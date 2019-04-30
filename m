@@ -2,28 +2,28 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 93C28F8BD
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Apr 2019 14:23:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B40A8F8DC
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Apr 2019 14:29:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727311AbfD3MXg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Apr 2019 08:23:36 -0400
-Received: from ms.lwn.net ([45.79.88.28]:48090 "EHLO ms.lwn.net"
+        id S1726015AbfD3M3T (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Apr 2019 08:29:19 -0400
+Received: from ms.lwn.net ([45.79.88.28]:48108 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726073AbfD3MXf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 30 Apr 2019 08:23:35 -0400
+        id S1726105AbfD3M3S (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 30 Apr 2019 08:29:18 -0400
 Received: from localhost.localdomain (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id DC23C9AF;
-        Tue, 30 Apr 2019 12:23:34 +0000 (UTC)
-Date:   Tue, 30 Apr 2019 06:23:31 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id B07B49AF;
+        Tue, 30 Apr 2019 12:29:17 +0000 (UTC)
+Date:   Tue, 30 Apr 2019 06:29:13 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
 To:     Federico Vaga <federico.vaga@vaga.pv.it>
 Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] doc: fix typo in PGP guide
-Message-ID: <20190430062331.1934f8f4@lwn.net>
-In-Reply-To: <20190429214514.25625-1-federico.vaga@vaga.pv.it>
-References: <20190429214514.25625-1-federico.vaga@vaga.pv.it>
+Subject: Re: [PATCH] doc:it_IT: translation alignment
+Message-ID: <20190430062913.14f97f9c@lwn.net>
+In-Reply-To: <20190429214720.25725-1-federico.vaga@vaga.pv.it>
+References: <20190429214720.25725-1-federico.vaga@vaga.pv.it>
 Organization: LWN.net
 X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
@@ -34,13 +34,19 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 29 Apr 2019 23:45:14 +0200
+On Mon, 29 Apr 2019 23:47:20 +0200
 Federico Vaga <federico.vaga@vaga.pv.it> wrote:
 
-> Fix typo in the GPG guide for maintainers
+> Aling Italian translation after the following changes in Documentation
+> 
+> bba757d8578f coding-style.rst: Generic alloc functions do not need OOM logging
+> d8e8bcc3d8de docs: doc-guide: remove the extension from .rst files
 > 
 > Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
 
-Applied, thanks.
+Something stuffed a blank line into this one that made it fail to apply;
+I fixed that up, fixed the typo in the title, and applied it.
+
+Thanks,
 
 jon
