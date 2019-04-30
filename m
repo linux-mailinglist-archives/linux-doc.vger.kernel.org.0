@@ -2,139 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B6E07EC3E
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Apr 2019 23:47:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 86E4FF48C
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Apr 2019 12:53:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729384AbfD2Vrf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Apr 2019 17:47:35 -0400
-Received: from mx.kolabnow.com ([95.128.36.41]:33832 "EHLO mx.kolabnow.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729341AbfD2Vrf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 29 Apr 2019 17:47:35 -0400
-Received: from localhost (unknown [127.0.0.1])
-        by ext-mx-out002.mykolab.com (Postfix) with ESMTP id E9C7E4A3;
-        Mon, 29 Apr 2019 23:47:32 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
-        content-transfer-encoding:content-type:content-type:mime-version
-        :message-id:date:date:subject:subject:from:from:received
-        :received:received; s=dkim20160331; t=1556574451; x=1558388852;
-         bh=g929uR7j5Bljj/SBE5STwaZj4+jLJMam9hBjyMFxOyE=; b=YGTQ8yQFm8e9
-        4TrdLZqp1JH50iqSFWrKO3MCLnziDMD7C5FnLUc0efA+VhGJWW3CaTFiIkh68LLJ
-        azzqBl/CIqZbgu5HAOzJeaoeSYMRZw1pmFo/mfda29FycAeqE5nwVSeI2UsbRv/D
-        8j3rdBkK3MU/6t1FjFjTay/UwlskevI4xCeT7Tt/GZB++VyNNerPJ20QEDgCbq5Y
-        oiZ8gRA9WJbMX0px1CUtRPVJ6xcixNpNV5TN+tZrCTUKv+OalQLQi8athhyTjdDF
-        36DOV9j+NuHkJXijwAJ5tbb0sh5ha6MK2GX3XGAo6+rAXztTbGKL8lLbbpjzRdLf
-        EpLVhYrbojIu8oH9LwpeBmfM0SC5G+1A0mJx1Qp8BRyVDolAntVOuWiX1Lt/8IBT
-        PnhbsggEhGg5eUWC4yDOgSWsgJeDE7ERPIZLCBPaNn+MmDTqaiyEDBmuHUxBa4p3
-        3oNgqy17yXdtTPEiNjV+CEcXyct2cPVV/GzUIvMoaj7MMEutZozrPyhuJPA4bF6I
-        P/1Bh2NanE5TaRw3yWNOaNtwc22bdNEbqEVyDIWloIqqkVy8RWFNhi8e8BVfcWDo
-        pqeB8Jlx7SYnJxQ5XmM87zmGBhy8+z5636LvAe4HID6fhMm21YxYm45p+R9XtBgW
-        dW7UgWZqnMQ1M8UB9kGgZP3EJLAqVHA=
-X-Virus-Scanned: amavisd-new at mykolab.com
-X-Spam-Flag: NO
-X-Spam-Score: 0
-X-Spam-Level: 
-X-Spam-Status: No, score=0 tagged_above=-10 required=5 tests=[none]
-        autolearn=disabled
-Received: from mx.kolabnow.com ([127.0.0.1])
-        by localhost (ext-mx-out002.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id u67NlFI4fDUg; Mon, 29 Apr 2019 23:47:31 +0200 (CEST)
-Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
-        by ext-mx-out002.mykolab.com (Postfix) with ESMTPS id A48BA126;
-        Mon, 29 Apr 2019 23:47:31 +0200 (CEST)
-Received: from ext-subm003.mykolab.com (unknown [10.9.6.3])
-        by int-mx003.mykolab.com (Postfix) with ESMTPS id 570282A0D;
-        Mon, 29 Apr 2019 23:47:31 +0200 (CEST)
-From:   Federico Vaga <federico.vaga@vaga.pv.it>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Federico Vaga <federico.vaga@vaga.pv.it>,
+        id S1726294AbfD3KwN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Apr 2019 06:52:13 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:60990 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727100AbfD3KwM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Apr 2019 06:52:12 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:Content-Type:
+        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+        Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=lPfh28qUBwA6NDJssauYlmo4DTLfQqZGBq58aXTm7uE=; b=XsLOi022t5Gy1qDHOn56jlESe
+        JpYV4OLdaK3y7GU/Vv6SIVBETUGWAa5x9UmaSHKq/fgGqu/j4bNH9t2PSaXfkKA5B0rynG1M6h43A
+        wtvM0PtWjO8nKcfzJLVU/9Z0/bfO+rtMN9QZPb33BpPosJLpoukGnaNZ1c1gwt0Rdn/zOagVlHREP
+        uHXeFvbHpKm8bej7PRUeZPGNc6Xt+adgqncr2J3CV0WuXxjQE+i5C6QrfAmI68MDpe3OowLLQGZGW
+        EEFBoyjyNj8rigy0hNPUXn1/0oIT0MbEs5bqtuqLXkb5crIVaA9GkE+qhjX7fctHx67zKfGepQQT/
+        VpN3DqHsw==;
+Received: from adsl-173-228-226-134.prtc.net ([173.228.226.134] helo=localhost)
+        by bombadil.infradead.org with esmtpsa (Exim 4.90_1 #2 (Red Hat Linux))
+        id 1hLQMq-0007Dj-CW; Tue, 30 Apr 2019 10:52:08 +0000
+From:   Christoph Hellwig <hch@lst.de>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>
+Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Kate Stewart <kstewart@linuxfoundation.org>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] doc:it_IT: translation alignment
-Date:   Mon, 29 Apr 2019 23:47:20 +0200
-Message-Id: <20190429214720.25725-1-federico.vaga@vaga.pv.it>
+Subject: clarify other licenses in LICENSES/
+Date:   Tue, 30 Apr 2019 06:51:27 -0400
+Message-Id: <20190430105130.24500-1-hch@lst.de>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Aling Italian translation after the following changes in Documentation
+Hi all,
 
-bba757d8578f coding-style.rst: Generic alloc functions do not need OOM logging
-d8e8bcc3d8de docs: doc-guide: remove the extension from .rst files
-
-Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
----
- .../it_IT/core-api/memory-allocation.rst            | 13 +++++++++++++
- .../translations/it_IT/doc-guide/index.rst          |  6 +++---
- .../translations/it_IT/process/coding-style.rst     |  8 +++++++-
- 3 files changed, 23 insertions(+), 4 deletions(-)
- create mode 100644 Documentation/translations/it_IT/core-api/memory-allocation.rst
-
-diff --git a/Documentation/translations/it_IT/core-api/memory-allocation.rst b/Documentation/translations/it_IT/core-api/memory-allocation.rst
-new file mode 100644
-index 000000000000..11d5148f8d6b
---- /dev/null
-+++ b/Documentation/translations/it_IT/core-api/memory-allocation.rst
-@@ -0,0 +1,13 @@
-+.. include:: ../disclaimer-ita.rst
-+
-+:Original: :ref:`Documentation/core-api/memory-allocation.rst <memory_allocation>`
-+
-+.. _it_memory_allocation:
-
-+================================
-+Guida all'allocazione di memoria
-+================================
-+
-+.. warning::
-+
-+    TODO ancora da tradurre
-diff --git a/Documentation/translations/it_IT/doc-guide/index.rst b/Documentation/translations/it_IT/doc-guide/index.rst
-index 7a6562b547ee..9fffff626711 100644
---- a/Documentation/translations/it_IT/doc-guide/index.rst
-+++ b/Documentation/translations/it_IT/doc-guide/index.rst
-@@ -12,9 +12,9 @@ Come scrivere la documentazione del kernel
- .. toctree::
-    :maxdepth: 1
- 
--   sphinx.rst
--   kernel-doc.rst
--   parse-headers.rst
-+   sphinx
-+   kernel-doc
-+   parse-headers
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/translations/it_IT/process/coding-style.rst b/Documentation/translations/it_IT/process/coding-style.rst
-index 2fd0e7f79d55..5ef534c95e69 100644
---- a/Documentation/translations/it_IT/process/coding-style.rst
-+++ b/Documentation/translations/it_IT/process/coding-style.rst
-@@ -859,7 +859,8 @@ racchiusa in #ifdef, potete usare printk(KERN_DEBUG ...).
- 
- Il kernel fornisce i seguenti assegnatori ad uso generico:
- kmalloc(), kzalloc(), kmalloc_array(), kcalloc(), vmalloc(), e vzalloc().
--Per maggiori informazioni, consultate la documentazione dell'API.
-+Per maggiori informazioni, consultate la documentazione dell'API:
-+:ref:`Documentation/translations/it_IT/core-api/memory-allocation.rst <it_memory_allocation>`
- 
- Il modo preferito per passare la dimensione di una struttura è il seguente:
- 
-@@ -890,6 +891,11 @@ Il modo preferito per assegnare un vettore a zero è il seguente:
- Entrambe verificano la condizione di overflow per la dimensione
- d'assegnamento n * sizeof(...), se accade ritorneranno NULL.
- 
-+Questi allocatori generici producono uno *stack dump* in caso di fallimento
-+a meno che non venga esplicitamente specificato __GFP_NOWARN. Quindi, nella
-+maggior parte dei casi, è inutile stampare messaggi aggiuntivi quando uno di
-+questi allocatori ritornano un puntatore NULL.
-+
- 15) Il morbo inline
- -------------------
- 
--- 
-2.20.1
-
+this series splits the others category into dual or deprecated,
+and also fixes up some other minor bits in the documentation for
+these non-preferred licenses.
