@@ -2,121 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A1E40113E8
-	for <lists+linux-doc@lfdr.de>; Thu,  2 May 2019 09:12:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 667A21179E
+	for <lists+linux-doc@lfdr.de>; Thu,  2 May 2019 12:51:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726335AbfEBHMI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 May 2019 03:12:08 -0400
-Received: from mail-pg1-f193.google.com ([209.85.215.193]:45865 "EHLO
-        mail-pg1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726268AbfEBHMH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 May 2019 03:12:07 -0400
-Received: by mail-pg1-f193.google.com with SMTP id i21so631472pgi.12;
-        Thu, 02 May 2019 00:12:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=YaNnLqU9o2lpY1nR/3WwmAgKR0IVYxRkeI3qUXiAw/Y=;
-        b=QqMTh4IjiuCKjE+ZXpNCaPibFnWWmDjJLBu9GCvAalwli10RsMnTFi9cTdQgKKooQY
-         8QVkPA0UnVk+YRWACLFtTIIw5qUibNjIPqhO8LFQgBzZZ2zmmejt83gJGy3m/vBaHefs
-         3KQ86O6s5Q4agajUQgxd8ICMIBeumAgpDOAjygvb8mbj2JXT32KBD4HHxticNiYMrYxN
-         s+7XUSE7KaHknapfG8q1zEcpypN2s7iKg5JQM5EwCLyXkQNene9h/l+PjDHW6jypQH8b
-         wn6Fe6bdMpJkF70u27FkS911N4jjHTX9PWoz+LFQNdHryZJxPY5iRlhhGkuJ/miIST8S
-         d4wA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=YaNnLqU9o2lpY1nR/3WwmAgKR0IVYxRkeI3qUXiAw/Y=;
-        b=e+IJKJQnJK/7hmTRpKArr1g8uLJ8hIe240QvWFAiKEETGtOnHtN9XUGAgEEwizy7dj
-         O7vvNyjuKCAzW/gP+ARKCzT955Lww4L7L3kYHpKBrsLsdy2Q9iXTKfve3+QY3luoMFCj
-         0Cx2bJSSVuJ+/pnQ90Sn0VMNV7Rn7I1jnXBRyersC6u93qgTnAbZpIcRRCliR888EuT4
-         jP/uQ/5EfIUfeQZsNDraVDJtP8SxbRB6EkcsZvl7QfPbPXBE+6SsVtZ/OG9wZabuETIT
-         LGViTkAEAOxbd68kQeRVebkA+VM+rgqMz3Kicp2ciLttRonY4YnGb2xi6E7bKrDoLXZx
-         i5HA==
-X-Gm-Message-State: APjAAAWHRKGnT865sRTWGsNJ/r2VGz+j5EFeD/f8RylQRV75sUV6rRQ2
-        iJ9NvlixbHMQsTgT4PuiaaQ=
-X-Google-Smtp-Source: APXvYqxNcOufLKQ1FgALFEGNWwmWDEakWbES4s56JUN0KpSWcfLerd1IPflwOE2uHoEnjFk9HY8rTg==
-X-Received: by 2002:a63:1b04:: with SMTP id b4mr2359807pgb.305.1556781127085;
-        Thu, 02 May 2019 00:12:07 -0700 (PDT)
-Received: from laptop.DHCP ([104.238.181.70])
-        by smtp.gmail.com with ESMTPSA id u24sm4686976pfh.91.2019.05.02.00.12.01
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 02 May 2019 00:12:06 -0700 (PDT)
-From:   Changbin Du <changbin.du@gmail.com>
-To:     corbet@lwn.net, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de
-Cc:     x86@kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Changbin Du <changbin.du@gmail.com>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Subject: [PATCH v2 27/27] Documentation: x86: convert x86_64/machinecheck to reST
-Date:   Thu,  2 May 2019 15:06:33 +0800
-Message-Id: <20190502070633.9809-28-changbin.du@gmail.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190502070633.9809-1-changbin.du@gmail.com>
-References: <20190502070633.9809-1-changbin.du@gmail.com>
+        id S1726454AbfEBKu5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 May 2019 06:50:57 -0400
+Received: from mail.kernel.org ([198.145.29.99]:46836 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726439AbfEBKu4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 2 May 2019 06:50:56 -0400
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 862482075E;
+        Thu,  2 May 2019 10:50:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1556794256;
+        bh=Ayblsy3jHDm2CChtokJ923ivXLZjfyjL6uNubfrhVOA=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=QXN7qfD9kVZ8X14uPJyJaEtMH+8kKfNVIsH6ibUWlQkRylnV/zLp9rQ6le2tunE78
+         SSJF7dmrJsP0QsUsoC9j31We0mjmXawkaN8LppVzAyCBUPD5b9pzAyl6ekchbNAzFq
+         btjAwtKByeIBqfun6usLtq6HFfVq7lLUJLvG54Zg=
+Date:   Thu, 2 May 2019 12:50:53 +0200
+From:   Greg KH <gregkh@linuxfoundation.org>
+To:     Brendan Higgins <brendanhiggins@google.com>
+Cc:     frowand.list@gmail.com, keescook@google.com,
+        kieran.bingham@ideasonboard.com, mcgrof@kernel.org,
+        robh@kernel.org, sboyd@kernel.org, shuah@kernel.org,
+        devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-kbuild@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-nvdimm@lists.01.org, linux-um@lists.infradead.org,
+        Alexander.Levin@microsoft.com, Tim.Bird@sony.com,
+        amir73il@gmail.com, dan.carpenter@oracle.com,
+        dan.j.williams@intel.com, daniel@ffwll.ch, jdike@addtoit.com,
+        joel@jms.id.au, julia.lawall@lip6.fr, khilman@baylibre.com,
+        knut.omang@oracle.com, logang@deltatee.com, mpe@ellerman.id.au,
+        pmladek@suse.com, richard@nod.at, rientjes@google.com,
+        rostedt@goodmis.org, wfg@linux.intel.com
+Subject: Re: [PATCH v2 00/17] kunit: introduce KUnit, the Linux kernel unit
+ testing framework
+Message-ID: <20190502105053.GA12416@kroah.com>
+References: <20190501230126.229218-1-brendanhiggins@google.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190501230126.229218-1-brendanhiggins@google.com>
+User-Agent: Mutt/1.11.4 (2019-03-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This converts the plain text documentation to reStructuredText format and
-add it to Sphinx TOC tree. No essential content change.
+On Wed, May 01, 2019 at 04:01:09PM -0700, Brendan Higgins wrote:
+> ## TLDR
+> 
+> I rebased the last patchset on 5.1-rc7 in hopes that we can get this in
+> 5.2.
 
-Signed-off-by: Changbin Du <changbin.du@gmail.com>
-Reviewed-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
----
- Documentation/x86/x86_64/index.rst                   |  1 +
- .../x86/x86_64/{machinecheck => machinecheck.rst}    | 12 +++++++-----
- 2 files changed, 8 insertions(+), 5 deletions(-)
- rename Documentation/x86/x86_64/{machinecheck => machinecheck.rst} (92%)
+That might be rushing it, normally trees are already closed now for
+5.2-rc1 if 5.1-final comes out this Sunday.
 
-diff --git a/Documentation/x86/x86_64/index.rst b/Documentation/x86/x86_64/index.rst
-index c04b6eab3c76..d6eaaa5a35fc 100644
---- a/Documentation/x86/x86_64/index.rst
-+++ b/Documentation/x86/x86_64/index.rst
-@@ -13,3 +13,4 @@ x86_64 Support
-    5level-paging
-    fake-numa-for-cpusets
-    cpu-hotplug-spec
-+   machinecheck
-diff --git a/Documentation/x86/x86_64/machinecheck b/Documentation/x86/x86_64/machinecheck.rst
-similarity index 92%
-rename from Documentation/x86/x86_64/machinecheck
-rename to Documentation/x86/x86_64/machinecheck.rst
-index d0648a74fceb..e189168406fa 100644
---- a/Documentation/x86/x86_64/machinecheck
-+++ b/Documentation/x86/x86_64/machinecheck.rst
-@@ -1,5 +1,8 @@
-+.. SPDX-License-Identifier: GPL-2.0
- 
--Configurable sysfs parameters for the x86-64 machine check code.
-+===============================================================
-+Configurable sysfs parameters for the x86-64 machine check code
-+===============================================================
- 
- Machine checks report internal hardware error conditions detected
- by the CPU. Uncorrected errors typically cause a machine check
-@@ -16,14 +19,13 @@ log then mcelog should run to collect and decode machine check entries
- from /dev/mcelog. Normally mcelog should be run regularly from a cronjob.
- 
- Each CPU has a directory in /sys/devices/system/machinecheck/machinecheckN
--(N = CPU number)
-+(N = CPU number).
- 
- The directory contains some configurable entries:
- 
--Entries:
--
- bankNctl
--(N bank number)
-+	(N bank number)
-+
- 	64bit Hex bitmask enabling/disabling specific subevents for bank N
- 	When a bit in the bitmask is zero then the respective
- 	subevent will not be reported.
--- 
-2.20.1
+> Shuah, I think you, Greg KH, and myself talked off thread, and we agreed
+> we would merge through your tree when the time came? Am I remembering
+> correctly?
 
+No objection from me.
+
+Let me go review the latest round of patches now.
+
+thanks,
+
+greg k-h
