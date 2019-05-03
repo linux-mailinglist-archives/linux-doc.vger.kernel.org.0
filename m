@@ -2,32 +2,31 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D6CA712DB6
-	for <lists+linux-doc@lfdr.de>; Fri,  3 May 2019 14:35:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2F6E012DC9
+	for <lists+linux-doc@lfdr.de>; Fri,  3 May 2019 14:39:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727800AbfECMe5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 3 May 2019 08:34:57 -0400
-Received: from ms.lwn.net ([45.79.88.28]:47980 "EHLO ms.lwn.net"
+        id S1727847AbfECMjk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 3 May 2019 08:39:40 -0400
+Received: from ms.lwn.net ([45.79.88.28]:48050 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726047AbfECMe4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 3 May 2019 08:34:56 -0400
+        id S1726897AbfECMjk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 3 May 2019 08:39:40 -0400
 Received: from localhost.localdomain (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 490267DE;
-        Fri,  3 May 2019 12:34:55 +0000 (UTC)
-Date:   Fri, 3 May 2019 06:34:53 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id 5B3147DE;
+        Fri,  3 May 2019 12:39:39 +0000 (UTC)
+Date:   Fri, 3 May 2019 06:39:37 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Christoph Hellwig <hch@lst.de>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Kate Stewart <kstewart@linuxfoundation.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: clarify other licenses in LICENSES/
-Message-ID: <20190503063453.1378ff99@lwn.net>
-In-Reply-To: <20190430114134.GA17027@kroah.com>
-References: <20190430105130.24500-1-hch@lst.de>
-        <20190430114134.GA17027@kroah.com>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] scripts/documentation-file-ref-check: don't parse Next/
+ dir
+Message-ID: <20190503063937.590a64c3@lwn.net>
+In-Reply-To: <64012d057b5cf2b75192fb75ef5d2547254ccf06.1555933320.git.mchehab+samsung@kernel.org>
+References: <64012d057b5cf2b75192fb75ef5d2547254ccf06.1555933320.git.mchehab+samsung@kernel.org>
 Organization: LWN.net
 X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
@@ -38,20 +37,17 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 30 Apr 2019 13:41:34 +0200
-Greg Kroah-Hartman <gregkh@linuxfoundation.org> wrote:
+On Mon, 22 Apr 2019 08:42:02 -0300
+Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
 
-> On Tue, Apr 30, 2019 at 06:51:27AM -0400, Christoph Hellwig wrote:
-> > Hi all,
-> > 
-> > this series splits the others category into dual or deprecated,
-> > and also fixes up some other minor bits in the documentation for
-> > these non-preferred licenses.  
+> If one tries to run this script under linux-next, it would
+> hit lots of false-positives, due to the tree merges that
+> are stored under the Next/ directory.
 > 
-> Looks good to me, thanks for doing this!
+> So, add a logic to ignore it.
 > 
-> Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 
-I've applied the set, thanks.
+Applied, thanks.
 
 jon
