@@ -2,101 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 837351AF27
-	for <lists+linux-doc@lfdr.de>; Mon, 13 May 2019 05:35:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5CF1E1AC13
+	for <lists+linux-doc@lfdr.de>; Sun, 12 May 2019 14:50:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727327AbfEMDfW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 12 May 2019 23:35:22 -0400
-Received: from aserp2130.oracle.com ([141.146.126.79]:39748 "EHLO
-        aserp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727202AbfEMDfW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 12 May 2019 23:35:22 -0400
-Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
-        by aserp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x4D3YL17040258;
-        Mon, 13 May 2019 03:34:21 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id; s=corp-2018-07-02;
- bh=r32tubxsUXPdHsbPUXKPUehGznTQnk+IpyDTdJj3D7Q=;
- b=K3sxFPvX27NlUsM04jJx+vPeBVvEciwZnkM1PCKdWRXzOJZ2JYX5lFAT+uTS0z4u8M19
- f0qA13BJ0ZuqmIX51GQ6n6q+SN8T5/zRq4g3RdRNW2u0wk+5n4/pTP/97p/btMq4kOtZ
- sAEKvgGIA1/GZQnNnWeHzEkB8CpenMMBeCB3CcwJucuQW4fCgWhGrnOL+MmxBtIE6s7h
- k98ClGykoA2MS3VWIf/2W4MBss0yQ4Bu0wmnt1V0QtSvqqDEn1Ak+0ZDU9kAzyp0XPW+
- ZPluFctbNEf10mZOS8ldocEVRB1HPbjCVX1XXGh/3sg6P5igSDlygcBDsKFUixcl/1B5 dA== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
-        by aserp2130.oracle.com with ESMTP id 2sdkwdcatr-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 13 May 2019 03:34:21 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
-        by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x4D3Va3B145133;
-        Mon, 13 May 2019 03:32:21 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
-        by userp3020.oracle.com with ESMTP id 2sdnqhr439-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 13 May 2019 03:32:20 +0000
-Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
-        by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x4D3WEw7025820;
-        Mon, 13 May 2019 03:32:14 GMT
-Received: from z2.cn.oracle.com (/10.182.69.87)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Sun, 12 May 2019 20:32:13 -0700
-From:   Zhenzhong Duan <zhenzhong.duan@oracle.com>
-To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     paulmck@linux.ibm.com, josh@joshtriplett.org, rostedt@goodmis.org,
-        mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com,
-        joel@joelfernandes.org, corbet@lwn.net, tglx@linutronix.de,
-        mingo@kernel.org, gregkh@linuxfoundation.org,
-        keescook@chromium.org, srinivas.eeda@oracle.com,
-        Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Subject: [PATCH v2] doc: kernel-parameters.txt: fix documentation of nmi_watchdog parameter
-Date:   Sun, 12 May 2019 11:35:27 +0800
-Message-Id: <1557632127-16717-1-git-send-email-zhenzhong.duan@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9255 signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1810050000 definitions=main-1905130023
-X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9255 signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
- definitions=main-1905130024
+        id S1726642AbfELMu0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 12 May 2019 08:50:26 -0400
+Received: from mail-pg1-f193.google.com ([209.85.215.193]:40147 "EHLO
+        mail-pg1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726586AbfELMu0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 12 May 2019 08:50:26 -0400
+Received: by mail-pg1-f193.google.com with SMTP id d31so5316366pgl.7;
+        Sun, 12 May 2019 05:50:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ID+FnkIsdsZZMHR0TLy2V6Zvg3KgV03Hfi0KeMPekp0=;
+        b=NDlLj5nzt4sv/G1h38gd65TbDuLxRpNGGJB1U1LTuU0ZoxHqOPQ7B+rJBJ/5u5LEbP
+         ltkpXruirUbrJEI3UW4h+7VZciaC4LHtNXlMZQAR/eULyuDKGEk5nYzmeyJXciopaOrG
+         yVUu+yzY+fWNbEqV5+bktX0SHUw1b3L3EVNVxcR7KVu+wdQbA8WtPXbv5Cn22H1xVqK+
+         TN35R53BKdeHblC6mxN/KieS+XTDhNqZUZLlUC9MQScxlmjNnfOcuYjw1gtY3yTkNwfY
+         yvDf3fqAOE60zbuJL8ThOjbwqwlmlvFQr6cCTN6Hjbfk8/Oi0Bv6gGh4KkZRgaEZN82i
+         YQZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ID+FnkIsdsZZMHR0TLy2V6Zvg3KgV03Hfi0KeMPekp0=;
+        b=a39YjTx+EW3D4p6re6xrHqZ9HKgQiuaS33B/WFjVVz3zSMkmPWmxIYP0BeDzUn4cVw
+         LRAd+7fJg6TJ2x+iL14wTzurP0eb1+yc14wNEWNz68FD/gM9ltpSzRctxAVLw0M+ReB3
+         zlt+GaFK6rhDOclx4ku1dUIPLpFfm9BjlT4bJP/s/PRpzg7ZePy/OpNL4sO0LzhLK+lj
+         RluyWSXYwGfn9stQj4DA4WR2OK9AmJ/HlKWnErYTztJ1cK9fkvzdPVAMAWDwsnMhIE95
+         lSsKVOQJSEzZYrLb3Egj7EYlxzMir0O6wNh1eqVAT3WMJVtTNTwlL8apUd/aZyusoaaG
+         TdNQ==
+X-Gm-Message-State: APjAAAVjqz3A/KWKuyPrIGS7pPAlH29cbaNSdENLm+1XYDhBiCSyioMO
+        E29Ao/mF5QJff6EEvQ2Ea0I=
+X-Google-Smtp-Source: APXvYqx1MURAMugsEwI2GJoOnkxPy/0xLoML4WLYdEwlv41NNm+VzQ+M/LTTCGTfl2TUoala8ffJxg==
+X-Received: by 2002:aa7:8157:: with SMTP id d23mr90254pfn.92.1557665425593;
+        Sun, 12 May 2019 05:50:25 -0700 (PDT)
+Received: from localhost.localdomain ([104.238.181.70])
+        by smtp.gmail.com with ESMTPSA id n2sm146426pgp.27.2019.05.12.05.50.22
+        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+        Sun, 12 May 2019 05:50:24 -0700 (PDT)
+From:   Changbin Du <changbin.du@gmail.com>
+To:     bhelgaas@google.com, corbet@lwn.net
+Cc:     linux-pci@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, mchehab+samsung@kernel.org,
+        Changbin Du <changbin.du@gmail.com>
+Subject: [PATCH v4 00/12] Include linux PCI docs into Sphinx TOC tree
+Date:   Sun, 12 May 2019 20:49:57 +0800
+Message-Id: <20190512125009.32079-1-changbin.du@gmail.com>
+X-Mailer: git-send-email 2.20.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The default behavior of hardlockup depends on the config of
-CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
+Hi all,
 
-Fix the description of nmi_watchdog to make it clear.
+The kernel now uses Sphinx to generate intelligent and beautiful documentation
+from reStructuredText files. I converted most of the Linux PCI docs to rst
+format in this serias.
 
-Signed-off-by: Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Reviewed-by: Joel Fernandes (Google) <joel@joelfernandes.org>
-Cc: Steven Rostedt <rostedt@goodmis.org>
----
- v2: fix description using words suggested by Steven Rostedt
+For you to preview, please visit below url:
+http://www.bytemem.com:8080/kernel-doc/PCI/index.html
 
- Documentation/admin-guide/kernel-parameters.txt | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+Thank you!
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 08df588..b9d4358 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2805,8 +2805,9 @@
- 			0 - turn hardlockup detector in nmi_watchdog off
- 			1 - turn hardlockup detector in nmi_watchdog on
- 			When panic is specified, panic when an NMI watchdog
--			timeout occurs (or 'nopanic' to override the opposite
--			default). To disable both hard and soft lockup detectors,
-+			timeout occurs (or 'nopanic' to not panic on an NMI
-+			watchdog, if CONFIG_BOOTPARAM_HARDLOCKUP_PANIC is set)
-+			To disable both hard and soft lockup detectors,
- 			please see 'nowatchdog'.
- 			This is useful when you use a panic=... timeout and
- 			need the box quickly up again.
+v2: trivial style update.
+v3: update titles. (Bjorn Helgaas)
+v4: fix comments from Mauro Carvalho Chehab
+
+Changbin Du (12):
+  Documentation: add Linux PCI to Sphinx TOC tree
+  Documentation: PCI: convert pci.txt to reST
+  Documentation: PCI: convert PCIEBUS-HOWTO.txt to reST
+  Documentation: PCI: convert pci-iov-howto.txt to reST
+  Documentation: PCI: convert MSI-HOWTO.txt to reST
+  Documentation: PCI: convert acpi-info.txt to reST
+  Documentation: PCI: convert pci-error-recovery.txt to reST
+  Documentation: PCI: convert pcieaer-howto.txt to reST
+  Documentation: PCI: convert endpoint/pci-endpoint.txt to reST
+  Documentation: PCI: convert endpoint/pci-endpoint-cfs.txt to reST
+  Documentation: PCI: convert endpoint/pci-test-function.txt to reST
+  Documentation: PCI: convert endpoint/pci-test-howto.txt to reST
+
+ .../PCI/{acpi-info.txt => acpi-info.rst}      |  15 +-
+ Documentation/PCI/endpoint/index.rst          |  13 +
+ ...-endpoint-cfs.txt => pci-endpoint-cfs.rst} |  99 ++---
+ .../{pci-endpoint.txt => pci-endpoint.rst}    |  96 +++--
+ ...est-function.txt => pci-test-function.rst} |  34 +-
+ ...{pci-test-howto.txt => pci-test-howto.rst} |  81 ++--
+ Documentation/PCI/index.rst                   |  18 +
+ .../PCI/{MSI-HOWTO.txt => msi-howto.rst}      |  85 +++--
+ ...or-recovery.txt => pci-error-recovery.rst} | 287 +++++++-------
+ .../{pci-iov-howto.txt => pci-iov-howto.rst}  | 161 ++++----
+ Documentation/PCI/{pci.txt => pci.rst}        | 356 ++++++++----------
+ .../{pcieaer-howto.txt => pcieaer-howto.rst}  | 156 +++++---
+ .../{PCIEBUS-HOWTO.txt => picebus-howto.rst}  | 140 ++++---
+ Documentation/index.rst                       |   1 +
+ MAINTAINERS                                   |   2 +-
+ include/linux/mod_devicetable.h               |  19 +
+ include/linux/pci.h                           |  37 ++
+ 17 files changed, 912 insertions(+), 688 deletions(-)
+ rename Documentation/PCI/{acpi-info.txt => acpi-info.rst} (96%)
+ create mode 100644 Documentation/PCI/endpoint/index.rst
+ rename Documentation/PCI/endpoint/{pci-endpoint-cfs.txt => pci-endpoint-cfs.rst} (64%)
+ rename Documentation/PCI/endpoint/{pci-endpoint.txt => pci-endpoint.rst} (82%)
+ rename Documentation/PCI/endpoint/{pci-test-function.txt => pci-test-function.rst} (84%)
+ rename Documentation/PCI/endpoint/{pci-test-howto.txt => pci-test-howto.rst} (78%)
+ create mode 100644 Documentation/PCI/index.rst
+ rename Documentation/PCI/{MSI-HOWTO.txt => msi-howto.rst} (88%)
+ rename Documentation/PCI/{pci-error-recovery.txt => pci-error-recovery.rst} (67%)
+ rename Documentation/PCI/{pci-iov-howto.txt => pci-iov-howto.rst} (63%)
+ rename Documentation/PCI/{pci.txt => pci.rst} (68%)
+ rename Documentation/PCI/{pcieaer-howto.txt => pcieaer-howto.rst} (72%)
+ rename Documentation/PCI/{PCIEBUS-HOWTO.txt => picebus-howto.rst} (70%)
+
 -- 
-1.8.3.1
+2.20.1
 
