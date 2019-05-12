@@ -2,124 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A63241A9DA
-	for <lists+linux-doc@lfdr.de>; Sun, 12 May 2019 03:09:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 837351AF27
+	for <lists+linux-doc@lfdr.de>; Mon, 13 May 2019 05:35:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726338AbfELBJw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 11 May 2019 21:09:52 -0400
-Received: from mail-wr1-f68.google.com ([209.85.221.68]:34423 "EHLO
-        mail-wr1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726393AbfELBJw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 11 May 2019 21:09:52 -0400
-Received: by mail-wr1-f68.google.com with SMTP id f8so1817499wrt.1
-        for <linux-doc@vger.kernel.org>; Sat, 11 May 2019 18:09:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amarulasolutions.com; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=b8AW4BGaZt47ssLrB6qXfhhNxNJaIAABugP8Bf2LUJc=;
-        b=JtUgc6MIGk7Y5MmFv4m3d4ISHMCOvUp6g70RA6sbJklbPEVGXVcftsBCT7hb5H1h0k
-         /tp84iZt9wpGTu4789QOwr/LuvvL5efzMDvkcNfztOA+KYtq22DXr4TJOuCD71vDgcfy
-         PAmm6OmFKtJSdn20Sq0KP1N7R6yfVj4Vk6Oss=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=b8AW4BGaZt47ssLrB6qXfhhNxNJaIAABugP8Bf2LUJc=;
-        b=romgGiy/mCuJI6tF23zBYCYZiexyaxLdZFIcclw6leLBXP/Ikmcdk0iYbpZEbozkv2
-         Uld6LNPBPxlgzA55n88ABGw/Df58bzlzUBipZd4km2VOOZ6e//EYXlklNsEdR27Cor20
-         PIRXCe4xHzjOxOvLkJKJID0ntylyHB9/fMPMJoXeBTKbzZhwqakbNz9vNbuEPHDKfKrF
-         snOu4vN3G3apiBwFXpkzqzQuNs7qIdupWhwElyrZNPbcoUGa6fNpz1WFg0BWvUouEmlV
-         SWpvRL6pNdJ0Pi1mU0oFEbbYgtdstGJvEVhaewKAF9Jd422s+LOLPL2nwByfBV+wClcS
-         c/lw==
-X-Gm-Message-State: APjAAAUeB79tEuQPDldaovHvK1HWCKsHDNbU+qq3q73nTNoBsTpc8Wdy
-        hlTW+T91ZWiraPFnirhdX4k58A==
-X-Google-Smtp-Source: APXvYqyhFbsf1FNgNI+/rAhBZzMgj02SE5lckYXHhdIt2dVUQv5+Ig7Tv7vgFOweYh2jEJHIGNHKzg==
-X-Received: by 2002:a5d:4647:: with SMTP id j7mr7970362wrs.280.1557623389777;
-        Sat, 11 May 2019 18:09:49 -0700 (PDT)
-Received: from andrea ([89.22.71.151])
-        by smtp.gmail.com with ESMTPSA id t18sm19424094wrg.19.2019.05.11.18.09.48
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Sat, 11 May 2019 18:09:49 -0700 (PDT)
-Date:   Sun, 12 May 2019 03:09:41 +0200
-From:   Andrea Parri <andrea.parri@amarulasolutions.com>
-To:     "Paul E. McKenney" <paulmck@linux.ibm.com>
-Cc:     Joel Fernandes <joel@joelfernandes.org>,
-        linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
-        Josh Triplett <josh@joshtriplett.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] doc/rcu: Correct field_count field naming in examples
-Message-ID: <20190512010941.GA8611@andrea>
-References: <20190505020328.165839-1-joel@joelfernandes.org>
- <20190507000453.GB3923@linux.ibm.com>
- <20190508162635.GD187505@google.com>
- <20190508181638.GY3923@linux.ibm.com>
- <20190511221126.GA3984@andrea>
- <20190512004131.GE3923@linux.ibm.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190512004131.GE3923@linux.ibm.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+        id S1727327AbfEMDfW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 12 May 2019 23:35:22 -0400
+Received: from aserp2130.oracle.com ([141.146.126.79]:39748 "EHLO
+        aserp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727202AbfEMDfW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 12 May 2019 23:35:22 -0400
+Received: from pps.filterd (aserp2130.oracle.com [127.0.0.1])
+        by aserp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x4D3YL17040258;
+        Mon, 13 May 2019 03:34:21 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id; s=corp-2018-07-02;
+ bh=r32tubxsUXPdHsbPUXKPUehGznTQnk+IpyDTdJj3D7Q=;
+ b=K3sxFPvX27NlUsM04jJx+vPeBVvEciwZnkM1PCKdWRXzOJZ2JYX5lFAT+uTS0z4u8M19
+ f0qA13BJ0ZuqmIX51GQ6n6q+SN8T5/zRq4g3RdRNW2u0wk+5n4/pTP/97p/btMq4kOtZ
+ sAEKvgGIA1/GZQnNnWeHzEkB8CpenMMBeCB3CcwJucuQW4fCgWhGrnOL+MmxBtIE6s7h
+ k98ClGykoA2MS3VWIf/2W4MBss0yQ4Bu0wmnt1V0QtSvqqDEn1Ak+0ZDU9kAzyp0XPW+
+ ZPluFctbNEf10mZOS8ldocEVRB1HPbjCVX1XXGh/3sg6P5igSDlygcBDsKFUixcl/1B5 dA== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+        by aserp2130.oracle.com with ESMTP id 2sdkwdcatr-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 13 May 2019 03:34:21 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+        by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x4D3Va3B145133;
+        Mon, 13 May 2019 03:32:21 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+        by userp3020.oracle.com with ESMTP id 2sdnqhr439-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 13 May 2019 03:32:20 +0000
+Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
+        by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x4D3WEw7025820;
+        Mon, 13 May 2019 03:32:14 GMT
+Received: from z2.cn.oracle.com (/10.182.69.87)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Sun, 12 May 2019 20:32:13 -0700
+From:   Zhenzhong Duan <zhenzhong.duan@oracle.com>
+To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     paulmck@linux.ibm.com, josh@joshtriplett.org, rostedt@goodmis.org,
+        mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com,
+        joel@joelfernandes.org, corbet@lwn.net, tglx@linutronix.de,
+        mingo@kernel.org, gregkh@linuxfoundation.org,
+        keescook@chromium.org, srinivas.eeda@oracle.com,
+        Zhenzhong Duan <zhenzhong.duan@oracle.com>
+Subject: [PATCH v2] doc: kernel-parameters.txt: fix documentation of nmi_watchdog parameter
+Date:   Sun, 12 May 2019 11:35:27 +0800
+Message-Id: <1557632127-16717-1-git-send-email-zhenzhong.duan@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9255 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1810050000 definitions=main-1905130023
+X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9255 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1905130024
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, May 11, 2019 at 05:41:31PM -0700, Paul E. McKenney wrote:
-> On Sun, May 12, 2019 at 12:11:26AM +0200, Andrea Parri wrote:
-> > Hi Paul, Joel,
-> > 
-> > > > > On the other hand, would you have ideas for more modern replacement
-> > > > > examples?
-> > > > 
-> > > > There are 3 cases I can see in listRCU.txt:
-> > > >   (1) action taken outside of read_lock (can tolerate stale data), no in-place update.
-> > > >                 this is the best possible usage of RCU.
-> > > >   (2) action taken outside of read_lock, in-place updates
-> > > >                 this is good as long as not too many in-place updates.
-> > > >                 involves copying creating new list node and replacing the
-> > > >                 node being updated with it.
-> > > >   (3) cannot tolerate stale data: here a deleted or obsolete flag can be used
-> > > >                                   protected by a per-entry lock. reader
-> > > > 				  aborts if object is stale.
-> > > > 
-> > > > Any replacement example must make satisfy (3) too?
-> > > 
-> > > It would be OK to have a separate example for (3).  It would of course
-> > > be nicer to have one example for all three, but not all -that- important.
-> > > 
-> > > > The only example for (3) that I know of is sysvipc sempahores which you also
-> > > > mentioned in the paper. Looking through this code, it hasn't changed
-> > > > conceptually and it could be a fit for an example (ipc_valid_object() checks
-> > > > for whether the object is stale).
-> > > 
-> > > That is indeed the classic canonical example.  ;-)
-> > > 
-> > > > The other example could be dentry look up which uses seqlocks for the
-> > > > RCU-walk case? But that could be too complex. This is also something I first
-> > > > learnt from the paper and then the excellent path-lookup.rst document in
-> > > > kernel sources.
-> > > 
-> > > This is a great example, but it would need serious simplification for
-> > > use in the Documentation/RCU directory.  Note that dcache uses it to
-> > > gain very limited and targeted consistency -- only a few types of updates
-> > > acquire the write-side of that seqlock.
-> > > 
-> > > Might be quite worthwhile to have a simplified example, though!
-> > > Perhaps a trivial hash table where write-side sequence lock is acquired
-> > > only when moving an element from one chain to another?
-> > 
-> > Sorry to take you down here..., but what do you mean by "the paper"?  ;-/
-> 
-> One or both of these two:
-> 
-> http://www2.rdrop.com/~paulmck/techreports/survey.2012.09.17a.pdf
-> http://www2.rdrop.com/~paulmck/techreports/RCUUsage.2013.02.24a.pdf
+The default behavior of hardlockup depends on the config of
+CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
 
-Oh, these are familiar.  ;-) Thank you!
+Fix the description of nmi_watchdog to make it clear.
 
-  Andrea
+Signed-off-by: Zhenzhong Duan <zhenzhong.duan@oracle.com>
+Reviewed-by: Joel Fernandes (Google) <joel@joelfernandes.org>
+Cc: Steven Rostedt <rostedt@goodmis.org>
+---
+ v2: fix description using words suggested by Steven Rostedt
+
+ Documentation/admin-guide/kernel-parameters.txt | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 08df588..b9d4358 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -2805,8 +2805,9 @@
+ 			0 - turn hardlockup detector in nmi_watchdog off
+ 			1 - turn hardlockup detector in nmi_watchdog on
+ 			When panic is specified, panic when an NMI watchdog
+-			timeout occurs (or 'nopanic' to override the opposite
+-			default). To disable both hard and soft lockup detectors,
++			timeout occurs (or 'nopanic' to not panic on an NMI
++			watchdog, if CONFIG_BOOTPARAM_HARDLOCKUP_PANIC is set)
++			To disable both hard and soft lockup detectors,
+ 			please see 'nowatchdog'.
+ 			This is useful when you use a panic=... timeout and
+ 			need the box quickly up again.
+-- 
+1.8.3.1
+
