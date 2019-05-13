@@ -2,160 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CB8D51AEFD
-	for <lists+linux-doc@lfdr.de>; Mon, 13 May 2019 04:45:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 563571AF36
+	for <lists+linux-doc@lfdr.de>; Mon, 13 May 2019 05:43:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727095AbfEMCpQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 12 May 2019 22:45:16 -0400
-Received: from userp2120.oracle.com ([156.151.31.85]:43406 "EHLO
-        userp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727281AbfEMCpP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 12 May 2019 22:45:15 -0400
-Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
-        by userp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x4D2hlBR011482;
-        Mon, 13 May 2019 02:44:07 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2018-07-02;
- bh=x0gnW+INC/YeTmeApouJTnXGIg6zn0tT5VaTPdxM56o=;
- b=DHcA9Z32aH0AOAGp1PFHjXTHiq00jun+G/JaB2j0BkvSUc+ZBZJkH1WlZ4RT8XDab85Y
- A/od1SEadzEDuLZMNKC52kgn7i90uGlfFKIMgvqpiehaFqTHh6Jqki1/6bdscLjK+elW
- lk5rlf/TO9/J3t66NhG6qh4Tr9xhezuj+zHbySbkEj5ASQg9C8nY3fG5jLhLGZjbVgdL
- 52pQgrEPqmyFKEuFuMSSyYHsp0PSZTboNtSTa2fjLNKOqE8RtbSMzgXpYFNJAxKIZuCR
- /OoxUunO+bkKZFfVXGX+VDYIwPlVYz7NEADYPMHShShh1FjAq+71Zpql1JC18mKln4XV /A== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
-        by userp2120.oracle.com with ESMTP id 2sdq1q3xjc-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 13 May 2019 02:44:07 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
-        by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x4D2i6HY096919;
-        Mon, 13 May 2019 02:44:06 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
-        by userp3030.oracle.com with ESMTP id 2sep21u70f-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 13 May 2019 02:44:06 +0000
-Received: from abhmp0009.oracle.com (abhmp0009.oracle.com [141.146.116.15])
-        by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x4D2hsm3015121;
-        Mon, 13 May 2019 02:43:54 GMT
-Received: from [10.191.29.181] (/10.191.29.181)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Sun, 12 May 2019 19:43:54 -0700
-Subject: Re: [PATCH 2/2] doc: kernel-parameters.txt: fix documentation of
- nmi_watchdog parameter
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        paulmck@linux.ibm.com, josh@joshtriplett.org,
-        mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com,
-        joel@joelfernandes.org, corbet@lwn.net, tglx@linutronix.de,
-        mingo@kernel.org, gregkh@linuxfoundation.org,
-        keescook@chromium.org, srinivas.eeda@oracle.com
-References: <1555211464-28652-1-git-send-email-zhenzhong.duan@oracle.com>
- <1555211464-28652-2-git-send-email-zhenzhong.duan@oracle.com>
- <20190510144749.592f4249@gandalf.local.home>
-From:   Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Organization: Oracle Corporation
-Message-ID: <88c81205-8b9d-5dae-95ba-ad115878ece9@oracle.com>
-Date:   Mon, 13 May 2019 10:43:44 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+        id S1727489AbfEMDnI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 12 May 2019 23:43:08 -0400
+Received: from mail-pl1-f194.google.com ([209.85.214.194]:34435 "EHLO
+        mail-pl1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727054AbfEMDnI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 12 May 2019 23:43:08 -0400
+Received: by mail-pl1-f194.google.com with SMTP id w7so5748089plz.1
+        for <linux-doc@vger.kernel.org>; Sun, 12 May 2019 20:43:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=joelfernandes.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=ezchhs2/JcNwmQ6qp2kyJmiYA74has20Z3uFmOgfa5o=;
+        b=ps6UOT3THA5KJfxvls/ZxlAY0ZVXlFvwiLLmm8vGbvHiwP97A9THs/tJmi9C1snr3Z
+         VtpUeqIDBspGhzwpC9q+IZM/sodI1PAEtn5bUUO2H4TB+yWFSf7cuXh/53LCrq/8KAhO
+         wqpPJ6ribAqXxGm7ZBeMgtqtdepH5mq8Y40x0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=ezchhs2/JcNwmQ6qp2kyJmiYA74has20Z3uFmOgfa5o=;
+        b=TuUUjHkIzmoxP32iPe8lnvycH8UcDu/1dbHoYIqEISPAz0VioWNZhd1vsz6DjTMwd3
+         zqjH0uzWEpnDMa4rpIPBbTP+axzw93yi7Rl+S7hfJiXuLTEZ062GqDIERP/U8BcC1t3Y
+         F7FAf8dVLGYbvWhUO6OAMeNUQIJUeulRD/eIbZ1KkmFiXGpqUbacexz4vxHt1Bg8yH05
+         lbbOyy2jyLEc/h4GO1Splfadypk1uNgonvr7MyeXRaBwHvLn7rDxMaH4/DDnq18Cvxrx
+         n0puFkk1l7AyA46U9VF9NCxbE2uwbhR+Otd9QG0cUCSTQRICbrCFMhIEwDO/mkU234WO
+         FvyA==
+X-Gm-Message-State: APjAAAXgcKo0OSFZRdg1RGn9l9u91XPQQhi1ZebAftYqMlSwB3uwNWLt
+        8F9Hx3cinmoj2XOKkYr4tzKx+w==
+X-Google-Smtp-Source: APXvYqzu8bwp2HEMw1jeBMsjNTdVpYVsHSFDeS4qrd+rWPWpdK86pmXbnbAHdWIgUhUzZtxJrOJ/EA==
+X-Received: by 2002:a17:902:e785:: with SMTP id cp5mr9385277plb.167.1557718987582;
+        Sun, 12 May 2019 20:43:07 -0700 (PDT)
+Received: from localhost ([2620:15c:6:12:9c46:e0da:efbf:69cc])
+        by smtp.gmail.com with ESMTPSA id l68sm20321949pfb.20.2019.05.12.20.43.06
+        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+        Sun, 12 May 2019 20:43:06 -0700 (PDT)
+Date:   Sun, 12 May 2019 23:43:05 -0400
+From:   Joel Fernandes <joel@joelfernandes.org>
+To:     "Paul E. McKenney" <paulmck@linux.ibm.com>
+Cc:     linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
+        Josh Triplett <josh@joshtriplett.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Andrea Parri <andrea.parri@amarulasolutions.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] doc/rcu: Correct field_count field naming in examples
+Message-ID: <20190513034305.GB96252@google.com>
+References: <20190505020328.165839-1-joel@joelfernandes.org>
+ <20190507000453.GB3923@linux.ibm.com>
+ <20190508162635.GD187505@google.com>
+ <20190508181638.GY3923@linux.ibm.com>
 MIME-Version: 1.0
-In-Reply-To: <20190510144749.592f4249@gandalf.local.home>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9255 signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1810050000 definitions=main-1905130018
-X-Proofpoint-Virus-Version: vendor=nai engine=5900 definitions=9255 signatures=668686
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
- definitions=main-1905130018
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190508181638.GY3923@linux.ibm.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Steven,
+On Wed, May 08, 2019 at 11:16:38AM -0700, Paul E. McKenney wrote:
+[snip]
+> > The other example could be dentry look up which uses seqlocks for the
+> > RCU-walk case? But that could be too complex. This is also something I first
+> > learnt from the paper and then the excellent path-lookup.rst document in
+> > kernel sources.
+> 
+> This is a great example, but it would need serious simplification for
+> use in the Documentation/RCU directory.  Note that dcache uses it to
+> gain very limited and targeted consistency -- only a few types of updates
+> acquire the write-side of that seqlock.
+> 
+> Might be quite worthwhile to have a simplified example, though!
+> Perhaps a trivial hash table where write-side sequence lock is acquired
+> only when moving an element from one chain to another?
 
-On 2019/5/11 2:47, Steven Rostedt wrote:
-> As nobody else commented, I will ;)
->
-> Hi Zhenzhong!
->
-> On Sun, 14 Apr 2019 11:11:04 +0800
-> Zhenzhong Duan <zhenzhong.duan@oracle.com> wrote:
->
->> As stated in "Documentation/lockup-watchdogs.txt:line 22", the default
->> behaivor after 'hardlockup' is to stay locked up rather than panic.
-> That actually says:
->
->   A 'hardlockup' is defined as a bug that causes the CPU to loop in
->   kernel mode for more than 10 seconds (see "Implementation" below for
->   details), without letting other interrupts have a chance to run.
->   Similarly to the softlockup case, the current stack trace is displayed
->   upon detection and the system will stay locked up unless the default
->   behavior is changed, which can be done through a sysctl,
->   'hardlockup_panic', a compile time knob, "BOOTPARAM_HARDLOCKUP_PANIC",
->   and a kernel parameter, "nmi_watchdog"
->
-> If your config has:
->
->   CONFIG_BOOTPARAM_HARDLOCKUP_PANIC=y
->
-> The kernel will panic on hard lockup by default unless you add nopanic.
->
-> If your config has:
->
->   # CONFIG_BOOTPARAM_HARDLOCKUP_PANIC is not set
->
-> Then the default will be not to panic unless you add "panic" to the
-> kernel command line.
->
->> Signed-off-by: Zhenzhong Duan <zhenzhong.duan@oracle.com>
->> ---
->>   Documentation/admin-guide/kernel-parameters.txt | 2 +-
->>   1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
->> index 2b8ee90..fcc9579 100644
->> --- a/Documentation/admin-guide/kernel-parameters.txt
->> +++ b/Documentation/admin-guide/kernel-parameters.txt
->> @@ -2769,7 +2769,7 @@
->>   			0 - turn hardlockup detector in nmi_watchdog off
->>   			1 - turn hardlockup detector in nmi_watchdog on
->>   			When panic is specified, panic when an NMI watchdog
->> -			timeout occurs (or 'nopanic' to override the opposite
->> +			timeout occurs (or 'nopanic' which is the opposite
->>   			default). To disable both hard and soft lockup detectors,
-> Honestly, I think the original text states what it does better than
-> your update. Because the nopanic is added to override the "opposite
-> default" which is if the config was set to do so.
->
-> That said, this all still can be explained better. What about:
->
->          nmi_watchdog=   [KNL,BUGS=X86] Debugging features for SMP kernels
->                          Format: [panic,][nopanic,][num]
->                          Valid num: 0 or 1
->                          0 - turn hardlockup detector in nmi_watchdog off
->                          1 - turn hardlockup detector in nmi_watchdog on
->                          When panic is specified, panic when an NMI watchdog
->                          timeout occurs (or 'nopanic' to not panic on an NMI
-> 			watchdog, if CONFIG_BOOTPARAM_HARDLOCKUP_PANIC is set)
->                          To disable both hard and soft lockup detectors,
->                          please see 'nowatchdog'.
->                          This is useful when you use a panic=... timeout and
->                          need the box quickly up again.
+Here you meant "moving from one chain to another" in the case of
+hashtable-resizing right? I could not think of another reason why an element
+is moved between 2 hash chains.
 
-Thanks Seeve for your comments, so the default behavior of hardlockup 
-depends on the setting of CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
+I just finished reading the main parts of Josh's relativistic hashtable paper
+[1] and it is very cool indeed. The whole wait-for-readers application for
+hashtable expansion is so well thought. I am planning to go over more papers
+and code and can certainly update this example with a read-mostly hashtable
+example as well as you are suggesting. :-)
 
-It did confused me previously. You suggested fix is better, I'll fix it 
-later.
+[1] https://www.usenix.org/legacy/event/atc11/tech/final_files/Triplett.pdf
 
+thanks,
 
-Zhenzhong
+ - Joel
 
