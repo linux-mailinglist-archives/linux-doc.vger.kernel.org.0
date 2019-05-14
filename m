@@ -2,97 +2,227 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3F03F1E4DF
-	for <lists+linux-doc@lfdr.de>; Wed, 15 May 2019 00:20:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7271D1E561
+	for <lists+linux-doc@lfdr.de>; Wed, 15 May 2019 00:59:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727084AbfENWTt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 May 2019 18:19:49 -0400
-Received: from mail-pg1-f202.google.com ([209.85.215.202]:34559 "EHLO
-        mail-pg1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726660AbfENWTs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 May 2019 18:19:48 -0400
-Received: by mail-pg1-f202.google.com with SMTP id z7so445098pgc.1
-        for <linux-doc@vger.kernel.org>; Tue, 14 May 2019 15:19:48 -0700 (PDT)
+        id S1726519AbfENW6u (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 May 2019 18:58:50 -0400
+Received: from mail-lf1-f65.google.com ([209.85.167.65]:45260 "EHLO
+        mail-lf1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726251AbfENW6t (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 May 2019 18:58:49 -0400
+Received: by mail-lf1-f65.google.com with SMTP id n22so427982lfe.12;
+        Tue, 14 May 2019 15:58:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=NNCnVCTAATMxlDMarLLJ67yqDDVFt+vwrBh9wh5mNVQ=;
-        b=quTKkalkkcdvAmo8Q5W/BySUzf8yCwwTH5YR563mPWxNUSE5MultuJds8qTnGLUd9G
-         GJOMcET4Wz5Z093noXRAIdno9qE82hEKyL9OWEEEeZgvMsgKsoo6ySFkGuc/6WqHcU0M
-         Hpl+SDxyqgLaiTUqKbcRAQtyOX/1f7cvhIRr9mCHA88MjEoBBMBrKFxLj+V+PJU2icQz
-         YZVy0jog5dz9kph3TsyRuJuDu4mNIMZwKmuJy8P56loFGJEgPnUHKRTVucDlKHqh0GsE
-         xE/dwKEOx3hf4rdD0KCrCmTo1nwHhw2rMCTcX3tA2M9n443niRuAWkZ8t1kGad/emCxN
-         xZ2A==
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=T7dJtGSFbjWxWHWtg1H1pkzLh90BLS34Ro60mdQlGtQ=;
+        b=pXS7LnibgSQvxgJQfrpes0/Ey1rz5rZMW0Y2fG1ZmwIvvBWrKz2ISfYOuHG7rTd242
+         Fxs0ggRXV24zAbPNWSylBMFbRa7MeO/Y9yQpcpQvBryX6X89wQYiTZbbBLRtABtUrrSv
+         v5HPeejMAlyQ1KtLgqtaHGMdEhf/fuhs0aJTJBFo255mRXHlIsdcPwk7Q5rp6fvnRxnS
+         wPfhx9JBqk0s2a0XQkM7Q6I+48TzpjCI1XE68a+CKC0hqlS+ejy1AQ2hEUG2kjJlo/EE
+         KqfHy4c36U2UUmoBaeoeVrQ3Vbks9OOEaZb3nG9bs8WCVpFAVcG9CtfvNSiuxLfzohmn
+         EBzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=NNCnVCTAATMxlDMarLLJ67yqDDVFt+vwrBh9wh5mNVQ=;
-        b=jxsuP0NaWMo3nM9KAdAxMYMOampnnBKOXoX88LGfz16uTC+n2vfT6YfudWxuExWVP0
-         prL2RT/ipUsAt0jYaoSVDgqysLkW8z4VE39ymhbBgqx2rAYzbSRHMwptnIiIAxCG+CuG
-         tJnRsXV7Y67EqMj06HbHiVYQZ7FEAanmpSKTN2eGmohMX0KwcnN7nwa50HMxU2gp9/N/
-         kdPrJCDRNDXN9IA0t6yorc+poABVig0Xe9Obkxu04aR5OW3TvkQnBTeLlxlIVy/AT127
-         95D15sKtv8rPSl9rxAHYzM+K5JmlFgLn0kskzvRLqAuexmHLvI7/dIwJE5B0gJlp2tzp
-         K4Og==
-X-Gm-Message-State: APjAAAVn6py/6rvauZ3bs1E1pWFwNtETNqh0TUCp4L5iCEK57gUwNWaz
-        BCuQMmbBgOXcDmfJy0NIsn1xzhuWZGkwN1Cbp3oG3A==
-X-Google-Smtp-Source: APXvYqxo6OjC5cnI7G46g6hiP/P8iTXGx7hD0/zp0LMpsykXkRPUvVhudAT1yu9PqFgJEj2J/jGAQAQ3/X7UkXFAG8BMDA==
-X-Received: by 2002:a63:6988:: with SMTP id e130mr40887298pgc.150.1557872385659;
- Tue, 14 May 2019 15:19:45 -0700 (PDT)
-Date:   Tue, 14 May 2019 15:17:11 -0700
-In-Reply-To: <20190514221711.248228-1-brendanhiggins@google.com>
-Message-Id: <20190514221711.248228-19-brendanhiggins@google.com>
-Mime-Version: 1.0
-References: <20190514221711.248228-1-brendanhiggins@google.com>
-X-Mailer: git-send-email 2.21.0.1020.gf2820cf01a-goog
-Subject: [PATCH v4 18/18] MAINTAINERS: add proc sysctl KUnit test to PROC
- SYSCTL section
-From:   Brendan Higgins <brendanhiggins@google.com>
-To:     frowand.list@gmail.com, gregkh@linuxfoundation.org,
-        jpoimboe@redhat.com, keescook@google.com,
-        kieran.bingham@ideasonboard.com, mcgrof@kernel.org,
-        peterz@infradead.org, robh@kernel.org, sboyd@kernel.org,
-        shuah@kernel.org, tytso@mit.edu, yamada.masahiro@socionext.com
-Cc:     devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kbuild@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        linux-nvdimm@lists.01.org, linux-um@lists.infradead.org,
-        Alexander.Levin@microsoft.com, Tim.Bird@sony.com,
-        amir73il@gmail.com, dan.carpenter@oracle.com, daniel@ffwll.ch,
-        jdike@addtoit.com, joel@jms.id.au, julia.lawall@lip6.fr,
-        khilman@baylibre.com, knut.omang@oracle.com, logang@deltatee.com,
-        mpe@ellerman.id.au, pmladek@suse.com, rdunlap@infradead.org,
-        richard@nod.at, rientjes@google.com, rostedt@goodmis.org,
-        wfg@linux.intel.com, Brendan Higgins <brendanhiggins@google.com>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=T7dJtGSFbjWxWHWtg1H1pkzLh90BLS34Ro60mdQlGtQ=;
+        b=jC7HEfd0J4mFn/XozbIZp5fLpwytrE1RSOO8kHc/Q9Bv9NIds7UQmCwE/AlUn416d+
+         8r6Mehbaexgn/00sY4wp1EjV9F9d7M8ieGldgB/Qrvj3BZcwZPnX1YCMJAE+9k1CPf7T
+         JqMKa5rWcM8hB4390qTIsjbFIJWIBar4Mf3dq3gIWKsFYYTekKK6A5L9uYvNbIK9IcHq
+         5wxlczcHjXKK8NgjEbjOOd3vn358c8GyD3DlYu9i0zGP2pQl+B06nndG6janl1D45dOE
+         QfSg47dN7to1V2Hhj2ohteECC3cD1a5k/vJPLQtslr67GPpEs9MwKrQhH18mJaBf5VLN
+         8SRA==
+X-Gm-Message-State: APjAAAWtr122fShNeDtHblfLNaZjGdLyenfR3wx8S0OmMaQV0978pZst
+        KvdEb2ErpeeO4u4g3AAreBE=
+X-Google-Smtp-Source: APXvYqxQ+csEAJFD0eD/GsZ4ysqpBGlqOuOqHSWqW2KoxkpJiBAfARDTsXcOVlDYGGI5wSPvjVN6QQ==
+X-Received: by 2002:ac2:424b:: with SMTP id m11mr3783326lfl.71.1557874726437;
+        Tue, 14 May 2019 15:58:46 -0700 (PDT)
+Received: from localhost.localdomain ([5.164.217.122])
+        by smtp.gmail.com with ESMTPSA id n26sm30342lfi.90.2019.05.14.15.58.45
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 14 May 2019 15:58:45 -0700 (PDT)
+From:   Serge Semin <fancer.lancer@gmail.com>
+To:     Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Rob Herring <robh+dt@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Serge Semin <fancer.lancer@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Serge Semin <Sergey.Semin@t-platforms.ru>,
+        linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [PATCH 1/2] dt-bindings: hwmon: Add DT bindings for TI ads1000/ads1100 ADCs
+Date:   Wed, 15 May 2019 01:58:08 +0300
+Message-Id: <20190514225810.12591-2-fancer.lancer@gmail.com>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20190514225810.12591-1-fancer.lancer@gmail.com>
+References: <20190514225810.12591-1-fancer.lancer@gmail.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add entry for the new proc sysctl KUnit test to the PROC SYSCTL section.
+Add dt-binding documentation for the Texas Instruments ads1000/ads1100 ADCs
+driver.
 
-Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
+Signed-off-by: Serge Semin <fancer.lancer@gmail.com>
 ---
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+ .../devicetree/bindings/hwmon/ads1000.txt     | 61 ++++++++++++++++
+ Documentation/hwmon/ads1000.rst               | 72 +++++++++++++++++++
+ 2 files changed, 133 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/hwmon/ads1000.txt
+ create mode 100644 Documentation/hwmon/ads1000.rst
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8a91887c8d541..2e539647589fd 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -12526,6 +12526,7 @@ S:	Maintained
- F:	fs/proc/proc_sysctl.c
- F:	include/linux/sysctl.h
- F:	kernel/sysctl.c
-+F:	kernel/sysctl-test.c
- F:	tools/testing/selftests/sysctl/
- 
- PS3 NETWORK SUPPORT
+diff --git a/Documentation/devicetree/bindings/hwmon/ads1000.txt b/Documentation/devicetree/bindings/hwmon/ads1000.txt
+new file mode 100644
+index 000000000000..3907b7da9b33
+--- /dev/null
++++ b/Documentation/devicetree/bindings/hwmon/ads1000.txt
+@@ -0,0 +1,61 @@
++ADS1000/ADS1100 (I2C)
++
++This device is a 12-16 bit A-D converter with 1 input.
++
++The inputs can be used either as a differential pair of Vin+ Vin- or as a single
++ended sensor for Vin+ GND. The inputs mode is platform-dependent and isn't
++configured by software in any case.
++
++Device A-D converter sensitivity can be configured using two parameters:
++ - pga is the programmable gain amplifier
++    0: x1 (default) 
++    1: x2
++    2: x4
++    3: x8
++ - data_rate in samples per second also affecting the output code accuracy
++    0: 128SPS - +/- Vdd*0.488mV (default, ads1000 accepts this rate only)
++    1: 32SPS  - +/- Vdd*0.122mV
++    2: 16SPS  - +/- Vdd*0.061mV
++    3: 8SPS   - +/- Vdd*0.030mV
++   Since this parameter also affects the output accuracy, be aware the greater
++   SPS the worse accuracy.
++
++As a result the output value is calculated by the next formulae:
++dVin = Cod * Vdd / (PGA * max(|Cod|)), where
++max(|Cod|) - maximum possible value of the output code, which depends on the SPS
++setting from the table above.
++
++The ADS1000/ADS1100 dts-node:
++
++  Required properties:
++   - compatible : must be "ti,ads1000" or "ti,ads1100"
++   - reg : I2C bus address of the device
++   - #address-cells : must be <1>
++   - #size-cells : must be <0>
++   - vdd-supply : regulator for reference supply voltage (usually fixed)
++
++  Optional properties:
++   - ti,gain : the programmable gain amplifier setting
++   - ti,datarate : the converter data rate
++   - ti,voltage-divider : <R1 R2> Ohms inbound voltage dividers,
++     so dVin = (R1 + R2)/R2 * dVin
++
++Example:
++
++vdd_5v0: fixedregulator@0 {
++	compatible = "regulator-fixed";
++	regulator-name = "vdd-ref";
++	regulator-min-microvolt = <5000000>;
++	regulator-max-microvolt = <5000000>;
++	regulator-always-on;
++};
++
++tiadc: ads1000@48 {
++	compatible = "ti,ads1000";
++	reg = <0x48>;
++
++	vdd-supply = <&vdd_5v0>;
++	ti,gain = <0>;
++	ti,voltage-divider = <31600 3600>;
++};
++
+diff --git a/Documentation/hwmon/ads1000.rst b/Documentation/hwmon/ads1000.rst
+new file mode 100644
+index 000000000000..fcfe52d5d64d
+--- /dev/null
++++ b/Documentation/hwmon/ads1000.rst
+@@ -0,0 +1,72 @@
++Kernel driver ads1000
++=====================
++
++Supported chips:
++
++  * Texas Instruments ADS1000
++
++    Prefix: 'ads1000'
++
++    Datasheet: Publicly available at the Texas Instruments website:
++
++               http://www.ti.com/lit/ds/symlink/ads1000.pdf
++
++  * Texas Instruments ADS1100
++
++    Prefix: 'ads1100'
++
++    Datasheet: Publicly available at the Texas Instruments website:
++
++               http://www.ti.com/lit/ds/symlink/ads1100.pdf
++
++Authors:
++	Serge Semin <fancer.lancer@gmail.com>
++
++Description
++-----------
++
++This driver implements support for the Texas Instruments ADS1000/ADS1100 ADCs.
++
++This device is a 12-16 bit A-D converter with 1 input.
++
++The inputs can be used either as a differential pair of Vin+ Vin- or as a single
++ended sensor for Vin+ GND. The inputs mode is platform-dependent and isn't
++configured by software in any case.
++
++Platform Data
++-------------
++
++In linux/platform_data/ads1000.h platform data is defined to be of
++the following fields:
++
++ - pga is the programmable gain amplifier.
++
++    - 0: x1
++    - 1: x2
++    - 2: x4
++    - 3: x8
++
++ - data_rate in samples per second also affecting the output code accuracy.
++
++    - 0: 128SPS - +/- Vdd*0.488mV (ads1000 accepts this rate only)
++    - 1: 32SPS  - +/- Vdd*0.122mV
++    - 2: 16SPS  - +/- Vdd*0.061mV
++    - 3: 8SPS   - +/- Vdd*0.030mV
++   Since this parameter also affects the output accuracy, be aware the greater
++   SPS the worse accuracy.
++
++ - vdd is a pointer to the voltage regulator with reference voltage source.
++
++ - divider is an array of inbound voltage dividers in <R1 R2> Ohms, if each of
++   them is non-zero then the output voltage will be modified as follows:
++   dVin = (R1 + R2)/R2 * dVin.
++
++As a result the output value is calculated by the next formulae:
++dVin = Cod * Vdd / (PGA * max(|Cod|)), where max(|Cod|) - maximum possible
++value of the output code, which depends on the SPS setting from data_rate.
++
++Devicetree
++----------
++
++Configuration is also possible via devicetree:
++Documentation/devicetree/bindings/hwmon/ads1000.txt
 -- 
-2.21.0.1020.gf2820cf01a-goog
+2.21.0
 
