@@ -2,59 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 91F3E2412C
-	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2019 21:27:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 61D442423F
+	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2019 22:52:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725941AbfETT1u (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 May 2019 15:27:50 -0400
-Received: from ms.lwn.net ([45.79.88.28]:35732 "EHLO ms.lwn.net"
+        id S1726074AbfETUwP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 May 2019 16:52:15 -0400
+Received: from mga03.intel.com ([134.134.136.65]:16868 "EHLO mga03.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725810AbfETT1u (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 20 May 2019 15:27:50 -0400
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 2172E6A2;
-        Mon, 20 May 2019 19:27:50 +0000 (UTC)
-Date:   Mon, 20 May 2019 13:27:49 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Cengiz Can <cengizc@gmail.com>
-Cc:     kexec@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: kdump: fix minor typo
-Message-ID: <20190520132749.093c3c78@lwn.net>
-In-Reply-To: <20190514161724.16604-1-cengizc@gmail.com>
-References: <20190514161724.16604-1-cengizc@gmail.com>
-Organization: LWN.net
+        id S1725763AbfETUwP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 20 May 2019 16:52:15 -0400
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+  by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 20 May 2019 13:52:14 -0700
+X-ExtLoop1: 1
+Received: from iweiny-desk2.sc.intel.com ([10.3.52.157])
+  by orsmga002.jf.intel.com with ESMTP; 20 May 2019 13:52:14 -0700
+From:   ira.weiny@intel.com
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     x86@kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, Ira Weiny <ira.weiny@intel.com>
+Subject: [PATCH] Documentation/x86: Fix path to entry_32.S
+Date:   Mon, 20 May 2019 13:52:53 -0700
+Message-Id: <20190520205253.23762-1-ira.weiny@intel.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 14 May 2019 19:17:25 +0300
-Cengiz Can <cengizc@gmail.com> wrote:
+From: Ira Weiny <ira.weiny@intel.com>
 
-> kdump.txt had a minor typo.
-> 
-> Signed-off-by: Cengiz Can <cengizc@gmail.com>
-> ---
->  Documentation/kdump/kdump.txt | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/kdump/kdump.txt b/Documentation/kdump/kdump.txt
-> index 51814450a7f8..3162eeb8c262 100644
-> --- a/Documentation/kdump/kdump.txt
-> +++ b/Documentation/kdump/kdump.txt
-> @@ -410,7 +410,7 @@ Notes on loading the dump-capture kernel:
->  * Boot parameter "1" boots the dump-capture kernel into single-user
->    mode without networking. If you want networking, use "3".
->  
-> -* We generally don' have to bring up a SMP kernel just to capture the
-> +* We generally don't have to bring up a SMP kernel just to capture the
+Signed-off-by: Ira Weiny <ira.weiny@intel.com>
+---
+ Documentation/x86/exception-tables.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Applied, thanks.
+diff --git a/Documentation/x86/exception-tables.txt b/Documentation/x86/exception-tables.txt
+index e396bcd8d830..001c0f1ad935 100644
+--- a/Documentation/x86/exception-tables.txt
++++ b/Documentation/x86/exception-tables.txt
+@@ -30,7 +30,7 @@ page fault handler
+ void do_page_fault(struct pt_regs *regs, unsigned long error_code)
+ 
+ in arch/x86/mm/fault.c. The parameters on the stack are set up by
+-the low level assembly glue in arch/x86/kernel/entry_32.S. The parameter
++the low level assembly glue in arch/x86/entry/entry_32.S. The parameter
+ regs is a pointer to the saved registers on the stack, error_code
+ contains a reason code for the exception.
+ 
+-- 
+2.20.1
 
-jon
