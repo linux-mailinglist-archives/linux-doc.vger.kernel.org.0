@@ -2,43 +2,43 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3F1D523C13
-	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2019 17:28:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4BED423C11
+	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2019 17:28:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2392136AbfETP1y (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 May 2019 11:27:54 -0400
-Received: from mx07-00178001.pphosted.com ([62.209.51.94]:16870 "EHLO
-        mx07-00178001.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S2388228AbfETP1y (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 May 2019 11:27:54 -0400
-Received: from pps.filterd (m0046037.ppops.net [127.0.0.1])
-        by mx07-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x4KFLead012608;
+        id S1731385AbfETP1w (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 May 2019 11:27:52 -0400
+Received: from mx08-00178001.pphosted.com ([91.207.212.93]:17566 "EHLO
+        mx07-00178001.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S2388179AbfETP1v (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 May 2019 11:27:51 -0400
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+        by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x4KFM4a7003544;
         Mon, 20 May 2019 17:27:18 +0200
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com; h=from : to : cc : subject
- : date : message-id : content-type : content-transfer-encoding :
- mime-version; s=STMicroelectronics;
- bh=g7uJcx07z3bWTIfepNMx6DxFWWSkzUQXRKhfA3a47Tg=;
- b=e7mQXsyF8vdXHzdtx+52HC8jYF7qyRlw4X0qOBaAESvHt3Ip+3aZ4o6/vHozSjFONiig
- NrqbVP1P/1cyyV73AkfgsiZKzboUTCelLytXlY004FdYABQ6fZw8TaunXLRPxcy0VxBV
- Ffe1ixxaBOaAjJFVsaxl3bncXihdMpAQU1Y2I02JEBVqcS7Rdx8lXxqsubiNx7gwtUFn
- Xc12mkPdLT9Scd43aV5XPFXMSr9IwrmNmuITQUmHFKiR4AYh5Fg9495Mg6c9hkcUW/SM
- Qi08taUsun2Ky+FqDp4+5mtWgSqHABgAc96SChYX7Hyp/I7W19FaAJlmy6+IHoWPWFml ow== 
+ : date : message-id : references : in-reply-to : content-type :
+ content-transfer-encoding : mime-version; s=STMicroelectronics;
+ bh=XaWvgYoi3fn5tdDi/Sgs87wZpH8WFoKkowCANtilYJs=;
+ b=EUW1ao9bejz7k51WbxPGf7MHnnjEmw6rDbuq4UQnFMlalClsTUHLEgj7I0HnxGlpwPnx
+ ZOwYGC+2EJvuJjXQVBYFrSLY3UDiG1KtWL0uccRmmMhoUIa7AqaPa2Hhl3PpbVfr82kJ
+ 5YfadjKxrO7LT59p31V8U0tWnCPjJjpWRP0RT/nOUbuV2nogisiVkPLWaoz7NKOxlQ1r
+ bfMlSHkqWWEKtkWIMYnWwMv98hfq42Mxqw3Hpw8CMs4G2PZk0bAS04VuwOf/bHul0OQR
+ WpGVwIeV95NRstJ+YiUDk1u3kl0TCre0w4KGzq6X7GXavBwGfT43oSxjUujDgVtYG3VE IQ== 
 Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-        by mx07-00178001.pphosted.com with ESMTP id 2sj7ttv8tn-1
+        by mx08-00178001.pphosted.com with ESMTP id 2sj773vj5w-1
         (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
         Mon, 20 May 2019 17:27:18 +0200
 Received: from zeta.dmz-eu.st.com (zeta.dmz-eu.st.com [164.129.230.9])
-        by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 1860734;
-        Mon, 20 May 2019 15:27:15 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag5node1.st.com [10.75.127.13])
-        by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id AEEE12BAC;
-        Mon, 20 May 2019 15:27:15 +0000 (GMT)
-Received: from SFHDAG5NODE1.st.com (10.75.127.13) by SFHDAG5NODE1.st.com
- (10.75.127.13) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Mon, 20 May
- 2019 17:27:15 +0200
+        by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 3B47D38;
+        Mon, 20 May 2019 15:27:17 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag3node2.st.com [10.75.127.8])
+        by zeta.dmz-eu.st.com (STMicroelectronics) with ESMTP id 0BA022BAE;
+        Mon, 20 May 2019 15:27:17 +0000 (GMT)
+Received: from SFHDAG5NODE1.st.com (10.75.127.13) by SFHDAG3NODE2.st.com
+ (10.75.127.8) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Mon, 20 May
+ 2019 17:27:16 +0200
 Received: from SFHDAG5NODE1.st.com ([fe80::cc53:528c:36c8:95f6]) by
  SFHDAG5NODE1.st.com ([fe80::cc53:528c:36c8:95f6%20]) with mapi id
- 15.00.1347.000; Mon, 20 May 2019 17:27:15 +0200
+ 15.00.1347.000; Mon, 20 May 2019 17:27:16 +0200
 From:   Gerald BAEZA <gerald.baeza@st.com>
 To:     "will.deacon@arm.com" <will.deacon@arm.com>,
         "mark.rutland@arm.com" <mark.rutland@arm.com>,
@@ -58,11 +58,13 @@ CC:     "linux-arm-kernel@lists.infradead.org"
         "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
         "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
         Gerald BAEZA <gerald.baeza@st.com>
-Subject: [PATCH v2 0/5] stm32-ddr-pmu driver creation
-Thread-Topic: [PATCH v2 0/5] stm32-ddr-pmu driver creation
-Thread-Index: AQHVDyCA+bIWujGZrUGYoRHYm+G4Sg==
-Date:   Mon, 20 May 2019 15:27:15 +0000
-Message-ID: <1558366019-24214-1-git-send-email-gerald.baeza@st.com>
+Subject: [PATCH v2 2/5] dt-bindings: perf: stm32: ddrperfm support
+Thread-Topic: [PATCH v2 2/5] dt-bindings: perf: stm32: ddrperfm support
+Thread-Index: AQHVDyCBQQc7A9kqVEqkYhOzbDRQTg==
+Date:   Mon, 20 May 2019 15:27:16 +0000
+Message-ID: <1558366019-24214-3-git-send-email-gerald.baeza@st.com>
+References: <1558366019-24214-1-git-send-email-gerald.baeza@st.com>
+In-Reply-To: <1558366019-24214-1-git-send-email-gerald.baeza@st.com>
 Accept-Language: fr-FR, en-US
 Content-Language: en-US
 X-MS-Has-Attach: 
@@ -82,36 +84,43 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 The DDRPERFM is the DDR Performance Monitor embedded in STM32MP1 SOC.
 
-This series adds support for the DDRPERFM via a new stm32-ddr-pmu driver,
-registered into the perf framework.
+This documentation indicates how to enable stm32-ddr-pmu driver on
+DDRPERFM peripheral, via the device tree.
 
-This driver is inspired from arch/arm/mm/cache-l2x0-pmu.c
-
+Signed-off-by: Gerald Baeza <gerald.baeza@st.com>
 ---
-Changes from v1:
-- add 'resets' description (bindings) and using (driver). Thanks Rob.
-- rebase on 5.2-rc1 (that includes the ddrperfm clock control patch).
-
-Gerald Baeza (5):
-  Documentation: perf: stm32: ddrperfm support
-  dt-bindings: perf: stm32: ddrperfm support
-  perf: stm32: ddrperfm driver creation
-  ARM: configs: enable STM32_DDR_PMU
-  ARM: dts: stm32: add ddrperfm on stm32mp157c
-
- .../devicetree/bindings/perf/stm32-ddr-pmu.txt     |  20 +
- Documentation/perf/stm32-ddr-pmu.txt               |  41 ++
- arch/arm/boot/dts/stm32mp157c.dtsi                 |   9 +
- arch/arm/configs/multi_v7_defconfig                |   1 +
- drivers/perf/Kconfig                               |   6 +
- drivers/perf/Makefile                              |   1 +
- drivers/perf/stm32_ddr_pmu.c                       | 512 +++++++++++++++++=
+ .../devicetree/bindings/perf/stm32-ddr-pmu.txt       | 20 ++++++++++++++++=
 ++++
- 7 files changed, 590 insertions(+)
+ 1 file changed, 20 insertions(+)
  create mode 100644 Documentation/devicetree/bindings/perf/stm32-ddr-pmu.tx=
 t
- create mode 100644 Documentation/perf/stm32-ddr-pmu.txt
- create mode 100644 drivers/perf/stm32_ddr_pmu.c
 
+diff --git a/Documentation/devicetree/bindings/perf/stm32-ddr-pmu.txt b/Doc=
+umentation/devicetree/bindings/perf/stm32-ddr-pmu.txt
+new file mode 100644
+index 0000000..9d36209
+--- /dev/null
++++ b/Documentation/devicetree/bindings/perf/stm32-ddr-pmu.txt
+@@ -0,0 +1,20 @@
++* STM32 DDR Performance Monitor (DDRPERFM)
++
++Required properties:
++- compatible: must be "st,stm32-ddr-pmu".
++- reg: physical address and length of the registers set.
++- clocks: list of phandles and specifiers to all input clocks listed in
++	  clock-names property.
++- clock-names: "bus" corresponds to the DDRPERFM bus clock and "ddr" to
++	       the DDR frequency.
++- resets: phandle to the reset controller and DDRPERFM reset specifier
++
++Example:
++	ddrperfm: perf@5a007000 {
++		compatible =3D "st,stm32-ddr-pmu";
++		reg =3D <0x5a007000 0x400>;
++		clocks =3D <&rcc DDRPERFM>, <&rcc PLL2_R>;
++		clock-names =3D "bus", "ddr";
++		resets =3D <&rcc DDRPERFM_R>;
++	};
++
 --=20
 2.7.4
