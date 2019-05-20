@@ -2,32 +2,29 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A8C52410B
-	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2019 21:20:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 91F3E2412C
+	for <lists+linux-doc@lfdr.de>; Mon, 20 May 2019 21:27:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725954AbfETTUe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 May 2019 15:20:34 -0400
-Received: from ms.lwn.net ([45.79.88.28]:35682 "EHLO ms.lwn.net"
+        id S1725941AbfETT1u (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 May 2019 15:27:50 -0400
+Received: from ms.lwn.net ([45.79.88.28]:35732 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725372AbfETTUe (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 20 May 2019 15:20:34 -0400
+        id S1725810AbfETT1u (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 20 May 2019 15:27:50 -0400
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id C87AA6A2;
-        Mon, 20 May 2019 19:20:33 +0000 (UTC)
-Date:   Mon, 20 May 2019 13:20:32 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id 2172E6A2;
+        Mon, 20 May 2019 19:27:50 +0000 (UTC)
+Date:   Mon, 20 May 2019 13:27:49 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     LKML <linux-kernel@vger.kernel.org>,
-        William Breathitt Gray <vilhelm.gray@gmail.com>,
-        linux-iio@vger.kernel.org,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH -next] counter: fix Documentation build error due to
- incorrect source file name
-Message-ID: <20190520132032.74912949@lwn.net>
-In-Reply-To: <b6475070-f336-1093-ff0f-6bc8d5fda35e@infradead.org>
-References: <b6475070-f336-1093-ff0f-6bc8d5fda35e@infradead.org>
+To:     Cengiz Can <cengizc@gmail.com>
+Cc:     kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: kdump: fix minor typo
+Message-ID: <20190520132749.093c3c78@lwn.net>
+In-Reply-To: <20190514161724.16604-1-cengizc@gmail.com>
+References: <20190514161724.16604-1-cengizc@gmail.com>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -37,36 +34,26 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, 18 May 2019 21:29:58 -0700
-Randy Dunlap <rdunlap@infradead.org> wrote:
+On Tue, 14 May 2019 19:17:25 +0300
+Cengiz Can <cengizc@gmail.com> wrote:
 
-> From: Randy Dunlap <rdunlap@infradead.org>
+> kdump.txt had a minor typo.
 > 
-> Fix kernel-doc build error in Documentation/driver-api/generic-counter.rst
-> of incorrect source file name.
-> Fixes this warning and error:
-> 
-> Error: Cannot open file ../drivers/counter/generic-counter.c
-> WARNING: kernel-doc '../scripts/kernel-doc -rst -enable-lineno -export ../drivers/counter/generic-counter.c' failed with return code 2
-> 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: William Breathitt Gray <vilhelm.gray@gmail.com>
-> Cc: linux-iio@vger.kernel.org
+> Signed-off-by: Cengiz Can <cengizc@gmail.com>
 > ---
->  Documentation/driver-api/generic-counter.rst |    2 +-
+>  Documentation/kdump/kdump.txt | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> --- linux-next-20190517.orig/Documentation/driver-api/generic-counter.rst
-> +++ linux-next-20190517/Documentation/driver-api/generic-counter.rst
-> @@ -251,7 +251,7 @@ for defining a counter device.
->  .. kernel-doc:: include/linux/counter.h
->     :internal:
+> diff --git a/Documentation/kdump/kdump.txt b/Documentation/kdump/kdump.txt
+> index 51814450a7f8..3162eeb8c262 100644
+> --- a/Documentation/kdump/kdump.txt
+> +++ b/Documentation/kdump/kdump.txt
+> @@ -410,7 +410,7 @@ Notes on loading the dump-capture kernel:
+>  * Boot parameter "1" boots the dump-capture kernel into single-user
+>    mode without networking. If you want networking, use "3".
 >  
-> -.. kernel-doc:: drivers/counter/generic-counter.c
-> +.. kernel-doc:: drivers/counter/counter.c
->     :export:
->  
->  Implementation
+> -* We generally don' have to bring up a SMP kernel just to capture the
+> +* We generally don't have to bring up a SMP kernel just to capture the
 
 Applied, thanks.
 
