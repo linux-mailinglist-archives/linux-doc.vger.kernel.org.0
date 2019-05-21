@@ -2,108 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 30FA025BEF
-	for <lists+linux-doc@lfdr.de>; Wed, 22 May 2019 04:29:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 351862466A
+	for <lists+linux-doc@lfdr.de>; Tue, 21 May 2019 05:41:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727294AbfEVC34 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 May 2019 22:29:56 -0400
-Received: from userp2130.oracle.com ([156.151.31.86]:42324 "EHLO
-        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726466AbfEVC34 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 May 2019 22:29:56 -0400
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
-        by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x4M2T0FR038593;
-        Wed, 22 May 2019 02:29:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id; s=corp-2018-07-02;
- bh=ZXUeQYgZB3O0V7HnlxDvOw49BMFt48EfbIn16aNTl/g=;
- b=pzLjNCWji1W1SDF9Bw9C/ZEezK9tc+A83lNgJZbqCd02orKUVbRCZ6qlapXr3wUJEjWW
- yLGMlFypDraEnHBeGQ9uzFJpoLUMciJGWWBWytfD26rCDCEcH8OtgPkLg0im6fI+cWt3
- BqvzhIaHlvsiXoPR/KNtJt/gJM/M5STmS02611bN5GjX6Hv1LQV2EW3iIZMRQHL2irDk
- WLTKbu8N2tA/IOBxz44m/x7nNsoV0lGg4Oe5Rs83FF9aYup0Z8N0NR0QmTUNlDDo5InV
- +f0mDTzN3f6jUNTmvXopZ2NJCKyUsy9y39NETflGe5gjn9l1Se6pqsc/++3Mc0ZI66xL BA== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
-        by userp2130.oracle.com with ESMTP id 2smsk58rtk-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 22 May 2019 02:29:00 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
-        by aserp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x4M2SDh1017840;
-        Wed, 22 May 2019 02:28:59 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
-        by aserp3030.oracle.com with ESMTP id 2smsgsawm3-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 22 May 2019 02:28:59 +0000
-Received: from abhmp0019.oracle.com (abhmp0019.oracle.com [141.146.116.25])
-        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x4M2SphF018805;
-        Wed, 22 May 2019 02:28:51 GMT
-Received: from z2.cn.oracle.com (/10.182.69.87)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Wed, 22 May 2019 02:28:50 +0000
-From:   Zhenzhong Duan <zhenzhong.duan@oracle.com>
-To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     paulmck@linux.ibm.com, josh@joshtriplett.org, rostedt@goodmis.org,
-        mathieu.desnoyers@efficios.com, jiangshanlai@gmail.com,
-        joel@joelfernandes.org, corbet@lwn.net, tglx@linutronix.de,
-        mingo@kernel.org, gregkh@linuxfoundation.org,
-        keescook@chromium.org, srinivas.eeda@oracle.com,
-        Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Subject: [PATCH v3] doc: kernel-parameters.txt: fix documentation of nmi_watchdog parameter
-Date:   Tue, 21 May 2019 10:32:08 +0800
-Message-Id: <1558405928-29449-1-git-send-email-zhenzhong.duan@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9264 signatures=668687
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1810050000 definitions=main-1905220015
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9264 signatures=668687
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
- definitions=main-1905220015
+        id S1727302AbfEUDlb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 May 2019 23:41:31 -0400
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:45626 "EHLO
+        mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727078AbfEUDlb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 May 2019 23:41:31 -0400
+Received: by mail-pl1-f193.google.com with SMTP id a5so7685070pls.12;
+        Mon, 20 May 2019 20:41:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oIMygyD3sInPQMcnYmQjxiYJQKnfeII4uM7qe57TIWY=;
+        b=OAy03SuHPZvHf9eiWYtJiWyRxvX8P7yOnlWRu6A2YcGpkcPnBT9R7OQxiZVaQQMzxS
+         jCmK/wyiIKgyihj7dSyKGNDijnO4DrhtWsFvimvIG1I88zQ6V2Jq4aAxSxeXMb/j7dPG
+         VsJ93FYEiREdwlWLXGxhv/A5IXpFJE7P5WYYUP/RaVdXsjB8AbJi/jUaxs98p3mJFK9k
+         UjB7v284fbm6dy1CKz7ktmXUNITj6pT8JzMNj1bh0jkcvCJjnFHTLpSvqTqWKjA14gnx
+         gsmPbvLTBVNx78c/DZ4K/gMci9q2UataRghBaISrLDc8OMXfSFum3/o2CbIWu7OOx80T
+         +ulg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=oIMygyD3sInPQMcnYmQjxiYJQKnfeII4uM7qe57TIWY=;
+        b=oEUlCaGp0bccS4DrXYPP67+UUCHC73oYtxdBmwgL2Gbl4MjJzs79hwZMgmqBTFfd6G
+         VgXK4L3d4dwo7aPaUR0qzFjGMZagghgzdwurTGXdgwFw73V7XuRbFBRYmvV84BnHA/rn
+         HzwlGl3bEztn6fMfiS6AWBj1NkAa63HTLzrUbydvbfvrRKGJeFWuo1zYx91yZqRbNAst
+         3K2AI/9N2ROCkzw3PizpxDn5cZkdUJVDRlJ8b2hwGg2wnV+x04ta5EQaJ4tUJe5IwcTi
+         FbsAjeCoD/4pu4VW9GMCafT7Iannrk1PTkiHzz3Atzpgpp7ZbJbXjw+4UdIoOnFeO57b
+         xLiA==
+X-Gm-Message-State: APjAAAXgPhYgcVNKD8VRX83YMgcdzRwGz8JpxU3FVf4ElyZM5H3yi/Av
+        ntyATBqBvSgvGyRL8BuXUWRrG5ZJAh8=
+X-Google-Smtp-Source: APXvYqzWjyywKwMRH7ExnVj2HvsLeLCpGjAlErCfjtV2Jt82i9xkXMi9kB0QNpru7Ak/5phso1h3Gw==
+X-Received: by 2002:a17:902:7202:: with SMTP id ba2mr25990766plb.177.1558410090897;
+        Mon, 20 May 2019 20:41:30 -0700 (PDT)
+Received: from masabert (150-66-66-201m5.mineo.jp. [150.66.66.201])
+        by smtp.gmail.com with ESMTPSA id 19sm22635975pfz.84.2019.05.20.20.41.29
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 20 May 2019 20:41:30 -0700 (PDT)
+Received: by masabert (Postfix, from userid 1000)
+        id BC43F2011A2; Tue, 21 May 2019 12:41:16 +0900 (JST)
+From:   Masanari Iida <standby24x7@gmail.com>
+To:     corbet@lwn.net, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+        davem@davemloft.net
+Cc:     Masanari Iida <standby24x7@gmail.com>
+Subject: [PATCH] net-next: net: Fix typos in ip-sysctl.txt
+Date:   Tue, 21 May 2019 12:41:15 +0900
+Message-Id: <20190521034115.18896-1-standby24x7@gmail.com>
+X-Mailer: git-send-email 2.22.0.rc1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The default behavior of hardlockup depends on the config of
-CONFIG_BOOTPARAM_HARDLOCKUP_PANIC.
+This patch fixes some spelling typos found in ip-sysctl.txt
 
-Fix the description of nmi_watchdog to make it clear.
-
-Suggested-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
-Signed-off-by: Zhenzhong Duan <zhenzhong.duan@oracle.com>
-Reviewed-by: Joel Fernandes (Google) <joel@joelfernandes.org>
-Acked-by: Ingo Molnar <mingo@kernel.org>
-Acked-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: linux-doc@vger.kernel.org
+Signed-off-by: Masanari Iida <standby24x7@gmail.com>
 ---
- v3: add Suggested-by and Acked-by
- v2: fix description using words suggested by Steven Rostedt
+ Documentation/networking/ip-sysctl.txt | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- Documentation/admin-guide/kernel-parameters.txt | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 08df588..b9d4358 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2805,8 +2805,9 @@
- 			0 - turn hardlockup detector in nmi_watchdog off
- 			1 - turn hardlockup detector in nmi_watchdog on
- 			When panic is specified, panic when an NMI watchdog
--			timeout occurs (or 'nopanic' to override the opposite
--			default). To disable both hard and soft lockup detectors,
-+			timeout occurs (or 'nopanic' to not panic on an NMI
-+			watchdog, if CONFIG_BOOTPARAM_HARDLOCKUP_PANIC is set)
-+			To disable both hard and soft lockup detectors,
- 			please see 'nowatchdog'.
- 			This is useful when you use a panic=... timeout and
- 			need the box quickly up again.
+diff --git a/Documentation/networking/ip-sysctl.txt b/Documentation/networking/ip-sysctl.txt
+index 725b8bea58a7..14fe93049d28 100644
+--- a/Documentation/networking/ip-sysctl.txt
++++ b/Documentation/networking/ip-sysctl.txt
+@@ -560,10 +560,10 @@ tcp_comp_sack_delay_ns - LONG INTEGER
+ 	Default : 1,000,000 ns (1 ms)
+ 
+ tcp_comp_sack_nr - INTEGER
+-	Max numer of SACK that can be compressed.
++	Max number of SACK that can be compressed.
+ 	Using 0 disables SACK compression.
+ 
+-	Detault : 44
++	Default : 44
+ 
+ tcp_slow_start_after_idle - BOOLEAN
+ 	If set, provide RFC2861 behavior and time out the congestion
 -- 
-1.8.3.1
+2.22.0.rc1
 
