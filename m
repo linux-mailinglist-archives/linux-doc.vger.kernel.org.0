@@ -2,59 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3A9222B21A
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2019 12:30:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E66C22B22F
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2019 12:32:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726115AbfE0KaS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 May 2019 06:30:18 -0400
-Received: from merlin.infradead.org ([205.233.59.134]:38400 "EHLO
-        merlin.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725814AbfE0KaS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 May 2019 06:30:18 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-         bh=fO4yzkLNvwCdtEhg2+HPTX4Reyxk7SMjLIEFxFLV1qg=; b=pYKF21PBn82fa2rICGxiMtwQK
-        t4RX9tPZfOsqVrIwLkSBvUDpxGCjSVECjEH9UDf1AM5h+k88M9da0PuEOcokdueJDRP1iQqcGfRL3
-        yizWRzNx+zl992HJ7vu9Up9W4b6bRGoSlYUszHF34bfWSRLc5SEvrZYyUYUNCM0EJeonttC6IxHRs
-        KBBpwT9Nbx2C5jetEzCAMldcFUDk+p4WwzVmvl31HKKvxvw9Uh4jV4M1o6rIlJM62xEJvuczATKCD
-        139WQc112sejHLe5eAzrgqHzEgbxPMHKMorztt9WDdki8vrIW1RlAfDFZZi51r52ZUE1xbBVeqp3V
-        eVwCt6+HA==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=hirez.programming.kicks-ass.net)
-        by merlin.infradead.org with esmtpsa (Exim 4.90_1 #2 (Red Hat Linux))
-        id 1hVCtI-0002IY-B8; Mon, 27 May 2019 10:30:05 +0000
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 1B49D2027F766; Mon, 27 May 2019 12:30:03 +0200 (CEST)
-Date:   Mon, 27 May 2019 12:30:03 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Tao Xu <tao3.xu@intel.com>
-Cc:     pbonzini@redhat.com, rkrcmar@redhat.com, corbet@lwn.net,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        sean.j.christopherson@intel.com, x86@kernel.org,
-        kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, jingqi.liu@intel.com
-Subject: Re: [PATCH v2 1/3] KVM: x86: add support for user wait instructions
-Message-ID: <20190527103003.GX2623@hirez.programming.kicks-ass.net>
-References: <20190524075637.29496-1-tao3.xu@intel.com>
- <20190524075637.29496-2-tao3.xu@intel.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190524075637.29496-2-tao3.xu@intel.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        id S1725943AbfE0KcP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 May 2019 06:32:15 -0400
+Received: from mx2.suse.de ([195.135.220.15]:52432 "EHLO mx1.suse.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726302AbfE0KcO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 27 May 2019 06:32:14 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx1.suse.de (Postfix) with ESMTP id 4502AAE27;
+        Mon, 27 May 2019 10:32:12 +0000 (UTC)
+From:   Juergen Gross <jgross@suse.com>
+To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-erofs@lists.ozlabs.org, devel@driverdev.osuosl.org,
+        linux-fsdevel@vger.kernel.org, linux-btrfs@vger.kernel.org,
+        linux-ext4@vger.kernel.org, linux-f2fs-devel@lists.sourceforge.net,
+        linux-mm@kvack.org
+Cc:     Juergen Gross <jgross@suse.com>, Jonathan Corbet <corbet@lwn.net>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        xen-devel@lists.xenproject.org, Gao Xiang <gaoxiang25@huawei.com>,
+        Chao Yu <yuchao0@huawei.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Chris Mason <clm@fb.com>, Josef Bacik <josef@toxicpanda.com>,
+        David Sterba <dsterba@suse.com>,
+        "Theodore Ts'o" <tytso@mit.edu>,
+        Andreas Dilger <adilger.kernel@dilger.ca>,
+        Jaegeuk Kim <jaegeuk@kernel.org>,
+        Mark Fasheh <mark@fasheh.com>,
+        Joel Becker <jlbec@evilplan.org>,
+        Joseph Qi <joseph.qi@linux.alibaba.com>,
+        ocfs2-devel@oss.oracle.com,
+        Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
+Subject: [PATCH 0/3] remove tmem and code depending on it
+Date:   Mon, 27 May 2019 12:32:04 +0200
+Message-Id: <20190527103207.13287-1-jgross@suse.com>
+X-Mailer: git-send-email 2.16.4
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 24, 2019 at 03:56:35PM +0800, Tao Xu wrote:
-> This patch adds support for UMONITOR, UMWAIT and TPAUSE instructions
-> in kvm, and by default dont't expose it to kvm and provide a capability
-> to enable it.
+Tmem has been an experimental Xen feature which has been dropped
+recently due to security problems and lack of maintainership.
 
-I'm thinking this should be conditional on the guest being a 1:1 guest,
-and I also seem to remember we have bits for that already -- they were
-used to disable paravirt spinlocks for example.
+So it is time now to drop it in Linux kernel, too.
+
+Juergen Gross (3):
+  xen: remove tmem driver
+  mm: remove cleancache.c
+  mm: remove tmem specifics from frontswap
+
+ Documentation/admin-guide/kernel-parameters.txt |  21 -
+ Documentation/vm/cleancache.rst                 | 296 ------------
+ Documentation/vm/frontswap.rst                  |  27 +-
+ Documentation/vm/index.rst                      |   1 -
+ MAINTAINERS                                     |   7 -
+ drivers/staging/erofs/data.c                    |   6 -
+ drivers/staging/erofs/internal.h                |   1 -
+ drivers/xen/Kconfig                             |  23 -
+ drivers/xen/Makefile                            |   2 -
+ drivers/xen/tmem.c                              | 419 -----------------
+ drivers/xen/xen-balloon.c                       |   2 -
+ drivers/xen/xen-selfballoon.c                   | 579 ------------------------
+ fs/block_dev.c                                  |   5 -
+ fs/btrfs/extent_io.c                            |   9 -
+ fs/btrfs/super.c                                |   2 -
+ fs/ext4/readpage.c                              |   6 -
+ fs/ext4/super.c                                 |   2 -
+ fs/f2fs/data.c                                  |   3 +-
+ fs/mpage.c                                      |   7 -
+ fs/ocfs2/super.c                                |   2 -
+ fs/super.c                                      |   3 -
+ include/linux/cleancache.h                      | 124 -----
+ include/linux/frontswap.h                       |   5 -
+ include/linux/fs.h                              |   5 -
+ include/xen/balloon.h                           |   8 -
+ include/xen/tmem.h                              |  18 -
+ mm/Kconfig                                      |  38 +-
+ mm/Makefile                                     |   1 -
+ mm/cleancache.c                                 | 317 -------------
+ mm/filemap.c                                    |  11 -
+ mm/frontswap.c                                  | 156 +------
+ mm/truncate.c                                   |  15 +-
+ 32 files changed, 17 insertions(+), 2104 deletions(-)
+ delete mode 100644 Documentation/vm/cleancache.rst
+ delete mode 100644 drivers/xen/tmem.c
+ delete mode 100644 drivers/xen/xen-selfballoon.c
+ delete mode 100644 include/linux/cleancache.h
+ delete mode 100644 include/xen/tmem.h
+ delete mode 100644 mm/cleancache.c
+
+-- 
+2.16.4
+
