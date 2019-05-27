@@ -2,122 +2,141 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5C5B32B2B7
-	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2019 13:07:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D49342B35C
+	for <lists+linux-doc@lfdr.de>; Mon, 27 May 2019 13:39:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726714AbfE0LHs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 May 2019 07:07:48 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:57840 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726418AbfE0LHs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 May 2019 07:07:48 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=tS6RAB6sVg+kJ3U+MKfWQpKGE8UFNU5HfgzkbdPGAmk=; b=G3MGG0KGi1GEDMk45x5Cqe45DL
-        i0C3iJCVGoqUnvkxkTg7LuUsAHIlhf/q6tnzqV7OQk6yQzEucjIkE7ebtEduJ3hfkN8ANGDgpEng/
-        tgGvJkxZigUcLf0dxqgruti/mlKNiQCSiVCVbERcp5JIIzCUibSd+YVBkJ4LCdniaM+TCd/OTKIzY
-        TQpV8LO9hP1s9q+/vVg+pKKCT1Ijm/5C1QDMv4q0hAt4y2cCgkIMyiD1YEgNziBpQWkzHe4tUGlb3
-        IYWljMTTkycEty5eFrlGN8vTqajO19PD+3P66TtSUxgj1Wi7OX4ayOm6LM3wHqC7RiPDxMbG0CLdT
-        0dWtbTfw==;
-Received: from [177.159.249.4] (helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.90_1 #2 (Red Hat Linux))
-        id 1hVDTn-00061x-OS; Mon, 27 May 2019 11:07:47 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
-        (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hVDTi-0002cu-RM; Mon, 27 May 2019 08:07:42 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Federico Vaga <federico.vaga@vaga.pv.it>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Joel Nider <joeln@il.ibm.com>
-Subject: [PATCH 5/5] docs: requirements.txt: recommend Sphinx 1.7.9
-Date:   Mon, 27 May 2019 08:07:41 -0300
-Message-Id: <2020d45c8f7ed71d5f66ba5d925ecdd81e044a9d.1558955082.git.mchehab+samsung@kernel.org>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <cover.1558955082.git.mchehab+samsung@kernel.org>
-References: <cover.1558955082.git.mchehab+samsung@kernel.org>
+        id S1726322AbfE0Ljb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 May 2019 07:39:31 -0400
+Received: from mail-ot1-f66.google.com ([209.85.210.66]:44041 "EHLO
+        mail-ot1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726094AbfE0Lja (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 May 2019 07:39:30 -0400
+Received: by mail-ot1-f66.google.com with SMTP id g18so14506656otj.11;
+        Mon, 27 May 2019 04:39:30 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=V0OzTK0kT2ddqZaGr86QRO9HD6H6ELQHgY3vn9EoNSY=;
+        b=nxBPaLcOHEMMdpZHLjXHOILUXYM8fTOI5bfBJJzIuPdm5mvL9uczAcDCZzKQcheqrN
+         /sF7iVdTly8QcS37JohIugNQjMN+SdRwmaBlWSF/xXV+G21BU9sSG6IxvMYDy6VXPHka
+         fFkS2JnNuppbI0A+djLSGEumGqTrDD273Rcea3ZL1j3XS8ACje+k2KImh+nLJXhy2qgQ
+         7K+npPDh3CfHY22hHIYqECLOuBYeiWASF3C5kbgwIVMhNRZRDELzyr3e4j0wGdhtd3ch
+         n/RTnCJSfoeoWo1JNkNo4d5wo6AO5aBK5s7Iq7mjEAM5BnDWeIoU1nH0ddDGyz98XP9Q
+         4djg==
+X-Gm-Message-State: APjAAAV89id1kqpUo8Ajpos7Z4do0GkQNSRoWc00IV5DeQI2NoTE3B0V
+        qTmjmzwgYCtu+y4Fq030nQnnVHdu0JHoWMvMO34=
+X-Google-Smtp-Source: APXvYqzRJPkCqJiOx+VOhGWb3xNSagzD3mXtVwSHX6dsr/mX9srOC/7Nko7rnVoMhplnBtrellrsrHboMJ8YmHsuPBA=
+X-Received: by 2002:a9d:1a5:: with SMTP id e34mr44398857ote.59.1558957169445;
+ Mon, 27 May 2019 04:39:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20190521145141.9813-1-paul@crapouillou.net>
+In-Reply-To: <20190521145141.9813-1-paul@crapouillou.net>
+From:   Mathieu Malaterre <malat@debian.org>
+Date:   Mon, 27 May 2019 13:39:18 +0200
+Message-ID: <CA+7wUszagtyMV3oMxAi4VqpDeFcBY5ohXZ3PrXe-X5JV21bjBw@mail.gmail.com>
+Subject: Re: Ingenic Timer/Counter Unit (TCU) patchset v12
+To:     Paul Cercueil <paul@crapouillou.net>
+Cc:     Rob Herring <robh+dt@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Ralf Baechle <ralf@linux-mips.org>,
+        Paul Burton <paul.burton@mips.com>,
+        James Hogan <jhogan@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Jason Cooper <jason@lakedaemon.net>,
+        Marc Zyngier <marc.zyngier@arm.com>,
+        Lee Jones <lee.jones@linaro.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
+        <devicetree@vger.kernel.org>, linux-mips@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-clk@vger.kernel.org, od@zcrc.me
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-As discussed at the linux-doc ML, while we'll still support
-version 1.3, it is time to recommend a more modern version.
+On Tue, May 21, 2019 at 4:51 PM Paul Cercueil <paul@crapouillou.net> wrote:
+>
+> Hi,
+>
+> Here's the V12 of my patchset to add support for the Timer/Counter Unit
+> (TCU) present on the JZ47xx SoCs from Ingenic.
+>
+> This patchset is much shorter at only 13 patches vs. 27 patches in V11;
+> the remaining patches will be sent in parallel (if applicable) or as a
+> follow-up patchset once this one is merged.
+>
+> In V11 the clocksource maintainers weren't happy with the size of the
+> ingenic-timer driver, which included clocks and irqchip setup code.
+> On the other hand, devicetree maintainers wanted one single node for
+> the TCU hardware since it's effectively just one hardware block.
+>
+> In this patchset the functionality is cut in four different drivers:
+> a MFD one to provide the regmap, probe the children and which provides
+> several API functions; a clocks driver; a irqchip driver; a clocksource
+> driver. All these drivers work with the same regmap, have the same
+> compatible strings, and will probe _with the same devicetree node_.
 
-So, let's switch the minimal requirements to Sphinx 1.7.9,
-as it has the "-jauto" flag, with makes a lot faster when
-building documentation.
+For the series:
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
----
- Documentation/doc-guide/sphinx.rst    | 17 ++++++++---------
- Documentation/sphinx/requirements.txt |  4 ++--
- 2 files changed, 10 insertions(+), 11 deletions(-)
+Tested-by: Mathieu Malaterre <malat@debian.org>
 
-diff --git a/Documentation/doc-guide/sphinx.rst b/Documentation/doc-guide/sphinx.rst
-index c039224b404e..4ba081f43e98 100644
---- a/Documentation/doc-guide/sphinx.rst
-+++ b/Documentation/doc-guide/sphinx.rst
-@@ -27,8 +27,7 @@ Sphinx Install
- ==============
- 
- The ReST markups currently used by the Documentation/ files are meant to be
--built with ``Sphinx`` version 1.3 or higher. If you desire to build
--PDF output, it is recommended to use version 1.4.6 or higher.
-+built with ``Sphinx`` version 1.3 or higher.
- 
- There's a script that checks for the Sphinx requirements. Please see
- :ref:`sphinx-pre-install` for further details.
-@@ -56,13 +55,13 @@ or ``virtualenv``, depending on how your distribution packaged Python 3.
-       those expressions are written using LaTeX notation. It needs texlive
-       installed with amdfonts and amsmath in order to evaluate them.
- 
--In summary, if you want to install Sphinx version 1.4.9, you should do::
-+In summary, if you want to install Sphinx version 1.7.9, you should do::
- 
--       $ virtualenv sphinx_1.4
--       $ . sphinx_1.4/bin/activate
--       (sphinx_1.4) $ pip install -r Documentation/sphinx/requirements.txt
-+       $ virtualenv sphinx_1.7.9
-+       $ . sphinx_1.7.9/bin/activate
-+       (sphinx_1.7.9) $ pip install -r Documentation/sphinx/requirements.txt
- 
--After running ``. sphinx_1.4/bin/activate``, the prompt will change,
-+After running ``. sphinx_1.7.9/bin/activate``, the prompt will change,
- in order to indicate that you're using the new environment. If you
- open a new shell, you need to rerun this command to enter again at
- the virtual environment before building the documentation.
-@@ -105,8 +104,8 @@ command line options for your distro::
- 	You should run:
- 
- 		sudo dnf install -y texlive-luatex85
--		/usr/bin/virtualenv sphinx_1.4
--		. sphinx_1.4/bin/activate
-+		/usr/bin/virtualenv sphinx_1.7.9
-+		. sphinx_1.7.9/bin/activate
- 		pip install -r Documentation/sphinx/requirements.txt
- 
- 	Can't build as 1 mandatory dependency is missing at ./scripts/sphinx-pre-install line 468.
-diff --git a/Documentation/sphinx/requirements.txt b/Documentation/sphinx/requirements.txt
-index 742be3e12619..14e29a0ae480 100644
---- a/Documentation/sphinx/requirements.txt
-+++ b/Documentation/sphinx/requirements.txt
-@@ -1,3 +1,3 @@
--docutils==0.12
--Sphinx==1.4.9
-+docutils
-+Sphinx==1.7.9
- sphinx_rtd_theme
--- 
-2.21.0
+System: MIPS Creator CI20
 
+For reference, here is my local patch:
+
+diff --git a/arch/mips/boot/dts/ingenic/jz4780.dtsi
+b/arch/mips/boot/dts/ingenic/jz4780.dtsi
+index 1bfac58da5df..e7b7da32f278 100644
+--- a/arch/mips/boot/dts/ingenic/jz4780.dtsi
++++ b/arch/mips/boot/dts/ingenic/jz4780.dtsi
+@@ -1,5 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0
+ #include <dt-bindings/clock/jz4780-cgu.h>
++#include <dt-bindings/clock/ingenic,tcu.h>
+ #include <dt-bindings/dma/jz4780-dma.h>
+
+ / {
+@@ -80,6 +81,15 @@
+
+                interrupt-parent = <&intc>;
+                interrupts = <27 26 25>;
++
++               watchdog: watchdog@0 {
++                       compatible = "ingenic,jz4780-watchdog";
++                       reg = <0x0 0xc>;
++
++                       clocks = <&tcu TCU_CLK_WDT>;
++                       clock-names = "wdt";
++               };
++
+        };
+
+        rtc_dev: rtc@10003000 {
+@@ -287,14 +297,6 @@
+                status = "disabled";
+        };
+
+-       watchdog: watchdog@10002000 {
+-               compatible = "ingenic,jz4780-watchdog";
+-               reg = <0x10002000 0x10>;
+-
+-               clocks = <&cgu JZ4780_CLK_RTCLK>;
+-               clock-names = "rtc";
+-       };
+-
+        nemc: nemc@13410000 {
+                compatible = "ingenic,jz4780-nemc";
+                reg = <0x13410000 0x10000>;
+
+
+
+> Regards,
+> -Paul
+>
+>
