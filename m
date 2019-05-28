@@ -2,86 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 358E82BBF8
-	for <lists+linux-doc@lfdr.de>; Tue, 28 May 2019 00:27:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 60CEB2BC8F
+	for <lists+linux-doc@lfdr.de>; Tue, 28 May 2019 02:50:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727257AbfE0W1G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 May 2019 18:27:06 -0400
-Received: from ms.lwn.net ([45.79.88.28]:58694 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727167AbfE0W1G (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 27 May 2019 18:27:06 -0400
-Received: from meer.lwn.net (localhost [127.0.0.1])
-        by ms.lwn.net (Postfix) with ESMTPA id ACFF16A2;
-        Mon, 27 May 2019 22:27:05 +0000 (UTC)
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     linux-doc@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 7/7] kernel-doc: always name missing kerneldoc sections
-Date:   Mon, 27 May 2019 16:26:58 -0600
-Message-Id: <20190527222658.27304-8-corbet@lwn.net>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190527222658.27304-1-corbet@lwn.net>
-References: <20190527222658.27304-1-corbet@lwn.net>
+        id S1727571AbfE1AuP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 May 2019 20:50:15 -0400
+Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130]:47483 "EHLO
+        out30-130.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727313AbfE1AuP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 May 2019 20:50:15 -0400
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R471e4;CH=green;DM=||false|;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04400;MF=joseph.qi@linux.alibaba.com;NM=1;PH=DS;RN=24;SR=0;TI=SMTPD_---0TSq1luR_1559004607;
+Received: from JosephdeMacBook-Pro.local(mailfrom:joseph.qi@linux.alibaba.com fp:SMTPD_---0TSq1luR_1559004607)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Tue, 28 May 2019 08:50:07 +0800
+Subject: Re: [PATCH 2/3] mm: remove cleancache.c
+To:     Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+        devel@driverdev.osuosl.org, linux-fsdevel@vger.kernel.org,
+        linux-btrfs@vger.kernel.org, linux-ext4@vger.kernel.org,
+        linux-f2fs-devel@lists.sourceforge.net, linux-mm@kvack.org
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Gao Xiang <gaoxiang25@huawei.com>,
+        Chao Yu <yuchao0@huawei.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Chris Mason <clm@fb.com>, Josef Bacik <josef@toxicpanda.com>,
+        David Sterba <dsterba@suse.com>, Theodore Ts'o <tytso@mit.edu>,
+        Andreas Dilger <adilger.kernel@dilger.ca>,
+        Jaegeuk Kim <jaegeuk@kernel.org>,
+        Mark Fasheh <mark@fasheh.com>,
+        Joel Becker <jlbec@evilplan.org>, ocfs2-devel@oss.oracle.com
+References: <20190527103207.13287-1-jgross@suse.com>
+ <20190527103207.13287-3-jgross@suse.com>
+From:   Joseph Qi <joseph.qi@linux.alibaba.com>
+Message-ID: <7c75d310-1beb-08f3-d590-b4ff2c42cbcd@linux.alibaba.com>
+Date:   Tue, 28 May 2019 08:50:06 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.11; rv:60.0)
+ Gecko/20100101 Thunderbird/60.7.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20190527103207.13287-3-jgross@suse.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The "no structured comments found" warning is not particularly useful if
-there are several invocations, one of which is looking for something
-wrong.  So if something specific has been requested, make it clear that
-it's the one we weren't able to find.
 
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
----
- scripts/kernel-doc | 16 +++++++++-------
- 1 file changed, 9 insertions(+), 7 deletions(-)
 
-diff --git a/scripts/kernel-doc b/scripts/kernel-doc
-index 3350e498b4ce..c0cb41e65b9b 100755
---- a/scripts/kernel-doc
-+++ b/scripts/kernel-doc
-@@ -285,7 +285,7 @@ use constant {
-     OUTPUT_INTERNAL     => 4, # output non-exported symbols
- };
- my $output_selection = OUTPUT_ALL;
--my $show_not_found = 0;
-+my $show_not_found = 0;	# No longer used
- 
- my @export_file_list;
- 
-@@ -435,7 +435,7 @@ while ($ARGV[0] =~ m/^--?(.*)/) {
-     } elsif ($cmd eq 'enable-lineno') {
- 	    $enable_lineno = 1;
-     } elsif ($cmd eq 'show-not-found') {
--	$show_not_found = 1;
-+	$show_not_found = 1;  # A no-op but don't fail
-     } else {
- 	# Unknown argument
-         usage();
-@@ -2163,12 +2163,14 @@ sub process_file($) {
-     }
- 
-     # Make sure we got something interesting.
--    if ($initial_section_counter == $section_counter) {
--	if ($output_mode ne "none") {
--	    print STDERR "${file}:1: warning: no structured comments found\n";
-+    if ($initial_section_counter == $section_counter && $
-+	output_mode ne "none") {
-+	if ($output_selection == OUTPUT_INCLUDE) {
-+	    print STDERR "${file}:1: warning: '$_' not found\n"
-+		for keys %function_table;
- 	}
--	if (($output_selection == OUTPUT_INCLUDE) && ($show_not_found == 1)) {
--	    print STDERR "    Was looking for '$_'.\n" for keys %function_table;
-+	else {
-+	    print STDERR "${file}:1: warning: no structured comments found\n";
- 	}
-     }
- }
--- 
-2.21.0
+On 19/5/27 18:32, Juergen Gross wrote:
+> With the removal of tmem and xen-selfballoon the only user of
+> cleancache is gone. Remove it, too.
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+>  Documentation/vm/cleancache.rst  | 296 ------------------------------------
+>  Documentation/vm/frontswap.rst   |  10 +-
+>  Documentation/vm/index.rst       |   1 -
+>  MAINTAINERS                      |   7 -
+>  drivers/staging/erofs/data.c     |   6 -
+>  drivers/staging/erofs/internal.h |   1 -
+>  fs/block_dev.c                   |   5 -
+>  fs/btrfs/extent_io.c             |   9 --
+>  fs/btrfs/super.c                 |   2 -
+>  fs/ext4/readpage.c               |   6 -
+>  fs/ext4/super.c                  |   2 -
+>  fs/f2fs/data.c                   |   3 +-
+>  fs/mpage.c                       |   7 -
+>  fs/ocfs2/super.c                 |   2 -
 
+For ocfs2 part,
+Reviewed-by: Joseph Qi <joseph.qi@linux.alibaba.com>
+
+>  fs/super.c                       |   3 -
+>  include/linux/cleancache.h       | 124 ---------------
+>  include/linux/fs.h               |   5 -
+>  mm/Kconfig                       |  22 ---
+>  mm/Makefile                      |   1 -
+>  mm/cleancache.c                  | 317 ---------------------------------------
+>  mm/filemap.c                     |  11 --
+>  mm/truncate.c                    |  15 +-
