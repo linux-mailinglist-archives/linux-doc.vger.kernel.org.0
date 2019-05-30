@@ -2,367 +2,287 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 14A672E9DB
-	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 02:53:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 950602E9F1
+	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 03:00:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727274AbfE3Axd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 May 2019 20:53:33 -0400
-Received: from mail-pl1-f202.google.com ([209.85.214.202]:52784 "EHLO
-        mail-pl1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727264AbfE3Ax3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 May 2019 20:53:29 -0400
-Received: by mail-pl1-f202.google.com with SMTP id q2so2751892plr.19
-        for <linux-doc@vger.kernel.org>; Wed, 29 May 2019 17:53:29 -0700 (PDT)
+        id S1726817AbfE3BAe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 May 2019 21:00:34 -0400
+Received: from mail-pf1-f194.google.com ([209.85.210.194]:44078 "EHLO
+        mail-pf1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726527AbfE3BAe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 May 2019 21:00:34 -0400
+Received: by mail-pf1-f194.google.com with SMTP id g9so2764823pfo.11;
+        Wed, 29 May 2019 18:00:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=b42+AR7n6zOPWsedWMtmn/sNL2bilZfayJ20H0mS03Q=;
-        b=txWr4P1wbKm2FDUVQCS9xHw85QmuQ+d9AXAzLP9TAUEmv5bgOYmu4DxmOkRJDSgNz5
-         tqvAMIIVpapauzkILdHC+DcBc6Gp3EAX+JO29PzF//Y3YJRDc5qDxROcS7RB18Upu9R8
-         uaA8nck5xCmnmJS3jZop675bjEFxWy8rIPvqFBHyTbtwD6WZu2zdB/PVyYkjajxyj5T3
-         wvKJatIp0Sfe+NC5wiAeFmD+4utrqf5OmZ7StTbYOnz9OD7WcIlrzfRQP9heYdM8GPX2
-         mtggiIuV7VgZzsPV72KTS1zyQStuapjwy9sRuISjPcfSSpkWhX+mB1NrzGVJxmiamBs/
-         Ldhw==
+        d=gmail.com; s=20161025;
+        h=sender:subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=Vw6ROn6nwvHNofKrf/iVLUbmXE65pyhQ9L1aja1o048=;
+        b=UhutMmwVItArx2/GzYypUcXt4iDc6LPvIFfXTMcS2OqrYkyVyeNbY7fFH97L81JqKD
+         AdwGy2Kb1U+cnXt7el14YyV4uSE0oMVH3sgGYK03H8bzaQAH+gZjXrZNigu7tfbRqhkR
+         XprvNjb8F5S1jMWzYhNQq/HfoQPzDcxCbky5YvN2gaSBy92j9YR+gPw6LWaXXTjfC7nW
+         Vm4fzeTlI33Pc9J5IMIVjtKD2E6Pi5DFzaGIAkLHplikaPBfNdNZ7BS/qIjNM+JJa/l0
+         jwKXRoZEib7GpYmjrDkm6MutcAoIeZKgQl3jENFLWfbJ6V07ZgnoIyB8gRsS6itjcDpb
+         7Q4g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=b42+AR7n6zOPWsedWMtmn/sNL2bilZfayJ20H0mS03Q=;
-        b=XIYJGfjTANywyjmdOta/f9T4ixPKHlg8uxveU699jolP8sp4bHjt4gPejdNGPkCTdJ
-         mxbpNUUw1jU4gMVJ6kNmyB0hAQA54hJDKqkXKL6XK8EnezPeUoVk/Knt7Y5aB692o0z6
-         fWLJNivM4B6T3p6ozZf9SKi1jcnk1fpHqXWJJbvspN4uPDuHqs9y+U0GOD3suJYJ3OON
-         W3e99ffdoeT2d17UocmNfN/nAB6R2zQCKzobCZJzPBjWZNcaJ8DjBRHd/1a5Qef0gQPZ
-         aRhZA8leDeR9Ci58MU/t8U3KBSlC76zoQDTPtbXIKOFI07Pz8y2ewMKgh5GMsHP2sQXK
-         BEPw==
-X-Gm-Message-State: APjAAAX/f9j/w6KZC07BLo8/lNaa9Kn25vNa8KmnOeWq2n0uKeoDwp3m
-        0WxTPn7kYUOgZpNHQxXdGasx58JF6bM=
-X-Google-Smtp-Source: APXvYqwq0u5fhrdHqmMQ0Jh9SDtVUwviQfew5VAVlFxx7HDPXhJGxaOzz8HP7Z/WXPlMifwcJjsHN58tHw8=
-X-Received: by 2002:a63:e645:: with SMTP id p5mr987859pgj.4.1559177608833;
- Wed, 29 May 2019 17:53:28 -0700 (PDT)
-Date:   Wed, 29 May 2019 17:49:06 -0700
-In-Reply-To: <20190530004906.261170-1-drosen@google.com>
-Message-Id: <20190530004906.261170-5-drosen@google.com>
-Mime-Version: 1.0
-References: <20190530004906.261170-1-drosen@google.com>
-X-Mailer: git-send-email 2.22.0.rc1.257.g3120a18244-goog
-Subject: [PATCH v3 4/4] f2fs: Add option to limit required GC for checkpoint=disable
-From:   Daniel Rosenberg <drosen@google.com>
-To:     Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        linux-f2fs-devel@lists.sourceforge.net
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, kernel-team@android.com,
-        Daniel Rosenberg <drosen@google.com>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
+         :date:user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=Vw6ROn6nwvHNofKrf/iVLUbmXE65pyhQ9L1aja1o048=;
+        b=KFlSnmGm7rkOhQvV45TKgB9bFJ6zWL370g+SBf4HXQiLBEVBQp4/twIodW7fNKxffi
+         5rNzuXqp4XV9l5mP97g96B0Pt/UTr+Eyp5PCgi399bVBKG3xv8woJP1wSqhq57mtSAd/
+         Lrs/0SbPWKzVn+QRhcUwbJXczPL3aqm5wmROkuIKbu/c4bMwtcCK93Im1r7F4LdoFvsh
+         gooNnJZ6PBnnyW0qmmRokodUlzVineqgNNdmdwnlcF4vpppOYwAJiph7qodUpgG+B2o2
+         md3HBA0xHKHlIqa1k+AhaxBNw9Rp4Pc0tQHz4esK+XjQZj3vWvgDThasw9KXytLmVpQu
+         TPlQ==
+X-Gm-Message-State: APjAAAWvwyMIT0piw0BH55UJtztf/1EY0Q1S3vDFzAhgKPjQJc56hv42
+        pD8fEXIDmRMaR0L8VUsu5ARelHtq
+X-Google-Smtp-Source: APXvYqwfAEpkoaWJ+x7E3jJg0ppuKnN9XJnSt86gxW+B4emkQ2pXb2LYUqUiEGdYvZY2UxSFtg5MqA==
+X-Received: by 2002:aa7:8d43:: with SMTP id s3mr671248pfe.5.1559178033031;
+        Wed, 29 May 2019 18:00:33 -0700 (PDT)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id g8sm511268pgq.33.2019.05.29.18.00.30
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 29 May 2019 18:00:31 -0700 (PDT)
+Subject: Re: [PATCH 1/2] hwmon: pmbus: Add Infineon PXE1610 VR driver
+To:     Vijay Khemka <vijaykhemka@fb.com>,
+        Jean Delvare <jdelvare@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc:     joel@jms.id.au, linux-aspeed@lists.ozlabs.org, sdasari@fb.com,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+References: <20190529223511.4059120-1-vijaykhemka@fb.com>
+From:   Guenter Roeck <linux@roeck-us.net>
+Message-ID: <e72ae680-e8b7-455a-fdde-af79d429dd8c@roeck-us.net>
+Date:   Wed, 29 May 2019 18:00:28 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
+MIME-Version: 1.0
+In-Reply-To: <20190529223511.4059120-1-vijaykhemka@fb.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This extends the checkpoint option to allow checkpoint=disable:%u[%]
-This allows you to specify what how much of the disk you are willing
-to lose access to while mounting with checkpoint=disable. If the amount
-lost would be higher, the mount will return -EAGAIN. This can be given
-as a percent of total space, or in blocks.
+On 5/29/19 3:35 PM, Vijay Khemka wrote:
+> Added pmbus driver for the new device Infineon pxe1610
+> voltage regulator. It also supports similar family device
+> PXE1110 and PXM1310.
+> 
+> Signed-off-by: Vijay Khemka <vijaykhemka@fb.com>
+> ---
+>   drivers/hwmon/pmbus/Kconfig   |   9 +++
+>   drivers/hwmon/pmbus/Makefile  |   1 +
+>   drivers/hwmon/pmbus/pxe1610.c | 119 ++++++++++++++++++++++++++++++++++
+>   3 files changed, 129 insertions(+)
+>   create mode 100644 drivers/hwmon/pmbus/pxe1610.c
+> 
+> diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
+> index 30751eb9550a..338ef9b5a395 100644
+> --- a/drivers/hwmon/pmbus/Kconfig
+> +++ b/drivers/hwmon/pmbus/Kconfig
+> @@ -154,6 +154,15 @@ config SENSORS_MAX8688
+>   	  This driver can also be built as a module. If so, the module will
+>   	  be called max8688.
+>   
+> +config SENSORS_PXE1610
+> +	tristate "Infineon PXE1610"
+> +	help
+> +	  If you say yes here you get hardware monitoring support for Infineon
+> +	  PXE1610.
+> +
+> +	  This driver can also be built as a module. If so, the module will
+> +	  be called pxe1610.
+> +
+>   config SENSORS_TPS40422
+>   	tristate "TI TPS40422"
+>   	help
+> diff --git a/drivers/hwmon/pmbus/Makefile b/drivers/hwmon/pmbus/Makefile
+> index 2219b9300316..b0fbd017a91a 100644
+> --- a/drivers/hwmon/pmbus/Makefile
+> +++ b/drivers/hwmon/pmbus/Makefile
+> @@ -18,6 +18,7 @@ obj-$(CONFIG_SENSORS_MAX20751)	+= max20751.o
+>   obj-$(CONFIG_SENSORS_MAX31785)	+= max31785.o
+>   obj-$(CONFIG_SENSORS_MAX34440)	+= max34440.o
+>   obj-$(CONFIG_SENSORS_MAX8688)	+= max8688.o
+> +obj-$(CONFIG_SENSORS_PXE1610)	+= pxe1610.o
+>   obj-$(CONFIG_SENSORS_TPS40422)	+= tps40422.o
+>   obj-$(CONFIG_SENSORS_TPS53679)	+= tps53679.o
+>   obj-$(CONFIG_SENSORS_UCD9000)	+= ucd9000.o
+> diff --git a/drivers/hwmon/pmbus/pxe1610.c b/drivers/hwmon/pmbus/pxe1610.c
+> new file mode 100644
+> index 000000000000..01e267944df5
+> --- /dev/null
+> +++ b/drivers/hwmon/pmbus/pxe1610.c
+> @@ -0,0 +1,119 @@
+> +// SPDX-License-Identifier: GPL-2.0+
+> +/*
+> + * Hardware monitoring driver for Infineon PXE1610
+> + *
+> + * Copyright (c) 2019 Facebook Inc
+> + *
+> + */
+> +
+> +#include <linux/err.h>
+> +#include <linux/i2c.h>
+> +#include <linux/init.h>
+> +#include <linux/kernel.h>
+> +#include <linux/module.h>
+> +#include "pmbus.h"
+> +
+> +/*
+> + * Identify chip parameters.
+> + */
+> +static int pxe1610_identify(struct i2c_client *client,
+> +			  struct pmbus_driver_info *info)
 
-Currently, we need to run garbage collection until the amount of holes
-is smaller than the OVP space. With the new option, f2fs can mark
-space as unusable up front instead of requiring garbage collection until
-the number of holes is small enough.
+Please align continuation lines with '('.
 
-Signed-off-by: Daniel Rosenberg <drosen@google.com>
----
- Documentation/ABI/testing/sysfs-fs-f2fs |  8 ++++
- Documentation/filesystems/f2fs.txt      | 19 +++++++-
- fs/f2fs/f2fs.h                          |  6 ++-
- fs/f2fs/segment.c                       | 17 +++++--
- fs/f2fs/super.c                         | 59 ++++++++++++++++---------
- fs/f2fs/sysfs.c                         | 16 +++++++
- 6 files changed, 99 insertions(+), 26 deletions(-)
+> +{
+> +	if (pmbus_check_byte_register(client, 0, PMBUS_VOUT_MODE)) {
+> +		int vout_mode;
+> +
+> +		vout_mode = pmbus_read_byte_data(client, 0, PMBUS_VOUT_MODE);
 
-diff --git a/Documentation/ABI/testing/sysfs-fs-f2fs b/Documentation/ABI/testing/sysfs-fs-f2fs
-index 91822ce258317..dca326e0ee3e1 100644
---- a/Documentation/ABI/testing/sysfs-fs-f2fs
-+++ b/Documentation/ABI/testing/sysfs-fs-f2fs
-@@ -243,3 +243,11 @@ Description:
- 		 - Del: echo '[h/c]!extension' > /sys/fs/f2fs/<disk>/extension_list
- 		 - [h] means add/del hot file extension
- 		 - [c] means add/del cold file extension
-+
-+What:		/sys/fs/f2fs/<disk>/unusable
-+Date		April 2019
-+Contact:	"Daniel Rosenberg" <drosen@google.com>
-+Description:
-+		If checkpoint=disable, it displays the number of blocks that are unusable.
-+                If checkpoint=enable it displays the enumber of blocks that would be unusable
-+                if checkpoint=disable were to be set.
-diff --git a/Documentation/filesystems/f2fs.txt b/Documentation/filesystems/f2fs.txt
-index 66aca042988ee..bebd1be3ba495 100644
---- a/Documentation/filesystems/f2fs.txt
-+++ b/Documentation/filesystems/f2fs.txt
-@@ -214,11 +214,22 @@ fsync_mode=%s          Control the policy of fsync. Currently supports "posix",
-                        non-atomic files likewise "nobarrier" mount option.
- test_dummy_encryption  Enable dummy encryption, which provides a fake fscrypt
-                        context. The fake fscrypt context is used by xfstests.
--checkpoint=%s          Set to "disable" to turn off checkpointing. Set to "enable"
-+checkpoint=%s[:%u[%]]     Set to "disable" to turn off checkpointing. Set to "enable"
-                        to reenable checkpointing. Is enabled by default. While
-                        disabled, any unmounting or unexpected shutdowns will cause
-                        the filesystem contents to appear as they did when the
-                        filesystem was mounted with that option.
-+                       While mounting with checkpoint=disabled, the filesystem must
-+                       run garbage collection to ensure that all available space can
-+                       be used. If this takes too much time, the mount may return
-+                       EAGAIN. You may optionally add a value to indicate how much
-+                       of the disk you would be willing to temporarily give up to
-+                       avoid additional garbage collection. This can be given as a
-+                       number of blocks, or as a percent. For instance, mounting
-+                       with checkpoint=disable:100% would always succeed, but it may
-+                       hide up to all remaining free space. The actual space that
-+                       would be unusable can be viewed at /sys/fs/f2fs/<disk>/unusable
-+                       This space is reclaimed once checkpoint=enable.
- 
- ================================================================================
- DEBUGFS ENTRIES
-@@ -396,6 +407,12 @@ Files in /sys/fs/f2fs/<devname>
- 
-  current_reserved_blocks      This shows # of blocks currently reserved.
- 
-+ unusable                     If checkpoint=disable, this shows the number of
-+                              blocks that are unusable.
-+                              If checkpoint=enable it shows the number of blocks
-+                              that would be unusable if checkpoint=disable were
-+                              to be set.
-+
- ================================================================================
- USAGE
- ================================================================================
-diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
-index a39cc4ffeb4b1..11ef20fedfe72 100644
---- a/fs/f2fs/f2fs.h
-+++ b/fs/f2fs/f2fs.h
-@@ -136,6 +136,9 @@ struct f2fs_mount_info {
- 	int alloc_mode;			/* segment allocation policy */
- 	int fsync_mode;			/* fsync policy */
- 	bool test_dummy_encryption;	/* test dummy encryption */
-+	block_t unusable_cap;		/* Amount of space allowed to be
-+					 * unusable when disabling checkpoint
-+					 */
- };
- 
- #define F2FS_FEATURE_ENCRYPT		0x0001
-@@ -3085,7 +3088,8 @@ bool f2fs_issue_discard_timeout(struct f2fs_sb_info *sbi);
- void f2fs_clear_prefree_segments(struct f2fs_sb_info *sbi,
- 					struct cp_control *cpc);
- void f2fs_dirty_to_prefree(struct f2fs_sb_info *sbi);
--int f2fs_disable_cp_again(struct f2fs_sb_info *sbi);
-+block_t f2fs_get_unusable_blocks(struct f2fs_sb_info *sbi);
-+int f2fs_disable_cp_again(struct f2fs_sb_info *sbi, block_t unusable);
- void f2fs_release_discard_addrs(struct f2fs_sb_info *sbi);
- int f2fs_npages_for_summary_flush(struct f2fs_sb_info *sbi, bool for_ra);
- void f2fs_allocate_new_segments(struct f2fs_sb_info *sbi);
-diff --git a/fs/f2fs/segment.c b/fs/f2fs/segment.c
-index ec59cbd0e661d..33bf07222f99f 100644
---- a/fs/f2fs/segment.c
-+++ b/fs/f2fs/segment.c
-@@ -873,13 +873,14 @@ void f2fs_dirty_to_prefree(struct f2fs_sb_info *sbi)
- 	mutex_unlock(&dirty_i->seglist_lock);
- }
- 
--int f2fs_disable_cp_again(struct f2fs_sb_info *sbi)
-+block_t f2fs_get_unusable_blocks(struct f2fs_sb_info *sbi)
- {
--	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
- 	int ovp_hole_segs =
- 		(overprovision_segments(sbi) - reserved_segments(sbi));
- 	block_t ovp_holes = ovp_hole_segs << sbi->log_blocks_per_seg;
-+	struct dirty_seglist_info *dirty_i = DIRTY_I(sbi);
- 	block_t holes[2] = {0, 0};	/* DATA and NODE */
-+	block_t unusable;
- 	struct seg_entry *se;
- 	unsigned int segno;
- 
-@@ -893,7 +894,17 @@ int f2fs_disable_cp_again(struct f2fs_sb_info *sbi)
- 	}
- 	mutex_unlock(&dirty_i->seglist_lock);
- 
--	if (holes[DATA] > ovp_holes || holes[NODE] > ovp_holes)
-+	unusable = holes[DATA] > holes[NODE] ? holes[DATA] : holes[NODE];
-+	if (unusable > ovp_holes)
-+		return unusable - ovp_holes;
-+	return 0;
-+}
-+
-+int f2fs_disable_cp_again(struct f2fs_sb_info *sbi, block_t unusable)
-+{
-+	int ovp_hole_segs =
-+		(overprovision_segments(sbi) - reserved_segments(sbi));
-+	if (unusable > F2FS_OPTION(sbi).unusable_cap)
- 		return -EAGAIN;
- 	if (is_sbi_flag_set(sbi, SBI_CP_DISABLED_QUICK) &&
- 		dirty_segments(sbi) > ovp_hole_segs)
-diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
-index 359fd68509d16..7d64e97611141 100644
---- a/fs/f2fs/super.c
-+++ b/fs/f2fs/super.c
-@@ -136,7 +136,10 @@ enum {
- 	Opt_alloc,
- 	Opt_fsync,
- 	Opt_test_dummy_encryption,
--	Opt_checkpoint,
-+	Opt_checkpoint_disable,
-+	Opt_checkpoint_disable_cap,
-+	Opt_checkpoint_disable_cap_perc,
-+	Opt_checkpoint_enable,
- 	Opt_err,
- };
- 
-@@ -195,7 +198,10 @@ static match_table_t f2fs_tokens = {
- 	{Opt_alloc, "alloc_mode=%s"},
- 	{Opt_fsync, "fsync_mode=%s"},
- 	{Opt_test_dummy_encryption, "test_dummy_encryption"},
--	{Opt_checkpoint, "checkpoint=%s"},
-+	{Opt_checkpoint_disable, "checkpoint=disable"},
-+	{Opt_checkpoint_disable_cap, "checkpoint=disable:%u"},
-+	{Opt_checkpoint_disable_cap_perc, "checkpoint=disable:%u%%"},
-+	{Opt_checkpoint_enable, "checkpoint=enable"},
- 	{Opt_err, NULL},
- };
- 
-@@ -772,22 +778,30 @@ static int parse_options(struct super_block *sb, char *options)
- 					"Test dummy encryption mount option ignored");
- #endif
- 			break;
--		case Opt_checkpoint:
--			name = match_strdup(&args[0]);
--			if (!name)
--				return -ENOMEM;
--
--			if (strlen(name) == 6 &&
--					!strncmp(name, "enable", 6)) {
--				clear_opt(sbi, DISABLE_CHECKPOINT);
--			} else if (strlen(name) == 7 &&
--					!strncmp(name, "disable", 7)) {
--				set_opt(sbi, DISABLE_CHECKPOINT);
--			} else {
--				kvfree(name);
-+		case Opt_checkpoint_disable_cap_perc:
-+			if (args->from && match_int(args, &arg))
- 				return -EINVAL;
--			}
--			kvfree(name);
-+			if (arg < 0 || arg > 100)
-+				return -EINVAL;
-+			if (arg == 100)
-+				F2FS_OPTION(sbi).unusable_cap =
-+					sbi->user_block_count;
-+			else
-+				F2FS_OPTION(sbi).unusable_cap =
-+					(sbi->user_block_count / 100) *	arg;
-+			set_opt(sbi, DISABLE_CHECKPOINT);
-+			break;
-+		case Opt_checkpoint_disable_cap:
-+			if (args->from && match_int(args, &arg))
-+				return -EINVAL;
-+			F2FS_OPTION(sbi).unusable_cap = arg;
-+			set_opt(sbi, DISABLE_CHECKPOINT);
-+			break;
-+		case Opt_checkpoint_disable:
-+			set_opt(sbi, DISABLE_CHECKPOINT);
-+			break;
-+		case Opt_checkpoint_enable:
-+			clear_opt(sbi, DISABLE_CHECKPOINT);
- 			break;
- 		default:
- 			f2fs_msg(sb, KERN_ERR,
-@@ -1410,8 +1424,8 @@ static int f2fs_show_options(struct seq_file *seq, struct dentry *root)
- 		seq_printf(seq, ",alloc_mode=%s", "reuse");
- 
- 	if (test_opt(sbi, DISABLE_CHECKPOINT))
--		seq_puts(seq, ",checkpoint=disable");
--
-+		seq_printf(seq, ",checkpoint=disable:%u",
-+				F2FS_OPTION(sbi).unusable_cap);
- 	if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_POSIX)
- 		seq_printf(seq, ",fsync_mode=%s", "posix");
- 	else if (F2FS_OPTION(sbi).fsync_mode == FSYNC_MODE_STRICT)
-@@ -1440,6 +1454,7 @@ static void default_options(struct f2fs_sb_info *sbi)
- 	set_opt(sbi, EXTENT_CACHE);
- 	set_opt(sbi, NOHEAP);
- 	clear_opt(sbi, DISABLE_CHECKPOINT);
-+	F2FS_OPTION(sbi).unusable_cap = 0;
- 	sbi->sb->s_flags |= SB_LAZYTIME;
- 	set_opt(sbi, FLUSH_MERGE);
- 	set_opt(sbi, DISCARD);
-@@ -1468,6 +1483,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
- 	struct cp_control cpc;
- 	int err = 0;
- 	int ret;
-+	block_t unusable;
- 
- 	if (s_flags & SB_RDONLY) {
- 		f2fs_msg(sbi->sb, KERN_ERR,
-@@ -1495,7 +1511,8 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
- 		goto restore_flag;
- 	}
- 
--	if (f2fs_disable_cp_again(sbi)) {
-+	unusable = f2fs_get_unusable_blocks(sbi);
-+	if (f2fs_disable_cp_again(sbi, unusable)) {
- 		err = -EAGAIN;
- 		goto restore_flag;
- 	}
-@@ -1508,7 +1525,7 @@ static int f2fs_disable_checkpoint(struct f2fs_sb_info *sbi)
- 		goto out_unlock;
- 
- 	spin_lock(&sbi->stat_lock);
--	sbi->unusable_block_count = 0;
-+	sbi->unusable_block_count = unusable;
- 	spin_unlock(&sbi->stat_lock);
- 
- out_unlock:
-diff --git a/fs/f2fs/sysfs.c b/fs/f2fs/sysfs.c
-index 729f46a3c9ee0..fa184880cff34 100644
---- a/fs/f2fs/sysfs.c
-+++ b/fs/f2fs/sysfs.c
-@@ -68,6 +68,20 @@ static ssize_t dirty_segments_show(struct f2fs_attr *a,
- 		(unsigned long long)(dirty_segments(sbi)));
- }
- 
-+static ssize_t unusable_show(struct f2fs_attr *a,
-+		struct f2fs_sb_info *sbi, char *buf)
-+{
-+	block_t unusable;
-+
-+	if (test_opt(sbi, DISABLE_CHECKPOINT))
-+		unusable = sbi->unusable_block_count;
-+	else
-+		unusable = f2fs_get_unusable_blocks(sbi);
-+	return snprintf(buf, PAGE_SIZE, "%llu\n",
-+		(unsigned long long)unusable);
-+}
-+
-+
- static ssize_t lifetime_write_kbytes_show(struct f2fs_attr *a,
- 		struct f2fs_sb_info *sbi, char *buf)
- {
-@@ -440,6 +454,7 @@ F2FS_GENERAL_RO_ATTR(dirty_segments);
- F2FS_GENERAL_RO_ATTR(lifetime_write_kbytes);
- F2FS_GENERAL_RO_ATTR(features);
- F2FS_GENERAL_RO_ATTR(current_reserved_blocks);
-+F2FS_GENERAL_RO_ATTR(unusable);
- 
- #ifdef CONFIG_FS_ENCRYPTION
- F2FS_FEATURE_RO_ATTR(encryption, FEAT_CRYPTO);
-@@ -495,6 +510,7 @@ static struct attribute *f2fs_attrs[] = {
- 	ATTR_LIST(inject_type),
- #endif
- 	ATTR_LIST(dirty_segments),
-+	ATTR_LIST(unusable),
- 	ATTR_LIST(lifetime_write_kbytes),
- 	ATTR_LIST(features),
- 	ATTR_LIST(reserved_blocks),
--- 
-2.22.0.rc1.257.g3120a18244-goog
+pmbus_read_byte_data() can return an error. Calling pmbus_check_byte_register()
+doesn't really add any value here, since the second call can still fail,
+which needs to be checked.
+
+> +		switch (vout_mode & 0x1f) {
+> +		case 1:
+> +			info->vrm_version = vr12;
+> +		break;
+
+Alignment is off.
+
+> +		case 2:
+> +			info->vrm_version = vr13;
+> +		break;
+
+Same here.
+
+> +		default:
+> +			return -ENODEV;
+> +		}
+> +	}
+> +	return 0;
+> +}
+> +
+> +static int pxe1610_probe(struct i2c_client *client,
+> +			 const struct i2c_device_id *id)
+> +{
+> +	struct pmbus_driver_info *info;
+> +	u8 buf[I2C_SMBUS_BLOCK_MAX];
+> +	int ret;
+> +
+> +	if (!i2c_check_functionality(client->adapter,
+> +				     I2C_FUNC_SMBUS_READ_BYTE_DATA
+> +				| I2C_FUNC_SMBUS_READ_WORD_DATA
+> +				| I2C_FUNC_SMBUS_READ_BLOCK_DATA))
+> +		return -ENODEV;
+> +
+> +	/* By default this device doesn't boot to page 0, so set page 0
+> +	 * to access all pmbus registers.
+> +	 */
+
+Please use standard multi-line comments.
+
+> +	i2c_smbus_write_byte_data(client, 0, 0);
+> +
+
+Please use the PMBUS_PAGE command definition.
+
+I wonder if it would make sense to initialize currpage in the core to an unreasonable
+number for multi-page chips, but I guess that is a different question.
+
+> +	/* Read Manufacturer id */
+> +	ret = i2c_smbus_read_block_data(client, PMBUS_MFR_ID, buf);
+> +	if (ret < 0) {
+> +		dev_err(&client->dev, "Failed to read PMBUS_MFR_ID\n");
+> +		return ret;
+> +	}
+> +	if (ret != 2 || strncmp(buf, "XP", strlen("XP"))) {
+
+The strlen() is really unnecessary here. Just use 2 (and a define
+for it if you like).
+
+> +		dev_err(&client->dev, "MFR_ID unrecognised\n");
+
+unrecognized. Oh well, turns out unrecognised is the British spelling and
+just as valid, so feel free to keep it if you like.
+
+> +		return -ENODEV;
+> +	}
+> +
+> +	info = devm_kzalloc(&client->dev, sizeof(struct pmbus_driver_info),
+> +			    GFP_KERNEL);
+> +	if (!info)
+> +		return -ENOMEM;
+> +
+> +	info->format[PSC_VOLTAGE_IN] = linear;
+> +	info->format[PSC_VOLTAGE_OUT] = vid;
+> +	info->format[PSC_CURRENT_IN] = linear;
+> +	info->format[PSC_CURRENT_OUT] = linear;
+> +	info->format[PSC_POWER] = linear;
+> +	info->format[PSC_TEMPERATURE] = linear;
+> +
+> +	info->func[0] = PMBUS_HAVE_VIN
+> +		| PMBUS_HAVE_VOUT | PMBUS_HAVE_IIN
+> +		| PMBUS_HAVE_IOUT | PMBUS_HAVE_PIN
+> +		| PMBUS_HAVE_POUT | PMBUS_HAVE_TEMP
+> +		| PMBUS_HAVE_STATUS_VOUT | PMBUS_HAVE_STATUS_IOUT
+> +		| PMBUS_HAVE_STATUS_INPUT | PMBUS_HAVE_STATUS_TEMP;
+> +	info->func[1] = info->func[0];
+> +	info->func[2] = info->func[0];
+> +
+> +	info->pages = id->driver_data;
+> +	info->identify = pxe1610_identify;
+> +
+
+It doesn't really add value to initialize all these parameters manually.
+I would suggest to use the approach from tps53679.c, ie have a static
+structure and use devm_kmemdup() to pass a copy to pmbus_do_probe().
+
+> +	return pmbus_do_probe(client, id, info);
+> +}
+> +
+> +static const struct i2c_device_id pxe1610_id[] = {
+> +	{"pxe1610", 3},
+> +	{"pxe1110", 3},
+> +	{"pxm1310", 3},
+
+Unless there are chips with different page counts in the queue, using
+driver_data to pass the number of pages does not add any value. Just
+set num_pages to 3.
+
+If you like, feel free to use a define instead of a constant.
+
+> +	{}
+> +};
+> +
+> +MODULE_DEVICE_TABLE(i2c, pxe1610_id);
+> +
+> +/* This is the driver that will be inserted */
+
+This comment does not add any value.
+
+> +static struct i2c_driver pxe1610_driver = {
+> +	.driver = {
+> +		   .name = "pxe1610",
+> +		   },
+> +	.probe = pxe1610_probe,
+> +	.remove = pmbus_do_remove,
+> +	.id_table = pxe1610_id,
+> +};
+> +
+> +module_i2c_driver(pxe1610_driver);
+> +
+> +MODULE_AUTHOR("Vijay Khemka <vijaykhemka@fb.com>");
+> +MODULE_DESCRIPTION("PMBus driver for Infineon PXE1610, PXE1110 and PXM1310");
+> +MODULE_LICENSE("GPL");
+> 
 
