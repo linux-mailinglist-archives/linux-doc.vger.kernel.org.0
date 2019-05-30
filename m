@@ -2,86 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9C1132EEC1
-	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 05:50:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C40F92F759
+	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 08:01:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387730AbfE3Dta (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 May 2019 23:49:30 -0400
-Received: from szxga07-in.huawei.com ([45.249.212.35]:53280 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S2387710AbfE3Dta (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 29 May 2019 23:49:30 -0400
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
-        by Forcepoint Email with ESMTP id BC38EA36FC591233E71A;
-        Thu, 30 May 2019 11:49:27 +0800 (CST)
-Received: from HGHY4L002753561.china.huawei.com (10.133.215.186) by
- DGGEMS403-HUB.china.huawei.com (10.3.19.203) with Microsoft SMTP Server id
- 14.3.439.0; Thu, 30 May 2019 11:49:20 +0800
-From:   Zhen Lei <thunder.leizhen@huawei.com>
-To:     Jean-Philippe Brucker <jean-philippe.brucker@arm.com>,
-        John Garry <john.garry@huawei.com>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Will Deacon <will.deacon@arm.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        linux-doc <linux-doc@vger.kernel.org>,
-        Sebastian Ott <sebott@linux.ibm.com>,
-        Gerald Schaefer <gerald.schaefer@de.ibm.com>,
-        "Martin Schwidefsky" <schwidefsky@de.ibm.com>,
-        Heiko Carstens <heiko.carstens@de.ibm.com>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        "Michael Ellerman" <mpe@ellerman.id.au>,
-        Tony Luck <tony.luck@intel.com>,
-        Fenghua Yu <fenghua.yu@intel.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        David Woodhouse <dwmw2@infradead.org>,
-        iommu <iommu@lists.linux-foundation.org>,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        linux-s390 <linux-s390@vger.kernel.org>,
-        linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
-        x86 <x86@kernel.org>, linux-ia64 <linux-ia64@vger.kernel.org>
-CC:     Zhen Lei <thunder.leizhen@huawei.com>,
-        Hanjun Guo <guohanjun@huawei.com>
-Subject: [PATCH v8 7/7] ia64: hide build option IOMMU_DEFAULT_PASSTHROUGH
-Date:   Thu, 30 May 2019 11:48:31 +0800
-Message-ID: <20190530034831.4184-8-thunder.leizhen@huawei.com>
-X-Mailer: git-send-email 2.21.0.windows.1
-In-Reply-To: <20190530034831.4184-1-thunder.leizhen@huawei.com>
-References: <20190530034831.4184-1-thunder.leizhen@huawei.com>
+        id S1726643AbfE3GBi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 May 2019 02:01:38 -0400
+Received: from out5-smtp.messagingengine.com ([66.111.4.29]:39903 "EHLO
+        out5-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1725961AbfE3GBh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 May 2019 02:01:37 -0400
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+        by mailout.nyi.internal (Postfix) with ESMTP id B2ABE220C3;
+        Thu, 30 May 2019 02:01:36 -0400 (EDT)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute5.internal (MEProxy); Thu, 30 May 2019 02:01:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=tobin.cc; h=date
+        :from:to:cc:subject:message-id:references:mime-version
+        :content-type:in-reply-to; s=fm3; bh=eCakL384zMTCpVZkURCZ5qsUo9h
+        k+pUOlpeRS6gbT+U=; b=TN/YiQjQWUsoQU0Ha08Nx01TZQhDPqY4mOo08RR3wKL
+        14s9bOMTOOAUcLSR9X5MNwkhrucp921SgYt8eKIlPpvoARbRjLSQfencP+c0Kv0e
+        HTfP1aMUZggm4zPrbd3Qyli58WikqV8Dsu+MqIE5Xd8481jUx/4eNaDaejPdIvM7
+        /HL2GzL6nZWp6nr2lWe5GfmgK3S0YV2LiIH7naZcf3pr+BxJ5Qv2cqEYHNtlVunn
+        7rc0+BaePmGZyY7E68wVYJBnCOEa/PqbrzSxz2KIyEgMpJgX7qPRFZUt7dnZCYGo
+        Xcd7YeB1k2tIWZRN4mITb61wny8b90bZtt2uXCuFgaw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-type:date:from:in-reply-to
+        :message-id:mime-version:references:subject:to:x-me-proxy
+        :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=eCakL3
+        84zMTCpVZkURCZ5qsUo9hk+pUOlpeRS6gbT+U=; b=py0C4DD0GGD8+o80IIh4uo
+        IgLnWHuzqpiNJWiZICIAW/ZZ3LLUnCYeiM8zsxwItBc7/+7sxcKQmbms64CFzmka
+        X0SCSUk/NAE1f8a01KMjYsDKIGDlWIsYg5qN4Dfv860bmA2D1jtZqxF/U/AQjo9a
+        kc7RsDDXoVSoNveVRKPsHS+f8Hplv52aQx2a0ZGp4SyJCne5pKjBI3unScFwkZut
+        FFySNOtUd20q3OL/QxosrODigq35dClXGSqhmIX55Aql+CQjBvIPBLEiG3nIIxxq
+        F0pSix0+p/pQnIWC/ZV/K0UKVZ8oePtzePDrFJhkFMEMWvLYKFGNSkvPYNuLPL4w
+        ==
+X-ME-Sender: <xms:v3HvXKLfe7nhbx7utOcf5lvo3wQXgHRhBPyJT-pv_1vGXu_S-r1MzQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduuddruddvkedguddtudcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enfghrlhcuvffnffculdduhedmnecujfgurhepfffhvffukfhfgggtuggjofgfsehttder
+    tdforedvnecuhfhrohhmpedfvfhosghinhcuvedrucfjrghrughinhhgfdcuoehmvgesth
+    hosghinhdrtggtqeenucfkphepuddvgedrudejuddrfedurddugeegnecurfgrrhgrmhep
+    mhgrihhlfhhrohhmpehmvgesthhosghinhdrtggtnecuvehluhhsthgvrhfuihiivgeptd
+X-ME-Proxy: <xmx:v3HvXKQBKsR03OmxOLM97vnrKFC1ITG7c-hWGZLSDhhCVoFZsR6oIg>
+    <xmx:v3HvXDRuJsPWMYIjrpe62IUEgbLL2WCT-qkS5EmxkEsOaF00rv-OrQ>
+    <xmx:v3HvXK4cRJ1jMdSJTqBJEUKXuiViDyLuEFXcU4c56N5sOLvJSb2VYQ>
+    <xmx:wHHvXAnGM5HD9n3U86goR9McOHwIl9nJwZzGvyQ-7Rrjd7fXa2Y6-w>
+Received: from localhost (124-171-31-144.dyn.iinet.net.au [124.171.31.144])
+        by mail.messagingengine.com (Postfix) with ESMTPA id 4EF6F8005B;
+        Thu, 30 May 2019 02:01:34 -0400 (EDT)
+Date:   Thu, 30 May 2019 16:01:30 +1000
+From:   "Tobin C. Harding" <me@tobin.cc>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     "Tobin C. Harding" <tobin@kernel.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Mauro Carvalho Chehab <mchehab@s-opensource.com>,
+        Neil Brown <neilb@suse.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 0/9] docs: Convert VFS doc to RST
+Message-ID: <20190530060130.GB11021@caerus>
+References: <20190515002913.12586-1-tobin@kernel.org>
+ <20190529163052.6ce91581@lwn.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.133.215.186]
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190529163052.6ce91581@lwn.net>
+X-Mailer: Mutt 1.9.4 (2018-02-28)
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The DMA mode PASSTHROUGH is not used on ia64.
+On Wed, May 29, 2019 at 04:30:52PM -0600, Jonathan Corbet wrote:
+> On Wed, 15 May 2019 10:29:04 +1000
+> "Tobin C. Harding" <tobin@kernel.org> wrote:
+> 
+> > Here is an updated version of the VFS doc conversion.  This series in no
+> > way represents a final point for the VFS documentation rather it is a
+> > small step towards getting VFS docs updated.  This series does not
+> > update the content of vfs.txt, only does formatting.
+> 
+> I've finally gotten to this, sorry for taking so long.  Applying it to
+> docs-next turned out to be a bit of a chore; there have been intervening
+> changes to vfs.txt that we didn't want to lose.  But I did it.
+> 
+> Unfortunately, there's still a remaining issue.  You did a lot of list
+> conversions like this:
+> 
+> > -  struct file_system_type *fs_type: describes the filesystem, partly initialized
+> > +``struct file_system_type *fs_type``: describes the filesystem, partly initialized
+> >  	by the specific filesystem code
+> 
+> but that does not render the way you would like, trust me.  You really
+> want to use the list format, something like:
+> 
+>     ``struct file_system_type *fs_type``
+> 	 describes the filesystem, partly initialized by the specific
+> 	 filesystem code
 
-Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
----
- drivers/iommu/Kconfig | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Ouch!  Yes I knew this was sub-optimal, I thought the HTML looked ok.
+I'll fix them up as suggested.
 
-diff --git a/drivers/iommu/Kconfig b/drivers/iommu/Kconfig
-index f6c030433d38048..f7400e35628dce4 100644
---- a/drivers/iommu/Kconfig
-+++ b/drivers/iommu/Kconfig
-@@ -89,7 +89,7 @@ choice
- 
- config IOMMU_DEFAULT_PASSTHROUGH
- 	bool "passthrough"
--	depends on !S390_IOMMU
-+	depends on (!S390_IOMMU && !IA64)
- 	help
- 	  In this mode, the DMA access through IOMMU without any addresses
- 	  translation. That means, the wrong or illegal DMA access can not
--- 
-1.8.3
+> There are, unfortunately, a lot of these to fix...  I bet it could be done
+> with an elisp function, but I don't have time to beat my head against that
+> wall right now.
 
+oh really?  That would actually make doing this much more enticing, I've
+already done all these multiple times manually - learning nothing, some
+elisp games would actually teach me something.  Cheers.
 
+> Any chance you would have time to send me a followup patch fixing these
+> up?  I'll keep my branch with this set for now so there's no need to
+> rebase those.
+
+Sure thing, patches to come.
+
+Cheers,
+Tobin.
