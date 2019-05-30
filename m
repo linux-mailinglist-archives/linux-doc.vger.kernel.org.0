@@ -2,161 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F7003036E
-	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 22:45:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2CC3C303BD
+	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 23:04:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726518AbfE3Uo7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 May 2019 16:44:59 -0400
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:45130 "EHLO
-        mail-pf1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726487AbfE3Uo7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 May 2019 16:44:59 -0400
-Received: by mail-pf1-f195.google.com with SMTP id s11so4679603pfm.12
-        for <linux-doc@vger.kernel.org>; Thu, 30 May 2019 13:44:58 -0700 (PDT)
+        id S1726285AbfE3VEI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 May 2019 17:04:08 -0400
+Received: from mail-qt1-f196.google.com ([209.85.160.196]:42678 "EHLO
+        mail-qt1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726079AbfE3VEI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 May 2019 17:04:08 -0400
+Received: by mail-qt1-f196.google.com with SMTP id s15so8767407qtk.9;
+        Thu, 30 May 2019 14:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=from:to:cc:subject:references:date:in-reply-to:message-id
-         :user-agent:mime-version;
-        bh=q6AUBPvqyat2bLNM++F9NloXkkCwBt3/tItx63cMlpE=;
-        b=C2e/JzbpUueBW6GWiWsrwQbKeGbHeV+0umj6fYHo//SnFeP6ktUlkhrM4ciCTH1r01
-         GiqRMuwhQC4PFGeU4JtJ0cJmEDB1GcL+fEV+5ReV0/OX84vu6QQipYF9IhWRIseSCwye
-         Yd6Ny28KV9jXxKId1cKev/qx2qjNT0bNlIcUcOqT0gSzZOqgBx5CcDyj9XKs/HG3tl2u
-         A+9dmAt0jbXOjWnMgRSXENvJAGGJ+s8n42XCpdvtVEegDqVRT4irnQKFTlL8YP4C6XFA
-         m7/G009ugSO8iFwOfoNeeFB2/YjQO5yA7UBg1McHFypCDaz91MGXSxTYKuZtMWd09wdF
-         2lsA==
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=QvB7om0vcev2wAaZ6mNs20WHEWnppnnUocSSe4PmuQc=;
+        b=R+OBAIIDsIp//zF5ukSuUovTfYFEJoCkFYDnb9WiLXH8OEUgBUOh8R1UVMP2YHb3OF
+         eReMh3bHTFhHiOFpIbZPL1rHF0/tIz4ay3Qv6E+WxX61iPzm6Sq8L/tCl1fC9591Rcn8
+         kqtj2T9JMKOVskaMpfkZ6QK7TIZrXEBSr4ePs+hZSUnoxKdhtgqKNuoB1oHBjubmzhsT
+         KaGYvH9sdz6DY7yn5Jssy8UUZ7WJkyXdsclyjAELQYnkmjwVcilDK3603hs/0AuGOMAT
+         S3UDgagjoQMIyUs2GB1tFWADaSHLRMNcXQHy0YOcfEcgyb09aUl/4338+95fDdYqk13y
+         gFVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:references:date:in-reply-to
-         :message-id:user-agent:mime-version;
-        bh=q6AUBPvqyat2bLNM++F9NloXkkCwBt3/tItx63cMlpE=;
-        b=WhgGIq1S17G9AbWSXzfE3JUcStOJ3zxudk4uvclPxUUYd2EXd6+Tm+yVc3ELuSYNaV
-         atwOFzT+9DCgpQj7wOBHZIh1XP9RcqGTjse/iXqhADZfOsW2iTnlN41tgSuzXdSQ47m4
-         9JtSMxHckUjVfPENVkdUDKFS4BiUVtp8g1lafuZ3T8622rjXLpDyxmuHMMUpkzQEkakA
-         X5FVhcpoyMOeJoyT+M027sI/F5u82ofhXFtsGIP6Ycqbv8oSK1RbO06YKKsLIs2Ex6Vj
-         FH6iDqG5pbmLogsqwze5A971Ob5rOqZWWVMA/skqHinTBNB6rbl6IW99GcFzc/CDLayk
-         SzNA==
-X-Gm-Message-State: APjAAAWDlP/N2GHKaS8/z514vHkHcR2dCmW4T74jMh+AOnGi/nWu8m3Q
-        PH890FlA+1L1cbj780iIySwj7g==
-X-Google-Smtp-Source: APXvYqwupWORAT9iyn5M2LRuwVXU+wPnlXfdJiuevQ15iB/9Mq30VTKY+wUMHcd1Nm1Mx7YzW8V9nQ==
-X-Received: by 2002:a17:90a:2a09:: with SMTP id i9mr5287388pjd.103.1559249097503;
-        Thu, 30 May 2019 13:44:57 -0700 (PDT)
-Received: from bsegall-linux.svl.corp.google.com.localhost ([2620:15c:2cd:202:39d7:98b3:2536:e93f])
-        by smtp.gmail.com with ESMTPSA id k22sm4021024pfk.54.2019.05.30.13.44.55
-        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-        Thu, 30 May 2019 13:44:56 -0700 (PDT)
-From:   bsegall@google.com
-To:     Dave Chiluk <chiluk+linux@indeed.com>
-Cc:     Phil Auld <pauld@redhat.com>, Peter Oskolkov <posk@posk.io>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>, cgroups@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Brendan Gregg <bgregg@netflix.com>,
-        Kyle Anderson <kwa@yelp.com>,
-        Gabriel Munos <gmunoz@netflix.com>,
-        John Hammond <jhammond@indeed.com>,
-        Cong Wang <xiyou.wangcong@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        pjt@google.com
-Subject: Re: [PATCH v3 1/1] sched/fair: Fix low cpu usage with high throttling by removing expiration of cpu-local slices
-References: <1558121424-2914-1-git-send-email-chiluk+linux@indeed.com>
-        <1559156926-31336-1-git-send-email-chiluk+linux@indeed.com>
-        <1559156926-31336-2-git-send-email-chiluk+linux@indeed.com>
-        <xm264l5dynrg.fsf@bsegall-linux.svl.corp.google.com>
-        <CAC=E7cU9GetuKVQE1HxXsSuOKgyxezXUmSH2ZDHOrLio_YZi1g@mail.gmail.com>
-Date:   Thu, 30 May 2019 13:44:55 -0700
-In-Reply-To: <CAC=E7cU9GetuKVQE1HxXsSuOKgyxezXUmSH2ZDHOrLio_YZi1g@mail.gmail.com>
-        (Dave Chiluk's message of "Thu, 30 May 2019 12:53:37 -0500")
-Message-ID: <xm26zhn3y8mw.fsf@bsegall-linux.svl.corp.google.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.2 (gnu/linux)
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to:user-agent;
+        bh=QvB7om0vcev2wAaZ6mNs20WHEWnppnnUocSSe4PmuQc=;
+        b=H6TIWx0j7Z6e7u+TWiYq5Fb8MshsijsG3R0AwNDGHj9p4mXtdfN0qeZs4F8ZZIzCHm
+         RPWkRmsjA694Kvn1sfmnhG1NXyA9mZ5xTH4o99TlvvB5JY7PafCN455Ctkay0xbybJvJ
+         B4USv7eBERSblpBlf6A6NECe8IAK4UxEqTfre59yfJor/qZ+O37RPYp10eRTE5vuHJgp
+         yLh2zvbJPUnPP6DpwndFoPrF3FuV5wK1Nv7y8ygO0dQuvigzZ8UVSKdvgspmc41FSUbs
+         UcXf0eozpFUMMicMxojzR/J4OnFJK//rilLOtL55jyDlL8xcY7SlTDhYxvLO+K/XXrWH
+         4u6w==
+X-Gm-Message-State: APjAAAWSP9Udo/sLXdotEAdgqXQ6SJD4IGI0Qcp9S1nchYMkOLiRr+RB
+        5oNZ47yXeq4+zEEXMYJc8w0=
+X-Google-Smtp-Source: APXvYqyuw30OhbxT+Mwrh13RKA2Ran/Eh9ndJGKcIcll5oZCsLcDaad1o0WbLY5JhpP7ztngQo8/zg==
+X-Received: by 2002:a0c:9499:: with SMTP id j25mr5385466qvj.155.1559250246854;
+        Thu, 30 May 2019 14:04:06 -0700 (PDT)
+Received: from localhost ([2620:10d:c091:500::1:658d])
+        by smtp.gmail.com with ESMTPSA id v2sm2107944qtf.24.2019.05.30.14.04.05
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 30 May 2019 14:04:05 -0700 (PDT)
+Date:   Thu, 30 May 2019 14:04:04 -0700
+From:   Tejun Heo <tj@kernel.org>
+To:     Odin Ugedal <odin@ugedal.com>
+Cc:     Li Zefan <lizefan@huawei.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "open list:CONTROL GROUP (CGROUP)" <cgroups@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        open list <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH] docs cgroups: add another example size for hugetlb
+Message-ID: <20190530210404.GX374014@devbig004.ftw2.facebook.com>
+References: <20190529222425.30879-1-odin@ugedal.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190529222425.30879-1-odin@ugedal.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dave Chiluk <chiluk+linux@indeed.com> writes:
+On Thu, May 30, 2019 at 12:24:25AM +0200, Odin Ugedal wrote:
+> Add another example to clarify that HugePages smaller than 1MB will
+> be displayed using "KB", with an uppercased K (eg. 20KB), and not the
+> normal SI prefix kilo (small k).
+> 
+> Because of a misunderstanding/copy-paste error inside runc
+> (see https://github.com/opencontainers/runc/pull/2065), it tried
+> accessing the cgroup control file of a 64kB HugePage using
+> "hugetlb.64kB._____" instead of the correct "hugetlb.64KB._____".
+> 
+> Adding a new example will make it clear how sizes smaller than 1MB are
+> handled.
+> 
+> Signed-off-by: Odin Ugedal <odin@ugedal.com>
 
-> On Wed, May 29, 2019 at 02:05:55PM -0700, bsegall@google.com wrote:
->> Dave Chiluk <chiluk+linux@indeed.com> writes:
->>
->> Yeah, having run the test, stranding only 1 ms per cpu rather than 5
->> doesn't help if you only have 10 ms of quota and even 10 threads/cpus.
->> The slack timer isn't important in this test, though I think it probably
->> should be changed.
-> My min_cfs_rq_runtime was already set to 1ms.
+Applied to cgroup/for-5.2-fixes.
 
-Yeah, I meant min_cfs_rq_runtime vs the 5ms if the slack stuff was
-broken.
+Thanks.
 
->
-> Additionally raising the amount of quota from 10ms to 50ms or even
-> 100ms, still results in throttling without full quota usage.
->
->> Decreasing min_cfs_rq_runtime helps, but would mean that we have to pull
->> quota more often / always. The worst case here I think is where you
->> run/sleep for ~1ns, so you wind up taking the lock twice every
->> min_cfs_rq_runtime: once for assign and once to return all but min,
->> which you then use up doing short run/sleep. I suppose that determines
->> how much we care about this overhead at all.
-> I'm not so concerned about how inefficiently the user-space application
-> runs, as that's up to the invidual developer.
-
-Increasing scheduler overhead is something we generally try to prevent
-is what I was worried about.
-
-> The fibtest testcase, is
-> purely my approximation of what a java application with lots of worker
-> threads might do, as I didn't have a great deterministic java
-> reproducer, and I feared posting java to LKML.  I'm more concerned with
-> the fact that the user requested 10ms/period or 100ms/period and they
-> hit throttling while simultaneously not seeing that amount of cpu usage.
-> i.e. on an 8 core machine if I
-> $ ./runfibtest 1
-> Iterations Completed(M): 1886
-> Throttled for: 51
-> CPU Usage (msecs) = 507
-> $ ./runfibtest 8
-> Iterations Completed(M): 1274
-> Throttled for: 52
-> CPU Usage (msecs) = 380
->
-> You see that in the 8 core case where we have 7 do nothing threads on
-> cpu's 1-7, we see only 380 ms of usage, and 52 periods of throttling
-> when we should have received ~500ms of cpu usage.
->
-> Looking more closely at the __return_cfs_rq_runtime logic I noticed
->         if (cfs_b->quota != RUNTIME_INF &&
->             cfs_rq->runtime_expires == cfs_b->runtime_expires) {
->
-> Which is awfully similar to the logic that was fixed by 512ac999.  Is it
-> possible that we are just not ever returning runtime back to the cfs_b
-> because of the runtime_expires comparison here?
-
-The relevant issue that patch fixes is that the old conditional was
-backwards. Also lowering min_cfs_rq_runtime to 0 fixes your testcase, so
-it's working.
-
->
->> Removing expiration means that in the worst case period and quota can be
->> effectively twice what the user specified, but only on very particular
->> workloads.
-> I'm only removing expiration of slices that have already been assigned
-> to individual cfs_rq.  My understanding is that there is at most one
-> cfs_rq per cpu, and each of those can have at most one slice of
-> available runtime.  So the worst case burst is slice_ms * cpus.  Please
-> help me understand how you get to twice user specified quota and period
-> as it's not obvious to me *(I've only been looking at this for a few
-> months).
-
-The reason that this effect is so significant is because slice_ms * cpus
-is roughly 100% of the quota. So yes, it's roughly the same thing.
-Unfortunately if there are more spare cpus on the system just doubling
-quota and period (keeping the same ratio) would not fix your issue,
-while removing expiration does while also potentially having that effect.
-
->
->> I think we should at least think about instead lowering
->> min_cfs_rq_runtime to some smaller value
-> Do you mean lower than 1ms?
-
-Yes
+-- 
+tejun
