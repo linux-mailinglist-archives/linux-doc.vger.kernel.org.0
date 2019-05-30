@@ -2,119 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 79B3430328
-	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 22:15:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E6B553032C
+	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 22:15:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726080AbfE3UP2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 May 2019 16:15:28 -0400
-Received: from mx.kolabnow.com ([95.128.36.41]:62724 "EHLO mx.kolabnow.com"
+        id S1726328AbfE3UPh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 May 2019 16:15:37 -0400
+Received: from mx.kolabnow.com ([95.128.36.42]:49032 "EHLO mx.kolabnow.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726045AbfE3UP1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 30 May 2019 16:15:27 -0400
+        id S1726079AbfE3UPh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 30 May 2019 16:15:37 -0400
 Received: from localhost (unknown [127.0.0.1])
-        by ext-mx-out002.mykolab.com (Postfix) with ESMTP id 9055E51F;
-        Thu, 30 May 2019 22:15:25 +0200 (CEST)
+        by ext-mx-out001.mykolab.com (Postfix) with ESMTP id 6AC22115;
+        Thu, 30 May 2019 22:15:36 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
-        content-transfer-encoding:content-type:content-type:mime-version
+        content-type:content-type:content-transfer-encoding:mime-version
         :references:in-reply-to:message-id:date:date:subject:subject
         :from:from:received:received:received; s=dkim20160331; t=
-        1559247325; x=1561061726; bh=o+dhPOQysQg5njFIBC1sFX14Ow3LdaOEtsg
-        F1ERnj5Q=; b=d1QwvrDPhrBdsE4uPwDsxVxBLepkqEWyRf9+oz1P6YIBcbwqsnh
-        3mT2HzDmM+fP6d4uqmUjaZ05r9CjZEGoefmtcQk+3EU/gH2CQCnQxsukSvA5LD6d
-        +6iqcMdlXvpHlSEkcx7PoxcTMuEToTNEFOjgBhW5Extvw880AqtGYUo30eaxV9E3
-        edAYn2OQxaBDumAU5Ylrbw4Zr5hSq/e0DZOE65PH0RZ7LDEVCFIirELUZuzQMA51
-        FWv9gO479uxVMHyirsPgah/59tJsgAnPPwfnLamWJpYyFozy+KDTtPckCw55bJHH
-        CpKwdnMt8jq/ULZxL9R/K7GMq94zVmRFmv7FhgU75J1rE3Hj6AwqAd1nmMiVsV7u
-        BC083HYWwVLXmukAL56XazlFeE9NNpf8VWHDJX2quFz9zcqwVtAgDjnAAiNUXyvr
-        M2q0cyowvl0mrRMCOZqhC9p/kKNyWYKUZykPYhNT9mtzzsI52hqck/tn7FBM0DGl
-        TzZnT5l7890hrNjmLe2JGRL8kaWRyuCLWMqZdVlyXwi2yRGhMqfk9g0KDBEhvLFT
-        urNifWpOhsdXehtm5BIKGRLgboEJ5lp5KUwvCuI0rVuv707z4wv7ZPn3SavPrPcl
-        3tvBSLrAhWvLv9u8A4cpi4Ztk26OOUAS6Wai/GU6MWXrviMNKuSiT7J0=
+        1559247336; x=1561061737; bh=/1Bzoci3zr3geDjPVfIzzdq7YP8QSh/pZWF
+        AI555y5M=; b=D8isbIjouobMFUizV9cdTIEPAN1DIQ7XL5AHjKR6YvRJerFhTrY
+        vX5hUOvVSk/DKZbb7DNabHp0WdPyXB9Vsh+7IA7A2ZZlVbHisu1oXX7EUw0dwais
+        zctFNidjZi24oSg7n4cr1qWuAivofMM09s6rKeod0IYLJeLKQZuCG9ftsD5CtCI5
+        DPQzg6SH1TaP4twrNkzxmsbrtOfolIcDVRszfNNG9RFlKMfrRvznZwK20Gad6IaY
+        0fSxoe0gsgtxw9ea7KDgVXqmofJv+iAKey4jPB2hnLtsCTjnBiiRfPWJ3A5OvNDE
+        QyxzXZAcyoBjLefAN8nxR+qyBs6n6DAWRgfzDV/tJu8u6p1kL78VgoQV0PAXuub1
+        eWSU9CX5z+01Uyd8awKavL92qwyEUY4GZA4+suk4sVAjH9LJsxdZ72rlLrSepNiO
+        WxJZKttnEBnyp6l4FiTwoA6tCvee2m2S0PlmW8kbfus5JufhGictzYvcBDAabREG
+        wlrKKxl1jhmymw/O8bqVJeATfw2hIUaE3EWPbd1Y2yz43amD2DY1oxcRiYAxbFTF
+        4hMGr/1tACSYpoxiAljrZRiMMENlyGwpuEeTB+DFTOnSMs/XHH0JQb38G6zwEuQv
+        wMI3VwrUOItwcpSo2V0wp+GgTYJhON85MPg5puLUrfCeaqf7iNe9mKuk=
 X-Virus-Scanned: amavisd-new at mykolab.com
 X-Spam-Flag: NO
-X-Spam-Score: -1.9
+X-Spam-Score: -1.899
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
-        tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
+X-Spam-Status: No, score=-1.899 tagged_above=-10 required=5
+        tests=[BAYES_00=-1.9, URIBL_BLOCKED=0.001]
+        autolearn=ham autolearn_force=no
 Received: from mx.kolabnow.com ([127.0.0.1])
-        by localhost (ext-mx-out002.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id l3yIbyGF4e75; Thu, 30 May 2019 22:15:25 +0200 (CEST)
-Received: from int-mx001.mykolab.com (unknown [10.9.13.1])
-        by ext-mx-out002.mykolab.com (Postfix) with ESMTPS id 12C4B11C;
-        Thu, 30 May 2019 22:15:24 +0200 (CEST)
+        by localhost (ext-mx-out001.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id ZOAcdX_iOcnK; Thu, 30 May 2019 22:15:36 +0200 (CEST)
+Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
+        by ext-mx-out001.mykolab.com (Postfix) with ESMTPS id F006EC8;
+        Thu, 30 May 2019 22:15:35 +0200 (CEST)
 Received: from ext-subm001.mykolab.com (unknown [10.9.6.1])
-        by int-mx001.mykolab.com (Postfix) with ESMTPS id AF330B99;
-        Thu, 30 May 2019 22:15:24 +0200 (CEST)
+        by int-mx003.mykolab.com (Postfix) with ESMTPS id 80BCC2B3C;
+        Thu, 30 May 2019 22:15:35 +0200 (CEST)
 From:   Federico Vaga <federico.vaga@vaga.pv.it>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Federico Vaga <federico.vaga@vaga.pv.it>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Subject: [PATCH] doc:it_IT: documentation alignment
-Date:   Thu, 30 May 2019 22:14:55 +0200
-Message-Id: <20190530201455.12412-2-federico.vaga@vaga.pv.it>
-In-Reply-To: <20190530201455.12412-1-federico.vaga@vaga.pv.it>
-References: <20190530201455.12412-1-federico.vaga@vaga.pv.it>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Alessia Mantegazza <amantegazza@vaga.pv.it>
+Subject: Re: [PATCH 06/22] doc: it_IT: fix reference to magic-number.rst
+Date:   Thu, 30 May 2019 22:15:34 +0200
+Message-ID: <1738585.bzCz3vHTFA@harkonnen>
+In-Reply-To: <76713fe801e082e54e4412331d14495f2620ee59.1559171394.git.mchehab+samsung@kernel.org>
+References: <cover.1559171394.git.mchehab+samsung@kernel.org> <76713fe801e082e54e4412331d14495f2620ee59.1559171394.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Documentation alignment for the following changes:
-a700767a7682 (doc/docs-next) docs: requirements.txt: recommend Sphinx 1.7.9
+On Thursday, May 30, 2019 1:23:37 AM CEST Mauro Carvalho Chehab wrote:
+> There's a typo at the referred file.
 
-Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
----
- .../translations/it_IT/doc-guide/sphinx.rst     | 17 ++++++++---------
- 1 file changed, 8 insertions(+), 9 deletions(-)
+I am about to send a patch that fixes all issues found by
+documentation-file-ref-check in Documentation/translations/it_IT.
 
-diff --git a/Documentation/translations/it_IT/doc-guide/sphinx.rst b/Documentation/translations/it_IT/doc-guide/sphinx.rst
-index 793b5cc33403..1739cba8863e 100644
---- a/Documentation/translations/it_IT/doc-guide/sphinx.rst
-+++ b/Documentation/translations/it_IT/doc-guide/sphinx.rst
-@@ -35,8 +35,7 @@ Installazione Sphinx
- ====================
- 
- I marcatori ReST utilizzati nei file in Documentation/ sono pensati per essere
--processati da ``Sphinx`` nella versione 1.3 o superiore. Se desiderate produrre
--un documento PDF è raccomandato l'utilizzo di una versione superiore alle 1.4.6.
-+processati da ``Sphinx`` nella versione 1.3 o superiore.
- 
- Esiste uno script che verifica i requisiti Sphinx. Per ulteriori dettagli
- consultate :ref:`it_sphinx-pre-install`.
-@@ -68,13 +67,13 @@ pacchettizzato dalla vostra distribuzione.
-       utilizzando LaTeX. Per una corretta interpretazione, è necessario aver
-       installato texlive con i pacchetti amdfonts e amsmath.
- 
--Riassumendo, se volete installare la versione 1.4.9 di Sphinx dovete eseguire::
-+Riassumendo, se volete installare la versione 1.7.9 di Sphinx dovete eseguire::
- 
--       $ virtualenv sphinx_1.4
--       $ . sphinx_1.4/bin/activate
--       (sphinx_1.4) $ pip install -r Documentation/sphinx/requirements.txt
-+       $ virtualenv sphinx_1.7.9
-+       $ . sphinx_1.7.9/bin/activate
-+       (sphinx_1.7.9) $ pip install -r Documentation/sphinx/requirements.txt
- 
--Dopo aver eseguito ``. sphinx_1.4/bin/activate``, il prompt cambierà per
-+Dopo aver eseguito ``. sphinx_1.7.9/bin/activate``, il prompt cambierà per
- indicare che state usando il nuovo ambiente. Se aprite un nuova sessione,
- prima di generare la documentazione, dovrete rieseguire questo comando per
- rientrare nell'ambiente virtuale.
-@@ -120,8 +119,8 @@ l'installazione::
- 	You should run:
- 
- 		sudo dnf install -y texlive-luatex85
--		/usr/bin/virtualenv sphinx_1.4
--		. sphinx_1.4/bin/activate
-+		/usr/bin/virtualenv sphinx_1.7.9
-+		. sphinx_1.7.9/bin/activate
- 		pip install -r Documentation/sphinx/requirements.txt
- 
- 	Can't build as 1 mandatory dependency is missing at ./scripts/sphinx-pre-install line 468.
--- 
-2.21.0
+Of course I fixed this as well.
+
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> ---
+>  Documentation/translations/it_IT/process/magic-number.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/translations/it_IT/process/magic-number.rst
+> b/Documentation/translations/it_IT/process/magic-number.rst index
+> 5281d53e57ee..ed1121d0ba84 100644
+> --- a/Documentation/translations/it_IT/process/magic-number.rst
+> +++ b/Documentation/translations/it_IT/process/magic-number.rst
+> @@ -1,6 +1,6 @@
+>  .. include:: ../disclaimer-ita.rst
+> 
+> -:Original: :ref:`Documentation/process/magic-numbers.rst <magicnumbers>`
+> +:Original: :ref:`Documentation/process/magic-number.rst <magicnumbers>`
+> 
+>  :Translator: Federico Vaga <federico.vaga@vaga.pv.it>
+> 
+>  .. _it_magicnumbers:
+
+
+
 
