@@ -2,88 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2CC3C303BD
-	for <lists+linux-doc@lfdr.de>; Thu, 30 May 2019 23:04:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F2DDA304A3
+	for <lists+linux-doc@lfdr.de>; Fri, 31 May 2019 00:11:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726285AbfE3VEI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 May 2019 17:04:08 -0400
-Received: from mail-qt1-f196.google.com ([209.85.160.196]:42678 "EHLO
-        mail-qt1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726079AbfE3VEI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 May 2019 17:04:08 -0400
-Received: by mail-qt1-f196.google.com with SMTP id s15so8767407qtk.9;
-        Thu, 30 May 2019 14:04:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=QvB7om0vcev2wAaZ6mNs20WHEWnppnnUocSSe4PmuQc=;
-        b=R+OBAIIDsIp//zF5ukSuUovTfYFEJoCkFYDnb9WiLXH8OEUgBUOh8R1UVMP2YHb3OF
-         eReMh3bHTFhHiOFpIbZPL1rHF0/tIz4ay3Qv6E+WxX61iPzm6Sq8L/tCl1fC9591Rcn8
-         kqtj2T9JMKOVskaMpfkZ6QK7TIZrXEBSr4ePs+hZSUnoxKdhtgqKNuoB1oHBjubmzhsT
-         KaGYvH9sdz6DY7yn5Jssy8UUZ7WJkyXdsclyjAELQYnkmjwVcilDK3603hs/0AuGOMAT
-         S3UDgagjoQMIyUs2GB1tFWADaSHLRMNcXQHy0YOcfEcgyb09aUl/4338+95fDdYqk13y
-         gFVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-         :references:mime-version:content-disposition:in-reply-to:user-agent;
-        bh=QvB7om0vcev2wAaZ6mNs20WHEWnppnnUocSSe4PmuQc=;
-        b=H6TIWx0j7Z6e7u+TWiYq5Fb8MshsijsG3R0AwNDGHj9p4mXtdfN0qeZs4F8ZZIzCHm
-         RPWkRmsjA694Kvn1sfmnhG1NXyA9mZ5xTH4o99TlvvB5JY7PafCN455Ctkay0xbybJvJ
-         B4USv7eBERSblpBlf6A6NECe8IAK4UxEqTfre59yfJor/qZ+O37RPYp10eRTE5vuHJgp
-         yLh2zvbJPUnPP6DpwndFoPrF3FuV5wK1Nv7y8ygO0dQuvigzZ8UVSKdvgspmc41FSUbs
-         UcXf0eozpFUMMicMxojzR/J4OnFJK//rilLOtL55jyDlL8xcY7SlTDhYxvLO+K/XXrWH
-         4u6w==
-X-Gm-Message-State: APjAAAWSP9Udo/sLXdotEAdgqXQ6SJD4IGI0Qcp9S1nchYMkOLiRr+RB
-        5oNZ47yXeq4+zEEXMYJc8w0=
-X-Google-Smtp-Source: APXvYqyuw30OhbxT+Mwrh13RKA2Ran/Eh9ndJGKcIcll5oZCsLcDaad1o0WbLY5JhpP7ztngQo8/zg==
-X-Received: by 2002:a0c:9499:: with SMTP id j25mr5385466qvj.155.1559250246854;
-        Thu, 30 May 2019 14:04:06 -0700 (PDT)
-Received: from localhost ([2620:10d:c091:500::1:658d])
-        by smtp.gmail.com with ESMTPSA id v2sm2107944qtf.24.2019.05.30.14.04.05
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 30 May 2019 14:04:05 -0700 (PDT)
-Date:   Thu, 30 May 2019 14:04:04 -0700
-From:   Tejun Heo <tj@kernel.org>
-To:     Odin Ugedal <odin@ugedal.com>
-Cc:     Li Zefan <lizefan@huawei.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "open list:CONTROL GROUP (CGROUP)" <cgroups@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        open list <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] docs cgroups: add another example size for hugetlb
-Message-ID: <20190530210404.GX374014@devbig004.ftw2.facebook.com>
-References: <20190529222425.30879-1-odin@ugedal.com>
+        id S1726125AbfE3WLB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 May 2019 18:11:01 -0400
+Received: from ms.lwn.net ([45.79.88.28]:58664 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726100AbfE3WLB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 30 May 2019 18:11:01 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 27469728;
+        Thu, 30 May 2019 21:32:40 +0000 (UTC)
+Date:   Thu, 30 May 2019 15:32:39 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     kbuild test robot <lkp@intel.com>
+Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>, kbuild-all@01.org,
+        linux-doc@vger.kernel.org, linux-media@vger.kernel.org
+Subject: Re: [lwn:docs-next 25/31] htmldocs: /bin/bash:
+ ./scripts/sphinx-pre-install: No such file or directory
+Message-ID: <20190530153239.57f321c9@lwn.net>
+In-Reply-To: <201905310424.Zhlxo3ky%lkp@intel.com>
+References: <201905310424.Zhlxo3ky%lkp@intel.com>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190529222425.30879-1-odin@ugedal.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, May 30, 2019 at 12:24:25AM +0200, Odin Ugedal wrote:
-> Add another example to clarify that HugePages smaller than 1MB will
-> be displayed using "KB", with an uppercased K (eg. 20KB), and not the
-> normal SI prefix kilo (small k).
-> 
-> Because of a misunderstanding/copy-paste error inside runc
-> (see https://github.com/opencontainers/runc/pull/2065), it tried
-> accessing the cgroup control file of a 64kB HugePage using
-> "hugetlb.64kB._____" instead of the correct "hugetlb.64KB._____".
-> 
-> Adding a new example will make it clear how sizes smaller than 1MB are
-> handled.
-> 
-> Signed-off-by: Odin Ugedal <odin@ugedal.com>
+On Fri, 31 May 2019 04:19:29 +0800
+kbuild test robot <lkp@intel.com> wrote:
 
-Applied to cgroup/for-5.2-fixes.
+> tree:   git://git.lwn.net/linux-2.6 docs-next
+> head:   a700767a7682d9bd237e927253274859aee075e7
+> commit: 9b88ad5464af1bf7228991f1c46a9a13484790a4 [25/31] scripts/sphinx-pre-install: always check if version is compatible with build
+> reproduce: make htmldocs
+> 
+> If you fix the issue, kindly add following tag
+> Reported-by: kbuild test robot <lkp@intel.com>
+> 
+> All errors (new ones prefixed by >>):
+> 
+> >> /bin/bash: ./scripts/sphinx-pre-install: No such file or directory  
 
-Thanks.
+For this one, I'm guessing we need something like the following...disagree?
 
--- 
-tejun
+jon
+
+--------
+diff --git a/Documentation/Makefile b/Documentation/Makefile
+index e889e7cb8511..c98188994322 100644
+--- a/Documentation/Makefile
++++ b/Documentation/Makefile
+@@ -23,7 +23,7 @@ ifeq ($(HAVE_SPHINX),0)
+ .DEFAULT:
+ 	$(warning The '$(SPHINXBUILD)' command was not found. Make sure you have Sphinx installed and in PATH, or set the SPHINXBUILD make variable to point to the full path of the '$(SPHINXBUILD)' executable.)
+ 	@echo
+-	@./scripts/sphinx-pre-install
++	@$(srctree)/scripts/sphinx-pre-install
+ 	@echo "  SKIP    Sphinx $@ target."
+ 
+ else # HAVE_SPHINX
