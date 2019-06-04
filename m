@@ -2,318 +2,181 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 15ED4343B8
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2019 12:11:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 72DDE34444
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2019 12:18:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727057AbfFDKLF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 4 Jun 2019 06:11:05 -0400
-Received: from casper.infradead.org ([85.118.1.10]:37588 "EHLO
-        casper.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727027AbfFDKLF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 4 Jun 2019 06:11:05 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-        MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender
-        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=RqlFiW8mqvn7VXsVgTdqn3QWI09o+fvsDMKwHHMYzmM=; b=d9cIWZCZ55BJMQwQks2BNYpnDx
-        FqYMGyyRB1/+xnBZRQfrn9L/vQOb3XFT6N2WpEBsZAYZoZbB/q7ZATyrLrNVWfSWI25HFL3inBEUU
-        vUdxdMhnNSspqMB6VC5iO2IIejt7RRQ3/VUlXkNtF+IYokbxbNlXoEDmre6nm5C0Aej2yZ/tky0mB
-        tEH7cJigZ0HyD2xXpUJZ1kcoRPkbjssCBOIh75l3gt6dOnBtH1yDtowQkM7ht2irwKoblXvOsRAQX
-        qyMsNFrrpG+tlA7Ihz3bC6PHmi8cqIpfcR2sloY0tI/zNa9b7flEVlJIBlvKL5taPWiCjXJ2TFzd4
-        KCADzMrQ==;
-Received: from [187.113.6.249] (helo=coco.lan)
-        by casper.infradead.org with esmtpsa (Exim 4.90_1 #2 (Red Hat Linux))
-        id 1hY6PB-0005Su-8Q; Tue, 04 Jun 2019 10:10:57 +0000
-Date:   Tue, 4 Jun 2019 07:10:48 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Christophe Leroy <christophe.leroy@c-s.fr>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        kvm@vger.kernel.org,
-        Radim =?UTF-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>,
-        Maxime Ripard <maxime.ripard@bootlin.com>,
-        dri-devel@lists.freedesktop.org,
-        platform-driver-x86@vger.kernel.org,
+        id S1727148AbfFDKSj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 4 Jun 2019 06:18:39 -0400
+Received: from conuserg-08.nifty.com ([210.131.2.75]:44024 "EHLO
+        conuserg-08.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727139AbfFDKSj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 4 Jun 2019 06:18:39 -0400
+Received: from localhost.localdomain (p14092-ipngnfx01kyoto.kyoto.ocn.ne.jp [153.142.97.92]) (authenticated)
+        by conuserg-08.nifty.com with ESMTP id x54AEC76032511;
+        Tue, 4 Jun 2019 19:14:12 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-08.nifty.com x54AEC76032511
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1559643254;
+        bh=2Cnt75TjD0TucqN65Zm4F4aK2FsJEMupPn4+qQfaomQ=;
+        h=From:To:Cc:Subject:Date:From;
+        b=T4jvQ0G6x7AI4kdGX5qwlpK7HOvTaBPAv/cRO5t4X32Dcs0uPZAvSErXh4DSjGB31
+         HcpKj3d7GK+dEJgeRDnlb3IgG5M1SUitGYK8fWYBHTStYwEem3M/mbalLmPcf7FXff
+         2NyynthHyJ0CxXthF++gCaIlODh+BwsYOnM6Vm7DKEJGoJYT3haZXkmHOejQU4htdI
+         qbLlQa5xUwjLEMB8M7yoUoLHvQw77TZmiZ2m1IsbGjpX7v+Ox9dBMBaEmddSnnMqUe
+         FudqJKtGFxDLUHkFG12GbiN4Ma4TLji3PyPSof/DKDCjFWY8qenZH14JVAqU6EKQqf
+         rZdDvtK1Yi38A==
+X-Nifty-SrcIP: [153.142.97.92]
+From:   Masahiro Yamada <yamada.masahiro@socionext.com>
+To:     linux-kbuild@vger.kernel.org
+Cc:     Randy Dunlap <rdunlap@infradead.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        David Howells <dhowells@redhat.com>,
+        Sam Ravnborg <sam@ravnborg.org>,
+        Jani Nikula <jani.nikula@intel.com>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        linux-riscv@lists.infradead.org,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        linux-s390@vger.kernel.org, Greentime Hu <green.hu@gmail.com>,
+        Helge Deller <deller@gmx.de>,
+        Vineet Gupta <vgupta@synopsys.com>,
+        Palmer Dabbelt <palmer@sifive.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        linux-snps-arc@lists.infradead.org,
+        Song Liu <songliubraving@fb.com>,
+        "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+        Yonghong Song <yhs@fb.com>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Michal Marek <michal.lkml@markovi.net>,
         Paul Mackerras <paulus@samba.org>,
-        linux-stm32@st-md-mailman.stormreply.com,
-        Alexandre Torgue <alexandre.torgue@st.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        David Airlie <airlied@linux.ie>,
-        Andrew Donnellan <ajd@linux.ibm.com>, linux-pm@vger.kernel.org,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Matan Ziv-Av <matan@svgalib.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        Daniel Vetter <daniel@ffwll.ch>, Sean Paul <sean@poorly.run>,
-        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Frederic Barrat <fbarrat@linux.ibm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        linuxppc-dev@lists.ozlabs.org,
-        Georgi Djakov <georgi.djakov@linaro.org>
-Subject: Re: [PATCH 09/22] docs: mark orphan documents as such
-Message-ID: <20190604071048.4f226fff@coco.lan>
-In-Reply-To: <2891a08c-50b1-db33-0e96-740d45c5235f@c-s.fr>
-References: <cover.1559171394.git.mchehab+samsung@kernel.org>
-        <e0bf4e767dd5de9189e5993fbec2f4b1bafd2064.1559171394.git.mchehab+samsung@kernel.org>
-        <2891a08c-50b1-db33-0e96-740d45c5235f@c-s.fr>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+        Martin KaFai Lau <kafai@fb.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        linux-parisc@vger.kernel.org, Alexei Starovoitov <ast@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Heiko Carstens <heiko.carstens@de.ibm.com>,
+        linux-kernel@vger.kernel.org, Vincent Chen <deanbo422@gmail.com>,
+        netdev@vger.kernel.org, bpf@vger.kernel.org,
+        linuxppc-dev@lists.ozlabs.org
+Subject: [PATCH 00/15] kbuild: refactor headers_install and support compile-test of UAPI headers
+Date:   Tue,  4 Jun 2019 19:13:54 +0900
+Message-Id: <20190604101409.2078-1-yamada.masahiro@socionext.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Mon, 3 Jun 2019 09:32:54 +0200
-Christophe Leroy <christophe.leroy@c-s.fr> escreveu:
 
-> Le 30/05/2019 =C3=A0 01:23, Mauro Carvalho Chehab a =C3=A9crit=C2=A0:
-> > Sphinx doesn't like orphan documents:
-> >=20
-> >      Documentation/accelerators/ocxl.rst: WARNING: document isn't inclu=
-ded in any toctree
-> >      Documentation/arm/stm32/overview.rst: WARNING: document isn't incl=
-uded in any toctree
-> >      Documentation/arm/stm32/stm32f429-overview.rst: WARNING: document =
-isn't included in any toctree
-> >      Documentation/arm/stm32/stm32f746-overview.rst: WARNING: document =
-isn't included in any toctree
-> >      Documentation/arm/stm32/stm32f769-overview.rst: WARNING: document =
-isn't included in any toctree
-> >      Documentation/arm/stm32/stm32h743-overview.rst: WARNING: document =
-isn't included in any toctree
-> >      Documentation/arm/stm32/stm32mp157-overview.rst: WARNING: document=
- isn't included in any toctree
-> >      Documentation/gpu/msm-crash-dump.rst: WARNING: document isn't incl=
-uded in any toctree
-> >      Documentation/interconnect/interconnect.rst: WARNING: document isn=
-'t included in any toctree
-> >      Documentation/laptops/lg-laptop.rst: WARNING: document isn't inclu=
-ded in any toctree
-> >      Documentation/powerpc/isa-versions.rst: WARNING: document isn't in=
-cluded in any toctree
-> >      Documentation/virtual/kvm/amd-memory-encryption.rst: WARNING: docu=
-ment isn't included in any toctree
-> >      Documentation/virtual/kvm/vcpu-requests.rst: WARNING: document isn=
-'t included in any toctree
-> >=20
-> > So, while they aren't on any toctree, add :orphan: to them, in order
-> > to silent this warning. =20
->=20
-> Are those files really not meant to be included in a toctree ?
->=20
-> Shouldn't we include them in the relevant toctree instead of just=20
-> shutting up Sphinx warnings ?
+Multiple people have suggested to compile-test UAPI headers.
 
-This is a good point. My understanding is that those orphaned docs
-are there for two reasons:
+Currently, Kbuild provides simple sanity checks by headers_check
+but they are not enough to catch bugs.
 
-1) someone created a new document as .rst but there's no index.rst file yet,
-as there are lots of other documents already there not converted. That's
-the case, for example, of the ones under Documentation/arm;
+The most recent patch I know is David Howells' work:
+https://patchwork.kernel.org/patch/10590203/
 
-2) They're part of an undergoing effort of converting stuff to ReST.
-One opted to keep it orphaned temporarily in order to avoid merge
-conflicts.
+I agree that we need better tests for UAPI headers,
+but I want to integrate it in a clean way.
 
-That's said, I have myself a big (/86 patches and growing) series
-with do a huge step on txt->rst conversion (it covers a significant
-amount of documentation). On this series, I'm removing the orphaned
-tags for several files (including, for example, those at Documentation/arm).
+The idea that has been in my mind is to compile each header
+to make sure the selfcontainedness.
 
-Yet, it is a lot easier to see if such series is not introducing
-warnings regressions if we first address those.
+Recently, Jani Nikula proposed a new syntax 'header-test-y'.
+https://patchwork.kernel.org/patch/10947005/
 
-It should be notice that discovering the orphaned files should be as
-simple as:
+So, I implemented UAPI compile-testing on top of that.
 
-	git grep -l ":orphan:" Documentation
+When adding a new feature, cleaning the code first is a
+good practice.
 
->=20
-> Christophe
->=20
-> >=20
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-> > ---
-> >   Documentation/accelerators/ocxl.rst                 | 2 ++
-> >   Documentation/arm/stm32/overview.rst                | 2 ++
-> >   Documentation/arm/stm32/stm32f429-overview.rst      | 2 ++
-> >   Documentation/arm/stm32/stm32f746-overview.rst      | 2 ++
-> >   Documentation/arm/stm32/stm32f769-overview.rst      | 2 ++
-> >   Documentation/arm/stm32/stm32h743-overview.rst      | 2 ++
-> >   Documentation/arm/stm32/stm32mp157-overview.rst     | 2 ++
-> >   Documentation/gpu/msm-crash-dump.rst                | 2 ++
-> >   Documentation/interconnect/interconnect.rst         | 2 ++
-> >   Documentation/laptops/lg-laptop.rst                 | 2 ++
-> >   Documentation/powerpc/isa-versions.rst              | 2 ++
-> >   Documentation/virtual/kvm/amd-memory-encryption.rst | 2 ++
-> >   Documentation/virtual/kvm/vcpu-requests.rst         | 2 ++
-> >   13 files changed, 26 insertions(+)
-> >=20
-> > diff --git a/Documentation/accelerators/ocxl.rst b/Documentation/accele=
-rators/ocxl.rst
-> > index 14cefc020e2d..b1cea19a90f5 100644
-> > --- a/Documentation/accelerators/ocxl.rst
-> > +++ b/Documentation/accelerators/ocxl.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
-> >   OpenCAPI (Open Coherent Accelerator Processor Interface)
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D
-> > diff --git a/Documentation/arm/stm32/overview.rst b/Documentation/arm/s=
-tm32/overview.rst
-> > index 85cfc8410798..f7e734153860 100644
-> > --- a/Documentation/arm/stm32/overview.rst
-> > +++ b/Documentation/arm/stm32/overview.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-> >   STM32 ARM Linux Overview
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D
-> > diff --git a/Documentation/arm/stm32/stm32f429-overview.rst b/Documenta=
-tion/arm/stm32/stm32f429-overview.rst
-> > index 18feda97f483..65bbb1c3b423 100644
-> > --- a/Documentation/arm/stm32/stm32f429-overview.rst
-> > +++ b/Documentation/arm/stm32/stm32f429-overview.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   STM32F429 Overview
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >  =20
-> > diff --git a/Documentation/arm/stm32/stm32f746-overview.rst b/Documenta=
-tion/arm/stm32/stm32f746-overview.rst
-> > index b5f4b6ce7656..42d593085015 100644
-> > --- a/Documentation/arm/stm32/stm32f746-overview.rst
-> > +++ b/Documentation/arm/stm32/stm32f746-overview.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   STM32F746 Overview
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >  =20
-> > diff --git a/Documentation/arm/stm32/stm32f769-overview.rst b/Documenta=
-tion/arm/stm32/stm32f769-overview.rst
-> > index 228656ced2fe..f6adac862b17 100644
-> > --- a/Documentation/arm/stm32/stm32f769-overview.rst
-> > +++ b/Documentation/arm/stm32/stm32f769-overview.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   STM32F769 Overview
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >  =20
-> > diff --git a/Documentation/arm/stm32/stm32h743-overview.rst b/Documenta=
-tion/arm/stm32/stm32h743-overview.rst
-> > index 3458dc00095d..c525835e7473 100644
-> > --- a/Documentation/arm/stm32/stm32h743-overview.rst
-> > +++ b/Documentation/arm/stm32/stm32h743-overview.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   STM32H743 Overview
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >  =20
-> > diff --git a/Documentation/arm/stm32/stm32mp157-overview.rst b/Document=
-ation/arm/stm32/stm32mp157-overview.rst
-> > index 62e176d47ca7..2c52cd020601 100644
-> > --- a/Documentation/arm/stm32/stm32mp157-overview.rst
-> > +++ b/Documentation/arm/stm32/stm32mp157-overview.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   STM32MP157 Overview
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >  =20
-> > diff --git a/Documentation/gpu/msm-crash-dump.rst b/Documentation/gpu/m=
-sm-crash-dump.rst
-> > index 757cd257e0d8..240ef200f76c 100644
-> > --- a/Documentation/gpu/msm-crash-dump.rst
-> > +++ b/Documentation/gpu/msm-crash-dump.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >   MSM Crash Dump Format
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > diff --git a/Documentation/interconnect/interconnect.rst b/Documentatio=
-n/interconnect/interconnect.rst
-> > index c3e004893796..56e331dab70e 100644
-> > --- a/Documentation/interconnect/interconnect.rst
-> > +++ b/Documentation/interconnect/interconnect.rst
-> > @@ -1,5 +1,7 @@
-> >   .. SPDX-License-Identifier: GPL-2.0
-> >  =20
-> > +:orphan:
-> > +
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >   GENERIC SYSTEM INTERCONNECT SUBSYSTEM
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > diff --git a/Documentation/laptops/lg-laptop.rst b/Documentation/laptop=
-s/lg-laptop.rst
-> > index aa503ee9b3bc..f2c2ffe31101 100644
-> > --- a/Documentation/laptops/lg-laptop.rst
-> > +++ b/Documentation/laptops/lg-laptop.rst
-> > @@ -1,5 +1,7 @@
-> >   .. SPDX-License-Identifier: GPL-2.0+
-> >  =20
-> > +:orphan:
-> > +
-> >   LG Gram laptop extra features
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D
-> >  =20
-> > diff --git a/Documentation/powerpc/isa-versions.rst b/Documentation/pow=
-erpc/isa-versions.rst
-> > index 812e20cc898c..66c24140ebf1 100644
-> > --- a/Documentation/powerpc/isa-versions.rst
-> > +++ b/Documentation/powerpc/isa-versions.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   CPU to ISA Version Mapping
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-> >  =20
-> > diff --git a/Documentation/virtual/kvm/amd-memory-encryption.rst b/Docu=
-mentation/virtual/kvm/amd-memory-encryption.rst
-> > index 659bbc093b52..33d697ab8a58 100644
-> > --- a/Documentation/virtual/kvm/amd-memory-encryption.rst
-> > +++ b/Documentation/virtual/kvm/amd-memory-encryption.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >   Secure Encrypted Virtualization (SEV)
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > diff --git a/Documentation/virtual/kvm/vcpu-requests.rst b/Documentatio=
-n/virtual/kvm/vcpu-requests.rst
-> > index 5feb3706a7ae..c1807a1b92e6 100644
-> > --- a/Documentation/virtual/kvm/vcpu-requests.rst
-> > +++ b/Documentation/virtual/kvm/vcpu-requests.rst
-> > @@ -1,3 +1,5 @@
-> > +:orphan:
-> > +
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >   KVM VCPU Requests
-> >   =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >  =20
+[1] Remove headers_install_all
+
+This target installs UAPI headers of all architectures
+in a single tree.
+It does not make sense to compile test of headers from
+multiple arches at the same time. Hence, removed.
+
+[2] Split header installation into 'make headers' and 'make headers_install'
+
+To compile-test UAPI headers, we need a work-directory somewhere
+to save objects and .*.cmd files.
+
+usr/include/ will be the work-directory.
+
+Since we cannot pollute the final destination of headers_install,
+
+I split the header installation into two stages.
+
+'make headers' will build up
+the ready-to-install headers in usr/include,
+which will be also used as a work-directory for the compile-test.
+
+'make headers_install' will copy headers
+from usr/include to $(INSTALL_HDR_PATH)/include.
+
+[3] Support compile-test of UAPI headers
+
+This is implemented in usr/include/Makefile
 
 
+Jani Nikula (1):
+  kbuild: add support for ensuring headers are self-contained
 
-Thanks,
-Mauro
+Masahiro Yamada (14):
+  kbuild: remove headers_{install,check}_all
+  kbuild: remove stale dependency between Documentation/ and
+    headers_install
+  kbuild: make gdb_script depend on prepare0 instead of prepare
+  kbuild: fix Kconfig prompt of CONFIG_HEADERS_CHECK
+  kbuild: add CONFIG_HEADERS_INSTALL and loosen the dependency of
+    samples
+  kbuild: remove build_unifdef target in scripts/Makefile
+  kbuild: build all prerequisite of headers_install simultaneously
+  kbuild: add 'headers' target to build up ready-to-install uapi headers
+  kbuild: re-implement Makefile.headersinst without directory descending
+  kbuild: move hdr-inst shorthand to top Makefile
+  kbuild: simplify scripts/headers_install.sh
+  kbuild: deb-pkg: do not run headers_check
+  fixup: kbuild: add support for ensuring headers are self-contained
+  kbuild: compile test UAPI headers to ensure they are self-contained
+
+ Documentation/kbuild/headers_install.txt |   7 --
+ Documentation/kbuild/makefiles.txt       |  13 ++-
+ Makefile                                 |  56 +++++-----
+ arch/arc/configs/tb10x_defconfig         |   1 +
+ arch/nds32/configs/defconfig             |   1 +
+ arch/parisc/configs/a500_defconfig       |   1 +
+ arch/parisc/configs/b180_defconfig       |   1 +
+ arch/parisc/configs/c3000_defconfig      |   1 +
+ arch/parisc/configs/default_defconfig    |   1 +
+ arch/powerpc/configs/ppc6xx_defconfig    |   1 +
+ arch/s390/configs/debug_defconfig        |   1 +
+ include/uapi/{linux => }/Kbuild          |   6 +-
+ init/Kconfig                             |  20 ++++
+ lib/Kconfig.debug                        |  25 +++--
+ samples/Kconfig                          |  14 ++-
+ samples/Makefile                         |   4 +-
+ scripts/Kbuild.include                   |   6 --
+ scripts/Makefile                         |   5 -
+ scripts/Makefile.build                   |   9 ++
+ scripts/Makefile.headersinst             | 132 ++++++++++-------------
+ scripts/Makefile.lib                     |   3 +
+ scripts/cc-system-headers.sh             |   8 ++
+ scripts/headers.sh                       |  29 -----
+ scripts/headers_install.sh               |  48 ++++-----
+ scripts/package/builddeb                 |   2 +-
+ usr/.gitignore                           |   1 -
+ usr/Makefile                             |   2 +
+ usr/include/.gitignore                   |   3 +
+ usr/include/Makefile                     | 132 +++++++++++++++++++++++
+ 29 files changed, 329 insertions(+), 204 deletions(-)
+ rename include/uapi/{linux => }/Kbuild (77%)
+ create mode 100755 scripts/cc-system-headers.sh
+ delete mode 100755 scripts/headers.sh
+ create mode 100644 usr/include/.gitignore
+ create mode 100644 usr/include/Makefile
+
+-- 
+2.17.1
+
