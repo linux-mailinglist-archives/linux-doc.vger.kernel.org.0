@@ -2,148 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C669734BBD
-	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2019 17:15:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 92C6D34C16
+	for <lists+linux-doc@lfdr.de>; Tue,  4 Jun 2019 17:22:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727976AbfFDPPU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 4 Jun 2019 11:15:20 -0400
-Received: from mail-lf1-f67.google.com ([209.85.167.67]:34362 "EHLO
-        mail-lf1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727854AbfFDPPU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 4 Jun 2019 11:15:20 -0400
-Received: by mail-lf1-f67.google.com with SMTP id y198so6257905lfa.1
-        for <linux-doc@vger.kernel.org>; Tue, 04 Jun 2019 08:15:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=vxNixpl3Pq1z+74RTrX6cWSIacBqU77a29xsqP6QNvI=;
-        b=JLl6HYWQi0kUYxM/8x7Fk6q3BbDyQGOii2WE8cm+zsUg4RFl3HdyQW62HIl5VRyh7S
-         Qsa0c2SNi+olQ21VyhSM7bFyvwlz17G9d5w9XKaTdU1jIjVpcXsNmFrPDsH7d3Xk9ldF
-         NOnTP5zX5zfVg0ahC0Yqd9hRQEW91qFCvMSSVbNEjlJvIwV1t7g32LUkzmwUZbcebnxT
-         c6xEt+iOvbSg9co9fsNG+s/BvuOBkHfEoYRznJpkyvXMhuJqjPuba80YmP7Jhey396hX
-         hlTr25H6GLrxhJ/W/SiIGpz9KfUU4ws+DOFrBX9XvryWvktYZTYB6PTjZpoWCm8v7U/A
-         EV0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=vxNixpl3Pq1z+74RTrX6cWSIacBqU77a29xsqP6QNvI=;
-        b=XQv6Fk1zofGNHBTdzJqYr97b0QnkYSUUnoznwONcvjFek8XSrEy3b+El+2uCcBaZt/
-         U/UsUdcHWGMVJpoUqTY790+WeXkdH3OC8xq2A2mqvGViuyhU6byHRKKjf+qN4il4zQ5t
-         G/XmNk2zZ/Cn8HD30gwb46Mi+LgfJNYuR8fFQB/F4SqqS2TGOtBUqNuPZbwWl3KPf7+N
-         D0T7r6KGgJn8cRhonmDu9Omh0Z5vs2lHuw73/B7pGaYr36bmdnuxfCrc/i0iPnJkBgCs
-         CH4IlP9yB1tjfOtcCM7So9BxjjVovgJQ8CKsZ8OFAx0/fWLc4ciyL5pMYFhouQ/fwfjM
-         64Sg==
-X-Gm-Message-State: APjAAAW0TzjhMPLjEco8aPnfhv6zoAp39dEQe36pPh80gWLjAhbjGL80
-        thy8NJdZ1b2+1ZFELMUfUSyphaTEXCjx9a+MtisSXw==
-X-Google-Smtp-Source: APXvYqxALvtdAFJHIBCgBqS+SOyaqoJFeh6LpcFxpL7+kqkdVczgEFylHDcBJOZP6hfhNH00/h6rmZKUutqhLzaclII=
-X-Received: by 2002:ac2:546a:: with SMTP id e10mr17091935lfn.75.1559661316679;
- Tue, 04 Jun 2019 08:15:16 -0700 (PDT)
+        id S1727948AbfFDPWZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 4 Jun 2019 11:22:25 -0400
+Received: from mail.kernel.org ([198.145.29.99]:45038 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727857AbfFDPWZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 4 Jun 2019 11:22:25 -0400
+Received: from localhost (unknown [117.99.94.117])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id A1FE420717;
+        Tue,  4 Jun 2019 15:22:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1559661744;
+        bh=lVdOfl5mMM4/U7zXe6pA0wVmIgPYM1znQCitNaCM4v4=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=MkVMMl/WIfQWlw+qL6ZxV4e9E69F9NBrq0gYloSeEkywgkHXUs1+W1ZSDJB3uoGuh
+         KlAeBoVR7W5d0LditCCgg3Qn1FYSDGF3g/Bw8rEUZmN73HgHhyKnxSKerZj5xYfhC5
+         4zQ6+osKiscKkdFkxbB02Nqb5NRXuamDafBcb8O4=
+Date:   Tue, 4 Jun 2019 20:49:16 +0530
+From:   Vinod Koul <vkoul@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Sanyog Kale <sanyog.r.kale@intel.com>,
+        Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>,
+        alsa-devel@alsa-project.org
+Subject: Re: [PATCH v2 13/22] docs: soundwire: locking: fix tags for a
+ code-block
+Message-ID: <20190604151916.GK15118@vkoul-mobl>
+References: <cover.1559656538.git.mchehab+samsung@kernel.org>
+ <0ea9c284f8db3867985c410d2764a2b68e5b35c1.1559656538.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
-References: <201905100945.V7PLp0za%lkp@intel.com> <CAFd5g46nZ0=Djo6d6iqdSQLaLP0Qq5bC+uzyjpqp5fXnty7YOg@mail.gmail.com>
- <94e6e17c-e360-f56d-674c-84cc0032ca4a@infradead.org>
-In-Reply-To: <94e6e17c-e360-f56d-674c-84cc0032ca4a@infradead.org>
-From:   Brendan Higgins <brendanhiggins@google.com>
-Date:   Tue, 4 Jun 2019 08:15:02 -0700
-Message-ID: <CAFd5g47tTXnRvaE_XX4cNuOA-YuR92Xab7BaU2Ce+dr6GXo3_Q@mail.gmail.com>
-Subject: Re: [kbuild:kunit 14/17] htmldocs: include/kunit/kunit-stream.h:58:
- warning: Function parameter or member '2' not described in '__printf'
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     kbuild test robot <lkp@intel.com>, kbuild-all@01.org,
-        linux-kbuild <linux-kbuild@vger.kernel.org>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        Felix Guo <felixguoxiuping@gmail.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0ea9c284f8db3867985c410d2764a2b68e5b35c1.1559656538.git.mchehab+samsung@kernel.org>
+User-Agent: Mutt/1.11.3 (2019-02-01)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, May 20, 2019 at 9:49 PM Randy Dunlap <rdunlap@infradead.org> wrote:
->
-> On 5/10/19 2:03 PM, Brendan Higgins wrote:
-> > On Thu, May 9, 2019 at 6:23 PM kbuild test robot <lkp@intel.com> wrote:
-> >> tree:   https://git.kernel.org/pub/scm/linux/kernel/git/masahiroy/linux-kbuild.git kunit
-> >> head:   c505c0b2e6237c729634327c178f5b0094f1c958
-> >> commit: c69e87665049970d1c2d6fe2fa1ae7a7c8655420 [14/17] Documentation: kunit: add documentation for KUnit
-> >> reproduce: make htmldocs
-> >>
-> >> If you fix the issue, kindly add following tag
-> >> Reported-by: kbuild test robot <lkp@intel.com>
-> >>
-> >> All warnings (new ones prefixed by >>):
-> > < snip >
-> >>    drivers/gpu/drm/i915/i915_vma.h:50: warning: cannot understand function prototype: 'struct i915_vma '
-> >>    drivers/gpu/drm/i915/i915_vma.h:1: warning: no structured comments found
-> >>    drivers/gpu/drm/i915/intel_guc_fwif.h:536: warning: cannot understand function prototype: 'struct guc_log_buffer_state '
-> >>    drivers/gpu/drm/i915/i915_trace.h:1: warning: no structured comments found
-> >>    drivers/gpu/drm/i915/i915_reg.h:156: warning: bad line:
-> >>    include/linux/interconnect.h:1: warning: no structured comments found
-> >>>> include/kunit/kunit-stream.h:58: warning: Function parameter or member '2' not described in '__printf'
-> >
-> > This looks like a bug in the kernel-doc parser: __printf in this context is:
-> >
-> >> 8dcda743 Brendan Higgins 2019-05-01  56  void __printf(2, 3) kunit_stream_add(struct kunit_stream *this,
-> >> 8dcda743 Brendan Higgins 2019-05-01  57                                      const char *fmt, ...);
-> >
-> > which is an attribute to tell the compiler that this is a printf style
-> > function with a printf style format string; it doesn't make sense to
-> > describe it's parameters.
->
-> Yes.  I'm a little surprised that this has never come up before, but in my
-> quick examination, it seems that most people put the __printf() attribute
-> in a header file but not in the .c implementation file, then they document
-> the function in the .c file, not in the header file, so it hasn't been needed.
->
-> Ignoring __printf() could be added to scripts/kernel-doc.  I added
-> kernel-doc notation to <linux/kernel.h> panic() and then tested it with
-> the patch below.  ItWorksForMe.  :)
->
->
-> >>    include/kunit/kunit-stream.h:58: warning: Function parameter or member '3' not described in '__printf'
-> >>    include/kunit/kunit-stream.h:58: warning: Excess function parameter 'this' description in '__printf'
-> >>    include/kunit/kunit-stream.h:58: warning: Excess function parameter 'fmt' description in '__printf'
-> >>    include/linux/skbuff.h:897: warning: Function parameter or member 'dev_scratch' not described in 'sk_buff'
-> > < snip >
-> >>    fs/debugfs/file.c:439: WARNING: Inline literal start-string without end-string.
-> >>
-> >> vim +58 include/kunit/kunit-stream.h
-> >>
-> >> 8dcda743 Brendan Higgins 2019-05-01  48
-> >> 8dcda743 Brendan Higgins 2019-05-01  49  /**
-> >> 8dcda743 Brendan Higgins 2019-05-01  50   * kunit_stream_add(): adds the formatted input to the internal buffer.
-> >> 8dcda743 Brendan Higgins 2019-05-01  51   * @this: the stream being operated on.
-> >> 8dcda743 Brendan Higgins 2019-05-01  52   * @fmt: printf style format string to append to stream.
-> >> 8dcda743 Brendan Higgins 2019-05-01  53   *
-> >> 8dcda743 Brendan Higgins 2019-05-01  54   * Appends the formatted string, @fmt, to the internal buffer.
-> >> 8dcda743 Brendan Higgins 2019-05-01  55   */
-> >> 8dcda743 Brendan Higgins 2019-05-01  56  void __printf(2, 3) kunit_stream_add(struct kunit_stream *this,
-> >> 8dcda743 Brendan Higgins 2019-05-01  57                                      const char *fmt, ...);
-> >> 8dcda743 Brendan Higgins 2019-05-01 @58
-> >>
-> >> :::::: The code at line 58 was first introduced by commit
-> >> :::::: 8dcda743c31c1ffc0ac13f3d23f3dd1b85b545f8 kunit: test: add kunit_stream a std::stream like logger
-> >
-> > Thanks!
->
->
-> ---
-> From: Randy Dunlap <rdunlap@infradead.org>
->
-> Ignore __printf() function attributes just as other __attribute__
-> strings are ignored.
->
-> Fixes this kernel-doc warning message:
-> include/kunit/kunit-stream.h:58: warning: Function parameter or member '2' not described in '__printf'
->
-> Reported-by: kbuild test robot <lkp@intel.com>
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Brendan Higgins <brendanhiggins@google.com>
-> ---
+On 04-06-19, 11:17, Mauro Carvalho Chehab wrote:
+> There's an ascii artwork at Example 1 whose code-block is not properly
+> idented, causing those warnings.
+> 
+>     Documentation/driver-api/soundwire/locking.rst:50: WARNING: Inconsistent literal block quoting.
+>     Documentation/driver-api/soundwire/locking.rst:51: WARNING: Line block ends without a blank line.
+>     Documentation/driver-api/soundwire/locking.rst:55: WARNING: Inline substitution_reference start-string without end-string.
+>     Documentation/driver-api/soundwire/locking.rst:56: WARNING: Line block ends without a blank line.
 
-Thanks! I just tried out your patch and it looks like it works.
+Applied, thanks
 
-Tested-by: Brendan Higgins <brendanhiggins@google.com>
+-- 
+~Vinod
