@@ -2,86 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A7DCD359C6
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2019 11:41:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5AD12359F2
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2019 11:54:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727013AbfFEJlf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 5 Jun 2019 05:41:35 -0400
-Received: from mail-lf1-f54.google.com ([209.85.167.54]:33902 "EHLO
-        mail-lf1-f54.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726690AbfFEJlf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 5 Jun 2019 05:41:35 -0400
-Received: by mail-lf1-f54.google.com with SMTP id y198so8095114lfa.1
-        for <linux-doc@vger.kernel.org>; Wed, 05 Jun 2019 02:41:34 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=mD5POnGi96vhsSTDzK5VPlMWzvJ6ZNYJN2YLUROjSiE=;
-        b=sqBLv0fFsjC/BFzhDj61AUu2nE6JFRpFp0/9pZEEYcTCYnLLMEVtlt4I337eYYoWCC
-         wRuwPxv/D3OPI17g+/UnyrRNY7BqOEGCPIKUdT2PWPM9woSovo9rccsHsSPFvHw9EbEt
-         9xpKmJKcxliVbKAFfuv8TNM4xbZ7JESbz3Bw9E5KIMX7X/NozM01FRMQh/hu9BryxruX
-         3JXQFQaXSm3tDocca8yG5m/D1zrsvdTeICbULOlAazseTfrNhlWD6E2SWbipQ+L0aokS
-         WhCjgFjhedTekNiKKK+//B/Qj0CUBCJ3+gqJwRoyLwMrj8NqVBKVnwuAGIsPerrWNCF5
-         msKQ==
-X-Gm-Message-State: APjAAAVjAIB/LxS/LWF/HGXjtxIQZ3DpI/AZ/WTjYnuHqEu3BoyZuMkD
-        Ft9R5EjJP/lwWFV+KyuPGAuxU+t8Zr8qY74h/xHQg83pfeQ=
-X-Google-Smtp-Source: APXvYqzwcglkITd7H0Ft0gMprdTFjTSYUv+hAGVBAfXR4UQk7GiuIytvLKV7ZVoazrmJaPI65LZkXlelTZSIlO32llE=
-X-Received: by 2002:ac2:46ef:: with SMTP id q15mr19765640lfo.63.1559727693337;
- Wed, 05 Jun 2019 02:41:33 -0700 (PDT)
+        id S1727120AbfFEJyA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 5 Jun 2019 05:54:00 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:60524 "EHLO mx1.redhat.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726690AbfFEJyA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 5 Jun 2019 05:54:00 -0400
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mx1.redhat.com (Postfix) with ESMTPS id 4A76F85360;
+        Wed,  5 Jun 2019 09:54:00 +0000 (UTC)
+Received: from warthog.procyon.org.uk (ovpn-120-173.rdu2.redhat.com [10.10.120.173])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id DA7832C8CA;
+        Wed,  5 Jun 2019 09:53:56 +0000 (UTC)
+Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
+        Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
+        Kingdom.
+        Registered in England and Wales under Company Registration No. 3798903
+From:   David Howells <dhowells@redhat.com>
+In-Reply-To: <21350864823e07cc951e1dc7f0601baa09920ac4.1559656538.git.mchehab+samsung@kernel.org>
+References: <21350864823e07cc951e1dc7f0601baa09920ac4.1559656538.git.mchehab+samsung@kernel.org> <cover.1559656538.git.mchehab+samsung@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     dhowells@redhat.com,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        keyrings@vger.kernel.org
+Subject: Re: [PATCH v2 15/22] docs: security: core.rst: Fix several warnings
 MIME-Version: 1.0
-References: <1559212177-7072-1-git-send-email-bhsharma@redhat.com>
- <87v9xsnlu9.fsf@concordia.ellerman.id.au> <CACi5LpM9v1YC_6HhA-uKghawzkEu=TTPVkomMmv2i-LGi8X7+g@mail.gmail.com>
- <20190530081358.650930ad@lwn.net> <87ef4eodwf.fsf@concordia.ellerman.id.au>
-In-Reply-To: <87ef4eodwf.fsf@concordia.ellerman.id.au>
-From:   Bhupesh Sharma <bhsharma@redhat.com>
-Date:   Wed, 5 Jun 2019 15:11:20 +0530
-Message-ID: <CACi5LpMTSu0PuZhLDnQv_bFD42vFnX_LMQvse4ERPfFiquSriw@mail.gmail.com>
-Subject: Re: [PATCH] Documentation/stackprotector: powerpc supports stack protector
-To:     Michael Ellerman <mpe@ellerman.id.au>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linuxppc-dev@lists.ozlabs.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Bhupesh SHARMA <bhupesh.linux@gmail.com>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset="us-ascii"
+Content-ID: <26616.1559728436.1@warthog.procyon.org.uk>
+Date:   Wed, 05 Jun 2019 10:53:56 +0100
+Message-ID: <26617.1559728436@warthog.procyon.org.uk>
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.25]); Wed, 05 Jun 2019 09:54:00 +0000 (UTC)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Jonathan,
+Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
 
-On Fri, May 31, 2019 at 8:44 PM Michael Ellerman <mpe@ellerman.id.au> wrote:
->
-> Jonathan Corbet <corbet@lwn.net> writes:
-> > On Thu, 30 May 2019 18:37:46 +0530
-> > Bhupesh Sharma <bhsharma@redhat.com> wrote:
-> >
-> >> > This should probably go via the documentation tree?
-> >> >
-> >> > Acked-by: Michael Ellerman <mpe@ellerman.id.au>
-> >>
-> >> Thanks for the review Michael.
-> >> I am ok with this going through the documentation tree as well.
-> >
-> > Works for me too, but I don't seem to find the actual patch anywhere I
-> > look.  Can you send me a copy?
->
-> You can get it from lore:
->
->   https://lore.kernel.org/linuxppc-dev/1559212177-7072-1-git-send-email-bhsharma@redhat.com/raw
->
-> Or patchwork (automatically adds my ack):
->
->   https://patchwork.ozlabs.org/patch/1107706/mbox/
->
-> Or Bhupesh can send it to you :)
+> +  *  ``asym_eds_op`` and ``asym_verify_signature``::
+> +
+> +       int (*asym_eds_op)(struct kernel_pkey_params *params,
+> +			  const void *in, void *out);
+> +       int (*asym_verify_signature)(struct kernel_pkey_params *params,
+> +				    const void *in, const void *in2);
 
-Please let me know if I should send out the patch again, this time
-Cc'ing you and the doc-list.
+That's redundant and shouldn't be necessary.
 
-Thanks,
-Bhupesh
+David
