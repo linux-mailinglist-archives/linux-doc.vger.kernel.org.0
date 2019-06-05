@@ -2,58 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5AD12359F2
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2019 11:54:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 59E60359F0
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Jun 2019 11:53:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727120AbfFEJyA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 5 Jun 2019 05:54:00 -0400
-Received: from mx1.redhat.com ([209.132.183.28]:60524 "EHLO mx1.redhat.com"
+        id S1727081AbfFEJx6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 5 Jun 2019 05:53:58 -0400
+Received: from mga07.intel.com ([134.134.136.100]:10368 "EHLO mga07.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726690AbfFEJyA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 5 Jun 2019 05:54:00 -0400
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mx1.redhat.com (Postfix) with ESMTPS id 4A76F85360;
-        Wed,  5 Jun 2019 09:54:00 +0000 (UTC)
-Received: from warthog.procyon.org.uk (ovpn-120-173.rdu2.redhat.com [10.10.120.173])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id DA7832C8CA;
-        Wed,  5 Jun 2019 09:53:56 +0000 (UTC)
-Organization: Red Hat UK Ltd. Registered Address: Red Hat UK Ltd, Amberley
-        Place, 107-111 Peascod Street, Windsor, Berkshire, SI4 1TE, United
-        Kingdom.
-        Registered in England and Wales under Company Registration No. 3798903
-From:   David Howells <dhowells@redhat.com>
-In-Reply-To: <21350864823e07cc951e1dc7f0601baa09920ac4.1559656538.git.mchehab+samsung@kernel.org>
-References: <21350864823e07cc951e1dc7f0601baa09920ac4.1559656538.git.mchehab+samsung@kernel.org> <cover.1559656538.git.mchehab+samsung@kernel.org>
-To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Cc:     dhowells@redhat.com,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        keyrings@vger.kernel.org
-Subject: Re: [PATCH v2 15/22] docs: security: core.rst: Fix several warnings
+        id S1726690AbfFEJx6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 5 Jun 2019 05:53:58 -0400
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 05 Jun 2019 02:53:57 -0700
+X-ExtLoop1: 1
+Received: from jnikula-mobl3.fi.intel.com (HELO localhost) ([10.237.66.150])
+  by fmsmga001.fm.intel.com with ESMTP; 05 Jun 2019 02:53:53 -0700
+From:   Jani Nikula <jani.nikula@intel.com>
+To:     intel-gfx@lists.freedesktop.org
+Cc:     linux-doc@vger.kernel.org, jani.nikula@intel.com,
+        Chris Wilson <chris@chris-wilson.co.uk>,
+        Mika Kuoppala <mika.kuoppala@linux.intel.com>
+Subject: [PATCH 1/2] Documentation/i915: Fix kernel-doc references to moved gem files
+Date:   Wed,  5 Jun 2019 12:56:56 +0300
+Message-Id: <20190605095657.23601-1-jani.nikula@intel.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <26616.1559728436.1@warthog.procyon.org.uk>
-Date:   Wed, 05 Jun 2019 10:53:56 +0100
-Message-ID: <26617.1559728436@warthog.procyon.org.uk>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.25]); Wed, 05 Jun 2019 09:54:00 +0000 (UTC)
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
+The error messages could be more descriptive, but fix these caused by
+file moves:
 
-> +  *  ``asym_eds_op`` and ``asym_verify_signature``::
-> +
-> +       int (*asym_eds_op)(struct kernel_pkey_params *params,
-> +			  const void *in, void *out);
-> +       int (*asym_verify_signature)(struct kernel_pkey_params *params,
-> +				    const void *in, const void *in2);
+WARNING: kernel-doc './scripts/kernel-doc -rst -enable-lineno -internal
+    ./drivers/gpu/drm/i915/i915_gem_shrinker.c' failed with return code 2
+WARNING: kernel-doc './scripts/kernel-doc -rst -enable-lineno -function
+    User command execution ./drivers/gpu/drm/i915/i915_gem_execbuffer.c'
+    failed with return code 1
+WARNING: kernel-doc './scripts/kernel-doc -rst -enable-lineno -internal
+    ./drivers/gpu/drm/i915/i915_gem_tiling.c' failed with return code 2
+WARNING: kernel-doc './scripts/kernel-doc -rst -enable-lineno -function
+    buffer object tiling ./drivers/gpu/drm/i915/i915_gem_tiling.c'
+    failed with return code 1
 
-That's redundant and shouldn't be necessary.
+Fixes: 10be98a77c55 ("drm/i915: Move more GEM objects under gem/")
+Cc: Chris Wilson <chris@chris-wilson.co.uk>
+Cc: Mika Kuoppala <mika.kuoppala@linux.intel.com>
+Signed-off-by: Jani Nikula <jani.nikula@intel.com>
+---
+ Documentation/gpu/i915.rst | 11 ++++-------
+ 1 file changed, 4 insertions(+), 7 deletions(-)
 
-David
+diff --git a/Documentation/gpu/i915.rst b/Documentation/gpu/i915.rst
+index 6c75380b2928..f98ee95da90f 100644
+--- a/Documentation/gpu/i915.rst
++++ b/Documentation/gpu/i915.rst
+@@ -349,7 +349,7 @@ of buffer object caches. Shrinking is used to make main memory
+ available. Note that this is mostly orthogonal to evicting buffer
+ objects, which has the goal to make space in gpu virtual address spaces.
+ 
+-.. kernel-doc:: drivers/gpu/drm/i915/i915_gem_shrinker.c
++.. kernel-doc:: drivers/gpu/drm/i915/gem/i915_gem_shrinker.c
+    :internal:
+ 
+ Batchbuffer Parsing
+@@ -373,7 +373,7 @@ Batchbuffer Pools
+ User Batchbuffer Execution
+ --------------------------
+ 
+-.. kernel-doc:: drivers/gpu/drm/i915/i915_gem_execbuffer.c
++.. kernel-doc:: drivers/gpu/drm/i915/gem/i915_gem_execbuffer.c
+    :doc: User command execution
+ 
+ Logical Rings, Logical Ring Contexts and Execlists
+@@ -382,9 +382,6 @@ Logical Rings, Logical Ring Contexts and Execlists
+ .. kernel-doc:: drivers/gpu/drm/i915/gt/intel_lrc.c
+    :doc: Logical Rings, Logical Ring Contexts and Execlists
+ 
+-.. kernel-doc:: drivers/gpu/drm/i915/gt/intel_lrc.c
+-   :internal:
+-
+ Global GTT views
+ ----------------
+ 
+@@ -415,10 +412,10 @@ Hardware Tiling and Swizzling Details
+ Object Tiling IOCTLs
+ --------------------
+ 
+-.. kernel-doc:: drivers/gpu/drm/i915/i915_gem_tiling.c
++.. kernel-doc:: drivers/gpu/drm/i915/gem/i915_gem_tiling.c
+    :internal:
+ 
+-.. kernel-doc:: drivers/gpu/drm/i915/i915_gem_tiling.c
++.. kernel-doc:: drivers/gpu/drm/i915/gem/i915_gem_tiling.c
+    :doc: buffer object tiling
+ 
+ WOPCM
+-- 
+2.20.1
+
