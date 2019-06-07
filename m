@@ -2,94 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0A6A3383F4
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2019 08:00:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C288838506
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Jun 2019 09:28:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726066AbfFGGAB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 7 Jun 2019 02:00:01 -0400
-Received: from mail-qt1-f195.google.com ([209.85.160.195]:37295 "EHLO
-        mail-qt1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726010AbfFGGAB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Jun 2019 02:00:01 -0400
-Received: by mail-qt1-f195.google.com with SMTP id y57so996711qtk.4;
-        Thu, 06 Jun 2019 23:00:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6RGX8KhKka8Pl3+vesfNXkUWjRHHCXob324mKOkGT88=;
-        b=bUZCsqP/Sagr0KrlVefrP0TctKD/wlxJRaimMtzcra7i7QXt4srnpJoAQR/xeT1Zw+
-         LtQXFxhCKA6IDuVG8n6XK+XsF9NbR+NSVR26URuDLVYzhWWB1ewqxPSuVQr31xnB1rUI
-         /YP+Abij3eTBFdvliLfQMtfSyimhJE4++fUxGonWODAPE5QSzfGs01uieCU89UUxyrGk
-         XdShapx4V/x6tExDCaK77VF2CfRRuCDJ+uku4IziMMjs5N61uel4XrzAO4kDxl3es+IY
-         wsjzFjvfzIQhLGjFxQJeFdJdBXt+eJwB6/kgsrMz5xyVHz3F6vZJVAEdD+4wvOHO611t
-         RUzw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=6RGX8KhKka8Pl3+vesfNXkUWjRHHCXob324mKOkGT88=;
-        b=HlsPyeUQHcSGSC7Mei9HRvRIpXJuKUEP+hQ6KSFVoJ02JLzuC0y0m/B1gLLQMpdr2T
-         QRZh5VKIMX4JCVoibXhs7kE7RfdSGelirOhvfVa09h9lsL9OCvsfVdCyLv1EOTvXOsX4
-         QAbWNL6nbIZzGCUe7DIclSGJwUUCQxloOEM3FC+oEgkjjrMuaXQu54gnlGw/N7d2Rl0F
-         DSLB7hatkys4ZEA/Xgo9XY6NctazQNe7QM8jOnV9HmeiHgc5u8H9RTOEGOd3Rx/vJX7h
-         /3ix70YTWpgkt1AwtWUQ5KJ+OFPshGaynaG/UzawFQrTHOPZFc1NjMEEACMGDabPI8et
-         RxHg==
-X-Gm-Message-State: APjAAAU2ow8tQy+ge+4jKmHFDLMbqEaCelLAwzEjjgRls8ctb+n0/Kui
-        +XcLNtoao0evotk5O9I3IAdyPUepSgw=
-X-Google-Smtp-Source: APXvYqy8QDCpgyjSYGbTWJE4qnK8J6n3snKXl+ZrIb/6YBsg25FMqGwRbBXgM7nSbyXjj0bb/WiANA==
-X-Received: by 2002:ac8:38c5:: with SMTP id g5mr45162827qtc.299.1559887199834;
-        Thu, 06 Jun 2019 22:59:59 -0700 (PDT)
-Received: from localhost.localdomain (pool-108-45-70-22.washdc.fios.verizon.net. [108.45.70.22])
-        by smtp.gmail.com with ESMTPSA id u26sm775134qtc.33.2019.06.06.22.59.59
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 06 Jun 2019 22:59:59 -0700 (PDT)
-From:   Alex <awaitingvictory@gmail.com>
-To:     paulmck@linux.vnet.ibm.com
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        trivial@kernel.org, Alex <awaitingvictory@gmail.com>,
-        Aaron A Montoya <aaron.a.montoya@gmail.com>
-Subject: [PATCH] linux: README: reduced README size by 1 byte by removing unnecessary space character
-Date:   Fri,  7 Jun 2019 01:59:18 -0400
-Message-Id: <20190607055917.17040-1-awaitingvictory@gmail.com>
-X-Mailer: git-send-email 2.21.0.windows.1
+        id S1727036AbfFGH27 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 7 Jun 2019 03:28:59 -0400
+Received: from smtp1.iitb.ac.in ([103.21.127.13]:60568 "EHLO smtp1.iitb.ac.in"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726116AbfFGH26 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 7 Jun 2019 03:28:58 -0400
+X-Greylist: delayed 3061 seconds by postgrey-1.27 at vger.kernel.org; Fri, 07 Jun 2019 03:28:57 EDT
+Received: from ldns2.iitb.ac.in (ldns2.iitb.ac.in [10.200.12.2])
+        by smtp1.iitb.ac.in (Postfix) with SMTP id 158D5103DF53
+        for <linux-doc@vger.kernel.org>; Fri,  7 Jun 2019 12:01:54 +0530 (IST)
+Received: (qmail 29995 invoked by uid 510); 7 Jun 2019 12:01:34 +0530
+X-Qmail-Scanner-Diagnostics: from 10.200.1.25 by ldns2 (envelope-from <rws@aero.iitb.ac.in>, uid 501) with qmail-scanner-2.11
+ spamassassin: 3.4.1. mhr: 1.0. {clamdscan: 0.100.0/25472} 
+ Clear:RC:1(10.200.1.25):SA:0(1.5/7.0):. Processed in 3.224183 secs; 07 Jun 2019 12:01:34 +0530
+X-Spam-Checker-Version: SpamAssassin 3.4.1 (2015-04-28) on ldns2.iitb.ac.in
+X-Spam-Level: *
+X-Spam-Status: No, score=1.5 required=7.0 tests=BAYES_50,IITB_ORIG,
+        MISSING_HEADERS,PROPER_IITB_MSGID autolearn=disabled version=3.4.1
+X-Spam-Pyzor: Reported 1 times.
+X-Envelope-From: rws@aero.iitb.ac.in
+X-Qmail-Scanner-Mime-Attachments: |
+X-Qmail-Scanner-Zip-Files: |
+Received: from unknown (HELO ldns2.iitb.ac.in) (10.200.1.25)
+  by ldns2.iitb.ac.in with SMTP; 7 Jun 2019 12:01:31 +0530
+Received: from vayu.aero.iitb.ac.in (vayu.aero.iitb.ac.in [10.101.1.1])
+        by ldns2.iitb.ac.in (Postfix) with ESMTP id CB958341965;
+        Fri,  7 Jun 2019 12:01:17 +0530 (IST)
+Received: from localhost (localhost [127.0.0.1])
+        by vayu.aero.iitb.ac.in (Postfix) with ESMTP id 9509A8902E52F;
+        Fri,  7 Jun 2019 12:01:17 +0530 (IST)
+Received: from vayu.aero.iitb.ac.in ([127.0.0.1])
+        by localhost (vayu.aero.iitb.ac.in [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id 3VnK-_U7b-vs; Fri,  7 Jun 2019 12:01:17 +0530 (IST)
+Received: from localhost (localhost [127.0.0.1])
+        by vayu.aero.iitb.ac.in (Postfix) with ESMTP id 5DAB88902E54D;
+        Fri,  7 Jun 2019 12:01:14 +0530 (IST)
+X-Virus-Scanned: amavisd-new at aero.iitb.ac.in
+Received: from vayu.aero.iitb.ac.in ([127.0.0.1])
+        by localhost (vayu.aero.iitb.ac.in [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id TgJiwoMo_EHZ; Fri,  7 Jun 2019 12:01:14 +0530 (IST)
+Received: from vayu.aero.iitb.ac.in (vayu.aero.iitb.ac.in [10.101.1.1])
+        by vayu.aero.iitb.ac.in (Postfix) with ESMTP id 0EEE684310111;
+        Fri,  7 Jun 2019 12:01:10 +0530 (IST)
+Date:   Fri, 7 Jun 2019 12:01:09 +0530 (IST)
+From:   Martins Henry <rws@aero.iitb.ac.in>
+Message-ID: <412557711.60336.1559889069980.JavaMail.zimbra@aero.iitb.ac.in>
+Subject: Thanks and I wait for your answer
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.101.1.5]
+X-Mailer: Zimbra 8.8.12_GA_3803 (ZimbraWebClient - FF11 (Win)/8.8.12_GA_3794)
+Thread-Index: SsslhYkcLNFU69da/wYft5cO9/ZYnA==
+Thread-Topic: Thanks and I wait for your answer
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Aaron A Montoya <aaron.a.montoya@gmail.com>
+Hello,
 
-On line 9 of the README there is an unnecessary extra space character, 
-after the period, that adds 1 byte of size to the file. By removing the 
-unnecessary space, Linux downloads will be 1 byte smaller and therefor be 
-faster to download and take up less space on a user's system, all while 
-correcting a sentence structure issue. This change is one of the few 
-optimizations with practically no downsides, besides taking time out 
-of the hardworking Linux maintainers day to implement the change.
-Remove extra space after the period on line 9 of the README.
-Commit 0619770a02a30834 ("Removed unnecessary space character from README")
+I am Martin Henry, An American Citizen; I am the personal secretary to
+Mr. Donald Railton, the controller of a Lottery Company. Please I am
+having big problem now, I have a 6yrs old daughter who has leukemia, a
+disease of the blood, and she needs a bone marrow transplant or she
+will die.
 
-Signed-off-by: Aaron A Montoya <aaron.a.montoya@gmail.com>
----
- README | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Please I am only asking for your help and you will benefit from it
+also. As an insider with Lottery Firm, working as the personal
+secretary to the controller, I want you to send me your name to play,
+I have some numbers that are going to win, stored in his secret data
+system in the office. The Lottery is an online entry with credit card
+anywhere with a name and address. All I want you to do is to send your
+name to play it and I will send confirmation to you.
 
-diff --git a/README b/README
-index 669ac7c32292..0b05d700637f 100644
---- a/README
-+++ b/README
-@@ -6,7 +6,7 @@ be rendered in a number of formats, like HTML and PDF. Please read
- Documentation/admin-guide/README.rst first.
- 
- In order to build the documentation, use ``make htmldocs`` or
--``make pdfdocs``.  The formatted documentation can also be read online at:
-+``make pdfdocs``. The formatted documentation can also be read online at:
- 
-     https://www.kernel.org/doc/html/latest/
- 
--- 
-2.21.0.windows.1
+I will play with my card on your name and the Prize will be shared
+equally between us. Immediately the results are released they will
+contact you for payment as the oversea winner. The lotto can be played
+with 9.00 dollars, or 50 dollars but the prize will be Millions.
+Remember that I am playing on your name with my card; I just want to
+front you for this, because I need this money to save the life of my
+little daughter.
 
+Thanks and I wait for your answer
+Martin Henry.
