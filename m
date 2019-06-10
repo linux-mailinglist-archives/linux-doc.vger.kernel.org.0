@@ -2,123 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C78E3AD3D
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2019 04:51:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 24E803ADC8
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2019 05:53:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387521AbfFJCvw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 9 Jun 2019 22:51:52 -0400
-Received: from inva020.nxp.com ([92.121.34.13]:45416 "EHLO inva020.nxp.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2387490AbfFJCvv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 9 Jun 2019 22:51:51 -0400
-Received: from inva020.nxp.com (localhost [127.0.0.1])
-        by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 6A0951A074A;
-        Mon, 10 Jun 2019 04:51:49 +0200 (CEST)
-Received: from invc005.ap-rdc01.nxp.com (invc005.ap-rdc01.nxp.com [165.114.16.14])
-        by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 6833D1A0732;
-        Mon, 10 Jun 2019 04:51:34 +0200 (CEST)
-Received: from localhost.localdomain (mega.ap.freescale.net [10.192.208.232])
-        by invc005.ap-rdc01.nxp.com (Postfix) with ESMTP id 8F70C40310;
-        Mon, 10 Jun 2019 10:51:18 +0800 (SGT)
-From:   Anson.Huang@nxp.com
-To:     robh+dt@kernel.org, mark.rutland@arm.com, corbet@lwn.net,
-        shawnguo@kernel.org, s.hauer@pengutronix.de, kernel@pengutronix.de,
-        festevam@gmail.com, catalin.marinas@arm.com, will.deacon@arm.com,
-        rui.zhang@intel.com, edubezval@gmail.com,
-        daniel.lezcano@linaro.org, aisheng.dong@nxp.com,
-        ulf.hansson@linaro.org, peng.fan@nxp.com,
-        mchehab+samsung@kernel.org, linux@roeck-us.net,
-        daniel.baluta@nxp.com, maxime.ripard@bootlin.com, olof@lixom.net,
-        jagan@amarulasolutions.com, horms+renesas@verge.net.au,
-        leonard.crestez@nxp.com, bjorn.andersson@linaro.org,
-        dinguyen@kernel.org, enric.balletbo@collabora.com,
-        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-pm@vger.kernel.org
-Cc:     Linux-imx@nxp.com
-Subject: [PATCH V14 5/5] arm64: dts: imx: add i.MX8QXP thermal support
-Date:   Mon, 10 Jun 2019 10:52:54 +0800
-Message-Id: <20190610025254.23940-5-Anson.Huang@nxp.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190610025254.23940-1-Anson.Huang@nxp.com>
-References: <20190610025254.23940-1-Anson.Huang@nxp.com>
-X-Virus-Scanned: ClamAV using ClamSMTP
+        id S2387625AbfFJDwu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 9 Jun 2019 23:52:50 -0400
+Received: from out30-45.freemail.mail.aliyun.com ([115.124.30.45]:50357 "EHLO
+        out30-45.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S2387475AbfFJDwu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 9 Jun 2019 23:52:50 -0400
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R131e4;CH=green;DM=||false|;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04395;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=6;SR=0;TI=SMTPD_---0TToRiUT_1560138766;
+Received: from Alexs-MacBook-Pro.local(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0TToRiUT_1560138766)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Mon, 10 Jun 2019 11:52:47 +0800
+Subject: Re: [PATCH v3 08/20] docs: zh_CN: avoid duplicate citation references
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Harry Wei <harryxiyou@gmail.com>
+References: <ff457774d46d96e8fe56b45409aba39d87a8672a.1559933665.git.mchehab+samsung@kernel.org>
+ <3c26852c46db3a56cb5f42765db0cc5c64334986.1559933665.git.mchehab+samsung@kernel.org>
+From:   Alex Shi <alex.shi@linux.alibaba.com>
+Message-ID: <a2c607e2-61cf-1888-7186-ae2ae84670de@linux.alibaba.com>
+Date:   Mon, 10 Jun 2019 11:52:46 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
+ Gecko/20100101 Thunderbird/60.6.1
+MIME-Version: 1.0
+In-Reply-To: <3c26852c46db3a56cb5f42765db0cc5c64334986.1559933665.git.mchehab+samsung@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Anson Huang <Anson.Huang@nxp.com>
+Acked!
 
-Add i.MX8QXP CPU thermal zone support.
+Thanks!
+Alex
 
-Signed-off-by: Anson Huang <Anson.Huang@nxp.com>
----
-No change.
----
- arch/arm64/boot/dts/freescale/imx8qxp.dtsi | 37 ++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
-
-diff --git a/arch/arm64/boot/dts/freescale/imx8qxp.dtsi b/arch/arm64/boot/dts/freescale/imx8qxp.dtsi
-index b2cb818..12044be 100644
---- a/arch/arm64/boot/dts/freescale/imx8qxp.dtsi
-+++ b/arch/arm64/boot/dts/freescale/imx8qxp.dtsi
-@@ -10,6 +10,7 @@
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/interrupt-controller/arm-gic.h>
- #include <dt-bindings/pinctrl/pads-imx8qxp.h>
-+#include <dt-bindings/thermal/thermal.h>
- 
- / {
- 	interrupt-parent = <&gic>;
-@@ -168,6 +169,11 @@
- 			compatible = "fsl,imx8qxp-sc-wdt", "fsl,imx-sc-wdt";
- 			timeout-sec = <60>;
- 		};
-+
-+		tsens: thermal-sensor {
-+			compatible = "fsl,imx8qxp-sc-thermal", "fsl,imx-sc-thermal";
-+			#thermal-sensor-cells = <1>;
-+		};
- 	};
- 
- 	timer {
-@@ -536,4 +542,35 @@
- 			power-domains = <&pd IMX_SC_R_GPIO_7>;
- 		};
- 	};
-+
-+	thermal_zones: thermal-zones {
-+		cpu-thermal0 {
-+			polling-delay-passive = <250>;
-+			polling-delay = <2000>;
-+			thermal-sensors = <&tsens IMX_SC_R_SYSTEM>;
-+			trips {
-+				cpu_alert0: trip0 {
-+					temperature = <107000>;
-+					hysteresis = <2000>;
-+					type = "passive";
-+				};
-+				cpu_crit0: trip1 {
-+					temperature = <127000>;
-+					hysteresis = <2000>;
-+					type = "critical";
-+				};
-+			};
-+			cooling-maps {
-+				map0 {
-+					trip = <&cpu_alert0>;
-+					cooling-device =
-+						<&A35_0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&A35_1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&A35_2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&A35_3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
-+
-+				};
-+			};
-+		};
-+	};
- };
--- 
-2.7.4
-
+On 2019/6/8 2:54 上午, Mauro Carvalho Chehab wrote:
+>     Documentation/process/programming-language.rst:44: WARNING: duplicate citation n2049, other instance in     Documentation/translations/zh_CN/process/programming-language.rst
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
