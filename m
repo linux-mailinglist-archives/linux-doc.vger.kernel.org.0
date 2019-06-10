@@ -2,133 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 91F1C3BE27
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2019 23:13:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7EE633B9A2
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2019 18:37:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389636AbfFJVNR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 10 Jun 2019 17:13:17 -0400
-Received: from mx.kolabnow.com ([95.128.36.41]:9204 "EHLO mx.kolabnow.com"
+        id S2387415AbfFJQhM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 10 Jun 2019 12:37:12 -0400
+Received: from mga07.intel.com ([134.134.136.100]:7055 "EHLO mga07.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726663AbfFJVNR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 10 Jun 2019 17:13:17 -0400
-Received: from localhost (unknown [127.0.0.1])
-        by ext-mx-out002.mykolab.com (Postfix) with ESMTP id B4F99844;
-        Mon, 10 Jun 2019 23:13:14 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
-        content-type:content-type:content-transfer-encoding:mime-version
-        :references:in-reply-to:message-id:date:date:subject:subject
-        :from:from:received:received:received; s=dkim20160331; t=
-        1560201194; x=1562015595; bh=ARkpqDw6hh5K+0monDK5QS19Np6XwBxbJQx
-        bed0bnp0=; b=DNscEI5WOdOU5DBDL0y/wOTaHbSZ35U80+dkOcNWgqOc8N5oV+e
-        weGSxcGuvJ1g0S0GiDNMxDmoVtN/WSHgTkoWvhDzfzPLnBDey1CsxJH7h1jl7p+O
-        aMnUrztGihiusjsxMNuh47zI6p/1+/O2+o3yl5TPHns45w6lyVU46PeElDVuLXWF
-        zRVqvI/tHLR4Gkg4pli4+GHg/gkfMQv6LsWwBRV2dbPCGIPkwXlCqG+Idaa+oKoU
-        z7gTrCPRSjF0CTvUs7P2Tm5iPtlp9LVL6gDUKmSVE54pSH22NPuZYUtQcOKrx7Ga
-        LEwHOd7+ZTRnVOKKfK7N6c/982FTmjigQOyvFGt4GSFmTE2NTUBj4zQddDOASoS6
-        U3JMgL7StJuqdgEwSxb4sg2TySbwgtRi8Rd6rJTXonRXdfKaly05yKKYpp3qKh3r
-        6ggayiLNtfYY7ygRZZH624JRVeRO5+eULJM5psD1SgLCYAdR3sHO7BDSDH0zKcQf
-        4grQrVlHzupIxFnoEwFhRrzWUMdsIuSbDeRMMGunW5SyZ+ikMuqyqq8WsGLcOdMs
-        5Lxa5au4jfSpcO7A0RzMlD0Ehz034xV7/w4ewF4M6ysy0GpiaMi2PybK9M1XsxRG
-        mpjIi4RgMNGAu489QCg37P1XWOdoW3ivw7oniGbgnk8H3i2CzN0RKmGE=
-X-Virus-Scanned: amavisd-new at mykolab.com
-X-Spam-Flag: NO
-X-Spam-Score: -1.9
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
-        tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
-Received: from mx.kolabnow.com ([127.0.0.1])
-        by localhost (ext-mx-out002.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id M5isNbMaxBm5; Mon, 10 Jun 2019 23:13:14 +0200 (CEST)
-Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
-        by ext-mx-out002.mykolab.com (Postfix) with ESMTPS id 346D111C;
-        Mon, 10 Jun 2019 23:13:14 +0200 (CEST)
-Received: from ext-subm003.mykolab.com (unknown [10.9.6.3])
-        by int-mx003.mykolab.com (Postfix) with ESMTPS id 1A3F82023;
-        Mon, 10 Jun 2019 18:26:39 +0200 (CEST)
-From:   Federico Vaga <federico.vaga@vaga.pv.it>
-To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        id S2387407AbfFJQhM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 10 Jun 2019 12:37:12 -0400
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 10 Jun 2019 09:37:11 -0700
+X-ExtLoop1: 1
+Received: from yyu32-desk1.sc.intel.com ([143.183.136.147])
+  by fmsmga007.fm.intel.com with ESMTP; 10 Jun 2019 09:37:10 -0700
+Message-ID: <94b9c55b3b874825fda485af40ab2a6bc3dad171.camel@intel.com>
+Subject: Re: [PATCH v7 22/27] binfmt_elf: Extract .note.gnu.property from an
+ ELF file
+From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
+To:     Dave Martin <Dave.Martin@arm.com>
+Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
         Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Will Deacon <will.deacon@arm.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <maxime.ripard@bootlin.com>,
-        Sean Paul <sean@poorly.run>, David Airlie <airlied@linux.ie>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH v3 16/33] docs: locking: convert docs to ReST and rename to *.rst
-Date:   Mon, 10 Jun 2019 18:26:37 +0200
-Message-ID: <2479388.eidelHUoWk@harkonnen>
-In-Reply-To: <d5a915447d63fce96cbf463a512cce89423776c3.1560045490.git.mchehab+samsung@kernel.org>
-References: <cover.1560045490.git.mchehab+samsung@kernel.org> <d5a915447d63fce96cbf463a512cce89423776c3.1560045490.git.mchehab+samsung@kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>
+Date:   Mon, 10 Jun 2019 09:29:04 -0700
+In-Reply-To: <20190607180115.GJ28398@e103592.cambridge.arm.com>
+References: <20190606200646.3951-1-yu-cheng.yu@intel.com>
+         <20190606200646.3951-23-yu-cheng.yu@intel.com>
+         <20190607180115.GJ28398@e103592.cambridge.arm.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.1-2 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In data Sunday, June 9, 2019 4:27:06 AM CEST, Mauro Carvalho Chehab ha 
-scritto:
-> Convert the locking documents to ReST and add them to the
-> kernel development book where it belongs.
+On Fri, 2019-06-07 at 19:01 +0100, Dave Martin wrote:
+> On Thu, Jun 06, 2019 at 01:06:41PM -0700, Yu-cheng Yu wrote:
+> > An ELF file's .note.gnu.property indicates features the executable file
+> > can support.  For example, the property GNU_PROPERTY_X86_FEATURE_1_AND
+> > indicates the file supports GNU_PROPERTY_X86_FEATURE_1_IBT and/or
+> > GNU_PROPERTY_X86_FEATURE_1_SHSTK.
+> > 
+> > With this patch, if an arch needs to setup features from ELF properties,
+> > it needs CONFIG_ARCH_USE_GNU_PROPERTY to be set, and a specific
+> > arch_setup_property().
+> > 
+> > For example, for X86_64:
+> > 
+> > int arch_setup_property(void *ehdr, void *phdr, struct file *f, bool inter)
+> > {
+> > 	int r;
+> > 	uint32_t property;
+> > 
+> > 	r = get_gnu_property(ehdr, phdr, f, GNU_PROPERTY_X86_FEATURE_1_AND,
+> > 			     &property);
+> > 	...
+> > }
 > 
-> Most of the stuff here is just to make Sphinx to properly
-> parse the text file, as they're already in good shape,
-> not requiring massive changes in order to be parsed.
+> Although this code works for the simple case, I have some concerns about
+> some aspects of the implementation here.  There appear to be some bounds
+> checking / buffer overrun issues, and the code seems quite complex.
 > 
-> The conversion is actually:
->   - add blank lines and identation in order to identify paragraphs;
->   - fix tables markups;
->   - add some lists markups;
->   - mark literal blocks;
->   - adjust title markups.
-> 
-> At its new index.rst, let's add a :orphan: while this is not linked to
-> the main index.rst file, in order to avoid build warnings.
-> 
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-> ---
->  Documentation/kernel-hacking/locking.rst      |   2 +-
->  Documentation/locking/index.rst               |  24 ++
->  ...{lockdep-design.txt => lockdep-design.rst} |  51 ++--
->  .../locking/{lockstat.txt => lockstat.rst}    | 221 ++++++++++--------
->  .../{locktorture.txt => locktorture.rst}      | 105 +++++----
->  .../{mutex-design.txt => mutex-design.rst}    |  26 ++-
->  ...t-mutex-design.txt => rt-mutex-design.rst} | 139 ++++++-----
->  .../locking/{rt-mutex.txt => rt-mutex.rst}    |  30 +--
->  .../locking/{spinlocks.txt => spinlocks.rst}  |  32 ++-
->  ...w-mutex-design.txt => ww-mutex-design.rst} |  82 ++++---
->  Documentation/pi-futex.txt                    |   2 +-
->  .../it_IT/kernel-hacking/locking.rst          |   2 +-
+> Maybe this patch tries too hard to be compatible with toolchains that do
+> silly things such as embedding huge notes in an executable, or mixing
+> NT_GNU_PROPERTY_TYPE_0 in a single PT_NOTE with a load of junk not
+> relevant to the loader.  I wonder whether Linux can dictate what
+> interpretation(s) of the ELF specs it is prepared to support, rather than
+> trying to support absolutely anything.
 
-Limited to translations/it_IT
+To me, looking at PT_GNU_PROPERTY and not trying to support anything is a
+logical choice.  And it breaks only a limited set of toolchains.
 
-Acked-by: Federico Vaga <federico.vaga@vaga.pv.it>
+I will simplify the parser and leave this patch as-is for anyone who wants to
+back-port.  Are there any objections or concerns?
 
->  drivers/gpu/drm/drm_modeset_lock.c            |   2 +-
->  include/linux/lockdep.h                       |   2 +-
->  include/linux/mutex.h                         |   2 +-
->  include/linux/rwsem.h                         |   2 +-
->  kernel/locking/mutex.c                        |   2 +-
->  kernel/locking/rtmutex.c                      |   2 +-
->  lib/Kconfig.debug                             |   4 +-
->  19 files changed, 428 insertions(+), 304 deletions(-)
->  create mode 100644 Documentation/locking/index.rst
->  rename Documentation/locking/{lockdep-design.txt => lockdep-design.rst}
-> (93%) rename Documentation/locking/{lockstat.txt => lockstat.rst} (41%)
-> rename Documentation/locking/{locktorture.txt => locktorture.rst} (57%)
-> rename Documentation/locking/{mutex-design.txt => mutex-design.rst} (94%)
-> rename Documentation/locking/{rt-mutex-design.txt => rt-mutex-design.rst}
-> (91%) rename Documentation/locking/{rt-mutex.txt => rt-mutex.rst} (71%)
-> rename Documentation/locking/{spinlocks.txt => spinlocks.rst} (89%) rename
-> Documentation/locking/{ww-mutex-design.txt => ww-mutex-design.rst} (93%)
-> 
-
-
-
-
-
+Yu-cheng
