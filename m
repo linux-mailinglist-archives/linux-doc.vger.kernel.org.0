@@ -2,34 +2,34 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 964913B951
-	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2019 18:24:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 91F1C3BE27
+	for <lists+linux-doc@lfdr.de>; Mon, 10 Jun 2019 23:13:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389293AbfFJQYR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 10 Jun 2019 12:24:17 -0400
-Received: from mx.kolabnow.com ([95.128.36.42]:48560 "EHLO mx.kolabnow.com"
+        id S2389636AbfFJVNR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 10 Jun 2019 17:13:17 -0400
+Received: from mx.kolabnow.com ([95.128.36.41]:9204 "EHLO mx.kolabnow.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2389927AbfFJQYR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 10 Jun 2019 12:24:17 -0400
+        id S1726663AbfFJVNR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 10 Jun 2019 17:13:17 -0400
 Received: from localhost (unknown [127.0.0.1])
-        by ext-mx-out003.mykolab.com (Postfix) with ESMTP id A05BC403C9;
-        Mon, 10 Jun 2019 18:24:14 +0200 (CEST)
+        by ext-mx-out002.mykolab.com (Postfix) with ESMTP id B4F99844;
+        Mon, 10 Jun 2019 23:13:14 +0200 (CEST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
         content-type:content-type:content-transfer-encoding:mime-version
         :references:in-reply-to:message-id:date:date:subject:subject
         :from:from:received:received:received; s=dkim20160331; t=
-        1560183854; x=1561998255; bh=4bpS8XQNGbDvLWL5Tu0rslp1K0w4sKNibrp
-        rpGYwGH4=; b=Lbfc/E8mnx4qr/xRVmvwpJNjreFxLBG1J9En/UscbACfH5ewC4o
-        fdM5vNL18CAajaJ3rwNnqKg5Pecm49ZPpbgDv0r0bFBXrMeE/eFFXPNCC66mE4tE
-        LYLpjzXakF4sFhYEt4OAuBsWaSYkdplWpf1PwVaouLYQt0/1/wV005H8ABcKd6+x
-        L7cinuwe6q2Hctbwv42ZlPY0qSJueKXegUniFnNieutN4CspU6qTaeNn6TGYSf35
-        BfblhDncQCJFkGpt7Kk92bBNvDpVwmQYsaH/sGO9ukCZYNMMfnKU/TyZkDa5iZuo
-        LPZlROLxBzlImuJrhW3J7+5KZA5Xd5uk3F1jzr8lTRX2EB7cJq4SzH2ANG/S/fE+
-        5ju2DrIRELuGL9TmsppNoNL0nF0/1rwrTVvI0EhnYkVNkBok/mXMm/2x9MZPuIhb
-        W0d5WXmGs1DQEOEqSkYE05tJEWA4Nu2/pukwymh1Kv7Ce9I44DMgVeqw03TdEVkw
-        T+JXxAUuO4uRM/+pwXANQa6p/DkJ0UoATw2v8Kb97t7+tP1J2nL4A7hRZgxVwCmk
-        I5wgnyTpg8whQpZ+jx+L2IrDjr0/zXhgZ52pgI+N74z17+8yWAmXnV7LsoiszXIn
-        ahEq2dSpCjh1nU5gSy5q7Xf9FtRBlHKzHghVvaEpnqo4VfnAshoMcebg=
+        1560201194; x=1562015595; bh=ARkpqDw6hh5K+0monDK5QS19Np6XwBxbJQx
+        bed0bnp0=; b=DNscEI5WOdOU5DBDL0y/wOTaHbSZ35U80+dkOcNWgqOc8N5oV+e
+        weGSxcGuvJ1g0S0GiDNMxDmoVtN/WSHgTkoWvhDzfzPLnBDey1CsxJH7h1jl7p+O
+        aMnUrztGihiusjsxMNuh47zI6p/1+/O2+o3yl5TPHns45w6lyVU46PeElDVuLXWF
+        zRVqvI/tHLR4Gkg4pli4+GHg/gkfMQv6LsWwBRV2dbPCGIPkwXlCqG+Idaa+oKoU
+        z7gTrCPRSjF0CTvUs7P2Tm5iPtlp9LVL6gDUKmSVE54pSH22NPuZYUtQcOKrx7Ga
+        LEwHOd7+ZTRnVOKKfK7N6c/982FTmjigQOyvFGt4GSFmTE2NTUBj4zQddDOASoS6
+        U3JMgL7StJuqdgEwSxb4sg2TySbwgtRi8Rd6rJTXonRXdfKaly05yKKYpp3qKh3r
+        6ggayiLNtfYY7ygRZZH624JRVeRO5+eULJM5psD1SgLCYAdR3sHO7BDSDH0zKcQf
+        4grQrVlHzupIxFnoEwFhRrzWUMdsIuSbDeRMMGunW5SyZ+ikMuqyqq8WsGLcOdMs
+        5Lxa5au4jfSpcO7A0RzMlD0Ehz034xV7/w4ewF4M6ysy0GpiaMi2PybK9M1XsxRG
+        mpjIi4RgMNGAu489QCg37P1XWOdoW3ivw7oniGbgnk8H3i2CzN0RKmGE=
 X-Virus-Scanned: amavisd-new at mykolab.com
 X-Spam-Flag: NO
 X-Spam-Score: -1.9
@@ -37,30 +37,32 @@ X-Spam-Level:
 X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
         tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
 Received: from mx.kolabnow.com ([127.0.0.1])
-        by localhost (ext-mx-out003.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id lIboWi3tIZq2; Mon, 10 Jun 2019 18:24:14 +0200 (CEST)
-Received: from int-mx001.mykolab.com (unknown [10.9.13.1])
-        by ext-mx-out003.mykolab.com (Postfix) with ESMTPS id 0847E402AB;
-        Mon, 10 Jun 2019 18:24:12 +0200 (CEST)
+        by localhost (ext-mx-out002.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id M5isNbMaxBm5; Mon, 10 Jun 2019 23:13:14 +0200 (CEST)
+Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
+        by ext-mx-out002.mykolab.com (Postfix) with ESMTPS id 346D111C;
+        Mon, 10 Jun 2019 23:13:14 +0200 (CEST)
 Received: from ext-subm003.mykolab.com (unknown [10.9.6.3])
-        by int-mx001.mykolab.com (Postfix) with ESMTPS id 58491439;
-        Mon, 10 Jun 2019 18:24:12 +0200 (CEST)
+        by int-mx003.mykolab.com (Postfix) with ESMTPS id 1A3F82023;
+        Mon, 10 Jun 2019 18:26:39 +0200 (CEST)
 From:   Federico Vaga <federico.vaga@vaga.pv.it>
 To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Mauro Carvalho Chehab <mchehab@infradead.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Akinobu Mita <akinobu.mita@gmail.com>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Kees Cook <keescook@chromium.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Subject: Re: [PATCH v3 09/33] docs: fault-injection: convert docs to ReST and rename to *.rst
-Date:   Mon, 10 Jun 2019 18:24:10 +0200
-Message-ID: <1693516.ET8j6nyPp2@harkonnen>
-In-Reply-To: <5bbdd14f23a8fa66164ac38d84662091b90adddc.1560045490.git.mchehab+samsung@kernel.org>
-References: <cover.1560045490.git.mchehab+samsung@kernel.org> <5bbdd14f23a8fa66164ac38d84662091b90adddc.1560045490.git.mchehab+samsung@kernel.org>
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Will Deacon <will.deacon@arm.com>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <maxime.ripard@bootlin.com>,
+        Sean Paul <sean@poorly.run>, David Airlie <airlied@linux.ie>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v3 16/33] docs: locking: convert docs to ReST and rename to *.rst
+Date:   Mon, 10 Jun 2019 18:26:37 +0200
+Message-ID: <2479388.eidelHUoWk@harkonnen>
+In-Reply-To: <d5a915447d63fce96cbf463a512cce89423776c3.1560045490.git.mchehab+samsung@kernel.org>
+References: <cover.1560045490.git.mchehab+samsung@kernel.org> <d5a915447d63fce96cbf463a512cce89423776c3.1560045490.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 7Bit
 Content-Type: text/plain; charset="us-ascii"
@@ -69,8 +71,15 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In data Sunday, June 9, 2019 4:26:59 AM CEST, Mauro Carvalho Chehab ha 
+In data Sunday, June 9, 2019 4:27:06 AM CEST, Mauro Carvalho Chehab ha 
 scritto:
+> Convert the locking documents to ReST and add them to the
+> kernel development book where it belongs.
+> 
+> Most of the stuff here is just to make Sphinx to properly
+> parse the text file, as they're already in good shape,
+> not requiring massive changes in order to be parsed.
+> 
 > The conversion is actually:
 >   - add blank lines and identation in order to identify paragraphs;
 >   - fix tables markups;
@@ -83,34 +92,43 @@ scritto:
 > 
 > Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 > ---
->  ...ault-injection.txt => fault-injection.rst} | 265 +++++++++---------
->  Documentation/fault-injection/index.rst       |  20 ++
->  ...r-inject.txt => notifier-error-inject.rst} |  18 +-
->  ...injection.txt => nvme-fault-injection.rst} | 174 ++++++------
->  ...rovoke-crashes.txt => provoke-crashes.rst} |  40 ++-
->  Documentation/process/4.Coding.rst            |   2 +-
->  .../translations/it_IT/process/4.Coding.rst   |   2 +-
+>  Documentation/kernel-hacking/locking.rst      |   2 +-
+>  Documentation/locking/index.rst               |  24 ++
+>  ...{lockdep-design.txt => lockdep-design.rst} |  51 ++--
+>  .../locking/{lockstat.txt => lockstat.rst}    | 221 ++++++++++--------
+>  .../{locktorture.txt => locktorture.rst}      | 105 +++++----
+>  .../{mutex-design.txt => mutex-design.rst}    |  26 ++-
+>  ...t-mutex-design.txt => rt-mutex-design.rst} | 139 ++++++-----
+>  .../locking/{rt-mutex.txt => rt-mutex.rst}    |  30 +--
+>  .../locking/{spinlocks.txt => spinlocks.rst}  |  32 ++-
+>  ...w-mutex-design.txt => ww-mutex-design.rst} |  82 ++++---
+>  Documentation/pi-futex.txt                    |   2 +-
+>  .../it_IT/kernel-hacking/locking.rst          |   2 +-
 
 Limited to translations/it_IT
 
 Acked-by: Federico Vaga <federico.vaga@vaga.pv.it>
 
->  .../translations/zh_CN/process/4.Coding.rst   |   2 +-
->  drivers/misc/lkdtm/core.c                     |   2 +-
->  include/linux/fault-inject.h                  |   2 +-
->  lib/Kconfig.debug                             |   2 +-
->  tools/testing/fault-injection/failcmd.sh      |   2 +-
->  12 files changed, 290 insertions(+), 241 deletions(-)
->  rename Documentation/fault-injection/{fault-injection.txt =>
-> fault-injection.rst} (68%) create mode 100644
-> Documentation/fault-injection/index.rst
->  rename Documentation/fault-injection/{notifier-error-inject.txt =>
-> notifier-error-inject.rst} (83%) rename
-> Documentation/fault-injection/{nvme-fault-injection.txt =>
-> nvme-fault-injection.rst} (19%) rename
-> Documentation/fault-injection/{provoke-crashes.txt => provoke-crashes.rst}
-> (45%)
+>  drivers/gpu/drm/drm_modeset_lock.c            |   2 +-
+>  include/linux/lockdep.h                       |   2 +-
+>  include/linux/mutex.h                         |   2 +-
+>  include/linux/rwsem.h                         |   2 +-
+>  kernel/locking/mutex.c                        |   2 +-
+>  kernel/locking/rtmutex.c                      |   2 +-
+>  lib/Kconfig.debug                             |   4 +-
+>  19 files changed, 428 insertions(+), 304 deletions(-)
+>  create mode 100644 Documentation/locking/index.rst
+>  rename Documentation/locking/{lockdep-design.txt => lockdep-design.rst}
+> (93%) rename Documentation/locking/{lockstat.txt => lockstat.rst} (41%)
+> rename Documentation/locking/{locktorture.txt => locktorture.rst} (57%)
+> rename Documentation/locking/{mutex-design.txt => mutex-design.rst} (94%)
+> rename Documentation/locking/{rt-mutex-design.txt => rt-mutex-design.rst}
+> (91%) rename Documentation/locking/{rt-mutex.txt => rt-mutex.rst} (71%)
+> rename Documentation/locking/{spinlocks.txt => spinlocks.rst} (89%) rename
+> Documentation/locking/{ww-mutex-design.txt => ww-mutex-design.rst} (93%)
 > 
+
+
 
 
 
