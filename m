@@ -2,109 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DD3863C440
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Jun 2019 08:32:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 168923C4FD
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Jun 2019 09:24:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2404209AbfFKGab (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 11 Jun 2019 02:30:31 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:34138 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S2404198AbfFKGa2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Jun 2019 02:30:28 -0400
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
-        by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x5B6RNh4126184
-        for <linux-doc@vger.kernel.org>; Tue, 11 Jun 2019 02:30:27 -0400
-Received: from e35.co.us.ibm.com (e35.co.us.ibm.com [32.97.110.153])
-        by mx0b-001b2d01.pphosted.com with ESMTP id 2t26p2900f-1
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-        for <linux-doc@vger.kernel.org>; Tue, 11 Jun 2019 02:30:26 -0400
-Received: from localhost
-        by e35.co.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
-        for <linux-doc@vger.kernel.org> from <bauerman@linux.ibm.com>;
-        Tue, 11 Jun 2019 07:30:24 +0100
-Received: from b03cxnp08026.gho.boulder.ibm.com (9.17.130.18)
-        by e35.co.us.ibm.com (192.168.1.135) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
-        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-        Tue, 11 Jun 2019 07:30:20 +0100
-Received: from b03ledav006.gho.boulder.ibm.com (b03ledav006.gho.boulder.ibm.com [9.17.130.237])
-        by b03cxnp08026.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x5B6UIWP26280258
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 11 Jun 2019 06:30:18 GMT
-Received: from b03ledav006.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 09AD7C605B;
-        Tue, 11 Jun 2019 06:30:18 +0000 (GMT)
-Received: from b03ledav006.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 843A5C606C;
-        Tue, 11 Jun 2019 06:30:13 +0000 (GMT)
-Received: from morokweng.localdomain.com (unknown [9.85.227.34])
-        by b03ledav006.gho.boulder.ibm.com (Postfix) with ESMTP;
-        Tue, 11 Jun 2019 06:30:13 +0000 (GMT)
-From:   Thiago Jung Bauermann <bauerman@linux.ibm.com>
-To:     linux-integrity@vger.kernel.org
-Cc:     linux-security-module@vger.kernel.org, keyrings@vger.kernel.org,
-        linux-crypto@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mimi Zohar <zohar@linux.ibm.com>,
-        Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>,
-        David Howells <dhowells@redhat.com>,
-        David Woodhouse <dwmw2@infradead.org>,
-        Jessica Yu <jeyu@kernel.org>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        "David S. Miller" <davem@davemloft.net>,
+        id S2404294AbfFKHY1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 Jun 2019 03:24:27 -0400
+Received: from mx1.redhat.com ([209.132.183.28]:39522 "EHLO mx1.redhat.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2404260AbfFKHY0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 11 Jun 2019 03:24:26 -0400
+Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mx1.redhat.com (Postfix) with ESMTPS id 425D6C18B2F3;
+        Tue, 11 Jun 2019 07:24:20 +0000 (UTC)
+Received: from oldenburg2.str.redhat.com (ovpn-116-118.ams2.redhat.com [10.36.116.118])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 4F4B05D721;
+        Tue, 11 Jun 2019 07:24:04 +0000 (UTC)
+From:   Florian Weimer <fweimer@redhat.com>
+To:     Dave Hansen <dave.hansen@intel.com>
+Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Peter Zijlstra <peterz@infradead.org>, x86@kernel.org,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        "AKASHI, Takahiro" <takahiro.akashi@linaro.org>,
-        Thiago Jung Bauermann <bauerman@linux.ibm.com>
-Subject: [PATCH v11 13/13] ima: Allow template= option for appraise rules as well
-Date:   Tue, 11 Jun 2019 03:28:17 -0300
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190611062817.18412-1-bauerman@linux.ibm.com>
-References: <20190611062817.18412-1-bauerman@linux.ibm.com>
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>
+Subject: Re: [PATCH v7 03/14] x86/cet/ibt: Add IBT legacy code bitmap setup function
+References: <20190606200926.4029-1-yu-cheng.yu@intel.com>
+        <20190606200926.4029-4-yu-cheng.yu@intel.com>
+        <20190607080832.GT3419@hirez.programming.kicks-ass.net>
+        <aa8a92ef231d512b5c9855ef416db050b5ab59a6.camel@intel.com>
+        <20190607174336.GM3436@hirez.programming.kicks-ass.net>
+        <b3de4110-5366-fdc7-a960-71dea543a42f@intel.com>
+        <34E0D316-552A-401C-ABAA-5584B5BC98C5@amacapital.net>
+        <7e0b97bf1fbe6ff20653a8e4e147c6285cc5552d.camel@intel.com>
+        <25281DB3-FCE4-40C2-BADB-B3B05C5F8DD3@amacapital.net>
+        <e26f7d09376740a5f7e8360fac4805488b2c0a4f.camel@intel.com>
+        <3f19582d-78b1-5849-ffd0-53e8ca747c0d@intel.com>
+        <5aa98999b1343f34828414b74261201886ec4591.camel@intel.com>
+        <0665416d-9999-b394-df17-f2a5e1408130@intel.com>
+        <5c8727dde9653402eea97bfdd030c479d1e8dd99.camel@intel.com>
+        <ac9a20a6-170a-694e-beeb-605a17195034@intel.com>
+        <328275c9b43c06809c9937c83d25126a6e3efcbd.camel@intel.com>
+        <92e56b28-0cd4-e3f4-867b-639d9b98b86c@intel.com>
+Date:   Tue, 11 Jun 2019 09:24:03 +0200
+In-Reply-To: <92e56b28-0cd4-e3f4-867b-639d9b98b86c@intel.com> (Dave Hansen's
+        message of "Mon, 10 Jun 2019 15:02:45 -0700")
+Message-ID: <8736kgd1po.fsf@oldenburg2.str.redhat.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.2 (gnu/linux)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-x-cbid: 19061106-0012-0000-0000-00001742EB62
-X-IBM-SpamModules-Scores: 
-X-IBM-SpamModules-Versions: BY=3.00011245; HX=3.00000242; KW=3.00000007;
- PH=3.00000004; SC=3.00000286; SDB=6.01216304; UDB=6.00639510; IPR=6.00997404;
- MB=3.00027259; MTD=3.00000008; XFM=3.00000015; UTC=2019-06-11 06:30:24
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19061106-0013-0000-0000-000057A5FBBC
-Message-Id: <20190611062817.18412-14-bauerman@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-06-11_03:,,
- signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 suspectscore=1 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=940 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1810050000 definitions=main-1906110044
+Content-Type: text/plain
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+X-Greylist: Sender IP whitelisted, not delayed by milter-greylist-4.5.16 (mx1.redhat.com [10.5.110.31]); Tue, 11 Jun 2019 07:24:26 +0000 (UTC)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-It's useful being able to specify a different IMA template on appraise
-policy rules, so allow it.
+* Dave Hansen:
 
-Signed-off-by: Thiago Jung Bauermann <bauerman@linux.ibm.com>
-Suggested-by: Mimi Zohar <zohar@linux.ibm.com>
----
- security/integrity/ima/ima_policy.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+> My assumption has always been that these large, potentially sparse
+> hardware tables *must* be mmap()'d with MAP_NORESERVE specified.  That
+> should keep them from being problematic with respect to overcommit.
 
-diff --git a/security/integrity/ima/ima_policy.c b/security/integrity/ima/ima_policy.c
-index 6463ab8921ea..1ac1ef458f2e 100644
---- a/security/integrity/ima/ima_policy.c
-+++ b/security/integrity/ima/ima_policy.c
-@@ -1110,7 +1110,8 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
- 			break;
- 		case Opt_template:
- 			ima_log_string(ab, "template", args[0].from);
--			if (entry->action != MEASURE) {
-+			if (entry->action != MEASURE &&
-+			    entry->action != APPRAISE) {
- 				result = -EINVAL;
- 				break;
- 			}
+MAP_NORESERVE pages still count towards the commit limit.  The flag only
+disables checks at allocation time, for this particular allocation.  (At
+least this was the behavior the last time I looked into this, I
+believe.)
 
+Not sure if this makes a difference here.
+
+Thanks,
+Florian
