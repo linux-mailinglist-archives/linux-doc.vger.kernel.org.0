@@ -2,119 +2,295 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6EFD13C0BE
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Jun 2019 02:58:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 742993C40A
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Jun 2019 08:32:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390244AbfFKA6u (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 10 Jun 2019 20:58:50 -0400
-Received: from mail-pl1-f195.google.com ([209.85.214.195]:37380 "EHLO
-        mail-pl1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2390212AbfFKA6u (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 10 Jun 2019 20:58:50 -0400
-Received: by mail-pl1-f195.google.com with SMTP id bh12so4326567plb.4
-        for <linux-doc@vger.kernel.org>; Mon, 10 Jun 2019 17:58:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amacapital-net.20150623.gappssmtp.com; s=20150623;
-        h=content-transfer-encoding:from:mime-version:subject:date:message-id
-         :references:cc:in-reply-to:to;
-        bh=Qm0kPO1uAJ3z1V1j+us2fMRdl6WcfjHPQXtYwKhWHOw=;
-        b=BVKkouMqizWMIp86sUnwYUIJSyRkM2G6Pe8zlryowrNTb9LFpBf1If0yNMMHqWfp0F
-         aqvarMEwPlbihNns5+AGPXDpt1we54kMWHty1e5OgyiGDIetI6BtOAAyQFCAS3LvpXtt
-         uzvSXO7fOA1xexLVdCqI1QOPZpKtT4lZVG077v5++zFnzHYcC3ZBSAwwFeHo9MexBqAQ
-         2Hhjnsrz/HjTu2HPnoa50Wg160y84xDJPkQyFDks7AOcPsvsPIeb4DvMn/Muc/w88IXq
-         lpM8C4dM7VF7To/MMIkC6rQztkpMZWTvQCV7twCTJ1I4ecG5LMDnzxqJ26KNPiGwgDTp
-         +SDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:content-transfer-encoding:from:mime-version
-         :subject:date:message-id:references:cc:in-reply-to:to;
-        bh=Qm0kPO1uAJ3z1V1j+us2fMRdl6WcfjHPQXtYwKhWHOw=;
-        b=cJFMZSFp5BTxfeyIWZniSwGXM4YdzcrnykG8z+fEipN2Zdumlwi1g9B/VJ9YRbgIK6
-         U5mRbrYs4G6LJ1b3mixNRhXE4kSfnLLWlbkD10kH6YSFpe4naKd4s6bXf+MvwawK2f0O
-         6wRkd/sQCcTD2CoNd66fRKusUyg4ZqtR+5X2oqnpDes/jRH2/9JMLrETworncqXvVwex
-         bctjufiPoY8tK0VNe48NgAcvGun35+BDRzCv6HzIinbyrtf+HPNhGF2e0M/4dqKs5tOA
-         ClrbjZ9ySHOmxkjUYu6KuldD/kKHKOzk/y+8vvSjXgOqSBSEok7HO16s/MuSepcnh0zB
-         XyvQ==
-X-Gm-Message-State: APjAAAVTaazYQbOr/XpjaCE3taHpgD8S957Cf6OR+WjaITnB6+Swp5na
-        NwMD+S2JMMIyXkES17sS1tl7JA==
-X-Google-Smtp-Source: APXvYqxSKP4PBZdAqAyV8bIxzJS6jMTPwYPb+xhoAjdP1xT8Us29SP9WDn8Ct0Ow9eVbUjBD+yr4Ew==
-X-Received: by 2002:a17:902:42e2:: with SMTP id h89mr70909928pld.271.1560214729538;
-        Mon, 10 Jun 2019 17:58:49 -0700 (PDT)
-Received: from [10.228.61.2] (151.sub-97-41-129.myvzw.com. [97.41.129.151])
-        by smtp.gmail.com with ESMTPSA id h19sm11894263pfn.79.2019.06.10.17.58.44
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Mon, 10 Jun 2019 17:58:46 -0700 (PDT)
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-From:   Andy Lutomirski <luto@amacapital.net>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [PATCH v7 03/14] x86/cet/ibt: Add IBT legacy code bitmap setup function
-Date:   Mon, 10 Jun 2019 17:36:03 -0700
-Message-Id: <7E931FED-B39D-4C05-8B78-D8CF2F0EF9FC@amacapital.net>
-References: <20190606200926.4029-1-yu-cheng.yu@intel.com> <aa8a92ef231d512b5c9855ef416db050b5ab59a6.camel@intel.com>
- <20190607174336.GM3436@hirez.programming.kicks-ass.net> <b3de4110-5366-fdc7-a960-71dea543a42f@intel.com>
- <34E0D316-552A-401C-ABAA-5584B5BC98C5@amacapital.net> <7e0b97bf1fbe6ff20653a8e4e147c6285cc5552d.camel@intel.com>
- <25281DB3-FCE4-40C2-BADB-B3B05C5F8DD3@amacapital.net> <e26f7d09376740a5f7e8360fac4805488b2c0a4f.camel@intel.com>
- <3f19582d-78b1-5849-ffd0-53e8ca747c0d@intel.com> <5aa98999b1343f34828414b74261201886ec4591.camel@intel.com>
- <0665416d-9999-b394-df17-f2a5e1408130@intel.com> <5c8727dde9653402eea97bfdd030c479d1e8dd99.camel@intel.com>
- <ac9a20a6-170a-694e-beeb-605a17195034@intel.com> <328275c9b43c06809c9937c83d25126a6e3efcbd.camel@intel.com>
- <92e56b28-0cd4-e3f4-867b-639d9b98b86c@intel.com> <1b961c71d30e31ecb22da2c5401b1a81cb802d86.camel@intel.com>
- <ea5e333f-8cd6-8396-635f-a9dc580d5364@intel.com> <BBBF82D3-EE21-49E1-92A4-713C7729E6AD@amacapital.net>
- <a329c4fa-adb0-09a4-7a8c-465f82e0e6c7@intel.com>
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>,
-        Peter Zijlstra <peterz@infradead.org>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        id S2404037AbfFKG3f (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 Jun 2019 02:29:35 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:39008 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S2403985AbfFKG3e (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Jun 2019 02:29:34 -0400
+Received: from pps.filterd (m0098421.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x5B6TReZ038344
+        for <linux-doc@vger.kernel.org>; Tue, 11 Jun 2019 02:29:32 -0400
+Received: from e33.co.us.ibm.com (e33.co.us.ibm.com [32.97.110.151])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 2t241np2e5-1
+        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+        for <linux-doc@vger.kernel.org>; Tue, 11 Jun 2019 02:29:31 -0400
+Received: from localhost
+        by e33.co.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
+        for <linux-doc@vger.kernel.org> from <bauerman@linux.ibm.com>;
+        Tue, 11 Jun 2019 07:29:08 +0100
+Received: from b03cxnp08026.gho.boulder.ibm.com (9.17.130.18)
+        by e33.co.us.ibm.com (192.168.1.133) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
+        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+        Tue, 11 Jun 2019 07:29:02 +0100
+Received: from b03ledav006.gho.boulder.ibm.com (b03ledav006.gho.boulder.ibm.com [9.17.130.237])
+        by b03cxnp08026.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x5B6T0l922610362
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 11 Jun 2019 06:29:00 GMT
+Received: from b03ledav006.gho.boulder.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id ABEE6C605D;
+        Tue, 11 Jun 2019 06:29:00 +0000 (GMT)
+Received: from b03ledav006.gho.boulder.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id B1485C6055;
+        Tue, 11 Jun 2019 06:28:51 +0000 (GMT)
+Received: from morokweng.localdomain.com (unknown [9.85.227.34])
+        by b03ledav006.gho.boulder.ibm.com (Postfix) with ESMTP;
+        Tue, 11 Jun 2019 06:28:51 +0000 (GMT)
+From:   Thiago Jung Bauermann <bauerman@linux.ibm.com>
+To:     linux-integrity@vger.kernel.org
+Cc:     linux-security-module@vger.kernel.org, keyrings@vger.kernel.org,
+        linux-crypto@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Mimi Zohar <zohar@linux.ibm.com>,
+        Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
+        James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>,
+        David Howells <dhowells@redhat.com>,
+        David Woodhouse <dwmw2@infradead.org>,
+        Jessica Yu <jeyu@kernel.org>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        "David S. Miller" <davem@davemloft.net>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>
-In-Reply-To: <a329c4fa-adb0-09a4-7a8c-465f82e0e6c7@intel.com>
-To:     Dave Hansen <dave.hansen@intel.com>
-X-Mailer: iPhone Mail (16F203)
+        "AKASHI, Takahiro" <takahiro.akashi@linaro.org>,
+        Thiago Jung Bauermann <bauerman@linux.ibm.com>
+Subject: [PATCH v11 00/13] Appended signatures support for IMA appraisal
+Date:   Tue, 11 Jun 2019 03:28:04 -0300
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+x-cbid: 19061106-0036-0000-0000-00000AC971EA
+X-IBM-SpamModules-Scores: 
+X-IBM-SpamModules-Versions: BY=3.00011245; HX=3.00000242; KW=3.00000007;
+ PH=3.00000004; SC=3.00000286; SDB=6.01216304; UDB=6.00639510; IPR=6.00997403;
+ MB=3.00027259; MTD=3.00000008; XFM=3.00000015; UTC=2019-06-11 06:29:06
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19061106-0037-0000-0000-00004C2DD766
+Message-Id: <20190611062817.18412-1-bauerman@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-06-11_03:,,
+ signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ malwarescore=0 suspectscore=3 phishscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+ mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.0.1-1810050000 definitions=main-1906110044
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hello,
+
+Nothing big in this version. Noteworthy changes are:
+
+1. Fixes for two bugs in ima_appraise_measurements() which were spotted and
+resolved by Mimi Zohar. The changelog points them out.
+
+2. One bugfix in process_measurement() which would cause all files
+appraised with modsig to be measured as well, even if the policy didn't
+request it.
+
+3. Adapted to work with per policy rule template formats.
+
+Plus small cosmetic changes in some places. The changelog has the details.
+
+This has been tested with signed modules and with signed kernels loaded via
+kexec_file_load().
+
+Many thanks to Mimi Zohar for her help with the development of this patch
+series.
+
+The patches apply on today's linux-integrity/next-queued-testing.
+
+Original cover letter:
+
+On the OpenPOWER platform, secure boot and trusted boot are being
+implemented using IMA for taking measurements and verifying signatures.
+Since the kernel image on Power servers is an ELF binary, kernels are
+signed using the scripts/sign-file tool and thus use the same signature
+format as signed kernel modules.
+
+This patch series adds support in IMA for verifying those signatures.
+It adds flexibility to OpenPOWER secure boot, because it allows it to boot
+kernels with the signature appended to them as well as kernels where the
+signature is stored in the IMA extended attribute.
+
+Changes since v10:
+
+- Patch "MODSIGN: Export module signature definitions"
+  - Moved config MODULE_SIG_FORMAT definition before its use. Suggested by
+    Mimi Zohar.
+  - Added missing kerneldoc for @name parameter. Suggested by Mimi Zohar.
+
+- Patch "ima: Implement support for module-style appended signatures"
+  - Bugfix: don't check status variable when deciding whether to verify
+    modsig in ima_appraise_measurement(). Suggested by Mimi Zohar.
+  - Bugfix: verify the modsig in ima_appraise_measurement() if the xattr
+    contains a digest. Suggested by Mimi Zohar.
+
+- Patch "ima: Define ima-modsig template"
+  - Renamed ima_modsig_serialize() to ima_get_raw_modsig().
+  - Renamed check_current_template_modsig() to check_template_modsig().
+  - Fixed outdated comment in ima_eventmodsig_init(). Suggested by Mimi
+    Zohar.
+  - Check either the global or the per-rule template when an appraisal rule
+    allows modsig. Suggested by Mimi Zohar.
+
+- Patch "ima: Store the measurement again when appraising a modsig"
+  - Bugfix: Only re-measure file containing modsig if it was measured
+    before.
+  - Check for modsig-related fields in the template_desc obtained in
+    process_measurement() which can be a per-rule template. Suggested by Mimi
+    Zohar.
+
+- Patch "ima: Allow template= option for appraise rules as well"
+  - New patch. Suggested by Mimi Zohar.
+
+Changes since v9:
+
+- Patch "MODSIGN: Export module signature definitions"
+  - Moved mod_check_sig() to a new file so that CONFIG_IMA_APPRAISE_MODSIG
+    doesn't have to depend on CONFIG_MODULES.
+  - Changed scripts/Makefile to build sign-file if CONFIG_MODULE_SIG_FORMAT
+    is set.
+  - Removed Mimi's Reviewed-by because of the changes in this version.
+
+- Patch "PKCS#7: Refactor verify_pkcs7_signature()"
+  - Don't add function pkcs7_get_message_sig() anymore, since it's not
+    needed in the current version.
+
+- Patch "PKCS#7: Introduce pkcs7_get_digest()"
+  - Changed 'len' argument from 'u8 *' to 'u32 *'.
+  - Added 'hash_algo' argument to obtain the algo used for the digest.
+  - Don't check whether 'buf', 'len' and 'hash_algo' output arguments are NULL,
+    since the function's only caller always sets them.
+  - Removed Mimi's Reviewed-by because of the changes in this version.
+
+- Patch "integrity: Introduce asymmetric_sig_has_known_key()"
+  - Dropped.
+
+- Patch "integrity: Introduce integrity_keyring_from_id"
+  - Squashed into "ima: Implement support for module-style appended signatures"
+  - Changed integrity_keyring_from_id() to a static function (suggested by Mimi
+    Zohar).
+
+- Patch "ima: Introduce is_signed()"
+  - Dropped.
+
+- Patch "ima: Export func_tokens"
+  - Squashed into "ima: Implement support for module-style appended signatures"
+
+- Patch "ima: Use designated initializers for struct ima_event_data"
+  - New patch.
+
+- Patch "ima: Factor xattr_verify() out of ima_appraise_measurement()"
+  - New patch.
+
+- Patch "ima: Implement support for module-style appended signatures"
+  - Renamed 'struct modsig_hdr' to 'struct modsig'.
+  - Added integrity_modsig_verify() to integrity/digsig.c so that it's not
+    necessary to export integrity_keyring_from_id() (Suggested by Mimi Zohar).
+  - Don't add functions ima_xattr_sig_known_key() and
+    modsig_has_known_key() since they're not necessary anymore.
+  - Added modsig argument to ima_appraise_measurement().
+  - Verify modsig in a separate function called by ima_appraise_measurement().
+  - Renamed ima_read_collect_modsig() to ima_read_modsig(), with a separate
+    collect function added in patch "ima: Collect modsig" (suggested by Mimi
+    Zohar).
+  - In ima_read_modsig(), moved code saving of raw PKCS7 data to 'struct
+    modsig' to patch "ima: Collect modsig".
+  - In ima_read_modsig(), moved all parts related to the modsig hash to
+    patch "ima: Collect modsig".
+  - In ima_read_modsig(), don't check if the buf pointer is NULL since it's
+    never supposed to happen.
+  - Renamed ima_free_xattr_data() to ima_free_modsig().
+  - No need to check for modsig in ima_read_xattr() and
+    ima_inode_set_xattr() anymore.
+  - In ima_modsig_verify(), don't check if the modsig pointer is NULL since
+    it's not supposed to happen.
+  - Don't define IMA_MODSIG element in enum evm_ima_xattr_type.
+
+- Patch "ima: Collect modsig"
+  - New patch.
+
+- Patch "ima: Define ima-modsig template"
+  - Patch renamed from "ima: Add new "d-sig" template field"
+  - Renamed 'd-sig' template field to 'd-modsig'.
+  - Added 'modsig' template field.
+  - Added 'ima-modsig' defined template descriptor.
+  - Renamed ima_modsig_serialize_data() to ima_modsig_serialize().
+  - Renamed ima_get_modsig_hash() to ima_get_modsig_digest(). Also the
+    function is a lot simpler now since what it used to do is now done in
+    ima_collect_modsig() and pkcs7_get_digest().
+  - Added check for failed modsig collection in ima_eventdigest_modsig_init().
+  - Added modsig argument to ima_store_measurement().
+  - Added 'modsig' field to struct ima_event_data.
+  - Removed check for modsig == NULL in ima_get_modsig_digest() and in
+    ima_modsig_serialize_data() since their callers already performs that
+    check.
+  - Moved check_current_template_modsig() to this patch, previously was in
+    "ima: Store the measurement again when appraising a modsig".
+
+- Patch "ima: Store the measurement again when appraising a modsig"
+  - Renamed ima_template_has_sig() to ima_template_has_modsig().
+  - Added a change to ima_collect_measurement(), making it to call
+    ima_collect_modsig() even if IMA_COLLECT is set in iint->flags.
+  - Removed IMA_READ_MEASURE flag.
+  - Renamed template_has_sig global variable to template_has_modsig.
+  - Renamed find_sig_in_template() to find_modsig_in_template().
 
 
-> On Jun 10, 2019, at 5:08 PM, Dave Hansen <dave.hansen@intel.com> wrote:
->=20
->> On 6/10/19 4:54 PM, Andy Lutomirski wrote:
->> Another benefit of kernel management: we could plausibly auto-clear
->> the bits corresponding to munmapped regions. Is this worth it?
->=20
-> I did it for MPX.  I think I even went to the trouble of zapping the
-> whole pages that got unused.
->=20
-> But, MPX tables took 80% of the address space, worst-case.  This takes
-> 0.003% :)  The only case it would really matter would be a task was
-> long-running, used legacy executables/JITs, and was mapping/unmapping
-> text all over the address space.  That seems rather unlikely.
+Thiago Jung Bauermann (13):
+  MODSIGN: Export module signature definitions
+  PKCS#7: Refactor verify_pkcs7_signature()
+  PKCS#7: Introduce pkcs7_get_digest()
+  integrity: Introduce struct evm_xattr
+  integrity: Select CONFIG_KEYS instead of depending on it
+  ima: Use designated initializers for struct ima_event_data
+  ima: Add modsig appraise_type option for module-style appended
+    signatures
+  ima: Factor xattr_verify() out of ima_appraise_measurement()
+  ima: Implement support for module-style appended signatures
+  ima: Collect modsig
+  ima: Define ima-modsig template
+  ima: Store the measurement again when appraising a modsig
+  ima: Allow template= option for appraise rules as well
 
-Every wasted page still costs 4K plus page table overhead.  The worst case i=
-s a JIT that doesn=E2=80=99t clean up and leaks legacy bitmap memory all ove=
-r. We can blame the JIT, but the actual attribution could be complicated.
+ Documentation/ABI/testing/ima_policy      |   6 +-
+ Documentation/security/IMA-templates.rst  |   7 +-
+ certs/system_keyring.c                    |  61 +++++--
+ crypto/asymmetric_keys/pkcs7_verify.c     |  33 ++++
+ include/crypto/pkcs7.h                    |   4 +
+ include/linux/module.h                    |   3 -
+ include/linux/module_signature.h          |  44 +++++
+ include/linux/verification.h              |  10 ++
+ init/Kconfig                              |   6 +-
+ kernel/Makefile                           |   1 +
+ kernel/module.c                           |   1 +
+ kernel/module_signature.c                 |  46 +++++
+ kernel/module_signing.c                   |  56 +-----
+ scripts/Makefile                          |   2 +-
+ security/integrity/Kconfig                |   2 +-
+ security/integrity/digsig.c               |  43 ++++-
+ security/integrity/evm/evm_main.c         |   8 +-
+ security/integrity/ima/Kconfig            |  13 ++
+ security/integrity/ima/Makefile           |   1 +
+ security/integrity/ima/ima.h              |  60 ++++++-
+ security/integrity/ima/ima_api.c          |  34 +++-
+ security/integrity/ima/ima_appraise.c     | 199 ++++++++++++++--------
+ security/integrity/ima/ima_init.c         |   4 +-
+ security/integrity/ima/ima_main.c         |  24 ++-
+ security/integrity/ima/ima_modsig.c       | 169 ++++++++++++++++++
+ security/integrity/ima/ima_policy.c       |  68 +++++++-
+ security/integrity/ima/ima_template.c     |  26 ++-
+ security/integrity/ima/ima_template_lib.c |  60 ++++++-
+ security/integrity/ima/ima_template_lib.h |   4 +
+ security/integrity/integrity.h            |  26 +++
+ 30 files changed, 840 insertions(+), 181 deletions(-)
+ create mode 100644 include/linux/module_signature.h
+ create mode 100644 kernel/module_signature.c
+ create mode 100644 security/integrity/ima/ima_modsig.c
 
-It also matters when you unmap one thing, map something else, and are sad wh=
-en the legacy bits are still set.
-
-Admittedly, it=E2=80=99s a bit hard to imagine the exploit that takes advant=
-age of this.=
