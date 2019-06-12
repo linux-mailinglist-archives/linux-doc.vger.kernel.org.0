@@ -2,147 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DA58942DF5
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2019 19:55:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9943742E9F
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2019 20:26:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390211AbfFLRzN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 Jun 2019 13:55:13 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:40650 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2389228AbfFLRxS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Jun 2019 13:53:18 -0400
+        id S1727904AbfFLSZq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 12 Jun 2019 14:25:46 -0400
+Received: from heliosphere.sirena.org.uk ([172.104.155.198]:35516 "EHLO
+        heliosphere.sirena.org.uk" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727843AbfFLSZp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Jun 2019 14:25:45 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=LODV2xUoFNxknV26miUARY9/ZInmVpzomuSRyMjtHiw=; b=qhY3Sf6FfNEogGrDLpyftWrZuf
-        JJQdRw/7eO3o/MuDOTpXitWc7L7YkGvyhhGnLy/2MBysWmo8kOkt9oXi1/0wjav78Qr8zKOeJLhbk
-        w6XziYseHKPtC9heWrMhpH/1SZrPO9Q9DFpiofc4Bug0LdxpxZPtboIKOUFrMdZ0Yqg7yBk+ob+gE
-        OmSYjUB+t5xYqfqgZPzydsGjfukWcIaXKv70dYDNYmOmXTCSi83WDOHaW9Obv7rwJS4jyhYwgZPFC
-        rNNweA1HfZEHJW7UeLaFoQ1wWaIda3Ehk1GwhpGvo2kHCljDdFwMa4tiRjeyuTAYoONsXKfyUGKOt
-        MLWlL0pw==;
-Received: from 201.86.169.251.dynamic.adsl.gvt.net.br ([201.86.169.251] helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hb7Qx-0002Dv-WE; Wed, 12 Jun 2019 17:53:16 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
-        (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hb7Qq-0001hm-Py; Wed, 12 Jun 2019 14:53:08 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        d=sirena.org.uk; s=20170815-heliosphere; h=In-Reply-To:Content-Type:
+        MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=7/JejZXuw4c82OjHDF4+j/TFP9PqUXciwPyDMKWbltA=; b=diZSDCcMuyJrjruXy1ZwgBgM6
+        U5GLj33sBcQ4EZclDj66fANPwauHu7YcuPai2oGPt2BlizI8WSBbIRMDhgGdE2zavpqxCVIWykapM
+        byA1dRAOskAfbv/m648KeoOg5tyt8xc0FNJ8lQuw0ijdPLebMkIY31IxyCPww9X0RoOg4=;
+Received: from [2001:470:1f1d:6b5:7e7a:91ff:fede:4a45] (helo=finisterre.sirena.org.uk)
+        by heliosphere.sirena.org.uk with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.89)
+        (envelope-from <broonie@sirena.org.uk>)
+        id 1hb7w7-0003Ol-Hn; Wed, 12 Jun 2019 18:25:27 +0000
+Received: by finisterre.sirena.org.uk (Postfix, from userid 1000)
+        id D22F9440046; Wed, 12 Jun 2019 19:25:26 +0100 (BST)
+Date:   Wed, 12 Jun 2019 19:25:26 +0100
+From:   Mark Brown <broonie@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Mauro Carvalho Chehab <mchehab@infradead.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <maxime.ripard@bootlin.com>,
-        Sean Paul <sean@poorly.run>, David Airlie <airlied@linux.ie>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        dri-devel@lists.freedesktop.org
-Subject: [PATCH v4 28/28] docs: EDID/HOWTO.txt: convert it and rename to howto.rst
-Date:   Wed, 12 Jun 2019 14:53:04 -0300
-Message-Id: <fda591389c53e22ae95d1493f0cb443370484757.1560361364.git.mchehab+samsung@kernel.org>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <cover.1560361364.git.mchehab+samsung@kernel.org>
+        Thomas Gleixner <tglx@linutronix.de>,
+        Clemens Ladisch <clemens@ladisch.de>,
+        Antti Palosaari <crope@iki.fi>,
+        Liam Girdwood <lgirdwood@gmail.com>,
+        Andy Whitcroft <apw@canonical.com>,
+        Joe Perches <joe@perches.com>,
+        Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>, alsa-devel@alsa-project.org
+Subject: Re: [PATCH v4 24/28] docs: timers: convert docs to ReST and rename
+ to *.rst
+Message-ID: <20190612182526.GG5316@sirena.org.uk>
 References: <cover.1560361364.git.mchehab+samsung@kernel.org>
+ <30e605cd5a295c42c39523d88b4c57298c5a6f1d.1560361364.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="j2AXaZ4YhVcLc+PQ"
+Content-Disposition: inline
+In-Reply-To: <30e605cd5a295c42c39523d88b4c57298c5a6f1d.1560361364.git.mchehab+samsung@kernel.org>
+X-Cookie: Editing is a rewording activity.
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Sphinx need to know when a paragraph ends. So, do some adjustments
-at the file for it to be properly parsed.
 
-At its new index.rst, let's add a :orphan: while this is not linked to
-the main index.rst file, in order to avoid build warnings.
+--j2AXaZ4YhVcLc+PQ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-that's said, I believe that this file should be moved to the
-GPU/DRM documentation.
+On Wed, Jun 12, 2019 at 02:53:00PM -0300, Mauro Carvalho Chehab wrote:
+> The conversion here is really trivial: just a bunch of title
+> markups and very few puntual changes is enough to make it to
+> be parsed by Sphinx and generate a nice html.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
----
- Documentation/EDID/{HOWTO.txt => howto.rst}   | 31 ++++++++++++-------
- .../admin-guide/kernel-parameters.txt         |  2 +-
- drivers/gpu/drm/Kconfig                       |  2 +-
- 3 files changed, 22 insertions(+), 13 deletions(-)
- rename Documentation/EDID/{HOWTO.txt => howto.rst} (83%)
+Acked-by: Mark Brown <broonie@kernel.org>
 
-diff --git a/Documentation/EDID/HOWTO.txt b/Documentation/EDID/howto.rst
-similarity index 83%
-rename from Documentation/EDID/HOWTO.txt
-rename to Documentation/EDID/howto.rst
-index 539871c3b785..725fd49a88ca 100644
---- a/Documentation/EDID/HOWTO.txt
-+++ b/Documentation/EDID/howto.rst
-@@ -1,3 +1,9 @@
-+:orphan:
-+
-+====
-+EDID
-+====
-+
- In the good old days when graphics parameters were configured explicitly
- in a file called xorg.conf, even broken hardware could be managed.
- 
-@@ -34,16 +40,19 @@ Makefile. Please note that the EDID data structure expects the timing
- values in a different way as compared to the standard X11 format.
- 
- X11:
--HTimings:  hdisp hsyncstart hsyncend htotal
--VTimings:  vdisp vsyncstart vsyncend vtotal
-+  HTimings:
-+    hdisp hsyncstart hsyncend htotal
-+  VTimings:
-+    vdisp vsyncstart vsyncend vtotal
- 
--EDID:
--#define XPIX hdisp
--#define XBLANK htotal-hdisp
--#define XOFFSET hsyncstart-hdisp
--#define XPULSE hsyncend-hsyncstart
-+EDID::
- 
--#define YPIX vdisp
--#define YBLANK vtotal-vdisp
--#define YOFFSET vsyncstart-vdisp
--#define YPULSE vsyncend-vsyncstart
-+  #define XPIX hdisp
-+  #define XBLANK htotal-hdisp
-+  #define XOFFSET hsyncstart-hdisp
-+  #define XPULSE hsyncend-hsyncstart
-+
-+  #define YPIX vdisp
-+  #define YBLANK vtotal-vdisp
-+  #define YOFFSET vsyncstart-vdisp
-+  #define YPULSE vsyncend-vsyncstart
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 3d072ca532bb..3faf37b8b001 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -930,7 +930,7 @@
- 			edid/1680x1050.bin, or edid/1920x1080.bin is given
- 			and no file with the same name exists. Details and
- 			instructions how to build your own EDID data are
--			available in Documentation/EDID/HOWTO.txt. An EDID
-+			available in Documentation/EDID/howto.rst. An EDID
- 			data set will only be used for a particular connector,
- 			if its name and a colon are prepended to the EDID
- 			name. Each connector may use a unique EDID data
-diff --git a/drivers/gpu/drm/Kconfig b/drivers/gpu/drm/Kconfig
-index 6b34949416b1..c3a6dd284c91 100644
---- a/drivers/gpu/drm/Kconfig
-+++ b/drivers/gpu/drm/Kconfig
-@@ -141,7 +141,7 @@ config DRM_LOAD_EDID_FIRMWARE
- 	  monitor are unable to provide appropriate EDID data. Since this
- 	  feature is provided as a workaround for broken hardware, the
- 	  default case is N. Details and instructions how to build your own
--	  EDID data are given in Documentation/EDID/HOWTO.txt.
-+	  EDID data are given in Documentation/EDID/howto.rst.
- 
- config DRM_DP_CEC
- 	bool "Enable DisplayPort CEC-Tunneling-over-AUX HDMI support"
--- 
-2.21.0
+--j2AXaZ4YhVcLc+PQ
+Content-Type: application/pgp-signature; name="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAl0BQ5UACgkQJNaLcl1U
+h9CfQwf/T+GuS4qxkPnnrGt5BupQpYiRUjRWLkbqyLs9yZLDqKhwJZcErxl4gHHx
+Z5Vb42b0CWQLguzl90HFaG5XtXjcUalh/JZX6OI+4o/wvkAKyEDLs83MFPvm/tCw
+Theem/1VwhHFUCD+yEPPIqCpBnAySRhPm75JjAJqN0BvIYxskUyXZ2T907Q6/I6C
+2sOs4xk62gUU50gKtb8O6++rTjpNux3HBPMX2//qoLOXgcapDinpcoChu4yA4w7g
+/C2tRwrHi/o+Wp+AvLZLAzHWgsGvzbtrgaKVD18h4qlNfxN7eZbpsFGiZ7uCI5Xf
+nYLJXuUu1+AcRHTr+oU1OnO8pq7ApA==
+=+02E
+-----END PGP SIGNATURE-----
+
+--j2AXaZ4YhVcLc+PQ--
