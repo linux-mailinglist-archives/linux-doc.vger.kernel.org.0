@@ -2,111 +2,141 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0605A420E3
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2019 11:33:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7EB5242883
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2019 16:14:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2408779AbfFLJcp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 Jun 2019 05:32:45 -0400
-Received: from foss.arm.com ([217.140.110.172]:48554 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2408577AbfFLJcp (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 12 Jun 2019 05:32:45 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 871CE337;
-        Wed, 12 Jun 2019 02:32:44 -0700 (PDT)
-Received: from e103592.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id EEAC83F246;
-        Wed, 12 Jun 2019 02:32:40 -0700 (PDT)
-Date:   Wed, 12 Jun 2019 10:32:38 +0100
-From:   Dave Martin <Dave.Martin@arm.com>
-To:     Yu-cheng Yu <yu-cheng.yu@intel.com>
-Cc:     Florian Weimer <fweimer@redhat.com>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>
-Subject: Re: [PATCH v7 22/27] binfmt_elf: Extract .note.gnu.property from an
- ELF file
-Message-ID: <20190612093238.GQ28398@e103592.cambridge.arm.com>
-References: <20190606200646.3951-1-yu-cheng.yu@intel.com>
- <20190606200646.3951-23-yu-cheng.yu@intel.com>
- <20190607180115.GJ28398@e103592.cambridge.arm.com>
- <94b9c55b3b874825fda485af40ab2a6bc3dad171.camel@intel.com>
- <87lfy9cq04.fsf@oldenburg2.str.redhat.com>
- <20190611114109.GN28398@e103592.cambridge.arm.com>
- <031bc55d8dcdcf4f031e6ff27c33fd52c61d33a5.camel@intel.com>
+        id S1730843AbfFLOMz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 12 Jun 2019 10:12:55 -0400
+Received: from mail-io1-f68.google.com ([209.85.166.68]:44807 "EHLO
+        mail-io1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730773AbfFLOMy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Jun 2019 10:12:54 -0400
+Received: by mail-io1-f68.google.com with SMTP id s7so13050697iob.11
+        for <linux-doc@vger.kernel.org>; Wed, 12 Jun 2019 07:12:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=/fXeSKZUU3yYcblyjjUr+PT/LFbKmVa2WZrUUbFVZZ0=;
+        b=RqyGGNemS8/TLIB5Dxl8WKbnhdoc9LMeuNFDMIXpzQjCM/HDctfvLF5YywpxKCA/Ig
+         7yPInDXKSM+OBgqGqsVrQpGGSMEQJnBZzRWTeXWniVKBg7SCoM2gvK6O3d0P8Rg8Knn+
+         7kPR7R8/O8zpOPULyC4Ksbu0LYVjAmgEBBVgfE++N7YLTYojHXFhqZ0vW6rhH6pMWPEh
+         znEfqS3UxP9YqmjVyDU0ZSD9qVP5VjHuDoMiJyK4TV0iN4rGvAIFGHXw8tdLPBeeAWW2
+         UoTRDFKFZJo64q4YbPRkTQD0aMhiZQZ2yxkHKkLHVCVoyrmFLNaqdcqQ0dSaWHA8CBfu
+         d5uw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=/fXeSKZUU3yYcblyjjUr+PT/LFbKmVa2WZrUUbFVZZ0=;
+        b=Ns0q0wkDwX5K1Hznp442obpweNEc8nJ7zm31lpL83Tm06IxDasKXn1UHl0Qfm4Zu+F
+         mOB0XaaAGf4Ji9rsPshJ1ux95F3yyuvW+MFzGjC8eVhigYSMeCWpEe9mtiCY5qj6QjfZ
+         9a9FKSBI3S6Y0JcLeTLCwytOFsvtPBmyHlLydeKcBIVDY0/Lb23tyIms+F4bpflNcrCx
+         mmAgOUCpaQKa+1NFTm1dlJVnH99GWKfrsdAUi3S/rhUB0sJUETvScktIUkJhPhuHDTCi
+         Y+0GiUZtqmkuDyMZuMKHVOqU92TqWp9XPEdgmt6vqeayzvgU8hkOZD241juxoxZzfk3R
+         whSQ==
+X-Gm-Message-State: APjAAAUjiQjihleyVDu0wIYzbn6o6NfdzjRE7KjzedycZKbdD7WbdvQm
+        P8VWOQUcRnFLoevDqh4LBfotRbhlfChkTdlj+4EUuA==
+X-Google-Smtp-Source: APXvYqwkiG/FnYs/yUolUcw3GIjfphJ0LlTz9nHHhg4BtY4TBFOFyCbFjrLUlM9TyKIfKg7WWD3xL1yeGraiKF5DRHU=
+X-Received: by 2002:a6b:641a:: with SMTP id t26mr7794304iog.3.1560348773474;
+ Wed, 12 Jun 2019 07:12:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <031bc55d8dcdcf4f031e6ff27c33fd52c61d33a5.camel@intel.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+References: <20190531150828.157832-1-elver@google.com> <20190531150828.157832-3-elver@google.com>
+ <CANpmjNP_-J5dZVtDeHUeDk2TBBkOgoPvGKq42Qd7rezbnFWNGg@mail.gmail.com>
+In-Reply-To: <CANpmjNP_-J5dZVtDeHUeDk2TBBkOgoPvGKq42Qd7rezbnFWNGg@mail.gmail.com>
+From:   Dmitry Vyukov <dvyukov@google.com>
+Date:   Wed, 12 Jun 2019 16:12:29 +0200
+Message-ID: <CACT4Y+a0H0NiMmydmw1qOA=zUXDmBZXHmh6-fp9nU0UtAPZvxQ@mail.gmail.com>
+Subject: Re: [PATCH v3 2/3] x86: Use static_cpu_has in uaccess region to avoid instrumentation
+To:     Marco Elver <elver@google.com>
+Cc:     Peter Zijlstra <peterz@infradead.org>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Alexander Potapenko <glider@google.com>,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 11, 2019 at 12:31:34PM -0700, Yu-cheng Yu wrote:
-> On Tue, 2019-06-11 at 12:41 +0100, Dave Martin wrote:
-> > On Mon, Jun 10, 2019 at 07:24:43PM +0200, Florian Weimer wrote:
-> > > * Yu-cheng Yu:
-> > > 
-> > > > To me, looking at PT_GNU_PROPERTY and not trying to support anything is a
-> > > > logical choice.  And it breaks only a limited set of toolchains.
-> > > > 
-> > > > I will simplify the parser and leave this patch as-is for anyone who wants
-> > > > to
-> > > > back-port.  Are there any objections or concerns?
-> > > 
-> > > Red Hat Enterprise Linux 8 does not use PT_GNU_PROPERTY and is probably
-> > > the largest collection of CET-enabled binaries that exists today.
-> > 
-> > For clarity, RHEL is actively parsing these properties today?
-> > 
-> > > My hope was that we would backport the upstream kernel patches for CET,
-> > > port the glibc dynamic loader to the new kernel interface, and be ready
-> > > to run with CET enabled in principle (except that porting userspace
-> > > libraries such as OpenSSL has not really started upstream, so many
-> > > processes where CET is particularly desirable will still run without
-> > > it).
-> > > 
-> > > I'm not sure if it is a good idea to port the legacy support if it's not
-> > > part of the mainline kernel because it comes awfully close to creating
-> > > our own private ABI.
-> > 
-> > I guess we can aim to factor things so that PT_NOTE scanning is
-> > available as a fallback on arches for which the absence of
-> > PT_GNU_PROPERTY is not authoritative.
-> 
-> We can probably check PT_GNU_PROPERTY first, and fallback (based on ld-linux
-> version?) to PT_NOTE scanning?
+On Fri, Jun 7, 2019 at 11:44 AM Marco Elver <elver@google.com> wrote:
+>
+> Gentle ping.  I would appreciate quick feedback if this approach is reasonable.
+>
+> Peter: since you suggested that we should not change objtool, did you
+> have a particular approach in mind that is maybe different from v2 and
+> v3? Or is this what you were thinking of?
+>
+> Many thanks!
+>
+> On Fri, 31 May 2019 at 17:11, Marco Elver <elver@google.com> wrote:
+> >
+> > This patch is a pre-requisite for enabling KASAN bitops instrumentation;
+> > using static_cpu_has instead of boot_cpu_has avoids instrumentation of
+> > test_bit inside the uaccess region. With instrumentation, the KASAN
+> > check would otherwise be flagged by objtool.
+> >
+> > For consistency, kernel/signal.c was changed to mirror this change,
+> > however, is never instrumented with KASAN (currently unsupported under
+> > x86 32bit).
+> >
+> > Signed-off-by: Marco Elver <elver@google.com>
+> > Suggested-by: H. Peter Anvin <hpa@zytor.com>
+> > ---
+> > Changes in v3:
+> > * Use static_cpu_has instead of moving boot_cpu_has outside uaccess
+> >   region.
+> >
+> > Changes in v2:
+> > * Replaces patch: 'tools/objtool: add kasan_check_* to uaccess
+> >   whitelist'
+> > ---
+> >  arch/x86/ia32/ia32_signal.c | 2 +-
+> >  arch/x86/kernel/signal.c    | 2 +-
+> >  2 files changed, 2 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/arch/x86/ia32/ia32_signal.c b/arch/x86/ia32/ia32_signal.c
+> > index 629d1ee05599..1cee10091b9f 100644
+> > --- a/arch/x86/ia32/ia32_signal.c
+> > +++ b/arch/x86/ia32/ia32_signal.c
+> > @@ -358,7 +358,7 @@ int ia32_setup_rt_frame(int sig, struct ksignal *ksig,
+> >                 put_user_ex(ptr_to_compat(&frame->uc), &frame->puc);
+> >
+> >                 /* Create the ucontext.  */
+> > -               if (boot_cpu_has(X86_FEATURE_XSAVE))
+> > +               if (static_cpu_has(X86_FEATURE_XSAVE))
 
-For arm64, we can check for PT_GNU_PROPERTY and then give up
-unconditionally.
 
-For x86, we would fall back to PT_NOTE scanning, but this will add a bit
-of cost to binaries that don't have NT_GNU_PROPERTY_TYPE_0.  The ld.so
-version doesn't tell you what ELF ABI a given executable conforms to.
+Peter Z or A, does it look good to you? Could you please Ack this?
 
-Since this sounds like it's largely a distro-specific issue, maybe there
-could be a Kconfig option to turn the fallback PT_NOTE scanning on?
 
-Cheers
----Dave
+> >                         put_user_ex(UC_FP_XSTATE, &frame->uc.uc_flags);
+> >                 else
+> >                         put_user_ex(0, &frame->uc.uc_flags);
+> > diff --git a/arch/x86/kernel/signal.c b/arch/x86/kernel/signal.c
+> > index 364813cea647..52eb1d551aed 100644
+> > --- a/arch/x86/kernel/signal.c
+> > +++ b/arch/x86/kernel/signal.c
+> > @@ -391,7 +391,7 @@ static int __setup_rt_frame(int sig, struct ksignal *ksig,
+> >                 put_user_ex(&frame->uc, &frame->puc);
+> >
+> >                 /* Create the ucontext.  */
+> > -               if (boot_cpu_has(X86_FEATURE_XSAVE))
+> > +               if (static_cpu_has(X86_FEATURE_XSAVE))
+> >                         put_user_ex(UC_FP_XSTATE, &frame->uc.uc_flags);
+> >                 else
+> >                         put_user_ex(0, &frame->uc.uc_flags);
+> > --
+> > 2.22.0.rc1.257.g3120a18244-goog
+> >
