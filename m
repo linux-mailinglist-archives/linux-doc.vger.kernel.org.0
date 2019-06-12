@@ -2,114 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1B25041C2E
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2019 08:27:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5FAFA42175
+	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2019 11:53:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730989AbfFLG07 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 Jun 2019 02:26:59 -0400
-Received: from szxga05-in.huawei.com ([45.249.212.191]:18137 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1726010AbfFLG07 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 12 Jun 2019 02:26:59 -0400
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.59])
-        by Forcepoint Email with ESMTP id 81C41E146AD85FC4BB65;
-        Wed, 12 Jun 2019 14:26:54 +0800 (CST)
-Received: from [127.0.0.1] (10.133.215.186) by DGGEMS402-HUB.china.huawei.com
- (10.3.19.202) with Microsoft SMTP Server id 14.3.439.0; Wed, 12 Jun 2019
- 14:26:46 +0800
-Subject: Re: [PATCH v8 2/7] x86/dma: use IS_ENABLED() to simplify the code
-To:     Borislav Petkov <bp@alien8.de>
-CC:     Jean-Philippe Brucker <jean-philippe.brucker@arm.com>,
-        John Garry <john.garry@huawei.com>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Will Deacon <will.deacon@arm.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        linux-doc <linux-doc@vger.kernel.org>,
-        Sebastian Ott <sebott@linux.ibm.com>,
-        Gerald Schaefer <gerald.schaefer@de.ibm.com>,
-        "Martin Schwidefsky" <schwidefsky@de.ibm.com>,
-        Heiko Carstens <heiko.carstens@de.ibm.com>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        "Michael Ellerman" <mpe@ellerman.id.au>,
-        Tony Luck <tony.luck@intel.com>,
-        Fenghua Yu <fenghua.yu@intel.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        David Woodhouse <dwmw2@infradead.org>,
-        iommu <iommu@lists.linux-foundation.org>,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        linux-s390 <linux-s390@vger.kernel.org>,
-        linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
-        x86 <x86@kernel.org>, linux-ia64 <linux-ia64@vger.kernel.org>,
-        Hanjun Guo <guohanjun@huawei.com>
-References: <20190530034831.4184-1-thunder.leizhen@huawei.com>
- <20190530034831.4184-3-thunder.leizhen@huawei.com>
- <20190612051624.GF32652@zn.tnic>
-From:   "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>
-Message-ID: <bd743433-73e9-3cf1-c159-4371abebd989@huawei.com>
-Date:   Wed, 12 Jun 2019 14:26:43 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+        id S2437703AbfFLJxn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 12 Jun 2019 05:53:43 -0400
+Received: from smtp.nue.novell.com ([195.135.221.5]:43724 "EHLO
+        smtp.nue.novell.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2437415AbfFLJxn (ORCPT
+        <rfc822;groupwise-linux-doc@vger.kernel.org:0:0>);
+        Wed, 12 Jun 2019 05:53:43 -0400
+Received: from emea4-mta.ukb.novell.com ([10.120.13.87])
+        by smtp.nue.novell.com with ESMTP (TLS encrypted); Wed, 12 Jun 2019 11:53:41 +0200
+Received: from suselix (nwb-a10-snat.microfocus.com [10.120.13.202])
+        by emea4-mta.ukb.novell.com with ESMTP (TLS encrypted); Wed, 12 Jun 2019 07:50:13 +0100
+Date:   Wed, 12 Jun 2019 08:50:09 +0200
+From:   Andreas Herrmann <aherrmann@suse.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-block@vger.kernel.org
+Subject: [PATCH] block/switching-sched.txt: Update to blk-mq schedulers
+Message-ID: <20190612065009.GA11361@suselix>
 MIME-Version: 1.0
-In-Reply-To: <20190612051624.GF32652@zn.tnic>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.133.215.186]
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
+Remove references to CFQ and legacy block layer which are gone.
+Update example with what's available under blk-mq.
 
-On 2019/6/12 13:16, Borislav Petkov wrote:
-> On Thu, May 30, 2019 at 11:48:26AM +0800, Zhen Lei wrote:
->> This patch removes the ifdefs around CONFIG_IOMMU_DEFAULT_PASSTHROUGH to
->> improve readablity.
-> 
-> Avoid having "This patch" or "This commit" in the commit message. It is
-> tautologically useless.
+Signed-off-by: Andreas Herrmann <aherrmann@suse.com>
+---
+ Documentation/block/switching-sched.txt | 18 ++++++++----------
+ 1 file changed, 8 insertions(+), 10 deletions(-)
 
-OK, thanks.
-
-> 
-> Also, do
-> 
-> $ git grep 'This patch' Documentation/process
-> 
-> for more details.
-> 
->> Signed-off-by: Zhen Lei <thunder.leizhen@huawei.com>
->> ---
->>  arch/x86/kernel/pci-dma.c | 7 ++-----
->>  1 file changed, 2 insertions(+), 5 deletions(-)
->>
->> diff --git a/arch/x86/kernel/pci-dma.c b/arch/x86/kernel/pci-dma.c
->> index dcd272dbd0a9330..9f2b19c35a060df 100644
->> --- a/arch/x86/kernel/pci-dma.c
->> +++ b/arch/x86/kernel/pci-dma.c
->> @@ -43,11 +43,8 @@
->>   * It is also possible to disable by default in kernel config, and enable with
->>   * iommu=nopt at boot time.
->>   */
->> -#ifdef CONFIG_IOMMU_DEFAULT_PASSTHROUGH
->> -int iommu_pass_through __read_mostly = 1;
->> -#else
->> -int iommu_pass_through __read_mostly;
->> -#endif
->> +int iommu_pass_through __read_mostly =
->> +			IS_ENABLED(CONFIG_IOMMU_DEFAULT_PASSTHROUGH);
-> 
-> Let that line stick out.
-
-OK, I will merge them on the same line.
-
-> 
-> Thx.
-> 
-
+diff --git a/Documentation/block/switching-sched.txt b/Documentation/block/switching-sched.txt
+index 3b2612e342f1..7977f6fb8b20 100644
+--- a/Documentation/block/switching-sched.txt
++++ b/Documentation/block/switching-sched.txt
+@@ -13,11 +13,9 @@ you can do so by typing:
+ 
+ # mount none /sys -t sysfs
+ 
+-As of the Linux 2.6.10 kernel, it is now possible to change the
+-IO scheduler for a given block device on the fly (thus making it possible,
+-for instance, to set the CFQ scheduler for the system default, but
+-set a specific device to use the deadline or noop schedulers - which
+-can improve that device's throughput).
++It is possible to change the IO scheduler for a given block device on
++the fly to select one of mq-deadline, none, bfq, or kyber schedulers -
++which can improve that device's throughput.
+ 
+ To set a specific scheduler, simply do this:
+ 
+@@ -30,8 +28,8 @@ The list of defined schedulers can be found by simply doing
+ a "cat /sys/block/DEV/queue/scheduler" - the list of valid names
+ will be displayed, with the currently selected scheduler in brackets:
+ 
+-# cat /sys/block/hda/queue/scheduler
+-noop deadline [cfq]
+-# echo deadline > /sys/block/hda/queue/scheduler
+-# cat /sys/block/hda/queue/scheduler
+-noop [deadline] cfq
++# cat /sys/block/sda/queue/scheduler
++[mq-deadline] kyber bfq none
++# echo none >/sys/block/sda/queue/scheduler
++# cat /sys/block/sda/queue/scheduler
++[none] mq-deadline kyber bfq
+-- 
+2.13.7
