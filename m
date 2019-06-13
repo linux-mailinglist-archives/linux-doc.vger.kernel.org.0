@@ -2,94 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1C64D43C20
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 17:34:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C802B43BE3
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 17:32:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727763AbfFMPeM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jun 2019 11:34:12 -0400
-Received: from mail-pf1-f174.google.com ([209.85.210.174]:33269 "EHLO
-        mail-pf1-f174.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728256AbfFMKcw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jun 2019 06:32:52 -0400
-Received: by mail-pf1-f174.google.com with SMTP id x15so11605285pfq.0
-        for <linux-doc@vger.kernel.org>; Thu, 13 Jun 2019 03:32:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=c8B2WpV2ao/GiAyoXZe0rgTXimW81Zj9eba5b1nq+eE=;
-        b=h8V7naw5ZXcy9hmK/khUBCeii6w8istWHF8EhmWYofLp5tS8e7g/0p6wZ6C0USi+Dh
-         mrRUluvbHlgWF/K0yOocTUP2YlkLwNpFUDSsXVVnXSqzMxRZWRa8AlpSQUB4RrPs6IWp
-         Un0SbBuDDP+12ShPcNz/XCABHYeLuj6PS9IayrYHiA8AwtHPQ4tPtuphrFBF90Vs17i1
-         vsXkMoAETxkRSg8jeio5rfDxL0JIBqmfMMx1icRj4Xq3iUPOW52qUByywGCwTiXh8DFu
-         1ObjgH9WASPPsW9zF4CAFudb6rqRmc7X2kjWgK4X/RZCxjra/QjT4/pkl2l4+HA8RP9h
-         ch5A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=c8B2WpV2ao/GiAyoXZe0rgTXimW81Zj9eba5b1nq+eE=;
-        b=HLp+U7ir7iveIO+7g+5PBWCh2dPY0COXd/nzqvQ1MitBDV3qtHI+D2FcuNGgrU/9I2
-         i/rH0fAh9x95aVJQuJ16ip9gLslGfN7kOpzfkH5WkpZJ9YbaebCHc0wA7BXgP3I+Lijb
-         5woad1hfK2hoytkCdhsdLKiZE+45QIYY5MJtakATf6eTuFZAQE3pXvZLYClksTlvHAiW
-         PkqTtxV5rx4kQHQecR9Dsrq/yNR19kFjzWabQsSiGbi2YLDl2xZmnZys0GiIzXTBTwdu
-         GaPlOIFGaJA/W69jQtixWiVEWHLDOd1oUiyelvrbujnbaG6avQPCde1WDc2o2qTvAH/3
-         rmDg==
-X-Gm-Message-State: APjAAAUEoYl2oNNRZ3Js1Q9uC00PTm0dqMCc08AsIGs5rsJhRKY4PWij
-        1r+55lFUUmiWDxdSWlBOsHSIvQ==
-X-Google-Smtp-Source: APXvYqzzZ7YxoNMF8oKGpZA1V8rzQ5wmso5pRZlZbpTxImoytKeurGrlcgP5yFfHuYycERwMARH53w==
-X-Received: by 2002:a17:90a:8c06:: with SMTP id a6mr963486pjo.45.1560421971996;
-        Thu, 13 Jun 2019 03:32:51 -0700 (PDT)
-Received: from localhost.localdomain ([117.196.234.139])
-        by smtp.gmail.com with ESMTPSA id a12sm2265078pgq.0.2019.06.13.03.32.39
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-        Thu, 13 Jun 2019 03:32:51 -0700 (PDT)
-From:   Sumit Garg <sumit.garg@linaro.org>
-To:     keyrings@vger.kernel.org, linux-integrity@vger.kernel.org,
-        linux-security-module@vger.kernel.org
-Cc:     jens.wiklander@linaro.org, corbet@lwn.net, dhowells@redhat.com,
-        jejb@linux.ibm.com, jarkko.sakkinen@linux.intel.com,
-        zohar@linux.ibm.com, jmorris@namei.org, serge@hallyn.com,
-        ard.biesheuvel@linaro.org, daniel.thompson@linaro.org,
+        id S1728518AbfFMPcT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 11:32:19 -0400
+Received: from relay.sw.ru ([185.231.240.75]:40016 "EHLO relay.sw.ru"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728483AbfFMKtT (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Jun 2019 06:49:19 -0400
+Received: from [172.16.25.12]
+        by relay.sw.ru with esmtp (Exim 4.92)
+        (envelope-from <aryabinin@virtuozzo.com>)
+        id 1hbNI7-0000bh-9J; Thu, 13 Jun 2019 13:49:11 +0300
+Subject: Re: [PATCH v3 1/3] lib/test_kasan: Add bitops tests
+To:     Marco Elver <elver@google.com>, peterz@infradead.org,
+        dvyukov@google.com, glider@google.com, andreyknvl@google.com,
+        mark.rutland@arm.com, hpa@zytor.com
+Cc:     corbet@lwn.net, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
+        x86@kernel.org, arnd@arndb.de, jpoimboe@redhat.com,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        tee-dev@lists.linaro.org, Sumit Garg <sumit.garg@linaro.org>
-Subject: [RFC 7/7] MAINTAINERS: Add entry for TEE based Trusted Keys
-Date:   Thu, 13 Jun 2019 16:00:33 +0530
-Message-Id: <1560421833-27414-8-git-send-email-sumit.garg@linaro.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1560421833-27414-1-git-send-email-sumit.garg@linaro.org>
-References: <1560421833-27414-1-git-send-email-sumit.garg@linaro.org>
+        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com
+References: <20190531150828.157832-1-elver@google.com>
+ <20190531150828.157832-2-elver@google.com>
+From:   Andrey Ryabinin <aryabinin@virtuozzo.com>
+Message-ID: <5c35bc08-749f-dbc4-09d0-fcf14b1da1b3@virtuozzo.com>
+Date:   Thu, 13 Jun 2019 13:49:23 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
+MIME-Version: 1.0
+In-Reply-To: <20190531150828.157832-2-elver@google.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add MAINTAINERS entry for TEE based Trusted Keys framework.
 
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
----
- MAINTAINERS | 9 +++++++++
- 1 file changed, 9 insertions(+)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 57f496c..db84fc4 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -8728,6 +8728,15 @@ F:	include/keys/trusted-type.h
- F:	security/keys/trusted.c
- F:	security/keys/trusted.h
- 
-+KEYS-TEE-TRUSTED
-+M:	Sumit Garg <sumit.garg@linaro.org>
-+L:	linux-integrity@vger.kernel.org
-+L:	keyrings@vger.kernel.org
-+S:	Supported
-+F:	Documentation/security/keys/tee-trusted.rst
-+F:	include/keys/tee_trusted.h
-+F:	security/keys/tee_trusted.c
-+
- KEYS/KEYRINGS:
- M:	David Howells <dhowells@redhat.com>
- L:	keyrings@vger.kernel.org
--- 
-2.7.4
+On 5/31/19 6:08 PM, Marco Elver wrote:
+> This adds bitops tests to the test_kasan module. In a follow-up patch,
+> support for bitops instrumentation will be added.
+> 
+> Signed-off-by: Marco Elver <elver@google.com>
+> ---
+> Changes in v3:
+> * Use kzalloc instead of kmalloc.
+> * Use sizeof(*bits).
+> 
+> Changes in v2:
+> * Use BITS_PER_LONG.
+> * Use heap allocated memory for test, as newer compilers (correctly)
+>   warn on OOB stack access.
+> ---
+>  lib/test_kasan.c | 75 ++++++++++++++++++++++++++++++++++++++++++++++--
+>  1 file changed, 72 insertions(+), 3 deletions(-)
+> 
+> diff --git a/lib/test_kasan.c b/lib/test_kasan.c
+> index 7de2702621dc..1ef9702327d2 100644
+> --- a/lib/test_kasan.c
+> +++ b/lib/test_kasan.c
+> @@ -11,16 +11,17 @@
+>  
+>  #define pr_fmt(fmt) "kasan test: %s " fmt, __func__
+>  
+> +#include <linux/bitops.h>
+>  #include <linux/delay.h>
+> +#include <linux/kasan.h>
+>  #include <linux/kernel.h>
+> -#include <linux/mman.h>
+>  #include <linux/mm.h>
+> +#include <linux/mman.h>
+> +#include <linux/module.h>
+>  #include <linux/printk.h>
+>  #include <linux/slab.h>
+>  #include <linux/string.h>
+>  #include <linux/uaccess.h>
+> -#include <linux/module.h>
+> -#include <linux/kasan.h>
+>  
+>  /*
+>   * Note: test functions are marked noinline so that their names appear in
+> @@ -623,6 +624,73 @@ static noinline void __init kasan_strings(void)
+>  	strnlen(ptr, 1);
+>  }
+>  
+> +static noinline void __init kasan_bitops(void)
+> +{
+> +	long *bits = kzalloc(sizeof(*bits), GFP_KERNEL);
 
+It would be safer to do kzalloc(sizeof(*bits) + 1, GFP_KERNEL) and change tests accordingly to: set_bit(BITS_PER_LONG + 1, bits) ...
+kmalloc will internally round up allocation to 16-bytes, so we won't be actually corrupting someone elses memory.
+
+
+> +	if (!bits)
+> +		return;
+> +
+> +	pr_info("within-bounds in set_bit");
+> +	set_bit(0, bits);
+> +
+> +	pr_info("within-bounds in set_bit");
+> +	set_bit(BITS_PER_LONG - 1, bits);
+
+
+I'd remove these two. There are plenty of within bounds set_bit() in the kernel so they are well tested already.
