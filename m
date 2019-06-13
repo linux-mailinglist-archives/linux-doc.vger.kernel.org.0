@@ -2,117 +2,162 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 28F4443E9D
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 17:52:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4F4D7442CC
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 18:26:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389914AbfFMPv7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jun 2019 11:51:59 -0400
-Received: from foss.arm.com ([217.140.110.172]:43874 "EHLO foss.arm.com"
+        id S1731243AbfFMQ0A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 12:26:00 -0400
+Received: from smtp5-g21.free.fr ([212.27.42.5]:34420 "EHLO smtp5-g21.free.fr"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2389906AbfFMPv6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 13 Jun 2019 11:51:58 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 6B8E0A78;
-        Thu, 13 Jun 2019 08:51:57 -0700 (PDT)
-Received: from e119884-lin.cambridge.arm.com (e119884-lin.cambridge.arm.com [10.1.196.72])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 1748E3F246;
-        Thu, 13 Jun 2019 08:51:55 -0700 (PDT)
-From:   Vincenzo Frascino <vincenzo.frascino@arm.com>
-To:     linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-mm@kvack.org, linux-arch@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will.deacon@arm.com>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Alexander Viro <viro@zeniv.linux.org.uk>
-Subject: [PATCH v5 2/2] arm64: Relax Documentation/arm64/tagged-pointers.txt
-Date:   Thu, 13 Jun 2019 16:51:37 +0100
-Message-Id: <20190613155137.47675-3-vincenzo.frascino@arm.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190613155137.47675-1-vincenzo.frascino@arm.com>
-References: <cover.1560339705.git.andreyknvl@google.com>
- <20190613155137.47675-1-vincenzo.frascino@arm.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1730967AbfFMQ0A (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Jun 2019 12:26:00 -0400
+Received: from heffalump.sk2.org (unknown [88.186.243.14])
+        by smtp5-g21.free.fr (Postfix) with ESMTPS id E012F5FFD3;
+        Thu, 13 Jun 2019 18:25:57 +0200 (CEST)
+Received: from steve by heffalump.sk2.org with local (Exim 4.89)
+        (envelope-from <steve@sk2.org>)
+        id 1hbSY0-0005A0-Vs; Thu, 13 Jun 2019 18:25:57 +0200
+From:   Stephen Kitt <steve@sk2.org>
+To:     corbet@lwn.net, federico.vaga@vaga.pv.it, linux-doc@vger.kernel.org
+Cc:     keescook@chromium.org, linux-kernel@vger.kernel.org,
+        Stephen Kitt <steve@sk2.org>
+Subject: [PATCH] docs: stop suggesting strlcpy
+Date:   Thu, 13 Jun 2019 18:25:48 +0200
+Message-Id: <20190613162548.19792-1-steve@sk2.org>
+X-Mailer: git-send-email 2.11.0
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On arm64 the TCR_EL1.TBI0 bit has been always enabled hence
-the userspace (EL0) is allowed to set a non-zero value in the
-top byte but the resulting pointers are not allowed at the
-user-kernel syscall ABI boundary.
+Since strlcpy is deprecated, the documentation shouldn't suggest using
+it. This patch fixes the examples to use strscpy instead. It also uses
+sizeof instead of underlying constants as far as possible, to simplify
+future changes to the corresponding data structures.
 
-With the relaxed ABI proposed in this set, it is now possible to pass
-tagged pointers to the syscalls, when these pointers are in memory
-ranges obtained by an anonymous (MAP_ANONYMOUS) mmap().
-
-Relax the requirements described in tagged-pointers.txt to be compliant
-with the behaviours guaranteed by the ARM64 Tagged Address ABI.
-
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Will Deacon <will.deacon@arm.com>
-CC: Andrey Konovalov <andreyknvl@google.com>
-Signed-off-by: Vincenzo Frascino <vincenzo.frascino@arm.com>
+Signed-off-by: Stephen Kitt <steve@sk2.org>
 ---
- Documentation/arm64/tagged-pointers.txt | 23 ++++++++++++++++-------
- 1 file changed, 16 insertions(+), 7 deletions(-)
+ Documentation/hid/hid-transport.txt                         | 6 +++---
+ Documentation/i2c/instantiating-devices                     | 2 +-
+ Documentation/i2c/upgrading-clients                         | 4 ++--
+ Documentation/kernel-hacking/locking.rst                    | 6 +++---
+ Documentation/translations/it_IT/kernel-hacking/locking.rst | 6 +++---
+ 5 files changed, 12 insertions(+), 12 deletions(-)
 
-diff --git a/Documentation/arm64/tagged-pointers.txt b/Documentation/arm64/tagged-pointers.txt
-index a25a99e82bb1..e33af14478e3 100644
---- a/Documentation/arm64/tagged-pointers.txt
-+++ b/Documentation/arm64/tagged-pointers.txt
-@@ -18,7 +18,8 @@ Passing tagged addresses to the kernel
- --------------------------------------
+diff --git a/Documentation/hid/hid-transport.txt b/Documentation/hid/hid-transport.txt
+index 3dcba9fd4a3a..4f41d67f1b4b 100644
+--- a/Documentation/hid/hid-transport.txt
++++ b/Documentation/hid/hid-transport.txt
+@@ -194,9 +194,9 @@ with HID core:
+ 		goto err_<...>;
+ 	}
  
- All interpretation of userspace memory addresses by the kernel assumes
--an address tag of 0x00.
-+an address tag of 0x00, unless the userspace opts-in the ARM64 Tagged
-+Address ABI via the PR_SET_TAGGED_ADDR_CTRL prctl().
+-	strlcpy(hid->name, <device-name-src>, 127);
+-	strlcpy(hid->phys, <device-phys-src>, 63);
+-	strlcpy(hid->uniq, <device-uniq-src>, 63);
++	strscpy(hid->name, <device-name-src>, sizeof(hid->name));
++	strscpy(hid->phys, <device-phys-src>, sizeof(hid->phys));
++	strscpy(hid->uniq, <device-uniq-src>, sizeof(hid->uniq));
  
- This includes, but is not limited to, addresses found in:
+ 	hid->ll_driver = &custom_ll_driver;
+ 	hid->bus = <device-bus>;
+diff --git a/Documentation/i2c/instantiating-devices b/Documentation/i2c/instantiating-devices
+index 0d85ac1935b7..8bc7d99133e3 100644
+--- a/Documentation/i2c/instantiating-devices
++++ b/Documentation/i2c/instantiating-devices
+@@ -137,7 +137,7 @@ static int usb_hcd_nxp_probe(struct platform_device *pdev)
+ 	(...)
+ 	i2c_adap = i2c_get_adapter(2);
+ 	memset(&i2c_info, 0, sizeof(struct i2c_board_info));
+-	strlcpy(i2c_info.type, "isp1301_nxp", I2C_NAME_SIZE);
++	strscpy(i2c_info.type, "isp1301_nxp", sizeof(i2c_info.type));
+ 	isp1301_i2c_client = i2c_new_probed_device(i2c_adap, &i2c_info,
+ 						   normal_i2c, NULL);
+ 	i2c_put_adapter(i2c_adap);
+diff --git a/Documentation/i2c/upgrading-clients b/Documentation/i2c/upgrading-clients
+index ccba3ffd6e80..96392cc5b5c7 100644
+--- a/Documentation/i2c/upgrading-clients
++++ b/Documentation/i2c/upgrading-clients
+@@ -43,7 +43,7 @@ static int example_attach(struct i2c_adapter *adap, int addr, int kind)
+ 	example->client.adapter = adap;
  
-@@ -31,18 +32,23 @@ This includes, but is not limited to, addresses found in:
-  - the frame pointer (x29) and frame records, e.g. when interpreting
-    them to generate a backtrace or call graph.
+ 	i2c_set_clientdata(&state->i2c_client, state);
+-	strlcpy(client->i2c_client.name, "example", I2C_NAME_SIZE);
++	strscpy(client->i2c_client.name, "example", sizeof(client->i2c_client.name));
  
--Using non-zero address tags in any of these locations may result in an
--error code being returned, a (fatal) signal being raised, or other modes
--of failure.
-+Using non-zero address tags in any of these locations when the
-+userspace application did not opt-in to the ARM64 Tagged Address ABI
-+may result in an error code being returned, a (fatal) signal being raised,
-+or other modes of failure.
+ 	ret = i2c_attach_client(&state->i2c_client);
+ 	if (ret < 0) {
+@@ -138,7 +138,7 @@ can be removed:
+ -	example->client.flags   = 0;
+ -	example->client.adapter = adap;
+ -
+--	strlcpy(client->i2c_client.name, "example", I2C_NAME_SIZE);
++-	strscpy(client->i2c_client.name, "example", sizeof(client->i2c_client.name));
  
--For these reasons, passing non-zero address tags to the kernel via
--system calls is forbidden, and using a non-zero address tag for sp is
--strongly discouraged.
-+For these reasons, when the userspace application did not opt-in, passing
-+non-zero address tags to the kernel via system calls is forbidden, and using
-+a non-zero address tag for sp is strongly discouraged.
+ The i2c_set_clientdata is now:
  
- Programs maintaining a frame pointer and frame records that use non-zero
- address tags may suffer impaired or inaccurate debug and profiling
- visibility.
+diff --git a/Documentation/kernel-hacking/locking.rst b/Documentation/kernel-hacking/locking.rst
+index 519673df0e82..dc698ea456e0 100644
+--- a/Documentation/kernel-hacking/locking.rst
++++ b/Documentation/kernel-hacking/locking.rst
+@@ -451,7 +451,7 @@ to protect the cache and all the objects within it. Here's the code::
+             if ((obj = kmalloc(sizeof(*obj), GFP_KERNEL)) == NULL)
+                     return -ENOMEM;
  
-+A definition of the meaning of ARM64 Tagged Address ABI and of the
-+guarantees that the ABI provides when the userspace opts-in via prctl()
-+can be found in: Documentation/arm64/tagged-address-abi.txt.
-+
+-            strlcpy(obj->name, name, sizeof(obj->name));
++            strscpy(obj->name, name, sizeof(obj->name));
+             obj->id = id;
+             obj->popularity = 0;
  
- Preserving tags
- ---------------
-@@ -57,6 +63,9 @@ be preserved.
- The architecture prevents the use of a tagged PC, so the upper byte will
- be set to a sign-extension of bit 55 on exception return.
+@@ -660,7 +660,7 @@ Here is the code::
+      }
  
-+These behaviours are preserved even when the userspace opts-in to the ARM64
-+Tagged Address ABI via the PR_SET_TAGGED_ADDR_CTRL prctl().
-+
+     @@ -63,6 +94,7 @@
+-             strlcpy(obj->name, name, sizeof(obj->name));
++             strscpy(obj->name, name, sizeof(obj->name));
+              obj->id = id;
+              obj->popularity = 0;
+     +        obj->refcnt = 1; /* The cache holds a reference */
+@@ -774,7 +774,7 @@ the lock is no longer used to protect the reference count itself.
+      }
  
- Other considerations
- --------------------
+     @@ -94,7 +76,7 @@
+-             strlcpy(obj->name, name, sizeof(obj->name));
++             strscpy(obj->name, name, sizeof(obj->name));
+              obj->id = id;
+              obj->popularity = 0;
+     -        obj->refcnt = 1; /* The cache holds a reference */
+diff --git a/Documentation/translations/it_IT/kernel-hacking/locking.rst b/Documentation/translations/it_IT/kernel-hacking/locking.rst
+index 0ef31666663b..5fd8a1abd2be 100644
+--- a/Documentation/translations/it_IT/kernel-hacking/locking.rst
++++ b/Documentation/translations/it_IT/kernel-hacking/locking.rst
+@@ -468,7 +468,7 @@ e tutti gli oggetti che contiene. Ecco il codice::
+             if ((obj = kmalloc(sizeof(*obj), GFP_KERNEL)) == NULL)
+                     return -ENOMEM;
+ 
+-            strlcpy(obj->name, name, sizeof(obj->name));
++            strscpy(obj->name, name, sizeof(obj->name));
+             obj->id = id;
+             obj->popularity = 0;
+ 
+@@ -678,7 +678,7 @@ Ecco il codice::
+      }
+ 
+     @@ -63,6 +94,7 @@
+-             strlcpy(obj->name, name, sizeof(obj->name));
++             strscpy(obj->name, name, sizeof(obj->name));
+              obj->id = id;
+              obj->popularity = 0;
+     +        obj->refcnt = 1; /* The cache holds a reference */
+@@ -792,7 +792,7 @@ contatore stesso.
+      }
+ 
+     @@ -94,7 +76,7 @@
+-             strlcpy(obj->name, name, sizeof(obj->name));
++             strscpy(obj->name, name, sizeof(obj->name));
+              obj->id = id;
+              obj->popularity = 0;
+     -        obj->refcnt = 1; /* The cache holds a reference */
 -- 
-2.21.0
+2.11.0
 
