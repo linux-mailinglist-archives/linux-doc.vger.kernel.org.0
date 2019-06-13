@@ -2,83 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5FF1643830
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 17:04:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E367343952
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 17:13:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732836AbfFMPEE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jun 2019 11:04:04 -0400
-Received: from hostingweb31-40.netsons.net ([89.40.174.40]:45540 "EHLO
-        hostingweb31-40.netsons.net" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1732475AbfFMOSq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jun 2019 10:18:46 -0400
-Received: from [109.168.11.45] (port=39754 helo=pc-ceresoli.dev.aim)
-        by hostingweb31.netsons.net with esmtpa (Exim 4.92)
-        (envelope-from <luca@lucaceresoli.net>)
-        id 1hbQYs-0005He-T4; Thu, 13 Jun 2019 16:18:42 +0200
-From:   Luca Ceresoli <luca@lucaceresoli.net>
-To:     linux-media@vger.kernel.org
-Cc:     Luca Ceresoli <luca@lucaceresoli.net>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Hans Verkuil <hverkuil@xs4all.nl>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH 9/9] media: docs: v4l2-controls: remove outdated paragraph
-Date:   Thu, 13 Jun 2019 16:18:26 +0200
-Message-Id: <20190613141826.26775-9-luca@lucaceresoli.net>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190613141826.26775-1-luca@lucaceresoli.net>
-References: <20190613141826.26775-1-luca@lucaceresoli.net>
+        id S1733169AbfFMPNE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 11:13:04 -0400
+Received: from mga02.intel.com ([134.134.136.20]:6651 "EHLO mga02.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1732613AbfFMPND (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Jun 2019 11:13:03 -0400
+X-Amp-Result: UNSCANNABLE
+X-Amp-File-Uploaded: False
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 13 Jun 2019 08:13:02 -0700
+X-ExtLoop1: 1
+Received: from bbouchn-mobl.ger.corp.intel.com (HELO localhost) ([10.252.35.22])
+  by orsmga006.jf.intel.com with ESMTP; 13 Jun 2019 08:12:58 -0700
+Date:   Thu, 13 Jun 2019 18:12:57 +0300
+From:   Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
+To:     Sumit Garg <sumit.garg@linaro.org>
+Cc:     keyrings@vger.kernel.org, linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org, jens.wiklander@linaro.org,
+        corbet@lwn.net, dhowells@redhat.com, jejb@linux.ibm.com,
+        zohar@linux.ibm.com, jmorris@namei.org, serge@hallyn.com,
+        ard.biesheuvel@linaro.org, daniel.thompson@linaro.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        tee-dev@lists.linaro.org
+Subject: Re: [RFC 1/7] tee: optee: allow kernel pages to register as shm
+Message-ID: <20190613151257.GA18488@linux.intel.com>
+References: <1560421833-27414-1-git-send-email-sumit.garg@linaro.org>
+ <1560421833-27414-2-git-send-email-sumit.garg@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - hostingweb31.netsons.net
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - lucaceresoli.net
-X-Get-Message-Sender-Via: hostingweb31.netsons.net: authenticated_id: luca+lucaceresoli.net/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: hostingweb31.netsons.net: luca@lucaceresoli.net
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1560421833-27414-2-git-send-email-sumit.garg@linaro.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This paragraph was added by commit a42b57f5aacf ("V4L/DVB: Documentation:
-add v4l2-controls.txt documenting the new controls API") back in 2010, when
-the controls API has been improved. Nowadays it is a bit anachronistic, so
-remove it.
+On Thu, Jun 13, 2019 at 04:00:27PM +0530, Sumit Garg wrote:
+> Kernel pages are marked as normal type memory only so allow kernel pages
+> to be registered as shared memory with OP-TEE.
+> 
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 
-The same information is stated in up-to-date wording a few paragraphs later
-anyway:
+Just out of pure interest why this was not allowed before?
 
-> You’re done! And this is sufficient for most of the drivers we have. No
-> need to do any validation of control values, or implement QUERYCTRL,
-> QUERY_EXT_CTRL and QUERYMENU. And G/S_CTRL as well as G/TRY/S_EXT_CTRLS
-> are automatically supported.
-
-Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
----
- Documentation/media/kapi/v4l2-controls.rst | 5 -----
- 1 file changed, 5 deletions(-)
-
-diff --git a/Documentation/media/kapi/v4l2-controls.rst b/Documentation/media/kapi/v4l2-controls.rst
-index 407617b1d0ce..ebe2a55908be 100644
---- a/Documentation/media/kapi/v4l2-controls.rst
-+++ b/Documentation/media/kapi/v4l2-controls.rst
-@@ -98,11 +98,6 @@ For V4L2 drivers:
- 
- 	foo->v4l2_dev.ctrl_handler = &foo->ctrl_handler;
- 
--Finally, remove all control functions from your v4l2_ioctl_ops (if any):
--vidioc_queryctrl, vidioc_query_ext_ctrl, vidioc_querymenu, vidioc_g_ctrl,
--vidioc_s_ctrl, vidioc_g_ext_ctrls, vidioc_try_ext_ctrls and vidioc_s_ext_ctrls.
--Those are now no longer needed.
--
- For sub-device drivers:
- 
- .. code-block:: c
--- 
-2.21.0
-
+/Jarkko
