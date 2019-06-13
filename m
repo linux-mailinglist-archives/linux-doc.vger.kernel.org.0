@@ -2,80 +2,150 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 26ABE448DF
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 19:12:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9AE2E44D83
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 22:33:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2393251AbfFMRLn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jun 2019 13:11:43 -0400
-Received: from mail.kernel.org ([198.145.29.99]:54756 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2392711AbfFMRLm (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 13 Jun 2019 13:11:42 -0400
-Received: from localhost (unknown [131.107.160.220])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 0248C205ED;
-        Thu, 13 Jun 2019 17:11:42 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1560445902;
-        bh=no9PMWb5VDOx7ySl5Q7f0oB1g4k565KdjFHzM77TOLg=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=pwobQrn2aoQYIN1bzYPeE5Ko11Ur0FE4EXjws5h5FTkyrG4Rm77bvEnzXFBjvcjPp
-         /xjX3Xawq2DH3fe4mM55XcblmrXZTA/Op+UQVzyL1/o0OrLAknvnr0ybQvzBKWlEnS
-         t9RrtqaDbsvYLAiE/D8WMC2Zd3a7/dIb4ESmg2CY=
-Date:   Thu, 13 Jun 2019 13:11:41 -0400
-From:   Sasha Levin <sashal@kernel.org>
-To:     Sumit Garg <sumit.garg@linaro.org>
-Cc:     peterhuewe@gmx.de,
-        Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
-        jgg@ziepe.ca, corbet@lwn.net,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-doc@vger.kernel.org, linux-integrity@vger.kernel.org,
-        Microsoft Linux Kernel List <linux-kernel@microsoft.com>,
-        Thirupathaiah Annapureddy <thiruan@microsoft.com>,
-        "Bryan Kelly (CSI)" <bryankel@microsoft.com>,
-        tee-dev@lists.linaro.org
-Subject: Re: [PATCH v4 1/2] fTPM: firmware TPM running in TEE
-Message-ID: <20190613171141.GL1513@sasha-vm>
-References: <20190530152758.16628-1-sashal@kernel.org>
- <20190530152758.16628-2-sashal@kernel.org>
- <CAFA6WYM1NrghG9qxUhrm76kopvBx9nmCL9XnRs11ysb2Yr0+Qw@mail.gmail.com>
- <20190604200951.GB29739@sasha-vm>
- <CAFA6WYMOjgHRw9RVrjherNo0ZNbTtEonPwSFFC0dT4CZO=A1NQ@mail.gmail.com>
+        id S1728298AbfFMUdQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 16:33:16 -0400
+Received: from mail-qt1-f194.google.com ([209.85.160.194]:36268 "EHLO
+        mail-qt1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725789AbfFMUdQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jun 2019 16:33:16 -0400
+Received: by mail-qt1-f194.google.com with SMTP id p15so4792006qtl.3;
+        Thu, 13 Jun 2019 13:33:16 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=R2FstjYRqQg59DXy+7LjAPTotoewKiLMGMYZxUsswDg=;
+        b=slXjkj1j5Jm7zPn/DBlhDdXtqvGdl5k2k1Vc9O+nBLlxdfjSRYODAuHyOVgKkFYzxh
+         vp7TBDYBmQV/SF7e4gpa52WkRlEqvCtkxyzPBnLYNNHCQc5ISp7MrCHqhKlQySTkRS+D
+         cK+xlSOasWhT+qWKPcUHD3lDddzb0JLK7QIAlVwSrNyGxHbE8wdNHXL1zcfR/mPZ6hVe
+         SyV+fPQBNAiWSmIEocUb8DSLtvEu7n3wbVBIEpTIUjWym1LHsDXWjcz1+XKyLTdM2kUL
+         iVZxl70Ah7J1S1g8YonLd1bwB2t7p/O725vgTxX2DJ42kLwjAF30ualKT/NyVDqyQyOk
+         Z4qg==
+X-Gm-Message-State: APjAAAXdy2T2hFZC0+J4w2mc3Ls4aE1x7WIyvxeyj1oq1DsA05PQax3Y
+        vDaF/ADNTLo2Kwb2QwmlVw==
+X-Google-Smtp-Source: APXvYqz/AjvzkvNZlLu61SiHZDfFw95Oeihx85WNdMpZRhlJlbJo2We6Ewob7bP6MREJhRmhkvqgzQ==
+X-Received: by 2002:a0c:887c:: with SMTP id 57mr4994570qvm.192.1560457995500;
+        Thu, 13 Jun 2019 13:33:15 -0700 (PDT)
+Received: from localhost ([64.188.179.243])
+        by smtp.gmail.com with ESMTPSA id l88sm423749qte.33.2019.06.13.13.33.14
+        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+        Thu, 13 Jun 2019 13:33:14 -0700 (PDT)
+Date:   Thu, 13 Jun 2019 14:33:13 -0600
+From:   Rob Herring <robh@kernel.org>
+To:     Serge Semin <fancer.lancer@gmail.com>
+Cc:     Jean Delvare <jdelvare@suse.com>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Serge Semin <Sergey.Semin@t-platforms.ru>,
+        linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 1/2] dt-bindings: hwmon: Add DT bindings for TI
+ ads1000/ads1100 ADCs
+Message-ID: <20190613203313.GA23102@bogus>
+References: <20190514225810.12591-1-fancer.lancer@gmail.com>
+ <20190514225810.12591-2-fancer.lancer@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAFA6WYMOjgHRw9RVrjherNo0ZNbTtEonPwSFFC0dT4CZO=A1NQ@mail.gmail.com>
+In-Reply-To: <20190514225810.12591-2-fancer.lancer@gmail.com>
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jun 05, 2019 at 04:39:36PM +0530, Sumit Garg wrote:
->On Wed, 5 Jun 2019 at 01:39, Sasha Levin <sashal@kernel.org> wrote:
->>
->> On Tue, Jun 04, 2019 at 11:45:52AM +0530, Sumit Garg wrote:
->> >On Thu, 30 May 2019 at 20:58, Sasha Levin <sashal@kernel.org> wrote:
->> >> +       /* Open context with TEE driver */
->> >> +       pvt_data->ctx = tee_client_open_context(NULL, ftpm_tee_match, NULL,
->> >> +                                               NULL);
->> >> +       if (IS_ERR(pvt_data->ctx)) {
->> >> +               dev_err(dev, "%s:tee_client_open_context failed\n", __func__);
->> >
->> >Is this well tested? I see this misleading error multiple times as
->> >follows although TEE driver works pretty well.
->>
->> Yes, this was all functionally tested.
->
->Can you share your build instructions and testing approach?
+On Wed, May 15, 2019 at 01:58:08AM +0300, Serge Semin wrote:
+> Add dt-binding documentation for the Texas Instruments ads1000/ads1100 ADCs
+> driver.
+> 
+> Signed-off-by: Serge Semin <fancer.lancer@gmail.com>
+> ---
+>  .../devicetree/bindings/hwmon/ads1000.txt     | 61 ++++++++++++++++
 
-Yes: it looks like you got all the kernel bits, but not the firmware.
-There are instructions for it here: https://github.com/microsoft/ms-tpm-20-ref
+Bindings should be separate patch.
 
-Once it's running, you can test it by running your favorite TPM usecases
-through /dev/tpm0.
+>  Documentation/hwmon/ads1000.rst               | 72 +++++++++++++++++++
+>  2 files changed, 133 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/hwmon/ads1000.txt
+>  create mode 100644 Documentation/hwmon/ads1000.rst
+> 
+> diff --git a/Documentation/devicetree/bindings/hwmon/ads1000.txt b/Documentation/devicetree/bindings/hwmon/ads1000.txt
+> new file mode 100644
+> index 000000000000..3907b7da9b33
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/hwmon/ads1000.txt
+> @@ -0,0 +1,61 @@
+> +ADS1000/ADS1100 (I2C)
+> +
+> +This device is a 12-16 bit A-D converter with 1 input.
 
---
-Thanks,
-Sasha
+ADC's should be in bindings/iio/adc/
+
+> +
+> +The inputs can be used either as a differential pair of Vin+ Vin- or as a single
+> +ended sensor for Vin+ GND. The inputs mode is platform-dependent and isn't
+> +configured by software in any case.
+> +
+> +Device A-D converter sensitivity can be configured using two parameters:
+> + - pga is the programmable gain amplifier
+> +    0: x1 (default) 
+> +    1: x2
+> +    2: x4
+> +    3: x8
+> + - data_rate in samples per second also affecting the output code accuracy
+> +    0: 128SPS - +/- Vdd*0.488mV (default, ads1000 accepts this rate only)
+> +    1: 32SPS  - +/- Vdd*0.122mV
+> +    2: 16SPS  - +/- Vdd*0.061mV
+> +    3: 8SPS   - +/- Vdd*0.030mV
+> +   Since this parameter also affects the output accuracy, be aware the greater
+> +   SPS the worse accuracy.
+> +
+> +As a result the output value is calculated by the next formulae:
+> +dVin = Cod * Vdd / (PGA * max(|Cod|)), where
+> +max(|Cod|) - maximum possible value of the output code, which depends on the SPS
+> +setting from the table above.
+> +
+> +The ADS1000/ADS1100 dts-node:
+> +
+> +  Required properties:
+> +   - compatible : must be "ti,ads1000" or "ti,ads1100"
+> +   - reg : I2C bus address of the device
+> +   - #address-cells : must be <1>
+> +   - #size-cells : must be <0>
+> +   - vdd-supply : regulator for reference supply voltage (usually fixed)
+> +
+> +  Optional properties:
+> +   - ti,gain : the programmable gain amplifier setting
+> +   - ti,datarate : the converter data rate
+
+IIRC, we have standard properties for these.
+
+> +   - ti,voltage-divider : <R1 R2> Ohms inbound voltage dividers,
+> +     so dVin = (R1 + R2)/R2 * dVin
+> +
+> +Example:
+> +
+> +vdd_5v0: fixedregulator@0 {
+> +	compatible = "regulator-fixed";
+> +	regulator-name = "vdd-ref";
+> +	regulator-min-microvolt = <5000000>;
+> +	regulator-max-microvolt = <5000000>;
+> +	regulator-always-on;
+> +};
+> +
+> +tiadc: ads1000@48 {
+
+adc@48
+
+> +	compatible = "ti,ads1000";
+> +	reg = <0x48>;
+> +
+> +	vdd-supply = <&vdd_5v0>;
+> +	ti,gain = <0>;
+> +	ti,voltage-divider = <31600 3600>;
+> +};
+> +
