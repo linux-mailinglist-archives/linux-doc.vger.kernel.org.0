@@ -2,53 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2D9D543A4B
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 17:20:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BDF3844CC6
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 21:59:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389011AbfFMPUJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jun 2019 11:20:09 -0400
-Received: from mga18.intel.com ([134.134.136.126]:39442 "EHLO mga18.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2389002AbfFMPUI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 13 Jun 2019 11:20:08 -0400
-X-Amp-Result: UNSCANNABLE
-X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-  by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 13 Jun 2019 08:20:07 -0700
-X-ExtLoop1: 1
-Received: from bbouchn-mobl.ger.corp.intel.com (HELO localhost) ([10.252.35.22])
-  by orsmga004.jf.intel.com with ESMTP; 13 Jun 2019 08:20:04 -0700
-Date:   Thu, 13 Jun 2019 18:20:03 +0300
-From:   Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
-To:     Sumit Garg <sumit.garg@linaro.org>
-Cc:     keyrings@vger.kernel.org, linux-integrity@vger.kernel.org,
-        linux-security-module@vger.kernel.org, jens.wiklander@linaro.org,
-        corbet@lwn.net, dhowells@redhat.com, jejb@linux.ibm.com,
-        zohar@linux.ibm.com, jmorris@namei.org, serge@hallyn.com,
-        ard.biesheuvel@linaro.org, daniel.thompson@linaro.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        tee-dev@lists.linaro.org
-Subject: Re: [RFC 2/7] tee: enable support to register kernel memory
-Message-ID: <20190613152003.GE18488@linux.intel.com>
-References: <1560421833-27414-1-git-send-email-sumit.garg@linaro.org>
- <1560421833-27414-3-git-send-email-sumit.garg@linaro.org>
+        id S1727397AbfFMT7t (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 15:59:49 -0400
+Received: from qf-corp.com ([43.252.215.172]:52977 "EHLO server1.qf-corp.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1727290AbfFMT7s (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Jun 2019 15:59:48 -0400
+X-Greylist: delayed 16174 seconds by postgrey-1.27 at vger.kernel.org; Thu, 13 Jun 2019 15:59:47 EDT
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=qf-corp.com
+        ; s=default; h=Message-ID:Reply-To:Subject:To:From:Date:
+        Content-Transfer-Encoding:Content-Type:MIME-Version:Sender:Cc:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
+        List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=x+wk2oDUMoo/hQHPqS9UCKstzOaLw+EthDvW07j7+BE=; b=D1Uox1LMK1rt1QMSaLI0QVUciF
+        geUu4q/MDt4AXiwtcDXi/cVcLr+hBDsPy/2Xl5r3lxruinMoHt1fYMhtupUaO2oXN5oTw77CQsUaO
+        9vVf/bMnZA5dLbusdse2bJpavGwdxlLdLvsFRVKvg8jBLNbYTqIrlroVrJegLmgrpGQkhHiQO/LHW
+        Yu2bVirrWeDun1wCS3L12m9UImciTyoyDYoAggX1lKD5ykmHrqTjzNdOmfuWx3iA8I6TJsrHscloc
+        93WkeHI3IOsgEGsQahqfu0GX0dbf+j6uCvZ95Is0+SturD8IejPVhi0EfUdCBzoa3ahIU+otTu6By
+        qdtcHRAw==;
+Received: from [::1] (port=38800 helo=server1.qf-corp.com)
+        by server1.qf-corp.com with esmtpa (Exim 4.92)
+        (envelope-from <admin@qf-corp.com>)
+        id 1hbRdY-0000DV-P2; Thu, 13 Jun 2019 23:27:36 +0800
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <1560421833-27414-3-git-send-email-sumit.garg@linaro.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Date:   Thu, 13 Jun 2019 23:27:36 +0800
+From:   Herr David Williams <admin@qf-corp.com>
+To:     undisclosed-recipients:;
+Subject: dringender Kredit
+Reply-To: david.loanfirm18@gmail.com
+Mail-Reply-To: david.loanfirm18@gmail.com
+Message-ID: <c7e7fb6d973d3acf48fa821201bff6b2@qf-corp.com>
+X-Sender: admin@qf-corp.com
+User-Agent: Roundcube Webmail/1.3.8
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - server1.qf-corp.com
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - qf-corp.com
+X-Get-Message-Sender-Via: server1.qf-corp.com: authenticated_id: admin@qf-corp.com
+X-Authenticated-Sender: server1.qf-corp.com: admin@qf-corp.com
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jun 13, 2019 at 04:00:28PM +0530, Sumit Garg wrote:
-> Enable support to register kernel memory reference with TEE. This change
-> will allow TEE bus drivers to register memory references.
-> 
-> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 
-Reviewed-by: Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
 
-/Jarkko
+-- 
+Benötigen Sie dringend einen Kredit? Wenn ja, antworten Sie für weitere 
+Details
