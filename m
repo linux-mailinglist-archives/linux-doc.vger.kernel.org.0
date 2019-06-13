@@ -2,112 +2,159 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DDE5F43E2F
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 17:48:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D357943CFE
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 17:39:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731742AbfFMPsC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jun 2019 11:48:02 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:50160 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726541AbfFMJVh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jun 2019 05:21:37 -0400
+        id S1728853AbfFMPic (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 11:38:32 -0400
+Received: from casper.infradead.org ([85.118.1.10]:33510 "EHLO
+        casper.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731947AbfFMJ7G (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jun 2019 05:59:06 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
-        :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
-        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-         bh=KNxPWlWuxnDwYXMMhXWadjBNeF5Uv67xMzgxslH4spI=; b=RvVfgl22PpGBJDNLkXFMiMjLs
-        u8EyR5xVLEFRoaxMXVmWkgS3oWG0cFcTq94IwDR7upEolKf/rdjFDkLH8uYoayUuNpIviET6kY9/8
-        tbb/DBMzpHXF5XxnKNtjV46uRJS0UaH/2h+CpUg5R5DWhCY6Q++wILsSOi+cl7IF0vBSJ90GTuunC
-        bCj7nyddUBt0KfPVT3aZpEv8LRFzH7VdqyrF41olQSipswiMd3oI+WWxkn21LhC+JiiYWDkDaKY/j
-        GfjiqyLLH4ow9K7AOYgLJrGwE8KfWhs1zsCVQlmoIR2Jbf7d9y07Ie9yPKBC1GIea5Nu6gR4dOV/y
-        zHArEAOGg==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=hirez.programming.kicks-ass.net)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hbLvA-0000K1-OV; Thu, 13 Jun 2019 09:21:24 +0000
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 33A9D209C844F; Thu, 13 Jun 2019 11:21:23 +0200 (CEST)
-Date:   Thu, 13 Jun 2019 11:21:23 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Marco Elver <elver@google.com>
-Cc:     aryabinin@virtuozzo.com, dvyukov@google.com, glider@google.com,
-        andreyknvl@google.com, mark.rutland@arm.com, hpa@zytor.com,
-        corbet@lwn.net, tglx@linutronix.de, mingo@redhat.com, bp@alien8.de,
-        x86@kernel.org, arnd@arndb.de, jpoimboe@redhat.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com
-Subject: Re: [PATCH v3 2/3] x86: Use static_cpu_has in uaccess region to
- avoid instrumentation
-Message-ID: <20190613092123.GO3402@hirez.programming.kicks-ass.net>
-References: <20190531150828.157832-1-elver@google.com>
- <20190531150828.157832-3-elver@google.com>
+        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+        MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender
+        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=X6go1h+qBvd8UqStxDka25oSP1lwn219vXM1njzftqM=; b=st/cCkCW17JvfhPcMMlIiWlWs7
+        IjzbMHLeCgNGoALijV6IG+3mBu2hWh+zDF/ixgeztGRJFvKYWEb/k1hwDtOuJEM+LaN5VPyeL2Nyt
+        pUW3p7YE7JRXzR5AqF9H3+IiwxYWckQCRps/QFoMco8bS1sS+v518UWrrJXO7ml5NcscdFDSXeQVX
+        ZKduv2MoYrDVAMjIkypzrzv1fDu9De18EdqyKnVmVA/jtlt3lbqFtvB/kKq3/UdhRk448WORt2zGk
+        vyVeBQhaltTvjNhKaj4bDz1fJNL7g5eIVBQzyzZatNVk3zR46pfOQJ6fi4X1Ul2gzhVbF7Xgp5Fcx
+        8jdm6Tow==;
+Received: from 201.86.169.251.dynamic.adsl.gvt.net.br ([201.86.169.251] helo=coco.lan)
+        by casper.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+        id 1hbMVS-0000iN-9Z; Thu, 13 Jun 2019 09:58:54 +0000
+Date:   Thu, 13 Jun 2019 06:58:43 -0300
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+To:     "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Sebastian Reichel <sre@kernel.org>,
+        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        Len Brown <len.brown@intel.com>, Pavel Machek <pavel@ucw.cz>,
+        Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>,
+        Mark Brown <broonie@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "H. Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        David Airlie <airlied@linux.ie>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        "David S. Miller" <davem@davemloft.net>, linux-pm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-pci@vger.kernel.org, linux-wireless@vger.kernel.org,
+        netdev@vger.kernel.org
+Subject: Re: [PATCH v4 18/28] docs: convert docs to ReST and rename to *.rst
+Message-ID: <20190613065843.100f72dd@coco.lan>
+In-Reply-To: <7dc94cb4-ebf1-22ab-29c9-fcb2b875a9ac@csail.mit.edu>
+References: <cover.1560361364.git.mchehab+samsung@kernel.org>
+        <fac44e1fbab5ea755a93601a4fdfa34fcc57ae9e.1560361364.git.mchehab+samsung@kernel.org>
+        <7dc94cb4-ebf1-22ab-29c9-fcb2b875a9ac@csail.mit.edu>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190531150828.157832-3-elver@google.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 31, 2019 at 05:08:30PM +0200, Marco Elver wrote:
-> This patch is a pre-requisite for enabling KASAN bitops instrumentation;
-> using static_cpu_has instead of boot_cpu_has avoids instrumentation of
-> test_bit inside the uaccess region. With instrumentation, the KASAN
-> check would otherwise be flagged by objtool.
-> 
-> For consistency, kernel/signal.c was changed to mirror this change,
-> however, is never instrumented with KASAN (currently unsupported under
-> x86 32bit).
+Em Wed, 12 Jun 2019 17:25:39 -0700
+"Srivatsa S. Bhat" <srivatsa@csail.mit.edu> escreveu:
 
-Acked-by: Peter Zijlstra (Intel) <peterz@infradead.org>
+> On 6/12/19 10:52 AM, Mauro Carvalho Chehab wrote:
+> > Convert the PM documents to ReST, in order to allow them to
+> > build with Sphinx.
+> > 
+> > The conversion is actually:
+> >   - add blank lines and identation in order to identify paragraphs;
+> >   - fix tables markups;
+> >   - add some lists markups;
+> >   - mark literal blocks;
+> >   - adjust title markups.
+> > 
+> > At its new index.rst, let's add a :orphan: while this is not linked to
+> > the main index.rst file, in order to avoid build warnings.
+> > 
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> > Acked-by: Bjorn Helgaas <bhelgaas@google.com>
+> > Acked-by: Mark Brown <broonie@kernel.org>
+> > ---  
+> 
+> [...]
+> 
+> > diff --git a/Documentation/power/suspend-and-cpuhotplug.txt b/Documentation/power/suspend-and-cpuhotplug.rst
+> > similarity index 90%
+> > rename from Documentation/power/suspend-and-cpuhotplug.txt
+> > rename to Documentation/power/suspend-and-cpuhotplug.rst
+> > index a8751b8df10e..9df664f5423a 100644
+> > --- a/Documentation/power/suspend-and-cpuhotplug.txt
+> > +++ b/Documentation/power/suspend-and-cpuhotplug.rst
+> > @@ -1,10 +1,15 @@
+> > +====================================================================
+> >  Interaction of Suspend code (S3) with the CPU hotplug infrastructure
+> > +====================================================================
+> >  
+> > -     (C) 2011 - 2014 Srivatsa S. Bhat <srivatsa.bhat@linux.vnet.ibm.com>
+> > +(C) 2011 - 2014 Srivatsa S. Bhat <srivatsa.bhat@linux.vnet.ibm.com>
+> >  
+> >  
+> > -I. How does the regular CPU hotplug code differ from how the Suspend-to-RAM
+> > -   infrastructure uses it internally? And where do they share common code?
+> > +I. Differences between CPU hotplug and Suspend-to-RAM
+> > +======================================================
+> > +
+> > +How does the regular CPU hotplug code differ from how the Suspend-to-RAM
+> > +infrastructure uses it internally? And where do they share common code?
+> >  
+> >  Well, a picture is worth a thousand words... So ASCII art follows :-)
+> >    
+> 
+> [...]
+> 
+> > @@ -101,7 +108,7 @@ execution during resume):
+> >  
+> >  It is to be noted here that the system_transition_mutex lock is acquired at the very
+> >  beginning, when we are just starting out to suspend, and then released only
+> > -after the entire cycle is complete (i.e., suspend + resume).
+> > +after the entire cycle is complete (i.e., suspend + resume)::
+> >    
+> 
+> I think that should be a period, not a colon, because it is clarifying
+> the text above it (as opposed to referring to the example below it).
+> 
+> Other than that, for suspend-and-cpuhotplug.txt:
+> 
+> Acked-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
 
-Thanks!
+Ah, ok. I'll change it to:
 
-> 
-> Signed-off-by: Marco Elver <elver@google.com>
-> Suggested-by: H. Peter Anvin <hpa@zytor.com>
-> ---
-> Changes in v3:
-> * Use static_cpu_has instead of moving boot_cpu_has outside uaccess
->   region.
-> 
-> Changes in v2:
-> * Replaces patch: 'tools/objtool: add kasan_check_* to uaccess
->   whitelist'
-> ---
->  arch/x86/ia32/ia32_signal.c | 2 +-
->  arch/x86/kernel/signal.c    | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/arch/x86/ia32/ia32_signal.c b/arch/x86/ia32/ia32_signal.c
-> index 629d1ee05599..1cee10091b9f 100644
-> --- a/arch/x86/ia32/ia32_signal.c
-> +++ b/arch/x86/ia32/ia32_signal.c
-> @@ -358,7 +358,7 @@ int ia32_setup_rt_frame(int sig, struct ksignal *ksig,
->  		put_user_ex(ptr_to_compat(&frame->uc), &frame->puc);
+	after the entire cycle is complete (i.e., suspend + resume).
+
+	::
+
+and add your acked-by.
+
 >  
->  		/* Create the ucontext.  */
-> -		if (boot_cpu_has(X86_FEATURE_XSAVE))
-> +		if (static_cpu_has(X86_FEATURE_XSAVE))
->  			put_user_ex(UC_FP_XSTATE, &frame->uc.uc_flags);
->  		else
->  			put_user_ex(0, &frame->uc.uc_flags);
-> diff --git a/arch/x86/kernel/signal.c b/arch/x86/kernel/signal.c
-> index 364813cea647..52eb1d551aed 100644
-> --- a/arch/x86/kernel/signal.c
-> +++ b/arch/x86/kernel/signal.c
-> @@ -391,7 +391,7 @@ static int __setup_rt_frame(int sig, struct ksignal *ksig,
->  		put_user_ex(&frame->uc, &frame->puc);
->  
->  		/* Create the ucontext.  */
-> -		if (boot_cpu_has(X86_FEATURE_XSAVE))
-> +		if (static_cpu_has(X86_FEATURE_XSAVE))
->  			put_user_ex(UC_FP_XSTATE, &frame->uc.uc_flags);
->  		else
->  			put_user_ex(0, &frame->uc.uc_flags);
-> -- 
-> 2.22.0.rc1.257.g3120a18244-goog
-> 
+> Regards,
+> Srivatsa
+> VMware Photon OS
+
+
+
+Thanks,
+Mauro
