@@ -2,69 +2,155 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6355344508
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 18:41:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2CA4E443A8
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 18:33:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730557AbfFMQlV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jun 2019 12:41:21 -0400
-Received: from helcar.hmeau.com ([216.24.177.18]:49950 "EHLO deadmen.hmeau.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730551AbfFMGyc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 13 Jun 2019 02:54:32 -0400
-Received: from gondobar.mordor.me.apana.org.au ([192.168.128.4] helo=gondobar)
-        by deadmen.hmeau.com with esmtps (Exim 4.89 #2 (Debian))
-        id 1hbJd0-0006Ci-I5; Thu, 13 Jun 2019 14:54:30 +0800
-Received: from herbert by gondobar with local (Exim 4.89)
-        (envelope-from <herbert@gondor.apana.org.au>)
-        id 1hbJd0-00050z-EA; Thu, 13 Jun 2019 14:54:30 +0800
-Date:   Thu, 13 Jun 2019 14:54:30 +0800
-From:   Herbert Xu <herbert@gondor.apana.org.au>
-To:     Eric Biggers <ebiggers@kernel.org>
-Cc:     linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] crypto: doc - improve the skcipher API example code
-Message-ID: <20190613065430.wocmr33a4mi4gxfr@gondor.apana.org.au>
+        id S2391849AbfFMQbD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 12:31:03 -0400
+Received: from szxga07-in.huawei.com ([45.249.212.35]:48284 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1730896AbfFMIaY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Jun 2019 04:30:24 -0400
+Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
+        by Forcepoint Email with ESMTP id 2AE1F7854A4A77E18E06;
+        Thu, 13 Jun 2019 16:30:18 +0800 (CST)
+Received: from [127.0.0.1] (10.133.215.186) by DGGEMS411-HUB.china.huawei.com
+ (10.3.19.211) with Microsoft SMTP Server id 14.3.439.0; Thu, 13 Jun 2019
+ 16:30:11 +0800
+Subject: Re: [PATCH v8 1/7] iommu: enhance IOMMU default DMA mode build
+ options
+To:     John Garry <john.garry@huawei.com>,
+        Jean-Philippe Brucker <jean-philippe.brucker@arm.com>,
+        Robin Murphy <robin.murphy@arm.com>,
+        "Will Deacon" <will.deacon@arm.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-doc <linux-doc@vger.kernel.org>,
+        Sebastian Ott <sebott@linux.ibm.com>,
+        Gerald Schaefer <gerald.schaefer@de.ibm.com>,
+        "Martin Schwidefsky" <schwidefsky@de.ibm.com>,
+        Heiko Carstens <heiko.carstens@de.ibm.com>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Paul Mackerras <paulus@samba.org>,
+        "Michael Ellerman" <mpe@ellerman.id.au>,
+        Tony Luck <tony.luck@intel.com>,
+        Fenghua Yu <fenghua.yu@intel.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        David Woodhouse <dwmw2@infradead.org>,
+        iommu <iommu@lists.linux-foundation.org>,
+        linux-kernel <linux-kernel@vger.kernel.org>,
+        linux-s390 <linux-s390@vger.kernel.org>,
+        linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
+        x86 <x86@kernel.org>, linux-ia64 <linux-ia64@vger.kernel.org>
+CC:     Hanjun Guo <guohanjun@huawei.com>, Linuxarm <linuxarm@huawei.com>
+References: <20190530034831.4184-1-thunder.leizhen@huawei.com>
+ <20190530034831.4184-2-thunder.leizhen@huawei.com>
+ <645bd526-4eb0-4a36-2dda-023f009247ab@huawei.com>
+ <030bafab-58f5-8bb1-0533-2977d6e138b2@huawei.com>
+ <55d0e30c-5bca-41fc-5bf0-4366dc387afd@huawei.com>
+From:   "Leizhen (ThunderTown)" <thunder.leizhen@huawei.com>
+Message-ID: <7d3727e3-a455-3a26-1104-5b85c196bbdf@huawei.com>
+Date:   Thu, 13 Jun 2019 16:30:08 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190603054408.5903-1-ebiggers@kernel.org>
-X-Newsgroups: apana.lists.os.linux.cryptoapi,apana.lists.os.linux.doc
-Organization: Core
-User-Agent: NeoMutt/20170113 (1.7.2)
+In-Reply-To: <55d0e30c-5bca-41fc-5bf0-4366dc387afd@huawei.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.133.215.186]
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Eric Biggers <ebiggers@kernel.org> wrote:
-> From: Eric Biggers <ebiggers@google.com>
-> 
-> Rewrite the skcipher API example, changing it to encrypt a buffer with
-> AES-256-XTS.  This addresses various problems with the previous example:
-> 
-> - It requests a specific driver "cbc-aes-aesni", which is unusual.
->  Normally users ask for "cbc(aes)", not a specific driver.
-> 
-> - It encrypts only a single AES block.  For the reader, that doesn't
->  clearly distinguish the "skcipher" API from the "cipher" API.
-> 
-> - Showing how to encrypt something with bare CBC is arguably a poor
->  choice of example, as it doesn't follow modern crypto trends.  Now,
->  usually authenticated encryption is recommended, in which case the
->  user would use the AEAD API, not skcipher.  Disk encryption is still a
->  legitimate use for skcipher, but for that usually XTS is recommended.
-> 
-> - Many other bugs and poor coding practices, such as not setting
->  CRYPTO_TFM_REQ_MAY_SLEEP, unnecessarily allocating a heap buffer for
->  the IV, unnecessary NULL checks, using a pointless wrapper struct, and
->  forgetting to set an error code in one case.
-> 
-> Signed-off-by: Eric Biggers <ebiggers@google.com>
-> ---
-> Documentation/crypto/api-samples.rst | 176 ++++++++++++---------------
-> 1 file changed, 77 insertions(+), 99 deletions(-)
 
-Patch applied.  Thanks.
--- 
-Email: Herbert Xu <herbert@gondor.apana.org.au>
-Home Page: http://gondor.apana.org.au/~herbert/
-PGP Key: http://gondor.apana.org.au/~herbert/pubkey.txt
+
+On 2019/5/31 18:42, John Garry wrote:
+> 
+>>>> -config IOMMU_DEFAULT_PASSTHROUGH
+>>>> -    bool "IOMMU passthrough by default"
+>>>> +choice
+>>>> +    prompt "IOMMU default DMA mode"
+>>>>      depends on IOMMU_API
+>>>> -        help
+>>>> -      Enable passthrough by default, removing the need to pass in
+>>>> -      iommu.passthrough=on or iommu=pt through command line. If this
+>>>> -      is enabled, you can still disable with iommu.passthrough=off
+>>>> -      or iommu=nopt depending on the architecture.
+>>>> +    default IOMMU_DEFAULT_STRICT
+>>>> +    help
+>>>> +      This option allows IOMMU DMA mode to be chose at build time, to
+>>>
+>>> As before:
+>>> /s/chose/chosen/, /s/allows IOMMU/allows an IOMMU/
+>> I'm sorry that the previous version was not modified.
+>>
+>>>
+>>>> +      override the default DMA mode of each ARCHs, removing the need to
+>>>
+>>> Again, as before:
+>>> ARCHs should be singular
+>> OK
+>>
+>>>
+>>>> +      pass in kernel parameters through command line. You can still use
+>>>> +      ARCHs specific boot options to override this option again.
+> 
+> *
+> 
+>>>> +
+>>>> +config IOMMU_DEFAULT_PASSTHROUGH
+>>>> +    bool "passthrough"
+>>>> +    help
+>>>> +      In this mode, the DMA access through IOMMU without any addresses
+>>>> +      translation. That means, the wrong or illegal DMA access can not
+>>>> +      be caught, no error information will be reported.
+>>>>
+>>>>        If unsure, say N here.
+>>>>
+>>>> +config IOMMU_DEFAULT_LAZY
+>>>> +    bool "lazy"
+>>>> +    help
+>>>> +      Support lazy mode, where for every IOMMU DMA unmap operation, the
+>>>> +      flush operation of IOTLB and the free operation of IOVA are deferred.
+>>>> +      They are only guaranteed to be done before the related IOVA will be
+>>>> +      reused.
+>>>
+>>> why no advisory on how to set if unsure?
+>> Because the LAZY and STRICT have their own advantages and disadvantages.
+>>
+>> Should I say: If unsure, keep the default。
+> 
+> Maybe. So you could put this in the help for the choice, * above, and remove the advisory on IOMMU_DEFAULT_PASSTHROUGH.
+
+OK, I'll revise it according to this idea in v9.
+
+> 
+> However the maintainer may have a different view.
+> 
+> Thanks,
+> John
+> 
+>>
+>>>
+>>>> +
+>>>> +config IOMMU_DEFAULT_STRICT
+>>>> +    bool "strict"
+>>>> +    help
+>>>> +      For every IOMMU DMA unmap operation, the flush operation of IOTLB and
+>>>> +      the free operation of IOVA are guaranteed to be done in the unmap
+>>>> +      function.
+>>>> +
+>>>> +      This mode is safer than the two above, but it maybe slower in some
+>>>> +      high performace scenarios.
+>>>
+>>> and here?
+> 
+> 
+> .
+> 
+
