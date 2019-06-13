@@ -2,104 +2,134 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6B07F43111
-	for <lists+linux-doc@lfdr.de>; Wed, 12 Jun 2019 22:43:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3E2214475D
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Jun 2019 18:59:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388658AbfFLUl3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 12 Jun 2019 16:41:29 -0400
-Received: from casper.infradead.org ([85.118.1.10]:53322 "EHLO
-        casper.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2388336AbfFLUl3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Jun 2019 16:41:29 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-        MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender
-        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=sI6gwiLkCC9ffzJ87+8NB0VxnCIPAyu/GIglnrwK0WM=; b=FP23l7y8EJ6iZDJ5fph+HSAolj
-        trkiU2x7HtkKhSRGUZyZpIiKm15P0rgkbNNalIYFxFuCbDnfS1nokePZq2tTbs0fffUHrAyc3pS+c
-        6o69mFfbo/DUz7YUDpimkjmKqFyr8Cd2tsfMOpfUpoxfIs2MqRpLJfuqIZBBmbVG+qgXyMdl1pOCI
-        s52wsFUQmJgnSQx78VVQVkbTICGtkN6hXgve34sWqdCW9wf+50/KBu4GnF+R64MbP7IgjDdH6VwYb
-        G65VlIyRP2OqJGEUC3TzQ7egPskq0AdIUUTA+VAKbvKJQIMbBN7/rvv12Cwe+T9KDmOVLIxesunR1
-        cd20LcJQ==;
-Received: from 201.86.169.251.dynamic.adsl.gvt.net.br ([201.86.169.251] helo=coco.lan)
-        by casper.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hbA3f-00072C-TH; Wed, 12 Jun 2019 20:41:24 +0000
-Date:   Wed, 12 Jun 2019 17:41:19 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Dan Williams <dan.j.williams@intel.com>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Vishal Verma <vishal.l.verma@intel.com>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Keith Busch <keith.busch@intel.com>,
-        Ira Weiny <ira.weiny@intel.com>,
-        linux-nvdimm <linux-nvdimm@lists.01.org>
-Subject: Re: [PATCH v1 29/31] docs: nvdimm: convert to ReST
-Message-ID: <20190612174119.7c0d94bd@coco.lan>
-In-Reply-To: <CAPcyv4g08r6bK_SyTjzKFRM7=wpTQLdmHqRSGh7r-e9YD4tq5Q@mail.gmail.com>
-References: <cover.1560364493.git.mchehab+samsung@kernel.org>
-        <075d5879142ff1b7ad16f5eccf4759d35ca02fd4.1560364494.git.mchehab+samsung@kernel.org>
-        <CAPcyv4g08r6bK_SyTjzKFRM7=wpTQLdmHqRSGh7r-e9YD4tq5Q@mail.gmail.com>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1729850AbfFMQ7L (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 12:59:11 -0400
+Received: from outgoing-stata.csail.mit.edu ([128.30.2.210]:53158 "EHLO
+        outgoing-stata.csail.mit.edu" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1729848AbfFMAeY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 12 Jun 2019 20:34:24 -0400
+X-Greylist: delayed 493 seconds by postgrey-1.27 at vger.kernel.org; Wed, 12 Jun 2019 20:34:23 EDT
+Received: from [4.30.142.84] (helo=srivatsab-a01.vmware.com)
+        by outgoing-stata.csail.mit.edu with esmtpsa (TLS1.2:RSA_AES_128_CBC_SHA1:128)
+        (Exim 4.82)
+        (envelope-from <srivatsa@csail.mit.edu>)
+        id 1hbDYq-000Xfo-J5; Wed, 12 Jun 2019 20:25:48 -0400
+Subject: Re: [PATCH v4 18/28] docs: convert docs to ReST and rename to *.rst
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Sebastian Reichel <sre@kernel.org>,
+        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        Len Brown <len.brown@intel.com>, Pavel Machek <pavel@ucw.cz>,
+        Nishanth Menon <nm@ti.com>, Stephen Boyd <sboyd@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>,
+        Mark Brown <broonie@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "H. Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        David Airlie <airlied@linux.ie>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        "David S. Miller" <davem@davemloft.net>, linux-pm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-pci@vger.kernel.org, linux-wireless@vger.kernel.org,
+        netdev@vger.kernel.org
+References: <cover.1560361364.git.mchehab+samsung@kernel.org>
+ <fac44e1fbab5ea755a93601a4fdfa34fcc57ae9e.1560361364.git.mchehab+samsung@kernel.org>
+From:   "Srivatsa S. Bhat" <srivatsa@csail.mit.edu>
+Message-ID: <7dc94cb4-ebf1-22ab-29c9-fcb2b875a9ac@csail.mit.edu>
+Date:   Wed, 12 Jun 2019 17:25:39 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
+ Gecko/20100101 Thunderbird/60.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+In-Reply-To: <fac44e1fbab5ea755a93601a4fdfa34fcc57ae9e.1560361364.git.mchehab+samsung@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Wed, 12 Jun 2019 12:04:12 -0700
-Dan Williams <dan.j.williams@intel.com> escreveu:
-
-> Hi Mauro,
+On 6/12/19 10:52 AM, Mauro Carvalho Chehab wrote:
+> Convert the PM documents to ReST, in order to allow them to
+> build with Sphinx.
 > 
-> On Wed, Jun 12, 2019 at 11:38 AM Mauro Carvalho Chehab
-> <mchehab+samsung@kernel.org> wrote:
-> >
-> > Rename the mtd documentation files to ReST, add an  
+> The conversion is actually:
+>   - add blank lines and identation in order to identify paragraphs;
+>   - fix tables markups;
+>   - add some lists markups;
+>   - mark literal blocks;
+>   - adjust title markups.
 > 
-> s/mtd/nvdimm/
-
-Sorry, cut and paste issue :-)
-
+> At its new index.rst, let's add a :orphan: while this is not linked to
+> the main index.rst file, in order to avoid build warnings.
 > 
-> > index for them and adjust in order to produce a nice html
-> > output via the Sphinx build system.
-> >
-> > At its new index.rst, let's add a :orphan: while this is not linked to
-> > the main index.rst file, in order to avoid build warnings.  
-> 
-> Looks ok, but I was not able to apply this one in isolation to give it
-> a try. Am I missing some pre-reqs compared to v5.2-rc4?
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> Acked-by: Bjorn Helgaas <bhelgaas@google.com>
+> Acked-by: Mark Brown <broonie@kernel.org>
+> ---
 
-I wrote the patch before v5.2-rc1, but, as this series touches a lot
-of stuff, it was rebased against today's linux-next (next-20190612).
+[...]
 
-I didn't notice an conflict on this specific file during the rebases
-though. 
+> diff --git a/Documentation/power/suspend-and-cpuhotplug.txt b/Documentation/power/suspend-and-cpuhotplug.rst
+> similarity index 90%
+> rename from Documentation/power/suspend-and-cpuhotplug.txt
+> rename to Documentation/power/suspend-and-cpuhotplug.rst
+> index a8751b8df10e..9df664f5423a 100644
+> --- a/Documentation/power/suspend-and-cpuhotplug.txt
+> +++ b/Documentation/power/suspend-and-cpuhotplug.rst
+> @@ -1,10 +1,15 @@
+> +====================================================================
+>  Interaction of Suspend code (S3) with the CPU hotplug infrastructure
+> +====================================================================
+>  
+> -     (C) 2011 - 2014 Srivatsa S. Bhat <srivatsa.bhat@linux.vnet.ibm.com>
+> +(C) 2011 - 2014 Srivatsa S. Bhat <srivatsa.bhat@linux.vnet.ibm.com>
+>  
+>  
+> -I. How does the regular CPU hotplug code differ from how the Suspend-to-RAM
+> -   infrastructure uses it internally? And where do they share common code?
+> +I. Differences between CPU hotplug and Suspend-to-RAM
+> +======================================================
+> +
+> +How does the regular CPU hotplug code differ from how the Suspend-to-RAM
+> +infrastructure uses it internally? And where do they share common code?
+>  
+>  Well, a picture is worth a thousand words... So ASCII art follows :-)
+>  
 
-There is a simple patch applied on linux-next after v5.2-rc4:
+[...]
 
-commit 3d9cf48b2ca257f1a249b347236098c3cf9d54f1
-Author: Shiyang Ruan <ruansy.fnst@cn.fujitsu.com>
-Date:   Thu May 9 15:40:49 2019 +0800
+> @@ -101,7 +108,7 @@ execution during resume):
+>  
+>  It is to be noted here that the system_transition_mutex lock is acquired at the very
+>  beginning, when we are just starting out to suspend, and then released only
+> -after the entire cycle is complete (i.e., suspend + resume).
+> +after the entire cycle is complete (i.e., suspend + resume)::
+>  
 
-    Documentation: nvdimm: Fix typo
-    
-    Remove the extra 'we '.
-    
-    Signed-off-by: Shiyang Ruan <ruansy.fnst@cn.fujitsu.com>
-    Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+I think that should be a period, not a colon, because it is clarifying
+the text above it (as opposed to referring to the example below it).
 
-Could this be the cause of the issue you're noticing when
-trying to apply it?
+Other than that, for suspend-and-cpuhotplug.txt:
 
-As this is signed-off by Jon, I suspect it went via docs-next.
-
-Thanks,
-Mauro
+Acked-by: Srivatsa S. Bhat (VMware) <srivatsa@csail.mit.edu>
+ 
+Regards,
+Srivatsa
+VMware Photon OS
