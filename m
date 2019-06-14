@@ -2,119 +2,147 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DADAF4506C
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 02:03:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8261D451AA
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 04:04:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727262AbfFNADg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Jun 2019 20:03:36 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:48964 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1725868AbfFNADg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jun 2019 20:03:36 -0400
-Received: from pps.filterd (m0098416.ppops.net [127.0.0.1])
-        by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x5E01lsk102784
-        for <linux-doc@vger.kernel.org>; Thu, 13 Jun 2019 20:03:35 -0400
-Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
-        by mx0b-001b2d01.pphosted.com with ESMTP id 2t3x2u50jc-1
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-        for <linux-doc@vger.kernel.org>; Thu, 13 Jun 2019 20:03:34 -0400
-Received: from localhost
-        by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
-        for <linux-doc@vger.kernel.org> from <zohar@linux.ibm.com>;
-        Fri, 14 Jun 2019 01:03:32 +0100
-Received: from b06cxnps4074.portsmouth.uk.ibm.com (9.149.109.196)
-        by e06smtp07.uk.ibm.com (192.168.101.137) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
-        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-        Fri, 14 Jun 2019 01:03:27 +0100
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
-        by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x5E03QVC33095874
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 14 Jun 2019 00:03:26 GMT
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 79607A405F;
-        Fri, 14 Jun 2019 00:03:26 +0000 (GMT)
-Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 986BBA4062;
-        Fri, 14 Jun 2019 00:03:24 +0000 (GMT)
-Received: from localhost.localdomain (unknown [9.80.81.91])
-        by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Fri, 14 Jun 2019 00:03:24 +0000 (GMT)
-Subject: Re: [RFC 0/7] Introduce TEE based Trusted Keys support
-From:   Mimi Zohar <zohar@linux.ibm.com>
-To:     Casey Schaufler <casey@schaufler-ca.com>,
-        Sumit Garg <sumit.garg@linaro.org>, keyrings@vger.kernel.org,
-        linux-integrity@vger.kernel.org,
-        linux-security-module@vger.kernel.org
-Cc:     jens.wiklander@linaro.org, corbet@lwn.net, dhowells@redhat.com,
-        jejb@linux.ibm.com, jarkko.sakkinen@linux.intel.com,
-        jmorris@namei.org, serge@hallyn.com, ard.biesheuvel@linaro.org,
-        daniel.thompson@linaro.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, tee-dev@lists.linaro.org
-Date:   Thu, 13 Jun 2019 20:03:13 -0400
-In-Reply-To: <d803283e-5e69-5deb-fe94-3f2e45fb95af@schaufler-ca.com>
-References: <1560421833-27414-1-git-send-email-sumit.garg@linaro.org>
-         <d803283e-5e69-5deb-fe94-3f2e45fb95af@schaufler-ca.com>
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.20.5 (3.20.5-1.fc24) 
-Mime-Version: 1.0
+        id S1727274AbfFNCEe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Jun 2019 22:04:34 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:52986 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727264AbfFNCEe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Jun 2019 22:04:34 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+        Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=aQUK413dBnPXJRbLUE6/RHV++edzrn3sivF8fzDWpGc=; b=hkvPTUNcFjmIKqVi/42DI9hcc
+        djs1/CZZ1gEi9/pkYp7JBfy+mzE4TN3vkpNxJQh+cxpMRjoZUQcYKThK+Lbc9vaeo/sl8COrkoihQ
+        2Nkm9p9a41yPkSk0oiQ+uqa9oaJuLpxhPzO87IqfhV1REBX6QdyTJk7Iexd5hgkPKXUb5IA07VKQe
+        XftuKi6beE3iXFUKmgQ526h4XS+dEAK09FLVKDxMSBZDMm71B91V+TcVb8eWcF/Dwv1toe1WcA/6A
+        XywndEaNPy/piJ98UTvHIdgHMyT3QFWskJPRUdKWRYklnTH2RNGvnLIL8zv28a+39Mv9Q16ozoVaQ
+        AKLPWGR4A==;
+Received: from 201.86.169.251.dynamic.adsl.gvt.net.br ([201.86.169.251] helo=bombadil.infradead.org)
+        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+        id 1hbbZv-0000EJ-7a; Fri, 14 Jun 2019 02:04:31 +0000
+Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
+        (envelope-from <mchehab@bombadil.infradead.org>)
+        id 1hbbZn-0002nV-M0; Thu, 13 Jun 2019 23:04:23 -0300
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        linuxppc-dev@lists.ozlabs.org,
+        Andrew Donnellan <ajd@linux.ibm.com>,
+        Jonathan Cameron <jic23@kernel.org>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        Anton Vorontsov <anton@enomsg.org>, linux-pm@vger.kernel.org,
+        Colin Cross <ccross@android.com>, linux-iio@vger.kernel.org,
+        Hartmut Knaack <knaack.h@gmx.de>,
+        Sebastian Reichel <sre@kernel.org>,
+        Frederic Barrat <fbarrat@linux.ibm.com>,
+        Andreas Klinger <ak@it-klinger.de>,
+        Tony Luck <tony.luck@intel.com>,
+        Peter Meerwald-Stadler <pmeerw@pmeerw.net>,
+        Stefan Achatz <erazor_de@users.sourceforge.net>,
+        Kees Cook <keescook@chromium.org>
+Subject: [PATCH 00/14] Add support to generate ABI documentation at admin-guide
+Date:   Thu, 13 Jun 2019 23:04:06 -0300
+Message-Id: <cover.1560477540.git.mchehab+samsung@kernel.org>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-x-cbid: 19061400-0028-0000-0000-0000037A2047
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19061400-0029-0000-0000-0000243A1AE4
-Message-Id: <1560470593.4805.109.camel@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-06-13_14:,,
- signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1810050000 definitions=main-1906130179
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 2019-06-13 at 09:40 -0700, Casey Schaufler wrote:
-> On 6/13/2019 3:30 AM, Sumit Garg wrote:
-> > Add support for TEE based trusted keys where TEE provides the functionality
-> > to seal and unseal trusted keys using hardware unique key. Also, this is
-> > an alternative in case platform doesn't possess a TPM device.
-> >
-> > This series also adds some TEE features like:
-> 
-> Please expand the acronym TEE on first use. That will
-> help people who don't work with it on a daily basis
-> understand what you're going on about.
+Greg,
 
-Thanks, Casey.
+As promised, I'm resending the patch series with adds the Kernel ABI to
+Documentation/admin-guide.
 
-"[6/7] doc: keys: Document usage of TEE based Trusted Keys" refers to
-the kernel tee documentation, but that documentation is limited to
-userspace interaction with the tee.
+Those patches are basically the version 3 patchset I sent back in 2017,
+rebased on the top of linux-next (next-20190613), and with some fixes
+in order for it to work.
 
-A trusted key is a random number generated and sealed(encrypted) by
-the TPM, so that only the TPM may unseal it.  The sealing key never
-leaves the TPM.  The sealed, trusted key may be exported to userspace.
- In the tee case, can the "sealing" key ever leave the tee?  Can the
-sealed, trusted key, exported to userspace, be unsealed by the tee?
- Are the tee security protections similar to those of the TPM?  How do
-they compare?
+- The 4 initial patches to fix some ABI descriptions that are violating 
+  the syntax described at Documentation/ABI/README;
 
-Mimi
+- The next 6 patches are the ones originally written in 2017 with a
+  script with parses the ABI files;
 
-> 
-> >
-> > Patch #1, #2 enables support for registered kernel shared memory with TEE.
-> >
-> > Patch #3 enables support for private kernel login method required for
-> > cases like trusted keys where we don't wan't user-space to directly access
-> > TEE service to retrieve trusted key contents.
-> >
-> > Rest of the patches from #4 to #7 adds support for TEE based trusted keys.
-> >
-> > This patch-set has been tested with OP-TEE based pseudo TA which can be
-> > found here [1].
-> >
-> > Looking forward to your valuable feedback/suggestions.
+- The 11th patch is a new one: it relaxes a little bit the parser in 
+  order to parse file headers that contains colons on it;
+
+- The 12th patch adds the new script to the documentation build
+  system, together with a new python Sphinx extension with calls it;
+
+- The 13th patch fixes the python script when running with newer
+  Sphinx versions (1.7 and upper);
+
+- The final patch fixes an UTF-8 trouble. I noticed it only with Sphinx
+  1.4, but it could affect other versions too. So, I ended by changing
+  the UTF-8 encoding logit to work version-independent, just like
+  what happens with kerneldoc.py extension.
+
+Mauro Carvalho Chehab (14):
+  ABI: fix some syntax issues at the ABI database
+  ABI: sysfs-driver-hid: the "What" field doesn't parse fine
+  ABI: sysfs-class-uwb_rc: remove a duplicated incomplete entry
+  ABI: better identificate tables
+  scripts: add an script to parse the ABI files
+  scripts/get_abi.pl: parse files with text at beginning
+  scripts/get_abi.pl: avoid use literal blocks when not needed
+  scripts/get_abi.pl: split label naming from xref logic
+  scripts/get_abi.pl: add support for searching for ABI symbols
+  scripts/get_abi.pl: represent what in tables
+  scripts/get_abi.pl: fix parse issues with some files
+  doc-rst: add ABI documentation to the admin-guide book
+  sphinx/kernel_abi.py: make it compatible with Sphinx 1.7+
+  docs: sphinx/kernel_abi.py: fix UTF-8 support
+
+ .../ABI/obsolete/sysfs-driver-hid-roccat-pyra |   2 +-
+ Documentation/ABI/testing/pstore              |   2 +-
+ .../sysfs-bus-event_source-devices-format     |   2 +-
+ .../ABI/testing/sysfs-bus-i2c-devices-hm6352  |   6 +-
+ .../ABI/testing/sysfs-bus-iio-distance-srf08  |   4 +-
+ .../testing/sysfs-bus-iio-proximity-as3935    |   4 +-
+ .../ABI/testing/sysfs-bus-pci-devices-cciss   |  22 +-
+ .../testing/sysfs-bus-usb-devices-usbsevseg   |  12 +-
+ .../sysfs-class-backlight-driver-lm3533       |   6 +-
+ Documentation/ABI/testing/sysfs-class-cxl     |   6 +-
+ Documentation/ABI/testing/sysfs-class-devfreq |   2 +-
+ .../ABI/testing/sysfs-class-led-driver-lm3533 |   8 +-
+ .../ABI/testing/sysfs-class-leds-gt683r       |   4 +-
+ .../ABI/testing/sysfs-class-powercap          |   2 +-
+ Documentation/ABI/testing/sysfs-class-uwb_rc  |   6 -
+ Documentation/ABI/testing/sysfs-driver-hid    |  12 +-
+ .../ABI/testing/sysfs-driver-hid-roccat-kone  |   2 +-
+ Documentation/ABI/testing/sysfs-kernel-fscaps |   2 +-
+ .../ABI/testing/sysfs-kernel-vmcoreinfo       |   2 +-
+ Documentation/admin-guide/abi-obsolete.rst    |  10 +
+ Documentation/admin-guide/abi-removed.rst     |   4 +
+ Documentation/admin-guide/abi-stable.rst      |  13 +
+ Documentation/admin-guide/abi-testing.rst     |  19 +
+ Documentation/admin-guide/abi.rst             |  11 +
+ Documentation/admin-guide/index.rst           |   1 +
+ Documentation/conf.py                         |   2 +-
+ Documentation/sphinx/kernel_abi.py            | 172 +++++++
+ scripts/get_abi.pl                            | 450 ++++++++++++++++++
+ 28 files changed, 731 insertions(+), 57 deletions(-)
+ create mode 100644 Documentation/admin-guide/abi-obsolete.rst
+ create mode 100644 Documentation/admin-guide/abi-removed.rst
+ create mode 100644 Documentation/admin-guide/abi-stable.rst
+ create mode 100644 Documentation/admin-guide/abi-testing.rst
+ create mode 100644 Documentation/admin-guide/abi.rst
+ create mode 100644 Documentation/sphinx/kernel_abi.py
+ create mode 100755 scripts/get_abi.pl
+
+-- 
+2.21.0
+
 
