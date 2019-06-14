@@ -2,60 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B17BE46B94
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 23:14:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A899A469AB
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 22:34:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726300AbfFNVOc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 17:14:32 -0400
-Received: from [89.32.41.185] ([89.32.41.185]:39730 "EHLO slot0.normalihy.ga"
-        rhost-flags-FAIL-FAIL-OK-OK) by vger.kernel.org with ESMTP
-        id S1726283AbfFNVOb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Jun 2019 17:14:31 -0400
-X-Greylist: delayed 1882 seconds by postgrey-1.27 at vger.kernel.org; Fri, 14 Jun 2019 17:14:30 EDT
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=dkim; d=normalihy.ga;
- h=Content-Type:MIME-Version:Content-Transfer-Encoding:Content-Description:Subject:To:From:Date:Reply-To:Message-ID; i=slaoma@normalihy.ga;
- bh=LF69dDschg8kOsoWmykprZXCKM4=;
- b=HX1Uso0OKF5WE7i5Z7v0Mv6P2hYMBl7R6YCXjyn6Dc6TsSXJPa0gLOjI249V+eOznNWuIQfcwsJk
-   MgLr5+DE5/DHFEFH4jKRS3/tfhGPPJfqgr3sYwju9f8iegVUKkignUKmgbj0NxaNDAa8gWBW62YV
-   ZYGx69w7M87mAw45h4owb2Ip3hY6pT2jWDAhuaVRv2qvemVxgExzF+5kYtExjoaJrGQmZ0x5OAu2
-   OCrdpJqGNPI1Le8ylcMuazKtbplVeSxRurcAcolz90B9FI4WUSE3n+dtWQbHhZwoCUvPLT6rL3zQ
-   h9CkdzRo3lH73d7K82ORk8tdXekYBUSUd9vIlQ==
-DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=dkim; d=normalihy.ga;
- b=gsAhrOLxPa10fIHs1dnCiEHxUlBy4OHlGULHjCejAoZ/hhZwsFrsXtxjuhLhQN1Ed6qPM2VjrfG5
-   dUAJXDScEITWk+1b/HTsdA04a7lQ/7j8cQ/QY+BtkGuOtr4dF1SrESOPueAH0nEW1spmd5koZkAK
-   N20+igq04plbEqPn26pGurbpas0a13RfJ371WRRkFnXz1rusAEel+CQRwcei/LYwAzfJ3Gq58uQL
-   faiAcm3GM134cGBzyjNwJVsTUlmlCa9aeX/0Bf9/il19lx9UkPTYxI84jKjDZobcnyZCR5kLOrNA
-   wO6s703SxTZKxh/GVskCUcoZu+kEV5VUifEeKg==;
-Content-Type: text/plain; charset="utf-8"
+        id S1726950AbfFNUeb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 16:34:31 -0400
+Received: from ms.lwn.net ([45.79.88.28]:54026 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726193AbfFNUeb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Jun 2019 16:34:31 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 20793128A;
+        Fri, 14 Jun 2019 20:34:30 +0000 (UTC)
+Date:   Fri, 14 Jun 2019 14:34:29 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will.deacon@arm.com>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Radim =?UTF-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>,
+        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
+        linux-arm-kernel@lists.infradead.org, kvm@vger.kernel.org,
+        linux-efi@vger.kernel.org
+Subject: Re: [PATCH v4 02/28] docs: arm64: convert docs to ReST and rename
+ to .rst
+Message-ID: <20190614143429.640226ec@lwn.net>
+In-Reply-To: <20190614141041.335a76e5@lwn.net>
+References: <cover.1560361364.git.mchehab+samsung@kernel.org>
+        <8320e8e871660bf9fc426bc688f4808a1a7aa031.1560361364.git.mchehab+samsung@kernel.org>
+        <20190614141041.335a76e5@lwn.net>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: INQUIRY -AGRA POLANDS
-To:     Recipients <slaoma@normalihy.ga>
-From:   "Mrkt dept" <slaoma@normalihy.ga>
-Date:   Fri, 14 Jun 2019 13:33:20 -0700
-Reply-To: agra.poland@aol.com
-Message-ID: <0.0.2.494.1D522F05C047E1E.0@slot0.normalihy.ga>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Sir,
+On Fri, 14 Jun 2019 14:10:41 -0600
+Jonathan Corbet <corbet@lwn.net> wrote:
 
-Greetings rom Agra Polands.
-we have been building our international business since 1997, dealing with a=
- wide range of luxury consumer goods in order to efficiently and effectivel=
-y satisfy all our customers=E2=80=99 demands.
+> On Wed, 12 Jun 2019 14:52:38 -0300
+> Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
+> 
+> > The documentation is in a format that is very close to ReST format.
+> > 
+> > The conversion is actually:
+> >   - add blank lines in order to identify paragraphs;
+> >   - fixing tables markups;
+> >   - adding some lists markups;
+> >   - marking literal blocks;
+> >   - adjust some title markups.
+> > 
+> > At its new index.rst, let's add a :orphan: while this is not linked to
+> > the main index.rst file, in order to avoid build warnings.  
+> 
+> This one doesn't apply to docs-next, since there's a bunch of stuff in
+> linux-next that I don't have.  I'd suggest that it either go by way of an
+> ARM tree or send it my way again after the ARM changes go upstream.
 
-Kindly confirm if you be able to supply us with our desired items.
+Actually, nevermind.  Pulling my tree forward to 5.2-rc4 resolved the
+issues here.
 
-What is your Payment terms and Shipments?.
+Thanks,
 
-Regards
-
-Riccardo Corbo
-International Buyer & Analyst
-Address:Via Trento, 7/F - Lomazzo (CO) - Italy VAT IT 12165160156 =
-
-agra.poland@aol.com
+jon
