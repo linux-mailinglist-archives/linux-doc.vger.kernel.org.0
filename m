@@ -2,125 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BC1E745FB7
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 16:00:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 853AC46000
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 16:06:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728422AbfFNN6A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 09:58:00 -0400
-Received: from mga06.intel.com ([134.134.136.31]:39583 "EHLO mga06.intel.com"
+        id S1728201AbfFNOGH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 10:06:07 -0400
+Received: from mail.kernel.org ([198.145.29.99]:52180 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727382AbfFNN6A (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Jun 2019 09:58:00 -0400
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 14 Jun 2019 06:57:59 -0700
-X-ExtLoop1: 1
-Received: from jnikula-mobl3.fi.intel.com (HELO localhost) ([10.237.66.150])
-  by fmsmga001.fm.intel.com with ESMTP; 14 Jun 2019 06:57:57 -0700
-From:   Jani Nikula <jani.nikula@linux.intel.com>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+        id S1728034AbfFNOGH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Jun 2019 10:06:07 -0400
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 959B920851;
+        Fri, 14 Jun 2019 14:06:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1560521166;
+        bh=HvW4i1HSdGzIPSWAaduqcsQ2yNdYu3HmAf+Hbrmp8Ao=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=Tn/+N3KZQ+DBDA6jQ46F5+/XfPDsFAsZnoYWimfUop5680wrZeSFNSj9knmV0QR6g
+         baEv3/NjYPJnk33eXXuD9vg5nXwXnKemQ+ZXTGMU8HS6ejp0M37qGcPylpliQBSGB2
+         uxATOx32ADuHGWm9Xj7Av+1NtfajxgCH95PVynYg=
+Date:   Fri, 14 Jun 2019 16:06:03 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Jani Nikula <jani.nikula@linux.intel.com>
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Mauro Carvalho Chehab <mchehab@s-opensource.com>,
         Mauro Carvalho Chehab <mchehab@infradead.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH 05/14] scripts: add an script to parse the ABI files
-In-Reply-To: <20190614133933.GA1076@kroah.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <cover.1560477540.git.mchehab+samsung@kernel.org> <196fb3c497546f923bf5d156c3fddbe74a4913bc.1560477540.git.mchehab+samsung@kernel.org> <87r27wuwc3.fsf@intel.com> <20190614133933.GA1076@kroah.com>
-Date:   Fri, 14 Jun 2019 17:00:55 +0300
-Message-ID: <87lfy4uuzs.fsf@intel.com>
+Subject: Re: [PATCH 12/14] doc-rst: add ABI documentation to the admin-guide
+ book
+Message-ID: <20190614140603.GB7234@kroah.com>
+References: <cover.1560477540.git.mchehab+samsung@kernel.org>
+ <9da2a7f6ff57d9d53dcbb964eb310f7956522870.1560477540.git.mchehab+samsung@kernel.org>
+ <87o930uvur.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87o930uvur.fsf@intel.com>
+User-Agent: Mutt/1.12.0 (2019-05-25)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 14 Jun 2019, Greg Kroah-Hartman <gregkh@linuxfoundation.org> wrote:
-> On Fri, Jun 14, 2019 at 04:31:56PM +0300, Jani Nikula wrote:
->> On Thu, 13 Jun 2019, Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
->> > From: Mauro Carvalho Chehab <mchehab@s-opensource.com>
->> >
->> > Add a script to parse the Documentation/ABI files and produce
->> > an output with all entries inside an ABI (sub)directory.
->> >
->> > Right now, it outputs its contents on ReST format. It shouldn't
->> > be hard to make it produce other kind of outputs, since the ABI
->> > file parser is implemented in separate than the output generator.
->> 
->> Hum, or just convert the ABI files to rst directly.
->
-> And what would that look like?
+On Fri, Jun 14, 2019 at 04:42:20PM +0300, Jani Nikula wrote:
+> On Thu, 13 Jun 2019, Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
+> > From: Mauro Carvalho Chehab <mchehab@s-opensource.com>
+> >
+> > As we don't want a generic Sphinx extension to execute commands,
+> > change the one proposed to Markus to call the abi_book.pl
+> > script.
+> >
+> > Use a script to parse the Documentation/ABI directory and output
+> > it at the admin-guide.
+> 
+> We had a legacy kernel-doc perl script so we used that instead of
+> rewriting it in python. Just to keep it bug-for-bug compatible with the
+> past. That was the only reason.
+> 
+> I see absolutely zero reason to add a new perl monstrosity with a python
+> extension to call it. All of this could be better done in python,
+> directly.
+> 
+> Please don't complicate the documentation build. I know you know we all
+> worked hard to take apart the old DocBook Rube Goldberg machine to
+> replace it with Sphinx. Please don't turn the Sphinx build to another
+> complicated mess.
+> 
+> My strong preferences are, in this order:
+> 
+> 1) Convert the ABI documentation to reStructuredText
 
-That pretty much depends on the requirements we want to set on both the
-ABI source files and the generated output. Obviously the requirements
-can be conflicting; might be hard to produce fancy output if the input
-is very limited.
+What would that exactly look like?  What would it require for new
+developers for when they write new entries?  Why not rely on a helper
+script, that allows us to validate things better?
 
-At the bare minimum, you could convert the files to contain
-reStructuredText field lists [1]. Add a colon at the start of the field
-name, and make sure field bodies (values) are not empty.
+> 2) Have the python extension read the ABI files directly, without an
+>    extra pipeline.
 
-Conversion of a file selected at random; I've only added ":" and "N/A".
+He who writes the script, get's to dictate the language of the script :)
 
-diff --git a/Documentation/ABI/stable/sysfs-devices-system-cpu b/Documentation/ABI/stable/sysfs-devices-system-cpu
-index 33c133e2a631..34c218b344fb 100644
---- a/Documentation/ABI/stable/sysfs-devices-system-cpu
-+++ b/Documentation/ABI/stable/sysfs-devices-system-cpu
-@@ -1,19 +1,20 @@
--What: 		/sys/devices/system/cpu/dscr_default
--Date:		13-May-2014
--KernelVersion:	v3.15.0
--Contact:
--Description:	Writes are equivalent to writing to
-+:What: 		/sys/devices/system/cpu/dscr_default
-+:Date:		13-May-2014
-+:KernelVersion:	v3.15.0
-+:Contact:	N/A
-+:Description:	Writes are equivalent to writing to
- 		/sys/devices/system/cpu/cpuN/dscr on all CPUs.
- 		Reads return the last written value or 0.
- 		This value is not a global default: it is a way to set
- 		all per-CPU defaults at the same time.
--Values:		64 bit unsigned integer (bit field)
-+:Values:	64 bit unsigned integer (bit field)
- 
--What: 		/sys/devices/system/cpu/cpu[0-9]+/dscr
--Date:		13-May-2014
--KernelVersion:	v3.15.0
--Contact:
--Description:	Default value for the Data Stream Control Register (DSCR) on
-+
-+:What: 		/sys/devices/system/cpu/cpu[0-9]+/dscr
-+:Date:		13-May-2014
-+:KernelVersion:	v3.15.0
-+:Contact:	N/A
-+:Description:	Default value for the Data Stream Control Register (DSCR) on
- 		a CPU.
- 		This default value is used when the kernel is executing and
- 		for any process that has not set the DSCR itself.
-@@ -22,4 +23,4 @@ Description:	Default value for the Data Stream Control Register (DSCR) on
- 		on any CPU where it executes (overriding the value described
- 		here).
- 		If set by a process it will be inherited by child processes.
--Values:		64 bit unsigned integer (bit field)
-+:Values:		64 bit unsigned integer (bit field)
+Personally, this looks sane to me, I'm going to apply the ABI fixups to
+my tree at least, and then see how the script works out.  The script can
+always be replaced with a different one in a different language at a
+later point in time of people think it really mattes.
 
----
+thanks,
 
-Of course, you'd still need to add higher level files to include the ABI
-files.
-
-At the other end, you could add structure and syntax to your heart's
-content, and make the output fancier too.
-
-BR,
-Jani.
-
-[1] http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html#field-lists
-
-
--- 
-Jani Nikula, Intel Open Source Graphics Center
+greg k-h
