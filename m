@@ -2,169 +2,161 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E9C9846657
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 19:53:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3810C466AD
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 19:59:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726758AbfFNRxg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 13:53:36 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:38698 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726701AbfFNRwf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jun 2019 13:52:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=/v1AAw7om1V/odGoZszjgQFtzJKsLoAGR/3cdXZzrpw=; b=lTpUvIAd/F8l4cCpDxm3Dq4sjh
-        Ss68Yohhl2qG8EJztKjSqfoUlYBHWNDVsCiCO3BLyOn8hVpXsprhxRCYjxX8GpVMet/i1wti7MGfa
-        qUeF3L8a8x/X3I6J32o65HqV14Qro88ua3DhEJdbd2ja0mQ8eRSwaDBdkUsEZ5HZBS7ij1B93fZ2u
-        2wnhL2Xs8Yhw0byrSeSlFNzIcMHaczC3W7Eh2kCxvCxjo3Sl8Hc7safqWHMuQ1QIKBhViMJo0qFCP
-        bCwiHKtUZ85aDaMOAMwddgnCLQuHxnlWa4VRULVlFITTnbqDa4fZG9iCiwsB+SvYDGxCIO9NK938T
-        X4RhDe3w==;
-Received: from 177.133.85.52.dynamic.adsl.gvt.net.br ([177.133.85.52] helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hbqNO-0000Pk-Sr; Fri, 14 Jun 2019 17:52:34 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
-        (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hbqNM-0002PS-3h; Fri, 14 Jun 2019 14:52:32 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        Kees Cook <keescook@chromium.org>,
-        Petr Mladek <pmladek@suse.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Joe Lawrence <joe.lawrence@redhat.com>,
-        Mikulas Patocka <mpatocka@redhat.com>,
-        Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
-        Sri Krishna chowdary <schowdary@nvidia.com>,
-        Changbin Du <changbin.du@intel.com>
-Subject: [PATCH v2 16/16] docs: Kconfig/Makefile: add a check for broken ABI files
-Date:   Fri, 14 Jun 2019 14:52:30 -0300
-Message-Id: <9ad24385565c0395e06ccb0e058184744f6e4c3b.1560534648.git.mchehab+samsung@kernel.org>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <3b8d7c64f887ddea01df3c4eeabc745c8ec45406.1560534648.git.mchehab+samsung@kernel.org>
-References: <3b8d7c64f887ddea01df3c4eeabc745c8ec45406.1560534648.git.mchehab+samsung@kernel.org>
+        id S1726627AbfFNR7N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 13:59:13 -0400
+Received: from lhrrgout.huawei.com ([185.176.76.210]:33008 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726389AbfFNR7N (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Jun 2019 13:59:13 -0400
+Received: from lhreml702-cah.china.huawei.com (unknown [172.18.7.108])
+        by Forcepoint Email with ESMTP id 8E24D53F4C2D688BC80F;
+        Fri, 14 Jun 2019 18:59:10 +0100 (IST)
+Received: from roberto-HP-EliteDesk-800-G2-DM-65W.huawei.com (10.204.65.154)
+ by smtpsuk.huawei.com (10.201.108.43) with Microsoft SMTP Server (TLS) id
+ 14.3.408.0; Fri, 14 Jun 2019 18:59:00 +0100
+From:   Roberto Sassu <roberto.sassu@huawei.com>
+To:     <zohar@linux.ibm.com>, <dmitry.kasatkin@huawei.com>,
+        <mjg59@google.com>
+CC:     <linux-integrity@vger.kernel.org>,
+        <linux-security-module@vger.kernel.org>,
+        <linux-fsdevel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <silviu.vlasceanu@huawei.com>,
+        Roberto Sassu <roberto.sassu@huawei.com>
+Subject: [PATCH v4 00/14] ima: introduce IMA Digest Lists extension
+Date:   Fri, 14 Jun 2019 19:54:59 +0200
+Message-ID: <20190614175513.27097-1-roberto.sassu@huawei.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.204.65.154]
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The files under Documentation/ABI should follow the syntax
-as defined at Documentation/ABI/README.
+This patch set introduces a new IMA extension called IMA Digest Lists.
 
-Allow checking if they're following the syntax by running
-the ABI parser script on COMPILE_TEST.
+At early boot, the extension preloads in kernel memory reference digest
+values, that can be compared with actual file digests when files are
+accessed in the system.
 
-With that, when there's a problem with a file under
-Documentation/ABI, it would produce a warning like:
+The extension will open for new possibilities: PCR with predictable value,
+that can be used for sealing policies associated to data or TPM keys;
+appraisal based on reference digests already provided by Linux distribution
+vendors in the software packages.
 
-	Warning: file ./Documentation/ABI/testing/sysfs-bus-pci-devices-aer_stats#14:
-		What '/sys/bus/pci/devices/<dev>/aer_stats/aer_rootport_total_err_cor' doesn't have a description
-	Warning: file ./Documentation/ABI/testing/sysfs-bus-pci-devices-aer_stats#21:
-		What '/sys/bus/pci/devices/<dev>/aer_stats/aer_rootport_total_err_fatal' doesn't have a description
+The first objective can be achieved because the PCR values does not depend
+on which and when files are measured: the extension measures digest lists
+sequentially and files whose digest is not in the digest list.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
----
- Documentation/Kconfig  | 11 +++++++++++
- Documentation/Makefile |  5 +++++
- lib/Kconfig.debug      |  2 ++
- scripts/get_abi.pl     | 14 +++++++++++---
- 4 files changed, 29 insertions(+), 3 deletions(-)
- create mode 100644 Documentation/Kconfig
+The second objective can be reached because the extension is able to
+extract reference measurements from packages (with a user space tool) and
+use it as a source for appraisal verification as the reference came from
+the security.ima xattr. This approach will also reduce the overhead as only
+one signature is verified for many files (as opposed to one signature for
+each file with the current implementation).
 
-diff --git a/Documentation/Kconfig b/Documentation/Kconfig
-new file mode 100644
-index 000000000000..a8b0701c1422
---- /dev/null
-+++ b/Documentation/Kconfig
-@@ -0,0 +1,11 @@
-+config WARN_ABI_ERRORS
-+	bool "Warn if there are errors at ABI files"
-+	depends on COMPILE_TEST
-+	help
-+	   The files under Documentation/ABI should follow what's
-+	   described at Documentation/ABI/README. Yet, as they're manually
-+	   written, it would be possible that some of those files would
-+	   have errors that would break them for being parsed by
-+	   scripts/get_abi.pl. Add a check to verify them.
-+
-+	   If unsure, select 'N'.
-diff --git a/Documentation/Makefile b/Documentation/Makefile
-index e889e7cb8511..c6480ed22884 100644
---- a/Documentation/Makefile
-+++ b/Documentation/Makefile
-@@ -4,6 +4,11 @@
- 
- subdir-y := devicetree/bindings/
- 
-+# Check for broken ABI files
-+ifeq ($(CONFIG_WARN_ABI_ERRORS),y)
-+$(shell $(srctree)/scripts/get_abi.pl validate --dir $(srctree)/Documentation/ABI)
-+endif
-+
- # You can set these variables from the command line.
- SPHINXBUILD   = sphinx-build
- SPHINXOPTS    =
-diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
-index cbdfae379896..b1b7e141ca99 100644
---- a/lib/Kconfig.debug
-+++ b/lib/Kconfig.debug
-@@ -2110,4 +2110,6 @@ config IO_STRICT_DEVMEM
- 
- source "arch/$(SRCARCH)/Kconfig.debug"
- 
-+source "Documentation/Kconfig"
-+
- endmenu # Kernel hacking
-diff --git a/scripts/get_abi.pl b/scripts/get_abi.pl
-index 774e9b809ead..25248c012eb3 100755
---- a/scripts/get_abi.pl
-+++ b/scripts/get_abi.pl
-@@ -38,7 +38,15 @@ my %data;
- sub parse_error($$$$) {
- 	my ($file, $ln, $msg, $data) = @_;
- 
--	print STDERR "file $file#$ln: $msg at\n\t$data";
-+	$data =~ s/\s+$/\n/;
-+
-+	print STDERR "Warning: file $file#$ln:\n\t$msg";
-+
-+	if ($data ne "") {
-+		print STDERR ". Line\n\t\t$data";
-+	} else {
-+	    print STDERR "\n";
-+	}
- }
- 
- #
-@@ -94,7 +102,7 @@ sub parse_abi {
- 
- 			# Invalid, but it is a common mistake
- 			if ($new_tag eq "where") {
--				parse_error($file, $ln, "tag 'Where' is invalid. Should be 'What:' instead", $_);
-+				parse_error($file, $ln, "tag 'Where' is invalid. Should be 'What:' instead", "");
- 				$new_tag = "what";
- 			}
- 
-@@ -190,7 +198,7 @@ sub parse_abi {
- 		}
- 
- 		# Everything else is error
--		parse_error($file, $ln, "Unexpected line:", $_);
-+		parse_error($file, $ln, "Unexpected content", $_);
- 	}
- 	$data{$nametag}->{description} =~ s/^\n+//;
- 	close IN;
+This version of the patch set provides a clear separation between current
+and new functionality. First, the new functionality must be explicitly
+enabled from the kernel command line. Second, results of operations
+performed by the extension can be distinguished from those obtained from
+the existing code: measurement entries created by the extension have a
+different PCR; mutable files appraised with the extension have a different
+security.ima type.
+
+The review of this patch set should start from patch 11 and 12, which
+modify the IMA-Measure and IMA-Appraise submodules to use digest lists.
+Patch 1 to 5 are prerequisites. Patch 6 to 10 adds support for digest
+lists. Finally, patch 13 introduces two new policies to measure/appraise
+rootfs and patch 14 adds the documentation (including a flow chart to
+show how IMA has been modified).
+
+The user space tools to configure digest lists are available at:
+
+https://github.com/euleros/digest-list-tools/releases/tag/v0.3
+
+The patch set applies on top of linux-integrity/next-queued-testing
+(73589972b987).
+
+It is necessary to apply also:
+https://patchwork.kernel.org/cover/10957495/
+
+To use appraisal, it is necessary to use a modified cpio and a modified
+dracut:
+
+https://github.com/euleros/cpio/tree/xattr-v1
+https://github.com/euleros/dracut/tree/digest-lists
+
+For now, please use it only in a testing environment.
+
+
+Changelog
+
+v3:
+- move ima_lookup_loaded_digest() and ima_add_digest_data_entry() from
+  ima_queue.c to ima_digest_list.c
+- remove patch that introduces security.ima_algo
+- add version number and type modifiers to the compact list header
+- remove digest list metadata, all digest lists in the directory are
+  accessed
+- move loading of signing keys to user space
+- add violation for both PCRs if they are selected
+- introduce two new appraisal modes
+
+v2:
+- add support for multiple hash algorithms
+- remove RPM parser from the kernel
+- add support for parsing digest lists in user space
+
+v1:
+- add support for immutable/mutable files
+- add support for appraisal with digest lists
+
+
+Roberto Sassu (14):
+  ima: read hash algorithm from security.ima even if appraisal is not
+    enabled
+  ima: generalize ima_read_policy()
+  ima: generalize ima_write_policy() and raise uploaded data size limit
+  ima: generalize policy file operations
+  ima: use ima_show_htable_value to show violations and hash table data
+  ima: add parser of compact digest list
+  ima: restrict upload of converted digest lists
+  ima: prevent usage of digest lists that are not measured/appraised
+  ima: introduce new securityfs files
+  ima: load parser digests and execute the parser at boot time
+  ima: add support for measurement with digest lists
+  ima: add support for appraisal with digest lists
+  ima: introduce new policies initrd and appraise_initrd
+  ima: add Documentation/security/IMA-digest-lists.txt
+
+ .../admin-guide/kernel-parameters.txt         |  16 +-
+ Documentation/security/IMA-digest-lists.txt   | 226 +++++++++++++
+ include/linux/evm.h                           |   6 +
+ include/linux/fs.h                            |   1 +
+ security/integrity/evm/evm_main.c             |   2 +-
+ security/integrity/iint.c                     |   1 +
+ security/integrity/ima/Kconfig                |  25 ++
+ security/integrity/ima/Makefile               |   1 +
+ security/integrity/ima/ima.h                  |  32 +-
+ security/integrity/ima/ima_api.c              |  43 ++-
+ security/integrity/ima/ima_appraise.c         |  92 +++---
+ security/integrity/ima/ima_digest_list.c      | 309 ++++++++++++++++++
+ security/integrity/ima/ima_digest_list.h      |  69 ++++
+ security/integrity/ima/ima_fs.c               | 224 ++++++++-----
+ security/integrity/ima/ima_init.c             |   2 +-
+ security/integrity/ima/ima_main.c             |  81 ++++-
+ security/integrity/ima/ima_policy.c           |  29 +-
+ security/integrity/integrity.h                |  22 ++
+ 18 files changed, 1018 insertions(+), 163 deletions(-)
+ create mode 100644 Documentation/security/IMA-digest-lists.txt
+ create mode 100644 security/integrity/ima/ima_digest_list.c
+ create mode 100644 security/integrity/ima/ima_digest_list.h
+
 -- 
-2.21.0
+2.17.1
 
