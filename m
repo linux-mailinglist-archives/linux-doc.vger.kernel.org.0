@@ -2,69 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A5255460A5
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 16:25:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CFD024625A
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 17:16:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728391AbfFNOZo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 10:25:44 -0400
-Received: from ms.lwn.net ([45.79.88.28]:52266 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728050AbfFNOZo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Jun 2019 10:25:44 -0400
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 73B88128A;
-        Fri, 14 Jun 2019 14:25:43 +0000 (UTC)
-Date:   Fri, 14 Jun 2019 08:25:42 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Dmitry Vyukov <dvyukov@google.com>
-Cc:     "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        "Theodore Ts'o" <tytso@mit.edu>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        David Rientjes <rientjes@google.com>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Michael Ellerman <mpe@ellerman.id.au>
-Subject: Re: [PATCH v3] Add a document on rebasing and merging
-Message-ID: <20190614082542.3f8674eb@lwn.net>
-In-Reply-To: <CACT4Y+avfTeZTmhti=7nEadthZZpTnOCTdEuG2S7PovmAMkhZQ@mail.gmail.com>
-References: <20190612094503.120f699a@lwn.net>
-        <CACT4Y+avfTeZTmhti=7nEadthZZpTnOCTdEuG2S7PovmAMkhZQ@mail.gmail.com>
-Organization: LWN.net
+        id S1726484AbfFNPQa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 11:16:30 -0400
+Received: from hostingweb31-40.netsons.net ([89.40.174.40]:39028 "EHLO
+        hostingweb31-40.netsons.net" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726297AbfFNPQZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jun 2019 11:16:25 -0400
+Received: from [109.168.11.45] (port=44258 helo=pc-ceresoli.dev.aim)
+        by hostingweb31.netsons.net with esmtpa (Exim 4.92)
+        (envelope-from <luca@lucaceresoli.net>)
+        id 1hbnwE-000D1q-Qn; Fri, 14 Jun 2019 17:16:22 +0200
+From:   Luca Ceresoli <luca@lucaceresoli.net>
+To:     linux-media@vger.kernel.org
+Cc:     Luca Ceresoli <luca@lucaceresoli.net>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Hans Verkuil <hverkuil@xs4all.nl>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [PATCH v2] media: docs: v4l2-controls: fix sentence rendered in a nonsense way
+Date:   Fri, 14 Jun 2019 17:14:29 +0200
+Message-Id: <20190614151429.15191-1-luca@lucaceresoli.net>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 8bit
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - hostingweb31.netsons.net
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - lucaceresoli.net
+X-Get-Message-Sender-Via: hostingweb31.netsons.net: authenticated_id: luca+lucaceresoli.net/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: hostingweb31.netsons.net: luca@lucaceresoli.net
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 14 Jun 2019 11:59:03 +0200
-Dmitry Vyukov <dvyukov@google.com> wrote:
+This sentence renders as:
 
-> I will appreciate if you elaborate a bit on this "scale of the
-> project". I wondered about reasons for having the current hierarchy of
-> trees and complex merging for a while, but wasn't able to find any
-> rationale. What exactly scale do you mean? I know a number of projects
-> that are comparable to Linux kernel, with the largest being 2 orders
-> of magnitude larger than kernel both in terms of code size and rate of
-> change, that use single tree and linear history. 
+> Since such compound controls need to expose more information about
+> themselves than is possible with ioctls VIDIOC_QUERYCTRL,
+> VIDIOC_QUERY_EXT_CTRL and VIDIOC_QUERYMENU the VIDIOC_QUERY_EXT_CTRL
+  ^^^^^^^^^^^^^^^^^^^^^                          ^^^^^^^^^^^^^^^^^^^^^
+> ioctl was added.
 
-I'm not sure what projects you're talking about, so it's hard to compare.
+This does not make sense. Fix by providing an explicit link text. This
+results in:
 
-During the 5.2 merge window, Linus did 209 pulls, bringing in just over
-12,000 changesets, from on the order of 1600 developers.  Even if, at the
-beginning of the window, each of those pulls was set up to be a
-fast-forward, they would no longer be positioned that way once the first
-pull was done.
+> Since such compound controls need to expose more information about
+> themselves than is possible with VIDIOC_QUERYCTRL the
+> VIDIOC_QUERY_EXT_CTRL ioctl was added.
 
-Are you really saying that subsystem maintainers should be continuously
-rebasing their trees to avoid merges at the top level?  Do you see how
-much work that would take, how badly it would obscure the development
-history, and how many bugs it would introduce?  Or perhaps I misunderstood
-what you're arguing for?
+Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
+---
+ Documentation/media/uapi/v4l/extended-controls.rst | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
 
-Thanks,
+diff --git a/Documentation/media/uapi/v4l/extended-controls.rst b/Documentation/media/uapi/v4l/extended-controls.rst
+index 0e9787072a41..655362483730 100644
+--- a/Documentation/media/uapi/v4l/extended-controls.rst
++++ b/Documentation/media/uapi/v4l/extended-controls.rst
+@@ -85,11 +85,10 @@ be able to see such compound controls. In other words, these controls
+ with compound types should only be used programmatically.
+ 
+ Since such compound controls need to expose more information about
+-themselves than is possible with
+-:ref:`VIDIOC_QUERYCTRL` the
+-:ref:`VIDIOC_QUERY_EXT_CTRL <VIDIOC_QUERYCTRL>` ioctl was added. In
+-particular, this ioctl gives the dimensions of the N-dimensional array
+-if this control consists of more than one element.
++themselves than is possible with :ref:`VIDIOC_QUERYCTRL <VIDIOC_QUERYCTRL>`
++the :ref:`VIDIOC_QUERY_EXT_CTRL <VIDIOC_QUERYCTRL>` ioctl was added. In
++particular, this ioctl gives the dimensions of the N-dimensional array if
++this control consists of more than one element.
+ 
+ .. note::
+ 
+-- 
+2.21.0
 
-jon
