@@ -2,109 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4903446976
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 22:33:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B17BE46B94
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 23:14:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727777AbfFNUai (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 16:30:38 -0400
-Received: from mail-qt1-f195.google.com ([209.85.160.195]:33964 "EHLO
-        mail-qt1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726784AbfFNUah (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jun 2019 16:30:37 -0400
-Received: by mail-qt1-f195.google.com with SMTP id m29so4037537qtu.1;
-        Fri, 14 Jun 2019 13:30:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=AurvGG5md8kdmEphcGq2SiHYTXdU1Fp3TGMe3JSDOo0=;
-        b=ponl8/TKF4625A5i4nwix1bf/BKuWpdnWdsbj1AYGUJeoO6YwVASh4cXNfVx9IvaZa
-         CFwxikzqVVjimctDR05UE41qDDK4m4UYGGq6lT/dI8Ixp9oxQCdYqc2Z3XtJrBBoXrBq
-         umOejNZ+ajnJrFU8/luWxLTc7Lm3AgFpFjiX5f8hfTa03/nmo8RpqMAR3V/rc21lr+pO
-         P0+G+E4MVXjXkkNwPVaW1x6EO7L4vXqTBB1608iq6Bbm2erdxjqToEzmht7mQ7XHe7Ki
-         LsXMlWNkp0G6rLPcPPR+KhweE4x8FfhIUl4x1cZTqJy/9LML7BZbbD8ApalUlsrWEJMI
-         TxRg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-         :references:mime-version:content-disposition:in-reply-to:user-agent;
-        bh=AurvGG5md8kdmEphcGq2SiHYTXdU1Fp3TGMe3JSDOo0=;
-        b=hmaoyJeeNEhOBOKwg9knm4EQnvki0SP+Cww6MkRFwddDnPnw30mE9gLX2kDBZuL4No
-         mMDyxpoY+8HQgnUxrWE46yVVXHK02+62v53rOPwFCimspnFtaNesk22Mm30tTlq5BMKV
-         S5LoDSd7/DsNMPCWA2Ki7TVeRQqbe2mvWjJlLZ8a8H4C3hCzdtX4k9Gvq+QdTnduLXdf
-         jU+4FWV9qyTMkGvKa/1X37yzNoyFBTMvp2z+uHNvQLXQ4aFjyumXNbzwSYqKHbAaEbu9
-         OYnGtRWMmSSCsaIUOXBfbKuFcdTA4UVIXUmZh71ZPMVS4tFrNNSwQ5H1Nuu+E4iu5OsF
-         wKJw==
-X-Gm-Message-State: APjAAAWo8hlOEMfzT7Pbw05EyYd3W7tF0awUE8K8PzyTlBbrmdZW4cPd
-        iLWE8GGv8Axb3NPIN5qX3kk=
-X-Google-Smtp-Source: APXvYqzw+5pIEwdgx1vf8nomOEwKyVQrAuLI6zJPGXYa+IhlGCCOm1m2SixssVwluHArEdFBBF2Wxg==
-X-Received: by 2002:ac8:1a39:: with SMTP id v54mr83461557qtj.21.1560544236029;
-        Fri, 14 Jun 2019 13:30:36 -0700 (PDT)
-Received: from localhost ([2620:10d:c091:480::6bab])
-        by smtp.gmail.com with ESMTPSA id e8sm2215252qkn.95.2019.06.14.13.30.35
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 14 Jun 2019 13:30:35 -0700 (PDT)
-Date:   Fri, 14 Jun 2019 13:30:33 -0700
-From:   Tejun Heo <tj@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "H. Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
-        Jens Axboe <axboe@kernel.dk>, Li Zefan <lizefan@huawei.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>, linux-block@vger.kernel.org,
-        cgroups@vger.kernel.org, netdev@vger.kernel.org,
-        bpf@vger.kernel.org, linux-security-module@vger.kernel.org
-Subject: Re: [PATCH v4 05/28] docs: cgroup-v1: convert docs to ReST and
- rename to *.rst
-Message-ID: <20190614203033.GD657710@devbig004.ftw2.facebook.com>
-References: <cover.1560361364.git.mchehab+samsung@kernel.org>
- <c1dd623359f44f05863456b8bceba0d8f3e42f38.1560361364.git.mchehab+samsung@kernel.org>
- <20190614141401.48bfb266@lwn.net>
+        id S1726300AbfFNVOc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 17:14:32 -0400
+Received: from [89.32.41.185] ([89.32.41.185]:39730 "EHLO slot0.normalihy.ga"
+        rhost-flags-FAIL-FAIL-OK-OK) by vger.kernel.org with ESMTP
+        id S1726283AbfFNVOb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Jun 2019 17:14:31 -0400
+X-Greylist: delayed 1882 seconds by postgrey-1.27 at vger.kernel.org; Fri, 14 Jun 2019 17:14:30 EDT
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=dkim; d=normalihy.ga;
+ h=Content-Type:MIME-Version:Content-Transfer-Encoding:Content-Description:Subject:To:From:Date:Reply-To:Message-ID; i=slaoma@normalihy.ga;
+ bh=LF69dDschg8kOsoWmykprZXCKM4=;
+ b=HX1Uso0OKF5WE7i5Z7v0Mv6P2hYMBl7R6YCXjyn6Dc6TsSXJPa0gLOjI249V+eOznNWuIQfcwsJk
+   MgLr5+DE5/DHFEFH4jKRS3/tfhGPPJfqgr3sYwju9f8iegVUKkignUKmgbj0NxaNDAa8gWBW62YV
+   ZYGx69w7M87mAw45h4owb2Ip3hY6pT2jWDAhuaVRv2qvemVxgExzF+5kYtExjoaJrGQmZ0x5OAu2
+   OCrdpJqGNPI1Le8ylcMuazKtbplVeSxRurcAcolz90B9FI4WUSE3n+dtWQbHhZwoCUvPLT6rL3zQ
+   h9CkdzRo3lH73d7K82ORk8tdXekYBUSUd9vIlQ==
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=dkim; d=normalihy.ga;
+ b=gsAhrOLxPa10fIHs1dnCiEHxUlBy4OHlGULHjCejAoZ/hhZwsFrsXtxjuhLhQN1Ed6qPM2VjrfG5
+   dUAJXDScEITWk+1b/HTsdA04a7lQ/7j8cQ/QY+BtkGuOtr4dF1SrESOPueAH0nEW1spmd5koZkAK
+   N20+igq04plbEqPn26pGurbpas0a13RfJ371WRRkFnXz1rusAEel+CQRwcei/LYwAzfJ3Gq58uQL
+   faiAcm3GM134cGBzyjNwJVsTUlmlCa9aeX/0Bf9/il19lx9UkPTYxI84jKjDZobcnyZCR5kLOrNA
+   wO6s703SxTZKxh/GVskCUcoZu+kEV5VUifEeKg==;
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190614141401.48bfb266@lwn.net>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: INQUIRY -AGRA POLANDS
+To:     Recipients <slaoma@normalihy.ga>
+From:   "Mrkt dept" <slaoma@normalihy.ga>
+Date:   Fri, 14 Jun 2019 13:33:20 -0700
+Reply-To: agra.poland@aol.com
+Message-ID: <0.0.2.494.1D522F05C047E1E.0@slot0.normalihy.ga>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jun 14, 2019 at 02:14:01PM -0600, Jonathan Corbet wrote:
-> On Wed, 12 Jun 2019 14:52:41 -0300
-> Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
-> 
-> > Convert the cgroup-v1 files to ReST format, in order to
-> > allow a later addition to the admin-guide.
-> > 
-> > The conversion is actually:
-> >   - add blank lines and identation in order to identify paragraphs;
-> >   - fix tables markups;
-> >   - add some lists markups;
-> >   - mark literal blocks;
-> >   - adjust title markups.
-> > 
-> > At its new index.rst, let's add a :orphan: while this is not linked to
-> > the main index.rst file, in order to avoid build warnings.
-> > 
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-> > Acked-by: Tejun Heo <tj@kernel.org>
-> 
-> This one, too, has linux-next stuff that keeps it from applying to
-> docs-next.  Tejun, would you like to carry it on top of your work?
+Hello Sir,
 
-Applied to cgroup/for-5.3.
+Greetings rom Agra Polands.
+we have been building our international business since 1997, dealing with a=
+ wide range of luxury consumer goods in order to efficiently and effectivel=
+y satisfy all our customers=E2=80=99 demands.
 
-Thanks.
+Kindly confirm if you be able to supply us with our desired items.
 
--- 
-tejun
+What is your Payment terms and Shipments?.
+
+Regards
+
+Riccardo Corbo
+International Buyer & Analyst
+Address:Via Trento, 7/F - Lomazzo (CO) - Italy VAT IT 12165160156 =
+
+agra.poland@aol.com
