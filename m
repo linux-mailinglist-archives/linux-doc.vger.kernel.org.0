@@ -2,163 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1DD9A462B2
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 17:28:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 29036462FE
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 17:36:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725999AbfFNP2D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 11:28:03 -0400
-Received: from casper.infradead.org ([85.118.1.10]:44860 "EHLO
-        casper.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725951AbfFNP2D (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jun 2019 11:28:03 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-        MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender
-        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=zkYfXJDrba3J/ihhf3pDgW4+XmjWJ9BtTd3Y+UzyafE=; b=BS4ZrbvjFPyHk5xTId0ecXBLat
-        Eni7lDtC5c80433fhcjoauEll6LtbS9S/fsvWv32ufxW/XTHAPEcfTjASF3wf4Gc1lv6TBtc1ZYsC
-        G/xseTJ8Z9UFEWcexun0lnArWMTwuyO3ZJlueKfxsLz0G1iTTU4KbBn3OVFbN+qCpR5hCPA/LGzvv
-        xblKmJx45lS/5NxhKoFJIHGB5Q/dov5mWXKaIopI66sCnlkHoR8M39ZKTlsorzUjs9i+7MUVyWrFb
-        Lj/Lb26SC48111GgRl0/zFEiTsCzUXyvLUerQHrwifk/U/+d7jEM0JFcQZp46DZop5KvdDI28SemZ
-        ib7N4LrQ==;
-Received: from 177.133.85.52.dynamic.adsl.gvt.net.br ([177.133.85.52] helo=coco.lan)
-        by casper.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hbo7T-0007sx-Kb; Fri, 14 Jun 2019 15:28:00 +0000
-Date:   Fri, 14 Jun 2019 12:27:55 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Jani Nikula <jani.nikula@linux.intel.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Mauro Carvalho Chehab <mchehab@s-opensource.com>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH 12/14] doc-rst: add ABI documentation to the admin-guide
- book
-Message-ID: <20190614122755.1c7b4898@coco.lan>
-In-Reply-To: <20190614140603.GB7234@kroah.com>
-References: <cover.1560477540.git.mchehab+samsung@kernel.org>
-        <9da2a7f6ff57d9d53dcbb964eb310f7956522870.1560477540.git.mchehab+samsung@kernel.org>
-        <87o930uvur.fsf@intel.com>
-        <20190614140603.GB7234@kroah.com>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1726455AbfFNPgk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 11:36:40 -0400
+Received: from mga06.intel.com ([134.134.136.31]:45350 "EHLO mga06.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725780AbfFNPgk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Jun 2019 11:36:40 -0400
+X-Amp-Result: UNSCANNABLE
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 14 Jun 2019 08:36:39 -0700
+X-ExtLoop1: 1
+Received: from mdumitrx-mobl1.ger.corp.intel.com (HELO localhost) ([10.249.32.245])
+  by orsmga005.jf.intel.com with ESMTP; 14 Jun 2019 08:36:30 -0700
+Date:   Fri, 14 Jun 2019 18:36:22 +0300
+From:   Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
+To:     Sumit Garg <sumit.garg@linaro.org>
+Cc:     keyrings@vger.kernel.org, linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org,
+        Jens Wiklander <jens.wiklander@linaro.org>, corbet@lwn.net,
+        dhowells@redhat.com, jejb@linux.ibm.com, zohar@linux.ibm.com,
+        jmorris@namei.org, serge@hallyn.com,
+        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
+        Daniel Thompson <daniel.thompson@linaro.org>,
+        linux-doc@vger.kernel.org,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        tee-dev@lists.linaro.org
+Subject: Re: [RFC 6/7] doc: keys: Document usage of TEE based Trusted Keys
+Message-ID: <20190614153622.GG11241@linux.intel.com>
+References: <1560421833-27414-1-git-send-email-sumit.garg@linaro.org>
+ <1560421833-27414-7-git-send-email-sumit.garg@linaro.org>
+ <20190613153414.GG18488@linux.intel.com>
+ <CAFA6WYP7qi_NBRUDBhcEAEzJY-iFvJdXqtCtgQxqAvPSXDjEng@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFA6WYP7qi_NBRUDBhcEAEzJY-iFvJdXqtCtgQxqAvPSXDjEng@mail.gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Fri, 14 Jun 2019 16:06:03 +0200
-Greg Kroah-Hartman <gregkh@linuxfoundation.org> escreveu:
-
-> On Fri, Jun 14, 2019 at 04:42:20PM +0300, Jani Nikula wrote:
-> > On Thu, 13 Jun 2019, Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:  
-> > > From: Mauro Carvalho Chehab <mchehab@s-opensource.com>
+On Fri, Jun 14, 2019 at 11:07:23AM +0530, Sumit Garg wrote:
+> On Thu, 13 Jun 2019 at 21:04, Jarkko Sakkinen
+> <jarkko.sakkinen@linux.intel.com> wrote:
+> >
+> > On Thu, Jun 13, 2019 at 04:00:32PM +0530, Sumit Garg wrote:
+> > > Provide documentation for usage of TEE based Trusted Keys via existing
+> > > user-space "keyctl" utility. Also, document various use-cases.
 > > >
-> > > As we don't want a generic Sphinx extension to execute commands,
-> > > change the one proposed to Markus to call the abi_book.pl
-> > > script.
-> > >
-> > > Use a script to parse the Documentation/ABI directory and output
-> > > it at the admin-guide.  
-> > 
-> > We had a legacy kernel-doc perl script so we used that instead of
-> > rewriting it in python. Just to keep it bug-for-bug compatible with the
-> > past. That was the only reason.
-> > 
-> > I see absolutely zero reason to add a new perl monstrosity with a python
-> > extension to call it. All of this could be better done in python,
-> > directly.
-> > 
-> > Please don't complicate the documentation build. I know you know we all
-> > worked hard to take apart the old DocBook Rube Goldberg machine to
-> > replace it with Sphinx. Please don't turn the Sphinx build to another
-> > complicated mess.
-> > 
-> > My strong preferences are, in this order:
-> > 
-> > 1) Convert the ABI documentation to reStructuredText  
+> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
+> >
+> > Sorry missed this patch. Anyway, I don't think we want multiple trusted
+> > keys subsystems. You have to fix the existing one if you care to get
+> > these changes in. There is no really other way around this.
+> >
 > 
-> What would that exactly look like?  What would it require for new
-> developers for when they write new entries?  Why not rely on a helper
-> script, that allows us to validate things better?
-
-Funny enough, this e-mail arrived here after Greg's reply, and my
-reply over his one :-)
-
--
-
-With regards to the script, my idea is to have it run on a new
-"validate" mode, when the Kernel is built with COMPILE_TEST:
-
-	https://git.linuxtv.org/mchehab/experimental.git/log/?h=abi_patches_v4
-
-NB: the last patch is not yet... somehow, the building system is not
-passing CONFIG_WARN_ABI_ERRORS to Documentation/Makefile. I'm
-debugging it.
-
-Personally, I would prefer to keep it the way it is, with two
-additions:
-
-1) I would add a SPDX header at the fist line of each file there;
-
-2) It would make sense to have a new field - or indicator - to let
-add ReST markups at the description. 
-
-The advantage of using a parseable ABI file is that it is possible
-to parse it, for example, to search for a symbol:
-
-	$ ./scripts/get_abi.pl voltage_max
-
-	/sys/class/power_supply/<supply_name>/voltage_max
-	-------------------------------------------------
-
-	Date:			January 2008
-	Contact:		linux-pm@vger.kernel.org
-	Defined on file:	Documentation/ABI/testing/sysfs-class-power
-
-	Description:
-
-	Reports the maximum VBUS voltage the supply can support.
-
-	Access: Read
-	Valid values: Represented in microvolts
-
-	...
-
+> I understand your point.
 > 
-> > 2) Have the python extension read the ABI files directly, without an
-> >    extra pipeline.  
+> When I initially looked at trusted key implementation, it seemed to be
+> tightly coupled to use TPM device. So I implemented a parallel
+> implementation to get initial feedback (functionality-wise) on this
+> new approach.
+
+Yeah, I completely get this. My feedback this is: we can definitely
+consider TEE based trusted keys, and I know that trusted.ko is a mess,
+but still that is the only right long-term path. Think about the
+positive side: if you as a side-effect can make it cleaner and more
+versatile, your patch set will improve the quality of the kernel as a
+whole i.e. you benefit larger audience than just TEE user base :-)
+
+> I will work on abstraction of trusted key apis to use either approach.
+> But is it fine with you if I send if I send a separate RFC patch for
+> abstraction and later once reviewed I will incorporate that patch in
+> this patch-set.
 > 
-> He who writes the script, get's to dictate the language of the script :)
+> It will be really helpful if you could help to test that abstraction
+> patch with a real TPM device as I doesn't posses one to test.
 
-No idea about how much time it would take if written in python,
-but this perl script is really fast:
+I can, yes.
 
-	$ time ./scripts/get_abi.pl search voltage_max >/dev/null
-	real	0m0,139s
-	user	0m0,132s
-	sys	0m0,006s
-
-That's the time it takes here (SSD disks) to read all files under
-Documentation/ABI, parse them and seek for a string.
-
-That's about half of the time a python script takes to just import the
-the sphinx modules and print its version, running at the same machine:
-
-	$ time sphinx-build --version >/dev/null
-
-	real	0m0,224s
-	user	0m0,199s
-	sys	0m0,024s
-
-> Personally, this looks sane to me, I'm going to apply the ABI fixups to
-> my tree at least, and then see how the script works out.  The script can
-> always be replaced with a different one in a different language at a
-> later point in time of people think it really mattes.
-
-Thanks,
-Mauro
+/Jarkko
