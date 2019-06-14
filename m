@@ -2,92 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AE2594625E
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 17:16:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DFB34462DF
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 17:33:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725858AbfFNPQS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 11:16:18 -0400
-Received: from hostingweb31-40.netsons.net ([89.40.174.40]:50010 "EHLO
-        hostingweb31-40.netsons.net" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1725843AbfFNPQS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jun 2019 11:16:18 -0400
-Received: from [109.168.11.45] (port=40856 helo=[192.168.101.64])
-        by hostingweb31.netsons.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
-        (Exim 4.92)
-        (envelope-from <luca@lucaceresoli.net>)
-        id 1hbnw6-000D0p-KC; Fri, 14 Jun 2019 17:16:14 +0200
-Subject: Re: [PATCH 1/9] media: docs: v4l2-controls: fix sentence rendered in
- a nonsense way
-To:     Hans Verkuil <hverkuil@xs4all.nl>, linux-media@vger.kernel.org
-Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20190613141826.26775-1-luca@lucaceresoli.net>
- <069ac18c-7b9e-652a-1ff8-35fca09e6538@xs4all.nl>
-From:   Luca Ceresoli <luca@lucaceresoli.net>
-Message-ID: <f132a0a3-d762-d4a3-f76c-a3cdc1dc5c56@lucaceresoli.net>
-Date:   Fri, 14 Jun 2019 17:16:14 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
-MIME-Version: 1.0
-In-Reply-To: <069ac18c-7b9e-652a-1ff8-35fca09e6538@xs4all.nl>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+        id S1726230AbfFNPdV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 11:33:21 -0400
+Received: from mga18.intel.com ([134.134.136.126]:64871 "EHLO mga18.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725780AbfFNPdV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Jun 2019 11:33:21 -0400
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 14 Jun 2019 08:33:20 -0700
+X-ExtLoop1: 1
+Received: from yyu32-desk1.sc.intel.com ([10.144.153.205])
+  by fmsmga001.fm.intel.com with ESMTP; 14 Jun 2019 08:33:20 -0700
+Message-ID: <cf0d1470e95e0a8b88742651d06601a53d6655c1.camel@intel.com>
+Subject: Re: [PATCH v7 03/14] x86/cet/ibt: Add IBT legacy code bitmap setup
+ function
+From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
+To:     Dave Hansen <dave.hansen@intel.com>,
+        Andy Lutomirski <luto@amacapital.net>
+Cc:     Peter Zijlstra <peterz@infradead.org>, x86@kernel.org,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>
+Date:   Fri, 14 Jun 2019 08:25:16 -0700
+In-Reply-To: <ea5e333f-8cd6-8396-635f-a9dc580d5364@intel.com>
+References: <20190606200926.4029-1-yu-cheng.yu@intel.com>
+         <20190606200926.4029-4-yu-cheng.yu@intel.com>
+         <20190607080832.GT3419@hirez.programming.kicks-ass.net>
+         <aa8a92ef231d512b5c9855ef416db050b5ab59a6.camel@intel.com>
+         <20190607174336.GM3436@hirez.programming.kicks-ass.net>
+         <b3de4110-5366-fdc7-a960-71dea543a42f@intel.com>
+         <34E0D316-552A-401C-ABAA-5584B5BC98C5@amacapital.net>
+         <7e0b97bf1fbe6ff20653a8e4e147c6285cc5552d.camel@intel.com>
+         <25281DB3-FCE4-40C2-BADB-B3B05C5F8DD3@amacapital.net>
+         <e26f7d09376740a5f7e8360fac4805488b2c0a4f.camel@intel.com>
+         <3f19582d-78b1-5849-ffd0-53e8ca747c0d@intel.com>
+         <5aa98999b1343f34828414b74261201886ec4591.camel@intel.com>
+         <0665416d-9999-b394-df17-f2a5e1408130@intel.com>
+         <5c8727dde9653402eea97bfdd030c479d1e8dd99.camel@intel.com>
+         <ac9a20a6-170a-694e-beeb-605a17195034@intel.com>
+         <328275c9b43c06809c9937c83d25126a6e3efcbd.camel@intel.com>
+         <92e56b28-0cd4-e3f4-867b-639d9b98b86c@intel.com>
+         <1b961c71d30e31ecb22da2c5401b1a81cb802d86.camel@intel.com>
+         <ea5e333f-8cd6-8396-635f-a9dc580d5364@intel.com>
+Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.1-2 
+Mime-Version: 1.0
 Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - hostingweb31.netsons.net
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - lucaceresoli.net
-X-Get-Message-Sender-Via: hostingweb31.netsons.net: authenticated_id: luca+lucaceresoli.net/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: hostingweb31.netsons.net: luca@lucaceresoli.net
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Hans,
-
-On 14/06/19 09:14, Hans Verkuil wrote:
-> On 6/13/19 4:18 PM, Luca Ceresoli wrote:
->> This sentence renders as:
->>
->>> Since such compound controls need to expose more information about
->>> themselves than is possible with ioctls VIDIOC_QUERYCTRL,
->>> VIDIOC_QUERY_EXT_CTRL and VIDIOC_QUERYMENU the VIDIOC_QUERY_EXT_CTRL
->>   ^^^^^^^^^^^^^^^^^^^^^                          ^^^^^^^^^^^^^^^^^^^^^
->>> ioctl was added.
->>
->> This does not make sense. Fix by providing an explicit link text. This
->> results in:
->>
->>> Since such compound controls need to expose more information about
->>> themselves than is possible with VIDIOC_QUERYCTRL and VIDIOC_QUERYMENU
->>> the VIDIOC_QUERY_EXT_CTRL ioctl was added.
->>
->> Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
->> ---
->>  Documentation/media/uapi/v4l/extended-controls.rst | 2 +-
->>  1 file changed, 1 insertion(+), 1 deletion(-)
->>
->> diff --git a/Documentation/media/uapi/v4l/extended-controls.rst b/Documentation/media/uapi/v4l/extended-controls.rst
->> index 24274b398e63..0968aa9cd167 100644
->> --- a/Documentation/media/uapi/v4l/extended-controls.rst
->> +++ b/Documentation/media/uapi/v4l/extended-controls.rst
->> @@ -86,7 +86,7 @@ with compound types should only be used programmatically.
->>  
->>  Since such compound controls need to expose more information about
->>  themselves than is possible with
->> -:ref:`VIDIOC_QUERYCTRL` the
->> +:ref:`VIDIOC_QUERYCTRL and VIDIOC_QUERYMENU <VIDIOC_QUERYCTRL>` the
+On Mon, 2019-06-10 at 15:59 -0700, Dave Hansen wrote:
+> On 6/10/19 3:40 PM, Yu-cheng Yu wrote:
+> > Ok, we will go back to do_mmap() with MAP_PRIVATE, MAP_NORESERVE and
+> > VM_DONTDUMP.  The bitmap will cover only 48-bit address space.
 > 
-> This should just refer to VIDIOC_QUERYCTRL, not QUERYMENU. So this
-> becomes: :ref:`VIDIOC_QUERYCTRL <VIDIOC_QUERYCTRL>`
+> Could you make sure to discuss the downsides of only doing a 48-bit
+> address space?
 
-Thanks for your prompt review. v2 on its way with this patch only, since
-you already added the other ones in your latest pull request.
+The downside is that we cannot load legacy lib's above 48-bit address space, but
+currently ld-linux does not do that.  Should ld-linux do that in the future,
+dlopen() fails.  Considering CRIU migration, we probably need to do this anyway?
 
--- 
-Luca
+> What are the reasons behind and implications of VM_DONTDUMP?
+
+The bitmap is very big.
+
+In GDB, it should be easy to tell why a control-protection fault occurred
+without the bitmap.
+
+Yu-cheng
