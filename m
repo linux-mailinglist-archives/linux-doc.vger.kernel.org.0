@@ -2,42 +2,41 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A899A469AB
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 22:34:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CDC4246A25
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 22:37:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726950AbfFNUeb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 16:34:31 -0400
-Received: from ms.lwn.net ([45.79.88.28]:54026 "EHLO ms.lwn.net"
+        id S1727131AbfFNUg7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 16:36:59 -0400
+Received: from ms.lwn.net ([45.79.88.28]:54060 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726193AbfFNUeb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Jun 2019 16:34:31 -0400
+        id S1727484AbfFNUga (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Jun 2019 16:36:30 -0400
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 20793128A;
-        Fri, 14 Jun 2019 20:34:30 +0000 (UTC)
-Date:   Fri, 14 Jun 2019 14:34:29 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id EE29C740;
+        Fri, 14 Jun 2019 20:36:28 +0000 (UTC)
+Date:   Fri, 14 Jun 2019 14:36:27 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
 To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Mauro Carvalho Chehab <mchehab@infradead.org>,
         linux-kernel@vger.kernel.org,
-        Catalin Marinas <catalin.marinas@arm.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>,
         Will Deacon <will.deacon@arm.com>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Radim =?UTF-8?B?S3LEjW3DocWZ?= <rkrcmar@redhat.com>,
-        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
-        linux-arm-kernel@lists.infradead.org, kvm@vger.kernel.org,
-        linux-efi@vger.kernel.org
-Subject: Re: [PATCH v4 02/28] docs: arm64: convert docs to ReST and rename
- to .rst
-Message-ID: <20190614143429.640226ec@lwn.net>
-In-Reply-To: <20190614141041.335a76e5@lwn.net>
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <maxime.ripard@bootlin.com>,
+        Sean Paul <sean@poorly.run>, David Airlie <airlied@linux.ie>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        dri-devel@lists.freedesktop.org
+Subject: Re: [PATCH v4 14/28] docs: locking: convert docs to ReST and rename
+ to *.rst
+Message-ID: <20190614143627.173f5005@lwn.net>
+In-Reply-To: <791f74dab9607d3d349b1e7fe5d0ab5abbb24081.1560361364.git.mchehab+samsung@kernel.org>
 References: <cover.1560361364.git.mchehab+samsung@kernel.org>
-        <8320e8e871660bf9fc426bc688f4808a1a7aa031.1560361364.git.mchehab+samsung@kernel.org>
-        <20190614141041.335a76e5@lwn.net>
+        <791f74dab9607d3d349b1e7fe5d0ab5abbb24081.1560361364.git.mchehab+samsung@kernel.org>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -47,30 +46,31 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 14 Jun 2019 14:10:41 -0600
-Jonathan Corbet <corbet@lwn.net> wrote:
+On Wed, 12 Jun 2019 14:52:50 -0300
+Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
 
-> On Wed, 12 Jun 2019 14:52:38 -0300
-> Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
+> Convert the locking documents to ReST and add them to the
+> kernel development book where it belongs.
 > 
-> > The documentation is in a format that is very close to ReST format.
-> > 
-> > The conversion is actually:
-> >   - add blank lines in order to identify paragraphs;
-> >   - fixing tables markups;
-> >   - adding some lists markups;
-> >   - marking literal blocks;
-> >   - adjust some title markups.
-> > 
-> > At its new index.rst, let's add a :orphan: while this is not linked to
-> > the main index.rst file, in order to avoid build warnings.  
+> Most of the stuff here is just to make Sphinx to properly
+> parse the text file, as they're already in good shape,
+> not requiring massive changes in order to be parsed.
 > 
-> This one doesn't apply to docs-next, since there's a bunch of stuff in
-> linux-next that I don't have.  I'd suggest that it either go by way of an
-> ARM tree or send it my way again after the ARM changes go upstream.
+> The conversion is actually:
+>   - add blank lines and identation in order to identify paragraphs;
+>   - fix tables markups;
+>   - add some lists markups;
+>   - mark literal blocks;
+>   - adjust title markups.
+> 
+> At its new index.rst, let's add a :orphan: while this is not linked to
+> the main index.rst file, in order to avoid build warnings.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> Acked-by: Federico Vaga <federico.vaga@vaga.pv.it>
 
-Actually, nevermind.  Pulling my tree forward to 5.2-rc4 resolved the
-issues here.
+This patch contains linux-next changes and doesn't apply to docs-next.
+Perhaps the best thing to do is to apply it to the locking tree?
 
 Thanks,
 
