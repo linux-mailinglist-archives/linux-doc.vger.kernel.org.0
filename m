@@ -2,103 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7E5A4468C7
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 22:21:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4903446976
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Jun 2019 22:33:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725802AbfFNUVg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Jun 2019 16:21:36 -0400
-Received: from mail.kernel.org ([198.145.29.99]:43290 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726072AbfFNUVg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Jun 2019 16:21:36 -0400
-Received: from sasha-vm.mshome.net (unknown [131.107.159.134])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 423F62184C;
-        Fri, 14 Jun 2019 20:21:35 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1560543695;
-        bh=7pm8JkCLHqEoLrJYY8z/2/wqC8f2TYEabiJDZrXwd5A=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=y6YMv1qU68gkZugK3Zs30fL635yTULIgOGn84MH449NBFuBJzExPGh9cigrJlIwQE
-         RqIEblW+Qp8qPgGtfhPlQue/kbfpVY8HN5hvdJ7HK5A478nwceV1rCOPn7vzsY3Pue
-         AqL86QycMpZGNo9FD0KrsnwoMHnUw19l6cSBtJtM=
-From:   Sasha Levin <sashal@kernel.org>
-To:     peterhuewe@gmx.de, jarkko.sakkinen@linux.intel.com, jgg@ziepe.ca
-Cc:     corbet@lwn.net, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-integrity@vger.kernel.org,
-        linux-kernel@microsoft.com, thiruan@microsoft.com,
-        bryankel@microsoft.com, tee-dev@lists.linaro.org,
-        Sasha Levin <sashal@kernel.org>
-Subject: [PATCH v5 2/2] fTPM: add documentation for ftpm driver
-Date:   Fri, 14 Jun 2019 16:21:27 -0400
-Message-Id: <20190614202127.26812-3-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190614202127.26812-1-sashal@kernel.org>
-References: <20190614202127.26812-1-sashal@kernel.org>
+        id S1727777AbfFNUai (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Jun 2019 16:30:38 -0400
+Received: from mail-qt1-f195.google.com ([209.85.160.195]:33964 "EHLO
+        mail-qt1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726784AbfFNUah (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Jun 2019 16:30:37 -0400
+Received: by mail-qt1-f195.google.com with SMTP id m29so4037537qtu.1;
+        Fri, 14 Jun 2019 13:30:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=AurvGG5md8kdmEphcGq2SiHYTXdU1Fp3TGMe3JSDOo0=;
+        b=ponl8/TKF4625A5i4nwix1bf/BKuWpdnWdsbj1AYGUJeoO6YwVASh4cXNfVx9IvaZa
+         CFwxikzqVVjimctDR05UE41qDDK4m4UYGGq6lT/dI8Ixp9oxQCdYqc2Z3XtJrBBoXrBq
+         umOejNZ+ajnJrFU8/luWxLTc7Lm3AgFpFjiX5f8hfTa03/nmo8RpqMAR3V/rc21lr+pO
+         P0+G+E4MVXjXkkNwPVaW1x6EO7L4vXqTBB1608iq6Bbm2erdxjqToEzmht7mQ7XHe7Ki
+         LsXMlWNkp0G6rLPcPPR+KhweE4x8FfhIUl4x1cZTqJy/9LML7BZbbD8ApalUlsrWEJMI
+         TxRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to:user-agent;
+        bh=AurvGG5md8kdmEphcGq2SiHYTXdU1Fp3TGMe3JSDOo0=;
+        b=hmaoyJeeNEhOBOKwg9knm4EQnvki0SP+Cww6MkRFwddDnPnw30mE9gLX2kDBZuL4No
+         mMDyxpoY+8HQgnUxrWE46yVVXHK02+62v53rOPwFCimspnFtaNesk22Mm30tTlq5BMKV
+         S5LoDSd7/DsNMPCWA2Ki7TVeRQqbe2mvWjJlLZ8a8H4C3hCzdtX4k9Gvq+QdTnduLXdf
+         jU+4FWV9qyTMkGvKa/1X37yzNoyFBTMvp2z+uHNvQLXQ4aFjyumXNbzwSYqKHbAaEbu9
+         OYnGtRWMmSSCsaIUOXBfbKuFcdTA4UVIXUmZh71ZPMVS4tFrNNSwQ5H1Nuu+E4iu5OsF
+         wKJw==
+X-Gm-Message-State: APjAAAWo8hlOEMfzT7Pbw05EyYd3W7tF0awUE8K8PzyTlBbrmdZW4cPd
+        iLWE8GGv8Axb3NPIN5qX3kk=
+X-Google-Smtp-Source: APXvYqzw+5pIEwdgx1vf8nomOEwKyVQrAuLI6zJPGXYa+IhlGCCOm1m2SixssVwluHArEdFBBF2Wxg==
+X-Received: by 2002:ac8:1a39:: with SMTP id v54mr83461557qtj.21.1560544236029;
+        Fri, 14 Jun 2019 13:30:36 -0700 (PDT)
+Received: from localhost ([2620:10d:c091:480::6bab])
+        by smtp.gmail.com with ESMTPSA id e8sm2215252qkn.95.2019.06.14.13.30.35
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Fri, 14 Jun 2019 13:30:35 -0700 (PDT)
+Date:   Fri, 14 Jun 2019 13:30:33 -0700
+From:   Tejun Heo <tj@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "H. Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
+        Jens Axboe <axboe@kernel.dk>, Li Zefan <lizefan@huawei.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>, linux-block@vger.kernel.org,
+        cgroups@vger.kernel.org, netdev@vger.kernel.org,
+        bpf@vger.kernel.org, linux-security-module@vger.kernel.org
+Subject: Re: [PATCH v4 05/28] docs: cgroup-v1: convert docs to ReST and
+ rename to *.rst
+Message-ID: <20190614203033.GD657710@devbig004.ftw2.facebook.com>
+References: <cover.1560361364.git.mchehab+samsung@kernel.org>
+ <c1dd623359f44f05863456b8bceba0d8f3e42f38.1560361364.git.mchehab+samsung@kernel.org>
+ <20190614141401.48bfb266@lwn.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190614141401.48bfb266@lwn.net>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch adds basic documentation to describe the new fTPM driver.
+On Fri, Jun 14, 2019 at 02:14:01PM -0600, Jonathan Corbet wrote:
+> On Wed, 12 Jun 2019 14:52:41 -0300
+> Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
+> 
+> > Convert the cgroup-v1 files to ReST format, in order to
+> > allow a later addition to the admin-guide.
+> > 
+> > The conversion is actually:
+> >   - add blank lines and identation in order to identify paragraphs;
+> >   - fix tables markups;
+> >   - add some lists markups;
+> >   - mark literal blocks;
+> >   - adjust title markups.
+> > 
+> > At its new index.rst, let's add a :orphan: while this is not linked to
+> > the main index.rst file, in order to avoid build warnings.
+> > 
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> > Acked-by: Tejun Heo <tj@kernel.org>
+> 
+> This one, too, has linux-next stuff that keeps it from applying to
+> docs-next.  Tejun, would you like to carry it on top of your work?
 
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- Documentation/security/tpm/index.rst        |  1 +
- Documentation/security/tpm/tpm_ftpm_tee.rst | 31 +++++++++++++++++++++
- 2 files changed, 32 insertions(+)
- create mode 100644 Documentation/security/tpm/tpm_ftpm_tee.rst
+Applied to cgroup/for-5.3.
 
-diff --git a/Documentation/security/tpm/index.rst b/Documentation/security/tpm/index.rst
-index af77a7bbb070..15783668644f 100644
---- a/Documentation/security/tpm/index.rst
-+++ b/Documentation/security/tpm/index.rst
-@@ -4,4 +4,5 @@ Trusted Platform Module documentation
- 
- .. toctree::
- 
-+   tpm_ftpm_tee
-    tpm_vtpm_proxy
-diff --git a/Documentation/security/tpm/tpm_ftpm_tee.rst b/Documentation/security/tpm/tpm_ftpm_tee.rst
-new file mode 100644
-index 000000000000..29c2f8b5ed10
---- /dev/null
-+++ b/Documentation/security/tpm/tpm_ftpm_tee.rst
-@@ -0,0 +1,31 @@
-+=============================================
-+Firmware TPM Driver
-+=============================================
-+
-+| Authors:
-+| Thirupathaiah Annapureddy <thiruan@microsoft.com>
-+| Sasha Levin <sashal@kernel.org>
-+
-+This document describes the firmware Trusted Platform Module (fTPM)
-+device driver.
-+
-+Introduction
-+============
-+
-+This driver is a shim for a firmware implemented in ARM's TrustZone
-+environment. The driver allows programs to interact with the TPM in the same
-+way the would interact with a hardware TPM.
-+
-+Design
-+======
-+
-+The driver acts as a thin layer that passes commands to and from a TPM
-+implemented in firmware. The driver itself doesn't contain much logic and is
-+used more like a dumb pipe between firmware and kernel/userspace.
-+
-+The firmware itself is based on the following paper:
-+https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/ftpm1.pdf
-+
-+When the driver is loaded it will expose ``/dev/tpmX`` character devices to
-+userspace which will enable userspace to communicate with the firmware tpm
-+through this device.
+Thanks.
+
 -- 
-2.20.1
-
+tejun
