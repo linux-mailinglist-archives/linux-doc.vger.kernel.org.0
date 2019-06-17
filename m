@@ -2,60 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2DA1F48589
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2019 16:34:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 598B8487FF
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2019 17:55:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725983AbfFQOeE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Jun 2019 10:34:04 -0400
-Received: from andre.telenet-ops.be ([195.130.132.53]:60566 "EHLO
-        andre.telenet-ops.be" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728281AbfFQOeD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Jun 2019 10:34:03 -0400
-Received: from ramsan ([84.194.111.163])
-        by andre.telenet-ops.be with bizsmtp
-        id Rqa12000h3XaVaC01qa1h9; Mon, 17 Jun 2019 16:34:02 +0200
-Received: from rox.of.borg ([192.168.97.57])
-        by ramsan with esmtp (Exim 4.90_1)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1hcsht-0002I4-Sm; Mon, 17 Jun 2019 16:34:01 +0200
-Received: from geert by rox.of.borg with local (Exim 4.90_1)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1hcsht-0001CJ-RN; Mon, 17 Jun 2019 16:34:01 +0200
-From:   Geert Uytterhoeven <geert+renesas@glider.be>
+        id S1726292AbfFQPz0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Jun 2019 11:55:26 -0400
+Received: from casper.infradead.org ([85.118.1.10]:38560 "EHLO
+        casper.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725863AbfFQPz0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Jun 2019 11:55:26 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+        MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender
+        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=+/5VA9ZuoXyLrG+BiiWydDZ/+oR7o3Vk3uSSQIEd16c=; b=gWNa6GaJ/p3/9QeUuIX0nsaxYa
+        2iVR/TxaDorIbG/lixhBnGTv/K/F8h/jNdQCRwn4NZpx55gNWejwIH9c7mghw2wHU3PEF6RMSVVTu
+        3jZSO6RQEurFZ/xoFL5QtSAzIA3CU1wYqyeBwatTPpNELSZOMYdeLcXNM2T7cLRcnqrxjIXVfjV9u
+        zO9KhUOkc32z7SPrBr7C9s/db4SLpfTyTOZkbgDp3R4iAi1JyugKBzaEwuLvL7ShOLTn0wooZ6FZ4
+        27otCZgKtA/D4/MwEjKdAlIaQS82//4REyeHJTueyzawe8KUFOmzeyshx08keOARG1UkgSvNNwtQU
+        qw6oNnvg==;
+Received: from 179.186.105.91.dynamic.adsl.gvt.net.br ([179.186.105.91] helo=coco.lan)
+        by casper.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+        id 1hctyd-0000g2-26; Mon, 17 Jun 2019 15:55:23 +0000
+Date:   Mon, 17 Jun 2019 12:55:17 -0300
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: [PATCH] doc-rst: Add missing newline at end of file
-Date:   Mon, 17 Jun 2019 16:34:00 +0200
-Message-Id: <20190617143400.4559-1-geert+renesas@glider.be>
-X-Mailer: git-send-email 2.17.1
+Cc:     Markus Heiser <markus.heiser@darmarit.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 14/14] docs: sphinx/kernel_abi.py: fix UTF-8 support
+Message-ID: <20190617125517.293fd50f@coco.lan>
+In-Reply-To: <20190617075608.696cf037@lwn.net>
+References: <cover.1560477540.git.mchehab+samsung@kernel.org>
+        <62c8ffe86df40c90299e80619a1cb5d50971c2c6.1560477540.git.mchehab+samsung@kernel.org>
+        <20190614161837.GA25206@kroah.com>
+        <20190614132530.7a013757@coco.lan>
+        <28aca947-4e88-7186-7f07-9a3ccb379649@darmarit.de>
+        <20190617061659.22596fc3@coco.lan>
+        <20190617075608.696cf037@lwn.net>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-"git diff" says:
+Em Mon, 17 Jun 2019 07:56:08 -0600
+Jonathan Corbet <corbet@lwn.net> escreveu:
 
-    \ No newline at end of file
+> On Mon, 17 Jun 2019 06:16:59 -0300
+> Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
+>=20
+> > > No need to change, the emacs notation is also OK, see your link
+> > >=20
+> > >    """or (using formats recognized by popular editors):"""
+> > >=20
+> > >    https://www.python.org/dev/peps/pep-0263/#defining-the-encoding
+> > >=20
+> > > I prefer emacs notation, this is also evaluated by many other editors=
+ / tools.   =20
+> >=20
+> > The usage of emacs notation is something that we don't like at the
+> > Linux Kernel. With ~4K developers per release, if we add tags to
+> > every single editor people use, it would be really messy, as one
+> > developer would be adding a tag and the next one replacing it by its
+> > some other favorite editor's tag. =20
+>=20
+> So "we" like a language-specific notation instead?  That seems a little
+> strange to me.  Lots of things understand the Emacs notation, it doesn't
+> seem like something that needs to be actively avoided here.
 
-after modifying the file.
+=46rom my side, I don't have any strong preference. Just saying that
+people usually complain when e-macs or vim specific tags appear at the
+Kernel. That's why I would prefer an editor-agnostic macro.
 
-Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
----
- Documentation/docutils.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It won't make any difference for me, anyway, as the editors I use
+don't recognize it.
 
-diff --git a/Documentation/docutils.conf b/Documentation/docutils.conf
-index 2830772264c877ca..f1a180b97dec5cb3 100644
---- a/Documentation/docutils.conf
-+++ b/Documentation/docutils.conf
-@@ -4,4 +4,4 @@
- # http://docutils.sourceforge.net/docs/user/config.html
- 
- [general]
--halt_level: severe
-\ No newline at end of file
-+halt_level: severe
--- 
-2.17.1
+Whatever you want is OK to me, provided that we use the same notation on
+all Sphinx extensions... right now there's a mix of notations.
 
+Thanks,
+Mauro
