@@ -2,85 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 649C848464
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2019 15:45:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6690D48471
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2019 15:48:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725983AbfFQNpY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Jun 2019 09:45:24 -0400
-Received: from fllv0016.ext.ti.com ([198.47.19.142]:48584 "EHLO
-        fllv0016.ext.ti.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728128AbfFQNpX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Jun 2019 09:45:23 -0400
-Received: from fllv0035.itg.ti.com ([10.64.41.0])
-        by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id x5HDj53A055630;
-        Mon, 17 Jun 2019 08:45:05 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-        s=ti-com-17Q1; t=1560779105;
-        bh=bmlEosqIheue8sh7rxjAemA/jBzcfDLP/M7QkasVbzw=;
-        h=Subject:To:CC:References:From:Date:In-Reply-To;
-        b=mVWrpD+HygCwj7C0nElze1ON1Ta3ERXApDsjcza2Fb7G0N6u9Y3FU/BRIF5BYyqqu
-         73jx1Ue4i1X/3SY72oZMKgb/ruGZG0yIRkHvhRP7NLFA+lNSmgfl4EL/YdOidI27vT
-         pGYN/efsB82p69Y7AMlYiwJ0sGZlGsS/dHQGn4/I=
-Received: from DLEE103.ent.ti.com (dlee103.ent.ti.com [157.170.170.33])
-        by fllv0035.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x5HDj5t7100260
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-        Mon, 17 Jun 2019 08:45:05 -0500
-Received: from DLEE115.ent.ti.com (157.170.170.26) by DLEE103.ent.ti.com
- (157.170.170.33) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5; Mon, 17
- Jun 2019 08:45:05 -0500
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE115.ent.ti.com
- (157.170.170.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
- Frontend Transport; Mon, 17 Jun 2019 08:45:05 -0500
-Received: from [10.250.65.13] (ileax41-snat.itg.ti.com [10.172.224.153])
-        by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id x5HDj4fU125494;
-        Mon, 17 Jun 2019 08:45:04 -0500
-Subject: Re: [PATCH] dt: leds-lm36274.txt: fix a broken reference to
- ti-lmu.txt
-To:     Pavel Machek <pavel@ucw.cz>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-CC:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        id S1726121AbfFQNsf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Jun 2019 09:48:35 -0400
+Received: from ms.lwn.net ([45.79.88.28]:42882 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725995AbfFQNsf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 17 Jun 2019 09:48:35 -0400
+Received: from localhost.localdomain (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 13F10300;
+        Mon, 17 Jun 2019 13:48:32 +0000 (UTC)
+Date:   Mon, 17 Jun 2019 07:48:29 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Jani Nikula <jani.nikula@linux.intel.com>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@s-opensource.com>,
         Mauro Carvalho Chehab <mchehab@infradead.org>,
-        <linux-kernel@vger.kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        Jacek Anaszewski <jacek.anaszewski@gmail.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        <linux-leds@vger.kernel.org>, <devicetree@vger.kernel.org>
-References: <79b9bf3388eb231da77c6a804862d21339262d0a.1560421387.git.mchehab+samsung@kernel.org>
- <20190617131220.GD21113@amd>
-From:   Dan Murphy <dmurphy@ti.com>
-Message-ID: <a15bace8-90a8-4201-86af-9fb464024f0a@ti.com>
-Date:   Mon, 17 Jun 2019 08:45:04 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.7.0
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 12/14] doc-rst: add ABI documentation to the admin-guide
+ book
+Message-ID: <20190617074829.70cbaa48@lwn.net>
+In-Reply-To: <20190617125438.GA18554@kroah.com>
+References: <cover.1560477540.git.mchehab+samsung@kernel.org>
+        <9da2a7f6ff57d9d53dcbb964eb310f7956522870.1560477540.git.mchehab+samsung@kernel.org>
+        <87o930uvur.fsf@intel.com>
+        <20190614140603.GB7234@kroah.com>
+        <20190614122755.1c7b4898@coco.lan>
+        <874l4ov16m.fsf@intel.com>
+        <20190617125438.GA18554@kroah.com>
+Organization: LWN.net
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-In-Reply-To: <20190617131220.GD21113@amd>
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Mon, 17 Jun 2019 14:54:38 +0200
+Greg Kroah-Hartman <gregkh@linuxfoundation.org> wrote:
 
-On 6/17/19 8:12 AM, Pavel Machek wrote:
-> On Thu 2019-06-13 07:23:15, Mauro Carvalho Chehab wrote:
->> There's a typo there:
->> 	ti_lmu.txt -> ti-lmu.txt
->>
->> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-> Acked-by: Pavel Machek <pavel@ucw.cz>
-Acked-by: Dan Murphy <dmurphy@ti.com>
->
->> @@ -6,7 +6,7 @@ up to 29V total output voltage. The 11-bit LED current is programmable via
->>   the I2C bus and/or controlled via a logic level PWM input from 60 uA to 30 mA.
->>   
->>   Parent device properties are documented in
->> -Documentation/devicetree/bindings/mfd/ti_lmu.txt
->> +Documentation/devicetree/bindings/mfd/ti-lmu.txt
->>   
->>   Regulator properties are documented in
->>   Documentation/devicetree/bindings/regulator/lm363x-regulator.txt
+> > I think it's just sad to see the documentation system slowly drift
+> > further away from the ideals we had, and towards the old ways we worked
+> > so hard to fix.  
+> 
+> What are those ideals?
+> 
+> I thought the goal was to be able to write documentation in a as much
+> as a normal text file as possible and have automation turn those files
+> into "pretty" documentation that we can all use.
+
+That was indeed one of the goals.  Another was to replace the incredible
+pile of fragile duct tape that the docs build system had become with
+something more robust, understandable, and maintainable.  We did that, to
+an extent at least, and life is better.
+
+Jani worries that we have been regressing toward duct-tape mode, and I
+suspect he may be right.  I'm certainly as guilty as anybody of tossing
+stuff in because it's expedient right now.  It is right to ask whether we
+should continue in that direction.
+
+Can we slow down just a bit on the ABI files?  It may be that Mauro's
+solution is the best one, but I would really like to think a bit about
+how all this stuff fits together, and life isn't really even giving me
+time to tie my shoes these days.  I don't think that this is screamingly
+urgent right now.
+
+Thanks,
+
+jon
