@@ -2,97 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 379A947CCD
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2019 10:28:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C460447DFC
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2019 11:11:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727508AbfFQI2N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Jun 2019 04:28:13 -0400
-Received: from mail-yw1-f73.google.com ([209.85.161.73]:42245 "EHLO
-        mail-yw1-f73.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728044AbfFQI2H (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Jun 2019 04:28:07 -0400
-Received: by mail-yw1-f73.google.com with SMTP id k142so11540829ywa.9
-        for <linux-doc@vger.kernel.org>; Mon, 17 Jun 2019 01:28:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=EsSBOAivkaHwi6D12Cv8eKMrxsdP+T6KPHsvwbMQYm0=;
-        b=C7EmzIa5t1p3To0eH+Btt+UKnk2zWoDCRcHlxDDez+EJGzuX5/OCX+VtE4f/+IBxBU
-         mGEeX0YKVsmTpTHqWxwdvH8hqIG3FELhUYhSlXikfd0094SnjH2SPp0dcm0R005htjts
-         6D/xP0jMwTBwY1jE9/ZxkY0+RYLVqYuSTLbgUEKmyJPUnfix1cU3MelrOVMNgQTKcGe9
-         cFGgfxb8WDzOX4wGL98vqfITN9oZvAZ6ZQuIixRxb8VtiucW8A40EeqqX9/1t6jRhzWX
-         B1r5Tw0xfFTV6bdsPqlvoEcQ0Y0C9kM0VAB1WtVyge15d2r4CngkCHzpB/WflMNr6YDF
-         mQ0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=EsSBOAivkaHwi6D12Cv8eKMrxsdP+T6KPHsvwbMQYm0=;
-        b=my99SgGrTuFrHtr5XPAsJ9zZrg+m65K2TX8yC0eByIgzrLtv+7P4UFjcx0bu1LfKM4
-         l1773sarM4aYulCO9AXb5ex4LWP71dS4dEyjzKIXMsj2HZoNQ5ZF4mjA5E5jmGfY+++y
-         b02pjCjolhRdRaaiETK6NCvLUMmUklATNEx0z4OiL/yNoBnbqzZbKKObnKnB1IzUvt71
-         BOnW8EbsmvuizhsYJvYN+yuSKVLN4TTNSRxcxWha97QCnuk7bmX7PQfQ8eGhihnZDyAe
-         CD8jjOXhEK4vFw0OkJ+P6mBXY5E70nRC/B89RvFyCx5gayd4ySawohhEbN7mu9GbQRfA
-         RZ9w==
-X-Gm-Message-State: APjAAAUbiIuqrrwKZtafDIp8TR8CorDsOua1eS7ZCEhAoBtYpbQ7xT8/
-        t5Xe7dtdyi7C98gnpXr9XnCeufeAHczGF9iXgAKIrA==
-X-Google-Smtp-Source: APXvYqygaxiZVfos+CJ+dORKXgXbsd4xQo+Oa0IXMYwFW3jHO/QMUCpEYOoJXhDPIYS8TyQgU0luKfcb92R2UWUxnJ1x6Q==
-X-Received: by 2002:a25:7642:: with SMTP id r63mr57620375ybc.253.1560760086697;
- Mon, 17 Jun 2019 01:28:06 -0700 (PDT)
-Date:   Mon, 17 Jun 2019 01:26:13 -0700
-In-Reply-To: <20190617082613.109131-1-brendanhiggins@google.com>
-Message-Id: <20190617082613.109131-19-brendanhiggins@google.com>
-Mime-Version: 1.0
-References: <20190617082613.109131-1-brendanhiggins@google.com>
-X-Mailer: git-send-email 2.22.0.410.gd8fdbe21b5-goog
-Subject: [PATCH v5 18/18] MAINTAINERS: add proc sysctl KUnit test to PROC
- SYSCTL section
-From:   Brendan Higgins <brendanhiggins@google.com>
-To:     frowand.list@gmail.com, gregkh@linuxfoundation.org,
-        jpoimboe@redhat.com, keescook@google.com,
-        kieran.bingham@ideasonboard.com, mcgrof@kernel.org,
-        peterz@infradead.org, robh@kernel.org, sboyd@kernel.org,
-        shuah@kernel.org, tytso@mit.edu, yamada.masahiro@socionext.com
-Cc:     devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kbuild@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        linux-nvdimm@lists.01.org, linux-um@lists.infradead.org,
-        Alexander.Levin@microsoft.com, Tim.Bird@sony.com,
-        amir73il@gmail.com, dan.carpenter@oracle.com, daniel@ffwll.ch,
-        jdike@addtoit.com, joel@jms.id.au, julia.lawall@lip6.fr,
-        khilman@baylibre.com, knut.omang@oracle.com, logang@deltatee.com,
-        mpe@ellerman.id.au, pmladek@suse.com, rdunlap@infradead.org,
-        richard@nod.at, rientjes@google.com, rostedt@goodmis.org,
-        wfg@linux.intel.com, Brendan Higgins <brendanhiggins@google.com>
-Content-Type: text/plain; charset="UTF-8"
+        id S1727558AbfFQJL7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Jun 2019 05:11:59 -0400
+Received: from casper.infradead.org ([85.118.1.10]:54208 "EHLO
+        casper.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726753AbfFQJL6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Jun 2019 05:11:58 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+        MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date:Sender
+        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
+        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=WKDHPuqmk7aGpvs0dQcDhq3t2LeY5Da3Poe4nEoqjOs=; b=BTvmnwI/e5DfYlzQy5najumy0A
+        R+0T9W0Onos9CA3zxDpp8p7TbkUpYAXa7a8AIHv9rhltqLLRr3ckaORXF0ZjwMb19HrAmpZcMTEcF
+        qsGUyjYro1Z3rfocqhyvNcKgjF8sOEeybxxvn9HR4pSfGjiGjuN+zD1HUEgyZsDzKIuFBRwFifRIK
+        QanmVoQx6D4F76RwDF75i6JQ6t1yIDb3T+lKTKycddAD4P5LntUmPn9zYNvqtNvAurSb3DuTJpSvm
+        vzh/NPMFsnjtr+32G6icNMfXGqmJFf1Hfy2Re80hnI9G2xhZ5d9hPcE79J+/lzNIhNGU6X61IDEYj
+        DcKW/vOw==;
+Received: from 179.186.105.91.dynamic.adsl.gvt.net.br ([179.186.105.91] helo=coco.lan)
+        by casper.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+        id 1hcng9-0006tV-Il; Mon, 17 Jun 2019 09:11:54 +0000
+Date:   Mon, 17 Jun 2019 06:11:46 -0300
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+To:     Markus Heiser <markus.heiser@darmarit.de>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Mauro Carvalho Chehab <mchehab@s-opensource.com>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 12/14] doc-rst: add ABI documentation to the admin-guide
+ book
+Message-ID: <20190617061146.06975213@coco.lan>
+In-Reply-To: <327067f6-2609-41e6-c987-e37620e7154e@darmarit.de>
+References: <cover.1560477540.git.mchehab+samsung@kernel.org>
+        <9da2a7f6ff57d9d53dcbb964eb310f7956522870.1560477540.git.mchehab+samsung@kernel.org>
+        <87o930uvur.fsf@intel.com>
+        <2955920a-3d6a-8e41-e8fe-b7db3cefed8b@darmarit.de>
+        <20190614081546.64101411@lwn.net>
+        <327067f6-2609-41e6-c987-e37620e7154e@darmarit.de>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add entry for the new proc sysctl KUnit test to the PROC SYSCTL section.
+Em Sun, 16 Jun 2019 18:04:01 +0200
+Markus Heiser <markus.heiser@darmarit.de> escreveu:
 
-Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
----
- MAINTAINERS | 1 +
- 1 file changed, 1 insertion(+)
+> Am 14.06.19 um 16:15 schrieb Jonathan Corbet:
+> > On Fri, 14 Jun 2019 16:10:31 +0200
+> > Markus Heiser <markus.heiser@darmarit.de> wrote:
+> >   
+> >> I agree with Jani. No matter how the decision ends, since I can't help here, I'd
+> >> rather not show up in the copyright.  
+> > 
+> > Is there something specific you are asking us to do here?
+> >   
+> 
+> 
+> I have lost the overview, but there was a patch Mauro added a
+> kernel_abi.py.  There was my name (Markus Heiser) listed with a
+> copyright notation.
+> 
+> I guess Mauro picked up some old RFC or an other old patch of
+> mine from 2016 and made some C&P .. whatever .. ATM I do not have
+> time to give any support on parsing ABI and I'am not interested
+> in holding copyrights on a C&P of a old source  ;)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f3fb3fc30853e..05cd8ffd33c8f 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -12718,6 +12718,7 @@ S:	Maintained
- F:	fs/proc/proc_sysctl.c
- F:	include/linux/sysctl.h
- F:	kernel/sysctl.c
-+F:	kernel/sysctl-test.c
- F:	tools/testing/selftests/sysctl/
+Well, the code was basically written by you :-)
+
+It was written to be a script capable of running a generic
+script. On that time, my contribution to it was basically
+to hardcode it to run "get_abi.pl".
+
+This came from an old branch where the last change was back in 2017. 
+It was resurrected due to a discussion at KS ML.
+
+There, the discussion was related to what's left to be converted
+to ReST.
+
+While I can't simply remove your copyright, would you be happy
+with something like that?
+
+
+Thanks,
+Mauro
+
+diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
+index 2d5d582207f7..ef91b1e1ff4b 100644
+--- a/Documentation/sphinx/kernel_abi.py
++++ b/Documentation/sphinx/kernel_abi.py
+@@ -7,7 +7,8 @@ u"""
+     Implementation of the ``kernel-abi`` reST-directive.
  
- PS3 NETWORK SUPPORT
--- 
-2.22.0.410.gd8fdbe21b5-goog
+     :copyright:  Copyright (C) 2016  Markus Heiser
+-    :copyright:  Copyright (C) 2016  Mauro Carvalho Chehab
++    :copyright:  Copyright (C) 2016-2019  Mauro Carvalho Chehab
++    :maintained-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+     :license:    GPL Version 2, June 1991 see Linux/COPYING for details.
+ 
+     The ``kernel-abi`` (:py:class:`KernelCmd`) directive calls the
+
 
