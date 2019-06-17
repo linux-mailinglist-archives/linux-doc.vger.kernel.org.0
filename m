@@ -2,107 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 903A8484C4
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2019 16:00:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C2CC2485E5
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Jun 2019 16:45:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726292AbfFQOAw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Jun 2019 10:00:52 -0400
-Received: from mail-ot1-f67.google.com ([209.85.210.67]:44393 "EHLO
-        mail-ot1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726173AbfFQOAw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Jun 2019 10:00:52 -0400
-Received: by mail-ot1-f67.google.com with SMTP id b7so9329371otl.11
-        for <linux-doc@vger.kernel.org>; Mon, 17 Jun 2019 07:00:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=v/0AosDiq0XlRMBf8oBwjVIp/eynr9o30+abHU130tU=;
-        b=QfGwVzUyw61eYELwxKAlY9/Qm6Aj9QSJ0n+dIVkf8/4yeJfiVbarVyCC4XbKUh7zyA
-         TB4mJQ/4WDEFdFlP9q8qfUxerum3OAS9kJIC9HkWocd6c82xelhC5lUZ8KGeL7GIc9b2
-         Vn2SIVgDQO8hQMwPHS4nOTl0lopwU7OuI/SKFbVXrGvgWTzn57ByfbFw3uFr/5eqy03z
-         O/40JUT3OWHkoJhC5IIKY/lFAiriQzdivbyM4D4bt87oTbTSaLBLA/VBa+dUA9Qn7Q8O
-         AgESDbDnLQa9ZvaNVt9qijL0DoPw8QB7RGDJ+rCIOi5DiwTJKQQpi0xCcP/5ARb5gi6O
-         48XQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=v/0AosDiq0XlRMBf8oBwjVIp/eynr9o30+abHU130tU=;
-        b=RgaBQSDRLGGnf0ZHC2ZA4B0M9/r2a0472SL4g+XKfHPXef5xYMGv5mUbtIU7L6yO6I
-         eMBOpfHfrNnRg852DaE+hZLWgff7qlx+OHxTPj/NDHURleAAF6TDBsPNdSEtCTDkTHcL
-         nuxMacOXo7bfTJ2tvFJY+pzyRbBPvG3FcCZLY/L0mJmFZMJBI6z4MWDdcOOYvZHE91GM
-         w0dURBKxkygEVtJb6MHDKA7QBrYhVQ/E1dvmx8YxoTTplT2YpZtmK/odb+s7k7iAOdRp
-         NswWzdMa3dOnmUvHidaL5fC6ChZ6JvCyyvCp++MPVV8TBcjCUxt2JRkUgw1tn0PKdCZL
-         NFcw==
-X-Gm-Message-State: APjAAAWXL1gFLAax2CJKFck9huwo8Jvyh49VhavaPIxCopbcpMenqq7Y
-        LCkLmGOOpsJmqX3AyY1gXlffDKlfUM5sCDA3m+7Ljg==
-X-Google-Smtp-Source: APXvYqz5F9NBThJnsQ+gL+ZpGjjXfOmWdrkG2sLPN0k3OAALt6m/XyHFzA0l3LB9J01pkclLKo1k7HRwqBHaHCOQM+M=
-X-Received: by 2002:a05:6830:1688:: with SMTP id k8mr9743899otr.233.1560780051018;
- Mon, 17 Jun 2019 07:00:51 -0700 (PDT)
+        id S1726427AbfFQOoV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Jun 2019 10:44:21 -0400
+Received: from mgwkm04.jp.fujitsu.com ([202.219.69.171]:20134 "EHLO
+        mgwkm04.jp.fujitsu.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726631AbfFQOoV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Jun 2019 10:44:21 -0400
+Received: from kw-mxauth.gw.nic.fujitsu.com (unknown [192.168.231.132]) by mgwkm04.jp.fujitsu.com with smtp
+         id 2860_a48c_ffb2cb9e_91b6_4026_a430_2415c2179bb5;
+        Mon, 17 Jun 2019 23:32:57 +0900
+Received: from g01jpfmpwkw02.exch.g01.fujitsu.local (g01jpfmpwkw02.exch.g01.fujitsu.local [10.0.193.56])
+        by kw-mxauth.gw.nic.fujitsu.com (Postfix) with ESMTP id 2669AAC00C7;
+        Mon, 17 Jun 2019 23:32:57 +0900 (JST)
+Received: from G01JPEXCHKW15.g01.fujitsu.local (G01JPEXCHKW15.g01.fujitsu.local [10.0.194.54])
+        by g01jpfmpwkw02.exch.g01.fujitsu.local (Postfix) with ESMTP id 46F098B48E8;
+        Mon, 17 Jun 2019 23:32:56 +0900 (JST)
+Received: from localhost.localdomain (10.17.204.146) by
+ G01JPEXCHKW15.g01.fujitsu.local (10.0.194.54) with Microsoft SMTP Server id
+ 14.3.439.0; Mon, 17 Jun 2019 23:32:55 +0900
+From:   Takao Indoh <indou.takao@jp.fujitsu.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will.deacon@arm.com>
+CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        QI Fuli <qi.fuli@fujitsu.com>,
+        "Takao Indoh" <indou.takao@fujitsu.com>
+Subject: [PATCH 0/2] arm64: Introduce boot parameter to disable TLB flush instruction within the same inner shareable domain
+Date:   Mon, 17 Jun 2019 23:32:53 +0900
+Message-ID: <20190617143255.10462-1-indou.takao@jp.fujitsu.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <20190613125950.197667-1-elver@google.com>
-In-Reply-To: <20190613125950.197667-1-elver@google.com>
-From:   Marco Elver <elver@google.com>
-Date:   Mon, 17 Jun 2019 16:00:38 +0200
-Message-ID: <CANpmjNMCmcg8GS_pkKc2gsdtd7-A2t27mOXATY9OLb1vQW5Lsg@mail.gmail.com>
-Subject: Re: [PATCH v5 0/3] Bitops instrumentation for KASAN
-To:     Peter Zijlstra <peterz@infradead.org>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        Alexander Potapenko <glider@google.com>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Andrew Morton <akpm@linux-foundation.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "the arch/x86 maintainers" <x86@kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        linux-arch <linux-arch@vger.kernel.org>,
-        kasan-dev <kasan-dev@googlegroups.com>,
-        Linux Memory Management List <linux-mm@kvack.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+X-TM-AS-GCONF: 00
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-All 3 patches have now been Acked and Reviewed. Which tree should this land in?
+From: Takao Indoh <indou.takao@fujitsu.com>
 
-Since this is related to KASAN, would this belong into the MM tree?
+I found a performance issue related on the implementation of Linux's TLB
+flush for arm64.
 
-Many thanks,
--- Marco
+When I run a single-threaded test program on moderate environment, it
+usually takes 39ms to finish its work. However, when I put a small
+apprication, which just calls mprotest() continuously, on one of sibling
+cores and run it simultaneously, the test program slows down significantly.
+It becomes 49ms(125%) on ThunderX2. I also detected the same problem on
+ThunderX1 and Fujitsu A64FX.
 
+I suppose the root cause of this issue is the implementation of Linux's TLB
+flush for arm64, especially use of TLBI-is instruction which is a broadcast
+to all processor core on the system. In case of the above situation,
+TLBI-is is called by mprotect().
 
+This is not a problem for small environment, but this causes a significant
+performance noise for large-scale HPC environment, which has more than
+thousand nodes with low latency interconnect.
 
+To fix this problem, this patch adds new boot parameter
+'disable_tlbflush_is'.  In the case of flush_tlb_mm() *without* this
+parameter, TLB entry is invalidated by __tlbi(aside1is, asid). By this
+instruction, all CPUs within the same inner shareable domain check if there
+are TLB entries which have this ASID, this causes performance noise. OTOH,
+when this new parameter is specified, TLB entry is invalidated by
+__tlbi(aside1, asid) only on the CPUs specified by mm_cpumask(mm).
+Therefore TLB flush is done on minimal CPUs and performance problem does
+not occur. Actually I confirm the performance problem is fixed by this
+patch.
 
-On Thu, 13 Jun 2019 at 15:00, Marco Elver <elver@google.com> wrote:
->
-> Previous version:
-> http://lkml.kernel.org/r/20190613123028.179447-1-elver@google.com
->
-> * Only changed lib/test_kasan in this version.
->
-> Marco Elver (3):
->   lib/test_kasan: Add bitops tests
->   x86: Use static_cpu_has in uaccess region to avoid instrumentation
->   asm-generic, x86: Add bitops instrumentation for KASAN
->
->  Documentation/core-api/kernel-api.rst     |   2 +-
->  arch/x86/ia32/ia32_signal.c               |   2 +-
->  arch/x86/include/asm/bitops.h             | 189 ++++------------
->  arch/x86/kernel/signal.c                  |   2 +-
->  include/asm-generic/bitops-instrumented.h | 263 ++++++++++++++++++++++
->  lib/test_kasan.c                          |  81 ++++++-
->  6 files changed, 382 insertions(+), 157 deletions(-)
->  create mode 100644 include/asm-generic/bitops-instrumented.h
->
-> --
-> 2.22.0.rc2.383.gf4fbbf30c2-goog
->
+Takao Indoh (2):
+  arm64: mm: Restore mm_cpumask (revert commit 38d96287504a ("arm64: mm:
+    kill mm_cpumask usage"))
+  arm64: tlb: Add boot parameter to disable TLB flush within the same
+    inner shareable domain
+
+ .../admin-guide/kernel-parameters.txt         |   4 +
+ arch/arm64/include/asm/mmu_context.h          |   7 +-
+ arch/arm64/include/asm/tlbflush.h             |  61 ++-----
+ arch/arm64/kernel/Makefile                    |   2 +-
+ arch/arm64/kernel/smp.c                       |   6 +
+ arch/arm64/kernel/tlbflush.c                  | 155 ++++++++++++++++++
+ arch/arm64/mm/context.c                       |   2 +
+ 7 files changed, 186 insertions(+), 51 deletions(-)
+ create mode 100644 arch/arm64/kernel/tlbflush.c
+
+-- 
+2.20.1
+
