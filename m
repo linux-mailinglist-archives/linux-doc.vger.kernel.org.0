@@ -2,112 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 364BB4A793
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Jun 2019 18:50:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 96EAE4AA56
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Jun 2019 20:51:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729507AbfFRQuf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Jun 2019 12:50:35 -0400
-Received: from foss.arm.com ([217.140.110.172]:50042 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729327AbfFRQuf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 18 Jun 2019 12:50:35 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E2F57344;
-        Tue, 18 Jun 2019 09:50:33 -0700 (PDT)
-Received: from e103592.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 56B6C3F246;
-        Tue, 18 Jun 2019 09:50:30 -0700 (PDT)
-Date:   Tue, 18 Jun 2019 17:50:28 +0100
-From:   Dave Martin <Dave.Martin@arm.com>
-To:     Florian Weimer <fweimer@redhat.com>
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Thomas Gleixner <tglx@linutronix.de>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-mm@kvack.org, linux-arch@vger.kernel.org,
-        linux-api@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>
-Subject: Re: [PATCH v7 22/27] binfmt_elf: Extract .note.gnu.property from an
- ELF file
-Message-ID: <20190618165027.GG2790@e103592.cambridge.arm.com>
-References: <87ef3r9i2j.fsf@oldenburg2.str.redhat.com>
- <20190618125512.GJ3419@hirez.programming.kicks-ass.net>
- <20190618133223.GD2790@e103592.cambridge.arm.com>
- <d54fe81be77b9edd8578a6d208c72cd7c0b8c1dd.camel@intel.com>
- <87pnna7v1d.fsf@oldenburg2.str.redhat.com>
- <1ca57aaae8a2121731f2dcb1a137b92eed39a0d2.camel@intel.com>
- <87blyu7ubf.fsf@oldenburg2.str.redhat.com>
- <b0491cb517ba377da6496fe91a98fdbfca4609a9.camel@intel.com>
- <20190618162005.GF2790@e103592.cambridge.arm.com>
- <8736k67tdc.fsf@oldenburg2.str.redhat.com>
+        id S1730450AbfFRSvr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Jun 2019 14:51:47 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:51878 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730266AbfFRSva (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Jun 2019 14:51:30 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+        Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=SKRSL9jnylaTQ6qXeJHCBAsp9dKQfYRmnXanorGc5eo=; b=LXa3IxlXYF9BK4XDFYoBkFK/C
+        ayj7wVmS/70JjZnx+pA/SY/2Q7iEuexASOgoE1EhAN8aCIeaCsyHgduBAkwayw9iy21eApOGYiUVx
+        Ne7xoTALEaJ7EydCcLjRisMFAWa3umScRvwd0i+xgZDzHlMRbILUOiCzmxWPLuIaq0Q4cF2IuyeER
+        aNj0mI1gnd4iiqruK3JFsutCUD5NwBvMO1h7jIemayxgDHqgNGBIEvIZOYI/fDhpVYYBeRc2565tt
+        SfICYZwjO5Dl0HXEGCy8bbfm8Kddvp9t6FkHu+VVIOBSOn0pSbZAt1MoMYoNb+DjnNsCzBOelmZzy
+        tU97Zkv5g==;
+Received: from 177.133.86.196.dynamic.adsl.gvt.net.br ([177.133.86.196] helo=bombadil.infradead.org)
+        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+        id 1hdJCa-0006RK-0j; Tue, 18 Jun 2019 18:51:28 +0000
+Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
+        (envelope-from <mchehab@bombadil.infradead.org>)
+        id 1hdJCW-0006U8-9m; Tue, 18 Jun 2019 15:51:24 -0300
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        "Steven Rostedt (VMware)" <rostedt@goodmis.org>,
+        Andreas Ziegler <andreas.ziegler@fau.de>,
+        Lecopzer Chen <lecopzer.chen@mediatek.com>
+Subject: [PATCH 1/6] docs: trace: fix a broken label
+Date:   Tue, 18 Jun 2019 15:51:17 -0300
+Message-Id: <a83ea390bc28784518fce772b4c961ea1c976f14.1560883872.git.mchehab+samsung@kernel.org>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <8736k67tdc.fsf@oldenburg2.str.redhat.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jun 18, 2019 at 06:25:51PM +0200, Florian Weimer wrote:
-> * Dave Martin:
-> 
-> > On Tue, Jun 18, 2019 at 09:00:35AM -0700, Yu-cheng Yu wrote:
-> >> On Tue, 2019-06-18 at 18:05 +0200, Florian Weimer wrote:
-> >> > * Yu-cheng Yu:
-> >> > 
-> >> > > > I assumed that it would also parse the main executable and make
-> >> > > > adjustments based on that.
-> >> > > 
-> >> > > Yes, Linux also looks at the main executable's header, but not its
-> >> > > NT_GNU_PROPERTY_TYPE_0 if there is a loader.
-> >> > > 
-> >> > > > 
-> >> > > > ld.so can certainly provide whatever the kernel needs.  We need to tweak
-> >> > > > the existing loader anyway.
-> >> > > > 
-> >> > > > No valid statically-linked binaries exist today, so this is not a
-> >> > > > consideration at this point.
-> >> > > 
-> >> > > So from kernel, we look at only PT_GNU_PROPERTY?
-> >> > 
-> >> > If you don't parse notes/segments in the executable for CET, then yes.
-> >> > We can put PT_GNU_PROPERTY into the loader.
-> >> 
-> >> Thanks!
-> >
-> > Would this require the kernel and ld.so to be updated in a particular
-> > order to avoid breakage?  I don't know enough about RHEL to know how
-> > controversial that might be.
-> 
-> There is no official ld.so that will work with the current userspace
-> interface (in this patch submission).  Upstream glibc needs to be
-> updated anyway, so yet another change isn't much of an issue.  This is
-> not a problem; we knew that something like this might happen.
-> 
-> Sure, people need a new binutils with backports for PT_GNU_PROPERTY, but
-> given that only very few people will build CET binaries with older
-> binutils, I think that's not a real issue either.
+Sphinx warnings about his:
 
-OK, just wanted to check we weren't missing any requirement for x86.
+	Documentation/trace/kprobetrace.rst:68: WARNING: undefined label: user_mem_access (if the link has no caption the label must precede a section header)
 
-This approach should satisfy the requirement for arm64 nicely.
+The problem is quite simple: Sphinx wants a blank line after
+references.
 
-Cheers
----Dave
+Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+---
+ Documentation/trace/kprobetrace.rst | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Documentation/trace/kprobetrace.rst b/Documentation/trace/kprobetrace.rst
+index b729b40a5ba5..3d162d432a3c 100644
+--- a/Documentation/trace/kprobetrace.rst
++++ b/Documentation/trace/kprobetrace.rst
+@@ -96,6 +96,7 @@ which shows given pointer in "symbol+offset" style.
+ For $comm, the default type is "string"; any other type is invalid.
+ 
+ .. _user_mem_access:
++
+ User Memory Access
+ ------------------
+ Kprobe events supports user-space memory access. For that purpose, you can use
+-- 
+2.21.0
+
