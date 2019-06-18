@@ -2,123 +2,129 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C3B149767
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Jun 2019 04:17:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 05BBF49A5D
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Jun 2019 09:21:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728637AbfFRCRL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Jun 2019 22:17:11 -0400
-Received: from inva020.nxp.com ([92.121.34.13]:38112 "EHLO inva020.nxp.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728101AbfFRCRJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 17 Jun 2019 22:17:09 -0400
-Received: from inva020.nxp.com (localhost [127.0.0.1])
-        by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id EF2E01A02EC;
-        Tue, 18 Jun 2019 04:17:06 +0200 (CEST)
-Received: from invc005.ap-rdc01.nxp.com (invc005.ap-rdc01.nxp.com [165.114.16.14])
-        by inva020.eu-rdc02.nxp.com (Postfix) with ESMTP id 2A58C1A0DC1;
-        Tue, 18 Jun 2019 04:16:51 +0200 (CEST)
-Received: from localhost.localdomain (mega.ap.freescale.net [10.192.208.232])
-        by invc005.ap-rdc01.nxp.com (Postfix) with ESMTP id 63B36402F2;
-        Tue, 18 Jun 2019 10:16:37 +0800 (SGT)
-From:   Anson.Huang@nxp.com
-To:     robh+dt@kernel.org, mark.rutland@arm.com, corbet@lwn.net,
-        shawnguo@kernel.org, s.hauer@pengutronix.de, kernel@pengutronix.de,
-        festevam@gmail.com, catalin.marinas@arm.com, will.deacon@arm.com,
-        rui.zhang@intel.com, edubezval@gmail.com,
-        daniel.lezcano@linaro.org, aisheng.dong@nxp.com,
-        ulf.hansson@linaro.org, peng.fan@nxp.com,
-        mchehab+samsung@kernel.org, linux@roeck-us.net,
-        daniel.baluta@nxp.com, maxime.ripard@bootlin.com,
-        horms+renesas@verge.net.au, olof@lixom.net,
-        jagan@amarulasolutions.com, bjorn.andersson@linaro.org,
-        leonard.crestez@nxp.com, dinguyen@kernel.org,
-        enric.balletbo@collabora.com, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-pm@vger.kernel.org
-Cc:     Linux-imx@nxp.com
-Subject: [PATCH V15 5/5] arm64: dts: imx: add i.MX8QXP thermal support
-Date:   Tue, 18 Jun 2019 10:18:20 +0800
-Message-Id: <20190618021820.14885-5-Anson.Huang@nxp.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190618021820.14885-1-Anson.Huang@nxp.com>
-References: <20190618021820.14885-1-Anson.Huang@nxp.com>
-X-Virus-Scanned: ClamAV using ClamSMTP
+        id S1726088AbfFRHVN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Jun 2019 03:21:13 -0400
+Received: from mail-oi1-f194.google.com ([209.85.167.194]:38394 "EHLO
+        mail-oi1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725913AbfFRHVN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Jun 2019 03:21:13 -0400
+Received: by mail-oi1-f194.google.com with SMTP id v186so8303896oie.5;
+        Tue, 18 Jun 2019 00:21:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zk9bWRMIeF1BfW35qp0hNrZwOQClEBtp/7mR1b//Sds=;
+        b=pksCcVRvsSoRLVbGmlM9vkhddYn81FdHuqb2RoiaVM1hdZf4Fz7tdW5XfA8dUqZEcr
+         q98RHckxVceJloQxaroM5i1vjzSrgNKlMIgYxX0Ok8+lkW5UzpKXqrw+FPkVW5IYdhah
+         Miw559GZlOna63lFVsvKKspAxTRhhiCatrjp3rTZN+lt/Q8xN9kAUVWVcZ6tk4+LpCbN
+         4bT8jVzwJsIz3xqJYuZh2I0fQ/pvWk5Sl5leMLjF/FdegLAnZFx55cL/Fup2iZXFTGY3
+         jBYDdgExFKP8PEW1TGY8zs+IS+I5NAsINO75YoqhKdRlb//iwTC6Bjm9I7bsgN2ymyr1
+         d6Hg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=zk9bWRMIeF1BfW35qp0hNrZwOQClEBtp/7mR1b//Sds=;
+        b=U8SIFJAu6/xmgcwI34VPCGyNRcQ9Db3vV6IVie2IGKycYA1bdxkvidH2yLdzSJkdp6
+         63C8fjFMFac0AbBDkvXSABKr9y1gf1bAbVUdjRKLuzPH35W1tuEg++1IvIm6800suXx1
+         dtOPh9syVLCd7uAyqeeWzYynEVjtalJRshigt2bGdnLfPQVCGtYnDMat0SLEEGptHTwT
+         V2NQaHcczPbUvkWiSWWQ8LDf1dtFO7g7RDVQ+mpbXVzzCragtdzWQYpeWTYkjuSj2Tyh
+         FWxviq5NCe4m8RsPACUHIeDYgpCZ/azTBHjXdjVSL8spL+WnAbweU6sweAIY0LYgdQfj
+         4sUQ==
+X-Gm-Message-State: APjAAAWBo6a8Bsh0YWfaei+9lqBITfshUCR0PeNV1GnDOo2HaQ1yxXti
+        mF/Mi/I6V6aVl+PzsJhfW0iHV0yJqwiReQ==
+X-Google-Smtp-Source: APXvYqxbFtgEVXknN5nBCSEMIVAKQSNKW3q/Nu7Jv5512Pbro5zbJTVbUyDzdCQyb8/dsWHODIhTFQ==
+X-Received: by 2002:a63:5d45:: with SMTP id o5mr995156pgm.40.1560835984975;
+        Mon, 17 Jun 2019 22:33:04 -0700 (PDT)
+Received: from localhost.localdomain ([112.196.181.128])
+        by smtp.googlemail.com with ESMTPSA id v23sm1242659pju.3.2019.06.17.22.33.02
+        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+        Mon, 17 Jun 2019 22:33:04 -0700 (PDT)
+From:   Puranjay Mohan <puranjay12@gmail.com>
+To:     Shuah Khan <skhan@linuxfoundation.org>
+Cc:     Puranjay Mohan <puranjay12@gmail.com>,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH] Documentation: platform: convert x86-laptop-drivers.txt to reST
+Date:   Tue, 18 Jun 2019 11:02:27 +0530
+Message-Id: <20190618053227.31678-1-puranjay12@gmail.com>
+X-Mailer: git-send-email 2.21.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Anson Huang <Anson.Huang@nxp.com>
+This converts the plain text documentation to reStructuredText format.
+No essential content change.
 
-Add i.MX8QXP CPU thermal zone support.
-
-Signed-off-by: Anson Huang <Anson.Huang@nxp.com>
+Signed-off-by: Puranjay Mohan <puranjay12@gmail.com>
 ---
-No change.
----
- arch/arm64/boot/dts/freescale/imx8qxp.dtsi | 37 ++++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+ Documentation/platform/x86-laptop-drivers.rst | 23 +++++++++++++++++++
+ Documentation/platform/x86-laptop-drivers.txt | 18 ---------------
+ 2 files changed, 23 insertions(+), 18 deletions(-)
+ create mode 100644 Documentation/platform/x86-laptop-drivers.rst
+ delete mode 100644 Documentation/platform/x86-laptop-drivers.txt
 
-diff --git a/arch/arm64/boot/dts/freescale/imx8qxp.dtsi b/arch/arm64/boot/dts/freescale/imx8qxp.dtsi
-index b2cb818..12044be 100644
---- a/arch/arm64/boot/dts/freescale/imx8qxp.dtsi
-+++ b/arch/arm64/boot/dts/freescale/imx8qxp.dtsi
-@@ -10,6 +10,7 @@
- #include <dt-bindings/gpio/gpio.h>
- #include <dt-bindings/interrupt-controller/arm-gic.h>
- #include <dt-bindings/pinctrl/pads-imx8qxp.h>
-+#include <dt-bindings/thermal/thermal.h>
- 
- / {
- 	interrupt-parent = <&gic>;
-@@ -168,6 +169,11 @@
- 			compatible = "fsl,imx8qxp-sc-wdt", "fsl,imx-sc-wdt";
- 			timeout-sec = <60>;
- 		};
+diff --git a/Documentation/platform/x86-laptop-drivers.rst b/Documentation/platform/x86-laptop-drivers.rst
+new file mode 100644
+index 000000000000..0494c3fdd41c
+--- /dev/null
++++ b/Documentation/platform/x86-laptop-drivers.rst
+@@ -0,0 +1,23 @@
++=============
++compal-laptop
++=============
 +
-+		tsens: thermal-sensor {
-+			compatible = "fsl,imx8qxp-sc-thermal", "fsl,imx-sc-thermal";
-+			#thermal-sensor-cells = <1>;
-+		};
- 	};
- 
- 	timer {
-@@ -536,4 +542,35 @@
- 			power-domains = <&pd IMX_SC_R_GPIO_7>;
- 		};
- 	};
++List of supported hardware:
++===========================
 +
-+	thermal_zones: thermal-zones {
-+		cpu-thermal0 {
-+			polling-delay-passive = <250>;
-+			polling-delay = <2000>;
-+			thermal-sensors = <&tsens IMX_SC_R_SYSTEM>;
-+			trips {
-+				cpu_alert0: trip0 {
-+					temperature = <107000>;
-+					hysteresis = <2000>;
-+					type = "passive";
-+				};
-+				cpu_crit0: trip1 {
-+					temperature = <127000>;
-+					hysteresis = <2000>;
-+					type = "critical";
-+				};
-+			};
-+			cooling-maps {
-+				map0 {
-+					trip = <&cpu_alert0>;
-+					cooling-device =
-+						<&A35_0 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&A35_1 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&A35_2 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>,
-+						<&A35_3 THERMAL_NO_LIMIT THERMAL_NO_LIMIT>;
++by Compal:
++----------
++- Compal FL90/IFL90
++- Compal FL91/IFL91
++- Compal FL92/JFL92
++- Compal FT00/IFT00
 +
-+				};
-+			};
-+		};
-+	};
- };
++by Dell:
++--------
++- Dell Vostro 1200
++- Dell Mini 9 (Inspiron 910)
++- Dell Mini 10 (Inspiron 1010)
++- Dell Mini 10v (Inspiron 1011)
++- Dell Mini 1012 (Inspiron 1012)
++- Dell Inspiron 11z (Inspiron 1110)
++- Dell Mini 12 (Inspiron 1210)
+diff --git a/Documentation/platform/x86-laptop-drivers.txt b/Documentation/platform/x86-laptop-drivers.txt
+deleted file mode 100644
+index 01facd2590bb..000000000000
+--- a/Documentation/platform/x86-laptop-drivers.txt
++++ /dev/null
+@@ -1,18 +0,0 @@
+-compal-laptop
+-=============
+-List of supported hardware:
+-
+-by Compal:
+-	Compal FL90/IFL90
+-	Compal FL91/IFL91
+-	Compal FL92/JFL92
+-	Compal FT00/IFT00
+-
+-by Dell:
+-	Dell Vostro 1200
+-	Dell Mini 9 (Inspiron 910)
+-	Dell Mini 10 (Inspiron 1010)
+-	Dell Mini 10v (Inspiron 1011)
+-	Dell Mini 1012 (Inspiron 1012)
+-	Dell Inspiron 11z (Inspiron 1110)
+-	Dell Mini 12 (Inspiron 1210)
 -- 
-2.7.4
+2.21.0
 
