@@ -2,100 +2,144 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 81B674D4AA
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2019 19:16:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 91BBF4D4C0
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Jun 2019 19:23:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726637AbfFTRQf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 Jun 2019 13:16:35 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:52384 "EHLO
+        id S1732190AbfFTRXU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Jun 2019 13:23:20 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:52614 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726530AbfFTRQe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Jun 2019 13:16:34 -0400
+        with ESMTP id S1732179AbfFTRXU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Jun 2019 13:23:20 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
-        Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:
-        From:Date:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
-        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+        Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
         List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-         bh=kCqgyiR5F0aD4cVPBETsM4czwZlhKydQ/vgPSIJD7N4=; b=JXYWNbvwW9E2LPETc7q4kiFoa
-        Ye2a5VuGyanq9MjczZmXHJZsjGbwD0meqnrbxijKsYaf0Cg2I6bnIz2EUQA28RSgYWvh8cEjD6ZXQ
-        D35i3N/qEMPUh7/DxH3WAxKCYODn72OVqb3cRgbMPhL4Cw55nTweO6IgA07mrBOqOGQle+2i+bI13
-        mTmUvb3IlE7o9poVsCZr8Pz1uYGZT/kREM3eVQqCi27W546CCJO2mL+dARfLPLbPPA41e2f/pSKo8
-        Ro1TaDAZjpepoOZgAfVf5LP+5QD0YNVRAHC3tIBj1y60gxRtrb7tSB34YTlPAGzY94bEYUlKFjh8h
-        fokuyz5BQ==;
-Received: from [177.97.20.138] (helo=coco.lan)
+         bh=PtklCVYV8bfZXS0SZvAiOjrQ2yJ2ynrocAeQpsRsGX4=; b=qvy1DnsrQMDY+x7l2EDUa1Zzt
+        xH+CIfz798eRgQY5Dwqv5+1Vljg6V97bxL+2kW12XBVpiZSNBUkF45q0S2EqcBAUzEYrQb9A292SS
+        SHpspALsABTf0JfPK/Mf2E+bfeFaeYeozApspZuFz6vC/+i0ERMr4YFxxVWooJAWU93T91kio6B+v
+        keFWRxSDm71JYxBAkDUYF++SlVECMUqfEAEt5UJkCjZg03fOakEUTxDjdL1YVsGxeOjCVE3h2ykEa
+        BAWp9RqNtku+W1LN2uJGbd40rpcNyHl93x3HxfeDWK3azPlN5/jMVrnxivRmyuaAmWvxYnS6c0j00
+        cmgZjQ9Vw==;
+Received: from [177.97.20.138] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1he0fo-0005vU-Mr; Thu, 20 Jun 2019 17:16:32 +0000
-Date:   Thu, 20 Jun 2019 14:16:28 -0300
+        id 1he0mM-0008Rr-CV; Thu, 20 Jun 2019 17:23:18 +0000
+Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
+        (envelope-from <mchehab@bombadil.infradead.org>)
+        id 1he0mJ-0000Cc-GA; Thu, 20 Jun 2019 14:23:15 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Johan Hovold <johan@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Mauro Carvalho Chehab <mchehab@s-opensource.com>,
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         Mauro Carvalho Chehab <mchehab@infradead.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Stefan Achatz <erazor_de@users.sourceforge.net>
-Subject: Re: [PATCH 04/14] ABI: better identificate tables
-Message-ID: <20190620141628.71157dda@coco.lan>
-In-Reply-To: <20190620162945.GC23052@kroah.com>
-References: <cover.1560477540.git.mchehab+samsung@kernel.org>
-        <6bc45c0d5d464d25d4d16eceac48a2f407166944.1560477540.git.mchehab+samsung@kernel.org>
-        <20190619125135.GG25248@localhost>
-        <20190619105633.7f7315a5@coco.lan>
-        <20190619150207.GA19346@kroah.com>
-        <20190620120150.GH6241@localhost>
-        <20190620125413.GA5170@kroah.com>
-        <20190620112034.0d2be447@coco.lan>
-        <20190620162945.GC23052@kroah.com>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        Kees Cook <keescook@chromium.org>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        Tony Luck <tony.luck@intel.com>
+Subject: [PATCH v2 00/22] Add ABI and features docs to the Kernel documentation
+Date:   Thu, 20 Jun 2019 14:22:52 -0300
+Message-Id: <cover.1561050806.git.mchehab+samsung@kernel.org>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Thu, 20 Jun 2019 18:29:45 +0200
-Greg Kroah-Hartman <gregkh@linuxfoundation.org> escreveu:
+This is a rebased version of the scripts with parse
+Documentation/ABI and Documentation/feature files
+and produce a ReST output. Those scripts are added to the
+Kernel building system, in order to output their contents
+inside the Kernel documentation.
 
-> On Thu, Jun 20, 2019 at 11:20:34AM -0300, Mauro Carvalho Chehab wrote:
-> > Em Thu, 20 Jun 2019 14:54:13 +0200
-> > Greg Kroah-Hartman <gregkh@linuxfoundation.org> escreveu:
-> >   
-> > > On Thu, Jun 20, 2019 at 02:01:50PM +0200, Johan Hovold wrote:  
-> > > > > I don't know when "Description" and "RST-Description" would be used.
-> > > > > Why not just parse "Description" like rst text and if things are "messy"
-> > > > > we fix them up as found, like you did with the ":" here?  It doesn't
-> > > > > have to be complex, we can always fix them up after-the-fact if new
-> > > > > stuff gets added that doesn't quite parse properly.
-> > > > > 
-> > > > > Just like we do for most kernel-doc formatting :)    
-> > > > 
-> > > > But kernel-doc has a documented format, which was sort of the point I
-> > > > was trying to make. If the new get_abi.pl scripts expects a colon I
-> > > > think it should be mentioned somewhere (e.g. Documentation/ABI/README).
-> > > > 
-> > > > Grepping for attribute entries in linux-next still reveals a number
-> > > > descriptions that still lack that colon and use varying formatting. More
-> > > > are bound to be added later, but perhaps that's ok depending on what
-> > > > you're aiming at here.    
-> > > 
-> > > I'm aiming for "good enough" to start with, and then we can work through
-> > > the exceptions.
-> > > 
-> > > But given that Mauro hasn't resent the script that does the conversion
-> > > of the files, I don't know if that will even matter... {hint}  
-> > 
-> > It sounds I missed something... are you expecting a new version?   
-> 
-> Yes, the last round of patches didn't have a SPDX header on the script,
-> so I couldn't add it to the tree :(
+Please notice that, as discussed, I added support at get_abi.pl
+to handle ABI files as if they're compatible with ReST. Right
+now, this feature can't be enabled for normal builds, as it will
+cause Sphinx crashes. After getting the offending ABI files fixed,
+a single line change will be enough to make it default.
 
-I could swear I sent you a version with SPDX on it... anyway, I'm
-re-sending the hole thing. The SPDX header addition is on a separate
-patch.
+a version "0" was sent back on 2017.
+
+v1: 
+  - rebased version of ABI scripts requested during KS/2019 discussions,
+    with some additional changes for it to parse newer ABI files;
+
+v2:
+  - Some additional fixes and improvements to get_abi.pl script;
+  - get_abi.pl script now optionally suports parsing ABI files with
+    uses ReST format (by default, this is disabled);
+  - Added scripts/get_feat.pl to parse Documentation/features;
+  - Added SPDX headers.
+
+Mauro Carvalho Chehab (22):
+  ABI: sysfs-bus-pci-devices-aer_stats uses an invalid tag
+  ABI: Fix KernelVersion tags
+  scripts: add an script to parse the ABI files
+  scripts/get_abi.pl: parse files with text at beginning
+  scripts/get_abi.pl: avoid use literal blocks when not needed
+  scripts/get_abi.pl: split label naming from xref logic
+  scripts/get_abi.pl: add support for searching for ABI symbols
+  scripts/get_abi.pl: represent what in tables
+  scripts/get_abi.pl: fix parse issues with some files
+  scripts/get_abi.pl: avoid creating duplicate names
+  scripts/get_abi.pl: add a handler for invalid "where" tag
+  scripts/get_abi.pl: add a validate command
+  doc-rst: add ABI documentation to the admin-guide book
+  docs: sphinx/kernel_abi.py: fix UTF-8 support
+  sphinx/kernel_abi.py: make it compatible with Sphinx 1.7+
+  docs: Kconfig/Makefile: add a check for broken ABI files
+  docs: kernel_abi.py: Update copyrights
+  doc: ABI scripts: add a SPDX header file
+  scripts: add a script to handle Documentation/features
+  docs: admin-guide, x86: add a features list
+  scripts/get_feat.pl: handle ".." special case
+  scripts/get_abi.pl: change script to allow parsing in ReST mode
+
+ Documentation/ABI/testing/pstore              |   2 +-
+ .../sysfs-bus-event_source-devices-format     |   2 +-
+ .../ABI/testing/sysfs-bus-i2c-devices-hm6352  |   6 +-
+ .../testing/sysfs-bus-pci-devices-aer_stats   |  24 +-
+ .../ABI/testing/sysfs-bus-pci-devices-cciss   |  22 +-
+ .../testing/sysfs-bus-usb-devices-usbsevseg   |  10 +-
+ .../ABI/testing/sysfs-driver-altera-cvp       |   2 +-
+ Documentation/ABI/testing/sysfs-driver-ppi    |   2 +-
+ Documentation/ABI/testing/sysfs-driver-st     |   2 +-
+ Documentation/ABI/testing/sysfs-driver-wacom  |   2 +-
+ Documentation/Kconfig                         |  11 +
+ Documentation/Makefile                        |   5 +
+ Documentation/admin-guide/abi-obsolete.rst    |  10 +
+ Documentation/admin-guide/abi-removed.rst     |   4 +
+ Documentation/admin-guide/abi-stable.rst      |  13 +
+ Documentation/admin-guide/abi-testing.rst     |  19 +
+ Documentation/admin-guide/abi.rst             |  11 +
+ Documentation/admin-guide/features.rst        |   3 +
+ Documentation/admin-guide/index.rst           |   2 +
+ Documentation/conf.py                         |   2 +-
+ Documentation/sphinx/kernel_abi.py            | 166 ++++++
+ Documentation/sphinx/kernel_feat.py           | 169 ++++++
+ Documentation/x86/features.rst                |   3 +
+ Documentation/x86/index.rst                   |   1 +
+ lib/Kconfig.debug                             |   2 +
+ scripts/get_abi.pl                            | 498 ++++++++++++++++++
+ scripts/get_feat.pl                           | 474 +++++++++++++++++
+ 27 files changed, 1429 insertions(+), 38 deletions(-)
+ create mode 100644 Documentation/Kconfig
+ create mode 100644 Documentation/admin-guide/abi-obsolete.rst
+ create mode 100644 Documentation/admin-guide/abi-removed.rst
+ create mode 100644 Documentation/admin-guide/abi-stable.rst
+ create mode 100644 Documentation/admin-guide/abi-testing.rst
+ create mode 100644 Documentation/admin-guide/abi.rst
+ create mode 100644 Documentation/admin-guide/features.rst
+ create mode 100644 Documentation/sphinx/kernel_abi.py
+ create mode 100644 Documentation/sphinx/kernel_feat.py
+ create mode 100644 Documentation/x86/features.rst
+ create mode 100755 scripts/get_abi.pl
+ create mode 100755 scripts/get_feat.pl
+
+-- 
+2.21.0
 
 
-Thanks,
-Mauro
