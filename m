@@ -2,64 +2,132 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 364BD4F6F0
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Jun 2019 18:29:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 562804F74C
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Jun 2019 18:59:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726425AbfFVQ27 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 22 Jun 2019 12:28:59 -0400
-Received: from sonic301-3.consmr.mail.bf2.yahoo.com ([74.6.129.42]:44709 "EHLO
-        sonic301-3.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726374AbfFVQ2u (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Jun 2019 12:28:50 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1561220929; bh=3fXYToOZXvh5MOJ1JSawYDThjnynC/Ekt2gucIg6zZg=; h=Date:From:Reply-To:Subject:From:Subject; b=FwrBLUl7u665XwQeVPTq5hUQ4Ptv5qPcwgE0MfCyAxPjQW66W+sBKlTITy95Xiak8M/9mL3k87XvuhuNYmdzjOXFqAsXXJ7ZeR0tr0xQhaR4qpp9+I79zHB4JVXDeOtUnrv/ni1DEn3m49tSMIml9+1SbDvUcui/xLYzcB7mOtvlwJJC6bBkcbOwJW8drH7WnSKYQVlUvO9PRg8+IWYABo4m/HoTrmg3JSd7+tfq1bmdsTjreC9G6uwJClVG1p8XyGEOijmNqXv9Ivunj8UzUvxVldTIg/taTAKdSlSG3i+xbnz28LKLpxSK2+M63p52Vf+hNJ0OycyVj1TkO+H8OQ==
-X-YMail-OSG: BClZlNgVM1mJa1pSUAMlnjmDwJQUKDn0osVKNVIeZ6AC0JZQ8NzrV_.P2vPToBw
- lk4l1yMYy0P1wu9iKWHPF1vwWtED.NCcY6jE.jXdELnZdUngnDzcX.f1Ik7TcPjN._6dUftCNvSG
- 0ilPDIIh6JKut3rld3EDzfXqVTEprJFL10dLfXEmdNXy8_9HzWnLN9Uxxh6FWr8nj4DbExyF48M8
- b8CzHn8AtWzh0fDjJqMRXb5UR1L1fHF.mq4wk_41bl8VHLLREhO8D9AiMB_Iou.TvP.xektI4Uzf
- lBotEg54S8nbe5a5a2eamKaLSiD6XaCIzSQkrGwkgk9qzk7J4361PG1C2lAWhSULJjGYH.uKi9SH
- 8omXh8MvwuZmVU7umqXbA4eIFWV8ruRR3qRFWtA.2B0Eer.D49EbNovsAu.wRPm8yYyL6YMdaoys
- 3vYAkjype1yPgR0gHAH3zObnNPMrtMzQfsTzcaha59dNYsVWPRo5EvcFgAIKXVIUqnKnooWuODru
- O4SgrdrM8PGEZGs5dJS.h.dJB3gwQ.0I1wf1Q_CLgJhbPMrumaMiWl3ifhN9G_CCxrGhRPRltqdB
- RyAvAXGENXKEJswzM.sYWHkLQyblOWaGX5TLKzeDGaJCZVu7CtZvQ0aNcyWtqrf4SAtE7MK9SqUH
- 7phABBxeBrGdyDkvdUQOX_EPh25.Hb3SncDKllMEIHjvEdwbQcMGmqMEDVCI8Jh0nfgpjh259ODl
- q.bGW_sz63_QvjPWXygjUQ4RzfXiei1bHIkvbkPAHc04dS.Qr8LP1Jyxp2QD0wtNtJgo5RScK99X
- P5NPqcNAR8eez8YgXpk3cKLQCR9JSylhL6QyUVACODhQSLMO_l73eEDpWzNQUeEQLrEwA53TFUO9
- BXx4lR26gADp4OeWMANR3pTNDn8J7Oc5G1l.tF8AqVFtdsoB5vgCdw0tzoX9_22cJzNNteihaN9H
- ktOSXaCeUY26x9DWNkYi7HTOCc9F4vHnioRwelB9Lv.KGDeGPUJBBPmfcn0xXC8MB2YTlUFeVHzN
- FJsHhvFz9eJx.VwEAdhJs3DHW6xmbj9a_RSOf.BoLPiAvMAdoBe_1sVY8nFOqhuBwpkbj17TOzIW
- ts0JEWafkyantIFw8kEnIr0AHDEAK4aB1fgOVS8TQpbEaj2tB4pKHPa4OOjXszQAPBozr7PYVj2f
- 6AcwHFYhcmsrFfliX20p43dgFMRY8GMXgvUWeegBAeAuOTxCoUC9WvAdL
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic301.consmr.mail.bf2.yahoo.com with HTTP; Sat, 22 Jun 2019 16:28:49 +0000
-Date:   Sat, 22 Jun 2019 16:28:46 +0000 (UTC)
-From:   "Miss.Fatima Yusuf" <fatimayusuf5@outlook.fr>
-Reply-To: miss.fmayusuf11@gmail.com
-Message-ID: <270302503.296556.1561220926635@mail.yahoo.com>
-Subject: From:Miss: Fatima Yusuf.
+        id S1726422AbfFVQ67 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 22 Jun 2019 12:58:59 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:42784 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726326AbfFVQ67 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Jun 2019 12:58:59 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+        Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=nqhxUWeu7PVWFSTsz/lHoY/3ToIX8DIdYUQ0uB/39IY=; b=qmHCcjUSr7SUV3SnjknFIfxRO
+        sLeAlifLvqZamTKw9Cqx6nL2ij8aEWvuUfDzfUX2OJ1R7qW6fISUbuTqoR5p6pGk6FHm8CccO4U5o
+        vPjNjOXn+0Wi5UV587mlfUsnOTT4Hfu+VYAI3+u0ZCeuoHm5u6LD91KGiq+5o7ib9X2o9YZed6jbB
+        VvDqvMP9wL9im0rTGru4gewNKCZQTPjowVywK3g7hTI/t3xQm8CIctWSoZCZH5BhqACXFbVpGCA39
+        HIOc3nFhEf8z96niR/hELEoh5pGS9pt6ys2xsnEQgtTjCebw1z30RUEZCpWVJtNM1nB2LyrAzHleI
+        EVipl0PFA==;
+Received: from [179.95.45.115] (helo=bombadil.infradead.org)
+        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+        id 1hejLu-00054m-H4; Sat, 22 Jun 2019 16:58:58 +0000
+Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
+        (envelope-from <mchehab@bombadil.infradead.org>)
+        id 1hejLr-0000v6-Pk; Sat, 22 Jun 2019 13:58:55 -0300
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        gregkh@linuxfoundation.org, Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 00/12] Add the ABI documentation to the admin guide
+Date:   Sat, 22 Jun 2019 13:58:41 -0300
+Message-Id: <cover.1561221403.git.mchehab+samsung@kernel.org>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-To:     unlisted-recipients:; (no To-header on input)
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi Greg/Jon,
+
+That's the rebased patches with add the ABI documentation to the
+admin-guide. It is rebased on the top of driver-core/driver-core-next,
+and it can work both on the "old" mode, where the scripts will
+avoid codes that would cause troubles for ReST, or at the new mode,
+with parses the description to the ReST output untouched.
+
+Patches 1 to 3 improves the get_abi.pl for it to parse ReST format,
+and to report where the errors/warnings occur at the ABI file.
+
+Patch 4 is implements support for a Sphinx log facility (info). 
+
+Patches 5 to 10 adds the new kernel ABI extension, making it ready
+to parse files in ether "normal" or "rst-source" mode.
+
+Patch 11 addresses a Sphinx issue, with is there since old vesions,
+but it gets worse on Sphins 2.0: basically, the ReST parser is lazy:
+if it receives too much stuff, it silently ignores the end of the content.
+So, the extension needs to split the content on small chunks.
+
+IMO, it is safe to apply patches 1 to 11 via Greg's tree. The only
+potential conflict would be at patch 4, but looking at docs-next,
+I don't see any changes at Documentation/scripts/kernelog.py.
+
+Patch 12 actually enables everything. 
+
+If Patch 12 gets merged via Greg's tree, it may rise a single-line
+trivial conflict with docs-next, as it will be adding kernel_abi to the 
+list of extensions at Documentation/conf.py, and Jon is likely
+adding another extension. too.
+
+So, it could be wise postpone patch 12 to be merged after both 
+trees got merged upstream.
+
+Patch 12 adds ABI with ReST-scaping code. I'll submit soon a
+second version for the RFC patches with turns it to "clean" mode.
+
+The entire ABI series (plus Documentation/features) is at:
+
+	https://git.linuxtv.org/mchehab/experimental.git/log/?h=abi_patches_v4.2
+
+And the ReST output (with Sphinx 2.0 - with IMO provides a nicer
+output) is at:
+
+	https://www.infradead.org/~mchehab/rst_features/admin-guide/abi.html
 
 
-From:Miss: Fatima Yusuf.
+Mauro Carvalho Chehab (12):
+  scripts/get_abi.pl: change script to allow parsing in ReST mode
+  scripts/get_abi.pl: fix parsing on ReST mode
+  scripts/get_abi.pl: Allow optionally record from where a line came
+    from
+  docs: kernellog.py: add support for info()
+  docs: kernel_abi.py: add a script to parse ABI documentation
+  docs: kernel_abi.py: fix UTF-8 support
+  docs: kernel_abi.py: make it compatible with Sphinx 1.7+
+  docs: kernel_abi.py: Update copyrights
+  docs: kernel_abi.py: add a SPDX header file
+  docs: kernel_abi.py: use --enable-lineno for get_abi.pl
+  docs: kernel_abi.py: Handle with a lazy Sphinx parser
+  docs: add ABI documentation to the admin-guide book
 
-For sure this mail would definitely come to you as a surprise, but do take your good time to go through it, My name is Ms. Fatima Yusuf,i am from Ivory Coast.
+ Documentation/admin-guide/abi-obsolete.rst |  10 ++
+ Documentation/admin-guide/abi-removed.rst  |   4 +
+ Documentation/admin-guide/abi-stable.rst   |  13 ++
+ Documentation/admin-guide/abi-testing.rst  |  19 +++
+ Documentation/admin-guide/abi.rst          |  11 ++
+ Documentation/admin-guide/index.rst        |   1 +
+ Documentation/conf.py                      |   2 +-
+ Documentation/sphinx/kernel_abi.py         | 189 +++++++++++++++++++++
+ Documentation/sphinx/kernellog.py          |   6 +-
+ scripts/get_abi.pl                         | 104 ++++++++----
+ 10 files changed, 325 insertions(+), 34 deletions(-)
+ create mode 100644 Documentation/admin-guide/abi-obsolete.rst
+ create mode 100644 Documentation/admin-guide/abi-removed.rst
+ create mode 100644 Documentation/admin-guide/abi-stable.rst
+ create mode 100644 Documentation/admin-guide/abi-testing.rst
+ create mode 100644 Documentation/admin-guide/abi.rst
+ create mode 100644 Documentation/sphinx/kernel_abi.py
 
-I lost my parents a year and couple of months ago. My father was a serving director of the Agro-exporting board until his death. He was assassinated by his business partners.Before his death, he made a deposit of US$9.7 Million Dollars here in Cote d'ivoire which was for the purchase of cocoa processing machine and development of another factory before his untimely death.
+-- 
+2.21.0
 
-Being that this part of the world experiences political and crises time without number, there is no guarantee of lives and properties. I cannot invest this money here any long, despite the fact it had been my late father's industrial plans.
 
-I want you to do me a favor to receive this funds into your country or any safer place as the beneficiary, I have plans to invest this money in continuation with the investment vision of my late father, but not in this place again rather in your country. I have the vision of going into real estate and industrial production or any profitable business venture.
-
-I will be ready to compensate you with 20% of the total Amount, now all my hope is banked on you and i really wants to invest this money in your country, where there is stability of Government, political and economic welfare.
-
-My greatest worry now is how to move out of this country because my uncle is threatening to kill me as he killed my father,Please do not let anybody hear about this, it is between me and you alone because of my security reason.
-
-I am waiting to hear from you.
-Yours Sincerely,
-Miss.Fatima Yusuf.
