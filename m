@@ -2,42 +2,44 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 635414F2F5
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Jun 2019 03:00:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8B4444F4D3
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Jun 2019 11:43:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726221AbfFVBAv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 21 Jun 2019 21:00:51 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:43690 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726052AbfFVBAv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Jun 2019 21:00:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
-        Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:
-        From:Date:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
-        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-         bh=DU48MQ9NZfd+dSFfhOVoqXBfrwMyOEsLPRg6YgjyGVI=; b=jhnuriO1MsaxnCd+jswIlYNwI
-        Z9eslOz5YY12SaOn2HmpCg3Jjl4UqJjNP2k5zUwZj75rfZRq1UVKMCePjopb2cwljbOaARcLctBH2
-        DIViKJ99NFy4w6DrFV48ErW/6qj3bFpd76z3SGTnEIo21MxhAkxSSsWIR4TFBoqJNpUYtEb0IXG+D
-        SipccnLUPJWlru8gtR60doHGE3X6te2sdU8mH+2QFM0faKrN5FxXIyOD93P4cWRoUk20PsX9gxkRk
-        m6RXGIxb7Zv/W9PlhqvMCVq5bNNdFiha/aT2g+TXkua+ML2H1KbQeWS7EYw4BlLxENbiqa2rYWzr3
-        8paKyQXWA==;
-Received: from [177.97.20.138] (helo=coco.lan)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1heUOg-00055M-PZ; Sat, 22 Jun 2019 01:00:51 +0000
-Date:   Fri, 21 Jun 2019 22:00:46 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, Matthew Wilcox <willy@infradead.org>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/3] Docs: An initial automarkup extension for sphinx
-Message-ID: <20190621220046.3de30d9d@coco.lan>
-In-Reply-To: <20190621235159.6992-2-corbet@lwn.net>
-References: <20190621235159.6992-1-corbet@lwn.net>
-        <20190621235159.6992-2-corbet@lwn.net>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1726121AbfFVJnH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 22 Jun 2019 05:43:07 -0400
+Received: from mail.kernel.org ([198.145.29.99]:58068 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726112AbfFVJnH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 22 Jun 2019 05:43:07 -0400
+Received: from archlinux (cpc149474-cmbg20-2-0-cust94.5-4.cable.virginm.net [82.4.196.95])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id E9FCC2084E;
+        Sat, 22 Jun 2019 09:43:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1561196585;
+        bh=t+jdhrtqnAeVSdTIuwqh5S0S8lqQudNzmmkSgt8+mNY=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=QkqDoDMQ8Tfy9zCFMuN2FS6chXTfNjoDIFZ8bO5yQW0Eamu0RIeew/hoHwQuMgbPH
+         uo4iewCHBEkJmzYmErZgwDR6Kw1lfwogjQXJQjOLMRGtqkSANbxXyPYQz+PRDvKLll
+         i5ZADS5Pu/wJgu+cuFQ5LVpfonRPSSWg1wqQRkVE=
+Date:   Sat, 22 Jun 2019 10:43:00 +0100
+From:   Jonathan Cameron <jic23@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Hartmut Knaack <knaack.h@gmx.de>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        Peter Meerwald-Stadler <pmeerw@pmeerw.net>,
+        linux-iio@vger.kernel.org,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Subject: Re: [PATCH v2 22/29] docs: iio: convert to ReST
+Message-ID: <20190622104300.6ff9e871@archlinux>
+In-Reply-To: <f54094f023f1ab7130af64ffdbe4bc4cf66452b9.1560890801.git.mchehab+samsung@kernel.org>
+References: <cover.1560890800.git.mchehab+samsung@kernel.org>
+        <f54094f023f1ab7130af64ffdbe4bc4cf66452b9.1560890801.git.mchehab+samsung@kernel.org>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -46,138 +48,242 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Fri, 21 Jun 2019 17:51:57 -0600
-Jonathan Corbet <corbet@lwn.net> escreveu:
+On Tue, 18 Jun 2019 17:53:40 -0300
+Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
 
-> Rather than fill our text files with :c:func:`function()` syntax, just do
-> the markup via a hook into the sphinx build process.
-
-
-Didn't test it, but it sounds a way nicer than the past version!
-
-> Signed-off-by: Jonathan Corbet <corbet@lwn.net>
-> ---
->  Documentation/conf.py              |  3 +-
->  Documentation/sphinx/automarkup.py | 80 ++++++++++++++++++++++++++++++
->  2 files changed, 82 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/sphinx/automarkup.py
+> Rename the iio documentation files to ReST, add an
+> index for them and adjust in order to produce a nice html
+> output via the Sphinx build system.
 > 
-> diff --git a/Documentation/conf.py b/Documentation/conf.py
-> index 7ace3f8852bd..a502baecbb85 100644
-> --- a/Documentation/conf.py
-> +++ b/Documentation/conf.py
-> @@ -34,7 +34,8 @@ needs_sphinx = '1.3'
->  # Add any Sphinx extension module names here, as strings. They can be
->  # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
->  # ones.
-> -extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain', 'kfigure', 'sphinx.ext.ifconfig']
-> +extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain',
-> +              'kfigure', 'sphinx.ext.ifconfig', 'automarkup']
+> At its new index.rst, let's add a :orphan: while this is not linked to
+> the main index.rst file, in order to avoid build warnings.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> Acked-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+I'll take this via IIO.
+
+Applied to the togreg branch of iio.git and pushed out as testing.
+I'll probably do a pull request to Greg tomorrow and these will hopefully
+turn up in linux-next not long after that.
+
+Thanks Mauro!
+
+Jonathan
+
+> ---
+>  .../iio/{ep93xx_adc.txt => ep93xx_adc.rst}    | 15 +++++-
+>  .../{iio_configfs.txt => iio_configfs.rst}    | 52 +++++++++++--------
+>  Documentation/iio/index.rst                   | 12 +++++
+>  drivers/iio/Kconfig                           |  2 +-
+>  4 files changed, 56 insertions(+), 25 deletions(-)
+>  rename Documentation/iio/{ep93xx_adc.txt => ep93xx_adc.rst} (71%)
+>  rename Documentation/iio/{iio_configfs.txt => iio_configfs.rst} (73%)
+>  create mode 100644 Documentation/iio/index.rst
+> 
+> diff --git a/Documentation/iio/ep93xx_adc.txt b/Documentation/iio/ep93xx_adc.rst
+> similarity index 71%
+> rename from Documentation/iio/ep93xx_adc.txt
+> rename to Documentation/iio/ep93xx_adc.rst
+> index 23053e7817bd..4fd8dea3f6b8 100644
+> --- a/Documentation/iio/ep93xx_adc.txt
+> +++ b/Documentation/iio/ep93xx_adc.rst
+> @@ -1,12 +1,16 @@
+> -Cirrus Logic EP93xx ADC driver.
+> +==============================
+> +Cirrus Logic EP93xx ADC driver
+> +==============================
 >  
->  # The name of the math extension changed on Sphinx 1.4
->  if (major == 1 and minor > 3) or (major > 1):
-> diff --git a/Documentation/sphinx/automarkup.py b/Documentation/sphinx/automarkup.py
+>  1. Overview
+> +===========
+>  
+>  The driver is intended to work on both low-end (EP9301, EP9302) devices with
+>  5-channel ADC and high-end (EP9307, EP9312, EP9315) devices with 10-channel
+>  touchscreen/ADC module.
+>  
+>  2. Channel numbering
+> +====================
+>  
+>  Numbering scheme for channels 0..4 is defined in EP9301 and EP9302 datasheets.
+>  EP9307, EP9312 and EP9312 have 3 channels more (total 8), but the numbering is
+> @@ -17,13 +21,20 @@ Assuming ep93xx_adc is IIO device0, you'd find the following entries under
+>  
+>    +-----------------+---------------+
+>    | sysfs entry     | ball/pin name |
+> -  +-----------------+---------------+
+> +  +=================+===============+
+>    | in_voltage0_raw | YM            |
+> +  +-----------------+---------------+
+>    | in_voltage1_raw | SXP           |
+> +  +-----------------+---------------+
+>    | in_voltage2_raw | SXM           |
+> +  +-----------------+---------------+
+>    | in_voltage3_raw | SYP           |
+> +  +-----------------+---------------+
+>    | in_voltage4_raw | SYM           |
+> +  +-----------------+---------------+
+>    | in_voltage5_raw | XP            |
+> +  +-----------------+---------------+
+>    | in_voltage6_raw | XM            |
+> +  +-----------------+---------------+
+>    | in_voltage7_raw | YP            |
+>    +-----------------+---------------+
+> diff --git a/Documentation/iio/iio_configfs.txt b/Documentation/iio/iio_configfs.rst
+> similarity index 73%
+> rename from Documentation/iio/iio_configfs.txt
+> rename to Documentation/iio/iio_configfs.rst
+> index 4e5f101837a8..ecbfdb3afef7 100644
+> --- a/Documentation/iio/iio_configfs.txt
+> +++ b/Documentation/iio/iio_configfs.rst
+> @@ -1,6 +1,9 @@
+> +===============================
+>  Industrial IIO configfs support
+> +===============================
+>  
+>  1. Overview
+> +===========
+>  
+>  Configfs is a filesystem-based manager of kernel objects. IIO uses some
+>  objects that could be easily configured using configfs (e.g.: devices,
+> @@ -10,20 +13,22 @@ See Documentation/filesystems/configfs/configfs.txt for more information
+>  about how configfs works.
+>  
+>  2. Usage
+> +========
+>  
+>  In order to use configfs support in IIO we need to select it at compile
+>  time via CONFIG_IIO_CONFIGFS config option.
+>  
+> -Then, mount the configfs filesystem (usually under /config directory):
+> +Then, mount the configfs filesystem (usually under /config directory)::
+>  
+> -$ mkdir /config
+> -$ mount -t configfs none /config
+> +  $ mkdir /config
+> +  $ mount -t configfs none /config
+>  
+>  At this point, all default IIO groups will be created and can be accessed
+>  under /config/iio. Next chapters will describe available IIO configuration
+>  objects.
+>  
+>  3. Software triggers
+> +====================
+>  
+>  One of the IIO default configfs groups is the "triggers" group. It is
+>  automagically accessible when the configfs is mounted and can be found
+> @@ -31,40 +36,40 @@ under /config/iio/triggers.
+>  
+>  IIO software triggers implementation offers support for creating multiple
+>  trigger types. A new trigger type is usually implemented as a separate
+> -kernel module following the interface in include/linux/iio/sw_trigger.h:
+> +kernel module following the interface in include/linux/iio/sw_trigger.h::
+>  
+> -/*
+> - * drivers/iio/trigger/iio-trig-sample.c
+> - * sample kernel module implementing a new trigger type
+> - */
+> -#include <linux/iio/sw_trigger.h>
+> +  /*
+> +   * drivers/iio/trigger/iio-trig-sample.c
+> +   * sample kernel module implementing a new trigger type
+> +   */
+> +  #include <linux/iio/sw_trigger.h>
+>  
+>  
+> -static struct iio_sw_trigger *iio_trig_sample_probe(const char *name)
+> -{
+> +  static struct iio_sw_trigger *iio_trig_sample_probe(const char *name)
+> +  {
+>  	/*
+>  	 * This allocates and registers an IIO trigger plus other
+>  	 * trigger type specific initialization.
+>  	 */
+> -}
+> +  }
+>  
+> -static int iio_trig_hrtimer_remove(struct iio_sw_trigger *swt)
+> -{
+> +  static int iio_trig_hrtimer_remove(struct iio_sw_trigger *swt)
+> +  {
+>  	/*
+>  	 * This undoes the actions in iio_trig_sample_probe
+>  	 */
+> -}
+> +  }
+>  
+> -static const struct iio_sw_trigger_ops iio_trig_sample_ops = {
+> +  static const struct iio_sw_trigger_ops iio_trig_sample_ops = {
+>  	.probe		= iio_trig_sample_probe,
+>  	.remove		= iio_trig_sample_remove,
+> -};
+> +  };
+>  
+> -static struct iio_sw_trigger_type iio_trig_sample = {
+> +  static struct iio_sw_trigger_type iio_trig_sample = {
+>  	.name = "trig-sample",
+>  	.owner = THIS_MODULE,
+>  	.ops = &iio_trig_sample_ops,
+> -};
+> +  };
+>  
+>  module_iio_sw_trigger_driver(iio_trig_sample);
+>  
+> @@ -73,21 +78,24 @@ iio-trig-sample module will create 'trig-sample' trigger type directory
+>  /config/iio/triggers/trig-sample.
+>  
+>  We support the following interrupt sources (trigger types):
+> +
+>  	* hrtimer, uses high resolution timers as interrupt source
+>  
+>  3.1 Hrtimer triggers creation and destruction
+> +---------------------------------------------
+>  
+>  Loading iio-trig-hrtimer module will register hrtimer trigger types allowing
+>  users to create hrtimer triggers under /config/iio/triggers/hrtimer.
+>  
+> -e.g:
+> +e.g::
+>  
+> -$ mkdir /config/iio/triggers/hrtimer/instance1
+> -$ rmdir /config/iio/triggers/hrtimer/instance1
+> +  $ mkdir /config/iio/triggers/hrtimer/instance1
+> +  $ rmdir /config/iio/triggers/hrtimer/instance1
+>  
+>  Each trigger can have one or more attributes specific to the trigger type.
+>  
+>  3.2 "hrtimer" trigger types attributes
+> +--------------------------------------
+>  
+>  "hrtimer" trigger type doesn't have any configurable attribute from /config dir.
+>  It does introduce the sampling_frequency attribute to trigger directory.
+> diff --git a/Documentation/iio/index.rst b/Documentation/iio/index.rst
 > new file mode 100644
-> index 000000000000..14b09b5d145e
+> index 000000000000..0593dca89a94
 > --- /dev/null
-> +++ b/Documentation/sphinx/automarkup.py
-> @@ -0,0 +1,80 @@
-> +# SPDX-License-Identifier: GPL-2.0
-> +# Copyright 2019 Jonathan Corbet <corbet@lwn.net>
-> +#
-> +# Apply kernel-specific tweaks after the initial document processing
-> +# has been done.
-> +#
-> +from docutils import nodes
-> +from sphinx import addnodes
-> +import re
+> +++ b/Documentation/iio/index.rst
+> @@ -0,0 +1,12 @@
+> +:orphan:
 > +
-> +#
-> +# Regex nastiness.  Of course.
-> +# Try to identify "function()" that's not already marked up some
-> +# other way.  Sphinx doesn't like a lot of stuff right after a
-> +# :c:func: block (i.e. ":c:func:`mmap()`s" flakes out), so the last
-> +# bit tries to restrict matches to things that won't create trouble.
-> +#
-> +RE_function = re.compile(r'([\w_][\w\d_]+\(\))')
+> +==============
+> +Industrial I/O
+> +==============
 > +
-> +#
-> +# The DVB docs create references for these basic system calls, leading
-> +# to lots of confusing links.  So just don't link them.
-> +#
-> +Skipfuncs = [ 'open', 'close', 'write' ]
+> +.. toctree::
+> +   :maxdepth: 1
+> +
+> +   iio_configfs
+> +
+> +   ep93xx_adc
+> diff --git a/drivers/iio/Kconfig b/drivers/iio/Kconfig
+> index 1d736a4952ab..5bd51853b15e 100644
+> --- a/drivers/iio/Kconfig
+> +++ b/drivers/iio/Kconfig
+> @@ -28,7 +28,7 @@ config IIO_CONFIGFS
+>  	help
+>  	  This allows configuring various IIO bits through configfs
+>  	  (e.g. software triggers). For more info see
+> -	  Documentation/iio/iio_configfs.txt.
+> +	  Documentation/iio/iio_configfs.rst.
+>  
+>  config IIO_TRIGGER
+>  	bool "Enable triggered sampling support"
 
-and yeah, of course, if there's something weird, it has to be at
-the media docs :-)
-
-Btw, if I'm not mistaken, we do the same for ioctl.
-
-
-I'm wandering if this could also handle the Documentation/* auto-replace.
-
-The patch snipped I did (against your past version is enclosed).
-
-
-diff --git a/Documentation/sphinx/automarkup.py b/Documentation/sphinx/automarkup.py
-index 39c8f4d5af82..60dad596c790 100644
---- a/Documentation/sphinx/automarkup.py
-+++ b/Documentation/sphinx/automarkup.py
-@@ -9,6 +9,7 @@
- from __future__ import print_function
- import re
- import sphinx
-+#import sys		# Just for debug
- 
- #
- # Regex nastiness.  Of course.
-@@ -31,10 +32,26 @@ RE_literal = re.compile(r'^(\s*)(.*::\s*|\.\.\s+code-block::.*)$')
- #
- RE_whitesp = re.compile(r'^(\s*)')
- 
-+#
-+# Get a documentation reference
-+#
-+RE_doc_links = re.compile(r'\bDocumentation/([\w\d\-\_\/]+)\.rst\b')
-+
-+#
-+# Doc link false-positives
-+#
-+RE_false_doc_links = re.compile(r':ref:`\s*Documentation/[\w\d\-\_\/]+\.rst')
-+
- def MangleFile(app, docname, text):
-     ret = [ ]
-     previous = ''
-     literal = False
-+
-+    rel_dir = ''
-+
-+    for depth in range(0, docname.count('/')):
-+        rel_dir += "../"
-+
-     for line in text[0].split('\n'):
-         #
-         # See if we might be ending a literal block, as denoted by
-@@ -63,7 +80,18 @@ def MangleFile(app, docname, text):
-         # Normal line - perform substitutions.
-         #
-         else:
--            ret.append(RE_function.sub(r'\1:c:func:`\2`\3', line))
-+#            new_line = RE_function.sub(r'\1:c:func:`\2`\3', line)
-+            new_line = line
-+
-+            if not RE_false_doc_links.search(new_line):
-+                new_line = RE_doc_links.sub(r':doc:`' + rel_dir + r'\1`', new_line)
-+
-+ #           # Just for debug - should be removed on production
-+ #           if new_line != line:
-+ #               print ("===>" + new_line, file=sys.stderr)
-+
-+            ret.append(new_line)
-+
-         #
-         # Might we be starting a literal block?  If so make note of
-         # the fact.
-
-
-Thanks,
-Mauro
