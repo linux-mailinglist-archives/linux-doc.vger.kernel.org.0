@@ -2,109 +2,134 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C84FE56BE6
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2019 16:28:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2793956D81
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2019 17:20:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728094AbfFZO2V (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Jun 2019 10:28:21 -0400
-Received: from mail-ed1-f65.google.com ([209.85.208.65]:44012 "EHLO
-        mail-ed1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728092AbfFZO2U (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jun 2019 10:28:20 -0400
-Received: by mail-ed1-f65.google.com with SMTP id e3so3621579edr.10
-        for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2019 07:28:19 -0700 (PDT)
+        id S1727589AbfFZPUd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Jun 2019 11:20:33 -0400
+Received: from mail-qt1-f193.google.com ([209.85.160.193]:34910 "EHLO
+        mail-qt1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725958AbfFZPUd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jun 2019 11:20:33 -0400
+Received: by mail-qt1-f193.google.com with SMTP id d23so2801704qto.2
+        for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2019 08:20:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=sender:date:from:to:cc:subject:message-id:mail-followup-to
-         :references:mime-version:content-disposition:in-reply-to:user-agent;
-        bh=RDzxId5d0cWk+Og3KjWmTmUc93/gQfEJUMFySwZomG0=;
-        b=QEOzXwN4cDsvAl3fnj/WI0Yyq8XoY5VQ/1ZZo0YTXcPQaz7t7hzaRKCaRnRHIHiPGt
-         zp3wPqP1RRIVvxImSiDl6NhJBgMjgo496X0ZA+o/q+gwPvwhoP6USmJAkOZsWfB7DEqS
-         y2jLjM7JyZMFztMCPpCoUhWNkkAoVfNtxTL34=
+        d=linuxfoundation.org; s=google;
+        h=date:from:to:cc:subject:message-id:mail-followup-to:mime-version
+         :content-disposition:user-agent;
+        bh=TMbonIAae3s2n3nbvmA2N1iuSovslInlJCc3ySLJcdo=;
+        b=NXfWmMC6rA5iGjeJuckjoA8abC+i9iNmXvE4Esx0q0dp0XHSZ6ko6vtFnRjp82PV+L
+         R2k65kPz6lxUsOY0EcyQI/QwK13IFv2g7OjBKD94myU5fVaR7UPNsnVrzKCEQDUKf2EJ
+         GwWbZdOIwAUFSisLg/cXtELPycN3xxyKYGn0Q=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-         :mail-followup-to:references:mime-version:content-disposition
-         :in-reply-to:user-agent;
-        bh=RDzxId5d0cWk+Og3KjWmTmUc93/gQfEJUMFySwZomG0=;
-        b=nLp66Nu7TBVio9SrgMDXv5414i7+lNt0jypBIVF8YYGOauH58NYRl/mT9QHAsp5K1y
-         v+iud7sBzG7vvgnNsPQpwzGFYAz8dM2jSHnXsfDq1ErxjjcgLdcPe3eEhmRvtpdKfWYL
-         msumKI+etDlj5WLtxQSL4/A1ozNiIgpO+wV7UN95fIBey8ZGsnHncy+gtAtmEQnLuDXG
-         nRQpSXIdx+54OYH84npPQHhfWrrJblpXg2ryFmRm/G5FKo94hM9eStpoqqCsydC+EfC9
-         fG6+b1vMOWkHD2SMVewlHJl4DjND1n+JWLO+Vgc9thXs2ALF8tv8oCkeuqbucknoDUqg
-         yp4w==
-X-Gm-Message-State: APjAAAXSS1tt6ZZL4jiUqEx96nuM5rAnpcPLw+1Z90T0KctEGeCC4yE+
-        2ZvM8kfxcV19inetr8+cHnTdoA==
-X-Google-Smtp-Source: APXvYqyHvtMQ1Lf+heBq8BjwPrx2FB7C/LXB6Iy0Y7C76qtBhDrUXHnqzdv+4phmpNRAYv0YzOY5Cw==
-X-Received: by 2002:aa7:c619:: with SMTP id h25mr5603958edq.295.1561559298723;
-        Wed, 26 Jun 2019 07:28:18 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-        by smtp.gmail.com with ESMTPSA id a8sm5564492edt.56.2019.06.26.07.28.17
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:mime-version:content-disposition:user-agent;
+        bh=TMbonIAae3s2n3nbvmA2N1iuSovslInlJCc3ySLJcdo=;
+        b=it7ZlYJDzZ76iUm8YZpINvlEm9DM2EuVXAU3fRDIUhKtDI8I1XWqSxEPdQCmw1OPxU
+         zSZRzfG0syuTh/PrEVKDpcjQM8CxtbZY42aC8fWKNaWY0cV5gLO6NRymaLreEPm/VZNI
+         seu21ljd6i3Y4+J0hqUg1Lpe5el34QpyuTv5MKBI1ub9LR3ahgR4zRwysneAYf7hgl62
+         Mm2oc2aCBiapkptgXG9wfpXeAgzTmmfG/M2q+UGt4lfhUebfXAawdPyukc5ONPJswxNU
+         FBRlTm8V0XyP38i3C0s5ZVROlSN/yM14h1MEVgB+zxUk6UMj+D39LotnwPhOJqB4GuSs
+         SVog==
+X-Gm-Message-State: APjAAAXjk26uC8eYlmQoiYjyYcJxddBxmyqqbdVYQwi9OeSbDf9jogms
+        5lqAsIAM6Y2QlQKFYqDE8XJwQ2PT5x0=
+X-Google-Smtp-Source: APXvYqzN9fn+CGt2RcRwUMWT6FUJnwizwfbnFPULKH1rwbhzVgQn1QkNw58beMnIWFoIRjMsBUuf6g==
+X-Received: by 2002:ac8:2aaa:: with SMTP id b39mr4375873qta.24.1561562431523;
+        Wed, 26 Jun 2019 08:20:31 -0700 (PDT)
+Received: from chatter.i7.local (192-0-228-88.cpe.teksavvy.com. [192.0.228.88])
+        by smtp.gmail.com with ESMTPSA id 6sm8626387qkk.69.2019.06.26.08.20.30
         (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Wed, 26 Jun 2019 07:28:17 -0700 (PDT)
-Date:   Wed, 26 Jun 2019 16:28:15 +0200
-From:   Daniel Vetter <daniel@ffwll.ch>
-To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        David Airlie <airlied@linux.ie>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <maxime.ripard@bootlin.com>,
-        Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org
-Subject: Re: [PATCH] docs: gpu: add msm-crash-dump.rst to the index.rst file
-Message-ID: <20190626142815.GM12905@phenom.ffwll.local>
-Mail-Followup-To: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        David Airlie <airlied@linux.ie>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <maxime.ripard@bootlin.com>,
-        Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org
-References: <e22a340cf94240094cfb38f8c62f6916ea99394a.1561556169.git.mchehab+samsung@kernel.org>
+        Wed, 26 Jun 2019 08:20:30 -0700 (PDT)
+Date:   Wed, 26 Jun 2019 11:20:29 -0400
+From:   Konstantin Ryabitsev <konstantin@linuxfoundation.org>
+To:     linux-doc@vger.kernel.org
+Cc:     corbet@lwn.net
+Subject: [PATCH] Documentation: PGP: update for newer HW devices
+Message-ID: <20190626152029.GA27451@chatter.i7.local>
+Mail-Followup-To: linux-doc@vger.kernel.org, corbet@lwn.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Disposition: inline
-In-Reply-To: <e22a340cf94240094cfb38f8c62f6916ea99394a.1561556169.git.mchehab+samsung@kernel.org>
-X-Operating-System: Linux phenom 4.19.0-5-amd64 
-User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Patchwork-Bot: notify
+User-Agent: Mutt/1.12.0 (2019-05-25)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jun 26, 2019 at 10:36:11AM -0300, Mauro Carvalho Chehab wrote:
-> This file is currently orphaned.
-> 
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-> ---
->  Documentation/gpu/index.rst | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/Documentation/gpu/index.rst b/Documentation/gpu/index.rst
-> index 1fcf8e851e15..55f3f4294686 100644
-> --- a/Documentation/gpu/index.rst
-> +++ b/Documentation/gpu/index.rst
-> @@ -12,6 +12,7 @@ Linux GPU Driver Developer's Guide
->     drm-uapi
->     drm-client
->     drivers
-> +   msm-crash-dump
+Newer devices like Yubikey 5 and Nitrokey Pro 2 have added support for
+NISTP's implementation of ECC cryptography, so update the guide
+accordingly and add a note on when to use nistp256 and when to use
+ed25519 for generating S keys.
 
-Should be added to drivers.rst I think, since it's driver-specific
-documentation.
--Daniel
+Signed-off-by: Konstantin Ryabitsev <konstantin@linuxfoundation.org>
+---
+ .../process/maintainer-pgp-guide.rst          | 31 ++++++++++---------
+ 1 file changed, 17 insertions(+), 14 deletions(-)
 
->     vga-switcheroo
->     vgaarbiter
->     todo
-> -- 
-> 2.21.0
-> 
-
+diff --git a/Documentation/process/maintainer-pgp-guide.rst b/Documentation/process/maintainer-pgp-guide.rst
+index 4bab7464ff8c..17db11b7ed48 100644
+--- a/Documentation/process/maintainer-pgp-guide.rst
++++ b/Documentation/process/maintainer-pgp-guide.rst
+@@ -238,7 +238,10 @@ your new subkey::
+     work.
+ 
+     If for some reason you prefer to stay with RSA subkeys, just replace
+-    "ed25519" with "rsa2048" in the above command.
++    "ed25519" with "rsa2048" in the above command. Additionally, if you
++    plan to use a hardware device that does not support ED25519 ECC
++    keys, like Nitrokey Pro or a Yubikey, then you should use
++    "nistp256" instead or "ed25519."
+ 
+ 
+ Back up your master key for disaster recovery
+@@ -432,23 +435,23 @@ Available smartcard devices
+ 
+ Unless all your laptops and workstations have smartcard readers, the
+ easiest is to get a specialized USB device that implements smartcard
+-functionality.  There are several options available:
++functionality. There are several options available:
+ 
+ - `Nitrokey Start`_: Open hardware and Free Software, based on FSI
+-  Japan's `Gnuk`_. Offers support for ECC keys, but fewest security
+-  features (such as resistance to tampering or some side-channel
+-  attacks).
+-- `Nitrokey Pro`_: Similar to the Nitrokey Start, but more
+-  tamper-resistant and offers more security features, but no ECC
+-  support.
+-- `Yubikey 4`_: proprietary hardware and software, but cheaper than
++  Japan's `Gnuk`_. One of the few available commercial devices that
++  support ED25519 ECC keys, but offer fewest security features (such as
++  resistance to tampering or some side-channel attacks).
++- `Nitrokey Pro 2`_: Similar to the Nitrokey Start, but more
++  tamper-resistant and offers more security features. Pro 2 supports ECC
++  cryptography (NISTP).
++- `Yubikey 5`_: proprietary hardware and software, but cheaper than
+   Nitrokey Pro and comes available in the USB-C form that is more useful
+   with newer laptops. Offers additional security features such as FIDO
+-  U2F, but no ECC.
++  U2F, among others, and now finally supports ECC keys (NISTP).
+ 
+ `LWN has a good review`_ of some of the above models, as well as several
+-others. If you want to use ECC keys, your best bet among commercially
+-available devices is the Nitrokey Start.
++others. Your choice will depend on cost, shipping availability in your
++geographical region, and open/proprietary hardware considerations.
+ 
+ .. note::
+ 
+@@ -457,8 +460,8 @@ available devices is the Nitrokey Start.
+     Foundation.
+ 
+ .. _`Nitrokey Start`: https://shop.nitrokey.com/shop/product/nitrokey-start-6
+-.. _`Nitrokey Pro`: https://shop.nitrokey.com/shop/product/nitrokey-pro-3
+-.. _`Yubikey 4`: https://www.yubico.com/product/yubikey-4-series/
++.. _`Nitrokey Pro 2`: https://shop.nitrokey.com/shop/product/nitrokey-pro-2-3
++.. _`Yubikey 5`: https://www.yubico.com/products/yubikey-5-overview/
+ .. _Gnuk: http://www.fsij.org/doc-gnuk/
+ .. _`LWN has a good review`: https://lwn.net/Articles/736231/
+ .. _`qualify for a free Nitrokey Start`: https://www.kernel.org/nitrokey-digital-tokens-for-kernel-developers.html
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.21.0
+
