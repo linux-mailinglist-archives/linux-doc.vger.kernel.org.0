@@ -2,81 +2,52 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 991B056C05
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2019 16:32:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3360256BCB
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Jun 2019 16:25:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727992AbfFZOcA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Jun 2019 10:32:00 -0400
-Received: from mail.kapsi.fi ([91.232.154.25]:37557 "EHLO mail.kapsi.fi"
+        id S1726104AbfFZOZn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Jun 2019 10:25:43 -0400
+Received: from ms.lwn.net ([45.79.88.28]:40056 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727323AbfFZOcA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 26 Jun 2019 10:32:00 -0400
-X-Greylist: delayed 1205 seconds by postgrey-1.27 at vger.kernel.org; Wed, 26 Jun 2019 10:31:59 EDT
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=kapsi.fi;
-         s=20161220; h=MIME-Version:Content-Type:Date:Cc:To:From:Subject:Message-ID:
-        Sender:Reply-To:Content-Transfer-Encoding:Content-ID:Content-Description:
-        Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
-        In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
-        List-Post:List-Owner:List-Archive;
-        bh=keTA49kcFTmiW+xDiXyC1TWyuwYvwy0XCF0h+Kehxjk=; b=BM4EX49b7qlwytNWNpmgO9+Y8M
-        1GD3OyaUVCs1KegazXc1JsEeeRq8VErYh3GpA+lPa2UNikAlX5HSzmyHgcMqXB9R7QlDAeuMYf6Vf
-        LYRCo3j3hPdiScV9T4RNBdNgKSSThOGV5U+VnFU9RNFKtOcA9Ds+R5VE8WGujYvxfB62ZKXa5tUvO
-        nJAXaN+x65x8Kl6t870yr7I5H2Mdc5HzyIQnhkkSMtE4NIwIqBe4fdoUyUASVgcXzXbAP9TGMVtgw
-        yLV+EZhzkDfcOndj+O+LYQkqfNS1Zh5l/ElaZLeijv3vK5C+c6lZqpHBU0tmlhecKm2/uBoiBQ8Hq
-        icSvWITg==;
-Received: from [2001:999:82:7295:8199:173e:7dbf:6fc5] (helo=jsakkine-mobl1)
-        by mail.kapsi.fi with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.89)
-        (envelope-from <jarkko.sakkinen@iki.fi>)
-        id 1hg8eO-0006dp-Ug; Wed, 26 Jun 2019 17:11:53 +0300
-Message-ID: <c9c1e7f83a55bc5fb621e2e4e1dab90c5b3aac01.camel@iki.fi>
-Subject: On Nitrokey Pro's ECC support
-From:   Jarkko Sakkinen <jarkko.sakkinen@iki.fi>
-To:     corbet@lwn.net
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Date:   Wed, 26 Jun 2019 17:11:46 +0300
-Content-Type: multipart/signed; micalg="pgp-sha256";
-        protocol="application/pgp-signature"; boundary="=-5zfw+oGv//ZvawvgHwv9"
-User-Agent: Evolution 3.32.1-2 
+        id S1727516AbfFZOZn (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 26 Jun 2019 10:25:43 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 1305C2AE;
+        Wed, 26 Jun 2019 14:25:43 +0000 (UTC)
+Date:   Wed, 26 Jun 2019 08:25:41 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Jarkko Sakkinen <jarkko.sakkinen@iki.fi>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        "Konstantin Ryabitsev" <konstantin@linuxfoundation.org>
+Subject: Re: On Nitrokey Pro's ECC support
+Message-ID: <20190626082541.2cd5897c@lwn.net>
+In-Reply-To: <c9c1e7f83a55bc5fb621e2e4e1dab90c5b3aac01.camel@iki.fi>
+References: <c9c1e7f83a55bc5fb621e2e4e1dab90c5b3aac01.camel@iki.fi>
+Organization: LWN.net
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 2001:999:82:7295:8199:173e:7dbf:6fc5
-X-SA-Exim-Mail-From: jarkko.sakkinen@iki.fi
-X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Wed, 26 Jun 2019 17:11:46 +0300
+Jarkko Sakkinen <jarkko.sakkinen@iki.fi> wrote:
 
---=-5zfw+oGv//ZvawvgHwv9
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+> I was getting myself a smartcard stick and looked for options from [1].
+> The documentation says that Nitrokey Pro does not support ECC while it
+> actually does [2]. I was already canceling my order when Jan Suhr, the
+> CEO of that company, kindly pointed out to me this.
+> 
+> [1] https://www.kernel.org/doc/html/latest/process/maintainer-pgp-guide.html
+> [2] https://shop.nitrokey.com/shop/product/nitrokey-pro-2-3
 
-Hi
+Maybe Konstantin (copied) might be willing to supply an update to the
+document to reflect this?
 
-I was getting myself a smartcard stick and looked for options from [1].
-The documentation says that Nitrokey Pro does not support ECC while it
-actually does [2]. I was already canceling my order when Jan Suhr, the
-CEO of that company, kindly pointed out to me this.
+Thanks,
 
-[1] https://www.kernel.org/doc/html/latest/process/maintainer-pgp-guide.htm=
-l
-[2] https://shop.nitrokey.com/shop/product/nitrokey-pro-2-3
-
-/Jarkko
-
---=-5zfw+oGv//ZvawvgHwv9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-Content-Transfer-Encoding: 7bit
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRE6pSOnaBC00OEHEIaerohdGur0gUCXRN9IgAKCRAaerohdGur
-0kmSAQDB06lSbBGO3TqrgxTFhdezWcVxXl9lJ9kdDIu4kR1b8wEA3IQKv9+KGXoN
-HrGHyxmcchSzm03XAKFzO+r17q5+aAw=
-=+ngF
------END PGP SIGNATURE-----
-
---=-5zfw+oGv//ZvawvgHwv9--
-
+jon
