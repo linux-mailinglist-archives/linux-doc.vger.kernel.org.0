@@ -2,132 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2AD2F57572
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Jun 2019 02:23:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AE64F5791C
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Jun 2019 03:50:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726768AbfF0AXZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Jun 2019 20:23:25 -0400
-Received: from mail-pl1-f193.google.com ([209.85.214.193]:35752 "EHLO
-        mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726711AbfF0AXZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jun 2019 20:23:25 -0400
-Received: by mail-pl1-f193.google.com with SMTP id w24so254742plp.2
-        for <linux-doc@vger.kernel.org>; Wed, 26 Jun 2019 17:23:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=c34/FfI7PALcZVh0MK4YlFiWvnY7m44Qb8oCZcTiVbU=;
-        b=a1r7b0eQqi65SnqqxyoyNoD4dz3PJJz11oTPJDYx1ctiFPDiwwrUHcLazOdtvx2h+b
-         BJ557GOrC/erbl4AklySqzJS15SQHRCyi1pl5V+Ls9UzeK+ybM4aUzx/S+y9D7ra9gXL
-         ud7lUYI/Zqb2M3pihkmgYamKJ46DHL/UUeQ91qNrgnYGOngk+Ky+30mJQ2BAC1N4CLmf
-         9YUjsBmnOgUwCj1x8uLgqFqywqoB2YH5RUIgldau68pKxTutIfleZKg6l9x3MWTSKJaB
-         ouNqg9FBjBvdFyIKXW5If/Gp0dxolKfdIn0hpcE+lOOFMC9WXHkJlNZBl9+xdWTdckpr
-         zuaA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=c34/FfI7PALcZVh0MK4YlFiWvnY7m44Qb8oCZcTiVbU=;
-        b=iEXZg0SkN1qieEd6qSzbD+q3QbIxya4ym/Rbfro4qIc1xMVfgAD5ki10iOFUWZHxoy
-         hlgwIwZongDNYKUOPzVJAGy4+35jft7rJugUIGQ8HPtrfZ8pfXCUe8om56zWLMKQ3Vyb
-         thBPp0FgvqPR+AFRVh+XascJW6iTi1Qw+NGg3j86BonQVmOyuWCMJPnDSZiw5fqU+dMw
-         cBnDjr0ILtXS8rqocHiLcsFx1VKpsVgPlyXk8NNykYVpKaF67PZyklTRU6YM2mTeMhZD
-         brx36b7JauyWE+42dPNtZQ5yl3LrpDOreHN0fai1+X2/vlsMBWxQusx9anZuNMJQO17s
-         OiFQ==
-X-Gm-Message-State: APjAAAWCSQjqJ86d1Mfi37Xcucl0gxIulf0aOAyA5pFvOvcMhTrm1WDj
-        KYxPOSGFyWMyFaSG4w/hJgBk0JcFbd+hDgfV4JWDfw==
-X-Google-Smtp-Source: APXvYqz8ozeAzYHPHzqs1rNqRCdggL5+4sDGi+NHmPQJCmuSKDQDwiM3UtGQ8HWyljDXcSyRIYd62W6XpQAlC3xYRPM=
-X-Received: by 2002:a17:902:29e6:: with SMTP id h93mr950785plb.297.1561595003889;
- Wed, 26 Jun 2019 17:23:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20190617082613.109131-1-brendanhiggins@google.com>
- <20190617082613.109131-14-brendanhiggins@google.com> <20190626000150.GT19023@42.do-not-panic.com>
- <CAFd5g44kkepB2hZcpYL-NB5ZHYE5tP7W-0yducGCX7Khd9gd9w@mail.gmail.com> <20190626220350.GA19023@42.do-not-panic.com>
-In-Reply-To: <20190626220350.GA19023@42.do-not-panic.com>
-From:   Brendan Higgins <brendanhiggins@google.com>
-Date:   Wed, 26 Jun 2019 17:23:12 -0700
-Message-ID: <CAFd5g44ZbVCM3rksF44z_diiejS+Xc+qcXm120L+t+FHwuGyrA@mail.gmail.com>
-Subject: Re: [PATCH v5 13/18] kunit: tool: add Python wrappers for running
- KUnit tests
-To:     Luis Chamberlain <mcgrof@kernel.org>
-Cc:     Frank Rowand <frowand.list@gmail.com>,
-        Greg KH <gregkh@linuxfoundation.org>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        Kees Cook <keescook@google.com>,
-        Kieran Bingham <kieran.bingham@ideasonboard.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Rob Herring <robh@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        shuah <shuah@kernel.org>, "Theodore Ts'o" <tytso@mit.edu>,
+        id S1727218AbfF0Btq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Jun 2019 21:49:46 -0400
+Received: from conuserg-08.nifty.com ([210.131.2.75]:27093 "EHLO
+        conuserg-08.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726905AbfF0Btq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Jun 2019 21:49:46 -0400
+Received: from grover.flets-west.jp (softbank126125154139.bbtec.net [126.125.154.139]) (authenticated)
+        by conuserg-08.nifty.com with ESMTP id x5R1kN0v032702;
+        Thu, 27 Jun 2019 10:46:23 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-08.nifty.com x5R1kN0v032702
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1561599984;
+        bh=t/tKte8+f+WnIerV46Kqk5V4Cu5goyQEz8X3TPyTH+k=;
+        h=From:To:Cc:Subject:Date:From;
+        b=x56ew+Nf/mRL+Y9auCSqcIA7wXTn2ja3HVYzHe0zb/E43gJ8Lggs/PguNK3OCZjgp
+         uEyvbCO2H1dT/DpTwUE6DbmQRbC6vOSL5OITz+s0Bb0odvn6gylTlEcXpF8asnjeml
+         88aMR4WR5z+A0KqVY3or1TMOqNYfDZk2Ex4sSzWca/5b84o36B0eGUd3VL7kWJzm2Z
+         ht4QKpX3nwgoUQtDo9jLHs9EQ7Dgcaxi1GdZoFz3rV7s0Tp5VvQMZ+OUmUdUW+ge61
+         tE78teOBqyznZ79jc3oTqjv6+zpNpU51id+uwMW/3dc8GBkGo5Jz2XIAR4PoONDPEu
+         JgLgECL33cJbg==
+X-Nifty-SrcIP: [126.125.154.139]
+From:   Masahiro Yamada <yamada.masahiro@socionext.com>
+To:     linux-kbuild@vger.kernel.org
+Cc:     Sam Ravnborg <sam@ravnborg.org>,
         Masahiro Yamada <yamada.masahiro@socionext.com>,
-        devicetree <devicetree@vger.kernel.org>,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        kunit-dev@googlegroups.com,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-fsdevel@vger.kernel.org,
-        linux-kbuild <linux-kbuild@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        linux-nvdimm <linux-nvdimm@lists.01.org>,
-        linux-um@lists.infradead.org,
-        Sasha Levin <Alexander.Levin@microsoft.com>,
-        "Bird, Timothy" <Tim.Bird@sony.com>,
-        Amir Goldstein <amir73il@gmail.com>,
-        Dan Carpenter <dan.carpenter@oracle.com>,
-        Daniel Vetter <daniel@ffwll.ch>, Jeff Dike <jdike@addtoit.com>,
-        Joel Stanley <joel@jms.id.au>,
-        Julia Lawall <julia.lawall@lip6.fr>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Knut Omang <knut.omang@oracle.com>,
-        Logan Gunthorpe <logang@deltatee.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Petr Mladek <pmladek@suse.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Richard Weinberger <richard@nod.at>,
-        David Rientjes <rientjes@google.com>,
-        Steven Rostedt <rostedt@goodmis.org>, wfg@linux.intel.com,
-        Felix Guo <felixguoxiuping@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+        Tony Luck <tony.luck@intel.com>, linux-doc@vger.kernel.org,
+        John Fastabend <john.fastabend@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jakub Kicinski <jakub.kicinski@netronome.com>,
+        linux-riscv@lists.infradead.org,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        xdp-newbies@vger.kernel.org, Anton Vorontsov <anton@enomsg.org>,
+        Palmer Dabbelt <palmer@sifive.com>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        Michal Marek <michal.lkml@markovi.net>,
+        Jesper Dangaard Brouer <hawk@kernel.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        linux-mediatek@lists.infradead.org,
+        linux-arm-kernel@lists.infradead.org,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Colin Cross <ccross@android.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Kees Cook <keescook@chromium.org>,
+        Alexei Starovoitov <ast@kernel.org>, netdev@vger.kernel.org,
+        linux-kernel@vger.kernel.org, bpf@vger.kernel.org
+Subject: [PATCH v2 0/4] Compile-test UAPI and kernel headers
+Date:   Thu, 27 Jun 2019 10:46:13 +0900
+Message-Id: <20190627014617.600-1-yamada.masahiro@socionext.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jun 26, 2019 at 3:03 PM Luis Chamberlain <mcgrof@kernel.org> wrote:
->
-> On Wed, Jun 26, 2019 at 01:02:55AM -0700, Brendan Higgins wrote:
-> > On Tue, Jun 25, 2019 at 5:01 PM Luis Chamberlain <mcgrof@kernel.org> wrote:
-> > >
-> > > On Mon, Jun 17, 2019 at 01:26:08AM -0700, Brendan Higgins wrote:
-> > > >  create mode 100644 tools/testing/kunit/test_data/test_is_test_passed-all_passed.log
-> > > >  create mode 100644 tools/testing/kunit/test_data/test_is_test_passed-crash.log
-> > > >  create mode 100644 tools/testing/kunit/test_data/test_is_test_passed-failure.log
-> > > >  create mode 100644 tools/testing/kunit/test_data/test_is_test_passed-no_tests_run.log
-> > > >  create mode 100644 tools/testing/kunit/test_data/test_output_isolated_correctly.log
-> > > >  create mode 100644 tools/testing/kunit/test_data/test_read_from_file.kconfig
-> > >
-> > > Why are these being added upstream? The commit log does not explain
-> > > this.
-> >
-> > Oh sorry, those are for testing purposes. I thought that was clear
-> > from being in the test_data directory. I will reference it in the
-> > commit log in the next revision.
->
-> Still, I don't get it. They seem to be results from a prior run. Why do
-> we need them for testing purposes?
 
-Those logs are the raw output from UML with KUnit installed. They are
-for testing kunit_tool, the Python scripts added in this commit. One
-of the things that kunit_tool does is parses the results output by
-UML, extracts the KUnit data, and presents it in a user friendly
-manner.
+1/4: reworked v2.
 
-I added these logs so I could test that kunit_tool parses certain
-kinds of output correctly. For example, I want to know that it parses
-a test failure correctly and includes the appropriate context. So I
-have a log from a unit test that failed, and I have a test (a Python
-test that is also in this commit) that tests whether kunit_tool can
-parse the log correctly.
+2/4: fix a flaw I noticed when I was working on this series
 
-Does that make sense?
+3/4: maybe useful for 4/4 and in some other places
+
+4/4: v2. compile as many headers as possible.
+
+
+Changes in v2:
+ - Add CONFIG_CPU_{BIG,LITTLE}_ENDIAN guard to avoid build error
+ - Use 'header-test-' instead of 'no-header-test'
+ - Avoid weird 'find' warning when cleaning
+  - New patch
+  - New patch
+  - Add everything to test coverage, and exclude broken ones
+  - Rename 'Makefile' to 'Kbuild'
+  - Add CONFIG_KERNEL_HEADER_TEST option
+
+Masahiro Yamada (4):
+  kbuild: compile-test UAPI headers to ensure they are self-contained
+  kbuild: do not create wrappers for header-test-y
+  kbuild: support header-test-pattern-y
+  kbuild: compile-test kernel headers to ensure they are self-contained
+
+ .gitignore                         |    1 -
+ Documentation/dontdiff             |    1 -
+ Documentation/kbuild/makefiles.txt |   13 +-
+ Makefile                           |    4 +-
+ include/Kbuild                     | 1134 ++++++++++++++++++++++++++++
+ init/Kconfig                       |   22 +
+ scripts/Makefile.build             |   10 +-
+ scripts/Makefile.lib               |   12 +-
+ scripts/cc-system-headers.sh       |    8 +
+ usr/.gitignore                     |    1 -
+ usr/Makefile                       |    2 +
+ usr/include/.gitignore             |    3 +
+ usr/include/Makefile               |  133 ++++
+ 13 files changed, 1331 insertions(+), 13 deletions(-)
+ create mode 100644 include/Kbuild
+ create mode 100755 scripts/cc-system-headers.sh
+ create mode 100644 usr/include/.gitignore
+ create mode 100644 usr/include/Makefile
+
+-- 
+2.17.1
+
