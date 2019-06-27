@@ -2,65 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 92E1B58726
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Jun 2019 18:32:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A13C958769
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Jun 2019 18:42:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726465AbfF0Qct (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Jun 2019 12:32:49 -0400
-Received: from mga14.intel.com ([192.55.52.115]:21015 "EHLO mga14.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726315AbfF0Qct (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 27 Jun 2019 12:32:49 -0400
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 27 Jun 2019 09:32:48 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,424,1557212400"; 
-   d="scan'208";a="170472750"
-Received: from unknown (HELO jsakkine-mobl1) ([10.252.36.47])
-  by FMSMGA003.fm.intel.com with ESMTP; 27 Jun 2019 09:32:44 -0700
-Message-ID: <0893dc429d4c3f3b52d423f9e61c08a5012a7519.camel@linux.intel.com>
-Subject: Re: [PATCH v7 1/2] fTPM: firmware TPM running in TEE
-From:   Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
-To:     Ilias Apalodimas <ilias.apalodimas@linaro.org>
-Cc:     Sasha Levin <sashal@kernel.org>, peterhuewe@gmx.de, jgg@ziepe.ca,
-        corbet@lwn.net, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-integrity@vger.kernel.org,
-        linux-kernel@microsoft.com, thiruan@microsoft.com,
-        bryankel@microsoft.com, tee-dev@lists.linaro.org,
-        sumit.garg@linaro.org, rdunlap@infradead.org
-Date:   Thu, 27 Jun 2019 19:32:45 +0300
-In-Reply-To: <20190627133004.GA3757@apalos>
-References: <20190625201341.15865-1-sashal@kernel.org>
-         <20190625201341.15865-2-sashal@kernel.org>
-         <673dd30d03e8ed9825bb46ef21b2efef015f6f2a.camel@linux.intel.com>
-         <20190626235653.GL7898@sasha-vm>
-         <b688e845ccbe011c54b10043fbc3c0de8f0befc2.camel@linux.intel.com>
-         <20190627133004.GA3757@apalos>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.32.1-2 
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+        id S1726668AbfF0QmO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Jun 2019 12:42:14 -0400
+Received: from conuserg-11.nifty.com ([210.131.2.78]:26335 "EHLO
+        conuserg-11.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726470AbfF0QmN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jun 2019 12:42:13 -0400
+Received: from grover.flets-west.jp (softbank126125154139.bbtec.net [126.125.154.139]) (authenticated)
+        by conuserg-11.nifty.com with ESMTP id x5RGdDPu001384;
+        Fri, 28 Jun 2019 01:39:13 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-11.nifty.com x5RGdDPu001384
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1561653555;
+        bh=gmui0wDo25dBFORH/YJIka6km4EHEw6EORwEfx2o9yQ=;
+        h=From:To:Cc:Subject:Date:From;
+        b=LHdsJdpohHEYXa83KNz44gcdbSGWwuH8/i52iXtlPRu1GaI0q1AIx+uhiZPjHD+z5
+         DuAejfYBz1ERCd2/UEO+AX31hXfRB+q54megCy3CibiEP6HvQxVWjnWOs45HCaF/1v
+         svegg5xjoWH1Nyji+k19J2kFhp8cBCa3WLF4tFizjrni8vK+F5L1uhpXRV3iLegiR5
+         10g+kzx64nxuVStvUP5W0JRs+1HhG7fKuerU2btKzoJvU2KSNdGHewmxZAQ7sXFeN6
+         9Ka0JHlHITKQRFO42QeQ+Z1F0cFcDwb6auRWANJTCWTkPeJI9xac1Jcl7bd/3v1Z3B
+         JmLIbr58SXI/Q==
+X-Nifty-SrcIP: [126.125.154.139]
+From:   Masahiro Yamada <yamada.masahiro@socionext.com>
+To:     linux-kbuild@vger.kernel.org
+Cc:     Jani Nikula <jani.nikula@intel.com>,
+        Sam Ravnborg <sam@ravnborg.org>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        Tony Luck <tony.luck@intel.com>, linux-doc@vger.kernel.org,
+        John Fastabend <john.fastabend@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jakub Kicinski <jakub.kicinski@netronome.com>,
+        linux-riscv@lists.infradead.org,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        xdp-newbies@vger.kernel.org, Anton Vorontsov <anton@enomsg.org>,
+        Palmer Dabbelt <palmer@sifive.com>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        Michal Marek <michal.lkml@markovi.net>,
+        Jesper Dangaard Brouer <hawk@kernel.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        linux-mediatek@lists.infradead.org,
+        linux-arm-kernel@lists.infradead.org,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Colin Cross <ccross@android.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Kees Cook <keescook@chromium.org>,
+        Alexei Starovoitov <ast@kernel.org>, netdev@vger.kernel.org,
+        linux-kernel@vger.kernel.org, bpf@vger.kernel.org
+Subject: [PATCH v3 0/4] Compile-test UAPI and kernel headers
+Date:   Fri, 28 Jun 2019 01:38:58 +0900
+Message-Id: <20190627163903.28398-1-yamada.masahiro@socionext.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 2019-06-27 at 16:30 +0300, Ilias Apalodimas wrote:
-> is really useful. I don't have hardware to test this at the moment, but once i
-> get it, i'll give it a spin.
+1/4: Compile-test exported headers (reworked in v2)
 
-Thank you for responding, really appreciate it.
+2/4: fix a flaw I noticed when I was working on this series.
+     Avoid generating intermediate wrappers.
 
-Please note, however, that I already did my v5.3 PR so there is a lot of
-time to give it a spin. In all cases, we will find a way to put this to
-my v5.4 PR. I don't see any reason why not.
+3/4: maybe useful for 4/4 and in some other places.
+     Add header-test-pattern-y syntax.
 
-As soon as the cosmetic stuff is fixed that I remarked in v7 I'm ready
-to take this to my tree and after that soonish make it available on
-linux-next.
+4/4: Compile-test kernel-space headers in include/.
+     v2: compile as many headers as possible.
+     v3: exclude more headers causing build errors
 
-/Jarkko
+
+Masahiro Yamada (4):
+  kbuild: compile-test UAPI headers to ensure they are self-contained
+  kbuild: do not create wrappers for header-test-y
+  kbuild: support header-test-pattern-y
+  kbuild: compile-test kernel headers to ensure they are self-contained
+
+ .gitignore                         |    1 -
+ Documentation/dontdiff             |    1 -
+ Documentation/kbuild/makefiles.txt |   13 +-
+ Makefile                           |    4 +-
+ include/Kbuild                     | 1250 ++++++++++++++++++++++++++++
+ init/Kconfig                       |   22 +
+ scripts/Makefile.build             |   10 +-
+ scripts/Makefile.lib               |   13 +-
+ scripts/cc-system-headers.sh       |    8 +
+ usr/.gitignore                     |    1 -
+ usr/Makefile                       |    2 +
+ usr/include/.gitignore             |    3 +
+ usr/include/Makefile               |  134 +++
+ 13 files changed, 1449 insertions(+), 13 deletions(-)
+ create mode 100644 include/Kbuild
+ create mode 100755 scripts/cc-system-headers.sh
+ create mode 100644 usr/include/.gitignore
+ create mode 100644 usr/include/Makefile
+
+-- 
+2.17.1
 
