@@ -2,45 +2,45 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E706E58F68
+	by mail.lfdr.de (Postfix) with ESMTP id 78D5058F67
 	for <lists+linux-doc@lfdr.de>; Fri, 28 Jun 2019 02:51:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726770AbfF1AuS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Jun 2019 20:50:18 -0400
-Received: from mail-pl1-f196.google.com ([209.85.214.196]:41215 "EHLO
-        mail-pl1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726647AbfF1AuR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jun 2019 20:50:17 -0400
-Received: by mail-pl1-f196.google.com with SMTP id m7so2197622pls.8
-        for <linux-doc@vger.kernel.org>; Thu, 27 Jun 2019 17:50:16 -0700 (PDT)
+        id S1726805AbfF1Av3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Jun 2019 20:51:29 -0400
+Received: from mail-pg1-f194.google.com ([209.85.215.194]:41553 "EHLO
+        mail-pg1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726788AbfF1AuT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jun 2019 20:50:19 -0400
+Received: by mail-pg1-f194.google.com with SMTP id q4so300343pgj.8
+        for <linux-doc@vger.kernel.org>; Thu, 27 Jun 2019 17:50:18 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=m+CwaiEJYAeRor4kEz6OTKmpKkJwK4ZSop7mjZ0336M=;
-        b=m7qPdfplzl6xowEsLfLZ3DZ2ID9dC7ZOe2+1x70VEFvGd0L3jOgP87b96Trvj18FhQ
-         SqVvv4nbeSJByhlGx46BUb1i8g4xZndETzsJnHcE3irXHyVumc36teJl4jP6R7QnaXcT
-         TFSIMXetlO/0A9Ht4Hzs5HcifW5ZP7ZboZXBvG8GNcyBUChHkIz0BpAqXNkvqsVOWrvv
-         ddhtKyfygUVf4rGOxvaOrM29QK27Zzo25eY28BWXPJCRI+SHgpPostougICZgi7Umpa5
-         dxowqDjvqYRDBLeSXzZ1zChaRL/YK0ypX7lEwiuvZ85ix5aMK+dFSYcR2ErduK/mWzup
-         TcVA==
-X-Gm-Message-State: APjAAAVg8pYh0m1s4+Z56uSSyq67jtpBrIOtYNUO40YctRuXR9g3FtXY
-        4D4lTZj/SJA7BkyzEN0vhab4MA==
-X-Google-Smtp-Source: APXvYqxzsP8xXGKl/Qhpt656m8uctj1yVi0IGiMIRv0+QZIxubDjbGfRWK4tm5YMCPI/V1y2ZpPiEg==
-X-Received: by 2002:a17:902:7443:: with SMTP id e3mr8041660plt.176.1561683016190;
-        Thu, 27 Jun 2019 17:50:16 -0700 (PDT)
+        bh=w5YuFi6wQz815HLumeYih2vZ7yJGUUzK81KZ4UHpdkE=;
+        b=WSzuudQTIpaZ3EJVwH+TJiFBcqoYCZD7UldbdcfYolGHGByR0NC4mOkoW/OgjZ4BGv
+         ePrsDWvBqTzHOKc/aHvWBOVFlaGu1Ia0XBcndzWeda1F3D02ituG6Nh0zw33YyQiiB9R
+         qoLUXwDma7nnaWRgx5n7+bylNHLiIRDnGz+snADKfcu2wR4UjBULLuh84SQWdHQ8J4VW
+         QZhlezXfgSLPvmDfSiQlLMOIHGzpjTlOzq+B5UAgsFsHKJwSeeV99ww5glNV43N77YKZ
+         p5lcKHoseT0bSlx/IdTgOnAiA0fxMgAyvpu4G+kXrAUWrWsJ2J3xfxu4q0AOa4LMm4Pb
+         im7A==
+X-Gm-Message-State: APjAAAWRUspgvntavRimqGL7IZD9jnJR5Dyg7SgftI3jidX4B+bTMy+F
+        9TGopr7/jzumjyUadXp925haVw==
+X-Google-Smtp-Source: APXvYqxsYnA1syozsfK0rSE+AAruFi3hspGXjnsXOpnbU/0EQNXN73FE9GR0RH5JOn0z34Ftgtlvsg==
+X-Received: by 2002:a17:90a:dd42:: with SMTP id u2mr9628988pjv.118.1561683018485;
+        Thu, 27 Jun 2019 17:50:18 -0700 (PDT)
 Received: from localhost (c-76-21-109-208.hsd1.ca.comcast.net. [76.21.109.208])
-        by smtp.gmail.com with ESMTPSA id i3sm270313pfo.138.2019.06.27.17.50.14
+        by smtp.gmail.com with ESMTPSA id v27sm280406pgn.76.2019.06.27.17.50.16
         (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Thu, 27 Jun 2019 17:50:15 -0700 (PDT)
+        Thu, 27 Jun 2019 17:50:17 -0700 (PDT)
 From:   Moritz Fischer <mdf@kernel.org>
 To:     linux-fpga@vger.kernel.org, gregkh@linuxfoundation.org
 Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Wu Hao <hao.wu@intel.com>, Alan Tull <atull@kernel.org>,
-        Moritz Fischer <mdf@kernel.org>
-Subject: [PATCH 01/15] fpga: dfl-fme-mgr: fix FME_PR_INTFC_ID register address.
-Date:   Thu, 27 Jun 2019 17:49:37 -0700
-Message-Id: <20190628004951.6202-2-mdf@kernel.org>
+        Wu Hao <hao.wu@intel.com>, Xu Yilun <yilun.xu@intel.com>,
+        Moritz Fischer <mdf@kernel.org>, Alan Tull <atull@kernel.org>
+Subject: [PATCH 02/15] fpga: dfl: fme: remove copy_to_user() in ioctl for PR
+Date:   Thu, 27 Jun 2019 17:49:38 -0700
+Message-Id: <20190628004951.6202-3-mdf@kernel.org>
 X-Mailer: git-send-email 2.22.0
 In-Reply-To: <20190628004951.6202-1-mdf@kernel.org>
 References: <20190628004951.6202-1-mdf@kernel.org>
@@ -53,33 +53,33 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Wu Hao <hao.wu@intel.com>
 
-FME_PR_INTFC_ID is used as compat_id for fpga manager and region,
-but high 64 bits and low 64 bits of the compat_id are swapped by
-mistake. This patch fixes this problem by fixing register address.
+This patch removes copy_to_user() code in partial reconfiguration
+ioctl, as it's useless as user never needs to read the data
+structure after ioctl.
 
+Signed-off-by: Xu Yilun <yilun.xu@intel.com>
 Signed-off-by: Wu Hao <hao.wu@intel.com>
-Acked-by: Alan Tull <atull@kernel.org>
 Acked-by: Moritz Fischer <mdf@kernel.org>
+Acked-by: Alan Tull <atull@kernel.org>
 Signed-off-by: Moritz Fischer <mdf@kernel.org>
 ---
- drivers/fpga/dfl-fme-mgr.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/fpga/dfl-fme-pr.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/drivers/fpga/dfl-fme-mgr.c b/drivers/fpga/dfl-fme-mgr.c
-index 76f37709dd1a..b3f7eee3c93f 100644
---- a/drivers/fpga/dfl-fme-mgr.c
-+++ b/drivers/fpga/dfl-fme-mgr.c
-@@ -30,8 +30,8 @@
- #define FME_PR_STS		0x10
- #define FME_PR_DATA		0x18
- #define FME_PR_ERR		0x20
--#define FME_PR_INTFC_ID_H	0xA8
--#define FME_PR_INTFC_ID_L	0xB0
-+#define FME_PR_INTFC_ID_L	0xA8
-+#define FME_PR_INTFC_ID_H	0xB0
+diff --git a/drivers/fpga/dfl-fme-pr.c b/drivers/fpga/dfl-fme-pr.c
+index d9ca9554844a..6ec0f09e5994 100644
+--- a/drivers/fpga/dfl-fme-pr.c
++++ b/drivers/fpga/dfl-fme-pr.c
+@@ -159,9 +159,6 @@ static int fme_pr(struct platform_device *pdev, unsigned long arg)
+ 	mutex_unlock(&pdata->lock);
+ free_exit:
+ 	vfree(buf);
+-	if (copy_to_user((void __user *)arg, &port_pr, minsz))
+-		return -EFAULT;
+-
+ 	return ret;
+ }
  
- /* FME PR Control Register Bitfield */
- #define FME_PR_CTRL_PR_RST	BIT_ULL(0)  /* Reset PR engine */
 -- 
 2.22.0
 
