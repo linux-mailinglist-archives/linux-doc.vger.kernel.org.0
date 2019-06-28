@@ -2,101 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CFA6F5A4CC
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Jun 2019 21:09:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EE87D5A570
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Jun 2019 21:50:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726702AbfF1TJG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Jun 2019 15:09:06 -0400
-Received: from mail-io1-f68.google.com ([209.85.166.68]:35248 "EHLO
-        mail-io1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726565AbfF1TJG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Jun 2019 15:09:06 -0400
-Received: by mail-io1-f68.google.com with SMTP id m24so14814321ioo.2
-        for <linux-doc@vger.kernel.org>; Fri, 28 Jun 2019 12:09:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=sifive.com; s=google;
-        h=date:from:to:cc:subject:in-reply-to:message-id:references
-         :user-agent:mime-version;
-        bh=denpEz7Y25tPYld+8szHUZUn70KyumHMuU5ZgYCdiKI=;
-        b=HWMrmaJnz5V8Ac64W9ltGnhij2/onexK3xCea2eFyAXK6JVJnwj62PwageLoaznljr
-         lVtZWieElekXXI6Q4uto5rBOs5y5+Y+oEhsPTyrfK/jawOxPcID1zg2pkEYUErrhcwJB
-         aszK3rXIb3zpoK6myJKG5S0dwok2xahK5qCTGgIkyiJIZXoRbIwMC/T+A04ynBDaa7BH
-         hrEXqsOvUf285Gj4q/Vnqx2FcdDFpiK+Iaa3nU5B1d3yP/hh7wB2rHg3xnWWrSZTkWn+
-         Q8Ff3Ayu/GN5pDCx+2ZM3PNc7q0wBMyQInqc2hToFVqvI2Nn3mimmdf2GreNGgeTmOwr
-         KdwQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:in-reply-to:message-id
-         :references:user-agent:mime-version;
-        bh=denpEz7Y25tPYld+8szHUZUn70KyumHMuU5ZgYCdiKI=;
-        b=aigW+xwbbfcFa399mfBiVA+OSZqQ6P8W4BIV5CN0cUo2sv7V6y66o56r9f4j1nWZpS
-         7K0QRPTCnfD5Oh5Yg8DsDSlp/F1jOnc55EBCFRFOHUckdyV5Gg6mRsgvDW6g6kZPmqA0
-         iGcVeFbCB9jUnQSGyQobh3MFIgwV04aHpiftoNHMxCTqpQq+Lktr0yTajdms34sHAbMZ
-         Ssu/WqnjnzQbyO1Nv5C1Sk4AliAfrP7c3K0GneJKJeR6uGjqGtjPf7MGtJgRrRhdXCOx
-         OaDryF4tx7CKUqXGMU1VdD2ctoAQbZzozPCiD5wSg/4Qr7TVbudqwqSepmGFgwv1S+rD
-         86Kw==
-X-Gm-Message-State: APjAAAWgwWh6itCWP/LB5hKskx0w4Z2C9j53sHYmO0iZS/lDBxgqUnPY
-        vSHt8Yp606rY6eU+1mfEEQxhUQ==
-X-Google-Smtp-Source: APXvYqyCiWd28x6ejKIVj1HQUvQbmY2IcCFzFG/uYivQu5hxZZBjfMnIAX99mg22opfTcrJJ/QIWog==
-X-Received: by 2002:a05:6638:281:: with SMTP id c1mr13074518jaq.43.1561748945460;
-        Fri, 28 Jun 2019 12:09:05 -0700 (PDT)
-Received: from localhost (c-73-95-159-87.hsd1.co.comcast.net. [73.95.159.87])
-        by smtp.gmail.com with ESMTPSA id x13sm2623367ioj.18.2019.06.28.12.09.04
-        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Fri, 28 Jun 2019 12:09:05 -0700 (PDT)
-Date:   Fri, 28 Jun 2019 12:09:04 -0700 (PDT)
-From:   Paul Walmsley <paul.walmsley@sifive.com>
-X-X-Sender: paulw@viisi.sifive.com
-To:     Atish Patra <atish.patra@wdc.com>
-cc:     linux-kernel@vger.kernel.org, Karsten Merker <merker@debian.org>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Anup Patel <Anup.Patel@wdc.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-riscv@lists.infradead.org,
-        Nick Kossifidis <mick@ics.forth.gr>,
-        Palmer Dabbelt <palmer@sifive.com>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        "mark.rutland@arm.com" <mark.rutland@arm.com>,
-        "marek.vasut@gmail.com" <marek.vasut@gmail.com>,
-        "catalin.marinas@arm.com" <catalin.marinas@arm.com>,
-        "will.deacon@arm.com" <will.deacon@arm.com>,
-        "trini@konsulko.com" <trini@konsulko.com>
-Subject: Re: [PATCH v4] RISC-V: Add an Image header that boot loader can
- parse.
-In-Reply-To: <20190606230800.19932-1-atish.patra@wdc.com>
-Message-ID: <alpine.DEB.2.21.9999.1906281207290.3867@viisi.sifive.com>
-References: <20190606230800.19932-1-atish.patra@wdc.com>
-User-Agent: Alpine 2.21.9999 (DEB 301 2018-08-15)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+        id S1727084AbfF1Tu2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Jun 2019 15:50:28 -0400
+Received: from mga05.intel.com ([192.55.52.43]:42462 "EHLO mga05.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726819AbfF1Tu1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 28 Jun 2019 15:50:27 -0400
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 28 Jun 2019 12:50:27 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,428,1557212400"; 
+   d="scan'208";a="164756004"
+Received: from yyu32-desk1.sc.intel.com ([10.144.153.205])
+  by fmsmga007.fm.intel.com with ESMTP; 28 Jun 2019 12:50:26 -0700
+From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
+To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>
+Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
+Subject: [RFC PATCH 1/3] mm: Introduce VM_IBT for CET legacy code bitmap
+Date:   Fri, 28 Jun 2019 12:41:56 -0700
+Message-Id: <20190628194158.2431-1-yu-cheng.yu@intel.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 6 Jun 2019, Atish Patra wrote:
+The previous discussion of the IBT legacy code bitmap is here:
 
-> Currently, the last stage boot loaders such as U-Boot can accept only
-> uImage which is an unnecessary additional step in automating boot
-> process.
-> 
-> Add an image header that boot loader understands and boot Linux from
-> flat Image directly.
+    https://lkml.org/lkml/2019/6/6/1032
 
-...
+When CET Indirect Branch Tracking (IBT) is enabled, the processor expects
+every branch target is an ENDBR instruction, or the target's address is
+marked as legacy in the legacy code bitmap.  The bitmap covers the whole
+user-mode address space (TASK_SIZE_MAX for 64-bit, TASK_SIZE for IA32),
+and each bit represents one page of linear address range.
 
+This patch introduces VM_IBT for the bitmap.
 
-> +#if __riscv_xlen == 64
-> +	/* Image load offset(2MB) from start of RAM */
-> +	.dword 0x200000
-> +#else
-> +	/* Image load offset(4MB) from start of RAM */
-> +	.dword 0x400000
-> +#endif
+Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
+---
+ fs/proc/task_mmu.c | 3 +++
+ include/linux/mm.h | 8 ++++++++
+ 2 files changed, 11 insertions(+)
 
-Is there a rationale behind these load offset values?
+diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
+index 66725e262a77..d707390285d3 100644
+--- a/fs/proc/task_mmu.c
++++ b/fs/proc/task_mmu.c
+@@ -663,6 +663,9 @@ static void show_smap_vma_flags(struct seq_file *m, struct vm_area_struct *vma)
+ #endif /* CONFIG_ARCH_HAS_PKEYS */
+ #ifdef CONFIG_X86_INTEL_SHADOW_STACK_USER
+ 		[ilog2(VM_SHSTK)]	= "ss",
++#endif
++#ifdef CONFIG_X86_INTEL_BRANCH_TRACKING_USER
++		[ilog2(VM_IBT)]		= "bt",
+ #endif
+ 	};
+ 	size_t i;
+diff --git a/include/linux/mm.h b/include/linux/mm.h
+index 921bae5fa7ab..a8da5bdfd7c9 100644
+--- a/include/linux/mm.h
++++ b/include/linux/mm.h
+@@ -299,12 +299,14 @@ extern unsigned int kobjsize(const void *objp);
+ #define VM_HIGH_ARCH_BIT_3	35	/* bit only usable on 64-bit architectures */
+ #define VM_HIGH_ARCH_BIT_4	36	/* bit only usable on 64-bit architectures */
+ #define VM_HIGH_ARCH_BIT_5	37	/* bit only usable on 64-bit architectures */
++#define VM_HIGH_ARCH_BIT_6	38	/* bit only usable on 64-bit architectures */
+ #define VM_HIGH_ARCH_0	BIT(VM_HIGH_ARCH_BIT_0)
+ #define VM_HIGH_ARCH_1	BIT(VM_HIGH_ARCH_BIT_1)
+ #define VM_HIGH_ARCH_2	BIT(VM_HIGH_ARCH_BIT_2)
+ #define VM_HIGH_ARCH_3	BIT(VM_HIGH_ARCH_BIT_3)
+ #define VM_HIGH_ARCH_4	BIT(VM_HIGH_ARCH_BIT_4)
+ #define VM_HIGH_ARCH_5	BIT(VM_HIGH_ARCH_BIT_5)
++#define VM_HIGH_ARCH_6	BIT(VM_HIGH_ARCH_BIT_6)
+ #endif /* CONFIG_ARCH_USES_HIGH_VMA_FLAGS */
+ 
+ #ifdef CONFIG_ARCH_HAS_PKEYS
+@@ -348,6 +350,12 @@ extern unsigned int kobjsize(const void *objp);
+ # define VM_SHSTK	VM_NONE
+ #endif
+ 
++#ifdef CONFIG_X86_INTEL_BRANCH_TRACKING_USER
++# define VM_IBT		VM_HIGH_ARCH_6
++#else
++# define VM_IBT		VM_NONE
++#endif
++
+ #ifndef VM_GROWSUP
+ # define VM_GROWSUP	VM_NONE
+ #endif
+-- 
+2.17.1
 
-
-- Paul
