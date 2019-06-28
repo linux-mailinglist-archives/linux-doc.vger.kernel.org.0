@@ -2,613 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 69C8458F55
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Jun 2019 02:51:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8600B59037
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Jun 2019 04:06:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726966AbfF1Aut (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Jun 2019 20:50:49 -0400
-Received: from mail-pf1-f195.google.com ([209.85.210.195]:38317 "EHLO
-        mail-pf1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726992AbfF1Aut (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jun 2019 20:50:49 -0400
-Received: by mail-pf1-f195.google.com with SMTP id y15so2064809pfn.5
-        for <linux-doc@vger.kernel.org>; Thu, 27 Jun 2019 17:50:48 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=WqdklbQ6zMUFnwZcyQZUcBmlqOVs1+Df1yhgx8AnMUU=;
-        b=LqMYgRmnN+EVfoJ1XBmBx11JIDLmmsHQup3NC9LwQ8SbiYFkZBBroxqCe96f7Qgeov
-         WT58FhQ3Ivdq7nqEgwqXS7WSzXkGh96GWAVG3HnPVZPly76emuG5/hNjdN9vl+/Rd4KV
-         METGlWxdgwB/tDE/X1LuuFgEndq03WvabZjezWhuYPOTG/gZs5Es7L+NTUi6Am5ikW6o
-         WPVPLdGvpDZeSjdbIgrAwDpRNlTKyHH3QZjqna1PSOnOeD5uLru3PDfTk839mzGnFYRS
-         nx3lzQLrRR25mh84okIbLWbYSSmI4RZhhSY9d+amtYi3TdBhr7U4Hn3SRwhNK8xhNDxv
-         2zrg==
-X-Gm-Message-State: APjAAAXzAOwWO7s6N7r2svmkly8edWpms+XeR1RTfjgpFsqJAhhLY2P+
-        DM//mRbK1IGLQQQC9DD0rN44xg==
-X-Google-Smtp-Source: APXvYqyVV5nxSCLvMbYAQl4SUJtSqWVsfpz3Nk73tL7pCIT3Mx4lezw8fl8a3ZZNqTFhwTv4Rz9IBQ==
-X-Received: by 2002:a65:448a:: with SMTP id l10mr6475489pgq.53.1561683048045;
-        Thu, 27 Jun 2019 17:50:48 -0700 (PDT)
-Received: from localhost (c-76-21-109-208.hsd1.ca.comcast.net. [76.21.109.208])
-        by smtp.gmail.com with ESMTPSA id k6sm285990pfi.12.2019.06.27.17.50.46
-        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Thu, 27 Jun 2019 17:50:47 -0700 (PDT)
-From:   Moritz Fischer <mdf@kernel.org>
-To:     linux-fpga@vger.kernel.org, gregkh@linuxfoundation.org
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Wu Hao <hao.wu@intel.com>, Luwei Kang <luwei.kang@intel.com>,
-        Ananda Ravuri <ananda.ravuri@intel.com>,
-        Xu Yilun <yilun.xu@intel.com>, Alan Tull <atull@kernel.org>,
-        Moritz Fischer <mdf@kernel.org>
-Subject: [PATCH 15/15] fpga: dfl: fme: add global error reporting support
-Date:   Thu, 27 Jun 2019 17:49:51 -0700
-Message-Id: <20190628004951.6202-16-mdf@kernel.org>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190628004951.6202-1-mdf@kernel.org>
-References: <20190628004951.6202-1-mdf@kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1726315AbfF1CGP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Jun 2019 22:06:15 -0400
+Received: from conuserg-07.nifty.com ([210.131.2.74]:58777 "EHLO
+        conuserg-07.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725770AbfF1CGP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jun 2019 22:06:15 -0400
+Received: from localhost.localdomain (p14092-ipngnfx01kyoto.kyoto.ocn.ne.jp [153.142.97.92]) (authenticated)
+        by conuserg-07.nifty.com with ESMTP id x5S24bLt004905;
+        Fri, 28 Jun 2019 11:04:37 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-07.nifty.com x5S24bLt004905
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1561687479;
+        bh=yjzub9I4CsKXLSVnhexVECUsjlcS8Xskdwg+YsVHiTs=;
+        h=From:To:Cc:Subject:Date:From;
+        b=f9i63ToXZF6WKlaT5nMAm7ALq+7kZeHOKPTmzXC1eWQPWP/qlEO1mYUJvoS5Z2H+F
+         YnPDFA4qjbN5T2kxl+BubSe5kaE9WiEL3xUbfQUdIeDHPL3a01IJm5gTpr9oj9vpnZ
+         81vKm+2TuMUy4OW1A9prEPWQXKqnh6ay8PxZE+/TrvhDZg2NUJJtf2aOw9UhYfTm1P
+         +zy+r3hGML1VjgbI2hShAuONiN39xZdHQBFzpQgcmDCdlet67xZ2aVNqkru8iXZgPn
+         bImL8vmbrj2lUUvlQDarblWlPXAW//lyDmfUvXCo6zRTQAOBGv/PP0Kc3LNYQsfLs2
+         RSIeAuWVo6W9A==
+X-Nifty-SrcIP: [153.142.97.92]
+From:   Masahiro Yamada <yamada.masahiro@socionext.com>
+To:     linux-kbuild@vger.kernel.org
+Cc:     Nathan Chancellor <natechancellor@gmail.com>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Sam Ravnborg <sam@ravnborg.org>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>,
+        Michal Marek <michal.lkml@markovi.net>
+Subject: [PATCH] kbuild: get rid of misleading $(AS) from documents
+Date:   Fri, 28 Jun 2019 11:04:33 +0900
+Message-Id: <20190628020433.19156-1-yamada.masahiro@socionext.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Wu Hao <hao.wu@intel.com>
+The assembler files in the kernel are *.S instead of *.s, so they must
+be preprocessed. Hence, we always use $(CC) as an assembler driver.
 
-This patch adds support for global error reporting for FPGA
-Management Engine (FME), it introduces sysfs interfaces to
-report different error detected by the hardware, and allow
-user to clear errors or inject error for testing purpose.
+$(AS) is almost unused in Kbuild. As of writing, there is just one user.
 
-Signed-off-by: Luwei Kang <luwei.kang@intel.com>
-Signed-off-by: Ananda Ravuri <ananda.ravuri@intel.com>
-Signed-off-by: Xu Yilun <yilun.xu@intel.com>
-Signed-off-by: Wu Hao <hao.wu@intel.com>
-Acked-by: Alan Tull <atull@kernel.org>
-Signed-off-by: Moritz Fischer <mdf@kernel.org>
+  $ git grep '$(AS)' -- :^Documentation
+  drivers/net/wan/Makefile:  AS68K = $(AS)
+
+The documentation about *_AFLAGS* sounds like the flags were passed
+to $(AS). This is somewhat misleading since we do not invoke $(AS)
+directly.
+
+Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
 ---
- .../ABI/testing/sysfs-platform-dfl-fme        |  75 ++++
- drivers/fpga/Makefile                         |   2 +-
- drivers/fpga/dfl-fme-error.c                  | 385 ++++++++++++++++++
- drivers/fpga/dfl-fme-main.c                   |   4 +
- drivers/fpga/dfl-fme.h                        |   2 +
- drivers/fpga/dfl.h                            |   2 +
- 6 files changed, 469 insertions(+), 1 deletion(-)
- create mode 100644 drivers/fpga/dfl-fme-error.c
 
-diff --git a/Documentation/ABI/testing/sysfs-platform-dfl-fme b/Documentation/ABI/testing/sysfs-platform-dfl-fme
-index 99cd3b2acff5..86eef83938b2 100644
---- a/Documentation/ABI/testing/sysfs-platform-dfl-fme
-+++ b/Documentation/ABI/testing/sysfs-platform-dfl-fme
-@@ -44,3 +44,78 @@ Description:	Read-only. It returns socket_id to indicate which socket
- 		this FPGA belongs to, only valid for integrated solution.
- 		User only needs this information, in case standard numa node
- 		can't provide correct information.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/revision
-+Date:		June 2019
-+KernelVersion:	5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-only. Read this file to get the revision of this global
-+		error reporting private feature.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/pcie0_errors
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-Write. Read this file for errors detected on pcie0 link.
-+		Write this file to clear errors logged in pcie0_errors. Write
-+		fails with -EINVAL if input parsing fails or input error code
-+		doesn't match.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/pcie1_errors
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-Write. Read this file for errors detected on pcie1 link.
-+		Write this file to clear errors logged in pcie1_errors. Write
-+		fails with -EINVAL if input parsing fails or input error code
-+		doesn't match.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/nonfatal_errors
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-only. It returns non-fatal errors detected.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/catfatal_errors
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-only. It returns catastrophic and fatal errors detected.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/inject_error
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-Write. Read this file to check errors injected. Write this
-+		file to inject errors for testing purpose. Write fails with
-+		-EINVAL if input parsing fails or input inject error code isn't
-+		supported.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/fme-errors/errors
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-only. Read this file to get errors detected by hardware.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/fme-errors/first_error
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-only. Read this file to get the first error detected by
-+		hardware.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/fme-errors/next_error
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Read-only. Read this file to get the second error detected by
-+		hardware.
-+
-+What:		/sys/bus/platform/devices/dfl-fme.0/errors/fme-errors/clear
-+Date:		June 2019
-+KernelVersion:  5.3
-+Contact:	Wu Hao <hao.wu@intel.com>
-+Description:	Write-only. Write error code to this file to clear all errors
-+		logged in errors, first_error and next_error. Write fails with
-+		-EINVAL if input parsing fails or input error code doesn't
-+		match.
-diff --git a/drivers/fpga/Makefile b/drivers/fpga/Makefile
-index 72558914a29c..4865b74b00a4 100644
---- a/drivers/fpga/Makefile
-+++ b/drivers/fpga/Makefile
-@@ -39,7 +39,7 @@ obj-$(CONFIG_FPGA_DFL_FME_BRIDGE)	+= dfl-fme-br.o
- obj-$(CONFIG_FPGA_DFL_FME_REGION)	+= dfl-fme-region.o
- obj-$(CONFIG_FPGA_DFL_AFU)		+= dfl-afu.o
+ Documentation/kbuild/kbuild.txt    |  5 ++---
+ Documentation/kbuild/makefiles.txt | 12 ++++++------
+ 2 files changed, 8 insertions(+), 9 deletions(-)
+
+diff --git a/Documentation/kbuild/kbuild.txt b/Documentation/kbuild/kbuild.txt
+index 9c230ea71963..7a7e2aa2fab5 100644
+--- a/Documentation/kbuild/kbuild.txt
++++ b/Documentation/kbuild/kbuild.txt
+@@ -31,12 +31,11 @@ Additional options to the assembler (for built-in and modules).
  
--dfl-fme-objs := dfl-fme-main.o dfl-fme-pr.o
-+dfl-fme-objs := dfl-fme-main.o dfl-fme-pr.o dfl-fme-error.o
- dfl-afu-objs := dfl-afu-main.o dfl-afu-region.o dfl-afu-dma-region.o
- dfl-afu-objs += dfl-afu-error.o
+ AFLAGS_MODULE
+ --------------------------------------------------
+-Additional module specific options to use for $(AS).
++Additional module specific options to use for assembler.
  
-diff --git a/drivers/fpga/dfl-fme-error.c b/drivers/fpga/dfl-fme-error.c
-new file mode 100644
-index 000000000000..cdea10825f71
---- /dev/null
-+++ b/drivers/fpga/dfl-fme-error.c
-@@ -0,0 +1,385 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/*
-+ * Driver for FPGA Management Engine Error Management
-+ *
-+ * Copyright 2019 Intel Corporation, Inc.
-+ *
-+ * Authors:
-+ *   Kang Luwei <luwei.kang@intel.com>
-+ *   Xiao Guangrong <guangrong.xiao@linux.intel.com>
-+ *   Wu Hao <hao.wu@intel.com>
-+ *   Joseph Grecco <joe.grecco@intel.com>
-+ *   Enno Luebbers <enno.luebbers@intel.com>
-+ *   Tim Whisonant <tim.whisonant@intel.com>
-+ *   Ananda Ravuri <ananda.ravuri@intel.com>
-+ *   Mitchel, Henry <henry.mitchel@intel.com>
-+ */
-+
-+#include <linux/uaccess.h>
-+
-+#include "dfl.h"
-+#include "dfl-fme.h"
-+
-+#define FME_ERROR_MASK		0x8
-+#define FME_ERROR		0x10
-+#define MBP_ERROR		BIT_ULL(6)
-+#define PCIE0_ERROR_MASK	0x18
-+#define PCIE0_ERROR		0x20
-+#define PCIE1_ERROR_MASK	0x28
-+#define PCIE1_ERROR		0x30
-+#define FME_FIRST_ERROR		0x38
-+#define FME_NEXT_ERROR		0x40
-+#define RAS_NONFAT_ERROR_MASK	0x48
-+#define RAS_NONFAT_ERROR	0x50
-+#define RAS_CATFAT_ERROR_MASK	0x58
-+#define RAS_CATFAT_ERROR	0x60
-+#define RAS_ERROR_INJECT	0x68
-+#define INJECT_ERROR_MASK	GENMASK_ULL(2, 0)
-+
-+static ssize_t revision_show(struct device *dev, struct device_attribute *attr,
-+			     char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	return sprintf(buf, "%u\n", dfl_feature_revision(base));
-+}
-+static DEVICE_ATTR_RO(revision);
-+
-+static ssize_t pcie0_errors_show(struct device *dev,
-+				 struct device_attribute *attr, char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	return sprintf(buf, "0x%llx\n",
-+		       (unsigned long long)readq(base + PCIE0_ERROR));
-+}
-+
-+static ssize_t pcie0_errors_store(struct device *dev,
-+				  struct device_attribute *attr,
-+				  const char *buf, size_t count)
-+{
-+	struct dfl_feature_platform_data *pdata = dev_get_platdata(dev->parent);
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+	int ret = 0;
-+	u64 v, val;
-+
-+	if (kstrtou64(buf, 0, &val))
-+		return -EINVAL;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	mutex_lock(&pdata->lock);
-+	writeq(GENMASK_ULL(63, 0), base + PCIE0_ERROR_MASK);
-+
-+	v = readq(base + PCIE0_ERROR);
-+	if (val == v)
-+		writeq(v, base + PCIE0_ERROR);
-+	else
-+		ret = -EINVAL;
-+
-+	writeq(0ULL, base + PCIE0_ERROR_MASK);
-+	mutex_unlock(&pdata->lock);
-+	return ret ? ret : count;
-+}
-+static DEVICE_ATTR_RW(pcie0_errors);
-+
-+static ssize_t pcie1_errors_show(struct device *dev,
-+				 struct device_attribute *attr, char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	return sprintf(buf, "0x%llx\n",
-+		       (unsigned long long)readq(base + PCIE1_ERROR));
-+}
-+
-+static ssize_t pcie1_errors_store(struct device *dev,
-+				  struct device_attribute *attr,
-+				  const char *buf, size_t count)
-+{
-+	struct dfl_feature_platform_data *pdata = dev_get_platdata(dev->parent);
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+	int ret = 0;
-+	u64 v, val;
-+
-+	if (kstrtou64(buf, 0, &val))
-+		return -EINVAL;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	mutex_lock(&pdata->lock);
-+	writeq(GENMASK_ULL(63, 0), base + PCIE1_ERROR_MASK);
-+
-+	v = readq(base + PCIE1_ERROR);
-+	if (val == v)
-+		writeq(v, base + PCIE1_ERROR);
-+	else
-+		ret = -EINVAL;
-+
-+	writeq(0ULL, base + PCIE1_ERROR_MASK);
-+	mutex_unlock(&pdata->lock);
-+	return ret ? ret : count;
-+}
-+static DEVICE_ATTR_RW(pcie1_errors);
-+
-+static ssize_t nonfatal_errors_show(struct device *dev,
-+				    struct device_attribute *attr, char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	return sprintf(buf, "0x%llx\n",
-+		       (unsigned long long)readq(base + RAS_NONFAT_ERROR));
-+}
-+static DEVICE_ATTR_RO(nonfatal_errors);
-+
-+static ssize_t catfatal_errors_show(struct device *dev,
-+				    struct device_attribute *attr, char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	return sprintf(buf, "0x%llx\n",
-+		       (unsigned long long)readq(base + RAS_CATFAT_ERROR));
-+}
-+static DEVICE_ATTR_RO(catfatal_errors);
-+
-+static ssize_t inject_error_show(struct device *dev,
-+				 struct device_attribute *attr, char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+	u64 v;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	v = readq(base + RAS_ERROR_INJECT);
-+
-+	return sprintf(buf, "0x%llx\n",
-+		       (unsigned long long)FIELD_GET(INJECT_ERROR_MASK, v));
-+}
-+
-+static ssize_t inject_error_store(struct device *dev,
-+				  struct device_attribute *attr,
-+				  const char *buf, size_t count)
-+{
-+	struct dfl_feature_platform_data *pdata = dev_get_platdata(dev->parent);
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+	u8 inject_error;
-+	u64 v;
-+
-+	if (kstrtou8(buf, 0, &inject_error))
-+		return -EINVAL;
-+
-+	if (inject_error & ~INJECT_ERROR_MASK)
-+		return -EINVAL;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	mutex_lock(&pdata->lock);
-+	v = readq(base + RAS_ERROR_INJECT);
-+	v &= ~INJECT_ERROR_MASK;
-+	v |= FIELD_PREP(INJECT_ERROR_MASK, inject_error);
-+	writeq(v, base + RAS_ERROR_INJECT);
-+	mutex_unlock(&pdata->lock);
-+
-+	return count;
-+}
-+static DEVICE_ATTR_RW(inject_error);
-+
-+static struct attribute *errors_attrs[] = {
-+	&dev_attr_revision.attr,
-+	&dev_attr_pcie0_errors.attr,
-+	&dev_attr_pcie1_errors.attr,
-+	&dev_attr_nonfatal_errors.attr,
-+	&dev_attr_catfatal_errors.attr,
-+	&dev_attr_inject_error.attr,
-+	NULL,
-+};
-+
-+static struct attribute_group errors_attr_group = {
-+	.attrs	= errors_attrs,
-+};
-+
-+static ssize_t errors_show(struct device *dev,
-+			   struct device_attribute *attr, char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	return sprintf(buf, "0x%llx\n",
-+		       (unsigned long long)readq(base + FME_ERROR));
-+}
-+static DEVICE_ATTR_RO(errors);
-+
-+static ssize_t first_error_show(struct device *dev,
-+				struct device_attribute *attr, char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	return sprintf(buf, "0x%llx\n",
-+		       (unsigned long long)readq(base + FME_FIRST_ERROR));
-+}
-+static DEVICE_ATTR_RO(first_error);
-+
-+static ssize_t next_error_show(struct device *dev,
-+			       struct device_attribute *attr, char *buf)
-+{
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	return sprintf(buf, "0x%llx\n",
-+		       (unsigned long long)readq(base + FME_NEXT_ERROR));
-+}
-+static DEVICE_ATTR_RO(next_error);
-+
-+static ssize_t clear_store(struct device *dev, struct device_attribute *attr,
-+			   const char *buf, size_t count)
-+{
-+	struct dfl_feature_platform_data *pdata = dev_get_platdata(dev->parent);
-+	struct device *err_dev = dev->parent;
-+	void __iomem *base;
-+	u64 v, val;
-+	int ret = 0;
-+
-+	if (kstrtou64(buf, 0, &val))
-+		return -EINVAL;
-+
-+	base = dfl_get_feature_ioaddr_by_id(err_dev, FME_FEATURE_ID_GLOBAL_ERR);
-+
-+	mutex_lock(&pdata->lock);
-+	writeq(GENMASK_ULL(63, 0), base + FME_ERROR_MASK);
-+
-+	v = readq(base + FME_ERROR);
-+	if (val == v) {
-+		writeq(v, base + FME_ERROR);
-+		v = readq(base + FME_FIRST_ERROR);
-+		writeq(v, base + FME_FIRST_ERROR);
-+		v = readq(base + FME_NEXT_ERROR);
-+		writeq(v, base + FME_NEXT_ERROR);
-+	} else {
-+		ret = -EINVAL;
-+	}
-+
-+	/* Workaround: disable MBP_ERROR if feature revision is 0 */
-+	writeq(dfl_feature_revision(base) ? 0ULL : MBP_ERROR,
-+	       base + FME_ERROR_MASK);
-+	mutex_unlock(&pdata->lock);
-+	return ret ? ret : count;
-+}
-+static DEVICE_ATTR_WO(clear);
-+
-+static struct attribute *fme_errors_attrs[] = {
-+	&dev_attr_errors.attr,
-+	&dev_attr_first_error.attr,
-+	&dev_attr_next_error.attr,
-+	&dev_attr_clear.attr,
-+	NULL,
-+};
-+
-+static struct attribute_group fme_errors_attr_group = {
-+	.attrs	= fme_errors_attrs,
-+	.name	= "fme-errors",
-+};
-+
-+static const struct attribute_group *error_groups[] = {
-+	&fme_errors_attr_group,
-+	&errors_attr_group,
-+	NULL
-+};
-+
-+static void fme_error_enable(struct dfl_feature *feature)
-+{
-+	void __iomem *base = feature->ioaddr;
-+
-+	/* Workaround: disable MBP_ERROR if revision is 0 */
-+	writeq(dfl_feature_revision(feature->ioaddr) ? 0ULL : MBP_ERROR,
-+	       base + FME_ERROR_MASK);
-+	writeq(0ULL, base + PCIE0_ERROR_MASK);
-+	writeq(0ULL, base + PCIE1_ERROR_MASK);
-+	writeq(0ULL, base + RAS_NONFAT_ERROR_MASK);
-+	writeq(0ULL, base + RAS_CATFAT_ERROR_MASK);
-+}
-+
-+static void err_dev_release(struct device *dev)
-+{
-+	kfree(dev);
-+}
-+
-+static int fme_global_err_init(struct platform_device *pdev,
-+			       struct dfl_feature *feature)
-+{
-+	struct device *dev;
-+	int ret = 0;
-+
-+	dev_dbg(&pdev->dev, "FME Global Error Reporting Init.\n");
-+
-+	dev = kzalloc(sizeof(*dev), GFP_KERNEL);
-+	if (!dev)
-+		return -ENOMEM;
-+
-+	dev->parent = &pdev->dev;
-+	dev->release = err_dev_release;
-+	dev_set_name(dev, "errors");
-+
-+	fme_error_enable(feature);
-+
-+	ret = device_register(dev);
-+	if (ret) {
-+		put_device(dev);
-+		return ret;
-+	}
-+
-+	ret = sysfs_create_groups(&dev->kobj, error_groups);
-+	if (ret) {
-+		device_unregister(dev);
-+		return ret;
-+	}
-+
-+	feature->priv = dev;
-+
-+	return ret;
-+}
-+
-+static void fme_global_err_uinit(struct platform_device *pdev,
-+				 struct dfl_feature *feature)
-+{
-+	struct device *dev = feature->priv;
-+
-+	dev_dbg(&pdev->dev, "FME Global Error Reporting UInit.\n");
-+
-+	sysfs_remove_groups(&dev->kobj, error_groups);
-+	device_unregister(dev);
-+}
-+
-+const struct dfl_feature_id fme_global_err_id_table[] = {
-+	{.id = FME_FEATURE_ID_GLOBAL_ERR,},
-+	{0,}
-+};
-+
-+const struct dfl_feature_ops fme_global_err_ops = {
-+	.init = fme_global_err_init,
-+	.uinit = fme_global_err_uinit,
-+};
-diff --git a/drivers/fpga/dfl-fme-main.c b/drivers/fpga/dfl-fme-main.c
-index 2d69b8fd0137..4490cf484dc1 100644
---- a/drivers/fpga/dfl-fme-main.c
-+++ b/drivers/fpga/dfl-fme-main.c
-@@ -226,6 +226,10 @@ static struct dfl_feature_driver fme_feature_drvs[] = {
- 		.id_table = fme_pr_mgmt_id_table,
- 		.ops = &fme_pr_mgmt_ops,
- 	},
-+	{
-+		.id_table = fme_global_err_id_table,
-+		.ops = &fme_global_err_ops,
-+	},
- 	{
- 		.ops = NULL,
- 	},
-diff --git a/drivers/fpga/dfl-fme.h b/drivers/fpga/dfl-fme.h
-index 7a021c483e9b..5fbe3f552553 100644
---- a/drivers/fpga/dfl-fme.h
-+++ b/drivers/fpga/dfl-fme.h
-@@ -37,5 +37,7 @@ struct dfl_fme {
+ AFLAGS_KERNEL
+ --------------------------------------------------
+-Additional options for $(AS) when used for assembler
+-code for code that is compiled as built-in.
++Additional options when used for assembling code that is compiled as built-in.
  
- extern const struct dfl_feature_ops fme_pr_mgmt_ops;
- extern const struct dfl_feature_id fme_pr_mgmt_id_table[];
-+extern const struct dfl_feature_ops fme_global_err_ops;
-+extern const struct dfl_feature_id fme_global_err_id_table[];
+ KCFLAGS
+ --------------------------------------------------
+diff --git a/Documentation/kbuild/makefiles.txt b/Documentation/kbuild/makefiles.txt
+index d65ad5746f94..f0b3a30b985d 100644
+--- a/Documentation/kbuild/makefiles.txt
++++ b/Documentation/kbuild/makefiles.txt
+@@ -306,7 +306,7 @@ more details, with real examples.
+ 	variable $(KBUILD_CFLAGS) and uses it for compilation flags for the
+ 	entire tree.
  
- #endif /* __DFL_FME_H */
-diff --git a/drivers/fpga/dfl.h b/drivers/fpga/dfl.h
-index fbc57f0f76ef..6c320801dd4a 100644
---- a/drivers/fpga/dfl.h
-+++ b/drivers/fpga/dfl.h
-@@ -197,12 +197,14 @@ struct dfl_feature_driver {
-  *		    feature dev (platform device)'s reources.
-  * @ioaddr: mapped mmio resource address.
-  * @ops: ops of this sub feature.
-+ * @priv: priv data of this feature.
-  */
- struct dfl_feature {
- 	u64 id;
- 	int resource_index;
- 	void __iomem *ioaddr;
- 	const struct dfl_feature_ops *ops;
-+	void *priv;
- };
+-	asflags-y specifies options for assembling with $(AS).
++	asflags-y specifies options for assembling.
  
- #define DEV_STATUS_IN_USE	0
+ 	Example:
+ 		#arch/sparc/kernel/Makefile
+@@ -441,7 +441,7 @@ more details, with real examples.
+ 	as-instr checks if the assembler reports a specific instruction
+ 	and then outputs either option1 or option2
+ 	C escapes are supported in the test instruction
+-	Note: as-instr-option uses KBUILD_AFLAGS for $(AS) options
++	Note: as-instr-option uses KBUILD_AFLAGS for assembler options
+ 
+     cc-option
+ 	cc-option is used to check if $(CC) supports a given option, and if
+@@ -814,7 +814,7 @@ When kbuild executes, the following steps are followed (roughly):
+ 	In this example, the binary $(obj)/image is a binary version of
+ 	vmlinux. The usage of $(call if_changed,xxx) will be described later.
+ 
+-    KBUILD_AFLAGS		$(AS) assembler flags
++    KBUILD_AFLAGS		assembler flags
+ 
+ 	Default value - see top level Makefile
+ 	Append or modify as required per architecture.
+@@ -853,15 +853,15 @@ When kbuild executes, the following steps are followed (roughly):
+ 	The first example utilises the trick that a config option expands
+ 	to 'y' when selected.
+ 
+-    KBUILD_AFLAGS_KERNEL	$(AS) options specific for built-in
++    KBUILD_AFLAGS_KERNEL	assembler options specific for built-in
+ 
+ 	$(KBUILD_AFLAGS_KERNEL) contains extra C compiler flags used to compile
+ 	resident kernel code.
+ 
+-    KBUILD_AFLAGS_MODULE   Options for $(AS) when building modules
++    KBUILD_AFLAGS_MODULE   Options for assembler when building modules
+ 
+ 	$(KBUILD_AFLAGS_MODULE) is used to add arch-specific options that
+-	are used for $(AS).
++	are used for assembler.
+ 	From commandline AFLAGS_MODULE shall be used (see kbuild.txt).
+ 
+     KBUILD_CFLAGS_KERNEL	$(CC) options specific for built-in
 -- 
-2.22.0
+2.17.1
 
