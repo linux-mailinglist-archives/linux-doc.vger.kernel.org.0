@@ -2,109 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8F7FB590FE
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Jun 2019 04:21:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F93859160
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Jun 2019 04:41:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726927AbfF1CUt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Jun 2019 22:20:49 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:41270 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726896AbfF1CUn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jun 2019 22:20:43 -0400
-Received: from pps.filterd (m0098404.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x5S2H1gd135698
-        for <linux-doc@vger.kernel.org>; Thu, 27 Jun 2019 22:20:42 -0400
-Received: from e11.ny.us.ibm.com (e11.ny.us.ibm.com [129.33.205.201])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 2td71fe5vk-1
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-        for <linux-doc@vger.kernel.org>; Thu, 27 Jun 2019 22:20:42 -0400
-Received: from localhost
-        by e11.ny.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
-        for <linux-doc@vger.kernel.org> from <bauerman@linux.ibm.com>;
-        Fri, 28 Jun 2019 03:20:40 +0100
-Received: from b01cxnp22035.gho.pok.ibm.com (9.57.198.25)
-        by e11.ny.us.ibm.com (146.89.104.198) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
-        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-        Fri, 28 Jun 2019 03:20:36 +0100
-Received: from b01ledav004.gho.pok.ibm.com (b01ledav004.gho.pok.ibm.com [9.57.199.109])
-        by b01cxnp22035.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x5S2KZgn53936570
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 28 Jun 2019 02:20:35 GMT
-Received: from b01ledav004.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 354D4112065;
-        Fri, 28 Jun 2019 02:20:35 +0000 (GMT)
-Received: from b01ledav004.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id E4A76112061;
-        Fri, 28 Jun 2019 02:20:31 +0000 (GMT)
-Received: from morokweng.localdomain.com (unknown [9.85.218.134])
-        by b01ledav004.gho.pok.ibm.com (Postfix) with ESMTP;
-        Fri, 28 Jun 2019 02:20:31 +0000 (GMT)
-From:   Thiago Jung Bauermann <bauerman@linux.ibm.com>
-To:     linux-integrity@vger.kernel.org
-Cc:     linux-security-module@vger.kernel.org, keyrings@vger.kernel.org,
-        linux-crypto@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mimi Zohar <zohar@linux.ibm.com>,
-        Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>,
-        David Howells <dhowells@redhat.com>,
-        David Woodhouse <dwmw2@infradead.org>,
-        Jessica Yu <jeyu@kernel.org>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "AKASHI, Takahiro" <takahiro.akashi@linaro.org>,
-        Thiago Jung Bauermann <bauerman@linux.ibm.com>
-Subject: [PATCH v12 11/11] ima: Allow template= option for appraise rules as well
-Date:   Thu, 27 Jun 2019 23:19:34 -0300
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190628021934.4260-1-bauerman@linux.ibm.com>
-References: <20190628021934.4260-1-bauerman@linux.ibm.com>
+        id S1726689AbfF1Cka (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Jun 2019 22:40:30 -0400
+Received: from smtprelay0011.hostedemail.com ([216.40.44.11]:45887 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726476AbfF1Ck3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Jun 2019 22:40:29 -0400
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay02.hostedemail.com (Postfix) with ESMTP id 24ED36D83;
+        Fri, 28 Jun 2019 02:40:28 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,:::::::::::::::::::,RULES_HIT:41:355:379:599:800:960:973:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1542:1593:1594:1605:1711:1730:1747:1777:1792:2194:2198:2199:2200:2393:2553:2559:2562:2693:2828:2895:3138:3139:3140:3141:3142:3355:3622:3865:3866:3867:3868:3870:3871:3872:3873:3874:4043:4321:4605:5007:6117:6119:7903:9010:9012:9108:10004:10400:10848:10967:11232:11658:11914:12050:12297:12663:12740:12760:12895:13161:13229:13439:13618:14096:14097:14181:14659:14721:14819:21063:21080:21451:21627:21740:30012:30054:30070:30090:30091,0,RBL:23.242.196.136:@perches.com:.lbl8.mailshell.net-62.8.0.180 64.201.201.201,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:fn,MSBL:0,DNSBL:neutral,Custom_rules:0:0:0,LFtime:27,LUA_SUMMARY:none
+X-HE-Tag: jump91_5b258eb197f18
+X-Filterd-Recvd-Size: 4127
+Received: from XPS-9350.home (cpe-23-242-196-136.socal.res.rr.com [23.242.196.136])
+        (Authenticated sender: joe@perches.com)
+        by omf11.hostedemail.com (Postfix) with ESMTPA;
+        Fri, 28 Jun 2019 02:40:26 +0000 (UTC)
+Message-ID: <2f1c88882fde00beebb6066e9bd561287f5932c5.camel@perches.com>
+Subject: Re: [tip:timers/core] hrtimer: Use a bullet for the returns bullet
+ list
+From:   Joe Perches <joe@perches.com>
+To:     Mauro Carvalho Chehab <mchehab@infradead.org>
+Cc:     corbet@lwn.net, linux-doc@vger.kernel.org, tglx@linutronix.de,
+        mingo@kernel.org, hpa@zytor.com, linux-kernel@vger.kernel.org,
+        mchehab+samsung@kernel.org, linux-tip-commits@vger.kernel.org,
+        docutils-develop@lists.sourceforge.net
+Date:   Thu, 27 Jun 2019 19:40:24 -0700
+In-Reply-To: <20190627213930.0d28a072@coco.lan>
+References: <74ddad7dac331b4e5ce4a90e15c8a49e3a16d2ac.1561372382.git.mchehab+samsung@kernel.org>
+         <tip-516337048fa40496ae5ca9863c367ec991a44d9a@git.kernel.org>
+         <3740b16e5d0a3144e2d48af7cf56ae8020c3f9af.camel@perches.com>
+         <20190627213930.0d28a072@coco.lan>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.30.5-0ubuntu0.18.10.1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-x-cbid: 19062802-2213-0000-0000-000003A60F54
-X-IBM-SpamModules-Scores: 
-X-IBM-SpamModules-Versions: BY=3.00011344; HX=3.00000242; KW=3.00000007;
- PH=3.00000004; SC=3.00000286; SDB=6.01224269; UDB=6.00644348; IPR=6.01005460;
- MB=3.00027497; MTD=3.00000008; XFM=3.00000015; UTC=2019-06-28 02:20:40
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19062802-2214-0000-0000-00005F06108E
-Message-Id: <20190628021934.4260-12-bauerman@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-06-27_15:,,
- signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 suspectscore=1 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=931 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1810050000 definitions=main-1906280019
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-It's useful being able to specify a different IMA template on appraise
-policy rules, so allow it.
+On Thu, 2019-06-27 at 21:39 -0300, Mauro Carvalho Chehab wrote:
+> Em Thu, 27 Jun 2019 15:08:59 -0700
+> Joe Perches <joe@perches.com> escreveu:
+[]
+> > > hrtimer: Use a bullet for the returns bullet list
+> > > 
+> > > That gets rid of this warning:
+> > > 
+> > >    ./kernel/time/hrtimer.c:1119: WARNING: Block quote ends without a blank line; unexpected unindent.  
+> > 
+> > Doesn't this form occur multiple dozens of times in
+> > kernel sources?
+> > 
+> > For instance:
+> > 
+> > $ git grep -B3 -A5 -P "^ \* Returns:?$" | \
+> >   grep -P -A8 '\-\s+\*\s*@\w+:'
+> 
+> Yes, this is a common pattern, but not all patterns that match the above
+> regex are broken.
+> 
+> > I think the warning is odd at best and docutils might
+> > be updated or the warning ignored or suppressed.
+> > 
+> > > and displays nicely both at the source code and at the produced
+> > > documentation.  
+> 
+> The warnings are painful - and they're the main reason why I wrote this
+> change: - I wanted to avoid new warnings actually unrelated to my
+> changes that were sometimes appearing while doing incremental
+> "make htmldocs" on a big patchset that I've been rebasing almost every
+> week over the last two months.
+> 
+> -
+> 
+> Yet, did you try to look how this pattern will appear at the html and pdf
+> output?
 
-Signed-off-by: Thiago Jung Bauermann <bauerman@linux.ibm.com>
-Suggested-by: Mimi Zohar <zohar@linux.ibm.com>
----
- security/integrity/ima/ima_policy.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+No I did not.
 
-diff --git a/security/integrity/ima/ima_policy.c b/security/integrity/ima/ima_policy.c
-index 4fc13e591f1d..46ed31a0adfe 100644
---- a/security/integrity/ima/ima_policy.c
-+++ b/security/integrity/ima/ima_policy.c
-@@ -1193,7 +1193,8 @@ static int ima_parse_rule(char *rule, struct ima_rule_entry *entry)
- 			break;
- 		case Opt_template:
- 			ima_log_string(ab, "template", args[0].from);
--			if (entry->action != MEASURE) {
-+			if (entry->action != MEASURE &&
-+			    entry->action != APPRAISE) {
- 				result = -EINVAL;
- 				break;
- 			}
+I just would like to avoid changing perfectly intelligible
+kernel-doc content into something less directly readable for
+the sake of external output.
+
+I don't use the externally generated formatted output docs.
+I read and use the source when necessary.
+
+Automatic creation of bulleted blocks from relatively
+unformatted content is a hard problem.
+
+I appreciate the work Mauro, I just would like to minimize
+the necessary changes if possible.
+
+The grep I did was trivial, I'm sure there are better tools
+to isolate the kernel-doc bits where the Return: block
+is emitted.
+
+
+>  Something like this:
+> 
+> 	sound/soc/codecs/wm8960.c: * Returns:
+> 	sound/soc/codecs/wm8960.c- *  -1, in case no sysclk frequency available found
+> 	sound/soc/codecs/wm8960.c- * >=0, in case we could derive bclk and lrclk from sysclk using
+> 	sound/soc/codecs/wm8960.c- *      (@sysclk_idx, @dac_idx, @bclk_idx) dividers
+> 
+> 
+> Will be displayed as:
+> 
+> 	**Returns:**
+> 	  -1, in case no sysclk frequency available found **>=0, in case we could derive bclk and lrclk from sysclk using** (@sysclk_idx, @dac_idx, @bclk_idx) dividers
+> (where **foo**) means that "foo" will be printed in bold.> 
+
+That's a yuck from me.
+
+> While it would likely be possible to improve kernel-doc to present better
+> results, I'm afraid that it would be too complex for simple regex
+> expressions, and hard to tune, as it would be a hint-based approach,
+> and doing a natural language processing would be too much effort.
+
+Yeah, tough problem.  I don't envy it.
+
+cheers and g'luck...
 
