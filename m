@@ -2,161 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3DCA85B289
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Jul 2019 03:00:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1A08C5B2B5
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Jul 2019 03:29:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726912AbfGABAX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 30 Jun 2019 21:00:23 -0400
-Received: from conuserg-12.nifty.com ([210.131.2.79]:60237 "EHLO
-        conuserg-12.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726896AbfGABAW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 30 Jun 2019 21:00:22 -0400
-Received: from grover.flets-west.jp (softbank126125154139.bbtec.net [126.125.154.139]) (authenticated)
-        by conuserg-12.nifty.com with ESMTP id x610x4fv000634;
-        Mon, 1 Jul 2019 09:59:09 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-12.nifty.com x610x4fv000634
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1561942750;
-        bh=1HcjEC7wLR2+UWOsM11fHQgnI022Sfeb8n0eROHz6Dw=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=DLEkV7w0not3hRjNOpSRVgM8jLvb2EBRfxQUh0olJzWpK6eUm9EGNPUlreEq8tRPO
-         e1MoyrbgT7Bn135uJgldXUPf9oHzqClPpEk7y578D5OBYaOhTwzHSrMwU+5HNxm6cP
-         77YaiaHL9X1hYqj7zHyT7XSjC+lQTb4IGS2BpLqcX+irOHFObhpPFzDABaSgkOJYBj
-         S/cVbafWaWaCp5knXhwsgxaeDhjXFKoQfTv9DPMBKxckEVcx+MOPnoApQ5jKyc+x+S
-         5kg2rijkRp5cW8ETcthjRVEUiUH0AoI2rdLr/5f+ZAsc0GFo1fiYav/xVO8hsuE4Vr
-         5F1k6FlUG22/Q==
-X-Nifty-SrcIP: [126.125.154.139]
-From:   Masahiro Yamada <yamada.masahiro@socionext.com>
-To:     linux-kbuild@vger.kernel.org
-Cc:     Sam Ravnborg <sam@ravnborg.org>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Michal Marek <michal.lkml@markovi.net>
-Subject: [PATCH 4/7] kbuild: support header-test-pattern-y
-Date:   Mon,  1 Jul 2019 09:58:42 +0900
-Message-Id: <20190701005845.12475-5-yamada.masahiro@socionext.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190701005845.12475-1-yamada.masahiro@socionext.com>
-References: <20190701005845.12475-1-yamada.masahiro@socionext.com>
+        id S1727132AbfGABWO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 30 Jun 2019 21:22:14 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:27040 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726402AbfGABWO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 30 Jun 2019 21:22:14 -0400
+Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x611LiPg003867
+        for <linux-doc@vger.kernel.org>; Sun, 30 Jun 2019 21:22:13 -0400
+Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 2texjwq0f7-1
+        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
+        for <linux-doc@vger.kernel.org>; Sun, 30 Jun 2019 21:22:13 -0400
+Received: from localhost
+        by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
+        for <linux-doc@vger.kernel.org> from <ajd@linux.ibm.com>;
+        Mon, 1 Jul 2019 02:22:11 +0100
+Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
+        by e06smtp07.uk.ibm.com (192.168.101.137) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
+        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
+        Mon, 1 Jul 2019 02:22:08 +0100
+Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
+        by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x611M7fK56492262
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 1 Jul 2019 01:22:07 GMT
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id C580B4203F;
+        Mon,  1 Jul 2019 01:22:07 +0000 (GMT)
+Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 7190D42049;
+        Mon,  1 Jul 2019 01:22:07 +0000 (GMT)
+Received: from ozlabs.au.ibm.com (unknown [9.192.253.14])
+        by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+        Mon,  1 Jul 2019 01:22:07 +0000 (GMT)
+Received: from [10.61.2.125] (haven.au.ibm.com [9.192.254.114])
+        (using TLSv1.2 with cipher AES128-SHA (128/128 bits))
+        (No client certificate requested)
+        by ozlabs.au.ibm.com (Postfix) with ESMTPSA id 2FDB1A0194;
+        Mon,  1 Jul 2019 11:22:06 +1000 (AEST)
+Subject: Re: [PATCH 22/39] docs: ocxl.rst: add it to the uAPI book
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Frederic Barrat <fbarrat@linux.ibm.com>,
+        linuxppc-dev@lists.ozlabs.org
+References: <cover.1561724493.git.mchehab+samsung@kernel.org>
+ <ee63ec4412f2f8c87da877f67f693f2cd85c1a37.1561724493.git.mchehab+samsung@kernel.org>
+From:   Andrew Donnellan <ajd@linux.ibm.com>
+Date:   Mon, 1 Jul 2019 11:21:58 +1000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.2
+MIME-Version: 1.0
+In-Reply-To: <ee63ec4412f2f8c87da877f67f693f2cd85c1a37.1561724493.git.mchehab+samsung@kernel.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-AU
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+x-cbid: 19070101-0028-0000-0000-0000037F25DE
+X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
+x-cbparentid: 19070101-0029-0000-0000-0000243F590A
+Message-Id: <7ac03678-3395-cdcf-6401-7856da4287c7@linux.ibm.com>
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-06-30_13:,,
+ signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+ mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.0.1-1810050000 definitions=main-1907010016
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In my view, most of headers can be self-contained. So, it would be
-tedious to add every header to header-test-y explicitly. We usually
-end up with "all headers with some exceptions".
+On 28/6/19 10:30 pm, Mauro Carvalho Chehab wrote:
+> The content of this file is user-faced.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 
-There are two types in exceptions:
+Acked-by: Andrew Donnellan <ajd@linux.ibm.com>
 
-[1] headers that are never compiled as standalone units
+> ---
+>   Documentation/{ => userspace-api}/accelerators/ocxl.rst | 2 --
+>   Documentation/userspace-api/index.rst                   | 1 +
+>   MAINTAINERS                                             | 2 +-
+>   3 files changed, 2 insertions(+), 3 deletions(-)
+>   rename Documentation/{ => userspace-api}/accelerators/ocxl.rst (99%)
+> 
+> diff --git a/Documentation/accelerators/ocxl.rst b/Documentation/userspace-api/accelerators/ocxl.rst
+> similarity index 99%
+> rename from Documentation/accelerators/ocxl.rst
+> rename to Documentation/userspace-api/accelerators/ocxl.rst
+> index b1cea19a90f5..14cefc020e2d 100644
+> --- a/Documentation/accelerators/ocxl.rst
+> +++ b/Documentation/userspace-api/accelerators/ocxl.rst
+> @@ -1,5 +1,3 @@
+> -:orphan:
+> -
+>   ========================================================
+>   OpenCAPI (Open Coherent Accelerator Processor Interface)
+>   ========================================================
+> diff --git a/Documentation/userspace-api/index.rst b/Documentation/userspace-api/index.rst
+> index a3233da7fa88..ad494da40009 100644
+> --- a/Documentation/userspace-api/index.rst
+> +++ b/Documentation/userspace-api/index.rst
+> @@ -20,6 +20,7 @@ place where this information is gathered.
+>      seccomp_filter
+>      unshare
+>      spec_ctrl
+> +   accelerators/ocxl
+>   
+>   .. only::  subproject and html
+>   
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 29d1498ad39d..f723371dccd0 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -11483,7 +11483,7 @@ F:	arch/powerpc/include/asm/pnv-ocxl.h
+>   F:	drivers/misc/ocxl/
+>   F:	include/misc/ocxl*
+>   F:	include/uapi/misc/ocxl.h
+> -F:	Documentation/accelerators/ocxl.rst
+> +F:	Documentation/userspace-api/accelerators/ocxl.rst
+>   
+>   OMAP AUDIO SUPPORT
+>   M:	Peter Ujfalusi <peter.ujfalusi@ti.com>
+> 
 
-  For examples, include/linux/compiler-gcc.h is not intended for
-  direct inclusion. We should always exclude such ones.
-
-[2] headers that are conditionally compiled as standalone units
-
-  Some headers can be compiled only for particular architectures.
-  For example, include/linux/arm-cci.h can be compiled only for
-  arm/arm64 because it requires <asm/arm-cci.h> to exist.
-  Clang can compile include/soc/nps/mtm.h only for arc because
-  it contains an arch-specific register in inline assembler.
-
-So, you can write Makefile like this:
-
-  header-test-                += linux/compiler-gcc.h
-  header-test-$(CONFIG_ARM)   += linux/arm-cci.h
-  header-test-$(CONFIG_ARM64) += linux/arm-cci.h
-  header-test-$(CONFIG_ARC)   += soc/nps/mtm.h
-
-The new syntax header-test-pattern-y will be useful to specify
-"the rest".
-
-The typical usage is like this:
-
-  header-test-pattern-y += */*.h
-
-This will add all the headers in sub-directories to the test coverage,
-excluding $(header-test-). In this regards, header-test-pattern-y
-behaves like a weaker variant of header-test-y.
-
-Caveat:
-The patterns in header-test-pattern-y are prefixed with $(srctree)/$(src)/
-but not $(objtree)/$(obj)/. Stale generated headers are often left over
-when you traverse the git history without cleaning. Wildcard patterns for
-$(objtree) may match to stale headers, which could fail to compile.
-One pitfall is $(srctree)/$(src)/ and $(objtree)/$(obj)/ point to the
-same directory for in-tree building. So, header-test-pattern-y should
-be used with care since it can potentially match to stale headers.
-
-Caveat2:
-You could use wildcard for header-test-. For example,
-
-  header-test- += asm-generic/%
-
-... will exclude headers in asm-generic directory. Unfortunately, the
-wildcard character is '%' instead of '*' here because this is evaluated
-by $(filter-out ...) whereas header-test-pattern-y is evaluated by
-$(wildcard ...). This is a kludge, but seems useful in some places...
-
-Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
-Tested-by: Jani Nikula <jani.nikula@intel.com>
----
-
-Changes in v4: None
-Changes in v3: None
-Changes in v2:
-  - New patch
-
- Documentation/kbuild/makefiles.txt | 10 ++++++++++
- scripts/Makefile.lib               | 11 +++++++++++
- 2 files changed, 21 insertions(+)
-
-diff --git a/Documentation/kbuild/makefiles.txt b/Documentation/kbuild/makefiles.txt
-index 5080fec34609..b817e6cefb77 100644
---- a/Documentation/kbuild/makefiles.txt
-+++ b/Documentation/kbuild/makefiles.txt
-@@ -1025,6 +1025,16 @@ When kbuild executes, the following steps are followed (roughly):
- 	i.e. compilable as standalone units. If CONFIG_HEADER_TEST is enabled,
- 	this builds them as part of extra-y.
- 
-+    header-test-pattern-y
-+
-+	This works as a weaker version of header-test-y, and accepts wildcard
-+	patterns. The typical usage is:
-+
-+		  header-test-pattern-y += *.h
-+
-+	This specifies all the files that matches to '*.h' in the current
-+	directory, but the files in 'header-test-' are excluded.
-+
- --- 6.7 Commands useful for building a boot image
- 
- 	Kbuild provides a few macros that are useful when building a
-diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
-index 55ae1ec65342..281864fcf0fe 100644
---- a/scripts/Makefile.lib
-+++ b/scripts/Makefile.lib
-@@ -67,6 +67,17 @@ extra-$(CONFIG_OF_ALL_DTBS) += $(patsubst %.dtb,%.dt.yaml, $(dtb-))
- endif
- 
- # Test self-contained headers
-+
-+# Wildcard searches in $(srctree)/$(src)/, but not in $(objtree)/$(obj)/.
-+# Stale generated headers are often left over, so pattern matching should
-+# be avoided. Please notice $(srctree)/$(src)/ and $(objtree)/$(obj) point
-+# to the same location for in-tree building. So, header-test-pattern-y should
-+# be used with care.
-+header-test-y	+= $(filter-out $(header-test-), \
-+		$(patsubst $(srctree)/$(src)/%, %, \
-+		$(wildcard $(addprefix $(srctree)/$(src)/, \
-+		$(header-test-pattern-y)))))
-+
- extra-$(CONFIG_HEADER_TEST) += $(addsuffix .s, $(header-test-y))
- 
- # Add subdir path
 -- 
-2.17.1
+Andrew Donnellan              OzLabs, ADL Canberra
+ajd@linux.ibm.com             IBM Australia Limited
 
