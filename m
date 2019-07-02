@@ -2,57 +2,54 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C3F2E5DAD8
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jul 2019 03:30:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 630615D9EC
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jul 2019 02:57:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727182AbfGCBaH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Jul 2019 21:30:07 -0400
-Received: from mail-lf1-f65.google.com ([209.85.167.65]:41373 "EHLO
-        mail-lf1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727117AbfGCBaG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Jul 2019 21:30:06 -0400
-Received: by mail-lf1-f65.google.com with SMTP id 62so475390lfa.8
-        for <linux-doc@vger.kernel.org>; Tue, 02 Jul 2019 18:30:05 -0700 (PDT)
+        id S1727410AbfGCA5X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Jul 2019 20:57:23 -0400
+Received: from mail-lj1-f196.google.com ([209.85.208.196]:37720 "EHLO
+        mail-lj1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726150AbfGCA5W (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Jul 2019 20:57:22 -0400
+Received: by mail-lj1-f196.google.com with SMTP id 131so504668ljf.4
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jul 2019 17:57:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=BWuzzOxwUVGbMCvFD/kQRaZgbqg2U0ttqAGoU0tIxDc=;
-        b=WU9xE1VaEDXdGOfDOaQ8eCNlTBcxHe1uPjWOXfL0akhUDkfR9pYxvy2vkEDfni+c8h
-         WMVK/5ptG9BAQJtthbU9xhXp41aX/dRI7O6DGRbzSic+KQYV4r79fr3F33IPwBk4A9/w
-         GB0kyYoceOYaI2Zwrbm6QbIM8AP0naUmdNCuQ2tAPmooOIqjVKYIIcMIkgONM7r947bm
-         Rcb/3dBlykiu3KSgumMs5axcfx87QLCZKcPVy2M8OzJauDqJh5Z1Bo7FTS75GRY0iu0+
-         IdLBkAJI8wJkTgpnoj96Ri0vBe8IfwgD2+EBl9ikgM/r7w39QRdydkoW0ChmAqm5YMzc
-         LsVA==
+        bh=16juguPwtTD1vWpUNQpyIYEAEOADqNOzx5F+yEENpfM=;
+        b=S/9wjNxzHSQ44lx7QK89mdaRsjoKX1ZHgfg3NuCejeCzRPPew2tWGQF+4K7vlloGvm
+         tyN6KUOOcr3VvGxxqoNTkXQVxwWSdgw6rRxyFAtqS2wmE4uIzfvXER5NQaV0WvTgDSO/
+         G7CftJYBPlUxgiiZGrDHr7XemlK99J37xqC6ZOicBwBXGmkzZiihRX4yIIpvZp2yFexg
+         a7FQYsjQ7dRg4vmj1VZqWbV5+hptW5EvSKIt7hNJxWmqz6RxXpQcQrlL4oP+c+fXuPnm
+         JcF2i68p+gi5kx0i/DM9PMGUD2oVxl7Rs4ZjGSg8mLnFJjXxbx6vHt20X8U5l6/jqpk/
+         XrvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=BWuzzOxwUVGbMCvFD/kQRaZgbqg2U0ttqAGoU0tIxDc=;
-        b=PH5V0oFdx9nQZ7CBX+SyY58nlU4uKPckB6huS9QyWYXjrYRnlcwbd5X+2A/n/OGaQe
-         s0BoPBEMD0/yKEbgDsHC/xjqeb7XYxTutJskj3ygs2NwT8QDRP1UCpKabmt3EXYNqUkM
-         Ntfx05CBf9gPs98Ues1GKjb9G5dkO2vozT5WjGVvYNTE8hgxMXJNN4/8Yu/TgmUd9bMx
-         YCmqMijOGxd6CJucSbxe016USLawoNSs58RtFv6oyHSUkrCNzDsNZbxgp2RfJs5B6WVI
-         BYy7wnqoygeJ0ilScnTrcA8R6BrxFE3trxJkEpJ7/EEx7xyXTNrOz2/xyQuOuTRNBz5l
-         zm4w==
-X-Gm-Message-State: APjAAAW2p9sCwS3RqJ6/Va9+9H5j+OgkR/cIqfR4iVAW8gLTKH/5da/9
-        bU89gfxbptY8DUt0qGwBSvyt1RBzpdQuUsWO6YVvnf9twfc=
-X-Google-Smtp-Source: APXvYqxPy3MzRImB1p5uGBTXdcSHdB32SVAS4jpsrlLbMd+boV/5IuiNLeQxCDIw30/585vq93owljYh5YviaC4jL+c=
-X-Received: by 2002:a19:dc0d:: with SMTP id t13mr1324771lfg.152.1562101441838;
- Tue, 02 Jul 2019 14:04:01 -0700 (PDT)
+        bh=16juguPwtTD1vWpUNQpyIYEAEOADqNOzx5F+yEENpfM=;
+        b=pYm9lwOXEwCGyFaiQ2SOSCgpBjGMUjnxRnR7/QNpSvSRiBsWDb+iVyd5FY3B+XVBcF
+         WwwuwQ166X+NYK6COxa5s6wSES1U/mZA/dlDQYcaFGNBTtMwe4AMlZy4gSV28EB5aceh
+         D6s5rnBG9q9LHFx9yqgG448v7kMaWjN5RdnVo6+4D8EEiURrHkbvuy2Qdd9esl6Lx+n6
+         SKZffxi9Gq6T57/A5jo9JXLX+BYOwRdvqxfr0RHf7q2yLaUVJ0nNpCzYe8SmZE+5EiRy
+         mN2aCGUz273IYBy4cIztyJha4oOEVvgwYhh2nOqjqrVzhsl6BZXFh2+zSxmOGGwMmt+J
+         S8OQ==
+X-Gm-Message-State: APjAAAV1aJxQSsRwYbPFyd/D3Kbp1CGQSZxHXDNi78IaPON+8TRtNEoG
+        TLgL2t7js4+7kvt+o7HyQ0EggrroP2cXliWMIHU3pw==
+X-Google-Smtp-Source: APXvYqzqBXDeMKmpI7HFc6XkzadQ68osH+Li6FhgxXGtJx4NhJW7ZyaamzfpJOk299AcYNEfRxB1ATHZc5WRU8OT9jg=
+X-Received: by 2002:a2e:a0cf:: with SMTP id f15mr18775412ljm.180.1562101588459;
+ Tue, 02 Jul 2019 14:06:28 -0700 (PDT)
 MIME-Version: 1.0
-References: <20190617221134.9930-1-f.fainelli@gmail.com> <20190617221134.9930-2-f.fainelli@gmail.com>
-In-Reply-To: <20190617221134.9930-2-f.fainelli@gmail.com>
+References: <20190617221134.9930-1-f.fainelli@gmail.com>
+In-Reply-To: <20190617221134.9930-1-f.fainelli@gmail.com>
 From:   Linus Walleij <linus.walleij@linaro.org>
-Date:   Tue, 2 Jul 2019 23:03:50 +0200
-Message-ID: <CACRpkdZGqiiax2m5L1y3=Enw0Q5cLc-idAQNae34uenf-drHDw@mail.gmail.com>
-Subject: Re: [PATCH v6 1/6] ARM: Add TTBR operator for kasan_init
-To:     Florian Fainelli <f.fainelli@gmail.com>,
-        Russell King <rmk+kernel@armlinux.org.uk>
+Date:   Tue, 2 Jul 2019 23:06:16 +0200
+Message-ID: <CACRpkdbqW2kJNdPi6JPupaHA_qRTWG-MsUxeCz0c38MRujOSSA@mail.gmail.com>
+Subject: Re: [PATCH v6 0/6] KASan for arm
+To:     Florian Fainelli <f.fainelli@gmail.com>
 Cc:     Linux ARM <linux-arm-kernel@lists.infradead.org>,
         bcm-kernel-feedback-list <bcm-kernel-feedback-list@broadcom.com>,
-        Abbott Liu <liuwenliang@huawei.com>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
         Alexander Potapenko <glider@google.com>,
         Dmitry Vyukov <dvyukov@google.com>,
         Jonathan Corbet <corbet@lwn.net>,
@@ -66,7 +63,7 @@ Cc:     Linux ARM <linux-arm-kernel@lists.infradead.org>,
         Ard Biesheuvel <ard.biesheuvel@linaro.org>,
         Daniel Lezcano <daniel.lezcano@linaro.org>,
         Philippe Ombredanne <pombredanne@nexb.com>,
-        Rob Landley <rob@landley.net>,
+        liuwenliang@huawei.com, Rob Landley <rob@landley.net>,
         Greg KH <gregkh@linuxfoundation.org>,
         Andrew Morton <akpm@linux-foundation.org>,
         Mark Rutland <mark.rutland@arm.com>,
@@ -89,41 +86,33 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Florian!
-
-thanks for your patch!
+Hi Florian,
 
 On Tue, Jun 18, 2019 at 12:11 AM Florian Fainelli <f.fainelli@gmail.com> wrote:
 
-> From: Abbott Liu <liuwenliang@huawei.com>
+> Abbott submitted a v5 about a year ago here:
 >
-> The purpose of this patch is to provide set_ttbr0/get_ttbr0 to
-> kasan_init function. The definitions of cp15 registers should be in
-> arch/arm/include/asm/cp15.h rather than arch/arm/include/asm/kvm_hyp.h,
-> so move them.
+> and the series was not picked up since then, so I rebased it against
+> v5.2-rc4 and re-tested it on a Brahma-B53 (ARMv8 running AArch32 mode)
+> and Brahma-B15, both LPAE and test-kasan is consistent with the ARM64
+> counter part.
 >
-> Cc: Andrey Ryabinin <aryabinin@virtuozzo.com>
-> Reported-by: Marc Zyngier <marc.zyngier@arm.com>
-> Signed-off-by: Abbott Liu <liuwenliang@huawei.com>
-> Signed-off-by: Florian Fainelli <f.fainelli@gmail.com>
+> We were in a fairly good shape last time with a few different people
+> having tested it, so I am hoping we can get that included for 5.4 if
+> everything goes well.
 
-> +#include <linux/stringify.h>
+Thanks for picking this up. I was trying out KASan in the past,
+got sidetracked and honestly lost interest a bit because it was
+boring. But I do realize that it is really neat, so I will try to help
+out with some review and test on a bunch of hardware I have.
 
-What is this for? I think it can be dropped.
+At one point I even had this running on the ARMv4 SA1100
+(no joke!) and if I recall correctly, I got stuck because of things
+that might very well have been related to using a very fragile
+Arm testchip that later broke down completely in the l2cache
+when we added the spectre/meltdown fixes.
 
-This stuff adding a whole bunch of accessors:
-
-> +static inline void set_par(u64 val)
-> +{
-> +       if (IS_ENABLED(CONFIG_ARM_LPAE))
-> +               write_sysreg(val, PAR_64);
-> +       else
-> +               write_sysreg(val, PAR_32);
-> +}
-
-Can we put that in a separate patch since it is not
-adding any users, so this is a pure refactoring patch for
-the current code?
+I start reviewing and testing.
 
 Yours,
 Linus Walleij
