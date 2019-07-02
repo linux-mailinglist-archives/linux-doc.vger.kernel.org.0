@@ -2,82 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 855EE5DA7E
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jul 2019 03:13:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A74145D981
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jul 2019 02:45:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727144AbfGCBNF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Jul 2019 21:13:05 -0400
-Received: from mail.kernel.org ([198.145.29.99]:57308 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726329AbfGCBNF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 2 Jul 2019 21:13:05 -0400
-Received: from akpm3.svl.corp.google.com (unknown [104.133.8.65])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id ED1AE218CA;
-        Tue,  2 Jul 2019 21:33:40 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1562103221;
-        bh=7BKwrn5ZR0EvyKBoBdw71Sjqy+1SUbMyW6AzU7/ufH4=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=RBa6CBZoD/h1b3spSkXt/s5mk4/LF71sNM0q6jPS2dnne68logM7RJmnQeYqnoPlk
-         We4S37hoCXN1vJ/SylpXLdidWn8wQovBsN3zWD/thJwRlA5V0kPWzkSRUxdgTRtCMR
-         lCSW1e94ZmkPHXhQYrDUGU4rHNsLYjp0UCC4jn8o=
-Date:   Tue, 2 Jul 2019 14:33:40 -0700
-From:   Andrew Morton <akpm@linux-foundation.org>
-To:     Waiman Long <longman@redhat.com>
-Cc:     Christoph Lameter <cl@linux.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        David Rientjes <rientjes@google.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
+        id S1727116AbfGCApx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Jul 2019 20:45:53 -0400
+Received: from mail-lj1-f195.google.com ([209.85.208.195]:46275 "EHLO
+        mail-lj1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726736AbfGCApx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Jul 2019 20:45:53 -0400
+Received: by mail-lj1-f195.google.com with SMTP id v24so434638ljg.13
+        for <linux-doc@vger.kernel.org>; Tue, 02 Jul 2019 17:45:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=uy9P4Bv7MoU15f1hxa9HUk41ddeWB4vxhHhX7nu5AF8=;
+        b=chfL2Y+vcu0HLio56W5yCpYcO12fzccTTuvBbkGhkNe/aF5ZgcfKOE24xS40HsFMlc
+         Ut8Bz0uCuff4zpfBt474goph+OPSk+NhNQVgLSimuL3/Ah0v11JGh/8rGaKti0yddSiM
+         q/0fOfoab+9/DUCSuDVGXRkPBEodmSnVOEGRZxSGePAp5QYIi/4446bzXKyWwa+Z9QVU
+         JorSbzfYLEjhFTeRYS7/jv30gSLerU7/hW/VDodF7UL5D3eT6ZP0fWQXg/OaUFUv2/fn
+         GcIo0P7LqaWgUcqGlOiipgnrK233+5QeGPJ94GG6q7nHRhDMqNxm2bzPhj2Qys7AxdxL
+         UO4w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=uy9P4Bv7MoU15f1hxa9HUk41ddeWB4vxhHhX7nu5AF8=;
+        b=Q6KT8CKag5HIWwgWdU/H9YOyoNf+pgCAlFGrfTgSp0vYIcaT8uuki/2g7nhyrDJuYQ
+         Ecq5xS0x16Jry02UpZUSooCOkmdzwGKuaJSJVWD+JCyUAqxJ4KGgfGq7uRsxF+gXj8Tq
+         V2WAsQUOUXKjgzSFtEMVuEpIY4YqRmHZNfIVLpN9ujpw6vyqGQA1axIrQ1lq3zGHYRHd
+         ntEyULZpmj0K5QYM4NRig61qeERuxW1pj6z329auGkK58aoOaTN2h507I03QZzrZjL2g
+         NfxbwigvZDy2CULzdAI8Cci6ynSXdNGC0W+nEWxrOFkN9u9PRBO3WLuq1eAhcRvgkcKd
+         GdtA==
+X-Gm-Message-State: APjAAAVXDtGzzlD/xs2zdb8ElgZJEqe5mHccYmZQbaZOeb+G6zCedXYf
+        1jfo0/TFZvIXOnMyPUCT+j7z7uDTw46AYBFYeT41SQ==
+X-Google-Smtp-Source: APXvYqybYGFXeKm3HudJJDld+RvqFOCnrMTby4Ii2vx9EH9qEyc7WekPspTFOFMLIfLcDmLdtXWyHbCAfNQSt4Z3QxE=
+X-Received: by 2002:a2e:8195:: with SMTP id e21mr167967ljg.62.1562104610089;
+ Tue, 02 Jul 2019 14:56:50 -0700 (PDT)
+MIME-Version: 1.0
+References: <20190617221134.9930-1-f.fainelli@gmail.com> <20190617221134.9930-3-f.fainelli@gmail.com>
+In-Reply-To: <20190617221134.9930-3-f.fainelli@gmail.com>
+From:   Linus Walleij <linus.walleij@linaro.org>
+Date:   Tue, 2 Jul 2019 23:56:38 +0200
+Message-ID: <CACRpkdb3P6oQTK9FGUkMj4kax8us3rKH6c36pX=HD1_wMqcoJQ@mail.gmail.com>
+Subject: Re: [PATCH v6 2/6] ARM: Disable instrumentation for some code
+To:     Florian Fainelli <f.fainelli@gmail.com>
+Cc:     Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        bcm-kernel-feedback-list <bcm-kernel-feedback-list@broadcom.com>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Abbott Liu <liuwenliang@huawei.com>,
+        Alexander Potapenko <glider@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Michal Hocko <mhocko@kernel.org>,
-        Vladimir Davydov <vdavydov.dev@gmail.com>, linux-mm@kvack.org,
-        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        cgroups@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Roman Gushchin <guro@fb.com>,
-        Shakeel Butt <shakeelb@google.com>,
-        Andrea Arcangeli <aarcange@redhat.com>
-Subject: Re: [PATCH] mm, slab: Extend slab/shrink to shrink all the memcg
- caches
-Message-Id: <20190702143340.715f771192721f60de1699d7@linux-foundation.org>
-In-Reply-To: <78879b79-1b8f-cdfd-d4fa-610afe5e5d48@redhat.com>
-References: <20190702183730.14461-1-longman@redhat.com>
-        <20190702130318.39d187dc27dbdd9267788165@linux-foundation.org>
-        <78879b79-1b8f-cdfd-d4fa-610afe5e5d48@redhat.com>
-X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+        Russell King <linux@armlinux.org.uk>, christoffer.dall@arm.com,
+        Marc Zyngier <marc.zyngier@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Nicolas Pitre <nico@fluxnic.net>,
+        Vladimir Murzin <vladimir.murzin@arm.com>,
+        Kees Cook <keescook@chromium.org>, jinb.park7@gmail.com,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Philippe Ombredanne <pombredanne@nexb.com>,
+        Rob Landley <rob@landley.net>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        Thomas Gleixner <tglx@linutronix.de>, thgarnie@google.com,
+        David Howells <dhowells@redhat.com>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Andre Przywara <andre.przywara@arm.com>,
+        julien.thierry@arm.com, drjones@redhat.com, philip@cog.systems,
+        mhocko@suse.com, kirill.shutemov@linux.intel.com,
+        kasan-dev@googlegroups.com,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        kvmarm@lists.cs.columbia.edu,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 2 Jul 2019 16:44:24 -0400 Waiman Long <longman@redhat.com> wrote:
+On Tue, Jun 18, 2019 at 12:11 AM Florian Fainelli <f.fainelli@gmail.com> wrote:
 
-> On 7/2/19 4:03 PM, Andrew Morton wrote:
-> > On Tue,  2 Jul 2019 14:37:30 -0400 Waiman Long <longman@redhat.com> wro=
-te:
-> >
-> >> Currently, a value of '1" is written to /sys/kernel/slab/<slab>/shrink
-> >> file to shrink the slab by flushing all the per-cpu slabs and free
-> >> slabs in partial lists. This applies only to the root caches, though.
-> >>
-> >> Extends this capability by shrinking all the child memcg caches and
-> >> the root cache when a value of '2' is written to the shrink sysfs file.
-> > Why?
-> >
-> > Please fully describe the value of the proposed feature to or users.=20
-> > Always.
->=20
-> Sure. Essentially, the sysfs shrink interface is not complete. It allows
-> the root cache to be shrunk, but not any of the memcg caches.=A0
+> @@ -236,7 +236,8 @@ static int unwind_pop_register(struct unwind_ctrl_block *ctrl,
+>                 if (*vsp >= (unsigned long *)ctrl->sp_high)
+>                         return -URC_FAILURE;
+>
+> -       ctrl->vrs[reg] = *(*vsp)++;
+> +       ctrl->vrs[reg] = READ_ONCE_NOCHECK(*(*vsp));
+> +       (*vsp)++;
 
-But that doesn't describe anything of value.  Who wants to use this,
-and why?  How will it be used?  What are the use-cases?
+I would probably even put in a comment here so it is clear why we
+do this. Passers-by may not know that READ_ONCE_NOCHECK() is
+even related to KASan.
 
+Other than that,
+Reviewed-by: Linus Walleij <linus.walleij@linaro.org>
+
+Yours,
+Linus Walleij
