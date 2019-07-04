@@ -2,112 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5AB415FD8A
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2019 21:50:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 161595FDDA
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2019 22:46:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726743AbfGDTu2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Jul 2019 15:50:28 -0400
-Received: from atrey.karlin.mff.cuni.cz ([195.113.26.193]:50150 "EHLO
-        atrey.karlin.mff.cuni.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726805AbfGDTu2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Jul 2019 15:50:28 -0400
-Received: by atrey.karlin.mff.cuni.cz (Postfix, from userid 512)
-        id 67D7A8067F; Thu,  4 Jul 2019 21:50:14 +0200 (CEST)
-Date:   Thu, 4 Jul 2019 21:50:25 +0200
-From:   Pavel Machek <pavel@ucw.cz>
-To:     Jann Horn <jannh@google.com>
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>,
-        the arch/x86 maintainers <x86@kernel.org>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>,
-        kernel list <linux-kernel@vger.kernel.org>,
-        linux-doc@vger.kernel.org, Linux-MM <linux-mm@kvack.org>,
-        linux-arch <linux-arch@vger.kernel.org>,
-        Linux API <linux-api@vger.kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>
-Subject: Re: [RFC PATCH] binfmt_elf: Extract .note.gnu.property from an ELF
- file
-Message-ID: <20190704195024.GA4013@amd>
-References: <20190628172203.797-1-yu-cheng.yu@intel.com>
- <CAG48ez0rHHfcRgiVZf5FP0YOzxsXigvpg6ci790cmiN6PBwkhQ@mail.gmail.com>
+        id S1726892AbfGDUqa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Jul 2019 16:46:30 -0400
+Received: from smtprelay0121.hostedemail.com ([216.40.44.121]:46513 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726038AbfGDUqa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Jul 2019 16:46:30 -0400
+Received: from smtprelay.hostedemail.com (10.5.19.251.rfc1918.com [10.5.19.251])
+        by smtpgrave08.hostedemail.com (Postfix) with ESMTP id C4112180253B0;
+        Thu,  4 Jul 2019 20:46:28 +0000 (UTC)
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay06.hostedemail.com (Postfix) with ESMTP id E67D818225AF9;
+        Thu,  4 Jul 2019 20:46:27 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,:::::::::::::::,RULES_HIT:41:355:379:599:800:960:973:982:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1541:1593:1594:1711:1730:1747:1777:1792:2393:2559:2562:2828:2895:3138:3139:3140:3141:3142:3353:3622:3653:3865:3866:3867:3868:3870:3874:4250:4321:5007:6119:6691:7903:8603:10004:10400:10848:11026:11232:11473:11658:11914:12043:12049:12297:12438:12740:12760:12895:13069:13161:13229:13311:13357:13439:14181:14659:14721:21080:21451:21627:30054:30064:30070:30083:30091,0,RBL:23.242.196.136:@perches.com:.lbl8.mailshell.net-62.8.0.180 64.201.201.201,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:fn,MSBL:0,DNSBL:neutral,Custom_rules:0:0:0,LFtime:24,LUA_SUMMARY:none
+X-HE-Tag: space91_1b23faa223b5f
+X-Filterd-Recvd-Size: 2807
+Received: from XPS-9350 (cpe-23-242-196-136.socal.res.rr.com [23.242.196.136])
+        (Authenticated sender: joe@perches.com)
+        by omf19.hostedemail.com (Postfix) with ESMTPA;
+        Thu,  4 Jul 2019 20:46:26 +0000 (UTC)
+Message-ID: <f6a4c2b601bb59179cb2e3b8f4d836a1c11379a3.camel@perches.com>
+Subject: Re: [PATCH] checkpatch: Added warnings in favor of strscpy().
+From:   Joe Perches <joe@perches.com>
+To:     Nitin Gote <nitin.r.gote@intel.com>, akpm@linux-foundation.org
+Cc:     corbet@lwn.net, apw@canonical.com, keescook@chromium.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        kernel-hardening@lists.openwall.com
+Date:   Thu, 04 Jul 2019 13:46:25 -0700
+In-Reply-To: <1562219683-15474-1-git-send-email-nitin.r.gote@intel.com>
+References: <1562219683-15474-1-git-send-email-nitin.r.gote@intel.com>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.30.5-0ubuntu0.18.10.1 
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-        protocol="application/pgp-signature"; boundary="xHFwDpU9dbj6ez1V"
-Content-Disposition: inline
-In-Reply-To: <CAG48ez0rHHfcRgiVZf5FP0YOzxsXigvpg6ci790cmiN6PBwkhQ@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Thu, 2019-07-04 at 11:24 +0530, Nitin Gote wrote:
+> Added warnings in checkpatch.pl script to :
+> 
+> 1. Deprecate strcpy() in favor of strscpy().
+> 2. Deprecate strlcpy() in favor of strscpy().
+> 3. Deprecate strncpy() in favor of strscpy() or strscpy_pad().
+> 
+> Updated strncpy() section in Documentation/process/deprecated.rst
+> to cover strscpy_pad() case.
+> 
+> Signed-off-by: Nitin Gote <nitin.r.gote@intel.com>
 
---xHFwDpU9dbj6ez1V
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+OK, for whatever reason, this when into a spam folder.
 
-Hi!
+> diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+[]
+> @@ -595,6 +595,11 @@ our %deprecated_apis = (
+>  	"rcu_barrier_sched"			=> "rcu_barrier",
+>  	"get_state_synchronize_sched"		=> "get_state_synchronize_rcu",
+>  	"cond_synchronize_sched"		=> "cond_synchronize_rcu",
+> +	"strcpy"				=> "strscpy",
+> +	"strlcpy"				=> "strscpy",
+> +	"strncpy"				=> "strscpy, strscpy_pad or for
+> +	non-NUL-terminated strings, strncpy() can still be used, but
+> +	destinations should be marked with the __nonstring",
+>  );
+
+$ git grep -w strcpy | wc -l
+2239
+$ git grep -w strlcpy | wc -l
+1760
+$ git grep -w strncpy | wc -l
+839
+
+These functions are _really_ commonly used in the kernel.
+
+This should probably be a different %deprecated_string_api
+and these should probably not be emitted at WARN level
+when using command line option -f/--file but at CHECK level
+so that novice script users just don't send bad patches.
+
+Also, perhaps there could be some macro for the relatively
+commonly used
+
+	strscpy(foo, bar, sizeof(foo))
+and
+	strlcpy(foo, bar, sizeof(foo))
+
+so argument 1 doesn't have to be repeated in the sizeof()
+
+Something like:
+
+#define stracpy(to, from)					\
+({								\
+	size_t size = ARRAY_SIZE(to);				\
+	BUILD_BUG_ON(!__same_type(typeof(*to), char));		\
+								\
+	strscpy(to, from, size);				\
+})
 
 
-> > +static int scan(u8 *buf, u32 buf_size, int item_size, test_item_fn tes=
-t_item,
-> > +               next_item_fn next_item, u32 *arg, u32 type, u32 *pos)
-> > +{
-> > +       int found =3D 0;
-> > +       u8 *p, *max;
-> > +
-> > +       max =3D buf + buf_size;
-> > +       if (max < buf)
-> > +               return 0;
->=20
-> How can this ever legitimately happen? If it can't, perhaps you meant
-> to put a WARN_ON_ONCE() or something like that here?
-> Also, computing out-of-bounds pointers is UB (section 6.5.6 of C99:
-> "If both the pointer operand and the result point to elements of the
-> same array object, or one past the last element of the array object,
-> the evaluation shall not produce an overflow; otherwise, the behavior
-> is undefined."), and if the addition makes the pointer wrap, that's
-> certainly out of bounds; so I don't think this condition can trigger
-> without UB.
-
-Kernel assumes sane compiler. We pass flags to get it... C99 does not
-quite apply here.
-								Pavel
-							=09
---=20
-(english) http://www.livejournal.com/~pavelmachek
-(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
-g.html
-
---xHFwDpU9dbj6ez1V
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iEYEARECAAYFAl0eWIAACgkQMOfwapXb+vLSMgCcC98TTx9pMIkokJGKGUu3i6ME
-o+AAn3TIA7Pjz5wBcK19BycwV2+shMN6
-=83sj
------END PGP SIGNATURE-----
-
---xHFwDpU9dbj6ez1V--
