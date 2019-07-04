@@ -2,162 +2,154 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4259A5FBF6
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2019 18:37:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 21DE75FCBA
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2019 20:11:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726915AbfGDQhb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Jul 2019 12:37:31 -0400
-Received: from userp2130.oracle.com ([156.151.31.86]:52566 "EHLO
-        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726038AbfGDQhb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Jul 2019 12:37:31 -0400
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
-        by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x64GXjN6118928;
-        Thu, 4 Jul 2019 16:36:47 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2018-07-02;
- bh=NcEmgxFBkFhHtsmzHQMfdfD6CfmHpDivA+w7qyMfS38=;
- b=hRxz717aoeNnSARD0LpeSZul2T3ZtwlydauRX1/Zc6j2LHZfHtpJfmaag8+xsYBppedH
- r51OP+Z2vTp65LNqljauvjt+wwlbA5YmWBP3u/5mD+YMgoAuBcJ52tsZ29oMauhPstus
- /qT6qB/IljI/XWvBplLt8srirE1J0+bmuxUb8B1t7TEUMM2MzlhEQXgAgo15A+jKeTb4
- txa9orNnS/bo+gIft8CCmmTir96K0m9HnfFSER3ngTyfFq5wQmef3PZ2De9J/4wDBT7V
- 9L+4s7tRYrA/5KmFrEn2wjhxyVJKkTnWM1AaxnH8QMNwHYiEdu+aet8jalq3RkXMHeLq rg== 
-Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
-        by userp2130.oracle.com with ESMTP id 2te61efkbh-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Thu, 04 Jul 2019 16:36:47 +0000
-Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
-        by aserp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x64GXjmP146881;
-        Thu, 4 Jul 2019 16:36:46 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
-        by aserp3020.oracle.com with ESMTP id 2th9ec1vs5-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Thu, 04 Jul 2019 16:36:46 +0000
-Received: from abhmp0015.oracle.com (abhmp0015.oracle.com [141.146.116.21])
-        by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id x64GaiRq015099;
-        Thu, 4 Jul 2019 16:36:44 GMT
-Received: from tomti.i.net-space.pl (/10.175.209.195)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Thu, 04 Jul 2019 09:36:44 -0700
-From:   Daniel Kiper <daniel.kiper@oracle.com>
-To:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        x86@kernel.org
-Cc:     bp@alien8.de, corbet@lwn.net, dpsmith@apertussolutions.com,
-        eric.snowberg@oracle.com, hpa@zytor.com, kanth.ghatraju@oracle.com,
-        konrad.wilk@oracle.com, mingo@redhat.com,
-        ross.philipson@oracle.com, tglx@linutronix.de
-Subject: [PATCH v2 3/3] x86/boot: Introduce the kernel_info.setup_type_max
-Date:   Thu,  4 Jul 2019 18:36:12 +0200
-Message-Id: <20190704163612.14311-4-daniel.kiper@oracle.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20190704163612.14311-1-daniel.kiper@oracle.com>
-References: <20190704163612.14311-1-daniel.kiper@oracle.com>
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9307 signatures=668688
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1810050000 definitions=main-1907040210
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9307 signatures=668688
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
- definitions=main-1907040210
+        id S1727090AbfGDSL1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Jul 2019 14:11:27 -0400
+Received: from mail-wr1-f68.google.com ([209.85.221.68]:36582 "EHLO
+        mail-wr1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727026AbfGDSL1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Jul 2019 14:11:27 -0400
+Received: by mail-wr1-f68.google.com with SMTP id n4so7501490wrs.3
+        for <linux-doc@vger.kernel.org>; Thu, 04 Jul 2019 11:11:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=EeY1//zgHjHvZL8PlJS76RO/TPLoiFY9/zkEu270Qfs=;
+        b=SgKiCrhYnxaQpOWryEwRE0jUNEKFhFz3Iw6QyUsme9ZyaVqDNoXUooFMnA9vLDiVP7
+         nDCBoZ9A80UD5z1G3VQD8CFzjxv1gj4kZfqNLxR1Zggc2VAX4N3/+gOBFNCAY2gxuw+7
+         H2pmvBR0LaFZT07eB3T7R1Y+sXr6XU3udnIPQ9T0D+ULJpDhKybLGnxrq4OBUbr8YTq6
+         iaoVk1x+JEIbZ5//8L00zQqNoEWsUB56O+t81vS12tlef8yb3zrkg5NHgLA8aZQXsTfU
+         cSFGAcip1OWVtzXCumPbhhUl7zPMoDq0Vt5/rfzG2HoM7Xc9+VLgoV2PBisnbK/CIbsP
+         IlUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=EeY1//zgHjHvZL8PlJS76RO/TPLoiFY9/zkEu270Qfs=;
+        b=D1fl7PZfSbtDQUpp8dNHEgsyj7gMMtRtijmxVY192K80mV7cZbsvqKKz7kikmX7y6q
+         4Kc9zH1A7nUfLfMySGSZ3d1vBGS6Ln/6jWRO4n9Vl7X/J+UHIxiomW2hqiVZTfSovrAM
+         xuVmXYvLPsO3Zm7wlLBQbKZ2mY/rXDnHMc+Zo01jmiGaaVajYYRQHrx7ytyNP8InwELu
+         CaWAfjEs1PMCYDnbER498ctj2D5q1Bz8aemZlF5GtYyC94tT5nKIGT3rMAVTBRfFDA42
+         J6lOG4CZwDB9dkiiqmwelh1ASWiTnMdcPL7U7TvpjjBFMQHFgHkkxorUseMCpf7CQGPq
+         iKxQ==
+X-Gm-Message-State: APjAAAVcqC7TYRmQOPwtOUVtqGYwFWrZjkMz0RUvpZvksslwqbAu9qdE
+        hA6dviGYPgjqXxI5YnfNoKzU9Q==
+X-Google-Smtp-Source: APXvYqyG/pol3jM2+TZsOqHSuN2Z8zVhvdIGUGLFjgj1lkzu8Hii2SD1es3NYfFmFBlXgWjxuCr5Vg==
+X-Received: by 2002:adf:aacf:: with SMTP id i15mr24167399wrc.124.1562263884453;
+        Thu, 04 Jul 2019 11:11:24 -0700 (PDT)
+Received: from apalos (athedsl-428434.home.otenet.gr. [79.131.225.144])
+        by smtp.gmail.com with ESMTPSA id o4sm6313945wmh.35.2019.07.04.11.11.22
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 04 Jul 2019 11:11:23 -0700 (PDT)
+Date:   Thu, 4 Jul 2019 21:11:20 +0300
+From:   Ilias Apalodimas <ilias.apalodimas@linaro.org>
+To:     Thirupathaiah Annapureddy <thiruan@microsoft.com>
+Cc:     Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
+        Sasha Levin <sashal@kernel.org>,
+        "peterhuewe@gmx.de" <peterhuewe@gmx.de>,
+        "jgg@ziepe.ca" <jgg@ziepe.ca>, "corbet@lwn.net" <corbet@lwn.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>,
+        Microsoft Linux Kernel List <linux-kernel@microsoft.com>,
+        "Bryan Kelly (CSI)" <bryankel@microsoft.com>,
+        "tee-dev@lists.linaro.org" <tee-dev@lists.linaro.org>,
+        "sumit.garg@linaro.org" <sumit.garg@linaro.org>,
+        "rdunlap@infradead.org" <rdunlap@infradead.org>,
+        Joakim Bech <joakim.bech@linaro.org>
+Subject: Re: [PATCH v7 1/2] fTPM: firmware TPM running in TEE
+Message-ID: <20190704181120.GA21445@apalos>
+References: <673dd30d03e8ed9825bb46ef21b2efef015f6f2a.camel@linux.intel.com>
+ <20190626235653.GL7898@sasha-vm>
+ <b688e845ccbe011c54b10043fbc3c0de8f0befc2.camel@linux.intel.com>
+ <20190627133004.GA3757@apalos>
+ <0893dc429d4c3f3b52d423f9e61c08a5012a7519.camel@linux.intel.com>
+ <20190702142109.GA32069@apalos>
+ <CY4PR21MB0279B99FB0097309ADE83809BCF80@CY4PR21MB0279.namprd21.prod.outlook.com>
+ <20190703065813.GA12724@apalos>
+ <CAC_iWjK2F13QxjuvqzqNLx00SiGz_FQ5X=MQxJyDev57bo3=LQ@mail.gmail.com>
+ <CY4PR21MB02791B5EF653514DC0223694BCFA0@CY4PR21MB0279.namprd21.prod.outlook.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CY4PR21MB02791B5EF653514DC0223694BCFA0@CY4PR21MB0279.namprd21.prod.outlook.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This field contains maximal allowed type for setup_data and
-setup_indirect structs.
+Hi Thirupathaiah,
+[...]
+> > > > > I managed to do some quick testing in QEMU.
+> > > > > Everything works fine when i build this as a module (using IBM's TPM 2.0
+> > > > > TSS)
+> > > > >
+> > > > > - As module
+> > > > > # insmod /lib/modules/5.2.0-rc1/kernel/drivers/char/tpm/tpm_ftpm_tee.ko
+> > > > > # getrandom -by 8
+> > > > > randomBytes length 8
+> > > > > 23 b9 3d c3 90 13 d9 6b
+> > > > >
+> > > > > - Built-in
+> > > > > # dmesg | grep optee
+> > > > > ftpm-tee firmware:optee: ftpm_tee_probe:tee_client_open_session failed,
+> > > > > err=ffff0008
+> > > > This (0xffff0008) translates to TEE_ERROR_ITEM_NOT_FOUND.
+> > > >
+> > > > Where is fTPM TA located in the your test setup?
+> > > > Is it stitched into TEE binary as an EARLY_TA or
+> > > > Is it expected to be loaded during run-time with the help of user mode OP-
+> > TEE supplicant?
+> > > >
+> > > > My guess is that you are trying to load fTPM TA through user mode OP-TEE
+> > supplicant.
+> > > > Can you confirm?
+> > > I tried both
+> > >
+> > 
+> > Ok apparently there was a failure with my built-in binary which i
+> > didn't notice. I did a full rebuilt and checked the elf this time :)
+> > 
+> > Built as an earlyTA my error now is:
+> > ftpm-tee firmware:optee: ftpm_tee_probe:tee_client_open_session
+> > failed, err=ffff3024 (translates to TEE_ERROR_TARGET_DEAD)
+> > Since you tested it on real hardware i guess you tried both
+> > module/built-in. Which TEE version are you using?
+> 
+> I am glad that the first issue (TEE_ERROR_ITEM_NOT_FOUND) is resolved after stitching
+> fTPM TA as an EARLY_TA. 
+> 
+> Regarding TEE_ERROR_TARGET_DEAD error, may I know which HW platform you are using to test? 
 
-And finally bump setup_header version in arch/x86/boot/header.S.
+QEMU, on armv7
 
-Suggested-by: H. Peter Anvin <hpa@zytor.com>
-Signed-off-by: Daniel Kiper <daniel.kiper@oracle.com>
-Reviewed-by: Ross Philipson <ross.philipson@oracle.com>
-Reviewed-by: Eric Snowberg <eric.snowberg@oracle.com>
----
- Documentation/x86/boot.rst             | 10 +++++++++-
- arch/x86/boot/compressed/kernel_info.S |  4 ++++
- arch/x86/boot/header.S                 |  2 +-
- arch/x86/include/uapi/asm/bootparam.h  |  3 +++
- 4 files changed, 17 insertions(+), 2 deletions(-)
+> What is the preboot environment (UEFI or U-boot)? 
+> Where is the secure storage in that HW platform? 
+> I could think of two classes of secure storage. 
+> 1. UFS/eMMC RPMB : If Supplicant in U-boot/UEFI initializes the 
+> fTPM TA NV Storage, there should be no issue. 
+> If fTPM TA NV storage is not initialized in pre-boot environment and you are using
+> built-in fTPM Linux driver, you can run into this issue as TA will try to initialize
+> NV store and fail. 
+> 
+> 2. other storage devices like QSPI accessible to only secure mode after
+> EBS/ReadyToBoot mile posts during boot. In this case, there should be no issue at all
+> as there is no dependency on non-secure side services provided by supplicant. 
+> 
 
-diff --git a/Documentation/x86/boot.rst b/Documentation/x86/boot.rst
-index 23d3726d54fc..63609fd0517f 100644
---- a/Documentation/x86/boot.rst
-+++ b/Documentation/x86/boot.rst
-@@ -73,7 +73,8 @@ Protocol 2.14:	BURNT BY INCORRECT COMMIT ae7e1238e68f2a472a125673ab506d49158c188
- 		(x86/boot: Add ACPI RSDP address to setup_header)
- 		DO NOT USE!!! ASSUME SAME AS 2.13.
- 
--Protocol 2.15:	(Kernel 5.3) Added the kernel_info and setup_indirect.
-+Protocol 2.15:	(Kernel 5.3) Added the kernel_info, kernel_info.setup_type_max
-+		and setup_indirect.
- =============	============================================================
- 
- .. note::
-@@ -980,6 +981,13 @@ Offset/size:	0x0004/4
-   This field contains the size of the kernel_info including kernel_info.header.
-   It should be used by the boot loader to detect supported fields in the kernel_info.
- 
-+============	==============
-+Field name:	setup_type_max
-+Offset/size:	0x0008/4
-+============	==============
-+
-+  This field contains maximal allowed type for setup_data and setup_indirect structs.
-+
- 
- The Image Checksum
- ==================
-diff --git a/arch/x86/boot/compressed/kernel_info.S b/arch/x86/boot/compressed/kernel_info.S
-index 3f1cb301b9ff..2f28aabf6558 100644
---- a/arch/x86/boot/compressed/kernel_info.S
-+++ b/arch/x86/boot/compressed/kernel_info.S
-@@ -1,5 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0 */
- 
-+#include <asm/bootparam.h>
-+
- 	.section ".rodata.kernel_info", "a"
- 
- 	.global kernel_info
-@@ -9,4 +11,6 @@ kernel_info:
- 	.ascii	"InfO"
-         /* Size. */
- 	.long	kernel_info_end - kernel_info
-+        /* Maximal allowed type for setup_data and setup_indirect structs. */
-+	.long	SETUP_TYPE_MAX
- kernel_info_end:
-diff --git a/arch/x86/boot/header.S b/arch/x86/boot/header.S
-index ec6a25a43148..893a456663ab 100644
---- a/arch/x86/boot/header.S
-+++ b/arch/x86/boot/header.S
-@@ -300,7 +300,7 @@ _start:
- 	# Part 2 of the header, from the old setup.S
- 
- 		.ascii	"HdrS"		# header signature
--		.word	0x020d		# header version number (>= 0x0105)
-+		.word	0x020f		# header version number (>= 0x0105)
- 					# or else old loadlin-1.5 will fail)
- 		.globl realmode_swtch
- realmode_swtch:	.word	0, 0		# default_switch, SETUPSEG
-diff --git a/arch/x86/include/uapi/asm/bootparam.h b/arch/x86/include/uapi/asm/bootparam.h
-index aaaa17fa6ad6..2ba870dae6f3 100644
---- a/arch/x86/include/uapi/asm/bootparam.h
-+++ b/arch/x86/include/uapi/asm/bootparam.h
-@@ -12,6 +12,9 @@
- #define SETUP_JAILHOUSE			6
- #define SETUP_INDIRECT			7
- 
-+/* max(SETUP_*) */
-+#define SETUP_TYPE_MAX			SETUP_INDIRECT
-+
- /* ram_size flags */
- #define RAMDISK_IMAGE_START_MASK	0x07FF
- #define RAMDISK_PROMPT_FLAG		0x8000
--- 
-2.11.0
+Please check the previous mail from Sumit. It explains exaclty what's going on.
+The tl;dr version is that the storage is up only when the supplicant is running.
 
+> If you let me know the HW platform details, I am happy to work with you to enable/integrate
+> fTPM TA on that HW platform. 
+> 
+Thanks, 
+The hardware i am waiting for for has an eMMC RPMB. In theory the U-Boot
+supplicant support will be there so i'll be able to test it.
+
+Thanks
+/Ilias
