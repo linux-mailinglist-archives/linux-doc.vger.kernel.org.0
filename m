@@ -2,93 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D57895F74F
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2019 13:46:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D05175FBFD
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2019 18:39:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727548AbfGDLp7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Jul 2019 07:45:59 -0400
-Received: from mga01.intel.com ([192.55.52.88]:2275 "EHLO mga01.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727436AbfGDLp7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 4 Jul 2019 07:45:59 -0400
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 04 Jul 2019 04:45:58 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.63,450,1557212400"; 
-   d="scan'208";a="339583474"
-Received: from hao-dev.bj.intel.com (HELO localhost) ([10.238.157.65])
-  by orsmga005.jf.intel.com with ESMTP; 04 Jul 2019 04:45:56 -0700
-Date:   Thu, 4 Jul 2019 19:29:13 +0800
-From:   Wu Hao <hao.wu@intel.com>
-To:     Greg KH <gregkh@linuxfoundation.org>
-Cc:     Moritz Fischer <mdf@kernel.org>, linux-fpga@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Zhang Yi Z <yi.z.zhang@intel.com>,
-        Xu Yilun <yilun.xu@intel.com>, Alan Tull <atull@kernel.org>
-Subject: Re: [PATCH 06/15] fpga: dfl: fme: add
- DFL_FPGA_FME_PORT_RELEASE/ASSIGN ioctl support.
-Message-ID: <20190704112913.GA24884@hao-dev>
-References: <20190628004951.6202-1-mdf@kernel.org>
- <20190628004951.6202-7-mdf@kernel.org>
- <20190703180753.GA24723@kroah.com>
- <20190703233058.GA15825@hao-dev>
- <20190704053927.GB347@kroah.com>
- <20190704063106.GA24777@hao-dev>
- <20190704082013.GE6438@kroah.com>
- <20190704085855.GB7391@hao-dev>
- <20190704110449.GC1404@kroah.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190704110449.GC1404@kroah.com>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+        id S1727116AbfGDQjT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Jul 2019 12:39:19 -0400
+Received: from aserp2120.oracle.com ([141.146.126.78]:54846 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726038AbfGDQjS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Jul 2019 12:39:18 -0400
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x64GXtXs024868;
+        Thu, 4 Jul 2019 16:38:45 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id; s=corp-2018-07-02;
+ bh=5+6c9J5hsLXAS3y9QhZ2laqXZP49w96VU6nbreUKrFg=;
+ b=K+/LnDb4B4jkTz2kamodwT13+Opqq+Rwvb16SM+8S9GMvS7u/+iv5YPIPiYnTlzyZn+p
+ lVTUEj9bY2ebxWc5IgAGNXcXekJ38PxBCsCfnEYuaOeWso8qK3Dp3VUVipqVaBrprN0w
+ kmDtB8bPVqs9UDPJDv7m4f6Ftiw+fPqiZlU/hevAFQIxwamdn0Q1YSAZ53sorO/38oqL
+ kiB7VgYSbnI3jpZJWax/5NrI3HGevLDETME80cjx7LgiuHziv2zmCmPPZePS+KDVk9nR
+ IgRX4YKnBXUWlsjATsnTzgGBqjCjOYR4HHP+AaNRR9XPb7ETh2mw9I91oKxbUgZauZb3 Vg== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+        by aserp2120.oracle.com with ESMTP id 2te5tbymx7-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Thu, 04 Jul 2019 16:38:45 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+        by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x64GX9gl098425;
+        Thu, 4 Jul 2019 16:36:44 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+        by userp3030.oracle.com with ESMTP id 2th5qm49at-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Thu, 04 Jul 2019 16:36:44 +0000
+Received: from abhmp0015.oracle.com (abhmp0015.oracle.com [141.146.116.21])
+        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x64GaZkL023461;
+        Thu, 4 Jul 2019 16:36:35 GMT
+Received: from tomti.i.net-space.pl (/10.175.209.195)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Thu, 04 Jul 2019 09:36:35 -0700
+From:   Daniel Kiper <daniel.kiper@oracle.com>
+To:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        x86@kernel.org
+Cc:     bp@alien8.de, corbet@lwn.net, dpsmith@apertussolutions.com,
+        eric.snowberg@oracle.com, hpa@zytor.com, kanth.ghatraju@oracle.com,
+        konrad.wilk@oracle.com, mingo@redhat.com,
+        ross.philipson@oracle.com, tglx@linutronix.de
+Subject: [PATCH v2 0/3] x86/boot: Introduce the kernel_info et consortes
+Date:   Thu,  4 Jul 2019 18:36:09 +0200
+Message-Id: <20190704163612.14311-1-daniel.kiper@oracle.com>
+X-Mailer: git-send-email 2.11.0
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9307 signatures=668688
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=677
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1810050000 definitions=main-1907040210
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9307 signatures=668688
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=721 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1810050000
+ definitions=main-1907040210
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jul 04, 2019 at 01:04:49PM +0200, Greg KH wrote:
-> On Thu, Jul 04, 2019 at 04:58:55PM +0800, Wu Hao wrote:
-> > > > Hope things could be more clear now. :)
-> > > 
-> > > That's nice for the vfio stuff, but you are just a "normal" driver here.
-> > > You want an ioctl that just does one thing, no arguments, no flags, no
-> > > anything.  No need for a size argument then at all.  These ioctls don't
-> > > even need a structure for them!
-> > > 
-> > > Don't try to be fancy, it's not needed, it's not like you are running
-> > > out of ioctl space...
-> > 
-> > Thanks a lot for the comments and suggestions.
-> > 
-> > That's true, it's a "normal" driver, maybe I overly considered the
-> > extensibility of it. OK, Let me rework this patch to remove argsz from
-> > these two ioctls.
-> > 
-> > What about the existing ioctls for this driver, they have argsz too.
-> > shall I prepare another patch to remove them as well?
-> 
-> I am hoping you actually have users for those ioctls in userspace today?
-> If not, and no one is using them, then yes, please fix those too.
+Hi,
 
-Yes, we have a few users, not many, e.g. https://github.com/OPAE/opae-sdk
+Due to very limited space in the setup_header this patch series introduces new
+kernel_info struct which will be used to convey information from the kernel to
+the bootloader. This way the boot protocol can be extended regardless of the
+setup_header limitations. Additionally, the patch series introduces some
+convenience features like the setup_indirect struct and the
+kernel_info.setup_type_max field.
 
-I believe we may have more users as we are submitting code to make this
-driver more usable.
+Daniel
 
-Let me think about this, if we want to do this clean up, we have to 
-increase the API version to tell everybody, things are changed. If
-finally we decide to do this clean up, that will be a new patch after
-this patchset.
+ Documentation/x86/boot.rst             | 133 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ arch/x86/boot/Makefile                 |   2 +-
+ arch/x86/boot/compressed/Makefile      |   4 +--
+ arch/x86/boot/compressed/kernel_info.S |  16 ++++++++++
+ arch/x86/boot/header.S                 |   3 +-
+ arch/x86/boot/tools/build.c            |   5 +++
+ arch/x86/include/uapi/asm/bootparam.h  |  15 ++++++++-
+ 7 files changed, 173 insertions(+), 5 deletions(-)
 
-Many Thanks for your patient guide and suggestions. :)
+Daniel Kiper (3):
+      x86/boot: Introduce the kernel_info
+      x86/boot: Introduce the setup_indirect
+      x86/boot: Introduce the kernel_info.setup_type_max
 
-Hao
-
-> 
-> thanks,
-> 
-> greg k-h
