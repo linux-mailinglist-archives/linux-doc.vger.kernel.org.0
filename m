@@ -2,108 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DC7765F30A
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2019 08:45:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 00C845F3CA
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Jul 2019 09:33:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725945AbfGDGpb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 4 Jul 2019 02:45:31 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:23286 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726698AbfGDGp0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Jul 2019 02:45:26 -0400
-Received: from pps.filterd (m0098393.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x646gXuS059047
-        for <linux-doc@vger.kernel.org>; Thu, 4 Jul 2019 02:45:26 -0400
-Received: from e13.ny.us.ibm.com (e13.ny.us.ibm.com [129.33.205.203])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 2tha40vjs3-1
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-        for <linux-doc@vger.kernel.org>; Thu, 04 Jul 2019 02:45:25 -0400
-Received: from localhost
-        by e13.ny.us.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
-        for <linux-doc@vger.kernel.org> from <bauerman@linux.ibm.com>;
-        Thu, 4 Jul 2019 07:45:24 +0100
-Received: from b01cxnp22036.gho.pok.ibm.com (9.57.198.26)
-        by e13.ny.us.ibm.com (146.89.104.200) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
-        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-        Thu, 4 Jul 2019 07:45:19 +0100
-Received: from b01ledav006.gho.pok.ibm.com (b01ledav006.gho.pok.ibm.com [9.57.199.111])
-        by b01cxnp22036.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x646jIW138338826
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Thu, 4 Jul 2019 06:45:18 GMT
-Received: from b01ledav006.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id B3404AC06B;
-        Thu,  4 Jul 2019 06:45:17 +0000 (GMT)
-Received: from b01ledav006.gho.pok.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 4321AAC05B;
-        Thu,  4 Jul 2019 06:45:11 +0000 (GMT)
-Received: from morokweng.localdomain (unknown [9.85.146.222])
-        by b01ledav006.gho.pok.ibm.com (Postfix) with ESMTPS;
-        Thu,  4 Jul 2019 06:45:10 +0000 (GMT)
-References: <20190628021934.4260-1-bauerman@linux.ibm.com> <1561991934.4067.17.camel@linux.ibm.com>
-User-agent: mu4e 1.2.0; emacs 26.2
-From:   Thiago Jung Bauermann <bauerman@linux.ibm.com>
-To:     Mimi Zohar <zohar@linux.ibm.com>
-Cc:     linux-integrity@vger.kernel.org,
-        linux-security-module@vger.kernel.org, keyrings@vger.kernel.org,
-        linux-crypto@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Dmitry Kasatkin <dmitry.kasatkin@gmail.com>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>,
-        David Howells <dhowells@redhat.com>,
-        "David Woodhouse" <dwmw2@infradead.org>,
-        Jessica Yu <jeyu@kernel.org>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "AKASHI\, Takahiro" <takahiro.akashi@linaro.org>
-Subject: Re: [PATCH v12 00/11] Appended signatures support for IMA appraisal
-In-reply-to: <1561991934.4067.17.camel@linux.ibm.com>
-Date:   Thu, 04 Jul 2019 03:45:07 -0300
+        id S1726267AbfGDHde (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 4 Jul 2019 03:33:34 -0400
+Received: from mail-lj1-f196.google.com ([209.85.208.196]:45785 "EHLO
+        mail-lj1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725945AbfGDHde (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 4 Jul 2019 03:33:34 -0400
+Received: by mail-lj1-f196.google.com with SMTP id m23so5104062lje.12
+        for <linux-doc@vger.kernel.org>; Thu, 04 Jul 2019 00:33:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=5nZlyonaYBcIHFs68w4W+bmgmZLAi4DVNEFkxYXC9bg=;
+        b=ly2ZB1RacvoXgtBZuxppsAKpbjRSfhQ8AdBwb59ZI7CcTPAY1b3+VAeo9SDLy3CvhX
+         NErHZ15uZn6Ui9j+6+th4cMMXPdKCoDyxmdwWuuy5tfhlvQqFRHhSdtzBGediN13vhQg
+         ltkRmZPytPiNO1j6j96DMn2FyHsaAg57+T7wMNLrUzRhGGk+MnbAtjEi5HuvEI/lFLdR
+         pbrUYpGK0O8kY6JjOxnLdhffIFMFuFnUYi0npgFV5QL5gdABcvOnBBKyK9tW8UKnUTr9
+         NchwHX5TsqNKMwWVk9WGT3/5wDsYuqYktsAKmDS1iOpCpm/BQN4/Woo2HrGv6JUS5dgk
+         LcBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=5nZlyonaYBcIHFs68w4W+bmgmZLAi4DVNEFkxYXC9bg=;
+        b=uKgY8cjTpSQq2RazbOKAXEe4WJ+U5xaS20zklIm2zcxbZcMJv2M/3t6fRCijNXUTzU
+         dZmSvTFAkOHeX68V2WN3qbdntsS/dNoe29YYUJRrAXkxOAFb5xAc7EoSI8rPPjtJF9Hw
+         xMGJmEPrgi+tu9TcI7uoLgYWoPOaRDCB97C4wrC69tkM9hceGrp9N/7QO2lZpK/wvUSO
+         BZxWz9gbQZaNYNEm0MbOrCJPWigriu+lBv1DWSw/w/ztUbbwnyZoaxwponjaZeXMqJmv
+         qLm9lOxNuMfa4lZsZAwzh2h6XA0Cpp8kpWHvI3j7xQ5p0bM+jUt7o5EF8D15u1CFNEUr
+         v8zw==
+X-Gm-Message-State: APjAAAWKi/wzJZIJhNPJFcs9PoDj3PWBD4gKKHc+8HyhozzLSyjklKGp
+        2t+f63OnV4B1vypD9H7ji8QNAfBf49/r5IEHO+K8Jg==
+X-Google-Smtp-Source: APXvYqx26V0oB3KzDPNa332FvmrdU9YRFQjWa+Pf4/6aOydVvuHTShaMCf9kZhWzOw++n54b2Y94ETsphqlWJxoLR4E=
+X-Received: by 2002:a2e:9048:: with SMTP id n8mr2092620ljg.37.1562225612626;
+ Thu, 04 Jul 2019 00:33:32 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-TM-AS-GCONF: 00
-x-cbid: 19070406-0064-0000-0000-000003F7088F
-X-IBM-SpamModules-Scores: 
-X-IBM-SpamModules-Versions: BY=3.00011376; HX=3.00000242; KW=3.00000007;
- PH=3.00000004; SC=3.00000286; SDB=6.01227188; UDB=6.00646128; IPR=6.01008425;
- MB=3.00027580; MTD=3.00000008; XFM=3.00000015; UTC=2019-07-04 06:45:23
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19070406-0065-0000-0000-00003E225467
-Message-Id: <87k1cyl2mk.fsf@morokweng.localdomain>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-07-04_03:,,
- signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1810050000 definitions=main-1907040087
+References: <20190701141005.24631-1-geert+renesas@glider.be>
+In-Reply-To: <20190701141005.24631-1-geert+renesas@glider.be>
+From:   Linus Walleij <linus.walleij@linaro.org>
+Date:   Thu, 4 Jul 2019 09:33:21 +0200
+Message-ID: <CACRpkdavvUR3G89_5DpXvgfpJ7LsxWiLyjFS0hSXVwAgaRFM-Q@mail.gmail.com>
+Subject: Re: [PATCH] Documentation: gpio: Fix reference to gpiod_get_array()
+To:     Geert Uytterhoeven <geert+renesas@glider.be>
+Cc:     Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Janusz Krzysztofik <jmkrzyszt@gmail.com>,
+        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Mon, Jul 1, 2019 at 4:10 PM Geert Uytterhoeven
+<geert+renesas@glider.be> wrote:
 
-Mimi Zohar <zohar@linux.ibm.com> writes:
-
-> On Thu, 2019-06-27 at 23:19 -0300, Thiago Jung Bauermann wrote:
->> Hello,
->> 
->> This version is essentially identical to the last one.
->> 
->> It is only a rebase on top of today's linux-integrity/next-queued-testing,
->> prompted by conflicts with Prakhar Srivastava's patches to measure the
->> kernel command line. It also drops two patches that are already present in
->> that branch.
+> The function is called gpiod_get_array(), not gpiod_array_get().
 >
-> Thanks, Thiago.  These patches are now in next-queued-testing waiting
-> for some additional reviews/acks.
+> Fixes: 77588c14ac868cae ("gpiolib: Pass array info to get/set array functions")
+> Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
 
-Thank you very much, Mimi! Now I think I'm only missing acks for the
-PKCS#7 changes in patches 2 and 3, and an ack for the s390 changes in
-patch 1.
+Patch applied.
 
--- 
-Thiago Jung Bauermann
-IBM Linux Technology Center
-
+Yours,
+Linus Walleij
