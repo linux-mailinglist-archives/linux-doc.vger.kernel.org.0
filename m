@@ -2,101 +2,115 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CD60C626A4
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2019 18:52:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8CC0862705
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2019 19:25:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390072AbfGHQwI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 Jul 2019 12:52:08 -0400
-Received: from mail-pl1-f193.google.com ([209.85.214.193]:35878 "EHLO
-        mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2388417AbfGHQwH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 Jul 2019 12:52:07 -0400
-Received: by mail-pl1-f193.google.com with SMTP id k8so8584739plt.3
-        for <linux-doc@vger.kernel.org>; Mon, 08 Jul 2019 09:52:07 -0700 (PDT)
+        id S2390047AbfGHRZa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 8 Jul 2019 13:25:30 -0400
+Received: from mail-qt1-f193.google.com ([209.85.160.193]:46238 "EHLO
+        mail-qt1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2389799AbfGHRZa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 Jul 2019 13:25:30 -0400
+Received: by mail-qt1-f193.google.com with SMTP id h21so16624504qtn.13
+        for <linux-doc@vger.kernel.org>; Mon, 08 Jul 2019 10:25:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=7J75IjUlVRUhuaNNPo9Ipgx69MtKDspwKECQeExp82M=;
-        b=UW8RQCXtp/S+37WliHJNkYf0tEdGA9WliIuwmJAtSxpVsPCZ2vWttD/8U+ykPhxs7i
-         yZARhp7BxL3hOwVybmL0bkBqZ7RpOp+sJ0tXHELzzjxUOBub+bX7Un89CbujX/5dB9vK
-         Wl2zQzXVUfeX5Qeea08Zq62Hve+yFBzR4ERDFoSXWa0id188ZL+i5ofm5lQo6b1kgfe+
-         M4LDO47Ib48dGjYxwkuXcNFy76gBTYQBKoB0AvHkhEkxnbMXIegALVkZyTBZQBzcvCry
-         QUG99XubmNxuWJuVRqgQHNKTWP7ARooCFjd2zfmK14s/7kqZjRffqzwmF4nnOcDZDdX8
-         ELWQ==
+        d=ziepe.ca; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=ku/o68pleqE6un6ZW/BvkhdW//GDmVPordPUQ3yzu6U=;
+        b=aE8JZ4oLuploE3xF/JrOpdr9AoVRhkEOsLUz30R2UjWMXOkivBepSb7ZtC0ZX+KsXy
+         3jJydV56/hO6tGXVAMdnk5HMzPdKt86jE10qCn/1Gf88ooDqWjePCTTNZ0F+BSMBygqX
+         YPq3EkN9XpWd27tk+5DaiRPVF5jljyVG7WLFWT1raAYswkHluQ+WIivkJ/9MijGIrDSx
+         woUAgC/OYAaDLs3ChTeqeOT97WIiKsdJIuVECqzzDxRRnFjmfYc0TVVKBO4QBv1Yc2gL
+         zNp5fGpXei7QgoOsN3bD6RPxGHKUtvFfX0ZuijlV/H08KY1uKgW6HuDlLPmodBgLWv82
+         dkKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=7J75IjUlVRUhuaNNPo9Ipgx69MtKDspwKECQeExp82M=;
-        b=ALS3FLQzAxbNzkMp4qeM7qLQl8eSm0GKcr3/i9ikev7z8NQqL+Ee1ruOkOjQP4r/10
-         ZX9D2RPpr73qn0j+Il8CRaFPXyFpYwjjj/h9E54jB3a6e3l8jKkJAuWNdHhcZ0O4XqRO
-         VoyLWlnMNYPVzltLeih76tgp0MYgn2qSSArIIgFiamA9MZji/2f0DyqlUNVwnZGcUgIV
-         M5RxVLBQGY+D7D5+gHW1JieGnN2FBsXrx6wXGwM/PvBatpZs9pDiU8jay0rZtNdfjfeP
-         8vaH5+w5RcQVpv+k+sDaMIXCFK28KEUbAcuDLPlCNebNMejvrHSveFVEyaJHcNCt/clU
-         0YRw==
-X-Gm-Message-State: APjAAAVOXRJYyPKsu2+aCTWsFosFKFuuv165BU43dh8uuj1DaThQBdtl
-        mdEgxx3VzdalJnsROIow3I9u+x7Lw10nJSpvXowpPw==
-X-Google-Smtp-Source: APXvYqxZC/RbOPzH426d+AJ7hk6yz9LlEDD0UGKSQ4VMbe6CPTsw+qVU6PTMA1mI+yI0fR24oB7KfcIVEZiOuq1IbMs=
-X-Received: by 2002:a17:902:4aa3:: with SMTP id x32mr25318366pld.119.1562604726692;
- Mon, 08 Jul 2019 09:52:06 -0700 (PDT)
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=ku/o68pleqE6un6ZW/BvkhdW//GDmVPordPUQ3yzu6U=;
+        b=KV7cKIXxGb6htfkLXdUZj89WTORFHsaVYJaVn8gcZsCzDrsQM1NtMfggSMyKQgfQoM
+         F8gntVZR7OVsXBEgqoJup1N4KRTUOGAUT9zNmO/FxSf9ayDR4U68WUPw10+eBhX8vRnc
+         7uP4wv9IjI4nfA1pFXelwmGwkMbmXwYSEmFTS0Tu1CdNC9iDlnpNsVQiofEzoyD71GDa
+         fMk1/WeUZ31QJNaj14fRuYV6lHCp/BQ/Ib8Es4ekxFFk8bmBn+QKmXTNSczMDT5SXh4p
+         luEGl1yzBtwCymHGn/Lj5FhZi4Y0y1uMYwnQ6RgK0Jq23eI0ew9zspAxzGO25E2BJoB/
+         RPxw==
+X-Gm-Message-State: APjAAAUzdtnfDgLoITchzGGpx9n5CyN8BF7cae8M+AefPVhDWb+r6C3V
+        yRI3Xjy9Z1HGYnWUwHmv143iVnRMjcItqg==
+X-Google-Smtp-Source: APXvYqxo7P6BBN+I5qF/OaEb7YKPon028ElmrspccvTXQPbFVXwjbGN4QtHkhSa38AtF7UfZ251zUw==
+X-Received: by 2002:ac8:1c42:: with SMTP id j2mr15087393qtk.68.1562606729322;
+        Mon, 08 Jul 2019 10:25:29 -0700 (PDT)
+Received: from ziepe.ca (hlfxns017vw-156-34-55-100.dhcp-dynamic.fibreop.ns.bellaliant.net. [156.34.55.100])
+        by smtp.gmail.com with ESMTPSA id t2sm9809926qth.33.2019.07.08.10.25.28
+        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+        Mon, 08 Jul 2019 10:25:28 -0700 (PDT)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+        (envelope-from <jgg@ziepe.ca>)
+        id 1hkXOK-0007Ke-A9; Mon, 08 Jul 2019 14:25:28 -0300
+Date:   Mon, 8 Jul 2019 14:25:28 -0300
+From:   Jason Gunthorpe <jgg@ziepe.ca>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Doug Ledford <dledford@redhat.com>, linux-rdma@vger.kernel.org
+Subject: Re: [PATCH 35/39] docs: infiniband: add it to the driver-api bookset
+Message-ID: <20190708172528.GC23996@ziepe.ca>
+References: <cover.1561724493.git.mchehab+samsung@kernel.org>
+ <12743088687a9b0b305c05b62a5093056a4190b8.1561724493.git.mchehab+samsung@kernel.org>
+ <20190703180802.GA26557@ziepe.ca>
+ <20190706081950.4a629537@coco.lan>
 MIME-Version: 1.0
-References: <20190705190239.8173-1-jeffrin@rajagiritech.edu.in>
-In-Reply-To: <20190705190239.8173-1-jeffrin@rajagiritech.edu.in>
-From:   Nick Desaulniers <ndesaulniers@google.com>
-Date:   Mon, 8 Jul 2019 09:51:55 -0700
-Message-ID: <CAKwvOd=wpJeBuQ9856+g53fMBgeZE-Pq0yFh1jTskGGGVriZOA@mail.gmail.com>
-Subject: Re: [PATCH] Documentation: dev-tools: Fixed an outdated directory
- path in gcov.rst
-To:     Jeffrin Jose T <jeffrin@rajagiritech.edu.in>,
-        Tri Vo <trong@google.com>
-Cc:     Peter Oberparleiter <oberpar@linux.ibm.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        LKML <linux-kernel@vger.kernel.org>,
-        clang-built-linux <clang-built-linux@googlegroups.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190706081950.4a629537@coco.lan>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-+Tri (on vacation) for review
+On Sat, Jul 06, 2019 at 08:19:50AM -0300, Mauro Carvalho Chehab wrote:
+> Em Wed, 3 Jul 2019 15:08:02 -0300
+> Jason Gunthorpe <jgg@ziepe.ca> escreveu:
+> 
+> > On Fri, Jun 28, 2019 at 09:30:28AM -0300, Mauro Carvalho Chehab wrote:
+> > > While this contains some uAPI stuff, it was intended to be
+> > > read by a kernel doc. So, let's not move it to a different
+> > > dir, but, instead, just add it to the driver-api bookset.
+> > > 
+> > > Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> > >  Documentation/index.rst            | 1 +
+> > >  Documentation/infiniband/index.rst | 2 +-
+> > >  2 files changed, 2 insertions(+), 1 deletion(-)
+> > > 
+> > > diff --git a/Documentation/index.rst b/Documentation/index.rst
+> > > index ea33cbbccd9d..e69d2fde7735 100644
+> > > +++ b/Documentation/index.rst
+> > > @@ -96,6 +96,7 @@ needed).
+> > >     block/index
+> > >     hid/index
+> > >     iio/index
+> > > +   infiniband/index
+> > >     leds/index
+> > >     media/index
+> > >     networking/index
+> > > diff --git a/Documentation/infiniband/index.rst b/Documentation/infiniband/index.rst
+> > > index 22eea64de722..9cd7615438b9 100644
+> > > +++ b/Documentation/infiniband/index.rst
+> > > @@ -1,4 +1,4 @@
+> > > -:orphan:
+> > > +.. SPDX-License-Identifier: GPL-2.0
+> > >  
+> > >  ==========
+> > >  InfiniBand  
+> > 
+> > Should this one go to the rdma.git as well? It looks like yes
+> 
+> I'm OK if you want to add to rdma.git. However, this will likely rise 
+> conflicts, though, as this series has lots of other patches touching
+> Documentation/index.rst. 
 
-On Fri, Jul 5, 2019 at 12:03 PM Jeffrin Jose T
-<jeffrin@rajagiritech.edu.in> wrote:
->
-> Fixed an outdated directory path inside gcov related documentation
-> which is part of an example that shows the way in which the gcov
-> command should be used in that context
->
-> Signed-off-by: Jeffrin Jose T <jeffrin@rajagiritech.edu.in>
-> ---
->  Documentation/dev-tools/gcov.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/Documentation/dev-tools/gcov.rst b/Documentation/dev-tools/gcov.rst
-> index 46aae52a41d0..e3d262d8c7de 100644
-> --- a/Documentation/dev-tools/gcov.rst
-> +++ b/Documentation/dev-tools/gcov.rst
-> @@ -8,7 +8,7 @@ To get coverage data for a specific file, change to the kernel build
->  directory and use gcov with the ``-o`` option as follows (requires root)::
->
->      # cd /tmp/linux-out
-> -    # gcov -o /sys/kernel/debug/gcov/tmp/linux-out/kernel spinlock.c
-> +    # gcov -o /sys/kernel/debug/gcov/tmp/linux-out/kernel/locking spinlock.c
->
->  This will create source code files annotated with execution counts
->  in the current directory. In addition, graphical gcov front-ends such
-> --
-> 2.20.1
->
-> --
-> You received this message because you are subscribed to the Google Groups "Clang Built Linux" group.
-> To unsubscribe from this group and stop receiving emails from it, send an email to clang-built-linux+unsubscribe@googlegroups.com.
-> To view this discussion on the web visit https://groups.google.com/d/msgid/clang-built-linux/20190705190239.8173-1-jeffrin%40rajagiritech.edu.in.
+Applied now, it seems better to keep everything consistent
 
-
-
--- 
-Thanks,
-~Nick Desaulniers
+Jason
