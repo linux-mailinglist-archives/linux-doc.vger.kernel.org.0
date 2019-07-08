@@ -2,54 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2FCA261FDB
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2019 15:53:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5AF3262041
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Jul 2019 16:15:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731491AbfGHNw5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 Jul 2019 09:52:57 -0400
-Received: from ms.lwn.net ([45.79.88.28]:51448 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727401AbfGHNw5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 8 Jul 2019 09:52:57 -0400
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 888C02EF;
-        Mon,  8 Jul 2019 13:52:56 +0000 (UTC)
-Date:   Mon, 8 Jul 2019 07:52:55 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Phong Tran <tranmanphong@gmail.com>
-Cc:     gregkh@linuxfoundation.org, skhan@linuxfoundation.org,
-        mchehab@kernel.org, linux-kernel-mentees@lists.linuxfoundation.org,
-        linux-usb@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] Documentation: usb: convert usb-help to rst
-Message-ID: <20190708075255.0f337b28@lwn.net>
-In-Reply-To: <20190705185519.31033-1-tranmanphong@gmail.com>
-References: <20190705185519.31033-1-tranmanphong@gmail.com>
-Organization: LWN.net
+        id S1728905AbfGHOO7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 8 Jul 2019 10:14:59 -0400
+Received: from Galois.linutronix.de ([193.142.43.55]:39489 "EHLO
+        Galois.linutronix.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728596AbfGHOO7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 Jul 2019 10:14:59 -0400
+Received: from [5.158.153.52] (helo=nanos.tec.linutronix.de)
+        by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
+        (Exim 4.80)
+        (envelope-from <tglx@linutronix.de>)
+        id 1hkUPi-0001Ht-7E; Mon, 08 Jul 2019 16:14:42 +0200
+Date:   Mon, 8 Jul 2019 16:14:41 +0200 (CEST)
+From:   Thomas Gleixner <tglx@linutronix.de>
+To:     Zhiqiang Liu <liuzhiqiang26@huawei.com>
+cc:     corbet@lwn.net, mcgrof@kernel.org,
+        Kees Cook <keescook@chromium.org>, akpm@linux-foundation.org,
+        manfred@colorfullife.com, jwilk@jwilk.net, dvyukov@google.com,
+        feng.tang@intel.com, sunilmut@microsoft.com,
+        quentin.perret@arm.com, linux@leemhuis.info, alex.popov@linux.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org,
+        "wangxiaogang (F)" <wangxiaogang3@huawei.com>,
+        "Zhoukang (A)" <zhoukang7@huawei.com>,
+        Mingfangsen <mingfangsen@huawei.com>, tedheadster@gmail.com,
+        Eric Dumazet <edumazet@google.com>
+Subject: Re: [PATCH next] softirq: enable MAX_SOFTIRQ_TIME tuning with sysctl
+ max_softirq_time_usecs
+In-Reply-To: <c1b7a345-fa22-e52a-4db8-1f1288e7ad15@huawei.com>
+Message-ID: <alpine.DEB.2.21.1907081558400.4709@nanos.tec.linutronix.de>
+References: <f274f85a-bbb6-3e32-b293-1d5d7f27a98f@huawei.com> <alpine.DEB.2.21.1906231820470.32342@nanos.tec.linutronix.de> <0099726a-ead3-bdbe-4c66-c8adc9a4f11b@huawei.com> <alpine.DEB.2.21.1906241141370.32342@nanos.tec.linutronix.de>
+ <c1b7a345-fa22-e52a-4db8-1f1288e7ad15@huawei.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat,  6 Jul 2019 01:55:19 +0700
-Phong Tran <tranmanphong@gmail.com> wrote:
+Zhiqiang,
 
-> Add new index.rst and change usb-help.txt format
-> to rst.
+On Tue, 25 Jun 2019, Zhiqiang Liu wrote:
+
+> I have a doubt about _msecs_to_jiffies funcs, especially when input m is
+> equal to 0.
+>
+> For different HZ setttings, different _msecs_to_jiffies funcs will be
+> chosen for msecs_to_jiffies func. However, the performance of different
+> _msecs_to_jiffies is inconsistent with input m is equal to 0.
+>
+> If HZ satisfies the condition: HZ <= MSEC_PER_SEC && !(MSEC_PER_SEC %
+> HZ), the return value of _msecs_to_jiffies func with m=0 is different
+> with different HZ setting.
+
+> ------------------------------------
+> | HZ |	MSEC_PER_SEC / HZ | return |
+> ------------------------------------
+> |1000|		1	  |   0	   |
+> |500 |		2	  |   1	   |
+> |200 |		5	  |   1	   |
+> |100 |		10	  |   1	   |
+> ------------------------------------
 > 
-> Signed-off-by: Phong Tran <tranmanphong@gmail.com>
+> Why only the return value of HZ=1000 is equal to 0 with m=0 ?
 
-Thank you for working to make the kernel's documentation better.  That
-said, I really don't think there is value in keeping this document.  It
-hasn't been updated in any useful way in decades, contains broken links,
-and the links that still work are full of obsolete information.  Honestly,
-a better patch would, IMO, just delete this file.
+I don't know how you tested that, but obviously all four HZ values use
+this variant:
+
+>     #if HZ <= MSEC_PER_SEC && !(MSEC_PER_SEC % HZ)
+>     static inline unsigned long _msecs_to_jiffies(const unsigned int m)
+>     {
+>             return (m + (MSEC_PER_SEC / HZ) - 1) / (MSEC_PER_SEC / HZ);
+>     }
+
+and for all four HZ values the result is 0. Why?
+
+For m = 0 the calculation reduces to:
+
+      ((MSEC_PER_SEC / HZ) - 1) / (MSEC_PER_SEC / HZ)
+
+i.e.
+
+	(x - 1) / x	where x = [1, 2, 5, 10]
+
+which is guaranteed to be 0 for integer math. If not, you have a compiler
+problem.
 
 Thanks,
 
-jon
+	tglx
