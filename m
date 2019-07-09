@@ -2,73 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7723D63B25
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2019 20:37:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C7C8363B59
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2019 20:46:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727027AbfGISdb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 9 Jul 2019 14:33:31 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:56706 "EHLO
+        id S1727233AbfGISqA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 Jul 2019 14:46:00 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:47714 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727028AbfGISd3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jul 2019 14:33:29 -0400
+        with ESMTP id S1726592AbfGISp7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jul 2019 14:45:59 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=lzQ/Qjq/0woNC8ClcMRNgoEEfKANaxJmJlDwa4T4CLc=; b=NNZ9GSnw0hdHQEGJT9P/SwJAgp
-        u98wRrDmFVTSn1yrcdIUphxXQFKE9oxw3BhKyeSEjnVAq+dmMfvxpDaRO2XG8y/1KIy+WJGRxDlLs
-        PknPGci3TcEIt5QLTDIl7WqrGyd6sdo+XfbXyIaaKqP2WPXpD7DOd1MXd1onXvh6QFEwgtYdtNpx+
-        DiqQa01J2K0J0lc6yn/hojGkMfypjlGPBe15ppXWwQoQT320trXN8SC9yJv9zFB7A4eJ5DnB0q92s
-        TFFxaASZWMGIOWZgHPYd6GdqGnDFU6GlmvOpKa8QIm/5EZYqZ41PSX8tr7xqOTdwGR2McsizzgTl3
-        gZcxOZtg==;
-Received: from 177.43.30.58.dynamic.adsl.gvt.net.br ([177.43.30.58] helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hkuvf-0007At-Bj; Tue, 09 Jul 2019 18:33:27 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
-        (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hkuvd-0005Q1-7i; Tue, 09 Jul 2019 15:33:25 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 5/5] docs: conf.py: add CJK package needed by translations
-Date:   Tue,  9 Jul 2019 15:33:23 -0300
-Message-Id: <545902a588b76f18cba035700fc0835067e9a1f8.1562696797.git.mchehab+samsung@kernel.org>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <cover.1562696797.git.mchehab+samsung@kernel.org>
-References: <cover.1562696797.git.mchehab+samsung@kernel.org>
+        d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+        :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=t9OheTk/YXmum441O9ftZpFS9er/+zh95pKwld4fGAw=; b=ZcfRHgdS5dZvpbhFJB5Y0+kTo
+        WoQP5pNcBks0NdLdZJBi5ZIvoFX3KLMPFPjbKmoSDcP1t7FO0vcsi5wf/gwHzD7p82IbDDPxr7kuG
+        YJcR0YmuBQF+RaFvPj2L5lS1N9FVSinAFg7VP+kbBifFL9Cdf1205aIQJd/3U4ZW59StzWS6JKWDp
+        XrfCGCf/KOuuhbVCQ6fj4mbl8zKfDMGgi/tVE/c7TIYWuNkOLamj3vglYxwp1ZjFIHi59KAtW/rOz
+        LE/prG1uIYmYS0wZ0yls2oZVJpUfjmYkeECSPltgEWlLBrSE62BTyCqNObVz6/bG2++eqs6odRD/w
+        czShoCIyA==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92 #3 (Red Hat Linux))
+        id 1hkv7n-00071T-72; Tue, 09 Jul 2019 18:45:59 +0000
+Date:   Tue, 9 Jul 2019 11:45:59 -0700
+From:   Matthew Wilcox <willy@infradead.org>
+To:     Sheriff Esseson <sheriffesseson@gmail.com>
+Cc:     skhan@linuxfoundation.org, darrick.wong@oracle.com,
+        linux-xfs@vger.kernel.org, corbet@lwn.net,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kernel-mentees@lists.linuxfoundation.org
+Subject: Re: [linux-kernel-mentees] [PATCH v6] Doc : fs : convert xfs.txt to
+ ReST
+Message-ID: <20190709184559.GL32320@bombadil.infradead.org>
+References: <20190709124859.GA21503@localhost>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190709124859.GA21503@localhost>
+User-Agent: Mutt/1.11.4 (2019-03-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In order to be able to output Asian symbols with XeLaTeX, we
-need the xeCJK package, and a default font for CJK symbols.
+On Tue, Jul 09, 2019 at 01:48:59PM +0100, Sheriff Esseson wrote:
+> Convert xfs.txt to ReST, rename and fix broken references, consequently.
+> 
+> Signed-off-by: Sheriff Esseson <sheriffesseson@gmail.com>
+> ---
+> 
+> Changes in v6:
+> 	- undo text reflow from v5.
+> 	- fix a typo.
+> 	- change indication of defaults , as suggested by Darrick J. Wong, to
+> 	  keep the read simple.
+> 	- change delimiter of boolean option from a newline to an "or" (clue
+> 	  from something like "<option> and <another option>" in the text)
+> 	  because the former does not render well in html.
+> 
+>  Documentation/filesystems/dax.txt             |   2 +-
+>  Documentation/filesystems/index.rst           |   1 +
+>  .../filesystems/{xfs.txt => xfs.rst}          | 123 +++++++++---------
+>  MAINTAINERS                                   |   2 +-
+>  4 files changed, 61 insertions(+), 67 deletions(-)
+>  rename Documentation/filesystems/{xfs.txt => xfs.rst} (81%)
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
----
- Documentation/conf.py | 4 ++++
- 1 file changed, 4 insertions(+)
+Documentation/{filesystem/xfs.txt => admin-guide/xfs.rst}.
 
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 191bd380c523..e0e1f087d351 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -277,6 +277,10 @@ latex_elements = {
-         \\setromanfont{DejaVu Serif}
-         \\setmonofont{DejaVu Sans Mono}
- 
-+	% This is needed for translations
-+        \\usepackage{xeCJK}
-+        \\setCJKmainfont{Noto Sans CJK SC}
-+
-      '''
- }
- 
--- 
-2.21.0
+> -	If "largeio" specified, a filesystem that was created with a
+> -	"swidth" specified will return the "swidth" value (in bytes)
+> -	in st_blksize. If the filesystem does not have a "swidth"
+> -	specified but does specify an "allocsize" then "allocsize"
+> +	If ``largeio`` specified, a filesystem that was created with a
 
+surely 'If ``largeio`` is specified' here?
+
+> +	``swidth`` specified will return the ``swidth`` value (in bytes)
+> +	in ``st_blksize``. If the filesystem does not have a ``swidth``
+> +	specified but does specify an ``allocsize`` then ``allocsize``
+>  	(in bytes) will be returned instead. Otherwise the behaviour
