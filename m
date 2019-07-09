@@ -2,39 +2,41 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 08E7863B24
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2019 20:37:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B6B1863B2A
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2019 20:37:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729347AbfGISd3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 9 Jul 2019 14:33:29 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:56730 "EHLO
+        id S1728080AbfGISde (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 Jul 2019 14:33:34 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:57008 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728080AbfGISd3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jul 2019 14:33:29 -0400
+        with ESMTP id S1729349AbfGISdd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jul 2019 14:33:33 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
         MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
         Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=jU46nPFGpBcyqb30Zk67VYs5JcFdJlitkqyISRTJIR8=; b=kdCctTTm6GLl0LS6Mel91M04G0
-        84DtC9k8ZUuY0g1ksPmbytcriGvhJ2Rz6RIdrLKw/8rHoWhSeaAulZRO69gdzs/P6rNpbfyNsIS7S
-        bIkl3VFAkD7PE6XzT5rRQa9KDkAsHvQcjssgDoWLZOqb46bRbWn8zY0bqPwRO5J5Gv5deH9T7GT5m
-        sET9YJk2X3poSpY5PZRzIZdidKc7vV9Sg8jkHXYzl9Efrr0ZoqSTHkxueW/NPvjVluPJcolbuj2YR
-        mUtSicLvsax2rtE6EeFxMmL6qvgdcneV8mqgcoXc/i37mivuRllDPngcapNauEmi5zFll5vglKOAz
-        tP/A+lyA==;
+        bh=/3X5BqPb3a1Kn6DP28s3SMqgBjBdt2wUeFKFEkKZCkQ=; b=aOfnADdnpUDttNTCPiXNLmlLlz
+        ctTcamkRN3H6Pu1l5OCKd9t2FwGuByETS3FA6xiA5YV1PsnuEzPs5imOTzRPbrnapYY+8L4s3+0rQ
+        8KNOhtD74Iqso9uqTzCLOZJSZ5s6WLz0XjertyVm+N6I+0IpQqTsj/6qyUHXQwpvXz5lvGIXvOOGV
+        1p3FnMiqwUy5CNczqUogjGPI7/q4BGKSlcocZL37JQJTE0/WUwDmyTfg5t3R5wdp+7YcRYu53iLPY
+        57bySD8/9JdVboO/YQHPl9QCIweWfqRHLTprEZbAMCFa6FOnWnQ9awV2kECd/qWATP3JAWgzAIVOJ
+        MFbguM2g==;
 Received: from 177.43.30.58.dynamic.adsl.gvt.net.br ([177.43.30.58] helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hkuvf-0007As-BB; Tue, 09 Jul 2019 18:33:27 +0000
+        id 1hkuvf-0007Av-Bj; Tue, 09 Jul 2019 18:33:27 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hkuvd-0005Pp-5K; Tue, 09 Jul 2019 15:33:25 -0300
+        id 1hkuvd-0005Pt-66; Tue, 09 Jul 2019 15:33:25 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 2/5] docs: arm: fix a breakage with pdf output
-Date:   Tue,  9 Jul 2019 15:33:20 -0300
-Message-Id: <7150e6eadf29dca6ad7c8c7e4ee2781b99119265.1562696797.git.mchehab+samsung@kernel.org>
+        Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
+        Hannes Reinecke <hare@suse.com>,
+        Omar Sandoval <osandov@fb.com>, linux-doc@vger.kernel.org
+Subject: [PATCH 3/5] docs: block: fix pdf output
+Date:   Tue,  9 Jul 2019 15:33:21 -0300
+Message-Id: <d310f0aa097cd3df3f7dc1862c7c0456254409ec.1562696797.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1562696797.git.mchehab+samsung@kernel.org>
 References: <cover.1562696797.git.mchehab+samsung@kernel.org>
@@ -46,27 +48,56 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add an extra blank line, as otherwise XeLaTex will complain with:
-
-	! LaTeX Error: Too deeply nested.
+Add an extra blank line and use a markup for the enumberated
+list, in order to make it possible to build the block book
+on pdf format.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
- Documentation/arm/spear/overview.rst | 1 +
- 1 file changed, 1 insertion(+)
+ Documentation/block/biodoc.rst | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
-diff --git a/Documentation/arm/spear/overview.rst b/Documentation/arm/spear/overview.rst
-index 8a1a87aca427..1a77f6b213b6 100644
---- a/Documentation/arm/spear/overview.rst
-+++ b/Documentation/arm/spear/overview.rst
-@@ -15,6 +15,7 @@ Introduction
-   Hierarchy in SPEAr is as follows:
+diff --git a/Documentation/block/biodoc.rst b/Documentation/block/biodoc.rst
+index d6e30b680405..c8eb28401332 100644
+--- a/Documentation/block/biodoc.rst
++++ b/Documentation/block/biodoc.rst
+@@ -9,6 +9,7 @@ Notes on the Generic Block Layer Rewrite in Linux 2.5
+ 	here might still be useful.
  
-   SPEAr (Platform)
+ Notes Written on Jan 15, 2002:
 +
- 	- SPEAr3XX (3XX SOC series, based on ARM9)
- 		- SPEAr300 (SOC)
- 			- SPEAr300 Evaluation Board
+ 	- Jens Axboe <jens.axboe@oracle.com>
+ 	- Suparna Bhattacharya <suparna@in.ibm.com>
+ 
+@@ -172,8 +173,8 @@ Some new queue property settings:
+ 
+ New queue flags:
+ 
+-	QUEUE_FLAG_CLUSTER (see 3.2.2)
+-	QUEUE_FLAG_QUEUED (see 3.2.4)
++	- QUEUE_FLAG_CLUSTER (see 3.2.2)
++	- QUEUE_FLAG_QUEUED (see 3.2.4)
+ 
+ 
+ ii. High-mem i/o capabilities are now considered the default
+@@ -478,7 +479,7 @@ With this multipage bio design:
+ - Splitting of an i/o request across multiple devices (as in the case of
+   lvm or raid) is achieved by cloning the bio (where the clone points to
+   the same bi_io_vec array, but with the index and size accordingly modified)
+-- A linked list of bios is used as before for unrelated merges [*]_ - this
++- A linked list of bios is used as before for unrelated merges [#]_ - this
+   avoids reallocs and makes independent completions easier to handle.
+ - Code that traverses the req list can find all the segments of a bio
+   by using rq_for_each_segment.  This handles the fact that a request
+@@ -489,7 +490,7 @@ With this multipage bio design:
+   [TBD: Should preferably also have a bi_voffset and bi_vlen to avoid modifying
+   bi_offset an len fields]
+ 
+-.. [*]
++.. [#]
+ 
+ 	unrelated merges -- a request ends up containing two or more bios that
+ 	didn't originate from the same place.
 -- 
 2.21.0
 
