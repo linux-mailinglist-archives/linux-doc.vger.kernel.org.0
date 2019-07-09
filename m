@@ -2,147 +2,133 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AD3FE63A69
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2019 20:01:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 68A3F63AAC
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2019 20:20:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726780AbfGISBs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 9 Jul 2019 14:01:48 -0400
-Received: from mail-pg1-f196.google.com ([209.85.215.196]:46721 "EHLO
-        mail-pg1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726486AbfGISBs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jul 2019 14:01:48 -0400
-Received: by mail-pg1-f196.google.com with SMTP id i8so9813685pgm.13
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jul 2019 11:01:48 -0700 (PDT)
+        id S1727059AbfGISUS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 Jul 2019 14:20:18 -0400
+Received: from mail-qk1-f193.google.com ([209.85.222.193]:38029 "EHLO
+        mail-qk1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726335AbfGISUR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jul 2019 14:20:17 -0400
+Received: by mail-qk1-f193.google.com with SMTP id a27so16752891qkk.5
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jul 2019 11:20:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=OUg57n/8w7Mlx4FSaThva6QRBMRQrC57aji70HqhlTs=;
-        b=u9enlrUFhNo6CpHlrQV/HgMnM2prP/1x9AkLcEyZIZZ95VhPysZXNdVgTxFeHrQSyj
-         D854QOHx1OOVg+bK1q0GL9M26yGnhrklGjHFU0YlePfBqyn8fol1vLU/0tJs5NO+XWNV
-         6Qg4G47Yz8EAu+oXnFu1Mzex0KXUQSkc3dP89G7ycpwdK6vtjyVs4n/CA1F66BOgluWi
-         cGrmqcEgZcaKnQ36vda5DA3xHSSM91ST4LQMohLGersiVfBM4MAAfBua5GuHtjmb28bv
-         cNHp7EXFv/Be9TyDKlfByNT+SveMU7rOne9AoLQN+azT38ic+R4kxi1lUa+FZPUqI2ob
-         eorw==
+        d=soleen.com; s=google;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=07lbMtNvRAMyX/POjVIPF1YJUTpi61TvrSJ6roJeVPs=;
+        b=nsdWBt1+R1ve8tCsDIWPrNy0y/NCDmw+8vDsI/xQ0qqlV/ZxUzX4XqCrlGrImpvaxv
+         bpKrt+60Fa3kB29M/KXQjapzKaDStgaZ7nQXw/WldmvXgddhp8rPPpJae/df0oZGQy4h
+         gVHsFN7crraEJnzfrq/y9JWg5aTPEv1/kkAx1s6m3jHG5VIGRQWfIODhRs8AkBKyXXso
+         fX4ZYxnGYoaxXW254flFRzCTVyUMDsXyUQPsr7UTYZJ683KQ/nPgb2LwR0NlJgTrhleL
+         OVQ+4zEfOSArBal5dVyMakYw9h0xf4hFLt0LnHZ7Wi9shjUez3sbBFm0jzjbMZlB9NNl
+         0NCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=OUg57n/8w7Mlx4FSaThva6QRBMRQrC57aji70HqhlTs=;
-        b=fQgMdZ+hJjK5ArqJ9urWEPcCTS923vtYgEMcYqcvq0fmjUZeh8AfVyEAC/1CJ+CrtD
-         gvuAhij6vuWbWEUjLibbB0HZxQ8+k1K+LYIJi58ps7jUKwKL01l5YjwzDoikCB+xdDen
-         HmQQ/CzLPxEl6hWZUuRh6L3upFO0fH9iPlT7Cw9VE1Xp02N0lBr58fId5IWdWtm1wkiS
-         vSssJP5bqONuVAuTiiACf2b21e4CbePSIgNwGQ0GWGKn+p9lTRiwBQfqhzpt4HdSm+eD
-         yjx/C2OrOIc7G78ga6+h8Z3186EvISqrGCwZiBPr0mAc5Div25OrReJB/RMyvCapR9sy
-         Wokg==
-X-Gm-Message-State: APjAAAU31NMDh/VXnVlwmOUHynzRIZipYl7NYGSF11jmETwl0aHl5KtE
-        jHKY7v/Vk0QZPpukq3zCR0VuE9p/bjo/imon7/PtJg==
-X-Google-Smtp-Source: APXvYqw4HCjsVl+Amh2Teet2qtkXvGz99b/JiD+OyiCx/6U5M9oVU+FrejKuChE3TPRj4OZE1ZrjIBxXffNmybu5Pvg=
-X-Received: by 2002:a63:205f:: with SMTP id r31mr32165059pgm.159.1562695307162;
- Tue, 09 Jul 2019 11:01:47 -0700 (PDT)
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=07lbMtNvRAMyX/POjVIPF1YJUTpi61TvrSJ6roJeVPs=;
+        b=JliPg1iaJOHDlMJRrxRG671yc/I5LK5PsafjvW3ZZgmatlMMm6Os9bDf+SKHDP6De/
+         wHx7T1wPJEcxW9O+BITga3wpYaqyLjea0tMmOPt1htcGBglpMQwvamu73y/SlcwSVYnp
+         S89oBRVmo3la+X7GlTu6J2jBggNPD2HLxeRsMTCj7nGQXXwedMBhnNvsl7oc8UGacXiR
+         N4XD+0w8I8VV2l+XYttXKTjnbEKjSLlb2lSBzbmKqSn37qfVMX9WnUg1m8IN3IsWE4TV
+         CYa7QiXktoY0To2MAvAAoGKdakUTlbP/MM7TJwgIpghxc4mTaKyOe2zpMZaIyFtdwr9K
+         nnpQ==
+X-Gm-Message-State: APjAAAWnZey/b3km1YkUZFWwGoKQZzyDylpcJ3RdR4Pr0PnhkymIaZ3l
+        IpFkSS28AfzwqxANiUe4zRWVfA==
+X-Google-Smtp-Source: APXvYqwZyzZlJCfnfaRBNAPrTgjGG/pRCaQYSyhIHt8cn7HXaH8O6U0lFii9rAJ8o1Oxephvp24BSQ==
+X-Received: by 2002:a37:bf07:: with SMTP id p7mr19214845qkf.315.1562696416701;
+        Tue, 09 Jul 2019 11:20:16 -0700 (PDT)
+Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
+        by smtp.gmail.com with ESMTPSA id k123sm9113056qkf.13.2019.07.09.11.20.15
+        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+        Tue, 09 Jul 2019 11:20:15 -0700 (PDT)
+From:   Pavel Tatashin <pasha.tatashin@soleen.com>
+To:     pasha.tatashin@soleen.com, jmorris@namei.org, sashal@kernel.org,
+        ebiederm@xmission.com, kexec@lists.infradead.org,
+        linux-kernel@vger.kernel.org, corbet@lwn.net,
+        catalin.marinas@arm.com, will@kernel.org,
+        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+Subject: [v2 0/5] arm64: allow to reserve memory for normal kexec kernel
+Date:   Tue,  9 Jul 2019 14:20:09 -0400
+Message-Id: <20190709182014.16052-1-pasha.tatashin@soleen.com>
+X-Mailer: git-send-email 2.22.0
 MIME-Version: 1.0
-References: <20190709063023.251446-1-brendanhiggins@google.com>
- <20190709063023.251446-17-brendanhiggins@google.com> <7cc417dd-036f-7dc1-6814-b1fdac810f03@kernel.org>
-In-Reply-To: <7cc417dd-036f-7dc1-6814-b1fdac810f03@kernel.org>
-From:   Brendan Higgins <brendanhiggins@google.com>
-Date:   Tue, 9 Jul 2019 11:01:35 -0700
-Message-ID: <CAFd5g4595X8cM919mohQVaShs4dKWzZ_-2RVB=6SH3RdVMwuQw@mail.gmail.com>
-Subject: Re: [PATCH v7 16/18] MAINTAINERS: add entry for KUnit the unit
- testing framework
-To:     shuah <shuah@kernel.org>
-Cc:     Frank Rowand <frowand.list@gmail.com>,
-        Greg KH <gregkh@linuxfoundation.org>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        Kees Cook <keescook@google.com>,
-        Kieran Bingham <kieran.bingham@ideasonboard.com>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Rob Herring <robh@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        "Theodore Ts'o" <tytso@mit.edu>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        devicetree <devicetree@vger.kernel.org>,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        kunit-dev@googlegroups.com,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-fsdevel@vger.kernel.org,
-        linux-kbuild <linux-kbuild@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        linux-nvdimm <linux-nvdimm@lists.01.org>,
-        linux-um@lists.infradead.org,
-        Sasha Levin <Alexander.Levin@microsoft.com>,
-        "Bird, Timothy" <Tim.Bird@sony.com>,
-        Amir Goldstein <amir73il@gmail.com>,
-        Dan Carpenter <dan.carpenter@oracle.com>,
-        Daniel Vetter <daniel@ffwll.ch>, Jeff Dike <jdike@addtoit.com>,
-        Joel Stanley <joel@jms.id.au>,
-        Julia Lawall <julia.lawall@lip6.fr>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Knut Omang <knut.omang@oracle.com>,
-        Logan Gunthorpe <logang@deltatee.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Petr Mladek <pmladek@suse.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Richard Weinberger <richard@nod.at>,
-        David Rientjes <rientjes@google.com>,
-        Steven Rostedt <rostedt@goodmis.org>, wfg@linux.intel.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jul 9, 2019 at 7:53 AM shuah <shuah@kernel.org> wrote:
->
-> On 7/9/19 12:30 AM, Brendan Higgins wrote:
-> > Add myself as maintainer of KUnit, the Linux kernel's unit testing
-> > framework.
-> >
-> > Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-> > Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> > Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
-> > ---
-> >   MAINTAINERS | 11 +++++++++++
-> >   1 file changed, 11 insertions(+)
-> >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index 677ef41cb012c..48d04d180a988 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -8599,6 +8599,17 @@ S:     Maintained
-> >   F:  tools/testing/selftests/
-> >   F:  Documentation/dev-tools/kselftest*
-> >
-> > +KERNEL UNIT TESTING FRAMEWORK (KUnit)
-> > +M:   Brendan Higgins <brendanhiggins@google.com>
-> > +L:   linux-kselftest@vger.kernel.org
-> > +L:   kunit-dev@googlegroups.com
-> > +W:   https://google.github.io/kunit-docs/third_party/kernel/docs/
-> > +S:   Maintained
-> > +F:   Documentation/dev-tools/kunit/
-> > +F:   include/kunit/
-> > +F:   kunit/
-> > +F:   tools/testing/kunit/
-> > +
-> >   KERNEL USERMODE HELPER
-> >   M:  Luis Chamberlain <mcgrof@kernel.org>
-> >   L:  linux-kernel@vger.kernel.org
-> >
->
-> Thanks Brendan.
->
-> I am good with this. I can take KUnit patches through kselftest
-> with your Ack.
+Changelog
+v1 - v2
+	- No changes to patches, addressed suggestion from James Morse
+	  to add "arm64" tag to cover letter.
+	- Improved cover letter information based on discussion.
 
-My acknowledgement? Sure! I thought we already agreed to that.
+Currently, it is only allowed to reserve memory for crash kernel, because
+it is a requirement in order to be able to boot into crash kernel without
+touching memory of crashed kernel is to have memory reserved.
 
-Also, do we need an ack from Masahiro or Michal for the Kbuild patch
-[PATCH v7 06/18]? And an ack from Josh or Peter for the objtool patch
-[PATCH v7 08/18]?
+The second benefit for having memory reserved for kexec kernel is
+that it does not require a relocation after segments are loaded into
+memory.
 
-Greg and Logan gave me a Reviewed-by for the Kbuild patch, so maybe
-that's fine, but I don't have any reviews or acks for the objtool
-patch.
+If kexec functionality is used for a fast system update, with a minimal
+downtime, the relocation of kernel + initramfs might take a significant
+portion of reboot.
 
-Thanks!
+In fact, on the machine that we are using, that has ARM64 processor
+it takes 0.35s to relocate during kexec, thus taking 52% of kernel reboot
+time:
+
+kernel shutdown	0.03s
+relocation	0.35s
+kernel startup	0.29s
+
+Image: 13M and initramfs is 24M. If initramfs increases, the relocation
+time increases proportionally.
+
+While, it is possible to add 'kexeckernel=' parameters support to other
+architectures by modifying reserve_crashkernel(), in this series this is
+done for arm64 only.
+
+The reason it is so slow on arm64 to relocate kernel is because the code
+that does relocation does this with MMU disabled, and thus D-Cache and
+I-Cache must also be disabled.
+
+Alternative solution is more complicated: Setup a temporary page table
+for relocation_routine and also for code from cpu_soft_restart. Perform
+relocation with MMU enabled, do cpu_soft_restart where MMU and caching
+are disabled, jump to purgatory. A similar approach was suggested for
+purgatory and was rejected due to making purgatory too complicated.
+On, the other hand hibernate does something similar already, but there
+MMU never needs to be disabled, and also by the time machine_kexec()
+is called, allocator is not available, as we can't fail to do reboot,
+so page table must be pre-allocated during kernel load time.
+
+Note: the above time is relocation time only. Purgatory usually also
+computes checksum, but that is skipped, because --no-check is used when
+kernel image is loaded via kexec.
+
+Pavel Tatashin (5):
+  kexec: quiet down kexec reboot
+  kexec: add resource for normal kexec region
+  kexec: export common crashkernel/kexeckernel parser
+  kexec: use reserved memory for normal kexec reboot
+  arm64, kexec: reserve kexeckernel region
+
+ .../admin-guide/kernel-parameters.txt         |  7 ++
+ arch/arm64/kernel/setup.c                     |  5 ++
+ arch/arm64/mm/init.c                          | 83 ++++++++++++-------
+ include/linux/crash_core.h                    |  6 ++
+ include/linux/ioport.h                        |  1 +
+ include/linux/kexec.h                         |  6 +-
+ kernel/crash_core.c                           | 27 +++---
+ kernel/kexec_core.c                           | 50 +++++++----
+ 8 files changed, 127 insertions(+), 58 deletions(-)
+
+-- 
+2.22.0
+
