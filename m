@@ -2,45 +2,45 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E73A763C73
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2019 22:08:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 73EF163C76
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jul 2019 22:08:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729579AbfGIUIO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 9 Jul 2019 16:08:14 -0400
-Received: from mail-lj1-f193.google.com ([209.85.208.193]:33741 "EHLO
-        mail-lj1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729563AbfGIUIO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jul 2019 16:08:14 -0400
-Received: by mail-lj1-f193.google.com with SMTP id h10so20815799ljg.0
-        for <linux-doc@vger.kernel.org>; Tue, 09 Jul 2019 13:08:13 -0700 (PDT)
+        id S1729619AbfGIUIV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 Jul 2019 16:08:21 -0400
+Received: from mail-lf1-f66.google.com ([209.85.167.66]:36061 "EHLO
+        mail-lf1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729563AbfGIUIU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jul 2019 16:08:20 -0400
+Received: by mail-lf1-f66.google.com with SMTP id q26so14270677lfc.3
+        for <linux-doc@vger.kernel.org>; Tue, 09 Jul 2019 13:08:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=eng.ucsd.edu; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=d34BftXccSkkOw2k0/u/K3U+2xht36SrSsHp8EGBSb8=;
-        b=aSPSgNcj8+aoFw+MkMG+Y3WZF4Ms2Wf+ZCFugavP2SmUYzN18znBtTzsUvUqXyO2cF
-         RxyASWunQ5+xt+43YmhLB2c4vaF17HpYQQXDfHEsCWv+8vgr8cQd8nvUwNtqcYESIUuV
-         ZxwZnUN5F2y0JeF8zsbPvFD+EOOTVbsq4nhs8=
+        bh=nPhFlUg160YIM5+wm6v8cRWOklVUq1HxImS3+DfzTd0=;
+        b=PUJkz0FBCQCSz7JsKk1v6RISYYb4uLBoN78kFvm+Iw2/PL2u3QbrMWBzJ5WcH35ASg
+         PtcuiBqmuUQWk1966XcAi4amWzqXC9cE4jqn58nlqZtkcOKraYiVlCt4RZM3A2nCe3Of
+         cypMt4nQ84B7R7rFT2pbAToU1gO9HIOXBtetk=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=d34BftXccSkkOw2k0/u/K3U+2xht36SrSsHp8EGBSb8=;
-        b=kSVnuxewihT6dgsiOOAky8O9GYINWE2GWVl/ziyHsGiX5ST6vjQZ49qEGaP9EyfKBN
-         e8sTKiGipmIOWsvKxQe1R4yHZdkDaZKXW+Miudfwrgc3qLQo/rLpxl9Njfz39WIJZdAR
-         rr0CDNUNinpkbfht6Q2aEjXN3t68U6fQODA5i0ACo9vseU4svkCwPAG7PRr1W8k5ZAb5
-         FfR11f7+qc4Q6IE7XJc1jg5JnGLtvOWr/nv9lVOHnZY7LR8kGz8vYi0tfvFiqyQT2C3U
-         sEhgbVzcfZqlNSJDi+aPCMdZhxK1kX9F/gLUUwbcJmUCH+coSQyatK0Oh1vDXb+WWTIL
-         tFpw==
-X-Gm-Message-State: APjAAAXdh4z/tHem+pMwGnTrAB4gBVgVNDNmrGISQ3A3ctn7Ghgd1Vyr
-        GpekHKAzcQantbpwDcHNX3v+Rw==
-X-Google-Smtp-Source: APXvYqwNtgr6wAYFjFx5JnikxkEur/7m5rEnOML8Wr1tKMxcssDUYfH1+3ffnlzRHWL0zEedERWnLQ==
-X-Received: by 2002:a2e:959a:: with SMTP id w26mr14985838ljh.150.1562702892320;
-        Tue, 09 Jul 2019 13:08:12 -0700 (PDT)
+        bh=nPhFlUg160YIM5+wm6v8cRWOklVUq1HxImS3+DfzTd0=;
+        b=lBgM6bKa4Iyea9KpClA7KOmjq1EFhZoB+n9suWWjOH5HfIo6AP0t3vZiBq5CWSegxV
+         8C5dOIK2/IIde18A8NEzWi0deovD6HMD4HysEHxlQRbyg7KmWfiE4JsLF3cetQ1M+jii
+         klSGgwlkH0tpQVXT+WreKwhBZdOoRhgnU7gduvG4DO8ZpBNWdS6IB6RW+Oe9ZLlm4E/v
+         vqZKXJYaEmfAQprzAvDRvVpxkAU3EVNCSfvYGdMMuH5lEzTrdDX2/rVTgY7DyCX/7/Ux
+         +BN5RHjuV5pIWmI1M+idf8cvgtjVVLqa3mJT1SnWHtXqgkiBVktWLVjcTjdRqjdj/Es9
+         9x7Q==
+X-Gm-Message-State: APjAAAW4gAScZmb+678tWWM+fZ4FBSKoO22uGq+w2QTsW4QcKOGkUUX9
+        kPHyyhzEyhGAyLNlxL+HOUi56Q==
+X-Google-Smtp-Source: APXvYqzNSk+qmgC/RcZPrqM4OfhOxlepPwzhf81+ba0k0BKPTZvqF+t+RraLwhsiS85v4y43wTqFMg==
+X-Received: by 2002:ac2:5336:: with SMTP id f22mr12185607lfh.180.1562702898776;
+        Tue, 09 Jul 2019 13:08:18 -0700 (PDT)
 Received: from luke-XPS-13.home (159-205-76-204.adsl.inetia.pl. [159.205.76.204])
-        by smtp.gmail.com with ESMTPSA id f1sm4489ljk.86.2019.07.09.13.08.11
+        by smtp.gmail.com with ESMTPSA id f1sm4489ljk.86.2019.07.09.13.08.17
         (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Tue, 09 Jul 2019 13:08:11 -0700 (PDT)
+        Tue, 09 Jul 2019 13:08:18 -0700 (PDT)
 From:   Luke Nowakowski-Krijger <lnowakow@eng.ucsd.edu>
 X-Google-Original-From: Luke Nowakowski-Krijger <lnowakow@neg.ucsd.edu>
 To:     linux-kernel-mentees@lists.linuxfoundation.org
@@ -48,9 +48,9 @@ Cc:     Luke Nowakowski-Krijger <lnowakow@eng.ucsd.edu>,
         pbonzini@redhat.com, rkrcmar@redhat.com, corbet@lwn.net,
         kvm@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/3] Documentation: virtual: Convert paravirt_ops.txt to .rst
-Date:   Tue,  9 Jul 2019 13:07:20 -0700
-Message-Id: <20190709200721.16991-3-lnowakow@neg.ucsd.edu>
+Subject: [PATCH v2 3/3] Documentation: virtual: Add toctree hooks
+Date:   Tue,  9 Jul 2019 13:07:21 -0700
+Message-Id: <20190709200721.16991-4-lnowakow@neg.ucsd.edu>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190709200721.16991-1-lnowakow@neg.ucsd.edu>
 References: <20190709200721.16991-1-lnowakow@neg.ucsd.edu>
@@ -63,62 +63,67 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Luke Nowakowski-Krijger <lnowakow@eng.ucsd.edu>
 
-Convert paravirt_opts.txt to .rst format to be able to be parsed by
-sphinx.
+Added toctree hooks for indexing. Hooks added only for newly added
+files.
 
-Made some minor spacing and formatting corrections to make defintions
-much more clear and easy to read. Added default kernel license to the
-document.
+The hook for the top of the tree will be added in a later patch series
+when a few more substantial changes have been added.
 
 Signed-off-by: Luke Nowakowski-Krijger <lnowakow@eng.ucsd.edu>
 ---
  Changes since v2:
- none
+ - Removed vcpu-request from hooks that was added in v1
  Changes since v1:
- + Converted doc to .rst format
+ + Added index.rst file in virtual directory
+ + Added index.rst file in virtual/kvm directory
+ 
+ Documentation/virtual/index.rst     | 18 ++++++++++++++++++
+ Documentation/virtual/kvm/index.rst | 11 +++++++++++
+ 2 files changed, 29 insertions(+)
+ create mode 100644 Documentation/virtual/index.rst
+ create mode 100644 Documentation/virtual/kvm/index.rst
 
- .../{paravirt_ops.txt => paravirt_ops.rst}    | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
- rename Documentation/virtual/{paravirt_ops.txt => paravirt_ops.rst} (65%)
-
-diff --git a/Documentation/virtual/paravirt_ops.txt b/Documentation/virtual/paravirt_ops.rst
-similarity index 65%
-rename from Documentation/virtual/paravirt_ops.txt
-rename to Documentation/virtual/paravirt_ops.rst
-index d4881c00e339..6b789d27cead 100644
---- a/Documentation/virtual/paravirt_ops.txt
-+++ b/Documentation/virtual/paravirt_ops.rst
-@@ -1,3 +1,6 @@
+diff --git a/Documentation/virtual/index.rst b/Documentation/virtual/index.rst
+new file mode 100644
+index 000000000000..19c9fa2266f4
+--- /dev/null
++++ b/Documentation/virtual/index.rst
+@@ -0,0 +1,18 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+============
- Paravirt_ops
- ============
- 
-@@ -18,15 +21,15 @@ at boot time.
- pv_ops operations are classified into three categories:
- 
- - simple indirect call
--  These operations correspond to high level functionality where it is
--  known that the overhead of indirect call isn't very important.
-+   These operations correspond to high level functionality where it is
-+   known that the overhead of indirect call isn't very important.
- 
- - indirect call which allows optimization with binary patch
--  Usually these operations correspond to low level critical instructions. They
--  are called frequently and are performance critical. The overhead is
--  very important.
-+   Usually these operations correspond to low level critical instructions. They
-+   are called frequently and are performance critical. The overhead is
-+   very important.
- 
- - a set of macros for hand written assembly code
--  Hand written assembly codes (.S files) also need paravirtualization
--  because they include sensitive instructions or some of code paths in
--  them are very performance critical.
-+   Hand written assembly codes (.S files) also need paravirtualization
-+   because they include sensitive instructions or some of code paths in
-+   them are very performance critical.
++===========================
++Linux Virtual Documentation
++===========================
++
++.. toctree::
++   :maxdepth: 2
++
++   kvm/index
++   paravirt_ops
++
++.. only:: html and subproject
++
++   Indices
++   =======
++
++   * :ref:`genindex`
+diff --git a/Documentation/virtual/kvm/index.rst b/Documentation/virtual/kvm/index.rst
+new file mode 100644
+index 000000000000..0b206a06f5be
+--- /dev/null
++++ b/Documentation/virtual/kvm/index.rst
+@@ -0,0 +1,11 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++===
++KVM
++===
++
++.. toctree::
++   :maxdepth: 2
++
++   amd-memory-encryption
++   cpuid
 -- 
 2.20.1
 
