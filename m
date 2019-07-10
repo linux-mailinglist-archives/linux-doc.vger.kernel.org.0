@@ -2,45 +2,45 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A4D00649AC
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2019 17:31:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 414CC649A5
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2019 17:31:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728103AbfGJPbd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 10 Jul 2019 11:31:33 -0400
-Received: from mail-lj1-f194.google.com ([209.85.208.194]:39521 "EHLO
-        mail-lj1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728092AbfGJPbc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Jul 2019 11:31:32 -0400
-Received: by mail-lj1-f194.google.com with SMTP id v18so2531831ljh.6
-        for <linux-doc@vger.kernel.org>; Wed, 10 Jul 2019 08:31:31 -0700 (PDT)
+        id S1728170AbfGJPbm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 10 Jul 2019 11:31:42 -0400
+Received: from mail-lf1-f68.google.com ([209.85.167.68]:44906 "EHLO
+        mail-lf1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728128AbfGJPbk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Jul 2019 11:31:40 -0400
+Received: by mail-lf1-f68.google.com with SMTP id r15so1884965lfm.11
+        for <linux-doc@vger.kernel.org>; Wed, 10 Jul 2019 08:31:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=eng.ucsd.edu; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=C1wKrfnxE3aI/zW2IlICe9/kKX5YLvazS2tqbYwzR+s=;
-        b=Lt9tEdlf/gZn4VTbkqpKUtk0yBIj0i1oFbgIxKD+jkjofB9nYD7V2uLfHpoXrkdLTx
-         NddoA0ouc8CwjRwyrW+zJC8NqAJAG4EteW9bapre+WW88VVW/3z79sGNTxMMnArP58Rs
-         sZHXZBaRIbSMAUshC1WD2E24T9nAx+236CsiI=
+        bh=kT4SgXaqaE6g+9MWv9VaHuJsn71MgZgDLbK4RzJDByw=;
+        b=YemC4rvt7R00JtZfg7hXOLzvKjhHsHBazb0p1ypnK0AcC91kCHOBjyaoCY+q9nmJwN
+         us/RDg8clMBCG6wqJhVc51OqXKOayANp30swyF4v+ZJ8qfzgZ36sDuM3wmv0PtXurKrZ
+         +J3sOXSUBvyEcgBJa4nvRf9X4dFQebBwHbtLw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=C1wKrfnxE3aI/zW2IlICe9/kKX5YLvazS2tqbYwzR+s=;
-        b=fW0qN6hgfud2F8Is5rBlEMt8no7VW9F6IkDCRGhsnCHVWXk/JMTG8yNTa76YkWf7CT
-         I+Dn16SLr+zQbpGYLBCS/s1x1lYOjflW/404gr4DKU06fw7+NnGH5h9B95YL4h4Dn+wv
-         CzSPIHuqmhhWWlOLYMilFQHCLbZ54aXDhvQn8+GtIjARJibZMdGi/1ZmzVXGuU5ovDia
-         xHxKf+jTLCqTruJNQpNqZV5hjzqWxAVGp77sJJotcj1x+G8+/+WjSLXGvJNP0Z7OOlBr
-         jXoLNLSLUpNziZPSMGzwaaANvGftsl4k1sicCu9MvFw/ZgC4f2iyV4KwwM8jLEw+NsXe
-         7K+Q==
-X-Gm-Message-State: APjAAAUE2XXECdDPTzKDmyB2LuptO3mLrlUiHWEEPa9AH4SSSbofo3b5
-        nIAsxqmu54x9KBq78i8OKQsP2w==
-X-Google-Smtp-Source: APXvYqzcZ1IiJN2Vu2KTzh2QcFqncKYeHJK0TUMUpy06XEaOG0cQVGDxKxcKSP+zFKizUHdpDSNY5w==
-X-Received: by 2002:a2e:8892:: with SMTP id k18mr18168234lji.239.1562772691184;
-        Wed, 10 Jul 2019 08:31:31 -0700 (PDT)
+        bh=kT4SgXaqaE6g+9MWv9VaHuJsn71MgZgDLbK4RzJDByw=;
+        b=W45dMcmzIDLUuBrj5Y4x/2zZN7xP34d0RUreD92+APIL/WmXZamnDSEO4bEpeqW2UH
+         +SkryVrDWvIoiU/3EkTds+TJ/9J9nKdBH38qaQ07Nh+k+nYjmz/4sPKH3tloaKgP40MB
+         Ow+qGbu/wUEv7SUaXHCC4oPUhm1upnkcFujYOxO9WpMFJiC1dZiejDn2PWuab5FlfeDw
+         ti3yMVeZ0N5ff67MhxEb+ifqvsU2K6XkkQ2cO4TjVLp4faPMsvNj/47NYVrAhHYhjVId
+         ahtHrPXIl9pwmjQYyDJWsj6dnwZR/QCfjXM+zS6jYEC0cO2lk93ENogLsPSMXqUbrUCU
+         BtwQ==
+X-Gm-Message-State: APjAAAWopexqeKqSLQhyE4DdHubrQYZpkq746lnHgLdiIjFG5sACHEFa
+        aCFdY2oZocZTh3sW67vh4u8kVg==
+X-Google-Smtp-Source: APXvYqzNcOC6VXyyydnq+IdKVH/E9wpLKyGohxE2qSzeP4J60HEleQIEFSUcWOBjbYQbSN5f1NvMNw==
+X-Received: by 2002:ac2:5601:: with SMTP id v1mr15571407lfd.106.1562772696751;
+        Wed, 10 Jul 2019 08:31:36 -0700 (PDT)
 Received: from luke-XPS-13.home (159-205-76-204.adsl.inetia.pl. [159.205.76.204])
-        by smtp.gmail.com with ESMTPSA id o17sm517208ljg.71.2019.07.10.08.31.30
+        by smtp.gmail.com with ESMTPSA id o17sm517208ljg.71.2019.07.10.08.31.35
         (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Wed, 10 Jul 2019 08:31:30 -0700 (PDT)
+        Wed, 10 Jul 2019 08:31:36 -0700 (PDT)
 From:   Luke Nowakowski-Krijger <lnowakow@eng.ucsd.edu>
 X-Google-Original-From: Luke Nowakowski-Krijger <lnowakow@neg.ucsd.edu>
 To:     linux-kernel-mentees@lists.linuxfoundation.org
@@ -48,9 +48,9 @@ Cc:     Luke Nowakowski-Krijger <lnowakow@eng.ucsd.edu>,
         pbonzini@redhat.com, rkrcmar@redhat.com, corbet@lwn.net,
         kvm@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [PATCH v3 1/3] Documentation: virtual: Convert paravirt_ops.txt to .rst
-Date:   Wed, 10 Jul 2019 08:30:52 -0700
-Message-Id: <20190710153054.29564-2-lnowakow@neg.ucsd.edu>
+Subject: [PATCH v3 2/3] Documentation: kvm: Convert cpuid.txt to .rst
+Date:   Wed, 10 Jul 2019 08:30:53 -0700
+Message-Id: <20190710153054.29564-3-lnowakow@neg.ucsd.edu>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20190710153054.29564-1-lnowakow@neg.ucsd.edu>
 References: <20190710153054.29564-1-lnowakow@neg.ucsd.edu>
@@ -63,64 +63,215 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Luke Nowakowski-Krijger <lnowakow@eng.ucsd.edu>
 
-Convert paravirt_opts.txt to .rst format to be able to be parsed by
-sphinx.
+Convert cpuid.txt to .rst format to be parsable by sphinx.
 
-Made some minor spacing and formatting corrections to make defintions
-much more clear and easy to read. Added default kernel license to the
-document.
+Change format and spacing to make function definitions and return values
+much more clear. Also added a table that is parsable by sphinx and makes
+the information much more clean. Updated Author email to their new
+active email address. Added license identifier with the consent of the
+author.
 
 Signed-off-by: Luke Nowakowski-Krijger <lnowakow@eng.ucsd.edu>
 ---
  Changes since v3:
- none
+ + added table entries that were in updated cpuid.txt
  Changes since v2:
- none
+ + added updated Author email address
+ + changed table to simpler format
+ - removed function bolding from v1
  Changes since v1:
  + Converted doc to .rst format
- 
- .../{paravirt_ops.txt => paravirt_ops.rst}    | 19 +++++++++++--------
- 1 file changed, 11 insertions(+), 8 deletions(-)
- rename Documentation/virtual/{paravirt_ops.txt => paravirt_ops.rst} (65%)
 
-diff --git a/Documentation/virtual/paravirt_ops.txt b/Documentation/virtual/paravirt_ops.rst
-similarity index 65%
-rename from Documentation/virtual/paravirt_ops.txt
-rename to Documentation/virtual/paravirt_ops.rst
-index d4881c00e339..6b789d27cead 100644
---- a/Documentation/virtual/paravirt_ops.txt
-+++ b/Documentation/virtual/paravirt_ops.rst
-@@ -1,3 +1,6 @@
+ .../virtual/kvm/{cpuid.txt => cpuid.rst}      | 162 ++++++++++--------
+ 1 file changed, 89 insertions(+), 73 deletions(-)
+ rename Documentation/virtual/kvm/{cpuid.txt => cpuid.rst} (13%)
+
+diff --git a/Documentation/virtual/kvm/cpuid.txt b/Documentation/virtual/kvm/cpuid.rst
+similarity index 13%
+rename from Documentation/virtual/kvm/cpuid.txt
+rename to Documentation/virtual/kvm/cpuid.rst
+index 2bdac528e4a2..01b081f6e7ea 100644
+--- a/Documentation/virtual/kvm/cpuid.txt
++++ b/Documentation/virtual/kvm/cpuid.rst
+@@ -1,6 +1,10 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+============
- Paravirt_ops
- ============
++==============
+ KVM CPUID bits
+-Glauber Costa <glommer@redhat.com>, Red Hat Inc, 2010
+-=====================================================
++==============
++
++:Author: Glauber Costa <glommer@gmail.com>
  
-@@ -18,15 +21,15 @@ at boot time.
- pv_ops operations are classified into three categories:
+ A guest running on a kvm host, can check some of its features using
+ cpuid. This is not always guaranteed to work, since userspace can
+@@ -10,10 +14,14 @@ a guest.
+ KVM cpuid functions are:
  
- - simple indirect call
--  These operations correspond to high level functionality where it is
--  known that the overhead of indirect call isn't very important.
-+   These operations correspond to high level functionality where it is
-+   known that the overhead of indirect call isn't very important.
+ function: KVM_CPUID_SIGNATURE (0x40000000)
+-returns : eax = 0x40000001,
+-          ebx = 0x4b4d564b,
+-          ecx = 0x564b4d56,
+-          edx = 0x4d.
++
++returns::
++
++   eax = 0x40000001
++   ebx = 0x4b4d564b
++   ecx = 0x564b4d56
++   edx = 0x4d
++
+ Note that this value in ebx, ecx and edx corresponds to the string "KVMKVMKVM".
+ The value in eax corresponds to the maximum cpuid function present in this leaf,
+ and will be updated if more functions are added in the future.
+@@ -21,71 +29,79 @@ Note also that old hosts set eax value to 0x0. This should
+ be interpreted as if the value was 0x40000001.
+ This function queries the presence of KVM cpuid leafs.
  
- - indirect call which allows optimization with binary patch
--  Usually these operations correspond to low level critical instructions. They
--  are called frequently and are performance critical. The overhead is
--  very important.
-+   Usually these operations correspond to low level critical instructions. They
-+   are called frequently and are performance critical. The overhead is
-+   very important.
- 
- - a set of macros for hand written assembly code
--  Hand written assembly codes (.S files) also need paravirtualization
--  because they include sensitive instructions or some of code paths in
--  them are very performance critical.
-+   Hand written assembly codes (.S files) also need paravirtualization
-+   because they include sensitive instructions or some of code paths in
-+   them are very performance critical.
+-
+ function: define KVM_CPUID_FEATURES (0x40000001)
+-returns : ebx, ecx
+-          eax = an OR'ed group of (1 << flag), where each flags is:
+-
+-
+-flag                               || value || meaning
+-=============================================================================
+-KVM_FEATURE_CLOCKSOURCE            ||     0 || kvmclock available at msrs
+-                                   ||       || 0x11 and 0x12.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_NOP_IO_DELAY           ||     1 || not necessary to perform delays
+-                                   ||       || on PIO operations.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_MMU_OP                 ||     2 || deprecated.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_CLOCKSOURCE2           ||     3 || kvmclock available at msrs
+-                                   ||       || 0x4b564d00 and 0x4b564d01
+-------------------------------------------------------------------------------
+-KVM_FEATURE_ASYNC_PF               ||     4 || async pf can be enabled by
+-                                   ||       || writing to msr 0x4b564d02
+-------------------------------------------------------------------------------
+-KVM_FEATURE_STEAL_TIME             ||     5 || steal time can be enabled by
+-                                   ||       || writing to msr 0x4b564d03.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_PV_EOI                 ||     6 || paravirtualized end of interrupt
+-                                   ||       || handler can be enabled by writing
+-                                   ||       || to msr 0x4b564d04.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_PV_UNHALT              ||     7 || guest checks this feature bit
+-                                   ||       || before enabling paravirtualized
+-                                   ||       || spinlock support.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_PV_TLB_FLUSH           ||     9 || guest checks this feature bit
+-                                   ||       || before enabling paravirtualized
+-                                   ||       || tlb flush.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_ASYNC_PF_VMEXIT        ||    10 || paravirtualized async PF VM exit
+-                                   ||       || can be enabled by setting bit 2
+-                                   ||       || when writing to msr 0x4b564d02
+-------------------------------------------------------------------------------
+-KVM_FEATURE_PV_SEND_IPI            ||    11 || guest checks this feature bit
+-                                   ||       || before using paravirtualized
+-                                   ||       || send IPIs.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_PV_POLL_CONTROL        ||    12 || host-side polling on HLT can
+-                                   ||       || be disabled by writing
+-                                   ||       || to msr 0x4b564d05.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_PV_SCHED_YIELD         ||    13 || guest checks this feature bit
+-                                   ||       || before using paravirtualized
+-                                   ||       || sched yield.
+-------------------------------------------------------------------------------
+-KVM_FEATURE_CLOCKSOURCE_STABLE_BIT ||    24 || host will warn if no guest-side
+-                                   ||       || per-cpu warps are expected in
+-                                   ||       || kvmclock.
+-------------------------------------------------------------------------------
+-
+-          edx = an OR'ed group of (1 << flag), where each flags is:
+-
+-
+-flag                               || value || meaning
+-==================================================================================
+-KVM_HINTS_REALTIME                 ||     0 || guest checks this feature bit to
+-                                   ||       || determine that vCPUs are never
+-                                   ||       || preempted for an unlimited time,
+-                                   ||       || allowing optimizations
+-----------------------------------------------------------------------------------
++
++returns::
++
++          ebx, ecx
++          eax = an OR'ed group of (1 << flag)
++
++where ``flag`` is defined as below:
++
++================================= =========== ================================
++flag                              value       meaning
++================================= =========== ================================
++KVM_FEATURE_CLOCKSOURCE           0           kvmclock available at msrs
++                                              0x11 and 0x12
++
++KVM_FEATURE_NOP_IO_DELAY          1           not necessary to perform delays
++                                              on PIO operations
++
++KVM_FEATURE_MMU_OP                2           deprecated
++
++KVM_FEATURE_CLOCKSOURCE2          3           kvmclock available at msrs
++
++                                              0x4b564d00 and 0x4b564d01
++KVM_FEATURE_ASYNC_PF              4           async pf can be enabled by
++                                              writing to msr 0x4b564d02
++
++KVM_FEATURE_STEAL_TIME            5           steal time can be enabled by
++                                              writing to msr 0x4b564d03
++
++KVM_FEATURE_PV_EOI                6           paravirtualized end of interrupt
++                                              handler can be enabled by
++                                              writing to msr 0x4b564d04
++
++KVM_FEATURE_PV_UNHAULT            7           guest checks this feature bit
++                                              before enabling paravirtualized
++                                              spinlock support
++
++KVM_FEATURE_PV_TLB_FLUSH          9           guest checks this feature bit
++                                              before enabling paravirtualized
++                                              tlb flush
++
++KVM_FEATURE_ASYNC_PF_VMEXIT       10          paravirtualized async PF VM EXIT
++                                              can be enabled by setting bit 2
++                                              when writing to msr 0x4b564d02
++
++KVM_FEATURE_PV_SEND_IPI           11          guest checks this feature bit
++                                              before enabling paravirtualized
++                                              sebd IPIs
++
++KVM_FEATURE_PV_POLL_CONTROL       12          host-side polling on HLT can
++                                              be disabled by writing
++                                              to msr 0x4b564d05.
++
++KVM_FEATURE_PV_SCHED_YIELD        13          guest checks this feature bit
++                                              before using paravirtualized
++                                              sched yield.
++
++KVM_FEATURE_CLOCSOURCE_STABLE_BIT 24          host will warn if no guest-side
++                                              per-cpu warps are expeced in
++                                              kvmclock
++================================= =========== ================================
++
++::
++
++      edx = an OR'ed group of (1 << flag)
++
++Where ``flag`` here is defined as below:
++
++================== ============ =================================
++flag               value        meaning
++================== ============ =================================
++KVM_HINTS_REALTIME 0            guest checks this feature bit to
++                                determine that vCPUs are never
++                                preempted for an unlimited time
++                                allowing optimizations
++================== ============ =================================
 -- 
 2.20.1
 
