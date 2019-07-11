@@ -2,152 +2,155 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DA44B64D8C
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jul 2019 22:28:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 262DF650AD
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Jul 2019 05:47:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727695AbfGJU1z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 10 Jul 2019 16:27:55 -0400
-Received: from mail-pf1-f194.google.com ([209.85.210.194]:33303 "EHLO
-        mail-pf1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727586AbfGJU1y (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Jul 2019 16:27:54 -0400
-Received: by mail-pf1-f194.google.com with SMTP id g2so1628656pfq.0
-        for <linux-doc@vger.kernel.org>; Wed, 10 Jul 2019 13:27:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=hO2jzOM05mxrz5IGdqgpee+axiQH+2OXPmqo+Ul0FcM=;
-        b=DXE2TyoaAsiT9dgVdMLJlwnFOJG+VPwltPNRpKt3x1FLvKASU/iQDS/su9pWcI6ZPd
-         MXkkWpKWuusX2P8emSJdJDlt30oE5SxYRezHyYxpjjVp3ZbcLi8A3iWXovzH83yYRc8k
-         fjxQns6K5/tsiMazqiGGWLPX8o1RPbeCk84rZYGhBrbKZfsdxcSVvoPDO0y7puTr2iGH
-         fQNI4xvqDUtOGBpEZRrc5xNRkpC2AFKD+tShr+e3Bwk8ghWvxHexXjknk4e4/Fuddr4K
-         h5eIBtrjZWB7rbYTWe1Z8/fz44NvT2DlWtjdcUYum8NYmtJkqcBIajW2gxCHzFBMqhlz
-         2q0w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=hO2jzOM05mxrz5IGdqgpee+axiQH+2OXPmqo+Ul0FcM=;
-        b=gOIUqZKZ2k4+ec80JWHuq0Gy7E2wCPNL3tuN7An3rT9xjic0sOu7sHge9VZ+JjlYmU
-         RBb29zXojJxygNA5yVfit+Tqm1UAjzwQ9h48mYVXaQa1ETDGeIturMNc9uqvDD6026xo
-         zla8bTglaDu2Ch+DcnjkA+cY1Scz5FEwrpOL/lrYQLhgC6yzEh/dPZQF2fuyCcMdRulm
-         DTcjCJMQafTsr6o6W9VXW+zCLjqXLmBIIBOAbYWDDgtTXvf5U+HOy1plN1poYhodMdvF
-         n1JfyxE9EXmhKUys3NIFMhmVcNAG7+Jt9DKdDKJ2v/8zZBXzQUDUNiNENty8oQk71qqk
-         GnZA==
-X-Gm-Message-State: APjAAAVJSBX33E5sKTZGz7xcSsnAzziQIgh1797rXCiP69zUoPpBspif
-        pyAZzS0Qk7/v7MYB9lNtBdiC9wEJX5/Xf+vmxXOPfA==
-X-Google-Smtp-Source: APXvYqzZdlWhCkBvFW8XUuT2KDhsG6TgutjUsDP74lsWb4XjESrHCjQll9Q/yu+3XrTs4ARL+yM6pPyLsGbtB4DuWT0=
-X-Received: by 2002:a63:205f:: with SMTP id r31mr109331pgm.159.1562790473396;
- Wed, 10 Jul 2019 13:27:53 -0700 (PDT)
+        id S1727838AbfGKDrB convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Wed, 10 Jul 2019 23:47:01 -0400
+Received: from mga14.intel.com ([192.55.52.115]:16529 "EHLO mga14.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727462AbfGKDrB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 10 Jul 2019 23:47:01 -0400
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 10 Jul 2019 20:47:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,476,1557212400"; 
+   d="scan'208";a="177043503"
+Received: from fmsmsx106.amr.corp.intel.com ([10.18.124.204])
+  by orsmga002.jf.intel.com with ESMTP; 10 Jul 2019 20:46:58 -0700
+Received: from fmsmsx151.amr.corp.intel.com (10.18.125.4) by
+ FMSMSX106.amr.corp.intel.com (10.18.124.204) with Microsoft SMTP Server (TLS)
+ id 14.3.439.0; Wed, 10 Jul 2019 20:46:57 -0700
+Received: from bgsmsx106.gar.corp.intel.com (10.223.43.196) by
+ FMSMSX151.amr.corp.intel.com (10.18.125.4) with Microsoft SMTP Server (TLS)
+ id 14.3.439.0; Wed, 10 Jul 2019 20:46:57 -0700
+Received: from bgsmsx101.gar.corp.intel.com ([169.254.1.46]) by
+ BGSMSX106.gar.corp.intel.com ([169.254.1.194]) with mapi id 14.03.0439.000;
+ Thu, 11 Jul 2019 09:16:54 +0530
+From:   "Gote, Nitin R" <nitin.r.gote@intel.com>
+To:     'Joe Perches' <joe@perches.com>, "corbet@lwn.net" <corbet@lwn.net>
+CC:     "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+        "apw@canonical.com" <apw@canonical.com>,
+        "keescook@chromium.org" <keescook@chromium.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "kernel-hardening@lists.openwall.com" 
+        <kernel-hardening@lists.openwall.com>
+Subject: RE: [PATCH v4] Added warnings in checkpatch.pl script to :
+Thread-Topic: [PATCH v4] Added warnings in checkpatch.pl script to :
+Thread-Index: AQHVNm3hVzOhL9haf0KMxjtR64B8zqbCGIgAgAFiYNA=
+Date:   Thu, 11 Jul 2019 03:46:53 +0000
+Message-ID: <12356C813DFF6F479B608F81178A5615878BFA@BGSMSX101.gar.corp.intel.com>
+References: <20190709154806.26363-1-nitin.r.gote@intel.com>
+ <040b50f00501ae131256bb13a5362731ebdd6bfe.camel@perches.com>
+In-Reply-To: <040b50f00501ae131256bb13a5362731ebdd6bfe.camel@perches.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-version: 11.0.600.7
+dlp-reaction: no-action
+x-ctpclassification: CTP_NT
+x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiOGE2YzA0YmEtOGQ4MC00MTJkLTg5NTgtZDAwYTljOTVlYjYwIiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjEwLjE4MDQuNDkiLCJUcnVzdGVkTGFiZWxIYXNoIjoiTlVmU3pPaTFySlpBV0ZVOEhBekFpcGYzQjJTS2JiZXAweWozOVBFeURlXC9TS3B1RVVtWHlnS21mUXBOQTduQTYifQ==
+x-originating-ip: [10.223.10.10]
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 8BIT
 MIME-Version: 1.0
-References: <20190709063023.251446-1-brendanhiggins@google.com>
- <20190709063023.251446-17-brendanhiggins@google.com> <7cc417dd-036f-7dc1-6814-b1fdac810f03@kernel.org>
- <CAFd5g4595X8cM919mohQVaShs4dKWzZ_-2RVB=6SH3RdVMwuQw@mail.gmail.com>
-In-Reply-To: <CAFd5g4595X8cM919mohQVaShs4dKWzZ_-2RVB=6SH3RdVMwuQw@mail.gmail.com>
-From:   Brendan Higgins <brendanhiggins@google.com>
-Date:   Wed, 10 Jul 2019 13:27:42 -0700
-Message-ID: <CAFd5g45zFhBN-yrJbRt6KnFkYKxVqjs9qeQULCSD6z89vvG-Tg@mail.gmail.com>
-Subject: Re: [PATCH v7 16/18] MAINTAINERS: add entry for KUnit the unit
- testing framework
-To:     shuah <shuah@kernel.org>
-Cc:     Frank Rowand <frowand.list@gmail.com>,
-        Greg KH <gregkh@linuxfoundation.org>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        Kees Cook <keescook@google.com>,
-        Kieran Bingham <kieran.bingham@ideasonboard.com>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Rob Herring <robh@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
-        "Theodore Ts'o" <tytso@mit.edu>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        devicetree <devicetree@vger.kernel.org>,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        kunit-dev@googlegroups.com,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-fsdevel@vger.kernel.org,
-        linux-kbuild <linux-kbuild@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        linux-nvdimm <linux-nvdimm@lists.01.org>,
-        linux-um@lists.infradead.org,
-        Sasha Levin <Alexander.Levin@microsoft.com>,
-        "Bird, Timothy" <Tim.Bird@sony.com>,
-        Amir Goldstein <amir73il@gmail.com>,
-        Dan Carpenter <dan.carpenter@oracle.com>,
-        Daniel Vetter <daniel@ffwll.ch>, Jeff Dike <jdike@addtoit.com>,
-        Joel Stanley <joel@jms.id.au>,
-        Julia Lawall <julia.lawall@lip6.fr>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Knut Omang <knut.omang@oracle.com>,
-        Logan Gunthorpe <logang@deltatee.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Petr Mladek <pmladek@suse.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Richard Weinberger <richard@nod.at>,
-        David Rientjes <rientjes@google.com>,
-        Steven Rostedt <rostedt@goodmis.org>, wfg@linux.intel.com
-Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jul 9, 2019 at 11:01 AM Brendan Higgins
-<brendanhiggins@google.com> wrote:
->
-> On Tue, Jul 9, 2019 at 7:53 AM shuah <shuah@kernel.org> wrote:
-> >
-> > On 7/9/19 12:30 AM, Brendan Higgins wrote:
-> > > Add myself as maintainer of KUnit, the Linux kernel's unit testing
-> > > framework.
-> > >
-> > > Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-> > > Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> > > Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
-> > > ---
-> > >   MAINTAINERS | 11 +++++++++++
-> > >   1 file changed, 11 insertions(+)
-> > >
-> > > diff --git a/MAINTAINERS b/MAINTAINERS
-> > > index 677ef41cb012c..48d04d180a988 100644
-> > > --- a/MAINTAINERS
-> > > +++ b/MAINTAINERS
-> > > @@ -8599,6 +8599,17 @@ S:     Maintained
-> > >   F:  tools/testing/selftests/
-> > >   F:  Documentation/dev-tools/kselftest*
-> > >
-> > > +KERNEL UNIT TESTING FRAMEWORK (KUnit)
-> > > +M:   Brendan Higgins <brendanhiggins@google.com>
-> > > +L:   linux-kselftest@vger.kernel.org
-> > > +L:   kunit-dev@googlegroups.com
-> > > +W:   https://google.github.io/kunit-docs/third_party/kernel/docs/
-> > > +S:   Maintained
-> > > +F:   Documentation/dev-tools/kunit/
-> > > +F:   include/kunit/
-> > > +F:   kunit/
-> > > +F:   tools/testing/kunit/
-> > > +
-> > >   KERNEL USERMODE HELPER
-> > >   M:  Luis Chamberlain <mcgrof@kernel.org>
-> > >   L:  linux-kernel@vger.kernel.org
-> > >
-> >
-> > Thanks Brendan.
-> >
-> > I am good with this. I can take KUnit patches through kselftest
-> > with your Ack.
->
-> My acknowledgement? Sure! I thought we already agreed to that.
->
-> Also, do we need an ack from Masahiro or Michal for the Kbuild patch
-> [PATCH v7 06/18]? And an ack from Josh or Peter for the objtool patch
-> [PATCH v7 08/18]?
 
-By the way, I am guessing you have already seen it, but I uploaded a
-new version to incorporate a suggestion made by Masahiro on patch
-06/18. In addition, I have gotten acks on the two patches mentioned
-above. So I think we are good to go.
+> -----Original Message-----
+> From: Joe Perches [mailto:joe@perches.com]
+> Sent: Tuesday, July 9, 2019 9:40 PM
+> To: Gote, Nitin R <nitin.r.gote@intel.com>; corbet@lwn.net
+> Cc: akpm@linux-foundation.org; apw@canonical.com;
+> keescook@chromium.org; linux-doc@vger.kernel.org; linux-
+> kernel@vger.kernel.org; kernel-hardening@lists.openwall.com
+> Subject: Re: [PATCH v4] Added warnings in checkpatch.pl script to :
+> 
+> On Tue, 2019-07-09 at 21:18 +0530, NitinGote wrote:
+> > From: Nitin Gote <nitin.r.gote@intel.com>
+> >
+> > 1. Deprecate strcpy() in favor of strscpy().
+> > 2. Deprecate strlcpy() in favor of strscpy().
+> > 3. Deprecate strncpy() in favor of strscpy() or strscpy_pad().
+> >
+> > Updated strncpy() section in Documentation/process/deprecated.rst
+> > to cover strscpy_pad() case.
+> 
+> Please slow down your patch submission rate for this instance and respond
+> appropriately to the comments you've been given.
 
-Thanks!
+Sure, I will explore this things more. And sorry, I missed to incorporate one comment. 
+I will take care of such things.
+
+> 
+> This stuff is not critical bug fixing.
+> 
+Noted.
+
+> The subject could be something like:
+> 
+> Subject: [PATCH v#] Documentation/checkpatch: Prefer strscpy over
+> strcpy/strlcpy
+> 
+
+How about this  :
+Subject: [PATCH v#] Doc/checkpatch: Prefer strscpy/strscpy_pad over strcpy/strlcpy/strncpy
+
+> > diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+> []
+> > @@ -605,6 +605,20 @@ foreach my $entry (keys %deprecated_apis) {  }
+> > $deprecated_apis_search = "(?:${deprecated_apis_search})";
+> >
+> > +our %deprecated_string_apis = (
+> > +        "strcpy"				=> "strscpy",
+> > +        "strlcpy"				=> "strscpy",
+> > +        "strncpy"				=> "strscpy, strscpy_pad or
+> for non-NUL-terminated strings, strncpy() can still be used, but destinations
+> should be marked with the __nonstring",
+> 
+> 'the' is not necessary.
+
+Noted.
+
+> 
+> There could likely also be a strscat created for strcat, strlcat and strncat.
+>
+
+I have not found reference for strscat in kernel.
+Could you please give any reference for strscat ?
+ 
+> btw:
+> 
+> There were several defects in the kernel for misuses of strlcpy.
+> 
+> Did you or anyone else have an opinion on stracpy to avoid duplicating the
+> first argument in a sizeof()?
+> 
+> 	strlcpy(foo, bar, sizeof(foo))
+> to
+> 	stracpy(foo, bar)
+> 
+> where foo must be char array compatible ?
+> 
+> https://lore.kernel.org/lkml/d1524130f91d7cfd61bc736623409693d2895f57.
+> camel@perches.com/
+> 
+>
+
+As I understood, your trying to give new interface like stracpy(), to avoid duplication of first 
+argument in a sizeof(), we can also make it more robust for users by adding check or warn in 
+checkpatch.pl to prefer stracpy().
+
+Did you or anyone has opinion on this ?
+
+
+Thanks,
+Nitin Gote
