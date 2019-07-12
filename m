@@ -2,74 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A02F266424
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jul 2019 04:22:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8A7F366516
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jul 2019 05:38:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729150AbfGLCVg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 11 Jul 2019 22:21:36 -0400
-Received: from out30-42.freemail.mail.aliyun.com ([115.124.30.42]:57848 "EHLO
-        out30-42.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1729216AbfGLCUk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Jul 2019 22:20:40 -0400
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R171e4;CH=green;DM=||false|;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01f04391;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=21;SR=0;TI=SMTPD_---0TWfV401_1562898035;
-Received: from localhost(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0TWfV401_1562898035)
-          by smtp.aliyun-inc.com(127.0.0.1);
-          Fri, 12 Jul 2019 10:20:35 +0800
-From:   Alex Shi <alex.shi@linux.alibaba.com>
-To:     linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
-        linux-kernel@vger.kernel.org,
-        linux-stm32@st-md-mailman.stormreply.com,
-        linux-arm-kernel@lists.infradead.org,
-        linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
-        linux-omap@vger.kernel.org, linux-fbdev@vger.kernel.org,
-        linux-samsung-soc@vger.kernel.org, linux-ia64@vger.kernel.org,
-        linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
-        linux-scsi@vger.kernel.org, linux-s390@vger.kernel.org,
-        kvm@vger.kernel.org, linux-sh@vger.kernel.org,
-        Chris Zankel <chris@zankel.net>,
-        Max Filippov <jcmvbkbc@gmail.com>,
-        linux-xtensa@linux-xtensa.org
-Subject: [PATCH 12/12] Documentation/xtensa: repointer docs to Documentation/arch/
-Date:   Fri, 12 Jul 2019 10:20:18 +0800
-Message-Id: <20190712022018.27989-12-alex.shi@linux.alibaba.com>
-X-Mailer: git-send-email 2.19.1.856.g8858448bb
-In-Reply-To: <20190712022018.27989-1-alex.shi@linux.alibaba.com>
-References: <20190712022018.27989-1-alex.shi@linux.alibaba.com>
+        id S1729524AbfGLDiF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 11 Jul 2019 23:38:05 -0400
+Received: from mga03.intel.com ([134.134.136.65]:16893 "EHLO mga03.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729467AbfGLDiF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 11 Jul 2019 23:38:05 -0400
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 11 Jul 2019 20:38:04 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.63,481,1557212400"; 
+   d="scan'208";a="186517666"
+Received: from gonegri-mobl.ger.corp.intel.com (HELO localhost) ([10.252.48.192])
+  by fmsmga001.fm.intel.com with ESMTP; 11 Jul 2019 20:37:59 -0700
+Date:   Fri, 12 Jul 2019 06:37:58 +0300
+From:   Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
+To:     Ilias Apalodimas <ilias.apalodimas@linaro.org>
+Cc:     Sasha Levin <sashal@kernel.org>, peterhuewe@gmx.de, jgg@ziepe.ca,
+        corbet@lwn.net, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-integrity@vger.kernel.org,
+        linux-kernel@microsoft.com, thiruan@microsoft.com,
+        bryankel@microsoft.com, tee-dev@lists.linaro.org,
+        sumit.garg@linaro.org, rdunlap@infradead.org
+Subject: Re: [PATCH v8 0/2] fTPM: firmware TPM running in TEE
+Message-ID: <20190712033758.vnwrmdxvz2kplt65@linux.intel.com>
+References: <20190705204746.27543-1-sashal@kernel.org>
+ <20190711200858.xydm3wujikufxjcw@linux.intel.com>
+ <20190711201059.GA18260@apalos>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190711201059.GA18260@apalos>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: NeoMutt/20180716
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Since we move Documentation/xtensa docs to Documentation/arch/xtensa
-dir, redirect the doc pointer to them.
+On Thu, Jul 11, 2019 at 11:10:59PM +0300, Ilias Apalodimas wrote:
+> Will report back any issues when we start using it on real hardware
+> rather than QEMU
+> 
+> Thanks
+> /Ilias
 
-Signed-off-by: Alex Shi <alex.shi@linux.alibaba.com>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Cc: Chris Zankel <chris@zankel.net>
-Cc: Max Filippov <jcmvbkbc@gmail.com>
-Cc: linux-xtensa@linux-xtensa.org
-Cc: linux-kernel@vger.kernel.org
----
- arch/xtensa/include/asm/initialize_mmu.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+That would awesome. PR is far away so there is time to add more
+tested-by's. Thanks.
 
-diff --git a/arch/xtensa/include/asm/initialize_mmu.h b/arch/xtensa/include/asm/initialize_mmu.h
-index 323d05789159..499fe4847490 100644
---- a/arch/xtensa/include/asm/initialize_mmu.h
-+++ b/arch/xtensa/include/asm/initialize_mmu.h
-@@ -42,7 +42,7 @@
- #if XCHAL_HAVE_S32C1I && (XCHAL_HW_MIN_VERSION >= XTENSA_HWVERSION_RC_2009_0)
- /*
-  * We Have Atomic Operation Control (ATOMCTL) Register; Initialize it.
-- * For details see Documentation/xtensa/atomctl.txt
-+ * For details see Documentation/arch/xtensa/atomctl.txt
-  */
- #if XCHAL_DCACHE_IS_COHERENT
- 	movi	a3, 0x25	/* For SMP/MX -- internal for writeback,
--- 
-2.19.1.856.g8858448bb
-
+/Jarkko
