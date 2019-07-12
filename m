@@ -2,145 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 817AF673C8
-	for <lists+linux-doc@lfdr.de>; Fri, 12 Jul 2019 19:01:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CB41867448
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jul 2019 19:34:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727655AbfGLRBO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 12 Jul 2019 13:01:14 -0400
-Received: from mail-pg1-f193.google.com ([209.85.215.193]:43805 "EHLO
-        mail-pg1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727651AbfGLRBN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 12 Jul 2019 13:01:13 -0400
-Received: by mail-pg1-f193.google.com with SMTP id f25so4787656pgv.10
-        for <linux-doc@vger.kernel.org>; Fri, 12 Jul 2019 10:01:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=joelfernandes.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=/5hJQY7vBLoyimOM3U70MNxFgsc86oXhHYtdVzU5ujQ=;
-        b=UAjbMqka7p1GCxFlNusyg29g1RCPFz9WIMtWvkN7qrcNF+ATnO9YKmLvPnuqPRJWG8
-         01CXWPFPyGYm3lOSoebpREdMbvmnc55dMqjKROvd/t5QxrZ6o7iZwPGUGOYk4Ll55hdr
-         IVAnsP7Rq6Ff+RAPzreODHBCQNzqAghR4nuBM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=/5hJQY7vBLoyimOM3U70MNxFgsc86oXhHYtdVzU5ujQ=;
-        b=fE0kJ3jpmK8m/dPwnkdSq8rJLvhlhEJfai+Uj7DUGnHMe7BMRrUOLMDay7mC90xOfa
-         9X2P5j0GnesNxp9zl9oFBoM7zl8ga+lGYpi7dlmsaF5PbYJOuIFbV7Xc/+lrPREiF1r0
-         gZuofJFffHAc33Xeri9aNQiIyJH1ECpuhjrwufWWy4S2s8An3C+X/XUxmdyfYQ6Jyfv3
-         Y9yE3UzBIcMWA9gW83w0NIyRWub5r2yO6XsWEIqOn305rfGDgYfBWxMzdDn7zyluSK3x
-         eH9qHZYyJyII3S6i0/Es6Um9120g0Choo+r25h05D7pVDoCECmCFC/uHH9ZI9yVA9P8L
-         ldPA==
-X-Gm-Message-State: APjAAAUkiAvln5/s+wKJTPn4OjDEWEHJwsPDEOUy41Jhw/Uok3bRFUFl
-        YZMTFmCQ9xhE0unkUpYQGP0=
-X-Google-Smtp-Source: APXvYqysKQjlbPJnzD1SgXu0qrPOgUWrpmjWhJmLr3dLME/oF4p6YcJaiWDgGdC5pNxKNHie+MpwEA==
-X-Received: by 2002:a63:dc56:: with SMTP id f22mr12036675pgj.305.1562950871565;
-        Fri, 12 Jul 2019 10:01:11 -0700 (PDT)
-Received: from joelaf.cam.corp.google.com ([2620:15c:6:12:9c46:e0da:efbf:69cc])
-        by smtp.gmail.com with ESMTPSA id a15sm7127385pgw.3.2019.07.12.10.01.07
-        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Fri, 12 Jul 2019 10:01:10 -0700 (PDT)
-From:   "Joel Fernandes (Google)" <joel@joelfernandes.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     "Joel Fernandes (Google)" <joel@joelfernandes.org>,
-        Alexey Kuznetsov <kuznet@ms2.inr.ac.ru>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Borislav Petkov <bp@alien8.de>, c0d1n61at3@gmail.com,
-        "David S. Miller" <davem@davemloft.net>, edumazet@google.com,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
-        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Josh Triplett <josh@joshtriplett.org>, keescook@chromium.org,
-        kernel-hardening@lists.openwall.com, kernel-team@android.com,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Len Brown <lenb@kernel.org>, linux-acpi@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-pci@vger.kernel.org,
-        linux-pm@vger.kernel.org,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        neilb@suse.com, netdev@vger.kernel.org,
-        Oleg Nesterov <oleg@redhat.com>,
-        "Paul E. McKenney" <paulmck@linux.ibm.com>,
-        Pavel Machek <pavel@ucw.cz>, peterz@infradead.org,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
-        Rasmus Villemoes <rasmus.villemoes@prevas.dk>,
-        rcu@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
-        Tejun Heo <tj@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>, will@kernel.org,
-        x86@kernel.org (maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT))
-Subject: [PATCH v2 9/9] doc: Update documentation about list_for_each_entry_rcu
-Date:   Fri, 12 Jul 2019 13:00:24 -0400
-Message-Id: <20190712170024.111093-10-joel@joelfernandes.org>
-X-Mailer: git-send-email 2.22.0.510.g264f2c817a-goog
-In-Reply-To: <20190712170024.111093-1-joel@joelfernandes.org>
-References: <20190712170024.111093-1-joel@joelfernandes.org>
+        id S1726977AbfGLRea (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 12 Jul 2019 13:34:30 -0400
+Received: from ms.lwn.net ([45.79.88.28]:59320 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726976AbfGLRea (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 12 Jul 2019 13:34:30 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id B29512CC;
+        Fri, 12 Jul 2019 17:34:28 +0000 (UTC)
+Date:   Fri, 12 Jul 2019 11:34:27 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Alex Shi <alex.shi@linux.alibaba.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-stm32@st-md-mailman.stormreply.com,
+        linux-arm-kernel@lists.infradead.org,
+        linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
+        linux-omap@vger.kernel.org, linux-fbdev@vger.kernel.org,
+        linux-samsung-soc@vger.kernel.org, linux-ia64@vger.kernel.org,
+        linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
+        linux-scsi@vger.kernel.org, linux-s390@vger.kernel.org,
+        kvm@vger.kernel.org, linux-sh@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH 01/12] Documentation: move architectures together
+Message-ID: <20190712113427.62fa7ffc@lwn.net>
+In-Reply-To: <20190712022018.27989-1-alex.shi@linux.alibaba.com>
+References: <20190712022018.27989-1-alex.shi@linux.alibaba.com>
+Organization: LWN.net
 MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch updates the documentation with information about
-usage of lockdep with list_for_each_entry_rcu().
+On Fri, 12 Jul 2019 10:20:07 +0800
+Alex Shi <alex.shi@linux.alibaba.com> wrote:
 
-Signed-off-by: Joel Fernandes (Google) <joel@joelfernandes.org>
----
- Documentation/RCU/lockdep.txt   | 15 +++++++++++----
- Documentation/RCU/whatisRCU.txt |  9 ++++++++-
- 2 files changed, 19 insertions(+), 5 deletions(-)
+> There are many different archs in Documentation/ dir, it's better to
+> move them together in 'Documentation/arch' which follows from kernel source.
 
-diff --git a/Documentation/RCU/lockdep.txt b/Documentation/RCU/lockdep.txt
-index da51d3068850..3d967df3a801 100644
---- a/Documentation/RCU/lockdep.txt
-+++ b/Documentation/RCU/lockdep.txt
-@@ -96,7 +96,14 @@ other flavors of rcu_dereference().  On the other hand, it is illegal
- to use rcu_dereference_protected() if either the RCU-protected pointer
- or the RCU-protected data that it points to can change concurrently.
- 
--There are currently only "universal" versions of the rcu_assign_pointer()
--and RCU list-/tree-traversal primitives, which do not (yet) check for
--being in an RCU read-side critical section.  In the future, separate
--versions of these primitives might be created.
-+Similar to rcu_dereference_protected, The RCU list and hlist traversal
-+primitives also check for whether there are called from within a reader
-+section. However, an optional lockdep expression can be passed to them as
-+the last argument in case they are called under other non-RCU protection.
-+
-+For example, the workqueue for_each_pwq() macro is implemented as follows.
-+It is safe to call for_each_pwq() outside a reader section but under protection
-+of wq->mutex:
-+#define for_each_pwq(pwq, wq)
-+	list_for_each_entry_rcu((pwq), &(wq)->pwqs, pwqs_node,
-+				lock_is_held(&(wq->mutex).dep_map))
-diff --git a/Documentation/RCU/whatisRCU.txt b/Documentation/RCU/whatisRCU.txt
-index 981651a8b65d..a08c03735963 100644
---- a/Documentation/RCU/whatisRCU.txt
-+++ b/Documentation/RCU/whatisRCU.txt
-@@ -290,7 +290,7 @@ rcu_dereference()
- 	at any time, including immediately after the rcu_dereference().
- 	And, again like rcu_assign_pointer(), rcu_dereference() is
- 	typically used indirectly, via the _rcu list-manipulation
--	primitives, such as list_for_each_entry_rcu().
-+	primitives, such as list_for_each_entry_rcu() [2].
- 
- 	[1] The variant rcu_dereference_protected() can be used outside
- 	of an RCU read-side critical section as long as the usage is
-@@ -305,6 +305,13 @@ rcu_dereference()
- 	a lockdep splat is emitted.  See RCU/Design/Requirements/Requirements.html
- 	and the API's code comments for more details and example usage.
- 
-+	[2] In case the list_for_each_entry_rcu() primitive is intended
-+	to be used outside of an RCU reader section such as when
-+	protected by a lock, then an additional lockdep expression can be
-+	passed as the last argument to it so that RCU lockdep checking code
-+	knows that the dereference of the list pointers are safe. If the
-+	indicated protection is not provided, a lockdep splat is emitted.
-+
- The following diagram shows how each API communicates among the
- reader, updater, and reclaimer.
- 
--- 
-2.22.0.510.g264f2c817a-goog
+So this seems certain to collide badly with Mauro's RST-conversion monster
+patch set.
 
+More to the point, though...if we are going to thrash up things this
+badly, we want to be sure that we're doing it right so we don't end up
+renaming everything again.  Grouping stuff into a new arch/ subdirectory
+adds a bit of order, but it doesn't do much toward trying to organize our
+documentation for its readers, and it doesn't help us to modernize the
+docs and get rid of the old, useless stuff.  A quick check shows that many
+of these files have seen no changes other than typo fixes since the
+beginning of the Git era.
+
+So, in my mind, this needs some thought.  Maybe we want a
+Documentation/arch in the end, but I'm not convinced that we should just
+create it and fill it with a snow shovel.  This might be a good thing to
+discuss at the kernel summit in September.
+
+Thanks,
+
+jon
