@@ -2,27 +2,27 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7F33A68CC9
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jul 2019 15:54:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9799468EC8
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jul 2019 16:09:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731936AbfGONyA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 15 Jul 2019 09:54:00 -0400
-Received: from mail.kernel.org ([198.145.29.99]:52880 "EHLO mail.kernel.org"
+        id S2388439AbfGOOJo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 15 Jul 2019 10:09:44 -0400
+Received: from mail.kernel.org ([198.145.29.99]:33496 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731710AbfGONyA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 15 Jul 2019 09:54:00 -0400
+        id S2388142AbfGOOJj (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 15 Jul 2019 10:09:39 -0400
 Received: from sasha-vm.mshome.net (unknown [73.61.17.35])
         (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id CEE5D206B8;
-        Mon, 15 Jul 2019 13:53:57 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 65D61206B8;
+        Mon, 15 Jul 2019 14:09:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1563198839;
-        bh=r9VbFvgB86loUol1iTq1VKBzHGe1IiiSjvv69koL+AE=;
+        s=default; t=1563199779;
+        bh=VhYJrHBQbvV0RkIhfelei557Bfvt9imaOYcQUrzBJ8E=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=rcMIgMYDyt6AHibyKKeOamfqZKJjmZXoy0OpRhrlvfGNGoUWQucYXba1fnflSCpXz
-         a9xMI9Pk6IFP6fwhxfkSWwK6Iqx9tIEVj6ITt/g72MlaPXnlQcoLfc4FcufQWvipA4
-         rXLLxNGusdqSs0DOrzRbArofDaHgcGB6T5UetWz0=
+        b=pze+m5BmWApqszCvPWgTszDNqUQQmQb8II2G60GwewsGUgVFEFfcBlbG2wTKWqweE
+         iDDW5YyE6G4JRrqjjNWqspbegaia9/TqvrnLfvhAsqEp8/UJ5hNy050MU0ijMdPa1x
+         OI/uPnpOG6N2RtvEuZSoiFfuNUIbpuuM4RoJi9pQ=
 From:   Sasha Levin <sashal@kernel.org>
 To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
 Cc:     Peter Zijlstra <peterz@infradead.org>,
@@ -31,12 +31,12 @@ Cc:     Peter Zijlstra <peterz@infradead.org>,
         Ingo Molnar <mingo@kernel.org>,
         Sasha Levin <sashal@kernel.org>, linux-arch@vger.kernel.org,
         linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.2 117/249] x86/atomic: Fix smp_mb__{before,after}_atomic()
-Date:   Mon, 15 Jul 2019 09:44:42 -0400
-Message-Id: <20190715134655.4076-117-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.1 103/219] x86/atomic: Fix smp_mb__{before,after}_atomic()
+Date:   Mon, 15 Jul 2019 10:01:44 -0400
+Message-Id: <20190715140341.6443-103-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190715134655.4076-1-sashal@kernel.org>
-References: <20190715134655.4076-1-sashal@kernel.org>
+In-Reply-To: <20190715140341.6443-1-sashal@kernel.org>
+References: <20190715140341.6443-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -96,10 +96,10 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  4 files changed, 13 insertions(+), 10 deletions(-)
 
 diff --git a/Documentation/atomic_t.txt b/Documentation/atomic_t.txt
-index dca3fb0554db..65bb09a29324 100644
+index 913396ac5824..ed0d814df7e0 100644
 --- a/Documentation/atomic_t.txt
 +++ b/Documentation/atomic_t.txt
-@@ -194,6 +194,9 @@ These helper barriers exist because architectures have varying implicit
+@@ -177,6 +177,9 @@ These helper barriers exist because architectures have varying implicit
  ordering on their SMP atomic primitives. For example our TSO architectures
  provide full ordered atomics and these barriers are no-ops.
  
