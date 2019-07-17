@@ -2,14 +2,14 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 042516BAFA
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 13:05:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EB6186BAEF
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 13:05:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726684AbfGQLFj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 17 Jul 2019 07:05:39 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:47058 "EHLO
+        id S1726309AbfGQLFi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 17 Jul 2019 07:05:38 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:47042 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726760AbfGQLFh (ORCPT
+        with ESMTP id S1726342AbfGQLFh (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jul 2019 07:05:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
@@ -17,25 +17,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=Zb/SASuRPcGdt/bTBUbecQLsS4IPsWmL3XCBWFftiQ0=; b=ZxRD0f4Rc54byLeqdDh0Xdgxx5
-        Q1kBP5IgPG2bAmb2xueLu+C9f/bh5DoIr6crbQIKmdzXQhdLD4yBfePTW5pTKVujrnSwwYiKNQP2X
-        OZ1/cHDulhTGkbVKCiB+A9chxv8NMPjofL2SnrExbCdTS5w9YmyOP+AP893uCjQY7Pak4NP9D1Qbm
-        f99XWv/KBlG4aayosMal8rDvOkrXAZgeq0qMs1vtQeTRFD3/yCk3mAD8uGOpbr8lJOrieoZTKOkCk
-        IBnjOcpUw+uWVQIiEoO8fJEgA8IdN47MuwRYHhR3lGEP/xe9P8OwaekgKvwbwmwObpL18b0zFK+x4
-        Xnssdkag==;
+        bh=ra0xbYPSU+4H3pFb2eOnhM3NB1hvssFTkUjTKCV0aRM=; b=hxXHWaQwBHdzR+WT6Jzaeq2c1L
+        CCVLEevN87ljhlBPSSCTH6tVr/eeYk0TIhfdXXIA/Yjdl17Wi0jUoEAkVhBjMX2olq+DgHn+HkH9J
+        GgucNMzEoFGJGW0lfFqeygXhmbCqPavcZM0S7+k/ETxwgfvQ4W1oCW68KQonUNPvTFregSzCG/HRN
+        LGR7yvnQhOsS7LyR2KpvKqDoriLEH3cTI57raPSnaWjHWgOF2xaf7zM9bFFGCDBsFL1ZYNMuyRy5G
+        JL2CBfAn3xvftqqXmLdbFUSDWcBN2tUmnaUte6bZzrCaLgrMgXsZfaHYOml/uA6VH5RpMh71WnjfB
+        3Up7BQQQ==;
 Received: from [191.33.154.161] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hnhke-00054Q-QZ; Wed, 17 Jul 2019 11:05:36 +0000
+        id 1hnhke-00054S-RX; Wed, 17 Jul 2019 11:05:36 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hnhkc-0003A0-TE; Wed, 17 Jul 2019 08:05:34 -0300
+        id 1hnhkc-0003A4-U1; Wed, 17 Jul 2019 08:05:34 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 To:     gregkh@linuxfoundation.org
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH v3 16/20] docs: ABI: make it parse ABI/stable as ReST-compatible files
-Date:   Wed, 17 Jul 2019 08:05:29 -0300
-Message-Id: <25bdd860bab61a7a8a3d7945954509631acb8a72.1563360659.git.mchehab+samsung@kernel.org>
+Subject: [PATCH v3 17/20] docs: ABI: create a 2-depth index for ABI
+Date:   Wed, 17 Jul 2019 08:05:30 -0300
+Message-Id: <162d163bbf8bd15f589ffc7167d1ad1490218b40.1563360659.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1563360659.git.mchehab+samsung@kernel.org>
 References: <cover.1563360659.git.mchehab+samsung@kernel.org>
@@ -46,58 +46,26 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now that the stable ABI files are compatible with ReST,
-parse them without converting complex descriptions as literal
-blocks nor escaping special characters.
-
-Please notice that escaping special characters will probably
-be needed at descriptions, at least for the asterisk character.
+That helps to identify what ABI files are adding titles.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
- Documentation/admin-guide/abi-stable.rst | 1 +
- Documentation/sphinx/kernel_abi.py       | 8 ++++++--
- 2 files changed, 7 insertions(+), 2 deletions(-)
+ Documentation/admin-guide/abi.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/admin-guide/abi-stable.rst b/Documentation/admin-guide/abi-stable.rst
-index 7495d7a35048..70490736e0d3 100644
---- a/Documentation/admin-guide/abi-stable.rst
-+++ b/Documentation/admin-guide/abi-stable.rst
-@@ -11,3 +11,4 @@ Most interfaces (like syscalls) are expected to never change and always
- be available.
+diff --git a/Documentation/admin-guide/abi.rst b/Documentation/admin-guide/abi.rst
+index 3b9645c77469..bcab3ef2597c 100644
+--- a/Documentation/admin-guide/abi.rst
++++ b/Documentation/admin-guide/abi.rst
+@@ -3,7 +3,7 @@ Linux ABI description
+ =====================
  
- .. kernel-abi:: $srctree/Documentation/ABI/stable
-+   :rst:
-diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index a417026ed690..a00eccfbafea 100644
---- a/Documentation/sphinx/kernel_abi.py
-+++ b/Documentation/sphinx/kernel_abi.py
-@@ -72,12 +72,13 @@ class KernelCmd(Directive):
-     u"""KernelABI (``kernel-abi``) directive"""
+ .. toctree::
+-   :maxdepth: 1
++   :maxdepth: 2
  
-     required_arguments = 1
--    optional_arguments = 0
-+    optional_arguments = 2
-     has_content = False
-     final_argument_whitespace = True
- 
-     option_spec = {
--        "debug"     : directives.flag
-+        "debug"     : directives.flag,
-+        "rst"       : directives.unchanged
-     }
- 
-     def run(self):
-@@ -91,6 +92,9 @@ class KernelCmd(Directive):
-         cmd = "get_abi.pl rest --enable-lineno --dir "
-         cmd += self.arguments[0]
- 
-+        if 'rst' in self.options:
-+            cmd += " --rst-source"
-+
-         srctree = path.abspath(os.environ["srctree"])
- 
-         fname = cmd
+    abi-stable
+    abi-testing
 -- 
 2.21.0
 
