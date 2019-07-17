@@ -2,108 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 377396B3F4
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 03:57:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D5FEC6B4E9
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 05:14:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728795AbfGQB4p (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 Jul 2019 21:56:45 -0400
-Received: from mail-pf1-f201.google.com ([209.85.210.201]:53055 "EHLO
-        mail-pf1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728762AbfGQB4o (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Jul 2019 21:56:44 -0400
-Received: by mail-pf1-f201.google.com with SMTP id a20so13479989pfn.19
-        for <linux-doc@vger.kernel.org>; Tue, 16 Jul 2019 18:56:44 -0700 (PDT)
+        id S1728541AbfGQDOk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 Jul 2019 23:14:40 -0400
+Received: from mail-pl1-f202.google.com ([209.85.214.202]:48032 "EHLO
+        mail-pl1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728047AbfGQDOg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Jul 2019 23:14:36 -0400
+Received: by mail-pl1-f202.google.com with SMTP id j12so11252365pll.14
+        for <linux-doc@vger.kernel.org>; Tue, 16 Jul 2019 20:14:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=z+RsQ5cMJRNJEspG7oJoFcFROmHPEJhG9JB06H11s3Q=;
-        b=arQQpTGJERz+HpGPXFp2jlPN5FrwHz2WQgWAk2OJzhGjTvteOU1VI4pyg3Gluszw+4
-         vjWiOIXlN3LE6Wmx+vW8ya52UlgsM6wNwD7n+F3tTlm0oU8wIAFq/wdLYE/uqwXxmQlX
-         XH8Q+EuWSZgjc3pc2sIgMXZRv15qqL94qa0UO9XEjvbkfa9x4jqUS6XSlv6anCR5d/Qu
-         TojpzGJ8KJngr73CNti9m0kYQQzcoyj/lkheRLPJEVpXYgERpvNTv8Z1n1LTd7t4E729
-         ECeSIi3rVf+NrWYm31K34bfHpNTeBSIN8kh5bzP8sJs2A90bieFh3IVp2mMrPJo+7TpA
-         I/fQ==
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=UEDqcbhewLjuqENwZ85B/xbrNZKpwQFH/0eCwyVdkGc=;
+        b=MEXCEEEPk/KuaWu/bxTbcr5Sv+ljjVJ5OJVxaekxPizc/h96zVyZZfexEYA9SVYpCV
+         mjNK6v82DvgDgHKwdyC4kOKNH2VJ/VJDJ+Y8EGV/S4OPONugktXp7uenWF6BpIWIsCSn
+         gk3QV/pTD0f1Ot1c4jFr0WyU7r3ZDFKJwWEsD3c0beg4TGWOT/qN2B8YjkmGYp7ZfOmq
+         VZNWdX98/zP1yYpmKExnU7XInexP5ArSxTe3Q8MMV4Xbp5bv4dbT2Sr0GFZ3Fhvphn9r
+         fMeA8QrxkD9RtLezfb49TUuBcKK3TcBeIUT8g6TVdU4YZSjYdoI3P20T9kvbW+psLYnL
+         0yeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=z+RsQ5cMJRNJEspG7oJoFcFROmHPEJhG9JB06H11s3Q=;
-        b=ktSTubvdpgkT02oX8aMme7M0h0i6MZu0S2MsHxxuo3v21sz+nKNHoELau3vg53gZHT
-         PPgjgvp/VUkEhb3DvKdbW8EVsnHdP3DiGsYr+UparJQtLcxNHw25lqNTMFf775OyvNjB
-         Oct+DrLRuejvdB8YrtVYiwFvoSfTXOTwZE0Y1QeRbkmoK4aJwuq5lEbWV/NuGq1GvAhi
-         RmCvkt/s3YgjFWew2MC0KmH+Q+WIuJVtLTN+fvTN2tyNEwyt2sAxXQ3/ZcLcoLO0kQG6
-         dNdfVfYok/o+hMo+tX1azfSxr0pKRpfLl8ViImYH8UDlWkRbUBZ/29rv09tBtLUifoEh
-         SlHw==
-X-Gm-Message-State: APjAAAUTkB4cinwHv/20SKLPgT9nwsi90Tfq5zbLKkxbOBOvijGRQqb2
-        uB4fzWt+PeNLqgvA+cXchkXuLAV2VI8mz0r3cB6/RA==
-X-Google-Smtp-Source: APXvYqwCZQKnuVk17fjP8A6U6bIZkWGFvrucA1ktqKosKL/38OKDiYQRbphN4EY4EbgHhiCugGJd7KJEeLMjHEFzWtBqZg==
-X-Received: by 2002:a65:4505:: with SMTP id n5mr34106191pgq.301.1563328603229;
- Tue, 16 Jul 2019 18:56:43 -0700 (PDT)
-Date:   Tue, 16 Jul 2019 18:55:43 -0700
-In-Reply-To: <20190717015543.152251-1-brendanhiggins@google.com>
-Message-Id: <20190717015543.152251-19-brendanhiggins@google.com>
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=UEDqcbhewLjuqENwZ85B/xbrNZKpwQFH/0eCwyVdkGc=;
+        b=rMiabPe5YCq7lB4f7/4Yvly6v0visTf/LvBoVVWf1/qkcCWO2L/hpED2rGiqAQgFUo
+         9VfJPcu5vzujnyNbqCe/TxtKmroXz09blQ7n2atgJv0jD3gtWYkXD7qta0iVhCTSo+uQ
+         BHTDAo9WkA267aek7oA73OjG8Znzvh6IeOjQlysd6NfqmB3YGqPr+gfD7Q6qVkloI6Ap
+         9oYHaJlDB55e6YIv2piXWKyt2igWL3cFj9D1mhP30bGQ4rP5cZtES4BFi6wbsYoUHtzD
+         5hT+nxw3NwfweOCyG/z9IfPlAoEb/WE/szZIfp+dHMGUOW70b1sEMZNZjqYa+JZI5peN
+         dWSQ==
+X-Gm-Message-State: APjAAAVAygCTlRylVr1l3D+DfBRwVzb3DzYyCYJ093Xzzf1FNl9B45UJ
+        lsCAvRUz53sI1A2+Nzk4YfY8HUFG624=
+X-Google-Smtp-Source: APXvYqx7EouYm/UBart6k3P8SNvF4Tt8Vrp1xqHYavJUzIKt18aw8pMHkXoYXAv17A98VxuiVijQcGClnME=
+X-Received: by 2002:a65:55c7:: with SMTP id k7mr6163284pgs.305.1563333275476;
+ Tue, 16 Jul 2019 20:14:35 -0700 (PDT)
+Date:   Tue, 16 Jul 2019 20:14:06 -0700
+Message-Id: <20190717031408.114104-1-drosen@google.com>
 Mime-Version: 1.0
-References: <20190717015543.152251-1-brendanhiggins@google.com>
 X-Mailer: git-send-email 2.22.0.510.g264f2c817a-goog
-Subject: [PATCH v11 18/18] MAINTAINERS: add proc sysctl KUnit test to PROC
- SYSCTL section
-From:   Brendan Higgins <brendanhiggins@google.com>
-To:     frowand.list@gmail.com, gregkh@linuxfoundation.org,
-        jpoimboe@redhat.com, keescook@google.com,
-        kieran.bingham@ideasonboard.com, mcgrof@kernel.org,
-        peterz@infradead.org, robh@kernel.org, sboyd@kernel.org,
-        shuah@kernel.org, tytso@mit.edu, yamada.masahiro@socionext.com
-Cc:     devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kbuild@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        linux-nvdimm@lists.01.org, linux-um@lists.infradead.org,
-        Alexander.Levin@microsoft.com, Tim.Bird@sony.com,
-        amir73il@gmail.com, dan.carpenter@oracle.com, daniel@ffwll.ch,
-        jdike@addtoit.com, joel@jms.id.au, julia.lawall@lip6.fr,
-        khilman@baylibre.com, knut.omang@oracle.com, logang@deltatee.com,
-        mpe@ellerman.id.au, pmladek@suse.com, rdunlap@infradead.org,
-        richard@nod.at, rientjes@google.com, rostedt@goodmis.org,
-        wfg@linux.intel.com, Brendan Higgins <brendanhiggins@google.com>,
-        Iurii Zaikin <yzaikin@google.com>
+Subject: [PATCH v2 0/2] Casefolding in F2FS
+From:   Daniel Rosenberg <drosen@google.com>
+To:     Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-f2fs-devel@lists.sourceforge.net
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, kernel-team@android.com,
+        Daniel Rosenberg <drosen@google.com>
 Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add entry for the new proc sysctl KUnit test to the PROC SYSCTL section,
-and add Iurii as a maintainer.
+These patches are largely based on the casefolding patches for ext4
+v2: Rebased patches again master, changed f2fs_msg to f2fs_info/f2fs_err
 
-Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-Cc: Iurii Zaikin <yzaikin@google.com>
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
-Acked-by: Luis Chamberlain <mcgrof@kernel.org>
----
- MAINTAINERS | 2 ++
- 1 file changed, 2 insertions(+)
+Daniel Rosenberg (2):
+  f2fs: include charset encoding information in the superblock
+  f2fs: Support case-insensitive file name lookups
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 48d04d180a988..f8204c75114da 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -12721,12 +12721,14 @@ F:	Documentation/filesystems/proc.txt
- PROC SYSCTL
- M:	Luis Chamberlain <mcgrof@kernel.org>
- M:	Kees Cook <keescook@chromium.org>
-+M:	Iurii Zaikin <yzaikin@google.com>
- L:	linux-kernel@vger.kernel.org
- L:	linux-fsdevel@vger.kernel.org
- S:	Maintained
- F:	fs/proc/proc_sysctl.c
- F:	include/linux/sysctl.h
- F:	kernel/sysctl.c
-+F:	kernel/sysctl-test.c
- F:	tools/testing/selftests/sysctl/
- 
- PS3 NETWORK SUPPORT
+ fs/f2fs/dir.c           | 133 ++++++++++++++++++++++++++++++++++++----
+ fs/f2fs/f2fs.h          |  24 ++++++--
+ fs/f2fs/file.c          |  10 ++-
+ fs/f2fs/hash.c          |  34 +++++++++-
+ fs/f2fs/inline.c        |   6 +-
+ fs/f2fs/inode.c         |   4 +-
+ fs/f2fs/namei.c         |  21 +++++++
+ fs/f2fs/super.c         |  86 ++++++++++++++++++++++++++
+ include/linux/f2fs_fs.h |   9 ++-
+ 9 files changed, 303 insertions(+), 24 deletions(-)
+
 -- 
 2.22.0.510.g264f2c817a-goog
 
