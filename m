@@ -2,14 +2,14 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3ADF66BC4F
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 14:28:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 591DF6BC4B
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 14:28:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727046AbfGQM20 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S1725873AbfGQM20 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Wed, 17 Jul 2019 08:28:26 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:53868 "EHLO
+Received: from bombadil.infradead.org ([198.137.202.133]:53854 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726343AbfGQM2Z (ORCPT
+        with ESMTP id S1726580AbfGQM2Z (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jul 2019 08:28:25 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
@@ -17,25 +17,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=2+k4mra1MFTOtyawpxcac8T2m64SzRcv+xkOwR1APCU=; b=NeQutpvVOIujHhlrVmsmpyWZ9a
-        ipS/ZbXXNWfAwXlG/Lo9RdZOP+K2kJi/NmhtlcWFxB/PTol2nHCjHqB05dU6JXRcspTpXtc3nd4Ac
-        48+KDY9Whpw7tLbbK1FHPG4F5XqYe6rAIzrni96eb2MsBcfr4mNqJ57ES/SAX6p01N1VasGQCw9td
-        WkQ6vo3+HbDYDl0Z6ngIi+VQEoJ3Yq0+qcv4Qc/9y9VeSrRogiep1PVkh2tfYrfk3Wjq0DI3Rv0Y7
-        XZer4uQRQkPZ2DCNfc+Vp4wnpJNRpjWNLmoZkmTo6HpMh23tYpeiPG3D7ZvYH1lkgdE/YbQZFygZh
-        6XXZqttw==;
+        bh=6Sy+C451QMv6wtGdIHTL1AhzpnVAGtDwr431h/ZLLtE=; b=M/14vkvIizzCpnZdjUs7C1jFQY
+        6/IHD1Z1R7sCz7kKluSVhU+bnd95y0MHLK3snnvu4y5zQlq3DUI/usMiuT9wT91ZZh4aS3qGNZmtz
+        XhKhky2tf7bk+LxzgZXgM8UjXw8Uy46JZ6nHjlOJJJkWOJOBr2t0Ksu+TX+ZSn6SRjZ6GmrBTM9iM
+        cTpMO+T4zo/fOeqko/JX+f9c1QOZCxr9SnH4FV+TDyOXHiEbotOYcDgl3P5MqH283KLt+naGROr+n
+        Jq3WwlVgV9I6fqoU50Zt+VjdDOraq8zjXNkTrz2zAN0ou0ZjrSGmr45gP96UFeM3dSQyFKwcN7EdY
+        yhN5BtFA==;
 Received: from [191.33.154.161] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hnj2n-0006fh-33; Wed, 17 Jul 2019 12:28:25 +0000
+        id 1hnj2m-0006fa-Sa; Wed, 17 Jul 2019 12:28:24 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hnj2k-00052O-0W; Wed, 17 Jul 2019 09:28:22 -0300
+        id 1hnj2k-00052S-1L; Wed, 17 Jul 2019 09:28:22 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 To:     gregkh@linuxfoundation.org
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH v4 08/15] docs: kernel_abi.py: allow passing ABI files in a transparent way
-Date:   Wed, 17 Jul 2019 09:28:12 -0300
-Message-Id: <c4bd23436b7bfe6fe60154423ea6424bde9fae64.1563365880.git.mchehab+samsung@kernel.org>
+Subject: [PATCH v4 09/15] docs: kernel_abi.py: Sphinx has a lazy parser... workaround it
+Date:   Wed, 17 Jul 2019 09:28:13 -0300
+Message-Id: <4a5e7955ff0a7621284bcf784d242dcb3ec3452d.1563365880.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1563365880.git.mchehab+samsung@kernel.org>
 References: <cover.1563365880.git.mchehab+samsung@kernel.org>
@@ -46,45 +46,115 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-As get-abi.pl supports an ABI file that it is ReST compliant,
-add an option to kernel-abi.py to allow using the transparent
-mode of the tool.
+The Sphinx docutils parser is lazy: if the content is bigger than
+a certain number of lines, it silenlty stops parsing it,
+producing an incomplete content. This seems to be worse on newer
+Sphinx versions, like 2.0.
+
+So, change the logic to parse the contents per input file.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
- Documentation/sphinx/kernel_abi.py | 8 ++++++--
- 1 file changed, 6 insertions(+), 2 deletions(-)
+ Documentation/sphinx/kernel_abi.py | 39 ++++++++++++++++++++----------
+ 1 file changed, 26 insertions(+), 13 deletions(-)
 
 diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index 615b3773bb62..30cac84e18f5 100644
+index 30cac84e18f5..6d2f56500197 100644
 --- a/Documentation/sphinx/kernel_abi.py
 +++ b/Documentation/sphinx/kernel_abi.py
-@@ -71,12 +71,13 @@ class KernelCmd(Directive):
-     u"""KernelABI (``kernel-abi``) directive"""
+@@ -36,6 +36,7 @@ import os
+ import subprocess
+ import sys
+ import re
++import kernellog
  
-     required_arguments = 1
--    optional_arguments = 0
-+    optional_arguments = 2
-     has_content = False
-     final_argument_whitespace = True
+ from os import path
  
-     option_spec = {
--        "debug"     : directives.flag
-+        "debug"     : directives.flag,
-+        "rst"       : directives.unchanged
+@@ -80,12 +81,6 @@ class KernelCmd(Directive):
+         "rst"       : directives.unchanged
      }
  
-     def warn(self, message, **replace):
-@@ -96,6 +97,9 @@ class KernelCmd(Directive):
-         cmd = "get_abi.pl rest --enable-lineno --dir "
-         cmd += self.arguments[0]
+-    def warn(self, message, **replace):
+-        replace["fname"]   = self.state.document.current_source
+-        replace["line_no"] = replace.get("line_no", self.lineno)
+-        message = ("%(fname)s:%(line_no)s: [kernel-abi WARN] : " + message) % replace
+-        self.state.document.settings.env.app.warn(message, prefix="")
+-
+     def run(self):
  
-+        if 'rst' in self.options:
-+            cmd += " --rst-source"
+         doc = self.state.document
+@@ -114,7 +109,7 @@ class KernelCmd(Directive):
+         shell_env["srctree"] = srctree
+ 
+         lines = self.runCmd(cmd, shell=True, cwd=cwd, env=shell_env)
+-        nodeList = self.nestedParse(lines, fname)
++        nodeList = self.nestedParse(lines, self.arguments[0])
+         return nodeList
+ 
+     def runCmd(self, cmd, **kwargs):
+@@ -141,9 +136,9 @@ class KernelCmd(Directive):
+                               % (self.name, ErrorString(exc)))
+         return out
+ 
+-    def nestedParse(self, lines, f):
++    def nestedParse(self, lines, fname):
+         content = ViewList()
+-        node    = nodes.section()
++        node = nodes.section()
+ 
+         if "debug" in self.options:
+             code_block = "\n\n.. code-block:: rst\n    :linenos:\n"
+@@ -153,22 +148,42 @@ class KernelCmd(Directive):
+ 
+         line_regex = re.compile("^#define LINENO (\S+)\#([0-9]+)$")
+         ln = 0
++        n = 0
++        f = fname
+ 
+         for line in lines.split("\n"):
++            n = n + 1
+             match = line_regex.search(line)
+             if match:
+-                f = match.group(1)
++                new_f = match.group(1)
 +
-         srctree = path.abspath(os.environ["srctree"])
++                # Sphinx parser is lazy: it stops parsing contents in the
++                # middle, if it is too big. So, handle it per input file
++                if new_f != f and content:
++                    self.do_parse(content, node)
++                    content = ViewList()
++
++                f = new_f
++
+                 # sphinx counts lines from 0
+                 ln = int(match.group(2)) - 1
+             else:
+                 content.append(line, f, ln)
  
-         fname = cmd
+-        buf  = self.state.memo.title_styles, self.state.memo.section_level, self.state.memo.reporter
++        kernellog.info(self.state.document.settings.env.app, "%s: parsed %i lines" % (fname, n))
+ 
++        if content:
++            self.do_parse(content, node)
++
++        return node.children
++
++    def do_parse(self, content, node):
+         if Use_SSI:
+             with switch_source_input(self.state, content):
+                 self.state.nested_parse(content, 0, node, match_titles=1)
+         else:
++            buf  = self.state.memo.title_styles, self.state.memo.section_level, self.state.memo.reporter
++
+             self.state.memo.title_styles  = []
+             self.state.memo.section_level = 0
+             self.state.memo.reporter      = AutodocReporter(content, self.state.memo.reporter)
+@@ -176,5 +191,3 @@ class KernelCmd(Directive):
+                 self.state.nested_parse(content, 0, node, match_titles=1)
+             finally:
+                 self.state.memo.title_styles, self.state.memo.section_level, self.state.memo.reporter = buf
+-
+-        return node.children
 -- 
 2.21.0
 
