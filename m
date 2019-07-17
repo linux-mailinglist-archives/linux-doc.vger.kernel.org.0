@@ -2,419 +2,284 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 566776B680
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 08:20:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DABDD6B96E
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 11:43:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727458AbfGQGSq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 17 Jul 2019 02:18:46 -0400
-Received: from conuserg-10.nifty.com ([210.131.2.77]:63477 "EHLO
-        conuserg-10.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725892AbfGQGSq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jul 2019 02:18:46 -0400
-Received: from localhost.localdomain (p14092-ipngnfx01kyoto.kyoto.ocn.ne.jp [153.142.97.92]) (authenticated)
-        by conuserg-10.nifty.com with ESMTP id x6H6I5Ol009435;
-        Wed, 17 Jul 2019 15:18:12 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-10.nifty.com x6H6I5Ol009435
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1563344292;
-        bh=krZ6W+tHWJH7GffyTlc7LmZ013xkArEQ4cWHwqkczlI=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=t1UUbokfuSiom8ybRWL4NLaySYXk9YGt5C6zZmBwZrHiNY25DkHy9ZCk3z9Ax+bB9
-         FIeWNPbolvDXCso6FTpmEtCTN3La8KWotw7YxepnqAfbxZR4e3VsYeuS0CJSuZUirY
-         wNvi9UE5dpfFdO8FR1mcSyBoWqImXIQF2L9gBdkAGN/GvfuIwZ/rZr4m702R7+HgbJ
-         ta2xoY73n7Yz1CwgqxTos+tNOY8dWfFfEWeWyifbtv31DrNC7Jm0ku2o/zQ4OLf2wg
-         EQpWQ8HlASCNVxsyiQ12NIezVkPfz91Heb7vyhcIj1Yy7Kw8RBv7Ztxng+pAz8LHGF
-         LwvF99gkXXpKw==
-X-Nifty-SrcIP: [153.142.97.92]
-From:   Masahiro Yamada <yamada.masahiro@socionext.com>
-To:     linux-kbuild@vger.kernel.org
-Cc:     Joe Lawrence <joe.lawrence@redhat.com>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        id S1726189AbfGQJjN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 17 Jul 2019 05:39:13 -0400
+Received: from szxga06-in.huawei.com ([45.249.212.32]:38356 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1725890AbfGQJjN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 17 Jul 2019 05:39:13 -0400
+Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.60])
+        by Forcepoint Email with ESMTP id C4BB120A60E0232F5525;
+        Wed, 17 Jul 2019 17:39:09 +0800 (CST)
+Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
+ (10.3.19.204) with Microsoft SMTP Server (TLS) id 14.3.439.0; Wed, 17 Jul
+ 2019 17:39:09 +0800
+Subject: Re: [PATCH v2 1/2] f2fs: include charset encoding information in the
+ superblock
+To:     Daniel Rosenberg <drosen@google.com>,
+        Jaegeuk Kim <jaegeuk@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Shuah Khan <shuah@kernel.org>,
-        Thomas Renninger <trenn@suse.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org
-Subject: [PATCH v3 09/12] kbuild: create *.mod with full directory path and remove MODVERDIR
-Date:   Wed, 17 Jul 2019 15:17:57 +0900
-Message-Id: <20190717061800.10018-10-yamada.masahiro@socionext.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190717061800.10018-1-yamada.masahiro@socionext.com>
-References: <20190717061800.10018-1-yamada.masahiro@socionext.com>
+        <linux-f2fs-devel@lists.sourceforge.net>
+CC:     <linux-kernel@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-fsdevel@vger.kernel.org>, <kernel-team@android.com>
+References: <20190717031408.114104-1-drosen@google.com>
+ <20190717031408.114104-2-drosen@google.com>
+From:   Chao Yu <yuchao0@huawei.com>
+Message-ID: <201eff19-869d-1d9f-018a-e2a60fbe1943@huawei.com>
+Date:   Wed, 17 Jul 2019 17:39:07 +0800
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+ Thunderbird/52.9.1
+MIME-Version: 1.0
+In-Reply-To: <20190717031408.114104-2-drosen@google.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.134.22.195]
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-While descending directories, Kbuild produces objects for modules,
-but do not link final *.ko files; it is done in the modpost.
+On 2019/7/17 11:14, Daniel Rosenberg wrote:
+> Add charset encoding to f2fs to support casefolding. It is modeled after
+> the same feature introduced in commit c83ad55eaa91 ("ext4: include charset
+> encoding information in the superblock")
+> 
+> Currently this is not compatible with encryption, similar to the current
+> ext4 imlpementation. This will change in the future.
+> 
+>>From the ext4 patch:
+> """
+> The s_encoding field stores a magic number indicating the encoding
+> format and version used globally by file and directory names in the
+> filesystem.  The s_encoding_flags defines policies for using the charset
+> encoding, like how to handle invalid sequences.  The magic number is
+> mapped to the exact charset table, but the mapping is specific to ext4.
+> Since we don't have any commitment to support old encodings, the only
+> encoding I am supporting right now is utf8-12.1.0.
+> 
+> The current implementation prevents the user from enabling encoding and
+> per-directory encryption on the same filesystem at the same time.  The
+> incompatibility between these features lies in how we do efficient
+> directory searches when we cannot be sure the encryption of the user
+> provided fname will match the actual hash stored in the disk without
+> decrypting every directory entry, because of normalization cases.  My
+> quickest solution is to simply block the concurrent use of these
+> features for now, and enable it later, once we have a better solution.
+> """
+> 
+> Signed-off-by: Daniel Rosenberg <drosen@google.com>
+> ---
+>  fs/f2fs/f2fs.h          |  6 +++
+>  fs/f2fs/super.c         | 81 +++++++++++++++++++++++++++++++++++++++++
+>  include/linux/f2fs_fs.h |  9 ++++-
+>  3 files changed, 95 insertions(+), 1 deletion(-)
+> 
+> diff --git a/fs/f2fs/f2fs.h b/fs/f2fs/f2fs.h
+> index 17382da7f0bd9..c6c7904572d0d 100644
+> --- a/fs/f2fs/f2fs.h
+> +++ b/fs/f2fs/f2fs.h
+> @@ -153,6 +153,7 @@ struct f2fs_mount_info {
+>  #define F2FS_FEATURE_LOST_FOUND		0x0200
+>  #define F2FS_FEATURE_VERITY		0x0400	/* reserved */
+>  #define F2FS_FEATURE_SB_CHKSUM		0x0800
+> +#define F2FS_FEATURE_CASEFOLD		0x1000
+>  
+>  #define __F2FS_HAS_FEATURE(raw_super, mask)				\
+>  	((raw_super->feature & cpu_to_le32(mask)) != 0)
+> @@ -1169,6 +1170,10 @@ struct f2fs_sb_info {
+>  	int valid_super_block;			/* valid super block no */
+>  	unsigned long s_flag;				/* flags for sbi */
+>  	struct mutex writepages;		/* mutex for writepages() */
+> +#ifdef CONFIG_UNICODE
+> +	struct unicode_map *s_encoding;
+> +	__u16 s_encoding_flags;
+> +#endif
+>  
+>  #ifdef CONFIG_BLK_DEV_ZONED
+>  	unsigned int blocks_per_blkz;		/* F2FS blocks per zone */
+> @@ -3562,6 +3567,7 @@ F2FS_FEATURE_FUNCS(quota_ino, QUOTA_INO);
+>  F2FS_FEATURE_FUNCS(inode_crtime, INODE_CRTIME);
+>  F2FS_FEATURE_FUNCS(lost_found, LOST_FOUND);
+>  F2FS_FEATURE_FUNCS(sb_chksum, SB_CHKSUM);
+> +F2FS_FEATURE_FUNCS(casefold, CASEFOLD);
 
-To keep track of modules, Kbuild creates a *.mod file in $(MODVERDIR)
-for every module it is building. Some post-processing steps read the
-necessary information from *.mod files. This avoids descending into
-directories again. This mechanism was introduced in 2003 or so.
+It needs to change sysfs.c like we did for other features, you can refer to
+d440c52d3151 ("f2fs: support superblock checksum").
 
-Later, commit 551559e13af1 ("kbuild: implement modules.order") added
-modules.order. So, we can simply read it out to know all the modules
-with directory paths. This is easier than parsing the first line of
-*.mod files.
+>  
+>  #ifdef CONFIG_BLK_DEV_ZONED
+>  static inline bool f2fs_blkz_is_seq(struct f2fs_sb_info *sbi, int devi,
+> diff --git a/fs/f2fs/super.c b/fs/f2fs/super.c
+> index 6de6cda440315..7927071ef5e95 100644
+> --- a/fs/f2fs/super.c
+> +++ b/fs/f2fs/super.c
+> @@ -23,6 +23,7 @@
+>  #include <linux/f2fs_fs.h>
+>  #include <linux/sysfs.h>
+>  #include <linux/quota.h>
+> +#include <linux/unicode.h>
+>  
+>  #include "f2fs.h"
+>  #include "node.h"
+> @@ -222,6 +223,36 @@ void f2fs_printk(struct f2fs_sb_info *sbi, const char *fmt, ...)
+>  	va_end(args);
+>  }
+>  
+> +#ifdef CONFIG_UNICODE
+> +static const struct f2fs_sb_encodings {
+> +	__u16 magic;
+> +	char *name;
+> +	char *version;
+> +} f2fs_sb_encoding_map[] = {
+> +	{F2FS_ENC_UTF8_12_1, "utf8", "12.1.0"},
+> +};
+> +
+> +static int f2fs_sb_read_encoding(const struct f2fs_super_block *sb,
+> +				 const struct f2fs_sb_encodings **encoding,
+> +				 __u16 *flags)
+> +{
+> +	__u16 magic = le16_to_cpu(sb->s_encoding);
+> +	int i;
+> +
+> +	for (i = 0; i < ARRAY_SIZE(f2fs_sb_encoding_map); i++)
+> +		if (magic == f2fs_sb_encoding_map[i].magic)
+> +			break;
+> +
+> +	if (i >= ARRAY_SIZE(f2fs_sb_encoding_map))
+> +		return -EINVAL;
+> +
+> +	*encoding = &f2fs_sb_encoding_map[i];
+> +	*flags = le16_to_cpu(sb->s_encoding_flags);
+> +
+> +	return 0;
+> +}
+> +#endif
+> +
+>  static inline void limit_reserve_root(struct f2fs_sb_info *sbi)
+>  {
+>  	block_t limit = min((sbi->user_block_count << 1) / 1000,
+> @@ -798,6 +829,13 @@ static int parse_options(struct super_block *sb, char *options)
+>  		return -EINVAL;
+>  	}
+>  #endif
+> +#ifndef CONFIG_UNICODE
+> +	if (f2fs_sb_has_casefold(sbi)) {
+> +		f2fs_err(sbi,
+> +			"Filesystem with casefold feature cannot be mounted without CONFIG_UNICODE");
+> +		return -EINVAL;
+> +	}
+> +#endif
+>  
+>  	if (F2FS_IO_SIZE_BITS(sbi) && !test_opt(sbi, LFS)) {
+>  		f2fs_err(sbi, "Should set mode=lfs with %uKB-sized IO",
+> @@ -1089,6 +1127,9 @@ static void f2fs_put_super(struct super_block *sb)
+>  	destroy_percpu_info(sbi);
+>  	for (i = 0; i < NR_PAGE_TYPE; i++)
+>  		kvfree(sbi->write_io[i]);
+> +#ifdef CONFIG_UNICODE
+> +	utf8_unload(sbi->s_encoding);
+> +#endif
+>  	kvfree(sbi);
+>  }
+>  
+> @@ -3126,6 +3167,42 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>  	sb->s_maxbytes = sbi->max_file_blocks <<
+>  				le32_to_cpu(raw_super->log_blocksize);
+>  	sb->s_max_links = F2FS_LINK_MAX;
+> +#ifdef CONFIG_UNICODE
+> +	if (f2fs_sb_has_casefold(sbi) && !sbi->s_encoding) {
+> +		const struct f2fs_sb_encodings *encoding_info;
+> +		struct unicode_map *encoding;
+> +		__u16 encoding_flags;
+> +
+> +		if (f2fs_sb_has_encrypt(sbi)) {
+> +			f2fs_err(sbi,
+> +				"Can't mount with encoding and encryption");
 
-$(MODVERDIR) has a flat directory structure, that is, *.mod files
-are named only with base names. This is based on the assumption that
-the module name is unique across the tree. This assumption is really
-fragile.
+Should set error number.
 
-Stephen Rothwell reported a race condition caused by a module name
-conflict:
+> +			goto free_options;
+> +		}
+> +
+> +		if (f2fs_sb_read_encoding(raw_super, &encoding_info,
+> +					  &encoding_flags)) {
+> +			f2fs_err(sbi,
+> +				 "Encoding requested by superblock is unknown");
 
-  https://lkml.org/lkml/2019/5/13/991
+Ditto
 
-In parallel building, two different threads could write to the same
-$(MODVERDIR)/*.mod simultaneously.
+> +			goto free_options;
+> +		}
+> +
+> +		encoding = utf8_load(encoding_info->version);
+> +		if (IS_ERR(encoding)) {
+> +			f2fs_err(sbi,
+> +				 "can't mount with superblock charset: %s-%s "
+> +				 "not supported by the kernel. flags: 0x%x.",
+> +				 encoding_info->name, encoding_info->version,
+> +				 encoding_flags);
 
-Non-unique module names are the source of all kind of troubles, hence
-commit 3a48a91901c5 ("kbuild: check uniqueness of module names")
-introduced a new checker script.
+Ditto
 
-However, it is still fragile in the build system point of view because
-this race happens before scripts/modules-check.sh is invoked. If it
-happens again, the modpost will emit unclear error messages.
+> +			goto free_options;
+> +		}
+> +		f2fs_info(sbi, "Using encoding defined by superblock: "
+> +			 "%s-%s with flags 0x%hx", encoding_info->name,
+> +			 encoding_info->version?:"\b", encoding_flags);
+> +
+> +		sbi->s_encoding = encoding;
+> +		sbi->s_encoding_flags = encoding_flags;
+> +	}
+> +#endif
 
-To fix this issue completely, create *.mod with full directory path
-so that two threads never attempt to write to the same file.
+How about wrapping these codes into function?
 
-$(MODVERDIR) is no longer needed.
+Thanks,
 
-Since modules with directory paths are listed in modules.order, Kbuild
-is still able to find *.mod files without additional descending.
-
-I also killed cmd_secanalysis; scripts/mod/sumversion.c computes MD4 hash
-for modules with MODULE_VERSION(). When CONFIG_DEBUG_SECTION_MISMATCH=y,
-it occurs not only in the modpost stage, but also during directory
-descending, where sumversion.c may parse stale *.mod files. It would emit
-'No such file or directory' warning when an object consisting a module is
-renamed, or when a single-obj module is turned into a multi-obj module or
-vice versa.
-
-Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
-Acked-by: Nicolas Pitre <nico@fluxnic.net>
----
-
-Changes in v3:
-  - Fix build error of allnoconfig
-  - Remove cmd_secanalysis
-  - Fix up comment in scripts/adjust_autoksyms.sh
-  - Fix up tools/power/cpupower/debug/kernel/Makefile
-
-Changes in v2:
-  - Remove -r of xargs, which is a GNU extension
-  - Add '--' for extra safety
-
- .gitignore                                 |  1 +
- Documentation/dontdiff                     |  1 +
- Makefile                                   | 20 +++-----------------
- lib/Kconfig.debug                          | 12 +-----------
- scripts/Makefile.build                     | 15 +++------------
- scripts/Makefile.modpost                   |  4 ++--
- scripts/adjust_autoksyms.sh                | 14 +++++---------
- scripts/mod/sumversion.c                   | 16 +++-------------
- scripts/package/mkspec                     |  2 +-
- tools/power/cpupower/debug/kernel/Makefile |  4 ++--
- 10 files changed, 22 insertions(+), 67 deletions(-)
-
-diff --git a/.gitignore b/.gitignore
-index 7587ef56b92d..8f5422cba6e2 100644
---- a/.gitignore
-+++ b/.gitignore
-@@ -30,6 +30,7 @@
- *.lz4
- *.lzma
- *.lzo
-+*.mod
- *.mod.c
- *.o
- *.o.*
-diff --git a/Documentation/dontdiff b/Documentation/dontdiff
-index 5eba889ea84d..9f4392876099 100644
---- a/Documentation/dontdiff
-+++ b/Documentation/dontdiff
-@@ -30,6 +30,7 @@
- *.lzo
- *.mo
- *.moc
-+*.mod
- *.mod.c
- *.o
- *.o.*
-diff --git a/Makefile b/Makefile
-index 396cd5e525d1..9ad9f8d1130d 100644
---- a/Makefile
-+++ b/Makefile
-@@ -486,11 +486,6 @@ export KBUILD_AFLAGS_MODULE KBUILD_CFLAGS_MODULE KBUILD_LDFLAGS_MODULE
- export KBUILD_AFLAGS_KERNEL KBUILD_CFLAGS_KERNEL
- export KBUILD_ARFLAGS
- 
--# When compiling out-of-tree modules, put MODVERDIR in the module
--# tree rather than in the kernel tree. The kernel tree might
--# even be read-only.
--export MODVERDIR := $(if $(KBUILD_EXTMOD),$(firstword $(KBUILD_EXTMOD))/).tmp_versions
--
- # Files to ignore in find ... statements
- 
- export RCS_FIND_IGNORE := \( -name SCCS -o -name BitKeeper -o -name .svn -o    \
-@@ -1029,8 +1024,8 @@ vmlinux-deps := $(KBUILD_LDS) $(KBUILD_VMLINUX_OBJS) $(KBUILD_VMLINUX_LIBS)
- 
- # Recurse until adjust_autoksyms.sh is satisfied
- PHONY += autoksyms_recursive
--autoksyms_recursive: $(vmlinux-deps)
- ifdef CONFIG_TRIM_UNUSED_KSYMS
-+autoksyms_recursive: $(vmlinux-deps) modules.order
- 	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/adjust_autoksyms.sh \
- 	  "$(MAKE) -f $(srctree)/Makefile vmlinux"
- endif
-@@ -1113,7 +1108,6 @@ endif
- 
- prepare1: prepare3 outputmakefile asm-generic $(version_h) $(autoksyms_h) \
- 						include/generated/utsrelease.h
--	$(cmd_crmodverdir)
- 
- archprepare: archheaders archscripts prepare1 scripts
- 
-@@ -1371,7 +1365,7 @@ endif # CONFIG_MODULES
- # make distclean Remove editor backup files, patch leftover files and the like
- 
- # Directories & files removed with 'make clean'
--CLEAN_DIRS  += $(MODVERDIR) include/ksym
-+CLEAN_DIRS  += include/ksym
- CLEAN_FILES += modules.builtin.modinfo
- 
- # Directories & files removed with 'make mrproper'
-@@ -1641,7 +1635,6 @@ PHONY += $(clean-dirs) clean
- $(clean-dirs):
- 	$(Q)$(MAKE) $(clean)=$(patsubst _clean_%,%,$@)
- 
--clean:	rm-dirs := $(MODVERDIR)
- clean: rm-files := $(KBUILD_EXTMOD)/Module.symvers
- 
- PHONY += help
-@@ -1655,8 +1648,6 @@ help:
- 	@echo  ''
- 
- PHONY += prepare
--prepare:
--	$(cmd_crmodverdir)
- endif # KBUILD_EXTMOD
- 
- clean: $(clean-dirs)
-@@ -1667,7 +1658,7 @@ clean: $(clean-dirs)
- 		-o -name '*.ko.*' \
- 		-o -name '*.dtb' -o -name '*.dtb.S' -o -name '*.dt.yaml' \
- 		-o -name '*.dwo' -o -name '*.lst' \
--		-o -name '*.su'  \
-+		-o -name '*.su' -o -name '*.mod' \
- 		-o -name '.*.d' -o -name '.*.tmp' -o -name '*.mod.c' \
- 		-o -name '*.lex.c' -o -name '*.tab.[ch]' \
- 		-o -name '*.asn1.[ch]' \
-@@ -1796,11 +1787,6 @@ quiet_cmd_depmod = DEPMOD  $(KERNELRELEASE)
-       cmd_depmod = $(CONFIG_SHELL) $(srctree)/scripts/depmod.sh $(DEPMOD) \
-                    $(KERNELRELEASE)
- 
--# Create temporary dir for module support files
--# clean it up only when building all modules
--cmd_crmodverdir = $(Q)mkdir -p $(MODVERDIR) \
--                  $(if $(KBUILD_MODULES),; rm -f $(MODVERDIR)/*)
--
- # read saved command lines for existing targets
- existing-targets := $(wildcard $(sort $(targets)))
- 
-diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
-index 4ac4ca21a30a..cde5675340ba 100644
---- a/lib/Kconfig.debug
-+++ b/lib/Kconfig.debug
-@@ -353,23 +353,13 @@ config DEBUG_SECTION_MISMATCH
- 	  which results in the code/data being placed in specific sections.
- 	  The section mismatch analysis is always performed after a full
- 	  kernel build, and enabling this option causes the following
--	  additional steps to occur:
-+	  additional step to occur:
- 	  - Add the option -fno-inline-functions-called-once to gcc commands.
- 	    When inlining a function annotated with __init in a non-init
- 	    function, we would lose the section information and thus
- 	    the analysis would not catch the illegal reference.
- 	    This option tells gcc to inline less (but it does result in
- 	    a larger kernel).
--	  - Run the section mismatch analysis for each module/built-in.a file.
--	    When we run the section mismatch analysis on vmlinux.o, we
--	    lose valuable information about where the mismatch was
--	    introduced.
--	    Running the analysis for each module/built-in.a file
--	    tells where the mismatch happens much closer to the
--	    source. The drawback is that the same mismatch is
--	    reported at least twice.
--	  - Enable verbose reporting from modpost in order to help resolve
--	    the section mismatches that are reported.
- 
- config SECTION_MISMATCH_WARN_ONLY
- 	bool "Make section mismatch errors non-fatal"
-diff --git a/scripts/Makefile.build b/scripts/Makefile.build
-index be32a3752de4..c6dfcc028f56 100644
---- a/scripts/Makefile.build
-+++ b/scripts/Makefile.build
-@@ -67,8 +67,6 @@ ifeq ($(CONFIG_MODULES)$(need-modorder),y1)
- modorder-target := $(obj)/modules.order
- endif
- 
--# We keep a list of all modules in $(MODVERDIR)
--
- __build: $(if $(KBUILD_BUILTIN),$(builtin-target) $(lib-target) $(extra-y)) \
- 	 $(if $(KBUILD_MODULES),$(obj-m) $(modorder-target)) \
- 	 $(subdir-ym) $(always)
-@@ -87,11 +85,6 @@ ifneq ($(KBUILD_ENABLE_EXTRA_GCC_CHECKS),)
-   cmd_checkdoc = $(srctree)/scripts/kernel-doc -none $<
- endif
- 
--# Do section mismatch analysis for each module/built-in.a
--ifdef CONFIG_DEBUG_SECTION_MISMATCH
--  cmd_secanalysis = ; scripts/mod/modpost $@
--endif
--
- # Compile C sources (.c)
- # ---------------------------------------------------------------------------
- 
-@@ -278,13 +271,11 @@ $(obj)/%.o: $(src)/%.c $(recordmcount_source) $(objtool_dep) FORCE
- 	$(call cmd,force_checksrc)
- 	$(call if_changed_rule,cc_o_c)
- 
--# Single-part modules are special since we need to mark them in $(MODVERDIR)
--
- $(single-used-m): $(obj)/%.o: $(src)/%.c $(recordmcount_source) $(objtool_dep) FORCE
- 	$(call cmd,force_checksrc)
- 	$(call if_changed_rule,cc_o_c)
- 	@{ echo $(@:.o=.ko); echo $@; \
--	   $(cmd_undef_syms); } > $(MODVERDIR)/$(@F:.o=.mod)
-+	   $(cmd_undef_syms); } > $(patsubst %.o,%.mod,$@)
- 
- quiet_cmd_cc_lst_c = MKLST   $@
-       cmd_cc_lst_c = $(CC) $(c_flags) -g -c -o $*.o $< && \
-@@ -461,12 +452,12 @@ endif
- # module is turned into a multi object module, $^ will contain header file
- # dependencies recorded in the .*.cmd file.
- quiet_cmd_link_multi-m = LD [M]  $@
--cmd_link_multi-m = $(LD) $(ld_flags) -r -o $@ $(filter %.o,$^) $(cmd_secanalysis)
-+      cmd_link_multi-m = $(LD) $(ld_flags) -r -o $@ $(filter %.o,$^)
- 
- $(multi-used-m): FORCE
- 	$(call if_changed,link_multi-m)
- 	@{ echo $(@:.o=.ko); echo $(filter %.o,$^); \
--	   $(cmd_undef_syms); } > $(MODVERDIR)/$(@F:.o=.mod)
-+	   $(cmd_undef_syms); } > $(patsubst %.o,%.mod,$@)
- $(call multi_depend, $(multi-used-m), .o, -objs -y -m)
- 
- targets += $(multi-used-m)
-diff --git a/scripts/Makefile.modpost b/scripts/Makefile.modpost
-index 5841508ffca9..6b19c1a4eae5 100644
---- a/scripts/Makefile.modpost
-+++ b/scripts/Makefile.modpost
-@@ -6,8 +6,8 @@
- # Stage one of module building created the following:
- # a) The individual .o files used for the module
- # b) A <module>.o file which is the .o files above linked together
--# c) A <module>.mod file in $(MODVERDIR)/, listing the name of the
--#    the preliminary <module>.o file, plus all .o files
-+# c) A <module>.mod file, listing the name of the preliminary <module>.o file,
-+#    plus all .o files
- # d) modules.order, which lists all the modules
- 
- # Stage 2 is handled by this file and does the following
-diff --git a/scripts/adjust_autoksyms.sh b/scripts/adjust_autoksyms.sh
-index aab4e299d7a2..2e4a7320bfb4 100755
---- a/scripts/adjust_autoksyms.sh
-+++ b/scripts/adjust_autoksyms.sh
-@@ -8,8 +8,7 @@
- #
- 
- # Create/update the include/generated/autoksyms.h file from the list
--# of all module's needed symbols as recorded on the third line of
--# .tmp_versions/*.mod files.
-+# of all module's needed symbols as recorded on the third line of *.mod files.
- #
- # For each symbol being added or removed, the corresponding dependency
- # file's timestamp is updated to force a rebuild of the affected source
-@@ -47,13 +46,10 @@ cat > "$new_ksyms_file" << EOT
-  */
- 
- EOT
--[ "$(ls -A "$MODVERDIR")" ] &&
--for mod in "$MODVERDIR"/*.mod; do
--	sed -n -e '3{s/ /\n/g;/^$/!p;}' "$mod"
--done | sort -u |
--while read sym; do
--	echo "#define __KSYM_${sym} 1"
--done >> "$new_ksyms_file"
-+sed 's/ko$/mod/' modules.order |
-+xargs -n1 sed -n -e '3{s/ /\n/g;/^$/!p;}' -- |
-+sort -u |
-+sed -e 's/\(.*\)/#define __KSYM_\1 1/' >> "$new_ksyms_file"
- 
- # Special case for modversions (see modpost.c)
- if [ -n "$CONFIG_MODVERSIONS" ]; then
-diff --git a/scripts/mod/sumversion.c b/scripts/mod/sumversion.c
-index 0f6dcb4011a8..166f3fa247a9 100644
---- a/scripts/mod/sumversion.c
-+++ b/scripts/mod/sumversion.c
-@@ -396,21 +396,11 @@ void get_src_version(const char *modname, char sum[], unsigned sumlen)
- 	unsigned long len;
- 	struct md4_ctx md;
- 	char *sources, *end, *fname;
--	const char *basename;
- 	char filelist[PATH_MAX + 1];
--	char *modverdir = getenv("MODVERDIR");
- 
--	if (!modverdir)
--		modverdir = ".";
--
--	/* Source files for module are in .tmp_versions/modname.mod,
--	   after the first line. */
--	if (strrchr(modname, '/'))
--		basename = strrchr(modname, '/') + 1;
--	else
--		basename = modname;
--	snprintf(filelist, sizeof(filelist), "%s/%.*s.mod", modverdir,
--		(int) strlen(basename) - 2, basename);
-+	/* objects for a module are listed in the second line of *.mod file. */
-+	snprintf(filelist, sizeof(filelist), "%.*smod",
-+		 (int)strlen(modname) - 1, modname);
- 
- 	file = grab_file(filelist, &len);
- 	if (!file)
-diff --git a/scripts/package/mkspec b/scripts/package/mkspec
-index 2d29df4a0a53..8640c278f1aa 100755
---- a/scripts/package/mkspec
-+++ b/scripts/package/mkspec
-@@ -29,7 +29,7 @@ fi
- 
- PROVIDES="$PROVIDES kernel-$KERNELRELEASE"
- __KERNELRELEASE=$(echo $KERNELRELEASE | sed -e "s/-/_/g")
--EXCLUDES="$RCS_TAR_IGNORE --exclude=.tmp_versions --exclude=*vmlinux* \
-+EXCLUDES="$RCS_TAR_IGNORE --exclude=*vmlinux* --exclude=*.mod \
- --exclude=*.o --exclude=*.ko --exclude=*.cmd --exclude=Documentation \
- --exclude=.config.old --exclude=.missing-syscalls.d --exclude=*.s"
- 
-diff --git a/tools/power/cpupower/debug/kernel/Makefile b/tools/power/cpupower/debug/kernel/Makefile
-index c23e5a6ceb7e..7b5c43684be1 100644
---- a/tools/power/cpupower/debug/kernel/Makefile
-+++ b/tools/power/cpupower/debug/kernel/Makefile
-@@ -12,8 +12,8 @@ default:
- 	$(MAKE) -C $(KDIR) M=$(CURDIR)
- 
- clean:
--	- rm -rf *.o *.ko .tmp-versions .*.cmd .*.mod.* *.mod.c
--	- rm -rf .tmp_versions* Module.symvers modules.order
-+	- rm -rf *.o *.ko .*.cmd .*.mod.* *.mod.c
-+	- rm -rf Module.symvers modules.order
- 
- install: default
- 	install -d $(KMISC)
--- 
-2.17.1
-
+>  
+>  #ifdef CONFIG_QUOTA
+>  	sb->dq_op = &f2fs_quota_operations;
+> @@ -3477,6 +3554,10 @@ static int f2fs_fill_super(struct super_block *sb, void *data, int silent)
+>  free_bio_info:
+>  	for (i = 0; i < NR_PAGE_TYPE; i++)
+>  		kvfree(sbi->write_io[i]);
+> +
+> +#ifdef CONFIG_UNICODE
+> +	utf8_unload(sbi->s_encoding);
+> +#endif
+>  free_options:
+>  #ifdef CONFIG_QUOTA
+>  	for (i = 0; i < MAXQUOTAS; i++)
+> diff --git a/include/linux/f2fs_fs.h b/include/linux/f2fs_fs.h
+> index 65559900d4d76..b7c9c7f721339 100644
+> --- a/include/linux/f2fs_fs.h
+> +++ b/include/linux/f2fs_fs.h
+> @@ -36,6 +36,11 @@
+>  
+>  #define F2FS_MAX_QUOTAS		3
+>  
+> +#define F2FS_ENC_UTF8_12_1	1
+> +#define F2FS_ENC_STRICT_MODE_FL	(1 << 0)
+> +#define f2fs_has_strict_mode(sbi) \
+> +	(sbi->s_encoding_flags & F2FS_ENC_STRICT_MODE_FL)
+> +
+>  #define F2FS_IO_SIZE(sbi)	(1 << F2FS_OPTION(sbi).write_io_size_bits) /* Blocks */
+>  #define F2FS_IO_SIZE_KB(sbi)	(1 << (F2FS_OPTION(sbi).write_io_size_bits + 2)) /* KB */
+>  #define F2FS_IO_SIZE_BYTES(sbi)	(1 << (F2FS_OPTION(sbi).write_io_size_bits + 12)) /* B */
+> @@ -109,7 +114,9 @@ struct f2fs_super_block {
+>  	struct f2fs_device devs[MAX_DEVICES];	/* device list */
+>  	__le32 qf_ino[F2FS_MAX_QUOTAS];	/* quota inode numbers */
+>  	__u8 hot_ext_count;		/* # of hot file extension */
+> -	__u8 reserved[310];		/* valid reserved region */
+> +	__le16  s_encoding;		/* Filename charset encoding */
+> +	__le16  s_encoding_flags;	/* Filename charset encoding flags */
+> +	__u8 reserved[306];		/* valid reserved region */
+>  	__le32 crc;			/* checksum of superblock */
+>  } __packed;
+>  
+> 
