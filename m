@@ -2,14 +2,14 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D331F6BC4C
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 14:28:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6D97D6BC49
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jul 2019 14:28:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725906AbfGQM20 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S1726260AbfGQM20 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Wed, 17 Jul 2019 08:28:26 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:53844 "EHLO
+Received: from bombadil.infradead.org ([198.137.202.133]:53832 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725873AbfGQM2Z (ORCPT
+        with ESMTP id S1726326AbfGQM2Z (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jul 2019 08:28:25 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
@@ -17,25 +17,25 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=TE9vkenpvTo72cIPLpVdE6ZQ97IxrNZt61rfSPwlSuQ=; b=tO1ko/5ThBajCC9UyUOLxRrUq4
-        9QV5xO1F12O2MdIaMK/rdbSY92jMOkR1gHHxdLEGSJQxwfLkJ0LTmdFDGhdzI4mVJKHt398m2k7Qi
-        DhPTe0OYNucg/odnpfYdLqf4m2l1aTFtD1/j3pouTvgKtebsoA4FS0SkHMU0p4ldVeXKSvO8W9YAZ
-        4rgtv1YyfXk3M+u6tWkqeahB5G2wIOlLW9ZM+MEhVY1pfMJADBwla+kpmKa1ecd2+jnsylzD3JkuG
-        AEx2palnkmvvSM40qhlsKJS/vt72J8MGajQjxjCUuOur2ary61x+Fg/DRYdfIaBz5L08hFEYM3nDU
-        vbAIkG9Q==;
+        bh=W3Fxw06vy/CbYdEr7aToxnoO7ZKperodN1Hgl9rSg3k=; b=YhI4b3Wwc/8gJ6OZge5l/pSgqC
+        AnGayXcca0m67xL9WDjzN9+wohiEkgZsytFas3iHYQn9PsI/WRWgfFC85t4Y21Zo4ihrgEwId55AY
+        c5jAr7oQQjY5wj05TmOlgFyGHsP78N2NYenLpVL9zdWUPY7YsHBlXUMkiH4k5Fmj/g77ioQFsA30c
+        VjblNlODJnxDd2VgJS+ZV+K6h61tJo+b5XoURlwuXjmr0kbpcb+QSytHJz/UhEDt3KxdN2p5+RZBp
+        9gOIO3x2hcFEP6nY3RP/vNqJKqGZx8Sd/MOV1cx1CIgNgtmHxu7FCiTGbzF/7fhLPJd039+ud9NTX
+        altFrS2g==;
 Received: from [191.33.154.161] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hnj2m-0006fV-MG; Wed, 17 Jul 2019 12:28:24 +0000
+        id 1hnj2m-0006fU-GB; Wed, 17 Jul 2019 12:28:24 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hnj2j-00052G-V1; Wed, 17 Jul 2019 09:28:21 -0300
+        id 1hnj2j-00052K-Vy; Wed, 17 Jul 2019 09:28:21 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 To:     gregkh@linuxfoundation.org
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH v4 06/15] docs: kernel_abi.py: make it compatible with Sphinx 1.7+
-Date:   Wed, 17 Jul 2019 09:28:10 -0300
-Message-Id: <39223d4080af1c8d1fba47a3d788d402c5437f49.1563365880.git.mchehab+samsung@kernel.org>
+Subject: [PATCH v4 07/15] docs: kernel_abi.py: use --enable-lineno for get_abi.pl
+Date:   Wed, 17 Jul 2019 09:28:11 -0300
+Message-Id: <cab91970bbef3616fc140bdaaf0e199abe1f30b3.1563365880.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1563365880.git.mchehab+samsung@kernel.org>
 References: <cover.1563365880.git.mchehab+samsung@kernel.org>
@@ -46,78 +46,73 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The same way kerneldoc.py needed changes to work with newer
-Sphinx, this script needs the same changes.
+Just like kernel-doc extension, we need to be able to identify
+what part of an imported document has issues, as reporting them
+as:
 
-While here, reorganize the include order to match kerneldoc.py.
+	get_abi.pl rest --dir $srctree/Documentation/ABI/obsolete --rst-source:1689: ERROR: Unexpected indentation.
+
+Makes a lot harder for someone to fix.
+
+It should be noticed that it the line which will be reported is
+the line where the "What:" definition is, and not the line
+with actually has an error.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
- Documentation/sphinx/kernel_abi.py | 39 +++++++++++++++++++++---------
- 1 file changed, 27 insertions(+), 12 deletions(-)
+ Documentation/sphinx/kernel_abi.py | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
 
 diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index b4434498fe2f..0b2a89d4c12d 100644
+index 0b2a89d4c12d..615b3773bb62 100644
 --- a/Documentation/sphinx/kernel_abi.py
 +++ b/Documentation/sphinx/kernel_abi.py
-@@ -32,18 +32,27 @@ u"""
- """
- 
- import codecs
--import sys
+@@ -35,6 +35,7 @@ import codecs
  import os
--from os import path
  import subprocess
-+import sys
+ import sys
++import re
  
--from sphinx.ext.autodoc import AutodocReporter
-+from os import path
+ from os import path
  
--from docutils import nodes
--from docutils.parsers.rst import Directive, directives
-+from docutils import nodes, statemachine
- from docutils.statemachine import ViewList
-+from docutils.parsers.rst import directives, Directive
- from docutils.utils.error_reporting import ErrorString
+@@ -92,7 +93,7 @@ class KernelCmd(Directive):
  
-+#
-+# AutodocReporter is only good up to Sphinx 1.7
-+#
-+import sphinx
+         env = doc.settings.env
+         cwd = path.dirname(doc.current_source)
+-        cmd = "get_abi.pl rest --dir "
++        cmd = "get_abi.pl rest --enable-lineno --dir "
+         cmd += self.arguments[0]
+ 
+         srctree = path.abspath(os.environ["srctree"])
+@@ -136,7 +137,7 @@ class KernelCmd(Directive):
+                               % (self.name, ErrorString(exc)))
+         return out
+ 
+-    def nestedParse(self, lines, fname):
++    def nestedParse(self, lines, f):
+         content = ViewList()
+         node    = nodes.section()
+ 
+@@ -146,8 +147,17 @@ class KernelCmd(Directive):
+                 code_block += "\n    " + l
+             lines = code_block + "\n\n"
+ 
+-        for c, l in enumerate(lines.split("\n")):
+-            content.append(l, fname, c)
++        line_regex = re.compile("^#define LINENO (\S+)\#([0-9]+)$")
++        ln = 0
 +
-+Use_SSI = sphinx.__version__[:3] >= '1.7'
-+if Use_SSI:
-+    from sphinx.util.docutils import switch_source_input
-+else:
-+    from sphinx.ext.autodoc import AutodocReporter
- 
- __version__  = '1.0'
- 
-@@ -141,11 +150,17 @@ class KernelCmd(Directive):
-             content.append(l, fname, c)
++        for line in lines.split("\n"):
++            match = line_regex.search(line)
++            if match:
++                f = match.group(1)
++                # sphinx counts lines from 0
++                ln = int(match.group(2)) - 1
++            else:
++                content.append(line, f, ln)
  
          buf  = self.state.memo.title_styles, self.state.memo.section_level, self.state.memo.reporter
--        self.state.memo.title_styles  = []
--        self.state.memo.section_level = 0
--        self.state.memo.reporter      = AutodocReporter(content, self.state.memo.reporter)
--        try:
--            self.state.nested_parse(content, 0, node, match_titles=1)
--        finally:
--            self.state.memo.title_styles, self.state.memo.section_level, self.state.memo.reporter = buf
-+
-+        if Use_SSI:
-+            with switch_source_input(self.state, content):
-+                self.state.nested_parse(content, 0, node, match_titles=1)
-+        else:
-+            self.state.memo.title_styles  = []
-+            self.state.memo.section_level = 0
-+            self.state.memo.reporter      = AutodocReporter(content, self.state.memo.reporter)
-+            try:
-+                self.state.nested_parse(content, 0, node, match_titles=1)
-+            finally:
-+                self.state.memo.title_styles, self.state.memo.section_level, self.state.memo.reporter = buf
-+
-         return node.children
+ 
 -- 
 2.21.0
 
