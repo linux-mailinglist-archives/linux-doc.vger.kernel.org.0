@@ -2,45 +2,44 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9C65D6FE70
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jul 2019 13:08:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 029B76FE4D
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jul 2019 13:07:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729868AbfGVLIJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 22 Jul 2019 07:08:09 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:35644 "EHLO
+        id S1727699AbfGVLH6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 22 Jul 2019 07:07:58 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:35486 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729842AbfGVLIB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Jul 2019 07:08:01 -0400
+        with ESMTP id S1729810AbfGVLH5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Jul 2019 07:07:57 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+        Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+        To:From:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=aR7AC9Cq6LkXN2cwUE0qDw5EbAH8P80ZhWXW4rf7/6E=; b=RfLraHyCWzEv4pBYzLgN9hvBmT
-        Ilf1u6/sz9rpDsOygYXZcV/kRW6aje8c86+KFo3R8OMxKnBT3ReS5V2zusgRm2KdJhDsDRryD2Pel
-        vRQWxjA79uBf3KXh9VdtqXUcvmbwOLtc03EmLBzplfcjYtfSfYr8fCD2p2VG5tpP5NZN906Fk3N0B
-        ed9qBV3VVZvVY+gFZs2LWO3m2T4f3sQ7sS86+plHrhBtK0SvfbeRGUZUEcIRGx7Zj9ePtJM6T8sEc
-        snz6+yOiQzYM1fpxD5msdwJWbff0QLwp340TQMzY9ALrSWNYeN0Xk04KBWtBxV5uak3jOjPl+eonC
-        Z4ud8A6A==;
+        bh=za6QOtbUP/u3w0Fp76v1uozWwIFho3lyw3+3ALnceBI=; b=U+GGgWw8mmtB8USYib7k+JsLBk
+        0jg2EQYj4+ft0BTHTILWDKL/I4LQypkHM2ZOaWkP5wcVvfCRj3MJz3Kjyhs9s5mKfePAWpF9Bfuqh
+        xwn4w+LPyzovwjx67zFFjgqLoiRZOSj3CapAZECpm/0N6FdyeIBtvw3eCNTfOaCJ6Xha9wZJwPIaP
+        Em24vua+8n/zLSvVrf2rikbeXUxq3tf8M9BQ2PfYt+7vpoqPLJ9CUh1X21EdkHKrUyTg/xB/DLHM1
+        TdWOyP5L3THtlvsuO+WC+CqplQZzmlRNkEfNkAkLgxgXUrFjKF60BHqVXzK2lcvB1jYXxob1y49gu
+        ANzf7H/w==;
 Received: from 177.157.124.3.dynamic.adsl.gvt.net.br ([177.157.124.3] helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hpWAi-00025E-3i; Mon, 22 Jul 2019 11:08:00 +0000
+        id 1hpWAe-00024u-J4; Mon, 22 Jul 2019 11:07:56 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hpWAa-00040v-63; Mon, 22 Jul 2019 08:07:52 -0300
+        id 1hpWAa-00040z-6r; Mon, 22 Jul 2019 08:07:52 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Miguel Ojeda Sandonis <miguel.ojeda.sandonis@gmail.com>,
-        linux-doc@vger.kernel.org
-Subject: [PATCH 07/22] docs: admin-guide: add auxdisplay files to it after conversion to ReST
-Date:   Mon, 22 Jul 2019 08:07:34 -0300
-Message-Id: <ed8bb8935bb67d294b5e3bee7647dbdd72c5b608.1563792334.git.mchehab+samsung@kernel.org>
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [PATCH 08/22] docs: README.buddha: convert to ReST and add to m68k book
+Date:   Mon, 22 Jul 2019 08:07:35 -0300
+Message-Id: <4b418a511e8b89ee458d5ba5ab1097a629c6568a.1563792334.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1563792333.git.mchehab+samsung@kernel.org>
 References: <cover.1563792333.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
@@ -48,418 +47,217 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Those two files describe userspace-faced information. While part of
-it might fit on uAPI, it sounds to me that the admin guide is the
-best place for them.
+Adjust the file for it to be properly parsed by Sphinx, adding
+it to the index of the book it belongs.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
- .../admin-guide/auxdisplay/cfag12864b.rst     |  98 ++++++++++++++++
- .../admin-guide/auxdisplay/index.rst          |  16 +++
- .../admin-guide/auxdisplay/ks0108.rst         |  50 +++++++++
- Documentation/admin-guide/index.rst           |   1 +
- Documentation/auxdisplay/cfag12864b           | 105 ------------------
- Documentation/auxdisplay/ks0108               |  55 ---------
- MAINTAINERS                                   |   2 +-
- drivers/auxdisplay/Kconfig                    |   2 +-
- 8 files changed, 167 insertions(+), 162 deletions(-)
- create mode 100644 Documentation/admin-guide/auxdisplay/cfag12864b.rst
- create mode 100644 Documentation/admin-guide/auxdisplay/index.rst
- create mode 100644 Documentation/admin-guide/auxdisplay/ks0108.rst
- delete mode 100644 Documentation/auxdisplay/cfag12864b
- delete mode 100644 Documentation/auxdisplay/ks0108
+ .../m68k/{README.buddha => buddha-driver.rst} | 95 +++++++++----------
+ Documentation/m68k/index.rst                  |  1 +
+ 2 files changed, 48 insertions(+), 48 deletions(-)
+ rename Documentation/m68k/{README.buddha => buddha-driver.rst} (73%)
 
-diff --git a/Documentation/admin-guide/auxdisplay/cfag12864b.rst b/Documentation/admin-guide/auxdisplay/cfag12864b.rst
-new file mode 100644
-index 000000000000..18c2865bd322
---- /dev/null
-+++ b/Documentation/admin-guide/auxdisplay/cfag12864b.rst
-@@ -0,0 +1,98 @@
-+===================================
-+cfag12864b LCD Driver Documentation
-+===================================
-+
-+:License:		GPLv2
-+:Author & Maintainer:	Miguel Ojeda Sandonis
-+:Date:			2006-10-27
-+
-+
-+
-+.. INDEX
-+
-+	1. DRIVER INFORMATION
-+	2. DEVICE INFORMATION
-+	3. WIRING
-+	4. USERSPACE PROGRAMMING
-+
-+1. Driver Information
-+---------------------
-+
-+This driver supports a cfag12864b LCD.
-+
-+
-+2. Device Information
-+---------------------
-+
-+:Manufacturer:	Crystalfontz
-+:Device Name:	Crystalfontz 12864b LCD Series
-+:Device Code:	cfag12864b
-+:Webpage:	http://www.crystalfontz.com
-+:Device Webpage: http://www.crystalfontz.com/products/12864b/
-+:Type:		LCD (Liquid Crystal Display)
-+:Width:		128
-+:Height:	64
-+:Colors:	2 (B/N)
-+:Controller:	ks0108
-+:Controllers:	2
-+:Pages:		8 each controller
-+:Addresses:	64 each page
-+:Data size:	1 byte each address
-+:Memory size:	2 * 8 * 64 * 1 = 1024 bytes = 1 Kbyte
-+
-+
-+3. Wiring
-+---------
-+
-+The cfag12864b LCD Series don't have official wiring.
-+
-+The common wiring is done to the parallel port as shown::
-+
-+  Parallel Port                          cfag12864b
-+
-+    Name Pin#                            Pin# Name
-+
-+  Strobe ( 1)------------------------------(17) Enable
-+  Data 0 ( 2)------------------------------( 4) Data 0
-+  Data 1 ( 3)------------------------------( 5) Data 1
-+  Data 2 ( 4)------------------------------( 6) Data 2
-+  Data 3 ( 5)------------------------------( 7) Data 3
-+  Data 4 ( 6)------------------------------( 8) Data 4
-+  Data 5 ( 7)------------------------------( 9) Data 5
-+  Data 6 ( 8)------------------------------(10) Data 6
-+  Data 7 ( 9)------------------------------(11) Data 7
-+         (10)                      [+5v]---( 1) Vdd
-+         (11)                      [GND]---( 2) Ground
-+         (12)                      [+5v]---(14) Reset
-+         (13)                      [GND]---(15) Read / Write
-+    Line (14)------------------------------(13) Controller Select 1
-+         (15)
-+    Init (16)------------------------------(12) Controller Select 2
-+  Select (17)------------------------------(16) Data / Instruction
-+  Ground (18)---[GND]              [+5v]---(19) LED +
-+  Ground (19)---[GND]
-+  Ground (20)---[GND]              E    A             Values:
-+  Ground (21)---[GND]       [GND]---[P1]---(18) Vee    - R = Resistor = 22 ohm
-+  Ground (22)---[GND]                |                 - P1 = Preset = 10 Kohm
-+  Ground (23)---[GND]       ----   S ------( 3) V0     - P2 = Preset = 1 Kohm
-+  Ground (24)---[GND]       |  |
-+  Ground (25)---[GND] [GND]---[P2]---[R]---(20) LED -
-+
-+
-+4. Userspace Programming
-+------------------------
-+
-+The cfag12864bfb describes a framebuffer device (/dev/fbX).
-+
-+It has a size of 1024 bytes = 1 Kbyte.
-+Each bit represents one pixel. If the bit is high, the pixel will
-+turn on. If the pixel is low, the pixel will turn off.
-+
-+You can use the framebuffer as a file: fopen, fwrite, fclose...
-+Although the LCD won't get updated until the next refresh time arrives.
-+
-+Also, you can mmap the framebuffer: open & mmap, munmap & close...
-+which is the best option for most uses.
-+
-+Check samples/auxdisplay/cfag12864b-example.c
-+for a real working userspace complete program with usage examples.
-diff --git a/Documentation/admin-guide/auxdisplay/index.rst b/Documentation/admin-guide/auxdisplay/index.rst
-new file mode 100644
-index 000000000000..e466f0595248
---- /dev/null
-+++ b/Documentation/admin-guide/auxdisplay/index.rst
-@@ -0,0 +1,16 @@
-+=========================
-+Auxiliary Display Support
-+=========================
-+
-+.. toctree::
-+    :maxdepth: 1
-+
-+    ks0108.rst
-+    cfag12864b.rst
-+
-+.. only::  subproject and html
-+
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
-diff --git a/Documentation/admin-guide/auxdisplay/ks0108.rst b/Documentation/admin-guide/auxdisplay/ks0108.rst
-new file mode 100644
-index 000000000000..c0b7faf73136
---- /dev/null
-+++ b/Documentation/admin-guide/auxdisplay/ks0108.rst
-@@ -0,0 +1,50 @@
-+==========================================
-+ks0108 LCD Controller Driver Documentation
-+==========================================
-+
-+:License:		GPLv2
-+:Author & Maintainer:	Miguel Ojeda Sandonis
-+:Date:			2006-10-27
-+
-+
-+
-+.. INDEX
-+
-+	1. DRIVER INFORMATION
-+	2. DEVICE INFORMATION
-+	3. WIRING
-+
-+
-+1. Driver Information
-+---------------------
-+
-+This driver supports the ks0108 LCD controller.
-+
-+
-+2. Device Information
-+---------------------
-+
-+:Manufacturer:	Samsung
-+:Device Name:	KS0108 LCD Controller
-+:Device Code:	ks0108
-+:Webpage:	-
-+:Device Webpage: -
-+:Type:		LCD Controller (Liquid Crystal Display Controller)
-+:Width:		64
-+:Height:	64
-+:Colors:	2 (B/N)
-+:Pages:		8
-+:Addresses:	64 each page
-+:Data size:	1 byte each address
-+:Memory size:	8 * 64 * 1 = 512 bytes
-+
-+
-+3. Wiring
-+---------
-+
-+The driver supports data parallel port wiring.
-+
-+If you aren't building LCD related hardware, you should check
-+your LCD specific wiring information in the same folder.
-+
-+For example, check Documentation/admin-guide/auxdisplay/cfag12864b.rst
-diff --git a/Documentation/admin-guide/index.rst b/Documentation/admin-guide/index.rst
-index 457fd1112b65..3f8f7d564552 100644
---- a/Documentation/admin-guide/index.rst
-+++ b/Documentation/admin-guide/index.rst
-@@ -101,6 +101,7 @@ configure specific aspects of kernel behavior to your liking.
-    iostats
-    kernel-per-CPU-kthreads
-    laptops/index
-+   auxdisplay/index
-    lcd-panel-cgram
-    ldm
-    lockup-watchdogs
-diff --git a/Documentation/auxdisplay/cfag12864b b/Documentation/auxdisplay/cfag12864b
-deleted file mode 100644
-index 12fd51b8de75..000000000000
---- a/Documentation/auxdisplay/cfag12864b
-+++ /dev/null
-@@ -1,105 +0,0 @@
--	===================================
--	cfag12864b LCD Driver Documentation
--	===================================
--
--License:		GPLv2
--Author & Maintainer:	Miguel Ojeda Sandonis
--Date:			2006-10-27
--
--
--
----------
--0. INDEX
----------
--
--	1. DRIVER INFORMATION
--	2. DEVICE INFORMATION
--	3. WIRING
--	4. USERSPACE PROGRAMMING
--
--
-----------------------
--1. DRIVER INFORMATION
-----------------------
--
--This driver supports a cfag12864b LCD.
--
--
-----------------------
--2. DEVICE INFORMATION
-----------------------
--
--Manufacturer:	Crystalfontz
--Device Name:	Crystalfontz 12864b LCD Series
--Device Code:	cfag12864b
--Webpage:	http://www.crystalfontz.com
--Device Webpage:	http://www.crystalfontz.com/products/12864b/
--Type:		LCD (Liquid Crystal Display)
--Width:		128
--Height:		64
--Colors:		2 (B/N)
--Controller:	ks0108
--Controllers:	2
--Pages:		8 each controller
--Addresses:	64 each page
--Data size:	1 byte each address
--Memory size:	2 * 8 * 64 * 1 = 1024 bytes = 1 Kbyte
--
--
-----------
--3. WIRING
-----------
--
--The cfag12864b LCD Series don't have official wiring.
--
--The common wiring is done to the parallel port as shown:
--
--Parallel Port                          cfag12864b
--
--  Name Pin#                            Pin# Name
--
--Strobe ( 1)------------------------------(17) Enable
--Data 0 ( 2)------------------------------( 4) Data 0
--Data 1 ( 3)------------------------------( 5) Data 1
--Data 2 ( 4)------------------------------( 6) Data 2
--Data 3 ( 5)------------------------------( 7) Data 3
--Data 4 ( 6)------------------------------( 8) Data 4
--Data 5 ( 7)------------------------------( 9) Data 5
--Data 6 ( 8)------------------------------(10) Data 6
--Data 7 ( 9)------------------------------(11) Data 7
--       (10)                      [+5v]---( 1) Vdd
--       (11)                      [GND]---( 2) Ground
--       (12)                      [+5v]---(14) Reset
--       (13)                      [GND]---(15) Read / Write
--  Line (14)------------------------------(13) Controller Select 1
--       (15)
--  Init (16)------------------------------(12) Controller Select 2
--Select (17)------------------------------(16) Data / Instruction
--Ground (18)---[GND]              [+5v]---(19) LED +
--Ground (19)---[GND]
--Ground (20)---[GND]              E    A             Values:
--Ground (21)---[GND]       [GND]---[P1]---(18) Vee    - R = Resistor = 22 ohm
--Ground (22)---[GND]                |                 - P1 = Preset = 10 Kohm
--Ground (23)---[GND]       ----   S ------( 3) V0     - P2 = Preset = 1 Kohm
--Ground (24)---[GND]       |  |
--Ground (25)---[GND] [GND]---[P2]---[R]---(20) LED -
--
--
--------------------------
--4. USERSPACE PROGRAMMING
--------------------------
--
--The cfag12864bfb describes a framebuffer device (/dev/fbX).
--
--It has a size of 1024 bytes = 1 Kbyte.
--Each bit represents one pixel. If the bit is high, the pixel will
--turn on. If the pixel is low, the pixel will turn off.
--
--You can use the framebuffer as a file: fopen, fwrite, fclose...
--Although the LCD won't get updated until the next refresh time arrives.
--
--Also, you can mmap the framebuffer: open & mmap, munmap & close...
--which is the best option for most uses.
--
--Check samples/auxdisplay/cfag12864b-example.c
--for a real working userspace complete program with usage examples.
-diff --git a/Documentation/auxdisplay/ks0108 b/Documentation/auxdisplay/ks0108
-deleted file mode 100644
-index 8ddda0c8ceef..000000000000
---- a/Documentation/auxdisplay/ks0108
-+++ /dev/null
-@@ -1,55 +0,0 @@
--	==========================================
--	ks0108 LCD Controller Driver Documentation
--	==========================================
--
--License:		GPLv2
--Author & Maintainer:	Miguel Ojeda Sandonis
--Date:			2006-10-27
--
--
--
----------
--0. INDEX
----------
--
--	1. DRIVER INFORMATION
--	2. DEVICE INFORMATION
--	3. WIRING
--
--
-----------------------
--1. DRIVER INFORMATION
-----------------------
--
--This driver supports the ks0108 LCD controller.
--
--
-----------------------
--2. DEVICE INFORMATION
-----------------------
--
--Manufacturer:	Samsung
--Device Name:	KS0108 LCD Controller
--Device Code:	ks0108
--Webpage:	-
--Device Webpage:	-
--Type:		LCD Controller (Liquid Crystal Display Controller)
--Width:		64
--Height:		64
--Colors:		2 (B/N)
--Pages:		8
--Addresses:	64 each page
--Data size:	1 byte each address
--Memory size:	8 * 64 * 1 = 512 bytes
--
--
-----------
--3. WIRING
-----------
--
--The driver supports data parallel port wiring.
--
--If you aren't building LCD related hardware, you should check
--your LCD specific wiring information in the same folder.
--
--For example, check Documentation/auxdisplay/cfag12864b.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fd2af50e66b5..4cd39259fcdc 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -8991,7 +8991,7 @@ F:	kernel/kprobes.c
- KS0108 LCD CONTROLLER DRIVER
- M:	Miguel Ojeda Sandonis <miguel.ojeda.sandonis@gmail.com>
- S:	Maintained
--F:	Documentation/auxdisplay/ks0108
-+F:	Documentation/admin-guide/auxdisplay/ks0108.rst
- F:	drivers/auxdisplay/ks0108.c
- F:	include/linux/ks0108.h
+diff --git a/Documentation/m68k/README.buddha b/Documentation/m68k/buddha-driver.rst
+similarity index 73%
+rename from Documentation/m68k/README.buddha
+rename to Documentation/m68k/buddha-driver.rst
+index 3ea9827ba3c7..20e401413991 100644
+--- a/Documentation/m68k/README.buddha
++++ b/Documentation/m68k/buddha-driver.rst
+@@ -1,3 +1,6 @@
++=====================================
++Amiga Buddha and Catweasel IDE Driver
++=====================================
  
-diff --git a/drivers/auxdisplay/Kconfig b/drivers/auxdisplay/Kconfig
-index dd61fdd400f0..6b476e663e80 100644
---- a/drivers/auxdisplay/Kconfig
-+++ b/drivers/auxdisplay/Kconfig
-@@ -97,7 +97,7 @@ config CFAG12864B
- 	  say Y. You also need the ks0108 LCD Controller driver.
+ The Amiga Buddha and Catweasel IDE Driver (part of ide.c) was written by
+ Geert Uytterhoeven based on the following specifications:
+@@ -12,12 +15,12 @@ described  in  their  manuals, no tricks have been used (for
+ example leaving some address lines out of the equations...).
+ If you want to configure the board yourself (for example let
+ a  Linux  kernel  configure the card), look at the Commodore
+-Docs.  Reading the nibbles should give this information:
++Docs.  Reading the nibbles should give this information::
  
- 	  For help about how to wire your LCD to the parallel port,
--	  check Documentation/auxdisplay/cfag12864b
-+	  check Documentation/admin-guide/auxdisplay/cfag12864b.rst
+-Vendor number: 4626 ($1212)
+-product number: 0 (42 for Catweasel Z-II)
+-Serial number: 0
+-Rom-vector: $1000
++  Vendor number: 4626 ($1212)
++  product number: 0 (42 for Catweasel Z-II)
++  Serial number: 0
++  Rom-vector: $1000
  
- 	  Depends on the x86 arch and the framebuffer support.
+ The  card  should be a Z-II board, size 64K, not for freemem
+ list, Rom-Vektor is valid, no second Autoconfig-board on the
+@@ -34,6 +37,7 @@ otherwise your chance is only 1:16 to find the board :-).
+ 
+ The local memory-map is even active when mapped to $e8:
+ 
++==============  ===========================================
+ $0-$7e		Autokonfig-space, see Z-II docs.
+ 
+ $80-$7fd	reserved
+@@ -50,50 +54,51 @@ $a00-$aff	IDE-Select 2 (Port 1, Register set 0)
+ $b00-$bff	IDE-Select 3 (Port 1, Register set 1)
+ 
+ $c00-$cff	IDE-Select 4 (Port 2, Register set 0,
+-                          Catweasel only!)
++                Catweasel only!)
+ 
+ $d00-$dff	IDE-Select 5 (Port 3, Register set 1,
+-			      Catweasel only!)
++		Catweasel only!)
+ 
+-$e00-$eff	local expansion port, on Catweasel Z-II the 
++$e00-$eff	local expansion port, on Catweasel Z-II the
+ 		Catweasel registers are also mapped here.
+ 		Never touch, use multidisk.device!
+-		
+-$f00		read only, Byte-access: Bit 7 shows the 
+-		level of the IRQ-line of IDE port 0. 
++
++$f00		read only, Byte-access: Bit 7 shows the
++		level of the IRQ-line of IDE port 0.
+ 
+ $f01-$f3f	mirror of $f00
+ 
+-$f40		read only, Byte-access: Bit 7 shows the 
+-		level of the IRQ-line of IDE port 1. 
++$f40		read only, Byte-access: Bit 7 shows the
++		level of the IRQ-line of IDE port 1.
+ 
+ $f41-$f7f	mirror of $f40
+ 
+-$f80		read only, Byte-access: Bit 7 shows the 
+-		level of the IRQ-line of IDE port 2. 
++$f80		read only, Byte-access: Bit 7 shows the
++		level of the IRQ-line of IDE port 2.
+ 		(Catweasel only!)
+ 
+ $f81-$fbf	mirror of $f80
+ 
+ $fc0		write-only: Writing any value to this
+-		register enables IRQs to be passed from the 
+-		IDE ports to the Zorro bus. This mechanism 
+-		has been implemented to be compatible with 
++		register enables IRQs to be passed from the
++		IDE ports to the Zorro bus. This mechanism
++		has been implemented to be compatible with
+ 		harddisks that are either defective or have
+-		a buggy firmware and pull the IRQ line up 
+-		while starting up. If interrupts would 
+-		always be passed to the bus, the computer 
+-		might not start up. Once enabled, this flag 
+-		can not be disabled again. The level of the 
+-		flag can not be determined by software 
++		a buggy firmware and pull the IRQ line up
++		while starting up. If interrupts would
++		always be passed to the bus, the computer
++		might not start up. Once enabled, this flag
++		can not be disabled again. The level of the
++		flag can not be determined by software
+ 		(what for? Write to me if it's necessary!).
+ 
+ $fc1-$fff	mirror of $fc0
+ 
+ $1000-$ffff	Buddha-Rom with offset $1000 in the rom
+-		chip. The addresses $0 to $fff of the rom 
++		chip. The addresses $0 to $fff of the rom
+ 		chip cannot be read. Rom is Byte-wide and
+ 		mapped to even addresses.
++==============  ===========================================
+ 
+ The  IDE ports issue an INT2.  You can read the level of the
+ IRQ-lines  of  the  IDE-ports by reading from the three (two
+@@ -128,7 +133,8 @@ must  always  be set to 1 to be compatible with later Buddha
+ versions  (if  I'll  ever  update this one).  I presume that
+ I'll  never use the lower four bits, but they have to be set
+ to 1 by definition.
+-  The  values in this table have to be shifted 5 bits to the
++
++The  values in this table have to be shifted 5 bits to the
+ left and or'd with $1f (this sets the lower 5 bits).
+ 
+ All  the timings have in common:  Select and IOR/IOW rise at
+@@ -138,44 +144,36 @@ values  are no multiple of 71.  One clock-cycle is 71ns long
+ (exactly 70,5 at 14,18 Mhz on PAL systems).
+ 
+ value 0 (Default after reset)
+-
+-497ns Select (7 clock cycles) , IOR/IOW after 172ns (2 clock cycles)
+-(same timing as the Amiga 1200 does on it's IDE port without
+-accelerator card)
++  497ns Select (7 clock cycles) , IOR/IOW after 172ns (2 clock cycles)
++  (same timing as the Amiga 1200 does on it's IDE port without
++  accelerator card)
+ 
+ value 1
+-
+-639ns Select (9 clock cycles), IOR/IOW after 243ns (3 clock cycles)
++  639ns Select (9 clock cycles), IOR/IOW after 243ns (3 clock cycles)
+ 
+ value 2
+-
+-781ns Select (11 clock cycles), IOR/IOW after 314ns (4 clock cycles)
++  781ns Select (11 clock cycles), IOR/IOW after 314ns (4 clock cycles)
+ 
+ value 3
+-
+-355ns Select (5 clock cycles), IOR/IOW after 101ns (1 clock cycle)
++  355ns Select (5 clock cycles), IOR/IOW after 101ns (1 clock cycle)
+ 
+ value 4
+-
+-355ns Select (5 clock cycles), IOR/IOW after 172ns (2 clock cycles)
++  355ns Select (5 clock cycles), IOR/IOW after 172ns (2 clock cycles)
+ 
+ value 5
+-
+-355ns Select (5 clock cycles), IOR/IOW after 243ns (3 clock cycles)
++  355ns Select (5 clock cycles), IOR/IOW after 243ns (3 clock cycles)
+ 
+ value 6
+-
+-1065ns Select (15 clock cycles), IOR/IOW after 314ns (4 clock cycles)
++  1065ns Select (15 clock cycles), IOR/IOW after 314ns (4 clock cycles)
+ 
+ value 7
+-
+-355ns Select, (5 clock cycles), IOR/IOW after 101ns (1 clock cycle)
++  355ns Select, (5 clock cycles), IOR/IOW after 101ns (1 clock cycle)
+ 
+ When accessing IDE registers with A6=1 (for example $84x),
+ the timing will always be mode 0 8-bit compatible, no matter
+ what you have selected in the speed register:
+ 
+-781ns select, IOR/IOW after 4 clock cycles (=314ns) aktive. 
++781ns select, IOR/IOW after 4 clock cycles (=314ns) aktive.
+ 
+ All  the  timings with a very short select-signal (the 355ns
+ fast  accesses)  depend  on the accelerator card used in the
+@@ -204,7 +202,8 @@ always  shows a "no IRQ here" on the Buddha, and accesses to
+ the  third  IDE  port  are  going into data's Nirwana on the
+ Buddha.
+ 
+-			    Jens Schönfeld february 19th, 1997
+-					updated may 27th, 1997
+-			     eMail: sysop@nostlgic.tng.oche.de
++Jens Schönfeld february 19th, 1997
+ 
++updated may 27th, 1997
++
++eMail: sysop@nostlgic.tng.oche.de
+diff --git a/Documentation/m68k/index.rst b/Documentation/m68k/index.rst
+index 3a5ba7fe1703..b89cb6a86d9b 100644
+--- a/Documentation/m68k/index.rst
++++ b/Documentation/m68k/index.rst
+@@ -8,6 +8,7 @@ m68k Architecture
+    :maxdepth: 2
+ 
+    kernel-options
++   buddha-driver
+ 
+ .. only::  subproject and html
  
 -- 
 2.21.0
