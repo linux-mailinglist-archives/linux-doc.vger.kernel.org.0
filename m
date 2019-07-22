@@ -2,49 +2,45 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B9FDB6FE5B
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jul 2019 13:08:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2D03B6FE6F
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jul 2019 13:08:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729821AbfGVLH6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 22 Jul 2019 07:07:58 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:35484 "EHLO
+        id S1729842AbfGVLIJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 22 Jul 2019 07:08:09 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:35630 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729809AbfGVLH5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Jul 2019 07:07:57 -0400
+        with ESMTP id S1729828AbfGVLIA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Jul 2019 07:08:00 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
-        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-        Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-         bh=lneEfxOE4rGo4770frPc8ixz4JwEUuF8R33p9n9HqsE=; b=FYTmZlQ1S1WsMMjfehz/LAhIc
-        zK4lkgLW5H2zGFph5WsaxCjFc5OzWfFeHpuqxPcxmvu80XvfP7g23ZOr5ViRNLNfIhHA0toxkcNxf
-        UZsQecGtOAdZxZaKJGHF/j3H8ocAVZ4f+qZagJ8przvrnwVPCw7U90LREeH2km7xFUZWRbLVmxEoT
-        BRPhu/QNfdyKbYGMLM7P7KADSdWUdQckUqUM1DNycLDXDi6XeBVKC+f8madjmCVVYYgL1V5qDOMxE
-        BSRuZ5IJKt8ME7agY4AlcbuCdZj4P7DlOcfmrp3pn+dur0kfJnFIPAWbH2lfxCXf2SrMlrdGu8/e5
-        ZNoBUj9Kw==;
+        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=EnOsrG4d5VuiZ8ZId8K/05VDXmNI8hz9v1O7aYYsAfg=; b=DMwnjeMjDE1+RSTZLUvD57csmJ
+        o5svIEzpvk6mHlcVU26viTllCyNKDKhHIAn97ipXlYQ7j3doF9AM0B37B2oN5LNaDyzrV7bmk1zOq
+        zlYPUW8QKmipBOcjGDTIjpG4JhnOx7JHGa3hyZOBqgN9Tmy5zAmXBWSDAxO01im9q9KMQfKHBB9LP
+        ZnQw4cLJeEZNE9v0ONG1fe63bdDYwrmi2tsn1CaaJO/U3KdnlSyLYypiZMucp8niNLpxJUoVZXotZ
+        q2Kb0+3ysTu3EmcviGVXDSZkJj0QFdlnb/ATNUb1GxT4q/NQS0CUrWJRXqC/E2+ohZUAxBSXDbS6T
+        Jal7uKsw==;
 Received: from 177.157.124.3.dynamic.adsl.gvt.net.br ([177.157.124.3] helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hpWAe-00024v-Gv; Mon, 22 Jul 2019 11:07:56 +0000
+        id 1hpWAh-00025C-Ln; Mon, 22 Jul 2019 11:08:00 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hpWAZ-00040T-Vm; Mon, 22 Jul 2019 08:07:51 -0300
+        id 1hpWAa-00040W-0a; Mon, 22 Jul 2019 08:07:52 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        linux-spi@vger.kernel.org, dmaengine@vger.kernel.org,
-        netdev@vger.kernel.org, linux-wimax@intel.com,
-        devel@driverdev.osuosl.org, linux-i2c@vger.kernel.org,
-        linux-parisc@vger.kernel.org, devel@lists.orangefs.org,
-        linux-cifs@vger.kernel.org, rcu@vger.kernel.org,
-        linux-iio@vger.kernel.org, openrisc@lists.librecores.org,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        alsa-devel@alsa-project.org, linux-wireless@vger.kernel.org,
-        linux-rtc@vger.kernel.org, linux-mips@vger.kernel.org
-Subject: [PATCH 00/22] ReST conversion of text files without .txt extension
-Date:   Mon, 22 Jul 2019 08:07:27 -0300
-Message-Id: <cover.1563792333.git.mchehab+samsung@kernel.org>
+        Rob Herring <robh+dt@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Jonathan Corbet <corbet@lwn.net>, devicetree@vger.kernel.org,
+        linux-doc@vger.kernel.org, Rob Herring <robh@kernel.org>
+Subject: [PATCH 01/22] docs: convert markdown documents to ReST
+Date:   Mon, 22 Jul 2019 08:07:28 -0300
+Message-Id: <40b78fbbe64108601c274d28b7c515b3cd29d206.1563792334.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <cover.1563792333.git.mchehab+samsung@kernel.org>
+References: <cover.1563792333.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 To:     unlisted-recipients:; (no To-header on input)
@@ -53,383 +49,525 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This series converts the text files under Documentation with doesn't end
-neither .txt or .rst and are not part of ABI or features[1].
+The documentation standard is ReST and not markdown.
 
-This series is at:
-	https://git.linuxtv.org/mchehab/experimental.git/log/?h=rst_for_5_4_v2.1
-
-And comes after the pending patches I had for v5.13 (some not applied
-yet):
-	https://git.linuxtv.org/mchehab/experimental.git/log/?h=pending_docs_after_5.13-rc1
-
-[1] I submitted already a series to handle ABI and features.
-There are some files besides the ones there with, IMHO, it
-doesn't make sense to convert.
-
-So, I wrote a small ugly script to track the files waiting to be
-converted:
-
-  #!/bin/bash
-
-  find Documentation/ -name '*.txt'|grep -vE '(features/|devicetree/|sphinx/|output/|dax-hv-api.txt|draft-ietf-cipso-ipsecurity-01.txt|translations)'
-  for i in $(find Documentation/ -type f|grep -v translations/|grep -v output/|grep -v devicetree|grep -v -E "\.(rst|txt|py|pyc|pl|dot|conf|svg|sh|awk|gif|S|inf|c|csv|css|vim|exceptions|modes)$"|grep -v ABI/ |grep -v Documentation/EDID/hex|grep -v dontdiff|grep -v Kconfig|grep -v Makefile|grep -v Module.symvers|grep -vE '\b(CodingStyle|SubmittingPatches|target-export-device|hotplug-script|wusb-cbaf)\b'|grep -v -E '(LICENSE|COPY|gitignore|Makefile|AUTHORS|TODO|CHANGES|CREDITS|ChangeLog)'|grep -v Documentation/virtual/kvm/devices/README); do echo $i; done
-
-After this patch series, the script reports 358 files missing conversion, all ending with .txt.
-
-From those, ~40 files are already at ReST format - the ones at Documentation/*.txt - except
-for a couple of files there.
-
-So, there's around 320 files left to be converted after this series,
-with gives me hope that we may finally finish the conversion this
-year. Let's see.
-
-Mauro Carvalho Chehab (22):
-  docs: convert markdown documents to ReST
-  docs: i2c: convert to ReST and add to driver-api bookset
-  docs: w1: convert to ReST and add to the kAPI group of docs
-  docs: spi: convert to ReST and add it to the kABI bookset
-  docs: ipmb: place it at driver-api and convert to ReST
-  docs: packing: move it to core-api book and adjust markups
-  docs: admin-guide: add auxdisplay files to it after conversion to ReST
-  docs: README.buddha: convert to ReST and add to m68k book
-  docs: parisc: convert to ReST and add to documentation body
-  docs: openrisc: convert to ReST and add to documentation body
-  docs: isdn: convert to ReST and add to kAPI bookset
-  docs: fs: cifs: convert to ReST and add to admin-guide book
-  docs: fs: convert docs without extension to ReST
-  docs: fs: convert porting to ReST
-  docs: index.rst: don't use genindex for pdf output
-  docs: wimax: convert to ReST and add to admin-guide
-  docs: mips: add to the documentation body as ReST
-  docs: hwmon: pxe1610: convert to ReST format and add to the index
-  docs: nios2: add it to the main Documentation body
-  docs: net: convert two README files to ReST format
-  docs: rcu: convert some articles from html to ReST
-  docs: ABI: remove extension from sysfs-class-mic.txt
-
- Documentation/ABI/stable/sysfs-bus-w1         |    2 +-
- .../ABI/stable/sysfs-driver-w1_ds28e04        |    4 +-
- .../ABI/stable/sysfs-driver-w1_ds28ea00       |    2 +-
- .../{sysfs-class-mic.txt => sysfs-class-mic}  |    0
- .../Data-Structures/Data-Structures.html      | 1391 -------
- .../Data-Structures/Data-Structures.rst       | 1163 ++++++
- .../Expedited-Grace-Periods.html              |  668 ----
- .../Expedited-Grace-Periods.rst               |  521 +++
- .../Memory-Ordering/Tree-RCU-Diagram.html     |    9 -
- .../Tree-RCU-Memory-Ordering.html             |  704 ----
- .../Tree-RCU-Memory-Ordering.rst              |  625 ++++
- .../RCU/Design/Requirements/Requirements.html | 3330 -----------------
- .../RCU/Design/Requirements/Requirements.rst  | 2662 +++++++++++++
- Documentation/RCU/index.rst                   |    5 +
- Documentation/RCU/whatisRCU.txt               |    4 +-
- .../admin-guide/auxdisplay/cfag12864b.rst     |   98 +
- .../admin-guide/auxdisplay/index.rst          |   16 +
- .../admin-guide/auxdisplay/ks0108.rst         |   50 +
- .../AUTHORS => admin-guide/cifs/authors.rst}  |   64 +-
- .../CHANGES => admin-guide/cifs/changes.rst}  |    4 +
- Documentation/admin-guide/cifs/index.rst      |   21 +
- .../cifs/introduction.rst}                    |    8 +
- .../cifs/TODO => admin-guide/cifs/todo.rst}   |   87 +-
- .../README => admin-guide/cifs/usage.rst}     |  560 +--
- .../cifs/winucase_convert.pl                  |    0
- Documentation/admin-guide/index.rst           |    3 +
- .../wimax/i2400m.rst}                         |  145 +-
- Documentation/admin-guide/wimax/index.rst     |   19 +
- .../wimax/wimax.rst}                          |   36 +-
- Documentation/auxdisplay/cfag12864b           |  105 -
- Documentation/auxdisplay/ks0108               |   55 -
- Documentation/core-api/index.rst              |    3 +-
- .../{packing.txt => core-api/packing.rst}     |   81 +-
- .../devicetree/bindings/i2c/i2c-mux-gpmux.txt |    2 +-
- Documentation/devicetree/writing-schema.md    |  130 -
- Documentation/devicetree/writing-schema.rst   |  153 +
- Documentation/driver-api/dmaengine/index.rst  |    2 +-
- Documentation/driver-api/index.rst            |    1 +
- Documentation/driver-api/ipmb.rst             |    2 +-
- Documentation/driver-api/soundwire/index.rst  |    2 +-
- ...irectory-locking => directory-locking.rst} |   40 +-
- Documentation/filesystems/index.rst           |    4 +
- .../filesystems/{Locking => locking.rst}      |  257 +-
- .../nfs/{Exporting => exporting.rst}          |   31 +-
- Documentation/filesystems/porting             |  686 ----
- Documentation/filesystems/porting.rst         |  852 +++++
- ...entication.md => ubifs-authentication.rst} |   70 +-
- Documentation/filesystems/vfs.rst             |    2 +-
- Documentation/hwmon/adm1021.rst               |    2 +-
- Documentation/hwmon/adm1275.rst               |    2 +-
- Documentation/hwmon/hih6130.rst               |    2 +-
- Documentation/hwmon/ibm-cffps.rst             |    2 +-
- Documentation/hwmon/index.rst                 |    1 +
- Documentation/hwmon/lm25066.rst               |    2 +-
- Documentation/hwmon/max16064.rst              |    2 +-
- Documentation/hwmon/max16065.rst              |    2 +-
- Documentation/hwmon/max20751.rst              |    2 +-
- Documentation/hwmon/max34440.rst              |    2 +-
- Documentation/hwmon/max6650.rst               |    2 +-
- Documentation/hwmon/max8688.rst               |    2 +-
- Documentation/hwmon/menf21bmc.rst             |    2 +-
- Documentation/hwmon/pcf8591.rst               |    2 +-
- Documentation/hwmon/{pxe1610 => pxe1610.rst}  |   33 +-
- Documentation/hwmon/sht3x.rst                 |    2 +-
- Documentation/hwmon/shtc1.rst                 |    2 +-
- Documentation/hwmon/tmp103.rst                |    2 +-
- Documentation/hwmon/tps40422.rst              |    2 +-
- Documentation/hwmon/ucd9000.rst               |    2 +-
- Documentation/hwmon/ucd9200.rst               |    2 +-
- Documentation/hwmon/via686a.rst               |    2 +-
- Documentation/hwmon/zl6100.rst                |    2 +-
- .../busses/{i2c-ali1535 => i2c-ali1535.rst}   |   13 +-
- .../busses/{i2c-ali1563 => i2c-ali1563.rst}   |    3 +
- .../busses/{i2c-ali15x3 => i2c-ali15x3.rst}   |   64 +-
- Documentation/i2c/busses/i2c-amd-mp2          |   23 -
- Documentation/i2c/busses/i2c-amd-mp2.rst      |   25 +
- .../i2c/busses/{i2c-amd756 => i2c-amd756.rst} |    8 +-
- .../busses/{i2c-amd8111 => i2c-amd8111.rst}   |   14 +-
- .../{i2c-diolan-u2c => i2c-diolan-u2c.rst}    |    3 +
- .../i2c/busses/{i2c-i801 => i2c-i801.rst}     |   33 +-
- .../i2c/busses/{i2c-ismt => i2c-ismt.rst}     |   20 +-
- .../busses/{i2c-mlxcpld => i2c-mlxcpld.rst}   |    6 +
- .../busses/{i2c-nforce2 => i2c-nforce2.rst}   |   33 +-
- .../{i2c-nvidia-gpu => i2c-nvidia-gpu.rst}    |    6 +-
- .../i2c/busses/{i2c-ocores => i2c-ocores.rst} |   22 +-
- Documentation/i2c/busses/i2c-parport          |  178 -
- ...2c-parport-light => i2c-parport-light.rst} |    8 +-
- Documentation/i2c/busses/i2c-parport.rst      |  190 +
- .../busses/{i2c-pca-isa => i2c-pca-isa.rst}   |    9 +-
- .../i2c/busses/{i2c-piix4 => i2c-piix4.rst}   |   18 +-
- .../busses/{i2c-sis5595 => i2c-sis5595.rst}   |   19 +-
- Documentation/i2c/busses/i2c-sis630           |   58 -
- Documentation/i2c/busses/i2c-sis630.rst       |   63 +
- .../i2c/busses/{i2c-sis96x => i2c-sis96x.rst} |   31 +-
- .../busses/{i2c-taos-evm => i2c-taos-evm.rst} |    8 +-
- .../i2c/busses/{i2c-via => i2c-via.rst}       |   28 +-
- .../i2c/busses/{i2c-viapro => i2c-viapro.rst} |   12 +-
- Documentation/i2c/busses/index.rst            |   33 +
- .../i2c/busses/{scx200_acb => scx200_acb.rst} |    9 +-
- .../i2c/{dev-interface => dev-interface.rst}  |   94 +-
- ...-considerations => dma-considerations.rst} |    0
- .../i2c/{fault-codes => fault-codes.rst}      |    5 +-
- .../i2c/{functionality => functionality.rst}  |   22 +-
- ...ult-injection => gpio-fault-injection.rst} |   12 +-
- .../i2c/{i2c-protocol => i2c-protocol.rst}    |   28 +-
- Documentation/i2c/{i2c-stub => i2c-stub.rst}  |   20 +-
- .../i2c/{i2c-topology => i2c-topology.rst}    |   68 +-
- Documentation/i2c/index.rst                   |   37 +
- ...ting-devices => instantiating-devices.rst} |   45 +-
- .../muxes/{i2c-mux-gpio => i2c-mux-gpio.rst}  |   26 +-
- ...e-parameters => old-module-parameters.rst} |   27 +-
- ...eprom-backend => slave-eeprom-backend.rst} |    4 +-
- .../{slave-interface => slave-interface.rst}  |   33 +-
- .../{smbus-protocol => smbus-protocol.rst}    |   86 +-
- Documentation/i2c/{summary => summary.rst}    |    6 +-
- ...en-bit-addresses => ten-bit-addresses.rst} |    5 +
- ...pgrading-clients => upgrading-clients.rst} |  204 +-
- .../{writing-clients => writing-clients.rst}  |   94 +-
- Documentation/index.rst                       |    8 +
- .../isdn/{README.avmb1 => avmb1.rst}          |  231 +-
- Documentation/isdn/{CREDITS => credits.rst}   |    7 +-
- .../isdn/{README.gigaset => gigaset.rst}      |  290 +-
- .../isdn/{README.hysdn => hysdn.rst}          |  125 +-
- Documentation/isdn/index.rst                  |   24 +
- .../{INTERFACE.CAPI => interface_capi.rst}    |  182 +-
- .../isdn/{README.mISDN => m_isdn.rst}         |    5 +-
- .../m68k/{README.buddha => buddha-driver.rst} |   95 +-
- Documentation/m68k/index.rst                  |    1 +
- .../{AU1xxx_IDE.README => au1xxx_ide.rst}     |   89 +-
- Documentation/mips/index.rst                  |   17 +
- .../networking/caif/{README => caif.rst}      |   88 +-
- .../networking/device_drivers/index.rst       |    2 +-
- Documentation/networking/index.rst            |    2 +-
- .../{README => mac80211_hwsim.rst}            |   28 +-
- Documentation/nios2/{README => nios2.rst}     |    1 +
- Documentation/openrisc/index.rst              |   18 +
- .../openrisc/{README => openrisc_port.rst}    |   25 +-
- Documentation/openrisc/{TODO => todo.rst}     |    9 +-
- .../parisc/{debugging => debugging.rst}       |    7 +
- Documentation/parisc/index.rst                |   18 +
- .../parisc/{registers => registers.rst}       |   59 +-
- Documentation/sound/index.rst                 |    2 +-
- .../spi/{butterfly => butterfly.rst}          |   44 +-
- Documentation/spi/index.rst                   |   22 +
- Documentation/spi/{pxa2xx => pxa2xx.rst}      |   95 +-
- .../spi/{spi-lm70llp => spi-lm70llp.rst}      |   17 +-
- .../spi/{spi-sc18is602 => spi-sc18is602.rst}  |    5 +-
- .../spi/{spi-summary => spi-summary.rst}      |  105 +-
- Documentation/spi/{spidev => spidev.rst}      |   30 +-
- Documentation/w1/index.rst                    |   21 +
- .../w1/masters/{ds2482 => ds2482.rst}         |   16 +-
- .../w1/masters/{ds2490 => ds2490.rst}         |    6 +-
- Documentation/w1/masters/index.rst            |   14 +
- Documentation/w1/masters/mxc-w1               |   12 -
- Documentation/w1/masters/mxc-w1.rst           |   17 +
- .../w1/masters/{omap-hdq => omap-hdq.rst}     |   12 +-
- .../w1/masters/{w1-gpio => w1-gpio.rst}       |   21 +-
- Documentation/w1/slaves/index.rst             |   16 +
- .../w1/slaves/{w1_ds2406 => w1_ds2406.rst}    |    4 +-
- .../w1/slaves/{w1_ds2413 => w1_ds2413.rst}    |    9 +
- Documentation/w1/slaves/w1_ds2423             |   47 -
- Documentation/w1/slaves/w1_ds2423.rst         |   54 +
- .../w1/slaves/{w1_ds2438 => w1_ds2438.rst}    |   10 +-
- .../w1/slaves/{w1_ds28e04 => w1_ds28e04.rst}  |    5 +
- .../w1/slaves/{w1_ds28e17 => w1_ds28e17.rst}  |   16 +-
- .../w1/slaves/{w1_therm => w1_therm.rst}      |   11 +-
- .../w1/{w1.generic => w1-generic.rst}         |   88 +-
- .../w1/{w1.netlink => w1-netlink.rst}         |   89 +-
- MAINTAINERS                                   |   60 +-
- drivers/auxdisplay/Kconfig                    |    2 +-
- drivers/hwmon/atxp1.c                         |    2 +-
- drivers/hwmon/smm665.c                        |    2 +-
- drivers/i2c/Kconfig                           |    4 +-
- drivers/i2c/busses/Kconfig                    |    2 +-
- drivers/i2c/busses/i2c-i801.c                 |    2 +-
- drivers/i2c/busses/i2c-taos-evm.c             |    2 +-
- drivers/i2c/i2c-core-base.c                   |    4 +-
- drivers/iio/dummy/iio_simple_dummy.c          |    4 +-
- drivers/rtc/rtc-ds1374.c                      |    2 +-
- drivers/spi/Kconfig                           |    2 +-
- drivers/spi/spi-butterfly.c                   |    2 +-
- drivers/spi/spi-lm70llp.c                     |    2 +-
- drivers/staging/isdn/hysdn/Kconfig            |    2 +-
- fs/cifs/export.c                              |    2 +-
- fs/exportfs/expfs.c                           |    2 +-
- fs/isofs/export.c                             |    2 +-
- fs/orangefs/file.c                            |    2 +-
- fs/orangefs/orangefs-kernel.h                 |    2 +-
- include/linux/dcache.h                        |    2 +-
- include/linux/exportfs.h                      |    2 +-
- include/linux/i2c.h                           |    2 +-
- include/linux/platform_data/sc18is602.h       |    2 +-
- 192 files changed, 9538 insertions(+), 9201 deletions(-)
- rename Documentation/ABI/testing/{sysfs-class-mic.txt => sysfs-class-mic} (100%)
- delete mode 100644 Documentation/RCU/Design/Data-Structures/Data-Structures.html
- create mode 100644 Documentation/RCU/Design/Data-Structures/Data-Structures.rst
- delete mode 100644 Documentation/RCU/Design/Expedited-Grace-Periods/Expedited-Grace-Periods.html
- create mode 100644 Documentation/RCU/Design/Expedited-Grace-Periods/Expedited-Grace-Periods.rst
- delete mode 100644 Documentation/RCU/Design/Memory-Ordering/Tree-RCU-Diagram.html
- delete mode 100644 Documentation/RCU/Design/Memory-Ordering/Tree-RCU-Memory-Ordering.html
- create mode 100644 Documentation/RCU/Design/Memory-Ordering/Tree-RCU-Memory-Ordering.rst
- delete mode 100644 Documentation/RCU/Design/Requirements/Requirements.html
- create mode 100644 Documentation/RCU/Design/Requirements/Requirements.rst
- create mode 100644 Documentation/admin-guide/auxdisplay/cfag12864b.rst
- create mode 100644 Documentation/admin-guide/auxdisplay/index.rst
- create mode 100644 Documentation/admin-guide/auxdisplay/ks0108.rst
- rename Documentation/{filesystems/cifs/AUTHORS => admin-guide/cifs/authors.rst} (60%)
- rename Documentation/{filesystems/cifs/CHANGES => admin-guide/cifs/changes.rst} (91%)
- create mode 100644 Documentation/admin-guide/cifs/index.rst
- rename Documentation/{filesystems/cifs/cifs.txt => admin-guide/cifs/introduction.rst} (98%)
- rename Documentation/{filesystems/cifs/TODO => admin-guide/cifs/todo.rst} (58%)
- rename Documentation/{filesystems/cifs/README => admin-guide/cifs/usage.rst} (72%)
- rename Documentation/{filesystems => admin-guide}/cifs/winucase_convert.pl (100%)
- rename Documentation/{wimax/README.i2400m => admin-guide/wimax/i2400m.rst} (69%)
- create mode 100644 Documentation/admin-guide/wimax/index.rst
- rename Documentation/{wimax/README.wimax => admin-guide/wimax/wimax.rst} (74%)
- delete mode 100644 Documentation/auxdisplay/cfag12864b
- delete mode 100644 Documentation/auxdisplay/ks0108
- rename Documentation/{packing.txt => core-api/packing.rst} (61%)
+Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Acked-by: Rob Herring <robh@kernel.org>
+---
+ Documentation/devicetree/writing-schema.md    | 130 ---------------
+ Documentation/devicetree/writing-schema.rst   | 153 ++++++++++++++++++
+ ...entication.md => ubifs-authentication.rst} |  70 +++++---
+ 3 files changed, 197 insertions(+), 156 deletions(-)
  delete mode 100644 Documentation/devicetree/writing-schema.md
  create mode 100644 Documentation/devicetree/writing-schema.rst
- rename Documentation/filesystems/{directory-locking => directory-locking.rst} (86%)
- rename Documentation/filesystems/{Locking => locking.rst} (79%)
- rename Documentation/filesystems/nfs/{Exporting => exporting.rst} (91%)
- delete mode 100644 Documentation/filesystems/porting
- create mode 100644 Documentation/filesystems/porting.rst
  rename Documentation/filesystems/{ubifs-authentication.md => ubifs-authentication.rst} (95%)
- rename Documentation/hwmon/{pxe1610 => pxe1610.rst} (82%)
- rename Documentation/i2c/busses/{i2c-ali1535 => i2c-ali1535.rst} (82%)
- rename Documentation/i2c/busses/{i2c-ali1563 => i2c-ali1563.rst} (93%)
- rename Documentation/i2c/busses/{i2c-ali15x3 => i2c-ali15x3.rst} (72%)
- delete mode 100644 Documentation/i2c/busses/i2c-amd-mp2
- create mode 100644 Documentation/i2c/busses/i2c-amd-mp2.rst
- rename Documentation/i2c/busses/{i2c-amd756 => i2c-amd756.rst} (79%)
- rename Documentation/i2c/busses/{i2c-amd8111 => i2c-amd8111.rst} (66%)
- rename Documentation/i2c/busses/{i2c-diolan-u2c => i2c-diolan-u2c.rst} (91%)
- rename Documentation/i2c/busses/{i2c-i801 => i2c-i801.rst} (89%)
- rename Documentation/i2c/busses/{i2c-ismt => i2c-ismt.rst} (81%)
- rename Documentation/i2c/busses/{i2c-mlxcpld => i2c-mlxcpld.rst} (88%)
- rename Documentation/i2c/busses/{i2c-nforce2 => i2c-nforce2.rst} (58%)
- rename Documentation/i2c/busses/{i2c-nvidia-gpu => i2c-nvidia-gpu.rst} (63%)
- rename Documentation/i2c/busses/{i2c-ocores => i2c-ocores.rst} (82%)
- delete mode 100644 Documentation/i2c/busses/i2c-parport
- rename Documentation/i2c/busses/{i2c-parport-light => i2c-parport-light.rst} (91%)
- create mode 100644 Documentation/i2c/busses/i2c-parport.rst
- rename Documentation/i2c/busses/{i2c-pca-isa => i2c-pca-isa.rst} (72%)
- rename Documentation/i2c/busses/{i2c-piix4 => i2c-piix4.rst} (92%)
- rename Documentation/i2c/busses/{i2c-sis5595 => i2c-sis5595.rst} (74%)
- delete mode 100644 Documentation/i2c/busses/i2c-sis630
- create mode 100644 Documentation/i2c/busses/i2c-sis630.rst
- rename Documentation/i2c/busses/{i2c-sis96x => i2c-sis96x.rst} (74%)
- rename Documentation/i2c/busses/{i2c-taos-evm => i2c-taos-evm.rst} (91%)
- rename Documentation/i2c/busses/{i2c-via => i2c-via.rst} (54%)
- rename Documentation/i2c/busses/{i2c-viapro => i2c-viapro.rst} (87%)
- create mode 100644 Documentation/i2c/busses/index.rst
- rename Documentation/i2c/busses/{scx200_acb => scx200_acb.rst} (86%)
- rename Documentation/i2c/{dev-interface => dev-interface.rst} (71%)
- rename Documentation/i2c/{DMA-considerations => dma-considerations.rst} (100%)
- rename Documentation/i2c/{fault-codes => fault-codes.rst} (98%)
- rename Documentation/i2c/{functionality => functionality.rst} (91%)
- rename Documentation/i2c/{gpio-fault-injection => gpio-fault-injection.rst} (97%)
- rename Documentation/i2c/{i2c-protocol => i2c-protocol.rst} (83%)
- rename Documentation/i2c/{i2c-stub => i2c-stub.rst} (93%)
- rename Documentation/i2c/{i2c-topology => i2c-topology.rst} (89%)
- create mode 100644 Documentation/i2c/index.rst
- rename Documentation/i2c/{instantiating-devices => instantiating-devices.rst} (93%)
- rename Documentation/i2c/muxes/{i2c-mux-gpio => i2c-mux-gpio.rst} (85%)
- rename Documentation/i2c/{old-module-parameters => old-module-parameters.rst} (75%)
- rename Documentation/i2c/{slave-eeprom-backend => slave-eeprom-backend.rst} (90%)
- rename Documentation/i2c/{slave-interface => slave-interface.rst} (94%)
- rename Documentation/i2c/{smbus-protocol => smbus-protocol.rst} (82%)
- rename Documentation/i2c/{summary => summary.rst} (96%)
- rename Documentation/i2c/{ten-bit-addresses => ten-bit-addresses.rst} (95%)
- rename Documentation/i2c/{upgrading-clients => upgrading-clients.rst} (54%)
- rename Documentation/i2c/{writing-clients => writing-clients.rst} (91%)
- rename Documentation/isdn/{README.avmb1 => avmb1.rst} (50%)
- rename Documentation/isdn/{CREDITS => credits.rst} (96%)
- rename Documentation/isdn/{README.gigaset => gigaset.rst} (74%)
- rename Documentation/isdn/{README.hysdn => hysdn.rst} (80%)
- create mode 100644 Documentation/isdn/index.rst
- rename Documentation/isdn/{INTERFACE.CAPI => interface_capi.rst} (75%)
- rename Documentation/isdn/{README.mISDN => m_isdn.rst} (89%)
- rename Documentation/m68k/{README.buddha => buddha-driver.rst} (73%)
- rename Documentation/mips/{AU1xxx_IDE.README => au1xxx_ide.rst} (67%)
- create mode 100644 Documentation/mips/index.rst
- rename Documentation/networking/caif/{README => caif.rst} (70%)
- rename Documentation/networking/mac80211_hwsim/{README => mac80211_hwsim.rst} (81%)
- rename Documentation/nios2/{README => nios2.rst} (96%)
- create mode 100644 Documentation/openrisc/index.rst
- rename Documentation/openrisc/{README => openrisc_port.rst} (80%)
- rename Documentation/openrisc/{TODO => todo.rst} (78%)
- rename Documentation/parisc/{debugging => debugging.rst} (94%)
- create mode 100644 Documentation/parisc/index.rst
- rename Documentation/parisc/{registers => registers.rst} (70%)
- rename Documentation/spi/{butterfly => butterfly.rst} (71%)
- create mode 100644 Documentation/spi/index.rst
- rename Documentation/spi/{pxa2xx => pxa2xx.rst} (83%)
- rename Documentation/spi/{spi-lm70llp => spi-lm70llp.rst} (88%)
- rename Documentation/spi/{spi-sc18is602 => spi-sc18is602.rst} (92%)
- rename Documentation/spi/{spi-summary => spi-summary.rst} (93%)
- rename Documentation/spi/{spidev => spidev.rst} (90%)
- create mode 100644 Documentation/w1/index.rst
- rename Documentation/w1/masters/{ds2482 => ds2482.rst} (71%)
- rename Documentation/w1/masters/{ds2490 => ds2490.rst} (98%)
- create mode 100644 Documentation/w1/masters/index.rst
- delete mode 100644 Documentation/w1/masters/mxc-w1
- create mode 100644 Documentation/w1/masters/mxc-w1.rst
- rename Documentation/w1/masters/{omap-hdq => omap-hdq.rst} (90%)
- rename Documentation/w1/masters/{w1-gpio => w1-gpio.rst} (75%)
- create mode 100644 Documentation/w1/slaves/index.rst
- rename Documentation/w1/slaves/{w1_ds2406 => w1_ds2406.rst} (96%)
- rename Documentation/w1/slaves/{w1_ds2413 => w1_ds2413.rst} (81%)
- delete mode 100644 Documentation/w1/slaves/w1_ds2423
- create mode 100644 Documentation/w1/slaves/w1_ds2423.rst
- rename Documentation/w1/slaves/{w1_ds2438 => w1_ds2438.rst} (93%)
- rename Documentation/w1/slaves/{w1_ds28e04 => w1_ds28e04.rst} (93%)
- rename Documentation/w1/slaves/{w1_ds28e17 => w1_ds28e17.rst} (88%)
- rename Documentation/w1/slaves/{w1_therm => w1_therm.rst} (95%)
- rename Documentation/w1/{w1.generic => w1-generic.rst} (59%)
- rename Documentation/w1/{w1.netlink => w1-netlink.rst} (77%)
 
+diff --git a/Documentation/devicetree/writing-schema.md b/Documentation/devicetree/writing-schema.md
+deleted file mode 100644
+index dc032db36262..000000000000
+--- a/Documentation/devicetree/writing-schema.md
++++ /dev/null
+@@ -1,130 +0,0 @@
+-# Writing DeviceTree Bindings in json-schema
+-
+-Devicetree bindings are written using json-schema vocabulary. Schema files are
+-written in a JSON compatible subset of YAML. YAML is used instead of JSON as it
+-considered more human readable and has some advantages such as allowing
+-comments (Prefixed with '#').
+-
+-## Schema Contents
+-
+-Each schema doc is a structured json-schema which is defined by a set of
+-top-level properties. Generally, there is one binding defined per file. The
+-top-level json-schema properties used are:
+-
+-- __$id__ - A json-schema unique identifier string. The string must be a valid
+-URI typically containing the binding's filename and path. For DT schema, it must
+-begin with "http://devicetree.org/schemas/". The URL is used in constructing
+-references to other files specified in schema "$ref" properties. A $ref values
+-with a leading '/' will have the hostname prepended. A $ref value a relative
+-path or filename only will be prepended with the hostname and path components
+-of the current schema file's '$id' value. A URL is used even for local files,
+-but there may not actually be files present at those locations.
+-
+-- __$schema__ - Indicates the meta-schema the schema file adheres to.
+-
+-- __title__ - A one line description on the contents of the binding schema.
+-
+-- __maintainers__ - A DT specific property. Contains a list of email address(es)
+-for maintainers of this binding.
+-
+-- __description__ - Optional. A multi-line text block containing any detailed
+-information about this binding. It should contain things such as what the block
+-or device does, standards the device conforms to, and links to datasheets for
+-more information.
+-
+-- __select__ - Optional. A json-schema used to match nodes for applying the
+-schema. By default without 'select', nodes are matched against their possible
+-compatible string values or node name. Most bindings should not need select.
+-
+-- __allOf__ - Optional. A list of other schemas to include. This is used to
+-include other schemas the binding conforms to. This may be schemas for a
+-particular class of devices such as I2C or SPI controllers.
+-
+-- __properties__ - A set of sub-schema defining all the DT properties for the
+-binding. The exact schema syntax depends on whether properties are known,
+-common properties (e.g. 'interrupts') or are binding/vendor specific properties.
+-
+-  A property can also define a child DT node with child properties defined
+-under it.
+-
+-  For more details on properties sections, see 'Property Schema' section.
+-
+-- __patternProperties__ - Optional. Similar to 'properties', but names are regex.
+-
+-- __required__ - A list of DT properties from the 'properties' section that
+-must always be present.
+-
+-- __examples__ - Optional. A list of one or more DTS hunks implementing the
+-binding. Note: YAML doesn't allow leading tabs, so spaces must be used instead.
+-
+-Unless noted otherwise, all properties are required.
+-
+-## Property Schema
+-
+-The 'properties' section of the schema contains all the DT properties for a
+-binding. Each property contains a set of constraints using json-schema
+-vocabulary for that property. The properties schemas are what is used for
+-validation of DT files.
+-
+-For common properties, only additional constraints not covered by the common
+-binding schema need to be defined such as how many values are valid or what
+-possible values are valid.
+-
+-Vendor specific properties will typically need more detailed schema. With the
+-exception of boolean properties, they should have a reference to a type in
+-schemas/types.yaml. A "description" property is always required.
+-
+-The Devicetree schemas don't exactly match the YAML encoded DT data produced by
+-dtc. They are simplified to make them more compact and avoid a bunch of
+-boilerplate. The tools process the schema files to produce the final schema for
+-validation. There are currently 2 transformations the tools perform.
+-
+-The default for arrays in json-schema is they are variable sized and allow more
+-entries than explicitly defined. This can be restricted by defining 'minItems',
+-'maxItems', and 'additionalItems'. However, for DeviceTree Schemas, a fixed
+-size is desired in most cases, so these properties are added based on the
+-number of entries in an 'items' list.
+-
+-The YAML Devicetree format also makes all string values an array and scalar
+-values a matrix (in order to define groupings) even when only a single value
+-is present. Single entries in schemas are fixed up to match this encoding.
+-
+-## Testing
+-
+-### Dependencies
+-
+-The DT schema project must be installed in order to validate the DT schema
+-binding documents and validate DTS files using the DT schema. The DT schema
+-project can be installed with pip:
+-
+-`pip3 install git+https://github.com/devicetree-org/dt-schema.git@master`
+-
+-dtc must also be built with YAML output support enabled. This requires that
+-libyaml and its headers be installed on the host system.
+-
+-### Running checks
+-
+-The DT schema binding documents must be validated using the meta-schema (the
+-schema for the schema) to ensure they are both valid json-schema and valid
+-binding schema. All of the DT binding documents can be validated using the
+-`dt_binding_check` target:
+-
+-`make dt_binding_check`
+-
+-In order to perform validation of DT source files, use the `dtbs_check` target:
+-
+-`make dtbs_check`
+-
+-This will first run the `dt_binding_check` which generates the processed schema.
+-
+-It is also possible to run checks with a single schema file by setting the
+-'DT_SCHEMA_FILES' variable to a specific schema file.
+-
+-`make dtbs_check DT_SCHEMA_FILES=Documentation/devicetree/bindings/trivial-devices.yaml`
+-
+-
+-## json-schema Resources
+-
+-[JSON-Schema Specifications](http://json-schema.org/)
+-
+-[Using JSON Schema Book](http://usingjsonschema.com/)
+diff --git a/Documentation/devicetree/writing-schema.rst b/Documentation/devicetree/writing-schema.rst
+new file mode 100644
+index 000000000000..8f71d1e2ac52
+--- /dev/null
++++ b/Documentation/devicetree/writing-schema.rst
+@@ -0,0 +1,153 @@
++:orphan:
++
++Writing DeviceTree Bindings in json-schema
++==========================================
++
++Devicetree bindings are written using json-schema vocabulary. Schema files are
++written in a JSON compatible subset of YAML. YAML is used instead of JSON as it
++considered more human readable and has some advantages such as allowing
++comments (Prefixed with '#').
++
++Schema Contents
++---------------
++
++Each schema doc is a structured json-schema which is defined by a set of
++top-level properties. Generally, there is one binding defined per file. The
++top-level json-schema properties used are:
++
++$id
++  A json-schema unique identifier string. The string must be a valid
++  URI typically containing the binding's filename and path. For DT schema, it must
++  begin with "http://devicetree.org/schemas/". The URL is used in constructing
++  references to other files specified in schema "$ref" properties. A $ref values
++  with a leading '/' will have the hostname prepended. A $ref value a relative
++  path or filename only will be prepended with the hostname and path components
++  of the current schema file's '$id' value. A URL is used even for local files,
++  but there may not actually be files present at those locations.
++
++$schema
++  Indicates the meta-schema the schema file adheres to.
++
++title
++  A one line description on the contents of the binding schema.
++
++maintainers
++  A DT specific property. Contains a list of email address(es)
++  for maintainers of this binding.
++
++description
++  Optional. A multi-line text block containing any detailed
++  information about this binding. It should contain things such as what the block
++  or device does, standards the device conforms to, and links to datasheets for
++  more information.
++
++select
++  Optional. A json-schema used to match nodes for applying the
++  schema. By default without 'select', nodes are matched against their possible
++  compatible string values or node name. Most bindings should not need select.
++
++ allOf
++  Optional. A list of other schemas to include. This is used to
++  include other schemas the binding conforms to. This may be schemas for a
++  particular class of devices such as I2C or SPI controllers.
++
++ properties
++  A set of sub-schema defining all the DT properties for the
++  binding. The exact schema syntax depends on whether properties are known,
++  common properties (e.g. 'interrupts') or are binding/vendor specific properties.
++
++A property can also define a child DT node with child properties defined
++under it.
++
++For more details on properties sections, see 'Property Schema' section.
++
++patternProperties
++  Optional. Similar to 'properties', but names are regex.
++
++required
++  A list of DT properties from the 'properties' section that
++  must always be present.
++
++examples
++  Optional. A list of one or more DTS hunks implementing the
++  binding. Note: YAML doesn't allow leading tabs, so spaces must be used instead.
++
++Unless noted otherwise, all properties are required.
++
++Property Schema
++---------------
++
++The 'properties' section of the schema contains all the DT properties for a
++binding. Each property contains a set of constraints using json-schema
++vocabulary for that property. The properties schemas are what is used for
++validation of DT files.
++
++For common properties, only additional constraints not covered by the common
++binding schema need to be defined such as how many values are valid or what
++possible values are valid.
++
++Vendor specific properties will typically need more detailed schema. With the
++exception of boolean properties, they should have a reference to a type in
++schemas/types.yaml. A "description" property is always required.
++
++The Devicetree schemas don't exactly match the YAML encoded DT data produced by
++dtc. They are simplified to make them more compact and avoid a bunch of
++boilerplate. The tools process the schema files to produce the final schema for
++validation. There are currently 2 transformations the tools perform.
++
++The default for arrays in json-schema is they are variable sized and allow more
++entries than explicitly defined. This can be restricted by defining 'minItems',
++'maxItems', and 'additionalItems'. However, for DeviceTree Schemas, a fixed
++size is desired in most cases, so these properties are added based on the
++number of entries in an 'items' list.
++
++The YAML Devicetree format also makes all string values an array and scalar
++values a matrix (in order to define groupings) even when only a single value
++is present. Single entries in schemas are fixed up to match this encoding.
++
++Testing
++-------
++
++Dependencies
++~~~~~~~~~~~~
++
++The DT schema project must be installed in order to validate the DT schema
++binding documents and validate DTS files using the DT schema. The DT schema
++project can be installed with pip::
++
++    pip3 install git+https://github.com/devicetree-org/dt-schema.git@master
++
++dtc must also be built with YAML output support enabled. This requires that
++libyaml and its headers be installed on the host system.
++
++Running checks
++~~~~~~~~~~~~~~
++
++The DT schema binding documents must be validated using the meta-schema (the
++schema for the schema) to ensure they are both valid json-schema and valid
++binding schema. All of the DT binding documents can be validated using the
++``dt_binding_check`` target::
++
++    make dt_binding_check
++
++In order to perform validation of DT source files, use the `dtbs_check` target::
++
++    make dtbs_check
++
++This will first run the `dt_binding_check` which generates the processed schema.
++
++It is also possible to run checks with a single schema file by setting the
++``DT_SCHEMA_FILES`` variable to a specific schema file.
++
++::
++
++    make dtbs_check DT_SCHEMA_FILES=Documentation/devicetree/bindings/trivial-devices.yaml
++
++
++json-schema Resources
++---------------------
++
++
++`JSON-Schema Specifications <http://json-schema.org/>`_
++
++`Using JSON Schema Book <http://usingjsonschema.com/>`_
+diff --git a/Documentation/filesystems/ubifs-authentication.md b/Documentation/filesystems/ubifs-authentication.rst
+similarity index 95%
+rename from Documentation/filesystems/ubifs-authentication.md
+rename to Documentation/filesystems/ubifs-authentication.rst
+index 23e698167141..6a9584f6ff46 100644
+--- a/Documentation/filesystems/ubifs-authentication.md
++++ b/Documentation/filesystems/ubifs-authentication.rst
+@@ -1,8 +1,11 @@
+-% UBIFS Authentication
+-% sigma star gmbh
+-% 2018
++:orphan:
+ 
+-# Introduction
++.. UBIFS Authentication
++.. sigma star gmbh
++.. 2018
++
++Introduction
++============
+ 
+ UBIFS utilizes the fscrypt framework to provide confidentiality for file
+ contents and file names. This prevents attacks where an attacker is able to
+@@ -33,7 +36,8 @@ existing features like key derivation can be utilized. It should however also
+ be possible to use UBIFS authentication without using encryption.
+ 
+ 
+-## MTD, UBI & UBIFS
++MTD, UBI & UBIFS
++----------------
+ 
+ On Linux, the MTD (Memory Technology Devices) subsystem provides a uniform
+ interface to access raw flash devices. One of the more prominent subsystems that
+@@ -47,7 +51,7 @@ UBIFS is a filesystem for raw flash which operates on top of UBI. Thus, wear
+ leveling and some flash specifics are left to UBI, while UBIFS focuses on
+ scalability, performance and recoverability.
+ 
+-
++::
+ 
+ 	+------------+ +*******+ +-----------+ +-----+
+ 	|            | * UBIFS * | UBI-BLOCK | | ... |
+@@ -84,7 +88,8 @@ persisted onto the flash directly. More details on UBIFS can also be found in
+ [UBIFS-WP].
+ 
+ 
+-### UBIFS Index & Tree Node Cache
++UBIFS Index & Tree Node Cache
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ Basic on-flash UBIFS entities are called *nodes*. UBIFS knows different types
+ of nodes. Eg. data nodes (`struct ubifs_data_node`) which store chunks of file
+@@ -118,17 +123,18 @@ on-flash filesystem structures like the index. On every commit, the TNC nodes
+ marked as dirty are written to the flash to update the persisted index.
+ 
+ 
+-### Journal
++Journal
++~~~~~~~
+ 
+ To avoid wearing out the flash, the index is only persisted (*commited*) when
+-certain conditions are met (eg. `fsync(2)`). The journal is used to record
++certain conditions are met (eg. ``fsync(2)``). The journal is used to record
+ any changes (in form of inode nodes, data nodes etc.) between commits
+ of the index. During mount, the journal is read from the flash and replayed
+ onto the TNC (which will be created on-demand from the on-flash index).
+ 
+ UBIFS reserves a bunch of LEBs just for the journal called *log area*. The
+ amount of log area LEBs is configured on filesystem creation (using
+-`mkfs.ubifs`) and stored in the superblock node. The log area contains only
++``mkfs.ubifs``) and stored in the superblock node. The log area contains only
+ two types of nodes: *reference nodes* and *commit start nodes*. A commit start
+ node is written whenever an index commit is performed. Reference nodes are
+ written on every journal update. Each reference node points to the position of
+@@ -152,6 +158,7 @@ done for the last referenced LEB of the journal. Only this can become corrupt
+ because of a power cut. If the recovery fails, UBIFS will not mount. An error
+ for every other LEB will directly cause UBIFS to fail the mount operation.
+ 
++::
+ 
+        | ----    LOG AREA     ---- | ----------    MAIN AREA    ------------ |
+ 
+@@ -172,10 +179,11 @@ for every other LEB will directly cause UBIFS to fail the mount operation.
+                           containing their buds
+ 
+ 
+-### LEB Property Tree/Table
++LEB Property Tree/Table
++~~~~~~~~~~~~~~~~~~~~~~~
+ 
+ The LEB property tree is used to store per-LEB information. This includes the
+-LEB type and amount of free and *dirty* (old, obsolete content) space [1] on
++LEB type and amount of free and *dirty* (old, obsolete content) space [1]_ on
+ the LEB. The type is important, because UBIFS never mixes index nodes with data
+ nodes on a single LEB and thus each LEB has a specific purpose. This again is
+ useful for free space calculations. See [UBIFS-WP] for more details.
+@@ -185,19 +193,21 @@ index. Due to its smaller size it is always written as one chunk on every
+ commit. Thus, saving the LPT is an atomic operation.
+ 
+ 
+-[1] Since LEBs can only be appended and never overwritten, there is a
+-difference between free space ie. the remaining space left on the LEB to be
+-written to without erasing it and previously written content that is obsolete
+-but can't be overwritten without erasing the full LEB.
++.. [1] Since LEBs can only be appended and never overwritten, there is a
++   difference between free space ie. the remaining space left on the LEB to be
++   written to without erasing it and previously written content that is obsolete
++   but can't be overwritten without erasing the full LEB.
+ 
+ 
+-# UBIFS Authentication
++UBIFS Authentication
++====================
+ 
+ This chapter introduces UBIFS authentication which enables UBIFS to verify
+ the authenticity and integrity of metadata and file contents stored on flash.
+ 
+ 
+-## Threat Model
++Threat Model
++------------
+ 
+ UBIFS authentication enables detection of offline data modification. While it
+ does not prevent it, it enables (trusted) code to check the integrity and
+@@ -224,7 +234,8 @@ Additional measures like secure boot and trusted boot have to be taken to
+ ensure that only trusted code is executed on a device.
+ 
+ 
+-## Authentication
++Authentication
++--------------
+ 
+ To be able to fully trust data read from flash, all UBIFS data structures
+ stored on flash are authenticated. That is:
+@@ -236,7 +247,8 @@ stored on flash are authenticated. That is:
+ - The LPT which stores UBI LEB metadata which UBIFS uses for free space accounting
+ 
+ 
+-### Index Authentication
++Index Authentication
++~~~~~~~~~~~~~~~~~~~~
+ 
+ Through UBIFS' concept of a wandering tree, it already takes care of only
+ updating and persisting changed parts from leaf node up to the root node
+@@ -260,6 +272,7 @@ include a hash. All other types of nodes will remain unchanged. This reduces
+ the storage overhead which is precious for users of UBIFS (ie. embedded
+ devices).
+ 
++::
+ 
+                              +---------------+
+                              |  Master Node  |
+@@ -303,7 +316,8 @@ hashes to index nodes does not change this since each hash will be persisted
+ atomically together with its respective node.
+ 
+ 
+-### Journal Authentication
++Journal Authentication
++~~~~~~~~~~~~~~~~~~~~~~
+ 
+ The journal is authenticated too. Since the journal is continuously written
+ it is necessary to also add authentication information frequently to the
+@@ -316,7 +330,7 @@ of the hash chain. That way a journal can be authenticated up to the last
+ authentication node. The tail of the journal which may not have a authentication
+ node cannot be authenticated and is skipped during journal replay.
+ 
+-We get this picture for journal authentication:
++We get this picture for journal authentication::
+ 
+     ,,,,,,,,
+     ,......,...........................................
+@@ -352,7 +366,8 @@ the superblock struct. The superblock node is stored in LEB 0 and is only
+ modified on feature flag or similar changes, but never on file changes.
+ 
+ 
+-### LPT Authentication
++LPT Authentication
++~~~~~~~~~~~~~~~~~~
+ 
+ The location of the LPT root node on the flash is stored in the UBIFS master
+ node. Since the LPT is written and read atomically on every commit, there is
+@@ -363,7 +378,8 @@ be verified by verifying the authenticity of the master node and comparing the
+ LTP hash stored there with the hash computed from the read on-flash LPT.
+ 
+ 
+-## Key Management
++Key Management
++--------------
+ 
+ For simplicity, UBIFS authentication uses a single key to compute the HMACs
+ of superblock, master, commit start and reference nodes. This key has to be
+@@ -399,7 +415,8 @@ approach is similar to the approach proposed for fscrypt encryption policy v2
+ [FSCRYPT-POLICY2].
+ 
+ 
+-# Future Extensions
++Future Extensions
++=================
+ 
+ In certain cases where a vendor wants to provide an authenticated filesystem
+ image to customers, it should be possible to do so without sharing the secret
+@@ -411,7 +428,8 @@ to the way the IMA/EVM subsystem deals with such situations. The HMAC key
+ will then have to be provided beforehand in the normal way.
+ 
+ 
+-# References
++References
++==========
+ 
+ [CRYPTSETUP2]        http://www.saout.de/pipermail/dm-crypt/2017-November/005745.html
+ 
 -- 
 2.21.0
-
 
