@@ -2,86 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1AD407229A
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2019 00:50:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 52DB5722D1
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2019 01:07:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389636AbfGWWug (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Jul 2019 18:50:36 -0400
-Received: from mail105.syd.optusnet.com.au ([211.29.132.249]:47339 "EHLO
-        mail105.syd.optusnet.com.au" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1732011AbfGWWug (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Jul 2019 18:50:36 -0400
-X-Greylist: delayed 1662 seconds by postgrey-1.27 at vger.kernel.org; Tue, 23 Jul 2019 18:50:35 EDT
-Received: from dread.disaster.area (pa49-195-139-63.pa.nsw.optusnet.com.au [49.195.139.63])
-        by mail105.syd.optusnet.com.au (Postfix) with ESMTPS id B095A2AD85A;
-        Wed, 24 Jul 2019 08:22:49 +1000 (AEST)
-Received: from dave by dread.disaster.area with local (Exim 4.92)
-        (envelope-from <david@fromorbit.com>)
-        id 1hq3AE-0003mj-Ey; Wed, 24 Jul 2019 08:21:42 +1000
-Date:   Wed, 24 Jul 2019 08:21:42 +1000
-From:   Dave Chinner <david@fromorbit.com>
-To:     Sheriff Esseson <sheriffesseson@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        "Darrick J. Wong" <darrick.wong@oracle.com>,
-        "supporter:XFS FILESYSTEM" <linux-xfs@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        open list <linux-kernel@vger.kernel.org>,
-        skhan@linuxfoundation.org,
-        linux-kernel-mentees@lists.linuxfoundation.org
-Subject: Re: [PATCH] Documentation: filesystem: fix "Removed Sysctls" table
-Message-ID: <20190723222142.GS7689@dread.disaster.area>
-References: <20190723114813.GA14870@localhost>
- <20190723074218.4532737f@lwn.net>
- <20190723145201.GA20658@localhost>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20190723145201.GA20658@localhost>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Optus-CM-Score: 0
-X-Optus-CM-Analysis: v=2.2 cv=P6RKvmIu c=1 sm=1 tr=0 cx=a_idp_d
-        a=fNT+DnnR6FjB+3sUuX8HHA==:117 a=fNT+DnnR6FjB+3sUuX8HHA==:17
-        a=jpOVt7BSZ2e4Z31A5e1TngXxSK0=:19 a=kj9zAlcOel0A:10 a=0o9FgrsRnhwA:10
-        a=pGLkceISAAAA:8 a=7-415B0cAAAA:8 a=rzqIo9VfzmB4bOlvi8MA:9
-        a=CjuIK1q_8ugA:10 a=igBNqPyMv6gA:10 a=biEYGPWJfzWAr4FL6Ov7:22
+        id S1726251AbfGWXGx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Jul 2019 19:06:53 -0400
+Received: from mail-pg1-f201.google.com ([209.85.215.201]:37875 "EHLO
+        mail-pg1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726217AbfGWXGx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Jul 2019 19:06:53 -0400
+Received: by mail-pg1-f201.google.com with SMTP id n9so23516471pgq.4
+        for <linux-doc@vger.kernel.org>; Tue, 23 Jul 2019 16:06:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=ypAciFLqcuJHhZlJfd3b9E/UNSP51lkN8ppY3+9yiV0=;
+        b=WQ3iNnYoSyu7xtrItLgp020OuxDdO2/iRV2uuk27rT/z0T/Ivgp2t0qpnjUQnutvGO
+         Kht4XkxfyI82pAf7iBAmzpAh3bma+GsOP/lWEILbL8XGZCUWOfR+zOJEZO+LCwqW1+0J
+         re12tXsPG1ZGIxtefWTTHZ0rmoSeptTv50oNwbBi/yxdBR8eGzy6vE71M02BrWaMSa2m
+         Wz74TCUFRRT36yUx5zDCm4LFO0AviBkQ0V64+68mNDKlBkz8NiEXI6tSXKyDDGRXxRym
+         +gBXn/6aa1ixajprqf1Gcl0vH57WykEURFDVSYksJJH5tW7lbed6XcGlVblOav8mCxix
+         p45A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=ypAciFLqcuJHhZlJfd3b9E/UNSP51lkN8ppY3+9yiV0=;
+        b=Mdez0uTJwgbfyMslhAuunoAFPY3bdD1laTbaJ7V5kHzfuuYT79SSRP87oztAI09BBK
+         cYL9UCQvgvxItKaiN8G5PbYr3SWUBE3xeiE0qCE0diHpGV32t4UvnRFtZh6X3m9yEdeR
+         JpQsh2cR0yLZHY1wkNX2N85QEhQCMOyMqxk2NIVS8i716uITnHW2NwNi00BDm3Kk6sfE
+         1vS08kl4WATbrW7GuJt5L0UppZbz/iJKQfm0FBctKvdSmNM2FRo/YCYLCdVI8kxvN6AN
+         7fun87m3isMCqv3hk1GlYriG4ljhdwu62EgOcBnL8m7hgXOzdrbDZe3z341sgoCvWI9v
+         2tWg==
+X-Gm-Message-State: APjAAAU02j4E+Bfh5A4vFPsLTEAv2Hf8z2ukz3gozUcWEtccjZHyrqXi
+        HsI0z5UlMW87ejDSdpvAUAWjsmld1Ao=
+X-Google-Smtp-Source: APXvYqwz+0x7RONeJbKjUnRXjeymxUnQSwmgLwpHeeoqm1M6i5wivZrMYqkPk7JDlsvHSKoQHeWXu8isL0I=
+X-Received: by 2002:a63:1c22:: with SMTP id c34mr78125523pgc.56.1563923212254;
+ Tue, 23 Jul 2019 16:06:52 -0700 (PDT)
+Date:   Tue, 23 Jul 2019 16:05:26 -0700
+Message-Id: <20190723230529.251659-1-drosen@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.22.0.657.g960e92d24f-goog
+Subject: [PATCH v4 0/3] Casefolding in F2FS
+From:   Daniel Rosenberg <drosen@google.com>
+To:     Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-f2fs-devel@lists.sourceforge.net
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-api@vger.kernel.org,
+        kernel-team@android.com, Daniel Rosenberg <drosen@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jul 23, 2019 at 03:52:01PM +0100, Sheriff Esseson wrote:
-> On Tue, Jul 23, 2019 at 07:42:18AM -0600, Jonathan Corbet wrote:
-> > On Tue, 23 Jul 2019 12:48:13 +0100
-> > Sheriff Esseson <sheriffesseson@gmail.com> wrote:
-> > 
-> > > the "Removed Sysctls" section is a table - bring it alive with ReST.
-> > > 
-> > > Signed-off-by: Sheriff Esseson <sheriffesseson@gmail.com>
-> > 
-> > So this appears to be identical to the patch you sent three days ago; is
-> > there a reason why you are sending it again now?
-> > 
-> > Thanks,
-> > 
-> > jon
-> 
-> Sorry, I was think the patch went unnoticed during the merge window - I could
-> not find a response.
+These patches are largely based on the casefolding patches for ext4
 
-The correct thing to do in that case is to reply to the original
-patch and ask if it has been looked at. The usual way of doing this
-is quoting the commit message and replying with a "Ping?" comment
-to bump it back to the top of everyone's mail stacks.
+v4: Added FS_CASEFOLD_FL flag, added documentation that escaped the last
+    format-patch, moved setting dentry ops to f2fs_setup_casefold
+v3: Addressed feedback, apart from F2FS_CASEFOLD_FL/FS_CASEFOLD_FL
+    Added sysfs file "encoding" to see the encoding set on a filesystem
+v2: Rebased patches again master, changed f2fs_msg to f2fs_info/f2fs_err
 
-But, again, 3 days is not a long time, people tend to be extremely
-busy and might take a few days to get to reviewing non-critical
-changes, and people may not even review patches during the merge
-window. I'd suggest waiting a week before pinging a patch you've
-sent if there's been no response....
+Daniel Rosenberg (3):
+  fs: Reserve flag for casefolding
+  f2fs: include charset encoding information in the superblock
+  f2fs: Support case-insensitive file name lookups
 
-Cheers,
+ Documentation/ABI/testing/sysfs-fs-f2fs |   7 ++
+ Documentation/filesystems/f2fs.txt      |   3 +
+ fs/f2fs/dir.c                           | 126 ++++++++++++++++++++++--
+ fs/f2fs/f2fs.h                          |  21 +++-
+ fs/f2fs/file.c                          |  16 ++-
+ fs/f2fs/hash.c                          |  35 ++++++-
+ fs/f2fs/inline.c                        |   4 +-
+ fs/f2fs/inode.c                         |   4 +-
+ fs/f2fs/namei.c                         |  21 ++++
+ fs/f2fs/super.c                         |  96 ++++++++++++++++++
+ fs/f2fs/sysfs.c                         |  23 +++++
+ include/linux/f2fs_fs.h                 |   9 +-
+ include/uapi/linux/fs.h                 |   1 +
+ tools/include/uapi/linux/fs.h           |   1 +
+ 14 files changed, 347 insertions(+), 20 deletions(-)
 
-Dave.
 -- 
-Dave Chinner
-david@fromorbit.com
+2.22.0.657.g960e92d24f-goog
+
