@@ -2,47 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 52DB5722D1
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2019 01:07:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2D7DD722CE
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2019 01:07:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726251AbfGWXGx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Jul 2019 19:06:53 -0400
-Received: from mail-pg1-f201.google.com ([209.85.215.201]:37875 "EHLO
-        mail-pg1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726217AbfGWXGx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Jul 2019 19:06:53 -0400
-Received: by mail-pg1-f201.google.com with SMTP id n9so23516471pgq.4
-        for <linux-doc@vger.kernel.org>; Tue, 23 Jul 2019 16:06:53 -0700 (PDT)
+        id S1726333AbfGWXG4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Jul 2019 19:06:56 -0400
+Received: from mail-pf1-f201.google.com ([209.85.210.201]:43479 "EHLO
+        mail-pf1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726327AbfGWXGz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Jul 2019 19:06:55 -0400
+Received: by mail-pf1-f201.google.com with SMTP id 6so27202057pfz.10
+        for <linux-doc@vger.kernel.org>; Tue, 23 Jul 2019 16:06:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
-        h=date:message-id:mime-version:subject:from:to:cc;
-        bh=ypAciFLqcuJHhZlJfd3b9E/UNSP51lkN8ppY3+9yiV0=;
-        b=WQ3iNnYoSyu7xtrItLgp020OuxDdO2/iRV2uuk27rT/z0T/Ivgp2t0qpnjUQnutvGO
-         Kht4XkxfyI82pAf7iBAmzpAh3bma+GsOP/lWEILbL8XGZCUWOfR+zOJEZO+LCwqW1+0J
-         re12tXsPG1ZGIxtefWTTHZ0rmoSeptTv50oNwbBi/yxdBR8eGzy6vE71M02BrWaMSa2m
-         Wz74TCUFRRT36yUx5zDCm4LFO0AviBkQ0V64+68mNDKlBkz8NiEXI6tSXKyDDGRXxRym
-         +gBXn/6aa1ixajprqf1Gcl0vH57WykEURFDVSYksJJH5tW7lbed6XcGlVblOav8mCxix
-         p45A==
+        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
+         :cc;
+        bh=yhEVR+lyaQktfxSLQ/EB+rshNGy8yD7d36OlQswd69s=;
+        b=MpvWJogDMmHQ2qrE16nKlM51a8S8juN4VRqWI7Y7hxGArHYnoMo171MSqnp0UMAbiY
+         M4ZsiHyFZy+tNob1BA48IiEW2FawnZr/tAXd6fH1yDW/ZoZIPdrX9l6ar2QptSWdyI2V
+         qcDLq3uh/BjJUYlgGyyuZlq7GfmtcSL3jXsz7W1gc6vo0xB1iBOY6ibHPOOl2DnhJ7yT
+         +nlx8f/YSL4dLcVNxGGhh2uN6Ahy+VlBKv3B1YJDLXSuS+zi3htFgNC4QyUi0OaVNKjb
+         jfpP5V44L+Q65wwreiOiNTae0K3lqfR62T9zMCxFQbkDqkY2fQx6b1MBPVChbBDHy51s
+         HkFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-        bh=ypAciFLqcuJHhZlJfd3b9E/UNSP51lkN8ppY3+9yiV0=;
-        b=Mdez0uTJwgbfyMslhAuunoAFPY3bdD1laTbaJ7V5kHzfuuYT79SSRP87oztAI09BBK
-         cYL9UCQvgvxItKaiN8G5PbYr3SWUBE3xeiE0qCE0diHpGV32t4UvnRFtZh6X3m9yEdeR
-         JpQsh2cR0yLZHY1wkNX2N85QEhQCMOyMqxk2NIVS8i716uITnHW2NwNi00BDm3Kk6sfE
-         1vS08kl4WATbrW7GuJt5L0UppZbz/iJKQfm0FBctKvdSmNM2FRo/YCYLCdVI8kxvN6AN
-         7fun87m3isMCqv3hk1GlYriG4ljhdwu62EgOcBnL8m7hgXOzdrbDZe3z341sgoCvWI9v
-         2tWg==
-X-Gm-Message-State: APjAAAU02j4E+Bfh5A4vFPsLTEAv2Hf8z2ukz3gozUcWEtccjZHyrqXi
-        HsI0z5UlMW87ejDSdpvAUAWjsmld1Ao=
-X-Google-Smtp-Source: APXvYqwz+0x7RONeJbKjUnRXjeymxUnQSwmgLwpHeeoqm1M6i5wivZrMYqkPk7JDlsvHSKoQHeWXu8isL0I=
-X-Received: by 2002:a63:1c22:: with SMTP id c34mr78125523pgc.56.1563923212254;
- Tue, 23 Jul 2019 16:06:52 -0700 (PDT)
-Date:   Tue, 23 Jul 2019 16:05:26 -0700
-Message-Id: <20190723230529.251659-1-drosen@google.com>
+        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
+         :references:subject:from:to:cc;
+        bh=yhEVR+lyaQktfxSLQ/EB+rshNGy8yD7d36OlQswd69s=;
+        b=lOqRRmLokx8DK+JlagsvTy6vbLdm56ij5kZD2O+wlZHicsNFYgBR5InTvgAq6NP4rr
+         LVssYV1NXRhHCgB3z/sA+jFyqbsuSYl1P+FlPzPeSx2KUeIPqfIJqxWvj6ArPLBnYuNA
+         U/BHULgJv+AIQZ3F9wQ0K/BLplHPdVMqWXlKplD8UArjMzUZdw56o3jI2gC9vThQttaT
+         zZFPHyvtvjd3qhHQbwqr5q3JNkeZk6dt9WRDpgja/W1cONwOS7/tAZ3UVg+I941oBDx9
+         0Sk5si0ANoY14eq8nCann6QOt1HA+UkCDpwf8BSyH80acoW5K6hDxGdt98UrNoSFa4+8
+         ocPA==
+X-Gm-Message-State: APjAAAV34qczoBX5UcDhnryZqhL7eMkrZFnCqesCNNhE31rWYz1W/caN
+        e92WSE4LHaxms/NQt4NrkQ+OUK2+fsg=
+X-Google-Smtp-Source: APXvYqxw57uNDKnlnh6qfncy9p6M/AL26AsgzE3ddNVSUXTIoicDTMYvXmTOpYQ5xpgukSD1KAWW9WK21Qs=
+X-Received: by 2002:a63:7a06:: with SMTP id v6mr79320562pgc.115.1563923214813;
+ Tue, 23 Jul 2019 16:06:54 -0700 (PDT)
+Date:   Tue, 23 Jul 2019 16:05:27 -0700
+In-Reply-To: <20190723230529.251659-1-drosen@google.com>
+Message-Id: <20190723230529.251659-2-drosen@google.com>
 Mime-Version: 1.0
+References: <20190723230529.251659-1-drosen@google.com>
 X-Mailer: git-send-email 2.22.0.657.g960e92d24f-goog
-Subject: [PATCH v4 0/3] Casefolding in F2FS
+Subject: [PATCH v4 1/3] fs: Reserve flag for casefolding
 From:   Daniel Rosenberg <drosen@google.com>
 To:     Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <yuchao0@huawei.com>,
         Jonathan Corbet <corbet@lwn.net>,
@@ -56,35 +60,39 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-These patches are largely based on the casefolding patches for ext4
+In preparation for including the casefold feature within f2fs, elevate
+the EXT4_CASEFOLD_FL flag to FS_CASEFOLD_FL.
 
-v4: Added FS_CASEFOLD_FL flag, added documentation that escaped the last
-    format-patch, moved setting dentry ops to f2fs_setup_casefold
-v3: Addressed feedback, apart from F2FS_CASEFOLD_FL/FS_CASEFOLD_FL
-    Added sysfs file "encoding" to see the encoding set on a filesystem
-v2: Rebased patches again master, changed f2fs_msg to f2fs_info/f2fs_err
+Signed-off-by: Daniel Rosenberg <drosen@google.com>
+---
+ include/uapi/linux/fs.h       | 1 +
+ tools/include/uapi/linux/fs.h | 1 +
+ 2 files changed, 2 insertions(+)
 
-Daniel Rosenberg (3):
-  fs: Reserve flag for casefolding
-  f2fs: include charset encoding information in the superblock
-  f2fs: Support case-insensitive file name lookups
-
- Documentation/ABI/testing/sysfs-fs-f2fs |   7 ++
- Documentation/filesystems/f2fs.txt      |   3 +
- fs/f2fs/dir.c                           | 126 ++++++++++++++++++++++--
- fs/f2fs/f2fs.h                          |  21 +++-
- fs/f2fs/file.c                          |  16 ++-
- fs/f2fs/hash.c                          |  35 ++++++-
- fs/f2fs/inline.c                        |   4 +-
- fs/f2fs/inode.c                         |   4 +-
- fs/f2fs/namei.c                         |  21 ++++
- fs/f2fs/super.c                         |  96 ++++++++++++++++++
- fs/f2fs/sysfs.c                         |  23 +++++
- include/linux/f2fs_fs.h                 |   9 +-
- include/uapi/linux/fs.h                 |   1 +
- tools/include/uapi/linux/fs.h           |   1 +
- 14 files changed, 347 insertions(+), 20 deletions(-)
-
+diff --git a/include/uapi/linux/fs.h b/include/uapi/linux/fs.h
+index 59c71fa8c553a..2a616aa3f6862 100644
+--- a/include/uapi/linux/fs.h
++++ b/include/uapi/linux/fs.h
+@@ -311,6 +311,7 @@ struct fscrypt_key {
+ #define FS_NOCOW_FL			0x00800000 /* Do not cow file */
+ #define FS_INLINE_DATA_FL		0x10000000 /* Reserved for ext4 */
+ #define FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
++#define FS_CASEFOLD_FL			0x40000000 /* Folder is case insensitive */
+ #define FS_RESERVED_FL			0x80000000 /* reserved for ext2 lib */
+ 
+ #define FS_FL_USER_VISIBLE		0x0003DFFF /* User visible flags */
+diff --git a/tools/include/uapi/linux/fs.h b/tools/include/uapi/linux/fs.h
+index 59c71fa8c553a..2a616aa3f6862 100644
+--- a/tools/include/uapi/linux/fs.h
++++ b/tools/include/uapi/linux/fs.h
+@@ -311,6 +311,7 @@ struct fscrypt_key {
+ #define FS_NOCOW_FL			0x00800000 /* Do not cow file */
+ #define FS_INLINE_DATA_FL		0x10000000 /* Reserved for ext4 */
+ #define FS_PROJINHERIT_FL		0x20000000 /* Create with parents projid */
++#define FS_CASEFOLD_FL			0x40000000 /* Folder is case insensitive */
+ #define FS_RESERVED_FL			0x80000000 /* reserved for ext2 lib */
+ 
+ #define FS_FL_USER_VISIBLE		0x0003DFFF /* User visible flags */
 -- 
 2.22.0.657.g960e92d24f-goog
 
