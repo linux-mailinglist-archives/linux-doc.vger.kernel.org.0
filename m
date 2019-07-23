@@ -2,191 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8A500710E4
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jul 2019 07:10:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5748C71192
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jul 2019 08:05:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732932AbfGWFKU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Jul 2019 01:10:20 -0400
-Received: from mga05.intel.com ([192.55.52.43]:1868 "EHLO mga05.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727735AbfGWFKU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 23 Jul 2019 01:10:20 -0400
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 22 Jul 2019 22:10:19 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.64,297,1559545200"; 
-   d="scan'208";a="196992413"
-Received: from hao-dev.bj.intel.com ([10.238.157.65])
-  by fmsmga002.fm.intel.com with ESMTP; 22 Jul 2019 22:10:17 -0700
-From:   Wu Hao <hao.wu@intel.com>
-To:     gregkh@linuxfoundation.org, mdf@kernel.org,
-        linux-fpga@vger.kernel.org
-Cc:     linux-kernel@vger.kernel.org, linux-api@vger.kernel.org,
-        linux-doc@vger.kernel.org, atull@kernel.org,
-        Wu Hao <hao.wu@intel.com>, Xu Yilun <yilun.xu@intel.com>
-Subject: [PATCH v3 12/12] Documentation: fpga: dfl: add descriptions for virtualization and new interfaces.
-Date:   Tue, 23 Jul 2019 12:51:35 +0800
-Message-Id: <1563857495-26692-13-git-send-email-hao.wu@intel.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1563857495-26692-1-git-send-email-hao.wu@intel.com>
-References: <1563857495-26692-1-git-send-email-hao.wu@intel.com>
+        id S2387580AbfGWGFa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Jul 2019 02:05:30 -0400
+Received: from mx2.suse.de ([195.135.220.15]:49662 "EHLO mx1.suse.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1725788AbfGWGFa (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 23 Jul 2019 02:05:30 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx1.suse.de (Postfix) with ESMTP id 817ADAF35;
+        Tue, 23 Jul 2019 06:05:27 +0000 (UTC)
+Date:   Tue, 23 Jul 2019 08:05:25 +0200
+From:   Michal Hocko <mhocko@kernel.org>
+To:     "Joel Fernandes (Google)" <joel@joelfernandes.org>
+Cc:     linux-kernel@vger.kernel.org, vdavydov.dev@gmail.com,
+        Brendan Gregg <bgregg@netflix.com>, kernel-team@android.com,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        carmenjackson@google.com, Christian Hansen <chansen3@cisco.com>,
+        Colin Ian King <colin.king@canonical.com>, dancol@google.com,
+        David Howells <dhowells@redhat.com>, fmayer@google.com,
+        joaodias@google.com, joelaf@google.com,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Kirill Tkhai <ktkhai@virtuozzo.com>,
+        Konstantin Khlebnikov <khlebnikov@yandex-team.ru>,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-mm@kvack.org, Mike Rapoport <rppt@linux.ibm.com>,
+        minchan@google.com, minchan@kernel.org, namhyung@google.com,
+        sspatil@google.com, surenb@google.com,
+        Thomas Gleixner <tglx@linutronix.de>, timmurray@google.com,
+        tkjos@google.com, Vlastimil Babka <vbabka@suse.cz>, wvw@google.com,
+        linux-api@vger.kernel.org
+Subject: Re: [PATCH v1 1/2] mm/page_idle: Add support for per-pid page_idle
+ using virtual indexing
+Message-ID: <20190723060525.GA4552@dhcp22.suse.cz>
+References: <20190722213205.140845-1-joel@joelfernandes.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190722213205.140845-1-joel@joelfernandes.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch adds virtualization support description for DFL based
-FPGA devices (based on PCIe SRIOV), and introductions to new
-interfaces added by new dfl private feature drivers.
+[Cc linux-api - please always do CC this list when introducing a user
+ visible API]
 
-[mdf@kernel.org: Fixed up to make it work with new reStructuredText docs]
-Signed-off-by: Xu Yilun <yilun.xu@intel.com>
-Signed-off-by: Wu Hao <hao.wu@intel.com>
-Acked-by: Alan Tull <atull@kernel.org>
-Signed-off-by: Moritz Fischer <mdf@kernel.org>
----
- Documentation/fpga/dfl.rst | 105 +++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 105 insertions(+)
+On Mon 22-07-19 17:32:04, Joel Fernandes (Google) wrote:
+> The page_idle tracking feature currently requires looking up the pagemap
+> for a process followed by interacting with /sys/kernel/mm/page_idle.
+> This is quite cumbersome and can be error-prone too. If between
+> accessing the per-PID pagemap and the global page_idle bitmap, if
+> something changes with the page then the information is not accurate.
+> More over looking up PFN from pagemap in Android devices is not
+> supported by unprivileged process and requires SYS_ADMIN and gives 0 for
+> the PFN.
+> 
+> This patch adds support to directly interact with page_idle tracking at
+> the PID level by introducing a /proc/<pid>/page_idle file. This
+> eliminates the need for userspace to calculate the mapping of the page.
+> It follows the exact same semantics as the global
+> /sys/kernel/mm/page_idle, however it is easier to use for some usecases
+> where looking up PFN is not needed and also does not require SYS_ADMIN.
+> It ended up simplifying userspace code, solving the security issue
+> mentioned and works quite well. SELinux does not need to be turned off
+> since no pagemap look up is needed.
+> 
+> In Android, we are using this for the heap profiler (heapprofd) which
+> profiles and pin points code paths which allocates and leaves memory
+> idle for long periods of time.
+> 
+> Documentation material:
+> The idle page tracking API for virtual address indexing using virtual page
+> frame numbers (VFN) is located at /proc/<pid>/page_idle. It is a bitmap
+> that follows the same semantics as /sys/kernel/mm/page_idle/bitmap
+> except that it uses virtual instead of physical frame numbers.
+> 
+> This idle page tracking API can be simpler to use than physical address
+> indexing, since the pagemap for a process does not need to be looked up
+> to mark or read a page's idle bit. It is also more accurate than
+> physical address indexing since in physical address indexing, address
+> space changes can occur between reading the pagemap and reading the
+> bitmap. In virtual address indexing, the process's mmap_sem is held for
+> the duration of the access.
 
-diff --git a/Documentation/fpga/dfl.rst b/Documentation/fpga/dfl.rst
-index 2f125ab..6fa483f 100644
---- a/Documentation/fpga/dfl.rst
-+++ b/Documentation/fpga/dfl.rst
-@@ -87,6 +87,8 @@ The following functions are exposed through ioctls:
- - Get driver API version (DFL_FPGA_GET_API_VERSION)
- - Check for extensions (DFL_FPGA_CHECK_EXTENSION)
- - Program bitstream (DFL_FPGA_FME_PORT_PR)
-+- Assign port to PF (DFL_FPGA_FME_PORT_ASSIGN)
-+- Release port from PF (DFL_FPGA_FME_PORT_RELEASE)
- 
- More functions are exposed through sysfs
- (/sys/class/fpga_region/regionX/dfl-fme.n/):
-@@ -102,6 +104,10 @@ More functions are exposed through sysfs
-      one FPGA device may have more than one port, this sysfs interface indicates
-      how many ports the FPGA device has.
- 
-+ Global error reporting management (errors/)
-+     error reporting sysfs interfaces allow user to read errors detected by the
-+     hardware, and clear the logged errors.
-+
- 
- FIU - PORT
- ==========
-@@ -143,6 +149,10 @@ More functions are exposed through sysfs:
-  Read Accelerator GUID (afu_id)
-      afu_id indicates which PR bitstream is programmed to this AFU.
- 
-+ Error reporting (errors/)
-+     error reporting sysfs interfaces allow user to read port/afu errors
-+     detected by the hardware, and clear the logged errors.
-+
- 
- DFL Framework Overview
- ======================
-@@ -218,6 +228,101 @@ the compat_id exposed by the target FPGA region. This check is usually done by
- userspace before calling the reconfiguration IOCTL.
- 
- 
-+FPGA virtualization - PCIe SRIOV
-+================================
-+This section describes the virtualization support on DFL based FPGA device to
-+enable accessing an accelerator from applications running in a virtual machine
-+(VM). This section only describes the PCIe based FPGA device with SRIOV support.
-+
-+Features supported by the particular FPGA device are exposed through Device
-+Feature Lists, as illustrated below:
-+
-+::
-+
-+    +-------------------------------+  +-------------+
-+    |              PF               |  |     VF      |
-+    +-------------------------------+  +-------------+
-+        ^            ^         ^              ^
-+        |            |         |              |
-+  +-----|------------|---------|--------------|-------+
-+  |     |            |         |              |       |
-+  |  +-----+     +-------+ +-------+      +-------+   |
-+  |  | FME |     | Port0 | | Port1 |      | Port2 |   |
-+  |  +-----+     +-------+ +-------+      +-------+   |
-+  |                  ^         ^              ^       |
-+  |                  |         |              |       |
-+  |              +-------+ +------+       +-------+   |
-+  |              |  AFU  | |  AFU |       |  AFU  |   |
-+  |              +-------+ +------+       +-------+   |
-+  |                                                   |
-+  |            DFL based FPGA PCIe Device             |
-+  +---------------------------------------------------+
-+
-+FME is always accessed through the physical function (PF).
-+
-+Ports (and related AFUs) are accessed via PF by default, but could be exposed
-+through virtual function (VF) devices via PCIe SRIOV. Each VF only contains
-+1 Port and 1 AFU for isolation. Users could assign individual VFs (accelerators)
-+created via PCIe SRIOV interface, to virtual machines.
-+
-+The driver organization in virtualization case is illustrated below:
-+::
-+
-+    +-------++------++------+             |
-+    | FME   || FME  || FME  |             |
-+    | FPGA  || FPGA || FPGA |             |
-+    |Manager||Bridge||Region|             |
-+    +-------++------++------+             |
-+    +-----------------------+  +--------+ |             +--------+
-+    |          FME          |  |  AFU   | |             |  AFU   |
-+    |         Module        |  | Module | |             | Module |
-+    +-----------------------+  +--------+ |             +--------+
-+          +-----------------------+       |       +-----------------------+
-+          | FPGA Container Device |       |       | FPGA Container Device |
-+          |  (FPGA Base Region)   |       |       |  (FPGA Base Region)   |
-+          +-----------------------+       |       +-----------------------+
-+            +------------------+          |         +------------------+
-+            | FPGA PCIE Module |          | Virtual | FPGA PCIE Module |
-+            +------------------+   Host   | Machine +------------------+
-+   -------------------------------------- | ------------------------------
-+             +---------------+            |          +---------------+
-+             | PCI PF Device |            |          | PCI VF Device |
-+             +---------------+            |          +---------------+
-+
-+FPGA PCIe device driver is always loaded first once a FPGA PCIe PF or VF device
-+is detected. It:
-+
-+* Finishes enumeration on both FPGA PCIe PF and VF device using common
-+  interfaces from DFL framework.
-+* Supports SRIOV.
-+
-+The FME device driver plays a management role in this driver architecture, it
-+provides ioctls to release Port from PF and assign Port to PF. After release
-+a port from PF, then it's safe to expose this port through a VF via PCIe SRIOV
-+sysfs interface.
-+
-+To enable accessing an accelerator from applications running in a VM, the
-+respective AFU's port needs to be assigned to a VF using the following steps:
-+
-+#. The PF owns all AFU ports by default. Any port that needs to be
-+   reassigned to a VF must first be released through the
-+   DFL_FPGA_FME_PORT_RELEASE ioctl on the FME device.
-+
-+#. Once N ports are released from PF, then user can use command below
-+   to enable SRIOV and VFs. Each VF owns only one Port with AFU.
-+
-+   ::
-+
-+      echo N > $PCI_DEVICE_PATH/sriov_numvfs
-+
-+#. Pass through the VFs to VMs
-+
-+#. The AFU under VF is accessible from applications in VM (using the
-+   same driver inside the VF).
-+
-+Note that an FME can't be assigned to a VF, thus PR and other management
-+functions are only available via the PF.
-+
- Device enumeration
- ==================
- This section introduces how applications enumerate the fpga device from
+I didn't get to read the actual code but the overall idea makes sense to
+me. I can see this being useful for userspace memory management (along
+with remote MADV_PAGEOUT, MADV_COLD).
+
+Normally I would object that a cumbersome nature of the existing
+interface can be hidden in a userspace but I do agree that rowhammer has
+made this one close to unusable for anything but a privileged process.
+
+I do not think you can make any argument about accuracy because
+the information will never be accurate. Sure the race window is smaller
+in principle but you can hardly say anything about how much or whether
+at all.
+
+Thanks.
 -- 
-1.8.3.1
-
+Michal Hocko
+SUSE Labs
