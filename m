@@ -2,48 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D7FBC73B31
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2019 21:58:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 58BD773CD2
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Jul 2019 22:12:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2392050AbfGXT5l (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Jul 2019 15:57:41 -0400
-Received: from mail-pg1-f195.google.com ([209.85.215.195]:37566 "EHLO
-        mail-pg1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2392032AbfGXT5j (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Jul 2019 15:57:39 -0400
-Received: by mail-pg1-f195.google.com with SMTP id i70so10998715pgd.4
-        for <linux-doc@vger.kernel.org>; Wed, 24 Jul 2019 12:57:39 -0700 (PDT)
+        id S2391990AbfGXT52 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Jul 2019 15:57:28 -0400
+Received: from mail-pf1-f193.google.com ([209.85.210.193]:41605 "EHLO
+        mail-pf1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2391975AbfGXT52 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Jul 2019 15:57:28 -0400
+Received: by mail-pf1-f193.google.com with SMTP id m30so21471291pff.8
+        for <linux-doc@vger.kernel.org>; Wed, 24 Jul 2019 12:57:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=android.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=L1oMJfrLOhz58HDhVH6CDl46g8rPXC84FR3jYEnwlGc=;
-        b=GJbaZyZrN284EZaMgoaqSAtkOaiXvAl2Jzk1NdlCcJt1i+MCIStLfk4VLsZ2eWeOwL
-         aSM/E1tfLEiFAK3NdeyIcFcVvjWjGQQ+uWIHDhmkk8M/SBs1ETRAFe+LkroYUjhXTbx0
-         SkMLhttcCwzaCdxowZTuk5Ud6qZm6p8qg32R93rtYmLzltdBctyeCSeLDBsi9u5+AWER
-         AV37Ol3qJnqTXl7pm5LrCVzP3JTx6e+lFViT2UYI+qcEHJtGCnuRImT8Uk41RoR0AH0M
-         s96Qe7uf+LFZFOV7uPbHX2OtrfWq4tbzx0fZ8BaY8r6/+WWWq9K6m7m/ZjrazNSZSFZT
-         6e/w==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3hIqVIsW0Jzv3qlJGiJ8fmrkQndrI1bOT+U/YKeP91w=;
+        b=G5AjQYftTGGOfdkJsIj3NaLgEDUlZP91m+rouc5jJaPeUxm49PKwX+kPqwAa2V7AnB
+         2eqvQ+C2gczG8vr1SCtVrY3GUttlIvDAlx8ABZeFpls9ipL1G7U6PIwaJPjKNAV7kpmo
+         6jgCzp0OAnxEEm47X0bE/HyhjPo9UxQCuWVvm5eUgAJhqJm+DieWs6iS8XZdj98C4w8g
+         pyFf2gGtyDUzJozXaLHY18a9NtYkX/WqgTkYm6lyaBr5jHE0etxoYdBgamdu3iqzekt7
+         Pz18kON/KoDzsy9GlupQqjI9N13kcAZtWCbaE9YkAgRg1E7P1/e2tdstcOvngir6qOV/
+         NN0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=L1oMJfrLOhz58HDhVH6CDl46g8rPXC84FR3jYEnwlGc=;
-        b=OWL0O9EmhWHwLsfu7yLwJtk3MnKrnEWwNfd5n4ziwIxvszC/UsqUPbYHQ/YoXf7L31
-         UuYrmVenMPWFL0QQ5/boZFhQmuTUxE8iim5WjzIgpqX15hENOLifuoITrrThFcSQ+oWe
-         16gJAp9eTEVN3EiR/+DxrJPL9jBJKjd9RE5wtfruiZpNd8OErDGUxx44wUBR3gLpFOUj
-         o07tNBwpt1YP0tr4m9bcxwwB1CCetDgw0MaCLC1RTQNTbM0zlf1OGye2jaHHCIDujN8F
-         0mA0q2tOogKfOav8URM4XNpxbsltn973OzBRIT2PW0jQK9eSrP88myZTeYSzuqgDp8x4
-         SIyg==
-X-Gm-Message-State: APjAAAWbEp7vscJZQpxf0AcL6QDaTkIIz6ffpKVawsS3kkaEARnkrYtg
-        9cVDm4AxDJ/m3OmIhxZHpmA=
-X-Google-Smtp-Source: APXvYqy7X7TyygDWC4aF4AtmXyrL0XzYUXo6uIcdD2u7K60Xp3HzR54ZYiPqDmuME7OVT8NPmFC2Nw==
-X-Received: by 2002:a63:3147:: with SMTP id x68mr19151426pgx.212.1563998258943;
-        Wed, 24 Jul 2019 12:57:38 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=3hIqVIsW0Jzv3qlJGiJ8fmrkQndrI1bOT+U/YKeP91w=;
+        b=hfmf1QT/7KWFfiKM9nx0tAOmRqTv7amLABtAjcK3S1EUH4GfN6H/jFQIIJDmmtuorr
+         Arvoycr72Dy7dajjz7d+NhSddH1KpPJZ0nsLsaS4fNgg7uDFnUYkq4Xh9/ZzHOKoJ8pw
+         PhgoigYBKBjlfiHCjwFWbigqwY7zkFwsHn5qVwmtH4UWeVipV9Javsj1bvoWOO9JXSPQ
+         I4kqy9Pa/UIP8YkykTNJYDXF0gSQJg+/khknWalmGJgORezsqmji+B72plMUPBMeTYyn
+         AY//6SWFzCvTbeTkPrrYeNhtcbEAzNQxQmGDi6gZbuXWfB9+kUZTZ1c58rV8gn4/l8eW
+         jFDQ==
+X-Gm-Message-State: APjAAAXmrTWalp1IeMw1SRpqKnlssoYFcWBV/9pLNB7PDovOg1QtP6Cl
+        0FIWhN+k39vVJ/RlDyF+eto=
+X-Google-Smtp-Source: APXvYqzZWQoYs7Fqyx9XIWGApgxx0jM5sfYBQXgu4zGqe1/h6VS9ZqeEJKn7ZZDuvPulVlMjtuT2zA==
+X-Received: by 2002:a63:b64:: with SMTP id a36mr73284058pgl.215.1563998247307;
+        Wed, 24 Jul 2019 12:57:27 -0700 (PDT)
 Received: from nebulus.mtv.corp.google.com ([2620:15c:211:200:5404:91ba:59dc:9400])
-        by smtp.gmail.com with ESMTPSA id f88sm46307394pjg.5.2019.07.24.12.57.38
+        by smtp.gmail.com with ESMTPSA id f88sm46307394pjg.5.2019.07.24.12.57.26
         (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Wed, 24 Jul 2019 12:57:38 -0700 (PDT)
+        Wed, 24 Jul 2019 12:57:26 -0700 (PDT)
 From:   Mark Salyzyn <salyzyn@android.com>
 To:     linux-kernel@vger.kernel.org
 Cc:     kernel-team@android.com, Mark Salyzyn <salyzyn@android.com>,
@@ -54,16 +54,11 @@ Cc:     kernel-team@android.com, Mark Salyzyn <salyzyn@android.com>,
         Amir Goldstein <amir73il@gmail.com>,
         Randy Dunlap <rdunlap@infradead.org>,
         Stephen Smalley <sds@tycho.nsa.gov>,
-        linux-unionfs@vger.kernel.org, linux-doc@vger.kernel.org,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Mark Salyzyn <salyzyn@google.com>,
-        linux-fsdevel@vger.kernel.org
-Subject: [PATCH v10 2/5] Add optional __get xattr method paired to __vfs_getxattr
-Date:   Wed, 24 Jul 2019 12:57:13 -0700
-Message-Id: <20190724195719.218307-3-salyzyn@android.com>
+        linux-unionfs@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [PATCH v10 0/2] overlayfs override_creds=off
+Date:   Wed, 24 Jul 2019 12:57:11 -0700
+Message-Id: <20190724195719.218307-1-salyzyn@android.com>
 X-Mailer: git-send-email 2.22.0.657.g960e92d24f-goog
-In-Reply-To: <20190724195719.218307-1-salyzyn@android.com>
-References: <20190724195719.218307-1-salyzyn@android.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
@@ -71,8 +66,34 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add an optional __get xattr method that would be called, if set, only
-in __vfs_getxattr instead of the regular get xattr method.
+Patch series:
+
+overlayfs: check CAP_DAC_READ_SEARCH before issuing exportfs_decode_fh
+Add optional __get xattr method paired to __vfs_getxattr
+overlayfs: add __get xattr method
+overlayfs: internal getxattr operations without sepolicy checking
+overlayfs: override_creds=off option bypass creator_cred
+
+The first four patches address fundamental security issues that should
+be solved regardless of the override_creds=off feature.
+
+The fifth that adds the feature depends on these other fixes.
+
+By default, all access to the upper, lower and work directories is the
+recorded mounter's MAC and DAC credentials.  The incoming accesses are
+checked against the caller's credentials.
+
+If the principles of least privilege are applied for sepolicy, the
+mounter's credentials might not overlap the credentials of the caller's
+when accessing the overlayfs filesystem.  For example, a file that a
+lower DAC privileged caller can execute, is MAC denied to the
+generally higher DAC privileged mounter, to prevent an attack vector.
+
+We add the option to turn off override_creds in the mount options; all
+subsequent operations after mount on the filesystem will be only the
+caller's credentials.  The module boolean parameter and mount option
+override_creds is also added as a presence check for this "feature",
+existence of /sys/module/overlay/parameters/overlay_creds
 
 Signed-off-by: Mark Salyzyn <salyzyn@android.com>
 Cc: Miklos Szeredi <miklos@szeredi.hu>
@@ -85,70 +106,37 @@ Cc: Stephen Smalley <sds@tycho.nsa.gov>
 Cc: linux-unionfs@vger.kernel.org
 Cc: linux-doc@vger.kernel.org
 Cc: linux-kernel@vger.kernel.org
-Cc: kernel-team@android.com
----
-v10 - added to patch series
----
- fs/xattr.c            | 11 ++++++++++-
- include/linux/xattr.h |  7 +++++--
- 2 files changed, 15 insertions(+), 3 deletions(-)
 
-diff --git a/fs/xattr.c b/fs/xattr.c
-index 90dd78f0eb27..b8f4734e222f 100644
---- a/fs/xattr.c
-+++ b/fs/xattr.c
-@@ -306,6 +306,9 @@ __vfs_getxattr(struct dentry *dentry, struct inode *inode, const char *name,
- 	handler = xattr_resolve_name(inode, &name);
- 	if (IS_ERR(handler))
- 		return PTR_ERR(handler);
-+	if (unlikely(handler->__get))
-+		return handler->__get(handler, dentry, inode, name, value,
-+				      size);
- 	if (!handler->get)
- 		return -EOPNOTSUPP;
- 	return handler->get(handler, dentry, inode, name, value, size);
-@@ -317,6 +320,7 @@ vfs_getxattr(struct dentry *dentry, const char *name, void *value, size_t size)
- {
- 	struct inode *inode = dentry->d_inode;
- 	int error;
-+	const struct xattr_handler *handler;
- 
- 	error = xattr_permission(inode, name, MAY_READ);
- 	if (error)
-@@ -339,7 +343,12 @@ vfs_getxattr(struct dentry *dentry, const char *name, void *value, size_t size)
- 		return ret;
- 	}
- nolsm:
--	return __vfs_getxattr(dentry, inode, name, value, size);
-+	handler = xattr_resolve_name(inode, &name);
-+	if (IS_ERR(handler))
-+		return PTR_ERR(handler);
-+	if (!handler->get)
-+		return -EOPNOTSUPP;
-+	return handler->get(handler, dentry, inode, name, value, size);
- }
- EXPORT_SYMBOL_GPL(vfs_getxattr);
- 
-diff --git a/include/linux/xattr.h b/include/linux/xattr.h
-index 6dad031be3c2..30f25e1ac571 100644
---- a/include/linux/xattr.h
-+++ b/include/linux/xattr.h
-@@ -30,10 +30,13 @@ struct xattr_handler {
- 	const char *prefix;
- 	int flags;      /* fs private flags */
- 	bool (*list)(struct dentry *dentry);
--	int (*get)(const struct xattr_handler *, struct dentry *dentry,
-+	int (*get)(const struct xattr_handler *handler, struct dentry *dentry,
- 		   struct inode *inode, const char *name, void *buffer,
- 		   size_t size);
--	int (*set)(const struct xattr_handler *, struct dentry *dentry,
-+	int (*__get)(const struct xattr_handler *handler, struct dentry *dentry,
-+		     struct inode *inode, const char *name, void *buffer,
-+		     size_t size);
-+	int (*set)(const struct xattr_handler *handler, struct dentry *dentry,
- 		   struct inode *inode, const char *name, const void *buffer,
- 		   size_t size, int flags);
- };
--- 
-2.22.0.657.g960e92d24f-goog
+---
+v10:
+- Rebase
+- Return NULL on CAP_DAC_READ_SEARCH
+- Add __get xattr method to solve sepolicy logging issue
+- Drop unnecassary sys_admin sepolicy checking for administrative
+  driver internal xattr functions.
 
+v6:
+- Drop CONFIG_OVERLAY_FS_OVERRIDE_CREDS.
+- Do better with the documentation, drop rationalizations.
+- pr_warn message adjusted to report consequences.
+
+v5:
+- beefed up the caveats in the Documentation
+- Is dependent on
+  "overlayfs: check CAP_DAC_READ_SEARCH before issuing exportfs_decode_fh"
+  "overlayfs: check CAP_MKNOD before issuing vfs_whiteout"
+- Added prwarn when override_creds=off
+
+v4:
+- spelling and grammar errors in text
+
+v3:
+- Change name from caller_credentials / creator_credentials to the
+  boolean override_creds.
+- Changed from creator to mounter credentials.
+- Updated and fortified the documentation.
+- Added CONFIG_OVERLAY_FS_OVERRIDE_CREDS
+
+v2:
+- Forward port changed attr to stat, resulting in a build error.
+- altered commit message.
