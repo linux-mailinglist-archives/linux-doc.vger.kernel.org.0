@@ -2,119 +2,124 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id ED2D47501E
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Jul 2019 15:51:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EB55E7510B
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Jul 2019 16:26:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390792AbfGYNvR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 25 Jul 2019 09:51:17 -0400
-Received: from foss.arm.com ([217.140.110.172]:57756 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725928AbfGYNvQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 25 Jul 2019 09:51:16 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 287B31595;
-        Thu, 25 Jul 2019 06:51:16 -0700 (PDT)
-Received: from e119884-lin.cambridge.arm.com (e119884-lin.cambridge.arm.com [10.1.196.72])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AE0983F71F;
-        Thu, 25 Jul 2019 06:51:14 -0700 (PDT)
-From:   Vincenzo Frascino <vincenzo.frascino@arm.com>
-To:     linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-mm@kvack.org, linux-arch@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     vincenzo.frascino@arm.com,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will.deacon@arm.com>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Szabolcs Nagy <szabolcs.nagy@arm.com>
-Subject: [PATCH v6 2/2] arm64: Relax Documentation/arm64/tagged-pointers.rst
-Date:   Thu, 25 Jul 2019 14:50:44 +0100
-Message-Id: <20190725135044.24381-3-vincenzo.frascino@arm.com>
-X-Mailer: git-send-email 2.22.0
-In-Reply-To: <20190725135044.24381-1-vincenzo.frascino@arm.com>
-References: <cover.1563904656.git.andreyknvl@google.com>
- <20190725135044.24381-1-vincenzo.frascino@arm.com>
+        id S1728479AbfGYO0C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 25 Jul 2019 10:26:02 -0400
+Received: from mail-wr1-f65.google.com ([209.85.221.65]:40012 "EHLO
+        mail-wr1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727756AbfGYO0A (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Jul 2019 10:26:00 -0400
+Received: by mail-wr1-f65.google.com with SMTP id r1so51008878wrl.7
+        for <linux-doc@vger.kernel.org>; Thu, 25 Jul 2019 07:25:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=arista.com; s=googlenew;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=a4yNVultYze7PPpy5cvYCGPl+Bxml2Gu2G9EV6OVJFI=;
+        b=aZFlfwYl11ZfalVK9HQXiK6psS8etYrq9MwdgKIeCJ3kUwwzXuJGup6sST8vFdvBKQ
+         rkCcwECT04sJ7YhwAYxBq5jy2/UpsoS5q5OXFn8Ok8EH6a6wWiUESNyzJIs0r2rnNini
+         RX9AZbR1bJNbiqsydTo0QFCdo45Ml3jX2A9h03zVGZ+LxvCTOYzFpq2ls8Ngtu1BX49r
+         nsz/wBb4QJ6Y5MZ2ETI4GCfJuw76lG1feSBfo2lb+mpXmxfmQXsXEm536srR+dvDubLo
+         /w/peoDdqwFNa85L1h2g5AMrXUdpIFtsNgZYkqVRcW+LTelShFbzpDXHPBotrl1euBKw
+         YPpg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=a4yNVultYze7PPpy5cvYCGPl+Bxml2Gu2G9EV6OVJFI=;
+        b=lgontemjkqO8grZeNXwUzCd9Y/eh/QP52R4BxkU3ZIFD2IteMPeqEiQoJ6iAMGTZJY
+         VJOhDD9hUXXvqx/V/XaBvApntzq5A5qODSPGv14DiE8PWAeFdlllptvv8soyzfHQX++w
+         3Lr5jdml6rtceL/bNDtmK4HycybcJ6JrWPajg7bxSNhNoNdU+Bu/d89ZgJWxyaZOROIU
+         CcisqZOmvvWvZ7Tn1UrSqUyRGIr419K688obF1pLBJtANgf0JIJeBDZuEWJHKGSiWIIJ
+         9AARZoK1aLxXNKHYIt+ftmd7DOOFXFP5izlHKUro3VCI8gAeiGt/bPUKNbDAOqM0VIca
+         Cehg==
+X-Gm-Message-State: APjAAAVJ4Az+oC82jT3jLbOD+BiAIjQFIngkIW4P+f8LkjN5S4MN3URL
+        +b/n1TTdmj1rn++U6b462UlVrm6B2gAcLRt4vehr4fw43ArW2lw7HxRVFn/RIFoKl1sbLKqoa1V
+        pL+MfAbqjNFcKbnau82SBzC/OxqysZ4jrjxT2d/cs2AuLtUdDmjTS0mlOchXX+9UFwZwhdlSwDg
+        hIyuSW1Gp89Mv4bH2cb4MxzuskPg==
+X-Google-Smtp-Source: APXvYqxabH00r2hqqNGEp5to49iVTGmcAndrlBJ4BpORlLoVXwrBhNSWz9rDUPc4MdkiwTekqVtyvw==
+X-Received: by 2002:adf:eb4e:: with SMTP id u14mr95315821wrn.168.1564064758809;
+        Thu, 25 Jul 2019 07:25:58 -0700 (PDT)
+Received: from [10.83.36.153] ([217.173.96.166])
+        by smtp.gmail.com with ESMTPSA id 4sm115262930wro.78.2019.07.25.07.25.57
+        (version=TLS1_3 cipher=AEAD-AES128-GCM-SHA256 bits=128/128);
+        Thu, 25 Jul 2019 07:25:58 -0700 (PDT)
+Subject: Re: [PATCH] hung_task: Allow printing warnings every check interval
+To:     Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>,
+        linux-kernel@vger.kernel.org
+Cc:     Dmitry Safonov <0x7f454c46@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Ingo Molnar <mingo@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        Vasiliy Khoruzhick <vasilykh@arista.com>,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org
+References: <20190724170249.9644-1-dima@arista.com>
+ <2964b430-63d6-e172-84e2-cb269cf43443@i-love.sakura.ne.jp>
+From:   Dmitry Safonov <dima@arista.com>
+Message-ID: <aa151251-d271-1e65-1cae-0d9da9764d56@arista.com>
+Date:   Thu, 25 Jul 2019 15:25:57 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.7.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <2964b430-63d6-e172-84e2-cb269cf43443@i-love.sakura.ne.jp>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-CLOUD-SEC-AV-Info: arista,google_mail,monitor
+X-CLOUD-SEC-AV-Sent: true
+X-Gm-Spam: 0
+X-Gm-Phishy: 0
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On arm64 the TCR_EL1.TBI0 bit has been always enabled hence
-the userspace (EL0) is allowed to set a non-zero value in the
-top byte but the resulting pointers are not allowed at the
-user-kernel syscall ABI boundary.
+On 7/25/19 11:38 AM, Tetsuo Handa wrote:
+> On 2019/07/25 2:02, Dmitry Safonov wrote:
+>> Hung task detector has one timeout and has two associated actions on it:
+>> - issuing warnings with names and stacks of blocked tasks
+>> - panic()
+>>
+>> We want switches to panic (and reboot) if there's a task
+>> in uninterruptible sleep for some minutes - at that moment something
+>> ugly has happened and the box needs a reboot.
+>> But we also want to detect conditions that are "out of range"
+>> or approaching the point of failure. Under such conditions we want
+>> to issue an "early warning" of an impending failure, minutes before
+>> the switch is going to panic.
+> 
+> Can't we do it by extending sysctl_hung_task_panic to accept values larger
+> than 1, and decrease by one when at least one thread was reported by each
+> check_hung_uninterruptible_tasks() check, and call panic() when
+> sysctl_hung_task_panic reached to 0 (or maybe 1 is simpler) ?
+> 
+> Hmm, might have the same problem regarding how/when to reset the counter.
+> If some userspace process can reset the counter, such process can trigger
+> SysRq-c when some period expired...
 
-With the relaxed ABI proposed in this set, it is now possible to pass
-tagged pointers to the syscalls, when these pointers are in memory
-ranges obtained by an anonymous (MAP_ANONYMOUS) mmap().
+Yes, also current distributions already using the counter to print
+warnings number of times and then silently ignore. I.e., on my Arch
+Linux setup:
+hung_task_warnings:10
 
-Relax the requirements described in tagged-pointers.rst to be compliant
-with the behaviours guaranteed by the ARM64 Tagged Address ABI.
+>> It seems rather easy to add printing tasks and their stacks for
+>> notification and debugging purposes into hung task detector without
+>> complicating the code or major cost (prints are with KERN_INFO loglevel
+>> and so don't go on console, only into dmesg log).
+> 
+> Well, I don't think so. Might be noisy for systems without "quiet" kernel
+> command line option, and we can't pass KERN_DEBUG to e.g. sched_show_task()...
 
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Will Deacon <will.deacon@arm.com>
-CC: Andrey Konovalov <andreyknvl@google.com>
-Signed-off-by: Vincenzo Frascino <vincenzo.frascino@arm.com>
-Acked-by: Szabolcs Nagy <szabolcs.nagy@arm.com>
----
- Documentation/arm64/tagged-pointers.rst | 23 ++++++++++++++++-------
- 1 file changed, 16 insertions(+), 7 deletions(-)
+Yes, that's why it's disabled by default (=0).
+I tend to agree that printing with KERN_DEBUG may be better, but in my
+point of view the patch isn't enough justification for patching
+sched_show_task() and show_stack().
 
-diff --git a/Documentation/arm64/tagged-pointers.rst b/Documentation/arm64/tagged-pointers.rst
-index 2acdec3ebbeb..933aaef8d52f 100644
---- a/Documentation/arm64/tagged-pointers.rst
-+++ b/Documentation/arm64/tagged-pointers.rst
-@@ -20,7 +20,8 @@ Passing tagged addresses to the kernel
- --------------------------------------
- 
- All interpretation of userspace memory addresses by the kernel assumes
--an address tag of 0x00.
-+an address tag of 0x00, unless the userspace opts-in the ARM64 Tagged
-+Address ABI via the PR_SET_TAGGED_ADDR_CTRL prctl().
- 
- This includes, but is not limited to, addresses found in:
- 
-@@ -33,18 +34,23 @@ This includes, but is not limited to, addresses found in:
-  - the frame pointer (x29) and frame records, e.g. when interpreting
-    them to generate a backtrace or call graph.
- 
--Using non-zero address tags in any of these locations may result in an
--error code being returned, a (fatal) signal being raised, or other modes
--of failure.
-+Using non-zero address tags in any of these locations when the
-+userspace application did not opt-in to the ARM64 Tagged Address ABI
-+may result in an error code being returned, a (fatal) signal being raised,
-+or other modes of failure.
- 
--For these reasons, passing non-zero address tags to the kernel via
--system calls is forbidden, and using a non-zero address tag for sp is
--strongly discouraged.
-+For these reasons, when the userspace application did not opt-in, passing
-+non-zero address tags to the kernel via system calls is forbidden, and using
-+a non-zero address tag for sp is strongly discouraged.
- 
- Programs maintaining a frame pointer and frame records that use non-zero
- address tags may suffer impaired or inaccurate debug and profiling
- visibility.
- 
-+A definition of the meaning of ARM64 Tagged Address ABI and of the
-+guarantees that the ABI provides when the userspace opts-in via prctl()
-+can be found in: Documentation/arm64/tagged-address-abi.rst.
-+
- 
- Preserving tags
- ---------------
-@@ -59,6 +65,9 @@ be preserved.
- The architecture prevents the use of a tagged PC, so the upper byte will
- be set to a sign-extension of bit 55 on exception return.
- 
-+These behaviours are preserved even when the userspace opts-in to the ARM64
-+Tagged Address ABI via the PR_SET_TAGGED_ADDR_CTRL prctl().
-+
- 
- Other considerations
- --------------------
--- 
-2.22.0
-
+Thanks,
+          Dmitry
