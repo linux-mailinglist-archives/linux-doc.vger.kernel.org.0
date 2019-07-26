@@ -2,47 +2,46 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 90F25764CA
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2019 13:47:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 91E99764C5
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2019 13:47:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726402AbfGZLrf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Jul 2019 07:47:35 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:47404 "EHLO
+        id S1726519AbfGZLrd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Jul 2019 07:47:33 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:47390 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726180AbfGZLre (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jul 2019 07:47:34 -0400
+        with ESMTP id S1726180AbfGZLrc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jul 2019 07:47:32 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+        Content-Type:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:
+        To:From:Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=ns01a/+dJBOEjeT/1CWh/+CD7/ir0pFGY6xdTOQcPbo=; b=UP9N99OCHIHEjE6YNaXL68byYU
-        T9OJh95quUUTHJmwl1TlhrNz3vPuPsRL/wcHureyhjtx5cqyF5XtXCwM6My/a2IaX/vVEUGlLAlO3
-        tccfZ5isggOwEGTdT6AOhuXMTLPlhENjcDg5T+DxsqsofwgGP8JzQ/XKnUl9EP9tx0dqglHSrS2Ww
-        ezZ6hkOBtGKC8sZ208lIhOiNGGIqQLhhp65h+1Zcsb9nzvCs2Vttku+Za3kWcsGeTlYn+bLwAnoCI
-        kMJymY+XshcL8KCiZDeMtN6R7Y3+9D/BAISo0T1XS5qy4chqi/mR24cmui7/zDBhgQKrqm0HIZz9p
-        8nlVayPQ==;
+        bh=m8kf/sPEYGMDUeP6JoO5tSRSz84bxy3DCh0yf5UUIs0=; b=iGohlSDAV5B4QjohSRDUM74DRr
+        8BnV+fmqXiZHJSrIpfrZSm0RL9ohLH/3yVOcscMSeHvBnGvA0vJusylj5PsVjmp6PgJ/ZYeV7m9hH
+        u9JVydoXGtFgGjqyzHlJlQ83Tm0NyJMgZblIIPL1GKlWkxXgLTj/fQ++1kJReUOSflozna3+Kmkre
+        cNguW2QYAk3/eTPlsU0OSUEHAlC90HjESdB7WGTqiXGlogBGHSsf0FRCV5GJFE4l9wwIix2WMWTKI
+        SZJNl2tbJmv3InbL4nlEb1eoiyO2KxzbnVPVo/toAhktp3enuLl2k9j1gIFN9A7C4gQ9bmYoyg4wv
+        flBAcVuw==;
 Received: from [179.95.31.157] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hqyh9-0003Bb-4m; Fri, 26 Jul 2019 11:47:31 +0000
+        id 1hqyh9-0003Bc-7R; Fri, 26 Jul 2019 11:47:31 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hqyh7-0000u9-3J; Fri, 26 Jul 2019 08:47:29 -0300
+        id 1hqyh7-0000uE-49; Fri, 26 Jul 2019 08:47:29 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Tejun Heo <tj@kernel.org>, Jens Axboe <axboe@kernel.dk>,
-        Li Zefan <lizefan@huawei.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>, cgroups@vger.kernel.org,
-        linux-block@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH 5/7] docs: cgroup-v1/blkio-controller.rst: remove a CFQ left over
-Date:   Fri, 26 Jul 2019 08:47:25 -0300
-Message-Id: <21b9281684395202d815d574121df89fa0c7ac62.1564140865.git.mchehab+samsung@kernel.org>
+        Harry Wei <harryxiyou@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [PATCH 6/7] docs: zh_CN: howto.rst: fix a broken reference
+Date:   Fri, 26 Jul 2019 08:47:26 -0300
+Message-Id: <cd296a4802f46a223522b31aebb16d0059c7d88a.1564140865.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1564140865.git.mchehab+samsung@kernel.org>
 References: <cover.1564140865.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
@@ -50,33 +49,35 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-changeset fb5772cbfe48 ("blkio-controller.txt: Remove references to CFQ")
-removed cgroup references to CFQ, but it kept one left. Get rid of
-it.
+There's a broken reference there pointing to the long gone
+DocBook dir.
 
-Fixes: fb5772cbfe48 ("blkio-controller.txt: Remove references to CFQ")
+While I don't read chinese, Google translator translates it
+to:
+	"The generated documentation will be placed in
+	 the Documentation/DocBook/ directory."
+
+Well, we know that the output will be Documentation/output
+dir. So, let's fix this one.
+
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
- Documentation/admin-guide/cgroup-v1/blkio-controller.rst | 6 ------
- 1 file changed, 6 deletions(-)
+ Documentation/translations/zh_CN/process/howto.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/admin-guide/cgroup-v1/blkio-controller.rst b/Documentation/admin-guide/cgroup-v1/blkio-controller.rst
-index 1d7d962933be..36d43ae7dc13 100644
---- a/Documentation/admin-guide/cgroup-v1/blkio-controller.rst
-+++ b/Documentation/admin-guide/cgroup-v1/blkio-controller.rst
-@@ -130,12 +130,6 @@ Proportional weight policy files
- 	    dev     weight
- 	    8:16    300
+diff --git a/Documentation/translations/zh_CN/process/howto.rst b/Documentation/translations/zh_CN/process/howto.rst
+index 5b671178b17b..c4ff8356b88d 100644
+--- a/Documentation/translations/zh_CN/process/howto.rst
++++ b/Documentation/translations/zh_CN/process/howto.rst
+@@ -147,7 +147,7 @@ Linux内核代码中包含有大量的文档。这些文档对于学习如何与
+     关于补丁是什么以及如何将它打在不同内核开发分支上的好介绍
  
--- blkio.leaf_weight[_device]
--	- Equivalents of blkio.weight[_device] for the purpose of
--          deciding how much weight tasks in the given cgroup has while
--          competing with the cgroup's child cgroups. For details,
--          please refer to Documentation/block/cfq-iosched.txt.
--
- - blkio.time
- 	- disk time allocated to cgroup per device in milliseconds. First
- 	  two fields specify the major and minor number of the device and
+ 内核还拥有大量从代码自动生成的文档。它包含内核内部API的全面介绍以及如何
+-妥善处理加锁的规则。生成的文档会放在 Documentation/DocBook/目录下。在内
++妥善处理加锁的规则。生成的文档会放在 Documentation/output/目录下。在内
+ 核源码的主目录中使用以下不同命令将会分别生成PDF、Postscript、HTML和手册
+ 页等不同格式的文档::
+ 
 -- 
 2.21.0
 
