@@ -2,39 +2,39 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DEC787648D
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2019 13:31:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4FBA67648E
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2019 13:31:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726087AbfGZLba (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S1726124AbfGZLba (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Fri, 26 Jul 2019 07:31:30 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:39244 "EHLO
+Received: from bombadil.infradead.org ([198.137.202.133]:39306 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725903AbfGZLb3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jul 2019 07:31:29 -0400
+        with ESMTP id S1726023AbfGZLba (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jul 2019 07:31:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
         MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
         Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=M2hix2Cz4QBH1TZxLrnjUPYGcjN9vCJCLVL+tsv3AQ0=; b=m+xBSOKe3JIRv4dGsVag10+DGt
-        ALzyb/lSA9T+50tb+k0xafAJu91Uzj4TCmbynxdYtKXsVHBGvD+W/MRoHXPKiggsP9AeZXUjRbUso
-        rhnejv9ioErvFplMfB07gEvShLMdfN4hfFv1NFsjxr7lYuaZnl+D9M9HFED6T/ZFTpj6mFJgIUYiv
-        bP0AVUYhr8BESF5C1ZZ6PS/+45nveBi0/DpFqPn/WlgSvekfmV6ujjZ7MSFra4vONgRusmQJgZULq
-        WVZUu7VHw+xN39kmT4RaQEqats1J3yplZqYdCihMDUMaCD/Dkz+T5rJzRdynxtTg723RMf/JlVYlS
-        zrRGYB8g==;
+        bh=5tM2MS1kf1uhWY8D5GobT8hsim8st9pL5ByAyD55Xv4=; b=I0vLv5r3/moDdwucSNPQFd0Kwh
+        rIGMfW9mC9RkkTDOnDSPdk1tFlxPOiqLk6HI0jS8QvEYvUAYzVC5A/SdLQn+Dv1bWTJ9t51UQzu2c
+        b/X3PLkCHldK/4bdxdCmqYae+aefq+maikpDrgWg0EzN57ZdocYkzMwxVVyQTGH0d+gwoQM2d4i94
+        AD+Ud2Me/leKbjB5ijf4g9XFIFd6Qi7EI2OUIA9YFKhoxpoyVy9JqdOPoym/0JcaUqNRVbi3TKtZe
+        vv83VALKPpygCbB1qaWaaf/YODdmIOSa2hjtDX1JZxO1+1TQyFe2SWHcigt900dTB/wT7PJ3sTirm
+        1QVqJmIQ==;
 Received: from [179.95.31.157] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hqyRb-0005vE-Nv; Fri, 26 Jul 2019 11:31:27 +0000
+        id 1hqyRc-0005vr-Nn; Fri, 26 Jul 2019 11:31:29 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hqyRZ-0008E8-Dk; Fri, 26 Jul 2019 08:31:25 -0300
+        id 1hqyRZ-0008EC-EW; Fri, 26 Jul 2019 08:31:25 -0300
 From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH v2 02/10] docs: conf.py: add CJK package needed by translations
-Date:   Fri, 26 Jul 2019 08:31:16 -0300
-Message-Id: <56508d88b3b142b95dea6a815fbe21b08d784524.1564139914.git.mchehab+samsung@kernel.org>
+Subject: [PATCH v2 03/10] docs: conf.py: only use CJK if the font is available
+Date:   Fri, 26 Jul 2019 08:31:17 -0300
+Message-Id: <5a9e47f3094a6188a3e9279bd48e2a6a19ab9f5b.1564139914.git.mchehab+samsung@kernel.org>
 X-Mailer: git-send-email 2.21.0
 In-Reply-To: <cover.1564139914.git.mchehab+samsung@kernel.org>
 References: <cover.1564139914.git.mchehab+samsung@kernel.org>
@@ -46,29 +46,56 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In order to be able to output Asian symbols with XeLaTeX, we
-need the xeCJK package, and a default font for CJK symbols.
+If we try to build a book with asian characters with XeLaTeX
+and the font is not available, it will produce an error.
+
+So, instead, add a logic at conf.py to detect if the proper
+font is installed.
+
+This will avoid an error while building the document, although
+the result may not be readable.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 ---
- Documentation/conf.py | 4 ++++
- 1 file changed, 4 insertions(+)
+ Documentation/conf.py | 13 +++++++++++--
+ 1 file changed, 11 insertions(+), 2 deletions(-)
 
 diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 13b5f711bddf..fa0a42b47e62 100644
+index fa0a42b47e62..a8fe845832bc 100644
 --- a/Documentation/conf.py
 +++ b/Documentation/conf.py
-@@ -277,6 +277,10 @@ latex_elements = {
+@@ -16,6 +16,8 @@ import sys
+ import os
+ import sphinx
+ 
++from subprocess import check_output
++
+ # Get Sphinx version
+ major, minor, patch = sphinx.version_info[:3]
+ 
+@@ -276,13 +278,20 @@ latex_elements = {
+         \\setsansfont{DejaVu Sans}
          \\setromanfont{DejaVu Serif}
          \\setmonofont{DejaVu Sans Mono}
++     '''
++}
  
-+	% This is needed for translations
-+        \\usepackage{xeCJK}
-+        \\setCJKmainfont{Noto Sans CJK SC}
++# At least one book (translations) may have Asian characters
++# with are only displayed if xeCJK is used
 +
++cjk_cmd = check_output(['fc-list', '--format="%{family[0]}\n"']).decode('utf-8', 'ignore')
++if cjk_cmd.find("Noto Sans CJK SC") >= 0:
++    print ("enabling CJK for LaTeX builder")
++    latex_elements['preamble']  += '''
+ 	% This is needed for translations
+         \\usepackage{xeCJK}
+         \\setCJKmainfont{Noto Sans CJK SC}
+-
       '''
- }
+-}
  
+ # Fix reference escape troubles with Sphinx 1.4.x
+ if major == 1 and minor > 3:
 -- 
 2.21.0
 
