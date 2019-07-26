@@ -2,306 +2,141 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7C85076676
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2019 14:52:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7B0E57669E
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2019 14:54:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726947AbfGZMwE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Jul 2019 08:52:04 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:40050 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726298AbfGZMvp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jul 2019 08:51:45 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=tSMWPfNo3gDEM1VH0Y4pk6VjAd2ZeBtw7dFpERpjKWk=; b=VXoqJYhIKWVBkc/X5nZNlBUkjz
-        1qgdAhqehg7/cl3iRicS7Q4hAJ9fYd/gKHPH16kOQFK5xCznIEGN86hXoQqYoXAlhxrsbUBK70D+r
-        3Tn08Mlvdv9fTZx1O7kH4DXTOxxs6Bgf7goGI1UHwdtYD5otzDfw4inDeXnwEuIPmW1k/vG2eoKBv
-        yiZCwMCkUSuU8bgk6iC7mzx/zuAVsDJaILxPlnsIp+YxR78q+5x6WwIcrEou678Keqq3/jITrolnq
-        287rq7FnOh0oLyziMLdJJWTM8D/rPTUnOge/MOkNkd2s+KA8SC9PP7uxg3M57C2JRxBajbudKNcDF
-        l3g8NfcA==;
-Received: from [179.95.31.157] (helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
-        id 1hqzhE-0006Ai-L7; Fri, 26 Jul 2019 12:51:41 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92)
-        (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1hqzhC-0005br-Ho; Fri, 26 Jul 2019 09:51:38 -0300
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-wireless@vger.kernel.org
-Subject: [PATCH v2 24/26] docs: net: convert two README files to ReST format
-Date:   Fri, 26 Jul 2019 09:51:34 -0300
-Message-Id: <aaff5964848b7ef1908184cfabd6a12a619ba02d.1564145354.git.mchehab+samsung@kernel.org>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <cover.1564145354.git.mchehab+samsung@kernel.org>
-References: <cover.1564145354.git.mchehab+samsung@kernel.org>
+        id S1726277AbfGZMyY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Jul 2019 08:54:24 -0400
+Received: from mail-pg1-f193.google.com ([209.85.215.193]:45788 "EHLO
+        mail-pg1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726007AbfGZMyY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jul 2019 08:54:24 -0400
+Received: by mail-pg1-f193.google.com with SMTP id o13so24743118pgp.12
+        for <linux-doc@vger.kernel.org>; Fri, 26 Jul 2019 05:54:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=joelfernandes.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=1CV30Ulmhw3UVs5wZJSfxlQX22PQyu6508MpeQYH9hA=;
+        b=gQuH0RicdNOowMPYfbO1oCrLPCJQ7RG5vRhySY5uKbNmTPgJ9gjJhxIQlgovgpa61j
+         /fesyTgUhfC6NkYtNzLPj9OFsHLRlFOnE6bQDcY/2tkHHiMxdFrnqXA8ZynuSTScFhap
+         MsVrgmBpEcAREpwym2Gd4zS7Og3lnANQ201d0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=1CV30Ulmhw3UVs5wZJSfxlQX22PQyu6508MpeQYH9hA=;
+        b=Hj/I7nN/naH8nPfYsq9GHy8ciOa/yDJh8mkY7tBqnLpBg/w5PMv5DkVAbCgWmC9CJ9
+         cPn8S1wuwwV5+8KbM+VooNc2NooFwJa7QjYTVYqryI++RhRH3WryqhezC02OFxp2FHXf
+         f8/oQ/x0xgkUCg0JM2PD3zldsJnxaxnlsT/2zKOQ6hbPyLWyQnxBFci/vplahWLPlajR
+         cebKm+yE5anQDiFMnd9M9iScWMjZ8hcWz6z7oF1xenxDfUD3+Y6B8xqiiVQVNw9vKOBf
+         bDKl2V0RHcH0PmaKKqdgWvTsARS8jVj62ljKVJ3ehE0QycSe7+tqyxZ8yOkFN1NylNn6
+         tnpg==
+X-Gm-Message-State: APjAAAUYnvGmA8LyeWyV6sCzQCEZd3FiRvOR+DPXwtZAMZi2oXiximro
+        6Aguj0gmntVvncaPfomY/Ps=
+X-Google-Smtp-Source: APXvYqzilkkbU1jvUSqJ7GWTJJgame/K3EOovYUFU8dAxa/kz5mkVmVgYiB/rX3VOXqDrSKNafzHjQ==
+X-Received: by 2002:a63:ee0c:: with SMTP id e12mr92603350pgi.184.1564145663513;
+        Fri, 26 Jul 2019 05:54:23 -0700 (PDT)
+Received: from localhost ([2620:15c:6:12:9c46:e0da:efbf:69cc])
+        by smtp.gmail.com with ESMTPSA id o129sm23051451pfg.1.2019.07.26.05.54.22
+        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+        Fri, 26 Jul 2019 05:54:22 -0700 (PDT)
+Date:   Fri, 26 Jul 2019 08:54:21 -0400
+From:   Joel Fernandes <joel@joelfernandes.org>
+To:     Konstantin Khlebnikov <khlebnikov@yandex-team.ru>
+Cc:     Minchan Kim <minchan@kernel.org>, linux-kernel@vger.kernel.org,
+        vdavydov.dev@gmail.com, Brendan Gregg <bgregg@netflix.com>,
+        kernel-team@android.com, Alexey Dobriyan <adobriyan@gmail.com>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        carmenjackson@google.com, Christian Hansen <chansen3@cisco.com>,
+        Colin Ian King <colin.king@canonical.com>, dancol@google.com,
+        David Howells <dhowells@redhat.com>, fmayer@google.com,
+        joaodias@google.com, Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Kirill Tkhai <ktkhai@virtuozzo.com>, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+        Michal Hocko <mhocko@suse.com>,
+        Mike Rapoport <rppt@linux.ibm.com>, namhyung@google.com,
+        sspatil@google.com
+Subject: Re: [PATCH v1 1/2] mm/page_idle: Add support for per-pid page_idle
+ using virtual indexing
+Message-ID: <20190726125421.GA103959@google.com>
+References: <20190722213205.140845-1-joel@joelfernandes.org>
+ <20190723061358.GD128252@google.com>
+ <20190723142049.GC104199@google.com>
+ <20190724042842.GA39273@google.com>
+ <20190724141052.GB9945@google.com>
+ <c116f836-5a72-c6e6-498f-a904497ef557@yandex-team.ru>
+ <20190726000654.GB66718@google.com>
+ <9cba9acb-9451-a53e-278d-92f7b66ae20b@yandex-team.ru>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <9cba9acb-9451-a53e-278d-92f7b66ae20b@yandex-team.ru>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-There are two README files there with doesn't have a .txt
-extension nor are at ReST format.
+On Fri, Jul 26, 2019 at 02:16:20PM +0300, Konstantin Khlebnikov wrote:
+> On 26.07.2019 3:06, Joel Fernandes wrote:
+> > On Thu, Jul 25, 2019 at 11:15:53AM +0300, Konstantin Khlebnikov wrote:
+> > [snip]
+> > > > > > Thanks for bringing up the swapping corner case..  Perhaps we can improve
+> > > > > > the heap profiler to detect this by looking at bits 0-4 in pagemap. While it
+> > > > > 
+> > > > > Yeb, that could work but it could add overhead again what you want to remove?
+> > > > > Even, userspace should keep metadata to identify that page was already swapped
+> > > > > in last period or newly swapped in new period.
+> > > > 
+> > > > Yep.
+> > > Between samples page could be read from swap and swapped out back multiple times.
+> > > For tracking this swap ptes could be marked with idle bit too.
+> > > I believe it's not so hard to find free bit for this.
+> > > 
+> > > Refault\swapout will automatically clear this bit in pte even if
+> > > page goes nowhere stays if swap-cache.
+> > 
+> > Could you clarify more about your idea? Do you mean swapout will clear the new
+> > idle swap-pte bit if the page was accessed just before the swapout? >
+> > Instead, I thought of using is_swap_pte() to detect if the PTE belong to a
+> > page that was swapped. And if so, then assume the page was idle. Sure we
+> > would miss data that the page was accessed before the swap out in the
+> > sampling window, however if the page was swapped out, then it is likely idle
+> > anyway.
+> 
+> 
+> I mean page might be in swap when you mark pages idle and
+> then been accessed and swapped back before second pass.
+> 
+> I propose marking swap pte with idle bit which will be automatically
+> cleared by following swapin/swapout pair:
+> 
+> page alloc -> install page pte
+> page swapout -> install swap entry in pte
+> mark vm idle -> set swap-idle bit in swap pte
+> access/swapin -> install page pte (clear page idle if set)
+> page swapout -> install swap entry in pte (without swap idle bit)
+> scan vm idle -> see swap entry without idle bit -> page has been accessed since marking idle
+> 
+> One bit in pte is enough for tracking. This does not needs any propagation for
+> idle bits between page and swap, or marking pages as idle in swap cache.
 
-In order to help with the docs conversion to ReST, rename those
-and manually convert them to ReST format.
+Ok I see the case you are referring to now. This can be a follow-up patch to
+address the case, because.. the limitation you mentioned is also something
+inherrent in the (traditional) physical page_idle tracking if that were used.
+The reason being, after swapping, the PTE is not mapped to any page so there
+is nothing to mark as idle. So if the page gets swapped out and in in the
+meanwhile, then you would run into the same issue.
 
-As there are lot more to be done for networking to be part of
-the documentation body, for now mark those two files with
-:orphan:, in order to supress a build warning.
+But yes, we should certainly address it in the future. I just want to keep
+things simple at the moment. I will make a note about your suggestion but you
+are welcomed to write a patch for it on top of my patch. I am about to send
+another revision shortly for futhre review.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
----
- .../networking/caif/{README => caif.rst}      | 88 +++++++++++++------
- .../{README => mac80211_hwsim.rst}            | 28 ++++--
- MAINTAINERS                                   |  2 +-
- 3 files changed, 81 insertions(+), 37 deletions(-)
- rename Documentation/networking/caif/{README => caif.rst} (70%)
- rename Documentation/networking/mac80211_hwsim/{README => mac80211_hwsim.rst} (81%)
+thanks,
 
-diff --git a/Documentation/networking/caif/README b/Documentation/networking/caif/caif.rst
-similarity index 70%
-rename from Documentation/networking/caif/README
-rename to Documentation/networking/caif/caif.rst
-index 757ccfaa1385..07afc8063d4d 100644
---- a/Documentation/networking/caif/README
-+++ b/Documentation/networking/caif/caif.rst
-@@ -1,18 +1,31 @@
--Copyright (C) ST-Ericsson AB 2010
--Author: Sjur Brendeland/ sjur.brandeland@stericsson.com
--License terms: GNU General Public License (GPL) version 2
-----------------------------------------------------------
-+:orphan:
- 
--=== Start ===
--If you have compiled CAIF for modules do:
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: <isonum.txt>
- 
--$modprobe crc_ccitt
--$modprobe caif
--$modprobe caif_socket
--$modprobe chnl_net
- 
-+================
-+Using Linux CAIF
-+================
- 
--=== Preparing the setup with a STE modem ===
-+
-+:Copyright: |copy| ST-Ericsson AB 2010
-+
-+:Author: Sjur Brendeland/ sjur.brandeland@stericsson.com
-+
-+Start
-+=====
-+
-+If you have compiled CAIF for modules do::
-+
-+    $modprobe crc_ccitt
-+    $modprobe caif
-+    $modprobe caif_socket
-+    $modprobe chnl_net
-+
-+
-+Preparing the setup with a STE modem
-+====================================
- 
- If you are working on integration of CAIF you should make sure
- that the kernel is built with module support.
-@@ -32,24 +45,30 @@ module parameter "ser_use_stx".
- Normally Frame Checksum is always used on UART, but this is also provided as a
- module parameter "ser_use_fcs".
- 
--$ modprobe caif_serial ser_ttyname=/dev/ttyS0 ser_use_stx=yes
--$ ifconfig caif_ttyS0 up
-+::
- 
--PLEASE NOTE: 	There is a limitation in Android shell.
-+    $ modprobe caif_serial ser_ttyname=/dev/ttyS0 ser_use_stx=yes
-+    $ ifconfig caif_ttyS0 up
-+
-+PLEASE NOTE:
-+		There is a limitation in Android shell.
- 		It only accepts one argument to insmod/modprobe!
- 
--=== Trouble shooting ===
-+Trouble shooting
-+================
- 
- There are debugfs parameters provided for serial communication.
- /sys/kernel/debug/caif_serial/<tty-name>/
- 
- * ser_state:   Prints the bit-mask status where
-+
-   - 0x02 means SENDING, this is a transient state.
-   - 0x10 means FLOW_OFF_SENT, i.e. the previous frame has not been sent
--	and is blocking further send operation. Flow OFF has been propagated
--	to all CAIF Channels using this TTY.
-+    and is blocking further send operation. Flow OFF has been propagated
-+    to all CAIF Channels using this TTY.
- 
- * tty_status: Prints the bit-mask tty status information
-+
-   - 0x01 - tty->warned is on.
-   - 0x02 - tty->low_latency is on.
-   - 0x04 - tty->packed is on.
-@@ -58,13 +77,17 @@ There are debugfs parameters provided for serial communication.
-   - 0x20 - tty->stopped is on.
- 
- * last_tx_msg: Binary blob Prints the last transmitted frame.
--	This can be printed with
-+
-+  This can be printed with::
-+
- 	$od --format=x1 /sys/kernel/debug/caif_serial/<tty>/last_rx_msg.
--	The first two tx messages sent look like this. Note: The initial
--	byte 02 is start of frame extension (STX) used for re-syncing
--	upon errors.
- 
--  - Enumeration:
-+  The first two tx messages sent look like this. Note: The initial
-+  byte 02 is start of frame extension (STX) used for re-syncing
-+  upon errors.
-+
-+  - Enumeration::
-+
-         0000000  02 05 00 00 03 01 d2 02
-                  |  |     |  |  |  |
-                  STX(1)   |  |  |  |
-@@ -73,7 +96,9 @@ There are debugfs parameters provided for serial communication.
-                              Command:Enumeration(1)
-                                 Link-ID(1)
-                                     Checksum(2)
--  - Channel Setup:
-+
-+  - Channel Setup::
-+
-         0000000  02 07 00 00 00 21 a1 00 48 df
-                  |  |     |  |  |  |  |  |
-                  STX(1)   |  |  |  |  |  |
-@@ -86,13 +111,18 @@ There are debugfs parameters provided for serial communication.
- 					  Checksum(2)
- 
- * last_rx_msg: Prints the last transmitted frame.
--	The RX messages for LinkSetup look almost identical but they have the
--	bit 0x20 set in the command bit, and Channel Setup has added one byte
--	before Checksum containing Channel ID.
--	NOTE: Several CAIF Messages might be concatenated. The maximum debug
-+
-+  The RX messages for LinkSetup look almost identical but they have the
-+  bit 0x20 set in the command bit, and Channel Setup has added one byte
-+  before Checksum containing Channel ID.
-+
-+  NOTE:
-+	Several CAIF Messages might be concatenated. The maximum debug
- 	buffer size is 128 bytes.
- 
--== Error Scenarios:
-+Error Scenarios
-+===============
-+
- - last_tx_msg contains channel setup message and last_rx_msg is empty ->
-   The host seems to be able to send over the UART, at least the CAIF ldisc get
-   notified that sending is completed.
-@@ -103,7 +133,9 @@ There are debugfs parameters provided for serial communication.
- 
- - if /sys/kernel/debug/caif_serial/<tty>/tty_status is non-zero there
-   might be problems transmitting over UART.
-+
-   E.g. host and modem wiring is not correct you will typically see
-   tty_status = 0x10 (hw_stopped) and ser_state = 0x10 (FLOW_OFF_SENT).
-+
-   You will probably see the enumeration message in last_tx_message
-   and empty last_rx_message.
-diff --git a/Documentation/networking/mac80211_hwsim/README b/Documentation/networking/mac80211_hwsim/mac80211_hwsim.rst
-similarity index 81%
-rename from Documentation/networking/mac80211_hwsim/README
-rename to Documentation/networking/mac80211_hwsim/mac80211_hwsim.rst
-index 3566a725d19c..d2266ce5534e 100644
---- a/Documentation/networking/mac80211_hwsim/README
-+++ b/Documentation/networking/mac80211_hwsim/mac80211_hwsim.rst
-@@ -1,5 +1,13 @@
-+:orphan:
-+
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: <isonum.txt>
-+
-+===================================================================
- mac80211_hwsim - software simulator of 802.11 radio(s) for mac80211
--Copyright (c) 2008, Jouni Malinen <j@w1.fi>
-+===================================================================
-+
-+:Copyright: |copy| 2008, Jouni Malinen <j@w1.fi>
- 
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License version 2 as
-@@ -7,6 +15,7 @@ published by the Free Software Foundation.
- 
- 
- Introduction
-+============
- 
- mac80211_hwsim is a Linux kernel module that can be used to simulate
- arbitrary number of IEEE 802.11 radios for mac80211. It can be used to
-@@ -43,6 +52,7 @@ regardless of channel.
- 
- 
- Simple example
-+==============
- 
- This example shows how to use mac80211_hwsim to simulate two radios:
- one to act as an access point and the other as a station that
-@@ -50,17 +60,19 @@ associates with the AP. hostapd and wpa_supplicant are used to take
- care of WPA2-PSK authentication. In addition, hostapd is also
- processing access point side of association.
- 
-+::
- 
--# Build mac80211_hwsim as part of kernel configuration
- 
--# Load the module
--modprobe mac80211_hwsim
-+    # Build mac80211_hwsim as part of kernel configuration
- 
--# Run hostapd (AP) for wlan0
--hostapd hostapd.conf
-+    # Load the module
-+    modprobe mac80211_hwsim
- 
--# Run wpa_supplicant (station) for wlan1
--wpa_supplicant -Dnl80211 -iwlan1 -c wpa_supplicant.conf
-+    # Run hostapd (AP) for wlan0
-+    hostapd hostapd.conf
-+
-+    # Run wpa_supplicant (station) for wlan1
-+    wpa_supplicant -Dnl80211 -iwlan1 -c wpa_supplicant.conf
- 
- 
- More test cases are available in hostap.git:
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c7656edee696..4de2f288d1ec 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -9568,7 +9568,7 @@ F:	Documentation/networking/mac80211-injection.txt
- F:	include/net/mac80211.h
- F:	net/mac80211/
- F:	drivers/net/wireless/mac80211_hwsim.[ch]
--F:	Documentation/networking/mac80211_hwsim/README
-+F:	Documentation/networking/mac80211_hwsim/mac80211_hwsim.rst
- 
- MAILBOX API
- M:	Jassi Brar <jassisinghbrar@gmail.com>
--- 
-2.21.0
+ - Joel
 
