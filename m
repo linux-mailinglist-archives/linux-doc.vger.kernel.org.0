@@ -2,174 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1B56176B86
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2019 16:24:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4240676BE0
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jul 2019 16:43:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727866AbfGZOY5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Jul 2019 10:24:57 -0400
-Received: from mail-ed1-f67.google.com ([209.85.208.67]:45649 "EHLO
-        mail-ed1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727868AbfGZOY4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jul 2019 10:24:56 -0400
-Received: by mail-ed1-f67.google.com with SMTP id x19so47528396eda.12
-        for <linux-doc@vger.kernel.org>; Fri, 26 Jul 2019 07:24:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=sender:date:from:to:cc:subject:message-id:mail-followup-to
-         :references:mime-version:content-disposition:in-reply-to:user-agent;
-        bh=iKvptB00eRJtAAyTA2xD7jIbIFN8n5r7X55dRtJg5Cw=;
-        b=f5L5IA3ayQmsQHY5KhIVuOFZAzingVgEcKk8EvRC5mL0KaqQyGnWAI0cbPTrNNuCz7
-         K18hM9pz10KIe5v0Z75fubUwSrYuFdOojHzAiYoIdyx9DO1Z5oW1vH1CNjwbsYziO6sT
-         /QI7SGtnnJxli3UbqAjXRyOHKL5kB7R4In+E8=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-         :mail-followup-to:references:mime-version:content-disposition
-         :in-reply-to:user-agent;
-        bh=iKvptB00eRJtAAyTA2xD7jIbIFN8n5r7X55dRtJg5Cw=;
-        b=DMVzOZwzZSQzN1umn4IGSTl/SLZp6UWZ9/LEFWS36lpOFfv76pSuGJkIm1aYnjkUwq
-         KkqvtnBqs5yuOjHpvP6pw7XunFiXKDcW8fhLB4ELDSQknvt2UymCyJwbzkB/5LhABzAC
-         luG9g0A+3pZUH1pBLt7IgnqJaHOHt9ZSvZyy8QIElM+W1cbcSPBHfNmmwR+LCv/xvczq
-         E7E2xM1mWyVerZ04mvW8XK4LFW1YJ63VCIr1arbAbewdi+Z3YD9IhqWn/gIoB7L+/cAA
-         3RGVb4mU1MzYb4z/MH0d1vqdUuIZFvdS2ox6oeSOEJjBWpbPCy6d/LQPvJ7wsDqq0mUp
-         yMoQ==
-X-Gm-Message-State: APjAAAXLYUgoiK5ot3bwBbIUWZ7/4Xh9blLdbSxwehxAantXi9mxmVyJ
-        crSe6AWCLhInXY+lDeSxupI=
-X-Google-Smtp-Source: APXvYqziEeXaDKlMzj6WkqFhfWfsWvSAtDFO47Ob8pLZS5KABUGhUNYgZNlFDTi49ewicGXyP7F9Dg==
-X-Received: by 2002:a50:ad48:: with SMTP id z8mr82669671edc.66.1564151094716;
-        Fri, 26 Jul 2019 07:24:54 -0700 (PDT)
-Received: from phenom.ffwll.local ([2a02:168:569e:0:3106:d637:d723:e855])
-        by smtp.gmail.com with ESMTPSA id m31sm14121701edd.42.2019.07.26.07.24.52
-        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Fri, 26 Jul 2019 07:24:53 -0700 (PDT)
-Date:   Fri, 26 Jul 2019 16:24:50 +0200
-From:   Daniel Vetter <daniel@ffwll.ch>
-To:     Rob Herring <robh+dt@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        "Paul E. McKenney" <paulmck@linux.ibm.com>,
-        Josh Triplett <josh@joshtriplett.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-        Alan Stern <stern@rowland.harvard.edu>,
-        Andrea Parri <andrea.parri@amarulasolutions.com>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        David Howells <dhowells@redhat.com>,
-        Jade Alglave <j.alglave@ucl.ac.uk>,
-        Luc Maranget <luc.maranget@inria.fr>,
-        Akira Yokosawa <akiyks@gmail.com>,
-        Daniel Lustig <dlustig@nvidia.com>,
-        Jerry Hoemann <jerry.hoemann@hpe.com>,
-        Wim Van Sebroeck <wim@linux-watchdog.org>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <maxime.ripard@bootlin.com>,
-        Sean Paul <sean@poorly.run>, David Airlie <airlied@linux.ie>,
-        Daniel Vetter <daniel@ffwll.ch>, Ajay Gupta <ajayg@nvidia.com>,
-        Don Brace <don.brace@microsemi.com>,
-        "James E.J. Bottomley" <jejb@linux.ibm.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        rcu@vger.kernel.org,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        devicetree@vger.kernel.org,
-        "open list:GENERIC INCLUDE/ASM HEADER FILES" 
-        <linux-arch@vger.kernel.org>,
-        LINUX-WATCHDOG <linux-watchdog@vger.kernel.org>,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        Linux I2C <linux-i2c@vger.kernel.org>,
-        esc.storagedev@microsemi.com, SCSI <linux-scsi@vger.kernel.org>,
-        Wolfram Sang <wsa@the-dreams.de>
-Subject: Re: [PATCH 1/7] docs: fix broken doc references due to renames
-Message-ID: <20190726142450.GJ15868@phenom.ffwll.local>
-Mail-Followup-To: Rob Herring <robh+dt@kernel.org>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        "Paul E. McKenney" <paulmck@linux.ibm.com>,
-        Josh Triplett <josh@joshtriplett.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-        Alan Stern <stern@rowland.harvard.edu>,
-        Andrea Parri <andrea.parri@amarulasolutions.com>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        David Howells <dhowells@redhat.com>,
-        Jade Alglave <j.alglave@ucl.ac.uk>,
-        Luc Maranget <luc.maranget@inria.fr>,
-        Akira Yokosawa <akiyks@gmail.com>,
-        Daniel Lustig <dlustig@nvidia.com>,
-        Jerry Hoemann <jerry.hoemann@hpe.com>,
-        Wim Van Sebroeck <wim@linux-watchdog.org>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <maxime.ripard@bootlin.com>,
-        Sean Paul <sean@poorly.run>, David Airlie <airlied@linux.ie>,
-        Ajay Gupta <ajayg@nvidia.com>, Don Brace <don.brace@microsemi.com>,
-        "James E.J. Bottomley" <jejb@linux.ibm.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        rcu@vger.kernel.org,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        devicetree@vger.kernel.org,
-        "open list:GENERIC INCLUDE/ASM HEADER FILES" <linux-arch@vger.kernel.org>,
-        LINUX-WATCHDOG <linux-watchdog@vger.kernel.org>,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        Linux I2C <linux-i2c@vger.kernel.org>, esc.storagedev@microsemi.com,
-        SCSI <linux-scsi@vger.kernel.org>, Wolfram Sang <wsa@the-dreams.de>
-References: <cover.1564140865.git.mchehab+samsung@kernel.org>
- <430ed96cb234805d1deb216e8c8559da22cc6bac.1564140865.git.mchehab+samsung@kernel.org>
- <CAL_JsqK_rfHehrKW_NS89BOV0=dYoao0H=zOzG=D-724vKduKw@mail.gmail.com>
+        id S1728149AbfGZOn4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Jul 2019 10:43:56 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:58802 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726491AbfGZOn4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jul 2019 10:43:56 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Resent-To:Resent-Message-ID:Subject:
+        Resent-From:Resent-Date:Sender:Content-Transfer-Encoding:MIME-Version:
+        References:In-Reply-To:Message-Id:Date:Cc:To:From:Reply-To:Content-Type:
+        Content-ID:Content-Description:Resent-Sender:Resent-Cc:List-Id:List-Help:
+        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=BHbEVXmpRXCdh5Jrvlt6ed3il/gE3QsZ5hyzVd7gNN0=; b=Jvcg7aIAyUnNxGRVjLagCFhKVj
+        lPwd/rVq7zqtZ87u2irtds/j893QBEAUMQj4EZKSAw/BWP7qXwYEAS/DCklpYWxinwQ4MV11yWpzK
+        WHDzwqojYJxFAMHXhmDL+CgrwdMI8KRgXc6yYNe0rCiQKtPhlo3XKpCVWsI6jeir/eqfhtUJ2rTK4
+        ul0BpB10fjGWQYNAumKIPoFOy99GsMteH/IpP3KDPuBgp3D6G+Z0HXcfPPWcMatfybpjvzbgm0ee4
+        XsvoA8l3n1zXKGBRB+yEF9xW9FrKplIJQqvTsAczGZYsI/yWgEaR2deMcjh5VnyCReRDzvi0+c1eO
+        a5ZkrLOg==;
+Received: from [179.95.31.157] (helo=coco.lan)
+        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+        id 1hr1Rs-000556-1o; Fri, 26 Jul 2019 14:43:56 +0000
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=casper.20170209; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=BHbEVXmpRXCdh5Jrvlt6ed3il/gE3QsZ5hyzVd7gNN0=; b=bMvgzuQCiAbHtzM7bvL8aWj1vT
+ keI3Oppm1KpzKDZeQ7dGI8bMTpYb3wjJLiBlUj0eyY33tvlRvUnLGOGZ1oRii9fjN3ht43VHU/wW9
+ Ww7Tv6DIobtE17QAKNCc+FH08p0y1gzVKwHEq9gK9eJYxB8O2y5R9LqqTtXcco/qEGmBx2FE8zcdN
+ WyDyXdPBq/evxHIIiLZjSZhiWuBmOMEY/DPbQrvIa3jYmvmvPD/ZpyurRGZEhxHi/LbRhPk857AJ1
+ OUhAWz1EpqPLRTBjpKb/KwHnd04y/4wqfDRF49bIWhjmzmjlrroKC3SYx3CRSIpQxs153JASujqTQ
+ xODEQqfw==;
+Authentication-Results: mail.kernel.org;
+ dkim=pass (2048-bit key) header.d=infradead.org header.i=@infradead.org header.b="YrgblcWE"
+DMARC-Filter: OpenDMARC Filter v1.3.2 mail.kernel.org 6CD5C22CBA
+Authentication-Results: mail.kernel.org; dmarc=fail (p=none dis=none) header.from=kernel.org
+Authentication-Results: mail.kernel.org; spf=none smtp.mailfrom=mchehab@bombadil.infradead.org
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+ d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
+ MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
+ Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
+ Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
+ List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+ bh=BHbEVXmpRXCdh5Jrvlt6ed3il/gE3QsZ5hyzVd7gNN0=; b=YrgblcWE+kyoTOgZZvvh5zofhB
+ uZbqRqJbem8lv7YXyCnH2vK/3lDTKwX6azTsKnFf1V3mqYDpYiJ3ULMem2qFzFX+uucfqmVvzG7EJ
+ e5pnu0uIA42xKh7FKvjBqqjP+Givbbvz8LLfxYhqBeCGoKk2M45j47lBYiWITu3hzu5NeMW28i1+2
+ bgumi5U+tFD/ErtMEdhWZyFIYSyIdxdyAeAxhN4LUmGDmST1SSJESSQBLTNA2CdXPLbe2g/sOGq1G
+ ws52VM1i6csFzQMeOiA/7t5v71cQwhAG2PIJAk1Zr9wDGZjaBuR+Qyfy6M45rY0mmcNGcqx7Acerd
+ PCjIMHKQ==;
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org> (by way of
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>)
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Date:   Fri, 26 Jul 2019 08:31:18 -0300
+Message-Id: <bb9f486cd7bce8d82cb0a1a7210b9ac1a6571112.1564139914.git.mchehab+samsung@kernel.org>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <cover.1564139914.git.mchehab+samsung@kernel.org>
+References: <cover.1564139914.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAL_JsqK_rfHehrKW_NS89BOV0=dYoao0H=zOzG=D-724vKduKw@mail.gmail.com>
-X-Operating-System: Linux phenom 4.19.0-5-amd64 
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 8bit
+X-CRM114-Version: 20100106-BlameMichelson ( TRE 0.8.0 (BSD) ) MR-646709E3 
+X-CRM114-CacheID: sfid-20190726_123146_661343_C1E0AEE9 
+X-CRM114-Status: GOOD (  12.13  )
+X-Spam-Score: -5.0 (-----)
+X-Spam-Report: SpamAssassin version 3.4.2 on casper.infradead.org summary:
+ Content analysis details:   (-5.0 points, 5.0 required)
+  pts rule name              description
+ ---- ---------------------- --------------------------------------------------
+ -5.0 RCVD_IN_DNSWL_HI       RBL: Sender listed at https://www.dnswl.org/,
+                             high trust
+                             [198.145.29.99 listed in list.dnswl.org]
+  0.0 SPF_HELO_NONE          SPF: HELO does not publish an SPF Record
+ -0.0 SPF_PASS               SPF: sender matches SPF record
+ -0.1 DKIM_VALID             Message has at least one valid DKIM or DK signature
+  0.1 DKIM_SIGNED            Message has a DKIM or DK signature, not necessarily
+                             valid
+Subject: [PATCH v2 04/10] scripts/sphinx-pre-install: fix script for
+ RHEL/CentOS
+Apparently-To: <mchehab+samsung@kernel.org>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
+To:     unlisted-recipients:; (no To-header on input)
 
-On Fri, Jul 26, 2019 at 07:41:35AM -0600, Rob Herring wrote:
-> On Fri, Jul 26, 2019 at 5:47 AM Mauro Carvalho Chehab
-> <mchehab+samsung@kernel.org> wrote:
-> >
-> > Some files got renamed but probably due to some merge conflicts,
-> > a few references still point to the old locations.
-> >
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-> > Acked-by: Wolfram Sang <wsa@the-dreams.de> # I2C part
-> > Reviewed-by: Jerry Hoemann <jerry.hoemann@hpe.com> # hpwdt.rst
-> > ---
-> >  Documentation/RCU/rculist_nulls.txt                   |  2 +-
-> >  Documentation/devicetree/bindings/arm/idle-states.txt |  2 +-
-> >  Documentation/locking/spinlocks.rst                   |  4 ++--
-> >  Documentation/memory-barriers.txt                     |  2 +-
-> >  Documentation/translations/ko_KR/memory-barriers.txt  |  2 +-
-> >  Documentation/watchdog/hpwdt.rst                      |  2 +-
-> >  MAINTAINERS                                           | 10 +++++-----
-> >  drivers/gpu/drm/drm_modes.c                           |  2 +-
+There's a missing parenthesis at the script, with causes it to
+fail to detect non-Fedora releases (e. g. RHEL/CentOS).
 
-for the drm part:
+Tested with Centos 7.6.1810.
 
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
+Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+---
+ scripts/sphinx-pre-install | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> >  drivers/i2c/busses/i2c-nvidia-gpu.c                   |  2 +-
-> >  drivers/scsi/hpsa.c                                   |  4 ++--
-> >  10 files changed, 16 insertions(+), 16 deletions(-)
-> 
-> Acked-by: Rob Herring <robh@kernel.org>
-
+diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
+index f230e65329a2..101ddd00bf02 100755
+--- a/scripts/sphinx-pre-install
++++ b/scripts/sphinx-pre-install
+@@ -371,7 +371,7 @@ sub give_redhat_hints()
+ 	#
+ 	# Checks valid for RHEL/CentOS version 7.x.
+ 	#
+-	if (! $system_release =~ /Fedora/) {
++	if (!($system_release =~ /Fedora/)) {
+ 		$map{"virtualenv"} = "python-virtualenv";
+ 	}
+ 
 -- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-http://blog.ffwll.ch
+2.21.0
+
