@@ -2,85 +2,146 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BDC547B4E0
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2019 23:18:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B5AE27B4E9
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2019 23:21:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387631AbfG3VS2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Jul 2019 17:18:28 -0400
-Received: from mail-pf1-f194.google.com ([209.85.210.194]:41356 "EHLO
-        mail-pf1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387612AbfG3VS1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Jul 2019 17:18:27 -0400
-Received: by mail-pf1-f194.google.com with SMTP id m30so30497136pff.8
-        for <linux-doc@vger.kernel.org>; Tue, 30 Jul 2019 14:18:27 -0700 (PDT)
+        id S2387672AbfG3VU6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Jul 2019 17:20:58 -0400
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:33595 "EHLO
+        mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2387480AbfG3VUv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Jul 2019 17:20:51 -0400
+Received: by mail-pl1-f193.google.com with SMTP id c14so29316222plo.0
+        for <linux-doc@vger.kernel.org>; Tue, 30 Jul 2019 14:20:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=message-id:mime-version:content-transfer-encoding:in-reply-to
-         :references:cc:from:to:subject:user-agent:date;
-        bh=k25bbBxrj71AiOvcgKU3QmoOQriQ0XSTDWlRTYXe0pA=;
-        b=Sma1hF7pz/FTcBGWICvGeP7v3c2UxR/eHqbhVrY3dt6dbhhY9TKjbXmVAg41wGbZ+0
-         ILDPGlvraupgEtzDH0C0zJxFESuJI69WGvf/8bBegcfMVKTbf7pbbqhMZYXCGe5qJFKC
-         831o4DYoiXOiAMl2OnZJD5zm6TIpIRpZ8RuRw=
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=44ONowdSlztBIQEZ8M7KxSw1b2hoFMAz6PJ/0W+xxXg=;
+        b=MYdDGpp4U8oIsvbKVIe106xriDXDt2HsL7ey1BlQ47Ueozytcr9m4K0kD1zTuiDIUr
+         s81G9I+zLn6mpHlhRusMyJTXhU0xiQKG6H1w+TjpUsvrxZP2UJ6+xTm3wvFvOwal8vuW
+         Kw41DfrD39NC3wbOQq+/iHnnwakNPOXJMDv1Y=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:mime-version
-         :content-transfer-encoding:in-reply-to:references:cc:from:to:subject
-         :user-agent:date;
-        bh=k25bbBxrj71AiOvcgKU3QmoOQriQ0XSTDWlRTYXe0pA=;
-        b=SyBjmMJ88RdgpEotVyA3SuWx17WUVS2DgvolqMX/GTQbqUMl0AJBpwLY5JO2IH1v+3
-         8gINiDhKUOgWOlEF7Z6JyMe7zmwO+MjR/wa6kcpGhlVt2BCM0Nf7c3dSHGDo0YVEqKPD
-         1C+BVHFZ7CQw5VtLvEhvLgJFCqGUeHCxWW6pVxaEigPM9m7tGzXYuv0FNVUXPmySKIgV
-         pjuHckeJN8VXQX/+deQy/q0AjHY+QhxtpCUO4Z1DpBJkB/bdA+5x6XrhOpctJoi62kTn
-         sZBHgv+oIx4IOOqf4b7H09A2TvJ95ANebMKOW2DdB/1qZwXhS3Fw4wMOS2CAjWmHqGl3
-         gbeQ==
-X-Gm-Message-State: APjAAAUNbAp10HolWn+A3P474VjsTVy0yWKCUDo46qVn9GTX+3wzddn9
-        VvOTLOjU9zxu159LqGDB7SAP9QucQj9LYA==
-X-Google-Smtp-Source: APXvYqzvQLeDEwvNTxn+rNx6BufjmxfuAKjelJV7vuPtHfLYpsOuMNgmHgSU4xzB9MsNOZtVSZcd1Q==
-X-Received: by 2002:a65:4b8b:: with SMTP id t11mr110215149pgq.130.1564521506924;
-        Tue, 30 Jul 2019 14:18:26 -0700 (PDT)
-Received: from chromium.org ([2620:15c:202:1:fa53:7765:582b:82b9])
-        by smtp.gmail.com with ESMTPSA id x13sm70320598pfn.6.2019.07.30.14.18.26
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=44ONowdSlztBIQEZ8M7KxSw1b2hoFMAz6PJ/0W+xxXg=;
+        b=K96MgzOzGSajIjPckh5qED2oU65bfX95PCvN6junkfiW8cd1DZIklseVlAjeCEJG24
+         E484/rXPjo4G1ljO13JRhVs5e7b0JlxPTn/+lxh0vYvrmU0xCIH86pTQZcTbWvtjsWJM
+         rLANTzD/USgLJi9UnzCskzmHYgwAmn+Zrc3SZ6kv8O39MtMY8pQ3PXWQ22J0SjIrf2ft
+         ZcQcJImkU7uPsokgFurs9q77IBbQ0oV1jG5KSyxj/xL3l/GP/Bse/TuhCJ1G6atG61Jh
+         tqmzrF7j54/CsuW3w3gWhAsnfGPP9tDEHy0GaMLHRrxt5PP8/VwKGBcAYFNeGrBZBNlD
+         lUDg==
+X-Gm-Message-State: APjAAAXqgYTCBXDA3AiPFnFvofRgPxPHVRZHquIhT0cO2Ddd6m1qyxLI
+        V+hWgTgffg7Je+8Cgog2e02Lyw==
+X-Google-Smtp-Source: APXvYqwSvLy4JdF9PJDCx8oAd5LCxJAQBDlp7X/T7IjGLK5mMyOmj16cBEiWsPXuNBpZ5ITHvwqSmA==
+X-Received: by 2002:a17:902:4b:: with SMTP id 69mr116375727pla.89.1564521650056;
+        Tue, 30 Jul 2019 14:20:50 -0700 (PDT)
+Received: from smtp.gmail.com ([2620:15c:202:1:fa53:7765:582b:82b9])
+        by smtp.gmail.com with ESMTPSA id n140sm68205686pfd.132.2019.07.30.14.20.49
         (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Tue, 30 Jul 2019 14:18:26 -0700 (PDT)
-Message-ID: <5d40b422.1c69fb81.204e.b4d8@mx.google.com>
-Content-Type: text/plain; charset="utf-8"
-MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20190730211250.GD4700@bombadil.infradead.org>
-References: <20190730210752.157700-1-swboyd@chromium.org> <20190730211250.GD4700@bombadil.infradead.org>
-Cc:     linux-kernel@vger.kernel.org, Greg KH <gregkh@linuxfoundation.org>,
-        Tri Vo <trong@android.com>, linux-doc@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>
+        Tue, 30 Jul 2019 14:20:49 -0700 (PDT)
 From:   Stephen Boyd <swboyd@chromium.org>
 To:     Matthew Wilcox <willy@infradead.org>
-Subject: Re: [PATCH] idr: Document calling context for IDA APIs mustn't use locks
-User-Agent: alot/0.8.1
-Date:   Tue, 30 Jul 2019 14:18:25 -0700
+Cc:     linux-kernel@vger.kernel.org, Greg KH <gregkh@linuxfoundation.org>,
+        Tri Vo <trong@android.com>, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v2 1/2] idr: Document calling context for IDA APIs mustn't use locks
+Date:   Tue, 30 Jul 2019 14:20:47 -0700
+Message-Id: <20190730212048.164657-1-swboyd@chromium.org>
+X-Mailer: git-send-email 2.22.0.709.g102302147b-goog
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Quoting Matthew Wilcox (2019-07-30 14:12:50)
-> On Tue, Jul 30, 2019 at 02:07:52PM -0700, Stephen Boyd wrote:
-> > The documentation for these functions indicates that callers don't need
-> > to hold a lock while calling them, but that documentation is only in one
-> > place under "IDA Usage". Let's state the same information on each IDA
-> > function so that it's clear what the calling context requires.
-> > Furthermore, let's document ida_simple_get() with the same information
-> > so that callers know how this API works.
->=20
-> I don't want people to use ida_simple_get() any more.  Use ida_alloc()
-> instead.
+The documentation for these functions indicates that callers don't need
+to hold a lock while calling them, but that documentation is only in one
+place under "IDA Usage". Let's state the same information on each IDA
+function so that it's clear what the calling context requires.
+Furthermore, let's document ida_simple_get() with the same information
+so that callers know how this API works.
 
-Fair enough. I'll document it as deprecated in another patch.
+Cc: Greg KH <gregkh@linuxfoundation.org>
+Cc: Tri Vo <trong@android.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+---
+ include/linux/idr.h | 9 ++++++---
+ lib/idr.c           | 9 ++++++---
+ 2 files changed, 12 insertions(+), 6 deletions(-)
 
->=20
-> > - * Context: Any context.
-> > + * Context: Any context. It is safe to call this function without
-> > + * synchronisation in your code.
->=20
-> I prefer "without locking" to "without synchronisation" ...
->=20
+diff --git a/include/linux/idr.h b/include/linux/idr.h
+index 4ec8986e5dfb..5bb026007044 100644
+--- a/include/linux/idr.h
++++ b/include/linux/idr.h
+@@ -263,7 +263,8 @@ void ida_destroy(struct ida *ida);
+  *
+  * Allocate an ID between 0 and %INT_MAX, inclusive.
+  *
+- * Context: Any context.
++ * Context: Any context. It is safe to call this function without
++ * locking in your code.
+  * Return: The allocated ID, or %-ENOMEM if memory could not be allocated,
+  * or %-ENOSPC if there are no free IDs.
+  */
+@@ -280,7 +281,8 @@ static inline int ida_alloc(struct ida *ida, gfp_t gfp)
+  *
+  * Allocate an ID between @min and %INT_MAX, inclusive.
+  *
+- * Context: Any context.
++ * Context: Any context. It is safe to call this function without
++ * locking in your code.
+  * Return: The allocated ID, or %-ENOMEM if memory could not be allocated,
+  * or %-ENOSPC if there are no free IDs.
+  */
+@@ -297,7 +299,8 @@ static inline int ida_alloc_min(struct ida *ida, unsigned int min, gfp_t gfp)
+  *
+  * Allocate an ID between 0 and @max, inclusive.
+  *
+- * Context: Any context.
++ * Context: Any context. It is safe to call this function without
++ * locking in your code.
+  * Return: The allocated ID, or %-ENOMEM if memory could not be allocated,
+  * or %-ENOSPC if there are no free IDs.
+  */
+diff --git a/lib/idr.c b/lib/idr.c
+index 66a374892482..dbd25696162e 100644
+--- a/lib/idr.c
++++ b/lib/idr.c
+@@ -381,7 +381,8 @@ EXPORT_SYMBOL(idr_replace);
+  * Allocate an ID between @min and @max, inclusive.  The allocated ID will
+  * not exceed %INT_MAX, even if @max is larger.
+  *
+- * Context: Any context.
++ * Context: Any context. It is safe to call this function without
++ * locking in your code.
+  * Return: The allocated ID, or %-ENOMEM if memory could not be allocated,
+  * or %-ENOSPC if there are no free IDs.
+  */
+@@ -488,7 +489,8 @@ EXPORT_SYMBOL(ida_alloc_range);
+  * @ida: IDA handle.
+  * @id: Previously allocated ID.
+  *
+- * Context: Any context.
++ * Context: Any context. It is safe to call this function without
++ * locking in your code.
+  */
+ void ida_free(struct ida *ida, unsigned int id)
+ {
+@@ -540,7 +542,8 @@ EXPORT_SYMBOL(ida_free);
+  * or freed.  If the IDA is already empty, there is no need to call this
+  * function.
+  *
+- * Context: Any context.
++ * Context: Any context. It is safe to call this function without
++ * locking in your code.
+  */
+ void ida_destroy(struct ida *ida)
+ {
+-- 
+Sent by a computer through tubes
 
-Ok. Resending shortly.
