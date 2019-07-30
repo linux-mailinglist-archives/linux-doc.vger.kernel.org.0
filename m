@@ -2,91 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0107A7B4E8
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2019 23:21:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9F4697B4EE
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jul 2019 23:23:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387648AbfG3VUw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Jul 2019 17:20:52 -0400
-Received: from mail-pf1-f193.google.com ([209.85.210.193]:42694 "EHLO
-        mail-pf1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387476AbfG3VUw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Jul 2019 17:20:52 -0400
-Received: by mail-pf1-f193.google.com with SMTP id q10so30477211pff.9
-        for <linux-doc@vger.kernel.org>; Tue, 30 Jul 2019 14:20:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=p7dnDK6H9SahbARleR/Q2DwmEq2lmdqCyjjpFTu4H3s=;
-        b=KFPaOPrQyZw+bawZZpKuOF9eMNcb8SWFtgMrxbvJiFsbTq5bXGuhq61Iu+DoFjYLjr
-         uMxxWqhK9E9zQT6WGNFKGzvJRPN36hycRmMSNrycTuU0G54Kc40jfiKXKSvcQ4wfppsN
-         cE4nYGlFbyZLZ3T/+z6w7SqMyOJwofXkmrCSc=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=p7dnDK6H9SahbARleR/Q2DwmEq2lmdqCyjjpFTu4H3s=;
-        b=ZOM1pCKKhIK/hyA1lBiBwFezRkXlQl/MLTtfQIOKBHA0L70KA7LMZVvwUY9YoH4Ir0
-         43bqPx650IB4lRJ7XIVU+OJxtncGWfMrIusAOq+0Ztn8FjSkA5jCi0ntfuQNQhocoaCX
-         kUkQM6N6hkg792Ijo2jx+rrN6PkVV0oMdQYfGX3K9zdKwYKBvuuyonX94x58Z+B1cjMY
-         cXS1I9k6wjPvGhKjiGzJuabqyBvBRL1PVoq6GOKO5WUB2l67uZkA1WTajoukQjdNHfmg
-         8GTwnyHl8g2LqMg9iui+8Kwt/vWqE0OBGTn1kwDAjFq6GWWAgYmEnGFrBhFMx0eu81iq
-         HCQA==
-X-Gm-Message-State: APjAAAXk7Xvsj4NY1oJDwwj6B0tZoM94aiKdbUwtWYgRCeXYSEN0DHhb
-        c7+jNODoxsuLOgiZc3sfkqPyBA==
-X-Google-Smtp-Source: APXvYqzsTyh96T1xkgu3NVZAClAdd/dL910dpPjg5fs+kLb+t+7VvwS6e3WVven83W+AxHF33v5QRQ==
-X-Received: by 2002:a65:4489:: with SMTP id l9mr114011518pgq.207.1564521650996;
-        Tue, 30 Jul 2019 14:20:50 -0700 (PDT)
-Received: from smtp.gmail.com ([2620:15c:202:1:fa53:7765:582b:82b9])
-        by smtp.gmail.com with ESMTPSA id n140sm68205686pfd.132.2019.07.30.14.20.50
-        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Tue, 30 Jul 2019 14:20:50 -0700 (PDT)
-From:   Stephen Boyd <swboyd@chromium.org>
-To:     Matthew Wilcox <willy@infradead.org>
-Cc:     linux-kernel@vger.kernel.org, Greg KH <gregkh@linuxfoundation.org>,
-        Tri Vo <trong@android.com>, Jonathan Corbet <corbet@lwn.net>,
+        id S2387673AbfG3VXZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Jul 2019 17:23:25 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:30862 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S2387649AbfG3VXZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Jul 2019 17:23:25 -0400
+Received: from pps.filterd (m0098414.ppops.net [127.0.0.1])
+        by mx0b-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x6ULHIYh111296;
+        Tue, 30 Jul 2019 17:22:52 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0b-001b2d01.pphosted.com with ESMTP id 2u2wp3r5x7-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 30 Jul 2019 17:22:52 -0400
+Received: from m0098414.ppops.net (m0098414.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.27/8.16.0.27) with SMTP id x6ULHO7E111414;
+        Tue, 30 Jul 2019 17:22:52 -0400
+Received: from ppma01dal.us.ibm.com (83.d6.3fa9.ip4.static.sl-reverse.com [169.63.214.131])
+        by mx0b-001b2d01.pphosted.com with ESMTP id 2u2wp3r5wb-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 30 Jul 2019 17:22:52 -0400
+Received: from pps.filterd (ppma01dal.us.ibm.com [127.0.0.1])
+        by ppma01dal.us.ibm.com (8.16.0.27/8.16.0.27) with SMTP id x6ULAECh003389;
+        Tue, 30 Jul 2019 21:22:50 GMT
+Received: from b01cxnp22035.gho.pok.ibm.com (b01cxnp22035.gho.pok.ibm.com [9.57.198.25])
+        by ppma01dal.us.ibm.com with ESMTP id 2u0e871hnq-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 30 Jul 2019 21:22:50 +0000
+Received: from b01ledav003.gho.pok.ibm.com (b01ledav003.gho.pok.ibm.com [9.57.199.108])
+        by b01cxnp22035.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x6ULMo8j39911730
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 30 Jul 2019 21:22:50 GMT
+Received: from b01ledav003.gho.pok.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id E4848B2064;
+        Tue, 30 Jul 2019 21:22:49 +0000 (GMT)
+Received: from b01ledav003.gho.pok.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id C455EB2072;
+        Tue, 30 Jul 2019 21:22:49 +0000 (GMT)
+Received: from paulmck-ThinkPad-W541 (unknown [9.85.181.16])
+        by b01ledav003.gho.pok.ibm.com (Postfix) with ESMTP;
+        Tue, 30 Jul 2019 21:22:49 +0000 (GMT)
+Received: by paulmck-ThinkPad-W541 (Postfix, from userid 1000)
+        id BA57916C0553; Tue, 30 Jul 2019 14:22:50 -0700 (PDT)
+Date:   Tue, 30 Jul 2019 14:22:50 -0700
+From:   "Paul E. McKenney" <paulmck@linux.ibm.com>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Josh Triplett <josh@joshtriplett.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Joel Fernandes <joel@joelfernandes.org>,
+        Jonathan Corbet <corbet@lwn.net>, rcu@vger.kernel.org,
         linux-doc@vger.kernel.org
-Subject: [PATCH v2 2/2] idr: Document that ida_simple_{get,remove}() are deprecated
-Date:   Tue, 30 Jul 2019 14:20:48 -0700
-Message-Id: <20190730212048.164657-2-swboyd@chromium.org>
-X-Mailer: git-send-email 2.22.0.709.g102302147b-goog
-In-Reply-To: <20190730212048.164657-1-swboyd@chromium.org>
-References: <20190730212048.164657-1-swboyd@chromium.org>
+Subject: Re: [PATCH v2 25/26] docs: rcu: convert some articles from html to
+ ReST
+Message-ID: <20190730212250.GJ14271@linux.ibm.com>
+Reply-To: paulmck@linux.ibm.com
+References: <cover.1564145354.git.mchehab+samsung@kernel.org>
+ <8444797277eea7be474f40625bb190775a9cee33.1564145354.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <8444797277eea7be474f40625bb190775a9cee33.1564145354.git.mchehab+samsung@kernel.org>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-07-30_10:,,
+ signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
+ malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
+ clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
+ mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.0.1-1906280000 definitions=main-1907300212
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-These two functions are deprecated. Users should call ida_alloc() or
-ida_free() respectively instead. Add documentation to this effect until
-the macro can be removed.
+On Fri, Jul 26, 2019 at 09:51:35AM -0300, Mauro Carvalho Chehab wrote:
+> There are 4 RCU articles that are written on html format.
+> 
+> The way they are, they can't be part of the Linux Kernel
+> documentation body nor share the styles and pdf output.
+> 
+> So, convert them to ReST format.
+> 
+> This way, make htmldocs and make pdfdocs will produce a
+> documentation output that will be like the original ones, but
+> will be part of the Linux Kernel documentation body.
+> 
+> Part of the conversion was done with the help of pandoc, but
+> the result had some broken things that had to be manually
+> fixed.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 
-Cc: Greg KH <gregkh@linuxfoundation.org>
-Cc: Tri Vo <trong@android.com>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Signed-off-by: Stephen Boyd <swboyd@chromium.org>
----
- include/linux/idr.h | 4 ++++
- 1 file changed, 4 insertions(+)
+I am having some trouble applying these, at least in part due to UTF-8
+sequences, for example double left quotation mark.  These end up being
+"=E2=80=9C", with a few space characters turned into "=20".
 
-diff --git a/include/linux/idr.h b/include/linux/idr.h
-index 5bb026007044..12f7233c7adb 100644
---- a/include/linux/idr.h
-+++ b/include/linux/idr.h
-@@ -314,6 +314,10 @@ static inline void ida_init(struct ida *ida)
- 	xa_init_flags(&ida->xa, IDA_INIT_FLAGS);
- }
- 
-+/*
-+ * ida_simple_get() and ida_simple_remove() are deprecated. Use
-+ * ida_alloc() and ida_free() instead respectively.
-+ */
- #define ida_simple_get(ida, start, end, gfp)	\
- 			ida_alloc_range(ida, start, (end) - 1, gfp)
- #define ida_simple_remove(ida, id)	ida_free(ida, id)
--- 
-Sent by a computer through tubes
+Any advice on how to apply these?  Should I just pull commits from
+somewhere?
 
+							Thanx, Paul
