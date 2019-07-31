@@ -2,129 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5E7957CEC0
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jul 2019 22:37:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5BC547CEFF
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jul 2019 22:45:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727508AbfGaUhU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 31 Jul 2019 16:37:20 -0400
-Received: from mail-wm1-f65.google.com ([209.85.128.65]:51115 "EHLO
-        mail-wm1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726553AbfGaUhU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 Jul 2019 16:37:20 -0400
-Received: by mail-wm1-f65.google.com with SMTP id v15so62215803wml.0;
-        Wed, 31 Jul 2019 13:37:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=5Ad1NCToWXZTQRV4Ttp/KixfCZVZvJNhr1ng0+uFB0U=;
-        b=HUS7OTHI0nOhTR1EypLAwV3WGLFJzyNNDC5Fuu1OVzfIFaNsnEtVHFz3CHkQtYU8pq
-         x50WNqAh5N3XQwVG1LXxBzt+JRqEGkBWZpzoBbEwfsq+MDQi6473wQ5FAFrN5oloDm6I
-         6vzPpODaGECtCkr3Cp2qGKYqDQyO4m4GhGDTih+s9Ur4w/X8IHUDFfRkWXiM7oWa/lPU
-         1xOmN6K1DV34d5hw9ONjIBMSOmhQo2ipEKYq4kO5FTd4cz8qqWo57My3yPGTAm0q+OYU
-         jrJtUGGe3537qXzswQKksHiYltyHqNe497MQN94TDoqOazRswFnWBJUuf/FRlP7Yqiam
-         exgA==
+        id S1728195AbfGaUpD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 31 Jul 2019 16:45:03 -0400
+Received: from mail-io1-f65.google.com ([209.85.166.65]:45645 "EHLO
+        mail-io1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728171AbfGaUpD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 Jul 2019 16:45:03 -0400
+Received: by mail-io1-f65.google.com with SMTP id g20so139322045ioc.12;
+        Wed, 31 Jul 2019 13:45:02 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=5Ad1NCToWXZTQRV4Ttp/KixfCZVZvJNhr1ng0+uFB0U=;
-        b=lJ8DjaWilVb9oMTxrWOFndABNS0giPK1CJdkcbvHRccIGhotForXuLT4ka8v4/LRoD
-         r3+rw80zBNoZWKKi/uwiBz5tAkg9y1PZnuhgVC/8KXfyxtNQBTE+26DJdaHvBOj5cXI0
-         Sw4iAsiqjlGsHIzzqOPFF4j1A//tBg1VdD/LFGQWD1VFvXyHEqQ4Pe8JORu2P8uSzRQl
-         gILPUcpAC5Ps5IRuUrW2z2/nqibYl0aB4V3GF9bzEV/JNtcd2UnmEBBgN7Kw1lFfHUdf
-         qwEXUZIAIywY2pXxA97QFa2WNYSROUo++3VrzmgDaTvHs/k4ycNG+WtbfaZu9M1ySa5F
-         libg==
-X-Gm-Message-State: APjAAAWBgHMNudxP2wwGTpbqze476ChSOTn+h28nyyeROZru/mvVnPGM
-        o1Yy8qqAQWV2M0DlMCw8F9xYNCLkR5oLVg==
-X-Google-Smtp-Source: APXvYqx1/Q0uveVq5FV8+XH5STD3bgkAXXFg30KGFFyawCzxVmplf3ARBL/1G5Pc26DRP0+epGnCFQ==
-X-Received: by 2002:a1c:a584:: with SMTP id o126mr114587742wme.147.1564605436488;
-        Wed, 31 Jul 2019 13:37:16 -0700 (PDT)
-Received: from archlinux-threadripper ([2a01:4f8:222:2f1b::2])
-        by smtp.gmail.com with ESMTPSA id t13sm83919608wrr.0.2019.07.31.13.37.15
+        bh=IEdWqU8ZGIKi58VBvQ5Df0TfD3yH+WqFvbBa6oi6JN0=;
+        b=gdAuq6hRNwcct0UEJR+ICcB9NN+jqRF2oBu36RUAqT4AATP5BZg/xCA2bNnN3O+iVV
+         MzhIu2ufLMsqij+ncXAdCH5zaeglYmHmyFgpVNQTw1Jj5X+Zp5km7nVHDgsgU7zuJDXb
+         K0z4NidosR44/dSZkqd/ZibcwMdOP8xAhyyGX8PwrUK/TsUULa5zHlkicKQc3RyRNcbq
+         Q9xFdKFBoBHi/10oTniWeE+fuseoPc1wPERl1HNBElyxXHgONKjRYX9I7CSgrFxqcWQ8
+         ipDlZyHAhzq0WM+x77249XlqIlbVwEMeT5JGuCkCqbPFn5BU18maKyzVXMDeVuCDWKca
+         0GTA==
+X-Gm-Message-State: APjAAAUF4LhyX/TMNJyy6W8rrpbkCkufByVi483e89URsmCGcCOTCZXm
+        hz5Pz3vIAlgunGnJHmcKNg==
+X-Google-Smtp-Source: APXvYqwzwZZOidfJYrJYlhodKg0mYboN9I3Q0BeikYWx8dkhXD4Oe6fAGwkanR/mlCD2tlc0FX8G4Q==
+X-Received: by 2002:a5d:9416:: with SMTP id v22mr45821355ion.4.1564605902112;
+        Wed, 31 Jul 2019 13:45:02 -0700 (PDT)
+Received: from localhost ([64.188.179.254])
+        by smtp.gmail.com with ESMTPSA id t133sm102419600iof.21.2019.07.31.13.45.01
         (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
-        Wed, 31 Jul 2019 13:37:15 -0700 (PDT)
-Date:   Wed, 31 Jul 2019 13:37:14 -0700
-From:   Nathan Chancellor <natechancellor@gmail.com>
-To:     Saravana Kannan <saravanak@google.com>
-Cc:     David Collins <collinsd@codeaurora.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
-        <devicetree@vger.kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Android Kernel Team <kernel-team@android.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        kbuild test robot <lkp@intel.com>
-Subject: Re: [PATCH] of/platform: Add missing const qualifier in
- of_link_property
-Message-ID: <20190731203714.GA41488@archlinux-threadripper>
-References: <20190729221101.228240-4-saravanak@google.com>
- <20190731181733.60422-1-natechancellor@gmail.com>
- <CAGETcx9LXP9b_W_1XQFmjODPJVrbnU+vH1RKer2i=jU7Q7EADg@mail.gmail.com>
+        Wed, 31 Jul 2019 13:45:01 -0700 (PDT)
+Date:   Wed, 31 Jul 2019 14:45:00 -0600
+From:   Rob Herring <robh@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Mark Rutland <mark.rutland@arm.com>, devicetree@vger.kernel.org
+Subject: Re: [PATCH 2/6] docs: writing-schema.md: convert from markdown to
+ ReST
+Message-ID: <20190731204500.GA6131@bogus>
+References: <cover.1564603513.git.mchehab+samsung@kernel.org>
+ <a239cd93ad86579ce7e02bc3032abd33b476e193.1564603513.git.mchehab+samsung@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAGETcx9LXP9b_W_1XQFmjODPJVrbnU+vH1RKer2i=jU7Q7EADg@mail.gmail.com>
-User-Agent: Mutt/1.12.1 (2019-06-15)
+In-Reply-To: <a239cd93ad86579ce7e02bc3032abd33b476e193.1564603513.git.mchehab+samsung@kernel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jul 31, 2019 at 01:33:40PM -0700, Saravana Kannan wrote:
-> On Wed, Jul 31, 2019 at 11:19 AM Nathan Chancellor
-> <natechancellor@gmail.com> wrote:
-> >
-> > Clang errors:
-> >
-> > drivers/of/platform.c:632:28: error: initializing 'struct
-> > supplier_bindings *' with an expression of type 'const struct
-> > supplier_bindings [4]' discards qualifiers
-> > [-Werror,-Wincompatible-pointer-types-discards-qualifiers]
-> >         struct supplier_bindings *s = bindings;
-> >                                   ^   ~~~~~~~~
-> > 1 error generated.
-> >
-> > Fixes: 05f812549f53 ("of/platform: Add functional dependency link from DT bindings")
-> > Reported-by: kbuild test robot <lkp@intel.com>
-> > Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
-> > ---
-> >
-> > Given this is still in the driver-core-testing branch, I am fine with
-> > this being squashed in if desired.
-> >
-> >  drivers/of/platform.c | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/drivers/of/platform.c b/drivers/of/platform.c
-> > index e2da90e53edb..21838226d68a 100644
-> > --- a/drivers/of/platform.c
-> > +++ b/drivers/of/platform.c
-> > @@ -629,7 +629,7 @@ static bool of_link_property(struct device *dev, struct device_node *con_np,
-> >                              const char *prop)
-> >  {
-> >         struct device_node *phandle;
-> > -       struct supplier_bindings *s = bindings;
-> > +       const struct supplier_bindings *s = bindings;
-> >         unsigned int i = 0;
-> >         bool done = true, matched = false;
+On Wed, Jul 31, 2019 at 05:08:49PM -0300, Mauro Carvalho Chehab wrote:
+> The documentation standard is ReST and not markdown.
 > 
-> Odd. I never got that email. Thanks for fixing this. I'll squash it
-> into my patch series since I have a bunch of other kbuild errors about
-> documentation.
-> 
-> -Saravana
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> Acked-by: Rob Herring <robh@kernel.org>
+> ---
+>  Documentation/devicetree/writing-schema.md  | 130 -----------------
+>  Documentation/devicetree/writing-schema.rst | 153 ++++++++++++++++++++
+>  2 files changed, 153 insertions(+), 130 deletions(-)
+>  delete mode 100644 Documentation/devicetree/writing-schema.md
+>  create mode 100644 Documentation/devicetree/writing-schema.rst
 
-It was a clang only email (which currently just get sent to our
-clang-built-linux mailing list as there is a lot of overlap with GCC).
+Applied, thanks.
 
-Not sure why there was no GCC email about this but oh well. Thanks for
-picking it up!
-
-Cheers,
-Nathan
+Rob
