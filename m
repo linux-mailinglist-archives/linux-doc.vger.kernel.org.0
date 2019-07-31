@@ -2,28 +2,33 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B9A3A7CC73
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Jul 2019 21:06:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 624467CC7F
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Jul 2019 21:09:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730714AbfGaTGC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 31 Jul 2019 15:06:02 -0400
-Received: from ms.lwn.net ([45.79.88.28]:55684 "EHLO ms.lwn.net"
+        id S1730778AbfGaTJJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 31 Jul 2019 15:09:09 -0400
+Received: from ms.lwn.net ([45.79.88.28]:55702 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725793AbfGaTGC (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 31 Jul 2019 15:06:02 -0400
+        id S1726073AbfGaTJJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 31 Jul 2019 15:09:09 -0400
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 435806D9;
-        Wed, 31 Jul 2019 19:06:02 +0000 (UTC)
-Date:   Wed, 31 Jul 2019 13:06:01 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id B15556D9;
+        Wed, 31 Jul 2019 19:09:08 +0000 (UTC)
+Date:   Wed, 31 Jul 2019 13:09:07 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Federico Vaga <federico.vaga@vaga.pv.it>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] doc: email-clients miscellaneous fixes
-Message-ID: <20190731130601.1859be1f@lwn.net>
-In-Reply-To: <20190706210100.26698-1-federico.vaga@vaga.pv.it>
-References: <20190706210100.26698-1-federico.vaga@vaga.pv.it>
+To:     Shobhit Kukreti <shobhitkukreti@gmail.com>
+Cc:     skhan@linuxfoundation.org,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        willy@infradead.org
+Subject: Re: [PATCH v3] Documentation: filesystems: Convert jfs.txt to
+Message-ID: <20190731130907.5e0527e9@lwn.net>
+In-Reply-To: <1562772541-32144-1-git-send-email-shobhitkukreti@gmail.com>
+References: <20190710093323.7e5d6790@coco.lan>
+        <1562772541-32144-1-git-send-email-shobhitkukreti@gmail.com>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -33,15 +38,16 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat,  6 Jul 2019 23:01:00 +0200
-Federico Vaga <federico.vaga@vaga.pv.it> wrote:
+On Wed, 10 Jul 2019 08:29:01 -0700
+Shobhit Kukreti <shobhitkukreti@gmail.com> wrote:
 
-> Fixed some style inconsistencies and remove old statement referring to
-> kmail missing feature (saving email from the view window is possible).
+> This converts the plain text documentation of jfs.txt to reStructuredText
+> format. Added to documentation build process and verified with 
+> make htmldocs
 > 
-> Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
+> Signed-off-by: Shobhit Kukreti <shobhitkukreti@gmail.com>
 
-So this one fell through the cracks, it seems, sorry.  Applied now.
+So this kind of fell through the cracks, sorry; I've applied it now.
 
 Thanks,
 
