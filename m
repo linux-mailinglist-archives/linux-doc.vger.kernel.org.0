@@ -2,91 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6CEE67FC12
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Aug 2019 16:24:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8351A7FCC3
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Aug 2019 16:52:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390684AbfHBOYE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Aug 2019 10:24:04 -0400
-Received: from mail.kernel.org ([198.145.29.99]:37488 "EHLO mail.kernel.org"
+        id S2387833AbfHBOud (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Aug 2019 10:50:33 -0400
+Received: from foss.arm.com ([217.140.110.172]:53178 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731067AbfHBOYE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 2 Aug 2019 10:24:04 -0400
-Received: from [192.168.0.101] (unknown [180.111.32.87])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id DA07F20679;
-        Fri,  2 Aug 2019 14:24:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1564755843;
-        bh=TgNcbo6TXcLbjq5+6OYqRgo/Qoe3xOKUkbU920IR4iE=;
-        h=Subject:To:Cc:References:From:Date:In-Reply-To:From;
-        b=QdJbHI4QqAf5coM6w57j/GQ9wNbAmk57r70Ay5RmCr8gUGhWlTy5PBEM5C4Q9zS5b
-         BYxLuLKi1vFk7ymoVG9ICyvdZuUyI3H3IT5y+uj/bvDjvExZo9yOtoEANv0ymSdKIS
-         3Ev9S/1AokA1xrp+CoDJCxpYvVX/4paPncNoZs1k=
-Subject: Re: [PATCH] mailmap: add entry for Jaegeuk Kim
-To:     Jonathan Corbet <corbet@lwn.net>, Chao Yu <yuchao0@huawei.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        jaegeuk@kernel.org
-References: <20190802012135.31419-1-yuchao0@huawei.com>
- <20190802072626.405246e3@lwn.net>
-From:   Chao Yu <chao@kernel.org>
-Message-ID: <fe9cd2bc-76ed-5371-e0c3-b538e7a805e7@kernel.org>
-Date:   Fri, 2 Aug 2019 22:23:37 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
+        id S1731205AbfHBOuc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 2 Aug 2019 10:50:32 -0400
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C9FD11596;
+        Fri,  2 Aug 2019 07:50:29 -0700 (PDT)
+Received: from e112269-lin.arm.com (e112269-lin.cambridge.arm.com [10.1.196.133])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E2E0B3F575;
+        Fri,  2 Aug 2019 07:50:27 -0700 (PDT)
+From:   Steven Price <steven.price@arm.com>
+Cc:     Steven Price <steven.price@arm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Marc Zyngier <maz@kernel.org>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        =?UTF-8?q?Radim=20Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@redhat.com>,
+        Russell King <linux@armlinux.org.uk>,
+        Will Deacon <will@kernel.org>,
+        James Morse <james.morse@arm.com>,
+        Julien Thierry <julien.thierry.kdev@gmail.com>,
+        Suzuki K Pouloze <suzuki.poulose@arm.com>,
+        kvm@vger.kernel.org, kvmarm@lists.cs.columbia.edu,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 0/9] arm64: Stolen time support
+Date:   Fri,  2 Aug 2019 15:50:08 +0100
+Message-Id: <20190802145017.42543-1-steven.price@arm.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20190802072626.405246e3@lwn.net>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2019-8-2 21:26, Jonathan Corbet wrote:
-> On Fri, 2 Aug 2019 09:21:35 +0800
-> Chao Yu <yuchao0@huawei.com> wrote:
-> 
->> Add entry to connect all Jaegeuk's email addresses.
->>
->> Acked-by: Jaegeuk Kim <jaegeuk@kernel.org>
->> Signed-off-by: Chao Yu <yuchao0@huawei.com>
->> ---
->>  .mailmap | 3 +++
->>  1 file changed, 3 insertions(+)
->>
->> diff --git a/.mailmap b/.mailmap
->> index 477debe3d960..70d41c86e644 100644
->> --- a/.mailmap
->> +++ b/.mailmap
->> @@ -89,6 +89,9 @@ Henrik Kretzschmar <henne@nachtwindheim.de>
->>  Henrik Rydberg <rydberg@bitmath.org>
->>  Herbert Xu <herbert@gondor.apana.org.au>
->>  Jacob Shin <Jacob.Shin@amd.com>
->> +Jaegeuk Kim <jaegeuk@kernel.org> <jaegeuk@google.com>
->> +Jaegeuk Kim <jaegeuk@kernel.org> <jaegeuk@motorola.com>
->> +Jaegeuk Kim <jaegeuk@kernel.org> <jaegeuk.kim@samsung.com>
-> 
-> So as I understand it, the mailmap file is there mostly to ensure that a
-> person's changesets are properly collected in 'git shortlog' and such.  As
-> documented on the man page, it is used when a person's name is spelled
-> differently at different times.
-> 
-> That doesn't appear to be the case here, and shortlog output is correct
-> already.  Given that, do we *really* need to maintain a collection of old
-> email addresses in the mailmap file?  What is the benefit of that?
+This series add support for paravirtualized time for arm64 guests and
+KVM hosts following the specification in Arm's document DEN 0057A:
 
-IMO, when we use git-blame to find out who is response for specified code, w/o
-mailmap we may just found old obsolete email address in the related commit; even
-we can search full name for his/her new email address, how can we make sure they
-are the same person... so anyway, it can help to find last valid/canonical email
-address of someone.
+https://developer.arm.com/docs/den0057/a
 
-Thanks,
+It implements support for stolen time, allowing the guest to
+identify time when it is forcibly not executing.
 
-> 
-> Thanks,
-> 
-> jon
-> 
+It doesn't implement support for Live Physical Time (LPT) as there are
+some concerns about the overheads and approach in the above
+specification, and I expect an updated version of the specification to
+be released soon with just the stolen time parts.
+
+I previously posted a series including LPT (as well as stolen time):
+https://lore.kernel.org/kvmarm/20181212150226.38051-1-steven.price@arm.com/
+
+Patches 2, 5, 7 and 8 are cleanup patches and could be taken separately.
+
+Christoffer Dall (1):
+  KVM: arm/arm64: Factor out hypercall handling from PSCI code
+
+Steven Price (8):
+  KVM: arm64: Document PV-time interface
+  KVM: arm64: Implement PV_FEATURES call
+  KVM: arm64: Support stolen time reporting via shared structure
+  KVM: Allow kvm_device_ops to be const
+  KVM: arm64: Provide a PV_TIME device to user space
+  arm/arm64: Provide a wrapper for SMCCC 1.1 calls
+  arm/arm64: Make use of the SMCCC 1.1 wrapper
+  arm64: Retrieve stolen time as paravirtualized guest
+
+ Documentation/virtual/kvm/arm/pvtime.txt | 107 +++++++++++++
+ arch/arm/kvm/Makefile                    |   2 +-
+ arch/arm/kvm/handle_exit.c               |   2 +-
+ arch/arm/mm/proc-v7-bugs.c               |  13 +-
+ arch/arm64/include/asm/kvm_host.h        |  13 +-
+ arch/arm64/include/asm/kvm_mmu.h         |   2 +
+ arch/arm64/include/asm/pvclock-abi.h     |  20 +++
+ arch/arm64/include/uapi/asm/kvm.h        |   6 +
+ arch/arm64/kernel/Makefile               |   1 +
+ arch/arm64/kernel/cpu_errata.c           |  80 ++++------
+ arch/arm64/kernel/kvm.c                  | 155 ++++++++++++++++++
+ arch/arm64/kvm/Kconfig                   |   1 +
+ arch/arm64/kvm/Makefile                  |   2 +
+ arch/arm64/kvm/handle_exit.c             |   4 +-
+ include/kvm/arm_hypercalls.h             |  44 ++++++
+ include/kvm/arm_psci.h                   |   2 +-
+ include/linux/arm-smccc.h                |  58 +++++++
+ include/linux/cpuhotplug.h               |   1 +
+ include/linux/kvm_host.h                 |   4 +-
+ include/linux/kvm_types.h                |   2 +
+ include/uapi/linux/kvm.h                 |   2 +
+ virt/kvm/arm/arm.c                       |  18 +++
+ virt/kvm/arm/hypercalls.c                | 138 ++++++++++++++++
+ virt/kvm/arm/mmu.c                       |  44 ++++++
+ virt/kvm/arm/psci.c                      |  84 +---------
+ virt/kvm/arm/pvtime.c                    | 190 +++++++++++++++++++++++
+ virt/kvm/kvm_main.c                      |   6 +-
+ 27 files changed, 848 insertions(+), 153 deletions(-)
+ create mode 100644 Documentation/virtual/kvm/arm/pvtime.txt
+ create mode 100644 arch/arm64/include/asm/pvclock-abi.h
+ create mode 100644 arch/arm64/kernel/kvm.c
+ create mode 100644 include/kvm/arm_hypercalls.h
+ create mode 100644 virt/kvm/arm/hypercalls.c
+ create mode 100644 virt/kvm/arm/pvtime.c
+
+-- 
+2.20.1
+
