@@ -2,248 +2,338 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B582E81BAD
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Aug 2019 15:16:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DAF6E81B18
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Aug 2019 15:12:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729122AbfHENQV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 5 Aug 2019 09:16:21 -0400
-Received: from foss.arm.com ([217.140.110.172]:48182 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729521AbfHENGM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 5 Aug 2019 09:06:12 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9C0D91597;
-        Mon,  5 Aug 2019 06:06:11 -0700 (PDT)
-Received: from [10.1.196.133] (e112269-lin.cambridge.arm.com [10.1.196.133])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id AEB373F706;
-        Mon,  5 Aug 2019 06:06:09 -0700 (PDT)
-Subject: Re: [PATCH 1/9] KVM: arm64: Document PV-time interface
-To:     Marc Zyngier <maz@kernel.org>
-Cc:     peter.maydell@linaro.org, kvm@vger.kernel.org,
-        =?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@redhat.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Suzuki K Pouloze <suzuki.poulose@arm.com>,
-        linux-doc@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
-        linux-kernel@vger.kernel.org, James Morse <james.morse@arm.com>,
-        linux-arm-kernel@lists.infradead.org,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Will Deacon <will@kernel.org>, kvmarm@lists.cs.columbia.edu,
-        Julien Thierry <julien.thierry.kdev@gmail.com>
-References: <20190802145017.42543-1-steven.price@arm.com>
- <20190802145017.42543-2-steven.price@arm.com> <20190803121343.2f482200@why>
-From:   Steven Price <steven.price@arm.com>
-Message-ID: <9b2077d1-29f2-549a-fd61-f9c8d3730c9c@arm.com>
-Date:   Mon, 5 Aug 2019 14:06:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+        id S1729257AbfHENLr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 5 Aug 2019 09:11:47 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:37407 "EHLO
+        mail-pf1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730429AbfHENKz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Aug 2019 09:10:55 -0400
+Received: by mail-pf1-f195.google.com with SMTP id 19so39625062pfa.4
+        for <linux-doc@vger.kernel.org>; Mon, 05 Aug 2019 06:10:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=joelfernandes.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=iKjp1sxUDmAX2wgfYH2j9XCohNundn8m7dMqKgSLwMI=;
+        b=saBskzTkvd5+FOutbmH6Dqo7LDxB6j1lLBCs9c9SMjidr9mCGA3JZWUpgJ24D1jEWP
+         BYegX6h+4En4gHMNnjD2hkiM6LzR+gIgnvCH+Qv7kghjhnQ196JBcG8u6X82QA91+dxZ
+         AT0bQGPEEfkSIGpd4JlN2XA3pwAzzkgJGuH/g=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=iKjp1sxUDmAX2wgfYH2j9XCohNundn8m7dMqKgSLwMI=;
+        b=J2CSbIeLNNJbRTh0Q/XMDOGjmp4Fji3nGiwZIng8kg2ilkNjBCLOWi2JEBeINN33r1
+         Ha041nTDPmn8ki1YDJyaDy/rYYzqhs841fyC9x7u8f1mwFh24bhejRoN2RhpQakVzOrx
+         8m2yzkylCVHromIWfTkaGXgNwl+BIOCHnphdYnNXTjXDSYqor4zJQAvDIhlwEQExrgf/
+         Kt1HMD9pBWbGz/jsvY3YYtQBQwBdpUEQ+awi/7mhDtbqx0HoPQe8y4LYytrSfqI9UD09
+         a6zgw9Iqt64rg9ca12JePcaKDDNKzau1ZpdPTaNIx1nwzxIRHOpiYlk2Jz4Wxv/trjlS
+         g6yQ==
+X-Gm-Message-State: APjAAAUOiynFza/mYoYKUHG94dnb9h/YQJ+Oh6X6men61NfRGay6CBL9
+        DcXsJiRgiWZKA6bwG0nwbck=
+X-Google-Smtp-Source: APXvYqz6u3cCDYJg+E3Gaw42gMUYLq5q2x4d2s7eKbbvOoyG04W78eoEyJ1/Ww27pKnvOKH8Zeg+QQ==
+X-Received: by 2002:a63:3006:: with SMTP id w6mr14611039pgw.440.1565010654596;
+        Mon, 05 Aug 2019 06:10:54 -0700 (PDT)
+Received: from localhost ([2620:15c:6:12:9c46:e0da:efbf:69cc])
+        by smtp.gmail.com with ESMTPSA id d129sm89649753pfc.168.2019.08.05.06.10.53
+        (version=TLS1_3 cipher=AEAD-AES256-GCM-SHA384 bits=256/256);
+        Mon, 05 Aug 2019 06:10:53 -0700 (PDT)
+Date:   Mon, 5 Aug 2019 09:10:52 -0400
+From:   Joel Fernandes <joel@joelfernandes.org>
+To:     Minchan Kim <minchan@kernel.org>
+Cc:     linux-kernel@vger.kernel.org,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Brendan Gregg <bgregg@netflix.com>,
+        Christian Hansen <chansen3@cisco.com>, dancol@google.com,
+        fmayer@google.com, joaodias@google.com,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>, kernel-team@android.com,
+        linux-api@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+        Michal Hocko <mhocko@suse.com>,
+        Mike Rapoport <rppt@linux.ibm.com>, namhyung@google.com,
+        Roman Gushchin <guro@fb.com>,
+        Stephen Rothwell <sfr@canb.auug.org.au>, surenb@google.com,
+        tkjos@google.com, Vladimir Davydov <vdavydov.dev@gmail.com>,
+        Vlastimil Babka <vbabka@suse.cz>, wvw@google.com
+Subject: Re: [PATCH v3 1/2] mm/page_idle: Add per-pid idle page tracking
+ using virtual indexing
+Message-ID: <20190805131052.GA208558@google.com>
+References: <20190726152319.134152-1-joel@joelfernandes.org>
+ <20190731085335.GD155569@google.com>
+ <20190731171937.GA75376@google.com>
+ <20190805075547.GA196934@google.com>
 MIME-Version: 1.0
-In-Reply-To: <20190803121343.2f482200@why>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190805075547.GA196934@google.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 03/08/2019 12:13, Marc Zyngier wrote:
-> On Fri,  2 Aug 2019 15:50:09 +0100
-> Steven Price <steven.price@arm.com> wrote:
+On Mon, Aug 05, 2019 at 04:55:47PM +0900, Minchan Kim wrote:
+> Hi Joel,
+
+Hi Minchan,
+
+> On Wed, Jul 31, 2019 at 01:19:37PM -0400, Joel Fernandes wrote:
+> > > > -static struct page *page_idle_get_page(unsigned long pfn)
+> > > > +static struct page *page_idle_get_page(struct page *page_in)
+> > > 
+> > > Looks weird function name after you changed the argument.
+> > > Maybe "bool check_valid_page(struct page *page)"?
+> > 
+> > 
+> > I don't think so, this function does a get_page_unless_zero() on the page as well.
+> > 
+> > > >  {
+> > > >  	struct page *page;
+> > > >  	pg_data_t *pgdat;
+> > > >  
+> > > > -	if (!pfn_valid(pfn))
+> > > > -		return NULL;
+> > > > -
+> > > > -	page = pfn_to_page(pfn);
+> > > > +	page = page_in;
+> > > >  	if (!page || !PageLRU(page) ||
+> > > >  	    !get_page_unless_zero(page))
+> > > >  		return NULL;
+> > > > @@ -51,6 +49,18 @@ static struct page *page_idle_get_page(unsigned long pfn)
+> > > >  	return page;
+> > > >  }
+> > > >  
+> > > > +/*
+> > > > + * This function tries to get a user memory page by pfn as described above.
+> > > > + */
+> > > > +static struct page *page_idle_get_page_pfn(unsigned long pfn)
+> > > 
+> > > So we could use page_idle_get_page name here.
+> > 
+> > 
+> > Based on above comment, I prefer to keep same name. Do you agree?
 > 
-> [+Peter for the userspace aspect of things]
+> Yes, I agree. Just please add a comment about refcount in the description
+> on page_idle_get_page.
+
+Ok.
+
+
+> > > > +	return page_idle_get_page(pfn_to_page(pfn));
+> > > > +}
+> > > > +
+> > > >  static bool page_idle_clear_pte_refs_one(struct page *page,
+> > > >  					struct vm_area_struct *vma,
+> > > >  					unsigned long addr, void *arg)
+> > > > @@ -118,6 +128,47 @@ static void page_idle_clear_pte_refs(struct page *page)
+> > > >  		unlock_page(page);
+> > > >  }
+> > > >  
+> > > > +/* Helper to get the start and end frame given a pos and count */
+> > > > +static int page_idle_get_frames(loff_t pos, size_t count, struct mm_struct *mm,
+> > > > +				unsigned long *start, unsigned long *end)
+> > > > +{
+> > > > +	unsigned long max_frame;
+> > > > +
+> > > > +	/* If an mm is not given, assume we want physical frames */
+> > > > +	max_frame = mm ? (mm->task_size >> PAGE_SHIFT) : max_pfn;
+> > > > +
+> > > > +	if (pos % BITMAP_CHUNK_SIZE || count % BITMAP_CHUNK_SIZE)
+> > > > +		return -EINVAL;
+> > > > +
+> > > > +	*start = pos * BITS_PER_BYTE;
+> > > > +	if (*start >= max_frame)
+> > > > +		return -ENXIO;
+> > > > +
+> > > > +	*end = *start + count * BITS_PER_BYTE;
+> > > > +	if (*end > max_frame)
+> > > > +		*end = max_frame;
+> > > > +	return 0;
+> > > > +}
+> > > > +
+> > > > +static bool page_really_idle(struct page *page)
+> > > 
+> > > Just minor:
+> > > Instead of creating new API, could we combine page_is_idle with
+> > > introducing furthere argument pte_check?
+> > 
+> > 
+> > I cannot see in the code where pte_check will be false when this is called? I
+> > could rename the function to page_idle_check_ptes() if that's Ok with you.
 > 
-> Hi Steve,
+> What I don't like is _*really*_ part of the funcion name.
 > 
->> Introduce a paravirtualization interface for KVM/arm64 based on the
->> "Arm Paravirtualized Time for Arm-Base Systems" specification DEN 0057A.
->>
->> This only adds the details about "Stolen Time" as the details of "Live
->> Physical Time" have not been fully agreed.
->>
->> User space can specify a reserved area of memory for the guest and
->> inform KVM to populate the memory with information on time that the host
->> kernel has stolen from the guest.
->>
->> A hypercall interface is provided for the guest to interrogate the
->> hypervisor's support for this interface and the location of the shared
->> memory structures.
->>
->> Signed-off-by: Steven Price <steven.price@arm.com>
->> ---
->>  Documentation/virtual/kvm/arm/pvtime.txt | 107 +++++++++++++++++++++++
->>  1 file changed, 107 insertions(+)
->>  create mode 100644 Documentation/virtual/kvm/arm/pvtime.txt
->>
->> diff --git a/Documentation/virtual/kvm/arm/pvtime.txt b/Documentation/virtual/kvm/arm/pvtime.txt
->> new file mode 100644
->> index 000000000000..e6ae9799e1d5
->> --- /dev/null
->> +++ b/Documentation/virtual/kvm/arm/pvtime.txt
->> @@ -0,0 +1,107 @@
->> +Paravirtualized time support for arm64
->> +======================================
->> +
->> +Arm specification DEN0057/A defined a standard for paravirtualised time
->> +support for Aarch64 guests:
+> I see several page_is_idle calls in huge_memory.c, migration.c, swap.c.
+> They could just check only page flag so they could use "false" with pte_check.
+
+I will rename it to page_idle_check_ptes(). If you want pte_check argument,
+that can be a later patch if/when there are other users for it in other
+files. Hope that's reasonable.
+
+
+> > > > +ssize_t page_idle_proc_generic(struct file *file, char __user *ubuff,
+> > > > +			       size_t count, loff_t *pos,
+> > > > +			       struct task_struct *tsk, int write)
+> > > > +{
+> > > > +	int ret;
+> > > > +	char *buffer;
+> > > > +	u64 *out;
+> > > > +	unsigned long start_addr, end_addr, start_frame, end_frame;
+> > > > +	struct mm_struct *mm = file->private_data;
+> > > > +	struct mm_walk walk = { .pmd_entry = pte_page_idle_proc_range, };
+> > > > +	struct page_node *cur;
+> > > > +	struct page_idle_proc_priv priv;
+> > > > +	bool walk_error = false;
+> > > > +	LIST_HEAD(idle_page_list);
+> > > > +
+> > > > +	if (!mm || !mmget_not_zero(mm))
+> > > > +		return -EINVAL;
+> > > > +
+> > > > +	if (count > PAGE_SIZE)
+> > > > +		count = PAGE_SIZE;
+> > > > +
+> > > > +	buffer = kzalloc(PAGE_SIZE, GFP_KERNEL);
+> > > > +	if (!buffer) {
+> > > > +		ret = -ENOMEM;
+> > > > +		goto out_mmput;
+> > > > +	}
+> > > > +	out = (u64 *)buffer;
+> > > > +
+> > > > +	if (write && copy_from_user(buffer, ubuff, count)) {
+> > > > +		ret = -EFAULT;
+> > > > +		goto out;
+> > > > +	}
+> > > > +
+> > > > +	ret = page_idle_get_frames(*pos, count, mm, &start_frame, &end_frame);
+> > > > +	if (ret)
+> > > > +		goto out;
+> > > > +
+> > > > +	start_addr = (start_frame << PAGE_SHIFT);
+> > > > +	end_addr = (end_frame << PAGE_SHIFT);
+> > > > +	priv.buffer = buffer;
+> > > > +	priv.start_addr = start_addr;
+> > > > +	priv.write = write;
+> > > > +
+> > > > +	priv.idle_page_list = &idle_page_list;
+> > > > +	priv.cur_page_node = 0;
+> > > > +	priv.page_nodes = kzalloc(sizeof(struct page_node) *
+> > > > +				  (end_frame - start_frame), GFP_KERNEL);
+> > > > +	if (!priv.page_nodes) {
+> > > > +		ret = -ENOMEM;
+> > > > +		goto out;
+> > > > +	}
+> > > > +
+> > > > +	walk.private = &priv;
+> > > > +	walk.mm = mm;
+> > > > +
+> > > > +	down_read(&mm->mmap_sem);
+> > > > +
+> > > > +	/*
+> > > > +	 * idle_page_list is needed because walk_page_vma() holds ptlock which
+> > > > +	 * deadlocks with page_idle_clear_pte_refs(). So we have to collect all
+> > > > +	 * pages first, and then call page_idle_clear_pte_refs().
+> > > > +	 */
+> > > 
+> > > Thanks for the comment, I was curious why you want to have
+> > > idle_page_list and the reason is here.
+> > > 
+> > > How about making this /proc/<pid>/page_idle per-process granuariy,
+> > > unlike system level /sys/xxx/page_idle? What I meant is not to check
+> > > rmap to see any reference from random process but just check only
+> > > access from the target process. It would be more proper as /proc/
+> > > <pid>/ interface and good for per-process tracking as well as
+> > > fast.
+> > 
+> > 
+> > I prefer not to do this for the following reasons:
+> > (1) It makes a feature lost, now accesses to shared pages will not be
+> > accounted properly. 
 > 
-> nit: AArch64
+> Do you really want to check global attribute by per-process interface?
+
+Pages are inherrently not per-process, they are global. A page does not
+necessarily belong to a process. An anonymous page can be shared. We are
+operating on pages in the end of the day.
+
+I think you are confusing the per-process file interface with the core
+mechanism. The core mechanism always operations on physical PAGES.
+
+
+> That would be doable with existing idle page tracking feature and that's
+> the one of reasons page idle tracking was born(e.g. even, page cache
+> for non-mapped) unlike clear_refs.
+
+I think you are misunderstanding the patch, the patch does not want to change
+the core mechanism. That is a bit out of scope for the patch. Page
+idle-tracking at the core of it looks at PTE of all processes. We are just
+using the VFN (virtual frame) interface to skip the need for separate pagemap
+look up -- that's it.
+
+
+> Once we create a new interface by per-process, just checking the process
+> -granuariy access check sounds more reasonable to me.
+
+It sounds reasonable but there is no reason to not do the full and proper
+page tracking for now, including shared pages. Otherwise it makes it
+inconsistent with the existing mechanism and can confuse the user about what
+to expect (especially for shared pages).
+
+
+> With that, we could catch only idle pages of the target process even though
+> the page was touched by several other processes.
+> If the user want to know global level access point, they could use
+> exisint interface(If there is a concern(e.g., security) to use existing
+> idle page tracking, let's discuss it as other topic how we could make
+> existing feature more useful).
 > 
->> +
->> +https://developer.arm.com/docs/den0057/a
+> IOW, my point is that we already have global access check(1. from ptes
+> among several processes, 2. from page flag for non-mapped pages) feature
+> from from existing idle page tracking interface and now we are about to create
+> new interface for per-process wise so I wanted to create a particular
+> feature which cannot be covered by existing iterface.
+
+Yes, it sounds like you want to create a different feature. Then that can be
+a follow-up different patch, and that is out of scope for this patch.
+
+
+> > (2) It makes it inconsistent with other idle page tracking mechanism. I
 > 
-> Between this file and the above document, which one is authoritative?
+> That's the my comment to create different idle page tracking we couldn't
+> do with existing interface.
 
-The above document should be authoritative - although I'm still waiting
-for the final version to be published. I'm not expecting any changes to
-the stolen time part though.
+Yes, sure. But that can be a different patch and we can weigh the benefits of
+it at that time. I don't want to introduce a new page tracking mechanism, I
+am just trying to reuse the existing one.
 
->> +
->> +KVM/Arm64 implements the stolen time part of this specification by providing
+
+> > prefer if post per-process. At the heart of it, the tracking is always at the
 > 
-> nit: KVM/arm64
+> What does it mean "post per-process"?
+
+Sorry it was a typo, I meant "the core mechanism should not be a per-process
+one, but a global one". We are just changing the interface in this patch, we
+are not changing the existing core mechanism. That gives us all the benefits
+of the existing code such as non-interference with page reclaim code, without
+introducing any new bugs. By the way I did fix a bug in the existing original
+code as well!
+
+
+> > physical page level -- I feel that is how it should be. Other drawback, is
+> > also we have to document this subtlety.
 > 
->> +some hypervisor service calls to support a paravirtualized guest obtaining a
->> +view of the amount of time stolen from its execution.
->> +
->> +Two new SMCCC compatible hypercalls are defined:
->> +
->> +PV_FEATURES 0xC5000020
->> +PV_TIME_ST  0xC5000022
->> +
->> +These are only available in the SMC64/HVC64 calling convention as
->> +paravirtualized time is not available to 32 bit Arm guests.
->> +
->> +PV_FEATURES
->> +    Function ID:  (uint32)  : 0xC5000020
->> +    PV_func_id:   (uint32)  : Either PV_TIME_LPT or PV_TIME_ST
->> +    Return value: (int32)   : NOT_SUPPORTED (-1) or SUCCESS (0) if the relevant
->> +                              PV-time feature is supported by the hypervisor.
-> 
-> How is PV_FEATURES discovered? Is the intention to make it a generic
-> ARM-wide PV discovery mechanism, not specific to PV time?
+> Sorry, Could you elaborate it a bit?
 
-SMCCC is mandated for PV time. So, assuming the hypervisor supports
-SMCCC, the "NOT_SUPPORTED" return is mandated by SMCCC if PV time isn't
-supported.
+I meant, with a new mechanism as the one you are proposing, we have to
+document that now shared pages will not be tracked properly. That is a
+'subtle difference' and will have to be documented appropriated in the
+'internals' section of the idle page tracking document.
 
-However, we do also use the SMCCC_ARCH_FEATURES mechanism to check the
-existence of PV_FEATURES before use. I'll update the document to call
-this out.
+thanks,
 
->> +
->> +PV_TIME_ST
->> +    Function ID:  (uint32)  : 0xC5000022
->> +    Return value: (int64)   : IPA of the stolen time data structure for this
->> +                              (V)CPU. On failure:
->> +                              NOT_SUPPORTED (-1)
->> +
-> 
-> Is the size implicit? What are the memory attributes? This either needs
-> documenting here, or point to the right bit to the spec.
+ - Joel
 
-The size is implicit - it's a pointer to the below structure, so the
-guest can only rely on the first 16 bytes being valid. The memory
-attributes are described in the specification as:
-
-"The calling guest can map the IPA into normal memory with inner and
-outer write back caching attributes, in the inner sharable domain"
-
-I'll put those details in this document for completeness.
-
->> +Stolen Time
->> +-----------
->> +
->> +The structure pointed to by the PV_TIME_ST hypercall is as follows:
->> +
->> +  Field       | Byte Length | Byte Offset | Description
->> +  ----------- | ----------- | ----------- | --------------------------
->> +  Revision    |      4      |      0      | Must be 0 for version 0.1
->> +  Attributes  |      4      |      4      | Must be 0
->> +  Stolen time |      8      |      8      | Stolen time in unsigned
->> +              |             |             | nanoseconds indicating how
->> +              |             |             | much time this VCPU thread
->> +              |             |             | was involuntarily not
->> +              |             |             | running on a physical CPU.
->> +
->> +The structure will be updated by the hypervisor periodically as time is stolen
-> 
-> Is it really periodic? If so, when is the update frequency?
-
-Hmm, periodic might be the wrong term - there is no guaranteed frequency
-of update. The spec says:
-
-"The hypervisor must update this value prior to scheduling a virtual CPU"
-
-I guess that's probably the best description.
-
->> +from the VCPU. It will be present within a reserved region of the normal
->> +memory given to the guest. The guest should not attempt to write into this
->> +memory. There is a structure by VCPU of the guest.
-> 
-> What if the vcpu writes to it? Does it get a fault?
-
-From the perspective from the specification this is undefined. A fault
-would therefore be acceptable but isn't generated in the implementation
-defined here.
-
-> If there is a
-> structure per vcpu, what is the layout in memory? How does a vcpu find
-> its own data structure? Is that the address returned by PV_TIME_ST?
-
-A call to PV_TIME_ST returns the structure for the calling vCPU - I'll
-make that explicit. The layout is therefore defined by the hypervisor
-and cannot be relied on by the guest. As below this implementation uses
-a simple array of structures.
-
->> +
->> +User space interface
->> +====================
->> +
->> +User space can request that KVM provide the paravirtualized time interface to
->> +a guest by creating a KVM_DEV_TYPE_ARM_PV_TIME device, for example:
->> +
->> +    struct kvm_create_device pvtime_device = {
->> +            .type = KVM_DEV_TYPE_ARM_PV_TIME,
->> +            .attr = 0,
->> +            .flags = 0,
->> +    };
->> +
->> +    pvtime_fd = ioctl(vm_fd, KVM_CREATE_DEVICE, &pvtime_device);
->> +
->> +The guest IPA of the structures must be given to KVM. This is the base address
-> 
-> nit: s/guest //
-> 
->> +of an array of stolen time structures (one for each VCPU). For example:
->> +
->> +    struct kvm_device_attr st_base = {
->> +            .group = KVM_DEV_ARM_PV_TIME_PADDR,
->> +            .attr = KVM_DEV_ARM_PV_TIME_ST,
->> +            .addr = (u64)(unsigned long)&st_paddr
->> +    };
->> +
->> +    ioctl(pvtime_fd, KVM_SET_DEVICE_ATTR, &st_base);
-> 
-> So the allocation itself is performed by the kernel? What are the
-> ordering requirements between creating vcpus and the device? What are
-> the alignment requirements for the base address?
-
-The base address should be page aligned - I'll spell that out.
-
-There are currently no ordering requirements between creating vcpus and
-the device. However...
-
->> +
->> +For migration (or save/restore) of a guest it is necessary to save the contents
->> +of the shared page(s) and later restore them. KVM_DEV_ARM_PV_TIME_STATE_SIZE
->> +provides the size of this data and KVM_DEV_ARM_PV_TIME_STATE allows the state
->> +to be read/written.
-> 
-> Is the size variable depending on the number of vcpus?
-
-...yes - so restoring the state after migration must be done after
-creating the vcpus. I'll point out that the device should created after.
-
-Thanks for the review,
-
-Steve
