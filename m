@@ -2,67 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 87F2889539
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Aug 2019 03:49:58 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1A4FC895B0
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Aug 2019 05:08:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726655AbfHLBt5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 11 Aug 2019 21:49:57 -0400
-Received: from szxga04-in.huawei.com ([45.249.212.190]:4656 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1726200AbfHLBt5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 11 Aug 2019 21:49:57 -0400
-Received: from DGGEMS409-HUB.china.huawei.com (unknown [172.30.72.60])
-        by Forcepoint Email with ESMTP id 60388B41B8A7E0293E9B;
-        Mon, 12 Aug 2019 09:49:52 +0800 (CST)
-Received: from [10.134.22.195] (10.134.22.195) by smtp.huawei.com
- (10.3.19.209) with Microsoft SMTP Server (TLS) id 14.3.439.0; Mon, 12 Aug
- 2019 09:49:48 +0800
-Subject: Re: [PATCH] mailmap: add entry for Jaegeuk Kim
-To:     Jonathan Corbet <corbet@lwn.net>, Chao Yu <chao@kernel.org>
-CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <jaegeuk@kernel.org>
-References: <20190802012135.31419-1-yuchao0@huawei.com>
- <20190802072626.405246e3@lwn.net>
- <fe9cd2bc-76ed-5371-e0c3-b538e7a805e7@kernel.org>
- <fd14e8d4-7468-ed3a-a679-6167eac72626@kernel.org>
- <20190809102816.52b3b310@lwn.net>
-From:   Chao Yu <yuchao0@huawei.com>
-Message-ID: <be87504b-d0e2-3219-82da-568bf9b02cc3@huawei.com>
-Date:   Mon, 12 Aug 2019 09:49:50 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
- Thunderbird/52.9.1
-MIME-Version: 1.0
-In-Reply-To: <20190809102816.52b3b310@lwn.net>
-Content-Type: text/plain; charset="windows-1252"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.134.22.195]
-X-CFilter-Loop: Reflected
+        id S1726296AbfHLDHr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 11 Aug 2019 23:07:47 -0400
+Received: from mga17.intel.com ([192.55.52.151]:12631 "EHLO mga17.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726011AbfHLDHq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 11 Aug 2019 23:07:46 -0400
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 11 Aug 2019 20:07:46 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.64,375,1559545200"; 
+   d="scan'208";a="199987451"
+Received: from hao-dev.bj.intel.com ([10.238.157.65])
+  by fmsmga004.fm.intel.com with ESMTP; 11 Aug 2019 20:07:44 -0700
+From:   Wu Hao <hao.wu@intel.com>
+To:     gregkh@linuxfoundation.org, mdf@kernel.org,
+        linux-fpga@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, linux-api@vger.kernel.org,
+        linux-doc@vger.kernel.org, atull@kernel.org,
+        Wu Hao <hao.wu@intel.com>
+Subject: [PATCH v5 0/9] FPGA DFL updates
+Date:   Mon, 12 Aug 2019 10:49:55 +0800
+Message-Id: <1565578204-13969-1-git-send-email-hao.wu@intel.com>
+X-Mailer: git-send-email 2.7.4
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2019/8/10 0:28, Jonathan Corbet wrote:
-> On Thu, 8 Aug 2019 22:37:41 +0800
-> Chao Yu <chao@kernel.org> wrote:
-> 
->>> IMO, when we use git-blame to find out who is response for specified code, w/o
->>> mailmap we may just found old obsolete email address in the related commit; even
->>> we can search full name for his/her new email address, how can we make sure they
->>> are the same person... so anyway, it can help to find last valid/canonical email
->>> address of someone.  
->>
->> Any thoughts?
-> 
-> I'm not fully convinced that we want to maintain a database of every
-> developer's email history.  But I did merge this patch a few days ago.
+Hi Greg,
 
-Thanks for the merging anyway. :)
+This is v5 patchset which adds more features to FPGA DFL. Marjor changes
+against v4 are sysfs related code rework to address comments on v4.
 
-> 
-> Thanks,
-> 
-> jon
-> .
-> 
+Please help to take a look. Thanks!
+
+Main changes from v4:
+  - convert code to use dev_groups for sysfs entries (#2, #3, #4, #6, #8).
+  - clean up for empty init function after remove sysfs add/remove (#1).
+  - introduce is_visible for sysfs groups (#3, #4, #6, #8).
+  - remove revision sysfs entries (#4, #6, #8).
+  - improve naming on shared functions (#5).
+  - reorganize sysfs entries for port and fme error reporting (#6, #8).
+
+Main changes from v3:
+  - drop avx512 partail reconfiguration patch for now.
+  - split dfl_fpga_cdev_config_port to 2 functions *_release/assign_port
+    (#1).
+  - split __dfl_fpga_cdev_config_port_vf into 2 functions with locking
+    added (#2).
+  - improve description in sysfs doc to avoid misunderstanding (#3).
+  - switch to boolean in sysfs entry store function (#3).
+  - remove dev_dbg in init/uinit callback function (#7, #9, #11).
+  - remove uinit callback which does does nothing (#8, #9)
+
+Main changes from v2:
+  - update kernel version/date in sysfs doc (patch #4, #5, #8, #10, #11).
+  - add back Documentation patch (patch #12).
+
+Main changes from v1:
+  - remove DRV/MODULE_VERSION modifications. (patch #1, #3, #4, #6)
+  - remove argsz from new ioctls. (patch #2)
+  - replace sysfs_create/remove_* with device_add/remove_* for sysfs entries.
+    (patch #5, #8, #11)
+
+Wu Hao (9):
+  fpga: dfl: make init callback optional
+  fpga: dfl: fme: convert platform_driver to use dev_groups
+  fpga: dfl: afu: convert platform_driver to use dev_groups
+  fpga: dfl: afu: add userclock sysfs interfaces.
+  fpga: dfl: afu: expose __afu_port_enable/disable function.
+  fpga: dfl: afu: add error reporting support.
+  fpga: dfl: afu: add STP (SignalTap) support
+  fpga: dfl: fme: add global error reporting support
+  Documentation: fpga: dfl: add descriptions for virtualization and new
+    interfaces.
+
+ Documentation/ABI/testing/sysfs-platform-dfl-fme  |  62 ++++
+ Documentation/ABI/testing/sysfs-platform-dfl-port |  53 ++++
+ Documentation/fpga/dfl.rst                        | 105 +++++++
+ drivers/fpga/Makefile                             |   3 +-
+ drivers/fpga/dfl-afu-error.c                      | 230 ++++++++++++++
+ drivers/fpga/dfl-afu-main.c                       | 230 +++++++++++---
+ drivers/fpga/dfl-afu.h                            |   9 +
+ drivers/fpga/dfl-fme-error.c                      | 359 ++++++++++++++++++++++
+ drivers/fpga/dfl-fme-main.c                       |  42 +--
+ drivers/fpga/dfl-fme.h                            |   3 +
+ drivers/fpga/dfl.c                                |  10 +-
+ drivers/fpga/dfl.h                                |   9 +
+ 12 files changed, 1041 insertions(+), 74 deletions(-)
+ create mode 100644 drivers/fpga/dfl-afu-error.c
+ create mode 100644 drivers/fpga/dfl-fme-error.c
+
+-- 
+1.8.3.1
+
