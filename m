@@ -2,112 +2,284 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E1A6C8AFA1
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2019 08:13:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 02AA58B16F
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Aug 2019 09:52:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727885AbfHMGMa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Aug 2019 02:12:30 -0400
-Received: from userp2130.oracle.com ([156.151.31.86]:33392 "EHLO
-        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727535AbfHMGM3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Aug 2019 02:12:29 -0400
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
-        by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x7D68sM0010867;
-        Tue, 13 Aug 2019 06:12:05 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=corp-2019-08-05;
- bh=XQCN31heGj0fx7iiZojr/ruGjvl/p/j3e97NBhsXhJ4=;
- b=Hh5QxY6oi4DhiIPJ94kk53OFSbFbraE7zsVJEFTCxJO8rt8AXjCqA2KTyWyUGjzB6WXA
- zZDJjGk53FDT3N27xLaGM8A4Khycl96/dZJD4n9Ju9zEwmwZDT9Xyp7j2zylN1CavrgX
- lqXzVJzEiSikgYf0SAqrEo5zemw2MaWAI9KwBzfG50SBRMdMTLuNjWSXr0hWy1dEYj8j
- BiIod3M6WAAw0G99ArhzvNHSzWO0B6mvB0v2g0gL6gLHvErMXTAxSg12AqGBXi7Lodj0
- fB+Ai1xgho8B1knHCd3ZI635InhUTgHK/1c8qEOEMVIj1aZ1V32Wfz5adNNTVENhtchg 6A== 
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references : mime-version :
- content-transfer-encoding; s=corp-2018-07-02;
- bh=XQCN31heGj0fx7iiZojr/ruGjvl/p/j3e97NBhsXhJ4=;
- b=IGJKk4EZ/+fm1qA7ajNbNJKALRXXJIHrIT8J3xdTfeXfqmhdA+5UzIg6P+IyX57b81x7
- 4Y1uZ2Zf45QhdpAqXWGCuEpFUKsRkW/pBFaY19lFPPGDeDRc9AY/kz0OsuepBgBz+jTv
- 1H76K34VkPA5tZHeLTKwRiv8LpgNh8NKbCHTNVjIrC+Fc50F1tsiVO2wf67kvKK4GCTd
- agDuynlJpl6xpbZX5aAb69Ys2ve/cvJhtCd9VOsfatc8ILfpGmxvCSp8WWbbwOQwKR4W
- 32asHbzwRU5Vu2Mt/hwqjlCtjBWKl6adJ/XeaSDoZyOFF7ROKsii88U1Xde9xRvMOH1k JA== 
-Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
-        by userp2130.oracle.com with ESMTP id 2u9nbtc171-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 13 Aug 2019 06:12:05 +0000
-Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
-        by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x7D68auX050030;
-        Tue, 13 Aug 2019 06:12:05 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
-        by userp3030.oracle.com with ESMTP id 2u9k1w4239-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 13 Aug 2019 06:12:04 +0000
-Received: from abhmp0019.oracle.com (abhmp0019.oracle.com [141.146.116.25])
-        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x7D6C3Hg026964;
-        Tue, 13 Aug 2019 06:12:03 GMT
-Received: from abi.no.oracle.com (/10.172.144.123)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Mon, 12 Aug 2019 23:12:03 -0700
-From:   Knut Omang <knut.omang@oracle.com>
-To:     linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     linux-doc@vger.kernel.org, linux-kbuild@vger.kernel.org,
-        Shuah Khan <shuah@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Shreyans Devendra Doshi <0xinfosect0r@gmail.com>,
-        Alan Maguire <alan.maguire@oracle.com>,
-        Brendan Higgins <brendanhiggins@google.com>,
-        Kevin Hilman <khilman@baylibre.com>,
-        Hidenori Yamaji <hidenori.yamaji@sony.com>,
-        Frank Rowand <frowand.list@gmail.com>,
-        Timothy Bird <Tim.Bird@sony.com>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        "Theodore Ts'o" <tytso@mit.edu>, Daniel Vetter <daniel@ffwll.ch>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Knut Omang <knut.omang@oracle.com>
-Subject: [RFC 19/19] Documentation/dev-tools: Add index entry for KTF documentation
-Date:   Tue, 13 Aug 2019 08:09:34 +0200
-Message-Id: <a4367b69bbfde842ca5bda21a5b07b601a703df0.1565676440.git-series.knut.omang@oracle.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <cover.92d76bb4f6dcedc971d0b72a49e8e459a98bca54.1565676440.git-series.knut.omang@oracle.com>
-References: <cover.92d76bb4f6dcedc971d0b72a49e8e459a98bca54.1565676440.git-series.knut.omang@oracle.com>
+        id S1727249AbfHMHwQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Aug 2019 03:52:16 -0400
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:44281 "EHLO
+        mail-pf1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727342AbfHMHwP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Aug 2019 03:52:15 -0400
+Received: by mail-pf1-f195.google.com with SMTP id c81so2116854pfc.11
+        for <linux-doc@vger.kernel.org>; Tue, 13 Aug 2019 00:52:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=QRTz9Xji1GnKtiBfvHtH9s0qQk1TmYlPxSNoKQScUSU=;
+        b=d9yKr6zAnRu5DLLhnVYGTN713jhVE7qQb/8wlQF/PDbGT/kyDXdm8ubBG3qPavV6nZ
+         u8/FB1rvN8wMU0yFPzjHRFBN1hKKU7wA/8PY9ud7efhPQJtWF8cp3djkdljM/WA8V8gm
+         bqlhiw6x+7V27woDkusatGNHK7XmvCHrSVdLLnEw0A9+0fZm3mPG7SlHF0PJ/Lupaifz
+         L71DVEtMYTgQuS82s2biq6SM/r1tk7PeT+IKYJss0dEuDaiJyvwR70N87LLGLnE/iHvq
+         az6JJK9ulszSFJIw00Tx/0ArednhKrhXSaivVF1sQb8YUpZB4etPZYKA7SF43FRjwDOA
+         SQPQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=QRTz9Xji1GnKtiBfvHtH9s0qQk1TmYlPxSNoKQScUSU=;
+        b=anLGQOBoODkU1IarKslN8+M9mWWgT5Kv2f2FmgkmHv7DAxJz86aF0sfG9TAANwv3yX
+         tt3DX8naEVnnt/Mde21HsJbwFLH8/+xtGGABzo0Q/lvX8WkloN/VIosvotg/aDo1mBtj
+         88X0ZXDSncDHnegAoiMHvXmQOSAaFGN3as1yoysKJyukQVDmx90a6gSuDZHeDubBi8uS
+         rFwu5N0nnWvu2B3KoHDHgPZCWfQPR0UiIL4kmLPqYtJb2R6yzAyAPogJH5Z4YVmGfhXu
+         QpKLjnpJ2KcCQPBEfrttHZOOKOe9lPxAwTzxujhZPJ0rlZB4snDzjD9LJtGD1XB+eaOZ
+         KTjg==
+X-Gm-Message-State: APjAAAVJB3/J4RgJQ4vPnNM2Po/sN5ag8OhZ1br1oe1DP4JUkjuyfvGM
+        jxCzPgivyRlhCUXJgrXKVCFLVnjFDYyFa831UYyxLA==
+X-Google-Smtp-Source: APXvYqyGp5FRBIbLsTLczd2XTjqdRRlw2nloNXwwo2pdocKRPV3RlOKTfDT9Lww7NrP1xso9VQHgOv3E8oAazxyso+4=
+X-Received: by 2002:aa7:8f2e:: with SMTP id y14mr10342747pfr.113.1565682734344;
+ Tue, 13 Aug 2019 00:52:14 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9347 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1906280000 definitions=main-1908130067
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9347 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1906280000
- definitions=main-1908130067
+References: <20190812182421.141150-1-brendanhiggins@google.com>
+ <20190812182421.141150-10-brendanhiggins@google.com> <20190813042159.46814206C2@mail.kernel.org>
+ <CAFd5g44XyQi-oprPcdgx-EPboQYaHY6Ocz8Te6NX2SxV=mVhQA@mail.gmail.com> <20190813055615.CA787206C2@mail.kernel.org>
+In-Reply-To: <20190813055615.CA787206C2@mail.kernel.org>
+From:   Brendan Higgins <brendanhiggins@google.com>
+Date:   Tue, 13 Aug 2019 00:52:03 -0700
+Message-ID: <CAFd5g4415URtJBKPhsEw98GxiExJr-fstW6SQ6nmV9ts9ggK-g@mail.gmail.com>
+Subject: Re: [PATCH v12 09/18] kunit: test: add support for test abort
+To:     Stephen Boyd <sboyd@kernel.org>
+Cc:     Frank Rowand <frowand.list@gmail.com>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        Kees Cook <keescook@google.com>,
+        Kieran Bingham <kieran.bingham@ideasonboard.com>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Rob Herring <robh@kernel.org>, shuah <shuah@kernel.org>,
+        "Theodore Ts'o" <tytso@mit.edu>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        devicetree <devicetree@vger.kernel.org>,
+        dri-devel <dri-devel@lists.freedesktop.org>,
+        kunit-dev@googlegroups.com,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        linux-fsdevel@vger.kernel.org,
+        linux-kbuild <linux-kbuild@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        linux-nvdimm <linux-nvdimm@lists.01.org>,
+        linux-um@lists.infradead.org,
+        Sasha Levin <Alexander.Levin@microsoft.com>,
+        "Bird, Timothy" <Tim.Bird@sony.com>,
+        Amir Goldstein <amir73il@gmail.com>,
+        Dan Carpenter <dan.carpenter@oracle.com>,
+        Daniel Vetter <daniel@ffwll.ch>, Jeff Dike <jdike@addtoit.com>,
+        Joel Stanley <joel@jms.id.au>,
+        Julia Lawall <julia.lawall@lip6.fr>,
+        Kevin Hilman <khilman@baylibre.com>,
+        Knut Omang <knut.omang@oracle.com>,
+        Logan Gunthorpe <logang@deltatee.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Petr Mladek <pmladek@suse.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Richard Weinberger <richard@nod.at>,
+        David Rientjes <rientjes@google.com>,
+        Steven Rostedt <rostedt@goodmis.org>, wfg@linux.intel.com
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Signed-off-by: Knut Omang <knut.omang@oracle.com>
----
- Documentation/dev-tools/index.rst | 1 +
- 1 file changed, 1 insertion(+)
+On Mon, Aug 12, 2019 at 10:56 PM Stephen Boyd <sboyd@kernel.org> wrote:
+>
+> Quoting Brendan Higgins (2019-08-12 21:57:55)
+> > On Mon, Aug 12, 2019 at 9:22 PM Stephen Boyd <sboyd@kernel.org> wrote:
+> > >
+> > > Quoting Brendan Higgins (2019-08-12 11:24:12)
+> > > > diff --git a/include/kunit/test.h b/include/kunit/test.h
+> > > > index 2625bcfeb19ac..93381f841e09f 100644
+> > > > --- a/include/kunit/test.h
+> > > > +++ b/include/kunit/test.h
+> > > > @@ -176,6 +178,11 @@ struct kunit {
+> > > >          */
+> > > >         bool success; /* Read only after test_case finishes! */
+> > > >         spinlock_t lock; /* Gaurds all mutable test state. */
+> > > > +       /*
+> > > > +        * death_test may be both set and unset from multiple threads in a test
+> > > > +        * case.
+> > > > +        */
+> > > > +       bool death_test; /* Protected by lock. */
+> > > >         /*
+> > > >          * Because resources is a list that may be updated multiple times (with
+> > > >          * new resources) from any thread associated with a test case, we must
+> > > > @@ -184,6 +191,13 @@ struct kunit {
+> > > >         struct list_head resources; /* Protected by lock. */
+> > > >  };
+> > > >
+> > > > +static inline void kunit_set_death_test(struct kunit *test, bool death_test)
+> > > > +{
+> > > > +       spin_lock(&test->lock);
+> > > > +       test->death_test = death_test;
+> > > > +       spin_unlock(&test->lock);
+> > > > +}
+> > >
+> > > These getters and setters are using spinlocks again. It doesn't make any
+> > > sense. It probably needs a rework like was done for the other bool
+> > > member, success.
+> >
+> > No, this is intentional. death_test can transition from false to true
+> > and then back to false within the same test. Maybe that deserves a
+> > comment?
+>
+> Yes. How does it transition from true to false again?
 
-diff --git a/Documentation/dev-tools/index.rst b/Documentation/dev-tools/index.rst
-index b0522a4..f155205 100644
---- a/Documentation/dev-tools/index.rst
-+++ b/Documentation/dev-tools/index.rst
-@@ -24,6 +24,7 @@ whole; patches welcome!
-    gdb-kernel-debugging
-    kgdb
-    kselftest
-+   ktf/index
- 
- 
- .. only::  subproject and html
--- 
-git-series 0.9.1
+The purpose is to tell try_catch that it was expected for the test to
+bail out. Given the default implementation there is no way for this to
+happen aside from abort() being called, but in some implementations it
+is possible to implement a fault catcher which allows a test suite to
+recover from an unexpected failure.
+
+Maybe it would be best to drop this until I add one of those
+alternative implementations.
+
+> Either way, having a spinlock around a read/write API doesn't make sense
+> because it just makes sure that two writes don't overlap, but otherwise
+> does nothing to keep things synchronized. For example a set to true
+> after a set to false when the two calls to set true or false aren't
+> synchronized means they can happen in any order. So I don't see how it
+> needs a spinlock. The lock needs to be one level higher.
+
+There shouldn't be any cases where one thread is trying to set it
+while another is trying to unset it. The thing I am worried about here
+is making sure all the cores see the write, and making sure no reads
+or writes get reordered before it. So I guess I just want a fence. So
+I take it I should probably have is a WRITE_ONCE here and READ_ONCE in
+the getter?
+
+> >
+> > > > +
+> > > >  void kunit_init_test(struct kunit *test, const char *name);
+> > > >
+> > > >  int kunit_run_tests(struct kunit_suite *suite);
+> > > > diff --git a/include/kunit/try-catch.h b/include/kunit/try-catch.h
+> > > > new file mode 100644
+> > > > index 0000000000000..8a414a9af0b64
+> > > > --- /dev/null
+> > > > +++ b/include/kunit/try-catch.h
+> [...]
+> > > > +
+> > > > +/*
+> > > > + * struct kunit_try_catch - provides a generic way to run code which might fail.
+> > > > + * @context: used to pass user data to the try and catch functions.
+> > > > + *
+> > > > + * kunit_try_catch provides a generic, architecture independent way to execute
+> > > > + * an arbitrary function of type kunit_try_catch_func_t which may bail out by
+> > > > + * calling kunit_try_catch_throw(). If kunit_try_catch_throw() is called, @try
+> > > > + * is stopped at the site of invocation and @catch is catch is called.
+> > > > + *
+> > > > + * struct kunit_try_catch provides a generic interface for the functionality
+> > > > + * needed to implement kunit->abort() which in turn is needed for implementing
+> > > > + * assertions. Assertions allow stating a precondition for a test simplifying
+> > > > + * how test cases are written and presented.
+> > > > + *
+> > > > + * Assertions are like expectations, except they abort (call
+> > > > + * kunit_try_catch_throw()) when the specified condition is not met. This is
+> > > > + * useful when you look at a test case as a logical statement about some piece
+> > > > + * of code, where assertions are the premises for the test case, and the
+> > > > + * conclusion is a set of predicates, rather expectations, that must all be
+> > > > + * true. If your premises are violated, it does not makes sense to continue.
+> > > > + */
+> > > > +struct kunit_try_catch {
+> > > > +       /* private: internal use only. */
+> > > > +       struct kunit *test;
+> > > > +       struct completion *try_completion;
+> > > > +       int try_result;
+> > > > +       kunit_try_catch_func_t try;
+> > > > +       kunit_try_catch_func_t catch;
+> > >
+> > > Can these other variables be documented in the kernel doc? And should
+> > > context be marked as 'public'?
+> >
+> > Sure, I can document them.
+> >
+> > But I don't think context should be public; it should only be accessed
+> > by kunit_try_catch_* functions. context should only be populated by
+> > *_init, and will be passed into *try and *catch when they are called
+> > internally.
+>
+> Ok. Then I guess just document them all but keep them all marked as
+> private.
+
+Will do.
+
+> >
+> > > > + */
+> > > > +void kunit_generic_try_catch_init(struct kunit_try_catch *try_catch);
+> > > > +
+> > > > +#endif /* _KUNIT_TRY_CATCH_H */
+> > > > diff --git a/kunit/test.c b/kunit/test.c
+> > > > index e5080a2c6b29c..995cb53fe4ee9 100644
+> > > > --- a/kunit/test.c
+> > > > +++ b/kunit/test.c
+> > > > @@ -158,6 +171,21 @@ static void kunit_fail(struct kunit *test, struct kunit_assert *assert)
+> > > >         kunit_print_string_stream(test, stream);
+> > > >  }
+> > > >
+> > > > +void __noreturn kunit_abort(struct kunit *test)
+> > > > +{
+> > > > +       kunit_set_death_test(test, true);
+> > > > +
+> > > > +       kunit_try_catch_throw(&test->try_catch);
+> > > > +
+> > > > +       /*
+> > > > +        * Throw could not abort from test.
+> > > > +        *
+> > > > +        * XXX: we should never reach this line! As kunit_try_catch_throw is
+> > > > +        * marked __noreturn.
+> > > > +        */
+> > > > +       WARN_ONCE(true, "Throw could not abort from test!\n");
+> > >
+> > > Should this just be a BUG_ON? It's supposedly impossible.
+> >
+> > It should be impossible; it will only reach this line if there is a
+> > bug in kunit_try_catch_throw. The reason I didn't use BUG_ON was
+> > because I previously got yelled at for having BUG_ON in this code
+> > path.
+> >
+> > Nevertheless, I think BUG_ON is more correct, so if you will stand by
+> > it, then that's what I will do.
+>
+> Yeah BUG_ON is appropriate here and self documenting so please use it.
+
+Cool, will do.
+
+> >
+> > > > +               return;
+> > > > +       }
+> > > > +
+> > > > +       if (kunit_get_death_test(test)) {
+> > > > +               /*
+> > > > +                * EXPECTED DEATH: kunit_run_case_internal encountered
+> > > > +                * anticipated fatal error. Everything should be in a safe
+> > > > +                * state.
+> > > > +                */
+> > > > +               kunit_run_case_cleanup(test, suite);
+> > > > +       } else {
+> > > > +               /*
+> > > > +                * UNEXPECTED DEATH: kunit_run_case_internal encountered an
+> > > > +                * unanticipated fatal error. We have no idea what the state of
+> > > > +                * the test case is in.
+> > > > +                */
+> > > > +               kunit_handle_test_crash(test, suite, test_case);
+> > > > +               kunit_set_failure(test);
+> > >
+> > > Like was done here.
+> >
+> > Sorry, like what?
+>
+> Just saying this has braces for the if-else.
+
+Ah, gotcha.
