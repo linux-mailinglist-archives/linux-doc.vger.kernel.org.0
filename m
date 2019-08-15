@@ -2,251 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 530F58F147
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Aug 2019 18:54:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D27A88F26F
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Aug 2019 19:40:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729565AbfHOQyl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 15 Aug 2019 12:54:41 -0400
-Received: from foss.arm.com ([217.140.110.172]:46702 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728128AbfHOQyl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 15 Aug 2019 12:54:41 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 35078360;
-        Thu, 15 Aug 2019 09:54:40 -0700 (PDT)
-Received: from [10.1.194.48] (e123572-lin.cambridge.arm.com [10.1.194.48])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8C14B3F706;
-        Thu, 15 Aug 2019 09:54:38 -0700 (PDT)
-Subject: Re: [PATCH v8 4/5] arm64: Define
- Documentation/arm64/tagged-address-abi.rst
-To:     Catalin Marinas <catalin.marinas@arm.com>,
-        linux-arm-kernel@lists.infradead.org, linux-mm@kvack.org
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Vincenzo Frascino <vincenzo.frascino@arm.com>,
-        Will Deacon <will.deacon@arm.com>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Szabolcs Nagy <szabolcs.nagy@arm.com>,
-        Dave P Martin <Dave.Martin@arm.com>,
-        Dave Hansen <dave.hansen@intel.com>, linux-doc@vger.kernel.org,
-        linux-arch@vger.kernel.org
-References: <20190815154403.16473-1-catalin.marinas@arm.com>
- <20190815154403.16473-5-catalin.marinas@arm.com>
-From:   Kevin Brodsky <kevin.brodsky@arm.com>
-Message-ID: <c06f4c55-6bbc-c589-a42f-c37e44955002@arm.com>
-Date:   Thu, 15 Aug 2019 17:54:37 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+        id S1726099AbfHORkP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 15 Aug 2019 13:40:15 -0400
+Received: from mx0a-002c1b01.pphosted.com ([148.163.151.68]:28000 "EHLO
+        mx0a-002c1b01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726001AbfHORkO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Aug 2019 13:40:14 -0400
+X-Greylist: delayed 1588 seconds by postgrey-1.27 at vger.kernel.org; Thu, 15 Aug 2019 13:40:14 EDT
+Received: from pps.filterd (m0127838.ppops.net [127.0.0.1])
+        by mx0a-002c1b01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id x7FHAoHL026139
+        for <linux-doc@vger.kernel.org>; Thu, 15 Aug 2019 10:13:45 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=from : to : cc :
+ subject : date : message-id : content-type : content-transfer-encoding :
+ mime-version; s=proofpoint20171006;
+ bh=TZ8nGziQlW+a5wDYdKs45iTjnMlJb/mQyXTuDUvImg8=;
+ b=H+jRBI864+mo5+itdeSRh9PQC48mz+KMokCoYTCn+Z65bup/R88VwJHphJv2/vA4psqf
+ uTL2ab31NCI0dw2wMiSyWdxeHcpq1joogNwu1OnaPgvVf1uKFl57ieQB1U2Oj5oec4S7
+ d15GTSOt+hMynMCQpU+YhdMSdq5X2MKwAehViFSyk6styXmdyQkzkbeBv7D+91gliLG3
+ SPyfNBgeZvX4zLXogOrbUkXCSjoMF2dros+ZDAVE6a1eeavgL4SFyFaMZO/Os189uZw9
+ xC7R5bfTwvww/KoH6wxJYGvUXdWIDgYnoWeDlka6srpsH/g8ok8U4MoRxCWQ+ZpHitS9 Tg== 
+Received: from nam04-sn1-obe.outbound.protection.outlook.com (mail-sn1nam04lp2055.outbound.protection.outlook.com [104.47.44.55])
+        by mx0a-002c1b01.pphosted.com with ESMTP id 2ubf9u62a2-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+        for <linux-doc@vger.kernel.org>; Thu, 15 Aug 2019 10:13:45 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=MljO8kXvMgHvu/0DavwuMTTfsf9nnfJKgZSh5Kz4oxRfjg0bGSNKDg9MJAhhtu3Y+K68akTPcJMd+ZJEdeJWtoR0pABqoplVgNLM1becjvG/QOmhWqR9qiYryeblkynBD8gOq5VV08bsdyXN3wrZgz4T6kCPMdh+orENVJwOPYT5fMJcVEn4N96IlfC7q+9uEuX3LlcrbcL6/X1A5Q+4RASbF7qIrIafbAvBsgZxjJfyXZpL7IXzyFLH9EFgxEvUIIlsRsgOdS0AyJVklSmqmIiiWcljDodd18KQpJfmnK9iiYguI5GqXjftYSNZcmZs4HAhHw8ZUurZThPGZzDp5g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=TZ8nGziQlW+a5wDYdKs45iTjnMlJb/mQyXTuDUvImg8=;
+ b=Q9oiL38wFIxemWnK9NrsYcGHRu9Sk/kqLC7rddC5ChtV4OwSb9w5i5kciTkhJRDZAbiAxfy513qGhnhTOa3NPtrThPcwG3qh9m7EHeVBvhZxQmsKte0CAkTHynjv2qHzOoZncq4+aHNVRPxtmSbswFskSld4UAb047bWEPHIfuBvECCAF4hIXlXnSpoC1D6OHgX20IXNieY9oR0+1B0uEo7BPif/TzZ0JpGKil3NHL1vAvY/w8AJIcxEz5L4wByhlcl9n1Q4f47GQGPRy5skvTGCFicmTaq5jfppxCeyJ8/rZ/tsNcsxvmPyVqsE92ik7THKs3FaSjf5XNj0Pl7njw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
+ dkim=pass header.d=nutanix.com; arc=none
+Received: from CY4PR0201MB3588.namprd02.prod.outlook.com (52.132.98.38) by
+ CY4PR0201MB3603.namprd02.prod.outlook.com (52.132.99.21) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.2178.16; Thu, 15 Aug 2019 17:13:44 +0000
+Received: from CY4PR0201MB3588.namprd02.prod.outlook.com
+ ([fe80::5598:9f2e:9d39:c737]) by CY4PR0201MB3588.namprd02.prod.outlook.com
+ ([fe80::5598:9f2e:9d39:c737%6]) with mapi id 15.20.2157.022; Thu, 15 Aug 2019
+ 17:13:44 +0000
+From:   Florian Schmidt <florian.schmidt@nutanix.com>
+To:     "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+CC:     Florian Schmidt <florian.schmidt@nutanix.com>
+Subject: [PATCH 0/2] trace-vmscan-postprocess: fix parsing and output
+Thread-Topic: [PATCH 0/2] trace-vmscan-postprocess: fix parsing and output
+Thread-Index: AQHVU4zK/xYOpq66nUS8+AEUJAsN0A==
+Date:   Thu, 15 Aug 2019 17:13:43 +0000
+Message-ID: <20190815164840.1141-1-florian.schmidt@nutanix.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-clientproxiedby: AM3PR07CA0145.eurprd07.prod.outlook.com
+ (2603:10a6:207:8::31) To CY4PR0201MB3588.namprd02.prod.outlook.com
+ (2603:10b6:910:8b::38)
+x-ms-exchange-messagesentrepresentingtype: 1
+x-mailer: git-send-email 2.23.0.rc1
+x-originating-ip: [62.254.189.133]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: 76ee8170-d12a-46b1-a83f-08d721a3ecb3
+x-microsoft-antispam: BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600148)(711020)(4605104)(1401327)(2017052603328)(7193020);SRVR:CY4PR0201MB3603;
+x-ms-traffictypediagnostic: CY4PR0201MB3603:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <CY4PR0201MB360304DE1BBED23C54EEC293F7AC0@CY4PR0201MB3603.namprd02.prod.outlook.com>
+x-proofpoint-crosstenant: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-forefront-prvs: 01304918F3
+x-forefront-antispam-report: SFV:NSPM;SFS:(10019020)(396003)(136003)(376002)(346002)(366004)(39850400004)(199004)(54094003)(189003)(2906002)(8676002)(86362001)(8936002)(6506007)(50226002)(6486002)(25786009)(66066001)(81156014)(81166006)(71190400001)(2616005)(476003)(66556008)(36756003)(64756008)(66446008)(26005)(71200400001)(186003)(256004)(386003)(7736002)(66946007)(6916009)(305945005)(102836004)(2501003)(5660300002)(66476007)(3846002)(6116002)(107886003)(5640700003)(6436002)(52116002)(44832011)(53936002)(1076003)(486006)(99286004)(2351001)(316002)(478600001)(6512007)(4326008)(14454004)(64030200001);DIR:OUT;SFP:1102;SCL:1;SRVR:CY4PR0201MB3603;H:CY4PR0201MB3588.namprd02.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;A:1;MX:1;
+received-spf: None (protection.outlook.com: nutanix.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam-message-info: +75h0lWdYemawUbJqmK4HNToWv+5haYbb8Q5DCeRR3Ei2Zl77vtg3s89hdJ7nAQPbuFQSQOh780uxpZbgj/xqNaEgD6jKFICoxYiBqMD4ROlusK1Qxn4iip5U291MR7aURSvax51pDJ0ToEjJ6AZ9dtta77tb8VGMuIcKvM/+LhOAU9SJ6yt7Dy+uBHnhNIHgL7S1TOso2kq2xCW89DeHTPnre28wws528i5TWjDZ6RovqvlfK74bh48y2I0wAsns1q0iIUzMK14fEOalRUO58Wl1mWPgZrpAtLQy7e2q/5ZDWaHaPid3unTK5yJ774F0bvRLXfJQuQ9zJK30azhEjUJYszya4lNUMXWJUkfl5qS9XdxSpsN1AcdQC9LEPjku/PsT6EwNCl34I0GeAg5FDOWR3M2p8NjRFigrqpB7/Q=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-In-Reply-To: <20190815154403.16473-5-catalin.marinas@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-GB
+X-OriginatorOrg: nutanix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 76ee8170-d12a-46b1-a83f-08d721a3ecb3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Aug 2019 17:13:43.3525
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: bb047546-786f-4de1-bd75-24e5b6f79043
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: tYX5/d2fFbvqnb18ineRkM6LMihQrmbFE0ldUQmrLPWXmvqV4crOVzc8ByYoTsVuNjC3Kt0lhpYD4b1NKani3/RRA7i9XS/f7+jQFOZRaPY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR0201MB3603
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:5.22.84,1.0.8
+ definitions=2019-08-15_07:2019-08-14,2019-08-15 signatures=0
+X-Proofpoint-Spam-Reason: safe
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 15/08/2019 16:44, Catalin Marinas wrote:
-> From: Vincenzo Frascino <vincenzo.frascino@arm.com>
->
-> On AArch64 the TCR_EL1.TBI0 bit is set by default, allowing userspace
-> (EL0) to perform memory accesses through 64-bit pointers with a non-zero
-> top byte. Introduce the document describing the relaxation of the
-> syscall ABI that allows userspace to pass certain tagged pointers to
-> kernel syscalls.
->
-> Cc: Will Deacon <will.deacon@arm.com>
-> Cc: Andrey Konovalov <andreyknvl@google.com>
-> Cc: Szabolcs Nagy <szabolcs.nagy@arm.com>
-> Cc: Kevin Brodsky <kevin.brodsky@arm.com>
-> Signed-off-by: Vincenzo Frascino <vincenzo.frascino@arm.com>
-> Co-developed-by: Catalin Marinas <catalin.marinas@arm.com>
-> Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
-> ---
->   Documentation/arm64/tagged-address-abi.rst | 155 +++++++++++++++++++++
->   1 file changed, 155 insertions(+)
->   create mode 100644 Documentation/arm64/tagged-address-abi.rst
->
-> diff --git a/Documentation/arm64/tagged-address-abi.rst b/Documentation/arm64/tagged-address-abi.rst
-> new file mode 100644
-> index 000000000000..8808337775d6
-> --- /dev/null
-> +++ b/Documentation/arm64/tagged-address-abi.rst
-> @@ -0,0 +1,155 @@
-> +==========================
-> +AArch64 TAGGED ADDRESS ABI
-> +==========================
-> +
-> +Authors: Vincenzo Frascino <vincenzo.frascino@arm.com>
-> +         Catalin Marinas <catalin.marinas@arm.com>
-> +
-> +Date: 15 August 2019
-> +
-> +This document describes the usage and semantics of the Tagged Address
-> +ABI on AArch64 Linux.
-> +
-> +1. Introduction
-> +---------------
-> +
-> +On AArch64 the TCR_EL1.TBI0 bit is set by default, allowing userspace
-> +(EL0) to perform memory accesses through 64-bit pointers with a non-zero
-> +top byte. This document describes the relaxation of the syscall ABI that
-> +allows userspace to pass certain tagged pointers to kernel syscalls.
-> +
-> +2. AArch64 Tagged Address ABI
-> +-----------------------------
-> +
-> +From the kernel syscall interface perspective and for the purposes of
-> +this document, a "valid tagged pointer" is a pointer with a potentially
-> +non-zero top-byte that references an address in the user process address
-> +space obtained in one of the following ways:
-> +
-> +- mmap() done by the process itself (or its parent), where either:
-
-The "parent" aspect is a useful addition, but technically, the mapping may have been 
-established by any process indirectly forked from the current process, not just its 
-immediate parent. I wonder if there is a better way to formulate this, to avoid this 
-complication. Maybe simply "mmap() syscall" (syscalls are always made from userspace, 
-and any mapping requested by userspace is eligible here)?
-
-> +
-> +  - flags have the **MAP_ANONYMOUS** bit set
-> +  - the file descriptor refers to a regular file (including those
-> +    returned by memfd_create()) or **/dev/zero**
-> +
-> +- brk() system call done by the process itself (i.e. the heap area
-
-Same idea.
-
-> +  between the initial location of the program break at process creation
-> +  and its current location).
-> +
-> +- any memory mapped by the kernel in the address space of the process
-> +  during creation and with the same restrictions as for mmap() above
-> +  (e.g. data, bss, stack).
-> +
-> +The AArch64 Tagged Address ABI has two stages of relaxation depending
-> +how the user addresses are used by the kernel:
-> +
-> +1. User addresses not accessed by the kernel but used for address space
-> +   management (e.g. mmap(), mprotect(), madvise()). The use of valid
-> +   tagged pointers in this context is always allowed.
-> +
-> +2. User addresses accessed by the kernel (e.g. write()). This ABI
-> +   relaxation is disabled by default and the application thread needs to
-> +   explicitly enable it via **prctl()** as follows:
-> +
-> +   - **PR_SET_TAGGED_ADDR_CTRL**: enable or disable the AArch64 Tagged
-> +     Address ABI for the calling thread.
-> +
-> +     The (unsigned int) arg2 argument is a bit mask describing the
-> +     control mode used:
-> +
-> +     - **PR_TAGGED_ADDR_ENABLE**: enable AArch64 Tagged Address ABI.
-> +       Default status is disabled.
-> +
-> +     Arguments arg3, arg4, and arg5 must be 0.
-> +
-> +   - **PR_GET_TAGGED_ADDR_CTRL**: get the status of the AArch64 Tagged
-> +     Address ABI for the calling thread.
-> +
-> +     Arguments arg2, arg3, arg4, and arg5 must be 0.
-> +
-> +   The ABI properties described above are thread-scoped, inherited on
-> +   clone() and fork() and cleared on exec().
-> +
-> +   Calling prctl(PR_SET_TAGGED_ADDR_CTRL, PR_TAGGED_ADDR_ENABLE, 0, 0, 0)
-> +   returns -EINVAL if the AArch64 Tagged Address ABI is globally disabled
-> +   by sysctl abi.tagged_addr_disabled=1. The default sysctl
-> +   abi.tagged_addr_disabled configuration is 0.
-> +
-> +When the AArch64 Tagged Address ABI is enabled for a thread, the
-> +following behaviours are guaranteed:
-> +
-> +- All syscalls except the cases mentioned in section 3 can accept any
-> +  valid tagged pointer.
-> +
-> +- The syscall behaviour is undefined for invalid tagged pointers: it may
-> +  result in an error code being returned, a (fatal) signal being raised,
-> +  or other modes of failure.
-> +
-> +- A valid tagged pointer has the same semantics as the corresponding
-> +  untagged pointer.
-> +
-> +A definition of the meaning of tagged pointers on AArch64 can be found
-> +in Documentation/arm64/tagged-pointers.rst.
-> +
-> +3. AArch64 Tagged Address ABI Exceptions
-> +-----------------------------------------
-> +
-> +The following system call parameters must be untagged regardless of the
-> +ABI relaxation:
-> +
-> +- prctl() other than arguments pointing to user structures to be
-> +  accessed by the kernel.
-> +
-> +- ioctl() other than arguments pointing to user structures to be
-> +  accessed by the kernel.
-
-Isn't "user structures" too restrictive? For instance, PR_SET_NAME takes a char *, 
-and there's no reason not allow it to be tagged. Maybe a more generic "user data"? 
-There is the additional issue of user struct's containing pointers, I guess the 
-restriction should apply recursively...
-
-Otherwise, the ABI looks pretty good to me, especially the new address space 
-management / user data distinction.
-
-Kevin
-
-> +
-> +- shmat() and shmdt().
-> +
-> +Any attempt to use non-zero tagged pointers may result in an error code
-> +being returned, a (fatal) signal being raised, or other modes of
-> +failure.
-> +
-> +4. Example of correct usage
-> +---------------------------
-> +.. code-block:: c
-> +
-> +   #include <stdlib.h>
-> +   #include <string.h>
-> +   #include <unistd.h>
-> +   #include <sys/mman.h>
-> +   #include <sys/prctl.h>
-> +
-> +   #define PR_SET_TAGGED_ADDR_CTRL	55
-> +   #define PR_TAGGED_ADDR_ENABLE	(1UL << 0)
-> +
-> +   #define TAG_SHIFT		56
-> +
-> +   int main(void)
-> +   {
-> +   	int tbi_enabled = 0;
-> +   	unsigned long tag = 0;
-> +   	char *ptr;
-> +
-> +   	/* check/enable the tagged address ABI */
-> +   	if (!prctl(PR_SET_TAGGED_ADDR_CTRL, PR_TAGGED_ADDR_ENABLE, 0, 0, 0))
-> +   		tbi_enabled = 1;
-> +
-> +   	/* memory allocation */
-> +   	ptr = mmap(NULL, sysconf(_SC_PAGE_SIZE), PROT_READ | PROT_WRITE,
-> +   		   MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-> +   	if (ptr == MAP_FAILED)
-> +   		return 1;
-> +
-> +   	/* set a non-zero tag if the ABI is available */
-> +   	if (tbi_enabled)
-> +   		tag = rand() & 0xff;
-> +   	ptr = (char *)((unsigned long)ptr | (tag << TAG_SHIFT));
-> +
-> +   	/* memory access to a tagged address */
-> +   	strcpy(ptr, "tagged pointer\n");
-> +
-> +   	/* syscall with a tagged pointer */
-> +   	write(1, ptr, strlen(ptr));
-> +
-> +   	return 0;
-> +   }
-
+VGhpcyBwYXRjaCBzZXJpZXMgdXBkYXRlcyB0cmFjZS12bXNjYW4tcG9zdHByb2Nlc3MucGwgdG8g
+d29yayB3aXRob3V0DQp0aHJvd2luZyB3YXJuaW5ncyBhbmQgZXJyb3JzIHdoaWNoIHN0ZW0gZnJv
+bSB1cGRhdGVzIHRvIHNldmVyYWwgdHJhY2UNCnBvaW50cy4NCg0KMzQ4MWMzN2ZmYTFkICgibW0v
+dm1zY2FuOiBkcm9wIG1heV93cml0ZXBhZ2UgYW5kIGNsYXNzem9uZV9pZHggZnJvbQ0KZGlyZWN0
+IHJlY2xhaW0gYmVnaW4gdGVtcGxhdGUiKSByZW1vdmVkICJtYXlfd3JpdGVwYWdlIiBmcm9tDQpt
+bV92bXNjYW5fZGlyZWN0X3JlY2xhaW1fYmVnaW4sIGFuZCAzYjc3NTk5OGVjYTcNCigiaW5jbHVk
+ZS90cmFjZS9ldmVudHMvdm1zY2FuLmg6IGRyb3Agem9uZSBpZCBmcm9tIGtzd2FwZCB0cmFjZXBv
+aW50cyIpDQpyZW1vdmVkICJ6aWQiIGZyb20gbW1fdm1zY2FuX3dha2V1cF9rc3dhcGQuIFRoZSBv
+dXRwdXQgb2YNCm1tX3Ztc2Nhbl9scnVfaXNvbGF0ZSBhbmQgbW1fdm1zY2FuX2xydV9zaHJpbmtf
+YWN0aXZlIHNlZW1zIHRvIG5ldmVyDQpoYXZlIG1hdGNoZWQgdGhlIGZvcm1hdCBvZiB0aGUgdHJh
+Y2UgcG9pbnQgb3V0cHV0IHNpbmNlIHRoZXkgd2VyZQ0KY3JlYXRlZCwgb3IgYXQgbGVhc3QgZm9y
+IGFzIGxvbmcgYXMgSSBjYW4gdGVsbC4gUGF0Y2ggMSBhbGlnbnMgdGhlDQpmb3JtYXQgcGFyc2lu
+ZyBvZiB0aGUgcGVybCBzY3JpcHQgd2l0aCB0aGUgY3VycmVudCBvdXRwdXQgb2YgdGhlIHRyYWNl
+DQpwb2ludHMuDQoNCkluIGFkZGl0aW9uLCB0aGUgdGFibGVzIHRoYXQgYXJlIHByaW50ZWQgYnkg
+dGhlIHNjcmlwdCB3ZXJlIG5vdCBwcm9wZXJseQ0KYWxpZ25lZCBhbnkgbW9yZSwgc28gcGF0Y2gg
+MiBmaXhlcyB0aGUgc3BhY2luZy4NCg0KQSBzaWRlIHJlbWFyazogcGFyc2luZyB0aGUgdHJhY2Ug
+b3V0cHV0IGZvciBtbV92bXNjYW5fbHJ1X3Nocmlua19hY3RpdmUNCmhhcyBiZWVuIGluIHRoZSBz
+Y3JpcHQgZXZlciBzaW5jZSBpdCB3YXMgY3JlYXRlZCBpbiAyMDEwLCBidXQgYXQgbm8NCnBvaW50
+IHRoZSBwYXJzZWQgb3V0cHV0IHdhcyBldmVyIHVzZWQgZm9yIGFueXRoaW5nLiBJIHVwZGF0ZWQg
+dGhlDQpwYXJzaW5nIGNvZGUgbm93LCBidXQgSSB3b25kZXIgaWYgd2UgY291bGQganVzdCBnZXQg
+cmlkIG9mIHRoYXQgcGFydC4uLg0KDQpGbG9yaWFuIFNjaG1pZHQgKDIpOg0KICB0cmFjZS12bXNj
+YW4tcG9zdHByb2Nlc3M6IHN5bmMgd2l0aCB0cmFjZXBvaW50cyB1cGRhdGVzDQogIHRyYWNlLXZt
+c2Nhbi1wb3N0cHJvY2VzczogZml4IG91dHB1dCB0YWJsZSBzcGFjaW5nDQoNCiAuLi4vcG9zdHBy
+b2Nlc3MvdHJhY2Utdm1zY2FuLXBvc3Rwcm9jZXNzLnBsICAgfCAyOSArKysrKysrKystLS0tLS0t
+LS0tDQogMSBmaWxlIGNoYW5nZWQsIDE0IGluc2VydGlvbnMoKyksIDE1IGRlbGV0aW9ucygtKQ0K
+DQotLSANCjIuMjMuMC5yYzENCg0K
