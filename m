@@ -2,281 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0E0C792602
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Aug 2019 16:06:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9C96092817
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Aug 2019 17:12:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726295AbfHSOFF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 19 Aug 2019 10:05:05 -0400
-Received: from foss.arm.com ([217.140.110.172]:55068 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727681AbfHSOFE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 19 Aug 2019 10:05:04 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 354AC28;
-        Mon, 19 Aug 2019 07:05:04 -0700 (PDT)
-Received: from e112269-lin.arm.com (e112269-lin.cambridge.arm.com [10.1.196.133])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 30EEB3F718;
-        Mon, 19 Aug 2019 07:05:02 -0700 (PDT)
-From:   Steven Price <steven.price@arm.com>
-To:     Marc Zyngier <maz@kernel.org>, Will Deacon <will@kernel.org>,
-        linux-arm-kernel@lists.infradead.org, kvmarm@lists.cs.columbia.edu
-Cc:     Steven Price <steven.price@arm.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        =?UTF-8?q?Radim=20Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@redhat.com>,
-        Russell King <linux@armlinux.org.uk>,
-        James Morse <james.morse@arm.com>,
-        Julien Thierry <julien.thierry.kdev@gmail.com>,
-        Suzuki K Pouloze <suzuki.poulose@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 9/9] arm64: Retrieve stolen time as paravirtualized guest
-Date:   Mon, 19 Aug 2019 15:04:36 +0100
-Message-Id: <20190819140436.12207-10-steven.price@arm.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190819140436.12207-1-steven.price@arm.com>
-References: <20190819140436.12207-1-steven.price@arm.com>
+        id S1726553AbfHSPMD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 19 Aug 2019 11:12:03 -0400
+Received: from conssluserg-01.nifty.com ([210.131.2.80]:38703 "EHLO
+        conssluserg-01.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726211AbfHSPMC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 19 Aug 2019 11:12:02 -0400
+Received: from mail-ua1-f43.google.com (mail-ua1-f43.google.com [209.85.222.43]) (authenticated)
+        by conssluserg-01.nifty.com with ESMTP id x7JFBfjG029268;
+        Tue, 20 Aug 2019 00:11:42 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conssluserg-01.nifty.com x7JFBfjG029268
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1566227502;
+        bh=vL3Z7j5SeJ0aDHILIlZfbZIFzUpyY8SuPcSJhgiwvOM=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=uRzTcPfrAk4VzJ5SbZGG0Kl2fAU2lBFnqrWuZGvKzDaQQgIWdLofdk3HF+oOPEBGN
+         bCLYwpAL+4O5s+6hCVO6CmyJlGp2YT6axmnqHaNsx/E685cFr5TLHK89JMKwDnnuti
+         hystVIWSRRzbncDqA9onrkea6rDUEuGru5BpCnbljexqAzaPy0o+6lzavt6/EOvy/M
+         5S7O2g6ZW4aTRu4Wx4IEoXG7it7PL+3PwPUNXwdeN30EpJoMBACDf9QHNSWNhJ8PPB
+         m/VvGv8odhe0uhUfHCS8fJLyQHHq2ixV6TKiR76xErLExgY2kMeOaBveSmf/NxWKNc
+         lJ/JkYTfBF1Jg==
+X-Nifty-SrcIP: [209.85.222.43]
+Received: by mail-ua1-f43.google.com with SMTP id j21so772656uap.2;
+        Mon, 19 Aug 2019 08:11:42 -0700 (PDT)
+X-Gm-Message-State: APjAAAX1FmRgA8lZ/ZURSrOdIm9powQM/vahBJ3bRcrYWPYIzpgAegqc
+        F79iyx5K22oJN7j9EA/4ZVdKio5qmAtnEiVCPts=
+X-Google-Smtp-Source: APXvYqzPZQNuP/5kcGI1YxzfK+nM3S/m3vTXLeDQu6Si58yshTzDliAN4R6WeTf4PGDCnAQg3AssiAvHFTGLtqlWcPU=
+X-Received: by 2002:ab0:32d8:: with SMTP id f24mr7470615uao.121.1566227500514;
+ Mon, 19 Aug 2019 08:11:40 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20190814160623.24802-1-yamada.masahiro@socionext.com>
+In-Reply-To: <20190814160623.24802-1-yamada.masahiro@socionext.com>
+From:   Masahiro Yamada <yamada.masahiro@socionext.com>
+Date:   Tue, 20 Aug 2019 00:11:04 +0900
+X-Gmail-Original-Message-ID: <CAK7LNATrP29_WBCUqH1FddoO3j_FrbO=8obzEGj6FDn8ukUTgg@mail.gmail.com>
+Message-ID: <CAK7LNATrP29_WBCUqH1FddoO3j_FrbO=8obzEGj6FDn8ukUTgg@mail.gmail.com>
+Subject: Re: [PATCH 1/3] kbuild: move KBUILD_LDS, KBUILD_VMLINUX_{OBJS,LIBS}
+ to makefiles.rst
+To:     Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Michal Marek <michal.lkml@markovi.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Enable paravirtualization features when running under a hypervisor
-supporting the PV_TIME_ST hypercall.
+On Thu, Aug 15, 2019 at 1:06 AM Masahiro Yamada
+<yamada.masahiro@socionext.com> wrote:
+>
+> These three variables are not intended to be tweaked by users.
+> Move them from kbuild.rst to makefiles.rst.
+>
+> Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
+> ---
+>
 
-For each (v)CPU, we ask the hypervisor for the location of a shared
-page which the hypervisor will use to report stolen time to us. We set
-pv_time_ops to the stolen time function which simply reads the stolen
-value from the shared page for a VCPU. We guarantee single-copy
-atomicity using READ_ONCE which means we can also read the stolen
-time for another VCPU than the currently running one while it is
-potentially being updated by the hypervisor.
+Applied to linux-kbuild.
 
-Signed-off-by: Steven Price <steven.price@arm.com>
----
- arch/arm64/include/asm/paravirt.h |   9 +-
- arch/arm64/kernel/paravirt.c      | 147 ++++++++++++++++++++++++++++++
- arch/arm64/kernel/time.c          |   3 +
- include/linux/cpuhotplug.h        |   1 +
- 4 files changed, 159 insertions(+), 1 deletion(-)
 
-diff --git a/arch/arm64/include/asm/paravirt.h b/arch/arm64/include/asm/paravirt.h
-index 799d9dd6f7cc..125c26c42902 100644
---- a/arch/arm64/include/asm/paravirt.h
-+++ b/arch/arm64/include/asm/paravirt.h
-@@ -21,6 +21,13 @@ static inline u64 paravirt_steal_clock(int cpu)
- {
- 	return pv_ops.time.steal_clock(cpu);
- }
--#endif
-+
-+int __init kvm_guest_init(void);
-+
-+#else
-+
-+#define kvm_guest_init()
-+
-+#endif // CONFIG_PARAVIRT
- 
- #endif
-diff --git a/arch/arm64/kernel/paravirt.c b/arch/arm64/kernel/paravirt.c
-index 4cfed91fe256..9971513aed73 100644
---- a/arch/arm64/kernel/paravirt.c
-+++ b/arch/arm64/kernel/paravirt.c
-@@ -6,13 +6,160 @@
-  * Author: Stefano Stabellini <stefano.stabellini@eu.citrix.com>
-  */
- 
-+#define pr_fmt(fmt) "kvmarm-pv: " fmt
-+
-+#include <linux/arm-smccc.h>
-+#include <linux/cpuhotplug.h>
- #include <linux/export.h>
-+#include <linux/io.h>
- #include <linux/jump_label.h>
-+#include <linux/printk.h>
-+#include <linux/psci.h>
-+#include <linux/reboot.h>
-+#include <linux/slab.h>
- #include <linux/types.h>
-+
- #include <asm/paravirt.h>
-+#include <asm/pvclock-abi.h>
-+#include <asm/smp_plat.h>
- 
- struct static_key paravirt_steal_enabled;
- struct static_key paravirt_steal_rq_enabled;
- 
- struct paravirt_patch_template pv_ops;
- EXPORT_SYMBOL_GPL(pv_ops);
-+
-+struct kvmarm_stolen_time_region {
-+	struct pvclock_vcpu_stolen_time *kaddr;
-+};
-+
-+static DEFINE_PER_CPU(struct kvmarm_stolen_time_region, stolen_time_region);
-+
-+static bool steal_acc = true;
-+static int __init parse_no_stealacc(char *arg)
-+{
-+	steal_acc = false;
-+	return 0;
-+}
-+early_param("no-steal-acc", parse_no_stealacc);
-+
-+/* return stolen time in ns by asking the hypervisor */
-+static u64 kvm_steal_clock(int cpu)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+
-+	reg = per_cpu_ptr(&stolen_time_region, cpu);
-+	if (!reg->kaddr) {
-+		pr_warn_once("stolen time enabled but not configured for cpu %d\n",
-+			     cpu);
-+		return 0;
-+	}
-+
-+	return le64_to_cpu(READ_ONCE(reg->kaddr->stolen_time));
-+}
-+
-+static int disable_stolen_time_current_cpu(void)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+
-+	reg = this_cpu_ptr(&stolen_time_region);
-+	if (!reg->kaddr)
-+		return 0;
-+
-+	memunmap(reg->kaddr);
-+	memset(reg, 0, sizeof(*reg));
-+
-+	return 0;
-+}
-+
-+static int stolen_time_dying_cpu(unsigned int cpu)
-+{
-+	return disable_stolen_time_current_cpu();
-+}
-+
-+static int init_stolen_time_cpu(unsigned int cpu)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+	struct arm_smccc_res res;
-+
-+	reg = this_cpu_ptr(&stolen_time_region);
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_HV_PV_TIME_ST, &res);
-+
-+	if ((long)res.a0 < 0)
-+		return -EINVAL;
-+
-+	reg->kaddr = memremap(res.a0,
-+			sizeof(struct pvclock_vcpu_stolen_time),
-+			MEMREMAP_WB);
-+
-+	if (reg->kaddr == NULL) {
-+		pr_warn("Failed to map stolen time data structure\n");
-+		return -ENOMEM;
-+	}
-+
-+	if (le32_to_cpu(reg->kaddr->revision) != 0 ||
-+			le32_to_cpu(reg->kaddr->attributes) != 0) {
-+		pr_warn("Unexpected revision or attributes in stolen time data\n");
-+		return -ENXIO;
-+	}
-+
-+	return 0;
-+}
-+
-+static int kvm_arm_init_stolen_time(void)
-+{
-+	int ret;
-+
-+	ret = cpuhp_setup_state(CPUHP_AP_ARM_KVMPV_STARTING,
-+				"hypervisor/kvmarm/pv:starting",
-+				init_stolen_time_cpu, stolen_time_dying_cpu);
-+	if (ret < 0)
-+		return ret;
-+	return 0;
-+}
-+
-+static bool has_kvm_steal_clock(void)
-+{
-+	struct arm_smccc_res res;
-+
-+	/* To detect the presence of PV time support we require SMCCC 1.1+ */
-+	if (psci_ops.smccc_version < SMCCC_VERSION_1_1)
-+		return false;
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_FEATURES_FUNC_ID,
-+			     ARM_SMCCC_HV_PV_FEATURES, &res);
-+
-+	if (res.a0 != SMCCC_RET_SUCCESS)
-+		return false;
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_HV_PV_FEATURES,
-+			     ARM_SMCCC_HV_PV_TIME_ST, &res);
-+
-+	if (res.a0 != SMCCC_RET_SUCCESS)
-+		return false;
-+
-+	return true;
-+}
-+
-+int __init kvm_guest_init(void)
-+{
-+	int ret = 0;
-+
-+	if (!has_kvm_steal_clock())
-+		return 0;
-+
-+	ret = kvm_arm_init_stolen_time();
-+	if (ret)
-+		return ret;
-+
-+	pv_ops.time.steal_clock = kvm_steal_clock;
-+
-+	static_key_slow_inc(&paravirt_steal_enabled);
-+	if (steal_acc)
-+		static_key_slow_inc(&paravirt_steal_rq_enabled);
-+
-+	pr_info("using stolen time PV\n");
-+
-+	return 0;
-+}
-diff --git a/arch/arm64/kernel/time.c b/arch/arm64/kernel/time.c
-index 0b2946414dc9..a52aea14c6ec 100644
---- a/arch/arm64/kernel/time.c
-+++ b/arch/arm64/kernel/time.c
-@@ -30,6 +30,7 @@
- 
- #include <asm/thread_info.h>
- #include <asm/stacktrace.h>
-+#include <asm/paravirt.h>
- 
- unsigned long profile_pc(struct pt_regs *regs)
- {
-@@ -65,4 +66,6 @@ void __init time_init(void)
- 
- 	/* Calibrate the delay loop directly */
- 	lpj_fine = arch_timer_rate / HZ;
-+
-+	kvm_guest_init();
- }
-diff --git a/include/linux/cpuhotplug.h b/include/linux/cpuhotplug.h
-index 068793a619ca..89d75edb5750 100644
---- a/include/linux/cpuhotplug.h
-+++ b/include/linux/cpuhotplug.h
-@@ -136,6 +136,7 @@ enum cpuhp_state {
- 	/* Must be the last timer callback */
- 	CPUHP_AP_DUMMY_TIMER_STARTING,
- 	CPUHP_AP_ARM_XEN_STARTING,
-+	CPUHP_AP_ARM_KVMPV_STARTING,
- 	CPUHP_AP_ARM_CORESIGHT_STARTING,
- 	CPUHP_AP_ARM64_ISNDEP_STARTING,
- 	CPUHP_AP_SMPCFD_DYING,
+> I will apply to linux-kbuild this
+> to avoid conflicts.
+>
+>
+>  Documentation/kbuild/kbuild.rst    | 14 --------------
+>  Documentation/kbuild/makefiles.rst | 14 ++++++++++++++
+>  2 files changed, 14 insertions(+), 14 deletions(-)
+>
+> diff --git a/Documentation/kbuild/kbuild.rst b/Documentation/kbuild/kbuild.rst
+> index 61b2181ed3ea..62f9d86c082c 100644
+> --- a/Documentation/kbuild/kbuild.rst
+> +++ b/Documentation/kbuild/kbuild.rst
+> @@ -258,17 +258,3 @@ KBUILD_BUILD_USER, KBUILD_BUILD_HOST
+>  These two variables allow to override the user@host string displayed during
+>  boot and in /proc/version. The default value is the output of the commands
+>  whoami and host, respectively.
+> -
+> -KBUILD_LDS
+> -----------
+> -The linker script with full path. Assigned by the top-level Makefile.
+> -
+> -KBUILD_VMLINUX_OBJS
+> --------------------
+> -All object files for vmlinux. They are linked to vmlinux in the same
+> -order as listed in KBUILD_VMLINUX_OBJS.
+> -
+> -KBUILD_VMLINUX_LIBS
+> --------------------
+> -All .a "lib" files for vmlinux. KBUILD_VMLINUX_OBJS and KBUILD_VMLINUX_LIBS
+> -together specify all the object files used to link vmlinux.
+> diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/makefiles.rst
+> index f4f0f7ffde2b..d3448d2c8017 100644
+> --- a/Documentation/kbuild/makefiles.rst
+> +++ b/Documentation/kbuild/makefiles.rst
+> @@ -995,6 +995,20 @@ When kbuild executes, the following steps are followed (roughly):
+>         top-level Makefile has set any other flags. This provides a
+>         means for an architecture to override the defaults.
+>
+> +    KBUILD_LDS
+> +
+> +       The linker script with full path. Assigned by the top-level Makefile.
+> +
+> +    KBUILD_VMLINUX_OBJS
+> +
+> +       All object files for vmlinux. They are linked to vmlinux in the same
+> +       order as listed in KBUILD_VMLINUX_OBJS.
+> +
+> +    KBUILD_VMLINUX_LIBS
+> +
+> +       All .a "lib" files for vmlinux. KBUILD_VMLINUX_OBJS and
+> +       KBUILD_VMLINUX_LIBS together specify all the object files used to
+> +       link vmlinux.
+>
+>  6.2 Add prerequisites to archheaders
+>  ------------------------------------
+> --
+> 2.17.1
+>
+
+
 -- 
-2.20.1
-
+Best Regards
+Masahiro Yamada
