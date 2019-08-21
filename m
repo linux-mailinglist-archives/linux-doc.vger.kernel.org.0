@@ -2,282 +2,197 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 12BA097F06
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Aug 2019 17:39:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BA28498051
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Aug 2019 18:39:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730220AbfHUPhl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 21 Aug 2019 11:37:41 -0400
-Received: from foss.arm.com ([217.140.110.172]:60520 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730208AbfHUPhg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 21 Aug 2019 11:37:36 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id E434A360;
-        Wed, 21 Aug 2019 08:37:35 -0700 (PDT)
-Received: from e112269-lin.arm.com (e112269-lin.cambridge.arm.com [10.1.196.133])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E1CE13F718;
-        Wed, 21 Aug 2019 08:37:33 -0700 (PDT)
-From:   Steven Price <steven.price@arm.com>
-To:     Marc Zyngier <maz@kernel.org>, Will Deacon <will@kernel.org>,
-        linux-arm-kernel@lists.infradead.org, kvmarm@lists.cs.columbia.edu
-Cc:     Steven Price <steven.price@arm.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        =?UTF-8?q?Radim=20Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@redhat.com>,
-        Russell King <linux@armlinux.org.uk>,
-        James Morse <james.morse@arm.com>,
-        Julien Thierry <julien.thierry.kdev@gmail.com>,
-        Suzuki K Pouloze <suzuki.poulose@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v3 10/10] arm64: Retrieve stolen time as paravirtualized guest
-Date:   Wed, 21 Aug 2019 16:36:56 +0100
-Message-Id: <20190821153656.33429-11-steven.price@arm.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190821153656.33429-1-steven.price@arm.com>
-References: <20190821153656.33429-1-steven.price@arm.com>
+        id S1727962AbfHUQjQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 21 Aug 2019 12:39:16 -0400
+Received: from mail-pl1-f194.google.com ([209.85.214.194]:46290 "EHLO
+        mail-pl1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727037AbfHUQjQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Aug 2019 12:39:16 -0400
+Received: by mail-pl1-f194.google.com with SMTP id c2so1602563plz.13;
+        Wed, 21 Aug 2019 09:39:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=JZz/nKJ1cJgQ4UieOexo+ZC6Ak4tiKQMyw5MEe0fvdc=;
+        b=T6I8yJx6Ol98caKaIAK43tRitnI5lMhslocmESeYjtEgWaIz4oTvloNAssYOyKMYYq
+         ckrGFxXooK39YM2uBUtS9p7FtzwYvGg0Q0bVSgwPW2FH1NYq2bgGfem2MmK7NsKjeHUU
+         UL/ax2yCTVNCnSXuGd1e7YToLx6v9q0P12cEwBYCEl64gwgvtlvR1+qJKZ3igLAbrhJP
+         syv6HjEB9esrvkB0GI5jCxKtCwNOyCJCn1t6dguZCfxp+aStN2wsMdoo4hHdvgeegKFG
+         0SVIekvRJMdt6DNtWO+jkRIv7E2gJCD0LcBBkSqz8IopShLtR38B0kVlgZnCOzXiOuD3
+         MvFg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=JZz/nKJ1cJgQ4UieOexo+ZC6Ak4tiKQMyw5MEe0fvdc=;
+        b=bDKNqK8GfD1iuQs5AWGBwX6nsJMC6su4l3SDS5gO2RegF6SWYfDMOwoEFarQpNz3bj
+         09ExqWTjiOzi+Ho8hUdKTOh8UJYrvmFZv3Zvr7+5AHPevH9WVAO2LsoxqFkRSvf9oe9t
+         eDtygxkyIJeyAVedYrn4+jIDZlv8GO8bAl/qsDHvwlm+5Jy/Sd84bXoTXqaEBNtcG+oC
+         S3wPijmIte6k50NSpHzElTtwcE9vLgEzhb4R/MDGcR9bpRpbfhw3IA+vPFflse1EuYa7
+         uPZmNk4kooRQzEpRqmjGbnU5873PfSEVtDqhYcZcVzbdkImfDbnBUoQWtPH1bgj99aIi
+         SDXw==
+X-Gm-Message-State: APjAAAUEK/MWP2fcYLXD1JZeBFvSSpUNKAHychPPZqavB6jsRe/KQ77d
+        PfBH6dRTB+y7/Ccvk0p6I/0=
+X-Google-Smtp-Source: APXvYqziKRUcRBP7nEElJtM5f5gF1qT0vWwx+4WrLduJb/cf4W7woU9T9ThcHFROzOpv0Ia8+R8zww==
+X-Received: by 2002:a17:902:74ca:: with SMTP id f10mr4975086plt.264.1566405555151;
+        Wed, 21 Aug 2019 09:39:15 -0700 (PDT)
+Received: from [192.168.43.210] (mobile-166-137-176-042.mycingular.net. [166.137.176.42])
+        by smtp.gmail.com with ESMTPSA id q10sm29424466pfl.8.2019.08.21.09.39.13
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 21 Aug 2019 09:39:14 -0700 (PDT)
+Subject: Re: [PATCH v7 3/7] of/platform: Add functional dependency link from
+ DT bindings
+To:     Saravana Kannan <saravanak@google.com>
+Cc:     Rob Herring <robh+dt@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
+        <devicetree@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+        David Collins <collinsd@codeaurora.org>,
+        Android Kernel Team <kernel-team@android.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+References: <20190724001100.133423-1-saravanak@google.com>
+ <20190724001100.133423-4-saravanak@google.com>
+ <141d2e16-26cc-1f05-1ac0-6784bab5ae88@gmail.com>
+ <CAGETcx-dVnLCRA+1CX47gtZgtwTcrN5KefpjMzh9OJB-BEnqyg@mail.gmail.com>
+ <19c99a6e-51c3-68d7-d1d6-640aae754c14@gmail.com>
+ <CAGETcx-XcXZq7YFHsFdzBDniQku9cxFUJL_vBoEKKhCH+cDKRw@mail.gmail.com>
+ <74931824-f8a1-0435-e00a-5b5cdbe8a8a2@gmail.com>
+ <CAGETcx8UHA9kNkjjnBXcf_OYXaaPO9ky60M01Cfz3NFb1c1FZw@mail.gmail.com>
+ <15ab4fb0-7e69-9cc1-4a79-cff06767f7d9@gmail.com>
+ <CAGETcx-F7VoQsDihvJ1FY=Pw8Rhu69zh6pBzkV4nSabwYRvbZw@mail.gmail.com>
+From:   Frank Rowand <frowand.list@gmail.com>
+Message-ID: <983bb329-7bb4-7401-a9f1-2b8dfe87c1b7@gmail.com>
+Date:   Wed, 21 Aug 2019 09:39:12 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAGETcx-F7VoQsDihvJ1FY=Pw8Rhu69zh6pBzkV4nSabwYRvbZw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Enable paravirtualization features when running under a hypervisor
-supporting the PV_TIME_ST hypercall.
+On 8/20/19 3:09 PM, Saravana Kannan wrote:
+> On Mon, Aug 19, 2019 at 9:26 PM Frank Rowand <frowand.list@gmail.com> wrote:
+>>
 
-For each (v)CPU, we ask the hypervisor for the location of a shared
-page which the hypervisor will use to report stolen time to us. We set
-pv_time_ops to the stolen time function which simply reads the stolen
-value from the shared page for a VCPU. We guarantee single-copy
-atomicity using READ_ONCE which means we can also read the stolen
-time for another VCPU than the currently running one while it is
-potentially being updated by the hypervisor.
 
-Signed-off-by: Steven Price <steven.price@arm.com>
----
- arch/arm64/include/asm/paravirt.h |   9 +-
- arch/arm64/kernel/paravirt.c      | 148 ++++++++++++++++++++++++++++++
- arch/arm64/kernel/time.c          |   3 +
- include/linux/cpuhotplug.h        |   1 +
- 4 files changed, 160 insertions(+), 1 deletion(-)
+< snip - the stuff I snipped deserves reply, but I want to focus on just
+  one topic for this reply >
 
-diff --git a/arch/arm64/include/asm/paravirt.h b/arch/arm64/include/asm/paravirt.h
-index 799d9dd6f7cc..125c26c42902 100644
---- a/arch/arm64/include/asm/paravirt.h
-+++ b/arch/arm64/include/asm/paravirt.h
-@@ -21,6 +21,13 @@ static inline u64 paravirt_steal_clock(int cpu)
- {
- 	return pv_ops.time.steal_clock(cpu);
- }
--#endif
-+
-+int __init kvm_guest_init(void);
-+
-+#else
-+
-+#define kvm_guest_init()
-+
-+#endif // CONFIG_PARAVIRT
- 
- #endif
-diff --git a/arch/arm64/kernel/paravirt.c b/arch/arm64/kernel/paravirt.c
-index 4cfed91fe256..ea8dbbbd3293 100644
---- a/arch/arm64/kernel/paravirt.c
-+++ b/arch/arm64/kernel/paravirt.c
-@@ -6,13 +6,161 @@
-  * Author: Stefano Stabellini <stefano.stabellini@eu.citrix.com>
-  */
- 
-+#define pr_fmt(fmt) "kvmarm-pv: " fmt
-+
-+#include <linux/arm-smccc.h>
-+#include <linux/cpuhotplug.h>
- #include <linux/export.h>
-+#include <linux/io.h>
- #include <linux/jump_label.h>
-+#include <linux/printk.h>
-+#include <linux/psci.h>
-+#include <linux/reboot.h>
-+#include <linux/slab.h>
- #include <linux/types.h>
-+
- #include <asm/paravirt.h>
-+#include <asm/pvclock-abi.h>
-+#include <asm/smp_plat.h>
- 
- struct static_key paravirt_steal_enabled;
- struct static_key paravirt_steal_rq_enabled;
- 
- struct paravirt_patch_template pv_ops;
- EXPORT_SYMBOL_GPL(pv_ops);
-+
-+struct kvmarm_stolen_time_region {
-+	struct pvclock_vcpu_stolen_time *kaddr;
-+};
-+
-+static DEFINE_PER_CPU(struct kvmarm_stolen_time_region, stolen_time_region);
-+
-+static bool steal_acc = true;
-+static int __init parse_no_stealacc(char *arg)
-+{
-+	steal_acc = false;
-+	return 0;
-+}
-+
-+early_param("no-steal-acc", parse_no_stealacc);
-+
-+/* return stolen time in ns by asking the hypervisor */
-+static u64 kvm_steal_clock(int cpu)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+
-+	reg = per_cpu_ptr(&stolen_time_region, cpu);
-+	if (!reg->kaddr) {
-+		pr_warn_once("stolen time enabled but not configured for cpu %d\n",
-+			     cpu);
-+		return 0;
-+	}
-+
-+	return le64_to_cpu(READ_ONCE(reg->kaddr->stolen_time));
-+}
-+
-+static int disable_stolen_time_current_cpu(void)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+
-+	reg = this_cpu_ptr(&stolen_time_region);
-+	if (!reg->kaddr)
-+		return 0;
-+
-+	memunmap(reg->kaddr);
-+	memset(reg, 0, sizeof(*reg));
-+
-+	return 0;
-+}
-+
-+static int stolen_time_dying_cpu(unsigned int cpu)
-+{
-+	return disable_stolen_time_current_cpu();
-+}
-+
-+static int init_stolen_time_cpu(unsigned int cpu)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+	struct arm_smccc_res res;
-+
-+	reg = this_cpu_ptr(&stolen_time_region);
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_HV_PV_TIME_ST, &res);
-+
-+	if ((long)res.a0 < 0)
-+		return -EINVAL;
-+
-+	reg->kaddr = memremap(res.a0,
-+			      sizeof(struct pvclock_vcpu_stolen_time),
-+			      MEMREMAP_WB);
-+
-+	if (!reg->kaddr) {
-+		pr_warn("Failed to map stolen time data structure\n");
-+		return -ENOMEM;
-+	}
-+
-+	if (le32_to_cpu(reg->kaddr->revision) != 0 ||
-+	    le32_to_cpu(reg->kaddr->attributes) != 0) {
-+		pr_warn("Unexpected revision or attributes in stolen time data\n");
-+		return -ENXIO;
-+	}
-+
-+	return 0;
-+}
-+
-+static int kvm_arm_init_stolen_time(void)
-+{
-+	int ret;
-+
-+	ret = cpuhp_setup_state(CPUHP_AP_ARM_KVMPV_STARTING,
-+				"hypervisor/kvmarm/pv:starting",
-+				init_stolen_time_cpu, stolen_time_dying_cpu);
-+	if (ret < 0)
-+		return ret;
-+	return 0;
-+}
-+
-+static bool has_kvm_steal_clock(void)
-+{
-+	struct arm_smccc_res res;
-+
-+	/* To detect the presence of PV time support we require SMCCC 1.1+ */
-+	if (psci_ops.smccc_version < SMCCC_VERSION_1_1)
-+		return false;
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_FEATURES_FUNC_ID,
-+			     ARM_SMCCC_HV_PV_FEATURES, &res);
-+
-+	if (res.a0 != SMCCC_RET_SUCCESS)
-+		return false;
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_HV_PV_FEATURES,
-+			     ARM_SMCCC_HV_PV_TIME_ST, &res);
-+
-+	if (res.a0 != SMCCC_RET_SUCCESS)
-+		return false;
-+
-+	return true;
-+}
-+
-+int __init kvm_guest_init(void)
-+{
-+	int ret = 0;
-+
-+	if (!has_kvm_steal_clock())
-+		return 0;
-+
-+	ret = kvm_arm_init_stolen_time();
-+	if (ret)
-+		return ret;
-+
-+	pv_ops.time.steal_clock = kvm_steal_clock;
-+
-+	static_key_slow_inc(&paravirt_steal_enabled);
-+	if (steal_acc)
-+		static_key_slow_inc(&paravirt_steal_rq_enabled);
-+
-+	pr_info("using stolen time PV\n");
-+
-+	return 0;
-+}
-diff --git a/arch/arm64/kernel/time.c b/arch/arm64/kernel/time.c
-index 0b2946414dc9..a52aea14c6ec 100644
---- a/arch/arm64/kernel/time.c
-+++ b/arch/arm64/kernel/time.c
-@@ -30,6 +30,7 @@
- 
- #include <asm/thread_info.h>
- #include <asm/stacktrace.h>
-+#include <asm/paravirt.h>
- 
- unsigned long profile_pc(struct pt_regs *regs)
- {
-@@ -65,4 +66,6 @@ void __init time_init(void)
- 
- 	/* Calibrate the delay loop directly */
- 	lpj_fine = arch_timer_rate / HZ;
-+
-+	kvm_guest_init();
- }
-diff --git a/include/linux/cpuhotplug.h b/include/linux/cpuhotplug.h
-index 068793a619ca..89d75edb5750 100644
---- a/include/linux/cpuhotplug.h
-+++ b/include/linux/cpuhotplug.h
-@@ -136,6 +136,7 @@ enum cpuhp_state {
- 	/* Must be the last timer callback */
- 	CPUHP_AP_DUMMY_TIMER_STARTING,
- 	CPUHP_AP_ARM_XEN_STARTING,
-+	CPUHP_AP_ARM_KVMPV_STARTING,
- 	CPUHP_AP_ARM_CORESIGHT_STARTING,
- 	CPUHP_AP_ARM64_ISNDEP_STARTING,
- 	CPUHP_AP_SMPCFD_DYING,
--- 
-2.20.1
+>> You have a real bug.  I have told you how to fix the real bug.  And you
+>> have ignored my suggestion.  (To be honest, I do not know for sure that
+>> my suggestion is feasible, but on the surface it appears to be.)
+> 
+> I'd actually say that your proposal is what's trying to paper over a
+> generic problem by saying it's specific to one or a few set of
+> resources. And it looks feasible to you because you haven't dove deep
+> into this issue.
 
+Not saying it is specific to one or a few sets of resources.  The
+proposal suggests handling every single consumer supplier relationship
+for which the bootloader has enabled a supplier resource via an
+explicit message communicating the enabled resources.  And directly
+handling those exact resources.
+
+Think about the definition of "paper over" vs "directly address".
+
+
+> 
+>> Again,
+>> my suggestion is to have the boot loader pass information to the kernel
+>> (via a chosen property) telling the kernel which devices the bootloader
+>> has enabled power to.  The power subsystem would use that information
+>> early in boot to do a "get" on the power supplier (I am not using precise
+>> power subsystem terminology, but it should be obvious what I mean).
+>> The consumer device driver would also have to be aware of the information
+>> passed via the chosen property because the power subsystem has done the
+>> "get" on the consumer devices behalf (exactly how the consumer gets
+>> that information is an implementation detail).  This approach is
+>> more direct, less subtle, less fragile.
+> 
+> I'll have to disagree on your claim. You are adding unnecessary
+> bootloader dependency when the kernel is completely capable of
+> handling this on its own. You are requiring explicit "gets" by
+> suppliers and then hoping all the consumers do the corresponding
+> "puts" to balance it out. Somehow the consumers need to know which
+> suppliers have parsed which bootloader input. And it's barely
+> scratching the surface of the problem.
+
+OK, let me flesh out a possible implementation just a little bit.
+
+This is focused on devicetree, as is your patch series.  For ACPI
+a parallel implementation would exist.
+
+The bootloader chosen property could be a list of tuples, each tuple
+containing: consumer phandle, supplier phandle.  Each tuple could
+contain more data if the implementation demands, but I'm trying to
+keep it simple to illustrate the concept.
+
+In early-ish boot a core function processes the chosen property.  For
+each consumer / supplier pair, the supplier compatible could be used
+to determine the supplier type.  (This might not be enough info to
+determine the supplier type - maybe the consumer property that points
+to the supplier will also have to be specified in the chosen property
+tuple, or maybe a supplier type could be added to the tuple.)  Given
+the consumer, supplier, and resource type the appropriate "get"
+would be done.
+
+Late in boot, and possible repeated after modules are loaded, a core
+function would scan the chosen property tuples, and for each
+consumer / supplier pair, if both the consumer and the supplier
+drivers are bound, it would be ASSUMED that it is ok to do the
+appropriate type of "put", and the "put" would be done.
+
+
+> 
+> You are assuming this has to do with just power when it can be clocks,
+> interconnects, etc. Why solve this repeated for each framework when
+> you can have a generic solution?
+
+No such assumption.
+
+
+> 
+> Also, while I understand what you mean by "get" it's not going to be
+> as simple as a reference count to keep the resource on. In reality
+> you'll need more complex handling. For example, having to keep a
+> voltage rail at or above X mV because one consumer might fail if the
+> voltage is < X mV. Or making sure a clock never goes about the
+> bootloader set frequency before all the consumer drivers are probed to
+> avoid overclocking one of the consumers. Trying to have this
+> explicitly coordinated across multiple drivers would be a nightmare.
+> It gets even more complicated with interconnects.
+> 
+> With my patch series, the consumers don't need to do anything. They
+> just probe as usual. The suppliers don't need to track or coordinate
+> with any consumers. For example, regulator suppliers just need to keep
+> the voltage rail at (or above) the level that the boot loader left it
+> on at and then apply the aggregated requests from their APIs once they
+> get the sync_state() callback. And it actually works -- tested for
+> regulators and clocks (and maybe even interconnects -- I forgot) in a
+> device I have.
+> 
+
+And same for the possible implementation I sketched above.  The equivalent
+of the sync_state() callback would be done by the end of boot (potentially
+repeated after each module loads) core function making a similar call.
+Hand waving here about what suppliers to call.
+
+Of course this is not the only way to implement my concept, just an
+example to suggest that it might be feasible and it might work.
+
+< snip >
+
+-Frank
