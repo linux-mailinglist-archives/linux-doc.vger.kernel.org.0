@@ -2,114 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6F90E98095
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Aug 2019 18:47:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 51C27980B7
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Aug 2019 18:53:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729740AbfHUQrt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 21 Aug 2019 12:47:49 -0400
-Received: from foss.arm.com ([217.140.110.172]:33482 "EHLO foss.arm.com"
+        id S1727476AbfHUQxp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 21 Aug 2019 12:53:45 -0400
+Received: from mail.kernel.org ([198.145.29.99]:34182 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729733AbfHUQrt (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 21 Aug 2019 12:47:49 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E04B360;
-        Wed, 21 Aug 2019 09:47:48 -0700 (PDT)
-Received: from arrakis.cambridge.arm.com (usa-sjc-imap-foss1.foss.arm.com [10.121.207.14])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id D35C93F718;
-        Wed, 21 Aug 2019 09:47:46 -0700 (PDT)
-From:   Catalin Marinas <catalin.marinas@arm.com>
-To:     linux-arm-kernel@lists.infradead.org, linux-mm@kvack.org
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Vincenzo Frascino <vincenzo.frascino@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Szabolcs Nagy <szabolcs.nagy@arm.com>,
-        Kevin Brodsky <kevin.brodsky@arm.com>,
-        Dave P Martin <Dave.Martin@arm.com>,
-        Dave Hansen <dave.hansen@intel.com>, linux-doc@vger.kernel.org,
-        linux-arch@vger.kernel.org, Will Deacon <will.deacon@arm.com>
-Subject: [PATCH v9 3/3] arm64: Relax Documentation/arm64/tagged-pointers.rst
-Date:   Wed, 21 Aug 2019 17:47:30 +0100
-Message-Id: <20190821164730.47450-4-catalin.marinas@arm.com>
-X-Mailer: git-send-email 2.23.0.rc0
-In-Reply-To: <20190821164730.47450-1-catalin.marinas@arm.com>
-References: <20190821164730.47450-1-catalin.marinas@arm.com>
+        id S1726696AbfHUQxp (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 21 Aug 2019 12:53:45 -0400
+Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 9699122DD3;
+        Wed, 21 Aug 2019 16:53:42 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1566406424;
+        bh=8EpYXOIJQ7TePwZ/ZCJnzDEkdpUgKmzzxBX02HTYDWc=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=mfA3TYZ5mReb6a41G+2FUsWZ4XDr3vM5MuLTd+xih2gFnd/B+p3syzRto7GLy1yCP
+         yNbNLlyJluiuGn/UDS0ljvkiKAsdh75khbDmuBybOByPBaXAfA3M/PM56Bd93ckdf7
+         Uz4JeqWNifNtxOjNgPEvRWiDgS+Ymy2V+CFJCsZE=
+Date:   Wed, 21 Aug 2019 17:53:39 +0100
+From:   Will Deacon <will@kernel.org>
+To:     Mark Rutland <mark.rutland@arm.com>
+Cc:     Ganapatrao Kulkarni <gklkml16@gmail.com>,
+        Ganapatrao Kulkarni <gkulkarni@marvell.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        Jayachandran Chandrasekharan Nair <jnair@marvell.com>,
+        Robert Richter <rrichter@marvell.com>,
+        Jan Glauber <jglauber@marvell.com>
+Subject: Re: [PATCH v3 2/2] drivers/perf: Add CCPI2 PMU support in ThunderX2
+ UNCORE driver.
+Message-ID: <20190821165339.7gu4rxkvdjcr4mta@willie-the-truck>
+References: <1563873380-2003-1-git-send-email-gkulkarni@marvell.com>
+ <1563873380-2003-3-git-send-email-gkulkarni@marvell.com>
+ <20190812120125.GA50712@lakrids.cambridge.arm.com>
+ <CAKTKpr7juHd9Bgam28LESadihFadEAevRAhc-7w3PTMYY7HLNw@mail.gmail.com>
+ <20190813110345.GD866@lakrids.cambridge.arm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190813110345.GD866@lakrids.cambridge.arm.com>
+User-Agent: NeoMutt/20170113 (1.7.2)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Vincenzo Frascino <vincenzo.frascino@arm.com>
+On Tue, Aug 13, 2019 at 12:03:45PM +0100, Mark Rutland wrote:
+> On Tue, Aug 13, 2019 at 04:25:15PM +0530, Ganapatrao Kulkarni wrote:
+> > On Mon, Aug 12, 2019 at 5:31 PM Mark Rutland <mark.rutland@arm.com> wrote:
+> > >
+> > > On Tue, Jul 23, 2019 at 09:16:28AM +0000, Ganapatrao Kulkarni wrote:
+> > > > CCPI2 is a low-latency high-bandwidth serial interface for connecting
+> > > > ThunderX2 processors. This patch adds support to capture CCPI2 perf events.
+> > >
+> > > It would be worth pointing out in the commit message how the CCPI2
+> > > counters differ from the others. I realise you have that in the body of
+> > > patch 1, but it's critical information when reviewing this patch...
+> > 
+> > Ok, I will add in next version.
+> > >
+> > > >
+> > > > Signed-off-by: Ganapatrao Kulkarni <gkulkarni@marvell.com>
+> > > > ---
+> > > >  drivers/perf/thunderx2_pmu.c | 248 ++++++++++++++++++++++++++++++-----
+> > > >  1 file changed, 214 insertions(+), 34 deletions(-)
+> > > >
+> > > > diff --git a/drivers/perf/thunderx2_pmu.c b/drivers/perf/thunderx2_pmu.c
+> > > > index 43d76c85da56..a4e1273eafa3 100644
+> > > > --- a/drivers/perf/thunderx2_pmu.c
+> > > > +++ b/drivers/perf/thunderx2_pmu.c
+> > > > @@ -17,22 +17,31 @@
+> > > >   */
+> > > >
+> > > >  #define TX2_PMU_MAX_COUNTERS         4
+> > >
+> > > Shouldn't this be 8 now?
+> > 
+> > It is kept unchanged to 4(as suggested by Will), which is same for
+> > both L3 and DMC.
+> > For CCPI2 this macro is not used.
+> 
+> Hmmm....
+> 
+> I disagree with that suggestion given that this also affects the
+> active_counters bitmap size (and thus it is not correctly sized as of
+> this patch), and it doesn't really save us much.
+> 
+> I think it would be better to bump this to 8 and always update the
+> events array, even though it will be unused for CCPI2. That's less
+> surprising, needs fewer special-cases, and we can use the hrtimer
+> function pointer alone to determine if we need to do any hrtimer work.
 
-On AArch64 the TCR_EL1.TBI0 bit is set by default, allowing userspace
-(EL0) to perform memory accesses through 64-bit pointers with a non-zero
-top byte. However, such pointers were not allowed at the user-kernel
-syscall ABI boundary.
+tbf, my complaint was actually about some macros applying to the whole
+PMU whilst others refer only to DMC/L3C and this not being apparent from
+the naming:
 
-With the Tagged Address ABI patchset, it is now possible to pass tagged
-pointers to the syscalls. Relax the requirements described in
-tagged-pointers.rst to be compliant with the behaviours guaranteed by
-the AArch64 Tagged Address ABI.
+https://lkml.org/lkml/2019/6/27/250
 
-Cc: Will Deacon <will.deacon@arm.com>
-Cc: Szabolcs Nagy <szabolcs.nagy@arm.com>
-Cc: Kevin Brodsky <kevin.brodsky@arm.com>
-Acked-by: Andrey Konovalov <andreyknvl@google.com>
-Signed-off-by: Vincenzo Frascino <vincenzo.frascino@arm.com>
-Co-developed-by: Catalin Marinas <catalin.marinas@arm.com>
-Signed-off-by: Catalin Marinas <catalin.marinas@arm.com>
----
- Documentation/arm64/tagged-pointers.rst | 23 ++++++++++++++++-------
- 1 file changed, 16 insertions(+), 7 deletions(-)
+so I'm fine having TX2_PMU_DMC_L3C_MAX_COUNTERS and
+TX2_PMU_CCPI2_MAX_COUNTERS, but that sort of naming needs to be consistent
+unless the macro/definition really applies to both. That fed the suggestion
+that GET_EVENTID could be generic and switch on the event type internally
+instead of at the caller.
 
-diff --git a/Documentation/arm64/tagged-pointers.rst b/Documentation/arm64/tagged-pointers.rst
-index 2acdec3ebbeb..04f2ba9b779e 100644
---- a/Documentation/arm64/tagged-pointers.rst
-+++ b/Documentation/arm64/tagged-pointers.rst
-@@ -20,7 +20,9 @@ Passing tagged addresses to the kernel
- --------------------------------------
- 
- All interpretation of userspace memory addresses by the kernel assumes
--an address tag of 0x00.
-+an address tag of 0x00, unless the application enables the AArch64
-+Tagged Address ABI explicitly
-+(Documentation/arm64/tagged-address-abi.rst).
- 
- This includes, but is not limited to, addresses found in:
- 
-@@ -33,13 +35,15 @@ This includes, but is not limited to, addresses found in:
-  - the frame pointer (x29) and frame records, e.g. when interpreting
-    them to generate a backtrace or call graph.
- 
--Using non-zero address tags in any of these locations may result in an
--error code being returned, a (fatal) signal being raised, or other modes
--of failure.
-+Using non-zero address tags in any of these locations when the
-+userspace application did not enable the AArch64 Tagged Address ABI may
-+result in an error code being returned, a (fatal) signal being raised,
-+or other modes of failure.
- 
--For these reasons, passing non-zero address tags to the kernel via
--system calls is forbidden, and using a non-zero address tag for sp is
--strongly discouraged.
-+For these reasons, when the AArch64 Tagged Address ABI is disabled,
-+passing non-zero address tags to the kernel via system calls is
-+forbidden, and using a non-zero address tag for sp is strongly
-+discouraged.
- 
- Programs maintaining a frame pointer and frame records that use non-zero
- address tags may suffer impaired or inaccurate debug and profiling
-@@ -59,6 +63,11 @@ be preserved.
- The architecture prevents the use of a tagged PC, so the upper byte will
- be set to a sign-extension of bit 55 on exception return.
- 
-+This behaviour is maintained when the AArch64 Tagged Address ABI is
-+enabled. In addition, with the exceptions above, the kernel will
-+preserve any non-zero tags passed by the user via syscalls and stored in
-+kernel data structures (e.g. ``set_robust_list()``, ``sigaltstack()``).
-+
- 
- Other considerations
- --------------------
+Will
