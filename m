@@ -2,139 +2,277 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id ED9239B6BF
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2019 21:12:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F9E09B6F6
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Aug 2019 21:21:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2406129AbfHWTMH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 23 Aug 2019 15:12:07 -0400
-Received: from mail-eopbgr20069.outbound.protection.outlook.com ([40.107.2.69]:31678
-        "EHLO EUR02-VE1-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S2406115AbfHWTMG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 23 Aug 2019 15:12:06 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=e9Ltf4KAnlgLs3jIF2avxYjRL/ZcIRyFhrNHyEhPofo8a47OlgMUaC3hLBKND9x5+3HhffUD0wimM6bKBVjYX8lltcK1cjCJMfpMhdFJgEvGBJ0O1KqVDeg8fczhHX0xRmcqgvDsetw6Qh/PJKrQaahaVgICEzXaFziyNtZGp0jaCMCjHL+pyKC69srMD2EaQ1nXiDDVIsAOz+jMZR6ANMUr9EwHFm+7dYlt96kMtuo0ZfNFBDQfKdsZSDkvnOB6YxANpFX7HazOJupHrsUg0glTmiODG7d44JGeKCcE65dQjDYClYHmCCyoeAlh1gHhQDlHNeV8EnYLS83syX5JzA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=egAmLLcYxNc+vNg4VL0BrjM1fDO0l7UPG3LF2prGCGY=;
- b=F/h0ojSGgxW0PaqeRb7OFjiqb3Xp9D6etzxz/gBwSRKUo+GWpEuHvmZpTJAP+8jGqBXveJMEMDRoD8R736+DOJNgYtqWz5jKmSNjP2Vo2pDXkQcDKzSaOaXkc/0GkJN9G8iPLpH2dQp/7sQlc8v25hk+AePLtvgBwPQqDMjgzuuiLSob6LuK45Sg+GPucsiqg5VU6YYl8NsQLlvo2Lj4b1Z6kxzxucWcHN7+Dt3ZnnWvFyRudNdRU5nXu0dnxl2utxD1ytCxlEeJThgw8fvuJh3dTS8KX6izTchhlg8ZgibxMjxRwy4HyfRJwj3TlyfLTHV3cTM+qT2hIDt5ByqP4g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=egAmLLcYxNc+vNg4VL0BrjM1fDO0l7UPG3LF2prGCGY=;
- b=EoVemOlIBJeY/WvrPItvVs+vdOuFhPGY2a5VaxPzAfAmyMRALG+GDG2B5FW7r+3DxEgdCotWSvbUa1zY7AsLMxUSnqCmMDUAofPoLbenTx14vIgP5Lj4WXVtBB4RdQ69hBL3xYJzCFS1ZhIBg5+me276UfiKu6f7VlHL8a+M93g=
-Received: from VI1PR0402MB2863.eurprd04.prod.outlook.com (10.175.20.18) by
- VI1PR0402MB2717.eurprd04.prod.outlook.com (10.175.22.139) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2178.16; Fri, 23 Aug 2019 19:11:42 +0000
-Received: from VI1PR0402MB2863.eurprd04.prod.outlook.com
- ([fe80::7de6:ea4b:9b5d:d023]) by VI1PR0402MB2863.eurprd04.prod.outlook.com
- ([fe80::7de6:ea4b:9b5d:d023%7]) with mapi id 15.20.2178.020; Fri, 23 Aug 2019
- 19:11:42 +0000
-From:   Stefan-gabriel Mirea <stefan-gabriel.mirea@nxp.com>
-To:     "corbet@lwn.net" <corbet@lwn.net>,
-        "robh+dt@kernel.org" <robh+dt@kernel.org>,
-        "mark.rutland@arm.com" <mark.rutland@arm.com>,
-        "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
-        "catalin.marinas@arm.com" <catalin.marinas@arm.com>,
-        "will@kernel.org" <will@kernel.org>,
-        "shawnguo@kernel.org" <shawnguo@kernel.org>,
-        Leo Li <leoyang.li@nxp.com>
-CC:     "jslaby@suse.com" <jslaby@suse.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-        "linux-serial@vger.kernel.org" <linux-serial@vger.kernel.org>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        Cosmin Stefan Stoica <cosmin.stoica@nxp.com>
-Subject: [PATCH v3 7/7] arm64: defconfig: Enable configs for S32V234
-Thread-Topic: [PATCH v3 7/7] arm64: defconfig: Enable configs for S32V234
-Thread-Index: AQHVWeaY2v6WFA+VBUyvk0fD5W0utQ==
-Date:   Fri, 23 Aug 2019 19:11:42 +0000
-Message-ID: <20190823191115.18490-8-stefan-gabriel.mirea@nxp.com>
-References: <20190823191115.18490-1-stefan-gabriel.mirea@nxp.com>
-In-Reply-To: <20190823191115.18490-1-stefan-gabriel.mirea@nxp.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.22.0
-x-clientproxiedby: AM5PR0402CA0007.eurprd04.prod.outlook.com
- (2603:10a6:203:90::17) To VI1PR0402MB2863.eurprd04.prod.outlook.com
- (2603:10a6:800:af::18)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=stefan-gabriel.mirea@nxp.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [212.146.100.6]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: fdf608ca-8d79-4ea7-96c8-08d727fdbb40
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(5600166)(711020)(4605104)(1401327)(4618075)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(2017052603328)(7193020);SRVR:VI1PR0402MB2717;
-x-ms-traffictypediagnostic: VI1PR0402MB2717:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <VI1PR0402MB27175AF93966C49C47D55850DFA40@VI1PR0402MB2717.eurprd04.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:3044;
-x-forefront-prvs: 0138CD935C
-x-forefront-antispam-report: SFV:NSPM;SFS:(10009020)(4636009)(136003)(376002)(39860400002)(366004)(396003)(346002)(189003)(199004)(446003)(476003)(2501003)(66446008)(76176011)(6436002)(6486002)(386003)(6506007)(50226002)(81156014)(256004)(86362001)(66946007)(64756008)(66556008)(66476007)(66066001)(186003)(8936002)(6512007)(25786009)(81166006)(36756003)(478600001)(52116002)(8676002)(14454004)(102836004)(6116002)(5660300002)(486006)(26005)(2201001)(71200400001)(53936002)(71190400001)(1076003)(316002)(110136005)(7416002)(54906003)(4326008)(99286004)(7736002)(305945005)(6636002)(3846002)(11346002)(2616005)(4744005)(2906002);DIR:OUT;SFP:1101;SCL:1;SRVR:VI1PR0402MB2717;H:VI1PR0402MB2863.eurprd04.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;MX:1;A:1;
-received-spf: None (protection.outlook.com: nxp.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: XUoXzVhHQn4W7F6ga20L4KDqNtgmFRvHXKqS1PiKRqQB9CGNKnwzQwxGV/vpJPYDyT3e1+4mcse9Y2PPXQgY8Uv8/7cCvtfKJu20GJfwzeQU4OC6fxTOJ3Us46cheTjhFt5CqP/omZan/skxY0xMd3ZSFufEApczwv0V5cbeJor5QHbTUtb9yjAtFsb9LcTKBxo0p+XSoqnLhhMDMJneHk1T8TTuTbP+Sms3nIBsgTaGnmoa5OGGJrFdSx+jvj7RqfnVy6QPXtX4RXGEBW095xObxtsZ3ppWutw7NzAwbv46/yD/cXfmF1CMlwHtc5rP9kYE54UMtknGS9jBnShMe4TW95aKMNP8bUSuvsogKYDhNdBONYAPrWn8knYtn6CVh//KaCOMHgFAnbAA0vFo6ZfncVWBpxuwgnmB9V1OCO0=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+        id S2391417AbfHWTVE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 23 Aug 2019 15:21:04 -0400
+Received: from mail-pg1-f193.google.com ([209.85.215.193]:35778 "EHLO
+        mail-pg1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2391408AbfHWTVE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Aug 2019 15:21:04 -0400
+Received: by mail-pg1-f193.google.com with SMTP id n4so6288626pgv.2
+        for <linux-doc@vger.kernel.org>; Fri, 23 Aug 2019 12:21:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=/Dy1FzmvR0eJjCC2Ikj9vF4MdQWBrZZ+dsE4XRbe9Hg=;
+        b=GAfB+2vJ9UrJ+uhpiqEtwdNUAGoePp1ae5xG71X3tHgcEOBBFdF2AwCGoVk8XSTrYT
+         oRRUEEvPUD4cV1i6GgH2SHbqdJCRPdrFO/UPOtyzTadVUQcsNqDEq6I1++oOJBWGvaLs
+         C5HzPLusDolOeQkf9O7mpaIshybmMgUw/HNKR7Koaj7SYHzwMnH5YKdROy/juCfof4sP
+         ++r5xrywZBPw+zoJUvm5jRbUk21qsc0ulY54/Pk5oMlkshAlGqJMfbZexIASPa/FjuZ5
+         QCinC6Nk9sFA3Zxtc3nf6I/65uah8zj86Z/PeVWCbjLofqVMWdi2cTkuT1xD3CjRZCUC
+         K2jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=/Dy1FzmvR0eJjCC2Ikj9vF4MdQWBrZZ+dsE4XRbe9Hg=;
+        b=uI5WwwdooFIpFP5Gr3gtZB7A+92Ui4tqwBmUyUTWAIffmMA6v7L2GBSqEtmSUa8I/m
+         Hv5gxGsDtdeGTeF9codQD+sSvwWEGxrQ/6GlcXp7fekPiwKLitk0IwjH3wYyyQRORouU
+         sfnLGtLb6k4KJJ0NVlbdeR0SdHeE91rGp4uwzDoOOJr6tQ8iaqOVmbYJDPjRY6usHiBj
+         +exq84VNrQO44rRom0W+udmK3mnEV3jjlg1cXKAaLYLLSF0SONm65Uqzl0WERE4kZmpI
+         TIka43ihRKpQi5PRcIuNZyIVbn1YP0sB3JdBs5w5fsP7WYFPJ4aH62Ifw2kf3jA3JcKh
+         P6zw==
+X-Gm-Message-State: APjAAAV33nUjRXkvgtx+5tZYb7JADCoeiXyzj85AjwrluPKZFkSUM+zf
+        IPvBmXfGeB7Y8eTkUWBUp4/dHEfogZTHTOoG0MxW+Q==
+X-Google-Smtp-Source: APXvYqxEt75OKlCOajPSpWXklQc5TrNHn3+UpDKdkP9anp7sx27yyQKY/ESDNfuQKCYdSlHMi2ha4adZkVxJBci1pHE=
+X-Received: by 2002:a17:90a:ab0d:: with SMTP id m13mr6579706pjq.84.1566588062607;
+ Fri, 23 Aug 2019 12:21:02 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: fdf608ca-8d79-4ea7-96c8-08d727fdbb40
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Aug 2019 19:11:42.0284
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: cSEddpcg/saqOpsEelq3kR9VHxcbrTTYUOioxZ1IdiPq88OOF36gDNiOjo9ibMpDFx9exECfseb7Fg214LLzXBjw6w6MVrHaawp15P7dsRo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0402MB2717
+References: <20190820232046.50175-1-brendanhiggins@google.com>
+ <20190820232046.50175-2-brendanhiggins@google.com> <7f2c8908-75f6-b793-7113-ad57c51777ce@kernel.org>
+ <CAFd5g44mRK9t4f58i_YMEt=e9RTxwrrhFY_V2LW_E7bUwR3cdg@mail.gmail.com>
+ <4513d9f3-a69b-a9a4-768b-86c2962b62e0@kernel.org> <CAFd5g446J=cVW4QW+QeZMLDi+ANqshAW6KTrFFBTusPcdr6-GA@mail.gmail.com>
+ <42c6235c-c586-8de1-1913-7cf1962c6066@kernel.org> <CAFd5g44hLgeqPtNw1zQ5k_+apBm=ri_6=wAgHk=oPOvQs6xgNg@mail.gmail.com>
+ <54f3c011-d666-e828-5e77-359b7a7374e7@kernel.org> <CAFd5g44NAs6KK0_sG9itgT5qxujpyx36XV6tT8=zMynG-ZyVhQ@mail.gmail.com>
+ <bb9384cd-bd62-2190-e0da-ed3537aff171@kernel.org>
+In-Reply-To: <bb9384cd-bd62-2190-e0da-ed3537aff171@kernel.org>
+From:   Brendan Higgins <brendanhiggins@google.com>
+Date:   Fri, 23 Aug 2019 12:20:50 -0700
+Message-ID: <CAFd5g47bJjp94bbCRmho8yUXNWx3PpQ4Cu6Y1UnErKVKWuedNw@mail.gmail.com>
+Subject: Re: [PATCH v14 01/18] kunit: test: add KUnit test runner core
+To:     shuah <shuah@kernel.org>
+Cc:     Frank Rowand <frowand.list@gmail.com>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        Kees Cook <keescook@google.com>,
+        Kieran Bingham <kieran.bingham@ideasonboard.com>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Rob Herring <robh@kernel.org>, Stephen Boyd <sboyd@kernel.org>,
+        "Theodore Ts'o" <tytso@mit.edu>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        devicetree <devicetree@vger.kernel.org>,
+        dri-devel <dri-devel@lists.freedesktop.org>,
+        kunit-dev@googlegroups.com,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        linux-fsdevel@vger.kernel.org,
+        linux-kbuild <linux-kbuild@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        linux-nvdimm <linux-nvdimm@lists.01.org>,
+        linux-um@lists.infradead.org,
+        Sasha Levin <Alexander.Levin@microsoft.com>,
+        "Bird, Timothy" <Tim.Bird@sony.com>,
+        Amir Goldstein <amir73il@gmail.com>,
+        Dan Carpenter <dan.carpenter@oracle.com>,
+        Daniel Vetter <daniel@ffwll.ch>, Jeff Dike <jdike@addtoit.com>,
+        Joel Stanley <joel@jms.id.au>,
+        Julia Lawall <julia.lawall@lip6.fr>,
+        Kevin Hilman <khilman@baylibre.com>,
+        Knut Omang <knut.omang@oracle.com>,
+        Logan Gunthorpe <logang@deltatee.com>,
+        Petr Mladek <pmladek@suse.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Richard Weinberger <richard@nod.at>,
+        David Rientjes <rientjes@google.com>,
+        Steven Rostedt <rostedt@goodmis.org>, wfg@linux.intel.com
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mihaela Martinas <Mihaela.Martinas@freescale.com>
+On Fri, Aug 23, 2019 at 12:04 PM shuah <shuah@kernel.org> wrote:
+>
+> On 8/23/19 12:56 PM, Brendan Higgins wrote:
+> > On Fri, Aug 23, 2019 at 11:32 AM shuah <shuah@kernel.org> wrote:
+> >>
+> >> On 8/23/19 11:54 AM, Brendan Higgins wrote:
+> >>> On Fri, Aug 23, 2019 at 10:34 AM shuah <shuah@kernel.org> wrote:
+> >>>>
+> >>>> On 8/23/19 11:27 AM, Brendan Higgins wrote:
+> >>>>> On Fri, Aug 23, 2019 at 10:05 AM shuah <shuah@kernel.org> wrote:
+> >>>>>>
+> >>>>>> On 8/23/19 10:48 AM, Brendan Higgins wrote:
+> >>>>>>> On Fri, Aug 23, 2019 at 8:33 AM shuah <shuah@kernel.org> wrote:
+> >>>>>>>>
+> >>>>>>>> Hi Brendan,
+> >>>>>>>>
+> >>>>>>>> On 8/20/19 5:20 PM, Brendan Higgins wrote:
+> >>>>>>>>> Add core facilities for defining unit tests; this provides a common way
+> >>>>>>>>> to define test cases, functions that execute code which is under test
+> >>>>>>>>> and determine whether the code under test behaves as expected; this also
+> >>>>>>>>> provides a way to group together related test cases in test suites (here
+> >>>>>>>>> we call them test_modules).
+> >>>>>>>>>
+> >>>>>>>>> Just define test cases and how to execute them for now; setting
+> >>>>>>>>> expectations on code will be defined later.
+> >>>>>>>>>
+> >>>>>>>>> Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
+> >>>>>>>>> Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> >>>>>>>>> Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
+> >>>>>>>>> Reviewed-by: Luis Chamberlain <mcgrof@kernel.org>
+> >>>>>>>>> Reviewed-by: Stephen Boyd <sboyd@kernel.org>
+> >>>>>>>>> ---
+> >>>>>>>>>       include/kunit/test.h | 179 ++++++++++++++++++++++++++++++++++++++++
+> >>>>>>>>>       kunit/Kconfig        |  17 ++++
+> >>>>>>>>>       kunit/Makefile       |   1 +
+> >>>>>>>>>       kunit/test.c         | 191 +++++++++++++++++++++++++++++++++++++++++++
+> >>>>>>>>>       4 files changed, 388 insertions(+)
+> >>>>>>>>>       create mode 100644 include/kunit/test.h
+> >>>>>>>>>       create mode 100644 kunit/Kconfig
+> >>>>>>>>>       create mode 100644 kunit/Makefile
+> >>>>>>>>>       create mode 100644 kunit/test.c
+> >>>>>>>>>
+> >>>>>>>>> diff --git a/include/kunit/test.h b/include/kunit/test.h
+> >>>>>>>>> new file mode 100644
+> >>>>>>>>> index 0000000000000..e0b34acb9ee4e
+> >>>>>>>>> --- /dev/null
+> >>>>>>>>> +++ b/include/kunit/test.h
+> >>>>>>>>> @@ -0,0 +1,179 @@
+> >>>>>>>>> +/* SPDX-License-Identifier: GPL-2.0 */
+> >>>>>>>>> +/*
+> >>>>>>>>> + * Base unit test (KUnit) API.
+> >>>>>>>>> + *
+> >>>>>>>>> + * Copyright (C) 2019, Google LLC.
+> >>>>>>>>> + * Author: Brendan Higgins <brendanhiggins@google.com>
+> >>>>>>>>> + */
+> >>>>>>>>> +
+> >>>>>>>>> +#ifndef _KUNIT_TEST_H
+> >>>>>>>>> +#define _KUNIT_TEST_H
+> >>>>>>>>> +
+> >>>>>>>>> +#include <linux/types.h>
+> >>>>>>>>> +
+> >>>>>>>>> +struct kunit;
+> >>>>>>>>> +
+> >>>>>>>>> +/**
+> >>>>>>>>> + * struct kunit_case - represents an individual test case.
+> >>>>>>>>> + * @run_case: the function representing the actual test case.
+> >>>>>>>>> + * @name: the name of the test case.
+> >>>>>>>>> + *
+> >>>>>>>>> + * A test case is a function with the signature, ``void (*)(struct kunit *)``
+> >>>>>>>>> + * that makes expectations (see KUNIT_EXPECT_TRUE()) about code under test. Each
+> >>>>>>>>> + * test case is associated with a &struct kunit_suite and will be run after the
+> >>>>>>>>> + * suite's init function and followed by the suite's exit function.
+> >>>>>>>>> + *
+> >>>>>>>>> + * A test case should be static and should only be created with the KUNIT_CASE()
+> >>>>>>>>> + * macro; additionally, every array of test cases should be terminated with an
+> >>>>>>>>> + * empty test case.
+> >>>>>>>>> + *
+> >>>>>>>>> + * Example:
+> >>>>>>>>
+> >>>>>>>> Can you fix these line continuations. It makes it very hard to read.
+> >>>>>>>> Sorry for this late comment. These comments lines are longer than 80
+> >>>>>>>> and wrap.
+> >>>>>>>
+> >>>>>>> None of the lines in this commit are over 80 characters in column
+> >>>>>>> width. Some are exactly 80 characters (like above).
+> >>>>>>>
+> >>>>>>> My guess is that you are seeing the diff added text (+ ), which when
+> >>>>>>> you add that to a line which is exactly 80 char in length ends up
+> >>>>>>> being over 80 char in email. If you apply the patch you will see that
+> >>>>>>> they are only 80 chars.
+> >>>>>>>
+> >>>>>>>>
+> >>>>>>>> There are several comment lines in the file that are way too long.
+> >>>>>>>
+> >>>>>>> Note that checkpatch also does not complain about any over 80 char
+> >>>>>>> lines in this file.
+> >>>>>>>
+> >>>>>>> Sorry if I am misunderstanding what you are trying to tell me. Please
+> >>>>>>> confirm either way.
+> >>>>>>>
+> >>>>>>
+> >>>>>> WARNING: Avoid unnecessary line continuations
+> >>>>>> #258: FILE: include/kunit/test.h:137:
+> >>>>>> +                */                                                            \
+> >>>>>>
+> >>>>>> total: 0 errors, 2 warnings, 388 lines checked
+> >>>>>
+> >>>>> Ah, okay so you don't like the warning about the line continuation.
+> >>>>> That's not because it is over 80 char, but because there is a line
+> >>>>> continuation after a comment. I don't really see a way to get rid of
+> >>>>> it without removing the comment from inside the macro.
+> >>>>>
+> >>>>> I put this TODO there in the first place a Luis' request, and I put it
+> >>>>> in the body of the macro because this macro already had a kernel-doc
+> >>>>> comment and I didn't think that an implementation detail TODO belonged
+> >>>>> in the user documentation.
+> >>>>>
+> >>>>>> Go ahead fix these. It appears there are few lines that either longer
+> >>>>>> than 80. In general, I keep them around 75, so it is easier read.
+> >>>>>
+> >>>>> Sorry, the above is the only checkpatch warning other than the
+> >>>>> reminder to update the MAINTAINERS file.
+> >>>>>
+> >>>>> Are you saying you want me to go through and make all the lines fit in
+> >>>>> 75 char column width? I hope not because that is going to be a pretty
+> >>>>> substantial change to make.
+> >>>>>
+> >>>>
+> >>>> There are two things with these comment lines. One is checkpatch
+> >>>> complaining and the other is general readability.
+> >>>
+> >>> So for the checkpatch warning, do you want me to move the comment out
+> >>> of the macro body into the kernel-doc comment? I don't really think it
+> >>> is the right place for a comment of this nature, but I think it is
+> >>> probably better than dropping it entirely (I don't see how else to do
+> >>> it without just removing the comment entirely).
+> >>>
+> >>
+> >> Don't drop the comments. It makes perfect sense to turn this into a
+> >> kernel-doc comment.
+> >
+> > I am fine with that. I will do that in a subsequent revision once we
+> > figure out the column limit issue.
+> >
+> >> We are going back forth on this a lot. I see several lines 81+ in
+> >> this file. I am at 5.3-rc5 and my commit hooks aren't happy. I am
+> >> fine with it if you want to convert these to kernel-doc comments.
+> >> I think it makes perfect sense.
+> >
+> > Okay, so this is interesting. When I look at the applied patches in my
+> > local repo, I don't see any 81+ lines. So it seems that something
+> > interesting is going on here.
+> >
+> > To be clear (sorry for the stupid question) you are seeing the issue
+> > after you applied the patch, and not in the patch file itself?
+> >
+>
+> I am using my normal workflow. My pre-commit check is catching this.
+> Just this patch.
 
-Enable support for the S32V234 SoC, including the previously added UART
-driver.
+Okay, *that* is super strange!
 
-Signed-off-by: Mihaela Martinas <Mihaela.Martinas@freescale.com>
-Signed-off-by: Adrian.Nitu <adrian.nitu@freescale.com>
-Signed-off-by: Stoica Cosmin-Stefan <cosmin.stoica@nxp.com>
-Signed-off-by: Stefan-Gabriel Mirea <stefan-gabriel.mirea@nxp.com>
----
- arch/arm64/configs/defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+So I have lines in this patch (01/18) that are exactly 80 char wide
+and I was thinking that it might be an off by one issue on either my
+workflow or your workflow, but I have lines in other patches that are
+exactly 80 char wide and our setups agree that they are fine, so I
+really am not sure what's going on here.
 
-diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-index 0e58ef02880c..bb5aa95a8455 100644
---- a/arch/arm64/configs/defconfig
-+++ b/arch/arm64/configs/defconfig
-@@ -48,6 +48,7 @@ CONFIG_ARCH_MXC=3Dy
- CONFIG_ARCH_QCOM=3Dy
- CONFIG_ARCH_RENESAS=3Dy
- CONFIG_ARCH_ROCKCHIP=3Dy
-+CONFIG_ARCH_S32=3Dy
- CONFIG_ARCH_SEATTLE=3Dy
- CONFIG_ARCH_STRATIX10=3Dy
- CONFIG_ARCH_SYNQUACER=3Dy
-@@ -347,6 +348,8 @@ CONFIG_SERIAL_XILINX_PS_UART=3Dy
- CONFIG_SERIAL_XILINX_PS_UART_CONSOLE=3Dy
- CONFIG_SERIAL_FSL_LPUART=3Dy
- CONFIG_SERIAL_FSL_LPUART_CONSOLE=3Dy
-+CONFIG_SERIAL_FSL_LINFLEXUART=3Dy
-+CONFIG_SERIAL_FSL_LINFLEXUART_CONSOLE=3Dy
- CONFIG_SERIAL_MVEBU_UART=3Dy
- CONFIG_SERIAL_DEV_BUS=3Dy
- CONFIG_VIRTIO_CONSOLE=3Dy
---=20
-2.22.0
+It sounds like you are only seeing the issue in only a couple places,
+do you mind calling out the specific lines that are problematic?
 
+> All others are good other than the 9/18 BUG() issue.
+> > Since we are still at OSS, would you mind if we meet up this afternoon
+> > so I can see this issue you are seeing? I imagine we should get this
+> > figured out pretty quickly.
+> >
+>
+> Yeah. Would have been nice. I am not at oss today.
+
+Dang.
