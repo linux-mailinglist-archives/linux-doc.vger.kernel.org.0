@@ -2,77 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 07C8F9EBFC
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2019 17:09:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6CAF59EC65
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Aug 2019 17:23:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730249AbfH0PI7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Aug 2019 11:08:59 -0400
-Received: from mx08-00178001.pphosted.com ([91.207.212.93]:58784 "EHLO
+        id S1730203AbfH0PXt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Aug 2019 11:23:49 -0400
+Received: from mx08-00178001.pphosted.com ([91.207.212.93]:1613 "EHLO
         mx07-00178001.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1728612AbfH0PI5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Aug 2019 11:08:57 -0400
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
-        by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x7RF28XA026519;
-        Tue, 27 Aug 2019 17:08:28 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com; h=from : to : cc : subject
- : date : message-id : references : in-reply-to : content-type :
- content-transfer-encoding : mime-version; s=STMicroelectronics;
- bh=XBn5EdlEuwPuny7s/ZVplkEwvVDz5QZdOFX+dgKCXXA=;
- b=iNORaUj7p6Vrz+dT27NTys4RFbS+VfOsa9329guLiC7b/Do+brszYr2pMO4ew3YzyzNM
- NB0Pjy6+9dBvLiwvNd+yE7efuMkFFrfe7UiYNHZ7+prV8NXDD24+bgJ5upoorAKVYi+T
- c3P2DG8fCtnZ3rJDwIq+9B9t7srkeH93DdVhn4TZoQpeXnEtLl6nB/6F6eEMNPuwetOU
- IFpI3OhI6uS1ozBIUwvNz3fe+qjtwQRge6Fh8bbYlBsa16M/sBr3KC6kFcA+RVBZ8Fa1
- /bM2ZiVTFBhLv/okCWn0oJvRLk4GFWajAJFT1uMjpZdI7sKsbVj9cw42Q7mZDfhVq/wV WA== 
+        by vger.kernel.org with ESMTP id S1727219AbfH0PXs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Aug 2019 11:23:48 -0400
+Received: from pps.filterd (m0046660.ppops.net [127.0.0.1])
+        by mx08-00178001.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x7RFLUt5007886;
+        Tue, 27 Aug 2019 17:23:36 +0200
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com; h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=STMicroelectronics;
+ bh=SMKi/mX7zvq/yrjJa5DU8JTV4hHp8R0QThyzkk9s3nA=;
+ b=VbqIUTEVJwBhsOXMzWDDM0WvEpGE8M1Fpzxc2dYPMy6ExSX4mLoDAaBLGp0xoV3psUrN
+ mrc3zFMXTWIe16z1EzNMiMSfbFZy7ftoqLjmFYBILsTiBut8g6JZQd5nEI98DH322Wln
+ ASDN4IZp3FXfucqYou5miezHC83yJBffg2S5FNlcIPC+HGTat3x7bXkz7KJgtCJ+aBGI
+ VmJ/Iloca7rnS74AbeTEj9+CiJosfGB28SXarYrcEHbXI/W8pmIhK9hTQd83Y8HhjuMO
+ grAuIuqZ2Mwmgsu4JYZvPXmKNXB4OZtpVs2GtNYceuB59H8KhZJ8NoMxsvftLAo9WGkC 6w== 
 Received: from beta.dmz-ap.st.com (beta.dmz-ap.st.com [138.198.100.35])
-        by mx08-00178001.pphosted.com with ESMTP id 2ujv4kt4b3-1
+        by mx08-00178001.pphosted.com with ESMTP id 2ujtcbjk3r-1
         (version=TLSv1 cipher=ECDHE-RSA-AES256-SHA bits=256 verify=NOT);
-        Tue, 27 Aug 2019 17:08:28 +0200
+        Tue, 27 Aug 2019 17:23:36 +0200
 Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-        by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 20FB056;
-        Tue, 27 Aug 2019 15:08:23 +0000 (GMT)
-Received: from Webmail-eu.st.com (sfhdag5node3.st.com [10.75.127.15])
-        by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id D02862B76DD;
-        Tue, 27 Aug 2019 17:08:22 +0200 (CEST)
-Received: from SFHDAG5NODE1.st.com (10.75.127.13) by SFHDAG5NODE3.st.com
- (10.75.127.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 27 Aug
- 2019 17:08:22 +0200
-Received: from SFHDAG5NODE1.st.com ([fe80::cc53:528c:36c8:95f6]) by
- SFHDAG5NODE1.st.com ([fe80::cc53:528c:36c8:95f6%20]) with mapi id
- 15.00.1473.003; Tue, 27 Aug 2019 17:08:21 +0200
-From:   Gerald BAEZA <gerald.baeza@st.com>
-To:     "will@kernel.org" <will@kernel.org>,
-        "mark.rutland@arm.com" <mark.rutland@arm.com>,
-        "robh+dt@kernel.org" <robh+dt@kernel.org>,
-        "mcoquelin.stm32@gmail.com" <mcoquelin.stm32@gmail.com>,
-        Alexandre TORGUE <alexandre.torgue@st.com>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "linux@armlinux.org.uk" <linux@armlinux.org.uk>,
-        "olof@lixom.net" <olof@lixom.net>, "arnd@arndb.de" <arnd@arndb.de>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+        by beta.dmz-ap.st.com (STMicroelectronics) with ESMTP id 768AE24;
+        Tue, 27 Aug 2019 15:23:32 +0000 (GMT)
+Received: from Webmail-eu.st.com (sfhdag3node2.st.com [10.75.127.8])
+        by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id A90C72AC1B6;
+        Tue, 27 Aug 2019 17:23:31 +0200 (CEST)
+Received: from lmecxl0912.lme.st.com (10.75.127.44) by SFHDAG3NODE2.st.com
+ (10.75.127.8) with Microsoft SMTP Server (TLS) id 15.0.1347.2; Tue, 27 Aug
+ 2019 17:23:31 +0200
+Subject: Re: [PATCH] Documentation: add link to stm32mp157 docs
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Gerald BAEZA <gerald.baeza@st.com>
+CC:     "mcoquelin.stm32@gmail.com" <mcoquelin.stm32@gmail.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
         "linux-stm32@st-md-mailman.stormreply.com" 
         <linux-stm32@st-md-mailman.stormreply.com>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-CC:     Gerald BAEZA <gerald.baeza@st.com>
-Subject: [PATCH v3 5/5] ARM: dts: stm32: add ddrperfm on stm32mp157c
-Thread-Topic: [PATCH v3 5/5] ARM: dts: stm32: add ddrperfm on stm32mp157c
-Thread-Index: AQHVXOlE7eeGfv5rUUSEpFdWg8XWbA==
-Date:   Tue, 27 Aug 2019 15:08:21 +0000
-Message-ID: <1566918464-23927-6-git-send-email-gerald.baeza@st.com>
-References: <1566918464-23927-1-git-send-email-gerald.baeza@st.com>
-In-Reply-To: <1566918464-23927-1-git-send-email-gerald.baeza@st.com>
-Accept-Language: fr-FR, en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.75.127.50]
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+References: <1566908347-92201-1-git-send-email-gerald.baeza@st.com>
+ <20190827074825.64a28e88@lwn.net>
+From:   Alexandre Torgue <alexandre.torgue@st.com>
+Message-ID: <5257eff7-418b-8e94-1ced-30718dd3f5dc@st.com>
+Date:   Tue, 27 Aug 2019 17:23:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
+In-Reply-To: <20190827074825.64a28e88@lwn.net>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.75.127.44]
+X-ClientProxiedBy: SFHDAG1NODE3.st.com (10.75.127.3) To SFHDAG3NODE2.st.com
+ (10.75.127.8)
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-08-27_03:,,
  signatures=0
 Sender: linux-doc-owner@vger.kernel.org
@@ -80,33 +68,49 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The DDRPERFM is the DDR Performance Monitor embedded
-in STM32MP1 SOC.
+Hi Jonathan,
 
-Signed-off-by: Gerald Baeza <gerald.baeza@st.com>
----
- arch/arm/boot/dts/stm32mp157c.dtsi | 8 ++++++++
- 1 file changed, 8 insertions(+)
+On 8/27/19 3:48 PM, Jonathan Corbet wrote:
+> On Tue, 27 Aug 2019 12:19:32 +0000
+> Gerald BAEZA <gerald.baeza@st.com> wrote:
+> 
+>> Link to the online stm32mp157 documentation added
+>> in the overview.
+>>
+>> Signed-off-by: Gerald Baeza <gerald.baeza@st.com>
+>> ---
+>>   Documentation/arm/stm32/stm32mp157-overview.rst | 6 ++++++
+>>   1 file changed, 6 insertions(+)
+>>
+>> diff --git a/Documentation/arm/stm32/stm32mp157-overview.rst b/Documentation/arm/stm32/stm32mp157-overview.rst
+>> index f62fdc8..8d5a476 100644
+>> --- a/Documentation/arm/stm32/stm32mp157-overview.rst
+>> +++ b/Documentation/arm/stm32/stm32mp157-overview.rst
+>> @@ -14,6 +14,12 @@ It features:
+>>   - Standard connectivity, widely inherited from the STM32 MCU family
+>>   - Comprehensive security support
+>>   
+>> +Resources
+>> +---------
+>> +
+>> +Datasheet and reference manual are publicly available on ST website:
+>> +.. _STM32MP157: https://www.st.com/en/microcontrollers-microprocessors/stm32mp157.html
+>> +
+> 
+> Adding the URL is a fine idea.  But you don't need the extra syntax to
+> create a link if you're not going to actually make a link out of it.  So
+> I'd take the ".. _STM32MP157:" part out and life will be good.
+> 
 
-diff --git a/arch/arm/boot/dts/stm32mp157c.dtsi b/arch/arm/boot/dts/stm32mp=
-157c.dtsi
-index 0c4e6eb..6ea6933 100644
---- a/arch/arm/boot/dts/stm32mp157c.dtsi
-+++ b/arch/arm/boot/dts/stm32mp157c.dtsi
-@@ -1378,6 +1378,14 @@
- 			};
- 		};
-=20
-+		ddrperfm: perf@5a007000 {
-+			compatible =3D "st,stm32-ddr-pmu";
-+			reg =3D <0x5a007000 0x400>;
-+			clocks =3D <&rcc DDRPERFM>;
-+			resets =3D <&rcc DDRPERFM_R>;
-+			status =3D "okay";
-+		};
-+
- 		usart1: serial@5c000000 {
- 			compatible =3D "st,stm32h7-uart";
- 			reg =3D <0x5c000000 0x400>;
---=20
-2.7.4
+We also did it for older stm32 product. Idea was to not have the "full" 
+address but just a shortcut of the link when html file is read. It maybe 
+makes no sens ? (if yes we will have to update older stm32 overview :))
+
+thanks
+Alex
+
+
+> Thanks,
+> 
+> jon
+> 
