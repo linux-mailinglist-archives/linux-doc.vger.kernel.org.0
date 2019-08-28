@@ -2,136 +2,180 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 55B75A0D22
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2019 00:05:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DBCA0A0D5A
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2019 00:16:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726882AbfH1WFj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Aug 2019 18:05:39 -0400
-Received: from atrey.karlin.mff.cuni.cz ([195.113.26.193]:57054 "EHLO
-        atrey.karlin.mff.cuni.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726875AbfH1WFi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Aug 2019 18:05:38 -0400
-Received: by atrey.karlin.mff.cuni.cz (Postfix, from userid 512)
-        id 74EDA820AE; Thu, 29 Aug 2019 00:05:21 +0200 (CEST)
-Date:   Thu, 29 Aug 2019 00:05:33 +0200
-From:   Pavel Machek <pavel@denx.de>
-To:     Thomas Gleixner <tglx@linutronix.de>
-Cc:     Pavel Machek <pavel@denx.de>, Borislav Petkov <bp@alien8.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-kernel@vger.kernel.org, stable@vger.kernel.org,
-        Tom Lendacky <thomas.lendacky@amd.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Chen Yu <yu.c.chen@intel.com>,
-        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        Juergen Gross <jgross@suse.com>,
-        Kees Cook <keescook@chromium.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-pm@vger.kernel.org" <linux-pm@vger.kernel.org>,
-        Nathan Chancellor <natechancellor@gmail.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
-        "x86@kernel.org" <x86@kernel.org>
-Subject: Re: [PATCH 4.19 72/98] x86/CPU/AMD: Clear RDRAND CPUID bit on AMD
- family 15h/16h
-Message-ID: <20190828220533.GA24056@amd>
-References: <20190828103113.GA14677@amd>
- <alpine.DEB.2.21.1908281231480.1869@nanos.tec.linutronix.de>
- <20190828114947.GC8052@amd>
- <20190828120024.GF4920@zn.tnic>
- <20190828120935.GD8052@amd>
- <20190828121628.GG4920@zn.tnic>
- <20190828122913.GE8052@amd>
- <20190828124621.GI4920@zn.tnic>
- <20190828133713.GF8052@amd>
- <alpine.DEB.2.21.1908281610310.23149@nanos.tec.linutronix.de>
+        id S1726839AbfH1WQ5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Aug 2019 18:16:57 -0400
+Received: from aserp2120.oracle.com ([141.146.126.78]:57500 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726658AbfH1WQ4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Aug 2019 18:16:56 -0400
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x7SMEM0p120994;
+        Wed, 28 Aug 2019 22:16:34 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id : in-reply-to : references : mime-version :
+ content-transfer-encoding; s=corp-2019-08-05;
+ bh=PGYZg8dmqranewG63iKkOm/uGgVLWKTGrL23VDeFueU=;
+ b=HYa37UCk9eYYThbbG6tR/5SUpBgGbIyfEfWlVD4Hf73AKELX42EgZPDizhrLpS4SrdX/
+ 3+MtYmiGN8eD9aLLvTlauWPjy4+MWyhB+tFKnV1BQv+qkDjCBuDjad35UsgnTcmeAHre
+ hnVo+WBBhwA2ieDS56cts1VLWeAyfJWSdsoT5icBrA25cak41bfesiN5bvtQilUFPS23
+ 9bQ0W+1OD0krKvuSyRCnfuUFhn+goGqaiTWHY7CL4/Oj+Oh5/ukvb8kW0sHFjQU2o3zj
+ Snd8LT9ws84aFPyLCJN6h6JVheSEb7ENaayp4XbC6XxUmu7w+sPGcxqYOFeV1W4S7zK4 jQ== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+        by aserp2120.oracle.com with ESMTP id 2up25500s1-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 28 Aug 2019 22:16:34 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+        by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id x7SMDKrE011415;
+        Wed, 28 Aug 2019 22:16:34 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+        by userp3030.oracle.com with ESMTP id 2unvtxxkb6-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 28 Aug 2019 22:16:33 +0000
+Received: from abhmp0010.oracle.com (abhmp0010.oracle.com [141.146.116.16])
+        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id x7SMGVg8031895;
+        Wed, 28 Aug 2019 22:16:31 GMT
+Received: from zissou.us.oracle.com (/10.152.34.58)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Wed, 28 Aug 2019 15:16:31 -0700
+From:   Daniel Jordan <daniel.m.jordan@oracle.com>
+To:     Herbert Xu <herbert@gondor.apana.org.au>,
+        Steffen Klassert <steffen.klassert@secunet.com>
+Cc:     Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        linux-crypto@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Daniel Jordan <daniel.m.jordan@oracle.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [PATCH v2 3/5] padata: get rid of padata_remove_cpu() for real
+Date:   Wed, 28 Aug 2019 18:14:23 -0400
+Message-Id: <20190828221425.22701-4-daniel.m.jordan@oracle.com>
+X-Mailer: git-send-email 2.23.0
+In-Reply-To: <20190828221425.22701-1-daniel.m.jordan@oracle.com>
+References: <20190828221425.22701-1-daniel.m.jordan@oracle.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-        protocol="application/pgp-signature"; boundary="r5Pyd7+fXNt84Ff3"
-Content-Disposition: inline
-In-Reply-To: <alpine.DEB.2.21.1908281610310.23149@nanos.tec.linutronix.de>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9363 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1906280000 definitions=main-1908280214
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9363 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
+ suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1906280000
+ definitions=main-1908280214
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+A later patch is going to address a lock ordering issue involving
+pinst->mutex and the CPU hotplug lock.  padata_remove_cpu() needs fixing
+but it has no callers, so just delete it rather than maintaining unused
+code.  The Fixes commit forgot to do it anyway.
 
---r5Pyd7+fXNt84Ff3
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+While at it remove Documentation references to other unused functions.
 
-On Wed 2019-08-28 16:15:06, Thomas Gleixner wrote:
-> On Wed, 28 Aug 2019, Pavel Machek wrote:
-> > On Wed 2019-08-28 14:46:21, Borislav Petkov wrote:
-> > > On Wed, Aug 28, 2019 at 02:29:13PM +0200, Pavel Machek wrote:
-> > > > This is not a way to have an inteligent conversation.
-> > >=20
-> > > No, this *is* the way to keep the conversation sane, without veering
-> > > off into some absurd claims.
-> > >=20
-> > > So, to cut to the chase: you can simply add "rdrand=3Dforce" to your
-> > > cmdline parameters and get back to using RDRAND.
-> > >=20
-> > > And yet if you still feel this fix does not meet your expectations,
-> > > you were told already to either produce patches or who to contact. I'm
-> > > afraid complaining on this thread won't get you anywhere but that's y=
-our
-> > > call.
-> >=20
-> > No, this does not meet my expectations, it violates stable kernel
-> > rules, and will cause regression to some users, while better solution
-> > is known to be available.
->=20
-> Your unqualified ranting does not meet my expectation either and it
-> violates any rule of common sense.
->=20
-> For the record:
->=20
->   Neither AMD nor we have any idea which particular machines have a fixed
->   BIOS and which have not. There is no technical indicator either at boot
->   time as the wreckage manifests itself only after resume.
->=20
->   So in the interest of users the only sensible decision is to disable
->   RDRAND for this class of CPUs.
+Fixes: 815613da6a67 ("kernel/padata.c: removed unused code")
+Signed-off-by: Daniel Jordan <daniel.m.jordan@oracle.com>
+Cc: Herbert Xu <herbert@gondor.apana.org.au>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
+Cc: Steffen Klassert <steffen.klassert@secunet.com>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: linux-crypto@vger.kernel.org
+Cc: linux-doc@vger.kernel.org
+Cc: linux-kernel@vger.kernel.org
+---
+ Documentation/padata.txt | 18 ++++--------------
+ kernel/padata.c          | 35 -----------------------------------
+ 2 files changed, 4 insertions(+), 49 deletions(-)
 
-No.
+diff --git a/Documentation/padata.txt b/Documentation/padata.txt
+index b103d0c82000..43ca928da713 100644
+--- a/Documentation/padata.txt
++++ b/Documentation/padata.txt
+@@ -51,27 +51,17 @@ padata cpumask contains no active CPU (flag not set).
+ padata_stop clears the flag and blocks until the padata instance
+ is unused.
+ 
+-The list of CPUs to be used can be adjusted with these functions::
++The list of CPUs to be used can be adjusted with this function::
+ 
+-    int padata_set_cpumasks(struct padata_instance *pinst,
+-			    cpumask_var_t pcpumask,
+-			    cpumask_var_t cbcpumask);
+     int padata_set_cpumask(struct padata_instance *pinst, int cpumask_type,
+ 			   cpumask_var_t cpumask);
+-    int padata_add_cpu(struct padata_instance *pinst, int cpu, int mask);
+-    int padata_remove_cpu(struct padata_instance *pinst, int cpu, int mask);
+ 
+ Changing the CPU masks are expensive operations, though, so it should not be
+ done with great frequency.
+ 
+-It's possible to change both cpumasks of a padata instance with
+-padata_set_cpumasks by specifying the cpumasks for parallel execution (pcpumask)
+-and for the serial callback function (cbcpumask). padata_set_cpumask is used to
+-change just one of the cpumasks. Here cpumask_type is one of PADATA_CPU_SERIAL,
+-PADATA_CPU_PARALLEL and cpumask specifies the new cpumask to use.
+-To simply add or remove one CPU from a certain cpumask the functions
+-padata_add_cpu/padata_remove_cpu are used. cpu specifies the CPU to add or
+-remove and mask is one of PADATA_CPU_SERIAL, PADATA_CPU_PARALLEL.
++padata_set_cpumask is used to change just one of the cpumasks. Here cpumask_type
++is one of PADATA_CPU_SERIAL or PADATA_CPU_PARALLEL, and cpumask specifies the
++new cpumask to use.
+ 
+ If a user is interested in padata cpumask changes, he can register to
+ the padata cpumask change notifier::
+diff --git a/kernel/padata.c b/kernel/padata.c
+index 2bfce01c5b85..6adce3b203fe 100644
+--- a/kernel/padata.c
++++ b/kernel/padata.c
+@@ -710,41 +710,6 @@ static int __padata_remove_cpu(struct padata_instance *pinst, int cpu)
+ 	return 0;
+ }
+ 
+- /**
+- * padata_remove_cpu - remove a cpu from the one or both(serial and parallel)
+- *                     padata cpumasks.
+- *
+- * @pinst: padata instance
+- * @cpu: cpu to remove
+- * @mask: bitmask specifying from which cpumask @cpu should be removed
+- *        The @mask may be any combination of the following flags:
+- *          PADATA_CPU_SERIAL   - serial cpumask
+- *          PADATA_CPU_PARALLEL - parallel cpumask
+- */
+-int padata_remove_cpu(struct padata_instance *pinst, int cpu, int mask)
+-{
+-	int err;
+-
+-	if (!(mask & (PADATA_CPU_SERIAL | PADATA_CPU_PARALLEL)))
+-		return -EINVAL;
+-
+-	mutex_lock(&pinst->lock);
+-
+-	get_online_cpus();
+-	if (mask & PADATA_CPU_SERIAL)
+-		cpumask_clear_cpu(cpu, pinst->cpumask.cbcpu);
+-	if (mask & PADATA_CPU_PARALLEL)
+-		cpumask_clear_cpu(cpu, pinst->cpumask.pcpu);
+-
+-	err = __padata_remove_cpu(pinst, cpu);
+-	put_online_cpus();
+-
+-	mutex_unlock(&pinst->lock);
+-
+-	return err;
+-}
+-EXPORT_SYMBOL(padata_remove_cpu);
+-
+ static inline int pinst_has_cpu(struct padata_instance *pinst, int cpu)
+ {
+ 	return cpumask_test_cpu(cpu, pinst->cpumask.pcpu) ||
+-- 
+2.23.0
 
-Obviously best solution would be microcode update to fix the problem,
-or to enable kernel to fix the problem.
-
->   If you have a list of machines which have a fixed BIOS, then provide it
->   in form of patches. If not then stop claiming that there is a better
->   solution available.
-
-And yes, whitelist would be already better than present solution. It is
-not my duty to submit fixes to your proposed patch.
-
-> Anyway, I'm done with that and further rants of yours go directly to
-> /dev/null.
->=20
-> Thanks for wasting everyones time
-
-Thanks for your profesional attitude.
-
-								Pavel
---=20
-DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
-HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
-
---r5Pyd7+fXNt84Ff3
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iEYEARECAAYFAl1m+q0ACgkQMOfwapXb+vJDbwCeJQ0WoYyf8A/jB7OEGuIzpOov
-WaQAn2Wcm/aEi77wq5CWOsCPWQNaLvO6
-=Fjjn
------END PGP SIGNATURE-----
-
---r5Pyd7+fXNt84Ff3--
