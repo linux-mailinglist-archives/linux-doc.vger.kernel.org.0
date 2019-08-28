@@ -2,235 +2,119 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id ACC85A0D51
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2019 00:14:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B5FFDA0D6B
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2019 00:18:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726954AbfH1WOr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Aug 2019 18:14:47 -0400
-Received: from mail-pl1-f195.google.com ([209.85.214.195]:35343 "EHLO
-        mail-pl1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726583AbfH1WOr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Aug 2019 18:14:47 -0400
-Received: by mail-pl1-f195.google.com with SMTP id gn20so604226plb.2
-        for <linux-doc@vger.kernel.org>; Wed, 28 Aug 2019 15:14:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=joelfernandes.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=+tFBZJVHvgLIW4WEOXc3LjhWIKl3Jg4cTwobT+ywcpc=;
-        b=eg11b/oKbXxytZx0nBuDi/kbckQigzqAKhHL1xf3u6d7B7deknpm5HhfBNd3cde7rv
-         CfRIhlDx8fEHqWbjdkil4I0kuF2ehdZUCdPnQacOGMEQdmy7U5NauoCocupBbMXcbiRx
-         XrDrjUQ8+0LAz5Az41Z8a+yZYtmIdL3nKysLI=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=+tFBZJVHvgLIW4WEOXc3LjhWIKl3Jg4cTwobT+ywcpc=;
-        b=rqM493ZdVPwz8zTXCrYqhwfOIItpcNVAhbHVjKNTg8j4L6ywyv/i1lXioxFrWF1LLB
-         ruTgd17s62lGuDCqFfNLOT5murcS5DLKybRn9zCKMqV1wcYJ3moVwrVRTY2SntoPpBmO
-         dRMPsV+PbyyFdknNv2nYuD8myA18YKpDbVu/xFAy6Fq/+L4rDGQaFIqEMwz3eynEqJol
-         q9auuikrV5rlitL8W63HJcFtVoK/4QhCgrOKlJVe6nWjbMLXWkKcIlcVLwqbLcxDJexa
-         lJKytucI/71h6DK/kYlRU7lzLIigT7CK1LateIkFhgDvcwLL9HMdFO2f19LywXqhapQ6
-         M51w==
-X-Gm-Message-State: APjAAAVPf93Jl+VvCenjj0/Y6eA1+odytPqdanome/+OEAK4v1Lx0Pw0
-        6g4D3w2+HStGuzAjdrF0V6l54w==
-X-Google-Smtp-Source: APXvYqzEUHxvQCMHOVhSm/J0FMO5MDlfqOZoMhPBRtoNe3itCHWER1VA49QKVtNN2e4nThTMGChQbw==
-X-Received: by 2002:a17:902:8a4:: with SMTP id 33mr6754340pll.322.1567030486889;
-        Wed, 28 Aug 2019 15:14:46 -0700 (PDT)
-Received: from localhost ([2620:15c:6:12:9c46:e0da:efbf:69cc])
-        by smtp.gmail.com with ESMTPSA id 97sm128436pjz.12.2019.08.28.15.14.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Aug 2019 15:14:46 -0700 (PDT)
-Date:   Wed, 28 Aug 2019 18:14:44 -0400
-From:   Joel Fernandes <joel@joelfernandes.org>
-To:     "Paul E. McKenney" <paulmck@kernel.org>
-Cc:     linux-kernel@vger.kernel.org,
-        Frederic Weisbecker <fweisbec@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Josh Triplett <josh@joshtriplett.org>, kernel-team@android.com,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        linux-doc@vger.kernel.org,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        rcu@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>
-Subject: Re: [RFC v1 2/2] rcu/tree: Remove dynticks_nmi_nesting counter
-Message-ID: <20190828221444.GA100789@google.com>
-References: <5d648897.1c69fb81.5e60a.fc70@mx.google.com>
- <20190828202330.GS26530@linux.ibm.com>
- <20190828210525.GB75931@google.com>
- <20190828211904.GX26530@linux.ibm.com>
- <20190828214241.GD75931@google.com>
- <20190828220108.GC26530@linux.ibm.com>
+        id S1727025AbfH1WS2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Aug 2019 18:18:28 -0400
+Received: from atrey.karlin.mff.cuni.cz ([195.113.26.193]:58257 "EHLO
+        atrey.karlin.mff.cuni.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727065AbfH1WS1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Aug 2019 18:18:27 -0400
+Received: by atrey.karlin.mff.cuni.cz (Postfix, from userid 512)
+        id 680128051E; Thu, 29 Aug 2019 00:18:11 +0200 (CEST)
+Date:   Thu, 29 Aug 2019 00:18:24 +0200
+From:   Pavel Machek <pavel@denx.de>
+To:     Thomas Gleixner <tglx@linutronix.de>
+Cc:     corbet@lwn.net, LKML <linux-kernel@vger.kernel.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>, x86@kernel.org,
+        Peter Zijlstra <peterz@infradead.org>,
+        Jiri Kosina <jkosina@suse.cz>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
+        David Woodhouse <dwmw2@infradead.org>,
+        Tom Lendacky <thomas.lendacky@amd.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Tony Luck <tony.luck@intel.com>,
+        Salvatore Bonaccorso <carnil@debian.org>,
+        linux-doc@vger.kernel.org
+Subject: Re: [patch] Fix up l1ft documentation was Re: Taking a break - time
+ to look back
+Message-ID: <20190828221824.GB24056@amd>
+References: <alpine.DEB.2.21.1812200022580.1651@nanos.tec.linutronix.de>
+ <20190102235152.GA24163@amd>
+ <20190311102109.GA14118@amd>
+ <alpine.DEB.2.21.1903111403330.1691@nanos.tec.linutronix.de>
+ <20190311131341.GA28223@amd>
+ <alpine.DEB.2.21.1903112211180.1651@nanos.tec.linutronix.de>
+ <20190312115757.GA29955@amd>
+ <alpine.DEB.2.21.1903120633000.1985@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha1;
+        protocol="application/pgp-signature"; boundary="A6N2fC+uXW/VQSAv"
 Content-Disposition: inline
-In-Reply-To: <20190828220108.GC26530@linux.ibm.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <alpine.DEB.2.21.1903120633000.1985@nanos.tec.linutronix.de>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Aug 28, 2019 at 03:01:08PM -0700, Paul E. McKenney wrote:
-> On Wed, Aug 28, 2019 at 05:42:41PM -0400, Joel Fernandes wrote:
-> > On Wed, Aug 28, 2019 at 02:19:04PM -0700, Paul E. McKenney wrote:
-> > > On Wed, Aug 28, 2019 at 05:05:25PM -0400, Joel Fernandes wrote:
-> > > > On Wed, Aug 28, 2019 at 01:23:30PM -0700, Paul E. McKenney wrote:
-> > > > > On Mon, Aug 26, 2019 at 09:33:54PM -0400, Joel Fernandes (Google) wrote:
-> > > > > > The dynticks_nmi_nesting counter serves 4 purposes:
-> > > > > > 
-> > > > > >       (a) rcu_is_cpu_rrupt_from_idle() needs to be able to detect first
-> > > > > >           interrupt nesting level.
-> > > > > > 
-> > > > > >       (b) We need to detect half-interrupts till we are sure they're not an
-> > > > > >           issue. However, change the comparison to DYNTICK_IRQ_NONIDLE with 0.
-> > > > > > 
-> > > > > >       (c) When a quiescent state report is needed from a nohz_full CPU.
-> > > > > >           The nesting counter detects we are a first level interrupt.
-> > > > > > 
-> > > > > > For (a) we can just use dyntick_nesting == 1 to determine this. Only the
-> > > > > > outermost interrupt that interrupted an RCU-idle state can set it to 1.
-> > > > > > 
-> > > > > > For (b), this warning condition has not occurred for several kernel
-> > > > > > releases.  But we still keep the warning but change it to use
-> > > > > > in_interrupt() instead of the nesting counter. In a later year, we can
-> > > > > > remove the warning.
-> > > > > > 
-> > > > > > For (c), the nest check is not really necessary since forced_tick would
-> > > > > > have been set to true in the outermost interrupt, so the nested/NMI
-> > > > > > interrupts will check forced_tick anyway, and bail.
-> > > > > 
-> > > > > Skipping the commit log and documentation for this pass.
-> > > > [snip] 
-> > > > > > diff --git a/kernel/rcu/tree.c b/kernel/rcu/tree.c
-> > > > > > index 255cd6835526..1465a3e406f8 100644
-> > > > > > --- a/kernel/rcu/tree.c
-> > > > > > +++ b/kernel/rcu/tree.c
-> > > > > > @@ -81,7 +81,6 @@
-> > > > > >  
-> > > > > >  static DEFINE_PER_CPU_SHARED_ALIGNED(struct rcu_data, rcu_data) = {
-> > > > > >  	.dynticks_nesting = 1,
-> > > > > > -	.dynticks_nmi_nesting = 0,
-> > > > > 
-> > > > > This should be in the previous patch, give or take naming.
-> > > > 
-> > > > Done.
-> > > > 
-> > > > > >  	.dynticks = ATOMIC_INIT(RCU_DYNTICK_CTRL_CTR),
-> > > > > >  };
-> > > > > >  struct rcu_state rcu_state = {
-> > > > > > @@ -392,15 +391,9 @@ static int rcu_is_cpu_rrupt_from_idle(void)
-> > > > > >  	/* Check for counter underflows */
-> > > > > >  	RCU_LOCKDEP_WARN(__this_cpu_read(rcu_data.dynticks_nesting) < 0,
-> > > > > >  			 "RCU dynticks_nesting counter underflow!");
-> > > > > > -	RCU_LOCKDEP_WARN(__this_cpu_read(rcu_data.dynticks_nmi_nesting) <= 0,
-> > > > > > -			 "RCU dynticks_nmi_nesting counter underflow/zero!");
-> > > > > >  
-> > > > > > -	/* Are we at first interrupt nesting level? */
-> > > > > > -	if (__this_cpu_read(rcu_data.dynticks_nmi_nesting) != 1)
-> > > > > > -		return false;
-> > > > > > -
-> > > > > > -	/* Does CPU appear to be idle from an RCU standpoint? */
-> > > > > > -	return __this_cpu_read(rcu_data.dynticks_nesting) == 0;
-> > > > > > +	/* Are we the outermost interrupt that arrived when RCU was idle? */
-> > > > > > +	return __this_cpu_read(rcu_data.dynticks_nesting) == 1;
-> > > > > >  }
-> > > > > >  
-> > > > > >  #define DEFAULT_RCU_BLIMIT 10     /* Maximum callbacks per rcu_do_batch ... */
-> > > > > > @@ -564,11 +557,10 @@ static void rcu_eqs_enter(bool user)
-> > > > > >  	struct rcu_data *rdp = this_cpu_ptr(&rcu_data);
-> > > > > >  
-> > > > > >  	/* Entering usermode/idle from interrupt is not handled. These would
-> > > > > > -	 * mean usermode upcalls or idle entry happened from interrupts. But,
-> > > > > > -	 * reset the counter if we warn.
-> > > > > > +	 * mean usermode upcalls or idle exit happened from interrupts. Remove
-> > > > > > +	 * the warning by 2020.
-> > > > > >  	 */
-> > > > > > -	if (WARN_ON_ONCE(rdp->dynticks_nmi_nesting != 0))
-> > > > > > -		WRITE_ONCE(rdp->dynticks_nmi_nesting, 0);
-> > > > > > +	WARN_ON_ONCE(in_interrupt());
-> > > > > 
-> > > > > And this is a red flag.  Bad things happen should some common code
-> > > > > that disables BH be invoked from the idle loop.  This might not be
-> > > > > happening now, but we need to avoid this sort of constraint.
-> > > > > How about instead merging ->dyntick_nesting into the low-order bits
-> > > > > of ->dyntick_nmi_nesting?
-> > > > > 
-> > > > > Yes, this assumes that we don't enter process level twice, but it should
-> > > > > be easy to add a WARN_ON() to test for that.  Except that we don't have
-> > > > > to because there is already this near the end of rcu_eqs_exit():
-> > > > > 
-> > > > > 	WARN_ON_ONCE(rdp->dynticks_nmi_nesting);
-> > > > > 
-> > > > > So the low-order bit of the combined counter could indicate process-level
-> > > > > non-idle, the next three bits could be unused to make interpretation
-> > > > > of hex printouts easier, and then the rest of the bits could be used in
-> > > > > the same way as currently.
-> > > > > 
-> > > > > This would allow a single read to see the full state, so that 0x1 means
-> > > > > at process level in the kernel, 0x11 is interrupt (or NMI) from process
-> > > > > level, 0x10 is interrupt/NMI from idle/user, and so on.
-> > > > > 
-> > > > > What am I missing here?  Why wouldn't this work, and without adding yet
-> > > > > another RCU-imposed constraint on some other subsystem?
-> > > > 
-> > > > What about replacing the warning with a WARN_ON_ONCE(in_irq()), would that
-> > > > address your concern?
-> > > > 
-> > > > Also, considering this warning condition is most likely never occurring as we
-> > > > know it, and we are considering deleting it soon enough, is it really worth
-> > > > reimplementing the whole mechanism with a complex bit-sharing scheme just
-> > > > because of the BH-disable condition you mentioned, which likely doesn't
-> > > > happen today? In my implementation, this is just a simple counter. I feel
-> > > > combining bits in the same counter will just introduce more complexity that
-> > > > this patch tries to address/avoid.
-> > > > 
-> > > > OTOH, I also don't mind with just deleting the warning altogether if you are
-> > > > Ok with that.
-> > > 
-> > > The big advantage of combining the counters is that all of the state is
-> > > explicit and visible in one place.  Plus it can be accessed atomically.
-> > > And it avoids setting a time bomb for some poor guys just trying to get
-> > > their idle-loop jobs done some time in the dim distant future.
-> > 
-> > I could try the approach you're suggesting but I didn't actually see an issue
-> > with the patch in its current state other than the WARN_ON_ONCE which I could
-> > change to WARN_ON_ONCE(in_irq()) to remove the concern. AFAICS, we don't
-> > detect "half soft-interrupts" in this code in anyway.
-> > 
-> > I do feel the approach you're suggesting can be a follow up, these 2 patches
-> > just focus on deleting dynticks_nmi_nesting counter and we can test this
-> > approach thoroughly for a release or so.
-> > 
-> > > Besides, this pair of patches already makes a large change from a
-> > > conceptual viewpoint.  If we are going to make a large change, let's
-> > > get our money's worth out of that change!
-> > 
-> > IMHO, most of the changes are to code comments, the actual code change is
-> > very little and is just removal of dynticks_nmi_nesting and simplification;
-> > its not really an introduction of a new mechanism.
-> 
-> This change is not fixing a bug, so there is no need for an emergency fix,
-> and thus no point in additional churn.  I understand that it is a bit
-> annoying to code and test something and have your friendly maintainer say
-> "sorry, wrong rocks", and the reason that I understand this is that I do
-> that to myself rather often.
 
-The motivation for me for this change is to avoid future bugs such as with
-the following patch where "== 2" did not take the force write of
-DYNTICK_IRQ_NONIDLE into account:
-https://git.kernel.org/pub/scm/linux/kernel/git/paulmck/linux-rcu.git/commit/?h=dev&id=13c4b07593977d9288e5d0c21c89d9ba27e2ea1f
+--A6N2fC+uXW/VQSAv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I still don't see it as pointless churn, it is also a maintenance cost in its
-current form and the simplification is worth it IMHO both from a readability,
-and maintenance stand point.
+Hi!
 
-I still don't see what's technically wrong with the patch. I could perhaps
-add the above "== 2" point in the patch?
+> On Tue, 12 Mar 2019, Pavel Machek wrote:
+> > On Mon 2019-03-11 23:31:08, Thomas Gleixner wrote:
+> > > Calling this a lie is a completly unjustified personal attack on thos=
+e who
+> >=20
+> > So how should it be called? I initally used less strong words, only to
+> > get "Care to tell what's a lie instead of making bold statements?"
+> > back. Also look at the timing of the thread.
+>=20
+> You called it a lie from the very beginning or what do you think made me
+> tell you that? Here is what you said:
 
-We could also discuss f2f at LPC to see if we can agree about it?
+Actually, I still call it a lie. Document clearly says that bug is
+fixed in non-virtualized cases, when in fact it depends on PAE and
+limited memory.
 
-thanks,
+> If you want to provide more accurate documentation then you better come up
+> with something which is helpful instead of completely useless blurb like
+> the below:
 
- - Joel
+At this point I want you to fix it yourself. Lying about security bugs
+being fixed when they are not is not cool. I tried to be helpful and
+submit a patch, but I don't feel like you are cooperating on getting
+the patch applied.
 
+> > +   Mitigation is present in kernels v4.19 and newer, and in
+> > +   recent -stable kernels. PAE needs to be enabled for mitigation to
+> > +   work.
+>=20
+> No. The mitigation is available when the kernel provides it. Numbers are
+> irrelevant because that documentation has to be applicable for stable
+> kernels as well. And what is a recent -stable kernel?
+>=20
+> Also the PAE part needs to go to a completely different section.
+
+Best regards,
+								Pavel
+
+
+--=20
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+
+--A6N2fC+uXW/VQSAv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iEYEARECAAYFAl1m/bAACgkQMOfwapXb+vKFyACffq6XkJvAWQwUcLfh9KmQ9cn3
+tdYAoJ+7fLiag86nhWVARzGKq5ICLBjw
+=PtcO
+-----END PGP SIGNATURE-----
+
+--A6N2fC+uXW/VQSAv--
