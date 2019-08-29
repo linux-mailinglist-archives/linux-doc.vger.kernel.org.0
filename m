@@ -2,121 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9DA64A12EE
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2019 09:46:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7BBA7A136D
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2019 10:12:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728068AbfH2Hqh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 29 Aug 2019 03:46:37 -0400
-Received: from mail-pf1-f202.google.com ([209.85.210.202]:49762 "EHLO
-        mail-pf1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728053AbfH2Hqc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Aug 2019 03:46:32 -0400
-Received: by mail-pf1-f202.google.com with SMTP id s10so1834286pfd.16
-        for <linux-doc@vger.kernel.org>; Thu, 29 Aug 2019 00:46:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=nhjHwCHt3mcz+mHDiVxN7s8L1KuUZ7MDwDAfLe16I50=;
-        b=G+4eBBbE8eR+JweFO/MTbU/JiiK//ZmQj8k/LyrXbCGTThb38w/Z2lUm+J9+GnNM0R
-         ILZAbYqpRKL7TOIZvfQiUJ2cF39/iD9rfGRzN/JPmUP0imOiTAzvaNMocnkNuQkRpez1
-         TeFD7m5SShMLKZ99sCn6+3Jk0GWByzZ/IZjTTkJhmHdk/U8KSb8jext129vtnUphdVPK
-         3Og8DoR1JhhS8QHP8PSei9z2OIoEIJgw7WByG4I5s8EIdtWDrfnC1s2xxQI7P6I0R2oo
-         vZCWREqieybOCkNKb7WgvgWuO6NUQORyGlcpSxF+myfSq3RilEg/tbt3CAbeESXosLmc
-         vLfQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=nhjHwCHt3mcz+mHDiVxN7s8L1KuUZ7MDwDAfLe16I50=;
-        b=ICYFZNme7OTNpQaFr/175D9cYT/q351qyJxv0fh2J12zIQtaePlwEUVF1MihB2GDQ8
-         qLeSbZPlKWpWSnGw0gFzmmWdBAjD9BVBwsyhlWlHiCGzPWPYatdnUeHy+Yn8PSSvf3/5
-         9MUpuZtAIGnXfGOuiU4pr2KmKOiGVJteMl4Fs52vdai11L2xNvpwc5qKdAYezbohuOIa
-         qgOLUq+XhthRJkOFpyE7PTnAQSQz/vyrM8lbMs3Z4JTkXlJ2VQ9PvDmg1T3zvVO/XlTr
-         nTDd0ETBJbDTmLd2bPcuDLAHyWfzUp5reWBUIAwiZJPOBfpyfAft3HvdR1qLR435+ccP
-         7yVw==
-X-Gm-Message-State: APjAAAUThWHZ03nKmyVkNBuLgpUemDNhyT8x5G3Mngm6NaU8rUzj66Pv
-        lve8H3G8wHu4onyZpATtw4T2rZyr6Ce9H0s=
-X-Google-Smtp-Source: APXvYqxjRrI7v0tAcH4lDhIBqUhl0wBMcJY40NePOKQ5MWBcbB/tbpokA1E16lgkYG8HCTLquA1Ns3qi+HNbWZE=
-X-Received: by 2002:a65:690f:: with SMTP id s15mr6855732pgq.432.1567064791199;
- Thu, 29 Aug 2019 00:46:31 -0700 (PDT)
-Date:   Thu, 29 Aug 2019 00:46:03 -0700
-In-Reply-To: <20190829074603.70424-1-saravanak@google.com>
-Message-Id: <20190829074603.70424-8-saravanak@google.com>
-Mime-Version: 1.0
-References: <20190829074603.70424-1-saravanak@google.com>
-X-Mailer: git-send-email 2.23.0.187.g17f5b7556c-goog
-Subject: [PATCH v10 7/7] of: property: Add "depends-on" parsing support to of_fwnode_add_links()
-From:   Saravana Kannan <saravanak@google.com>
-To:     Rob Herring <robh+dt@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>, Len Brown <lenb@kernel.org>
-Cc:     Saravana Kannan <saravanak@google.com>, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-acpi@vger.kernel.org, clang-built-linux@googlegroups.com,
-        David Collins <collinsd@codeaurora.org>,
-        kernel-team@android.com
-Content-Type: text/plain; charset="UTF-8"
+        id S1725990AbfH2IMw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 29 Aug 2019 04:12:52 -0400
+Received: from mx2.suse.de ([195.135.220.15]:57376 "EHLO mx1.suse.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1725776AbfH2IMw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 29 Aug 2019 04:12:52 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx1.suse.de (Postfix) with ESMTP id 204D5AC8E;
+        Thu, 29 Aug 2019 08:12:51 +0000 (UTC)
+Date:   Thu, 29 Aug 2019 10:12:49 +0200
+From:   Petr Mladek <pmladek@suse.com>
+To:     Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <uwe@kleine-koenig.org>
+Cc:     Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        metux IT consult Enrico Weigelt <lkml@metux.net>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] vsprintf: introduce %dE for error constants
+Message-ID: <20190829081249.3zvvsa4ggb5pfozl@pathway.suse.cz>
+References: <20190827211244.7210-1-uwe@kleine-koenig.org>
+ <20190828113216.p2yiha4xyupkbcbs@pathway.suse.cz>
+ <74303921-aa95-9962-2254-27e556af54f4@kleine-koenig.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <74303921-aa95-9962-2254-27e556af54f4@kleine-koenig.org>
+User-Agent: NeoMutt/20170912 (1.9.0)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-If dependencies inferred by of_fwnode_add_links() result in a cycle, it
-can prevent the probing of all the devices in the cycle. The depends-on
-property has been added to explicitly override inferred dependencies
-when they create a cycle.
+On Wed 2019-08-28 21:18:37, Uwe Kleine-König  wrote:
+> Hello Petr,
+> 
+> On 8/28/19 1:32 PM, Petr Mladek wrote:
+> > On Tue 2019-08-27 23:12:44, Uwe Kleine-König  wrote:
+> >> Petr Mladek had some concerns:
+> >>> There are ideas to make the code even more tricky to reduce
+> >>> the size, keep it fast.
+> >>
+> >> I think Enrico Weigelt's suggestion to use a case is the best
+> >> performance-wise so that's what I picked up. Also I hope that
+> >> performance isn't that important because the need to print an error
+> >> should not be so common that it really hurts in production.
 
-Add depends-on parsing support to of_fwnode_add_links() so that
-platforms with cyclic dependencies can use "depends-on" to break the
-cycle and continue successfully probing devices.
+This is contadicting. The "best" performance-wise solution was
+choosen in favor of space. The next sentence says that performance
+is not important.
 
-Signed-off-by: Saravana Kannan <saravanak@google.com>
----
- drivers/of/property.c | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+> > I personally do not like switch/case. It is a lot of code.
+> > I wonder if it even saved some space.
+> 
+> I guess we have to die either way. Either it is quick or it is space
+> efficient.
 
-diff --git a/drivers/of/property.c b/drivers/of/property.c
-index 420c2d428184..78a262e24686 100644
---- a/drivers/of/property.c
-+++ b/drivers/of/property.c
-@@ -1106,6 +1106,12 @@ static struct device_node *parse_interconnects(struct device_node *np,
- 				"#interconnect-cells");
- }
- 
-+static struct device_node *parse_depends_on(struct device_node *np,
-+					    const char *prop_name, int index)
-+{
-+	return parse_prop_cells(np, prop_name, index, "depends-on", NULL);
-+}
-+
- static int strcmp_suffix(const char *str, const char *suffix)
- {
- 	unsigned int len, suffix_len;
-@@ -1151,6 +1157,7 @@ static const struct supplier_bindings bindings[] = {
- 	{ .parse_prop = parse_clocks, },
- 	{ .parse_prop = parse_interconnects, },
- 	{ .parse_prop = parse_regulators, },
-+	{ .parse_prop = parse_depends_on, },
- 	{},
- };
- 
-@@ -1203,6 +1210,12 @@ static int __of_link_to_suppliers(struct device *dev,
- 	struct property *p;
- 	int ret = 0;
- 
-+	if (of_find_property(con_np, "depends-on", NULL)) {
-+		if (of_link_property(dev, con_np, "depends-on"))
-+			ret = -EAGAIN;
-+		return ret;
-+	}
-+
- 	for_each_property_of_node(con_np, p)
- 		if (of_link_property(dev, con_np, p->name))
- 			ret = -EAGAIN;
--- 
-2.23.0.187.g17f5b7556c-goog
+I am more concerned about the size. Well, array of strings will
+be both fast and size efficient.
 
+> With the big case I trust the compiler to pick something
+> sensible expecting that it adapts for example to -Osize.
+
+I am not sure what are the expectations here. I can't imagine
+another translation than:
+
+   if (val == 1)
+     str = "EPERM";
+   else if (val == 2)
+     str = "ENOENT"
+   else if (val == 3)
+     str = "ESRCH"
+   ...
+
+It means that all constans will be hardcoded in the code instead
+of in data section. Plus there will be instructions for each
+if/else part.
+
+> > If you want to safe space, I would use u16 to store the numbers.
+> > Or I would use array of strings. There will be only few holes.
+> > 
+> > You might also consider handling only the most commonly
+> > used codes from errno.h and errno-base.h (1..133). There will
+> > be no holes and the codes are stable.
+> 
+> I'd like to postpone the discussion about "how" until we agreed about
+> the "if at all".
+
+It seems that all people like this feature.
+
+BTW: I though more about generating or cut&pasting the arrary.
+I can't find any reasonable way how to generate it.
+
+But both, errno.h and errno-base.h, are super stable. Only
+comments were modified or new codes added. Most of them
+are defined by POSIX so they should remain stable.
+
+Therefore cut&pasted array of strings looks acceptable.
+We should only allow to easily check numbers for each code,
+e.g. by defining the array as
+
+const err_str * [] {
+	"0"			/*   0  Success */
+	"EPERM",		/*   1	Operation not permitted */
+	"ENOENT",		/*   2	No such file or directory */
+	"ESRCH",		/*   3	No such process */
+	...
+
+
+If there is a hole, we could use something like:
+
+	"-41",			/*  41  Skipped. EWOULDBLOCK is
+	defined as EAGAIN.  Operation would block */
+
+Best Regards,
+Petr
