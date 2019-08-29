@@ -2,138 +2,135 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7356BA1D02
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2019 16:38:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D6C97A1D74
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Aug 2019 16:44:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727976AbfH2OiP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 29 Aug 2019 10:38:15 -0400
-Received: from mail-wm1-f68.google.com ([209.85.128.68]:51034 "EHLO
-        mail-wm1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727984AbfH2OiP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Aug 2019 10:38:15 -0400
-Received: by mail-wm1-f68.google.com with SMTP id v15so4016529wml.0
-        for <linux-doc@vger.kernel.org>; Thu, 29 Aug 2019 07:38:14 -0700 (PDT)
+        id S1727787AbfH2On6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 29 Aug 2019 10:43:58 -0400
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:39638 "EHLO
+        mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727684AbfH2On6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Aug 2019 10:43:58 -0400
+Received: by mail-pl1-f193.google.com with SMTP id az1so703975plb.6
+        for <linux-doc@vger.kernel.org>; Thu, 29 Aug 2019 07:43:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=wvm5jhfZdBAjiVI0fMQa3wyfT8pVsOoRMdM2UQ5EVAc=;
-        b=Gn5aTJaW0lhbDQWyYFqDBkrdNnFy2pGrPIg9uFcSU0QDrKLANwjVThGZPuAKLE95y6
-         PXgyzsxKFqZzbh35PUrCyLRVoJ6/TM5gO3zvjyXoIGe2F+a44h45x4ntyUH2R9K/8cer
-         BeLiukfqMO5AwUsbhhH+vawbOADQgyod20IzadiyA9ufUf4775gkItruHuFcBiZ+BFVO
-         OfDktx/jfQqMWmlIB0pvioN4mmJ2KnMbs3Z4fCMXu7cQr+0MgZ6j1tz2YEHxpUare8iy
-         RpQ8bZzMq7EY7hZuuUVYJ0ULMsjbZIwfeG16WX1G2RrY2rGVkY5CnetDJwPeb1Lms6T5
-         VNvg==
+        d=joelfernandes.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=1jbNDnatKqrZZbvhaAxgomk5lFvDz0GUQU4rtuS0hzg=;
+        b=pws3InZSGoRYhnY0msy/KI8nH8nUy9PWXFaj3FcNG/GZCigAofnwgs5fjrQ8Da9fqU
+         LNpQeOlxbcmYSt6Uaj1LSagZSEqFQ2qS4K/en9qTys+ZgKZrM0ZGqrZ4NHMOsNDFBuXF
+         4uZe3hiSoi6hgUH6GDDOvCVr2tIEgef6i48qQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=wvm5jhfZdBAjiVI0fMQa3wyfT8pVsOoRMdM2UQ5EVAc=;
-        b=H70hkWmcjuUZ0XAxKsNEjLqsdxlmBCJloMrrL9H6VaSP5NZKoE1XEzq9e1TUd0E7AR
-         /DPmHEFy0axpiBZn0DDSq96DBXsd0M4EGtVxAzd/WyQqac2hMdutS/FP0bHm6QE2wblz
-         ZLtwr2ddsHDDltolBHm66MuxBeTAE+l2/cT8aA8Q6cjTFmv9CCSfJtaCYi59lrcuGBJl
-         Ame1JbkM0YcufDzrkFne+CpPttRVTtNvsPXzBs+e8yWhKhVT+v2hjYei5q1vyNw6sJnr
-         0cAGUdVO1Kf8+dzBWk16wgisWfHVv/slHl9g0N+9ddSLbjA+sQREJ9vuY1blMftLwvZa
-         mz/A==
-X-Gm-Message-State: APjAAAX57ZPBE30wDdlto4YJ+w3v3LpqWbtB/yeDEtW3O76pXKHMBTu5
-        7L0xg1i1m+2oMupiqCMJGxtNig==
-X-Google-Smtp-Source: APXvYqyIGe38MXQx8iatCV54dE9UCR5qWcasMJ6961l0x1sY1UGN6+ZmbFEIsoWLeRqF7iEbp26wzA==
-X-Received: by 2002:a7b:cbce:: with SMTP id n14mr11150614wmi.47.1567089493399;
-        Thu, 29 Aug 2019 07:38:13 -0700 (PDT)
-Received: from localhost.localdomain (amontpellier-652-1-281-69.w109-210.abo.wanadoo.fr. [109.210.96.69])
-        by smtp.gmail.com with ESMTPSA id g15sm3241925wrp.29.2019.08.29.07.38.12
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=1jbNDnatKqrZZbvhaAxgomk5lFvDz0GUQU4rtuS0hzg=;
+        b=lyhA+2DOazb2LujybL+kCW5kSXwBPKL7XXZnhW5kZO9wOd3FntPvBMKFAShyV3DjYu
+         dMor+VPrvMVAOZQSx+FsrVM8yyJHNX7DQn4GtuFtXYwkSb0U1sWmSJL62Q83X6QFwZO+
+         wMcH8f9XTBPhoSyxuJ6crGl0jeuzIioxO/f6vmXSvYkmFfrCRp1/tcautrZdDsb+t+Bu
+         WdegM5dAqm4NZvlsF9gjWDXhrsrULSB5r2VNb4JVtr3Od/8btQJpiPlzlHxpxV/Q1VTJ
+         UlGGzyLQDpspeJS3pJTBftP2Ec1hrabRZ226fGPpCs7cXC4kadlILvyHBi8W8lus1Pia
+         Zjow==
+X-Gm-Message-State: APjAAAX7Nu4hyoaszm5sgu4AEorD9C4c50Y2XjGQ5qUpmzbjcufIIx8U
+        htKsNQnEPqa/Glqs4zQrB19hEw==
+X-Google-Smtp-Source: APXvYqxMzTPU8bK6VjApFdjKL0gEBlWweOLhLYTEdCnvF7eVDYTr1s/5dEscVTxlZWsL0uFq/aCAzw==
+X-Received: by 2002:a17:902:126:: with SMTP id 35mr2476290plb.76.1567089837473;
+        Thu, 29 Aug 2019 07:43:57 -0700 (PDT)
+Received: from localhost ([2620:15c:6:12:9c46:e0da:efbf:69cc])
+        by smtp.gmail.com with ESMTPSA id ev3sm16452782pjb.3.2019.08.29.07.43.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 29 Aug 2019 07:38:12 -0700 (PDT)
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Alban Bedel <albeu@free.fr>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Geert Uytterhoeven <geert+renesas@glider.be>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-gpio@vger.kernel.org, Julia Lawall <Julia.Lawall@lip6.fr>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH 9/9] misc: sram: use devm_platform_ioremap_resource_wc()
-Date:   Thu, 29 Aug 2019 16:37:42 +0200
-Message-Id: <20190829143742.24726-10-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20190829143742.24726-1-brgl@bgdev.pl>
-References: <20190829143742.24726-1-brgl@bgdev.pl>
+        Thu, 29 Aug 2019 07:43:56 -0700 (PDT)
+Date:   Thu, 29 Aug 2019 10:43:55 -0400
+From:   Joel Fernandes <joel@joelfernandes.org>
+To:     "Paul E. McKenney" <paulmck@kernel.org>
+Cc:     linux-kernel@vger.kernel.org,
+        Frederic Weisbecker <fweisbec@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Josh Triplett <josh@joshtriplett.org>, kernel-team@android.com,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        linux-doc@vger.kernel.org,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        rcu@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>
+Subject: Re: [RFC v1 2/2] rcu/tree: Remove dynticks_nmi_nesting counter
+Message-ID: <20190829144355.GE63638@google.com>
+References: <5d648897.1c69fb81.5e60a.fc70@mx.google.com>
+ <20190828202330.GS26530@linux.ibm.com>
+ <20190828210525.GB75931@google.com>
+ <20190828211904.GX26530@linux.ibm.com>
+ <20190828214241.GD75931@google.com>
+ <20190828220108.GC26530@linux.ibm.com>
+ <20190828221444.GA100789@google.com>
+ <20190828231247.GE26530@linux.ibm.com>
+ <20190829015155.GB100789@google.com>
+ <20190829034336.GD4125@linux.ibm.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190829034336.GD4125@linux.ibm.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Wed, Aug 28, 2019 at 08:43:36PM -0700, Paul E. McKenney wrote:
+[snip]
+> > > > > This change is not fixing a bug, so there is no need for an emergency fix,
+> > > > > and thus no point in additional churn.  I understand that it is a bit
+> > > > > annoying to code and test something and have your friendly maintainer say
+> > > > > "sorry, wrong rocks", and the reason that I understand this is that I do
+> > > > > that to myself rather often.
+> > > > 
+> > > > The motivation for me for this change is to avoid future bugs such as with
+> > > > the following patch where "== 2" did not take the force write of
+> > > > DYNTICK_IRQ_NONIDLE into account:
+> > > > https://git.kernel.org/pub/scm/linux/kernel/git/paulmck/linux-rcu.git/commit/?h=dev&id=13c4b07593977d9288e5d0c21c89d9ba27e2ea1f
+> > > 
+> > > Yes, the current code does need some simplification.
+> > > 
+> > > > I still don't see it as pointless churn, it is also a maintenance cost in its
+> > > > current form and the simplification is worth it IMHO both from a readability,
+> > > > and maintenance stand point.
+> > > > 
+> > > > I still don't see what's technically wrong with the patch. I could perhaps
+> > > > add the above "== 2" point in the patch?
+> > > 
+> > > I don't know of a crash or splat your patch would cause, if that is
+> > > your question.  But that is also true of the current code, so the point
+> > > is simplification, not bug fixing.  And from what I can see, there is an
+> > > opportunity to simplify quite a bit further.  And with something like
+> > > RCU, further simplification is worth -serious- consideration.
+> > > 
+> > > > We could also discuss f2f at LPC to see if we can agree about it?
+> > > 
+> > > That might make a lot of sense.
+> > 
+> > Sure. I am up for a further redesign / simplification. I will think more
+> > about your suggestions and can also further discuss at LPC.
+> 
+> One question that might (or might not) help:  Given the compound counter,
+> where the low-order hex digit indicates whether the corresponding CPU
+> is running in a non-idle kernel task and the rest of the hex digits
+> indicate the NMI-style nesting counter shifted up by four bits, what
+> could rcu_is_cpu_rrupt_from_idle() be reduced to?
+> 
+> > And this patch is on LKML archives and is not going anywhere so there's no
+> > rush I guess ;-)
+> 
+> True enough!  ;-)
 
-Use the new devm_platform_ioremap_resource_wc() helper instead of
-devm_ioremap_wc() combinded with a call to platform_get_resource().
-Also use devm_platform_ioremap_resource() where applicable.
+Paul, do we also nuke rcu_eqs_special_set()?  Currently I don't see anyone
+using it. And also remove the bottom most bit of dynticks?
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
- drivers/misc/sram.c | 28 ++++++++--------------------
- 1 file changed, 8 insertions(+), 20 deletions(-)
+Also what happens if a TLB flush broadcast is needed? Do we IPI nohz or idle
+CPUs are the moment?
 
-diff --git a/drivers/misc/sram.c b/drivers/misc/sram.c
-index f30448bf3a63..6c1a23cb3e8c 100644
---- a/drivers/misc/sram.c
-+++ b/drivers/misc/sram.c
-@@ -340,8 +340,6 @@ static const struct of_device_id sram_dt_ids[] = {
- static int sram_probe(struct platform_device *pdev)
- {
- 	struct sram_dev *sram;
--	struct resource *res;
--	size_t size;
- 	int ret;
- 	int (*init_func)(void);
- 
-@@ -351,25 +349,14 @@ static int sram_probe(struct platform_device *pdev)
- 
- 	sram->dev = &pdev->dev;
- 
--	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
--	if (!res) {
--		dev_err(sram->dev, "found no memory resource\n");
--		return -EINVAL;
--	}
--
--	size = resource_size(res);
--
--	if (!devm_request_mem_region(sram->dev, res->start, size, pdev->name)) {
--		dev_err(sram->dev, "could not request region for resource\n");
--		return -EBUSY;
--	}
--
- 	if (of_property_read_bool(pdev->dev.of_node, "no-memory-wc"))
--		sram->virt_base = devm_ioremap(sram->dev, res->start, size);
-+		sram->virt_base = devm_platform_ioremap_resource(pdev, 0);
- 	else
--		sram->virt_base = devm_ioremap_wc(sram->dev, res->start, size);
--	if (!sram->virt_base)
--		return -ENOMEM;
-+		sram->virt_base = devm_platform_ioremap_resource_wc(pdev, 0);
-+	if (IS_ERR(sram->virt_base)) {
-+		dev_err(&pdev->dev, "could not map SRAM registers\n");
-+		return PTR_ERR(sram->virt_base);
-+	}
- 
- 	sram->pool = devm_gen_pool_create(sram->dev, ilog2(SRAM_GRANULARITY),
- 					  NUMA_NO_NODE, NULL);
-@@ -382,7 +369,8 @@ static int sram_probe(struct platform_device *pdev)
- 	else
- 		clk_prepare_enable(sram->clk);
- 
--	ret = sram_reserve_regions(sram, res);
-+	ret = sram_reserve_regions(sram,
-+			platform_get_resource(pdev, IORESOURCE_MEM, 0));
- 	if (ret)
- 		goto err_disable_clk;
- 
--- 
-2.21.0
+All of this was introduced in:
+b8c17e6664c4 ("rcu: Maintain special bits at bottom of ->dynticks counter")
+
+thanks,
+
+ - Joel
 
