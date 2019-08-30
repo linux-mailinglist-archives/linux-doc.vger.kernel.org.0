@@ -2,282 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 65AE6A330A
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Aug 2019 10:45:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 55A0EA3358
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Aug 2019 11:06:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728547AbfH3In3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Aug 2019 04:43:29 -0400
-Received: from foss.arm.com ([217.140.110.172]:56350 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728538AbfH3In3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 30 Aug 2019 04:43:29 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 96FE7344;
-        Fri, 30 Aug 2019 01:43:28 -0700 (PDT)
-Received: from e112269-lin.arm.com (e112269-lin.cambridge.arm.com [10.1.196.133])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5F8BD3F718;
-        Fri, 30 Aug 2019 01:43:26 -0700 (PDT)
-From:   Steven Price <steven.price@arm.com>
-To:     Marc Zyngier <maz@kernel.org>, Will Deacon <will@kernel.org>,
-        linux-arm-kernel@lists.infradead.org, kvmarm@lists.cs.columbia.edu
-Cc:     Steven Price <steven.price@arm.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        =?UTF-8?q?Radim=20Kr=C4=8Dm=C3=A1=C5=99?= <rkrcmar@redhat.com>,
-        Russell King <linux@armlinux.org.uk>,
-        James Morse <james.morse@arm.com>,
-        Julien Thierry <julien.thierry.kdev@gmail.com>,
-        Suzuki K Pouloze <suzuki.poulose@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>, kvm@vger.kernel.org,
+        id S1726849AbfH3JG1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Aug 2019 05:06:27 -0400
+Received: from mx2.suse.de ([195.135.220.15]:46406 "EHLO mx1.suse.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726461AbfH3JG1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 30 Aug 2019 05:06:27 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx1.suse.de (Postfix) with ESMTP id 6B268AF93;
+        Fri, 30 Aug 2019 09:06:25 +0000 (UTC)
+Date:   Fri, 30 Aug 2019 11:06:24 +0200
+From:   Petr Mladek <pmladek@suse.com>
+To:     Uwe =?iso-8859-1?Q?Kleine-K=F6nig?= <uwe@kleine-koenig.org>
+Cc:     Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Juergen Gross <jgross@suse.com>,
+        Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        metux IT consult Enrico Weigelt <lkml@metux.net>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v4 10/10] arm64: Retrieve stolen time as paravirtualized guest
-Date:   Fri, 30 Aug 2019 09:42:55 +0100
-Message-Id: <20190830084255.55113-11-steven.price@arm.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190830084255.55113-1-steven.price@arm.com>
-References: <20190830084255.55113-1-steven.price@arm.com>
+Subject: Re: [PATCH v2] vsprintf: introduce %dE for error constants
+Message-ID: <20190830090624.tb2tmhbt3wzwz6rp@pathway.suse.cz>
+References: <20190827211244.7210-1-uwe@kleine-koenig.org>
+ <20190828113216.p2yiha4xyupkbcbs@pathway.suse.cz>
+ <74303921-aa95-9962-2254-27e556af54f4@kleine-koenig.org>
+ <20190829081249.3zvvsa4ggb5pfozl@pathway.suse.cz>
+ <45cd5b50-9854-fce7-5f08-f7660abb8691@suse.com>
+ <a83449cf-3a4a-f3e0-210a-dc7c39505355@rasmusvillemoes.dk>
+ <002dc2a7-40a3-f52a-c8fa-5dbb42e6dd7b@kleine-koenig.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <002dc2a7-40a3-f52a-c8fa-5dbb42e6dd7b@kleine-koenig.org>
+User-Agent: NeoMutt/20170912 (1.9.0)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Enable paravirtualization features when running under a hypervisor
-supporting the PV_TIME_ST hypercall.
+On Thu 2019-08-29 19:39:45, Uwe Kleine-König  wrote:
+> On 8/29/19 11:09 AM, Rasmus Villemoes wrote:
+> > On 29/08/2019 10.27, Juergen Gross wrote:
+> >> On 29.08.19 10:12, Petr Mladek wrote:
+> >>> On Wed 2019-08-28 21:18:37, Uwe Kleine-König  wrote:
+> >>>>
+> >>>> I'd like to postpone the discussion about "how" until we agreed about
+> >>>> the "if at all".
+> >>>
+> >>> It seems that all people like this feature.
+> >>
+> >> Hmm, what about already existing format strings conatining "%dE"?
+> >>
+> >> Yes, I could find only one (drivers/staging/speakup/speakup_bns.c), but
+> >> nevertheless...
+> > 
+> > Indeed, Uwe still needs to respond to how he wants to handle that. I
+> 
+> This is indeed bad and I didn't expect that. I just took a quick look
+> and this string is indeed used as sprintf format string.
 
-For each (v)CPU, we ask the hypervisor for the location of a shared
-page which the hypervisor will use to report stolen time to us. We set
-pv_time_ops to the stolen time function which simply reads the stolen
-value from the shared page for a VCPU. We guarantee single-copy
-atomicity using READ_ONCE which means we can also read the stolen
-time for another VCPU than the currently running one while it is
-potentially being updated by the hypervisor.
+Hmm, it seems that solving this might be pretty tricky.
 
-Signed-off-by: Steven Price <steven.price@arm.com>
----
- arch/arm64/include/asm/paravirt.h |   9 +-
- arch/arm64/kernel/paravirt.c      | 148 ++++++++++++++++++++++++++++++
- arch/arm64/kernel/time.c          |   3 +
- include/linux/cpuhotplug.h        |   1 +
- 4 files changed, 160 insertions(+), 1 deletion(-)
+I see this as a warning that we should not play with fire.
+There might be a reason why all format modifiers are put
+between % and the format identifier.
 
-diff --git a/arch/arm64/include/asm/paravirt.h b/arch/arm64/include/asm/paravirt.h
-index 799d9dd6f7cc..125c26c42902 100644
---- a/arch/arm64/include/asm/paravirt.h
-+++ b/arch/arm64/include/asm/paravirt.h
-@@ -21,6 +21,13 @@ static inline u64 paravirt_steal_clock(int cpu)
- {
- 	return pv_ops.time.steal_clock(cpu);
- }
--#endif
-+
-+int __init kvm_guest_init(void);
-+
-+#else
-+
-+#define kvm_guest_init()
-+
-+#endif // CONFIG_PARAVIRT
- 
- #endif
-diff --git a/arch/arm64/kernel/paravirt.c b/arch/arm64/kernel/paravirt.c
-index 4cfed91fe256..5bf3be7ccf7e 100644
---- a/arch/arm64/kernel/paravirt.c
-+++ b/arch/arm64/kernel/paravirt.c
-@@ -6,13 +6,161 @@
-  * Author: Stefano Stabellini <stefano.stabellini@eu.citrix.com>
-  */
- 
-+#define pr_fmt(fmt) "kvmarm-pv: " fmt
-+
-+#include <linux/arm-smccc.h>
-+#include <linux/cpuhotplug.h>
- #include <linux/export.h>
-+#include <linux/io.h>
- #include <linux/jump_label.h>
-+#include <linux/printk.h>
-+#include <linux/psci.h>
-+#include <linux/reboot.h>
-+#include <linux/slab.h>
- #include <linux/types.h>
-+
- #include <asm/paravirt.h>
-+#include <asm/pvclock-abi.h>
-+#include <asm/smp_plat.h>
- 
- struct static_key paravirt_steal_enabled;
- struct static_key paravirt_steal_rq_enabled;
- 
- struct paravirt_patch_template pv_ops;
- EXPORT_SYMBOL_GPL(pv_ops);
-+
-+struct kvmarm_stolen_time_region {
-+	struct pvclock_vcpu_stolen_time *kaddr;
-+};
-+
-+static DEFINE_PER_CPU(struct kvmarm_stolen_time_region, stolen_time_region);
-+
-+static bool steal_acc = true;
-+static int __init parse_no_stealacc(char *arg)
-+{
-+	steal_acc = false;
-+	return 0;
-+}
-+
-+early_param("no-steal-acc", parse_no_stealacc);
-+
-+/* return stolen time in ns by asking the hypervisor */
-+static u64 kvm_steal_clock(int cpu)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+
-+	reg = per_cpu_ptr(&stolen_time_region, cpu);
-+	if (!reg->kaddr) {
-+		pr_warn_once("stolen time enabled but not configured for cpu %d\n",
-+			     cpu);
-+		return 0;
-+	}
-+
-+	return le64_to_cpu(READ_ONCE(reg->kaddr->stolen_time));
-+}
-+
-+static int disable_stolen_time_current_cpu(void)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+
-+	reg = this_cpu_ptr(&stolen_time_region);
-+	if (!reg->kaddr)
-+		return 0;
-+
-+	memunmap(reg->kaddr);
-+	memset(reg, 0, sizeof(*reg));
-+
-+	return 0;
-+}
-+
-+static int stolen_time_dying_cpu(unsigned int cpu)
-+{
-+	return disable_stolen_time_current_cpu();
-+}
-+
-+static int init_stolen_time_cpu(unsigned int cpu)
-+{
-+	struct kvmarm_stolen_time_region *reg;
-+	struct arm_smccc_res res;
-+
-+	reg = this_cpu_ptr(&stolen_time_region);
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_HV_PV_TIME_ST, &res);
-+
-+	if ((long)res.a0 < 0)
-+		return -EINVAL;
-+
-+	reg->kaddr = memremap(res.a0,
-+			      sizeof(struct pvclock_vcpu_stolen_time),
-+			      MEMREMAP_WB);
-+
-+	if (!reg->kaddr) {
-+		pr_warn("Failed to map stolen time data structure\n");
-+		return -ENOMEM;
-+	}
-+
-+	if (le32_to_cpu(reg->kaddr->revision) != 0 ||
-+	    le32_to_cpu(reg->kaddr->attributes) != 0) {
-+		pr_warn("Unexpected revision or attributes in stolen time data\n");
-+		return -ENXIO;
-+	}
-+
-+	return 0;
-+}
-+
-+static int kvm_arm_init_stolen_time(void)
-+{
-+	int ret;
-+
-+	ret = cpuhp_setup_state(CPUHP_AP_ARM_KVMPV_STARTING,
-+				"hypervisor/kvmarm/pv:starting",
-+				init_stolen_time_cpu, stolen_time_dying_cpu);
-+	if (ret < 0)
-+		return ret;
-+	return 0;
-+}
-+
-+static bool has_kvm_steal_clock(void)
-+{
-+	struct arm_smccc_res res;
-+
-+	/* To detect the presence of PV time support we require SMCCC 1.1+ */
-+	if (psci_ops.smccc_version < SMCCC_VERSION_1_1)
-+		return false;
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_ARCH_FEATURES_FUNC_ID,
-+			     ARM_SMCCC_HV_PV_FEATURES, &res);
-+
-+	if (res.a0 != SMCCC_RET_SUCCESS)
-+		return false;
-+
-+	arm_smccc_1_1_invoke(ARM_SMCCC_HV_PV_FEATURES,
-+			     ARM_SMCCC_HV_PV_TIME_ST, &res);
-+
-+	if (res.a0 != SMCCC_RET_SUCCESS)
-+		return false;
-+
-+	return true;
-+}
-+
-+int __init kvm_guest_init(void)
-+{
-+	int ret;
-+
-+	if (!has_kvm_steal_clock())
-+		return 0;
-+
-+	ret = kvm_arm_init_stolen_time();
-+	if (ret)
-+		return ret;
-+
-+	pv_ops.time.steal_clock = kvm_steal_clock;
-+
-+	static_key_slow_inc(&paravirt_steal_enabled);
-+	if (steal_acc)
-+		static_key_slow_inc(&paravirt_steal_rq_enabled);
-+
-+	pr_info("using stolen time PV\n");
-+
-+	return 0;
-+}
-diff --git a/arch/arm64/kernel/time.c b/arch/arm64/kernel/time.c
-index 0b2946414dc9..a52aea14c6ec 100644
---- a/arch/arm64/kernel/time.c
-+++ b/arch/arm64/kernel/time.c
-@@ -30,6 +30,7 @@
- 
- #include <asm/thread_info.h>
- #include <asm/stacktrace.h>
-+#include <asm/paravirt.h>
- 
- unsigned long profile_pc(struct pt_regs *regs)
- {
-@@ -65,4 +66,6 @@ void __init time_init(void)
- 
- 	/* Calibrate the delay loop directly */
- 	lpj_fine = arch_timer_rate / HZ;
-+
-+	kvm_guest_init();
- }
-diff --git a/include/linux/cpuhotplug.h b/include/linux/cpuhotplug.h
-index 068793a619ca..89d75edb5750 100644
---- a/include/linux/cpuhotplug.h
-+++ b/include/linux/cpuhotplug.h
-@@ -136,6 +136,7 @@ enum cpuhp_state {
- 	/* Must be the last timer callback */
- 	CPUHP_AP_DUMMY_TIMER_STARTING,
- 	CPUHP_AP_ARM_XEN_STARTING,
-+	CPUHP_AP_ARM_KVMPV_STARTING,
- 	CPUHP_AP_ARM_CORESIGHT_STARTING,
- 	CPUHP_AP_ARM64_ISNDEP_STARTING,
- 	CPUHP_AP_SMPCFD_DYING,
--- 
-2.20.1
+> > still prefer making it %pE, both because it's easier to convert integers
+> > to ERR_PTRs than having to worry about the type of PTR_ERR() being long
+> > and not int, and because alphanumerics after %p have been ignored for a
+> > long time (10 years?) whether or not those characters have been
+> > recognized as a %p extension, so nobody relies on %pE putting an E after
+> > the %p output. It also keeps the non-standard extensions in the same
+> > "namespace", so to speak.
+>
+> > Oh, 'E' is taken, well, make it 'e' then.
+> 
+> I like having %pe to print error valued pointers. Then maybe we could
+> have both %de for ints and %pe for pointers. :-)
 
+I would prefer to avoid %pe. It would make sense only when the value
+really contains error id. It means that it has to be used as:
+
+    if (IS_ERR(p)) {
+       pr_warn(...);
+
+The error path might handle the error using PTR_ERR() also
+on other locations. Also PTR_ERR() will make it clear that we
+are trying to print the error code.
+
+Best Regards,
+Petr
