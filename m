@@ -2,139 +2,145 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 171FAAA23B
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2019 14:00:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A29D4AA2AE
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Sep 2019 14:07:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388892AbfIEL6z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Sep 2019 07:58:55 -0400
-Received: from mail-eopbgr80057.outbound.protection.outlook.com ([40.107.8.57]:16451
-        "EHLO EUR04-VI1-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S2388280AbfIEL6y (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 5 Sep 2019 07:58:54 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=bKAoDb2zCK7Q+bzXXcqOeTtYELoM9zyY0OBmTaVI1ymAl51JZzKb1/IPHtE2I5WNp/018V4LuBtbLZbzP9nOaBlNFqEUHF8H1M3y22nxbZ/jD1NXy4oFse2laMIyWP8CJEcA2E4IRyCL9wbaGJlnjunZl1iZ6ogR+U+OX/4vAeKArUQXygnYNIWzaLHaPyogxY26a+2jgGuue4XZTXrIkEn5rUNJUnbDp3mbPqIiUkWWzeRIEfJLlHfD6dspM/XxDxvSclLx0kdmtEyzwgrmRe3h6U6i8ZyaX+94uB8ydmfpJSG9gGkN3UcX4rMSIirLNbok2siyFFv2MadHQw2wWA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=egAmLLcYxNc+vNg4VL0BrjM1fDO0l7UPG3LF2prGCGY=;
- b=RiDFctgqIYUCOM0NAqMrspLlcu0fS4GgrqkZaq3w/RQUFhxN5UK4D3ZjKxK6EBK4iSf/JYCOG/eawSsJlSnReaQ0WwD9YCJzkHtdms+/MZf9HO7f8gmvGZ0HR37aTFvlBgSLsFqj2seZ1/lPHpA9hm/17PxXn6IsnWffDZuwYuMLOuZQMut8nBC0iRcFWYidPo0PydRHepUJ8YEdvdXMEcrIjkxomcWvlyFNrfMZzbBd3hVqE7ACBf7OUojsrZln7lgh4k+3R5/jU/ogC80nBIC07qotpxgs/SyCgluN8SpxdIP8b/c8ecbWMk83d01eZqd0+u1r3+Lil9ghEuIluw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
- header.d=nxp.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=egAmLLcYxNc+vNg4VL0BrjM1fDO0l7UPG3LF2prGCGY=;
- b=Tqkrqu4rOsAEd5J1ezYDkXwvgxLUPExymw50TUmtBgVMh4kjKv2k2ndYq+776jm4TGSyRFasSSkJe/ppQUTN+r3CDL5Q3tEJrxOp782X9aI5kUYg48udTudLbEj45U5A6qEcnGavqG8edkj/gfKC5VVQxf4bXVmFquo5tpgpjLE=
-Received: from VI1PR0402MB2863.eurprd04.prod.outlook.com (10.175.20.18) by
- VI1PR0402MB3805.eurprd04.prod.outlook.com (52.134.16.26) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2220.18; Thu, 5 Sep 2019 11:58:41 +0000
-Received: from VI1PR0402MB2863.eurprd04.prod.outlook.com
- ([fe80::19cd:9f82:31ce:fbbb]) by VI1PR0402MB2863.eurprd04.prod.outlook.com
- ([fe80::19cd:9f82:31ce:fbbb%8]) with mapi id 15.20.2220.022; Thu, 5 Sep 2019
- 11:58:41 +0000
-From:   Stefan-gabriel Mirea <stefan-gabriel.mirea@nxp.com>
-To:     "corbet@lwn.net" <corbet@lwn.net>,
-        "robh+dt@kernel.org" <robh+dt@kernel.org>,
-        "mark.rutland@arm.com" <mark.rutland@arm.com>,
-        "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
-        "catalin.marinas@arm.com" <catalin.marinas@arm.com>,
-        "will@kernel.org" <will@kernel.org>,
-        "shawnguo@kernel.org" <shawnguo@kernel.org>,
-        Leo Li <leoyang.li@nxp.com>
-CC:     "jslaby@suse.com" <jslaby@suse.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-        "linux-serial@vger.kernel.org" <linux-serial@vger.kernel.org>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        Cosmin Stefan Stoica <cosmin.stoica@nxp.com>
-Subject: [PATCH v4 6/6] arm64: defconfig: Enable configs for S32V234
-Thread-Topic: [PATCH v4 6/6] arm64: defconfig: Enable configs for S32V234
-Thread-Index: AQHVY+FC12rG9yn4iU2MzSxKohFhxg==
-Date:   Thu, 5 Sep 2019 11:58:41 +0000
-Message-ID: <20190905115803.19565-7-stefan-gabriel.mirea@nxp.com>
-References: <20190905115803.19565-1-stefan-gabriel.mirea@nxp.com>
-In-Reply-To: <20190905115803.19565-1-stefan-gabriel.mirea@nxp.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-mailer: git-send-email 2.22.0
-x-clientproxiedby: AM6P193CA0005.EURP193.PROD.OUTLOOK.COM
- (2603:10a6:209:3e::18) To VI1PR0402MB2863.eurprd04.prod.outlook.com
- (2603:10a6:800:af::18)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=stefan-gabriel.mirea@nxp.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-originating-ip: [212.146.100.6]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 52e9e927-a1d5-45cf-0cf4-08d731f8650b
-x-ms-office365-filtering-ht: Tenant
-x-microsoft-antispam: BCL:0;PCL:0;RULEID:(2390118)(7020095)(4652040)(8989299)(4534185)(4627221)(201703031133081)(201702281549075)(8990200)(5600166)(711020)(4605104)(1401327)(4618075)(2017052603328)(7193020);SRVR:VI1PR0402MB3805;
-x-ms-traffictypediagnostic: VI1PR0402MB3805:|VI1PR0402MB3805:
-x-ms-exchange-transport-forked: True
-x-microsoft-antispam-prvs: <VI1PR0402MB38052310A176976C1AE777F8DFBB0@VI1PR0402MB3805.eurprd04.prod.outlook.com>
-x-ms-oob-tlc-oobclassifiers: OLM:3044;
-x-forefront-prvs: 015114592F
-x-forefront-antispam-report: SFV:NSPM;SFS:(10009020)(4636009)(346002)(39860400002)(366004)(396003)(376002)(136003)(199004)(189003)(476003)(81156014)(81166006)(446003)(2616005)(486006)(71190400001)(11346002)(6436002)(1076003)(54906003)(71200400001)(110136005)(53936002)(8676002)(7416002)(102836004)(478600001)(36756003)(14454004)(6512007)(25786009)(2501003)(2201001)(86362001)(256004)(66556008)(64756008)(66446008)(186003)(66946007)(26005)(4326008)(4744005)(3846002)(7736002)(316002)(6506007)(52116002)(99286004)(8936002)(76176011)(2906002)(305945005)(6486002)(5660300002)(50226002)(66066001)(6116002)(66476007)(6636002)(386003);DIR:OUT;SFP:1101;SCL:1;SRVR:VI1PR0402MB3805;H:VI1PR0402MB2863.eurprd04.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;A:1;MX:1;
-received-spf: None (protection.outlook.com: nxp.com does not designate
- permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam-message-info: P2/Ou2M7NRa69+jdpisdTjUDtNnjQhQZwee+CQ+3DhmyPHbsqQZ2jYVvx+uW7DrZateik+4GOLdgaAG+ixIbRehEKZYSNH/3VSqgTyevI17mJVY1oMoypbTXSQ42ZhOfbMTwQqr4ijStR6nyX5uy/q7yMU9XV3Jm2jnNpgeGFU9cvTRozMXYhhJdZu+wphb8n1vjfzHoUMV1N9/UYl7uR5h+GbmH/9T/TMXHsYRJ1qeTJ/ySdZeUeLYsbMRr1qXGi+mLSKFGYqV7kYjfSYdKHE0uDmzeivRmhF9m/tgTmmIwnAde097htu7/aXbwhhSOMcSlXg+KloThczCLXGJNViFnTtYpGNUNQh9l5cWn+USDAaFz4jj/MZMckHYu6jbjYRSqaSx7Gnyvl3xu7Peod4g8ctJu2WCU31h4Jy6MoHE=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+        id S1733243AbfIEMHJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Sep 2019 08:07:09 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:59870 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1732374AbfIEMHJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Sep 2019 08:07:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+        Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:
+        From:Date:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=+M5pUPd0CSd5IqfYJSlkUN21WzkPkfZPQNuEhTOUOgo=; b=XJxqYaSDJ0FmgiWHpkI6ft+c3
+        xpR0PYf82uONs7qbR16qRqH2gjeCTKZcuij6XuYltzRPRBM9aSEx8Lctmhs40s8h4IMaLeu7sqt9X
+        NDqPjvyqhaVfOvVDdCKGb1L2LeSLkunvHggzBLtmw+Uf9c3H+j1f8Eic5cRAwYLPP9Ta6ZnLoJKRM
+        mDAKSnHhoRibTk3TY1j+uaOxMx8JGf/zIFe8yDRjPLVwnAFoasHLZzwIItaVLTwB52kA7QCJbkugF
+        A06FClA44XGCu5sYW3lcm/PAUHIEDnVWs7w9pmr/MNrXK7Fz+w1WNvGXoo/OJ5VqQsm1siPTobWAG
+        p7bsRQUGg==;
+Received: from [177.159.253.249] (helo=coco.lan)
+        by bombadil.infradead.org with esmtpsa (Exim 4.92 #3 (Red Hat Linux))
+        id 1i5qXb-0001t5-MF; Thu, 05 Sep 2019 12:07:08 +0000
+Date:   Thu, 5 Sep 2019 09:07:01 -0300
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Linux Media Mailing List <linux-media@vger.kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        Joe Perches <joe@perches.com>, linux-kernel@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>, Jessica Yu <jeyu@kernel.org>,
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Thomas Gleixner <tglx@linutronix.de>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] docs: license-rules.txt: cover SPDX headers on Python
+ scripts
+Message-ID: <20190905090701.37dcf75e@coco.lan>
+In-Reply-To: <20190905092703.GA30899@kroah.com>
+References: <20190905055614.7958918b@coco.lan>
+        <88e638eb959095ab6657d295f9f8c27169569bf2.1567675272.git.mchehab+samsung@kernel.org>
+        <20190905092703.GA30899@kroah.com>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-X-OriginatorOrg: nxp.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 52e9e927-a1d5-45cf-0cf4-08d731f8650b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 05 Sep 2019 11:58:41.5936
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: H5mWGBWRf+jmJM9z5sDNk/Rpm21pcY6qpcMUrrIKi46x4+3xOozdj8zvb9BF6wDGoh1eoSMa9ms/axi3R03KD48JWdeLX+uCVDZ+0PCqj1c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR0402MB3805
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mihaela Martinas <Mihaela.Martinas@freescale.com>
+Em Thu, 5 Sep 2019 11:27:03 +0200
+Greg Kroah-Hartman <gregkh@linuxfoundation.org> escreveu:
 
-Enable support for the S32V234 SoC, including the previously added UART
-driver.
+> On Thu, Sep 05, 2019 at 06:23:13AM -0300, Mauro Carvalho Chehab wrote:
+> > The author of the license-rules.rst file wanted to be very restrict
+> > with regards to the location of the SPDX header. It says that
+> > the SPDX header "shall be added at the first  possible line in
+> > a file which can contain a comment". Not happy with this already
+> > restrictive requiement, it goes further:
+> > 
+> > "For the majority  of files this is the first line, except for
+> > scripts", opening an exception to have the SPDX header at the
+> > second line, if the first line starts with "#!".
+> > 
+> > Well, it turns that this is too restrictive for Python scripts,
+> > and may cause regressions if this would be enforced.
+> > 
+> > As mentioned on:
+> > 	https://stackoverflow.com/questions/728891/correct-way-to-define-python-source-code-encoding
+> > 
+> > Python's PEP-263 [1] dictates that an script that needs to default to
+> > UTF-8 encoding has to follow this rule:
+> > 
+> > 	'Python will default to ASCII as standard encoding if no other
+> > 	 encoding hints are given.
+> > 
+> > 	 To define a source code encoding, a magic comment must be placed
+> > 	 into the source files either as first or second line in the file'
+> > 
+> > And:
+> > 	'More precisely, the first or second line must match the following
+> > 	 regular expression:
+> > 
+> > 	 ^[ \t\f]*#.*?coding[:=][ \t]*([-_.a-zA-Z0-9]+)'
+> > 
+> > [1] https://www.python.org/dev/peps/pep-0263/
+> > 
+> > If a script has both "#!" and the charset encoding line, we can't place
+> > a SPDX tag without either violating license-rules.rst or breaking the
+> > script by making it crash with non-ASCII characters.
+> > 
+> > So, add a sort notice saying that, for Python scripts, the SPDX
+> > header may be up to the third line, in order to cover the case
+> > where both "#!" and "# .*coding.*UTF-8" lines are found.
+> > 
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> > ---
+> >  Documentation/process/license-rules.rst | 7 +++++--
+> >  1 file changed, 5 insertions(+), 2 deletions(-)
+> > 
+> > diff --git a/Documentation/process/license-rules.rst b/Documentation/process/license-rules.rst
+> > index 2ef44ada3f11..5d23e3498b1c 100644
+> > --- a/Documentation/process/license-rules.rst
+> > +++ b/Documentation/process/license-rules.rst
+> > @@ -64,9 +64,12 @@ License identifier syntax
+> >     possible line in a file which can contain a comment.  For the majority
+> >     of files this is the first line, except for scripts which require the
+> >     '#!PATH_TO_INTERPRETER' in the first line.  For those scripts the SPDX
+> > -   identifier goes into the second line.
+> > +   identifier goes into the second line\ [1]_.
+> >  
+> > -|
+> > +.. [1] Please notice that Python scripts may also need an encoding rule
+> > +   as defined on PEP-263, which should be defined either at the first
+> > +   or the second line. So, for such scripts, the SPDX identifier may
+> > +   go up to the third line.
+> >  
+> >  2. Style:
+> >    
+> 
+> If you are going to do this, can you also fix up scripts/spdxcheck.py to
+> properly catch this
 
-Signed-off-by: Mihaela Martinas <Mihaela.Martinas@freescale.com>
-Signed-off-by: Adrian.Nitu <adrian.nitu@freescale.com>
-Signed-off-by: Stoica Cosmin-Stefan <cosmin.stoica@nxp.com>
-Signed-off-by: Stefan-Gabriel Mirea <stefan-gabriel.mirea@nxp.com>
----
- arch/arm64/configs/defconfig | 3 +++
- 1 file changed, 3 insertions(+)
+For completeness, just added a check for it, and a "stats" mode at the
+script that will tell on what line the first SPDX tag occurs.
 
-diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
-index 0e58ef02880c..bb5aa95a8455 100644
---- a/arch/arm64/configs/defconfig
-+++ b/arch/arm64/configs/defconfig
-@@ -48,6 +48,7 @@ CONFIG_ARCH_MXC=3Dy
- CONFIG_ARCH_QCOM=3Dy
- CONFIG_ARCH_RENESAS=3Dy
- CONFIG_ARCH_ROCKCHIP=3Dy
-+CONFIG_ARCH_S32=3Dy
- CONFIG_ARCH_SEATTLE=3Dy
- CONFIG_ARCH_STRATIX10=3Dy
- CONFIG_ARCH_SYNQUACER=3Dy
-@@ -347,6 +348,8 @@ CONFIG_SERIAL_XILINX_PS_UART=3Dy
- CONFIG_SERIAL_XILINX_PS_UART_CONSOLE=3Dy
- CONFIG_SERIAL_FSL_LPUART=3Dy
- CONFIG_SERIAL_FSL_LPUART_CONSOLE=3Dy
-+CONFIG_SERIAL_FSL_LINFLEXUART=3Dy
-+CONFIG_SERIAL_FSL_LINFLEXUART_CONSOLE=3Dy
- CONFIG_SERIAL_MVEBU_UART=3Dy
- CONFIG_SERIAL_DEV_BUS=3Dy
- CONFIG_VIRTIO_CONSOLE=3Dy
---=20
-2.22.0
+I'll probably rework at the patch later, in order to disable the pedantic
+mode by default.
 
+There are currently 227 files that don't complain with the "up to line 3"
+rule, including COPYING (with should probably be excluded from the check).
+
+Patches are at:
+
+	https://git.linuxtv.org/mchehab/experimental.git/log/?h=spdx_pedantic
+
+Btw, most violations are due to:
+
+/*
+ * SPDX...
+
+Regards,
+Mauro
