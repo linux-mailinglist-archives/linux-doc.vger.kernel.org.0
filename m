@@ -2,116 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F125ABDE3
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Sep 2019 18:41:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 90954ABECF
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Sep 2019 19:33:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2391839AbfIFQlY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 6 Sep 2019 12:41:24 -0400
-Received: from smtp1.goneo.de ([85.220.129.30]:54488 "EHLO smtp1.goneo.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1732541AbfIFQlY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 6 Sep 2019 12:41:24 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by smtp1.goneo.de (Postfix) with ESMTP id 89F78241179;
-        Fri,  6 Sep 2019 18:41:19 +0200 (CEST)
-X-Virus-Scanned: by goneo
-X-Spam-Flag: NO
-X-Spam-Score: -2.782
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.782 tagged_above=-999 tests=[ALL_TRUSTED=-1,
-        AWL=0.118, BAYES_00=-1.9] autolearn=ham
-Received: from smtp1.goneo.de ([127.0.0.1])
-        by localhost (smtp1.goneo.de [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id 1OXLey5hysWb; Fri,  6 Sep 2019 18:41:18 +0200 (CEST)
-Received: from [192.168.1.127] (dyndsl-037-138-233-152.ewe-ip-backbone.de [37.138.233.152])
-        by smtp1.goneo.de (Postfix) with ESMTPSA id A237F23FE7D;
-        Fri,  6 Sep 2019 18:41:17 +0200 (CEST)
+        id S2388209AbfIFRdr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 6 Sep 2019 13:33:47 -0400
+Received: from smtprelay0102.hostedemail.com ([216.40.44.102]:41097 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1727381AbfIFRdq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 6 Sep 2019 13:33:46 -0400
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay01.hostedemail.com (Postfix) with ESMTP id 11459100E86C4;
+        Fri,  6 Sep 2019 17:33:45 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 50,0,0,,d41d8cd98f00b204,joe@perches.com,:::::::::::::::::::,RULES_HIT:41:355:379:599:967:973:982:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1540:1593:1594:1711:1730:1747:1777:1792:2197:2199:2393:2525:2560:2563:2682:2685:2828:2859:2933:2937:2939:2942:2945:2947:2951:2954:3022:3138:3139:3140:3141:3142:3352:3622:3653:3865:3866:3867:3868:3871:3872:3934:3936:3938:3941:3944:3947:3950:3953:3956:3959:4321:5007:6117:7901:9025:10004:10400:10848:11026:11232:11658:11914:12043:12297:12438:12555:12740:12760:12895:13069:13163:13229:13311:13357:13439:14181:14659:14721:21080:21221:21433:21451:21627:30054:30060:30070:30091,0,RBL:47.151.152.152:@perches.com:.lbl8.mailshell.net-62.8.0.100 64.201.201.201,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:fn,MSBL:0,DNSBL:neutral,Custom_rules:0:0:0,LFtime:27,LUA_SUMMARY:none
+X-HE-Tag: shape57_207efb1258f13
+X-Filterd-Recvd-Size: 2276
+Received: from XPS-9350.home (unknown [47.151.152.152])
+        (Authenticated sender: joe@perches.com)
+        by omf09.hostedemail.com (Postfix) with ESMTPA;
+        Fri,  6 Sep 2019 17:33:43 +0000 (UTC)
+Message-ID: <9d30210a2d024aae4c36c8995019cdeab29e1e19.camel@perches.com>
 Subject: Re: [PATCH] docs: license-rules.txt: cover SPDX headers on Python
  scripts
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+From:   Joe Perches <joe@perches.com>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Linux Media Mailing List <linux-media@vger.kernel.org>,
         Mauro Carvalho Chehab <mchehab@infradead.org>,
-        Joe Perches <joe@perches.com>, linux-kernel@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
         Jessica Yu <jeyu@kernel.org>,
         Federico Vaga <federico.vaga@vaga.pv.it>,
         Thomas Gleixner <tglx@linutronix.de>, linux-doc@vger.kernel.org
+Date:   Fri, 06 Sep 2019 10:33:42 -0700
+In-Reply-To: <20190906083457.7e7934ec@coco.lan>
 References: <20190905055614.7958918b@coco.lan>
- <88e638eb959095ab6657d295f9f8c27169569bf2.1567675272.git.mchehab+samsung@kernel.org>
- <20190905065701.4744e66a@lwn.net> <20190905141723.GB25790@kroah.com>
-From:   Markus Heiser <markus.heiser@darmarit.de>
-Message-ID: <14b7cc52-5814-36d6-2625-5aa7eea20082@darmarit.de>
-Date:   Fri, 6 Sep 2019 18:41:17 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.8.0
+         <88e638eb959095ab6657d295f9f8c27169569bf2.1567675272.git.mchehab+samsung@kernel.org>
+         <20190905092703.GA30899@kroah.com> <20190905090701.37dcf75e@coco.lan>
+         <b32c2e46b91e7bcda2a9bd140673f06d71b2487a.camel@perches.com>
+         <20190906083457.7e7934ec@coco.lan>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.32.1-2 
 MIME-Version: 1.0
-In-Reply-To: <20190905141723.GB25790@kroah.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: de-DE
 Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-Am 05.09.19 um 16:17 schrieb Greg Kroah-Hartman:
-> On Thu, Sep 05, 2019 at 06:57:01AM -0600, Jonathan Corbet wrote:
->> On Thu,  5 Sep 2019 06:23:13 -0300
->> Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
->>
->>> Python's PEP-263 [1] dictates that an script that needs to default to
->>> UTF-8 encoding has to follow this rule:
->>>
->>> 	'Python will default to ASCII as standard encoding if no other
->>> 	 encoding hints are given.
->>>
->>> 	 To define a source code encoding, a magic comment must be placed
->>> 	 into the source files either as first or second line in the file'
->>
->> So this is only Python 2, right?  Python 3 is UTF8 by default.  Given that
->> Python 2 is EOL in January, is this something we should be concerned
->> about?  Or should we instead be making sure that all the Python we have
->> in-tree works properly with Python 3 and be done with it?
+On Fri, 2019-09-06 at 08:34 -0300, Mauro Carvalho Chehab wrote:
+> I did some changes on it, plus one change at the pedantic mode of
+> scripts/spdxcheck.py, and placed the corresponding patches at:
 > 
-> I recommend just using python 3 everywhere and be done with it as there
-> are already many distros that default to that already.
+> 	https://git.linuxtv.org/mchehab/experimental.git/log/?h=spdx_pedantic
 
-As far as I know: many distros have installed py3 and py2 interpreter
-by default.  Mostly for internal purpose the distros use the py3 but
-the 'python' command is default binded to a py2 interpreter.
+Your script needs a modification of this line:
 
-About Linux distros and python2 & python3 read:
+    $spdx = $1 if m/(SPDX-License-Identifier:.*)/;
 
-   https://www.python.org/dev/peps/pep-0394/
+This is on $_ and not $spdx.
 
-In short: command 'python' mostly refers to py2 interpreters as long as py2 is
-supported, later the distros will remove the python2 stack.  So it depends on
-the distro and your alternatives(8) setup.  The common rules for distros are:
+This line needs to be:
 
-   https://www.python.org/dev/peps/pep-0394/#for-python-runtime-distributors
+    $spdx = $1 if $spdx =~ m/(SPDX-License-Identifier:.*)/;
 
-and what debian says:
-
-   https://debian-python.readthedocs.io/en/latest/debian-policy.html#versions
-
-IMO we can't predict what the python command will call py2 or py3 interpreter.
-And we scould not fergett that not all (build hosts) are using up to date
-
-At least I have to say that it is always recommended to use a
-virtualenv build up using requirements.txt and option
-
-May we can and add option "-p python3" to:
-
+Otherwise the script produces:
+---
+diff --git a/tools/perf/util/rlimit.h b/tools/perf/util/rlimit.h
+index 9f59d8e..5d975b9 100644
+--- a/tools/perf/util/rlimit.h
++++ b/tools/perf/util/rlimit.h
+@@ -1,6 +1,6 @@
++/* SPDX-License-Identifier: LGPL-2.1 */ */
+ #ifndef __PERF_RLIMIT_H_
+ #define __PERF_RLIMIT_H_
+-/* SPDX-License-Identifier: LGPL-2.1 */
  
-https://www.kernel.org/doc/html/latest/doc-guide/sphinx.html?highlight=virtualenv#sphinx-install
+ void rlimit__bump_memlock(void);
+ #endif // __PERF_RLIMIT_H_
 
-  $ virtualenv -p python3 sphinx_1.7.9
-  $ . sphinx_1.7.9/bin/activate
-  (sphinx_1.7.9) $ pip install -r Documentation/sphinx/requirements.txt
 
-BTW: I always recomend to use (support) up-to-date py-packages, but we had
-this discussion already.
-
-  -- Markus --
