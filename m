@@ -2,61 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D950AAD997
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Sep 2019 15:04:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B2F45ADF12
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Sep 2019 20:38:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725897AbfIINE7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 9 Sep 2019 09:04:59 -0400
-Received: from mx2.suse.de ([195.135.220.15]:38606 "EHLO mx1.suse.de"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1729256AbfIINE7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 9 Sep 2019 09:04:59 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx1.suse.de (Postfix) with ESMTP id CF73EB0F2;
-        Mon,  9 Sep 2019 13:04:57 +0000 (UTC)
-From:   Thomas Zimmermann <tzimmermann@suse.de>
-To:     daniel@ffwll.ch, kraxel@redhat.com, airlied@linux.ie,
-        corbet@lwn.net, z.liuxinliang@hisilicon.com, zourongrong@gmail.com,
-        kong.kongxinwei@hisilicon.com, puck.chen@hisilicon.com,
-        hdegoede@redhat.com, sam@ravnborg.org, yc_chen@aspeedtech.com
-Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        virtualization@lists.linux-foundation.org,
-        Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 4/4] drm/vram: Unconditonally set BO call-back functions
-Date:   Mon,  9 Sep 2019 15:04:53 +0200
-Message-Id: <20190909130453.6718-5-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190909130453.6718-1-tzimmermann@suse.de>
-References: <20190909130453.6718-1-tzimmermann@suse.de>
+        id S1727566AbfIISiY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 Sep 2019 14:38:24 -0400
+Received: from tartarus.angband.pl ([54.37.238.230]:41248 "EHLO
+        tartarus.angband.pl" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727202AbfIISiY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Sep 2019 14:38:24 -0400
+Received: from kilobyte by tartarus.angband.pl with local (Exim 4.92)
+        (envelope-from <kilobyte@angband.pl>)
+        id 1i7OYL-0003LS-UH; Mon, 09 Sep 2019 20:38:17 +0200
+Date:   Mon, 9 Sep 2019 20:38:17 +0200
+From:   Adam Borowski <kilobyte@angband.pl>
+To:     Pavel Machek <pavel@ucw.cz>
+Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Documentation: sysrq: don't recommend 'S' 'U' before 'B'
+Message-ID: <20190909183817.GB12602@angband.pl>
+References: <20190903160840.56652-1-kilobyte@angband.pl>
+ <20190909083331.GA27626@amd>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
+In-Reply-To: <20190909083331.GA27626@amd>
+X-Junkbait: aaron@angband.pl, zzyx@angband.pl
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-SA-Exim-Connect-IP: <locally generated>
+X-SA-Exim-Mail-From: kilobyte@angband.pl
+X-SA-Exim-Scanned: No (on tartarus.angband.pl); SAEximRunCond expanded to false
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The statement's condition is always true.
+On Mon, Sep 09, 2019 at 10:33:31AM +0200, Pavel Machek wrote:
+> On Tue 2019-09-03 18:08:40, Adam Borowski wrote:
+> > This advice is obsolete and slightly harmful for filesystems from this
+> > millenium: any modern filesystem can handle unexpected crashes without
+> > requiring fsck -- and on the other hand, trying to write to the disk when
+> > the kernel is in a bad state risks introducing corruption.
+> 
+> Actually no, I don't think it is good idea.
+> 
+> sync is still useful these days -- you want the current data to be
+> written to disk; true, you'll not have to do fsck, but you may lose
+> your current data.
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
----
- drivers/gpu/drm/drm_gem_vram_helper.c | 3 +--
- 1 file changed, 1 insertion(+), 2 deletions(-)
+Well yeah, but that's only if you have a reason to suspect there's some data
+you care about.  I'd say that in the usual case, saving whatever volatile
+state the system has tends to be not worth risking corruption.
 
-diff --git a/drivers/gpu/drm/drm_gem_vram_helper.c b/drivers/gpu/drm/drm_gem_vram_helper.c
-index 73e81e3a8724..13717ae65da5 100644
---- a/drivers/gpu/drm/drm_gem_vram_helper.c
-+++ b/drivers/gpu/drm/drm_gem_vram_helper.c
-@@ -91,8 +91,7 @@ static int drm_gem_vram_init(struct drm_device *dev,
- 	int ret;
- 	size_t acc_size;
- 
--	if (!gbo->bo.base.funcs)
--		gbo->bo.base.funcs = &drm_gem_vram_object_funcs;
-+	gbo->bo.base.funcs = &drm_gem_vram_object_funcs;
- 
- 	ret = drm_gem_object_init(dev, &gbo->bo.base, size);
- 	if (ret)
+Ie, the default advice for a locked-up system should be SysRq B.
+
+Is there some other wording that you would be happier with?
+
+> > For ext2, any unsafe shutdown meant widespread breakage, but it's no longer
+> > a reasonable filesystem for any non-special use.
+> > 
+> > Signed-off-by: Adam Borowski <kilobyte@angband.pl>
+> > ---
+> >  Documentation/admin-guide/sysrq.rst | 20 +++++++++-----------
+> >  1 file changed, 9 insertions(+), 11 deletions(-)
+> > 
+> > diff --git a/Documentation/admin-guide/sysrq.rst b/Documentation/admin-guide/sysrq.rst
+> > index 7b9035c01a2e..72b2cfb066f4 100644
+> > --- a/Documentation/admin-guide/sysrq.rst
+> > +++ b/Documentation/admin-guide/sysrq.rst
+> > @@ -171,22 +171,20 @@ It seems others find it useful as (System Attention Key) which is
+> >  useful when you want to exit a program that will not let you switch consoles.
+> >  (For example, X or a svgalib program.)
+> >  
+> > -``reboot(b)`` is good when you're unable to shut down. But you should also
+> > -``sync(s)`` and ``umount(u)`` first.
+> > +``reboot(b)`` is good when you're unable to shut down, it is an equivalent
+> > +of pressing the "reset" button.
+> >  
+> >  ``crash(c)`` can be used to manually trigger a crashdump when the system is hung.
+> >  Note that this just triggers a crash if there is no dump mechanism available.
+> >  
+> > -``sync(s)`` is great when your system is locked up, it allows you to sync your
+> > -disks and will certainly lessen the chance of data loss and fscking. Note
+> > -that the sync hasn't taken place until you see the "OK" and "Done" appear
+> > -on the screen. (If the kernel is really in strife, you may not ever get the
+> > -OK or Done message...)
+> > +``sync(s)`` is handy before yanking removable medium or after using a rescue
+> > +shell that provides no graceful shutdown -- it will ensure your data is
+> > +safely written to the disk. Note that the sync hasn't taken place until you see
+> > +the "OK" and "Done" appear on the screen.
+> >  
+> > -``umount(u)`` is basically useful in the same ways as ``sync(s)``. I generally
+> > -``sync(s)``, ``umount(u)``, then ``reboot(b)`` when my system locks. It's saved
+> > -me many a fsck. Again, the unmount (remount read-only) hasn't taken place until
+> > -you see the "OK" and "Done" message appear on the screen.
+> > +``umount(u)`` can be used to mark filesystems as properly unmounted. From the
+> > +running system's point of view, they will be remounted read-only. The remount
+> > +isn't complete until you see the "OK" and "Done" message appear on the screen.
+> >  
+> >  The loglevels ``0``-``9`` are useful when your console is being flooded with
+> >  kernel messages you do not want to see. Selecting ``0`` will prevent all but
+
+
+Meow!
 -- 
-2.23.0
-
+⢀⣴⠾⠻⢶⣦⠀
+⣾⠁⢰⠒⠀⣿⡁
+⢿⡄⠘⠷⠚⠋⠀ I was born a dumb, ugly and work-loving kid, then I got swapped on
+⠈⠳⣄⠀⠀⠀⠀ the maternity ward.
