@@ -2,67 +2,52 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BE9E5B565A
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Sep 2019 21:43:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EBAA9B58B2
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Sep 2019 01:41:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728281AbfIQTnH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 Sep 2019 15:43:07 -0400
-Received: from bhuna.collabora.co.uk ([46.235.227.227]:44008 "EHLO
-        bhuna.collabora.co.uk" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725862AbfIQTnG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Sep 2019 15:43:06 -0400
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-        (Authenticated sender: tonyk)
-        with ESMTPSA id 8F21C28DE06
-From:   =?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@collabora.com>
-To:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     corbet@lwn.net, kernel@collabora.com,
-        =?UTF-8?q?Andr=C3=A9=20Almeida?= <andrealmeid@collabora.com>
-Subject: [PATCH 2/2] kernel-doc: add support for ____cacheline_aligned_in_smp attribute
-Date:   Tue, 17 Sep 2019 16:41:46 -0300
-Message-Id: <20190917194146.35642-3-andrealmeid@collabora.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20190917194146.35642-1-andrealmeid@collabora.com>
-References: <20190917194146.35642-1-andrealmeid@collabora.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+        id S1727468AbfIQXkT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 Sep 2019 19:40:19 -0400
+Received: from mail.kernel.org ([198.145.29.99]:43480 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725902AbfIQXkT (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 17 Sep 2019 19:40:19 -0400
+Subject: Re: [GIT PULL] Documentation for 5.4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1568763618;
+        bh=Ne0yRbdT8PpLUK/TPK3mDvpPWz3ogAq3s+79svNELtw=;
+        h=From:In-Reply-To:References:Date:To:Cc:From;
+        b=EIXEkLp3nWp3SiqWA/lWfqmIrd4Cqu+No4b+UnwNL7VlfXMRZJ8HyR9DIV6EbNTfw
+         2rFzxQLGu2H92adjC1mUvcO7E7RFAGQ3SAZyYnybQ3g/xfMKpPK20pnUuCo/YfPrzt
+         k+0YAglrMXEEIS3Pju36k8h9Xs/CImbX8v+/yrew=
+From:   pr-tracker-bot@kernel.org
+In-Reply-To: <20190916001918.7c9b69f7@lwn.net>
+References: <20190916001918.7c9b69f7@lwn.net>
+X-PR-Tracked-List-Id: <linux-kernel.vger.kernel.org>
+X-PR-Tracked-Message-Id: <20190916001918.7c9b69f7@lwn.net>
+X-PR-Tracked-Remote: git://git.lwn.net/linux.git tags/docs-5.4
+X-PR-Tracked-Commit-Id: fe013f8bc160d79c6e33bb66d9bb0cd24949274c
+X-PR-Merge-Tree: torvalds/linux.git
+X-PR-Merge-Refname: refs/heads/master
+X-PR-Merge-Commit-Id: 7c672abc120a55f678e5571ae2ee93f06ca4d7f9
+Message-Id: <156876361890.26432.9962895084250559819.pr-tracker-bot@kernel.org>
+Date:   Tue, 17 Sep 2019 23:40:18 +0000
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Linus Torvalds <torvalds@linux-foundation.org>,
+        LKML <linux-kernel@vger.kernel.org>, linux-doc@vger.kernel.org
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Subroutine dump_struct uses type attributes to check if the struct
-syntax is valid. Then, it removes all attributes before using it for
-output. `____cacheline_aligned_in_smp` is an attribute that is
-not included in both steps. Add it, since it is used by kernel structs.
+The pull request you sent on Mon, 16 Sep 2019 00:19:18 -0600:
 
-Signed-off-by: André Almeida <andrealmeid@collabora.com>
----
- scripts/kernel-doc | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+> git://git.lwn.net/linux.git tags/docs-5.4
 
-diff --git a/scripts/kernel-doc b/scripts/kernel-doc
-index f1faa036ee59..5505750261d7 100755
---- a/scripts/kernel-doc
-+++ b/scripts/kernel-doc
-@@ -1062,7 +1062,7 @@ sub dump_struct($$) {
-     my $x = shift;
-     my $file = shift;
- 
--    if ($x =~ /(struct|union)\s+(\w+)\s*\{(.*)\}(\s*(__packed|__aligned|__attribute__\s*\(\([a-z0-9,_\s\(\)]*\)\)))*/) {
-+    if ($x =~ /(struct|union)\s+(\w+)\s*\{(.*)\}(\s*(__packed|__aligned|____cacheline_aligned_in_smp|__attribute__\s*\(\([a-z0-9,_\s\(\)]*\)\)))*/) {
- 	my $decl_type = $1;
- 	$declaration_name = $2;
- 	my $members = $3;
-@@ -1077,6 +1077,7 @@ sub dump_struct($$) {
- 	$members =~ s/\s*__aligned\s*\([^;]*\)/ /gos;
- 	$members =~ s/\s*__packed\s*/ /gos;
- 	$members =~ s/\s*CRYPTO_MINALIGN_ATTR/ /gos;
-+	$members =~ s/\s*____cacheline_aligned_in_smp/ /gos;
- 	# replace DECLARE_BITMAP
- 	$members =~ s/DECLARE_BITMAP\s*\(([^,)]+),\s*([^,)]+)\)/unsigned long $1\[BITS_TO_LONGS($2)\]/gos;
- 	# replace DECLARE_HASHTABLE
+has been merged into torvalds/linux.git:
+https://git.kernel.org/torvalds/c/7c672abc120a55f678e5571ae2ee93f06ca4d7f9
+
+Thank you!
+
 -- 
-2.23.0
-
+Deet-doot-dot, I am a bot.
+https://korg.wiki.kernel.org/userdoc/prtracker
