@@ -2,27 +2,27 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BAD9CB65D8
+	by mail.lfdr.de (Postfix) with ESMTP id A3E47B65D7
 	for <lists+linux-doc@lfdr.de>; Wed, 18 Sep 2019 16:23:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728548AbfIROXO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S1729153AbfIROXO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Wed, 18 Sep 2019 10:23:14 -0400
-Received: from mx2.suse.de ([195.135.220.15]:33178 "EHLO mx1.suse.de"
+Received: from mx2.suse.de ([195.135.220.15]:33190 "EHLO mx1.suse.de"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1727558AbfIROXO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S1728548AbfIROXO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Wed, 18 Sep 2019 10:23:14 -0400
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx1.suse.de (Postfix) with ESMTP id 05273B675;
+        by mx1.suse.de (Postfix) with ESMTP id 052FEB676;
         Wed, 18 Sep 2019 14:23:11 +0000 (UTC)
 From:   Thomas Zimmermann <tzimmermann@suse.de>
 To:     airlied@linux.ie, daniel@ffwll.ch, kraxel@redhat.com,
         sam@ravnborg.org, yc_chen@aspeedtech.com, corbet@lwn.net
 Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
         Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH 03/11] drm/ast: Move cursor update code to ast_show_cursor()
-Date:   Wed, 18 Sep 2019 16:22:59 +0200
-Message-Id: <20190918142307.27127-4-tzimmermann@suse.de>
+Subject: [PATCH 04/11] drm/ast: Reserve space for double-buffered cursor image
+Date:   Wed, 18 Sep 2019 16:23:00 +0200
+Message-Id: <20190918142307.27127-5-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20190918142307.27127-1-tzimmermann@suse.de>
 References: <20190918142307.27127-1-tzimmermann@suse.de>
@@ -33,171 +33,43 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-A call to ast's show-cursor function now receives the cursor image
-and updates the buffer. The change splits off image update and
-base-address update into separate functions. The will help with
-the upcoming change to VRAM buffers.
+With the patch, we reserve 2x 16 KiB at the high end of video memory,
+with each frame aligned to an 8-byte boundary. The remaining memory is
+available for GEM VRAM buffer objects.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/ast/ast_mode.c | 120 +++++++++++++++++++--------------
- 1 file changed, 69 insertions(+), 51 deletions(-)
+ drivers/gpu/drm/ast/ast_ttm.c | 13 ++++++++++---
+ 1 file changed, 10 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/ast/ast_mode.c b/drivers/gpu/drm/ast/ast_mode.c
-index a4cbf2d5ee0a..1294f0612fd5 100644
---- a/drivers/gpu/drm/ast/ast_mode.c
-+++ b/drivers/gpu/drm/ast/ast_mode.c
-@@ -1064,23 +1064,6 @@ static void ast_i2c_destroy(struct ast_i2c_chan *i2c)
- 	kfree(i2c);
- }
+diff --git a/drivers/gpu/drm/ast/ast_ttm.c b/drivers/gpu/drm/ast/ast_ttm.c
+index fad34106083a..8e6a1d8917d0 100644
+--- a/drivers/gpu/drm/ast/ast_ttm.c
++++ b/drivers/gpu/drm/ast/ast_ttm.c
+@@ -35,13 +35,20 @@
  
--static void ast_show_cursor(struct drm_crtc *crtc)
--{
--	struct ast_private *ast = crtc->dev->dev_private;
--	u8 jreg;
--
--	jreg = 0x2;
--	/* enable ARGB cursor */
--	jreg |= 1;
--	ast_set_index_reg_mask(ast, AST_IO_CRTC_PORT, 0xcb, 0xfc, jreg);
--}
--
--static void ast_hide_cursor(struct drm_crtc *crtc)
--{
--	struct ast_private *ast = crtc->dev->dev_private;
--	ast_set_index_reg_mask(ast, AST_IO_CRTC_PORT, 0xcb, 0xfc, 0x00);
--}
--
- static u32 copy_cursor_image(u8 *src, u8 *dst, int width, int height)
+ int ast_mm_init(struct ast_private *ast)
  {
- 	union {
-@@ -1137,6 +1120,72 @@ static u32 copy_cursor_image(u8 *src, u8 *dst, int width, int height)
- 	return csum;
- }
- 
-+static int ast_cursor_update(void *dst, void *src, unsigned int width,
-+			     unsigned int height)
-+{
-+	u32 csum;
-+
-+	/* do data transfer to cursor cache */
-+	csum = copy_cursor_image(src, dst, width, height);
-+
-+	/* write checksum + signature */
-+	dst += AST_HWC_SIZE;
-+	writel(csum, dst);
-+	writel(width, dst + AST_HWC_SIGNATURE_SizeX);
-+	writel(height, dst + AST_HWC_SIGNATURE_SizeY);
-+	writel(0, dst + AST_HWC_SIGNATURE_HOTSPOTX);
-+	writel(0, dst + AST_HWC_SIGNATURE_HOTSPOTY);
-+
-+	return 0;
-+}
-+
-+static void ast_cursor_set_base(struct ast_private *ast, u64 address)
-+{
-+	u8 addr0 = (address >> 3) & 0xff;
-+	u8 addr1 = (address >> 11) & 0xff;
-+	u8 addr2 = (address >> 19) & 0xff;
-+
-+	ast_set_index_reg(ast, AST_IO_CRTC_PORT, 0xc8, addr0);
-+	ast_set_index_reg(ast, AST_IO_CRTC_PORT, 0xc9, addr1);
-+	ast_set_index_reg(ast, AST_IO_CRTC_PORT, 0xca, addr2);
-+}
-+
-+static int ast_show_cursor(struct drm_crtc *crtc, void *dst, void *src,
-+			   unsigned int width, unsigned int height,
-+			   u64 dst_gpu)
-+{
-+	struct ast_private *ast = crtc->dev->dev_private;
-+	struct ast_crtc *ast_crtc = to_ast_crtc(crtc);
-+	int ret;
-+	u8 jreg;
-+
-+	dst += (AST_HWC_SIZE + AST_HWC_SIGNATURE_SIZE)*ast->next_cursor;
-+
-+	ret = ast_cursor_update(dst, src, width, height);
-+	if (ret)
-+		return ret;
-+	ast_cursor_set_base(ast, dst_gpu);
-+
-+	ast->next_cursor = (ast->next_cursor + 1) % AST_DEFAULT_HWC_NUM;
-+
-+	ast_crtc->offset_x = AST_MAX_HWC_WIDTH - width;
-+	ast_crtc->offset_y = AST_MAX_HWC_WIDTH - height;
-+
-+	jreg = 0x2;
-+	/* enable ARGB cursor */
-+	jreg |= 1;
-+	ast_set_index_reg_mask(ast, AST_IO_CRTC_PORT, 0xcb, 0xfc, jreg);
-+
-+	return 0;
-+}
-+
-+static void ast_hide_cursor(struct drm_crtc *crtc)
-+{
-+	struct ast_private *ast = crtc->dev->dev_private;
-+
-+	ast_set_index_reg_mask(ast, AST_IO_CRTC_PORT, 0xcb, 0xfc, 0x00);
-+}
-+
- static int ast_cursor_set(struct drm_crtc *crtc,
- 			  struct drm_file *file_priv,
- 			  uint32_t handle,
-@@ -1144,12 +1193,9 @@ static int ast_cursor_set(struct drm_crtc *crtc,
- 			  uint32_t height)
- {
- 	struct ast_private *ast = crtc->dev->dev_private;
--	struct ast_crtc *ast_crtc = to_ast_crtc(crtc);
- 	struct drm_gem_object *obj;
- 	struct drm_gem_vram_object *gbo;
- 	s64 dst_gpu;
--	u64 gpu_addr;
--	u32 csum;
++	unsigned long cursor_size;
+ 	struct drm_vram_mm *vmm;
  	int ret;
- 	u8 *src, *dst;
+ 	struct drm_device *dev = ast->dev;
  
-@@ -1185,37 +1231,9 @@ static int ast_cursor_set(struct drm_crtc *crtc,
- 		goto err_drm_gem_vram_vunmap;
- 	}
- 
--	dst += (AST_HWC_SIZE + AST_HWC_SIGNATURE_SIZE)*ast->next_cursor;
--
--	/* do data transfer to cursor cache */
--	csum = copy_cursor_image(src, dst, width, height);
--
--	/* write checksum + signature */
--	{
--		struct drm_gem_vram_object *dst_gbo =
--			drm_gem_vram_of_gem(ast->cursor_cache);
--		u8 *dst = drm_gem_vram_kmap(dst_gbo, false, NULL);
--		dst += (AST_HWC_SIZE + AST_HWC_SIGNATURE_SIZE)*ast->next_cursor + AST_HWC_SIZE;
--		writel(csum, dst);
--		writel(width, dst + AST_HWC_SIGNATURE_SizeX);
--		writel(height, dst + AST_HWC_SIGNATURE_SizeY);
--		writel(0, dst + AST_HWC_SIGNATURE_HOTSPOTX);
--		writel(0, dst + AST_HWC_SIGNATURE_HOTSPOTY);
--
--		/* set pattern offset */
--		gpu_addr = (u64)dst_gpu;
--		gpu_addr += (AST_HWC_SIZE + AST_HWC_SIGNATURE_SIZE)*ast->next_cursor;
--		gpu_addr >>= 3;
--		ast_set_index_reg(ast, AST_IO_CRTC_PORT, 0xc8, gpu_addr & 0xff);
--		ast_set_index_reg(ast, AST_IO_CRTC_PORT, 0xc9, (gpu_addr >> 8) & 0xff);
--		ast_set_index_reg(ast, AST_IO_CRTC_PORT, 0xca, (gpu_addr >> 16) & 0xff);
--	}
--	ast_crtc->offset_x = AST_MAX_HWC_WIDTH - width;
--	ast_crtc->offset_y = AST_MAX_HWC_WIDTH - height;
--
--	ast->next_cursor = (ast->next_cursor + 1) % AST_DEFAULT_HWC_NUM;
--
--	ast_show_cursor(crtc);
-+	ret = ast_show_cursor(crtc, dst, src, width, height, dst_gpu);
-+	if (ret)
-+		goto err_drm_gem_vram_kunmap;
- 
- 	drm_gem_vram_vunmap(gbo, src);
- 	drm_gem_object_put_unlocked(obj);
+-	vmm = drm_vram_helper_alloc_mm(
+-		dev, pci_resource_start(dev->pdev, 0),
+-		ast->vram_size);
++	/* At the high end of video memory, we reserve space for
++	 * two cursor images. The cursor plane uses this memory to
++	 * store a double-buffered image of the current cursor.
++	 */
++	cursor_size = roundup((AST_HWC_SIZE + AST_HWC_SIGNATURE_SIZE),
++			      PAGE_SIZE) * AST_DEFAULT_HWC_NUM;
++
++	vmm = drm_vram_helper_alloc_mm(dev, pci_resource_start(dev->pdev, 0),
++				       ast->vram_size - cursor_size);
+ 	if (IS_ERR(vmm)) {
+ 		ret = PTR_ERR(vmm);
+ 		DRM_ERROR("Error initializing VRAM MM; %d\n", ret);
 -- 
 2.23.0
 
