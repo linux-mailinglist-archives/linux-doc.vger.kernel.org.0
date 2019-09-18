@@ -2,135 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CD192B5EEF
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Sep 2019 10:19:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 30139B65D9
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Sep 2019 16:23:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730024AbfIRITR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Sep 2019 04:19:17 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:40482 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1730015AbfIRITQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Sep 2019 04:19:16 -0400
-Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x8I8HWZl031240
-        for <linux-doc@vger.kernel.org>; Wed, 18 Sep 2019 04:19:15 -0400
-Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 2v3gqk0kf2-1
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-        for <linux-doc@vger.kernel.org>; Wed, 18 Sep 2019 04:19:15 -0400
-Received: from localhost
-        by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
-        for <linux-doc@vger.kernel.org> from <sourabhjain@linux.ibm.com>;
-        Wed, 18 Sep 2019 09:19:13 +0100
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (9.149.109.195)
-        by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
-        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-        Wed, 18 Sep 2019 09:19:11 +0100
-Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com [9.149.105.58])
-        by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x8I8JApK36241542
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 18 Sep 2019 08:19:10 GMT
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 0ECF24C059;
-        Wed, 18 Sep 2019 08:19:10 +0000 (GMT)
-Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id B0AF64C04E;
-        Wed, 18 Sep 2019 08:19:08 +0000 (GMT)
-Received: from localhost.localdomain (unknown [9.124.35.138])
-        by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Wed, 18 Sep 2019 08:19:08 +0000 (GMT)
-Subject: Re: [PATCH v3] powerpc/fadump: sysfs for fadump memory reservation
-To:     Hari Bathini <hbathini@linux.ibm.com>,
-        Michael Ellerman <mpe@ellerman.id.au>
-Cc:     linux-doc@vger.kernel.org, mahesh@linux.vnet.ibm.com,
-        corbet@lwn.net, linux-kernel@vger.kernel.org,
-        gregkh@linuxfoundation.org, linuxppc-dev@lists.ozlabs.org
-References: <20190810175905.7761-1-sourabhjain@linux.ibm.com>
- <53311fa4-2cce-1eb6-1aae-0c835e06eb24@linux.ibm.com>
- <cf4fdb60-438c-bc4e-d759-1fbb27364c50@linux.ibm.com>
- <f53e4cfe-57cb-d8a6-385a-fa6243940573@linux.ibm.com>
- <f8e9cbdd-1926-081d-c8e6-f9d55408fe51@linux.ibm.com>
- <87sgpn2t2w.fsf@concordia.ellerman.id.au>
- <b3540b13-20f9-6995-831e-b7f88121fd1f@linux.ibm.com>
-From:   Sourabh Jain <sourabhjain@linux.ibm.com>
-Date:   Wed, 18 Sep 2019 13:49:08 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.4.0
+        id S1727558AbfIROXO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Sep 2019 10:23:14 -0400
+Received: from mx2.suse.de ([195.135.220.15]:33184 "EHLO mx1.suse.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1728507AbfIROXO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 18 Sep 2019 10:23:14 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx1.suse.de (Postfix) with ESMTP id 05B47B67C;
+        Wed, 18 Sep 2019 14:23:11 +0000 (UTC)
+From:   Thomas Zimmermann <tzimmermann@suse.de>
+To:     airlied@linux.ie, daniel@ffwll.ch, kraxel@redhat.com,
+        sam@ravnborg.org, yc_chen@aspeedtech.com, corbet@lwn.net
+Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH 00/11] drm/vram: Add VRAM buffers for HW cursors
+Date:   Wed, 18 Sep 2019 16:22:56 +0200
+Message-Id: <20190918142307.27127-1-tzimmermann@suse.de>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <b3540b13-20f9-6995-831e-b7f88121fd1f@linux.ibm.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-x-cbid: 19091808-0008-0000-0000-00000317D5C5
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19091808-0009-0000-0000-00004A365650
-Message-Id: <c9ce4153-c634-b336-6bf0-6b43b93f11b4@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-09-18_06:,,
- signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 suspectscore=0 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1908290000 definitions=main-1909180086
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+This patchset adds dedicated VRAM buffers and cleans up the memory
+management of HW cursors in ast and mgag200.
 
+The ast and mgag200 drivers support HW cursors of uncommon pixel formats.
+Both drivers manage cursor memory in dedicated GEM VRAM buffer objects
+with a double buffering scheme; either by alternating between two GEM BOs,
+or by alternating between offsets within the same GEM BO. The code is
+convoluted and can lead to memory fragmentation if the BO is stored the
+middle of VRAM. This is especially a problem on devices with only a small
+amount of video memory.
 
-On 8/27/19 11:32 AM, Hari Bathini wrote:
-> 
-> 
-> On 27/08/19 8:49 AM, Michael Ellerman wrote:
->> Hari Bathini <hbathini@linux.ibm.com> writes:
->>> On 26/08/19 4:14 PM, Sourabh Jain wrote:
->>>> On 8/26/19 3:46 PM, Sourabh Jain wrote:
->>>>> On 8/26/19 3:29 PM, Hari Bathini wrote:
->>>>>> On 10/08/19 11:29 PM, Sourabh Jain wrote:
->>>>>>> Add a sys interface to allow querying the memory reserved by
->>>>>>> fadump for saving the crash dump.
->>>>>>>
->>>>>>> Add an ABI doc entry for new sysfs interface.
->>>>>>>    - /sys/kernel/fadump_mem_reserved
->>>>>>>
->>>>>>> Signed-off-by: Sourabh Jain <sourabhjain@linux.ibm.com>
->>>>>>> ---
->>>>>>> Changelog:
->>>>>>> v1 -> v2:
->>>>>>>   - Added ABI doc for new sysfs interface.
->>>>>>>
->>>>>>> v2 -> v3:
->>>>>>>   - Updated the ABI documentation.
->>>>>>> ---
->>>>>>>
->>>>>>>  Documentation/ABI/testing/sysfs-kernel-fadump    |  6 ++++++
->>>>>>
->>>>>> Shouldn't this be Documentation/ABI/testing/sysfs-kernel-fadump_mem_reserved?
->>>>
->>>> How about documenting fadump_mem_reserved and other sysfs attributes suggested
->>>> by you in a single file Documentation/ABI/testing/sysfs-kernel-fadump?
->>>
->>> I wouldn't mind that but please do check if it is breaking a convention..
->>
->> AIUI a file named like that would hold the documentation for the files
->> inside a directory called /sys/kernel/fadump.
->>
->> And in fact that's probably where these files should live, rather than
->> just dropped directly into /sys/kernel.
-> Michael, could that be corrected now by introducing new sysfs files for FADump in
-> /sys/kernel/fadump/.
-> 
-> Also, duplicating current /sys/kernel/fadump_* files as /sys/kernel/fadump/* files
-> & eventually dropping /sys/kernel/fadump_* files sometime later..
+This patchset introduces VRAM buffers, a simple data structure that
+manages dedicated areas of VRAM. The VRAM buffer supports double-
+buffering (or more) to allow for flicker-free updates. A typical use
+case is in managing small, static buffers, such as cursors or sprites.
 
+The patchset then cleans up cursor memory management in ast and mgag200.
+To avoid the fragmentation issue, at the high end of each device's VRAM,
+a few KiB are reserved for the HW cursor. This memory is maintained by a
+double-buffered VRAM buffer. For updating the cursor image, each driver's
+cursor_set() functions fills the current back buffer and then makes it the
+front buffer.
 
-Sent a patch series that adds fadump_mem_reserved sysfs file along with reorganizing
-the existing fadump sysfs files.
+The patchset has been tested on ast and mgag200 hardware.
 
-Patch series available here:
-https://lists.ozlabs.org/pipermail/linuxppc-dev/2019-September/197100.html
+Thomas Zimmermann (11):
+  drm/vram: Add struct drm_vram_buffer to VRAM helpers
+  drm/ast: Don't call ast_show_cursor() from ast_cursor_move()
+  drm/ast: Move cursor update code to ast_show_cursor()
+  drm/ast: Reserve space for double-buffered cursor image
+  drm/ast: Store cursor in reserved memory area
+  drm/mgag200: Rename cursor functions to use mgag200_ prefix
+  drm/mgag200: Add init and fini functions for cursor handling
+  drm/mgag200: Add separate move-cursor function
+  drm/mgag200: Move cursor-image update to mgag200_show_cursor()
+  drm/mgag200: Reserve video memory for cursor plane
+  drm/mgag200: Implement cursor buffer with struct drm_vram_buffer
 
-- Sourabh Jain
+ Documentation/gpu/drm-mm.rst             |  19 +-
+ drivers/gpu/drm/ast/ast_drv.h            |   5 +-
+ drivers/gpu/drm/ast/ast_mode.c           | 198 +++++++++--------
+ drivers/gpu/drm/ast/ast_ttm.c            |  13 +-
+ drivers/gpu/drm/drm_vram_helper_common.c | 259 ++++++++++++++++++++++-
+ drivers/gpu/drm/mgag200/mgag200_cursor.c | 252 +++++++++++-----------
+ drivers/gpu/drm/mgag200/mgag200_drv.h    |  24 +--
+ drivers/gpu/drm/mgag200/mgag200_main.c   |  20 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c   |   6 +-
+ drivers/gpu/drm/mgag200/mgag200_ttm.c    |  15 +-
+ include/drm/drm_vram_helper.h            |  64 ++++++
+ 11 files changed, 607 insertions(+), 268 deletions(-)
+ create mode 100644 include/drm/drm_vram_helper.h
+
+--
+2.23.0
 
