@@ -2,238 +2,163 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C88ADB9B69
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Sep 2019 02:20:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4E97BB9CC5
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Sep 2019 08:51:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2437514AbfIUAUH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Sep 2019 20:20:07 -0400
-Received: from mail-pl1-f201.google.com ([209.85.214.201]:40889 "EHLO
-        mail-pl1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2437493AbfIUAT6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Sep 2019 20:19:58 -0400
-Received: by mail-pl1-f201.google.com with SMTP id f4so5476476plo.7
-        for <linux-doc@vger.kernel.org>; Fri, 20 Sep 2019 17:19:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=kn+0r7CDFmPHQws2Z+HRgp03O+EE7Nh4RU07v5olnXQ=;
-        b=T5BJ/ml3LmuSG+0CXgZ8AJ4j+ss53JBL9GLtI0JFOUlGqadAvbBeWprW/AZkGqKCkX
-         kH+CCd6NWp3Jc3Dfsrn04uqLh+OXRFB5zLZdmf4yr8rM8h51oQXGDsRMbm8jN3H9V5zX
-         GFJWUdCh7XpjZFKeURyr4AhYaUOz3icGzKQtJGa/bJLEcLQ8lSP+JOdUcG0G7cZFHXGv
-         dVFAxS5LFG5hd2y1mAiuV01DaT+IAC1LFJtip0AfhTTHgImrEAmywOPQNFd4CneHS5e3
-         5UihKl1AsamI2RQwYXwnS/5b5Msk2ZUnIIMIqklrqQvUzuMyaxR/3Ep8jdJC34ay8XwI
-         wOSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=kn+0r7CDFmPHQws2Z+HRgp03O+EE7Nh4RU07v5olnXQ=;
-        b=T5V8ob49k/6NdpvahGxcOuDqb58BDJaCaV8glIopWlRFSojiV0eEJOwICamybLfw++
-         OCa6lWvGMaUf7CkP6GLv35eoWIZ0hixA5bMLcgxzC2WvGVRvoiqhWlhP7pWLQelg7FXK
-         0fhSNv0jft0/t/moskuclgm148Ex6v1YkFs/eTQLIg7FjktYCWIo6uRIBNRO2dcs1NU3
-         31Zij8x0W7UpCX/4S66ni1M+EmTMjH4KwPR+pN2Fhej9dR3ou9WPKukhpMIqDzqgB92f
-         zislht1pcXJLGrZmuzcn6TiSRDBRDYU59k50jvcfjZdOHaWRFGI6quNPP/z/0iRHEtQA
-         wVnA==
-X-Gm-Message-State: APjAAAXoaOnjSZv2o85k7fObpOxUMXiw6Jx+8KgQGCqaQAlj0W5dKz5O
-        DfzEIQr+JlYNvNUnv2Jf2SHHeRdtAPGpKzjzdF+PhQ==
-X-Google-Smtp-Source: APXvYqxDY0icLnRBjQzpPrC2KX5LTAhxTzeIRmFru7uDlGKy4Wngq/ktxjMPqmMLb+o3CaD2oHpzsIcm5TdDnm45dj3Qvw==
-X-Received: by 2002:a63:1521:: with SMTP id v33mr18113645pgl.9.1569025197473;
- Fri, 20 Sep 2019 17:19:57 -0700 (PDT)
-Date:   Fri, 20 Sep 2019 17:18:55 -0700
-In-Reply-To: <20190921001855.200947-1-brendanhiggins@google.com>
-Message-Id: <20190921001855.200947-20-brendanhiggins@google.com>
-Mime-Version: 1.0
-References: <20190921001855.200947-1-brendanhiggins@google.com>
-X-Mailer: git-send-email 2.23.0.351.gc4317032e6-goog
-Subject: [PATCH v17 19/19] kunit: fix failure to build without printk
-From:   Brendan Higgins <brendanhiggins@google.com>
-To:     frowand.list@gmail.com, gregkh@linuxfoundation.org,
-        jpoimboe@redhat.com, keescook@google.com,
-        kieran.bingham@ideasonboard.com, mcgrof@kernel.org,
-        peterz@infradead.org, robh@kernel.org, sboyd@kernel.org,
-        shuah@kernel.org, tytso@mit.edu, yamada.masahiro@socionext.com
-Cc:     devicetree@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kbuild@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        linux-nvdimm@lists.01.org, linux-um@lists.infradead.org,
-        Alexander.Levin@microsoft.com, Tim.Bird@sony.com,
-        amir73il@gmail.com, dan.carpenter@oracle.com, daniel@ffwll.ch,
-        jdike@addtoit.com, joel@jms.id.au, julia.lawall@lip6.fr,
-        khilman@baylibre.com, knut.omang@oracle.com, logang@deltatee.com,
-        mpe@ellerman.id.au, pmladek@suse.com, rdunlap@infradead.org,
-        richard@nod.at, rientjes@google.com, rostedt@goodmis.org,
-        wfg@linux.intel.com, torvalds@linux-foundation.org,
-        Brendan Higgins <brendanhiggins@google.com>,
-        Stephen Rothwell <sfr@canb.auug.org.au>,
-        Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
-        Joe Perches <joe@perches.com>
-Content-Type: text/plain; charset="UTF-8"
+        id S2437328AbfIUGvp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 21 Sep 2019 02:51:45 -0400
+Received: from conuserg-11.nifty.com ([210.131.2.78]:44852 "EHLO
+        conuserg-11.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2437309AbfIUGvo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 21 Sep 2019 02:51:44 -0400
+Received: from grover.flets-west.jp (softbank126021098169.bbtec.net [126.21.98.169]) (authenticated)
+        by conuserg-11.nifty.com with ESMTP id x8L6ntFu016571;
+        Sat, 21 Sep 2019 15:49:55 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-11.nifty.com x8L6ntFu016571
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1569048596;
+        bh=tas5o108IC96vrbiA6E2q4q/CHS7VyOE8X05kkRhjv4=;
+        h=From:To:Cc:Subject:Date:From;
+        b=M2KoWggIDxhTWdR3manNk4BIAW/gVcpoBEur+qmkgpTXa/tjxMVRqeozpFHJyp6Te
+         J8DzbqMjb01sXCBY82J8SBNr1LD7x0TR3454MT8I1v6mYnxeTcaTz5dU2vcmeJHbY4
+         qwz2TjETGlDjVXj+RilqsT7SEkCvznnDgJQY96qx98HDCWHNrNs55K9tlNncuzRQC2
+         Ee+IXj0fCOlSQBN5NyiQ532f32Y9V6U+r66GtU9NL8TQlzhWZxofyfWIyOCSpiYmcf
+         THXaC7U9m+af4Zs/d+BNpm2cIc8v8dE9FTCg+InBUVvpeyChZcwBetWZnZSISwaALC
+         1HvO9uNtSVXhQ==
+X-Nifty-SrcIP: [126.21.98.169]
+From:   Masahiro Yamada <yamada.masahiro@socionext.com>
+To:     linux-kbuild@vger.kernel.org
+Cc:     Masahiro Yamada <yamada.masahiro@socionext.com>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Michal Marek <michal.lkml@markovi.net>,
+        Paul Mackerras <paulus@samba.org>,
+        clang-built-linux@googlegroups.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org
+Subject: [PATCH] kbuild: remove ar-option and KBUILD_ARFLAGS
+Date:   Sat, 21 Sep 2019 15:49:54 +0900
+Message-Id: <20190921064954.11196-1-yamada.masahiro@socionext.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Previously KUnit assumed that printk would always be present, which is
-not a valid assumption to make. Fix that by removing call to
-vprintk_emit, and calling printk directly.
+Commit 40df759e2b9e ("kbuild: Fix build with binutils <= 2.19")
+introduced ar-option and KBUILD_ARFLAGS to cope with old binutils.
 
-This fixes a build error[1] reported by Randy.
+According to Documentation/process/changes.rst, the current minimal
+supported version of binutils is 2.21 so you can assume the 'D' option
+is always supported. Not only GNU ar but also llvm-ar supports it.
 
-For context this change comes after much discussion. My first stab[2] at
-this was just to make the KUnit logging code compile out; however, it
-was agreed that if we were going to use vprintk_emit, then vprintk_emit
-should provide a no-op stub, which lead to my second attempt[3]. In
-response to me trying to stub out vprintk_emit, Sergey Senozhatsky
-suggested a way for me to remove our usage of vprintk_emit, which led to
-my third attempt at solving this[4].
+With the 'D' option hard-coded, there is no more user of ar-option
+or KBUILD_ARFLAGS.
 
-In my third version of this patch[4], I completely removed vprintk_emit,
-as suggested by Sergey; however, there was a bit of debate over whether
-Sergey's solution was the best. The debate arose due to Sergey's version
-resulting in a checkpatch warning, which resulted in a debate over
-correct printk usage. Joe Perches offered an alternative fix which was
-somewhat less far reaching than what Sergey had suggested and
-importantly relied on continuing to use %pV. Much of the debated
-centered around whether %pV should be widely used, and whether Sergey's
-version would result in object size bloat. Ultimately, we decided to go
-with Sergey's version.
-
-Reported-by: Randy Dunlap <rdunlap@infradead.org>
-Link[1]: https://lore.kernel.org/linux-kselftest/c7229254-0d90-d90e-f3df-5b6d6fc0b51f@infradead.org/
-Link[2]: https://lore.kernel.org/linux-kselftest/20190827174932.44177-1-brendanhiggins@google.com/
-Link[3]: https://lore.kernel.org/linux-kselftest/20190827234835.234473-1-brendanhiggins@google.com/
-Link[4]: https://lore.kernel.org/linux-kselftest/20190828093143.163302-1-brendanhiggins@google.com/
-Cc: Stephen Rothwell <sfr@canb.auug.org.au>
-Cc: Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>
-Cc: Joe Perches <joe@perches.com>
-Cc: Tim.Bird@sony.com
-Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-Acked-by: Randy Dunlap <rdunlap@infradead.org> # build-tested
-Reviewed-by: Petr Mladek <pmladek@suse.com>
+Signed-off-by: Masahiro Yamada <yamada.masahiro@socionext.com>
 ---
- include/kunit/test.h |  5 ++--
- lib/kunit/test.c     | 57 +++++---------------------------------------
- 2 files changed, 8 insertions(+), 54 deletions(-)
 
-diff --git a/include/kunit/test.h b/include/kunit/test.h
-index 8b7eb03d4971..dba48304b3bd 100644
---- a/include/kunit/test.h
-+++ b/include/kunit/test.h
-@@ -339,9 +339,8 @@ static inline void *kunit_kzalloc(struct kunit *test, size_t size, gfp_t gfp)
+ Documentation/kbuild/makefiles.rst | 5 -----
+ Makefile                           | 4 ----
+ arch/powerpc/boot/Makefile         | 2 +-
+ scripts/Kbuild.include             | 5 -----
+ scripts/Makefile.build             | 2 +-
+ scripts/Makefile.lib               | 2 +-
+ 6 files changed, 3 insertions(+), 17 deletions(-)
+
+diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/makefiles.rst
+index 6ba9d5365ff3..b89c88168d6a 100644
+--- a/Documentation/kbuild/makefiles.rst
++++ b/Documentation/kbuild/makefiles.rst
+@@ -954,11 +954,6 @@ When kbuild executes, the following steps are followed (roughly):
  
- void kunit_cleanup(struct kunit *test);
+ 	From commandline LDFLAGS_MODULE shall be used (see kbuild.txt).
  
--void __printf(3, 4) kunit_printk(const char *level,
--				 const struct kunit *test,
--				 const char *fmt, ...);
-+#define kunit_printk(lvl, test, fmt, ...) \
-+	printk(lvl "\t# %s: " fmt, (test)->name, ##__VA_ARGS__)
+-    KBUILD_ARFLAGS   Options for $(AR) when creating archives
+-
+-	$(KBUILD_ARFLAGS) set by the top level Makefile to "D" (deterministic
+-	mode) if this option is supported by $(AR).
+-
+     KBUILD_LDS
  
- /**
-  * kunit_info() - Prints an INFO level message associated with @test.
-diff --git a/lib/kunit/test.c b/lib/kunit/test.c
-index b2ca9b94c353..c83c0fa59cbd 100644
---- a/lib/kunit/test.c
-+++ b/lib/kunit/test.c
-@@ -16,36 +16,12 @@ static void kunit_set_failure(struct kunit *test)
- 	WRITE_ONCE(test->success, false);
- }
+ 	The linker script with full path. Assigned by the top-level Makefile.
+diff --git a/Makefile b/Makefile
+index 656a8c95789d..88b180b2cb64 100644
+--- a/Makefile
++++ b/Makefile
+@@ -498,7 +498,6 @@ export CFLAGS_KASAN CFLAGS_KASAN_NOSANITIZE CFLAGS_UBSAN
+ export KBUILD_AFLAGS AFLAGS_KERNEL AFLAGS_MODULE
+ export KBUILD_AFLAGS_MODULE KBUILD_CFLAGS_MODULE KBUILD_LDFLAGS_MODULE
+ export KBUILD_AFLAGS_KERNEL KBUILD_CFLAGS_KERNEL
+-export KBUILD_ARFLAGS
  
--static int kunit_vprintk_emit(int level, const char *fmt, va_list args)
--{
--	return vprintk_emit(0, level, NULL, 0, fmt, args);
--}
--
--static int kunit_printk_emit(int level, const char *fmt, ...)
--{
--	va_list args;
--	int ret;
--
--	va_start(args, fmt);
--	ret = kunit_vprintk_emit(level, fmt, args);
--	va_end(args);
--
--	return ret;
--}
--
--static void kunit_vprintk(const struct kunit *test,
--			  const char *level,
--			  struct va_format *vaf)
--{
--	kunit_printk_emit(level[1] - '0', "\t# %s: %pV", test->name, vaf);
--}
--
- static void kunit_print_tap_version(void)
- {
- 	static bool kunit_has_printed_tap_version;
+ # Files to ignore in find ... statements
  
- 	if (!kunit_has_printed_tap_version) {
--		kunit_printk_emit(LOGLEVEL_INFO, "TAP version 14\n");
-+		pr_info("TAP version 14\n");
- 		kunit_has_printed_tap_version = true;
- 	}
- }
-@@ -64,10 +40,8 @@ static size_t kunit_test_cases_len(struct kunit_case *test_cases)
- static void kunit_print_subtest_start(struct kunit_suite *suite)
- {
- 	kunit_print_tap_version();
--	kunit_printk_emit(LOGLEVEL_INFO, "\t# Subtest: %s\n", suite->name);
--	kunit_printk_emit(LOGLEVEL_INFO,
--			  "\t1..%zd\n",
--			  kunit_test_cases_len(suite->test_cases));
-+	pr_info("\t# Subtest: %s\n", suite->name);
-+	pr_info("\t1..%zd\n", kunit_test_cases_len(suite->test_cases));
- }
+@@ -914,9 +913,6 @@ ifdef CONFIG_RETPOLINE
+ KBUILD_CFLAGS += $(call cc-option,-fcf-protection=none)
+ endif
  
- static void kunit_print_ok_not_ok(bool should_indent,
-@@ -87,9 +61,7 @@ static void kunit_print_ok_not_ok(bool should_indent,
- 	else
- 		ok_not_ok = "not ok";
+-# use the deterministic mode of AR if available
+-KBUILD_ARFLAGS := $(call ar-option,D)
+-
+ include scripts/Makefile.kasan
+ include scripts/Makefile.extrawarn
+ include scripts/Makefile.ubsan
+diff --git a/arch/powerpc/boot/Makefile b/arch/powerpc/boot/Makefile
+index 6841bd52738b..dfbd7f22eef5 100644
+--- a/arch/powerpc/boot/Makefile
++++ b/arch/powerpc/boot/Makefile
+@@ -50,7 +50,7 @@ endif
  
--	kunit_printk_emit(LOGLEVEL_INFO,
--			  "%s%s %zd - %s\n",
--			  indent, ok_not_ok, test_number, description);
-+	pr_info("%s%s %zd - %s\n", indent, ok_not_ok, test_number, description);
- }
+ BOOTAFLAGS	:= -D__ASSEMBLY__ $(BOOTCFLAGS) -nostdinc
  
- static bool kunit_suite_has_succeeded(struct kunit_suite *suite)
-@@ -133,11 +105,11 @@ static void kunit_print_string_stream(struct kunit *test,
- 		kunit_err(test,
- 			  "Could not allocate buffer, dumping stream:\n");
- 		list_for_each_entry(fragment, &stream->fragments, node) {
--			kunit_err(test, fragment->fragment);
-+			kunit_err(test, "%s", fragment->fragment);
- 		}
- 		kunit_err(test, "\n");
- 	} else {
--		kunit_err(test, buf);
-+		kunit_err(test, "%s", buf);
- 		kunit_kfree(test, buf);
- 	}
- }
-@@ -504,20 +476,3 @@ void kunit_cleanup(struct kunit *test)
- 		kunit_resource_free(test, resource);
- 	}
- }
+-BOOTARFLAGS	:= -cr$(KBUILD_ARFLAGS)
++BOOTARFLAGS	:= -crD
+ 
+ ifdef CONFIG_CC_IS_CLANG
+ BOOTCFLAGS += $(CLANG_FLAGS)
+diff --git a/scripts/Kbuild.include b/scripts/Kbuild.include
+index e31fd6a8b2a3..956668239ef5 100644
+--- a/scripts/Kbuild.include
++++ b/scripts/Kbuild.include
+@@ -143,11 +143,6 @@ cc-ifversion = $(shell [ $(CONFIG_GCC_VERSION)0 $(1) $(2)000 ] && echo $(3) || e
+ # Usage: KBUILD_LDFLAGS += $(call ld-option, -X, -Y)
+ ld-option = $(call try-run, $(LD) $(KBUILD_LDFLAGS) $(1) -v,$(1),$(2),$(3))
+ 
+-# ar-option
+-# Usage: KBUILD_ARFLAGS := $(call ar-option,D)
+-# Important: no spaces around options
+-ar-option = $(call try-run, $(AR) rc$(1) "$$TMP",$(1),$(2))
 -
--void kunit_printk(const char *level,
--		  const struct kunit *test,
--		  const char *fmt, ...)
--{
--	struct va_format vaf;
--	va_list args;
--
--	va_start(args, fmt);
--
--	vaf.fmt = fmt;
--	vaf.va = &args;
--
--	kunit_vprintk(test, level, &vaf);
--
--	va_end(args);
--}
+ # ld-version
+ # Note this is mainly for HJ Lu's 3 number binutil versions
+ ld-version = $(shell $(LD) --version | $(srctree)/scripts/ld-version.sh)
+diff --git a/scripts/Makefile.build b/scripts/Makefile.build
+index 611bda95ac5e..f199341f04eb 100644
+--- a/scripts/Makefile.build
++++ b/scripts/Makefile.build
+@@ -395,7 +395,7 @@ $(sort $(subdir-obj-y)): $(subdir-ym) ;
+ ifdef builtin-target
+ 
+ quiet_cmd_ar_builtin = AR      $@
+-      cmd_ar_builtin = rm -f $@; $(AR) rcSTP$(KBUILD_ARFLAGS) $@ $(real-prereqs)
++      cmd_ar_builtin = rm -f $@; $(AR) cDPrST $@ $(real-prereqs)
+ 
+ $(builtin-target): $(real-obj-y) FORCE
+ 	$(call if_changed,ar_builtin)
+diff --git a/scripts/Makefile.lib b/scripts/Makefile.lib
+index 23e524027740..15895fd4ef9f 100644
+--- a/scripts/Makefile.lib
++++ b/scripts/Makefile.lib
+@@ -238,7 +238,7 @@ quiet_cmd_ld = LD      $@
+ # ---------------------------------------------------------------------------
+ 
+ quiet_cmd_ar = AR      $@
+-      cmd_ar = rm -f $@; $(AR) rcsTP$(KBUILD_ARFLAGS) $@ $(real-prereqs)
++      cmd_ar = rm -f $@; $(AR) cDPrsT $@ $(real-prereqs)
+ 
+ # Objcopy
+ # ---------------------------------------------------------------------------
 -- 
-2.23.0.351.gc4317032e6-goog
+2.17.1
 
