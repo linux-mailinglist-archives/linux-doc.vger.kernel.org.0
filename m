@@ -2,38 +2,38 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BD231BA6EA
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Sep 2019 21:47:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D76B5BAAC9
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Sep 2019 21:54:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2394491AbfIVSyB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 22 Sep 2019 14:54:01 -0400
-Received: from mail.kernel.org ([198.145.29.99]:54200 "EHLO mail.kernel.org"
+        id S1728530AbfIVTbC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 22 Sep 2019 15:31:02 -0400
+Received: from mail.kernel.org ([198.145.29.99]:46032 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2393650AbfIVSyB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 22 Sep 2019 14:54:01 -0400
+        id S2391962AbfIVStD (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 22 Sep 2019 14:49:03 -0400
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
         (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 551B621A4A;
-        Sun, 22 Sep 2019 18:53:59 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id AE2F121D71;
+        Sun, 22 Sep 2019 18:49:01 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1569178440;
+        s=default; t=1569178142;
         bh=+hscBSSiceQUDY9+VOYTuW47bvxKdbmKQzrUpDh6YtQ=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=jwIeYJoMaU40PaGqJbyZWkymzD3NS2Pv14BMtEDR6H/bXkqZrNs66Y0PwtgmvNEDH
-         dUX1yJcmUJjsAxGswiBceljnYw8HRveuMADqOXvg1RIVUk0Q5T0CggC326xoV6qgZk
-         DjPnu9VCuRPFGrJGQhgTVWPoArQJ6CWDS2YyCIUY=
+        b=B/it5WjnLOwm+MJZIRh0D/h67FS36mVvEgxmn4f4C47bk3ojwWqykZbMm2Y/IvzwM
+         2EZlatYg3w/s4M7vq5nC0hnWqNcn6WX42/L1QtcjwO8Rgzf/ESKV7LndsUtoo30dce
+         vm60yRn73eECxGvatNdSouqhpMaNJkPyqw80haXY=
 From:   Sasha Levin <sashal@kernel.org>
 To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
 Cc:     Tomas Espeleta <tomas.espeleta@gmail.com>,
         Takashi Iwai <tiwai@suse.de>, Sasha Levin <sashal@kernel.org>,
         linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.2 173/185] ALSA: hda - Add a quirk model for fixing Huawei Matebook X right speaker
-Date:   Sun, 22 Sep 2019 14:49:11 -0400
-Message-Id: <20190922184924.32534-173-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 5.3 191/203] ALSA: hda - Add a quirk model for fixing Huawei Matebook X right speaker
+Date:   Sun, 22 Sep 2019 14:43:37 -0400
+Message-Id: <20190922184350.30563-191-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20190922184924.32534-1-sashal@kernel.org>
-References: <20190922184924.32534-1-sashal@kernel.org>
+In-Reply-To: <20190922184350.30563-1-sashal@kernel.org>
+References: <20190922184350.30563-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
