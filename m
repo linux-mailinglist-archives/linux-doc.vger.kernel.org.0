@@ -2,27 +2,27 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C3116BBA72
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Sep 2019 19:28:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E6C08BBA76
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Sep 2019 19:28:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2440169AbfIWR2E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 23 Sep 2019 13:28:04 -0400
-Received: from mx2.suse.de ([195.135.220.15]:46464 "EHLO mx1.suse.de"
+        id S2437873AbfIWR2F (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 23 Sep 2019 13:28:05 -0400
+Received: from mx2.suse.de ([195.135.220.15]:46480 "EHLO mx1.suse.de"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S2440167AbfIWR2E (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S2440166AbfIWR2E (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Mon, 23 Sep 2019 13:28:04 -0400
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx1.suse.de (Postfix) with ESMTP id 98A49B647;
+        by mx1.suse.de (Postfix) with ESMTP id D5233B652;
         Mon, 23 Sep 2019 17:28:00 +0000 (UTC)
 From:   Thomas Zimmermann <tzimmermann@suse.de>
 To:     airlied@linux.ie, daniel@ffwll.ch, kraxel@redhat.com,
         sam@ravnborg.org, yc_chen@aspeedtech.com, corbet@lwn.net
 Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
         Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 10/12] drm/mgag200: Move cursor BO swapping into mgag200_show_cursor()
-Date:   Mon, 23 Sep 2019 19:27:51 +0200
-Message-Id: <20190923172753.26593-11-tzimmermann@suse.de>
+Subject: [PATCH v2 11/12] drm/mgag200: Reserve video memory for cursor plane
+Date:   Mon, 23 Sep 2019 19:27:52 +0200
+Message-Id: <20190923172753.26593-12-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20190923172753.26593-1-tzimmermann@suse.de>
 References: <20190923172753.26593-1-tzimmermann@suse.de>
@@ -33,186 +33,131 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Selecting the correct BO for the new cursor image is not relevant
-outside of mgag200_show_cursor(). Let the function do the work.
+The double-buffered cursor image is currently stored in video memory
+by creating two BOs and pinning them to VRAM. The exact location is
+chosen by VRAM helpers. The pinned cursor BOs can conflict with
+framebuffer BOs and prevent the primary plane from displaying its
+framebuffer.
+
+As a first step to solving this problem, we reserve dedicated space at
+the high end of the video memory for the cursor images. As the amount
+of video memory now differs from the amount of available framebuffer
+memory, size tests are adapted accordingly.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
 ---
- drivers/gpu/drm/mgag200/mgag200_cursor.c | 120 +++++++++++------------
- 1 file changed, 56 insertions(+), 64 deletions(-)
+ drivers/gpu/drm/mgag200/mgag200_cursor.c | 19 +++++++++++++++----
+ drivers/gpu/drm/mgag200/mgag200_drv.h    |  2 ++
+ drivers/gpu/drm/mgag200/mgag200_main.c   |  2 +-
+ drivers/gpu/drm/mgag200/mgag200_mode.c   |  2 +-
+ drivers/gpu/drm/mgag200/mgag200_ttm.c    |  4 ++++
+ 5 files changed, 23 insertions(+), 6 deletions(-)
 
 diff --git a/drivers/gpu/drm/mgag200/mgag200_cursor.c b/drivers/gpu/drm/mgag200/mgag200_cursor.c
-index 13daa0ce1c9e..4a5b1aa921e0 100644
+index 4a5b1aa921e0..7f48abf80a6a 100644
 --- a/drivers/gpu/drm/mgag200/mgag200_cursor.c
 +++ b/drivers/gpu/drm/mgag200/mgag200_cursor.c
-@@ -117,21 +117,69 @@ static void mgag200_cursor_set_base(struct mga_device *mdev, u64 address)
- 	WREG_DAC(MGA1064_CURSOR_BASE_ADR_HI, addrh);
- }
- 
--static int mgag200_show_cursor(struct mga_device *mdev, void *dst, void *src,
--			       unsigned int width, unsigned int height,
--			       u64 dst_gpu)
-+static int mgag200_show_cursor(struct mga_device *mdev, void *src,
-+			       unsigned int width, unsigned int height)
+@@ -216,17 +216,20 @@ static void mgag200_move_cursor(struct mga_device *mdev, int x, int y)
+ int mgag200_cursor_init(struct mga_device *mdev)
  {
-+	struct drm_device *dev = mdev->dev;
-+	struct drm_gem_vram_object *pixels_1 = mdev->cursor.pixels_1;
-+	struct drm_gem_vram_object *pixels_2 = mdev->cursor.pixels_2;
-+	struct drm_gem_vram_object *pixels_current = mdev->cursor.pixels_current;
-+	struct drm_gem_vram_object *pixels_next;
-+	void *dst;
-+	s64 off;
- 	int ret;
+ 	struct drm_device *dev = mdev->dev;
++	size_t size;
++
++	size = roundup(64 * 48, PAGE_SIZE);
++	if (size * 2 > mdev->vram_fb_available)
++		return -ENOMEM;
  
-+	if (!pixels_1 || !pixels_2) {
-+		WREG8(MGA_CURPOSXL, 0);
-+		WREG8(MGA_CURPOSXH, 0);
-+		return -ENOTSUPP; /* Didn't allocate space for cursors */
-+	}
-+
-+	if (WARN_ON(pixels_current &&
-+		    pixels_1 != pixels_current &&
-+		    pixels_2 != pixels_current)) {
-+		return -ENOTSUPP; /* inconsistent state */
-+	}
-+
-+	if (pixels_current == pixels_1)
-+		pixels_next = pixels_2;
-+	else
-+		pixels_next = pixels_1;
-+
-+	dst = drm_gem_vram_vmap(pixels_next);
-+	if (IS_ERR(dst)) {
-+		ret = PTR_ERR(dst);
-+		dev_err(&dev->pdev->dev,
-+			"failed to map cursor updates: %d\n", ret);
-+		return ret;
-+	}
-+	off = drm_gem_vram_offset(pixels_next);
-+	if (off < 0) {
-+		ret = (int)off;
-+		dev_err(&dev->pdev->dev,
-+			"failed to get cursor scanout address: %d\n", ret);
-+		goto err_drm_gem_vram_vunmap;
-+	}
-+
- 	ret = mgag200_cursor_update(mdev, dst, src, width, height);
- 	if (ret)
--		return ret;
--	mgag200_cursor_set_base(mdev, dst_gpu);
-+		goto err_drm_gem_vram_vunmap;
-+	mgag200_cursor_set_base(mdev, off);
+ 	/*
+ 	 * Make small buffers to store a hardware cursor (double
+ 	 * buffered icon updates)
+ 	 */
+ 	mdev->cursor.pixels_1 = drm_gem_vram_create(dev, &dev->vram_mm->bdev,
+-						    roundup(48*64, PAGE_SIZE),
+-						    0, 0);
++						    size, 0, 0);
+ 	mdev->cursor.pixels_2 = drm_gem_vram_create(dev, &dev->vram_mm->bdev,
+-						    roundup(48*64, PAGE_SIZE),
+-						    0, 0);
++						    size, 0, 0);
+ 	if (IS_ERR(mdev->cursor.pixels_2) || IS_ERR(mdev->cursor.pixels_1)) {
+ 		mdev->cursor.pixels_1 = NULL;
+ 		mdev->cursor.pixels_2 = NULL;
+@@ -235,6 +238,14 @@ int mgag200_cursor_init(struct mga_device *mdev)
+ 	}
+ 	mdev->cursor.pixels_current = NULL;
  
- 	/* Adjust cursor control register to turn on the cursor */
- 	WREG_DAC(MGA1064_CURSOR_CTL, 4); /* 16-colour palletized cursor mode */
- 
-+	if (pixels_current)
-+		drm_gem_vram_unpin(pixels_current);
-+	mdev->cursor.pixels_current = pixels_next;
-+
-+	drm_gem_vram_vunmap(pixels_next, dst);
++	/*
++	 * At the high end of video memory, we reserve space for
++	 * buffer objects. The cursor plane uses this memory to store
++	 * a double-buffered image of the current cursor. Hence, it's
++	 * not available for framebuffers.
++	 */
++	mdev->vram_fb_available -= 2 * size;
 +
  	return 0;
-+
-+err_drm_gem_vram_vunmap:
-+	drm_gem_vram_vunmap(pixels_next, dst);
-+	return ret;
  }
  
- /*
-@@ -198,28 +246,10 @@ int mgag200_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
- {
- 	struct drm_device *dev = crtc->dev;
- 	struct mga_device *mdev = (struct mga_device *)dev->dev_private;
--	struct drm_gem_vram_object *pixels_1 = mdev->cursor.pixels_1;
--	struct drm_gem_vram_object *pixels_2 = mdev->cursor.pixels_2;
--	struct drm_gem_vram_object *pixels_current = mdev->cursor.pixels_current;
--	struct drm_gem_vram_object *pixels_next;
- 	struct drm_gem_object *obj;
- 	struct drm_gem_vram_object *gbo = NULL;
- 	int ret;
--	u8 *src, *dst;
--	s64 gpu_addr;
--	u64 dst_gpu;
--
--	if (!pixels_1 || !pixels_2) {
--		WREG8(MGA_CURPOSXL, 0);
--		WREG8(MGA_CURPOSXH, 0);
--		return -ENOTSUPP; /* Didn't allocate space for cursors */
--	}
--
--	if (WARN_ON(pixels_current &&
--		    pixels_1 != pixels_current &&
--		    pixels_2 != pixels_current)) {
--		return -ENOTSUPP; /* inconsistent state */
--	}
-+	u8 *src;
+diff --git a/drivers/gpu/drm/mgag200/mgag200_drv.h b/drivers/gpu/drm/mgag200/mgag200_drv.h
+index 01243fa6397c..5d6cfc88697a 100644
+--- a/drivers/gpu/drm/mgag200/mgag200_drv.h
++++ b/drivers/gpu/drm/mgag200/mgag200_drv.h
+@@ -173,6 +173,8 @@ struct mga_device {
  
- 	if (!handle || !file_priv) {
- 		mgag200_hide_cursor(mdev);
-@@ -232,11 +262,6 @@ int mgag200_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
- 		return -EINVAL;
+ 	struct mga_cursor cursor;
+ 
++	size_t vram_fb_available;
++
+ 	bool				suspended;
+ 	int				num_crtc;
+ 	enum mga_type			type;
+diff --git a/drivers/gpu/drm/mgag200/mgag200_main.c b/drivers/gpu/drm/mgag200/mgag200_main.c
+index 2b59280777a5..5f74aabcd3df 100644
+--- a/drivers/gpu/drm/mgag200/mgag200_main.c
++++ b/drivers/gpu/drm/mgag200/mgag200_main.c
+@@ -159,7 +159,7 @@ int mgag200_driver_load(struct drm_device *dev, unsigned long flags)
+ 
+ 	drm_mode_config_init(dev);
+ 	dev->mode_config.funcs = (void *)&mga_mode_funcs;
+-	if (IS_G200_SE(mdev) && mdev->mc.vram_size < (2048*1024))
++	if (IS_G200_SE(mdev) && mdev->vram_fb_available < (2048*1024))
+ 		dev->mode_config.preferred_depth = 16;
+ 	else
+ 		dev->mode_config.preferred_depth = 32;
+diff --git a/drivers/gpu/drm/mgag200/mgag200_mode.c b/drivers/gpu/drm/mgag200/mgag200_mode.c
+index 0cf5608c3644..5ec697148fc1 100644
+--- a/drivers/gpu/drm/mgag200/mgag200_mode.c
++++ b/drivers/gpu/drm/mgag200/mgag200_mode.c
+@@ -1629,7 +1629,7 @@ static enum drm_mode_status mga_vga_mode_valid(struct drm_connector *connector,
+ 			bpp = connector->cmdline_mode.bpp;
  	}
  
--	if (pixels_current == pixels_1)
--		pixels_next = pixels_2;
--	else
--		pixels_next = pixels_1;
--
- 	obj = drm_gem_object_lookup(file_priv, handle);
- 	if (!obj)
- 		return -ENOENT;
-@@ -249,48 +274,15 @@ int mgag200_crtc_cursor_set(struct drm_crtc *crtc, struct drm_file *file_priv,
- 		goto err_drm_gem_object_put_unlocked;
- 	}
+-	if ((mode->hdisplay * mode->vdisplay * (bpp/8)) > mdev->mc.vram_size) {
++	if ((mode->hdisplay * mode->vdisplay * (bpp/8)) > mdev->vram_fb_available) {
+ 		if (connector->cmdline_mode.specified)
+ 			connector->cmdline_mode.specified = false;
+ 		return MODE_BAD;
+diff --git a/drivers/gpu/drm/mgag200/mgag200_ttm.c b/drivers/gpu/drm/mgag200/mgag200_ttm.c
+index 69c81ebf3745..99997d737362 100644
+--- a/drivers/gpu/drm/mgag200/mgag200_ttm.c
++++ b/drivers/gpu/drm/mgag200/mgag200_ttm.c
+@@ -50,6 +50,8 @@ int mgag200_mm_init(struct mga_device *mdev)
+ 	mdev->fb_mtrr = arch_phys_wc_add(pci_resource_start(dev->pdev, 0),
+ 					 pci_resource_len(dev->pdev, 0));
  
--	/* Pin and map up-coming buffer to write colour indices */
--	ret = drm_gem_vram_pin(pixels_next, DRM_GEM_VRAM_PL_FLAG_VRAM);
--	if (ret) {
--		dev_err(&dev->pdev->dev,
--			"failed to pin cursor buffer: %d\n", ret);
--		goto err_drm_gem_vram_vunmap;
--	}
--	dst = drm_gem_vram_kmap(pixels_next, true, NULL);
--	if (IS_ERR(dst)) {
--		ret = PTR_ERR(dst);
--		dev_err(&dev->pdev->dev,
--			"failed to kmap cursor updates: %d\n", ret);
--		goto err_drm_gem_vram_unpin_dst;
--	}
--	gpu_addr = drm_gem_vram_offset(pixels_next);
--	if (gpu_addr < 0) {
--		ret = (int)gpu_addr;
--		dev_err(&dev->pdev->dev,
--			"failed to get cursor scanout address: %d\n", ret);
--		goto err_drm_gem_vram_kunmap_dst;
--	}
--	dst_gpu = (u64)gpu_addr;
--
--	ret = mgag200_show_cursor(mdev, dst, src, width, height, dst_gpu);
-+	ret = mgag200_show_cursor(mdev, src, width, height);
- 	if (ret)
--		goto err_drm_gem_vram_kunmap_dst;
-+		goto err_drm_gem_vram_vunmap;
- 
- 	/* Now update internal buffer pointers */
--	if (pixels_current)
--		drm_gem_vram_unpin(pixels_current);
--	mdev->cursor.pixels_current = pixels_next;
--
--	drm_gem_vram_kunmap(pixels_next);
- 	drm_gem_vram_vunmap(gbo, src);
- 	drm_gem_object_put_unlocked(obj);
- 
++	mdev->vram_fb_available = mdev->mc.vram_size;
++
  	return 0;
--
--err_drm_gem_vram_kunmap_dst:
--	drm_gem_vram_kunmap(pixels_next);
--err_drm_gem_vram_unpin_dst:
--	drm_gem_vram_unpin(pixels_next);
- err_drm_gem_vram_vunmap:
- 	drm_gem_vram_vunmap(gbo, src);
- err_drm_gem_object_put_unlocked:
+ }
+ 
+@@ -57,6 +59,8 @@ void mgag200_mm_fini(struct mga_device *mdev)
+ {
+ 	struct drm_device *dev = mdev->dev;
+ 
++	mdev->vram_fb_available = 0;
++
+ 	drm_vram_helper_release_mm(dev);
+ 
+ 	arch_io_free_memtype_wc(pci_resource_start(dev->pdev, 0),
 -- 
 2.23.0
 
