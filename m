@@ -2,205 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0C28FBB30A
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Sep 2019 13:47:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 20DBABB639
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Sep 2019 16:08:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2439540AbfIWLqy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 23 Sep 2019 07:46:54 -0400
-Received: from mx2.suse.de ([195.135.220.15]:54780 "EHLO mx1.suse.de"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1729982AbfIWLqx (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 23 Sep 2019 07:46:53 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx1.suse.de (Postfix) with ESMTP id 51009B152;
-        Mon, 23 Sep 2019 11:46:51 +0000 (UTC)
-From:   Thomas Bogendoerfer <tbogendoerfer@suse.de>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Ralf Baechle <ralf@linux-mips.org>,
-        Paul Burton <paul.burton@mips.com>,
-        James Hogan <jhogan@kernel.org>,
-        Lee Jones <lee.jones@linaro.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-        Alessandro Zummo <a.zummo@towertech.it>,
-        Alexandre Belloni <alexandre.belloni@bootlin.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jslaby@suse.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org,
-        netdev@vger.kernel.org, linux-rtc@vger.kernel.org,
-        linux-serial@vger.kernel.org
-Subject: [PATCH v6 4/4] MIPS: SGI-IP27: fix readb/writeb addressing
-Date:   Mon, 23 Sep 2019 13:46:34 +0200
-Message-Id: <20190923114636.6748-5-tbogendoerfer@suse.de>
-X-Mailer: git-send-email 2.13.7
-In-Reply-To: <20190923114636.6748-1-tbogendoerfer@suse.de>
-References: <20190923114636.6748-1-tbogendoerfer@suse.de>
+        id S2390953AbfIWOIk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 23 Sep 2019 10:08:40 -0400
+Received: from mail-yw1-f66.google.com ([209.85.161.66]:44338 "EHLO
+        mail-yw1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2389738AbfIWOIk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 23 Sep 2019 10:08:40 -0400
+Received: by mail-yw1-f66.google.com with SMTP id u187so5223174ywa.11
+        for <linux-doc@vger.kernel.org>; Mon, 23 Sep 2019 07:08:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=poorly.run; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=eLbXfyJzh+CNXjjxIUFpnYYGETQ4UqgCIVHyFOjnoV8=;
+        b=Zbo5KJNatZHi8F0+zI8CGJr1tW/mUoHn4vEK5PVb0piMTlMc2nVpV1KBO4w2F+uTro
+         KPiA3LiAGbSAfKu+menMBQ0NorPe69vNZHAt107ogBQ+g0gu/8sSSamPe+sJG/5U1UfQ
+         0OkjH0sPMsruEswKxOb8L1Ewidk4urm4FRPUusPYYCu+POfx5WByescbXRN+Jm3Qswi1
+         CwryXI6Y067HkWaPJBWKt0lrkmTffcMFuY4VZGGRcs94kCAbtVDaTYOnBQ4sD35VmPWg
+         ZAiALGdUjGSUqHOkxo69pyRd1h4NqcUz7ImREZOp99LkHN3nRpMv6NAJFqduPcRCslMu
+         9O4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=eLbXfyJzh+CNXjjxIUFpnYYGETQ4UqgCIVHyFOjnoV8=;
+        b=T713+U8HHyqPso08NcvWDrSuET2XfHrVnqu8CMLvxZeTh7JTxhdL0kk1AvGtaMtNuL
+         lK9tl6pOJAINYT6rhoyAXbVPZziQrevR/GPiOYoBjSI/BwKKjZQU9V0unVOoDVA/JXYy
+         52XYjMj9yg9Fgl1lXAXVXXuLpv8Iz9TPlEqvLJo/M7TaCGCK5TOOhzyo3L4G/G+8vj/w
+         HTZKyMMPVgRkieaHXaesDG5XMwwh8HVXcmpZstJdl4Hh9JqMpkbeHCSepawqkVZCyNSa
+         3LJcK+2tqkfb2ERRG5uId7ISRj1NhUkO75i89hjZaqOWLGaBUFQhSA1gaZN4Qewm8BUc
+         V4mg==
+X-Gm-Message-State: APjAAAVxgqi/RI0Lujtcjb8ob30LhsZ8rhvdb3cdzvu0SlWb/7JIw7+p
+        YbGQECC5avNDnZ5tbZltHcfxDQ==
+X-Google-Smtp-Source: APXvYqxnruDu0JvpWl1+7CxiyW2Ywlf37HwFjpHtml3Gro0m6A/4M7sAOHzqTO+ahIFUoPilpwn/8Q==
+X-Received: by 2002:a81:4bc2:: with SMTP id y185mr22221130ywa.491.1569247718773;
+        Mon, 23 Sep 2019 07:08:38 -0700 (PDT)
+Received: from localhost ([2620:0:1013:11:89c6:2139:5435:371d])
+        by smtp.gmail.com with ESMTPSA id e130sm2591425ywh.50.2019.09.23.07.08.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 23 Sep 2019 07:08:38 -0700 (PDT)
+Date:   Mon, 23 Sep 2019 10:08:37 -0400
+From:   Sean Paul <sean@poorly.run>
+To:     Gerd Hoffmann <kraxel@redhat.com>
+Cc:     Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org,
+        Sean Paul <seanpaul@chromium.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        Daniel Vetter <daniel.vetter@ffwll.ch>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        David Airlie <airlied@linux.ie>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 2/2] Documentation/gpu: Fix no structured comments
+ warning for drm_gem_ttm_helper.h
+Message-ID: <20190923140837.GA218215@art_vandelay>
+References: <20190920193558.89815-1-sean@poorly.run>
+ <20190920193558.89815-2-sean@poorly.run>
+ <20190923065946.rlchr5hubkogutw4@sirius.home.kraxel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20190923065946.rlchr5hubkogutw4@sirius.home.kraxel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Our chosen byte swapping, which is what firmware already uses, is to
-do readl/writel by normal lw/sw intructions (data invariance). This
-also means we need to mangle addresses for u8 and u16 accesses. The
-mangling for 16bit has been done aready, but 8bit one was missing.
-Correcting this causes different addresses for accesses to the
-SuperIO and local bus of the IOC3 chip. This is fixed by changing
-byte order in ioc3 and m48rtc_rtc structs.
+On Mon, Sep 23, 2019 at 08:59:46AM +0200, Gerd Hoffmann wrote:
+> On Fri, Sep 20, 2019 at 03:35:52PM -0400, Sean Paul wrote:
+> > From: Sean Paul <seanpaul@chromium.org>
+> > 
+> > Fixes
+> > include/drm/drm_gem_ttm_helper.h:1: warning: no structured comments found
+> 
+> Reviewed-by: Gerd Hoffmann <kraxel@redhat.com>
+> 
 
-Acked-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
-Signed-off-by: Thomas Bogendoerfer <tbogendoerfer@suse.de>
----
- arch/mips/include/asm/mach-ip27/mangle-port.h |  4 +--
- arch/mips/include/asm/sn/ioc3.h               | 38 +++++++++++++--------------
- drivers/rtc/rtc-m48t35.c                      | 11 ++++++++
- drivers/tty/serial/8250/8250_ioc3.c           |  4 +--
- 4 files changed, 34 insertions(+), 23 deletions(-)
+Thanks, pushed to drm-misc-next
 
-diff --git a/arch/mips/include/asm/mach-ip27/mangle-port.h b/arch/mips/include/asm/mach-ip27/mangle-port.h
-index f6e4912ea062..27c56efa519f 100644
---- a/arch/mips/include/asm/mach-ip27/mangle-port.h
-+++ b/arch/mips/include/asm/mach-ip27/mangle-port.h
-@@ -8,7 +8,7 @@
- #ifndef __ASM_MACH_IP27_MANGLE_PORT_H
- #define __ASM_MACH_IP27_MANGLE_PORT_H
- 
--#define __swizzle_addr_b(port)	(port)
-+#define __swizzle_addr_b(port)	((port) ^ 3)
- #define __swizzle_addr_w(port)	((port) ^ 2)
- #define __swizzle_addr_l(port)	(port)
- #define __swizzle_addr_q(port)	(port)
-@@ -20,6 +20,6 @@
- # define ioswabl(a, x)		(x)
- # define __mem_ioswabl(a, x)	cpu_to_le32(x)
- # define ioswabq(a, x)		(x)
--# define __mem_ioswabq(a, x)	cpu_to_le32(x)
-+# define __mem_ioswabq(a, x)	cpu_to_le64(x)
- 
- #endif /* __ASM_MACH_IP27_MANGLE_PORT_H */
-diff --git a/arch/mips/include/asm/sn/ioc3.h b/arch/mips/include/asm/sn/ioc3.h
-index 78ef760ddde4..3865d3225780 100644
---- a/arch/mips/include/asm/sn/ioc3.h
-+++ b/arch/mips/include/asm/sn/ioc3.h
-@@ -21,50 +21,50 @@ struct ioc3_serialregs {
- 
- /* SUPERIO uart register map */
- struct ioc3_uartregs {
-+	u8	iu_lcr;
- 	union {
--		u8	iu_rbr;	/* read only, DLAB == 0 */
--		u8	iu_thr;	/* write only, DLAB == 0 */
--		u8	iu_dll;	/* DLAB == 1 */
-+		u8	iu_iir;	/* read only */
-+		u8	iu_fcr;	/* write only */
- 	};
- 	union {
- 		u8	iu_ier;	/* DLAB == 0 */
- 		u8	iu_dlm;	/* DLAB == 1 */
- 	};
- 	union {
--		u8	iu_iir;	/* read only */
--		u8	iu_fcr;	/* write only */
-+		u8	iu_rbr;	/* read only, DLAB == 0 */
-+		u8	iu_thr;	/* write only, DLAB == 0 */
-+		u8	iu_dll;	/* DLAB == 1 */
- 	};
--	u8	iu_lcr;
--	u8	iu_mcr;
--	u8	iu_lsr;
--	u8	iu_msr;
- 	u8	iu_scr;
-+	u8	iu_msr;
-+	u8	iu_lsr;
-+	u8	iu_mcr;
- };
- 
- struct ioc3_sioregs {
- 	u8	fill[0x141];	/* starts at 0x141 */
- 
--	u8	uartc;
- 	u8	kbdcg;
-+	u8	uartc;
- 
--	u8	fill0[0x150 - 0x142 - 1];
-+	u8	fill0[0x151 - 0x142 - 1];
- 
--	u8	pp_data;
--	u8	pp_dsr;
- 	u8	pp_dcr;
-+	u8	pp_dsr;
-+	u8	pp_data;
- 
--	u8	fill1[0x158 - 0x152 - 1];
-+	u8	fill1[0x159 - 0x153 - 1];
- 
--	u8	pp_fifa;
--	u8	pp_cfgb;
- 	u8	pp_ecr;
-+	u8	pp_cfgb;
-+	u8	pp_fifa;
- 
--	u8	fill2[0x168 - 0x15a - 1];
-+	u8	fill2[0x16a - 0x15b - 1];
- 
--	u8	rtcad;
- 	u8	rtcdat;
-+	u8	rtcad;
- 
--	u8	fill3[0x170 - 0x169 - 1];
-+	u8	fill3[0x170 - 0x16b - 1];
- 
- 	struct ioc3_uartregs	uartb;	/* 0x20170  */
- 	struct ioc3_uartregs	uarta;	/* 0x20178  */
-diff --git a/drivers/rtc/rtc-m48t35.c b/drivers/rtc/rtc-m48t35.c
-index d3a75d447fce..e8194f1f01a8 100644
---- a/drivers/rtc/rtc-m48t35.c
-+++ b/drivers/rtc/rtc-m48t35.c
-@@ -20,6 +20,16 @@
- 
- struct m48t35_rtc {
- 	u8	pad[0x7ff8];    /* starts at 0x7ff8 */
-+#ifdef CONFIG_SGI_IP27
-+	u8	hour;
-+	u8	min;
-+	u8	sec;
-+	u8	control;
-+	u8	year;
-+	u8	month;
-+	u8	date;
-+	u8	day;
-+#else
- 	u8	control;
- 	u8	sec;
- 	u8	min;
-@@ -28,6 +38,7 @@ struct m48t35_rtc {
- 	u8	date;
- 	u8	month;
- 	u8	year;
-+#endif
- };
- 
- #define M48T35_RTC_SET		0x80
-diff --git a/drivers/tty/serial/8250/8250_ioc3.c b/drivers/tty/serial/8250/8250_ioc3.c
-index 2be6ed2967e0..4c405f1b9c67 100644
---- a/drivers/tty/serial/8250/8250_ioc3.c
-+++ b/drivers/tty/serial/8250/8250_ioc3.c
-@@ -23,12 +23,12 @@ struct ioc3_8250_data {
- 
- static unsigned int ioc3_serial_in(struct uart_port *p, int offset)
- {
--	return readb(p->membase + offset);
-+	return readb(p->membase + (offset ^ 3));
- }
- 
- static void ioc3_serial_out(struct uart_port *p, int offset, int value)
- {
--	writeb(value, p->membase + offset);
-+	writeb(value, p->membase + (offset ^ 3));
- }
- 
- static int serial8250_ioc3_probe(struct platform_device *pdev)
+Sean
+
 -- 
-2.13.7
-
+Sean Paul, Software Engineer, Google / Chromium OS
