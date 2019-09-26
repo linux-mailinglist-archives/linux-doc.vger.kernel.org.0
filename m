@@ -2,85 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D98F9BF1C1
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2019 13:32:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CE8F8BF5C0
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Sep 2019 17:20:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726902AbfIZLcN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 26 Sep 2019 07:32:13 -0400
-Received: from lelv0143.ext.ti.com ([198.47.23.248]:57298 "EHLO
-        lelv0143.ext.ti.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725787AbfIZLcJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Sep 2019 07:32:09 -0400
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-        by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id x8QBW1d1026527;
-        Thu, 26 Sep 2019 06:32:01 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-        s=ti-com-17Q1; t=1569497521;
-        bh=88Xv9IRV7+oNSxAgr2jq3XB2+SHFQvDvj39xR9Z58mQ=;
-        h=From:To:CC:Subject:Date:In-Reply-To:References;
-        b=eyZNqkD+oH2zsbe88+Ktakn1JXraKUrcBJUMmBPftF8+Ry1V36N0LmBeo8NhyMzsr
-         NsqdZJ9Cbl3tcy85cp1uGVuJ5vkqfLZ4abIP2F+abI4YsOJ0NPn4skrL4ro/kBCybP
-         VFuPC3aepTsuTunrzfK/bKrjRW8jkJwx7chGJ4Pc=
-Received: from DLEE100.ent.ti.com (dlee100.ent.ti.com [157.170.170.30])
-        by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id x8QBW1NA032455
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-        Thu, 26 Sep 2019 06:32:01 -0500
-Received: from DLEE102.ent.ti.com (157.170.170.32) by DLEE100.ent.ti.com
- (157.170.170.30) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5; Thu, 26
- Sep 2019 06:32:01 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DLEE102.ent.ti.com
- (157.170.170.32) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5 via
- Frontend Transport; Thu, 26 Sep 2019 06:31:54 -0500
-Received: from a0393678ub.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-        by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id x8QBUTkE069017;
-        Thu, 26 Sep 2019 06:31:57 -0500
-From:   Kishon Vijay Abraham I <kishon@ti.com>
-To:     Bjorn Helgaas <bhelgaas@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Rob Herring <robh+dt@kernel.org>, Jon Mason <jdmason@kudzu.us>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Allen Hubbe <allenbh@gmail.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>
-CC:     Mark Rutland <mark.rutland@arm.com>, <kishon@ti.com>,
-        <linux-pci@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-ntb@googlegroups.com>
-Subject: [RFC PATCH 21/21] NTB: tool: Enable the NTB/PCIe link on the local or remote side of bridge
-Date:   Thu, 26 Sep 2019 16:59:33 +0530
-Message-ID: <20190926112933.8922-22-kishon@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20190926112933.8922-1-kishon@ti.com>
-References: <20190926112933.8922-1-kishon@ti.com>
+        id S1726030AbfIZPUh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Sep 2019 11:20:37 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:54296 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726029AbfIZPUh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Sep 2019 11:20:37 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+        Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:
+        Subject:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
+        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=yLzCCbA1xxgfSSaN55ak3+kri+HafX9octEvTxgZHQ4=; b=QPr6feejBrc5AYDFCfltGGA9g
+        MOBKVaJNT8g359mo5ovvj7SADpWggwaleaynmHTmIYrP0Dvoza9azT1TCvicyZuy9cv5sANCwT5W3
+        FF2mFDgv3fPhc3hN6hocoT+L4rJuD25u1PZbE61MAfmTXHNk8R0mjCVermC1hgulxsQNBhNEldsMD
+        gh4TwP/rzW80LblNU6jyYPgNR+2MnxFo+EM6EDSKKJdOEXsKzFiYZ3MsDbGNPX2nYvsefFcRJhyB3
+        ZBi7dDMANOsy7GNmE1geqRK3jmUBJTtd4fcii6HYFMX87s2QXBhODXtm8z67ADOVa6PpQGLnU6pDf
+        OrGBGwJzA==;
+Received: from [2601:1c0:6280:3f0::9a1f]
+        by bombadil.infradead.org with esmtpsa (Exim 4.92.2 #3 (Red Hat Linux))
+        id 1iDVZF-00039v-NT; Thu, 26 Sep 2019 15:20:29 +0000
+Subject: Re: [RFC PATCH] x86/doc/boot_protocol: Correct the description of
+ "reloc"
+To:     hpa@zytor.com, Cao jin <caoj.fnst@cn.fujitsu.com>,
+        Ingo Molnar <mingo@kernel.org>
+Cc:     x86@kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, tglx@linutronix.de, mingo@redhat.com,
+        bp@alien8.de, corbet@lwn.net
+References: <20190926042116.17929-1-caoj.fnst@cn.fujitsu.com>
+ <20190926060139.GA100481@gmail.com>
+ <faabfe47-ba3e-5a92-af65-dc26e8e2ecb9@cn.fujitsu.com>
+ <3073CD01-65C5-4BEC-B2FC-F76DD0E70D73@zytor.com>
+From:   Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <f7a1d739-94ae-f6d3-efdb-9748e5e03f82@infradead.org>
+Date:   Thu, 26 Sep 2019 08:20:28 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.8.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+In-Reply-To: <3073CD01-65C5-4BEC-B2FC-F76DD0E70D73@zytor.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Invoke ntb_link_enable() to enable the NTB/PCIe link on the local
-or remote side of the bridge.
+On 9/26/19 12:58 AM, hpa@zytor.com wrote:
+> On September 26, 2019 12:55:51 AM PDT, Cao jin <caoj.fnst@cn.fujitsu.com> wrote:
+>> On 9/26/19 2:01 PM, Ingo Molnar wrote:
+>>> * Cao jin <caoj.fnst@cn.fujitsu.com> wrote:
+>>>
+>>>> The fields marked with (reloc) actually are not dedicated for
+>> writing,
+>>>> but communicating info for relocatable kernel with boot loaders. For
+>>>> example:
+>>>>
+>>>>     ============    ============
+>>>>     Field name:     pref_address
+>>>>     Type:           read (reloc)
+>>>>     Offset/size:    0x258/8
+>>>>     Protocol:       2.10+
+>>>>     ============    ============
+>>>>
+>>>>     ============    ========================
+>>>>     Field name:     code32_start
+>>>>     Type:           modify (optional, reloc)
+>>>>     Offset/size:    0x214/4
+>>>>     Protocol:       2.00+
+>>>>     ============    ========================
+>>>>
+>>>> Signed-off-by: Cao jin <caoj.fnst@cn.fujitsu.com>
+>>>> ---
+>>>> Unless I have incorrect non-native understanding for "fill in", I
+>> think
+>>>> this is inaccurate.
+>>>>
+>>>>  Documentation/x86/boot.rst | 2 +-
+>>>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/Documentation/x86/boot.rst b/Documentation/x86/boot.rst
+>>>> index 08a2f100c0e6..a611bf04492d 100644
+>>>> --- a/Documentation/x86/boot.rst
+>>>> +++ b/Documentation/x86/boot.rst
+>>>> @@ -243,7 +243,7 @@ bootloader ("modify").
+>>>>  
+>>>>  All general purpose boot loaders should write the fields marked
+>>>>  (obligatory).  Boot loaders who want to load the kernel at a
+>>>> -nonstandard address should fill in the fields marked (reloc); other
+>>>> +nonstandard address should consult with the fields marked (reloc);
+>> other
+>>>>  boot loaders can ignore those fields.
+>>>>  
+>>>>  The byte order of all fields is littleendian (this is x86, after
+>> all.)
+>>>
+>>> Well, this documentation is written from the point of view of a 
+>>> *bootloader*, not the kernel. So the 'fill in' says that the
+>> bootloader 
+>>> should write those fields - which is correct, right?
+>>>
+>>
+>> Take pref_address or relocatable_kernel for example, they have type:
+>> read (reloc), does boot loader need to write them? I don't see grub
+>> does
+>> this at least.
+> 
+> Read means the boot later reads them.
 
-Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
----
- drivers/ntb/test/ntb_tool.c | 1 +
- 1 file changed, 1 insertion(+)
+is that          boot loader ??
 
-diff --git a/drivers/ntb/test/ntb_tool.c b/drivers/ntb/test/ntb_tool.c
-index d592c0ffbd19..04138e6a371b 100644
---- a/drivers/ntb/test/ntb_tool.c
-+++ b/drivers/ntb/test/ntb_tool.c
-@@ -1638,6 +1638,7 @@ static int tool_probe(struct ntb_client *self, struct ntb_dev *ntb)
- 
- 	tool_setup_dbgfs(tc);
- 
-+	ntb_link_enable(ntb, NTB_SPEED_AUTO, NTB_WIDTH_AUTO);
- 	return 0;
- 
- err_clear_mws:
+
 -- 
-2.17.1
-
+~Randy
