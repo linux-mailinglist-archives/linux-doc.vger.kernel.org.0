@@ -2,27 +2,27 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E3227C1754
-	for <lists+linux-doc@lfdr.de>; Sun, 29 Sep 2019 19:37:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7899AC17FC
+	for <lists+linux-doc@lfdr.de>; Sun, 29 Sep 2019 19:41:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730170AbfI2RhB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 29 Sep 2019 13:37:01 -0400
-Received: from mail.kernel.org ([198.145.29.99]:49878 "EHLO mail.kernel.org"
+        id S1730375AbfI2Ree (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 29 Sep 2019 13:34:34 -0400
+Received: from mail.kernel.org ([198.145.29.99]:46460 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729652AbfI2RhA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 29 Sep 2019 13:37:00 -0400
+        id S1730338AbfI2Rec (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 29 Sep 2019 13:34:32 -0400
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
         (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id E862C21925;
-        Sun, 29 Sep 2019 17:36:56 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id A3DBF21A4A;
+        Sun, 29 Sep 2019 17:34:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1569778619;
-        bh=PYnztwhNqQMmqSmLLY+GbEr8E79+RaN7u/dLYiZhWPM=;
-        h=From:To:Cc:Subject:Date:From;
-        b=fef6pEQlxhyQ11NB1IOneALhZv1pYdzN/WW6SQP1asCLGFXlXUhGZVEEocViRhePV
-         GXhw/0/I9SWbDJc23jdpDbP424O/niwDU6VBMGbV3+GTtwy5GoO8/fxUkZbTL+LaT/
-         S+OUUF7ZyUpAEd+4KTPThOO6yHQBGDs8FUxRaHNM=
+        s=default; t=1569778471;
+        bh=A1jJ1AW6jgvvZsGzhEij7gKPOs+3Yd1J76zpIlkaLgk=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=kohl7XStE46OkeyDEx9wy+GgVS/dex6EWSsjHD0fZpvzMpjAqXbnwIqRBYTi4so+e
+         ffxEYlIWWgsRgy5MNI96pYWkhUOz6dFVPl4ebEVhDrWYtAiVlpblmjAzK+uARSZk3w
+         9JZnQroOkP0o5vBpERFL+AHm4iERDq7Atj4mWrnk=
 From:   Sasha Levin <sashal@kernel.org>
 To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
 Cc:     Paul Cercueil <paul@crapouillou.net>,
@@ -45,10 +45,12 @@ Cc:     Paul Cercueil <paul@crapouillou.net>,
         devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-mips@vger.kernel.org, linux-clk@vger.kernel.org, od@zcrc.me,
         Sasha Levin <sashal@kernel.org>
-Subject: [PATCH AUTOSEL 4.4 1/9] clk: jz4740: Add TCU clock
-Date:   Sun, 29 Sep 2019 13:36:46 -0400
-Message-Id: <20190929173655.10178-1-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.19 02/33] clk: jz4740: Add TCU clock
+Date:   Sun, 29 Sep 2019 13:33:50 -0400
+Message-Id: <20190929173424.9361-2-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20190929173424.9361-1-sashal@kernel.org>
+References: <20190929173424.9361-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
@@ -96,7 +98,7 @@ Signed-off-by: Sasha Levin <sashal@kernel.org>
  2 files changed, 7 insertions(+)
 
 diff --git a/drivers/clk/ingenic/jz4740-cgu.c b/drivers/clk/ingenic/jz4740-cgu.c
-index 305a26c2a800e..01b5b8b103888 100644
+index 4479c102e8994..d8ac7f2e183a1 100644
 --- a/drivers/clk/ingenic/jz4740-cgu.c
 +++ b/drivers/clk/ingenic/jz4740-cgu.c
 @@ -211,6 +211,12 @@ static const struct ingenic_cgu_clk_info jz4740_cgu_clocks[] = {
@@ -113,10 +115,10 @@ index 305a26c2a800e..01b5b8b103888 100644
  
  static void __init jz4740_cgu_init(struct device_node *np)
 diff --git a/include/dt-bindings/clock/jz4740-cgu.h b/include/dt-bindings/clock/jz4740-cgu.h
-index 43153d3e9bd26..ff7c27bc98e37 100644
+index 6ed83f926ae71..e82d77028581a 100644
 --- a/include/dt-bindings/clock/jz4740-cgu.h
 +++ b/include/dt-bindings/clock/jz4740-cgu.h
-@@ -33,5 +33,6 @@
+@@ -34,5 +34,6 @@
  #define JZ4740_CLK_ADC		19
  #define JZ4740_CLK_I2C		20
  #define JZ4740_CLK_AIC		21
