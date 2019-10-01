@@ -2,77 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BDA45C3EEB
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Oct 2019 19:47:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0A1E1C3FC8
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Oct 2019 20:25:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726219AbfJARrD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 1 Oct 2019 13:47:03 -0400
-Received: from ms.lwn.net ([45.79.88.28]:38456 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726096AbfJARrD (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 1 Oct 2019 13:47:03 -0400
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 73359316;
-        Tue,  1 Oct 2019 17:47:02 +0000 (UTC)
-Date:   Tue, 1 Oct 2019 11:47:01 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     LKML <linux-kernel@vger.kernel.org>
-Cc:     linux-doc@vger.kernel.org,
-        Christian =?UTF-8?B?S8O2bmln?= <christian.koenig@amd.com>
-Subject: [PATCH] docs/driver-api: Catch up with dma_buf file-name changes
-Message-ID: <20191001114701.7349d9ec@lwn.net>
-Organization: LWN.net
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+        id S1732312AbfJASZl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 1 Oct 2019 14:25:41 -0400
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:43924 "EHLO
+        mail-pl1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1732274AbfJASZj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Oct 2019 14:25:39 -0400
+Received: by mail-pl1-f195.google.com with SMTP id f21so5897019plj.10
+        for <linux-doc@vger.kernel.org>; Tue, 01 Oct 2019 11:25:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id;
+        bh=m8eYBBkYRVbOtZzQQIEHp8iS4j4fHlbVl2GeuXY9abc=;
+        b=GCImDONAmbUHbQLrQB1XgH5tNRznUrOQk5MeIV9pELjG1VRjWfQ42k1ZyWikYSU8Wc
+         Pjq3OvQ5baNwN33CS4tp1TQP5RACnCeFwaaamkAzAEuoAKTXDv9/l+d8uSIPw6oj6OTA
+         qSy5q/jPfZzw+0cfYrH4F38I8Hg4p/EaDJ8m0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=m8eYBBkYRVbOtZzQQIEHp8iS4j4fHlbVl2GeuXY9abc=;
+        b=tut4ww24CSgvxWHXNUJOPoTc6o9rpdi1OeTwQqvL8kqmFKGBK1IUyxJE0AHRdJdJuq
+         bXdeW2xM1IIHHy1o6xpWkDORhU/1sUFDK4KW0Ghe+HP1S7wqpy808+STSrIeyx3ekh+o
+         mAnr+IHvcLslUMzsy2PsmckqtSw+nY6D/jdGDyPCW0xqAChnCHMK8mYCQhslVluQUh0R
+         ayUAmjPMhP21FftxQWrdUkE+Gw00Ak1MH9Vx3MgF3c3zALgFMEQOijWv1Ak/mEwaad7/
+         4cN9bu0QGrlVKEDPUMR+jL/PMlTW6BflV/z0CPRn4sqCvONKvoqnmQ/0qxySrByLj0SC
+         zufg==
+X-Gm-Message-State: APjAAAVasSdJNjOlXnZSHqd5Gd0MlTyHj1cvC1H+F8hIg3LJ6K++ZkDU
+        +fXz7onvIxNbnsl7CBrjMgvb3g==
+X-Google-Smtp-Source: APXvYqxZou0NR60fIrMXL0icbnWrdfQ0MFD0ezaaocwIAUDTRdBtukN7GzFfirNw9FhjrJVC3NcSJQ==
+X-Received: by 2002:a17:902:ab82:: with SMTP id f2mr27937294plr.220.1569954337120;
+        Tue, 01 Oct 2019 11:25:37 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id k15sm18909204pgt.66.2019.10.01.11.25.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 01 Oct 2019 11:25:36 -0700 (PDT)
+From:   Kees Cook <keescook@chromium.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Kees Cook <keescook@chromium.org>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/2] docs: Programmatically render MAINTAINERS into ReST
+Date:   Tue,  1 Oct 2019 11:25:30 -0700
+Message-Id: <20191001182532.21538-1-keescook@chromium.org>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-drivers/dma_buf/reservation.c was renamed to dma-resv.c (and
-include/linux/reservation.h to dma-resv.h), but the documentation was not
-updated to match, leading to these build errors:
+v1: https://lore.kernel.org/lkml/20190924230208.12414-1-keescook@chromium.org
 
-  Error: Cannot open file ./drivers/dma-buf/reservation.c
-  Error: Cannot open file ./drivers/dma-buf/reservation.c
-  Error: Cannot open file ./drivers/dma-buf/reservation.c
-  Error: Cannot open file ./include/linux/reservation.h
-  Error: Cannot open file ./include/linux/reservation.h
+v2: fix python2 utf-8 issue thanks to Jonathan Corbet
 
-Update the documentation and make the world happy again.
 
-Fixes: 52791eeec1d9 ("dma-buf: rename reservation_object to dma_resv')
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+Commit log from Patch 2 repeated here for cover letter:
+
+In order to have the MAINTAINERS file visible in the rendered ReST
+output, this makes some small changes to the existing MAINTAINERS file
+to allow for better machine processing, and adds a new Sphinx directive
+"maintainers-include" to perform the rendering.
+
+Features include:
+- Per-subsystem reference links: subsystem maintainer entries can be
+  trivially linked to both internally and external. For example:
+  https://www.kernel.org/doc/html/latest/process/maintainers.html#secure-computi
+ng
+
+- Internally referenced .rst files are linked so they can be followed
+  when browsing the resulting rendering. This allows, for example, the
+  future addition of maintainer profiles to be automatically linked.
+
+- Field name expansion: instead of the short fields (e.g. "M", "F",
+  "K"), use the indicated inline "full names" for the fields (which are
+  marked with "*"s in MAINTAINERS) so that a rendered subsystem entry
+  is more human readable. Email lists are additionally comma-separated.
+  For example:
+
+    SECURE COMPUTING
+        Mail:     Kees Cook <keescook@chromium.org>
+        Reviewer: Andy Lutomirski <luto@amacapital.net>,
+                  Will Drewry <wad@chromium.org>
+        SCM:      git git://git.kernel.org/pub/scm/linux/kernel/git/kees/linux.g
+it seccomp
+        Status:   Supported
+        Files:    kernel/seccomp.c include/uapi/linux/seccomp.h
+                  include/linux/seccomp.h tools/testing/selftests/seccomp/*
+                  tools/testing/selftests/kselftest_harness.h
+                  userspace-api/seccomp_filter
+        Content regex:  \bsecure_computing \bTIF_SECCOMP\b
+
 ---
-[I'll carry this in docs-next unless somebody objects.]
+Kees Cook (2):
+  doc-rst: Reduce CSS padding around Field
+  doc-rst: Programmatically render MAINTAINERS into ReST
 
- Documentation/driver-api/dma-buf.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ Documentation/conf.py                         |   3 +-
+ Documentation/process/index.rst               |   1 +
+ Documentation/process/maintainers.rst         |   1 +
+ .../sphinx-static/theme_overrides.css         |  10 +
+ Documentation/sphinx/maintainers_include.py   | 197 ++++++++++++++++++
+ MAINTAINERS                                   |  62 +++---
+ 6 files changed, 243 insertions(+), 31 deletions(-)
+ create mode 100644 Documentation/process/maintainers.rst
+ create mode 100755 Documentation/sphinx/maintainers_include.py
 
-diff --git a/Documentation/driver-api/dma-buf.rst b/Documentation/driver-api/dma-buf.rst
-index b541e97c7ab1..c78db28519f7 100644
---- a/Documentation/driver-api/dma-buf.rst
-+++ b/Documentation/driver-api/dma-buf.rst
-@@ -118,13 +118,13 @@ Kernel Functions and Structures Reference
- Reservation Objects
- -------------------
- 
--.. kernel-doc:: drivers/dma-buf/reservation.c
-+.. kernel-doc:: drivers/dma-buf/dma-resv.c
-    :doc: Reservation Object Overview
- 
--.. kernel-doc:: drivers/dma-buf/reservation.c
-+.. kernel-doc:: drivers/dma-buf/dma-resv.c
-    :export:
- 
--.. kernel-doc:: include/linux/reservation.h
-+.. kernel-doc:: include/linux/dma-resv.h
-    :internal:
- 
- DMA Fences
--- 
-2.21.0
+--
+2.17.1
 
