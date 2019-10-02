@@ -2,83 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CA891C8E0C
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Oct 2019 18:16:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 48792C8E44
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Oct 2019 18:25:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727287AbfJBQOe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 2 Oct 2019 12:14:34 -0400
-Received: from mail-pf1-f196.google.com ([209.85.210.196]:46719 "EHLO
-        mail-pf1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726215AbfJBQOd (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Oct 2019 12:14:33 -0400
-Received: by mail-pf1-f196.google.com with SMTP id q5so10594455pfg.13
-        for <linux-doc@vger.kernel.org>; Wed, 02 Oct 2019 09:14:33 -0700 (PDT)
+        id S1727160AbfJBQZl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 2 Oct 2019 12:25:41 -0400
+Received: from mail-wr1-f65.google.com ([209.85.221.65]:43957 "EHLO
+        mail-wr1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727090AbfJBQZk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Oct 2019 12:25:40 -0400
+Received: by mail-wr1-f65.google.com with SMTP id q17so20393330wrx.10
+        for <linux-doc@vger.kernel.org>; Wed, 02 Oct 2019 09:25:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=pensando.io; s=google;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=eeyTOg17q9KxMpdnKIdB7cChcxt684Nc0Z/pTXOp8y8=;
-        b=EP1pH7wpiE0TYKvhUm2wWyzT1PRmnrtJW2S9yGvLz+UQS5H6/InXwE+x7vcQn0YkA8
-         FvYrIpIaayfSv4Ts2FZYpj3clWi/NGLG/G3R7XP1QXkQqsFA+p03EIgoGlgNePuVOKte
-         EV2xbhJPg+0sbcZIjH2QWZyQcxkXcsqBDBFBGsAG+au4XuTyaRh7n3OKaPHzKopsBy0D
-         UKEmC1UUp5TnLJB/BzgH+VR7a60BkAmOYCpo8QG8Zz0WcDX/gt+ScP5hZv0bfiIbfid5
-         VtIAGaDfjpZDJsmbs5y6TakZJvKeAeAbclrWPjG2I6CjzEY6C4bLgws3vjG9QhFFf/wO
-         LjJA==
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=y2jhf/oP0I0B2owborVP8OXRaK2yh9UzOD7ehI47lE4=;
+        b=TnWxK91Y4wFzvU9QvIAxrFQEsZcO68ZTUG5zzQ5BcelNJwbKwQC5PvhiSVV9EVhYzZ
+         uc2Y0m4ypWPiEdqYBLPQ5LOcZfGYWaupqFePORd1nXG8xRoBt0D2Gf5mX0jqAq6D1tOd
+         eIhlNI1vji05euHzqNybratSVsoIVZgNb1iZ6Rb/0+uo6JnNQxOpEAg2ik4mUvfb2z0D
+         Up1P+Whl3XrBps5B7ESaWw3kXkaGVeVYdpiSdDAthfibRLuabUo5nq+8f5O9UMCcR2qw
+         4qcqxzlohhS5LdH+dM5NCQnE/QGu/W7mJHplIpv9W6/JN2hQ7TDGQfQMylacPgd3gv/y
+         ViVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=eeyTOg17q9KxMpdnKIdB7cChcxt684Nc0Z/pTXOp8y8=;
-        b=rlIg9w+Cu5ZmGfYrllj9BZfHxKT2M/2tHeKhJhTNGrd9OraGTH4/+s90pKBsZK1OG8
-         J29mDj1Otcglrxr7S3gDG1x9bvhX3fKu9mi6WUZmsetz/mJQ9EiM4Re8jFtZx2sMnidU
-         wUjVpVQjCGwuCBsHOQvFT5N8mNNvPv9xZz7Xow1dnXHOT3SR4dQqHseDMT3rkNNkO93e
-         RpGjOp/+fRJlItfwqOlxFizC2hv2OpXak3OgMzlwEpTcsLK3tGfDRvqtB8QDlSoeNmCS
-         eJaEsTlv4qzPBBCX87znxvTw78d1DuGy0YXHMkuvttOB7AWGKkiEX9VggSm0JbL/B4sj
-         VJbQ==
-X-Gm-Message-State: APjAAAUb53ncOsEWhWGryloHpBvNTRbwQlXimAOmYId6M6VkVCqTuifz
-        FPlTQ33jZHs6ixsRhdBa8xr4aQ==
-X-Google-Smtp-Source: APXvYqxrTJaVirNXUIMjjQQYz+vd4XBrvrCFGiFDXmev6sjlsTLcobvsJWUnNNcWVcQJlboCNdrkOA==
-X-Received: by 2002:a62:e817:: with SMTP id c23mr5436656pfi.230.1570032873121;
-        Wed, 02 Oct 2019 09:14:33 -0700 (PDT)
-Received: from Shannons-MacBook-Pro.local (static-50-53-47-17.bvtn.or.frontiernet.net. [50.53.47.17])
-        by smtp.gmail.com with ESMTPSA id z25sm18095592pfn.7.2019.10.02.09.14.31
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 02 Oct 2019 09:14:32 -0700 (PDT)
-Subject: Re: [PATCH] Documentation: networking: device drivers: Remove stray
- asterisks
-To:     =?UTF-8?Q?Jonathan_Neusch=c3=a4fer?= <j.neuschaefer@gmx.net>,
-        linux-doc@vger.kernel.org
-Cc:     Jeff Kirsher <jeffrey.t.kirsher@intel.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Pensando Drivers <drivers@pensando.io>,
-        intel-wired-lan@lists.osuosl.org, netdev@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20191002150956.16234-1-j.neuschaefer@gmx.net>
-From:   Shannon Nelson <snelson@pensando.io>
-Message-ID: <1fd5d5df-30ea-2545-daf6-575473879cd6@pensando.io>
-Date:   Wed, 2 Oct 2019 09:14:31 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.14; rv:60.0)
- Gecko/20100101 Thunderbird/60.9.0
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=y2jhf/oP0I0B2owborVP8OXRaK2yh9UzOD7ehI47lE4=;
+        b=SPeKQFn6niepwmRyaMIG2sSVhQWq2VJ9ghjTO5e2MuqCwGe2I4PV+7Xt15SvX8SGsP
+         s5jzKt+hqR8dhL9wewJ8wxxPp+U0jF7pBl2cJgc4xOTjp0o22ybyWoc5Ye1Zo+bqRvwj
+         IsB8KeGV3AhldOCrZP3q+67B6AysFizOuJPtw6TVJwQcORGQSq4Z9k02pqq9grrggMoe
+         nstFz5/yqGv+Mkiv8XS/gR47Fkn8g4cNNCE3iU2/Y14NjeprOz58cEZuEptfkIMs8W6U
+         AQPL27x62ks4WfjSL3Lddix+rbT7RLviTstAvmFUfXXhuAisBsyzPEzQno0vwisCJkT+
+         h9Mw==
+X-Gm-Message-State: APjAAAVXG87kkefUQcKLvehiQstB7iRdheqiiLH3yqMDyWimWw/Pv69t
+        JFEia/810ZbDqqQKCsOktYIAZQ==
+X-Google-Smtp-Source: APXvYqzIugv5g3vDP04bEfPDbNEqTdsDd+tLzwOawLS9vL2iOnudpm9WsHszqFxHdIXBGoYMClSyIg==
+X-Received: by 2002:a5d:5185:: with SMTP id k5mr3591524wrv.341.1570033538451;
+        Wed, 02 Oct 2019 09:25:38 -0700 (PDT)
+Received: from debian-brgl.home ([2a01:cb1d:af:5b00:6d6c:8493:1ab5:dad7])
+        by smtp.gmail.com with ESMTPSA id w9sm3482067wrt.62.2019.10.02.09.25.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 02 Oct 2019 09:25:37 -0700 (PDT)
+From:   Bartosz Golaszewski <brgl@bgdev.pl>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [PATCH v2 0/5] drivers: add a new variant of devm_platform_ioremap_resource()
+Date:   Wed,  2 Oct 2019 18:25:29 +0200
+Message-Id: <20191002162534.3967-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <20191002150956.16234-1-j.neuschaefer@gmx.net>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-US
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/2/19 8:09 AM, Jonathan Neuschäfer wrote:
-> These asterisks were once references to a line that said:
->    "* Other names and brands may be claimed as the property of others."
-> But now, they serve no purpose; they can only irritate the reader.
->
-[...]
-> Fixes: df69ba43217d ("ionic: Add basic framework for IONIC Network device driver")
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Acked-by: Shannon Nelson <snelson@pensando.io>
+The new devm_platform_ioremap_resource() helper has now been widely
+adopted and used in many drivers. Users of the write-combined ioremap()
+variants could benefit from the same code shrinkage. This series provides
+a write-combined version of devm_platform_ioremap_resource() and uses it in a
+relevant driver with the assumption that - just like was the case
+previously - a coccinelle script will be developed to ease the transition
+for others.
 
+v1 -> v2:
+- dropped everything related to nocache ioremap as this is going away
+
+Bartosz Golaszewski (5):
+  Documentation: devres: add missing entry for
+    devm_platform_ioremap_resource()
+  lib: devres: prepare devm_ioremap_resource() for more variants
+  lib: devres: provide devm_ioremap_resource_wc()
+  drivers: platform: provide devm_platform_ioremap_resource_wc()
+  misc: sram: use devm_platform_ioremap_resource_wc()
+
+ .../driver-api/driver-model/devres.rst        |  3 +
+ drivers/base/platform.c                       | 27 ++++++--
+ drivers/misc/sram.c                           | 28 +++------
+ include/linux/device.h                        |  2 +
+ include/linux/platform_device.h               |  3 +
+ lib/devres.c                                  | 62 +++++++++++++------
+ 6 files changed, 80 insertions(+), 45 deletions(-)
+
+-- 
+2.23.0
 
