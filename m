@@ -2,27 +2,29 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9C686CAEF0
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2019 21:09:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 17F29CAEF4
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2019 21:09:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1733125AbfJCTJb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Oct 2019 15:09:31 -0400
-Received: from ms.lwn.net ([45.79.88.28]:33704 "EHLO ms.lwn.net"
+        id S1729464AbfJCTJi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Oct 2019 15:09:38 -0400
+Received: from ms.lwn.net ([45.79.88.28]:33710 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729264AbfJCTJa (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 3 Oct 2019 15:09:30 -0400
+        id S1732733AbfJCTJb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 3 Oct 2019 15:09:31 -0400
 Received: from meer.lwn.net (localhost [127.0.0.1])
-        by ms.lwn.net (Postfix) with ESMTPA id 05CF7300;
-        Thu,  3 Oct 2019 19:09:29 +0000 (UTC)
+        by ms.lwn.net (Postfix) with ESMTPA id 5A7077C0;
+        Thu,  3 Oct 2019 19:09:30 +0000 (UTC)
 From:   Jonathan Corbet <corbet@lwn.net>
 To:     linux-doc@vger.kernel.org
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         Daniel Vetter <daniel@ffwll.ch>, linux-kernel@vger.kernel.org,
         Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 0/2] docs: move the ioctl() documentation out of the top level
-Date:   Thu,  3 Oct 2019 13:09:19 -0600
-Message-Id: <20191003190921.5141-1-corbet@lwn.net>
+Subject: [PATCH 1/2] docs: move botching-up-ioctls.rst to the process guide
+Date:   Thu,  3 Oct 2019 13:09:20 -0600
+Message-Id: <20191003190921.5141-2-corbet@lwn.net>
 X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20191003190921.5141-1-corbet@lwn.net>
+References: <20191003190921.5141-1-corbet@lwn.net>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
@@ -30,37 +32,46 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-We have a handful of ioctl() documentation that doesn't really merit a
-top-level directory, especially when there are more suitable places for
-it.  So:
+This is overall information for kernel developers, and not part of the
+user-space API.
 
- - Move botching-up-ioctls.rst to the process guide; it's aimed at kernel
-   developers so should be where they will look.
-
- - Move the rest to the userspace-api book along with the rest of the
-   user-space documentation.
-
-Jonathan Corbet (2):
-  docs: move botching-up-ioctls.rst to the process guide
-  docs: Move the user-space ioctl() docs to userspace-api
-
- Documentation/index.rst                                    | 1 -
- Documentation/{ioctl => process}/botching-up-ioctls.rst    | 0
- Documentation/process/index.rst                            | 1 +
- Documentation/userspace-api/index.rst                      | 1 +
- Documentation/{ => userspace-api}/ioctl/cdrom.rst          | 0
- Documentation/{ => userspace-api}/ioctl/hdio.rst           | 0
- Documentation/{ => userspace-api}/ioctl/index.rst          | 1 -
- Documentation/{ => userspace-api}/ioctl/ioctl-decoding.rst | 0
- Documentation/{ => userspace-api}/ioctl/ioctl-number.rst   | 0
- 9 files changed, 2 insertions(+), 2 deletions(-)
+Cc: Daniel Vetter <daniel@ffwll.ch>
+Signed-off-by: Jonathan Corbet <corbet@lwn.net>
+---
+ Documentation/ioctl/index.rst                           | 1 -
+ Documentation/{ioctl => process}/botching-up-ioctls.rst | 0
+ Documentation/process/index.rst                         | 1 +
+ 3 files changed, 1 insertion(+), 1 deletion(-)
  rename Documentation/{ioctl => process}/botching-up-ioctls.rst (100%)
- rename Documentation/{ => userspace-api}/ioctl/cdrom.rst (100%)
- rename Documentation/{ => userspace-api}/ioctl/hdio.rst (100%)
- rename Documentation/{ => userspace-api}/ioctl/index.rst (86%)
- rename Documentation/{ => userspace-api}/ioctl/ioctl-decoding.rst (100%)
- rename Documentation/{ => userspace-api}/ioctl/ioctl-number.rst (100%)
 
+diff --git a/Documentation/ioctl/index.rst b/Documentation/ioctl/index.rst
+index 0f0a857f6615..475675eae086 100644
+--- a/Documentation/ioctl/index.rst
++++ b/Documentation/ioctl/index.rst
+@@ -9,7 +9,6 @@ IOCTLs
+ 
+    ioctl-number
+ 
+-   botching-up-ioctls
+    ioctl-decoding
+ 
+    cdrom
+diff --git a/Documentation/ioctl/botching-up-ioctls.rst b/Documentation/process/botching-up-ioctls.rst
+similarity index 100%
+rename from Documentation/ioctl/botching-up-ioctls.rst
+rename to Documentation/process/botching-up-ioctls.rst
+diff --git a/Documentation/process/index.rst b/Documentation/process/index.rst
+index e2c9ffc682c5..e2c2cdaa93fa 100644
+--- a/Documentation/process/index.rst
++++ b/Documentation/process/index.rst
+@@ -57,6 +57,7 @@ lack of a better place.
+    adding-syscalls
+    magic-number
+    volatile-considered-harmful
++   botching-up-ioctls
+    clang-format
+ 
+ .. only::  subproject and html
 -- 
 2.21.0
 
