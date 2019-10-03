@@ -2,99 +2,49 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3AF32CAEF2
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2019 21:09:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C4C75CAF3C
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2019 21:29:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729264AbfJCTJe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Oct 2019 15:09:34 -0400
-Received: from ms.lwn.net ([45.79.88.28]:33722 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729464AbfJCTJb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 3 Oct 2019 15:09:31 -0400
-Received: from meer.lwn.net (localhost [127.0.0.1])
-        by ms.lwn.net (Postfix) with ESMTPA id AF974740;
-        Thu,  3 Oct 2019 19:09:30 +0000 (UTC)
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     linux-doc@vger.kernel.org
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Daniel Vetter <daniel@ffwll.ch>, linux-kernel@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 2/2] docs: Move the user-space ioctl() docs to userspace-api
-Date:   Thu,  3 Oct 2019 13:09:21 -0600
-Message-Id: <20191003190921.5141-3-corbet@lwn.net>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20191003190921.5141-1-corbet@lwn.net>
-References: <20191003190921.5141-1-corbet@lwn.net>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1731412AbfJCT3a convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Thu, 3 Oct 2019 15:29:30 -0400
+Received: from shards.monkeyblade.net ([23.128.96.9]:47724 "EHLO
+        shards.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731411AbfJCT3a (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Oct 2019 15:29:30 -0400
+Received: from localhost (unknown [IPv6:2601:601:9f00:1e2::3d5])
+        (using TLSv1 with cipher AES256-SHA (256/256 bits))
+        (Client did not present a certificate)
+        (Authenticated sender: davem-davemloft)
+        by shards.monkeyblade.net (Postfix) with ESMTPSA id B55AD146D1ABB;
+        Thu,  3 Oct 2019 12:29:29 -0700 (PDT)
+Date:   Thu, 03 Oct 2019 12:29:29 -0700 (PDT)
+Message-Id: <20191003.122929.5827330149147558.davem@davemloft.net>
+To:     j.neuschaefer@gmx.net
+Cc:     netdev@vger.kernel.org, corbet@lwn.net, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: networking: devlink-trap: Fix reference to other
+ document
+From:   David Miller <davem@davemloft.net>
+In-Reply-To: <20191003190536.32463-1-j.neuschaefer@gmx.net>
+References: <20191003190536.32463-1-j.neuschaefer@gmx.net>
+X-Mailer: Mew version 6.8 on Emacs 26.1
+Mime-Version: 1.0
+Content-Type: Text/Plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8BIT
+X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12 (shards.monkeyblade.net [149.20.54.216]); Thu, 03 Oct 2019 12:29:29 -0700 (PDT)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This is strictly user-space material at this point, so put it with the
-other user-space API documentation.
+From: Jonathan Neuschäfer <j.neuschaefer@gmx.net>
+Date: Thu,  3 Oct 2019 21:05:36 +0200
 
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
----
- Documentation/index.rst                                    | 1 -
- Documentation/userspace-api/index.rst                      | 1 +
- Documentation/{ => userspace-api}/ioctl/cdrom.rst          | 0
- Documentation/{ => userspace-api}/ioctl/hdio.rst           | 0
- Documentation/{ => userspace-api}/ioctl/index.rst          | 0
- Documentation/{ => userspace-api}/ioctl/ioctl-decoding.rst | 0
- Documentation/{ => userspace-api}/ioctl/ioctl-number.rst   | 0
- 7 files changed, 1 insertion(+), 1 deletion(-)
- rename Documentation/{ => userspace-api}/ioctl/cdrom.rst (100%)
- rename Documentation/{ => userspace-api}/ioctl/hdio.rst (100%)
- rename Documentation/{ => userspace-api}/ioctl/index.rst (100%)
- rename Documentation/{ => userspace-api}/ioctl/ioctl-decoding.rst (100%)
- rename Documentation/{ => userspace-api}/ioctl/ioctl-number.rst (100%)
+> This fixes the following Sphinx warning:
+> 
+> Documentation/networking/devlink-trap.rst:175: WARNING: unknown document: /devlink-trap-netdevsim
+> 
+> Fixes: 9e0874570488 ("Documentation: Add description of netdevsim traps")
+> Signed-off-by: Jonathan Neuschäfer <j.neuschaefer@gmx.net>
 
-diff --git a/Documentation/index.rst b/Documentation/index.rst
-index b843e313d2f2..dbf0951a0abe 100644
---- a/Documentation/index.rst
-+++ b/Documentation/index.rst
-@@ -57,7 +57,6 @@ the kernel interface as seen by application developers.
-    :maxdepth: 2
- 
-    userspace-api/index
--   ioctl/index
- 
- 
- Introduction to kernel development
-diff --git a/Documentation/userspace-api/index.rst b/Documentation/userspace-api/index.rst
-index ad494da40009..e983488b48b1 100644
---- a/Documentation/userspace-api/index.rst
-+++ b/Documentation/userspace-api/index.rst
-@@ -21,6 +21,7 @@ place where this information is gathered.
-    unshare
-    spec_ctrl
-    accelerators/ocxl
-+   ioctl/index
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/ioctl/cdrom.rst b/Documentation/userspace-api/ioctl/cdrom.rst
-similarity index 100%
-rename from Documentation/ioctl/cdrom.rst
-rename to Documentation/userspace-api/ioctl/cdrom.rst
-diff --git a/Documentation/ioctl/hdio.rst b/Documentation/userspace-api/ioctl/hdio.rst
-similarity index 100%
-rename from Documentation/ioctl/hdio.rst
-rename to Documentation/userspace-api/ioctl/hdio.rst
-diff --git a/Documentation/ioctl/index.rst b/Documentation/userspace-api/ioctl/index.rst
-similarity index 100%
-rename from Documentation/ioctl/index.rst
-rename to Documentation/userspace-api/ioctl/index.rst
-diff --git a/Documentation/ioctl/ioctl-decoding.rst b/Documentation/userspace-api/ioctl/ioctl-decoding.rst
-similarity index 100%
-rename from Documentation/ioctl/ioctl-decoding.rst
-rename to Documentation/userspace-api/ioctl/ioctl-decoding.rst
-diff --git a/Documentation/ioctl/ioctl-number.rst b/Documentation/userspace-api/ioctl/ioctl-number.rst
-similarity index 100%
-rename from Documentation/ioctl/ioctl-number.rst
-rename to Documentation/userspace-api/ioctl/ioctl-number.rst
--- 
-2.21.0
-
+Acked-by: David S. Miller <davem@davemloft.net>
