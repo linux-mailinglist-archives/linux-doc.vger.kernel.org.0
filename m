@@ -2,101 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C318CCA101
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2019 17:15:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E2C46CA7E5
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2019 18:58:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727264AbfJCPP7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Oct 2019 11:15:59 -0400
-Received: from mail.kernel.org ([198.145.29.99]:39600 "EHLO mail.kernel.org"
+        id S2389030AbfJCQ5s (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Oct 2019 12:57:48 -0400
+Received: from ms.lwn.net ([45.79.88.28]:33156 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726364AbfJCPP6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 3 Oct 2019 11:15:58 -0400
-Received: from localhost (lfbn-1-10718-76.w90-89.abo.wanadoo.fr [90.89.68.76])
+        id S2405828AbfJCQtd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 3 Oct 2019 12:49:33 -0400
+Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 78C542133F;
-        Thu,  3 Oct 2019 15:15:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1570115758;
-        bh=TYOnIuRjzhdf6d/+AussWQ/jrj8Mub0Q/qfG0zOFxO0=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=O9Bv8u+dZ3vkxt9uu7BIYGOCnTaR8sUQzSd2GMf//E/hio6zBr/ZX3/1uNSKXwmwC
-         He33ej1ByT54C6yQ0ToG1Dv7oO7FsaLJ8XSqG2Rygxs6e8hX08T58RwyUpstqrfuPQ
-         n+HknfP9I6Vj4Kwin0VcsSvZ2UWnfgIdax1nR+No=
-Date:   Thu, 3 Oct 2019 17:15:55 +0200
-From:   Maxime Ripard <mripard@kernel.org>
-To:     Linus Walleij <linus.walleij@linaro.org>
-Cc:     Jonathan =?utf-8?Q?Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
-        "open list:DRM PANEL DRIVERS" <dri-devel@lists.freedesktop.org>,
-        David Airlie <airlied@linux.ie>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Sean Paul <sean@poorly.run>, Jonathan Corbet <corbet@lwn.net>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH 1/2] drm/mcde: Fix reference to DOC comment
-Message-ID: <20191003151555.64qabct3jmd74ypi@gilmour>
-References: <20191002153827.23026-1-j.neuschaefer@gmx.net>
- <CACRpkdZ0ekYtZ4bZ-A4NZN6HO6XJzwpdZ_HjUL=FoWfG08UBtg@mail.gmail.com>
- <CACRpkdYDuAx6OhFYiXT+79a1NphtfPQfyY=o7jKi0Bas5vr7+g@mail.gmail.com>
+        by ms.lwn.net (Postfix) with ESMTPSA id 2DF5C2D4;
+        Thu,  3 Oct 2019 16:49:33 +0000 (UTC)
+Date:   Thu, 3 Oct 2019 10:49:32 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc:     Jeremy MAURO <jeremy.mauro@gmail.com>, j.mauro@criteo.com,
+        linux-doc@vger.kernel.org (open list:DOCUMENTATION SCRIPTS),
+        linux-kernel@vger.kernel.org (open list)
+Subject: Re: [PATCH v2 2/2] scripts/sphinx-pre-install: Add a new path for
+ the debian package "fonts-noto-cjk"
+Message-ID: <20191003104932.5067387b@lwn.net>
+In-Reply-To: <20191002104504.515c6b7d@coco.lan>
+References: <20191002073636.68ad85de@coco.lan>
+        <20191002133543.10909-1-j.mauro@criteo.com>
+        <20191002104504.515c6b7d@coco.lan>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="7wxihfagc5o75k2e"
-Content-Disposition: inline
-In-Reply-To: <CACRpkdYDuAx6OhFYiXT+79a1NphtfPQfyY=o7jKi0Bas5vr7+g@mail.gmail.com>
-User-Agent: NeoMutt/20180716
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Wed, 2 Oct 2019 10:45:04 -0300
+Mauro Carvalho Chehab <mchehab+samsung@kernel.org> wrote:
 
---7wxihfagc5o75k2e
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Em Wed,  2 Oct 2019 15:35:42 +0200
+> Jeremy MAURO <jeremy.mauro@gmail.com> escreveu:
+> 
+> > The latest debian version "bullseye/sid" has changed the path of the file
+> > "notoserifcjk-regular.ttc", with the previous change and this change we
+> > keep the backward compatibility and add the latest debian version
+> > 
+> > Signed-off-by: Jeremy MAURO <j.mauro@criteo.com>  
+> 
+> Reviewed-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 
-Hi,
+Both patches applied, thanks.
 
-On Thu, Oct 03, 2019 at 04:39:39PM +0200, Linus Walleij wrote:
-> On Thu, Oct 3, 2019 at 4:34 PM Linus Walleij <linus.walleij@linaro.org> w=
-rote:
-> > On Wed, Oct 2, 2019 at 5:39 PM Jonathan Neusch=E4fer
-> > <j.neuschaefer@gmx.net> wrote:
-> >
-> > > The :doc: reference did not match the DOC comment's name.
-> > >
-> > > Fixes: 5fc537bfd000 ("drm/mcde: Add new driver for ST-Ericsson MCDE")
-> > > Signed-off-by: Jonathan Neusch=E4fer <j.neuschaefer@gmx.net>
-> >
-> > Both patches applied!
->
-> ...but I can't push the changes:
->
-> $ dim push-branch drm-misc-next
-> dim: 9fa1f9734e40 ("Revert "drm/sun4i: dsi: Change the start delay
-> calculation""): committer Signed-off-by missing.
-> dim: ERROR: issues in commits detected, aborting
->
-> Not even my commit, apart from that it looks like it does have
-> the committer Signed-off-by. I'm confused and don't know what
-> to do... anyone has some hints?
-
-Yeah, it's pretty weird, I just pushed without any trouble.
-
-Did you rebase or something?
-
-Maxime
-
---7wxihfagc5o75k2e
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iHUEABYIAB0WIQRcEzekXsqa64kGDp7j7w1vZxhRxQUCXZYQqwAKCRDj7w1vZxhR
-xfd6AQD/zc6r1v0NTQoKgRKELqgow/1Hm8wGjF422mloLB4VLQEAyokgh0l6DFKA
-QgASZMRMHm9asS0gq4v//8nwRHxrUAc=
-=ahDz
------END PGP SIGNATURE-----
-
---7wxihfagc5o75k2e--
+jon
