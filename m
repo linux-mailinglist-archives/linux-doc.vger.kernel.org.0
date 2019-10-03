@@ -2,54 +2,147 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8408DC9CEA
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2019 13:12:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A2265C9CF8
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Oct 2019 13:14:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729806AbfJCLMR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Oct 2019 07:12:17 -0400
-Received: from foss.arm.com ([217.140.110.172]:41758 "EHLO foss.arm.com"
+        id S1729904AbfJCLMV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Oct 2019 07:12:21 -0400
+Received: from foss.arm.com ([217.140.110.172]:41780 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728140AbfJCLMQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 3 Oct 2019 07:12:16 -0400
+        id S1728140AbfJCLMT (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 3 Oct 2019 07:12:19 -0400
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 667F61000;
-        Thu,  3 Oct 2019 04:12:16 -0700 (PDT)
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F3E251597;
+        Thu,  3 Oct 2019 04:12:18 -0700 (PDT)
 Received: from e108454-lin.cambridge.arm.com (e108454-lin.cambridge.arm.com [10.1.196.50])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 47D223F706;
-        Thu,  3 Oct 2019 04:12:15 -0700 (PDT)
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D3C843F706;
+        Thu,  3 Oct 2019 04:12:17 -0700 (PDT)
 From:   Julien Grall <julien.grall@arm.com>
 To:     linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org
 Cc:     will@kernel.org, catalin.marinas@arm.com, suzuki.poulose@arm.com,
         Julien Grall <julien.grall@arm.com>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 0/4] arm64/cpufeature: Fix + doc update
-Date:   Thu,  3 Oct 2019 12:12:07 +0100
-Message-Id: <20191003111211.483-1-julien.grall@arm.com>
+Subject: [PATCH 2/4] docs/arm64: elf_hwcaps: sort the HWCAP{,2} documentation by ascending value
+Date:   Thu,  3 Oct 2019 12:12:09 +0100
+Message-Id: <20191003111211.483-3-julien.grall@arm.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20191003111211.483-1-julien.grall@arm.com>
+References: <20191003111211.483-1-julien.grall@arm.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi all,
+Part of the hardware capabilities documented in elf_hwcap.rst are
+ordered following the definition in the header
+arch/arm64/include/uapi/asm/hwcap.h but others seems to be documented
+in random order.
 
-This patch fix an issue related to exposing the FRINT capability to
-userspace (see patch #1). The rest is documentation update.
+To make easier to match against the definition in the header, they are
+now sorted in the same order as they are defined in header. I.e.,
+HWCAP first by ascending value, and then HWCAP2 in the similar fashion.
 
-Cheers,
+Signed-off-by: Julien Grall <julien.grall@arm.com>
+---
+ Documentation/arm64/elf_hwcaps.rst | 64 +++++++++++++++++++-------------------
+ 1 file changed, 32 insertions(+), 32 deletions(-)
 
-Julien Grall (4):
-  arm64: cpufeature: Effectively expose FRINT capability to userspace
-  docs/arm64: elf_hwcaps: sort the HWCAP{,2} documentation by ascending
-    value
-  docs/arm64: elf_hwcaps: Document HWCAP_SB
-  docs/arm64: cpu-feature-registers: Documents missing visible fields
-
- Documentation/arm64/cpu-feature-registers.rst |  4 ++
- Documentation/arm64/elf_hwcaps.rst            | 67 ++++++++++++++-------------
- arch/arm64/kernel/cpufeature.c                |  1 +
- 3 files changed, 40 insertions(+), 32 deletions(-)
-
+diff --git a/Documentation/arm64/elf_hwcaps.rst b/Documentation/arm64/elf_hwcaps.rst
+index 91f79529c58c..9ee7f8ff1fae 100644
+--- a/Documentation/arm64/elf_hwcaps.rst
++++ b/Documentation/arm64/elf_hwcaps.rst
+@@ -119,10 +119,6 @@ HWCAP_LRCPC
+ HWCAP_DCPOP
+     Functionality implied by ID_AA64ISAR1_EL1.DPB == 0b0001.
+ 
+-HWCAP2_DCPODP
+-
+-    Functionality implied by ID_AA64ISAR1_EL1.DPB == 0b0010.
+-
+ HWCAP_SHA3
+     Functionality implied by ID_AA64ISAR0_EL1.SHA3 == 0b0001.
+ 
+@@ -141,30 +137,6 @@ HWCAP_SHA512
+ HWCAP_SVE
+     Functionality implied by ID_AA64PFR0_EL1.SVE == 0b0001.
+ 
+-HWCAP2_SVE2
+-
+-    Functionality implied by ID_AA64ZFR0_EL1.SVEVer == 0b0001.
+-
+-HWCAP2_SVEAES
+-
+-    Functionality implied by ID_AA64ZFR0_EL1.AES == 0b0001.
+-
+-HWCAP2_SVEPMULL
+-
+-    Functionality implied by ID_AA64ZFR0_EL1.AES == 0b0010.
+-
+-HWCAP2_SVEBITPERM
+-
+-    Functionality implied by ID_AA64ZFR0_EL1.BitPerm == 0b0001.
+-
+-HWCAP2_SVESHA3
+-
+-    Functionality implied by ID_AA64ZFR0_EL1.SHA3 == 0b0001.
+-
+-HWCAP2_SVESM4
+-
+-    Functionality implied by ID_AA64ZFR0_EL1.SM4 == 0b0001.
+-
+ HWCAP_ASIMDFHM
+    Functionality implied by ID_AA64ISAR0_EL1.FHM == 0b0001.
+ 
+@@ -180,10 +152,6 @@ HWCAP_ILRCPC
+ HWCAP_FLAGM
+     Functionality implied by ID_AA64ISAR0_EL1.TS == 0b0001.
+ 
+-HWCAP2_FLAGM2
+-
+-    Functionality implied by ID_AA64ISAR0_EL1.TS == 0b0010.
+-
+ HWCAP_SSBS
+     Functionality implied by ID_AA64PFR1_EL1.SSBS == 0b0010.
+ 
+@@ -197,6 +165,38 @@ HWCAP_PACG
+     ID_AA64ISAR1_EL1.GPI == 0b0001, as described by
+     Documentation/arm64/pointer-authentication.rst.
+ 
++HWCAP2_DCPODP
++
++    Functionality implied by ID_AA64ISAR1_EL1.DPB == 0b0010.
++
++HWCAP2_SVE2
++
++    Functionality implied by ID_AA64ZFR0_EL1.SVEVer == 0b0001.
++
++HWCAP2_SVEAES
++
++    Functionality implied by ID_AA64ZFR0_EL1.AES == 0b0001.
++
++HWCAP2_SVEPMULL
++
++    Functionality implied by ID_AA64ZFR0_EL1.AES == 0b0010.
++
++HWCAP2_SVEBITPERM
++
++    Functionality implied by ID_AA64ZFR0_EL1.BitPerm == 0b0001.
++
++HWCAP2_SVESHA3
++
++    Functionality implied by ID_AA64ZFR0_EL1.SHA3 == 0b0001.
++
++HWCAP2_SVESM4
++
++    Functionality implied by ID_AA64ZFR0_EL1.SM4 == 0b0001.
++
++HWCAP2_FLAGM2
++
++    Functionality implied by ID_AA64ISAR0_EL1.TS == 0b0010.
++
+ HWCAP2_FRINT
+ 
+     Functionality implied by ID_AA64ISAR1_EL1.FRINTTS == 0b0001.
 -- 
 2.11.0
 
