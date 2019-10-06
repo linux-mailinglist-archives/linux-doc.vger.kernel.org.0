@@ -2,48 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 716F5CCED2
-	for <lists+linux-doc@lfdr.de>; Sun,  6 Oct 2019 07:40:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5CB46CCEC8
+	for <lists+linux-doc@lfdr.de>; Sun,  6 Oct 2019 07:40:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726331AbfJFFj5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 6 Oct 2019 01:39:57 -0400
-Received: from mail-pf1-f194.google.com ([209.85.210.194]:43256 "EHLO
-        mail-pf1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726277AbfJFFjq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 6 Oct 2019 01:39:46 -0400
-Received: by mail-pf1-f194.google.com with SMTP id a2so6406165pfo.10
-        for <linux-doc@vger.kernel.org>; Sat, 05 Oct 2019 22:39:44 -0700 (PDT)
+        id S1726300AbfJFFjt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 6 Oct 2019 01:39:49 -0400
+Received: from mail-pg1-f194.google.com ([209.85.215.194]:44762 "EHLO
+        mail-pg1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726290AbfJFFjr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 6 Oct 2019 01:39:47 -0400
+Received: by mail-pg1-f194.google.com with SMTP id i14so6123106pgt.11
+        for <linux-doc@vger.kernel.org>; Sat, 05 Oct 2019 22:39:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=JGpHJMNJmt0D2CtlAvF0BB0ayFvc7p4D4pLv8EbvGc0=;
-        b=hrHDoGWgArLcjoy0hg4PkXWTSixMvbFbwkcCa91SIAZRFyGz1B9nRGPJWh7Yy7Ywkt
-         e6JGXS3ykmBB5j1QyCEgvzPT77oLwZygN10YdkakXwi5qIw8CbuIVg0P3a2nS2uDk//r
-         G18E/AHje4wYYlglCW7eN2fGPGHs5R1Bhm9FeNgF1LKq/J89/nwylmdNe6e08m2sEPPJ
-         xU67f7DAAqMtaxiQssJRcLTQ21fI83dyecuUxXZD9VW/qE7B0iQM7+kZ4A1uGJUKxyLW
-         Becd1uwkUIwNeh190VTOY7YdSa2bfjdB9WBlXpw9z66aR8H2fnZQnv0CPMgx31dpjJgM
-         RyGQ==
+        bh=o+2cCkacS0/wsdoq+AhwYBV7HAjDIr1+29FN1l6fATg=;
+        b=zlR7f3v6X6VUHlmDnEU4rDms8pwdJwwfFhghIIGBJMCzHM+Mj8Y7hUSVAPN0Cb3JOg
+         Gm1vfy2oFYliCkbSbasts3bHObYD0QK3/P+QRlH+MLIu6JUPoNPUJX3DII2meRrAWwGr
+         YjFpHV0GPS32lYoKZOyL5VPwSibzj5KfsIxaHChxOFonp1xGLXserUJLx0Xkcf6/tvbT
+         NMM/+taLAaPaayKF7G4IdbGr711z5zaq516AdwGkTIp4VT57hPZnoPGCcu7WBQv1ZFXG
+         qzMnxm4i8bUffPu72P/i3mrXDqUB3N/0jNUtK8frmZxI4vCCOIhbpGhZSJCbx8+SKI3H
+         Bwlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=JGpHJMNJmt0D2CtlAvF0BB0ayFvc7p4D4pLv8EbvGc0=;
-        b=GiXJKKLhTXeZcZXRkLu/9aHjY6olwJ9WP5fqFzui1dYe/7h5OGpA0lQJZQxb0SeAkC
-         1CS3Ry0DI3vGeGDtXWxwXHTefJIGhcwxlEE21vTJHBEG1Qc8NlW8uFU46bOG8RC+/+QH
-         7nh6UKprcjP0qWIP9R/TrnGiTJqIBYxu68w1kyhvrn0kPkxw5SheOiO3KWz3dpBT5n52
-         Te/PEBNxQ2++MfU4XhtfDjw7ofIqSWw+UWnz5DldEAlXzM25iY+M6TiqaGJXj8u14sXO
-         /aIg3czo02/5tyZJ2CDfnKUHJaRKnZw7F1fsrxMccF8zTB9Xwzmpu12A6+lMd//jrP2P
-         gUyA==
-X-Gm-Message-State: APjAAAUpSeaYnkhIKO7rArisIoRsSloSnOFazQQSOmkMVuFXehhhg+Fm
-        Dor5SVwpV9YSw1/B1vKKdZBTYg==
-X-Google-Smtp-Source: APXvYqyZkMteRPmIT4lYcc/6t8ZvthXPr2H8kcWCAOiHeEc0hH0NUfT8n8WaSRKA29NDI6H98rKhmw==
-X-Received: by 2002:a17:90a:f487:: with SMTP id bx7mr25496934pjb.83.1570340384435;
-        Sat, 05 Oct 2019 22:39:44 -0700 (PDT)
+        bh=o+2cCkacS0/wsdoq+AhwYBV7HAjDIr1+29FN1l6fATg=;
+        b=UGMHUTTfoAx/TTOwcZX0WLOdLBbW1aj/FZaIriULilGRgHNVOE0v1S2WfQLhUdB2E1
+         vIlafdIrs8deGrNbuAWkdFKAk4eBiq0zz45QqtQcbjDMXQxWQ2R8V0GN5JuG6/i0NWWR
+         YGiITmvwYwucBAU+KEfReWd3xBivzl6yjrauWqMQmc52N3i5bhHmTo11WCX3dtt1CPNS
+         wLVIbZiCHefJPidlSCAPsOBatz7Am3h4KRipWvGlnFUFptDWTKV2r9LTqCy2leqgCtPM
+         a8ViDXPvE8suzgnnEi7uVRMTPkH5TYPBNrSBC1RmYO+JH5kB/FcK191VjdSfOxdhQPIJ
+         LvmQ==
+X-Gm-Message-State: APjAAAUVQ3LGsfqfcfwC0dcSaWIAzkexXfyGrQgYmEQL3O/dRFSUOCNH
+        D/Cm7rnZARH5NNhloDS0dIWyKg==
+X-Google-Smtp-Source: APXvYqxK3lP1b5O5P9pkwJr2DSVKlg5gfYiK+vKbxwea7k+/ZUAKfLagdWTvWlycO53oE5WA3dKsUQ==
+X-Received: by 2002:aa7:99da:: with SMTP id v26mr26356523pfi.258.1570340385338;
+        Sat, 05 Oct 2019 22:39:45 -0700 (PDT)
 Received: from debian-brgl.local (50-255-47-209-static.hfc.comcastbusiness.net. [50.255.47.209])
-        by smtp.gmail.com with ESMTPSA id q30sm10019320pja.18.2019.10.05.22.39.43
+        by smtp.gmail.com with ESMTPSA id q30sm10019320pja.18.2019.10.05.22.39.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 05 Oct 2019 22:39:44 -0700 (PDT)
+        Sat, 05 Oct 2019 22:39:45 -0700 (PDT)
 From:   Bartosz Golaszewski <brgl@bgdev.pl>
 To:     Jonathan Corbet <corbet@lwn.net>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -53,9 +53,9 @@ To:     Jonathan Corbet <corbet@lwn.net>,
 Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-gpio@vger.kernel.org,
         Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH v3 7/8] gpio: mvebu: use devm_platform_ioremap_resource_byname()
-Date:   Sun,  6 Oct 2019 07:39:15 +0200
-Message-Id: <20191006053916.8849-8-brgl@bgdev.pl>
+Subject: [PATCH v3 8/8] gpio: tegra186: use devm_platform_ioremap_resource_byname()
+Date:   Sun,  6 Oct 2019 07:39:16 +0200
+Message-Id: <20191006053916.8849-9-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.23.0
 In-Reply-To: <20191006053916.8849-1-brgl@bgdev.pl>
 References: <20191006053916.8849-1-brgl@bgdev.pl>
@@ -68,56 +68,36 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Use devm_platform_ioremap_resource_byname() instead of calling
-platform_get_resource_byname() and devm_ioremap_resource() separately.
+Use the devm_platform_ioremap_resource_byname() helper instead of
+calling platform_get_resource_byname() and devm_ioremap_resource()
+separately.
 
 Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- drivers/gpio/gpio-mvebu.c | 19 +++++++------------
- 1 file changed, 7 insertions(+), 12 deletions(-)
+ drivers/gpio/gpio-tegra186.c | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/drivers/gpio/gpio-mvebu.c b/drivers/gpio/gpio-mvebu.c
-index 6c0687694341..2f0f50336b9a 100644
---- a/drivers/gpio/gpio-mvebu.c
-+++ b/drivers/gpio/gpio-mvebu.c
-@@ -773,23 +773,12 @@ static int mvebu_pwm_probe(struct platform_device *pdev,
- {
- 	struct device *dev = &pdev->dev;
- 	struct mvebu_pwm *mvpwm;
+diff --git a/drivers/gpio/gpio-tegra186.c b/drivers/gpio/gpio-tegra186.c
+index a9058fda187e..ef40fbe923cf 100644
+--- a/drivers/gpio/gpio-tegra186.c
++++ b/drivers/gpio/gpio-tegra186.c
+@@ -407,7 +407,6 @@ static int tegra186_gpio_probe(struct platform_device *pdev)
+ 	unsigned int i, j, offset;
+ 	struct gpio_irq_chip *irq;
+ 	struct tegra_gpio *gpio;
 -	struct resource *res;
- 	u32 set;
+ 	char **names;
+ 	int err;
  
- 	if (!of_device_is_compatible(mvchip->chip.of_node,
- 				     "marvell,armada-370-gpio"))
- 		return 0;
+@@ -417,8 +416,7 @@ static int tegra186_gpio_probe(struct platform_device *pdev)
  
--	/*
--	 * There are only two sets of PWM configuration registers for
--	 * all the GPIO lines on those SoCs which this driver reserves
--	 * for the first two GPIO chips. So if the resource is missing
--	 * we can't treat it as an error.
--	 */
--	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "pwm");
--	if (!res)
--		return 0;
--
- 	if (IS_ERR(mvchip->clk))
- 		return PTR_ERR(mvchip->clk);
+ 	gpio->soc = of_device_get_match_data(&pdev->dev);
  
-@@ -812,7 +801,13 @@ static int mvebu_pwm_probe(struct platform_device *pdev,
- 	mvchip->mvpwm = mvpwm;
- 	mvpwm->mvchip = mvchip;
- 
--	mvpwm->membase = devm_ioremap_resource(dev, res);
-+	/*
-+	 * There are only two sets of PWM configuration registers for
-+	 * all the GPIO lines on those SoCs which this driver reserves
-+	 * for the first two GPIO chips. So if the resource is missing
-+	 * we can't treat it as an error.
-+	 */
-+	mvpwm->membase = devm_platform_ioremap_resource_byname(pdev, "pwm");
- 	if (IS_ERR(mvpwm->membase))
- 		return PTR_ERR(mvpwm->membase);
+-	res = platform_get_resource_byname(pdev, IORESOURCE_MEM, "gpio");
+-	gpio->base = devm_ioremap_resource(&pdev->dev, res);
++	gpio->base = devm_platform_ioremap_resource_byname(pdev, "gpio");
+ 	if (IS_ERR(gpio->base))
+ 		return PTR_ERR(gpio->base);
  
 -- 
 2.23.0
