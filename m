@@ -2,159 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0F5B623C1C5
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Aug 2020 00:02:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 37BA523C266
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Aug 2020 01:52:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728390AbgHDWCA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 4 Aug 2020 18:02:00 -0400
-Received: from mail.kernel.org ([198.145.29.99]:39772 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728305AbgHDWB7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 4 Aug 2020 18:01:59 -0400
-Received: from oasis.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id A7F67207FC;
-        Tue,  4 Aug 2020 22:01:50 +0000 (UTC)
-Date:   Tue, 4 Aug 2020 18:01:47 -0400
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     SeongJae Park <sjpark@amazon.com>
-Cc:     <akpm@linux-foundation.org>, SeongJae Park <sjpark@amazon.de>,
-        <Jonathan.Cameron@Huawei.com>, <aarcange@redhat.com>,
-        <acme@kernel.org>, <alexander.shishkin@linux.intel.com>,
-        <amit@kernel.org>, <benh@kernel.crashing.org>,
-        <brendan.d.gregg@gmail.com>, <brendanhiggins@google.com>,
-        <cai@lca.pw>, <colin.king@canonical.com>, <corbet@lwn.net>,
-        <david@redhat.com>, <dwmw@amazon.com>, <fan.du@intel.com>,
-        <foersleo@amazon.de>, <gthelen@google.com>, <irogers@google.com>,
-        <jolsa@redhat.com>, <kirill@shutemov.name>, <mark.rutland@arm.com>,
-        <mgorman@suse.de>, <minchan@kernel.org>, <mingo@redhat.com>,
-        <namhyung@kernel.org>, <peterz@infradead.org>,
-        <rdunlap@infradead.org>, <riel@surriel.com>, <rientjes@google.com>,
-        <rppt@kernel.org>, <sblbir@amazon.com>, <shakeelb@google.com>,
-        <shuah@kernel.org>, <sj38.park@gmail.com>, <snu@amazon.de>,
-        <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
-        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
-        <linux-damon@amazon.com>, <linux-mm@kvack.org>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v19 08/15] mm/damon: Add a tracepoint
-Message-ID: <20200804180147.16d34809@oasis.local.home>
-In-Reply-To: <20200804091416.31039-9-sjpark@amazon.com>
-References: <20200804091416.31039-1-sjpark@amazon.com>
-        <20200804091416.31039-9-sjpark@amazon.com>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+        id S1727792AbgHDXw3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 4 Aug 2020 19:52:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59272 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726011AbgHDXw2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 4 Aug 2020 19:52:28 -0400
+X-Greylist: delayed 86248 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 04 Aug 2020 16:52:27 PDT
+Received: from dockerbox (unknown [IPv6:2001:4800:7817:101:be76:4eff:fe04:a215])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTP id BC72FC061756;
+        Tue,  4 Aug 2020 16:52:27 -0700 (PDT)
+Received: from 127.0.0.1 (localhost [127.0.0.1])
+        by dockerbox (Postfix) with SMTP id 6F4DA5EC5A;
+        Mon,  7 Oct 2019 19:30:12 -0500 (CDT)
+Received: from [32.188.209.113] by 127.0.0.1 with SMTP; Mon, 07 Oct 2019 18:22:17 -0600
+Message-ID: <80v-q$4-o4pqyq0@6eeih174.p55>
+From:   "Mr Barrister Hans Erich" <dave@dbsoundfactory.com>
+Reply-To: "Mr Barrister Hans Erich" <dave@dbsoundfactory.com>
+To:     linkos@binet.lv
+Subject: RE:PERSONAL LETTER FROM MRS RASHIA AMIRA
+Date:   Mon, 07 Oct 19 18:22:17 GMT
+X-Mailer: Microsoft Outlook Express 5.00.2615.200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/alternative;
+        boundary="_.A4476ECDD73A3"
+X-Priority: 3
+X-MSMail-Priority: Normal
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 4 Aug 2020 11:14:09 +0200
-SeongJae Park <sjpark@amazon.com> wrote:
 
-> From: SeongJae Park <sjpark@amazon.de>
-> 
-> This commit adds a tracepoint for DAMON.  It traces the monitoring
-> results of each region for each aggregation interval.  Using this, DAMON
-> can easily integrated with tracepoints supporting tools such as perf.
-> 
-> Signed-off-by: SeongJae Park <sjpark@amazon.de>
-> Reviewed-by: Leonard Foerster <foersleo@amazon.de>
-> ---
->  include/trace/events/damon.h | 43 ++++++++++++++++++++++++++++++++++++
->  mm/damon.c                   |  4 ++++
->  2 files changed, 47 insertions(+)
->  create mode 100644 include/trace/events/damon.h
-> 
-> diff --git a/include/trace/events/damon.h b/include/trace/events/damon.h
-> new file mode 100644
-> index 000000000000..2f422f4f1fb9
-> --- /dev/null
-> +++ b/include/trace/events/damon.h
-> @@ -0,0 +1,43 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#undef TRACE_SYSTEM
-> +#define TRACE_SYSTEM damon
-> +
-> +#if !defined(_TRACE_DAMON_H) || defined(TRACE_HEADER_MULTI_READ)
-> +#define _TRACE_DAMON_H
-> +
-> +#include <linux/damon.h>
-> +#include <linux/types.h>
-> +#include <linux/tracepoint.h>
-> +
-> +TRACE_EVENT(damon_aggregated,
-> +
-> +	TP_PROTO(struct damon_target *t, struct damon_region *r,
-> +		unsigned int nr_regions),
-> +
-> +	TP_ARGS(t, r, nr_regions),
-> +
-> +	TP_STRUCT__entry(
-> +		__field(unsigned long, target_id)
-> +		__field(unsigned int, nr_regions)
-> +		__field(unsigned long, start)
-> +		__field(unsigned long, end)
-> +		__field(unsigned int, nr_accesses)
-> +	),
-> +
-> +	TP_fast_assign(
-> +		__entry->target_id = t->id;
-> +		__entry->nr_regions = nr_regions;
-> +		__entry->start = r->ar.start;
-> +		__entry->end = r->ar.end;
-> +		__entry->nr_accesses = r->nr_accesses;
-> +	),
-> +
-> +	TP_printk("target_id=%lu nr_regions=%u %lu-%lu: %u",
-> +			__entry->target_id, __entry->nr_regions,
-> +			__entry->start, __entry->end, __entry->nr_accesses)
-> +);
-> +
-> +#endif /* _TRACE_DAMON_H */
-> +
-> +/* This part must be outside protection */
-> +#include <trace/define_trace.h>
-> diff --git a/mm/damon.c b/mm/damon.c
-> index b3420ba97fd2..65e65e779313 100644
-> --- a/mm/damon.c
-> +++ b/mm/damon.c
-> @@ -20,6 +20,8 @@
->  
->  #define pr_fmt(fmt) "damon: " fmt
->  
-> +#define CREATE_TRACE_POINTS
-> +
->  #include <linux/damon.h>
->  #include <linux/delay.h>
->  #include <linux/kthread.h>
-> @@ -31,6 +33,7 @@
->  #include <linux/sched/mm.h>
->  #include <linux/sched/task.h>
->  #include <linux/slab.h>
+--_.A4476ECDD73A3
+Content-Type: text/plain;
+Content-Transfer-Encoding: quoted-printable
 
-It's best to place the #define CREATE_TRACE_POINTS here, so that it
-doesn't cause any side effects when including the other headers.
+Greetings
 
-Other than that:
+My name is Barrister Hans Erich.
 
-Reviewed-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
+I have a client who is interested to invest in your country, she is a well=
+ known politician in her country and deserve a lucrative investment partne=
+rship with you outside her country without any delay   Please can you mana=
+ge such investment please Kindly reply for further details.
 
--- Steve
+Your full names --------
 
 
-> +#include <trace/events/damon.h>
->  
->  /* Minimal region size.  Every damon_region is aligned by this. */
->  #define MIN_REGION PAGE_SIZE
-> @@ -856,6 +859,7 @@ static void kdamond_reset_aggregated(struct damon_ctx *c)
->  			damon_write_rbuf(c, &r->ar.end, sizeof(r->ar.end));
->  			damon_write_rbuf(c, &r->nr_accesses,
->  					sizeof(r->nr_accesses));
-> +			trace_damon_aggregated(t, r, nr);
->  			r->nr_accesses = 0;
->  		}
->  	}
+Your urgent response will be appreciated
+
+Thank you and God bless you.
+
+Barrister Hans Erich
+
+Yours sincerely,
+Barrister Hans Erich
+CONTACT: hanserich9helmut@gmail.com
+
+--_.A4476ECDD73A3--
 
