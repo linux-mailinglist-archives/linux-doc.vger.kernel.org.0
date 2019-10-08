@@ -2,76 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2AD90CF2B0
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Oct 2019 08:23:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 44E9DCF53C
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Oct 2019 10:47:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730013AbfJHGXW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Oct 2019 02:23:22 -0400
-Received: from 59-120-53-16.HINET-IP.hinet.net ([59.120.53.16]:43422 "EHLO
-        ATCSQR.andestech.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1729568AbfJHGXW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Oct 2019 02:23:22 -0400
-Received: from ATCSQR.andestech.com (localhost [127.0.0.2] (may be forged))
-        by ATCSQR.andestech.com with ESMTP id x985vlnO075691
-        for <linux-doc@vger.kernel.org>; Tue, 8 Oct 2019 13:57:47 +0800 (GMT-8)
-        (envelope-from nickhu@andestech.com)
-Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
-        by ATCSQR.andestech.com with ESMTP id x985uS4f075344;
-        Tue, 8 Oct 2019 13:56:28 +0800 (GMT-8)
-        (envelope-from nickhu@andestech.com)
-Received: from atcsqa06.andestech.com (10.0.15.65) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.123.3; Tue, 8 Oct 2019
- 14:12:20 +0800
-From:   Nick Hu <nickhu@andestech.com>
-To:     <alankao@andestech.com>, <paul.walmsley@sifive.com>,
-        <palmer@sifive.com>, <aou@eecs.berkeley.edu>,
-        <aryabinin@virtuozzo.com>, <glider@google.com>,
-        <dvyukov@google.com>, <corbet@lwn.net>, <alexios.zavras@intel.com>,
-        <allison@lohutok.net>, <Anup.Patel@wdc.com>, <tglx@linutronix.de>,
-        <gregkh@linuxfoundation.org>, <atish.patra@wdc.com>,
-        <kstewart@linuxfoundation.org>, <linux-doc@vger.kernel.org>,
-        <linux-riscv@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
-        <kasan-dev@googlegroups.com>, <linux-mm@kvack.org>
-CC:     Nick Hu <nickhu@andestech.com>
-Subject: [PATCH v3 3/3] kasan: Add riscv to KASAN documentation.
-Date:   Tue, 8 Oct 2019 14:11:53 +0800
-Message-ID: <8f3c66f3f24450b21b749a5e6e6eabf066632ac9.1570514545.git.nickhu@andestech.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <cover.1570514544.git.nickhu@andestech.com>
-References: <cover.1570514544.git.nickhu@andestech.com>
+        id S1728866AbfJHIrV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Oct 2019 04:47:21 -0400
+Received: from mail-lj1-f195.google.com ([209.85.208.195]:45198 "EHLO
+        mail-lj1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730137AbfJHIrU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Oct 2019 04:47:20 -0400
+Received: by mail-lj1-f195.google.com with SMTP id q64so16609745ljb.12
+        for <linux-doc@vger.kernel.org>; Tue, 08 Oct 2019 01:47:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=l8gpydJYA0YDgp2JmqFlI7k3M5woSWANVYThPnzBSyg=;
+        b=BkRMuuut74Tg4ql3czpGBiGETKQ47t0yfFGj9qUtoNECtFLrPq7patqxRQTIKUPosJ
+         e5ij5XG6gLCR9aH2tMBlyg4nicWRgSUUeguPdBLCGj5e+fmO4WBOWHqbIrjN23GcV9X+
+         9UiM5zuZ8kUOjmbmakyLfk3DNm7gDqehMEcBVhaBie4GaVJqRz5rpcUAluJLllJOF3Mf
+         +y7BzcB/eQ1ZrGH8gN2u8Rxxi+fzSaghOC5xViRMArZNRSxn2csNz/W1bUfwb6lH8tnt
+         yTgKoyASrJ8JwI3YQxZpWYMIBXyHXAIoXg2BD9qf9M9BjKJeDzu0rw7W+YgoKaSJzGqP
+         eNYw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=l8gpydJYA0YDgp2JmqFlI7k3M5woSWANVYThPnzBSyg=;
+        b=oJFjsDQoDOXHGiYCKZ1vFoZhJ3YeJ0OoJ0k9RsShj0ihUy0z6WRvemRhHE22jV+Yay
+         Yzu5tglG3Q2fTmU6hLiBvHm2Aig69ATqsDHG47FKmgeM607VYuS5zmQLA+Ovsq/NwmrF
+         nuzhuIJKqRp2outPvgWTrk6jhS/cFp0+rGfZexKUoDgaWXFVFj69gbIxwKaZ2Z+jbXJ1
+         7ucZ27EdpzZ4ihWfvEPlkS9t2Iy2KZhdC2VyKdb6wJb2erQ7BlXtOraCTqDs5v43jWWS
+         PUAHr4bgF4gh713KkdPr0H6/fVb68D/eHoDa1WYIKvnRk5IAsytvVeZoRCo4A3ESUS5U
+         3odg==
+X-Gm-Message-State: APjAAAXQTmx/59r0okn6WHVc7WzF+APFjBSXATYFtBVUKZakvdheRCIP
+        XxPp2d+tx4buADPO3Nzq3MgLSZteIdBGqcdC1/MOAw==
+X-Google-Smtp-Source: APXvYqxbNM71HM7CPR6QRsIgEbU3UU9U/CSiMXaA2SIbIfrQl+rWLBRuuYXoBIaSEvilchXKRH21ww7tus0XXj0qkXw=
+X-Received: by 2002:a2e:63da:: with SMTP id s87mr20899729lje.79.1570524436968;
+ Tue, 08 Oct 2019 01:47:16 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.65]
-X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com x985uS4f075344
+References: <20190617221134.9930-1-f.fainelli@gmail.com> <CACRpkdbqW2kJNdPi6JPupaHA_qRTWG-MsUxeCz0c38MRujOSSA@mail.gmail.com>
+ <0ba50ae2-be09-f633-ab1f-860e8b053882@broadcom.com> <CAK8P3a2QBQrBU+bBBL20kR+qJfmspCNjiw05jHTa-q6EDfodMg@mail.gmail.com>
+ <fbdc3788-3a24-2885-b61b-8480e8464a51@gmail.com> <CAK8P3a1E_1=_+eJXvcFMLd=a=YW_WGwjm3nzRZV7SzzZqovzRw@mail.gmail.com>
+In-Reply-To: <CAK8P3a1E_1=_+eJXvcFMLd=a=YW_WGwjm3nzRZV7SzzZqovzRw@mail.gmail.com>
+From:   Linus Walleij <linus.walleij@linaro.org>
+Date:   Tue, 8 Oct 2019 10:47:05 +0200
+Message-ID: <CACRpkdbuwn-YBYd324OsfC4efBU_1pfnyS+N=+3DmrYOEKKFJw@mail.gmail.com>
+Subject: Re: [PATCH v6 0/6] KASan for arm
+To:     Arnd Bergmann <arnd@arndb.de>
+Cc:     Florian Fainelli <f.fainelli@gmail.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        Michal Hocko <mhocko@suse.com>,
+        Julien Thierry <julien.thierry@arm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoffer Dall <christoffer.dall@arm.com>,
+        David Howells <dhowells@redhat.com>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        Alexander Potapenko <glider@google.com>,
+        kvmarm@lists.cs.columbia.edu, Jonathan Corbet <corbet@lwn.net>,
+        Abbott Liu <liuwenliang@huawei.com>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Russell King <linux@armlinux.org.uk>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        bcm-kernel-feedback-list <bcm-kernel-feedback-list@broadcom.com>,
+        drjones@redhat.com, Vladimir Murzin <vladimir.murzin@arm.com>,
+        Kees Cook <keescook@chromium.org>,
+        Marc Zyngier <marc.zyngier@arm.com>,
+        Andre Przywara <andre.przywara@arm.com>,
+        Philippe Ombredanne <pombredanne@nexb.com>,
+        Jinbum Park <jinb.park7@gmail.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Nicolas Pitre <nico@fluxnic.net>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        Rob Landley <rob@landley.net>, philip@cog.systems,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Thomas Garnier <thgarnie@google.com>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add riscv to the KASAN documentation to mention that riscv
-is supporting generic kasan now.
+On Tue, Oct 8, 2019 at 12:10 AM Arnd Bergmann <arnd@arndb.de> wrote:
+> On Mon, Oct 7, 2019 at 11:35 PM Florian Fainelli <f.fainelli@gmail.com> wrote:
 
-Signed-off-by: Nick Hu <nickhu@andestech.com>
----
- Documentation/dev-tools/kasan.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> > > 053555034bdf kasan: disable CONFIG_KASAN_STACK with clang on arm32
+> >
+> > This one I did not take based on Linus' feedback that is breaks booting
+> > on his RealView board.
+>
+> That likely means that there is still a bigger problem somewhere.
 
-diff --git a/Documentation/dev-tools/kasan.rst b/Documentation/dev-tools/kasan.rst
-index b72d07d70239..34fbb7212cbc 100644
---- a/Documentation/dev-tools/kasan.rst
-+++ b/Documentation/dev-tools/kasan.rst
-@@ -21,8 +21,8 @@ global variables yet.
- 
- Tag-based KASAN is only supported in Clang and requires version 7.0.0 or later.
- 
--Currently generic KASAN is supported for the x86_64, arm64, xtensa and s390
--architectures, and tag-based KASAN is supported only for arm64.
-+Currently generic KASAN is supported for the x86_64, arm64, xtensa, s390 and
-+riscv architectures, and tag-based KASAN is supported only for arm64.
- 
- Usage
- -----
--- 
-2.17.0
+I will try to look into it. I got pretty puzzled by this, it makes no sense.
 
+One possible problem is that some of the test chips on the RealViews
+are not that stable, especially with caches. The plan is to test in QEMU
+and hardware in parallel.
+
+Yours,
+Linus Walleij
