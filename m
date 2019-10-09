@@ -2,63 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 193C5D1B08
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Oct 2019 23:37:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F1CE6D1B13
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Oct 2019 23:40:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730955AbfJIVhx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Oct 2019 17:37:53 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:49744 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728804AbfJIVhx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Oct 2019 17:37:53 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
-        Content-Type:MIME-Version:Date:Message-ID:Subject:From:Cc:To:Sender:Reply-To:
-        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
-        Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
-        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-         bh=MhyxE9zBIIhY8OiSfA4AvqqI7W7cYlVr3qfwPxHgOW8=; b=F9EWuJeTiYZA2rHH9YbjclEUF
-        Q3IyphguSrQA1f31AZkJj1UXRVjclkntzyu3wbpr7CKL202hrtZiaF6uriusuK4iuymYvLTrE+quE
-        UxgIb1Y/dpGH4UJMGdF8ki+33g6yF48kdODwvnIdIitrl9VjBCI0zFbkd+yzLalZ+j/PJ7YlIh2EG
-        XytEOPwe0JdgIcLGJkNJunSqOA9i+0E29kFeAZYLf/mQGfanIG9/QMX0n2raourfDm4UjiuWEtULM
-        JMCE4wo+E/H01lZ+Tixbu3J+k6wT07YtC7ezRzInuyLXbTcUFIxYN9wuQcNQ5Af21AqvIU9Mp4KD6
-        VdlmGyT1A==;
-Received: from [2601:1c0:6280:3f0::9ef4]
-        by bombadil.infradead.org with esmtpsa (Exim 4.92.2 #3 (Red Hat Linux))
-        id 1iIJeZ-0000RD-Sw; Wed, 09 Oct 2019 21:37:51 +0000
-To:     "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Kees Cook <keescook@chromium.org>,
+        id S1731995AbfJIVkw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Oct 2019 17:40:52 -0400
+Received: from ms.lwn.net ([45.79.88.28]:45888 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1731979AbfJIVkw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 9 Oct 2019 17:40:52 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id CBF982BD;
+        Wed,  9 Oct 2019 21:40:51 +0000 (UTC)
+Date:   Wed, 9 Oct 2019 15:40:50 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        Kees Cook <keescook@chromium.org>,
         Mauro Carvalho Chehab <mchehab@kernel.org>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Subject: Sphinx parallel build errors
-Message-ID: <dc19a670-7e8e-04e5-667d-578c2dd3754e@infradead.org>
-Date:   Wed, 9 Oct 2019 14:37:51 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.1
+Subject: Re: Sphinx parallel build errors
+Message-ID: <20191009154050.502061fa@lwn.net>
+In-Reply-To: <dc19a670-7e8e-04e5-667d-578c2dd3754e@infradead.org>
+References: <dc19a670-7e8e-04e5-667d-578c2dd3754e@infradead.org>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Wed, 9 Oct 2019 14:37:51 -0700
+Randy Dunlap <rdunlap@infradead.org> wrote:
 
-Sphinx parallel build error:
-OSError: [Errno 12] Cannot allocate memory
+> Sphinx parallel build error:
+> OSError: [Errno 12] Cannot allocate memory
+> 
+> I have had this error 4 times in the last 3 days.
+> 
+> The first time it oom-killed Thunderbird.  No big deal.
+> The second time it oom-killed gimp, which had 24 photos open.
+> Still no big deal.  Just a nuisance.
+> 
+> My little laptop has only 8 GB of RAM.
+> 
+> Is there a way that I can limit the amount of parallelism?
 
-I have had this error 4 times in the last 3 days.
+Is this a change with current docs-next, or have you seen this for a
+while?  The parallelism logic changed a bit in docs-next, but the default
+behavior should be the same as it was before.
 
-The first time it oom-killed Thunderbird.  No big deal.
-The second time it oom-killed gimp, which had 24 photos open.
-Still no big deal.  Just a nuisance.
+"make -j 1 htmldocs" (in current docs-next) should give you a nice, slow,
+serial build.
 
-My little laptop has only 8 GB of RAM.
-
-Is there a way that I can limit the amount of parallelism?
-
-thanks.
--- 
-~Randy
+jon
