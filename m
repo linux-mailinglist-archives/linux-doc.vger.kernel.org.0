@@ -2,91 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A2B26D7602
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2019 14:10:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A3FF4D7747
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2019 15:18:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731819AbfJOMKl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Oct 2019 08:10:41 -0400
-Received: from mx2.suse.de ([195.135.220.15]:58236 "EHLO mx1.suse.de"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1730682AbfJOMKG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 15 Oct 2019 08:10:06 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx1.suse.de (Postfix) with ESMTP id C75F6B3BE;
-        Tue, 15 Oct 2019 12:10:01 +0000 (UTC)
-From:   Thomas Bogendoerfer <tbogendoerfer@suse.de>
-To:     Jakub Kicinski <jakub.kicinski@netronome.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Ralf Baechle <ralf@linux-mips.org>,
-        Paul Burton <paul.burton@mips.com>,
-        James Hogan <jhogan@kernel.org>,
-        Lee Jones <lee.jones@linaro.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-        Alessandro Zummo <a.zummo@towertech.it>,
-        Alexandre Belloni <alexandre.belloni@bootlin.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jiri Slaby <jslaby@suse.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org,
-        netdev@vger.kernel.org, linux-rtc@vger.kernel.org,
-        linux-serial@vger.kernel.org
-Subject: [PATCH v10 6/6] MIPS: SGI-IP27: Enable ethernet phy on second Origin 200 module
-Date:   Tue, 15 Oct 2019 14:09:51 +0200
-Message-Id: <20191015120953.2597-7-tbogendoerfer@suse.de>
-X-Mailer: git-send-email 2.16.4
-In-Reply-To: <20191015120953.2597-1-tbogendoerfer@suse.de>
-References: <20191015120953.2597-1-tbogendoerfer@suse.de>
+        id S1730640AbfJONSp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Oct 2019 09:18:45 -0400
+Received: from mga18.intel.com ([134.134.136.126]:16623 "EHLO mga18.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729551AbfJONSp (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 15 Oct 2019 09:18:45 -0400
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 15 Oct 2019 06:18:44 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.67,300,1566889200"; 
+   d="scan'208";a="208181089"
+Received: from mcretu-mobl.ger.corp.intel.com (HELO localhost) ([10.252.56.150])
+  by fmsmga001.fm.intel.com with ESMTP; 15 Oct 2019 06:18:38 -0700
+From:   Jani Nikula <jani.nikula@linux.intel.com>
+To:     Matthew Wilcox <willy@infradead.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>
+Cc:     Tim.Bird@sony.com, changbin.du@gmail.com, corbet@lwn.net,
+        linux-doc@vger.kernel.org, linux-pci@vger.kernel.org,
+        linux-fpga@vger.kernel.org, linux-usb@vger.kernel.org,
+        linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, linux-mm@kvack.org,
+        linux-crypto@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org
+Subject: Re: [PATCH] kernel-doc: rename the kernel-doc directive 'functions' to 'specific'
+In-Reply-To: <20191015115439.GE32665@bombadil.infradead.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20191013055359.23312-1-changbin.du@gmail.com> <875zkrd7nq.fsf@intel.com> <ECADFF3FD767C149AD96A924E7EA6EAF977CAF09@USCULXMSG01.am.sony.com> <7e7557b5-469f-3e63-6254-53dab2d7234a@suse.de> <20191015115439.GE32665@bombadil.infradead.org>
+Date:   Tue, 15 Oct 2019 16:19:36 +0300
+Message-ID: <8736fub0yf.fsf@intel.com>
+MIME-Version: 1.0
+Content-Type: text/plain
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-PROM only enables ethernet PHY on first Origin 200 module, so we must
-do it ourselves for the second module.
+On Tue, 15 Oct 2019, Matthew Wilcox <willy@infradead.org> wrote:
+> On Tue, Oct 15, 2019 at 11:25:53AM +0200, Thomas Zimmermann wrote:
+>> > My preference would be to use 'symbols'.  I tried to come up with something
+>> > but 'symbols' is better than anything I came up with.
+>> 
+>> Maybe 'interfaces' or 'artifacts'. The term 'symbols' is just as
+>> imprecise as 'functions'.
+>
+> I suggested 'identifier' because that's the term used in the C spec (6.2.1):
+>
+> : An identifier can denote an object; a function; a tag or a member
+> : of a structure, union, or enumeration; a typedef name; a label name;
+> : a macro name; or a macro parameter.
+>
+> We don't allow documenting all those things separately, but it does cover
+> all the things we do allow to be individually documented.
 
-Signed-off-by: Thomas Bogendoerfer <tbogendoerfer@suse.de>
----
- arch/mips/pci/pci-ip27.c | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+Agreed.
 
-diff --git a/arch/mips/pci/pci-ip27.c b/arch/mips/pci/pci-ip27.c
-index 441eb9383b20..0d2eb86e8a1e 100644
---- a/arch/mips/pci/pci-ip27.c
-+++ b/arch/mips/pci/pci-ip27.c
-@@ -7,6 +7,11 @@
-  * Copyright (C) 1999, 2000, 04 Ralf Baechle (ralf@linux-mips.org)
-  * Copyright (C) 1999, 2000 Silicon Graphics, Inc.
-  */
-+#include <asm/sn/addrs.h>
-+#include <asm/sn/types.h>
-+#include <asm/sn/klconfig.h>
-+#include <asm/sn/hub.h>
-+#include <asm/sn/ioc3.h>
- #include <asm/pci/bridge.h>
- 
- dma_addr_t __phys_to_dma(struct device *dev, phys_addr_t paddr)
-@@ -31,3 +36,20 @@ int pcibus_to_node(struct pci_bus *bus)
- }
- EXPORT_SYMBOL(pcibus_to_node);
- #endif /* CONFIG_NUMA */
-+
-+static void ip29_fixup_phy(struct pci_dev *dev)
-+{
-+	int nasid = pcibus_to_node(dev->bus);
-+	u32 sid;
-+
-+	if (nasid != 1)
-+		return; /* only needed on second module */
-+
-+	/* enable ethernet PHY on IP29 systemboard */
-+	pci_read_config_dword(dev, PCI_SUBSYSTEM_VENDOR_ID, &sid);
-+	if (sid == (PCI_VENDOR_ID_SGI | (IOC3_SUBSYS_IP29_SYSBOARD) << 16))
-+		REMOTE_HUB_S(nasid, MD_LED0, 0x09);
-+}
-+
-+DECLARE_PCI_FIXUP_FINAL(PCI_VENDOR_ID_SGI, PCI_DEVICE_ID_SGI_IOC3,
-+			ip29_fixup_phy);
+BR,
+Jani.
+
+
 -- 
-2.16.4
-
+Jani Nikula, Intel Open Source Graphics Center
