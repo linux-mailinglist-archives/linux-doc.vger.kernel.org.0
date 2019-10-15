@@ -2,55 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 91934D81FF
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2019 23:20:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B37DBD8201
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Oct 2019 23:21:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726402AbfJOVU7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Oct 2019 17:20:59 -0400
-Received: from mail-wm1-f66.google.com ([209.85.128.66]:34503 "EHLO
-        mail-wm1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727343AbfJOVU6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Oct 2019 17:20:58 -0400
-Received: by mail-wm1-f66.google.com with SMTP id y135so3201584wmc.1
-        for <linux-doc@vger.kernel.org>; Tue, 15 Oct 2019 14:20:57 -0700 (PDT)
+        id S1727621AbfJOVVB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Oct 2019 17:21:01 -0400
+Received: from mail-wr1-f66.google.com ([209.85.221.66]:40494 "EHLO
+        mail-wr1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727343AbfJOVVB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Oct 2019 17:21:01 -0400
+Received: by mail-wr1-f66.google.com with SMTP id o28so2909354wro.7
+        for <linux-doc@vger.kernel.org>; Tue, 15 Oct 2019 14:20:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=DCrRB45TPzffk/SG7GSckRQdVqj6ZXw8oOiajo6TgQI=;
-        b=UAVuIDOUvZZyV9kO0gvn+x6GUYOnygxkODoUfALvIsMaw6iKXTdPjrTQ1/2tAq/O+V
-         1gI0fI2ihrg8U0u8VsqX9bK7m++OeZO+pOB4s8FbkLSkgh5GetHpRKSuEnkcYvoO6vRv
-         QZLjyukx3tERcSOtM/HXqRD1WPjjaSkRE4pKDGKxpLkNftixSK+CeITcMNnCZWHKP/sR
-         J25T4HwG8yZeq/mXdvFlXV0aQt/TIeNhid+EFeQXv+3PhmV2hdOGaCJ/ymUvDXk+OmgG
-         p2Wx3iSa82S9gQCS5xVVCQl/pjBO3YH1S9Mcch1qDEDGpthT5JAAyg4VPMOmYKvU0tRY
-         //Lg==
+        bh=alLGJNyVbZt7KtVg3svRAQohavR/n2a/uHVAjbCo+ys=;
+        b=Il5KPxhsnxm+Ix6dhPSpK8HRTsKtqHrGi6vQ9B32L+KB5lI2iQM7q2rX5lNgxBZOAj
+         sTxK+FQXLWS8NNlBwBSn2RemW7KmzzP1SIi23IUKkgFUD4Vz5NFVSXqfM40bHG9ywp5L
+         1UdLhA1cG/g+DPMwAKB1ZdZiCkVE9ijj5PhrTvqxwIFwENPVwLWdyyyDopnzsG+7FAPC
+         8ncZ4P27r9qnPSa7VKYt8jgJAt7qsd9kZ3j4cffLY4gOhhMKB0K+26uuZdq75L2mRUfZ
+         0HKO3jeMkq0nV0bMOSB2oj7T3jVoZAtLIFeM4gsp6lGEuMBX4zChruTqJykbO6VtrV/Q
+         zvmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=DCrRB45TPzffk/SG7GSckRQdVqj6ZXw8oOiajo6TgQI=;
-        b=AjrsX7xgEWHSzGjZOeWSlCmuA/zt09wDVzyjpRS7mKt+aNzr9ewRRxZW9uWAFMtUsy
-         +A6Ed2RDq/Mg2VOxpgyt7fEgYIUkSdB1A0YCkuhxHw3Q06jSuhiwEwTtqlIuG+ifaQkv
-         T/MGgjAn2yEmsrtOULX4WOBj7b4Rp3CLJQk5ssFtvYo905BPdHnrWjYNq/vUgjPjmeT9
-         Sq8cj5rSXYFUHVjl+x8hgKKKVP2T6aeDTTnOfGLrJAJkmHUekZtQ6p/UdX+pKycLJqmi
-         +q3dfC4u33zNWYJk2xKZ1XB+LKJYgr/Qudp02/ze3/ywszUoroV/2EzBJMqrGrLT+axM
-         tC5w==
-X-Gm-Message-State: APjAAAX6aIkuZnMHJ3SB/nAbUh4OLgrLXuAHvVEsuPFDK1PnF+XlubrR
-        72eQYBS9yg18nqKI1Ptnu3/jHA==
-X-Google-Smtp-Source: APXvYqy4BIPufvC95A9MJQDTfCl0bC0PyKdCFW22iNvtafhJog5HkDLu3m0vixfc3Ae+wpStOmoTnA==
-X-Received: by 2002:a7b:cb95:: with SMTP id m21mr432615wmi.36.1571174456914;
-        Tue, 15 Oct 2019 14:20:56 -0700 (PDT)
+        bh=alLGJNyVbZt7KtVg3svRAQohavR/n2a/uHVAjbCo+ys=;
+        b=U1bYlPM10DUa1NF12e8Of+9kbHKTuxJfkYUUrjP8hrdp2mo7n3Uva4sup/S6zPe4rM
+         o7/ce36z/kp/rRyHSq5PJ04520GunJ1jdR4kB4+JIPEz7KCbkwNfepXLaJtpBVwuuYZA
+         2ZOnJQ+vyr6c3JCj395ctOc32D16Hb+PSlS8nsgX6tGRYl1QjzuNJNQw9PvGxVmq76xQ
+         F/D+yZ6FL7Tqx/4HrqJrP/B35uaNT752b4IU5DiG+zcRDLRrSdAXICS/ETSeKOAFzLPQ
+         lDCx1K1Q7ekFXdBekp8ZvM9MvthkFwWruY3UUjVJVIH2ErpuFuP6hUbq4fe+ZDccZR04
+         QgXQ==
+X-Gm-Message-State: APjAAAWx+ANVZqv3sLKPiILxBSXGx02us07tfqmYYFj8XlEBmEuECByU
+        6nhh6TZW8ZpPQu1QlXqR7cMfGw==
+X-Google-Smtp-Source: APXvYqzkHH8ZWehVkIFHGRN8tgNXwkkU2U/LLCNdx5ni4mo3xTpD80O35029jqeWSB380+7UDX4RGw==
+X-Received: by 2002:a05:6000:1252:: with SMTP id j18mr3244847wrx.23.1571174457936;
+        Tue, 15 Oct 2019 14:20:57 -0700 (PDT)
 Received: from linaro.org ([2a00:23c5:6815:3901:39d2:21a2:678a:9501])
-        by smtp.gmail.com with ESMTPSA id g185sm517649wme.10.2019.10.15.14.20.55
+        by smtp.gmail.com with ESMTPSA id g185sm517649wme.10.2019.10.15.14.20.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Oct 2019 14:20:56 -0700 (PDT)
+        Tue, 15 Oct 2019 14:20:57 -0700 (PDT)
 From:   Mike Leach <mike.leach@linaro.org>
 To:     mike.leach@linaro.org, coresight@lists.linaro.org,
         linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org
 Cc:     mathieu.poirier@linaro.org, corbet@lwn.net,
         gregkh@linuxfoundation.org, suzuki.poulose@arm.com
-Subject: [PATCH v3 06/11] coresight: etm4x: Improve usability of sysfs - CID and VMID masks.
-Date:   Tue, 15 Oct 2019 22:19:59 +0100
-Message-Id: <20191015212004.24748-7-mike.leach@linaro.org>
+Subject: [PATCH v3 07/11] coresight: etm4x: Add view comparator settings API to sysfs.
+Date:   Tue, 15 Oct 2019 22:20:00 +0100
+Message-Id: <20191015212004.24748-8-mike.leach@linaro.org>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20191015212004.24748-1-mike.leach@linaro.org>
 References: <20191015212004.24748-1-mike.leach@linaro.org>
@@ -59,61 +59,92 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Context ID and VM ID masks required 2 value inputs, even when the
-second value is ignored as insufficient CID / VMID comparators are
-implemented.
+Currently it is not possible to view the current settings of a given
+address comparator without knowing what type it is set to. For example, if
+a comparator is set as an addr_start comparator, attempting to read
+addr_stop for the same index will result in an error.
 
-Permit a single value to be used if that is sufficient to cover all
-implemented comparators.
+addr_cmp_view is added to allow the user to see the current settings of
+the indexed address comparator without resorting to trial and error when
+the set type is not known.
 
 Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
+Reviewed-by: Leo Yan <leo.yan@linaro.org>
 Signed-off-by: Mike Leach <mike.leach@linaro.org>
 ---
- drivers/hwtracing/coresight/coresight-etm4x-sysfs.c | 10 ++++++++--
- 1 file changed, 8 insertions(+), 2 deletions(-)
+ .../coresight/coresight-etm4x-sysfs.c         | 52 +++++++++++++++++++
+ 1 file changed, 52 insertions(+)
 
 diff --git a/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c b/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
-index d772765dcd29..d6fcb9fee97a 100644
+index d6fcb9fee97a..ca1a54411225 100644
 --- a/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
 +++ b/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
-@@ -1794,6 +1794,7 @@ static ssize_t ctxid_masks_store(struct device *dev,
- 	unsigned long val1, val2, mask;
- 	struct etmv4_drvdata *drvdata = dev_get_drvdata(dev->parent);
- 	struct etmv4_config *config = &drvdata->config;
-+	int nr_inputs;
+@@ -1275,6 +1275,57 @@ static ssize_t addr_exlevel_s_ns_store(struct device *dev,
+ }
+ static DEVICE_ATTR_RW(addr_exlevel_s_ns);
  
- 	/*
- 	 * Don't use contextID tracing if coming from a PID namespace.  See
-@@ -1809,7 +1810,9 @@ static ssize_t ctxid_masks_store(struct device *dev,
- 	 */
- 	if (!drvdata->ctxid_size || !drvdata->numcidc)
- 		return -EINVAL;
--	if (sscanf(buf, "%lx %lx", &val1, &val2) != 2)
-+	/* one mask if <= 4 comparators, two for up to 8 */
-+	nr_inputs = sscanf(buf, "%lx %lx", &val1, &val2);
-+	if ((drvdata->numcidc > 4) && (nr_inputs != 2))
- 		return -EINVAL;
- 
- 	spin_lock(&drvdata->spinlock);
-@@ -1983,6 +1986,7 @@ static ssize_t vmid_masks_store(struct device *dev,
- 	unsigned long val1, val2, mask;
- 	struct etmv4_drvdata *drvdata = dev_get_drvdata(dev->parent);
- 	struct etmv4_config *config = &drvdata->config;
-+	int nr_inputs;
- 
- 	/*
- 	 * only implemented when vmid tracing is enabled, i.e. at least one
-@@ -1990,7 +1994,9 @@ static ssize_t vmid_masks_store(struct device *dev,
- 	 */
- 	if (!drvdata->vmid_size || !drvdata->numvmidc)
- 		return -EINVAL;
--	if (sscanf(buf, "%lx %lx", &val1, &val2) != 2)
-+	/* one mask if <= 4 comparators, two for up to 8 */
-+	nr_inputs = sscanf(buf, "%lx %lx", &val1, &val2);
-+	if ((drvdata->numvmidc > 4) && (nr_inputs != 2))
- 		return -EINVAL;
- 
- 	spin_lock(&drvdata->spinlock);
++static const char * const addr_type_names[] = {
++	"unused",
++	"single",
++	"range",
++	"start",
++	"stop"
++};
++
++static ssize_t addr_cmp_view_show(struct device *dev,
++				  struct device_attribute *attr, char *buf)
++{
++	u8 idx, addr_type;
++	unsigned long addr_v, addr_v2, addr_ctrl;
++	struct etmv4_drvdata *drvdata = dev_get_drvdata(dev->parent);
++	struct etmv4_config *config = &drvdata->config;
++	int size = 0;
++	bool exclude = false;
++
++	spin_lock(&drvdata->spinlock);
++	idx = config->addr_idx;
++	addr_v = config->addr_val[idx];
++	addr_ctrl = config->addr_acc[idx];
++	addr_type = config->addr_type[idx];
++	if (addr_type == ETM_ADDR_TYPE_RANGE) {
++		if (idx & 0x1) {
++			idx -= 1;
++			addr_v2 = addr_v;
++			addr_v = config->addr_val[idx];
++		} else {
++			addr_v2 = config->addr_val[idx + 1];
++		}
++		exclude = config->viiectlr & BIT(idx / 2 + 16);
++	}
++	spin_unlock(&drvdata->spinlock);
++	if (addr_type) {
++		size = scnprintf(buf, PAGE_SIZE, "addr_cmp[%i] %s %#lx", idx,
++				 addr_type_names[addr_type], addr_v);
++		if (addr_type == ETM_ADDR_TYPE_RANGE) {
++			size += scnprintf(buf + size, PAGE_SIZE - size,
++					  " %#lx %s", addr_v2,
++					  exclude ? "exclude" : "include");
++		}
++		size += scnprintf(buf + size, PAGE_SIZE - size,
++				  " ctrl(%#lx)\n", addr_ctrl);
++	} else {
++		size = scnprintf(buf, PAGE_SIZE, "addr_cmp[%i] unused\n", idx);
++	}
++	return size;
++}
++static DEVICE_ATTR_RO(addr_cmp_view);
++
+ static ssize_t vinst_pe_cmp_start_stop_show(struct device *dev,
+ 					    struct device_attribute *attr,
+ 					    char *buf)
+@@ -2120,6 +2171,7 @@ static struct attribute *coresight_etmv4_attrs[] = {
+ 	&dev_attr_addr_ctxtype.attr,
+ 	&dev_attr_addr_context.attr,
+ 	&dev_attr_addr_exlevel_s_ns.attr,
++	&dev_attr_addr_cmp_view.attr,
+ 	&dev_attr_vinst_pe_cmp_start_stop.attr,
+ 	&dev_attr_seq_idx.attr,
+ 	&dev_attr_seq_state.attr,
 -- 
 2.17.1
 
