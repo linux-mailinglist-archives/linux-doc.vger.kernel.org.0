@@ -2,85 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2BAC9DBD7B
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Oct 2019 08:05:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D450DBEEF
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Oct 2019 09:52:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2504234AbfJRGFd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 18 Oct 2019 02:05:33 -0400
-Received: from mail-pf1-f193.google.com ([209.85.210.193]:45760 "EHLO
-        mail-pf1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2393765AbfJRGFc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Oct 2019 02:05:32 -0400
-Received: by mail-pf1-f193.google.com with SMTP id y72so3162714pfb.12
-        for <linux-doc@vger.kernel.org>; Thu, 17 Oct 2019 23:05:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=kV1HX3xh/tQvI6WiE4yR07HXyvimZNgOnLXkscZ88j0=;
-        b=rNoBCmIeaRcA1mrVqUxdH4pw/8j8IkEbk/qw1GX4lANW4AX0Dk5+RJOhz36wh9oq7+
-         MlNa34bkncIwzByQSEY7SGN6S3l2b9voQ25gO6CTHGdrMkHziCSO/G+rYztKGsdG+Kc0
-         W5bEBveWq6xSfTorbPOyy9Ghsr5c4df/muiu2SZXdq2tuJ+nvMVyxpeesVh8RmTUaEfw
-         bnRS3c32sRD4Kg8FxY2QpzCI8WLLlE4wIK6CAYgwCxK/wu5ta0K2LT5vx4Q0ZPDcMQZy
-         sxBHPnVcsw5RnJ0L8kMJhv6CdtY8Gbd8uGinnz70GAlqYaHuPSYxpei2xNm1aFCVaOdo
-         7a8A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=kV1HX3xh/tQvI6WiE4yR07HXyvimZNgOnLXkscZ88j0=;
-        b=dlhDsGeS283NrLQwJtrh7cNKeI07kYW12e1TsmVKl4yP1wPIX+RjjV07p2UJ4N4eFg
-         8SJeuRfJ415w/YVIstOjsxTLmR0ubRM43G5xIbhYKTr9x6DVmiZC5EB4yR6jn1fUq6iF
-         4fd3ijX9SsMaaGoerBLM7HPJ/39x3oUskYIVS+FS7s54o/PanjU6goQ+BwCpNIxELkrX
-         SUyDXPy/ZVw2Y6J84WkgS1xgTYZuO1KA1U0JMZa6S9P/jDnzD3FEYbsKR2lkx7gBN4Us
-         swfCW5mKIPSUh+H0k03z0hAaGUpQRFVpeh0ObQlsXGSOMebTWKyZ3YklYj5zVRVfexb9
-         T3rg==
-X-Gm-Message-State: APjAAAWI9rvrN1BCnikpEBbEdQc5Qey6hYzj+towFregdnR0djJoBsgf
-        ILKR2UpSKex+lX6pjET9TfDdQQ==
-X-Google-Smtp-Source: APXvYqyAFLFmNyiYOrRfv+ueuvIzGLlZ4cM1uXHv4BljYJWlUgaHvWI4mlFH93ITuT0Ecs9zIOHg+A==
-X-Received: by 2002:a63:4525:: with SMTP id s37mr8470239pga.148.1571378731948;
-        Thu, 17 Oct 2019 23:05:31 -0700 (PDT)
-Received: from localhost ([122.172.151.112])
-        by smtp.gmail.com with ESMTPSA id s10sm7537837pgn.9.2019.10.17.23.05.30
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 17 Oct 2019 23:05:31 -0700 (PDT)
-Date:   Fri, 18 Oct 2019 11:35:29 +0530
-From:   Viresh Kumar <viresh.kumar@linaro.org>
-To:     Amit Kucheria <amit.kucheria@linaro.org>
-Cc:     linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        daniel.lezcano@linaro.org, sudeep.holla@arm.com,
-        bjorn.andersson@linaro.org, edubezval@gmail.com, agross@kernel.org,
-        tdas@codeaurora.org, swboyd@chromium.org, ilina@codeaurora.org,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
-        Amit Kucheria <amit.kucheria@verdurent.com>,
-        Zhang Rui <rui.zhang@intel.com>, linux-doc@vger.kernel.org,
-        linux-pm@vger.kernel.org
-Subject: Re: [PATCH v3 1/6] thermal: Remove netlink support
-Message-ID: <20191018060529.a5dmredz3baotaaa@vireshk-i7>
-References: <cover.1571314830.git.amit.kucheria@linaro.org>
- <cc1b26eb9efa974bc4d36a2944d4064df0c37983.1571314830.git.amit.kucheria@linaro.org>
+        id S2504882AbfJRHwU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 18 Oct 2019 03:52:20 -0400
+Received: from zaovasilisa.ru ([88.200.194.99]:46823 "EHLO usrv.lan"
+        rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S2504820AbfJRHwP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 18 Oct 2019 03:52:15 -0400
+X-Greylist: delayed 39671 seconds by postgrey-1.27 at vger.kernel.org; Fri, 18 Oct 2019 03:51:51 EDT
+Received: from 127.0.0.1 (localhost [127.0.0.1])
+        by usrv.lan (Postfix) with SMTP id CC3F818647F;
+        Thu, 17 Oct 2019 17:04:03 +0400 (MSD)
+Received: from [72.215.151.127] by 127.0.0.1 with ESMTP id 72A686FDC7F; Thu, 17 Oct 2019 18:59:02 +0600
+Message-ID: <735ui-$$-55e3--c$i$-l0-18w85$-6@8d6h1006syk>
+From:   "Mr Ekrem Bayraktar" <dave@dbsoundfactory.com>
+Reply-To: "Mr Ekrem Bayraktar" <dave@dbsoundfactory.com>
+To:     links@q.vu
+Subject: MOTHERLESS CHILDREN IN YOUR CITY !!
+Date:   Thu, 17 Oct 19 18:59:02 GMT
+X-Mailer: AOL 7.0 for Windows US sub 118
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <cc1b26eb9efa974bc4d36a2944d4064df0c37983.1571314830.git.amit.kucheria@linaro.org>
-User-Agent: NeoMutt/20180716-391-311a52
+Content-Type: multipart/alternative;
+        boundary="EFA7_FB09FAD2"
+X-Priority: 3
+X-MSMail-Priority: Normal
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 17-10-19, 17:57, Amit Kucheria wrote:
-> There are no users of netlink messages for thermal inside the kernel.
-> Remove the code and adjust the documentation.
-> 
-> Signed-off-by: Amit Kucheria <amit.kucheria@linaro.org>
-> ---
->  .../driver-api/thermal/sysfs-api.rst          |  26 +----
->  drivers/thermal/thermal_core.c                | 107 +-----------------
->  include/linux/thermal.h                       |  11 --
->  3 files changed, 10 insertions(+), 134 deletions(-)
 
-Acked-by: Viresh Kumar <viresh.kumar@linaro.org>
+--EFA7_FB09FAD2
+Content-Type: text/plain;
+Content-Transfer-Encoding: quoted-printable
 
--- 
-viresh
+Dear Sir / Madam
+
+
+
+Since ever we left your country back to Canada , we have gotten Government=
+ approval and we have been busying planning for the less privilege Childre=
+n projects.
+
+We are planning to release first batch of the funds $2,990,000.00 within 1=
+4 days for building an estate for motherless children in your city.
+
+I want you to use my mother;s company name to register this charity projec=
+t in your country after receiving the project funds.
+
+It must be registered as { Bayraktar Group Homeless Children Ltd }.
+
+
+Can you handle and supervise this big project ?
+Can you manager all the workers as a senior supervisor ?
+We want to be sure you can handle it before we proceed with this project.
+
+
+Please call me if you want to hear from us + 1-917 580 4919.
+Please can you manage such project please Kindly reply for further details=
+.
+
+Your full names-----------
+
+
+
+Ekrem Bayraktar.
+Bayraktar Shipping Group
+
+--EFA7_FB09FAD2--
+
