@@ -2,153 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 486A3DC5BD
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Oct 2019 15:06:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B50CFDC8E7
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Oct 2019 17:39:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2634085AbfJRNG2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 18 Oct 2019 09:06:28 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:58640 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S2634083AbfJRNG1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Oct 2019 09:06:27 -0400
-Received: from pps.filterd (m0098404.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.27/8.16.0.27) with SMTP id x9ID3EWH021136
-        for <linux-doc@vger.kernel.org>; Fri, 18 Oct 2019 09:06:26 -0400
-Received: from e06smtp02.uk.ibm.com (e06smtp02.uk.ibm.com [195.75.94.98])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 2vqcatv03p-1
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-        for <linux-doc@vger.kernel.org>; Fri, 18 Oct 2019 09:06:26 -0400
-Received: from localhost
-        by e06smtp02.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
-        for <linux-doc@vger.kernel.org> from <sourabhjain@linux.ibm.com>;
-        Fri, 18 Oct 2019 14:06:24 +0100
-Received: from b06avi18878370.portsmouth.uk.ibm.com (9.149.26.194)
-        by e06smtp02.uk.ibm.com (192.168.101.132) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
-        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-        Fri, 18 Oct 2019 14:06:21 +0100
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
-        by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id x9ID6J8C46858516
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 18 Oct 2019 13:06:19 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 71E92A405D;
-        Fri, 18 Oct 2019 13:06:19 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 6F54BA405B;
-        Fri, 18 Oct 2019 13:06:17 +0000 (GMT)
-Received: from localhost.localdomain.com (unknown [9.85.73.145])
-        by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Fri, 18 Oct 2019 13:06:17 +0000 (GMT)
-From:   Sourabh Jain <sourabhjain@linux.ibm.com>
-To:     mpe@ellerman.id.au
-Cc:     mahesh@linux.vnet.ibm.com, hbathini@linux.ibm.com,
-        linux-kernel@vger.kernel.org, linuxppc-dev@ozlabs.org,
-        corbet@lwn.net, linux-doc@vger.kernel.org,
-        Sourabh Jain <sourabhjain@linux.ibm.com>
-Subject: [PATCH v2 4/4] powerpc/fadump: sysfs for fadump memory reservation
-Date:   Fri, 18 Oct 2019 18:35:57 +0530
-X-Mailer: git-send-email 2.17.2
-In-Reply-To: <20191018130557.2217-1-sourabhjain@linux.ibm.com>
-References: <20191018130557.2217-1-sourabhjain@linux.ibm.com>
-X-TM-AS-GCONF: 00
-x-cbid: 19101813-0008-0000-0000-00000323493B
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19101813-0009-0000-0000-00004A426B01
-Message-Id: <20191018130557.2217-5-sourabhjain@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:,, definitions=2019-10-18_03:,,
- signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 priorityscore=1501
- malwarescore=0 suspectscore=1 phishscore=0 bulkscore=0 spamscore=0
- clxscore=1015 lowpriorityscore=0 mlxscore=0 impostorscore=0
- mlxlogscore=999 adultscore=0 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.0.1-1908290000 definitions=main-1910180123
+        id S2392991AbfJRPjW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 18 Oct 2019 11:39:22 -0400
+Received: from ms.lwn.net ([45.79.88.28]:36676 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728464AbfJRPjV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 18 Oct 2019 11:39:21 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 35AC9378;
+        Fri, 18 Oct 2019 15:39:21 +0000 (UTC)
+Date:   Fri, 18 Oct 2019 09:39:20 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Shaokun Zhang <zhangshaokun@hisilicon.com>
+Cc:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        Jens Axboe <axboe@kernel.dk>
+Subject: Re: [PATCH] docs: block: Remove blk_init_queue related description
+Message-ID: <20191018093920.6fbc8141@lwn.net>
+In-Reply-To: <1571061002-25998-1-git-send-email-zhangshaokun@hisilicon.com>
+References: <1571061002-25998-1-git-send-email-zhangshaokun@hisilicon.com>
+Organization: LWN.net
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a sys interface to allow querying the memory reserved by FADump for
-saving the crash dump.
+On Mon, 14 Oct 2019 21:50:02 +0800
+Shaokun Zhang <zhangshaokun@hisilicon.com> wrote:
 
-Also added Documentation/ABI for the new sysfs file.
+> blk_init_queue has been removed since commit <a1ce35fa4985>
+> ("block: remove dead elevator code"), Let's cleanup the description
+> in the biodoc.rst document.
+> 
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: Jens Axboe <axboe@kernel.dk>
+> Signed-off-by: Shaokun Zhang <zhangshaokun@hisilicon.com>
 
-Signed-off-by: Sourabh Jain <sourabhjain@linux.ibm.com>
----
- Documentation/ABI/testing/sysfs-kernel-fadump    |  7 +++++++
- Documentation/powerpc/firmware-assisted-dump.rst |  5 +++++
- arch/powerpc/kernel/fadump.c                     | 14 ++++++++++++++
- 3 files changed, 26 insertions(+)
+So I applied this, then changed my mind and unapplied it; I think it's the
+wrong fix.
 
-diff --git a/Documentation/ABI/testing/sysfs-kernel-fadump b/Documentation/ABI/testing/sysfs-kernel-fadump
-index dbf0606ba917..2b23af7e1c2f 100644
---- a/Documentation/ABI/testing/sysfs-kernel-fadump
-+++ b/Documentation/ABI/testing/sysfs-kernel-fadump
-@@ -39,3 +39,10 @@ Description:	write only
- 		The sysfs file is available when the system is booted to
- 		collect the dump on OPAL based machine. It used to release
- 		the memory used to collect the opalcore.
-+
-+What:		/sys/kernel/fadump/fadump_mem_reserved
-+Date:		Oct 2019
-+Contact:	linuxppc-dev@lists.ozlabs.org
-+Description:	read only
-+		Provide information about the amount of memory reserved by
-+		FADump to save the crash dump in bytes.
-diff --git a/Documentation/powerpc/firmware-assisted-dump.rst b/Documentation/powerpc/firmware-assisted-dump.rst
-index 6e2d329efda9..80c750847324 100644
---- a/Documentation/powerpc/firmware-assisted-dump.rst
-+++ b/Documentation/powerpc/firmware-assisted-dump.rst
-@@ -268,6 +268,11 @@ Here is the list of files under kernel sysfs:
-     be handled and vmcore will not be captured. This interface can be
-     easily integrated with kdump service start/stop.
- 
-+ /sys/kernel/fadump/fadump_mem_reserved
-+
-+   This is used to display the memory reserved by FADump for saving the
-+   crash dump.
-+
-  /sys/kernel/fadump_release_mem
-     This file is available only when FADump is active during
-     second kernel. This is used to release the reserved memory
-diff --git a/arch/powerpc/kernel/fadump.c b/arch/powerpc/kernel/fadump.c
-index 866eddc279d8..82cc92f135b2 100644
---- a/arch/powerpc/kernel/fadump.c
-+++ b/arch/powerpc/kernel/fadump.c
-@@ -1357,6 +1357,13 @@ static ssize_t fadump_enabled_show(struct kobject *kobj,
- 	return sprintf(buf, "%d\n", fw_dump.fadump_enabled);
- }
- 
-+static ssize_t fadump_mem_reserved_show(struct kobject *kobj,
-+					struct kobj_attribute *attr,
-+					char *buf)
-+{
-+	return sprintf(buf, "%ld\n", fw_dump.reserve_dump_area_size);
-+}
-+
- static ssize_t fadump_register_show(struct kobject *kobj,
- 					struct kobj_attribute *attr,
- 					char *buf)
-@@ -1430,6 +1437,9 @@ static struct kobj_attribute fadump_attr = __ATTR(fadump_enabled,
- static struct kobj_attribute fadump_register_attr = __ATTR(fadump_registered,
- 						0644, fadump_register_show,
- 						fadump_register_store);
-+static struct kobj_attribute fadump_mem_reserved_attr =
-+			__ATTR(fadump_mem_reserved, 0444,
-+			       fadump_mem_reserved_show, NULL);
- 
- DEFINE_SHOW_ATTRIBUTE(fadump_region);
- 
-@@ -1486,6 +1496,10 @@ static void fadump_init_files(void)
- 			pr_err("unable to create fadump/fadump_release_mem sysfs file (%d)\n",
- 			       rc);
- 	}
-+	rc = sysfs_create_file(fadump_kobj, &fadump_mem_reserved_attr.attr);
-+	if (rc)
-+		pr_err("unable to create fadump_mem_reserved sysfs file (%d)\n",
-+		       rc);
- 	return;
- }
- 
--- 
-2.17.2
+>  Documentation/block/biodoc.rst | 10 ----------
+>  1 file changed, 10 deletions(-)
+> 
+> diff --git a/Documentation/block/biodoc.rst b/Documentation/block/biodoc.rst
+> index b964796ec9c7..a19081d88349 100644
+> --- a/Documentation/block/biodoc.rst
+> +++ b/Documentation/block/biodoc.rst
+> @@ -1013,11 +1013,6 @@ request_fn execution which it means that lots of older drivers
+>  should still be SMP safe. Drivers are free to drop the queue
+>  lock themselves, if required. Drivers that explicitly used the
+>  io_request_lock for serialization need to be modified accordingly.
+> -Usually it's as easy as adding a global lock::
+> -
+> -	static DEFINE_SPINLOCK(my_driver_lock);
+> -
+> -and passing the address to that lock to blk_init_queue().
 
+This is a section about coping with the removal of the io_request_lock,
+which happened in 2.5, prior to the git era.  I think it is probably safe
+to say that there are no relevant drivers that still need to be updated
+for this particular change.
+
+>  5.2 64 bit sector numbers (sector_t prepares for 64 bit support)
+>  ----------------------------------------------------------------
+> @@ -1071,11 +1066,6 @@ right thing to use is bio_endio(bio) instead.
+>  If the driver is dropping the io_request_lock from its request_fn strategy,
+>  then it just needs to replace that with q->queue_lock instead.
+>  
+> -As described in Sec 1.1, drivers can set max sector size, max segment size
+> -etc per queue now. Drivers that used to define their own merge functions i
+> -to handle things like this can now just use the blk_queue_* functions at
+> -blk_init_queue time.
+> -
+>  Drivers no longer have to map a {partition, sector offset} into the
+>  correct absolute location anymore, this is done by the block layer, so
+>  where a driver received a request ala this before::
+
+Here, too.  We're talking about teaching drivers how to use bios.
+
+My suggested fix is to just remove both sections from the document
+entirely; neither is relevant in 2019.
+
+Even better, of course, would be to pass through this document and bring
+it up to current practice in general; there is certain to be a lot more in
+need of fixing here.
+
+Thanks,
+
+jon
