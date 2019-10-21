@@ -2,254 +2,144 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9E89ADF1C4
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Oct 2019 17:41:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 02AFBDF1D3
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Oct 2019 17:43:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728052AbfJUPlW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Oct 2019 11:41:22 -0400
-Received: from mx0b-00128a01.pphosted.com ([148.163.139.77]:23980 "EHLO
-        mx0b-00128a01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726289AbfJUPlW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Oct 2019 11:41:22 -0400
-Received: from pps.filterd (m0167090.ppops.net [127.0.0.1])
-        by mx0b-00128a01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id x9LFXXGt003599;
-        Mon, 21 Oct 2019 11:40:54 -0400
-Received: from nam05-co1-obe.outbound.protection.outlook.com (mail-co1nam05lp2059.outbound.protection.outlook.com [104.47.48.59])
-        by mx0b-00128a01.pphosted.com with ESMTP id 2vqy46bw0h-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
-        Mon, 21 Oct 2019 11:40:54 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=U3Kv+D+zn2/ISQgRg5uQNAuWBTLzRiMJQLbRZHVIj/fhcms0a1tWjOaDlfHMCYXQ3ll5zMm6ooz2WrE3TDmKaOz4zkbM051wuMbsWFgLp3ZpbMmVS0WNvaUwUNcW8PNd4lLgzxVxBt/M2jdxw/b/fzMY+xTETJ6q9p4ybHG/GDRmcWn7rkIxr6ku3ARygX/I9Liv+kGsz7GAAueyXqAVhlgTcoiC2un0ccsoVCJh0mL+80lFvebQtwmNIip/Clhmd/VdunrzIgNYCT+yVlZesfMZ2VYN8tIEGajkegCjtCHXU34w5XPC3UO59nO2xQ1Zt+MhuO8Xg8rNRICYsLd/xw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1jpS+gCEUevYtrwJ2pR1CTP9IKd1jYmFKaMtnaJ1e0U=;
- b=f5oz1Acg5RvdBaBAdBZI2k0q5aeDq/zyMbHwIq1bfE0BDhz4ns7W9aNS2z2ymBDoxSrFqcffE+yEUq0b03n6kpUqGe/J+2lRGRh7vpw9vAiHC68e52RPz/rxFCiEFshcOMdt44P9YfxjL63rjJoUHO88PwKiNEfCcNCwhsIfdzWr0xexubJrOb7Y12ukOXqIEcB+plZCnuTk+ykr2zJKrbwAwJfszRCkg72TcTE2BxDSjbEdixCGgHapS63Yz0Kdvy1kBihOid8rwYEHh9ofAXt2tzgTtZUyT/s/hMDYVmDR3tBD3QkehfEugBEV7YamI9x/zkcM9xKR8tZjP1L2yg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 137.71.25.55) smtp.rcpttodomain=vger.kernel.org smtp.mailfrom=analog.com;
- dmarc=bestguesspass action=none header.from=analog.com; dkim=none (message
- not signed); arc=none
+        id S1728793AbfJUPni (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Oct 2019 11:43:38 -0400
+Received: from mail-oi1-f193.google.com ([209.85.167.193]:34406 "EHLO
+        mail-oi1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728263AbfJUPng (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Oct 2019 11:43:36 -0400
+Received: by mail-oi1-f193.google.com with SMTP id 83so11465838oii.1
+        for <linux-doc@vger.kernel.org>; Mon, 21 Oct 2019 08:43:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=analog.onmicrosoft.com; s=selector2-analog-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1jpS+gCEUevYtrwJ2pR1CTP9IKd1jYmFKaMtnaJ1e0U=;
- b=ynArVqbItCwMFzuXskxrLSxiXYWDeoGpF6VDFA5pDVM8f3J8LmXDf7jd/BcOM+hP3rI/tgJP6kHYO7Mzmyr9t9zmHItGXnmszmX6ZJJInXjxZYCwMeHyqEw+dKTAM+aBIm4BrJ8DpOZBTK/TtHb27myV2OPVwz/x0Q38ADudKn8=
-Received: from CY1PR03CA0004.namprd03.prod.outlook.com (2603:10b6:600::14) by
- BYAPR03MB3462.namprd03.prod.outlook.com (2603:10b6:a02:a9::23) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2347.21; Mon, 21 Oct 2019 15:40:52 +0000
-Received: from CY1NAM02FT011.eop-nam02.prod.protection.outlook.com
- (2a01:111:f400:7e45::206) by CY1PR03CA0004.outlook.office365.com
- (2603:10b6:600::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.2367.21 via Frontend
- Transport; Mon, 21 Oct 2019 15:40:52 +0000
-Received-SPF: Pass (protection.outlook.com: domain of analog.com designates
- 137.71.25.55 as permitted sender) receiver=protection.outlook.com;
- client-ip=137.71.25.55; helo=nwd2mta1.analog.com;
-Received: from nwd2mta1.analog.com (137.71.25.55) by
- CY1NAM02FT011.mail.protection.outlook.com (10.152.75.156) with Microsoft SMTP
- Server (version=TLS1_0, cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.20.2367.14
- via Frontend Transport; Mon, 21 Oct 2019 15:40:51 +0000
-Received: from NWD2HUBCAS7.ad.analog.com (nwd2hubcas7.ad.analog.com [10.64.69.107])
-        by nwd2mta1.analog.com (8.13.8/8.13.8) with ESMTP id x9LFepQZ006667
-        (version=TLSv1/SSLv3 cipher=AES256-SHA bits=256 verify=OK);
-        Mon, 21 Oct 2019 08:40:51 -0700
-Received: from nsa.sphairon.box (10.44.3.90) by NWD2HUBCAS7.ad.analog.com
- (10.64.69.107) with Microsoft SMTP Server (TLS) id 14.3.408.0; Mon, 21 Oct
- 2019 11:40:50 -0400
-From:   =?UTF-8?q?Nuno=20S=C3=A1?= <nuno.sa@analog.com>
-To:     <linux-hwmon@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>
-CC:     Rob Herring <robh+dt@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jean Delvare <jdelvare@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v3 2/2] dt-bindings: hwmon: Add ltc2947 documentation
-Date:   Mon, 21 Oct 2019 17:41:15 +0200
-Message-ID: <20191021154115.319073-2-nuno.sa@analog.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191021154115.319073-1-nuno.sa@analog.com>
-References: <20191021154115.319073-1-nuno.sa@analog.com>
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=cnXjVYkeWXq+gubvSOjcYVnZzqsBIZ+DNJdYhPS5/D8=;
+        b=kSbOVSxROO2ODHZOo0AzN65grokopehSUbmYsECSJU6VZS+Nr1cw7LV6r4iAcc7N6Q
+         wzllLP+X0DveM8FqCCuVinvCaP3XnL9YCqdDKRLIgt+rSBWXCJrhGRJSCwEj6KftUioO
+         0G2RZFY6J41AyIPK9sMmrPMRorNfiZZJTp5ufyuGPVmC6KiDrg62GQx+BfeYcb0Dnk00
+         e/caau408WrMpaj5r51qcXRJcyfgpkFW4QXzy07SHQAOJOIGjTVSNPCX9FqYnJLFZw+a
+         lxjcEwL/AFpSmr/jX73HRWC155IV+n6XsiPCIITIqBSlVnEH5R1A+3H+uOSRpVi6DTHo
+         g2Dg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=cnXjVYkeWXq+gubvSOjcYVnZzqsBIZ+DNJdYhPS5/D8=;
+        b=VlvOs50etPIbr/kfD+FSUtYHiTkJnKIX5ySjKD3jPS/gQLgLQBKkRCSlT0++dlWF2y
+         QIWpeIrFm+L6LLO550ilUadPb3YcomO6KmaFbzi3QNwvinnC3sCooWHgHCRRo+hnzDvs
+         I79nLKG7cg66VcI1B+Y5IGdKmo9QmWMKCvXEdCee26Z6k1vKvjkQNLBp0fN96QkpoZAa
+         DsP3zIGwL3iXp1xo1EwevyJuyR91XwzGRN28bcj/U7eo9bXOCPT6L3Ve178nEDnM4SDb
+         n8j97MayI0iGCywS2zyhQTTRubR9OhMWpL15dnGpxOscO3/Q85vDXfj8QCWFJqNO/Pxk
+         gDnw==
+X-Gm-Message-State: APjAAAV2vK3eOYcHWApoXk21JXAiY5sF/XtXoaW4eJQrEXcdOE8mUpXV
+        v5WSERu29Iyw9sJJb1i46WsQNiOtgu3G/chFaQjcfQ==
+X-Google-Smtp-Source: APXvYqxc1yCRq3k+cvMu1sAucXV2pLfdg+Ismk5+9IUGxVHljKC2H3cX5Rq52uV7mrAoht13w5nwv0u1z0tu95TtZcU=
+X-Received: by 2002:aca:f492:: with SMTP id s140mr20094795oih.83.1571672614698;
+ Mon, 21 Oct 2019 08:43:34 -0700 (PDT)
 MIME-Version: 1.0
+References: <20191017141305.146193-1-elver@google.com> <20191017141305.146193-3-elver@google.com>
+ <CACT4Y+b9VYz0wji085hvg3ZMMv6FR_WGc_NcEZETSOvME6hYOQ@mail.gmail.com>
+In-Reply-To: <CACT4Y+b9VYz0wji085hvg3ZMMv6FR_WGc_NcEZETSOvME6hYOQ@mail.gmail.com>
+From:   Marco Elver <elver@google.com>
+Date:   Mon, 21 Oct 2019 17:43:22 +0200
+Message-ID: <CANpmjNPyxjjkRigstizGLh4rQKhY8JVUzD-6sJLYf62KB77F5w@mail.gmail.com>
+Subject: Re: [PATCH v2 2/8] objtool, kcsan: Add KCSAN runtime functions to whitelist
+To:     Dmitry Vyukov <dvyukov@google.com>
+Cc:     LKMM Maintainers -- Akira Yokosawa <akiyks@gmail.com>,
+        Alan Stern <stern@rowland.harvard.edu>,
+        Alexander Potapenko <glider@google.com>,
+        Andrea Parri <parri.andrea@gmail.com>,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Boqun Feng <boqun.feng@gmail.com>,
+        Borislav Petkov <bp@alien8.de>, Daniel Axtens <dja@axtens.net>,
+        Daniel Lustig <dlustig@nvidia.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        David Howells <dhowells@redhat.com>,
+        "H. Peter Anvin" <hpa@zytor.com>, Ingo Molnar <mingo@redhat.com>,
+        Jade Alglave <j.alglave@ucl.ac.uk>,
+        Joel Fernandes <joel@joelfernandes.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        Luc Maranget <luc.maranget@inria.fr>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        "Paul E. McKenney" <paulmck@linux.ibm.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Will Deacon <will@kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        linux-efi@vger.kernel.org,
+        "open list:KERNEL BUILD + fi..." <linux-kbuild@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Linux-MM <linux-mm@kvack.org>,
+        "the arch/x86 maintainers" <x86@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
-X-Originating-IP: [10.44.3.90]
-X-ADIRoutedOnPrem: True
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-HT: Tenant
-X-Forefront-Antispam-Report: CIP:137.71.25.55;IPV:NLI;CTRY:US;EFV:NLI;SFV:NSPM;SFS:(10009020)(39860400002)(136003)(376002)(396003)(346002)(189003)(199004)(110136005)(54906003)(305945005)(23676004)(5820100001)(53416004)(7636002)(966005)(7736002)(70206006)(70586007)(6306002)(4326008)(8936002)(50466002)(26005)(8676002)(106002)(316002)(76176011)(50226002)(45776006)(186003)(6666004)(356004)(16526019)(246002)(2870700001)(1076003)(486006)(36756003)(5660300002)(3846002)(446003)(11346002)(2906002)(2616005)(2201001)(86362001)(6116002)(47776003)(478600001)(426003)(336012)(476003)(126002);DIR:OUT;SFP:1101;SCL:1;SRVR:BYAPR03MB3462;H:nwd2mta1.analog.com;FPR:;SPF:Pass;LANG:en;PTR:nwd2mail10.analog.com;MX:1;A:1;
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2003a0ba-1deb-4445-c3c2-08d7563d0dd3
-X-MS-TrafficTypeDiagnostic: BYAPR03MB3462:
-X-MS-Exchange-PUrlCount: 3
-X-Microsoft-Antispam-PRVS: <BYAPR03MB346234A7F412C9D9DBE3503E99690@BYAPR03MB3462.namprd03.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:8882;
-X-Forefront-PRVS: 0197AFBD92
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: sL1CJStpItdmYVTbCjjUH95aFkFGRnEU49TtsAMSdslkZvWxyBy+9kzrdTrPojx6LFZoV6thpTENlIIL6o8T+f06cx7hLkDA/c0L8mFIRFuoW2tuflzT/7XEvMpLoUu0L/yTf/rt/YgPNMNy83pPOwK7Zz5IsLg8WCuAPcMxw+y4FgKjecjQswuvesmiCJntHWDjoICJrysKTpJ1g5yRCDLQNJygOO1SjVwsoWKLuYDxaFyb/quEZGSB7jfPkDX3+0BvplBH2mxkiq1zBlEPcHD4LyI9lh8pMDbwu2QidTmZcZReAy8eokxqCMqrD5r7hdu+4c5KRL8KaGD2rgOpQlKKVvIPEXPD/+ZZRBq/FhRoIeISDG3EHXj66w2ws9/hVyA9ay+nf7ek3EGrbqJX+uZDsD2qVBptY2JImZA63SrgeOsVXoyfgcQd6mwsY5DNBJEn36B8t6kdfMirlc6kxWnD9rVKfsYJJAvlsqLvQSs=
-X-OriginatorOrg: analog.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2019 15:40:51.9949
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2003a0ba-1deb-4445-c3c2-08d7563d0dd3
-X-MS-Exchange-CrossTenant-Id: eaa689b4-8f87-40e0-9c6f-7228de4d754a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=eaa689b4-8f87-40e0-9c6f-7228de4d754a;Ip=[137.71.25.55];Helo=[nwd2mta1.analog.com]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR03MB3462
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,1.0.8
- definitions=2019-10-21_04:2019-10-21,2019-10-21 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 phishscore=0
- spamscore=0 priorityscore=1501 adultscore=0 malwarescore=0 clxscore=1015
- mlxlogscore=999 mlxscore=0 impostorscore=0 suspectscore=0
- lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-1908290000 definitions=main-1910210147
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Document the LTC2947 device devicetree bindings.
+On Mon, 21 Oct 2019 at 17:15, Dmitry Vyukov <dvyukov@google.com> wrote:
+>
+> On Thu, Oct 17, 2019 at 4:13 PM Marco Elver <elver@google.com> wrote:
+> >
+> > This patch adds KCSAN runtime functions to the objtool whitelist.
+> >
+> > Signed-off-by: Marco Elver <elver@google.com>
+> > ---
+> >  tools/objtool/check.c | 17 +++++++++++++++++
+> >  1 file changed, 17 insertions(+)
+> >
+> > diff --git a/tools/objtool/check.c b/tools/objtool/check.c
+> > index 044c9a3cb247..d1acc867b43c 100644
+> > --- a/tools/objtool/check.c
+> > +++ b/tools/objtool/check.c
+> > @@ -466,6 +466,23 @@ static const char *uaccess_safe_builtin[] = {
+> >         "__asan_report_store4_noabort",
+> >         "__asan_report_store8_noabort",
+> >         "__asan_report_store16_noabort",
+> > +       /* KCSAN */
+> > +       "__kcsan_check_watchpoint",
+> > +       "__kcsan_setup_watchpoint",
+> > +       /* KCSAN/TSAN out-of-line */
+>
+> There is no TSAN in-line instrumentation.
 
-Signed-off-by: Nuno Sá <nuno.sa@analog.com>
----
-Changes in v2:
- * Add license identifier;
- * Fix the uint32-array properties;
- * Set maximum at the same indent as allOf in adi,accumulation-deadband-microamp;
- * Set enum at the same indent as allOf in adi,gpio-out-pol;
- * Use spi instead of spi0 on the example;
+Done @ v3.
 
-Changes in v3:
- * Nothing changed.
+> > +       "__tsan_func_entry",
+> > +       "__tsan_func_exit",
+> > +       "__tsan_read_range",
+>
+> There is also __tsan_write_range(), right? Isn't it safer to add it right away?
 
- .../bindings/hwmon/adi,ltc2947.yaml           | 104 ++++++++++++++++++
- MAINTAINERS                                   |   1 +
- 2 files changed, 105 insertions(+)
- create mode 100644 Documentation/devicetree/bindings/hwmon/adi,ltc2947.yaml
+Added all missing functions for v3.
 
-diff --git a/Documentation/devicetree/bindings/hwmon/adi,ltc2947.yaml b/Documentation/devicetree/bindings/hwmon/adi,ltc2947.yaml
-new file mode 100644
-index 000000000000..ae04903f34bf
---- /dev/null
-+++ b/Documentation/devicetree/bindings/hwmon/adi,ltc2947.yaml
-@@ -0,0 +1,104 @@
-+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
-+%YAML 1.2
-+---
-+$id: http://devicetree.org/schemas/bindings/hwmon/adi,ltc2947.yaml#
-+$schema: http://devicetree.org/meta-schemas/core.yaml#
-+
-+title: Analog Devices LTC2947 high precision power and energy monitor
-+
-+maintainers:
-+  - Nuno Sá <nuno.sa@analog.com>
-+
-+description: |
-+  Analog Devices LTC2947 high precision power and energy monitor over SPI or I2C.
-+
-+  https://www.analog.com/media/en/technical-documentation/data-sheets/LTC2947.pdf
-+
-+properties:
-+  compatible:
-+    enum:
-+      - adi,ltc2947
-+
-+  reg:
-+    maxItems: 1
-+
-+  clocks:
-+    description:
-+      The LTC2947 uses either a trimmed internal oscillator or an external clock
-+      as the time base for determining the integration period to represent time,
-+      charge and energy. When an external clock is used, this property must be
-+      set accordingly.
-+    maxItems: 1
-+
-+  adi,accumulator-ctl-pol:
-+    description:
-+      This property controls the polarity of current that is accumulated to
-+      calculate charge and energy so that, they can be only accumulated for
-+      positive current for example. Since there are two sets of registers for
-+      the accumulated values, this entry can also have two items which sets
-+      energy1/charge1 and energy2/charger2 respectively. Check table 12 of the
-+      datasheet for more information on the supported options.
-+    allOf:
-+      - $ref: /schemas/types.yaml#/definitions/uint32-array
-+      - minItems: 2
-+        maxItems: 2
-+        items:
-+          enum: [0, 1, 2, 3]
-+          default: 0
-+
-+  adi,accumulation-deadband-microamp:
-+    description:
-+      This property controls the Accumulation Dead band which allows to set the
-+      level of current below which no accumulation takes place.
-+    allOf:
-+      - $ref: /schemas/types.yaml#/definitions/uint32
-+    maximum: 255
-+    default: 0
-+
-+  adi,gpio-out-pol:
-+    description:
-+      This property controls the GPIO polarity. Setting it to one makes the GPIO
-+      active high, setting it to zero makets it active low. When this property
-+      is present, the GPIO is automatically configured as output and set to
-+      control a fan as a function of measured temperature.
-+    allOf:
-+      - $ref: /schemas/types.yaml#/definitions/uint32
-+    enum: [0, 1]
-+    default: 0
-+
-+  adi,gpio-in-accum:
-+    description:
-+      When set, this property sets the GPIO as input. It is then used to control
-+      the accumulation of charge, energy and time. This function can be
-+      enabled/configured separately for each of the two sets of accumulation
-+      registers. Check table 13 of the datasheet for more information on the
-+      supported options. This property cannot be used together with
-+      adi,gpio-out-pol.
-+    allOf:
-+      - $ref: /schemas/types.yaml#/definitions/uint32-array
-+      - minItems: 2
-+        maxItems: 2
-+        items:
-+          enum: [0, 1, 2]
-+          default: 0
-+
-+required:
-+  - compatible
-+  - reg
-+
-+
-+examples:
-+  - |
-+    spi {
-+           #address-cells = <1>;
-+           #size-cells = <0>;
-+
-+           ltc2947_spi: ltc2947@0 {
-+                   compatible = "adi,ltc2947";
-+                   reg = <0>;
-+                   /* accumulation takes place always for energ1/charge1. */
-+                   /* accumulation only on positive current for energy2/charge2. */
-+                   adi,accumulator-ctl-pol = <0 1>;
-+           };
-+    };
-+...
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 318332b6a411..e2ba1a182052 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -9638,6 +9638,7 @@ F:	drivers/hwmon/ltc2947-core.c
- F:	drivers/hwmon/ltc2947-spi.c
- F:	drivers/hwmon/ltc2947-i2c.c
- F:	drivers/hwmon/ltc2947.h
-+F:	Documentation/devicetree/bindings/hwmon/adi,ltc2947.yaml
- 
- LTC4306 I2C MULTIPLEXER DRIVER
- M:	Michael Hennerich <michael.hennerich@analog.com>
--- 
-2.23.0
+Many thanks for the comments!
 
+
+> > +       "__tsan_read1",
+> > +       "__tsan_read2",
+> > +       "__tsan_read4",
+> > +       "__tsan_read8",
+> > +       "__tsan_read16",
+> > +       "__tsan_write1",
+> > +       "__tsan_write2",
+> > +       "__tsan_write4",
+> > +       "__tsan_write8",
+> > +       "__tsan_write16",
+> >         /* KCOV */
+> >         "write_comp_data",
+> >         "__sanitizer_cov_trace_pc",
+> > --
+> > 2.23.0.866.gb869b98d4c-goog
+> >
