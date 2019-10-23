@@ -2,76 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 302C3E1ADF
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Oct 2019 14:39:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 20700E1B71
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Oct 2019 14:54:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390432AbfJWMjh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Oct 2019 08:39:37 -0400
-Received: from inca-roads.misterjones.org ([213.251.177.50]:60501 "EHLO
-        inca-roads.misterjones.org" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1732680AbfJWMjh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Oct 2019 08:39:37 -0400
-Received: from www-data by cheepnis.misterjones.org with local (Exim 4.80)
-        (envelope-from <maz@kernel.org>)
-        id 1iNFv9-0001yJ-KM; Wed, 23 Oct 2019 14:39:23 +0200
-To:     Steven Price <steven.price@arm.com>
-Subject: Re: [PATCH v7 00/10] arm64: Stolen time support
-X-PHP-Originating-Script: 0:main.inc
+        id S2391829AbfJWMxL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Oct 2019 08:53:11 -0400
+Received: from mx2.suse.de ([195.135.220.15]:49240 "EHLO mx1.suse.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S2390962AbfJWMxL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 23 Oct 2019 08:53:11 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx1.suse.de (Postfix) with ESMTP id 803CEB678;
+        Wed, 23 Oct 2019 12:53:08 +0000 (UTC)
+From:   Michal Suchanek <msuchanek@suse.de>
+To:     linux-scsi@vger.kernel.org
+Cc:     Michal Suchanek <msuchanek@suse.de>,
+        Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
+        "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Eric Biggers <ebiggers@google.com>,
+        "J. Bruce Fields" <bfields@redhat.com>,
+        Benjamin Coddington <bcodding@redhat.com>,
+        Hannes Reinecke <hare@suse.com>,
+        Omar Sandoval <osandov@fb.com>, Ming Lei <ming.lei@redhat.com>,
+        Damien Le Moal <damien.lemoal@wdc.com>,
+        Bart Van Assche <bvanassche@acm.org>,
+        Tejun Heo <tj@kernel.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
+Subject: [PATCH v2 0/8] Fix cdrom autoclose.
+Date:   Wed, 23 Oct 2019 14:52:39 +0200
+Message-Id: <cover.1571834862.git.msuchanek@suse.de>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Date:   Wed, 23 Oct 2019 13:39:23 +0100
-From:   Marc Zyngier <maz@kernel.org>
-Cc:     Will Deacon <will@kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <kvmarm@lists.cs.columbia.edu>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        =?UTF-8?Q?Radim_Kr=C4=8Dm=C3=A1?= =?UTF-8?Q?=C5=99?= 
-        <rkrcmar@redhat.com>, Russell King <linux@armlinux.org.uk>,
-        James Morse <james.morse@arm.com>,
-        Julien Thierry <julien.thierry.kdev@gmail.com>,
-        Suzuki K Pouloze <suzuki.poulose@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>, <kvm@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-In-Reply-To: <20191021152823.14882-1-steven.price@arm.com>
-References: <20191021152823.14882-1-steven.price@arm.com>
-Message-ID: <f0d79362ab994e269680fba75f913044@www.loen.fr>
-X-Sender: maz@kernel.org
-User-Agent: Roundcube Webmail/0.7.2
-X-SA-Exim-Connect-IP: <locally generated>
-X-SA-Exim-Rcpt-To: steven.price@arm.com, will@kernel.org, linux-arm-kernel@lists.infradead.org, kvmarm@lists.cs.columbia.edu, catalin.marinas@arm.com, pbonzini@redhat.com, rkrcmar@redhat.com, linux@armlinux.org.uk, james.morse@arm.com, julien.thierry.kdev@gmail.com, suzuki.poulose@arm.com, mark.rutland@arm.com, kvm@vger.kernel.org, linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-X-SA-Exim-Mail-From: maz@kernel.org
-X-SA-Exim-Scanned: No (on cheepnis.misterjones.org); SAEximRunCond expanded to false
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Steven,
+Link: https://lore.kernel.org/lkml/cover.1513263482.git.msuchanek@suse.de/
 
-On 2019-10-21 16:28, Steven Price wrote:
-> This series add support for paravirtualized time for arm64 guests and
-> KVM hosts following the specification in Arm's document DEN 0057A:
->
-> https://developer.arm.com/docs/den0057/a
->
-> It implements support for stolen time, allowing the guest to
-> identify time when it is forcibly not executing.
->
-> Note that Live Physical Time (LPT) which was previously part of the
-> above specification has now been removed.
->
-> Also available as a git tree:
-> git://linux-arm.org/linux-sp.git stolen_time/v7
+Hello,
 
-Can you please point me to userspace patches that I could apply to
-kvmtool? I'd like to give this series a go as part of my normal 
-testing.
+there is cdrom autoclose feature that is supposed to close the tray,
+wait for the disc to become ready, and then open the device.
 
-Thanks,
+This used to work in ancient times. Then in old times there was a hack
+in util-linux which worked around the breakage which probably resulted
+from switching to scsi emulation.
 
-         M.
+Currently util-linux maintainer refuses to merge another hack on the
+basis that kernel still has the feature so it should be fixed there.
+The code needs not be replicated in every userspace utility like mount
+or dd which has no business knowing which devices are CD-roms and where
+the autoclose setting is in the kernel.
+
+Michal Suchanek (8):
+  cdrom: add poll_event_interruptible
+  cdrom: factor out common open_for_* code
+  cdrom: wait for the tray to close
+  cdrom: separate autoclose into an IOCTL
+  docs: cdrom: Add autoclose IOCTL
+  bdev: add open_finish.
+  scsi: sr: workaround VMware ESXi cdrom emulation bug
+  scsi: sr: wait for the medium to become ready
+
+ Documentation/filesystems/locking.rst |   2 +
+ Documentation/ioctl/cdrom.rst         |  25 ++++
+ drivers/cdrom/cdrom.c                 | 188 ++++++++++++++------------
+ drivers/scsi/sr.c                     |  60 ++++++--
+ fs/block_dev.c                        |  21 ++-
+ include/linux/blkdev.h                |   1 +
+ include/uapi/linux/cdrom.h            |   1 +
+ 7 files changed, 198 insertions(+), 100 deletions(-)
+
 -- 
-Jazz is not dead. It just smells funny...
+2.23.0
+
