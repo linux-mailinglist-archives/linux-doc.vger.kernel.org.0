@@ -2,141 +2,191 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CFE20E1B54
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Oct 2019 14:53:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F2F5E1D54
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Oct 2019 15:50:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2391894AbfJWMxR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Oct 2019 08:53:17 -0400
-Received: from mx2.suse.de ([195.135.220.15]:49374 "EHLO mx1.suse.de"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S2391880AbfJWMxQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 23 Oct 2019 08:53:16 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx1.suse.de (Postfix) with ESMTP id CECD2B67E;
-        Wed, 23 Oct 2019 12:53:14 +0000 (UTC)
-From:   Michal Suchanek <msuchanek@suse.de>
-To:     linux-scsi@vger.kernel.org
-Cc:     Michal Suchanek <msuchanek@suse.de>,
-        Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
-        "James E.J. Bottomley" <jejb@linux.ibm.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Eric Biggers <ebiggers@google.com>,
-        "J. Bruce Fields" <bfields@redhat.com>,
-        Benjamin Coddington <bcodding@redhat.com>,
-        Hannes Reinecke <hare@suse.com>,
-        Omar Sandoval <osandov@fb.com>, Ming Lei <ming.lei@redhat.com>,
-        Damien Le Moal <damien.lemoal@wdc.com>,
-        Bart Van Assche <bvanassche@acm.org>,
-        Tejun Heo <tj@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: [PATCH v2 8/8] scsi: sr: wait for the medium to become ready
-Date:   Wed, 23 Oct 2019 14:52:47 +0200
-Message-Id: <94dc98dc67b1d183d04c338c7978efa0556db6ac.1571834862.git.msuchanek@suse.de>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <cover.1571834862.git.msuchanek@suse.de>
-References: <cover.1571834862.git.msuchanek@suse.de>
+        id S2391914AbfJWNum (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Oct 2019 09:50:42 -0400
+Received: from [217.140.110.172] ([217.140.110.172]:52720 "EHLO foss.arm.com"
+        rhost-flags-FAIL-FAIL-OK-OK) by vger.kernel.org with ESMTP
+        id S2392090AbfJWNul (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 23 Oct 2019 09:50:41 -0400
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9FA494A7;
+        Wed, 23 Oct 2019 06:50:17 -0700 (PDT)
+Received: from [10.1.194.43] (e112269-lin.cambridge.arm.com [10.1.194.43])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C3E743F71F;
+        Wed, 23 Oct 2019 06:50:15 -0700 (PDT)
+From:   Steven Price <steven.price@arm.com>
+Subject: Re: [PATCH v7 00/10] arm64: Stolen time support
+To:     Marc Zyngier <maz@kernel.org>
+Cc:     Mark Rutland <mark.rutland@arm.com>, kvm@vger.kernel.org,
+        =?UTF-8?B?UmFkaW0gS3LEjW3DocWZ?= <rkrcmar@redhat.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Suzuki K Pouloze <suzuki.poulose@arm.com>,
+        linux-doc@vger.kernel.org, Russell King <linux@armlinux.org.uk>,
+        linux-kernel@vger.kernel.org, James Morse <james.morse@arm.com>,
+        Julien Thierry <julien.thierry.kdev@gmail.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Will Deacon <will@kernel.org>, kvmarm@lists.cs.columbia.edu,
+        linux-arm-kernel@lists.infradead.org
+References: <20191021152823.14882-1-steven.price@arm.com>
+ <f0d79362ab994e269680fba75f913044@www.loen.fr>
+Message-ID: <5b3968d8-9a5a-ee9d-70b3-436dc052dd0a@arm.com>
+Date:   Wed, 23 Oct 2019 14:50:14 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <f0d79362ab994e269680fba75f913044@www.loen.fr>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Use the autoclose IOCLT provided by cdrom driver to wait for drive to
-close in open_finish, and attempt to open once more after the door
-closes.
+On 23/10/2019 13:39, Marc Zyngier wrote:
+> Hi Steven,
+> 
+> On 2019-10-21 16:28, Steven Price wrote:
+>> This series add support for paravirtualized time for arm64 guests and
+>> KVM hosts following the specification in Arm's document DEN 0057A:
+>>
+>> https://developer.arm.com/docs/den0057/a
+>>
+>> It implements support for stolen time, allowing the guest to
+>> identify time when it is forcibly not executing.
+>>
+>> Note that Live Physical Time (LPT) which was previously part of the
+>> above specification has now been removed.
+>>
+>> Also available as a git tree:
+>> git://linux-arm.org/linux-sp.git stolen_time/v7
+> 
+> Can you please point me to userspace patches that I could apply to
+> kvmtool? I'd like to give this series a go as part of my normal testing.
 
-Signed-off-by: Michal Suchanek <msuchanek@suse.de>
+I don't have a proper patch yet, but the below is what I've been testing
+with (this breaks with kernels without PV-time).
+
+Steve
+
+----8<----
+From 8f6540cfbe2842f3ee422c07fbd1f590534cc90a Mon Sep 17 00:00:00 2001
+From: Steven Price <steven.price@arm.com>
+Date: Thu, 8 Nov 2018 13:43:56 +0000
+Subject: [PATCH kvmtool] ARM PV time support
+
+Signed-off-by: Steven Price <steven.price@arm.com>
 ---
- drivers/scsi/sr.c | 54 ++++++++++++++++++++++++++++++++++++-----------
- 1 file changed, 42 insertions(+), 12 deletions(-)
+ Makefile                 |  2 +-
+ arm/kvm-cpu.c            |  4 ++++
+ arm/pvtime.c             | 47 ++++++++++++++++++++++++++++++++++++++++
+ include/kvm/arm-pvtime.h |  6 +++++
+ 4 files changed, 58 insertions(+), 1 deletion(-)
+ create mode 100644 arm/pvtime.c
+ create mode 100644 include/kvm/arm-pvtime.h
 
-diff --git a/drivers/scsi/sr.c b/drivers/scsi/sr.c
-index 8090c5bdec09..34d9a818b9e0 100644
---- a/drivers/scsi/sr.c
-+++ b/drivers/scsi/sr.c
-@@ -521,29 +521,58 @@ static blk_status_t sr_init_command(struct scsi_cmnd *SCpnt)
- 	return ret;
+diff --git a/Makefile b/Makefile
+index 3862112..a79956b 100644
+--- a/Makefile
++++ b/Makefile
+@@ -158,7 +158,7 @@ endif
+ # ARM
+ OBJS_ARM_COMMON		:= arm/fdt.o arm/gic.o arm/gicv2m.o arm/ioport.o \
+ 			   arm/kvm.o arm/kvm-cpu.o arm/pci.o arm/timer.o \
+-			   arm/pmu.o
++			   arm/pmu.o arm/pvtime.o
+ HDRS_ARM_COMMON		:= arm/include
+ ifeq ($(ARCH), arm)
+ 	DEFINES		+= -DCONFIG_ARM
+diff --git a/arm/kvm-cpu.c b/arm/kvm-cpu.c
+index 7780251..c903b05 100644
+--- a/arm/kvm-cpu.c
++++ b/arm/kvm-cpu.c
+@@ -1,5 +1,6 @@
+ #include "kvm/kvm.h"
+ #include "kvm/kvm-cpu.h"
++#include "kvm/arm-pvtime.h"
+ 
+ static int debug_fd;
+ 
+@@ -122,6 +123,9 @@ struct kvm_cpu *kvm_cpu__arch_init(struct kvm *kvm, unsigned long cpu_id)
+ 	vcpu->cpu_compatible	= target->compatible;
+ 	vcpu->is_running	= true;
+ 
++	if (pvtime_vcpu_init(vcpu))
++		die("Unable to initialise pvtime");
++
+ 	return vcpu;
  }
  
--static int sr_block_open(struct block_device *bdev, fmode_t mode)
-+static int __sr_block_open(struct block_device *bdev, fmode_t mode)
- {
--	struct scsi_cd *cd;
--	struct scsi_device *sdev;
--	int ret = -ENXIO;
--
--	cd = scsi_cd_get(bdev->bd_disk);
--	if (!cd)
--		goto out;
-+	struct scsi_cd *cd = scsi_cd(bdev->bd_disk);
-+	int ret;
- 
--	sdev = cd->device;
--	scsi_autopm_get_device(sdev);
- 	check_disk_change(bdev);
- 
- 	mutex_lock(&sr_mutex);
- 	ret = cdrom_open(&cd->cdi, bdev, mode);
- 	mutex_unlock(&sr_mutex);
- 
-+	return ret;
+diff --git a/arm/pvtime.c b/arm/pvtime.c
+new file mode 100644
+index 0000000..fc152d3
+--- /dev/null
++++ b/arm/pvtime.c
+@@ -0,0 +1,47 @@
++#include "kvm/kvm.h"
++#include "kvm/kvm-cpu.h"
++#include "kvm/arm-pvtime.h"
++
++#define PVTIME_BASE 0x10000000
++
++#define KVM_ARM_VCPU_PVTIME_CTRL	2
++#define   KVM_ARM_VCPU_PVTIME_IPA	0
++
++static int pvtime_init(struct kvm *kvm)
++{
++	char *mem;
++	int size = ALIGN(64 * kvm->cfg.nrcpus, PAGE_SIZE);
++
++	mem = mmap(NULL, size, PROT_RW, MAP_ANON_NORESERVE, -1, 0);
++	if (mem == MAP_FAILED)
++		return -ENOMEM;
++
++	if (kvm__register_dev_mem(kvm, PVTIME_BASE, size, mem))
++		return -EINVAL;
++
++	return 0;
 +}
 +
-+static int sr_block_open(struct block_device *bdev, fmode_t mode)
++base_init(pvtime_init);
++
++int pvtime_vcpu_init(struct kvm_cpu *vcpu)
 +{
-+	struct scsi_cd *cd = scsi_cd_get(bdev->bd_disk);
-+	struct scsi_device *sdev;
-+	int ret;
++	int err;
++	u64 st_paddr = PVTIME_BASE;
 +
-+	if (!cd)
-+		return -ENXIO;
++	st_paddr += vcpu->cpu_id * 64;
 +
-+	sdev = cd->device;
-+	scsi_autopm_get_device(sdev);
-+	ret = __sr_block_open(bdev, mode);
- 	scsi_autopm_put_device(sdev);
--	if (ret)
++	struct kvm_device_attr st_base = {
++		.group = KVM_ARM_VCPU_PVTIME_CTRL,
++		.attr = KVM_ARM_VCPU_PVTIME_IPA,
++		.addr = (u64)&st_paddr
++	};
 +
-+	if (ret == -ERESTARTSYS)
- 		scsi_cd_put(cd);
- 
--out:
-+	return ret;
-+}
-+
-+static int sr_block_open_finish(struct block_device *bdev, fmode_t mode,
-+				int ret)
-+{
-+	struct scsi_cd *cd = scsi_cd(bdev->bd_disk);
-+
-+	/* wait for drive to get ready */
-+	if ((ret == -ENOMEDIUM) && !(mode & FMODE_NDELAY)) {
-+		struct scsi_device *sdev = cd->device;
-+		/*
-+		 * Cannot use sr_block_ioctl because it locks sr_mutex blocking
-+		 * out any processes trying to access the drive
-+		 */
-+		scsi_autopm_get_device(sdev);
-+		cdrom_ioctl(&cd->cdi, bdev, mode, CDROM_AUTOCLOSE, 0);
-+		ret = __sr_block_open(bdev, mode);
-+		scsi_autopm_put_device(sdev);
++	err = ioctl(vcpu->vcpu_fd, KVM_SET_DEVICE_ATTR, &st_base);
++	if (err) {
++		perror("ioctl st_base failed");
++		return err;
 +	}
 +
- 	return ret;
- }
- 
-@@ -639,6 +668,7 @@ static const struct block_device_operations sr_bdops =
- {
- 	.owner		= THIS_MODULE,
- 	.open		= sr_block_open,
-+	.open_finish	= sr_block_open_finish,
- 	.release	= sr_block_release,
- 	.ioctl		= sr_block_ioctl,
- 	.check_events	= sr_block_check_events,
++	return 0;
++}
+diff --git a/include/kvm/arm-pvtime.h b/include/kvm/arm-pvtime.h
+new file mode 100644
+index 0000000..f5db286
+--- /dev/null
++++ b/include/kvm/arm-pvtime.h
+@@ -0,0 +1,6 @@
++#ifndef ARM_PVTIME_H
++#define ARM_PVTIME_H
++
++int pvtime_vcpu_init(struct kvm_cpu *vcpu);
++
++#endif
 -- 
-2.23.0
+2.20.1
 
