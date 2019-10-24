@@ -2,86 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 683BFE3C5A
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Oct 2019 21:50:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AC28DE3D04
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Oct 2019 22:16:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2437420AbfJXTuW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Oct 2019 15:50:22 -0400
-Received: from gate2.alliedtelesis.co.nz ([202.36.163.20]:59733 "EHLO
-        gate2.alliedtelesis.co.nz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2437329AbfJXTuW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Oct 2019 15:50:22 -0400
-Received: from mmarshal3.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (Client did not present a certificate)
-        by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id D1D86891AB;
-        Fri, 25 Oct 2019 08:50:18 +1300 (NZDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
-        s=mail181024; t=1571946618;
-        bh=Hs8NcqdoljgJGEwJZDugNhLtA/5VyqVGE/xZcIF5ZMg=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References;
-        b=G8ldo2dqp4J5lq1pnturQcTs3+2QXGPrAwl3SDqG1M4YDQXBC+A5mdgvmrMw4GGvk
-         gGEwXd9lJ6xp4Nh6SXO4afBzSqb3Jccxy7UOcE+uXPNE9sZIg7hhr3XkHeViYVwasM
-         X2DU1jlUKZnGOfkuYDVbZC89Ia7z4pJElSWNPFgwbpjWmYzNDoLBgTRnoQEsl+DhjD
-         y7309s0e2pmijL8o8RLN07iPqlXMt9s5X+V4R7VqCaZwYeKPUOMEmgVugNcd50yYGR
-         Dh1001ZeYdsU5ToF/Vn8N3wHMfZSNqeHs1DCREj92STg0JkFe09rGKChiEw3j8wcKZ
-         phQDI5Dak+f1w==
-Received: from smtp (Not Verified[10.32.16.33]) by mmarshal3.atlnz.lc with Trustwave SEG (v7,5,8,10121)
-        id <B5db2007a0000>; Fri, 25 Oct 2019 08:50:18 +1300
-Received: from chrisp-dl.ws.atlnz.lc (chrisp-dl.ws.atlnz.lc [10.33.22.20])
-        by smtp (Postfix) with ESMTP id E513313EEFC;
-        Fri, 25 Oct 2019 08:50:22 +1300 (NZDT)
-Received: by chrisp-dl.ws.atlnz.lc (Postfix, from userid 1030)
-        id B140728005C; Fri, 25 Oct 2019 08:50:18 +1300 (NZDT)
-From:   Chris Packham <chris.packham@alliedtelesis.co.nz>
-To:     corbet@lwn.net, rppt@linux.ibm.com, willy@infradead.org
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Chris Packham <chris.packham@alliedtelesis.co.nz>
-Subject: [PATCH v3 3/3] docs/core-api: memory-allocation: mention size helpers
-Date:   Fri, 25 Oct 2019 08:50:16 +1300
-Message-Id: <20191024195016.11054-4-chris.packham@alliedtelesis.co.nz>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191024195016.11054-1-chris.packham@alliedtelesis.co.nz>
+        id S1727270AbfJXUQb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 24 Oct 2019 16:16:31 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:35756 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725958AbfJXUQb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Oct 2019 16:16:31 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+        :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=3hTyeN9xmnC/Yhvndz3wJnR6k4/3+2nRERhWgX7Ke30=; b=FZxmLY5GViBzQY4rQFc6SofwP
+        OHI09ws/PdZcw8ujlRy4h1oHWD0amPAnqKVbEibFkhprvd0q0dOTxltklCWKFib/O2qTssCIx6GhQ
+        40cEt/hbAcxnov6Pd/P56QHxO4sqYCJW/usqdEgk//M/P178VrHpatlVmKRjVN7/iteoylbICVeQL
+        fyhcpsrmmAgxFX697ItpvX78FZ8HMA7e8eJCgk2Lf8tcxwC7P5+oM0gMdG2ymBq95jkCdYOFQeRGx
+        1V1AQWFUslewS9b2ZsxsD/iCvPIYz4Ngn0oBCHMf8lz5uO152x9faqfAXOP8sfc8Ju5wjsc3R6/In
+        nz6BI8sDQ==;
+Received: from willy by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1iNjX2-0002Xr-5R; Thu, 24 Oct 2019 20:16:28 +0000
+Date:   Thu, 24 Oct 2019 13:16:28 -0700
+From:   Matthew Wilcox <willy@infradead.org>
+To:     Chris Packham <chris.packham@alliedtelesis.co.nz>
+Cc:     corbet@lwn.net, rppt@linux.ibm.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 0/3] docs/core-api: memory-allocation: minor cleanups
+Message-ID: <20191024201628.GL2963@bombadil.infradead.org>
 References: <20191024195016.11054-1-chris.packham@alliedtelesis.co.nz>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-x-atlnz-ls: pat
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20191024195016.11054-1-chris.packham@alliedtelesis.co.nz>
+User-Agent: Mutt/1.12.1 (2019-06-15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Mention struct_size(), array_size() and array3_size() in the same place
-as kmalloc() and friends.
+On Fri, Oct 25, 2019 at 08:50:13AM +1300, Chris Packham wrote:
+> Clean up some formatting and add references to helpers for calculating sizes
+> safely.
 
-Signed-off-by: Chris Packham <chris.packham@alliedtelesis.co.nz>
----
+For the whole series:
 
-Notes:
-    Changes in v3:
-    - rebase against v5.4-rc4
-    Changes in v2:
-    - Drop use of c:func:
-
- Documentation/core-api/memory-allocation.rst | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/core-api/memory-allocation.rst b/Documentation=
-/core-api/memory-allocation.rst
-index e47d48655085..4aa82ddd01b8 100644
---- a/Documentation/core-api/memory-allocation.rst
-+++ b/Documentation/core-api/memory-allocation.rst
-@@ -91,7 +91,8 @@ The most straightforward way to allocate memory is to u=
-se a function
- from the kmalloc() family. And, to be on the safe side it's best to use
- routines that set memory to zero, like kzalloc(). If you need to
- allocate memory for an array, there are kmalloc_array() and kcalloc()
--helpers.
-+helpers. The helpers struct_size(), array_size() and array3_size() can
-+be used to safely calculate object sizes without overflowing.
-=20
- The maximal size of a chunk that can be allocated with `kmalloc` is
- limited. The actual limit depends on the hardware and the kernel
---=20
-2.23.0
-
+Reviewed-by: Matthew Wilcox (Oracle) <willy@infradead.org>
