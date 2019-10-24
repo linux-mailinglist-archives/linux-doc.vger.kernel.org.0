@@ -2,91 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B519E3C57
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Oct 2019 21:50:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 54ED1E3C61
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Oct 2019 21:50:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2437147AbfJXTt7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Oct 2019 15:49:59 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:41720 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2437127AbfJXTt7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Oct 2019 15:49:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
-        Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:
-        Subject:Sender:Reply-To:Content-ID:Content-Description:Resent-Date:
-        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
-        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-         bh=qOGOspI8Yp77UR3I2ZyXpP3n8duCcwhHM+XycuF+ITA=; b=gFfI4mK3vxFR5+ZE+1FRgfWgS
-        FH1exvuK7nhQwFyEXoIp3RvDO13yc8MYshtgiNUVBi2K6H7oDhq7OmT+DFhFITrtOjoKVxI3gF2ri
-        +NuOOVBlSKc7uozcSq13/kqJjdytV3VAEFl34iQsnuNWlpGTPJQn0zM0sna1HhFspZRgIbGLgV9A3
-        aKhvWgkdxFvKje4zG5YnSzV0YX420w27S2tfduEVgcL0OeSp7hmMDUuua5dlT6FD/nsuUSRA3Qc3n
-        rFValBFSHIEX80Mq0QfnAUIPG6lsAq3vaC6sMggXQXdVQvImi+si+ziv/UHqhoL9POO66D6+/KDD7
-        6IdUawPNA==;
-Received: from [2601:1c0:6280:3f0::9ef4]
-        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1iNj7O-0006Sb-49; Thu, 24 Oct 2019 19:49:58 +0000
-Subject: Re: [PATCH v2 1/2] docs/core-api: memory-allocation: remove uses of
- c:func:
-To:     Chris Packham <Chris.Packham@alliedtelesis.co.nz>,
-        "corbet@lwn.net" <corbet@lwn.net>
-Cc:     "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-References: <20191022211438.3938-1-chris.packham@alliedtelesis.co.nz>
- <20191022211438.3938-2-chris.packham@alliedtelesis.co.nz>
- <20191024120227.0bd1ae92@lwn.net>
- <d053a8dc8e08b5b3ff4f2f4ff5b7c6ce4c3e773f.camel@alliedtelesis.co.nz>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <d5c282bd-42b7-7019-9964-30dc21ed0282@infradead.org>
-Date:   Thu, 24 Oct 2019 12:49:57 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.1
+        id S2437826AbfJXTub (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 24 Oct 2019 15:50:31 -0400
+Received: from gate2.alliedtelesis.co.nz ([202.36.163.20]:59746 "EHLO
+        gate2.alliedtelesis.co.nz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2437127AbfJXTuX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Oct 2019 15:50:23 -0400
+Received: from mmarshal3.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (Client did not present a certificate)
+        by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 8116A891AC;
+        Fri, 25 Oct 2019 08:50:22 +1300 (NZDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
+        s=mail181024; t=1571946622;
+        bh=ThiNpTXHoycHPLCDbXolfJgvcU9M5rnzh6PH45SgY74=;
+        h=From:To:Cc:Subject:Date;
+        b=bEF2VBnxH3bvcE4sA9EW7lI4R/hGYa1rlxcy3I7TT15bBnmCoRGNRgbM2626TeK2M
+         U8QQulm1/9lP/0uKlXFIm+aIrd1P1LJUecMUDHPs04v4h5S41WJEv37MoVuj5tKHXT
+         kff0lu4bd+Ohcysx25wZU3rw9uwxCgnhbBdM06HZmSzThT+At5w3VB3TSzD8OXvixP
+         e3wLtNWPPdTReYVMSpjDDILXOFxHa3lX/0Li+a7bjVwZ5JnMhhDom2FOjtSyKUtO2Q
+         duzYZ0FdN/ky3PnmECJp9AAIFj9ycarX7siUXQeGUZe4SGC3dM33ZFXq8ssocYQftZ
+         cChWwUxKz10Dw==
+Received: from smtp (Not Verified[10.32.16.33]) by mmarshal3.atlnz.lc with Trustwave SEG (v7,5,8,10121)
+        id <B5db200790000>; Fri, 25 Oct 2019 08:50:21 +1300
+Received: from chrisp-dl.ws.atlnz.lc (chrisp-dl.ws.atlnz.lc [10.33.22.20])
+        by smtp (Postfix) with ESMTP id 896A313EEEB;
+        Fri, 25 Oct 2019 08:50:22 +1300 (NZDT)
+Received: by chrisp-dl.ws.atlnz.lc (Postfix, from userid 1030)
+        id 5358A28005C; Fri, 25 Oct 2019 08:50:18 +1300 (NZDT)
+From:   Chris Packham <chris.packham@alliedtelesis.co.nz>
+To:     corbet@lwn.net, rppt@linux.ibm.com, willy@infradead.org
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Chris Packham <chris.packham@alliedtelesis.co.nz>
+Subject: [PATCH v3 0/3] docs/core-api: memory-allocation: minor cleanups
+Date:   Fri, 25 Oct 2019 08:50:13 +1300
+Message-Id: <20191024195016.11054-1-chris.packham@alliedtelesis.co.nz>
+X-Mailer: git-send-email 2.23.0
 MIME-Version: 1.0
-In-Reply-To: <d053a8dc8e08b5b3ff4f2f4ff5b7c6ce4c3e773f.camel@alliedtelesis.co.nz>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
+x-atlnz-ls: pat
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/24/19 12:39 PM, Chris Packham wrote:
-> Hi Jon,
-> 
-> On Thu, 2019-10-24 at 12:02 -0600, Jonathan Corbet wrote:
->> On Wed, 23 Oct 2019 10:14:37 +1300
->> Chris Packham <chris.packham@alliedtelesis.co.nz> wrote:
->>
->>> These are no longer needed as the documentation build will automatically
->>> add the cross references.
->>>
->>> Signed-off-by: Chris Packham <chris.packham@alliedtelesis.co.nz>
->>> ---
->>>
->>>  Documentation/core-api/memory-allocation.rst | 49 +++++++++-----------
->>>  1 file changed, 23 insertions(+), 26 deletions(-)
->>
->> So I can't get this patch to apply, and I can't even figure out why.  If
->> you take the patch from the list, can you apply it to a docs-next (or
->> mainline) branch?
->>
-> 
-> I think it might be dependent on my other typo fix patch[1]. I'll
-> rebase to v5.4-rc4 and send as a series of 3. Sorry for the hassle.
-> 
-> --
-> [1] 
-> https://lore.kernel.org/lkml/20191021003833.15704-1-chris.packham@alliedtelesis.co.nz/
-> 
-> 
->> Thanks,
->>
->> jon
+Clean up some formatting and add references to helpers for calculating si=
+zes
+safely.
 
-patch tells me:
-patch: **** malformed patch at line 84: -:c:func:`kmem_cache_destroy`.
+This series is based of v5.4-rc4.
 
--- 
-~Randy
+There was a merge conflict with commit 59bb47985c1d ("mm, sl[aou]b: guara=
+ntee
+natural alignment for kmalloc(power-of-two)") and the c:func: patch is
+dependent on the typo fix. The former was resolved with a rebase, the lat=
+ter by
+actually sending it as part of the series.
+
+Chris Packham (3):
+  docs/core-api: memory-allocation: fix typo
+  docs/core-api: memory-allocation: remove uses of c:func:
+  docs/core-api: memory-allocation: mention size helpers
+
+ Documentation/core-api/memory-allocation.rst | 50 ++++++++++----------
+ 1 file changed, 24 insertions(+), 26 deletions(-)
+
+--=20
+2.23.0
 
