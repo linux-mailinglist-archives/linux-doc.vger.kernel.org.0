@@ -2,72 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DCF60E48B9
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Oct 2019 12:42:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9CA88E4956
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Oct 2019 13:09:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390008AbfJYKmf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Oct 2019 06:42:35 -0400
-Received: from mx2.suse.de ([195.135.220.15]:53626 "EHLO mx1.suse.de"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1730471AbfJYKmf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 25 Oct 2019 06:42:35 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx1.suse.de (Postfix) with ESMTP id C6C93B2FC;
-        Fri, 25 Oct 2019 10:42:32 +0000 (UTC)
-Date:   Fri, 25 Oct 2019 12:42:30 +0200
-From:   Michal =?iso-8859-1?Q?Such=E1nek?= <msuchanek@suse.de>
-To:     Christoph Hellwig <hch@infradead.org>
-Cc:     linux-scsi@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Jens Axboe <axboe@kernel.dk>,
-        "James E.J. Bottomley" <jejb@linux.ibm.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Eric Biggers <ebiggers@google.com>,
-        "J. Bruce Fields" <bfields@redhat.com>,
-        Benjamin Coddington <bcodding@redhat.com>,
-        Hannes Reinecke <hare@suse.com>,
-        Omar Sandoval <osandov@fb.com>, Ming Lei <ming.lei@redhat.com>,
-        Damien Le Moal <damien.lemoal@wdc.com>,
-        Bart Van Assche <bvanassche@acm.org>,
-        Tejun Heo <tj@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v2 2/8] cdrom: factor out common open_for_* code
-Message-ID: <20191025104230.GN938@kitsune.suse.cz>
-References: <cover.1571834862.git.msuchanek@suse.de>
- <da032629db4a770a5f98ff400b91b44873cbdf46.1571834862.git.msuchanek@suse.de>
- <20191024021958.GA11485@infradead.org>
- <20191024085014.GF938@kitsune.suse.cz>
- <20191025023908.GB14108@infradead.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20191025023908.GB14108@infradead.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        id S2503696AbfJYLJI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Oct 2019 07:09:08 -0400
+Received: from xavier.telenet-ops.be ([195.130.132.52]:36618 "EHLO
+        xavier.telenet-ops.be" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2503212AbfJYLIs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Oct 2019 07:08:48 -0400
+Received: from ramsan ([84.195.182.253])
+        by xavier.telenet-ops.be with bizsmtp
+        id Hn8b2100e5USYZQ01n8bmB; Fri, 25 Oct 2019 13:08:46 +0200
+Received: from rox.of.borg ([192.168.97.57])
+        by ramsan with esmtp (Exim 4.90_1)
+        (envelope-from <geert@linux-m68k.org>)
+        id 1iNxSN-0003rD-Iz; Fri, 25 Oct 2019 13:08:35 +0200
+Received: from geert by rox.of.borg with local (Exim 4.90_1)
+        (envelope-from <geert@linux-m68k.org>)
+        id 1iNw6A-0006mq-Ia; Fri, 25 Oct 2019 11:41:34 +0200
+From:   Geert Uytterhoeven <geert+renesas@glider.be>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Ludovic Desroches <ludovic.desroches@microchip.com>,
+        Ulf Hansson <ulf.hansson@linaro.org>,
+        Nicolas Ferre <nicolas.ferre@microchip.com>,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        Jaehoon Chung <jh80.chung@samsung.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Johannes Berg <johannes@sipsolutions.net>
+Cc:     linux-doc@vger.kernel.org, linux-mmc@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, netdev@vger.kernel.org,
+        linux-wireless@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Geert Uytterhoeven <geert+renesas@glider.be>
+Subject: [PATCH v2 0/7] debugfs: Add and use debugfs_create_xul()
+Date:   Fri, 25 Oct 2019 11:41:23 +0200
+Message-Id: <20191025094130.26033-1-geert+renesas@glider.be>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Oct 24, 2019 at 07:39:08PM -0700, Christoph Hellwig wrote:
-> On Thu, Oct 24, 2019 at 10:50:14AM +0200, Michal Suchánek wrote:
-> > Then I will get complaints I do unrelated changes and it's hard to
-> > review. The code gets removed later anyway.
-> 
-> If you refactor you you pretty much have a card blanche for the
-> refactored code and the direct surroundings.
+        Hi all,
 
-This is different from what other reviewers say:
+The existing debugfs_create_ulong() function supports objects of
+type "unsigned long", which are 32-bit or 64-bit depending on the
+platform, in decimal form.  To format objects in hexadecimal, various
+debugfs_create_x*() functions exist, but all of them take fixed-size
+types. 
+  
+To work around this, some drivers call one of debugfs_create_x{32,64}(),
+depending on the size of unsigned long.
+Other drivers just cast the value pointer to "u32 *" or "u64 *",
+introducing portability bugs or data leaks in the process.
+ 
+Hence this patch series adds a debugfs helper for "unsigned long"
+objects in hexadecimal format, and converts drivers to make use of it.
+It also contains two cleanups removing superfluous casts, which I added
+to this series to avoid conflicts.
+ 
+Changes compared to v1[1]:
+  - Add kerneldoc,
+  - Update Documentation/filesystems/debugfs.txt,
+  - Add Acked-by.
 
-https://lore.kernel.org/lkml/1517245320.2687.14.camel@wdc.com/
+Dependencies:
+  - The first patch now depends on "Documentation: debugfs: Document
+    debugfs helper for unsigned long values"[2], which Jon said he
+    applied to his tree.
 
-Either way, this code is removed in a later patch so this discussion is
-moot. It makes sense to have a bisection point here in case something
-goes wrong but it is pointless to argue about the code structure
-inherited from the previous revision.
+Thanks!
 
-Thanks
+[1] https://lore.kernel.org/lkml/20191021143742.14487-1-geert+renesas@glider.be/
+[2] https://lore.kernel.org/lkml/20191021150645.32440-1-geert+renesas@glider.be/
 
-Michal
+Geert Uytterhoeven (7):
+  debugfs: Add debugfs_create_xul() for hexadecimal unsigned long
+  mac80211: Use debugfs_create_xul() helper
+  net: caif: Fix debugfs on 64-bit platforms
+  mmc: atmel-mci: Fix debugfs on 64-bit platforms
+  mmc: atmel-mci: Remove superfluous cast in debugfs_create_u32() call
+  mmc: dw_mmc: Fix debugfs on 64-bit platforms
+  mmc: dw_mmc: Remove superfluous cast in debugfs_create_u32() call
+
+ Documentation/filesystems/debugfs.txt |  5 ++++-
+ drivers/mmc/host/atmel-mci.c          | 10 +++++-----
+ drivers/mmc/host/dw_mmc.c             | 10 +++++-----
+ drivers/net/caif/caif_serial.c        |  4 ++--
+ include/linux/debugfs.h               | 21 +++++++++++++++++++++
+ net/mac80211/debugfs_sta.c            | 17 +++--------------
+ 6 files changed, 40 insertions(+), 27 deletions(-)
+
+-- 
+2.17.1
+
+Gr{oetje,eeting}s,
+
+						Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+							    -- Linus Torvalds
