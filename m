@@ -2,880 +2,162 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 76D3AE77B4
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2019 18:36:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CB883E7806
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2019 19:02:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728807AbfJ1Rgx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 28 Oct 2019 13:36:53 -0400
-Received: from mail-wr1-f65.google.com ([209.85.221.65]:38879 "EHLO
-        mail-wr1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725773AbfJ1Rgw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Oct 2019 13:36:52 -0400
-Received: by mail-wr1-f65.google.com with SMTP id v9so10818069wrq.5
-        for <linux-doc@vger.kernel.org>; Mon, 28 Oct 2019 10:36:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=RNnDH0yg12yKxrKJPNBwW1f4jjYPWsoNvl5GDVFxpS8=;
-        b=tG8HNKoKWoZwuVGtL3xyM0udfU6NY+SSLzMwcMAzc6soATW9ivQcODukXtojhtgAZp
-         xAlYQx55SN2tMbEZEePYKfNwKIn3+VL+KS0Bpn4BkP5x26ZjntjthwcF1YxahxvJ+8j3
-         NyUNx5dwWGyANiccoWJmGo2XZs6sPtnckMTHLKmFHrPvXv4EceUaqHY5e6zlzsMacA1e
-         47WXcVLTQFIY9iWSy16y5gx3XmlJsi4bwCUQxqjB71ASEhY7GQ42nmHyKdUgYTwPKcRw
-         7TUe9CYjkAJTtCumAy9jvKS38JDlwvo/UgAfaX7wb1mU3FCNRosEzL4jYZDagN2cLX3w
-         1b3Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=RNnDH0yg12yKxrKJPNBwW1f4jjYPWsoNvl5GDVFxpS8=;
-        b=TwD+nirqHXBIcdlnNm+N8+hsgeKNiJzjYuVn0vMx2jJkJLZkY2kFbYX89nA9ofhjMs
-         NmTmaouWV6b7RPd49A8EVTzD7KCgCYWfVww+JYGICR1YL/Vq4E0YbPQQmtyLXGqdYKvT
-         q1nKoioTgPAvrqZxXds3ocOff4H+VKpic1YU1dnuQXRA9UNOa9Try4UXH9Z529leGXyQ
-         STjT4aPFv0Dc98vhqu/BqI6H7ATdxTzxVZXf/164ycjgRFw4kmi/mDnkkS4imDNPeb1w
-         SYP8xEk1+D9IFbjXeNgG7Mg8kATh8IBOhrlqTiLZsHk2BphSSuz8xBoVgikp9L1yG4wx
-         HrsQ==
-X-Gm-Message-State: APjAAAXn5e7yTC1bLFt/Q98Fe+tTQas/M90v6xKskrKvbkqEXGA2oYR1
-        zrLKWe4VUjOdvRQWjaHnIKQpj94oyD0=
-X-Google-Smtp-Source: APXvYqzaIpli5fFKQeFfdDVqVF0M+zfATBPAsSqAiM6bzHgYQLOJE1WNHmgM75Ekk8po0bG8xdqVzQ==
-X-Received: by 2002:adf:efd1:: with SMTP id i17mr15335030wrp.172.1572283775909;
-        Mon, 28 Oct 2019 10:29:35 -0700 (PDT)
-Received: from linaro.org ([2a00:23c5:6815:3901:a072:1d10:8dba:cbb])
-        by smtp.gmail.com with ESMTPSA id r19sm14273295wrr.47.2019.10.28.10.29.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Oct 2019 10:29:35 -0700 (PDT)
-From:   Mike Leach <mike.leach@linaro.org>
-To:     linux-doc@vger.kernel.org, corbet@lwn.net
-Cc:     mathieu.poirier@linaro.org, linux-arm-kernel@lists.infradead.org,
-        coresight@lists.linaro.org, Mike Leach <mike.leach@linaro.org>
-Subject: [PATCH v4 4/4] coresight: etm4x: docs: Adds detailed document for programming etm4x.
-Date:   Mon, 28 Oct 2019 17:29:19 +0000
-Message-Id: <20191028172919.19662-5-mike.leach@linaro.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191028172919.19662-1-mike.leach@linaro.org>
-References: <20191028172919.19662-1-mike.leach@linaro.org>
+        id S2404294AbfJ1SCh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 28 Oct 2019 14:02:37 -0400
+Received: from mail.kernel.org ([198.145.29.99]:42870 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1730859AbfJ1SCg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 28 Oct 2019 14:02:36 -0400
+Received: from paulmck-ThinkPad-P72 (50-39-105-78.bvtn.or.frontiernet.net [50.39.105.78])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 253A620862;
+        Mon, 28 Oct 2019 18:02:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1572285755;
+        bh=Hyg++zfQSMX+47X9Z7dJD9TriyOsl/OxnbC82FMuQLA=;
+        h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
+        b=qNfN5tlvR6Bc/HSOU2T5NwEH9tG876FuSY2Z9rzu8ckVYKZhUlhZZrUo7IRm8luG7
+         l0Q0zKiZWrYCqc1okeIwqoF0Sz28N1jbDTXgyTGrEUqW+h9PMDoTFT33gV0cByPup+
+         IsGWDrTlyxhOLYfdMgB19mVKHTo1nMBXgKCq8tT8=
+Date:   Mon, 28 Oct 2019 11:02:33 -0700
+From:   "Paul E. McKenney" <paulmck@kernel.org>
+To:     madhuparnabhowmik04@gmail.com
+Cc:     joel@joelfernandes.org, corbet@lwn.net, linux-doc@vger.kernel.org,
+        rcu@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        Madhuparna Bhowmik <madhuparnbhowmik04@gmail.com>
+Subject: Re: [PATCH 2/2] Documentation: RCU: Converted arrayRCU.txt to
+ arrayRCU.rst.
+Message-ID: <20191028180233.GO4465@paulmck-ThinkPad-P72>
+Reply-To: paulmck@kernel.org
+References: <20191028151936.27016-1-madhuparnabhowmik04@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20191028151936.27016-1-madhuparnabhowmik04@gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add in detailed programmers reference for users wanting to program the
-CoreSight ETM 4.x driver using sysfs.
+On Mon, Oct 28, 2019 at 08:49:36PM +0530, madhuparnabhowmik04@gmail.com wrote:
+> From: Madhuparna Bhowmik <madhuparnabhowmik04@gmail.com>
+> 
+> This patch converts arrayRCU from txt to rst format.
+> arrayRCU.rst is also added in the index.rst file.
+> 
+> Signed-off-by: Madhuparna Bhowmik <madhuparnbhowmik04@gmail.com>
+> Signed-off-by: Madhuparna Bhowmik <madhuparnabhowmik04@gmail.com>
 
-Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
-Signed-off-by: Mike Leach <mike.leach@linaro.org>
----
- .../coresight/coresight-etm4x-reference.rst   | 798 ++++++++++++++++++
- 1 file changed, 798 insertions(+)
- create mode 100644 Documentation/trace/coresight/coresight-etm4x-reference.rst
+Thank you, but this does not apply to the -rcu git repo's "dev" branch.
+Could you please tell me what commit you developed this against?
 
-diff --git a/Documentation/trace/coresight/coresight-etm4x-reference.rst b/Documentation/trace/coresight/coresight-etm4x-reference.rst
-new file mode 100644
-index 000000000000..b64d9a9c79df
---- /dev/null
-+++ b/Documentation/trace/coresight/coresight-etm4x-reference.rst
-@@ -0,0 +1,798 @@
-+===============================================
-+ETMv4 sysfs linux driver programming reference.
-+===============================================
-+
-+    :Author:   Mike Leach <mike.leach@linaro.org>
-+    :Date:     October 11th, 2019
-+
-+Supplement to existing ETMv4 driver documentation.
-+
-+Sysfs files and directories
-+---------------------------
-+
-+Root: ``/sys/bus/coresight/devices/etm<N>``
-+
-+
-+The following paragraphs explain the association between sysfs files and the
-+ETMv4 registers that they effect. Note the register names are given without
-+the ‘TRC’ prefix.
-+
-+----
-+
-+:File:            ``mode`` (rw)
-+:Trace Registers: {CONFIGR + others}
-+:Notes:
-+    Bit select trace features. See ‘mode’ section below. Bits
-+    in this will cause equivalent programming of trace config and
-+    other registers to enable the features requested.
-+
-+:Syntax & eg:
-+    ``echo bitfield > mode``
-+
-+    bitfield up to 32 bits setting trace features.
-+
-+:Example:
-+    ``$> echo 0x012 > mode``
-+
-+----
-+
-+:File:            ``reset`` (wo)
-+:Trace Registers: All
-+:Notes:
-+    Reset all programming to trace nothing / no logic programmed.
-+
-+:Syntax:
-+    ``echo 1 > reset``
-+
-+----
-+
-+:File:            ``enable_source`` (wo)
-+:Trace Registers: PRGCTLR, All hardware regs.
-+:Notes:
-+    - > 0 : Programs up the hardware with the current values held in the driver
-+      and enables trace.
-+
-+    - = 0 : disable trace hardware.
-+
-+:Syntax:
-+    ``echo 1 > enable_source``
-+
-+----
-+
-+:File:            ``cpu`` (ro)
-+:Trace Registers: None.
-+:Notes:
-+    CPU ID that this ETM is attached to.
-+
-+:Example:
-+    ``$> cat cpu``
-+
-+    ``$> 0``
-+
-+----
-+
-+:File:            ``addr_idx`` (rw)
-+:Trace Registers: None.
-+:Notes:
-+    Virtual register to index address comparator and range
-+    features. Set index for first of the pair in a range.
-+
-+:Syntax:
-+    ``echo idx > addr_idx``
-+
-+    Where idx < nr_addr_cmp x 2
-+
-+----
-+
-+:File:            ``addr_range`` (rw)
-+:Trace Registers: ACVR[idx, idx+1], VIIECTLR
-+:Notes:
-+    Pair of addresses for a range selected by addr_idx. Include
-+    / exclude according to the optional parameter, or if omitted
-+    uses the current ‘mode’ setting. Select comparator range in
-+    control register. Error if index is odd value.
-+
-+:Depends: ``mode, addr_idx``
-+:Syntax:
-+   ``echo addr1 addr2 [exclude] > addr_range``
-+
-+   Where addr1 and addr2 define the range and addr1 < addr2.
-+
-+   Optional exclude value:-
-+
-+   - 0 for include
-+   - 1 for exclude.
-+:Example:
-+   ``$> echo 0x0000 0x2000 0 > addr_range``
-+
-+----
-+
-+:File:            ``addr_single`` (rw)
-+:Trace Registers: ACVR[idx]
-+:Notes:
-+    Set a single address comparator according to addr_idx. This
-+    is used if the address comparator is used as part of event
-+    generation logic etc.
-+
-+:Depends: ``addr_idx``
-+:Syntax:
-+   ``echo addr1 > addr_single``
-+
-+----
-+
-+:File:           ``addr_start`` (rw)
-+:Trace Registers: ACVR[idx], VISSCTLR
-+:Notes:
-+    Set a trace start address comparator according to addr_idx.
-+    Select comparator in control register.
-+
-+:Depends: ``addr_idx``
-+:Syntax:
-+    ``echo addr1 > addr_start``
-+
-+----
-+
-+:File:            ``addr_stop`` (rw)
-+:Trace Registers: ACVR[idx], VISSCTLR
-+:Notes:
-+    Set a trace stop address comparator according to addr_idx.
-+    Select comparator in control register.
-+
-+:Depends: ``addr_idx``
-+:Syntax:
-+    ``echo addr1 > addr_stop``
-+
-+----
-+
-+:File:            ``addr_context`` (rw)
-+:Trace Registers: ACATR[idx,{6:4}]
-+:Notes:
-+    Link context ID comparator to address comparator addr_idx
-+
-+:Depends: ``addr_idx``
-+:Syntax:
-+    ``echo ctxt_idx > addr_context``
-+
-+    Where ctxt_idx is the index of the linked context id / vmid
-+    comparator.
-+
-+----
-+
-+:File:            ``addr_ctxtype`` (rw)
-+:Trace Registers: ACATR[idx,{3:2}]
-+:Notes:
-+    Input value string. Set type for linked context ID comparator
-+
-+:Depends: ``addr_idx``
-+:Syntax:
-+    ``echo type > addr_ctxtype``
-+
-+    Type one of {all, vmid, ctxid, none}
-+:Example:
-+    ``$> echo ctxid > addr_ctxtype``
-+
-+----
-+
-+:File:            ``addr_exlevel_s_ns`` (rw)
-+:Trace Registers: ACATR[idx,{14:8}]
-+:Notes:
-+    Set the ELx secure and non-secure matching bits for the
-+    selected address comparator
-+
-+:Depends: ``addr_idx``
-+:Syntax:
-+    ``echo val > addr_exlevel_s_ns``
-+
-+    val is a 7 bit value for exception levels to exclude. Input
-+    value shifted to correct bits in register.
-+:Example:
-+    ``$> echo 0x4F > addr_exlevel_s_ns``
-+
-+----
-+
-+:File:            ``addr_instdatatype`` (rw)
-+:Trace Registers: ACATR[idx,{1:0}]
-+:Notes:
-+    Set the comparator address type for matching. Driver only
-+    supports setting instruction address type.
-+
-+:Depends: ``addr_idx``
-+
-+----
-+
-+:File:            ``addr_cmp_view`` (ro)
-+:Trace Registers: ACVR[idx, idx+1], ACATR[idx], VIIECTLR
-+:Notes:
-+    Read the currently selected address comparator. If part of
-+    address range then display both addresses.
-+
-+:Depends: ``addr_idx``
-+:Syntax:
-+    ``cat addr_cmp_view``
-+:Example:
-+    ``$> cat addr_cmp_view``
-+
-+   ``addr_cmp[0] range 0x0 0xffffffffffffffff include ctrl(0x4b00)``
-+
-+----
-+
-+:File:            ``nr_addr_cmp`` (ro)
-+:Trace Registers: From IDR4
-+:Notes:
-+    Number of address comparator pairs
-+
-+----
-+
-+:File:            ``sshot_idx`` (rw)
-+:Trace Registers: None
-+:Notes:
-+    Select single shot register set.
-+
-+----
-+
-+:File:            ``sshot_ctrl`` (rw)
-+:Trace Registers: SSCCR[idx]
-+:Notes:
-+    Access a single shot comparator control register.
-+
-+:Depends: ``sshot_idx``
-+:Syntax:
-+    ``echo val > sshot_ctrl``
-+
-+    Writes val into the selected control register.
-+
-+----
-+
-+:File:            ``sshot_status`` (ro)
-+:Trace Registers: SSCSR[idx]
-+:Notes:
-+    Read a single shot comparator status register
-+
-+:Depends: ``sshot_idx``
-+:Syntax:
-+    ``cat sshot_status``
-+
-+    Read status.
-+:Example:
-+    ``$> cat sshot_status``
-+
-+    ``0x1``
-+
-+----
-+
-+:File:            ``sshot_pe_ctrl`` (rw)
-+:Trace Registers: SSPCICR[idx]
-+:Notes:
-+    Access a single shot PE comparator input control register.
-+
-+:Depends: ``sshot_idx``
-+:Syntax:
-+    ``echo val > sshot_pe_ctrl``
-+
-+    Writes val into the selected control register.
-+
-+----
-+
-+:File:            ``ns_exlevel_vinst`` (rw)
-+:Trace Registers: VICTLR{23:20}
-+:Notes:
-+    Program non-secure exception level filters. Set / clear NS
-+    exception filter bits. Setting ‘1’ excludes trace from the
-+    exception level.
-+
-+:Syntax:
-+    ``echo bitfield > ns_exlevel_viinst``
-+
-+    Where bitfield contains bits to set clear for EL0 to EL2
-+:Example:
-+    ``%> echo 0x4 > ns_exlevel_viinst``
-+
-+    Excludes EL2 NS trace.
-+
-+----
-+
-+:File:            ``vinst_pe_cmp_start_stop`` (rw)
-+:Trace Registers: VIPCSSCTLR
-+:Notes:
-+    Access PE start stop comparator input control registers
-+
-+----
-+
-+:File:            ``bb_ctrl`` (rw)
-+:Trace Registers: BBCTLR
-+:Notes:
-+    Define ranges that Branch Broadcast will operate in.
-+    Default (0x0) is all addresses.
-+
-+:Depends: BB enabled.
-+
-+----
-+
-+:File:            ``cyc_threshold`` (rw)
-+:Trace Registers: CCCTLR
-+:Notes:
-+    Set the threshold for which cycle counts will be emitted.
-+    Error if attempt to set below minimum defined in IDR3, masked
-+    to width of valid bits.
-+
-+:Depends: CC enabled.
-+
-+----
-+
-+:File:            ``syncfreq`` (rw)
-+:Trace Registers: SYNCPR
-+:Notes:
-+    Set trace synchronisation period. Power of 2 value, 0 (off)
-+    or 8-20. Driver defaults to 12 (every 4096 bytes).
-+
-+----
-+
-+:File:            ``cntr_idx`` (rw)
-+:Trace Registers: none
-+:Notes:
-+    Select the counter to access
-+
-+:Syntax:
-+    ``echo idx > cntr_idx``
-+
-+    Where idx < nr_cntr
-+
-+----
-+
-+:File:            ``cntr_ctrl`` (rw)
-+:Trace Registers: CNTCTLR[idx]
-+:Notes:
-+    Set counter control value.
-+
-+:Depends: ``cntr_idx``
-+:Syntax:
-+    ``echo val > cntr_ctrl``
-+
-+    Where val is per ETMv4 spec.
-+
-+----
-+
-+:File:            ``cntrldvr`` (rw)
-+:Trace Registers: CNTRLDVR[idx]
-+:Notes:
-+    Set counter reload value.
-+
-+:Depends: ``cntr_idx``
-+:Syntax:
-+    ``echo val > cntrldvr``
-+
-+    Where val is per ETMv4 spec.
-+
-+----
-+
-+:File:            ``nr_cntr`` (ro)
-+:Trace Registers: From IDR5
-+
-+:Notes:
-+    Number of counters implemented.
-+
-+----
-+
-+:File:            ``ctxid_idx`` (rw)
-+:Trace Registers: None
-+:Notes:
-+    Select the context ID comparator to access
-+
-+:Syntax:
-+    ``echo idx > ctxid_idx``
-+
-+    Where idx < numcidc
-+
-+----
-+
-+:File:            ``ctxid_pid`` (rw)
-+:Trace Registers: CIDCVR[idx]
-+:Notes:
-+   Set the context ID comparator value
-+
-+:Depends: ``ctxid_idx``
-+
-+----
-+
-+:File: ``ctxid_masks`` (rw)
-+:Trace Registers: CIDCCTLR0, CIDCCTLR1, CIDCVR<0-7>
-+:Notes:
-+    Pair of values to set the byte masks for 1-8 context ID
-+    comparators. Automatically clears masked bytes to 0 in CID
-+    value registers.
-+
-+:Syntax:
-+    ``echo m3m2m1m0 [m7m6m5m4] > ctxid_masks``
-+
-+    32 bit values made up of mask bytes, where mN represents a
-+    byte mask value for Context ID comparator N.
-+
-+    Second value not required on systems that have fewer than 4
-+    context ID comparators
-+
-+----
-+
-+:File:            ``numcidc`` (ro)
-+:Trace Registers: From IDR4
-+:Notes:
-+    Number of Context ID comparators
-+
-+----
-+
-+:File:            ``vmid_idx`` (rw)
-+:Trace Registers: None
-+:Notes:
-+    Select the VM ID comparator to access.
-+
-+:Syntax:
-+    ``echo idx > vmid_idx``
-+
-+    Where idx <  numvmidc
-+
-+----
-+
-+:File:            ``vmid_val`` (rw)
-+:Trace Registers: VMIDCVR[idx]
-+:Notes:
-+    Set the VM ID comparator value
-+
-+:Depends: ``vmid_idx``
-+
-+----
-+
-+:File:            ``vmid_masks`` (rw)
-+:Trace Registers: VMIDCCTLR0, VMIDCCTLR1, VMIDCVR<0-7>
-+:Notes:
-+    Pair of values to set the byte masks for 1-8 VM ID comparators.
-+    Automatically clears masked bytes to 0 in VMID value registers.
-+
-+:Syntax:
-+    ``echo m3m2m1m0 [m7m6m5m4] > vmid_masks``
-+
-+    Where mN represents a byte mask value for VMID comparator N.
-+    Second value not required on systems that have fewer than 4
-+    VMID comparators.
-+
-+----
-+
-+:File:            ``numvmidc`` (ro)
-+:Trace Registers: From IDR4
-+:Notes:
-+    Number of VMID comparators
-+
-+----
-+
-+:File:            ``res_idx`` (rw)
-+:Trace Registers: None.
-+:Notes:
-+    Select the resource selector control to access. Must be 2 or
-+    higher as selectors 0 and 1 are hardwired.
-+
-+:Syntax:
-+    ``echo idx > res_idx``
-+
-+    Where 2 <= idx < nr_resource x 2
-+
-+----
-+
-+:File:            ``res_ctrl`` (rw)
-+:Trace Registers: RSCTLR[idx]
-+:Notes:
-+    Set resource selector control value. Value per ETMv4 spec.
-+
-+:Depends: ``res_idx``
-+:Syntax:
-+    ``echo val > res_cntr``
-+
-+    Where val is per ETMv4 spec.
-+
-+----
-+
-+:File:            ``nr_resource`` (ro)
-+:Trace Registers: From IDR4
-+:Notes:
-+    Number of resource selector pairs
-+
-+----
-+
-+:File:            ``event`` (rw)
-+:Trace Registers: EVENTCTRL0R
-+:Notes:
-+    Set up to 4 implemented event fields.
-+
-+:Syntax:
-+    ``echo ev3ev2ev1ev0 > event``
-+
-+    Where evN is an 8 bit event field. Up to 4 event fields make up the
-+    32-bit input value. Number of valid fields is implementation dependent,
-+    defined in IDR0.
-+
-+----
-+
-+:File: ``event_instren`` (rw)
-+:Trace Registers: EVENTCTRL1R
-+:Notes:
-+    Choose events which insert event packets into trace stream.
-+
-+:Depends: EVENTCTRL0R
-+:Syntax:
-+    ``echo bitfield > event_instren``
-+
-+    Where bitfield is up to 4 bits according to number of event fields.
-+
-+----
-+
-+:File:            ``event_ts`` (rw)
-+:Trace Registers: TSCTLR
-+:Notes:
-+    Set the event that will generate timestamp requests.
-+
-+:Depends: ``TS activated``
-+:Syntax:
-+    ``echo evfield > event_ts``
-+
-+    Where evfield is an 8 bit event selector.
-+
-+----
-+
-+:File:            ``seq_idx`` (rw)
-+:Trace Registers: None
-+:Notes:
-+    Sequencer event register select - 0 to 2
-+
-+----
-+
-+:File:            ``seq_state`` (rw)
-+:Trace Registers: SEQSTR
-+:Notes:
-+    Sequencer current state - 0 to 3.
-+
-+----
-+
-+:File:            ``seq_event`` (rw)
-+:Trace Registers: SEQEVR[idx]
-+:Notes:
-+    State transition event registers
-+
-+:Depends: ``seq_idx``
-+:Syntax:
-+    ``echo evBevF > seq_event``
-+
-+    Where evBevF is a 16 bit value made up of two event selectors,
-+
-+    - evB : back
-+    - evF : forwards.
-+
-+----
-+
-+:File:            ``seq_reset_event`` (rw)
-+:Trace Registers: SEQRSTEVR
-+:Notes:
-+    Sequencer reset event
-+
-+:Syntax:
-+    ``echo evfield > seq_reset_event``
-+
-+    Where evfield is an 8 bit event selector.
-+
-+----
-+
-+:File:            ``nrseqstate`` (ro)
-+:Trace Registers: From IDR5
-+:Notes:
-+    Number of sequencer states (0 or 4)
-+
-+----
-+
-+:File:            ``nr_pe_cmp`` (ro)
-+:Trace Registers: From IDR4
-+:Notes:
-+    Number of PE comparator inputs
-+
-+----
-+
-+:File:            ``nr_ext_inp`` (ro)
-+:Trace Registers: From IDR5
-+:Notes:
-+    Number of external inputs
-+
-+----
-+
-+:File:            ``nr_ss_cmp`` (ro)
-+:Trace Registers: From IDR4
-+:Notes:
-+    Number of Single Shot control registers
-+
-+----
-+
-+*Note:* When programming any address comparator the driver will tag the
-+comparator with a type used - i.e. RANGE, SINGLE, START, STOP. Once this tag
-+is set, then only the values can be changed using the same sysfs file / type
-+used to program it.
-+
-+Thus::
-+
-+  % echo 0 > addr_idx		; select address comparator 0
-+  % echo 0x1000 0x5000 0 > addr_range ; set address range on comparators 0, 1.
-+  % echo 0x2000 > addr_start    ; error as comparator 0 is a range comparator
-+  % echo 2 > addr_idx		; select address comparator 2
-+  % echo 0x2000 > addr_start	; this is OK as comparator 2 is unused.
-+  % echo 0x3000 > addr_stop	; error as comparator 2 set as start address.
-+  % echo 2 > addr_idx		; select address comparator 3
-+  % echo 0x3000 > addr_stop	; this is OK
-+
-+To remove programming on all the comparators (and all the other hardware) use
-+the reset parameter::
-+
-+  % echo 1 > reset
-+
-+
-+
-+The ‘mode’ sysfs parameter.
-+---------------------------
-+
-+This is a bitfield selection parameter that sets the overall trace mode for the
-+ETM. The table below describes the bits, using the defines from the driver
-+source file, along with a description of the feature these represent. Many
-+features are optional and therefore dependent on implementation in the
-+hardware.
-+
-+Bit assignments shown below:-
-+
-+----
-+
-+**bit (0):**
-+    ETM_MODE_EXCLUDE
-+
-+**description:**
-+    This is the default value for the include / exclude function when
-+    setting address ranges. Set 1 for exclude range. When the mode
-+    parameter is set this value is applied to the currently indexed
-+    address range.
-+
-+
-+**bit (4):**
-+    ETM_MODE_BB
-+
-+**description:**
-+    Set to enable branch broadcast if supported in hardware [IDR0].
-+
-+
-+**bit (5):**
-+    ETMv4_MODE_CYCACC
-+
-+**description:**
-+    Set to enable cycle accurate trace if supported [IDR0].
-+
-+
-+**bit (6):**
-+    ETMv4_MODE_CTXID
-+
-+**description:**
-+    Set to enable context ID tracing if supported in hardware [IDR2].
-+
-+
-+**bit (7):**
-+    ETM_MODE_VMID
-+
-+**description:**
-+    Set to enable virtual machine ID tracing if supported [IDR2].
-+
-+
-+**bit (11):**
-+    ETMv4_MODE_TIMESTAMP
-+
-+**description:**
-+    Set to enable timestamp generation if supported [IDR0].
-+
-+
-+**bit (12):**
-+    ETM_MODE_RETURNSTACK
-+**description:**
-+    Set to enable trace return stack use if supported [IDR0].
-+
-+
-+**bit (13-14):**
-+    ETM_MODE_QELEM(val)
-+
-+**description:**
-+    ‘val’ determines level of Q element support enabled if
-+    implemented by the ETM [IDR0]
-+
-+
-+**bit (19):**
-+    ETM_MODE_ATB_TRIGGER
-+
-+**description:**
-+    Set to enable the ATBTRIGGER bit in the event control register
-+    [EVENTCTLR1] if supported [IDR5].
-+
-+
-+**bit (20):**
-+    ETM_MODE_LPOVERRIDE
-+
-+**description:**
-+    Set to enable the LPOVERRIDE bit in the event control register
-+    [EVENTCTLR1], if supported [IDR5].
-+
-+
-+**bit (21):**
-+    ETM_MODE_ISTALL_EN
-+
-+**description:**
-+    Set to enable the ISTALL bit in the stall control register
-+    [STALLCTLR]
-+
-+
-+**bit (23):**
-+    ETM_MODE_INSTPRIO
-+
-+**description:**
-+	      Set to enable the INSTPRIORITY bit in the stall control register
-+	      [STALLCTLR] , if supported [IDR0].
-+
-+
-+**bit (24):**
-+    ETM_MODE_NOOVERFLOW
-+
-+**description:**
-+    Set to enable the NOOVERFLOW bit in the stall control register
-+    [STALLCTLR], if supported [IDR3].
-+
-+
-+**bit (25):**
-+    ETM_MODE_TRACE_RESET
-+
-+**description:**
-+    Set to enable the TRCRESET bit in the viewinst control register
-+    [VICTLR] , if supported [IDR3].
-+
-+
-+**bit (26):**
-+    ETM_MODE_TRACE_ERR
-+
-+**description:**
-+    Set to enable the TRCCTRL bit in the viewinst control register
-+    [VICTLR].
-+
-+
-+**bit (27):**
-+    ETM_MODE_VIEWINST_STARTSTOP
-+
-+**description:**
-+    Set the initial state value of the ViewInst start / stop logic
-+    in the viewinst control register [VICTLR]
-+
-+
-+**bit (30):**
-+    ETM_MODE_EXCL_KERN
-+
-+**description:**
-+    Set default trace setup to exclude kernel mode trace (see note a)
-+
-+
-+**bit (31):**
-+    ETM_MODE_EXCL_USER
-+
-+**description:**
-+    Set default trace setup to exclude user space trace (see note a)
-+
-+----
-+
-+*Note a)* On startup the ETM is programmed to trace the complete address space
-+using address range comparator 0. ‘mode’ bits 30 / 31 modify this setting to
-+set EL exclude bits for NS state in either user space (EL0) or kernel space
-+(EL1) in the address range comparator. (the default setting excludes all
-+secure EL, and NS EL2)
-+
-+Once the reset parameter has been used, and/or custom programming has been
-+implemented - using these bits will result in the EL bits for address
-+comparator 0 being set in the same way.
-+
-+*Note b)* Bits 2-3, 8-10, 15-16, 18, 22, control features that only work with
-+data trace. As A-profile data trace is architecturally prohibited in ETMv4,
-+these have been omitted here. Possible uses could be where a kernel has
-+support for control of R or M profile infrastructure as part of a heterogeneous
-+system.
-+
-+Bits 17, 28-29 are unused.
--- 
-2.17.1
+FYI, the location and much more about -rcu may be found here:
 
+https://mirrors.edge.kernel.org/pub/linux/kernel/people/paulmck/rcutodo.html
+
+							Thanx, Paul
+
+> ---
+>  .../RCU/{arrayRCU.txt => arrayRCU.rst}         | 18 ++++++++++++++----
+>  Documentation/RCU/index.rst                    |  1 +
+>  2 files changed, 15 insertions(+), 4 deletions(-)
+>  rename Documentation/RCU/{arrayRCU.txt => arrayRCU.rst} (91%)
+> 
+> diff --git a/Documentation/RCU/arrayRCU.txt b/Documentation/RCU/arrayRCU.rst
+> similarity index 91%
+> rename from Documentation/RCU/arrayRCU.txt
+> rename to Documentation/RCU/arrayRCU.rst
+> index f05a9afb2c39..c8a26f7b2577 100644
+> --- a/Documentation/RCU/arrayRCU.txt
+> +++ b/Documentation/RCU/arrayRCU.rst
+> @@ -1,4 +1,7 @@
+> +.. _array_rcu_doc:
+> +
+>  Using RCU to Protect Read-Mostly Arrays
+> +=======================================
+>  
+>  
+>  Although RCU is more commonly used to protect linked lists, it can
+> @@ -26,6 +29,7 @@ described in the following sections.
+>  
+>  
+>  Situation 1: Hash Tables
+> +------------------------
+>  
+>  Hash tables are often implemented as an array, where each array entry
+>  has a linked-list hash chain.  Each hash chain can be protected by RCU
+> @@ -34,6 +38,7 @@ to other array-of-list situations, such as radix trees.
+>  
+>  
+>  Situation 2: Static Arrays
+> +--------------------------
+>  
+>  Static arrays, where the data (rather than a pointer to the data) is
+>  located in each array element, and where the array is never resized,
+> @@ -41,11 +46,14 @@ have not been used with RCU.  Rik van Riel recommends using seqlock in
+>  this situation, which would also have minimal read-side overhead as long
+>  as updates are rare.
+>  
+> -Quick Quiz:  Why is it so important that updates be rare when
+> -	     using seqlock?
+> +Quick Quiz:
+> +		Why is it so important that updates be rare when using seqlock?
+> +
+> +:ref:`Answer to Quick Quiz <answer_quick_quiz_seqlock>`
+>  
+>  
+>  Situation 3: Resizeable Arrays
+> +------------------------------
+>  
+>  Use of RCU for resizeable arrays is demonstrated by the grow_ary()
+>  function formerly used by the System V IPC code.  The array is used
+> @@ -60,7 +68,7 @@ the remainder of the new, updates the ids->entries pointer to point to
+>  the new array, and invokes ipc_rcu_putref() to free up the old array.
+>  Note that rcu_assign_pointer() is used to update the ids->entries pointer,
+>  which includes any memory barriers required on whatever architecture
+> -you are running on.
+> +you are running on.::
+>  
+>  	static int grow_ary(struct ipc_ids* ids, int newsize)
+>  	{
+> @@ -112,7 +120,7 @@ a simple check suffices.  The pointer to the structure corresponding
+>  to the desired IPC object is placed in "out", with NULL indicating
+>  a non-existent entry.  After acquiring "out->lock", the "out->deleted"
+>  flag indicates whether the IPC object is in the process of being
+> -deleted, and, if not, the pointer is returned.
+> +deleted, and, if not, the pointer is returned.::
+>  
+>  	struct kern_ipc_perm* ipc_lock(struct ipc_ids* ids, int id)
+>  	{
+> @@ -144,8 +152,10 @@ deleted, and, if not, the pointer is returned.
+>  		return out;
+>  	}
+>  
+> +.. _answer_quick_quiz_seqlock:
+>  
+>  Answer to Quick Quiz:
+> +	Why is it so important that updates be rare when using seqlock?
+>  
+>  	The reason that it is important that updates be rare when
+>  	using seqlock is that frequent updates can livelock readers.
+> diff --git a/Documentation/RCU/index.rst b/Documentation/RCU/index.rst
+> index 340a9725676c..c4586602e7e2 100644
+> --- a/Documentation/RCU/index.rst
+> +++ b/Documentation/RCU/index.rst
+> @@ -7,6 +7,7 @@ RCU concepts
+>  .. toctree::
+>     :maxdepth: 1
+>  
+> +   arrayRCU
+>     rcu
+>     listRCU
+>     UP
+> -- 
+> 2.17.1
+> 
