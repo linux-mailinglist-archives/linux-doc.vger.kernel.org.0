@@ -2,71 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D50E0E6AEB
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2019 03:42:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B92C9E6C3B
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2019 07:07:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730234AbfJ1Cmc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 27 Oct 2019 22:42:32 -0400
-Received: from 59-120-53-16.HINET-IP.hinet.net ([59.120.53.16]:10324 "EHLO
-        ATCSQR.andestech.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1730229AbfJ1Cmc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 27 Oct 2019 22:42:32 -0400
-Received: from mail.andestech.com (atcpcs16.andestech.com [10.0.1.222])
-        by ATCSQR.andestech.com with ESMTP id x9S2OTh5087266;
-        Mon, 28 Oct 2019 10:24:29 +0800 (GMT-8)
-        (envelope-from nickhu@andestech.com)
-Received: from atcsqa06.andestech.com (10.0.15.65) by ATCPCS16.andestech.com
- (10.0.1.222) with Microsoft SMTP Server id 14.3.123.3; Mon, 28 Oct 2019
- 10:41:57 +0800
-From:   Nick Hu <nickhu@andestech.com>
-To:     <aryabinin@virtuozzo.com>, <glider@google.com>,
-        <dvyukov@google.com>, <corbet@lwn.net>, <paul.walmsley@sifive.com>,
-        <palmer@sifive.com>, <aou@eecs.berkeley.edu>, <tglx@linutronix.de>,
-        <gregkh@linuxfoundation.org>, <alankao@andestech.com>,
-        <Anup.Patel@wdc.com>, <atish.patra@wdc.com>,
-        <kasan-dev@googlegroups.com>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-riscv@lists.infradead.org>,
-        <linux-mm@kvack.org>, <green.hu@gmail.com>
-CC:     Nick Hu <nickhu@andestech.com>
-Subject: [PATCH v4 3/3] kasan: Add riscv to KASAN documentation.
-Date:   Mon, 28 Oct 2019 10:41:01 +0800
-Message-ID: <20191028024101.26655-4-nickhu@andestech.com>
-X-Mailer: git-send-email 2.17.0
-In-Reply-To: <20191028024101.26655-1-nickhu@andestech.com>
-References: <20191028024101.26655-1-nickhu@andestech.com>
-MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.0.15.65]
-X-DNSRBL: 
-X-MAIL: ATCSQR.andestech.com x9S2OTh5087266
+        id S1731635AbfJ1GH3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 28 Oct 2019 02:07:29 -0400
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:44499 "EHLO
+        mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731716AbfJ1GHZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Oct 2019 02:07:25 -0400
+Received: by mail-pl1-f193.google.com with SMTP id q16so4813908pll.11;
+        Sun, 27 Oct 2019 23:07:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=N3AnrnW8m8clFq9XuX9N6KUkxKYhGl3KT2G9TPIKHEM=;
+        b=bT52vDaGBuwdvyDqaSD1/IYjhM9gTx5GKu0rpFGpTnEp+vUUEry3qL26DvF4gTll+C
+         Tsg6NIxfTMU8UPtxYojqJlAet/oJktqwY9hMv/NDujzqn4f9kiDSME3+3Y5hsnAZS8LH
+         b96WrKIg58YXA5n6e3vcYIbyRDeSKZ0L2Ueus/iaZ2zqkrsVtUx4BWc40Kh+ilZ4/LNZ
+         EHGZjbFwgKMJDf4C1WMnZJvA9ZFBV9yCqGpVsiTi/9XlEinuePMUleGRp0TX/bTtKGZR
+         at4sGrNQYyv/v9eiv0dUdUzNvwDMCVD0p2bAAbiJ5bcTyZQFuRRYux5r5cjpnTLJKQcZ
+         z2fg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=N3AnrnW8m8clFq9XuX9N6KUkxKYhGl3KT2G9TPIKHEM=;
+        b=pRc47WoXAgvhq2dvxWUadAteefh1aYHeiuNIMlnx7HRZL9XB2WbWrIIAYFk+6AKdGT
+         Vp0z2L6FIbpxRUwwnZiMstadnbGDW4lEVfTI7E8Uy2xDpgjqNd4VYLPmVsW9lqs+TrDc
+         lwmXzIEhxR6BXAJh9FZjWxP1JPJQZ4A5g0o7s/I90OwVlSBZQAhEryooGTI0psd9+ot4
+         rZJtm/RC8pjVNSo7CiA5A2Vhf7p/sbliBihKu1qBee4KQxeCK7BMXpFTsdzcgrl6qiTr
+         Tk4ZTclS39i8LW0n/O8i4SAmF6povxovY71HOuz/F1Ib9utha55TuAQqnnZ7MVzKasHR
+         aU+w==
+X-Gm-Message-State: APjAAAUewOKAVeyYLaK88d82EMhSLtvlDR351DQWr+3me+pJzzF2bUCx
+        jQycC6ldHumFJu4q6QXStq8=
+X-Google-Smtp-Source: APXvYqzUSnrIvw+xmNvs6HOdzZLoYxHxyluQ5VYTuyR6cYdBdKLk+sZRLjYcH4wWEmk0/9YY5QsZZw==
+X-Received: by 2002:a17:902:347:: with SMTP id 65mr16901116pld.161.1572242844300;
+        Sun, 27 Oct 2019 23:07:24 -0700 (PDT)
+Received: from madhuparna-HP-Notebook.nitk.ac.in ([2402:3a80:539:cf3b:393e:2dcf:24de:b4fb])
+        by smtp.gmail.com with ESMTPSA id 70sm746781pfw.160.2019.10.27.23.07.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 27 Oct 2019 23:07:23 -0700 (PDT)
+From:   madhuparnabhowmik04@gmail.com
+To:     corbet@lwn.net, mchehab+samsung@kernel.org,
+        gregkh@linuxfoundation.org
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        Madhuparna Bhowmik <madhuparnabhowmik04@gmail.com>
+Subject: [PATCH] Documentation: driver-api: index: Removed non-existing document driver-api/sgi-ioc4 from the toctree.
+Date:   Mon, 28 Oct 2019 11:37:10 +0530
+Message-Id: <20191028060710.15154-1-madhuparnabhowmik04@gmail.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add riscv to the KASAN documentation to mention that riscv
-is supporting generic kasan now.
+From: Madhuparna Bhowmik <madhuparnabhowmik04@gmail.com>
 
-Signed-off-by: Nick Hu <nickhu@andestech.com>
+This patches fixes the WARNING: toctree contains reference
+to nonexisting document u'driver-api/sgi-ioc4'by removing
+it from the toctree in the index.rst file.
+
+Signed-off-by: Madhuparna Bhowmik <madhuparnabhowmik04@gmail.com>
 ---
- Documentation/dev-tools/kasan.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ Documentation/driver-api/index.rst | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/Documentation/dev-tools/kasan.rst b/Documentation/dev-tools/kasan.rst
-index b72d07d70239..34fbb7212cbc 100644
---- a/Documentation/dev-tools/kasan.rst
-+++ b/Documentation/dev-tools/kasan.rst
-@@ -21,8 +21,8 @@ global variables yet.
- 
- Tag-based KASAN is only supported in Clang and requires version 7.0.0 or later.
- 
--Currently generic KASAN is supported for the x86_64, arm64, xtensa and s390
--architectures, and tag-based KASAN is supported only for arm64.
-+Currently generic KASAN is supported for the x86_64, arm64, xtensa, s390 and
-+riscv architectures, and tag-based KASAN is supported only for arm64.
- 
- Usage
- -----
+diff --git a/Documentation/driver-api/index.rst b/Documentation/driver-api/index.rst
+index 38e638abe3eb..6d46ceeb62c4 100644
+--- a/Documentation/driver-api/index.rst
++++ b/Documentation/driver-api/index.rst
+@@ -93,7 +93,6 @@ available subsections can be seen below.
+    pwm
+    rfkill
+    serial/index
+-   sgi-ioc4
+    sm501
+    smsc_ece1099
+    switchtec
 -- 
-2.17.0
+2.17.1
 
