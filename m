@@ -2,178 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 68786E7790
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2019 18:26:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 07734E77A5
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Oct 2019 18:35:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731915AbfJ1R0Y (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 28 Oct 2019 13:26:24 -0400
-Received: from mail-wr1-f67.google.com ([209.85.221.67]:40010 "EHLO
-        mail-wr1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731902AbfJ1R0Y (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Oct 2019 13:26:24 -0400
-Received: by mail-wr1-f67.google.com with SMTP id o28so10774021wro.7
-        for <linux-doc@vger.kernel.org>; Mon, 28 Oct 2019 10:26:22 -0700 (PDT)
+        id S1729930AbfJ1RfE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 28 Oct 2019 13:35:04 -0400
+Received: from mail-wr1-f45.google.com ([209.85.221.45]:45355 "EHLO
+        mail-wr1-f45.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729246AbfJ1RfE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Oct 2019 13:35:04 -0400
+Received: by mail-wr1-f45.google.com with SMTP id q13so10777718wrs.12
+        for <linux-doc@vger.kernel.org>; Mon, 28 Oct 2019 10:35:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=fsxDBESrwWHwyM1DCATrB1UFDRDfNhtm7Mjrlgu4k7M=;
-        b=jqLCX2XbQZcjGdp44fzhRkfZ8j64gc3PbrSeddnCwY5DTfFITJRz1j1M+ZBPlyUA+u
-         k341/Eso+RKdt2Ag9s03kJwXUjGoaU4ZMcVtarl6VbEvvF7HfZFS4ZdbG/3RpJxVjVrW
-         HvFwRAqDCu6zcTwvahmPB89Qzyc6pBZ+dFfa/F5Ikn/wQtqQUxoqWUmHxpgcgP8mTcsf
-         IznNKUzXUVwiy8GJtEGDQ5AjhcsB3+BRtdgRcK8fez7hN85MU9CJ25XSIo4nw1hoiTTm
-         KOrlL9VfyGRmxi3odu/xd+LdHCfJvMlFj+tQ/50PoW+Dwek610BiOrsA/s7msnqkXYAN
-         OQPw==
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id;
+        bh=4h0j1y2DktN68cOwekrIvX7jwMz9RtEdu7NiWvIBj+I=;
+        b=UNycCq4T9++5SpxfhlzKUrQcEJ2MW9XCLYxLXprqK7P78e4Li0WacOJmgUozVa6JZE
+         H0CG5nHPGsh2NczLP0vU5vz3E1FNMgsPVd4OHrSshAtmFMiNrwAyvjArsiWR1eN0GwUX
+         w4LKnnZWFCcPvNkPt1/EvL4n2Uc5S+vcmibMoL+/fPYFNISlCVqR9/Sc3cgaWu3hRjY+
+         YkUUJBYISQJiFK/52/EMRxD8RBUAtXTHKT5CGi2Nkg53foAUdTIP0YwH9ieD93EQzZ3H
+         DPnkukaVoMAD5vGpN9LjHvtXa38J82BRdU9hQ+Sz80Il1NpWfphaLh1eaWWPDeupYB6x
+         2kSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=fsxDBESrwWHwyM1DCATrB1UFDRDfNhtm7Mjrlgu4k7M=;
-        b=FAMswqiRUeAvjN7wWs+PKT693UWyWZGI0axRXcqCQDaNgFsmyroUa1+5BaXJLFq8HF
-         9cZ6NGw4T3C28AMZ+/Anq2mv0QET/zGbu+fZjBAhq15QLaPbwETXcV7wo9qk98GJmlwI
-         M5jFBHFToW7GYuC3Sf29HL8ZKwZqRV3yflpnM6PzstAZTY3RFMCPQ2Ys3hVpghTOKxEj
-         tyCjr7TkXKAydIe83i3/o4QXKhvVvYQpTvTKrzk5m9ifGnz3QnBYun2i7sz3wm2HriUk
-         FhQabsBZJwpAUtPwzMyK1t7bgMgIl3YCZhCkbh7JEA5JX12GK5GfGv6CqOkYKw/atBl5
-         Cs1g==
-X-Gm-Message-State: APjAAAUL+4AdQ0IBZ7meZOo0xzfgv6rp4RUsCmfiJfmNcxj2Vl1IumEv
-        V5+GTd861JbJ320wK9QMgZSGiZ7R05ZoEx3atkoejWzi
-X-Google-Smtp-Source: APXvYqzTX2FQ05PWF54+JFdIZSpNQOePU0aZ3NHBjzPzhKIWkWrTRt0NWeFDg0ngiRxe/VYKAzyYgVBQ5DHked/EefE=
-X-Received: by 2002:adf:f746:: with SMTP id z6mr15264958wrp.238.1572283580779;
- Mon, 28 Oct 2019 10:26:20 -0700 (PDT)
-MIME-Version: 1.0
-References: <CAODfWeEohxJYW1w9g5u8G7RV+OKDqycWw0uEEqRoTQCVvfvKjw@mail.gmail.com>
-In-Reply-To: <CAODfWeEohxJYW1w9g5u8G7RV+OKDqycWw0uEEqRoTQCVvfvKjw@mail.gmail.com>
-From:   =?UTF-8?B?SMOpY3RvciBPcsOzbiBNYXJ0w61uZXo=?= 
-        <hector.oron@gmail.com>
-Date:   Mon, 28 Oct 2019 18:26:09 +0100
-Message-ID: <CAODfWeH67_ZfO7yrrQ+EcFgXd8stA23y6hUtimhzEbXvWmjhbw@mail.gmail.com>
-Subject: Re: [PATCH] doc: fix warnings for unused files in toctree
-To:     linux-doc@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>
-Content-Type: multipart/mixed; boundary="00000000000051b3730595fbcc5f"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=4h0j1y2DktN68cOwekrIvX7jwMz9RtEdu7NiWvIBj+I=;
+        b=Q2CdM78siqx4JFpL5mBY4hkK2p6CwtkbktEazXiThBSLUd/kR+I48hW1xTQ9WM+Pfv
+         hU8wSNb2b1ZU65ANQTPPAxKMd0KUgHAwhSWczET74yztdl0OQooskhuq/BMKj7JsLMwP
+         OL53tAiBRySzhbKqwB2l5wqRj0AzcQohvyYccBhxPOWfunbvIqOsEWacAPpW7pL5+5Zk
+         NypKIUG464F2NY1RQt6JV34r5+zqL5thP00cGpfNU19qb9ukNxEO90SG8x6d+3Jli7lT
+         WgDRfsF6SNV6V2AOICkZOfBM/OH1hcHZkwQkIiCNPd4L9p41EdiIhfF91/qoJoP9jOoe
+         oTVQ==
+X-Gm-Message-State: APjAAAV1WT0zLTtBTgmnPENZsP5SwJOPGuitb57EDbvD2rR1mwl2+BUr
+        9mNbICna4R72v771uvemsCXGYZUxA4w=
+X-Google-Smtp-Source: APXvYqzj0ah01Wc2PstZV4U7mwqqyvoxYeN2HSfBJjs0fAyazqXH9zMDKR/Xrx7HTVPPjFVa+bXexg==
+X-Received: by 2002:a5d:4b51:: with SMTP id w17mr3330012wrs.357.1572283771618;
+        Mon, 28 Oct 2019 10:29:31 -0700 (PDT)
+Received: from linaro.org ([2a00:23c5:6815:3901:a072:1d10:8dba:cbb])
+        by smtp.gmail.com with ESMTPSA id r19sm14273295wrr.47.2019.10.28.10.29.30
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 28 Oct 2019 10:29:31 -0700 (PDT)
+From:   Mike Leach <mike.leach@linaro.org>
+To:     linux-doc@vger.kernel.org, corbet@lwn.net
+Cc:     mathieu.poirier@linaro.org, linux-arm-kernel@lists.infradead.org,
+        coresight@lists.linaro.org, Mike Leach <mike.leach@linaro.org>
+Subject: [PATCH v4 0/4] coresight: etm4x: docs: sysfs API doc updates
+Date:   Mon, 28 Oct 2019 17:29:15 +0000
+Message-Id: <20191028172919.19662-1-mike.leach@linaro.org>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---00000000000051b3730595fbcc5f
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Review of ETMV4 sysfs code resulted in a number of minor issues being
+discovered. Patchset fixed these and updated docs.
 
-Hello,
+Applies to coresight/next
 
-  I was planning to add more fixes in separated commit, but while
-working on it, apparently it could be part of the previous commit.
-  Apologies, find updated patch.
+Changes since v3
+  First 8 patches of v3 have been accepted onto coresight/next. The patch
+  series is now documents only
+  Docs .txt files changed to .rst by unrelated patch. This set reflects
+  this change and updates the added docs to match.
+  Indexing changed for new coresight docs directory.
 
-Missatge de H=C3=A9ctor Or=C3=B3n Mart=C3=ADnez <hector.oron@gmail.com> del=
- dia dl.,
-28 d=E2=80=99oct. 2019 a les 18:12:
->
-> Hello,
->
->   Find patch attached to fix some warnings about unused files in
-> toctree and unexistent files, listed in toctrees.
->
-> Regards
-> --
->  H=C3=A9ctor Or=C3=B3n  -.. . -... .. .- -.   -.. . ...- . .-.. --- .--. =
-. .-.
+Changes since v2 (reviews from Mathieu and Leo):-
+  Patch 0002 now adds stable tag. Tested on 4.9, 4.14, 4.19
+  Applies to coresight/next (5.4-rc1)
+  Documentation changed to .rst format to match recent updates that
+  converted other CoreSight .txt files.
+  Misc typo / comment changes.
 
+Changes since v1 (from reviews by Mathieu and Leo):-
+  Usability patch split into 2 separate functional patches.
+  Docs patch split into 3 patches.
+  Misc style and comment typo fixes.
 
+Mike Leach (4):
+  coresight: etm4x: docs: Update ABI doc for new sysfs name scheme.
+  coresight: etm4x: docs: Update ABI doc for new sysfs etm4 attributes
+  coresight: docs: Create common sub-directory for coresight trace.
+  coresight: etm4x: docs: Adds detailed document for programming etm4x.
 
---=20
- H=C3=A9ctor Or=C3=B3n  -.. . -... .. .- -.   -.. . ...- . .-.. --- .--. . =
-.-.
+ .../testing/sysfs-bus-coresight-devices-etm4x | 183 ++--
+ .../{ => coresight}/coresight-cpu-debug.rst   |   0
+ .../coresight/coresight-etm4x-reference.rst   | 798 ++++++++++++++++++
+ .../trace/{ => coresight}/coresight.rst       |   2 +-
+ Documentation/trace/coresight/index.rst       |   9 +
+ Documentation/trace/index.rst                 |   3 +-
+ MAINTAINERS                                   |   3 +-
+ 7 files changed, 925 insertions(+), 73 deletions(-)
+ rename Documentation/trace/{ => coresight}/coresight-cpu-debug.rst (100%)
+ create mode 100644 Documentation/trace/coresight/coresight-etm4x-reference.rst
+ rename Documentation/trace/{ => coresight}/coresight.rst (99%)
+ create mode 100644 Documentation/trace/coresight/index.rst
 
---00000000000051b3730595fbcc5f
-Content-Type: text/x-patch; charset="UTF-8"; 
-	name="0001-doc-fix-warnings-for-unused-files-in-toctree.patch"
-Content-Disposition: attachment; 
-	filename="0001-doc-fix-warnings-for-unused-files-in-toctree.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_k2ap1gtm0>
-X-Attachment-Id: f_k2ap1gtm0
+-- 
+2.17.1
 
-RnJvbSA0YzEwZjI1NzRmZTEwZmQxOTc0OTFkMjRhNjQ5NDg0M2ViMTM2YzkzIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/SD1DMz1BOWN0b3I9MjBPcj1DMz1CM249MjBN
-YXJ0PUMzPUFEbmV6Pz0KIDxoZWN0b3Iub3JvbkBnbWFpbC5jb20+CkRhdGU6IE1vbiwgMjggT2N0
-IDIwMTkgMTc6NDk6MjEgKzAxMDAKU3ViamVjdDogW1BBVENIXSBkb2M6IGZpeCB3YXJuaW5ncyBm
-b3IgdW51c2VkIGZpbGVzIGluIHRvY3RyZWUKTUlNRS1WZXJzaW9uOiAxLjAKQ29udGVudC1UeXBl
-OiB0ZXh0L3BsYWluOyBjaGFyc2V0PVVURi04CkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDhi
-aXQKClRoZXJlIGFyZSBhIGJ1bmNoIG9mIHdhcm5pbmdzIGZvciBtaXNzaW5nIGZpbGVzIGluIHRo
-ZSB0b2N0cmVlLAphbmQgdGhlcmUgYXJlIGZpbGVzIHRoYXQgaGF2ZSBiZWVuIHJlbW92ZWQuCgpU
-aGUgZm9sbG93aW5nIGNoYW5nZSBmaXggdGhvc2Ugd2FybmluZ3MuCgpTaWduZWQtb2ZmLWJ5OiBI
-w6ljdG9yIE9yw7NuIE1hcnTDrW5leiA8aGVjdG9yLm9yb25AZ21haWwuY29tPgotLS0KIERvY3Vt
-ZW50YXRpb24vYWRtaW4tZ3VpZGUvZGV2aWNlLW1hcHBlci9pbmRleC5yc3QgfCAgMSArCiBEb2N1
-bWVudGF0aW9uL2FkbWluLWd1aWRlL3BlcmYvaW5kZXgucnN0ICAgICAgICAgIHwgIDEgKwogRG9j
-dW1lbnRhdGlvbi9kcml2ZXItYXBpL2RtYS1idWYucnN0ICAgICAgICAgICAgICB8IDEyIC0tLS0t
-LS0tLS0tLQogRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL2luZGV4LnJzdCAgICAgICAgICAgICAg
-ICB8ICAxIC0KIERvY3VtZW50YXRpb24vZ3B1L2k5MTUucnN0ICAgICAgICAgICAgICAgICAgICAg
-ICAgfCAgOSAtLS0tLS0tLS0KIERvY3VtZW50YXRpb24vbWlzYy1kZXZpY2VzL2luZGV4LnJzdCAg
-ICAgICAgICAgICAgfCAgMSAtCiBEb2N1bWVudGF0aW9uL3VzYi9pbmRleC5yc3QgICAgICAgICAg
-ICAgICAgICAgICAgIHwgIDIgLS0KIERvY3VtZW50YXRpb24vdXNiL3RleHRfZmlsZXMucnN0ICAg
-ICAgICAgICAgICAgICAgfCAgNiAtLS0tLS0KIDggZmlsZXMgY2hhbmdlZCwgMiBpbnNlcnRpb25z
-KCspLCAzMSBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL2FkbWluLWd1
-aWRlL2RldmljZS1tYXBwZXIvaW5kZXgucnN0IGIvRG9jdW1lbnRhdGlvbi9hZG1pbi1ndWlkZS9k
-ZXZpY2UtbWFwcGVyL2luZGV4LnJzdAppbmRleCBjNzdjNThiOGY2N2IuLjNmZjU2OGQ2MDc1OSAx
-MDA2NDQKLS0tIGEvRG9jdW1lbnRhdGlvbi9hZG1pbi1ndWlkZS9kZXZpY2UtbWFwcGVyL2luZGV4
-LnJzdAorKysgYi9Eb2N1bWVudGF0aW9uL2FkbWluLWd1aWRlL2RldmljZS1tYXBwZXIvaW5kZXgu
-cnN0CkBAIC0xOSw2ICsxOSw3IEBAIERldmljZSBNYXBwZXIKICAgICBkbS1zZXJ2aWNlLXRpbWUK
-ICAgICBkbS11ZXZlbnQKICAgICBkbS16b25lZAorICAgIGRtLWNsb25lCiAgICAgZXJhCiAgICAg
-a2NvcHlkCiAgICAgbGluZWFyCmRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL2FkbWluLWd1aWRl
-L3BlcmYvaW5kZXgucnN0IGIvRG9jdW1lbnRhdGlvbi9hZG1pbi1ndWlkZS9wZXJmL2luZGV4LnJz
-dAppbmRleCBlZTRiZmQyYTc0MGYuLjBmNDUwYTFmNjRjOCAxMDA2NDQKLS0tIGEvRG9jdW1lbnRh
-dGlvbi9hZG1pbi1ndWlkZS9wZXJmL2luZGV4LnJzdAorKysgYi9Eb2N1bWVudGF0aW9uL2FkbWlu
-LWd1aWRlL3BlcmYvaW5kZXgucnN0CkBAIC0xNCwzICsxNCw0IEBAIFBlcmZvcm1hbmNlIG1vbml0
-b3Igc3VwcG9ydAogICAgeGdlbmUtcG11CiAgICBhcm1fZHN1X3BtdQogICAgdGh1bmRlcngyLXBt
-dQorICAgaW14LWRkcgpkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL2RtYS1i
-dWYucnN0IGIvRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL2RtYS1idWYucnN0CmluZGV4IGI1NDFl
-OTdjN2FiMS4uZDJmM2M5NWVhOWVkIDEwMDY0NAotLS0gYS9Eb2N1bWVudGF0aW9uL2RyaXZlci1h
-cGkvZG1hLWJ1Zi5yc3QKKysrIGIvRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL2RtYS1idWYucnN0
-CkBAIC0xMTUsMTggKzExNSw2IEBAIEtlcm5lbCBGdW5jdGlvbnMgYW5kIFN0cnVjdHVyZXMgUmVm
-ZXJlbmNlCiAuLiBrZXJuZWwtZG9jOjogaW5jbHVkZS9saW51eC9kbWEtYnVmLmgKICAgIDppbnRl
-cm5hbDoKIAotUmVzZXJ2YXRpb24gT2JqZWN0cwotLS0tLS0tLS0tLS0tLS0tLS0tLQotCi0uLiBr
-ZXJuZWwtZG9jOjogZHJpdmVycy9kbWEtYnVmL3Jlc2VydmF0aW9uLmMKLSAgIDpkb2M6IFJlc2Vy
-dmF0aW9uIE9iamVjdCBPdmVydmlldwotCi0uLiBrZXJuZWwtZG9jOjogZHJpdmVycy9kbWEtYnVm
-L3Jlc2VydmF0aW9uLmMKLSAgIDpleHBvcnQ6Ci0KLS4uIGtlcm5lbC1kb2M6OiBpbmNsdWRlL2xp
-bnV4L3Jlc2VydmF0aW9uLmgKLSAgIDppbnRlcm5hbDoKLQogRE1BIEZlbmNlcwogLS0tLS0tLS0t
-LQogCmRpZmYgLS1naXQgYS9Eb2N1bWVudGF0aW9uL2RyaXZlci1hcGkvaW5kZXgucnN0IGIvRG9j
-dW1lbnRhdGlvbi9kcml2ZXItYXBpL2luZGV4LnJzdAppbmRleCAzOGU2MzhhYmUzZWIuLjZkNDZj
-ZWViNjJjNCAxMDA2NDQKLS0tIGEvRG9jdW1lbnRhdGlvbi9kcml2ZXItYXBpL2luZGV4LnJzdAor
-KysgYi9Eb2N1bWVudGF0aW9uL2RyaXZlci1hcGkvaW5kZXgucnN0CkBAIC05Myw3ICs5Myw2IEBA
-IGF2YWlsYWJsZSBzdWJzZWN0aW9ucyBjYW4gYmUgc2VlbiBiZWxvdy4KICAgIHB3bQogICAgcmZr
-aWxsCiAgICBzZXJpYWwvaW5kZXgKLSAgIHNnaS1pb2M0CiAgICBzbTUwMQogICAgc21zY19lY2Ux
-MDk5CiAgICBzd2l0Y2h0ZWMKZGlmZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vZ3B1L2k5MTUucnN0
-IGIvRG9jdW1lbnRhdGlvbi9ncHUvaTkxNS5yc3QKaW5kZXggMzQxNTI1NWFkM2RjLi43ZDFmNjU2
-MTI4NTYgMTAwNjQ0Ci0tLSBhL0RvY3VtZW50YXRpb24vZ3B1L2k5MTUucnN0CisrKyBiL0RvY3Vt
-ZW50YXRpb24vZ3B1L2k5MTUucnN0CkBAIC0zNTgsMTUgKzM1OCw2IEBAIEJhdGNoYnVmZmVyIFBh
-cnNpbmcKIC4uIGtlcm5lbC1kb2M6OiBkcml2ZXJzL2dwdS9kcm0vaTkxNS9pOTE1X2NtZF9wYXJz
-ZXIuYwogICAgOmludGVybmFsOgogCi1CYXRjaGJ1ZmZlciBQb29scwotLS0tLS0tLS0tLS0tLS0t
-LS0KLQotLi4ga2VybmVsLWRvYzo6IGRyaXZlcnMvZ3B1L2RybS9pOTE1L2k5MTVfZ2VtX2JhdGNo
-X3Bvb2wuYwotICAgOmRvYzogYmF0Y2ggcG9vbAotCi0uLiBrZXJuZWwtZG9jOjogZHJpdmVycy9n
-cHUvZHJtL2k5MTUvaTkxNV9nZW1fYmF0Y2hfcG9vbC5jCi0gICA6aW50ZXJuYWw6Ci0KIFVzZXIg
-QmF0Y2hidWZmZXIgRXhlY3V0aW9uCiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogCmRpZmYg
-LS1naXQgYS9Eb2N1bWVudGF0aW9uL21pc2MtZGV2aWNlcy9pbmRleC5yc3QgYi9Eb2N1bWVudGF0
-aW9uL21pc2MtZGV2aWNlcy9pbmRleC5yc3QKaW5kZXggZjExYzVkYWVhZGE1Li5hNTdmOTJkZmU0
-OWEgMTAwNjQ0Ci0tLSBhL0RvY3VtZW50YXRpb24vbWlzYy1kZXZpY2VzL2luZGV4LnJzdAorKysg
-Yi9Eb2N1bWVudGF0aW9uL21pc2MtZGV2aWNlcy9pbmRleC5yc3QKQEAgLTIwLDQgKzIwLDMgQEAg
-Zml0IGludG8gb3RoZXIgY2F0ZWdvcmllcy4KICAgIGlzbDI5MDAzCiAgICBsaXMzbHYwMmQKICAg
-IG1heDY4NzUKLSAgIHhpbGlueF9zZGZlYwpkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi91c2Iv
-aW5kZXgucnN0IGIvRG9jdW1lbnRhdGlvbi91c2IvaW5kZXgucnN0CmluZGV4IGU1NTM4NmE0YWJm
-Yi4uMzZiNmViZDlhOWQ5IDEwMDY0NAotLS0gYS9Eb2N1bWVudGF0aW9uL3VzYi9pbmRleC5yc3QK
-KysrIGIvRG9jdW1lbnRhdGlvbi91c2IvaW5kZXgucnN0CkBAIC0yMiwxMSArMjIsOSBAQCBVU0Ig
-c3VwcG9ydAogICAgIG1pc2NfdXNic2V2c2VnCiAgICAgbXRvdWNodXNiCiAgICAgb2hjaQotICAg
-IHJpbwogICAgIHVzYmlwX3Byb3RvY29sCiAgICAgdXNibW9uCiAgICAgdXNiLXNlcmlhbAotICAg
-IHd1c2ItZGVzaWduLW92ZXJ2aWV3CiAKICAgICB1c2ItaGVscAogICAgIHRleHRfZmlsZXMKZGlm
-ZiAtLWdpdCBhL0RvY3VtZW50YXRpb24vdXNiL3RleHRfZmlsZXMucnN0IGIvRG9jdW1lbnRhdGlv
-bi91c2IvdGV4dF9maWxlcy5yc3QKaW5kZXggNmE4ZDNmY2Y2NGI2Li4xYzE4YzA1YzM5MjAgMTAw
-NjQ0Ci0tLSBhL0RvY3VtZW50YXRpb24vdXNiL3RleHRfZmlsZXMucnN0CisrKyBiL0RvY3VtZW50
-YXRpb24vdXNiL3RleHRfZmlsZXMucnN0CkBAIC0xNiwxMiArMTYsNiBAQCBVU0IgZGV2ZnMgZHJv
-cCBwZXJtaXNzaW9ucyBzb3VyY2UKIC4uIGxpdGVyYWxpbmNsdWRlOjogdXNiZGV2ZnMtZHJvcC1w
-ZXJtaXNzaW9ucy5jCiAgICAgOmxhbmd1YWdlOiBjCiAKLVdVU0IgY29tbWFuZCBsaW5lIHNjcmlw
-dCB0byBtYW5pcHVsYXRlIGF1dGggY3JlZGVudGlhbHMKLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0KLQotLi4gbGl0ZXJhbGluY2x1ZGU6OiB3
-dXNiLWNiYWYKLSAgIDpsYW5ndWFnZTogc2hlbGwKLQogQ3JlZGl0cwogLS0tLS0tLQogCi0tIAoy
-LjIwLjEKCg==
---00000000000051b3730595fbcc5f--
