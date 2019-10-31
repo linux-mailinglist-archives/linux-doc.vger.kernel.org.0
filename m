@@ -2,123 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 07D26EB8B9
-	for <lists+linux-doc@lfdr.de>; Thu, 31 Oct 2019 22:10:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 71845EB939
+	for <lists+linux-doc@lfdr.de>; Thu, 31 Oct 2019 22:48:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728438AbfJaVJ7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 31 Oct 2019 17:09:59 -0400
-Received: from mga01.intel.com ([192.55.52.88]:43170 "EHLO mga01.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727957AbfJaVJ6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 31 Oct 2019 17:09:58 -0400
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 31 Oct 2019 14:09:57 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.68,253,1569308400"; 
-   d="scan'208";a="375376881"
-Received: from iweiny-desk2.sc.intel.com ([10.3.52.157])
-  by orsmga005.jf.intel.com with ESMTP; 31 Oct 2019 14:09:55 -0700
-Date:   Thu, 31 Oct 2019 14:09:55 -0700
-From:   Ira Weiny <ira.weiny@intel.com>
-To:     John Hubbard <jhubbard@nvidia.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        =?iso-8859-1?Q?Bj=F6rn_T=F6pel?= <bjorn.topel@intel.com>,
-        Christoph Hellwig <hch@infradead.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Dave Chinner <david@fromorbit.com>,
-        David Airlie <airlied@linux.ie>,
-        "David S . Miller" <davem@davemloft.net>, Jan Kara <jack@suse.cz>,
-        Jason Gunthorpe <jgg@ziepe.ca>, Jens Axboe <axboe@kernel.dk>,
+        id S1728774AbfJaVsT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 31 Oct 2019 17:48:19 -0400
+Received: from mail-wr1-f68.google.com ([209.85.221.68]:45694 "EHLO
+        mail-wr1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728598AbfJaVsT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 31 Oct 2019 17:48:19 -0400
+Received: by mail-wr1-f68.google.com with SMTP id q13so7856959wrs.12;
+        Thu, 31 Oct 2019 14:48:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=sEuZEsN3CO17Mk96Q9i8WbzrGmqYVcLxl0EB6NndMBA=;
+        b=NHGlhWOH/lPzkiisqXGbCuqEH3Cld5YZg5wB3dQ5EjwTa2udUJNWsdHlxUGKg23GAT
+         5X6weI8hStYzrXSUv3yWPZWKvm+ql7YOJTqq9CQrjDzjlDxaHOO5QDMmkdvFrxKyImVg
+         l7cFw15yuXDcDQAQ9Jj19zsXBpy85G6mfCyF7ZKRWloLgf6pd5Er82Y9hBhOgc31d6k3
+         kzvjGCSMK83TiVP0PsUdBW5Aqsq6S+KrournTX1g5JHIoUV2U1zYYittS5pyaxgjuaYt
+         IRG21NXAysTNvlN3e9MckdKqEP5zoetsDm+TN3CnidRGBibcEZGLlPydXAnzmwxNfVvy
+         CwXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=sEuZEsN3CO17Mk96Q9i8WbzrGmqYVcLxl0EB6NndMBA=;
+        b=Pu9NibAAWYvpiUEO/SbubTyvxiFDqWiykl0cR0n7Lq9AteueLMarG2Df7Bn1YW+GIv
+         ZNekfjiFJCz5ijGEjWBbsnkIAvsFpi3LnU3SJamt9M/wL8MYdE23ebovzzM6ZWAZVAM6
+         97GI2ptKj7NuZoxtaSOb0LMo7EcaeD6W7RRxzUBmDgs75kUKpO7+qp7VOvsVYc2EmkFg
+         HzefgxAqJEpjY93lG7ZH8OzS5nZGIFMqKWWnPVaZxTcn/zndmvkyW1QZ+0QqqBARPPiM
+         qu7l34RgDBxOZx/WZikqlcbegbyQs8ih/JBSIyjMAq99voPcFhnSUj9MD1C7rzx66vM5
+         zAMg==
+X-Gm-Message-State: APjAAAVxN8yu0bksIeqvyaBEjfol5xBh4VrxocFeQDACD1+tV1A1kSex
+        /NSV4p6mwYQtOlkU6thTL4s=
+X-Google-Smtp-Source: APXvYqwONELlt6nYOaizT5kkHAo20vYTlb0GLvd1u+tok17wOcwrfhYhLQBU7nsf0a6o7FC9F5iitA==
+X-Received: by 2002:adf:8088:: with SMTP id 8mr7492245wrl.230.1572558496697;
+        Thu, 31 Oct 2019 14:48:16 -0700 (PDT)
+Received: from fainelli-desktop.igp.broadcom.net ([192.19.223.252])
+        by smtp.gmail.com with ESMTPSA id g184sm5813674wma.8.2019.10.31.14.48.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 31 Oct 2019 14:48:15 -0700 (PDT)
+From:   Florian Fainelli <f.fainelli@gmail.com>
+To:     linux-arm-kernel@lists.infradead.org
+Cc:     Florian Fainelli <f.fainelli@gmail.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        =?iso-8859-1?B?Suly9G1l?= Glisse <jglisse@redhat.com>,
-        Magnus Karlsson <magnus.karlsson@intel.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Michal Hocko <mhocko@suse.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Paul Mackerras <paulus@samba.org>,
-        Shuah Khan <shuah@kernel.org>,
-        Vlastimil Babka <vbabka@suse.cz>, bpf@vger.kernel.org,
-        dri-devel@lists.freedesktop.org, kvm@vger.kernel.org,
-        linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        linux-media@vger.kernel.org, linux-rdma@vger.kernel.org,
-        linuxppc-dev@lists.ozlabs.org, netdev@vger.kernel.org,
-        linux-mm@kvack.org, LKML <linux-kernel@vger.kernel.org>,
-        Christoph Hellwig <hch@lst.de>,
-        "Aneesh Kumar K . V" <aneesh.kumar@linux.ibm.com>
-Subject: Re: [PATCH 02/19] mm/gup: factor out duplicate code from four
- routines
-Message-ID: <20191031210954.GE14771@iweiny-DESK2.sc.intel.com>
-References: <20191030224930.3990755-1-jhubbard@nvidia.com>
- <20191030224930.3990755-3-jhubbard@nvidia.com>
- <20191031183549.GC14771@iweiny-DESK2.sc.intel.com>
- <75b557f7-24b2-740c-2640-2f914d131600@nvidia.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <75b557f7-24b2-740c-2640-2f914d131600@nvidia.com>
-User-Agent: Mutt/1.11.1 (2018-12-01)
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Vladimir Murzin <vladimir.murzin@arm.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Doug Berger <opendmb@gmail.com>,
+        Hanjun Guo <guohanjun@huawei.com>, Qian Cai <cai@lca.pw>,
+        Zhang Lei <zhang.lei@jp.fujitsu.com>,
+        Marc Zyngier <maz@kernel.org>,
+        Jeremy Linton <jeremy.linton@arm.com>,
+        Andre Przywara <andre.przywara@arm.com>,
+        linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+        linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH v2 0/3] arm64: Brahma-B53 erratum updates
+Date:   Thu, 31 Oct 2019 14:47:22 -0700
+Message-Id: <20191031214725.1491-1-f.fainelli@gmail.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Oct 31, 2019 at 11:43:37AM -0700, John Hubbard wrote:
-> On 10/31/19 11:35 AM, Ira Weiny wrote:
-> > On Wed, Oct 30, 2019 at 03:49:13PM -0700, John Hubbard wrote:
-> ...
-> >> +
-> >> +static void __remove_refs_from_head(struct page *page, int refs)
-> >> +{
-> >> +	/* Do a get_page() first, in case refs == page->_refcount */
-> >> +	get_page(page);
-> >> +	page_ref_sub(page, refs);
-> >> +	put_page(page);
-> >> +}
-> > 
-> > I wonder if this is better implemented as "put_compound_head()"?  To match the
-> > try_get_compound_head() call below?
-> 
-> Hi Ira,
-> 
-> Good idea, I'll rename it to that.
-> 
-> > 
-> >> +
-> >> +static int __huge_pt_done(struct page *head, int nr_recorded_pages, int *nr)
-> >> +{
-> >> +	*nr += nr_recorded_pages;
-> >> +	SetPageReferenced(head);
-> >> +	return 1;
-> > 
-> > When will this return anything but 1?
-> > 
-> 
-> Never, but it saves a line at all four call sites, by having it return like that.
-> 
-> I could see how maybe people would prefer to just have it be a void function,
-> and return 1 directly at the call sites. Since this was a lower line count I
-> thought maybe it would be slightly better, but it's hard to say really.
+Hi Will,
 
-It is a NIT perhaps but I feel like the signature of a function should stand on
-it's own.  What this does is mix the meaning of this function with those
-calling it.  Which IMO is not good style.
+This patch series enable the Brahma-B53 CPU to be matched for the
+ARM64_ERRATUM_845719 and ARM64_ERRATUM_843419 and while we are it, also
+whitelists it for SSB and spectre v2.
 
-We can see what others say.
+The silicon-errata.rst document is updated accordingly, we unfortunately
+do not have internal numbers tracking those errata.
 
-Ira
+Doug Berger (1):
+  arm64: apply ARM64_ERRATUM_845719 workaround for Brahma-B53 core
 
-> 
-> thanks,
-> 
-> John Hubbard
-> NVIDIA
-> 
+Florian Fainelli (2):
+  arm64: Brahma-B53 is SSB and spectre v2 safe
+  arm64: apply ARM64_ERRATUM_843419 workaround for Brahma-B53 core
+
+ Documentation/arm64/silicon-errata.rst |  5 ++++
+ arch/arm64/include/asm/cputype.h       |  2 ++
+ arch/arm64/kernel/cpu_errata.c         | 38 ++++++++++++++++++++++----
+ 3 files changed, 40 insertions(+), 5 deletions(-)
+
+-- 
+2.17.1
+
