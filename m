@@ -2,190 +2,187 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3A05AEE149
-	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2019 14:33:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 68E30EE24E
+	for <lists+linux-doc@lfdr.de>; Mon,  4 Nov 2019 15:28:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727444AbfKDNdX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 4 Nov 2019 08:33:23 -0500
-Received: from mail-pf1-f193.google.com ([209.85.210.193]:36916 "EHLO
-        mail-pf1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727430AbfKDNdX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Nov 2019 08:33:23 -0500
-Received: by mail-pf1-f193.google.com with SMTP id p24so5707222pfn.4;
-        Mon, 04 Nov 2019 05:33:23 -0800 (PST)
+        id S1728607AbfKDO2u (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 4 Nov 2019 09:28:50 -0500
+Received: from mail-ua1-f74.google.com ([209.85.222.74]:50351 "EHLO
+        mail-ua1-f74.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727838AbfKDO2u (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 4 Nov 2019 09:28:50 -0500
+Received: by mail-ua1-f74.google.com with SMTP id y4so2657837uaa.17
+        for <linux-doc@vger.kernel.org>; Mon, 04 Nov 2019 06:28:49 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:mime-version:content-disposition
-         :user-agent;
-        bh=10qTlHam78u6yRC3L6QqGT06Q7p6TYbTqIxEC0HhRO0=;
-        b=luvJ6kxWnZqEyiG7YB72VUOBY1mNPZxfclcjQrTtik9vSLH0CjUhqgxnXOfSz5xvwT
-         gXg/4L0NsTbMsO0m6n7whf6O78+ynOyB5fqotfyOVeWgt0QeXV+Ek2loqI5LbJexlfY2
-         amUx3QNXYKzQMqphwzMIRAcluHrQ4h/z4Lo8qADt6nUzzqcpwOouTkuRC0AmrDPMF+bN
-         TXD/ZzJb3H8fJO/yQ9rqCwzhA2x9aWromkrPJwBLPiBdik0bBx6ajPa/mZdPOIWuVla+
-         f8+fB8VMgkT6G3Bk7wxsjPjZQvzwCn1A3XX9gyOrC281IPjcI1106kguun3LnCXXLWu9
-         YO3g==
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=gOZJXriFYaJqnLiXWIeTvOu6TRK/57oj4m43E1U5Ltw=;
+        b=iYeCrSfzcJoqpFfx6PikIHg8ccjBlymGJnP7hoPQwkYwjCtI9GxlmAhDNPMboxoTVO
+         x0r3aGeA4Mh55fN74DlnnyoKLCP5EYtGoDRC1iJxDUrLjdkzWX2Z8xkzsuyteDFKdMu7
+         j9QngGU+Lh7YFeOyuqjYfowPE5w4CorcRwYknePhBEWSRm/ggfZyx7vY8L6GGJvAE6n8
+         QE3y+1uf000U7nWOZ0L0iV5yDzjIaUGAZazZh5REdGHMjOBwQujSQBLtL81TMYPnLLHX
+         WF4N/P47ZjSdXzqhY+tOV7QPWdrBIiS+PKoKfUHodGpyf5G8hdYY2YVVFvpQ4MyVAoxn
+         ATxw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-         :content-disposition:user-agent;
-        bh=10qTlHam78u6yRC3L6QqGT06Q7p6TYbTqIxEC0HhRO0=;
-        b=a/TF6hDWlFmPpeQAn5nI29598OPkZyu+Md/+N/qAc6SjfOMeG4MlgkNLaIEbNs32/D
-         +gMknwI9Ne9RL8PVT/cAE6JZ4yE6gSsahX4p6lKrEg5pc7ysYYIt55ViXYJN5hC6cTow
-         DvLYNtcskegEXWwLfANT0P86VmtNazWXTxb4pUo0y/flpsxpVlVQ7MpKEwYaHFhrc6jv
-         L10/ya3FUgzMVjcm5OzPiqyjP0YFoZYAHuzYdl89PSt4cmLe0WZnle0sY4yQ+5dyLD3M
-         cROAeIvGHpwA4VsKXQmOHfzx6meggS+S3JNrRJWBbsz1xvjaasRrODSKz+ODYFw/+5no
-         QyrQ==
-X-Gm-Message-State: APjAAAXrlcWCNVM3dKZFjrKd2EjkcMXaRr4HqXrxv1oZfP0d56+8lV+H
-        uwc0teCmdpe4ahVLw01BFZ4PsZtB6ZyeMA==
-X-Google-Smtp-Source: APXvYqxMCYkoZ3FwXu4e+XkbHtaCGCUa4MI0iVdDjAo7UC2iJOGftkvkz53xSD4jAY6u9adoa6VoMQ==
-X-Received: by 2002:a17:90a:9f8a:: with SMTP id o10mr34979785pjp.91.1572874402452;
-        Mon, 04 Nov 2019 05:33:22 -0800 (PST)
-Received: from workstation-kernel-dev ([139.5.253.170])
-        by smtp.gmail.com with ESMTPSA id l3sm15530908pff.9.2019.11.04.05.33.18
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 04 Nov 2019 05:33:22 -0800 (PST)
-Date:   Mon, 4 Nov 2019 19:03:15 +0530
-From:   Amol Grover <frextrite@gmail.com>
-To:     "Paul E. McKenney" <paulmck@kernel.org>,
-        Josh Triplett <josh@joshtriplett.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Joel Fernandes <joel@joelfernandes.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     rcu@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        linux-kernel-mentees@lists.linuxfoundation.org,
-        Shuah Khan <skhan@linuxfoundation.org>,
-        Joel Fernandes <joel@joelfernandes.org>
-Subject: [PATCH] Documentation: RCU: whatisRCU: Fix formatting for section 2
-Message-ID: <20191104133315.GA14499@workstation-kernel-dev>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=gOZJXriFYaJqnLiXWIeTvOu6TRK/57oj4m43E1U5Ltw=;
+        b=Kyj1dVMXSxAV6DDxSb7LhrOhW+d1O3Z327vKmq+Y7Ai9iqGLufzu+7/3cL3d2qEyZd
+         pErGJhm7vserQcHsyA7GWlmj/h92hsGi/XoEjU8SVYRsa0nMZ3b01Lyapux3D0LQVyp2
+         p2daq4nOLNRiDVSzzQeHnaJjQv6IvRvPTQUiIJSYyU3wpN+UAiqrrE0kIFeK8B/Zkcaa
+         pHXVd6RDCBvMj4VHllQQrR5VH6Uib/WrYsn3wMeBAT0TqHIX5jekCJ/BlgVX4I15FVTv
+         jCIgblpnSgr3BpFb33R42pEgtD8hFFpDbFuVeS2OVTyn3MT3OdiZfLJtz4oxIcvHhuZX
+         QyNw==
+X-Gm-Message-State: APjAAAX2oOWlDn8W6OCX/nOFkN++v3HMY+2lHbxJEDr2oQ3+QABJ5Hon
+        NXu4X/IbZ9HvsPM1Fz6GlSk4okxz5w==
+X-Google-Smtp-Source: APXvYqzSuwLczAxwseRWbVJPz3W76r9RPcuLhjVcCaAZtkQCbfSRQ1gJrmSs8glOqHVw0BLDi5YUSOLJcQ==
+X-Received: by 2002:a67:fbd9:: with SMTP id o25mr5000794vsr.70.1572877728570;
+ Mon, 04 Nov 2019 06:28:48 -0800 (PST)
+Date:   Mon,  4 Nov 2019 15:27:36 +0100
+Message-Id: <20191104142745.14722-1-elver@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.24.0.rc1.363.gb1bccd3e3d-goog
+Subject: [PATCH v3 0/9] Add Kernel Concurrency Sanitizer (KCSAN)
+From:   Marco Elver <elver@google.com>
+To:     elver@google.com
+Cc:     akiyks@gmail.com, stern@rowland.harvard.edu, glider@google.com,
+        parri.andrea@gmail.com, andreyknvl@google.com, luto@kernel.org,
+        ard.biesheuvel@linaro.org, arnd@arndb.de, boqun.feng@gmail.com,
+        bp@alien8.de, dja@axtens.net, dlustig@nvidia.com,
+        dave.hansen@linux.intel.com, dhowells@redhat.com,
+        dvyukov@google.com, hpa@zytor.com, mingo@redhat.com,
+        j.alglave@ucl.ac.uk, joel@joelfernandes.org, corbet@lwn.net,
+        jpoimboe@redhat.com, luc.maranget@inria.fr, mark.rutland@arm.com,
+        npiggin@gmail.com, paulmck@kernel.org, peterz@infradead.org,
+        tglx@linutronix.de, will@kernel.org, kasan-dev@googlegroups.com,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-efi@vger.kernel.org, linux-kbuild@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org, x86@kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Convert RCU API method text to sub-headings and
-add hyperlink and superscript to 2 literary notes
-under rcu_dereference() section
+This is the patch-series for the Kernel Concurrency Sanitizer (KCSAN).
+KCSAN is a sampling watchpoint-based data-race detector. More details
+are included in Documentation/dev-tools/kcsan.rst. This patch-series
+only enables KCSAN for x86, but we expect adding support for other
+architectures is relatively straightforward (we are aware of
+experimental ARM64 and POWER support).
 
-Signed-off-by: Amol Grover <frextrite@gmail.com>
----
- Documentation/RCU/whatisRCU.rst | 34 +++++++++++++++++++++++++++------
- 1 file changed, 28 insertions(+), 6 deletions(-)
+To gather early feedback, we announced KCSAN back in September, and
+have integrated the feedback where possible:
+http://lkml.kernel.org/r/CANpmjNPJ_bHjfLZCAPV23AXFfiPiyXXqqu72n6TgWzb2Gnu1eA@mail.gmail.com
 
-diff --git a/Documentation/RCU/whatisRCU.rst b/Documentation/RCU/whatisRCU.rst
-index ae40c8bcc56c..3cf6e17d0065 100644
---- a/Documentation/RCU/whatisRCU.rst
-+++ b/Documentation/RCU/whatisRCU.rst
-@@ -150,6 +150,7 @@ later.  See the kernel docbook documentation for more info, or look directly
- at the function header comments.
- 
- rcu_read_lock()
-+^^^^^^^^^^^^^^^
- 
- 	void rcu_read_lock(void);
- 
-@@ -164,6 +165,7 @@ rcu_read_lock()
- 	longer-term references to data structures.
- 
- rcu_read_unlock()
-+^^^^^^^^^^^^^^^^^
- 
- 	void rcu_read_unlock(void);
- 
-@@ -172,6 +174,7 @@ rcu_read_unlock()
- 	read-side critical sections may be nested and/or overlapping.
- 
- synchronize_rcu()
-+^^^^^^^^^^^^^^^^^
- 
- 	void synchronize_rcu(void);
- 
-@@ -225,6 +228,7 @@ synchronize_rcu()
- 	checklist.txt for some approaches to limiting the update rate.
- 
- rcu_assign_pointer()
-+^^^^^^^^^^^^^^^^^^^^
- 
- 	void rcu_assign_pointer(p, typeof(p) v);
- 
-@@ -245,6 +249,7 @@ rcu_assign_pointer()
- 	the _rcu list-manipulation primitives such as list_add_rcu().
- 
- rcu_dereference()
-+^^^^^^^^^^^^^^^^^
- 
- 	typeof(p) rcu_dereference(p);
- 
-@@ -279,8 +284,10 @@ rcu_dereference()
- 	if an update happened while in the critical section, and incur
- 	unnecessary overhead on Alpha CPUs.
- 
-+.. _back_to_1:
-+
- 	Note that the value returned by rcu_dereference() is valid
--	only within the enclosing RCU read-side critical section [1].
-+	only within the enclosing RCU read-side critical section |cs_1|.
- 	For example, the following is -not- legal::
- 
- 		rcu_read_lock();
-@@ -298,15 +305,27 @@ rcu_dereference()
- 	it was acquired is just as illegal as doing so with normal
- 	locking.
- 
-+.. _back_to_2:
-+
- 	As with rcu_assign_pointer(), an important function of
- 	rcu_dereference() is to document which pointers are protected by
- 	RCU, in particular, flagging a pointer that is subject to changing
- 	at any time, including immediately after the rcu_dereference().
- 	And, again like rcu_assign_pointer(), rcu_dereference() is
- 	typically used indirectly, via the _rcu list-manipulation
--	primitives, such as list_for_each_entry_rcu() [2].
-+	primitives, such as list_for_each_entry_rcu() |entry_2|.
-+
-+.. |cs_1| raw:: html
-+
-+	<a href="#cs"><sup>[1]</sup></a>
-+
-+.. |entry_2| raw:: html
- 
--	[1] The variant rcu_dereference_protected() can be used outside
-+	<a href="#entry"><sup>[2]</sup></a>
-+
-+.. _cs:
-+
-+	\ :sup:`[1]`\  The variant rcu_dereference_protected() can be used outside
- 	of an RCU read-side critical section as long as the usage is
- 	protected by locks acquired by the update-side code.  This variant
- 	avoids the lockdep warning that would happen when using (for
-@@ -317,15 +336,18 @@ rcu_dereference()
- 	a lockdep expression to indicate which locks must be acquired
- 	by the caller. If the indicated protection is not provided,
- 	a lockdep splat is emitted.  See Documentation/RCU/Design/Requirements/Requirements.rst
--	and the API's code comments for more details and example usage.
-+	and the API's code comments for more details and example usage. :ref:`back <back_to_1>`
-+
-+
-+.. _entry:
- 
--	[2] If the list_for_each_entry_rcu() instance might be used by
-+	\ :sup:`[2]`\  If the list_for_each_entry_rcu() instance might be used by
- 	update-side code as well as by RCU readers, then an additional
- 	lockdep expression can be added to its list of arguments.
- 	For example, given an additional "lock_is_held(&mylock)" argument,
- 	the RCU lockdep code would complain only if this instance was
- 	invoked outside of an RCU read-side critical section and without
--	the protection of mylock.
-+	the protection of mylock. :ref:`back <back_to_2>`
- 
- The following diagram shows how each API communicates among the
- reader, updater, and reclaimer.
+We want to point out and acknowledge the work surrounding the LKMM,
+including several articles that motivate why data-races are dangerous
+[1, 2], justifying a data-race detector such as KCSAN.
+[1] https://lwn.net/Articles/793253/
+[2] https://lwn.net/Articles/799218/
+
+The current list of known upstream fixes for data-races found by KCSAN
+can be found here:
+https://github.com/google/ktsan/wiki/KCSAN#upstream-fixes-of-data-races-found-by-kcsan
+
+Changelog
+---------
+v3:
+* Major changes:
+ - Add microbenchmark.
+ - Add instruction watchpoint skip randomization.
+ - Refactor API and core runtime fast-path and slow-path. Compared to
+   the previous version, with a default config and benchmarked using the
+   added microbenchmark, this version is 3.8x faster.
+ - Make __tsan_unaligned __alias of generic accesses.
+ - Rename kcsan_{begin,end}_atomic ->
+   kcsan_{nestable,flat}_atomic_{begin,end}
+ - For filter list in debugfs.c use kmalloc+krealloc instead of
+   kvmalloc.
+ - Split Documentation into separate patch.
+
+v2: http://lkml.kernel.org/r/20191017141305.146193-1-elver@google.com
+* Major changes:
+ - Replace kcsan_check_access(.., {true, false}) with
+   kcsan_check_{read,write}.
+ - Change atomic-instrumented.h to use __atomic_check_{read,write}.
+ - Use common struct kcsan_ctx in task_struct and for per-CPU interrupt
+   contexts.
+
+v1: http://lkml.kernel.org/r/20191016083959.186860-1-elver@google.com
+
+Marco Elver (9):
+  kcsan: Add Kernel Concurrency Sanitizer infrastructure
+  kcsan: Add Documentation entry in dev-tools
+  objtool, kcsan: Add KCSAN runtime functions to whitelist
+  build, kcsan: Add KCSAN build exceptions
+  seqlock, kcsan: Add annotations for KCSAN
+  seqlock: Require WRITE_ONCE surrounding raw_seqcount_barrier
+  asm-generic, kcsan: Add KCSAN instrumentation for bitops
+  locking/atomics, kcsan: Add KCSAN instrumentation
+  x86, kcsan: Enable KCSAN for x86
+
+ Documentation/dev-tools/index.rst         |   1 +
+ Documentation/dev-tools/kcsan.rst         | 217 +++++++++
+ MAINTAINERS                               |  11 +
+ Makefile                                  |   3 +-
+ arch/x86/Kconfig                          |   1 +
+ arch/x86/boot/Makefile                    |   2 +
+ arch/x86/boot/compressed/Makefile         |   2 +
+ arch/x86/entry/vdso/Makefile              |   3 +
+ arch/x86/include/asm/bitops.h             |   6 +-
+ arch/x86/kernel/Makefile                  |   7 +
+ arch/x86/kernel/cpu/Makefile              |   3 +
+ arch/x86/lib/Makefile                     |   4 +
+ arch/x86/mm/Makefile                      |   3 +
+ arch/x86/purgatory/Makefile               |   2 +
+ arch/x86/realmode/Makefile                |   3 +
+ arch/x86/realmode/rm/Makefile             |   3 +
+ drivers/firmware/efi/libstub/Makefile     |   2 +
+ include/asm-generic/atomic-instrumented.h | 393 +++++++--------
+ include/asm-generic/bitops-instrumented.h |  18 +
+ include/linux/compiler-clang.h            |   9 +
+ include/linux/compiler-gcc.h              |   7 +
+ include/linux/compiler.h                  |  35 +-
+ include/linux/kcsan-checks.h              |  97 ++++
+ include/linux/kcsan.h                     | 115 +++++
+ include/linux/sched.h                     |   4 +
+ include/linux/seqlock.h                   |  51 +-
+ init/init_task.c                          |   8 +
+ init/main.c                               |   2 +
+ kernel/Makefile                           |   6 +
+ kernel/kcsan/Makefile                     |  11 +
+ kernel/kcsan/atomic.h                     |  27 ++
+ kernel/kcsan/core.c                       | 560 ++++++++++++++++++++++
+ kernel/kcsan/debugfs.c                    | 275 +++++++++++
+ kernel/kcsan/encoding.h                   |  94 ++++
+ kernel/kcsan/kcsan.h                      | 131 +++++
+ kernel/kcsan/report.c                     | 306 ++++++++++++
+ kernel/kcsan/test.c                       | 121 +++++
+ kernel/sched/Makefile                     |   6 +
+ lib/Kconfig.debug                         |   2 +
+ lib/Kconfig.kcsan                         | 119 +++++
+ lib/Makefile                              |   3 +
+ mm/Makefile                               |   8 +
+ scripts/Makefile.kcsan                    |   6 +
+ scripts/Makefile.lib                      |  10 +
+ scripts/atomic/gen-atomic-instrumented.sh |  17 +-
+ tools/objtool/check.c                     |  18 +
+ 46 files changed, 2526 insertions(+), 206 deletions(-)
+ create mode 100644 Documentation/dev-tools/kcsan.rst
+ create mode 100644 include/linux/kcsan-checks.h
+ create mode 100644 include/linux/kcsan.h
+ create mode 100644 kernel/kcsan/Makefile
+ create mode 100644 kernel/kcsan/atomic.h
+ create mode 100644 kernel/kcsan/core.c
+ create mode 100644 kernel/kcsan/debugfs.c
+ create mode 100644 kernel/kcsan/encoding.h
+ create mode 100644 kernel/kcsan/kcsan.h
+ create mode 100644 kernel/kcsan/report.c
+ create mode 100644 kernel/kcsan/test.c
+ create mode 100644 lib/Kconfig.kcsan
+ create mode 100644 scripts/Makefile.kcsan
+
 -- 
-2.20.1
+2.24.0.rc1.363.gb1bccd3e3d-goog
 
