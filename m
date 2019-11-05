@@ -2,59 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AC86CF0253
-	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2019 17:08:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 678DAF027C
+	for <lists+linux-doc@lfdr.de>; Tue,  5 Nov 2019 17:20:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390125AbfKEQI3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 Nov 2019 11:08:29 -0500
-Received: from mx2.rt-rk.com ([89.216.37.149]:60605 "EHLO mail.rt-rk.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2390166AbfKEQI3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 5 Nov 2019 11:08:29 -0500
-Received: from localhost (localhost [127.0.0.1])
-        by mail.rt-rk.com (Postfix) with ESMTP id B1C621A2148;
-        Tue,  5 Nov 2019 16:59:40 +0100 (CET)
-X-Virus-Scanned: amavisd-new at rt-rk.com
-Received: from rtrkw774-lin.domain.local (rtrkw774-lin.domain.local [10.10.14.106])
-        by mail.rt-rk.com (Postfix) with ESMTPSA id 919FC1A215D;
-        Tue,  5 Nov 2019 16:59:40 +0100 (CET)
-From:   Aleksandar Markovic <aleksandar.markovic@rt-rk.com>
-To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        corbet@lwn.net
-Cc:     Aleksandar Markovic <aleksandar.m.mail@gmail.com>
-Subject: [PATCH 3/3] docs: ioctl: Update ioctl-number.rst 'last updated' date
-Date:   Tue,  5 Nov 2019 16:59:21 +0100
-Message-Id: <1572969561-17591-4-git-send-email-aleksandar.markovic@rt-rk.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1572969561-17591-1-git-send-email-aleksandar.markovic@rt-rk.com>
-References: <1572969561-17591-1-git-send-email-aleksandar.markovic@rt-rk.com>
+        id S2389934AbfKEQUo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 Nov 2019 11:20:44 -0500
+Received: from mail-pf1-f194.google.com ([209.85.210.194]:33522 "EHLO
+        mail-pf1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2389760AbfKEQUn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 Nov 2019 11:20:43 -0500
+Received: by mail-pf1-f194.google.com with SMTP id c184so15906638pfb.0;
+        Tue, 05 Nov 2019 08:20:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=ZPVzr1zF8FoSavwzywDNDMaLZfpRZ21grLGFJWRaQIU=;
+        b=Z2Z8MtYGi373NNAWDZz42HeMuGe7BEJkMfI30Qyj50jQnSlcVYc85z4f4nH35KIcru
+         pFYdzrPtkPxWJaIeXkHw3mhsE/OLQSxoZglyhJDnmpZn7/e0OeIqCItP1vDMu5LY02hD
+         O8Ip8VY7PnkU9Ng0mb/VQl/+vzlPrAsaEMCrvVEf7YQ2k8rs0XYkEfBd2g9frV8GrmWR
+         gHC0yGQ0H58nS/5AB5+QnzwWZst5eY5+8whiffDUVTASowbRXKWalL11eiUUNojm+XCe
+         85qU152zCeNNi/J/AIaBFW7vL9ZEoMkJ1uBEgNu+j4mZEoLZLZxVev0j/Jlb9/7We7MK
+         Ckuw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=ZPVzr1zF8FoSavwzywDNDMaLZfpRZ21grLGFJWRaQIU=;
+        b=Vj8L02A1McMsNW5pr2nuqAnz5pfM0NZIdvU/L5BDPx42jN/NhAayGdBj24/aC523GH
+         4zfmbnYTmdAe6eYH++W0qqnmOyFIWGE5Gke199Woaj/rPsXIoyUoHmpLFoSRGIotTEhA
+         YGVfCTX4OtOmo79OzW72mXI9mtpO7Xx5l/eNrAMRH0rTHIRSyrz9HxCGR5Vev+vivBix
+         ImmWnRyb40A2Ey7EAu3dM9uLKzp6roKAKHIeiDBGfPJZRAd/n36qmjqZc3n9r6eiWSOB
+         UJxvF3eAVVPjSjUwQicg09Ex1EGVdUVgsGdpV4pwAw86/DjXfheQSf3epWkaC7Lc7Hqx
+         bqVg==
+X-Gm-Message-State: APjAAAXp6PGh7frt1Olm92VPxpuZAf+W4NMiliMRfFpAxNkp+wSLt2rE
+        JxWp0xdL9kKYv7mFp2vSXqg=
+X-Google-Smtp-Source: APXvYqyFwAsiCDt6AGENcB7yeqqnr/v5aOegQz2usIGj2+tHe7XeVZpvQBweyYpsJ6cneMn6zCf/zw==
+X-Received: by 2002:a63:f94f:: with SMTP id q15mr17430362pgk.412.1572970841275;
+        Tue, 05 Nov 2019 08:20:41 -0800 (PST)
+Received: from workstation ([139.5.253.184])
+        by smtp.gmail.com with ESMTPSA id f2sm17765272pfg.48.2019.11.05.08.20.35
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 05 Nov 2019 08:20:39 -0800 (PST)
+Date:   Tue, 5 Nov 2019 21:50:32 +0530
+From:   Amol Grover <frextrite@gmail.com>
+To:     Shuah Khan <skhan@linuxfoundation.org>
+Cc:     paulmck@kernel.org, Josh Triplett <josh@joshtriplett.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Joel Fernandes <joel@joelfernandes.org>,
+        Jonathan Corbet <corbet@lwn.net>, rcu@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kernel-mentees@lists.linuxfoundation.org
+Subject: Re: [PATCH] Documentation: RCU: whatisRCU: Fix formatting for
+ section 2
+Message-ID: <20191105162032.GA10619@workstation>
+References: <20191104133315.GA14499@workstation-kernel-dev>
+ <20191104150328.GZ20975@paulmck-ThinkPad-P72>
+ <20191104171641.GA15217@workstation-kernel-dev>
+ <20191104194528.GJ20975@paulmck-ThinkPad-P72>
+ <dc5570d4-26bf-59ab-76bb-79490dde2369@linuxfoundation.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <dc5570d4-26bf-59ab-76bb-79490dde2369@linuxfoundation.org>
+User-Agent: Mutt/1.12.1 (2019-06-15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
+On Tue, Nov 05, 2019 at 07:52:59AM -0700, Shuah Khan wrote:
+> Hi Amol,
+> 
+> On 11/4/19 12:45 PM, Paul E. McKenney wrote:
+> > On Mon, Nov 04, 2019 at 10:46:41PM +0530, Amol Grover wrote:
+> > > On Mon, Nov 04, 2019 at 07:03:28AM -0800, Paul E. McKenney wrote:
+> > > > On Mon, Nov 04, 2019 at 07:03:15PM +0530, Amol Grover wrote:
+> > > > > Convert RCU API method text to sub-headings and
+> > > > > add hyperlink and superscript to 2 literary notes
+> > > > > under rcu_dereference() section
+> > > > > 
+> > > > > Signed-off-by: Amol Grover <frextrite@gmail.com>
+> > > > 
+> > > > Good stuff, but Phong Tran beat you to it.  If you are suggesting
+> > > > changes to that patch, please send a reply to her email, which
+> > > > may be found here:
+> > > > 
+> 
+> Please do a review and send comments and suggestions in an email
+> instead of a patch.
 
-Update info on the date of the last update of ioctl-number.rst.
+Hi Shuah,
 
-Signed-off-by: Aleksandar Markovic <aleksandar.m.mail@gmail.com>
----
- Documentation/ioctl/ioctl-number.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Sure thing! I'll do a review and send in the suggestions.
 
-diff --git a/Documentation/ioctl/ioctl-number.rst b/Documentation/ioctl/ioctl-number.rst
-index 799b90b..f501467 100644
---- a/Documentation/ioctl/ioctl-number.rst
-+++ b/Documentation/ioctl/ioctl-number.rst
-@@ -2,7 +2,7 @@
- Ioctl Numbers
- =============
- 
--19 October 1999
-+Last update: 5th November, 2019
- 
- Michael Elizabeth Chastain
- <mec@shout.net>
--- 
-2.7.4
+> 
+> > > > https://lore.kernel.org/lkml/20191030233128.14997-1-tranmanphong@gmail.com/
+> > > > 
+> > > > There are several options for replying to this email listed at the
+> > > > bottom of that web page.
+> > > 
+> > > Thank you Paul! And that is correct, I was suggesting changes to
+> > > that patch. However, since that patch was already integrated into
+> > > the `dev` branch, I mistakenly believed this patch could be sent
+> > > independently. Sorry for the trouble, I'll re-send the patch the
+> > > correct way.
+> > 
+> 
+> Please drop your patch and do a review for the patch as suggested by
+> Paul. This should have been a review and not a patch on top.
 
+Noted. Will definitely keep this in mind the next time.
+
+Thank you
+Amol
+
+> 
+> thanks,
+> -- Shuah
