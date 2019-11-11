@@ -2,63 +2,63 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0D68AF7389
-	for <lists+linux-doc@lfdr.de>; Mon, 11 Nov 2019 13:03:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3B7C2F7A0F
+	for <lists+linux-doc@lfdr.de>; Mon, 11 Nov 2019 18:36:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726964AbfKKMDS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Nov 2019 07:03:18 -0500
-Received: from inva021.nxp.com ([92.121.34.21]:57452 "EHLO inva021.nxp.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726810AbfKKMDS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 11 Nov 2019 07:03:18 -0500
-Received: from inva021.nxp.com (localhost [127.0.0.1])
-        by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 711F420093F;
-        Mon, 11 Nov 2019 13:03:16 +0100 (CET)
-Received: from inva024.eu-rdc02.nxp.com (inva024.eu-rdc02.nxp.com [134.27.226.22])
-        by inva021.eu-rdc02.nxp.com (Postfix) with ESMTP id 64C4220001D;
-        Mon, 11 Nov 2019 13:03:16 +0100 (CET)
-Received: from fsr-fed2164-101.ea.freescale.net (fsr-fed2164-101.ea.freescale.net [10.171.82.91])
-        by inva024.eu-rdc02.nxp.com (Postfix) with ESMTP id 1ECDA205FE;
-        Mon, 11 Nov 2019 13:03:16 +0100 (CET)
-From:   Madalin Bucur <madalin.bucur@nxp.com>
-To:     davem@davemloft.net, netdev@vger.kernel.org
-Cc:     linux-doc@vger.kernel.org, corbet@lwn.net,
-        Madalin Bucur <madalin.bucur@nxp.com>
-Subject: [PATCH net-next 2/2] Documentation: networking: dpaa_eth: adjust sysfs paths
-Date:   Mon, 11 Nov 2019 14:03:12 +0200
-Message-Id: <1573473792-17797-3-git-send-email-madalin.bucur@nxp.com>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1573473792-17797-1-git-send-email-madalin.bucur@nxp.com>
-References: <1573473792-17797-1-git-send-email-madalin.bucur@nxp.com>
-Content-Type: text/plain; charset="us-ascii"
-Reply-to: madalin.bucur@nxp.com
-X-Virus-Scanned: ClamAV using ClamSMTP
+        id S1726845AbfKKRg4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Nov 2019 12:36:56 -0500
+Received: from utopia.booyaka.com ([74.50.51.50]:39398 "EHLO
+        utopia.booyaka.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726763AbfKKRg4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Nov 2019 12:36:56 -0500
+X-Greylist: delayed 402 seconds by postgrey-1.27 at vger.kernel.org; Mon, 11 Nov 2019 12:36:56 EST
+Received: (qmail 2500 invoked by uid 1019); 11 Nov 2019 17:30:13 -0000
+Received: from localhost (sendmail-bs@127.0.0.1)
+  by localhost with SMTP; 11 Nov 2019 17:30:13 -0000
+Date:   Mon, 11 Nov 2019 17:30:13 +0000 (UTC)
+From:   Paul Walmsley <paul@pwsan.com>
+To:     Christoph Hellwig <hch@lst.de>
+cc:     Jonathan Corbet <corbet@lwn.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Andreas Schwab <schwab@suse.de>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        linux-riscv@lists.infradead.org
+Subject: Re: [PATCH] Documentation: admin-guide: add earlycon documentation
+ for RISC-V
+In-Reply-To: <20191108061009.GA30335@lst.de>
+Message-ID: <alpine.DEB.2.21.999.1911111729271.32333@utopia.booyaka.com>
+References: <alpine.DEB.2.21.9999.1910091252160.11044@viisi.sifive.com> <CAMuHMdUfqvkVJHHwyuYxLSxj_iUofx-vSvEj92C5mg3bGxHqmA@mail.gmail.com> <20191010112347.4a7237bb@lwn.net> <20191108061009.GA30335@lst.de>
+User-Agent: Alpine 2.21.999 (DEB 260 2018-02-26)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The sysfs paths changed, updating to the current ones.
+Hi Jon,
 
-Signed-off-by: Madalin Bucur <madalin.bucur@nxp.com>
----
- Documentation/networking/device_drivers/freescale/dpaa.txt | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Fri, 8 Nov 2019, Christoph Hellwig wrote:
 
-diff --git a/Documentation/networking/device_drivers/freescale/dpaa.txt b/Documentation/networking/device_drivers/freescale/dpaa.txt
-index ad1044292073..b06601ff9200 100644
---- a/Documentation/networking/device_drivers/freescale/dpaa.txt
-+++ b/Documentation/networking/device_drivers/freescale/dpaa.txt
-@@ -254,7 +254,7 @@ The following statistics are exported for each interface through ethtool:
- The driver also exports the following information in sysfs:
- 
- 	- the FQ IDs for each FQ type
--	/sys/devices/platform/dpaa-ethernet.0/net/<int>/fqids
-+	/sys/devices/platform/soc/<addr>.fman/<addr>.ethernet/dpaa-ethernet.<id>/net/fm<nr>-mac<nr>/fqids
- 
- 	- the ID of the buffer pool in use
--	/sys/devices/platform/dpaa-ethernet.0/net/<int>/bpids
-+	/sys/devices/platform/soc/<addr>.fman/<addr>.ethernet/dpaa-ethernet.<id>/net/fm<nr>-mac<nr>/bpids
--- 
-2.1.0
+> can you please revert this?  The paragraph above this addition already
+> describes the riscv case perfecty well with my previous patch:
+> 
+> 	earlycon=	[KNL] Output early console device and options.
+> 
+> 			When used with no options, the early console is
+> 			determined by stdout-path property in device tree's
+> 			chosen node or the ACPI SPCR table if supported by
+> 			the platform.
+> 
+> 			[RISCV] When used with no options, the early
+> 			console is determined by the stdout-path
+> 			property in the device tree's chosen node.
 
+I support reverting the RISCV section, now that Christoph's more general 
+change has gone in.
+
+
+
+- Paul
