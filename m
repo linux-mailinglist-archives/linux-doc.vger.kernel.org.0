@@ -2,170 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8D819F97AB
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2019 18:54:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2811DF9ADA
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2019 21:38:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726932AbfKLRyV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 12 Nov 2019 12:54:21 -0500
-Received: from Galois.linutronix.de ([193.142.43.55]:35230 "EHLO
-        Galois.linutronix.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726718AbfKLRyV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Nov 2019 12:54:21 -0500
-Received: from [5.158.153.53] (helo=tip-bot2.lab.linutronix.de)
-        by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
-        (Exim 4.80)
-        (envelope-from <tip-bot2@linutronix.de>)
-        id 1iUaMW-0000f1-PT; Tue, 12 Nov 2019 18:53:56 +0100
-Received: from [127.0.1.1] (localhost [IPv6:::1])
-        by tip-bot2.lab.linutronix.de (Postfix) with ESMTP id 5C1721C0357;
-        Tue, 12 Nov 2019 18:53:56 +0100 (CET)
-Date:   Tue, 12 Nov 2019 17:53:56 -0000
-From:   "tip-bot2 for Daniel Kiper" <tip-bot2@linutronix.de>
-Reply-to: linux-kernel@vger.kernel.org
-To:     linux-tip-commits@vger.kernel.org
-Subject: [tip: x86/boot] x86/boot: Introduce kernel_info.setup_type_max
-Cc:     "H. Peter Anvin (Intel)" <hpa@zytor.com>,
-        Daniel Kiper <daniel.kiper@oracle.com>,
-        Borislav Petkov <bp@suse.de>,
-        Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-        Ross Philipson <ross.philipson@oracle.com>,
-        Andy Lutomirski <luto@amacapital.net>,
-        ard.biesheuvel@linaro.org,
-        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-        dave.hansen@linux.intel.com, eric.snowberg@oracle.com,
-        Ingo Molnar <mingo@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Juergen Gross <jgross@suse.com>, kanth.ghatraju@oracle.com,
-        linux-doc@vger.kernel.org, "linux-efi" <linux-efi@vger.kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>, rdunlap@infradead.org,
-        Thomas Gleixner <tglx@linutronix.de>,
-        "x86-ml" <x86@kernel.org>, xen-devel@lists.xenproject.org,
-        Ingo Molnar <mingo@kernel.org>, Borislav Petkov <bp@alien8.de>,
-        linux-kernel@vger.kernel.org
-In-Reply-To: <20191112134640.16035-3-daniel.kiper@oracle.com>
-References: <20191112134640.16035-3-daniel.kiper@oracle.com>
+        id S1727121AbfKLUiF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 12 Nov 2019 15:38:05 -0500
+Received: from mail-qk1-f195.google.com ([209.85.222.195]:41864 "EHLO
+        mail-qk1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727100AbfKLUiF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Nov 2019 15:38:05 -0500
+Received: by mail-qk1-f195.google.com with SMTP id m125so15713591qkd.8
+        for <linux-doc@vger.kernel.org>; Tue, 12 Nov 2019 12:38:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=GMi4xT2UOd2CFR3VJjVGTgOG1WxBYR/HDNQyyBU/zGM=;
+        b=j3NNIjPO3cADqvZd/hJQbIxM+DDhVRAEGcC+3T6+Q3fhxmcfREpCirlLaEIJBZkEdd
+         e3aBqytbSt/O1y6azCg5mzciQb9aXN7nl404GgQzXcRXFb+31Gp+DUUM20vq+CBmnlhO
+         OI6Itn853T6kP0jxgCe/92EYcvYqEI5wpO6FG/uJe2R9DweqI3FnTjwOvYkLmRQ3s4Xc
+         zG96fPghzfwVyKWk9G5BMiBAMZoSIJhIZiNOrjmRw2PjfIwZlx+LuvDRDWa51OzyNGdk
+         7PnZkzKlvewWQFyt2QF7slB5Swx6CEiwuOCbZxYFCsytkVXhCWtpdK2fshpP/jsmV8fx
+         ZjTQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=GMi4xT2UOd2CFR3VJjVGTgOG1WxBYR/HDNQyyBU/zGM=;
+        b=b/nZC3NKWreN7eN/E7F8q6qYtuTM/2e+pjNZS3y2c/lCwM7o/Ul3Jw+H+xXRKavl5p
+         XTvS4FwljFcpFc0WpjvTC09tozmI15e82laZ1Q/7TsyCpAEtG0zsYjIBWRclxna6M43Y
+         avzMqtpozt7m9hpwwldz04h8zjwxTYZM5z8lSLAYIvULXG4LuLQcNC7rX9cuFgYqiXkD
+         cL9L1QZnvXimBaSTubRmW0MGUd4c41zdHDPJtwOEjpGbkvWpvaqkun5rAfIlEGqWaZuP
+         useRF516icgdG/hQ0ml0yP4kEv3MyiF1q0PS8qvcKjLcoENM0d/1O/VzOQMDcyS+ANzl
+         NIog==
+X-Gm-Message-State: APjAAAV5QmCUapPEyefm9ACJGSeVhjOVGVNE1+XFbLQk7L9sCXP5yBPq
+        WrI9ZSjgFkFv1RkbWur4PpvSWg==
+X-Google-Smtp-Source: APXvYqwLkTug1hfsKRZbiUckKPR5+bmE3pOvHeIup8u/vHZbKyWy6tiIbngDLXx22jZap3IUKn0tSg==
+X-Received: by 2002:a37:dc44:: with SMTP id v65mr7289252qki.72.1573591083419;
+        Tue, 12 Nov 2019 12:38:03 -0800 (PST)
+Received: from ziepe.ca (hlfxns017vw-142-162-113-180.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.113.180])
+        by smtp.gmail.com with ESMTPSA id k40sm11983680qta.76.2019.11.12.12.38.02
+        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+        Tue, 12 Nov 2019 12:38:02 -0800 (PST)
+Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
+        (envelope-from <jgg@ziepe.ca>)
+        id 1iUcvK-00043t-G4; Tue, 12 Nov 2019 16:38:02 -0400
+Date:   Tue, 12 Nov 2019 16:38:02 -0400
+From:   Jason Gunthorpe <jgg@ziepe.ca>
+To:     John Hubbard <jhubbard@nvidia.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Alex Williamson <alex.williamson@redhat.com>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn.topel@intel.com>,
+        Christoph Hellwig <hch@infradead.org>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Dave Chinner <david@fromorbit.com>,
+        David Airlie <airlied@linux.ie>,
+        "David S . Miller" <davem@davemloft.net>,
+        Ira Weiny <ira.weiny@intel.com>, Jan Kara <jack@suse.cz>,
+        Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
+        =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
+        Magnus Karlsson <magnus.karlsson@intel.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Michal Hocko <mhocko@suse.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Paul Mackerras <paulus@samba.org>,
+        Shuah Khan <shuah@kernel.org>,
+        Vlastimil Babka <vbabka@suse.cz>, bpf@vger.kernel.org,
+        dri-devel@lists.freedesktop.org, kvm@vger.kernel.org,
+        linux-block@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-media@vger.kernel.org, linux-rdma@vger.kernel.org,
+        linuxppc-dev@lists.ozlabs.org, netdev@vger.kernel.org,
+        linux-mm@kvack.org, LKML <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v3 00/23] mm/gup: track dma-pinned pages: FOLL_PIN,
+ FOLL_LONGTERM
+Message-ID: <20191112203802.GD5584@ziepe.ca>
+References: <20191112000700.3455038-1-jhubbard@nvidia.com>
 MIME-Version: 1.0
-Message-ID: <157358123601.29376.5713242923411470070.tip-bot2@tip-bot2>
-X-Mailer: tip-git-log-daemon
-Robot-ID: <tip-bot2.linutronix.de>
-Robot-Unsubscribe: Contact <mailto:tglx@linutronix.de> to get blacklisted from these emails
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-X-Linutronix-Spam-Score: -1.0
-X-Linutronix-Spam-Level: -
-X-Linutronix-Spam-Status: No , -1.0 points, 5.0 required,  ALL_TRUSTED=-1,SHORTCIRCUIT=-0.0001
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20191112000700.3455038-1-jhubbard@nvidia.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The following commit has been merged into the x86/boot branch of tip:
+On Mon, Nov 11, 2019 at 04:06:37PM -0800, John Hubbard wrote:
+> Hi,
+> 
+> The cover letter is long, so the more important stuff is first:
+> 
+> * Jason, if you or someone could look at the the VFIO cleanup (patch 8)
+>   and conversion to FOLL_PIN (patch 18), to make sure it's use of
+>   remote and longterm gup matches what we discussed during the review
+>   of v2, I'd appreciate it.
+> 
+> * Also for Jason and IB: as noted below, in patch 11, I am (too?) boldly
+>   converting from put_user_pages() to release_pages().
 
-Commit-ID:     00cd1c154d565c62ad5e065bf3530f68bdf59490
-Gitweb:        https://git.kernel.org/tip/00cd1c154d565c62ad5e065bf3530f68bdf59490
-Author:        Daniel Kiper <daniel.kiper@oracle.com>
-AuthorDate:    Tue, 12 Nov 2019 14:46:39 +01:00
-Committer:     Borislav Petkov <bp@suse.de>
-CommitterDate: Tue, 12 Nov 2019 16:16:54 +01:00
+Why are we doing this? I think things got confused here someplace, as
+the comment still says:
 
-x86/boot: Introduce kernel_info.setup_type_max
+/**
+ * put_user_page() - release a gup-pinned page
+ * @page:            pointer to page to be released
+ *
+ * Pages that were pinned via get_user_pages*() must be released via
+ * either put_user_page(), or one of the put_user_pages*() routines
+ * below.
 
-This field contains maximal allowed type for setup_data.
+I feel like if put_user_pages() is not the correct way to undo
+get_user_pages() then it needs to be deleted.
 
-Do not bump setup_header version in arch/x86/boot/header.S because it
-will be followed by additional changes coming into the Linux/x86 boot
-protocol.
-
-Suggested-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Signed-off-by: Daniel Kiper <daniel.kiper@oracle.com>
-Signed-off-by: Borislav Petkov <bp@suse.de>
-Reviewed-by: Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>
-Reviewed-by: Ross Philipson <ross.philipson@oracle.com>
-Reviewed-by: H. Peter Anvin (Intel) <hpa@zytor.com>
-Cc: Andy Lutomirski <luto@amacapital.net>
-Cc: ard.biesheuvel@linaro.org
-Cc: Boris Ostrovsky <boris.ostrovsky@oracle.com>
-Cc: dave.hansen@linux.intel.com
-Cc: eric.snowberg@oracle.com
-Cc: Ingo Molnar <mingo@redhat.com>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Juergen Gross <jgross@suse.com>
-Cc: kanth.ghatraju@oracle.com
-Cc: linux-doc@vger.kernel.org
-Cc: linux-efi <linux-efi@vger.kernel.org>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: rdunlap@infradead.org
-Cc: ross.philipson@oracle.com
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: x86-ml <x86@kernel.org>
-Cc: xen-devel@lists.xenproject.org
-Link: https://lkml.kernel.org/r/20191112134640.16035-3-daniel.kiper@oracle.com
----
- Documentation/x86/boot.rst             |  9 ++++++++-
- arch/x86/boot/compressed/kernel_info.S |  5 +++++
- arch/x86/include/uapi/asm/bootparam.h  |  3 +++
- 3 files changed, 16 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/x86/boot.rst b/Documentation/x86/boot.rst
-index c60fafd..6cdd767 100644
---- a/Documentation/x86/boot.rst
-+++ b/Documentation/x86/boot.rst
-@@ -73,7 +73,7 @@ Protocol 2.14:	BURNT BY INCORRECT COMMIT ae7e1238e68f2a472a125673ab506d49158c188
- 		(x86/boot: Add ACPI RSDP address to setup_header)
- 		DO NOT USE!!! ASSUME SAME AS 2.13.
- 
--Protocol 2.15:	(Kernel 5.5) Added the kernel_info.
-+Protocol 2.15:	(Kernel 5.5) Added the kernel_info and kernel_info.setup_type_max.
- =============	============================================================
- 
- .. note::
-@@ -981,6 +981,13 @@ Offset/size:	0x0008/4
-   This field contains the size of the kernel_info including kernel_info.header
-   and kernel_info.kernel_info_var_len_data.
- 
-+============	==============
-+Field name:	setup_type_max
-+Offset/size:	0x000c/4
-+============	==============
-+
-+  This field contains maximal allowed type for setup_data.
-+
- 
- The Image Checksum
- ==================
-diff --git a/arch/x86/boot/compressed/kernel_info.S b/arch/x86/boot/compressed/kernel_info.S
-index 8ea6f6e..018dacb 100644
---- a/arch/x86/boot/compressed/kernel_info.S
-+++ b/arch/x86/boot/compressed/kernel_info.S
-@@ -1,5 +1,7 @@
- /* SPDX-License-Identifier: GPL-2.0 */
- 
-+#include <asm/bootparam.h>
-+
- 	.section ".rodata.kernel_info", "a"
- 
- 	.global kernel_info
-@@ -12,6 +14,9 @@ kernel_info:
- 	/* Size total. */
- 	.long	kernel_info_end - kernel_info
- 
-+	/* Maximal allowed type for setup_data. */
-+	.long	SETUP_TYPE_MAX
-+
- kernel_info_var_len_data:
- 	/* Empty for time being... */
- kernel_info_end:
-diff --git a/arch/x86/include/uapi/asm/bootparam.h b/arch/x86/include/uapi/asm/bootparam.h
-index a1ebcd7..dbb4112 100644
---- a/arch/x86/include/uapi/asm/bootparam.h
-+++ b/arch/x86/include/uapi/asm/bootparam.h
-@@ -11,6 +11,9 @@
- #define SETUP_APPLE_PROPERTIES		5
- #define SETUP_JAILHOUSE			6
- 
-+/* max(SETUP_*) */
-+#define SETUP_TYPE_MAX			SETUP_JAILHOUSE
-+
- /* ram_size flags */
- #define RAMDISK_IMAGE_START_MASK	0x07FF
- #define RAMDISK_PROMPT_FLAG		0x8000
+Jason
