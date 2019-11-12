@@ -2,200 +2,178 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CAEB1F842E
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2019 01:08:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AA9CFF85D9
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Nov 2019 02:03:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727674AbfKLAIE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Nov 2019 19:08:04 -0500
-Received: from hqemgate14.nvidia.com ([216.228.121.143]:10792 "EHLO
-        hqemgate14.nvidia.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727631AbfKLAHb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Nov 2019 19:07:31 -0500
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by hqemgate14.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
-        id <B5dc9f7c50000>; Mon, 11 Nov 2019 16:07:33 -0800
-Received: from hqmail.nvidia.com ([172.20.161.6])
-  by hqpgpgate101.nvidia.com (PGP Universal service);
-  Mon, 11 Nov 2019 16:07:30 -0800
-X-PGP-Universal: processed;
-        by hqpgpgate101.nvidia.com on Mon, 11 Nov 2019 16:07:30 -0800
-Received: from HQMAIL107.nvidia.com (172.20.187.13) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 12 Nov
- 2019 00:07:30 +0000
-Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
- Transport; Tue, 12 Nov 2019 00:07:29 +0000
-Received: from blueforge.nvidia.com (Not Verified[10.110.48.28]) by rnnvemgw01.nvidia.com with Trustwave SEG (v7,5,8,10121)
-        id <B5dc9f7c00003>; Mon, 11 Nov 2019 16:07:29 -0800
-From:   John Hubbard <jhubbard@nvidia.com>
-To:     Andrew Morton <akpm@linux-foundation.org>
-CC:     Al Viro <viro@zeniv.linux.org.uk>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        =?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?= <bjorn.topel@intel.com>,
-        Christoph Hellwig <hch@infradead.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Dave Chinner <david@fromorbit.com>,
-        David Airlie <airlied@linux.ie>,
-        "David S . Miller" <davem@davemloft.net>,
-        Ira Weiny <ira.weiny@intel.com>, Jan Kara <jack@suse.cz>,
-        Jason Gunthorpe <jgg@ziepe.ca>, Jens Axboe <axboe@kernel.dk>,
-        Jonathan Corbet <corbet@lwn.net>,
-        =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
-        Magnus Karlsson <magnus.karlsson@intel.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Michal Hocko <mhocko@suse.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Paul Mackerras <paulus@samba.org>,
-        Shuah Khan <shuah@kernel.org>,
-        Vlastimil Babka <vbabka@suse.cz>, <bpf@vger.kernel.org>,
-        <dri-devel@lists.freedesktop.org>, <kvm@vger.kernel.org>,
-        <linux-block@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-fsdevel@vger.kernel.org>, <linux-kselftest@vger.kernel.org>,
-        <linux-media@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
-        <linuxppc-dev@lists.ozlabs.org>, <netdev@vger.kernel.org>,
-        <linux-mm@kvack.org>, LKML <linux-kernel@vger.kernel.org>,
-        John Hubbard <jhubbard@nvidia.com>
-Subject: [PATCH v3 23/23] mm/gup: remove support for gup(FOLL_LONGTERM)
-Date:   Mon, 11 Nov 2019 16:07:00 -0800
-Message-ID: <20191112000700.3455038-24-jhubbard@nvidia.com>
-X-Mailer: git-send-email 2.24.0
-In-Reply-To: <20191112000700.3455038-1-jhubbard@nvidia.com>
-References: <20191112000700.3455038-1-jhubbard@nvidia.com>
+        id S1726955AbfKLBDs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Nov 2019 20:03:48 -0500
+Received: from mail-ot1-f65.google.com ([209.85.210.65]:44428 "EHLO
+        mail-ot1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726877AbfKLBDs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Nov 2019 20:03:48 -0500
+Received: by mail-ot1-f65.google.com with SMTP id c19so12848287otr.11;
+        Mon, 11 Nov 2019 17:03:47 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=SKl5Xcupc7He4WT8w6+4E+JP5fs6vZK0i9WhfBICwi0=;
+        b=d3PqHGsFtDWb2St2GM5ijefG9xREPIdGtyXN05qLPsTSkaE12NJTFOzlJZ6FzhMSzQ
+         O3n6UrzYc6g/099EuGpQri2pPr/1EHtJJNS+HqsP/cVODQOlHDBoIpmLtBdUURQt65Fo
+         1hdAgjrxxPYiuSFaUDI1PgVLP2NfdvF2SO6T+JrTf54WfNqHG60K4cSr66PwLOfkpCDK
+         ypv9ocsv1PeTWbGF8yPwo3Bz4RAOcyZ5Y/CdRvh2z+e1IODlZ+ROyohUpqAPlU/ZurDh
+         IPhKSL+J68h1CwOkg5w7J55i0OsA4ZhumPgeT3VkzgIvE+JONEvRVYgXWMto461qWNtz
+         2Z+w==
+X-Gm-Message-State: APjAAAXtIYEDuvpD/mlnYwb5fZvixp9JZl0iyDx/bk5ilnQ+Vvlr8Zyh
+        /K4F9ipgYYQMcmzPYSUOVw==
+X-Google-Smtp-Source: APXvYqyfrZ9KqRIgcKWGt4To/iYyiB/1CqymxV0BGHHKvUeahi0knIHGpqDR3dybuwmTUYZWIbXJ8g==
+X-Received: by 2002:a9d:351:: with SMTP id 75mr14276197otv.142.1573520626610;
+        Mon, 11 Nov 2019 17:03:46 -0800 (PST)
+Received: from localhost (24-155-109-49.dyn.grandenetworks.net. [24.155.109.49])
+        by smtp.gmail.com with ESMTPSA id y4sm5468071oie.42.2019.11.11.17.03.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 11 Nov 2019 17:03:45 -0800 (PST)
+Date:   Mon, 11 Nov 2019 19:03:45 -0600
+From:   Rob Herring <robh@kernel.org>
+To:     etremblay@distech-controls.com
+Cc:     linux@roeck-us.net, linux-hwmon@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+        jdelvare@suse.com, mark.rutland@arm.com, corbet@lwn.net
+Subject: Re: [PATCH v7 1/2] dt-bindings: hwmon: Add TMP512/513
+Message-ID: <20191112010345.GA19664@bogus>
+References: <20191111203445.27130-1-etremblay@distech-controls.com>
+ <20191111203445.27130-2-etremblay@distech-controls.com>
 MIME-Version: 1.0
-X-NVConfidentiality: public
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
-        t=1573517253; bh=cQGm03MwEI364eqhkDgW3lkBD2mDh5xmPmbbGUpAUxU=;
-        h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
-         In-Reply-To:References:MIME-Version:X-NVConfidentiality:
-         Content-Transfer-Encoding:Content-Type;
-        b=jeDFucw7tE0NfME1gtSntL7jl6FwAVKx401Zg0zd1OkOK23btFnhhwRkX1BypOId8
-         tB5L/HA86k7OcI07xiKO7SPq60A52WvJh6+uA0reTiW0Z5JqnjbNT8xfKH/mHa0AAf
-         LXGFigUduDHPhfFDSdZFC243oMyts/7+rCWm2Jy33t/ZP00CwXdKXT72ELCCro7Ypj
-         RelyojEcjFUpR+VNp3Kz50mWDTbe3Hqv0UhXwYhoLmNdXakM0Dw9hV3hWsEAA2x0LI
-         p1qiFqadYG8i1oiRlkGsryI6OZveEzbEGW+7+g6ht6r3kDox/sRMIxnR+qCRLVVO1J
-         rLJMc31P/tZAA==
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20191111203445.27130-2-etremblay@distech-controls.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now that all other kernel callers of get_user_pages(FOLL_LONGTERM)
-have been converted to pin_longterm_pages(), lock it down:
+On Mon, Nov 11, 2019 at 03:34:44PM -0500, etremblay@distech-controls.com wrote:
+> From: Eric Tremblay <etremblay@distech-controls.com>
+> 
+> Document the TMP513/512 device devicetree bindings
+> 
+> Signed-off-by: Eric Tremblay <etremblay@distech-controls.com>
+> ---
+>  .../devicetree/bindings/hwmon/ti,tmp513.yaml  | 89 +++++++++++++++++++
+>  1 file changed, 89 insertions(+)
+>  create mode 100644 Documentation/devicetree/bindings/hwmon/ti,tmp513.yaml
+> 
+> diff --git a/Documentation/devicetree/bindings/hwmon/ti,tmp513.yaml b/Documentation/devicetree/bindings/hwmon/ti,tmp513.yaml
+> new file mode 100644
+> index 000000000000..de4ed3645e0f
+> --- /dev/null
+> +++ b/Documentation/devicetree/bindings/hwmon/ti,tmp513.yaml
+> @@ -0,0 +1,89 @@
+> +# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+> +%YAML 1.2
+> +---
+> +
+> +$id: http://devicetree.org/schemas/hwmon/ti,tmp513.yaml#
+> +$schema: http://devicetree.org/meta-schemas/core.yaml#
+> +
+> +title: TMP513/512 system monitor sensor
+> +
+> +maintainers:
+> +  - Eric Tremblay <etremblay@distech-controls.com>
+> +
+> +description: |
+> +  This driver implements support for Texas Instruments TMP512, and TMP513.
+> +  The TMP512 (dual-channel) and TMP513 (triple-channel) are system monitors
+> +  that include remote sensors, a local temperature sensor, and a high-side
+> +  current shunt monitor. These system monitors have the capability of measuring
+> +  remote temperatures, on-chip temperatures, and system voltage/power/current
+> +  consumption.
+> +
+> +  Datasheets:
+> +  http://www.ti.com/lit/gpn/tmp513
+> +  http://www.ti.com/lit/gpn/tmp512
+> +
+> +
+> +properties:
+> +  compatible:
+> +    enum:
+> +      - ti,tmp512
+> +      - ti,tmp513
+> +
+> +  reg:
+> +    maxItems: 1
+> +
+> +  shunt-resistor-micro-ohms:
+> +    description: |
+> +      If 0, the calibration process will be skiped and the current and power
+> +      measurement engine will not work. Temperature and voltage measurement
+> +      will continue to work. The shunt value also need to respect:
+> +      rshunt <= pga-gain * 40 * 1000 * 1000.
+> +      If not, it's not possible to compute a valid calibration value.
+> +    default: 1000
+> +
+> +  ti,pga-gain:
+> +    description: |
+> +      The gain value for the PGA function. This is 8, 4, 2 or 1.
+> +      The PGA gain affect the shunt voltage range.
+> +      The range will be equal to: pga-gain * 40mV
+> +    allOf:
+> +      - $ref: /schemas/types.yaml#/definitions/uint32
+> +    enum: [1, 2, 4, 8]
+> +    default: 8
+> +
+> +  ti,bus-range-microvolt:
+> +    description: |
+> +      This is the operating range of the bus voltage in microvolt
+> +    allOf:
+> +      - $ref: /schemas/types.yaml#/definitions/uint32
+> +    enum: [16000000, 32000000]
+> +    default: 32000000
+> +
+> +  ti,nfactor:
+> +    description: |
+> +      Array of three(TMP513) or two(TMP512) n-Factor value for each remote
+> +      temperature channel.
+> +      See datasheet Table 11 for n-Factor range list and value interpretation.
+> +    allOf:
+> +      - $ref: /schemas/types.yaml#definitions/uint8-array
+> +      - minItems: 2
+> +        maxItems: 3
+> +        items:
+> +          default: 0
+> +
+> +required:
+> +  - compatible
+> +  - reg
+> +
+> +examples:
+> +  - |
+> +    i2c {
 
-1) Add an assertion to get_user_pages(), preventing callers from
-   passing FOLL_LONGTERM (in addition to the existing assertion that
-   prevents FOLL_PIN).
+'make dt_binding_check' fails. You need #address-cells and #size-cells 
+in here:
 
-2) Remove the associated GUP_LONGTERM_BENCHMARK test.
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dts:20.17-30: Warning (reg_format): /example-0/i2c/tmp513@5c:reg: property has invalid length (4 bytes) (#address-cells == 2, #size-cells == 1)
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dt.yaml: Warning (pci_device_bus_num): Failed prerequisite 'reg_format'
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dts:17.5-26.11: Warning (i2c_bus_bridge): /example-0/i2c: incorrect #address-cells for I2C bus
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dts:17.5-26.11: Warning (i2c_bus_bridge): /example-0/i2c: incorrect #size-cells for I2C bus
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dt.yaml: Warning (i2c_bus_reg): Failed prerequisite 'reg_format'
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dt.yaml: Warning (i2c_bus_reg): Failed prerequisite 'i2c_bus_bridge'
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dt.yaml: Warning (spi_bus_reg): Failed prerequisite 'reg_format'
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dts:18.23-25.15: 
+Warning (avoid_default_addr_size): /example-0/i2c/tmp513@5c: Relying on default #address-cells value
+Documentation/devicetree/bindings/hwmon/ti,tmp513.example.dts:18.23-25.15: Warning (avoid_default_addr_size): /example-0/i2c/tmp513@5c: Relying on default #size-cells value
 
-Signed-off-by: John Hubbard <jhubbard@nvidia.com>
----
- mm/gup.c                                   | 8 ++++----
- mm/gup_benchmark.c                         | 9 +--------
- tools/testing/selftests/vm/gup_benchmark.c | 7 ++-----
- 3 files changed, 7 insertions(+), 17 deletions(-)
-
-diff --git a/mm/gup.c b/mm/gup.c
-index fc164c2ee6b5..db73ba216dff 100644
---- a/mm/gup.c
-+++ b/mm/gup.c
-@@ -1743,11 +1743,11 @@ long get_user_pages(unsigned long start, unsigned l=
-ong nr_pages,
- 		struct vm_area_struct **vmas)
- {
- 	/*
--	 * FOLL_PIN must only be set internally by the pin_user_page*() and
--	 * pin_longterm_*() APIs, never directly by the caller, so enforce that
--	 * with an assertion:
-+	 * FOLL_PIN and FOLL_LONGTERM must only be set internally by the
-+	 * pin_user_page*() and pin_longterm_*() APIs, never directly by the
-+	 * caller, so enforce that with an assertion:
- 	 */
--	if (WARN_ON_ONCE(gup_flags & FOLL_PIN))
-+	if (WARN_ON_ONCE(gup_flags & (FOLL_PIN | FOLL_LONGTERM)))
- 		return -EINVAL;
-=20
- 	return __gup_longterm_locked(current, current->mm, start, nr_pages,
-diff --git a/mm/gup_benchmark.c b/mm/gup_benchmark.c
-index 8f980d91dbf5..679f0e6a0adb 100644
---- a/mm/gup_benchmark.c
-+++ b/mm/gup_benchmark.c
-@@ -6,7 +6,7 @@
- #include <linux/debugfs.h>
-=20
- #define GUP_FAST_BENCHMARK	_IOWR('g', 1, struct gup_benchmark)
--#define GUP_LONGTERM_BENCHMARK	_IOWR('g', 2, struct gup_benchmark)
-+/* Command 2 has been deleted. */
- #define GUP_BENCHMARK		_IOWR('g', 3, struct gup_benchmark)
- #define PIN_FAST_BENCHMARK	_IOWR('g', 4, struct gup_benchmark)
- #define PIN_LONGTERM_BENCHMARK	_IOWR('g', 5, struct gup_benchmark)
-@@ -28,7 +28,6 @@ static void put_back_pages(int cmd, struct page **pages, =
-unsigned long nr_pages)
-=20
- 	switch (cmd) {
- 	case GUP_FAST_BENCHMARK:
--	case GUP_LONGTERM_BENCHMARK:
- 	case GUP_BENCHMARK:
- 		for (i =3D 0; i < nr_pages; i++)
- 			put_page(pages[i]);
-@@ -97,11 +96,6 @@ static int __gup_benchmark_ioctl(unsigned int cmd,
- 			nr =3D get_user_pages_fast(addr, nr, gup->flags,
- 						 pages + i);
- 			break;
--		case GUP_LONGTERM_BENCHMARK:
--			nr =3D get_user_pages(addr, nr,
--					    gup->flags | FOLL_LONGTERM,
--					    pages + i, NULL);
--			break;
- 		case GUP_BENCHMARK:
- 			nr =3D get_user_pages(addr, nr, gup->flags, pages + i,
- 					    NULL);
-@@ -159,7 +153,6 @@ static long gup_benchmark_ioctl(struct file *filep, uns=
-igned int cmd,
-=20
- 	switch (cmd) {
- 	case GUP_FAST_BENCHMARK:
--	case GUP_LONGTERM_BENCHMARK:
- 	case GUP_BENCHMARK:
- 	case PIN_FAST_BENCHMARK:
- 	case PIN_LONGTERM_BENCHMARK:
-diff --git a/tools/testing/selftests/vm/gup_benchmark.c b/tools/testing/sel=
-ftests/vm/gup_benchmark.c
-index 03928e47a86f..836b7082db13 100644
---- a/tools/testing/selftests/vm/gup_benchmark.c
-+++ b/tools/testing/selftests/vm/gup_benchmark.c
-@@ -15,7 +15,7 @@
- #define PAGE_SIZE sysconf(_SC_PAGESIZE)
-=20
- #define GUP_FAST_BENCHMARK	_IOWR('g', 1, struct gup_benchmark)
--#define GUP_LONGTERM_BENCHMARK	_IOWR('g', 2, struct gup_benchmark)
-+/* Command 2 has been deleted. */
- #define GUP_BENCHMARK		_IOWR('g', 3, struct gup_benchmark)
-=20
- /*
-@@ -49,7 +49,7 @@ int main(int argc, char **argv)
- 	char *file =3D "/dev/zero";
- 	char *p;
-=20
--	while ((opt =3D getopt(argc, argv, "m:r:n:f:abctTLUuwSH")) !=3D -1) {
-+	while ((opt =3D getopt(argc, argv, "m:r:n:f:abctTUuwSH")) !=3D -1) {
- 		switch (opt) {
- 		case 'a':
- 			cmd =3D PIN_FAST_BENCHMARK;
-@@ -75,9 +75,6 @@ int main(int argc, char **argv)
- 		case 'T':
- 			thp =3D 0;
- 			break;
--		case 'L':
--			cmd =3D GUP_LONGTERM_BENCHMARK;
--			break;
- 		case 'U':
- 			cmd =3D GUP_BENCHMARK;
- 			break;
---=20
-2.24.0
-
+> +        tmp513@5c {
+> +            compatible = "ti,tmp513";
+> +            reg = <0x5C>;
+> +            shunt-resistor-micro-ohms = <330000>;
+> +            ti,bus-range-microvolt = <32000000>;
+> +            ti,pga-gain = <8>;
+> +            ti,nfactor = [01 F3 00];
+> +        };
+> +    };
+> -- 
+> 2.17.1
+> 
