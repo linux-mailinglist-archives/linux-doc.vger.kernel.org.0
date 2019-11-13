@@ -2,91 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 67D0AFA7CC
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Nov 2019 05:07:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1950CFA773
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Nov 2019 04:43:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727137AbfKMEH1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 12 Nov 2019 23:07:27 -0500
-Received: from userp2130.oracle.com ([156.151.31.86]:41116 "EHLO
-        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727032AbfKMEH0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Nov 2019 23:07:26 -0500
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
-        by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xAD39E4j105913;
-        Wed, 13 Nov 2019 03:12:35 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=to : cc : subject :
- from : references : date : in-reply-to : message-id : mime-version :
- content-type; s=corp-2019-08-05;
- bh=0uycHj1hnQzwFGbzXvkxe6k9HMxfe6ttpDQFwoIQ6ig=;
- b=oyrnK84K2lFalULpBohYNELqp5uWFq4H4bNYTd5O+HL+HohkNKKn4yBkDhRIexvWhkBP
- h6pM/s7KHtwVZNSb7WJJgWpip1ghFTmIuUd3u7Jg3GVcz1S0HPbOMJNLGmzUzcAsEUOo
- 7g1tqS0T9Qi8pfq07LO1MfU6HLaMsJxugqI3ynla/s0535IVhPiadUt+miRPYdLy+otF
- o+z8VKq8/v6b7er0P9YcYd3Q/YfVO4ex1Hrt4d9KJRW3b/8PremoFZ2Trk/xYooHqPy4
- 38a034x/8XZRbQcuMryqoQxIYmQELbakQIPTs12hFAR9DRL8wh5IJ+2LXWr7brPGxp6y Sw== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
-        by userp2130.oracle.com with ESMTP id 2w5mvts7kj-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 13 Nov 2019 03:12:35 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
-        by aserp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xAD399jU167983;
-        Wed, 13 Nov 2019 03:12:34 GMT
-Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
-        by aserp3030.oracle.com with ESMTP id 2w7vpnfw09-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 13 Nov 2019 03:12:34 +0000
-Received: from abhmp0013.oracle.com (abhmp0013.oracle.com [141.146.116.19])
-        by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id xAD3CUEJ031961;
-        Wed, 13 Nov 2019 03:12:30 GMT
-Received: from ca-mkp.ca.oracle.com (/10.159.214.123)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Tue, 12 Nov 2019 19:12:29 -0800
-To:     Finn Thain <fthain@telegraphics.com.au>
-Cc:     "James E.J. Bottomley" <jejb@linux.ibm.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        "Michael Schmitz" <schmitzmic@gmail.com>,
-        linux-scsi@vger.kernel.org, linux-kernel@vger.kernel.org,
-        stable@vger.kernel.org, "Jonathan Corbet" <corbet@lwn.net>,
-        "Bartlomiej Zolnierkiewicz" <b.zolnierkie@samsung.com>,
-        "Jens Axboe" <axboe@kernel.dk>,
-        "Viresh Kumar" <vireshk@kernel.org>,
-        "Oliver Neukum" <oneukum@suse.com>,
-        "Alan Stern" <stern@rowland.harvard.edu>,
-        "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-        usb-storage@lists.one-eyed-alien.net, linux-doc@vger.kernel.org,
-        linux-ide@vger.kernel.org, linux-usb@vger.kernel.org
-Subject: Re: [PATCH 0/2] SG_NONE fix and cleanup
-From:   "Martin K. Petersen" <martin.petersen@oracle.com>
-Organization: Oracle Corporation
-References: <cover.1572656814.git.fthain@telegraphics.com.au>
-Date:   Tue, 12 Nov 2019 22:12:25 -0500
-In-Reply-To: <cover.1572656814.git.fthain@telegraphics.com.au> (Finn Thain's
-        message of "Sat, 02 Nov 2019 12:06:54 +1100")
-Message-ID: <yq1lfskpizq.fsf@oracle.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1.92 (gnu/linux)
+        id S1727480AbfKMDno (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 12 Nov 2019 22:43:44 -0500
+Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130]:55702 "EHLO
+        out30-130.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726994AbfKMDno (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Nov 2019 22:43:44 -0500
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R131e4;CH=green;DM=||false|;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04423;MF=yun.wang@linux.alibaba.com;NM=1;PH=DS;RN=16;SR=0;TI=SMTPD_---0ThxeMyX_1573616617;
+Received: from testdeMacBook-Pro.local(mailfrom:yun.wang@linux.alibaba.com fp:SMTPD_---0ThxeMyX_1573616617)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Wed, 13 Nov 2019 11:43:38 +0800
+To:     Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Iurii Zaikin <yzaikin@google.com>,
+        =?UTF-8?Q?Michal_Koutn=c3=bd?= <mkoutny@suse.com>,
+        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org,
+        "Paul E. McKenney" <paulmck@linux.ibm.com>
+From:   =?UTF-8?B?546L6LSH?= <yun.wang@linux.alibaba.com>
+Subject: [PATCH 0/3] sched/numa: introduce advanced numa statistic
+Message-ID: <743eecad-9556-a241-546b-c8a66339840e@linux.alibaba.com>
+Date:   Wed, 13 Nov 2019 11:43:37 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
+ Gecko/20100101 Thunderbird/60.9.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9439 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1910280000 definitions=main-1911130026
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9439 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
- suspectscore=0 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1910280000
- definitions=main-1911130026
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Modern production environment could use hundreds of cgroup to control
+the resources for different workloads, along with the complicated
+resource binding.
 
-Finn,
+On NUMA platforms where we have multiple nodes, things become even more
+complicated, we hope there are more local memory access to improve the
+performance, and NUMA Balancing keep working hard to achieve that,
+however, wrong memory policy or node binding could easily waste the
+effort, result a lot of remote page accessing.
 
-> These two patches address some issues stemming from scsi-mq conversion.
+We need to perceive such problems, then we got chance to fix it before
+there are too much damages, however, there are no good approach yet to
+help catch the mouse who introduced the remote access.
 
-Applied to 5.5/scsi-queue, thanks!
+This patch set is trying to fill in the missing pieces， by introduce
+the per-cgroup NUMA locality/exectime statistics, and expose the per-task
+page migration failure counter, with these statistics, we could achieve
+the daily monitoring on NUMA efficiency, to give warning when things going
+too wrong.
+
+Please check the third patch for more details.
+
+Thanks to Peter, Mel and Michal for the good advices :-)
+
+Michael Wang (3):
+  sched/numa: advanced per-cgroup numa statistic
+  sched/numa: expose per-task pages-migration-failure counter
+  sched/numa: documentation for per-cgroup numa stat
+
+ Documentation/admin-guide/cg-numa-stat.rst      | 161 ++++++++++++++++++++++++
+ Documentation/admin-guide/kernel-parameters.txt |   4 +
+ Documentation/admin-guide/sysctl/kernel.rst     |   9 ++
+ include/linux/sched.h                           |  18 ++-
+ include/linux/sched/sysctl.h                    |   6 +
+ init/Kconfig                                    |   9 ++
+ kernel/sched/core.c                             |  91 ++++++++++++++
+ kernel/sched/debug.c                            |   1 +
+ kernel/sched/fair.c                             |  33 +++++
+ kernel/sched/sched.h                            |  17 +++
+ kernel/sysctl.c                                 |  11 ++
+ 11 files changed, 359 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/admin-guide/cg-numa-stat.rst
+
 
 -- 
-Martin K. Petersen	Oracle Linux Engineering
+2.14.4.44.g2045bb6
+
