@@ -2,111 +2,163 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 424E0FD0D9
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Nov 2019 23:16:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 54115FD111
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Nov 2019 23:42:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726910AbfKNWQx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Nov 2019 17:16:53 -0500
-Received: from mail-pg1-f202.google.com ([209.85.215.202]:38340 "EHLO
+        id S1726319AbfKNWms (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Nov 2019 17:42:48 -0500
+Received: from mail-pg1-f202.google.com ([209.85.215.202]:37565 "EHLO
         mail-pg1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726613AbfKNWQx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Nov 2019 17:16:53 -0500
-Received: by mail-pg1-f202.google.com with SMTP id s8so5696863pgv.5
-        for <linux-doc@vger.kernel.org>; Thu, 14 Nov 2019 14:16:53 -0800 (PST)
+        with ESMTP id S1726910AbfKNWmq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Nov 2019 17:42:46 -0500
+Received: by mail-pg1-f202.google.com with SMTP id u20so5748212pga.4
+        for <linux-doc@vger.kernel.org>; Thu, 14 Nov 2019 14:42:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=date:message-id:mime-version:subject:from:to:cc;
-        bh=RIRCCMERSX60DPHxGjGXa+inq5I/jJQr4eEYO43s6dg=;
-        b=b9yORXv/tdkFLcUZLkE2uzdHVIAtpfolnXmlTeaiVz2ryjjkEh/t2kNaI789QpRTvE
-         O9WsLv6IF3fN3uBMbxzQywCTFZSMufT4FIute2CLGCs1UWc8vO+k1HXXyPVRiY6EyPL6
-         5smqPjl6obIK+mHGIlbVYQWEp5HN0XgRQ/Fh9hsHOlKKpAfCJM1Syzugol+2omkoUwIY
-         nHXGmn0dCv0LGM904hExXWxqyT31nnHQopgdJII4RmQqrVN7mg7yTCZc/K9L+Rjb3qtG
-         jLAhT7lazS8wGJZV/qaEIlk7HCS9pzEuHTmW8m4RSU5JuVDahNOW02KBJXLBNH0F+kxx
-         fEdg==
+        bh=//SxIFwu+xlyZ3KpN5ryMxJ8rZ5gTQh9998RBPDyljs=;
+        b=AMVLKupT3zHwBW4ZWFmXDdkA6JXGWjf0opHk2wCQKAwS/Pbi4yMhHyuB+kQf3TtJc+
+         Sr5MjazmlpJQW3hbtSsmlnovsDxJxUitOKUL5EgxO8rrjWZ7zytghWHAyrEy4+bEdScu
+         c+cDEwZVZDHw4nGXQRdAgdqsjnIYfpURyalE5LZEx4445CTjusNn8VX1Eku552sRPuyo
+         0H6a5OYznQ/W259RWo7jY/aRLwWThsV3r8C89RZX61L4Y7NyBI9BO/y1DSBiBXuyS9Hs
+         YogeSAJRRrhEiw//W7lJQDdgETPc661qHyFCTJ3aubO7xW05TiumkLUZdRXZW38Yl+Kx
+         LYfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-        bh=RIRCCMERSX60DPHxGjGXa+inq5I/jJQr4eEYO43s6dg=;
-        b=CFP27q9rI4TzG100yh4kPF1EXdCGB/Rb698a9VOIUSrbQZCSX2JatVK0tTkvJhdrnN
-         ohaGuHGax/PqSxmxYnVALeRM6LYSj/hMXOlsnT/0lvyuV6EBxI0h8i7OM9Tp49O1lRo6
-         E8UHJE8SpBsdmIBhOVZcqRyw2AG+N7SPEOB1AkYXQNE3lcJgnc3/v2CeqTo56BthUi8g
-         MY9/Fh0D+Gtw8guoAQC6eoLUA9unrkC3ilfK3No0vofR9HNjdVmDB4pG2XKxV59i+H34
-         9qMqaIwnMiQFIepeqflOPdL9tdo51RTeHiSJQ9LvgIYw1daMWMwigCPtmxMBrL6aEdhF
-         /hUA==
-X-Gm-Message-State: APjAAAV1tngXC+sZO/yR57A8unybQPjTzs+8/Vdqm0lCaXrj/pm6NhDE
-        ieinFrthbmaVmEinfGWkiUgTgtQlMRVJI1Y1yw==
-X-Google-Smtp-Source: APXvYqxWfMGrMQWNfScxPQ8PK0aNqLSflhxN3kaSIb2n9bqGp3hJU1d5cougJeT1MB1d3dZzeSupTC5WQY6PSGv3xSs=
-X-Received: by 2002:a65:41cd:: with SMTP id b13mr12783514pgq.385.1573769812744;
- Thu, 14 Nov 2019 14:16:52 -0800 (PST)
-Date:   Thu, 14 Nov 2019 14:16:34 -0800
-Message-Id: <20191114221634.258799-1-asteinhauser@google.com>
+        bh=//SxIFwu+xlyZ3KpN5ryMxJ8rZ5gTQh9998RBPDyljs=;
+        b=sm3JDWkmStml5/NRsxGhEkGNpPDeHeMTHkTTb8Qhc1D12djn6CRoHEvHZ7BFEouvIA
+         9MlNZN0D1zUUNNqa7ml8EqEP0FyaJrVxIG/RPY/+YHQ5ZljTLsTzI2QkXNcyWeiMy3Ze
+         cIrwDI5N9A1YQFa6iTChQ6Qcpl3KVDGZl052UL0aJB/z/xm81ij/cvGGkM7hFjhsBCMY
+         d6hPtuSSVSOoDzNjm2WSbE3zdSbsn5aSlLvttmgsmHk7RMer+FVNHTfiAntO+nSZ1vW+
+         SSaVdoC0tv6EpfRHGGAC+v1XSf/BybA6erx4Fk1OpZqQ+zckjLpguW5FNYaSgdBd45JI
+         9NXQ==
+X-Gm-Message-State: APjAAAU2OVaKdCzsS9MlmmlCq5sX7fM89masn0NT9wwjL3zRdW71OZWg
+        iDBY4SyXd4idIiF9NGPNacMMur0XCF4Cu1rogvqBFQ==
+X-Google-Smtp-Source: APXvYqwSbawrArXZyzzhjKV9QauxgDW501V2Kcvv8bhjhOddYlxq9Fi9xMi+/r+OSAKviq/rsgaF6aoGbPEnQAIMjfp4GQ==
+X-Received: by 2002:a63:34c8:: with SMTP id b191mr12450491pga.26.1573771364839;
+ Thu, 14 Nov 2019 14:42:44 -0800 (PST)
+Date:   Thu, 14 Nov 2019 14:42:40 -0800
+Message-Id: <20191114224240.77861-1-brendanhiggins@google.com>
 Mime-Version: 1.0
 X-Mailer: git-send-email 2.24.0.432.g9d3f5f5b63-goog
-Subject: [PATCH] Mention PowerPC in the L1TF documentation.
-From:   asteinhauser@google.com
-To:     corbet@lwn.net, tglx@linutronix.de
-Cc:     linux-doc@vger.kernel.org,
-        Anthony Steinhauser <asteinhauser@google.com>
+Subject: [PATCH linux-kselftest/test v2] Documentation: kunit: add
+ documentation for kunit_tool
+From:   Brendan Higgins <brendanhiggins@google.com>
+To:     shuah@kernel.org, davidgow@google.com
+Cc:     kunit-dev@googlegroups.com, linux-kernel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, linux-doc@vger.kernel.org,
+        corbet@lwn.net, tytso@mit.edu,
+        Brendan Higgins <brendanhiggins@google.com>
 Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Anthony Steinhauser <asteinhauser@google.com>
+Add documentation for the Python script used to build, run, and collect
+results from the kernel known as kunit_tool. kunit_tool
+(tools/testing/kunit/kunit.py) was already added in previous commits.
 
-There is a false negative that L1TF is Intel specific while it affects
-also PowerPC:
-https://git.kernel.org/pub/scm/linux/kernel/git/powerpc/linux.git/commit/?id=8e6b6da91ac9b9ec5a925b6cb13f287a54bd547d
-Another false negative is that the kernel is unconditionally protected
-against L1TF attacks from userspace. That's true only on x86 but not on
-PowerPC where you can turn the protection off by nopti.
-Signed-off-by: Anthony Steinhauser <asteinhauser@google.com>
+Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
 ---
- Documentation/admin-guide/hw-vuln/l1tf.rst | 15 +++++++++------
- 1 file changed, 9 insertions(+), 6 deletions(-)
+ Documentation/dev-tools/kunit/index.rst      |  1 +
+ Documentation/dev-tools/kunit/kunit-tool.rst | 57 ++++++++++++++++++++
+ Documentation/dev-tools/kunit/start.rst      |  5 +-
+ 3 files changed, 62 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/dev-tools/kunit/kunit-tool.rst
 
-diff --git a/Documentation/admin-guide/hw-vuln/l1tf.rst b/Documentation/admin-guide/hw-vuln/l1tf.rst
-index f83212fae4d5..243e494b337a 100644
---- a/Documentation/admin-guide/hw-vuln/l1tf.rst
-+++ b/Documentation/admin-guide/hw-vuln/l1tf.rst
-@@ -9,10 +9,11 @@ for the access, has the Present bit cleared or other reserved bits set.
- Affected processors
- -------------------
+diff --git a/Documentation/dev-tools/kunit/index.rst b/Documentation/dev-tools/kunit/index.rst
+index 26ffb46bdf99d..c60d760a0eed1 100644
+--- a/Documentation/dev-tools/kunit/index.rst
++++ b/Documentation/dev-tools/kunit/index.rst
+@@ -9,6 +9,7 @@ KUnit - Unit Testing for the Linux Kernel
  
--This vulnerability affects a wide range of Intel processors. The
--vulnerability is not present on:
-+This vulnerability affects a wide range of Intel and PowerPC processors.
-+The vulnerability is not present on:
+ 	start
+ 	usage
++	kunit-tool
+ 	api/index
+ 	faq
  
--   - Processors from AMD, Centaur and other non Intel vendors
-+   - Processors from AMD, Centaur and other non Intel vendors except for
-+     PowerPC
+diff --git a/Documentation/dev-tools/kunit/kunit-tool.rst b/Documentation/dev-tools/kunit/kunit-tool.rst
+new file mode 100644
+index 0000000000000..37509527c04e1
+--- /dev/null
++++ b/Documentation/dev-tools/kunit/kunit-tool.rst
+@@ -0,0 +1,57 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=================
++kunit_tool How-To
++=================
++
++What is kunit_tool?
++===================
++
++kunit_tool is a script (``tools/testing/kunit/kunit.py``) that aids in building
++the Linux kernel as UML (`User Mode Linux
++<http://user-mode-linux.sourceforge.net/>`_), running KUnit tests, parsing
++the test results and displaying them in a user friendly manner.
++
++What is a kunitconfig?
++======================
++
++It's just a defconfig that kunit_tool looks for in the base directory.
++kunit_tool uses it to generate a .config as you might expect. In addition, it
++verifies that the generated .config contains the CONFIG options in the
++kunitconfig; the reason it does this is so that it is easy to be sure that a
++CONFIG that enables a test actually ends up in the .config.
++
++How do I use kunit_tool?
++=================================
++
++If a kunitconfig is present at the root directory, all you have to do is:
++
++.. code-block:: bash
++
++	./tools/testing/kunit/kunit.py run
++
++However, you most likely want to use it with the following options:
++
++.. code-block:: bash
++
++	./tools/testing/kunit/kunit.py run --timeout=30 --jobs=`nproc --all`
++
++- ``--timeout`` sets a maximum amount of time to allow tests to run.
++- ``--jobs`` sets the number of threads to use to build the kernel.
++
++If you just want to use the defconfig that ships with the kernel, you can
++append the ``--defconfig`` flag as well:
++
++.. code-block:: bash
++
++	./tools/testing/kunit/kunit.py run --timeout=30 --jobs=`nproc --all` --defconfig
++
++.. note::
++	This command is particularly helpful for getting started because it
++	just works. No kunitconfig needs to be present.
++
++For a list of all the flags supported by kunit_tool, you can run:
++
++.. code-block:: bash
++
++	./tools/testing/kunit/kunit.py run --help
+diff --git a/Documentation/dev-tools/kunit/start.rst b/Documentation/dev-tools/kunit/start.rst
+index aeeddfafeea20..4248a6f9038b8 100644
+--- a/Documentation/dev-tools/kunit/start.rst
++++ b/Documentation/dev-tools/kunit/start.rst
+@@ -19,7 +19,10 @@ The wrapper can be run with:
  
-    - Older processor models, where the CPU family is < 6
+ .. code-block:: bash
  
-@@ -125,7 +126,7 @@ mitigations are active. The relevant sysfs file is:
+-   ./tools/testing/kunit/kunit.py run
++	./tools/testing/kunit/kunit.py run --timeout=30 --jobs=`nproc --all` --defconfig
++
++For more information on this wrapper (also called kunit_tool) checkout the
++:doc:`kunit-tool` page.
  
- /sys/devices/system/cpu/vulnerabilities/l1tf
- 
--The possible values in this file are:
-+The possible values in this file on x86 are:
- 
-   ===========================   ===============================
-   'Not affected'		The processor is not vulnerable
-@@ -158,8 +159,10 @@ The resulting grade of protection is discussed in the following sections.
- Host mitigation mechanism
- -------------------------
- 
--The kernel is unconditionally protected against L1TF attacks from malicious
--user space running on the host.
-+On x86 the kernel is unconditionally protected against L1TF attacks from
-+malicious user space running on the host. On PowerPC the kernel is
-+protected by flushing the L1D cache on each transition from kernel to
-+userspace unless the 'nopti' boot argument turns this mitigation off.
- 
- 
- Guest mitigation mechanisms
+ Creating a kunitconfig
+ ======================
 -- 
 2.24.0.432.g9d3f5f5b63-goog
 
