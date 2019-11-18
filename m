@@ -2,318 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5B35D100A4A
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Nov 2019 18:32:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AE232100A92
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Nov 2019 18:41:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726472AbfKRRcg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Nov 2019 12:32:36 -0500
-Received: from mail-wm1-f68.google.com ([209.85.128.68]:55651 "EHLO
-        mail-wm1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726314AbfKRRcg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Nov 2019 12:32:36 -0500
-Received: by mail-wm1-f68.google.com with SMTP id b11so126543wmb.5;
-        Mon, 18 Nov 2019 09:32:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=9cUOn4dXQObR7q+VBOZahx/ugZjKHh2rWdB8yZdQGkI=;
-        b=nWX+jjiizY/XT+BAk1ctVJ1fdnxY5KQ50xN1jo+PQ4iae9XeYK6gM/spIaPzc8Nb07
-         bFNlxbj9VyzaEzfZDXWrzQ5D1a7BGV7PpqQFB73jOORcMYP0fCJL15e+iglW39/+nzcL
-         /5bjXHEzM85mreMl5DUfCf1Y23HhN9SSyWz+GC42DDKvERWzjSMk3q3P89ggVsVv4edx
-         eKYGwWmeno1SWhK5ZXdmoA9EiI3foSzDdy0Vp+sBW0yYOFNqcVtMc6WFWTxbocF6HY4l
-         qY5Yo4HuGPOdnwmCeuTYq16iYHk58zz6G+QY7pcDjtj32fotR8vMo1jgy026iNNOwVAF
-         cEIw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=9cUOn4dXQObR7q+VBOZahx/ugZjKHh2rWdB8yZdQGkI=;
-        b=umyAdOB/uWtoNn/voqCCz3SMlxVNRKpW0KQFzqr2C8kx7Sxw+TNcb5v8J74EZS28JN
-         8mrUWiXcxDEz8b5U7p9Wmm45VIpSIPdc05WqHNJTkOyvgmiqfXcE6abA9aYBwUxo651g
-         64cC96srTRsPPV4dYY9dW9IlDyXKIhpBQZLfLRQfGfgvGcJyYvewngpd/PT+DTv8P8JA
-         qciQkGtuzU1IZaDzizaJp6PGDpt+KwYF6CwVPsDkgaruRoUueGHEVDrsq6Bdm+9ZCFVr
-         6ZwfyVa3t58SkQqy1gLNF5KwsLHmmZh34KZKtFeRSFG97TPAhUetFRq2zX5sxuDyjK9N
-         l2kQ==
-X-Gm-Message-State: APjAAAWP9is6dYNlwhzoqb+bdpA38T38cqaTDnY5yFzpWkhBnkZWGqkz
-        ioy8SUCtr5ncerplUzxiIoA=
-X-Google-Smtp-Source: APXvYqxBASmSBziAl7PKRwEoLyPls2LH9/l314Fd8pkEnVKPTAzBofCwPdmeJNVo3SBbmPo3YIht9A==
-X-Received: by 2002:a1c:5fc4:: with SMTP id t187mr201252wmb.142.1574098351306;
-        Mon, 18 Nov 2019 09:32:31 -0800 (PST)
-Received: from pali ([2a02:2b88:2:1::5cc6:2f])
-        by smtp.gmail.com with ESMTPSA id n1sm24456636wrr.24.2019.11.18.09.32.29
-        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-        Mon, 18 Nov 2019 09:32:29 -0800 (PST)
-Date:   Mon, 18 Nov 2019 18:32:28 +0100
-From:   Pali =?utf-8?B?Um9ow6Fy?= <pali.rohar@gmail.com>
-To:     Giovanni Mascellani <gio@debian.org>
-Cc:     Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 1/2] dell-smm-hwmon: Add support for disabling
- automatic BIOS fan control
-Message-ID: <20191118173228.gn2y5ssp7v3fcctn@pali>
-References: <20191118171148.76373-1-gio@debian.org>
+        id S1726705AbfKRRlH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 18 Nov 2019 12:41:07 -0500
+Received: from ms.lwn.net ([45.79.88.28]:60096 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726475AbfKRRlH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 18 Nov 2019 12:41:07 -0500
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 42294378;
+        Mon, 18 Nov 2019 17:41:06 +0000 (UTC)
+Date:   Mon, 18 Nov 2019 10:41:05 -0700
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+Cc:     andriy.shevchenko@intel.com, prarit@redhat.com,
+        rafael.j.wysocki@intel.co, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org
+Subject: Re: [PATCH] admin guide/pm: Admin guide for intel-speed-select
+Message-ID: <20191118104105.11776f58@lwn.net>
+In-Reply-To: <20191115204925.55181-1-srinivas.pandruvada@linux.intel.com>
+References: <20191115204925.55181-1-srinivas.pandruvada@linux.intel.com>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-        protocol="application/pgp-signature"; boundary="dntxtsgj3xed2gg4"
-Content-Disposition: inline
-In-Reply-To: <20191118171148.76373-1-gio@debian.org>
-User-Agent: NeoMutt/20170113 (1.7.2)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Fri, 15 Nov 2019 12:49:25 -0800
+Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com> wrote:
 
---dntxtsgj3xed2gg4
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+> Added documentation to configure servers to use Intel(R) Speed
+> Select Technology using intel-speed-select tool.
+> 
+> Signed-off-by: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
 
-On Monday 18 November 2019 18:11:47 Giovanni Mascellani wrote:
-> This patch exports standard hwmon pwmX_enable sysfs attribute for
-> enabling or disabling automatic fan control by BIOS. Standard value
-> "1" is for disabling automatic BIOS fan control and value "2" for
-> enabling.
->=20
-> By default BIOS auto mode is enabled by laptop firmware.
->=20
-> When BIOS auto mode is enabled, custom fan speed value (set via hwmon
-> pwmX sysfs attribute) is overwritten by SMM in few seconds and
-> therefore any custom settings are without effect. So this is reason
-> why implementing option for disabling BIOS auto mode is needed.
->=20
-> So finally this patch allows kernel to set and control fan speed on
-> laptops, but it can be dangerous (like setting speed of other fans).
->=20
-> The SMM commands to enable or disable automatic fan control are not
-> documented and are not the same on all Dell laptops. Therefore a
-> whitelist is used to send the correct codes only on laptopts for which
-> they are known.
->=20
-> This patch was originally developed by Pali Roh=C3=A1r; later Giovanni
-> Mascellani implemented the whitelist.
->=20
-> Signed-off-by: Giovanni Mascellani <gio@debian.org>
-> Co-Developer-by: Pali Roh=C3=A1r <pali.rohar@gmail.com>
+Thanks for improving the docs!  I do have a few overall comments,
+though...  
 
-This patch is fine for me now. I'm not sure if Co-Developer-by: tag is
-supported, but you can add:
+>  .../admin-guide/pm/intel-speed-select.rst     | 934 ++++++++++++++++++
+>  .../admin-guide/pm/working-state.rst          |   1 +
+>  2 files changed, 935 insertions(+)
+>  create mode 100644 Documentation/admin-guide/pm/intel-speed-select.rst
+> 
+> diff --git a/Documentation/admin-guide/pm/intel-speed-select.rst b/Documentation/admin-guide/pm/intel-speed-select.rst
+> new file mode 100644
+> index 000000000000..c2ce57ebc268
+> --- /dev/null
+> +++ b/Documentation/admin-guide/pm/intel-speed-select.rst
+> @@ -0,0 +1,934 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +=========================================================
+> +Intel® Speed Select Technology (Intel® SST) : User Guide
+> +=========================================================
 
-Signed-off-by: Pali Roh=C3=A1r <pali.rohar@gmail.com>
+People give me grief when I take docs patches adding non-ascii characters.
+Adding nearly 100 useless ® symbols seems likely to trigger that sort of
+unicode aversion.  Can I ask you, please, to take those out?  There are
+many occurrences of unadorned "Intel" in the kernel, and the world hasn't
+ended yet.
 
-> ---
->  drivers/hwmon/dell-smm-hwmon.c | 114 ++++++++++++++++++++++++++++++---
->  1 file changed, 104 insertions(+), 10 deletions(-)
->=20
-> diff --git a/drivers/hwmon/dell-smm-hwmon.c b/drivers/hwmon/dell-smm-hwmo=
-n.c
-> index 4212d022d253..25d160b36a57 100644
-> --- a/drivers/hwmon/dell-smm-hwmon.c
-> +++ b/drivers/hwmon/dell-smm-hwmon.c
-> @@ -68,6 +68,8 @@ static uint i8k_pwm_mult;
->  static uint i8k_fan_max =3D I8K_FAN_HIGH;
->  static bool disallow_fan_type_call;
->  static bool disallow_fan_support;
-> +static unsigned int manual_fan;
-> +static unsigned int auto_fan;
-> =20
->  #define I8K_HWMON_HAVE_TEMP1	(1 << 0)
->  #define I8K_HWMON_HAVE_TEMP2	(1 << 1)
-> @@ -300,6 +302,20 @@ static int i8k_get_fan_nominal_speed(int fan, int sp=
-eed)
->  	return i8k_smm(&regs) ? : (regs.eax & 0xffff) * i8k_fan_mult;
->  }
-> =20
-> +/*
-> + * Enable or disable automatic BIOS fan control support
-> + */
-> +static int i8k_enable_fan_auto_mode(bool enable)
-> +{
-> +	struct smm_regs regs =3D { };
+> +The Intel® Speed Select Technology (Intel® SST) provides a powerful new
+> +collection of features that give more granular control over CPU performance.
+> +With Intel® SST, one server can be configured for power and performance for a
+> +variety of diverse workload requirements.
 > +
-> +	if (disallow_fan_support)
-> +		return -EINVAL;
+> +Refer to the links below for an overview of the technology:
 > +
-> +	regs.eax =3D enable ? auto_fan : manual_fan;
-> +	return i8k_smm(&regs);
-> +}
+> +- https://www.intel.com/content/www/us/en/architecture-and-technology/speed-select-technology-article.html
+> +- https://builders.intel.com/docs/networkbuilders/intel-speed-select-technology-base-frequency-enhancing-performance.pdf
 > +
->  /*
->   * Set the fan speed (off, low, high). Returns the new fan status.
->   */
-> @@ -726,6 +742,35 @@ static ssize_t i8k_hwmon_pwm_store(struct device *de=
-v,
->  	return err < 0 ? -EIO : count;
->  }
-> =20
-> +static ssize_t i8k_hwmon_pwm_enable_store(struct device *dev,
-> +					  struct device_attribute *attr,
-> +					  const char *buf, size_t count)
-> +{
-> +	int err;
-> +	bool enable;
-> +	unsigned long val;
+> +These capabilities are further enhanced in some of the newer generations of
+> +server platforms where these features can be enumerated and controlled
+> +dynamically without pre-configuring via BIOS setup options. This dynamic
+> +configuration is done via mailbox commands to the hardware. One way to enumerate
+> +and configure these features is by using the Intel® Speed Select utility.
 > +
-> +	if (!auto_fan)
-> +		return -ENODEV;
+> +This document explains how to use the Intel® Speed Select tool to enumerate and
+> +control Intel® SST features. This document gives example commands and explains
+> +how these commands change the power and performance profile of the system under
+> +test. Using this tool as an example, customers can replicate the messaging
+> +implemented in the tool in their production software.
 > +
-> +	err =3D kstrtoul(buf, 10, &val);
-> +	if (err)
-> +		return err;
 > +
-> +	if (val =3D=3D 1)
-> +		enable =3D false;
-> +	else if (val =3D=3D 2)
-> +		enable =3D true;
-> +	else
-> +		return -EINVAL;
-> +
-> +	mutex_lock(&i8k_mutex);
-> +	err =3D i8k_enable_fan_auto_mode(enable);
-> +	mutex_unlock(&i8k_mutex);
-> +
-> +	return err ? err : count;
-> +}
-> +
->  static SENSOR_DEVICE_ATTR_RO(temp1_input, i8k_hwmon_temp, 0);
->  static SENSOR_DEVICE_ATTR_RO(temp1_label, i8k_hwmon_temp_label, 0);
->  static SENSOR_DEVICE_ATTR_RO(temp2_input, i8k_hwmon_temp, 1);
-> @@ -749,6 +794,7 @@ static SENSOR_DEVICE_ATTR_RO(temp10_label, i8k_hwmon_=
-temp_label, 9);
->  static SENSOR_DEVICE_ATTR_RO(fan1_input, i8k_hwmon_fan, 0);
->  static SENSOR_DEVICE_ATTR_RO(fan1_label, i8k_hwmon_fan_label, 0);
->  static SENSOR_DEVICE_ATTR_RW(pwm1, i8k_hwmon_pwm, 0);
-> +static SENSOR_DEVICE_ATTR_WO(pwm1_enable, i8k_hwmon_pwm_enable, 0);
->  static SENSOR_DEVICE_ATTR_RO(fan2_input, i8k_hwmon_fan, 1);
->  static SENSOR_DEVICE_ATTR_RO(fan2_label, i8k_hwmon_fan_label, 1);
->  static SENSOR_DEVICE_ATTR_RW(pwm2, i8k_hwmon_pwm, 1);
-> @@ -780,12 +826,13 @@ static struct attribute *i8k_attrs[] =3D {
->  	&sensor_dev_attr_fan1_input.dev_attr.attr,	/* 20 */
->  	&sensor_dev_attr_fan1_label.dev_attr.attr,	/* 21 */
->  	&sensor_dev_attr_pwm1.dev_attr.attr,		/* 22 */
-> -	&sensor_dev_attr_fan2_input.dev_attr.attr,	/* 23 */
-> -	&sensor_dev_attr_fan2_label.dev_attr.attr,	/* 24 */
-> -	&sensor_dev_attr_pwm2.dev_attr.attr,		/* 25 */
-> -	&sensor_dev_attr_fan3_input.dev_attr.attr,	/* 26 */
-> -	&sensor_dev_attr_fan3_label.dev_attr.attr,	/* 27 */
-> -	&sensor_dev_attr_pwm3.dev_attr.attr,		/* 28 */
-> +	&sensor_dev_attr_pwm1_enable.dev_attr.attr,	/* 23 */
-> +	&sensor_dev_attr_fan2_input.dev_attr.attr,	/* 24 */
-> +	&sensor_dev_attr_fan2_label.dev_attr.attr,	/* 25 */
-> +	&sensor_dev_attr_pwm2.dev_attr.attr,		/* 26 */
-> +	&sensor_dev_attr_fan3_input.dev_attr.attr,	/* 27 */
-> +	&sensor_dev_attr_fan3_label.dev_attr.attr,	/* 28 */
-> +	&sensor_dev_attr_pwm3.dev_attr.attr,		/* 29 */
->  	NULL
->  };
-> =20
-> @@ -828,16 +875,19 @@ static umode_t i8k_is_visible(struct kobject *kobj,=
- struct attribute *attr,
->  	    !(i8k_hwmon_flags & I8K_HWMON_HAVE_TEMP10))
->  		return 0;
-> =20
-> -	if (index >=3D 20 && index <=3D 22 &&
-> +	if (index >=3D 20 && index <=3D 23 &&
->  	    !(i8k_hwmon_flags & I8K_HWMON_HAVE_FAN1))
->  		return 0;
-> -	if (index >=3D 23 && index <=3D 25 &&
-> +	if (index >=3D 24 && index <=3D 26 &&
->  	    !(i8k_hwmon_flags & I8K_HWMON_HAVE_FAN2))
->  		return 0;
-> -	if (index >=3D 26 && index <=3D 28 &&
-> +	if (index >=3D 27 && index <=3D 29 &&
->  	    !(i8k_hwmon_flags & I8K_HWMON_HAVE_FAN3))
->  		return 0;
-> =20
-> +	if (index =3D=3D 23 && !auto_fan)
-> +		return 0;
-> +
->  	return attr->mode;
->  }
-> =20
-> @@ -1135,12 +1185,48 @@ static struct dmi_system_id i8k_blacklist_fan_sup=
-port_dmi_table[] __initdata =3D {
->  	{ }
->  };
-> =20
-> +struct i8k_fan_control_data {
-> +	unsigned int manual_fan;
-> +	unsigned int auto_fan;
-> +};
-> +
-> +enum i8k_fan_controls {
-> +	I8K_FAN_34A3_35A3,
-> +};
-> +
-> +static const struct i8k_fan_control_data i8k_fan_control_data[] =3D {
-> +	[I8K_FAN_34A3_35A3] =3D {
-> +		.manual_fan =3D 0x34a3,
-> +		.auto_fan =3D 0x35a3,
-> +	},
-> +};
-> +
-> +static struct dmi_system_id i8k_whitelist_fan_control[] __initdata =3D {
-> +	{
-> +		.ident =3D "Dell Precision 5530",
-> +		.matches =3D {
-> +			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
-> +			DMI_EXACT_MATCH(DMI_PRODUCT_NAME, "Precision 5530"),
-> +		},
-> +		.driver_data =3D (void *)&i8k_fan_control_data[I8K_FAN_34A3_35A3],
-> +	},
-> +	{
-> +		.ident =3D "Dell Latitude E6440",
-> +		.matches =3D {
-> +			DMI_MATCH(DMI_SYS_VENDOR, "Dell Inc."),
-> +			DMI_EXACT_MATCH(DMI_PRODUCT_NAME, "Latitude E6440"),
-> +		},
-> +		.driver_data =3D (void *)&i8k_fan_control_data[I8K_FAN_34A3_35A3],
-> +	},
-> +	{ }
-> +};
-> +
->  /*
->   * Probe for the presence of a supported laptop.
->   */
->  static int __init i8k_probe(void)
->  {
-> -	const struct dmi_system_id *id;
-> +	const struct dmi_system_id *id, *fan_control;
->  	int fan, ret;
-> =20
->  	/*
-> @@ -1200,6 +1286,14 @@ static int __init i8k_probe(void)
->  	i8k_fan_max =3D fan_max ? : I8K_FAN_HIGH;	/* Must not be 0 */
->  	i8k_pwm_mult =3D DIV_ROUND_UP(255, i8k_fan_max);
-> =20
-> +	fan_control =3D dmi_first_match(i8k_whitelist_fan_control);
-> +	if (fan_control && fan_control->driver_data) {
-> +		const struct i8k_fan_control_data *fan_control_data =3D fan_control->d=
-river_data;
-> +		manual_fan =3D fan_control_data->manual_fan;
-> +		auto_fan =3D fan_control_data->auto_fan;
-> +		pr_info("enabling support for setting automatic/manual fan control\n");
-> +	}
-> +
->  	if (!fan_mult) {
->  		/*
->  		 * Autodetect fan multiplier based on nominal rpm
+> +intel-speed-select configuration tool
+> +-------------------------------------
 
---=20
-Pali Roh=C3=A1r
-pali.rohar@gmail.com
+The conventions for subsection markers are documented in
+Documentation/doc-guide/sphinx.rst; this should be "========" rather than
+hyphens. 
 
---dntxtsgj3xed2gg4
-Content-Type: application/pgp-signature; name="signature.asc"
+> +Most Linux distribution packages include the "intel-speed-select" tool. If not,
+> +it can be built by downloading the Linux kernel tree from kernel.org. Once
+> +downloaded, the tool can be built without building the full kernel.
+> +
+> +From the kernel tree, run the following commands:
+> +
+> +# cd tools/power/x86/intel-speed-select/
+> +
+> +# make
+> +
+> +# make install
 
------BEGIN PGP SIGNATURE-----
+This kind of stuff isn't going to render well in the built docs.  Can you
+please change the literal text to literal blocks?  Something like:
 
-iF0EABECAB0WIQS4VrIQdKium2krgIWL8Mk9A+RDUgUCXdLVkwAKCRCL8Mk9A+RD
-UptqAKCDV9GLxi+nzSzmFuka+tuytD4U1gCcDHwaFLNCmeHqC17JGAhujp0PRBE=
-=B9yk
------END PGP SIGNATURE-----
+	From the kernel tree, run the following commands::
 
---dntxtsgj3xed2gg4--
+		# cd tools/power/x86/intel-speed-select/
+		# make
+		# make install
+
+Note the "::" on the first line; that introduces a literal block.  It would
+be good to build the docs once you're done and be sure that you're happy
+with the results.
+
+There's a lot of these in this document.
+
+> +
+> +**Getting Help**
+
+Since this is meant to be a section header, please mark it as such;
+"------" would be the appropriate marker for a header at this level.
+
+That's enough for a first pass.
+
+Thanks,
+
+jon
