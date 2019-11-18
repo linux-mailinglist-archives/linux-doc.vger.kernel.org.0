@@ -2,191 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A23A0100A18
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Nov 2019 18:18:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F1D3F100A4E
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Nov 2019 18:32:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726664AbfKRRSc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Nov 2019 12:18:32 -0500
-Received: from pietrobattiston.it ([92.243.7.39]:50946 "EHLO
-        jauntuale.pietrobattiston.it" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726068AbfKRRSc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Nov 2019 12:18:32 -0500
-X-Greylist: delayed 394 seconds by postgrey-1.27 at vger.kernel.org; Mon, 18 Nov 2019 12:18:30 EST
-Received: from amalgama (pno-math-19.ulb.ac.be [164.15.133.19])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits))
-        (No client certificate requested)
-        (Authenticated sender: giovanni)
-        by jauntuale.pietrobattiston.it (Postfix) with ESMTPSA id 16B0BE0546;
-        Mon, 18 Nov 2019 18:11:57 +0100 (CET)
-Received: by amalgama (Postfix, from userid 1000)
-        id CD1053C0244; Mon, 18 Nov 2019 18:11:56 +0100 (CET)
-From:   Giovanni Mascellani <gio@debian.org>
-To:     Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        =?UTF-8?q?Pali=20Roh=C3=A1r?= <pali.rohar@gmail.com>,
-        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc:     Giovanni Mascellani <gio@debian.org>
-Subject: [PATCH v4 2/2] dell-smm-hwmon: Add documentation
-Date:   Mon, 18 Nov 2019 18:11:48 +0100
-Message-Id: <20191118171148.76373-2-gio@debian.org>
-X-Mailer: git-send-email 2.24.0
-In-Reply-To: <20191118171148.76373-1-gio@debian.org>
-References: <20191118171148.76373-1-gio@debian.org>
+        id S1726600AbfKRRcg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 18 Nov 2019 12:32:36 -0500
+Received: from aserp2120.oracle.com ([141.146.126.78]:60890 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726435AbfKRRcg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Nov 2019 12:32:36 -0500
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xAIHOlrR167573;
+        Mon, 18 Nov 2019 17:31:09 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
+ : subject : in-reply-to : message-id : references : mime-version :
+ content-type; s=corp-2019-08-05;
+ bh=fWYXVHNMGwzk76eEZvx0wQOORGxMzV4ZZmWutwdTNzU=;
+ b=Q5GHLqOYfoRD2LBmmxZ4kiwYWBh8AWPj0SB2Z3g4mFTDqRw9Flq35LRrJ2/t248iDQQ3
+ vFuZ+0waQZOwR+Z3NE5LzA/MCdaVk/S6TF0cyXfeJa9Jyr5XyhE+vVf1zTAgzmfyI3jc
+ FTLivj2WUYPiwMrv9u9TV8BrhJwDGUi5wVsEbuSTkvtx4Sl1x/EVZpddEDfaMpMS/6AF
+ 8qDwYjC66Grn3t32XQvuajrTDL9P6HwBLdpaAomWolKjE3zu7Rf9xXM37PKezu1lLVPj
+ r6MhS7VO/vt3nw79XH3sd+Iyk7HPu2/pAa2lGkteW6E6MhK5WuJxJXzHle7btIyWPv4X gw== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+        by aserp2120.oracle.com with ESMTP id 2wa92phqga-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 18 Nov 2019 17:31:09 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+        by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xAIHOe7T174690;
+        Mon, 18 Nov 2019 17:31:08 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+        by userp3030.oracle.com with ESMTP id 2watjxwr9y-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 18 Nov 2019 17:31:08 +0000
+Received: from abhmp0018.oracle.com (abhmp0018.oracle.com [141.146.116.24])
+        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id xAIHV3s9028994;
+        Mon, 18 Nov 2019 17:31:03 GMT
+Received: from dhcp-10-175-206-139.vpn.oracle.com (/10.175.206.139)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Mon, 18 Nov 2019 09:31:03 -0800
+Date:   Mon, 18 Nov 2019 17:30:48 +0000 (GMT)
+From:   Alan Maguire <alan.maguire@oracle.com>
+X-X-Sender: alan@dhcp-10-175-206-139.vpn.oracle.com
+To:     Stephen Boyd <sboyd@kernel.org>
+cc:     Alan Maguire <alan.maguire@oracle.com>, brendanhiggins@google.com,
+        linux-kselftest@vger.kernel.org, skhan@linuxfoundation.org,
+        linux-kernel@vger.kernel.org, kunit-dev@googlegroups.com,
+        keescook@chromium.org, yzaikin@google.com,
+        akpm@linux-foundation.org, yamada.masahiro@socionext.com,
+        catalin.marinas@arm.com, joe.lawrence@redhat.com,
+        penguin-kernel@i-love.sakura.ne.jp, schowdary@nvidia.com,
+        urezki@gmail.com, andriy.shevchenko@linux.intel.com,
+        corbet@lwn.net, tytso@mit.edu, adilger.kernel@dilger.ca,
+        mcgrof@kernel.org, changbin.du@intel.com,
+        linux-ext4@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 linux-kselftest-test 2/6] kunit: hide unexported
+ try-catch interface in try-catch-impl.h
+In-Reply-To: <20191117013606.4541D207DD@mail.kernel.org>
+Message-ID: <alpine.LRH.2.20.1911181728530.1562@dhcp-10-175-206-139.vpn.oracle.com>
+References: <1573812972-10529-1-git-send-email-alan.maguire@oracle.com> <1573812972-10529-3-git-send-email-alan.maguire@oracle.com> <20191117013606.4541D207DD@mail.kernel.org>
+User-Agent: Alpine 2.20 (LRH 67 2015-01-07)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9445 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=3 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-1911180150
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9445 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
+ suspectscore=3 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
+ definitions=main-1911180150
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Part of the documentation is taken from the README of the userspace
-utils (https://github.com/vitorafsr/i8kutils). The license is GPL-2+
-and the author Massimo Dal Zotto is already credited as author of
-the module. Therefore there should be no copyright problem.
+On Sat, 16 Nov 2019, Stephen Boyd wrote:
+> Quoting Alan Maguire (2019-11-15 02:16:08)
+> > diff --git a/lib/kunit/try-catch-impl.h b/lib/kunit/try-catch-impl.h
+> > new file mode 100644
+> > index 0000000..e308d5c
+> > --- /dev/null
+> > +++ b/lib/kunit/try-catch-impl.h
+> > @@ -0,0 +1,28 @@
+> > +/* SPDX-License-Identifier: GPL-2.0 */
+> > +/*
+> > + * An API to allow a function, that may fail, to be executed, and recover in a
+> 
+> This file is not an API. Maybe just say "Internal kunit try catch
+> implementation details to be shared with tests".
+>
 
-I also added a paragraph with specific information on the experimental
-support for automatic BIOS fan control.
+Thanks for the review! Will fix this, along with adding the
+"Co-developed-by:" for Knut and will remove the unneeded
+#include of linux/kernel.h in v5 mentioned in the patch
+1 review. Thanks again!
 
-Signed-off-by: Giovanni Mascellani <gio@debian.org>
----
- Documentation/hwmon/dell-smm-hwmon.rst | 112 +++++++++++++++++++++++++
- Documentation/hwmon/index.rst          |   1 +
- 2 files changed, 113 insertions(+)
- create mode 100644 Documentation/hwmon/dell-smm-hwmon.rst
+Alan
 
-diff --git a/Documentation/hwmon/dell-smm-hwmon.rst b/Documentation/hwmon/dell-smm-hwmon.rst
-new file mode 100644
-index 000000000000..f80d30d8a02a
---- /dev/null
-+++ b/Documentation/hwmon/dell-smm-hwmon.rst
-@@ -0,0 +1,112 @@
-+Kernel driver dell-smm-hwmon
-+============================
-+
-+Description
-+-----------
-+
-+On many Dell laptops the System Management Mode (SMM) BIOS can be
-+queried for the status of fans and temperature sensors. The userspace
-+suite `i8kutils`__ can be used to read the sensors and automatically
-+adjust fan speed.
-+
-+ __ https://github.com/vitorafsr/i8kutils
-+
-+``/proc`` interface
-+-------------------
-+
-+The information provided by the kernel driver can be accessed by
-+simply reading the ``/proc/i8k`` file. For example::
-+
-+    $ cat /proc/i8k
-+    1.0 A17 2J59L02 52 2 1 8040 6420 1 2
-+
-+The fields read from ``/proc/i8k`` are::
-+
-+    1.0 A17 2J59L02 52 2 1 8040 6420 1 2
-+    |   |   |       |  | | |    |    | |
-+    |   |   |       |  | | |    |    | +------- 10. buttons status
-+    |   |   |       |  | | |    |    +--------- 9.  AC status
-+    |   |   |       |  | | |    +-------------- 8.  right fan rpm
-+    |   |   |       |  | | +------------------- 7.  left fan rpm
-+    |   |   |       |  | +--------------------- 6.  right fan status
-+    |   |   |       |  +----------------------- 5.  left fan status
-+    |   |   |       +-------------------------- 4.  CPU temperature (Celsius)
-+    |   |   +---------------------------------- 3.  Dell service tag (later known as 'serial number')
-+    |   +-------------------------------------- 2.  BIOS version
-+    +------------------------------------------ 1.  /proc/i8k format version
-+
-+A negative value, for example -22, indicates that the BIOS doesn't
-+return the corresponding information. This is normal on some
-+models/BIOSes.
-+
-+For performance reasons the ``/proc/i8k`` doesn't report by default
-+the AC status since this SMM call takes a long time to execute and is
-+not really needed.  If you want to see the ac status in ``/proc/i8k``
-+you must explictitly enable this option by passing the
-+``power_status=1`` parameter to insmod. If AC status is not
-+available -1 is printed instead.
-+
-+The driver provides also an ioctl interface which can be used to
-+obtain the same information and to control the fan status. The ioctl
-+interface can be accessed from C programs or from shell using the
-+i8kctl utility. See the source file of ``i8kutils`` for more
-+information on how to use the ioctl interface.
-+
-+``sysfs`` interface
-+-------------------
-+
-+Temperature sensors and fans can also be queried and set via the
-+standard ``hwmon`` interface on ``sysfs``.
-+
-+Disabling automatic BIOS fan control
-+------------------------------------
-+
-+On some laptops, the BIOS automatically sets fan speed every few
-+seconds. Therefore the fan speed set via ``/proc/i8k`` or via the
-+``sysfs`` interface is quickly overwritten.
-+
-+There is experimental support for disabling automatic BIOS fan
-+control, at least on laptops where the corresponding SMM command is
-+known, by writing the value ``1`` in the attribute ``pwm1_enable``
-+(writing ``2`` enables automatic BIOS control again). Even if you have
-+more than one fan, all of them are set to either enabled or disabled
-+automatic fan control at the same time and, notwithstanding the name,
-+``pwm1_enable`` sets automatic control for all fans.
-+
-+If ``pwm1_enable`` is not available, then it means that SMM codes for
-+enabling and disabling automatic BIOS fan control are not known for
-+your laptop. You can experiment with the code in `this repository`__
-+to probe the BIOS on your machine and discover the appropriate codes.
-+
-+ __ https://github.com/clopez/dellfan/
-+
-+Module parameters
-+-----------------
-+
-+* force:bool
-+                   Force loading without checking for supported
-+                   models. (default: 0)
-+
-+* ignore_dmi:bool
-+                   Continue probing hardware even if DMI data does not
-+                   match. (default: 0)
-+
-+* restricted:bool
-+                   Allow fan control only to processes with the
-+                   ``CAP_SYS_ADMIN`` capability set or processes run
-+                   as root. In this case normal users will be able to
-+                   read temperature and fan status but not to control
-+                   the fan.  If your notebook is shared with other
-+                   users and you don't trust them you may want to use
-+                   this option. (default: 1)
-+
-+* power_status:bool
-+                   Report AC status in ``/proc/i8k``. (default: 0)
-+
-+* fan_mult:uint
-+                   Factor to multiply fan speed with. (default:
-+                   autodetect)
-+
-+* fan_max:uint
-+                   Maximum configurable fan speed. (default:
-+                   autodetect)
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 230ad59b462b..092435ad6bb8 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -44,6 +44,7 @@ Hardware Monitoring Kernel Drivers
-    coretemp
-    da9052
-    da9055
-+   dell-smm-hwmon
-    dme1737
-    ds1621
-    ds620
--- 
-2.24.0
-
+> > + * controlled manner.
+> > + *
+> > + * Copyright (C) 2019, Google LLC.
+> > + * Author: Brendan Higgins <brendanhiggins@google.com>
+> > + */
+> > +
+> > +#ifndef _KUNIT_TRY_CATCH_IMPL_H
+> > +#define _KUNIT_TRY_CATCH_IMPL_H
+> > +
+> > +#include <kunit/try-catch.h>
+> > +#include <linux/types.h>
+> > +
+> > +struct kunit;
+> > +
+> > +static inline void kunit_try_catch_init(struct kunit_try_catch *try_catch,
+> > +                                       struct kunit *test,
+> > +                                       kunit_try_catch_func_t try,
+> 
