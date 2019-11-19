@@ -2,298 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 76621102FFA
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Nov 2019 00:19:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 30F24103041
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Nov 2019 00:31:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727506AbfKSXTh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Nov 2019 18:19:37 -0500
-Received: from mail-wm1-f68.google.com ([209.85.128.68]:38113 "EHLO
+        id S1727007AbfKSXbG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Nov 2019 18:31:06 -0500
+Received: from mail-wm1-f68.google.com ([209.85.128.68]:53919 "EHLO
         mail-wm1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727522AbfKSXTg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Nov 2019 18:19:36 -0500
-Received: by mail-wm1-f68.google.com with SMTP id z19so5806763wmk.3
-        for <linux-doc@vger.kernel.org>; Tue, 19 Nov 2019 15:19:34 -0800 (PST)
+        with ESMTP id S1726911AbfKSXbF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Nov 2019 18:31:05 -0500
+Received: by mail-wm1-f68.google.com with SMTP id u18so5115903wmc.3
+        for <linux-doc@vger.kernel.org>; Tue, 19 Nov 2019 15:31:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=Yv901JXCZKepPNb0ar0BUnWjRmLSWkOuwXeWlenYz+g=;
-        b=aS47yCywZ0yEX+8wij98lM5dhxsoxYagzC7/SuPpk+VqdW0DxbIKnoISZ9Ncy734Mc
-         KSchZvwuuUORjQQkuv+1yn9JwMEWWqvshwdrPYKm7XDcIF2hld3CfIWPZyZ6WXLUIhY5
-         MZEUyupCLfMfywetMPJgdZuDh1WHeZQD3HeTC4V4vn/4b1OaZdkxVUkDqIFjS4UfQuyY
-         tG5Gk5/guKzOeuHCgIVpx4Mz1dg8UoqlQJleOuPBkpYQTHgr/OoVwrTllLbVxoiNqkZg
-         FH0igUkC76tZU4RJYAjM1wApMJStuoNkibbHW3BbDcU8+xYL0z8ta4M3P7MobyIWutMy
-         8Prg==
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=mP+0iqiXj77eONbT81jP0IEP9HdwZqjxx63AWCIxHNA=;
+        b=eWt1VHPn8CeyEJkHh8wfdDoWw5EBwvsVv+ooqf2AO/Zbwx52j4WyMuZ5MnEbfn+4Gi
+         KfL/jdy4ujXa0lrrB4mryex1DzfBRrRNcJJzcXW+RNbKutYVCpwkXIY0pylxxMgWm3Ht
+         M8VIf2ub0+jN+0s3ZGOz+lYWhR8yH/TtZfTuSaO9asxRMqzuDXYlks/kEkTgE/S/P53S
+         m5fYO4xeerkaV2wpfwkPh1m2WbLZs3cvqOti+OCNs09c0s4sHlZt4JrvGQ4JXuXf5oAH
+         EiOeSSVac8ZaFvRrrRNj9ba26sS3QxpitGEk2F+ZU+USScUYVseseeZx10PO67zMRmXt
+         SLsQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=Yv901JXCZKepPNb0ar0BUnWjRmLSWkOuwXeWlenYz+g=;
-        b=s915P5Qycd/TeePHUXhTFdqza/3TUMathGjtDBsE8HDdcyC+Xmo9myfmeklvB5YCPc
-         QQSgsPLqAjfweVILoOb51+chbn8aTRyKmNTfJWtAqgYun2b+4BtJEKa3uwfLHNIbRFb5
-         T71470BChGUW2SXx8854TlPVIi+AGKZ2MOI3gIyH+QtSAzKvzEAu/tOPoCwavRYYZREI
-         MYIHpkhkAMUHDA/zONhlTSgWvjQgtXjhbsi7WY8cQYvSTd+4eXOu6Srfy/7rpGCgX3ca
-         aXSrlKATx8Yvs2t13FLX27VNtLBkjuCwD5T9h5/N/j/nvzuJ2UBT8D9g4pb56qYu8JNT
-         IWQg==
-X-Gm-Message-State: APjAAAU1wij9584B+ZJZNV3zvRv0HsYip/l+sQDO8vL+vZj5snEH/v6a
-        gLsB5jo6vgZnC1Ol8RfeCV3S4g==
-X-Google-Smtp-Source: APXvYqzSDyfD3vKtj2shweM8dfoDtDxP7zvdOlvTPXRIrhzyIpVN1xVy9jNbgLbXY08cAHNkpIcffg==
-X-Received: by 2002:a1c:2395:: with SMTP id j143mr362829wmj.128.1574205574013;
-        Tue, 19 Nov 2019 15:19:34 -0800 (PST)
-Received: from linaro.org ([2a00:23c5:6815:3901:a19d:4139:292b:19a0])
-        by smtp.gmail.com with ESMTPSA id m15sm15746717wrj.52.2019.11.19.15.19.33
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Nov 2019 15:19:33 -0800 (PST)
-From:   Mike Leach <mike.leach@linaro.org>
-To:     mike.leach@linaro.org, coresight@lists.linaro.org,
-        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Cc:     mathieu.poirier@linaro.org, suzuki.poulose@arm.com
-Subject: [PATCH v5 14/14] docs: sysfs: coresight: Add sysfs ABI documentation for CTI
-Date:   Tue, 19 Nov 2019 23:19:12 +0000
-Message-Id: <20191119231912.12768-15-mike.leach@linaro.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191119231912.12768-1-mike.leach@linaro.org>
-References: <20191119231912.12768-1-mike.leach@linaro.org>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=mP+0iqiXj77eONbT81jP0IEP9HdwZqjxx63AWCIxHNA=;
+        b=bFGBOpdD8xvnTvK9C6TJryL2N9dVpIFQAipYNFq1BlVHdO7uVoh6jDkKlDPWhDGLw3
+         lu5BRPn3y2rzCMz5cjJWdorzw1iwCaTOUe2Zjh8YyjYrGSltg9/0AU/Fw9tmmMnRQldf
+         mQx0KFQpA3dbvPOwYO5WCh8zegkUQNZH7V4zXapV1l5L/wJpZWqdqqdM85ge3x5yiOED
+         9H8xISXphfrkOM+MMFiTy9hnv/dn7VuAfOTNf70H3vuiiL/p2qT2Bpn3XEwoVBPe9zJD
+         o1xCKbImthwRMyfXDaAb+8cq/brHDGZez4ZQ4LBcvfNel7m9cAph30NzP4dQ5QHY1Nxn
+         FTvA==
+X-Gm-Message-State: APjAAAXTScIW5h/MYYAId9lnVTaP0WpZ3gJG8sQTy/ivMEZ/LU4BWKx2
+        0lZtmH1QQj5Www1pCV3TbTogyjzsD8aMZZ4Z9pUhVw==
+X-Google-Smtp-Source: APXvYqwRIvQ8PKVNdixUgQnuXSHFcZZKFRs7eXQkjHRIkNkDAd3sCFPQ/jj3utQ2CUNuE+/QqniO8zwM2uAD7sAvFhM=
+X-Received: by 2002:a05:600c:295:: with SMTP id 21mr369402wmk.43.1574206263262;
+ Tue, 19 Nov 2019 15:31:03 -0800 (PST)
+MIME-Version: 1.0
+References: <20191119213834.175992-1-brendanhiggins@google.com>
+In-Reply-To: <20191119213834.175992-1-brendanhiggins@google.com>
+From:   David Gow <davidgow@google.com>
+Date:   Tue, 19 Nov 2019 15:30:51 -0800
+Message-ID: <CABVgOSn6bc=Rq50Y_Av+0gXTjyHuV+UaULNHicz16hp_uRmDsg@mail.gmail.com>
+Subject: Re: [PATCH linux-kselftest/test v1] Documentation: kunit: fix typos
+ and gramatical errors
+To:     Brendan Higgins <brendanhiggins@google.com>
+Cc:     Shuah Khan <shuah@kernel.org>, kunit-dev@googlegroups.com,
+        linux-kernel@vger.kernel.org,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>, linux-doc@vger.kernel.org,
+        corbet@lwn.net, heidifahim@google.com,
+        Patricia Alfonso <trishalfonso@google.com>,
+        Randy Dunlap <rdunlap@infradead.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add API usage document for sysfs API in CTI driver.
+On Tue, Nov 19, 2019 at 1:39 PM 'Brendan Higgins' via KUnit
+Development <kunit-dev@googlegroups.com> wrote:
+>
+> Fix typos and gramatical errors in the Getting Started and Usage guide
+> for KUnit.
+>
+> Reported-by: Randy Dunlap <rdunlap@infradead.org>
+> Link: https://patchwork.kernel.org/patch/11156481/
+> Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
+> ---
+>  Documentation/dev-tools/kunit/start.rst |  6 +++---
+>  Documentation/dev-tools/kunit/usage.rst | 22 +++++++++++-----------
+>  2 files changed, 14 insertions(+), 14 deletions(-)
+>
 
-Signed-off-by: Mike Leach <mike.leach@linaro.org>
----
- .../testing/sysfs-bus-coresight-devices-cti   | 221 ++++++++++++++++++
- 1 file changed, 221 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-bus-coresight-devices-cti
+Reviewed-by: David Gow <davidgow@google.com>
 
-diff --git a/Documentation/ABI/testing/sysfs-bus-coresight-devices-cti b/Documentation/ABI/testing/sysfs-bus-coresight-devices-cti
-new file mode 100644
-index 000000000000..d867800f567f
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-bus-coresight-devices-cti
-@@ -0,0 +1,221 @@
-+What:		/sys/bus/coresight/devices/<cti-name>/enable
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Enable/Disable the CTI hardware.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/ctmid
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) Display the associated CTM ID
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/nr_trigger_cons
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) Number of devices connected to triggers on this CTI
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/triggers<N>/name
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) Name of connected device <N>
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/triggers<N>/in_signals
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) Input trigger signals from connected device <N>
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/triggers<N>/in_types
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) Functional types for the input trigger signals
-+		from connected device <N>
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/triggers<N>/out_signals
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) Output trigger signals to connected device <N>
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/triggers<N>/out_types
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) Functional types for the output trigger signals
-+		to connected device <N>
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/inout_sel
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Select the index for inen and outen registers.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/inen
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Read or write the CTIINEN register selected by inout_sel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/outen
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Read or write the CTIOUTEN register selected by inout_sel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/gate
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Read or write CTIGATE register.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/asicctl
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Read or write ASICCTL register.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/intack
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Write the INTACK register.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/appset
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Set CTIAPPSET register to activate channel. Read back to
-+		determine current value of register.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/appclear
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Write APPCLEAR register to deactivate channel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/apppulse
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Write APPPULSE to pulse a channel active for one clock
-+		cycle.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/chinstatus
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) Read current status of channel inputs.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/choutstatus
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) read current status of channel outputs.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/triginstatus
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) read current status of input trigger signals
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/regs/trigoutstatus
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) read current status of output trigger signals.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/trigin_attach
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Attach a CTI input trigger to a CTM channel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/trigin_detach
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Detach a CTI input trigger from a CTM channel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/trigout_attach
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Attach a CTI output trigger to a CTM channel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/trigout_detach
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Detach a CTI output trigger from a CTM channel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_gate_enable
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Enable CTIGATE for single channel (W) or list enabled
-+		channels through the gate (R).
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_gate_disable
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Disable CTIGATE for single channel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_set
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Activate a single channel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_clear
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Deactivate a single channel.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_pulse
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Pulse a single channel - activate for a single clock cycle.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/trigout_filtered
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) List of output triggers filtered across all connections.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/trig_filter_enable
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Enable or disable trigger output signal filtering.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_inuse
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) show channels with at least one attached trigger signal.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_free
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(R) show channels with no attached trigger signals.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_xtrigs_view
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(RW) Write channel number to select a channel to view, read to
-+		see triggers attached to selected channel on this CTI.
-+
-+What:		/sys/bus/coresight/devices/<cti-name>/channels/chan_xtrigs_reset
-+Date:		Jul 2019
-+KernelVersion	5.4
-+Contact:	Mike Leach or Mathieu Poirier
-+Description:	(W) Clear all channel / trigger programming.
--- 
-2.17.1
+These changes look good to me.
 
+
+> diff --git a/Documentation/dev-tools/kunit/start.rst b/Documentation/dev-tools/kunit/start.rst
+> index f4d9a4fa914f8..db146c7d77490 100644
+> --- a/Documentation/dev-tools/kunit/start.rst
+> +++ b/Documentation/dev-tools/kunit/start.rst
+
+Could you also fix the kunit.py invocation on line 162, which should
+have "run" passed as an argument?
+See:
+https://git.kernel.org/pub/scm/linux/kernel/git/shuah/linux-kselftest.git/tree/Documentation/dev-tools/kunit/start.rst?h=test#n162
+
+It should read "/tools/testing/kunit/kunit.py run".
+
+Thanks,
+-- David
