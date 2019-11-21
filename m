@@ -2,41 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7334D104730
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Nov 2019 01:03:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4C404104736
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Nov 2019 01:03:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726620AbfKUADM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 20 Nov 2019 19:03:12 -0500
-Received: from mail-pf1-f196.google.com ([209.85.210.196]:41654 "EHLO
-        mail-pf1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726573AbfKUADL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Nov 2019 19:03:11 -0500
-Received: by mail-pf1-f196.google.com with SMTP id p26so630235pfq.8
-        for <linux-doc@vger.kernel.org>; Wed, 20 Nov 2019 16:03:11 -0800 (PST)
+        id S1726714AbfKUADV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 20 Nov 2019 19:03:21 -0500
+Received: from mail-pg1-f193.google.com ([209.85.215.193]:32899 "EHLO
+        mail-pg1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726704AbfKUADN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Nov 2019 19:03:13 -0500
+Received: by mail-pg1-f193.google.com with SMTP id h27so599489pgn.0
+        for <linux-doc@vger.kernel.org>; Wed, 20 Nov 2019 16:03:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id;
-        bh=kE4zc5h6g2FxYn8FExOX8denzzfy5tUjIQSu5KP5KmM=;
-        b=JsQWdJHB+oNkBu7ELea7xobOL8sPLan0tvqfIXBGQb8cKhX2p5HOSu59C39cXn21E5
-         /EEkVA+Px+gj1I2cR5vhwhVwJTxp6aYfMFvtRQxDIkHEDh/t7ThaOHgxiqtcu26y+tQB
-         yK527WA4x8pmDhcJPggr5jOivZihBSKaHiFac=
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=x//g3D21vWGwG/RhBLblP0rKHJ6VZUOUfN3oNVWDiSE=;
+        b=NJqzhMhLJICCf5qJMl+TNG+sSEH4R/DlE9aDYaGlbweivfvOOJQa6VQxDYNhcw/U9t
+         YZBnJUjG+3AcvvO3yIKNSW4lCAPdVCpA5BPmA1YWjjpzaOAduVif+C5xVk+E/ryM7vd1
+         uuTBP5iylemd6FFCSBjIPF1u5PAS9YbOLn9xE=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=kE4zc5h6g2FxYn8FExOX8denzzfy5tUjIQSu5KP5KmM=;
-        b=n1/p+O0BMXycF+KtnHoJgiO45xkpMg02dQI9LHOeF3v7AWk5CK/W4ZbrYvT2Untyou
-         TWM/HApjLrKZKeUfnxAlkhmQBD8MwKg0rBlo5zrmlHppUEpGUNtNj7PNBQot4f6qulai
-         NeTVvaehWzMFGYS6dj+AOTybA35ACtqXb1qq2NHuYkjfGW9fxRcMQw1QQtqZGzwkSgvX
-         OAn03KEoqmY6DgpPdbEbAtPqJYkolk/BIMxhdrZOAGBfYyYlH7zgjxwf2gzhibtK/9oE
-         71WdHR/qOE9ERNMOMeQxDAesNnfMJ5aQwGT0VpOpZPMLJLHrEKDVNzjphzs9q+zSd7JH
-         nN7g==
-X-Gm-Message-State: APjAAAWPw9InLw5wUgAmGs6moDxn7CVAWPNoxtPqHMELjGIB9syZPq/O
-        DcEwVnKa/3wfC+SDagYN8f41E/1Qhwk=
-X-Google-Smtp-Source: APXvYqy350K6RxOhGawpWh8zemjxoDaCUC89yo91oTtqYpdp242hU/Mj6Kh82KEizm35UJmtm2Igow==
-X-Received: by 2002:a63:ce0b:: with SMTP id y11mr6074021pgf.338.1574294590899;
-        Wed, 20 Nov 2019 16:03:10 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=x//g3D21vWGwG/RhBLblP0rKHJ6VZUOUfN3oNVWDiSE=;
+        b=H4n6+wdokTDJ1h0XjsnCq26MstT9XpQYaT+Q9lInMlm4mzuxfPQrDUwbsZBXIuDlJY
+         BXV1baXYEZMV0kKt+KwZBL2ZRBZXrESNZEnxXAIAtfYGM0ZY5GIZjloRZOQ0VcPwBZJD
+         f836BiBxkXFV4+S9X///FewMw8NnMUjF1283UzV0F0fEOYsD7tVsrZQ2a0vkrk8ZEUpw
+         Ilcr+nxTnr5fxBhpeAq/s6D7WbNXCs7MZDl8GHfHZ74G0Yp29bU1FAMXSJ/YrjObYAYr
+         zpFpR2zUigoccZj4rgpCUO8q/iX0ktM6/wEcjQkgQnkJmjdT2I/wKzLZGO4vF5hHJ1OQ
+         fTkg==
+X-Gm-Message-State: APjAAAWJQ27R8VF3f1Dx6hTMj8E2zC4k2YtXPLevv5JiiqPBadaudtTM
+        Z/GDxjSxna4KPx86oExvs0Bv7Q==
+X-Google-Smtp-Source: APXvYqwStyJTrur6Um6X5gdnLSs05KUM0vEvX7S95Lr4MJfOROwA8QgHHWEsLmoYwK5zC4lSNlbP5Q==
+X-Received: by 2002:a63:101:: with SMTP id 1mr6069915pgb.336.1574294592164;
+        Wed, 20 Nov 2019 16:03:12 -0800 (PST)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id 7sm358842pgk.25.2019.11.20.16.03.09
+        by smtp.gmail.com with ESMTPSA id r28sm555496pfl.37.2019.11.20.16.03.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Wed, 20 Nov 2019 16:03:09 -0800 (PST)
 From:   Kees Cook <keescook@chromium.org>
@@ -44,42 +45,49 @@ To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     Kees Cook <keescook@chromium.org>,
         Rasmus Villemoes <linux@rasmusvillemoes.dk>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 0/3] docs, parallelism: Rearrange how jobserver reservations are made
-Date:   Wed, 20 Nov 2019 16:03:01 -0800
-Message-Id: <20191121000304.48829-1-keescook@chromium.org>
+Subject: [PATCH 1/3] docs, parallelism: Fix failure path and add comment
+Date:   Wed, 20 Nov 2019 16:03:02 -0800
+Message-Id: <20191121000304.48829-2-keescook@chromium.org>
 X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20191121000304.48829-1-keescook@chromium.org>
+References: <20191121000304.48829-1-keescook@chromium.org>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+Rasmus noted that the failure path didn't correctly exit. Fix this and
+add another comment about GNU Make's job server environment variable
+names over time.
 
-As Rasmus noted[1], there were some deficiencies in how the Make jobserver
-vs sphinx parallelism logic was handled. This series attempts to address
-all those problems by building a set of wrappers and fixing some of the
-internal logic.
+Reported-by: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Link: https://lore.kernel.org/lkml/eb25959a-9ec4-3530-2031-d9d716b40b20@rasmusvillemoes.dk
+Signed-off-by: Kees Cook <keescook@chromium.org>
+---
+ scripts/jobserver-count | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Thank you Rasmus for the suggestions (and the "jobhog" example)! :)
-
--Kees
-
-[1] https://lore.kernel.org/lkml/eb25959a-9ec4-3530-2031-d9d716b40b20@rasmusvillemoes.dk
-
-Kees Cook (3):
-  docs, parallelism: Fix failure path and add comment
-  docs, parallelism: Do not leak blocking mode to writer
-  docs, parallelism: Rearrange how jobserver reservations are made
-
- Documentation/Makefile                   |  5 +-
- Documentation/sphinx/parallel-wrapper.sh | 25 +++++++++
- scripts/jobserver-count                  | 58 --------------------
- scripts/jobserver-exec                   | 69 ++++++++++++++++++++++++
- 4 files changed, 96 insertions(+), 61 deletions(-)
- create mode 100644 Documentation/sphinx/parallel-wrapper.sh
- delete mode 100755 scripts/jobserver-count
- create mode 100644 scripts/jobserver-exec
-
+diff --git a/scripts/jobserver-count b/scripts/jobserver-count
+index 0b482d6884d2..6e15b38df3d0 100755
+--- a/scripts/jobserver-count
++++ b/scripts/jobserver-count
+@@ -24,6 +24,8 @@ try:
+ 	flags = os.environ['MAKEFLAGS']
+ 
+ 	# Look for "--jobserver=R,W"
++	# Note that GNU Make has used --jobserver-fds and --jobserver-auth
++	# so this handles all of them.
+ 	opts = [x for x in flags.split(" ") if x.startswith("--jobserver")]
+ 
+ 	# Parse out R,W file descriptor numbers and set them nonblocking.
+@@ -53,6 +55,7 @@ os.write(writer, jobs)
+ # If the jobserver was (impossibly) full or communication failed, use default.
+ if len(jobs) < 1:
+ 	print(default)
++	sys.exit(0)
+ 
+ # Report available slots (with a bump for our caller's reserveration).
+ print(len(jobs) + 1)
 -- 
 2.17.1
 
