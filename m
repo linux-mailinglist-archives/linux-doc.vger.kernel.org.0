@@ -2,67 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B21C1073A3
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Nov 2019 14:50:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AF3B410750A
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Nov 2019 16:41:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728129AbfKVNuX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Nov 2019 08:50:23 -0500
-Received: from mail.kernel.org ([198.145.29.99]:33198 "EHLO mail.kernel.org"
+        id S1726563AbfKVPl4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Nov 2019 10:41:56 -0500
+Received: from vps0.lunn.ch ([185.16.172.187]:51836 "EHLO vps0.lunn.ch"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728045AbfKVNuX (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 22 Nov 2019 08:50:23 -0500
-Received: from localhost.localdomain (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 1BA3020707;
-        Fri, 22 Nov 2019 13:50:20 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1574430622;
-        bh=1j7jq5pzhcTbwy0u76M9Rv5JeZ9UHE4g2b5e/liny1s=;
-        h=From:To:Cc:Subject:Date:From;
-        b=FuIaQm17HWkghGLQUjRZks57ZpwgGb3L7/3yYdlPdCy4Y3ZZHX3m+kMzzUlitxP23
-         Sm1fUL0Mj/3kxlCN4g51SXu8TI42k2pLAp5EWVaA487JG8QzNWVUwSNIfwdv3k6OKu
-         DjH2CAp1rkknrzGdg5+dJqYgWyDHMuJ1XbtcHyGQ=
-From:   Masami Hiramatsu <mhiramat@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Masami Hiramatsu <mhiramat@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Mike Rapoport <rppt@linux.ibm.com>,
-        Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH] Documentation: Remove bootmem_debug from kernel-parameters.txt
-Date:   Fri, 22 Nov 2019 22:50:17 +0900
-Message-Id: <157443061745.20995.9432492850513217966.stgit@devnote2>
-X-Mailer: git-send-email 2.20.1
-User-Agent: StGit/0.17.1-dirty
+        id S1726046AbfKVPl4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 22 Nov 2019 10:41:56 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+        s=20171124; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+        Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+        List-Post:List-Owner:List-Archive;
+        bh=THFUwirn/uJnC7DI3jfFtAvR/UqZZDFawj8Dyx6URJc=; b=PV5pursFlMYrdGaMRpwCluiQYc
+        qiJu304Y3kCUiu2APiD/uD+7aWSX5asvZCvhhQVzpTMbfjdZHxg1DuR1yvHvI8fmhnDAHxj4XlLfo
+        13ptDVI3zZEzDFaYsn54XaBJmFrdxmNiDF2kCMdUgRXuPKjJ2rtBmAnTL+kBSs2Kb0iw=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.92.2)
+        (envelope-from <andrew@lunn.ch>)
+        id 1iYB46-00060w-V5; Fri, 22 Nov 2019 16:41:46 +0100
+Date:   Fri, 22 Nov 2019 16:41:46 +0100
+From:   Andrew Lunn <andrew@lunn.ch>
+To:     Russell King <rmk+kernel@armlinux.org.uk>
+Cc:     Florian Fainelli <f.fainelli@gmail.com>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jonathan Corbet <corbet@lwn.net>, netdev@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next] net: phy: remove phy_ethtool_sset()
+Message-ID: <20191122154146.GD6602@lunn.ch>
+References: <E1iY8BQ-00066m-TG@rmk-PC.armlinux.org.uk>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <E1iY8BQ-00066m-TG@rmk-PC.armlinux.org.uk>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Remove bootmem_debug kernel paramenter because it has been
-replaced by memblock=debug.
+On Fri, Nov 22, 2019 at 12:37:08PM +0000, Russell King wrote:
+> There are no users of phy_ethtool_sset() in the kernel anymore, and
+> as of 3c1bcc8614db ("net: ethernet: Convert phydev advertize and
+> supported from u32 to link mode"), the implementation is slightly
+> buggy - it doesn't correctly check the masked advertising mask as it
+> used to.
+> 
+> Remove it, and update the phy documentation to refer to its replacement
+> function.
+> 
+> Signed-off-by: Russell King <rmk+kernel@armlinux.org.uk>
 
-Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
-Cc: Mike Rapoport <rppt@linux.ibm.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
----
- Documentation/admin-guide/kernel-parameters.txt |    2 --
- 1 file changed, 2 deletions(-)
+Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index a84a83f8881e..02eae837272e 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -437,8 +437,6 @@
- 			no delay (0).
- 			Format: integer
- 
--	bootmem_debug	[KNL] Enable bootmem allocator debug messages.
--
- 	bert_disable	[ACPI]
- 			Disable BERT OS support on buggy BIOSes.
- 
-
+    Andrew
