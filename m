@@ -2,38 +2,38 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 82BD0106593
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Nov 2019 07:26:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 04E4310637C
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Nov 2019 07:11:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727964AbfKVFvC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 Nov 2019 00:51:02 -0500
-Received: from mail.kernel.org ([198.145.29.99]:55932 "EHLO mail.kernel.org"
+        id S1729192AbfKVF4h (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 Nov 2019 00:56:37 -0500
+Received: from mail.kernel.org ([198.145.29.99]:34432 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727961AbfKVFvB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 22 Nov 2019 00:51:01 -0500
+        id S1729188AbfKVF4g (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 22 Nov 2019 00:56:36 -0500
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
         (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 5B9B12071F;
-        Fri, 22 Nov 2019 05:51:00 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 4967B20717;
+        Fri, 22 Nov 2019 05:56:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1574401861;
+        s=default; t=1574402196;
         bh=ghWIX+m6hgr7up8H2IEj/4iJDmGytA1qPuXv0RVTtfE=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=1EHxdevvFPHBCNS5+gONhoZVNJAv+tbV3PmeFoFxKZMVrOJpO+zPrwvV4DPCwt55L
-         bxuY5MAW/SZkTaztpmYaPa0WOkqXowP2u5MB5X0D6YMwZwt3J7i4A/cEDB0mWbZFI/
-         NzpaX4fRT5O3sOat0oAyJGNWMw6hL3lEII7XVjiQ=
+        b=xWnjU3Q1wTlwOFD/uMJsgMFHk5ky9dh88lkqS2ebLvJs3wR4dfLgp/56dq803eaUZ
+         U2RWQDZX0nOtLum1dfmToSrzKTamR93qGeGFKgTw8Gzd/9JAr4KQG7RpWQD3LpWMQw
+         gRu24tD4MYwNL2Xhn2B9ghWxH1WeCjFQ+BlJPx9c=
 From:   Sasha Levin <sashal@kernel.org>
 To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
 Cc:     Peter Hutterer <peter.hutterer@who-t.net>,
         Jiri Kosina <jkosina@suse.cz>, Sasha Levin <sashal@kernel.org>,
         linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 4.19 097/219] HID: doc: fix wrong data structure reference for UHID_OUTPUT
-Date:   Fri, 22 Nov 2019 00:47:09 -0500
-Message-Id: <20191122054911.1750-90-sashal@kernel.org>
+Subject: [PATCH AUTOSEL 4.14 045/127] HID: doc: fix wrong data structure reference for UHID_OUTPUT
+Date:   Fri, 22 Nov 2019 00:54:23 -0500
+Message-Id: <20191122055544.3299-44-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20191122054911.1750-1-sashal@kernel.org>
-References: <20191122054911.1750-1-sashal@kernel.org>
+In-Reply-To: <20191122055544.3299-1-sashal@kernel.org>
+References: <20191122055544.3299-1-sashal@kernel.org>
 MIME-Version: 1.0
 X-stable: review
 X-Patchwork-Hint: Ignore
