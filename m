@@ -2,78 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A1BB108374
-	for <lists+linux-doc@lfdr.de>; Sun, 24 Nov 2019 14:31:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A0AF81083C2
+	for <lists+linux-doc@lfdr.de>; Sun, 24 Nov 2019 15:15:51 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726836AbfKXNbm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 24 Nov 2019 08:31:42 -0500
-Received: from mail-io1-f67.google.com ([209.85.166.67]:43685 "EHLO
-        mail-io1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726744AbfKXNbl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 24 Nov 2019 08:31:41 -0500
-Received: by mail-io1-f67.google.com with SMTP id p12so5815877iog.10
-        for <linux-doc@vger.kernel.org>; Sun, 24 Nov 2019 05:31:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=pI7cV3FDgc1XH+A619u5I2fUvKpFMBjQiQlWPO2Scvc=;
-        b=BNRZF59V+y1qVNWXojByNGDCVlBgmCUlKSKsuntP9sowcWV/iY6Ftnwi1qr+eYu9or
-         yUmjgceOu7FH8OatGdC1JCF9ColIDmYB544Sb6gf3b4IWKWFUyyu7YnoCtWuppvDkOgQ
-         w1YJyJPFJ2/bziWSVfhGLW7bkyHRnwGdqO5vctf7JU7Gjq3xNvwfrJo3AAoB4uop9XWP
-         LKliOsrzu3JyTxEKhIJMNjD/3KkslT57M65HzuJw5JES+6XaAgF42BcMaKF3EsIHfcpC
-         hbtnf7KL0T8HvCiM1nUiGHKQwoqWqK7e+c68GA3ukINLwpAgApmB+r29yyYOkbVA9FfL
-         7F6w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=pI7cV3FDgc1XH+A619u5I2fUvKpFMBjQiQlWPO2Scvc=;
-        b=qfUhCIhxQQAJK2r1zBp+E8Z8RiTlU5uWzna+4XFCgWQwTBTE+WUDYXV8AmU6ZHpAH1
-         97UKDZBHdSsw5yVn62n22x2IQGOtx3mF8+RMOdETSB+AU+isJDKJwaIoUfirOrTTP/Po
-         THFBjmoaPdbAfJcSBSMogmGSOZJ+a8zIsXNr5KwBewX1Z2Od4Fr0OLb8yaF5rWAzBUs7
-         Kp7EOjVezDWuRkAFg1hvR3+OObtRaTLSM1+4xkqH67ubVGbXW2i/dG+uQ298pRc3Q2+1
-         /IssGtphVEM1tZC+IfeQWt7YXMg/RhgelPJXnshvq+UraWH6go52sYdvapUHJ8YWqQ0Q
-         1Psw==
-X-Gm-Message-State: APjAAAWkhailWseDmGysp5iGskmiWoAmFXhdEOh7PLkH0EFUlxnD92ie
-        Vne7NmAqFbDaoh/yZlyb1v9/i0L349EVNX7L130=
-X-Google-Smtp-Source: APXvYqx3ipn29kdsUrB2hKIKt68fvIStoroWfBNlIkO6Jy4NtNR8U2utFF9nmUXE8gGIjJzo9bMjvlwLyvm7C9FOqyg=
-X-Received: by 2002:a02:44c7:: with SMTP id o190mr23753916jaa.8.1574602301023;
- Sun, 24 Nov 2019 05:31:41 -0800 (PST)
+        id S1726813AbfKXOPv convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Sun, 24 Nov 2019 09:15:51 -0500
+Received: from customer-187-141-72-141-sta.uninet-ide.com.mx ([187.141.72.141]:40802
+        "EHLO correo.opb.gob.mx" rhost-flags-OK-FAIL-OK-OK) by vger.kernel.org
+        with ESMTP id S1726779AbfKXOPv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 24 Nov 2019 09:15:51 -0500
+X-Greylist: delayed 4888 seconds by postgrey-1.27 at vger.kernel.org; Sun, 24 Nov 2019 09:15:49 EST
+Received: from localhost (localhost [127.0.0.1])
+        by correo.opb.gob.mx (Postfix) with ESMTP id E583C1A322D;
+        Sun, 24 Nov 2019 06:57:37 -0500 (EST)
+Received: from correo.opb.gob.mx ([127.0.0.1])
+        by localhost (correo.opb.gob.mx [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id dNCeQ6LoFeWR; Sun, 24 Nov 2019 06:57:37 -0500 (EST)
+Received: from localhost (localhost [127.0.0.1])
+        by correo.opb.gob.mx (Postfix) with ESMTP id 1BCE41A3223;
+        Sun, 24 Nov 2019 06:57:35 -0500 (EST)
+X-Virus-Scanned: amavisd-new at opb.gob.mx
+Received: from correo.opb.gob.mx ([127.0.0.1])
+        by localhost (correo.opb.gob.mx [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id odZvaJKm3JFG; Sun, 24 Nov 2019 06:57:34 -0500 (EST)
+Received: from correo.opb.gob.mx (correo.opb.gob.mx [172.16.254.57])
+        by correo.opb.gob.mx (Postfix) with ESMTP id 476171A3205;
+        Sun, 24 Nov 2019 06:57:30 -0500 (EST)
+Date:   Sun, 24 Nov 2019 05:57:30 -0600 (CST)
+From:   "Mr.WEHNER DAVID M." <jesus.valencia@opb.gob.mx>
+Reply-To: "Mr.WEHNER DAVID M." <info@zbukgroupltd.info>
+Message-ID: <1105698182.24559.1574596650210.JavaMail.zimbra@opb.gob.mx>
+In-Reply-To: <1063337394.24307.1574596445839.JavaMail.zimbra@opb.gob.mx>
+Subject: =?utf-8?Q?Pengar_=C3=B6verf=C3=B6rs?=
 MIME-Version: 1.0
-Received: by 2002:a4f:4fd0:0:0:0:0:0 with HTTP; Sun, 24 Nov 2019 05:31:40
- -0800 (PST)
-Reply-To: afginvestmentbrokers@al-faisaliah.org
-From:   "Mr. Joon-Kyu Lin" <johnpfox60@gmail.com>
-Date:   Sun, 24 Nov 2019 05:31:40 -0800
-Message-ID: <CAHLmmYMNie8+abnKYLM=x7Vn6dZtv4fKZLDVSYj5ixeKcdoXkA@mail.gmail.com>
-Subject: Venture Capital & Private Investors
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8BIT
+X-Originating-IP: [198.199.76.158]
+X-Mailer: Zimbra 8.0.7_GA_6021 (ZimbraWebClient - GC75 (Win)/8.0.7_GA_6021)
+Thread-Topic: Pengar =?utf-8?B?w7Z2ZXJmw7Zycw==?=
+Thread-Index: Wlue1ObLHW28G6QK4CR7qvueCy2AHA==
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Attention:
+Office Of The Head
+Internationell överföring
+Operation Zenith Bank
+(UK) Ltd LONDON United
+Storbritannien och Irland
+Tel: +44 203 389 5674
+Fax: +44 704 307 1539
 
-I am an investor that can provide funding for any viable business idea or
-venture.
+Hälsning,
 
-Please do let me know if you have fund management abilities, credible
-projects in need of funding or advanced stage projects requiring Bank
-Guarantees, Loans or Partnership, Joint Venture, Equity, we would be
-delighted to work with you.
+Din e-postadress kom upp i ett slumpmässigt drag som genomfördes i Zenith Banks huvudkontor, International Transfer Operation i London, Storbritannien.
 
+Jag är Mr.WEHNER DAVID M.A personlig bokföring till avdöd Michael Blair som arbetade med Shell British Petroleum. Mr.Michael Blair, en välkänd filantropist, innan han dog, gjorde en testamente i ett advokatbyrå om att 12,5 miljoner US dollar (tolv miljoner femhundra tusen amerikanska dollar) bör doneras till någon lycklig individuell filantrop eller välgörenhetsorganisation utomlands.
 
-Best Regards,
-Mr. Joon-Kyu Lim
-Al Faisaliah Group (AFG)
-Venture Capital & Private Investors
+Zenith Bank Abp är en överenskommelse med sena Michael Blair om att donera fonden till alla lyckliga individer i Amerika, Europa, Asien och Afrika i andra för att förbättra liv och företag
 
---
-*This email and any attachments are intended for the named recipients only
-and contain confidential materials. Any unauthorized copying, reviewing,
-dissemination or other use by anyone other than the named recipients of
-this communication is strictly prohibited. If you received this email in
-error and/or are not a named recipient, please notify the sender (Al
-Faisaliah Group) and delete all copies of this email. Thank you.
+Vi har gjort vårt slumpmässiga drag och din e-postadress valdes för att ta emot denna fond som mottagare av hans testament. Vänligen snälla tillbaka till mig
+så snart du har fått vårt e-postmeddelande för att aktivera överföringen
+Operationen riktar dig till vad du ska göra för att få denna fond lagligen.
+
+Du rekommenderas att ta med följande nedan:
+
+FULLSTÄNDIGA NAMN:
+
+FULL KONTAKTADRESS:
+
+TELEFON- OCH FAXNUMMER:
+
+Med vänliga hälsningar,
+Mr.WEHNER DAVID M.
+Chef, internationell överföringsoperation
+Zenith Bank (UK) Abp
