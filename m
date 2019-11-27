@@ -2,87 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0860010ABF7
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Nov 2019 09:43:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D345D10AD17
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Nov 2019 11:00:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726696AbfK0InL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 Nov 2019 03:43:11 -0500
-Received: from baptiste.telenet-ops.be ([195.130.132.51]:52844 "EHLO
-        baptiste.telenet-ops.be" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726985AbfK0InK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Nov 2019 03:43:10 -0500
-Received: from ramsan ([84.195.182.253])
-        by baptiste.telenet-ops.be with bizsmtp
-        id Wwiu2100b5USYZQ01wiua4; Wed, 27 Nov 2019 09:43:09 +0100
-Received: from rox.of.borg ([192.168.97.57])
-        by ramsan with esmtp (Exim 4.90_1)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1iZsuU-0000xw-RV; Wed, 27 Nov 2019 09:42:54 +0100
-Received: from geert by rox.of.borg with local (Exim 4.90_1)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1iZsuU-0004PA-P7; Wed, 27 Nov 2019 09:42:54 +0100
-From:   Geert Uytterhoeven <geert+renesas@glider.be>
-To:     Linus Walleij <linus.walleij@linaro.org>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Rob Herring <robh+dt@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Harish Jenny K N <harish_kandiga@mentor.com>,
-        Eugeniu Rosca <erosca@de.adit-jv.com>
-Cc:     Alexander Graf <graf@amazon.com>,
-        Peter Maydell <peter.maydell@linaro.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Phil Reid <preid@electromag.com.au>,
-        Marc Zyngier <marc.zyngier@arm.com>,
-        Christoffer Dall <christoffer.dall@arm.com>,
-        Magnus Damm <magnus.damm@gmail.com>,
-        linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
-        devicetree@vger.kernel.org, linux-renesas-soc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, qemu-devel@nongnu.org,
-        Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: [PATCH v3 7/7] MAINTAINERS: Add GPIO Aggregator/Repeater section
-Date:   Wed, 27 Nov 2019 09:42:53 +0100
-Message-Id: <20191127084253.16356-8-geert+renesas@glider.be>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191127084253.16356-1-geert+renesas@glider.be>
-References: <20191127084253.16356-1-geert+renesas@glider.be>
+        id S1726282AbfK0KAw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Nov 2019 05:00:52 -0500
+Received: from mx2.suse.de ([195.135.220.15]:60146 "EHLO mx1.suse.de"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726143AbfK0KAw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 27 Nov 2019 05:00:52 -0500
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx1.suse.de (Postfix) with ESMTP id 3A3F3B286;
+        Wed, 27 Nov 2019 10:00:50 +0000 (UTC)
+Date:   Wed, 27 Nov 2019 10:00:46 +0000
+From:   Mel Gorman <mgorman@suse.de>
+To:     ?????? <yun.wang@linux.alibaba.com>
+Cc:     Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Iurii Zaikin <yzaikin@google.com>,
+        Michal Koutn? <mkoutny@suse.com>,
+        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org,
+        "Paul E. McKenney" <paulmck@linux.ibm.com>
+Subject: Re: [PATCH v2 2/3] sched/numa: expose per-task
+ pages-migration-failure
+Message-ID: <20191127100046.GM28938@suse.de>
+References: <743eecad-9556-a241-546b-c8a66339840e@linux.alibaba.com>
+ <207ef46c-672c-27c8-2012-735bd692a6de@linux.alibaba.com>
+ <3931bf05-2939-0499-7660-8cc9a6f71c9a@linux.alibaba.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=iso-8859-15
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <3931bf05-2939-0499-7660-8cc9a6f71c9a@linux.alibaba.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a maintainership section for the GPIO Aggregator/Repeater, covering
-documentation, Device Tree bindings, and driver source code.
+On Wed, Nov 27, 2019 at 09:50:01AM +0800, ?????? wrote:
+> NUMA balancing will try to migrate pages between nodes, which
+> could caused by memory policy or numa group aggregation, while
+> the page migration could failed too for eg when the target node
+> run out of memory.
+> 
+> Since this is critical to the performance, admin should know
+> how serious the problem is, and take actions before it causing
+> too much performance damage, thus this patch expose the counter
+> as 'migfailed' in '/proc/PID/sched'.
+> 
+> Cc: Peter Zijlstra <peterz@infradead.org>
+> Cc: Michal Koutný <mkoutny@suse.com>
+> Suggested-by: Mel Gorman <mgorman@suse.de>
+> Signed-off-by: Michael Wang <yun.wang@linux.alibaba.com>
 
-Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
----
-Harish: Do you want to be listed as maintainer, too?
+This patch can be treated independently of the rest of the series as
+it's not directly related.
 
-v3:
-  - New.
----
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
+Acked-by: Mel Gorman <mgorman@suse.de>
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index e5949b6827b72f2b..0f12ebdaa8faa76b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -7043,6 +7043,14 @@ S:	Maintained
- F:	Documentation/firmware-guide/acpi/gpio-properties.rst
- F:	drivers/gpio/gpiolib-acpi.c
- 
-+GPIO AGGREGATOR/REPEATER
-+M:	Geert Uytterhoeven <geert+renesas@glider.be>
-+L:	linux-gpio@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/admin-guide/gpio/gpio-aggregator.rst
-+F:	Documentation/devicetree/bindings/gpio/gpio-repeater.yaml
-+F:	drivers/gpio/gpio-aggregator.c
-+
- GPIO IR Transmitter
- M:	Sean Young <sean@mess.org>
- L:	linux-media@vger.kernel.org
 -- 
-2.17.1
-
+Mel Gorman
+SUSE Labs
