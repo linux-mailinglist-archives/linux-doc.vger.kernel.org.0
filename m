@@ -2,27 +2,27 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E520C10BAC4
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Nov 2019 22:07:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0400710BB60
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Nov 2019 22:13:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732076AbfK0VGa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 Nov 2019 16:06:30 -0500
-Received: from mail.kernel.org ([198.145.29.99]:60518 "EHLO mail.kernel.org"
+        id S1730531AbfK0VMA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Nov 2019 16:12:00 -0500
+Received: from mail.kernel.org ([198.145.29.99]:41542 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731941AbfK0VG2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 27 Nov 2019 16:06:28 -0500
+        id S1732807AbfK0VL7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 27 Nov 2019 16:11:59 -0500
 Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id BE14A2080F;
-        Wed, 27 Nov 2019 21:06:26 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 566F82176D;
+        Wed, 27 Nov 2019 21:11:57 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1574888787;
-        bh=+1owT5ab5x+CU8TcWONskHf6Fca/rC+NpVhtxJEsRo8=;
+        s=default; t=1574889117;
+        bh=5qMPp90pyJ9iHGpcpTcjtPuzSnCHUz2f55lGYcnWxHw=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=AVnoJFekv+LanBOioJFbeq4k78eWyIeBWlyJjKTg35nK09/ERYGVAJ2+Xx2t2liOe
-         T6r36BTjjx703bTOxOydqiRmrubF0ytdJW5shVeX2tOw41EO2gyiCo9PquuWoeUR0w
-         4xXTC8sp6LothiEFXvx4q+vyiubZRrN1NeCmkXlg=
+        b=ZyYZWY91IWTYtGzF857oVIK9ngpmsyhx+yjD18fsFieJpUgzVjjn7JgnjJdQc1xl3
+         69Fr10iV6JmlGSrmI0bjNs9mBkoEoa0whderVFAwS433F/U8Y7SM0pjU1GqLuZxbaV
+         H6f9wvu2etu/dNYFMoeUU0ihJcujQ/sTbfieEW/8=
 From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 To:     linux-kernel@vger.kernel.org
 Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -38,12 +38,12 @@ Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Tim Chen <tim.c.chen@linux.intel.com>,
         Tony Luck <tony.luck@intel.com>,
         Tyler Hicks <tyhicks@canonical.com>, x86-ml <x86@kernel.org>
-Subject: [PATCH 4.19 268/306] x86/speculation: Fix incorrect MDS/TAA mitigation status
-Date:   Wed, 27 Nov 2019 21:31:58 +0100
-Message-Id: <20191127203134.410002838@linuxfoundation.org>
+Subject: [PATCH 5.3 47/95] x86/speculation: Fix incorrect MDS/TAA mitigation status
+Date:   Wed, 27 Nov 2019 21:32:04 +0100
+Message-Id: <20191127202912.948534486@linuxfoundation.org>
 X-Mailer: git-send-email 2.24.0
-In-Reply-To: <20191127203114.766709977@linuxfoundation.org>
-References: <20191127203114.766709977@linuxfoundation.org>
+In-Reply-To: <20191127202845.651587549@linuxfoundation.org>
+References: <20191127202845.651587549@linuxfoundation.org>
 User-Agent: quilt/0.66
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -144,7 +144,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  parameter "tsx=" on CPUs which support TSX control. MSR_IA32_TSX_CTRL is used
 --- a/Documentation/admin-guide/kernel-parameters.txt
 +++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2359,6 +2359,12 @@
+@@ -2449,6 +2449,12 @@
  				     SMT on vulnerable CPUs
  			off        - Unconditionally disable MDS mitigation
  
@@ -157,7 +157,7 @@ Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
  			Not specifying this option is equivalent to
  			mds=full.
  
-@@ -4773,6 +4779,11 @@
+@@ -4896,6 +4902,11 @@
  				     vulnerable to cross-thread TAA attacks.
  			off        - Unconditionally disable TAA mitigation
  
