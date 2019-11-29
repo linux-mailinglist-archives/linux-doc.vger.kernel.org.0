@@ -2,72 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 45AAC10DA49
-	for <lists+linux-doc@lfdr.de>; Fri, 29 Nov 2019 20:59:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F35F10DA52
+	for <lists+linux-doc@lfdr.de>; Fri, 29 Nov 2019 21:00:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727107AbfK2T7s (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 29 Nov 2019 14:59:48 -0500
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:21447 "EHLO
-        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1727158AbfK2T7r (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 29 Nov 2019 14:59:47 -0500
+        id S1727192AbfK2UAD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 29 Nov 2019 15:00:03 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:46667 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1727182AbfK2T7v (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 29 Nov 2019 14:59:51 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1575057586;
+        s=mimecast20190719; t=1575057590;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:content-type:content-type:
          content-transfer-encoding:content-transfer-encoding:
          in-reply-to:in-reply-to:references:references;
-        bh=2FRKI5+6EDUKwn2QzAstv2u6dW0Q8/ilQLcz5atGxuE=;
-        b=NQANLXP30sRk0tXFB+ffKa9zZTtMQXSoaD2W8LshSl3Q7Ylv8BBiQQyfiYm5As3WuQG94s
-        EjWu+Cna3UG4FM8zBBI98tY8ctinVKFCPfpq9MWWCfP6aJUpSlsdHMw0jwCq8jFkRPaPYQ
-        HAy5Gvo5IU+QmXZfeP360nCl2HdA//s=
-Received: from mail-pg1-f198.google.com (mail-pg1-f198.google.com
- [209.85.215.198]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-64-D6Cx4IfxNTaad9ReuV8AIg-1; Fri, 29 Nov 2019 14:59:45 -0500
-Received: by mail-pg1-f198.google.com with SMTP id k10so17083156pgm.7
-        for <linux-doc@vger.kernel.org>; Fri, 29 Nov 2019 11:59:45 -0800 (PST)
+        bh=yNq9Cl1u8a4Res9gMqZVglO/lwiENzme0qL73M9MY10=;
+        b=Xn5WL/5fcfHfHYGqaCb56Nms5mGTDrFImjM5lMm9SPXQiMR8avov3MQm2U377R69ly1Wy9
+        MdemmGd+QMX7FJ0PDFZXUte1tfpdJIyVAQA55VJxFVRlm6gKm+RWhumSwxDngartSAHXsA
+        7ngXgIAdFVzheLr4v9LmUhyKoV3PdIU=
+Received: from mail-pg1-f200.google.com (mail-pg1-f200.google.com
+ [209.85.215.200]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-259-gntmA8q3Mpmt9vvyufy6bw-1; Fri, 29 Nov 2019 14:59:49 -0500
+Received: by mail-pg1-f200.google.com with SMTP id p188so17081381pgp.15
+        for <linux-doc@vger.kernel.org>; Fri, 29 Nov 2019 11:59:48 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references;
-        bh=BgAr5VVOQXh1yien5qVgdgmIL5RHbScoYGF2ala0/ak=;
-        b=d2B7s+7iuL/Tse+jSUz64XKcZM1Q5nB6c9NjFnx5Qp2oCkyBPmnUeQSwplwY7matkI
-         LZosGcxcx31eD1/7Z4fVGmq3zX9lTCH81wjwKu4GFg7O4X0p2+uZWRSIB2+z6HJ37qdK
-         BLZkAoFBgxhg3g4tbzTqTWASLfAzBpQbaUHp53pO7AHFZrpQQkKdKDSnpsiovSRu/Lyn
-         6Ameio71cYtPBObQM41HErzJHmapvTVTQUxRP9rLPBQ1fKk7E9YE8LldDkdNsgTl+0LL
-         Y/QnXBMcQEiXyS+FHgv5m/6STLbXSVQMQH5JBVoFMk069IuQyK+bTjYExSRmvy4lAatt
-         1Hug==
-X-Gm-Message-State: APjAAAUQgZ8KuCOC695q0mq8Iv74bCtSSv/pszhetUyuFSDI4D0N3iRe
-        KlymBCIEC7RJ9M+1HXq/A+8k1DwZVBhlac4+z3s0Z+Y+gg98fZcMDPeD6OYRLegavyrR9qqKImw
-        Z6k4TiizEfbd/NlvojY+s
-X-Received: by 2002:a17:90a:fb53:: with SMTP id iq19mr20314623pjb.138.1575057584293;
-        Fri, 29 Nov 2019 11:59:44 -0800 (PST)
-X-Google-Smtp-Source: APXvYqz4gnI9c2bYrtjkLwMhPYvWHvZw+YasEX6lAkryf7HpqeVi2n8s5GR/Ai2re8lnbcSS3E4aLw==
-X-Received: by 2002:a17:90a:fb53:: with SMTP id iq19mr20314608pjb.138.1575057584113;
-        Fri, 29 Nov 2019 11:59:44 -0800 (PST)
+        bh=EGXp9xk2iujKm5hWzUI7x5fii/ZV0bMMwslmLu+YaOk=;
+        b=h23cwuQAUQKCCGvvu+czCyqi4nhLqOuZxohoQ8IVWeD+UZ4JNl18pV33l75T019SFf
+         +StEfDY2QgBSf9INhXPS3QBYzLScVardKPKXwZdkKTr7pNMn/tUZziA/tlJnLqZaegTf
+         QRDijr3SEVH+lKZxTF0Gl2sQT4p0TrRShgiw49mZKiN1Dy4936zg3QjfOkk0YrgPcpB9
+         Wcz3XhihGcvhoMGM0M3OCgumR3Wk+an9ym5qSA3y8NKMg4oNMTaWhBVfsMmOMjl66vVq
+         9FsYV5i476akMonBDqWUpI6nuPYvoIORgyy4nxhhaxtFhEY+pB3PeTbFDYBLFRK0PJDA
+         dvDQ==
+X-Gm-Message-State: APjAAAV4nk3xA0biPvlYJhjqXNYpkwjfIxUitXqFhwofdiR23SxY+kj0
+        aGBg7bbTyrzc0lKcIyA4E95P5tJSS7kN/q3F4T6HFhMdRV/Oc/HGuEyOs9n6JxtQLV6pCOcSLGi
+        iGOnVDbA5vLPHgMHrpHqD
+X-Received: by 2002:a17:90a:dc81:: with SMTP id j1mr3729522pjv.29.1575057588119;
+        Fri, 29 Nov 2019 11:59:48 -0800 (PST)
+X-Google-Smtp-Source: APXvYqxPVcE/XW8sUFbfhtiOj/O3Z62tRbLgdRo5GLkRP1HykyImTD8scVfMGcKn/WmLBQBtuJQ40Q==
+X-Received: by 2002:a17:90a:dc81:: with SMTP id j1mr3729508pjv.29.1575057587944;
+        Fri, 29 Nov 2019 11:59:47 -0800 (PST)
 Received: from localhost ([122.177.85.74])
-        by smtp.gmail.com with ESMTPSA id 67sm15725427pfw.82.2019.11.29.11.59.42
+        by smtp.gmail.com with ESMTPSA id 67sm15725516pfw.82.2019.11.29.11.59.46
         (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 29 Nov 2019 11:59:43 -0800 (PST)
+        Fri, 29 Nov 2019 11:59:47 -0800 (PST)
 From:   Bhupesh Sharma <bhsharma@redhat.com>
 To:     linux-kernel@vger.kernel.org
 Cc:     bhsharma@redhat.com, bhupesh.linux@gmail.com, x86@kernel.org,
         linuxppc-dev@lists.ozlabs.org,
         linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        kexec@lists.infradead.org, Jonathan Corbet <corbet@lwn.net>,
+        kexec@lists.infradead.org, Boris Petkov <bp@alien8.de>,
+        Ingo Molnar <mingo@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
         James Morse <james.morse@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Steve Capper <steve.capper@arm.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Ard Biesheuvel <ard.biesheuvel@linaro.org>
-Subject: [RESEND PATCH v5 3/5] Documentation/arm64: Fix a simple typo in memory.rst
-Date:   Sat, 30 Nov 2019 01:29:17 +0530
-Message-Id: <1575057559-25496-4-git-send-email-bhsharma@redhat.com>
+        Will Deacon <will.deacon@arm.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Paul Mackerras <paulus@samba.org>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Dave Anderson <anderson@redhat.com>,
+        Kazuhito Hagio <k-hagio@ab.jp.nec.com>
+Subject: [RESEND PATCH v5 4/5] Documentation/vmcoreinfo: Add documentation for 'MAX_PHYSMEM_BITS'
+Date:   Sat, 30 Nov 2019 01:29:18 +0530
+Message-Id: <1575057559-25496-5-git-send-email-bhsharma@redhat.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1575057559-25496-1-git-send-email-bhsharma@redhat.com>
 References: <1575057559-25496-1-git-send-email-bhsharma@redhat.com>
-X-MC-Unique: D6Cx4IfxNTaad9ReuV8AIg-1
+X-MC-Unique: gntmA8q3Mpmt9vvyufy6bw-1
 X-Mimecast-Spam-Score: 0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: quoted-printable
@@ -76,37 +79,50 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Fix a simple typo in arm64/memory.rst
+Add documentation for 'MAX_PHYSMEM_BITS' variable being added to
+vmcoreinfo.
 
-Cc: Jonathan Corbet <corbet@lwn.net>
+'MAX_PHYSMEM_BITS' defines the maximum supported physical address
+space memory.
+
+Cc: Boris Petkov <bp@alien8.de>
+Cc: Ingo Molnar <mingo@kernel.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
 Cc: James Morse <james.morse@arm.com>
-Cc: Mark Rutland <mark.rutland@arm.com>
-Cc: Will Deacon <will@kernel.org>
-Cc: Steve Capper <steve.capper@arm.com>
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Ard Biesheuvel <ard.biesheuvel@linaro.org>
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
+Cc: Will Deacon <will.deacon@arm.com>
+Cc: Michael Ellerman <mpe@ellerman.id.au>
+Cc: Paul Mackerras <paulus@samba.org>
+Cc: Benjamin Herrenschmidt <benh@kernel.crashing.org>
+Cc: Dave Anderson <anderson@redhat.com>
+Cc: Kazuhito Hagio <k-hagio@ab.jp.nec.com>
+Cc: x86@kernel.org
+Cc: linuxppc-dev@lists.ozlabs.org
 Cc: linux-arm-kernel@lists.infradead.org
+Cc: linux-kernel@vger.kernel.org
+Cc: kexec@lists.infradead.org
 Signed-off-by: Bhupesh Sharma <bhsharma@redhat.com>
 ---
- Documentation/arm64/memory.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/admin-guide/kdump/vmcoreinfo.rst | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/Documentation/arm64/memory.rst b/Documentation/arm64/memory.rs=
-t
-index 02e02175e6f5..cf03b3290800 100644
---- a/Documentation/arm64/memory.rst
-+++ b/Documentation/arm64/memory.rst
-@@ -129,7 +129,7 @@ this logic.
+diff --git a/Documentation/admin-guide/kdump/vmcoreinfo.rst b/Documentation=
+/admin-guide/kdump/vmcoreinfo.rst
+index 007a6b86e0ee..447b64314f56 100644
+--- a/Documentation/admin-guide/kdump/vmcoreinfo.rst
++++ b/Documentation/admin-guide/kdump/vmcoreinfo.rst
+@@ -93,6 +93,11 @@ It exists in the sparse memory mapping model, and it is =
+also somewhat
+ similar to the mem_map variable, both of them are used to translate an
+ address.
 =20
- As a single binary will need to support both 48-bit and 52-bit VA
- spaces, the VMEMMAP must be sized large enough for 52-bit VAs and
--also must be sized large enought to accommodate a fixed PAGE_OFFSET.
-+also must be sized large enough to accommodate a fixed PAGE_OFFSET.
++MAX_PHYSMEM_BITS
++----------------
++
++Defines the maximum supported physical address space memory.
++
+ page
+ ----
 =20
- Most code in the kernel should not need to consider the VA_BITS, for
- code that does need to know the VA size the variables are
 --=20
 2.7.4
 
