@@ -2,89 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D75E210E2DF
-	for <lists+linux-doc@lfdr.de>; Sun,  1 Dec 2019 19:16:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 45C4510E34C
+	for <lists+linux-doc@lfdr.de>; Sun,  1 Dec 2019 20:17:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727297AbfLASQM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 1 Dec 2019 13:16:12 -0500
-Received: from mtax.cdmx.gob.mx ([187.141.35.197]:15297 "EHLO mtax.cdmx.gob.mx"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727296AbfLASQL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 1 Dec 2019 13:16:11 -0500
-X-Greylist: delayed 6386 seconds by postgrey-1.27 at vger.kernel.org; Sun, 01 Dec 2019 13:16:10 EST
-X-NAI-Header: Modified by McAfee Email Gateway (4500)
+        id S1727332AbfLATG2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 1 Dec 2019 14:06:28 -0500
+Received: from mail-qk1-f193.google.com ([209.85.222.193]:33122 "EHLO
+        mail-qk1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726965AbfLATG2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 1 Dec 2019 14:06:28 -0500
+Received: by mail-qk1-f193.google.com with SMTP id c124so26006707qkg.0
+        for <linux-doc@vger.kernel.org>; Sun, 01 Dec 2019 11:06:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cdmx.gob.mx; s=72359050-3965-11E6-920A-0192F7A2F08E;
-        t=1575217563; h=DKIM-Filter:X-Virus-Scanned:
-         Content-Type:MIME-Version:Content-Transfer-Encoding:
-         Content-Description:Subject:To:From:Date:Message-Id:
-         X-AnalysisOut:X-AnalysisOut:X-AnalysisOut:
-         X-AnalysisOut:X-AnalysisOut:X-SAAS-TrackingID:
-         X-NAI-Spam-Flag:X-NAI-Spam-Threshold:X-NAI-Spam-Score:
-         X-NAI-Spam-Rules:X-NAI-Spam-Version; bh=M
-        8rWdUYQ57RAYAgTWJQ4Rsch0kO0UXllaAVDzocOs4
-        8=; b=gdGvDiNUKiUhilfj4ftj21FaCYGQYX8q7FNvKplgkaPj
-        MclqfAugOxvgInLV/270KWG+vqemlr2xO+f6X4+9iFSsz7h3U4
-        GWBads6s3rlMD6Xhtx0Tz/G9q1LtwMJTuciz56UoGrt6L/7XGd
-        C/aSolCvQj6X2BOmbA6h3OLSY6Y=
-Received: from cdmx.gob.mx (correo.cdmx.gob.mx [10.250.108.150]) by mtax.cdmx.gob.mx with smtp
-        (TLS: TLSv1/SSLv3,256bits,ECDHE-RSA-AES256-GCM-SHA384)
-         id 28cd_468d_6594afac_edb4_45b9_aed5_ec2a71494602;
-        Sun, 01 Dec 2019 10:26:02 -0600
-Received: from localhost (localhost [127.0.0.1])
-        by cdmx.gob.mx (Postfix) with ESMTP id 4DE351E2830;
-        Sun,  1 Dec 2019 10:18:01 -0600 (CST)
-Received: from cdmx.gob.mx ([127.0.0.1])
-        by localhost (cdmx.gob.mx [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id Kpa1fxuy2Y4E; Sun,  1 Dec 2019 10:18:01 -0600 (CST)
-Received: from localhost (localhost [127.0.0.1])
-        by cdmx.gob.mx (Postfix) with ESMTP id 13F411E27CC;
-        Sun,  1 Dec 2019 10:12:52 -0600 (CST)
-DKIM-Filter: OpenDKIM Filter v2.9.2 cdmx.gob.mx 13F411E27CC
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cdmx.gob.mx;
-        s=72359050-3965-11E6-920A-0192F7A2F08E; t=1575216772;
-        bh=M8rWdUYQ57RAYAgTWJQ4Rsch0kO0UXllaAVDzocOs48=;
-        h=Content-Type:MIME-Version:Content-Transfer-Encoding:Subject:To:
-         From:Date:Message-Id;
-        b=ggUkghrfP/xQbNONi1s3Pjb+pHbQMDmrw0t6hdMqCHw0/MDTWJIm42Sjw92OKXN0c
-         M6ZXyWcNIz0w1dmNEkIDzaVw/UsKiSZDdHn0lPtukMScrNfB1A8IYfjWgXlCrP8hB8
-         Yhen5lx9qYVf9rhCSzBTL4aWQMRr62M3wiKyG0Rk=
-X-Virus-Scanned: amavisd-new at cdmx.gob.mx
-Received: from cdmx.gob.mx ([127.0.0.1])
-        by localhost (cdmx.gob.mx [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id 0ZkBS3VzSp8w; Sun,  1 Dec 2019 10:12:52 -0600 (CST)
-Received: from [192.168.0.104] (unknown [188.125.168.160])
-        by cdmx.gob.mx (Postfix) with ESMTPSA id E73301E269F;
-        Sun,  1 Dec 2019 10:03:46 -0600 (CST)
-Content-Type: text/plain; charset="iso-8859-1"
+        d=jonmasters-org.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:organization:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=MYJMRHaiXc+sf5WEZ2y2GPKTcfT0mAf/egNeoJkGqUk=;
+        b=jwOVcGbncaHcFffRkMA7LE9/UEhFUaIT8HSLGGQg6lzBye14j5BgANn42w4XkkyUfV
+         ZOeYTUI0Dd3YuYKHFmy8XJ288eAiat5tF1T/Annsj7YQszO0ng4s3PnYNlcc6EvK8Mst
+         nsUxYHAo+BA5vFB6wpkDCkxk7TWJ8NevfsWgUFUPHAht5Wo6CiF4uhiBp8edAwy1OiuX
+         S1Jd1DrmUKk4BtedkskZETWYwSznYKzddZWM91onELxBhwwxx64JfrvTFsVTo8CLYBUB
+         zeMcq1mqFwHppbPvN09508FJp8LjKrr8nCXj4xoCiyXtevuoR+S4h+dA+WQi+mdQEGob
+         fBEg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:organization
+         :message-id:date:user-agent:mime-version:in-reply-to
+         :content-language:content-transfer-encoding;
+        bh=MYJMRHaiXc+sf5WEZ2y2GPKTcfT0mAf/egNeoJkGqUk=;
+        b=Jq30SbkE6K481bN5DlSaPtUwuhVNYhV+KCaaRUELptGPdf9Ej+vBA82ATusiZrXTeq
+         s60uA6N4jiNQKPSKsMb+V7ki5TKpHoHinlgf0/MpoHl6M+6Rr9S2LdItcXDXM8sXx3qO
+         /h4eiUWeXyCGDG2EL6grQH7GfYQ313f28Obt/gZbgEPPyBZC+KH0eSw+86FM0a4MlJuC
+         sn9aV1QJn8wzOVfwH/V6hCEhIhyCppvhRKjG8pdtKSlZDg3rgeCxZEcqjHBMN7hjsfVj
+         r1d7TA5y+vyIAKPwfiAr0WEFDxTGvEXJvEkmsPQGDWcPFyENViQrkgvuPO51Yq9jXnTV
+         rFkg==
+X-Gm-Message-State: APjAAAVrA3uAdQ5SUFhBl8Cew+kf8iJCxH4xp06eeIzT8hFuaovEu6bK
+        KqJ0wnGUj4mGKyEiTBklTLsGrA==
+X-Google-Smtp-Source: APXvYqxQytCbo+98XXQij13g03gGpSRogXBmEDaQ9V4RHLtJy49OLvXxEnE89dRmw7RtqJlp/u3SRg==
+X-Received: by 2002:a05:620a:16a4:: with SMTP id s4mr5994651qkj.488.1575227185774;
+        Sun, 01 Dec 2019 11:06:25 -0800 (PST)
+Received: from independence.bos.jonmasters.org (24-148-33-89.s2391.c3-0.grn-cbr1.chi-grn.il.cable.rcncustomer.com. [24.148.33.89])
+        by smtp.gmail.com with ESMTPSA id k123sm6414644qkd.4.2019.12.01.11.06.24
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 01 Dec 2019 11:06:25 -0800 (PST)
+Subject: Re: [PATCH 0/2] arm64: Introduce boot parameter to disable TLB flush
+ instruction within the same inner shareable domain
+To:     Will Deacon <will@kernel.org>,
+        "qi.fuli@fujitsu.com" <qi.fuli@fujitsu.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will.deacon@arm.com>,
+        Itaru Kitayama <itaru.kitayama@gmail.com>,
+        "peterz@infradead.org" <peterz@infradead.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "indou.takao@fujitsu.com" <indou.takao@fujitsu.com>,
+        "maeda.naoaki@fujitsu.com" <maeda.naoaki@fujitsu.com>,
+        "misono.tomohiro@fujitsu.com" <misono.tomohiro@fujitsu.com>,
+        "tokamoto@jp.fujitsu.com" <tokamoto@jp.fujitsu.com>
+References: <20190617143255.10462-1-indou.takao@jp.fujitsu.com>
+ <93009dbd-b31c-7364-86d2-21f0fac36676@jp.fujitsu.com>
+ <20191101172851.GC3983@willie-the-truck>
+From:   Jon Masters <jcm@jonmasters.org>
+Organization: World Organi{s,z}ation of Broken Dreams
+Message-ID: <a06ae400-29b2-d88f-af48-deafd7e355fe@jonmasters.org>
+Date:   Sun, 1 Dec 2019 11:02:42 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: Congratulations
-To:     Recipients <aac-styfe@cdmx.gob.mx>
-From:   "Bishop Johnr" <aac-styfe@cdmx.gob.mx>
-Date:   Sun, 01 Dec 2019 17:03:38 +0100
-Message-Id: <20191201160346.E73301E269F@cdmx.gob.mx>
-X-AnalysisOut: [v=2.2 cv=U7TiNaju c=1 sm=1 tr=0 p=6K-Ig8iNAUou4E5wYCEA:9 p]
-X-AnalysisOut: [=zRI05YRXt28A:10 a=T6zFoIZ12MK39YzkfxrL7A==:117 a=9152RP8M]
-X-AnalysisOut: [6GQqDhC/mI/QXQ==:17 a=8nJEP1OIZ-IA:10 a=pxVhFHJ0LMsA:10 a=]
-X-AnalysisOut: [pGLkceISAAAA:8 a=wPNLvfGTeEIA:10 a=M8O0W8wq6qAA:10 a=Ygvjr]
-X-AnalysisOut: [iKHvHXA2FhpO6d-:22]
-X-SAAS-TrackingID: 899e3ed5.0.104999800.00-2374.176568161.s12p02m005.mxlogic.net
-X-NAI-Spam-Flag: NO
-X-NAI-Spam-Threshold: 3
-X-NAI-Spam-Score: -5000
-X-NAI-Spam-Rules: 1 Rules triggered
-        WHITELISTED=-5000
-X-NAI-Spam-Version: 2.3.0.9418 : core <6686> : inlines <7165> : streams
- <1840193> : uri <2949749>
+In-Reply-To: <20191101172851.GC3983@willie-the-truck>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Money was donated to you by Mr and Mrs Allen and Violet Large, just contact=
- them with this email for more information =
+On 11/1/19 1:28 PM, Will Deacon wrote:
 
+> On Fri, Nov 01, 2019 at 09:56:05AM +0000, qi.fuli@fujitsu.com wrote:
 
-EMail: allenandvioletlargeaward@gmail.com
+>> In this thread, I explained that:
+>> * I found a performance problem which is caused by TLBI-is instruction.
+>> * The problem occurs like this:
+>>    1) On a core, OS tries to flush TLB using TLBI-is instruction
+>>    2) TLBI-is instruction causes a broadcast to all other cores, and
+>>    each core received hard-wired signal
+>>    3) Each core check if there are TLB entries which have the specified
+>> ASID/VA
+
+(the above confuses implementation with architecture)
+
+<snip>
+
+> I think it's worth bearing in mind that I have little sympathy for the
+> problem that you are seeing. As far as I can tell, you've done the
+> following:
+> 
+>    1. You designed a CPU micro-architecture that stalls whenever it receives
+>       a TLB invalidation request.
+
+s/SPARC/Arm/ && wire in DVM
+
+>    2. You integrated said CPU design into a system where broadcast TLB
+>       invalidation is not filtered and therefore stalls every CPU every
+>       time that /any/ TLB invalidation is broadcast.
+> 
+>    3. You deployed a mixture of Linux and jitter-sensitive software on
+>       this system, and now you're failing to meet your performance
+>       requirements.
+> 
+> Have I got that right?
+> 
+> If so, given that your CPU design isn't widely available, nobody else
+> appears to have made this mistake and jitter hasn't been reported as an
+> issue for any other systems, it's very unlikely that we're going to make
+> invasive upstream kernel changes to support you. I'm sorry, but all I can
+> suggest is that you check that your micro-architecture and performance
+> requirements are aligned with the design of Linux *before* building another
+> machine like this in future.
+> 
+> I hate to be blunt, but I also don't want to waste your time.
+
+I always tried to ask nicely for the above to be heeded. There's a 
+difference between "hi, our implementation doesn't scale, and here's 
+why" vs "there's a problem with all TLBIs...". There isn't. The problem 
+is the implementation and that should have been called out first thing.
+
+Jon.
+
+-- 
+Computer Architect
