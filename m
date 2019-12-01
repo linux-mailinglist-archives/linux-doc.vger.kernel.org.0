@@ -2,138 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 45C4510E34C
-	for <lists+linux-doc@lfdr.de>; Sun,  1 Dec 2019 20:17:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CB0E810E3E8
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2019 00:26:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727332AbfLATG2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 1 Dec 2019 14:06:28 -0500
-Received: from mail-qk1-f193.google.com ([209.85.222.193]:33122 "EHLO
-        mail-qk1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726965AbfLATG2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 1 Dec 2019 14:06:28 -0500
-Received: by mail-qk1-f193.google.com with SMTP id c124so26006707qkg.0
-        for <linux-doc@vger.kernel.org>; Sun, 01 Dec 2019 11:06:26 -0800 (PST)
+        id S1727326AbfLAXZq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 1 Dec 2019 18:25:46 -0500
+Received: from mail-wm1-f54.google.com ([209.85.128.54]:38618 "EHLO
+        mail-wm1-f54.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727279AbfLAXZp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 1 Dec 2019 18:25:45 -0500
+Received: by mail-wm1-f54.google.com with SMTP id p17so8261897wmi.3;
+        Sun, 01 Dec 2019 15:25:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=jonmasters-org.20150623.gappssmtp.com; s=20150623;
-        h=subject:to:cc:references:from:organization:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=MYJMRHaiXc+sf5WEZ2y2GPKTcfT0mAf/egNeoJkGqUk=;
-        b=jwOVcGbncaHcFffRkMA7LE9/UEhFUaIT8HSLGGQg6lzBye14j5BgANn42w4XkkyUfV
-         ZOeYTUI0Dd3YuYKHFmy8XJ288eAiat5tF1T/Annsj7YQszO0ng4s3PnYNlcc6EvK8Mst
-         nsUxYHAo+BA5vFB6wpkDCkxk7TWJ8NevfsWgUFUPHAht5Wo6CiF4uhiBp8edAwy1OiuX
-         S1Jd1DrmUKk4BtedkskZETWYwSznYKzddZWM91onELxBhwwxx64JfrvTFsVTo8CLYBUB
-         zeMcq1mqFwHppbPvN09508FJp8LjKrr8nCXj4xoCiyXtevuoR+S4h+dA+WQi+mdQEGob
-         fBEg==
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=Nuine0dlwsDQb9vcAljbjPYMQNC3YRYMqCbVc0zfEfo=;
+        b=jvxkMi5Kn4oGzit1SjsXgIDBxGmAVjJbbDnAthzS3xLLr74s46jPUI8/PzOdq8iXo3
+         7ALDzp3JXWLhdaoY2Nht6T9HElNYGSllyYUlwvLsy3On+SqGenz4fW0j5pcMv3Ed1FbI
+         5igThj61ZbJ6TulNcFnk8xoS0i1jKHt9jAeABjcrjLiuW/4AkR3XJB1DE8zZLUlUIWYl
+         R8N0hfTrtgRjfFJUM7JU7XnYqEGJlscKaQQIufYZI9AHV1cC5YGsMkUK6FZK9/PZp4wW
+         ZqaSQyjuF4Oi0XssAs4JCXF/NuZrgbXRg/nTSNTMA/NNhrSOfOWLm8IWwIvbmu6IuDAS
+         Qi7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:organization
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=MYJMRHaiXc+sf5WEZ2y2GPKTcfT0mAf/egNeoJkGqUk=;
-        b=Jq30SbkE6K481bN5DlSaPtUwuhVNYhV+KCaaRUELptGPdf9Ej+vBA82ATusiZrXTeq
-         s60uA6N4jiNQKPSKsMb+V7ki5TKpHoHinlgf0/MpoHl6M+6Rr9S2LdItcXDXM8sXx3qO
-         /h4eiUWeXyCGDG2EL6grQH7GfYQ313f28Obt/gZbgEPPyBZC+KH0eSw+86FM0a4MlJuC
-         sn9aV1QJn8wzOVfwH/V6hCEhIhyCppvhRKjG8pdtKSlZDg3rgeCxZEcqjHBMN7hjsfVj
-         r1d7TA5y+vyIAKPwfiAr0WEFDxTGvEXJvEkmsPQGDWcPFyENViQrkgvuPO51Yq9jXnTV
-         rFkg==
-X-Gm-Message-State: APjAAAVrA3uAdQ5SUFhBl8Cew+kf8iJCxH4xp06eeIzT8hFuaovEu6bK
-        KqJ0wnGUj4mGKyEiTBklTLsGrA==
-X-Google-Smtp-Source: APXvYqxQytCbo+98XXQij13g03gGpSRogXBmEDaQ9V4RHLtJy49OLvXxEnE89dRmw7RtqJlp/u3SRg==
-X-Received: by 2002:a05:620a:16a4:: with SMTP id s4mr5994651qkj.488.1575227185774;
-        Sun, 01 Dec 2019 11:06:25 -0800 (PST)
-Received: from independence.bos.jonmasters.org (24-148-33-89.s2391.c3-0.grn-cbr1.chi-grn.il.cable.rcncustomer.com. [24.148.33.89])
-        by smtp.gmail.com with ESMTPSA id k123sm6414644qkd.4.2019.12.01.11.06.24
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 01 Dec 2019 11:06:25 -0800 (PST)
-Subject: Re: [PATCH 0/2] arm64: Introduce boot parameter to disable TLB flush
- instruction within the same inner shareable domain
-To:     Will Deacon <will@kernel.org>,
-        "qi.fuli@fujitsu.com" <qi.fuli@fujitsu.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will.deacon@arm.com>,
-        Itaru Kitayama <itaru.kitayama@gmail.com>,
-        "peterz@infradead.org" <peterz@infradead.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        "indou.takao@fujitsu.com" <indou.takao@fujitsu.com>,
-        "maeda.naoaki@fujitsu.com" <maeda.naoaki@fujitsu.com>,
-        "misono.tomohiro@fujitsu.com" <misono.tomohiro@fujitsu.com>,
-        "tokamoto@jp.fujitsu.com" <tokamoto@jp.fujitsu.com>
-References: <20190617143255.10462-1-indou.takao@jp.fujitsu.com>
- <93009dbd-b31c-7364-86d2-21f0fac36676@jp.fujitsu.com>
- <20191101172851.GC3983@willie-the-truck>
-From:   Jon Masters <jcm@jonmasters.org>
-Organization: World Organi{s,z}ation of Broken Dreams
-Message-ID: <a06ae400-29b2-d88f-af48-deafd7e355fe@jonmasters.org>
-Date:   Sun, 1 Dec 2019 11:02:42 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <20191101172851.GC3983@willie-the-truck>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=Nuine0dlwsDQb9vcAljbjPYMQNC3YRYMqCbVc0zfEfo=;
+        b=aBCzUcMgk3T71aMiU+1I7mYyFoKHJGRsAW1hLKtqjWzbjHI0Q2ax8YlEyqJPDAnXvG
+         xQk7hROJsOU0Jzp1MFYZ9jLl82wyzovS8qrxombMDnQJN7OIflWAB9/wiJw35dbTEMV4
+         O1+fPgIHCJENN+2IigZJq8HDxQxn0sWwooW73tl+GIMdm20dZSecQgAvjnsswvr8WhYl
+         n065kuF7SGvMCTbQ+nltsb1GaFhR+/oLZW/DLwNOAQo1Tfu1Sb6wu258StxthopgtQzt
+         1rBUgeMBQQ1BlzQBaqDcdmIw8qlCxX5nISDCXj5U6oRoPLJmVI0F90j/T1/wZaNBJ5PU
+         tK7w==
+X-Gm-Message-State: APjAAAV9yEs+ldo9GgBCoSb3bNobv5eIMd9D+Q5HBjYhstH5wS+3ChTn
+        Pxh0b8+LGj+KVPyiXDRpiR8=
+X-Google-Smtp-Source: APXvYqwiRSldoFbS1BRUYFG/Ss97kQu4OFo0/z31SQvh9IRKY72Mt9G86SXcMG6D1EQoXjJLDlfFCg==
+X-Received: by 2002:a1c:f610:: with SMTP id w16mr7218543wmc.34.1575242741560;
+        Sun, 01 Dec 2019 15:25:41 -0800 (PST)
+Received: from localhost.localdomain (cable-86-56-100-90.cust.telecolumbus.net. [86.56.100.90])
+        by smtp.gmail.com with ESMTPSA id y6sm37450454wrl.17.2019.12.01.15.25.40
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+        Sun, 01 Dec 2019 15:25:40 -0800 (PST)
+From:   SeongJae Park <sj38.park@gmail.com>
+To:     brendanhiggins@google.com, shuah@kernel.org
+Cc:     corbet@lwn.net, linux-kselftest@vger.kernel.org,
+        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, SeongJae Park <sjpark@amazon.de>
+Subject: [PATCH 0/6] Fix nits in the kunit
+Date:   Mon,  2 Dec 2019 08:25:18 +0900
+Message-Id: <1575242724-4937-1-git-send-email-sj38.park@gmail.com>
+X-Mailer: git-send-email 2.7.4
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11/1/19 1:28 PM, Will Deacon wrote:
+From: SeongJae Park <sjpark@amazon.de>
 
-> On Fri, Nov 01, 2019 at 09:56:05AM +0000, qi.fuli@fujitsu.com wrote:
+This patchset contains trivial fixes for the kunit documentations and the
+wrapper python scripts.
 
->> In this thread, I explained that:
->> * I found a performance problem which is caused by TLBI-is instruction.
->> * The problem occurs like this:
->>    1) On a core, OS tries to flush TLB using TLBI-is instruction
->>    2) TLBI-is instruction causes a broadcast to all other cores, and
->>    each core received hard-wired signal
->>    3) Each core check if there are TLB entries which have the specified
->> ASID/VA
+SeongJae Park (6):
+  docs/kunit/start: Use in-tree 'kunit_defconfig'
+  docs/kunit/start: Skip wrapper run command
+  kunit: Remove duplicated defconfig creation
+  kunit: Create default config in 'build_dir'
+  kunit: Place 'test.log' under the 'build_dir'
+  kunit: Rename 'kunitconfig' to '.kunitconfig'
 
-(the above confuses implementation with architecture)
-
-<snip>
-
-> I think it's worth bearing in mind that I have little sympathy for the
-> problem that you are seeing. As far as I can tell, you've done the
-> following:
-> 
->    1. You designed a CPU micro-architecture that stalls whenever it receives
->       a TLB invalidation request.
-
-s/SPARC/Arm/ && wire in DVM
-
->    2. You integrated said CPU design into a system where broadcast TLB
->       invalidation is not filtered and therefore stalls every CPU every
->       time that /any/ TLB invalidation is broadcast.
-> 
->    3. You deployed a mixture of Linux and jitter-sensitive software on
->       this system, and now you're failing to meet your performance
->       requirements.
-> 
-> Have I got that right?
-> 
-> If so, given that your CPU design isn't widely available, nobody else
-> appears to have made this mistake and jitter hasn't been reported as an
-> issue for any other systems, it's very unlikely that we're going to make
-> invasive upstream kernel changes to support you. I'm sorry, but all I can
-> suggest is that you check that your micro-architecture and performance
-> requirements are aligned with the design of Linux *before* building another
-> machine like this in future.
-> 
-> I hate to be blunt, but I also don't want to waste your time.
-
-I always tried to ask nicely for the above to be heeded. There's a 
-difference between "hi, our implementation doesn't scale, and here's 
-why" vs "there's a problem with all TLBIs...". There isn't. The problem 
-is the implementation and that should have been called out first thing.
-
-Jon.
+ Documentation/dev-tools/kunit/start.rst | 19 +++++--------------
+ tools/testing/kunit/kunit.py            | 10 ++++++----
+ tools/testing/kunit/kunit_kernel.py     |  6 +++---
+ 3 files changed, 14 insertions(+), 21 deletions(-)
 
 -- 
-Computer Architect
+2.7.4
+
