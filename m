@@ -2,147 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8E8F910E3DE
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2019 00:26:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 646A210E40F
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Dec 2019 01:19:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727370AbfLAXZx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 1 Dec 2019 18:25:53 -0500
-Received: from mail-wr1-f67.google.com ([209.85.221.67]:35664 "EHLO
-        mail-wr1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727266AbfLAXZu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 1 Dec 2019 18:25:50 -0500
-Received: by mail-wr1-f67.google.com with SMTP id g17so9888754wro.2;
-        Sun, 01 Dec 2019 15:25:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=fWlVQQ7BGjjRSAk/bgCXHsVzfE8yYuX6nxPeJuLphn8=;
-        b=Mp6PBDwok9zKHQgQwFIqsk8Kp13EuqwQgDStOdtp+jslRIbHY+t8AK1gLB3dgxw38i
-         nmeKUiA+Le18w85SifDtKTcp8iDoQHbJjj46dUpMKHu81+z79UApQwecxqo8/EA9TE8b
-         KmfXPa0Ib+SsF+e8rJEhfzdSQMR8w18Cixxn0VoSA+RJCpdQZPDREbHtklOiEEa/AlVE
-         GqmWPwOcLfwiPTAWT1IXXuUlCbX7KDh2BWFZuQspi8fFe7wXxPfHPWBeaKIOXdHSIdtl
-         36YQNx5tiSYurc8WxjJvi48yeyYTfIPdi1so4DPMlmbsLw86YETOD205NyLJdT+06H7G
-         Y8Bg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=fWlVQQ7BGjjRSAk/bgCXHsVzfE8yYuX6nxPeJuLphn8=;
-        b=A3a+CpgTncmypnuBtT6FxDr+a//ejGVHNF3oXm8BMr76MR2b+4zWA1mKeQKv2UKsoU
-         bBYBSkXt04P2t76B7TX2IGiIDzYZF/tY36gQFMIJv35xHPqPUmq883W2fWnfzPedDhgu
-         Ikte8cagU3FKI/m/v5fWsqfiJUDHdUUWvfmv/M3+uel08wZAv6YexAgvaJ/D8mQ49KYK
-         iaOeuqUZA3xXH4rK76QEPc0xGOnytW+OlY91p5ynlV+9UuKLub2bHBscl9zWyjfScEdH
-         cTx0mBxGr2eEbEGj80S4Z5XZlXmDXvujim1Zv6sMnMKjUmABOJSgj5dcpD6P+sXwNC/n
-         wxuQ==
-X-Gm-Message-State: APjAAAU4q1eQv4+MxVPhwVmL+4t+E6Cd37mQ7Y6M0G51Lxq1xuEvvL8u
-        iWVKIZrHs9SrIFu6Yol2yrk=
-X-Google-Smtp-Source: APXvYqzn/ztyle4DWAe6RVHE5z16tim7uASA6oB6ZOky9JKO0016DSgwVvnTw5//h32ruU28bIH4gA==
-X-Received: by 2002:a05:6000:1044:: with SMTP id c4mr46983995wrx.204.1575242748425;
-        Sun, 01 Dec 2019 15:25:48 -0800 (PST)
-Received: from localhost.localdomain (cable-86-56-100-90.cust.telecolumbus.net. [86.56.100.90])
-        by smtp.gmail.com with ESMTPSA id y6sm37450454wrl.17.2019.12.01.15.25.47
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-        Sun, 01 Dec 2019 15:25:47 -0800 (PST)
-From:   SeongJae Park <sj38.park@gmail.com>
-To:     brendanhiggins@google.com, shuah@kernel.org
-Cc:     corbet@lwn.net, linux-kselftest@vger.kernel.org,
-        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, SeongJae Park <sjpark@amazon.de>
-Subject: [PATCH 6/6] kunit: Rename 'kunitconfig' to '.kunitconfig'
-Date:   Mon,  2 Dec 2019 08:25:24 +0900
-Message-Id: <1575242724-4937-7-git-send-email-sj38.park@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1575242724-4937-1-git-send-email-sj38.park@gmail.com>
-References: <1575242724-4937-1-git-send-email-sj38.park@gmail.com>
+        id S1727280AbfLBATf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 1 Dec 2019 19:19:35 -0500
+Received: from mout.gmx.net ([212.227.17.20]:40179 "EHLO mout.gmx.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727279AbfLBATf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 1 Dec 2019 19:19:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1575245969;
+        bh=tV2kfJnJSdTdIr7Ps2AnmtxR9DGkfzjZII/HdaPqu2M=;
+        h=X-UI-Sender-Class:Date:From:To:Cc:Subject:References:In-Reply-To;
+        b=KlHLiuVaOBd4mKI4BCQUSvNRCPl8ARefOB49YMaP2wTobrmhAGLqTu7yodbtqoo3u
+         WrUErq7tEgkuEQGV2RP8jTSk9ooft29JgurYDcGa7vWzAX2Bu+hufuLoTwAWmxewCt
+         qHdq0IIDhWpSxDQsNoU6r3sg5VpGBqB4O42szENc=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from longitude ([109.90.233.102]) by mail.gmx.com (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MMofc-1iIo8D30ku-00IpQs; Mon, 02
+ Dec 2019 01:19:29 +0100
+Date:   Mon, 2 Dec 2019 01:19:28 +0100
+From:   Jonathan =?utf-8?Q?Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Linus Torvalds <torvalds@linux-foundation.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Jonathan =?utf-8?Q?Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
+Subject: Re: [PULL] Documentation for 5.5
+Message-ID: <20191202001928.GA4146@latitude>
+References: <20191126093002.06ece6dd@lwn.net>
+ <CAHk-=whH-wrF7dx_+NgpYi8pK0vovE2mEFE3sgEYXAQZcPwBjA@mail.gmail.com>
+ <20191130171428.6c09f892@lwn.net>
+MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="EVF5PPMfhYS0aIcm"
+Content-Disposition: inline
+In-Reply-To: <20191130171428.6c09f892@lwn.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Provags-ID: V03:K1:4gNqU4/I/EbdcWnb41uvU/DGVpdpSEFnA27YIf93++D6TcXhoOP
+ eiborndJQqHECFBbeAeRxVInTGLHqs8KxwrXFpj0c2f5lzMVFRX0PW9+We7GAvzeuLZDr/d
+ GkEBuYPvdeWfE5VF3D4eFHHYk1W//k4z/RKIoYAa0EQ9savxvkKl8GQbJrcrflm02h5N5Yk
+ ZQ8JpBTTS/CHuFLpBV6hA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Wbdz4rfoDNo=:O02Xc1mHEfHOYVvObo7Zld
+ 3bE0/TZBOgKqRhdD8PL8iaSlk8+ePaqPhB/JlF8cDAI0X+nBa1Mw7/O/jjmiyM7tu/PYTeL4R
+ gcXp1NKQwiY41AgD9kam1rufSG+PeiIS+qAv0r10CLGLoATAwUV8Elt7bwlrYae92SLuEjKMB
+ tA2Hc7zl6NhGQdQ1XewQQ5ZTaP1mT0nGfvta2UW0jchHAE41EwV2y2/UT6dic8H78AttYxBrU
+ Dj/ggEO0UtDN2cr2h25GLXtPs4vx5/x9CGAIYJDP7Y7yRJsm2xaf3G/aBUN+GNouacbsVuxRl
+ lsQ5cedUTM4cL864NCBY4JQqRi8ajp5ecPSpOQOpjnzNcDrB3e0CuhxafxENY0fIPTDzXHtZH
+ /FWTDDqs2PrPRF3EHn1KSXYLbDwKn1apie2T+UueqQOVpmP4QZScaKC03lxaMnc27Ri0E3qXd
+ ALmkXgK+AV5p2mbc6oVhryfbCjZMvqnNYPnXCKZwIWtNP1ZZ2d3xgXVE7NKTCrHXdY0dGocxw
+ 4/Gsp2Bt5BjeqQBXuxbdKylxRNN9sca/ppWLFQm4rwH+uyuL3OfXslNme36US7Wp0drVmz5cY
+ T0DzWbzGPWeC390iPRQh33TE96Oy6Sxr3NNCqf+krfqDoO66xotmUOZtVSM4jN9atGAaeJFPb
+ DxCy8zfbj6d8DhN42StZqkZLPv0iX95RNfdBTB+x0+QrydxbefY3T1CPDwF6zvZCA8Q4ADGEx
+ Azl1YuVgA9TbZJRz2qHHh0LTeBAE4S30c3wWrexXe0XCUEjyF8f8Yd2Fpa3uz/6GDU+CAW8ac
+ fnUYAvV/+QiK93xioGkn2qmOJtuckUxmwaB3YswerhOnk+5E6Qj3nwsMGfzsFtasDJUZNTjFL
+ GqkpwI/5GDUWdPBBv/1kzSOJYOSLJP8QpgvdE0NaLGtsUI8qqoLq0bg5nkfClulXrST6mqDjA
+ 3KilgwuFBucnhbbUs4fcCbwCgHHOJJvX+XM0wQRuzE6N/b6ZaWN36p+GxWMIYkvHnpv3/3/jO
+ QzcGSjfpsVzJ6A2qG+NfzugUcPce0oXxnUgsyu9mvADHJlQ0mGhGrn7t9z4ZL/59j4y5Us1yK
+ cwg0C8tmIUXxVQ+yBzza1M0YZ+g1DpwmOmDu14CCiUhzY3Q5YkonbIxngEeBjZ3luLczmwKQ/
+ EipZrLUes/LkbeCEg4y9mxT7proRpi8pZlBjGL2zUfQSQYBdgtlVhYMO/lzt7ATmrZpor1OVs
+ 5b8HsYV2QuIIaJQS6KK8NlmL6kvTUUrkM5T2ONchgyDfOHDPYKfSmqrBHgpg=
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: SeongJae Park <sjpark@amazon.de>
 
-This commit renames 'kunitconfig' to '.kunitconfig' so that it can be
-automatically ignored by git and do not disturb people who want to type
-'kernel/' by pressing only the 'k' and then 'tab' key.
+--EVF5PPMfhYS0aIcm
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- Documentation/dev-tools/kunit/start.rst | 12 +++++-------
- tools/testing/kunit/kunit.py            |  2 +-
- tools/testing/kunit/kunit_kernel.py     |  4 ++--
- 3 files changed, 8 insertions(+), 10 deletions(-)
+On Sat, Nov 30, 2019 at 05:14:28PM -0700, Jonathan Corbet wrote:
+[...]
+> All of the afflicted files arrived in that state as the result of a pair
+> of patches from Jonathan (copied); I have verified that the original
+> patches also had the DOS line endings.
 
-diff --git a/Documentation/dev-tools/kunit/start.rst b/Documentation/dev-tools/kunit/start.rst
-index e25978d..f2e585e 100644
---- a/Documentation/dev-tools/kunit/start.rst
-+++ b/Documentation/dev-tools/kunit/start.rst
-@@ -15,18 +15,16 @@ Included with KUnit is a simple Python wrapper that helps format the output to
- easily use and read KUnit output. It handles building and running the kernel, as
- well as formatting the output.
- 
--Creating a kunitconfig
--======================
-+Creating a .kunitconfig
-+=======================
- The Python script is a thin wrapper around Kbuild as such, it needs to be
--configured with a ``kunitconfig`` file. This file essentially contains the
-+configured with a ``.kunitconfig`` file. This file essentially contains the
- regular Kernel config, with the specific test targets as well.
- 
- .. code-block:: bash
- 
- 	cd $PATH_TO_LINUX_REPO
--	cp arch/um/configs/kunit_defconfig kunitconfig
--
--You may want to add kunitconfig to your local gitignore.
-+	cp arch/um/configs/kunit_defconfig .kunitconfig
- 
- Verifying KUnit Works
- ---------------------
-@@ -141,7 +139,7 @@ and the following to ``drivers/misc/Makefile``:
- 
- 	obj-$(CONFIG_MISC_EXAMPLE_TEST) += example-test.o
- 
--Now add it to your ``kunitconfig``:
-+Now add it to your ``.kunitconfig``:
- 
- .. code-block:: none
- 
-diff --git a/tools/testing/kunit/kunit.py b/tools/testing/kunit/kunit.py
-index 1746330..309d6e3 100755
---- a/tools/testing/kunit/kunit.py
-+++ b/tools/testing/kunit/kunit.py
-@@ -108,7 +108,7 @@ def main(argv, linux=None):
- 				type=str, default=None, metavar='build_dir')
- 
- 	run_parser.add_argument('--defconfig',
--				help='Uses a default kunitconfig.',
-+				help='Uses a default .kunitconfig.',
- 				action='store_true')
- 
- 	cli_args = parser.parse_args(argv)
-diff --git a/tools/testing/kunit/kunit_kernel.py b/tools/testing/kunit/kunit_kernel.py
-index b640939..507364d 100644
---- a/tools/testing/kunit/kunit_kernel.py
-+++ b/tools/testing/kunit/kunit_kernel.py
-@@ -14,7 +14,7 @@ import os
- import kunit_config
- 
- KCONFIG_PATH = '.config'
--KUNITCONFIG_PATH = 'kunitconfig'
-+KUNITCONFIG_PATH = '.kunitconfig'
- 
- class ConfigError(Exception):
- 	"""Represents an error trying to configure the Linux kernel."""
-@@ -111,7 +111,7 @@ class LinuxSourceTree(object):
- 		return True
- 
- 	def build_reconfig(self, build_dir):
--		"""Creates a new .config if it is not a subset of the kunitconfig."""
-+		"""Creates a new .config if it is not a subset of the .kunitconfig."""
- 		kconfig_path = get_kconfig_path(build_dir)
- 		if os.path.exists(kconfig_path):
- 			existing_kconfig = kunit_config.Kconfig()
--- 
-2.7.4
+Not sure why, or where in the mails' path this happened, but the base64
+with CR/LF inside is also present in the copies that went directly to
+me, rather than via the mailing lists.
 
+> Anyway, if I revert the two offending patches and resend the pull, is that
+> good enough, or do you want this mess out of the history entirely?
+
+On a somewhat related note: "Documentation: networking: device drivers:
+Remove stray asterisks" was also picked up via the networking tree.
+Perhaps I should have mentioned that when I became aware(?)
+
+> Sorry for the trouble,
+
+Well, same here :/
+
+
+Jonathan Neusch=C3=A4fer
+
+--EVF5PPMfhYS0aIcm
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEvHAHGBBjQPVy+qvDCDBEmo7zX9sFAl3kWIkACgkQCDBEmo7z
+X9sZlBAArNmrtwOupByvamJkONeJ8iiJAy1xT4EtPY0j22FfM5sJ9lDJVuo+y/+Q
+zt+KzQi6vH020+oX3NmTBLLL2pLqkTURb+Nha2zqoyA15GOz/iM+a3Hz5j9agUQc
+zIiI4MTSsYsHbiZMyMDpDNuNqul3wNWHpHmm3VRc6jEOmsG43vqJ9t1LICk2g0X0
+Kn5nJ/q0UqSTO2Rvawol746XVb/Rw72zxu9SG2Vex9cWDjwaTK2qAGYPSUWmtbCd
+SSkX1515wPVc5oTpQ9/7XvsdNWwhhsk+mUPihI4QIf/lwPq5sEVhZbMSFjg7+4RK
+NAMcMbkbnmYzAdPaU2Mwz94BQ1sGWSIcKWcYfOZG7DWi0LBtyd2GiY/BzTjk49/q
+GhpovKBT1Qr3XVIv1yD/u8vGPIkRgwcOkVn9vFjj8XGXMh72zTC2DlbKnz2PrwYA
+PsDQnY/qvcntWyfeIlL09v7RpkTWjs+Gp2SoxH4OOfRRRRG/H1AC1xakTDAXO06R
+yg4CeOGmQesBa3ttYUuhMMmU4zrjYWK40m1FyZ+xtP3XCck0jPL1cMcaiGeHNw+n
+vC0wMs9IyydsnSZPq/hYxeq/I9I8OOeufaDhjGctU25y5OQdYYapXgMRvZDoqAnm
+jHzWv+2MW5nDhLhCkC4tTtwLDL1GQdH8uWiZdVd3jItla8BcDIM=
+=MTIV
+-----END PGP SIGNATURE-----
+
+--EVF5PPMfhYS0aIcm--
