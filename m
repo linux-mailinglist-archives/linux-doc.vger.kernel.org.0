@@ -2,89 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 215B7111CD1
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 23:48:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6DA37112016
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Dec 2019 00:16:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728862AbfLCWrx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Dec 2019 17:47:53 -0500
-Received: from mail-pg1-f195.google.com ([209.85.215.195]:44791 "EHLO
-        mail-pg1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729355AbfLCWrw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 17:47:52 -0500
-Received: by mail-pg1-f195.google.com with SMTP id x7so2300233pgl.11
-        for <linux-doc@vger.kernel.org>; Tue, 03 Dec 2019 14:47:51 -0800 (PST)
+        id S1728580AbfLCXMX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Dec 2019 18:12:23 -0500
+Received: from mail-pf1-f196.google.com ([209.85.210.196]:33553 "EHLO
+        mail-pf1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728310AbfLCWjy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 17:39:54 -0500
+Received: by mail-pf1-f196.google.com with SMTP id y206so2574094pfb.0
+        for <linux-doc@vger.kernel.org>; Tue, 03 Dec 2019 14:39:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=7TqgN2iJjOXxie883Mhqea6U14ESjoMu4kL/R78rVdw=;
-        b=XLtR10TY5HvNYaSa6cai3/R9FYzleQQZz2svZyL8tOK87YQA912V1ym4Hv9zSZTa4W
-         XsYLsdsxIIeqUmKaaTyXJdXq5ZIMsdtz+qAW2aJArY3lZQzq/8XMkxXKMLduQdGguwWQ
-         tEyyhc1m8FNszdEx+TWMqK02tQGLsYRH7qEoztNCUWj2XYpGsKHNu+2K9gLUBTSzkpQg
-         cL0sHoa58B89n343/NyL3Q5aK/piEHaXyVdmqwAxoUlwff0wlzeadqsQ5m97SN9ss//N
-         WQpKd+LYhfVNyvGjsitB44ASs9L0mP1g554ne1GdBkVgiDiXqQvNshl3HDgwl4vsoLUr
-         Y7lA==
+        bh=PooeH2U9l4e0abyw2b34fiXdiQuPMqsoVdOri4vyWA8=;
+        b=Z4qWuLdzmbQTwgVTPkTffJkS/6pNJFJU52Pv5anld3AdBN2RKrp/QNd1ONA86GCT4X
+         Ue7OKCSynqRiSFtptrF3HrNk43XMiXsTQ2B0hgCska6BooFqIZFkPDO2/D24Z9Nquoaa
+         wm5Z9A+sS3IkccLQquaDr/DfefHCZZUj9H4vgVMLNNvKvukZfQs7lne9YWKfrNG4zLb9
+         EHOyQnKZfLEu0it+urUIkOotHnUuBQSoEytGqEP1moY7TceKQ3RaPVjFaxcxV680ACSY
+         cAD51x/PTdUvx4vPH5x/HrR9owsPzsP1j9WGcfG4gxtfx0o31QH3nq6CaIq7UZ+E1KoD
+         tfCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=7TqgN2iJjOXxie883Mhqea6U14ESjoMu4kL/R78rVdw=;
-        b=NX3VpcLOjyUSe/zSNF5xDxzUCbtRLdyTRpIt11/wPkMlJmHf+nyzou7bs5HS/W7IoQ
-         Gc5Gi5jvHfDMXcYtNozuFaJkjheFNxxkXtbjtBnDR5t4xDpxB/u7kZZEbxGKjvVr6wNd
-         HbnEbeP838oHUf/0LYuWIFSpzCXJUuH0YLjeiYI6nnWsvi7CBmkh8ISt8HmJeasDDm10
-         A3XMVot3okac24wjBHOvVw3SbwMoTyN9joqTo1rMRoAxQqLhyRHtjtpUWigarAL7NdXu
-         TzqUPFr15Lh7LR3dFsWwZk02ObEl5+yufndytDFwbamu+q49+ka85hasMk32ipBb5oD5
-         kKSw==
-X-Gm-Message-State: APjAAAVIZi/GocLmcTiKbscmO8FV1unaSzcWgmpfFOsF9jEhy4bep5cE
-        eY7K/DDprlmp7Gp0QjyZhedTEcpeiw5aO9Ge7P+q7w==
-X-Google-Smtp-Source: APXvYqxzyBp784JSAxM/nOyG953YC2qIJk8I3LZCsWw1NC/8F92n1+h9oQjRuIVvcrvMxxIyY3GenyseDH3/qhHb7BI=
-X-Received: by 2002:a63:480f:: with SMTP id v15mr32786pga.201.1575413270868;
- Tue, 03 Dec 2019 14:47:50 -0800 (PST)
+        bh=PooeH2U9l4e0abyw2b34fiXdiQuPMqsoVdOri4vyWA8=;
+        b=IRrZgwBNEqWwOriwoiuNYNIJIE3g2/DXBcUuz85hICd0D3G119ZiUdnN8/zn6XsmeZ
+         8XbiZ4bLsPIixx1WyEwCbhn9CDvU13u5mmd6w6gbhohvIt4ukiSIhwSOJlUtKxQ7jiZL
+         3QsonPaPF6xpGryVPgrrXFkLKzAya6rYyBNKFPyHC1+aiGyUfK9INIzSQJsEVtbZUMJk
+         E13iJs03G1j2KwQPUw/7NoMw0/Iqps/Mvc6WAxtVq0tyTo/CNAg6Qpd0B1APmqSUkQEp
+         NZJg81y/55LCkaON3j41uYPKcZIOam9MZuyREOxot2MsSoa0Od/HGT1wkU1Y1vZ0e2wE
+         TgKg==
+X-Gm-Message-State: APjAAAVu50qP2iYmE6/rpGXdbS9CmMlWHy1wgQT29djUguPLMyaUzdFV
+        /Sga8VBBxorqitqUMPXkqhTmEGiJqvkVjrKRCHI2zg==
+X-Google-Smtp-Source: APXvYqyopdizFtuRaXmHpNZY01aJqLAUpTS7fHYCocl6WpG8VXrtTOu+n9u17wqq8KlX1dRoJ6xGABbIJHbMC+vv96s=
+X-Received: by 2002:aa7:961b:: with SMTP id q27mr238999pfg.23.1575412793102;
+ Tue, 03 Dec 2019 14:39:53 -0800 (PST)
 MIME-Version: 1.0
-References: <1575374868-32601-1-git-send-email-alan.maguire@oracle.com> <1575374868-32601-6-git-send-email-alan.maguire@oracle.com>
-In-Reply-To: <1575374868-32601-6-git-send-email-alan.maguire@oracle.com>
+References: <1575396508-21480-1-git-send-email-sj38.park@gmail.com> <1575396508-21480-4-git-send-email-sj38.park@gmail.com>
+In-Reply-To: <1575396508-21480-4-git-send-email-sj38.park@gmail.com>
 From:   Brendan Higgins <brendanhiggins@google.com>
-Date:   Tue, 3 Dec 2019 14:47:39 -0800
-Message-ID: <CAFd5g47BXKat2Hty01WHz6eJj3WOjbeJ3pYqimaf2wQPm7Eibw@mail.gmail.com>
-Subject: Re: [PATCH v5 linux-kselftest-test 5/6] kunit: allow kunit to be
- loaded as a module
-To:     Alan Maguire <alan.maguire@oracle.com>
-Cc:     "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+Date:   Tue, 3 Dec 2019 14:39:42 -0800
+Message-ID: <CAFd5g47CtpRusO1tit3x+65p8EWVy-PSWU1rhwZ6x6ubbig=rQ@mail.gmail.com>
+Subject: Re: [PATCH v3 3/5] kunit: Create default config in '--build_dir'
+To:     SeongJae Park <sj38.park@gmail.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
         KUnit Development <kunit-dev@googlegroups.com>,
-        Kees Cook <keescook@chromium.org>,
-        Iurii Zaikin <yzaikin@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        catalin.marinas@arm.com, joe.lawrence@redhat.com,
-        penguin-kernel@i-love.sakura.ne.jp, urezki@gmail.com,
-        andriy.shevchenko@linux.intel.com,
-        Jonathan Corbet <corbet@lwn.net>,
-        David Gow <davidgow@google.com>, adilger.kernel@dilger.ca,
-        "Theodore Ts'o" <tytso@mit.edu>,
-        Luis Chamberlain <mcgrof@kernel.org>,
         "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Knut Omang <knut.omang@oracle.com>
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>, shuah <shuah@kernel.org>,
+        SeongJae Park <sjpark@amazon.de>
 Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Dec 3, 2019 at 4:08 AM Alan Maguire <alan.maguire@oracle.com> wrote:
+On Tue, Dec 3, 2019 at 10:08 AM SeongJae Park <sj38.park@gmail.com> wrote:
 >
-> Making kunit itself buildable as a module allows for "always-on"
-> kunit configuration; specifying CONFIG_KUNIT=m means the module
-> is built but only used when loaded.  Kunit test modules will load
-> kunit.ko as an implicit dependency, so simply running
-> "modprobe my-kunit-tests" will load the tests along with the kunit
-> module and run them.
+> From: SeongJae Park <sjpark@amazon.de>
 >
-> Co-developed-by: Knut Omang <knut.omang@oracle.com>
-> Signed-off-by: Knut Omang <knut.omang@oracle.com>
-> Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
+> If both '--build_dir' and '--defconfig' are given, the handling of
+> '--defconfig' ignores '--build_dir' option.  This commit modifies the
+> behavior to respect '--build_dir' option.
+>
+> Signed-off-by: SeongJae Park <sjpark@amazon.de>
+> Suggested-by: Brendan Higgins <brendanhiggins@google.com>
+> Reported-by: Brendan Higgins <brendanhiggins@google.com>
 
 Reviewed-by: Brendan Higgins <brendanhiggins@google.com>
-
-Thanks!
