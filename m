@@ -2,145 +2,202 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 59D7F10FD59
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 13:09:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AEC7A10FD92
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 13:26:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726521AbfLCMJM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Dec 2019 07:09:12 -0500
-Received: from aserp2120.oracle.com ([141.146.126.78]:46302 "EHLO
-        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726318AbfLCMJL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 07:09:11 -0500
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
-        by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xB3Bs2uf147819;
-        Tue, 3 Dec 2019 12:08:52 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2019-08-05;
- bh=CNr0y+ZoPApz+Tp45+kJAccK/U23wlJ3cxKmAvkb2ZI=;
- b=XshhpMXm4z9mCI2Ceys9JEAiTAY87sFJ/a8ze8ca63aECp348cHrJAt1IzPUtrXqCRpA
- hHhtmT5dZIHCgfKK/u2LAcBJP6xtXHyp3PmonrbUqrZY1r2y9oE04oYYew6u46P5+GA4
- kLy1K/PxYhGxAXl01KOQh887yCsumleADosj1T2VAKowVJfIwi8XYw1Lqi3BW+l4NLWK
- ckGBhygeLdEb9zsWrsvXDYEmNHqU47/UBhG5UsotU0rE8XKoV3UVYSOqJXWs6AfPWrUd
- yyuD6C84X1cLsane1EUP4eu9oWLoz7z4hR9E7mt7GgtXAWNo4yB3Qw6O7GzSyp7VutfF 1w== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
-        by aserp2120.oracle.com with ESMTP id 2wkgcq75ws-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 03 Dec 2019 12:08:52 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
-        by userp3020.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xB3BsX9a161922;
-        Tue, 3 Dec 2019 12:08:52 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
-        by userp3020.oracle.com with ESMTP id 2wn4qpupdp-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 03 Dec 2019 12:08:51 +0000
-Received: from abhmp0019.oracle.com (abhmp0019.oracle.com [141.146.116.25])
-        by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id xB3C8oM6027265;
-        Tue, 3 Dec 2019 12:08:50 GMT
-Received: from dhcp-10-175-211-120.vpn.oracle.com (/10.175.211.120)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Tue, 03 Dec 2019 04:08:49 -0800
-From:   Alan Maguire <alan.maguire@oracle.com>
-To:     brendanhiggins@google.com, linux-kselftest@vger.kernel.org
-Cc:     linux-kernel@vger.kernel.org, kunit-dev@googlegroups.com,
-        keescook@chromium.org, yzaikin@google.com,
-        akpm@linux-foundation.org, yamada.masahiro@socionext.com,
-        catalin.marinas@arm.com, joe.lawrence@redhat.com,
-        penguin-kernel@i-love.sakura.ne.jp, urezki@gmail.com,
-        andriy.shevchenko@linux.intel.com, corbet@lwn.net,
-        davidgow@google.com, adilger.kernel@dilger.ca, tytso@mit.edu,
-        mcgrof@kernel.org, linux-doc@vger.kernel.org,
-        Alan Maguire <alan.maguire@oracle.com>,
-        Knut Omang <knut.omang@oracle.com>
-Subject: [PATCH v5 linux-kselftest-test 6/6] kunit: update documentation to describe module-based build
-Date:   Tue,  3 Dec 2019 12:07:48 +0000
-Message-Id: <1575374868-32601-7-git-send-email-alan.maguire@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1575374868-32601-1-git-send-email-alan.maguire@oracle.com>
-References: <1575374868-32601-1-git-send-email-alan.maguire@oracle.com>
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9459 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=4 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1911140001 definitions=main-1912030096
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9459 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
- suspectscore=4 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
- definitions=main-1912030096
+        id S1726144AbfLCM0F (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Dec 2019 07:26:05 -0500
+Received: from mail-qt1-f195.google.com ([209.85.160.195]:39564 "EHLO
+        mail-qt1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726105AbfLCM0F (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 07:26:05 -0500
+Received: by mail-qt1-f195.google.com with SMTP id g1so3522261qtj.6
+        for <linux-doc@vger.kernel.org>; Tue, 03 Dec 2019 04:26:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=KCV6d9hCioXwDxQSc+9jtdCsRf9f3DSaaCIPQTYGbKY=;
+        b=bpJPXACy569Uou4xeEkwZe9zGcFmIVFTruFj2RkHy7VtyGHrOoGRz3FqXS6kIL+sRo
+         daMX5qEwAaWytvZEWpXQrsbW2BR8GJe0aPT3Cj7ggNoQNY3Dh2zJwsQVDGqIjqUv/hdQ
+         v2w7Is0MN86M34UBMlqsoquVNzg/LUCns7zy7DYnvPW3vKggDzp9hAMv6pdFnZgEqcvf
+         C4CXXVbJGvuwu7Bf8+AGrGMJmfi+XQ46PkOQY/Y8DnSF1xg5jRT4EnhFTXMHrLm63DYi
+         Nr3L1gbqGsTXMpQbHcQsMQwZRuobk3Bz4Nzsvvx5aTaYSsezK7fEDiHD4k3YJUebl9YQ
+         mqrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=KCV6d9hCioXwDxQSc+9jtdCsRf9f3DSaaCIPQTYGbKY=;
+        b=KL43s1NhVHj46EKitdQ4fyuuRMm+SnGylmlrtgX843gGgg2k2rKEumcpaG6UOt1Upt
+         0ByUx/yZq5M7eKplSgJc+0HULKZjPXqvpxa85UAswuLI6hlRNW2Bw1ztCuxi9RB3zSUg
+         Im9wm3UVH/Lthh8z65X8/76mmtvAECqNk/ZONGxYDUuMB9TPPBVlljnn8k+tTS7VLKWN
+         VFxWnq8R4iBjwxckFHDMGjD8OFT6ge8DnUwMhHWEekA7vyG8MGM9P/31xFcRWsVB7RUG
+         f7D16mWCRrvCgrgXEg/iASF9KoYMFOc66hD6yOvakOcjhNeBAZroBQ0Aq7Bvs9S7GIKT
+         PtfA==
+X-Gm-Message-State: APjAAAWaT4r1mKpKQXle95/Gx3J/gj3JTB5md3CpUDfO/BTYBo9xZ2zA
+        xhAYK4Frs5CJEuCXiKTYifzOj5W/8lQooT4EeGQkTQvB
+X-Google-Smtp-Source: APXvYqweLlybh/rT5gfnZhz0yyuec8Zuu65/mrhliV+x4arFaG745EaW3zCKngE6hVl+mIngkPeM29sDhed2WB7clT0=
+X-Received: by 2002:ac8:1098:: with SMTP id a24mr4859094qtj.62.1575375964252;
+ Tue, 03 Dec 2019 04:26:04 -0800 (PST)
+MIME-Version: 1.0
+References: <20191119231912.12768-1-mike.leach@linaro.org> <20191119231912.12768-7-mike.leach@linaro.org>
+ <b2f640d3-c320-82d4-7399-172846820589@arm.com> <CAJ9a7VgkgoUTL0+_3kj53go_CKtAH3fO5xF9UNDPPz1se1SKSw@mail.gmail.com>
+ <ffda8aff-0904-7292-e2f1-93833b936c49@arm.com>
+In-Reply-To: <ffda8aff-0904-7292-e2f1-93833b936c49@arm.com>
+From:   Mike Leach <mike.leach@linaro.org>
+Date:   Tue, 3 Dec 2019 12:25:52 +0000
+Message-ID: <CAJ9a7VgH6tueHP_bCcwKzORbBxxADrRhUzPaSe=3NixCC05=Dw@mail.gmail.com>
+Subject: Re: [PATCH v5 06/14] coresight: cti: Add device tree support for v8
+ arch CTI
+To:     Suzuki Kuruppassery Poulose <suzuki.poulose@arm.com>
+Cc:     Coresight ML <coresight@lists.linaro.org>,
+        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+        devicetree@vger.kernel.org,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Documentation should describe how to build kunit and tests as
-modules.
+Hi Suzuki,
 
-Co-developed-by: Knut Omang <knut.omang@oracle.com>
-Signed-off-by: Knut Omang <knut.omang@oracle.com>
-Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
-Reviewed-by: Stephen Boyd <swboyd@chromium.org>
----
- Documentation/dev-tools/kunit/faq.rst   |  3 ++-
- Documentation/dev-tools/kunit/index.rst |  3 +++
- Documentation/dev-tools/kunit/usage.rst | 16 ++++++++++++++++
- 3 files changed, 21 insertions(+), 1 deletion(-)
+On Tue, 3 Dec 2019 at 11:28, Suzuki Kuruppassery Poulose
+<suzuki.poulose@arm.com> wrote:
+>
+> On 03/12/2019 10:59, Mike Leach wrote:
+> > Hi Suzuki,
+> >
+> > On Fri, 29 Nov 2019 at 11:33, Suzuki Kuruppassery Poulose
+> > <suzuki.poulose@arm.com> wrote:
+> >>
+> >> On 19/11/2019 23:19, Mike Leach wrote:
+> >>> The v8 architecture defines the relationship between a PE, its optional ETM
+> >>> and a CTI. Unlike non-architectural CTIs which are implementation defined,
+> >>> this has a fixed set of connections which can therefore be represented as a
+> >>> simple tag in the device tree.
+> >>>
+> >>> This patch defines the tags needed to create an entry for this PE/ETM/CTI
+> >>> relationship, and provides functionality to implement the connection model
+> >>> in the CTI driver.
+> >>>
+> >>> Signed-off-by: Mike Leach <mike.leach@linaro.org>
+> >>> ---
+>
+>
+> >>> +#ifdef CONFIG_OF
+> >>> +/*
+> >>> + * CTI can be bound to a CPU, or a system device.
+> >>> + * CPU can be declared at the device top level or in a connections node
+> >>> + * so need to check relative to node not device.
+> >>> + */
+> >>> +static int of_cti_get_cpu_at_node(const struct device_node *node)
+> >>> +{
+> >>> +     int cpu;
+> >>> +     struct device_node *dn;
+> >>> +
+> >>> +     if (node == NULL)
+> >>> +             return -1;
+> >>> +
+> >>> +     dn = of_parse_phandle(node, "cpu", 0);
+> >>> +     /* CTI affinity defaults to no cpu */
+> >>> +     if (!dn)
+> >>> +             return -1;
+> >>> +     cpu = of_cpu_node_to_id(dn);
+> >>> +     of_node_put(dn);
+> >>> +
+> >>> +     /* No Affinity  if no cpu nodes are found */
+> >>> +     return (cpu < 0) ? -1 : cpu;
+> >>> +}
+> >>> +
+> >>> +static const char *of_cti_get_node_name(const struct device_node *node)
+> >>> +{
+> >>> +     if (node)
+> >>> +             return node->full_name;
+> >>> +     return "unknown";
+> >>> +}
+> >>> +#else
+> >>> +static int of_cti_get_cpu_at_node(const struct device_node *node)
+> >>> +{
+> >>> +     return -1;
+> >>> +}
+> >>> +
+> >>> +static const char *of_cti_get_node_name(const struct device_node *node)
+> >>> +{
+> >>> +     return "unknown";
+> >>> +}
+> >>> +#endif
+> >>> +
+> >>> +static int cti_plat_get_cpu_at_node(struct fwnode_handle *fwnode)
+> >>> +{
+> >>
+> >> You may simply reuse coresight_get_cpu() below, instead of adding this
+> >> duplicate set of functions. See below.
+> >>
+> >>
+> >
+> > No we can't. coresight_get_cpu gets the 'cpu' entry relative to the
+> > device node, this gets the 'cpu' relative to the supplied node.
+> > This is very important for the case where a none v8 architected PE is
+> > attached to a CTI. This will use the devicetree form:-
+> >
+> > cti@<addr> {
+> >      [ some stuff  ]
+> >     trig_conns@1 {
+> >            cpu = <&CPU0>
+> >            [trigger signal  connection info for this cpu]
+> >     }
+> > }
+> >
+> > trig_conns is a child node and we must look for 'cpu' relative to it.
+>
+> Ok. May be we could refactor the function to find the 'CPU' node
+> relative to the given "fwnode" and let the coresight_get_cpu() use it ?
+>
+> int coresight_get_cpu(struct device *dev)
+> {
+>         return coresight_get_fwnode_cpu(dev_fwnode(dev));
+> }
+>
+> That way it is clear what we are dealing with. i.e, fwnode of any level
+> (device or an intermediate node).
+>
 
-diff --git a/Documentation/dev-tools/kunit/faq.rst b/Documentation/dev-tools/kunit/faq.rst
-index bf20951..ea55b24 100644
---- a/Documentation/dev-tools/kunit/faq.rst
-+++ b/Documentation/dev-tools/kunit/faq.rst
-@@ -29,7 +29,8 @@ Yes, well, mostly.
- 
- For the most part, the KUnit core framework (what you use to write the tests)
- can compile to any architecture; it compiles like just another part of the
--kernel and runs when the kernel boots. However, there is some infrastructure,
-+kernel and runs when the kernel boots, or when built as a module, when the
-+module is loaded.  However, there is some infrastructure,
- like the KUnit Wrapper (``tools/testing/kunit/kunit.py``) that does not support
- other architectures.
- 
-diff --git a/Documentation/dev-tools/kunit/index.rst b/Documentation/dev-tools/kunit/index.rst
-index 26ffb46..7ddc385 100644
---- a/Documentation/dev-tools/kunit/index.rst
-+++ b/Documentation/dev-tools/kunit/index.rst
-@@ -48,6 +48,9 @@ to a standalone program that can be run like any other program directly inside
- of a host operating system; to be clear, it does not require any virtualization
- support; it is just a regular program.
- 
-+Alternatively, kunit and kunit tests can be built as modules and tests will
-+run when the test module is loaded.
-+
- KUnit is fast. Excluding build time, from invocation to completion KUnit can run
- several dozen tests in only 10 to 20 seconds; this might not sound like a big
- deal to some people, but having such fast and easy to run tests fundamentally
-diff --git a/Documentation/dev-tools/kunit/usage.rst b/Documentation/dev-tools/kunit/usage.rst
-index c6e6963..82f9213 100644
---- a/Documentation/dev-tools/kunit/usage.rst
-+++ b/Documentation/dev-tools/kunit/usage.rst
-@@ -539,6 +539,22 @@ Interspersed in the kernel logs you might see the following:
- 
- Congratulations, you just ran a KUnit test on the x86 architecture!
- 
-+In a similar manner, kunit and kunit tests can also be built as modules,
-+so if you wanted to run tests in this way you might add the following config
-+options to your ``.config``:
-+
-+.. code-block:: none
-+
-+	CONFIG_KUNIT=m
-+	CONFIG_KUNIT_EXAMPLE_TEST=m
-+
-+Once the kernel is built and installed, a simple
-+
-+.. code-block:: bash
-+	modprobe example-test
-+
-+...will run the tests.
-+
- Writing new tests for other architectures
- -----------------------------------------
- 
+At present the generic coresight_get_cpu() deals with both DT and ACPI
+bindings.
+To refactor this would require re-factoring both binding types - and
+at present we have no definition for ACPI bindings for CTI and hence
+no way of knowing how the embedded cpu node is going to be
+represented.
+
+I think we have to take just the DT binding as is for now as a CTI
+specific element and consider if it is worth re-factoring once the
+ACPI bindings are defined
+
+Regards
+
+Mike
+
+> >>> +     csdev = cti_get_assoc_csdev_by_fwnode(cs_fwnode);
+> >>> +     if (csdev)
+> >>> +             assoc_name = dev_name(&csdev->dev);
+> >>
+> >> Does it make sense to defer the probing until the ETM device  turn up ?
+> >> Its fine either way.
+> >>
+> >
+> > Not really as the ETM is optional but the PE still has a CTI.
+>
+> Ah, you're right. Please ignore my comment.
+>
+> Kind regards
+> Suzuki
+
+
+
 -- 
-1.8.3.1
-
+Mike Leach
+Principal Engineer, ARM Ltd.
+Manchester Design Centre. UK
