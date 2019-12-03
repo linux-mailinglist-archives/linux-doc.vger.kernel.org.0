@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3291E10F7EC
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 07:41:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2372710F80D
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 07:48:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727240AbfLCGlC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Dec 2019 01:41:02 -0500
-Received: from mail-pl1-f193.google.com ([209.85.214.193]:38212 "EHLO
+        id S1727257AbfLCGsm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Dec 2019 01:48:42 -0500
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:42656 "EHLO
         mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727228AbfLCGlC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 01:41:02 -0500
-Received: by mail-pl1-f193.google.com with SMTP id o8so1289656pls.5
-        for <linux-doc@vger.kernel.org>; Mon, 02 Dec 2019 22:41:01 -0800 (PST)
+        with ESMTP id S1727156AbfLCGsm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 01:48:42 -0500
+Received: by mail-pl1-f193.google.com with SMTP id x13so1288645plr.9
+        for <linux-doc@vger.kernel.org>; Mon, 02 Dec 2019 22:48:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=txqB93EC07vnRxRZaCApt0VS2Bxm0RCf+BrdUWlZ5n8=;
-        b=mQgWYUsazi3iLKeYXps0csdlVmrHlYsQ8PPJW+N+TvkqBxRZLF3r9hThklk0JAeT/E
-         95g4K9LXGYqaiyl3PMjAA8hEHNCwh0BHK3lCTFehF1JZCKBWQHbkK6vJgg494kuCoDG0
-         llgHa+eD0gQ3/JVO/nYpmFM2RtR0AE9/LCgiwjx4ateE5sRsltCWYyijqdVXbwi+HRes
-         vAHJESd5WrwgpkCCzoDg870kMIk27sNmUhT66e6ZAP2rm/l3UZyLLgaVD9YwyJnpCc/5
-         27YtK8VqP5y5D1N+TabQGA+Y7kir+ClhGf7zWb5Uesoh0JkPs0xH/jNkTmocqNFHv3Oy
-         ZduA==
+        bh=ZrUEQpnhjssA5H4ckLx1/FL4yMnKDJVtL3vS1urgk3c=;
+        b=OOLlVpJm+w4AJN2yx2hZrTcrZJ3k3sy8lSHYPpvN6XZ9ploTJEIEA7bBYCzbBRt7yG
+         24G1DjY1sW2lu77gPUtsz6b0HFGxKaD2CDltSF7FiVg5kyy0WpmKqHSo2uS1s9Qa0ZRI
+         6F+OaGm8aksg028LhkmscCBPzYA1s+22EsdOvkMPfszSgKbHt0vqHVyByeBT31r1L9eu
+         6ESyJXHpUka2Uj7ErZ7hg0iKSOdeypmLfgKoQ5qMSCSX7+yiKAzJKerBv5kNPr/PYc42
+         F+oP+an8sZM6y4mFx1/AKjeYQZ5kNyGFVTretLd/mhbZmPFF82g/Wmwt1fKOT6SONTVV
+         kQWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=txqB93EC07vnRxRZaCApt0VS2Bxm0RCf+BrdUWlZ5n8=;
-        b=q9A6t0V72WVG+HNMZTRoJw3FLduoWTZBqosiYuxfudEta828i45TluV/NL/5iwJkhi
-         Tco+erqLjGpbYzYbBlB94kF0cn/DQyqYLTEnCTAJq2GMr8ybivJSbGTtcjtrHddQiUna
-         xg4SQl+EI8G+nZiI0Xll8iQyaXn5Y/WctdquUbvJ9AHKzmKK3ebvmVn8oxfwfnsvil3e
-         HoD8BOoaWXh8EOh5NrcoUlKls/QK3uhEZjHFNqiGZFQr9LEgjMTxHPyyNBn0MjYYJPhY
-         9Iw4IxxQlWokpwr8ceK8pkdmtr1TfZM94ph5x5hb34TqZp5AWyb7nimjYvPtvHnLw8aC
-         gX7g==
-X-Gm-Message-State: APjAAAWypk+LQw8DsZE4bMhrXehqeQ1BF/aVCsQDlhQWpw6WHLBLCqh8
-        WASr8YDde7OKr2sxHW3f2Ux7aKF1gwyN9CwQUkGQUQ==
-X-Google-Smtp-Source: APXvYqxFV1COUKvWUrh7FKcPNPvAl5pzHEfFxQVmduhIljm7Zx5aez1Zqxp7kxFQPcnSN/a6hmWpDnEap+IdDr9XjLE=
-X-Received: by 2002:a17:902:9f98:: with SMTP id g24mr3446029plq.325.1575355260934;
- Mon, 02 Dec 2019 22:41:00 -0800 (PST)
+        bh=ZrUEQpnhjssA5H4ckLx1/FL4yMnKDJVtL3vS1urgk3c=;
+        b=e7OD0he4IeLOqSCKBfD4W3OEzBXMTWX23/IPBvBPNbzsHRlRgUSG0MBPFExPXsyoFa
+         /3AVtbRptRwQfen5vKmLC6HxK8br3VYL9iSvynTy981SVSluLg0nqmn7zBB7kYis7uxt
+         effnnehitpROt1DjnKUkR+MjR3Wy/j8eebWMpOrgybUgzVrKEF6zumcGMaycRbENTak/
+         KugT/wG/TIBSO2njrqlEj2VLahea9d3pWDrCWm+/AzEyHkPds8NoXV7JHj2Rw+n9lNI5
+         NnD26ETSi0PquD6IzWA+PdWSSHNhxWAenAZ0sCgP05/j9QS9+GOXcXSSCLK9Piekt5r5
+         r+MQ==
+X-Gm-Message-State: APjAAAWf9Ljl31RN6aHhhK38CTRCHdye542lmhiDX8NDLM4xmbFFJ47g
+        Aw3O6kD5kSez0H4+MhGCT+fboYWLkme7wypYd8zWug==
+X-Google-Smtp-Source: APXvYqxg5MdII+ViMW9PQ/XsBs5+SO2UZbHgYTN/T+GWkJaALLpc5gamk8VhBLGEjzYRqnWtES6UF8zeBKnnFHqZ+9E=
+X-Received: by 2002:a17:902:9f98:: with SMTP id g24mr3467227plq.325.1575355720790;
+ Mon, 02 Dec 2019 22:48:40 -0800 (PST)
 MIME-Version: 1.0
-References: <1575242724-4937-1-git-send-email-sj38.park@gmail.com> <1575242724-4937-5-git-send-email-sj38.park@gmail.com>
-In-Reply-To: <1575242724-4937-5-git-send-email-sj38.park@gmail.com>
+References: <1575242724-4937-1-git-send-email-sj38.park@gmail.com> <1575242724-4937-6-git-send-email-sj38.park@gmail.com>
+In-Reply-To: <1575242724-4937-6-git-send-email-sj38.park@gmail.com>
 From:   Brendan Higgins <brendanhiggins@google.com>
-Date:   Mon, 2 Dec 2019 22:40:49 -0800
-Message-ID: <CAFd5g46bb_46dCpu3t=qT0FMqifS8wodnhjWC7jfpkuhT1ngAQ@mail.gmail.com>
-Subject: Re: [PATCH 4/6] kunit: Create default config in 'build_dir'
+Date:   Mon, 2 Dec 2019 22:48:29 -0800
+Message-ID: <CAFd5g46TH31RkdFk5L4OFsuMmOA9SKJG_-g5bkehP1Z4uugrGQ@mail.gmail.com>
+Subject: Re: [PATCH 5/6] kunit: Place 'test.log' under the 'build_dir'
 To:     SeongJae Park <sj38.park@gmail.com>
 Cc:     shuah <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
         "open list:KERNEL SELFTEST FRAMEWORK" 
@@ -65,37 +65,16 @@ On Sun, Dec 1, 2019 at 3:25 PM SeongJae Park <sj38.park@gmail.com> wrote:
 >
 > From: SeongJae Park <sjpark@amazon.de>
 >
-> If both '--build_dir' and '--defconfig' are given, the handling of
-> '--defconfig' ignores '--build_dir' option.  This commit modifies the
-> behavior to respect '--build_dir' option.
+> 'kunit' writes the 'test.log' under the kernel source directory even
+> though a 'build_dir' option is given.  As users who use the option might
+> expect the outputs to be placed under the specified directory, this
+> commit modifies the logic to write the log file under the 'build_dir'.
+
+Good idea!
+
 >
 > Signed-off-by: SeongJae Park <sjpark@amazon.de>
-> ---
->  tools/testing/kunit/kunit.py | 5 +++++
->  1 file changed, 5 insertions(+)
->
-> diff --git a/tools/testing/kunit/kunit.py b/tools/testing/kunit/kunit.py
-> index f8f2695..1746330 100755
-> --- a/tools/testing/kunit/kunit.py
-> +++ b/tools/testing/kunit/kunit.py
-> @@ -114,6 +114,11 @@ def main(argv, linux=None):
->         cli_args = parser.parse_args(argv)
->
->         if cli_args.subcommand == 'run':
-> +               if cli_args.build_dir:
-> +                       kunit_kernel.KUNITCONFIG_PATH = os.path.join(
 
-If you are going to modify the value of KUNITCONFIG_PATH can you
-rename the variable to make it lower_snake_case? UPPER_SNAKE_CASE in
-Python is usually (at least in this directory) used to indicate the
-variable is a constant.
+Reviewed-by: Brendan Higgins <brendanhiggins@google.com>
 
-> +                               cli_args.build_dir,
-> +                               kunit_kernel.KUNITCONFIG_PATH)
-> +
->                 if cli_args.defconfig:
->                         create_default_kunitconfig()
->
-> --
-> 2.7.4
->
+Thanks!
