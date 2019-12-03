@@ -2,142 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 573B4110417
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 19:11:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AEC4D110537
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 20:32:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727009AbfLCSLI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Dec 2019 13:11:08 -0500
-Received: from mail-lf1-f65.google.com ([209.85.167.65]:43366 "EHLO
-        mail-lf1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726114AbfLCSLI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 13:11:08 -0500
-Received: by mail-lf1-f65.google.com with SMTP id 9so2295499lfq.10;
-        Tue, 03 Dec 2019 10:11:06 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=9g/Y/Bt40KbJDiW5JOJCnl3btsiJd4zL6Ayui/PxS9w=;
-        b=UfhJWpRkr9o6OerC+nd7VlQE/uyYA7iUskCVoHhYzPbBGCZZs8/RkUA0Yy2g5vZIoR
-         DZN4Ppim07wll+Egp+aWPIrF4DW101YwHwpGcPVbFSViq9ufGMdxiBpVqRmXHQqAJ/g2
-         0Wk775mVV48A4vG9NpcXMhzXwYO3bqAuDKXqVbzrlX1JEH9Xwk4Udz3Pm+h6hOHGgfs4
-         fBPPlA13r7G0vT4HJsuHK6Uahamvj4cdvEI7/8q7UAPfvVtEqgZSwkhNwlZpLbcCsM6k
-         /0c77BOovYKJlyst/tbOLxj3lJinwGtftpAzueP1Rgu7YunQ7em3LdosAuRFm8NAE+tm
-         EIpg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=9g/Y/Bt40KbJDiW5JOJCnl3btsiJd4zL6Ayui/PxS9w=;
-        b=FP4EbhRWPztiedp0DIxeVPqoLHylXDoGW5iUorAbWiZw8JuFZKlLIOMxrpiCgc+g4Z
-         1qWS+A+oF7o7ZsZWZV385d6mb9dbYBY6+r7WjzQiBSuFJNh6YJt0iah2UxszdgkVX65S
-         QSMlmhJ9KfgdkO31At54xAa+Ihk0q+WDFSBNyfl3Q2ipuMAI9znQkVOMM1PdJqf0vQ/I
-         P1CnVW+VOGH4h9MSHZ+P1Ucy9gUR7VKM7VfXDb4ArIfZrv4//H1jppdG78iQv3WlFjUI
-         vKZt2xXvwJnDFgxzcZoI2k5q5HXIvn93MYq/lavfjO1D+WZfO9kLWPath9UMdVAskOpj
-         /Ocg==
-X-Gm-Message-State: APjAAAUmUssZLx+UfwdNIdUtzw3lTymwE9+RMEnml4VCejKSg4yVHU13
-        a6/kqRP36Gehpn6hkzlJLMQJhItSN3XQX1AdfV4=
-X-Google-Smtp-Source: APXvYqx6dExbD8o0Glt5fztVJXYXC5iw9XbfbbKHxoGp7nWMkkWalgNU1aj+WSVgO/kDeG0wDxjJkLsn4DIspy4to90=
-X-Received: by 2002:ac2:531b:: with SMTP id c27mr3421907lfh.91.1575396665854;
- Tue, 03 Dec 2019 10:11:05 -0800 (PST)
+        id S1727486AbfLCTbq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Dec 2019 14:31:46 -0500
+Received: from aserp2120.oracle.com ([141.146.126.78]:35986 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727433AbfLCTbp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 14:31:45 -0500
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xB3JOcB9165372;
+        Tue, 3 Dec 2019 19:31:36 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding;
+ s=corp-2019-08-05; bh=qEl+pOhRr3g+RbA74TF3EJsh7AdX920CBSilgxsTtEA=;
+ b=TyhNG6phCS4TQJ7F8PPU0jytfzaRchoWR6IbfN7EznnBQ/F0L+jvwdG88mZ1u5+kgpLZ
+ 6BEjm/u8DxAD7qZI9poq6jroazrTa9BNAxhYM69DmOYZUbgPdQmY/v181yS9PZ6BRHAe
+ dVgcPbpj1uBaxy1L8FZEJX2WJ1QZcyt5mwJH/+AeDtnFjhhnLpifjoic1/NHm8BF1BzP
+ n2A3L5DnkRiFSDZ/18BPHf0h9mIJXhhup5SwnS/RqYcjjGY+YpewUOJACi52ZrSpIfS2
+ rEBf2OHZwpAj/ui+N+1Bzw+xcxwwOnOvBPuVku/rNgOToZFrLVf5oW0Bl+e82BcctOSd Sg== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+        by aserp2120.oracle.com with ESMTP id 2wkgcq9x9c-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 03 Dec 2019 19:31:35 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+        by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xB3JEcmg133392;
+        Tue, 3 Dec 2019 19:31:35 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+        by userp3030.oracle.com with ESMTP id 2wn7pqmm1x-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 03 Dec 2019 19:31:34 +0000
+Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
+        by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id xB3JVT6O009168;
+        Tue, 3 Dec 2019 19:31:30 GMT
+Received: from localhost.localdomain (/98.229.125.203)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Tue, 03 Dec 2019 11:31:29 -0800
+From:   Daniel Jordan <daniel.m.jordan@oracle.com>
+To:     Herbert Xu <herbert@gondor.apana.org.au>,
+        Steffen Klassert <steffen.klassert@secunet.com>
+Cc:     Eric Biggers <ebiggers@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-crypto@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Daniel Jordan <daniel.m.jordan@oracle.com>
+Subject: [PATCH v2 0/5] padata lockdep, cpumask, and doc fixes
+Date:   Tue,  3 Dec 2019 14:31:09 -0500
+Message-Id: <20191203193114.238912-1-daniel.m.jordan@oracle.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-References: <1575242724-4937-1-git-send-email-sj38.park@gmail.com>
- <20191203070025.GA4206@google.com> <CAEjAshraUy20gEEaff69=b11DhB7zbz8WHT=6wOuw6C2FyJwYA@mail.gmail.com>
- <CAEjAsho98ER1RQ6=++ECmoCJxw2mMrGqV4jAgW5wgfb8eEM9eQ@mail.gmail.com> <CAFd5g46qPPsKJFqs07Eiea0Nim=YDWbOUndJu=JbW--VcTb-ww@mail.gmail.com>
-In-Reply-To: <CAFd5g46qPPsKJFqs07Eiea0Nim=YDWbOUndJu=JbW--VcTb-ww@mail.gmail.com>
-From:   SeongJae Park <sj38.park@gmail.com>
-Date:   Tue, 3 Dec 2019 19:10:39 +0100
-Message-ID: <CAEjAshpTAj_aYBUG1PWoyPajT69hWptXOZKwydg6duTNV5=aLQ@mail.gmail.com>
-Subject: Re: [PATCH 0/6] Fix nits in the kunit
-To:     Brendan Higgins <brendanhiggins@google.com>
-Cc:     Shuah Khan <shuah@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        KUnit Development <kunit-dev@googlegroups.com>,
-        linux-doc <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        SeongJae Park <sjpark@amazon.de>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9460 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=2 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=984
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-1912030143
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9460 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
+ suspectscore=2 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
+ definitions=main-1912030143
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Dec 3, 2019 at 6:45 PM Brendan Higgins
-<brendanhiggins@google.com> wrote:
->
-> On Tue, Dec 3, 2019 at 12:26 AM SeongJae Park <sj38.park@gmail.com> wrote:
-> >
-> > You're right, the error was due to the assumption of the existence of the
-> > build_dir.  The "kunit: Create default config in '--build_dir'" patch made the
-> > bug.  I fixed it in the second version patchset[1].
-> >
-> > [1] https://lore.kernel.org/linux-doc/1575361141-6806-1-git-send-email-sj38.park@gmail.com/
->
-> After trying your new patches, I am still getting the
-> "FileNotFoundError" when the given build_dir has not been created.
+This series depends on all of Herbert's recent padata fixes to reduce
+merge conflicts on his end:
 
-Sorry, apparently my mistake...  Sent v3 fixing it:
-https://lore.kernel.org/linux-kselftest/1575396508-21480-1-git-send-email-sj38.park@gmail.com/T/#t
+  crypto: pcrypt - Do not clear MAY_SLEEP flag in original request
+  padata: Remove unused padata_remove_cpu
+  [v3] crypto: pcrypt - Avoid deadlock by using per-instance padata queues
+  crypto: pcrypt - Fix user-after-free on module unload
+  padata: Remove broken queue flushing 
 
+If this should be based on something else, please let me know.
 
 Thanks,
-SeongJae Park
+Daniel
+
+v2:
+ - documentation patch RST-ized according to Jon's comments
+ - "validate cpumask" patch added
+ - rebased onto v5.4 and updated since Herbert's fixes have changed
+
+Daniel Jordan (5):
+  padata: validate cpumask without removed CPU during offline
+  padata: always acquire cpu_hotplug_lock before pinst->lock
+  padata: remove cpumask change notifier
+  padata: remove reorder_objects
+  padata: update documentation
+
+ Documentation/core-api/index.rst  |   1 +
+ Documentation/core-api/padata.rst | 169 ++++++++++++++++++++++++++++++
+ Documentation/padata.txt          | 163 ----------------------------
+ crypto/pcrypt.c                   |   1 -
+ include/linux/cpuhotplug.h        |   1 +
+ include/linux/padata.h            |  28 ++---
+ kernel/padata.c                   | 124 ++++++++--------------
+ 7 files changed, 220 insertions(+), 267 deletions(-)
+ create mode 100644 Documentation/core-api/padata.rst
+ delete mode 100644 Documentation/padata.txt
 
 
->
-> > Thanks,
-> > SeongJae Park
-> >
-> > On Tue, Dec 3, 2019 at 8:10 AM SeongJae Park <sj38.park@gmail.com> wrote:
-> > >
-> > > On Tue, Dec 3, 2019 at 8:00 AM Brendan Higgins
-> > > <brendanhiggins@google.com> wrote:
-> > > >
-> > > > On Mon, Dec 02, 2019 at 08:25:18AM +0900, SeongJae Park wrote:
-> > > > > From: SeongJae Park <sjpark@amazon.de>
-> > > > >
-> > > > > This patchset contains trivial fixes for the kunit documentations and the
-> > > > > wrapper python scripts.
-> > > > >
-> > > > > SeongJae Park (6):
-> > > > >   docs/kunit/start: Use in-tree 'kunit_defconfig'
-> > > > >   docs/kunit/start: Skip wrapper run command
-> > > > >   kunit: Remove duplicated defconfig creation
-> > > > >   kunit: Create default config in 'build_dir'
-> > > > >   kunit: Place 'test.log' under the 'build_dir'
-> > > > >   kunit: Rename 'kunitconfig' to '.kunitconfig'
-> > > > >
-> > > > >  Documentation/dev-tools/kunit/start.rst | 19 +++++--------------
-> > > > >  tools/testing/kunit/kunit.py            | 10 ++++++----
-> > > > >  tools/testing/kunit/kunit_kernel.py     |  6 +++---
-> > > > >  3 files changed, 14 insertions(+), 21 deletions(-)
-> > > >
-> > > > I applied your patchset to torvalds/master, ran the command:
-> > > >
-> > > > tools/testing/kunit/kunit.py run --timeout=60 --jobs=8 --defconfig --build_dir=.kunit
-> > > >
-> > > > and got the error:
-> > > >
-> > > > Traceback (most recent call last):
-> > > >   File "tools/testing/kunit/kunit.py", line 140, in <module>
-> > > >     main(sys.argv[1:])
-> > > >   File "tools/testing/kunit/kunit.py", line 123, in main
-> > > >     create_default_kunitconfig()
-> > > >   File "tools/testing/kunit/kunit.py", line 36, in create_default_kunitconfig
-> > > >     kunit_kernel.KUNITCONFIG_PATH)
-> > > >   File "/usr/lib/python3.7/shutil.py", line 121, in copyfile
-> > > >     with open(dst, 'wb') as fdst:
-> > > > FileNotFoundError: [Errno 2] No such file or directory: '.kunit/.kunitconfig'
-> > > >
-> > > > It seems that it expects the build_dir to already exist; however, I
-> > > > don't think this is clear from the error message. Would you mind
-> > > > addressing that here?
-> > >
-> > > Thank you for sharing this.  I will take a look!
-> > >
-> > >
-> > > Thanks,
-> > > SeongJae Park
-> > > >
-> > > > Cheers!
+base-commit: 219d54332a09e8d8741c1e1982f5eae56099de85
+prerequisite-patch-id: e31e7b28eb12a2c7e1e04261f4e890f83a57bd19
+prerequisite-patch-id: 00f7ca687bd9df6281e9ced0925a865b2fa7b297
+prerequisite-patch-id: 9f3bb985b34d29ff30e44b8829545736de02186f
+prerequisite-patch-id: fe09ee84131ee649b90ee291fbbeda32e90c42fe
+prerequisite-patch-id: f2e5a29f78e2403677ad50d870d90022932bc2b6
+-- 
+2.24.0
+
