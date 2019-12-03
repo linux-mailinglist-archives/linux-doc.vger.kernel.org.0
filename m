@@ -2,305 +2,520 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 632EB10F799
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 07:02:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4037F10F7F9
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Dec 2019 07:43:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727084AbfLCGC2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Dec 2019 01:02:28 -0500
-Received: from out30-130.freemail.mail.aliyun.com ([115.124.30.130]:41629 "EHLO
-        out30-130.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726521AbfLCGC1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 01:02:27 -0500
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R481e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e07488;MF=yun.wang@linux.alibaba.com;NM=1;PH=DS;RN=18;SR=0;TI=SMTPD_---0TjnKXaQ_1575352938;
-Received: from testdeMacBook-Pro.local(mailfrom:yun.wang@linux.alibaba.com fp:SMTPD_---0TjnKXaQ_1575352938)
-          by smtp.aliyun-inc.com(127.0.0.1);
-          Tue, 03 Dec 2019 14:02:22 +0800
-Subject: [PATCH v3 2/2] sched/numa: documentation for per-cgroup numa
- statistics
-From:   =?UTF-8?B?546L6LSH?= <yun.wang@linux.alibaba.com>
-To:     Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        id S1727328AbfLCGnF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Dec 2019 01:43:05 -0500
+Received: from mail-pl1-f193.google.com ([209.85.214.193]:46450 "EHLO
+        mail-pl1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727326AbfLCGnE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Dec 2019 01:43:04 -0500
+Received: by mail-pl1-f193.google.com with SMTP id k20so1278452pll.13;
+        Mon, 02 Dec 2019 22:43:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xMg2QTQLutQrm7Lp/5HxOmyJDHXUuQDgs4CLc4ZQ1Pw=;
+        b=luo3V3QXKfsir1cphjIAQ+NkWHZ/qg2mKLUqFR0bEkR8L5HY7LPo/Wbmxx5GoJGbO9
+         ig1sJQGbUOBa2NKyGRuBDbfshgnZgDIAWD6Rewx6oYIHO+SSSzOhsyn6GOhPfeuF8XWj
+         a1jo8olDgqRknDKxLVhJW6bRn2OtvJ4tOm90qZPtTP37RwqpJz5ZGdtLzxhqwfhQaUwt
+         4ez1WgXYfEJQINIzbPJyXsKjtvpIJ19bPwGpz5r/zRxLq8Qnjvz5GiHB1on5rYRv1JQY
+         h0KW+tVXp17FtKgleHQsstXCb8s3G8iuiStopjQXrlrbQkQmgjypTrRd+WJ5BlbdrX/3
+         JcrQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=xMg2QTQLutQrm7Lp/5HxOmyJDHXUuQDgs4CLc4ZQ1Pw=;
+        b=EltVN42oTA44/QZQoHjXGSnimPf/x9I0BVrieOgh1qTOHXBm4pcQfb4Qe9Mn46ri3h
+         nFlp8PDRPLWMpWTpSdzFFMxZ7hPAEFo/vz8oNCEDDOi1Lxak9OYhderXp8NGix9jSaHu
+         v+kkX6hCjc0aTRb5KO8eWuivqgYyxdg9TETzJT8qjaZDbqdB3vNWsKZbO4RYVYLAnR41
+         5dqRgTDnsk42qAC8z29Mx9jIJ/0TwC1laUprNNgUJL7UTc//3fK06EtTbCa54BE/bomf
+         MOA5VdNM089P6ZEPHc2SCfq1ZU7DHb46KHri1v3d464H+ahCeFSecz3Se6HRuC0TvB2g
+         shRw==
+X-Gm-Message-State: APjAAAVBn/Pvb85rwoIjwkmUDH1iiW10hlshumpdtYEbc8aI0n8umvCg
+        ZafNqU7lUGiTiCwNGSDwSjI=
+X-Google-Smtp-Source: APXvYqx5sadgPlSA8Pb3fKmCBf77tUSRtRNFjlDfuoyhjGY/9qsyux/qPLAbY4OVPDrW/v4oUoDK3A==
+X-Received: by 2002:a17:902:758a:: with SMTP id j10mr3536545pll.29.1575355383372;
+        Mon, 02 Dec 2019 22:43:03 -0800 (PST)
+Received: from localhost.localdomain ([139.5.253.93])
+        by smtp.googlemail.com with ESMTPSA id w6sm1893786pge.92.2019.12.02.22.42.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Dec 2019 22:43:02 -0800 (PST)
+From:   Amol Grover <frextrite@gmail.com>
+To:     "Paul E . McKenney" <paulmck@kernel.org>,
+        Josh Triplett <josh@joshtriplett.org>,
         Steven Rostedt <rostedt@goodmis.org>,
-        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Iurii Zaikin <yzaikin@google.com>,
-        =?UTF-8?Q?Michal_Koutn=c3=bd?= <mkoutny@suse.com>,
-        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org,
-        "Paul E. McKenney" <paulmck@linux.ibm.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Joel Fernandes <joel@joelfernandes.org>,
         Jonathan Corbet <corbet@lwn.net>
-References: <743eecad-9556-a241-546b-c8a66339840e@linux.alibaba.com>
- <207ef46c-672c-27c8-2012-735bd692a6de@linux.alibaba.com>
- <040def80-9c38-4bcc-e4a8-8a0d10f131ed@linux.alibaba.com>
-Message-ID: <d295141d-e1bf-10f5-a489-a7055ca6d509@linux.alibaba.com>
-Date:   Tue, 3 Dec 2019 14:02:18 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:60.0)
- Gecko/20100101 Thunderbird/60.9.0
+Cc:     rcu@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Madhuparna Bhowmik <madhuparnabhowmik04@gmail.com>,
+        Amol Grover <frextrite@gmail.com>
+Subject: [PATCH] doc: listRCU: Add some more listRCU patterns in the kernel
+Date:   Tue,  3 Dec 2019 12:09:43 +0530
+Message-Id: <20191203063941.6981-1-frextrite@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-In-Reply-To: <040def80-9c38-4bcc-e4a8-8a0d10f131ed@linux.alibaba.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add the description for 'numa_locality', also a new doc to explain
-the details on how to deal with the per-cgroup numa statistics.
+- Add more information about listRCU patterns taking examples
+from audit subsystem in the linux kernel.
 
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Michal Koutný <mkoutny@suse.com>
-Cc: Mel Gorman <mgorman@suse.de>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Iurii Zaikin <yzaikin@google.com>
-Cc: Randy Dunlap <rdunlap@infradead.org>
-Signed-off-by: Michael Wang <yun.wang@linux.alibaba.com>
+- The initially written audit examples are kept, even though they are
+slightly different in the kernel.
+
+- Modify inline text for better passage quality.
+
+- Fix typo in code-blocks and improve code comments.
+
+- Add text formatting (italics, bold and code) for better emphasis.
+
+Patch originally submitted at
+https://lore.kernel.org/patchwork/patch/1082804/
+
+Co-developed-by: Joel Fernandes (Google) <joel@joelfernandes.org>
+Signed-off-by: Amol Grover <frextrite@gmail.com>
 ---
- Documentation/admin-guide/cg-numa-stat.rst      | 176 ++++++++++++++++++++++++
- Documentation/admin-guide/index.rst             |   1 +
- Documentation/admin-guide/kernel-parameters.txt |   4 +
- Documentation/admin-guide/sysctl/kernel.rst     |   9 ++
- include/linux/sched.h                           |  10 +-
- init/Kconfig                                    |   4 +-
- kernel/sched/fair.c                             |   4 +-
- 7 files changed, 200 insertions(+), 8 deletions(-)
- create mode 100644 Documentation/admin-guide/cg-numa-stat.rst
+ Documentation/RCU/listRCU.rst | 281 ++++++++++++++++++++++++++--------
+ 1 file changed, 214 insertions(+), 67 deletions(-)
 
-diff --git a/Documentation/admin-guide/cg-numa-stat.rst b/Documentation/admin-guide/cg-numa-stat.rst
-new file mode 100644
-index 000000000000..49167db36f37
---- /dev/null
-+++ b/Documentation/admin-guide/cg-numa-stat.rst
-@@ -0,0 +1,176 @@
-+===============================
-+Per-cgroup NUMA statistics
-+===============================
+diff --git a/Documentation/RCU/listRCU.rst b/Documentation/RCU/listRCU.rst
+index 7956ff33042b..9308cbf27f2e 100644
+--- a/Documentation/RCU/listRCU.rst
++++ b/Documentation/RCU/listRCU.rst
+@@ -4,12 +4,61 @@ Using RCU to Protect Read-Mostly Linked Lists
+ =============================================
+ 
+ One of the best applications of RCU is to protect read-mostly linked lists
+-("struct list_head" in list.h).  One big advantage of this approach
++(``struct list_head`` in list.h).  One big advantage of this approach
+ is that all of the required memory barriers are included for you in
+ the list macros.  This document describes several applications of RCU,
+ with the best fits first.
+ 
+-Example 1: Read-Side Action Taken Outside of Lock, No In-Place Updates
 +
-+Background
-+----------
++Example 1: Read-mostly list: Deferred Destruction
++-------------------------------------------------
 +
-+On NUMA platforms, remote memory accessing always has a performance penalty.
-+Although we have NUMA balancing working hard to maximize the access locality,
-+there are still situations it can't help.
++A widely used usecase for RCU lists in the kernel is lockless iteration over
++all processes in the system. ``task_struct::tasks`` represents the list node that
++links all the processes. The list can be traversed in parallel to any list
++additions or removals.
 +
-+This could happen in modern production environment. When a large number of
-+cgroups are used to classify and control resources, this creates a complex
-+configuration for memory policy, CPUs and NUMA nodes. In such cases NUMA
-+balancing could end up with the wrong memory policy or exhausted local NUMA
-+node, which would lead to low percentage of local page accesses.
++The traversal of the list is done using ``for_each_process()`` which is defined
++by the 2 macros::
 +
-+We need to detect such cases, figure out which workloads from which cgroup
-+have introduced the issues, then we get chance to do adjustment to avoid
-+performance degradation.
++	#define next_task(p) \
++		list_entry_rcu((p)->tasks.next, struct task_struct, tasks)
 +
-+However, there are no hardware counters for per-task local/remote accessing
-+info, we don't know how many remote page accesses have occurred for a
-+particular task.
++	#define for_each_process(p) \
++		for (p = &init_task ; (p = next_task(p)) != &init_task ; )
 +
-+NUMA Locality
-+-------------
++The code traversing the list of all processes typically looks like::
 +
-+Fortunately, we have NUMA Balancing which scans task's mapping and triggers
-+page fault periodically, giving us the opportunity to record per-task page
-+accessing info, when the CPU fall into PF is from the same node of pages, we
-+consider task as doing local page accessing, otherwise the remote page
-+accessing, we call these two counter the locality info.
++	rcu_read_lock();
++	for_each_process(p) {
++		/* Do something with p */
++	}
++	rcu_read_unlock();
 +
-+On each tick, we acquire the locality info of current task on that CPU, update
-+the increments into it's cgroup, becoming the group locality info.
++The simplified code for removing a process from a task list is::
 +
-+By "echo 1 > /proc/sys/kernel/numa_locality" at runtime or adding boot parameter
-+'numa_locality', we will enable the accounting of per-cgroup NUMA locality info,
-+the 'cpu.numa_stat' entry of CPU cgroup will show statistics::
++	void release_task(struct task_struct *p)
++	{
++		write_lock(&tasklist_lock);
++		list_del_rcu(&p->tasks);
++		write_unlock(&tasklist_lock);
++		call_rcu(&p->rcu, delayed_put_task_struct);
++	}
 +
-+  page_access local=NR_LOCAL_PAGE_ACCESS remote=NR_REMOTE_PAGE_ACCESS
++When a process exits, ``release_task()`` calls ``list_del_rcu(&p->tasks)`` under
++``tasklist_lock`` writer lock protection, to remove the task from the list of
++all tasks. The ``tasklist_lock`` prevents concurrent list additions/removals
++from corrupting the list. Readers using ``for_each_process()`` are not protected
++with the ``tasklist_lock``. To prevent readers from noticing changes in the list
++pointers, the ``task_struct`` object is freed only after one or more grace
++periods elapse (with the help of ``call_rcu()``). This deferring of destruction
++ensures that any readers traversing the list will see valid ``p->tasks.next``
++pointers and deletion/freeing can happen in parallel with traversal of the list.
++This pattern is also called an **existence lock**, since RCU pins the object in
++memory until all existing readers finish.
 +
-+We define 'NUMA locality' as::
 +
-+  NR_LOCAL_PAGE_ACCESS * 100 / (NR_LOCAL_PAGE_ACCESS + NR_REMOTE_PAGE_ACCESS)
++Example 2: Read-Side Action Taken Outside of Lock: No In-Place Updates
+ ----------------------------------------------------------------------
+ 
+ The best applications are cases where, if reader-writer locking were
+@@ -26,7 +75,7 @@ added or deleted, rather than being modified in place.
+ 
+ A straightforward example of this use of RCU may be found in the
+ system-call auditing support.  For example, a reader-writer locked
+-implementation of audit_filter_task() might be as follows::
++implementation of ``audit_filter_task()`` might be as follows::
+ 
+ 	static enum audit_state audit_filter_task(struct task_struct *tsk)
+ 	{
+@@ -34,7 +83,7 @@ implementation of audit_filter_task() might be as follows::
+ 		enum audit_state   state;
+ 
+ 		read_lock(&auditsc_lock);
+-		/* Note: audit_netlink_sem held by caller. */
++		/* Note: audit_filter_mutex held by caller. */
+ 		list_for_each_entry(e, &audit_tsklist, list) {
+ 			if (audit_filter_rules(tsk, &e->rule, NULL, &state)) {
+ 				read_unlock(&auditsc_lock);
+@@ -58,7 +107,7 @@ This means that RCU can be easily applied to the read side, as follows::
+ 		enum audit_state   state;
+ 
+ 		rcu_read_lock();
+-		/* Note: audit_netlink_sem held by caller. */
++		/* Note: audit_filter_mutex held by caller. */
+ 		list_for_each_entry_rcu(e, &audit_tsklist, list) {
+ 			if (audit_filter_rules(tsk, &e->rule, NULL, &state)) {
+ 				rcu_read_unlock();
+@@ -69,18 +118,18 @@ This means that RCU can be easily applied to the read side, as follows::
+ 		return AUDIT_BUILD_CONTEXT;
+ 	}
+ 
+-The read_lock() and read_unlock() calls have become rcu_read_lock()
+-and rcu_read_unlock(), respectively, and the list_for_each_entry() has
+-become list_for_each_entry_rcu().  The _rcu() list-traversal primitives
++The ``read_lock()`` and ``read_unlock()`` calls have become ``rcu_read_lock()``
++and ``rcu_read_unlock()``, respectively, and the ``list_for_each_entry()`` has
++become ``list_for_each_entry_rcu()``.  The **_rcu()** list-traversal primitives
+ insert the read-side memory barriers that are required on DEC Alpha CPUs.
+ 
+-The changes to the update side are also straightforward.  A reader-writer
+-lock might be used as follows for deletion and insertion::
++The changes to the update side are also straightforward. A reader-writer lock
++might be used as follows for deletion and insertion::
+ 
+ 	static inline int audit_del_rule(struct audit_rule *rule,
+ 					 struct list_head *list)
+ 	{
+-		struct audit_entry  *e;
++		struct audit_entry *e;
+ 
+ 		write_lock(&auditsc_lock);
+ 		list_for_each_entry(e, list, list) {
+@@ -113,9 +162,9 @@ Following are the RCU equivalents for these two functions::
+ 	static inline int audit_del_rule(struct audit_rule *rule,
+ 					 struct list_head *list)
+ 	{
+-		struct audit_entry  *e;
++		struct audit_entry *e;
+ 
+-		/* Do not use the _rcu iterator here, since this is the only
++		/* No need to use the _rcu iterator here, since this is the only
+ 		 * deletion routine. */
+ 		list_for_each_entry(e, list, list) {
+ 			if (!audit_compare_rule(rule, &e->rule)) {
+@@ -139,41 +188,41 @@ Following are the RCU equivalents for these two functions::
+ 		return 0;
+ 	}
+ 
+-Normally, the write_lock() and write_unlock() would be replaced by
+-a spin_lock() and a spin_unlock(), but in this case, all callers hold
+-audit_netlink_sem, so no additional locking is required.  The auditsc_lock
+-can therefore be eliminated, since use of RCU eliminates the need for
+-writers to exclude readers.  Normally, the write_lock() calls would
+-be converted into spin_lock() calls.
++Normally, the ``write_lock()`` and ``write_unlock()`` would be replaced by a
++``spin_lock()`` and a ``spin_unlock()``. But in this case, all callers hold
++``audit_filter_mutex``, so no additional locking is required. The
++``auditsc_lock`` can therefore be eliminated, since use of RCU eliminates the
++need for writers to exclude readers.
+ 
+-The list_del(), list_add(), and list_add_tail() primitives have been
+-replaced by list_del_rcu(), list_add_rcu(), and list_add_tail_rcu().
+-The _rcu() list-manipulation primitives add memory barriers that are
+-needed on weakly ordered CPUs (most of them!).  The list_del_rcu()
+-primitive omits the pointer poisoning debug-assist code that would
+-otherwise cause concurrent readers to fail spectacularly.
++The ``list_del()``, ``list_add()``, and ``list_add_tail()`` primitives have been
++replaced by ``list_del_rcu()``, ``list_add_rcu()``, and ``list_add_tail_rcu()``.
++The **_rcu()** list-manipulation primitives add memory barriers that are needed on
++weakly ordered CPUs (most of them!).  The ``list_del_rcu()`` primitive omits the
++pointer poisoning debug-assist code that would otherwise cause concurrent
++readers to fail spectacularly.
+ 
+-So, when readers can tolerate stale data and when entries are either added
+-or deleted, without in-place modification, it is very easy to use RCU!
++So, when readers can tolerate stale data and when entries are either added or
++deleted, without in-place modification, it is very easy to use RCU!
+ 
+-Example 2: Handling In-Place Updates
 +
-+This per-cgroup percentage number help to represent the NUMA Balancing behavior.
++Example 3: Handling In-Place Updates
+ ------------------------------------
+ 
+-The system-call auditing code does not update auditing rules in place.
+-However, if it did, reader-writer-locked code to do so might look as
+-follows (presumably, the field_count is only permitted to decrease,
+-otherwise, the added fields would need to be filled in)::
++The system-call auditing code does not update auditing rules in place.  However,
++if it did, the reader-writer-locked code to do so might look as follows
++(assuming only ``field_count`` is updated, otherwise, the added fields would
++need to be filled in)::
+ 
+ 	static inline int audit_upd_rule(struct audit_rule *rule,
+ 					 struct list_head *list,
+ 					 __u32 newaction,
+ 					 __u32 newfield_count)
+ 	{
+-		struct audit_entry  *e;
+-		struct audit_newentry *ne;
++		struct audit_entry *e;
++		struct audit_entry *ne;
+ 
+ 		write_lock(&auditsc_lock);
+-		/* Note: audit_netlink_sem held by caller. */
++		/* Note: audit_filter_mutex held by caller. */
+ 		list_for_each_entry(e, list, list) {
+ 			if (!audit_compare_rule(rule, &e->rule)) {
+ 				e->rule.action = newaction;
+@@ -188,16 +237,16 @@ otherwise, the added fields would need to be filled in)::
+ 
+ The RCU version creates a copy, updates the copy, then replaces the old
+ entry with the newly updated entry.  This sequence of actions, allowing
+-concurrent reads while doing a copy to perform an update, is what gives
+-RCU ("read-copy update") its name.  The RCU code is as follows::
++concurrent reads while making a copy to perform an update, is what gives
++RCU (*read-copy update*) its name.  The RCU code is as follows::
+ 
+ 	static inline int audit_upd_rule(struct audit_rule *rule,
+ 					 struct list_head *list,
+ 					 __u32 newaction,
+ 					 __u32 newfield_count)
+ 	{
+-		struct audit_entry  *e;
+-		struct audit_newentry *ne;
++		struct audit_entry *e;
++		struct audit_entry *ne;
+ 
+ 		list_for_each_entry(e, list, list) {
+ 			if (!audit_compare_rule(rule, &e->rule)) {
+@@ -215,34 +264,45 @@ RCU ("read-copy update") its name.  The RCU code is as follows::
+ 		return -EFAULT;		/* No matching rule */
+ 	}
+ 
+-Again, this assumes that the caller holds audit_netlink_sem.  Normally,
+-the reader-writer lock would become a spinlock in this sort of code.
++Again, this assumes that the caller holds ``audit_filter_mutex``.  Normally, the
++writer lock would become a spinlock in this sort of code.
+ 
+-Example 3: Eliminating Stale Data
++Another use of this pattern can be found in the openswitch driver's *connection
++tracking table* code in ``ct_limit_set()``.  The table holds connection tracking
++entries and has a limit on the maximum entries.  There is one such table
++per-zone and hence one *limit* per zone.  The zones are mapped to their limits
++through a hashtable using an RCU-managed hlist for the hash chains. When a new
++limit is set, a new limit object is allocated and ``ct_limit_set()`` is called
++to replace the old limit object with the new one using ``list_replace_rcu()``.
++The old limit object is then freed after a grace period using ``kfree_rcu()``.
 +
-+Note that the accounting is hierarchical, which means the NUMA locality info for
-+a given group represent not only the workload of this group, but also the
-+workloads of all its descendants.
 +
-+For example the 'cpu.numa_stat' show::
++Example 4: Eliminating Stale Data
+ ---------------------------------
+ 
+-The auditing examples above tolerate stale data, as do most algorithms
++The auditing example above tolerates stale data, as do most algorithms
+ that are tracking external state.  Because there is a delay from the
+ time the external state changes before Linux becomes aware of the change,
+-additional RCU-induced staleness is normally not a problem.
++additional RCU-induced staleness is generally not a problem.
+ 
+ However, there are many examples where stale data cannot be tolerated.
+ One example in the Linux kernel is the System V IPC (see the ipc_lock()
+-function in ipc/util.c).  This code checks a "deleted" flag under a
+-per-entry spinlock, and, if the "deleted" flag is set, pretends that the
++function in ipc/util.c).  This code checks a *deleted* flag under a
++per-entry spinlock, and, if the *deleted* flag is set, pretends that the
+ entry does not exist.  For this to be helpful, the search function must
+-return holding the per-entry spinlock, as ipc_lock() does in fact do.
++return holding the per-entry lock, as ipc_lock() does in fact do.
 +
-+  page_access local=129909383 remote=18265810
++.. _quick_quiz:
+ 
+ Quick Quiz:
+-	Why does the search function need to return holding the per-entry lock for
+-	this deleted-flag technique to be helpful?
++	For the deleted-flag technique to be helpful, why is it necessary
++	to hold the per-entry lock while returning from the search function?
+ 
+-:ref:`Answer to Quick Quiz <answer_quick_quiz_list>`
++:ref:`Answer to Quick Quiz <quick_quiz_answer>`
+ 
+-If the system-call audit module were to ever need to reject stale data,
+-one way to accomplish this would be to add a "deleted" flag and a "lock"
+-spinlock to the audit_entry structure, and modify audit_filter_task()
+-as follows::
++If the system-call audit module were to ever need to reject stale data, one way
++to accomplish this would be to add a ``deleted`` flag and a ``lock`` spinlock to the
++audit_entry structure, and modify ``audit_filter_task()`` as follows::
+ 
+ 	static enum audit_state audit_filter_task(struct task_struct *tsk)
+ 	{
+@@ -267,20 +327,20 @@ as follows::
+ 	}
+ 
+ Note that this example assumes that entries are only added and deleted.
+-Additional mechanism is required to deal correctly with the
+-update-in-place performed by audit_upd_rule().  For one thing,
+-audit_upd_rule() would need additional memory barriers to ensure
+-that the list_add_rcu() was really executed before the list_del_rcu().
++Additional mechanism is required to deal correctly with the update-in-place
++performed by ``audit_upd_rule()``.  For one thing, ``audit_upd_rule()`` would
++need additional memory barriers to ensure that the ``list_add_rcu()`` was really
++executed before the ``list_del_rcu()``.
+ 
+-The audit_del_rule() function would need to set the "deleted"
+-flag under the spinlock as follows::
++The ``audit_del_rule()`` function would need to set the ``deleted`` flag under the
++spinlock as follows::
+ 
+ 	static inline int audit_del_rule(struct audit_rule *rule,
+ 					 struct list_head *list)
+ 	{
+-		struct audit_entry  *e;
++		struct audit_entry *e;
+ 
+-		/* Do not need to use the _rcu iterator here, since this
++		/* No need to use the _rcu iterator here, since this
+ 		 * is the only deletion routine. */
+ 		list_for_each_entry(e, list, list) {
+ 			if (!audit_compare_rule(rule, &e->rule)) {
+@@ -295,6 +355,91 @@ flag under the spinlock as follows::
+ 		return -EFAULT;		/* No matching rule */
+ 	}
+ 
++This too assumes that the caller holds ``audit_filter_mutex``.
 +
-+The NUMA locality calculated as::
 +
-+  129909383 * 100 / (129909383 + 18265810) = 87.67
++Example 5: Skipping Stale Objects
++---------------------------------
 +
-+Thus we know the workload of this group and its descendants have totally done
-+129909383 times of local page accessing and 18265810 times of remotes, locality
-+is 87.67% which imply most of the memory access are local.
++For some usecases, reader performance can be improved by skipping stale objects
++during read-side list traversal if the object in concern is pending destruction
++after one or more grace periods. One such example can be found in the timerfd
++subsystem. When a ``CLOCK_REALTIME`` clock is reprogrammed - for example due to
++setting of the system time, then all programmed timerfds that depend on this
++clock get triggered and processes waiting on them to expire are woken up in
++advance of their scheduled expiry. To facilitate this, all such timers are added
++to an RCU-managed ``cancel_list`` when they are setup in
++``timerfd_setup_cancel()``::
 +
-+NUMA Consumption
-+----------------
++	static void timerfd_setup_cancel(struct timerfd_ctx *ctx, int flags)
++	{
++		spin_lock(&ctx->cancel_lock);
++		if ((ctx->clockid == CLOCK_REALTIME &&
++		    (flags & TFD_TIMER_ABSTIME) && (flags & TFD_TIMER_CANCEL_ON_SET)) {
++			if (!ctx->might_cancel) {
++				ctx->might_cancel = true;
++				spin_lock(&cancel_lock);
++				list_add_rcu(&ctx->clist, &cancel_list);
++				spin_unlock(&cancel_lock);
++			}
++		}
++		spin_unlock(&ctx->cancel_lock);
++	}
 +
-+There are also other cgroup entry help us to estimate NUMA efficiency, which is
-+'cpuacct.usage_percpu' and 'memory.numa_stat'.
++When a timerfd is freed (fd is closed), then the ``might_cancel`` flag of the
++timerfd object is cleared, the object removed from the ``cancel_list`` and
++destroyed::
 +
-+By reading 'cpuacct.usage_percpu' we will get per-cpu runtime (in nanoseconds)
-+info (in hierarchy) as::
++	int timerfd_release(struct inode *inode, struct file *file)
++	{
++		struct timerfd_ctx *ctx = file->private_data;
 +
-+  CPU_0_RUNTIME CPU_1_RUNTIME CPU_2_RUNTIME ... CPU_X_RUNTIME
++		spin_lock(&ctx->cancel_lock);
++		if (ctx->might_cancel) {
++			ctx->might_cancel = false;
++			spin_lock(&cancel_lock);
++			list_del_rcu(&ctx->clist);
++			spin_unlock(&cancel_lock);
++		}
++		spin_unlock(&ctx->cancel_lock);
 +
-+Combined with the info from::
++		hrtimer_cancel(&ctx->t.tmr);
++		kfree_rcu(ctx, rcu);
++		return 0;
++	}
 +
-+  cat /sys/devices/system/node/nodeX/cpulist
++If the ``CLOCK_REALTIME`` clock is set, for example by a time server, the
++hrtimer framework calls ``timerfd_clock_was_set()`` which walks the
++``cancel_list`` and wakes up processes waiting on the timerfd. While iterating
++the ``cancel_list``, the ``might_cancel`` flag is consulted to skip stale
++objects::
 +
-+We would be able to accumulate the runtime of CPUs into NUMA nodes, to get the
-+per-cgroup node runtime info.
++	void timerfd_clock_was_set(void)
++	{
++		struct timerfd_ctx *ctx;
++		unsigned long flags;
 +
-+By reading 'memory.numa_stat' we will get per-cgroup node memory consumption
-+info as::
++		rcu_read_lock();
++		list_for_each_entry_rcu(ctx, &cancel_list, clist) {
++			if (!ctx->might_cancel)
++				continue;
++			spin_lock_irqsave(&ctx->wqh.lock, flags);
++			if (ctx->moffs != ktime_mono_to_real(0)) {
++				ctx->moffs = KTIME_MAX;
++				ctx->ticks++;
++				wake_up_locked_poll(&ctx->wqh, EPOLLIN);
++			}
++			spin_unlock_irqrestore(&ctx->wqh.lock, flags);
++		}
++		rcu_read_unlock();
++	}
 +
-+  total=TOTAL_MEM N0=MEM_ON_NODE0 N1=MEM_ON_NODE1 ... NX=MEM_ON_NODEX
++The key point here is, because RCU-traversal of the ``cancel_list`` happens
++while objects are being added and removed to the list, sometimes the traversal
++can step on an object that has been removed from the list. In this example, it
++is seen that it is better to skip such objects using a flag.
 +
-+Together we call these the per-cgroup NUMA consumption info, tell us how many
-+resources a particular workload has consumed, on a particular NUMA node.
 +
-+Monitoring
-+----------
+ Summary
+ -------
+ 
+@@ -303,19 +448,21 @@ the most amenable to use of RCU.  The simplest case is where entries are
+ either added or deleted from the data structure (or atomically modified
+ in place), but non-atomic in-place modifications can be handled by making
+ a copy, updating the copy, then replacing the original with the copy.
+-If stale data cannot be tolerated, then a "deleted" flag may be used
++If stale data cannot be tolerated, then a *deleted* flag may be used
+ in conjunction with a per-entry spinlock in order to allow the search
+ function to reject newly deleted data.
+ 
+-.. _answer_quick_quiz_list:
++.. _quick_quiz_answer:
+ 
+ Answer to Quick Quiz:
+-	Why does the search function need to return holding the per-entry
+-	lock for this deleted-flag technique to be helpful?
++	For the deleted-flag technique to be helpful, why is it necessary
++	to hold the per-entry lock while returning from the search function?
+ 
+ 	If the search function drops the per-entry lock before returning,
+ 	then the caller will be processing stale data in any case.  If it
+ 	is really OK to be processing stale data, then you don't need a
+-	"deleted" flag.  If processing stale data really is a problem,
++	*deleted* flag.  If processing stale data really is a problem,
+ 	then you need to hold the per-entry lock across all of the code
+ 	that uses the value that was returned.
 +
-+By monitoring the increments of locality info, we can easily know whether NUMA
-+Balancing is working well for a particular workload.
-+
-+For example we take a 5 seconds sample period, then on each sampling we have::
-+
-+  local_diff = last_nr_local_page_access - nr_local_page_access
-+  remote_diff = last_nr_remote_page_access - nr_remote_page_access
-+
-+and we get the locality in this period as::
-+
-+  locality = local_diff * 100 / (local_diff + remote_diff)
-+
-+We can plot a line for locality, when the line close to 100% things are good,
-+when getting close to 0% something is wrong, we can pick a proper watermark to
-+trigger warning message.
-+
-+You may want to drop the data if the local/remote_diff is too small, which
-+implies there are not many available pages for NUMA Balancing to scan, ignoring
-+would be fine since most likely the workload is insensitive to NUMA, or the
-+memory topology is already good enough.
-+
-+Monitoring root group helps you control the overall situation, while you may
-+also want to monitor all the leaf groups which contain the workloads, this
-+helps to catch the mouse.
-+
-+Try to put your workload into also the cpuacct & memory cgroup, when NUMA
-+Balancing is disabled or locality becomes too small, we may want to monitoring
-+the per-node runtime & memory info to see if the node consumption meet the
-+requirements.
-+
-+For NUMA node X on each sampling we have::
-+
-+  runtime_X_diff = runtime_X - last_runtime_X
-+  runtime_all_diff = runtime_all - last_runtime_all
-+
-+  runtime_percent_X = runtime_X_diff * 100 / runtime_all_diff
-+  memory_percent_X = memory_X * 100 / memory_all
-+
-+These two percentages are usually matched on each node, workload should execute
-+mostly on the node that contains most of its memory, but it's not guaranteed.
-+
-+The workload may only access a small part of its memory, in such cases although
-+the majority of memory are remotely, locality could still be good.
-+
-+Thus to tell if things are fine or not depends on the understanding of system
-+resource deployment, however, if you find node X got 100% memory percent but 0%
-+runtime percent, definitely something is wrong.
-+
-+Troubleshooting
-+---------------
-+
-+After identifying which workload introduced the bad locality, check:
-+
-+1). Is the workload bound to a particular NUMA node?
-+2). Has any NUMA node run out of resources?
-+
-+There are several ways to bind task's memory with a NUMA node, the strict way
-+like the MPOL_BIND memory policy or 'cpuset.mems' will limit the memory
-+node where to allocate pages. In this situation, admin should make sure the
-+task is allowed to run on the CPUs of that NUMA node, and make sure there are
-+available CPU resource there.
-+
-+There are also ways to bind task's CPU with a NUMA node, like 'cpuset.cpus' or
-+sched_setaffinity() syscall. In this situation, NUMA Balancing help to migrate
-+pages into that node, admin should make sure there are available memory there.
-+
-+Admin could try to rebind or unbind the NUMA node to erase the damage, make a
-+change then observe the statistics to see if things get better until the
-+situation is acceptable.
-+
-+Highlights
-+----------
-+
-+For some tasks, NUMA Balancing may found no necessary to scan pages, and
-+locality could always be 0 or small number, don't pay attention to them
-+since they most likely insensitive to NUMA.
-+
-+There is no accounting until the option is turned on, so enable it in advance
-+if you want to have the whole history.
-+
-+We have per-task migfailed counter to tell how many page migration has been
-+failed for a particular task, you will find it in /proc/PID/sched entry.
-diff --git a/Documentation/admin-guide/index.rst b/Documentation/admin-guide/index.rst
-index 4405b7485312..c75a3fdfcd94 100644
---- a/Documentation/admin-guide/index.rst
-+++ b/Documentation/admin-guide/index.rst
-@@ -112,6 +112,7 @@ configure specific aspects of kernel behavior to your liking.
-    video-output
-    wimax/index
-    xfs
-+   cg-numa-stat
-
- .. only::  subproject and html
-
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index 0945611b3877..9d9e57d19af3 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -3227,6 +3227,10 @@
- 	numa_balancing=	[KNL,X86] Enable or disable automatic NUMA balancing.
- 			Allowed values are enable and disable
-
-+	numa_locality	[KNL] Enable per-cgroup numa locality info.
-+			Useful to debug NUMA efficiency problems when there are
-+			lots of per-cgroup workloads.
-+
- 	numa_zonelist_order= [KNL, BOOT] Select zonelist order for NUMA.
- 			'node', 'default' can be specified
- 			This can be set from sysctl after boot.
-diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
-index 7e203b3ed331..efa995e757fd 100644
---- a/Documentation/admin-guide/sysctl/kernel.rst
-+++ b/Documentation/admin-guide/sysctl/kernel.rst
-@@ -572,6 +572,15 @@ rate for each task.
- numa_balancing_scan_size_mb is how many megabytes worth of pages are
- scanned for a given scan.
-
-+numa_locality:
-+=============
-+
-+Enables/disables per-cgroup NUMA locality info.
-+
-+0: disabled (default).
-+1: enabled.
-+
-+Check Documentation/admin-guide/cg-numa-stat.rst for details.
-
- osrelease, ostype & version:
- ============================
++:ref:`Back to Quick Quiz <quick_quiz>`
 -- 
-2.14.4.44.g2045bb6
+2.24.0
 
