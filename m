@@ -2,99 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 764DC112E79
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Dec 2019 16:31:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CA075112EB0
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Dec 2019 16:40:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728325AbfLDPb0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 4 Dec 2019 10:31:26 -0500
-Received: from aserp2120.oracle.com ([141.146.126.78]:57386 "EHLO
-        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728256AbfLDPbZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 4 Dec 2019 10:31:25 -0500
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
-        by aserp2120.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xB4FTVrB117073;
-        Wed, 4 Dec 2019 15:31:01 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
- : subject : in-reply-to : message-id : references : mime-version :
- content-type; s=corp-2019-08-05;
- bh=3HXTEHGjRHmK560JTL3C3ZVMunILMgZmaWDSgV/yAWc=;
- b=NavOD1sqByyqk0LtmIBRd41E+pizBK+QBKTPXQorgMkOR3N34bUeKcga6ZksLatgdlpZ
- ecF3d7hB8Vim/ut4EfNnmXVw9thzBFtAR1KiEkWKgmwwCA2BjcbfjakIx7njcy7Mtyrn
- dwJCWhspPecbwtaeCJ7RHU0cs8ZpDyKXJp2aH2JWVMpG1NAxOO8oHV2eMvHQ4vONYgIm
- Nq5egI+u32gElcEVuwuJyrB06P9qwSc48jDrUUx42dEb7Ei/xWdp9evKaQznaRKm1mko
- Wy0rEi83SfZ1+BDcbHDAz+sWiMGU8/nojfMUxj+ZRfIFau1mQslp+KjKUIqlqEjMCT3v gA== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
-        by aserp2120.oracle.com with ESMTP id 2wkgcqf3wv-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 04 Dec 2019 15:31:01 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
-        by aserp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id xB4FTODa195008;
-        Wed, 4 Dec 2019 15:31:00 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
-        by aserp3030.oracle.com with ESMTP id 2wp16aytx4-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 04 Dec 2019 15:31:00 +0000
-Received: from abhmp0004.oracle.com (abhmp0004.oracle.com [141.146.116.10])
-        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id xB4FUxiF020567;
-        Wed, 4 Dec 2019 15:30:59 GMT
-Received: from dhcp-10-175-179-22.vpn.oracle.com (/10.175.179.22)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Wed, 04 Dec 2019 07:30:59 -0800
-Date:   Wed, 4 Dec 2019 15:30:46 +0000 (GMT)
-From:   Alan Maguire <alan.maguire@oracle.com>
-X-X-Sender: alan@dhcp-10-175-179-22.vpn.oracle.com
-To:     Iurii Zaikin <yzaikin@google.com>
-cc:     Alan Maguire <alan.maguire@oracle.com>,
-        Brendan Higgins <brendanhiggins@google.com>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        KUnit Development <kunit-dev@googlegroups.com>,
-        Kees Cook <keescook@chromium.org>, akpm@linux-foundation.org,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        catalin.marinas@arm.com, joe.lawrence@redhat.com,
-        penguin-kernel@i-love.sakura.ne.jp, urezki@gmail.com,
-        andriy.shevchenko@linux.intel.com, corbet@lwn.net,
-        David Gow <davidgow@google.com>, adilger.kernel@dilger.ca,
-        "Theodore Ts'o" <tytso@mit.edu>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Knut Omang <knut.omang@oracle.com>
-Subject: Re: [PATCH v5 linux-kselftest-test 3/6] kunit: allow kunit tests to
- be loaded as a module
-In-Reply-To: <CAAXuY3rYZHac4o1bqqnbR_1g12dtqmJHVp8Taky00J4-+2hwZA@mail.gmail.com>
-Message-ID: <alpine.LRH.2.20.1912041530210.5511@dhcp-10-175-179-22.vpn.oracle.com>
-References: <1575374868-32601-1-git-send-email-alan.maguire@oracle.com> <1575374868-32601-4-git-send-email-alan.maguire@oracle.com> <CAAXuY3rYZHac4o1bqqnbR_1g12dtqmJHVp8Taky00J4-+2hwZA@mail.gmail.com>
-User-Agent: Alpine 2.20 (LRH 67 2015-01-07)
+        id S1728465AbfLDPkB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 4 Dec 2019 10:40:01 -0500
+Received: from mail-pj1-f68.google.com ([209.85.216.68]:39847 "EHLO
+        mail-pj1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728529AbfLDPkB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 4 Dec 2019 10:40:01 -0500
+Received: by mail-pj1-f68.google.com with SMTP id v93so3139387pjb.6
+        for <linux-doc@vger.kernel.org>; Wed, 04 Dec 2019 07:40:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=joelfernandes.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=Yf0/AyAbsCQScuwSh0FkTQfwVgWv8tTjAbyxzK0zN18=;
+        b=u6pokYYSDBN0Rp74jlq4km9163s/bxCbqqwQgKLvwLLq7hphPCk1dgf878+h0qVVmM
+         oV7Vue9ENHkWIJGRL7X1hXiu7FUUrbQYBpuBn1nz9Kjrd62+TdmBaVDPebDuggsEami0
+         S0WXUL9OT1MT+WRt/jL2wKJFluZcb3sg62uSg=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=Yf0/AyAbsCQScuwSh0FkTQfwVgWv8tTjAbyxzK0zN18=;
+        b=IkjF6emGgqp+NUIQKK6anuvRXPZurP6F9+s/JrjOB8oSP09Ntw2DrFltII4gp4A5O2
+         b1qg5hqe0ICCmScNd9NoVOPBLtRIrzRknk9xEBCGLvLoQ6lmCX5v2/y7bjfbbR74DOvj
+         ia/f54uV5VxLJ8AwDlDDwg0hdk/ATeRbeSyn92CSE7YadqGUV5b5SAQXIdtNvB2SW8OM
+         pVoqQT1W1oMIiGUqya05BPmqMaPWkhDPTA5PLlOfykFsZqnUYjRKNmb2ExGZDqIBga1K
+         TD/eFF4e+9LbP8gyYxtS8b+cxkLFPQM4a1Ax1Pt1xPbRT/fMTykGY6EoOL1PzqbsntTM
+         RnHQ==
+X-Gm-Message-State: APjAAAXqfSQ8eoCPbLjK2UGIMx7h/oFFKfL+/zGKh4oadDw4OWqZ1x7Y
+        iY11mLpkOa9MyzUCARmZppc9cg==
+X-Google-Smtp-Source: APXvYqydWvp2jT88+hxu6Hv9v4Gi45t2Z6QCPGmLhAy/GxOqbXhW3/mndI4tvMOl+WYPILBjfEd8DQ==
+X-Received: by 2002:a17:90a:9bc6:: with SMTP id b6mr3975479pjw.77.1575474000054;
+        Wed, 04 Dec 2019 07:40:00 -0800 (PST)
+Received: from localhost ([2620:15c:6:12:9c46:e0da:efbf:69cc])
+        by smtp.gmail.com with ESMTPSA id u3sm7370858pjn.0.2019.12.04.07.39.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Dec 2019 07:39:59 -0800 (PST)
+Date:   Wed, 4 Dec 2019 10:39:58 -0500
+From:   Joel Fernandes <joel@joelfernandes.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Amol Grover <frextrite@gmail.com>,
+        "Paul E . McKenney" <paulmck@kernel.org>,
+        Josh Triplett <josh@joshtriplett.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Lai Jiangshan <jiangshanlai@gmail.com>, rcu@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Madhuparna Bhowmik <madhuparnabhowmik04@gmail.com>
+Subject: Re: [PATCH] doc: listRCU: Add some more listRCU patterns in the
+ kernel
+Message-ID: <20191204153958.GA17404@google.com>
+References: <20191203063941.6981-1-frextrite@gmail.com>
+ <20191203064132.38d75348@lwn.net>
+ <20191204082412.GA6959@workstation-kernel-dev>
+ <20191204074833.44bcc079@lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9461 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=3 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=988
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.0.1-1911140001 definitions=main-1912040129
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9461 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
- suspectscore=3 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
- lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
- definitions=main-1912040129
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20191204074833.44bcc079@lwn.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 3 Dec 2019, Iurii Zaikin wrote:
-
-> > +ifeq ($(CONFIG_EXT4_KUNIT_TESTS),y)
-> >  ext4-$(CONFIG_EXT4_KUNIT_TESTS)                += inode-test.o
-> > +else
-> > +obj-$(CONFIG_EXT4_KUNIT_TESTS)         += ext4-inode-test.o
-> > +ext4-inode-test-objs                   += inode-test.o
-> > +endif
-> Why not rename it unconditionally?
+On Wed, Dec 04, 2019 at 07:48:33AM -0700, Jonathan Corbet wrote:
+> On Wed, 4 Dec 2019 13:54:12 +0530
+> Amol Grover <frextrite@gmail.com> wrote:
 > 
+> > The cross-reference of the functions should be done automatically by sphinx
+> > while generating HTML, right? But when compiled none of the functions were
+> > cross-referenced hence "``" was added around the methods (and other symbols)
+> > to distinguish them from normal text.
 
-Good point - I've fixed this in v6. Thanks for the review!
+Amol, when I tried your patch -- some functions were cross-referenced. Some
+were not. I don't think all were not cross referenced.
 
-Alan
+> 
+> If there's nothing to cross-reference to (i.e. no kerneldoc comments)
+> then the reference obviously won't be generated.  I would still ask that
+> you leave out the literal markers; they will block linking to any docs
+> added in the future, and they clutter up the text - the plain-text reading
+> experience is important too.
+
+Actually I had asked Amol privately to add the backticks. It appeared super
+weird in my browser when some function calls were rendered monospace while
+others weren't. Not all functions were successfully cross referenced for me.
+May be it is my kernel version?
+
+Amol, do as Jon said and send a v2. Then I will test your patch again.
+
+thanks,
+
+ - Joel
+
