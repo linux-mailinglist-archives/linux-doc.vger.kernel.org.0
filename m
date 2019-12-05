@@ -2,179 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 28E0C1148E1
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2019 22:52:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 996C9114932
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Dec 2019 23:25:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387533AbfLEVww (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Dec 2019 16:52:52 -0500
-Received: from mail-io1-f68.google.com ([209.85.166.68]:44570 "EHLO
-        mail-io1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387525AbfLEVwu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Dec 2019 16:52:50 -0500
-Received: by mail-io1-f68.google.com with SMTP id z23so5192298iog.11;
-        Thu, 05 Dec 2019 13:52:49 -0800 (PST)
+        id S1729450AbfLEWZE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Dec 2019 17:25:04 -0500
+Received: from mail-pf1-f193.google.com ([209.85.210.193]:43311 "EHLO
+        mail-pf1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729430AbfLEWZE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Dec 2019 17:25:04 -0500
+Received: by mail-pf1-f193.google.com with SMTP id h14so2261756pfe.10;
+        Thu, 05 Dec 2019 14:25:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=+DItobioE2v0mcjvG7rtQWbeO2Gh9dZ5P9FoUFdI1r8=;
-        b=dPQL7iwe36qPjYatnqnyMK7+wQcq/+GaIbuumJSYp+Odzdr29W4dj+1GMvZFPEkLfM
-         oNmNdpZg2sTDEI/oKXIUKo/HKR99JM9odseNtG5FtKpfeB3k04kTZE8xpQ+wh5sgowmC
-         rTTgQqq+7LfhVB7gPQrOSEilZFv/rYaMluz46geLr/ut3X6TD0GA59ekD4poXUrDF2xK
-         JxQbqtw1xXN3GtclgVuveNgkX+MVDUwTgno7kM2POx4KSLcyFjR/0mqxaBQWPeNb4h3M
-         2KOlJM2pkKbOGvU7dIk430gVwcAPLnk6jaIEJ52jc5zAzoml8pZDPymIughrtVJHuG1F
-         1ddQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=i7d8gLjd+sLoiJpXei1q6a6kERigQFuSYg7tC9xLpLQ=;
+        b=Nhguw729g/WUMhWFkxEF7GWHFRtvnBoAnkFhvhi7jPBIXNhvjwFDNssMX1ScVNCjVY
+         dW8HB3etskB92IitKyrS5OMjiXsowoD2PjZKU1GmTTxwR2hxRQyVEsiJv4lVR/kqOpD3
+         nEw2j1J0191duIdNWJmeI4q0fWmk9pkWe0I0N2ae+Co2AWVGtk9CJ0C+tKyA1YTZ0+ez
+         48pGKZFjF7owmWUoJIbih8f5sRKw+VwGRUOA2WxacA6mFFm6rBHZBE/qQVGvCYFNdJYa
+         GLtYcGVHUtWACOHYF9ybZSqr//+XnNMD71B5OmkWLgxbYOQ34mM975xOfvQDjHQEBcRA
+         GczQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=+DItobioE2v0mcjvG7rtQWbeO2Gh9dZ5P9FoUFdI1r8=;
-        b=oj9G1pWGxjYV82LZliWlCqnvmBwzftC2KOB1aWDLCB1GxQdifuyLP0rWHFDsBOVyrB
-         SQz8fmog3gVS7IHJUpE20Tf5emQ3ATSQZLuv3q5+SzRzmqkgCYelF1xnu8IfMHJEvNPa
-         QoijkMXAwauICHEFCxACR5o+4cNGnQ6BQbK7w4z/mnML2xGjshtJ3TrIpt/QWZ1pjXXX
-         2ZdNkxsH84BuQ1QQWVpY0QPHI50TqPcwfT/kXyWmNRVOsIXFarJOzwVlvZXxQsFfZPWS
-         6shXDnBh2ghrOBiVVwVQKtnfnasdkK4rld3KaU3y8KRKVGzSf9XfpqWGj25+2jS5UGin
-         LQBw==
-X-Gm-Message-State: APjAAAULiwyC1jrA5VTYTd/bH8sbPVcsUnniPIlMsuYDuGy9bRFTTNUp
-        qn09lXmThBLuDhSGFaenaU5O2JzKTDyQRQ==
-X-Google-Smtp-Source: APXvYqy2RPf1EWJTE5thsigSgQnTSK9fZBeGJmChON0tx5U/ZvgnYBw2HIVw83BdYuHDLHTSkkrmbw==
-X-Received: by 2002:a02:ca42:: with SMTP id i2mr10497732jal.87.1575582768972;
-        Thu, 05 Dec 2019 13:52:48 -0800 (PST)
-Received: from localhost.localdomain (c-24-9-77-57.hsd1.co.comcast.net. [24.9.77.57])
-        by smtp.googlemail.com with ESMTPSA id n22sm740184iog.14.2019.12.05.13.52.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 05 Dec 2019 13:52:48 -0800 (PST)
-From:   Jim Cromie <jim.cromie@gmail.com>
-To:     jbaron@akamai.com, gregkh@linuxfoundation.org,
-        linux-kernel@vger.kernel.org
-Cc:     linux@rasmusvillemoes.dk, Jim Cromie <jim.cromie@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 18/18] dyndbg-docs: normalize comments in examples
-Date:   Thu,  5 Dec 2019 14:51:51 -0700
-Message-Id: <20191205215151.421926-21-jim.cromie@gmail.com>
-X-Mailer: git-send-email 2.23.0
-In-Reply-To: <20191205215151.421926-1-jim.cromie@gmail.com>
-References: <20191205215151.421926-1-jim.cromie@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=i7d8gLjd+sLoiJpXei1q6a6kERigQFuSYg7tC9xLpLQ=;
+        b=acY+3j5os/SbzpHWqWTeqRHOI+WXZCTJImL/Dz/muGr3oKBT10U4Roy3cAXcTW7oz0
+         OFvXOMtFJfSYjZtLkmIfeZ0oLgZunBdHH4S27r8u2PBa91C/DQstwHtZOvgrgV4h56GY
+         rYBsTUGglzOhDaHH+AjNrAp3B82IGYd+F8lw/eoAUfpPVfhVbu/KS5vT4DCJ4O7XpBN1
+         V+1TlKI+0dMR54UfT5yxJcOyXHNNV4vVtgsfy0w2xZxzluoolMNJYZfqThjL3tLh3mOc
+         jqecxMr+D2/rr3mpk6GZtJ0l6aopLbzdZ8D2gGI+VYoIFmh7VXYqboo0lZ3gox8ptJFZ
+         jF2w==
+X-Gm-Message-State: APjAAAXZ6Baeck6SRkXo/2oHUuwjJEAOlXQSvseCGLq9d2FJdlYglE3n
+        +4gB9U5s6T0WEpQuIRMZmevptdZwHvIWBunlZy4=
+X-Google-Smtp-Source: APXvYqxMbd1CA+h65ymSEClEw1SnfCASsf92gbJSoej2Vn3nUlZUtazzWber25+lZzHthoOXsseTrIP4ugkGyOQ1uYg=
+X-Received: by 2002:a65:490e:: with SMTP id p14mr2933470pgs.4.1575584703737;
+ Thu, 05 Dec 2019 14:25:03 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20191205215151.421926-1-jim.cromie@gmail.com> <20191205215151.421926-20-jim.cromie@gmail.com>
+In-Reply-To: <20191205215151.421926-20-jim.cromie@gmail.com>
+From:   Andy Shevchenko <andy.shevchenko@gmail.com>
+Date:   Fri, 6 Dec 2019 00:24:52 +0200
+Message-ID: <CAHp75VcSkm4M7VOuMWnNUOMAPbbvmodGfn9_Pu25H213pMuxFA@mail.gmail.com>
+Subject: Re: [PATCH 17/18] dyndbg: rename dynamic_debug to dyndbg
+To:     Jim Cromie <jim.cromie@gmail.com>
+Cc:     jbaron@akamai.com, Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Kees Cook <keescook@chromium.org>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Joe Lawrence <joe.lawrence@redhat.com>,
+        Kent Overstreet <kent.overstreet@gmail.com>,
+        "Uladzislau Rezki (Sony)" <urezki@gmail.com>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Gary Hook <Gary.Hook@amd.com>, Arnd Bergmann <arnd@arndb.de>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Linux Documentation List <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-given that:
-  ~# cat batch-of-dyndbg-cmd-queries > /sys/kernel/debug/dyndbg/control
+On Thu, Dec 5, 2019 at 11:54 PM Jim Cromie <jim.cromie@gmail.com> wrote:
+>
+> This rename fixes a subtle usage wrinkle; the __setup() names didn't
+> match the fake "dyndbg" module parameter used to enable dynamic-printk
+> callsites in modules.  See the last change in Docs for the effect.
+>
+> It also shortens the "__FILE__:__func__" prefix in dyndbg.verbose
+> messages, effectively s/dynamic_debug/dyndbg/
+>
+> This is a 99.9% rename; trim_prefix and debugfs_create_dir arg excepted.
+> Nonetheless, it also changes both /sys appearances:
+>
+> bash-5.0# ls -R /sys/kernel/debug/dyndbg/ /sys/module/dyndbg/parameters/
+> /sys/kernel/debug/dyndbg/:
+> control
 
-works, and since '#' is a legal comment character accepted
-by >control, the syntax is much more like bash than c++.
+> /sys/module/dyndbg/parameters/:
 
-So replace '//' with '#'.
-Someone might copy-paste these examples, lets make them more usable
+Isn't this path a part of ABI?
 
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
----
- .../admin-guide/dynamic-debug-howto.rst       | 51 ++++++++++---------
- 1 file changed, 27 insertions(+), 24 deletions(-)
+> verbose
+>
+> Finally, paths in docs are ~= s|/dynamic_debug/|/dyndbg/|,
+> plus the kernel cmdline example tweak cited above.
 
-diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index d91dbb52721d..33eed4713bb8 100644
---- a/Documentation/admin-guide/dynamic-debug-howto.rst
-+++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -189,11 +189,11 @@ format
-     characters (``"``) or single quote characters (``'``).
-     Examples::
- 
--	format svcrdma:         // many of the NFS/RDMA server pr_debugs
--	format readahead        // some pr_debugs in the readahead cache
--	format nfsd:\040SETATTR // one way to match a format with whitespace
--	format "nfsd: SETATTR"  // a neater way to match a format with whitespace
--	format 'nfsd: SETATTR'  // yet another way to match a format with whitespace
-+	format svcrdma:         # many of the NFS/RDMA server pr_debugs
-+	format readahead        # some pr_debugs in the readahead cache
-+	format nfsd:\040SETATTR # one way to match a format with whitespace
-+	format "nfsd: SETATTR"  # a neater way to match a format with whitespace
-+	format 'nfsd: SETATTR'  # yet another way to match a format with whitespace
- 
- line
-     The given line number or range of line numbers is compared
-@@ -204,10 +204,10 @@ line
-     the first line in the file, an empty last line number means the
-     last line number in the file.  Examples::
- 
--	line 1603           // exactly line 1603
--	line 1600-1605      // the six lines from line 1600 to line 1605
--	line -1605          // the 1605 lines from line 1 to line 1605
--	line 1600-          // all lines from line 1600 to the end of the file
-+	line 1603           # exactly line 1603
-+	line 1600-1605      # the six lines from line 1600 to line 1605
-+	line -1605          # the 1605 lines from line 1 to line 1605
-+	line 1600-          # all lines from line 1600 to the end of the file
- 
- Flags Specification::
- 
-@@ -345,44 +345,47 @@ Examples
- 
- ::
- 
--  // enable the message at line 1603 of file svcsock.c
-+  # enable the message at line 1603 of file svcsock.c
-   nullarbor:~ # echo -n 'file svcsock.c line 1603 +p' >
- 				<debugfs>/dyndbg/control
- 
--  // enable all the messages in file svcsock.c
-+  # enable all the messages in file svcsock.c
-   nullarbor:~ # echo -n 'file svcsock.c +p' >
- 				<debugfs>/dyndbg/control
- 
--  // enable all the messages in the NFS server module
-+  # enable all the messages in the NFS server module
-   nullarbor:~ # echo -n 'module nfsd +p' >
- 				<debugfs>/dyndbg/control
- 
--  // enable all 12 messages in the function svc_process()
-+  # enable all 12 messages in the function svc_process()
-   nullarbor:~ # echo -n 'func svc_process +p' >
- 				<debugfs>/dyndbg/control
- 
--  // disable all 12 messages in the function svc_process()
-+  # disable all 12 messages in the function svc_process()
-   nullarbor:~ # echo -n 'func svc_process -p' >
- 				<debugfs>/dyndbg/control
- 
--  // enable messages for NFS calls READ, READLINK, READDIR and READDIR+.
-+  # enable messages for NFS calls READ, READLINK, READDIR and READDIR+.
-   nullarbor:~ # echo -n 'format "nfsd: READ" +p' >
- 				<debugfs>/dyndbg/control
- 
--  // enable messages in files of which the paths include string "usb"
-+  # enable messages in files of which the paths include string "usb"
-   nullarbor:~ # echo -n '*usb* +p' > <debugfs>/dyndbg/control
- 
--  // enable all messages
-+  # enable all messages
-   nullarbor:~ # echo -n '+p' > <debugfs>/dyndbg/control
- 
--  // add module, function to all enabled messages
-+  # add module, function to all enabled messages
-   nullarbor:~ # echo -n '+mf' > <debugfs>/dyndbg/control
- 
--  // boot-args example, with newlines and comments for readability
--  Kernel command line: ...
--    // see whats going on in dyndbg=value processing
-+  # boot-args example, with newlines and comments for readability
-+  # Kernel command line: ...
-+
-+    # see whats going on in dyndbg=value processing
-     dyndbg.verbose=1
--    // enable pr_debugs in 2 builtins, #cmt is stripped
-+
-+    # enable pr_debugs in 2 builtins, #cmt is stripped
-     dyndbg="module params +p #cmt ; module sys +p"
--    // enable pr_debugs in 2 functions in a module loaded later
--    pc87360.dyndbg="func pc87360_init_device +p; func pc87360_find +p"
-+
-+    # enable pr_debugs in 2 functions in a module loaded later
-+    pc87360.dyndbg="func *_init_device +p; func *_find +p"
+
 -- 
-2.23.0
-
+With Best Regards,
+Andy Shevchenko
