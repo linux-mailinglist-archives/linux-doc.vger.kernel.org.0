@@ -2,14 +2,14 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 85155115ABF
-	for <lists+linux-doc@lfdr.de>; Sat,  7 Dec 2019 03:37:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 25C85115AC0
+	for <lists+linux-doc@lfdr.de>; Sat,  7 Dec 2019 03:37:48 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726395AbfLGChq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 6 Dec 2019 21:37:46 -0500
-Received: from sonic306-21.consmr.mail.gq1.yahoo.com ([98.137.68.84]:42426
+        id S1726375AbfLGChr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 6 Dec 2019 21:37:47 -0500
+Received: from sonic306-21.consmr.mail.gq1.yahoo.com ([98.137.68.84]:36869
         "EHLO sonic306-21.consmr.mail.gq1.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726375AbfLGChq (ORCPT
+        by vger.kernel.org with ESMTP id S1726386AbfLGChq (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Fri, 6 Dec 2019 21:37:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1575686265; bh=82fzkijXm+n6ft45Y/RezXKrtgCgFJ4irkLCD48yicI=; h=From:To:Cc:Subject:Date:References:From:Subject; b=oJKZjJPRAYh0vPLgNNsI/2IAydnH367tI2U+36+YuwDLDUJWYEbYyKtCuGZO3UoCOiRdNoTyvyk7Y0xIYkZvuZwHoPmaCVB3eav8291ycZn/E2nwYii/0qn4uuOmqtHq4HAq5UpvQ8MoMxVnKk8IPB1rzC7JoWJsLR+7TLg8m6TpYE4Uk/qBpHRGeFA8oeoA0xAbQygHcn4xOAm9mwxu/zQOHzU11zqEXpU8L0muCVWy4j4ju6hD/By96UO0o6CrOPOG6xWIRQsdjP12ILHc/q7PJAE7gnNKDPHcWU5C8VeJmmzk2jcHZAw2ETFdb35avIIwxfYj8ij+l3wP5BHYNg==
 X-YMail-OSG: rO6V5FEVM1k6K6ElIjpcjIX2knF0W_YgA6UeOpsGVrbXgW97bgNZ70IFTDP7dg8
