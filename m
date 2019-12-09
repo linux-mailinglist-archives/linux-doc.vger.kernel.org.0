@@ -2,118 +2,132 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id EC8CE1166A9
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2019 07:00:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8C3AC1166C2
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2019 07:20:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726351AbfLIGAe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 9 Dec 2019 01:00:34 -0500
-Received: from mail-pl1-f194.google.com ([209.85.214.194]:39640 "EHLO
-        mail-pl1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726132AbfLIGAe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Dec 2019 01:00:34 -0500
-Received: by mail-pl1-f194.google.com with SMTP id o9so5321536plk.6;
-        Sun, 08 Dec 2019 22:00:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=nhb5iYSKarpzYLBlnwTSbrMg2sj4+ZyMpkyTdMyfngA=;
-        b=KuvapgAFtrWic560Lj82rvz2Y68f8uUuOoJqyquWJGcFKs4rW0HDc6Wz7l/s3VT3tQ
-         Ig4sY6x26kFVEsosgohf5d4njPDHmLerGHLdJrCvRRO8/ziqkggrI5XZxOXahiBW38Zj
-         rvv65YuqvzNvPl/nVot8+8PtO/11UL3ArGalFLY4oFAnD/jbWGQESUxhGmFrW1kCFK/L
-         TMGh5sHS8V/NKC3dcbiY4+mn4uINqxsH4aM7vUc/fxm2bUUvGWKFDPocnz1H3fdgVC71
-         QrVSz1+1uVv6KVDfLf/4gpg0yvGhK3EG72k/egpBXRfAcERNWKU+spbtHsR04V9YJn8r
-         OOmA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
-         :date:user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=nhb5iYSKarpzYLBlnwTSbrMg2sj4+ZyMpkyTdMyfngA=;
-        b=XSyVVRfZBdfj2AQLvahCdUf7jhbWNAg3qnSBj//dxSr03U1CFap0IIbBWhwuTwsgnE
-         c5nMNcwd7XqR3fCAC7WyTFTgUasOwKZ/ylwTZ2esz1v7HGcYpo3bdl1fFF8i4UNHwZVx
-         7lmeX6xObJN+Ra/QTMaACuzdRkBKPGQOXKJJjFuELiNXunhg+WF0uJ6GStmc3/VfWPiU
-         GtQRDr5whq+VBNarMQ3nhWEpC4YrxM6xuplTH+pT0KvWYQXZu0DNNU/1rC4FkSz4RkgK
-         3IeUCiuEe262VJhNhHXFITKUztpkFXOFRSQLV/FdEgUfVTv4jgwbCvPkrX6t70b4GTTx
-         YUFg==
-X-Gm-Message-State: APjAAAWQU+zmOSEW/iuRn7YL7EWgs41mtKTj/s9S3pEfUofNn4pyQqMa
-        4yTUuQ63+GgGOFzsqRbwarU=
-X-Google-Smtp-Source: APXvYqwZaJmwlO80tNnx2ffsisZwtZsQB/t/XqrR/oUKqfUW4e6AsIWaHBQmae/9M1fzSWQykM7boA==
-X-Received: by 2002:a17:902:8309:: with SMTP id bd9mr27125627plb.113.1575871233472;
-        Sun, 08 Dec 2019 22:00:33 -0800 (PST)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
-        by smtp.gmail.com with ESMTPSA id z10sm2324777pfa.184.2019.12.08.22.00.31
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sun, 08 Dec 2019 22:00:32 -0800 (PST)
-Subject: Re: [PATCH 1/1] hwmon: Driver for temperature sensors on SATA drives
-To:     Randy Dunlap <rdunlap@infradead.org>, linux-hwmon@vger.kernel.org
-Cc:     Jean Delvare <jdelvare@suse.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-scsi@vger.kernel.org,
-        linux-ide@vger.kernel.org, Chris Healy <cphealy@gmail.com>,
-        Linus Walleij <linus.walleij@linaro.org>
-References: <20191209052119.32072-1-linux@roeck-us.net>
- <20191209052119.32072-2-linux@roeck-us.net>
- <dc914b45-961c-a1d1-bc25-f6922004f6f4@infradead.org>
-From:   Guenter Roeck <linux@roeck-us.net>
-Message-ID: <2b77af4c-7a49-2f50-e209-2fe27bc0ed48@roeck-us.net>
-Date:   Sun, 8 Dec 2019 22:00:30 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.1
+        id S1727089AbfLIGUH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 Dec 2019 01:20:07 -0500
+Received: from mail-bn8nam12on2053.outbound.protection.outlook.com ([40.107.237.53]:14529
+        "EHLO NAM12-BN8-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726270AbfLIGUG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 9 Dec 2019 01:20:06 -0500
+Received: from CY4PR02CA0023.namprd02.prod.outlook.com (2603:10b6:903:18::33)
+ by DM6PR02MB4713.namprd02.prod.outlook.com (2603:10b6:5:13::20) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2495.22; Mon, 9 Dec
+ 2019 06:20:04 +0000
+Received: from SN1NAM02FT031.eop-nam02.prod.protection.outlook.com
+ (2a01:111:f400:7e44::201) by CY4PR02CA0023.outlook.office365.com
+ (2603:10b6:903:18::33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2516.13 via Frontend
+ Transport; Mon, 9 Dec 2019 06:20:04 +0000
+Authentication-Results: spf=softfail (sender IP is 149.199.60.83)
+ smtp.mailfrom=gmail.com; vger.kernel.org; dkim=none (message not signed)
+ header.d=none;vger.kernel.org; dmarc=fail action=none header.from=gmail.com;
+Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
+ gmail.com discourages use of 149.199.60.83 as permitted sender)
+Received: from xsj-pvapsmtpgw01 (149.199.60.83) by
+ SN1NAM02FT031.mail.protection.outlook.com (10.152.72.116) with Microsoft SMTP
+ Server (version=TLS1_0, cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.20.2495.26
+ via Frontend Transport; Mon, 9 Dec 2019 06:20:04 +0000
+Received: from unknown-38-66.xilinx.com ([149.199.38.66] helo=xsj-pvapsmtp01)
+        by xsj-pvapsmtpgw01 with esmtp (Exim 4.63)
+        (envelope-from <shubhrajyoti.datta@gmail.com>)
+        id 1ieCGg-0004SE-Ql; Sun, 08 Dec 2019 22:11:38 -0800
+Received: from [127.0.0.1] (helo=xsj-smtp-dlp1.xlnx.xilinx.com)
+        by xsj-pvapsmtp01 with esmtp (Exim 4.63)
+        (envelope-from <shubhrajyoti.datta@gmail.com>)
+        id 1ieCGb-0002d4-MK; Sun, 08 Dec 2019 22:11:33 -0800
+Received: from xsj-pvapsmtp01 (maildrop.xilinx.com [149.199.38.66])
+        by xsj-smtp-dlp1.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id xB96BWOM029704;
+        Sun, 8 Dec 2019 22:11:32 -0800
+Received: from [10.140.6.59] (helo=xhdshubhraj40.xilinx.com)
+        by xsj-pvapsmtp01 with esmtp (Exim 4.63)
+        (envelope-from <shubhrajyoti.datta@gmail.com>)
+        id 1ieCGa-0002co-9a; Sun, 08 Dec 2019 22:11:32 -0800
+From:   shubhrajyoti.datta@gmail.com
+To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        devicetree@vger.kernel.org
+Cc:     gregkh@linuxfoundation.org, arnd@arndb.de, michal.simek@xilinx.com,
+        robh+dt@kernel.org, shubhrajyoti.datta@gmail.com,
+        Shubhrajyoti Datta <shubhrajyoti.datta@xilinx.com>
+Subject: [PATCH v2 1/3] dt-bindings: misc: Add dt bindings for traffic generator
+Date:   Mon,  9 Dec 2019 11:41:26 +0530
+Message-Id: <8b3a446fc60cdd7d085203ce00c3f6bfba642437.1575871828.git.shubhrajyoti.datta@xilinx.com>
+X-Mailer: git-send-email 2.1.1
+X-RCIS-Action: ALLOW
+X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.2.0.1013-23620.005
+X-TM-AS-Result: No--5.340-7.0-31-1
+X-imss-scan-details: No--5.340-7.0-31-1;No--5.340-5.0-31-1
+X-TM-AS-User-Approved-Sender: No;No
+X-TM-AS-Result-Xfilter: Match text exemption rules:No
+X-EOPAttributedMessage: 0
+X-Matching-Connectors: 132203460042138298;(f9e945fa-a09a-4caa-7158-08d2eb1d8c44);()
+X-Forefront-Antispam-Report: CIP:149.199.60.83;IPV:NLI;CTRY:US;EFV:NLI;SFV:NSPM;SFS:(10009020)(376002)(136003)(39850400004)(396003)(346002)(199004)(189003)(6666004)(356004)(305945005)(107886003)(81156014)(81166006)(8936002)(50226002)(8676002)(70586007)(316002)(70206006)(9686003)(5660300002)(450100002)(82202003)(48376002)(50466002)(9786002)(118296001)(86362001)(2906002)(426003)(498600001)(4326008)(7696005)(73392003)(336012)(76482006)(51416003)(36756003)(26005);DIR:OUT;SFP:1101;SCL:1;SRVR:DM6PR02MB4713;H:xsj-pvapsmtpgw01;FPR:;SPF:SoftFail;LANG:en;PTR:unknown-60-83.xilinx.com;A:1;MX:1;
 MIME-Version: 1.0
-In-Reply-To: <dc914b45-961c-a1d1-bc25-f6922004f6f4@infradead.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 3b08127a-4f85-4a7f-001a-08d77c6fd453
+X-MS-TrafficTypeDiagnostic: DM6PR02MB4713:
+X-Microsoft-Antispam-PRVS: <DM6PR02MB4713857BAB0074F84DEFDC1087580@DM6PR02MB4713.namprd02.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3968;
+X-Forefront-PRVS: 02462830BE
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: wwHHjshntirVcT8JzxppteOw1XoIQK/GmKnzHjA4tW1svffO473niwMNZQtniFoNlStvcPGTq+kFz0wfhD9Ye6+jspNGwjGQrwVpmsTU38cnk4yM5RaEtq1FtPXQVyHXSxxrz+38KCKYYtr37o5zSA+Vi7qvqeiwC05EJbRvu8uBAe5QvRckBiZkjy0Kl4iU4ycUh5zFrjeCduU0NWkGac6+I2jgSS2PuFDNIJHisD6Lsnfc3AF3mrZdzx7H2MnehT2wyZ7PnQqEiNcZ2Pm34TR+1bMOq+oV/HogkVzHsFWaSONo0n1AsCd7WQ7HMdK4XobDVMY8Pn10n6lgjvEMMkMJaY6Chz1vhQGNj8sv0ktMYMZnkRFa9qcIKPXJ5qz3/SBZNPJObrA1ZWZOcSQEFNrEIj3HdekqqQEgXhD0y+pacx3F6xJr2D6hCHuRX9FM
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2019 06:20:04.0506
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3b08127a-4f85-4a7f-001a-08d77c6fd453
+X-MS-Exchange-CrossTenant-Id: 5afe0b00-7697-4969-b663-5eab37d5f47e
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5afe0b00-7697-4969-b663-5eab37d5f47e;Ip=[149.199.60.83];Helo=[xsj-pvapsmtpgw01]
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR02MB4713
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 12/8/19 9:28 PM, Randy Dunlap wrote:
-> Hi,
-> 
-> On 12/8/19 9:21 PM, Guenter Roeck wrote:
->> diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
->> index 13a6b4afb4b3..4c63eb7ba96a 100644
->> --- a/drivers/hwmon/Kconfig
->> +++ b/drivers/hwmon/Kconfig
->> @@ -1346,6 +1346,16 @@ config SENSORS_RASPBERRYPI_HWMON
->>   	  This driver can also be built as a module. If so, the module
->>   	  will be called raspberrypi-hwmon.
->>   
->> +config SENSORS_SATATEMP
->> +	tristate "SATA hard disk drives with temperature sensors"
->> +	depends on SCSI && ATA
->> +	help
->> +	  If you say yes you get support for the temperature sensor on
->> +	  SATA hard disk drives.
->> +
->> +	  This driver can also be built as a module. If so, the module
->> +	  will be called smarttemp.
-> 
-> Makefile seems to say satatemp.
-> 
+From: Shubhrajyoti Datta <shubhrajyoti.datta@xilinx.com>
 
-Oops. Thanks for the note. Will fix.
+Add dt bindings for xilinx traffic generator IP.
 
-Guenter
+Signed-off-by: Shubhrajyoti Datta <shubhrajyoti.datta@xilinx.com>
+---
+ .../bindings/misc/xlnx,axi-traffic-gen.txt         | 25 ++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/misc/xlnx,axi-traffic-gen.txt
 
->> +
->>   config SENSORS_SHT15
->>   	tristate "Sensiron humidity and temperature sensors. SHT15 and compat."
->>   	depends on GPIOLIB || COMPILE_TEST
->> diff --git a/drivers/hwmon/Makefile b/drivers/hwmon/Makefile
->> index 40c036ea45e6..fe55b8f76af9 100644
->> --- a/drivers/hwmon/Makefile
->> +++ b/drivers/hwmon/Makefile
->> @@ -148,6 +148,7 @@ obj-$(CONFIG_SENSORS_S3C)	+= s3c-hwmon.o
->>   obj-$(CONFIG_SENSORS_SCH56XX_COMMON)+= sch56xx-common.o
->>   obj-$(CONFIG_SENSORS_SCH5627)	+= sch5627.o
->>   obj-$(CONFIG_SENSORS_SCH5636)	+= sch5636.o
->> +obj-$(CONFIG_SENSORS_SATATEMP)	+= satatemp.o
->>   obj-$(CONFIG_SENSORS_SHT15)	+= sht15.o
->>   obj-$(CONFIG_SENSORS_SHT21)	+= sht21.o
->>   obj-$(CONFIG_SENSORS_SHT3x)	+= sht3x.o
-> 
-> 
+diff --git a/Documentation/devicetree/bindings/misc/xlnx,axi-traffic-gen.txt b/Documentation/devicetree/bindings/misc/xlnx,axi-traffic-gen.txt
+new file mode 100644
+index 0000000..6edb8f6
+--- /dev/null
++++ b/Documentation/devicetree/bindings/misc/xlnx,axi-traffic-gen.txt
+@@ -0,0 +1,25 @@
++* Xilinx AXI Traffic generator IP
++
++Required properties:
++- compatible: "xlnx,axi-traffic-gen"
++- interrupts: Should contain AXI Traffic Generator interrupts.
++- interrupt-parent: Must be core interrupt controller.
++- reg: Should contain AXI Traffic Generator registers location and length.
++- interrupt-names: Should contain both the intr names of device - error
++		   and completion.
++- xlnx,device-id: Device instance Id.
++
++Optional properties:
++- clocks: Input clock specifier. Refer to common clock bindings.
++
++Example:
++++++++++
++axi_traffic_gen_1: axi-traffic-gen@76000000 {
++	compatible = "xlnx,axi-traffic-gen-1.0", "xlnx,axi-traffic-gen";
++	clocks = <&clkc 15>;
++	interrupts = <0 2 2 2>;
++	interrupt-parent = <&axi_intc_1>;
++	interrupt-names = "err-out", "irq-out";
++	reg = <0x76000000 0x800000>;
++	xlnx,device-id = <0x0>;
++} ;
+-- 
+2.1.1
 
