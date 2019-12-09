@@ -2,146 +2,146 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4B7821165F7
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2019 05:59:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 24C86116628
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2019 06:21:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726960AbfLIE7C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 8 Dec 2019 23:59:02 -0500
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:15560 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727137AbfLIE6x (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 8 Dec 2019 23:58:53 -0500
-Received: from pps.filterd (m0098394.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id xB94upia081561
-        for <linux-doc@vger.kernel.org>; Sun, 8 Dec 2019 23:58:52 -0500
-Received: from e06smtp07.uk.ibm.com (e06smtp07.uk.ibm.com [195.75.94.103])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 2wrt7jsssx-1
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-        for <linux-doc@vger.kernel.org>; Sun, 08 Dec 2019 23:58:52 -0500
-Received: from localhost
-        by e06smtp07.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
-        for <linux-doc@vger.kernel.org> from <sourabhjain@linux.ibm.com>;
-        Mon, 9 Dec 2019 04:58:50 -0000
-Received: from b06cxnps3074.portsmouth.uk.ibm.com (9.149.109.194)
-        by e06smtp07.uk.ibm.com (192.168.101.137) with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted;
-        (version=TLSv1/SSLv3 cipher=AES256-GCM-SHA384 bits=256/256)
-        Mon, 9 Dec 2019 04:58:48 -0000
-Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
-        by b06cxnps3074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id xB94wkbh18153684
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Mon, 9 Dec 2019 04:58:46 GMT
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id B0BE5A4051;
-        Mon,  9 Dec 2019 04:58:46 +0000 (GMT)
-Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 1C819A4040;
-        Mon,  9 Dec 2019 04:58:45 +0000 (GMT)
-Received: from localhost.in.ibm.com (unknown [9.124.35.249])
-        by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Mon,  9 Dec 2019 04:58:44 +0000 (GMT)
-From:   Sourabh Jain <sourabhjain@linux.ibm.com>
-To:     mpe@ellerman.id.au
-Cc:     mahesh@linux.vnet.ibm.com, hbathini@linux.ibm.com,
-        linux-kernel@vger.kernel.org, linuxppc-dev@ozlabs.org,
-        corbet@lwn.net, linux-doc@vger.kernel.org,
-        gregkh@linuxfoundation.org,
-        Sourabh Jain <sourabhjain@linux.ibm.com>
-Subject: [PATCH v5 6/6] powerpc/fadump: sysfs for fadump memory reservation
-Date:   Mon,  9 Dec 2019 10:28:26 +0530
-X-Mailer: git-send-email 2.17.2
-In-Reply-To: <20191209045826.30076-1-sourabhjain@linux.ibm.com>
-References: <20191209045826.30076-1-sourabhjain@linux.ibm.com>
-X-TM-AS-GCONF: 00
-x-cbid: 19120904-0028-0000-0000-000003C6B563
-X-IBM-AV-DETECTION: SAVI=unused REMOTE=unused XFE=unused
-x-cbparentid: 19120904-0029-0000-0000-00002489DF31
-Message-Id: <20191209045826.30076-7-sourabhjain@linux.ibm.com>
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
- definitions=2019-12-09_01:2019-12-09,2019-12-08 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999
- suspectscore=1 impostorscore=0 bulkscore=0 lowpriorityscore=0 phishscore=0
- malwarescore=0 spamscore=0 mlxscore=0 adultscore=0 clxscore=1015
- priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-1910280000 definitions=main-1912090042
+        id S1726038AbfLIFVY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 Dec 2019 00:21:24 -0500
+Received: from mail-pg1-f195.google.com ([209.85.215.195]:35255 "EHLO
+        mail-pg1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725819AbfLIFVY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Dec 2019 00:21:24 -0500
+Received: by mail-pg1-f195.google.com with SMTP id l24so6507226pgk.2;
+        Sun, 08 Dec 2019 21:21:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:from:to:cc:subject:date:message-id;
+        bh=AW9VGumdZy3wyOIy/HTgLy8T6vfCGABBPNOsP0bKaQE=;
+        b=TsG72EKhhevQp6j8XWGxYjQUHFzVKmaJ+m6N3d0iIbPMuUY9MxkgA1+vjqDbRmFDeO
+         ghawKgXv6oFiwdG60kodv4PWWwf2+7SjkF/xi6rhUHjJOpkQpQtpYsKQvmIaAf/vr+BC
+         r3ovygDlMulStfAJC+J2FJfON43TXLO8IrfNuZZvvwtdulQqdItQBNmRP/9sCpBEUNUQ
+         /A4W2DZsA7wRKxgYBl7xwDVwE1xK9bkEsu4sMM0OLnLcN6UrfP0joLWUZcfrhEfZsklz
+         ktfOtxJJDO+Adp1o6Ul8WBQN0+Udjkits3w7hrH+/olZ69NId9+GyD5QYMdBdJBB50G8
+         ZGng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
+        bh=AW9VGumdZy3wyOIy/HTgLy8T6vfCGABBPNOsP0bKaQE=;
+        b=IdmRvHtBfQdKdWykFZURtgzXOuwrmw9rVFyVssh5/yCvDZ1+USioUA2+Gd3RHarnpo
+         YE30Cr3Oc4AQMXvvnD2IrxgJhvSaK0ggd0E7UJuSORtbk/AgERmmCgRBlnheeyoOscy/
+         CpCnOeYJnsrJLOkB7hwuK7DC9c3nQTQqn1Ewcm26pEjB/+fjnnwSGi4yckJnREhCvyp+
+         jR/i7XsQsh1JFec60+CKUzvjWfEKzCX6XlvvRJSkhnCFcJC1cYJjlAwFLBgG9upBe7Gj
+         uUgzi7O0cNaOsDsQTSFGU25Q5c4uOL0UyjmA6gBQQlZfQhbKY9AV+ZYL3Bewp8btHNMj
+         gBXQ==
+X-Gm-Message-State: APjAAAVXpfTgBYfOjsnMDcxif+ssJbkD4GmNCHhJh4B20N0N/3ohBKTr
+        2b6yHG9UXrDA5AXD7Kt3PLUTddFT
+X-Google-Smtp-Source: APXvYqxYDPRGsuZZfyTlwwznlYvBbns+TS2/nPhxae0oeWbWTkG1vruV0JtDqhcrduLGxraf//k3IQ==
+X-Received: by 2002:a63:4a50:: with SMTP id j16mr17333906pgl.308.1575868882682;
+        Sun, 08 Dec 2019 21:21:22 -0800 (PST)
+Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id b7sm10752127pjo.3.2019.12.08.21.21.20
+        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+        Sun, 08 Dec 2019 21:21:21 -0800 (PST)
+From:   Guenter Roeck <linux@roeck-us.net>
+To:     linux-hwmon@vger.kernel.org
+Cc:     Jean Delvare <jdelvare@suse.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-scsi@vger.kernel.org,
+        linux-ide@vger.kernel.org, Guenter Roeck <linux@roeck-us.net>
+Subject: [PATCH 0/1] Summary: hwmon driver for temperature sensors on SATA drives
+Date:   Sun,  8 Dec 2019 21:21:18 -0800
+Message-Id: <20191209052119.32072-1-linux@roeck-us.net>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a sys interface to allow querying the memory reserved by FADump for
-saving the crash dump.
+In the past, several attempts have been made to add support for reporting
+SCSI/[S]ATA drive temperatures to the Linux kernel. This is desirable to
+have a means to report drive temperatures to userspace without root
+privileges and in a standard format, but also to be able to tie reported
+temperatures with the thermal subsystem.
 
-Also added Documentation/ABI for the new sysfs file.
+The most recent attempt was [1] by Linus Walleij. It went through a total
+of seven iterations. At the end, it was rejected for a number of reasons;
+see the provided link for details. This implementation resides in the
+SCSI core. It originally resided in libata but was moved to SCSI per
+maintainer request, where it was ultimately rejected.
 
-Signed-off-by: Sourabh Jain <sourabhjain@linux.ibm.com>
+The feedback on this approach suggests to use the SCSI Temperature log page
+[0x0d] as means to access drive temperature information. It is unknown
+if this is implemented in any real SCSI drive. The feedback also suggests to
+obtain temperature from ATA drives, convert it into the SCSI temperature log
+page in libata-scsi, and to use that information in a hardware monitoring
+driver. The format and method to do this is documented in [3]. This is not
+currently implemented in the Linux kernel.
+
+An earlier submission of a driver to report SCSI/SATA drive temperatures
+was made back in 2009 by Constantin Baranov [2]. This submission resides
+in the hardware monitoring subsystem. It does not rely on changes in the
+SCSI subsystem or in libata-scsi. Instead, it registers itself with the
+SCSI subsystem using scsi_register_interface(). It was rejected primarily
+because it executes ATA passthrough commands without verification that it
+is actually connected to an ATA drive.
+
+Both submissions use SMART attributes to read drive temperature information.
+[1] also tries to identify temperature limits from those attributes.
+Unfortunately, SMART attributes are not well defined, resulting in relative
+complex code trying to identify the exact format of the reported data.
+
+With the available information and feedback, we can make a number of
+observations and conclusions.
+a) Using available (S)ATA drive temperature information and convert it to
+   a SCSI log page is an interesting idea. On the downside, it would add a
+   substantial amount of complexity to libata-scsi. The code would either
+   have to be optional, or it would have to be built into the kernel even
+   if it is never used on a given system. Without access to SCSI drives
+   supporting this feature, it would be all but impossible to test the code
+   against such a drive. It would neither be possible to test correctness
+   of the code in libata-scsi nor in the driver using that information.
+   Overall it would be much easier and much less risky to implement such
+   code on the receiving side (ie in a driver reporting the temperatures)
+   instead of trying to convert the information from one format to another
+   first. In summary, it is neither practical nor feasible. On top of that,
+   there is no guarantee that code implementing this functionality would
+   ever be accepted into the kernel for this very reason.
+b) The code needed to read and analyze SCSI temperature log pages is quite
+   complex (see smartmontools [5]). There is no existing support code
+   in the Linux kernel; such code would have to be written. This makes
+   the approach discussed in a) even more risky and less practical.
+c) Overall, any attempt to report temperature information for anything
+   but SATA drives in the kernel is not practical due to the complexity
+   involved, and due to the inability to test the resulting code with
+   non-SATA drives.
+d) Using SMART data for anything but basic temperature reporting is not
+   really feasible due to the lack of standardization. Any attempt to do
+   this would add a substantial amount of code, ambiguity, and risk.
+
+This submission implements a driver to report the temperature of SATA
+drives through the hardware monitoring subsystem. It is implemented as
+stand-alone driver in the hardware monitoring subsystem. The driver uses
+the mechanism from submission [1] to register with the SCSI subsystem.
+By using this mechanism, changes in the SCSI or ATA subsystems are not
+required.  To reduce risk and complexity, it only instantiates after
+reliably validating that it is connected to a SATA drive. It does not
+attempt to report the temperature of non-SATA drives.
+
+The driver uses the SCT Command Transport feature set as specified in
+ATA8-ACS [4] to read and report the temperature as well as temperature
+limits and lowest/highest temperature information (if available) for
+SATA drives. If a drive does not support SCT Command Transport, the driver
+attempts to access a limited set of well known SMART attributes to read
+the drive temperature. In that case, only the current drive temperature
+is reported.
+
 ---
- Documentation/ABI/testing/sysfs-kernel-fadump    | 7 +++++++
- Documentation/powerpc/firmware-assisted-dump.rst | 5 +++++
- arch/powerpc/kernel/fadump.c                     | 9 +++++++++
- 3 files changed, 21 insertions(+)
-
-diff --git a/Documentation/ABI/testing/sysfs-kernel-fadump b/Documentation/ABI/testing/sysfs-kernel-fadump
-index 5d988b919e81..8f7a64a81783 100644
---- a/Documentation/ABI/testing/sysfs-kernel-fadump
-+++ b/Documentation/ABI/testing/sysfs-kernel-fadump
-@@ -31,3 +31,10 @@ Description:	write only
- 		the system is booted to capture the vmcore using FADump.
- 		It is used to release the memory reserved by FADump to
- 		save the crash dump.
-+
-+What:		/sys/kernel/fadump/mem_reserved
-+Date:		Dec 2019
-+Contact:	linuxppc-dev@lists.ozlabs.org
-+Description:	read only
-+		Provide information about the amount of memory reserved by
-+		FADump to save the crash dump in bytes.
-diff --git a/Documentation/powerpc/firmware-assisted-dump.rst b/Documentation/powerpc/firmware-assisted-dump.rst
-index 365c10209ef3..04993eaf3113 100644
---- a/Documentation/powerpc/firmware-assisted-dump.rst
-+++ b/Documentation/powerpc/firmware-assisted-dump.rst
-@@ -268,6 +268,11 @@ Here is the list of files under kernel sysfs:
-     be handled and vmcore will not be captured. This interface can be
-     easily integrated with kdump service start/stop.
- 
-+ /sys/kernel/fadump/mem_reserved
-+
-+   This is used to display the memory reserved by FADump for saving the
-+   crash dump.
-+
-  /sys/kernel/fadump_release_mem
-     This file is available only when FADump is active during
-     second kernel. This is used to release the reserved memory
-diff --git a/arch/powerpc/kernel/fadump.c b/arch/powerpc/kernel/fadump.c
-index 35ecb51edc50..6f367e5b7970 100644
---- a/arch/powerpc/kernel/fadump.c
-+++ b/arch/powerpc/kernel/fadump.c
-@@ -1364,6 +1364,13 @@ static ssize_t enabled_show(struct kobject *kobj,
- 	return sprintf(buf, "%d\n", fw_dump.fadump_enabled);
- }
- 
-+static ssize_t mem_reserved_show(struct kobject *kobj,
-+				 struct kobj_attribute *attr,
-+				 char *buf)
-+{
-+	return sprintf(buf, "%ld\n", fw_dump.reserve_dump_area_size);
-+}
-+
- static ssize_t registered_show(struct kobject *kobj,
- 			       struct kobj_attribute *attr,
- 			       char *buf)
-@@ -1431,10 +1438,12 @@ EXPORT_SYMBOL_GPL(fadump_kobj);
- static struct kobj_attribute release_attr = __ATTR_WO(release_mem);
- static struct kobj_attribute enable_attr = __ATTR_RO(enabled);
- static struct kobj_attribute register_attr = __ATTR_RW(registered);
-+static struct kobj_attribute mem_reserved_attr = __ATTR_RO(mem_reserved);
- 
- static struct attribute *fadump_attrs[] = {
- 	&enable_attr.attr,
- 	&register_attr.attr,
-+	&mem_reserved_attr.attr,
- 	NULL,
- };
- 
--- 
-2.17.2
-
+References:
+[1] https://patchwork.kernel.org/patch/10688021/
+[2] https://lore.kernel.org/lkml/20090913040104.ab1d0b69.const@mimas.ru/
+[3] http://www.t10.org/cgi-bin/ac.pl?t=f&f=sat5r02.pdf
+    Information technology - SCSI / ATA Translation - 5 (SAT-5),
+    section 10.3.8 (Temperature log page).
+[4] http://www.t13.org/documents/uploadeddocuments/docs2008/d1699r6a-ata8-acs.pdf
+    ANS T13/1699-D "Information technology - AT Attachment 8 - ATA/ATAPI Command
+    Set (ATA8-ACS)"
+[5] https://github.com/mirror/smartmontools.git
