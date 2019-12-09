@@ -2,209 +2,399 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C721B1166CE
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2019 07:21:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4EB681167ED
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2019 09:06:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727123AbfLIGUL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 9 Dec 2019 01:20:11 -0500
-Received: from mail-eopbgr760048.outbound.protection.outlook.com ([40.107.76.48]:3934
-        "EHLO NAM02-CY1-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1726270AbfLIGUK (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 9 Dec 2019 01:20:10 -0500
-Received: from MWHPR02CA0021.namprd02.prod.outlook.com (2603:10b6:300:4b::31)
- by BN6PR02MB2754.namprd02.prod.outlook.com (2603:10b6:404:fe::17) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2516.17; Mon, 9 Dec
- 2019 06:20:06 +0000
-Received: from SN1NAM02FT044.eop-nam02.prod.protection.outlook.com
- (2a01:111:f400:7e44::203) by MWHPR02CA0021.outlook.office365.com
- (2603:10b6:300:4b::31) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2516.14 via Frontend
- Transport; Mon, 9 Dec 2019 06:20:06 +0000
-Authentication-Results: spf=softfail (sender IP is 149.199.60.83)
- smtp.mailfrom=gmail.com; vger.kernel.org; dkim=none (message not signed)
- header.d=none;vger.kernel.org; dmarc=fail action=none header.from=gmail.com;
-Received-SPF: SoftFail (protection.outlook.com: domain of transitioning
- gmail.com discourages use of 149.199.60.83 as permitted sender)
-Received: from xsj-pvapsmtpgw01 (149.199.60.83) by
- SN1NAM02FT044.mail.protection.outlook.com (10.152.72.173) with Microsoft SMTP
- Server (version=TLS1_0, cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.20.2495.26
- via Frontend Transport; Mon, 9 Dec 2019 06:20:06 +0000
-Received: from unknown-38-66.xilinx.com ([149.199.38.66] helo=xsj-pvapsmtp01)
-        by xsj-pvapsmtpgw01 with esmtp (Exim 4.63)
-        (envelope-from <shubhrajyoti.datta@gmail.com>)
-        id 1ieCGq-0004SM-Pw; Sun, 08 Dec 2019 22:11:48 -0800
-Received: from [127.0.0.1] (helo=xsj-smtp-dlp1.xlnx.xilinx.com)
-        by xsj-pvapsmtp01 with esmtp (Exim 4.63)
-        (envelope-from <shubhrajyoti.datta@gmail.com>)
-        id 1ieCGl-0002eo-Ks; Sun, 08 Dec 2019 22:11:43 -0800
-Received: from xsj-pvapsmtp01 (smtp.xilinx.com [149.199.38.66])
-        by xsj-smtp-dlp1.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id xB96BfbU029825;
-        Sun, 8 Dec 2019 22:11:42 -0800
-Received: from [10.140.6.59] (helo=xhdshubhraj40.xilinx.com)
-        by xsj-pvapsmtp01 with esmtp (Exim 4.63)
-        (envelope-from <shubhrajyoti.datta@gmail.com>)
-        id 1ieCGj-0002co-CA; Sun, 08 Dec 2019 22:11:41 -0800
-From:   shubhrajyoti.datta@gmail.com
-To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        devicetree@vger.kernel.org
-Cc:     gregkh@linuxfoundation.org, arnd@arndb.de, michal.simek@xilinx.com,
-        robh+dt@kernel.org, shubhrajyoti.datta@gmail.com,
-        Kedareswara rao Appana <appana.durga.rao@xilinx.com>,
+        id S1727084AbfLIIGs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 Dec 2019 03:06:48 -0500
+Received: from mail.kernel.org ([198.145.29.99]:51844 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727044AbfLIIGs (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 9 Dec 2019 03:06:48 -0500
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id EBE19205ED;
+        Mon,  9 Dec 2019 08:06:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1575878807;
+        bh=+p82qJRV+HdxV2eDzgujR97+XhTtLV6uMXNeoRqg/1E=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=v70dICLIt2wSBD4f5PAvXKM1AYydl/wRec66JOgjWOeOcRTy8WdF2/6+9O18/LUDx
+         WfF15Vi1Xyt+t2Mp7EYm5LDVSYdLEi7nMADrtVet2G7SnRP47LHdVgtO32e5D0q2J3
+         UCpNb3gfRe129WO9VYBAYxh8ub7MqHcsaXSvkHKk=
+Date:   Mon, 9 Dec 2019 09:06:45 +0100
+From:   Greg KH <gregkh@linuxfoundation.org>
+To:     shubhrajyoti.datta@gmail.com
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        devicetree@vger.kernel.org, arnd@arndb.de, michal.simek@xilinx.com,
+        robh+dt@kernel.org,
+        Shubhrajyoti Datta <shubhrajyoti.datta@xilinx.com>,
         Kedareswara rao Appana <appanad@xilinx.com>,
-        Shubhrajyoti Datta <shubhrajyoti.datta@xilinx.com>
-Subject: [PATCH v2 3/3] trafgen: Document sysfs entries
-Date:   Mon,  9 Dec 2019 11:41:28 +0530
-Message-Id: <d8921f9b2406a276cc5064725aa28eb2757f923b.1575871828.git.shubhrajyoti.datta@xilinx.com>
-X-Mailer: git-send-email 2.1.1
-In-Reply-To: <8b3a446fc60cdd7d085203ce00c3f6bfba642437.1575871828.git.shubhrajyoti.datta@xilinx.com>
+        Srikanth Thokala <sthokal@xilinx.com>
+Subject: Re: [PATCH v2 2/3] trafgen: xilinx: add axi traffic generator driver
+Message-ID: <20191209080645.GA706232@kroah.com>
 References: <8b3a446fc60cdd7d085203ce00c3f6bfba642437.1575871828.git.shubhrajyoti.datta@xilinx.com>
-X-RCIS-Action: ALLOW
-X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.2.0.1013-23620.005
-X-TM-AS-Result: No-1.037-7.0-31-1
-X-imss-scan-details: No-1.037-7.0-31-1;No-1.037-5.0-31-1
-X-TM-AS-User-Approved-Sender: No;No
-X-TM-AS-Result-Xfilter: Match text exemption rules:No
-X-EOPAttributedMessage: 0
-X-Matching-Connectors: 132203460065069038;(f9e945fa-a09a-4caa-7158-08d2eb1d8c44);()
-X-Forefront-Antispam-Report: CIP:149.199.60.83;IPV:NLI;CTRY:US;EFV:NLI;SFV:NSPM;SFS:(10009020)(136003)(346002)(396003)(39860400002)(376002)(189003)(199004)(305945005)(76482006)(70586007)(450100002)(7696005)(2906002)(4326008)(51416003)(966005)(8676002)(81166006)(107886003)(498600001)(70206006)(81156014)(76176011)(316002)(426003)(8936002)(336012)(36756003)(26005)(86362001)(54906003)(50226002)(118296001)(50466002)(9786002)(5660300002)(9686003)(6666004)(73392003)(356004)(48376002)(82202003);DIR:OUT;SFP:1101;SCL:1;SRVR:BN6PR02MB2754;H:xsj-pvapsmtpgw01;FPR:;SPF:SoftFail;LANG:en;PTR:unknown-60-83.xilinx.com;MX:1;A:1;
+ <d66da6c524d01414562d3c15853174eeafa0c9fa.1575871828.git.shubhrajyoti.datta@xilinx.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 382b3af5-3478-4579-e537-08d77c6fd5b0
-X-MS-TrafficTypeDiagnostic: BN6PR02MB2754:
-X-Microsoft-Antispam-PRVS: <BN6PR02MB2754E768B44DC42DDFEEBC5B87580@BN6PR02MB2754.namprd02.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:6108;
-X-Forefront-PRVS: 02462830BE
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: WLNSK7IruUD3lrUf277wXroBm/F7WYHgez/CS11nBM5FCieAjK3ZD8OfniiaDKSHGQQtI6BqVSHFlm4/ks4oSV8bHQIdVGGg6osYBP4YSvmyWyWfYToshSdMtb07Sm2NoiT+4EewW0woixlu415jBQNMOGDVVfNTJxAx3cCZJt9443Sg7rlQ/B9at2niSrPR8BqGmLVqLB/b+jHzJRofM5J3Tc9YoGc0G0L69XMB+cdO4nWFiCbRIbwiUlVAH7zJrz9Psk83mkpLO+jdjn0hdGqjB9Dlzmn3xNAALduP8PPo/leHy76W9sLUawaLND4Z4XLiW92fjefto0pexbvicQ5tVdMWDSXhjQ+Q34XvnxQeIyFsmxGDUtUd/rFuCSyzZ8yUMo0Up57KNSrXcyEjNqx1+/xXXgk4is45E3o1KSBGPlVoRbZy6gILUgde1/qvpJ2K6nP+V964jgex8snscbSUhHwQ/wqDQLOegOXHvM4=
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Dec 2019 06:20:06.3089
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 382b3af5-3478-4579-e537-08d77c6fd5b0
-X-MS-Exchange-CrossTenant-Id: 5afe0b00-7697-4969-b663-5eab37d5f47e
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=5afe0b00-7697-4969-b663-5eab37d5f47e;Ip=[149.199.60.83];Helo=[xsj-pvapsmtpgw01]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR02MB2754
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <d66da6c524d01414562d3c15853174eeafa0c9fa.1575871828.git.shubhrajyoti.datta@xilinx.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Kedareswara rao Appana <appana.durga.rao@xilinx.com>
+On Mon, Dec 09, 2019 at 11:41:27AM +0530, shubhrajyoti.datta@gmail.com wrote:
+> +/* Macro */
 
-This patch adds the documentaion for the sysfs entries in the driver.
+We know it's a macro, no need to say it :)
 
-Signed-off-by: Kedareswara rao Appana <appanad@xilinx.com>
-Signed-off-by: Shubhrajyoti Datta <shubhrajyoti.datta@xilinx.com>
----
- Documentation/misc-devices/xilinx_trafgen.txt | 97 +++++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
- create mode 100644 Documentation/misc-devices/xilinx_trafgen.txt
+> +#define to_xtg_dev_info(n)	((struct xtg_dev_info *)dev_get_drvdata(n))
 
-diff --git a/Documentation/misc-devices/xilinx_trafgen.txt b/Documentation/misc-devices/xilinx_trafgen.txt
-new file mode 100644
-index 0000000..dadcdad
---- /dev/null
-+++ b/Documentation/misc-devices/xilinx_trafgen.txt
-@@ -0,0 +1,97 @@
-+Kernel driver xilinx_trafgen
-+============================
-+
-+Supported chips:
-+Zynq SOC, Xilinx 7 series fpga's (Virtex,Kintex,Artix)
-+
-+Data Sheet:
-+	http://www.xilinx.com/support/documentation/ip_documentation/axi_traffic_gen/v2_0/pg125-axi-traffic-gen.pdf
-+
-+Author:
-+        Kedareswara Rao Appana <appanad@xilinx.com>
-+
-+Description
-+-----------
-+
-+AXI Traffic Generator IP is a core that stresses the AXI4 interconnect and other
-+AXI4 peripherals in the system. It generates a wide variety of AXI4 transactions
-+based on the core programming.
-+
-+Features:
-+---> Configurable option to generate and accept data according to different
-+traffic profiles.
-+---> Supports dependent/independent transaction between read/write master port
-+with configurable delays.
-+---> Programmable repeat count for each transaction with
-+constant/increment/random address.
-+---> External start/stop to generate traffic without processor intervention.
-+---> Generates IP-specific traffic on AXI interface for pre-defined protocols.
-+
-+SYSFS:
-+
-+id
-+	RO - shows the trafgen id.
-+
-+resource
-+	RO - shows the baseaddress for the trafgen.
-+
-+master_start_stop
-+	RW - monitors the master start logic.
-+
-+config_slave_status
-+	RW - configure and monitors the slave status.
-+
-+err_sts
-+	RW - get the error statistics/clear the errors.
-+
-+err_en
-+	WO - enable the errors.
-+
-+intr_en
-+	WO - enable the interrupts.
-+
-+last_valid_index
-+	RW - gets the last valid index value.
-+
-+config_sts_show
-+	RO - show the config status value.
-+
-+mram_clear
-+	WO - clears the master ram.
-+
-+cram_clear
-+	WO - clears the command ram.
-+
-+pram_clear
-+	WO - clears the parameter ram.
-+
-+static_enable
-+	RO - enables the static mode.
-+
-+static_burst_len
-+	RW - gets/sets the static burst length.
-+
-+static_transferdone
-+	RW - monitors the static transfer done status.
-+
-+reset_static_transferdone
-+	RO - resets the static transferdone bit.
-+
-+stream_cfg
-+	RW - sets the stream configuration parameters like delay.
-+
-+stream_tktsn
-+	RW - TSTRB/TKEEP value for the last beat of the
-+transfer set n. N can be 1 to 4.
-+
-+stream_enable
-+	RO - enables the streaming mode.
-+
-+stream_transferlen
-+	RW - get/set the streaming mode transfer length.
-+
-+stream_transfercnt
-+	RW - get/set the streaming mode transfer count.
-+
-+loop_enable
-+	RW - get/set loop enable value.
--- 
-2.1.1
+No need for the cast, and really, no need for this macro at all.  Please
+drop it.
 
+> + * FIXME: This structure is shared with the user application and
+> + * hence need to be synchronized. We know these kind of structures
+> + * should not be defined in the driver and this need to be fixed
+> + * if found a proper placeholder (in uapi/).
+
+Woah!  This isn't ok to leave as a fixme.  Please fix properly.
+
+As it is, this is NOT a portable data structure by any means.
+
+> + * FIXME: This structure is shared with the user application and
+> + * hence need to be synchronized. We know these kind of structures
+> + * should not be defined in the driver and this need to be fixed
+> + * if found a proper placeholder (in uapi/).
+
+Same here, this is just flat out not going to work.
+
+> +static void xtg_access_rams(struct xtg_dev_info *tg, int where,
+> +			    int count, int flags, u32 *data)
+> +{
+> +	u32 index;
+> +
+> +	switch (flags) {
+> +	case XTG_WRITE_RAM_ZERO:
+> +		memset_io(tg->regs + where, 0, count);
+> +#ifdef CONFIG_PHYS_ADDR_T_64BIT
+
+No #ifdef in .c code please, fix this correctly.
+
+> +		writel(0x0, tg->regs + where +
+> +			(XTG_COMMAND_RAM_MSB_OFFSET - XTG_COMMAND_RAM_OFFSET) +
+> +			XTG_EXTCMD_RAM_BLOCK_SIZE - XTG_CMD_RAM_BLOCK_SIZE);
+> +#endif
+> +		break;
+> +	case XTG_WRITE_RAM:
+> +		for (index = 0; count > 0; index++, count -= 4)
+> +			writel(data[index], tg->regs + where + index * 4);
+> +#ifdef CONFIG_PHYS_ADDR_T_64BIT
+
+Same here, and everywhere else.
+
+> +/**
+> + * xtg_sysfs_ioctl - Implements sysfs operations
+
+sysfs is not an ioctl.  Please fix your naming.
+
+> + * @dev: Device structure
+> + * @buf: Value to write
+> + * @opcode: Ioctl opcode
+> + *
+> + * Return: value read from the sysfs opcode.
+> + */
+
+Why are you creating kernel doc documentation for static functions?
+That's not needed at all, right?
+
+> +static ssize_t xtg_sysfs_ioctl(struct device *dev, const char *buf,
+> +			       enum xtg_sysfs_ioctl_opcode opcode)
+> +{
+> +	struct xtg_dev_info *tg = to_xtg_dev_info(dev);
+> +	unsigned long wrval;
+> +	ssize_t status, rdval = 0;
+> +
+> +	if (opcode > XTG_GET_STREAM_TRANSFERCNT) {
+> +		status = kstrtoul(buf, 0, &wrval);
+> +		if (status < 0)
+> +			return status;
+> +	}
+> +
+> +	switch (opcode) {
+> +	case XTG_GET_MASTER_CMP_STS:
+> +		rdval = (readl(tg->regs + XTG_MCNTL_OFFSET) &
+> +				XTG_MCNTL_MSTEN_MASK) ? 1 : 0;
+> +		break;
+> +
+> +	case XTG_GET_MASTER_LOOP_EN:
+> +		rdval = (readl(tg->regs + XTG_MCNTL_OFFSET) &
+> +				XTG_MCNTL_LOOPEN_MASK) ? 1 : 0;
+> +		break;
+> +
+> +	case XTG_GET_SLV_CTRL_REG:
+> +		rdval = readl(tg->regs + XTG_SCNTL_OFFSET);
+> +		break;
+> +
+> +	case XTG_GET_ERR_STS:
+> +		rdval = readl(tg->regs + XTG_ERR_STS_OFFSET) &
+> +				XTG_ERR_ALL_ERRS_MASK;
+> +		break;
+> +
+> +	case XTG_GET_CFG_STS:
+> +		rdval = readl(tg->regs + XTG_CFG_STS_OFFSET);
+> +		break;
+> +
+> +	case XTG_GET_LAST_VALID_INDEX:
+> +		rdval = (((tg->last_wr_valid_idx << 16) & 0xffff0000) |
+> +				(tg->last_rd_valid_idx & 0xffff));
+> +		break;
+> +
+> +	case XTG_GET_DEVICE_ID:
+> +		rdval = tg->id;
+> +		break;
+> +
+> +	case XTG_GET_RESOURCE:
+> +		rdval = (unsigned long)tg->regs;
+> +		break;
+> +
+> +	case XTG_GET_STATIC_ENABLE:
+> +		rdval = readl(tg->regs + XTG_STATIC_CNTL_OFFSET);
+> +		break;
+> +
+> +	case XTG_GET_STATIC_BURSTLEN:
+> +		rdval = readl(tg->regs + XTG_STATIC_LEN_OFFSET);
+> +		break;
+> +
+> +	case XTG_GET_STATIC_TRANSFERDONE:
+> +		rdval = (readl(tg->regs + XTG_STATIC_CNTL_OFFSET) &
+> +				XTG_STATIC_CNTL_TD_MASK);
+> +		break;
+> +
+> +	case XTG_GET_STREAM_ENABLE:
+> +		rdval = readl(tg->regs + XTG_STREAM_CNTL_OFFSET);
+> +		break;
+> +
+> +	case XTG_GET_STREAM_TRANSFERLEN:
+> +		rdval = (readl(tg->regs + XTG_STREAM_TL_OFFSET) &
+> +				XTG_STREAM_TL_TLEN_MASK);
+> +		break;
+> +
+> +	case XTG_GET_STREAM_TRANSFERCNT:
+> +		rdval = ((readl(tg->regs + XTG_STREAM_TL_OFFSET) &
+> +				XTG_STREAM_TL_TCNT_MASK) >>
+> +				XTG_STREAM_TL_TCNT_SHIFT);
+> +		break;
+> +
+> +	case XTG_GET_STREAM_TKTS1:
+> +		rdval = readl(tg->regs + XTG_STREAM_TKTS1_OFFSET);
+> +		break;
+> +	case XTG_GET_STREAM_TKTS2:
+> +		rdval = readl(tg->regs + XTG_STREAM_TKTS2_OFFSET);
+> +		break;
+> +	case XTG_GET_STREAM_TKTS3:
+> +		rdval = readl(tg->regs + XTG_STREAM_TKTS3_OFFSET);
+> +		break;
+> +	case XTG_GET_STREAM_TKTS4:
+> +		rdval = readl(tg->regs + XTG_STREAM_TKTS4_OFFSET);
+> +		break;
+> +
+> +	case XTG_GET_STREAM_CFG:
+> +		rdval = (readl(tg->regs + XTG_STREAM_CFG_OFFSET));
+> +		break;
+> +
+> +	case XTG_START_MASTER_LOGIC:
+> +		if (wrval)
+> +			writel(readl(tg->regs + XTG_MCNTL_OFFSET) |
+> +					XTG_MCNTL_MSTEN_MASK,
+> +				tg->regs + XTG_MCNTL_OFFSET);
+> +		break;
+> +
+> +	case XTG_MASTER_LOOP_EN:
+> +		if (wrval)
+> +			writel(readl(tg->regs + XTG_MCNTL_OFFSET) |
+> +					XTG_MCNTL_LOOPEN_MASK,
+> +				tg->regs + XTG_MCNTL_OFFSET);
+> +		else
+> +			writel(readl(tg->regs + XTG_MCNTL_OFFSET) &
+> +					~XTG_MCNTL_LOOPEN_MASK,
+> +				tg->regs + XTG_MCNTL_OFFSET);
+> +		break;
+> +
+> +	case XTG_SET_SLV_CTRL_REG:
+> +		writel(wrval, tg->regs + XTG_SCNTL_OFFSET);
+> +		break;
+> +
+> +	case XTG_ENABLE_ERRORS:
+> +		wrval &= XTG_ERR_ALL_ERRS_MASK;
+> +		writel(wrval, tg->regs + XTG_ERR_EN_OFFSET);
+> +		break;
+> +
+> +	case XTG_CLEAR_ERRORS:
+> +		wrval &= XTG_ERR_ALL_ERRS_MASK;
+> +		writel(readl(tg->regs + XTG_ERR_STS_OFFSET) | wrval,
+> +		       tg->regs + XTG_ERR_STS_OFFSET);
+> +		break;
+> +
+> +	case XTG_ENABLE_INTRS:
+> +		if (wrval & XTG_MASTER_CMP_INTR) {
+> +			pr_info("Enabling Master Complete Interrupt\n");
+> +			writel(readl(tg->regs + XTG_ERR_EN_OFFSET) |
+> +					XTG_ERR_EN_MSTIRQEN_MASK,
+> +				tg->regs + XTG_ERR_EN_OFFSET);
+> +		}
+> +		if (wrval & XTG_MASTER_ERR_INTR) {
+> +			pr_info("Enabling Interrupt on Master Errors\n");
+> +			writel(readl(tg->regs + XTG_MSTERR_INTR_OFFSET) |
+> +					XTG_MSTERR_INTR_MINTREN_MASK,
+> +				tg->regs + XTG_MSTERR_INTR_OFFSET);
+> +		}
+> +		if (wrval & XTG_SLAVE_ERR_INTR) {
+> +			pr_info("Enabling Interrupt on Slave Errors\n");
+> +			writel(readl(tg->regs + XTG_SCNTL_OFFSET) |
+> +					XTG_SCNTL_ERREN_MASK,
+> +				tg->regs + XTG_SCNTL_OFFSET);
+> +		}
+> +		break;
+> +
+> +	case XTG_CLEAR_MRAM:
+> +		xtg_access_rams(tg, tg->xtg_mram_offset,
+> +				XTG_MASTER_RAM_SIZE,
+> +				XTG_WRITE_RAM_ZERO, NULL);
+> +		break;
+> +
+> +	case XTG_CLEAR_CRAM:
+> +		xtg_access_rams(tg, XTG_COMMAND_RAM_OFFSET,
+> +				XTG_COMMAND_RAM_SIZE,
+> +				XTG_WRITE_RAM_ZERO, NULL);
+> +		break;
+> +
+> +	case XTG_CLEAR_PRAM:
+> +		xtg_access_rams(tg, XTG_PARAM_RAM_OFFSET,
+> +				XTG_PARAM_RAM_SIZE,
+> +				XTG_WRITE_RAM_ZERO, NULL);
+> +		break;
+> +
+> +	case XTG_SET_STATIC_ENABLE:
+> +		if (wrval) {
+> +			wrval &= XTG_STATIC_CNTL_STEN_MASK;
+> +			writel(readl(tg->regs + XTG_STATIC_CNTL_OFFSET) | wrval,
+> +			       tg->regs + XTG_STATIC_CNTL_OFFSET);
+> +		} else {
+> +			writel(readl(tg->regs + XTG_STATIC_CNTL_OFFSET) &
+> +				~XTG_STATIC_CNTL_STEN_MASK,
+> +				tg->regs + XTG_STATIC_CNTL_OFFSET);
+> +		}
+> +		break;
+> +
+> +	case XTG_SET_STATIC_BURSTLEN:
+> +		writel(wrval, tg->regs + XTG_STATIC_LEN_OFFSET);
+> +		break;
+> +
+> +	case XTG_SET_STATIC_TRANSFERDONE:
+> +		wrval |= XTG_STATIC_CNTL_TD_MASK;
+> +		writel(readl(tg->regs + XTG_STATIC_CNTL_OFFSET) | wrval,
+> +		       tg->regs + XTG_STATIC_CNTL_OFFSET);
+> +		break;
+> +
+> +	case XTG_SET_STREAM_ENABLE:
+> +		if (wrval) {
+> +			rdval = readl(tg->regs + XTG_STREAM_CNTL_OFFSET);
+> +			rdval |= XTG_STREAM_CNTL_STEN_MASK,
+> +			writel(rdval,
+> +			       tg->regs + XTG_STREAM_CNTL_OFFSET);
+> +		} else {
+> +			writel(readl(tg->regs + XTG_STREAM_CNTL_OFFSET) &
+> +			       ~XTG_STREAM_CNTL_STEN_MASK,
+> +			       tg->regs + XTG_STREAM_CNTL_OFFSET);
+> +		}
+> +		break;
+> +
+> +	case XTG_SET_STREAM_TRANSFERLEN:
+> +		wrval &= XTG_STREAM_TL_TLEN_MASK;
+> +		rdval = readl(tg->regs + XTG_STREAM_TL_OFFSET);
+> +		rdval &= ~XTG_STREAM_TL_TLEN_MASK;
+> +		writel(rdval | wrval,
+> +		       tg->regs + XTG_STREAM_TL_OFFSET);
+> +		break;
+> +
+> +	case XTG_SET_STREAM_TRANSFERCNT:
+> +		wrval = ((wrval << XTG_STREAM_TL_TCNT_SHIFT) &
+> +				XTG_STREAM_TL_TCNT_MASK);
+> +		rdval = readl(tg->regs + XTG_STREAM_TL_OFFSET);
+> +		rdval = rdval & ~XTG_STREAM_TL_TCNT_MASK;
+> +		writel(rdval | wrval,
+> +		       tg->regs + XTG_STREAM_TL_OFFSET);
+> +		break;
+> +
+> +	case XTG_SET_STREAM_TKTS1:
+> +		writel(wrval, tg->regs + XTG_STREAM_TKTS1_OFFSET);
+> +		break;
+> +	case XTG_SET_STREAM_TKTS2:
+> +		writel(wrval, tg->regs + XTG_STREAM_TKTS2_OFFSET);
+> +		break;
+> +	case XTG_SET_STREAM_TKTS3:
+> +		writel(wrval, tg->regs + XTG_STREAM_TKTS3_OFFSET);
+> +		break;
+> +	case XTG_SET_STREAM_TKTS4:
+> +		writel(wrval, tg->regs + XTG_STREAM_TKTS4_OFFSET);
+> +		break;
+> +
+> +	case XTG_SET_STREAM_CFG:
+> +		writel(wrval, tg->regs + XTG_STREAM_CFG_OFFSET);
+> +		break;
+> +
+> +	default:
+> +		break;
+> +	}
+> +
+> +	return rdval;
+> +}
+> +
+> +/* Sysfs functions */
+> +
+> +static ssize_t id_show(struct device *dev,
+> +		       struct device_attribute *attr, char *buf)
+> +{
+> +	ssize_t rdval = xtg_sysfs_ioctl(dev, buf, XTG_GET_DEVICE_ID);
+> +
+> +	return snprintf(buf, PAGE_SIZE, "%zd\n", rdval);
+
+You "know" the size of the data for sysfs, no need for snprintf() or
+friends at all, just use sprintf() please.
+
+> +static ssize_t xtg_pram_read(struct file *filp, struct kobject *kobj,
+> +			     struct bin_attribute *bin_attr,
+> +			     char *buf, loff_t off, size_t count)
+> +{
+> +	pr_info("No read access to Parameter RAM\n");
+> +
+> +	return 0;
+> +}
+
+
+This is pointless, why do you have/need this?
+
+Looks like a good way to spam the kernel log :(
+
+And never use pr_* calls in a driver, always use dev_* instead.
+
+> +	/*
+> +	 * Create sysfs file entries for the device
+> +	 */
+> +	err = sysfs_create_group(&dev->kobj, &xtg_attributes);
+
+You just raced with userspace and lost.  Set the attribute groups
+pointer up correctly and the driver core will create/remove your
+attributes for you.  This code does it wrong.
+
+> +	dev_info(&pdev->dev, "Probing xilinx traffic generator success\n");
+
+Do NOT be noisy when everything goes correctly.  Drivers should not
+print out anything if all is well, please drop this.
+
+thanks,
+
+greg k-h
