@@ -2,69 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C7D2116CE5
-	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2019 13:16:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 198CB116F8C
+	for <lists+linux-doc@lfdr.de>; Mon,  9 Dec 2019 15:50:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727412AbfLIMQS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 9 Dec 2019 07:16:18 -0500
-Received: from [123.157.104.123] ([123.157.104.123]:34575 "EHLO mail.hzccb.com"
-        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1727074AbfLIMQR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 9 Dec 2019 07:16:17 -0500
-X-Greylist: delayed 451 seconds by postgrey-1.27 at vger.kernel.org; Mon, 09 Dec 2019 07:16:16 EST
-Received: from localhost (localhost [127.0.0.1])
-        by mail.hzccb.com (Postfix) with ESMTP id F34E412C700;
-        Mon,  9 Dec 2019 20:08:37 +0800 (CST)
-Received: from mail.hzccb.com ([127.0.0.1])
-        by localhost (mail.hzccb.com [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id wq_8uBoYfAWV; Mon,  9 Dec 2019 20:08:37 +0800 (CST)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.hzccb.com (Postfix) with ESMTP id EB4B112C704;
-        Mon,  9 Dec 2019 20:08:36 +0800 (CST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.hzccb.com EB4B112C704
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=hzccb.com;
-        s=4B0886B4-54E6-11E4-871D-BE366F29F7D3; t=1575893317;
-        bh=pHhd9ORGT79A6WZoc5DtwakirRaLrjStXBvFmGmwXog=;
-        h=Date:From:Message-ID:MIME-Version;
-        b=GjhDXnnDR5vsx6ZCQjDAQ4qSwBOvd7xMObRLRrTNtR8bUC3RwPsNFW3cx0hrK+tsM
-         P+wZrkPMW4tbjNePUYbEj495ictM8pLJDm/jLB3onIp0x+Nh2ThuBtLjupuSVTYHhY
-         UOu/5R9gXY9pCiVky6uOUAPpJnmLG8VxuKhly44c=
-X-Virus-Scanned: amavisd-new at hzccb.com
-Received: from mail.hzccb.com ([127.0.0.1])
-        by localhost (mail.hzccb.com [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id Oj1G6aDvLCKU; Mon,  9 Dec 2019 20:08:36 +0800 (CST)
-Received: from mail.hzccb.com (mail.hzccb.com [10.130.10.39])
-        by mail.hzccb.com (Postfix) with ESMTP id 3404E12C6F8;
-        Mon,  9 Dec 2019 20:08:36 +0800 (CST)
-Date:   Mon, 9 Dec 2019 20:08:36 +0800 (CST)
-From:   "Mr. Musa Ali" <test@hzccb.com>
-Reply-To: "Mr.Musa Ali" <Musa_Ali77@outlook.com>
-Message-ID: <1041509527.115308.1575893316163.JavaMail.zimbra@hzccb.com>
-Subject: VERY VERY URGENT.
+        id S1726362AbfLIOuP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 9 Dec 2019 09:50:15 -0500
+Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:43321 "EHLO
+        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1726358AbfLIOuO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 9 Dec 2019 09:50:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1575903013;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=zmXv5r+jYXphY7BscO2smGv5aBXrs+fMMrRQn1IS66s=;
+        b=KZYSuTFfvO1SUMBac3WKVs3MjAQImVa0KmDCtycsOE/uTgjW/t9I5YrMVHptquZwzQWCwF
+        8cAkU0Pyb+fmYIlJL4xSNg/ahgWa4ulXmB/nFvzL45b8EtSBaY855YA6OPY9/IvdeATK52
+        8kvx5jbOijOd8PLjuPDsA3RgiLXJfho=
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-409-x907W369PQSRif72ty41tg-1; Mon, 09 Dec 2019 09:49:10 -0500
+Received: by mail-wm1-f69.google.com with SMTP id y125so22589wmg.1
+        for <linux-doc@vger.kernel.org>; Mon, 09 Dec 2019 06:49:09 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:references:mime-version:content-disposition
+         :in-reply-to;
+        bh=LTG1mZGmZ9hcbwqZAQIUO+xcTEzvZOPY6N77kDf6jfs=;
+        b=EN5mdM5Kgw0q1HZqEVy0V4JvocnliozXpvpmOuFGeZ+i/o60+WrNQcqkbMntby0sAe
+         Cq0QZd4Ha3HRyAvBYqjm2nImxFUxIw5g0VvmUVD5kXCglHH5xU8KmCxZQqXWBLuw+aXt
+         2gO83o+/OdnnPFaouLfv6U7JLJyjovVqL9jgKkJImQhCJ/EEvE2C93lYYZgHhMDnNDts
+         +8Ct6sKjntiGMe0Dum7gw85iSLgpelLRwzM/PL0LDz4PBV7T8NBWQARQAgcF59r1CkEt
+         yVPd7DP25CyRMw6BFlw4b1Iw7rF0HysmWI15si4tAgAzj6VI95d7/qjRjKlDqGjArzN/
+         7sig==
+X-Gm-Message-State: APjAAAWTg/mLO32UCFxvPDRDc3ra2NAh1mptHmWdfK/6G8yjC1FAozEE
+        K1ZJt5Nk88/qDEGDrTiUW7hU/kRcxgppriT0NLIabNNrg7X56uxFM2vsj1Q5WyRNE190Cbdl6l+
+        40abUwC9h2gLznXrMrmC1
+X-Received: by 2002:adf:f108:: with SMTP id r8mr2640088wro.390.1575902948958;
+        Mon, 09 Dec 2019 06:49:08 -0800 (PST)
+X-Google-Smtp-Source: APXvYqzeyuo2wJ8z5YlI5WtkiEPJHJQh87qKQlY3/8QtSaJHx1DoZzLAqxIrGtET/Y+H06nEwDhd7A==
+X-Received: by 2002:adf:f108:: with SMTP id r8mr2640058wro.390.1575902948744;
+        Mon, 09 Dec 2019 06:49:08 -0800 (PST)
+Received: from orion (ip-89-103-126-188.net.upcbroadband.cz. [89.103.126.188])
+        by smtp.gmail.com with ESMTPSA id k4sm14506803wmk.26.2019.12.09.06.49.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 09 Dec 2019 06:49:08 -0800 (PST)
+Date:   Mon, 9 Dec 2019 15:49:06 +0100
+From:   Carlos Maiolino <cmaiolino@redhat.com>
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     Linux FS Devel <linux-fsdevel@vger.kernel.org>,
+        "Darrick J . Wong" <darrick.wong@oracle.com>,
+        linux-xfs <linux-xfs@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH] xfs: fix Sphinx documentation warning
+Message-ID: <20191209144906.u3hllhe5ekkqsvva@orion>
+Mail-Followup-To: Randy Dunlap <rdunlap@infradead.org>,
+        Linux FS Devel <linux-fsdevel@vger.kernel.org>,
+        "Darrick J . Wong" <darrick.wong@oracle.com>,
+        linux-xfs <linux-xfs@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+References: <bd3c7d7e-2859-06b0-a209-7d19f7c2e79f@infradead.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [165.16.222.189]
-X-Mailer: Zimbra 8.8.12_GA_3817 (ZimbraWebClient - GC78 (Win)/8.8.12_GA_3817)
-Thread-Index: gf3dn/ymj/2AMcnsrUmOpMODIYgGvw==
-Thread-Topic: VERY VERY URGENT.
-To:     unlisted-recipients:; (no To-header on input)
+In-Reply-To: <bd3c7d7e-2859-06b0-a209-7d19f7c2e79f@infradead.org>
+X-MC-Unique: x907W369PQSRif72ty41tg-1
+X-Mimecast-Spam-Score: 0
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From Mr.Musa Ali.   I feel quite safe dealing with foreign partner in this important business. Though this medium (Internet) has been greatly abused, I choose to reach you through it because it still remains the fastest medium of communication. However, this correspondence is private, and it should be treated in strict confidence.
+On Sun, Dec 08, 2019 at 08:14:36PM -0800, Randy Dunlap wrote:
+> From: Randy Dunlap <rdunlap@infradead.org>
+>=20
+> Fix Sphinx documentation format warning by not indenting so much.
+>=20
+> Documentation/admin-guide/xfs.rst:257: WARNING: Block quote ends without =
+a blank line; unexpected unindent.
+>=20
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Darrick J. Wong <darrick.wong@oracle.com>
+> Cc: linux-xfs@vger.kernel.org
+> ---
+>  Documentation/admin-guide/xfs.rst |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
- Firstly I will like to assure you that this transaction is 100% risk and trouble free to both  parties, In order to transfer out twenty million five hundred thousand dollars, (US$20.500 000 ) from our bank here, secondly the fund for transfers of clean origin. The owner of the fund is late COLONEL MUMMER GADDAFI formal Libyan president, who was murdered during the Libyan crisis,
+Looks good, you can add:
 
- I want to transfer left fund into your account as the foreign beneficiary of the fund. I know that this letter will come to you as a surprise as we don't know ourselves before, but be sure that it is real and a genuine business. I contact you believing that you will not let me down once the fund goes into your account. More details of this deal will be forwarded to you as soon as I hear from you positively concerning this transfer;
+Reviewed-by: Carlos Maiolino <cmaiolino@redhat.com>
 
- I will come over to your Country as soon as the transfer is over to receive my own share of the fund for further investments by your advice. Please I want you to understand that  the government of my country want to take over all unclaimed funds please write me  back immediately and tell me if you really want to carry out the transaction with me, please delete this message if you are not interested. 
+>=20
+> --- linux-next-20191209.orig/Documentation/admin-guide/xfs.rst
+> +++ linux-next-20191209/Documentation/admin-guide/xfs.rst
+> @@ -253,7 +253,7 @@ The following sysctls are available for
+>  =09pool.
+> =20
+>    fs.xfs.speculative_prealloc_lifetime
+> -=09=09(Units: seconds   Min: 1  Default: 300  Max: 86400)
+> +=09(Units: seconds   Min: 1  Default: 300  Max: 86400)
+>  =09The interval at which the background scanning for inodes
+>  =09with unused speculative preallocation runs. The scan
+>  =09removes unused preallocation from clean inodes and releases
+>=20
 
+--=20
+Carlos
 
-
- Looking forwards to hear from you soon,
-
- Regards,
- Mr.Musa Ali.
