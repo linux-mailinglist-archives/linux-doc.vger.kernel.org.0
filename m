@@ -2,22 +2,22 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 91EAD11B850
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Dec 2019 17:16:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B609011B86E
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Dec 2019 17:19:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729522AbfLKQQL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 Dec 2019 11:16:11 -0500
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:26724 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1729296AbfLKQQL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Dec 2019 11:16:11 -0500
-Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id xBBGG9GV117827
-        for <linux-doc@vger.kernel.org>; Wed, 11 Dec 2019 11:16:09 -0500
+        id S1729230AbfLKQTo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 11 Dec 2019 11:19:44 -0500
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:43734 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1728912AbfLKQTo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Dec 2019 11:19:44 -0500
+Received: from pps.filterd (m0098419.ppops.net [127.0.0.1])
+        by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id xBBGCdvk131541
+        for <linux-doc@vger.kernel.org>; Wed, 11 Dec 2019 11:19:43 -0500
 Received: from e06smtp04.uk.ibm.com (e06smtp04.uk.ibm.com [195.75.94.100])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 2wtfbxm5k4-1
+        by mx0b-001b2d01.pphosted.com with ESMTP id 2wtcd1ywvj-1
         (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=NOT)
-        for <linux-doc@vger.kernel.org>; Wed, 11 Dec 2019 11:15:54 -0500
+        for <linux-doc@vger.kernel.org>; Wed, 11 Dec 2019 11:19:42 -0500
 Received: from localhost
         by e06smtp04.uk.ibm.com with IBM ESMTP SMTP Gateway: Authorized Use Only! Violators will be prosecuted
         for <linux-doc@vger.kernel.org> from <sourabhjain@linux.ibm.com>;
@@ -58,11 +58,11 @@ x-cbparentid: 19121116-0017-0000-0000-00003335FFA8
 Message-Id: <20191211160910.21656-5-sourabhjain@linux.ibm.com>
 X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.95,18.0.572
  definitions=2019-12-11_04:2019-12-11,2019-12-11 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=1 spamscore=0
- mlxlogscore=999 malwarescore=0 phishscore=0 priorityscore=1501 bulkscore=0
- adultscore=0 mlxscore=0 lowpriorityscore=0 clxscore=1015 impostorscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-1910280000
- definitions=main-1912110137
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0 spamscore=0
+ lowpriorityscore=0 bulkscore=0 mlxscore=0 impostorscore=0 malwarescore=0
+ mlxlogscore=999 adultscore=0 clxscore=1015 priorityscore=1501
+ suspectscore=1 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-1910280000 definitions=main-1912110137
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
