@@ -2,61 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7832611E56F
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2019 15:19:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 99C5711E5E1
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Dec 2019 15:54:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727639AbfLMOQV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 13 Dec 2019 09:16:21 -0500
-Received: from foss.arm.com ([217.140.110.172]:60830 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727569AbfLMOQU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 13 Dec 2019 09:16:20 -0500
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5ED0513A1;
-        Fri, 13 Dec 2019 06:16:20 -0800 (PST)
-Received: from [10.1.197.1] (ewhatever.cambridge.arm.com [10.1.197.1])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 6EBB63F52E;
-        Fri, 13 Dec 2019 06:16:19 -0800 (PST)
-Subject: Re: [PATCH] arm64/elf_hwcap: Add new flags for BFloat-16 extension
-To:     Anshuman Khandual <anshuman.khandual@arm.com>,
-        linux-arm-kernel@lists.infradead.org
-Cc:     Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <1576145232-8311-1-git-send-email-anshuman.khandual@arm.com>
-From:   Suzuki Kuruppassery Poulose <suzuki.poulose@arm.com>
-Message-ID: <7730f07d-8560-d354-875b-ee49bc000e64@arm.com>
-Date:   Fri, 13 Dec 2019 14:16:18 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <1576145232-8311-1-git-send-email-anshuman.khandual@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+        id S1727816AbfLMOyn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 13 Dec 2019 09:54:43 -0500
+Received: from mail-wr1-f65.google.com ([209.85.221.65]:34211 "EHLO
+        mail-wr1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727673AbfLMOyn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 13 Dec 2019 09:54:43 -0500
+Received: by mail-wr1-f65.google.com with SMTP id t2so6978503wrr.1
+        for <linux-doc@vger.kernel.org>; Fri, 13 Dec 2019 06:54:42 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id;
+        bh=Uo6+XZGMNTkft0H6aZfy4bG5kDxQR0Iolx1l0XRUcio=;
+        b=GMXNLsI0WWja/RR+HGlhdm3ZA3pmxghfYWYqBVMdP7AiaL+MXIf+YZQmltb7doRgFV
+         EDsLpRgqRbOJtUZJHLlXGvGdvYQji91fTSN/Nhcw6vzc+i1BfcOdD6mDf+C9bnc1Be8O
+         36LWJu5d/s+jH9jWBZVinuJ0mpuz/CkJ/w/OhenH9i2ezoAxyuGGQjhpOpPgKWovJekv
+         YLDFX01/dNXB5P3jQo4VnJFE4PNYIPckEFZMkl6Htm5mhdoJg2+pRRu044fFPFgKvM7+
+         2JpRL5tJJdTw8+Uwk27fQXEvOi2aPy6aGp7wvJG/VCvKR0MwB/PpSvLTFF45VlbBtPPC
+         L42w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=Uo6+XZGMNTkft0H6aZfy4bG5kDxQR0Iolx1l0XRUcio=;
+        b=WEOtdtg1g4z0D3CxowQJPp7vWqQsjh15V2LHJdwbszhUlFYWZCDUwaazhEfqsiZo/N
+         1g2fDimP3G7JG5dE6xYCFYBgzEGIjl2Lgb78Cg/es1NSjulS6h1q6mxoWWgluGamPNQt
+         A2csHRA7SJCxz4KSQ0DHkO61PZXpfc3+GOBLPEpClK28E1JB8vgqE31MSMrfRHIP7G6J
+         OF8mZ73atXlrIy5D0mma2H5rZsNaYbfrOvHYconNahnOpYLx7fosDznKBKAgdyT8ScZ2
+         HnCKhtegbwjQX3aLM3LG+4QQuHzOnzdAC+NOTLTMKXFybf2khnzdjC8if6jLIslCZtRK
+         jpDg==
+X-Gm-Message-State: APjAAAWCVWI7pmXm8ChJ0QLOEPaPTGMh3CN4zjaqE5AfUelvhwFsw3Rs
+        EQCXFx1BINj1i7S9Q2U7paMo3A==
+X-Google-Smtp-Source: APXvYqynfeDaiazOqnf+uPa0CaJht8vTImScZqHs/rULucW5sFyMc6N54mDM1cJXTFkrzsZ0H6bLjg==
+X-Received: by 2002:adf:ef49:: with SMTP id c9mr13026144wrp.292.1576248881480;
+        Fri, 13 Dec 2019 06:54:41 -0800 (PST)
+Received: from linaro.org ([2a00:23c5:6815:3901:54:d457:4f7b:f42c])
+        by smtp.gmail.com with ESMTPSA id n189sm10002979wme.33.2019.12.13.06.54.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Dec 2019 06:54:40 -0800 (PST)
+From:   Mike Leach <mike.leach@linaro.org>
+To:     linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org,
+        linux-doc@vger.kernel.org
+Cc:     mathieu.poirier@linaro.org, suzuki.poulose@arm.com,
+        Mike Leach <mike.leach@linaro.org>
+Subject: [PATCH v3 0/6] Describe CoreSight topology using sysfs links.
+Date:   Fri, 13 Dec 2019 14:54:25 +0000
+Message-Id: <20191213145431.24067-1-mike.leach@linaro.org>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 12/12/2019 10:07, Anshuman Khandual wrote:
-> Expose the availability of the BFloat16 (BF16) format support in the CPUs.
-> BF16 is a new 16-bit floating point format different from the half
-> precision format defined by the IEEE-754-2008.
-> 
-> BF16 extensions add support for new instructions for both FP/SIMD and SVE.
-> Advertise these features individually to the userspace via ELF HWCAP.
-> 
-> Cc: Catalin Marinas <catalin.marinas@arm.com>
-> Cc: Will Deacon <will@kernel.org>
-> Cc: Mark Rutland <mark.rutland@arm.com>
-> Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
-> Cc: linux-doc@vger.kernel.org
-> Cc: linux-kernel@vger.kernel.org
-> Signed-off-by: Anshuman Khandual <anshuman.khandual@arm.com>
+The connections between CoreSight sources, links and sinks is not obvious
+without documentation or access to the device tree / ACPI definitions for
+the platform.
 
+This patchset provides sysfs links to enable the user to follow the trace
+patch from source to sink.
 
-Looks good to me.
+Components in the trace path are updated to have a connections sysfs
+group, which collates all the links for that component.
 
-Reviewed-by: Suzuki K Poulose <suzuki.poulose@arm.com>
+The CTI components which exist aside from the main trace patch, also
+have an added connections directory showing connections to other
+CoreSight devices.
+
+This patchset applies on top of the recent CTI patchset [1].
+
+Adaptation of an original patchset [2] from Suzuki, reusing 2 patches
+unchanged with update to 3rd adapt to the new common code for trace
+path and CTI component links & add a default connections group.
+
+Tested on Juno r1, DB410c; kernel 5.5-rc1
+
+[1] https://lists.linaro.org/pipermail/coresight/2019-December/003504.html
+[2] https://lists.linaro.org/pipermail/coresight/2019-May/002803.html
+
+Changes since v2:
+1) Fixed issues with signature ordering noted by Suzuki.
+2) Alterations to main CTI set[1] to overcome issue noted by Matthieu.
+
+Changes since v1:
+1) Code from original v4 CTI set moved here so that all connections related
+code in this set.
+2) Connections directory mandatory for all CoreSight components and
+generated as part of the registration process.
+
+Mike Leach (3):
+  coresight: Add generic sysfs link creation functions.
+  coresight: cti: Add in sysfs links to other coresight devices.
+  coresight: docs: Add information about the topology representations.
+
+Suzuki K Poulose (3):
+  coresight: Pass coresight_device for coresight_release_platform_data
+  coresight: add return value for fixup connections
+  coresight: Expose device connections via sysfs
+
+ .../trace/coresight/coresight-ect.rst         |   5 +-
+ Documentation/trace/coresight/coresight.rst   |  85 ++++++++
+ drivers/hwtracing/coresight/Makefile          |   3 +-
+ drivers/hwtracing/coresight/coresight-cti.c   |  41 +++-
+ .../hwtracing/coresight/coresight-platform.c  |   2 +-
+ drivers/hwtracing/coresight/coresight-priv.h  |  12 +-
+ drivers/hwtracing/coresight/coresight-sysfs.c | 204 ++++++++++++++++++
+ drivers/hwtracing/coresight/coresight.c       |  75 ++++---
+ include/linux/coresight.h                     |  22 ++
+ 9 files changed, 420 insertions(+), 29 deletions(-)
+ create mode 100644 drivers/hwtracing/coresight/coresight-sysfs.c
+
+-- 
+2.17.1
+
