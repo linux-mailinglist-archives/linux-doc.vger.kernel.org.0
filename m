@@ -2,255 +2,549 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 02F3A11EED3
-	for <lists+linux-doc@lfdr.de>; Sat, 14 Dec 2019 00:50:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B3E611EF08
+	for <lists+linux-doc@lfdr.de>; Sat, 14 Dec 2019 01:14:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726833AbfLMXsw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 13 Dec 2019 18:48:52 -0500
-Received: from mga03.intel.com ([134.134.136.65]:56595 "EHLO mga03.intel.com"
+        id S1726676AbfLNAOo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 13 Dec 2019 19:14:44 -0500
+Received: from mga03.intel.com ([134.134.136.65]:57956 "EHLO mga03.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726813AbfLMXsv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 13 Dec 2019 18:48:51 -0500
+        id S1726590AbfLNAOo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 13 Dec 2019 19:14:44 -0500
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 13 Dec 2019 15:48:51 -0800
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 13 Dec 2019 16:14:43 -0800
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.69,311,1571727600"; 
-   d="scan'208";a="388836448"
+   d="scan'208";a="216585270"
 Received: from spandruv-mobl.jf.intel.com ([10.255.89.247])
-  by orsmga005.jf.intel.com with ESMTP; 13 Dec 2019 15:48:50 -0800
+  by orsmga006.jf.intel.com with ESMTP; 13 Dec 2019 16:14:42 -0800
 From:   Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
-To:     rjw@rjwysocki.net, corbet@lwn.net, lenb@kernel.org,
-        rui.zhang@intel.com
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-acpi@vger.kernel.org,
+To:     dvhart@infradead.org, andy@infradead.org, corbet@lwn.net
+Cc:     linux-doc@vger.kernel.org, platform-driver-x86@vger.kernel.org,
+        linux-kernel@vger.kernel.org, lenb@kernel.org, rjw@rjwysocki.net,
         Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
-Subject: [PATCH v2 2/2] ACPI / fan: Display fan performance state information
-Date:   Fri, 13 Dec 2019 15:48:40 -0800
-Message-Id: <20191213234840.9791-3-srinivas.pandruvada@linux.intel.com>
+Subject: [PATCH 1/2] platform/x86: Add support for Uncore frequency control
+Date:   Fri, 13 Dec 2019 16:14:07 -0800
+Message-Id: <20191214001408.4878-1-srinivas.pandruvada@linux.intel.com>
 X-Mailer: git-send-email 2.17.2
-In-Reply-To: <20191213234840.9791-1-srinivas.pandruvada@linux.intel.com>
-References: <20191213234840.9791-1-srinivas.pandruvada@linux.intel.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When _FPS object indicates support of variable speed fan, thermal cooling
-devices for fan shows max performance state count using attribute
-"max_state" greater than or equal to 1.
+Some server users set limits on the uncore frequency using MSR 620H, while
+running latency sensitive workloads. Here uncore frequency controls
+RING/LLC(last-level cache) clocks.
 
-But the thermal cooling device doesn't display properties of each
-performance state. This is not enough for smart fan control user space
-software, which also considers speed, power and noise level.
+But MSR control is not always possible from the user space, so this driver
+provides a sysfs interface to set max and min frequency limits. This MSR
+620H is a die scoped in multi-die system or package scoped in non multi-die
+systems.
 
-This change presents fan performance states attributes under acpi
-device for the fan. This will be under:
-/sys/bus/acpi/devices/devices/INT3404:00
-or
-/sys/bus/platform/devices/PNP0C0B:00.
+When this driver is loaded, a new directory is created under
+ /sys/devices/system/cpu.
 
-For example:
-$ ls /sys/bus/acpi/devices/INT3404\:00
-description  path           state0   state11  state4  state7  status
-hid          physical_node  state1   state2   state5  state8  subsystem
-modalias     power          state10  state3   state6  state9  uevent
-uid          wakeup
+For example on a two package Skylake server:
+$cd /sys/devices/system/cpu/intel_uncore_frequency
 
-Here each state* attribute is representing a performance state.
+$ls
+package_00_die_00 package_01_die_00
 
-Contents of state* attribute are formatted using:
-control_percent:trip_point:speed_rpm:noise_level_mdb:power_mw
+$ls package_00_die_00
+max_freq_khz  min_freq_khz  power_up_max_freq_khz
+power_up_min_freq_khz
 
-$ cat /sys/bus/acpi/devices/INT3404\:00/state10
-95:0:11600:47500:4500
+$grep . *
+    max_freq_khz:2400000
+    min_freq_khz:1200000
+    power_up_max_freq_khz:2400000
+    power_up_min_freq_khz:1200000
 
-For more information refer to:
-Documentation/acpi/fan_performance_states.txt
+Here, power_up_max_freq_khz and power_up_min_freq_khz are read only
+attributes to show power up values of max and min frequencies respectively.
+Other attributes are read-write, so that users can modify.
 
-While here, return correct error from acpi_fan_probe() when
-acpi_fan_get_fps() or acpi_fan_get_fif() fails.
-
-Suggested-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 Signed-off-by: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
 ---
- drivers/acpi/fan.c | 96 ++++++++++++++++++++++++++++++++++++++++++----
- 1 file changed, 88 insertions(+), 8 deletions(-)
+ drivers/platform/x86/Kconfig                  |  11 +
+ drivers/platform/x86/Makefile                 |   1 +
+ drivers/platform/x86/intel-uncore-frequency.c | 434 ++++++++++++++++++
+ 3 files changed, 446 insertions(+)
+ create mode 100644 drivers/platform/x86/intel-uncore-frequency.c
 
-diff --git a/drivers/acpi/fan.c b/drivers/acpi/fan.c
-index 816b0803f7fb..86d2417953b5 100644
---- a/drivers/acpi/fan.c
-+++ b/drivers/acpi/fan.c
-@@ -44,12 +44,16 @@ static const struct dev_pm_ops acpi_fan_pm = {
- #define FAN_PM_OPS_PTR NULL
- #endif
+diff --git a/drivers/platform/x86/Kconfig b/drivers/platform/x86/Kconfig
+index 27d5b40fb717..6013c3b96cfd 100644
+--- a/drivers/platform/x86/Kconfig
++++ b/drivers/platform/x86/Kconfig
+@@ -1337,6 +1337,17 @@ config PCENGINES_APU2
+ 	  To compile this driver as a module, choose M here: the module
+ 	  will be called pcengines-apuv2.
  
-+#define ACPI_FPS_NAME_LEN	20
++config INTEL_UNCORE_FREQ_CONTROL
++	tristate "Intel Uncore frequency control driver"
++	depends on X86_64
++	help
++	  This driver allows control of uncore frequency limits on
++	  supported server platforms.
++	  Uncore frequency controls RING/LLC (last-level cache) clocks.
 +
- struct acpi_fan_fps {
- 	u64 control;
- 	u64 trip_point;
- 	u64 speed;
- 	u64 noise_level;
- 	u64 power;
-+	char name[ACPI_FPS_NAME_LEN];
-+	struct device_attribute dev_attr;
- };
++	  To compile this driver as a module, choose M here: the module
++	  will be called intel-uncore-frequency.
++
+ source "drivers/platform/x86/intel_speed_select_if/Kconfig"
  
- struct acpi_fan_fif {
-@@ -265,6 +269,39 @@ static int acpi_fan_speed_cmp(const void *a, const void *b)
- 	return fps1->speed - fps2->speed;
- }
- 
-+static ssize_t show_state(struct device *dev, struct device_attribute *attr, char *buf)
+ config SYSTEM76_ACPI
+diff --git a/drivers/platform/x86/Makefile b/drivers/platform/x86/Makefile
+index 42d85a00be4e..3747b1f07cf1 100644
+--- a/drivers/platform/x86/Makefile
++++ b/drivers/platform/x86/Makefile
+@@ -105,3 +105,4 @@ obj-$(CONFIG_INTEL_ATOMISP2_PM)	+= intel_atomisp2_pm.o
+ obj-$(CONFIG_PCENGINES_APU2)	+= pcengines-apuv2.o
+ obj-$(CONFIG_INTEL_SPEED_SELECT_INTERFACE) += intel_speed_select_if/
+ obj-$(CONFIG_SYSTEM76_ACPI)	+= system76_acpi.o
++obj-$(CONFIG_INTEL_UNCORE_FREQ_CONTROL)	+= intel-uncore-frequency.o
+diff --git a/drivers/platform/x86/intel-uncore-frequency.c b/drivers/platform/x86/intel-uncore-frequency.c
+new file mode 100644
+index 000000000000..82ee5a3107cf
+--- /dev/null
++++ b/drivers/platform/x86/intel-uncore-frequency.c
+@@ -0,0 +1,434 @@
++// SPDX-License-Identifier: GPL-2.0
++/*
++ * Intel Uncore Frequency Setting
++ * Copyright (c) 2019, Intel Corporation.
++ * All rights reserved.
++ *
++ * Provide interface to set MSR 620 at a granularity of per die. On CPU online,
++ * one control CPU is identified per die to read/write limit. This control CPU
++ * is changed, if the CPU state is changed to offline. When the last CPU is
++ * offline in a die then remove the sysfs object for that die.
++ * The majority of actual code is related to sysfs create and read/write
++ * attributes.
++ *
++ * Author: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
++ */
++
++#include <linux/cpu.h>
++#include <linux/module.h>
++#include <linux/slab.h>
++#include <linux/suspend.h>
++#include <asm/cpu_device_id.h>
++#include <asm/intel-family.h>
++
++#define MSR_UNCORE_RATIO_LIMIT			0x620
++#define UNCORE_FREQ_KHZ_MULTIPLIER		100000
++
++/**
++ * struct uncore_data -	Encapsulate all uncore data
++ * @stored_uncore_data:	Last user changed MSR 620 value, which will be restored
++ *			on system resume.
++ * @power_up_min_freq_khz: Sampled minimum uncore frequency at driver init
++ * @power_up_max_freq_khz: Sampled maximum uncore frequency at driver init
++ * @control_cpu:	Designated CPU for a die to read/write
++ * @valid:		Mark the data valid/invalid
++ *
++ * This structure is used to encapsulate all data related to uncore sysfs
++ * settings for a die/package.
++ */
++struct uncore_data {
++	struct kobject kobj;
++	u64 stored_uncore_data;
++	u32 power_up_min_freq_khz;
++	u32 power_up_max_freq_khz;
++	int control_cpu;
++	bool valid;
++};
++
++#define to_uncore_data(a) container_of(a, struct uncore_data, kobj)
++
++/* Max instances for uncore data, one for each die */
++static int uncore_max_entries __read_mostly;
++/* Storage for uncore data for all instances */
++static struct uncore_data *uncore_instances;
++/* Root of the all uncore sysfs kobjs */
++struct kobject uncore_root_kobj;
++/* Stores the CPU mask of the target CPUs to use during uncore read/write */
++static cpumask_t uncore_cpu_mask;
++/* CPU online callback register instance */
++static enum cpuhp_state uncore_hp_state __read_mostly;
++/* Mutex to control all mutual exclusions */
++static DEFINE_MUTEX(uncore_lock);
++
++struct uncore_attr {
++	struct attribute attr;
++	ssize_t (*show)(struct kobject *kobj,
++			struct attribute *attr, char *buf);
++	ssize_t (*store)(struct kobject *kobj,
++			 struct attribute *attr, const char *c, ssize_t count);
++};
++
++#define define_one_uncore_ro(_name) \
++static struct uncore_attr _name = \
++__ATTR(_name, 0444, show_##_name, NULL)
++
++#define define_one_uncore_rw(_name) \
++static struct uncore_attr _name = \
++__ATTR(_name, 0644, show_##_name, store_##_name)
++
++#define show_uncore_data(member_name)					\
++	static ssize_t show_##member_name(struct kobject *kobj,         \
++					  struct attribute *attr,	\
++					  char *buf)			\
++	{                                                               \
++		struct uncore_data *data = to_uncore_data(kobj);	\
++		return scnprintf(buf, PAGE_SIZE, "%u\n",		\
++				 data->member_name);			\
++	}								\
++	define_one_uncore_ro(member_name)
++
++show_uncore_data(power_up_min_freq_khz);
++show_uncore_data(power_up_max_freq_khz);
++
++/* Common function to read MSR 0x620 and read min/max */
++static int uncore_read_ratio(struct uncore_data *data, unsigned int *min,
++			     unsigned int *max)
 +{
-+	struct acpi_fan_fps *fps = container_of(attr, struct acpi_fan_fps, dev_attr);
-+	int count;
++	u64 cap;
++	int ret;
 +
-+	if (fps->control == 0xFFFFFFFF || fps->control > 100)
-+		count = snprintf(buf, PAGE_SIZE, "not-defined:");
-+	else
-+		count = snprintf(buf, PAGE_SIZE, "%lld:", fps->control);
++	ret = rdmsrl_on_cpu(data->control_cpu, MSR_UNCORE_RATIO_LIMIT, &cap);
++	if (ret)
++		return ret;
 +
-+	if (fps->trip_point == 0xFFFFFFFF || fps->trip_point > 9)
-+		count += snprintf(&buf[count], PAGE_SIZE, "not-defined:");
-+	else
-+		count += snprintf(&buf[count], PAGE_SIZE, "%lld:", fps->trip_point);
++	*max = (cap & 0x7F) * UNCORE_FREQ_KHZ_MULTIPLIER;
++	*min = ((cap & GENMASK(14, 8)) >> 8) * UNCORE_FREQ_KHZ_MULTIPLIER;
 +
-+	if (fps->speed == 0xFFFFFFFF)
-+		count += snprintf(&buf[count], PAGE_SIZE, "not-defined:");
-+	else
-+		count += snprintf(&buf[count], PAGE_SIZE, "%lld:", fps->speed);
++	return 0;
++}
 +
-+	if (fps->noise_level == 0xFFFFFFFF)
-+		count += snprintf(&buf[count], PAGE_SIZE, "not-defined:");
-+	else
-+		count += snprintf(&buf[count], PAGE_SIZE, "%lld:", fps->noise_level * 100);
++/* Common function to set min/max ratios to be used by sysfs callbacks */
++static int uncore_write_ratio(struct uncore_data *data, unsigned int input,
++			      int set_max)
++{
++	int ret;
++	u64 cap;
 +
-+	if (fps->power == 0xFFFFFFFF)
-+		count += snprintf(&buf[count], PAGE_SIZE, "not-defined\n");
-+	else
-+		count += snprintf(&buf[count], PAGE_SIZE, "%lld\n", fps->power);
++	mutex_lock(&uncore_lock);
++
++	input /= UNCORE_FREQ_KHZ_MULTIPLIER;
++	if (!input || input > 0x7F) {
++		ret = -EINVAL;
++		goto finish_write;
++	}
++
++	rdmsrl(MSR_UNCORE_RATIO_LIMIT, cap);
++	if (set_max) {
++		cap &= ~0x7F;
++		cap |= input;
++	} else  {
++		cap &= ~GENMASK(14, 8);
++		cap |= (input << 8);
++	}
++
++	ret = wrmsrl_on_cpu(data->control_cpu, MSR_UNCORE_RATIO_LIMIT, cap);
++	if (ret)
++		goto finish_write;
++
++	data->stored_uncore_data = cap;
++
++finish_write:
++	mutex_unlock(&uncore_lock);
++
++	return ret;
++}
++
++static ssize_t store_min_max_freq_khz(struct kobject *kobj,
++				      struct attribute *attr,
++				      const char *buf, ssize_t count,
++				      int min_max)
++{
++	struct uncore_data *data = to_uncore_data(kobj);
++	unsigned int input;
++
++	if (kstrtouint(buf, 10, &input))
++		return -EINVAL;
++
++	uncore_write_ratio(data, input, min_max);
 +
 +	return count;
 +}
 +
- static int acpi_fan_get_fps(struct acpi_device *device)
- {
- 	struct acpi_fan *fan = acpi_driver_data(device);
-@@ -295,12 +332,13 @@ static int acpi_fan_get_fps(struct acpi_device *device)
- 	}
- 	for (i = 0; i < fan->fps_count; i++) {
- 		struct acpi_buffer format = { sizeof("NNNNN"), "NNNNN" };
--		struct acpi_buffer fps = { sizeof(fan->fps[i]), &fan->fps[i] };
-+		struct acpi_buffer fps = { offsetof(struct acpi_fan_fps, name),
-+						&fan->fps[i] };
- 		status = acpi_extract_package(&obj->package.elements[i + 1],
- 					      &format, &fps);
- 		if (ACPI_FAILURE(status)) {
- 			dev_err(&device->dev, "Invalid _FPS element\n");
--			break;
-+			goto err;
- 		}
- 	}
- 
-@@ -308,6 +346,24 @@ static int acpi_fan_get_fps(struct acpi_device *device)
- 	sort(fan->fps, fan->fps_count, sizeof(*fan->fps),
- 	     acpi_fan_speed_cmp, NULL);
- 
-+	for (i = 0; i < fan->fps_count; ++i) {
-+		struct acpi_fan_fps *fps = &fan->fps[i];
++static ssize_t show_min_max_freq_khz(struct kobject *kobj,
++				     struct attribute *attr,
++				     char *buf, int min_max)
++{
++	struct uncore_data *data = to_uncore_data(kobj);
++	unsigned int min, max;
++	int ret;
 +
-+		snprintf(fps->name, ACPI_FPS_NAME_LEN, "state%d", i);
-+		fps->dev_attr.show = show_state;
-+		fps->dev_attr.store = NULL;
-+		fps->dev_attr.attr.name = fps->name;
-+		fps->dev_attr.attr.mode = 0444;
-+		status = sysfs_create_file(&device->dev.kobj, &fps->dev_attr.attr);
-+		if (status) {
-+			int j;
++	mutex_lock(&uncore_lock);
++	ret = uncore_read_ratio(data, &min, &max);
++	mutex_unlock(&uncore_lock);
++	if (ret)
++		return ret;
 +
-+			for (j = 0; j < i; ++j)
-+				sysfs_remove_file(&device->dev.kobj, &fan->fps[j].dev_attr.attr);
-+			break;
-+		}
++	if (min_max)
++		return sprintf(buf, "%u\n", max);
++
++	return sprintf(buf, "%u\n", min);
++}
++
++#define store_uncore_min_max(name, min_max)				\
++	static ssize_t store_##name(struct kobject *kobj,		\
++				    struct attribute *attr,		\
++				    const char *buf, ssize_t count)	\
++	{                                                               \
++									\
++		return store_min_max_freq_khz(kobj, attr, buf, count,	\
++					      min_max);			\
 +	}
 +
- err:
- 	kfree(obj);
- 	return status;
-@@ -330,14 +386,20 @@ static int acpi_fan_probe(struct platform_device *pdev)
- 	platform_set_drvdata(pdev, fan);
- 
- 	if (acpi_fan_is_acpi4(device)) {
--		if (acpi_fan_get_fif(device) || acpi_fan_get_fps(device))
--			goto end;
-+		result = acpi_fan_get_fif(device);
-+		if (result)
-+			return result;
++#define show_uncore_min_max(name, min_max)				\
++	static ssize_t show_##name(struct kobject *kobj,		\
++				   struct attribute *attr, char *buf)	\
++	{                                                               \
++									\
++		return show_min_max_freq_khz(kobj, attr, buf, min_max); \
++	}
 +
-+		result = acpi_fan_get_fps(device);
-+		if (result)
-+			return result;
++store_uncore_min_max(min_freq_khz, 0);
++store_uncore_min_max(max_freq_khz, 1);
 +
- 		fan->acpi4 = true;
- 	} else {
- 		result = acpi_device_update_power(device, NULL);
- 		if (result) {
- 			dev_err(&device->dev, "Failed to set initial power state\n");
--			goto end;
-+			goto err_end;
- 		}
- 	}
- 
-@@ -350,7 +412,7 @@ static int acpi_fan_probe(struct platform_device *pdev)
- 						&fan_cooling_ops);
- 	if (IS_ERR(cdev)) {
- 		result = PTR_ERR(cdev);
--		goto end;
-+		goto err_end;
- 	}
- 
- 	dev_dbg(&pdev->dev, "registered as cooling_device%d\n", cdev->id);
-@@ -365,10 +427,21 @@ static int acpi_fan_probe(struct platform_device *pdev)
- 	result = sysfs_create_link(&cdev->device.kobj,
- 				   &pdev->dev.kobj,
- 				   "device");
--	if (result)
-+	if (result) {
- 		dev_err(&pdev->dev, "Failed to create sysfs link 'device'\n");
-+		goto err_end;
++show_uncore_min_max(min_freq_khz, 0);
++show_uncore_min_max(max_freq_khz, 1);
++
++define_one_uncore_rw(min_freq_khz);
++define_one_uncore_rw(max_freq_khz);
++
++static struct attribute *uncore_attrs[] = {
++	&power_up_min_freq_khz.attr,
++	&power_up_max_freq_khz.attr,
++	&max_freq_khz.attr,
++	&min_freq_khz.attr,
++	NULL
++};
++
++static struct kobj_type uncore_ktype = {
++	.sysfs_ops = &kobj_sysfs_ops,
++	.default_attrs = uncore_attrs,
++};
++
++static struct kobj_type uncore_root_ktype = {
++	.sysfs_ops = &kobj_sysfs_ops,
++};
++
++/* Caller provides protection */
++static struct uncore_data *uncore_get_instance(unsigned int cpu)
++{
++	int id = topology_logical_die_id(cpu);
++
++	if (id >= 0 && id < uncore_max_entries)
++		return &uncore_instances[id];
++
++	return NULL;
++}
++
++static void uncore_add_die_entry(int cpu)
++{
++	struct uncore_data *data;
++
++	mutex_lock(&uncore_lock);
++	data = uncore_get_instance(cpu);
++	if (!data) {
++		mutex_unlock(&uncore_lock);
++		return;
++	}
++
++	if (data->valid) {
++		/* control cpu changed */
++		data->control_cpu = cpu;
++	} else {
++		char str[64];
++		int ret;
++
++		memset(data, 0, sizeof(*data));
++		sprintf(str, "package_%02d_die_%02d",
++			topology_physical_package_id(cpu),
++			topology_die_id(cpu));
++
++		uncore_read_ratio(data, &data->power_up_min_freq_khz,
++				  &data->power_up_max_freq_khz);
++
++		ret = kobject_init_and_add(&data->kobj, &uncore_ktype,
++					   &uncore_root_kobj, str);
++		if (!ret) {
++			data->control_cpu = cpu;
++			data->valid = true;
++		}
++	}
++	mutex_unlock(&uncore_lock);
++}
++
++/* Last CPU in this die is offline, so remove sysfs entries */
++static void uncore_remove_die_entry(int cpu)
++{
++	struct uncore_data *data;
++
++	mutex_lock(&uncore_lock);
++	data = uncore_get_instance(cpu);
++	if (data) {
++		kobject_put(&data->kobj);
++		data->control_cpu = -1;
++		data->valid = false;
++	}
++	mutex_unlock(&uncore_lock);
++}
++
++static int uncore_event_cpu_online(unsigned int cpu)
++{
++	int target;
++
++	/* Check if there is an online cpu in the package for uncore MSR */
++	target = cpumask_any_and(&uncore_cpu_mask, topology_die_cpumask(cpu));
++	if (target < nr_cpu_ids)
++		return 0;
++
++	/* Use this CPU on this die as a control CPU */
++	cpumask_set_cpu(cpu, &uncore_cpu_mask);
++	uncore_add_die_entry(cpu);
++
++	return 0;
++}
++
++static int uncore_event_cpu_offline(unsigned int cpu)
++{
++	int target;
++
++	/* Check if existing cpu is used for uncore MSRs */
++	if (!cpumask_test_and_clear_cpu(cpu, &uncore_cpu_mask))
++		return 0;
++
++	/* Find a new cpu to set uncore MSR */
++	target = cpumask_any_but(topology_die_cpumask(cpu), cpu);
++
++	if (target < nr_cpu_ids) {
++		cpumask_set_cpu(target, &uncore_cpu_mask);
++		uncore_add_die_entry(target);
++	} else {
++		uncore_remove_die_entry(cpu);
 +	}
 +
 +	return 0;
++}
 +
-+err_end:
-+	if (fan->acpi4) {
-+		int i;
++static int uncore_pm_notify(struct notifier_block *nb, unsigned long mode,
++			    void *_unused)
++{
++	int cpu;
 +
-+		for (i = 0; i < fan->fps_count; ++i)
-+			sysfs_remove_file(&device->dev.kobj, &fan->fps[i].dev_attr.attr);
++	switch (mode) {
++	case PM_POST_HIBERNATION:
++	case PM_POST_RESTORE:
++	case PM_POST_SUSPEND:
++		for_each_cpu(cpu, &uncore_cpu_mask) {
++			struct uncore_data *data;
++			int ret;
++
++			data = uncore_get_instance(cpu);
++			if (!data || !data->valid || !data->stored_uncore_data)
++				continue;
++
++			ret = wrmsrl_on_cpu(cpu, MSR_UNCORE_RATIO_LIMIT,
++					    data->stored_uncore_data);
++			if (ret)
++				return ret;
++		}
++		break;
++	default:
++		break;
 +	}
- 
--end:
- 	return result;
- }
- 
-@@ -376,6 +449,13 @@ static int acpi_fan_remove(struct platform_device *pdev)
- {
- 	struct acpi_fan *fan = platform_get_drvdata(pdev);
- 
-+	if (fan->acpi4) {
-+		struct acpi_device *device = ACPI_COMPANION(&pdev->dev);
-+		int i;
++	return 0;
++}
 +
-+		for (i = 0; i < fan->fps_count; ++i)
-+			sysfs_remove_file(&device->dev.kobj, &fan->fps[i].dev_attr.attr);
++static struct notifier_block uncore_pm_nb = {
++	.notifier_call = uncore_pm_notify,
++};
++
++#define ICPU(model)     { X86_VENDOR_INTEL, 6, model, X86_FEATURE_ANY, }
++
++static const struct x86_cpu_id intel_uncore_cpu_ids[] = {
++	ICPU(INTEL_FAM6_BROADWELL_G),
++	ICPU(INTEL_FAM6_BROADWELL_X),
++	ICPU(INTEL_FAM6_BROADWELL_D),
++	ICPU(INTEL_FAM6_SKYLAKE_X),
++	ICPU(INTEL_FAM6_ICELAKE_X),
++	ICPU(INTEL_FAM6_ICELAKE_D),
++	{}
++};
++
++static int __init intel_uncore_init(void)
++{
++	const struct x86_cpu_id *id;
++	int ret;
++
++	id = x86_match_cpu(intel_uncore_cpu_ids);
++	if (!id)
++		return -ENODEV;
++
++	uncore_max_entries = topology_max_packages() *
++					topology_max_die_per_package();
++	uncore_instances = kcalloc(uncore_max_entries,
++				   sizeof(*uncore_instances), GFP_KERNEL);
++	if (!uncore_instances)
++		return -ENOMEM;
++
++	ret = kobject_init_and_add(&uncore_root_kobj, &uncore_root_ktype,
++				   &cpu_subsys.dev_root->kobj,
++				   "intel_uncore_frequency");
++	if (ret)
++		goto err_free;
++
++	ret = cpuhp_setup_state(CPUHP_AP_ONLINE_DYN,
++				"platform/x86/uncore-freq:online",
++				uncore_event_cpu_online,
++				uncore_event_cpu_offline);
++	if (ret < 0)
++		goto err_rem_kobj;
++
++	uncore_hp_state = ret;
++
++	ret = register_pm_notifier(&uncore_pm_nb);
++	if (ret)
++		goto err_rem_state;
++
++	return 0;
++
++err_rem_state:
++	cpuhp_remove_state(uncore_hp_state);
++err_rem_kobj:
++	kobject_put(&uncore_root_kobj);
++err_free:
++	kfree(uncore_instances);
++
++	return ret;
++}
++module_init(intel_uncore_init)
++
++static void __exit intel_uncore_exit(void)
++{
++	int i;
++
++	unregister_pm_notifier(&uncore_pm_nb);
++	cpuhp_remove_state(uncore_hp_state);
++	for (i = 0; i < uncore_max_entries; ++i) {
++		if (uncore_instances[i].valid)
++			kobject_put(&uncore_instances[i].kobj);
 +	}
- 	sysfs_remove_link(&pdev->dev.kobj, "thermal_cooling");
- 	sysfs_remove_link(&fan->cdev->device.kobj, "device");
- 	thermal_cooling_device_unregister(fan->cdev);
++	kobject_put(&uncore_root_kobj);
++	kfree(uncore_instances);
++}
++module_exit(intel_uncore_exit)
++
++MODULE_LICENSE("GPL v2");
++MODULE_DESCRIPTION("Intel Uncore Frequency Limits Driver");
 -- 
 2.17.2
 
