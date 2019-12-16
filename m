@@ -2,51 +2,52 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DA88A11FFB9
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Dec 2019 09:30:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8FD9711FFD5
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Dec 2019 09:31:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726926AbfLPIaE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 16 Dec 2019 03:30:04 -0500
-Received: from mail-ua1-f66.google.com ([209.85.222.66]:43762 "EHLO
-        mail-ua1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726788AbfLPIaD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 16 Dec 2019 03:30:03 -0500
-Received: by mail-ua1-f66.google.com with SMTP id o42so1768519uad.10
-        for <linux-doc@vger.kernel.org>; Mon, 16 Dec 2019 00:30:03 -0800 (PST)
+        id S1726873AbfLPIbh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 16 Dec 2019 03:31:37 -0500
+Received: from mail-ua1-f65.google.com ([209.85.222.65]:37870 "EHLO
+        mail-ua1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726795AbfLPIbh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 16 Dec 2019 03:31:37 -0500
+Received: by mail-ua1-f65.google.com with SMTP id f9so1783394ual.4
+        for <linux-doc@vger.kernel.org>; Mon, 16 Dec 2019 00:31:36 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=kDxQhaeLo6rNMVFT3CBcpOhBFhoVMYpLfsYqZHIsllM=;
-        b=GJ6KAmw6S+sq3Ccetl/H3ixiZVhos+PR0jEMWgPCzfx0kYdnBXsUmmddRDGHKCa+IW
-         XpoIFbLS8+19HgHvj1aji88fMJFyb1lR/OZ36673QRjkhDqdlzrIFkgM8oE+oLQDArnf
-         b7+9QxLZM6bFfD0TyRkuo4e0dVkdBL0SKoIBmAyTVM1uFsJHNelZ/+e0ANXGZ4aezkeZ
-         o4gb0cTRAp9bOD/PgQ9vQbyM+lGwK9Ok7JQXcF4SJ5b4Kw9UhJJL2BCwrf0d2BtMgGGk
-         5R3A+AL4JyWngHzSseIzNmoBzR/zYQxFslU5c3tgyAMleZF6TpW7mWEL4HtKwSHPi2AZ
-         9W7Q==
+        bh=rfvNJ6SwD135PnS64Nblsl7Xm55KVFsUpW1c0eS2aVY=;
+        b=wOHPZF2+BYK6vzqlz1znc9EAj8uqLkELPngMwylGAxwnHWVHi5jDTQsS5EfDYt6Bqa
+         V4ru3lw+J8heO3Q5g6OoS8A8ConuE4Ic3Lym6EkjxnEQ3Z9oY8AXSmMVRGHWNXBZVI2t
+         /p4RShonvw73Ywu2BrVxv02T0FhA9iagfClQ10XNrKcMAYVoIyYj8vWu0h3p0mgQNX40
+         MN7v6mUuqZLSHvblwbxzjcgQCNrsgg5oaCLfiGP6PvS2qJZGQFszpU8BS5wAjLraSRIu
+         QuSxv1yIZyYfmQWeq/HignciG/JW4vhXQVXGIlx/5x816KYrIYVFPzELAaL9QymoQWAu
+         1S7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=kDxQhaeLo6rNMVFT3CBcpOhBFhoVMYpLfsYqZHIsllM=;
-        b=CO/ZD+PmOq6m+JTedYwp2DGo8BwCbmzE11jQGeXD7gRnK7cHaPeSpo509anH+ha77p
-         VtPDQ7asi08nib1u0IhzapfUbifoFKR4AhWNjFntZ5JVDchL+ia8WX7Zdq1Rou6fCazS
-         /g810vfnkmZU34ZdIS/noEfSce/pZi3iXnE0kBr7oCC3YCy21up1YI3hi1Pndvz+FRn6
-         5ZAwgQWZpW4T8UeF+aC1X3+LJcOYlWnRO5OWR/UKoyZvC4ZZ1bhXAOFMMOnKppVSEI82
-         iwT4pNZSBFJJRZmPSHn/k5QbnopIWOfmtjFjTnHby2+xQ+Qchd7dOND9usvd1xs2CH+Q
-         ojbg==
-X-Gm-Message-State: APjAAAWyPivP9SBrYTY5VLKyf1J0kIzHdGDA3V056Vuk2zDJJPcSI44D
-        IbrjZ/ngO2B66yossIVSXeDjYhMpJZ0WsBimuRIJpQ==
-X-Google-Smtp-Source: APXvYqwni+l6XxPCyreJYxRHqzJXidyE2iM9tvx9B737sdIeXKOHoRA6FLpVo5xoUtWtnIiiMdWW6jDBBKJSinB1wok=
-X-Received: by 2002:ab0:5512:: with SMTP id t18mr22623715uaa.128.1576485002794;
- Mon, 16 Dec 2019 00:30:02 -0800 (PST)
+        bh=rfvNJ6SwD135PnS64Nblsl7Xm55KVFsUpW1c0eS2aVY=;
+        b=trSVBEpbzTBhKLbA/upLA5o3Q6dptijUAuh6/ldqou3Jp3xT+AfuzImUP1b0bUlNV5
+         gOG5pg2YuhCbh6iIbVox4cNPLt0/ExxoRSf+h5V3u9xfDqpwrxP0RkOxT+82Z7gkjWSU
+         Io+a4gx0s7GBzHIa+nFkSG6OTk4lJj+XSJkE6xv9FpKcJkRJg/KhJ5M6/oFOnyxqjsYK
+         stIX/tUMA8oEbjV5JgSLvqwfBjGj9VzhKsQm1uWYzFFdo8eKSiavkIMskXZVW2eW6biR
+         wh7lFFZSlXoi0Omc8f/xrawI3qe6VbrGtbcKJY68BvZkiPZZ0yxhpGoiTa397CiZop7I
+         POHw==
+X-Gm-Message-State: APjAAAVqNJBd0PuDWDcDP1hrYc7YSQH2TcVs+CnQ69uykUfk3qWrcqda
+        CVrP5gZKah7WMO/enEe9MGrao6KotbFOwGyw0k/EzA==
+X-Google-Smtp-Source: APXvYqxpum27qzlPECIy99bHs3MTRT1fsw5fQXcrzj94L1CgoL4z3o4EdzdWdo+LFQweAhtr1FIPsa+WvuSZCwwL/ps=
+X-Received: by 2002:ab0:2716:: with SMTP id s22mr22638741uao.20.1576485095866;
+ Mon, 16 Dec 2019 00:31:35 -0800 (PST)
 MIME-Version: 1.0
-References: <cover.1576054779.git.matti.vaittinen@fi.rohmeurope.com> <f34765b5cb4e949c2e85415ded3d0ee7736cc97b.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
-In-Reply-To: <f34765b5cb4e949c2e85415ded3d0ee7736cc97b.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
+References: <cover.1576054779.git.matti.vaittinen@fi.rohmeurope.com> <f56dce4fcb71592cbcf0fc48a841f86f52770d4c.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
+In-Reply-To: <f56dce4fcb71592cbcf0fc48a841f86f52770d4c.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
 From:   Linus Walleij <linus.walleij@linaro.org>
-Date:   Mon, 16 Dec 2019 09:29:51 +0100
-Message-ID: <CACRpkdbUS7WeQ7OoTtjGnB7L=uhYncwwcHxkJ1Uj6GqYCGNGJA@mail.gmail.com>
-Subject: Re: [PATCH v6 10/15] gpio: devres: Add devm_gpiod_get_parent_array
+Date:   Mon, 16 Dec 2019 09:31:24 +0100
+Message-ID: <CACRpkdap9TXqWpUKb+vPmLkjV-1msm8zVWshv+m6c87oDxip7A@mail.gmail.com>
+Subject: Re: [PATCH v6 11/15] docs: driver-model: Add missing managed GPIO
+ array get functions
 To:     Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>
 Cc:     Matti Vaittinen <mazziesaccount@gmail.com>,
         Jacek Anaszewski <jacek.anaszewski@gmail.com>,
@@ -82,35 +83,20 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Dec 11, 2019 at 10:47 AM Matti Vaittinen
+On Wed, Dec 11, 2019 at 10:48 AM Matti Vaittinen
 <matti.vaittinen@fi.rohmeurope.com> wrote:
 
-> Bunch of MFD sub-devices which are instantiated by MFD do not have
-> own device-tree nodes but have (for example) the GPIO consumer
-> information in parent device's DT node. Add resource managed
-> devm_gpiod_get_array() for such devices so that they can get the
-> consumer information from parent DT while still binding the GPIO
-> reservation life-time to this sub-device life time.
->
-> If devm_gpiod_get_array is used as such - then unloading and then
-> re-loading the child device fails as the GPIOs reserved during first
-> load are not freed when driver for sub-device is unload (if parent
-> stays there).
+> devm_gpiod_get_array and devm_gpiod_get_array_optional were missing
+> from the list. Add them.
 >
 > Signed-off-by: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>
 > ---
->
-> Changes since v5:
-> - renamed internal function (no __ - prefixes for Linus :] )
+> No changes sinnce v5
 
-Thanks, as there are things happening in the GPIO subsystem I
-have put this one patch on an immutable branch here:
-https://git.kernel.org/pub/scm/linux/kernel/git/linusw/linux-gpio.git/log/?h=ib-devm-gpiod-get-parent-array
+Patch applied.
 
-Please ask the maintainer (I guess Lee?) to pull this into wherever
-the rest of the patches should be merged if you want patches beyond
-this point to be applied for the next (v5.6) merge window, then this
-patch is not needed in the series.
+No need to merge this patch into MFD or other subsystem where the
+rest gets merged.
 
 Yours,
 Linus Walleij
