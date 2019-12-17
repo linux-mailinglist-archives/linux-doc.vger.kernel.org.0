@@ -2,302 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4E812122D8E
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2019 14:54:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AD53C122DA5
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Dec 2019 14:56:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728574AbfLQNyg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 Dec 2019 08:54:36 -0500
-Received: from mail-wr1-f66.google.com ([209.85.221.66]:35009 "EHLO
-        mail-wr1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728575AbfLQNye (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Dec 2019 08:54:34 -0500
-Received: by mail-wr1-f66.google.com with SMTP id g17so11398171wro.2
-        for <linux-doc@vger.kernel.org>; Tue, 17 Dec 2019 05:54:32 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:content-transfer-encoding:in-reply-to
-         :user-agent;
-        bh=oA8lLtw5+Ki0rvk2E5DHDZT8Xzrj3ly5MFjUCZJfvp4=;
-        b=lTG+PpfFsBwem7LWNxasDI84APR3q/FRpiSMZtA97AEzPrTw2ZyGUJQg/2FxOcmzPj
-         mR8fMTv8VyALWzwIWUVsBn08FAh1PZukJmgC3lBgktyX0rejOrHDGoS+brxtqiakPnkw
-         +Lp5ryB6ZwG4GA7LfhEGedR1eicJaEWe+LMu4udE1xyaJyW9uUIpiZsMoP6UMmVWXSTX
-         pa5+4HCL7T03BoJ5cUrNB0Dol/uKTrsHHawoIZQSQ9Tgj1fhu8JpdmCFKDMsIeTjeWop
-         bSBopk1rH/KXWuS/YL9zR1B30nDVAx0UFUfY375pnL/CKYQhEI+hIlOXnU5xyuBlv5uz
-         bVfg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:content-transfer-encoding
-         :in-reply-to:user-agent;
-        bh=oA8lLtw5+Ki0rvk2E5DHDZT8Xzrj3ly5MFjUCZJfvp4=;
-        b=QfE+M1GtoPf+TS4hVhC/lSEEnQlncs7rtHZBAKJwrrGvLmapJE9mb0K3C04FWeOFGB
-         AQBi12499Zxq2BLzCIw7arcGeQCEhQa4fKJM+Ygdc1MxNKNIY3Ur8swaie/70w0UPwFP
-         4A/vZNG1P5A2lwI6Gtt6mD1E9wqJNwlLhcGlkMzypRTd4gJv6FGsztGEa7HUnGGpvhIy
-         OgyiN9dd/OCodYm41ftH9/ruizAVHEQKkl1AUP4wbpFM7pGcyx9+n53XSDhv0lPoFPTR
-         FH/37UElnII6v9vyDRVBJfXMnKXhEHXX7q5sCYuUG3C+xAeVD/4875fcHkxHa+XbKQ2o
-         r1iA==
-X-Gm-Message-State: APjAAAURABoXaof5mQ+PtXElN/RKCwr23oGL9T+wNGZzWhB+Ew9rxkiV
-        XBXVBtYru0kGYaHBBezKNueHcQ==
-X-Google-Smtp-Source: APXvYqwHiX7Jsxay7dET6g2LF2XE9E9hwjKYARcptPGb5BljEooR+jLCasy9A33y/rTtfMlkvAcXww==
-X-Received: by 2002:adf:f80c:: with SMTP id s12mr36904115wrp.1.1576590871292;
-        Tue, 17 Dec 2019 05:54:31 -0800 (PST)
-Received: from dell ([2.27.35.132])
-        by smtp.gmail.com with ESMTPSA id x10sm25415862wrp.58.2019.12.17.05.54.29
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 17 Dec 2019 05:54:30 -0800 (PST)
-Date:   Tue, 17 Dec 2019 13:54:30 +0000
-From:   Lee Jones <lee.jones@linaro.org>
-To:     "Vaittinen, Matti" <Matti.Vaittinen@fi.rohmeurope.com>
-Cc:     "corbet@lwn.net" <corbet@lwn.net>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "phil.edworthy@renesas.com" <phil.edworthy@renesas.com>,
-        "dmurphy@ti.com" <dmurphy@ti.com>,
-        "linux-leds@vger.kernel.org" <linux-leds@vger.kernel.org>,
-        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
-        "linux-rtc@vger.kernel.org" <linux-rtc@vger.kernel.org>,
-        "linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
-        "mchehab+samsung@kernel.org" <mchehab+samsung@kernel.org>,
-        "alexandre.belloni@bootlin.com" <alexandre.belloni@bootlin.com>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "mturquette@baylibre.com" <mturquette@baylibre.com>,
-        "lgirdwood@gmail.com" <lgirdwood@gmail.com>,
-        "jacek.anaszewski@gmail.com" <jacek.anaszewski@gmail.com>,
-        "mazziesaccount@gmail.com" <mazziesaccount@gmail.com>,
-        "a.zummo@towertech.it" <a.zummo@towertech.it>,
-        "linus.walleij@linaro.org" <linus.walleij@linaro.org>,
-        "arnd@arndb.de" <arnd@arndb.de>,
-        "mark.rutland@arm.com" <mark.rutland@arm.com>,
-        "robh+dt@kernel.org" <robh+dt@kernel.org>,
-        "noralf@tronnes.org" <noralf@tronnes.org>,
-        "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
-        "bgolaszewski@baylibre.com" <bgolaszewski@baylibre.com>,
-        "linux-clk@vger.kernel.org" <linux-clk@vger.kernel.org>,
-        "pavel@ucw.cz" <pavel@ucw.cz>,
-        "sboyd@kernel.org" <sboyd@kernel.org>,
-        "broonie@kernel.org" <broonie@kernel.org>,
-        "wsa+renesas@sang-engineering.com" <wsa+renesas@sang-engineering.com>
-Subject: Re: [PATCH v6 05/15] mfd: bd71828: Support ROHM BD71828 PMIC - core
-Message-ID: <20191217135430.GM18955@dell>
-References: <cover.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
- <252de5646fedfec7c575269843a47091fe199c79.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
- <20191216164641.GC18955@dell>
- <5593db6b3328c0a1a7069d839f5c777b4b3822b6.camel@fi.rohmeurope.com>
+        id S1728568AbfLQN4f (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 Dec 2019 08:56:35 -0500
+Received: from szxga04-in.huawei.com ([45.249.212.190]:8136 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1728573AbfLQN4e (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 17 Dec 2019 08:56:34 -0500
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.59])
+        by Forcepoint Email with ESMTP id 7104DDED043953C7AA42;
+        Tue, 17 Dec 2019 21:56:30 +0800 (CST)
+Received: from DESKTOP-1NISPDV.china.huawei.com (10.173.221.248) by
+ DGGEMS413-HUB.china.huawei.com (10.3.19.213) with Microsoft SMTP Server id
+ 14.3.439.0; Tue, 17 Dec 2019 21:56:21 +0800
+From:   <yezengruan@huawei.com>
+To:     <yezengruan@huawei.com>, <linux-kernel@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <kvmarm@lists.cs.columbia.edu>, <kvm@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>,
+        <virtualization@lists.linux-foundation.org>
+CC:     <maz@kernel.org>, <james.morse@arm.com>, <linux@armlinux.org.uk>,
+        <suzuki.poulose@arm.com>, <julien.thierry.kdev@gmail.com>,
+        <catalin.marinas@arm.com>, <mark.rutland@arm.com>,
+        <will@kernel.org>, <steven.price@arm.com>,
+        <daniel.lezcano@linaro.org>
+Subject: [PATCH 0/5] KVM: arm64: vcpu preempted check support
+Date:   Tue, 17 Dec 2019 21:55:44 +0800
+Message-ID: <20191217135549.3240-1-yezengruan@huawei.com>
+X-Mailer: git-send-email 2.23.0.windows.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <5593db6b3328c0a1a7069d839f5c777b4b3822b6.camel@fi.rohmeurope.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.173.221.248]
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 17 Dec 2019, Vaittinen, Matti wrote:
+From: Zengruan Ye <yezengruan@huawei.com>
 
-> Hello Lee,
-> 
-> On Mon, 2019-12-16 at 16:46 +0000, Lee Jones wrote:
-> > On Wed, 11 Dec 2019, Matti Vaittinen wrote:
-> > 
-> > > BD71828GW is a single-chip power management IC for battery-powered
-> > > portable
-> > > devices. The IC integrates 7 buck converters, 7 LDOs, and a 1500 mA
-> > > single-cell linear charger. Also included is a Coulomb counter, a
-> > > real-time
-> > > clock (RTC), 3 GPO/regulator control pins, HALL input and a 32.768
-> > > kHz
-> > > clock gate.
-> > > 
-> > > Add MFD core driver providing interrupt controller facilities and
-> > > i2c
-> > > access to sub device drivers.
-> > > 
-> > > Signed-off-by: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>
-> > > ---
-> > > 
-> > > Changes since v5:
-> > > - No changes
-> > > 
-> > >  drivers/mfd/Kconfig              |  15 ++
-> > >  drivers/mfd/Makefile             |   2 +-
-> > >  drivers/mfd/rohm-bd71828.c       | 319 +++++++++++++++++++++++
-> > >  include/linux/mfd/rohm-bd71828.h | 425
-> > > +++++++++++++++++++++++++++++++
-> > >  include/linux/mfd/rohm-generic.h |   1 +
-> > >  5 files changed, 761 insertions(+), 1 deletion(-)
-> > >  create mode 100644 drivers/mfd/rohm-bd71828.c
-> > >  create mode 100644 include/linux/mfd/rohm-bd71828.h
-> > 
-> > Couple of small nits.  Once fixed, please apply my:
-> > 
-> > For my own reference:
-> >   Acked-for-MFD-by: Lee Jones <lee.jones@linaro.org>
-> > 
-> > > diff --git a/drivers/mfd/Kconfig b/drivers/mfd/Kconfig
-> > > index 420900852166..c3c9432ef51c 100644
-> > > --- a/drivers/mfd/Kconfig
-> > > +++ b/drivers/mfd/Kconfig
-> > > @@ -1906,6 +1906,21 @@ config MFD_ROHM_BD70528
-> > >  	  10 bits SAR ADC for battery temperature monitor and 1S
-> > > battery
-> > >  	  charger.
-> > >  
-> > > +config MFD_ROHM_BD71828
-> > > +	tristate "ROHM BD71828 Power Management IC"
-> > > +	depends on I2C=y
-> > > +	depends on OF
-> > > +	select REGMAP_I2C
-> > > +	select REGMAP_IRQ
-> > > +	select MFD_CORE
-> > > +	help
-> > > +	  Select this option to get support for the ROHM BD71828 Power
-> > > +	  Management IC. BD71828GW is a single-chip power management IC
-> > > for
-> > > +	  battery-powered portable devices. The IC integrates 7 buck
-> > > +	  converters, 7 LDOs, and a 1500 mA single-cell linear charger.
-> > > +	  Also included is a Coulomb counter, a real-time clock (RTC),
-> > > and
-> > > +	  a 32.768 kHz clock gate.
-> > > +
-> > >  config MFD_STM32_LPTIMER
-> > >  	tristate "Support for STM32 Low-Power Timer"
-> > >  	depends on (ARCH_STM32 && OF) || COMPILE_TEST
-> > > diff --git a/drivers/mfd/Makefile b/drivers/mfd/Makefile
-> > > index aed99f08739f..ca2d55c679c5 100644
-> > > --- a/drivers/mfd/Makefile
-> > > +++ b/drivers/mfd/Makefile
-> > > @@ -252,6 +252,6 @@ obj-$(CONFIG_MFD_MXS_LRADC)     += mxs-lradc.o
-> > >  obj-$(CONFIG_MFD_SC27XX_PMIC)	+= sprd-sc27xx-spi.o
-> > >  obj-$(CONFIG_RAVE_SP_CORE)	+= rave-sp.o
-> > >  obj-$(CONFIG_MFD_ROHM_BD70528)	+= rohm-bd70528.o
-> > > +obj-$(CONFIG_MFD_ROHM_BD71828)	+= rohm-bd71828.o
-> > >  obj-$(CONFIG_MFD_ROHM_BD718XX)	+= rohm-bd718x7.o
-> > >  obj-$(CONFIG_MFD_STMFX) 	+= stmfx.o
-> > > -
-> > 
-> > Nit: This is an unrelated change and should not really be in this
-> > patch.
-> 
-> Ok. Will get rid of it.
-> 
-> > 
-> > > diff --git a/drivers/mfd/rohm-bd71828.c b/drivers/mfd/rohm-
-> > > bd71828.c
-> > > new file mode 100644
-> > > index 000000000000..7f445d699fd9
-> > > --- /dev/null
-> > > +++ b/drivers/mfd/rohm-bd71828.c
-> > > @@ -0,0 +1,319 @@
-> > > +// SPDX-License-Identifier: GPL-2.0-only
-> > > +//
-> > > +// Copyright (C) 2019 ROHM Semiconductors
-> > > +//
-> > > +// ROHM BD71828 PMIC driver
-> > > +
-> 
-> //snip
-> 
-> > > +
-> > > +static struct i2c_driver bd71828_drv = {
-> > > +	.driver = {
-> > > +		.name = "rohm-bd71828",
-> > > +		.of_match_table = bd71828_of_match,
-> > > +	},
-> > > +	.probe_new = &bd71828_i2c_probe,
-> > > +};
-> > > +
-> > 
-> > Nit: You can remove this line.
-> 
-> Will do.
-> 
-> > 
-> > > +module_i2c_driver(bd71828_drv);
-> > > +
-> > > +MODULE_AUTHOR("Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>
-> > > ");
-> > > +MODULE_DESCRIPTION("ROHM BD71828 Power Management IC driver");
-> > > +MODULE_LICENSE("GPL");
-> > 
-> > This does not match the header.
-> 
-> How is that? This is what is stated in module.h for the 
-> MODULE_LICENSE:
-> 
-> /*
->  * The following license idents are currently accepted as indicating
-> free
->  * software modules
->  *
->  *	"GPL"				[GNU Public License v2]
->  *	"GPL v2"			[GNU Public License v2]
->  *	"GPL and additional rights"	[GNU Public License v2 rights
-> and more]
->  *	"Dual BSD/GPL"			[GNU Public License v2
->  *					 or BSD license choice]
->  *	"Dual MIT/GPL"			[GNU Public License v2
->  *					 or MIT license choice]
->  *	"Dual MPL/GPL"			[GNU Public License v2
->  *					 or Mozilla license choice]
->  *
->  * The following other idents are available
->  *
->  *	"Proprietary"			[Non free products]
->  *
->  * Both "GPL v2" and "GPL" (the latter also in dual licensed strings)
-> are
->  * merely stating that the module is licensed under the GPL v2, but are
-> not
->  * telling whether "GPL v2 only" or "GPL v2 or later". The reason why
-> there
->  * are two variants is a historic and failed attempt to convey more
->  * information in the MODULE_LICENSE string. For module loading the
->  * "only/or later" distinction is completely irrelevant and does
-> neither
->  * replace the proper license identifiers in the corresponding source
-> file
->  * nor amends them in any way. The sole purpose is to make the
->  * 'Proprietary' flagging work and to refuse to bind symbols which are
->  * exported with EXPORT_SYMBOL_GPL when a non free module is loaded.
->  *
->  * In the same way "BSD" is not a clear license information. It merely
->  * states, that the module is licensed under one of the compatible BSD
->  * license variants. The detailed and correct license information is
-> again
->  * to be found in the corresponding source files.
->  *
->  * There are dual licensed components, but when running with Linux it
-> is the
->  * GPL that is relevant so this is a non issue. Similarly LGPL linked
-> with GPL
->  * is a GPL combined work.
->  *
->  * This exists for several reasons
->  * 1.	So modinfo can show license info for users wanting to vet their
-> setup
->  *	is free
->  * 2.	So the community can ignore bug reports including proprietary
-> modules
->  * 3.	So vendors can do likewise based on their own policies
->  */
-> #define MODULE_LICENSE(_license) MODULE_INFO(license, _license)
-> 
-> I have no objections on changing the license if needed but can you
-> please tell me what is Ok combos then - I am having hard time when
-> trying to select licenses which are acceptable for all.
+This patch set aims to support the vcpu_is_preempted() functionality
+under KVM/arm64, which allowing the guest to obtain the vcpu is
+currently running or not. This will enhance lock performance on
+overcommitted hosts (more runnable vcpus than physical cpus in the
+system) as doing busy waits for preempted vcpus will hurt system
+performance far worse than early yielding.
 
-If you have this in your header:
+We have observed some performace improvements in uninx benchmark tests.
 
-  GPL-2.0-only
+unix benchmark result:
+  host:  kernel 5.5.0-rc1, HiSilicon Kunpeng920, 8 cpus
+  guest: kernel 5.5.0-rc1, 16 vcpus
 
-Your MODULE tags should read:
+               test-case                |    after-patch    |   before-patch
+----------------------------------------+-------------------+------------------
+ Dhrystone 2 using register variables   | 334600751.0 lps   | 335319028.3 lps
+ Double-Precision Whetstone             |     32856.1 MWIPS |   32849.6 MWIPS
+ Execl Throughput                       |      3662.1 lps   |    2718.0 lps
+ File Copy 1024 bufsize 2000 maxblocks  |    432906.4 KBps  |  158011.8 KBps
+ File Copy 256 bufsize 500 maxblocks    |    116023.0 KBps  |   37664.0 KBps
+ File Copy 4096 bufsize 8000 maxblocks  |   1432769.8 KBps  |  441108.8 KBps
+ Pipe Throughput                        |   6405029.6 lps   | 6021457.6 lps
+ Pipe-based Context Switching           |    185872.7 lps   |  184255.3 lps
+ Process Creation                       |      4025.7 lps   |    3706.6 lps
+ Shell Scripts (1 concurrent)           |      6745.6 lpm   |    6436.1 lpm
+ Shell Scripts (8 concurrent)           |       998.7 lpm   |     931.1 lpm
+ System Call Overhead                   |   3913363.1 lps   | 3883287.8 lps
+----------------------------------------+-------------------+------------------
+ System Benchmarks Index Score          |      1835.1       |    1327.6
 
-MODULE_LICENSE("GPL v2");
+Zengruan Ye (5):
+  KVM: arm64: Document PV-lock interface
+  KVM: arm64: Implement PV_LOCK_FEATURES call
+  KVM: arm64: Support pvlock preempted via shared structure
+  KVM: arm64: Add interface to support vcpu preempted check
+  KVM: arm64: Support the vcpu preemption check
+
+ Documentation/virt/kvm/arm/pvlock.rst  | 31 +++++++++
+ arch/arm/include/asm/kvm_host.h        | 13 ++++
+ arch/arm64/include/asm/kvm_host.h      | 17 +++++
+ arch/arm64/include/asm/paravirt.h      | 15 ++++
+ arch/arm64/include/asm/pvlock-abi.h    | 16 +++++
+ arch/arm64/include/asm/spinlock.h      |  7 ++
+ arch/arm64/kernel/Makefile             |  2 +-
+ arch/arm64/kernel/paravirt-spinlocks.c | 13 ++++
+ arch/arm64/kernel/paravirt.c           | 95 +++++++++++++++++++++++++-
+ arch/arm64/kernel/setup.c              |  2 +
+ arch/arm64/kvm/Makefile                |  1 +
+ include/linux/arm-smccc.h              | 13 ++++
+ include/linux/cpuhotplug.h             |  1 +
+ virt/kvm/arm/arm.c                     |  8 +++
+ virt/kvm/arm/hypercalls.c              |  7 ++
+ virt/kvm/arm/pvlock.c                  | 21 ++++++
+ 16 files changed, 260 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/virt/kvm/arm/pvlock.rst
+ create mode 100644 arch/arm64/include/asm/pvlock-abi.h
+ create mode 100644 arch/arm64/kernel/paravirt-spinlocks.c
+ create mode 100644 virt/kvm/arm/pvlock.c
 
 -- 
-Lee Jones [李琼斯]
-Linaro Services Technical Lead
-Linaro.org │ Open source software for ARM SoCs
-Follow Linaro: Facebook | Twitter | Blog
+2.19.1
+
+
