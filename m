@@ -2,81 +2,132 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5861D125042
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Dec 2019 19:08:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B07CB12508D
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Dec 2019 19:26:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727730AbfLRSIK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Dec 2019 13:08:10 -0500
-Received: from mail-oi1-f193.google.com ([209.85.167.193]:39560 "EHLO
-        mail-oi1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727725AbfLRSIK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Dec 2019 13:08:10 -0500
-Received: by mail-oi1-f193.google.com with SMTP id a67so1545698oib.6;
-        Wed, 18 Dec 2019 10:08:09 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=DFlpwK3AxGJVLFi7l3r97G6DWX/N2u0QA0ZvIo1IjIs=;
-        b=Cy9elW83IRvo8FqtZwlKeNNyEImOWnbMThpJkjADghFFD52K5+ejZQRarbxDvlsQG7
-         RFWkPOQgvgcKFxhlNxPFXIrM+e2ThjU2W9wUII4F1TLuNoyea0ZREOztBPczdXSzfLIP
-         Sk1iQNM4DCxuNo0rY+HRL1pi96aydtDfO0L+7PB+N0P+mpFjEno12dFVqMYnIfljg+54
-         WFOWHDeeVRoSavIFYMrjibUYbR2LxsdJWPT24m16tCVusNJjF7Vc08tPzVnRB8NqmQoJ
-         pjO/k7EnTgemE+d8CxFRlqbymp3N7BkfHzUq3UnslUNLqjPqAxFpT62BKU5NZxCE3qRf
-         dflw==
-X-Gm-Message-State: APjAAAVTHMrFwebaXcQAmjZFciEHXkHfOA0Fs6aheixhRaXM9yzpH7zY
-        /uUF9ATe355JCYklbzfH5g==
-X-Google-Smtp-Source: APXvYqxV3PQgsNKWechNRemE0G3OUmYxE4aKcrp20lSkDN5QSvgGAnJKNyOqxoZGsjHlbI5X+3IITw==
-X-Received: by 2002:a05:6808:3c5:: with SMTP id o5mr1201077oie.142.1576692489561;
-        Wed, 18 Dec 2019 10:08:09 -0800 (PST)
-Received: from localhost (24-155-109-49.dyn.grandenetworks.net. [24.155.109.49])
-        by smtp.gmail.com with ESMTPSA id m2sm1022649oim.13.2019.12.18.10.08.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Dec 2019 10:08:09 -0800 (PST)
-Date:   Wed, 18 Dec 2019 12:08:08 -0600
-From:   Rob Herring <robh@kernel.org>
-To:     Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>
-Cc:     matti.vaittinen@fi.rohmeurope.com, mazziesaccount@gmail.com,
-        Jacek Anaszewski <jacek.anaszewski@gmail.com>,
-        Pavel Machek <pavel@ucw.cz>, Dan Murphy <dmurphy@ti.com>,
-        Wolfram Sang <wsa+renesas@sang-engineering.com>,
-        Phil Edworthy <phil.edworthy@renesas.com>,
-        Noralf =?iso-8859-1?Q?Tr=F8nnes?= <noralf@tronnes.org>,
-        linux-leds@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
-        linux-rtc@vger.kernel.org
-Subject: Re: [PATCH v6 03/15] dt-bindings: mfd: Document ROHM BD71828 bindings
-Message-ID: <20191218180808.GA6226@bogus>
-References: <cover.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
- <c910b9a057e76044291a4d669530ccf19225675f.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <c910b9a057e76044291a4d669530ccf19225675f.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        id S1727184AbfLRS01 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Dec 2019 13:26:27 -0500
+Received: from foss.arm.com ([217.140.110.172]:56488 "EHLO foss.arm.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727121AbfLRS01 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 18 Dec 2019 13:26:27 -0500
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id F12EE1FB;
+        Wed, 18 Dec 2019 10:26:26 -0800 (PST)
+Received: from e108754-lin.cambridge.arm.com (unknown [10.1.198.81])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 1C9F53F67D;
+        Wed, 18 Dec 2019 10:26:25 -0800 (PST)
+From:   Ionela Voinescu <ionela.voinescu@arm.com>
+To:     catalin.marinas@arm.com, will@kernel.org, mark.rutland@arm.com,
+        maz@kernel.org, suzuki.poulose@arm.com, sudeep.holla@arm.com,
+        dietmar.eggemann@arm.com, ionela.voinescu@arm.com
+Cc:     peterz@infradead.org, mingo@redhat.com, ggherdovich@suse.cz,
+        vincent.guittot@linaro.org, linux-arm-kernel@lists.infradead.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/6] arm64: ARMv8.4 Activity Monitors support
+Date:   Wed, 18 Dec 2019 18:26:01 +0000
+Message-Id: <20191218182607.21607-1-ionela.voinescu@arm.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 11 Dec 2019 11:37:59 +0200, Matti Vaittinen wrote:
-> ROHM BD71828 Power management IC integrates 7 buck converters, 7 LDOs,
-> a real-time clock (RTC), 3 GPO/regulator control pins, HALL input
-> and a 32.768 kHz clock gate.
-> 
-> Document the dt bindings drivers are using.
-> 
-> Signed-off-by: Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>
-> ---
-> Changes since v5:
-> - Remove regulator run-level properties
-> - Change SPDX to dual lisence
-> - remove trivial descriptions
-> 
->  .../bindings/mfd/rohm,bd71828-pmic.yaml       | 193 ++++++++++++++++++
->  1 file changed, 193 insertions(+)
->  create mode 100644 Documentation/devicetree/bindings/mfd/rohm,bd71828-pmic.yaml
-> 
+These patches introduce support for the Activity Monitors Unit (AMU)
+CPU extension, an optional extension in ARMv8.4 CPUs. This provides
+performance counters intended for system management use. Two of these
+counters are then used to compute the frequency scale correction
+factor needed to achieve frequency invariance.
 
-Reviewed-by: Rob Herring <robh@kernel.org>
+With the CONFIG_ARM64_AMU_EXTN enabled the kernel is able to safely
+run a mix of CPUs with and without support for the AMU extension.
+The AMU capability is unconditionally enabled in the kernel as to
+allow any late CPU to use the feature: the cpu_enable function will
+be called for all CPUs that match the criteria, including secondary
+and hotplugged CPUs, marking this feature as present on that
+respective CPU (through a per-cpu variable).
+
+To be noted that firmware must implement AMU support when running on
+CPUs that present the activity monitors extension: allow access to
+the registers from lower exception levels, enable the counters,
+implement save and restore functionality. More details can be found
+in the documentation.
+
+Given that the activity counters inform on activity on the CPUs, and 
+that not all CPUs might implement the extension, for functional and 
+security reasons, it's best to disable access to the AMU registers
+from userspace (EL0) and KVM guests.
+
+In the last patch of the series, two of the AMU counters are used to
+compute the frequency scale factor needed to achieve frequency
+invariance of signals in the scheduler, based on an interface added
+to support counter-based frequency invariance - arch_scale_freq_tick.
+The interface and update point for the counter-based frequency scale
+factor is based on the similar approach in the patch that introduces
+frequency invariance for x86 [1]. 
+
+The current series is based on linux-next 20191217.
+
+Testing:
+ - Build tested for multiple architectures and defconfigs.
+ - AMU feature detection, EL0 and KVM guest access to AMU registers,
+   feature support in firmware (version 1.5 and later of the ARM 
+   Trusted Firmware) was tested on an Armv8-A Base Platform FVP:
+   Architecture Envelope Model [2] (supports version 8.0 to 8.5),
+   with the following configurations:
+
+   cluster0.has_arm_v8-4=1
+   cluster1.has_arm_v8-4=1
+   cluster0.has_amu=1
+   cluster1.has_amu=1
+
+v1 -> v2:
+ - v1 can be found at [3]
+ - Added patches that use the counters for the scheduler's frequency
+   invariance engine
+ - In patch arm64: add support for the AMU extension v1 - 
+    - Defined an accessor function cpu_has_amu_feat to allow a read
+      of amu_feat only from the current CPU, to ensure the safe use
+      of the per-cpu variable for the current user (arm64 topology
+      driver) and future users.
+    - Modified type of amu_feat from bool to u8 to satisfy sparse
+      checker's warning 'expression using sizeof _Bool [sparse]',
+      as the size of bool is compiler dependent.
+
+[1] https://lore.kernel.org/lkml/20191113124654.18122-1-ggherdovich@suse.cz/
+[2] https://developer.arm.com/tools-and-software/simulation-models/fixed-virtual-platforms
+[3] https://lore.kernel.org/lkml/20190917134228.5369-1-ionela.voinescu@arm.com/
+
+Ionela Voinescu (6):
+  arm64: add support for the AMU extension v1
+  arm64: trap to EL1 accesses to AMU counters from EL0
+  arm64/kvm: disable access to AMU registers from kvm guests
+  Documentation: arm64: document support for the AMU extension
+  TEMP: sched: add interface for counter-based frequency invariance
+  arm64: use activity monitors for frequency invariance
+
+ Documentation/arm64/amu.rst                   | 107 ++++++++
+ Documentation/arm64/booting.rst               |  14 ++
+ Documentation/arm64/cpu-feature-registers.rst |   2 +
+ Documentation/arm64/index.rst                 |   1 +
+ arch/arm64/Kconfig                            |  27 ++
+ arch/arm64/include/asm/assembler.h            |  10 +
+ arch/arm64/include/asm/cpucaps.h              |   3 +-
+ arch/arm64/include/asm/cpufeature.h           |   4 +
+ arch/arm64/include/asm/kvm_arm.h              |   7 +-
+ arch/arm64/include/asm/sysreg.h               |  44 ++++
+ arch/arm64/include/asm/topology.h             |   9 +
+ arch/arm64/kernel/cpufeature.c                |  81 +++++-
+ arch/arm64/kernel/topology.c                  | 233 ++++++++++++++++++
+ arch/arm64/kvm/hyp/switch.c                   |  13 +-
+ arch/arm64/kvm/sys_regs.c                     |  95 ++++++-
+ arch/arm64/mm/proc.S                          |   3 +
+ drivers/base/arch_topology.c                  |  16 ++
+ kernel/sched/core.c                           |   1 +
+ kernel/sched/sched.h                          |   7 +
+ 19 files changed, 666 insertions(+), 11 deletions(-)
+ create mode 100644 Documentation/arm64/amu.rst
+
+-- 
+2.17.1
+
