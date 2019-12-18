@@ -2,78 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8B1D612464F
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Dec 2019 12:59:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DE9D01247C5
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Dec 2019 14:13:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726718AbfLRL7i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Dec 2019 06:59:38 -0500
-Received: from out30-45.freemail.mail.aliyun.com ([115.124.30.45]:40479 "EHLO
-        out30-45.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726141AbfLRL7i (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Dec 2019 06:59:38 -0500
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R151e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e07486;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=5;SR=0;TI=SMTPD_---0TlHJONf_1576670373;
-Received: from localhost(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0TlHJONf_1576670373)
-          by smtp.aliyun-inc.com(127.0.0.1);
-          Wed, 18 Dec 2019 19:59:33 +0800
-From:   Alex Shi <alex.shi@linux.alibaba.com>
-Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 2/2] docs/zh_CN: add translator info and link to index
-Date:   Wed, 18 Dec 2019 19:59:27 +0800
-Message-Id: <1576670367-153661-2-git-send-email-alex.shi@linux.alibaba.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1576670367-153661-1-git-send-email-alex.shi@linux.alibaba.com>
-References: <1576670367-153661-1-git-send-email-alex.shi@linux.alibaba.com>
+        id S1726774AbfLRNNA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Dec 2019 08:13:00 -0500
+Received: from foss.arm.com ([217.140.110.172]:45860 "EHLO foss.arm.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726545AbfLRNNA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 18 Dec 2019 08:13:00 -0500
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1C74730E;
+        Wed, 18 Dec 2019 05:12:59 -0800 (PST)
+Received: from localhost (unknown [10.37.6.21])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 67D5A3F718;
+        Wed, 18 Dec 2019 05:12:58 -0800 (PST)
+Date:   Wed, 18 Dec 2019 13:12:57 +0000
+From:   Mark Brown <broonie@kernel.org>
+To:     Matti Vaittinen <matti.vaittinen@fi.rohmeurope.com>
+Cc:     mazziesaccount@gmail.com,
+        Jacek Anaszewski <jacek.anaszewski@gmail.com>,
+        Pavel Machek <pavel@ucw.cz>, Dan Murphy <dmurphy@ti.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lee Jones <lee.jones@linaro.org>,
+        Liam Girdwood <lgirdwood@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+        Alessandro Zummo <a.zummo@towertech.it>,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Wolfram Sang <wsa+renesas@sang-engineering.com>,
+        Phil Edworthy <phil.edworthy@renesas.com>,
+        Noralf =?iso-8859-1?Q?Tr=F8nnes?= <noralf@tronnes.org>,
+        linux-leds@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-clk@vger.kernel.org, linux-gpio@vger.kernel.org,
+        linux-rtc@vger.kernel.org
+Subject: Re: [PATCH v6 08/15] regulator: bd718x7: Split driver to common and
+ bd718x7 specific parts
+Message-ID: <20191218131256.GA42175@sirena.org.uk>
+References: <cover.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
+ <fea73fd89f0db81fac30eba3b523c2232c401eae.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="jI8keyz6grp/JLjh"
+Content-Disposition: inline
+In-Reply-To: <fea73fd89f0db81fac30eba3b523c2232c401eae.1576054779.git.matti.vaittinen@fi.rohmeurope.com>
+X-Cookie: In the next world, you're on your own.
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now people could find it via html docs.
 
-Signed-off-by: Alex Shi <alex.shi@linux.alibaba.com>
-Cc: Harry Wei <harryxiyou@gmail.com>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
----
- Documentation/translations/zh_CN/process/index.rst                   | 1 +
- .../translations/zh_CN/process/kernel-enforcement-statement.rst      | 5 +++++
- 2 files changed, 6 insertions(+)
+--jI8keyz6grp/JLjh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-diff --git a/Documentation/translations/zh_CN/process/index.rst b/Documentation/translations/zh_CN/process/index.rst
-index 47a2af54fb13..8051a7b322c5 100644
---- a/Documentation/translations/zh_CN/process/index.rst
-+++ b/Documentation/translations/zh_CN/process/index.rst
-@@ -31,6 +31,7 @@
-    development-process
-    email-clients
-    license-rules
-+   kernel-enforcement-statement
-    kernel-driver-statement
- 
- 其它大多数开发人员感兴趣的社区指南：
-diff --git a/Documentation/translations/zh_CN/process/kernel-enforcement-statement.rst b/Documentation/translations/zh_CN/process/kernel-enforcement-statement.rst
-index 4c71229bf2d8..75f7b7b9137c 100644
---- a/Documentation/translations/zh_CN/process/kernel-enforcement-statement.rst
-+++ b/Documentation/translations/zh_CN/process/kernel-enforcement-statement.rst
-@@ -1,5 +1,10 @@
- ﻿.. _cn_process_statement_kernel:
- 
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: :ref:`Documentation/process/kernel-enforcement-statement.rst <process_statement_kernel>`
-+:Translator: Alex Shi <alex.shi@linux.alibaba.com>
-+
- Linux 内核执行声明
- ------------------
- 
--- 
-1.8.3.1
+On Wed, Dec 11, 2019 at 11:44:51AM +0200, Matti Vaittinen wrote:
+> Few ROHM PMICs allow setting the voltage states for different system states
+> like RUN, IDLE, SUSPEND and LPSR. States are then changed via SoC specific
+> mechanisms. bd718x7 driver implemented device-tree parsing functions for
+> these state specific voltages. The parsing functions can be re-used by
+> other ROHM chip drivers like bd71828. Split the generic functions from
+> bd718x7-regulator.c to rohm-regulator.c and export them for other modules
+> to use.
 
+This doesn't apply against current code, please check and resend.
+
+--jI8keyz6grp/JLjh
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAl36JdgACgkQJNaLcl1U
+h9DRzAf9GnOeN9QrXV/Jr5D4kRT68S0BysPHNoXDglBc5m5saw2Xi10Wt8Yov3+b
+1tdcVFQmjj41vcRZ8FHNma019NBth1CezUFjN9EagATCMFH2tFculjHcLFSywRhY
+EBL4+OttxR37zIS7rtqWbk6U8GUNrTjJKbZeELPODuIkSxCJGSrm5TwMvmVnyCie
+8jKr9a/7f4USdEz//uVvAbK0lAhwujG781fF+ymXz8hjJw+2NyZ9QYtpxqO53x/m
+Z6ImWi10KNA4p3nHHs6dcJcaotd6wYv7zB5B5bWSP5E8L9Csl/AzVfZNkHwMFK20
+Nswu4+WMO8olZX88qcj/ZsccB6glKg==
+=KLXG
+-----END PGP SIGNATURE-----
+
+--jI8keyz6grp/JLjh--
