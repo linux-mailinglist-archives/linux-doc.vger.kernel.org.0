@@ -2,119 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0D837125C19
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2019 08:37:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 793FE125CC5
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2019 09:34:42 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726704AbfLSHhv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 19 Dec 2019 02:37:51 -0500
-Received: from mail-pj1-f67.google.com ([209.85.216.67]:50584 "EHLO
-        mail-pj1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726498AbfLSHhv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Dec 2019 02:37:51 -0500
-Received: by mail-pj1-f67.google.com with SMTP id r67so2098204pjb.0;
-        Wed, 18 Dec 2019 23:37:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=0nx8L7SUVUpwZ2hHI379dkMfkYdwVJx/h+xm8bvbJTk=;
-        b=RppPDfWtAF2/78ZaqvoheL1TQLs+e51ZH1gVEgdKQIpkiez/5Q8Wr/YF9Ffs87OlWh
-         +0QTXE9zrmiP10IM+/vBzP1urUkk0hgLRFQp3+Nnaj6QroNO2EMUYcRJfuq4sGLNZwBM
-         flUyjTnsuqI5WEoOsW33M3wGm0x3jYpNr1RfUZTcP97rDyfpOvjJ6CorymapkR/GJp+p
-         Qd4cAYqeyMiW0sGir5FaaYfgSRomJ6wCCkenp1i7P+l6zTQ0E6RkMe6PpZjE8pdZW845
-         Q8aq5GwowoxjemsBR0ZbmGJYQrj5mhD5jIXnD25lPeoU38JYt+BipmcK6VEylZouupzG
-         sv9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:subject:to:cc:references:from:message-id
-         :date:user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=0nx8L7SUVUpwZ2hHI379dkMfkYdwVJx/h+xm8bvbJTk=;
-        b=Em1vPcc7BTxmQU8woXy20JfdqqScdU2Ob8EgiU/BFrrCqUjxDlzPg/NOusa+DV9xi1
-         dhqhFk4UB0BzIyGh64WKf6wwB3I90Ww98K7DWIIDBba74Y4NJO/Zl45NC9hGN/v6XM0m
-         sZPqp6v3SMAXc2SYxfYR8kaFZRsszMI1ALWZYT4WxTgObWu+pu17yl+N8f6RuaOMpu6e
-         ZwVmrLNSCktytUhgr81L0cE/KHn8sKVy3fYczYzYBgnaYlrGXhOxe+4i7AOQXt89bhfK
-         di63812aaReZgGcFxzSYL3/pUVDytV8EUl6xgdZeXNGNPqdevYWJT0HwAmmd1lSA7fUF
-         n8AA==
-X-Gm-Message-State: APjAAAU2EaRF6Q0kMhomLCdO8hhqFCZ30v5GAsHg1FGHbRFykuCpAL1k
-        qEkO7gRiCjPaaWFkklk8lnO3GKTH
-X-Google-Smtp-Source: APXvYqy6Zi45dKUBsN0A3zZlJRUeD/RU79k4wl44YxSfuWyLsO/jzk8oOCtvuT8Isz69mo20xLT4ZA==
-X-Received: by 2002:a17:90a:94c1:: with SMTP id j1mr8181360pjw.2.1576741070618;
-        Wed, 18 Dec 2019 23:37:50 -0800 (PST)
-Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
-        by smtp.gmail.com with ESMTPSA id i22sm4714674pfd.19.2019.12.18.23.37.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 18 Dec 2019 23:37:48 -0800 (PST)
-Subject: Re: [PATCH v2] hwmon: Driver for temperature sensors on SATA drives
-To:     "Martin K. Petersen" <martin.petersen@oracle.com>
-Cc:     linux-hwmon@vger.kernel.org, Jean Delvare <jdelvare@suse.com>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Bart Van Assche <bvanassche@acm.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-scsi@vger.kernel.org, linux-ide@vger.kernel.org,
-        Chris Healy <cphealy@gmail.com>
-References: <20191215174509.1847-1-linux@roeck-us.net>
- <20191215174509.1847-2-linux@roeck-us.net> <yq1r211dvck.fsf@oracle.com>
-From:   Guenter Roeck <linux@roeck-us.net>
-Message-ID: <f2b90347-66db-16f9-44b1-b6c7df319331@roeck-us.net>
-Date:   Wed, 18 Dec 2019 23:37:47 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.2.2
-MIME-Version: 1.0
-In-Reply-To: <yq1r211dvck.fsf@oracle.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+        id S1726797AbfLSIeg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 19 Dec 2019 03:34:36 -0500
+Received: from conuserg-12.nifty.com ([210.131.2.79]:36831 "EHLO
+        conuserg-12.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726463AbfLSIeg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Dec 2019 03:34:36 -0500
+Received: from localhost.localdomain (p14092-ipngnfx01kyoto.kyoto.ocn.ne.jp [153.142.97.92]) (authenticated)
+        by conuserg-12.nifty.com with ESMTP id xBJ8XVeB026051;
+        Thu, 19 Dec 2019 17:33:32 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-12.nifty.com xBJ8XVeB026051
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1576744412;
+        bh=qI5mMd1cAwycq3B8kLudFXZgwvG5Ji5YZpa3DkyTil0=;
+        h=From:To:Cc:Subject:Date:From;
+        b=G53E+sLqx0KukWN7HDXX4hwLlfe5erHOz4O8LADMWlDcIYtkBmHrrWEk2J/JTd500
+         fzEaMzqAtjfXuv4Ipq57ovnkCU3opY/rmKde7nfKtF3KAJ5f7LQSuCWxui3kjAFFEq
+         dfeNIJ5g+6KNgWs7xgxUrM7t42TGCgAPm2prs9XZvUC7GFazrm+2KQFiKsbc9tWLPU
+         212tZIiRia5zCDhV/kPtatDoZ2jGFnvUgGetoiaoKoqoQMEN/71wYDENpJkchbusPW
+         axlHcBgpUJIN4S9ofRUcFrCIrVQAoMMe7aD3kEgI9X+jJqkR1OPqCsL+dHIHwkL8oB
+         dHuZel67E0BvQ==
+X-Nifty-SrcIP: [153.142.97.92]
+From:   Masahiro Yamada <masahiroy@kernel.org>
+To:     linux-kbuild@vger.kernel.org
+Cc:     Lucas De Marchi <lucas.de.marchi@gmail.com>,
+        Sam Ravnborg <sam@ravnborg.org>, Jessica Yu <jeyu@kernel.org>,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Michal Marek <michal.lkml@markovi.net>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH 0/3] kbuild: generate modules.builtin without Makefile.modbuiltin or tristate.conf
+Date:   Thu, 19 Dec 2019 17:33:26 +0900
+Message-Id: <20191219083329.5926-1-masahiroy@kernel.org>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Martin,
 
-On 12/18/19 4:15 PM, Martin K. Petersen wrote:
-> 
-> Guenter,
-> 
->> This driver solves this problem by adding support for reading the
->> temperature of SATA drives from the kernel using the hwmon API and
->> by adding a temperature zone for each drive.
-> 
-> My working tree is available here:
-> 
->    https://git.kernel.org/pub/scm/linux/kernel/git/mkp/linux.git/log/?h=5.6/drivetemp
-> 
+This series re-implements the way of generating modules.builtin
 
-I had a quick look at the patch. Looks good overall. I think you should be able
-to use the buffer allocated in struct drivetemp_data (named smartdata). Maybe
-rename it to something more generic. If it needs to be dma-aligned, maybe we
-can use kzalloc() to allocate it. Only reason I didn't use it for vpd was because
-that needed 1024 bytes.
+Current approach:
+   Collect all CONFIG options with 'tristate' type into tristate.conf,
+   and parse Makefiles to get the list of builtin modules.
 
-> A few notes:
-> 
->   - Before applying your patch I did s/satatemp/drivetemp/
-> 
->   - I get a crash in the driver core during probe if the drivetemp module
->     is loaded prior to loading ahci or a SCSI HBA driver. This crash is
->     unrelated to my changes. Haven't had time to debug.
-> 
-Definitely something we'll need to look into. Do you have a traceback ?
+New approach:
+   Use MODULE_LICENSE() tags that compiled into vmlinux.
+   This information appears in modules.builtin.info,
+   but trimmed from vmlinux itself. So the image size does
+   not change.
 
-Thanks,
-Guenter
+This slightly speeds up builds because Kbuild no longer needs
+to traverse the source tree twice.
 
->   - I tweaked your ATA detection heuristics and now use the cached VPD
->     page 0x89 instead of fetching one from the device.
-> 
->   - I also added support for reading the temperature log page on SCSI
->     drives.
-> 
->   - Tested with a mixed bag of about 40 SCSI and SATA drives attached.
-> 
->   - I still think sensor naming needs work. How and where are the
->     "drivetemp-scsi-8-140" names generated?
-> 
-> I'll tinker some more but thought I'd share what I have for now.
-> 
+Also, the code diff is appealing:
+ 8 files changed, 35 insertions(+), 135 deletions(-)
+
+I think this is OK, but I hope module people can check it.
+
+
+
+Masahiro Yamada (3):
+  kbuild: add stringify helper to quote a string passed to C files
+  kbuild: pass KBUILD_MODFILE when compiling builtin objects
+  kbuild: create modules.builtin without Makefile.modbuiltin or
+    tristate.conf
+
+ Documentation/kbuild/kconfig.rst |  5 ---
+ Makefile                         | 21 +++---------
+ include/linux/module.h           | 12 ++++++-
+ scripts/Kbuild.include           | 10 +++---
+ scripts/Makefile.lib             | 17 ++++++----
+ scripts/Makefile.modbuiltin      | 57 --------------------------------
+ scripts/kconfig/confdata.c       | 45 ++-----------------------
+ scripts/link-vmlinux.sh          |  4 +++
+ 8 files changed, 36 insertions(+), 135 deletions(-)
+ delete mode 100644 scripts/Makefile.modbuiltin
+
+-- 
+2.17.1
 
