@@ -2,419 +2,159 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 80C3F125CC1
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2019 09:34:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 29A74126121
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Dec 2019 12:46:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726622AbfLSIed (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 19 Dec 2019 03:34:33 -0500
-Received: from conuserg-12.nifty.com ([210.131.2.79]:36689 "EHLO
-        conuserg-12.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726463AbfLSIed (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 19 Dec 2019 03:34:33 -0500
-Received: from localhost.localdomain (p14092-ipngnfx01kyoto.kyoto.ocn.ne.jp [153.142.97.92]) (authenticated)
-        by conuserg-12.nifty.com with ESMTP id xBJ8XVeE026051;
-        Thu, 19 Dec 2019 17:33:34 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-12.nifty.com xBJ8XVeE026051
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1576744414;
-        bh=hqbUenuvR6fw/8XNviC6Tz21TG63y2gIQKK3vmfTNtg=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=PoCBUhPLUdYEynfkqvs/ctHyV4QOMmDldlt4RgwnjO6CBCbF77hpe47TpAiup5HVI
-         Vn8/WWCspyb7lJtoK3O6B7/eDJzqzC/nKnoe+bf8cosR7r9X4EqDQWyvNSHttsNp+u
-         5PFvP0zguibQxV7ikGALaxKcBXT5uZqi9mBJmYpKlwySHK7U9+39akUpKG7ivM+W6K
-         QEMlH3frtrXoqHuBrG9REmfOTSqHpYtoVNmUq6LFhZHGwJBZ0/gKiuOeTo9TCVPx8a
-         Ai7F5Lvq2c9ty14msvuT9K0K7N/wUnlWoolqBDgqlCk5VvmCmBk4SyrlLf/2ETZ2W2
-         UMHPElmRqhIpA==
-X-Nifty-SrcIP: [153.142.97.92]
-From:   Masahiro Yamada <masahiroy@kernel.org>
-To:     linux-kbuild@vger.kernel.org
-Cc:     Lucas De Marchi <lucas.de.marchi@gmail.com>,
-        Sam Ravnborg <sam@ravnborg.org>, Jessica Yu <jeyu@kernel.org>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Michal Marek <michal.lkml@markovi.net>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 3/3] kbuild: create modules.builtin without Makefile.modbuiltin or tristate.conf
-Date:   Thu, 19 Dec 2019 17:33:29 +0900
-Message-Id: <20191219083329.5926-4-masahiroy@kernel.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191219083329.5926-1-masahiroy@kernel.org>
-References: <20191219083329.5926-1-masahiroy@kernel.org>
+        id S1726692AbfLSLqB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 19 Dec 2019 06:46:01 -0500
+Received: from szxga03-in.huawei.com ([45.249.212.189]:2108 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726668AbfLSLqB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 19 Dec 2019 06:46:01 -0500
+Received: from DGGEMM405-HUB.china.huawei.com (unknown [172.30.72.54])
+        by Forcepoint Email with ESMTP id 0245EC08727047931738;
+        Thu, 19 Dec 2019 19:45:58 +0800 (CST)
+Received: from dggeme755-chm.china.huawei.com (10.3.19.101) by
+ DGGEMM405-HUB.china.huawei.com (10.3.20.213) with Microsoft SMTP Server (TLS)
+ id 14.3.439.0; Thu, 19 Dec 2019 19:45:57 +0800
+Received: from [127.0.0.1] (10.173.221.248) by dggeme755-chm.china.huawei.com
+ (10.3.19.101) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1713.5; Thu, 19
+ Dec 2019 19:45:56 +0800
+Subject: Re: [PATCH 1/5] KVM: arm64: Document PV-lock interface
+To:     Steven Price <steven.price@arm.com>
+CC:     "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "kvmarm@lists.cs.columbia.edu" <kvmarm@lists.cs.columbia.edu>,
+        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "virtualization@lists.linux-foundation.org" 
+        <virtualization@lists.linux-foundation.org>,
+        "maz@kernel.org" <maz@kernel.org>,
+        James Morse <James.Morse@arm.com>,
+        "linux@armlinux.org.uk" <linux@armlinux.org.uk>,
+        Suzuki Poulose <Suzuki.Poulose@arm.com>,
+        "julien.thierry.kdev@gmail.com" <julien.thierry.kdev@gmail.com>,
+        "Catalin Marinas" <Catalin.Marinas@arm.com>,
+        Mark Rutland <Mark.Rutland@arm.com>,
+        "will@kernel.org" <will@kernel.org>,
+        "daniel.lezcano@linaro.org" <daniel.lezcano@linaro.org>
+References: <20191217135549.3240-1-yezengruan@huawei.com>
+ <20191217135549.3240-2-yezengruan@huawei.com>
+ <20191217142138.GA38811@arm.com>
+From:   yezengruan <yezengruan@huawei.com>
+Message-ID: <49120a3c-405d-d2e3-2a88-ba590feccbcc@huawei.com>
+Date:   Thu, 19 Dec 2019 19:45:55 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.0
+MIME-Version: 1.0
+In-Reply-To: <20191217142138.GA38811@arm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.173.221.248]
+X-ClientProxiedBy: dggeme707-chm.china.huawei.com (10.1.199.103) To
+ dggeme755-chm.china.huawei.com (10.3.19.101)
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Commit bc081dd6e9f6 ("kbuild: generate modules.builtin") added
-infrastructure to generate modules.builtin, the list of all
-builtin modules.
+Hi Steve,
 
-Basically, it works like this:
+On 2019/12/17 22:21, Steven Price wrote:
+> On Tue, Dec 17, 2019 at 01:55:45PM +0000, yezengruan@huawei.com wrote:
+>> From: Zengruan Ye <yezengruan@huawei.com>
+>>
+>> Introduce a paravirtualization interface for KVM/arm64 to obtain the vcpu
+>> is currently running or not.
+>>
+>> A hypercall interface is provided for the guest to interrogate the
+>> hypervisor's support for this interface and the location of the shared
+>> memory structures.
+>>
+>> Signed-off-by: Zengruan Ye <yezengruan@huawei.com>
+>> ---
+>>  Documentation/virt/kvm/arm/pvlock.rst | 31 +++++++++++++++++++++++++++
+>>  1 file changed, 31 insertions(+)
+>>  create mode 100644 Documentation/virt/kvm/arm/pvlock.rst
+>>
+>> diff --git a/Documentation/virt/kvm/arm/pvlock.rst b/Documentation/virt/kvm/arm/pvlock.rst
+>> new file mode 100644
+>> index 000000000000..eec0c36edf17
+>> --- /dev/null
+>> +++ b/Documentation/virt/kvm/arm/pvlock.rst
+>> @@ -0,0 +1,31 @@
+>> +.. SPDX-License-Identifier: GPL-2.0
+>> +
+>> +Paravirtualized lock support for arm64
+>> +======================================
+>> +
+>> +KVM/arm64 provids some hypervisor service calls to support a paravirtualized
+>> +guest obtaining the vcpu is currently running or not.
+>> +
+>> +Two new SMCCC compatible hypercalls are defined:
+>> +
+>> +* PV_LOCK_FEATURES:   0xC5000040
+>> +* PV_LOCK_PREEMPTED:  0xC5000041
+> 
+> These values are in the "Standard Hypervisor Service Calls" section of
+> SMCCC - so is there a document that describes this features such that
+> other OSes or hypervisors can implement it? I'm also not entirely sure
+> of the process of ensuring that the IDs picked are non-conflicting.
+> 
+> Otherwise if this is a KVM specific interface this should probably
+> belong within the "Vendor Specific Hypervisor Service Calls" section
+> along with some probing that the hypervisor is actually KVM. Although I
+> don't see anything KVM specific.
 
-  - Kconfig generates include/config/tristate.conf, the list of
-    tristate CONFIG options with a value in a capital letter.
+Thanks for pointing it out to me! Actually, I also don't see any documents
+or KVM specific that describes this features. The values in the "Vendor
+Specific Hypervisor Service Calls" section may be more appropriate, such as
+the following
 
-  - scripts/Makefile.modbuiltin makes Kbuild descend into
-    directories to collect the information of builtin modules.
+* PV_LOCK_FEATURES:   0xC6000020
+* PV_LOCK_PREEMPTED:  0xC6000021
 
-I am not a big fan of it because Kbuild ends up with traversing
-the source tree twice.
+Please let me know if you have any suggestions.
 
-I am not sure how perfectly it should work, but this approach cannot
-avoid false positives; even if the relevant CONFIG option is tristate,
-some Makefiles forces obj-m to obj-y.
+> 
+>> +
+>> +The existence of the PV_LOCK hypercall should be probed using the SMCCC 1.1
+>> +ARCH_FEATURES mechanism before calling it.
+>> +
+>> +PV_LOCK_FEATURES
+>> +    ============= ========    ==========
+>> +    Function ID:  (uint32)    0xC5000040
+>> +    PV_call_id:   (uint32)    The function to query for support.
+>> +    Return value: (int64)     NOT_SUPPORTED (-1) or SUCCESS (0) if the relevant
+>> +                              PV-lock feature is supported by the hypervisor.
+>> +    ============= ========    ==========
+>> +
+>> +PV_LOCK_PREEMPTED
+>> +    ============= ========    ==========
+>> +    Function ID:  (uint32)    0xC5000041
+>> +    Return value: (int64)     NOT_SUPPORTED (-1) or SUCCESS (0) if the IPA of
+>> +                              this vcpu's pv data structure is configured by
+>> +                              the hypervisor.
+>> +    ============= ========    ==========
+> 
+>>From the code it looks like there's another argument for this SMC - the
+> physical address (or IPA) of a struct pvlock_vcpu_state. This structure
+> also needs to be described as it is part of the ABI.
 
-Some examples are:
+Will update.
 
-  arch/powerpc/platforms/powermac/Makefile:
-    obj-$(CONFIG_NVRAM:m=y)         += nvram.o
+> 
+> Steve
+> 
+> .
+> 
 
-  net/ipv6/Makefile:
-    obj-$(subst m,y,$(CONFIG_IPV6)) += inet6_hashtables.o
+Thanks,
 
-  net/netlabel/Makefile:
-    obj-$(subst m,y,$(CONFIG_IPV6)) += netlabel_calipso.o
+Zengruan
 
-Nobody has complained about (or noticed) it, so it is probably fine to
-have false positives in modules.builtin.
-
-This commit simplifies the implementation. Let's exploit the fact
-that every module has MODULE_LICENSE(). (modpost shows a warning if
-MODULE_LICENSE is missing. If so, 0-day bot would already have blocked
-such a module.)
-
-I added MODULE_FILE to <linux/module.h>. When the code is being compiled
-as builtin, it will be filled with the file path of the module, and
-collected into modules.builtin.info. Then, scripts/link-vmlinux.sh
-extracts the list of builtin modules out of it.
-
-This new approach fixes the false-positives above, but adds another
-type of false-positives; non-modular code may have MODULE_LICENSE()
-by mistake. This is not a big deal, it is just the code is always
-orphan. We can clean it up if we like. You can see cleanup examples by:
-
-  $ git log --grep='make.* explicitly non-modular'
-
-To sum up, this commits deletes lots of code, but still produces almost
-equivalent results. Please note it does not increase the vmlinux size at
-all. As you can see in include/asm-generic/vmlinux.lds.h, the .modinfo
-section is discarded in the link stage.
-
-Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
----
-
- Documentation/kbuild/kconfig.rst |  5 ---
- Makefile                         | 21 +++---------
- include/linux/module.h           | 12 ++++++-
- scripts/Kbuild.include           |  6 ----
- scripts/Makefile.modbuiltin      | 57 --------------------------------
- scripts/kconfig/confdata.c       | 45 ++-----------------------
- scripts/link-vmlinux.sh          |  4 +++
- 7 files changed, 22 insertions(+), 128 deletions(-)
- delete mode 100644 scripts/Makefile.modbuiltin
-
-diff --git a/Documentation/kbuild/kconfig.rst b/Documentation/kbuild/kconfig.rst
-index a9a855f894b3..dce6801d66c9 100644
---- a/Documentation/kbuild/kconfig.rst
-+++ b/Documentation/kbuild/kconfig.rst
-@@ -154,11 +154,6 @@ KCONFIG_AUTOCONFIG
- This environment variable can be set to specify the path & name of the
- "auto.conf" file.  Its default value is "include/config/auto.conf".
- 
--KCONFIG_TRISTATE
------------------
--This environment variable can be set to specify the path & name of the
--"tristate.conf" file.  Its default value is "include/config/tristate.conf".
--
- KCONFIG_AUTOHEADER
- ------------------
- This environment variable can be set to specify the path & name of the
-diff --git a/Makefile b/Makefile
-index f900c23b8291..a9fa0f2975e2 100644
---- a/Makefile
-+++ b/Makefile
-@@ -673,7 +673,7 @@ $(KCONFIG_CONFIG):
- #
- # This exploits the 'multi-target pattern rule' trick.
- # The syncconfig should be executed only once to make all the targets.
--%/auto.conf %/auto.conf.cmd %/tristate.conf: $(KCONFIG_CONFIG)
-+%/auto.conf %/auto.conf.cmd: $(KCONFIG_CONFIG)
- 	$(Q)$(MAKE) -f $(srctree)/Makefile syncconfig
- else # !may-sync-config
- # External modules and some install targets need include/generated/autoconf.h
-@@ -1277,24 +1277,13 @@ all: modules
- # using awk while concatenating to the final file.
- 
- PHONY += modules
--modules: $(if $(KBUILD_BUILTIN),vmlinux) modules.order modules.builtin
-+modules: $(if $(KBUILD_BUILTIN),vmlinux) modules.order
- 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modpost
- 	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/modules-check.sh
- 
- modules.order: descend
- 	$(Q)$(AWK) '!x[$$0]++' $(addsuffix /$@, $(build-dirs)) > $@
- 
--modbuiltin-dirs := $(addprefix _modbuiltin_, $(build-dirs))
--
--modules.builtin: $(modbuiltin-dirs)
--	$(Q)$(AWK) '!x[$$0]++' $(addsuffix /$@, $(build-dirs)) > $@
--
--PHONY += $(modbuiltin-dirs)
--# tristate.conf is not included from this Makefile. Add it as a prerequisite
--# here to make it self-healing in case somebody accidentally removes it.
--$(modbuiltin-dirs): include/config/tristate.conf
--	$(Q)$(MAKE) $(modbuiltin)=$(patsubst _modbuiltin_%,%,$@)
--
- # Target to prepare building external modules
- PHONY += modules_prepare
- modules_prepare: prepare
-@@ -1314,7 +1303,7 @@ _modinst_:
- 		ln -s $(CURDIR) $(MODLIB)/build ; \
- 	fi
- 	@sed 's:^:kernel/:' modules.order > $(MODLIB)/modules.order
--	@sed 's:^:kernel/:' modules.builtin > $(MODLIB)/modules.builtin
-+	@cp -f modules.builtin $(MODLIB)/
- 	@cp -f $(objtree)/modules.builtin.modinfo $(MODLIB)/
- 	$(Q)$(MAKE) -f $(srctree)/scripts/Makefile.modinst
- 
-@@ -1356,7 +1345,7 @@ endif # CONFIG_MODULES
- 
- # Directories & files removed with 'make clean'
- CLEAN_DIRS  += include/ksym
--CLEAN_FILES += modules.builtin.modinfo modules.nsdeps
-+CLEAN_FILES += modules.builtin modules.builtin.modinfo modules.nsdeps
- 
- # Directories & files removed with 'make mrproper'
- MRPROPER_DIRS  += include/config include/generated          \
-@@ -1711,7 +1700,7 @@ clean: $(clean-dirs)
- 		-o -name '*.lex.c' -o -name '*.tab.[ch]' \
- 		-o -name '*.asn1.[ch]' \
- 		-o -name '*.symtypes' -o -name 'modules.order' \
--		-o -name modules.builtin -o -name '.tmp_*.o.*' \
-+		-o -name '.tmp_*.o.*' \
- 		-o -name '*.c.[012]*.*' \
- 		-o -name '*.ll' \
- 		-o -name '*.gcno' \) -type f -print | xargs rm -f
-diff --git a/include/linux/module.h b/include/linux/module.h
-index bd165ba68617..6877b3b191d0 100644
---- a/include/linux/module.h
-+++ b/include/linux/module.h
-@@ -169,6 +169,16 @@ extern void cleanup_module(void);
-  */
- #define MODULE_SOFTDEP(_softdep) MODULE_INFO(softdep, _softdep)
- 
-+/*
-+ * MODULE_FILE is used for generating modules.builtin
-+ * So, make it no-op when this is being built as a module
-+ */
-+#ifdef MODULE
-+#define MODULE_FILE
-+#else
-+#define MODULE_FILE	MODULE_INFO(file, KBUILD_MODFILE);
-+#endif
-+
- /*
-  * The following license idents are currently accepted as indicating free
-  * software modules
-@@ -213,7 +223,7 @@ extern void cleanup_module(void);
-  * 2.	So the community can ignore bug reports including proprietary modules
-  * 3.	So vendors can do likewise based on their own policies
-  */
--#define MODULE_LICENSE(_license) MODULE_INFO(license, _license)
-+#define MODULE_LICENSE(_license) MODULE_FILE MODULE_INFO(license, _license)
- 
- /*
-  * Author(s), use "Name <email>" or just "Name", for multiple
-diff --git a/scripts/Kbuild.include b/scripts/Kbuild.include
-index 88c144787e57..3da8321efb74 100644
---- a/scripts/Kbuild.include
-+++ b/scripts/Kbuild.include
-@@ -163,12 +163,6 @@ ld-ifversion = $(shell [ $(ld-version) $(1) $(2) ] && echo $(3) || echo $(4))
- # $(Q)$(MAKE) $(build)=dir
- build := -f $(srctree)/scripts/Makefile.build obj
- 
--###
--# Shorthand for $(Q)$(MAKE) -f scripts/Makefile.modbuiltin obj=
--# Usage:
--# $(Q)$(MAKE) $(modbuiltin)=dir
--modbuiltin := -f $(srctree)/scripts/Makefile.modbuiltin obj
--
- ###
- # Shorthand for $(Q)$(MAKE) -f scripts/Makefile.dtbinst obj=
- # Usage:
-diff --git a/scripts/Makefile.modbuiltin b/scripts/Makefile.modbuiltin
-deleted file mode 100644
-index 7d4711b88656..000000000000
---- a/scripts/Makefile.modbuiltin
-+++ /dev/null
-@@ -1,57 +0,0 @@
--# SPDX-License-Identifier: GPL-2.0
--# ==========================================================================
--# Generating modules.builtin
--# ==========================================================================
--
--src := $(obj)
--
--PHONY := __modbuiltin
--__modbuiltin:
--
--include include/config/auto.conf
--# tristate.conf sets tristate variables to uppercase 'Y' or 'M'
--# That way, we get the list of built-in modules in obj-Y
--include include/config/tristate.conf
--
--include scripts/Kbuild.include
--
--ifdef building_out_of_srctree
--# Create output directory if not already present
--_dummy := $(shell [ -d $(obj) ] || mkdir -p $(obj))
--endif
--
--# The filename Kbuild has precedence over Makefile
--kbuild-dir := $(if $(filter /%,$(src)),$(src),$(srctree)/$(src))
--kbuild-file := $(if $(wildcard $(kbuild-dir)/Kbuild),$(kbuild-dir)/Kbuild,$(kbuild-dir)/Makefile)
--include $(kbuild-file)
--
--include scripts/Makefile.lib
--__subdir-Y     := $(patsubst %/,%,$(filter %/, $(obj-Y)))
--subdir-Y       += $(__subdir-Y)
--subdir-ym      := $(sort $(subdir-y) $(subdir-Y) $(subdir-m))
--subdir-ym      := $(addprefix $(obj)/,$(subdir-ym))
--obj-Y          := $(addprefix $(obj)/,$(obj-Y))
--
--modbuiltin-subdirs := $(patsubst %,%/modules.builtin, $(subdir-ym))
--modbuiltin-mods    := $(filter %.ko, $(obj-Y:.o=.ko))
--modbuiltin-target  := $(obj)/modules.builtin
--
--__modbuiltin: $(modbuiltin-target) $(subdir-ym)
--	@:
--
--$(modbuiltin-target): $(subdir-ym) FORCE
--	$(Q)(for m in $(modbuiltin-mods); do echo $$m; done;	\
--	cat /dev/null $(modbuiltin-subdirs)) > $@
--
--PHONY += FORCE
--
--FORCE:
--
--# Descending
--# ---------------------------------------------------------------------------
--
--PHONY += $(subdir-ym)
--$(subdir-ym):
--	$(Q)$(MAKE) $(modbuiltin)=$@
--
--.PHONY: $(PHONY)
-diff --git a/scripts/kconfig/confdata.c b/scripts/kconfig/confdata.c
-index 3569d2dec37c..fb675bd9a809 100644
---- a/scripts/kconfig/confdata.c
-+++ b/scripts/kconfig/confdata.c
-@@ -710,25 +710,6 @@ static struct conf_printer header_printer_cb =
- 	.print_comment = header_print_comment,
- };
- 
--/*
-- * Tristate printer
-- *
-- * This printer is used when generating the `include/config/tristate.conf' file.
-- */
--static void
--tristate_print_symbol(FILE *fp, struct symbol *sym, const char *value, void *arg)
--{
--
--	if (sym->type == S_TRISTATE && *value != 'n')
--		fprintf(fp, "%s%s=%c\n", CONFIG_, sym->name, (char)toupper(*value));
--}
--
--static struct conf_printer tristate_printer_cb =
--{
--	.print_symbol = tristate_print_symbol,
--	.print_comment = kconfig_print_comment,
--};
--
- static void conf_write_symbol(FILE *fp, struct symbol *sym,
- 			      struct conf_printer *printer, void *printer_arg)
- {
-@@ -1062,7 +1043,7 @@ int conf_write_autoconf(int overwrite)
- 	struct symbol *sym;
- 	const char *name;
- 	const char *autoconf_name = conf_get_autoconfig_name();
--	FILE *out, *tristate, *out_h;
-+	FILE *out, *out_h;
- 	int i;
- 
- 	if (!overwrite && is_present(autoconf_name))
-@@ -1077,23 +1058,13 @@ int conf_write_autoconf(int overwrite)
- 	if (!out)
- 		return 1;
- 
--	tristate = fopen(".tmpconfig_tristate", "w");
--	if (!tristate) {
--		fclose(out);
--		return 1;
--	}
--
- 	out_h = fopen(".tmpconfig.h", "w");
- 	if (!out_h) {
- 		fclose(out);
--		fclose(tristate);
- 		return 1;
- 	}
- 
- 	conf_write_heading(out, &kconfig_printer_cb, NULL);
--
--	conf_write_heading(tristate, &tristate_printer_cb, NULL);
--
- 	conf_write_heading(out_h, &header_printer_cb, NULL);
- 
- 	for_all_symbols(i, sym) {
-@@ -1101,15 +1072,11 @@ int conf_write_autoconf(int overwrite)
- 		if (!(sym->flags & SYMBOL_WRITE) || !sym->name)
- 			continue;
- 
--		/* write symbol to auto.conf, tristate and header files */
-+		/* write symbols to auto.conf and autoconf.h */
- 		conf_write_symbol(out, sym, &kconfig_printer_cb, (void *)1);
--
--		conf_write_symbol(tristate, sym, &tristate_printer_cb, (void *)1);
--
- 		conf_write_symbol(out_h, sym, &header_printer_cb, NULL);
- 	}
- 	fclose(out);
--	fclose(tristate);
- 	fclose(out_h);
- 
- 	name = getenv("KCONFIG_AUTOHEADER");
-@@ -1120,14 +1087,6 @@ int conf_write_autoconf(int overwrite)
- 	if (rename(".tmpconfig.h", name))
- 		return 1;
- 
--	name = getenv("KCONFIG_TRISTATE");
--	if (!name)
--		name = "include/config/tristate.conf";
--	if (make_parent_dir(name))
--		return 1;
--	if (rename(".tmpconfig_tristate", name))
--		return 1;
--
- 	if (make_parent_dir(autoconf_name))
- 		return 1;
- 	/*
-diff --git a/scripts/link-vmlinux.sh b/scripts/link-vmlinux.sh
-index 436379940356..bf0bf9063aaf 100755
---- a/scripts/link-vmlinux.sh
-+++ b/scripts/link-vmlinux.sh
-@@ -250,6 +250,10 @@ ${MAKE} -f "${srctree}/scripts/Makefile.modpost" MODPOST_VMLINUX=1
- 
- info MODINFO modules.builtin.modinfo
- ${OBJCOPY} -j .modinfo -O binary vmlinux.o modules.builtin.modinfo
-+info GEN modules.builtin
-+# The second line aids cases where multiple modules share the same object.
-+tr '\0' '\n' < modules.builtin.modinfo | sed -n 's/^[[:alnum:]:_]*\.file=//p' |
-+	tr ' ' '\n' | uniq | sed -e 's:^:kernel/:' -e 's/$/.ko/' > modules.builtin
- 
- btf_vmlinux_bin_o=""
- if [ -n "${CONFIG_DEBUG_INFO_BTF}" ]; then
--- 
-2.17.1
 
