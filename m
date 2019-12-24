@@ -2,123 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1302C1299D3
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Dec 2019 19:24:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B2885129F2F
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Dec 2019 09:37:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726829AbfLWSYv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 23 Dec 2019 13:24:51 -0500
-Received: from mail-qv1-f67.google.com ([209.85.219.67]:46029 "EHLO
-        mail-qv1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726805AbfLWSYu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 23 Dec 2019 13:24:50 -0500
-Received: by mail-qv1-f67.google.com with SMTP id l14so6643582qvu.12
-        for <linux-doc@vger.kernel.org>; Mon, 23 Dec 2019 10:24:50 -0800 (PST)
+        id S1726084AbfLXIh1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 24 Dec 2019 03:37:27 -0500
+Received: from mail-qt1-f196.google.com ([209.85.160.196]:41031 "EHLO
+        mail-qt1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726268AbfLXIhX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 24 Dec 2019 03:37:23 -0500
+Received: by mail-qt1-f196.google.com with SMTP id k40so17617074qtk.8
+        for <linux-doc@vger.kernel.org>; Tue, 24 Dec 2019 00:37:23 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=KNSp0xKzXXca6h2YP8X3emLAqK9GuJuCbstCZTI5ulI=;
-        b=FctYOOrJ074bGu2erxfD+ggi+amf34vJ2+/SB/OaLs8ZFEcoEOPSKxrX7J7vfW72iX
-         iaD1ph6XI9oWEr/nnku4Pr+MbBh9He5Xr+rBPzoju6TBhM7n5pqaYtl/oqkKFK9Nr8fH
-         Us04jbJ3zTX0WDIVdGhJyQO5EPn2JUvIhBvTug4ZRXtCzaFxharK0qUYwO9ZIkwiEqhS
-         c9Aa/tUvtqh3RdzKBnkDvwefmOBkVu9RUXlbwmdawA3jtTcA8wQCgHrvBfiWYN8r7VQg
-         T/hlkSjI6vXJcCVxYIXrbbrRmfsaCa4t09oEgSwlogc3AYXQW7LtDW06LM/jq8bAmut6
-         WCJg==
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=LcGU1mt+nAQIi3eKcWZpiy7DqrkNG23tK1MNYV9CB+M=;
+        b=eygDl7YBOCWWlQe5JjF71GUH0MxM2GnwKjuCnN7TJql3Th2giuJ6whXX6bgil+EExJ
+         9q7jYtqcvwBdzX9QmcdS5Or8CwSEfjU/0/6EcB0lhs2iKt4PXI5gP8H4utHkg0jLU9pY
+         B3mJ64Fh1mzjTJR24vDJfgXQy9lm4sSOGyTAmophO5wmGAx5nYj7rGjQfi7P3LAErQ+9
+         nhoHpZhHZfmEvsP3QBOkQ8v7+CQPKZ7xdr5PRDvAs49FpgCEc+DOuULzYeX+h2ST5GXh
+         R1VWtI5/q+jGX0u6pDRVuuLWSSgz7y4RrZwwTh9WgOyOHzfF2l/9tXjgijxyMV1XszYE
+         /ocA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=KNSp0xKzXXca6h2YP8X3emLAqK9GuJuCbstCZTI5ulI=;
-        b=f7Ed9ny5NlniZcw+PCj7B5BnxUdY4KtD6PI79rg0WPTOaaZk7uh5So5K3AqBAVX07d
-         O+Zto40VTtjBb0raiNA278eEQenRAheyITajerwiR1gFW49ovHP1+r3rP+Ej3lHAkSEC
-         bRbM4U/u77Uz/w1y1OYmCV4gzjdYpbNwCs6Ude+LzLeZPSmxE5Z5+G18SfG6M5H+uxU7
-         fxwWV5zRuHBbDqA6VX1wKsDeR1aNal4+OufBge2owVgw9JkLCFc9jB7+gduvh3HGi9NW
-         wKR4/UIc/iamjw2dzZsZtAiLnk6iGgvK5EuxPC2s9/iThhcQzs6Wzxe7os+hB4WAT6++
-         1c5Q==
-X-Gm-Message-State: APjAAAUK8tND1QUdNqXZRj5Y0/w2gBJD51yn+2gPBudNYgiE/wlUBuJT
-        8qxHD36yTobqv3MPsBRtij6DbQ==
-X-Google-Smtp-Source: APXvYqyOJm+HA/OOXOk1TxOLC8pk6pJEfZhfUy8M7as0rtMhyNSoNfAsriRZZomXf9eRLN7qDrjm+A==
-X-Received: by 2002:a0c:e150:: with SMTP id c16mr25637620qvl.51.1577125488455;
-        Mon, 23 Dec 2019 10:24:48 -0800 (PST)
-Received: from ziepe.ca (hlfxns017vw-142-68-57-212.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.68.57.212])
-        by smtp.gmail.com with ESMTPSA id b7sm6449933qtj.15.2019.12.23.10.24.47
-        (version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-        Mon, 23 Dec 2019 10:24:47 -0800 (PST)
-Received: from jgg by mlx.ziepe.ca with local (Exim 4.90_1)
-        (envelope-from <jgg@ziepe.ca>)
-        id 1ijSNq-0007Pv-LV; Mon, 23 Dec 2019 14:24:46 -0400
-Date:   Mon, 23 Dec 2019 14:24:46 -0400
-From:   Jason Gunthorpe <jgg@ziepe.ca>
-To:     Dan Williams <dan.j.williams@intel.com>
-Cc:     John Hubbard <jhubbard@nvidia.com>,
-        Leon Romanovsky <leon@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        =?utf-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn.topel@intel.com>,
-        Christoph Hellwig <hch@infradead.org>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Dave Chinner <david@fromorbit.com>,
-        David Airlie <airlied@linux.ie>,
-        "David S . Miller" <davem@davemloft.net>,
-        Ira Weiny <ira.weiny@intel.com>, Jan Kara <jack@suse.cz>,
-        Jens Axboe <axboe@kernel.dk>, Jonathan Corbet <corbet@lwn.net>,
-        =?utf-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
-        Magnus Karlsson <magnus.karlsson@intel.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Michal Hocko <mhocko@suse.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Paul Mackerras <paulus@samba.org>,
-        Shuah Khan <shuah@kernel.org>,
-        Vlastimil Babka <vbabka@suse.cz>, bpf@vger.kernel.org,
-        Maling list - DRI developers 
-        <dri-devel@lists.freedesktop.org>, KVM list <kvm@vger.kernel.org>,
-        linux-block@vger.kernel.org,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-        linux-kselftest@vger.kernel.org,
-        "Linux-media@vger.kernel.org" <linux-media@vger.kernel.org>,
-        linux-rdma <linux-rdma@vger.kernel.org>,
-        linuxppc-dev <linuxppc-dev@lists.ozlabs.org>,
-        Netdev <netdev@vger.kernel.org>, Linux MM <linux-mm@kvack.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Maor Gottlieb <maorg@mellanox.com>
-Subject: Re: [PATCH v11 00/25] mm/gup: track dma-pinned pages: FOLL_PIN
-Message-ID: <20191223182446.GA28321@ziepe.ca>
-References: <20191216222537.491123-1-jhubbard@nvidia.com>
- <20191219132607.GA410823@unreal>
- <a4849322-8e17-119e-a664-80d9f95d850b@nvidia.com>
- <20191219210743.GN17227@ziepe.ca>
- <42a3e5c1-6301-db0b-5d09-212edf5ecf2a@nvidia.com>
- <20191220133423.GA13506@ziepe.ca>
- <CAPcyv4hX9TsTMjsv2hnbEM-TpkC9abtWGSVskr9nPwpR8c5E1Q@mail.gmail.com>
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=LcGU1mt+nAQIi3eKcWZpiy7DqrkNG23tK1MNYV9CB+M=;
+        b=rxT+6VhM5ToXFqMLWC08ZsJds0vyPi57EBXVFpcHgweBWYUHWHwp0zgow5CTy8Y66d
+         kY0SfW895svREtsVhqM/Ab5fhwvjN7zQ8bRAEsN0Lur+OZdMg6a/7dCLA6t0YWsAg8lO
+         S4OgHRCgR8cmRgtxirfdM2F0ZXYTRy0dr1hWa47fRr7xIjAqJmN6yj6P/MvGeOeTMsOD
+         ncvGY7tPoekvvIQkdKBg2dQkfElP/Jmtvo7aujM8rBfkU/MjfMvKrNWcgF2C7+ydKl20
+         ebiNDG3wYlZqheNJtIjUKlsjMr0+QxlMJlP7GC6zZYrgJpFpABgaicyX162syvCLtu6X
+         Jzuw==
+X-Gm-Message-State: APjAAAUAw9CbCubsP/c9BD+l1cPqyTd+SeT5y7OxoPbaLPvTx3Zw9cdJ
+        taEXChdyvumJ/FjRskp8ppsCYBu62cOa25WMh7c=
+X-Google-Smtp-Source: APXvYqyA2n44646Wl9JB8Imy9OLLzJdjXN8GcJmUl6KzhAVYFQ3YkgwqF66v+1Fe8G1X849TvuFmMEcglRF1JWQ82U4=
+X-Received: by 2002:ac8:2b26:: with SMTP id 35mr26070705qtu.341.1577176642769;
+ Tue, 24 Dec 2019 00:37:22 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAPcyv4hX9TsTMjsv2hnbEM-TpkC9abtWGSVskr9nPwpR8c5E1Q@mail.gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Received: by 2002:ad4:530a:0:0:0:0:0 with HTTP; Tue, 24 Dec 2019 00:37:22
+ -0800 (PST)
+Reply-To: bethnatividad9@gmail.com
+From:   Beth Nat <anthonymoore105@gmail.com>
+Date:   Tue, 24 Dec 2019 08:37:22 +0000
+Message-ID: <CAKqrdYA5V4KZX0c4sA1FEJYxSJKRN5oMbBm3OFwOCwGFzixGXg@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Dec 20, 2019 at 04:32:13PM -0800, Dan Williams wrote:
-
-> > > There's already a limit, it's just a much larger one. :) What does "no limit"
-> > > really mean, numerically, to you in this case?
-> >
-> > I guess I mean 'hidden limit' - hitting the limit and failing would
-> > be managable.
-> >
-> > I think 7 is probably too low though, but we are not using 1GB huge
-> > pages, only 2M..
-> 
-> What about RDMA to 1GB-hugetlbfs and 1GB-device-dax mappings?
-
-I don't think the failing testing is doing that.
-
-It is also less likely that 1GB regions will need multi-mapping, IMHO.
-
-Jason
+How are you today my dear? i saw your profile and it interests me, i
+am a Military nurse from USA. Can we be friend? I want to know more
+about you.
