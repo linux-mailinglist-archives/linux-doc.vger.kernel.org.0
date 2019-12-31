@@ -2,103 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0BBCE12D9AD
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Dec 2019 16:16:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E49612D9D0
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Dec 2019 16:32:16 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727206AbfLaPQM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 31 Dec 2019 10:16:12 -0500
-Received: from mail-wm1-f67.google.com ([209.85.128.67]:33635 "EHLO
-        mail-wm1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727180AbfLaPQK (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Dec 2019 10:16:10 -0500
-Received: by mail-wm1-f67.google.com with SMTP id d139so1954385wmd.0;
-        Tue, 31 Dec 2019 07:16:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=TQMSEdRQ4ekpdJKwbIsHv9YNIyDhx2awGDRf3GaLUoA=;
-        b=MuPDQ31JAsnaUbWu33M5qr81ER4QFiw8/4Mukj7bEgn1qiImA316a/iR2mH02cV6bU
-         Mu8BaaHO5CZVQAJpP3PcUhu36H+yL4ai65XuD0Q1aVU5J0k3t8GOiPzi7P+xuRvpPiyH
-         MTBCccF4MSHKcbDSFzxU0JVu8YmXx83fO3UQEtn2L1GYICZUy5cdWbmArwpzFxodwW8q
-         3Am37j6iixnIdQpx903s0yoGEQyVd3OWvNeH7KNS1dZpAGXjywZcJO4CEJ+EaDmOUCsR
-         kcR9Mq9FaHKIuYAfWbDYO5sP5EeLKfFlFZS23DAKYMcn0wuQAkKYSkB8MqG19as9ZAeS
-         Bt2Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=TQMSEdRQ4ekpdJKwbIsHv9YNIyDhx2awGDRf3GaLUoA=;
-        b=H3RAxkxrWzFXX1yyPHkMsnSq1CIDocF3nzu0Xkrs/g16pcjiC3BOdBp7WzTfCVMvdw
-         LRX8mT2twwc5BczYfz7uaAbT3aWu+ixJdEcYy4Fen5pd/9jo9eoTNqPuNIe5oVy92MSS
-         WQgPPb5fqRCYHBzEjr58qZSoAAs1y0f1hxILCgR4ZuZibSSHGam05v+y/TV0N4RH17hx
-         pcH2k5bmKHTK2IN2ttbrPqgeKR7H8qjuAX05wO2sDwQqgVEXccAMtYfj3eiiIY26x3wn
-         +a926cLIDe5h38j7jeOwLpVcTHZTxunS6+fV6quTuwfws0PkEuftddzf6wuCQfWSBQf/
-         Nzpw==
-X-Gm-Message-State: APjAAAXo/yB5eq8Ee5wtod77+cSOXPi8Abr16wI0Nb2mbGXITpIHXFTJ
-        7vishgAioTR7Ey/qTwdREXY=
-X-Google-Smtp-Source: APXvYqwzosLGiFO8h5oGTKEN3V9jiDhs5PrmLw3JN1QdbUc2cga+BAGy/PJs8U5iBzBam6xXgWVPNg==
-X-Received: by 2002:a05:600c:54b:: with SMTP id k11mr4770427wmc.63.1577805368677;
-        Tue, 31 Dec 2019 07:16:08 -0800 (PST)
-Received: from localhost.localdomain ([2a02:2450:10d2:194d:45f9:d1e3:14f9:8ba2])
-        by smtp.gmail.com with ESMTPSA id e12sm49228468wrn.56.2019.12.31.07.16.07
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Dec 2019 07:16:08 -0800 (PST)
-From:   sj38.park@gmail.com
-X-Google-Original-From: sjpark@amazon.de
-To:     paulmck@kernel.org
-Cc:     corbet@lwn.net, rcu@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, SeongJae Park <sjpark@amazon.de>
-Subject: [PATCH 7/7] rcu: Fix typos in beginning comments
-Date:   Tue, 31 Dec 2019 16:15:49 +0100
-Message-Id: <20191231151549.12797-8-sjpark@amazon.de>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191231151549.12797-1-sjpark@amazon.de>
-References: <20191231151549.12797-1-sjpark@amazon.de>
+        id S1726659AbfLaPcP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 31 Dec 2019 10:32:15 -0500
+Received: from ms.lwn.net ([45.79.88.28]:36918 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726060AbfLaPcP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 31 Dec 2019 10:32:15 -0500
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id B3758536;
+        Tue, 31 Dec 2019 15:32:14 +0000 (UTC)
+Date:   Tue, 31 Dec 2019 08:32:13 -0700
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     "Daniel W. S. Almeida" <dwlsalmeida@gmail.com>
+Cc:     mchehab+samsung@kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, skhan@linuxfoundation.org,
+        linux-kernel-mentees@lists.linuxfoundation.org
+Subject: Re: [PATCH v2 2/8] Documentation: nfsroot.txt: convert to ReST
+Message-ID: <20191231083213.0786bda1@lwn.net>
+In-Reply-To: <47e2ea6e-a808-5012-6f9a-8800fbd3be00@gmail.com>
+References: <cover.1577681164.git.dwlsalmeida@gmail.com>
+        <92be5a49b967ce35a305fc5ccfb3efea3f61a19a.1577681164.git.dwlsalmeida@gmail.com>
+        <20191230121807.3a1f5f38@lwn.net>
+        <47e2ea6e-a808-5012-6f9a-8800fbd3be00@gmail.com>
+Organization: LWN.net
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: SeongJae Park <sjpark@amazon.de>
+On Tue, 31 Dec 2019 01:08:11 -0300
+"Daniel W. S. Almeida" <dwlsalmeida@gmail.com> wrote:
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- kernel/rcu/srcutree.c | 2 +-
- kernel/rcu/tree.c     | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+> Would you please rephrase this? My first language isn't English and I am 
+> not sure I understood that.
+> 
+> > It's best in general to avoid refilling paragraphs so as to make it clear
+> > what is being changed.  But we would also like to avoid creating such long
+> > lines.  Perhaps an add-on patch refilling things would satisfy both
+> > criteria here.  
 
-diff --git a/kernel/rcu/srcutree.c b/kernel/rcu/srcutree.c
-index 119a37319e67..a0892a9e2bf7 100644
---- a/kernel/rcu/srcutree.c
-+++ b/kernel/rcu/srcutree.c
-@@ -5,7 +5,7 @@
-  * Copyright (C) IBM Corporation, 2006
-  * Copyright (C) Fujitsu, 2012
-  *
-- * Author: Paul McKenney <paulmck@linux.ibm.com>
-+ * Authors: Paul McKenney <paulmck@linux.ibm.com>
-  *	   Lai Jiangshan <laijs@cn.fujitsu.com>
-  *
-  * For detailed explanation of Read-Copy Update mechanism see -
-diff --git a/kernel/rcu/tree.c b/kernel/rcu/tree.c
-index 48fba2257748..ab7cbe71f57b 100644
---- a/kernel/rcu/tree.c
-+++ b/kernel/rcu/tree.c
-@@ -1,12 +1,12 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Read-Copy Update mechanism for mutual exclusion
-+ * Read-Copy Update mechanism for mutual exclusion (tree-based version)
-  *
-  * Copyright IBM Corporation, 2008
-  *
-  * Authors: Dipankar Sarma <dipankar@in.ibm.com>
-  *	    Manfred Spraul <manfred@colorfullife.com>
-- *	    Paul E. McKenney <paulmck@linux.ibm.com> Hierarchical version
-+ *	    Paul E. McKenney <paulmck@linux.ibm.com>
-  *
-  * Based on the original work by Paul McKenney <paulmck@linux.ibm.com>
-  * and inputs from Rusty Russell, Andrea Arcangeli and Andi Kleen.
--- 
-2.17.1
+Changing text in an existing paragraph can
+result in line lengths that are inconsistent and ragged, leading to a less 
+pleasant appearance
+and the temptation to "refill" the paragraph so that the 
+lines are all approximately equal in length.  The problem with yielding
+to that temptation is that it messes up
+the diff output so that you can no longer easily see the actual
+text changes that were made.
 
+Thus, when making such changes, it can be better to not refill the
+paragraphs - as, indeed, you did not.  But if the result becomes too
+difficult to read (as in, it creates lines that are waaaay to long), it
+can be good to create a second patch that makes only the cosmetic changes
+without any associated text changes.  I was suggesting doing that in this
+case.
+
+Does that help?
+
+Thanks,
+
+jon
