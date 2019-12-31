@@ -2,92 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5CC1A12D860
-	for <lists+linux-doc@lfdr.de>; Tue, 31 Dec 2019 12:34:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D986212D9A6
+	for <lists+linux-doc@lfdr.de>; Tue, 31 Dec 2019 16:16:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727236AbfLaLer (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 31 Dec 2019 06:34:47 -0500
-Received: from lelv0142.ext.ti.com ([198.47.23.249]:32842 "EHLO
-        lelv0142.ext.ti.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727121AbfLaLeq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Dec 2019 06:34:46 -0500
-Received: from lelv0266.itg.ti.com ([10.180.67.225])
-        by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id xBVBYHGs097830;
-        Tue, 31 Dec 2019 05:34:17 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-        s=ti-com-17Q1; t=1577792057;
-        bh=wyWNxMP+yMhE2vhg63JvjcfQkIOPbmIBjduJwe6FrHA=;
-        h=From:To:CC:Subject:Date:In-Reply-To:References;
-        b=MHqSgTK5pL83EbaxttUKDQWDjwyKXlVMYbglNHVZ0qkO9XVsmr4QHJFIjAK4Noimo
-         7wG375clbDJ/tHkNGuzmVBeoj470VECaxsoFDay3H6uhjOmstQheQqy37JV2xDjYsr
-         3+1Z52ijtA7UB9qHEGXy7IAnlWdHyAG8Vx1rrmxM=
-Received: from DFLE105.ent.ti.com (dfle105.ent.ti.com [10.64.6.26])
-        by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id xBVBYHQB091197
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-        Tue, 31 Dec 2019 05:34:17 -0600
-Received: from DFLE107.ent.ti.com (10.64.6.28) by DFLE105.ent.ti.com
- (10.64.6.26) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3; Tue, 31
- Dec 2019 05:34:17 -0600
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE107.ent.ti.com
- (10.64.6.28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1847.3 via
- Frontend Transport; Tue, 31 Dec 2019 05:34:17 -0600
-Received: from a0393678ub.india.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-        by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id xBVBXX38024759;
-        Tue, 31 Dec 2019 05:34:11 -0600
-From:   Kishon Vijay Abraham I <kishon@ti.com>
-To:     Kishon Vijay Abraham I <kishon@ti.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Andrew Murray <andrew.murray@arm.com>,
-        Tom Joseph <tjoseph@cadence.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Jingoo Han <jingoohan1@gmail.com>,
-        Gustavo Pimentel <gustavo.pimentel@synopsys.com>,
-        Shawn Lin <shawn.lin@rock-chips.com>,
-        Heiko Stuebner <heiko@sntech.de>
-CC:     <linux-pci@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        <linux-doc@vger.kernel.org>, <devicetree@vger.kernel.org>,
-        <linux-rockchip@lists.infradead.org>,
-        <linux-arm-kernel@lists.infradead.org>
-Subject: [PATCH 7/7] misc: pci_endpoint_test: Populate sriov_configure ops to configure SR-IOV device
-Date:   Tue, 31 Dec 2019 17:05:34 +0530
-Message-ID: <20191231113534.30405-8-kishon@ti.com>
+        id S1727081AbfLaPQB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 31 Dec 2019 10:16:01 -0500
+Received: from mail-wm1-f68.google.com ([209.85.128.68]:53020 "EHLO
+        mail-wm1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726060AbfLaPQA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Dec 2019 10:16:00 -0500
+Received: by mail-wm1-f68.google.com with SMTP id p9so2073241wmc.2;
+        Tue, 31 Dec 2019 07:15:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=IuZodoMyqxWVvgkPYDeRfZ7CtU3buoKs+K2n5bYydxM=;
+        b=HsjdWOSldyM0TpjQUTTB0DNQ/NBqpLVTKsfEIbGTGgqcVOqAJ5fFV8AwnnwnCd+E79
+         ZjHdSgQuXyaL6Nfroh67pORdTSBm+14RkVKPT+qo7RfrOG3Jh4C4Mr/Msw9YvQpRrgst
+         tjlUsqaYplx1vnLRThEsohMOM7/L5B40Grmq0YtcitT/uYDJ//oi8y5EOugFsWjeH22o
+         Hn7X7svFd7DrnvEakE4P0iTfQwzu76JCllORoNyVvWclyREffMh47C7adRj2QlsTgu4d
+         LE3Mrp/Z+H9axDC7O4FbAIDZkitNSMpfupPPjnwBJteMJb5C9Oi/KzZS99PLhQgCepzn
+         zQSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=IuZodoMyqxWVvgkPYDeRfZ7CtU3buoKs+K2n5bYydxM=;
+        b=OXarlZaOLJf29agSPxomj+Z+T4qCbCy4UmoG/8Y402JpIlDeHW7cDGHB3nLD4BOUf3
+         cSRqERccHr0nf+y7cVtCFCGz3Q6TrxaAI9RLiw9itEax5sqyWqFc7hyNZVkiI2jWxDFN
+         iEiRLLgJvqJIDiOkhZT/LWm+4LOpQxrXSueg9TlLIHvq17NXbr3FGY6sP8oOn7DmlSOD
+         5hmXjaamUxUMqkVcG3Hk09gfrgLsCwO1LZZdSnZvsC223LBig3wPb9D5RmQutYFuWtWz
+         hj12rxbdc7o1+yrWckkdvLoaEHTsCwcGuCHpYWBM/cCflrdVGts6SQceaF/1BNFCIjbK
+         GabA==
+X-Gm-Message-State: APjAAAWwzTeF8pYaEpbAW+UB5wte7wJXCrKOvZzewJI9CIAF3+golG/R
+        YnQ7PyqQ1WKknfU/+vdnQ/i5xLE+y8I=
+X-Google-Smtp-Source: APXvYqyXs3CLrhQctyrKhrV80uTB4H7vfM9YTjYdapzsoXy5/nafeO6bYTA++7Dg731fUGNnVx2R3A==
+X-Received: by 2002:a1c:498a:: with SMTP id w132mr4529592wma.10.1577805358784;
+        Tue, 31 Dec 2019 07:15:58 -0800 (PST)
+Received: from localhost.localdomain ([2a02:2450:10d2:194d:45f9:d1e3:14f9:8ba2])
+        by smtp.gmail.com with ESMTPSA id e12sm49228468wrn.56.2019.12.31.07.15.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 31 Dec 2019 07:15:57 -0800 (PST)
+From:   sj38.park@gmail.com
+X-Google-Original-From: sjpark@amazon.de
+To:     paulmck@kernel.org
+Cc:     corbet@lwn.net, rcu@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, SeongJae Park <sjpark@amazon.de>
+Subject: [PATCH 0/7] Fix trivial nits in RCU docs
+Date:   Tue, 31 Dec 2019 16:15:42 +0100
+Message-Id: <20191231151549.12797-1-sjpark@amazon.de>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20191231113534.30405-1-kishon@ti.com>
-References: <20191231113534.30405-1-kishon@ti.com>
-MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Populate sriov_configure ops with pci_sriov_configure_simple to
-configure SR-IOV device.
+From: SeongJae Park <sjpark@amazon.de>
 
-Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
----
- drivers/misc/pci_endpoint_test.c | 1 +
- 1 file changed, 1 insertion(+)
+This patchset fixes trivial nits in the RCU documentations.
 
-diff --git a/drivers/misc/pci_endpoint_test.c b/drivers/misc/pci_endpoint_test.c
-index b2458988939e..0f448c33f45c 100644
---- a/drivers/misc/pci_endpoint_test.c
-+++ b/drivers/misc/pci_endpoint_test.c
-@@ -840,6 +840,7 @@ static struct pci_driver pci_endpoint_test_driver = {
- 	.id_table	= pci_endpoint_test_tbl,
- 	.probe		= pci_endpoint_test_probe,
- 	.remove		= pci_endpoint_test_remove,
-+	.sriov_configure = pci_sriov_configure_simple,
- };
- module_pci_driver(pci_endpoint_test_driver);
- 
+SeongJae Park (7):
+  doc/RCU/Design: Remove remaining HTML tags in ReST files
+  doc/RCU/listRCU: Fix typos in a example code snippets
+  doc/RCU/listRCU: Update example function name
+  doc/RCU/rcu: Use ':ref:' for links to other docs
+  doc/RCU/rcu: Use absolute paths for non-rst files
+  doc/RCU/rcu: Use https instead of http if possible
+  rcu: Fix typos in beginning comments
+
+ .../Tree-RCU-Memory-Ordering.rst               |  8 ++++----
+ Documentation/RCU/listRCU.rst                  | 10 +++++-----
+ Documentation/RCU/rcu.rst                      | 18 +++++++++---------
+ kernel/rcu/srcutree.c                          |  2 +-
+ kernel/rcu/tree.c                              |  4 ++--
+ 5 files changed, 21 insertions(+), 21 deletions(-)
+
 -- 
 2.17.1
 
