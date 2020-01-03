@@ -2,154 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8736012FB44
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jan 2020 18:12:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9FC7612FDA6
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jan 2020 21:20:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728196AbgACRMN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 3 Jan 2020 12:12:13 -0500
-Received: from mail.kernel.org ([198.145.29.99]:46414 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728191AbgACRMM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 3 Jan 2020 12:12:12 -0500
-Received: from localhost.localdomain (unknown [194.230.155.149])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 1544F215A4;
-        Fri,  3 Jan 2020 17:12:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1578071531;
-        bh=Bq3wSGweNgUnUR2ScgkLGNaGTFe493jXCOPTmwaWkAQ=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=QUj3CD1Iz1tYjBpeeYY40qAazySGz44Eepq4NFeLl1wD3gLnnShAHmeTo48UMEZBz
-         gR7Of2G+8ZjlLIsfqNzyPz20R52boqeB1/dsVM7Lf0n82h+CzAmSorq+npjp7pKnzJ
-         Gj9f8OjA5S4bfIKmfFHJoUlhllwIipvss8e6x428=
-From:   Krzysztof Kozlowski <krzk@kernel.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Krzysztof Kozlowski <krzk@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kukjin Kim <kgene@kernel.org>,
-        Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
-        Zhang Rui <rui.zhang@intel.com>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        Amit Kucheria <amit.kucheria@verdurent.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Viresh Kumar <viresh.kumar@linaro.org>,
-        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-samsung-soc@vger.kernel.org, linux-pm@vger.kernel.org,
-        devicetree@vger.kernel.org
-Subject: [PATCH 05/19] thermal: exynos: Rename Samsung and Exynos to lowercase
-Date:   Fri,  3 Jan 2020 18:11:17 +0100
-Message-Id: <20200103171131.9900-6-krzk@kernel.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200103171131.9900-1-krzk@kernel.org>
-References: <20200103171131.9900-1-krzk@kernel.org>
+        id S1728679AbgACUT7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 3 Jan 2020 15:19:59 -0500
+Received: from mail-qv1-f67.google.com ([209.85.219.67]:39557 "EHLO
+        mail-qv1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728407AbgACUTq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 3 Jan 2020 15:19:46 -0500
+Received: by mail-qv1-f67.google.com with SMTP id y8so16693090qvk.6
+        for <linux-doc@vger.kernel.org>; Fri, 03 Jan 2020 12:19:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:from:date:message-id:subject:to;
+        bh=40ACnQIUnpge54Cj+EODMXbGQ2AM0yGbootCDBdgIh0=;
+        b=AWCc/ylFmQ91zZEJrbKovcmODhKduqUVkKGxHK8uCtVvWppAnjCzAVhlqtuTB6Zv3H
+         fwGfadWPG5OWx3vtouAanI9rAb4+nCSTS9ougZHH94RmFVRXusGOhSeq6LcZbXUbpYke
+         LecHuReAxOHZIAlNr0puF8IN10taJseJbu/8dZmgE65qy44VHc90CsjCbMPz9YIW56uc
+         KAocddCq9fbTe+4eLEe4ukQAx3KuF/S8Bs/5ss0PU18bAsmodPObJCziaNGvW+fW97nj
+         vqPpR6NvW2UHqccwDYrcuioTdRRCTX8F5vGOe97A6Uj5iUQG4sbm5c76feOsNIPb/J8O
+         nOKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+        bh=40ACnQIUnpge54Cj+EODMXbGQ2AM0yGbootCDBdgIh0=;
+        b=mWQVAa7zAt0e0nwp9n5yyACcoeF99n0aV9pqGoDz9yN3WG6kh8bRKNce8uUnuWURP8
+         3RE+4Y9yBiMB9wvODSbINyWDtmyVvY9oWMMxKCyItPWya1yydOTrCBJpd8t7LJmA5X7w
+         pVbbMvV2sj9orjB6pYwIwizLUcJfMf6RC+YoUk0CatOC0MwyI7Vl0UeaEVXaw2xC4PIS
+         9irPbGwNgcNSsDQ5mEK91jvRdZ3K5au9Vf5O7uVn068nVQ4dWDGP0z331VFPhB5Rz8ED
+         C1EFLG84rC6UBR3i1CyqJTjaKCkUjN67OuNjFLe4/teqj6ucmhtURnp6ofLKzJ2wnnU8
+         heLw==
+X-Gm-Message-State: APjAAAWcGKm+/ZNdaHDZZO9NBiraEpMKcxa1gr5ruj2U9GBABLWPnjY6
+        3Gx1qLdAtw2cPbPqRjPIewl6VJx2ltoSpCK4WZA=
+X-Google-Smtp-Source: APXvYqwTD0MzQRfSqMjBdpNUeZAJzfDvhrEGhXGCrMyvXGb//+N8M9ASxsqTbkQfP5NbaV7n6hKI5gEfY+hOjDS6Fyg=
+X-Received: by 2002:ad4:478b:: with SMTP id z11mr69635758qvy.185.1578082785331;
+ Fri, 03 Jan 2020 12:19:45 -0800 (PST)
+MIME-Version: 1.0
+Received: by 2002:ac8:4410:0:0:0:0:0 with HTTP; Fri, 3 Jan 2020 12:19:45 -0800 (PST)
+From:   "Rev.Dr Emmanuel Okoye CEO Ecobank-benin" 
+        <westernunion.benin982@gmail.com>
+Date:   Fri, 3 Jan 2020 21:19:45 +0100
+Message-ID: <CAP=nHBKxfmbdRg7q4-1jdSUL6+zok9agasMSrXV5CsEJEmZz3A@mail.gmail.com>
+Subject: I promise you must be happy today, God has uplifted you and your
+ family ok
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Fix up inconsistent usage of upper and lowercase letters in "Samsung"
-and "Exynos" names.
+Dear Friend
 
-"SAMSUNG" and "EXYNOS" are not abbreviations but regular trademarked
-names.  Therefore they should be written with lowercase letters starting
-with capital letter.
+i hope all is well with you,if so, glory be to God almighty. I'm very
+happy to inform you, about my success in getting payment funds under
+the cooperation of a new partner from United States of
+America.Presently I am in uk for investment projects with my own share
+of the total sum. I didn't forget your past efforts. IMF finally
+approved your compensation payment funds this morning by prepaid (ATM)
+Debit card of US$12,500.000.00Million Dollars, Since you not received
+this payment yet, I was not certified
+but it is not your fault and not my fault, I hold nothing against
+you.than bank official whom has been detaining the transfer in the
+bank, trying to claim your funds by themselves.
 
-The lowercase "Exynos" name is promoted by its manufacturer Samsung
-Electronics Co., Ltd., in advertisement materials and on website.
+Therefore, in appreciation of your effort I have raised an
+International prepaid (ATM) Debit card of US$12,500.000.00 in your
+favor as compensation to you.
 
-Although advertisement materials usually use uppercase "SAMSUNG", the
-lowercase version is used in all legal aspects (e.g. on Wikipedia and in
-privacy/legal statements on
-https://www.samsung.com/semiconductor/privacy-global/).
+Now, i want you to contact my Diplomatic Agent, His name is Mike Benz
+on His  e-mail Address (mikebenz550@aol.com
 
-Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
----
- Documentation/driver-api/thermal/exynos_thermal.rst | 6 +++---
- drivers/thermal/samsung/Kconfig                     | 2 +-
- drivers/thermal/samsung/exynos_tmu.c                | 4 ++--
- include/dt-bindings/thermal/thermal_exynos.h        | 2 +-
- 4 files changed, 7 insertions(+), 7 deletions(-)
+ask Him to send the Prepaid (ATM) Debit card to you. Bear in mind that
+the money is in Prepaid (ATM) Debit card, not cash, so you need to
+send to him,
+your full name
+address  where the prepaid (ATM) Debit card will be delivered to you,
+including your cell phone number. Finally, I left explicit
+instructions with him, on how to send the (ATM CARD) to you.
 
-diff --git a/Documentation/driver-api/thermal/exynos_thermal.rst b/Documentation/driver-api/thermal/exynos_thermal.rst
-index d4e4a5b75805..764df4ab584d 100644
---- a/Documentation/driver-api/thermal/exynos_thermal.rst
-+++ b/Documentation/driver-api/thermal/exynos_thermal.rst
-@@ -4,7 +4,7 @@ Kernel driver exynos_tmu
- 
- Supported chips:
- 
--* ARM SAMSUNG EXYNOS4, EXYNOS5 series of SoC
-+* ARM Samsung Exynos4, Exynos5 series of SoC
- 
-   Datasheet: Not publicly available
- 
-@@ -14,7 +14,7 @@ Authors: Amit Daniel <amit.daniel@samsung.com>
- TMU controller Description:
- ---------------------------
- 
--This driver allows to read temperature inside SAMSUNG EXYNOS4/5 series of SoC.
-+This driver allows to read temperature inside Samsung Exynos4/5 series of SoC.
- 
- The chip only exposes the measured 8-bit temperature code value
- through a register.
-@@ -43,7 +43,7 @@ The three equations are:
-        Trimming info for 85 degree Celsius (stored at TRIMINFO register)
-        Temperature code measured at 85 degree Celsius which is unchanged
- 
--TMU(Thermal Management Unit) in EXYNOS4/5 generates interrupt
-+TMU(Thermal Management Unit) in Exynos4/5 generates interrupt
- when temperature exceeds pre-defined levels.
- The maximum number of configurable threshold is five.
- The threshold levels are defined as follows::
-diff --git a/drivers/thermal/samsung/Kconfig b/drivers/thermal/samsung/Kconfig
-index fe0d2ba51392..f4eff5a41a84 100644
---- a/drivers/thermal/samsung/Kconfig
-+++ b/drivers/thermal/samsung/Kconfig
-@@ -5,7 +5,7 @@ config EXYNOS_THERMAL
- 	depends on HAS_IOMEM
- 	help
- 	  If you say yes here you get support for the TMU (Thermal Management
--	  Unit) driver for SAMSUNG EXYNOS series of SoCs. This driver initialises
-+	  Unit) driver for Samsung Exynos series of SoCs. This driver initialises
- 	  the TMU, reports temperature and handles cooling action if defined.
- 	  This driver uses the Exynos core thermal APIs and TMU configuration
- 	  data from the supported SoCs.
-diff --git a/drivers/thermal/samsung/exynos_tmu.c b/drivers/thermal/samsung/exynos_tmu.c
-index 8193b66a3f83..fd4a17812f33 100644
---- a/drivers/thermal/samsung/exynos_tmu.c
-+++ b/drivers/thermal/samsung/exynos_tmu.c
-@@ -1,6 +1,6 @@
- // SPDX-License-Identifier: GPL-2.0-or-later
- /*
-- * exynos_tmu.c - Samsung EXYNOS TMU (Thermal Management Unit)
-+ * exynos_tmu.c - Samsung Exynos TMU (Thermal Management Unit)
-  *
-  *  Copyright (C) 2014 Samsung Electronics
-  *  Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>
-@@ -1186,7 +1186,7 @@ static struct platform_driver exynos_tmu_driver = {
- 
- module_platform_driver(exynos_tmu_driver);
- 
--MODULE_DESCRIPTION("EXYNOS TMU Driver");
-+MODULE_DESCRIPTION("Exynos TMU Driver");
- MODULE_AUTHOR("Donggeun Kim <dg77.kim@samsung.com>");
- MODULE_LICENSE("GPL");
- MODULE_ALIAS("platform:exynos-tmu");
-diff --git a/include/dt-bindings/thermal/thermal_exynos.h b/include/dt-bindings/thermal/thermal_exynos.h
-index 642e4e7f4084..52fcb51dda3c 100644
---- a/include/dt-bindings/thermal/thermal_exynos.h
-+++ b/include/dt-bindings/thermal/thermal_exynos.h
-@@ -1,6 +1,6 @@
- /* SPDX-License-Identifier: GPL-2.0+ */
- /*
-- * thermal_exynos.h - Samsung EXYNOS TMU device tree definitions
-+ * thermal_exynos.h - Samsung Exynos TMU device tree definitions
-  *
-  *  Copyright (C) 2014 Samsung Electronics
-  *  Lukasz Majewski <l.majewski@samsung.com>
--- 
-2.17.1
+The Prepaid (ATM) Debit card, will be send to you through my
+Diplomatic Agent Mr. Mike Benz immediately you contact him. So contact
+my Diplomatic Agent Mr. Mike Benz immediately you receive this letter.
+Below is his contact information:
 
+NAME : MIKE BENZ
+EMAIL ADDRESS: mikebenz550@aol.com
+Text Him, (256) 284-4886
+
+Request for Delivery of the Prepaid (ATM) Debit card  to you today.
+Note, please I have paid for the whole service fees for you, so the
+only money you will send to my Diplomatic Agent Mr. Mike Benz is
+$50.00 for your prepaid (ATM) Debit card DELIVERY FEE to your address
+ok.
+Let me know once you receive this Card at your address.
+Best regards,
+Rev.Dr, George Adadar
