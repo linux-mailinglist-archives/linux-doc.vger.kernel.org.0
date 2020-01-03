@@ -2,100 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9FC7612FDA6
-	for <lists+linux-doc@lfdr.de>; Fri,  3 Jan 2020 21:20:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 88E2A12FDD2
+	for <lists+linux-doc@lfdr.de>; Fri,  3 Jan 2020 21:22:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728679AbgACUT7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 3 Jan 2020 15:19:59 -0500
-Received: from mail-qv1-f67.google.com ([209.85.219.67]:39557 "EHLO
-        mail-qv1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728407AbgACUTq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 3 Jan 2020 15:19:46 -0500
-Received: by mail-qv1-f67.google.com with SMTP id y8so16693090qvk.6
-        for <linux-doc@vger.kernel.org>; Fri, 03 Jan 2020 12:19:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=40ACnQIUnpge54Cj+EODMXbGQ2AM0yGbootCDBdgIh0=;
-        b=AWCc/ylFmQ91zZEJrbKovcmODhKduqUVkKGxHK8uCtVvWppAnjCzAVhlqtuTB6Zv3H
-         fwGfadWPG5OWx3vtouAanI9rAb4+nCSTS9ougZHH94RmFVRXusGOhSeq6LcZbXUbpYke
-         LecHuReAxOHZIAlNr0puF8IN10taJseJbu/8dZmgE65qy44VHc90CsjCbMPz9YIW56uc
-         KAocddCq9fbTe+4eLEe4ukQAx3KuF/S8Bs/5ss0PU18bAsmodPObJCziaNGvW+fW97nj
-         vqPpR6NvW2UHqccwDYrcuioTdRRCTX8F5vGOe97A6Uj5iUQG4sbm5c76feOsNIPb/J8O
-         nOKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=40ACnQIUnpge54Cj+EODMXbGQ2AM0yGbootCDBdgIh0=;
-        b=mWQVAa7zAt0e0nwp9n5yyACcoeF99n0aV9pqGoDz9yN3WG6kh8bRKNce8uUnuWURP8
-         3RE+4Y9yBiMB9wvODSbINyWDtmyVvY9oWMMxKCyItPWya1yydOTrCBJpd8t7LJmA5X7w
-         pVbbMvV2sj9orjB6pYwIwizLUcJfMf6RC+YoUk0CatOC0MwyI7Vl0UeaEVXaw2xC4PIS
-         9irPbGwNgcNSsDQ5mEK91jvRdZ3K5au9Vf5O7uVn068nVQ4dWDGP0z331VFPhB5Rz8ED
-         C1EFLG84rC6UBR3i1CyqJTjaKCkUjN67OuNjFLe4/teqj6ucmhtURnp6ofLKzJ2wnnU8
-         heLw==
-X-Gm-Message-State: APjAAAWcGKm+/ZNdaHDZZO9NBiraEpMKcxa1gr5ruj2U9GBABLWPnjY6
-        3Gx1qLdAtw2cPbPqRjPIewl6VJx2ltoSpCK4WZA=
-X-Google-Smtp-Source: APXvYqwTD0MzQRfSqMjBdpNUeZAJzfDvhrEGhXGCrMyvXGb//+N8M9ASxsqTbkQfP5NbaV7n6hKI5gEfY+hOjDS6Fyg=
-X-Received: by 2002:ad4:478b:: with SMTP id z11mr69635758qvy.185.1578082785331;
- Fri, 03 Jan 2020 12:19:45 -0800 (PST)
+        id S1727406AbgACUWL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 3 Jan 2020 15:22:11 -0500
+Received: from vps0.lunn.ch ([185.16.172.187]:46992 "EHLO vps0.lunn.ch"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727221AbgACUWL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 3 Jan 2020 15:22:11 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=lunn.ch;
+        s=20171124; h=In-Reply-To:Content-Type:MIME-Version:References:Message-ID:
+        Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+        List-Post:List-Owner:List-Archive;
+        bh=DXlmvzGIFZg8e5QLUFHILq1iokX6z7xR+KUOugOpcFk=; b=SIyeeLJQqmZ/2qTmaHrZ9qQARN
+        7X+wcB5fwelP5ttPn5BJGuir3VwzgpFIqZue/nh9qs2Dt8Q75j9PT7xgU00KPHeY1Ecb9bvnzXJEP
+        cIk5Z5fjE5AciDvMJV6H0j/qXPgwJJfED73cETIUlrAhrsUS/q3mlM9yFXGL7JidKZ7Y=;
+Received: from andrew by vps0.lunn.ch with local (Exim 4.93)
+        (envelope-from <andrew@lunn.ch>)
+        id 1inTSK-0002mu-Q5; Fri, 03 Jan 2020 21:22:00 +0100
+Date:   Fri, 3 Jan 2020 21:22:00 +0100
+From:   Andrew Lunn <andrew@lunn.ch>
+To:     Russell King <rmk+kernel@armlinux.org.uk>
+Cc:     Florian Fainelli <f.fainelli@gmail.com>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kishon Vijay Abraham I <kishon@ti.com>,
+        linux-doc@vger.kernel.org, netdev@vger.kernel.org
+Subject: Re: [PATCH net-next 1/2] net: phy: add PHY_INTERFACE_MODE_10GBASER
+Message-ID: <20200103202200.GP1397@lunn.ch>
+References: <20200103115125.GC25745@shell.armlinux.org.uk>
+ <E1inLV8-0006gD-P7@rmk-PC.armlinux.org.uk>
 MIME-Version: 1.0
-Received: by 2002:ac8:4410:0:0:0:0:0 with HTTP; Fri, 3 Jan 2020 12:19:45 -0800 (PST)
-From:   "Rev.Dr Emmanuel Okoye CEO Ecobank-benin" 
-        <westernunion.benin982@gmail.com>
-Date:   Fri, 3 Jan 2020 21:19:45 +0100
-Message-ID: <CAP=nHBKxfmbdRg7q4-1jdSUL6+zok9agasMSrXV5CsEJEmZz3A@mail.gmail.com>
-Subject: I promise you must be happy today, God has uplifted you and your
- family ok
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <E1inLV8-0006gD-P7@rmk-PC.armlinux.org.uk>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear Friend
+On Fri, Jan 03, 2020 at 11:52:22AM +0000, Russell King wrote:
+> Recent discussion has revealed that the use of PHY_INTERFACE_MODE_10GKR
+> is incorrect. Add a 10GBASE-R definition, document both the -R and -KR
+> versions, and the fact that 10GKR was used incorrectly.
+> 
+> Signed-off-by: Russell King <rmk+kernel@armlinux.org.uk>
 
-i hope all is well with you,if so, glory be to God almighty. I'm very
-happy to inform you, about my success in getting payment funds under
-the cooperation of a new partner from United States of
-America.Presently I am in uk for investment projects with my own share
-of the total sum. I didn't forget your past efforts. IMF finally
-approved your compensation payment funds this morning by prepaid (ATM)
-Debit card of US$12,500.000.00Million Dollars, Since you not received
-this payment yet, I was not certified
-but it is not your fault and not my fault, I hold nothing against
-you.than bank official whom has been detaining the transfer in the
-bank, trying to claim your funds by themselves.
+Reviewed-by: Andrew Lunn <andrew@lunn.ch>
 
-Therefore, in appreciation of your effort I have raised an
-International prepaid (ATM) Debit card of US$12,500.000.00 in your
-favor as compensation to you.
-
-Now, i want you to contact my Diplomatic Agent, His name is Mike Benz
-on His  e-mail Address (mikebenz550@aol.com
-
-ask Him to send the Prepaid (ATM) Debit card to you. Bear in mind that
-the money is in Prepaid (ATM) Debit card, not cash, so you need to
-send to him,
-your full name
-address  where the prepaid (ATM) Debit card will be delivered to you,
-including your cell phone number. Finally, I left explicit
-instructions with him, on how to send the (ATM CARD) to you.
-
-The Prepaid (ATM) Debit card, will be send to you through my
-Diplomatic Agent Mr. Mike Benz immediately you contact him. So contact
-my Diplomatic Agent Mr. Mike Benz immediately you receive this letter.
-Below is his contact information:
-
-NAME : MIKE BENZ
-EMAIL ADDRESS: mikebenz550@aol.com
-Text Him, (256) 284-4886
-
-Request for Delivery of the Prepaid (ATM) Debit card  to you today.
-Note, please I have paid for the whole service fees for you, so the
-only money you will send to my Diplomatic Agent Mr. Mike Benz is
-$50.00 for your prepaid (ATM) Debit card DELIVERY FEE to your address
-ok.
-Let me know once you receive this Card at your address.
-Best regards,
-Rev.Dr, George Adadar
+    Andrew
