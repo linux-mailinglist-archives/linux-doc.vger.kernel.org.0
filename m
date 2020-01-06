@@ -2,121 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A987E131817
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2020 20:02:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E1A2913189D
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2020 20:20:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726657AbgAFTC3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Jan 2020 14:02:29 -0500
-Received: from mail-wm1-f68.google.com ([209.85.128.68]:37373 "EHLO
-        mail-wm1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726569AbgAFTC3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jan 2020 14:02:29 -0500
-Received: by mail-wm1-f68.google.com with SMTP id f129so16460132wmf.2;
-        Mon, 06 Jan 2020 11:02:28 -0800 (PST)
+        id S1726937AbgAFTTr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Jan 2020 14:19:47 -0500
+Received: from mail-wr1-f68.google.com ([209.85.221.68]:44145 "EHLO
+        mail-wr1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726569AbgAFTTM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jan 2020 14:19:12 -0500
+Received: by mail-wr1-f68.google.com with SMTP id q10so12029939wrm.11;
+        Mon, 06 Jan 2020 11:19:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to;
-        bh=FSOZYLdeJYzx9HNM/eHVZQqHNGetz8F34rLJogrEMmw=;
-        b=VchTfkRHWQ15fzvFurpwbHnQJzO4ovSRNlVvcBm7mlyYHD4J5jQMMP8zwzys7HmgBS
-         FtDIhNzXVJ+U6rTOTnTv8Zdc5vP7a+myYVzERvb0l6+5dOx2r3J4SPaaIcKh0mcT/A9x
-         QmlIe/Y5jlGBSFYYf4xVP4fWAJDAfnlhMRpcfsVnnxQb9DKVfLb5yn532WO4J36Nfb4j
-         oWsCoVSDmdhT/w20U6HZb9v56w0Az6ny2n6RgnZrV6TFdp/K1ip0fq5l4U0Jp2xYxJVq
-         VTmjMt/PcPSqvLlGtMkXyDM36G0xhe+t13ueF9k9hxmMKGNl74JOVLIzLolx9TAEWEay
-         WnqQ==
+        h=from:to:cc:subject:date:message-id;
+        bh=A27WQZOEbgSzITJcY4rI27WoWfYXi0S0dPxyuFu6MSY=;
+        b=oputHxGnw1oGn3BatQlgSJmMMlzHK/XNNzFFStKqT0RbR4G7fEJieEg9fHeD/4P1Ji
+         tRezg3ma4TOTbq6DSvbL9NLT8w85FhHBXiEmT3nmulD1HIysGxbrfV+oLrnY3ji0zJ4o
+         lN7+xpc7+6Rj9ly9t2MgExZqFsBOW9dfhP3OfS+5rrj93SuRjqGsw0op/2sLFgY40mMk
+         WrWkAieTchgq5C8zMFVVLn27QpopjItt/3ozKfkv5HmI05RYajEnaJCAROWP1lNKpnUn
+         OKxTCzGF6Q6CyOoEeqyaVBvrEux/DTECgN1QeBUKa/dkL5DPyjN30H8vmTnEv1Of/GrW
+         URXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to;
-        bh=FSOZYLdeJYzx9HNM/eHVZQqHNGetz8F34rLJogrEMmw=;
-        b=ZpSA181m4f71lWjt7ExhftMR3mIwIca5PDzp9KqP84nnn87jdHtX6yblqU2a859IBI
-         bxa1nBmeu87ZboI1W7zPJ7tr4MvCfOGCD35LV5wT0KrLGkbf7kmzYZLOgVSLCXWkqtFn
-         BNc0Q2LaGPXUAA9mSAViE21l440vJJZFWOgSfnNyPULvAyoz7C2WP6Xu9Wf6pvsmrWcc
-         ClF1Eu9gRUTcRd57FRingd957ya9USbavmGFVGNJ2QLjx7z91ID+GbwdwxbokDbLGKpr
-         /JTGpBtQmBcROkVokU4UQCx2rBByFLDPJbXdPuv7749rABgk3aUnpRuU3AXHy7DUFjmT
-         DZqQ==
-X-Gm-Message-State: APjAAAVUl6kK5qK6cpAOkT6hJq1yhL25Fe4vpr2ru/ITfKweHkHVpNkZ
-        toqtt5J/HpdHlgX2kjHZK5M=
-X-Google-Smtp-Source: APXvYqzbzGbTexFibdeXL8cwzeV1stJTTJXd0fQh4ROjZbmZL+vfTazuUNacYc+Cnk//gudO8csTDw==
-X-Received: by 2002:a7b:c946:: with SMTP id i6mr35278830wml.28.1578337347235;
-        Mon, 06 Jan 2020 11:02:27 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=A27WQZOEbgSzITJcY4rI27WoWfYXi0S0dPxyuFu6MSY=;
+        b=G8P6iXDLt1YEX4n1cqqQXRw1YxThF6716IW90t01Vo3kb+H1eErkasYVKmXrT1g+le
+         XwvoHcfBsqM5bkxM0mDYIqqlMZ5ETkaqCrz6XTGlLq06dHAis6FOBh4KKzgUiXX2OUxB
+         gRQDptPVFB7LvAJsjIq7rtFY1dUeJmW4YGwJTHOlYHPjDN6G6vS+IyXbRcPj8b5H/ds+
+         txSGxDglO+UeT0d1MJiI8e/Ee3OEjTVx4I4QF0lQTJuhI2yq5M+4UgLc5jcv/WxP30qN
+         uzuW1p1bPGswfQgDG598Fd/+tNxIQ2OGnPQbG4fr3JU9SomzSzWKSVLoAFgguPQId8JX
+         /J/A==
+X-Gm-Message-State: APjAAAUKRh4E2greAEaD5zUTQVhCUR7sWoSf5ll1vxDyS2mDuvh0xV8f
+        QBNocnHpH5QWkxhvqIMKIGc=
+X-Google-Smtp-Source: APXvYqxZ+TmUFdkPrK14zayrozuKucwL/kzOUHuSKHDxBzEG3aS32lnpkMzzUiTMQ2jgW0Wq01r66A==
+X-Received: by 2002:adf:ef8b:: with SMTP id d11mr100976013wro.45.1578338350359;
+        Mon, 06 Jan 2020 11:19:10 -0800 (PST)
 Received: from localhost.localdomain ([2a02:2450:10d2:194d:74f9:b588:decc:794d])
-        by smtp.gmail.com with ESMTPSA id n16sm73565486wro.88.2020.01.06.11.02.25
+        by smtp.gmail.com with ESMTPSA id o4sm72041756wrx.25.2020.01.06.11.19.09
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Jan 2020 11:02:26 -0800 (PST)
+        Mon, 06 Jan 2020 11:19:09 -0800 (PST)
 From:   SeongJae Park <sj38.park@gmail.com>
-To:     "Paul E. McKenney" <paulmck@kernel.org>
-Cc:     madhuparnabhowmik04@gmail.com, sj38.park@gmail.com,
-        joel@joelfernandes.or, frextrite@gmail.com, corbet@lwn.net,
-        rcu@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, SeongJae Park <sjpark@amazon.de>
-Subject: Re: Re: [PATCH 6/7] doc/RCU/rcu: Use https instead of http if possible
-Date:   Mon,  6 Jan 2020 20:02:12 +0100
-Message-Id: <20200106190212.20255-1-sj38.park@gmail.com>
+X-Google-Original-From: SeongJae Park <sjpark@amazon.de>
+To:     paulmck@kernel.org
+Cc:     corbet@lwn.net, rcu@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, madhuparnabhowmik04@gmail.com,
+        sj38.park@gmail.com, SeongJae Park <sjpark@amazon.de>
+Subject: [PATCH v2 0/7] Fix trivial nits in RCU docs
+Date:   Mon,  6 Jan 2020 20:18:45 +0100
+Message-Id: <20200106191852.22973-1-sjpark@amazon.de>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200106183543.GN13449@paulmck-ThinkPad-P72> (raw)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 6 Jan 2020 10:35:43 -0800 "Paul E. McKenney" <paulmck@kernel.org> wrote:
+This patchset fixes trivial nits in the RCU documentations.
 
-> On Mon, Jan 06, 2020 at 06:59:51PM +0530, madhuparnabhowmik04@gmail.com wrote:
-> > From: sj38.park@gmail.com
-> > 
-> > From: SeongJae Park <sjpark@amazon.de>
-> > 
-> > Signed-off-by: SeongJae Park <sjpark@amazon.de>
-> > 
-> > Hi SeongJae,
-> > 
-> > The patch looks fine, but I am not sure if this change is required.
-> > What do you think Paul?
-> 
-> Thank you, Madhuparna!  This change might not be absolutely required,
-> but it is a good change.
+It is based on the latest dev branch of Paul's linux-rcu git repository.
+The Complete git tree is also available at
+https://github.com/sjp38/linux/tree/patches/rcu/docs/2019-12-31/v2.
 
-Sorry for late reply, Madhuparna.  I made this patch because I seen a commit
-converting http urls to https url for a document.  However, I couldn't find the
-commit again.  Maybe my confusion.  So, please drop this if you have any doubt,
-Paul.
+Changes from v1
+(https://lore.kernel.org/linux-doc/20191231151549.12797-1-sjpark@amazon.de/)
 
-> 
-> SeongJae, could you please include Madhuparna's pair of Reviewed-by
-> tags and also make your email address consistent in your next posting?
-> You currently have both sj38.park@gmail.com and sjpark@amazon.de.
-> Either is fine.  ;-)
+ - Add 'Reviewed-by' from Madhuparna
+ - Fix wrong author email address
+ - Rebased on latest dev branch of Paul's linux-rcu git repository.
 
-Yes, of course, and sorry for the mistake.  I will use sjpark@amazon.de for
-this patchset.  Will send the second version soon.
+SeongJae Park (7):
+  doc/RCU/Design: Remove remaining HTML tags in ReST files
+  doc/RCU/listRCU: Fix typos in a example code snippets
+  doc/RCU/listRCU: Update example function name
+  doc/RCU/rcu: Use ':ref:' for links to other docs
+  doc/RCU/rcu: Use absolute paths for non-rst files
+  doc/RCU/rcu: Use https instead of http if possible
+  rcu: Fix typos in beginning comments
 
+ .../Tree-RCU-Memory-Ordering.rst               |  8 ++++----
+ Documentation/RCU/listRCU.rst                  | 10 +++++-----
+ Documentation/RCU/rcu.rst                      | 18 +++++++++---------
+ kernel/rcu/srcutree.c                          |  2 +-
+ kernel/rcu/tree.c                              |  4 ++--
+ 5 files changed, 21 insertions(+), 21 deletions(-)
 
-Thanks,
-SeongJae Park
+-- 
+2.17.1
 
-> 
-> 							Thanx, Paul
-> 
-> > Thanks,
-> > Madhuparna
-> > 
-> > ---
-> >  Documentation/RCU/rcu.rst | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/Documentation/RCU/rcu.rst b/Documentation/RCU/rcu.rst
-> > index 2a830c51477e..0e03c6ef3147 100644
-> > --- a/Documentation/RCU/rcu.rst
-> > +++ b/Documentation/RCU/rcu.rst
-> > @@ -79,7 +79,7 @@ Frequently Asked Questions
-> >    Of these, one was allowed to lapse by the assignee, and the
-> >    others have been contributed to the Linux kernel under GPL.
-> >    There are now also LGPL implementations of user-level RCU
-> > -  available (http://liburcu.org/).
-> > +  available (https://liburcu.org/).
-> >  
-> >  - I hear that RCU needs work in order to support realtime kernels?
-> >  
-> > -- 
-> > 2.17.1
-> > 
-> > 
