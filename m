@@ -2,102 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 194A2131899
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2020 20:20:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 583941318DE
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2020 20:44:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727139AbgAFTTc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Jan 2020 14:19:32 -0500
-Received: from mail-wr1-f66.google.com ([209.85.221.66]:39147 "EHLO
-        mail-wr1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727035AbgAFTTU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jan 2020 14:19:20 -0500
-Received: by mail-wr1-f66.google.com with SMTP id y11so50971484wrt.6;
-        Mon, 06 Jan 2020 11:19:18 -0800 (PST)
+        id S1726569AbgAFTnn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Jan 2020 14:43:43 -0500
+Received: from mail-wr1-f68.google.com ([209.85.221.68]:42178 "EHLO
+        mail-wr1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726734AbgAFTnn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jan 2020 14:43:43 -0500
+Received: by mail-wr1-f68.google.com with SMTP id q6so50981628wro.9;
+        Mon, 06 Jan 2020 11:43:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=vGg3ZTA0AdAyTlCUXvBOcxXYMS9l69TXZtzSDH3ov8s=;
-        b=XeOWgz299BHP2DP1j1E1lK2HGTUOUZ94xHwxWj1f8/4DEmDtRvuHel4fljRhCdDwjO
-         MV4Qf39yQ1Ku791UG4WyFHN9TN0IMVlDWvVGozIFe8SL0QGEffsK5iKWP1qDuWkF5v0q
-         SJlED1oWHLiNmpYP8DWJ7+52XW3RA5nAMKBRAvGdRAnjELMXA2olTrMgscE2zAI4mk+G
-         +aZfXlvS8tiJEiIjs4v/OWS66OjG8KHXovBajwf7xUyKsmmOzu2VWOCP8XwTOIaPU0UI
-         I1/0IS6lLBeHrKnHnNWDLj5FIqvfarAmHbYSoYOkJXicNvfYBH+AryuPMatDlAGWFReX
-         7nRQ==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :in-reply-to;
+        bh=3agK+krrH1Z+I8WdgHEmrcnhNd69YzO2FgoakpXdIM4=;
+        b=QFluuYObY7vGlnLLw3uduf9rETAML7enawTk8MKTszjUcfg1qD3RwXhKMjcocQsex0
+         +VtDbBsDL5C0ihjYtZlqurqwQXCc8SdmvcJzv1ZO719VrQKb6jyuOK06WFtNNBK+tL8x
+         wneirxeq5LUUJs+96/BbRurp/9RJoM1GgkZl25JPxkW9sge99uHeWkiuby6JbpRjPPKw
+         eHuTpKv6aqTmmKZfH3Zrzq7I5g6zAZeArxEU5zDtpsbreH7ijxzOI9hsaXv3pGFz3rYo
+         tyJEF9Q2enbO4+gT6z501AMy6OL270tIq+JXyWtpprX7gGrGqtUMz8hAERCiJKXx0m3V
+         Skrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=vGg3ZTA0AdAyTlCUXvBOcxXYMS9l69TXZtzSDH3ov8s=;
-        b=tGaHm+C+hLSXQXDVJisk8DEdXNuPmUlggyp6mmGjzl42VArG3K81SZMMhWUdE5WHFN
-         qAWITCX0bcgP9V1ydIohaH2lyLTd/PhPakzHBaHKlgY2hnE/Pm0IB07NM0K8SreSQFWo
-         k3j28/INTx9KGkIvSplaS3NmxLBU0xVZvtzarhaXYmnp/SK+OIO/r1AdEntc/Qt5jL51
-         +iRXC+JXcsbt6YtkyMqHAr5FnT4VWLhGzMi8jOk2eSuC0RIAVn3kyjCOYwi0b9HWfyla
-         /u3zgg0QJyCo1vHM305cZ8Y2dbrSRSKi4oNtU4JlMM4yoeqLgU4tRrXhEY+O0fdR2xOj
-         xtEQ==
-X-Gm-Message-State: APjAAAWGg1tJH8z0IciBu9zGPdttmwhSpG18KOoOGOxc1isRvpGGpOU/
-        TWjhOWYHWFYFO1u5YzUHTdk=
-X-Google-Smtp-Source: APXvYqxMwRG0fTMpNevLwHNROx4q6sdNJBT+nqdNCYxHybddDiXql6Di+T/nCRGJUlV/Ltj8IM99jw==
-X-Received: by 2002:adf:f288:: with SMTP id k8mr110922459wro.301.1578338358105;
-        Mon, 06 Jan 2020 11:19:18 -0800 (PST)
+         :references:in-reply-to;
+        bh=3agK+krrH1Z+I8WdgHEmrcnhNd69YzO2FgoakpXdIM4=;
+        b=V98fP40lLt1OVVFt6oAi3L02Q/Saby87cgJLpHC6OSUO2MJpIH5tYNLHci0vHJx2fe
+         iE88V2lBgUv1FT13jHEvmgb3/A4C3l6jMNyWSzQQL2ljS+REFLPd4AGCA/CqM6M9emFv
+         HZ0v5SHKoORwxlGdC19FFhU5Yv77JERVg68cDxdENVfqqlD27oBGWeu1Je6OWLwhMyn6
+         Wcx7WzZk3PxoCst0jDFON1nohWVvcYK61RN+BN4EJYbnOUMFVPQIjp0S90H63c1Rng1c
+         1R8mXzZdh+Jo+YiwIXDa//sVTDYW9isUVp3Pi2GUby2PwfHoPIWPSHFr4rySiiEcpruV
+         2MHQ==
+X-Gm-Message-State: APjAAAU2QRu2Vw3zx+cfTNU8pc+eSIkWHCuHP1hM8xRX5EJ+zd+DD6Gs
+        xSbtPb+TFJY7CwpBnh+lEUI=
+X-Google-Smtp-Source: APXvYqxErxW1fHoZLV5x7CfY7Q600YRv+7IqD60lqlLPsRZpbDgjSbDF3Tadf3HpSDFeZ00pvqNTsQ==
+X-Received: by 2002:adf:f20b:: with SMTP id p11mr101664797wro.195.1578339821034;
+        Mon, 06 Jan 2020 11:43:41 -0800 (PST)
 Received: from localhost.localdomain ([2a02:2450:10d2:194d:74f9:b588:decc:794d])
-        by smtp.gmail.com with ESMTPSA id o4sm72041756wrx.25.2020.01.06.11.19.17
+        by smtp.gmail.com with ESMTPSA id q14sm4035075wmj.14.2020.01.06.11.43.40
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Jan 2020 11:19:17 -0800 (PST)
+        Mon, 06 Jan 2020 11:43:40 -0800 (PST)
 From:   SeongJae Park <sj38.park@gmail.com>
-X-Google-Original-From: SeongJae Park <sjpark@amazon.de>
-To:     paulmck@kernel.org
-Cc:     corbet@lwn.net, rcu@vger.kernel.org, linux-doc@vger.kernel.org,
+To:     sj38.park@gmail.com
+Cc:     corbet@lwn.net, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, madhuparnabhowmik04@gmail.com,
-        sj38.park@gmail.com, SeongJae Park <sjpark@amazon.de>
-Subject: [PATCH v2 7/7] rcu: Fix typos in beginning comments
-Date:   Mon,  6 Jan 2020 20:18:52 +0100
-Message-Id: <20200106191852.22973-8-sjpark@amazon.de>
+        paulmck@kernel.org, rcu@vger.kernel.org, sjpark@amazon.de
+Subject: Re: [PATCH v2 0/7] Fix trivial nits in RCU docs
+Date:   Mon,  6 Jan 2020 20:43:30 +0100
+Message-Id: <20200106194330.24687-1-sj38.park@gmail.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200106191852.22973-1-sjpark@amazon.de>
 References: <20200106191852.22973-1-sjpark@amazon.de>
+In-Reply-To: <20200106191852.22973-1-sjpark@amazon.de>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- kernel/rcu/srcutree.c | 2 +-
- kernel/rcu/tree.c     | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
+Author email (sjpark@amazon.de) is not applied to this patch set mails...
+Maybe my git send-email setting is somewhere broken.  Sorry, I will correct
+this and send v3 soon.
 
-diff --git a/kernel/rcu/srcutree.c b/kernel/rcu/srcutree.c
-index 3c4e6441bbf9..0b561480e6c4 100644
---- a/kernel/rcu/srcutree.c
-+++ b/kernel/rcu/srcutree.c
-@@ -5,7 +5,7 @@
-  * Copyright (C) IBM Corporation, 2006
-  * Copyright (C) Fujitsu, 2012
-  *
-- * Author: Paul McKenney <paulmck@linux.ibm.com>
-+ * Authors: Paul McKenney <paulmck@linux.ibm.com>
-  *	   Lai Jiangshan <laijs@cn.fujitsu.com>
-  *
-  * For detailed explanation of Read-Copy Update mechanism see -
-diff --git a/kernel/rcu/tree.c b/kernel/rcu/tree.c
-index 982c7b48cd9b..8367fc080801 100644
---- a/kernel/rcu/tree.c
-+++ b/kernel/rcu/tree.c
-@@ -1,12 +1,12 @@
- // SPDX-License-Identifier: GPL-2.0+
- /*
-- * Read-Copy Update mechanism for mutual exclusion
-+ * Read-Copy Update mechanism for mutual exclusion (tree-based version)
-  *
-  * Copyright IBM Corporation, 2008
-  *
-  * Authors: Dipankar Sarma <dipankar@in.ibm.com>
-  *	    Manfred Spraul <manfred@colorfullife.com>
-- *	    Paul E. McKenney <paulmck@linux.ibm.com> Hierarchical version
-+ *	    Paul E. McKenney <paulmck@linux.ibm.com>
-  *
-  * Based on the original work by Paul McKenney <paulmck@linux.ibm.com>
-  * and inputs from Rusty Russell, Andrea Arcangeli and Andi Kleen.
--- 
-2.17.1
 
+Thanks,
+SeongJae Park
+
+On   Mon,  6 Jan 2020 20:18:45 +0100   SeongJae Park <sj38.park@gmail.com> wrote:
+
+> This patchset fixes trivial nits in the RCU documentations.
+> 
+> It is based on the latest dev branch of Paul's linux-rcu git repository.
+> The Complete git tree is also available at
+> https://github.com/sjp38/linux/tree/patches/rcu/docs/2019-12-31/v2.
+> 
+> Changes from v1
+> (https://lore.kernel.org/linux-doc/20191231151549.12797-1-sjpark@amazon.de/)
+> 
+>  - Add 'Reviewed-by' from Madhuparna
+>  - Fix wrong author email address
+>  - Rebased on latest dev branch of Paul's linux-rcu git repository.
+> 
+> SeongJae Park (7):
+>   doc/RCU/Design: Remove remaining HTML tags in ReST files
+>   doc/RCU/listRCU: Fix typos in a example code snippets
+>   doc/RCU/listRCU: Update example function name
+>   doc/RCU/rcu: Use ':ref:' for links to other docs
+>   doc/RCU/rcu: Use absolute paths for non-rst files
+>   doc/RCU/rcu: Use https instead of http if possible
+>   rcu: Fix typos in beginning comments
+> 
+>  .../Tree-RCU-Memory-Ordering.rst               |  8 ++++----
+>  Documentation/RCU/listRCU.rst                  | 10 +++++-----
+>  Documentation/RCU/rcu.rst                      | 18 +++++++++---------
+>  kernel/rcu/srcutree.c                          |  2 +-
+>  kernel/rcu/tree.c                              |  4 ++--
+>  5 files changed, 21 insertions(+), 21 deletions(-)
+> 
+> -- 
+> 2.17.1
+> 
