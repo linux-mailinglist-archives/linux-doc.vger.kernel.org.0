@@ -2,112 +2,170 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A90A3131A8D
-	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2020 22:35:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E4FFA131B60
+	for <lists+linux-doc@lfdr.de>; Mon,  6 Jan 2020 23:29:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726830AbgAFVfI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 6 Jan 2020 16:35:08 -0500
-Received: from mail-pg1-f196.google.com ([209.85.215.196]:44558 "EHLO
-        mail-pg1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726731AbgAFVfH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jan 2020 16:35:07 -0500
-Received: by mail-pg1-f196.google.com with SMTP id x7so27439383pgl.11;
-        Mon, 06 Jan 2020 13:35:07 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=m5JbUZHGVS7KhF/eteOGbVRmf/p5dDdWHItMOmdV+PY=;
-        b=KXEBFPr7uLQ4erGLtuIgSp+jERI4sICam+LtekOisclwM/7Qx2N3YufOUEUvR5OLLO
-         XdTzdU8wj6aTXkVgZQghUWNKX8HHrujLuUn7U/6QdzzfigQDunDmhBZPk7pTbg4HAn09
-         8ux3h6/ue1ptdVg7cPXq2UwMXsxX3J3i0cCAbZXn4HTwJig05+Ff2b8/ARSw65Au3Z4c
-         WDfXSfvuEh9BNLMKuAY1hTMyoLvov63knvGkpmFO2OaYyzPQivH3SevLolpROMrsxRba
-         mpsaWA5DwVT6nUFBEWYEFJ7GnNTFP0nIBGlGku150zrhA4iZjYHmjachj/FdlaSVvnle
-         omPg==
-X-Gm-Message-State: APjAAAUaDyzvedV6CbNNLujbyp3HLCfwfxN1tinkfl0NdZXKzsJpBi6I
-        DUjEMlCNofyeOBCdPVIJ0v8=
-X-Google-Smtp-Source: APXvYqw182QJjFmapUgFthZkzGtp0VoNIvjQLkmo3FZplcl6V6fewGd0Km+oD9FveLcEgGfjcf+wSw==
-X-Received: by 2002:a62:486:: with SMTP id 128mr111783695pfe.236.1578346506948;
-        Mon, 06 Jan 2020 13:35:06 -0800 (PST)
-Received: from 42.do-not-panic.com (42.do-not-panic.com. [157.230.128.187])
-        by smtp.gmail.com with ESMTPSA id g22sm74464874pgk.85.2020.01.06.13.35.05
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 06 Jan 2020 13:35:05 -0800 (PST)
-Received: by 42.do-not-panic.com (Postfix, from userid 1000)
-        id 2F19740321; Mon,  6 Jan 2020 21:35:05 +0000 (UTC)
-Date:   Mon, 6 Jan 2020 21:35:05 +0000
-From:   Luis Chamberlain <mcgrof@kernel.org>
-To:     Ard Biesheuvel <ard.biesheuvel@linaro.org>
-Cc:     Hans de Goede <hdegoede@redhat.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Darren Hart <dvhart@infradead.org>,
-        Andy Shevchenko <andy@infradead.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Borislav Petkov <bp@alien8.de>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        Peter Jones <pjones@redhat.com>,
-        Dave Olsthoorn <dave@bewaar.me>,
-        the arch/x86 maintainers <x86@kernel.org>,
-        platform-driver-x86@vger.kernel.org,
-        linux-efi <linux-efi@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-input@vger.kernel.org
-Subject: Re: [PATCH v10 00/10] efi/firmware/platform-x86: Add EFI embedded fw
- support
-Message-ID: <20200106213505.GW11244@42.do-not-panic.com>
-References: <20191210115117.303935-1-hdegoede@redhat.com>
- <66f45932-756d-0bb0-d7a8-330d61785663@redhat.com>
- <CAKv+Gu_X+UM95MJJMjT69upL9zN3H9BnUkv8s9TjcpevANbYEw@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAKv+Gu_X+UM95MJJMjT69upL9zN3H9BnUkv8s9TjcpevANbYEw@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        id S1727222AbgAFW3Q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 6 Jan 2020 17:29:16 -0500
+Received: from userp2130.oracle.com ([156.151.31.86]:58854 "EHLO
+        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726721AbgAFW3Q (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 6 Jan 2020 17:29:16 -0500
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+        by userp2130.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 006MJDHS051697;
+        Mon, 6 Jan 2020 22:28:53 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id; s=corp-2019-08-05;
+ bh=U9cMW9SZLbBtmgqabstWfkfHdgUKUAYyt+h4V5ncAvQ=;
+ b=a5yOabC1OjGsCQHU0M1Ei2XDW7eFH5WoVpsBDSE0D0ZYz728luo518She+P86nOrz4II
+ 8rWYUGL80l16p+cURHDmuzDf9G8Lj7nY5JU11ECoFlhfMYvSxj+5zNsiZBs6Ua1D7QMP
+ Zs4gxuSFXKQQ3SmRR+OfchNtLIz/mQhxcOGjQ7jhILDWLWGTpeu+CWgwoXe85MEtA2U9
+ OLpU2zisL34rIO2HfRnQJs/vC/WhBQOWIkwLTLaQqxQIopN0VnT11J5VpX2fRVePmyeX
+ BYyX930yf2THD7T7ylWqi3zUOvcmBNvqJb3rTFwgHXo0+lplJqvMSmjRW2NYkHwornGY Ew== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+        by userp2130.oracle.com with ESMTP id 2xaj4tt4xs-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 06 Jan 2020 22:28:53 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+        by userp3030.oracle.com (8.16.0.27/8.16.0.27) with SMTP id 006MJNbQ182897;
+        Mon, 6 Jan 2020 22:28:53 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+        by userp3030.oracle.com with ESMTP id 2xb467jcne-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 06 Jan 2020 22:28:53 +0000
+Received: from abhmp0010.oracle.com (abhmp0010.oracle.com [141.146.116.16])
+        by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 006MSlBn028806;
+        Mon, 6 Jan 2020 22:28:47 GMT
+Received: from dhcp-10-175-162-40.vpn.oracle.com (/10.175.162.40)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Mon, 06 Jan 2020 14:28:46 -0800
+From:   Alan Maguire <alan.maguire@oracle.com>
+To:     shuah@kernel.org, brendanhiggins@google.com,
+        linux-kselftest@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, kunit-dev@googlegroups.com,
+        keescook@chromium.org, yzaikin@google.com,
+        akpm@linux-foundation.org, yamada.masahiro@socionext.com,
+        catalin.marinas@arm.com, joe.lawrence@redhat.com,
+        penguin-kernel@i-love.sakura.ne.jp, urezki@gmail.com,
+        andriy.shevchenko@linux.intel.com, corbet@lwn.net,
+        davidgow@google.com, adilger.kernel@dilger.ca, tytso@mit.edu,
+        mcgrof@kernel.org, linux-doc@vger.kernel.org,
+        Alan Maguire <alan.maguire@oracle.com>
+Subject: [RESEND PATCH v7 linux-kselftest-test 0/6] kunit: support building core/tests as modules
+Date:   Mon,  6 Jan 2020 22:28:17 +0000
+Message-Id: <1578349703-15650-1-git-send-email-alan.maguire@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9492 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=3 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-1911140001 definitions=main-2001060185
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9492 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 malwarescore=0
+ suspectscore=3 phishscore=0 bulkscore=0 spamscore=0 clxscore=1015
+ lowpriorityscore=0 mlxscore=0 impostorscore=0 mlxlogscore=999 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.0.1-1911140001
+ definitions=main-2001060185
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jan 03, 2020 at 12:36:04PM +0100, Ard Biesheuvel wrote:
-> On Fri, 3 Jan 2020 at 12:27, Hans de Goede <hdegoede@redhat.com> wrote:
-> >
-> > Hi All,
-> >
-> > Since I send this out, efi-next has seen some changes causing the first
-> > 2 patches to no longer cleanly apply. So it looks like we need to
-> > merge this one bit at a time with immutable branches.
-> >
-> > Ard, the first 2 patches in this series should be merged through your
-> > efi tree. AFAIK everyone is happy with them in their current state
-> > so they are ready for merging. Can you create an immutable branch
-> > with these 2 patches and merge that into your efi-next branch?
-> >
-> > Note if you do the immutable branch on 5.5-rc1 + just these 2 patches,
-> > there will be a conflict when you merge this into efi-next, but it is
-> > trivial to resolve.
-> >
-> 
-> I will need to defer to Ingo here, as he usually applies the EFI
-> changes piecemeal rather than merging my branches directly.
-> 
-> I'd be fine with just annotating the conflict in the pull request if
-> it is trivial, though, but it is really up to Luis and Ingo to align
-> here.
+The current kunit execution model is to provide base kunit functionality
+and tests built-in to the kernel.  The aim of this series is to allow
+building kunit itself and tests as modules.  This in turn allows a
+simple form of selective execution; load the module you wish to test.
+In doing so, kunit itself (if also built as a module) will be loaded as
+an implicit dependency.
 
-I don't have a tree, and firmware goes Greg's driver core tree so
-actually its up to Greg and Ingo on how this gets merged. But it seems
-you just have one issue to fix:
+Because this requires a core API modification - if a module delivers
+multiple suites, they must be declared with the kunit_test_suites()
+macro - we're proposing this patch set as a candidate to be applied to the
+test tree before too many kunit consumers appear.  We attempt to deal
+with existing consumers in patch 3.
 
-[PATCH v10 05/10] test_firmware: add support for firmware_request_platform
+Changes since v6:
+ - reintroduce kunit_test_suite() definition to handle users in other trees
+   not yet converted to using kunit_test_suites() (kbuild error when
+   applying patches to ext4/dev tree)
+ - modify drivers/base/power/qos-test.c to use kunit_test_suites()
+   to register suite.  We do not convert it to support module build now as
+   the suite uses a few unexported function; see patch 3 for details.
+   
+Changes since v5:
+ - fixed fs/ext4/Makefile to remove unneeded conditional compilation
+   (Iurii, patch 3)
+ - added Reviewed-by, Acked-by to patches 3, 4, 5 and 6
 
-There is a few set of empty lines added and I had one comment on the
-release of the firmware.
+Changes since v4:
+ - fixed signoff chain to use Co-developed-by: prior to Knut's signoff
+   (Stephen, all patches)
+ - added Reviewed-by, Tested-by for patches 1, 2, 4 and 6
+ - updated comment describing try-catch-impl.h (Stephen, patch 2)
+ - fixed MODULE_LICENSEs to be GPL v2 (Stephen, patches 3, 5)
+ - added __init to kunit_init() (Stephen, patch 5)
 
-Other than this, I agree this seems ready to be merged.
+Changes since v3:
+ - removed symbol lookup patch for separate submission later
+ - removed use of sysctl_hung_task_timeout_seconds (patch 4, as discussed
+   with Brendan and Stephen)
+ - disabled build of string-stream-test when CONFIG_KUNIT_TEST=m; this
+   is to avoid having to deal with symbol lookup issues
+ - changed string-stream-impl.h back to string-stream.h (Brendan)
+ - added module build support to new list, ext4 tests
 
-  Luis
+Changes since v2:
+ - moved string-stream.h header to lib/kunit/string-stream-impl.h (Brendan)
+   (patch 1)
+ - split out non-exported interfaces in try-catch-impl.h (Brendan)
+   (patch 2)
+ - added kunit_find_symbol() and KUNIT_INIT_SYMBOL to lookup non-exported
+   symbols (patches 3, 4)
+ - removed #ifdef MODULE around module licenses (Randy, Brendan, Andy)
+   (patch 4)
+ - replaced kunit_test_suite() with kunit_test_suites() rather than
+   supporting both (Brendan) (patch 4)
+ - lookup sysctl_hung_task_timeout_secs as kunit may be built as a module
+   and the symbol may not be available (patch 5)
+
+Alan Maguire (6):
+  kunit: move string-stream.h to lib/kunit
+  kunit: hide unexported try-catch interface in try-catch-impl.h
+  kunit: allow kunit tests to be loaded as a module
+  kunit: remove timeout dependence on sysctl_hung_task_timeout_seconds
+  kunit: allow kunit to be loaded as a module
+  kunit: update documentation to describe module-based build
+
+ Documentation/dev-tools/kunit/faq.rst              |  3 +-
+ Documentation/dev-tools/kunit/index.rst            |  3 ++
+ Documentation/dev-tools/kunit/usage.rst            | 16 ++++++++++
+ drivers/base/power/qos-test.c                      |  2 +-
+ fs/ext4/Kconfig                                    |  2 +-
+ fs/ext4/Makefile                                   |  3 +-
+ fs/ext4/inode-test.c                               |  4 ++-
+ include/kunit/assert.h                             |  3 +-
+ include/kunit/test.h                               | 37 ++++++++++++++++------
+ include/kunit/try-catch.h                          | 10 ------
+ kernel/sysctl-test.c                               |  4 ++-
+ lib/Kconfig.debug                                  |  4 +--
+ lib/kunit/Kconfig                                  |  6 ++--
+ lib/kunit/Makefile                                 | 14 +++++---
+ lib/kunit/assert.c                                 | 10 ++++++
+ lib/kunit/{example-test.c => kunit-example-test.c} |  4 ++-
+ lib/kunit/{test-test.c => kunit-test.c}            |  7 ++--
+ lib/kunit/string-stream-test.c                     |  5 +--
+ lib/kunit/string-stream.c                          |  3 +-
+ {include => lib}/kunit/string-stream.h             |  0
+ lib/kunit/test.c                                   | 25 ++++++++++++++-
+ lib/kunit/try-catch-impl.h                         | 27 ++++++++++++++++
+ lib/kunit/try-catch.c                              | 37 +++++-----------------
+ lib/list-test.c                                    |  4 ++-
+ 24 files changed, 160 insertions(+), 73 deletions(-)
+ rename lib/kunit/{example-test.c => kunit-example-test.c} (97%)
+ rename lib/kunit/{test-test.c => kunit-test.c} (98%)
+ rename {include => lib}/kunit/string-stream.h (100%)
+ create mode 100644 lib/kunit/try-catch-impl.h
+
+-- 
+1.8.3.1
+
