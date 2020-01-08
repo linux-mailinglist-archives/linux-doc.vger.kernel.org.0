@@ -2,23 +2,30 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D657913395E
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2020 04:03:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4B7EF133AC3
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jan 2020 06:17:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725908AbgAHDDy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Jan 2020 22:03:54 -0500
-Received: from mail.kernel.org ([198.145.29.99]:48446 "EHLO mail.kernel.org"
+        id S1726098AbgAHFRI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Jan 2020 00:17:08 -0500
+Received: from mail.kernel.org ([198.145.29.99]:33246 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725812AbgAHDDx (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 7 Jan 2020 22:03:53 -0500
-Received: from rorschach.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
+        id S1725774AbgAHFRI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 8 Jan 2020 00:17:08 -0500
+Received: from devnote2 (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 67FDC2075A;
-        Wed,  8 Jan 2020 03:03:51 +0000 (UTC)
-Date:   Tue, 7 Jan 2020 22:03:49 -0500
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     Masami Hiramatsu <mhiramat@kernel.org>
+        by mail.kernel.org (Postfix) with ESMTPSA id 59507205F4;
+        Wed,  8 Jan 2020 05:17:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1578460627;
+        bh=6DqBJAl2kjOCf1oC9VXFfY+JG1WsolzIxUrqFyuWY1M=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=GyMFAwTaHPKZxt3iskasGOLh42Jb2+KmmkdAcVWrXZWSmOkoo+MC/POnzZq3E0gaE
+         FD415/RWJnSfygsVWSalEB2vd+zDtB3G+Vm4kU1RLYduQ22dMQFRivgap/24WUWJ0b
+         iX/n2ETr5rKK/L2rNuXtRhrXgie64J8qNCwZOm3Q=
+Date:   Wed, 8 Jan 2020 14:17:00 +0900
+From:   Masami Hiramatsu <mhiramat@kernel.org>
+To:     Steven Rostedt <rostedt@goodmis.org>
 Cc:     Frank Rowand <frowand.list@gmail.com>,
         Ingo Molnar <mingo@redhat.com>,
         Randy Dunlap <rdunlap@infradead.org>,
@@ -36,13 +43,13 @@ Cc:     Frank Rowand <frowand.list@gmail.com>,
         linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
         linux-kernel@vger.kernel.org
 Subject: Re: [PATCH v5 01/22] bootconfig: Add Extra Boot Config support
-Message-ID: <20200107220349.1e7424f9@rorschach.local.home>
+Message-Id: <20200108141700.425599efe7ab0ac7c4329661@kernel.org>
 In-Reply-To: <20200107205945.63e5d35a@rorschach.local.home>
 References: <157736902773.11126.2531161235817081873.stgit@devnote2>
         <157736904075.11126.16068256892686522924.stgit@devnote2>
         <20200107205945.63e5d35a@rorschach.local.home>
-X-Mailer: Claws Mail 3.17.4git76 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
-MIME-Version: 1.0
+X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
@@ -50,10 +57,55 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hi Steve,
+
 On Tue, 7 Jan 2020 20:59:45 -0500
 Steven Rostedt <rostedt@goodmis.org> wrote:
 
+> On Thu, 26 Dec 2019 23:04:00 +0900
+> Masami Hiramatsu <mhiramat@kernel.org> wrote:
 > 
+> 
+> > +/**
+> > + * xbc_node_is_value() - Test the node is a value node
+> > + * @node: An XBC node.
+> > + *
+> > + * Test the @node is a value node and return true if a value node, false if not.
+> > + */
+> > +static inline __init bool xbc_node_is_value(struct xbc_node *node)
+> > +{
+> > +	return !!(node->data & XBC_VALUE);
+> 
+> The "!!" is not needed, as this is a static inline bool function. The
+> compiler will make this a 1 or 0 without it.
+> 
+> 	return node->data & XBC_VALUE;
+> 
+> is sufficient.
+
+OK.
+
+> 
+> > +}
+> > +
+> > +/**
+> > + * xbc_node_is_key() - Test the node is a key node
+> > + * @node: An XBC node.
+> > + *
+> > + * Test the @node is a key node and return true if a key node, false if not.
+> > + */
+> > +static inline __init bool xbc_node_is_key(struct xbc_node *node)
+> > +{
+> > +	return !(node->data & XBC_VALUE);
+> > +}
+> > +
+
+Maybe this is better use xbc_node_is_value()
+
+	return !xbc_node_is_value();
+
+Right?
+
 > > +
 > > +/*
 > > + * Return delimiter or error, no node added. As same as lib/cmdline.c,
@@ -82,57 +134,52 @@ Steven Rostedt <rostedt@goodmis.org> wrote:
 > > +				continue;
 > > +			quotes = 0;
 > > +			*p++ = '\0';
-> > +			p = skip_spaces(p);  
+> > +			p = skip_spaces(p);
 > 
 > Hmm, if p here == "    \0" then skip_spaces() will make p == "\0"
 > 
 > > +			c = *p;
 > > +			if (c && !strchr(",;\n#}", c))
 > > +				return xbc_parse_error("No value delimiter", p);
-> > +			p++;  
+> > +			p++;
 > 
 > Now p == one passed "\0" which is in unknown territory.
 
-I like how you have patch 3 use this code. It makes it easy to test,
-and valgrind pointed out that this is a bug. With a file that just
-contained:
+Ah, right!
 
-   foo = "1"
+> 
+> > +			break;
+> > +		}
+> > +		if (strchr(",;\n#}", c)) {
+> 
+> Also, why are we looking at '\n'? as wouldn't that get skipped by
+> skip_spaces() too?
 
-I ran this:
+I forgot that '\n' is also isspace() true...
 
-  $ valgrind -v --leak-check=full ./tools/bootconfig/bootconfig -a /tmp/boot-bad /tmp/initrd  2>/tmp/out
+Thank you!
 
-Which gave me this:
+> 
+> -- Steve
+> 
+> > +			v = strim(v);
+> > +			*p++ = '\0';
+> > +			break;
+> > +		}
+> > +	}
+> > +	if (quotes)
+> > +		return xbc_parse_error("No closing quotes", p);
+> > +	if (c == '#') {
+> > +		p = skip_comment(p);
+> > +		c = *p;
+> > +	}
+> > +	*__n = p;
+> > +	*__v = v;
+> > +
+> > +	return c;
+> > +}
+> > +
 
-==18929== Invalid read of size 1
-==18929==    at 0x483FC02: strpbrk (vg_replace_strmem.c:1690)
-==18929==    by 0x40263C: xbc_init (bootconfig.c:724)
-==18929==    by 0x403162: apply_xbc (main.c:255)
-==18929==    by 0x403346: main (main.c:331)
-==18929==  Address 0x4a4e09f is 0 bytes after a block of size 15 alloc'd
-==18929==    at 0x483780B: malloc (vg_replace_malloc.c:309)
-==18929==    by 0x402B9D: load_xbc_fd (main.c:95)
-==18929==    by 0x402C87: load_xbc_file (main.c:120)
-==18929==    by 0x4030AC: apply_xbc (main.c:238)
-==18929==    by 0x403346: main (main.c:331)
 
-Which proves this the issue as when I apply the patch below, this goes
-away:
-
--- Steve
-
-diff --git a/lib/bootconfig.c b/lib/bootconfig.c
-index 7a7cdc45bf62..0793ef9f48b8 100644
---- a/lib/bootconfig.c
-+++ b/lib/bootconfig.c
-@@ -468,7 +468,8 @@ static int __init __xbc_parse_value(char **__v, char **__n)
- 			c = *p;
- 			if (c && !strchr(",;\n#}", c))
- 				return xbc_parse_error("No value delimiter", p);
--			p++;
-+			if (*p)
-+				p++;
- 			break;
- 		}
- 		if (strchr(",;\n#}", c)) {
+-- 
+Masami Hiramatsu <mhiramat@kernel.org>
