@@ -2,322 +2,374 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id EA6F2136B25
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2020 11:35:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E015C136D99
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2020 14:17:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727558AbgAJKfX convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Fri, 10 Jan 2020 05:35:23 -0500
-Received: from cloudserver094114.home.pl ([79.96.170.134]:42638 "EHLO
-        cloudserver094114.home.pl" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726697AbgAJKfW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 10 Jan 2020 05:35:22 -0500
-Received: from 79.184.255.90.ipv4.supernova.orange.pl (79.184.255.90) (HELO kreacher.localnet)
- by serwer1319399.home.pl (79.96.170.134) with SMTP (IdeaSmtpServer 0.83.320)
- id 14b9680682bab4c8; Fri, 10 Jan 2020 11:35:19 +0100
-From:   "Rafael J. Wysocki" <rjw@rjwysocki.net>
-To:     Linux PM <linux-pm@vger.kernel.org>
-Cc:     LKML <linux-kernel@vger.kernel.org>,
-        Len Brown <len.brown@intel.com>,
-        Linux ACPI <linux-acpi@vger.kernel.org>,
-        Zhang Rui <rui.zhang@intel.com>,
-        Linux Documentation <linux-doc@vger.kernel.org>,
-        Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2] Documentation: admin-guide: PM: Add intel_idle document
-Date:   Fri, 10 Jan 2020 11:35:19 +0100
-Message-ID: <1754251.4pWRGBvRWM@kreacher>
+        id S1727715AbgAJNQP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 10 Jan 2020 08:16:15 -0500
+Received: from smtp-fw-9102.amazon.com ([207.171.184.29]:46532 "EHLO
+        smtp-fw-9102.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727428AbgAJNQO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 10 Jan 2020 08:16:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1578662172; x=1610198172;
+  h=from:to:cc:subject:date:message-id:mime-version:
+   content-transfer-encoding;
+  bh=pSUASsSyOliXn6zxjs/WndFpkUwK2Cn3aRxKvF+GEnU=;
+  b=t1qn/Pak0p3LKAgmjwAfiu/Q5vkbfwSmpncIwOa1eOBToDon5i4lxu4/
+   ZjyNBBJGmo5uBa9twzkI7NS5Qbs6epQE9ANBly7dNW9TYE9y7QXBsuFzu
+   6N+qrOiTEnq49Ek6h3zB7/FRxKux0iNEGy+TXKdIhY7UQHj3VXLSvWtGB
+   4=;
+IronPort-SDR: wvy9v+eZOlLemHmt5+LPqiF/nwnr8jI03lOH6haZzbaKd74biA7bMckcaduhMrIfQGjxJXMXJ9
+ Z8tOKzAkfR7Q==
+X-IronPort-AV: E=Sophos;i="5.69,417,1571702400"; 
+   d="scan'208";a="17962720"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1e-57e1d233.us-east-1.amazon.com) ([10.47.23.38])
+  by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP; 10 Jan 2020 13:15:56 +0000
+Received: from EX13MTAUEA002.ant.amazon.com (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
+        by email-inbound-relay-1e-57e1d233.us-east-1.amazon.com (Postfix) with ESMTPS id BC3C91415D7;
+        Fri, 10 Jan 2020 13:15:53 +0000 (UTC)
+Received: from EX13D31EUA001.ant.amazon.com (10.43.165.15) by
+ EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
+ id 15.0.1236.3; Fri, 10 Jan 2020 13:15:52 +0000
+Received: from u886c93fd17d25d.ant.amazon.com (10.43.161.115) by
+ EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
+ id 15.0.1367.3; Fri, 10 Jan 2020 13:15:47 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     <akpm@linux-foundation.org>
+CC:     <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>,
+        <corbet@lwn.net>, <linux-doc@vger.kernel.org>, <mgorman@suse.de>,
+        <brendanhiggins@google.com>, <sj38.park@gmail.com>,
+        SeongJae Park <sjpark@amazon.de>
+Subject: [RFC PATCH 0/5] Introduce Data Access MONitor (DAMON)
+Date:   Fri, 10 Jan 2020 14:15:17 +0100
+Message-ID: <20200110131522.29964-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.43.161.115]
+X-ClientProxiedBy: EX13D10UWA001.ant.amazon.com (10.43.160.216) To
+ EX13D31EUA001.ant.amazon.com (10.43.165.15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+From: SeongJae Park <sjpark@amazon.de>
 
-Add an admin-guide document for the intel_idle driver to describe
-how it works: how it enumerates idle states, what happens during the
-initialization of it, how it can be controlled via the kernel command
-line and so on.
+This RFC patchset introduces a new kernel module for practical monitoring of
+data accesses, namely DAMON.
 
-Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
----
+The patches are organized in the following sequence.  The first and second
+patch introduces the core logic and the raw level user interface of DAMON,
+respectively.  To provide a minimal reference to the raw level interfaces and
+for more convenient test of the DAMON itself, the third patch implements an
+user space wrapper tools for the DAMON.  The fourth patch adds a document for
+the DAMON, and finally the fifth patch provides DAMON's unit tests, which is
+using the kunit framework.
 
--> v2:
-  * Rewrite the description of the "noacpi" module parameter (Randy).
-  * Reduce the level of detail in the description of driver actions in some
-    places (to address review comments from Randy).
-  * Add R-by from Randy.
+The patches are based on the v5.4 plus the back-ported kunit, which retrieved
+from v5.5-rc1.  You can also clone the complete git tree by:
 
----
- Documentation/admin-guide/pm/intel_idle.rst    |  246 +++++++++++++++++++++++++
- Documentation/admin-guide/pm/working-state.rst |    1 
- 2 files changed, 247 insertions(+)
+    $ git clone git://github.com/sjp38/linux -b damon/rfc/v1
 
-Index: linux-pm/Documentation/admin-guide/pm/working-state.rst
-===================================================================
---- linux-pm.orig/Documentation/admin-guide/pm/working-state.rst
-+++ linux-pm/Documentation/admin-guide/pm/working-state.rst
-@@ -8,6 +8,7 @@ Working-State Power Management
-    :maxdepth: 2
- 
-    cpuidle
-+   intel_idle
-    cpufreq
-    intel_pstate
-    intel_epb
-Index: linux-pm/Documentation/admin-guide/pm/intel_idle.rst
-===================================================================
---- /dev/null
-+++ linux-pm/Documentation/admin-guide/pm/intel_idle.rst
-@@ -0,0 +1,246 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: <isonum.txt>
-+
-+==============================================
-+``intel_idle`` CPU Idle Time Management Driver
-+==============================================
-+
-+:Copyright: |copy| 2020 Intel Corporation
-+
-+:Author: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-+
-+
-+General Information
-+===================
-+
-+``intel_idle`` is a part of the
-+:doc:`CPU idle time management subsystem <cpuidle>` in the Linux kernel
-+(``CPUIdle``).  It is the default CPU idle time management driver for the
-+Nehalem and later generations of Intel processors, but the level of support for
-+a particular processor model in it depends on whether or not it recognizes that
-+processor model and may also depend on information coming from the platform
-+firmware.  [To understand ``intel_idle`` it is necessary to know how ``CPUIdle``
-+works in general, so this is the time to get familiar with :doc:`cpuidle` if you
-+have not done that yet.]
-+
-+``intel_idle`` uses the ``MWAIT`` instruction to inform the processor that the
-+logical CPU executing it is idle and so it may be possible to put some of the
-+processor's functional blocks into low-power states.  That instruction takes two
-+arguments (passed in the ``EAX`` and ``ECX`` registers of the target CPU), the
-+first of which, referred to as a *hint*, can be used by the processor to
-+determine what can be done (for details refer to Intel Software Developer’s
-+Manual [1]_).  Accordingly, ``intel_idle`` refuses to work with processors in
-+which the support for the ``MWAIT`` instruction has been disabled (for example,
-+via the platform firmware configuration menu) or which do not support that
-+instruction at all.
-+
-+``intel_idle`` is not modular, so it cannot be unloaded, which means that the
-+only way to pass early-configuration-time parameters to it is via the kernel
-+command line.
-+
-+
-+.. _intel-idle-enumeration-of-states:
-+
-+Enumeration of Idle States
-+==========================
-+
-+Each ``MWAIT`` hint value is interpreted by the processor as a license to
-+reconfigure itself in a certain way in order to save energy.  The processor
-+configurations (with reduced power draw) resulting from that are referred to
-+as C-states (in the ACPI terminology) or idle states.  The list of meaningful
-+``MWAIT`` hint values and idle states (i.e. low-power configurations of the
-+processor) corresponding to them depends on the processor model and it may also
-+depend on the configuration of the platform.
-+
-+In order to create a list of available idle states required by the ``CPUIdle``
-+subsystem (see :ref:`idle-states-representation` in :doc:`cpuidle`),
-+``intel_idle`` can use two sources of information: static tables of idle states
-+for different processor models included in the driver itself and the ACPI tables
-+of the system.  The former are always used if the processor model at hand is
-+recognized by ``intel_idle`` and the latter are used if that is required for
-+the given processor model (which is the case for all server processor models
-+recognized by ``intel_idle``) or if the processor model is not recognized.
-+
-+If the ACPI tables are going to be used for building the list of available idle
-+states, ``intel_idle`` first looks for a ``_CST`` object under one of the ACPI
-+objects corresponding to the CPUs in the system (refer to the ACPI specification
-+[2]_ for the description of ``_CST`` and its output package).  Because the
-+``CPUIdle`` subsystem expects that the list of idle states supplied by the
-+driver will be suitable for all of the CPUs handled by it and ``intel_idle`` is
-+registered as the ``CPUIdle`` driver for all of the CPUs in the system, the
-+driver looks for the first ``_CST`` object returning at least one valid idle
-+state description and such that all of the idle states included in its return
-+package are of the FFH (Functional Fixed Hardware) type, which means that the
-+``MWAIT`` instruction is expected to be used to tell the processor that it can
-+enter one of them.  The return package of that ``_CST`` is then assumed to be
-+applicable to all of the other CPUs in the system and the idle state
-+descriptions extracted from it are stored in a preliminary list of idle states
-+coming from the ACPI tables.  [This step is skipped if ``intel_idle`` is
-+configured to ignore the ACPI tables; see `below <intel-idle-parameters_>`_.]
-+
-+Next, the first (index 0) entry in the list of available idle states is
-+initialized to represent a "polling idle state" (a pseudo-idle state in which
-+the target CPU continuously fetches and executes instructions), and the
-+subsequent (real) idle state entries are populated as follows.
-+
-+If the processor model at hand is recognized by ``intel_idle``, there is a
-+(static) table of idle state descriptions for it in the driver.  In that case,
-+the "internal" table is the primary source of information on idle states and the
-+information from it is copied to the final list of available idle states.  If
-+using the ACPI tables for the enumeration of idle states is not required
-+(depending on the processor model), all of the listed idle state are enabled by
-+default (so all of them will be taken into consideration by ``CPUIdle``
-+governors during CPU idle state selection).  Otherwise, some of the listed idle
-+states may not be enabled by default if there are no matching entries in the
-+preliminary list of idle states coming from the ACPI tables.  In that case user
-+space still can enable them later (on a per-CPU basis) with the help of
-+the ``disable`` idle state attribute in ``sysfs`` (see
-+:ref:`idle-states-representation` in :doc:`cpuidle`).  This basically means that
-+the idle states "known" to the driver may not be enabled by default if they have
-+not been exposed by the platform firmware (through the ACPI tables).
-+
-+If the given processor model is not recognized by ``intel_idle``, but it
-+supports ``MWAIT``, the preliminary list of idle states coming from the ACPI
-+tables is used for building the final list that will be supplied to the
-+``CPUIdle`` core during driver registration.  For each idle state in that list,
-+the description, ``MWAIT`` hint and exit latency are copied to the corresponding
-+entry in the final list of idle states.  The name of the idle state represented
-+by it (to be returned by the ``name`` idle state attribute in ``sysfs``) is
-+"CX_ACPI", where X is the index of that idle state in the final list (note that
-+the minimum value of X is 1, because 0 is reserved for the "polling" state), and
-+its target residency is based on the exit latency value.  Specifically, for
-+C1-type idle states the exit latency value is also used as the target residency
-+(for compatibility with the majority of the "internal" tables of idle states for
-+various processor models recognized by ``intel_idle``) and for the other idle
-+state types (C2 and C3) the target residency value is 3 times the exit latency
-+(again, that is because it reflects the target residency to exit latency ratio
-+in the majority of cases for the processor models recognized by ``intel_idle``).
-+All of the idle states in the final list are enabled by default in this case.
-+
-+
-+.. _intel-idle-initialization-and-quirks:
-+
-+Initialization
-+==============
-+
-+The initialization of ``intel_idle`` starts with checking if the kernel command
-+line options forbid the use of the ``MWAIT`` instruction.  If that is the case,
-+an error code is returned right away.
-+
-+The next step is to check whether or not the processor model is known to the
-+driver, which determines the idle states enumeration method (see
-+`above <intel-idle-enumeration-of-states_>`_), and whether or not the processor
-+supports ``MWAIT`` (the initialization fails if that is not the case).  Then,
-+the ``MWAIT`` support in the processor is enumerated through ``CPUID`` and the
-+driver initialization fails if the level of support is not as expected (for
-+example, if the total number of ``MWAIT`` substates returned is 0).
-+
-+Next, if the driver is not configured to ignore the ACPI tables (see
-+`below <intel-idle-parameters_>`_), the idle states information provided by the
-+platform firmware is extracted from them.
-+
-+Then, ``CPUIdle`` device objects are allocated for all CPUs and the list of
-+available idle states is created as explained
-+`above <intel-idle-enumeration-of-states_>`_.
-+
-+Finally, ``intel_idle`` is registered with the help of cpuidle_register_driver()
-+as the ``CPUIdle`` driver for all CPUs in the system and a CPU online callback
-+for configuring individual CPUs is registered via cpuhp_setup_state(), which
-+(among other things) causes the callback routine to be invoked for all of the
-+CPUs present in the system at that time (each CPU executes its own instance of
-+the callback routine).  That routine registers a ``CPUIdle`` device for the CPU
-+running it (which enables the ``CPUIdle`` subsystem to operate that CPU) and
-+optionally performs some CPU-specific initialization actions that may be
-+required for the given processor model.
-+
-+
-+.. _intel-idle-parameters:
-+
-+Kernel Command Line Options and Module Parameters
-+=================================================
-+
-+The *x86* architecture support code recognizes three kernel command line
-+options related to CPU idle time management: ``idle=poll``, ``idle=halt``,
-+and ``idle=nomwait``.  If any of them is present in the kernel command line, the
-+``MWAIT`` instruction is not allowed to be used, so the initialization of
-+``intel_idle`` will fail.
-+
-+Apart from that there are two module parameters recognized by ``intel_idle``
-+itself that can be set via the kernel command line (they cannot be updated via
-+sysfs, so that is the only way to change their values).
-+
-+The ``max_cstate`` parameter value is the maximum idle state index in the list
-+of idle states supplied to the ``CPUIdle`` core during the registration of the
-+driver.  It is also the maximum number of regular (non-polling) idle states that
-+can be used by ``intel_idle``, so the enumeration of idle states is terminated
-+after finding that number of usable idle states (the other idle states that
-+potentially might have been used if ``max_cstate`` had been greater are not
-+taken into consideration at all).  Setting ``max_cstate`` can prevent
-+``intel_idle`` from exposing idle states that are regarded as "too deep" for
-+some reason to the ``CPUIdle`` core, but it does so by making them effectively
-+invisible until the system is shut down and started again which may not always
-+be desirable.  In practice, it is only really necessary to do that if the idle
-+states in question cannot be enabled during system startup, because in the
-+working state of the system the CPU power management quality of service (PM
-+QoS) feature can be used to prevent ``CPUIdle`` from touching those idle states
-+even if they have been enumerated (see :ref:`cpu-pm-qos` in :doc:`cpuidle`).
-+Setting ``max_cstate`` to 0 causes the ``intel_idle`` initialization to fail.
-+
-+The ``noacpi`` module parameter (which is recognized by ``intel_idle`` if the
-+kernel has been configured with ACPI support), can be set to make the driver
-+ignore the system's ACPI tables entirely (it is unset by default).
-+
-+
-+.. _intel-idle-core-and-package-idle-states:
-+
-+Core and Package Levels of Idle States
-+======================================
-+
-+Typically, in a processor supporting the ``MWAIT`` instruction there are (at
-+least) two levels of idle states (or C-states).  One level, referred to as
-+"core C-states", covers individual cores in the processor, whereas the other
-+level, referred to as "package C-states", covers the entire processor package
-+and it may also involve other components of the system (GPUs, memory
-+controllers, I/O hubs etc.).
-+
-+Some of the ``MWAIT`` hint values allow the processor to use core C-states only
-+(most importantly, that is the case for the ``MWAIT`` hint value corresponding
-+to the ``C1`` idle state), but the majority of them give it a license to put
-+the target core (i.e. the core containing the logical CPU executing ``MWAIT``
-+with the given hint value) into a specific core C-state and then (if possible)
-+to enter a specific package C-state at the deeper level.  For example, the
-+``MWAIT`` hint value representing the ``C3`` idle state allows the processor to
-+put the target core into the low-power state referred to as "core ``C3``" (or
-+``CC3``), which happens if all of the logical CPUs (SMT siblings) in that core
-+have executed ``MWAIT`` with the ``C3`` hint value (or with a hint value
-+representing a deeper idle state), and in addition to that (in the majority of
-+cases) it gives the processor a license to put the entire package (possibly
-+including some non-CPU components such as a GPU or a memory controller) into the
-+low-power state referred to as "package ``C3``" (or ``PC3``), which happens if
-+all of the cores have gone into the ``CC3`` state and (possibly) some additional
-+conditions are satisfied (for instance, if the GPU is covered by ``PC3``, it may
-+be required to be in a certain GPU-specific low-power state for ``PC3`` to be
-+reachable).
-+
-+As a rule, there is no simple way to make the processor use core C-states only
-+if the conditions for entering the corresponding package C-states are met, so
-+the logical CPU executing ``MWAIT`` with a hint value that is not core-level
-+only (like for ``C1``) must always assume that this may cause the processor to
-+enter a package C-state.  [That is why the exit latency and target residency
-+values corresponding to the majority of ``MWAIT`` hint values in the "internal"
-+tables of idle states in ``intel_idle`` reflect the properties of package
-+C-states.]  If using package C-states is not desirable at all, either
-+:ref:`PM QoS <cpu-pm-qos>` or the ``max_cstate`` module parameter of
-+``intel_idle`` described `above <intel-idle-parameters_>`_ must be used to
-+restrict the range of permissible idle states to the ones with core-level only
-+``MWAIT`` hint values (like ``C1``).
-+
-+
-+References
-+==========
-+
-+.. [1] *Intel® 64 and IA-32 Architectures Software Developer’s Manual Volume 2B*,
-+       https://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-vol-2b-manual.html
-+
-+.. [2] *Advanced Configuration and Power Interface (ACPI) Specification*,
-+       https://uefi.org/specifications
+The web is also available:
+https://github.com/sjp38/linux/releases/tag/damon/rfc/v1
+
+----
+
+DAMON is a kernel module that allows users to monitor the actual memory access
+pattern of specific user-space processes.  It aims to be 1) accurate enough to
+be useful for performance-centric domains, and 2) sufficiently light-weight so
+that it can be applied online.
+
+For the goals, DAMON utilizes its two core mechanisms, called region-based
+sampling and adaptive regions adjustment.  The region-based sampling allows
+users to make their own trade-off between the quality and the overhead of the
+monitoring and set the upperbound of the monitoring overhead.  Further, the
+adaptive regions adjustment mechanism makes DAMON to maximize the quality and
+minimize the overhead with its best efforts while preserving the users
+configured trade-off.
 
 
+Background
+==========
+
+For performance-centric analysis and optimizations of memory management schemes
+(either that of kernel space or user space), the actual data access pattern of
+the workloads is highly useful.  The information need to be only reasonable
+rather than strictly correct, because some level of incorrectness can be
+handled in many performance-centric domains.  It also need to be taken within
+reasonably short time with only light-weight overhead.
+
+Manually extracting such data is not easy and time consuming if the target
+workload is huge and complex, even for the developers of the programs.  There
+are a range of tools and techniques developed for general memory access
+investigations, and some of those could be partially used for this purpose.
+However, most of those are not practical or unscalable, mainly because those
+are designed with no consideration about the trade-off between the accuracy of
+the output and the overhead.
+
+The memory access instrumentation techniques which is applied to many tools
+such as Intel PIN is essential for correctness required cases such as invalid
+memory access bug detections.  However, those usually incur high overhead which
+is unacceptable for many of the performance-centric domains.  Periodic access
+checks based on H/W or S/W access counting features (e.g., the Accessed bits of
+PTEs or the PG_Idle flags of pages) can dramatically decrease the overhead by
+forgiving some of the quality, compared to the instrumentation based
+techniques.  The reduced quality is still reasonable for many of the domains,
+but the overhead can arbitrarily increase as the size of the target workload
+grows.  Miniature-like static region based sampling can set the upperbound of
+the overhead, but it will now decrease the quality of the output as the size of
+the workload grows.
+
+
+Related Works
+=============
+
+There are a number of researches[1,2,3,4,5,6] optimizing memory management
+mechanisms based on the actual memory access patterns that shows impressive
+results.  However, most of those has no deep consideration about the monitoring
+of the accesses itself.  Some of those focused on the overhead of the
+monitoring, but does not consider the accuracy scalability[6] or has additional
+dependencies[7].  Indeed, one recent research[5] about the proactive
+reclamation has also proposed[8] to the kernel community but the monitoring
+overhead was considered a main problem.
+
+[1] Subramanya R Dulloor, Amitabha Roy, Zheguang Zhao, Narayanan Sundaram,
+    Nadathur Satish, Rajesh Sankaran, Jeff Jackson, and Karsten Schwan. 2016.
+    Data tiering in heterogeneous memory systems. In Proceedings of the 11th
+    European Conference on Computer Systems (EuroSys). ACM, 15.
+[2] Youngjin Kwon, Hangchen Yu, Simon Peter, Christopher J Rossbach, and Emmett
+    Witchel. 2016. Coordinated and efficient huge page management with ingens.
+    In 12th USENIX Symposium on Operating Systems Design and Implementation
+    (OSDI).  705–721.
+[3] Harald Servat, Antonio J Peña, Germán Llort, Estanislao Mercadal,
+    HansChristian Hoppe, and Jesús Labarta. 2017. Automating the application
+    data placement in hybrid memory systems. In 2017 IEEE International
+    Conference on Cluster Computing (CLUSTER). IEEE, 126–136.
+[4] Vlad Nitu, Boris Teabe, Alain Tchana, Canturk Isci, and Daniel Hagimont.
+    2018. Welcome to zombieland: practical and energy-efficient memory
+    disaggregation in a datacenter. In Proceedings of the 13th European
+    Conference on Computer Systems (EuroSys). ACM, 16.
+[5] Andres Lagar-Cavilla, Junwhan Ahn, Suleiman Souhlal, Neha Agarwal, Radoslaw
+    Burny, Shakeel Butt, Jichuan Chang, Ashwin Chaugule, Nan Deng, Junaid
+    Shahid, Greg Thelen, Kamil Adam Yurtsever, Yu Zhao, and Parthasarathy
+    Ranganathan.  2019. Software-Defined Far Memory in Warehouse-Scale
+    Computers.  In Proceedings of the 24th International Conference on
+    Architectural Support for Programming Languages and Operating Systems
+    (ASPLOS).  ACM, New York, NY, USA, 317–330.
+    DOI:https://doi.org/10.1145/3297858.3304053
+[6] Carl Waldspurger, Trausti Saemundsson, Irfan Ahmad, and Nohhyun Park.
+    2017. Cache Modeling and Optimization using Miniature Simulations. In 2017
+    USENIX Annual Technical Conference (ATC). USENIX Association, Santa
+    Clara, CA, 487–498.
+    https://www.usenix.org/conference/atc17/technical-sessions/
+[7] Haojie Wang, Jidong Zhai, Xiongchao Tang, Bowen Yu, Xiaosong Ma, and
+    Wenguang Chen. 2018. Spindle: Informed Memory Access Monitoring. In 2018
+    USENIX Annual Technical Conference (ATC). USENIX Association, Boston, MA,
+    561–574.  https://www.usenix.org/conference/atc18/presentation/wang-haojie
+[8] Jonathan Corbet. 2019. Proactively reclaiming idle memory. (2019).
+    https://lwn.net/Articles/787611/.
+
+
+Expected Use-cases
+==================
+
+A straightforward usecase of DAMON would be the program behavior analysis.
+With the DAMON output, users can confirm whether the program is running as
+intended or not.  This will be useful for debuggings and tests of design
+points.
+
+The monitored results can also be useful for counting the dynamic working set
+size of workloads.  For the administration of memory overcommitted systems or
+selection of the environments (e.g., containers providing different amount of
+memory) for your workloads, this will be useful.
+
+If you are a programmer, you can optimize your program by managing the memory
+based on the actual data access pattern.  For example, you can identify the
+dynamic hotness of your data using DAMON and call ``mlock()`` to keep your hot
+data in DRAM, or call ``madvise()`` with ``MADV_PAGEOUT`` to proactively
+reclaim cold data.  Even though your program is guaranteed to not encounter
+memory pressure, you can still improve the performance by applying the DAMON
+outputs for call of ``MADV_HUGEPAGE`` and ``MADV_NOHUGEPAGE``.  More creative
+optimizations would be possible.  Our evaluations of DAMON includes a
+straightforward optimization using the ``mlock()``.  Please refer to the below
+Evaluation section for more detail.
+
+As DAMON incurs very low overhead, such optimizations can be applied not only
+offline, but also online.  Also, there is no reason to limit such optimizations
+to the user space.  Several parts of the kernel's memory management mechanisms
+could be also optimized using DAMON. The reclamation, the THP (de)promotion
+decisions, and the compaction would be such a candidates.  Nevertheless,
+current version of DAMON is not highly optimized for the online/in-kernel uses.
+
+
+Mechanisms of DAMON
+===================
+
+
+Basic Access Check
+------------------
+
+DAMON basically reports what pages are how frequently accessed.  The report is
+passed to users in binary format via a ``result file`` which users can set it's
+path.  Note that the frequency is not an absolute number of accesses, but a
+relative frequency among the pages of the target workloads.
+
+Users can also control the resolution of the reports by setting two time
+intervals, ``sampling interval`` and ``aggregation interval``.  In detail,
+DAMON checks access to each page per ``sampling interval``, aggregates the
+results (counts the number of the accesses to each page), and reports the
+aggregated results per ``aggregation interval``.  For the access check of each
+page, DAMON uses the Accessed bits of PTEs.
+
+This is thus similar to the previously mentioned periodic access checks based
+mechanisms, which overhead is increasing as the size of the target process
+grows.
+
+
+Region Based Sampling
+---------------------
+
+To avoid the unbounded increase of the overhead, DAMON groups a number of
+adjacent pages that assumed to have same access frequencies into a region.  As
+long as the assumption (pages in a region have same access frequencies) is
+kept, only one page in the region is required to be checked.  Thus, for each
+``sampling interval``, DAMON randomly picks one page in each region and clears
+its Accessed bit.  After one more ``sampling interval``, DAMON reads the
+Accessed bit of the page and increases the access frequency of the region if
+the bit has set meanwhile.  Therefore, the monitoring overhead is controllable
+by setting the number of regions.  DAMON allows users to set the minimal and
+maximum number of regions for the trade-off.
+
+Except the assumption, this is almost same with the above-mentioned
+miniature-like static region based sampling.  In other words, this scheme
+cannot preserve the quality of the output if the assumption is not guaranteed.
+
+
+Adaptive Regions Adjustment
+---------------------------
+
+At the beginning of the monitoring, DAMON constructs the initial regions by
+evenly splitting the memory mapped address space of the process into the
+user-specified minimal number of regions.  In this initial state, the
+assumption is normally not kept and thus the quality could be low.  To keep the
+assumption as much as possible, DAMON adaptively merges and splits each region.
+For each ``aggregation interval``, it compares the access frequencies of
+adjacent regions and merges those if the frequency difference is small.  Then,
+after it reports and clears the aggregated access frequency of each region, it
+splits each region into two regions if the total number of regions is smaller
+than the half of the user-specified maximum number of regions.
+
+In this way, DAMON provides its best-effort quality and minimal overhead while
+keeping the bounds users set for their trade-off.
+
+
+Applying Dynamic Memory Mappings
+--------------------------------
+
+Only a number of small parts in the super-huge virtual address space of the
+processes is mapped to physical memory and accessed.  Thus, tracking the
+unmapped address regions is just wasteful.  However, tracking every memory
+mapping change might incur an overhead.  For the reason, DAMON applies the
+dynamic memory mapping changes to the tracking regions only for each of an
+user-specified time interval (``regions update interval``).
+
+
+Evaluations
+===========
+
+A prototype of DAMON has evaluated on an Intel Xeon E7-8837 machine using 20
+benchmarks that picked from SPEC CPU 2006, NAS, Tensorflow Benchmark,
+SPLASH-2X, and PARSEC 3 benchmark suite.  Nonethless, this section provides
+only summary of the results.  For more detail, please refer to the slides used
+for the introduction of DAMON at the Linux Plumbers Conference 2019[1] or the
+MIDDLEWARE'19 industrial track paper[2].
+
+
+Quality
+-------
+
+We first traced and visualized the data access pattern of each workload.  We
+were able to confirm that the visualized results are reasonably accurate by
+manually comparing those with the source code of the workloads.
+
+To see the usefulness of the monitoring, we optimized 9 memory intensive
+workloads among them for memory pressure situations using the DAMON outputs.
+In detail, we identified frequently accessed memory regions in each workload
+based on the DAMON results and protected them with ``mlock()`` system calls.
+The optimized versions consistently show speedup (2.55x in best case, 1.65x in
+average) under memory pressure situation.
+
+
+Overhead
+--------
+
+We also measured the overhead of DAMON.  It was not only under the upperbound
+we set, but was much lower (0.6 percent of the bound in best case, 13.288
+percent of the bound in average).  This reduction of the overhead is mainly
+resulted from the adaptive regions adjustment.  We also compared the overhead
+with that of the straightforward periodic Accessed bit check-based monitoring,
+which checks the access of every page frame.  DAMON's overhead was much smaller
+than the straightforward mechanism by 94,242.42x in best case, 3,159.61x in
+average.
+
+
+References
+==========
+
+Prototypes of DAMON have introduced by an LPC kernel summit track talk[1] and
+two academic papers[2,3].  Please refer to those for more detailed information,
+especially the evaluations.
+
+[1] SeongJae Park, Tracing Data Access Pattern with Bounded Overhead and
+    Best-effort Accuracy. In The Linux Kernel Summit, September 2019.
+    https://linuxplumbersconf.org/event/4/contributions/548/
+[2] SeongJae Park, Yunjae Lee, Heon Y. Yeom, Profiling Dynamic Data Access
+    Patterns with Controlled Overhead and Quality. In 20th ACM/IFIP
+    International Middleware Conference Industry, December 2019.
+    https://dl.acm.org/doi/10.1145/3366626.3368125
+[3] SeongJae Park, Yunjae Lee, Yunhee Kim, Heon Y. Yeom, Profiling Dynamic Data
+    Access Patterns with Bounded Overhead and Accuracy. In IEEE International
+    Workshop on Foundations and Applications of Self- Systems (FAS 2019), June
+    2019.
+
+
+SeongJae Park (5):
+  mm: Introduce Data Access MONitor (DAMON)
+  mm/damon: Add debugfs interface
+  mm/damon: Add minimal user-space tools
+  Documentation/admin-guide/mm: Add a document for DAMON
+  mm/damon: Add kunit tests
+
+ .../admin-guide/mm/data_access_monitor.rst    |  235 +++
+ Documentation/admin-guide/mm/index.rst        |    1 +
+ mm/Kconfig                                    |   23 +
+ mm/Makefile                                   |    1 +
+ mm/damon-test.h                               |  571 ++++++++
+ mm/damon.c                                    | 1266 +++++++++++++++++
+ tools/damon/bin2txt.py                        |   64 +
+ tools/damon/damn                              |   36 +
+ tools/damon/heats.py                          |  358 +++++
+ tools/damon/nr_regions.py                     |  116 ++
+ tools/damon/record.py                         |  182 +++
+ tools/damon/report.py                         |   45 +
+ tools/damon/wss.py                            |  121 ++
+ 13 files changed, 3019 insertions(+)
+ create mode 100644 Documentation/admin-guide/mm/data_access_monitor.rst
+ create mode 100644 mm/damon-test.h
+ create mode 100644 mm/damon.c
+ create mode 100644 tools/damon/bin2txt.py
+ create mode 100644 tools/damon/damn
+ create mode 100644 tools/damon/heats.py
+ create mode 100644 tools/damon/nr_regions.py
+ create mode 100644 tools/damon/record.py
+ create mode 100644 tools/damon/report.py
+ create mode 100644 tools/damon/wss.py
+
+-- 
+2.17.1
 
