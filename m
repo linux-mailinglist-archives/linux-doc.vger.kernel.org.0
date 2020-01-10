@@ -2,56 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5DFE5136D9A
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2020 14:17:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 14B7C136DA4
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jan 2020 14:18:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727750AbgAJNQR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 10 Jan 2020 08:16:17 -0500
-Received: from smtp-fw-9102.amazon.com ([207.171.184.29]:46508 "EHLO
-        smtp-fw-9102.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727408AbgAJNQQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 10 Jan 2020 08:16:16 -0500
+        id S1727492AbgAJNSU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 10 Jan 2020 08:18:20 -0500
+Received: from smtp-fw-6002.amazon.com ([52.95.49.90]:29957 "EHLO
+        smtp-fw-6002.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727347AbgAJNSU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 10 Jan 2020 08:18:20 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1578662175; x=1610198175;
+  t=1578662297; x=1610198297;
   h=from:to:cc:subject:date:message-id:in-reply-to:
    references:mime-version;
-  bh=WerMUO/qpSqjTgSXC4CARN0MxavhaBRm9YNNK0ZfhrM=;
-  b=v/+fcVi+Ke8kU9jc7Ev/ZqKpKbusQ9btH1EXrT5dpwwPraLvL+ESItuc
-   bzR81hN7BXBaiqtB2MhadK8JL3URjioDv6//9XdI6dV/prQm124wMUebt
-   FCnHfzJb7feT7rzyATshQcqjsCg4+qHIkxujbO43abMDBMN2CPKSiYEmN
+  bh=B5diwc3i/K+sWdwNuNXD6p4E8O6N/m5denNj/GUhgrM=;
+  b=LEHa2ZS6K7Em8RicjsucRMCuvh30GjML3m5gdAoOBIpkB7/GpXOIxQgV
+   77UT5g8IahnYsFC+jOzt4O1un2x1z1jQAok+kyZGR6DTJQHNcz+vFfGBe
+   K9WMdKZPBeyYa9zJ7MXqktoDdiO3CLtzZ8nGDf8MAiq5nJNVuwowNm8OO
    E=;
-IronPort-SDR: 3RVzEwdQvjmq7wiM5YWZTP89FsDgphbyHOKX/HZgyySmxvue4fF4tk7eqap/VYYW4sSxkwb7/O
- 6vr7iY/aTaMw==
+IronPort-SDR: vSd92ypDhQMFCsS8oH5oeSkSa83C3Q9UP8ZRdCC4mWsjuXLKBr4pqssw45rkc2bm8W05EvzLmK
+ 7j+NpnZH1VkQ==
 X-IronPort-AV: E=Sophos;i="5.69,417,1571702400"; 
-   d="scan'208";a="17962751"
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1d-f273de60.us-east-1.amazon.com) ([10.47.23.38])
-  by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP; 10 Jan 2020 13:16:14 +0000
-Received: from EX13MTAUEA002.ant.amazon.com (iad55-ws-svc-p15-lb9-vlan2.iad.amazon.com [10.40.159.162])
-        by email-inbound-relay-1d-f273de60.us-east-1.amazon.com (Postfix) with ESMTPS id 122FDA230F;
-        Fri, 10 Jan 2020 13:16:09 +0000 (UTC)
+   d="scan'208";a="10965220"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-1e-62350142.us-east-1.amazon.com) ([10.43.8.6])
+  by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP; 10 Jan 2020 13:18:16 +0000
+Received: from EX13MTAUEA002.ant.amazon.com (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
+        by email-inbound-relay-1e-62350142.us-east-1.amazon.com (Postfix) with ESMTPS id 5FC80A2477;
+        Fri, 10 Jan 2020 13:18:13 +0000 (UTC)
 Received: from EX13D31EUA001.ant.amazon.com (10.43.165.15) by
  EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
- id 15.0.1236.3; Fri, 10 Jan 2020 13:16:09 +0000
-Received: from u886c93fd17d25d.ant.amazon.com (10.43.161.115) by
+ id 15.0.1236.3; Fri, 10 Jan 2020 13:18:12 +0000
+Received: from u886c93fd17d25d.ant.amazon.com (10.43.162.119) by
  EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
- id 15.0.1367.3; Fri, 10 Jan 2020 13:16:05 +0000
+ id 15.0.1367.3; Fri, 10 Jan 2020 13:18:07 +0000
 From:   SeongJae Park <sjpark@amazon.com>
 To:     <akpm@linux-foundation.org>
 CC:     <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>,
         <corbet@lwn.net>, <linux-doc@vger.kernel.org>, <mgorman@suse.de>,
         <brendanhiggins@google.com>, <sj38.park@gmail.com>,
         SeongJae Park <sjpark@amazon.de>
-Subject: [RFC PATCH 4/5] Documentation/admin-guide/mm: Add a document for DAMON
-Date:   Fri, 10 Jan 2020 14:15:21 +0100
-Message-ID: <20200110131522.29964-5-sjpark@amazon.com>
+Subject: [RFC PATCH 5/5] mm/damon: Add kunit tests
+Date:   Fri, 10 Jan 2020 14:17:53 +0100
+Message-ID: <20200110131753.30737-1-sjpark@amazon.com>
 X-Mailer: git-send-email 2.17.1
 In-Reply-To: <20200110131522.29964-1-sjpark@amazon.com>
 References: <20200110131522.29964-1-sjpark@amazon.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.43.161.115]
-X-ClientProxiedBy: EX13D10UWA001.ant.amazon.com (10.43.160.216) To
+X-Originating-IP: [10.43.162.119]
+X-ClientProxiedBy: EX13D22UWC004.ant.amazon.com (10.43.162.198) To
  EX13D31EUA001.ant.amazon.com (10.43.165.15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
@@ -60,269 +60,623 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: SeongJae Park <sjpark@amazon.de>
 
-This commit adds a simple document for DAMON under
-'Documentation/admin-guide/mm/'.
+This commit adds kunit based unit tests for DAMON.
 
 Signed-off-by: SeongJae Park <sjpark@amazon.de>
 ---
- .../admin-guide/mm/data_access_monitor.rst    | 235 ++++++++++++++++++
- Documentation/admin-guide/mm/index.rst        |   1 +
- 2 files changed, 236 insertions(+)
- create mode 100644 Documentation/admin-guide/mm/data_access_monitor.rst
+ mm/Kconfig      |  11 +
+ mm/damon-test.h | 571 ++++++++++++++++++++++++++++++++++++++++++++++++
+ mm/damon.c      |   2 +
+ 3 files changed, 584 insertions(+)
+ create mode 100644 mm/damon-test.h
 
-diff --git a/Documentation/admin-guide/mm/data_access_monitor.rst b/Documentation/admin-guide/mm/data_access_monitor.rst
-new file mode 100644
-index 000000000000..907a7af75f35
---- /dev/null
-+++ b/Documentation/admin-guide/mm/data_access_monitor.rst
-@@ -0,0 +1,235 @@
-+.. _data_access_monitor:
-+
-+==========================
-+DAMON: Data Access MONitor
-+==========================
-+
-+
-+Too Long; Don't Read
-+====================
-+
-+DAMON is a kernel module that allows users to monitor the actual memory access
-+pattern of specific user-space processes.  It aims to be 1) accurate enough to
-+be useful for performance-centric domains, and 2) sufficiently light-weight so
-+that it can be applied online.
-+
-+For the goals, DAMON utilizes its two core mechanisms, called region-based
-+sampling and adaptive regions adjustment.  The region-based sampling allows
-+users to make their own trade-off between the quality and the overhead of the
-+monitoring and set the upperbound of the monitoring overhead.  Further, the
-+adaptive regions adjustment mechanism makes DAMON to maximize the quality and
-+minimize the overhead with its best efforts while preserving the users
-+configured trade-off.
-+
-+
-+Background
-+==========
-+
-+For performance-centric analysis and optimizations of memory management schemes
-+(either that of kernel space or user space), the actual data access pattern of
-+the workloads is highly useful.  The information need to be only reasonable
-+rather than strictly correct, because some level of incorrectness can be
-+handled in many performance-centric domains.  It also need to be taken within
-+reasonably short time with only light-weight overhead.
-+
-+Manually extracting such data is not easy and time consuming if the target
-+workload is huge and complex, even for the developers of the programs.  There
-+are a range of tools and techniques developed for general memory access
-+investigations, and some of those could be partially used for this purpose.
-+However, most of those are not practical or unscalable, mainly because those
-+are designed with no consideration about the trade-off between the accuracy of
-+the output and the overhead.
-+
-+The memory access instrumentation techniques which is applied to many tools
-+such as Intel PIN is essential for correctness required cases such as invalid
-+memory access bug detections.  However, those usually incur high overhead which
-+is unacceptable for many of the performance-centric domains.  Periodic access
-+checks based on H/W or S/W access counting features (e.g., the Accessed bits of
-+PTEs or the PG_Idle flags of pages) can dramatically decrease the overhead by
-+forgiving some of the quality, compared to the instrumentation based
-+techniques.  The reduced quality is still reasonable for many of the domains,
-+but the overhead can arbitrarily increase as the size of the target workload
-+grows.  Miniature-like static region based sampling can set the upperbound of
-+the overhead, but it will now decrease the quality of the output as the size of
-+the workload grows.
-+
-+
-+Expected Use-cases
-+==================
-+
-+A straightforward usecase of DAMON would be the program behavior analysis.
-+With the DAMON output, users can confirm whether the program is running as
-+intended or not.  This will be useful for debuggings and tests of design
-+points.
-+
-+The monitored results can also be useful for counting the dynamic working set
-+size of workloads.  For the administration of memory overcommitted systems or
-+selection of the environments (e.g., containers providing different amount of
-+memory) for your workloads, this will be useful.
-+
-+If you are a programmer, you can optimize your program by managing the memory
-+based on the actual data access pattern.  For example, you can identify the
-+dynamic hotness of your data using DAMON and call ``mlock()`` to keep your hot
-+data in DRAM, or call ``madvise()`` with ``MADV_PAGEOUT`` to proactively
-+reclaim cold data.  Even though your program is guaranteed to not encounter
-+memory pressure, you can still improve the performance by applying the DAMON
-+outputs for call of ``MADV_HUGEPAGE`` and ``MADV_NOHUGEPAGE``.  More creative
-+optimizations would be possible.  Our evaluations of DAMON includes a
-+straightforward optimization using the ``mlock()``.  Please refer to the below
-+Evaluation section for more detail.
-+
-+As DAMON incurs very low overhead, such optimizations can be applied not only
-+offline, but also online.  Also, there is no reason to limit such optimizations
-+to the user space.  Several parts of the kernel's memory management mechanisms
-+could be also optimized using DAMON. The reclamation, the THP (de)promotion
-+decisions, and the compaction would be such a candidates.
-+
-+
-+Mechanisms of DAMON
-+===================
-+
-+
-+Basic Access Check
-+------------------
-+
-+DAMON basically reports what pages are how frequently accessed.  The report is
-+passed to users in binary format via a ``result file`` which users can set it's
-+path.  Note that the frequency is not an absolute number of accesses, but a
-+relative frequency among the pages of the target workloads.
-+
-+Users can also control the resolution of the reports by setting two time
-+intervals, ``sampling interval`` and ``aggregation interval``.  In detail,
-+DAMON checks access to each page per ``sampling interval``, aggregates the
-+results (counts the number of the accesses to each page), and reports the
-+aggregated results per ``aggregation interval``.  For the access check of each
-+page, DAMON uses the Accessed bits of PTEs.
-+
-+This is thus similar to the previously mentioned periodic access checks based
-+mechanisms, which overhead is increasing as the size of the target process
-+grows.
-+
-+
-+Region Based Sampling
-+---------------------
-+
-+To avoid the unbounded increase of the overhead, DAMON groups a number of
-+adjacent pages that assumed to have same access frequencies into a region.  As
-+long as the assumption (pages in a region have same access frequencies) is
-+kept, only one page in the region is required to be checked.  Thus, for each
-+``sampling interval``, DAMON randomly picks one page in each region and clears
-+its Accessed bit.  After one more ``sampling interval``, DAMON reads the
-+Accessed bit of the page and increases the access frequency of the region if
-+the bit has set meanwhile.  Therefore, the monitoring overhead is controllable
-+by setting the number of regions.  DAMON allows users to set the minimal and
-+maximum number of regions for the trade-off.
-+
-+Except the assumption, this is almost same with the above-mentioned
-+miniature-like static region based sampling.  In other words, this scheme
-+cannot preserve the quality of the output if the assumption is not guaranteed.
-+
-+
-+Adaptive Regions Adjustment
-+---------------------------
-+
-+At the beginning of the monitoring, DAMON constructs the initial regions by
-+evenly splitting the memory mapped address space of the process into the
-+user-specified minimal number of regions.  In this initial state, the
-+assumption is normally not kept and thus the quality could be low.  To keep the
-+assumption as much as possible, DAMON adaptively merges and splits each region.
-+For each ``aggregation interval``, it compares the access frequencies of
-+adjacent regions and merges those if the frequency difference is small.  Then,
-+after it reports and clears the aggregated access frequency of each region, it
-+splits each region into two regions if the total number of regions is smaller
-+than the half of the user-specified maximum number of regions.
-+
-+In this way, DAMON provides its best-effort quality and minimal overhead while
-+keeping the bounds users set for their trade-off.
-+
-+
-+Applying Dynamic Memory Mappings
-+--------------------------------
-+
-+Only a number of small parts in the super-huge virtual address space of the
-+processes is mapped to physical memory and accessed.  Thus, tracking the
-+unmapped address regions is just wasteful.  However, tracking every memory
-+mapping change might incur an overhead.  For the reason, DAMON applies the
-+dynamic memory mapping changes to the tracking regions only for each of an
-+user-specified time interval (``regions update interval``).
-+
-+
-+User Interface
-+==============
-+
-+DAMON exports three files, ``attrs``, ``pids``, and ``monitor_on`` under its
-+debugfs directory, ``<debugfs>/damon/``.
-+
-+
-+Attributes
-+----------
-+
-+Users can read and write the ``sampling interval``, ``aggregation interval``,
-+``regions update interval``, min/max number of regions, and the path to
-+``result file`` by reading from and writing to the ``attrs`` file.  For
-+example, below commands set those values to 5 ms, 100 ms, 1,000 ms, 10, 1000,
-+and ``/damon.data`` and check it again::
-+
-+    # cd <debugfs>/damon
-+    # echo 5000 100000 1000000 10 1000 /damon.data > attrs
-+    # cat attrs
-+    5000 100000 1000000 10 1000 /damon.data
-+
-+
-+Target PIDs
-+-----------
-+
-+Users can read and write the pids of current monitoring target processes by
-+reading from and writing to the `pids` file.  For example, below commands set
-+processes having pids 42 and 4242 as the processes to be monitored and check
-+it again::
-+
-+    # cd <debugfs>/damon
-+    # echo 42 4242 > pids
-+    # cat pids
-+    42 4242
-+
-+Note that setting the pids doesn't starts the monitoring.
-+
-+
-+Turning On/Off
-+--------------
-+
-+You can check current status, start and stop the monitoring by reading from and
-+writing to the ``monitor_on`` file.  Writing ``on`` to the file starts DAMON to
-+monitor the target processes with the attributes.  Writing ``off`` to the file
-+stops DAMON.  DAMON also stops if every target processes is be terminated.
-+Below example commands turn on, off, and check status of DAMON::
-+
-+    # cd <debugfs>/damon
-+    # echo on > monitor_on
-+    # echo off > monitor_on
-+    # cat monitor_on
-+    off
-+
-+Please note that you cannot write to the ``attrs`` and ``pids`` files while the
-+monitoring is turned on.  If you write to the files while DAMON is running,
-+``-EINVAL`` will be returned.
-+
-+
-+User Space Wrapper
-+------------------
-+
-+DAMON has a shallow wrapper python script, ``/tools/damon/damn`` that provides
-+more convenient interface.  Note that it is only aimed to be used for minimal
-+reference of the DAMON's raw interfaces and for debugging of the DAMON itself.
-+Based on the debugfs interface, you can create another cool and more convenient
-+user space tools.
-+
-+
-+Quick Tutorial
-+--------------
-+
-+To test DAMON on your system,
-+
-+1. Ensure your kernel is built with CONFIG_DAMON turned on, and debugfs is
-+   mounted at ``/sys/kernel/debug/``.
-+2. ``<your kernel source tree>/tools/damon/damn -h``
-diff --git a/Documentation/admin-guide/mm/index.rst b/Documentation/admin-guide/mm/index.rst
-index 11db46448354..d3d0ba373eb6 100644
---- a/Documentation/admin-guide/mm/index.rst
-+++ b/Documentation/admin-guide/mm/index.rst
-@@ -27,6 +27,7 @@ the Linux memory management.
+diff --git a/mm/Kconfig b/mm/Kconfig
+index b7af8a1b5cb5..7b023799aa38 100644
+--- a/mm/Kconfig
++++ b/mm/Kconfig
+@@ -748,4 +748,15 @@ config DAMON
+ 	  be 1) accurate enough to be useful for performance-centric domains,
+ 	  and 2) sufficiently light-weight so that it can be applied online.
  
-    concepts
-    cma_debugfs
-+   data_access_monitor
-    hugetlbpage
-    idle_page_tracking
-    ksm
++config DAMON_TEST
++	bool "Test for damon"
++	depends on DAMON && KUNIT
++	help
++	  This builds the DAMON Kunit test suite.
++
++	  For more information on KUnit and unit tests in general, please refer
++	  to the KUnit documentation.
++
++	  If unsure, say N.
++
+ endmenu
+diff --git a/mm/damon-test.h b/mm/damon-test.h
+new file mode 100644
+index 000000000000..0d94910b8fe5
+--- /dev/null
++++ b/mm/damon-test.h
+@@ -0,0 +1,571 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++/*
++ * Data Access Monitor Unit Tests
++ *
++ * Copyright 2019 Amazon.com, Inc. or its affiliates.  All rights reserved.
++ *
++ * Author: SeongJae Park <sjpark@amazon.de>
++ */
++
++#ifdef CONFIG_DAMON_TEST
++
++#ifndef _DAMON_TEST_H
++#define _DAMON_TEST_H
++
++#include <kunit/test.h>
++
++static void damon_test_str_to_pids(struct kunit *test)
++{
++	char *question;
++	unsigned long *answers;
++	unsigned long expected[] = {12, 35, 46};
++	ssize_t nr_integers = 0, i;
++
++	question = "123";
++	answers = str_to_pids(question, strnlen(question, 128), &nr_integers);
++	KUNIT_EXPECT_EQ(test, 1l, nr_integers);
++	KUNIT_EXPECT_EQ(test, 123ul, answers[0]);
++	kfree(answers);
++
++	question = "123abc";
++	answers = str_to_pids(question, strnlen(question, 128), &nr_integers);
++	KUNIT_EXPECT_EQ(test, 1l, nr_integers);
++	KUNIT_EXPECT_EQ(test, 123ul, answers[0]);
++	kfree(answers);
++
++	question = "a123";
++	answers = str_to_pids(question, strnlen(question, 128), &nr_integers);
++	KUNIT_EXPECT_EQ(test, 0l, nr_integers);
++	KUNIT_EXPECT_PTR_EQ(test, answers, (unsigned long *)NULL);
++
++	question = "12 35";
++	answers = str_to_pids(question, strnlen(question, 128), &nr_integers);
++	KUNIT_EXPECT_EQ(test, 2l, nr_integers);
++	for (i = 0; i < nr_integers; i++)
++		KUNIT_EXPECT_EQ(test, expected[i], answers[i]);
++	kfree(answers);
++
++	question = "12 35 46";
++	answers = str_to_pids(question, strnlen(question, 128), &nr_integers);
++	KUNIT_EXPECT_EQ(test, 3l, nr_integers);
++	for (i = 0; i < nr_integers; i++)
++		KUNIT_EXPECT_EQ(test, expected[i], answers[i]);
++	kfree(answers);
++
++	question = "12 35 abc 46";
++	answers = str_to_pids(question, strnlen(question, 128), &nr_integers);
++	KUNIT_EXPECT_EQ(test, 2l, nr_integers);
++	for (i = 0; i < 2; i++)
++		KUNIT_EXPECT_EQ(test, expected[i], answers[i]);
++	kfree(answers);
++
++	question = "";
++	answers = str_to_pids(question, strnlen(question, 128), &nr_integers);
++	KUNIT_EXPECT_EQ(test, 0l, nr_integers);
++	KUNIT_EXPECT_PTR_EQ(test, (unsigned long *)NULL, answers);
++	kfree(answers);
++
++	question = "\n";
++	answers = str_to_pids(question, strnlen(question, 128), &nr_integers);
++	KUNIT_EXPECT_EQ(test, 0l, nr_integers);
++	KUNIT_EXPECT_PTR_EQ(test, (unsigned long *)NULL, answers);
++	kfree(answers);
++}
++
++static void damon_test_regions(struct kunit *test)
++{
++	struct damon_region *r;
++	struct damon_task *t;
++
++	r = damon_new_region(1, 2);
++	KUNIT_EXPECT_EQ(test, 1ul, r->vm_start);
++	KUNIT_EXPECT_EQ(test, 2ul, r->vm_end);
++	KUNIT_EXPECT_EQ(test, 0u, r->nr_accesses);
++	KUNIT_EXPECT_TRUE(test, r->sampling_addr >= r->vm_start);
++	KUNIT_EXPECT_TRUE(test, r->sampling_addr < r->vm_end);
++
++	t = damon_new_task(42);
++	KUNIT_EXPECT_EQ(test, 0u, nr_damon_regions(t));
++
++	damon_add_region_tail(r, t);
++	KUNIT_EXPECT_EQ(test, 1u, nr_damon_regions(t));
++
++	damon_del_region(r);
++	KUNIT_EXPECT_EQ(test, 0u, nr_damon_regions(t));
++
++	damon_free_task(t);
++}
++
++static void damon_test_tasks(struct kunit *test)
++{
++	struct damon_task *t;
++
++	t = damon_new_task(42);
++	KUNIT_EXPECT_EQ(test, 42ul, t->pid);
++	KUNIT_EXPECT_EQ(test, 0u, nr_damon_tasks());
++
++	damon_add_task_tail(t);
++	KUNIT_EXPECT_EQ(test, 1u, nr_damon_tasks());
++
++	damon_destroy_task(t);
++	KUNIT_EXPECT_EQ(test, 0u, nr_damon_tasks());
++}
++
++static void damon_test_set_pids(struct kunit *test)
++{
++	unsigned long pids[] = {1, 2, 3};
++	char buf[64];
++
++	damon_set_pids(pids, 3);
++	damon_sprint_pids(buf, 64);
++	pr_info("buf: %s (%zu)\n", buf, strlen(buf));
++	KUNIT_EXPECT_EQ(test, 0, strncmp(buf, "1 2 3\n", 64));
++
++	damon_set_pids(NULL, 0);
++	damon_sprint_pids(buf, 64);
++	KUNIT_EXPECT_EQ(test, 0, strncmp(buf, "\n", 64));
++
++	damon_set_pids((unsigned long []){1, 2}, 2);
++	damon_sprint_pids(buf, 64);
++	KUNIT_EXPECT_EQ(test, 0, strncmp(buf, "1 2\n", 64));
++
++	damon_set_pids((unsigned long []){2}, 1);
++	damon_sprint_pids(buf, 64);
++	KUNIT_EXPECT_EQ(test, 0, strncmp(buf, "2\n", 64));
++
++	damon_set_pids(NULL, 0);
++	damon_sprint_pids(buf, 64);
++	KUNIT_EXPECT_EQ(test, 0, strncmp(buf, "\n", 64));
++}
++
++static void damon_test_three_regions_in_vmas(struct kunit *test)
++{
++	struct region regions[3] = {0,};
++
++	struct vm_area_struct vmas[] = {
++		(struct vm_area_struct) {.vm_start = 10, .vm_end = 20},
++		(struct vm_area_struct) {.vm_start = 20, .vm_end = 25},
++		(struct vm_area_struct) {.vm_start = 200, .vm_end = 210},
++		(struct vm_area_struct) {.vm_start = 210, .vm_end = 220},
++		(struct vm_area_struct) {.vm_start = 300, .vm_end = 305},
++		(struct vm_area_struct) {.vm_start = 307, .vm_end = 330},
++	};
++	vmas[0].vm_next = &vmas[1];
++	vmas[1].vm_next = &vmas[2];
++	vmas[2].vm_next = &vmas[3];
++	vmas[3].vm_next = &vmas[4];
++	vmas[4].vm_next = &vmas[5];
++	vmas[5].vm_next = NULL;
++
++	damon_three_regions_in_vmas(&vmas[0], regions);
++
++	KUNIT_EXPECT_EQ(test, 10ul, regions[0].start);
++	KUNIT_EXPECT_EQ(test, 25ul, regions[0].end);
++	KUNIT_EXPECT_EQ(test, 200ul, regions[1].start);
++	KUNIT_EXPECT_EQ(test, 220ul, regions[1].end);
++	KUNIT_EXPECT_EQ(test, 300ul, regions[2].start);
++	KUNIT_EXPECT_EQ(test, 330ul, regions[2].end);
++}
++
++/* Clean up global state of damon */
++static void damon_cleanup_global_state(void)
++{
++	struct damon_task *t, *next;
++
++	damon_for_each_task_safe(t, next)
++		damon_destroy_task(t);
++
++	damon_rbuf_offset = 0;
++}
++
++static void damon_test_aggregate(struct kunit *test)
++{
++	unsigned long pids[] = {1, 2, 3};
++	unsigned long saddr[][3] = {{10, 20, 30}, {5, 42, 49}, {13, 33, 55} };
++	unsigned long eaddr[][3] = {{15, 27, 40}, {31, 45, 55}, {23, 44, 66} };
++	unsigned long accesses[][3] = {{42, 95, 84}, {10, 20, 30}, {0, 1, 2} };
++	struct damon_task *t;
++	struct damon_region *r;
++	int it, ir;
++	ssize_t sz, sr, sp;
++
++	damon_set_pids(pids, 3);
++
++	it = 0;
++	damon_for_each_task(t) {
++		for (ir = 0; ir < 3; ir++) {
++			r = damon_new_region(saddr[it][ir], eaddr[it][ir]);
++			r->nr_accesses = accesses[it][ir];
++			damon_add_region_tail(r, t);
++		}
++		it++;
++	}
++	kdamond_flush_aggregated();
++	it = 0;
++	damon_for_each_task(t) {
++		ir = 0;
++		damon_for_each_region(r, t) {
++			KUNIT_EXPECT_EQ(test, 0u, r->nr_accesses);
++			ir++;
++		}
++		KUNIT_EXPECT_EQ(test, 3, ir);
++		it++;
++	}
++	KUNIT_EXPECT_EQ(test, 3, it);
++
++	sr = sizeof(r->vm_start) + sizeof(r->vm_end) + sizeof(r->nr_accesses);
++	sp = sizeof(t->pid) + sizeof(unsigned int) + 3 * sr;
++	sz = sizeof(struct timespec64) + sizeof(unsigned int) + 3 * sp;
++	KUNIT_EXPECT_EQ(test, (unsigned int)sz, damon_rbuf_offset);
++
++	damon_cleanup_global_state();
++}
++
++static void damon_test_write_rbuf(struct kunit *test)
++{
++	char *data;
++
++	data = "hello";
++	damon_write_rbuf(data, strnlen(data, 256));
++	KUNIT_EXPECT_EQ(test, damon_rbuf_offset, 5u);
++
++	damon_write_rbuf(data, 0);
++	KUNIT_EXPECT_EQ(test, damon_rbuf_offset, 5u);
++
++	KUNIT_EXPECT_EQ(test, strncmp(damon_rbuf, data, 5), 0);
++}
++
++static void damon_test_update_two_gaps(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r, *prev = NULL;
++	unsigned long regions[] = {10, 20, 20, 30,
++		50, 55, 55, 57, 57, 59,
++		70, 80, 80, 90, 90, 100};	/* 10-30, 50-59, 70-100 */
++	struct region new_regions[3] = {
++		(struct region){.start = 5, .end = 27},
++		(struct region){.start = 45, .end = 55},
++		(struct region){.start = 73, .end = 104} };
++	int i;
++	bool first_gap = true;
++
++	t = damon_new_task(42);
++	for (i = 0; i < ARRAY_SIZE(regions) / 2; i++) {
++		r = damon_new_region(regions[i * 2], regions[i * 2 + 1]);
++		damon_add_region_tail(r, t);
++	}
++	damon_add_task_tail(t);
++
++	damon_apply_three_regions(t, new_regions);
++
++	damon_for_each_region(r, t) {
++		if (prev == NULL) {
++			KUNIT_EXPECT_EQ(test, r->vm_start, 5ul);
++			goto next;
++		}
++
++		if (prev->vm_end != r->vm_start && first_gap) {
++			KUNIT_EXPECT_EQ(test, prev->vm_end, 27ul);
++			KUNIT_EXPECT_EQ(test, r->vm_start, 45ul);
++			first_gap = false;
++			goto next;
++		}
++
++		if (prev->vm_end != r->vm_start && !first_gap) {
++			KUNIT_EXPECT_EQ(test, prev->vm_end, 55ul);
++			KUNIT_EXPECT_EQ(test, r->vm_start, 73ul);
++			goto next;
++		}
++
++next:
++		prev = r;
++	}
++
++	damon_cleanup_global_state();
++}
++
++static void damon_test_update_two_gaps2(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r;
++	/* 10-20-30, 50-55-57-59, 70-80-90-100 */
++	unsigned long regions[] = {10, 20, 20, 30,
++		50, 55, 55, 57, 57, 59,
++		70, 80, 80, 90, 90, 100};
++	struct region new_regions[3] = {
++		(struct region){.start = 5, .end = 27},
++		(struct region){.start = 56, .end = 57},
++		(struct region){.start = 65, .end = 104} };
++	/* expect 5-27, 56-57, 65-80-90-104 */
++	unsigned long answers[] = {5, 20, 20, 27,
++		56, 57,
++		65, 80, 80, 90, 90, 104};
++	int i;
++
++	t = damon_new_task(42);
++	for (i = 0; i < ARRAY_SIZE(regions) / 2; i++) {
++		r = damon_new_region(regions[i * 2], regions[i * 2 + 1]);
++		damon_add_region_tail(r, t);
++	}
++	damon_add_task_tail(t);
++
++	damon_apply_three_regions(t, new_regions);
++
++	for (i = 0; i < ARRAY_SIZE(answers) / 2; i++) {
++		r = damon_nth_region_of(t, i);
++		KUNIT_EXPECT_EQ(test, r->vm_start, answers[i * 2]);
++		KUNIT_EXPECT_EQ(test, r->vm_end, answers[i++ * 2 + 1]);
++	}
++
++	damon_cleanup_global_state();
++}
++
++static void damon_test_update_two_gaps3(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r;
++	/* 10-20-30, 50-55-57-59, 70-80-90-100 */
++	unsigned long regions[] = {10, 20, 20, 30,
++		50, 55, 55, 57, 57, 59,
++		70, 80, 80, 90, 90, 100};
++	struct region new_regions[3] = {
++		(struct region){.start = 5, .end = 27},
++		(struct region){.start = 61, .end = 63},
++		(struct region){.start = 65, .end = 104} };
++	/* expect 5-27, 56-57, 65-80-90-104 */
++	unsigned long answers[] = {5, 20, 20, 27,
++		61, 63,
++		65, 80, 80, 90, 90, 104};
++	int i;
++
++	t = damon_new_task(42);
++	for (i = 0; i < ARRAY_SIZE(regions) / 2; i++) {
++		r = damon_new_region(regions[i * 2], regions[i * 2 + 1]);
++		damon_add_region_tail(r, t);
++	}
++	damon_add_task_tail(t);
++
++	damon_apply_three_regions(t, new_regions);
++
++	for (i = 0; i < ARRAY_SIZE(answers) / 2; i++) {
++		r = damon_nth_region_of(t, i);
++		KUNIT_EXPECT_EQ(test, r->vm_start, answers[i * 2]);
++		KUNIT_EXPECT_EQ(test, r->vm_end, answers[i++ * 2 + 1]);
++	}
++
++	damon_cleanup_global_state();
++}
++
++static void damon_test_update_two_gaps4(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r;
++	/* 10-20-30, 50-55-57-59, 70-80-90-100 */
++	unsigned long regions[] = {10, 20, 20, 30,
++		50, 55, 55, 57, 57, 59,
++		70, 80, 80, 90, 90, 100};
++	struct region new_regions[3] = {
++		(struct region){.start = 5, .end = 7},
++		(struct region){.start = 30, .end = 32},
++		(struct region){.start = 65, .end = 68} };
++	/* expect 5-27, 56-57, 65-80-90-104 */
++	unsigned long answers[] = {5, 7, 30, 32, 65, 68};
++	int i;
++
++	t = damon_new_task(42);
++	for (i = 0; i < ARRAY_SIZE(regions) / 2; i++) {
++		r = damon_new_region(regions[i * 2], regions[i * 2 + 1]);
++		damon_add_region_tail(r, t);
++	}
++	damon_add_task_tail(t);
++
++	damon_apply_three_regions(t, new_regions);
++
++	for (i = 0; i < ARRAY_SIZE(answers) / 2; i++) {
++		r = damon_nth_region_of(t, i);
++		KUNIT_EXPECT_EQ(test, r->vm_start, answers[i * 2]);
++		KUNIT_EXPECT_EQ(test, r->vm_end, answers[i++ * 2 + 1]);
++	}
++
++	damon_cleanup_global_state();
++}
++
++static void damon_test_split_evenly(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r;
++	unsigned long i;
++
++	KUNIT_EXPECT_EQ(test, damon_split_region_evenly(NULL, 5), -EINVAL);
++
++	t = damon_new_task(42);
++	r = damon_new_region(0, 100);
++	KUNIT_EXPECT_EQ(test, damon_split_region_evenly(r, 0), -EINVAL);
++
++	damon_add_region_tail(r, t);
++	KUNIT_EXPECT_EQ(test, damon_split_region_evenly(r, 10), 0);
++	KUNIT_EXPECT_EQ(test, nr_damon_regions(t), 10u);
++
++	i = 0;
++	damon_for_each_region(r, t) {
++		KUNIT_EXPECT_EQ(test, r->vm_start, i++ * 10);
++		KUNIT_EXPECT_EQ(test, r->vm_end, i * 10);
++	}
++	damon_free_task(t);
++
++	t = damon_new_task(42);
++	r = damon_new_region(5, 59);
++	damon_add_region_tail(r, t);
++	KUNIT_EXPECT_EQ(test, damon_split_region_evenly(r, 5), 0);
++	KUNIT_EXPECT_EQ(test, nr_damon_regions(t), 5u);
++
++	i = 0;
++	damon_for_each_region(r, t) {
++		if (i == 4)
++			break;
++		KUNIT_EXPECT_EQ(test, r->vm_start, 5 + 10 * i++);
++		KUNIT_EXPECT_EQ(test, r->vm_end, 5 + 10 * i);
++	}
++	KUNIT_EXPECT_EQ(test, r->vm_start, 5 + 10 * i);
++	KUNIT_EXPECT_EQ(test, r->vm_end, 59ul);
++	damon_free_task(t);
++
++	t = damon_new_task(42);
++	r = damon_new_region(5, 6);
++	damon_add_region_tail(r, t);
++	KUNIT_EXPECT_EQ(test, damon_split_region_evenly(r, 2), -EINVAL);
++	KUNIT_EXPECT_EQ(test, nr_damon_regions(t), 1u);
++
++	damon_for_each_region(r, t) {
++		KUNIT_EXPECT_EQ(test, r->vm_start, 5ul);
++		KUNIT_EXPECT_EQ(test, r->vm_end, 6ul);
++	}
++	damon_free_task(t);
++}
++
++static void damon_test_split_at(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r;
++
++	t = damon_new_task(42);
++	r = damon_new_region(0, 100);
++	damon_add_region_tail(r, t);
++	damon_split_region_at(r, 25);
++	KUNIT_EXPECT_EQ(test, r->vm_start, 0ul);
++	KUNIT_EXPECT_EQ(test, r->vm_end, 25ul);
++
++	r = damon_next_region(r);
++	KUNIT_EXPECT_EQ(test, r->vm_start, 25ul);
++	KUNIT_EXPECT_EQ(test, r->vm_end, 100ul);
++
++	damon_free_task(t);
++}
++
++static void damon_test_merge_two(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r, *r2, *r3;
++	int i;
++
++	t = damon_new_task(42);
++	r = damon_new_region(0, 100);
++	r->nr_accesses = 10;
++	damon_add_region_tail(r, t);
++	r2 = damon_new_region(100, 300);
++	r2->nr_accesses = 20;
++	damon_add_region_tail(r2, t);
++
++	damon_merge_two_regions(r, r2);
++	KUNIT_EXPECT_EQ(test, r->vm_start, 0ul);
++	KUNIT_EXPECT_EQ(test, r->vm_end, 300ul);
++	KUNIT_EXPECT_EQ(test, r->nr_accesses, 16u);
++
++	i = 0;
++	damon_for_each_region(r3, t) {
++		KUNIT_EXPECT_PTR_EQ(test, r, r3);
++		i++;
++	}
++	KUNIT_EXPECT_EQ(test, i, 1);
++
++	damon_free_task(t);
++}
++
++static void damon_test_merge_regions_of(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r;
++	unsigned long sa[] = {0, 100, 114, 122, 130, 156, 170, 184};
++	unsigned long ea[] = {100, 112, 122, 130, 156, 170, 184, 230};
++	unsigned int nrs[] = {0, 0, 10, 10, 20, 30, 1, 2};
++
++	unsigned long saddrs[] = {0, 114, 130, 156, 170};
++	unsigned long eaddrs[] = {112, 130, 156, 170, 230};
++	int i;
++
++	t = damon_new_task(42);
++	for (i = 0; i < ARRAY_SIZE(sa); i++) {
++		r = damon_new_region(sa[i], ea[i]);
++		r->nr_accesses = nrs[i];
++		damon_add_region_tail(r, t);
++	}
++
++	damon_merge_regions_of(t, 9);
++	/* 0-112, 114-130, 130-156, 156-170 */
++	KUNIT_EXPECT_EQ(test, nr_damon_regions(t), 5u);
++	for (i = 0; i < 5; i++) {
++		r = damon_nth_region_of(t, i);
++		KUNIT_EXPECT_EQ(test, r->vm_start, saddrs[i]);
++		KUNIT_EXPECT_EQ(test, r->vm_end, eaddrs[i]);
++	}
++	damon_free_task(t);
++}
++
++static void damon_test_split_regions_of(struct kunit *test)
++{
++	struct damon_task *t;
++	struct damon_region *r;
++
++	t = damon_new_task(42);
++	r = damon_new_region(0, 22);
++	damon_add_region_tail(r, t);
++	damon_split_regions_of(t);
++	KUNIT_EXPECT_EQ(test, nr_damon_regions(t), 2u);
++	damon_free_task(t);
++}
++
++static void damon_test_kdamond_need_stop(struct kunit *test)
++{
++	KUNIT_EXPECT_TRUE(test, kdamond_need_stop());
++}
++
++static struct kunit_case damon_test_cases[] = {
++	KUNIT_CASE(damon_test_str_to_pids),
++	KUNIT_CASE(damon_test_tasks),
++	KUNIT_CASE(damon_test_regions),
++	KUNIT_CASE(damon_test_set_pids),
++	KUNIT_CASE(damon_test_three_regions_in_vmas),
++	KUNIT_CASE(damon_test_aggregate),
++	KUNIT_CASE(damon_test_write_rbuf),
++	KUNIT_CASE(damon_test_update_two_gaps),
++	KUNIT_CASE(damon_test_update_two_gaps2),
++	KUNIT_CASE(damon_test_update_two_gaps3),
++	KUNIT_CASE(damon_test_update_two_gaps4),
++	KUNIT_CASE(damon_test_split_evenly),
++	KUNIT_CASE(damon_test_split_at),
++	KUNIT_CASE(damon_test_merge_two),
++	KUNIT_CASE(damon_test_merge_regions_of),
++	KUNIT_CASE(damon_test_split_regions_of),
++	KUNIT_CASE(damon_test_kdamond_need_stop),
++	{},
++};
++
++static struct kunit_suite damon_test_suite = {
++	.name = "damon",
++	.test_cases = damon_test_cases,
++};
++kunit_test_suite(damon_test_suite);
++
++#endif /* _DAMON_TEST_H */
++
++#endif	/* CONFIG_DAMON_TEST */
+diff --git a/mm/damon.c b/mm/damon.c
+index 0e99b4875700..c4b6b2db9a8c 100644
+--- a/mm/damon.c
++++ b/mm/damon.c
+@@ -1262,3 +1262,5 @@ static int __init damon_init(void)
+ }
+ 
+ module_init(damon_init);
++
++#include "damon-test.h"
 -- 
 2.17.1
 
