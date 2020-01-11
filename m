@@ -2,139 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2D3531381D6
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Jan 2020 15:57:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 59964138381
+	for <lists+linux-doc@lfdr.de>; Sat, 11 Jan 2020 21:23:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730287AbgAKO5x (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 11 Jan 2020 09:57:53 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:23690 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1730241AbgAKO5x (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 11 Jan 2020 09:57:53 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1578754672;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=6IIyl7nwLzkMIjP69KzWLUXNNYREWPo9znJtU/sIj/o=;
-        b=duAIfecSUhygFuQdn3GTZXSqBW4t4q4HeKOdMcumT2eGhPniI2QNgsJQhvHIW1zchaJBWL
-        G6sUROPTaQ12r/dJt8ljCS8Id9u/nV1x5ZqSc3+1h9HVZ856HgcPeaAHaOm+BLwt5WQsOI
-        Te5zQMSnUDxXPrI3rdztQxKovLFuaAE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-426-A5kjaX56M6GbHvBdLqSCmQ-1; Sat, 11 Jan 2020 09:57:50 -0500
-X-MC-Unique: A5kjaX56M6GbHvBdLqSCmQ-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1FE49107ACC4;
-        Sat, 11 Jan 2020 14:57:48 +0000 (UTC)
-Received: from shalem.localdomain.com (ovpn-116-84.ams2.redhat.com [10.36.116.84])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 4C21487EC6;
-        Sat, 11 Jan 2020 14:57:44 +0000 (UTC)
-From:   Hans de Goede <hdegoede@redhat.com>
-To:     Ard Biesheuvel <ardb@kernel.org>,
-        Darren Hart <dvhart@infradead.org>,
-        Andy Shevchenko <andy@infradead.org>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>
-Cc:     Hans de Goede <hdegoede@redhat.com>,
-        Peter Jones <pjones@redhat.com>,
-        Dave Olsthoorn <dave@bewaar.me>, x86@kernel.org,
-        platform-driver-x86@vger.kernel.org, linux-efi@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-input@vger.kernel.org,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        Ard Biesheuvel <ard.biesheuvel@linaro.org>
-Subject: [PATCH v11 10/10] platform/x86: touchscreen_dmi: Add info for the Chuwi Vi8 Plus tablet
-Date:   Sat, 11 Jan 2020 15:57:03 +0100
-Message-Id: <20200111145703.533809-11-hdegoede@redhat.com>
-In-Reply-To: <20200111145703.533809-1-hdegoede@redhat.com>
-References: <20200111145703.533809-1-hdegoede@redhat.com>
+        id S1731128AbgAKUXB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 11 Jan 2020 15:23:01 -0500
+Received: from mail-pf1-f195.google.com ([209.85.210.195]:36061 "EHLO
+        mail-pf1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731119AbgAKUXA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 11 Jan 2020 15:23:00 -0500
+Received: by mail-pf1-f195.google.com with SMTP id x184so2861699pfb.3;
+        Sat, 11 Jan 2020 12:23:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:subject:from:to:cc:references:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=41KWMk1pZePqF7DfgTawJC7PFNFV1UU7PbNC+WCjwvw=;
+        b=vZ2ZQzhbAdvQJc6i1VGPzo9PLxV1GRAtcj4FNeKlizCfjGVoIi1N+h4A+/941KxN+K
+         Or5V7F/FqqwYcoY/I0IELwJMc1OB4/SeieFXzIQXNzzWHAJFiHE95uQYNxUWFE79oRqR
+         SQZlM1xt9m+6DjAGHIR4JN+Ky8GXwFR83vc0513L656LSwct6Lf0m77fXi2k6tw2isKF
+         f9+8Wpaeji9ri//KUKpJRXjfdo9GjKJLE9pdawsG4HeaW/e6Es0PrxCMCAUuHSAMyQAV
+         lzMa/3Qlagy1ZW2ZrRKzsVFyQxoF43PQsooNsstDlyuGruyMrX2F+ZA4x8xxLL01cRwj
+         63sA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:subject:from:to:cc:references:message-id
+         :date:user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=41KWMk1pZePqF7DfgTawJC7PFNFV1UU7PbNC+WCjwvw=;
+        b=tbkucNVnTzmfcaSDn2PpG0mduXkGdk+XO+O392RSiGY0KOYUlAe4vPan3+x6DGIgKO
+         kGeuHrIeI3M8LCQXiZXFcvTV6C4iYOKLA13mfa4AGPBcWI/Cy3TT9RdjbuE0pmePfgBm
+         0LbUGpWXgKpMqlEeJ+UptuGvqfyuT/b90XvlyyBtllIhsDuR5EgfvIdhZG3Xvk1oGhDu
+         36TSUmNMi2ccyPVb9KMwoFTn4roWH9GU6a0+LqM9O+PbE1x5OxYYBDGIbXQdstBchEzo
+         iuqMGGoGJcFpmT8GkjrJ6kIm6pO6V6q3PfzXGkcNEdDnz1py4qp3VHpVlR6jodMVNPZW
+         hOdw==
+X-Gm-Message-State: APjAAAXNdIMhAASR74GnhuNMUhlDNTPDDUSkZ9IpD5K9p92OY+FOCYHN
+        aL55M6qMFRYX2eY6NxRoOiw=
+X-Google-Smtp-Source: APXvYqyzTVgDIcY913y1z652I02ZglZtHagv5esZ0OSA1Rm/rl7v3G+QeLDwAGkHey9qCR8Hz8yWjg==
+X-Received: by 2002:a63:d306:: with SMTP id b6mr12428585pgg.195.1578774179696;
+        Sat, 11 Jan 2020 12:22:59 -0800 (PST)
+Received: from server.roeck-us.net ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id b193sm7962800pfb.57.2020.01.11.12.22.58
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sat, 11 Jan 2020 12:22:59 -0800 (PST)
+Subject: Re: [PATCH v2] hwmon: Driver for temperature sensors on SATA drives
+From:   Guenter Roeck <linux@roeck-us.net>
+To:     "Martin K. Petersen" <martin.petersen@oracle.com>
+Cc:     linux-hwmon@vger.kernel.org, Jean Delvare <jdelvare@suse.com>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Bart Van Assche <bvanassche@acm.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-scsi@vger.kernel.org, linux-ide@vger.kernel.org,
+        Chris Healy <cphealy@gmail.com>
+References: <20191215174509.1847-1-linux@roeck-us.net>
+ <20191215174509.1847-2-linux@roeck-us.net> <yq1r211dvck.fsf@oracle.com>
+ <b22a519c-8f26-e731-345f-9deca1b2150e@roeck-us.net>
+ <yq1sgkq21ll.fsf@oracle.com> <20200108153341.GB28530@roeck-us.net>
+Message-ID: <38af9fda-9edf-1b54-bd8d-92f712ae4cda@roeck-us.net>
+Date:   Sat, 11 Jan 2020 12:22:57 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.2.2
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20200108153341.GB28530@roeck-us.net>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add touchscreen info for the Chuwi Vi8 Plus tablet. This tablet uses a
-Chipone ICN8505 touchscreen controller, with the firmware used by the
-touchscreen embedded in the EFI firmware.
+On 1/8/20 7:33 AM, Guenter Roeck wrote:
+> On Tue, Jan 07, 2020 at 08:12:06PM -0500, Martin K. Petersen wrote:
+>>
+>> Guenter,
+>>
+>>> Any idea how I might be able to reproduce this ? So far I have been
+>>> unsuccessful.
+>>>
+>>> Building drivetemp into the kernel, with ahci and everything SCSI
+>>> built as module, doesn't trigger the crash for me. This is with the
+>>> drivetemp patch (v3) as well as commit d188b0675b ("scsi: core: Add
+>>> sysfs attributes for VPD pages 0h and 89h") applied on top of v5.4.7.
+>>
+>> This is with 5.5-rc1. I'll try another kernel.
+>>
+>> My repro is:
+>>
+>> # modprobe drivetemp
+>> # modprobe <any SCSI driver, including ahci>
+>>
+> No luck on my side. Can you provide a traceback ? Maybe we can use it
+> to find out what is happening.
+> 
 
-Acked-by: Andy Shevchenko <andy.shevchenko@gmail.com>
-Acked-by: Ard Biesheuvel <ard.biesheuvel@linaro.org>
-Signed-off-by: Hans de Goede <hdegoede@redhat.com>
----
-Changes in v7:
-- Remove PROPERTY_ENTRY_BOOL("efi-embedded-firmware") properties entry,
-  as this is no longer necessary
+I tried again, this time with v5.5-rc5. Loading and unloading ahci and
+drivetemp in any order does not cause any problems for me.
 
-Changes in v6:
-- Switch from crc sums to SHA256 hashes for the firmware hash
----
- drivers/platform/x86/touchscreen_dmi.c | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+At this point I don't know what else I could test. I went ahead and
+applied the drivetemp patch to hwmon-next. Maybe we'll get some additional
+test feedback this way.
 
-diff --git a/drivers/platform/x86/touchscreen_dmi.c b/drivers/platform/x8=
-6/touchscreen_dmi.c
-index 4449e4c0b26b..4a09b479cda5 100644
---- a/drivers/platform/x86/touchscreen_dmi.c
-+++ b/drivers/platform/x86/touchscreen_dmi.c
-@@ -132,6 +132,18 @@ static const struct ts_dmi_data chuwi_vi8_data =3D {
- 	.properties     =3D chuwi_vi8_props,
- };
-=20
-+static const struct ts_dmi_data chuwi_vi8_plus_data =3D {
-+	.embedded_fw =3D {
-+		.name	=3D "chipone/icn8505-HAMP0002.fw",
-+		.prefix =3D { 0xb0, 0x07, 0x00, 0x00, 0xe4, 0x07, 0x00, 0x00 },
-+		.length	=3D 35012,
-+		.sha256	=3D { 0x93, 0xe5, 0x49, 0xe0, 0xb6, 0xa2, 0xb4, 0xb3,
-+			    0x88, 0x96, 0x34, 0x97, 0x5e, 0xa8, 0x13, 0x78,
-+			    0x72, 0x98, 0xb8, 0x29, 0xeb, 0x5c, 0xa7, 0xf1,
-+			    0x25, 0x13, 0x43, 0xf4, 0x30, 0x7c, 0xfc, 0x7c },
-+	},
-+};
-+
- static const struct property_entry chuwi_vi10_props[] =3D {
- 	PROPERTY_ENTRY_U32("touchscreen-min-x", 0),
- 	PROPERTY_ENTRY_U32("touchscreen-min-y", 4),
-@@ -743,6 +755,15 @@ const struct dmi_system_id touchscreen_dmi_table[] =3D=
- {
- 			DMI_MATCH(DMI_BIOS_VERSION, "CHUWI.D86JLBNR"),
- 		},
- 	},
-+	{
-+		/* Chuwi Vi8 Plus (CWI519) */
-+		.driver_data =3D (void *)&chuwi_vi8_plus_data,
-+		.matches =3D {
-+			DMI_MATCH(DMI_SYS_VENDOR, "Hampoo"),
-+			DMI_MATCH(DMI_PRODUCT_NAME, "D2D3_Vi8A1"),
-+			DMI_MATCH(DMI_BOARD_NAME, "Cherry Trail CR"),
-+		},
-+	},
- 	{
- 		/* Chuwi Vi10 (CWI505) */
- 		.driver_data =3D (void *)&chuwi_vi10_data,
-@@ -1137,6 +1158,9 @@ static int __init ts_dmi_init(void)
- 		return 0; /* Not an error */
-=20
- 	ts_data =3D dmi_id->driver_data;
-+	/* Some dmi table entries only provide an efi_embedded_fw_desc */
-+	if (!ts_data->properties)
-+		return 0;
-=20
- 	error =3D bus_register_notifier(&i2c_bus_type, &ts_dmi_notifier);
- 	if (error)
---=20
-2.24.1
-
+Guenter
