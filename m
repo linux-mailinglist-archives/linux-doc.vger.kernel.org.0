@@ -2,92 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 20904138AAD
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jan 2020 06:22:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 92CDC138B70
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jan 2020 06:52:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725909AbgAMFW3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 13 Jan 2020 00:22:29 -0500
-Received: from mail.kernel.org ([198.145.29.99]:56504 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725268AbgAMFW3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 13 Jan 2020 00:22:29 -0500
-Received: from localhost (unknown [106.200.247.255])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 7A93121556;
-        Mon, 13 Jan 2020 05:22:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1578892948;
-        bh=pQmyxSK2rYvZKhrIwLap9VHfSzCEWZiVvINtuLhYf+8=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=sXsnWQlS74pdFu0UVzYxpNsBcF1pjQrjT5BtFxF/taQ3HDzM842jYOvVocHdIWHG9
-         J+i7dHx1rmbqKaLZExA0iZN52nxNbefaz3lsNVHM25Wj2b8b0dwwoSCDmehmjB0IRc
-         dXZyIv9yOCMRN0Vz0016AX+lCzyP+cCrTUAuhMIM=
-Date:   Mon, 13 Jan 2020 10:52:24 +0530
-From:   Vinod Koul <vkoul@kernel.org>
-To:     Pierre-Louis Bossart <pierre-louis.bossart@linux.intel.com>
-Cc:     alsa-devel@alsa-project.org, Jonathan Corbet <corbet@lwn.net>,
-        tiwai@suse.de, gregkh@linuxfoundation.org,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org,
-        Ranjani Sridharan <ranjani.sridharan@linux.intel.com>,
-        broonie@kernel.org, srinivas.kandagatla@linaro.org,
-        jank@cadence.com, slawomir.blauciak@intel.com,
-        Sanyog Kale <sanyog.r.kale@intel.com>,
-        Bard liao <yung-chuan.liao@linux.intel.com>,
-        Rander Wang <rander.wang@linux.intel.com>
-Subject: Re: [alsa-devel] [PATCH 2/6] soundwire: stream: update state machine
- and add state checks
-Message-ID: <20200113052224.GQ2818@vkoul-mobl>
-References: <20200108175438.13121-1-pierre-louis.bossart@linux.intel.com>
- <20200108175438.13121-3-pierre-louis.bossart@linux.intel.com>
- <20200110064838.GY2818@vkoul-mobl>
- <a18c668f-4628-0fb9-ffa0-b24cdad1cc8b@linux.intel.com>
- <69ad48b0-fa3c-904a-4106-5cd9bd18de5c@linux.intel.com>
+        id S1732134AbgAMFwZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 13 Jan 2020 00:52:25 -0500
+Received: from mail-oi1-f194.google.com ([209.85.167.194]:46149 "EHLO
+        mail-oi1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726475AbgAMFwZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Jan 2020 00:52:25 -0500
+Received: by mail-oi1-f194.google.com with SMTP id 13so7164406oij.13
+        for <linux-doc@vger.kernel.org>; Sun, 12 Jan 2020 21:52:25 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=Rjbe3pVeMfYVPdmVklZ4b2stSqI32LIYp+bn/8NyJvk=;
+        b=El5YZgtDEXJCHEtZrRB1ujEJT5GnrR9nqQvx3oNXkD1KXWKAy5lE4fahagwXmNRBuY
+         Z373bCStdjZZAvrcMmyjZhqXNYKD7qS8gpQ1uKt4Zm/CJYofbOmd6y2KCfdaIf8lu4gx
+         e04Qq2Wd5k0QzXhgODgXLh9+BTAbr7mIJG1kvrHD2cB5892G2QaMtoQjZ8YbwAsn/v/R
+         qN1ulSwy8kLJzDOOwwvDkEa6g0paOaNUUW6lO8NcaOsOsQMTh2eV34LXY/bnRxfyDcL+
+         OFIAYoYpyWTxvo4nB11oXa8J2BNLiFXnr18VfN4DCPOmpXqWPT8f/9GzmZX8VWLxs4VK
+         s+8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=Rjbe3pVeMfYVPdmVklZ4b2stSqI32LIYp+bn/8NyJvk=;
+        b=CPH1PQDM5fLDlNbIuWFkGq0Z1YgDghAXy9M+dKXXAC9OvvIBOJiou9qFraYfhTKb9w
+         AxA0ZJorjEA9VWQr7MIxJUDiK31Bj5tM2ZouCmXDDuDdr2qDgkDBn3T8MDjufWG9Xtfk
+         2dISAGAvtH/QceEMA2mVJqVwSINhPemzYtXB1SvOunFTPHrj4ch1dVpQeTSkwixjzVHM
+         F6PYuvrdZtModvwXKXiNww/mfwo0QU6Xz4SMAs+6NgeeyMAtO2q9pDJvCnYShF+ODlOY
+         oVFW7qLYCGKwq/JyDIDI2BKXJCuLqxTJ7L2EObr8uk3RMqllQ0X9x0iYbJZSJMiC24Zh
+         dpCA==
+X-Gm-Message-State: APjAAAVkj789BjOGuWtkyYbwL2y9KQXZqoeGvG1banisG7Xagel2Ch0V
+        ObX+PjctlrGi3WwX+y3HHb7xbLsKG7yCkxlREIg=
+X-Google-Smtp-Source: APXvYqy7JhGBt0ZjJ/1t4CT74GIhTuvbOMnCynReBbsGRcTAfZPwoiLBCe9XiPA9xaK1JAPmy14eucUMWI9DLkbKsUo=
+X-Received: by 2002:a54:4713:: with SMTP id k19mr11513430oik.113.1578894745174;
+ Sun, 12 Jan 2020 21:52:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <69ad48b0-fa3c-904a-4106-5cd9bd18de5c@linux.intel.com>
+Received: by 2002:a4a:41cb:0:0:0:0:0 with HTTP; Sun, 12 Jan 2020 21:52:24
+ -0800 (PST)
+Reply-To: rickschaech@gmail.com
+From:   Rick Schaech <cathben72@gmail.com>
+Date:   Mon, 13 Jan 2020 01:52:24 -0400
+Message-ID: <CAEcBxO=TAnFn5LzizHa22hUC0Db5FuiZJF28m=yX3_9m--jRqg@mail.gmail.com>
+Subject: I wait for your swift response,
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11-01-20, 05:30, Pierre-Louis Bossart wrote:
-> 
-> 
-> On 1/10/20 10:30 AM, Pierre-Louis Bossart wrote:
-> > 
-> > > > -  int sdw_prepare_stream(struct sdw_stream_runtime * stream);
-> > > > +  int sdw_prepare_stream(struct sdw_stream_runtime * stream,
-> > > > bool resume);
-> > > 
-> > > so what does the additional argument of resume do..?
-> > > 
-> > > > diff --git a/drivers/soundwire/stream.c b/drivers/soundwire/stream.c
-> > > > index 178ae92b8cc1..6aa0b5d370c0 100644
-> > > > --- a/drivers/soundwire/stream.c
-> > > > +++ b/drivers/soundwire/stream.c
-> > > > @@ -1553,8 +1553,18 @@ int sdw_prepare_stream(struct
-> > > > sdw_stream_runtime *stream)
-> > > 
-> > > and it is not modified here, so is the doc correct or this..?
-> > 
-> > the doc is correct and the code is updated in
-> > 
-> > [PATCH 4/6] soundwire: stream: do not update parameters during
-> > DISABLED-PREPARED transition
-> 
-> Sorry, wrong answer, my bad. The code block in the documentation is
-> incorrect.
-> 
-> The Patch 4/6 implements the transition mentioned in the documentation, but
-> the extra parameter is a left-over from an earlier version. This case is now
-> handled internally. We did revert to the initial prototype after finding out
-> that dealing with transitions in the caller is error-prone.
+Dear, I'm Mr Rick Schaech, I am the General Account Auditor, Though i
+know we have not meet each other before but sometimes in life God have
+a reason of bringing two people from two different countries together
+as business partners or life partners.
 
-Glad that you agree with me on something!
+My dear friend, I have the sum of 15.7 Million USD i wish to put in
+your name due to the death of my late client who died several years
+ago as his next of kin column still remain blank. Though the internet
+medium is highly abuse these days but am assuring you that this
+transaction is legitimate and I am contacting you that we may have a
+deal, note for your cooperation and collaboration 40% of the sum will
+be for you while the other 60% will be for me as well. I wait for your
+swift response for more details. please forward your response to my
+personal E-mail: rickschaech@gmail.com
 
--- 
-~Vinod
+Yours sincerely,
+Rick Schaech.
