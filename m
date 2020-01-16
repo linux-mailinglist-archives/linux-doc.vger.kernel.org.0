@@ -2,89 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 72DC413D92A
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2020 12:39:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4D44313DA02
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2020 13:30:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726088AbgAPLiy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Jan 2020 06:38:54 -0500
-Received: from mail-eopbgr1380095.outbound.protection.outlook.com ([40.107.138.95]:48485
-        "EHLO IND01-MA1-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1725999AbgAPLix (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 16 Jan 2020 06:38:53 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=JSCNuOxB6d7XEM/A4CFFfe14/oZi0MfW7GeOXPqij1QzWWIGcDhFa3/6plyMBEqzqwzluf4PPgubzQ6uMI0boykwY0O/9qEmzxU/e5tiYtzVDzIifiv4/OCn2JGcyMit2VZWiK+tIG8WuDk8350edAM3lLIXySk3f2vCdUaVgInV6vJxk4lWZe1fnsq18b0xSOG7dkPA3D67Ls0n/AS7qj378r4rfe+vNA8n/dL+G0fIiM7c4a91SHAPwAciV9hMKaiXpL0op0cMsSMZl8pAhUWoKzQqdd6Tv6tfBbn9ihKCUXzlR3Soy9feBV8Sy+EgNZKMKKC4PljgVGXF2dljqw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=u0MmcKB8ErdZr1OYaeaDqFajhH9KIMis02vXGCbfmO0=;
- b=VvI9JyCGygRmsPxcN5c3pZxiInqGgKZmD1s9vIYedDOAy7MBX+XHRzu94DMJLQiKxrmWPHnKPXxCI3O8gIJr/aoJrjkB55NeduO0MEl7NiNkX9d3/fCLRo5eLFjUosL3mDh7cvkZOENOm9g8AHLjomEsdI0WLdTeeEehxuvbVWVI1CPV/W8xuLKBvx1OhodHjGl6hXbVKqRvxvRc39xF1+wstLBiy0kSstaVKA8EtQ0LSZAPDk2z+PBsoDglEcDMTK7D0x385Wq1HuOLYtbN+LET+Uk4fPI3vg+aQKpIrK51Twyoy6bhpTFWvLGPecoLSHpXIlllh5GOK0AJ1tkWiA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=oceanedigitaldata.com; dmarc=pass action=none
- header.from=oceanedigitaldata.com; dkim=pass header.d=oceanedigitaldata.com;
- arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=NETORGFT5553580.onmicrosoft.com;
- s=selector1-NETORGFT5553580-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=u0MmcKB8ErdZr1OYaeaDqFajhH9KIMis02vXGCbfmO0=;
- b=xnvwO0RvlSlXeuiMUzalUV7fE1/58OQahdSxNZgBJr8L2ttJyDJOjC6azkwXymlza+8Ll4dZSAJnEtZH0/zN2P76jJpOL4LA+3u+jrPEg/m+vzjDMijk3PjpKvQQv4pWYv2XsmC6X7cV3C16K6dxkL9WjXNaiIxnjCwx4yocJkA=
-Received: from BM1PR01MB3362.INDPRD01.PROD.OUTLOOK.COM (52.133.239.87) by
- BM1PR01MB0932.INDPRD01.PROD.OUTLOOK.COM (10.174.211.135) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2623.13; Thu, 16 Jan 2020 11:38:47 +0000
-Received: from BM1PR01MB3362.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::7815:ea:4d7e:7f52]) by BM1PR01MB3362.INDPRD01.PROD.OUTLOOK.COM
- ([fe80::7815:ea:4d7e:7f52%7]) with mapi id 15.20.2644.015; Thu, 16 Jan 2020
- 11:38:47 +0000
-Received: from DESKTOPMPN5UI4 (49.207.50.126) by MAXPR01CA0087.INDPRD01.PROD.OUTLOOK.COM (2603:1096:a00:49::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2644.20 via Frontend Transport; Thu, 16 Jan 2020 11:38:46 +0000
-From:   Brenda Lane <brenda.lane@oceanedigitaldata.com>
-To:     "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-Subject: FYI Embedded World  2020
-Thread-Topic: FYI Embedded World  2020
-Thread-Index: AdXMYYKBwaPGj85YTM6ru0ZUB8KZcQ==
-Importance: high
-X-Priority: 1
-Date:   Thu, 16 Jan 2020 11:38:47 +0000
-Message-ID: <!&!AAAAAAAAAAAYAAAAAAAAAMeItoodLbBEhAG+Fnluak7CgAAAEAAAAIxsWE2fVv1EryS39PBE1yQBAAAAAA==@oceanedigitaldata.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: MAXPR01CA0087.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:a00:49::29) To BM1PR01MB3362.INDPRD01.PROD.OUTLOOK.COM
- (2603:1096:b00:76::23)
-authentication-results: spf=none (sender IP is )
- smtp.mailfrom=brenda.lane@oceanedigitaldata.com; 
-x-ms-exchange-messagesentrepresentingtype: 1
-x-mailer: Microsoft Outlook 15.0
-x-originating-ip: [49.207.50.126]
-x-ms-publictraffictype: Email
-x-ms-office365-filtering-correlation-id: 51876504-e41b-4344-21c8-08d79a78a609
-x-ms-traffictypediagnostic: BM1PR01MB0932:
-x-microsoft-antispam-prvs: <BM1PR01MB09324C85D5F2B69F64AFCB29EA360@BM1PR01MB0932.INDPRD01.PROD.OUTLOOK.COM>
-x-ms-oob-tlc-oobclassifiers: OLM:5236;
-x-forefront-prvs: 02843AA9E0
-x-forefront-antispam-report: SFV:NSPM;SFS:(10019020)(366004)(376002)(396003)(346002)(136003)(39850400004)(199004)(189003)(26005)(2616005)(66556008)(66446008)(64756008)(956004)(36756003)(2906002)(186003)(16526019)(66476007)(86362001)(55236004)(66946007)(44832011)(6486002)(1006002)(7116003)(508600001)(8676002)(81156014)(8936002)(5660300002)(71200400001)(6916009)(52116002)(316002)(81166006)(4744005)(6496006)(130950200001);DIR:OUT;SFP:1102;SCL:1;SRVR:BM1PR01MB0932;H:BM1PR01MB3362.INDPRD01.PROD.OUTLOOK.COM;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;A:1;MX:1;
-received-spf: None (protection.outlook.com: oceanedigitaldata.com does not
- designate permitted sender hosts)
-x-ms-exchange-senderadcheck: 1
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: DwYGhXU+vp048g6A3GyJ6Q3+qm5WN0+5oCG2eBbYbsfuhMgL7z8fJAplUh0ThNXg7ubOjyDJplMkRJNhNSqzU5ycx7lCV5ofS5DqvP62PSJ3LlwkMzmvXQn+jlLS9xQ9b5y6frtsge/4XEBn1iQY1xUz+25W6MTgpqOAHYmkbTkh6/ojGjFwoYYYBpdVn7DNzoHYXV3FDWNWfmeOD8grTgOCGx0959M6sUqr4jQ9MOD4xkWTA+7NrDMKSOS6LVK+WwunOnG54c/1ExGO8HB367+VWdMERAnurkBLv1bYLmQDJvh9V6vK4CBa273k08zwHDkEZjDUfZdh/xbdfs6/FHLPx28JhrwW+ylYJcU4yq4d6fQPGDdV3yOtbvWvTMgezHFJwN6+Wh8IZ+4J2EgBANeWTYq+9cNSxTZNEqSln768ZKSGNmkyBlhJgc0RZo0a/c3M3uRwuBXR7yfajlnvzHDF5O0VSDkUeE7hsPV7vThHWFZPPYnEqt1EdM3qbuE6
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="us-ascii"
-Content-ID: <F029167DDA23174689FAAD9721F389B3@INDPRD01.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: quoted-printable
+        id S1726861AbgAPM3y (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Jan 2020 07:29:54 -0500
+Received: from mailout2.w1.samsung.com ([210.118.77.12]:38078 "EHLO
+        mailout2.w1.samsung.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726084AbgAPM3x (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Jan 2020 07:29:53 -0500
+Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
+        by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20200116122951euoutp02f5afaa23047a8d57cd21a63808be9a7b~qXdW3ymg20636106361euoutp02n
+        for <linux-doc@vger.kernel.org>; Thu, 16 Jan 2020 12:29:51 +0000 (GMT)
+DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20200116122951euoutp02f5afaa23047a8d57cd21a63808be9a7b~qXdW3ymg20636106361euoutp02n
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
+        s=mail20170921; t=1579177791;
+        bh=9smxSwk2JX5E045fPogk/LSOgeGj4lDoUVspfYuU4Do=;
+        h=From:To:Cc:Subject:Date:References:From;
+        b=YckGHTbVL3T7wB1KdbCl4YZU9uniSHNyenKBea0AsCvjA0O2WQndPWEr/QQ3CK/l4
+         iVWAEbZRV8CqCsNdiRXXRuAffP/Kjk1TLIHSkqs+KcbZjtugcQ12PVWwquFgjJn6nX
+         ZUhRvyJ+GwquixbiCOafq3eCA2kYsz1soMlOsnMA=
+Received: from eusmges3new.samsung.com (unknown [203.254.199.245]) by
+        eucas1p1.samsung.com (KnoxPortal) with ESMTP id
+        20200116122951eucas1p1a80018be5cd8fc18e358f6a72b71ce62~qXdWghTn71717617176eucas1p1V;
+        Thu, 16 Jan 2020 12:29:51 +0000 (GMT)
+Received: from eucas1p2.samsung.com ( [182.198.249.207]) by
+        eusmges3new.samsung.com (EUCPMTA) with SMTP id DC.2F.60698.F37502E5; Thu, 16
+        Jan 2020 12:29:51 +0000 (GMT)
+Received: from eusmtrp2.samsung.com (unknown [182.198.249.139]) by
+        eucas1p1.samsung.com (KnoxPortal) with ESMTPA id
+        20200116122951eucas1p1d36493f2b496bb13dca4fd1a17abad49~qXdWMkQMn1718617186eucas1p1c;
+        Thu, 16 Jan 2020 12:29:51 +0000 (GMT)
+Received: from eusmgms1.samsung.com (unknown [182.198.249.179]) by
+        eusmtrp2.samsung.com (KnoxPortal) with ESMTP id
+        20200116122951eusmtrp22589902b42e5cdb84cbbe6668e393695~qXdWL78CO1149911499eusmtrp2E;
+        Thu, 16 Jan 2020 12:29:51 +0000 (GMT)
+X-AuditID: cbfec7f5-a29ff7000001ed1a-d8-5e20573fb24e
+Received: from eusmtip1.samsung.com ( [203.254.199.221]) by
+        eusmgms1.samsung.com (EUCPMTA) with SMTP id E2.32.08375.F37502E5; Thu, 16
+        Jan 2020 12:29:51 +0000 (GMT)
+Received: from AMDC3058.digital.local (unknown [106.120.51.71]) by
+        eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
+        20200116122950eusmtip1fe10a41302d87854f36386f1033f69ec~qXdVjUpIb0460004600eusmtip1b;
+        Thu, 16 Jan 2020 12:29:50 +0000 (GMT)
+From:   Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>
+To:     "David S . Miller" <davem@davemloft.net>,
+        Ralf Baechle <ralf@linux-mips.org>,
+        Paul Burton <paul.burton@mips.com>,
+        James Hogan <jhogan@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-ide@vger.kernel.org, linux-mips@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        b.zolnierkie@samsung.com
+Subject: [PATCH 0/3] ide/MIPS/docs: remove no longer used au1xxx-ide driver
+Date:   Thu, 16 Jan 2020 13:29:35 +0100
+Message-Id: <20200116122938.20789-1-b.zolnierkie@samsung.com>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-X-OriginatorOrg: oceanedigitaldata.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 51876504-e41b-4344-21c8-08d79a78a609
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Jan 2020 11:38:47.3311
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 4d88f05e-781c-4247-92e4-bd9439b8070f
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: xxHYIyb689m3VnTfpsM0vpAOl1raAVaH6O0wOJvUHbRTfuCsVO2jzHPu3fSgeNLdhc6NcvszLxTR7teRMOmmxh6bcdjG7tKjOOfd2l5j1tyndMIPVqYL1tmZWepSvOQ8
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BM1PR01MB0932
+Content-Transfer-Encoding: 8bit
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFKsWRmVeSWpSXmKPExsWy7djP87r24QpxBjfnSFhsnLGe1eLJgXZG
+        iznnW1gsJp74xGKxsG0Ji8WxHY+YLC7vmsNm0blpK6NF3+tjzBaX9qg4cHlsWXmTyWPTqk42
+        j6Mr1zJ5LO6bzOrx+shDFo++LasYPT5vkgtgj+KySUnNySxLLdK3S+DKeHK0nblgPXfFzPk3
+        mRoYb3N0MXJySAiYSDS032DuYuTiEBJYwShx/dJ8FgjnC6PE4+6jbBDOZ0aJL+vXs8O0vLx8
+        ECqxnFHi7+fTjHAtU5sPsoJUsQlYSUxsXwWWEBHYzSjx8/lusC3MAhMYJfadmcAMUiUs4C1x
+        o+kWE4jNIqAqsae7kw3E5hWwlZi24BLUPnmJrd8+sULEBSVOznzCAmIzA8Wbt84GGyohMI9d
+        4uW0+8wQDS4SV48th7KFJV4d3wI1SEbi/875TBAN64AO73gB1b2dUWL55H9sEFXWEnfO/QKy
+        OYBWaEqs36UPEXaUaOk9CBaWEOCTuPFWEOIIPolJ26YzQ4R5JTrahCCq1SQ2LNvABrO2a+dK
+        qHM8JP5dmA8WFxKIlZh4/injBEaFWUhem4XktVkINyxgZF7FKJ5aWpybnlpsnJdarlecmFtc
+        mpeul5yfu4kRmKJO/zv+dQfjvj9JhxgFOBiVeHg/hCjECbEmlhVX5h5ilOBgVhLhPTlDNk6I
+        NyWxsiq1KD++qDQntfgQozQHi5I4r/Gil7FCAumJJanZqakFqUUwWSYOTqkGxu2sR0v/rbt9
+        gOHFm2fq7NW3z1UpTiufd3PftG79eqFPUYfSVxQlsV/Z/fi/9ibDf882Plt/qvNu4bpZ9kof
+        01xcJgjolkYnis2JrPR6qbXFvVshcp5tUQRXcp74p+aFVx7unFRUknfqtcWMT1ekDli0OPyx
+        vKP27vay3C+xUvYrPxz4ZSoQ0KTEUpyRaKjFXFScCACDGjezTQMAAA==
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupjkeLIzCtJLcpLzFFi42I5/e/4XV37cIU4g/0zWCw2zljPavHkQDuj
+        xZzzLSwWE098YrFY2LaExeLYjkdMFpd3zWGz6Ny0ldGi7/UxZotLe1QcuDy2rLzJ5LFpVSeb
+        x9GVa5k8FvdNZvV4feQhi0ffllWMHp83yQWwR+nZFOWXlqQqZOQXl9gqRRtaGOkZWlroGZlY
+        6hkam8daGZkq6dvZpKTmZJalFunbJehlPDnazlywnrti5vybTA2Mtzm6GDk5JARMJF5ePsjW
+        xcjFISSwlFHiad8y9i5GDqCEjMTx9WUQNcISf651QdV8YpTYsuMYE0iCTcBKYmL7KkaQhIjA
+        fkaJyQsPMIE4zAJTGCVWnGkFqxIW8Ja40XQLzGYRUJXY093JBmLzCthKTFtwiR1ihbzE1m+f
+        WCHighInZz5hAbGZgeLNW2czT2Dkm4UkNQtJagEj0ypGkdTS4tz03GJDveLE3OLSvHS95Pzc
+        TYzAuNh27OfmHYyXNgYfYhTgYFTi4Z0RpBAnxJpYVlyZe4hRgoNZSYT35AzZOCHelMTKqtSi
+        /Pii0pzU4kOMpkDHTmSWEk3OB8ZsXkm8oamhuYWlobmxubGZhZI4b4fAwRghgfTEktTs1NSC
+        1CKYPiYOTqkGRsdWNe5117p1pdPn3zpsJ7c1tbz+8n3DowsuBchqr++xD1NobXsZ/3Vq0OnD
+        Z+U/rf1p93VBAJ+rE1OHecm6ete7a8ReiTAeOvW3PH7lDY9Ol21v5gtLBGTbx2xyLKy8s93p
+        Zf/24E0ebfZcQY93eaiuK1HX3PUrdQ7X/rfTPp4NvBEyjdejRImlOCPRUIu5qDgRADDN8euh
+        AgAA
+X-CMS-MailID: 20200116122951eucas1p1d36493f2b496bb13dca4fd1a17abad49
+X-Msg-Generator: CA
+Content-Type: text/plain; charset="utf-8"
+X-RootMTR: 20200116122951eucas1p1d36493f2b496bb13dca4fd1a17abad49
+X-EPHeader: CA
+CMS-TYPE: 201P
+X-CMS-RootMailID: 20200116122951eucas1p1d36493f2b496bb13dca4fd1a17abad49
+References: <CGME20200116122951eucas1p1d36493f2b496bb13dca4fd1a17abad49@eucas1p1.samsung.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
@@ -92,20 +102,41 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 Hi,
 
-I'm wondering if you would be interested in purchasing Embedded World 2020
-Attendees List.
+Commit 54ff4a1d1732 ("MIPS: Alchemy: pata_platform for DB1200")
+from year 2014 converted the only user of au1xxx-ide IDE host
+driver (MIPS Alchemy DB1200 platform) to use pata_platform libata
+host driver instead. This patch series removes dead au1xxx-ide
+driver code & co.
 
-Target Audience: Electronic Systems, Embedded Technology, Embedded Systems,
-E-mobility and Distributed Intelligence
+Since patch #2 depends on patch #1 (and it is also the best to
+apply patch #3 after driver code removal) it would be probably
+easiest to merge everything through MIPS tree (after getting
+necessary ACKs, from David for the first patch and Jonathan for
+the third one).
 
-Venue:  Nuremberg, Germany
+Best regards,
+--
+Bartlomiej Zolnierkiewicz
+Samsung R&D Institute Poland
+Samsung Electronics
 
-Please let me know your thoughts, So that I can send you the Number of
-Contacts available and the Cost for it.
 
-Best Regards,
-Brenda Lane
-B2B Tradeshow Specialist
+Bartlomiej Zolnierkiewicz (3):
+  ide: remove no longer used au1xxx-ide driver
+  MIPS: Alchemy: remove no longer used au1xxx_ide.h header
+  docs: mips: remove no longer needed au1xxx_ide.rst documentation
 
-If you're not interested kindly reply with the subject line "Opt-Out".
+ Documentation/mips/au1xxx_ide.rst             | 130 ----
+ Documentation/mips/index.rst                  |   2 -
+ .../mips/include/asm/mach-au1x00/au1xxx_ide.h | 178 ------
+ drivers/ide/Kconfig                           |  17 -
+ drivers/ide/Makefile                          |   2 -
+ drivers/ide/au1xxx-ide.c                      | 597 ------------------
+ 6 files changed, 926 deletions(-)
+ delete mode 100644 Documentation/mips/au1xxx_ide.rst
+ delete mode 100644 arch/mips/include/asm/mach-au1x00/au1xxx_ide.h
+ delete mode 100644 drivers/ide/au1xxx-ide.c
+
+-- 
+2.24.1
 
