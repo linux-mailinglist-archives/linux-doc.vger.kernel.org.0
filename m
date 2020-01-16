@@ -2,266 +2,140 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 056B013DA0D
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2020 13:30:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F23AB13DA76
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2020 13:49:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726566AbgAPMaM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Jan 2020 07:30:12 -0500
-Received: from mailout2.w1.samsung.com ([210.118.77.12]:38112 "EHLO
-        mailout2.w1.samsung.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726884AbgAPM3z (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Jan 2020 07:29:55 -0500
-Received: from eucas1p2.samsung.com (unknown [182.198.249.207])
-        by mailout2.w1.samsung.com (KnoxPortal) with ESMTP id 20200116122953euoutp02b71d492bf43442014c13e9a616de4eaa~qXdYnvxIF0636106361euoutp02p
-        for <linux-doc@vger.kernel.org>; Thu, 16 Jan 2020 12:29:53 +0000 (GMT)
-DKIM-Filter: OpenDKIM Filter v2.11.0 mailout2.w1.samsung.com 20200116122953euoutp02b71d492bf43442014c13e9a616de4eaa~qXdYnvxIF0636106361euoutp02p
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=samsung.com;
-        s=mail20170921; t=1579177793;
-        bh=v970nJMjsRWqcBPklydlZ7zPDTbaWjPdtn6Ae0h/7OQ=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=lLJC5hZSytGpSpw9ReEM8OjhihJdodbQcnHBJ/ATcP2vSors3nQzglOx4PNhtxUWb
-         U5SJWPOOWsMQdYSusLzLI6Z/sHrlm1gnbSqjnTmZlOCEody/LMsZGPKPpJntt1R4mq
-         6GpPBMQ61otfm3T4yPU1k07jM19Sisw2dIOPSVm8=
-Received: from eusmges2new.samsung.com (unknown [203.254.199.244]) by
-        eucas1p2.samsung.com (KnoxPortal) with ESMTP id
-        20200116122953eucas1p241a67f127bd32a308a32478d5d2d5b70~qXdYafozZ2394123941eucas1p2J;
-        Thu, 16 Jan 2020 12:29:53 +0000 (GMT)
-Received: from eucas1p2.samsung.com ( [182.198.249.207]) by
-        eusmges2new.samsung.com (EUCPMTA) with SMTP id B5.7E.60679.147502E5; Thu, 16
-        Jan 2020 12:29:53 +0000 (GMT)
-Received: from eusmtrp2.samsung.com (unknown [182.198.249.139]) by
-        eucas1p2.samsung.com (KnoxPortal) with ESMTPA id
-        20200116122952eucas1p2060adca6613ae02096ecc80319e5d197~qXdX300GS2194221942eucas1p2a;
-        Thu, 16 Jan 2020 12:29:52 +0000 (GMT)
-Received: from eusmgms1.samsung.com (unknown [182.198.249.179]) by
-        eusmtrp2.samsung.com (KnoxPortal) with ESMTP id
-        20200116122952eusmtrp21ef87d1f6f590cad08fc8a76f99ac2c8~qXdX3Qom_1149911499eusmtrp2O;
-        Thu, 16 Jan 2020 12:29:52 +0000 (GMT)
-X-AuditID: cbfec7f4-0e5ff7000001ed07-9d-5e2057419fa8
-Received: from eusmtip1.samsung.com ( [203.254.199.221]) by
-        eusmgms1.samsung.com (EUCPMTA) with SMTP id E4.32.08375.047502E5; Thu, 16
-        Jan 2020 12:29:52 +0000 (GMT)
-Received: from AMDC3058.digital.local (unknown [106.120.51.71]) by
-        eusmtip1.samsung.com (KnoxPortal) with ESMTPA id
-        20200116122952eusmtip11ca6991f0150900a555f601adf878ed6~qXdXTA-K60627006270eusmtip1c;
-        Thu, 16 Jan 2020 12:29:52 +0000 (GMT)
-From:   Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>
-To:     "David S . Miller" <davem@davemloft.net>,
-        Ralf Baechle <ralf@linux-mips.org>,
-        Paul Burton <paul.burton@mips.com>,
-        James Hogan <jhogan@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-ide@vger.kernel.org, linux-mips@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        b.zolnierkie@samsung.com
-Subject: [PATCH 3/3] docs: mips: remove no longer needed au1xxx_ide.rst
- documentation
-Date:   Thu, 16 Jan 2020 13:29:38 +0100
-Message-Id: <20200116122938.20789-4-b.zolnierkie@samsung.com>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200116122938.20789-1-b.zolnierkie@samsung.com>
+        id S1726908AbgAPMq5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Jan 2020 07:46:57 -0500
+Received: from szxga04-in.huawei.com ([45.249.212.190]:9640 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726406AbgAPMq5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 16 Jan 2020 07:46:57 -0500
+Received: from DGGEMS401-HUB.china.huawei.com (unknown [172.30.72.59])
+        by Forcepoint Email with ESMTP id 9C97F30E39BD4543FFB2;
+        Thu, 16 Jan 2020 20:46:54 +0800 (CST)
+Received: from DESKTOP-1NISPDV.china.huawei.com (10.173.221.248) by
+ DGGEMS401-HUB.china.huawei.com (10.3.19.201) with Microsoft SMTP Server id
+ 14.3.439.0; Thu, 16 Jan 2020 20:46:44 +0800
+From:   Zengruan Ye <yezengruan@huawei.com>
+To:     <linux-kernel@vger.kernel.org>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <kvmarm@lists.cs.columbia.edu>, <kvm@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>,
+        <virtualization@lists.linux-foundation.org>
+CC:     <yezengruan@huawei.com>, <maz@kernel.org>, <james.morse@arm.com>,
+        <linux@armlinux.org.uk>, <suzuki.poulose@arm.com>,
+        <julien.thierry.kdev@gmail.com>, <catalin.marinas@arm.com>,
+        <mark.rutland@arm.com>, <will@kernel.org>, <steven.price@arm.com>,
+        <daniel.lezcano@linaro.org>, <wanghaibin.wang@huawei.com>,
+        <peterz@infradead.org>, <longman@redhat.com>
+Subject: [PATCH v3 0/8] KVM: arm64: vCPU preempted check support
+Date:   Thu, 16 Jan 2020 20:46:18 +0800
+Message-ID: <20200116124626.1155-1-yezengruan@huawei.com>
+X-Mailer: git-send-email 2.23.0.windows.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrFKsWRmVeSWpSXmKPExsWy7djP87qO4QpxBp//iFtsnLGe1eLJgXZG
-        iznnW1gsJp74xGKxsG0Ji8WxHY+YLC7vmsNm0blpK6NF3+tjzBaX9qg4cHlsWXmTyWPTqk42
-        j6Mr1zJ5LO6bzOrx+shDFo++LasYPT5vkgtgj+KySUnNySxLLdK3S+DKmDj/N2tBr0ZFz94l
-        zA2MNxS6GDk5JARMJL6+/M7excjFISSwglHi3KNdrBDOF0aJ+ZcPsUA4nxklHjQvYYVpuXt5
-        D1RiOaPEjAWrGeFaJt1oYQKpYhOwkpjYvgosISKwm1Hi5/PdzCAOs8AERol9ZyYwg1QJC4RL
-        rFl3hw3EZhFQldixrhvM5hWwlTi/6T87xD55ia3fPoHt5hSwk+g78IwVokZQ4uTMJywgNjNQ
-        TfPW2WALJAR2sUu8XnucEaLZRWLi9p1sELawxKvjW6CGykj83zmfCaJhHaPE344XUN3bGSWW
-        T/4H1WEtcefcLyCbA2iFpsT6XfoQYUeJhdd6WUDCEgJ8EjfeCkIcwScxadt0Zogwr0RHmxBE
-        tZrEhmUb2GDWdu1cyQxhe0hsfXqZeQKj4iwk78xC8s4shL0LGJlXMYqnlhbnpqcWG+WllusV
-        J+YWl+al6yXn525iBKao0/+Of9nBuOtP0iFGAQ5GJR7eGUEKcUKsiWXFlbmHGCU4mJVEeE/O
-        kI0T4k1JrKxKLcqPLyrNSS0+xCjNwaIkzmu86GWskEB6YklqdmpqQWoRTJaJg1OqgbFNoq3X
-        7t2cadt2Rje5iegV9XSduKVinr9h+yWG6zOifR0mv94evK6k7Z2Z4V1Lrp/T/e4kzvCaeH9/
-        wzSmB1viLW3+bO7/Jm5d4HUxly9pt27PvMItuvv03n2pEORg1z79VZ9d1yVysuftX6rvol83
-        +AvVhdQcmJBXJ/J2srKywZ7JzJF2UUosxRmJhlrMRcWJAMk+ldlNAwAA
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFlrKIsWRmVeSWpSXmKPExsVy+t/xu7oO4QpxBuc2m1hsnLGe1eLJgXZG
-        iznnW1gsJp74xGKxsG0Ji8WxHY+YLC7vmsNm0blpK6NF3+tjzBaX9qg4cHlsWXmTyWPTqk42
-        j6Mr1zJ5LO6bzOrx+shDFo++LasYPT5vkgtgj9KzKcovLUlVyMgvLrFVija0MNIztLTQMzKx
-        1DM0No+1MjJV0rezSUnNySxLLdK3S9DLmDj/N2tBr0ZFz94lzA2MNxS6GDk5JARMJO5e3sPS
-        xcjFISSwlFHia9cFIIcDKCEjcXx9GUSNsMSfa11sEDWfGCUOfFvLDpJgE7CSmNi+ihEkISKw
-        n1Fi8sIDTCAOs8AURokVZ1qZQCYJC4RKvLmsBNLAIqAqsWNdNxuIzStgK3F+0392iA3yElu/
-        fWIFsTkF7CT6DjwDs4WAaube2s0KUS8ocXLmExYQmxmovnnrbOYJjAKzkKRmIUktYGRaxSiS
-        Wlqcm55bbKhXnJhbXJqXrpecn7uJERhF24793LyD8dLG4EOMAhyMSjy8M4IU4oRYE8uKK3MP
-        MUpwMCuJ8J6cIRsnxJuSWFmVWpQfX1Sak1p8iNEU6ImJzFKiyfnACM8riTc0NTS3sDQ0NzY3
-        NrNQEuftEDgYIySQnliSmp2aWpBaBNPHxMEp1cAYfuylFeORr3M9NsvO2PPwj4/ln8eLXAsS
-        XApztLrn9K1eLb/+y1wdgZOXTRclzf7t5GK09N7GnNXT6o02P1/X+l/vmaNkyfoNx6TUb+db
-        nC3V4E+Lt3gm4/fy+4pVAXnxr0Md98iXr4+9KxL8PSfinPhOt5gWi9SWfQEhH1PumcX5vIl8
-        v2ynEktxRqKhFnNRcSIAAWOZL7gCAAA=
-X-CMS-MailID: 20200116122952eucas1p2060adca6613ae02096ecc80319e5d197
-X-Msg-Generator: CA
-Content-Type: text/plain; charset="utf-8"
-X-RootMTR: 20200116122952eucas1p2060adca6613ae02096ecc80319e5d197
-X-EPHeader: CA
-CMS-TYPE: 201P
-X-CMS-RootMailID: 20200116122952eucas1p2060adca6613ae02096ecc80319e5d197
-References: <20200116122938.20789-1-b.zolnierkie@samsung.com>
-        <CGME20200116122952eucas1p2060adca6613ae02096ecc80319e5d197@eucas1p2.samsung.com>
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.173.221.248]
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Since the au1xxx-ide IDE host driver is no longer needed its documentation
-can be removed.
+This patch set aims to support the vcpu_is_preempted() functionality
+under KVM/arm64, which allowing the guest to obtain the vCPU is
+currently running or not. This will enhance lock performance on
+overcommitted hosts (more runnable vCPUs than physical CPUs in the
+system) as doing busy waits for preempted vCPUs will hurt system
+performance far worse than early yielding.
 
-Signed-off-by: Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>
----
- Documentation/mips/au1xxx_ide.rst | 130 ------------------------------
- Documentation/mips/index.rst      |   2 -
- 2 files changed, 132 deletions(-)
- delete mode 100644 Documentation/mips/au1xxx_ide.rst
+We have observed some performace improvements in uninx benchmark tests.
 
-diff --git a/Documentation/mips/au1xxx_ide.rst b/Documentation/mips/au1xxx_ide.rst
-deleted file mode 100644
-index 2f9c2cff6738..000000000000
---- a/Documentation/mips/au1xxx_ide.rst
-+++ /dev/null
-@@ -1,130 +0,0 @@
--.. include:: <isonum.txt>
--
--======================
--MIPS AU1XXX IDE driver
--======================
--
--Released 2005-07-15
--
--About
--=====
--
--This file describes the 'drivers/ide/au1xxx-ide.c', related files and the
--services they provide.
--
--If you are short in patience and just want to know how to add your hard disc to
--the white or black list, go to the 'ADD NEW HARD DISC TO WHITE OR BLACK LIST'
--section.
--
--
--License
--=======
--
--:Copyright: |copy| 2003-2005 AMD, Personal Connectivity Solutions
--
--This program is free software; you can redistribute it and/or modify it under
--the terms of the GNU General Public License as published by the Free Software
--Foundation; either version 2 of the License, or (at your option) any later
--version.
--
--THIS SOFTWARE IS PROVIDED ``AS IS`` AND ANY EXPRESS OR IMPLIED WARRANTIES,
--INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
--FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR
--BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
--CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
--SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
--INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
--CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
--ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
--POSSIBILITY OF SUCH DAMAGE.
--
--You should have received a copy of the GNU General Public License along with
--this program; if not, write to the Free Software Foundation, Inc.,
--675 Mass Ave, Cambridge, MA 02139, USA.
--
--Note:
--      for more information, please refer "AMD Alchemy Au1200/Au1550 IDE
--      Interface and Linux Device Driver" Application Note.
--
--
--Files, Configs and Compatibility
--================================
--
--Two files are introduced:
--
--  a) 'arch/mips/include/asm/mach-au1x00/au1xxx_ide.h'
--     contains : struct _auide_hwif
--
--                - timing parameters for PIO mode 0/1/2/3/4
--                - timing parameters for MWDMA 0/1/2
--
--  b) 'drivers/ide/mips/au1xxx-ide.c'
--     contains the functionality of the AU1XXX IDE driver
--
--Following extra configs variables are introduced:
--
--  CONFIG_BLK_DEV_IDE_AU1XXX_PIO_DBDMA
--	- enable the PIO+DBDMA mode
--  CONFIG_BLK_DEV_IDE_AU1XXX_MDMA2_DBDMA
--	- enable the MWDMA mode
--
--
--Supported IDE Modes
--===================
--
--The AU1XXX IDE driver supported all PIO modes - PIO mode 0/1/2/3/4 - and all
--MWDMA modes - MWDMA 0/1/2 -. There is no support for SWDMA and UDMA mode.
--
--To change the PIO mode use the program hdparm with option -p, e.g.
--'hdparm -p0 [device]' for PIO mode 0. To enable the MWDMA mode use the option
---X, e.g. 'hdparm -X32 [device]' for MWDMA mode 0.
--
--
--Performance Configurations
--==========================
--
--If the used system doesn't need USB support enable the following kernel
--configs::
--
--    CONFIG_IDE=y
--    CONFIG_BLK_DEV_IDE=y
--    CONFIG_IDE_GENERIC=y
--    CONFIG_BLK_DEV_IDEPCI=y
--    CONFIG_BLK_DEV_GENERIC=y
--    CONFIG_BLK_DEV_IDEDMA_PCI=y
--    CONFIG_BLK_DEV_IDE_AU1XXX=y
--    CONFIG_BLK_DEV_IDE_AU1XXX_MDMA2_DBDMA=y
--    CONFIG_BLK_DEV_IDEDMA=y
--
--Also define 'IDE_AU1XXX_BURSTMODE' in 'drivers/ide/mips/au1xxx-ide.c' to enable
--the burst support on DBDMA controller.
--
--If the used system need the USB support enable the following kernel configs for
--high IDE to USB throughput.
--
--::
--
--    CONFIG_IDE_GENERIC=y
--    CONFIG_BLK_DEV_IDEPCI=y
--    CONFIG_BLK_DEV_GENERIC=y
--    CONFIG_BLK_DEV_IDEDMA_PCI=y
--    CONFIG_BLK_DEV_IDE_AU1XXX=y
--    CONFIG_BLK_DEV_IDE_AU1XXX_MDMA2_DBDMA=y
--    CONFIG_BLK_DEV_IDEDMA=y
--
--Also undefine 'IDE_AU1XXX_BURSTMODE' in 'drivers/ide/mips/au1xxx-ide.c' to
--disable the burst support on DBDMA controller.
--
--
--Acknowledgments
--===============
--
--These drivers wouldn't have been done without the base of kernel 2.4.x AU1XXX
--IDE driver from AMD.
--
--Additional input also from:
--Matthias Lenk <matthias.lenk@amd.com>
--
--Happy hacking!
--
--Enrico Walther <enrico.walther@amd.com>
-diff --git a/Documentation/mips/index.rst b/Documentation/mips/index.rst
-index a93c2f65884c..d5ad8c00f0bd 100644
---- a/Documentation/mips/index.rst
-+++ b/Documentation/mips/index.rst
-@@ -10,8 +10,6 @@ MIPS-specific Documentation
- 
-    ingenic-tcu
- 
--   au1xxx_ide
--
- .. only::  subproject and html
- 
-    Indices
+unix benchmark result:
+  host:  kernel 5.5.0-rc5, HiSilicon Kunpeng920, 8 CPUs
+  guest: kernel 5.5.0-rc5, 16 vCPUs
+
+               test-case                |    after-patch    |   before-patch
+----------------------------------------+-------------------+------------------
+ Dhrystone 2 using register variables   | 334600751.0 lps   | 335319028.3 lps
+ Double-Precision Whetstone             |     32856.1 MWIPS |     32849.6 MWIPS
+ Execl Throughput                       |      3662.1 lps   |      2718.0 lps
+ File Copy 1024 bufsize 2000 maxblocks  |    432906.4 KBps  |    158011.8 KBps
+ File Copy 256 bufsize 500 maxblocks    |    116023.0 KBps  |     37664.0 KBps
+ File Copy 4096 bufsize 8000 maxblocks  |   1432769.8 KBps  |    441108.8 KBps
+ Pipe Throughput                        |   6405029.6 lps   |   6021457.6 lps
+ Pipe-based Context Switching           |    185872.7 lps   |    184255.3 lps
+ Process Creation                       |      4025.7 lps   |      3706.6 lps
+ Shell Scripts (1 concurrent)           |      6745.6 lpm   |      6436.1 lpm
+ Shell Scripts (8 concurrent)           |       998.7 lpm   |       931.1 lpm
+ System Call Overhead                   |   3913363.1 lps   |   3883287.8 lps
+----------------------------------------+-------------------+------------------
+ System Benchmarks Index Score          |      1835.1       |      1327.6
+
+Changes from v2:
+https://lore.kernel.org/lkml/20191226135833.1052-1-yezengruan@huawei.com/
+ * Post Will's patches as part of this series [1][2], and add the
+   probing logic for checking whether the hypervisor is KVM or not
+ * Clear PV-lock interface documentation
+ * Remove preempted state field
+ * Fix build error when CONFIG_PARAVIRT is not set
+ * Bunch of typo fixes.
+
+Changes from v1:
+https://lore.kernel.org/lkml/20191217135549.3240-1-yezengruan@huawei.com/
+ * Guest kernel no longer allocates the PV lock structure, instead it
+   is allocated by user space to avoid lifetime issues about kexec.
+ * Provide vCPU attributes for PV lock.
+ * Update SMC number of PV lock features.
+ * Report some basic validation when PV lock init.
+ * Document preempted field.
+ * Bunch of typo fixes.
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/will/linux.git/commit/?h=kvm/hvc&id=464f5a1741e5959c3e4d2be1966ae0093b4dce06
+
+[2] https://git.kernel.org/pub/scm/linux/kernel/git/will/linux.git/commit/?h=kvm/hvc&id=6597490e005d0eeca8ed8c1c1d7b4318ee014681
+
+Will Deacon (2):
+  arm64: Probe for the presence of KVM hypervisor services during boot
+  arm/arm64: KVM: Advertise KVM UID to guests via SMCCC
+
+Zengruan Ye (6):
+  KVM: arm64: Document PV-lock interface
+  KVM: arm64: Add SMCCC paravirtualised lock calls
+  KVM: arm64: Support pvlock preempted via shared structure
+  KVM: arm64: Provide vCPU attributes for PV lock
+  KVM: arm64: Add interface to support vCPU preempted check
+  KVM: arm64: Support the vCPU preemption check
+
+ Documentation/virt/kvm/arm/pvlock.rst   |  68 +++++++++++++
+ Documentation/virt/kvm/devices/vcpu.txt |  14 +++
+ arch/arm/include/asm/kvm_host.h         |  18 ++++
+ arch/arm64/include/asm/hypervisor.h     |  11 ++
+ arch/arm64/include/asm/kvm_host.h       |  27 +++++
+ arch/arm64/include/asm/paravirt.h       |  15 +++
+ arch/arm64/include/asm/pvlock-abi.h     |  16 +++
+ arch/arm64/include/asm/spinlock.h       |   9 ++
+ arch/arm64/include/uapi/asm/kvm.h       |   2 +
+ arch/arm64/kernel/Makefile              |   2 +-
+ arch/arm64/kernel/paravirt-spinlocks.c  |  13 +++
+ arch/arm64/kernel/paravirt.c            | 129 +++++++++++++++++++++++-
+ arch/arm64/kernel/setup.c               |  37 +++++++
+ arch/arm64/kvm/Makefile                 |   1 +
+ arch/arm64/kvm/guest.c                  |   9 ++
+ include/linux/arm-smccc.h               |  36 +++++++
+ include/linux/cpuhotplug.h              |   1 +
+ include/uapi/linux/kvm.h                |   2 +
+ virt/kvm/arm/arm.c                      |   8 ++
+ virt/kvm/arm/hypercalls.c               |  54 +++++++---
+ virt/kvm/arm/pvlock.c                   | 102 +++++++++++++++++++
+ 21 files changed, 559 insertions(+), 15 deletions(-)
+ create mode 100644 Documentation/virt/kvm/arm/pvlock.rst
+ create mode 100644 arch/arm64/include/asm/pvlock-abi.h
+ create mode 100644 arch/arm64/kernel/paravirt-spinlocks.c
+ create mode 100644 virt/kvm/arm/pvlock.c
+
 -- 
-2.24.1
+2.19.1
+
 
