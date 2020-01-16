@@ -2,97 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4AA6B13D73C
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2020 10:50:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3B6EE13D757
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Jan 2020 11:01:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730879AbgAPJtL convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Thu, 16 Jan 2020 04:49:11 -0500
-Received: from mx2.suse.de ([195.135.220.15]:42442 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729546AbgAPJtL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 16 Jan 2020 04:49:11 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx2.suse.de (Postfix) with ESMTP id 29BD1AED8;
-        Thu, 16 Jan 2020 09:49:09 +0000 (UTC)
-Date:   Thu, 16 Jan 2020 10:49:07 +0100
-From:   Jean Delvare <jdelvare@suse.de>
-To:     Luca Ceresoli <luca@lucaceresoli.net>
-Cc:     linux-doc@vger.kernel.org, linux-i2c@vger.kernel.org,
-        Wolfram Sang <wsa@the-dreams.de>,
-        Peter Rosin <peda@axentia.se>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 26/26] docs: i2c: rename sections so the overall picture
- is clearer
-Message-ID: <20200116104907.3f2de4d0@endymion>
-In-Reply-To: <20200106074905.14438-1-luca@lucaceresoli.net>
-References: <20200105224006.10321-1-luca@lucaceresoli.net>
-        <20200106074905.14438-1-luca@lucaceresoli.net>
-Organization: SUSE Linux
-X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-suse-linux-gnu)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+        id S1731991AbgAPKBc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Jan 2020 05:01:32 -0500
+Received: from smtp2207-205.mail.aliyun.com ([121.197.207.205]:57398 "EHLO
+        smtp2207-205.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1730652AbgAPKBb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Jan 2020 05:01:31 -0500
+X-Alimail-AntiSpam: AC=CONTINUE;BC=0.06713096|-1;CH=green;DM=CONTINUE|CONTINUE|true|0.236711-0.0800231-0.683266;DS=CONTINUE|ham_system_inform|0.0724902-0.00115022-0.92636;FP=0|0|0|0|0|-1|-1|-1;HT=e01l07426;MF=liaoweixiong@allwinnertech.com;NM=1;PH=DS;RN=17;RT=17;SR=0;TI=SMTPD_---.Gd3Kgdg_1579168866;
+Received: from PC-liaoweixiong.allwinnertech.com(mailfrom:liaoweixiong@allwinnertech.com fp:SMTPD_---.Gd3Kgdg_1579168866)
+          by smtp.aliyun-inc.com(10.147.42.241);
+          Thu, 16 Jan 2020 18:01:12 +0800
+From:   WeiXiong Liao <liaoweixiong@allwinnertech.com>
+To:     Kees Cook <keescook@chromium.org>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Richard Weinberger <richard@nod.at>,
+        Vignesh Raghavendra <vigneshr@ti.com>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Rob Herring <robh@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        WeiXiong Liao <liaoweixiong@allwinnertech.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mtd@lists.infradead.org
+Subject: [PATCH 00/11] pstore: support crash log to block and mtd device
+Date:   Thu, 16 Jan 2020 18:00:20 +0800
+Message-Id: <1579168831-16399-1-git-send-email-liaoweixiong@allwinnertech.com>
+X-Mailer: git-send-email 1.9.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon,  6 Jan 2020 08:49:05 +0100, Luca Ceresoli wrote:
-> Some of the section names are not very clear. Reading those names in the
-> index.rst page does not help much in grasping what the content is supposed
-> to be.
-> 
-> Rename those sections to clarify their content, especially when reading
-> the index page.
-> 
-> Signed-off-by: Luca Ceresoli <luca@lucaceresoli.net>
-> Acked-by: Peter Rosin <peda@axentia.se>
-> ---
-> 
-> Note: here checkpatch complains:
-> 
->   WARNING: Missing or malformed SPDX-License-Identifier tag in line 1
-> 
-> Thas's because those files have no license line. I would gladly add a
-> proper license line, but what it the correct license here? Should I ask the
-> authors? GPLv2-only as the kernel default?
-> 
-> I'd appreciate a guidance here, thanks in advance.
+Why should we need to log to block (mtd) device?
+1. Most embedded intelligent equipment have no persistent ram, which
+   increases costs. We perfer to cheaper solutions, like block devices.
+2. Do not any equipment have battery, which means that it lost all data
+   on general ram if power failure. Pstore has little to do for these
+   equipments.
 
-I don't think we need a license for such documentation files, so I
-would just ignore checkpatch.
+Why should we adapt pstore/blk to MTD device instead of mtdoops?
+1. repetitive jobs between pstore and mtdoops
+   Both of pstore and mtdoops do the same jobs that store panic/oops log.
+2. do what a driver should do
+   To me, a driver should provide methods instead of policies. What MTD
+   should do is to provide read/write/erase operations, geting rid of codes
+   about chunk management, kmsg dumper and configuration.
+3. enhanced feature
+   Not only store log, but also show it as files.
+   Not only log, but also trigger time and trigger count.
+   Not only panic/oops log, but also log recorder for pmsg, console and
+   ftrace in the future.
 
-> ---
->  Documentation/i2c/dev-interface.rst         | 6 +++---
->  Documentation/i2c/i2c-protocol.rst          | 6 +++---
->  Documentation/i2c/i2c-topology.rst          | 6 +++---
->  Documentation/i2c/old-module-parameters.rst | 6 +++---
->  Documentation/i2c/smbus-protocol.rst        | 6 +++---
->  Documentation/i2c/summary.rst               | 6 +++---
->  Documentation/i2c/writing-clients.rst       | 6 +++---
->  7 files changed, 21 insertions(+), 21 deletions(-)
-> (...)
-> diff --git a/Documentation/i2c/summary.rst b/Documentation/i2c/summary.rst
-> index fc69d9567d9d..ae3bbb9fd8f1 100644
-> --- a/Documentation/i2c/summary.rst
-> +++ b/Documentation/i2c/summary.rst
-> @@ -1,6 +1,6 @@
-> -=============
-> -I2C and SMBus
-> -=============
-> +==============================
-> +Introductions to I2C and SMBus
-> +==============================
+Before upstream submission, pstore/blk is tested on arch ARM and x84_64,
+block device and mtd device, built as modules and in kernel. Here are the
+details:
 
-I would use "Introduction", singular.
+	https://github.com/gmpy/articles/blob/master/pstore/Test-Pstore-Block.md
 
->  
->  I²C (pronounce: I squared C and written I2C in the kernel documentation) is
->  a protocol developed by Philips. It is a slow two-wire protocol (variable
-> (...)
+WeiXiong Liao (11):
+  pstore/blk: new support logger for block devices
+  blkoops: add blkoops, a warpper for pstore/blk
+  pstore/blk: support pmsg recorder
+  pstore/blk: blkoops: support console recorder
+  pstore/blk: blkoops: support ftrace recorder
+  Documentation: pstore/blk: blkoops: create document for pstore_blk
+  pstore/blk: skip broken zone for mtd device
+  blkoops: respect for device to pick recorders
+  pstore/blk: blkoops: support special removing jobs for dmesg.
+  blkoops: add interface for dirver to get information of blkoops
+  mtd: new support oops logger based on pstore/blk
 
-Reviewed-by: Jean Delvare <jdelvare@suse.de>
+ Documentation/admin-guide/pstore-block.rst |  297 ++++++
+ MAINTAINERS                                |    3 +-
+ drivers/mtd/Kconfig                        |   10 +
+ drivers/mtd/Makefile                       |    1 +
+ drivers/mtd/mtdpstore.c                    |  531 +++++++++++
+ fs/pstore/Kconfig                          |  109 +++
+ fs/pstore/Makefile                         |    5 +
+ fs/pstore/blkoops.c                        |  490 ++++++++++
+ fs/pstore/blkzone.c                        | 1341 ++++++++++++++++++++++++++++
+ include/linux/blkoops.h                    |   94 ++
+ include/linux/pstore_blk.h                 |   91 ++
+ 11 files changed, 2971 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/admin-guide/pstore-block.rst
+ create mode 100644 drivers/mtd/mtdpstore.c
+ create mode 100644 fs/pstore/blkoops.c
+ create mode 100644 fs/pstore/blkzone.c
+ create mode 100644 include/linux/blkoops.h
+ create mode 100644 include/linux/pstore_blk.h
 
 -- 
-Jean Delvare
-SUSE L3 Support
+1.9.1
+
