@@ -2,111 +2,141 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 294E1141295
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Jan 2020 22:05:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A3CE7141380
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Jan 2020 22:43:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729799AbgAQVFn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 17 Jan 2020 16:05:43 -0500
-Received: from mail-lj1-f193.google.com ([209.85.208.193]:42132 "EHLO
-        mail-lj1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729818AbgAQVFg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Jan 2020 16:05:36 -0500
-Received: by mail-lj1-f193.google.com with SMTP id y4so27837044ljj.9
-        for <linux-doc@vger.kernel.org>; Fri, 17 Jan 2020 13:05:35 -0800 (PST)
+        id S1728896AbgAQVmz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 17 Jan 2020 16:42:55 -0500
+Received: from mail-pl1-f202.google.com ([209.85.214.202]:44159 "EHLO
+        mail-pl1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726957AbgAQVmz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Jan 2020 16:42:55 -0500
+Received: by mail-pl1-f202.google.com with SMTP id h8so11392658plr.11
+        for <linux-doc@vger.kernel.org>; Fri, 17 Jan 2020 13:42:55 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=ZBkS9S8oFTr7ty1NIiAX5JrGRHx/96iPY51B8fxdR2Y=;
-        b=cHQbz9MerebtnThsNe1yZb3HrtSTeIETgYrDu7Q6ONNqX19PijFVSf1lIzu4QilAmq
-         hnzwI7P9xI2x5Nd23oDV61kz+2bLOlRlL10WS0JzuDLyURLzzSJmFejdlEtxX62vduXq
-         TpK3nS16M0AtekVAN7KXLTgm+8OVHS0eXGhicVmwjML/hqokK/cH4dVEcUKTav6rGeHG
-         F2mggp9KMtiE0o776HZy0j2hC+yCq9L9owGloa+hAahvM5W8iEcIFR2imdSPMy3FtcK2
-         qu8VkJVvrJS72NCEqvK6tJF2u/4NncgSSpbA7HFFqnczDZ/uro6Wxu9pbLQt70yvz9qn
-         t7xA==
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=yBEf4c2Y/V+ZNwnYQzLFCcZKpZySQQ5dJ9X0QGzY9eo=;
+        b=hrp+gp+g8aB/jpumGkpuc5F5wkzC/eegSUgKsuaP5vuBUKLF33qoqqM2MafIuVh9s1
+         jI2A1GYFMvU+zXn/tCLnmGXTqm3p0Gd4ZJGvWkGqgwBJx9K3w5rosKRTKFkLyeVpf7r7
+         WFGq/cvvGa0UIt89Z8qEnh4tUigSQ7k5T7oowlnUjWNYSj1q2cLitkSLMyMd0jkKCkAD
+         anxNB8ZROhRvpyrX/Yj82zl81n9GScBR9YTXGVMqHu3OoPibEEExYkK8+hQXWp7bAWgy
+         5hmPB7B0i/vXCHN1gPjV6lJhuK5oImOVpW8qPq4w+BW8SnU9RkZI5NRwJt35MaEoucrI
+         kOSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=ZBkS9S8oFTr7ty1NIiAX5JrGRHx/96iPY51B8fxdR2Y=;
-        b=MRYguLhERWOKLUKqAM6QKoSt2x2aQAr8V+tIL1PySuKyDtfWhWmuP9micwXbOCuUfM
-         oxqjwHoyR9z8/B1HfyMnVjtc8pMZ1dC4bDqtIBW69IJxlSE8f60bhcUipaWJmjMVXijQ
-         0AvuQZvGvx7fpHvQBAPbmYb4gl4sUXu4ZRwDoF8REU+y+wAPVnqwXZU2ENzp1auJF2Yr
-         qc6vDUOcCRP2Rx1hZelL16ie3XLRVYMGmKUPZaOLbl0Ts6gNKOgC00Osa12DADhfAbmS
-         MX89+u2rxyzlN/FIHYn5Wn11O5L9IQOs6Yo9cxIcp2KNU8oHDBkD11C+IbrTsNqAmga0
-         4CEg==
-X-Gm-Message-State: APjAAAXv7PDH04JW05JjZ3aYZ2CRrhGtl4w3rPjSq+X9t+I8DMqvCkjH
-        1PmoNSCAQVeDQ1VeiNU1DtfocMbNuX8avcRIcKDvow==
-X-Google-Smtp-Source: APXvYqwUSECeAUfn+Q3aKc4hgEvhvTGDwKPCeuq5cHdmTnCOCRP0mwkFi9O47FkIodi5rljBhCBu+PmnCppplmipwMc=
-X-Received: by 2002:a2e:9143:: with SMTP id q3mr6695400ljg.199.1579295134552;
- Fri, 17 Jan 2020 13:05:34 -0800 (PST)
-MIME-Version: 1.0
-References: <20190617221134.9930-1-f.fainelli@gmail.com> <20191114181243.q37rxoo3seds6oxy@pengutronix.de>
- <7322163f-e08e-a6b7-b143-e9d59917ee5b@gmail.com> <20191115070842.2x7psp243nfo76co@pengutronix.de>
- <20191115114416.ba6lmwb7q4gmepzc@pengutronix.de> <60bda4a9-f4f8-3641-2612-17fab3173b29@gmail.com>
- <CACRpkdYJR3gQCb4WXwF4tGzk+tT7jMcV9=nDK0PFkeh+0G11bA@mail.gmail.com> <2639dfb0-9e48-cc0f-27e5-34308f790293@gmail.com>
-In-Reply-To: <2639dfb0-9e48-cc0f-27e5-34308f790293@gmail.com>
-From:   Linus Walleij <linus.walleij@linaro.org>
-Date:   Fri, 17 Jan 2020 22:05:23 +0100
-Message-ID: <CACRpkdYs-jeYO+8avOryJnXdWsB9AkPy7Q5FRQ1gGC1NU35MHA@mail.gmail.com>
-Subject: Re: [PATCH v6 0/6] KASan for arm
-To:     Florian Fainelli <f.fainelli@gmail.com>
-Cc:     Marco Felsch <m.felsch@pengutronix.de>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Alexandre Belloni <alexandre.belloni@bootlin.com>,
-        Michal Hocko <mhocko@suse.com>,
-        Julien Thierry <julien.thierry@arm.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Christoffer Dall <christoffer.dall@arm.com>,
-        David Howells <dhowells@redhat.com>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
-        Alexander Potapenko <glider@google.com>,
-        kvmarm@lists.cs.columbia.edu, Jonathan Corbet <corbet@lwn.net>,
-        Abbott Liu <liuwenliang@huawei.com>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        Russell King <linux@armlinux.org.uk>,
-        kasan-dev <kasan-dev@googlegroups.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        bcm-kernel-feedback-list <bcm-kernel-feedback-list@broadcom.com>,
-        drjones@redhat.com, Vladimir Murzin <vladimir.murzin@arm.com>,
-        Kees Cook <keescook@chromium.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Marc Zyngier <marc.zyngier@arm.com>,
-        Andre Przywara <andre.przywara@arm.com>,
-        Philippe Ombredanne <pombredanne@nexb.com>,
-        Jinbum Park <jinb.park7@gmail.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Sascha Hauer <kernel@pengutronix.de>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Nicolas Pitre <nico@fluxnic.net>,
-        Greg KH <gregkh@linuxfoundation.org>,
-        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        Rob Landley <rob@landley.net>, philip@cog.systems,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Thomas Garnier <thgarnie@google.com>,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=yBEf4c2Y/V+ZNwnYQzLFCcZKpZySQQ5dJ9X0QGzY9eo=;
+        b=PhFHtM7uU+dK+zERbCb7bVAgeZbe+UMNFQLU0bW0pcaFWvj4DzvoL4VosgSul1Cm7u
+         uG2zmgWLf0izaVyO4RzEEhtac2sQFsc53PMvxVOxD+1yFbJW28qUl8tcLXqjHABl4FMI
+         ptGNfL9cZ728ZRKatza1RR0ndfaWDuVB3UTxou2Ug4BTG0Jh822ZC8QixT2TIYjbnzQv
+         /o7vQd3kN4pURHHbhPWj3n0VyuHymj3q7AFwfMB0Rbx45seF1Q6FDsUnT721MjzTcI2T
+         8VyZuCh2c8irfkO//L4X+oJp+oVYy27SQfke596Zzean/VgGHpHPysYbQl6fOVxPlFOi
+         coTA==
+X-Gm-Message-State: APjAAAUiyv6azvxJVvgkyx3UJVxpLX9HKRoJL/BxnmXumaQzyi5WW1Si
+        z9IdtaYxXp2lE2rzP5liodlvG7V5pI0=
+X-Google-Smtp-Source: APXvYqx/thRfotMiEcNYQU3muvCEizuxjwfQx4bfJuDJBpTmZngE9VJym447R2DaU34FJTWJBfRydBLRlJY=
+X-Received: by 2002:a63:ff20:: with SMTP id k32mr45963088pgi.448.1579297374588;
+ Fri, 17 Jan 2020 13:42:54 -0800 (PST)
+Date:   Fri, 17 Jan 2020 13:42:37 -0800
+Message-Id: <20200117214246.235591-1-drosen@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
+Subject: [PATCH v3 0/9] Support for Casefolding and Encryption
+From:   Daniel Rosenberg <drosen@google.com>
+To:     "Theodore Ts'o" <tytso@mit.edu>, linux-ext4@vger.kernel.org,
+        Jaegeuk Kim <jaegeuk@kernel.org>, Chao Yu <chao@kernel.org>,
+        linux-f2fs-devel@lists.sourceforge.net,
+        Eric Biggers <ebiggers@kernel.org>,
+        linux-fscrypt@vger.kernel.org,
+        Alexander Viro <viro@zeniv.linux.org.uk>
+Cc:     Andreas Dilger <adilger.kernel@dilger.ca>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        Gabriel Krisman Bertazi <krisman@collabora.com>,
+        kernel-team@android.com, Daniel Rosenberg <drosen@google.com>
 Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jan 17, 2020 at 8:55 PM Florian Fainelli <f.fainelli@gmail.com> wrote:
+These patches are all on top of fscrypt's developement branch
 
-> [Me]
-> > Can we start to submit these patches to Russell's patch tracker?
-> > Any more testing I should be doing?
->
-> Let me submit and rebase v7 get the auto builders some days to see if it
-> exposes a new build issue and then we toss it to RMK's patch tracker and
-> fix bugs from there?
+Ext4 and F2FS currently both support casefolding and encryption, but not at
+the same time. These patches aim to rectify that.
 
-OK you can add my Tested-by: Linus Walleij <linus.walleij@linaro.org>
-to the patches.
+Since directory names are stored case preserved, we cannot just take the hash
+of the ciphertext. Instead we use the siphash of the casefolded name. With this
+we no longer have a direct path from an encrypted name to the hash without the
+key. To deal with this, fscrypt now always includes the hash in the name it
+presents when the key is not present. There is a pre-existing bug where you can
+change parts of the hash and still match the name so long as the disruption to
+the hash does not happen to affect lookup on that filesystem. I'm not sure how
+to fix that without making ext4 lookups slower in the more common case.
 
-Thanks,
-Linus Walleij
+I moved the identical dcache operations for ext4 and f2fs into the VFS, as any
+filesystem that uses casefolding will need the same code. This will also allow
+further optimizations to that path, although my current changes don't take
+advantage of that yet.
+
+For Ext4, this also means that we need to store the hash on disk. We only do so
+for encrypted and casefolded directories to avoid on disk format changes.
+Previously encryption and casefolding could not live on the same filesystem,
+and we're relaxing that requirement. F2fs is a bit more straightforward since
+it already stores hashes on disk.
+
+I've updated the related tools with just enough to enable the feature. I still
+need to adjust ext4's fsck's, although without access to the keys,
+neither fsck will be able to verify the hashes of casefolded and encrypted names.
+
+v3 changes:
+fscrypt patch only creates hash key if it will be needed.
+Rebased on top of fscrypt branch, reconstified match functions in ext4/f2fs
+
+v2 changes:
+fscrypt moved to separate thread to rebase on fscrypt dev branch
+addressed feedback, plus some minor fixes
+
+
+Daniel Rosenberg (9):
+  fscrypt: Add siphash and hash key for policy v2
+  fscrypt: Don't allow v1 policies with casefolding
+  fscrypt: Change format of no-key token
+  fscrypt: Only create hash key when needed
+  vfs: Fold casefolding into vfs
+  f2fs: Handle casefolding with Encryption
+  ext4: Use struct super_blocks' casefold data
+  ext4: Hande casefolding with encryption
+  ext4: Optimize match for casefolded encrypted dirs
+
+ Documentation/filesystems/ext4/directory.rst |  27 ++
+ fs/crypto/Kconfig                            |   1 +
+ fs/crypto/fname.c                            | 232 ++++++++++---
+ fs/crypto/fscrypt_private.h                  |   9 +
+ fs/crypto/keysetup.c                         |  35 +-
+ fs/crypto/policy.c                           |  53 +++
+ fs/dcache.c                                  |  28 ++
+ fs/ext4/dir.c                                |  75 +----
+ fs/ext4/ext4.h                               |  85 +++--
+ fs/ext4/hash.c                               |  26 +-
+ fs/ext4/ialloc.c                             |   5 +-
+ fs/ext4/inline.c                             |  41 +--
+ fs/ext4/namei.c                              | 324 ++++++++++++-------
+ fs/ext4/super.c                              |  21 +-
+ fs/f2fs/dir.c                                | 112 +++----
+ fs/f2fs/f2fs.h                               |  12 +-
+ fs/f2fs/hash.c                               |  25 +-
+ fs/f2fs/inline.c                             |   9 +-
+ fs/f2fs/super.c                              |  17 +-
+ fs/f2fs/sysfs.c                              |   8 +-
+ fs/inode.c                                   |   3 +-
+ fs/namei.c                                   |  41 ++-
+ include/linux/fs.h                           |  10 +
+ include/linux/fscrypt.h                      |  95 ++----
+ include/linux/unicode.h                      |  14 +
+ 25 files changed, 835 insertions(+), 473 deletions(-)
+
+-- 
+2.25.0.341.g760bfbb309-goog
+
