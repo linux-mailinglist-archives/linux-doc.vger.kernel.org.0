@@ -2,70 +2,62 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 15717141EAE
-	for <lists+linux-doc@lfdr.de>; Sun, 19 Jan 2020 16:00:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8494A141F90
+	for <lists+linux-doc@lfdr.de>; Sun, 19 Jan 2020 19:44:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726925AbgASO7f (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 19 Jan 2020 09:59:35 -0500
-Received: from mail.kernel.org ([198.145.29.99]:58980 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726778AbgASO7e (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 19 Jan 2020 09:59:34 -0500
-Received: from gandalf.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 98EA6206D7;
-        Sun, 19 Jan 2020 14:59:32 +0000 (UTC)
-Date:   Sun, 19 Jan 2020 09:59:31 -0500
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     Masami Hiramatsu <mhiramat@kernel.org>
-Cc:     Ingo Molnar <mingo@redhat.com>,
-        Frank Rowand <frowand.list@gmail.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Namhyung Kim <namhyung@kernel.org>,
-        Tim Bird <Tim.Bird@sony.com>, Jiri Olsa <jolsa@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Tom Zanussi <tom.zanussi@linux.intel.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v6 00/22] tracing: bootconfig: Boot-time tracing and
- Extra boot config
-Message-ID: <20200119095931.736c4a1f@gandalf.local.home>
-In-Reply-To: <20200119232037.c46321eac70bf288b42f493f@kernel.org>
-References: <157867220019.17873.13377985653744804396.stgit@devnote2>
-        <20200119232037.c46321eac70bf288b42f493f@kernel.org>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+        id S1728978AbgASSoq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 19 Jan 2020 13:44:46 -0500
+Received: from mail-il1-f194.google.com ([209.85.166.194]:41088 "EHLO
+        mail-il1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728855AbgASSoi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 19 Jan 2020 13:44:38 -0500
+Received: by mail-il1-f194.google.com with SMTP id f10so25481137ils.8
+        for <linux-doc@vger.kernel.org>; Sun, 19 Jan 2020 10:44:37 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=/o+CA7VDRA7UR3HGeT8+/tYzwEnOXwq5B8ZHP2/HeYc=;
+        b=gmKBxPx84PXNKr5CdAEsBl4o6OI0Ul1T9kdeNuOonXVMsPZvHaiVfrF6wsqmkO6amC
+         OhpUNNF3SMjaFtPDB5q+oWHWGLwTM1KQcLAEAJsxead1wkkS8vgEkLcKKIbpXv93k89C
+         Il/b6fig8uFQ2ful9dClSdBh6ES0WHCRI487g5LzaF7Sg904xrrN8vXROMW6UBU7S6v1
+         1KY36Pw5SyxrOXfagNts4/xbaFFgof1/AzREyQlil09RYVWfcnHmKvyC/eKHTr8xAdVR
+         8OHIBUIT1uRPI/WtlHnD2gmL8PhGi3ea1Do5nFE3xaprr/6eI7i7Fk2drMcN+8BwExKd
+         ZFxA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=/o+CA7VDRA7UR3HGeT8+/tYzwEnOXwq5B8ZHP2/HeYc=;
+        b=FJrMA6uwzQZ3l2krSy7GXy46HvWOWng/FiSjNt/7fBlkmR0Jxqt29vKwTnf4uwxP+i
+         jWuw1Zezx/zOr0+H7kISjWYcJgz+HRPYEvWzTl0RY8R+uQmMrE1SOsjUvLEsmGRe3C9L
+         eKSLAxyEYYSt4jooL4C4E/1JJgC1D7cSdzJiiYoj0im18c+4X2judo/y7uzmwZ2Ww4uY
+         S+XsimXRfJnKn1nQAdoIxCUtTJdb80C8AKmQrv3T/WjGrGxrdymbcN9OZubUQRd2QG+B
+         VnF5KQ6KPEFNQoD8/fRDyinYWCKI5tO5fvPqAcenQF9R1c8/3WR7hmyPxqFB5NHFeelg
+         pDvw==
+X-Gm-Message-State: APjAAAUlatwRJ8RTzV17cQHF7BtTFBWLBffzumNTZYG0MJln16XQ+9Yw
+        o9KPfGLp0hPooARQknyE71KrGBFe/PgEBh0y3Zc=
+X-Google-Smtp-Source: APXvYqw0/+WGODIUvKkziyHBLuQsuF4sA8inGcr6D1fE0jlGptJu92UkXoVDxAQCBYSMyoJXI0/9BUQNIZC+z8C9ask=
+X-Received: by 2002:a92:5c52:: with SMTP id q79mr7225189ilb.11.1579459477506;
+ Sun, 19 Jan 2020 10:44:37 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Received: by 2002:a02:95c8:0:0:0:0:0 with HTTP; Sun, 19 Jan 2020 10:44:37
+ -0800 (PST)
+Reply-To: favordens@email.com
+From:   Favor Desmond <contecindy5@gmail.com>
+Date:   Sun, 19 Jan 2020 18:44:37 +0000
+Message-ID: <CAOfCPNxP6Zd30BF2yc=mXgSsiq_K60AW+CVH-5JzXJEsBrwaJA@mail.gmail.com>
+Subject: HELLO
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, 19 Jan 2020 23:20:37 +0900
-Masami Hiramatsu <mhiramat@kernel.org> wrote:
-
-> Hi Steve,
-> 
-> Thanks for pick this series on your tree. I would like to fix some patches
-> according to Randy's comments. Should I update this series or just incremental
-> updates on top of your tree?
-> 
-
-Hi Masami,
-
-Just send me incremental patches. I try not to ever rebase what I push
-to linux-next (except for adding changes that don't affect the content
-of the code, like adding acked-by to commit messages).
-
-Thanks,
-
--- Steve
+Hello Dear
+Greetings to you,I am Favor Desmond from Ivory coast currently living
+in  Togo Republic,I would like to know you more, so that i can tell
+you little amount myself and my photo, email address is
+favordens@email.com
+Thanks
+Favor
