@@ -2,97 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A3711142D1D
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2020 15:20:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 76828142D22
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2020 15:20:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726988AbgATOUN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Jan 2020 09:20:13 -0500
-Received: from mail4.protonmail.ch ([185.70.40.27]:32249 "EHLO
-        mail4.protonmail.ch" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727285AbgATOUN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Jan 2020 09:20:13 -0500
-Date:   Mon, 20 Jan 2020 14:20:05 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-        s=default; t=1579530011;
-        bh=F6zq9nm/Ri9Wc3JAzDzqc/NsBZlXQNstVWMJ+FiUD2Q=;
-        h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:
-         Feedback-ID:From;
-        b=TCR5hUsb/JnJc7uM8oxBC3I6eBvwEg/FoIUMNWIeHnlCgpRePl2SfSTFz80zqlASn
-         6rKu+yfYy1x6o5WPBkXVuHEsNIcUjgn75L6LhZBTNCMbBIX0ggE9oNfjLAumZro3Xb
-         iBytV4Ecp7y7Z83BtkHWlAyM4Rgn6jw8aJe5MIgQ=
-To:     Thomas Gleixner <tglx@linutronix.de>
-From:   Krzysztof Piecuch <piecuch@protonmail.com>
-Cc:     Andy Lutomirski <luto@amacapital.net>,
-        "corbet\\@lwn.net" <corbet@lwn.net>,
-        "mingo\\@redhat.com" <mingo@redhat.com>,
-        "bp\\@alien8.de" <bp@alien8.de>, "hpa\\@zytor.com" <hpa@zytor.com>,
-        "x86\\@kernel.org" <x86@kernel.org>,
-        "mchehab+samsung\\@kernel.org" <mchehab+samsung@kernel.org>,
-        "jpoimboe\\@redhat.com" <jpoimboe@redhat.com>,
-        "gregkh\\@linuxfoundation.org" <gregkh@linuxfoundation.org>,
-        "pawan.kumar.gupta\\@linux.intel.com" 
-        <pawan.kumar.gupta@linux.intel.com>,
-        "paulmck\\@linux.ibm.com" <paulmck@linux.ibm.com>,
-        "jgross\\@suse.com" <jgross@suse.com>,
-        "rafael.j.wysocki\\@intel.com" <rafael.j.wysocki@intel.com>,
-        "viresh.kumar\\@linaro.org" <viresh.kumar@linaro.org>,
-        "drake\\@endlessm.com" <drake@endlessm.com>,
-        "malat\\@debian.org" <malat@debian.org>,
-        "mzhivich\\@akamai.com" <mzhivich@akamai.com>,
-        "juri.lelli\\@redhat.com" <juri.lelli@redhat.com>,
-        "linux-doc\\@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel\\@vger.kernel.org" <linux-kernel@vger.kernel.org>
-Reply-To: Krzysztof Piecuch <piecuch@protonmail.com>
-Subject: Re: [PATCH] x86/tsc: Add tsc_tuned_baseclk flag disabling CPUID.16h use for tsc calibration
-Message-ID: <ap4FOrto78iOuRRggmgRTphowIopQYqbTDWXbRr82-Ipk_351W6863FJjJHWjrGFsZanu7_C3YrIXCdmCVziB1V4E-Rsn4Tp698EBJPR0C4=@protonmail.com>
-In-Reply-To: <871rru4535.fsf@nanos.tec.linutronix.de>
-References: <9rN6HvBfpUYE7XjHYSTKXKkKOUHQd_skSYGqjXlI0jTIk4nqLoLUloev1jgSayOdvzmkXgRNP8j_mgcikMJy6L_JN_vJhUJn9vD9xm_ueSo=@protonmail.com>
- <6BFAC54D-65CA-4F8A-9C5B-CEFB108C90FD@amacapital.net>
- <pdsz0EbsOFH8qmBn1Uv20EOOr71rKXljZIItC75EhT9KO4TKEKrt83Es88ZeaAh3MYuk0UM8F6XKfvmmRHgZjF50CXk9sigWEH_SyXp6lZE=@protonmail.com>
- <871rru4535.fsf@nanos.tec.linutronix.de>
-Feedback-ID: krphKiiPlx_XKIryTSpdJ_XtBwogkHXWA-Us-PsTeaBSrzOTAKWxwbFkseT4Z85b_7PMRvSnq3Ah7f9INXrOMw==:Ext:ProtonMail
+        id S1729031AbgATOU0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Jan 2020 09:20:26 -0500
+Received: from mga01.intel.com ([192.55.52.88]:61462 "EHLO mga01.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726642AbgATOUZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 20 Jan 2020 09:20:25 -0500
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 20 Jan 2020 06:20:25 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,342,1574150400"; 
+   d="scan'208";a="306932076"
+Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
+  by orsmga001.jf.intel.com with ESMTP; 20 Jan 2020 06:20:22 -0800
+Received: from andy by smile with local (Exim 4.93)
+        (envelope-from <andriy.shevchenko@linux.intel.com>)
+        id 1itXuh-0002aA-6e; Mon, 20 Jan 2020 16:20:23 +0200
+Date:   Mon, 20 Jan 2020 16:20:23 +0200
+From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To:     lijiazi <jqqlijiazi@gmail.com>
+Cc:     Petr Mladek <pmladek@suse.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Rob Herring <robh+dt@kernel.org>,
+        Frank Rowand <frowand.list@gmail.com>,
+        devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
+        lijiazi <lijiazi@xiaomi.com>
+Subject: Re: [PATCH v3 1/3] lib/vsprintf: add two device node flags for %pOF
+Message-ID: <20200120142023.GP32742@smile.fi.intel.com>
+References: <54fe6854ede6e2f22eb9775837da1ad7a13a3df4.1579423564.git.lijiazi@xiaomi.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.2 required=7.0 tests=ALL_TRUSTED,BAYES_05,
-        DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM
-        shortcircuit=no autolearn=ham autolearn_force=no version=3.4.2
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on mail.protonmail.ch
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <54fe6854ede6e2f22eb9775837da1ad7a13a3df4.1579423564.git.lijiazi@xiaomi.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Monday, January 20, 2020 1:42 PM, Thomas Gleixner <tglx@linutronix.de> w=
-rote:
->
-> Simply because all of this is horribly fragile and if you put virt into
-> the picture it gets even worse.
->
-> The initial calibration via PIT/HPET is halfways accurate in most cases
-> and we use the 1% as a sanity check.
->
-> > Ideally it would be better to get the early calibration right than
-> > risk getting it wrong because of an "anomaly".
->
-> Ideally we would just have a way to read the stupid frequency from some
-> reliable place, but there is no such thing.
->
-> Guess why we have all this code, surely not because we have nothing
-> better to do than dreaming up a variety of weird ways to figure out that
-> frequency.
+On Mon, Jan 20, 2020 at 07:38:27PM +0800, lijiazi wrote:
+> Add two device node flags into printk-formats.rst.
 
-Thank you for the explanation.
+This should be rather third patch in the series.
 
-> Widening the error window here is clearly a hack. As you have to supply
-> a valid number there, then why not just providing the frequency itself
-> on the command line? That would at least make most sense and would avoid
-> to use completely wrong data in the early boot stage.
+-- 
+With Best Regards,
+Andy Shevchenko
 
-That sounds good.
-I'll assume that the user will be supposed to provide a flag tsc_early_hz=
-=3D
-so that refine_calibration_work can get better numbers while still doing
-the 1% sanity check.
 
-I'll send a patch this week.
