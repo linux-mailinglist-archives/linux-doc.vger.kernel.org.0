@@ -2,82 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A9B381431D8
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2020 19:56:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4758114324E
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2020 20:32:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726425AbgATS4Z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Jan 2020 13:56:25 -0500
-Received: from mail.kernel.org ([198.145.29.99]:41114 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726112AbgATS4Z (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 20 Jan 2020 13:56:25 -0500
-Received: from gandalf.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 51569207FF;
-        Mon, 20 Jan 2020 18:56:23 +0000 (UTC)
-Date:   Mon, 20 Jan 2020 13:56:21 -0500
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     Daniel Vetter <daniel@ffwll.ch>
-Cc:     Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org,
-        Sean Paul <seanpaul@chromium.org>,
-        Daniel Vetter <daniel.vetter@ffwll.ch>,
-        David Airlie <airlied@gmail.com>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        Pekka Paalanen <ppaalanen@gmail.com>,
-        Rob Clark <robdclark@gmail.com>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Ville =?UTF-8?B?U3lyasOkbMOk?= <ville.syrjala@linux.intel.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        David Airlie <airlied@linux.ie>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v4] drm/trace: Buffer DRM logs in a ringbuffer
- accessible via debugfs
-Message-ID: <20200120135621.34346e38@gandalf.local.home>
-In-Reply-To: <20200116062722.GA8400@dvetter-linux.ger.corp.intel.com>
-References: <20200114172155.215463-1-sean@poorly.run>
-        <20200116062722.GA8400@dvetter-linux.ger.corp.intel.com>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+        id S1726586AbgATTcI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Jan 2020 14:32:08 -0500
+Received: from mail-ed1-f68.google.com ([209.85.208.68]:35264 "EHLO
+        mail-ed1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727312AbgATTcA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Jan 2020 14:32:00 -0500
+Received: by mail-ed1-f68.google.com with SMTP id f8so625599edv.2
+        for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2020 11:31:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=z7I/Kq2V0EnXiuoACdRbnwoAql3KZ080nwyXVjlruyU=;
+        b=kLfnsSTIjE2YEe6HI6GtqXd6cMnhTRLMcstoRngEtLrpsW8Des52P9cJGak3H8TgGi
+         7pI7x0ReUsZVA5020Qw65cEVulbgAqf7PV7Yj5z98jIQHYXuhdjNseji1wTJmoRk9owd
+         jH0nw85bxKb6JNDbbMZz77rTtrhB/lrp1T9+1Yzp1e0fAmiYnPF2y/wqE3N2vxlEpqDg
+         Q62+v45VGQo8fprIjkXGYdl8n0+0lt4RTeTWLmEirmHeh05e1zsbOQ1RyEmjVmqN0eJc
+         PRg9w7tG3wGqyiL8Rgrtjody799fKx6nbHvtMQHhCmcCncWFfzoetJS1edNfQP320vCH
+         Vilg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=z7I/Kq2V0EnXiuoACdRbnwoAql3KZ080nwyXVjlruyU=;
+        b=Ynl6+RhrTvcI90pyr5VM16OcUKswY+6b/SVgqfG47vP24nM8VRVGlzDfrZQ9mtYi2x
+         i8QO8mq13OQrEfM8yh21KpmL1SHhZ1b7TP1SCxRNONGEpEnUlYpTHdJSizLDrR0+XWK3
+         pURDr4wdFaiX7S8iEXLpHgD5aKgHheKT4U25iEQp60k96CiwTCGn9Odpe5lc9FPXLLLZ
+         1idUDBk3n71Q4gATT6yaXJczlOn5rnBeU6wWttRMsfUiO9r5AkfvwOxp8nkGiiWm14Oa
+         UugvTMkNUTqe6+PARAgiWNIYumiJqWNndADKTOkkWK07aJFf8vijh7ZDaY9pOkJ8upfr
+         +OgA==
+X-Gm-Message-State: APjAAAV287is+TiKmPph474EQYathF4b8SF3GR2dxdclTalml7HDXHaj
+        3Lp0wXgIUxBb9+aJRf1WwZSRhu4NRuKGL4DIgnk=
+X-Google-Smtp-Source: APXvYqwPh6D8ihOXjaVWGs/0GLulEekGPU0xOOyxhr7PagnLX+E8xWeQy/UQ09ZNp2jZFCCt0xVGiodDu+D5No4niKg=
+X-Received: by 2002:a05:6402:505:: with SMTP id m5mr609398edv.15.1579548719077;
+ Mon, 20 Jan 2020 11:31:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Received: by 2002:a05:6402:22dc:0:0:0:0 with HTTP; Mon, 20 Jan 2020 11:31:57
+ -0800 (PST)
+Reply-To: mcclainejohn.13@gmail.com
+From:   "Prof, William Roberts" <eco.bank1204@gmail.com>
+Date:   Mon, 20 Jan 2020 20:31:57 +0100
+Message-ID: <CAOE+jAB9Cv76tHqc-hO92yWjVshCsALoX=zT1ruNmX+0-Bjyxw@mail.gmail.com>
+Subject: Contact Diplomatic Agent, Mr. Mcclaine John to receive your ATM CARD
+ valued the sum of $12.8Million United States Dollars
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 16 Jan 2020 07:27:22 +0100
-Daniel Vetter <daniel@ffwll.ch> wrote:
+Attn: Dear Beneficiary,
 
-> On Tue, Jan 14, 2020 at 12:21:43PM -0500, Sean Paul wrote:
-> > From: Sean Paul <seanpaul@chromium.org>
-> > 
-> > This patch uses a ring_buffer to keep a "flight recorder" (name credit Weston)
-> > of DRM logs for a specified set of debug categories. The user writes a
-> > bitmask of debug categories to the "trace_mask" node and can read log
-> > messages from the "trace" node.
-> > 
-> > These nodes currently exist in debugfs under the dri directory. I
-> > intended on exposing all of this through tracefs originally, but the
-> > tracefs entry points are not exposed, so there's no way to create
-> > tracefs files from drivers at the moment. I think it would be a
-> > worthwhile endeavour, but one requiring more time and conversation to
-> > ensure the drm traces fit somewhere sensible.  
-> 
-> Hm, since the idea is to ship this in production environments debugfs is
-> out. sysfs is also kinda the wrong thing, so maybe trying to get this
-> stuffed into tracefs is actually the way to go?
->
+I wish to inform you that the diplomatic agent conveying your ATM CARD
+valued the sum of $12.8Million United States Dollars has misplaced
+your address and he is currently stranded at (George Bush
+International Airport) Houston Texas USA now
+We required you to reconfirm the following information's below to him
+so that he can deliver your Payment CARD to you today or tomorrow
+morning as information provided with open communications via email and
+telephone for security reasons.
+HERE IS THE DETAILS  HE NEED FROM YOU URGENT
+YOUR FULL NAME:========
+ADDRESS:========
+MOBILE NO:========
+NAME OF YOUR NEAREST AIRPORT:========
+A COPY OF YOUR IDENTIFICATION :========
 
-Why not use normal tracepoints and the tracing infrastructure? You can
-add your own instance as rasdaemon does, which isn't affected by other
-tracing. There's code now to even create these instances and enable and
-disable events from within the kernel.
+Note; do contact the diplomatic agent immediately through the
+information's listed below
+Contact Person: Diplomatic Agent, Mr. Mcclaine John
+EMAIL: mcclainejohn.13@gmail.com
+Tel:(223) 777-7518
 
-  https://lore.kernel.org/lkml/1574276919-11119-1-git-send-email-divya.indi@oracle.com/
+Contact the diplomatic agent immediately
+because he is waiting to hear from you today with the needed information's.
 
-As this is tracefs, you can mount it without even compiling in debugfs.
+NOTE: The Diplomatic agent does not know that the content of the
+consignment box is $12.800,000,00 Million United States Dollars and on
+no circumstances should you let him know the content. The consignment
+was moved from here as family treasures, so never allow him to open
+the box. Please I have paid delivery fees for you but the only money
+you must send to Mcclaine John is your ATM CARD delivery fee $25.00
+only. text Him as you contact Him Immediately
 
--- Steve
+Thanks,
+with Regards.
+Prof, William Roberts
+Director DHL COURIER SERVICES-Benin
