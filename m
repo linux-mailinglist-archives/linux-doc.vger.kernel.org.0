@@ -2,47 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 21F98142CF7
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2020 15:14:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CC4E8142CFD
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2020 15:16:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727573AbgATOOS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Jan 2020 09:14:18 -0500
-Received: from mga07.intel.com ([134.134.136.100]:58183 "EHLO mga07.intel.com"
+        id S1726942AbgATOQp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Jan 2020 09:16:45 -0500
+Received: from mga02.intel.com ([134.134.136.20]:55069 "EHLO mga02.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726885AbgATOOS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 20 Jan 2020 09:14:18 -0500
+        id S1726885AbgATOQp (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 20 Jan 2020 09:16:45 -0500
 X-Amp-Result: UNKNOWN
 X-Amp-Original-Verdict: FILE UNKNOWN
 X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 20 Jan 2020 06:14:16 -0800
+Received: from orsmga006.jf.intel.com ([10.7.209.51])
+  by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 20 Jan 2020 06:16:44 -0800
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.70,342,1574150400"; 
-   d="scan'208";a="249977801"
+   d="scan'208";a="228409728"
 Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
-  by fmsmga004.fm.intel.com with ESMTP; 20 Jan 2020 06:14:13 -0800
+  by orsmga006.jf.intel.com with ESMTP; 20 Jan 2020 06:16:42 -0800
 Received: from andy by smile with local (Exim 4.93)
         (envelope-from <andriy.shevchenko@linux.intel.com>)
-        id 1itXok-0002Vm-Sj; Mon, 20 Jan 2020 16:14:14 +0200
-Date:   Mon, 20 Jan 2020 16:14:14 +0200
+        id 1itXr8-0002Xp-V7; Mon, 20 Jan 2020 16:16:42 +0200
+Date:   Mon, 20 Jan 2020 16:16:42 +0200
 From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
-Cc:     lijiazi <jqqlijiazi@gmail.com>, Petr Mladek <pmladek@suse.com>,
+To:     lijiazi <jqqlijiazi@gmail.com>
+Cc:     Petr Mladek <pmladek@suse.com>,
         Steven Rostedt <rostedt@goodmis.org>,
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
         Rasmus Villemoes <linux@rasmusvillemoes.dk>,
         Jonathan Corbet <corbet@lwn.net>,
         Rob Herring <robh+dt@kernel.org>,
         Frank Rowand <frowand.list@gmail.com>,
         devicetree@vger.kernel.org, linux-doc@vger.kernel.org,
         lijiazi <lijiazi@xiaomi.com>
-Subject: Re: [PATCH v3 1/3] lib/vsprintf: add two device node flags for %pOF
-Message-ID: <20200120141414.GM32742@smile.fi.intel.com>
+Subject: Re: [PATCH v3 2/3] lib/vsprintf: introduce OF_DEVICE_NODE_FLAG_MAX
+Message-ID: <20200120141642.GN32742@smile.fi.intel.com>
 References: <54fe6854ede6e2f22eb9775837da1ad7a13a3df4.1579423564.git.lijiazi@xiaomi.com>
- <20200120133652.GA386200@jagdpanzerIV.localdomain>
+ <2d432e67cab2eb51f36f5b2e904a185ef48df6e0.1579423564.git.lijiazi@xiaomi.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200120133652.GA386200@jagdpanzerIV.localdomain>
+In-Reply-To: <2d432e67cab2eb51f36f5b2e904a185ef48df6e0.1579423564.git.lijiazi@xiaomi.com>
 Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
@@ -50,32 +51,25 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jan 20, 2020 at 10:36:52PM +0900, Sergey Senozhatsky wrote:
-> On (20/01/20 19:38), lijiazi wrote:
-> >  Documentation/core-api/printk-formats.rst | 2 ++
-> >  1 file changed, 2 insertions(+)
-> > 
-> > diff --git a/Documentation/core-api/printk-formats.rst b/Documentation/core-api/printk-formats.rst
-> > index 8ebe46b1..9271f20 100644
-> > --- a/Documentation/core-api/printk-formats.rst
-> > +++ b/Documentation/core-api/printk-formats.rst
-> > @@ -441,6 +441,8 @@ Examples::
-> >  							d - detached
-> >  							P - Populated
-> >  							B - Populated bus
-> > +							O - Overlay
-> > +							F - Overlay free cset
-> 
-> I think these 3 can be just one patch. Patching Documentation and
-> vsprintf in separate steps might be a bit inconvenient.
+On Mon, Jan 20, 2020 at 07:38:28PM +0800, lijiazi wrote:
+> introduce OF_DEVICE_NODE_FLAG_MAX for %pOF related printk.
 
-The new flags addition may be a subject to discuss. That's why I suggested
-to split it out. Though the above misses the functionality for these flags.
+introduce -> Introduce
 
-Adding a flag counter to the OF header is orthogonal to printf() changes,
-it may be there independently. So, it should be a separate patch.
+> @@ -147,6 +147,13 @@ extern raw_spinlock_t devtree_lock;
+>  #define OF_OVERLAY		5 /* allocated for an overlay */
+>  #define OF_OVERLAY_FREE_CSET	6 /* in overlay cset being freed */
 
-The comment added there is doubtful, though.
+> +/*
+> + * add OF_DEVICE_NODE_FLAG_MAX for %pOF related printk.
+> + * if there is any change on these flags, please synchronize the change
+> + * to device_node_string function in lib/vsprintf.c.
+
+This is doubtful comment. If we don't want to print some flags in printf()?
+And in general this is orthogonal to the printf() changes.
+
+> + */
+> +#define OF_DEVICE_NODE_FLAG_MAX 6 /* Maximum available flags */
 
 -- 
 With Best Regards,
