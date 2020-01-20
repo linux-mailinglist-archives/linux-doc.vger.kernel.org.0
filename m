@@ -2,94 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4758114324E
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2020 20:32:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D8795143385
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jan 2020 22:54:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726586AbgATTcI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Jan 2020 14:32:08 -0500
-Received: from mail-ed1-f68.google.com ([209.85.208.68]:35264 "EHLO
-        mail-ed1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727312AbgATTcA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Jan 2020 14:32:00 -0500
-Received: by mail-ed1-f68.google.com with SMTP id f8so625599edv.2
-        for <linux-doc@vger.kernel.org>; Mon, 20 Jan 2020 11:31:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=z7I/Kq2V0EnXiuoACdRbnwoAql3KZ080nwyXVjlruyU=;
-        b=kLfnsSTIjE2YEe6HI6GtqXd6cMnhTRLMcstoRngEtLrpsW8Des52P9cJGak3H8TgGi
-         7pI7x0ReUsZVA5020Qw65cEVulbgAqf7PV7Yj5z98jIQHYXuhdjNseji1wTJmoRk9owd
-         jH0nw85bxKb6JNDbbMZz77rTtrhB/lrp1T9+1Yzp1e0fAmiYnPF2y/wqE3N2vxlEpqDg
-         Q62+v45VGQo8fprIjkXGYdl8n0+0lt4RTeTWLmEirmHeh05e1zsbOQ1RyEmjVmqN0eJc
-         PRg9w7tG3wGqyiL8Rgrtjody799fKx6nbHvtMQHhCmcCncWFfzoetJS1edNfQP320vCH
-         Vilg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=z7I/Kq2V0EnXiuoACdRbnwoAql3KZ080nwyXVjlruyU=;
-        b=Ynl6+RhrTvcI90pyr5VM16OcUKswY+6b/SVgqfG47vP24nM8VRVGlzDfrZQ9mtYi2x
-         i8QO8mq13OQrEfM8yh21KpmL1SHhZ1b7TP1SCxRNONGEpEnUlYpTHdJSizLDrR0+XWK3
-         pURDr4wdFaiX7S8iEXLpHgD5aKgHheKT4U25iEQp60k96CiwTCGn9Odpe5lc9FPXLLLZ
-         1idUDBk3n71Q4gATT6yaXJczlOn5rnBeU6wWttRMsfUiO9r5AkfvwOxp8nkGiiWm14Oa
-         UugvTMkNUTqe6+PARAgiWNIYumiJqWNndADKTOkkWK07aJFf8vijh7ZDaY9pOkJ8upfr
-         +OgA==
-X-Gm-Message-State: APjAAAV287is+TiKmPph474EQYathF4b8SF3GR2dxdclTalml7HDXHaj
-        3Lp0wXgIUxBb9+aJRf1WwZSRhu4NRuKGL4DIgnk=
-X-Google-Smtp-Source: APXvYqwPh6D8ihOXjaVWGs/0GLulEekGPU0xOOyxhr7PagnLX+E8xWeQy/UQ09ZNp2jZFCCt0xVGiodDu+D5No4niKg=
-X-Received: by 2002:a05:6402:505:: with SMTP id m5mr609398edv.15.1579548719077;
- Mon, 20 Jan 2020 11:31:59 -0800 (PST)
+        id S1726915AbgATVyK convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Mon, 20 Jan 2020 16:54:10 -0500
+Received: from hostingweb31-40.netsons.net ([89.40.174.40]:36509 "EHLO
+        hostingweb31-40.netsons.net" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726752AbgATVyJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Jan 2020 16:54:09 -0500
+Received: from [212.124.162.70] (port=49808 helo=[192.168.77.51])
+        by hostingweb31.netsons.net with esmtpsa (TLSv1.2:ECDHE-RSA-AES128-GCM-SHA256:128)
+        (Exim 4.92)
+        (envelope-from <luca@lucaceresoli.net>)
+        id 1itezm-000CuJ-GG; Mon, 20 Jan 2020 22:54:06 +0100
+From:   Luca Ceresoli <luca@lucaceresoli.net>
+Subject: Re: [PATCH 02/26] docs: i2c: summary: extend introduction
+To:     Jean Delvare <jdelvare@suse.de>
+Cc:     linux-doc@vger.kernel.org, linux-i2c@vger.kernel.org,
+        Wolfram Sang <wsa@the-dreams.de>,
+        Peter Rosin <peda@axentia.se>, linux-kernel@vger.kernel.org
+References: <20200105224006.10321-1-luca@lucaceresoli.net>
+ <20200105225012.11701-1-luca@lucaceresoli.net>
+ <20200105225012.11701-2-luca@lucaceresoli.net>
+ <20200120102730.4eb9116b@endymion>
+Message-ID: <4a772de1-cb81-37bb-4170-9d19d56aaaac@lucaceresoli.net>
+Date:   Mon, 20 Jan 2020 22:54:06 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Received: by 2002:a05:6402:22dc:0:0:0:0 with HTTP; Mon, 20 Jan 2020 11:31:57
- -0800 (PST)
-Reply-To: mcclainejohn.13@gmail.com
-From:   "Prof, William Roberts" <eco.bank1204@gmail.com>
-Date:   Mon, 20 Jan 2020 20:31:57 +0100
-Message-ID: <CAOE+jAB9Cv76tHqc-hO92yWjVshCsALoX=zT1ruNmX+0-Bjyxw@mail.gmail.com>
-Subject: Contact Diplomatic Agent, Mr. Mcclaine John to receive your ATM CARD
- valued the sum of $12.8Million United States Dollars
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20200120102730.4eb9116b@endymion>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8BIT
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - hostingweb31.netsons.net
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - lucaceresoli.net
+X-Get-Message-Sender-Via: hostingweb31.netsons.net: authenticated_id: luca@lucaceresoli.net
+X-Authenticated-Sender: hostingweb31.netsons.net: luca@lucaceresoli.net
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Attn: Dear Beneficiary,
+Hi Jean,
 
-I wish to inform you that the diplomatic agent conveying your ATM CARD
-valued the sum of $12.8Million United States Dollars has misplaced
-your address and he is currently stranded at (George Bush
-International Airport) Houston Texas USA now
-We required you to reconfirm the following information's below to him
-so that he can deliver your Payment CARD to you today or tomorrow
-morning as information provided with open communications via email and
-telephone for security reasons.
-HERE IS THE DETAILS  HE NEED FROM YOU URGENT
-YOUR FULL NAME:========
-ADDRESS:========
-MOBILE NO:========
-NAME OF YOUR NEAREST AIRPORT:========
-A COPY OF YOUR IDENTIFICATION :========
+On 20/01/20 10:27, Jean Delvare wrote:
+> On Sun,  5 Jan 2020 23:49:48 +0100, Luca Ceresoli wrote:
+>> - state the "official" name (I²C, not I2C, according to the spec) at
+>>    the beginning but keep using the more practical I2C elsewhere
+>>  - mention some known different names
+>>  - add link to the specification document
+> 
+> Indentation is inconsistent.
 
-Note; do contact the diplomatic agent immediately through the
-information's listed below
-Contact Person: Diplomatic Agent, Mr. Mcclaine John
-EMAIL: mcclainejohn.13@gmail.com
-Tel:(223) 777-7518
+Weird, this looks OK in my git log and my inbox, wrong on patchwork.
+Perhaps starting an e-mail with a space breaks something? I'll try to
+avoid that in the future.
 
-Contact the diplomatic agent immediately
-because he is waiting to hear from you today with the needed information's.
+>> diff --git a/Documentation/i2c/summary.rst b/Documentation/i2c/summary.rst
+>> index 3a24eac17375..b7d3e620155b 100644
+>> --- a/Documentation/i2c/summary.rst
+>> +++ b/Documentation/i2c/summary.rst
+>> @@ -2,12 +2,18 @@
+>>  I2C and SMBus
+>>  =============
+>>  
+>> -I2C (pronounce: I squared C) is a protocol developed by Philips. It is a
+>> -slow two-wire protocol (variable speed, up to 400 kHz), with a high speed
+>> -extension (3.4 MHz).  It provides an inexpensive bus for connecting many
+>> -types of devices with infrequent or low bandwidth communications needs.
+>> -I2C is widely used with embedded systems.  Some systems use variants that
+>> -don't meet branding requirements, and so are not advertised as being I2C.
+>> +I²C (pronounce: I squared C and written I2C in the kernel documentation) is
+>> +a protocol developed by Philips. It is a slow two-wire protocol (variable
+>> +speed, up to 400 kHz), with a high speed extension (3.4 MHz).  It provides
+>> +an inexpensive bus for connecting many types of devices with infrequent or
+>> +low bandwidth communications needs.  I2C is widely used with embedded
+>> +systems.  Some systems use variants that don't meet branding requirements,
+>> +and so are not advertised as being I2C but with different names, e.g. TWI
+>> +(Two Wire Interface), IIC.
+> 
+> Maybe that's just me but "but with different names" sounds strange to
+> me in the sentence construct. Maybe "but come under different names"
+> instead?
 
-NOTE: The Diplomatic agent does not know that the content of the
-consignment box is $12.800,000,00 Million United States Dollars and on
-no circumstances should you let him know the content. The consignment
-was moved from here as family treasures, so never allow him to open
-the box. Please I have paid delivery fees for you but the only money
-you must send to Mcclaine John is your ATM CARD delivery fee $25.00
-only. text Him as you contact Him Immediately
+What I mean is "...are not advertised as being I2C but [are advertised]
+with different names". Looks equally clear to me, but since it has to be
+clear to readers, I'll take your suggestion for v2.
 
-Thanks,
-with Regards.
-Prof, William Roberts
-Director DHL COURIER SERVICES-Benin
+Thanks for all the review work. I'm not going to reply to each e-mail
+individually, but each of your suggestions will be taken in v2 unless I
+reply differently.
+
+-- 
+Luca
+
