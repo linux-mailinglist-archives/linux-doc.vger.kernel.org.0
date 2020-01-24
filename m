@@ -2,75 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 789D7147ED2
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Jan 2020 11:37:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 515DD1484F2
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Jan 2020 13:07:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731036AbgAXKhG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Jan 2020 05:37:06 -0500
-Received: from mail-lj1-f194.google.com ([209.85.208.194]:34714 "EHLO
-        mail-lj1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730722AbgAXKhF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Jan 2020 05:37:05 -0500
-Received: by mail-lj1-f194.google.com with SMTP id x7so1880880ljc.1
-        for <linux-doc@vger.kernel.org>; Fri, 24 Jan 2020 02:37:04 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=au9tF4VEkPezJUlH0C+XE3DpUKOgmruR5VOhcKwpk64=;
-        b=WefJdIeFKWy7oZxhVAc/LD7d527RVYmyMj89t4ZqDdX9TaAwfb/O65u1clfvoEE4Z+
-         e/v05JsAVM67VWDmjyKLvkzO5cqXEglHY86bAnIDNbh7kp/O3JOyD07KR6aBinRKXol2
-         0QF3zRXN5v2WRqSm1W58cQYAffhMVR5YEAsjAebN86EG8Nmq3xwIjWXr8dI42t4mDYLT
-         43NKCZJcwJz0rDtgz2DE8FYwx33EQbpFFqB/2nCQO+LHR5ql8TU3YHIjNRI356PuorSL
-         FZrqQ71hkb7p3jaQFEiWyPPXB2D9nFyffMYqcD6HV9bepewU0Y0wOv8vyfYjB9x9qxwf
-         eiXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=au9tF4VEkPezJUlH0C+XE3DpUKOgmruR5VOhcKwpk64=;
-        b=eXPL/Z/1r8X9w1k1EiLrFjPyU7KUwyimuSw2vkfUvJ+/7pBlNfmEHQgGECvZbfF1Qi
-         QBXgIWof5ahgCiyzT+kPxNGm4SObgB4rThyStgf/LMi4gTFx2piShnRmwl4PAiZ7X9h/
-         SdOeICUAOm0VRqrbXFfMEn454JMoq/kGPY5cf7Yhk0VvIcKNDoKkGHvFQ6eaklqzAhyQ
-         VIjrXVptqjbJ/pRj6zmuEJV4qcyadFjk2/IxL/Q6dmtjEI6Qg+96mixllyuiV9KfOu+x
-         3QIhQ7C6tT6lyMor518pNqpLroaBJNpLnau61yXWTk2bWjvj8uQW0tkd+XpGjp3TnD4S
-         X5+g==
-X-Gm-Message-State: APjAAAXHvsdsKopcqe3qSSwpQSraoyoMAMG3uC2yp67P6p7S8/Vtb1q0
-        F632Xc+3YmQy8JuzvlbeaDIKiDd8dNPor0SFmk0=
-X-Google-Smtp-Source: APXvYqwsZ6dEtVit6A2ZJCyRX9r9OQLZZyuqJA6P9bgoHE1pVVy2Pegx6UXltQmMTfBpesIRPABU0wXam1/vkMY9B3I=
-X-Received: by 2002:a2e:8547:: with SMTP id u7mr1798755ljj.165.1579862223196;
- Fri, 24 Jan 2020 02:37:03 -0800 (PST)
+        id S1730786AbgAXMHk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Jan 2020 07:07:40 -0500
+Received: from foss.arm.com ([217.140.110.172]:51040 "EHLO foss.arm.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729396AbgAXMHk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 24 Jan 2020 07:07:40 -0500
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C46B71FB;
+        Fri, 24 Jan 2020 04:00:28 -0800 (PST)
+Received: from [10.1.194.46] (e113632-lin.cambridge.arm.com [10.1.194.46])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F00763F68E;
+        Fri, 24 Jan 2020 04:00:26 -0800 (PST)
+Subject: Re: [PATCH v2 1/6] arm64: add support for the AMU extension v1
+To:     Ionela Voinescu <ionela.voinescu@arm.com>
+Cc:     catalin.marinas@arm.com, will@kernel.org, mark.rutland@arm.com,
+        maz@kernel.org, suzuki.poulose@arm.com, sudeep.holla@arm.com,
+        dietmar.eggemann@arm.com, peterz@infradead.org, mingo@redhat.com,
+        ggherdovich@suse.cz, vincent.guittot@linaro.org,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20191218182607.21607-1-ionela.voinescu@arm.com>
+ <20191218182607.21607-2-ionela.voinescu@arm.com>
+ <05b1981b-cf4d-d990-5155-6ed3fadcca92@arm.com>
+ <20200123183207.GB20475@arm.com>
+From:   Valentin Schneider <valentin.schneider@arm.com>
+Message-ID: <00d852b0-d456-efc3-5bfa-31524168344b@arm.com>
+Date:   Fri, 24 Jan 2020 12:00:25 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
 MIME-Version: 1.0
-Received: by 2002:a19:dc18:0:0:0:0:0 with HTTP; Fri, 24 Jan 2020 02:37:02
- -0800 (PST)
-Reply-To: brianjesse343@gmail.com
-From:   brianjesse <westernu288@gmail.com>
-Date:   Fri, 24 Jan 2020 10:37:02 +0000
-Message-ID: <CAD1j+E8Y8mQDDxwutMnhFfzyQJo9b5owoaQaB0TSsUUnYs0YSA@mail.gmail.com>
-Subject: Hl
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20200123183207.GB20475@arm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Witaj, Uprzejmie informujemy, =C5=BCe ten e-mail, kt=C3=B3ry dotar=C5=82 do=
- Twojej
-skrzynki pocztowej, nie jest b=C5=82=C4=99dem, ale zosta=C5=82 specjalnie d=
-o Ciebie
-skierowany. Mam propozycj=C4=99 (7.500.000,00 $) pozostawion=C4=85 przez mo=
-jego
-zmar=C5=82ego in=C5=BCyniera Carlosa Carlosa, kt=C3=B3ry nosi to samo nazwi=
-sko, kt=C3=B3ry
-pracowa=C5=82 i mieszka=C5=82 tutaj w Lom=C3=A9 Togo. M=C3=B3j zmar=C5=82y =
-klient i rodzina
-uczestniczyli w wypadku samochodowym, kt=C3=B3ry poch=C5=82on=C4=85=C5=82 i=
-ch =C5=BCycie.
-Skontaktuj=C4=99 si=C4=99 z tob=C4=85 jako najbli=C5=BCszym krewnym zmar=C5=
-=82ego, aby=C5=9B m=C3=B3g=C5=82
-otrzyma=C4=87 =C5=9Brodki na roszczenia. Po udzieleniu szybkiej odpowiedzi
-poinformuj=C4=99 ci=C4=99 o sposobach wykonania tego przymierza. Skontaktuj=
- si=C4=99
-ze mn=C4=85 w tej wiadomo=C5=9Bci e-mail (brianjesse343@gmail.com)
+On 23/01/2020 18:32, Ionela Voinescu wrote:
+[...]
+> and later we can use information in
+> AMCGCR_EL0 to get the number of architected counters (n) and
+> AMEVTYPER0<n>_EL0 to find out the type. The same logic would apply to
+> the auxiliary counters.
+> 
+
+Good, I think that's all we'll really need. I've not gone through the whole
+series (yet!) so I might've missed AMCGCR being used.
+
+>>> @@ -1150,6 +1152,59 @@ static bool has_hw_dbm(const struct arm64_cpu_capabilities *cap,
+>>>  
+>>>  #endif
+>>>  
+>>> +#ifdef CONFIG_ARM64_AMU_EXTN
+>>> +
+>>> +/*
+>>> + * This per cpu variable only signals that the CPU implementation supports
+>>> + * the Activity Monitors Unit (AMU) but does not provide information
+>>> + * regarding all the events that it supports.
+>>> + * When this amu_feat per CPU variable is true, the user of this feature
+>>> + * can only rely on the presence of the 4 fixed counters. But this does
+>>> + * not guarantee that the counters are enabled or access to these counters
+>>> + * is provided by code executed at higher exception levels.
+>>> + *
+>>> + * Also, to ensure the safe use of this per_cpu variable, the following
+>>> + * accessor is defined to allow a read of amu_feat for the current cpu only
+>>> + * from the current cpu.
+>>> + *  - cpu_has_amu_feat()
+>>> + */
+>>> +static DEFINE_PER_CPU_READ_MOSTLY(u8, amu_feat);
+>>> +
+>>
+>> Why not bool?
+>>
+> 
+> I've changed it from bool after a sparse warning about expression using
+> sizeof(bool) and found this is due to sizeof(bool) being compiler
+> dependent. It does not change anything but I thought it might be a good
+> idea to define it as 8-bit unsigned and rely on fixed size.
+> 
+
+I believe conveying the intent (a truth value) is more important than the
+underlying storage size in this case. It mostly matters when dealing with
+aggregates, but here it's just a free-standing variable.
+
+We already have a few per-CPU boolean variables in arm64/kernel/fpsimd.c
+and the commits aren't even a year old, so I'd go for ignoring sparse this
+time around.
+
+> Thank you for the review,
+> Ionela.
+> 
+>>> +inline bool cpu_has_amu_feat(void)
+>>> +{
+>>> +	return !!this_cpu_read(amu_feat);
+>>> +}
+>>> +
+>>> +static void cpu_amu_enable(struct arm64_cpu_capabilities const *cap)
+>>> +{
+>>> +	if (has_cpuid_feature(cap, SCOPE_LOCAL_CPU)) {
+>>> +		pr_info("detected CPU%d: Activity Monitors Unit (AMU)\n",
+>>> +			smp_processor_id());
+>>> +		this_cpu_write(amu_feat, 1);
+>>> +	}
+>>> +}
