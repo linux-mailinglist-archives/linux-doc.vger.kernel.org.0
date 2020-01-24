@@ -2,127 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 48EFF147A37
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Jan 2020 10:17:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 789D7147ED2
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Jan 2020 11:37:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730380AbgAXJRB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Jan 2020 04:17:01 -0500
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:44433 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1730275AbgAXJRA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Jan 2020 04:17:00 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1579857418;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=eVwp3U5GzOX2o0jWqVHj3WHwgjI/zlg9dOk4xt7JmuA=;
-        b=Uzx9WVjjbAcDNrmkkLuX5HGYwUEtDHQ2B7kphc75eyyvktouhu2hiz2Zrtnk49URcnAwOP
-        7wQ1kTw1e0uA412jy0vnUOKEjij1vdjVIZuRzfggZYLe7jbcN+DJ/K97as6Bs1Kp3pvYZz
-        sPUpNx3UHBqXwm1EEt93ge8tR+W2GfE=
-Received: from mail-wr1-f72.google.com (mail-wr1-f72.google.com
- [209.85.221.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-271-f8ytwAVpOKOfU5ITyQ3WBg-1; Fri, 24 Jan 2020 04:16:52 -0500
-X-MC-Unique: f8ytwAVpOKOfU5ITyQ3WBg-1
-Received: by mail-wr1-f72.google.com with SMTP id k18so869317wrw.9
-        for <linux-doc@vger.kernel.org>; Fri, 24 Jan 2020 01:16:52 -0800 (PST)
+        id S1731036AbgAXKhG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Jan 2020 05:37:06 -0500
+Received: from mail-lj1-f194.google.com ([209.85.208.194]:34714 "EHLO
+        mail-lj1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730722AbgAXKhF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Jan 2020 05:37:05 -0500
+Received: by mail-lj1-f194.google.com with SMTP id x7so1880880ljc.1
+        for <linux-doc@vger.kernel.org>; Fri, 24 Jan 2020 02:37:04 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=au9tF4VEkPezJUlH0C+XE3DpUKOgmruR5VOhcKwpk64=;
+        b=WefJdIeFKWy7oZxhVAc/LD7d527RVYmyMj89t4ZqDdX9TaAwfb/O65u1clfvoEE4Z+
+         e/v05JsAVM67VWDmjyKLvkzO5cqXEglHY86bAnIDNbh7kp/O3JOyD07KR6aBinRKXol2
+         0QF3zRXN5v2WRqSm1W58cQYAffhMVR5YEAsjAebN86EG8Nmq3xwIjWXr8dI42t4mDYLT
+         43NKCZJcwJz0rDtgz2DE8FYwx33EQbpFFqB/2nCQO+LHR5ql8TU3YHIjNRI356PuorSL
+         FZrqQ71hkb7p3jaQFEiWyPPXB2D9nFyffMYqcD6HV9bepewU0Y0wOv8vyfYjB9x9qxwf
+         eiXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=eVwp3U5GzOX2o0jWqVHj3WHwgjI/zlg9dOk4xt7JmuA=;
-        b=kzmfWCcITCk5jviD39qHG0+DHuv545GkZO7u0gLHqfiHniGL4klc4PLe3/qXr4ouMt
-         eAOCscwDcauKcZHb12Vw8U6qRgD40LAVK7VKuTUmEjK8WoGa9zQ2sD0T0hoKpk6mCLwi
-         LHO+gfmX64mfJGzynzjt1ft3dQ/M0/NQ/+8oxU5GHT6Fw/YUc3NSGyHJegGxU2eZ1GVi
-         wUbPtU0ORIiVGRYNk8jKWQlu5aCdF+hM4yaGAnumvWLZvoTV/UhdQotvpxezp4XDklXU
-         YnyVMs7VpSsCrlpmXj5om1eQ10Dj8G++G9ohQfRNwB2wGX8PY5oZXGYUf7Je340DbeMi
-         LPNw==
-X-Gm-Message-State: APjAAAVBBbNNIQdW8dbn0RqS61ot0pdQSRDypr1tmBVtq9sF5dRmNDmz
-        vhavHMlVeAXbR7Q6X0ynrKW6/L1PPd4iwR30gizVnKVay74ykLNHJ1sAUQrbK6SDlb+YhOR7Qca
-        l44NDQLnfwoF+CWZjovyx
-X-Received: by 2002:a1c:a445:: with SMTP id n66mr2460515wme.151.1579857411330;
-        Fri, 24 Jan 2020 01:16:51 -0800 (PST)
-X-Google-Smtp-Source: APXvYqxUiU565WJyxONGgI7w4xQRq/ENXZEynENvjhqk4CBvmo8g5IcgWmw96rLrMcfuNGJKf9m74A==
-X-Received: by 2002:a1c:a445:: with SMTP id n66mr2460489wme.151.1579857411156;
-        Fri, 24 Jan 2020 01:16:51 -0800 (PST)
-Received: from localhost.localdomain ([109.38.141.136])
-        by smtp.gmail.com with ESMTPSA id a132sm6060770wme.3.2020.01.24.01.16.49
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 24 Jan 2020 01:16:50 -0800 (PST)
-Subject: Re: [PATCH v12 03/10] firmware: Rename FW_OPT_NOFALLBACK to
- FW_OPT_NOFALLBACK_SYSFS
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Andy Lutomirski <luto@kernel.org>
-Cc:     Ard Biesheuvel <ardb@kernel.org>,
-        Darren Hart <dvhart@infradead.org>,
-        Andy Shevchenko <andy@infradead.org>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        Peter Jones <pjones@redhat.com>,
-        Dave Olsthoorn <dave@bewaar.me>, x86@kernel.org,
-        platform-driver-x86@vger.kernel.org, linux-efi@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-input@vger.kernel.org
-References: <20200115163554.101315-1-hdegoede@redhat.com>
- <20200115163554.101315-4-hdegoede@redhat.com>
- <20200124085751.GA2957916@kroah.com>
-From:   Hans de Goede <hdegoede@redhat.com>
-Message-ID: <d25d5d6e-0348-b19f-539e-048cfa70d6a6@redhat.com>
-Date:   Fri, 24 Jan 2020 10:16:48 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.1.1
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=au9tF4VEkPezJUlH0C+XE3DpUKOgmruR5VOhcKwpk64=;
+        b=eXPL/Z/1r8X9w1k1EiLrFjPyU7KUwyimuSw2vkfUvJ+/7pBlNfmEHQgGECvZbfF1Qi
+         QBXgIWof5ahgCiyzT+kPxNGm4SObgB4rThyStgf/LMi4gTFx2piShnRmwl4PAiZ7X9h/
+         SdOeICUAOm0VRqrbXFfMEn454JMoq/kGPY5cf7Yhk0VvIcKNDoKkGHvFQ6eaklqzAhyQ
+         VIjrXVptqjbJ/pRj6zmuEJV4qcyadFjk2/IxL/Q6dmtjEI6Qg+96mixllyuiV9KfOu+x
+         3QIhQ7C6tT6lyMor518pNqpLroaBJNpLnau61yXWTk2bWjvj8uQW0tkd+XpGjp3TnD4S
+         X5+g==
+X-Gm-Message-State: APjAAAXHvsdsKopcqe3qSSwpQSraoyoMAMG3uC2yp67P6p7S8/Vtb1q0
+        F632Xc+3YmQy8JuzvlbeaDIKiDd8dNPor0SFmk0=
+X-Google-Smtp-Source: APXvYqwsZ6dEtVit6A2ZJCyRX9r9OQLZZyuqJA6P9bgoHE1pVVy2Pegx6UXltQmMTfBpesIRPABU0wXam1/vkMY9B3I=
+X-Received: by 2002:a2e:8547:: with SMTP id u7mr1798755ljj.165.1579862223196;
+ Fri, 24 Jan 2020 02:37:03 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20200124085751.GA2957916@kroah.com>
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Received: by 2002:a19:dc18:0:0:0:0:0 with HTTP; Fri, 24 Jan 2020 02:37:02
+ -0800 (PST)
+Reply-To: brianjesse343@gmail.com
+From:   brianjesse <westernu288@gmail.com>
+Date:   Fri, 24 Jan 2020 10:37:02 +0000
+Message-ID: <CAD1j+E8Y8mQDDxwutMnhFfzyQJo9b5owoaQaB0TSsUUnYs0YSA@mail.gmail.com>
+Subject: Hl
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
-
-On 1/24/20 9:57 AM, Greg Kroah-Hartman wrote:
-> On Wed, Jan 15, 2020 at 05:35:47PM +0100, Hans de Goede wrote:
->> This is a preparation patch for adding a new platform fallback mechanism,
->> which will have its own enable/disable FW_OPT_xxx option.
->>
->> Note this also fixes a typo in one of the re-wordwrapped comments:
->> enfoce -> enforce.
->>
->> Acked-by: Luis Chamberlain <mcgrof@kernel.org>
->> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
-> 
-> I've taken this in my tree for now in a quest to try to get others to
-> pay attention to this series...
-
-Thank you.
-
-As mentioned before I believe that this series is ready for merging now.
-
-Andy Lutomirski had one last change request for v12 of the second
-patch in the series, specifically to replace the loop searching for
-the prefix with a memem, but the kernel does not have memmem.
-
-Andy, are you ok with v12 as is, given that we don't have memmem ?
-
-Assuming Andy is ok with v12 as is, then to merge this we need
-to probably wait for 5.6-rc1 and then have the x86/efi folks do
-an immutable branch with the first 2 patches of the series.
-
-After that you (Greg) can merge patches 3-10 (after merging the
-branch) and the platform/drivers/x86 folks can take 11 and 12
-(also after merging the branch).
-
-Regards,
-
-Hans
-
+Witaj, Uprzejmie informujemy, =C5=BCe ten e-mail, kt=C3=B3ry dotar=C5=82 do=
+ Twojej
+skrzynki pocztowej, nie jest b=C5=82=C4=99dem, ale zosta=C5=82 specjalnie d=
+o Ciebie
+skierowany. Mam propozycj=C4=99 (7.500.000,00 $) pozostawion=C4=85 przez mo=
+jego
+zmar=C5=82ego in=C5=BCyniera Carlosa Carlosa, kt=C3=B3ry nosi to samo nazwi=
+sko, kt=C3=B3ry
+pracowa=C5=82 i mieszka=C5=82 tutaj w Lom=C3=A9 Togo. M=C3=B3j zmar=C5=82y =
+klient i rodzina
+uczestniczyli w wypadku samochodowym, kt=C3=B3ry poch=C5=82on=C4=85=C5=82 i=
+ch =C5=BCycie.
+Skontaktuj=C4=99 si=C4=99 z tob=C4=85 jako najbli=C5=BCszym krewnym zmar=C5=
+=82ego, aby=C5=9B m=C3=B3g=C5=82
+otrzyma=C4=87 =C5=9Brodki na roszczenia. Po udzieleniu szybkiej odpowiedzi
+poinformuj=C4=99 ci=C4=99 o sposobach wykonania tego przymierza. Skontaktuj=
+ si=C4=99
+ze mn=C4=85 w tej wiadomo=C5=9Bci e-mail (brianjesse343@gmail.com)
