@@ -2,48 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B2EB14B05C
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 08:20:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BB55E14B05A
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 08:20:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725995AbgA1HUQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jan 2020 02:20:16 -0500
-Received: from mail-pg1-f201.google.com ([209.85.215.201]:40678 "EHLO
-        mail-pg1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725971AbgA1HUQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 02:20:16 -0500
-Received: by mail-pg1-f201.google.com with SMTP id 63so7493314pge.7
-        for <linux-doc@vger.kernel.org>; Mon, 27 Jan 2020 23:20:16 -0800 (PST)
+        id S1726149AbgA1HUt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jan 2020 02:20:49 -0500
+Received: from mail-pf1-f202.google.com ([209.85.210.202]:50300 "EHLO
+        mail-pf1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726034AbgA1HUS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 02:20:18 -0500
+Received: by mail-pf1-f202.google.com with SMTP id r13so4095466pfr.17
+        for <linux-doc@vger.kernel.org>; Mon, 27 Jan 2020 23:20:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
-        h=date:message-id:mime-version:subject:from:to:cc;
-        bh=geIt7NTj15qXn0Pd7vHPLbcleORDZqpFgUWoIN42PEM=;
-        b=QvEXh6vx1uu5+MqSyqNpYaqM0+WH+gnl/II2vETCPrUPXtj+INkYpNvum2xVSiePqx
-         t2/NWdcygIobxjQwa6b1OnLgvNTscgcCzwk3Kw36NhrFIWMkNB+UMzrLz77/vEJkezdN
-         15guaSPb7ab1mnGvB+LtN0ErleZfv4RBuk2g7w4q3DMM5WCH/e9o2GfN///ZX1kp+P2k
-         9OtN5uEDF4qS+QZEf323rO0sMLIeC/Xw2+dPQ0tCmivr5rQ4PxRJoq7SiQXxSHuWxBpw
-         M/ivCrQQeOhdoSDO7BN4ynNQSAV+TGlgrrSPB/kV0uDwtRpyqiwvZ/W28+FQICH5XA89
-         pVVA==
+        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
+         :cc;
+        bh=XuQcSLVF/Hrh3GBoBCfa3f7wfs7J5i1pjasDMgobHXc=;
+        b=vpzib0J5nj2DND1Cvoora+gxNlK5gAdhGn/MxnEv1DGxNvefQ3cALz+hejiSzvm/kz
+         0te1TfEliFbLVQvJUYznkMSGK01039LVFSB9r+iJV1l9dPo+gzbJMyOcH2mgZxmTyt70
+         Ylh5PypNoWdZcB1/mA8ew7tua/n8BZNZPi6l0sGOL4enKiRWfvbx0sjlCYm0qzRkNaUE
+         JBTFAlidEjkqlvUrc46EMpV+Tyh7821f+lJa1cP65ZKovA0yreplcoZFc3eLrLoJTiDD
+         DFfpjDOVoWz5jV5x2/D50lrKtfaFp6mPZAh7QuJTHBiTtuz0ZbzBY2L9w8zfbQIdnPl7
+         x44w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
-        bh=geIt7NTj15qXn0Pd7vHPLbcleORDZqpFgUWoIN42PEM=;
-        b=TMoUutDj2YHRgM49U6e/rfVyZWI+P07RakatYOORQ/axWiNojj4YduUcnFGPIIaQHL
-         Krim0xg7U2qYrIKwbeM6L7mqeuUu3+pr5eY5By/bHmqnq6mnq4YTFB8+mLARYmU8BwwD
-         wW0CQgW+qug8VZjNJWhvKo0h4pMB1nD8aj6NgTB0eNrnV7CQaFFL4aKLFxifnobO/K3p
-         14sc5ypkIqfzmM+YAlUy55IzoUQsQ1hbWU+yRYSKwYRnH4VXD4Y9msrFi7/SETWn+q7s
-         1Tr5P4GIRJYNQgNgLAmzFU8IsCXJlADhFDaJ2XdXwu16TCdRU1qQutsl+8MYfT5R+dFf
-         H+pg==
-X-Gm-Message-State: APjAAAWRDgw62lhVcgE5pY3RWstZVyP4mNYpipQvKLl82WARjR5fbOBz
-        0HRzkPVTISrb608jpyEk6DC79FI0YyK7Lq+cMggiAw==
-X-Google-Smtp-Source: APXvYqzxUoPIpd2+KXb0X0NAkTjM1rpz5agpoINUJNKoxT6jjwLdIPKlYS+TLWvc+a1bwy5Pu70qMjsB/y7aNJ72Gg23zw==
-X-Received: by 2002:a65:4b89:: with SMTP id t9mr9307336pgq.102.1580196015485;
- Mon, 27 Jan 2020 23:20:15 -0800 (PST)
-Date:   Mon, 27 Jan 2020 23:19:55 -0800
-Message-Id: <20200128072002.79250-1-brendanhiggins@google.com>
+        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
+         :references:subject:from:to:cc;
+        bh=XuQcSLVF/Hrh3GBoBCfa3f7wfs7J5i1pjasDMgobHXc=;
+        b=uLbCF0F/vQeEhjWeCYwRBEi1A30/KzAoZjL8qwLvsOBj7XsQhT3Dbt8XdaYTrPSCzt
+         sGPyv6GZaINawA1hVc2Jbz5Syw3WKy8ijUUXMK2et8a6UAh2j0sHmwLNOAqGpFKbcZZ+
+         XtUeNVX6mu4vMU+OVqUNpbwCzHxS+uAnDlVK6iSV21QdaKN841LyfXl8On28mR871A4i
+         D2nZxii0OdcupiAKDAwOfk/8q5PJcITgFbjCFDdxcznQdayADijm8T3ATNj7jukLuVfs
+         ukR+E7pWG0iIT3VFmJJ2LqXRTVc1DvcCjowGkiK5k97kVsEplbWALwKCrXMzFYhTHyGi
+         bZBA==
+X-Gm-Message-State: APjAAAXsiUMyrRfsORrD/6DfPc2ZqUoV9eMu7xNT9kL2drIg5qntW8rF
+        MxSOilXjSy0FMZ+zM+rxhE0AX9TI3C0miGdiqEAvPg==
+X-Google-Smtp-Source: APXvYqxhr/v1PhdZEF/n7DR85NKPlp1nK8BnB+q0UXQhUtXxUX2SIyir4VRVLjV7DDEFnqw9g+ZcXkVv2G/Rzr1RlAuQdQ==
+X-Received: by 2002:a63:1119:: with SMTP id g25mr23427156pgl.359.1580196018089;
+ Mon, 27 Jan 2020 23:20:18 -0800 (PST)
+Date:   Mon, 27 Jan 2020 23:19:56 -0800
+In-Reply-To: <20200128072002.79250-1-brendanhiggins@google.com>
+Message-Id: <20200128072002.79250-2-brendanhiggins@google.com>
 Mime-Version: 1.0
+References: <20200128072002.79250-1-brendanhiggins@google.com>
 X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
-Subject: [PATCH v1 0/7] kunit: create a centralized executor to dispatch all
- KUnit tests
+Subject: [PATCH v1 1/7] vmlinux.lds.h: add linker section for KUnit test suites
 From:   Brendan Higgins <brendanhiggins@google.com>
 To:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
         arnd@arndb.de, keescook@chromium.org, skhan@linuxfoundation.org,
@@ -62,70 +65,45 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-## TL;DR
+Add a linker section where KUnit can put references to its test suites.
+This patch is the first step in transitioning to dispatching all KUnit
+tests from a centralized executor rather than having each as its own
+separate late_initcall.
 
-This patchset adds a centralized executor to dispatch tests rather than
-relying on late_initcall to schedule each test suite separately along
-with a couple of new features that depend on it.
+Co-developed-by: Iurii Zaikin <yzaikin@google.com>
+Signed-off-by: Iurii Zaikin <yzaikin@google.com>
+Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
+Reviewed-by: Stephen Boyd <sboyd@kernel.org>
+---
+ include/asm-generic/vmlinux.lds.h | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
-## What am I trying to do?
-
-Conceptually, I am trying to provide a mechanism by which test suites
-can be grouped together so that they can be reasoned about collectively.
-The last two of three patches in this series add features which depend
-on this:
-
-PATCH 5/7 Prints out a test plan right before KUnit tests are run[1];
-          this is valuable because it makes it possible for a test
-          harness to detect whether the number of tests run matches the
-          number of tests expected to be run, ensuring that no tests
-          silently failed.
-
-PATCH 6/7 Add a new kernel command-line option which allows the user to
-          specify that the kernel poweroff, halt, or reboot after
-          completing all KUnit tests; this is very handy for running
-          KUnit tests on UML or a VM so that the UML/VM process exits
-          cleanly immediately after running all tests without needing a
-          special initramfs.
-
-In addition, by dispatching tests from a single location, we can
-guarantee that all KUnit tests run after late_init is complete, which
-was a concern during the initial KUnit patchset review (this has not
-been a problem in practice, but resolving with certainty is nevertheless
-desirable).
-
-Other use cases for this exist, but the above features should provide an
-idea of the value that this could provide.
-
-Alan Maguire (1):
-  kunit: test: create a single centralized executor for all tests
-
-Brendan Higgins (5):
-  vmlinux.lds.h: add linker section for KUnit test suites
-  arch: um: add linker section for KUnit test suites
-  init: main: add KUnit to kernel init
-  kunit: test: add test plan to KUnit TAP format
-  Documentation: Add kunit_shutdown to kernel-parameters.txt
-
-David Gow (1):
-  kunit: Add 'kunit_shutdown' option
-
- .../admin-guide/kernel-parameters.txt         |  7 ++
- arch/um/include/asm/common.lds.S              |  4 +
- include/asm-generic/vmlinux.lds.h             |  8 ++
- include/kunit/test.h                          | 82 ++++++++++++-------
- init/main.c                                   |  4 +
- lib/kunit/Makefile                            |  3 +-
- lib/kunit/executor.c                          | 71 ++++++++++++++++
- lib/kunit/test.c                              | 11 ---
- tools/testing/kunit/kunit_kernel.py           |  2 +-
- tools/testing/kunit/kunit_parser.py           | 76 ++++++++++++++---
- .../test_is_test_passed-all_passed.log        |  1 +
- .../test_data/test_is_test_passed-crash.log   |  1 +
- .../test_data/test_is_test_passed-failure.log |  1 +
- 13 files changed, 217 insertions(+), 54 deletions(-)
- create mode 100644 lib/kunit/executor.c
-
+diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
+index e00f41aa8ec4f..99a866f49cb3d 100644
+--- a/include/asm-generic/vmlinux.lds.h
++++ b/include/asm-generic/vmlinux.lds.h
+@@ -856,6 +856,13 @@
+ 		KEEP(*(.con_initcall.init))				\
+ 		__con_initcall_end = .;
+ 
++/* Alignment must be consistent with (kunit_suite *) in include/kunit/test.h */
++#define KUNIT_TEST_SUITES						\
++		. = ALIGN(8);						\
++		__kunit_suites_start = .;				\
++		KEEP(*(.kunit_test_suites))				\
++		__kunit_suites_end = .;
++
+ #ifdef CONFIG_BLK_DEV_INITRD
+ #define INIT_RAM_FS							\
+ 	. = ALIGN(4);							\
+@@ -1024,6 +1031,7 @@
+ 		INIT_CALLS						\
+ 		CON_INITCALL						\
+ 		INIT_RAM_FS						\
++		KUNIT_TEST_SUITES					\
+ 	}
+ 
+ #define BSS_SECTION(sbss_align, bss_align, stop_align)			\
 -- 
 2.25.0.341.g760bfbb309-goog
 
