@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BB55E14B05A
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 08:20:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 339E514B050
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 08:20:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726149AbgA1HUt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jan 2020 02:20:49 -0500
-Received: from mail-pf1-f202.google.com ([209.85.210.202]:50300 "EHLO
-        mail-pf1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726034AbgA1HUS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 02:20:18 -0500
-Received: by mail-pf1-f202.google.com with SMTP id r13so4095466pfr.17
-        for <linux-doc@vger.kernel.org>; Mon, 27 Jan 2020 23:20:18 -0800 (PST)
+        id S1726137AbgA1HUW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jan 2020 02:20:22 -0500
+Received: from mail-pl1-f201.google.com ([209.85.214.201]:46861 "EHLO
+        mail-pl1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726114AbgA1HUV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 02:20:21 -0500
+Received: by mail-pl1-f201.google.com with SMTP id t17so5179467plr.13
+        for <linux-doc@vger.kernel.org>; Mon, 27 Jan 2020 23:20:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=date:in-reply-to:message-id:mime-version:references:subject:from:to
          :cc;
-        bh=XuQcSLVF/Hrh3GBoBCfa3f7wfs7J5i1pjasDMgobHXc=;
-        b=vpzib0J5nj2DND1Cvoora+gxNlK5gAdhGn/MxnEv1DGxNvefQ3cALz+hejiSzvm/kz
-         0te1TfEliFbLVQvJUYznkMSGK01039LVFSB9r+iJV1l9dPo+gzbJMyOcH2mgZxmTyt70
-         Ylh5PypNoWdZcB1/mA8ew7tua/n8BZNZPi6l0sGOL4enKiRWfvbx0sjlCYm0qzRkNaUE
-         JBTFAlidEjkqlvUrc46EMpV+Tyh7821f+lJa1cP65ZKovA0yreplcoZFc3eLrLoJTiDD
-         DFfpjDOVoWz5jV5x2/D50lrKtfaFp6mPZAh7QuJTHBiTtuz0ZbzBY2L9w8zfbQIdnPl7
-         x44w==
+        bh=GWHGFk+tfCHvu/qeG8h3yhiMIdqay1deL3woZTxVWJc=;
+        b=Fmsd/wxUUyxkz1Z6qM0r0RkypL0fOEHozNsNaZpYgWUn5bll19sW638dyuJWud6WFE
+         mkQXUTsINjW8p/0aIJ9Px3JJnE0tLlxui4Ay2uXa4EAnUjgJqyXJ127ebWMJgyugOwUe
+         HKaz+i/1o7x2R3F/+KoD3rZft6qDJ7sJpzE73MrvYoPk/YEIDLLtHA2H1V46OZKf5JFE
+         D8+CUicqNyWC1f7beM4bEicUD2XIYC0yfRKT/4fkVQc1NuINeHE+s+lbvUL3Fc5UiIny
+         AxqghwkUQciLsKR60QKfaPCbCi3/uhAClhQMgjbMIMVgXtFJ/XcE4Ub26q4LhGU7qOcE
+         fPdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:in-reply-to:message-id:mime-version
          :references:subject:from:to:cc;
-        bh=XuQcSLVF/Hrh3GBoBCfa3f7wfs7J5i1pjasDMgobHXc=;
-        b=uLbCF0F/vQeEhjWeCYwRBEi1A30/KzAoZjL8qwLvsOBj7XsQhT3Dbt8XdaYTrPSCzt
-         sGPyv6GZaINawA1hVc2Jbz5Syw3WKy8ijUUXMK2et8a6UAh2j0sHmwLNOAqGpFKbcZZ+
-         XtUeNVX6mu4vMU+OVqUNpbwCzHxS+uAnDlVK6iSV21QdaKN841LyfXl8On28mR871A4i
-         D2nZxii0OdcupiAKDAwOfk/8q5PJcITgFbjCFDdxcznQdayADijm8T3ATNj7jukLuVfs
-         ukR+E7pWG0iIT3VFmJJ2LqXRTVc1DvcCjowGkiK5k97kVsEplbWALwKCrXMzFYhTHyGi
-         bZBA==
-X-Gm-Message-State: APjAAAXsiUMyrRfsORrD/6DfPc2ZqUoV9eMu7xNT9kL2drIg5qntW8rF
-        MxSOilXjSy0FMZ+zM+rxhE0AX9TI3C0miGdiqEAvPg==
-X-Google-Smtp-Source: APXvYqxhr/v1PhdZEF/n7DR85NKPlp1nK8BnB+q0UXQhUtXxUX2SIyir4VRVLjV7DDEFnqw9g+ZcXkVv2G/Rzr1RlAuQdQ==
-X-Received: by 2002:a63:1119:: with SMTP id g25mr23427156pgl.359.1580196018089;
- Mon, 27 Jan 2020 23:20:18 -0800 (PST)
-Date:   Mon, 27 Jan 2020 23:19:56 -0800
+        bh=GWHGFk+tfCHvu/qeG8h3yhiMIdqay1deL3woZTxVWJc=;
+        b=kqKVV6sbNEKFPzzBCS1iYE2rJ9znHSAuWVgv/cvP1FgVOhiN137s9hhSVCWR2M8Gzu
+         m2wDmYuOqpHJqrgfuLI1Zo3DZQwoOC9Gg9uxjCmjTIdGAxgW0PxBA9N8gXdfUElHZ8TL
+         KJrdQAEpHPJLBg5lGcnf4MhRBbPOG9M0w3e1BjFycnqsaAtlvx/VUkgi8TLJMWutpy5a
+         2xxODA7FLol/EzQ3r+3BsNilarrQjjmBwXdKqHflEfpX4Eln6b6jwyaaFkBvLCJSID94
+         e3Z4oq/7rny4UIKEJFkYtQ6EDkxcTDzV4MAklmKlvGzzVdUNjAa3rt5176ANwSzijxB5
+         sMPA==
+X-Gm-Message-State: APjAAAVcBRN1Yd5k58/3gFF4FIXRR5QZJbB29umzLbF2DVgsNvdgAO7/
+        5P/yBqgpLqKy87FgZYANNCIfB3pSfykh9pNL+FWP8Q==
+X-Google-Smtp-Source: APXvYqypywQG2gYZge4fgQ89ZnPWWXjpZ4aK4qljq8Qu2reaQNXfA+YsY3M5yDRXuo44nsf6Cp429z3ZpkmkTuhetTXF2A==
+X-Received: by 2002:a63:2cd6:: with SMTP id s205mr18113288pgs.258.1580196020528;
+ Mon, 27 Jan 2020 23:20:20 -0800 (PST)
+Date:   Mon, 27 Jan 2020 23:19:57 -0800
 In-Reply-To: <20200128072002.79250-1-brendanhiggins@google.com>
-Message-Id: <20200128072002.79250-2-brendanhiggins@google.com>
+Message-Id: <20200128072002.79250-3-brendanhiggins@google.com>
 Mime-Version: 1.0
 References: <20200128072002.79250-1-brendanhiggins@google.com>
 X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
-Subject: [PATCH v1 1/7] vmlinux.lds.h: add linker section for KUnit test suites
+Subject: [PATCH v1 2/7] arch: um: add linker section for KUnit test suites
 From:   Brendan Higgins <brendanhiggins@google.com>
 To:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
         arnd@arndb.de, keescook@chromium.org, skhan@linuxfoundation.org,
@@ -65,45 +65,32 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a linker section where KUnit can put references to its test suites.
-This patch is the first step in transitioning to dispatching all KUnit
-tests from a centralized executor rather than having each as its own
-separate late_initcall.
+Add a linker section to UML where KUnit can put references to its test
+suites. This patch is an early step in transitioning to dispatching all
+KUnit tests from a centralized executor rather than having each as its
+own separate late_initcall.
 
-Co-developed-by: Iurii Zaikin <yzaikin@google.com>
-Signed-off-by: Iurii Zaikin <yzaikin@google.com>
 Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
 Reviewed-by: Stephen Boyd <sboyd@kernel.org>
 ---
- include/asm-generic/vmlinux.lds.h | 8 ++++++++
- 1 file changed, 8 insertions(+)
+ arch/um/include/asm/common.lds.S | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
-index e00f41aa8ec4f..99a866f49cb3d 100644
---- a/include/asm-generic/vmlinux.lds.h
-+++ b/include/asm-generic/vmlinux.lds.h
-@@ -856,6 +856,13 @@
- 		KEEP(*(.con_initcall.init))				\
- 		__con_initcall_end = .;
+diff --git a/arch/um/include/asm/common.lds.S b/arch/um/include/asm/common.lds.S
+index 7145ce6999822..eab9ceb450efd 100644
+--- a/arch/um/include/asm/common.lds.S
++++ b/arch/um/include/asm/common.lds.S
+@@ -52,6 +52,10 @@
+ 	CON_INITCALL
+   }
  
-+/* Alignment must be consistent with (kunit_suite *) in include/kunit/test.h */
-+#define KUNIT_TEST_SUITES						\
-+		. = ALIGN(8);						\
-+		__kunit_suites_start = .;				\
-+		KEEP(*(.kunit_test_suites))				\
-+		__kunit_suites_end = .;
++  .kunit_test_suites : {
++	KUNIT_TEST_SUITES
++  }
 +
- #ifdef CONFIG_BLK_DEV_INITRD
- #define INIT_RAM_FS							\
- 	. = ALIGN(4);							\
-@@ -1024,6 +1031,7 @@
- 		INIT_CALLS						\
- 		CON_INITCALL						\
- 		INIT_RAM_FS						\
-+		KUNIT_TEST_SUITES					\
- 	}
- 
- #define BSS_SECTION(sbss_align, bss_align, stop_align)			\
+   .exitcall : {
+ 	__exitcall_begin = .;
+ 	*(.exitcall.exit)
 -- 
 2.25.0.341.g760bfbb309-goog
 
