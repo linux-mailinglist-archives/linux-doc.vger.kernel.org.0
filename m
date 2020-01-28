@@ -2,46 +2,47 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4885314B58B
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 14:58:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AAE3D14B5EF
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 15:01:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726610AbgA1N6q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jan 2020 08:58:46 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:58490 "EHLO
+        id S1727316AbgA1OAr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jan 2020 09:00:47 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:59316 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726560AbgA1N6p (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 08:58:45 -0500
+        with ESMTP id S1727298AbgA1OAq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 09:00:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=O3Bsu4uD9UgtNB0QQELv28C8SHkVh8CCN2pYgVVPZ10=; b=oC2PH9uNv2IBDBXBCX8h16/jbJ
-        Oih4oBbKrrxTLtZCsot5BjSI0z+1mOuJ1T5XA+G6/ZbDtwYlKVZgDOWbNZp45zFBRLvAcw7S3ZlCT
-        q0wEsl5yO8y8Tin4A8ooYPKkcKVqVk+pnvGEDFQd2AJOJnra0RMV/CtyQVbfXe02cjXGWd5q7PNYy
-        dFsSe0NTMhtAQ2ppM+5WG7Z3/bSY/sbfNqoNRi/Hz35W+2dprqce9HRweCPwp/54c19PVn1I+q9cP
-        /AwfveRWiYsrP379mlDeLe8N5Yg5UWehYQTtyX872rDeH0dl8nxPhfbk3rsjCiLqipqZum25DNz3V
-        zaYOREvQ==;
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+        Resent-To:Resent-Cc:Resent-Message-ID:In-Reply-To:References:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=DXSED2YLe82h5LjexvdXkjf3Ix9TaTo2l6rYLelz1VU=; b=kB9R/0m6RyesZFlW3txEtEd1A
+        olQ2YuBFW2vHq3owokfOnlDabx+GnkIsCH6lhxAL3Pwl5HKvRNZlEq2FWEKIq44o7uJO3+YFp7TK8
+        3xIxWcqxJz2IBeqs5C13Y/h715HeTOuJpXU3JDe7Xgb5r6WGMgdC7oVTCeam7LW8jWxsgvYBMGBVX
+        tFBoIefn0BUhKdMT1QDKm+0CM6Qk+OcsL0gnbM56YnRo2ZnQicscNgcDiDDJTBIJkqXFbxCEDplQO
+        YZbC0C7JpXcACqrITWycMHZIH1HjQmKmAd7IcmT7LGTj0VIzX+Vyi03n8AOjnflysoG8WxNeZmt/U
+        U4byvpgWA==;
 Received: from [177.41.103.99] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1iwRO7-0006I1-1r; Tue, 28 Jan 2020 13:58:44 +0000
+        id 1iwRQ5-0007ia-UW; Tue, 28 Jan 2020 14:00:45 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1iwRNq-001BJZ-8z; Tue, 28 Jan 2020 14:58:26 +0100
+        id 1iwRPp-001BND-5V; Tue, 28 Jan 2020 15:00:29 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Media Mailing List <linux-media@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         Mauro Carvalho Chehab <mchehab@infradead.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: [PATCH 06/27] docs: virt: Convert msr.txt to ReST format
-Date:   Tue, 28 Jan 2020 14:58:02 +0100
-Message-Id: <00eb6bb2ec51ac985360c5231fc416342c2782df.1580219586.git.mchehab+huawei@kernel.org>
+        linux-um@lists.infradead.org, linux-doc@vger.kernel.org,
+        Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org,
+        Jeff Dike <jdike@addtoit.com>,
+        Richard Weinberger <richard@nod.at>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH 00/27] docs: virt: convert text documents to ReST format
+Date:   Tue, 28 Jan 2020 15:00:01 +0100
+Message-Id: <cover.1580219586.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
-In-Reply-To: <cover.1580219586.git.mchehab+huawei@kernel.org>
-References: <cover.1580219586.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
@@ -49,338 +50,100 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-- Use document title markup;
-- Convert tables;
-- Add blank lines and adjust indentation.
+Manually convert the documentation under Documentation/virt to ReST,
+minimizing the usage of uneeded markups and preserving the documentation
+writer's style.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/virt/kvm/index.rst            |   1 +
- Documentation/virt/kvm/{msr.txt => msr.rst} | 145 ++++++++++++--------
- 2 files changed, 91 insertions(+), 55 deletions(-)
+PS.: Patches are against docs-next tree.
+
+Mauro Carvalho Chehab (27):
+  docs: kvm: add arm/pvtime.rst to index.rst
+  docs: virt: convert UML documentation to ReST
+  docs: virt: user_mode_linux.rst: update compiling instructions
+  docs: virt: user_mode_linux.rst: fix URL references
+  docs: virt: convert halt-polling.txt to ReST format
+  docs: virt: Convert msr.txt to ReST format
+  docs: kvm: devices/arm-vgic-its.txt to ReST format
+  docs: kvm: devices/arm-vgit-v3.txt to ReST
+  docs: kvm: convert devices/arm-vgit.txt to ReST
+  docs: kvm: convert devices/mpic.txt to ReST
+  docs: kvm: convert devices/s390_flic.txt to ReST
+  docs: kvm: convert devices/vcpu.txt to ReST
+  docs: kvm: convert devices/vcpu.txt to ReST
+  docs: kvm: convert devices/vm.txt to ReST
+  docs: kvm: convert devices/xics.txt to ReST
+  docs: kvm: convert devices/xive.txt to ReST
+  docs: kvm: Convert api.txt to ReST format
+  docs: kvm: convert arm/hyp-abi.txt to ReST
+  docs: kvm: arm/psci.txt: convert to ReST
+  docs: kvm: Convert hypercalls.txt to ReST format
+  docs: kvm: Convert locking.txt to ReST format
+  docs: kvm: Convert mmu.txt to ReST format
+  docs: kvm: Convert nested-vmx.txt to ReST format
+  docs: kvm: Convert ppc-pv.txt to ReST format
+  docs: kvm: Convert s390-diag.txt to ReST format
+  docs: kvm: Convert timekeeping.txt to ReST format
+  docs: kvm: review-checklist.txt: rename to ReST
+
+ Documentation/virt/index.rst                  |    1 +
+ Documentation/virt/kvm/{api.txt => api.rst}   | 3343 ++++++++++-------
+ .../virt/kvm/arm/{hyp-abi.txt => hyp-abi.rst} |   26 +-
+ Documentation/virt/kvm/arm/index.rst          |   12 +
+ .../virt/kvm/arm/{psci.txt => psci.rst}       |   44 +-
+ .../{arm-vgic-its.txt => arm-vgic-its.rst}    |  104 +-
+ .../{arm-vgic-v3.txt => arm-vgic-v3.rst}      |  130 +-
+ .../devices/{arm-vgic.txt => arm-vgic.rst}    |   87 +-
+ Documentation/virt/kvm/devices/index.rst      |   19 +
+ .../virt/kvm/devices/{mpic.txt => mpic.rst}   |    9 +-
+ .../devices/{s390_flic.txt => s390_flic.rst}  |   68 +-
+ Documentation/virt/kvm/devices/vcpu.rst       |  112 +
+ Documentation/virt/kvm/devices/vcpu.txt       |   76 -
+ .../virt/kvm/devices/{vfio.txt => vfio.rst}   |   23 +-
+ .../virt/kvm/devices/{vm.txt => vm.rst}       |  204 +-
+ .../virt/kvm/devices/{xics.txt => xics.rst}   |   26 +-
+ .../virt/kvm/devices/{xive.txt => xive.rst}   |  146 +-
+ .../{halt-polling.txt => halt-polling.rst}    |   84 +-
+ .../kvm/{hypercalls.txt => hypercalls.rst}    |  127 +-
+ Documentation/virt/kvm/index.rst              |   16 +
+ .../virt/kvm/{locking.txt => locking.rst}     |  109 +-
+ Documentation/virt/kvm/{mmu.txt => mmu.rst}   |   60 +-
+ Documentation/virt/kvm/{msr.txt => msr.rst}   |  145 +-
+ .../kvm/{nested-vmx.txt => nested-vmx.rst}    |   35 +-
+ .../virt/kvm/{ppc-pv.txt => ppc-pv.rst}       |   24 +-
+ ...iew-checklist.txt => review-checklist.rst} |    1 +
+ .../virt/kvm/{s390-diag.txt => s390-diag.rst} |   11 +-
+ .../kvm/{timekeeping.txt => timekeeping.rst}  |  221 +-
+ ...odeLinux-HOWTO.txt => user_mode_linux.rst} | 1812 ++++-----
+ 29 files changed, 3954 insertions(+), 3121 deletions(-)
+ rename Documentation/virt/kvm/{api.txt => api.rst} (71%)
+ rename Documentation/virt/kvm/arm/{hyp-abi.txt => hyp-abi.rst} (80%)
+ create mode 100644 Documentation/virt/kvm/arm/index.rst
+ rename Documentation/virt/kvm/arm/{psci.txt => psci.rst} (61%)
+ rename Documentation/virt/kvm/devices/{arm-vgic-its.txt => arm-vgic-its.rst} (71%)
+ rename Documentation/virt/kvm/devices/{arm-vgic-v3.txt => arm-vgic-v3.rst} (77%)
+ rename Documentation/virt/kvm/devices/{arm-vgic.txt => arm-vgic.rst} (66%)
+ create mode 100644 Documentation/virt/kvm/devices/index.rst
+ rename Documentation/virt/kvm/devices/{mpic.txt => mpic.rst} (92%)
+ rename Documentation/virt/kvm/devices/{s390_flic.txt => s390_flic.rst} (88%)
+ create mode 100644 Documentation/virt/kvm/devices/vcpu.rst
+ delete mode 100644 Documentation/virt/kvm/devices/vcpu.txt
+ rename Documentation/virt/kvm/devices/{vfio.txt => vfio.rst} (74%)
+ rename Documentation/virt/kvm/devices/{vm.txt => vm.rst} (61%)
+ rename Documentation/virt/kvm/devices/{xics.txt => xics.rst} (85%)
+ rename Documentation/virt/kvm/devices/{xive.txt => xive.rst} (63%)
+ rename Documentation/virt/kvm/{halt-polling.txt => halt-polling.rst} (64%)
+ rename Documentation/virt/kvm/{hypercalls.txt => hypercalls.rst} (55%)
+ rename Documentation/virt/kvm/{locking.txt => locking.rst} (79%)
+ rename Documentation/virt/kvm/{mmu.txt => mmu.rst} (94%)
  rename Documentation/virt/kvm/{msr.txt => msr.rst} (75%)
+ rename Documentation/virt/kvm/{nested-vmx.txt => nested-vmx.rst} (90%)
+ rename Documentation/virt/kvm/{ppc-pv.txt => ppc-pv.rst} (91%)
+ rename Documentation/virt/kvm/{review-checklist.txt => review-checklist.rst} (97%)
+ rename Documentation/virt/kvm/{s390-diag.txt => s390-diag.rst} (91%)
+ rename Documentation/virt/kvm/{timekeeping.txt => timekeeping.rst} (85%)
+ rename Documentation/virt/uml/{UserModeLinux-HOWTO.txt => user_mode_linux.rst} (74%)
 
-diff --git a/Documentation/virt/kvm/index.rst b/Documentation/virt/kvm/index.rst
-index b39f4894b61d..cc6dde47b267 100644
---- a/Documentation/virt/kvm/index.rst
-+++ b/Documentation/virt/kvm/index.rst
-@@ -10,6 +10,7 @@ KVM
-    amd-memory-encryption
-    cpuid
-    halt-polling
-+   msr
-    vcpu-requests
- 
-    arm/index
-diff --git a/Documentation/virt/kvm/msr.txt b/Documentation/virt/kvm/msr.rst
-similarity index 75%
-rename from Documentation/virt/kvm/msr.txt
-rename to Documentation/virt/kvm/msr.rst
-index df1f4338b3ca..952ac339765b 100644
---- a/Documentation/virt/kvm/msr.txt
-+++ b/Documentation/virt/kvm/msr.rst
-@@ -1,6 +1,8 @@
--KVM-specific MSRs.
--Glauber Costa <glommer@redhat.com>, Red Hat Inc, 2010
--=====================================================
-+=================
-+KVM-specific MSRs
-+=================
-+
-+:Author: Glauber Costa <glommer@redhat.com>, Red Hat Inc, 2010
- 
- KVM makes use of some custom MSRs to service some requests.
- 
-@@ -9,34 +11,39 @@ Custom MSRs have a range reserved for them, that goes from
- but they are deprecated and their use is discouraged.
- 
- Custom MSR list
----------
-+---------------
- 
- The current supported Custom MSR list is:
- 
--MSR_KVM_WALL_CLOCK_NEW:   0x4b564d00
-+MSR_KVM_WALL_CLOCK_NEW:
-+	0x4b564d00
- 
--	data: 4-byte alignment physical address of a memory area which must be
-+data:
-+	4-byte alignment physical address of a memory area which must be
- 	in guest RAM. This memory is expected to hold a copy of the following
--	structure:
-+	structure::
- 
--	struct pvclock_wall_clock {
-+	 struct pvclock_wall_clock {
- 		u32   version;
- 		u32   sec;
- 		u32   nsec;
--	} __attribute__((__packed__));
-+	  } __attribute__((__packed__));
- 
- 	whose data will be filled in by the hypervisor. The hypervisor is only
- 	guaranteed to update this data at the moment of MSR write.
- 	Users that want to reliably query this information more than once have
- 	to write more than once to this MSR. Fields have the following meanings:
- 
--		version: guest has to check version before and after grabbing
-+	version:
-+		guest has to check version before and after grabbing
- 		time information and check that they are both equal and even.
- 		An odd version indicates an in-progress update.
- 
--		sec: number of seconds for wallclock at time of boot.
-+	sec:
-+		 number of seconds for wallclock at time of boot.
- 
--		nsec: number of nanoseconds for wallclock at time of boot.
-+	nsec:
-+		 number of nanoseconds for wallclock at time of boot.
- 
- 	In order to get the current wallclock time, the system_time from
- 	MSR_KVM_SYSTEM_TIME_NEW needs to be added.
-@@ -47,13 +54,15 @@ MSR_KVM_WALL_CLOCK_NEW:   0x4b564d00
- 	Availability of this MSR must be checked via bit 3 in 0x4000001 cpuid
- 	leaf prior to usage.
- 
--MSR_KVM_SYSTEM_TIME_NEW:  0x4b564d01
-+MSR_KVM_SYSTEM_TIME_NEW:
-+	0x4b564d01
- 
--	data: 4-byte aligned physical address of a memory area which must be in
-+data:
-+	4-byte aligned physical address of a memory area which must be in
- 	guest RAM, plus an enable bit in bit 0. This memory is expected to hold
--	a copy of the following structure:
-+	a copy of the following structure::
- 
--	struct pvclock_vcpu_time_info {
-+	  struct pvclock_vcpu_time_info {
- 		u32   version;
- 		u32   pad0;
- 		u64   tsc_timestamp;
-@@ -62,7 +71,7 @@ MSR_KVM_SYSTEM_TIME_NEW:  0x4b564d01
- 		s8    tsc_shift;
- 		u8    flags;
- 		u8    pad[2];
--	} __attribute__((__packed__)); /* 32 bytes */
-+	  } __attribute__((__packed__)); /* 32 bytes */
- 
- 	whose data will be filled in by the hypervisor periodically. Only one
- 	write, or registration, is needed for each VCPU. The interval between
-@@ -72,23 +81,28 @@ MSR_KVM_SYSTEM_TIME_NEW:  0x4b564d01
- 
- 	Fields have the following meanings:
- 
--		version: guest has to check version before and after grabbing
-+	version:
-+		guest has to check version before and after grabbing
- 		time information and check that they are both equal and even.
- 		An odd version indicates an in-progress update.
- 
--		tsc_timestamp: the tsc value at the current VCPU at the time
-+	tsc_timestamp:
-+		the tsc value at the current VCPU at the time
- 		of the update of this structure. Guests can subtract this value
- 		from current tsc to derive a notion of elapsed time since the
- 		structure update.
- 
--		system_time: a host notion of monotonic time, including sleep
-+	system_time:
-+		a host notion of monotonic time, including sleep
- 		time at the time this structure was last updated. Unit is
- 		nanoseconds.
- 
--		tsc_to_system_mul: multiplier to be used when converting
-+	tsc_to_system_mul:
-+		multiplier to be used when converting
- 		tsc-related quantity to nanoseconds
- 
--		tsc_shift: shift to be used when converting tsc-related
-+	tsc_shift:
-+		shift to be used when converting tsc-related
- 		quantity to nanoseconds. This shift will ensure that
- 		multiplication with tsc_to_system_mul does not overflow.
- 		A positive value denotes a left shift, a negative value
-@@ -96,7 +110,7 @@ MSR_KVM_SYSTEM_TIME_NEW:  0x4b564d01
- 
- 		The conversion from tsc to nanoseconds involves an additional
- 		right shift by 32 bits. With this information, guests can
--		derive per-CPU time by doing:
-+		derive per-CPU time by doing::
- 
- 			time = (current_tsc - tsc_timestamp)
- 			if (tsc_shift >= 0)
-@@ -106,29 +120,34 @@ MSR_KVM_SYSTEM_TIME_NEW:  0x4b564d01
- 			time = (time * tsc_to_system_mul) >> 32
- 			time = time + system_time
- 
--		flags: bits in this field indicate extended capabilities
-+	flags:
-+		bits in this field indicate extended capabilities
- 		coordinated between the guest and the hypervisor. Availability
- 		of specific flags has to be checked in 0x40000001 cpuid leaf.
- 		Current flags are:
- 
--		 flag bit   | cpuid bit    | meaning
--		-------------------------------------------------------------
--			    |	           | time measures taken across
--		     0      |	   24      | multiple cpus are guaranteed to
--			    |		   | be monotonic
--		-------------------------------------------------------------
--			    |		   | guest vcpu has been paused by
--		     1	    |	  N/A	   | the host
--			    |		   | See 4.70 in api.txt
--		-------------------------------------------------------------
-+
-+		+-----------+--------------+----------------------------------+
-+		| flag bit  | cpuid bit    | meaning			      |
-+		+-----------+--------------+----------------------------------+
-+		|	    |		   | time measures taken across       |
-+		|    0      |	   24      | multiple cpus are guaranteed to  |
-+		|	    |		   | be monotonic		      |
-+		+-----------+--------------+----------------------------------+
-+		|	    |		   | guest vcpu has been paused by    |
-+		|    1	    |	  N/A	   | the host			      |
-+		|	    |		   | See 4.70 in api.txt	      |
-+		+-----------+--------------+----------------------------------+
- 
- 	Availability of this MSR must be checked via bit 3 in 0x4000001 cpuid
- 	leaf prior to usage.
- 
- 
--MSR_KVM_WALL_CLOCK:  0x11
-+MSR_KVM_WALL_CLOCK:
-+	0x11
- 
--	data and functioning: same as MSR_KVM_WALL_CLOCK_NEW. Use that instead.
-+data and functioning:
-+	same as MSR_KVM_WALL_CLOCK_NEW. Use that instead.
- 
- 	This MSR falls outside the reserved KVM range and may be removed in the
- 	future. Its usage is deprecated.
-@@ -136,9 +155,11 @@ MSR_KVM_WALL_CLOCK:  0x11
- 	Availability of this MSR must be checked via bit 0 in 0x4000001 cpuid
- 	leaf prior to usage.
- 
--MSR_KVM_SYSTEM_TIME: 0x12
-+MSR_KVM_SYSTEM_TIME:
-+	0x12
- 
--	data and functioning: same as MSR_KVM_SYSTEM_TIME_NEW. Use that instead.
-+data and functioning:
-+	same as MSR_KVM_SYSTEM_TIME_NEW. Use that instead.
- 
- 	This MSR falls outside the reserved KVM range and may be removed in the
- 	future. Its usage is deprecated.
-@@ -146,7 +167,7 @@ MSR_KVM_SYSTEM_TIME: 0x12
- 	Availability of this MSR must be checked via bit 0 in 0x4000001 cpuid
- 	leaf prior to usage.
- 
--	The suggested algorithm for detecting kvmclock presence is then:
-+	The suggested algorithm for detecting kvmclock presence is then::
- 
- 		if (!kvm_para_available())    /* refer to cpuid.txt */
- 			return NON_PRESENT;
-@@ -163,8 +184,11 @@ MSR_KVM_SYSTEM_TIME: 0x12
- 		} else
- 			return NON_PRESENT;
- 
--MSR_KVM_ASYNC_PF_EN: 0x4b564d02
--	data: Bits 63-6 hold 64-byte aligned physical address of a
-+MSR_KVM_ASYNC_PF_EN:
-+	0x4b564d02
-+
-+data:
-+	Bits 63-6 hold 64-byte aligned physical address of a
- 	64 byte memory area which must be in guest RAM and must be
- 	zeroed. Bits 5-3 are reserved and should be zero. Bit 0 is 1
- 	when asynchronous page faults are enabled on the vcpu 0 when
-@@ -200,20 +224,22 @@ MSR_KVM_ASYNC_PF_EN: 0x4b564d02
- 	Currently type 2 APF will be always delivered on the same vcpu as
- 	type 1 was, but guest should not rely on that.
- 
--MSR_KVM_STEAL_TIME: 0x4b564d03
-+MSR_KVM_STEAL_TIME:
-+	0x4b564d03
- 
--	data: 64-byte alignment physical address of a memory area which must be
-+data:
-+	64-byte alignment physical address of a memory area which must be
- 	in guest RAM, plus an enable bit in bit 0. This memory is expected to
--	hold a copy of the following structure:
-+	hold a copy of the following structure::
- 
--	struct kvm_steal_time {
-+	  struct kvm_steal_time {
- 		__u64 steal;
- 		__u32 version;
- 		__u32 flags;
- 		__u8  preempted;
- 		__u8  u8_pad[3];
- 		__u32 pad[11];
--	}
-+	  }
- 
- 	whose data will be filled in by the hypervisor periodically. Only one
- 	write, or registration, is needed for each VCPU. The interval between
-@@ -224,25 +250,32 @@ MSR_KVM_STEAL_TIME: 0x4b564d03
- 
- 	Fields have the following meanings:
- 
--		version: a sequence counter. In other words, guest has to check
-+	version:
-+		a sequence counter. In other words, guest has to check
- 		this field before and after grabbing time information and make
- 		sure they are both equal and even. An odd version indicates an
- 		in-progress update.
- 
--		flags: At this point, always zero. May be used to indicate
-+	flags:
-+		At this point, always zero. May be used to indicate
- 		changes in this structure in the future.
- 
--		steal: the amount of time in which this vCPU did not run, in
-+	steal:
-+		the amount of time in which this vCPU did not run, in
- 		nanoseconds. Time during which the vcpu is idle, will not be
- 		reported as steal time.
- 
--		preempted: indicate the vCPU who owns this struct is running or
-+	preempted:
-+		indicate the vCPU who owns this struct is running or
- 		not. Non-zero values mean the vCPU has been preempted. Zero
- 		means the vCPU is not preempted. NOTE, it is always zero if the
- 		the hypervisor doesn't support this field.
- 
--MSR_KVM_EOI_EN: 0x4b564d04
--	data: Bit 0 is 1 when PV end of interrupt is enabled on the vcpu; 0
-+MSR_KVM_EOI_EN:
-+	0x4b564d04
-+
-+data:
-+	Bit 0 is 1 when PV end of interrupt is enabled on the vcpu; 0
- 	when disabled.  Bit 1 is reserved and must be zero.  When PV end of
- 	interrupt is enabled (bit 0 set), bits 63-2 hold a 4-byte aligned
- 	physical address of a 4 byte memory area which must be in guest RAM and
-@@ -274,11 +307,13 @@ MSR_KVM_EOI_EN: 0x4b564d04
- 	clear it using a single CPU instruction, such as test and clear, or
- 	compare and exchange.
- 
--MSR_KVM_POLL_CONTROL: 0x4b564d05
-+MSR_KVM_POLL_CONTROL:
-+	0x4b564d05
-+
- 	Control host-side polling.
- 
--	data: Bit 0 enables (1) or disables (0) host-side HLT polling logic.
-+data:
-+	Bit 0 enables (1) or disables (0) host-side HLT polling logic.
- 
- 	KVM guests can request the host not to poll on HLT, for example if
- 	they are performing polling themselves.
--
 -- 
 2.24.1
+
 
