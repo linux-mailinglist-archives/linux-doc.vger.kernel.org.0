@@ -2,95 +2,128 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 00F1514B048
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 08:20:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 79BC914B085
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 08:46:18 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726291AbgA1HUe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jan 2020 02:20:34 -0500
-Received: from mail-pj1-f74.google.com ([209.85.216.74]:44741 "EHLO
-        mail-pj1-f74.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726389AbgA1HUe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 02:20:34 -0500
-Received: by mail-pj1-f74.google.com with SMTP id c31so945174pje.9
-        for <linux-doc@vger.kernel.org>; Mon, 27 Jan 2020 23:20:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=klZSQn7VqC7h7im1FGCSgAsyHBEPANhNSwWbBSFGQEg=;
-        b=QbvcI+etsqAlCV8e08VCXPOpU8eZ3t5R/0WlbHTJvxoQjpGyprnI2S+3VA6TTU6VcK
-         QX1fWLkdGx43woSE9wxtOr/nIAR3GDaX0+tn1XlmHZ/gDfsUEus8JCgUXj/7t81YSGwq
-         A1+5KuQ/mfdwKuU6SJEJcnV3OamCXXd43jahBhlSObRoHRxmuhcNwcQLh/PNROz4WbAm
-         cTrDAdcVVc6LRnp5yWQAHaMmosEmCohM+vE8NJDyUtTlY82smbWOEof+WuehV/08VE1/
-         7PHZ1+O99hDXEO3U5zm/NWDW0yicvPq5SOraPW0/CVRO6+C//tnAYf5QyggRVE/D9Iqx
-         WDkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=klZSQn7VqC7h7im1FGCSgAsyHBEPANhNSwWbBSFGQEg=;
-        b=lZ8aLlxJEikX1BKXtgPZ+4B5mjYIpZYRwA9boByjDZHOMyWy23sOi8JqWfXaa7Ki4E
-         323BaEx3hKACea71pjsF/mxmw7a00f2YDhrlRgDwFNK59Yxjk6VXbXMCVYfcbCXdv+mO
-         NfeIv9Pb4NK0V83Oue9b4NXFk3NP+VGS5Z3K+ipfhDYZtw1LnRzVRccsFUif5TSsVZIz
-         f+BIl5yl2F+kMNji1iiG7Q+Lk0gD/EYM4rEwM73KcRwyCUn2vs5raMuGYdm0GTMIE6yy
-         gmUk/jEyU2EAE/MOLTPJpv8knuS08bzObQVDE8QbyYUsPYKFvt7MDWOSX5r2KTb+HdTs
-         3U1w==
-X-Gm-Message-State: APjAAAWe0Ne8KqTWqwl4CoaisjzWpUCfZeapRoATu1rVqsS61yxgOhaQ
-        umQhNUuLv6YPDCGdcencLuoGu/zP/fKj7PDSvASDyA==
-X-Google-Smtp-Source: APXvYqwA5T0XsCGucJCgnj8mr7+umXSlJ/p82m0DTcBQ5anFOlb+KkNonTYUXWa6suDswZ7MNnrzg6/s9XBTLENdrlmgtA==
-X-Received: by 2002:a63:c747:: with SMTP id v7mr14107372pgg.291.1580196033243;
- Mon, 27 Jan 2020 23:20:33 -0800 (PST)
-Date:   Mon, 27 Jan 2020 23:20:02 -0800
-In-Reply-To: <20200128072002.79250-1-brendanhiggins@google.com>
-Message-Id: <20200128072002.79250-8-brendanhiggins@google.com>
-Mime-Version: 1.0
-References: <20200128072002.79250-1-brendanhiggins@google.com>
-X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
-Subject: [PATCH v1 7/7] Documentation: Add kunit_shutdown to kernel-parameters.txt
-From:   Brendan Higgins <brendanhiggins@google.com>
-To:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
-        arnd@arndb.de, keescook@chromium.org, skhan@linuxfoundation.org,
-        alan.maguire@oracle.com, yzaikin@google.com, davidgow@google.com,
-        akpm@linux-foundation.org, rppt@linux.ibm.com,
-        frowand.list@gmail.com
-Cc:     gregkh@linuxfoundation.org, sboyd@kernel.org, logang@deltatee.com,
-        mcgrof@kernel.org, knut.omang@oracle.com,
-        linux-um@lists.infradead.org, linux-arch@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Brendan Higgins <brendanhiggins@google.com>
+        id S1725839AbgA1HqR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jan 2020 02:46:17 -0500
+Received: from mga07.intel.com ([134.134.136.100]:58075 "EHLO mga07.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725825AbgA1HqR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 28 Jan 2020 02:46:17 -0500
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 27 Jan 2020 23:46:14 -0800
+X-IronPort-AV: E=Sophos;i="5.70,372,1574150400"; 
+   d="scan'208";a="308519690"
+Received: from vinayver-mobl1.gar.corp.intel.com ([10.252.174.80])
+  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 27 Jan 2020 23:46:09 -0800
+Message-ID: <6eba5e502636ec8a0be279f48097c7137a95aa13.camel@linux.intel.com>
+Subject: Re: [PATCH v2] admin guide/pm: Admin guide for Intel Uncore
+ Frequency limits
+From:   Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     andy@infradead.org, dvhart@infradead.org, lenb@kernel.org,
+        andy@kernel.org, linux-kernel@vger.kernel.org,
+        platform-driver-x86@vger.kernel.org, linux-doc@vger.kernel.org
+Date:   Mon, 27 Jan 2020 23:46:02 -0800
+In-Reply-To: <20200124100039.70116459@lwn.net>
+References: <20200113040143.1419770-1-srinivas.pandruvada@linux.intel.com>
+         <20200124100039.70116459@lwn.net>
 Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.34.1-2 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add kunit_shutdown, an option to specify that the kernel shutsdown after
-running KUnit tests, to the kernel-parameters.txt documentation.
+On Fri, 2020-01-24 at 10:00 -0700, Jonathan Corbet wrote:
+> On Sun, 12 Jan 2020 20:01:43 -0800
+> Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com> wrote:
+> 
+> > Added documentation for the attributes to control uncore frequency
+> > selection.
+> > 
+> > Signed-off-by: Srinivas Pandruvada <
+> > srinivas.pandruvada@linux.intel.com>
+> > ---
+> > v2:
+> >  - Split the documentation patch to another patch to merge via
+> > different
+> >     tree
+> 
+> Which tree did you have in mind?  PM stuff tends to go through
+> Rafael's
+> tree, normally, which is fine.
+Linux PM tree is fine. I will add necessary --to and --cc to my next
+version of the patch with the suggested changes from you.
 
-Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
----
- Documentation/admin-guide/kernel-parameters.txt | 7 +++++++
- 1 file changed, 7 insertions(+)
+Thanks,
+Srinivas
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index ade4e6ec23e03..0472b02ce16bb 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2054,6 +2054,13 @@
- 			0: force disabled
- 			1: force enabled
- 
-+	kunit_shutdown	[KERNEL UNIT TESTING FRAMEWORK] Shutdown kernel after
-+			running tests.
-+			Default:	(flag not present) don't shutdown
-+			poweroff:	poweroff the kernel after running tests.
-+			halt:		halt the kernel after running tests.
-+			reboot:		reboot the kernel after running tests.
-+
- 	kvm.ignore_msrs=[KVM] Ignore guest accesses to unhandled MSRs.
- 			Default is 0 (don't ignore, but inject #GP)
- 
--- 
-2.25.0.341.g760bfbb309-goog
+> 
+> >  Documentation/admin-guide/pm/intel_uncore.rst | 23
+> > +++++++++++++++++++
+> >  .../admin-guide/pm/working-state.rst          |  1 +
+> >  2 files changed, 24 insertions(+)
+> >  create mode 100644 Documentation/admin-guide/pm/intel_uncore.rst
+> > 
+> > diff --git a/Documentation/admin-guide/pm/intel_uncore.rst
+> > b/Documentation/admin-guide/pm/intel_uncore.rst
+> > new file mode 100644
+> > index 000000000000..d75be65fb16a
+> > --- /dev/null
+> > +++ b/Documentation/admin-guide/pm/intel_uncore.rst
+> > @@ -0,0 +1,23 @@
+> > +.. SPDX-License-Identifier: GPL-2.0
+> > +
+> > +=========================================================
+> > +Intel® Uncore Frequency Selection
+> 
+> I would really like to avoid adding ® symbols throughout the docs.  I
+> get
+> grief for non-ASCII symbols that actually have a need to be there;
+> this
+> isn't one of those.  
+> 
+> > +=========================================================
+> > +
+> > +The uncore frequency in the Intel(R) hardware is selected based on
+> > internal heuristics, which uses the current selected performance
+> > state and various system power constraints. In majority of the
+> > cases this selection is the most optimal, so there is no need for
+> > placing external constraints from the Operating System.
+> 
+> I would say that this violates the 80-character limit by a character
+> or
+> two...  The entire patch has this problem.
+> 
+> > +
+> > +But there are some customers who wants less jitters from dynamic
+> > uncore frequency selection. For them, power saving is much lower
+> > priority than consistent performance. Currently these customers
+> > uses MSR 0x620, to place hard limits on the maximum and the minimum
+> > uncore frequency. They can now use Linux sysfs to place these
+> > limits and also have additional capability to place hard limits
+> > under power constraint scenario.
+> 
+> less jitter (singular)
+> 
+> > +
+> > +The Uncore frequency section attributes are present under
+> > "/sys/devices/system/cpu/intel_uncore_frequency".
+> > +The scope of these attributes is per die in multi-die systems or
+> > package wide in non multi-die systems. There is a unique folder for
+> > each die or package. For example:
+> > +"package_00_die_00" for package 0 and die 0.
+> 
+> This may not render as you would like; use an RST literal block here.
+> 
+> Thanks,
+> 
+> jon
+> 
 
