@@ -2,14 +2,14 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 04DBB14B5F6
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 15:01:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4C35814B5D8
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 15:01:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727020AbgA1OBO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jan 2020 09:01:14 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:59358 "EHLO
+        id S1727337AbgA1OAs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jan 2020 09:00:48 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:59428 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727303AbgA1OAr (ORCPT
+        with ESMTP id S1727308AbgA1OAr (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 09:00:47 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
@@ -17,18 +17,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=x2sp6iOc0E903sdVig18K8EVOnXyeDCsbEfAqgSYd/k=; b=GzW5tuhw0/UVkEKTt12cdFXIdP
-        acieGBF+dJF3ESI1fKqsSaSOMJydY3YH2QHL6YYURRmr24NwKzdPR5xZ6g/tLxFCw0JDbHwGgGr3h
-        r5/6AdlH6r+HlLl6FRNrD0oc3VuCMozX6Et5yTNGLVU2TNP28fqYVvkkq+oV2MUhdAYM8blefzxIV
-        0047eZ0Ph8Nw6N3+/uiQnrQZH7AS0ge4MiQVOhu8/gMol6aBb4H/Zs9y5iKfBrB0WfDVvz4CFM5PT
-        Y618f0hYArDAuaemOj2SdMfh+RqoTqC2XV7By1DUvL9bzVaailrKKoZm/DaCD+M8Esj3+QcfDwuOH
-        OQ94ndig==;
+        bh=qSQNK5Ivf59NAVe6e3CbDIPuMhg/3mhXwdp9SJF3SBc=; b=dbi4rOLWK4VPc4F5gqe5vAiWbW
+        zHY6QmdxRQO3QfkDrqx0CbpJv2TFp0MgelsMkzZN6LxkeGpgMu0ADBhNsdidm5iiVTrXtBpF2pUM0
+        7lnduDY7uX/oa+pjLPnepXOljxyV93LJX1g3TeBS9sdfbdGPkARNp9eUmOBCOpKyegzv6zsHsHlUK
+        dGgq5rBhzeMtU1nxnFlpSGtw/z7BIAzrHArV8vZy2NKycFDGnMV4XAfIy83NzjP8UedBGFwPpVnaG
+        YWcUZqTy+Ih/NtDbZBug5r0GTYxG7j6pOSo4VxzULrUhQC96pmXya9PrfGjO8ycjWm+U2z0LwEOYe
+        PCmCItCQ==;
 Received: from [177.41.103.99] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1iwRQ5-0007il-Ve; Tue, 28 Jan 2020 14:00:46 +0000
+        id 1iwRQ6-0007ix-95; Tue, 28 Jan 2020 14:00:46 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1iwRPp-001BOT-Nn; Tue, 28 Jan 2020 15:00:29 +0100
+        id 1iwRPp-001BOs-Uo; Tue, 28 Jan 2020 15:00:29 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Media Mailing List <linux-media@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
@@ -36,9 +36,9 @@ Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         Paolo Bonzini <pbonzini@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
         linux-doc@vger.kernel.org
-Subject: [PATCH 16/27] docs: kvm: convert devices/xive.txt to ReST
-Date:   Tue, 28 Jan 2020 15:00:17 +0100
-Message-Id: <126a26241472a0df74b8c19f489162ddc1edfc4b.1580219586.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 21/27] docs: kvm: Convert locking.txt to ReST format
+Date:   Tue, 28 Jan 2020 15:00:22 +0100
+Message-Id: <31d840edcc924b6b4d6f3f6b3f130623c2a4d91c.1580219586.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <cover.1580219586.git.mchehab+huawei@kernel.org>
 References: <cover.1580219586.git.mchehab+huawei@kernel.org>
@@ -49,261 +49,229 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-- Use title markups;
-- adjust indentation and add blank lines as needed;
-- adjust tables to match ReST accepted formats;
-- mark code blocks as such.
+- Use document title and chapter markups;
+- Add markups for literal blocks;
+- use :field: for field descriptions;
+- Add blank lines and adjust indentation.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/virt/kvm/devices/index.rst      |   1 +
- .../virt/kvm/devices/{xive.txt => xive.rst}   | 146 +++++++++++-------
- 2 files changed, 94 insertions(+), 53 deletions(-)
- rename Documentation/virt/kvm/devices/{xive.txt => xive.rst} (63%)
+ Documentation/virt/kvm/index.rst              |   1 +
+ .../virt/kvm/{locking.txt => locking.rst}     | 109 ++++++++++--------
+ 2 files changed, 61 insertions(+), 49 deletions(-)
+ rename Documentation/virt/kvm/{locking.txt => locking.rst} (79%)
 
-diff --git a/Documentation/virt/kvm/devices/index.rst b/Documentation/virt/kvm/devices/index.rst
-index 63b61369d09b..192cda7405c8 100644
---- a/Documentation/virt/kvm/devices/index.rst
-+++ b/Documentation/virt/kvm/devices/index.rst
-@@ -16,3 +16,4 @@ Devices
-    vfio
-    vm
-    xics
-+   xive
-diff --git a/Documentation/virt/kvm/devices/xive.txt b/Documentation/virt/kvm/devices/xive.rst
-similarity index 63%
-rename from Documentation/virt/kvm/devices/xive.txt
-rename to Documentation/virt/kvm/devices/xive.rst
-index f5d1d6b5af61..e3947089b19c 100644
---- a/Documentation/virt/kvm/devices/xive.txt
-+++ b/Documentation/virt/kvm/devices/xive.rst
-@@ -1,8 +1,9 @@
-+===========================================================
- POWER9 eXternal Interrupt Virtualization Engine (XIVE Gen1)
--==========================================================
-+===========================================================
+diff --git a/Documentation/virt/kvm/index.rst b/Documentation/virt/kvm/index.rst
+index ac83bc588f7e..9be8f53b729d 100644
+--- a/Documentation/virt/kvm/index.rst
++++ b/Documentation/virt/kvm/index.rst
+@@ -12,6 +12,7 @@ KVM
+    cpuid
+    halt-polling
+    hypercalls
++   locking
+    msr
+    vcpu-requests
  
- Device types supported:
--  KVM_DEV_TYPE_XIVE     POWER9 XIVE Interrupt Controller generation 1
-+  - KVM_DEV_TYPE_XIVE     POWER9 XIVE Interrupt Controller generation 1
+diff --git a/Documentation/virt/kvm/locking.txt b/Documentation/virt/kvm/locking.rst
+similarity index 79%
+rename from Documentation/virt/kvm/locking.txt
+rename to Documentation/virt/kvm/locking.rst
+index 635cd6eaf714..065706a9155e 100644
+--- a/Documentation/virt/kvm/locking.txt
++++ b/Documentation/virt/kvm/locking.rst
+@@ -1,3 +1,4 @@
++=================
+ KVM Lock Overview
+ =================
  
- This device acts as a VM interrupt controller. It provides the KVM
- interface to configure the interrupt sources of a VM in the underlying
-@@ -64,72 +65,100 @@ the legacy interrupt mode, referred as XICS (POWER7/8).
+@@ -18,7 +19,7 @@ On x86, vcpu->mutex is taken outside kvm->arch.hyperv.hv_lock.
+ Everything else is a leaf: no other lock is taken inside the critical
+ sections.
  
- * Groups:
+-2: Exception
++2. Exception
+ ------------
  
--  1. KVM_DEV_XIVE_GRP_CTRL
--  Provides global controls on the device
-+1. KVM_DEV_XIVE_GRP_CTRL
-+     Provides global controls on the device
-+
-   Attributes:
-     1.1 KVM_DEV_XIVE_RESET (write only)
-     Resets the interrupt controller configuration for sources and event
-     queues. To be used by kexec and kdump.
-+
-     Errors: none
+ Fast page fault:
+@@ -28,15 +29,16 @@ the mmu-lock on x86. Currently, the page fault can be fast in one of the
+ following two cases:
  
-     1.2 KVM_DEV_XIVE_EQ_SYNC (write only)
-     Sync all the sources and queues and mark the EQ pages dirty. This
-     to make sure that a consistent memory state is captured when
-     migrating the VM.
-+
-     Errors: none
+ 1. Access Tracking: The SPTE is not present, but it is marked for access
+-tracking i.e. the SPTE_SPECIAL_MASK is set. That means we need to
+-restore the saved R/X bits. This is described in more detail later below.
++   tracking i.e. the SPTE_SPECIAL_MASK is set. That means we need to
++   restore the saved R/X bits. This is described in more detail later below.
  
-     1.3 KVM_DEV_XIVE_NR_SERVERS (write only)
-     The kvm_device_attr.addr points to a __u32 value which is the number of
-     interrupt server numbers (ie, highest possible vcpu id plus one).
-+
-     Errors:
--      -EINVAL: Value greater than KVM_MAX_VCPU_ID.
--      -EFAULT: Invalid user pointer for attr->addr.
--      -EBUSY:  A vCPU is already connected to the device.
+ 2. Write-Protection: The SPTE is present and the fault is
+-caused by write-protect. That means we just need to change the W bit of the 
+-spte.
++   caused by write-protect. That means we just need to change the W bit of
++   the spte.
  
--  2. KVM_DEV_XIVE_GRP_SOURCE (write only)
--  Initializes a new source in the XIVE device and mask it.
-+      =======  ==========================================
-+      -EINVAL  Value greater than KVM_MAX_VCPU_ID.
-+      -EFAULT  Invalid user pointer for attr->addr.
-+      -EBUSY   A vCPU is already connected to the device.
-+      =======  ==========================================
+ What we use to avoid all the race is the SPTE_HOST_WRITEABLE bit and
+ SPTE_MMU_WRITEABLE bit on the spte:
 +
-+2. KVM_DEV_XIVE_GRP_SOURCE (write only)
-+     Initializes a new source in the XIVE device and mask it.
-+
-   Attributes:
-     Interrupt source number  (64-bit)
--  The kvm_device_attr.addr points to a __u64 value:
--  bits:     | 63   ....  2 |   1   |   0
--  values:   |    unused    | level | type
-+
-+  The kvm_device_attr.addr points to a __u64 value::
-+
-+    bits:     | 63   ....  2 |   1   |   0
-+    values:   |    unused    | level | type
-+
-   - type:  0:MSI 1:LSI
-   - level: assertion level in case of an LSI.
-+
-   Errors:
--    -E2BIG:  Interrupt source number is out of range
--    -ENOMEM: Could not create a new source block
--    -EFAULT: Invalid user pointer for attr->addr.
--    -ENXIO:  Could not allocate underlying HW interrupt
+ - SPTE_HOST_WRITEABLE means the gfn is writable on host.
+ - SPTE_MMU_WRITEABLE means the gfn is writable on mmu. The bit is set when
+   the gfn is writable on guest mmu and it is not write-protected by shadow
+@@ -48,19 +50,23 @@ restore the saved R/X bits if VMX_EPT_TRACK_ACCESS mask is set, or both. This
+ is safe because whenever changing these bits can be detected by cmpxchg.
  
--  3. KVM_DEV_XIVE_GRP_SOURCE_CONFIG (write only)
--  Configures source targeting
-+    =======  ==========================================
-+    -E2BIG   Interrupt source number is out of range
-+    -ENOMEM  Could not create a new source block
-+    -EFAULT  Invalid user pointer for attr->addr.
-+    -ENXIO   Could not allocate underlying HW interrupt
-+    =======  ==========================================
+ But we need carefully check these cases:
+-1): The mapping from gfn to pfn
 +
-+3. KVM_DEV_XIVE_GRP_SOURCE_CONFIG (write only)
-+     Configures source targeting
++1) The mapping from gfn to pfn
 +
-   Attributes:
-     Interrupt source number  (64-bit)
--  The kvm_device_attr.addr points to a __u64 value:
--  bits:     | 63   ....  33 |  32  | 31 .. 3 |  2 .. 0
--  values:   |    eisn       | mask |  server | priority
-+
-+  The kvm_device_attr.addr points to a __u64 value::
-+
-+    bits:     | 63   ....  33 |  32  | 31 .. 3 |  2 .. 0
-+    values:   |    eisn       | mask |  server | priority
-+
-   - priority: 0-7 interrupt priority level
-   - server: CPU number chosen to handle the interrupt
-   - mask: mask flag (unused)
-   - eisn: Effective Interrupt Source Number
-+
-   Errors:
--    -ENOENT: Unknown source number
--    -EINVAL: Not initialized source number
--    -EINVAL: Invalid priority
--    -EINVAL: Invalid CPU number.
--    -EFAULT: Invalid user pointer for attr->addr.
--    -ENXIO:  CPU event queues not configured or configuration of the
--             underlying HW interrupt failed
--    -EBUSY:  No CPU available to serve interrupt
+ The mapping from gfn to pfn may be changed since we can only ensure the pfn
+ is not changed during cmpxchg. This is a ABA problem, for example, below case
+ will happen:
  
--  4. KVM_DEV_XIVE_GRP_EQ_CONFIG (read-write)
--  Configures an event queue of a CPU
-+    =======  =======================================================
-+    -ENOENT  Unknown source number
-+    -EINVAL  Not initialized source number
-+    -EINVAL  Invalid priority
-+    -EINVAL  Invalid CPU number.
-+    -EFAULT  Invalid user pointer for attr->addr.
-+    -ENXIO   CPU event queues not configured or configuration of the
-+	     underlying HW interrupt failed
-+    -EBUSY   No CPU available to serve interrupt
-+    =======  =======================================================
-+
-+4. KVM_DEV_XIVE_GRP_EQ_CONFIG (read-write)
-+     Configures an event queue of a CPU
-+
-   Attributes:
-     EQ descriptor identifier (64-bit)
--  The EQ descriptor identifier is a tuple (server, priority) :
--  bits:     | 63   ....  32 | 31 .. 3 |  2 .. 0
--  values:   |    unused     |  server | priority
--  The kvm_device_attr.addr points to :
-+
-+  The EQ descriptor identifier is a tuple (server, priority)::
-+
-+    bits:     | 63   ....  32 | 31 .. 3 |  2 .. 0
-+    values:   |    unused     |  server | priority
-+
-+  The kvm_device_attr.addr points to::
-+
-     struct kvm_ppc_xive_eq {
- 	__u32 flags;
- 	__u32 qshift;
-@@ -138,8 +167,9 @@ the legacy interrupt mode, referred as XICS (POWER7/8).
- 	__u32 qindex;
- 	__u8  pad[40];
-     };
-+
-   - flags: queue flags
--    KVM_XIVE_EQ_ALWAYS_NOTIFY (required)
-+      KVM_XIVE_EQ_ALWAYS_NOTIFY (required)
- 	forces notification without using the coalescing mechanism
- 	provided by the XIVE END ESBs.
-   - qshift: queue size (power of 2)
-@@ -147,22 +177,31 @@ the legacy interrupt mode, referred as XICS (POWER7/8).
-   - qtoggle: current queue toggle bit
-   - qindex: current queue index
-   - pad: reserved for future use
-+
-   Errors:
--    -ENOENT: Invalid CPU number
--    -EINVAL: Invalid priority
--    -EINVAL: Invalid flags
--    -EINVAL: Invalid queue size
--    -EINVAL: Invalid queue address
--    -EFAULT: Invalid user pointer for attr->addr.
--    -EIO:    Configuration of the underlying HW failed
+-At the beginning:
+-gpte = gfn1
+-gfn1 is mapped to pfn1 on host
+-spte is the shadow page table entry corresponding with gpte and
+-spte = pfn1
++At the beginning::
  
--  5. KVM_DEV_XIVE_GRP_SOURCE_SYNC (write only)
--  Synchronize the source to flush event notifications
-+    =======  =========================================
-+    -ENOENT  Invalid CPU number
-+    -EINVAL  Invalid priority
-+    -EINVAL  Invalid flags
-+    -EINVAL  Invalid queue size
-+    -EINVAL  Invalid queue address
-+    -EFAULT  Invalid user pointer for attr->addr.
-+    -EIO     Configuration of the underlying HW failed
-+    =======  =========================================
+-   VCPU 0                           VCPU0
+-on fast page fault path:
++	gpte = gfn1
++	gfn1 is mapped to pfn1 on host
++	spte is the shadow page table entry corresponding with gpte and
++	spte = pfn1
 +
-+5. KVM_DEV_XIVE_GRP_SOURCE_SYNC (write only)
-+     Synchronize the source to flush event notifications
++	   VCPU 0                           VCPU0
 +
-   Attributes:
-     Interrupt source number  (64-bit)
++on fast page fault path::
+ 
+    old_spte = *spte;
+                                  pfn1 is swapped out:
+@@ -81,6 +87,7 @@ We dirty-log for gfn1, that means gfn2 is lost in dirty-bitmap.
+ For direct sp, we can easily avoid it since the spte of direct sp is fixed
+ to gfn. For indirect sp, before we do cmpxchg, we call gfn_to_pfn_atomic()
+ to pin gfn to pfn, because after gfn_to_pfn_atomic():
 +
-   Errors:
--    -ENOENT: Unknown source number
--    -EINVAL: Not initialized source number
+ - We have held the refcount of pfn that means the pfn can not be freed and
+   be reused for another gfn.
+ - The pfn is writable that means it can not be shared between different gfns
+@@ -91,7 +98,8 @@ Then, we can ensure the dirty bitmaps is correctly set for a gfn.
+ Currently, to simplify the whole things, we disable fast page fault for
+ indirect shadow page.
+ 
+-2): Dirty bit tracking
++2) Dirty bit tracking
 +
-+    =======  =============================
-+    -ENOENT  Unknown source number
-+    -EINVAL  Not initialized source number
-+    =======  =============================
+ In the origin code, the spte can be fast updated (non-atomically) if the
+ spte is read-only and the Accessed bit has already been set since the
+ Accessed bit and Dirty bit can not be lost.
+@@ -99,12 +107,14 @@ Accessed bit and Dirty bit can not be lost.
+ But it is not true after fast page fault since the spte can be marked
+ writable between reading spte and updating spte. Like below case:
  
- * VCPU state
+-At the beginning:
+-spte.W = 0
+-spte.Accessed = 1
++At the beginning::
  
-@@ -175,11 +214,12 @@ the legacy interrupt mode, referred as XICS (POWER7/8).
-   as it synthesizes the priorities of the pending interrupts. We
-   capture a bit more to report debug information.
- 
--  KVM_REG_PPC_VP_STATE (2 * 64bits)
--  bits:     |  63  ....  32  |  31  ....  0  |
--  values:   |   TIMA word0   |   TIMA word1  |
--  bits:     | 127       ..........       64  |
--  values:   |            unused              |
-+  KVM_REG_PPC_VP_STATE (2 * 64bits)::
+-   VCPU 0                                       VCPU0
+-In mmu_spte_clear_track_bits():
++	spte.W = 0
++	spte.Accessed = 1
 +
-+    bits:     |  63  ....  32  |  31  ....  0  |
-+    values:   |   TIMA word0   |   TIMA word1  |
-+    bits:     | 127       ..........       64  |
-+    values:   |            unused              |
++	   VCPU 0                                       VCPU0
++
++In mmu_spte_clear_track_bits()::
  
- * Migration:
+    old_spte = *spte;
  
-@@ -196,7 +236,7 @@ the legacy interrupt mode, referred as XICS (POWER7/8).
-   3. Capture the state of the source targeting, the EQs configuration
-   and the state of thread interrupt context registers.
+@@ -134,7 +144,8 @@ In order to avoid this kind of issue, we always treat the spte as "volatile"
+ if it can be updated out of mmu-lock, see spte_has_volatile_bits(), it means,
+ the spte is always atomically updated in this case.
  
--  Restore is similar :
-+  Restore is similar:
+-3): flush tlbs due to spte updated
++3) flush tlbs due to spte updated
++
+ If the spte is updated from writable to readonly, we should flush all TLBs,
+ otherwise rmap_write_protect will find a read-only spte, even though the
+ writable spte might be cached on a CPU's TLB.
+@@ -166,47 +177,47 @@ which time it will be set using the Dirty tracking mechanism described above.
+ 3. Reference
+ ------------
  
-   1. Restore the EQ configuration. As targeting depends on it.
-   2. Restore targeting
+-Name:		kvm_lock
+-Type:		mutex
+-Arch:		any
+-Protects:	- vm_list
++:Name:		kvm_lock
++:Type:		mutex
++:Arch:		any
++:Protects:	- vm_list
+ 
+-Name:		kvm_count_lock
+-Type:		raw_spinlock_t
+-Arch:		any
+-Protects:	- hardware virtualization enable/disable
+-Comment:	'raw' because hardware enabling/disabling must be atomic /wrt
++:Name:		kvm_count_lock
++:Type:		raw_spinlock_t
++:Arch:		any
++:Protects:	- hardware virtualization enable/disable
++:Comment:	'raw' because hardware enabling/disabling must be atomic /wrt
+ 		migration.
+ 
+-Name:		kvm_arch::tsc_write_lock
+-Type:		raw_spinlock
+-Arch:		x86
+-Protects:	- kvm_arch::{last_tsc_write,last_tsc_nsec,last_tsc_offset}
++:Name:		kvm_arch::tsc_write_lock
++:Type:		raw_spinlock
++:Arch:		x86
++:Protects:	- kvm_arch::{last_tsc_write,last_tsc_nsec,last_tsc_offset}
+ 		- tsc offset in vmcb
+-Comment:	'raw' because updating the tsc offsets must not be preempted.
++:Comment:	'raw' because updating the tsc offsets must not be preempted.
+ 
+-Name:		kvm->mmu_lock
+-Type:		spinlock_t
+-Arch:		any
+-Protects:	-shadow page/shadow tlb entry
+-Comment:	it is a spinlock since it is used in mmu notifier.
++:Name:		kvm->mmu_lock
++:Type:		spinlock_t
++:Arch:		any
++:Protects:	-shadow page/shadow tlb entry
++:Comment:	it is a spinlock since it is used in mmu notifier.
+ 
+-Name:		kvm->srcu
+-Type:		srcu lock
+-Arch:		any
+-Protects:	- kvm->memslots
++:Name:		kvm->srcu
++:Type:		srcu lock
++:Arch:		any
++:Protects:	- kvm->memslots
+ 		- kvm->buses
+-Comment:	The srcu read lock must be held while accessing memslots (e.g.
++:Comment:	The srcu read lock must be held while accessing memslots (e.g.
+ 		when using gfn_to_* functions) and while accessing in-kernel
+ 		MMIO/PIO address->device structure mapping (kvm->buses).
+ 		The srcu index can be stored in kvm_vcpu->srcu_idx per vcpu
+ 		if it is needed by multiple functions.
+ 
+-Name:		blocked_vcpu_on_cpu_lock
+-Type:		spinlock_t
+-Arch:		x86
+-Protects:	blocked_vcpu_on_cpu
+-Comment:	This is a per-CPU lock and it is used for VT-d posted-interrupts.
++:Name:		blocked_vcpu_on_cpu_lock
++:Type:		spinlock_t
++:Arch:		x86
++:Protects:	blocked_vcpu_on_cpu
++:Comment:	This is a per-CPU lock and it is used for VT-d posted-interrupts.
+ 		When VT-d posted-interrupts is supported and the VM has assigned
+ 		devices, we put the blocked vCPU on the list blocked_vcpu_on_cpu
+ 		protected by blocked_vcpu_on_cpu_lock, when VT-d hardware issues
 -- 
 2.24.1
 
