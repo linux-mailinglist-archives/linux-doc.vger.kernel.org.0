@@ -2,74 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id F3D4414AFEA
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 07:41:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9B2EB14B05C
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 08:20:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725799AbgA1GlH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jan 2020 01:41:07 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:44788 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725810AbgA1GlG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 01:41:06 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=irDvNvMPu+MyYJbjRW4UBc3IIkb5VZlMlk/bR+uOR3Y=; b=jncTHtSMxXXF4vLyOhw8Z0Jdt+
-        uXvi5Bhc+hz58eDxnRDUr2NZ/ZDcacogNt31wOVNOjZ99rgpdu8FDFwVUnH64S0h1s/Zu4pe2CMMK
-        Z5QEptcMq49wpRxTZzboVMLLqlbMWcVvv3msuI+Bz/AFVCv8zCLAlD720s1E+NX1uQElwMP9KQUyg
-        cw2ruZhhINWOSuYctqYMKrmOrZzmkCAsZlGidSLHUZQ7vYWhPKq4gGbhPkZWbfJ7pYf5/Se+cHHu/
-        YNzNSBmdaH7bwhW78cLFRFpijSlS9WD4bI0jEz+ZpqRyzegKuXPREtik7ATexjcIPPSfzajlXG+7R
-        jgYivdhA==;
-Received: from [80.156.29.194] (helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1iwKYb-00077n-Vh; Tue, 28 Jan 2020 06:41:06 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1iwKYa-001AeA-2V; Tue, 28 Jan 2020 07:41:04 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Media Mailing List <linux-media@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jaskaran Singh <jaskaransingh7654321@gmail.com>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Christian Brauner <christian@brauner.io>,
-        Stefan Hajnoczi <stefanha@redhat.com>,
-        "Tobin C. Harding" <tobin@kernel.org>, linux-doc@vger.kernel.org
-Subject: [PATCH 2/2] docs: filesystems: add overlayfs to index.rst
-Date:   Tue, 28 Jan 2020 07:41:01 +0100
-Message-Id: <3b8e7783b1fcc71e4f94af5ea8e5fa264392f8c4.1580193653.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <00008303fde6b4e06d027d3b76ae7032614a7030.1580193653.git.mchehab+huawei@kernel.org>
-References: <00008303fde6b4e06d027d3b76ae7032614a7030.1580193653.git.mchehab+huawei@kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1725995AbgA1HUQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jan 2020 02:20:16 -0500
+Received: from mail-pg1-f201.google.com ([209.85.215.201]:40678 "EHLO
+        mail-pg1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725971AbgA1HUQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 02:20:16 -0500
+Received: by mail-pg1-f201.google.com with SMTP id 63so7493314pge.7
+        for <linux-doc@vger.kernel.org>; Mon, 27 Jan 2020 23:20:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=geIt7NTj15qXn0Pd7vHPLbcleORDZqpFgUWoIN42PEM=;
+        b=QvEXh6vx1uu5+MqSyqNpYaqM0+WH+gnl/II2vETCPrUPXtj+INkYpNvum2xVSiePqx
+         t2/NWdcygIobxjQwa6b1OnLgvNTscgcCzwk3Kw36NhrFIWMkNB+UMzrLz77/vEJkezdN
+         15guaSPb7ab1mnGvB+LtN0ErleZfv4RBuk2g7w4q3DMM5WCH/e9o2GfN///ZX1kp+P2k
+         9OtN5uEDF4qS+QZEf323rO0sMLIeC/Xw2+dPQ0tCmivr5rQ4PxRJoq7SiQXxSHuWxBpw
+         M/ivCrQQeOhdoSDO7BN4ynNQSAV+TGlgrrSPB/kV0uDwtRpyqiwvZ/W28+FQICH5XA89
+         pVVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=geIt7NTj15qXn0Pd7vHPLbcleORDZqpFgUWoIN42PEM=;
+        b=TMoUutDj2YHRgM49U6e/rfVyZWI+P07RakatYOORQ/axWiNojj4YduUcnFGPIIaQHL
+         Krim0xg7U2qYrIKwbeM6L7mqeuUu3+pr5eY5By/bHmqnq6mnq4YTFB8+mLARYmU8BwwD
+         wW0CQgW+qug8VZjNJWhvKo0h4pMB1nD8aj6NgTB0eNrnV7CQaFFL4aKLFxifnobO/K3p
+         14sc5ypkIqfzmM+YAlUy55IzoUQsQ1hbWU+yRYSKwYRnH4VXD4Y9msrFi7/SETWn+q7s
+         1Tr5P4GIRJYNQgNgLAmzFU8IsCXJlADhFDaJ2XdXwu16TCdRU1qQutsl+8MYfT5R+dFf
+         H+pg==
+X-Gm-Message-State: APjAAAWRDgw62lhVcgE5pY3RWstZVyP4mNYpipQvKLl82WARjR5fbOBz
+        0HRzkPVTISrb608jpyEk6DC79FI0YyK7Lq+cMggiAw==
+X-Google-Smtp-Source: APXvYqzxUoPIpd2+KXb0X0NAkTjM1rpz5agpoINUJNKoxT6jjwLdIPKlYS+TLWvc+a1bwy5Pu70qMjsB/y7aNJ72Gg23zw==
+X-Received: by 2002:a65:4b89:: with SMTP id t9mr9307336pgq.102.1580196015485;
+ Mon, 27 Jan 2020 23:20:15 -0800 (PST)
+Date:   Mon, 27 Jan 2020 23:19:55 -0800
+Message-Id: <20200128072002.79250-1-brendanhiggins@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
+Subject: [PATCH v1 0/7] kunit: create a centralized executor to dispatch all
+ KUnit tests
+From:   Brendan Higgins <brendanhiggins@google.com>
+To:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
+        arnd@arndb.de, keescook@chromium.org, skhan@linuxfoundation.org,
+        alan.maguire@oracle.com, yzaikin@google.com, davidgow@google.com,
+        akpm@linux-foundation.org, rppt@linux.ibm.com,
+        frowand.list@gmail.com
+Cc:     gregkh@linuxfoundation.org, sboyd@kernel.org, logang@deltatee.com,
+        mcgrof@kernel.org, knut.omang@oracle.com,
+        linux-um@lists.infradead.org, linux-arch@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Brendan Higgins <brendanhiggins@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-While the document is there, it is currently missing at the
-index file.
+## TL;DR
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/filesystems/index.rst | 1 +
- 1 file changed, 1 insertion(+)
+This patchset adds a centralized executor to dispatch tests rather than
+relying on late_initcall to schedule each test suite separately along
+with a couple of new features that depend on it.
 
-diff --git a/Documentation/filesystems/index.rst b/Documentation/filesystems/index.rst
-index ad6315a48d14..328e2c48df31 100644
---- a/Documentation/filesystems/index.rst
-+++ b/Documentation/filesystems/index.rst
-@@ -47,4 +47,5 @@ Documentation for filesystem implementations.
-    :maxdepth: 2
- 
-    autofs
-+   overlayfs
-    virtiofs
+## What am I trying to do?
+
+Conceptually, I am trying to provide a mechanism by which test suites
+can be grouped together so that they can be reasoned about collectively.
+The last two of three patches in this series add features which depend
+on this:
+
+PATCH 5/7 Prints out a test plan right before KUnit tests are run[1];
+          this is valuable because it makes it possible for a test
+          harness to detect whether the number of tests run matches the
+          number of tests expected to be run, ensuring that no tests
+          silently failed.
+
+PATCH 6/7 Add a new kernel command-line option which allows the user to
+          specify that the kernel poweroff, halt, or reboot after
+          completing all KUnit tests; this is very handy for running
+          KUnit tests on UML or a VM so that the UML/VM process exits
+          cleanly immediately after running all tests without needing a
+          special initramfs.
+
+In addition, by dispatching tests from a single location, we can
+guarantee that all KUnit tests run after late_init is complete, which
+was a concern during the initial KUnit patchset review (this has not
+been a problem in practice, but resolving with certainty is nevertheless
+desirable).
+
+Other use cases for this exist, but the above features should provide an
+idea of the value that this could provide.
+
+Alan Maguire (1):
+  kunit: test: create a single centralized executor for all tests
+
+Brendan Higgins (5):
+  vmlinux.lds.h: add linker section for KUnit test suites
+  arch: um: add linker section for KUnit test suites
+  init: main: add KUnit to kernel init
+  kunit: test: add test plan to KUnit TAP format
+  Documentation: Add kunit_shutdown to kernel-parameters.txt
+
+David Gow (1):
+  kunit: Add 'kunit_shutdown' option
+
+ .../admin-guide/kernel-parameters.txt         |  7 ++
+ arch/um/include/asm/common.lds.S              |  4 +
+ include/asm-generic/vmlinux.lds.h             |  8 ++
+ include/kunit/test.h                          | 82 ++++++++++++-------
+ init/main.c                                   |  4 +
+ lib/kunit/Makefile                            |  3 +-
+ lib/kunit/executor.c                          | 71 ++++++++++++++++
+ lib/kunit/test.c                              | 11 ---
+ tools/testing/kunit/kunit_kernel.py           |  2 +-
+ tools/testing/kunit/kunit_parser.py           | 76 ++++++++++++++---
+ .../test_is_test_passed-all_passed.log        |  1 +
+ .../test_data/test_is_test_passed-crash.log   |  1 +
+ .../test_data/test_is_test_passed-failure.log |  1 +
+ 13 files changed, 217 insertions(+), 54 deletions(-)
+ create mode 100644 lib/kunit/executor.c
+
 -- 
-2.24.1
+2.25.0.341.g760bfbb309-goog
 
