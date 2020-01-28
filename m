@@ -2,14 +2,14 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CBB9F14BBD6
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 15:50:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F0CC314BBE1
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Jan 2020 15:50:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726793AbgA1Otk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Jan 2020 09:49:40 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:59292 "EHLO
+        id S1727127AbgA1Otw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Jan 2020 09:49:52 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:59296 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727287AbgA1OAq (ORCPT
+        with ESMTP id S1727296AbgA1OAq (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Jan 2020 09:00:46 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
@@ -17,18 +17,18 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         Reply-To:Content-Type:Content-ID:Content-Description:Resent-Date:Resent-From:
         Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
         List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=jCGNvxr49Lix6H95n0igp3NkedHJdEszNuxewfmtp4U=; b=fc1iY6Qx1yxSY+62KFqb/Clia9
-        OYMkvWWkR2paMXKhmnjOBuzaKgV4Fnj3tCcWxxWsPGGpwPlfd4FwU4ZNJrCD2axU49+P7xMsEZmC9
-        uWL/3zfYB+LS52QsgFLaFweeGd1SCMsQnXoOHQvKsTbA7ZQpmjOm69YifcTOfo2ft9cnDOCYAlmYh
-        xt8sfvCT30mLzamI4qwPr9JyJ2GEMoXLSibP0E7uclu84q/KXaABqGTaPkr+6YUeI/LX839RXw4BU
-        H2XceMpCByAw264O0SuA9EnqzIbOESmFWqwCzbZAt6WU0yu/K3HzPRIj9n36xc5UOrvD35bsWn9/Q
-        pinGjYiw==;
+        bh=pdZ8qcVwJgau11WErg9V3Yc+VhPbjBFzGGVo//flLAo=; b=sySpSqJoeSAZ6nqHqhBfl+XL21
+        5TpZr0mZuhA3gjKteTVLv/eqBXj3j7v3SR1IaT6AyaLkVi3P4i120VOT1GYEelIixnpAIOMp3avUF
+        dWcV5qIF8XF9ZnBIr9iXJTJe7MY/1z3Z31t0hDyHWgbw23m7VunkcFNqCC8Lm8sxfmfcEZhjKd/Hx
+        nbff9DxLcKkcvU9gyzcTNaaEfwwssfyhaayE8Ohm4Rhd5zovUeG4zPiap29IglIpc4Wuh7PJgtMEK
+        Gm8rcvGV2v6NOPWzyyspbvE4H4nXlHJNNtTz/xOxOdik+kQXZGDOgtULAm98Rq3XeAtvhaMKEr/Lk
+        l7p89GIA==;
 Received: from [177.41.103.99] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1iwRQ5-0007ip-UM; Tue, 28 Jan 2020 14:00:45 +0000
+        id 1iwRQ5-0007ij-Uh; Tue, 28 Jan 2020 14:00:45 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1iwRPp-001BOO-Mg; Tue, 28 Jan 2020 15:00:29 +0100
+        id 1iwRPp-001BOd-RL; Tue, 28 Jan 2020 15:00:29 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Media Mailing List <linux-media@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
@@ -36,9 +36,9 @@ Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         Paolo Bonzini <pbonzini@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
         linux-doc@vger.kernel.org
-Subject: [PATCH 15/27] docs: kvm: convert devices/xics.txt to ReST
-Date:   Tue, 28 Jan 2020 15:00:16 +0100
-Message-Id: <ad7db80d43d8afef0fffb5424fa1fc12fdf4ef50.1580219586.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 18/27] docs: kvm: convert arm/hyp-abi.txt to ReST
+Date:   Tue, 28 Jan 2020 15:00:19 +0100
+Message-Id: <707c15ba05c14b49801e29840154ee1aed5cd910.1580219586.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <cover.1580219586.git.mchehab+huawei@kernel.org>
 References: <cover.1580219586.git.mchehab+huawei@kernel.org>
@@ -49,100 +49,83 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-- Use title markups;
-- adjust indentation and add blank lines as needed;
-- adjust tables to match ReST accepted formats;
-- use :field: markups.
+- Add proper markups for titles;
+- Adjust whitespaces and blank lines to match ReST
+  needs;
+- Mark literal blocks as such.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/virt/kvm/devices/index.rst      |  1 +
- .../virt/kvm/devices/{xics.txt => xics.rst}   | 26 ++++++++++++++-----
- 2 files changed, 21 insertions(+), 6 deletions(-)
- rename Documentation/virt/kvm/devices/{xics.txt => xics.rst} (85%)
+ .../virt/kvm/arm/{hyp-abi.txt => hyp-abi.rst} | 26 ++++++++++++-------
+ Documentation/virt/kvm/arm/index.rst          |  1 +
+ 2 files changed, 18 insertions(+), 9 deletions(-)
+ rename Documentation/virt/kvm/arm/{hyp-abi.txt => hyp-abi.rst} (80%)
 
-diff --git a/Documentation/virt/kvm/devices/index.rst b/Documentation/virt/kvm/devices/index.rst
-index 29f8ecdf7fa0..63b61369d09b 100644
---- a/Documentation/virt/kvm/devices/index.rst
-+++ b/Documentation/virt/kvm/devices/index.rst
-@@ -15,3 +15,4 @@ Devices
-    vcpu
-    vfio
-    vm
-+   xics
-diff --git a/Documentation/virt/kvm/devices/xics.txt b/Documentation/virt/kvm/devices/xics.rst
-similarity index 85%
-rename from Documentation/virt/kvm/devices/xics.txt
-rename to Documentation/virt/kvm/devices/xics.rst
-index 423332dda7bc..74e36dbea0fd 100644
---- a/Documentation/virt/kvm/devices/xics.txt
-+++ b/Documentation/virt/kvm/devices/xics.rst
-@@ -1,20 +1,29 @@
-+=========================
- XICS interrupt controller
-+=========================
+diff --git a/Documentation/virt/kvm/arm/hyp-abi.txt b/Documentation/virt/kvm/arm/hyp-abi.rst
+similarity index 80%
+rename from Documentation/virt/kvm/arm/hyp-abi.txt
+rename to Documentation/virt/kvm/arm/hyp-abi.rst
+index a20a0bee268d..cf74b5b87df6 100644
+--- a/Documentation/virt/kvm/arm/hyp-abi.txt
++++ b/Documentation/virt/kvm/arm/hyp-abi.rst
+@@ -1,4 +1,6 @@
+-* Internal ABI between the kernel and HYP
++=======================================
++Internal ABI between the kernel and HYP
++=======================================
  
- Device type supported: KVM_DEV_TYPE_XICS
+ This file documents the interaction between the Linux kernel and the
+ hypervisor layer when running Linux as a hypervisor (for example
+@@ -19,25 +21,31 @@ and only act on individual CPUs.
+ Unless specified otherwise, any built-in hypervisor must implement
+ these functions (see arch/arm{,64}/include/asm/virt.h):
  
- Groups:
-   1. KVM_DEV_XICS_GRP_SOURCES
--  Attributes: One per interrupt source, indexed by the source number.
-+       Attributes:
- 
-+         One per interrupt source, indexed by the source number.
-   2. KVM_DEV_XICS_GRP_CTRL
--  Attributes:
--    2.1 KVM_DEV_XICS_NR_SERVERS (write only)
-+       Attributes:
+-* r0/x0 = HVC_SET_VECTORS
+-  r1/x1 = vectors
++* ::
 +
-+         2.1 KVM_DEV_XICS_NR_SERVERS (write only)
-+
-   The kvm_device_attr.addr points to a __u32 value which is the number of
-   interrupt server numbers (ie, highest possible vcpu id plus one).
-+
-   Errors:
--    -EINVAL: Value greater than KVM_MAX_VCPU_ID.
--    -EFAULT: Invalid user pointer for attr->addr.
--    -EBUSY:  A vcpu is already connected to the device.
-+
-+    =======  ==========================================
-+    -EINVAL  Value greater than KVM_MAX_VCPU_ID.
-+    -EFAULT  Invalid user pointer for attr->addr.
-+    -EBUSY   A vcpu is already connected to the device.
-+    =======  ==========================================
++    r0/x0 = HVC_SET_VECTORS
++    r1/x1 = vectors
  
- This device emulates the XICS (eXternal Interrupt Controller
- Specification) defined in PAPR.  The XICS has a set of interrupt
-@@ -53,24 +62,29 @@ the interrupt source number.  The 64 bit state word has the following
- bitfields, starting from the least-significant end of the word:
+   Set HVBAR/VBAR_EL2 to 'vectors' to enable a hypervisor. 'vectors'
+   must be a physical address, and respect the alignment requirements
+   of the architecture. Only implemented by the initial stubs, not by
+   Linux hypervisors.
  
- * Destination (server number), 32 bits
+-* r0/x0 = HVC_RESET_VECTORS
++* ::
 +
-   This specifies where the interrupt should be sent, and is the
-   interrupt server number specified for the destination vcpu.
++    r0/x0 = HVC_RESET_VECTORS
  
- * Priority, 8 bits
+   Turn HYP/EL2 MMU off, and reset HVBAR/VBAR_EL2 to the initials
+   stubs' exception vector value. This effectively disables an existing
+   hypervisor.
+ 
+-* r0/x0 = HVC_SOFT_RESTART
+-  r1/x1 = restart address
+-  x2 = x0's value when entering the next payload (arm64)
+-  x3 = x1's value when entering the next payload (arm64)
+-  x4 = x2's value when entering the next payload (arm64)
++* ::
 +
-   This is the priority specified for this interrupt source, where 0 is
-   the highest priority and 255 is the lowest.  An interrupt with a
-   priority of 255 will never be delivered.
++    r0/x0 = HVC_SOFT_RESTART
++    r1/x1 = restart address
++    x2 = x0's value when entering the next payload (arm64)
++    x3 = x1's value when entering the next payload (arm64)
++    x4 = x2's value when entering the next payload (arm64)
  
- * Level sensitive flag, 1 bit
-+
-   This bit is 1 for a level-sensitive interrupt source, or 0 for
-   edge-sensitive (or MSI).
+   Mask all exceptions, disable the MMU, move the arguments into place
+   (arm64 only), and jump to the restart address while at HYP/EL2. This
+diff --git a/Documentation/virt/kvm/arm/index.rst b/Documentation/virt/kvm/arm/index.rst
+index e039d9b1e076..134fa5fa77e5 100644
+--- a/Documentation/virt/kvm/arm/index.rst
++++ b/Documentation/virt/kvm/arm/index.rst
+@@ -7,4 +7,5 @@ ARM
+ .. toctree::
+    :maxdepth: 2
  
- * Masked flag, 1 bit
-+
-   This bit is set to 1 if the interrupt is masked (cannot be delivered
-   regardless of its priority), for example by the ibm,int-off RTAS
-   call, or 0 if it is not masked.
- 
- * Pending flag, 1 bit
-+
-   This bit is 1 if the source has a pending interrupt, otherwise 0.
- 
- Only one XICS instance may be created per VM.
++   hyp-abi
+    pvtime
 -- 
 2.24.1
 
