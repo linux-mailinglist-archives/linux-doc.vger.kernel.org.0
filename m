@@ -2,253 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AFFB214D0FB
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2020 20:07:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A011114D13B
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jan 2020 20:36:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728135AbgA2TG6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Jan 2020 14:06:58 -0500
-Received: from mail-qk1-f193.google.com ([209.85.222.193]:41148 "EHLO
-        mail-qk1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727515AbgA2TG6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Jan 2020 14:06:58 -0500
-Received: by mail-qk1-f193.google.com with SMTP id s187so332558qke.8
-        for <linux-doc@vger.kernel.org>; Wed, 29 Jan 2020 11:06:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=lca.pw; s=google;
-        h=mime-version:subject:from:in-reply-to:date:cc
-         :content-transfer-encoding:message-id:references:to;
-        bh=FhknuesOl8lF6FjwV2Qc/z+nG0xejuInhcls4JdTHTE=;
-        b=DCehkkTPUKR/9mbJVh0nUrN/gskyVcvXI5B/eGdZLKEDp2a2IvK3KP27QsnLVrulFo
-         7FeUrVYKeUtQbXyLVsEUMSLVDdWeU3hDie02VUj4zCFu/f7+t9k/LrKu3YXphoB7kgS5
-         Dr+ubaFziWqyJAanEe1MV1xCL8jdrRvT15y2Xf03sBspj0ZEmpof5gX8nyKdTxIP/vtP
-         8TFzloPPg6j/QKMhpBLqMrZpuslq6kseN4umpk3KaACEb81xTF1zRnK8UgAMIEx3wen+
-         zKCAzmTS5qYpNM4GEoxRfHvttHY5guooy8wlnmqIDidMA65CN8Cp7Ow1DDmuubTJ6+no
-         xwCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-         :content-transfer-encoding:message-id:references:to;
-        bh=FhknuesOl8lF6FjwV2Qc/z+nG0xejuInhcls4JdTHTE=;
-        b=lrIeZMTrqCSL3jX/xZtiQ6GNIgedGVzhgPZRiQ6VF1RgK7w9TwXSPaGofyQ0+pxsS3
-         5Ij+kTczR66yUvzzd8ZyLp4h5tmAeJ/GzDZu4jVwX0Z7NUjjGD6vtmlHGad9tb010pcG
-         GJGUnWyi7KIgo9E1m0dQqUWnVS+3TurmYEQ/O7XbtGYOAd/cANTymfGjGzKp7bsawYmO
-         DEx+Ag7xx7WXzNsrZo9uWH6TkZZzTByovY/ZZnCleMgm2f71ZKBxCN4IGx4imrYRPUaO
-         QMf5zV/sNC2iZ2v0OV7RkM6scfEj60Rqy3YJZrO6KtyMEBVbcimQvpIWtR3WgILhDOA0
-         i+fA==
-X-Gm-Message-State: APjAAAWT3FequHe0xIXWfha6sbL8s1jx7pfRmbhJownRR0UWHIRqwxq7
-        j1PkX1fEXBv2hrEzxp4SPIuXJQ==
-X-Google-Smtp-Source: APXvYqwPr6EFcwzsD4a9IE6KvyyzcOfmje3dq69CM1Rmuk5CYXrxg2b6W6h23S9/HHiJ0XgFpUrhUQ==
-X-Received: by 2002:a37:a8ca:: with SMTP id r193mr1300286qke.346.1580324816647;
-        Wed, 29 Jan 2020 11:06:56 -0800 (PST)
-Received: from [192.168.1.153] (pool-71-184-117-43.bstnma.fios.verizon.net. [71.184.117.43])
-        by smtp.gmail.com with ESMTPSA id v2sm1406940qkj.29.2020.01.29.11.06.55
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 29 Jan 2020 11:06:56 -0800 (PST)
-Content-Type: text/plain;
-        charset=utf-8
-Mime-Version: 1.0 (Mac OS X Mail 13.0 \(3608.40.2.2.4\))
-Subject: Re: [PATCH 1/1] mm: sysctl: add panic_on_inconsistent_mm sysctl
-From:   Qian Cai <cai@lca.pw>
-In-Reply-To: <20200129180851.551109-1-ghalat@redhat.com>
-Date:   Wed, 29 Jan 2020 14:06:54 -0500
-Cc:     Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux-MM <linux-mm@kvack.org>, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org, ssaner@redhat.com, atomlin@redhat.com,
-        oleksandr@redhat.com, vbendel@redhat.com, kirill@shutemov.name,
-        khlebnikov@yandex-team.ru, borntraeger@de.ibm.com,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Iurii Zaikin <yzaikin@google.com>,
-        Kees Cook <keescook@chromium.org>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>
-Content-Transfer-Encoding: quoted-printable
-Message-Id: <526F3E1C-87D3-4049-BC93-A4F0EDA45608@lca.pw>
-References: <20200129180851.551109-1-ghalat@redhat.com>
-To:     Grzegorz Halat <ghalat@redhat.com>
-X-Mailer: Apple Mail (2.3608.40.2.2.4)
+        id S1726618AbgA2Tgm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Jan 2020 14:36:42 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:47788 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726283AbgA2Tgm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Jan 2020 14:36:42 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+        :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=m8XtGCoj/Rgqwp4rgy8+qM/2t7I9us+2QhgbXiUwMMs=; b=OQj7u2PkCLXgOD7LOfBHdmIjv
+        OmB24ayrGnvtecw5aFRY8MRd+Whr/VOv/YE1luD75ZthbeVU6MqgqutWaWv4V01LXe9fJlfyirknM
+        f4Lyx6vGjHXqzzgreKCLAtqFGWyLli7YZu0UORiIkyRcadjZuQ/vggyzPk4oXmTHSZ8DkUYzijIWY
+        DPLCZAyQL4g4DNLFUx70capYXl2mHA27gH+TMOWNPYcvGpoQscSeLNw1irEMebpUDhnC/lb9eIgqE
+        p7OrFC3VfQrnGOSSDWwMNmCAiQnVVK3JEK9ss64IupYj4UC9VJdr5YWsXapJiXVzx+74/PDJHiLa7
+        HnOpv8E8A==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=noisy.programming.kicks-ass.net)
+        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1iwt8M-0005M8-Sb; Wed, 29 Jan 2020 19:36:19 +0000
+Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (Client did not present a certificate)
+        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 73AB5305FB6;
+        Wed, 29 Jan 2020 20:34:33 +0100 (CET)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+        id 5B3702B7337BB; Wed, 29 Jan 2020 20:36:16 +0100 (CET)
+Date:   Wed, 29 Jan 2020 20:36:16 +0100
+From:   Peter Zijlstra <peterz@infradead.org>
+To:     SeongJae Park <sj38.park@gmail.com>
+Cc:     sjpark@amazon.com, akpm@linux-foundation.org,
+        SeongJae Park <sjpark@amazon.de>, acme@kernel.org,
+        amit@kernel.org, brendan.d.gregg@gmail.com, corbet@lwn.net,
+        dwmw@amazon.com, mgorman@suse.de, rostedt@goodmis.org,
+        kirill@shutemov.name, brendanhiggins@google.com,
+        colin.king@canonical.com, minchan@kernel.org,
+        vdavydov.dev@gmail.com, vdavydov@parallels.com, linux-mm@kvack.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Ingo Molnar <mingo@redhat.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Jiri Olsa <jolsa@redhat.com>,
+        Namhyung Kim <namhyung@kernel.org>
+Subject: Re: Re: Re: Re: [PATCH v2 0/9] Introduce Data Access MONitor (DAMON)
+Message-ID: <20200129193616.GT14914@hirez.programming.kicks-ass.net>
+References: <20200129180709.GS14879@hirez.programming.kicks-ass.net>
+ <20200129190645.2137-1-sj38.park@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200129190645.2137-1-sj38.park@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Wed, Jan 29, 2020 at 08:06:45PM +0100, SeongJae Park wrote:
+> > Perf can do address based sampling of memops, I suspect you can create
+> > something using that.
+> 
+> If you're saying implementing DAMON in 'perf mem', I think it would conflict
+> with abovely explained DAMON's goal.
+> 
+> Else, if you're saying it would be the right place to handle the DAMON
+> generated data, I agree, thank you for pointing me that.  Will keep it in mind
+> while shaping the interface of DAMON.
 
+I'm saying it might be able to provide the data you need; without damon.
 
-> On Jan 29, 2020, at 1:08 PM, Grzegorz Halat <ghalat@redhat.com> wrote:
->=20
-> Memory management subsystem performs various checks at runtime,
-> if an inconsistency is detected then such event is being logged and =
-kernel
-> continues to run. While debugging such problems it is helpful to =
-collect
-> memory dump as early as possible. Currently, there is no easy way to =
-panic
-> kernel when such error is detected.
-
-Also, why can=E2=80=99t you have a simple script that checking for the =
-tainted flags
-periodically, and then trigger the crash dump once it happened?
-
->=20
-> It was proposed[1] to panic the kernel if panic_on_oops is set but =
-this
-> approach was not accepted. One of alternative proposals was =
-introduction of
-> a new sysctl.
->=20
-> Add a new sysctl - panic_on_inconsistent_mm. If the sysctl is set then =
-the
-> kernel will be crashed when an inconsistency is detected by memory
-> management. This currently means panic when bad page or bad PTE
-> is detected(this may be extended to other places in MM).
->=20
-> Another use case of this sysctl may be in security-wise environments,
-> it may be more desired to crash machine than continue to run with
-> potentially damaged data structures.
->=20
-> Changes since v1 [2]:
-> - rename the sysctl to panic_on_inconsistent_mm
-> - move the sysctl from kernel to vm table
-> - print modules in print_bad_pte() only before calling panic
->=20
-> [1] =
-https://lore.kernel.org/linux-mm/1426495021-6408-1-git-send-email-borntrae=
-ger@de.ibm.com/
-> [2] =
-https://lore.kernel.org/lkml/20200127101100.92588-1-ghalat@redhat.com/
->=20
-> Signed-off-by: Grzegorz Halat <ghalat@redhat.com>
-> ---
-> Documentation/admin-guide/sysctl/vm.rst | 14 ++++++++++++++
-> include/linux/kernel.h                  |  1 +
-> kernel/sysctl.c                         |  9 +++++++++
-> mm/memory.c                             |  8 ++++++++
-> mm/page_alloc.c                         |  4 +++-
-> 5 files changed, 35 insertions(+), 1 deletion(-)
->=20
-> diff --git a/Documentation/admin-guide/sysctl/vm.rst =
-b/Documentation/admin-guide/sysctl/vm.rst
-> index 64aeee1009ca..57f7926a64b8 100644
-> --- a/Documentation/admin-guide/sysctl/vm.rst
-> +++ b/Documentation/admin-guide/sysctl/vm.rst
-> @@ -61,6 +61,7 @@ Currently, these files are in /proc/sys/vm:
-> - overcommit_memory
-> - overcommit_ratio
-> - page-cluster
-> +- panic_on_inconsistent_mm
-> - panic_on_oom
-> - percpu_pagelist_fraction
-> - stat_interval
-> @@ -741,6 +742,19 @@ extra faults and I/O delays for following faults =
-if they would have been part of
-> that consecutive pages readahead would have brought in.
->=20
->=20
-> +panic_on_inconsistent_mm
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-
-> +
-> +Controls the kernel's behaviour when inconsistency is detected
-> +by memory management code, for example bad page state or bad PTE.
-> +
-> +0: try to continue operation.
-> +
-> +1: panic immediately.
-> +
-> +The default value is 0.
-> +
-> +
-> panic_on_oom
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->=20
-> diff --git a/include/linux/kernel.h b/include/linux/kernel.h
-> index 0d9db2a14f44..b3bd94c558ab 100644
-> --- a/include/linux/kernel.h
-> +++ b/include/linux/kernel.h
-> @@ -518,6 +518,7 @@ extern int oops_in_progress;		/* If =
-set, an oops, panic(), BUG() or die() is in
-> extern int panic_timeout;
-> extern unsigned long panic_print;
-> extern int panic_on_oops;
-> +extern int panic_on_inconsistent_mm;
-> extern int panic_on_unrecovered_nmi;
-> extern int panic_on_io_nmi;
-> extern int panic_on_warn;
-> diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-> index 70665934d53e..a9733311e3a1 100644
-> --- a/kernel/sysctl.c
-> +++ b/kernel/sysctl.c
-> @@ -1303,6 +1303,15 @@ static struct ctl_table vm_table[] =3D {
-> 		.extra1		=3D SYSCTL_ZERO,
-> 		.extra2		=3D &two,
-> 	},
-> +	{
-> +		.procname	=3D "panic_on_inconsistent_mm",
-> +		.data		=3D &panic_on_inconsistent_mm,
-> +		.maxlen		=3D sizeof(int),
-> +		.mode		=3D 0644,
-> +		.proc_handler	=3D proc_dointvec_minmax,
-> +		.extra1		=3D SYSCTL_ZERO,
-> +		.extra2		=3D SYSCTL_ONE,
-> +	},
-> 	{
-> 		.procname	=3D "panic_on_oom",
-> 		.data		=3D &sysctl_panic_on_oom,
-> diff --git a/mm/memory.c b/mm/memory.c
-> index 45442d9a4f52..b29a18077a6a 100644
-> --- a/mm/memory.c
-> +++ b/mm/memory.c
-> @@ -71,6 +71,7 @@
-> #include <linux/dax.h>
-> #include <linux/oom.h>
-> #include <linux/numa.h>
-> +#include <linux/module.h>
->=20
-> #include <trace/events/kmem.h>
->=20
-> @@ -88,6 +89,8 @@
-> #warning Unfortunate NUMA and NUMA Balancing config, growing =
-page-frame for last_cpupid.
-> #endif
->=20
-> +int panic_on_inconsistent_mm __read_mostly;
-> +
-> #ifndef CONFIG_NEED_MULTIPLE_NODES
-> /* use the per-pgdat data instead for discontigmem - mbligh */
-> unsigned long max_mapnr;
-> @@ -543,6 +546,11 @@ static void print_bad_pte(struct vm_area_struct =
-*vma, unsigned long addr,
-> 		 vma->vm_ops ? vma->vm_ops->fault : NULL,
-> 		 vma->vm_file ? vma->vm_file->f_op->mmap : NULL,
-> 		 mapping ? mapping->a_ops->readpage : NULL);
-> +
-> +	if (panic_on_inconsistent_mm) {
-> +		print_modules();
-> +		panic("Bad page map detected");
-> +	}
-> 	dump_stack();
-> 	add_taint(TAINT_BAD_PAGE, LOCKDEP_NOW_UNRELIABLE);
-> }
-> diff --git a/mm/page_alloc.c b/mm/page_alloc.c
-> index d047bf7d8fd4..a20cd3ece5ba 100644
-> --- a/mm/page_alloc.c
-> +++ b/mm/page_alloc.c
-> @@ -643,9 +643,11 @@ static void bad_page(struct page *page, const =
-char *reason,
-> 	if (bad_flags)
-> 		pr_alert("bad because of flags: %#lx(%pGp)\n",
-> 						bad_flags, &bad_flags);
-> -	dump_page_owner(page);
->=20
-> +	dump_page_owner(page);
-> 	print_modules();
-> +	if (panic_on_inconsistent_mm)
-> +		panic("Bad page state detected");
-> 	dump_stack();
-> out:
-> 	/* Leave bad fields for debug, except PageBuddy could make =
-trouble */
-> --=20
-> 2.21.1
->=20
-
+Might; because I'm not entirely sure what you're looking for, nor
+exactly what events we have that provide address information.
