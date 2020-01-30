@@ -2,58 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2286014E564
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Jan 2020 23:14:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A611114E5A3
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Jan 2020 23:51:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725972AbgA3WOu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Jan 2020 17:14:50 -0500
-Received: from mail.kernel.org ([198.145.29.99]:38972 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725907AbgA3WOu (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 30 Jan 2020 17:14:50 -0500
-Received: from cakuba (unknown [199.201.64.133])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 9273620707;
-        Thu, 30 Jan 2020 22:14:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1580422489;
-        bh=Hh04uXBi7OcIx5ozha/taPqwFRcX5aRWOqzIboXiuHU=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=s9ACRgpQmFHVWcx5jc0K+lNdf539SserYwTzfbdVUaTUnC72bjHFmygCrnuZfE5YA
-         Fq2wn2udDI8nOuRa0iIxQqUBuI0H5aIv4+vAlGbBnR5UQ41+QE7ALfD8/n9YpQb9oa
-         yxbZaXU5dQF8EM3PF6N4Qp57ZJ8F5vD3Mrf60/Ok=
-Date:   Thu, 30 Jan 2020 14:14:48 -0800
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     Pablo Neira Ayuso <pablo@netfilter.org>
-Cc:     Matteo Croce <mcroce@redhat.com>, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, "David S. Miller" <davem@davemloft.net>,
-        Florian Westphal <fw@strlen.de>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH net] netfilter: nf_flowtable: fix documentation
-Message-ID: <20200130141448.27fa32aa@cakuba>
-In-Reply-To: <20200130191019.19440-1-mcroce@redhat.com>
-References: <20200130191019.19440-1-mcroce@redhat.com>
+        id S1726026AbgA3WvA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Jan 2020 17:51:00 -0500
+Received: from mail-pf1-f194.google.com ([209.85.210.194]:37227 "EHLO
+        mail-pf1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726481AbgA3WvA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Jan 2020 17:51:00 -0500
+Received: by mail-pf1-f194.google.com with SMTP id p14so2252184pfn.4
+        for <linux-doc@vger.kernel.org>; Thu, 30 Jan 2020 14:51:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Nm7q/eqnnGMhJ4cSfabctzSKxn0MOorqNV0sKFngedQ=;
+        b=TMfOq3Cm7tFFkVWajkEH/mOlfghX4QyLqQHqYZZWR4V20ArmjrlHpz0d8+8xSByinZ
+         hdNbCAldYk6XW/2l4H6+W+D99nfYFDFdlo1JF1zsEkJxE9vw/m1xetfRlk4B1wB04LUf
+         vgQJJnXFxYGn+sGKkA8pUh58KRPmTHCO35p+LwSV7Wkci1t0zGgCnSKFVsD3CJRVFyCo
+         Hx7zchW0IfdwQSjwaOeDPLPmvT/qzRZbY0PFmpfI+3jsVs5e+ZwXMFUc5OJY345A6bMq
+         pB48aI/3uWmIP/mXK6bLsZAtTLERYf85LGN/IzjM9ZEQtYWVvQ1wOCqgnYJxKRvVLiz2
+         DaBg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Nm7q/eqnnGMhJ4cSfabctzSKxn0MOorqNV0sKFngedQ=;
+        b=CenuVm2aI+EUtuKgp+PlaYmAFh8EXtGjNKbkKSteuT6NNAoxZxoFSWaoSxvcwwy6iS
+         Nk61Lf42uUEulFNPv+eoKQNkYaagm+P4yZzuiH4pdYS2VHN+S4J2/zZn/GStFwibAfYD
+         M52+TarpulZnCq0gpJHDE+YhNOL6xbWWjkFTTuX9fk2oKoqXroYi6Cl3nk01kkaBH5pj
+         Rkrt3A5ndvdk1Qx3ufYQN3x3LqNGg2lUXseINgH3vhtG6QEggM+gqQqCp7V6ZpNFiXla
+         r8Jp3erypSNwqtqcc4XBmreEb5s4tZtFzf4kJVvFAolNd9oBwuwZ/QXiEJqDLDWCsc8l
+         sW4w==
+X-Gm-Message-State: APjAAAVZOCA95AEi+m67OzMx5cBorqNTI86yjG6sriTWUmwWnO8IzOgx
+        nxCObpXfMSf64oPM+/C7bIFx13rl78ehX7u+pa6yyw==
+X-Google-Smtp-Source: APXvYqx0i4HutGZ0NwffQW6YWyeSX4LgIJj846OBe2RwSGkQlJX/8HwMxqcna9y1bwf7blHqEu8eaWZyufGuXP7EBl4=
+X-Received: by 2002:a63:597:: with SMTP id 145mr6755667pgf.384.1580424659726;
+ Thu, 30 Jan 2020 14:50:59 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20200128072002.79250-1-brendanhiggins@google.com>
+ <20200128072002.79250-5-brendanhiggins@google.com> <20200129063836.6C2A62064C@mail.kernel.org>
+In-Reply-To: <20200129063836.6C2A62064C@mail.kernel.org>
+From:   Brendan Higgins <brendanhiggins@google.com>
+Date:   Thu, 30 Jan 2020 14:50:48 -0800
+Message-ID: <CAFd5g440ENddSAGA=CQhE-RZQAC8Hh1_+EOmfx2oDueB-EZXLw@mail.gmail.com>
+Subject: Re: [PATCH v1 4/7] init: main: add KUnit to kernel init
+To:     Stephen Boyd <sboyd@kernel.org>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Alan Maguire <alan.maguire@oracle.com>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+        Arnd Bergmann <arnd@arndb.de>, David Gow <davidgow@google.com>,
+        Frank Rowand <frowand.list@gmail.com>,
+        Jeff Dike <jdike@addtoit.com>,
+        Kees Cook <keescook@chromium.org>,
+        Richard Weinberger <richard@nod.at>, rppt@linux.ibm.com,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Iurii Zaikin <yzaikin@google.com>,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Logan Gunthorpe <logang@deltatee.com>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Knut Omang <knut.omang@oracle.com>,
+        linux-um <linux-um@lists.infradead.org>,
+        linux-arch@vger.kernel.org,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        KUnit Development <kunit-dev@googlegroups.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 30 Jan 2020 20:10:19 +0100, Matteo Croce wrote:
-> In the flowtable documentation there is a missing semicolon, the command
-> as is would give this error:
-> 
->     nftables.conf:5:27-33: Error: syntax error, unexpected devices, expecting newline or semicolon
->                     hook ingress priority 0 devices = { br0, pppoe-data };
->                                             ^^^^^^^
->     nftables.conf:4:12-13: Error: invalid hook (null)
->             flowtable ft {
->                       ^^
-> 
-> Fixes: 19b351f16fd9 ("netfilter: add flowtable documentation")
-> Signed-off-by: Matteo Croce <mcroce@redhat.com>
+On Tue, Jan 28, 2020 at 10:38 PM Stephen Boyd <sboyd@kernel.org> wrote:
+>
+> Quoting Brendan Higgins (2020-01-27 23:19:59)
+> > Remove KUnit from init calls entirely, instead call directly from
+> > kernel_init().
+> >
+> > Co-developed-by: Alan Maguire <alan.maguire@oracle.com>
+> > Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
+> > Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
+> > ---
+>
+> Reviewed-by: Stephen Boyd <sboyd@kernel.org>
+>
+> Although, why can't it be squashed with the previous patch?
 
-This is netfilter so even though it's tagged as net, I'm expecting
-Pablo (or Jon) to take it. Please LMK if I'm wrong.
+I think that this is pretty much the smallest logical change that
+doesn't touch just KUnit. I figured it might make it easier for people
+not interested in KUnit what changes I am making to init. I assume
+that people don't touch init willy-nilly, right?
