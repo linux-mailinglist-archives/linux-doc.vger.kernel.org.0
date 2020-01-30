@@ -2,96 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 81C3F14E604
-	for <lists+linux-doc@lfdr.de>; Fri, 31 Jan 2020 00:09:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D941714E641
+	for <lists+linux-doc@lfdr.de>; Fri, 31 Jan 2020 00:59:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727795AbgA3XIu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Jan 2020 18:08:50 -0500
-Received: from mail-pf1-f201.google.com ([209.85.210.201]:53490 "EHLO
-        mail-pf1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727784AbgA3XIr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Jan 2020 18:08:47 -0500
-Received: by mail-pf1-f201.google.com with SMTP id c17so2752588pfi.20
-        for <linux-doc@vger.kernel.org>; Thu, 30 Jan 2020 15:08:47 -0800 (PST)
+        id S1727666AbgA3X65 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Jan 2020 18:58:57 -0500
+Received: from mail-pl1-f194.google.com ([209.85.214.194]:39402 "EHLO
+        mail-pl1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727539AbgA3X65 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 30 Jan 2020 18:58:57 -0500
+Received: by mail-pl1-f194.google.com with SMTP id g6so1973701plp.6
+        for <linux-doc@vger.kernel.org>; Thu, 30 Jan 2020 15:58:56 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=dCX2LQDaoIcwFmYSq3cgmAkx+Exp0YNCPmOsw4OCxis=;
-        b=Cea+74kKLR/GteXq64Op60MuNDLPdMizqbgVfNpoWkuF8hmEB2KWidlL87tYLsXrua
-         8Xzbo2dCO77srQ679vBOopPPaT5k/SDDfLFgk2PVYP32VYXEliWcHSPQQvW7RJouxHAe
-         hc+sUOuQ6TRmwjFRtbnmDP2UOQJ2LzmbdTH38wKl5fTpIu7RcFxSIOf2vAfgqu8CZAVW
-         GLEzOaHOLVt2EVc2azlbEU9baY7XraTtjjWlZ/jKsLTm/MLozD7uXkqirkr8AYc/6GXF
-         us3u/wuW2oRnrheLqJLro/pS7keuZISgD+5hxQQ9fLdo+8fcCY/HdMmki7Y+kyw+/l1K
-         d+6g==
+        bh=nnBwEA2giD74itzmaPDJLtfzfFraVmkFwFzES0zVDnk=;
+        b=puvFWiDRkG0BzSX3C/l7V98D8skWjWf/yGJxCo+DaTkYZSQk1fUprzzO9S++QH4A6z
+         LnLRTrUn4ORyLTk1VGC4g8Cx7oNBFTcfpYCHZKnTTOUSRg1GQjGu5zUalY/rP1XJ8xw8
+         V/dxaiIIXfGetpnC1/92U52ynlUcwN/m8g9sCWA/yjMIqgKTdzPYqbU8VCCX6gTrNU6k
+         hF7u/fcXpjBk028VWRst6iXxn82KjDIMC0n8auK+C30wEtcRtgpzDOtGxNuVyMpRu4Yh
+         ZijiFoS1T5jyXAroSAtO48jJRhmxO/xRWuipzqP2Roq8FOYmx+2UlixHpo5oV0Rqv7Av
+         2DyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=dCX2LQDaoIcwFmYSq3cgmAkx+Exp0YNCPmOsw4OCxis=;
-        b=f1DkpbLVm/09P80zhinTxMuydciuFMjHLfD/Vgt63bY9vHruOvQeuENUZarqQHn28o
-         x15d+pQClxOg1wMNB4Pgxplg41Dg/zkyKOxsxDx07iUTKsUMtlIubcdJ8d2V/9CWOWGV
-         pBS/8p4cqUcufQ+Xk7k3jzXTo6Wflt27Gk+m88FrLyxrwBZ9USfHYyKzDJgVBQ1EhS53
-         Y3OV8gQsr9JisV+cNK4kaDR8ov9KM4qg+wNcPgwrIsJbvlLOaPZFvGtQuSCN26s0RL5r
-         pzwYZ+khFZGPgpg2lDH1GlnjuqgsrM1S74itP1eAupywH9/iDE0Hu8tjFOBJXu97Hfc3
-         Fmzg==
-X-Gm-Message-State: APjAAAWi72oRD7MQILOulU1fVFbRaxRxnSGVVpg3bZG825lHURTI7Jmh
-        iQr3ndQocQt/OwjOphVWggCCMli49WomQEbar0vLZg==
-X-Google-Smtp-Source: APXvYqx+2ri6MUmVYy6ptSJgWKOGMVZfjLQX0JTmgMuADBux9koL0KUnaGALzsStF3tXii//z0M3FTNmV1ggHaNXMBaSXw==
-X-Received: by 2002:a63:78cf:: with SMTP id t198mr6898466pgc.287.1580425727146;
- Thu, 30 Jan 2020 15:08:47 -0800 (PST)
-Date:   Thu, 30 Jan 2020 15:08:12 -0800
-In-Reply-To: <20200130230812.142642-1-brendanhiggins@google.com>
-Message-Id: <20200130230812.142642-8-brendanhiggins@google.com>
-Mime-Version: 1.0
-References: <20200130230812.142642-1-brendanhiggins@google.com>
-X-Mailer: git-send-email 2.25.0.341.g760bfbb309-goog
-Subject: [PATCH v2 7/7] Documentation: Add kunit_shutdown to kernel-parameters.txt
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=nnBwEA2giD74itzmaPDJLtfzfFraVmkFwFzES0zVDnk=;
+        b=b9ox/+W8lpLLgOBRd3zBjlaWsCOSAQSQBCvTB0i89dUtQuwHdTusC6/vZTdrvUH61L
+         d+xX/v3223Tn+1a1BcYsTkYe+H1fMojJ5vkwGMWSj4HK136lYT17m0EiyfOj9nyv4GRa
+         fc+2fLhsHmjKPjG4Egtye6TiXQxq7q8Zz/4+TLYvoOzuCPBRp01q+JipLGFCxcAJiP0k
+         QdzmEsIOHvK8IpvNVbvZpox89ohuMZyuUK3++0APGNMVjL54LWLl/T1Nno4VgvLiBhMS
+         WAJPqH15xK/c6mD5Q8iZgjdi2qmnsKEzjYn/EYsVCAyn1DsrQOrOceNc11FXFNfi1K/t
+         O1+g==
+X-Gm-Message-State: APjAAAUZICnIyENdJN8y0CTHwve8D9UDYneRKLMxbrJgomIpoj89AN7j
+        jz8NP+csAIh7SPFQrrEvdsOLJSlPamisiSyv/MPMEA==
+X-Google-Smtp-Source: APXvYqwSbpScfcJzpgVyKcx6TgNZ6LI68xx2xLHwdPDEW3rfaTNMpnoILEgEjBKDFJHMG838ctNvM1kPlspCdJjT2oA=
+X-Received: by 2002:a17:90a:6484:: with SMTP id h4mr8390552pjj.84.1580428736132;
+ Thu, 30 Jan 2020 15:58:56 -0800 (PST)
+MIME-Version: 1.0
+References: <20200128085742.14566-1-sjpark@amazon.com> <20200128085742.14566-2-sjpark@amazon.com>
+In-Reply-To: <20200128085742.14566-2-sjpark@amazon.com>
 From:   Brendan Higgins <brendanhiggins@google.com>
-To:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
-        arnd@arndb.de, keescook@chromium.org, skhan@linuxfoundation.org,
-        alan.maguire@oracle.com, yzaikin@google.com, davidgow@google.com,
-        akpm@linux-foundation.org, rppt@linux.ibm.com,
-        frowand.list@gmail.com
-Cc:     gregkh@linuxfoundation.org, sboyd@kernel.org, logang@deltatee.com,
-        mcgrof@kernel.org, knut.omang@oracle.com,
-        linux-um@lists.infradead.org, linux-arch@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Brendan Higgins <brendanhiggins@google.com>
+Date:   Thu, 30 Jan 2020 15:58:44 -0800
+Message-ID: <CAFd5g46fnZBiBYdBDmd=wJctoshbS2Q2JFGVBpoiPbis41Jw_Q@mail.gmail.com>
+Subject: Re: [PATCH v2 1/9] mm: Introduce Data Access MONitor (DAMON)
+To:     SeongJae Park <sjpark@amazon.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        SeongJae Park <sjpark@amazon.de>,
+        SeongJae Park <sj38.park@gmail.com>, acme@kernel.org,
+        amit@kernel.org, brendan.d.gregg@gmail.com,
+        Jonathan Corbet <corbet@lwn.net>, dwmw@amazon.com,
+        mgorman@suse.de, Steven Rostedt <rostedt@goodmis.org>,
+        kirill@shutemov.name, colin.king@canonical.com, minchan@kernel.org,
+        vdavydov.dev@gmail.com, vdavydov@parallels.com, linux-mm@kvack.org,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add kunit_shutdown, an option to specify that the kernel shutsdown after
-running KUnit tests, to the kernel-parameters.txt documentation.
+On Tue, Jan 28, 2020 at 12:58 AM <sjpark@amazon.com> wrote:
+>
+> From: SeongJae Park <sjpark@amazon.de>
+[...]
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 56765f542244..5a4db07cad33 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -4611,6 +4611,12 @@ F:       net/ax25/ax25_out.c
+>  F:     net/ax25/ax25_timer.c
+>  F:     net/ax25/sysctl_net_ax25.c
+>
+> +DATA ACCESS MONITOR
+> +M:     SeongJae Park <sjpark@amazon.de>
+> +L:     linux-mm@kvack.org
+> +S:     Maintained
+> +F:     mm/damon.c
+> +
 
-Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-Reviewed-by: Stephen Boyd <sboyd@kernel.org>
----
- Documentation/admin-guide/kernel-parameters.txt | 7 +++++++
- 1 file changed, 7 insertions(+)
+No one else has complained, so don't feel like you need to do it on my
+account, but I have had maintainers tell me that the MAINTAINERS
+update should be in its own patch and come at the end of the patchset.
+Up to you, but you might want to do it now if you are going to send
+another revision for other reasons.
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index ade4e6ec23e03..522fd8bdec949 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2054,6 +2054,13 @@
- 			0: force disabled
- 			1: force enabled
- 
-+	kunit_shutdown	[KERNEL UNIT TESTING FRAMEWORK] Shutdown kernel after
-+			running tests.
-+			Default:	(flag not present) don't shutdown
-+			poweroff:	poweroff the kernel after running tests
-+			halt:		halt the kernel after running tests
-+			reboot:		reboot the kernel after running tests
-+
- 	kvm.ignore_msrs=[KVM] Ignore guest accesses to unhandled MSRs.
- 			Default is 0 (don't ignore, but inject #GP)
- 
--- 
-2.25.0.341.g760bfbb309-goog
-
+>  DAVICOM FAST ETHERNET (DMFE) NETWORK DRIVER
+>  L:     netdev@vger.kernel.org
+>  S:     Orphan
+[...]
