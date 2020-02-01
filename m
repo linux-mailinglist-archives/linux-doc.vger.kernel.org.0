@@ -2,136 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A67214F62A
-	for <lists+linux-doc@lfdr.de>; Sat,  1 Feb 2020 04:41:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EC7F514F6DF
+	for <lists+linux-doc@lfdr.de>; Sat,  1 Feb 2020 07:25:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727236AbgBADkl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 31 Jan 2020 22:40:41 -0500
-Received: from hqnvemgate25.nvidia.com ([216.228.121.64]:11996 "EHLO
-        hqnvemgate25.nvidia.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727152AbgBADkl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 31 Jan 2020 22:40:41 -0500
-Received: from hqpgpgate101.nvidia.com (Not Verified[216.228.121.13]) by hqnvemgate25.nvidia.com (using TLS: TLSv1.2, DES-CBC3-SHA)
-        id <B5e34f3220003>; Fri, 31 Jan 2020 19:40:18 -0800
-Received: from hqmail.nvidia.com ([172.20.161.6])
-  by hqpgpgate101.nvidia.com (PGP Universal service);
-  Fri, 31 Jan 2020 19:40:39 -0800
-X-PGP-Universal: processed;
-        by hqpgpgate101.nvidia.com on Fri, 31 Jan 2020 19:40:39 -0800
-Received: from HQMAIL105.nvidia.com (172.20.187.12) by HQMAIL111.nvidia.com
- (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Sat, 1 Feb
- 2020 03:40:39 +0000
-Received: from rnnvemgw01.nvidia.com (10.128.109.123) by HQMAIL105.nvidia.com
- (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1473.3 via Frontend
- Transport; Sat, 1 Feb 2020 03:40:38 +0000
-Received: from blueforge.nvidia.com (Not Verified[10.110.48.28]) by rnnvemgw01.nvidia.com with Trustwave SEG (v7,5,8,10121)
-        id <B5e34f3360001>; Fri, 31 Jan 2020 19:40:38 -0800
-From:   John Hubbard <jhubbard@nvidia.com>
-To:     Andrew Morton <akpm@linux-foundation.org>
-CC:     Al Viro <viro@zeniv.linux.org.uk>,
-        Christoph Hellwig <hch@infradead.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Dave Chinner <david@fromorbit.com>,
-        Ira Weiny <ira.weiny@intel.com>, Jan Kara <jack@suse.cz>,
-        Jason Gunthorpe <jgg@ziepe.ca>,
+        id S1726106AbgBAGZL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 1 Feb 2020 01:25:11 -0500
+Received: from mail-pg1-f195.google.com ([209.85.215.195]:44694 "EHLO
+        mail-pg1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726038AbgBAGZL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 1 Feb 2020 01:25:11 -0500
+Received: by mail-pg1-f195.google.com with SMTP id x7so4751243pgl.11;
+        Fri, 31 Jan 2020 22:25:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kIoryQNxUONJRGtWLKxPO60ZclmbdJRMXHgfMgH0QP0=;
+        b=a8HWqdZZWAZLkD+sZxA1kKSsILlD5gmRvsj9U3v+N6blQBaQ+8VsYkBRyN7xZV/Zj4
+         7e+42qi6iFLM4tVW1fKuZqOFhF+3c0y7S/NOgM2K3ygTBYFWrXRjdIj8e6L+Qj2luhCd
+         6MPtjjhO85yBkBKTyI5eVqUUgLgmg1DnxeaIbYTmlJmlMrH4PZIzQ/ZUHJiK+1RaaZ7B
+         FLkJfGm0ziM2b/vVZDfB0ksKtHzSyx8kLGiHsqpZSPbVpQMmRL7tf4xD8y8cVDSkgTK7
+         pt53OK/25Adx6fP4LRYldqspO0DzKHwCz/Ssc/WTYbEbioyrSCU4Tfwcu+PRP/d4bd2O
+         sf1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kIoryQNxUONJRGtWLKxPO60ZclmbdJRMXHgfMgH0QP0=;
+        b=kgvk68jHXDCYIaUCfh8WlDZBE9ByD3EBgi5H8JQ8LmTsCJErnU8SPZCVhXdTS8Je5v
+         JjplsCZ3DoDcENxQ1uaJx7D6/uewFwKvt0oRxDXf3V27FAy3jH1q6tOQqU8lLNd5bXyH
+         k7olLJiE0MyMAd6dcmhreh3lvdw72uUCEdxcpoUCUcmmdCHpRzY/qE9kxx4uMGia1Iy4
+         /VhKP4P2MGZvfsQb8jXcjWM+ps5+x+sxHnMqeTKgQg2+4i3L9XJBQUWe0vktElijGv2/
+         fVKSiXZR4sqXPScMpGRwG4LGeZzSDZ/tV7X+2gdQ1Z4hMWiyPh65tfmXBOEXr8fcsXra
+         C0Qw==
+X-Gm-Message-State: APjAAAXdgCEoHJqOG4T4r2jdTirc+OtsDikjQ68QnVkDezyuAeiTqWyT
+        /DWqAURugH8Erch2qqItrOo=
+X-Google-Smtp-Source: APXvYqwxlkeYW4dDNOTkF37a/kTlbvpnPY0f7epfd8y8ApICp5cCAtiaLNv739Lg/+BCp8U9ypEpzg==
+X-Received: by 2002:a63:214e:: with SMTP id s14mr14017609pgm.428.1580538310445;
+        Fri, 31 Jan 2020 22:25:10 -0800 (PST)
+Received: from localhost.localdomain ([149.248.18.167])
+        by smtp.gmail.com with ESMTPSA id v4sm13191971pgo.63.2020.01.31.22.25.04
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 31 Jan 2020 22:25:09 -0800 (PST)
+From:   Changbin Du <changbin.du@gmail.com>
+To:     Andrey Ryabinin <aryabinin@virtuozzo.com>
+Cc:     Alexander Potapenko <glider@google.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        =?UTF-8?q?J=C3=A9r=C3=B4me=20Glisse?= <jglisse@redhat.com>,
-        "Kirill A . Shutemov" <kirill@shutemov.name>,
-        Michal Hocko <mhocko@suse.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Shuah Khan <shuah@kernel.org>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Matthew Wilcox <willy@infradead.org>,
-        <linux-doc@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
-        <linux-kselftest@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
-        <linux-mm@kvack.org>, LKML <linux-kernel@vger.kernel.org>,
-        John Hubbard <jhubbard@nvidia.com>
-Subject: [PATCH v3 12/12] selftests/vm: run_vmtests: invoke gup_benchmark with basic FOLL_PIN coverage
-Date:   Fri, 31 Jan 2020 19:40:29 -0800
-Message-ID: <20200201034029.4063170-13-jhubbard@nvidia.com>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200201034029.4063170-1-jhubbard@nvidia.com>
-References: <20200201034029.4063170-1-jhubbard@nvidia.com>
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        hpa@zytor.com, x86@kernel.org, Andy Lutomirski <luto@kernel.org>,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kbuild@vger.kernel.org, Changbin Du <changbin.du@gmail.com>
+Subject: [PATCH 0/2] Add SANITIZE_xx.o & SANITIZE and apply them to x86
+Date:   Sat,  1 Feb 2020 14:24:57 +0800
+Message-Id: <20200201062459.7150-1-changbin.du@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-X-NVConfidentiality: public
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
-        t=1580528418; bh=Q/jtf1QAQWUBdGa6x5cGwrQgIxtlzXz53YFDTgazJkU=;
-        h=X-PGP-Universal:From:To:CC:Subject:Date:Message-ID:X-Mailer:
-         In-Reply-To:References:MIME-Version:X-NVConfidentiality:
-         Content-Transfer-Encoding:Content-Type;
-        b=rPWspbRZ9wTXN6wzyKrT58WKFB8KhDBv5porhVCyZPlXhI8858oFjOKd9++Oz+P/R
-         T7WkXG/QPJrDbYbVVQPCebUWxMniLzpLek2L9lcTOgPYa0H3PMpkVERIB5uudRfxVP
-         OoC8eQLTQkQ+7f5DDq+u1/Jj8kzpYl+HvVZp0CFfici3rDYQBu1Lu/77EZcYF4F4ud
-         33Qsym32HTOs/YQR8/LUnFKgD17+VAiWdvuvqQSfyyW6wj63u3A+9bV1nxdbBvmoGz
-         uFqEbNg7eJpqijIdwc4bR2sf7KFsbbxpXvk+w1hNIC7F46x3+YS8A0c3iTrjknG3AL
-         VzbSdMNidSCJg==
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-It's good to have basic unit test coverage of the new FOLL_PIN
-behavior. Fortunately, the gup_benchmark unit test is extremely
-fast (a few milliseconds), so adding it the the run_vmtests suite
-is going to cause no noticeable change in running time.
+These two patches add SANITIZE_xx.o and SANITIZE to disable all sanitizers for
+specific files, and apply them to x86 booting code.
 
-So, add two new invocations to run_vmtests:
+We need to disable UBSAN for some of ealy stage code:
+ o For code which could operate in one-one mapping mode. In this case,
+   kernel would crash at accessing data parameter when invoking UBSAN
+   handlers.
+ o Since UBSAN handlers are instrumented by KASAN, so invoking UBSAN
+   handlers before KASAN is initiated also is not allowed.
 
-1) Run gup_benchmark with normal get_user_pages().
+Changbin Du (2):
+  sanitize: Add SANITIZE_xx.o and SANITIZE to disable all sanitizers for
+    specific files
+  x86: Disable both KASAN and UBSAN for some booting code
 
-2) Run gup_benchmark with pin_user_pages(). This is much like
-the first call, except that it sets FOLL_PIN.
+ Documentation/dev-tools/kasan.rst | 12 ++++++++++++
+ arch/x86/boot/Makefile            |  2 +-
+ arch/x86/boot/compressed/Makefile |  2 +-
+ arch/x86/entry/vdso/Makefile      |  3 +--
+ arch/x86/kernel/Makefile          | 10 +++++-----
+ arch/x86/lib/Makefile             |  2 +-
+ arch/x86/mm/Makefile              |  4 ++--
+ arch/x86/realmode/Makefile        |  2 +-
+ arch/x86/realmode/rm/Makefile     |  2 +-
+ scripts/Makefile.lib              |  4 ++--
+ 10 files changed, 27 insertions(+), 16 deletions(-)
 
-Running these two in quick succession also provide a visual
-comparison of the running times, which is convenient.
-
-The new invocations are fairly early in the run_vmtests script,
-because with test suites, it's usually preferable to put the
-shorter, faster tests first, all other things being equal.
-
-Reviewed-by: Ira Weiny <ira.weiny@intel.com>
-Signed-off-by: John Hubbard <jhubbard@nvidia.com>
----
- tools/testing/selftests/vm/run_vmtests | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
-
-diff --git a/tools/testing/selftests/vm/run_vmtests b/tools/testing/selftes=
-ts/vm/run_vmtests
-index a692ea828317..df6a6bf3f238 100755
---- a/tools/testing/selftests/vm/run_vmtests
-+++ b/tools/testing/selftests/vm/run_vmtests
-@@ -112,6 +112,28 @@ echo "NOTE: The above hugetlb tests provide minimal co=
-verage.  Use"
- echo "      https://github.com/libhugetlbfs/libhugetlbfs.git for"
- echo "      hugetlb regression testing."
-=20
-+echo "--------------------------------------------"
-+echo "running 'gup_benchmark -U' (normal/slow gup)"
-+echo "--------------------------------------------"
-+./gup_benchmark -U
-+if [ $? -ne 0 ]; then
-+	echo "[FAIL]"
-+	exitcode=3D1
-+else
-+	echo "[PASS]"
-+fi
-+
-+echo "------------------------------------------"
-+echo "running gup_benchmark -b (pin_user_pages)"
-+echo "------------------------------------------"
-+./gup_benchmark -b
-+if [ $? -ne 0 ]; then
-+	echo "[FAIL]"
-+	exitcode=3D1
-+else
-+	echo "[PASS]"
-+fi
-+
- echo "-------------------"
- echo "running userfaultfd"
- echo "-------------------"
---=20
-2.25.0
+-- 
+2.24.0
 
