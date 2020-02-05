@@ -2,407 +2,308 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D41B715380B
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2020 19:24:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D5D951539F1
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Feb 2020 22:07:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727517AbgBESXi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 5 Feb 2020 13:23:38 -0500
-Received: from mga09.intel.com ([134.134.136.24]:43407 "EHLO mga09.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727870AbgBESX3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 5 Feb 2020 13:23:29 -0500
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-  by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 05 Feb 2020 10:23:27 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,406,1574150400"; 
-   d="scan'208";a="343835209"
-Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
-  by fmsmga001.fm.intel.com with ESMTP; 05 Feb 2020 10:23:26 -0800
-From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
-To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        id S1727033AbgBEVHC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 5 Feb 2020 16:07:02 -0500
+Received: from mail-pl1-f196.google.com ([209.85.214.196]:44301 "EHLO
+        mail-pl1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727450AbgBEVHB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 5 Feb 2020 16:07:01 -0500
+Received: by mail-pl1-f196.google.com with SMTP id d9so1370773plo.11
+        for <linux-doc@vger.kernel.org>; Wed, 05 Feb 2020 13:06:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=51aeHheY/rt4DM+DW672ePDwXYA8QyYv8DwatD1TXuQ=;
+        b=LYYUZew3BwAE1xoByIz6JPLp2v+5cIbt1vVEbEqSwZU+daxgKZMqXXZNwDO/EaTk89
+         mefzudnZvyMQwVKqJBHBxwO1RvNhAupM3vfp2JZ3DQ9IdQeNS5iXI/3PVzYsCui3DGPj
+         7P3Q/vJL71vxTJcoskqAqh1emNeO13XS5W1DGsoywcadkfDagL33w7P5O8vZJh7wky6q
+         WmtHRCfKjsTkS9Sykv4FGUNUyJGu8Z8qxovwgVpr21LdlZRplwPHK7f0FFKzx2hqDm+V
+         tcRkyuNlVmcsvTiGRvHRtK34hPDDBz/R9Y+v2L0jqeFQky+scE8b0KIuMnI+V4AGNj/u
+         ZS6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=51aeHheY/rt4DM+DW672ePDwXYA8QyYv8DwatD1TXuQ=;
+        b=b0M9Eb9aErthoSg/h8Ihyy8jBVGxK+bjaGYY4AUFuGKjnK7cgNtLkzgRJqSa56Jk4q
+         RAM/cZ9gTw6qbddkwCOVO3usSGSP8anRHauXMBVdquTsX9tgG15PePR4KXBKDpvQ6Jph
+         m0Dy3MpRW0y63pHATGsi9La6sEUbX65cE9SXi/hhFhvGnA8Q6H3jzgXwR+SKM67NUvaS
+         eoXILuV8J7SizZgzolN1uwUOpPq7dTyt1rTwYcp1QQolN08J0HIQXfgATA6dPY4Oj0hU
+         zHZvHXmkOB+b6M197K1Hje/CZEco63VcZbHHfq1y2mjmwkN7kUHmV06PeZdWF4xnHArs
+         MQ5Q==
+X-Gm-Message-State: APjAAAWb+D6WaHoxLX8Ku+u9I1eFiaPnW6g6m3U/UEHoBMQglYvBhAHE
+        CRdSq+j4NqBZt0HgzpiRpYVW7w==
+X-Google-Smtp-Source: APXvYqz/259/Z0l+PdxYDVyZ4ffYq1mmxbp7AAs1jQ1DpAGMP1eIJKwJWmu0jT4pXZZ76v93octxJw==
+X-Received: by 2002:a17:90a:8685:: with SMTP id p5mr103015pjn.92.1580936819090;
+        Wed, 05 Feb 2020 13:06:59 -0800 (PST)
+Received: from xps15 (S0106002369de4dac.cg.shawcable.net. [68.147.8.254])
+        by smtp.gmail.com with ESMTPSA id 199sm420457pfv.81.2020.02.05.13.06.56
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 05 Feb 2020 13:06:58 -0800 (PST)
+Date:   Wed, 5 Feb 2020 14:06:55 -0700
+From:   Mathieu Poirier <mathieu.poirier@linaro.org>
+To:     Clement Leger <cleger@kalray.eu>
+Cc:     Ohad Ben-Cohen <ohad@wizery.com>,
+        Bjorn Andersson <bjorn.andersson@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>, x86-patch-review@intel.com
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
-Subject: [RFC PATCH v9 7/7] x86/cet/ibt: Introduce arch_prctl(ARCH_X86_CET_MARK_LEGACY_CODE)
-Date:   Wed,  5 Feb 2020 10:23:08 -0800
-Message-Id: <20200205182308.4028-8-yu-cheng.yu@intel.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20200205182308.4028-1-yu-cheng.yu@intel.com>
-References: <20200205182308.4028-1-yu-cheng.yu@intel.com>
+        Shawn Guo <shawnguo@kernel.org>,
+        Sascha Hauer <s.hauer@pengutronix.de>,
+        linux-remoteproc@vger.kernel.org,
+        Pengutronix Kernel Team <kernel@pengutronix.de>,
+        Fabio Estevam <festevam@gmail.com>,
+        NXP Linux Team <linux-imx@nxp.com>,
+        Andy Gross <agross@kernel.org>,
+        Patrice Chotard <patrice.chotard@st.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-arm-msm@vger.kernel.org,
+        Arnaud Pouliquen <arnaud.pouliquen@st.com>,
+        Loic PALLARDY <loic.pallardy@st.com>, s-anna <s-anna@ti.com>
+Subject: Re: [PATCH v3 1/2] remoteproc: Use u64 len for da_to_va
+Message-ID: <20200205210655.GA25901@xps15>
+References: <20200129163013.GA16538@xps15>
+ <20200204174412.16814-1-cleger@kalray.eu>
+ <20200204174412.16814-2-cleger@kalray.eu>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200204174412.16814-2-cleger@kalray.eu>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When Indirect Branch Tracking (IBT) is active, non-IBT-compatible legacy
-code can be executed if its address range is specified in the legacy code
-bitmap.  Each bit in the bitmap indicates a 4-KB legacy code page.
+Hi Clement,
 
-The bitmap is allocated when the first time an application calls
-arch_prctl(ARCH_X86_MARK_LEGACY_CODE).  It is setup as a special mapping.
-The application can read the bitmap but not write to; it manages the bitmap
-with the arch_prctl() being introduced:
+On Tue, Feb 04, 2020 at 06:44:11PM +0100, Clement Leger wrote:
+> With upcoming changes in elf loader for elf64 support, section size will
+> be a u64. When used with da_to_va, this will potentially lead to
+> overflow if using the current "int" type for len argument. Change
+> da_to_va prototype to use a u64 for len and fix all users of this
+> function.
+> 
+> Signed-off-by: Clement Leger <cleger@kalray.eu>
+> ---
+>  drivers/remoteproc/imx_rproc.c           | 9 +++++----
+>  drivers/remoteproc/keystone_remoteproc.c | 2 +-
+>  drivers/remoteproc/qcom_q6v5_adsp.c      | 2 +-
+>  drivers/remoteproc/qcom_q6v5_mss.c       | 2 +-
+>  drivers/remoteproc/qcom_q6v5_pas.c       | 2 +-
+>  drivers/remoteproc/qcom_q6v5_wcss.c      | 2 +-
+>  drivers/remoteproc/qcom_wcnss.c          | 2 +-
+>  drivers/remoteproc/remoteproc_core.c     | 2 +-
+>  drivers/remoteproc/remoteproc_internal.h | 2 +-
+>  drivers/remoteproc/st_slim_rproc.c       | 4 ++--
+>  drivers/remoteproc/wkup_m3_rproc.c       | 2 +-
+>  include/linux/remoteproc.h               | 2 +-
+>  12 files changed, 17 insertions(+), 16 deletions(-)
+> 
+> diff --git a/drivers/remoteproc/imx_rproc.c b/drivers/remoteproc/imx_rproc.c
+> index 3e72b6f38d4b..1e895d5cf918 100644
+> --- a/drivers/remoteproc/imx_rproc.c
+> +++ b/drivers/remoteproc/imx_rproc.c
+> @@ -186,7 +186,7 @@ static int imx_rproc_stop(struct rproc *rproc)
+>  }
+>  
+>  static int imx_rproc_da_to_sys(struct imx_rproc *priv, u64 da,
+> -			       int len, u64 *sys)
+> +			       u64 len, u64 *sys)
+>  {
+>  	const struct imx_rproc_dcfg *dcfg = priv->dcfg;
+>  	int i;
+> @@ -203,12 +203,12 @@ static int imx_rproc_da_to_sys(struct imx_rproc *priv, u64 da,
+>  		}
+>  	}
+>  
+> -	dev_warn(priv->dev, "Translation failed: da = 0x%llx len = 0x%x\n",
+> +	dev_warn(priv->dev, "Translation failed: da = 0x%llx len = 0x%llx\n",
+>  		 da, len);
+>  	return -ENOENT;
+>  }
+>  
+> -static void *imx_rproc_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *imx_rproc_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
+>  	struct imx_rproc *priv = rproc->priv;
+>  	void *va = NULL;
 
-arch_prctl(ARCH_X86_CET_MARK_LEGACY_CODE, unsigned long *buf)
-    Mark an address range as IBT legacy code.
+The condition "if (len <= 0)" at the beginning of the function needs to be
+fixed.  
 
-    *buf: starting linear address
-    *(buf + 1): size of the legacy code
-    *(buf + 2): set (1); clear (0)
 
-v9:
-- Split out special mapping zero page handling to the previous patch.
-- Change the bitmap from a pre-defined address to get_unmapped_area().
+> @@ -235,7 +235,8 @@ static void *imx_rproc_da_to_va(struct rproc *rproc, u64 da, int len)
+>  		}
+>  	}
+>  
+> -	dev_dbg(&rproc->dev, "da = 0x%llx len = 0x%x va = 0x%p\n", da, len, va);
+> +	dev_dbg(&rproc->dev, "da = 0x%llx len = 0x%llx va = 0x%p\n",
+> +		da, len, va);
+>  
+>  	return va;
+>  }
+> diff --git a/drivers/remoteproc/keystone_remoteproc.c b/drivers/remoteproc/keystone_remoteproc.c
+> index 5c4658f00b3d..25c01df47eba 100644
+> --- a/drivers/remoteproc/keystone_remoteproc.c
+> +++ b/drivers/remoteproc/keystone_remoteproc.c
+> @@ -246,7 +246,7 @@ static void keystone_rproc_kick(struct rproc *rproc, int vqid)
+>   * can be used either by the remoteproc core for loading (when using kernel
+>   * remoteproc loader), or by any rpmsg bus drivers.
+>   */
+> -static void *keystone_rproc_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *keystone_rproc_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
 
-v8:
-- Change legacy bitmap to a special mapping.
+Same comment as above.
 
-Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
----
- arch/x86/include/asm/cet.h        |   2 +
- arch/x86/include/uapi/asm/prctl.h |   3 +
- arch/x86/kernel/Makefile          |   2 +-
- arch/x86/kernel/cet_bitmap.c      | 226 ++++++++++++++++++++++++++++++
- arch/x86/kernel/cet_prctl.c       |  15 ++
- 5 files changed, 247 insertions(+), 1 deletion(-)
- create mode 100644 arch/x86/kernel/cet_bitmap.c
+>  	struct keystone_rproc *ksproc = rproc->priv;
+>  	void __iomem *va = NULL;
+> diff --git a/drivers/remoteproc/qcom_q6v5_adsp.c b/drivers/remoteproc/qcom_q6v5_adsp.c
+> index e953886b2eb7..7518e67a49e5 100644
+> --- a/drivers/remoteproc/qcom_q6v5_adsp.c
+> +++ b/drivers/remoteproc/qcom_q6v5_adsp.c
+> @@ -270,7 +270,7 @@ static int adsp_stop(struct rproc *rproc)
+>  	return ret;
+>  }
+>  
+> -static void *adsp_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *adsp_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
+>  	struct qcom_adsp *adsp = (struct qcom_adsp *)rproc->priv;
+>  	int offset;
+> diff --git a/drivers/remoteproc/qcom_q6v5_mss.c b/drivers/remoteproc/qcom_q6v5_mss.c
+> index 471128a2e723..248febde6fc1 100644
+> --- a/drivers/remoteproc/qcom_q6v5_mss.c
+> +++ b/drivers/remoteproc/qcom_q6v5_mss.c
+> @@ -1148,7 +1148,7 @@ static int q6v5_stop(struct rproc *rproc)
+>  	return 0;
+>  }
+>  
+> -static void *q6v5_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *q6v5_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
+>  	struct q6v5 *qproc = rproc->priv;
+>  	int offset;
+> diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
+> index db4b3c4bacd7..cf2cd609c90d 100644
+> --- a/drivers/remoteproc/qcom_q6v5_pas.c
+> +++ b/drivers/remoteproc/qcom_q6v5_pas.c
+> @@ -159,7 +159,7 @@ static int adsp_stop(struct rproc *rproc)
+>  	return ret;
+>  }
+>  
+> -static void *adsp_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *adsp_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
+>  	struct qcom_adsp *adsp = (struct qcom_adsp *)rproc->priv;
+>  	int offset;
+> diff --git a/drivers/remoteproc/qcom_q6v5_wcss.c b/drivers/remoteproc/qcom_q6v5_wcss.c
+> index f93e1e4a1cc0..3a6b82a16961 100644
+> --- a/drivers/remoteproc/qcom_q6v5_wcss.c
+> +++ b/drivers/remoteproc/qcom_q6v5_wcss.c
+> @@ -406,7 +406,7 @@ static int q6v5_wcss_stop(struct rproc *rproc)
+>  	return 0;
+>  }
+>  
+> -static void *q6v5_wcss_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *q6v5_wcss_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
+>  	struct q6v5_wcss *wcss = rproc->priv;
+>  	int offset;
+> diff --git a/drivers/remoteproc/qcom_wcnss.c b/drivers/remoteproc/qcom_wcnss.c
+> index dc135754bb9c..f893219e45a8 100644
+> --- a/drivers/remoteproc/qcom_wcnss.c
+> +++ b/drivers/remoteproc/qcom_wcnss.c
+> @@ -287,7 +287,7 @@ static int wcnss_stop(struct rproc *rproc)
+>  	return ret;
+>  }
+>  
+> -static void *wcnss_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *wcnss_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
+>  	struct qcom_wcnss *wcnss = (struct qcom_wcnss *)rproc->priv;
+>  	int offset;
+> diff --git a/drivers/remoteproc/remoteproc_core.c b/drivers/remoteproc/remoteproc_core.c
+> index 307df98347ba..9e6d3c6a60ee 100644
+> --- a/drivers/remoteproc/remoteproc_core.c
+> +++ b/drivers/remoteproc/remoteproc_core.c
+> @@ -185,7 +185,7 @@ EXPORT_SYMBOL(rproc_va_to_pa);
+>   * here the output of the DMA API for the carveouts, which should be more
+>   * correct.
+>   */
+> -void *rproc_da_to_va(struct rproc *rproc, u64 da, int len)
+> +void *rproc_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
+>  	struct rproc_mem_entry *carveout;
+>  	void *ptr = NULL;
+> diff --git a/drivers/remoteproc/remoteproc_internal.h b/drivers/remoteproc/remoteproc_internal.h
+> index 493ef9262411..004867061721 100644
+> --- a/drivers/remoteproc/remoteproc_internal.h
+> +++ b/drivers/remoteproc/remoteproc_internal.h
+> @@ -50,7 +50,7 @@ void rproc_exit_sysfs(void);
+>  void rproc_free_vring(struct rproc_vring *rvring);
+>  int rproc_alloc_vring(struct rproc_vdev *rvdev, int i);
+>  
+> -void *rproc_da_to_va(struct rproc *rproc, u64 da, int len);
+> +void *rproc_da_to_va(struct rproc *rproc, u64 da, u64 len);
+>  phys_addr_t rproc_va_to_pa(void *cpu_addr);
+>  int rproc_trigger_recovery(struct rproc *rproc);
+>  
+> diff --git a/drivers/remoteproc/st_slim_rproc.c b/drivers/remoteproc/st_slim_rproc.c
+> index 04492fead3c8..fc01cd879b60 100644
+> --- a/drivers/remoteproc/st_slim_rproc.c
+> +++ b/drivers/remoteproc/st_slim_rproc.c
+> @@ -174,7 +174,7 @@ static int slim_rproc_stop(struct rproc *rproc)
+>  	return 0;
+>  }
+>  
+> -static void *slim_rproc_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *slim_rproc_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
+>  	struct st_slim_rproc *slim_rproc = rproc->priv;
+>  	void *va = NULL;
+> @@ -191,7 +191,7 @@ static void *slim_rproc_da_to_va(struct rproc *rproc, u64 da, int len)
+>  		}
+>  	}
+>  
+> -	dev_dbg(&rproc->dev, "da = 0x%llx len = 0x%x va = 0x%pK\n",
+> +	dev_dbg(&rproc->dev, "da = 0x%llx len = 0x%llx va = 0x%pK\n",
+>  		da, len, va);
+>  
+>  	return va;
+> diff --git a/drivers/remoteproc/wkup_m3_rproc.c b/drivers/remoteproc/wkup_m3_rproc.c
+> index 3984e585c847..0e8082948489 100644
+> --- a/drivers/remoteproc/wkup_m3_rproc.c
+> +++ b/drivers/remoteproc/wkup_m3_rproc.c
+> @@ -80,7 +80,7 @@ static int wkup_m3_rproc_stop(struct rproc *rproc)
+>  	return 0;
+>  }
+>  
+> -static void *wkup_m3_rproc_da_to_va(struct rproc *rproc, u64 da, int len)
+> +static void *wkup_m3_rproc_da_to_va(struct rproc *rproc, u64 da, u64 len)
+>  {
 
-diff --git a/arch/x86/include/asm/cet.h b/arch/x86/include/asm/cet.h
-index d3f0d50d51ec..a9677bcdeb5c 100644
---- a/arch/x86/include/asm/cet.h
-+++ b/arch/x86/include/asm/cet.h
-@@ -4,6 +4,7 @@
- 
- #ifndef __ASSEMBLY__
- #include <linux/types.h>
-+#include <asm/processor.h>
- 
- struct task_struct;
- struct sc_ext;
-@@ -30,6 +31,7 @@ void cet_disable_free_shstk(struct task_struct *p);
- int cet_restore_signal(bool ia32, struct sc_ext *sc);
- int cet_setup_signal(bool ia32, unsigned long rstor, struct sc_ext *sc);
- int cet_setup_ibt(void);
-+int cet_mark_legacy_code(unsigned long addr, unsigned long size, unsigned long set);
- void cet_disable_ibt(void);
- #else
- static inline int prctl_cet(int option, unsigned long arg2) { return -EINVAL; }
-diff --git a/arch/x86/include/uapi/asm/prctl.h b/arch/x86/include/uapi/asm/prctl.h
-index d962f0ec9ccf..da39d4bde4e1 100644
---- a/arch/x86/include/uapi/asm/prctl.h
-+++ b/arch/x86/include/uapi/asm/prctl.h
-@@ -18,5 +18,8 @@
- #define ARCH_X86_CET_DISABLE		0x3002
- #define ARCH_X86_CET_LOCK		0x3003
- #define ARCH_X86_CET_ALLOC_SHSTK	0x3004
-+#define ARCH_X86_CET_GET_LEGACY_BITMAP	0x3005 /* deprecated */
-+#define ARCH_X86_CET_SET_LEGACY_BITMAP	0x3006 /* deprecated */
-+#define ARCH_X86_CET_MARK_LEGACY_CODE	0x3007
- 
- #endif /* _ASM_X86_PRCTL_H */
-diff --git a/arch/x86/kernel/Makefile b/arch/x86/kernel/Makefile
-index 69a19957e200..0261ea015e45 100644
---- a/arch/x86/kernel/Makefile
-+++ b/arch/x86/kernel/Makefile
-@@ -142,7 +142,7 @@ obj-$(CONFIG_UNWINDER_ORC)		+= unwind_orc.o
- obj-$(CONFIG_UNWINDER_FRAME_POINTER)	+= unwind_frame.o
- obj-$(CONFIG_UNWINDER_GUESS)		+= unwind_guess.o
- 
--obj-$(CONFIG_X86_INTEL_CET)		+= cet.o cet_prctl.o
-+obj-$(CONFIG_X86_INTEL_CET)		+= cet.o cet_prctl.o cet_bitmap.o
- 
- ###
- # 64 bit specific files
-diff --git a/arch/x86/kernel/cet_bitmap.c b/arch/x86/kernel/cet_bitmap.c
-new file mode 100644
-index 000000000000..2c9e76f9b3f6
---- /dev/null
-+++ b/arch/x86/kernel/cet_bitmap.c
-@@ -0,0 +1,226 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+
-+#include <linux/bits.h>
-+#include <linux/err.h>
-+#include <linux/memcontrol.h>
-+#include <linux/mm.h>
-+#include <linux/mman.h>
-+#include <linux/oom.h>
-+#include <linux/pagemap.h>
-+#include <linux/rmap.h>
-+#include <linux/swap.h>
-+#include <asm/cet.h>
-+#include <asm/fpu/internal.h>
-+
-+#define MMAP_MAX	(unsigned long)(test_thread_flag(TIF_ADDR32) ? \
-+				TASK_SIZE : TASK_SIZE_MAX)
-+#define IBT_BITMAP_SIZE	(round_up(MMAP_MAX, PAGE_SIZE * BITS_PER_BYTE) / \
-+				(PAGE_SIZE * BITS_PER_BYTE))
-+
-+/*
-+ * For read fault, provide the zero page.  For write fault coming from
-+ * get_user_pages(), clear the page already allocated.
-+ */
-+static vm_fault_t bitmap_fault(const struct vm_special_mapping *sm,
-+			       struct vm_area_struct *vma, struct vm_fault *vmf)
-+{
-+	if (!(vmf->flags & FAULT_FLAG_WRITE)) {
-+		vmf->page = ZERO_PAGE(vmf->address);
-+		return 0;
-+	} else {
-+		vm_fault_t r;
-+
-+		if (!vmf->cow_page)
-+			return VM_FAULT_ERROR;
-+
-+		clear_user_highpage(vmf->cow_page, vmf->address);
-+		__SetPageUptodate(vmf->cow_page);
-+		r = finish_fault(vmf);
-+		return r ? r : VM_FAULT_DONE_COW;
-+	}
-+}
-+
-+static int bitmap_mremap(const struct vm_special_mapping *sm,
-+			 struct vm_area_struct *vma)
-+{
-+	return -EINVAL;
-+}
-+
-+static const struct vm_special_mapping bitmap_mapping = {
-+	.name	= "[ibt_bitmap]",
-+	.fault	= bitmap_fault,
-+	.mremap	= bitmap_mremap,
-+};
-+
-+static int alloc_bitmap(void)
-+{
-+	struct mm_struct *mm = current->mm;
-+	struct vm_area_struct *vma;
-+	unsigned long addr;
-+	u64 msr_val;
-+	int r = 0;
-+
-+	if (down_write_killable(&mm->mmap_sem))
-+		return -EINTR;
-+
-+	addr = get_unmapped_area(NULL, 0, IBT_BITMAP_SIZE, 0, 0);
-+	if (IS_ERR_VALUE(addr)) {
-+		up_write(&mm->mmap_sem);
-+		return PTR_ERR((void *)addr);
-+	}
-+
-+	vma = _install_special_mapping(mm, addr, IBT_BITMAP_SIZE,
-+				       VM_READ | VM_MAYREAD | VM_MAYWRITE,
-+				       &bitmap_mapping);
-+
-+	if (IS_ERR(vma))
-+		r = PTR_ERR(vma);
-+
-+	up_write(&mm->mmap_sem);
-+
-+	if (r)
-+		return r;
-+
-+	fpregs_lock();
-+	if (test_thread_flag(TIF_NEED_FPU_LOAD))
-+		__fpregs_load_activate();
-+
-+	rdmsrl(MSR_IA32_U_CET, msr_val);
-+	msr_val |= (addr | MSR_IA32_CET_LEG_IW_EN);
-+	wrmsrl(MSR_IA32_U_CET, msr_val);
-+	fpregs_unlock();
-+	current->thread.cet.ibt_bitmap_used = 1;
-+	current->thread.cet.ibt_bitmap_base = addr;
-+	return 0;
-+}
-+
-+/*
-+ * Set bits in the IBT legacy code bitmap, which is read-only user memory.
-+ */
-+static int set_bits(unsigned long start_bit, unsigned long end_bit,
-+		    unsigned long set)
-+{
-+	unsigned long start_ul, end_ul, nr_ul;
-+	unsigned long start_ul_addr, tmp_addr, len;
-+	int i, j;
-+
-+	start_ul = start_bit / BITS_PER_LONG;
-+	end_ul = end_bit / BITS_PER_LONG;
-+	i = start_bit % BITS_PER_LONG;
-+	j = end_bit % BITS_PER_LONG;
-+
-+	tmp_addr = current->thread.cet.ibt_bitmap_base;
-+	start_ul_addr = tmp_addr + start_ul * sizeof(0UL);
-+	nr_ul = end_ul - start_ul + 1;
-+
-+	tmp_addr = start_ul_addr;
-+	len = nr_ul * sizeof(0UL);
-+
-+	down_read(&current->mm->mmap_sem);
-+	while (len) {
-+		unsigned long *first, *last, mask, bytes;
-+		int ret, offset;
-+		void *kern_page_addr;
-+		struct page *page = NULL;
-+
-+		ret = get_user_pages(tmp_addr, 1, FOLL_WRITE | FOLL_FORCE,
-+				     &page, NULL);
-+
-+		if (ret <= 0) {
-+			up_read(&current->mm->mmap_sem);
-+			return ret;
-+		}
-+
-+		kern_page_addr = kmap(page);
-+
-+		bytes = len;
-+		offset = tmp_addr & (PAGE_SIZE - 1);
-+
-+		/* Is end_ul in this page? */
-+		if (bytes > (PAGE_SIZE - offset)) {
-+			bytes = PAGE_SIZE - offset;
-+			last = NULL;
-+		} else {
-+			last = (unsigned long *)(kern_page_addr + offset + bytes) - 1;
-+		}
-+
-+		/* Is start_ul in this page? */
-+		if (tmp_addr == start_ul_addr)
-+			first = (unsigned long *)(kern_page_addr + offset);
-+		else
-+			first = NULL;
-+
-+		if (nr_ul == 1) {
-+			mask = GENMASK(j, i);
-+
-+			if (set)
-+				*first |= mask;
-+			else
-+				*first &= ~mask;
-+		} else {
-+			if (first) {
-+				mask = GENMASK(BITS_PER_LONG - 1, i);
-+
-+				if (set)
-+					*first |= mask;
-+				else
-+					*first &= ~mask;
-+			}
-+
-+			if (last) {
-+				mask = GENMASK(j, 0);
-+
-+				if (set)
-+					*last |= mask;
-+				else
-+					*last &= ~mask;
-+			}
-+
-+			if (nr_ul > 2) {
-+				void *p = kern_page_addr + offset;
-+				int cnt = bytes;
-+
-+				if (first) {
-+					p += sizeof(*first);
-+					cnt -= sizeof(*first);
-+				}
-+
-+				if (last)
-+					cnt -= sizeof(*last);
-+
-+				if (set)
-+					memset(p, 0xff, cnt);
-+				else
-+					memset(p, 0, cnt);
-+			}
-+		}
-+
-+		set_page_dirty_lock(page);
-+		kunmap(page);
-+		put_page(page);
-+
-+		len -= bytes;
-+		tmp_addr += bytes;
-+	}
-+	up_read(&current->mm->mmap_sem);
-+	return 0;
-+}
-+
-+int cet_mark_legacy_code(unsigned long addr, unsigned long size, unsigned long set)
-+{
-+	int r;
-+
-+	if (!current->thread.cet.ibt_enabled)
-+		return -EINVAL;
-+
-+	if ((addr >= MMAP_MAX) || (addr + size > MMAP_MAX))
-+		return -EINVAL;
-+
-+	if (!current->thread.cet.ibt_bitmap_used) {
-+		r = alloc_bitmap();
-+		if (r)
-+			return r;
-+	}
-+
-+	return set_bits(addr / PAGE_SIZE, (addr + size - 1) / PAGE_SIZE, set);
-+}
-diff --git a/arch/x86/kernel/cet_prctl.c b/arch/x86/kernel/cet_prctl.c
-index 2a3170786a3b..3fa5ce8d4938 100644
---- a/arch/x86/kernel/cet_prctl.c
-+++ b/arch/x86/kernel/cet_prctl.c
-@@ -54,6 +54,18 @@ static int handle_alloc_shstk(unsigned long arg2)
- 	return 0;
- }
- 
-+static int handle_mark_legacy_code(unsigned long arg2)
-+{
-+	unsigned long addr, size, set;
-+
-+	if (get_user(addr, (unsigned long __user *)arg2) ||
-+	    get_user(size, (unsigned long __user *)arg2 + 1) ||
-+	    get_user(set, (unsigned long __user *)arg2 + 2))
-+		return -EFAULT;
-+
-+	return cet_mark_legacy_code(addr, size, set);
-+}
-+
- int prctl_cet(int option, unsigned long arg2)
- {
- 	struct cet_status *cet = &current->thread.cet;
-@@ -82,6 +94,9 @@ int prctl_cet(int option, unsigned long arg2)
- 	case ARCH_X86_CET_ALLOC_SHSTK:
- 		return handle_alloc_shstk(arg2);
- 
-+	case ARCH_X86_CET_MARK_LEGACY_CODE:
-+		return handle_mark_legacy_code(arg2);
-+
- 	default:
- 		return -EINVAL;
- 	}
--- 
-2.21.0
+Same comment as above.
 
+>  	struct wkup_m3_rproc *wkupm3 = rproc->priv;
+>  	void *va = NULL;
+> diff --git a/include/linux/remoteproc.h b/include/linux/remoteproc.h
+> index 16ad66683ad0..f84bd5fe0211 100644
+> --- a/include/linux/remoteproc.h
+> +++ b/include/linux/remoteproc.h
+> @@ -374,7 +374,7 @@ struct rproc_ops {
+>  	int (*start)(struct rproc *rproc);
+>  	int (*stop)(struct rproc *rproc);
+>  	void (*kick)(struct rproc *rproc, int vqid);
+> -	void * (*da_to_va)(struct rproc *rproc, u64 da, int len);
+> +	void * (*da_to_va)(struct rproc *rproc, u64 da, u64 len);
+>  	int (*parse_fw)(struct rproc *rproc, const struct firmware *fw);
+>  	int (*handle_rsc)(struct rproc *rproc, u32 rsc_type, void *rsc,
+>  			  int offset, int avail);
+> -- 
+> 2.15.0.276.g89ea799
+> 
