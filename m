@@ -2,31 +2,31 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id F0E1B1547A0
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2020 16:18:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1B83C1547BB
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2020 16:19:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727821AbgBFPS2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Feb 2020 10:18:28 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:38146 "EHLO
+        id S1727921AbgBFPSx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Feb 2020 10:18:53 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:38080 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727600AbgBFPSA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Feb 2020 10:18:00 -0500
+        with ESMTP id S1727567AbgBFPR7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Feb 2020 10:17:59 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
         MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
         Reply-To:Content-Type:Content-ID:Content-Description;
-        bh=TDw4+n6xFIkIZr6/PMan7IvWXuztzHBg7QOOp1nQd6U=; b=tyrOorZGg0l/BAcXz//a1S6VmB
-        AHc1UDlvIBDN1MUiIG0StZ1YKBfgyBLYKBSOEfTQ6ForLgpKnFh+nxaacZwGL/Z94KB779y1I/UW0
-        XDMYScpzS1mJ5Uw4DIBg2WTuRNO1kUJCEJEucUFRSc8E3mQ6ko3N54wColDvdlMPi2SqVa3SBQv2S
-        bjXhW2DOFuU74Z++DCsmssYt3hyw1HXowaS+1ErYB0/AuGfFFxRVHgQWAPfOgGUcquorhNmZQMWDA
-        7qjSWYVT9Ye9/AZD9Qo+U2xVFcP5I0+bjfJij+m6WvFS4ve35WzW0JtWB65hYrJa8lj0lufC/d2ZE
-        4AsiTcgA==;
+        bh=QgU2YXtK8JhIR8sXlz9vfHZraerok3TnGVbMXzCh8os=; b=TzbiuPkJqsGKqG8F7imLQjjC9B
+        yVa4lGO0gd7dsYvu+807KcFSRv7rqyVQwSAskmsOCRBSJ0NPleA1uTB8CVxFlPzENQFy5mJ+4Rok8
+        hhA1vgIbvXJ5VW9xenneNqdRhNrsBOfAk4ZmfOlAvDlwru3TXV09hqSENT9ow2IJCc31vNTiPT8lk
+        UA7MiUq6loUfx2+PvnhJ6Sv6MaztRvqX1iCsm5mxJdjXt72C+FIpnkPthM3uUySI/ATbVavUwjLko
+        19GEym0hL3C/ZwhJ2JKfu4TM+FLjYgzAtu2qODYzT4ZiFruljkrf9y43b/j9KJbsfautF/G2+X/UJ
+        sPy5eJTQ==;
 Received: from [179.95.15.160] (helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1iziul-0005jP-Ib; Thu, 06 Feb 2020 15:18:00 +0000
+        id 1iziuk-0005jM-WC; Thu, 06 Feb 2020 15:17:59 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1iziud-002oVJ-3l; Thu, 06 Feb 2020 16:17:51 +0100
+        id 1iziud-002oVR-6t; Thu, 06 Feb 2020 16:17:51 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Media Mailing List <linux-media@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
@@ -35,9 +35,9 @@ Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         Jakub Kicinski <kuba@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>, netdev@vger.kernel.org,
         linux-doc@vger.kernel.org
-Subject: [PATCH 09/28] docs: networking: convert baycom.txt to ReST
-Date:   Thu,  6 Feb 2020 16:17:29 +0100
-Message-Id: <14095ed618a5e64460923da48236bfc6d8943e5a.1581002063.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 11/28] docs: networking: convert cdc_mbim.txt to ReST
+Date:   Thu,  6 Feb 2020 16:17:31 +0100
+Message-Id: <f671aae2b28bd65a879e164d40fce9e52b96199a.1581002063.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <cover.1581002062.git.mchehab+huawei@kernel.org>
 References: <cover.1581002062.git.mchehab+huawei@kernel.org>
@@ -49,228 +49,227 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 - add SPDX header;
-- adjust titles and chapters, adding proper markups;
 - mark code blocks and literals as such;
-- mark tables as such;
+- use :field: markup;
 - adjust identation, whitespaces and blank lines;
 - add to networking/index.rst.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- .../networking/{baycom.txt => baycom.rst}     | 110 ++++++++++--------
- Documentation/networking/index.rst            |   1 +
- 2 files changed, 64 insertions(+), 47 deletions(-)
- rename Documentation/networking/{baycom.txt => baycom.rst} (58%)
+ .../networking/{cdc_mbim.txt => cdc_mbim.rst} | 76 +++++++++++--------
+ Documentation/networking/index.rst            |  1 +
+ 2 files changed, 47 insertions(+), 30 deletions(-)
+ rename Documentation/networking/{cdc_mbim.txt => cdc_mbim.rst} (88%)
 
-diff --git a/Documentation/networking/baycom.txt b/Documentation/networking/baycom.rst
-similarity index 58%
-rename from Documentation/networking/baycom.txt
-rename to Documentation/networking/baycom.rst
-index 688f18fd4467..fe2d010f0e86 100644
---- a/Documentation/networking/baycom.txt
-+++ b/Documentation/networking/baycom.rst
-@@ -1,26 +1,31 @@
--		    LINUX DRIVERS FOR BAYCOM MODEMS
+diff --git a/Documentation/networking/cdc_mbim.txt b/Documentation/networking/cdc_mbim.rst
+similarity index 88%
+rename from Documentation/networking/cdc_mbim.txt
+rename to Documentation/networking/cdc_mbim.rst
+index 4e68f0bc5dba..0048409c06b4 100644
+--- a/Documentation/networking/cdc_mbim.txt
++++ b/Documentation/networking/cdc_mbim.rst
+@@ -1,5 +1,8 @@
+-     cdc_mbim - Driver for CDC MBIM Mobile Broadband modems
+-    ========================================================
 +.. SPDX-License-Identifier: GPL-2.0
- 
--       Thomas M. Sailer, HB9JNX/AE4WA, <sailer@ife.ee.ethz.ch>
-+===============================
-+Linux Drivers for Baycom Modems
-+===============================
- 
--!!NEW!! (04/98) The drivers for the baycom modems have been split into
-+Thomas M. Sailer, HB9JNX/AE4WA, <sailer@ife.ee.ethz.ch>
 +
-+The drivers for the baycom modems have been split into
- separate drivers as they did not share any code, and the driver
- and device names have changed.
++======================================================
++cdc_mbim - Driver for CDC MBIM Mobile Broadband modems
++======================================================
  
- This document describes the Linux Kernel Drivers for simple Baycom style
--amateur radio modems. 
-+amateur radio modems.
+ The cdc_mbim driver supports USB devices conforming to the "Universal
+ Serial Bus Communications Class Subclass Specification for Mobile
+@@ -19,9 +22,9 @@ by a cdc_ncm driver parameter:
  
- The following drivers are available:
-+====================================
+ prefer_mbim
+ -----------
+-Type:          Boolean
+-Valid Range:   N/Y (0-1)
+-Default Value: Y (MBIM is preferred)
++:Type:          Boolean
++:Valid Range:   N/Y (0-1)
++:Default Value: Y (MBIM is preferred)
  
- baycom_ser_fdx:
-   This driver supports the SER12 modems either full or half duplex.
--  Its baud rate may be changed via the `baud' module parameter,
-+  Its baud rate may be changed via the ``baud`` module parameter,
-   therefore it supports just about every bit bang modem on a
-   serial port. Its devices are called bcsf0 through bcsf3.
-   This is the recommended driver for SER12 type modems,
-   however if you have a broken UART clone that does not have working
--  delta status bits, you may try baycom_ser_hdx. 
-+  delta status bits, you may try baycom_ser_hdx.
+ This parameter sets the system policy for NCM/MBIM functions.  Such
+ functions will be handled by either the cdc_ncm driver or the cdc_mbim
+@@ -44,11 +47,13 @@ userspace MBIM management application always is required to enable a
+ MBIM function.
  
--baycom_ser_hdx: 
-+baycom_ser_hdx:
-   This is an alternative driver for SER12 type modems.
-   It only supports half duplex, and only 1200 baud. Its devices
-   are called bcsh0 through bcsh3. Use this driver only if baycom_ser_fdx
-@@ -37,45 +42,48 @@ baycom_epp:
- 
- The following modems are supported:
- 
--ser12:  This is a very simple 1200 baud AFSK modem. The modem consists only
--        of a modulator/demodulator chip, usually a TI TCM3105. The computer
--        is responsible for regenerating the receiver bit clock, as well as
--        for handling the HDLC protocol. The modem connects to a serial port,
--        hence the name. Since the serial port is not used as an async serial
--        port, the kernel driver for serial ports cannot be used, and this
--        driver only supports standard serial hardware (8250, 16450, 16550)
-+======= ========================================================================
-+ser12   This is a very simple 1200 baud AFSK modem. The modem consists only
-+	of a modulator/demodulator chip, usually a TI TCM3105. The computer
-+	is responsible for regenerating the receiver bit clock, as well as
-+	for handling the HDLC protocol. The modem connects to a serial port,
-+	hence the name. Since the serial port is not used as an async serial
-+	port, the kernel driver for serial ports cannot be used, and this
-+	driver only supports standard serial hardware (8250, 16450, 16550)
- 
--par96:  This is a modem for 9600 baud FSK compatible to the G3RUH standard.
--        The modem does all the filtering and regenerates the receiver clock.
--        Data is transferred from and to the PC via a shift register.
--        The shift register is filled with 16 bits and an interrupt is signalled.
--        The PC then empties the shift register in a burst. This modem connects
--        to the parallel port, hence the name. The modem leaves the 
--        implementation of the HDLC protocol and the scrambler polynomial to
--        the PC.
-+par96   This is a modem for 9600 baud FSK compatible to the G3RUH standard.
-+	The modem does all the filtering and regenerates the receiver clock.
-+	Data is transferred from and to the PC via a shift register.
-+	The shift register is filled with 16 bits and an interrupt is signalled.
-+	The PC then empties the shift register in a burst. This modem connects
-+	to the parallel port, hence the name. The modem leaves the
-+	implementation of the HDLC protocol and the scrambler polynomial to
-+	the PC.
- 
--picpar: This is a redesign of the par96 modem by Henning Rech, DF9IC. The modem
--        is protocol compatible to par96, but uses only three low power ICs
--        and can therefore be fed from the parallel port and does not require
--        an additional power supply. Furthermore, it incorporates a carrier
--        detect circuitry.
-+picpar  This is a redesign of the par96 modem by Henning Rech, DF9IC. The modem
-+	is protocol compatible to par96, but uses only three low power ICs
-+	and can therefore be fed from the parallel port and does not require
-+	an additional power supply. Furthermore, it incorporates a carrier
-+	detect circuitry.
- 
--EPP:    This is a high-speed modem adaptor that connects to an enhanced parallel port.
--        Its target audience is users working over a high speed hub (76.8kbit/s).
--
--eppfpga: This is a redesign of the EPP adaptor.
-+EPP     This is a high-speed modem adaptor that connects to an enhanced parallel
-+	port.
- 
-+	Its target audience is users working over a high speed hub (76.8kbit/s).
- 
-+eppfpga This is a redesign of the EPP adaptor.
-+======= ========================================================================
- 
- All of the above modems only support half duplex communications. However,
- the driver supports the KISS (see below) fullduplex command. It then simply
- starts to send as soon as there's a packet to transmit and does not care
- about DCD, i.e. it starts to send even if there's someone else on the channel.
--This command is required by some implementations of the DAMA channel 
-+This command is required by some implementations of the DAMA channel
- access protocol.
- 
- 
- The Interface of the drivers
-+============================
- 
- Unlike previous drivers, these drivers are no longer character devices,
- but they are now true kernel network interfaces. Installation is therefore
-@@ -88,20 +96,22 @@ me for WAMPES which allows attaching a kernel network interface directly.
- 
- 
- Configuring the driver
-+======================
- 
- Every time a driver is inserted into the kernel, it has to know which
- modems it should access at which ports. This can be done with the setbaycom
- utility. If you are only using one modem, you can also configure the
- driver from the insmod command line (or by means of an option line in
--/etc/modprobe.d/*.conf).
-+``/etc/modprobe.d/*.conf``).
+ Such userspace applications includes, but are not limited to:
 +
-+Examples::
+  - mbimcli (included with the libmbim [3] library), and
+  - ModemManager [4]
  
--Examples:
-   modprobe baycom_ser_fdx mode="ser12*" iobase=0x3f8 irq=4
-   sethdlc -i bcsf0 -p mode "ser12*" io 0x3f8 irq 4
- 
- Both lines configure the first port to drive a ser12 modem at the first
--serial port (COM1 under DOS). The * in the mode parameter instructs the driver to use
--the software DCD algorithm (see below).
-+serial port (COM1 under DOS). The * in the mode parameter instructs the driver
-+to use the software DCD algorithm (see below)::
- 
-   insmod baycom_par mode="picpar" iobase=0x378
-   sethdlc -i bcp0 -p mode "picpar" io 0x378
-@@ -115,29 +125,33 @@ Note that both utilities interpret the values slightly differently.
- 
- 
- Hardware DCD versus Software DCD
-+================================
- 
- To avoid collisions on the air, the driver must know when the channel is
- busy. This is the task of the DCD circuitry/software. The driver may either
- utilise a software DCD algorithm (options=1) or use a DCD signal from
- the hardware (options=0).
- 
--ser12:  if software DCD is utilised, the radio's squelch should always be
--        open. It is highly recommended to use the software DCD algorithm,
--        as it is much faster than most hardware squelch circuitry. The
--        disadvantage is a slightly higher load on the system.
-+======= =================================================================
-+ser12   if software DCD is utilised, the radio's squelch should always be
-+	open. It is highly recommended to use the software DCD algorithm,
-+	as it is much faster than most hardware squelch circuitry. The
-+	disadvantage is a slightly higher load on the system.
- 
--par96:  the software DCD algorithm for this type of modem is rather poor.
--        The modem simply does not provide enough information to implement
--        a reasonable DCD algorithm in software. Therefore, if your radio
--        feeds the DCD input of the PAR96 modem, the use of the hardware
--        DCD circuitry is recommended.
-+par96   the software DCD algorithm for this type of modem is rather poor.
-+	The modem simply does not provide enough information to implement
-+	a reasonable DCD algorithm in software. Therefore, if your radio
-+	feeds the DCD input of the PAR96 modem, the use of the hardware
-+	DCD circuitry is recommended.
- 
--picpar: the picpar modem features a builtin DCD hardware, which is highly
--        recommended.
-+picpar  the picpar modem features a builtin DCD hardware, which is highly
-+	recommended.
-+======= =================================================================
- 
- 
- 
- Compatibility with the rest of the Linux kernel
-+===============================================
- 
- The serial driver and the baycom serial drivers compete
- for the same hardware resources. Of course only one driver can access a given
-@@ -154,5 +168,7 @@ The parallel port drivers (baycom_par, baycom_epp) now use the parport subsystem
- to arbitrate the ports between different client drivers.
- 
- vy 73s de
+ Establishing a MBIM IP session reequires at least these actions by the
+ management application:
 +
- Tom Sailer, sailer@ife.ee.ethz.ch
+  - open the control channel
+  - configure network connection settings
+  - connect to network
+@@ -76,7 +81,7 @@ complies with all the control channel requirements in [1].
+ 
+ The cdc-wdmX device is created as a child of the MBIM control
+ interface USB device.  The character device associated with a specific
+-MBIM function can be looked up using sysfs.  For example:
++MBIM function can be looked up using sysfs.  For example::
+ 
+  bjorn@nemi:~$ ls /sys/bus/usb/drivers/cdc_mbim/2-4:2.12/usbmisc
+  cdc-wdm0
+@@ -119,13 +124,15 @@ negotiated control message size.
+ 
+ 
+ /dev/cdc-wdmX ioctl()
+---------------------
++---------------------
+ IOCTL_WDM_MAX_COMMAND: Get Maximum Command Size
+ This ioctl returns the wMaxControlMessage field of the CDC MBIM
+ functional descriptor for MBIM devices.  This is intended as a
+ convenience, eliminating the need to parse the USB descriptors from
+ userspace.
+ 
++::
 +
- hb9jnx @ hb9w.ampr.org
+ 	#include <stdio.h>
+ 	#include <fcntl.h>
+ 	#include <sys/ioctl.h>
+@@ -178,7 +185,7 @@ VLAN links prior to establishing MBIM IP sessions where the SessionId
+ is greater than 0. These links can be added by using the normal VLAN
+ kernel interfaces, either ioctl or netlink.
+ 
+-For example, adding a link for a MBIM IP session with SessionId 3:
++For example, adding a link for a MBIM IP session with SessionId 3::
+ 
+   ip link add link wwan0 name wwan0.3 type vlan id 3
+ 
+@@ -207,6 +214,7 @@ the stream to the end user in an appropriate way for the stream type.
+ The network device ABI requires a dummy ethernet header for every DSS
+ data frame being transported.  The contents of this header is
+ arbitrary, with the following exceptions:
++
+  - TX frames using an IP protocol (0x0800 or 0x86dd) will be dropped
+  - RX frames will have the protocol field set to ETH_P_802_3 (but will
+    not be properly formatted 802.3 frames)
+@@ -218,7 +226,7 @@ adding the dummy ethernet header on TX and stripping it on RX.
+ 
+ This is a simple example using tools commonly available, exporting
+ DssSessionId 5 as a pty character device pointed to by a /dev/nmea
+-symlink:
++symlink::
+ 
+   ip link add link wwan0 name wwan0.dss5 type vlan id 261
+   ip link set dev wwan0.dss5 up
+@@ -236,7 +244,7 @@ map frames to the correct DSS session and adding 18 byte VLAN ethernet
+ headers with the appropriate tag on TX.  In this case using a socket
+ filter is recommended, matching only the DSS VLAN subset. This avoid
+ unnecessary copying of unrelated IP session data to userspace.  For
+-example:
++example::
+ 
+   static struct sock_filter dssfilter[] = {
+ 	/* use special negative offsets to get VLAN tag */
+@@ -249,11 +257,11 @@ example:
+ 	BPF_JUMP(BPF_JMP|BPF_JGE|BPF_K, 512, 3, 0),	/* 511 is last DSS VLAN */
+ 
+ 	/* verify ethertype */
+-        BPF_STMT(BPF_LD|BPF_H|BPF_ABS, 2 * ETH_ALEN),
+-        BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K, ETH_P_802_3, 0, 1),
++	BPF_STMT(BPF_LD|BPF_H|BPF_ABS, 2 * ETH_ALEN),
++	BPF_JUMP(BPF_JMP|BPF_JEQ|BPF_K, ETH_P_802_3, 0, 1),
+ 
+-        BPF_STMT(BPF_RET|BPF_K, (u_int)-1),	/* accept */
+-        BPF_STMT(BPF_RET|BPF_K, 0),		/* ignore */
++	BPF_STMT(BPF_RET|BPF_K, (u_int)-1),	/* accept */
++	BPF_STMT(BPF_RET|BPF_K, 0),		/* ignore */
+   };
+ 
+ 
+@@ -266,6 +274,7 @@ network device.
+ 
+ This mapping implies a few restrictions on multiplexed IPS and DSS
+ sessions, which may not always be practical:
++
+  - no IPS or DSS session can use a frame size greater than the MTU on
+    IP session 0
+  - no IPS or DSS session can be in the up state unless the network
+@@ -280,7 +289,7 @@ device.
+ 
+ Tip: It might be less confusing to the end user to name this VLAN
+ subdevice after the MBIM SessionID instead of the VLAN ID.  For
+-example:
++example::
+ 
+   ip link add link wwan0 name wwan0.0 type vlan id 4094
+ 
+@@ -290,7 +299,7 @@ VLAN mapping
+ 
+ Summarizing the cdc_mbim driver mapping described above, we have this
+ relationship between VLAN tags on the wwanY network device and MBIM
+-sessions on the shared USB data channel:
++sessions on the shared USB data channel::
+ 
+   VLAN ID       MBIM type   MBIM SessionID           Notes
+   ---------------------------------------------------------
+@@ -310,30 +319,37 @@ sessions on the shared USB data channel:
+ References
+ ==========
+ 
+-[1] USB Implementers Forum, Inc. - "Universal Serial Bus
+-      Communications Class Subclass Specification for Mobile Broadband
+-      Interface Model", Revision 1.0 (Errata 1), May 1, 2013
++ 1) USB Implementers Forum, Inc. - "Universal Serial Bus
++    Communications Class Subclass Specification for Mobile Broadband
++    Interface Model", Revision 1.0 (Errata 1), May 1, 2013
++
+       - http://www.usb.org/developers/docs/devclass_docs/
+ 
+-[2] USB Implementers Forum, Inc. - "Universal Serial Bus
+-      Communications Class Subclass Specifications for Network Control
+-      Model Devices", Revision 1.0 (Errata 1), November 24, 2010
++ 2) USB Implementers Forum, Inc. - "Universal Serial Bus
++    Communications Class Subclass Specifications for Network Control
++    Model Devices", Revision 1.0 (Errata 1), November 24, 2010
++
+       - http://www.usb.org/developers/docs/devclass_docs/
+ 
+-[3] libmbim - "a glib-based library for talking to WWAN modems and
+-      devices which speak the Mobile Interface Broadband Model (MBIM)
+-      protocol"
++ 3) libmbim - "a glib-based library for talking to WWAN modems and
++    devices which speak the Mobile Interface Broadband Model (MBIM)
++    protocol"
++
+       - http://www.freedesktop.org/wiki/Software/libmbim/
+ 
+-[4] ModemManager - "a DBus-activated daemon which controls mobile
+-      broadband (2G/3G/4G) devices and connections"
++ 4) ModemManager - "a DBus-activated daemon which controls mobile
++    broadband (2G/3G/4G) devices and connections"
++
+       - http://www.freedesktop.org/wiki/Software/ModemManager/
+ 
+-[5] "MBIM (Mobile Broadband Interface Model) Registry"
++ 5) "MBIM (Mobile Broadband Interface Model) Registry"
++
+        - http://compliance.usb.org/mbim/
+ 
+-[6] "/sys/kernel/debug/usb/devices output format"
++ 6) "/sys/kernel/debug/usb/devices output format"
++
+        - Documentation/driver-api/usb/usb.rst
+ 
+-[7] "/sys/bus/usb/devices/.../descriptors"
++ 7) "/sys/bus/usb/devices/.../descriptors"
++
+        - Documentation/ABI/stable/sysfs-bus-usb
 diff --git a/Documentation/networking/index.rst b/Documentation/networking/index.rst
-index 1e0fc66739cc..250d29bf9efb 100644
+index 26ea79cecb9d..ef13fa26b4df 100644
 --- a/Documentation/networking/index.rst
 +++ b/Documentation/networking/index.rst
-@@ -41,6 +41,7 @@ Contents:
-    arcnet
-    atm
+@@ -43,6 +43,7 @@ Contents:
     ax25
-+   baycom
+    baycom
+    bonding
++   cdc_mbim
  
  .. only::  subproject and html
  
