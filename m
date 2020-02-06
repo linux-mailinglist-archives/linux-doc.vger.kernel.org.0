@@ -2,301 +2,150 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id F08BD15449F
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2020 14:10:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B66D21546C2
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2020 15:51:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727569AbgBFNK5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Feb 2020 08:10:57 -0500
-Received: from smtp2207-205.mail.aliyun.com ([121.197.207.205]:57380 "EHLO
-        smtp2207-205.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727361AbgBFNK4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Feb 2020 08:10:56 -0500
-X-Alimail-AntiSpam: AC=CONTINUE;BC=0.07436282|-1;CH=green;DM=CONTINUE|CONTINUE|true|0.774386-0.00992849-0.215685;DS=SPAM|spam_ad|0.977435-0.000146245-0.0224188;FP=0|0|0|0|0|-1|-1|-1;HT=e01l07426;MF=liaoweixiong@allwinnertech.com;NM=1;PH=DS;RN=16;RT=16;SR=0;TI=SMTPD_---.GlHG0bB_1580994647;
-Received: from 192.168.31.126(mailfrom:liaoweixiong@allwinnertech.com fp:SMTPD_---.GlHG0bB_1580994647)
-          by smtp.aliyun-inc.com(10.147.42.135);
-          Thu, 06 Feb 2020 21:10:48 +0800
-Subject: Re: [PATCH v1 11/11] mtd: new support oops logger based on pstore/blk
-To:     Miquel Raynal <mraynal@kernel.org>
-Cc:     Kees Cook <keescook@chromium.org>,
-        Anton Vorontsov <anton@enomsg.org>,
-        Colin Cross <ccross@android.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Jonathan Corbet <corbet@lwn.net>,
+        id S1727474AbgBFOvW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Feb 2020 09:51:22 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:55410 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727542AbgBFOug (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Feb 2020 09:50:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
+        MIME-Version:Message-Id:Date:Subject:Cc:To:From:Reply-To:Content-Type:
+        Content-ID:Content-Description:In-Reply-To:References;
+        bh=CFTgqqR2acxHA5DJomm2PAamk9pZ/zM9hwGQ2WMtNfY=; b=JleqWJzuQMdqgilcjxy2q0YU3p
+        Zy28uGKU9tvzuIds0rI4IO7SfN6BFcLn7mfla3HzvwJyvHDa0Z9S/I3y6mqXg2Cb4C4MpyQO4SXuV
+        VGPacStQh+oUTjE84Go67+OqnGS0EQb72LpreKnq3Q6s4IuJCslUiuRvpefh8F5ki6MnOaGvyhGrq
+        k4jCcCAQJwtr4/Tm1UHsJaVWS2/UmhwRpr9ZTQZYS1E1hdrSN+IGybq22EQ30JQeH+R+pbA8QkhkY
+        oiM7tPwCaPDszRwwdkWS2S835N1xXc2SWyqaTczNHoaNMImot1L8MCNMCJAehSaC3mLW9TpQunedW
+        iA8lxqVw==;
+Received: from [179.95.15.160] (helo=bombadil.infradead.org)
+        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1iziUE-0004IX-QJ; Thu, 06 Feb 2020 14:50:34 +0000
+Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@bombadil.infradead.org>)
+        id 1iziU6-002nKI-5y; Thu, 06 Feb 2020 15:50:26 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Media Mailing List <linux-media@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@infradead.org>,
+        linux-doc@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
         Richard Weinberger <richard@nod.at>,
-        Vignesh Raghavendra <vigneshr@ti.com>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Rob Herring <robh@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mtd@lists.infradead.org
-References: <1579482233-2672-1-git-send-email-liaoweixiong@allwinnertech.com>
- <1579482233-2672-12-git-send-email-liaoweixiong@allwinnertech.com>
- <20200120110306.32e53fd8@xps13>
- <27226590-379c-8784-f461-f5d701015611@allwinnertech.com>
- <20200121094802.61f8cb4d@xps13>
- <2c6000b1-ae25-564b-911a-2879e9c244b2@allwinnertech.com>
- <20200122184114.125b42c8@xps13>
-From:   liaoweixiong <liaoweixiong@allwinnertech.com>
-Message-ID: <e135f947-226f-8dd0-b328-fb87c5064914@allwinnertech.com>
-Date:   Thu, 6 Feb 2020 21:10:47 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+        Jeff Dike <jdike@addtoit.com>, kvm@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>, linux-um@lists.infradead.org
+Subject: [PATCH v2 00/27] docs: virt: manually convert text documents to ReST format
+Date:   Thu,  6 Feb 2020 15:49:57 +0100
+Message-Id: <cover.1581000481.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-In-Reply-To: <20200122184114.125b42c8@xps13>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-hi Miquel Raynal,
+Manually convert the documentation under Documentation/virt to ReST,
+minimizing the usage of uneeded markups and preserving the documentation
+writer's style.
 
-On 2020/1/23 AM 1:41, Miquel Raynal wrote:
-> Hello,
-> 
-> 
->>>>>> +/*
->>>>>> + * All zones will be read as pstore/blk will read zone one by one when do
->>>>>> + * recover.
->>>>>> + */
->>>>>> +static ssize_t mtdpstore_read(char *buf, size_t size, loff_t off)
->>>>>> +{
->>>>>> +	struct mtdpstore_context *cxt = &oops_cxt;
->>>>>> +	size_t retlen;
->>>>>> +	int ret;
->>>>>> +
->>>>>> +	if (mtdpstore_block_isbad(cxt, off))
->>>>>> +		return -ENEXT;
->>>>>> +
->>>>>> +	pr_debug("try to read off 0x%llx size %zu\n", off, size);
->>>>>> +	ret = mtd_read(cxt->mtd, off, size, &retlen, (u_char *)buf);
->>>>>> +	if ((ret < 0 && !mtd_is_bitflip(ret)) || size != retlen)  {
->>>>>
->>>>> IIRC size != retlen does not mean it failed, but that you should
->>>>> continue reading after retlen bytes, no?
->>>>>     >>
->>>> Yes, you are right. I will fix it. Thanks.
->>>>   
->>>>> Also, mtd_is_bitflip() does not mean that you are reading a false
->>>>> buffer, but that the data has been corrected as it contained bitflips.
->>>>> mtd_is_eccerr() however, would be meaningful.
->>>>>     >>
->>>> Sure I know mtd_is_bitflip() does not mean failure, but I do not think
->>>> mtd_is_eccerr() should be here since the codes are ret < 0 and NOT
->>>> mtd_is_bitflip().
->>>
->>> Yes, just drop this check, only keep ret < 0.
->>>    
->>
->> If I don't get it wrong, it should not	 be dropped here. Like your words,
->> "mtd_is_bitflip() does not mean that you are reading a false buffer,
->> but that the data has been corrected as it contained bitflips.", the
->> data I get are valid even if mtd_is_bitflip() return true. It's correct
->> data and it's no need to go to handle error. To me, the codes
->> should be:
->> 	if (ret < 0 && !mit_is_bitflip())
->> 		[error handling]
-> 
-> Please check the implementation of mtd_is_bitflip(). You'll probably
-> figure out what I am saying.
-> 
-> https://elixir.bootlin.com/linux/latest/source/include/linux/mtd/mtd.h#L585
-> 
+PS.: Patches are against linux-next tree (20200204).
 
-How about the codes as follows:
+v2:
 
-for (done = 0, retlen = 0; done < size; done += retlen) {
-	ret = mtd_read(..., &retlen, ...);
-	if (!ret)
-		continue;
-	/*
-	 * do nothing if bitflip and ecc error occurs because whether
-	 * it's bitflip or ECC error, just a small number of bits flip
-	 * and the impact on log data is so small. The mtdpstore just
-	 * hands over what it gets and user can judge whether the data
-	 * is valid or not.
-	 */
-	if (mtd_is_bitflip(ret)) {
-		dev_warn("bitflip at....");
-		continue;
-	} else if (mtd_is_eccerr(ret)) {
-		dev_warn("eccerr at....");
-		retlen = retlen == 0 ? size : retlen;
-		continue;
-	} else {
-		dev_err("read failure at...");
-		/* this zone is broken, try next one */
-		return -ENEXT;
-	}
-}
+- Solved a conflict with linux-next;
+- Added SPDX headers.
 
-> 
-> |...]
-> 
->>>>>> +		return;
->>>>>> +	}
->>>>>> +	if (unlikely(info->dmesg_size % mtd->writesize)) {
->>>>>> +		pr_err("record size %lu KB must align to write size %d KB\n",
->>>>>> +				info->dmesg_size / 1024,
->>>>>> +				mtd->writesize / 1024);
->>>>>
->>>>> This condition is weird, why would you check this?
->>>>>     >>
->>>> pstore/blk will write 'record_size' dmesg log at one time.
->>>> Since each write data must be aligned to 'writesize' for flash, I am not
->>>> sure
->>>> all flash drivers are compatible with misaligned data, that's why i
->>>> check this.
->>>
->>> I think you should enforce this alignment instead of checking it.
->>>    
->>
->> Do you mean that mtdpstore should enforce this alignment while running?
->> The way I can think of is to handle a buffer aligned to writesize and
->> write to flash with this aligned buffer.
->>
->> That causes some error. The MTD device will be divided into mutil
->> chunks accroding to dmesg_size. Each chunk stores a individual
->> OOPS/Panic log. If dmesg_size is misaligned to writesize, the last
->> write results in next write failure because the page of flash can only
->> be programed once before next erase and the page shared by two chunks
->> has been used by the last write. Besides, we can not read to buffer,
->> ersae and write back as there is no read/erase for panic case.
-> 
-> I mean: what is the usual size of dmesg? I don't get why you need it to
+Mauro Carvalho Chehab (27):
+  docs: kvm: add arm/pvtime.rst to index.rst
+  docs: virt: convert UML documentation to ReST
+  docs: virt: user_mode_linux.rst: update compiling instructions
+  docs: virt: user_mode_linux.rst: fix URL references
+  docs: virt: convert halt-polling.txt to ReST format
+  docs: virt: Convert msr.txt to ReST format
+  docs: kvm: devices/arm-vgic-its.txt to ReST format
+  docs: kvm: devices/arm-vgit-v3.txt to ReST
+  docs: kvm: convert devices/arm-vgit.txt to ReST
+  docs: kvm: convert devices/mpic.txt to ReST
+  docs: kvm: convert devices/s390_flic.txt to ReST
+  docs: kvm: convert devices/vcpu.txt to ReST
+  docs: kvm: convert devices/vcpu.txt to ReST
+  docs: kvm: convert devices/vm.txt to ReST
+  docs: kvm: convert devices/xics.txt to ReST
+  docs: kvm: convert devices/xive.txt to ReST
+  docs: kvm: Convert api.txt to ReST format
+  docs: kvm: convert arm/hyp-abi.txt to ReST
+  docs: kvm: arm/psci.txt: convert to ReST
+  docs: kvm: Convert hypercalls.txt to ReST format
+  docs: kvm: Convert locking.txt to ReST format
+  docs: kvm: Convert mmu.txt to ReST format
+  docs: kvm: Convert nested-vmx.txt to ReST format
+  docs: kvm: Convert ppc-pv.txt to ReST format
+  docs: kvm: Convert s390-diag.txt to ReST format
+  docs: kvm: Convert timekeeping.txt to ReST format
+  docs: kvm: review-checklist.txt: rename to ReST
 
-The usual size of dmesg is 64K, usually be equal to log_buf size.
+ Documentation/virt/index.rst                  |    1 +
+ Documentation/virt/kvm/{api.txt => api.rst}   | 3348 ++++++++++-------
+ .../virt/kvm/arm/{hyp-abi.txt => hyp-abi.rst} |   28 +-
+ Documentation/virt/kvm/arm/index.rst          |   12 +
+ .../virt/kvm/arm/{psci.txt => psci.rst}       |   46 +-
+ .../{arm-vgic-its.txt => arm-vgic-its.rst}    |  106 +-
+ .../{arm-vgic-v3.txt => arm-vgic-v3.rst}      |  132 +-
+ .../devices/{arm-vgic.txt => arm-vgic.rst}    |   89 +-
+ Documentation/virt/kvm/devices/index.rst      |   19 +
+ .../virt/kvm/devices/{mpic.txt => mpic.rst}   |   11 +-
+ .../devices/{s390_flic.txt => s390_flic.rst}  |   70 +-
+ Documentation/virt/kvm/devices/vcpu.rst       |  114 +
+ Documentation/virt/kvm/devices/vcpu.txt       |   76 -
+ .../virt/kvm/devices/{vfio.txt => vfio.rst}   |   25 +-
+ .../virt/kvm/devices/{vm.txt => vm.rst}       |  206 +-
+ .../virt/kvm/devices/{xics.txt => xics.rst}   |   28 +-
+ .../virt/kvm/devices/{xive.txt => xive.rst}   |  148 +-
+ .../{halt-polling.txt => halt-polling.rst}    |   86 +-
+ .../kvm/{hypercalls.txt => hypercalls.rst}    |  129 +-
+ Documentation/virt/kvm/index.rst              |   16 +
+ .../virt/kvm/{locking.txt => locking.rst}     |  111 +-
+ Documentation/virt/kvm/{mmu.txt => mmu.rst}   |   62 +-
+ Documentation/virt/kvm/{msr.txt => msr.rst}   |  147 +-
+ .../kvm/{nested-vmx.txt => nested-vmx.rst}    |   37 +-
+ .../virt/kvm/{ppc-pv.txt => ppc-pv.rst}       |   26 +-
+ ...iew-checklist.txt => review-checklist.rst} |    3 +
+ .../virt/kvm/{s390-diag.txt => s390-diag.rst} |   13 +-
+ .../kvm/{timekeeping.txt => timekeeping.rst}  |  221 +-
+ ...odeLinux-HOWTO.txt => user_mode_linux.rst} | 1814 ++++-----
+ 29 files changed, 4003 insertions(+), 3121 deletions(-)
+ rename Documentation/virt/kvm/{api.txt => api.rst} (71%)
+ rename Documentation/virt/kvm/arm/{hyp-abi.txt => hyp-abi.rst} (79%)
+ create mode 100644 Documentation/virt/kvm/arm/index.rst
+ rename Documentation/virt/kvm/arm/{psci.txt => psci.rst} (60%)
+ rename Documentation/virt/kvm/devices/{arm-vgic-its.txt => arm-vgic-its.rst} (71%)
+ rename Documentation/virt/kvm/devices/{arm-vgic-v3.txt => arm-vgic-v3.rst} (77%)
+ rename Documentation/virt/kvm/devices/{arm-vgic.txt => arm-vgic.rst} (66%)
+ create mode 100644 Documentation/virt/kvm/devices/index.rst
+ rename Documentation/virt/kvm/devices/{mpic.txt => mpic.rst} (91%)
+ rename Documentation/virt/kvm/devices/{s390_flic.txt => s390_flic.rst} (87%)
+ create mode 100644 Documentation/virt/kvm/devices/vcpu.rst
+ delete mode 100644 Documentation/virt/kvm/devices/vcpu.txt
+ rename Documentation/virt/kvm/devices/{vfio.txt => vfio.rst} (72%)
+ rename Documentation/virt/kvm/devices/{vm.txt => vm.rst} (61%)
+ rename Documentation/virt/kvm/devices/{xics.txt => xics.rst} (84%)
+ rename Documentation/virt/kvm/devices/{xive.txt => xive.rst} (62%)
+ rename Documentation/virt/kvm/{halt-polling.txt => halt-polling.rst} (64%)
+ rename Documentation/virt/kvm/{hypercalls.txt => hypercalls.rst} (55%)
+ rename Documentation/virt/kvm/{locking.txt => locking.rst} (78%)
+ rename Documentation/virt/kvm/{mmu.txt => mmu.rst} (94%)
+ rename Documentation/virt/kvm/{msr.txt => msr.rst} (74%)
+ rename Documentation/virt/kvm/{nested-vmx.txt => nested-vmx.rst} (90%)
+ rename Documentation/virt/kvm/{ppc-pv.txt => ppc-pv.rst} (91%)
+ rename Documentation/virt/kvm/{review-checklist.txt => review-checklist.rst} (95%)
+ rename Documentation/virt/kvm/{s390-diag.txt => s390-diag.rst} (90%)
+ rename Documentation/virt/kvm/{timekeeping.txt => timekeeping.rst} (85%)
+ rename Documentation/virt/uml/{UserModeLinux-HOWTO.txt => user_mode_linux.rst} (74%)
 
-> be ie. a multiple of 2k. It probably is actually, I don't know if there
-> is a standard. But if dmesg_size is eg 3k, just skip the end of the
-> partially written page and start writing at the next page?
-> 
+-- 
+2.24.1
 
-1. upper layer do not support to skip partially written page
-The upper layer pstore/blk will not skip the end of the partially
-written page since it is not only used for MTD device, but also
-block device, which has no page limited. A common practice at the
-upper layer is to check the size and limit size to be aligned. We
-make dmesg_size to be a multiple of 4K for greater compatibility.
 
-2. chunks management and size per write
-The mtdpstore tells pstore/blk how large the device is. Then
-pstore/blk will divide it into several chunks according to
-dmesg_size. The pstore/blk will write dmesg_size data at a time.
-
-In a word, the amount of data written each time can not lead to page
-slicing, so, dmesg_size must be aligned to writesize.
-
->>
->>>>   
->>>>>> +		return;
->>>>>> +	}
->>>>>> +	if (unlikely(mtd->size > MTDPSTORE_MAX_MTD_SIZE)) {
->>>>>> +		pr_err("mtd%d is too large (limit is %d MiB)\n",
->>>>>> +				mtd->index,
->>>>>> +				MTDPSTORE_MAX_MTD_SIZE / 1024 / 1024);
->>>>>
->>>>> Same question? I could understand that it is easier to manage blocks
->>>>> knowing their maximum number though.
->>>>>     >>
->>>> It refers to mtdoops.
->>>
->>> What do you mean?
->>>    
->>
->> To me, it's unnecessary to check at all, however it is really there
->> on codes of mtdoops. I refer to module mtdoops when I design mtdpstore.
->> It may be helpfull for some cases out of my think, that's why I keep it.
-> 
-> Why not.
-> 
-
-OK, I will drop it.
-
-> [...]
-> 
->>>>
->>>> In case of repeated erase when users remove several log files, mtdpstore
->>>> do remove jobs when exit.
->>>>
->>>> Besides, mtdpstore do not check the return code to ensure write back valid
->>>> log as much as possible.
->>>
->>> You are not in a critical path, I don't understand why you don't check
->>> it? If it returns an error, it means the data is not written. IMHO it
->>> is best to alert the user than to silently fail.
->>>    
->>
->> This function will be called only when mtd device is removing. It's
->> useless to alert the user but try to flush the other valid data to
-> 
-> It is useful to alert the user! It means something went wrong while
-> everything seems fine.
-> 
->> flash as mush as possible by which reduce losses. If it's just
->> because of busy, what happens next time?
-> 
-> Just because of busy? I don't get it.
-
-I want to express that if the write fails due to busy, the next one
-may succeed.
-
-> 
-> I'm okay with the idea of trying to write the other chunks though:
-> 
-> 	while (remaining_chunk) {
-> 		ret = mtd_write()
-> 		if (ret) {
-> 			alert-user;
-> 			continue;
-> 		}
-> 	}
-> 
-
-OK, I will fix it.
-
->>
->>>>   
->>>>>> +. >>>> +		off += zonesize;
->>>>>> +		size -= min_t(unsigned int, zonesize, size);
->>>>>> +	}
->>>>>> +
->>>>>> +free:
->>>>>> +	kfree(buf);
->>>>>> +	return ret;
->>>>>> +}
->>>>>> +
->>>
->>>
->>> [...]
->>>    
->>>>>
->>>>> Thanks,
->>>>> Miquèl
->>>>>     >>
->>>> I will collect more suggestions and submit the new version at one time.
->>>>   
->>>
->>> Sure, no hurry.
->>>    
->>
->> I am on holiday, please forgive me for my slow response.
-> 
-> Take your time, as I said, no hurry.
-> 
->>
->>>
->>> Thanks,
->>> Miquèl
->>>    
-> 
-> 
-> 
-> 
-> Thanks,
-> Miquèl
-> 
