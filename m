@@ -2,90 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CC269154683
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2020 15:51:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F0B51546D1
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Feb 2020 15:52:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727634AbgBFOuj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Feb 2020 09:50:39 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:55578 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727595AbgBFOuj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Feb 2020 09:50:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description;
-        bh=Xb2eNgwrC898oYbNqzuMV7ovBYhNc/yn4b5J/jn4QTY=; b=dGYyz5GfgFKIEyiHigh5cXYP1J
-        fVd5GKitRvzT67FNvqGS2fX2AO5F7ddD95DxNM9+EtWfaJ7TOHy0QDDfz0stUhRQLelU8kV4O9asN
-        u0Y+r2KmvNlaCUc1BO/qgh29bWjQkCY8f28n7EAidV5QHjV4RLod7u23vL8dAFVcm9JKUFXhjnZg0
-        txbGDkb9qs4ttvv3WYujw6y2lPxO4bg+yvt+T/ki7qTuwTqBtAilCKzV/xMHGW5asJUMLYqXlC9+k
-        Ds0i1WkAWzHnbfN5Tv1Tbxoq4p8nqYTsqKR1FMPNf/Rgkr118xur509Fk6uXjIuacqod2uZDvGdmD
-        VgdKLXAg==;
-Received: from [179.95.15.160] (helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1iziUI-0004In-Tw; Thu, 06 Feb 2020 14:50:38 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1iziU7-002nMK-7u; Thu, 06 Feb 2020 15:50:27 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Media Mailing List <linux-media@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
+        id S1727894AbgBFOvk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Feb 2020 09:51:40 -0500
+Received: from mga02.intel.com ([134.134.136.20]:60948 "EHLO mga02.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727501AbgBFOue (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 6 Feb 2020 09:50:34 -0500
+X-Amp-Result: UNKNOWN
+X-Amp-Original-Verdict: FILE UNKNOWN
+X-Amp-File-Uploaded: False
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 06 Feb 2020 06:50:33 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.70,410,1574150400"; 
+   d="scan'208";a="279692433"
+Received: from dgbrowne-mobl.ger.corp.intel.com (HELO localhost) ([10.252.14.106])
+  by FMSMGA003.fm.intel.com with ESMTP; 06 Feb 2020 06:50:28 -0800
+Date:   Thu, 6 Feb 2020 16:50:27 +0200
+From:   Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     linux-kernel@vger.kernel.org, x86@kernel.org,
+        linux-sgx@vger.kernel.org, akpm@linux-foundation.org,
+        dave.hansen@intel.com, sean.j.christopherson@intel.com,
+        nhorman@redhat.com, npmccallum@redhat.com, haitao.huang@intel.com,
+        andriy.shevchenko@linux.intel.com, tglx@linutronix.de,
+        kai.svahn@intel.com, bp@alien8.de, josh@joshtriplett.org,
+        luto@kernel.org, kai.huang@intel.com, rientjes@google.com,
+        cedric.xing@intel.com, puiterwijk@redhat.com,
         linux-doc@vger.kernel.org
-Subject: [PATCH v2 27/27] docs: kvm: review-checklist.txt: rename to ReST
-Date:   Thu,  6 Feb 2020 15:50:24 +0100
-Message-Id: <8efe2cb409b6aaea2f01f4167db3c13e816129c5.1581000481.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <cover.1581000481.git.mchehab+huawei@kernel.org>
-References: <cover.1581000481.git.mchehab+huawei@kernel.org>
+Subject: Re: [PATCH v25 21/21] docs: x86/sgx: Document SGX micro architecture
+ and kernel internals
+Message-ID: <20200206145027.GA8148@linux.intel.com>
+References: <20200204060545.31729-1-jarkko.sakkinen@linux.intel.com>
+ <20200204060545.31729-22-jarkko.sakkinen@linux.intel.com>
+ <5ea28632-cd64-bc26-fab6-2868142eb9e4@infradead.org>
+ <20200205230756.GB28111@linux.intel.com>
+ <64d57033-cd19-ae6f-48c5-d7e01a97ad5e@infradead.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <64d57033-cd19-ae6f-48c5-d7e01a97ad5e@infradead.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This file is already in ReST compatible format.
-So, rename it and add to the kvm's index.rst.
+On Wed, Feb 05, 2020 at 03:10:47PM -0800, Randy Dunlap wrote:
+> On 2/5/20 3:07 PM, Jarkko Sakkinen wrote:
+> > I rewrote it as:
+> > 
+> > "Intel provides a proprietary binary version of the PCE. This is a
+> > necessity when the software needs to prove to be running inside a legit
+> 
+> s/legit/legitimate/ please
+> 
+> > enclave on real hardware."
 
-While here, use the standard conversion for document titles.
+Hmm, actually it reads what I have now in the repository already
+legitimate [1] :-) I guess I changed the text still after sending
+the email.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/virt/kvm/index.rst                               | 2 ++
- .../virt/kvm/{review-checklist.txt => review-checklist.rst}    | 3 +++
- 2 files changed, 5 insertions(+)
- rename Documentation/virt/kvm/{review-checklist.txt => review-checklist.rst} (95%)
+Thank you for such detailed comments.
 
-diff --git a/Documentation/virt/kvm/index.rst b/Documentation/virt/kvm/index.rst
-index 7c1be8910837..774deaebf7fa 100644
---- a/Documentation/virt/kvm/index.rst
-+++ b/Documentation/virt/kvm/index.rst
-@@ -21,6 +21,8 @@ KVM
-    timekeeping
-    vcpu-requests
- 
-+   review-checklist
-+
-    arm/index
- 
-    devices/index
-diff --git a/Documentation/virt/kvm/review-checklist.txt b/Documentation/virt/kvm/review-checklist.rst
-similarity index 95%
-rename from Documentation/virt/kvm/review-checklist.txt
-rename to Documentation/virt/kvm/review-checklist.rst
-index 499af499e296..1f86a9d3f705 100644
---- a/Documentation/virt/kvm/review-checklist.txt
-+++ b/Documentation/virt/kvm/review-checklist.rst
-@@ -1,3 +1,6 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+================================
- Review checklist for kvm patches
- ================================
- 
--- 
-2.24.1
+[1] https://github.com/jsakkine-intel/linux-sgx/blob/master/Documentation/x86/sgx.rst1
 
+/Jarkko
