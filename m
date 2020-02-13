@@ -2,51 +2,64 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D407715C0F7
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2020 16:05:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C969915C148
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2020 16:22:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727671AbgBMPFj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Feb 2020 10:05:39 -0500
-Received: from mail.kernel.org ([198.145.29.99]:51156 "EHLO mail.kernel.org"
+        id S1727347AbgBMPWP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Feb 2020 10:22:15 -0500
+Received: from foss.arm.com ([217.140.110.172]:47730 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726937AbgBMPFi (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 13 Feb 2020 10:05:38 -0500
-Received: from localhost (unknown [106.201.58.38])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 682572073C;
-        Thu, 13 Feb 2020 15:05:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1581606338;
-        bh=8h7ApCXX+TXuCTnHuQ6rL7GF7/ZIetlNjEEQZpp7WHE=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=U6tGLeaXMxUc18bxn0djoZdpPEafEFmdDJIovTwv85769BECoLGYFD6ffcEwtIyYq
-         pcjajZ1W7l5MnjmDsf4sVfhvCit7rXanJRKwMF9j7FvKXpSaTE5B/bAGJ9Y7himYTy
-         +uL0f3IW4CwLcvNPfSGrV38SVXjMbUm1J9oMPaLY=
-Date:   Thu, 13 Feb 2020 20:35:33 +0530
-From:   Vinod Koul <vkoul@kernel.org>
-To:     Changbin Du <changbin.du@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, dmaengine@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] dmaengine: doc: fix warnings/issues of client.rst
-Message-ID: <20200213150533.GO2618@vkoul-mobl>
-References: <20200204125115.12128-1-changbin.du@gmail.com>
+        id S1726937AbgBMPWO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Feb 2020 10:22:14 -0500
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 663CD328;
+        Thu, 13 Feb 2020 07:22:14 -0800 (PST)
+Received: from [10.1.195.59] (ifrit.cambridge.arm.com [10.1.195.59])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5FE623F68E;
+        Thu, 13 Feb 2020 07:22:12 -0800 (PST)
+Subject: Re: [PATCH v3 5/7] cpufreq: add function to get the hardware max
+ frequency
+To:     Ionela Voinescu <ionela.voinescu@arm.com>
+Cc:     catalin.marinas@arm.com, will@kernel.org, mark.rutland@arm.com,
+        maz@kernel.org, suzuki.poulose@arm.com, sudeep.holla@arm.com,
+        lukasz.luba@arm.com, rjw@rjwysocki.net, peterz@infradead.org,
+        mingo@redhat.com, vincent.guittot@linaro.org,
+        viresh.kumar@linaro.org, linux-arm-kernel@lists.infradead.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-pm@vger.kernel.org
+References: <20200211184542.29585-1-ionela.voinescu@arm.com>
+ <20200211184542.29585-6-ionela.voinescu@arm.com>
+ <b63a4a47-99e5-9c71-73be-740aedde4714@arm.com>
+ <20200213125918.GA2397@arm.com>
+From:   Valentin Schneider <valentin.schneider@arm.com>
+Message-ID: <cf821516-e66b-94d4-ee63-5f94602a7cff@arm.com>
+Date:   Thu, 13 Feb 2020 15:22:11 +0000
+User-Agent: Mozilla/5.0 (X11; Linux aarch64; rv:68.0) Gecko/20100101
+ Thunderbird/68.4.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200204125115.12128-1-changbin.du@gmail.com>
+In-Reply-To: <20200213125918.GA2397@arm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 04-02-20, 20:51, Changbin Du wrote:
-> This fixed some warnings/issues of client.rst.
->  o Need a blank line for enumerated lists.
->  o Do not create section in enumerated list.
->  o Remove suffix ':' from section title.
+On 2/13/20 12:59 PM, Ionela Voinescu wrote:
+>> What about intel_pstate / turbo stuff? IIRC one of Giovanni's issues was that
+>> turbo freq is not always reported as the max freq. Dunno if we can do
+>> anything about it; at the very least maybe document the caveat?
+>>
+> 
+> Okay, I can add details in the description in regards to potential
+> reasons to overwrite this function. But basically this is one of the
+> reasons for making this a weak function. The best information we can
+> generically get for maximum hardware frequency is cpuinfo.max_freq.
+> But if platforms have the possibility to obtain this differently from
+> either hardware or firmware they can overwrite this.
+> 
 
-Applied, thanks
+Right, that would be handled by a different implementation of
+that function, so this wasn't too relevant of a comment. Sorry!
 
--- 
-~Vinod
