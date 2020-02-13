@@ -2,22 +2,22 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BA46A15BDBE
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2020 12:37:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AAF3315BDCD
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2020 12:38:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729532AbgBMLhE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Feb 2020 06:37:04 -0500
-Received: from foss.arm.com ([217.140.110.172]:45350 "EHLO foss.arm.com"
+        id S1729942AbgBMLit (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Feb 2020 06:38:49 -0500
+Received: from foss.arm.com ([217.140.110.172]:45430 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726232AbgBMLhD (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 13 Feb 2020 06:37:03 -0500
+        id S1729854AbgBMLit (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Feb 2020 06:38:49 -0500
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 2B9201FB;
-        Thu, 13 Feb 2020 03:37:03 -0800 (PST)
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5EC491FB;
+        Thu, 13 Feb 2020 03:38:48 -0800 (PST)
 Received: from localhost (unknown [10.37.6.21])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A4F8C3F6CF;
-        Thu, 13 Feb 2020 03:37:02 -0800 (PST)
-Date:   Thu, 13 Feb 2020 11:37:01 +0000
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D795B3F6CF;
+        Thu, 13 Feb 2020 03:38:47 -0800 (PST)
+Date:   Thu, 13 Feb 2020 11:38:46 +0000
 From:   Mark Brown <broonie@kernel.org>
 To:     Jerome Brunet <jbrunet@baylibre.com>
 Cc:     Samuel Holland <samuel@sholland.org>,
@@ -28,18 +28,18 @@ Cc:     Samuel Holland <samuel@sholland.org>,
         Takashi Iwai <tiwai@suse.com>,
         Jonathan Corbet <corbet@lwn.net>, alsa-devel@alsa-project.org,
         devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, stable@vger.kernel.org
-Subject: Re: [PATCH 1/4] ASoC: codec2codec: avoid invalid/double-free of pcm
- runtime
-Message-ID: <20200213113701.GA4333@sirena.org.uk>
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH 4/4] ASoC: simple-card: Add support for codec-to-codec
+ dai_links
+Message-ID: <20200213113846.GB4333@sirena.org.uk>
 References: <20200213061147.29386-1-samuel@sholland.org>
- <20200213061147.29386-2-samuel@sholland.org>
- <1jr1yyannl.fsf@starbuckisacylon.baylibre.com>
+ <20200213061147.29386-5-samuel@sholland.org>
+ <1jpneialqa.fsf@starbuckisacylon.baylibre.com>
 MIME-Version: 1.0
 Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="qMm9M+Fa2AknHoGS"
+        protocol="application/pgp-signature"; boundary="/NkBOFFp2J2Af1nK"
 Content-Disposition: inline
-In-Reply-To: <1jr1yyannl.fsf@starbuckisacylon.baylibre.com>
+In-Reply-To: <1jpneialqa.fsf@starbuckisacylon.baylibre.com>
 X-Cookie: Academicians care, that's who.
 User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
@@ -48,31 +48,42 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
---qMm9M+Fa2AknHoGS
+--/NkBOFFp2J2Af1nK
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thu, Feb 13, 2020 at 09:37:18AM +0100, Jerome Brunet wrote:
+On Thu, Feb 13, 2020 at 10:18:53AM +0100, Jerome Brunet wrote:
+> On Thu 13 Feb 2020 at 07:11, Samuel Holland <samuel@sholland.org> wrote:
 
-> This brings another question/problem:
-> A link which has failed in PMU, could try in PMD to hw_free/shutdown a
-> dai which has not gone through startup/hw_params, right ?
+> > +- codec-to-codec			: Indicates a codec-to-codec
+> > dai-link.
 
-I think so, yes.
+> I wonder if such property could be viewed as a Linux implementation
+> detail ?
 
---qMm9M+Fa2AknHoGS
+Yes, it is.
+
+> Should the card figure out the codec-to-codec links on its own or is it
+> something generic enough to put in DT ?
+
+We should be able to figure it out by ourselves, we already have a link
+between two CODECs - we should be able to infer that it is in fact a
+link between two CODECs with the information we already have, probably
+by looking at the two devices that are referenced.
+
+--/NkBOFFp2J2Af1nK
 Content-Type: application/pgp-signature; name="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAl5FNNoACgkQJNaLcl1U
-h9Anuwf/SQT6ubriSIEq1TwGCzPNYCbx2WjOhRIjTbtNwtmezyCgzCOThrEEuRZh
-VjvYkn7VqZBgoHsh43+vqiwtI3eLXwrX02o4izW1srdqfh2ZDAMmHH37qf8zfYmv
-S7bC9gDSY8sFOjSevEKgk6MC/3h60PKK0Q7FWc/A1B8Fqo5ZaoeuYrMqw0x2yQVI
-1DRTlhVoOKIQ+tjKIPmRwTt1KyJi9FlhN5oW2hEpIpMOK34jnVyKBMHESopGF6tT
-fFPPHWKfZlxP8SkwtcYsH1xxrZC5LwlPA8haNBQAtniDaVG+PlndvoN69UfBudPw
-s7tJfn+2MEXC0NEJzXukYpwwHkuu1A==
-=r51Q
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAl5FNUUACgkQJNaLcl1U
+h9AQ3Af/XaLbts6WjJP/3bk73GDv0QmGgaskQL8b6m1D39K+JlBEpJFtRFU8dbwI
+lRAtiipudev/YrYxB1zTgCbspo7bZ+p9X+lKGs3duT/Mbu/S19AJXn1oczaI9bSr
+ry8cckwgoWfaT5KEgf32ZKhLPL2RYOGUfxK8YD3V2SVj74QapjdY3S4cOWFYCGSy
+G9RP0+ReSirSQ9p4MFiA3zxj5lLgNHnCoMkVrIUktLtLfbE9T6vyW0eZhc0+9wXC
+td2NQln5v755wOwxzGvfZ0hmO1Zil4FZEoCCdGT/izv7joqZaB18lG/XVlBCHQbn
+Sm25vTaxFqSe2wL3vQlqmRW5BEYsTQ==
+=eGwg
 -----END PGP SIGNATURE-----
 
---qMm9M+Fa2AknHoGS--
+--/NkBOFFp2J2Af1nK--
