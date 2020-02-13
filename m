@@ -2,83 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E5ADE15C9C7
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2020 18:57:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 40FDC15CA57
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2020 19:27:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727683AbgBMR5m (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Feb 2020 12:57:42 -0500
-Received: from 2.mo177.mail-out.ovh.net ([178.33.109.80]:41369 "EHLO
-        2.mo177.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726282AbgBMR5m (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Feb 2020 12:57:42 -0500
-X-Greylist: delayed 524 seconds by postgrey-1.27 at vger.kernel.org; Thu, 13 Feb 2020 12:57:42 EST
-Received: from player715.ha.ovh.net (unknown [10.108.54.141])
-        by mo177.mail-out.ovh.net (Postfix) with ESMTP id D51741223A2
-        for <linux-doc@vger.kernel.org>; Thu, 13 Feb 2020 18:48:56 +0100 (CET)
+        id S1727910AbgBMS1K (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Feb 2020 13:27:10 -0500
+Received: from 1.mo179.mail-out.ovh.net ([178.33.111.220]:48829 "EHLO
+        1.mo179.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727433AbgBMS1K (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 13 Feb 2020 13:27:10 -0500
+Received: from player715.ha.ovh.net (unknown [10.110.208.131])
+        by mo179.mail-out.ovh.net (Postfix) with ESMTP id 6191D158DFD
+        for <linux-doc@vger.kernel.org>; Thu, 13 Feb 2020 18:47:55 +0100 (CET)
 Received: from sk2.org (cre33-1_migr-88-122-126-116.fbx.proxad.net [88.122.126.116])
         (Authenticated sender: steve@sk2.org)
-        by player715.ha.ovh.net (Postfix) with ESMTPSA id 865B7F2A671A;
-        Thu, 13 Feb 2020 17:48:45 +0000 (UTC)
+        by player715.ha.ovh.net (Postfix) with ESMTPSA id E5037F2A64BB;
+        Thu, 13 Feb 2020 17:47:44 +0000 (UTC)
 From:   Stephen Kitt <steve@sk2.org>
 To:     Jonathan Corbet <corbet@lwn.net>,
         Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         linux-doc@vger.kernel.org
 Cc:     linux-kernel@vger.kernel.org, Stephen Kitt <steve@sk2.org>
-Subject: [PATCH 4/6] docs: add missing IPC documentation in sysctl/kernel.rst
-Date:   Thu, 13 Feb 2020 18:46:59 +0100
-Message-Id: <20200213174701.3200366-5-steve@sk2.org>
+Subject: [PATCH 0/6] docs: sysctl/kernel.rst rework
+Date:   Thu, 13 Feb 2020 18:46:55 +0100
+Message-Id: <20200213174701.3200366-1-steve@sk2.org>
 X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200213174701.3200366-1-steve@sk2.org>
-References: <20200213174701.3200366-1-steve@sk2.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 10090314967056797061
+X-Ovh-Tracer-Id: 10073144994123304325
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedugedrieekgddutdeiucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucfkpheptddrtddrtddrtddpkeekrdduvddvrdduvdeirdduudeinecuvehluhhsthgvrhfuihiivgepudenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepphhlrgihvghrjeduhedrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehsthgvvhgvsehskhdvrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedugedrieekgddutdehucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhephffvufffkffogggtgfesthekredtredtjeenucfhrhhomhepufhtvghphhgvnhcumfhithhtuceoshhtvghvvgesshhkvddrohhrgheqnecukfhppedtrddtrddtrddtpdekkedruddvvddruddviedrudduieenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejudehrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This adds short descriptions of msgmax, msgmnb, msgmni, and shmmni,
-which were previously listed in kernel.rst but not described.
+Hi,
 
-Signed-off-by: Stephen Kitt <steve@sk2.org>
----
- Documentation/admin-guide/sysctl/kernel.rst | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+A recent discussion about differences in the "panic" description in
+sysctl/kernel.rst led me to look into completing that file, and it
+turned out that more work was needed than documenting "panic". This
+patch series is the first batch, making the resulting documentation
+hopefully nicer and more accurate. It doesn't add fields that are
+present in 5.5 but not documented, that's the subject of another
+series of patches I haven't started working on yet...
 
-diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
-index 9221366901af..29a712e24610 100644
---- a/Documentation/admin-guide/sysctl/kernel.rst
-+++ b/Documentation/admin-guide/sysctl/kernel.rst
-@@ -413,6 +413,15 @@ to false.  Generally used with the `kexec_load_disabled`_ toggle.
- msgmax, msgmnb, and msgmni
- ==========================
- 
-+``msgmax`` is the maximum size of an IPC message, in bytes. 8192 by
-+default (``MSGMAX``).
-+
-+``msgmnb`` is the maximum size of an IPC queue, in bytes. 16384 by
-+default (``MSGMNB``).
-+
-+``msgmni`` is the maximum number of IPC queues. 32000 by default
-+(``MSGMNI``).
-+
- 
- msg_next_id, sem_next_id, and shm_next_id (System V IPC)
- ========================================================
-@@ -961,6 +970,9 @@ kernel.  This value defaults to ``SHMMAX``.
- shmmni
- ======
- 
-+This value determines the maximum number of shared memory segments.
-+4096 by default (``SHMMNI``).
-+
- 
- shm_rmid_forced
- ===============
+Regards,
+
+Stephen
+
+
+Stephen Kitt (6):
+  docs: pretty up sysctl/kernel.rst
+  docs: merge debugging-modules.txt into sysctl/kernel.rst
+  docs: drop l2cr from sysctl/kernel.rst
+  docs: add missing IPC documentation in sysctl/kernel.rst
+  docs: document stop-a in sysctl/kernel.rst
+  docs: document panic fully in sysctl/kernel.rst
+
+ Documentation/admin-guide/sysctl/kernel.rst | 1026 ++++++++++---------
+ Documentation/debugging-modules.txt         |   22 -
+ 2 files changed, 530 insertions(+), 518 deletions(-)
+ delete mode 100644 Documentation/debugging-modules.txt
+
+
+base-commit: 359c92c02bfae1a6f1e8e37c298e518fd256642c
 -- 
 2.24.1
 
