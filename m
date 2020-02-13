@@ -2,31 +2,31 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DB8F115CA4E
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2020 19:26:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AD65915CA6D
+	for <lists+linux-doc@lfdr.de>; Thu, 13 Feb 2020 19:33:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727076AbgBMS0z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Feb 2020 13:26:55 -0500
-Received: from ms.lwn.net ([45.79.88.28]:46850 "EHLO ms.lwn.net"
+        id S1727347AbgBMSdr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 13 Feb 2020 13:33:47 -0500
+Received: from ms.lwn.net ([45.79.88.28]:46922 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725781AbgBMS0z (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 13 Feb 2020 13:26:55 -0500
+        id S1725781AbgBMSdr (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Feb 2020 13:33:47 -0500
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 570832D8;
-        Thu, 13 Feb 2020 18:26:54 +0000 (UTC)
-Date:   Thu, 13 Feb 2020 11:26:53 -0700
+        by ms.lwn.net (Postfix) with ESMTPSA id 554F3740;
+        Thu, 13 Feb 2020 18:33:46 +0000 (UTC)
+Date:   Thu, 13 Feb 2020 11:33:45 -0700
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     "Daniel W. S. Almeida" <dwlsalmeida@gmail.com>
-Cc:     mchehab+samsung@kernel.org, linux-doc@vger.kernel.org,
-        skhan@linuxfoundation.org,
-        linux-kernel-mentees@lists.linuxfoundation.org
-Subject: Re: [PATCH v2 0/5] Documentation: nfs: convert remaining files to
- ReST.
-Message-ID: <20200213112653.069734d7@lwn.net>
-In-Reply-To: <20200129044917.566906-1-dwlsalmeida@gmail.com>
-References: <20200129044917.566906-1-dwlsalmeida@gmail.com>
+To:     Yue Hu <zbestahu@gmail.com>
+Cc:     minchan@kernel.org, ngupta@vflare.org,
+        sergey.senozhatsky.work@gmail.com, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, huyue2@yulong.com, zbestahu@163.com
+Subject: Re: [PATCH] Documentation: zram: fix the description about
+ orig_data_size of mm_stat
+Message-ID: <20200213113345.187b1424@lwn.net>
+In-Reply-To: <20200206111031.9524-1-zbestahu@gmail.com>
+References: <20200206111031.9524-1-zbestahu@gmail.com>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -36,28 +36,33 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 29 Jan 2020 01:49:12 -0300
-"Daniel W. S. Almeida" <dwlsalmeida@gmail.com> wrote:
+On Thu,  6 Feb 2020 19:10:31 +0800
+Yue Hu <zbestahu@gmail.com> wrote:
 
-> From: "Daniel W. S. Almeida" <dwlsalmeida@gmail.com>
+> From: Yue Hu <zbestahu@163.com>
 > 
-> This series completes the conversion of Documentation/filesystems/nfs to ReST.
+> orig_data_size counted the same_pages by commit 51f9f82c855d ("zram:
+> count same page write as page_stored"), so let's fix it.
 > 
+> Signed-off-by: Yue Hu <zbestahu@163.com>
+> ---
+>  Documentation/admin-guide/blockdev/zram.rst | 2 --
+>  1 file changed, 2 deletions(-)
 > 
-> I did not think these rst files were supposed to be
-> in admin-guide, so I left them where they are.
-> 
-> Changes in v2:
-> 	Change csv-table to ReST grid table format
-> 	Remove "#." syntax
-> 
-> Daniel W. S. Almeida (5):
->   Documentation: nfs: convert pnfs.txt to ReST
->   Documentation: nfs: rpc-cache: convert to ReST
->   Documentation: nfs: rpc-server-gss: convert to ReST
->   Documentation: nfs: nfs41-server: convert to ReST
->   Documentation: nfs: knfsd-stats: convert to ReST
+> diff --git a/Documentation/admin-guide/blockdev/zram.rst b/Documentation/admin-guide/blockdev/zram.rst
+> index 27c77d853028..a6fd1f9b5faf 100644
+> --- a/Documentation/admin-guide/blockdev/zram.rst
+> +++ b/Documentation/admin-guide/blockdev/zram.rst
+> @@ -251,8 +251,6 @@ line of text and contains the following stats separated by whitespace:
+>  
+>   ================ =============================================================
+>   orig_data_size   uncompressed size of data stored in this disk.
+> -		  This excludes same-element-filled pages (same_pages) since
+> -		  no memory is allocated for them.
+>                    Unit: bytes
+>   compr_data_size  compressed size of data stored in this disk
+>   mem_used_total   the amount of memory allocated for this disk. This
 
-I've applied the set, thanks.
+Applied, thanks.
 
 jon
