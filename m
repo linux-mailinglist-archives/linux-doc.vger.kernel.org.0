@@ -2,177 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id E0D4515F455
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Feb 2020 19:23:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3696A15F3C7
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Feb 2020 19:22:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2394631AbgBNSU3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Feb 2020 13:20:29 -0500
-Received: from mail.kernel.org ([198.145.29.99]:53788 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730306AbgBNPuF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Feb 2020 10:50:05 -0500
-Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id BB79124689;
-        Fri, 14 Feb 2020 15:50:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1581695404;
-        bh=QDbcSE8Xu5JeiofYS9+dLJs+2AYt2A/dcxPo4yHaiRo=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=EdeSOTcHm/L/OzlMFPklhX268BEITsk+xfUqGqSqPIXLIHH6fwqwjhGKjKcoIKL4d
-         l+cxmEONiaFnMaabTqcpQW5hn0ZpZpgsSqXW/1Sp6YAYnqq/aPd1dJVme+blwlBGXt
-         CT5hp6r0NwGabczXNowrSjP94uMS6sIJj8MCBhFk=
-From:   Sasha Levin <sashal@kernel.org>
-To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
-Cc:     Heinz Mauelshagen <heinzm@redhat.com>,
-        Mike Snitzer <snitzer@redhat.com>,
-        Sasha Levin <sashal@kernel.org>, dm-devel@redhat.com,
-        linux-doc@vger.kernel.org
-Subject: [PATCH AUTOSEL 5.5 053/542] dm raid: table line rebuild status fixes
-Date:   Fri, 14 Feb 2020 10:40:45 -0500
-Message-Id: <20200214154854.6746-53-sashal@kernel.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214154854.6746-1-sashal@kernel.org>
-References: <20200214154854.6746-1-sashal@kernel.org>
+        id S2404476AbgBNSPJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Feb 2020 13:15:09 -0500
+Received: from mail-il1-f195.google.com ([209.85.166.195]:33681 "EHLO
+        mail-il1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2404455AbgBNSPJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Feb 2020 13:15:09 -0500
+Received: by mail-il1-f195.google.com with SMTP id s18so8829607iln.0
+        for <linux-doc@vger.kernel.org>; Fri, 14 Feb 2020 10:15:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=8xaqocqI7n6rLhfdsAfsTQaAIhwnxm1qjzL1SYx1WFE=;
+        b=hj1rflza0N0ahI/+Gib5Me4e1hJXe20b4t9CabubbAWx1ea4PGEDoBKz1g/sTDSHVh
+         BkrKDWptx3Iw26vTATPAmfUJDeuVBDraF8++mKvznG20mbE6Pice1TDSOeV6+MqN3YEb
+         3nbpfkMNy8ZmiUOCpbFFVmtuXK1tpbmsYgTLY=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=8xaqocqI7n6rLhfdsAfsTQaAIhwnxm1qjzL1SYx1WFE=;
+        b=NKVYZk3Qazr+sj6ZRVeUHMrleX99benk5rLXfiwVcu2vDMbRoDofwpy0TrdTrJFdNk
+         vfHv8zgIXWw63FEAYk1IgUoio+J3gUOS7Qc0E1ZQ+tUXoTyZemMN6m0KkzU15TWcu0MQ
+         oC2laYblC/SBkmQnyFvrvoF3A067Py2rP5o2DFFZbuZafj0RLmUcmOSNgD5+IoD8WoW9
+         QY3Ho3k+arpvHRIaLI7x0wlLj/kGYPGseekMBo3vAQFwU+WJ1Lgv9SBgmgofrycfjuKN
+         A1dFNNIA1/7RbukMaPv9c09oCIwp12TK17UTca5qV07tBXTBVinp48TvVKUo0flo5lto
+         89bg==
+X-Gm-Message-State: APjAAAWD9SXu/BhBS6+CUAGBguLL2zTZci719TDbOxPduv6+rV7rlZKj
+        DbpzGHnRm6IjLL5mIuiNIYaFx2UoJ4uOnwPMNIzXZA==
+X-Google-Smtp-Source: APXvYqyfILAtOIqub0HXb6q5FysHf639kfwZQi9NKsp0iDgHRaBKzXR2uoGVpx/vHgvyqNQMw/PayKSHtXU1wqjJCF8=
+X-Received: by 2002:a92:af8e:: with SMTP id v14mr4049827ill.150.1581704108241;
+ Fri, 14 Feb 2020 10:15:08 -0800 (PST)
 MIME-Version: 1.0
-X-stable: review
-X-Patchwork-Hint: Ignore
-Content-Transfer-Encoding: 8bit
+References: <158166060044.9887.549561499483343724.stgit@devnote2> <158166062748.9887.15284887096084339722.stgit@devnote2>
+In-Reply-To: <158166062748.9887.15284887096084339722.stgit@devnote2>
+From:   Hsin-Yi Wang <hsinyi@chromium.org>
+Date:   Sat, 15 Feb 2020 02:14:42 +0800
+Message-ID: <CAJMQK-hZAgCPjgdRE70QrkSKvJAgYPwmCHB9pjLUn3tQ6p_2YA@mail.gmail.com>
+Subject: Re: [PATCH 2/3] random: rng-seed source is utf-8
+To:     Masami Hiramatsu <mhiramat@kernel.org>
+Cc:     lkml <linux-kernel@vger.kernel.org>, kernel-team@android.com,
+        Mark Salyzyn <salyzyn@android.com>,
+        "Theodore Ts'o" <tytso@mit.edu>, Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Richard Henderson <richard.henderson@linaro.org>,
+        Mark Brown <broonie@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Mike Rapoport <rppt@linux.ibm.com>,
+        Arvind Sankar <nivedita@alum.mit.edu>,
+        Dominik Brodowski <linux@dominikbrodowski.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Alexander Potapenko <glider@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+        Juergen Gross <jgross@suse.com>, Rob Herring <robh@kernel.org>,
+        linux-doc@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Heinz Mauelshagen <heinzm@redhat.com>
+On Fri, Feb 14, 2020 at 2:10 PM Masami Hiramatsu <mhiramat@kernel.org> wrote:
+>
+> From: Mark Salyzyn <salyzyn@android.com>
+>
+> commit 428826f5358c922dc378830a1717b682c0823160
+> ("fdt: add support for rng-seed") makes the assumption that the data
+> in rng-seed is binary, when it is typically constructed of utf-8
+> characters which has a bitness of roughly 6 to give appropriate
+> credit due for the entropy.
+>
+> Fixes: 428826f5358c ("fdt: add support for rng-seed")
+> Signed-off-by: Mark Salyzyn <salyzyn@android.com>
+> Cc: linux-kernel@vger.kernel.org
+> Cc: kernel-team@android.com
+> Cc: Kees Cook <keescook@chromium.org>
+> Cc: Theodore Y. Ts'o <tytso@mit.edu>
+> ---
+>  drivers/char/random.c |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/drivers/char/random.c b/drivers/char/random.c
+> index c7f9584de2c8..ee21a6a584b1 100644
+> --- a/drivers/char/random.c
+> +++ b/drivers/char/random.c
+> @@ -2306,7 +2306,7 @@ EXPORT_SYMBOL_GPL(add_hwgenerator_randomness);
+>  void add_bootloader_randomness(const void *buf, unsigned int size)
+>  {
+>         if (IS_ENABLED(CONFIG_RANDOM_TRUST_BOOTLOADER))
+> -               add_hwgenerator_randomness(buf, size, size * 8);
+> +               add_hwgenerator_randomness(buf, size, size * 6);
+Hi,
 
-[ Upstream commit 43f3952a51f8198d365acb7f51fe42d578fe5d0a ]
+In the next patch, entropy is added by
++                       add_device_randomness(rng_seed, strlen(rng_seed));
++                       credit_trusted_entropy_bits(strlen(rng_seed) * 6);
 
-raid_status() wasn't emitting rebuild flags on the table line properly
-because the rdev number was not yet set properly; index raid component
-devices array directly to solve.
+If the add_bootloader_randomness() function is only used for dt, do we
+need to shorten the credit bits?
 
-Also fix wrong argument count on emitted table line caused by 1 too
-many rebuild/write_mostly argument and consider any journal_(dev|mode)
-pairs.
+In dt-schema[1] we stated that this is a uint8 array, and dt is able
+to generate this. It doesn't need to avoid using space for parameter
+splitting.
 
-Link: https://bugzilla.redhat.com/1782045
-Signed-off-by: Heinz Mauelshagen <heinzm@redhat.com>
-Signed-off-by: Mike Snitzer <snitzer@redhat.com>
-Signed-off-by: Sasha Levin <sashal@kernel.org>
----
- .../admin-guide/device-mapper/dm-raid.rst     |  2 +
- drivers/md/dm-raid.c                          | 43 ++++++++++---------
- 2 files changed, 24 insertions(+), 21 deletions(-)
+For some device, asking for random number is time consuming. Shorten
+the credit length makes it have to generate longer seed for dt to meet
+the CRNG_INIT_CNT_THRESH threshold.
 
-diff --git a/Documentation/admin-guide/device-mapper/dm-raid.rst b/Documentation/admin-guide/device-mapper/dm-raid.rst
-index f6344675e3951..695a2ea1d1ae2 100644
---- a/Documentation/admin-guide/device-mapper/dm-raid.rst
-+++ b/Documentation/admin-guide/device-mapper/dm-raid.rst
-@@ -419,3 +419,5 @@ Version History
- 	rebuild errors.
-  1.15.0 Fix size extensions not being synchronized in case of new MD bitmap
-         pages allocated;  also fix those not occuring after previous reductions
-+ 1.15.1 Fix argument count and arguments for rebuild/write_mostly/journal_(dev|mode)
-+        on the status line.
-diff --git a/drivers/md/dm-raid.c b/drivers/md/dm-raid.c
-index c412eaa975fc0..9a18bef0a5ff0 100644
---- a/drivers/md/dm-raid.c
-+++ b/drivers/md/dm-raid.c
-@@ -129,7 +129,9 @@ struct raid_dev {
- 				  CTR_FLAG_RAID10_COPIES | \
- 				  CTR_FLAG_RAID10_FORMAT | \
- 				  CTR_FLAG_DELTA_DISKS | \
--				  CTR_FLAG_DATA_OFFSET)
-+				  CTR_FLAG_DATA_OFFSET | \
-+				  CTR_FLAG_JOURNAL_DEV | \
-+				  CTR_FLAG_JOURNAL_MODE)
- 
- /* Valid options definitions per raid level... */
- 
-@@ -3001,7 +3003,6 @@ static int raid_ctr(struct dm_target *ti, unsigned int argc, char **argv)
- 		{ 1, 254, "Cannot understand number of raid devices parameters" }
- 	};
- 
--	/* Must have <raid_type> */
- 	arg = dm_shift_arg(&as);
- 	if (!arg) {
- 		ti->error = "No arguments";
-@@ -3508,8 +3509,7 @@ static void raid_status(struct dm_target *ti, status_type_t type,
- 	unsigned long recovery;
- 	unsigned int raid_param_cnt = 1; /* at least 1 for chunksize */
- 	unsigned int sz = 0;
--	unsigned int rebuild_disks;
--	unsigned int write_mostly_params = 0;
-+	unsigned int rebuild_writemostly_count = 0;
- 	sector_t progress, resync_max_sectors, resync_mismatches;
- 	enum sync_state state;
- 	struct raid_type *rt;
-@@ -3593,18 +3593,20 @@ static void raid_status(struct dm_target *ti, status_type_t type,
- 	case STATUSTYPE_TABLE:
- 		/* Report the table line string you would use to construct this raid set */
- 
--		/* Calculate raid parameter count */
--		for (i = 0; i < rs->raid_disks; i++)
--			if (test_bit(WriteMostly, &rs->dev[i].rdev.flags))
--				write_mostly_params += 2;
--		rebuild_disks = memweight(rs->rebuild_disks, DISKS_ARRAY_ELEMS * sizeof(*rs->rebuild_disks));
--		raid_param_cnt += rebuild_disks * 2 +
--				  write_mostly_params +
-+		/*
-+		 * Count any rebuild or writemostly argument pairs and subtract the
-+		 * hweight count being added below of any rebuild and writemostly ctr flags.
-+		 */
-+		for (i = 0; i < rs->raid_disks; i++) {
-+			rebuild_writemostly_count += (test_bit(i, (void *) rs->rebuild_disks) ? 2 : 0) +
-+						     (test_bit(WriteMostly, &rs->dev[i].rdev.flags) ? 2 : 0);
-+		}
-+		rebuild_writemostly_count -= (test_bit(__CTR_FLAG_REBUILD, &rs->ctr_flags) ? 2 : 0) +
-+					     (test_bit(__CTR_FLAG_WRITE_MOSTLY, &rs->ctr_flags) ? 2 : 0);
-+		/* Calculate raid parameter count based on ^ rebuild/writemostly argument counts and ctr flags set. */
-+		raid_param_cnt += rebuild_writemostly_count +
- 				  hweight32(rs->ctr_flags & CTR_FLAG_OPTIONS_NO_ARGS) +
--				  hweight32(rs->ctr_flags & CTR_FLAG_OPTIONS_ONE_ARG) * 2 +
--				  (test_bit(__CTR_FLAG_JOURNAL_DEV, &rs->ctr_flags) ? 2 : 0) +
--				  (test_bit(__CTR_FLAG_JOURNAL_MODE, &rs->ctr_flags) ? 2 : 0);
--
-+				  hweight32(rs->ctr_flags & CTR_FLAG_OPTIONS_ONE_ARG) * 2;
- 		/* Emit table line */
- 		/* This has to be in the documented order for userspace! */
- 		DMEMIT("%s %u %u", rs->raid_type->name, raid_param_cnt, mddev->new_chunk_sectors);
-@@ -3612,11 +3614,10 @@ static void raid_status(struct dm_target *ti, status_type_t type,
- 			DMEMIT(" %s", dm_raid_arg_name_by_flag(CTR_FLAG_SYNC));
- 		if (test_bit(__CTR_FLAG_NOSYNC, &rs->ctr_flags))
- 			DMEMIT(" %s", dm_raid_arg_name_by_flag(CTR_FLAG_NOSYNC));
--		if (rebuild_disks)
-+		if (test_bit(__CTR_FLAG_REBUILD, &rs->ctr_flags))
- 			for (i = 0; i < rs->raid_disks; i++)
--				if (test_bit(rs->dev[i].rdev.raid_disk, (void *) rs->rebuild_disks))
--					DMEMIT(" %s %u", dm_raid_arg_name_by_flag(CTR_FLAG_REBUILD),
--							 rs->dev[i].rdev.raid_disk);
-+				if (test_bit(i, (void *) rs->rebuild_disks))
-+					DMEMIT(" %s %u", dm_raid_arg_name_by_flag(CTR_FLAG_REBUILD), i);
- 		if (test_bit(__CTR_FLAG_DAEMON_SLEEP, &rs->ctr_flags))
- 			DMEMIT(" %s %lu", dm_raid_arg_name_by_flag(CTR_FLAG_DAEMON_SLEEP),
- 					  mddev->bitmap_info.daemon_sleep);
-@@ -3626,7 +3627,7 @@ static void raid_status(struct dm_target *ti, status_type_t type,
- 		if (test_bit(__CTR_FLAG_MAX_RECOVERY_RATE, &rs->ctr_flags))
- 			DMEMIT(" %s %d", dm_raid_arg_name_by_flag(CTR_FLAG_MAX_RECOVERY_RATE),
- 					 mddev->sync_speed_max);
--		if (write_mostly_params)
-+		if (test_bit(__CTR_FLAG_WRITE_MOSTLY, &rs->ctr_flags))
- 			for (i = 0; i < rs->raid_disks; i++)
- 				if (test_bit(WriteMostly, &rs->dev[i].rdev.flags))
- 					DMEMIT(" %s %d", dm_raid_arg_name_by_flag(CTR_FLAG_WRITE_MOSTLY),
-@@ -4029,7 +4030,7 @@ static void raid_resume(struct dm_target *ti)
- 
- static struct target_type raid_target = {
- 	.name = "raid",
--	.version = {1, 15, 0},
-+	.version = {1, 15, 1},
- 	.module = THIS_MODULE,
- 	.ctr = raid_ctr,
- 	.dtr = raid_dtr,
--- 
-2.20.1
+[1] https://github.com/devicetree-org/dt-schema/blob/master/schemas/chosen.yaml#L55
 
+Thanks
