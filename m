@@ -2,102 +2,177 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 02E9915EED4
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Feb 2020 18:43:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E0D4515F455
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Feb 2020 19:23:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389635AbgBNRn1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Feb 2020 12:43:27 -0500
-Received: from mout.gmx.net ([212.227.17.21]:58423 "EHLO mout.gmx.net"
+        id S2394631AbgBNSU3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Feb 2020 13:20:29 -0500
+Received: from mail.kernel.org ([198.145.29.99]:53788 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2389657AbgBNRn1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Feb 2020 12:43:27 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-        s=badeba3b8450; t=1581702189;
-        bh=YD0nFl3vWsnaqqD55goqiNGiQpuyc+Q7p0W3ZhF8GAc=;
-        h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
-        b=hyGOJVtYMdzUajW1BFxX5mCC+gi/I9kyRDiLz+4PsgtXaxY7bdZrxjbGG6gnF11+T
-         NmrLVR14lphMFbFfyJFDclgC9hOb/OJwnjOuMiYtYICWaTuS19yXio6lsldMroG+3U
-         CWscgUZXSlNjbakc7qc4IYKZxGg0cO/QeTWl0nMs=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from longitude ([37.201.214.12]) by mail.gmx.com (mrgmx105
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MTRQq-1iuuhN2GPk-00Tnwl; Fri, 14
- Feb 2020 18:43:09 +0100
-From:   =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
-To:     linux-doc@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Logan Gunthorpe <logang@deltatee.com>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Shobhit Kukreti <shobhitkukreti@gmail.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jason Gunthorpe <jgg@ziepe.ca>, Harald Seiler <hws@denx.de>,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 4/4] docs: admin-guide: edid: Clarify where to run "make"
-Date:   Fri, 14 Feb 2020 18:41:35 +0100
-Message-Id: <20200214174139.16101-4-j.neuschaefer@gmx.net>
+        id S1730306AbgBNPuF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Feb 2020 10:50:05 -0500
+Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id BB79124689;
+        Fri, 14 Feb 2020 15:50:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1581695404;
+        bh=QDbcSE8Xu5JeiofYS9+dLJs+2AYt2A/dcxPo4yHaiRo=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=EdeSOTcHm/L/OzlMFPklhX268BEITsk+xfUqGqSqPIXLIHH6fwqwjhGKjKcoIKL4d
+         l+cxmEONiaFnMaabTqcpQW5hn0ZpZpgsSqXW/1Sp6YAYnqq/aPd1dJVme+blwlBGXt
+         CT5hp6r0NwGabczXNowrSjP94uMS6sIJj8MCBhFk=
+From:   Sasha Levin <sashal@kernel.org>
+To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Cc:     Heinz Mauelshagen <heinzm@redhat.com>,
+        Mike Snitzer <snitzer@redhat.com>,
+        Sasha Levin <sashal@kernel.org>, dm-devel@redhat.com,
+        linux-doc@vger.kernel.org
+Subject: [PATCH AUTOSEL 5.5 053/542] dm raid: table line rebuild status fixes
+Date:   Fri, 14 Feb 2020 10:40:45 -0500
+Message-Id: <20200214154854.6746-53-sashal@kernel.org>
 X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200214174139.16101-1-j.neuschaefer@gmx.net>
-References: <20200214174139.16101-1-j.neuschaefer@gmx.net>
+In-Reply-To: <20200214154854.6746-1-sashal@kernel.org>
+References: <20200214154854.6746-1-sashal@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:DKgAw2x+7Ddj6hriwqYIqBxjRCFrNpwXTt0CoC57L4vTp6HUO9o
- MIwJqXbuVjJFLBjzfZvQ1crfmQiDZyWAuXahgJkoRK2LCUcYjt+B9E7cwSXKHSnkI6rh5bJ
- /usDS4opbxeV25Ko3D6t8zFvLvec+VBZzN0pQuBC6xMYS9AwdAJlWCyyGIitZJOuH5n5Vtn
- qEcLyfAI+53Q9pp3bFlmQ==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:OAl7uKbfhaM=:kAu0UPlFuy368GjG4NK/qI
- T43/K/OWcc6Chj9+DynxGbxk+rc5YgAQQ9sPdhvlc/e0VdAe/RkNrzMLg0IwjVuWbmKXE0mef
- La2ntDv6ZVmKpfdk72FYQGz+RdSvDcJtpK2aO/cNqjN4YuS+wAK5ma1U57AEdU3/WsywuhGqs
- VAyDz5I3tRLYov8rVd/5SndvWN3AOfcPf8joWg0cwB5NHX+0QpqwyVUDP3ieq5+Jm0W/ceftu
- T/L3KXR3LjXVUdyeUo6nV6+i3Q4Q1dARquYtbvPSoABkt8cbAcp9bOdM0RKwHuN+nWU19b9Ry
- Wfy74bXsDR2TYM4gby8f/EqtTlik6lgaSgTc2PSFWgbVt/hCwpbzSrpvvU7ceqSUHmQgRZlEm
- v9OrZd07Xlcpg7fZPlSDX/pla1Eu4Cn46RpW14hIg3sSXKgjR7oyBjZE1Zbonx+9gS1i9qeJd
- WbIb3cntxTBb07vg+BbS2Hp8BlRLY2Dmlf54Orm+W35rFCCykBjVlfGVQ/ZQCwpO8KzBulkrq
- 1PkF7pvzDLenKD8X+0TpKZ5PlhlrxpVXwM0h4htpAQZhdfF14ace0fHWDhRgWwzHo1p/aMozD
- 0ofZ72k1rwJbwOpalH9OK7WD7ZT/EuZZSfQTPzVE+Uou2FgrLPg9X1odeCRPiRrdJjxNyjo6R
- yWMMyYTAfKBjQHoDqFG9K3RieTPHjgfHji7yuIBvsCPgBa7cAkDR+uxBoWC+1eVpAngQPPc19
- sgDn7RKy9usjeiZquxsDHlk86u4hnjk2b/ySz8JnxaPXvQVJAjjXXhe0LFNPHN8DBwFYAHuNi
- DHdvbWED5rkMQ0YwhDhajA6EdeC97dquz9m2BTnt9bOnnYFRTPkvJUOIYgOw5zszuPpCjLOpV
- wL8RRsMjG9/Plx5uU2yJeiG86RsOLuYlNcri+2q7kz2jJ7n48OiN+FblSQvvnYMBreUBK+lDw
- J9I9MDGT1/ZIvivYM+5M9Hquu/KxFpj/qj6mR/lAVe9S0YEN4Q/5yU/qwSRrw2ZUs/aDcqgxx
- mFXpghz6PZfLLttlSKUVfMIaGaqnRJTkISwKP2LLbwOOAeZphnU4gtWnTb5jbJ8FTeTHqZHsj
- AyGM0fGZc26dE35jCzmcn3w58bQZrKXVIxQWCkbBhFVMmstl+pcT2+ikpGckKp6aFzK7iWFYk
- UMKT5vIT1lNNH5sQPpLXktxKRWrUvgmX3sgS/juN7sOOTLvqpZgyubiLo/mjXDlxaH/VjoCBZ
- VBCyo8aZZ/J0NxMm/
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When both the documentation and the data files lived in
-Documentation/EDID, this wasn't necessary, but both have
-been moved to other directories in the meantime.
+From: Heinz Mauelshagen <heinzm@redhat.com>
 
-Signed-off-by: Jonathan Neusch=C3=A4fer <j.neuschaefer@gmx.net>
-=2D--
- Documentation/admin-guide/edid.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+[ Upstream commit 43f3952a51f8198d365acb7f51fe42d578fe5d0a ]
 
-diff --git a/Documentation/admin-guide/edid.rst b/Documentation/admin-guid=
-e/edid.rst
-index 7dc07942ceb2..80deeb21a265 100644
-=2D-- a/Documentation/admin-guide/edid.rst
-+++ b/Documentation/admin-guide/edid.rst
-@@ -34,7 +34,7 @@ individual data for a specific misbehaving monitor, comm=
-ented sources
- and a Makefile environment are given here.
+raid_status() wasn't emitting rebuild flags on the table line properly
+because the rdev number was not yet set properly; index raid component
+devices array directly to solve.
 
- To create binary EDID and C source code files from the existing data
--material, simply type "make".
-+material, simply type "make" in tools/edid/.
+Also fix wrong argument count on emitted table line caused by 1 too
+many rebuild/write_mostly argument and consider any journal_(dev|mode)
+pairs.
 
- If you want to create your own EDID file, copy the file 1024x768.S,
- replace the settings with your own data and add a new target to the
-=2D-
+Link: https://bugzilla.redhat.com/1782045
+Signed-off-by: Heinz Mauelshagen <heinzm@redhat.com>
+Signed-off-by: Mike Snitzer <snitzer@redhat.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ .../admin-guide/device-mapper/dm-raid.rst     |  2 +
+ drivers/md/dm-raid.c                          | 43 ++++++++++---------
+ 2 files changed, 24 insertions(+), 21 deletions(-)
+
+diff --git a/Documentation/admin-guide/device-mapper/dm-raid.rst b/Documentation/admin-guide/device-mapper/dm-raid.rst
+index f6344675e3951..695a2ea1d1ae2 100644
+--- a/Documentation/admin-guide/device-mapper/dm-raid.rst
++++ b/Documentation/admin-guide/device-mapper/dm-raid.rst
+@@ -419,3 +419,5 @@ Version History
+ 	rebuild errors.
+  1.15.0 Fix size extensions not being synchronized in case of new MD bitmap
+         pages allocated;  also fix those not occuring after previous reductions
++ 1.15.1 Fix argument count and arguments for rebuild/write_mostly/journal_(dev|mode)
++        on the status line.
+diff --git a/drivers/md/dm-raid.c b/drivers/md/dm-raid.c
+index c412eaa975fc0..9a18bef0a5ff0 100644
+--- a/drivers/md/dm-raid.c
++++ b/drivers/md/dm-raid.c
+@@ -129,7 +129,9 @@ struct raid_dev {
+ 				  CTR_FLAG_RAID10_COPIES | \
+ 				  CTR_FLAG_RAID10_FORMAT | \
+ 				  CTR_FLAG_DELTA_DISKS | \
+-				  CTR_FLAG_DATA_OFFSET)
++				  CTR_FLAG_DATA_OFFSET | \
++				  CTR_FLAG_JOURNAL_DEV | \
++				  CTR_FLAG_JOURNAL_MODE)
+ 
+ /* Valid options definitions per raid level... */
+ 
+@@ -3001,7 +3003,6 @@ static int raid_ctr(struct dm_target *ti, unsigned int argc, char **argv)
+ 		{ 1, 254, "Cannot understand number of raid devices parameters" }
+ 	};
+ 
+-	/* Must have <raid_type> */
+ 	arg = dm_shift_arg(&as);
+ 	if (!arg) {
+ 		ti->error = "No arguments";
+@@ -3508,8 +3509,7 @@ static void raid_status(struct dm_target *ti, status_type_t type,
+ 	unsigned long recovery;
+ 	unsigned int raid_param_cnt = 1; /* at least 1 for chunksize */
+ 	unsigned int sz = 0;
+-	unsigned int rebuild_disks;
+-	unsigned int write_mostly_params = 0;
++	unsigned int rebuild_writemostly_count = 0;
+ 	sector_t progress, resync_max_sectors, resync_mismatches;
+ 	enum sync_state state;
+ 	struct raid_type *rt;
+@@ -3593,18 +3593,20 @@ static void raid_status(struct dm_target *ti, status_type_t type,
+ 	case STATUSTYPE_TABLE:
+ 		/* Report the table line string you would use to construct this raid set */
+ 
+-		/* Calculate raid parameter count */
+-		for (i = 0; i < rs->raid_disks; i++)
+-			if (test_bit(WriteMostly, &rs->dev[i].rdev.flags))
+-				write_mostly_params += 2;
+-		rebuild_disks = memweight(rs->rebuild_disks, DISKS_ARRAY_ELEMS * sizeof(*rs->rebuild_disks));
+-		raid_param_cnt += rebuild_disks * 2 +
+-				  write_mostly_params +
++		/*
++		 * Count any rebuild or writemostly argument pairs and subtract the
++		 * hweight count being added below of any rebuild and writemostly ctr flags.
++		 */
++		for (i = 0; i < rs->raid_disks; i++) {
++			rebuild_writemostly_count += (test_bit(i, (void *) rs->rebuild_disks) ? 2 : 0) +
++						     (test_bit(WriteMostly, &rs->dev[i].rdev.flags) ? 2 : 0);
++		}
++		rebuild_writemostly_count -= (test_bit(__CTR_FLAG_REBUILD, &rs->ctr_flags) ? 2 : 0) +
++					     (test_bit(__CTR_FLAG_WRITE_MOSTLY, &rs->ctr_flags) ? 2 : 0);
++		/* Calculate raid parameter count based on ^ rebuild/writemostly argument counts and ctr flags set. */
++		raid_param_cnt += rebuild_writemostly_count +
+ 				  hweight32(rs->ctr_flags & CTR_FLAG_OPTIONS_NO_ARGS) +
+-				  hweight32(rs->ctr_flags & CTR_FLAG_OPTIONS_ONE_ARG) * 2 +
+-				  (test_bit(__CTR_FLAG_JOURNAL_DEV, &rs->ctr_flags) ? 2 : 0) +
+-				  (test_bit(__CTR_FLAG_JOURNAL_MODE, &rs->ctr_flags) ? 2 : 0);
+-
++				  hweight32(rs->ctr_flags & CTR_FLAG_OPTIONS_ONE_ARG) * 2;
+ 		/* Emit table line */
+ 		/* This has to be in the documented order for userspace! */
+ 		DMEMIT("%s %u %u", rs->raid_type->name, raid_param_cnt, mddev->new_chunk_sectors);
+@@ -3612,11 +3614,10 @@ static void raid_status(struct dm_target *ti, status_type_t type,
+ 			DMEMIT(" %s", dm_raid_arg_name_by_flag(CTR_FLAG_SYNC));
+ 		if (test_bit(__CTR_FLAG_NOSYNC, &rs->ctr_flags))
+ 			DMEMIT(" %s", dm_raid_arg_name_by_flag(CTR_FLAG_NOSYNC));
+-		if (rebuild_disks)
++		if (test_bit(__CTR_FLAG_REBUILD, &rs->ctr_flags))
+ 			for (i = 0; i < rs->raid_disks; i++)
+-				if (test_bit(rs->dev[i].rdev.raid_disk, (void *) rs->rebuild_disks))
+-					DMEMIT(" %s %u", dm_raid_arg_name_by_flag(CTR_FLAG_REBUILD),
+-							 rs->dev[i].rdev.raid_disk);
++				if (test_bit(i, (void *) rs->rebuild_disks))
++					DMEMIT(" %s %u", dm_raid_arg_name_by_flag(CTR_FLAG_REBUILD), i);
+ 		if (test_bit(__CTR_FLAG_DAEMON_SLEEP, &rs->ctr_flags))
+ 			DMEMIT(" %s %lu", dm_raid_arg_name_by_flag(CTR_FLAG_DAEMON_SLEEP),
+ 					  mddev->bitmap_info.daemon_sleep);
+@@ -3626,7 +3627,7 @@ static void raid_status(struct dm_target *ti, status_type_t type,
+ 		if (test_bit(__CTR_FLAG_MAX_RECOVERY_RATE, &rs->ctr_flags))
+ 			DMEMIT(" %s %d", dm_raid_arg_name_by_flag(CTR_FLAG_MAX_RECOVERY_RATE),
+ 					 mddev->sync_speed_max);
+-		if (write_mostly_params)
++		if (test_bit(__CTR_FLAG_WRITE_MOSTLY, &rs->ctr_flags))
+ 			for (i = 0; i < rs->raid_disks; i++)
+ 				if (test_bit(WriteMostly, &rs->dev[i].rdev.flags))
+ 					DMEMIT(" %s %d", dm_raid_arg_name_by_flag(CTR_FLAG_WRITE_MOSTLY),
+@@ -4029,7 +4030,7 @@ static void raid_resume(struct dm_target *ti)
+ 
+ static struct target_type raid_target = {
+ 	.name = "raid",
+-	.version = {1, 15, 0},
++	.version = {1, 15, 1},
+ 	.module = THIS_MODULE,
+ 	.ctr = raid_ctr,
+ 	.dtr = raid_dtr,
+-- 
 2.20.1
 
