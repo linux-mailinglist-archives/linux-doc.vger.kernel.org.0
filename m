@@ -2,48 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AC45A15F3C8
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Feb 2020 19:22:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 296FB15F550
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Feb 2020 19:39:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2404444AbgBNSPJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Feb 2020 13:15:09 -0500
-Received: from mail.kernel.org ([198.145.29.99]:51372 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2403889AbgBNSPH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Feb 2020 13:15:07 -0500
-Received: from mail-qt1-f176.google.com (mail-qt1-f176.google.com [209.85.160.176])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 84D7D2468D;
-        Fri, 14 Feb 2020 18:15:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1581704106;
-        bh=EgUf06AnxJMKKDD9vyJH7e9zyuboRGgH8QAWwfCzsDE=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=nZm10juJDfo2Yj82liZpPmIrIhwcXj3fMK4wNQ63R5sKqZahT0J541opn6Y9KxtqM
-         ZtnTUYYvsGLLcmxPXiE+lRyUBJSF/VWm6e9ozUt8Eu7GEq7sWz0L6cpWbZ9F+js8M/
-         nvXSd+CB4UnQkmhAAWv07+BbOiNFFWKPj18wiZPE=
-Received: by mail-qt1-f176.google.com with SMTP id d18so7568169qtj.10;
-        Fri, 14 Feb 2020 10:15:06 -0800 (PST)
-X-Gm-Message-State: APjAAAVP49jSHFKzyjF1pc1JoIzvGE9oo7avw605O41P9X930rrPejwf
-        WCYRZPjEpNkz7tn5zGPTNnJE79JAfrl+S4cXFg==
-X-Google-Smtp-Source: APXvYqxw+F4z1ZYq1QXrq+yJXzMLC4EqWE0yp7S40U2pHrAhLEMwW0jmuZvKNd4LOAWn0VfF1Z6wh3ZcM0sed4WWACc=
-X-Received: by 2002:aed:2344:: with SMTP id i4mr3684530qtc.136.1581704105492;
- Fri, 14 Feb 2020 10:15:05 -0800 (PST)
-MIME-Version: 1.0
-References: <158166060044.9887.549561499483343724.stgit@devnote2>
- <CAL_JsqJ_VwHdpQ_WnQHu5J-bfs1vRPd5HQwVekR+5kKdVi4sXw@mail.gmail.com> <1694f42c-bfc9-570a-64d2-3984965c8940@android.com>
-In-Reply-To: <1694f42c-bfc9-570a-64d2-3984965c8940@android.com>
-From:   Rob Herring <robh@kernel.org>
-Date:   Fri, 14 Feb 2020 12:14:53 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqKb=qBH6QXphEZi7vMS+2K5kNj1riXQiUWma=bidAjN5A@mail.gmail.com>
-Message-ID: <CAL_JsqKb=qBH6QXphEZi7vMS+2K5kNj1riXQiUWma=bidAjN5A@mail.gmail.com>
+        id S1729430AbgBNSbV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Feb 2020 13:31:21 -0500
+Received: from mail-pj1-f65.google.com ([209.85.216.65]:51909 "EHLO
+        mail-pj1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729479AbgBNSbV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Feb 2020 13:31:21 -0500
+Received: by mail-pj1-f65.google.com with SMTP id fa20so4217285pjb.1
+        for <linux-doc@vger.kernel.org>; Fri, 14 Feb 2020 10:31:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=android.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-transfer-encoding:content-language;
+        bh=b2tZd1tExc8HDMdHBE3vQFxVxr8Zxh1LCSwV2NCLKvA=;
+        b=I2psfdBnjWffVVztPHbsuO6CJ1Wik63YRMJ7O0UZnYqwXbM0XbThRNVDNh7GFGt4JL
+         m70CeLxJ8CHuU6pM7QNVUuzZizPkY/avCoYD7zSwwE4x6KERh6m95jrh0i4ikiCd8XRY
+         WPcezJytnnIzv3FYja0Zv8mEzFdsDTKHCRBxPwmbEHB6K0wZDWc1FXRkYuX/iM//beDU
+         yN/oHf2wS9u+UmOZVh4lDTXPJZQvK/E35/Q6KyJ6dosvdc0edZzptawqkbxSHv2j2X/X
+         mEMwuXWsi9Hdw6P8gXgL3ZHPcW9ZTVJHBKjYEyVIO6W9jvKmpjrXxVlrsKStqjIQQGfG
+         xOCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-transfer-encoding
+         :content-language;
+        bh=b2tZd1tExc8HDMdHBE3vQFxVxr8Zxh1LCSwV2NCLKvA=;
+        b=fzmL/+2XhgQdNXBzxXLeoyJLfAYbjTJhwTFa0w8uzo8C/zWPBeUNGnQqq5W4HjPVA0
+         dG7d5Hogbbt8xOz3c96lB2VEeZgFzJF/QUMdKxw8SBnrUiCX1GMzQhDNT+9ujoi2MSSV
+         1o7MRD4vAaFQYeXSebtVep8B+ScjcANnIWeheqEPeIDNMsW9Dar68VhJY1uueAs+bXuP
+         6hAWNQls0UdQwMP4TtahQhAYNO9IKBBZrPa7SxdZIv9wTteLGr4iNT8z/LfUXLhu9EPl
+         fiscjTchBRtXp4MZOMeuifKpTIKw3O6a78S5ZnttVCEakOMD8H84Qck0YzJ8GsSLOSwy
+         Jz3w==
+X-Gm-Message-State: APjAAAW91gzaxryq852HmPZQM7QHoXFvW0/66QXB4EqisablDOTdLljB
+        tJw8zgzkVQgSSRsVlCe5rqz7U4IPFE4=
+X-Google-Smtp-Source: APXvYqweRvrbcGI+TN/E706xtY2309e9rucgMW2XIhqLYDDV+p9y1XPcO+Pq087xKSbHaBwFV0buhg==
+X-Received: by 2002:a17:902:a616:: with SMTP id u22mr4596187plq.173.1581705080166;
+        Fri, 14 Feb 2020 10:31:20 -0800 (PST)
+Received: from nebulus.mtv.corp.google.com ([2620:15c:211:200:5404:91ba:59dc:9400])
+        by smtp.googlemail.com with ESMTPSA id a10sm782832pgk.71.2020.02.14.10.31.18
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 14 Feb 2020 10:31:19 -0800 (PST)
 Subject: Re: [PATCH 0/3] random: add random.rng_seed to bootconfig entry
-To:     Mark Salyzyn <salyzyn@android.com>
+To:     Rob Herring <robh@kernel.org>
 Cc:     Masami Hiramatsu <mhiramat@kernel.org>,
         "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
         Android Kernel Team <kernel-team@android.com>,
-        "Theodore Ts'o" <tytso@mit.edu>, Arnd Bergmann <arnd@arndb.de>,
+        Theodore Ts'o <tytso@mit.edu>, Arnd Bergmann <arnd@arndb.de>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Richard Henderson <richard.henderson@linaro.org>,
         Mark Brown <broonie@kernel.org>,
@@ -63,69 +70,62 @@ Cc:     Masami Hiramatsu <mhiramat@kernel.org>,
         Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
         Juergen Gross <jgross@suse.com>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+References: <158166060044.9887.549561499483343724.stgit@devnote2>
+ <CAL_JsqJ_VwHdpQ_WnQHu5J-bfs1vRPd5HQwVekR+5kKdVi4sXw@mail.gmail.com>
+ <1694f42c-bfc9-570a-64d2-3984965c8940@android.com>
+ <CAL_JsqKb=qBH6QXphEZi7vMS+2K5kNj1riXQiUWma=bidAjN5A@mail.gmail.com>
+From:   Mark Salyzyn <salyzyn@android.com>
+Message-ID: <7882e5d2-dd4d-cdfb-2aab-9a3d910882d4@android.com>
+Date:   Fri, 14 Feb 2020 10:31:18 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.3.0
+MIME-Version: 1.0
+In-Reply-To: <CAL_JsqKb=qBH6QXphEZi7vMS+2K5kNj1riXQiUWma=bidAjN5A@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-GB
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Feb 14, 2020 at 11:00 AM Mark Salyzyn <salyzyn@android.com> wrote:
+On 2/14/20 10:14 AM, Rob Herring wrote:
+> On Fri, Feb 14, 2020 at 11:00 AM Mark Salyzyn <salyzyn@android.com> wrote:
+>> On 2/14/20 5:49 AM, Rob Herring wrote:
+>>> On Fri, Feb 14, 2020 at 12:10 AM Masami Hiramatsu <mhiramat@kernel.org> wrote:
+>>>> Hi,
+>>>>
+>>>> The following series is bootconfig based implementation of
+>>>> the rng_seed option patch originally from Mark Salyzyn.
+>>>> Note that I removed unrelated command line fixes from this
+>>>> series.
+>>> Why do we need this? There's already multiple other ways to pass
+>>> random seed and this doesn't pass the "too complex for the command
+>>> line" argument you had for needing bootconfig.
+>>>
+>>> Rob
+>> Android is the use case I can vouch for. But also KVM.
+. . .
+> I'm familiar with Cuttlefish somewhat. Guess who got virtio-gpu
+> working on Android[1]. :) I assume DT doesn't work for you because you
+> need x86 builds, but doesn't QEMU use UEFI in that case which also has
+> a mechanism for passing entropy.
+IDK, will have to ask the Cuttlefish Team why UEFI not being used, will 
+get back to you.
 >
-> On 2/14/20 5:49 AM, Rob Herring wrote:
-> > On Fri, Feb 14, 2020 at 12:10 AM Masami Hiramatsu <mhiramat@kernel.org> wrote:
-> >> Hi,
-> >>
-> >> The following series is bootconfig based implementation of
-> >> the rng_seed option patch originally from Mark Salyzyn.
-> >> Note that I removed unrelated command line fixes from this
-> >> series.
-> > Why do we need this? There's already multiple other ways to pass
-> > random seed and this doesn't pass the "too complex for the command
-> > line" argument you had for needing bootconfig.
-> >
-> > Rob
->
-> Android is the use case I can vouch for. But also KVM.
->
-> Android Cuttlefish is an emulated device used extensively in the testing
-> and development infrastructure for In-house, partner, and system and
-> application developers for Android. There is no bootloader, per-se.
-> Because of the Android GKI distribution, there is also no rng virtual
-> driver built in, it is loaded later as a module, too late for many
-> aspects of KASLR and networking. There is no Device Tree, it does
-> however have access to the content of the initrd image, and to the
-> command line for the kernel. The only convenient way to get early
-> entropy is going to have to be one of those two places.
+> To clarify my question: Why do we need random seed in bootconfig
+> rather than just the kernel command line? I'm not understanding why
+> things changed from your original patch.
 
-I'm familiar with Cuttlefish somewhat. Guess who got virtio-gpu
-working on Android[1]. :) I assume DT doesn't work for you because you
-need x86 builds, but doesn't QEMU use UEFI in that case which also has
-a mechanism for passing entropy.
+Command line was identified as the simplest for them to implement 
+generically for the x86 and arm64 Cuttlefish instances and hence my 
+original patch series.
 
-To clarify my question: Why do we need random seed in bootconfig
-rather than just the kernel command line? I'm not understanding why
-things changed from your original patch.
+However, it also is limited in the size of the entropy string that can 
+be provided, so we flipped a coin and decided to accept the bootconfig 
+mechanism as a viable alternative; that BTW appeared to be simpler to 
+implement (mainly because rubbing out the entropy command line argument 
+is not easy).
 
-> In addition, 2B Android devices on the planet, especially in light of
-> the Android GKI distribution were everything that is vendor created is
-> in a module, needs a way to collect early entropy prior to module load
-> and pass it to the kernel. Yes, they do have access to the recently
-> added Device Tree approach, and we expect them to use it, as I have an
-> active backport for the mechanism into the Android 4.19 and 5.4 kernels.
-> There may also be some benefit to allowing the 13000 different
-> bootloaders an option to use bootconfig as a way of propagating the much
-> needed entropy to their kernels. I could make a case to also allow them
-> command line as another option to relieve their development stress to
-> deliver product, but we can stop there. Regardless, this early entropy
-> has the benefit of greatly improving security and precious boot time.
+-- Mark
 
-We're going to update 13000 bootloaders to understand bootconfig
-rather than use the infrastructure already in place (DT and/or command
-line)?
-
-bootconfig is an ftrace feature only IMO. If it's more than that, I
-imagine there will be some opinions about that. Adding new
-bootloader-kernel interfaces is painful and not something to just add
-without much review.
-
-Rob
