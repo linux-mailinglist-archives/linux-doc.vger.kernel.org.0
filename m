@@ -2,81 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4580B15F73C
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Feb 2020 20:58:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C583915F8C6
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Feb 2020 22:33:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388798AbgBNT6t (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 14 Feb 2020 14:58:49 -0500
-Received: from mail.kernel.org ([198.145.29.99]:32972 "EHLO mail.kernel.org"
+        id S1728741AbgBNVdW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Feb 2020 16:33:22 -0500
+Received: from mga14.intel.com ([192.55.52.115]:64984 "EHLO mga14.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2387401AbgBNT6t (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 14 Feb 2020 14:58:49 -0500
-Received: from mail-qt1-f182.google.com (mail-qt1-f182.google.com [209.85.160.182])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 2889B24670;
-        Fri, 14 Feb 2020 19:58:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1581710328;
-        bh=XC5HWZChdpdyVR/sHe3gjLYY5rs5zXxK4u7OywTLHpE=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=SY15NjUO9PcKLxh7i6ZwO6NX31YVMxbMgN4ezk3OERsu210IZREbcF5B2w3hN0RwC
-         ia6xMEt7nKfw8QRH0krNClFA+DXf7KMq8Kl/czVtkWG2Kt7JsBt5FoludaVoEKp48q
-         /Qx6We0s8Rv02n9NrPTUFSCnpX/x29Jk1GZ04t+w=
-Received: by mail-qt1-f182.google.com with SMTP id n17so7791614qtv.2;
-        Fri, 14 Feb 2020 11:58:48 -0800 (PST)
-X-Gm-Message-State: APjAAAVPkPL+dsvd7OtXFqP6ZobH84VutkU5Mdb2Pw5V4Auq4lpYE2uK
-        MEI1WIORkYxAy645nrw1+VzT9b4JJ3b8nyNgxw==
-X-Google-Smtp-Source: APXvYqwsXrnW+RM01kek/DuNdK+aWFf5bKCS1++/Ib4hvavk7926vsQnkmnIIg3GmV+0f7UWNCdv+H++sX8uLJIBQKA=
-X-Received: by 2002:ac8:6747:: with SMTP id n7mr3980294qtp.224.1581710327072;
- Fri, 14 Feb 2020 11:58:47 -0800 (PST)
+        id S1728123AbgBNVdV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 14 Feb 2020 16:33:21 -0500
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 14 Feb 2020 13:33:21 -0800
+X-IronPort-AV: E=Sophos;i="5.70,441,1574150400"; 
+   d="scan'208";a="227742868"
+Received: from mravago-mobl.amr.corp.intel.com (HELO arch-ashland-svkelley.intel.com) ([10.252.135.120])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-SHA; 14 Feb 2020 13:33:20 -0800
+From:   Sean V Kelley <sean.v.kelley@linux.intel.com>
+To:     tglx@linutronix.de, bhelgaas@google.com, corbet@lwn.net,
+        mingo@redhat.com, bp@alien8.de
+Cc:     x86@kernel.org, linux-pci@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        kar.hin.ong@ni.com, sassmann@kpanic.de,
+        Sean V Kelley <sean.v.kelley@linux.intel.com>
+Subject: [PATCH 0/2] Add boot interrupt quirk mechanism for Xeon chipsets
+Date:   Fri, 14 Feb 2020 13:33:11 -0800
+Message-Id: <20200214213313.66622-1-sean.v.kelley@linux.intel.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-References: <158166060044.9887.549561499483343724.stgit@devnote2> <158166062748.9887.15284887096084339722.stgit@devnote2>
-In-Reply-To: <158166062748.9887.15284887096084339722.stgit@devnote2>
-From:   Rob Herring <robh@kernel.org>
-Date:   Fri, 14 Feb 2020 13:58:35 -0600
-X-Gmail-Original-Message-ID: <CAL_Jsq+BDfWgGTVtppD-JEFHZRqpc00WaV2N7c6qsPBSaxOEPw@mail.gmail.com>
-Message-ID: <CAL_Jsq+BDfWgGTVtppD-JEFHZRqpc00WaV2N7c6qsPBSaxOEPw@mail.gmail.com>
-Subject: Re: [PATCH 2/3] random: rng-seed source is utf-8
-To:     Masami Hiramatsu <mhiramat@kernel.org>
-Cc:     "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        Android Kernel Team <kernel-team@android.com>,
-        Mark Salyzyn <salyzyn@android.com>,
-        "Theodore Ts'o" <tytso@mit.edu>, Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Richard Henderson <richard.henderson@linaro.org>,
-        Mark Brown <broonie@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Hsin-Yi Wang <hsinyi@chromium.org>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Arvind Sankar <nivedita@alum.mit.edu>,
-        Dominik Brodowski <linux@dominikbrodowski.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Alexander Potapenko <glider@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-        Juergen Gross <jgross@suse.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Feb 14, 2020 at 12:10 AM Masami Hiramatsu <mhiramat@kernel.org> wrote:
->
-> From: Mark Salyzyn <salyzyn@android.com>
->
-> commit 428826f5358c922dc378830a1717b682c0823160
-> ("fdt: add support for rng-seed") makes the assumption that the data
-> in rng-seed is binary, when it is typically constructed of utf-8
+When IRQ lines on secondary or higher IO-APICs are masked (e.g.,
+Real-Time threaded interrupts), many chipsets redirect IRQs on
+this line to the legacy PCH and in turn the base IO-APIC in the
+system. The unhandled interrupts on the base IO-APIC will be
+identified by the Linux kernel as Spurious Interrupts and can
+lead to disabled IRQ lines.
 
-Typically? Why is that?
+Disabling this legacy PCI interrupt routing is chipset-specific and
+varies in mechanism between chipset vendors and across generations.
+In some cases the mechanism is exposed to BIOS but not all BIOS
+vendors choose to pick it up. With the increasing usage of RT as it
+marches towards mainline, additional issues have been raised with
+more recent Xeon chipsets.
 
-> characters which has a bitness of roughly 6 to give appropriate
-> credit due for the entropy.
+This patchset disables the boot interrupt on these Xeon chipsets where
+this is possible with an additional mechanism.  In addition, this
+patchset includes documentation covering the background of this quirk.
+
+Sean V Kelley (2):
+  pci: Add boot interrupt quirk mechanism for Xeon chipsets
+  Documentation:PCI: Add background on Boot Interrupts
+
+ Documentation/PCI/boot-interrupts.rst | 153 ++++++++++++++++++++++++++
+ Documentation/PCI/index.rst           |   1 +
+ drivers/pci/quirks.c                  |  80 ++++++++++++--
+ 3 files changed, 227 insertions(+), 7 deletions(-)
+ create mode 100644 Documentation/PCI/boot-interrupts.rst
+
+--
+2.25.0
+
