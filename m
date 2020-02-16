@@ -2,105 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 14E511604BD
-	for <lists+linux-doc@lfdr.de>; Sun, 16 Feb 2020 17:16:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 60ACE16072B
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2020 00:21:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728362AbgBPQQw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 16 Feb 2020 11:16:52 -0500
-Received: from netrider.rowland.org ([192.131.102.5]:53815 "HELO
-        netrider.rowland.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with SMTP id S1728367AbgBPQQv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 16 Feb 2020 11:16:51 -0500
-Received: (qmail 31448 invoked by uid 500); 16 Feb 2020 11:16:50 -0500
-Received: from localhost (sendmail-bs@127.0.0.1)
-  by localhost with SMTP; 16 Feb 2020 11:16:50 -0500
-Date:   Sun, 16 Feb 2020 11:16:50 -0500 (EST)
-From:   Alan Stern <stern@rowland.harvard.edu>
-X-X-Sender: stern@netrider.rowland.org
-To:     "Paul E. McKenney" <paulmck@kernel.org>
-cc:     Boqun Feng <boqun.feng@gmail.com>, <linux-kernel@vger.kernel.org>,
-        Andrea Parri <parri.andrea@gmail.com>,
-        Will Deacon <will@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        David Howells <dhowells@redhat.com>,
-        Jade Alglave <j.alglave@ucl.ac.uk>,
-        Luc Maranget <luc.maranget@inria.fr>,
-        Akira Yokosawa <akiyks@gmail.com>,
-        Daniel Lustig <dlustig@nvidia.com>,
-        Jonathan Corbet <corbet@lwn.net>, <linux-arch@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>
-Subject: Re: [RFC 0/3] tools/memory-model: Add litmus tests for atomic APIs
-In-Reply-To: <20200216120625.GF2935@paulmck-ThinkPad-P72>
-Message-ID: <Pine.LNX.4.44L0.2002161113320.30459-100000@netrider.rowland.org>
+        id S1726059AbgBPXVX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 16 Feb 2020 18:21:23 -0500
+Received: from wout4-smtp.messagingengine.com ([64.147.123.20]:46127 "EHLO
+        wout4-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726036AbgBPXVT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 16 Feb 2020 18:21:19 -0500
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+        by mailout.west.internal (Postfix) with ESMTP id 90DDB35C;
+        Sun, 16 Feb 2020 18:21:17 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute5.internal (MEProxy); Sun, 16 Feb 2020 18:21:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
+        from:to:cc:subject:date:message-id:mime-version
+        :content-transfer-encoding; s=fm2; bh=UZCtLu13K7pBoKdVcBGA3CuNTA
+        Yit6KVzt20iCDpYH0=; b=tS+a52Lzt8lez+wz+VZKEn2pZ92WHEMq6WNhjawLwv
+        JRhCVQVegKYgRq+1f2dRHfeqYMCVrVDU+gXTjUaxsyCjt9w+ruuwQFBC8FZ+FtFP
+        +CURfUzo1BNwuUXT3M8277kymerNlHfIPm61Mzs+i7DeqSJ/YF6oN+TgjIUK36zu
+        uCdQXysoBCFxWfGZvws9l+7vS4sGrjpQ1qYiYR/sGSW47xb2Mgu/n0SUKsQt8JUg
+        /h6StKufrUAtLIuaxGdcj+z2uRKD+0KBEM9J7RDP38TseM+DXdlQxJj8SfKRki9O
+        1dLCxvWmdS5coxV2gfvnhEfaZfGd2u1P4RK76vz/NkvA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:date:from
+        :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+        :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=UZCtLu13K7pBoKdVc
+        BGA3CuNTAYit6KVzt20iCDpYH0=; b=UmrVFZU3AZC5/PYk4L3RbIKCh5JAca09X
+        d/68g6BnItC0FgkrfSzqNvrOf2spm3mjiy7du2AH01ceEqnv6UEX9y7hkT9Taaar
+        CUsMlAVr/ampvNsb6E/buB/GcRcOW7y4ifQ5U8PkTvGcdkz/e+in+eok3vwLELYq
+        iZ20pPX3PIcxS3wOJQ2XuG1LfVsshtcWm9xNrtkwoTDuIsPsxQO3ExkgK1OJ0Cen
+        fOMdBMGF1pJquHF4YOsTfFoAsrm3ibPQX9IdyfnmsDjL0XJIOyYrMPZ++y1Bkhyq
+        YbXxcDUd1AyVyLx3ungkPikwDnJ3+lHvTMLrYFu6jS3y2G9dVGp7A==
+X-ME-Sender: <xms:a85JXvWwLdOqHYCMGfaKmBk-F9AMJNPL1OAnCJpSBQkA5tpGxTdqCA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrjeehgddtkecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvffufffkofgggfestdekredtredttdenucfhrhhomhepufgrmhhuvghlucfj
+    ohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecukfhppeejtd
+    drudefhedrudegkedrudehudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhep
+    mhgrihhlfhhrohhmpehsrghmuhgvlhesshhhohhllhgrnhgurdhorhhg
+X-ME-Proxy: <xmx:a85JXnQ4xxjUMIjDMeOMQkxvdO7buS0jc2zsh6hnBgd0kBeMTIkutQ>
+    <xmx:a85JXnDH844wNKDEJz_b33AdDsFlzdYP7YdhwtC4hP5F_fRQr0hu_w>
+    <xmx:a85JXmLOiNVu-IcHyC-OrU3cEVdYbTtpmjN6RWQ0BEaVzteE5o8qtA>
+    <xmx:bc5JXsGOl72sBSAFWPqUg6yNNOirTVCo-ebGjAS3aV0CyzbV0joaxA>
+Received: from titanium.stl.sholland.net (70-135-148-151.lightspeed.stlsmo.sbcglobal.net [70.135.148.151])
+        by mail.messagingengine.com (Postfix) with ESMTPA id 6DD2F3060D1A;
+        Sun, 16 Feb 2020 18:21:15 -0500 (EST)
+From:   Samuel Holland <samuel@sholland.org>
+To:     Liam Girdwood <lgirdwood@gmail.com>,
+        Mark Brown <broonie@kernel.org>,
+        Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jerome Brunet <jbrunet@baylibre.com>
+Cc:     alsa-devel@alsa-project.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, Samuel Holland <samuel@sholland.org>
+Subject: [PATCH v2 0/3] simple-audio-card codec2codec support
+Date:   Sun, 16 Feb 2020 17:21:11 -0600
+Message-Id: <20200216232114.15742-1-samuel@sholland.org>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, 16 Feb 2020, Paul E. McKenney wrote:
+We are currently using simple-audio-card on the Allwinner A64 SoC.
+The digital audio codec there (sun8i-codec) has 3 AIFs, one each for the
+CPU, the modem, and Bluetooth. Adding support for the secondary AIFs
+requires adding codec2codec DAI links.
 
-> On Sun, Feb 16, 2020 at 01:43:45PM +0800, Boqun Feng wrote:
-> > On Sat, Feb 15, 2020 at 07:25:50AM -0800, Paul E. McKenney wrote:
-> > > On Fri, Feb 14, 2020 at 10:27:44AM -0500, Alan Stern wrote:
-> > > > On Fri, 14 Feb 2020, Boqun Feng wrote:
-> > > > 
-> > > > > A recent discussion raises up the requirement for having test cases for
-> > > > > atomic APIs:
-> > > > > 
-> > > > > 	https://lore.kernel.org/lkml/20200213085849.GL14897@hirez.programming.kicks-ass.net/
-> > > > > 
-> > > > > , and since we already have a way to generate a test module from a
-> > > > > litmus test with klitmus[1]. It makes sense that we add more litmus
-> > > > > tests for atomic APIs into memory-model.
-> > > > 
-> > > > It might be worth discussing this point a little more fully.  The 
-> > > > set of tests in tools/memory-model/litmus-tests/ is deliberately rather 
-> > > > limited.  Paul has a vastly more expansive set of litmus tests in a 
-> > > > GitHub repository, and I am doubtful about how many new tests we want 
-> > > > to keep in the kernel source.
-> > > 
-> > > Indeed, the current view is that the litmus tests in the kernel source
-> > > tree are intended to provide examples of C-litmus-test-language features
-> > > and functions, as opposed to exercising the full cross-product of
-> > > Linux-kernel synchronization primitives.
-> > > 
-> > > For a semi-reasonable subset of that cross-product, as Alan says, please
-> > > see https://github.com/paulmckrcu/litmus.
-> > > 
-> > > For a list of the Linux-kernel synchronization primitives currently
-> > > supported by LKMM, please see tools/memory-model/linux-kernel.def.
-> > > 
-> > 
-> > So how about I put those atomic API tests into a separate directory, say
-> > Documentation/atomic/ ?
-> > 
-> > The problem I want to solve here is that people (usually who implements
-> > the atomic APIs for new archs) may want some examples, which can help
-> > them understand the API requirements and test the implementation. And
-> > litmus tests are the perfect tool here (given that them can be
-> > translated to test modules with klitmus). And I personally really think
-> > this is something the LKMM group should maintain, that's why I put them
-> > in the tools/memory-model/litmus-tests/. But I'm OK if we end up
-> > deciding those should be put outside that directory.
-> 
-> Good point!
-> 
-> However, we should dicuss this with the proposed beneficiaries, namely
-> the architecture maintainers.  Do they want it?  If so, where would
-> they like it to be?  How should it be organized?
-> 
-> In the meantime, I am more than happy to accept litmus tests into the
-> github archive.
-> 
-> So how would you like to proceed?
+Since the modem and bt-sco codec DAI drivers only have one set of
+possible PCM parameters (namely, 8kHz mono S16LE), there's no real
+need for a machine driver to specify the DAI link configuration. The
+parameters for these "simple" DAI links can be chosen automatically.
 
-I think it makes sense to put Boqun's tests under Documentation/ rather
-than tools/.  After all, their point is to document the memory model's
-requirements for operations on atomic_t's.  They aren't meant to be
-examples or demos showing how to use herd or write litmus tests.
+This series adds codec2codec DAI link support to simple-audio-card.
+Codec to codec links are automatically detected when DAIs in the link
+belong to codec components.
 
-Alan
+I tried to reuse as much code as possible, so the first two patches
+refactor a couple of helper functions to be more generic.
+
+The last patch adds the new feature and its documentation.
+
+Samuel Holland (3):
+  ALSA: pcm: Add a non-runtime version of snd_pcm_limit_hw_rates
+  ASoC: pcm: Export parameter intersection logic
+  ASoC: simple-card: Add support for codec to codec DAI links
+
+ Documentation/sound/soc/codec-to-codec.rst |  9 +++-
+ include/sound/pcm.h                        |  9 +++-
+ include/sound/soc.h                        |  3 ++
+ sound/core/pcm_misc.c                      | 18 +++----
+ sound/soc/generic/simple-card-utils.c      | 50 ++++++++++++++++++++
+ sound/soc/soc-pcm.c                        | 55 +++++++++++++++-------
+ 6 files changed, 116 insertions(+), 28 deletions(-)
+
+-- 
+2.24.1
 
