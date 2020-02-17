@@ -2,41 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 978C11617D0
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2020 17:20:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EA0BD1617CD
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2020 17:20:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728650AbgBQQU4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Feb 2020 11:20:56 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:55358 "EHLO
+        id S1729204AbgBQQUz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Feb 2020 11:20:55 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:55470 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728789AbgBQQUv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Feb 2020 11:20:51 -0500
+        with ESMTP id S1729125AbgBQQUw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Feb 2020 11:20:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
         MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
         Reply-To:Content-Type:Content-ID:Content-Description;
-        bh=jLWQhdjlNUCvPW2x0jtz8CREosgEHwxuovRUzRlgqDg=; b=hsSIlzNJdpuYMfFdAgTlQr4cMW
-        OBEQozCh2VV0JPvYBKObSHXd2OnmJ15hhPh06NffSd7dVkESle6A6+56gBRO8AoQWPk2DUTxFqgD3
-        rfhwg5p4XjO6+z2Pdv3GU4I6as2jlXa7SZtuFFTYEblb4q3ppiU8+ZVjcJUcP5dkE6vImtbM+fFWx
-        lYizYDJaZ1ySNMPoRyAS7qtQq7WAPi9VqFa75qWUN7Ya/jIq+E0ZzUMYrIe0peLvV5lyiK1ZmIRYR
-        cIP+1MKPMaPlofi/rUkhF0Zyj6CWm8bHkeH46zFGQ6sP+Z32/jGfF5+mLWpQgmNMx5Noz8tuIQFD5
-        Y5jc6IeA==;
+        bh=qG7uZEs5ZQjxVvahtWw+edjEtqyiOL4CWOMINZp7934=; b=jIpukE231DX1ILjjBvfd6tvqr2
+        yXSoHBSg+66L1BXbQwLVh8VK/gkUrNrN35dJWko/hQhq45EOE57xjrRAnYzrULG4oGjyvRkftYwzH
+        AVgRRSj2fTJ0xnhIjI8hKnVTWIhp7nNVkl55P5VwNEuulYWeIw/DM/yRV7fW6ZIAQrkYHYNF0Iuke
+        mtRctHzbTU3+pjj4oY6JZqgEdgonzrC8ygar/Mu+ua+vBIh9yPxkc6VDeIGjh4LFml3q+a8TR7HNJ
+        KdmuObk0U2ZQHAE2frmR8ouoFZXKVapzAWDvJ6mrlLNmPfPDCmEQpOA1JIH4NGjbWVU/3P7XY+Abf
+        BoqHDKGQ==;
 Received: from tmo-109-126.customers.d1-online.com ([80.187.109.126] helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1j3j8Y-00042J-Cn; Mon, 17 Feb 2020 16:20:51 +0000
+        id 1j3j8Y-00042K-De; Mon, 17 Feb 2020 16:20:51 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1j3j8W-000fqA-Ef; Mon, 17 Feb 2020 17:20:44 +0100
+        id 1j3j8W-000fqF-Fd; Mon, 17 Feb 2020 17:20:44 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
-        Viresh Kumar <viresh.kumar@linaro.org>,
-        linux-pm@vger.kernel.org
-Subject: [PATCH v2 20/24] docs: cpu-freq: convert pcc-cpufreq.txt to ReST
-Date:   Mon, 17 Feb 2020 17:20:38 +0100
-Message-Id: <63ed3462eb3083290d9bc41332ab45524a71b3d9.1581956285.git.mchehab+huawei@kernel.org>
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Paul Mackerras <paulus@samba.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        linuxppc-dev@lists.ozlabs.org
+Subject: [PATCH v2 21/24] docs: powerpc: convert vcpudispatch_stats.txt to ReST
+Date:   Mon, 17 Feb 2020 17:20:39 +0100
+Message-Id: <73b1f05f20281a423718a4d3996a6f34d66e4622.1581956285.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <cover.1581956285.git.mchehab+huawei@kernel.org>
 References: <cover.1581956285.git.mchehab+huawei@kernel.org>
@@ -48,164 +49,81 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 - Add a SPDX header;
-- Add a document title, based on the original contents of
-  cpu-freq/index.txt;
-- Add copyright symbol;
-- Remove a c-like comment, adding the useful info not covered
-  by the SPDX and document title headers as text;
-- Comment out the existing text-only index;
-- Mark literal blocks as such;
-- Some whitespace fixes and new line breaks;
-- Add it to cpu-freq/index.rst.
+- Use standard markup for document title;
+- Adjust identation on lists and add blank lines where
+  needed;
+- Add it to the powerpc index.rst file.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/cpu-freq/index.rst              |  1 +
- .../{pcc-cpufreq.txt => pcc-cpufreq.rst}      | 86 ++++++++-----------
- 2 files changed, 38 insertions(+), 49 deletions(-)
- rename Documentation/cpu-freq/{pcc-cpufreq.txt => pcc-cpufreq.rst} (80%)
+ Documentation/powerpc/index.rst                 |  1 +
+ ...ispatch_stats.txt => vcpudispatch_stats.rst} | 17 ++++++++++++-----
+ 2 files changed, 13 insertions(+), 5 deletions(-)
+ rename Documentation/powerpc/{vcpudispatch_stats.txt => vcpudispatch_stats.rst} (94%)
 
-diff --git a/Documentation/cpu-freq/index.rst b/Documentation/cpu-freq/index.rst
-index d12ef0bb78a5..fb2db2eb7eaf 100644
---- a/Documentation/cpu-freq/index.rst
-+++ b/Documentation/cpu-freq/index.rst
-@@ -19,6 +19,7 @@ Author: Dominik Brodowski  <linux@brodo.de>
-    cpu-drivers
-    cpufreq-nforce2
-    cpufreq-stats
-+   pcc-cpufreq
+diff --git a/Documentation/powerpc/index.rst b/Documentation/powerpc/index.rst
+index 0d45f0fc8e57..29b90b1b6f20 100644
+--- a/Documentation/powerpc/index.rst
++++ b/Documentation/powerpc/index.rst
+@@ -30,6 +30,7 @@ powerpc
+     syscall64-abi
+     transactional_memory
+     ultravisor
++    vcpudispatch_stats
  
- Mailing List
- ------------
-diff --git a/Documentation/cpu-freq/pcc-cpufreq.txt b/Documentation/cpu-freq/pcc-cpufreq.rst
-similarity index 80%
-rename from Documentation/cpu-freq/pcc-cpufreq.txt
-rename to Documentation/cpu-freq/pcc-cpufreq.rst
-index 9e3c3b33514c..6fd891f757a7 100644
---- a/Documentation/cpu-freq/pcc-cpufreq.txt
-+++ b/Documentation/cpu-freq/pcc-cpufreq.rst
-@@ -1,45 +1,29 @@
--/*
-- *  pcc-cpufreq.txt - PCC interface documentation
-- *
-- *  Copyright (C) 2009 Red Hat, Matthew Garrett <mjg@redhat.com>
-- *  Copyright (C) 2009 Hewlett-Packard Development Company, L.P.
-- *      Nagananda Chumbalkar <nagananda.chumbalkar@hp.com>
-- *
-- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- *
-- *  This program is free software; you can redistribute it and/or modify
-- *  it under the terms of the GNU General Public License as published by
-- *  the Free Software Foundation; version 2 of the License.
-- *
-- *  This program is distributed in the hope that it will be useful, but
-- *  WITHOUT ANY WARRANTY; without even the implied warranty of
-- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE, GOOD TITLE or NON
-- *  INFRINGEMENT. See the GNU General Public License for more details.
-- *
-- *  You should have received a copy of the GNU General Public License along
-- *  with this program; if not, write to the Free Software Foundation, Inc.,
-- *  675 Mass Ave, Cambridge, MA 02139, USA.
-- *
-- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- */
+ .. only::  subproject and html
+ 
+diff --git a/Documentation/powerpc/vcpudispatch_stats.txt b/Documentation/powerpc/vcpudispatch_stats.rst
+similarity index 94%
+rename from Documentation/powerpc/vcpudispatch_stats.txt
+rename to Documentation/powerpc/vcpudispatch_stats.rst
+index e21476bfd78c..5704657a5987 100644
+--- a/Documentation/powerpc/vcpudispatch_stats.txt
++++ b/Documentation/powerpc/vcpudispatch_stats.rst
+@@ -1,5 +1,8 @@
+-VCPU Dispatch Statistics:
+-=========================
 +.. SPDX-License-Identifier: GPL-2.0
-+.. include:: <isonum.txt>
- 
-+=========================================================
-+Processor Clocking Control (PCC) CPUFreq Driver Specifics
-+=========================================================
- 
--			Processor Clocking Control Driver
--			---------------------------------
-+Copyright |copy| 2009 Red Hat, Matthew Garrett <mjg@redhat.com>
- 
--Contents:
-----------
--1.	Introduction
--1.1	PCC interface
--1.1.1   Get Average Frequency
--1.1.2	Set Desired Frequency
--1.2	Platforms affected
--2.	Driver and /sys details
--2.1	scaling_available_frequencies
--2.2	cpuinfo_transition_latency
--2.3	cpuinfo_cur_freq
--2.4	related_cpus
--3.	Caveats
-+Copyright |copy| 2009 Hewlett-Packard Development Company, L.P.,
-+Nagananda Chumbalkar <nagananda.chumbalkar@hp.com>
 +
++========================
++VCPU Dispatch Statistics
++========================
+ 
+ For Shared Processor LPARs, the POWER Hypervisor maintains a relatively
+ static mapping of the LPAR processors (vcpus) to physical processor
+@@ -20,25 +23,29 @@ The statistics themselves are available by reading the procfs file
+ a vcpu as represented by the first field, followed by 8 numbers.
+ 
+ The first number corresponds to:
 +
-+.. Contents:
+ 1. total vcpu dispatches since the beginning of statistics collection
+ 
+ The next 4 numbers represent vcpu dispatch dispersions:
 +
-+   1.	Introduction
-+   1.1	PCC interface
-+   1.1.1   Get Average Frequency
-+   1.1.2	Set Desired Frequency
-+   1.2	Platforms affected
-+   2.	Driver and /sys details
-+   2.1	scaling_available_frequencies
-+   2.2	cpuinfo_transition_latency
-+   2.3	cpuinfo_cur_freq
-+   2.4	related_cpus
-+   3.	Caveats
+ 2. number of times this vcpu was dispatched on the same processor as last
+    time
+ 3. number of times this vcpu was dispatched on a different processor core
+    as last time, but within the same chip
+ 4. number of times this vcpu was dispatched on a different chip
+ 5. number of times this vcpu was dispatches on a different socket/drawer
+-(next numa boundary)
++   (next numa boundary)
  
- 1. Introduction:
- ----------------
-@@ -140,7 +124,9 @@ Internally, there is no need for the driver to convert the "target" frequency
- to a corresponding P-state.
- 
- The VERSION number for the driver will be of the format v.xy.ab.
--eg: 1.00.02
-+eg::
+ The final 3 numbers represent statistics in relation to the home node of
+ the vcpu:
 +
-+   1.00.02
-    ----- --
-     |    |
-     |    -- this will increase with bug fixes/enhancements to the driver
-@@ -168,21 +154,21 @@ A) Often cpuinfo_cur_freq will show a value different than what is declared
- in the scaling_available_frequencies or scaling_cur_freq, or scaling_max_freq.
- This is due to "turbo boost" available on recent Intel processors. If certain
- conditions are met the BIOS can achieve a slightly higher speed than requested
--by OSPM. An example:
-+by OSPM. An example::
- 
--scaling_cur_freq	: 2933000
--cpuinfo_cur_freq	: 3196000
-+	scaling_cur_freq	: 2933000
-+	cpuinfo_cur_freq	: 3196000
- 
- B) There is a round-off error associated with the cpuinfo_cur_freq value.
- Since the driver obtains the current frequency as a "percentage" (%) of the
- nominal frequency from the BIOS, sometimes, the values displayed by
--scaling_cur_freq and cpuinfo_cur_freq may not match. An example:
-+scaling_cur_freq and cpuinfo_cur_freq may not match. An example::
- 
--scaling_cur_freq	: 1600000
--cpuinfo_cur_freq	: 1583000
-+	scaling_cur_freq	: 1600000
-+	cpuinfo_cur_freq	: 1583000
- 
- In this example, the nominal frequency is 2933 MHz. The driver obtains the
--current frequency, cpuinfo_cur_freq, as 54% of the nominal frequency:
-+current frequency, cpuinfo_cur_freq, as 54% of the nominal frequency::
- 
- 	54% of 2933 MHz = 1583 MHz
- 
-@@ -193,8 +179,10 @@ corresponds to the frequency of the P0 P-state.
- -----------------
- The related_cpus field is identical to affected_cpus.
- 
--affected_cpus	: 4
--related_cpus	: 4
-+::
+ 6. number of times this vcpu was dispatched in its home node (chip)
+ 7. number of times this vcpu was dispatched in a different node
+ 8. number of times this vcpu was dispatched in a node further away (numa
+-distance)
++   distance)
 +
-+	affected_cpus	: 4
-+	related_cpus	: 4
++An example output::
  
- Currently, the PCC driver does not evaluate _PSD. The platforms that support
- PCC do not implement SW_ALL. So OSPM doesn't need to perform any coordination
+-An example output:
+     $ sudo cat /proc/powerpc/vcpudispatch_stats
+     cpu0 6839 4126 2683 30 0 6821 18 0
+     cpu1 2515 1274 1229 12 0 2509 6 0
 -- 
 2.24.1
 
