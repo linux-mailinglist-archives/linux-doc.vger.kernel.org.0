@@ -2,42 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id EA0BD1617CD
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2020 17:20:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B4CA31617C7
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Feb 2020 17:20:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729204AbgBQQUz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S1728662AbgBQQUz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Mon, 17 Feb 2020 11:20:55 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:55470 "EHLO
+Received: from bombadil.infradead.org ([198.137.202.133]:55480 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729125AbgBQQUw (ORCPT
+        with ESMTP id S1729141AbgBQQUw (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Feb 2020 11:20:52 -0500
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
         MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
         Reply-To:Content-Type:Content-ID:Content-Description;
-        bh=qG7uZEs5ZQjxVvahtWw+edjEtqyiOL4CWOMINZp7934=; b=jIpukE231DX1ILjjBvfd6tvqr2
-        yXSoHBSg+66L1BXbQwLVh8VK/gkUrNrN35dJWko/hQhq45EOE57xjrRAnYzrULG4oGjyvRkftYwzH
-        AVgRRSj2fTJ0xnhIjI8hKnVTWIhp7nNVkl55P5VwNEuulYWeIw/DM/yRV7fW6ZIAQrkYHYNF0Iuke
-        mtRctHzbTU3+pjj4oY6JZqgEdgonzrC8ygar/Mu+ua+vBIh9yPxkc6VDeIGjh4LFml3q+a8TR7HNJ
-        KdmuObk0U2ZQHAE2frmR8ouoFZXKVapzAWDvJ6mrlLNmPfPDCmEQpOA1JIH4NGjbWVU/3P7XY+Abf
-        BoqHDKGQ==;
+        bh=pA1Ytc4V6l+zv01/JwSvNvIG9QUyjZkI8aPimfUATz4=; b=Odl+TPknK3HUJhxjvOeLRzSBt5
+        0MyamttI8PfGaWxdEFqVVn4SwqeVTN00LmvLIUldzZE8qGsOGWojQf5tVP66J0zykrJkRzhUDgUOM
+        4PKQbKXVdpBMv4pKdbfIAoMOTVDI7RZoKXZYD9b3Th3YN3qJvKXWmZWJvkT8Wpf8a30deDO99qe30
+        wCv4B3K2+t45JR1bCgRdcG2zOnc52i4oV28vsWJ8DjjEkaXWCNA+mnIAiNxNxLhlgTxqk5ZjHJTve
+        2k/jshFTaCkL/7YoXgClFRjjHv8YDDfFCxB2YitOkoz+IVgjcYXxJ0RkGwTK1PWdzV686SHMAinAl
+        h0RPxbIw==;
 Received: from tmo-109-126.customers.d1-online.com ([80.187.109.126] helo=bombadil.infradead.org)
         by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1j3j8Y-00042K-De; Mon, 17 Feb 2020 16:20:51 +0000
+        id 1j3j8Y-00042L-Ep; Mon, 17 Feb 2020 16:20:51 +0000
 Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
         (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1j3j8W-000fqF-Fd; Mon, 17 Feb 2020 17:20:44 +0100
+        id 1j3j8W-000fqK-HE; Mon, 17 Feb 2020 17:20:44 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        linuxppc-dev@lists.ozlabs.org
-Subject: [PATCH v2 21/24] docs: powerpc: convert vcpudispatch_stats.txt to ReST
-Date:   Mon, 17 Feb 2020 17:20:39 +0100
-Message-Id: <73b1f05f20281a423718a4d3996a6f34d66e4622.1581956285.git.mchehab+huawei@kernel.org>
+        Yoshinori Sato <ysato@users.sourceforge.jp>,
+        Rich Felker <dalias@libc.org>, linux-sh@vger.kernel.org
+Subject: [PATCH v2 22/24] docs: sh: convert new-machine.txt to ReST
+Date:   Mon, 17 Feb 2020 17:20:40 +0100
+Message-Id: <3623fa8b3045ca7ad3373763578ba8690a469dbd.1581956285.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <cover.1581956285.git.mchehab+huawei@kernel.org>
 References: <cover.1581956285.git.mchehab+huawei@kernel.org>
@@ -49,81 +47,310 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 - Add a SPDX header;
-- Use standard markup for document title;
-- Adjust identation on lists and add blank lines where
-  needed;
-- Add it to the powerpc index.rst file.
+- Adjust document title to follow ReST style;
+- Mark literal blocks as such;
+- Mark a table as such;
+- Add it to sh/index.rst.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/powerpc/index.rst                 |  1 +
- ...ispatch_stats.txt => vcpudispatch_stats.rst} | 17 ++++++++++++-----
- 2 files changed, 13 insertions(+), 5 deletions(-)
- rename Documentation/powerpc/{vcpudispatch_stats.txt => vcpudispatch_stats.rst} (94%)
+ Documentation/sh/index.rst                    |   5 +
+ .../sh/{new-machine.txt => new-machine.rst}   | 193 +++++++++---------
+ 2 files changed, 105 insertions(+), 93 deletions(-)
+ rename Documentation/sh/{new-machine.txt => new-machine.rst} (73%)
 
-diff --git a/Documentation/powerpc/index.rst b/Documentation/powerpc/index.rst
-index 0d45f0fc8e57..29b90b1b6f20 100644
---- a/Documentation/powerpc/index.rst
-+++ b/Documentation/powerpc/index.rst
-@@ -30,6 +30,7 @@ powerpc
-     syscall64-abi
-     transactional_memory
-     ultravisor
-+    vcpudispatch_stats
+diff --git a/Documentation/sh/index.rst b/Documentation/sh/index.rst
+index bc8db7ba894a..56c08790265d 100644
+--- a/Documentation/sh/index.rst
++++ b/Documentation/sh/index.rst
+@@ -4,6 +4,11 @@ SuperH Interfaces Guide
  
- .. only::  subproject and html
+ :Author: Paul Mundt
  
-diff --git a/Documentation/powerpc/vcpudispatch_stats.txt b/Documentation/powerpc/vcpudispatch_stats.rst
-similarity index 94%
-rename from Documentation/powerpc/vcpudispatch_stats.txt
-rename to Documentation/powerpc/vcpudispatch_stats.rst
-index e21476bfd78c..5704657a5987 100644
---- a/Documentation/powerpc/vcpudispatch_stats.txt
-+++ b/Documentation/powerpc/vcpudispatch_stats.rst
-@@ -1,5 +1,8 @@
--VCPU Dispatch Statistics:
--=========================
++.. toctree::
++    :maxdepth: 1
++
++    new-machine
++
+ Memory Management
+ =================
+ 
+diff --git a/Documentation/sh/new-machine.txt b/Documentation/sh/new-machine.rst
+similarity index 73%
+rename from Documentation/sh/new-machine.txt
+rename to Documentation/sh/new-machine.rst
+index e0961a66130b..07d69049c220 100644
+--- a/Documentation/sh/new-machine.txt
++++ b/Documentation/sh/new-machine.rst
+@@ -1,6 +1,8 @@
 +.. SPDX-License-Identifier: GPL-2.0
-+
-+========================
-+VCPU Dispatch Statistics
-+========================
  
- For Shared Processor LPARs, the POWER Hypervisor maintains a relatively
- static mapping of the LPAR processors (vcpus) to physical processor
-@@ -20,25 +23,29 @@ The statistics themselves are available by reading the procfs file
- a vcpu as represented by the first field, followed by 8 numbers.
+-                Adding a new board to LinuxSH
+-               ================================
++=============================
++Adding a new board to LinuxSH
++=============================
  
- The first number corresponds to:
-+
- 1. total vcpu dispatches since the beginning of statistics collection
+                Paul Mundt <lethal@linux-sh.org>
  
- The next 4 numbers represent vcpu dispatch dispersions:
-+
- 2. number of times this vcpu was dispatched on the same processor as last
-    time
- 3. number of times this vcpu was dispatched on a different processor core
-    as last time, but within the same chip
- 4. number of times this vcpu was dispatched on a different chip
- 5. number of times this vcpu was dispatches on a different socket/drawer
--(next numa boundary)
-+   (next numa boundary)
+@@ -19,65 +21,67 @@ include/asm-sh/. For the new kernel, things are broken out by board type,
+ companion chip type, and CPU type. Looking at a tree view of this directory
+ hierarchy looks like the following:
  
- The final 3 numbers represent statistics in relation to the home node of
- the vcpu:
-+
- 6. number of times this vcpu was dispatched in its home node (chip)
- 7. number of times this vcpu was dispatched in a different node
- 8. number of times this vcpu was dispatched in a node further away (numa
--distance)
-+   distance)
-+
-+An example output::
+-Board-specific code:
++Board-specific code::
  
--An example output:
-     $ sudo cat /proc/powerpc/vcpudispatch_stats
-     cpu0 6839 4126 2683 30 0 6821 18 0
-     cpu1 2515 1274 1229 12 0 2509 6 0
+-.
+-|-- arch
+-|   `-- sh
+-|       `-- boards
+-|           |-- adx
+-|           |   `-- board-specific files
+-|           |-- bigsur
+-|           |   `-- board-specific files
+-|           |
+-|           ... more boards here ...
+-|
+-`-- include
+-    `-- asm-sh
+-        |-- adx
+-        |   `-- board-specific headers
+-        |-- bigsur
+-        |   `-- board-specific headers
+-        |
+-	.. more boards here ...
++    .
++    |-- arch
++    |   `-- sh
++    |       `-- boards
++    |           |-- adx
++    |           |   `-- board-specific files
++    |           |-- bigsur
++    |           |   `-- board-specific files
++    |           |
++    |           ... more boards here ...
++    |
++    `-- include
++	`-- asm-sh
++	    |-- adx
++	    |   `-- board-specific headers
++	    |-- bigsur
++	    |   `-- board-specific headers
++	    |
++	    .. more boards here ...
+ 
+-Next, for companion chips:
+-.
+-`-- arch
+-    `-- sh
+-        `-- cchips
+-            `-- hd6446x
+-                `-- hd64461
+-                    `-- cchip-specific files
++Next, for companion chips::
++
++    .
++    `-- arch
++	`-- sh
++	    `-- cchips
++		`-- hd6446x
++		    `-- hd64461
++			`-- cchip-specific files
+ 
+ ... and so on. Headers for the companion chips are treated the same way as
+ board-specific headers. Thus, include/asm-sh/hd64461 is home to all of the
+ hd64461-specific headers.
+ 
+-Finally, CPU family support is also abstracted:
+-.
+-|-- arch
+-|   `-- sh
+-|       |-- kernel
+-|       |   `-- cpu
+-|       |       |-- sh2
+-|       |       |   `-- SH-2 generic files
+-|       |       |-- sh3
+-|       |       |   `-- SH-3 generic files
+-|       |       `-- sh4
+-|       |           `-- SH-4 generic files
+-|       `-- mm
+-|           `-- This is also broken out per CPU family, so each family can
+-|               have their own set of cache/tlb functions.
+-|
+-`-- include
+-    `-- asm-sh
+-        |-- cpu-sh2
+-        |   `-- SH-2 specific headers
+-        |-- cpu-sh3
+-        |   `-- SH-3 specific headers
+-        `-- cpu-sh4
+-            `-- SH-4 specific headers
++Finally, CPU family support is also abstracted::
++
++    .
++    |-- arch
++    |   `-- sh
++    |       |-- kernel
++    |       |   `-- cpu
++    |       |       |-- sh2
++    |       |       |   `-- SH-2 generic files
++    |       |       |-- sh3
++    |       |       |   `-- SH-3 generic files
++    |       |       `-- sh4
++    |       |           `-- SH-4 generic files
++    |       `-- mm
++    |           `-- This is also broken out per CPU family, so each family can
++    |               have their own set of cache/tlb functions.
++    |
++    `-- include
++	`-- asm-sh
++	    |-- cpu-sh2
++	    |   `-- SH-2 specific headers
++	    |-- cpu-sh3
++	    |   `-- SH-3 specific headers
++	    `-- cpu-sh4
++		`-- SH-4 specific headers
+ 
+ It should be noted that CPU subtypes are _not_ abstracted. Thus, these still
+ need to be dealt with by the CPU family specific code.
+@@ -110,33 +114,33 @@ arch/sh/boards and the include/asm-sh/ hierarchy. In order to better
+ explain this, we use some examples for adding an imaginary board. For
+ setup code, we're required at the very least to provide definitions for
+ get_system_type() and platform_setup(). For our imaginary board, this
+-might look something like:
++might look something like::
+ 
+-/*
+- * arch/sh/boards/vapor/setup.c - Setup code for imaginary board
+- */
+-#include <linux/init.h>
++    /*
++    * arch/sh/boards/vapor/setup.c - Setup code for imaginary board
++    */
++    #include <linux/init.h>
+ 
+-const char *get_system_type(void)
+-{
+-	return "FooTech Vaporboard";
+-}
++    const char *get_system_type(void)
++    {
++	    return "FooTech Vaporboard";
++    }
+ 
+-int __init platform_setup(void)
+-{
+-  	/*
+-	 * If our hardware actually existed, we would do real
+-	 * setup here. Though it's also sane to leave this empty
+-	 * if there's no real init work that has to be done for
+-	 * this board.
+-	 */
++    int __init platform_setup(void)
++    {
++	    /*
++	    * If our hardware actually existed, we would do real
++	    * setup here. Though it's also sane to leave this empty
++	    * if there's no real init work that has to be done for
++	    * this board.
++	    */
+ 
+-	/* Start-up imaginary PCI ... */
++	    /* Start-up imaginary PCI ... */
+ 
+-	/* And whatever else ... */
++	    /* And whatever else ... */
+ 
+-	return 0;
+-}
++	    return 0;
++    }
+ 
+ Our new imaginary board will also have to tie into the machvec in order for it
+ to be of any use.
+@@ -172,7 +176,7 @@ sufficient.
+    vector.
+ 
+    Note that these prototypes are generated automatically by setting
+-   __IO_PREFIX to something sensible. A typical example would be:
++   __IO_PREFIX to something sensible. A typical example would be::
+ 
+ 	#define __IO_PREFIX vapor
+    	#include <asm/io_generic.h>
+@@ -181,7 +185,7 @@ sufficient.
+    have a legacy io.h should remove it entirely and switch to the new model.
+ 
+  - Add machine vector definitions to the board's setup.c. At a bare minimum,
+-   this must be defined as something like:
++   this must be defined as something like::
+ 
+ 	struct sh_machine_vector mv_vapor __initmv = {
+ 		.mv_name = "vapor",
+@@ -202,20 +206,20 @@ Large portions of the build system are now entirely dynamic, and merely
+ require the proper entry here and there in order to get things done.
+ 
+ The first thing to do is to add an entry to arch/sh/Kconfig, under the
+-"System type" menu:
++"System type" menu::
+ 
+-config SH_VAPOR
+-	bool "Vapor"
+-	help
+-	  select Vapor if configuring for a FooTech Vaporboard.
++    config SH_VAPOR
++	    bool "Vapor"
++	    help
++	    select Vapor if configuring for a FooTech Vaporboard.
+ 
+ next, this has to be added into arch/sh/Makefile. All boards require a
+ machdir-y entry in order to be built. This entry needs to be the name of
+ the board directory as it appears in arch/sh/boards, even if it is in a
+ sub-directory (in which case, all parent directories below arch/sh/boards/
+-need to be listed). For our new board, this entry can look like:
++need to be listed). For our new board, this entry can look like::
+ 
+-machdir-$(CONFIG_SH_VAPOR)	+= vapor
++    machdir-$(CONFIG_SH_VAPOR)	+= vapor
+ 
+ provided that we've placed everything in the arch/sh/boards/vapor/ directory.
+ 
+@@ -230,7 +234,7 @@ This is done by adding an entry to the end of the arch/sh/tools/mach-types
+ list. The method for doing this is self explanatory, and so we won't waste
+ space restating it here. After this is done, you will be able to use
+ implicit checks for your board if you need this somewhere throughout the
+-common code, such as:
++common code, such as::
+ 
+ 	/* Make sure we're on the FooTech Vaporboard */
+ 	if (!mach_is_vapor())
+@@ -253,16 +257,19 @@ build target, and it will be implicitly listed as such in the help text.
+ Looking at the 'make help' output, you should now see something like:
+ 
+ Architecture specific targets (sh):
+-  zImage                  - Compressed kernel image (arch/sh/boot/zImage)
+-  adx_defconfig           - Build for adx
+-  cqreek_defconfig        - Build for cqreek
+-  dreamcast_defconfig     - Build for dreamcast
+-...
+-  vapor_defconfig         - Build for vapor
+ 
+-which then allows you to do:
++  =======================   =============================================
++  zImage                    Compressed kernel image (arch/sh/boot/zImage)
++  adx_defconfig             Build for adx
++  cqreek_defconfig          Build for cqreek
++  dreamcast_defconfig       Build for dreamcast
++  ...
++  vapor_defconfig           Build for vapor
++  =======================   =============================================
+ 
+-$ make ARCH=sh CROSS_COMPILE=sh4-linux- vapor_defconfig vmlinux
++which then allows you to do::
++
++    $ make ARCH=sh CROSS_COMPILE=sh4-linux- vapor_defconfig vmlinux
+ 
+ which will in turn copy the defconfig for this board, run it through
+ oldconfig (prompting you for any new options since the time of creation),
 -- 
 2.24.1
 
