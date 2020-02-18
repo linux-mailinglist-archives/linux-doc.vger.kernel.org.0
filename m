@@ -2,96 +2,208 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 87CA3162908
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 16:03:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2124916293E
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 16:19:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726634AbgBRPDj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Feb 2020 10:03:39 -0500
-Received: from mout.gmx.net ([212.227.15.19]:38477 "EHLO mout.gmx.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726540AbgBRPDj (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 18 Feb 2020 10:03:39 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-        s=badeba3b8450; t=1582038159;
-        bh=78WLr0Jh0oX941+EHl0TP1NEkR5NyE7h/+gfWtJqsqA=;
-        h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
-        b=V+xHiljLUpanYuvJitxOcIggYEggezMjFipHdOvHaga5Eurb3vA0pA1BYSPwCewAA
-         xhhesrB6c5IEOBzBeE0cQM4irbpox/5DXxkXdLQA9WhNZspXjPuACaUwG+UdAg6liX
-         mOxQJrqxVHweeik5u61bE+N9ZWHcq2T9orXC5g7Y=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from longitude ([5.146.194.223]) by mail.gmx.com (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1MXGvM-1ixtDd37Mc-00YidA; Tue, 18
- Feb 2020 16:02:39 +0100
-From:   =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
-To:     linux-doc@vger.kernel.org
-Cc:     =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
+        id S1727393AbgBRPSi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Feb 2020 10:18:38 -0500
+Received: from laurent.telenet-ops.be ([195.130.137.89]:39498 "EHLO
+        laurent.telenet-ops.be" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726882AbgBRPSf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Feb 2020 10:18:35 -0500
+Received: from ramsan ([84.195.182.253])
+        by laurent.telenet-ops.be with bizsmtp
+        id 4FJD2200y5USYZQ01FJEv4; Tue, 18 Feb 2020 16:18:34 +0100
+Received: from rox.of.borg ([192.168.97.57])
+        by ramsan with esmtp (Exim 4.90_1)
+        (envelope-from <geert@linux-m68k.org>)
+        id 1j44dZ-0006yA-Pa; Tue, 18 Feb 2020 16:18:13 +0100
+Received: from geert by rox.of.borg with local (Exim 4.90_1)
+        (envelope-from <geert@linux-m68k.org>)
+        id 1j44dZ-00022u-MX; Tue, 18 Feb 2020 16:18:13 +0100
+From:   Geert Uytterhoeven <geert+renesas@glider.be>
+To:     Linus Walleij <linus.walleij@linaro.org>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Richard Weinberger <richard@nod.at>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-        Juergen Gross <jgross@suse.com>, linux-kernel@vger.kernel.org
-Subject: [PATCH] docs: Fix path to MTD command line partition parser
-Date:   Tue, 18 Feb 2020 16:02:19 +0100
-Message-Id: <20200218150222.18590-1-j.neuschaefer@gmx.net>
-X-Mailer: git-send-email 2.20.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:kZSahnpTKmGAZGrssfHw5TUnMAFLMXg3CFjIbXnPC0vqEdMxxPO
- uj8IUfNCN52o/tUGY9sUDPa96hkrOpsBku8upZfPHIF3K3c2bLkhEFKvWYONDL+OW4Iq6cE
- R01WX4JADvtpEj+ReLrGdt6s8xQYsYucLxXtiVDY48KQolDoVJCrvQicaqGvb0NWnzq/SHr
- 5tg2gijiJoobgUzIbKygw==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:w85UQI942Kw=:aUKBxXiwwpBL5kKKplIrZ3
- LWSEQLuCeWmEv/OmSfmwlTuXoiPnRCqDCMlThgINYrt5ds3P9BVBkUV5w0bKqsBnXt0Ea6p8Q
- 42kPF3J2pN4hJcAxIyc+xhRQQ7RSSqdMFHW3Q8JWSoMo3l7RKAZdZ5hnNCuOf68nvKxfXPxWt
- A3q5bl/b8aRcPzvrsIUwvxH9yv354iuquGyD2Q+MBGVAWE1/l4QXOxVdJwlBLkqrslhNEwcaC
- P8lPHYewUxSgwksvQgtnW/q423T75nG4AEk5gRsxKEB4mbarRz5Nsc7jwr/anhprPfYoIpPk3
- p42OEH5XuvQw7Y02YEPeAR7odryy6g7vjgKkLOAOYuoXsKQwkUr+tPLwwN1Rdu6JrKK/hWx5Z
- EbFJV5m4Je26JZmvRFPfnIp6TOLPS0BAbvo+mAqR0ZTTaq/1IgXs8BbZkGZjmcSzFHYS+vNMY
- tc0ngvduWTZ7GP0+Lyr47lTavckogL2M3tmo43nWSKLY1WX5my+ks/DMa4crrpPTP+tcKx5Vl
- A9hI8Tr4gfbKX+7D5tiUNoy6l4raBlyVxuV3SB/SuM4AF0981/v7M0fKcjEHPXRBjxncmA4hS
- AP+hS+y/0C+qwSPqh4cW9hL50y+93wh2D1D8GdeVRib/jFQg8Sy3yJDOZRK+6pKptWVusDEDc
- l6NN/k5twKnAiM0XbKOk+9sdJeQvFp//j+g8jU3hJ3NtlmZuqmDR88Jo1sT6nGowflKOp2fPG
- cA0hieFAa2nTeNx+ClRojxYoNp/V3bBMO2yA0qVrNWgmeVRENEKO/p6ZsjuffLAmH/D9eLd6D
- QZGGjxPbmeTfXzOi85XmMri9AdPF3GxDrmj3v+eCfodhj14/jwdK6a3CocyhUvdlO+NHdrcKt
- 6wPGRRzokY3noYelGGYUpUCB9WwZeq22GRzlTdM8WdmpkUnr96jkJ4gzQmHHzj+p/nLioabHS
- QBaIVnwwHz7RpEU+xS+AGqF2yL1fzLIISI6Wd2igT1CSkU+YmTuv+MNNm92T/QtwLhbtqDCpv
- ndBnEemXKS4nMvohAmP39n3HR1ZHxmGZJpgfkX0PudyEhQ79x3CmHNB6HPRX7UkD99RvXyOiG
- jaO3FSkOvaNxzHzd7ehdeJw1aEzRG7CeNFAH9eKxLF60zvf/TxGPMQTN1aU3s8j8L+V4JM1VQ
- AR+wR193CGPXYwesN6jRGTsmDhcdaufGOgxEn8mUzsW8u3KKD1Xm47mu/Hx8pcREa7evZA7wq
- OIAjJqTCnZN2IdNcd
+        Harish Jenny K N <harish_kandiga@mentor.com>,
+        Eugeniu Rosca <erosca@de.adit-jv.com>
+Cc:     Alexander Graf <graf@amazon.com>,
+        Peter Maydell <peter.maydell@linaro.org>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Phil Reid <preid@electromag.com.au>,
+        Marc Zyngier <marc.zyngier@arm.com>,
+        Christoffer Dall <christoffer.dall@arm.com>,
+        Magnus Damm <magnus.damm@gmail.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-renesas-soc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        qemu-devel@nongnu.org, Geert Uytterhoeven <geert+renesas@glider.be>
+Subject: [PATCH v5 0/5] gpio: Add GPIO Aggregator
+Date:   Tue, 18 Feb 2020 16:18:07 +0100
+Message-Id: <20200218151812.7816-1-geert+renesas@glider.be>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-cmdlinepart.c has been moved to drivers/mtd/parsers/.
+	Hi all,
 
-Fixes: a3f12a35c91d ("mtd: parsers: Move CMDLINE parser")
-Signed-off-by: Jonathan Neusch=C3=A4fer <j.neuschaefer@gmx.net>
-=2D--
- Documentation/admin-guide/kernel-parameters.txt | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+GPIO controllers are exported to userspace using /dev/gpiochip*
+character devices.  Access control to these devices is provided by
+standard UNIX file system permissions, on an all-or-nothing basis:
+either a GPIO controller is accessible for a user, or it is not.
+Currently no mechanism exists to control access to individual GPIOs.
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentati=
-on/admin-guide/kernel-parameters.txt
-index dbc22d684627..47cd55e339a5 100644
-=2D-- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -2791,7 +2791,7 @@
- 			<name>,<region-number>[,<base>,<size>,<buswidth>,<altbuswidth>]
+Hence this adds a GPIO driver to aggregate existing GPIOs, and expose
+them as a new gpiochip.  This is useful for implementing access control,
+and assigning a set of GPIOs to a specific user.  Furthermore, this
+simplifies and hardens exporting GPIOs to a virtual machine, as the VM
+can just grab the full GPIO controller, and no longer needs to care
+about which GPIOs to grab and which not, reducing the attack surface.
 
- 	mtdparts=3D	[MTD]
--			See drivers/mtd/cmdlinepart.c.
-+			See drivers/mtd/parsers/cmdlinepart.c
+Recently, other use cases have been discovered[1]:
+  - Describing simple GPIO-operated devices in DT, and using the GPIO
+    Aggregator as a generic GPIO driver for userspace, which is useful
+    for industrial control.
 
- 	multitce=3Doff	[PPC]  This parameter disables the use of the pSeries
- 			firmware feature for updating multiple TCE entries
-=2D-
-2.20.1
+Changes compared to v4[2]:
+  - Add Reviewed-by, Tested-by,
+  - Fix inconsistent indentation in documentation.
 
+Changes compared to v3[3] (more details in the individual patches):
+  - Drop controversial GPIO repeater,
+  - Drop support for legacy sysfs interface based name matching,
+  - Drop applied "gpiolib: Add GPIOCHIP_NAME definition",
+  - Documentation improvements,
+  - Lots of small cleanups.
+
+Changes compared to v2[4] (more details in the individual patches):
+  - Integrate GPIO Repeater functionality,
+  - Absorb GPIO forwarder library, as the Aggregator and Repeater are
+    now a single driver,
+  - Use the aggregator parameters to create a GPIO lookup table instead
+    of an array of GPIO descriptors,
+  - Add documentation,
+  - New patches:
+      - "gpiolib: Add GPIOCHIP_NAME definition",
+      - "gpiolib: Add support for gpiochipN-based table lookup",
+      - "gpiolib: Add support for GPIO line table lookup",
+      - "dt-bindings: gpio: Add gpio-repeater bindings",
+      - "docs: gpio: Add GPIO Aggregator/Repeater documentation",
+      - "MAINTAINERS: Add GPIO Aggregator/Repeater section".
+  - Dropped patches:
+      - "gpio: Export gpiod_{request,free}() to modular GPIO code",
+      - "gpio: Export gpiochip_get_desc() to modular GPIO code",
+      - "gpio: Export gpio_name_to_desc() to modular GPIO code",
+      - "gpio: Add GPIO Forwarder Helper".
+
+Changes compared to v1[5]:
+  - Drop "virtual", rename to gpio-aggregator,
+  - Create and use new GPIO Forwarder Helper, to allow sharing code with
+    the GPIO inverter,
+  - Lift limit on the maximum number of GPIOs,
+  - Improve parsing of GPIO specifiers,
+  - Fix modular build.
+
+Aggregating GPIOs and exposing them as a new gpiochip was suggested in
+response to my proof-of-concept for GPIO virtualization with QEMU[6][7].
+
+For the first use case, aggregated GPIO controllers are instantiated and
+destroyed by writing to atribute files in sysfs.
+Sample session on the Renesas Koelsch development board:
+
+  - Unbind LEDs from leds-gpio driver:
+
+        echo leds > /sys/bus/platform/drivers/leds-gpio/unbind
+
+  - Create aggregators:
+
+    $ echo e6052000.gpio 19,20 \
+        > /sys/bus/platform/drivers/gpio-aggregator/new_device
+
+    gpio-aggregator gpio-aggregator.0: gpio 0 => gpio-953 (gpio-aggregator.0)
+    gpio-aggregator gpio-aggregator.0: gpio 1 => gpio-954 (gpio-aggregator.0)
+    gpiochip_find_base: found new base at 778
+    gpio gpiochip8: (gpio-aggregator.0): added GPIO chardev (254:8)
+    gpiochip_setup_dev: registered GPIOs 778 to 779 on device: gpiochip8 (gpio-aggregator.0)
+
+    $ echo e6052000.gpio 21 e6050000.gpio 20-22 \
+        > /sys/bus/platform/drivers/gpio-aggregator/new_device
+
+    gpio-aggregator gpio-aggregator.1: gpio 0 => gpio-955 (gpio-aggregator.1)
+    gpio-aggregator gpio-aggregator.1: gpio 1 => gpio-1012 (gpio-aggregator.1)
+    gpio-aggregator gpio-aggregator.1: gpio 2 => gpio-1013 (gpio-aggregator.1)
+    gpio-aggregator gpio-aggregator.1: gpio 3 => gpio-1014 (gpio-aggregator.1)
+    gpiochip_find_base: found new base at 774
+    gpio gpiochip9: (gpio-aggregator.1): added GPIO chardev (254:9)
+    gpiochip_setup_dev: registered GPIOs 774 to 777 on device: gpiochip9 (gpio-aggregator.1)
+
+  - Adjust permissions on /dev/gpiochip[89] (optional)
+
+  - Control LEDs:
+
+    $ gpioset gpiochip8 0=0 1=1 # LED6 OFF, LED7 ON
+    $ gpioset gpiochip8 0=1 1=0 # LED6 ON, LED7 OFF
+    $ gpioset gpiochip9 0=0     # LED8 OFF
+    $ gpioset gpiochip9 0=1     # LED8 ON
+
+  - Destroy aggregators:
+
+    $ echo gpio-aggregator.0 \
+            > /sys/bus/platform/drivers/gpio-aggregator/delete_device
+    $ echo gpio-aggregator.1 \
+            > /sys/bus/platform/drivers/gpio-aggregator/delete_device
+
+Thanks!
+
+References:
+  [1] "[PATCH V4 2/2] gpio: inverter: document the inverter bindings"
+      (https://lore.kernel.org/r/1561699236-18620-3-git-send-email-harish_kandiga@mentor.com/)
+  [2] "[PATCH v4 0/5] gpio: Add GPIO Aggregator"
+      (https://lore.kernel.org/r/20200115181523.23556-1-geert+renesas@glider.be)
+  [3] "[PATCH v3 0/7] gpio: Add GPIO Aggregator/Repeater"
+      (https://lore.kernel.org/r/20191127084253.16356-1-geert+renesas@glider.be/)
+  [4] "[PATCH/RFC v2 0/5] gpio: Add GPIO Aggregator Driver"
+      (https://lore.kernel.org/r/20190911143858.13024-1-geert+renesas@glider.be/)
+  [5] "[PATCH RFC] gpio: Add Virtual Aggregator GPIO Driver"
+      (https://lore.kernel.org/r/20190705160536.12047-1-geert+renesas@glider.be/)
+  [6] "[PATCH QEMU POC] Add a GPIO backend"
+      (https://lore.kernel.org/r/20181003152521.23144-1-geert+renesas@glider.be/)
+  [7] "Getting To Blinky: Virt Edition / Making device pass-through
+       work on embedded ARM"
+      (https://fosdem.org/2019/schedule/event/vai_getting_to_blinky/)
+
+Geert Uytterhoeven (5):
+  gpiolib: Add support for gpiochipN-based table lookup
+  gpiolib: Add support for GPIO line table lookup
+  gpio: Add GPIO Aggregator
+  docs: gpio: Add GPIO Aggregator documentation
+  MAINTAINERS: Add GPIO Aggregator section
+
+ .../admin-guide/gpio/gpio-aggregator.rst      | 102 ++++
+ Documentation/admin-guide/gpio/index.rst      |   1 +
+ MAINTAINERS                                   |   7 +
+ drivers/gpio/Kconfig                          |  12 +
+ drivers/gpio/Makefile                         |   1 +
+ drivers/gpio/gpio-aggregator.c                | 574 ++++++++++++++++++
+ drivers/gpio/gpiolib.c                        |  33 +-
+ include/linux/gpio/machine.h                  |  15 +-
+ 8 files changed, 732 insertions(+), 13 deletions(-)
+ create mode 100644 Documentation/admin-guide/gpio/gpio-aggregator.rst
+ create mode 100644 drivers/gpio/gpio-aggregator.c
+
+-- 
+2.17.1
+
+Gr{oetje,eeting}s,
+
+						Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+							    -- Linus Torvalds
