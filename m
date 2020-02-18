@@ -2,86 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 01D0D1623BA
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 10:44:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6DDEB162441
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 11:07:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726264AbgBRJoQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Feb 2020 04:44:16 -0500
-Received: from mail-pf1-f196.google.com ([209.85.210.196]:35192 "EHLO
-        mail-pf1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726199AbgBRJoP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Feb 2020 04:44:15 -0500
-Received: by mail-pf1-f196.google.com with SMTP id y73so10391721pfg.2;
-        Tue, 18 Feb 2020 01:44:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=HNw/4H6/vd73/BDz9NY7P3n/SYJkPQvMSu9pnjd4OI0=;
-        b=T0jj166NyIIYsZWGkA6bw1qquWK4pwEH8zNZqOrz7gRJ+w0IOg8SHBoOfGUoeSC76j
-         lfwAKNKWj/CUSESKN8/p9psXJ669A8U/IK6OIufFheKUBA4oTzN8lc9Ct+VrnVf2/fiy
-         EQhAP0LT5FYmOLmZ6pY3T/0epMl9QN8wX/+nbnXMzxXWTBgCM0RYJTqubzNPy1wRv3vt
-         mvcnyDXROkK3qHl2irsJHU02kG6sIsUgdfyu5VuwnWMSOxriPaqvagQeInOA5PKuiuC5
-         oYZFV1g7W+ePVMB/I+oWcRTtozZRhUp3wJmDISk4gyLpOQ4IM8qVlBmoa69QSOP+Gwgm
-         rDlg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=HNw/4H6/vd73/BDz9NY7P3n/SYJkPQvMSu9pnjd4OI0=;
-        b=jwG42tgp5LUWN8lf1OcMIP6Nfkqo3VHUwQpI6FrfgzQO/xndf1uOMBaBkUj1lx7nzp
-         jkE0u+KKsjLGe0FUGceTUCCr9d9Uuz6fKVbVl6gZy8Mx5Kmezdv1OPIxY4eMhke4t64y
-         O0Z3INOKw4SXtqVoAm4erUlNf15gplgEU0FMjnaIE5Fkmne8i26vz7XKYIyQQIwVvJAX
-         vSBaTBMqXhdowXbLQUNFc3GakwYrQ4C+TpBkeAZSMxlfZsMTAWv/3e2sDKbb7Sy3AJO+
-         tAKbQf+Ijl8n5osflEQwcymlbX78YBpbV22JHXOPQWSf8NeUGJ8gj6paXNYpMwFDk2ZR
-         8Rhg==
-X-Gm-Message-State: APjAAAWkvT6lZr1jWWp3cBRkzDnYsINK5rTJJDFCz+0ppeCZV963lRX9
-        Qam3VzQtrLIB1z1/H1zpkINyeCGQVDE=
-X-Google-Smtp-Source: APXvYqwSQovdx0x/dBbrq78/Nk3rJpBtr4ZejkKk0cG28D2d6b4sV77mnRgoiOTrXIW2YD58v8XhfA==
-X-Received: by 2002:a63:a741:: with SMTP id w1mr22532136pgo.131.1582019055042;
-        Tue, 18 Feb 2020 01:44:15 -0800 (PST)
-Received: from localhost.localdomain ([103.231.91.38])
-        by smtp.gmail.com with ESMTPSA id l10sm2457419pjy.5.2020.02.18.01.44.08
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 18 Feb 2020 01:44:14 -0800 (PST)
-From:   Bhaskar Chowdhury <unixbhaskar@gmail.com>
-To:     corbet@lwn.net, federico.vaga@vaga.pv.it, rdunlap@infradead.org
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Bhaskar Chowdhury <unixbhaskar@gmail.com>
-Subject: [PATCH] Replace dead urls with active urls for Mutt
-Date:   Tue, 18 Feb 2020 15:10:13 +0530
-Message-Id: <20200218094013.29806-1-unixbhaskar@gmail.com>
-X-Mailer: git-send-email 2.24.1
+        id S1726467AbgBRKHh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Feb 2020 05:07:37 -0500
+Received: from bombadil.infradead.org ([198.137.202.133]:35552 "EHLO
+        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726444AbgBRKHh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Feb 2020 05:07:37 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
+        Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:
+        From:Date:Sender:Reply-To:Content-ID:Content-Description;
+        bh=+ubzgwWRDVP0Wr1vDpgnLvEPIoud36HG39FDLUrxEew=; b=c2w+DYLCNvLqziMvzOtrobTKYf
+        4Ypb5Yrnz+Nm9jwFfhbEzWTLTYBz9HJLf8dsWoLrmcvAjjC2sFbm+z8ALu6p7TBFfPOze+pQETVN5
+        VnNk8b+j7ooNNyXU7L9PuQEZHDFvWRiHRC91+af1Ro+rKTiWUOmhBY+24AkGtnJP93hhwZMztZpj0
+        SiVu4L9pr6UtLl49udMEvnT4ytluxUVNBRwLxHsk+3ExmNzWN73xoqIETW84cJiyOEfgPzNXJUNoH
+        1C4U8UQ0OMzJ9gxtqJAKV08nviuWkoygbbwg9WElVAIppTtu9/KssmN6dzYINtY5flnyLrxYwwfHc
+        Y6rzL6zQ==;
+Received: from tmo-109-126.customers.d1-online.com ([80.187.109.126] helo=localhost)
+        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1j3zmx-0005ab-64; Tue, 18 Feb 2020 10:07:35 +0000
+Date:   Tue, 18 Feb 2020 11:07:31 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Joseph Qi <joseph.qi@linux.alibaba.com>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-fsdevel@vger.kernel.org, Mark Fasheh <mark@fasheh.com>,
+        Joel Becker <jlbec@evilplan.org>, ocfs2-devel@oss.oracle.com
+Subject: Re: [PATCH 12/44] docs: filesystems: convert dlmfs.txt to ReST
+Message-ID: <20200218110731.2890658d@kernel.org>
+In-Reply-To: <3b40d7d4-3798-08db-220d-b45704ada48a@linux.alibaba.com>
+References: <cover.1581955849.git.mchehab+huawei@kernel.org>
+        <efc9e59925723e17d1a4741b11049616c221463e.1581955849.git.mchehab+huawei@kernel.org>
+        <3b40d7d4-3798-08db-220d-b45704ada48a@linux.alibaba.com>
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch replace stale/dead urls with active urls for Mutt.
+Em Tue, 18 Feb 2020 09:21:51 +0800
+Joseph Qi <joseph.qi@linux.alibaba.com> escreveu:
 
-Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
----
- Documentation/process/email-clients.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+> On 20/2/18 00:11, Mauro Carvalho Chehab wrote:
 
-diff --git a/Documentation/process/email-clients.rst b/Documentation/process/email-clients.rst
-index 5273d06c8ff6..c4f9dc7a0889 100644
---- a/Documentation/process/email-clients.rst
-+++ b/Documentation/process/email-clients.rst
-@@ -237,9 +237,9 @@ using Mutt to send patches through Gmail::
+> > @@ -96,14 +101,19 @@ operation. If the lock succeeds, you'll get an fd.
+> >  open(2) with O_CREAT to ensure the resource inode is created - dlmfs does
+> >  not automatically create inodes for existing lock resources.
+> >  
+> > +============  ===========================
+> >  Open Flag     Lock Request Type
+> > ----------     -----------------  
+> 
+> Better to remove the above line.
+> 
+> > +============  ===========================
+> >  O_RDONLY      Shared Read
+> >  O_RDWR        Exclusive
+> > +============  ===========================
+> >  
+> > +
+> > +============  ===========================
+> >  Open Flag     Resulting Locking Behavior
+> > ----------     --------------------------  
+> 
+> Ditto.
 
- The Mutt docs have lots more information:
+Ok. So, I guess we can just merge the two tables into one, like:
 
--    http://dev.mutt.org/trac/wiki/UseCases/Gmail
-+    https://gitlab.com/muttmua/mutt/-/wikis/UseCases/Gmail
+	============  =================
+	O_RDONLY      Shared Read
+	O_RDWR        Exclusive
+	O_NONBLOCK    Trylock operation
+	============  =================
 
--    http://dev.mutt.org/doc/manual.html
-+    http://www.mutt.org/doc/manual/
+Right?
 
- Pine (TUI)
- **********
---
-2.24.1
-
+Cheers,
+Mauro
