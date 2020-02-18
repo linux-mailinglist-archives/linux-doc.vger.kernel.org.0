@@ -2,174 +2,137 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 61CE316230A
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 10:10:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0E0B516233F
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 10:19:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726199AbgBRJKe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Feb 2020 04:10:34 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:35174 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726186AbgBRJKe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Feb 2020 04:10:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Sender:Content-Transfer-Encoding:
-        MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:
-        Reply-To:Content-Type:Content-ID:Content-Description;
-        bh=CdqmLOZ5sQ/Aflxvzy0izWi/tvqp/in3SnUYEGpwbcw=; b=GQTK0tfVKYqBydcyzx4tuedINU
-        sLt6G5M349wSwoKo359zKoG0jTDuodwOtf0uEdagPSD3aB5YxsNFefDQTToqZilMk9oFxfWHCXI8S
-        o3D1xrrtrnRUeqBQGGzqivds0H4CpU+8O0f0UdoxMmtN007ccjLEeA1UgKf1pFq4I12n0ho/gywa2
-        +KKJC7VuZPIYpniO53GELz4cpeejga/JwmR85E87lK29F+fNRbBUm8dXksF55kIUSO6YKBDgZBbpy
-        omEMXGkBVwWLU6F5Z1yAyMxkIH9n5fDGdtVe+9KxR8F/9yJNfyJ375F3Vu//0u2IeezgkC5qEUerh
-        n6x3eAEA==;
-Received: from tmo-109-126.customers.d1-online.com ([80.187.109.126] helo=bombadil.infradead.org)
-        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1j3ytm-00046s-59; Tue, 18 Feb 2020 09:10:34 +0000
-Received: from mchehab by bombadil.infradead.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@bombadil.infradead.org>)
-        id 1j3j8W-000fpH-24; Mon, 17 Feb 2020 17:20:44 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v2 09/24] docs: misc-devices/c2port.txt: convert to ReST format
-Date:   Mon, 17 Feb 2020 17:20:27 +0100
-Message-Id: <d9837c807f6d3f2a861ceaeef3803c3f62a6aac3.1581956285.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <cover.1581956285.git.mchehab+huawei@kernel.org>
-References: <cover.1581956285.git.mchehab+huawei@kernel.org>
+        id S1726330AbgBRJTV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Feb 2020 04:19:21 -0500
+Received: from mail-pg1-f194.google.com ([209.85.215.194]:34534 "EHLO
+        mail-pg1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726199AbgBRJTV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Feb 2020 04:19:21 -0500
+Received: by mail-pg1-f194.google.com with SMTP id j4so10656582pgi.1;
+        Tue, 18 Feb 2020 01:19:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:mail-followup-to:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=8w6bEyoNMZ8GDT13mdRKLob+Xn1ecdp0CQY3QFDsyDs=;
+        b=BPqV6iz2bS9MAhgLxm7OeM/o/qlK5Wua9oMkKpxtEeaRf9utiyPHZ72av5ngMciQRR
+         +SrWtaC2oqYl3tfcI0fgn8LvStvsFpniZ1QbogwBwTEWr3SkbtQ80kaJ9HiYNWdQcX+q
+         uXSG+MbNYWg4MnTnmlWhSeiUxswt+DiewfYl1td2lHl4l2g6C90p9Uudg+0pyL5Vmh5T
+         Objq17zvOMXBa8+AMIpYTzOhiGIJErA+n1sMozF+dNGg0GRIBWpAQ6UhY55PMdxiLo2N
+         4k2l9kGDjnsWYctqRbRb6Hbylo2QBNbc9FNMfsWexU5IXz8RBsxWKWXiHYZCxsP996uj
+         9JJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:references:mime-version:content-disposition
+         :in-reply-to:user-agent;
+        bh=8w6bEyoNMZ8GDT13mdRKLob+Xn1ecdp0CQY3QFDsyDs=;
+        b=i5BubamruWAn7US755OVP/lT2XJ7TGuTFuKEjALjn5u54t7LDTs2DWuI6CaQQCj+S6
+         6wHezDBmX89/h1J9LBbdePkvNNbibHDLEBeSQKO+QAmp5K80oESaFMcQpwEWU9UIXFnV
+         R1cah68dvDkCKtxWhlMkS/4da6P3jyhb+jltTGF2SuiQ2gg8jUFmwxfjdexkKmRGaALx
+         6mYv4fjc7txfL+dBAijJjgAW9Olxj+a/OkY5IHjPM4y1+nHhVNb4QBwXomW1f2yH+J6c
+         8+lLnJhISMporKzeFDodeXiKiFqrBXVIDCxc5c4UgpHdhIwxmUoofFTMnmCX8BzFubBT
+         JMGQ==
+X-Gm-Message-State: APjAAAWptT554NKI8hTL/3cWuV0xthETKTLjHHX+Nrp5VARpcrwz8Fpm
+        F9HvDDKVS3u9f+sf/fL7Tsc=
+X-Google-Smtp-Source: APXvYqzdMEe4GnabLeoK5c8UQ1m4S5xb2zFZjwAIugQwIwcwSD4dwTkunADz5CRAPkU8cVCnzXChCg==
+X-Received: by 2002:a62:7c96:: with SMTP id x144mr21295021pfc.7.1582017560307;
+        Tue, 18 Feb 2020 01:19:20 -0800 (PST)
+Received: from Gentoo ([103.231.91.38])
+        by smtp.gmail.com with ESMTPSA id t11sm2322514pjo.21.2020.02.18.01.19.14
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 18 Feb 2020 01:19:19 -0800 (PST)
+Date:   Tue, 18 Feb 2020 14:49:07 +0530
+From:   Bhaskar Chowdhury <unixbhaskar@gmail.com>
+To:     Federico Vaga <federico.vaga@vaga.pv.it>
+Cc:     corbet@lwn.net, rdunlap@infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Replace stale url with active one for Mutt
+Message-ID: <20200218091904.GA3828@Gentoo>
+Mail-Followup-To: Bhaskar Chowdhury <unixbhaskar@gmail.com>,
+        Federico Vaga <federico.vaga@vaga.pv.it>, corbet@lwn.net,
+        rdunlap@infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20200218065854.13152-1-unixbhaskar@gmail.com>
+ <26370462.jMSB3ls19i@pcbe13614>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha256;
+        protocol="application/pgp-signature"; boundary="OgqxwSJOaUobr8KG"
+Content-Disposition: inline
+In-Reply-To: <26370462.jMSB3ls19i@pcbe13614>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-- Use copyright symbol;
-- use title markups;
-- adjust indentation;
-- mark literal blocks as such.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- .../misc-devices/{c2port.txt => c2port.rst}   | 58 ++++++++++---------
- Documentation/misc-devices/index.rst          |  1 +
- 2 files changed, 32 insertions(+), 27 deletions(-)
- rename Documentation/misc-devices/{c2port.txt => c2port.rst} (59%)
+--OgqxwSJOaUobr8KG
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/Documentation/misc-devices/c2port.txt b/Documentation/misc-devices/c2port.rst
-similarity index 59%
-rename from Documentation/misc-devices/c2port.txt
-rename to Documentation/misc-devices/c2port.rst
-index ea7344465610..258e1c1d43c7 100644
---- a/Documentation/misc-devices/c2port.txt
-+++ b/Documentation/misc-devices/c2port.rst
-@@ -1,7 +1,11 @@
--			C2 port support
--			---------------
-+.. SPDX-License-Identifier: GPL-2.0
-+.. include:: <isonum.txt>
- 
--(C) Copyright 2007 Rodolfo Giometti <giometti@enneenne.com>
-+===============
-+C2 port support
-+===============
-+
-+|copy| Copyright 2007 Rodolfo Giometti <giometti@enneenne.com>
- 
- This program is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
-@@ -32,10 +36,10 @@ The C2 Interface main references are at (http://www.silabs.com)
- Silicon Laboratories site], see:
- 
- - AN127: FLASH Programming via the C2 Interface at
--http://www.silabs.com/Support Documents/TechnicalDocs/an127.pdf 
-+  http://www.silabs.com/Support Documents/TechnicalDocs/an127.pdf
- 
- - C2 Specification at
--http://www.silabs.com/pages/DownloadDoc.aspx?FILEURL=Support%20Documents/TechnicalDocs/an127.pdf&src=SearchResults
-+  http://www.silabs.com/pages/DownloadDoc.aspx?FILEURL=Support%20Documents/TechnicalDocs/an127.pdf&src=SearchResults
- 
- however it implements a two wire serial communication protocol (bit
- banging) designed to enable in-system programming, debugging, and
-@@ -47,44 +51,44 @@ Using the driver
- ----------------
- 
- Once the driver is loaded you can use sysfs support to get C2port's
--info or read/write in-system flash.
-+info or read/write in-system flash::
- 
--# ls /sys/class/c2port/c2port0/
--access            flash_block_size  flash_erase       rev_id
--dev_id            flash_blocks_num  flash_size        subsystem/
--flash_access      flash_data        reset             uevent
-+  # ls /sys/class/c2port/c2port0/
-+  access            flash_block_size  flash_erase       rev_id
-+  dev_id            flash_blocks_num  flash_size        subsystem/
-+  flash_access      flash_data        reset             uevent
- 
- Initially the C2port access is disabled since you hardware may have
- such lines multiplexed with other devices so, to get access to the
--C2port, you need the command:
-+C2port, you need the command::
- 
--# echo 1 > /sys/class/c2port/c2port0/access
-+  # echo 1 > /sys/class/c2port/c2port0/access
- 
- after that you should read the device ID and revision ID of the
--connected micro controller:
-+connected micro controller::
- 
--# cat /sys/class/c2port/c2port0/dev_id
--8
--# cat /sys/class/c2port/c2port0/rev_id
--1
-+  # cat /sys/class/c2port/c2port0/dev_id
-+  8
-+  # cat /sys/class/c2port/c2port0/rev_id
-+  1
- 
- However, for security reasons, the in-system flash access in not
--enabled yet, to do so you need the command:
-+enabled yet, to do so you need the command::
- 
--# echo 1 > /sys/class/c2port/c2port0/flash_access
-+  # echo 1 > /sys/class/c2port/c2port0/flash_access
- 
--After that you can read the whole flash:
-+After that you can read the whole flash::
- 
--# cat /sys/class/c2port/c2port0/flash_data > image
-+  # cat /sys/class/c2port/c2port0/flash_data > image
- 
--erase it:
-+erase it::
- 
--# echo 1 > /sys/class/c2port/c2port0/flash_erase
-+  # echo 1 > /sys/class/c2port/c2port0/flash_erase
- 
--and write it:
-+and write it::
- 
--# cat image > /sys/class/c2port/c2port0/flash_data
-+  # cat image > /sys/class/c2port/c2port0/flash_data
- 
--after writing you have to reset the device to execute the new code:
-+after writing you have to reset the device to execute the new code::
- 
--# echo 1 > /sys/class/c2port/c2port0/reset
-+  # echo 1 > /sys/class/c2port/c2port0/reset
-diff --git a/Documentation/misc-devices/index.rst b/Documentation/misc-devices/index.rst
-index 04f5dab2384c..c2e880d78734 100644
---- a/Documentation/misc-devices/index.rst
-+++ b/Documentation/misc-devices/index.rst
-@@ -16,6 +16,7 @@ fit into other categories.
- 
-    ad525x_dpot
-    eeprom
-+   c2port
-    ibmvmc
-    ics932s401
-    isl29003
--- 
-2.24.1
+On 09:17 Tue 18 Feb 2020, Federico Vaga wrote:
+>On Tuesday, February 18, 2020 7:58:54 AM CET Bhaskar Chowdhury wrote:
+>> This patch will replace  dead/stale url with the active urls.
+>>=20
+>> Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+>> ---
+>>  Documentation/process/email-clients.rst | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>=20
+>> diff --git a/Documentation/process/email-clients.rst
+>> b/Documentation/process/email-clients.rst index 5273d06c8ff6..bf8b4c9a4e=
+fe
+>> 100644
+>> --- a/Documentation/process/email-clients.rst
+>> +++ b/Documentation/process/email-clients.rst
+>> @@ -237,9 +237,9 @@ using Mutt to send patches through Gmail::
+>>=20
+>>  The Mutt docs have lots more information:
+>>=20
+>> -    http://dev.mutt.org/trac/wiki/UseCases/Gmail
+>> +    https://gitlab.com/muttmua/mutt/-/wikis/UseCases/Gmail
+>>=20
+>> -    http://dev.mutt.org/doc/manual.html
+>> +    http://www.mutt.org/#doc
+>
+>http://www.mutt.org/doc/manual/
+>
+>I think this link is better
+Sure.Let me correct that.
 
+~Bhaskar
+>
+>>=20
+>>  Pine (TUI)
+>>  **********
+>> --
+>> 2.24.1
+>
+>
+>--=20
+>Federico Vaga
+>http://www.federicovaga.it/
+>
+>
+
+--OgqxwSJOaUobr8KG
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAABCAAdFiEEnwF+nWawchZUPOuwsjqdtxFLKRUFAl5LrAQACgkQsjqdtxFL
+KRWujQgAlZ5ZEVIRfqnvG09XSPDty9RYeQ46yCAIVry3YCiqna7cnMR87fMP4Sck
+aYMGFol+angmsXin7dzgR8o32qANzVxyF/zziqcyI81vL22vvByjuFGUzVz9DYpT
+fAmzwtcgiJ/wXV1A+O421+oFLFRfg2nI7vc2i1effy7mEbzFzFgczuJWADWArWwQ
+MaU4YhbuzhFwvxmFKcKjmSLyPtDd0cdtgZVk9wDn2qnh6kDcVlxJv8NJMIxwMykz
+zupNPIB4xd7DBvJCHcPE3fPZHdMJErFwYuFcMyPrQ6SmgZ7wqk0i9ARzars35QqC
+vhyi2mQ88zKgvVMqvHmiEYDqXL9o6A==
+=fYJL
+-----END PGP SIGNATURE-----
+
+--OgqxwSJOaUobr8KG--
