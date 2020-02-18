@@ -2,58 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C4B2162617
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 13:26:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DD5AD1626C2
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 14:05:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726486AbgBRM0U (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Feb 2020 07:26:20 -0500
-Received: from mga18.intel.com ([134.134.136.126]:32339 "EHLO mga18.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726422AbgBRM0U (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 18 Feb 2020 07:26:20 -0500
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga106.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 18 Feb 2020 04:26:19 -0800
-X-IronPort-AV: E=Sophos;i="5.70,456,1574150400"; 
-   d="scan'208";a="228718753"
-Received: from jnikula-mobl3.fi.intel.com (HELO localhost) ([10.237.66.161])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 18 Feb 2020 04:26:17 -0800
-From:   Jani Nikula <jani.nikula@linux.intel.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Subject: Re: "staging" area for unsorted random files under Documentation/*.rst
-In-Reply-To: <20200218113219.7b7cc460@kernel.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20200218113219.7b7cc460@kernel.org>
-Date:   Tue, 18 Feb 2020 14:26:14 +0200
-Message-ID: <87v9o4ulnd.fsf@intel.com>
+        id S1726663AbgBRNFH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Feb 2020 08:05:07 -0500
+Received: from 2.mo68.mail-out.ovh.net ([46.105.52.162]:44287 "EHLO
+        2.mo68.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726363AbgBRNFH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Feb 2020 08:05:07 -0500
+X-Greylist: delayed 319 seconds by postgrey-1.27 at vger.kernel.org; Tue, 18 Feb 2020 08:05:06 EST
+Received: from player779.ha.ovh.net (unknown [10.108.54.97])
+        by mo68.mail-out.ovh.net (Postfix) with ESMTP id 1718515AA97
+        for <linux-doc@vger.kernel.org>; Tue, 18 Feb 2020 13:59:45 +0100 (CET)
+Received: from sk2.org (cre33-1_migr-88-122-126-116.fbx.proxad.net [88.122.126.116])
+        (Authenticated sender: steve@sk2.org)
+        by player779.ha.ovh.net (Postfix) with ESMTPSA id 0DFEEF77705F;
+        Tue, 18 Feb 2020 12:59:40 +0000 (UTC)
+From:   Stephen Kitt <steve@sk2.org>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, Stephen Kitt <steve@sk2.org>
+Subject: [PATCH v2 0/8] docs: sysctl/kernel.rst rework
+Date:   Tue, 18 Feb 2020 13:59:15 +0100
+Message-Id: <20200218125923.685-1-steve@sk2.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 16123168143214857605
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedugedrjeekgdegjecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvffufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucfkpheptddrtddrtddrtddpkeekrdduvddvrdduvdeirdduudeinecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepphhlrgihvghrjeejledrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehsthgvvhgvsehskhdvrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 18 Feb 2020, Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-> Shifting those around is not easy (I tried a few times), as some discussions
-> are required in order to get them at their rightful places.
->
-> So, my current proposal is to just rename them to *.rst, keeping them
-> where they are, and adding them into an "staging" area at the main
-> index.rst. See the enclosed patch.
+Hi,
 
-The obligatory bikeshedding comment, how about adding an actual
-"staging" directory under Documentation, perhaps with an index.rst of
-its own?
+A recent discussion about differences in the "panic" description in
+sysctl/kernel.rst led me to look into completing that file, and it
+turned out that more work was needed than documenting "panic". This
+patch series is the first batch, making the resulting documentation
+hopefully nicer and more accurate. It doesn't add fields that are
+present in 5.5 but not documented; I've started adding these, but I'd
+rather submit them individually once the basic kernel.rst is
+committed, to make it easier to request review from the appropriate
+maintainers (each patch adding documentation should be mergeable
+separately, without needing a patch series).
 
-Personally I don't really mind having .txt files around either, just
-*not* at the top level Documentation directory.
+Regards,
 
-BR,
-Jani.
+Stephen
 
 
+Changes in v2:
+* in the first patch, drop the first kernel version mention, leave the
+  copyright lines alone;
+* in the second patch, merge : and ::, drop a smartquote in favour of
+  a plain quote;
+* in commit messages, give the references used for the documentation;
+* add a script to check the documentation against the code;
+* drop the rtsig entries which are not relevant now (as revealed by
+  the check script).
+
+Stephen Kitt (8):
+  docs: pretty up sysctl/kernel.rst
+  docs: merge debugging-modules.txt into sysctl/kernel.rst
+  docs: drop l2cr from sysctl/kernel.rst
+  docs: add missing IPC documentation in sysctl/kernel.rst
+  docs: document stop-a in sysctl/kernel.rst
+  docs: document panic fully in sysctl/kernel.rst
+  docs: add a script to check sysctl docs
+  docs: sysctl/kernel: remove rtsig entries
+
+ Documentation/admin-guide/sysctl/kernel.rst | 1029 ++++++++++---------
+ Documentation/debugging-modules.txt         |   22 -
+ scripts/check-sysctl-docs                   |  181 ++++
+ 3 files changed, 707 insertions(+), 525 deletions(-)
+ delete mode 100644 Documentation/debugging-modules.txt
+ create mode 100755 scripts/check-sysctl-docs
+
+
+base-commit: 359c92c02bfae1a6f1e8e37c298e518fd256642c
 -- 
-Jani Nikula, Intel Open Source Graphics Center
+2.20.1
+
