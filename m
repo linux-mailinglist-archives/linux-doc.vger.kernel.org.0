@@ -2,72 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id BDFDC1626D5
-	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 14:09:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 801421626BF
+	for <lists+linux-doc@lfdr.de>; Tue, 18 Feb 2020 14:05:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726636AbgBRNJt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Feb 2020 08:09:49 -0500
-Received: from 1.mo173.mail-out.ovh.net ([178.33.111.180]:38612 "EHLO
-        1.mo173.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726620AbgBRNJs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Feb 2020 08:09:48 -0500
-Received: from player779.ha.ovh.net (unknown [10.108.57.140])
-        by mo173.mail-out.ovh.net (Postfix) with ESMTP id D5DB8130311
-        for <linux-doc@vger.kernel.org>; Tue, 18 Feb 2020 14:01:09 +0100 (CET)
-Received: from sk2.org (cre33-1_migr-88-122-126-116.fbx.proxad.net [88.122.126.116])
-        (Authenticated sender: steve@sk2.org)
-        by player779.ha.ovh.net (Postfix) with ESMTPSA id 35FCDF77769C;
-        Tue, 18 Feb 2020 13:00:57 +0000 (UTC)
-From:   Stephen Kitt <steve@sk2.org>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        linux-doc@vger.kernel.org
-Cc:     linux-kernel@vger.kernel.org, Stephen Kitt <steve@sk2.org>
-Subject: [PATCH v2 8/8] docs: sysctl/kernel: remove rtsig entries
-Date:   Tue, 18 Feb 2020 13:59:23 +0100
-Message-Id: <20200218125923.685-9-steve@sk2.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200218125923.685-1-steve@sk2.org>
-References: <20200218125923.685-1-steve@sk2.org>
+        id S1726655AbgBRNE7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 18 Feb 2020 08:04:59 -0500
+Received: from mx2.suse.de ([195.135.220.15]:49568 "EHLO mx2.suse.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726363AbgBRNE7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 18 Feb 2020 08:04:59 -0500
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.220.254])
+        by mx2.suse.de (Postfix) with ESMTP id A54CDB297;
+        Tue, 18 Feb 2020 13:04:57 +0000 (UTC)
+Received: by ds.suse.cz (Postfix, from userid 10065)
+        id DAE34DA7BA; Tue, 18 Feb 2020 14:04:40 +0100 (CET)
+Date:   Tue, 18 Feb 2020 14:04:39 +0100
+From:   David Sterba <dsterba@suse.cz>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        linux-fsdevel@vger.kernel.org, David Sterba <dsterba@suse.com>
+Subject: Re: [PATCH 03/44] docs: filesystems: convert affs.txt to ReST
+Message-ID: <20200218130439.GK2902@suse.cz>
+Reply-To: dsterba@suse.cz
+References: <cover.1581955849.git.mchehab+huawei@kernel.org>
+ <b44c56befe0e28cbc0eb1b3e281ad7d99737ff16.1581955849.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 16146812041506475397
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedugedrjeekgdegkecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvffufffkofgjfhgggfestdekredtredttdenucfhrhhomhepufhtvghphhgvnhcumfhithhtuceoshhtvghvvgesshhkvddrohhrgheqnecukfhppedtrddtrddtrddtpdekkedruddvvddruddviedrudduieenucevlhhushhtvghrufhiiigvpedvnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejjeelrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b44c56befe0e28cbc0eb1b3e281ad7d99737ff16.1581955849.git.mchehab+huawei@kernel.org>
+User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-These have no corresponding code in the kernel.
+On Mon, Feb 17, 2020 at 05:11:49PM +0100, Mauro Carvalho Chehab wrote:
+> - Add a SPDX header;
+> - Adjust document title;
+> - Add table markups;
+> - Mark literal blocks as such;
+> - Some whitespace fixes and new line breaks;
+> - Add it to filesystems/index.rst.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Signed-off-by: Stephen Kitt <steve@sk2.org>
----
- Documentation/admin-guide/sysctl/kernel.rst | 10 ----------
- 1 file changed, 10 deletions(-)
-
-diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
-index 3d21e076aea4..ba4b51bb1f3e 100644
---- a/Documentation/admin-guide/sysctl/kernel.rst
-+++ b/Documentation/admin-guide/sysctl/kernel.rst
-@@ -902,16 +902,6 @@ ROM/Flash boot loader. Maybe to tell it what to do after
- rebooting. ???
- 
- 
--rtsig-max & rtsig-nr
--====================
--
--The file rtsig-max can be used to tune the maximum number
--of POSIX realtime (queued) signals that can be outstanding
--in the system.
--
--rtsig-nr shows the number of RT signals currently queued.
--
--
- sched_energy_aware
- ==================
- 
--- 
-2.20.1
-
+Acked-by: David Sterba <dsterba@suse.com>
