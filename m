@@ -2,181 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 7C20C1648D3
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2020 16:40:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 307A91649A8
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2020 17:16:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726652AbgBSPkO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 19 Feb 2020 10:40:14 -0500
-Received: from mail-lf1-f68.google.com ([209.85.167.68]:40777 "EHLO
-        mail-lf1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726450AbgBSPkN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Feb 2020 10:40:13 -0500
-Received: by mail-lf1-f68.google.com with SMTP id c23so464562lfi.7
-        for <linux-doc@vger.kernel.org>; Wed, 19 Feb 2020 07:40:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=rasmusvillemoes.dk; s=google;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=DjhGrWlHlzAhSmIGZSJTb9Plyn22VtP6qt1MQHcL+Zk=;
-        b=PYsekawxaa7r8OQGnxfNV9VnCXM7BrK+NDwHk7T4i0z/ztAjW1r5lTXG9aEIqTs9dY
-         97kQ385qlpSZOGpcd83URJfWGgRk0MLMML8fI3zLpbxGQjtI/u+xf3TV/IO+7J7cplxj
-         nQSd9TXyIDpsTxB5HtLVYiS14MaXI1w3REUbo=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=DjhGrWlHlzAhSmIGZSJTb9Plyn22VtP6qt1MQHcL+Zk=;
-        b=lzRY8DGKM1p1cfvsnVjVhSB7yZPCxcRIU9J3tzNB/C/vyuP+a7YWs21iH3ieS84+FA
-         /nZOswVtKcVSmgPwr/VQYyU7YR0BPV/waQRPAexNhShnjqO5yGPuLlVf8AzTxjspu/bh
-         82OIUF2ToYAZgZV+VpFTH5/ooORP3SwB1WzmxJtsc154SnA5qcFqTghTNdc+DhsKjWcv
-         Z+xJ+7vzqPsonoTMPecrHcbOEZY1rHitt/7bf0fkXT67Tw8OyuVPogHD05YXNf1U/qvx
-         Qy5oiDf2y9tNp3cHcucFqya+iq3URFsE1CO922NJqOvSYZxcJuseaK+cET77z0qpGNpw
-         EmwA==
-X-Gm-Message-State: APjAAAWOCtoL3Dl0kMyGSaqg9VxYthRzT1pdU80WrT6Z2NOv0Kj4xg8Q
-        H6nh8rLtlILmXl9AFjiTfIZcXg==
-X-Google-Smtp-Source: APXvYqwBV533EPhDKSU98zhnDXzc4T1ILEZyOcIFNV5+E+aUHF7rksvA7rro099KnL/VyIoD16hSzA==
-X-Received: by 2002:ac2:44bc:: with SMTP id c28mr13417993lfm.72.1582126810463;
-        Wed, 19 Feb 2020 07:40:10 -0800 (PST)
-Received: from [172.16.11.50] ([81.216.59.226])
-        by smtp.gmail.com with ESMTPSA id y7sm1591308lfk.83.2020.02.19.07.40.09
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 19 Feb 2020 07:40:10 -0800 (PST)
-Subject: Re: [PATCH] vsprintf: sanely handle NULL passed to %pe
-To:     Petr Mladek <pmladek@suse.com>
-Cc:     Ilya Dryomov <idryomov@gmail.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        id S1726610AbgBSQQG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 19 Feb 2020 11:16:06 -0500
+Received: from pb-smtp21.pobox.com ([173.228.157.53]:56037 "EHLO
+        pb-smtp21.pobox.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726652AbgBSQQF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Feb 2020 11:16:05 -0500
+Received: from pb-smtp21.pobox.com (unknown [127.0.0.1])
+        by pb-smtp21.pobox.com (Postfix) with ESMTP id 8A923C3D6B;
+        Wed, 19 Feb 2020 11:16:02 -0500 (EST)
+        (envelope-from nico@fluxnic.net)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=pobox.com; h=date:from:to
+        :cc:subject:in-reply-to:message-id:references:mime-version
+        :content-type; s=sasl; bh=XtMU/4b5IGSfpYkZCGu5uzpv9so=; b=A8qbss
+        13zDDHQnllBhRUStKjdBhjG42y4BdLYd3zfE8x1c4GnTnmbAESYHedrpLZFkObOZ
+        u9dW0ZWY913qGaVl11sWPaCZkC0sGalwZGpbDBZuD6HtuAdzUAZ1YVoxoE5OdS52
+        V8CrxmDNSgRILwM7+x8MSPXE+Rokl9mrToE9E=
+Received: from pb-smtp21.sea.icgroup.com (unknown [127.0.0.1])
+        by pb-smtp21.pobox.com (Postfix) with ESMTP id 82969C3D6A;
+        Wed, 19 Feb 2020 11:16:02 -0500 (EST)
+        (envelope-from nico@fluxnic.net)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=fluxnic.net;
+ h=date:from:to:cc:subject:in-reply-to:message-id:references:mime-version:content-type; s=2016-12.pbsmtp; bh=Pd52co5mLcPM8CNVJEjnyKKtge8+vEpzfcY4NUuaImw=; b=XjVUwBq4gU1kuQh3xuy1rbq0RW9fP8wTQa5Jwow7zjC6ptzC0o8Ta9cc9VzySvsICTvf6ZRekv6M9gJb24DQ872/8Zk7nognGX/xuQOQLjf6Jk2kB6vQBUBckDHEoAiawi2bvaQkbVB+QJFyMeffogIyDbC6hg2dyx8dH1hrRCY=
+Received: from yoda.home (unknown [24.203.50.76])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by pb-smtp21.pobox.com (Postfix) with ESMTPSA id 5E1AEC3D67;
+        Wed, 19 Feb 2020 11:15:59 -0500 (EST)
+        (envelope-from nico@fluxnic.net)
+Received: from xanadu.home (xanadu.home [192.168.2.2])
+        by yoda.home (Postfix) with ESMTPSA id 8007A2DA08DE;
+        Wed, 19 Feb 2020 11:15:57 -0500 (EST)
+Date:   Wed, 19 Feb 2020 11:15:57 -0500 (EST)
+From:   Nicolas Pitre <nico@fluxnic.net>
+To:     Masahiro Yamada <masahiroy@kernel.org>
+cc:     linux-kbuild@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
+        Richard Cochran <richardcochran@gmail.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        John Stultz <john.stultz@linaro.org>,
+        Josh Triplett <josh@joshtriplett.org>,
+        Mark Brown <broonie@kernel.org>,
+        Ulf Magnusson <ulfalizer@gmail.com>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        "Tobin C . Harding" <me@tobin.cc>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
-References: <CAHk-=wjEd-gZ1g52kgi_g8gq-QCF2E01TkQd5Hmj4W5aThLw3A@mail.gmail.com>
- <20200219082155.6787-1-linux@rasmusvillemoes.dk>
- <CAOi1vP-4=QCSZ2A89g1po2p=6n_g09SXUCa0_r2SBJm2greRmw@mail.gmail.com>
- <0fef2a1f-9391-43a9-32d5-2788ae96c529@rasmusvillemoes.dk>
- <20200219134826.qqdhy2z67ubsnr2m@pathway.suse.cz>
- <5459eb50-48e2-2fd9-3560-0bc921e3678c@rasmusvillemoes.dk>
- <20200219144558.2jbawr52qb63vysq@pathway.suse.cz>
-From:   Rasmus Villemoes <linux@rasmusvillemoes.dk>
-Message-ID: <bcfb2f94-e7a8-0860-86e3-9fc866d98742@rasmusvillemoes.dk>
-Date:   Wed, 19 Feb 2020 16:40:08 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
+        Michal Marek <michal.lkml@markovi.net>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] kconfig: make 'imply' obey the direct dependency
+In-Reply-To: <20200219074950.23344-1-masahiroy@kernel.org>
+Message-ID: <nycvar.YSQ.7.76.2002191046520.1559@knanqh.ubzr>
+References: <20200219074950.23344-1-masahiroy@kernel.org>
+User-Agent: Alpine 2.21 (LFD 202 2017-01-01)
 MIME-Version: 1.0
-In-Reply-To: <20200219144558.2jbawr52qb63vysq@pathway.suse.cz>
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
+X-Pobox-Relay-ID: 1DA55B42-5333-11EA-A2D4-8D86F504CC47-78420484!pb-smtp21.pobox.com
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 19/02/2020 15.45, Petr Mladek wrote:
-> On Wed 2020-02-19 14:56:32, Rasmus Villemoes wrote:
->> On 19/02/2020 14.48, Petr Mladek wrote:
->>> On Wed 2020-02-19 12:53:22, Rasmus Villemoes wrote:
->>>> --- a/lib/vsprintf.c
->>>> +++ b/lib/vsprintf.c
->>> The test should go into null_pointer() instead of errptr().
->>
->> Eh, no, the behaviour of %pe is tested by errptr(). I'll keep it that
->> way. But I should add a #else section that tests how %pe behaves without
->> CONFIG_SYMBOLIC_ERRNAME - though that's orthogonal to this patch.
+On Wed, 19 Feb 2020, Masahiro Yamada wrote:
+
+> The 'imply' statement may create unmet direct dependency when the
+> implied symbol depends on m.
 > 
-> OK, we should agree on some structure first.
+> [Test Code]
 > 
-> We already have two top level functions that test how a particular
-> pointer is printed using different pointer modifiers:
+>   config FOO
+>           tristate "foo"
+>           imply BAZ
 > 
-> 	null_pointer();     -> NULL with %p, %pX, %pE
-> 	invalid_pointer();  -> random pointer with %p, %pX, %pE
+>   config BAZ
+>           tristate "baz"
+>           depends on BAR
 > 
-> Following this logic, errptr() should test how a pointer from IS_ERR() range
-> is printed using different pointer formats.
-
-Oh please. I wrote test_printf.c originally and structured it with one
-helper for each %p<whatever>. How are your additions null_pointer and
-invalid_pointer good examples for what the existing style is?
-
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 649)
-test_pointer(void)
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 650) {
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 651)  plain();
-3e5903eb9cff7 (Petr Mladek      2019-04-17 13:53:48 +0200 652)
-null_pointer();
-3e5903eb9cff7 (Petr Mladek      2019-04-17 13:53:48 +0200 653)
-invalid_pointer();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 654)
-symbol_ptr();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 655)
-kernel_ptr();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 656)
-struct_resource();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 657)  addr();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 658)
-escaped_str();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 659)
-hex_string();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 660)  mac();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 661)  ip();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 662)  uuid();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 663)  dentry();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 664)
-struct_va_format();
-4d42c44727a06 (Andy Shevchenko  2018-12-04 23:23:11 +0200 665)
-struct_rtc_time();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 666)
-struct_clk();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 667)  bitmap();
-707cc7280f452 (Rasmus Villemoes 2015-11-06 16:30:29 -0800 668)
-netdev_features();
-edf14cdbf9a0e (Vlastimil Babka  2016-03-15 14:55:56 -0700 669)  flags();
-57f5677e535ba (Rasmus Villemoes 2019-10-15 21:07:05 +0200 670)  errptr();
-f1ce39df508de (Sakari Ailus     2019-10-03 15:32:19 +0300 671)
-fwnode_pointer();
-
-
-> I am open to crate another logic but it must be consistent.
-
-So yeah, I'm going to continue testing the behaviour of %pe in errptr, TYVM.
-
-> If you want to check %pe with NULL in errptr(), you have to
-> split the other two functions per-modifier. IMHO, it is not
-> worth it.
-
-Agreed, let's leave null_pointer and invalid_pointer alone.
-
->>>> BTW., your original patch for %p lacks corresponding update of
->>>> test_vsprintf.c. Please add appropriate test cases.
->>>
->>> diff --git a/lib/test_printf.c b/lib/test_printf.c
->>> index 2d9f520d2f27..1726a678bccd 100644
->>> --- a/lib/test_printf.c
->>> +++ b/lib/test_printf.c
->>> @@ -333,7 +333,7 @@ test_hashed(const char *fmt, const void *p)
->>>  static void __init
->>>  null_pointer(void)
->>>  {
->>> -	test_hashed("%p", NULL);
->>> +	test(ZEROS "00000000", "%p", NULL);
->>
->> No, it most certainly also needs to check a few "%p", ERR_PTR(-4) cases
->> (where one of course has to use explicit integers and not E* constants).
+>   config BAR
+>           def_tristate m
 > 
-> Yes, it would be great to add checks for %p, %px for IS_ERR() range.
-> But it is different story. The above change is for the original patch
-> and it was about NULL pointer handling.
+>   config MODULES
+>           def_bool y
+>           option modules
+> 
+> If you set FOO=y, BAZ is also promoted to y, which results in the
+> following .config file:
+> 
+>   CONFIG_FOO=y
+>   CONFIG_BAZ=y
+>   CONFIG_BAR=m
+>   CONFIG_MODULES=y
+> 
+> This ignores the dependency "BAZ depends on BAR".
+> 
+> Unlike 'select', what is worse, Kconfig never shows the
+> "WARNING: unmet direct dependencies detected for ..." for this case.
+> 
+> Because 'imply' should be weaker than 'depends on', Kconfig should
+> take the direct dependency into account.
+> 
+> Describe this case in Documentation/kbuild/kconfig-language.rst for
+> clarification.
+> 
+> Commit 237e3ad0f195 ("Kconfig: Introduce the "imply" keyword") says that
+> a symbol implied by y is restricted to y or n, excluding m.
+> 
+> As for the combination of FOO=y and BAR=m, the case of BAZ=m is excluded
+> by the 'imply', and BAZ=y is also excluded by 'depends on'. So, only the
+> possible value is BAZ=n.
 
-Wrong. The original patch (i.e. Ilya's) had subject "vsprintf: don't
-obfuscate NULL and error pointers" and did
+I don't think this is right. The imply keyword provide influence over 
+another symbol but it should not impose any restrictions. If BAR=m then 
+BAZ should still be allowed to be m or n.
 
-+	if (IS_ERR_OR_NULL(ptr))
+> @@ -174,6 +174,9 @@ applicable everywhere (see syntax).
+>  	n		y		n		N/m/y
+>  	m		y		m		M/y/n
+>  	y		y		y		Y/n
+> +	n		m		n		N/m
+> +	m		m		m		M/n
+> +	y		m		n		N
 
-so the tests that should be part of that patch very much need to cover
-both NULL and ERR_PTRs passed to plain %p.
+Here the last line shoule be y m n N/m.
 
-Rasmus
+Generally speaking, the code enabled by FOO may rely on functionalities 
+provided by BAZ only when BAZ >= FOO. This is accomplished with 
+IS_REACHABLE():
+
+	foo_init()
+	{
+		if (IS_REACHABLE(CONFIG_BAZ))
+			baz_register(&foo);
+		...
+	}
+
+So if FOO=y and BAZ=m then IS_REACHABLE(CONFIG_BAZ) will be false. Maybe 
+adding a note to that effect linked to the "y m n N/m" line in the table 
+would be a good idea.
+
+
+Nicolas
