@@ -2,213 +2,166 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6D44F163931
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2020 02:18:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 05645163D02
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2020 07:26:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727797AbgBSBSz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 18 Feb 2020 20:18:55 -0500
-Received: from mail-yb1-f196.google.com ([209.85.219.196]:36391 "EHLO
-        mail-yb1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726939AbgBSBSz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 18 Feb 2020 20:18:55 -0500
-Received: by mail-yb1-f196.google.com with SMTP id u26so7986149ybd.3;
-        Tue, 18 Feb 2020 17:18:54 -0800 (PST)
+        id S1726133AbgBSG0o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 19 Feb 2020 01:26:44 -0500
+Received: from mail-qv1-f65.google.com ([209.85.219.65]:43885 "EHLO
+        mail-qv1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726202AbgBSG0n (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Feb 2020 01:26:43 -0500
+Received: by mail-qv1-f65.google.com with SMTP id p2so10317635qvo.10;
+        Tue, 18 Feb 2020 22:26:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=j3P5cz57t37xwJenchSTYFOFaqISpD+NLl5dWuTR5us=;
-        b=tuQ/QLWSMTHNxnuMpdJSRv/XURC6oUM8Pjuua84ym07G7E7qlw+3cghRMcEATEwYGM
-         8IqfkwbFoSIcCT0pYfHrMgv3IELwIwY2bz30DnqmL49LEPhBzqgFixWCEVb7bIhCzS3J
-         JYSLUPk9E9S9aC4tDeMcPvWC4dSmCquHrM+Nz65YYKOt1Wof/DbEDjQKJc3EqwUBPPeK
-         odSg04UHK7N8b40lC+9p8s/JBvYoyQ9liEfLdRt8rglKKy0JPZ4/UBgHAmeDWgvbuGLh
-         +qHjP3jJu49Uzsr6fHQ5PGvYoCU/4OHxl3yXsiPNoKmdqTqYh+VeguR59ip2SVvdbo1L
-         9y2Q==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0AcgEW7Nzia0J/XRf8fWH9Xd9Cf6gra4pdDV/CfwMW8=;
+        b=GkQkIkwu3bSBbkX5iqfaiTQ/EWXrz7RZHKk2yfg4nz7wWXo3quKjX3E1IRLce3DGxm
+         DplPfnCtn7dp9hhWpY/m2B8BJGFYwXZ4UFL26QEpai5NBUKZGR5LUxerP3pM02MKRmDb
+         dbW3rq5C3WlbwtJzU7rGzptNTJ9bijeu49I5lcCvqqRyXt4Li7Nq5AHG7qh8BocxZuo8
+         3JUvL2bDAEQF29tEpfdh55zkmHyWcE/+4NjUILBwfQEZWakU1a79/LBR/96xkGKzeJYO
+         Yfxk5dow2hM9ycQ54JPXQNrGf0NQYMRyENq95jFH8CIJ0xPJUS1qXXTBufppfHlVvrnG
+         pHLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=j3P5cz57t37xwJenchSTYFOFaqISpD+NLl5dWuTR5us=;
-        b=N9QTwfSIPSHWadxKlhPST4uGeGA4PcG2B7nVp8I7GcIpr+s2jUktlfLf+usOOAUvbr
-         6mo7VxyznSsHoA02Qxrl9GGZ3qN76dsIHgfDJlqnn41B3H1taItTLYqtTUk4xl3lqok/
-         fvU/KkPL90LpJFB/ub77J97PEwfyFbFud86tytRd0FS1TLox7vT7GoZIWfzMaLDZRd3K
-         rLAjALRaWQXYmZf5Fn3jYg8V0MpUCnEWGYXdLNn5cooeRoLBc4a/7diBUEsYtB+G1h8q
-         lO+cs4v99GprEi0Kavnjd4hlAqV/Anx969V66aQerZpPPG8ezKfAAbAfH/rOmQMH6tBr
-         0n9g==
-X-Gm-Message-State: APjAAAU//lXJJisRMjG0CWKLeOgaXCI5LLxR/aaToYvpKtx55n4kV9/Y
-        Iwg5sHKv7FK+3BgDou6Q2uA=
-X-Google-Smtp-Source: APXvYqxal5g0abulMEnQ2qIUU7f2LwlhQja5hx62UdLp1BNno67EDTOWLZriKk9fSHISH+QDUVnmkw==
-X-Received: by 2002:a25:250c:: with SMTP id l12mr21156867ybl.162.1582075133872;
-        Tue, 18 Feb 2020 17:18:53 -0800 (PST)
-Received: from [192.168.1.46] (c-73-88-245-53.hsd1.tn.comcast.net. [73.88.245.53])
-        by smtp.gmail.com with ESMTPSA id a202sm248553ywe.8.2020.02.18.17.18.53
+        bh=0AcgEW7Nzia0J/XRf8fWH9Xd9Cf6gra4pdDV/CfwMW8=;
+        b=an9qdWkJg9iZy6SckGcjEHQJuO7sb44o41kielXRHYDWn+RWH5lVjYUUDioKxogaRK
+         tt+qc3TGWkUTPuSts5mXg4toWlm4Q/x3Zk+UqY0oNgEUm4v0/r1eb6EOI7s580BlwF1w
+         LABL7VBJxIZIWb4YqCwhpzVurRexHtuFBzfhr4+DJCvzSVMEAW5/9/I6RGVulfHcsoqW
+         DJVgszClK0V5Fuqt08E+5oFgNXZ2eHruF3WpGK5ToeqqanCtZFE014LZuoS7yTeUZk86
+         jRK0Cg4Y5NnDUT6DEeulA5AMEqiFnXaK2HDOKOxr1o6X2ZsL5PwmBO1MYj5ZXBBN/S4p
+         5GSQ==
+X-Gm-Message-State: APjAAAWWfEcNX8OAfoyvnNyy9w6wdRU0TmyMzibN9uYFFEOG5dpc1MSz
+        yAspTFribQ2KTsSptBb71/k=
+X-Google-Smtp-Source: APXvYqzKwD91/nC2RbUzYfJ4VcV0Uo/JIoQ1VLbyw/Ly/Uh2gsKDSrQwovgooWirT3x3ZqGaABhHpQ==
+X-Received: by 2002:a0c:a281:: with SMTP id g1mr19893975qva.168.1582093602261;
+        Tue, 18 Feb 2020 22:26:42 -0800 (PST)
+Received: from auth1-smtp.messagingengine.com (auth1-smtp.messagingengine.com. [66.111.4.227])
+        by smtp.gmail.com with ESMTPSA id g84sm528780qke.129.2020.02.18.22.26.40
         (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Tue, 18 Feb 2020 17:18:53 -0800 (PST)
-Subject: Re: [PATCH v3 kunit-next 1/2] kunit: add debugfs
- /sys/kernel/debug/kunit/<suite>/results display
-To:     "Bird, Tim" <Tim.Bird@sony.com>,
-        Brendan Higgins <brendanhiggins@google.com>
-Cc:     Alan Maguire <alan.maguire@oracle.com>,
-        Greg KH <gregkh@linuxfoundation.org>, shuah <shuah@kernel.org>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        KUnit Development <kunit-dev@googlegroups.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Tue, 18 Feb 2020 22:26:41 -0800 (PST)
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
+        by mailauth.nyi.internal (Postfix) with ESMTP id 7F9B52221A;
+        Wed, 19 Feb 2020 01:26:38 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute6.internal (MEProxy); Wed, 19 Feb 2020 01:26:38 -0500
+X-ME-Sender: <xms:GNVMXmv9xhC6qNyttzhAS_dCGFzqMF0jdB2vfajqLYe5Y2NjOIAnuQ>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrjeelgdelgecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvffufffkofgggfestdekredtredttdenucfhrhhomhepuehoqhhunhcuhfgv
+    nhhguceosghoqhhunhdrfhgvnhhgsehgmhgrihhlrdgtohhmqeenucffohhmrghinhepkh
+    gvrhhnvghlrdhorhhgpdhgihhthhhusgdrtghomhdpihhnrhhirgdrfhhrnecukfhppeeh
+    vddrudehhedrudduuddrjedunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpe
+    hmrghilhhfrhhomhepsghoqhhunhdomhgvshhmthhprghuthhhphgvrhhsohhnrghlihht
+    hidqieelvdeghedtieegqddujeejkeehheehvddqsghoqhhunhdrfhgvnhhgpeepghhmrg
+    hilhdrtghomhesfhhigihmvgdrnhgrmhgv
+X-ME-Proxy: <xmx:GNVMXpLvH150ImJ4YxZj3Q7cZIgosNe75Fm00EUVZ6qP5-CZHjDInQ>
+    <xmx:GNVMXjgX4Y6OBKcc6r73mxGCrsDQkM7zIm9fZuXYoCio95u-9zSecQ>
+    <xmx:GNVMXtvrvoMiU0sMYDbfkbaYwRATfJM6Irh7uW_6vazje5SaU45ayQ>
+    <xmx:HtVMXiN7X9oPH7cijwrpi040vXQDHgFB4xchEe4BixliuaIOj1SJ59dEryk>
+Received: from localhost (unknown [52.155.111.71])
+        by mail.messagingengine.com (Postfix) with ESMTPA id A263A3060BD1;
+        Wed, 19 Feb 2020 01:26:31 -0500 (EST)
+From:   Boqun Feng <boqun.feng@gmail.com>
+To:     linux-kernel@vger.kernel.org
+Cc:     Alan Stern <stern@rowland.harvard.edu>,
+        Andrea Parri <parri.andrea@gmail.com>,
+        Will Deacon <will@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Boqun Feng <boqun.feng@gmail.com>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        David Howells <dhowells@redhat.com>,
+        Jade Alglave <j.alglave@ucl.ac.uk>,
+        Luc Maranget <luc.maranget@inria.fr>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Akira Yokosawa <akiyks@gmail.com>,
+        Daniel Lustig <dlustig@nvidia.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        David Gow <davidgow@google.com>
-References: <1581094694-6513-1-git-send-email-alan.maguire@oracle.com>
- <1581094694-6513-2-git-send-email-alan.maguire@oracle.com>
- <c42ac237-476a-526f-b445-61e7a63bc101@gmail.com>
- <CAFd5g47p9wnbz=HrNh0U2bbc=0ZaJ7n0U+_=E8yp8yPMrqwzaA@mail.gmail.com>
- <MWHPR13MB0895A9AC64475539ECF99987FD110@MWHPR13MB0895.namprd13.prod.outlook.com>
-From:   Frank Rowand <frowand.list@gmail.com>
-Message-ID: <f0d102a8-6501-88d8-d47d-202fd36e55a5@gmail.com>
-Date:   Tue, 18 Feb 2020 19:18:52 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Rob Herring <robh@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [RFC v2 0/4] Documentation/locking/atomic: Add litmus tests for atomic APIs
+Date:   Wed, 19 Feb 2020 14:26:23 +0800
+Message-Id: <20200219062627.104736-1-boqun.feng@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-In-Reply-To: <MWHPR13MB0895A9AC64475539ECF99987FD110@MWHPR13MB0895.namprd13.prod.outlook.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/18/20 2:49 PM, Bird, Tim wrote:
-> 
-> 
->> -----Original Message-----
->> From:  Brendan Higgins
->>
->> On Wed, Feb 12, 2020 at 7:25 PM Frank Rowand <frowand.list@gmail.com> wrote:
->>>
->>> On 2/7/20 10:58 AM, Alan Maguire wrote:
-> 
-> ...
-> 
->>>> diff --git a/lib/kunit/test.c b/lib/kunit/test.c
->>>> index 9242f93..aec607f 100644
->>>> --- a/lib/kunit/test.c
->>>> +++ b/lib/kunit/test.c
->>>> @@ -10,6 +10,7 @@
->>>>  #include <linux/kernel.h>
->>>>  #include <linux/sched/debug.h>
->>>>
->>>> +#include "debugfs.h"
->>>>  #include "string-stream.h"
->>>>  #include "try-catch-impl.h"
->>>>
->>>> @@ -28,73 +29,91 @@ static void kunit_print_tap_version(void)
->>>>       }
->>>>  }
->>>>
->>>> -static size_t kunit_test_cases_len(struct kunit_case *test_cases)
->>>> +size_t kunit_suite_num_test_cases(struct kunit_suite *suite)
->>>>  {
->>>>       struct kunit_case *test_case;
->>>>       size_t len = 0;
->>>>
->>>> -     for (test_case = test_cases; test_case->run_case; test_case++)
->>>> +     kunit_suite_for_each_test_case(suite, test_case)
->>>>               len++;
->>>>
->>>>       return len;
->>>>  }
->>>> +EXPORT_SYMBOL_GPL(kunit_suite_num_test_cases);
->>>>
->>>>  static void kunit_print_subtest_start(struct kunit_suite *suite)
->>>>  {
->>>>       kunit_print_tap_version();
->>>> -     pr_info("\t# Subtest: %s\n", suite->name);
->>>> -     pr_info("\t1..%zd\n", kunit_test_cases_len(suite->test_cases));
->>>> +     kunit_log(KERN_INFO, suite, "# Subtest: %s", suite->name);
->>>> +     kunit_log(KERN_INFO, suite, "1..%zd",
->>>> +               kunit_suite_num_test_cases(suite));
->>>
->>> The subtest 'is a TAP stream indented 4 spaces'.  (So the old code was
->>> also incorrect since it indented with a tab.)
->>
->> Whoops.
->>
->> I agree that fixing tabs to spaces is probably the easiest thing to do
->> here; nevertheless, I think this might be a good time to talk about
->> other deviations from the spec and what to do about it. This might
->> also be a good time to bring up Tim's comment at LPC last year about
->> forking TAP. Arguably I already have given that TAP14 is still under
->> review and is consequently subject to change.
->>
->> Additionally, the way I report expectation/assertion failures are my
->> own extension to the TAP spec. I did this because at the time I wasn't
->> ready to open the can of worms that was adding a YAML serializer to
->> the Linux kernel; I mentioned adding a YAML serializer at LPC and
->> people didn't seem super thrilled with the idea.
-> 
-> I'm not sure I follow.  Are you talking about writing YAML or interpreting
-> YAML.  You don't need a serializer to write YAML.  It can be done 
-> with straight text output.  I guess it depends on the scope of what you
-> envision.  Even if you want to do more than trivial structured output,
-> I don't think you'll need a full serializer.  (IOW, I think you could sneak
-> something in and just call it a test output formatter.  Just don't call it YAML
-> and most people won't notice. :-)
+A recent discussion raises up the requirement for having test cases for
+atomic APIs:
 
-A serializer is a red herring.  Just drop the entire label and concept.
-What is already in KUnit is the equivalent, printing out (eg through
-printk() or however printk() is wrapped) simple text of the form (by
-example) of
+	https://lore.kernel.org/lkml/20200213085849.GL14897@hirez.programming.kicks-ass.net/
 
-  label: value
-  label: value
-  label:
-    label: value
-    label: value
-  label:
-     label:
-       label: value
-       label: value
+, and since we already have a way to generate a test module from a
+litmus test with klitmus[1]. It makes sense that we add more litmus
+tests for atomic APIs. And based on the previous discussion, I create a
+new directory Documentation/atomic-tests and put these litmus tests
+here.
 
-So basically
-  - label/value pairs
-  - label without value indicating a node or block (another level)
-  - some rules about the format of value
-  - indentation indicating a node or block
+This patchset starts the work by adding the litmus tests which are
+already used in atomic_t.txt, and also improve the atomic_t.txt to make
+it consistent with the litmus tests.
 
-That is something really simple.  No need for any fancy coding to
-encapsulate.
+Previous version:
+v1: https://lore.kernel.org/linux-doc/20200214040132.91934-1-boqun.feng@gmail.com/
 
--Frank
+Changes since v1:
 
-> 
->>
->> Further both the TAP implementation here as well as what is in
->> kselftest have arbitrary kernel output mixed in with TAP output, which
->> seems to be a further deviation from the spec.
-> Well that's a different kettle of worms, and really argues for staying
-> with something that is strictly line-based.
-> 
->>
->> In an effort to do this, and so that at the very least I could
->> document what I have done here, I have been looking into getting a
->> copy of TAP into the kernel. Unfortunately, TAP appears to have some
->> licensing issues. TAP says that it can be used/modified "under the
->> same terms as Perl itself" and then provides a dead link. I filed a
->> pull request to update the licence to the Perl Artistic Licence 1.0
->> since I believe that is what they are referencing; however, I have not
->> heard back from them yet.
-> 
-> When you say "getting a copy of TAP into the kernel", I presume you mean
-> an existing implementation to produce TAP output?  Or are you talking about
-> a TAP interpreter?  I'm not sure the former needs to use an existing implementation.
-> 
-> I previously volunteered (in Lisbon) to write up the TAP deviations,
-> and never got around to it.   Sorry about that. I can try to work on it now if
-> people are still interested.
->  -- Tim
-> 
-> [rest of patch omitted]
-> 
-> 
+*	Move the tests into Documentation/atomic-tests directory as a
+	result of the discussion with Alan and Paul.
+
+*	Word changing on litmus test names and other sentences in
+	documents based on Alan's suggestion.
+
+*	Add local variable declarations in 
+	Atomic-RMW+mb__after_atomic-is-stronger-than-acquire to make
+	klitmus work as per Andrea's suggestion.
+
+Currently, I haven't heard anything from Luc on whether the
+atomic_add_unless() works or not for the LKMM, but based on my test and
+Andrea's previous test, I think it actually works. I will add the
+corresponding changes to the LIMITATIONS part of LKMM document if I got
+a comfirm from Luc. And my PR:
+
+	https://github.com/herd/herdtools7/pull/28
+
+is still not merged. So this version is simply an RFC and comments and
+suggesions are welcome!
+
+Regards,
+Boqun
+
+
+[1]: http://diy.inria.fr/doc/litmus.html#klitmus
+
+Boqun Feng (4):
+  Documentation/locking/atomic: Fix atomic-set litmus test
+  Documentation/locking/atomic: Introduce atomic-tests directory
+  Documentation/locking/atomic: Add a litmus test for atomic_set()
+  Documentation/locking/atomic: Add a litmus test smp_mb__after_atomic()
+
+ ...ter_atomic-is-stronger-than-acquire.litmus | 32 +++++++++++++++++++
+ ...c-RMW-ops-are-atomic-WRT-atomic_set.litmus | 24 ++++++++++++++
+ Documentation/atomic-tests/README             | 16 ++++++++++
+ Documentation/atomic_t.txt                    | 24 +++++++-------
+ MAINTAINERS                                   |  1 +
+ 5 files changed, 85 insertions(+), 12 deletions(-)
+ create mode 100644 Documentation/atomic-tests/Atomic-RMW+mb__after_atomic-is-stronger-than-acquire.litmus
+ create mode 100644 Documentation/atomic-tests/Atomic-RMW-ops-are-atomic-WRT-atomic_set.litmus
+ create mode 100644 Documentation/atomic-tests/README
+
+-- 
+2.25.0
 
