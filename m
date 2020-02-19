@@ -2,143 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 307A91649A8
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2020 17:16:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3F0071649D4
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2020 17:18:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726610AbgBSQQG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 19 Feb 2020 11:16:06 -0500
-Received: from pb-smtp21.pobox.com ([173.228.157.53]:56037 "EHLO
-        pb-smtp21.pobox.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726652AbgBSQQF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Feb 2020 11:16:05 -0500
-Received: from pb-smtp21.pobox.com (unknown [127.0.0.1])
-        by pb-smtp21.pobox.com (Postfix) with ESMTP id 8A923C3D6B;
-        Wed, 19 Feb 2020 11:16:02 -0500 (EST)
-        (envelope-from nico@fluxnic.net)
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=pobox.com; h=date:from:to
-        :cc:subject:in-reply-to:message-id:references:mime-version
-        :content-type; s=sasl; bh=XtMU/4b5IGSfpYkZCGu5uzpv9so=; b=A8qbss
-        13zDDHQnllBhRUStKjdBhjG42y4BdLYd3zfE8x1c4GnTnmbAESYHedrpLZFkObOZ
-        u9dW0ZWY913qGaVl11sWPaCZkC0sGalwZGpbDBZuD6HtuAdzUAZ1YVoxoE5OdS52
-        V8CrxmDNSgRILwM7+x8MSPXE+Rokl9mrToE9E=
-Received: from pb-smtp21.sea.icgroup.com (unknown [127.0.0.1])
-        by pb-smtp21.pobox.com (Postfix) with ESMTP id 82969C3D6A;
-        Wed, 19 Feb 2020 11:16:02 -0500 (EST)
-        (envelope-from nico@fluxnic.net)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed; d=fluxnic.net;
- h=date:from:to:cc:subject:in-reply-to:message-id:references:mime-version:content-type; s=2016-12.pbsmtp; bh=Pd52co5mLcPM8CNVJEjnyKKtge8+vEpzfcY4NUuaImw=; b=XjVUwBq4gU1kuQh3xuy1rbq0RW9fP8wTQa5Jwow7zjC6ptzC0o8Ta9cc9VzySvsICTvf6ZRekv6M9gJb24DQ872/8Zk7nognGX/xuQOQLjf6Jk2kB6vQBUBckDHEoAiawi2bvaQkbVB+QJFyMeffogIyDbC6hg2dyx8dH1hrRCY=
-Received: from yoda.home (unknown [24.203.50.76])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by pb-smtp21.pobox.com (Postfix) with ESMTPSA id 5E1AEC3D67;
-        Wed, 19 Feb 2020 11:15:59 -0500 (EST)
-        (envelope-from nico@fluxnic.net)
-Received: from xanadu.home (xanadu.home [192.168.2.2])
-        by yoda.home (Postfix) with ESMTPSA id 8007A2DA08DE;
-        Wed, 19 Feb 2020 11:15:57 -0500 (EST)
-Date:   Wed, 19 Feb 2020 11:15:57 -0500 (EST)
-From:   Nicolas Pitre <nico@fluxnic.net>
-To:     Masahiro Yamada <masahiroy@kernel.org>
-cc:     linux-kbuild@vger.kernel.org, Arnd Bergmann <arnd@arndb.de>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        John Stultz <john.stultz@linaro.org>,
-        Josh Triplett <josh@joshtriplett.org>,
-        Mark Brown <broonie@kernel.org>,
-        Ulf Magnusson <ulfalizer@gmail.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Michal Marek <michal.lkml@markovi.net>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] kconfig: make 'imply' obey the direct dependency
-In-Reply-To: <20200219074950.23344-1-masahiroy@kernel.org>
-Message-ID: <nycvar.YSQ.7.76.2002191046520.1559@knanqh.ubzr>
-References: <20200219074950.23344-1-masahiroy@kernel.org>
-User-Agent: Alpine 2.21 (LFD 202 2017-01-01)
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-X-Pobox-Relay-ID: 1DA55B42-5333-11EA-A2D4-8D86F504CC47-78420484!pb-smtp21.pobox.com
+        id S1726949AbgBSQRv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 19 Feb 2020 11:17:51 -0500
+Received: from aserp2120.oracle.com ([141.146.126.78]:51002 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726875AbgBSQRv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Feb 2020 11:17:51 -0500
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 01JGDHTf099382;
+        Wed, 19 Feb 2020 16:17:43 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id; s=corp-2020-01-29;
+ bh=BNcmBhywV0DFM128D29E/9FuWa/2cPZxKTGsz7YzcAQ=;
+ b=JFiRihx5XLYpFw5xwu4ZKZbDYNC1no12sHS4O4wwBerpzND8HlGPtLRjRJ4VUwRabnAy
+ GCJTlUxZXZodo56CSv+kx1tFdWUWFqYH64t2+cfVif5ncvBtdUrq0r8Df7XTNsKeuh6g
+ KEg269iNdtUK1ppzJsh/8WhVHDBCQE9Tzk4X4R3DiTn5VccymC7SYktKinj9+zlNYE/H
+ otosaGi6cYHdhvkhkkfWRWC+9Fq8H0OZNxppIXMffIh7q8ZA6/fx/xbNnoCOmu0eqPzi
+ y2Z07Cb/qKOxWubuzE+dJuQrEAwA0YxgpBuoWas5o9NmPTldWoY/RkCctB2wEMrNfoey vA== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+        by aserp2120.oracle.com with ESMTP id 2y8udkc6g6-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 19 Feb 2020 16:17:41 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+        by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 01JGCJQa017716;
+        Wed, 19 Feb 2020 16:17:41 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+        by aserp3030.oracle.com with ESMTP id 2y8udasx8s-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 19 Feb 2020 16:17:41 +0000
+Received: from abhmp0003.oracle.com (abhmp0003.oracle.com [141.146.116.9])
+        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 01JGHbeN019137;
+        Wed, 19 Feb 2020 16:17:37 GMT
+Received: from dhcp-10-175-189-86.vpn.oracle.com (/10.175.189.86)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Wed, 19 Feb 2020 08:17:37 -0800
+From:   Alan Maguire <alan.maguire@oracle.com>
+To:     brendanhiggins@google.com, frowand.list@gmail.com,
+        gregkh@linuxfoundation.org, shuah@kernel.org
+Cc:     corbet@lwn.net, linux-kselftest@vger.kernel.org,
+        linux-kernel@vger.kernel.org, kunit-dev@googlegroups.com,
+        linux-doc@vger.kernel.org, Alan Maguire <alan.maguire@oracle.com>
+Subject: [PATCH v5 kunit-next 0/4] kunit: add debugfs representation to show results
+Date:   Wed, 19 Feb 2020 16:17:06 +0000
+Message-Id: <1582129030-22282-1-git-send-email-alan.maguire@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9536 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 mlxscore=0 adultscore=0
+ mlxlogscore=999 malwarescore=0 bulkscore=0 suspectscore=3 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2001150001
+ definitions=main-2002190122
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9536 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 lowpriorityscore=0 suspectscore=3
+ spamscore=0 priorityscore=1501 adultscore=0 mlxscore=0 clxscore=1015
+ malwarescore=0 mlxlogscore=999 phishscore=0 impostorscore=0 bulkscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2001150001
+ definitions=main-2002190122
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 19 Feb 2020, Masahiro Yamada wrote:
+When kunit tests are run on native (i.e. non-UML) environments, the results
+of test execution are often intermixed with dmesg output.  This patch
+series attempts to solve this by providing a debugfs representation
+of the results of the last test run, available as
 
-> The 'imply' statement may create unmet direct dependency when the
-> implied symbol depends on m.
-> 
-> [Test Code]
-> 
->   config FOO
->           tristate "foo"
->           imply BAZ
-> 
->   config BAZ
->           tristate "baz"
->           depends on BAR
-> 
->   config BAR
->           def_tristate m
-> 
->   config MODULES
->           def_bool y
->           option modules
-> 
-> If you set FOO=y, BAZ is also promoted to y, which results in the
-> following .config file:
-> 
->   CONFIG_FOO=y
->   CONFIG_BAZ=y
->   CONFIG_BAR=m
->   CONFIG_MODULES=y
-> 
-> This ignores the dependency "BAZ depends on BAR".
-> 
-> Unlike 'select', what is worse, Kconfig never shows the
-> "WARNING: unmet direct dependencies detected for ..." for this case.
-> 
-> Because 'imply' should be weaker than 'depends on', Kconfig should
-> take the direct dependency into account.
-> 
-> Describe this case in Documentation/kbuild/kconfig-language.rst for
-> clarification.
-> 
-> Commit 237e3ad0f195 ("Kconfig: Introduce the "imply" keyword") says that
-> a symbol implied by y is restricted to y or n, excluding m.
-> 
-> As for the combination of FOO=y and BAR=m, the case of BAZ=m is excluded
-> by the 'imply', and BAZ=y is also excluded by 'depends on'. So, only the
-> possible value is BAZ=n.
+/sys/kernel/debug/kunit/<testsuite>/results
 
-I don't think this is right. The imply keyword provide influence over 
-another symbol but it should not impose any restrictions. If BAR=m then 
-BAZ should still be allowed to be m or n.
+Changes since v4:
 
-> @@ -174,6 +174,9 @@ applicable everywhere (see syntax).
->  	n		y		n		N/m/y
->  	m		y		m		M/y/n
->  	y		y		y		Y/n
-> +	n		m		n		N/m
-> +	m		m		m		M/n
-> +	y		m		n		N
+- added suite-level log expectations to kunit log test (Brendan, patch 2)
+- added log expectations (of it being NULL) for case where
+  CONFIG_KUNIT_DEBUGFS=n to kunit log test (patch 2)
+- added patch 3 which replaces subtest tab indentation with 4 space
+  indentation as per TAP 14 spec (Frank, patch 3)
 
-Here the last line shoule be y m n N/m.
+Changes since v3:
 
-Generally speaking, the code enabled by FOO may rely on functionalities 
-provided by BAZ only when BAZ >= FOO. This is accomplished with 
-IS_REACHABLE():
+- added CONFIG_KUNIT_DEBUGFS to support conditional compilation of debugfs
+  representation, including string logging (Frank, patch 1)
+- removed unneeded NULL check for test_case in
+  kunit_suite_for_each_test_case() (Frank, patch 1)
+- added kunit log test to verify logging multiple strings works
+  (Frank, patch 2)
+- rephrased description of results file (Frank, patch 3)
 
-	foo_init()
-	{
-		if (IS_REACHABLE(CONFIG_BAZ))
-			baz_register(&foo);
-		...
-	}
+Changes since v2:
 
-So if FOO=y and BAZ=m then IS_REACHABLE(CONFIG_BAZ) will be false. Maybe 
-adding a note to that effect linked to the "y m n N/m" line in the table 
-would be a good idea.
+- updated kunit_status2str() to kunit_status_to_string() and made it
+  static inline in include/kunit/test.h (Brendan)
+- added log string to struct kunit_suite and kunit_case, with log
+  pointer in struct kunit pointing at the case log.  This allows us
+  to collect kunit_[err|info|warning]() messages at the same time
+  as we printk() them.  This solves for the most part the sharing
+  of log messages between test execution and debugfs since we
+  just print the suite log (which contains the test suite preamble)
+  and the individual test logs.  The only exception is the suite-level
+  status, which we cannot store in the suite log as it would mean
+  we'd print the suite and its status prior to the suite's results.
+  (Brendan, patch 1)
+- dropped debugfs-based kunit run patch for now so as not to cause
+  problems with tests currently under development (Brendan)
+- fixed doc issues with code block (Brendan, patch 3)
 
+Changes since v1:
+ - trimmed unneeded include files in lib/kunit/debugfs.c (Greg)
+ - renamed global debugfs functions to be prefixed with kunit_ (Greg)
+ - removed error checking for debugfs operations (Greg)
 
-Nicolas
+Alan Maguire (4):
+  kunit: add debugfs /sys/kernel/debug/kunit/<suite>/results display
+  kunit: add log test
+  kunit: subtests should be indented 4 spaces according to TAP
+  kunit: update documentation to describe debugfs representation
+
+ Documentation/dev-tools/kunit/usage.rst |  13 ++++
+ include/kunit/test.h                    |  59 ++++++++++++---
+ lib/kunit/Kconfig                       |   8 +++
+ lib/kunit/Makefile                      |   4 ++
+ lib/kunit/assert.c                      |  79 +++++++++++----------
+ lib/kunit/debugfs.c                     | 116 ++++++++++++++++++++++++++++++
+ lib/kunit/debugfs.h                     |  30 ++++++++
+ lib/kunit/kunit-test.c                  |  45 +++++++++++-
+ lib/kunit/test.c                        | 122 ++++++++++++++++++++++++--------
+ 9 files changed, 395 insertions(+), 81 deletions(-)
+ create mode 100644 lib/kunit/debugfs.c
+ create mode 100644 lib/kunit/debugfs.h
+
+-- 
+1.8.3.1
+
