@@ -2,70 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 4CC22165182
-	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2020 22:19:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6EB2B165209
+	for <lists+linux-doc@lfdr.de>; Wed, 19 Feb 2020 23:01:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727421AbgBSVTW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 19 Feb 2020 16:19:22 -0500
-Received: from eggs.gnu.org ([209.51.188.92]:57255 "EHLO eggs.gnu.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726645AbgBSVTV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 19 Feb 2020 16:19:21 -0500
-Received: from fencepost.gnu.org ([2001:470:142:3::e]:47277)
-        by eggs.gnu.org with esmtp (Exim 4.71)
-        (envelope-from <lxsameer@gnu.org>)
-        id 1j4Wka-0007GV-VA; Wed, 19 Feb 2020 16:19:20 -0500
-Received: from [46.7.45.31] (port=46504 helo=localhost.localdomain)
-        by fencepost.gnu.org with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256)
-        (Exim 4.82)
-        (envelope-from <lxsameer@gnu.org>)
-        id 1j4WkZ-0006l6-Nb; Wed, 19 Feb 2020 16:19:20 -0500
-From:   lxsameer@gnu.org
-To:     corbet@lwn.net
-Cc:     rdunlap@infradead.org, linux-doc@vger.kernel.org,
-        gregkh@linuxfoundation.org, Sameer Rahmani <lxsameer@gnu.org>
-Subject: [PATCH v3 2/2] Documentation: kobject.txt has been moved to core-api/kobject.rst
-Date:   Wed, 19 Feb 2020 21:19:03 +0000
-Message-Id: <20200219211903.43924-2-lxsameer@gnu.org>
-X-Mailer: git-send-email 2.25.0
-In-Reply-To: <20200219211903.43924-1-lxsameer@gnu.org>
-References: <20200219211903.43924-1-lxsameer@gnu.org>
+        id S1727274AbgBSWBN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 19 Feb 2020 17:01:13 -0500
+Received: from mail-ot1-f68.google.com ([209.85.210.68]:36083 "EHLO
+        mail-ot1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726760AbgBSWBM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 19 Feb 2020 17:01:12 -0500
+Received: by mail-ot1-f68.google.com with SMTP id j20so1730448otq.3;
+        Wed, 19 Feb 2020 14:01:12 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=pGyOjkge91SQbfrzXim9rbGo7PLjTkG0M1L94MYw0r8=;
+        b=OWFYf8kDu5dL7O5QjP98UYJ3WghQq/L8Z6fj10VWfG2msbX5dstECQ9o+2bQZ9soyh
+         JlfuuXrnKLv2QsMnirdciKm+ErLpL+z5CZ1CvpuZ6ccTj/mpHPa8zSRKN9MU7pq5fmre
+         NvaSqRUOA2WgDyEJjqdCW48x4/F6POSoFJ1e0OSRKykK6p79QB5yMnQd5u+fQS0w12NW
+         RXMrHLXiuDxL5n8urIyE2YbKlysddMhEuJkUjX+VHIoy/V8KubhG4RpukaANY/Wow+nU
+         noaWmpd1FMX6CTqm4mWURwlc6zs95pKqhqAAKKR6+NNMNMn4YYLgdzZ2EPvNVjeCWG9n
+         S9tg==
+X-Gm-Message-State: APjAAAVvPVobx3xtjgdNVgEsItTGno/DstYiusX0a5GLsDqz0fS8Cf17
+        HINC+eT4rPGp5dZI2jGg0hobIaY=
+X-Google-Smtp-Source: APXvYqy51NRJch2sHB4+XDMbzjUA1EEZ5/PvXRCgza6XulwmduWMFpSBLhIi0HIfrADNWHh7u9SpCQ==
+X-Received: by 2002:a9d:6a2:: with SMTP id 31mr20777530otx.313.1582149671782;
+        Wed, 19 Feb 2020 14:01:11 -0800 (PST)
+Received: from rob-hp-laptop (24-155-109-49.dyn.grandenetworks.net. [24.155.109.49])
+        by smtp.gmail.com with ESMTPSA id l207sm409515oih.25.2020.02.19.14.01.10
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 19 Feb 2020 14:01:11 -0800 (PST)
+Received: (nullmailer pid 14284 invoked by uid 1000);
+        Wed, 19 Feb 2020 22:01:10 -0000
+Date:   Wed, 19 Feb 2020 16:01:10 -0600
+From:   Rob Herring <robh@kernel.org>
+To:     Mike Jones <michael-a1.jones@analog.com>
+Cc:     linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux@roeck-us.net, jdelvare@suse.com, robh+dt@kernel.org,
+        corbet@lwn.net, Mike Jones <michael-a1.jones@analog.com>
+Subject: Re: [PATCH 2/2] bindings: (hwmon/ltc2978.txt): add support for more
+ parts.
+Message-ID: <20200219220110.GA14227@bogus>
+References: <1581032654-4330-1-git-send-email-michael-a1.jones@analog.com>
+ <1581032654-4330-2-git-send-email-michael-a1.jones@analog.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-detected-operating-system: by eggs.gnu.org: GNU/Linux 2.2.x-3.x [generic]
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1581032654-4330-2-git-send-email-michael-a1.jones@analog.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Sameer Rahmani <lxsameer@gnu.org>
+On Thu,  6 Feb 2020 16:44:14 -0700, Mike Jones wrote:
+> LTC2972, LTC2979, LTC3884, LTC3889, LTC7880, LTM4664, LTM4677,
+> LTM4678, LTM4680, LTM4700.
+> 
+> Signed-off-by: Mike Jones <michael-a1.jones@analog.com>
+> ---
+>  .../devicetree/bindings/hwmon/ltc2978.txt          | 22 ++++++++++++++++++----
+>  1 file changed, 18 insertions(+), 4 deletions(-)
+> 
 
-Moved the `kobject.txt` to `core-api/kobject.rst` and updated the
-`core-api` index to point to it.
-
-Signed-off-by: Sameer Rahmani <lxsameer@gnu.org>
----
- Documentation/core-api/index.rst                    | 1 +
- Documentation/{kobject.txt => core-api/kobject.rst} | 0
- 2 files changed, 1 insertion(+)
- rename Documentation/{kobject.txt => core-api/kobject.rst} (100%)
-
-diff --git a/Documentation/core-api/index.rst b/Documentation/core-api/index.rst
-index a501dc1c90d0..65035d60f5ee 100644
---- a/Documentation/core-api/index.rst
-+++ b/Documentation/core-api/index.rst
-@@ -11,6 +11,7 @@ Core utilities
- .. toctree::
-    :maxdepth: 1
- 
-+   kobject
-    kernel-api
-    assoc_array
-    atomic_ops
-diff --git a/Documentation/kobject.txt b/Documentation/core-api/kobject.rst
-similarity index 100%
-rename from Documentation/kobject.txt
-rename to Documentation/core-api/kobject.rst
--- 
-2.25.0
-
+Acked-by: Rob Herring <robh@kernel.org>
