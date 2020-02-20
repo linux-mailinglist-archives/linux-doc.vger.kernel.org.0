@@ -2,223 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 03874166727
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Feb 2020 20:29:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 29D041667F0
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Feb 2020 21:05:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728979AbgBTT3p (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 Feb 2020 14:29:45 -0500
-Received: from mga01.intel.com ([192.55.52.88]:16662 "EHLO mga01.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728964AbgBTT3p (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 20 Feb 2020 14:29:45 -0500
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 20 Feb 2020 11:29:44 -0800
-X-IronPort-AV: E=Sophos;i="5.70,465,1574150400"; 
-   d="scan'208";a="228993659"
-Received: from ykim6-mobl1.amr.corp.intel.com (HELO arch-ashland-svkelley.intel.com) ([10.254.188.97])
-  by fmsmga007-auth.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-SHA; 20 Feb 2020 11:29:44 -0800
-From:   Sean V Kelley <sean.v.kelley@linux.intel.com>
-To:     tglx@linutronix.de, bhelgaas@google.com, corbet@lwn.net,
-        mingo@redhat.com, bp@alien8.de
-Cc:     x86@kernel.org, linux-pci@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        kar.hin.ong@ni.com, sassmann@kpanic.de,
-        Sean V Kelley <sean.v.kelley@linux.intel.com>
-Subject: [PATCH v2 2/2] Documentation:PCI: Add background on Boot Interrupts
-Date:   Thu, 20 Feb 2020 11:29:30 -0800
-Message-Id: <20200220192930.64820-3-sean.v.kelley@linux.intel.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200220192930.64820-1-sean.v.kelley@linux.intel.com>
-References: <20200220192930.64820-1-sean.v.kelley@linux.intel.com>
+        id S1728958AbgBTUFZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Feb 2020 15:05:25 -0500
+Received: from mail-pl1-f196.google.com ([209.85.214.196]:38380 "EHLO
+        mail-pl1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728929AbgBTUFZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Feb 2020 15:05:25 -0500
+Received: by mail-pl1-f196.google.com with SMTP id t6so1968738plj.5
+        for <linux-doc@vger.kernel.org>; Thu, 20 Feb 2020 12:05:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=AM1AiYiIhAr8XdPP/BPciMkpM20+lBQrHGm2LLEISDc=;
+        b=lTCaAxg+atkTw/KGP3m5VplsBAN/kWSpDjgAlM8Igr+a1sNmdzHD2rx5fB5o3IhXPH
+         RAy7xzNQrh+ZcTNTwroQf75JBOIBK4gXmhJ5zDM6AYt4yCQFvEAOIOZB4Og5F2cm+aYr
+         3zJNHZvcgdIM69biK+8wzmvvgSiGd8QDV4ZDc=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=AM1AiYiIhAr8XdPP/BPciMkpM20+lBQrHGm2LLEISDc=;
+        b=RkO9ighFPwqQm+VNylvPZdUNTBXO8iI79jNJYrFfrGCothgxoNrtwLb9foXFnLIRWI
+         2vD/MGdwBZ0kiMD0VXJcuTFDAmXQRxhdJSY0c7anHC+t1jNDw+9YzHb8b6VoLp7ing70
+         tCmgMaaU+p90HQDsHw+RDKYkxrQivm8zBzzm2U34m9mcyiLjrKKBOxw10F3SNDbAPEs9
+         6nijUjNiHQBikZE21rxLEHk8j7wbIXgLAxFHWxIFGOqLZE8ge1CF2BDI+IR8EuahHpq0
+         /mY1tkGrwd4EfVdRhZAm9/dtjhlI6E+yiemXP6PEZrgi/f9ABeQ1kguSQCq3NdZZ3a+x
+         FcTQ==
+X-Gm-Message-State: APjAAAWUY0TfV7KRwC5Bfu4q3TVeJaxUE6PXytygYxKgFnJB6mZLBSoF
+        8JoA+RJAT0bAgh6fslk82dlECA==
+X-Google-Smtp-Source: APXvYqw3Kx3/mRCnqMTvzz5MIjrcTa/0IfhIihZu3PCJsDr+kPXc0CbGTglNzPe5nUHCADYpbjISSw==
+X-Received: by 2002:a17:90a:af81:: with SMTP id w1mr5712258pjq.14.1582229123159;
+        Thu, 20 Feb 2020 12:05:23 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id r145sm433935pfr.5.2020.02.20.12.05.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 20 Feb 2020 12:05:21 -0800 (PST)
+Date:   Thu, 20 Feb 2020 12:05:20 -0800
+From:   Kees Cook <keescook@chromium.org>
+To:     "Rafael J. Wysocki" <rafael@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Subject: Re: [Regression] Docs build broken by commit 51e46c7a4007
+Message-ID: <202002201158.2911CE2388@keescook>
+References: <CAJZ5v0he=WQ6159fyaYYffdi66y596rVo7z1yLyGFcH45PXNUg@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAJZ5v0he=WQ6159fyaYYffdi66y596rVo7z1yLyGFcH45PXNUg@mail.gmail.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Improve understanding of the PCI quirks for this legacy PCI interrupt
-behavior to the benefit of developers and users alike.
+On Thu, Feb 20, 2020 at 07:50:47PM +0100, Rafael J. Wysocki wrote:
+> On two of my systems the docs build has been broken by commit
+> 51e46c7a4007 ("docs, parallelism: Rearrange how jobserver reservations
+> are made").
+> 
+> The symptom is that the build system complains about the "output"
+> directory not being there and returns with an error.
+> 
+> Reverting the problematic commit makes the problem go away.
 
-Reviewed-by: Thomas Gleixner <tglx@linutronix.de>
-Signed-off-by: Sean V Kelley <sean.v.kelley@linux.intel.com>
----
- Documentation/PCI/boot-interrupts.rst | 153 ++++++++++++++++++++++++++
- Documentation/PCI/index.rst           |   1 +
- 2 files changed, 154 insertions(+)
- create mode 100644 Documentation/PCI/boot-interrupts.rst
+How strange! This must be some race in the parallel build. AFAICT,
+"output" is made in the first sub-target (Documentation/media). This
+doesn't look entirely stable (there's no ordering implied by the "all"
+target in there)...
 
-diff --git a/Documentation/PCI/boot-interrupts.rst b/Documentation/PCI/boot-interrupts.rst
-new file mode 100644
-index 000000000000..b4d42481fd7f
---- /dev/null
-+++ b/Documentation/PCI/boot-interrupts.rst
-@@ -0,0 +1,153 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===============
-+Boot Interrupts
-+===============
-+
-+:Author: - Sean V Kelley <sean.v.kelley@linux.intel.com>
-+
-+Overview
-+========
-+
-+On PCI Express, interrupts are represented with either MSI or inbound interrupt
-+messages (Assert_INTx/Deassert_INTx). The integrated IO-APIC in a given Core
-+IO converts the legacy interrupt messages from PCI Express to MSI interrupts.
-+If the IO-APIC is disabled (via the mask bits in the IO-APIC table entries),
-+the messages are routed to the legacy PCH. This in-band interrupt mechanism was
-+traditionally necessary for systems that did not support the IO-APIC and for
-+boot. Intel in the past has used the term "boot interrupts" to describe this
-+mechanism. Further, the PCI Express protocol describes this in-band legacy
-+wire-interrupt INTx mechanism for I/O devices to signal PCI-style level
-+interrupts. The subsequent paragraphs describe problems with the Core IO
-+handling of INTx message routing to the PCH and mitigation within BIOS and
-+the OS.
-+
-+
-+Problem
-+=======
-+
-+When in-band legacy INTx messages are forwarded to the PCH, they in turn
-+trigger a new interrupt for which the OS likely lacks a handler. When an
-+interrupt goes unhandled over time, they are tracked by the Linux kernel
-+as Spurious Interrupts. The IRQ will be disabled by the Linux kernel after
-+it reaches a specific count with the error "nobody cared". This disabled
-+IRQ now prevents valid usage by an existing interrupt which may happen to
-+share the IRQ line.
-+
-+irq 19: nobody cared (try booting with the "irqpoll" option)
-+CPU: 0 PID: 2988 Comm: irq/34-nipalk Tainted: 4.14.87-rt49-02410-g4a640ec-dirty #1
-+Hardware name: National Instruments NI PXIe-8880/NI PXIe-8880, BIOS 2.1.5f1 01/09/2020
-+Call Trace:
-+<IRQ>
-+ ? dump_stack+0x46/0x5e
-+ ? __report_bad_irq+0x2e/0xb0
-+ ? note_interrupt+0x242/0x290
-+ ? nNIKAL100_memoryRead16+0x8/0x10 [nikal]
-+ ? handle_irq_event_percpu+0x55/0x70
-+ ? handle_irq_event+0x4f/0x80
-+ ? handle_fasteoi_irq+0x81/0x180
-+ ? handle_irq+0x1c/0x30
-+ ? do_IRQ+0x41/0xd0
-+ ? common_interrupt+0x84/0x84
-+</IRQ>
-+
-+handlers:
-+irq_default_primary_handler threaded usb_hcd_irq
-+Disabling IRQ #19
-+
-+
-+Conditions
-+==========
-+
-+The use of threaded interrupts is the most likely condition to trigger this
-+problem today. Threaded interrupts may not be reenabled after the IRQ handler
-+wakes. These "one shot" conditions mean that the threaded interrupt needs to
-+keep the interrupt line masked until the threaded handler has run. Especially
-+when dealing with high data rate interrupts, the thread needs to run to completion
-+otherwise some handlers will end up in stack overflows since the interrupt
-+of the issuing device is still active.
-+
-+Affected Chipsets
-+=================
-+
-+The legacy interrupt forwarding mechansim exists today in a number of devices
-+including but not limited to chipsets from AMD/ATI, Broadcom, and Intel. Changes
-+made through the mitigations below have been applied to drivers/pci/quirks.c
-+
-+Starting with ICX there are no longer any IO-APICs in the Core IO's devices.
-+IO-APIC is only in the PCH.  Devices connected to the Core IO's PCIE Root Ports
-+will use native MSI/MSI-X mechanisms.
-+
-+Mitigations
-+===========
-+
-+The mitigations take the form of PCI quirks. The preference has been to first
-+identify and make use of a means to disable the routing to the PCH. In such a
-+case a quirk to disable boot interrupt generation can be added.[1]
-+
-+Intel® 6300ESB I/O Controller Hub
-+Alternate Base Address Register:
-+ BIE: Boot Interrupt Enable
-+	0 = Boot interrupt is enabled.
-+	1 = Boot interrupt is disabled.
-+
-+Intel® Sandy Bridge through Sky Lake based Xeon servers:
-+Coherent Interface Protocol Interrupt Control
-+ dis_intx_route2pch/dis_intx_route2ich/dis_intx_route2dmi2:
-+	When this bit is set. Local INTx messages received from the
-+	Intel® Quick Data DMA/PCI Express ports are not routed to legacy
-+	PCH - they are either converted into MSI via the integrated IO-APIC
-+	(if the IO-APIC mask bit is clear in the appropriate entries)
-+	or cause no further action (when mask bit is set)
-+
-+In the absence of a way to directly disable the routing, another approach
-+has been to make use of PCI Interrupt pin to INTx routing tables for purposes
-+of redirecting the interrupt handler to the rerouted interrupt line by default.
-+Therefore, on chipsets where this INTx routing cannot be disabled, the
-+Linux kernel will reroute the valid interrupt to its legacy interrupt. This
-+redirection of the handler will prevent the occurrence of the spurious
-+interrupt detection which would ordinarily disable the IRQ line due to
-+excessive unhandled counts.[2]
-+
-+The config option X86_REROUTE_FOR_BROKEN_BOOT_IRQS exists to enable
-+(or disable) the redirection of the interrupt handler to the PCH interrupt
-+line. The option can be overridden by either pci=ioapicreroute or
-+pci=noioapicreroute.[3]
-+
-+
-+More Documentation
-+==================
-+
-+There is an overview of the legacy interrupt handling mentioned in several
-+datasheets (6300ESB and 6700PXH below). While largely the same, it provides
-+insight into the evolution of its handling with chipsets.
-+
-+Example of disabling of the boot interrupt
-+------------------------------------------
-+
-+Intel® 6300ESB I/O Controller Hub (Document # 300641-004US)
-+	5.7.3 Boot Interrupt
-+	https://www.intel.com/content/dam/doc/datasheet/6300esb-io-controller-hub-datasheet.pdf
-+
-+Intel® Xeon® Processor E5-1600/2400/2600/4600 v3 Product Families
-+Datasheet - Volume 2: Registers (Dcument # 330784-003)
-+	6.6.41 cipintrc Coherent Interface Protocol Interrupt Control
-+	https://www.intel.com/content/dam/www/public/us/en/documents/datasheets/xeon-e5-v3-datasheet-vol-2.pdf
-+
-+Example of handler rerouting
-+----------------------------
-+
-+Intel® 6700PXH 64-bit PCI Hub (Document # 302628)
-+	2.15.2 PCI Express Legacy INTx Support and Boot Interrupt
-+	https://www.intel.com/content/dam/doc/datasheet/6700pxh-64-bit-pci-hub-datasheet.pdf
-+
-+
-+If you have any legacy PCI interrupt questions that aren't answered, email me.
-+
-+Cheers,
-+    Sean V Kelley
-+    sean.v.kelley@linux.intel.com
-+
-+[1] https://lore.kernel.org/lkml/12131949181903-git-send-email-sassmann@suse.de/
-+[2] https://lore.kernel.org/lkml/12131949182094-git-send-email-sassmann@suse.de/
-+[3] https://lore.kernel.org/lkml/487C8EA7.6020205@suse.de/
-diff --git a/Documentation/PCI/index.rst b/Documentation/PCI/index.rst
-index 6768305e4c26..8f66feaafd4f 100644
---- a/Documentation/PCI/index.rst
-+++ b/Documentation/PCI/index.rst
-@@ -16,3 +16,4 @@ Linux PCI Bus Subsystem
-    pci-error-recovery
-    pcieaer-howto
-    endpoint/index
-+   boot-interrupts
+Does this work for you?
+
+
+diff --git a/Documentation/Makefile b/Documentation/Makefile
+index d77bb607aea4..5654e087ae1e 100644
+--- a/Documentation/Makefile
++++ b/Documentation/Makefile
+@@ -62,7 +62,8 @@ loop_cmd = $(echo-cmd) $(cmd_$(1)) || exit;
+ #    e.g. "media" for the linux-tv book-set at ./Documentation/media
+ 
+ quiet_cmd_sphinx = SPHINX  $@ --> file://$(abspath $(BUILDDIR)/$3/$4)
+-      cmd_sphinx = $(MAKE) BUILDDIR=$(abspath $(BUILDDIR)) $(build)=Documentation/media $2 && \
++      cmd_sphinx = mkdir -p $(abspath $(BUILDDIR)) && \
++	$(MAKE) BUILDDIR=$(abspath $(BUILDDIR)) $(build)=Documentation/media $2 && \
+ 	PYTHONDONTWRITEBYTECODE=1 \
+ 	BUILDDIR=$(abspath $(BUILDDIR)) SPHINX_CONF=$(abspath $(srctree)/$(src)/$5/$(SPHINX_CONF)) \
+ 	$(PYTHON) $(srctree)/scripts/jobserver-exec \
+
 -- 
-2.25.1
-
+Kees Cook
