@@ -2,59 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 75A91166698
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Feb 2020 19:50:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 39012166723
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Feb 2020 20:29:53 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728792AbgBTSu6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 Feb 2020 13:50:58 -0500
-Received: from mail-ot1-f47.google.com ([209.85.210.47]:38871 "EHLO
-        mail-ot1-f47.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728383AbgBTSu6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Feb 2020 13:50:58 -0500
-Received: by mail-ot1-f47.google.com with SMTP id z9so4669817oth.5;
-        Thu, 20 Feb 2020 10:50:58 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
-        bh=Q5CZuZWi1DSDJyVpY9xS+DmKo4lBYMFB8JrrBsjqGUY=;
-        b=Vr1iV1DjWL1dPXd9YgPGJHT/oo/vxVmxRWd5Yct+Wyw9IePTvbfxIYM708KARQ6Q6W
-         jZ+9fwWBzp36qYE2jU/DfCOJanMtZFeeGSKRf5kOf5NCsG1VaMmlkRJoDeD5b55ASmev
-         L4gTp965OyJNG41/ERX5naumZymOyXHmUs+ZHUuxR9AYB4R7RL6ieZ8NUlwcOUg7dmkA
-         UUnxDui0LNNspLGDUJlTxxkAR79GgPhwpbCOjyw/pxIDbZU2YXB5QCGClk608O/W9teZ
-         aKchCazLkJ5ZpKOB5jPQveLcd7cQF0LDhTvATWrrFomRGbyfB37jILeFEHAQJ3qu1eoU
-         CsmQ==
-X-Gm-Message-State: APjAAAVnI+aysoyxjMcBQ0mJw5A10U3O4jmRW+j20ZXTmBxYGHESjEtt
-        31dtU/S30wwLCg6y6HLwtbM0hE9+BLyD+0cJKnw=
-X-Google-Smtp-Source: APXvYqyWRvtcUboyeW4G0KBUMExDffyDfxpoi9QiJR7R5ZLxIG5F8P2fN8Y3mFdLrq+ZgZQacKKfJYjcIVY5Tv4xRac=
-X-Received: by 2002:a9d:67d7:: with SMTP id c23mr24878961otn.262.1582224657794;
- Thu, 20 Feb 2020 10:50:57 -0800 (PST)
+        id S1728448AbgBTT3i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Feb 2020 14:29:38 -0500
+Received: from mga01.intel.com ([192.55.52.88]:16662 "EHLO mga01.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728248AbgBTT3h (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 20 Feb 2020 14:29:37 -0500
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 20 Feb 2020 11:29:37 -0800
+X-IronPort-AV: E=Sophos;i="5.70,465,1574150400"; 
+   d="scan'208";a="228993647"
+Received: from ykim6-mobl1.amr.corp.intel.com (HELO arch-ashland-svkelley.intel.com) ([10.254.188.97])
+  by fmsmga007-auth.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-SHA; 20 Feb 2020 11:29:36 -0800
+From:   Sean V Kelley <sean.v.kelley@linux.intel.com>
+To:     tglx@linutronix.de, bhelgaas@google.com, corbet@lwn.net,
+        mingo@redhat.com, bp@alien8.de
+Cc:     x86@kernel.org, linux-pci@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        kar.hin.ong@ni.com, sassmann@kpanic.de,
+        Sean V Kelley <sean.v.kelley@linux.intel.com>
+Subject: [PATCH v2 0/2] pci: Add boot interrupt quirk mechanism for Xeon chipsets
+Date:   Thu, 20 Feb 2020 11:29:28 -0800
+Message-Id: <20200220192930.64820-1-sean.v.kelley@linux.intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-From:   "Rafael J. Wysocki" <rafael@kernel.org>
-Date:   Thu, 20 Feb 2020 19:50:47 +0100
-Message-ID: <CAJZ5v0he=WQ6159fyaYYffdi66y596rVo7z1yLyGFcH45PXNUg@mail.gmail.com>
-Subject: [Regression] Docs build broken by commit 51e46c7a4007
-To:     Kees Cook <keescook@chromium.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Kees,
+Changes since v1 [1]:
 
-On two of my systems the docs build has been broken by commit
-51e46c7a4007 ("docs, parallelism: Rearrange how jobserver reservations
-are made").
+- Correct Documentation section title for 6300ESB chipset.
+(Jonathan Derrick)
 
-The symptom is that the build system complains about the "output"
-directory not being there and returns with an error.
+- Use consistent abbreviations in comments for IO-APIC and Core IO.
+(Andy Shevchenko)
 
-Reverting the problematic commit makes the problem go away.
+- Retained Reviewed-by tag due to no technical changes.
 
-Please advise. :-)
+[1]: https://lore.kernel.org/lkml/20200214213313.66622-1-sean.v.kelley@linux.intel.com/
 
-Cheers,
-Rafael
+Bjorn, I'm open for it to go to stable as well.
+
+--
+
+When IRQ lines on secondary or higher IO-APICs are masked (e.g.,
+Real-Time threaded interrupts), many chipsets redirect IRQs on
+this line to the legacy PCH and in turn the base IO-APIC in the
+system. The unhandled interrupts on the base IO-APIC will be
+identified by the Linux kernel as Spurious Interrupts and can
+lead to disabled IRQ lines.
+
+Disabling this legacy PCI interrupt routing is chipset-specific and
+varies in mechanism between chipset vendors and across generations.
+In some cases the mechanism is exposed to BIOS but not all BIOS
+vendors chose to pick it up. With the increasing usage of RT as it
+marches towards mainline, additional issues have been raised with
+more recent Xeon chipsets.
+
+This patchset disables the boot interrupt on these Xeon chipsets where
+this is possible with an additional mechanism. In addition, this
+patchset includes documentation covering the background of this quirk.
+
+
+Sean V Kelley (2):
+  pci: Add boot interrupt quirk mechanism for Xeon chipsets
+  Documentation:PCI: Add background on Boot Interrupts
+
+ Documentation/PCI/boot-interrupts.rst | 153 ++++++++++++++++++++++++++
+ Documentation/PCI/index.rst           |   1 +
+ drivers/pci/quirks.c                  |  80 ++++++++++++--
+ 3 files changed, 227 insertions(+), 7 deletions(-)
+ create mode 100644 Documentation/PCI/boot-interrupts.rst
+
+--
+2.25.1
+
