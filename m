@@ -2,419 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 66895165ABE
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Feb 2020 10:59:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 43975165AF3
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Feb 2020 11:00:58 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726934AbgBTJ7K (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 Feb 2020 04:59:10 -0500
-Received: from mail-pf1-f196.google.com ([209.85.210.196]:40914 "EHLO
-        mail-pf1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726837AbgBTJ7J (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Feb 2020 04:59:09 -0500
-Received: by mail-pf1-f196.google.com with SMTP id b185so1674731pfb.7
-        for <linux-doc@vger.kernel.org>; Thu, 20 Feb 2020 01:59:09 -0800 (PST)
+        id S1727697AbgBTKAw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Feb 2020 05:00:52 -0500
+Received: from mail-pl1-f195.google.com ([209.85.214.195]:46804 "EHLO
+        mail-pl1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726940AbgBTKAw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Feb 2020 05:00:52 -0500
+Received: by mail-pl1-f195.google.com with SMTP id y8so1346216pll.13
+        for <linux-doc@vger.kernel.org>; Thu, 20 Feb 2020 02:00:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=g8/4VMO0eMvLgV7z0zh7RiVQcwNjZX2GSNJ6is44LF4=;
-        b=c4k5CWe5jA4Ac/PtrEjXVGgnSxbKxif/1ZAiyVt+jkoccUgOMoSvXGQWQky8QZhwTR
-         Q1YctkJ1MFeClnVQGE3nIw1fGk+9Z/66GcJIrO2lXCYizKN9IqxXxLn4GSoagYn9vGdX
-         ekYxkbtihD+ryX1a5vxHXA+kS1puPxChqhk13gv2vCl53dARtIeR075mXxCDACEVmc3y
-         LvjqRXB0GZGRk8++h4dJnYaEp+9+tFb4ASR7wFj4zKPsSWZbjZxc+fM93G8lXzuBy5zK
-         KIHGa5/fYXMsfNXPhxSepz+2CqRNSOuZq76UCh9NxkM1P2ivL6iYfep3ZdSsl/Ul0b6P
-         9uYQ==
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=xsUbPWAhYtsZRE8nHbpZ90/dMr+6ACJOvf/o3gzcGwM=;
+        b=HNr12GxrjzeTq5ngoCzqSt/oCz/awtVKQjQZSLSC8wH7YBMgy25gbBZAhW+Y0cyQtN
+         kKOB6xx7VSxXLMJyPV/Iw9cK7Vpbqp3v5jLq0Zvd6h+PBJbitmup3n2IFd9ivmo89YEc
+         /egZXb6yTbPIlbWpBfeXIKwkL7oS7K3OMrKAxyuXOjiC7/P/VIk23D6A59RJPNAClTBn
+         +zj7jGrC7+bzH45DlaK20O1eBGRgn2fMPgq7Wa1mBm1zmtrzXPwl1yC71D45vDAfaVEW
+         zMZ35nTliz1ILnftScHIxTS+hT27IDr8KQbngHJW7d3FYzVNjhmSHX1GSZlutxUUsLmX
+         El3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=g8/4VMO0eMvLgV7z0zh7RiVQcwNjZX2GSNJ6is44LF4=;
-        b=SBn5aO8gzB9/ytY+G3zFXwj08SGRz+OOnJSF0iFefvEvJ18LeKnH8i+tRNzb9cSS2t
-         Bk7Hb/4mVdLKeBCJ/05ESgreJ19NX2ReK1fgC7Cp8ILuBgCkVRBYavmt1hlzgkSw/B1Z
-         okFcyUVWDdd0nCClhsGx4XGMyUzomzlRK0MBtc0Z07dEb4/iTnsLAGpYfHadecTAVsXh
-         eMR/f0qi8u3kZBkZp1auBATSnKM+iEDtGUtSkkm5jwqAw+e9f3bqow+a6TFaSK0qnWhV
-         yep6sxgRZ5NRM97FSCTFXMfutKyH0HgDmTvsZXEnz+i08CNFHOXD3cP/J6kSDEFPp0la
-         RG9A==
-X-Gm-Message-State: APjAAAVJXMzXTOnNWGnFnmEv+n9D6wnaC3hpuaH39himRp4R1UWYhUXC
-        xHw5Ku0pcrMqtjGvdHFccMz+WH9wYkNA
-X-Google-Smtp-Source: APXvYqySvQOwAIz5U+khcaAHkStoua6YiDYrz8kbg2qb68zXVrTmRJaeQ+WDUL2M5AQbYW71vL/UGA==
-X-Received: by 2002:a62:1958:: with SMTP id 85mr30187656pfz.221.1582192748548;
-        Thu, 20 Feb 2020 01:59:08 -0800 (PST)
-Received: from localhost.localdomain ([2409:4072:315:9501:edda:4222:88ae:442f])
-        by smtp.gmail.com with ESMTPSA id b3sm2678644pjo.30.2020.02.20.01.59.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 20 Feb 2020 01:59:07 -0800 (PST)
-From:   Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-To:     gregkh@linuxfoundation.org, arnd@arndb.de
-Cc:     smohanad@codeaurora.org, jhugo@codeaurora.org,
-        kvalo@codeaurora.org, bjorn.andersson@linaro.org,
-        hemantk@codeaurora.org, linux-arm-msm@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH v3 01/16] docs: Add documentation for MHI bus
-Date:   Thu, 20 Feb 2020 15:28:39 +0530
-Message-Id: <20200220095854.4804-2-manivannan.sadhasivam@linaro.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200220095854.4804-1-manivannan.sadhasivam@linaro.org>
-References: <20200220095854.4804-1-manivannan.sadhasivam@linaro.org>
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=xsUbPWAhYtsZRE8nHbpZ90/dMr+6ACJOvf/o3gzcGwM=;
+        b=auB9qdWaVdijSXjMK+CWqMhBmkvMN/DY87ZHbSPsOh+Wp9qPz7n3t2vqiTj2bkJDc3
+         fi1xVWfzFcc5FUkG0VNR8UXTBLCZ9AdnDY44y7KnmgeqJJ2k1DNyXWL6EJ6mXb9jbDkC
+         NOwnPJodBYh7JCGJYsfNtXjFGl9DQNgTMloUFBaDmi/FTyqKajt64Gn0w1BVdlCUidWP
+         ZnHiDXJI8L6vWZ77AnAWScTkAelhv6pUMQHnCapv9dwu462rCtemOiCXwKFtm/0UvyYf
+         gQIxMZmmpa2wKpajvY2zCkW/kadESorBXJmUu9BFO8aCO+CLozQtSg/N8DyS5yEGtisq
+         3gow==
+X-Gm-Message-State: APjAAAWMXv6rEqRyyha+p/aUK1pKTQwYPd5ipOYSlMc4DSZNT91an7PT
+        AAU1q8r4Oti7WfXaYCEMElWr11NKe7oGKPlVViw=
+X-Google-Smtp-Source: APXvYqxfZA4v8peKNM04mGNBALs86xGAR9+I6+hzmiYK3t55tpMLGcCRQQm6ljdK7TnDP4vs7ZB6lB1K0pwxYVg4mFM=
+X-Received: by 2002:a17:90a:3268:: with SMTP id k95mr2701944pjb.48.1582192851840;
+ Thu, 20 Feb 2020 02:00:51 -0800 (PST)
+MIME-Version: 1.0
+Received: by 2002:a17:90a:90f:0:0:0:0 with HTTP; Thu, 20 Feb 2020 02:00:51
+ -0800 (PST)
+Reply-To: cagesusan199@gmail.com
+From:   "Mrs. Susan S. Cage" <drgoodluckebelejonathan061@gmail.com>
+Date:   Thu, 20 Feb 2020 02:00:51 -0800
+Message-ID: <CALjo5=9Nw6erRGz0fKm=tZEMk3GYPX9FUD54_CiYDSXv8KBisA@mail.gmail.com>
+Subject: Attention:Beneficiary
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-MHI (Modem Host Interface) is a communication protocol used by the
-host processors to control and communicate with modems over a high
-speed peripheral bus or shared memory. The MHI protocol has been
-designed and developed by Qualcomm Innovation Center, Inc., for use
-in their modems. This commit adds the documentation for the bus and
-the implementation in Linux kernel.
-
-This is based on the patch submitted by Sujeev Dias:
-https://lkml.org/lkml/2018/7/9/987
-
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Signed-off-by: Sujeev Dias <sdias@codeaurora.org>
-Signed-off-by: Siddartha Mohanadoss <smohanad@codeaurora.org>
-[mani: converted to .rst and splitted the patch]
-Signed-off-by: Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>
-Reviewed-by: Jeffrey Hugo <jhugo@codeaurora.org>
----
- Documentation/index.rst        |   1 +
- Documentation/mhi/index.rst    |  18 +++
- Documentation/mhi/mhi.rst      | 218 +++++++++++++++++++++++++++++++++
- Documentation/mhi/topology.rst |  60 +++++++++
- 4 files changed, 297 insertions(+)
- create mode 100644 Documentation/mhi/index.rst
- create mode 100644 Documentation/mhi/mhi.rst
- create mode 100644 Documentation/mhi/topology.rst
-
-diff --git a/Documentation/index.rst b/Documentation/index.rst
-index e99d0bd2589d..edc9b211bbff 100644
---- a/Documentation/index.rst
-+++ b/Documentation/index.rst
-@@ -133,6 +133,7 @@ needed).
-    misc-devices/index
-    mic/index
-    scheduler/index
-+   mhi/index
- 
- Architecture-agnostic documentation
- -----------------------------------
-diff --git a/Documentation/mhi/index.rst b/Documentation/mhi/index.rst
-new file mode 100644
-index 000000000000..1d8dec302780
---- /dev/null
-+++ b/Documentation/mhi/index.rst
-@@ -0,0 +1,18 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===
-+MHI
-+===
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   mhi
-+   topology
-+
-+.. only::  subproject and html
-+
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
-diff --git a/Documentation/mhi/mhi.rst b/Documentation/mhi/mhi.rst
-new file mode 100644
-index 000000000000..803ff84f7d7b
---- /dev/null
-+++ b/Documentation/mhi/mhi.rst
-@@ -0,0 +1,218 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+==========================
-+MHI (Modem Host Interface)
-+==========================
-+
-+This document provides information about the MHI protocol.
-+
-+Overview
-+========
-+
-+MHI is a protocol developed by Qualcomm Innovation Center, Inc. It is used
-+by the host processors to control and communicate with modem devices over high
-+speed peripheral buses or shared memory. Even though MHI can be easily adapted
-+to any peripheral buses, it is primarily used with PCIe based devices. MHI
-+provides logical channels over the physical buses and allows transporting the
-+modem protocols, such as IP data packets, modem control messages, and
-+diagnostics over at least one of those logical channels. Also, the MHI
-+protocol provides data acknowledgment feature and manages the power state of the
-+modems via one or more logical channels.
-+
-+MHI Internals
-+=============
-+
-+MMIO
-+----
-+
-+MMIO (Memory mapped IO) consists of a set of registers in the device hardware,
-+which are mapped to the host memory space by the peripheral buses like PCIe.
-+Following are the major components of MMIO register space:
-+
-+MHI control registers: Access to MHI configurations registers
-+
-+MHI BHI registers: BHI (Boot Host Interface) registers are used by the host
-+for downloading the firmware to the device before MHI initialization.
-+
-+Channel Doorbell array: Channel Doorbell (DB) registers used by the host to
-+notify the device when there is new work to do.
-+
-+Event Doorbell array: Associated with event context array, the Event Doorbell
-+(DB) registers are used by the host to notify the device when new events are
-+available.
-+
-+Debug registers: A set of registers and counters used by the device to expose
-+debugging information like performance, functional, and stability to the host.
-+
-+Data structures
-+---------------
-+
-+All data structures used by MHI are in the host system memory. Using the
-+physical interface, the device accesses those data structures. MHI data
-+structures and data buffers in the host system memory regions are mapped for
-+the device.
-+
-+Channel context array: All channel configurations are organized in channel
-+context data array.
-+
-+Transfer rings: Used by the host to schedule work items for a channel. The
-+transfer rings are organized as a circular queue of Transfer Descriptors (TD).
-+
-+Event context array: All event configurations are organized in the event context
-+data array.
-+
-+Event rings: Used by the device to send completion and state transition messages
-+to the host
-+
-+Command context array: All command configurations are organized in command
-+context data array.
-+
-+Command rings: Used by the host to send MHI commands to the device. The command
-+rings are organized as a circular queue of Command Descriptors (CD).
-+
-+Channels
-+--------
-+
-+MHI channels are logical, unidirectional data pipes between a host and a device.
-+The concept of channels in MHI is similar to endpoints in USB. MHI supports up
-+to 256 channels. However, specific device implementations may support less than
-+the maximum number of channels allowed.
-+
-+Two unidirectional channels with their associated transfer rings form a
-+bidirectional data pipe, which can be used by the upper-layer protocols to
-+transport application data packets (such as IP packets, modem control messages,
-+diagnostics messages, and so on). Each channel is associated with a single
-+transfer ring.
-+
-+Transfer rings
-+--------------
-+
-+Transfers between the host and device are organized by channels and defined by
-+Transfer Descriptors (TD). TDs are managed through transfer rings, which are
-+defined for each channel between the device and host and reside in the host
-+memory. TDs consist of one or more ring elements (or transfer blocks)::
-+
-+        [Read Pointer (RP)] ----------->[Ring Element] } TD
-+        [Write Pointer (WP)]-           [Ring Element]
-+                             -          [Ring Element]
-+                              --------->[Ring Element]
-+                                        [Ring Element]
-+
-+Below is the basic usage of transfer rings:
-+
-+* Host allocates memory for transfer ring.
-+* Host sets the base pointer, read pointer, and write pointer in corresponding
-+  channel context.
-+* Ring is considered empty when RP == WP.
-+* Ring is considered full when WP + 1 == RP.
-+* RP indicates the next element to be serviced by the device.
-+* When the host has a new buffer to send, it updates the ring element with
-+  buffer information, increments the WP to the next element and rings the
-+  associated channel DB.
-+
-+Event rings
-+-----------
-+
-+Events from the device to host are organized in event rings and defined by Event
-+Descriptors (ED). Event rings are used by the device to report events such as
-+data transfer completion status, command completion status, and state changes
-+to the host. Event rings are the array of EDs that resides in the host
-+memory. EDs consist of one or more ring elements (or transfer blocks)::
-+
-+        [Read Pointer (RP)] ----------->[Ring Element] } ED
-+        [Write Pointer (WP)]-           [Ring Element]
-+                             -          [Ring Element]
-+                              --------->[Ring Element]
-+                                        [Ring Element]
-+
-+Below is the basic usage of event rings:
-+
-+* Host allocates memory for event ring.
-+* Host sets the base pointer, read pointer, and write pointer in corresponding
-+  channel context.
-+* Both host and device has a local copy of RP, WP.
-+* Ring is considered empty (no events to service) when WP + 1 == RP.
-+* Ring is considered full of events when RP == WP.
-+* When there is a new event the device needs to send, the device updates ED
-+  pointed by RP, increments the RP to the next element and triggers the
-+  interrupt.
-+
-+Ring Element
-+------------
-+
-+A Ring Element is a data structure used to transfer a single block
-+of data between the host and the device. Transfer ring element types contain a
-+single buffer pointer, the size of the buffer, and additional control
-+information. Other ring element types may only contain control and status
-+information. For single buffer operations, a ring descriptor is composed of a
-+single element. For large multi-buffer operations (such as scatter and gather),
-+elements can be chained to form a longer descriptor.
-+
-+MHI Operations
-+==============
-+
-+MHI States
-+----------
-+
-+MHI_STATE_RESET
-+~~~~~~~~~~~~~~~
-+MHI is in reset state after power-up or hardware reset. The host is not allowed
-+to access device MMIO register space.
-+
-+MHI_STATE_READY
-+~~~~~~~~~~~~~~~
-+MHI is ready for initialization. The host can start MHI initialization by
-+programming MMIO registers.
-+
-+MHI_STATE_M0
-+~~~~~~~~~~~~
-+MHI is running and operational in the device. The host can start channels by
-+issuing channel start command.
-+
-+MHI_STATE_M1
-+~~~~~~~~~~~~
-+MHI operation is suspended by the device. This state is entered when the
-+device detects inactivity at the physical interface within a preset time.
-+
-+MHI_STATE_M2
-+~~~~~~~~~~~~
-+MHI is in low power state. MHI operation is suspended and the device may
-+enter lower power mode.
-+
-+MHI_STATE_M3
-+~~~~~~~~~~~~
-+MHI operation stopped by the host. This state is entered when the host suspends
-+MHI operation.
-+
-+MHI Initialization
-+------------------
-+
-+After system boots, the device is enumerated over the physical interface.
-+In the case of PCIe, the device is enumerated and assigned BAR-0 for
-+the device's MMIO register space. To initialize the MHI in a device,
-+the host performs the following operations:
-+
-+* Allocates the MHI context for event, channel and command arrays.
-+* Initializes the context array, and prepares interrupts.
-+* Waits until the device enters READY state.
-+* Programs MHI MMIO registers and sets device into MHI_M0 state.
-+* Waits for the device to enter M0 state.
-+
-+MHI Data Transfer
-+-----------------
-+
-+MHI data transfer is initiated by the host to transfer data to the device.
-+Following are the sequence of operations performed by the host to transfer
-+data to device:
-+
-+* Host prepares TD with buffer information.
-+* Host increments the WP of the corresponding channel transfer ring.
-+* Host rings the channel DB register.
-+* Device wakes up to process the TD.
-+* Device generates a completion event for the processed TD by updating ED.
-+* Device increments the RP of the corresponding event ring.
-+* Device triggers IRQ to wake up the host.
-+* Host wakes up and checks the event ring for completion event.
-+* Host updates the WP of the corresponding event ring to indicate that the
-+  data transfer has been completed successfully.
-+
-diff --git a/Documentation/mhi/topology.rst b/Documentation/mhi/topology.rst
-new file mode 100644
-index 000000000000..dc7799d03294
---- /dev/null
-+++ b/Documentation/mhi/topology.rst
-@@ -0,0 +1,60 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+============
-+MHI Topology
-+============
-+
-+This document provides information about the MHI topology modeling and
-+representation in the kernel.
-+
-+MHI Controller
-+--------------
-+
-+MHI controller driver manages the interaction with the MHI client devices
-+such as the external modems and WiFi chipsets. It is also the MHI bus master
-+which is in charge of managing the physical link between the host and device.
-+It is however not involved in the actual data transfer as the data transfer
-+is taken care by the physical bus such as PCIe. Each controller driver exposes
-+channels and events based on the client device type.
-+
-+Below are the roles of the MHI controller driver:
-+
-+* Turns on the physical bus and establishes the link to the device
-+* Configures IRQs, IOMMU, and IOMEM
-+* Allocates struct mhi_controller and registers with the MHI bus framework
-+  with channel and event configurations using mhi_register_controller.
-+* Initiates power on and shutdown sequence
-+* Initiates suspend and resume power management operations of the device.
-+
-+MHI Device
-+----------
-+
-+MHI device is the logical device which binds to a maximum of two MHI channels
-+for bi-directional communication. Once MHI is in powered on state, the MHI
-+core will create MHI devices based on the channel configuration exposed
-+by the controller. There can be a single MHI device for each channel or for a
-+couple of channels.
-+
-+Each supported device is enumerated in::
-+
-+        /sys/bus/mhi/devices/
-+
-+MHI Driver
-+----------
-+
-+MHI driver is the client driver which binds to one or more MHI devices. The MHI
-+driver sends and receives the upper-layer protocol packets like IP packets,
-+modem control messages, and diagnostics messages over MHI. The MHI core will
-+bind the MHI devices to the MHI driver.
-+
-+Each supported driver is enumerated in::
-+
-+        /sys/bus/mhi/drivers/
-+
-+Below are the roles of the MHI driver:
-+
-+* Registers the driver with the MHI bus framework using mhi_driver_register.
-+* Prepares the device for transfer by calling mhi_prepare_for_transfer.
-+* Initiates data transfer by calling mhi_queue_transfer.
-+* Once the data transfer is finished, calls mhi_unprepare_from_transfer to
-+  end data transfer.
 -- 
-2.17.1
+Dearest Friend,
 
+Sorry for invading your privacy, my name is Susan S. Cage I am 81
+years, citizen of United States and presently in hospital undergoing
+chromatography for bronchogenic carcinomas (Lung cancer) which
+affected both Lungs. The doctors said I have few days to live because
+the cancer has now affected my brain.
+
+My late husband left Fifteen Million, Five Hundred British Pounds
+Sterling in my account, I want to transfer the money to you and I want
+you to use it as a donate for charitable and help the needy,
+motherless, less privileged and widows within your location.
+
+I need your assurance that you will use the fund for charity, once I a
+favorable reply from you, will inform my Bank through my lawyer to
+transfer the fund to you as my Next of Kin and Sole Beneficiary. Once
+I receive your response, I will inform my bank in writing through my
+lawyer.
+
+
+
+Thank you and God bless you.
+
+Mrs. Susan S. Cage
