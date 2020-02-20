@@ -2,58 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D0C4A165A22
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Feb 2020 10:27:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 20566165A82
+	for <lists+linux-doc@lfdr.de>; Thu, 20 Feb 2020 10:53:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726805AbgBTJ12 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 20 Feb 2020 04:27:28 -0500
-Received: from mail.kernel.org ([198.145.29.99]:54678 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726637AbgBTJ11 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 20 Feb 2020 04:27:27 -0500
-Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id C9EB820801;
-        Thu, 20 Feb 2020 09:27:25 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1582190847;
-        bh=XgKAWIq9e6qAgZoVDhw9r2LNsJdmFShHckDTrw/YwQY=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=a0hINo/Z0z0lHhBBiiUKy1fk51vRDZ8cxOvOQ0UFCdwyy5Hd9E/z9sUBe2gYguR0s
-         eZMkfFLEY84H4JrrB24U/XbanQSWUBvjHnLYKv4zxSawW+Zthkn4+fOANXlAYOv3XF
-         LicQQ/pCuojfq6hcKl7i/bxGdFc90S6Ppl5jJDlk=
-Date:   Thu, 20 Feb 2020 09:27:22 +0000
-From:   Will Deacon <will@kernel.org>
-To:     Scott Branden <scott.branden@broadcom.com>
-Cc:     Catalin Marinas <catalin.marinas@arm.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jiri Kosina <trivial@kernel.org>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: arm64: fix trivial spelling enought to enough in
- memory.rst
-Message-ID: <20200220092721.GA12780@willie-the-truck>
-References: <20200219221403.16740-1-scott.branden@broadcom.com>
+        id S1726801AbgBTJxw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Feb 2020 04:53:52 -0500
+Received: from mail-ot1-f66.google.com ([209.85.210.66]:41915 "EHLO
+        mail-ot1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726771AbgBTJxw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Feb 2020 04:53:52 -0500
+Received: by mail-ot1-f66.google.com with SMTP id r27so3066300otc.8;
+        Thu, 20 Feb 2020 01:53:52 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=jeN19GuMB9ysdWk9mvfpt7TayG82X3Z6MoBxOjoN1DQ=;
+        b=aj3HSdcnObpMLp28TZMsunEHb7Q79as1GgDSnPUDnmeqDlwUqh3X2s6AZk+JzsrATG
+         H6gVwRT7EZEE7W1Xek/mmnp6uV1kgpBqpOUAUjA7/OJGpPibP4RCe0fXZCFVDlRnJITc
+         ZmRUbqXUsefDtI5kZD+qUl+N0a7PgS8jHEC+BVq3iE/x0dKi0LqNzeFCZUTc0pZWRRMv
+         IqTQRcP9JPywkQc32E0lTVEa8VOdJ+7c31QrHZRrIaW2ChEXwRJ5jtMyuN7nmqJLi15m
+         /3GMHog5o3XEEvXlL+MqUIgPIgsSGI28XcCLB9NeHpLXt2JHTkiG3vr7nzF8wiak9rVR
+         Os/A==
+X-Gm-Message-State: APjAAAWvVnDdYOp7kiHXD+77UtUh2ChEdQOM/PdafJCBSQVqwnkUfuF2
+        5B6VbmlZwT/oFIE7ZIl5dJkGON2PQtNfKr1/Kj4=
+X-Google-Smtp-Source: APXvYqxLOo4uzE64DC6gPgGBW4hdqs+4rlt7vt1Fjhxf8+gu4PC1ikAdU8TeWnrzHm8OZrIZcVApDNT1MUzLwx8rN1w=
+X-Received: by 2002:a9d:7559:: with SMTP id b25mr22192490otl.189.1582192431589;
+ Thu, 20 Feb 2020 01:53:51 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200219221403.16740-1-scott.branden@broadcom.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <98d72d3b-c9eb-36bc-1d68-2c3020bdf9c5@infradead.org>
+In-Reply-To: <98d72d3b-c9eb-36bc-1d68-2c3020bdf9c5@infradead.org>
+From:   "Rafael J. Wysocki" <rafael@kernel.org>
+Date:   Thu, 20 Feb 2020 10:53:39 +0100
+Message-ID: <CAJZ5v0hsoYc4CYw90CAQGKpeh=Zt5oC0YWkP-o-t2TuntSng2A@mail.gmail.com>
+Subject: Re: [PATCH] Documentation/admin-guide/acpi: fix fan_performance_states.rst
+ warnings
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        ACPI Devel Mailing List <linux-acpi@vger.kernel.org>,
+        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Feb 19, 2020 at 02:14:03PM -0800, Scott Branden wrote:
-> Fix trivial spelling error enought to enough in memory.rst.
-> 
-> Cc: trivial@kernel.org
-> Signed-off-by: Scott Branden <scott.branden@broadcom.com>
+On Mon, Feb 17, 2020 at 5:42 AM Randy Dunlap <rdunlap@infradead.org> wrote:
+>
+> From: Randy Dunlap <rdunlap@infradead.org>
+>
+> Fix Sphinx format warnings in fan_performace_states.rst
+> by adding indentation.
+>
+> Documentation/admin-guide/acpi/fan_performance_states.rst:21: WARNING: Literal block ends without a blank line; unexpected unindent.
+> Documentation/admin-guide/acpi/fan_performance_states.rst:41: WARNING: Literal block expected; none found.
+>
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+> Cc: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
 > ---
->  Documentation/arm64/memory.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  Documentation/admin-guide/acpi/fan_performance_states.rst |    4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> --- lnx-56-rc2.orig/Documentation/admin-guide/acpi/fan_performance_states.rst
+> +++ lnx-56-rc2/Documentation/admin-guide/acpi/fan_performance_states.rst
+> @@ -18,7 +18,7 @@ may look as follows::
+>
+>   $ ls -l /sys/bus/acpi/devices/INT3404:00/
+>   total 0
+> -...
+> + ...
+>   -r--r--r-- 1 root root 4096 Dec 13 20:38 state0
+>   -r--r--r-- 1 root root 4096 Dec 13 20:38 state1
+>   -r--r--r-- 1 root root 4096 Dec 13 20:38 state10
+> @@ -38,7 +38,7 @@ where each of the "state*" files represe
+>  and contains a colon-separated list of 5 integer numbers (fields) with the
+>  following interpretation::
+>
+> -control_percent:trip_point_index:speed_rpm:noise_level_mdb:power_mw
+> +  control_percent:trip_point_index:speed_rpm:noise_level_mdb:power_mw
+>
+>  * ``control_percent``: The percent value to be used to set the fan speed to a
+>    specific level using the _FSL object (0-100).
 
-I can take this along with the other arm64 fixes I have pending.
-
-Will
+Applied as a fix for 5.6, thanks!
