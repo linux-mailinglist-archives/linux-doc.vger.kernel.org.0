@@ -2,155 +2,36 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1C2291690AE
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Feb 2020 18:20:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D32571690EC
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Feb 2020 18:49:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726701AbgBVRUB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 22 Feb 2020 12:20:01 -0500
-Received: from mail-pf1-f196.google.com ([209.85.210.196]:34447 "EHLO
-        mail-pf1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726198AbgBVRUB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Feb 2020 12:20:01 -0500
-Received: by mail-pf1-f196.google.com with SMTP id i6so3001221pfc.1;
-        Sat, 22 Feb 2020 09:20:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=pBlnEnGsMstGVyIAKqUSLHLBYoQgpr7wBNrwAms26Yo=;
-        b=N1umw+dflj+4ygktxCh4x4Xar6LUvIUmf87d4s89h/nqrxANA7zQDFBY8qnXkOrEyx
-         CQXxj4ALPcj9n2jU4lqCLhSdIaabPtBMeOrc4ROQKyQz45q+eoMd6ZGd86Jc1Y3bKEbM
-         ofQ6l0SsWVo8pvRkgKXPKjEA2O5VFuCojotM/dlJkIoLJtkN2EEyR/qFVoizEXpolbpP
-         crUwRoOWuqASC2bDRyLUELkObvduTrGL36P8kvwhyVR17d9N2fW+hTJRk/g4SX1xGN0/
-         oVz2HIGXviL3O0M1Bvn3V8j4wkaftP7mhIXa1xUKMKqlA9gJ2S9gpIbQBpNGAac/I6k7
-         3bMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=pBlnEnGsMstGVyIAKqUSLHLBYoQgpr7wBNrwAms26Yo=;
-        b=mdc2stm4Od63J3/euoZ3FX7bFuAb3lNAUnxgcp5R7nTczzIBO9vEyJ5dVA5Oh1nZgT
-         bUqZese5simL+5qSz5vJA2I/mP8/d/dkAVi30yBQgzpIP76g2Bj3KqKE3NblVkyTbfPW
-         BANiie+FKdFSX8xlnxV2JgGsTTJY/uHaKGjqLN0jIK22+lta3u1I/5cxZKBzB05c4lJy
-         WuqpdPpvllsKwAOKBcFi8462GfChRz8DjcaQWuIoQZdRbq6X+FMWJojw6vHQ+hB+C+pW
-         e8eh+/0QuKK5PkHtq/qgs87NoApxphAYEbIBqDjICvyTeE7d1BPY1x0ASBOaTpaqqm21
-         VAWQ==
-X-Gm-Message-State: APjAAAVU23T17HkWk5BbAEY5kUQMvYX/TqxguLkRMgt4HfA6LlBCN0A+
-        P3bAgxnme9KEYxEIZRMacR4=
-X-Google-Smtp-Source: APXvYqyMMrZF1/Re4YpunwWENhyrHlPdkj4bvOMtyz7rrMFPvXnZsgu1uZHAceyS/8F+rJM/rTosGw==
-X-Received: by 2002:a63:da49:: with SMTP id l9mr44453319pgj.125.1582392000256;
-        Sat, 22 Feb 2020 09:20:00 -0800 (PST)
-Received: from localhost.localdomain (180-177-0-29.dynamic.kbronet.com.tw. [180.177.0.29])
-        by smtp.googlemail.com with ESMTPSA id i27sm6501077pgn.76.2020.02.22.09.19.58
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-        Sat, 22 Feb 2020 09:19:59 -0800 (PST)
-From:   Manbing <manbing3@gmail.com>
-To:     Jeff Dike <jdike@addtoit.com>, Richard Weinberger <richard@nod.at>,
-        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Manbing <manbing3@gmail.com>, linux-um@lists.infradead.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH] Documentation: update UserModeLinux-HOWTO.txt
-Date:   Sun, 23 Feb 2020 01:19:27 +0800
-Message-Id: <1582391968-3960-1-git-send-email-manbing3@gmail.com>
-X-Mailer: git-send-email 2.7.4
+        id S1726826AbgBVRtj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 22 Feb 2020 12:49:39 -0500
+Received: from [167.172.150.84] ([167.172.150.84]:36150 "EHLO
+        centos-s-1vcpu-2gb-nyc1-01.localdomain" rhost-flags-FAIL-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726707AbgBVRti (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Feb 2020 12:49:38 -0500
+Received: from localhost (centos-s-1vcpu-2gb-nyc1-01 [127.0.0.1])
+        by centos-s-1vcpu-2gb-nyc1-01.localdomain (Postfix) with SMTP id 81F0017732;
+        Fri, 21 Feb 2020 16:50:47 +0000 (UTC)
+Received: from [51.7.194.114] by localhost with ESMTP id 61145412 for <linda_278@centurytel.net>; Fri, 21 Feb 2020 21:47:38 +0500
+Message-ID: <qo$48v09x4c2--5-$f9@r5u1c0kgq>
+From:   "RECEIVE AND SECURE THIS MONEY FOR ME" <fta447447@gmail.com>
+Reply-To: "RECEIVE AND SECURE THIS MONEY FOR ME" <fta447447@gmail.com>
+To:     linda_278@centurytel.net
+Subject: RECEIVE MONEY IN BANK ACCOUNT REPLY TO fta447447@gmail.com
+Date:   Fri, 21 Feb 20 21:47:38 GMT
+X-Mailer: AOL 7.0 for Windows US sub 118
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+        boundary="A..C8.._3321CEA_"
+X-Priority: 3
+X-MSMail-Priority: Normal
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Original content is obsolete. Which is based on kernel 2.4.0-prerelease.
-Updating content according to kernel 5.5.1.
 
-Signed-off-by: Manbing <manbing3@gmail.com>
----
- Documentation/virt/uml/UserModeLinux-HOWTO.txt | 42 +++++---------------------
- 1 file changed, 8 insertions(+), 34 deletions(-)
-
-diff --git a/Documentation/virt/uml/UserModeLinux-HOWTO.txt b/Documentation/virt/uml/UserModeLinux-HOWTO.txt
-index 87b80f5..08ee28d 100644
---- a/Documentation/virt/uml/UserModeLinux-HOWTO.txt
-+++ b/Documentation/virt/uml/UserModeLinux-HOWTO.txt
-@@ -1,6 +1,6 @@
-   User Mode Linux HOWTO
-   User Mode Linux Core Team
--  Mon Nov 18 14:16:16 EST 2002
-+  Mon Feb 10 08:27:24 EST 2020
- 
-   This document describes the use and abuse of Jeff Dike's User Mode
-   Linux: a port of the Linux kernel as a normal Intel Linux process.
-@@ -215,26 +215,17 @@
- 
- 
-   Compiling the user mode kernel is just like compiling any other
--  kernel.  Let's go through the steps, using 2.4.0-prerelease (current
-+  kernel.  Let's go through the steps, using 5.5.1 (current
-   as of this writing) as an example:
- 
- 
--  1. Download the latest UML patch from
--
--     the download page <http://user-mode-linux.sourceforge.net/
--
--     In this example, the file is uml-patch-2.4.0-prerelease.bz2.
--
--
--  2. Download the matching kernel from your favourite kernel mirror,
-+  1. Download the matching kernel from your favourite kernel mirror,
-      such as:
- 
--     ftp://ftp.ca.kernel.org/pub/kernel/v2.4/linux-2.4.0-prerelease.tar.bz2
--     <ftp://ftp.ca.kernel.org/pub/kernel/v2.4/linux-2.4.0-prerelease.tar.bz2>
--     .
-+     wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.5.1.tar.xz
- 
- 
--  3. Make a directory and unpack the kernel into it.
-+  2. Make a directory and unpack the kernel into it.
- 
- 
- 
-@@ -255,31 +246,14 @@
- 
- 
-        host%
--       tar -xzvf linux-2.4.0-prerelease.tar.bz2
--
--
--
--
--
--
--  4. Apply the patch using
--
--
--
--       host%
--       cd ~/uml/linux
--
--
--
--       host%
--       bzcat uml-patch-2.4.0-prerelease.bz2 | patch -p1
-+       tar xvf linux-5.5.1.tar.xz
- 
- 
- 
- 
- 
- 
--  5. Run your favorite config; `make xconfig ARCH=um' is the most
-+  3. Run your favorite config; `make xconfig ARCH=um' is the most
-      convenient.  `make config ARCH=um' and 'make menuconfig ARCH=um'
-      will work as well.  The defaults will give you a useful kernel.  If
-      you want to change something, go ahead, it probably won't hurt
-@@ -293,7 +267,7 @@
- 
- 
- 
--  6. Finish with `make linux ARCH=um': the result is a file called
-+  4. Finish with `make linux ARCH=um': the result is a file called
-      `linux' in the top directory of your source tree.
- 
-   Make sure that you don't build this kernel in /usr/src/linux.  On some
--- 
-2.7.4
+--A..C8.._3321CEA_--
 
