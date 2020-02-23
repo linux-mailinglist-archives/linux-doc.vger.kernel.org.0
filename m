@@ -2,162 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1041D169139
-	for <lists+linux-doc@lfdr.de>; Sat, 22 Feb 2020 19:18:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 820011695A3
+	for <lists+linux-doc@lfdr.de>; Sun, 23 Feb 2020 04:46:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726701AbgBVSSG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 22 Feb 2020 13:18:06 -0500
-Received: from ivanoab7.miniserver.com ([37.128.132.42]:44742 "EHLO
-        www.kot-begemot.co.uk" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726550AbgBVSSG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Feb 2020 13:18:06 -0500
-Received: from tun252.jain.kot-begemot.co.uk ([192.168.18.6] helo=jain.kot-begemot.co.uk)
-        by www.kot-begemot.co.uk with esmtps (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.92)
-        (envelope-from <anton.ivanov@cambridgegreys.com>)
-        id 1j5ZLl-0006OE-Ua; Sat, 22 Feb 2020 18:18:02 +0000
-Received: from [151.251.251.9] (helo=[192.168.14.3])
-        by jain.kot-begemot.co.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.92)
-        (envelope-from <anton.ivanov@cambridgegreys.com>)
-        id 1j5ZLj-0005tN-3P; Sat, 22 Feb 2020 18:18:01 +0000
-Subject: Re: [PATCH] Documentation: update UserModeLinux-HOWTO.txt
-To:     Manbing <manbing3@gmail.com>, Jeff Dike <jdike@addtoit.com>,
-        Richard Weinberger <richard@nod.at>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-um@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <1582391968-3960-1-git-send-email-manbing3@gmail.com>
-From:   Anton Ivanov <anton.ivanov@cambridgegreys.com>
-Organization: Cambridge Greys Limited
-Message-ID: <9e8a47ca-bc82-496c-dc32-a5cde0d26fe9@cambridgegreys.com>
-Date:   Sat, 22 Feb 2020 18:17:56 +0000
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+        id S1727163AbgBWDph (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 22 Feb 2020 22:45:37 -0500
+Received: from new4-smtp.messagingengine.com ([66.111.4.230]:35585 "EHLO
+        new4-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726884AbgBWDpg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 22 Feb 2020 22:45:36 -0500
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+        by mailnew.nyi.internal (Postfix) with ESMTP id C7E016A20;
+        Sat, 22 Feb 2020 22:45:35 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute5.internal (MEProxy); Sat, 22 Feb 2020 22:45:35 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
+        from:to:cc:subject:date:message-id:mime-version
+        :content-transfer-encoding; s=fm2; bh=JMfR+VrrDoBk0uiOZlbWJKwHPD
+        wLyBQJby+91WZGxwo=; b=N15Z7jSUHNbz+mOHEHh9vOf++wuuoKnB3PsgyLkvBC
+        Jgd/3kRocYSbOQo6xAfqnqIV6K+B6EFoN4p95GFDrHgwTkCRVxQbYrB1p/xKhAuP
+        A2jZDHH3jNATzObmEqMAPXVIf9OptXQM2P3xIBPsnEclURSOD9cR0XezUlYxOMpb
+        AWQJJsa+dTYzLFD2tMybJg7yuHssBeM7mEKDUJSLZCT4v/+bH2px4G8sWQqppksS
+        QRfZ06pCUHh1lUrfEr4fsYjTWCALrwWNP167atO547OnzalTGBEFoE62g2LMfDfs
+        ZfJcrkxRX6Hu0RQjCIsfxnBv8tBJaKw/AzC0G2pCyc4A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:date:from
+        :message-id:mime-version:subject:to:x-me-proxy:x-me-proxy
+        :x-me-sender:x-me-sender:x-sasl-enc; s=fm2; bh=JMfR+VrrDoBk0uiOZ
+        lbWJKwHPDwLyBQJby+91WZGxwo=; b=ViTn650G/ITqnEZaxdRRq1Px708Tpx7IL
+        6rIFKsUtxC/91d7eYk8XJyJ7h3oYHtnwQcM6QqbA18vNEC8Or1Pcdzja1MWoEjpZ
+        0eV7iTjE4nNc4Iocb+nA7nb2AHc/xOcIDv050uf0kNCg4183CQzlreRCGmh2GAqW
+        vFViFctcOAzgtJ+O32qHcikV56OMKCYXcTOvZ8DSKtFCXWx+hdx29PQk6b0FfV9N
+        4LeUWQt4wagG1FVMh2PkDiRwaSMIg/GAp+BIJC3D/qIsIHw4GXQSEBVi6Z3b8lsl
+        5WySNwkpwWoKvf9fMBL0M4uSWguBeXDdq7dp/db3SdANrCmnKOGBw==
+X-ME-Sender: <xms:XvVRXsEGLApsGVhP9X0Uvwv0ihw2IEdDB3YOYxcXos1Vx-8BIZZR5w>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedrkeejgdeitdcutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefhvffufffkofgggfestdekredtredttdenucfhrhhomhepufgrmhhuvghlucfj
+    ohhllhgrnhguuceoshgrmhhuvghlsehshhholhhlrghnugdrohhrgheqnecukfhppeejtd
+    drudefhedrudegkedrudehudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhep
+    mhgrihhlfhhrohhmpehsrghmuhgvlhesshhhohhllhgrnhgurdhorhhg
+X-ME-Proxy: <xmx:XvVRXpIaccIq6yUpwks2VERhBIKwEPRyJAzXCLcaWaA9AVUS3CF99g>
+    <xmx:XvVRXvPb7NRIuARAiPqP49vSipDB_z-4we1CTrA-MYDdKyXD98o6IQ>
+    <xmx:XvVRXhlUVGjXJO3xaPjeBqm07zAIWCt7altd8e8jjp1JYLHbJUTw-w>
+    <xmx:X_VRXvD5uUkrC7iwE2GgfU6duBgXHVk6qB_NtBHs1bbcSUKofbkOdQ>
+Received: from titanium.stl.sholland.net (70-135-148-151.lightspeed.stlsmo.sbcglobal.net [70.135.148.151])
+        by mail.messagingengine.com (Postfix) with ESMTPA id F27D83060BD1;
+        Sat, 22 Feb 2020 22:45:33 -0500 (EST)
+From:   Samuel Holland <samuel@sholland.org>
+To:     Mark Brown <broonie@kernel.org>,
+        Liam Girdwood <lgirdwood@gmail.com>,
+        Jaroslav Kysela <perex@perex.cz>,
+        Takashi Iwai <tiwai@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jerome Brunet <jbrunet@baylibre.com>
+Cc:     Ondrej Jirman <megous@megous.com>, alsa-devel@alsa-project.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Samuel Holland <samuel@sholland.org>
+Subject: [PATCH v3 0/3] simple-audio-card codec2codec support
+Date:   Sat, 22 Feb 2020 21:45:30 -0600
+Message-Id: <20200223034533.1035-1-samuel@sholland.org>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-In-Reply-To: <1582391968-3960-1-git-send-email-manbing3@gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Spam-Score: -0.7
-X-Spam-Score: -0.7
-X-Clacks-Overhead: GNU Terry Pratchett
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+We are currently using simple-audio-card on the Allwinner A64 SoC.
+The digital audio codec there (sun8i-codec) has 3 AIFs, one each for the
+CPU, the modem, and Bluetooth. Adding support for the secondary AIFs
+requires adding codec2codec DAI links.
 
+Since the modem and bt-sco codec DAI drivers only have one set of
+possible PCM parameters (namely, 8kHz mono S16LE), there's no real
+need for a machine driver to specify the DAI link configuration. The
+parameters for these "simple" DAI links can be chosen automatically.
 
-On 22/02/2020 17:19, Manbing wrote:
-> Original content is obsolete. Which is based on kernel 2.4.0-prerelease.
-> Updating content according to kernel 5.5.1.
-> 
-> Signed-off-by: Manbing <manbing3@gmail.com>
-> ---
->   Documentation/virt/uml/UserModeLinux-HOWTO.txt | 42 +++++---------------------
->   1 file changed, 8 insertions(+), 34 deletions(-)
-> 
-> diff --git a/Documentation/virt/uml/UserModeLinux-HOWTO.txt b/Documentation/virt/uml/UserModeLinux-HOWTO.txt
-> index 87b80f5..08ee28d 100644
-> --- a/Documentation/virt/uml/UserModeLinux-HOWTO.txt
-> +++ b/Documentation/virt/uml/UserModeLinux-HOWTO.txt
-> @@ -1,6 +1,6 @@
->     User Mode Linux HOWTO
->     User Mode Linux Core Team
-> -  Mon Nov 18 14:16:16 EST 2002
-> +  Mon Feb 10 08:27:24 EST 2020
->   
->     This document describes the use and abuse of Jeff Dike's User Mode
->     Linux: a port of the Linux kernel as a normal Intel Linux process.
-> @@ -215,26 +215,17 @@
->   
->   
->     Compiling the user mode kernel is just like compiling any other
-> -  kernel.  Let's go through the steps, using 2.4.0-prerelease (current
-> +  kernel.  Let's go through the steps, using 5.5.1 (current
->     as of this writing) as an example:
->   
->   
-> -  1. Download the latest UML patch from
-> -
-> -     the download page <http://user-mode-linux.sourceforge.net/
-> -
-> -     In this example, the file is uml-patch-2.4.0-prerelease.bz2.
-> -
-> -
-> -  2. Download the matching kernel from your favourite kernel mirror,
-> +  1. Download the matching kernel from your favourite kernel mirror,
->        such as:
->   
-> -     ftp://ftp.ca.kernel.org/pub/kernel/v2.4/linux-2.4.0-prerelease.tar.bz2
-> -     <ftp://ftp.ca.kernel.org/pub/kernel/v2.4/linux-2.4.0-prerelease.tar.bz2>
-> -     .
-> +     wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.5.1.tar.xz
->   
->   
-> -  3. Make a directory and unpack the kernel into it.
-> +  2. Make a directory and unpack the kernel into it.
->   
->   
->   
-> @@ -255,31 +246,14 @@
->   
->   
->          host%
-> -       tar -xzvf linux-2.4.0-prerelease.tar.bz2
-> -
-> -
-> -
-> -
-> -
-> -
-> -  4. Apply the patch using
-> -
-> -
-> -
-> -       host%
-> -       cd ~/uml/linux
-> -
-> -
-> -
-> -       host%
-> -       bzcat uml-patch-2.4.0-prerelease.bz2 | patch -p1
-> +       tar xvf linux-5.5.1.tar.xz
->   
->   
->   
->   
->   
->   
-> -  5. Run your favorite config; `make xconfig ARCH=um' is the most
-> +  3. Run your favorite config; `make xconfig ARCH=um' is the most
->        convenient.  `make config ARCH=um' and 'make menuconfig ARCH=um'
->        will work as well.  The defaults will give you a useful kernel.  If
->        you want to change something, go ahead, it probably won't hurt
-> @@ -293,7 +267,7 @@
->   
->   
->   
-> -  6. Finish with `make linux ARCH=um': the result is a file called
-> +  4. Finish with `make linux ARCH=um': the result is a file called
->        `linux' in the top directory of your source tree.
->   
->     Make sure that you don't build this kernel in /usr/src/linux.  On some
-> 
+This series adds codec2codec DAI link support to simple-audio-card.
+Codec to codec links are automatically detected when all DAIs in the
+link belong to codec components.
 
-I am rewriting the whole thing at the moment.
+I tried to reuse as much code as possible, so the first two patches
+refactor a couple of helper functions to be more generic.
 
-I will publish the finished sections for review at some point during the 
-coming week.
+The last patch adds the new feature and its documentation.
 
-It needs to be rewritten from scratch, fixing a few things like this is 
-not enough.
+Changes in v3:
+  - Update use of for_each_rtd_components for v5.6
+Changes in v2:
+  - Drop patch 1 as it was merged
+  - Automatically detect codec2codec links instead of using a DT property
 
-Brgds,
+Samuel Holland (3):
+  ALSA: pcm: Add a standalone version of snd_pcm_limit_hw_rates
+  ASoC: pcm: Export parameter intersection logic
+  ASoC: simple-card: Add support for codec2codec DAI links
+
+ Documentation/sound/soc/codec-to-codec.rst |  9 +++-
+ include/sound/pcm.h                        |  9 +++-
+ include/sound/soc.h                        |  3 ++
+ sound/core/pcm_misc.c                      | 18 +++----
+ sound/soc/generic/simple-card-utils.c      | 49 +++++++++++++++++++
+ sound/soc/soc-pcm.c                        | 55 +++++++++++++++-------
+ 6 files changed, 115 insertions(+), 28 deletions(-)
 
 -- 
-Anton R. Ivanov
+2.24.1
 
-Cambridge Greys Limited, England and Wales company No 10273661
-http://www.cambridgegreys.com/
