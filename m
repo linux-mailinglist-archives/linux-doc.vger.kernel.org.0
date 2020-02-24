@@ -2,103 +2,149 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B314B16A7FF
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Feb 2020 15:13:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 71CCF16A822
+	for <lists+linux-doc@lfdr.de>; Mon, 24 Feb 2020 15:16:03 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727796AbgBXONB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Feb 2020 09:13:01 -0500
-Received: from foss.arm.com ([217.140.110.172]:37732 "EHLO foss.arm.com"
+        id S1727489AbgBXOP4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Feb 2020 09:15:56 -0500
+Received: from mail.kernel.org ([198.145.29.99]:33716 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727426AbgBXONA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 24 Feb 2020 09:13:00 -0500
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id AD37530E;
-        Mon, 24 Feb 2020 06:12:59 -0800 (PST)
-Received: from e108754-lin.cambridge.arm.com (unknown [10.1.198.53])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 6090F3F534;
-        Mon, 24 Feb 2020 06:12:57 -0800 (PST)
-From:   Ionela Voinescu <ionela.voinescu@arm.com>
-To:     catalin.marinas@arm.com, will@kernel.org, mark.rutland@arm.com,
-        maz@kernel.org, suzuki.poulose@arm.com, sudeep.holla@arm.com,
-        lukasz.luba@arm.com, valentin.schneider@arm.com,
-        dietmar.eggemann@arm.com, rjw@rjwysocki.net,
-        ionela.voinescu@arm.com
-Cc:     peterz@infradead.org, mingo@redhat.com, vincent.guittot@linaro.org,
-        viresh.kumar@linaro.org, linux-arm-kernel@lists.infradead.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-pm@vger.kernel.org
-Subject: [PATCH v4 7/7] clocksource/drivers/arm_arch_timer: validate arch_timer_rate
-Date:   Mon, 24 Feb 2020 14:11:42 +0000
-Message-Id: <20200224141142.25445-8-ionela.voinescu@arm.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200224141142.25445-1-ionela.voinescu@arm.com>
-References: <20200224141142.25445-1-ionela.voinescu@arm.com>
+        id S1727581AbgBXOPz (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 24 Feb 2020 09:15:55 -0500
+Received: from localhost (52.sub-174-234-140.myvzw.com [174.234.140.52])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id B01D520880;
+        Mon, 24 Feb 2020 14:15:53 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1582553754;
+        bh=XCz98vLZW6w/xNhdXjYLn54ZixK2JilGaitOtPGmMvs=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:From;
+        b=CiqJ30OyI8S16FM0s04k11u8hdvW/ESmAR0LgjcOX3sDn0jmkQnhIKAK+66JUKaJl
+         TcnQ17I7B1cjisYZGQP23ile5qHfOKb+aY2TPcwFmbrG7ppVrUmQOJ4ZHd3a3NdLGg
+         Z+FB1pzImqT5cmXjYfSJSAMfBWz1JpYVsppB54z8=
+Date:   Mon, 24 Feb 2020 08:15:51 -0600
+From:   Bjorn Helgaas <helgaas@kernel.org>
+To:     Stanislav Spassov <stanspas@amazon.com>
+Cc:     linux-pci@vger.kernel.org, Stanislav Spassov <stanspas@amazon.de>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jan H =?iso-8859-1?Q?=2E_Sch=F6nherr?= <jschoenh@amazon.de>,
+        Wei Wang <wawei@amazon.de>, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org, Ashok Raj <ashok.raj@intel.com>,
+        Alex Williamson <alex.williamson@redhat.com>,
+        Sinan Kaya <okaya@kernel.org>, Rajat Jain <rajatja@google.com>
+Subject: Re: [PATCH 1/3] PCI: Make PCIE_RESET_READY_POLL_MS configurable
+Message-ID: <20200224141551.GA217704@google.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200223122057.6504-2-stanspas@amazon.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Using an arch timer with a frequency of less than 1MHz can potentially
-result in incorrect functionality in systems that assume a reasonable
-rate of the arch timer of 1 to 50MHz, described as typical in the
-architecture specification.
+[+cc Ashok, Alex, Sinan, Rajat]
 
-Therefore, warn if the arch timer rate is below 1MHz, which is
-considered atypical and worth emphasizing.
+On Sun, Feb 23, 2020 at 01:20:55PM +0100, Stanislav Spassov wrote:
+> From: Wei Wang <wawei@amazon.de>
+> 
+> The resonable value for the maximum time to wait for a PCI device to be
+> ready after reset varies depending on the platform and the reliability
+> of its set of devices.
 
-Signed-off-by: Ionela Voinescu <ionela.voinescu@arm.com>
-Suggested-by: Valentin Schneider <valentin.schneider@arm.com>
-Acked-by: Marc Zyngier <maz@kernel.org>
-Cc: Mark Rutland <mark.rutland@arm.com>
-Cc: Marc Zyngier <maz@kernel.org>
----
- drivers/clocksource/arm_arch_timer.c | 18 +++++++++++++++---
- 1 file changed, 15 insertions(+), 3 deletions(-)
+There are several mechanisms in the spec for reducing these times,
+e.g., Readiness Notifications (PCIe r5.0, sec 6.23), the Readiness
+Time Reporting capability (sec 7.9.17), and ACPI _DSM methods (PCI
+Firmware Spec r3.2, sec 4.6.8, 4.6.9).
 
-diff --git a/drivers/clocksource/arm_arch_timer.c b/drivers/clocksource/arm_arch_timer.c
-index 9a5464c625b4..4faa930eabf8 100644
---- a/drivers/clocksource/arm_arch_timer.c
-+++ b/drivers/clocksource/arm_arch_timer.c
-@@ -885,6 +885,17 @@ static int arch_timer_starting_cpu(unsigned int cpu)
- 	return 0;
- }
- 
-+static int validate_timer_rate(void)
-+{
-+	if (!arch_timer_rate)
-+		return -EINVAL;
-+
-+	/* Arch timer frequency < 1MHz can cause trouble */
-+	WARN_ON(arch_timer_rate < 1000000);
-+
-+	return 0;
-+}
-+
- /*
-  * For historical reasons, when probing with DT we use whichever (non-zero)
-  * rate was probed first, and don't verify that others match. If the first node
-@@ -900,7 +911,7 @@ static void arch_timer_of_configure_rate(u32 rate, struct device_node *np)
- 		arch_timer_rate = rate;
- 
- 	/* Check the timer frequency. */
--	if (arch_timer_rate == 0)
-+	if (validate_timer_rate())
- 		pr_warn("frequency not available\n");
- }
- 
-@@ -1594,9 +1605,10 @@ static int __init arch_timer_acpi_init(struct acpi_table_header *table)
- 	 * CNTFRQ value. This *must* be correct.
- 	 */
- 	arch_timer_rate = arch_timer_get_cntfrq();
--	if (!arch_timer_rate) {
-+	ret = validate_timer_rate();
-+	if (ret) {
- 		pr_err(FW_BUG "frequency not available.\n");
--		return -EINVAL;
-+		return ret;
- 	}
- 
- 	arch_timer_uses_ppi = arch_timer_select_ppi();
--- 
-2.17.1
+I would much rather use standard mechanisms like those instead of
+adding kernel parameters.  A user would have to use trial and error
+to figure out the value to use with a parameter like this, and that
+doesn't feel like a robust approach.
 
+> Signed-off-by: Wei Wang <wawei@amazon.de>
+> Signed-off-by: Stanislav Spassov <stanspas@amazon.de>
+> ---
+>  .../admin-guide/kernel-parameters.txt         |  5 +++++
+>  drivers/pci/pci.c                             | 22 ++++++++++++++-----
+>  2 files changed, 22 insertions(+), 5 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> index dbc22d684627..5e4dade9acc8 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -3653,6 +3653,11 @@
+>  		nomsi	Do not use MSI for native PCIe PME signaling (this makes
+>  			all PCIe root ports use INTx for all services).
+>  
+> +	pcie_reset_ready_poll_ms= [PCI,PCIE]
+> +			Specifies timeout for PCI(e) device readiness polling
+> +			after device reset (in milliseconds).
+> +			Default: 60000 = 60 seconds
+> +
+>  	pcmv=		[HW,PCMCIA] BadgePAD 4
+>  
+>  	pd_ignore_unused
+> diff --git a/drivers/pci/pci.c b/drivers/pci/pci.c
+> index d828ca835a98..db9b58ab6c68 100644
+> --- a/drivers/pci/pci.c
+> +++ b/drivers/pci/pci.c
+> @@ -149,7 +149,19 @@ static int __init pcie_port_pm_setup(char *str)
+>  __setup("pcie_port_pm=", pcie_port_pm_setup);
+>  
+>  /* Time to wait after a reset for device to become responsive */
+> -#define PCIE_RESET_READY_POLL_MS 60000
+> +#define PCIE_RESET_READY_POLL_MS_DEFAULT 60000
+> +
+> +int __read_mostly pcie_reset_ready_poll_ms = PCIE_RESET_READY_POLL_MS_DEFAULT;
+> +
+> +static int __init pcie_reset_ready_poll_ms_setup(char *str)
+> +{
+> +	int timeout;
+> +
+> +	if (!kstrtoint(str, 0, &timeout))
+> +		pcie_reset_ready_poll_ms = timeout;
+> +	return 1;
+> +}
+> +__setup("pcie_reset_ready_poll_ms=", pcie_reset_ready_poll_ms_setup);
+>  
+>  /**
+>   * pci_bus_max_busnr - returns maximum PCI bus number of given bus' children
+> @@ -4506,7 +4518,7 @@ int pcie_flr(struct pci_dev *dev)
+>  	 */
+>  	msleep(100);
+>  
+> -	return pci_dev_wait(dev, "FLR", PCIE_RESET_READY_POLL_MS);
+> +	return pci_dev_wait(dev, "FLR", pcie_reset_ready_poll_ms);
+>  }
+>  EXPORT_SYMBOL_GPL(pcie_flr);
+>  
+> @@ -4551,7 +4563,7 @@ static int pci_af_flr(struct pci_dev *dev, int probe)
+>  	 */
+>  	msleep(100);
+>  
+> -	return pci_dev_wait(dev, "AF_FLR", PCIE_RESET_READY_POLL_MS);
+> +	return pci_dev_wait(dev, "AF_FLR", pcie_reset_ready_poll_ms);
+>  }
+>  
+>  /**
+> @@ -4596,7 +4608,7 @@ static int pci_pm_reset(struct pci_dev *dev, int probe)
+>  	pci_write_config_word(dev, dev->pm_cap + PCI_PM_CTRL, csr);
+>  	pci_dev_d3_sleep(dev);
+>  
+> -	return pci_dev_wait(dev, "PM D3hot->D0", PCIE_RESET_READY_POLL_MS);
+> +	return pci_dev_wait(dev, "PM D3hot->D0", pcie_reset_ready_poll_ms);
+>  }
+>  
+>  /**
+> @@ -4826,7 +4838,7 @@ int pci_bridge_secondary_bus_reset(struct pci_dev *dev)
+>  {
+>  	pcibios_reset_secondary_bus(dev);
+>  
+> -	return pci_dev_wait(dev, "bus reset", PCIE_RESET_READY_POLL_MS);
+> +	return pci_dev_wait(dev, "bus reset", pcie_reset_ready_poll_ms);
+>  }
+>  EXPORT_SYMBOL_GPL(pci_bridge_secondary_bus_reset);
