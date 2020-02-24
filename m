@@ -2,112 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 87EE516B20C
-	for <lists+linux-doc@lfdr.de>; Mon, 24 Feb 2020 22:20:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 275F516B569
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Feb 2020 00:27:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726651AbgBXVUe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Feb 2020 16:20:34 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:57134 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726722AbgBXVUe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Feb 2020 16:20:34 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
-        Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:
-        Subject:Sender:Reply-To:Content-ID:Content-Description;
-        bh=fkY214yexK+t/F1pQbBsYjUG330mJqrxeclx5N+mhSA=; b=u5FEQU6iNG9BXLbfGM9AoiY4eL
-        9q1wRwvkvd8uW7q+TyHg3zcHSGnN2QHfRjDIF4Lw3z+vZBoQXVukEHGV06OegODzjJWbFTdD8d85c
-        ZUrdecPw1KZ76W1qRA5cOVqDNV5qGkz/7N5sXCbV3QsQZNauW98kr0ae9e3vj+Km4liWGw8YNnaAP
-        ieABjJOuHEB8XWJ2WkkLAxcPtl5sSwfag0SKdAhzgrZsqaXCeMr24XQRYytF1176ZZg4VJe23KUka
-        PV08s8xS+7ibt5AZCUpLg79NCXA6ZoGEXYvjo+ISMWtHmRgqQCc87xzIFeuewYR+88RMFJxsKrEJk
-        ce0/30YA==;
-Received: from [2601:1c0:6280:3f0:897c:6038:c71d:ecac]
-        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1j6L9U-0007h1-9o; Mon, 24 Feb 2020 21:20:32 +0000
-Subject: Re: [PATCH] Documentation/llvm: add documentation on building w/
- Clang/LLVM
-To:     Nick Desaulniers <ndesaulniers@google.com>, corbet@lwn.net,
-        masahiroy@kernel.org
-Cc:     Kees Cook <keescook@chromium.org>,
-        Nathan Chancellor <natechancellor@gmail.com>,
-        Michal Marek <michal.lkml@markovi.net>,
-        linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, clang-built-linux@googlegroups.com
-References: <20200224174129.2664-1-ndesaulniers@google.com>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <ab366833-3f9f-0311-3c06-d48b7dc9655f@infradead.org>
-Date:   Mon, 24 Feb 2020 13:20:30 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.4.1
-MIME-Version: 1.0
-In-Reply-To: <20200224174129.2664-1-ndesaulniers@google.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+        id S1728524AbgBXX1F (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Feb 2020 18:27:05 -0500
+Received: from mail-wm1-f66.google.com ([209.85.128.66]:50284 "EHLO
+        mail-wm1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727976AbgBXX1D (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Feb 2020 18:27:03 -0500
+Received: by mail-wm1-f66.google.com with SMTP id a5so1111953wmb.0;
+        Mon, 24 Feb 2020 15:27:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=8NVlvzE3Tm6P+gLHVWoR+a8t0nwDLWG0p5mfxUKacM8=;
+        b=RsqzdoQe89nHPyKET3qT33aLg5yAxbgQswsmIDvzPvSW7D6bHtfMRpm0nbYYuP4Gtt
+         B9UsEgE7n86ChF4Dm6CIHlaSOhB5/4iMGOzhwM49ofX6YupnwF+7Qvhl4TF4+CiJr4S4
+         gLAuRlDJS6BS6BWZVUrvXnLV2pIPM2RinXRL5M1SyZqy5zoNxw4qPmPH1IXpoy0Avgcd
+         JMoKZKKULwgWohALQ2Y4RnbO6yAUZ6ozphw0I7QDihAmUW7SiDK56UfXHlbjAOsdsiuF
+         ipYwR+jDXaNnHyRfHBAu5Hs5SLJZaactWOr2h572/bjV0WUAH+P8DGZ6D9Y0pXgz8coa
+         rg6Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=8NVlvzE3Tm6P+gLHVWoR+a8t0nwDLWG0p5mfxUKacM8=;
+        b=D5iotJNP3zLFJQ0xnxCNUUm7xYMcO2lssrHNCDQhO1+7gW6DYeSVdIX1Mb7fN+IF9G
+         xIJ9xXeLNUvJkXSe1089NcnaxRPXhE8aVRtkMBTgYvaeDeAQqorB98bmRoN4JVPVDIAO
+         ix5Ty7O0kIejFyiddP+5y4qaZZv+RwAt+v7BxeMPTb/+wjVBNk2R044Et9/2+q4ZTRA4
+         uX7NEODcmFEfSCEh1+l6VEx9DibUxo1+EHlnK2DiwjGm3VkL2EfJzYjM9Y7/0EFz5+de
+         gSGZKDsSDyZ564H2uAtsZgdsCUwNp8DAx1w/Az150yjRV48TyKzGi+G+3SlfymZ8e0sJ
+         n5yA==
+X-Gm-Message-State: APjAAAVkd/hCDxzYCr35S+rQ0kEcHpDkhj3ZPHMxU2Pk5FtOTEITfkax
+        JRm99z97G+MXFJwVKAjeeYo=
+X-Google-Smtp-Source: APXvYqwLkmHUUFun+m9+BvTzVsQnD+kGQ4DuAT8WzcyXQYxIMaZPQS9XVg5KG8cUpMT9brJIkdK1/w==
+X-Received: by 2002:a1c:a952:: with SMTP id s79mr1369235wme.83.1582586820935;
+        Mon, 24 Feb 2020 15:27:00 -0800 (PST)
+Received: from buildbot.home (217-149-167-12.nat.highway.telekom.at. [217.149.167.12])
+        by smtp.googlemail.com with ESMTPSA id g25sm1971099wmh.3.2020.02.24.15.26.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Feb 2020 15:27:00 -0800 (PST)
+From:   Franz Forstmayr <forstmayr.franz@gmail.com>
+To:     forstmayr.franz@gmail.com
+Cc:     Guenter Roeck <linux@roeck-us.net>,
+        Jean Delvare <jdelvare@suse.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH 1/3] dt-bindings: hwmon: Add compatible for ti,ina260
+Date:   Tue, 25 Feb 2020 00:26:45 +0100
+Message-Id: <20200224232647.29213-1-forstmayr.franz@gmail.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/24/20 9:41 AM, Nick Desaulniers wrote:
-> Added to kbuild documentation. Provides more official info on building
-> kernels with Clang and LLVM than our wiki.
-> 
-> Suggested-by: Kees Cook <keescook@chromium.org>
-> Reviewed-by: Nathan Chancellor <natechancellor@gmail.com>
-> Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
-> ---
->  Documentation/kbuild/index.rst |  1 +
->  Documentation/kbuild/llvm.rst  | 80 ++++++++++++++++++++++++++++++++++
->  2 files changed, 81 insertions(+)
->  create mode 100644 Documentation/kbuild/llvm.rst
-> 
-> diff --git a/Documentation/kbuild/index.rst b/Documentation/kbuild/index.rst
-> index 0f144fad99a6..3882bd5f7728 100644
-> --- a/Documentation/kbuild/index.rst
-> +++ b/Documentation/kbuild/index.rst
-> @@ -19,6 +19,7 @@ Kernel Build System
->  
->      issues
->      reproducible-builds
-> +    llvm
->  
->  .. only::  subproject and html
->  
-> diff --git a/Documentation/kbuild/llvm.rst b/Documentation/kbuild/llvm.rst
-> new file mode 100644
-> index 000000000000..68ae022aebc0
-> --- /dev/null
-> +++ b/Documentation/kbuild/llvm.rst
-> @@ -0,0 +1,80 @@
-> +==============================
-> +Building Linux with Clang/LLVM
-> +==============================
-> +
-> +This document covers how to build the Linux kernel with Clang and LLVM
-> +utilities.
-> +
-> +About
-> +-----
-> +
-> +The Linux kernel has always traditionally been compiled with GNU toolchains
-> +such as GCC and binutils. On going work has allowed for `Clang
+Add initial support for power/current monitor INA260
 
-                             Ongoing
+Signed-off-by: Franz Forstmayr <forstmayr.franz@gmail.com>
+---
+ Documentation/devicetree/bindings/hwmon/ina2xx.txt | 1 +
+ 1 file changed, 1 insertion(+)
 
-> +<https://clang.llvm.org/>`_ and `LLVM <https://llvm.org/>`_ utilities to be
-> +used as viable substitutes. Distributions such as `Android
-> +<https://www.android.com/>`_, `ChromeOS
-> +<https://www.chromium.org/chromium-os>`_, and `OpenMandriva
-> +<https://www.openmandriva.org/>`_ use Clang built kernels.  `LLVM is a
-> +collection of toolchain components implemented in terms of C++ objects
-> +<https://www.aosabook.org/en/llvm.html>`_. Clang is a front-end to LLVM that
-> +supports C and the GNU C extensions required by the kernel, and is pronounced
-> +"klang," not "see-lang."
-
-
-Thanks for the info.
-
+diff --git a/Documentation/devicetree/bindings/hwmon/ina2xx.txt b/Documentation/devicetree/bindings/hwmon/ina2xx.txt
+index 02af0d94e921..92983a224109 100644
+--- a/Documentation/devicetree/bindings/hwmon/ina2xx.txt
++++ b/Documentation/devicetree/bindings/hwmon/ina2xx.txt
+@@ -8,6 +8,7 @@ Required properties:
+ 	- "ti,ina226" for ina226
+ 	- "ti,ina230" for ina230
+ 	- "ti,ina231" for ina231
++	- "ti,ina260" for ina260
+ - reg: I2C address
+ 
+ Optional properties:
 -- 
-~Randy
+2.17.1
 
