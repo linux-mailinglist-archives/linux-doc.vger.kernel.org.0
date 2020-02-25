@@ -2,112 +2,188 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AD86B16B734
-	for <lists+linux-doc@lfdr.de>; Tue, 25 Feb 2020 02:34:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A0A1A16B862
+	for <lists+linux-doc@lfdr.de>; Tue, 25 Feb 2020 05:08:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728226AbgBYBe6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 24 Feb 2020 20:34:58 -0500
-Received: from mail-io1-f68.google.com ([209.85.166.68]:44630 "EHLO
-        mail-io1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728011AbgBYBe6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Feb 2020 20:34:58 -0500
-Received: by mail-io1-f68.google.com with SMTP id z16so625752iod.11;
-        Mon, 24 Feb 2020 17:34:57 -0800 (PST)
+        id S1728880AbgBYEI3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 24 Feb 2020 23:08:29 -0500
+Received: from mail-pg1-f195.google.com ([209.85.215.195]:35292 "EHLO
+        mail-pg1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728871AbgBYEI3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 24 Feb 2020 23:08:29 -0500
+Received: by mail-pg1-f195.google.com with SMTP id 7so4136336pgr.2
+        for <linux-doc@vger.kernel.org>; Mon, 24 Feb 2020 20:08:28 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=sMy0D4t4BEz+I62Pa6Ixc/TtcpxG23tmRPXSx/fbdfA=;
-        b=Bxex5n5ihE8BOt/P+mikL+dJSM3ex/S8YWwgHIsDlsA1WPxMfiLLNQGYgzQogWVLQn
-         Gi7ZSTeKYZZE9dNXK45XteWf1sBSrKMWxweXs53uvh2YfipDvEG6GyFIYNXq+0Se+E6l
-         RjxvD+dSSShWAOWtQL7HoSlP3H0NUzgLafBfHVo//WYWHMqbWo8rwo8JzNda95FOSRYz
-         2e4TCvUlic4ZNMC1qQrenVWc/0FFsLcRHkfqLD950fON+K3S630px2DclwsTxFQR5ARz
-         b2EVTue95HQS4eG3crkYAbuku93JWC1wRnmABjTaihH3XOavNvL1SzCvxxI4y0qVp63d
-         wggw==
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=hsmwTWPSD0szPQ7rhutWKLwR4ldbSWtt8mN+lR7f3aU=;
+        b=MXlDVQn4uxGfZrKHYHdu9vVDcDBZL3lMcLcfkDncLFD0zglrIbydVAGMBV8Agofb0n
+         zkD60KvQ1pCfz2obp+2lXF8jOXuSGqU5dzcfEw46uZTOuXz4r7clGnU0mWjfozvjJ1O6
+         IpVneKjih9wEx7/pBxWAh0Ykd2vjNwYiRAEEo=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=sMy0D4t4BEz+I62Pa6Ixc/TtcpxG23tmRPXSx/fbdfA=;
-        b=K2MrbAtrXnu/dxPma+ZSoj02JZmYyZvxVkrBx7B5XZyyy8SvNAq70o+mWvx/I1PRsM
-         dfrLzGUU5/x7/u/l21hDrg2VopB7wAFGNiMXzxy/LMdtLISuQJRlG3Y41e2FCxI1OdTb
-         p2vYQGEd7JXjni8k97gQmMu5xFEURbPFpUEezQM7Fyy+hVkvDSGcL4F1S0QPneegUHpd
-         a1rHAFnJR2y/F8lJZUMp5BhL2Dos0NNcLWYAAqAReIOk8gONVtEQwsDcymKdnfdxUtwF
-         osnKflmoMp8T7O8pbEn+nPSoFHGggNDaOCUIkBFXoytyCW21mJPPKLjKMlS3FrSB3ey+
-         BzHg==
-X-Gm-Message-State: APjAAAXhvWSv/A+5e/Gsru4YVTCJrm+GAPbeaGImKd/uhAkk728ns9qR
-        YtyMNC7BkwiGzyZEZaPn5eA=
-X-Google-Smtp-Source: APXvYqx7ANfXYY3vlxOfYrESs9/zK1XANM1oYSy6o5tVQHylmMMevdRVd+EiNYUXGYDFn1Lfvd/Zmg==
-X-Received: by 2002:a6b:1490:: with SMTP id 138mr3357877iou.8.1582594496980;
-        Mon, 24 Feb 2020 17:34:56 -0800 (PST)
-Received: from timdesk.hsd1.ca.comcast.net ([108.165.36.110])
-        by smtp.gmail.com with ESMTPSA id b1sm4888798ilc.33.2020.02.24.17.34.56
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-        Mon, 24 Feb 2020 17:34:56 -0800 (PST)
-From:   tbird20d@gmail.com
-X-Google-Original-From: tim.bird@sony.com
-To:     mchehab@kernel.org, corbet@lwn.net
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        tbird20d@gmail.com, tim.bird@sony.com
-Subject: [PATCH] scripts/sphinx-pre-install: add '-p python3' to virtualenv
-Date:   Mon, 24 Feb 2020 18:34:41 -0700
-Message-Id: <1582594481-23221-1-git-send-email-tim.bird@sony.com>
-X-Mailer: git-send-email 2.1.4
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=hsmwTWPSD0szPQ7rhutWKLwR4ldbSWtt8mN+lR7f3aU=;
+        b=WzcmiC5cRS7BeYhFtSvgtg0okx3vJimxQeqnRmKGi6i0r4Tdzj8ESYdCznhMX10j7a
+         0hh99bK7sBq9uYAaOG2ZKiKIcnTuu/KW8KShSluKuLU0jgv06Fr+72GXqr8HalJThAaw
+         qJbSNq+pH2PP9z3UtBoKqvxgdZ0BzOSNn5+WuxefF0FhipOVjgFMJLVfGHWDlbTnQbHo
+         zacj50Fu2nyppuZAbvjfM6bkSl0w6zdxf8I+w+COq/tGQvNApaM6Hq8BZP1H/lX75ZCt
+         y6R8MB5aRjrABQFKYSvZiEN6jDpBRYRo7Dak5/rmBQ/Zzfwqd/SwaQHfFXCu9GMDMZWm
+         F1wA==
+X-Gm-Message-State: APjAAAXzQZ6SIkDO9wXIPLPQmacwISNoajhbodkthjpAMed+MY5xo1IW
+        48QkRPVTnjdrwQHJuG8lYA3lBw==
+X-Google-Smtp-Source: APXvYqzLSh4qBx7e3y9T7+6B1WtB3BYgqC7e04hpV+b/CjGdlLicTi1+yUxV41DvXvzlMP3W7wKwaA==
+X-Received: by 2002:a63:b515:: with SMTP id y21mr9533512pge.148.1582603708389;
+        Mon, 24 Feb 2020 20:08:28 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id z27sm14758726pfj.107.2020.02.24.20.08.27
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 24 Feb 2020 20:08:27 -0800 (PST)
+Date:   Mon, 24 Feb 2020 20:08:26 -0800
+From:   Kees Cook <keescook@chromium.org>
+To:     Nick Desaulniers <ndesaulniers@google.com>
+Cc:     corbet@lwn.net, masahiroy@kernel.org,
+        Nathan Chancellor <natechancellor@gmail.com>,
+        Michal Marek <michal.lkml@markovi.net>,
+        linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, clang-built-linux@googlegroups.com
+Subject: Re: [PATCH] Documentation/llvm: add documentation on building w/
+ Clang/LLVM
+Message-ID: <202002242003.870E5F80@keescook>
+References: <20200224174129.2664-1-ndesaulniers@google.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200224174129.2664-1-ndesaulniers@google.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Tim Bird <tim.bird@sony.com>
+On Mon, Feb 24, 2020 at 09:41:28AM -0800, Nick Desaulniers wrote:
+> Added to kbuild documentation. Provides more official info on building
+> kernels with Clang and LLVM than our wiki.
+> 
+> Suggested-by: Kees Cook <keescook@chromium.org>
+> Reviewed-by: Nathan Chancellor <natechancellor@gmail.com>
+> Signed-off-by: Nick Desaulniers <ndesaulniers@google.com>
+> ---
+>  Documentation/kbuild/index.rst |  1 +
+>  Documentation/kbuild/llvm.rst  | 80 ++++++++++++++++++++++++++++++++++
+>  2 files changed, 81 insertions(+)
+>  create mode 100644 Documentation/kbuild/llvm.rst
+> 
+> diff --git a/Documentation/kbuild/index.rst b/Documentation/kbuild/index.rst
+> index 0f144fad99a6..3882bd5f7728 100644
+> --- a/Documentation/kbuild/index.rst
+> +++ b/Documentation/kbuild/index.rst
+> @@ -19,6 +19,7 @@ Kernel Build System
+>  
+>      issues
+>      reproducible-builds
+> +    llvm
+>  
+>  .. only::  subproject and html
+>  
+> diff --git a/Documentation/kbuild/llvm.rst b/Documentation/kbuild/llvm.rst
+> new file mode 100644
+> index 000000000000..68ae022aebc0
+> --- /dev/null
+> +++ b/Documentation/kbuild/llvm.rst
+> @@ -0,0 +1,80 @@
+> +==============================
+> +Building Linux with Clang/LLVM
+> +==============================
+> +
+> +This document covers how to build the Linux kernel with Clang and LLVM
+> +utilities.
+> +
+> +About
+> +-----
+> +
+> +The Linux kernel has always traditionally been compiled with GNU toolchains
+> +such as GCC and binutils. On going work has allowed for `Clang
+> +<https://clang.llvm.org/>`_ and `LLVM <https://llvm.org/>`_ utilities to be
+> +used as viable substitutes. Distributions such as `Android
+> +<https://www.android.com/>`_, `ChromeOS
+> +<https://www.chromium.org/chromium-os>`_, and `OpenMandriva
+> +<https://www.openmandriva.org/>`_ use Clang built kernels.  `LLVM is a
+> +collection of toolchain components implemented in terms of C++ objects
+> +<https://www.aosabook.org/en/llvm.html>`_. Clang is a front-end to LLVM that
+> +supports C and the GNU C extensions required by the kernel, and is pronounced
+> +"klang," not "see-lang."
+> +
+> +Clang
+> +-----
+> +
+> +The compiler used can be swapped out via `CC=` command line argument to `make`.
+> +`CC=` should be set when selecting a config and during a build.
+> +
+> +	make CC=clang defconfig
+> +
+> +	make CC=clang
+> +
+> +Cross Compiling
+> +---------------
+> +
+> +A single Clang compiler binary will typically contain all supported backends,
+> +which can help simplify cross compiling.
+> +
+> +	ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- make CC=clang
+> +
+> +`CROSS_COMPILE` is not used to suffix the Clang compiler binary, instead
 
-With Ubuntu 16.04 (and presumably Debian distros of the same age),
-the instructions for setting up a python virtual environment should
-do so with the python 3 interpreter.  On these older distros, the
-default python (and virtualenv command) might be python2 based.
+s/suffix/prefix/
 
-Some of the packages that sphinx relies on are now only available
-for python3.  If you don't specify the python3 interpreter for
-the virtualenv, you get errors when doing the pip installs for
-various packages
+> +`CROSS_COMPILE` is used to set a command line flag: `--target <triple>`. For
+> +example:
+> +
+> +	clang --target aarch64-linux-gnu foo.c
+> +
+> +LLVM Utilities
+> +--------------
+> +
+> +LLVM has substitutes for GNU binutils utilities. These can be invoked as
+> +additional parameters to `make`.
+> +
+> +	make CC=clang AS=clang LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-strip \\
+> +	  OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump OBJSIZE=llvm-objsize \\
+> +	  READELF=llvm-readelf HOSTCC=clang HOSTCXX=clang++ HOSTAR=llvm-ar \\
+> +	  HOSTLD=ld.lld
+> +
+> +Getting Help
+> +------------
+> +
+> +- `Website <https://clangbuiltlinux.github.io/>`_
+> +- `Mailing List <https://groups.google.com/forum/#!forum/clang-built-linux>`_: <clang-built-linux@googlegroups.com>
+> +- `Issue Tracker <https://github.com/ClangBuiltLinux/linux/issues>`_
+> +- IRC: #clangbuiltlinux on chat.freenode.net
+> +- `Telegram <https://t.me/ClangBuiltLinux>`_: @ClangBuiltLinux
+> +- `Wiki <https://github.com/ClangBuiltLinux/linux/wiki>`_
+> +- `Beginner Bugs <https://github.com/ClangBuiltLinux/linux/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue%22>`_
+> +
+> +Getting LLVM
+> +-------------
+> +
+> +- http://releases.llvm.org/download.html
+> +- https://github.com/llvm/llvm-project
+> +- https://llvm.org/docs/GettingStarted.html
+> +- https://llvm.org/docs/CMake.html
+> +- https://apt.llvm.org/
+> +- https://www.archlinux.org/packages/extra/x86_64/llvm/
+> +- https://github.com/ClangBuiltLinux/tc-build
+> +- https://github.com/ClangBuiltLinux/linux/wiki/Building-Clang-from-source
+> +- https://android.googlesource.com/platform/prebuilts/clang/host/linux-x86/
 
-Fix this by adding '-p python3' to the virtualenv recommendation
-line.
+Should this also include an update to Documentation/process/changes.rst
+with the minimum version required? (I would expect this to be "9" for Clang,
+and "11" for ld.lld.)
 
-Signed-off-by: Tim Bird <tim.bird@sony.com>
----
- scripts/sphinx-pre-install | 17 ++++++++++++++++-
- 1 file changed, 16 insertions(+), 1 deletion(-)
+Otherwise, yes, with Randy and Masahiro's suggestions, please consider it:
 
-diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
-index a8f0c00..fa3fb05 100755
---- a/scripts/sphinx-pre-install
-+++ b/scripts/sphinx-pre-install
-@@ -701,11 +701,26 @@ sub check_needs()
- 		} else {
- 			my $rec_activate = "$virtenv_dir/bin/activate";
- 			my $virtualenv = findprog("virtualenv-3");
-+			my $rec_python3 = "";
- 			$virtualenv = findprog("virtualenv-3.5") if (!$virtualenv);
- 			$virtualenv = findprog("virtualenv") if (!$virtualenv);
- 			$virtualenv = "virtualenv" if (!$virtualenv);
- 
--			printf "\t$virtualenv $virtenv_dir\n";
-+			my $rel = "";
-+			if (index($system_release, "Ubuntu") != -1) {
-+				$rel = $1 if ($system_release =~ /Ubuntu\s+(\d+)[.]/);
-+				if ($rel && $rel >= 16) {
-+					$rec_python3 = " -p python3";
-+				}
-+			}
-+			if (index($system_release, "Debian") != -1) {
-+				$rel = $1 if ($system_release =~ /Debian\s+(\d+)/);
-+				if ($rel && $rel >= 7) {
-+					$rec_python3 = " -p python3";
-+				}
-+			}
-+
-+			printf "\t$virtualenv$rec_python3 $virtenv_dir\n";
- 			printf "\t. $rec_activate\n";
- 			printf "\tpip install -r $requirement_file\n";
- 			deactivate_help();
+Reviewed-by: Kees Cook <keescook@chromium.org>
+
 -- 
-2.1.4
-
+Kees Cook
