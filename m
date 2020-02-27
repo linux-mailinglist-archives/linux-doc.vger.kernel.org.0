@@ -2,192 +2,129 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B93911721FB
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Feb 2020 16:14:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 90277172350
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Feb 2020 17:26:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730475AbgB0POh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Feb 2020 10:14:37 -0500
-Received: from mail-wm1-f41.google.com ([209.85.128.41]:55008 "EHLO
-        mail-wm1-f41.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729910AbgB0POh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Feb 2020 10:14:37 -0500
-Received: by mail-wm1-f41.google.com with SMTP id z12so3983465wmi.4
-        for <linux-doc@vger.kernel.org>; Thu, 27 Feb 2020 07:14:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=0dvq0TIvLIhYW6FRHb2k6j4t1FaEUBN90K81y+vKrss=;
-        b=n3dfJoV3D6qtoScNIKFTLoXkidqgBL9BgtF6Y4SweATy7nHjRMGikNNWjPH/JLrt2g
-         5hWx1D+DIFycvH62F1+p8Ie8w8AfTz821Uzb0TAbtnFxUJw+q4URbDYjG84wx8Ue32iE
-         0jb5//mN0QFp334ZGFkDA2WJnMNoHOwcelt+NLw5t55RbTzKMNIkin2cFMv6b5JzWzr0
-         rwbII38y+SkKSK7a/KiX6l882RelEgCAAHH/7LEWEW2K1A2Ni90sUAbwmrIOrlswEP0b
-         A8fpW1MzM+diCyT4l5bhEdp9Q04oS9OUWKS1Ue0/uW8FVdpDrLp9hLcw0443S9oWLpaX
-         Be9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=0dvq0TIvLIhYW6FRHb2k6j4t1FaEUBN90K81y+vKrss=;
-        b=dbB27HC7rkMeIfFJMIk8r2KghKKutQuTOGCKggIZlIuUvGBMa9VS9mokBzxYaMIPGU
-         4hxDCoDE6HwLEEuYOmTwcxKFkzCykVJOJWIXGTgh6xPsz8rhvpZj2icRVnGO6tAk/1kN
-         hzofdwN9Y5Dx8CvwSTRnbgoYqzUIyzEO8CEpyTvu/9AWGrXuykCXctIVp6vPJnldmC3F
-         C/y1op1YzJHLzsEAr1egQs0CdpK/MpLIY5cy1iVpaQKBecrB+ZA813dJ4cHBBqWm4wyi
-         xGygvACZ++BThFVSNTnhOj75UL1YeXX57mSVfPehZL8h37bKeJuZpy1FYcbfhVjqIxMw
-         xtJQ==
-X-Gm-Message-State: APjAAAWL+i4aKVlHevT5mi+iN9bVFHs9Hj8xl3zXw/ZNYkb5wlu81R9Q
-        qopyxxaWY8tSEIZxsiInw2K0uQ==
-X-Google-Smtp-Source: APXvYqzyZ0jyt4lFW5kshD8LLCN+heer9j/vnrZt0b0UOmMwmVFlpTvo+3iTRCXmNrQPH0rFQ8WXmg==
-X-Received: by 2002:a05:600c:149:: with SMTP id w9mr10823wmm.132.1582816473630;
-        Thu, 27 Feb 2020 07:14:33 -0800 (PST)
-Received: from linaro.org ([2a00:23c5:6801:1801:2dc1:e60d:4b1c:70e0])
-        by smtp.gmail.com with ESMTPSA id q12sm8973079wrg.71.2020.02.27.07.14.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 27 Feb 2020 07:14:32 -0800 (PST)
-From:   Mike Leach <mike.leach@linaro.org>
-To:     linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org,
-        linux-doc@vger.kernel.org
-Cc:     mathieu.poirier@linaro.org, suzuki.poulose@arm.com,
-        Mike Leach <mike.leach@linaro.org>
-Subject: [PATCH v5 6/6] coresight: docs: Add information about the topology representations
-Date:   Thu, 27 Feb 2020 15:14:16 +0000
-Message-Id: <20200227151416.14271-7-mike.leach@linaro.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200227151416.14271-1-mike.leach@linaro.org>
-References: <20200227151416.14271-1-mike.leach@linaro.org>
+        id S1730015AbgB0Q0N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Feb 2020 11:26:13 -0500
+Received: from mail.kernel.org ([198.145.29.99]:56792 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729402AbgB0Q0N (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 27 Feb 2020 11:26:13 -0500
+Received: from paulmck-ThinkPad-P72.home (unknown [163.114.132.128])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 3675224697;
+        Thu, 27 Feb 2020 16:26:12 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1582820772;
+        bh=WmU71Lj4UDtNZ82BoefiR89GTcfxg2tFZvzAqtQOSZQ=;
+        h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
+        b=0AEWJ49a5eR1VGeCnDgdj2Al1+fI8AncWZnozP9Pw/ByyAzg4mN4U7T/6tCHtGyRo
+         hOJ0nIE+WpGzBn9d9+6TJBGsRm7JjRKybwS29KzVKMBEPogHM83ACoGc1X7gESbAyu
+         //tE3ILHCkISn6TJLDEn5zyANd+BCU5ceoUmMCRY=
+Received: by paulmck-ThinkPad-P72.home (Postfix, from userid 1000)
+        id 6225335226D2; Thu, 27 Feb 2020 07:47:55 -0800 (PST)
+Date:   Thu, 27 Feb 2020 07:47:55 -0800
+From:   "Paul E. McKenney" <paulmck@kernel.org>
+To:     Boqun Feng <boqun.feng@gmail.com>
+Cc:     linux-kernel@vger.kernel.org,
+        Alan Stern <stern@rowland.harvard.edu>,
+        Andrea Parri <parri.andrea@gmail.com>,
+        Will Deacon <will@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        David Howells <dhowells@redhat.com>,
+        Jade Alglave <j.alglave@ucl.ac.uk>,
+        Luc Maranget <luc.maranget@inria.fr>,
+        Akira Yokosawa <akiyks@gmail.com>,
+        Daniel Lustig <dlustig@nvidia.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Rob Herring <robh@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3 0/5] Documentation/locking/atomic: Add litmus tests
+ for atomic APIs
+Message-ID: <20200227154755.GJ2935@paulmck-ThinkPad-P72>
+Reply-To: paulmck@kernel.org
+References: <20200227004049.6853-1-boqun.feng@gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200227004049.6853-1-boqun.feng@gmail.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Update the CoreSight documents to describe the new connections directory
-and the links between CoreSight devices in this directory.
+On Thu, Feb 27, 2020 at 08:40:44AM +0800, Boqun Feng wrote:
+> A recent discussion raises up the requirement for having test cases for
+> atomic APIs:
+> 
+> 	https://lore.kernel.org/lkml/20200213085849.GL14897@hirez.programming.kicks-ass.net/
+> 
+> , and since we already have a way to generate a test module from a
+> litmus test with klitmus[1]. It makes sense that we add more litmus
+> tests for atomic APIs. And based on the previous discussion, I create a
+> new directory Documentation/atomic-tests and put these litmus tests
+> here.
+> 
+> This patchset starts the work by adding the litmus tests which are
+> already used in atomic_t.txt, and also improve the atomic_t.txt to make
+> it consistent with the litmus tests.
+> 
+> Previous version:
+> v1: https://lore.kernel.org/linux-doc/20200214040132.91934-1-boqun.feng@gmail.com/
+> v2: https://lore.kernel.org/lkml/20200219062627.104736-1-boqun.feng@gmail.com/
+> 
+> Changes since v2:
+> 
+> *	Change from "RFC" to "PATCH".
+> 
+> *	Wording improvement in atomic_t.txt as per Alan's suggestion.
+> 
+> *	Add a new patch describing the usage of atomic_add_unless() is
+> 	not limited anymore for LKMM litmus tests.
+> 
+> My PR on supporting "(void) expr;" statement has been merged by Luc
+> (Thank you, Luc). So all the litmus tests in this patchset can be
+> handled by the herdtools compiled from latest master branch of the
+> source code.
+> 
+> Comments and suggestions are welcome!
+> 
+> Regards,
+> Boqun
 
-Signed-off-by: Mike Leach <mike.leach@linaro.org>
-Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
----
- .../trace/coresight/coresight-ect.rst         |  5 +-
- Documentation/trace/coresight/coresight.rst   | 85 +++++++++++++++++++
- 2 files changed, 89 insertions(+), 1 deletion(-)
+Queued for further review, thank you, Boqun!
 
-diff --git a/Documentation/trace/coresight/coresight-ect.rst b/Documentation/trace/coresight/coresight-ect.rst
-index 067cee91c857..3539af895832 100644
---- a/Documentation/trace/coresight/coresight-ect.rst
-+++ b/Documentation/trace/coresight/coresight-ect.rst
-@@ -71,7 +71,7 @@ capable of generating or using trigger signals.::
- 
-   >$ ls /sys/bus/coresight/devices/etm0/cti_cpu0
-   channels  ctmid  enable  nr_trigger_cons mgmt  power  regs  subsystem
--  triggers0 triggers1  uevent
-+  connections triggers0 triggers1  uevent
- 
- *Key file items are:-*
-    * ``enable``: enables/disables the CTI.
-@@ -84,6 +84,9 @@ capable of generating or using trigger signals.::
-    * ``channels``: Contains the channel API - CTI main programming interface.
-    * ``regs``: Gives access to the raw programmable CTI regs.
-    * ``mgmt``: the standard CoreSight management registers.
-+   * ``connections``: Links to connected *CoreSight* devices. The number of
-+     links can be 0 to ``nr_trigger_cons``. Actual number given by ``nr_links``
-+     in this directory.
- 
- 
- triggers<N> directories
-diff --git a/Documentation/trace/coresight/coresight.rst b/Documentation/trace/coresight/coresight.rst
-index 108600ee1e12..0b73acb44efa 100644
---- a/Documentation/trace/coresight/coresight.rst
-+++ b/Documentation/trace/coresight/coresight.rst
-@@ -241,6 +241,91 @@ to the newer scheme, to give a confirmation that what you see on your
- system is not unexpected. One must use the "names" as they appear on
- the system under specified locations.
- 
-+Topology Representation
-+-----------------------
-+
-+Each CoreSight component has a ``connections`` directory which will contain
-+links to other CoreSight components. This allows the user to explore the trace
-+topology and for larger systems, determine the most appropriate sink for a
-+given source. The connection information can also be used to establish
-+which CTI devices are connected to a given component. This directory contains a
-+``nr_links`` attribute detailing the number of links in the directory.
-+
-+For an ETM source, in this case ``etm0`` on a Juno platform, a typical
-+arrangement will be::
-+
-+  linaro-developer:~# ls - l /sys/bus/coresight/devices/etm0/connections
-+  <file details>  cti_cpu0 -> ../../../23020000.cti/cti_cpu0
-+  <file details>  nr_links
-+  <file details>  out:0 -> ../../../230c0000.funnel/funnel2
-+
-+Following the out port to ``funnel2``::
-+
-+  linaro-developer:~# ls -l /sys/bus/coresight/devices/funnel2/connections
-+  <file details> in:0 -> ../../../23040000.etm/etm0
-+  <file details> in:1 -> ../../../23140000.etm/etm3
-+  <file details> in:2 -> ../../../23240000.etm/etm4
-+  <file details> in:3 -> ../../../23340000.etm/etm5
-+  <file details> nr_links
-+  <file details> out:0 -> ../../../20040000.funnel/funnel0
-+
-+And again to ``funnel0``::
-+
-+  linaro-developer:~# ls -l /sys/bus/coresight/devices/funnel0/connections
-+  <file details> in:0 -> ../../../220c0000.funnel/funnel1
-+  <file details> in:1 -> ../../../230c0000.funnel/funnel2
-+  <file details> nr_links
-+  <file details> out:0 -> ../../../20010000.etf/tmc_etf0
-+
-+Finding the first sink ``tmc_etf0``. This can be used to collect data
-+as a sink, or as a link to propagate further along the chain::
-+
-+  linaro-developer:~# ls -l /sys/bus/coresight/devices/tmc_etf0/connections
-+  <file details> cti_sys0 -> ../../../20020000.cti/cti_sys0
-+  <file details> in:0 -> ../../../20040000.funnel/funnel0
-+  <file details> nr_links
-+  <file details> out:0 -> ../../../20150000.funnel/funnel4
-+
-+via ``funnel4``::
-+
-+  linaro-developer:~# ls -l /sys/bus/coresight/devices/funnel4/connections
-+  <file details> in:0 -> ../../../20010000.etf/tmc_etf0
-+  <file details> in:1 -> ../../../20140000.etf/tmc_etf1
-+  <file details> nr_links
-+  <file details> out:0 -> ../../../20120000.replicator/replicator0
-+
-+and a ``replicator0``::
-+
-+  linaro-developer:~# ls -l /sys/bus/coresight/devices/replicator0/connections
-+  <file details> in:0 -> ../../../20150000.funnel/funnel4
-+  <file details> nr_links
-+  <file details> out:0 -> ../../../20030000.tpiu/tpiu0
-+  <file details> out:1 -> ../../../20070000.etr/tmc_etr0
-+
-+Arriving at the final sink in the chain, ``tmc_etr0``::
-+
-+  linaro-developer:~# ls -l /sys/bus/coresight/devices/tmc_etr0/connections
-+  <file details> cti_sys0 -> ../../../20020000.cti/cti_sys0
-+  <file details> in:0 -> ../../../20120000.replicator/replicator0
-+  <file details> nr_links
-+
-+As described below, when using sysfs it is sufficient to enable a sink and
-+a source for successful trace. The framework will correctly enable all
-+intermediate links as required.
-+
-+Note: ``cti_sys0`` appears in two of the connections lists above.
-+CTIs can connect to multiple devices and are arranged in a star topology
-+via the CTM. See (:doc:`coresight-ect`) [#fourth]_ for further details.
-+Looking at this device we see 4 connections::
-+
-+  linaro-developer:~# ls -l /sys/bus/coresight/devices/cti_sys0/connections
-+  <file details> nr_links
-+  <file details> stm0 -> ../../../20100000.stm/stm0
-+  <file details> tmc_etf0 -> ../../../20010000.etf/tmc_etf0
-+  <file details> tmc_etr0 -> ../../../20070000.etr/tmc_etr0
-+  <file details> tpiu0 -> ../../../20030000.tpiu/tpiu0
-+
-+
- How to use the tracer modules
- -----------------------------
- 
--- 
-2.17.1
+							Thanx, Paul
 
+> [1]: http://diy.inria.fr/doc/litmus.html#klitmus
+> 
+> Boqun Feng (5):
+>   tools/memory-model: Add an exception for limitations on _unless()
+>     family
+>   Documentation/locking/atomic: Fix atomic-set litmus test
+>   Documentation/locking/atomic: Introduce atomic-tests directory
+>   Documentation/locking/atomic: Add a litmus test for atomic_set()
+>   Documentation/locking/atomic: Add a litmus test smp_mb__after_atomic()
+> 
+>  ...ter_atomic-is-stronger-than-acquire.litmus | 32 +++++++++++++++++++
+>  ...c-RMW-ops-are-atomic-WRT-atomic_set.litmus | 24 ++++++++++++++
+>  Documentation/atomic-tests/README             | 16 ++++++++++
+>  Documentation/atomic_t.txt                    | 24 +++++++-------
+>  MAINTAINERS                                   |  1 +
+>  tools/memory-model/README                     | 10 ++++--
+>  6 files changed, 92 insertions(+), 15 deletions(-)
+>  create mode 100644 Documentation/atomic-tests/Atomic-RMW+mb__after_atomic-is-stronger-than-acquire.litmus
+>  create mode 100644 Documentation/atomic-tests/Atomic-RMW-ops-are-atomic-WRT-atomic_set.litmus
+>  create mode 100644 Documentation/atomic-tests/README
+> 
+> -- 
+> 2.25.0
+> 
