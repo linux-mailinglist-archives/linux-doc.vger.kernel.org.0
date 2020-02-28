@@ -2,34 +2,33 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 116E1173333
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Feb 2020 09:47:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 71BA3173371
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Feb 2020 10:01:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726207AbgB1IrR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Feb 2020 03:47:17 -0500
-Received: from mout.web.de ([212.227.15.3]:59253 "EHLO mout.web.de"
+        id S1726413AbgB1JBi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Feb 2020 04:01:38 -0500
+Received: from mout.web.de ([212.227.15.4]:47843 "EHLO mout.web.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726005AbgB1IrR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 28 Feb 2020 03:47:17 -0500
+        id S1726476AbgB1JBh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 28 Feb 2020 04:01:37 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
-        s=dbaedf251592; t=1582879599;
-        bh=rQjLTBlvunSkxyu3YphLUHI7fI8eF/7rQkELvUf0t3M=;
+        s=dbaedf251592; t=1582880456;
+        bh=OLX6B01E7giakeT8iy+FXoMCj714HHMGd/9fp4qWhZk=;
         h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
-        b=Eiv1f//y9oKylrqIwvF2RwuiXVyJARB96hwEy+OR1ARaxaEER0vJM6PI1fnkuy8nQ
-         R+qzH2hCIhyju3OrJD8Z/b/LGreSKbKuu6hWtjkMtvmBVQ+zFqJwqDyFcqDKsAyq1P
-         UOlWSr3NyyjXtB1hj3OyMu9eB4WUsYUfu806nyHE=
+        b=fueQFsa4XuMf/QcAw0HSEo5Hm+fYqiS8wngBRfASHuYlYwEu6KDT/qoAXVU1ojjFg
+         7bQYvAHbtJ3fiKqZ5rLKRAsr73eNPyVXvYBmMvvedLSUKcMUN23IslV+Lh3HhGz4EZ
+         N7qbnjIGdwazLhxMwLIOaKbE9Bce2u9NNzbxafIc=
 X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
 Received: from [192.168.1.2] ([93.133.179.252]) by smtp.web.de (mrweb001
- [213.165.67.108]) with ESMTPSA (Nemesis) id 0MPGym-1j3BRm3ptA-004SEQ; Fri, 28
- Feb 2020 09:46:39 +0100
-Subject: Re: [PATCH 2/2] Documentation: bootconfig: Add EBNF syntax file
+ [213.165.67.108]) with ESMTPSA (Nemesis) id 0Lhedd-1jlMC11Gxl-00mpHu; Fri, 28
+ Feb 2020 10:00:56 +0100
+Subject: Re: [v2 0/1] Documentation: bootconfig: Documentation updates
 To:     Masami Hiramatsu <mhiramat@kernel.org>, linux-doc@vger.kernel.org
 Cc:     Jonathan Corbet <corbet@lwn.net>,
         Steven Rostedt <rostedt@goodmis.org>,
         Randy Dunlap <rdunlap@infradead.org>,
-        linux-kernel@vger.kernel.org
-References: <158278834245.14966.6179457011671073018.stgit@devnote2>
- <158278836196.14966.3881489301852781521.stgit@devnote2>
+        linux-kernel@vger.kernel.org, kernel-janitors@vger.kernel.org
+References: <158287861133.18632.12035327305997207220.stgit@devnote2>
 From:   Markus Elfring <Markus.Elfring@web.de>
 Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
  mQINBFg2+xABEADBJW2hoUoFXVFWTeKbqqif8VjszdMkriilx90WB5c0ddWQX14h6w5bT/A8
@@ -74,52 +73,59 @@ Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
  Z/wsLiWTgKlih2QYULvW61XU+mWsK8+ZlYUrRMpkauN4CJ5yTpvp+Orcz5KixHQmc5tbkLWf
  x0n1QFc1xxJhbzN+r9djSGGN/5IBDfUqSANC8cWzHpWaHmSuU3JSAMB/N+yQjIad2ztTckZY
  pwT6oxng29LzZspTYUEzMz3wK2jQHw+U66qBFk8whA7B2uAU1QdGyPgahLYSOa4XAEGb6wbI FEE=
-Message-ID: <6a60e891-ba13-8137-1594-f958923f7513@web.de>
-Date:   Fri, 28 Feb 2020 09:46:37 +0100
+Message-ID: <957cef56-04b0-3889-6c95-a8ed7606b68d@web.de>
+Date:   Fri, 28 Feb 2020 10:00:55 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.5.0
 MIME-Version: 1.0
-In-Reply-To: <158278836196.14966.3881489301852781521.stgit@devnote2>
+In-Reply-To: <158287861133.18632.12035327305997207220.stgit@devnote2>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:/pZezKS4zO08RVgrxyQbwr/WqO0ghf1uwz+EmgLP70wgsSWlerX
- dWsZsiuNsV0nFaCepAy1Zy3UDONlf2KEoeMkgaIbprfzggSlfnxvwl3qwlNdlRKpwlsFdBL
- 8jro3KKNJwNcc6IOMkGVe6Q4DDBDMYT0PRaFC8d17AeLjyvp2mS1RO81K84PR13Ff6D3dov
- Z2mWCAkCYsOBlhz8Py7TA==
+X-Provags-ID: V03:K1:knO5+5TOAyNYw/bpcty1OC/fCQ6yx0zJfXG6n5L//YJoRBRu+fI
+ E3P7UVpJGkwu6G3puQCSliOXqYHVD17SxzbrLZWzSrrj5aOnS87/m68hXRpZGc2ms2pjnuN
+ vpkFdB6QTlmcWYOaV32HHKFA8NKkJkSrUIRA2LsB2pNgqH2/A6TBwPweJR+CLEfgKfpt+4C
+ tJECRDPcHIfQUVGJpjNyw==
 X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:8TRmWpVopBw=:eDLfYuTD2Dd2yWf3la6uZv
- WoyJZd0HkNg6In/4KwEwpMlf8Hm5tV4b87cu2B+SKUodFlW9aOQNLKARbLjCgri4IiLUbx/wz
- HUKE00g/md4bHKj0dIrwTi2oIRrsO0sWr088dLy9xCkIVv6c+DyQV5zQ98/VYKZpPM4Vmp7bU
- xEK+Lrp7FEnKEH9AZKMpKztAOnSz+JmK5EGHQVCMz4UZc1pBdQyPC/y/nPsg8H2IoIHmw79hi
- 48b86EWb3xrpARA8pVshKnoBji1vTI4zpcygE9u10t9aje9tO2rMWFL9i3R9c3Z/+1pEENopq
- 3a9h8/rz+qmSGvLDg9i3Cg9aQ4s+daATzqPGVV7lFjOWGnz3Hy41NbaMu1sQvFUNni4PeWLWK
- 2cQvXQNFlDZcOkN4nO5ElMh/i9NsCVUfr19OyANT4/spToDt3kL/spuAeNxF6n+yrF4Y0jyfr
- JqX8GUCWRft/BWD8Beq6ZrVUEcqsPgFgCWsXjwfT8QRLJ7YD6KdeVIIvgzbJp62xKxLNiE4as
- UZpnyXH7NfWpk1vT2qJOeK8lDAMzX/k0MBDIuYXhZtKGZ308VtOBnw2vbTjT79fBF8CmMV1cM
- nispwyOtbvcpn7h6JXW7tBR7QIP9V5wjot7tgi2jNNpCFpLn+jkQHimdiBA0HVt+LycajY+nJ
- fXb6Ygq7HHJ8k20COrS0bUWwKZ/wk0ojyKnE8tG558fkmtcsI+Iokt7heF0x5iKUZrkRnVB4H
- vmTD8kFf0MsFkruVcr+A9z1jdNUs3d1pAdh+06rJM0+aRILJ1UnPbl3sbrLtUUNMWy2qCcWqS
- RWOqc6A+aCa/c4XHni2yIoh8dnnZfiXDUkxzQwxZDQQ+m7hoG20ybOutJ8jhCQuFGqgmjTRfY
- YL3XP6EhQDtFNTY7v5gcC64y6fWT64jQs7alkfRiUERQvGuPBtWSjQeoeAVZbaY2enPid9LK+
- vd0Bkacya8xqBDq0x7SVF15FTXm8B9mi0ZYqzYbB7HW9gTKHMmSWCpPcXeWoieMB3qetdMMdr
- 3wWZ9Cs3dwJHW7+rUnCDt1velZYstqIhYd1SuyQDkq0m74Fi28/+R/yveofsy6fdCKUDXOvFF
- jUgvX+TaunN/xo8dIh0zrW2NovovXVNdLz92dNYk6kIXhmo7v5+0VZwynKIlh3NxZVf25yM7p
- RnkMqjlkgSJ1EErDJ4qSXlzpnUO5riiYHbEsVSWYhk1IN/3/cBnw9ktjmCQJ3rn9lZtQTw2Pa
- 2zRZCMo1+XlpITP/c
+X-UI-Out-Filterresults: notjunk:1;V03:K0:npS9/4x9CMI=:t56PeqSY1T3yjJqSAQ6u6i
+ Ds45u23XQWBeyJndKIZYHt4wz9BypJ6VJ2XF4aMaBstVsuLxurRH9oyE03FXvzLzSNjzLEKAX
+ WSv9IapoE78BNtc0Yi5y9u8PH2qk4RwJ+CeWRmNgQji/lkZOAwupBrA5fx0fFZUeC3KeSO06z
+ 29eWQUE81Ir5XsJeoIsy4lpLDEOWbGEe6xPoQK26MYaEKCKSL/Jcu7aMZI1Cap2N38yAWKgdo
+ GzuDRWk46JvD1HE/p3FrLZTY8W96aobGuCjgINPnjCMXM9oRgBzd/0tD/RFK2KHj2PtNnZP/r
+ /ma2tVg8ZQklCZZg0lx7BK5c7Fxd0VxoWRRi3+npZf/mGNvrbTvFSAxTXQ7FGNJVsn7N6MwJq
+ QmR4UhrctDPHE8ohBujhx7qBm+p6+VU/S/YG+FYjBUww8SmUP/dNPjOy9QwvPn7U3nAmXIxrK
+ mqBN3xqABGIGCLufL15F3R2rJhumKBqMK+M6ByZU1s7rt6orP9S8Z6cTf8sz/BrrEfvKltWVP
+ qRomU6V6LgxoIlAQ965VOruxrTulltbNvR1giepvoYmXU4DzkZ3m3dON7P/5lJaS76L1sHfnS
+ S4M3y0Bwatf4Cl8ac81gjc5JBVtdhCY53AQ2j/Hu4QgQh+GnfqQsOBZAZF5yNiYrUYp+Wa6DS
+ OqUa7rXv18ow6RVz1NKJLS6kkHEz1AxylggoeEB9dfgXmv5U4E8XO9jt2D1ulyjd3f8vsiYwx
+ zYWVjz61BhizYkXBTLjjvS1edqdAaigt3i47xi3568eqM9PjIPNvgKXiBRwnylrqrNLRKU07Q
+ Qa4tyAtWbBVSZ0Hf3k//YD2hyxR3FXOa08Ct3ypyDKX7eNQ6Vj2EKQJTd1VaxpoZG8vpJI7/v
+ TyV1Mq/7uPIvD6tMVraryd1NmV9SnQgx4HOWD155e6YxX361DtBAEreqAv+qyyquILKlKW2Vp
+ 5ChNAnANPU7pUtb/7K81za+hk3N2rIOgbnvz9zhdV3cQquIYe6uJRBzIAIF6MPm5m3NxyQEqh
+ hmgVGb9q9MvGAiHammGES111vjXaeNSVv7NltqHlgfV+wIL1Grd0rFY8E4JPTJDhrR3pitqbb
+ h07h1HmArT+gTdxRInnodzQwigY9oRzlwoVnaSPirNACEBqpDH8VNS8u1dgWkfPuO1khndmWh
+ s5ghF2ItAhiUNJjT1wyLzYQ3t7xyFQI8x6ADkkBY6a7S9TRO0Ccy2UjijNXiy3hso2OiQZUeB
+ 8j6KiGSpZc8KPYG/L
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-=E2=80=A6
-> +++ b/Documentation/admin-guide/bootconfig.rst
-=E2=80=A6
-> +.. include:: bootconfig.ebnf
-> +   :literal:
+> I decided to drop EBNF (extended Backus=E2=80=93Naur form) patch
+> since the ISO/IEC 14977 EBNF seems not carefully defined
 
-Can the markup directive =E2=80=9Ccode EBNF=E2=80=9D be more appropriate f=
-or the discussed extension?
+Significant efforts happened also for this standard.
+Does its revision refer still to the year 1996?
+
+
+> and there are many variants which named EBNF.
+> I'll postpone it until finding better solution.
+
+How will the corresponding clarification evolve?
+
+
+I hope that typos will be avoided also in subjects of subsequent cover let=
+ters.
 
 Regards,
 Markus
