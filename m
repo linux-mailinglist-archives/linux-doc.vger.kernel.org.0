@@ -2,114 +2,154 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5AA52172CC9
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Feb 2020 01:07:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C6EB7172E25
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Feb 2020 02:21:28 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729876AbgB1AHO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Feb 2020 19:07:14 -0500
-Received: from mail.kernel.org ([198.145.29.99]:60362 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730028AbgB1AHO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 27 Feb 2020 19:07:14 -0500
-Received: from kicinski-fedora-PC1C0HJN.thefacebook.com (unknown [163.114.132.128])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 5053F246B6;
-        Fri, 28 Feb 2020 00:07:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1582848433;
-        bh=su/zdgqZWOIgoXteahy9y0RwSvWY0ZVcKuqUOz2jKsQ=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=0/f3qtgMZjsoNc3LGLQ1TSckFbOseuVrbPJeUglc9BQnSeKHlwhKYVsFsVPfvHKve
-         3g9cLMtVCQglx1U8/ju4kIbNX7iQeFjyLeASO5jRe/Qs9J5wtkjd/e492jeS83GPLI
-         N1LVSaSOrTN28CGikGS41WEUGAy0MZaRDVOfCymQ=
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     corbet@lwn.net
-Cc:     clm@fb.com, hannes@cmpxchg.org, tj@kernel.org, lizefan@huawei.com,
-        linux-doc@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>
-Subject: [PATCH doc 5/5] doc: cgroup: improve formatting of references
-Date:   Thu, 27 Feb 2020 16:06:53 -0800
-Message-Id: <20200228000653.1572553-6-kuba@kernel.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200228000653.1572553-1-kuba@kernel.org>
-References: <20200228000653.1572553-1-kuba@kernel.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1730493AbgB1BU6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Feb 2020 20:20:58 -0500
+Received: from mail-qk1-f202.google.com ([209.85.222.202]:51353 "EHLO
+        mail-qk1-f202.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730442AbgB1BU6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Feb 2020 20:20:58 -0500
+Received: by mail-qk1-f202.google.com with SMTP id n126so1353285qkc.18
+        for <linux-doc@vger.kernel.org>; Thu, 27 Feb 2020 17:20:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=UxlFvDl+mYUOihiySIoFvbuwiyqTD12ewe+CWWzU0ro=;
+        b=Cc0JuZTfhaIDHKNZM37wEYgZzqrbvgr4Kpn3pNKsq4dpXHFoVOP/Iy5EaG8MPe0qHM
+         fqaKBpOtGroaVggoO0eF0KR+YehCClaj/Fe6Id9L8BwOyhmJPWqN9SqFrmwV1nMGBhYG
+         3By6Lr+I1WyhWZyW9wmCgDsFO7Rxty9/jcF6ClbLWK9kpirrBKtj1cNL9AN8bXAhQtTl
+         iBWN4ey/UqpntnkjYAfHHiMifGNshfQBWvKDt1AlkCaOsbEk/qxvpEVWm3gdz8Z47PdR
+         CVNrCbYHxZXcU6vawXUsmqm9jUqvKhaV6R3SAMk2XWXdWBznnf4nrx5vUJyFAgtSyPzD
+         0lLA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=UxlFvDl+mYUOihiySIoFvbuwiyqTD12ewe+CWWzU0ro=;
+        b=bBU2uTyN7hbfGCnmXx0KJsCqF8Lcgt6BthYDQSdvXFpJN+Su3CvT3lAQS7SgWKLC0K
+         FXX8PEnUOxmmj/rHcMt+jZM5QCwp0n4ptYSLkopN1cpj55g8lIIYbmMmvIyLvgArQczp
+         8NAIot6CnzPX05azUn7aVrOVe3+9XChwpb/+Si99tvHsfEVQdUeVtGRBchDbTx9ErOpy
+         6Gtw1e86AyZGy1WiKVJAhiVP2gUy+tOg1kvAsJf/ffsXGPOEoT985zX6Di/Y73QHuHeN
+         b0MGi9bGURkXZZmFVxI1a4i3XwK+rJYpIxoHGu4YFVrYS+bQbGfOXJCC1EbAvpN2g37g
+         fduQ==
+X-Gm-Message-State: APjAAAXKE2vE8lkvJ8j6WD2mqtLA+RogBjXnVRq8gBRs2RGl+ceMhLa6
+        2mtpNcu/1VFZFPLkxFLgkiRp0Wzd7+1EkqE0vv2SeQ==
+X-Google-Smtp-Source: APXvYqxBgrAvVVUr+eI3w9pSyj8Z2/ifloxhO80OhuCfxDoH9J4UCvD3tbTVrS4n5PAVeq88ixanzwm/QJ1cJqGp96pfXQ==
+X-Received: by 2002:a05:620a:2288:: with SMTP id o8mr2477361qkh.368.1582852855324;
+ Thu, 27 Feb 2020 17:20:55 -0800 (PST)
+Date:   Thu, 27 Feb 2020 17:20:29 -0800
+Message-Id: <20200228012036.15682-1-brendanhiggins@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.25.1.481.gfbce0eb801-goog
+Subject: [PATCH v3 0/7] kunit: create a centralized executor to dispatch all
+ KUnit tests
+From:   Brendan Higgins <brendanhiggins@google.com>
+To:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
+        arnd@arndb.de, keescook@chromium.org, skhan@linuxfoundation.org,
+        alan.maguire@oracle.com, yzaikin@google.com, davidgow@google.com,
+        akpm@linux-foundation.org, rppt@linux.ibm.com,
+        frowand.list@gmail.com
+Cc:     gregkh@linuxfoundation.org, sboyd@kernel.org, logang@deltatee.com,
+        mcgrof@kernel.org, linux-um@lists.infradead.org,
+        linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        kunit-dev@googlegroups.com, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org,
+        Brendan Higgins <brendanhiggins@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Annotate references to other documents to make them clickable.
+## TL;DR
 
-Signed-off-by: Jakub Kicinski <kuba@kernel.org>
-Acked-by: Johannes Weiner <hannes@cmpxchg.org>
----
- Documentation/accounting/psi.rst              | 2 ++
- Documentation/admin-guide/cgroup-v1/index.rst | 2 ++
- Documentation/admin-guide/cgroup-v2.rst       | 8 ++++----
- 3 files changed, 8 insertions(+), 4 deletions(-)
+This patchset adds a centralized executor to dispatch tests rather than
+relying on late_initcall to schedule each test suite separately along
+with a couple of new features that depend on it.
 
-diff --git a/Documentation/accounting/psi.rst b/Documentation/accounting/psi.rst
-index 621111ce5740..f2b3439edcc2 100644
---- a/Documentation/accounting/psi.rst
-+++ b/Documentation/accounting/psi.rst
-@@ -1,3 +1,5 @@
-+.. _psi:
-+
- ================================
- PSI - Pressure Stall Information
- ================================
-diff --git a/Documentation/admin-guide/cgroup-v1/index.rst b/Documentation/admin-guide/cgroup-v1/index.rst
-index 10bf48bae0b0..226f64473e8e 100644
---- a/Documentation/admin-guide/cgroup-v1/index.rst
-+++ b/Documentation/admin-guide/cgroup-v1/index.rst
-@@ -1,3 +1,5 @@
-+.. _cgroup-v1:
-+
- ========================
- Control Groups version 1
- ========================
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index 308d096af071..fbb111616705 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -9,7 +9,7 @@ This is the authoritative documentation on the design, interface and
- conventions of cgroup v2.  It describes all userland-visible aspects
- of cgroup including core and specific controller behaviors.  All
- future changes must be reflected in this document.  Documentation for
--v1 is available under Documentation/admin-guide/cgroup-v1/.
-+v1 is available under :ref:`Documentation/admin-guide/cgroup-v1/index.rst <cgroup-v1>`.
- 
- .. CONTENTS
- 
-@@ -1023,7 +1023,7 @@ All time durations are in microseconds.
- 	A read-only nested-key file which exists on non-root cgroups.
- 
- 	Shows pressure stall information for CPU. See
--	Documentation/accounting/psi.rst for details.
-+	:ref:`Documentation/accounting/psi.rst <psi>` for details.
- 
-   cpu.uclamp.min
-         A read-write single value file which exists on non-root cgroups.
-@@ -1391,7 +1391,7 @@ PAGE_SIZE multiple when read back.
- 	A read-only nested-key file which exists on non-root cgroups.
- 
- 	Shows pressure stall information for memory. See
--	Documentation/accounting/psi.rst for details.
-+	:ref:`Documentation/accounting/psi.rst <psi>` for details.
- 
- 
- Usage Guidelines
-@@ -1631,7 +1631,7 @@ IO Interface Files
- 	A read-only nested-key file which exists on non-root cgroups.
- 
- 	Shows pressure stall information for IO. See
--	Documentation/accounting/psi.rst for details.
-+	:ref:`Documentation/accounting/psi.rst <psi>` for details.
- 
- 
- Writeback
+Also, sorry for the delay in getting this new revision out. I have been
+really busy for the past couple weeks.
+
+## What am I trying to do?
+
+Conceptually, I am trying to provide a mechanism by which test suites
+can be grouped together so that they can be reasoned about collectively.
+The last two of three patches in this series add features which depend
+on this:
+
+PATCH 5/7 Prints out a test plan[1] right before KUnit tests are run;
+          this is valuable because it makes it possible for a test
+          harness to detect whether the number of tests run matches the
+          number of tests expected to be run, ensuring that no tests
+          silently failed. The test plan includes a count of tests that
+          will run. With the centralized executor, the tests are located
+          in a single data structure and thus can be counted.
+
+PATCH 6/7 Add a new kernel command-line option which allows the user to
+          specify that the kernel poweroff, halt, or reboot after
+          completing all KUnit tests; this is very handy for running
+          KUnit tests on UML or a VM so that the UML/VM process exits
+          cleanly immediately after running all tests without needing a
+          special initramfs. The centralized executor provides a
+          definitive point when all tests have completed and the
+          poweroff, halt, or reboot could occur.
+
+In addition, by dispatching tests from a single location, we can
+guarantee that all KUnit tests run after late_init is complete, which
+was a concern during the initial KUnit patchset review (this has not
+been a problem in practice, but resolving with certainty is nevertheless
+desirable).
+
+Other use cases for this exist, but the above features should provide an
+idea of the value that this could provide.
+
+## Changes since last revision:
+- On patch 7/7, I added some additional wording around the
+  kunit_shutdown command line option explaining that it runs after
+  built-in tests as suggested by Frank.
+- On the coverletter, I improved some wording and added a missing link.
+  I also specified the base-commit for the series.
+- Frank asked for some changes to the documentation; however, David is
+  taking care of that in a separate patch[2], so I did not make those
+  changes here. There will be some additional changes necessary
+  after David's patch is applied.
+
+Alan Maguire (1):
+  kunit: test: create a single centralized executor for all tests
+
+Brendan Higgins (5):
+  vmlinux.lds.h: add linker section for KUnit test suites
+  arch: um: add linker section for KUnit test suites
+  init: main: add KUnit to kernel init
+  kunit: test: add test plan to KUnit TAP format
+  Documentation: Add kunit_shutdown to kernel-parameters.txt
+
+David Gow (1):
+  kunit: Add 'kunit_shutdown' option
+
+ .../admin-guide/kernel-parameters.txt         |  8 ++
+ arch/um/include/asm/common.lds.S              |  4 +
+ include/asm-generic/vmlinux.lds.h             |  8 ++
+ include/kunit/test.h                          | 82 ++++++++++++-------
+ init/main.c                                   |  4 +
+ lib/kunit/Makefile                            |  3 +-
+ lib/kunit/executor.c                          | 71 ++++++++++++++++
+ lib/kunit/test.c                              | 11 ---
+ tools/testing/kunit/kunit_kernel.py           |  2 +-
+ tools/testing/kunit/kunit_parser.py           | 76 ++++++++++++++---
+ .../test_is_test_passed-all_passed.log        |  1 +
+ .../test_data/test_is_test_passed-crash.log   |  1 +
+ .../test_data/test_is_test_passed-failure.log |  1 +
+ 13 files changed, 218 insertions(+), 54 deletions(-)
+ create mode 100644 lib/kunit/executor.c
+
+
+base-commit: a2f0b878c3ca531a1706cb2a8b079cea3b17bafc
+
+[1] https://github.com/isaacs/testanything.github.io/blob/tap14/tap-version-14-specification.md#the-plan
+[2] https://patchwork.kernel.org/patch/11383635/
+
 -- 
-2.24.1
+2.25.1.481.gfbce0eb801-goog
 
