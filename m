@@ -2,34 +2,34 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 67530172CC8
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Feb 2020 01:07:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5AA52172CC9
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Feb 2020 01:07:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730034AbgB1AHN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Feb 2020 19:07:13 -0500
-Received: from mail.kernel.org ([198.145.29.99]:60330 "EHLO mail.kernel.org"
+        id S1729876AbgB1AHO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Feb 2020 19:07:14 -0500
+Received: from mail.kernel.org ([198.145.29.99]:60362 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729953AbgB1AHN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 27 Feb 2020 19:07:13 -0500
+        id S1730028AbgB1AHO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 27 Feb 2020 19:07:14 -0500
 Received: from kicinski-fedora-PC1C0HJN.thefacebook.com (unknown [163.114.132.128])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id D0F86246B4;
-        Fri, 28 Feb 2020 00:07:12 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 5053F246B6;
+        Fri, 28 Feb 2020 00:07:13 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1582848433;
-        bh=/4wVjqmrBspm9EnZOKQaF0PtnQoAhB60IM6pppAslk4=;
+        bh=su/zdgqZWOIgoXteahy9y0RwSvWY0ZVcKuqUOz2jKsQ=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=N5/eqeMPmJSZbS760VnBZt5p2QYkoko0M3D6ioSAbhNvrmWXrVZXQzfvqf2+gDvpN
-         WF8Qd2fLl1rUC5QgGfrRnro/Eo2e7hLjii7/Yh1i4JaxEQKkfQ3CEWiGTVCglJHlVs
-         HkF50yExxITOvcEXO6WCsmDTt+Ab9Z8kyoXcM8/Y=
+        b=0/f3qtgMZjsoNc3LGLQ1TSckFbOseuVrbPJeUglc9BQnSeKHlwhKYVsFsVPfvHKve
+         3g9cLMtVCQglx1U8/ju4kIbNX7iQeFjyLeASO5jRe/Qs9J5wtkjd/e492jeS83GPLI
+         N1LVSaSOrTN28CGikGS41WEUGAy0MZaRDVOfCymQ=
 From:   Jakub Kicinski <kuba@kernel.org>
 To:     corbet@lwn.net
 Cc:     clm@fb.com, hannes@cmpxchg.org, tj@kernel.org, lizefan@huawei.com,
         linux-doc@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>
-Subject: [PATCH doc 4/5] doc: cgroup: improve formatting of cpuset examples
-Date:   Thu, 27 Feb 2020 16:06:52 -0800
-Message-Id: <20200228000653.1572553-5-kuba@kernel.org>
+Subject: [PATCH doc 5/5] doc: cgroup: improve formatting of references
+Date:   Thu, 27 Feb 2020 16:06:53 -0800
+Message-Id: <20200228000653.1572553-6-kuba@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <20200228000653.1572553-1-kuba@kernel.org>
 References: <20200228000653.1572553-1-kuba@kernel.org>
@@ -40,37 +40,76 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-We need literal sections otherwise the entire example is rendered
-as a single line.
+Annotate references to other documents to make them clickable.
 
 Signed-off-by: Jakub Kicinski <kuba@kernel.org>
 Acked-by: Johannes Weiner <hannes@cmpxchg.org>
 ---
- Documentation/admin-guide/cgroup-v2.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ Documentation/accounting/psi.rst              | 2 ++
+ Documentation/admin-guide/cgroup-v1/index.rst | 2 ++
+ Documentation/admin-guide/cgroup-v2.rst       | 8 ++++----
+ 3 files changed, 8 insertions(+), 4 deletions(-)
 
+diff --git a/Documentation/accounting/psi.rst b/Documentation/accounting/psi.rst
+index 621111ce5740..f2b3439edcc2 100644
+--- a/Documentation/accounting/psi.rst
++++ b/Documentation/accounting/psi.rst
+@@ -1,3 +1,5 @@
++.. _psi:
++
+ ================================
+ PSI - Pressure Stall Information
+ ================================
+diff --git a/Documentation/admin-guide/cgroup-v1/index.rst b/Documentation/admin-guide/cgroup-v1/index.rst
+index 10bf48bae0b0..226f64473e8e 100644
+--- a/Documentation/admin-guide/cgroup-v1/index.rst
++++ b/Documentation/admin-guide/cgroup-v1/index.rst
+@@ -1,3 +1,5 @@
++.. _cgroup-v1:
++
+ ========================
+ Control Groups version 1
+ ========================
 diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index 9d16fbc5df63..308d096af071 100644
+index 308d096af071..fbb111616705 100644
 --- a/Documentation/admin-guide/cgroup-v2.rst
 +++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -1841,7 +1841,7 @@ Cpuset Interface Files
- 	from the requested CPUs.
+@@ -9,7 +9,7 @@ This is the authoritative documentation on the design, interface and
+ conventions of cgroup v2.  It describes all userland-visible aspects
+ of cgroup including core and specific controller behaviors.  All
+ future changes must be reflected in this document.  Documentation for
+-v1 is available under Documentation/admin-guide/cgroup-v1/.
++v1 is available under :ref:`Documentation/admin-guide/cgroup-v1/index.rst <cgroup-v1>`.
  
- 	The CPU numbers are comma-separated numbers or ranges.
--	For example:
-+	For example::
+ .. CONTENTS
  
- 	  # cat cpuset.cpus
- 	  0-4,6,8-10
-@@ -1880,7 +1880,7 @@ Cpuset Interface Files
- 	from the requested memory nodes.
+@@ -1023,7 +1023,7 @@ All time durations are in microseconds.
+ 	A read-only nested-key file which exists on non-root cgroups.
  
- 	The memory node numbers are comma-separated numbers or ranges.
--	For example:
-+	For example::
+ 	Shows pressure stall information for CPU. See
+-	Documentation/accounting/psi.rst for details.
++	:ref:`Documentation/accounting/psi.rst <psi>` for details.
  
- 	  # cat cpuset.mems
- 	  0-1,3
+   cpu.uclamp.min
+         A read-write single value file which exists on non-root cgroups.
+@@ -1391,7 +1391,7 @@ PAGE_SIZE multiple when read back.
+ 	A read-only nested-key file which exists on non-root cgroups.
+ 
+ 	Shows pressure stall information for memory. See
+-	Documentation/accounting/psi.rst for details.
++	:ref:`Documentation/accounting/psi.rst <psi>` for details.
+ 
+ 
+ Usage Guidelines
+@@ -1631,7 +1631,7 @@ IO Interface Files
+ 	A read-only nested-key file which exists on non-root cgroups.
+ 
+ 	Shows pressure stall information for IO. See
+-	Documentation/accounting/psi.rst for details.
++	:ref:`Documentation/accounting/psi.rst <psi>` for details.
+ 
+ 
+ Writeback
 -- 
 2.24.1
 
