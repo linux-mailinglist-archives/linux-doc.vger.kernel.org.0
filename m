@@ -2,113 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 64C99175496
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 08:39:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 31C121754CD
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 08:48:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727104AbgCBHiS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 2 Mar 2020 02:38:18 -0500
-Received: from mail.kernel.org ([198.145.29.99]:44812 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727032AbgCBHiR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 2 Mar 2020 02:38:17 -0500
-Received: from mail.kernel.org (ip5f5ad4e9.dynamic.kabel-deutschland.de [95.90.212.233])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 2E87D246BF;
-        Mon,  2 Mar 2020 07:38:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583134696;
-        bh=bQRwx5N1oMLXQUYzamAbbIdg3iVXNtnWVf4W1C9hQYM=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=XfLrHLjXrkIM7eQBCCeL+qHVgyG/Gy2SZ8JbcLR9/CSIIblyRHnFBz1NKwe+m8xhB
-         +djCBge5zD/6eTZJYYpOmgcNvCOvpHDd9NosavfqLoSoO22DkXr/LtaF8eGiIPtQ6i
-         0WaKDxNLAiQvAz1genTg6GluUq0oq7bZJSCxSdLo=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1j8feW-0003WA-2y; Mon, 02 Mar 2020 08:38:12 +0100
-From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Rob Herring <robh+dt@kernel.org>, devicetree@vger.kernel.org,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
-Subject: [PATCH 12/12] docs: dt: convert writing-bindings.txt to ReST
-Date:   Mon,  2 Mar 2020 08:38:07 +0100
-Message-Id: <00ea462a2db1a9b4fd188e0100c52fdf0d68aaf0.1583134242.git.mchehab+samsung@kernel.org>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <cover.1583134242.git.mchehab+samsung@kernel.org>
-References: <cover.1583134242.git.mchehab+samsung@kernel.org>
+        id S1726654AbgCBHs2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Mar 2020 02:48:28 -0500
+Received: from youngberry.canonical.com ([91.189.89.112]:47552 "EHLO
+        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725446AbgCBHs2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Mar 2020 02:48:28 -0500
+Received: from ip5f5bf7ec.dynamic.kabel-deutschland.de ([95.91.247.236] helo=wittgenstein)
+        by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.86_2)
+        (envelope-from <christian.brauner@ubuntu.com>)
+        id 1j8fns-0001Sk-QB; Mon, 02 Mar 2020 07:47:52 +0000
+Date:   Mon, 2 Mar 2020 08:47:51 +0100
+From:   Christian Brauner <christian.brauner@ubuntu.com>
+To:     Jann Horn <jannh@google.com>
+Cc:     Bernd Edlinger <bernd.edlinger@hotmail.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        "Eric W. Biederman" <ebiederm@xmission.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Oleg Nesterov <oleg@redhat.com>,
+        Frederic Weisbecker <frederic@kernel.org>,
+        Andrei Vagin <avagin@gmail.com>,
+        Ingo Molnar <mingo@kernel.org>,
+        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        Yuyang Du <duyuyang@gmail.com>,
+        David Hildenbrand <david@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Anshuman Khandual <anshuman.khandual@arm.com>,
+        David Howells <dhowells@redhat.com>,
+        James Morris <jamorris@linux.microsoft.com>,
+        Kees Cook <keescook@chromium.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Shakeel Butt <shakeelb@google.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        Christian Kellner <christian@kellner.me>,
+        Andrea Arcangeli <aarcange@redhat.com>,
+        Aleksa Sarai <cyphar@cyphar.com>,
+        "Dmitry V. Levin" <ldv@altlinux.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>
+Subject: Re: [PATCH] exec: Fix a deadlock in ptrace
+Message-ID: <20200302074751.evhnq3b5zvtbaqu4@wittgenstein>
+References: <AM6PR03MB5170B06F3A2B75EFB98D071AE4E60@AM6PR03MB5170.eurprd03.prod.outlook.com>
+ <CAG48ez3QHVpMJ9Rb_Q4LEE6uAqQJeS1Myu82U=fgvUfoeiscgw@mail.gmail.com>
+ <20200301185244.zkofjus6xtgkx4s3@wittgenstein>
+ <CAG48ez3mnYc84iFCA25-rbJdSBi3jh9hkp569XZTbFc_9WYbZw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <CAG48ez3mnYc84iFCA25-rbJdSBi3jh9hkp569XZTbFc_9WYbZw@mail.gmail.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+On Sun, Mar 01, 2020 at 09:00:22PM +0100, Jann Horn wrote:
+> On Sun, Mar 1, 2020 at 7:52 PM Christian Brauner
+> <christian.brauner@ubuntu.com> wrote:
+> > On Sun, Mar 01, 2020 at 07:21:03PM +0100, Jann Horn wrote:
+> > > On Sun, Mar 1, 2020 at 12:27 PM Bernd Edlinger
+> > > <bernd.edlinger@hotmail.de> wrote:
+> > > > The proposed solution is to have a second mutex that is
+> > > > used in mm_access, so it is allowed to continue while the
+> > > > dying threads are not yet terminated.
+> > >
+> > > Just for context: When I proposed something similar back in 2016,
+> > > https://lore.kernel.org/linux-fsdevel/20161102181806.GB1112@redhat.com/
+> > > was the resulting discussion thread. At least back then, I looked
+> > > through the various existing users of cred_guard_mutex, and the only
+> > > places that couldn't be converted to the new second mutex were
+> > > PTRACE_ATTACH and SECCOMP_FILTER_FLAG_TSYNC.
+> > >
+> > >
+> > > The ideal solution would IMO be something like this: Decide what the
+> > > new task's credentials should be *before* reaching de_thread(),
+> > > install them into a second cred* on the task (together with the new
+> > > dumpability), drop the cred_guard_mutex, and let ptrace_may_access()
+> > > check against both. After that, some further restructuring might even
+> >
+> > Hm, so essentially a private ptrace_access_cred member in task_struct?
+> 
+> And a second dumpability field, because that changes together with the
+> creds during execve. (Btw, currently the dumpability is in the
+> mm_struct, but that's kinda wrong. The mm_struct is removed from a
+> task on exit while access checks can still be performed against it, and
+> currently ptrace_may_access() just lets the access go through in that
+> case, which weakens the protection offered by PR_SET_DUMPABLE when
+> used for security purposes. I think it ought to be moved over into the
+> task_struct.)
+> 
+> > That would presumably also involve altering various LSM hooks to look at
+> > ptrace_access_cred.
+> 
+> When I tried to implement this in the past, I changed the LSM hook to
+> take the target task's cred* as an argument, and then called the LSM
+> hook twice from ptrace_may_access(). IIRC having the target task's
+> creds as an argument works for almost all the LSMs, with the exception
+> of Yama, which doesn't really care about the target task's creds, so
+> you have to pass in both the task_struct* and the cred*.
 
-- Add a SPDX header;
-- Adjust document and section titles;
-- Mark literal blocks as such;
-- Add it to bindings/index.rst.
+It seems we should try PoCing this.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
----
- Documentation/devicetree/bindings/index.rst                | 1 +
- .../{writing-bindings.txt => writing-bindings.rst}         | 7 +++++++
- 2 files changed, 8 insertions(+)
- rename Documentation/devicetree/bindings/{writing-bindings.txt => writing-bindings.rst} (92%)
-
-diff --git a/Documentation/devicetree/bindings/index.rst b/Documentation/devicetree/bindings/index.rst
-index 6b87875a049c..3837b17c234f 100644
---- a/Documentation/devicetree/bindings/index.rst
-+++ b/Documentation/devicetree/bindings/index.rst
-@@ -9,3 +9,4 @@ Device Tree
- 
-    ABI
-    submitting-patches
-+   writing-bindings
-diff --git a/Documentation/devicetree/bindings/writing-bindings.txt b/Documentation/devicetree/bindings/writing-bindings.rst
-similarity index 92%
-rename from Documentation/devicetree/bindings/writing-bindings.txt
-rename to Documentation/devicetree/bindings/writing-bindings.rst
-index ca024b9c7433..45ff426d0019 100644
---- a/Documentation/devicetree/bindings/writing-bindings.txt
-+++ b/Documentation/devicetree/bindings/writing-bindings.rst
-@@ -1,4 +1,8 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+============================================================
- DOs and DON'Ts for designing and writing Devicetree bindings
-+============================================================
- 
- This is a list of common review feedback items focused on binding design. With
- every rule, there are exceptions and bindings have many gray areas.
-@@ -8,6 +12,7 @@ Documentation/devicetree/bindings/submitting-patches.rst
- 
- 
- Overall design
-+==============
- 
- - DO attempt to make bindings complete even if a driver doesn't support some
-   features. For example, if a device has an interrupt, then include the
-@@ -32,6 +37,7 @@ Overall design
- 
- 
- Properties
-+==========
- 
- - DO make 'compatible' properties specific. DON'T use wildcards in compatible
-   strings. DO use fallback compatibles when devices are the same as or a subset
-@@ -53,6 +59,7 @@ Properties
- 
- 
- Board/SoC .dts Files
-+====================
- 
- - DO put all MMIO devices under a bus node and not at the top-level.
- 
--- 
-2.21.1
-
+Christian
