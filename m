@@ -2,41 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D79441755A9
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 09:18:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 55BCE17557A
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 09:18:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727784AbgCBISS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 2 Mar 2020 03:18:18 -0500
-Received: from mail.kernel.org ([198.145.29.99]:57210 "EHLO mail.kernel.org"
+        id S1727550AbgCBIRE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Mar 2020 03:17:04 -0500
+Received: from mail.kernel.org ([198.145.29.99]:57232 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727226AbgCBIQV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 2 Mar 2020 03:16:21 -0500
+        id S1727386AbgCBIQY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 2 Mar 2020 03:16:24 -0500
 Received: from mail.kernel.org (ip5f5ad4e9.dynamic.kabel-deutschland.de [95.90.212.233])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 7A7DE246E6;
-        Mon,  2 Mar 2020 08:16:19 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id CEB29246BE;
+        Mon,  2 Mar 2020 08:16:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583136979;
-        bh=GvP4vju05kdmGtfnW2lQXLeHqLhoRjSRhWQZFPyQmYk=;
+        s=default; t=1583136982;
+        bh=qnOcMWBVyOrLDL9qUMoQRMKsUWyqtsUnvIWanywp9n4=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=YZN5X21zTEIKDTB/Y9m+GsTynkhbbdJlzCYIekaDakbOwT+y28iFIkUAeJvZwCRu1
-         zhrvOQ1QXXNiXrpo0VgbqNIU7NNPsBtkCmlhmwgASD9SpxuVUzcJ5rgODrXjoW1hcJ
-         OlnPXLS1qdhPmRgM1woOYoXpf5bdlv8bEJ5Q8DzI=
+        b=n1VkBPKaBgXAEJQYPtTE4ufBXvF6UjpCSkl24qzmKML+J9GzmNn/ps9IWDH1yM+TT
+         GhnzBXUNqepjKzJLBJ/lpTZOS2KUfP66DRCFo6Cl9K9uOkYlPWERjofNX9oKlbcPvq
+         8E/NDiEOjxnPVNIC9lbnU/Lq0L5e5upq/9tYxjpg=
 Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
         (envelope-from <mchehab@kernel.org>)
-        id 1j8gFN-0003yI-JF; Mon, 02 Mar 2020 09:16:17 +0100
+        id 1j8gFN-0003yR-L9; Mon, 02 Mar 2020 09:16:17 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Kashyap Desai <kashyap.desai@broadcom.com>,
-        Sumit Saxena <sumit.saxena@broadcom.com>,
-        Shivasharan S <shivasharan.srikanteshwara@broadcom.com>,
-        megaraidlinux.pdl@broadcom.com, linux-scsi@vger.kernel.org
-Subject: [PATCH 22/42] docs: scsi: convert megaraid.txt to ReST
-Date:   Mon,  2 Mar 2020 09:15:55 +0100
-Message-Id: <b7ee59230c5a33ff6d60edba0d0bcf3e2aeaa88f.1583136624.git.mchehab+huawei@kernel.org>
+        GOTO Masanori <gotom@debian.or.jp>,
+        YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>,
+        "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        linux-scsi@vger.kernel.org
+Subject: [PATCH 24/42] docs: scsi: convert NinjaSCSI.txt to ReST
+Date:   Mon,  2 Mar 2020 09:15:57 +0100
+Message-Id: <6385a411d000dad005b78647629e43700580ecf0.1583136624.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.21.1
 In-Reply-To: <cover.1583136624.git.mchehab+huawei@kernel.org>
 References: <cover.1583136624.git.mchehab+huawei@kernel.org>
@@ -49,114 +50,310 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/scsi/index.rst                  |  1 +
- .../scsi/{megaraid.txt => megaraid.rst}       | 47 +++++++++++--------
- MAINTAINERS                                   |  2 +-
- 3 files changed, 29 insertions(+), 21 deletions(-)
- rename Documentation/scsi/{megaraid.txt => megaraid.rst} (66%)
+ .../scsi/{NinjaSCSI.txt => NinjaSCSI.rst}     | 198 +++++++++++-------
+ Documentation/scsi/index.rst                  |   1 +
+ MAINTAINERS                                   |   4 +-
+ drivers/scsi/pcmcia/Kconfig                   |   2 +-
+ 4 files changed, 121 insertions(+), 84 deletions(-)
+ rename Documentation/scsi/{NinjaSCSI.txt => NinjaSCSI.rst} (28%)
 
-diff --git a/Documentation/scsi/index.rst b/Documentation/scsi/index.rst
-index 22427511e227..37be1fc9d128 100644
---- a/Documentation/scsi/index.rst
-+++ b/Documentation/scsi/index.rst
-@@ -26,5 +26,6 @@ Linux SCSI Subsystem
-    libsas
-    link_power_management_policy
-    lpfc
-+   megaraid
- 
-    scsi_transport_srp/figures
-diff --git a/Documentation/scsi/megaraid.txt b/Documentation/scsi/megaraid.rst
-similarity index 66%
-rename from Documentation/scsi/megaraid.txt
-rename to Documentation/scsi/megaraid.rst
-index 3c7cea51e687..22b75a86ba72 100644
---- a/Documentation/scsi/megaraid.txt
-+++ b/Documentation/scsi/megaraid.rst
-@@ -1,7 +1,10 @@
--			Notes on Management Module
--			~~~~~~~~~~~~~~~~~~~~~~~~~~
+diff --git a/Documentation/scsi/NinjaSCSI.txt b/Documentation/scsi/NinjaSCSI.rst
+similarity index 28%
+rename from Documentation/scsi/NinjaSCSI.txt
+rename to Documentation/scsi/NinjaSCSI.rst
+index ac8db8ceec77..999a6ed5bf7e 100644
+--- a/Documentation/scsi/NinjaSCSI.txt
++++ b/Documentation/scsi/NinjaSCSI.rst
+@@ -1,127 +1,163 @@
 +.. SPDX-License-Identifier: GPL-2.0
  
--Overview:
-+==========================
-+Notes on Management Module
-+==========================
+-         WorkBiT NinjaSCSI-3/32Bi driver for Linux
++=========================================
++WorkBiT NinjaSCSI-3/32Bi driver for Linux
++=========================================
+ 
+ 1. Comment
+- This is Workbit corp.'s(http://www.workbit.co.jp/) NinjaSCSI-3
++==========
 +
-+Overview
- --------
++This is Workbit corp.'s(http://www.workbit.co.jp/) NinjaSCSI-3
+ for Linux.
  
- Different classes of controllers from LSI Logic accept and respond to the
-@@ -25,28 +28,32 @@ ioctl commands. But this module is envisioned to handle all user space level
- interactions. So any 'proc', 'sysfs' implementations will be localized in this
- common module.
- 
--Credits:
-+Credits
- -------
- 
--"Shared code in a third module, a "library module", is an acceptable
--solution. modprobe automatically loads dependent modules, so users
--running "modprobe driver1" or "modprobe driver2" would automatically
--load the shared library module."
-+::
- 
--		- Jeff Garzik (jgarzik@pobox.com), 02.25.2004 LKML
-+	"Shared code in a third module, a "library module", is an acceptable
-+	solution. modprobe automatically loads dependent modules, so users
-+	running "modprobe driver1" or "modprobe driver2" would automatically
-+	load the shared library module."
- 
--"As Jeff hinted, if your userspace<->driver API is consistent between
--your new MPT-based RAID controllers and your existing megaraid driver,
--then perhaps you need a single small helper module (lsiioctl or some
--better name), loaded by both mptraid and megaraid automatically, which
--handles registering the /dev/megaraid node dynamically. In this case,
--both mptraid and megaraid would register with lsiioctl for each
--adapter discovered, and lsiioctl would essentially be a switch,
--redirecting userspace tool ioctls to the appropriate driver."
-+- Jeff Garzik (jgarzik@pobox.com), 02.25.2004 LKML
- 
--		- Matt Domsch, (Matt_Domsch@dell.com), 02.25.2004 LKML
-+::
- 
--Design:
-+	"As Jeff hinted, if your userspace<->driver API is consistent between
-+	your new MPT-based RAID controllers and your existing megaraid driver,
-+	then perhaps you need a single small helper module (lsiioctl or some
-+	better name), loaded by both mptraid and megaraid automatically, which
-+	handles registering the /dev/megaraid node dynamically. In this case,
-+	both mptraid and megaraid would register with lsiioctl for each
-+	adapter discovered, and lsiioctl would essentially be a switch,
-+	redirecting userspace tool ioctls to the appropriate driver."
+ 2. My Linux environment
+-Linux kernel: 2.4.7 / 2.2.19
+-pcmcia-cs:    3.1.27
+-gcc:          gcc-2.95.4
+-PC card:      I-O data PCSC-F (NinjaSCSI-3)
+-              I-O data CBSC-II in 16 bit mode (NinjaSCSI-32Bi)
+-SCSI device:  I-O data CDPS-PX24 (CD-ROM drive)
+-              Media Intelligent MMO-640GT (Optical disk drive)
++=======================
 +
-+- Matt Domsch, (Matt_Domsch@dell.com), 02.25.2004 LKML
++:Linux kernel: 2.4.7 / 2.2.19
++:pcmcia-cs:    3.1.27
++:gcc:          gcc-2.95.4
++:PC card:      I-O data PCSC-F (NinjaSCSI-3),
++               I-O data CBSC-II in 16 bit mode (NinjaSCSI-32Bi)
++:SCSI device:  I-O data CDPS-PX24 (CD-ROM drive),
++               Media Intelligent MMO-640GT (Optical disk drive)
+ 
+ 3. Install
+-[1] Check your PC card is true "NinjaSCSI-3" card.
++==========
 +
-+Design
- ------
++(a) Check your PC card is true "NinjaSCSI-3" card.
++
+     If you installed pcmcia-cs already, pcmcia reports your card as UNKNOWN
+     card, and write ["WBT", "NinjaSCSI-3", "R1.0"] or some other string to
+     your console or log file.
++
+     You can also use "cardctl" program (this program is in pcmcia-cs source
+     code) to get more info.
  
- The Common Management Module is implemented in megaraid_mm.[ch] files. This
-@@ -61,7 +68,7 @@ uioc_t. The management module converts the older ioctl packets from the older
- applications into uioc_t. After driver handles the uioc_t, the common module
- will convert that back into the old format before returning to applications.
+-# cat /var/log/messages
+-...
+-Jan  2 03:45:06 lindberg cardmgr[78]: unsupported card in socket 1
+-Jan  2 03:45:06 lindberg cardmgr[78]:   product info: "WBT", "NinjaSCSI-3", "R1.0"
+-...
+-# cardctl ident
+-Socket 0:
+-  no product info available
+-Socket 1:
+-  product info: "IO DATA", "CBSC16       ", "1"
++    ::
  
--As new applications evolve and replace the old ones, the old packet format 
-+As new applications evolve and replace the old ones, the old packet format
- will be retired.
++	# cat /var/log/messages
++	...
++	Jan  2 03:45:06 lindberg cardmgr[78]: unsupported card in socket 1
++	Jan  2 03:45:06 lindberg cardmgr[78]:   product info: "WBT", "NinjaSCSI-3", "R1.0"
++	...
++	# cardctl ident
++	Socket 0:
++	  no product info available
++	Socket 1:
++	  product info: "IO DATA", "CBSC16       ", "1"
  
- Common module dedicates one uioc_t packet to each controller registered. This
+-[2] Get the Linux kernel source, and extract it to /usr/src.
++
++(b) Get the Linux kernel source, and extract it to /usr/src.
+     Because the NinjaSCSI driver requires some SCSI header files in Linux 
+     kernel source, I recommend rebuilding your kernel; this eliminates 
+     some versioning problems.
+-$ cd /usr/src
+-$ tar -zxvf linux-x.x.x.tar.gz
+-$ cd linux
+-$ make config
+-...
+ 
+-[3] If you use this driver with Kernel 2.2, unpack pcmcia-cs in some directory
++    ::
++
++	$ cd /usr/src
++	$ tar -zxvf linux-x.x.x.tar.gz
++	$ cd linux
++	$ make config
++	...
++
++(c) If you use this driver with Kernel 2.2, unpack pcmcia-cs in some directory
+     and make & install. This driver requires the pcmcia-cs header file.
+-$ cd /usr/src
+-$ tar zxvf cs-pcmcia-cs-3.x.x.tar.gz
+-...
+ 
+-[4] Extract this driver's archive somewhere, and edit Makefile, then do make.
+-$ tar -zxvf nsp_cs-x.x.tar.gz
+-$ cd nsp_cs-x.x
+-$ emacs Makefile
+-...
+-$ make
++    ::
+ 
+-[5] Copy nsp_cs.ko to suitable place, like /lib/modules/<Kernel version>/pcmcia/ .
++	$ cd /usr/src
++	$ tar zxvf cs-pcmcia-cs-3.x.x.tar.gz
++	...
++
++(d) Extract this driver's archive somewhere, and edit Makefile, then do make::
++
++	$ tar -zxvf nsp_cs-x.x.tar.gz
++	$ cd nsp_cs-x.x
++	$ emacs Makefile
++	...
++	$ make
++
++(e) Copy nsp_cs.ko to suitable place, like /lib/modules/<Kernel version>/pcmcia/ .
++
++(f) Add these lines to /etc/pcmcia/config .
+ 
+-[6] Add these lines to /etc/pcmcia/config .
+     If you use pcmcia-cs-3.1.8 or later, we can use "nsp_cs.conf" file.
+     So, you don't need to edit file. Just copy to /etc/pcmcia/ .
+ 
+--------------------------------------
+-device "nsp_cs"
+-  class "scsi" module "nsp_cs"
+-
+-card "WorkBit NinjaSCSI-3"
+-  version "WBT", "NinjaSCSI-3", "R1.0"
+-  bind "nsp_cs"
+-
+-card "WorkBit NinjaSCSI-32Bi (16bit)"
+-  version "WORKBIT", "UltraNinja-16", "1"
+-  bind "nsp_cs"
+-
+-# OEM
+-card "WorkBit NinjaSCSI-32Bi (16bit) / IO-DATA"
+-  version "IO DATA", "CBSC16       ", "1"
+-  bind "nsp_cs"
+-
+-# OEM
+-card "WorkBit NinjaSCSI-32Bi (16bit) / KME-1"
+-  version "KME    ", "SCSI-CARD-001", "1"
+-  bind "nsp_cs"
+-card "WorkBit NinjaSCSI-32Bi (16bit) / KME-2"
+-  version "KME    ", "SCSI-CARD-002", "1"
+-  bind "nsp_cs"
+-card "WorkBit NinjaSCSI-32Bi (16bit) / KME-3"
+-  version "KME    ", "SCSI-CARD-003", "1"
+-  bind "nsp_cs"
+-card "WorkBit NinjaSCSI-32Bi (16bit) / KME-4"
+-  version "KME    ", "SCSI-CARD-004", "1"
+-  bind "nsp_cs"
+--------------------------------------
+-
+-[7] Start (or restart) pcmcia-cs.
+-# /etc/rc.d/rc.pcmcia start        (BSD style)
+-or
+-# /etc/init.d/pcmcia start         (SYSV style)
++    ::
++
++	device "nsp_cs"
++	  class "scsi" module "nsp_cs"
++
++	card "WorkBit NinjaSCSI-3"
++	  version "WBT", "NinjaSCSI-3", "R1.0"
++	  bind "nsp_cs"
++
++	card "WorkBit NinjaSCSI-32Bi (16bit)"
++	  version "WORKBIT", "UltraNinja-16", "1"
++	  bind "nsp_cs"
++
++	# OEM
++	card "WorkBit NinjaSCSI-32Bi (16bit) / IO-DATA"
++	  version "IO DATA", "CBSC16       ", "1"
++	  bind "nsp_cs"
++
++	# OEM
++	card "WorkBit NinjaSCSI-32Bi (16bit) / KME-1"
++	  version "KME    ", "SCSI-CARD-001", "1"
++	  bind "nsp_cs"
++	card "WorkBit NinjaSCSI-32Bi (16bit) / KME-2"
++	  version "KME    ", "SCSI-CARD-002", "1"
++	  bind "nsp_cs"
++	card "WorkBit NinjaSCSI-32Bi (16bit) / KME-3"
++	  version "KME    ", "SCSI-CARD-003", "1"
++	  bind "nsp_cs"
++	card "WorkBit NinjaSCSI-32Bi (16bit) / KME-4"
++	  version "KME    ", "SCSI-CARD-004", "1"
++	  bind "nsp_cs"
++
++(f) Start (or restart) pcmcia-cs::
++
++	# /etc/rc.d/rc.pcmcia start        (BSD style)
++
++    or::
++
++	# /etc/init.d/pcmcia start         (SYSV style)
+ 
+ 
+ 4. History
++==========
++
+ See README.nin_cs .
+ 
+ 5. Caution
+- If you eject card when doing some operation for your SCSI device or suspend
++==========
++
++If you eject card when doing some operation for your SCSI device or suspend
+ your computer, you encount some *BAD* error like disk crash.
+- It works good when I using this driver right way. But I'm not guarantee
++
++It works good when I using this driver right way. But I'm not guarantee
+ your data. Please backup your data when you use this driver.
+ 
+ 6. Known Bugs
+- In 2.4 kernel, you can't use 640MB Optical disk. This error comes from
++=============
++
++In 2.4 kernel, you can't use 640MB Optical disk. This error comes from
+ high level SCSI driver.
+ 
+ 7. Testing
+- Please send me some reports(bug reports etc..) of this software.
++==========
++
++Please send me some reports(bug reports etc..) of this software.
+ When you send report, please tell me these or more.
+-	card name
+-	kernel version
+-	your SCSI device name(hard drive, CD-ROM, etc...)
++
++	- card name
++	- kernel version
++	- your SCSI device name(hard drive, CD-ROM, etc...)
+ 
+ 8. Copyright
++============
++
+  See GPL.
+ 
+ 
+diff --git a/Documentation/scsi/index.rst b/Documentation/scsi/index.rst
+index a2545efbb407..eb2df0e0dcb7 100644
+--- a/Documentation/scsi/index.rst
++++ b/Documentation/scsi/index.rst
+@@ -28,5 +28,6 @@ Linux SCSI Subsystem
+    lpfc
+    megaraid
+    ncr53c8xx
++   NinjaSCSI
+ 
+    scsi_transport_srp/figures
 diff --git a/MAINTAINERS b/MAINTAINERS
-index e2bd7911baa9..6d28bfc72259 100644
+index 6d28bfc72259..2f441cf59b4b 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -10699,7 +10699,7 @@ L:	megaraidlinux.pdl@broadcom.com
- L:	linux-scsi@vger.kernel.org
- W:	http://www.avagotech.com/support/
+@@ -11861,7 +11861,7 @@ NINJA SCSI-3 / NINJA SCSI-32Bi (16bit/CardBus) PCMCIA SCSI HOST ADAPTER DRIVER
+ M:	YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>
+ W:	http://www.netlab.is.tsukuba.ac.jp/~yokota/izumi/ninja/
  S:	Maintained
--F:	Documentation/scsi/megaraid.txt
-+F:	Documentation/scsi/megaraid.rst
- F:	drivers/scsi/megaraid.*
- F:	drivers/scsi/megaraid/
+-F:	Documentation/scsi/NinjaSCSI.txt
++F:	Documentation/scsi/NinjaSCSI.rst
+ F:	drivers/scsi/pcmcia/nsp_*
+ 
+ NINJA SCSI-32Bi/UDE PCI/CARDBUS SCSI HOST ADAPTER DRIVER
+@@ -11869,7 +11869,7 @@ M:	GOTO Masanori <gotom@debian.or.jp>
+ M:	YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>
+ W:	http://www.netlab.is.tsukuba.ac.jp/~yokota/izumi/ninja/
+ S:	Maintained
+-F:	Documentation/scsi/NinjaSCSI.txt
++F:	Documentation/scsi/NinjaSCSI.rst
+ F:	drivers/scsi/nsp32*
+ 
+ NIOS2 ARCHITECTURE
+diff --git a/drivers/scsi/pcmcia/Kconfig b/drivers/scsi/pcmcia/Kconfig
+index dc9b74c9348a..9696b6b5591f 100644
+--- a/drivers/scsi/pcmcia/Kconfig
++++ b/drivers/scsi/pcmcia/Kconfig
+@@ -36,7 +36,7 @@ config PCMCIA_NINJA_SCSI
+ 	help
+ 	  If you intend to attach this type of PCMCIA SCSI host adapter to
+ 	  your computer, say Y here and read
+-	  <file:Documentation/scsi/NinjaSCSI.txt>.
++	  <file:Documentation/scsi/NinjaSCSI.rst>.
+ 
+ 	  Supported cards:
  
 -- 
 2.21.1
