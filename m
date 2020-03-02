@@ -2,43 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A2F181760C9
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 18:13:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 140EB17612D
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 18:38:03 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727152AbgCBRNh convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Mon, 2 Mar 2020 12:13:37 -0500
-Received: from mail-vi1eur05olkn2013.outbound.protection.outlook.com ([40.92.90.13]:28162
-        "EHLO EUR05-VI1-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1726451AbgCBRNh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 2 Mar 2020 12:13:37 -0500
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=cuZdh4Q3G0BdUqKFlSBo4CRVCUuUSpPKxfZQhMjEy7Hg4mrD33IA7POZB2GB5LdPvU7hPk6i7JAxo6EpDgZfbmeWghA9hVRyjml0tEd4YVxklJDwbfLNURbSyxQuCwWC28UWDEui+rdkeOGtkV4+ZfFZ0Dsn2TNP6anIhv9Qw9MsALK4fVDaRiNGiPccjxRnOSlbur0XodFoj0t2mbKAbmqSxM2gBsmLoldxV0g8gQ4Sxlyvl+nJVAlNPMhwRF73/GJ2cgc8T0LX+T8zY1GXYQrdl/iKi5WL/7UaqycYKOuSUQOUSCZA+K7D+ZpZbOpk5l7wfuF1AP1ssJHZOY900g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=M4Qr6lLw8CV2Brnq7qtJZ08k3XwrEVL/z6ssdJEf8X0=;
- b=hoqRa7Ya6FMJzaS22tJKYatlMUbYWrPOdzm8UR/2embysCjvR4DxthW29gxrIsJ7kZeCoQX2dNKkVc+32OpRxafswQwla9KrneslJHFPP6BpT7NqVYTKUptnUdkieLOirk2zZcJmd5SW0BQ4JdeWpfpksm+km6o67TaqVYcBfjKrMndlUnSLzZGp88Nofp8ajoAfoq9SXRynpM/kkqA/K6B3p+CQEvKLDYMFVX0SPeDlCPppd+x8R3/+H/ttcYs0p9sV0fBhWHOLdCasWkcb9uVKCt8723SSUTr/1G943j3HfWmeTbJfe7msgZa36e9WMVqUt8oHcnehbn8kifTtWw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=none; dmarc=none;
- dkim=none; arc=none
-Received: from AM6EUR05FT020.eop-eur05.prod.protection.outlook.com
- (2a01:111:e400:fc11::3a) by
- AM6EUR05HT022.eop-eur05.prod.protection.outlook.com (2a01:111:e400:fc11::122)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.14; Mon, 2 Mar
- 2020 17:13:31 +0000
-Received: from AM6PR03MB5170.eurprd03.prod.outlook.com (10.233.240.60) by
- AM6EUR05FT020.mail.protection.outlook.com (10.233.241.105) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.20.2772.14 via Frontend Transport; Mon, 2 Mar 2020 17:13:31 +0000
-Received: from AM6PR03MB5170.eurprd03.prod.outlook.com
- ([fe80::1956:d274:cab3:b4dd]) by AM6PR03MB5170.eurprd03.prod.outlook.com
- ([fe80::1956:d274:cab3:b4dd%6]) with mapi id 15.20.2772.019; Mon, 2 Mar 2020
- 17:13:31 +0000
-Received: from [192.168.1.101] (92.77.140.102) by AM4PR05CA0016.eurprd05.prod.outlook.com (2603:10a6:205::29) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2772.15 via Frontend Transport; Mon, 2 Mar 2020 17:13:29 +0000
-From:   Bernd Edlinger <bernd.edlinger@hotmail.de>
-To:     "Eric W. Biederman" <ebiederm@xmission.com>
-CC:     Jann Horn <jannh@google.com>,
+        id S1727181AbgCBRhz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Mar 2020 12:37:55 -0500
+Received: from mail-ot1-f66.google.com ([209.85.210.66]:38168 "EHLO
+        mail-ot1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727144AbgCBRhz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Mar 2020 12:37:55 -0500
+Received: by mail-ot1-f66.google.com with SMTP id i14so64470otp.5
+        for <linux-doc@vger.kernel.org>; Mon, 02 Mar 2020 09:37:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=/ZAKVb1y956pqysbIHLXaqWd9Ys3FR5AQaat5ayTW2U=;
+        b=tvXmHHsdwC2ZHXs+RdxnZLvNNTOIQtXQo8+c4NIG9SwSrx3X2qfM4PFM54/x5xFwJp
+         cfFlhvQc0zBKaRaTBUYJdf4weoUwAZE/jWkqSkDz7QQA2gBwflEvwBaARHqOO3jfoZWe
+         H3HzZ3d8YIZfEn42qsIaSNuiAQiMlVeuHwsGHfdJ91w4d3C9kQ6guQceh2DHy3g/ptV8
+         GD9luNMoxl/wmt0z1ZAyx7TT3Evb8ThhnGs8bzJ/crBzhPs02h3kMtaJVJfzx4+AOqh4
+         0/3m1NcszFU4y0wqzn15zw+AD7m87pgt2c5Z3r/ZdcO5TYFDuZe7cntLaqgpzosYUE3y
+         +q/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=/ZAKVb1y956pqysbIHLXaqWd9Ys3FR5AQaat5ayTW2U=;
+        b=myjabzqXSDQah/YsYvb+7qGCwdGfRImgwwpuZKxLmR6HE3CcGgQ3VAcxduUHvCrWmV
+         Ul7WE9nWOo5YUKEC+uTfBCM+GqM/RrxDIlHk2fVoHwXJis2yXGalm1tDHbk4BIUzEPwK
+         BFk3yk270X6ytf6kF09JuWjwsTQxK7GwxFOaD2E6pjTle1ghmopriLEiGlNZr2SsM2AH
+         HfUpNeucWlT0b4rYSPZKq5faXbBKztu0zgXCGze9v4Fkgg2uBlsw5yUtrmCrmb1qIYPQ
+         u8W6a2nWqFxn4ty3sfGKLvcxgJxScdaLS+m/2AlhxETZBBddrJXmB62loQIi1iID6fyL
+         DkOQ==
+X-Gm-Message-State: ANhLgQ1AaeMQGZFFK6nyh3SXXLsaLpTr0T1N01WLBwnyTeIafxYMNtSK
+        24it66GiEfJ86XrBcn0dvg+thCd2ZaspP4gt9A6o0g==
+X-Google-Smtp-Source: ADFU+vtHoXXslAIJ9PskP6M3hEdJM3ncRGi/PdHfdHEyUI3a6T8IzVZn8NhUDRURCHCZlf8D86bKwYn9TcyfdRsVwhY=
+X-Received: by 2002:a05:6830:1d6e:: with SMTP id l14mr256675oti.32.1583170673984;
+ Mon, 02 Mar 2020 09:37:53 -0800 (PST)
+MIME-Version: 1.0
+References: <AM6PR03MB5170B06F3A2B75EFB98D071AE4E60@AM6PR03MB5170.eurprd03.prod.outlook.com>
+ <CAG48ez3QHVpMJ9Rb_Q4LEE6uAqQJeS1Myu82U=fgvUfoeiscgw@mail.gmail.com>
+ <20200301185244.zkofjus6xtgkx4s3@wittgenstein> <CAG48ez3mnYc84iFCA25-rbJdSBi3jh9hkp569XZTbFc_9WYbZw@mail.gmail.com>
+ <AM6PR03MB5170EB4427BF5C67EE98FF09E4E60@AM6PR03MB5170.eurprd03.prod.outlook.com>
+ <87a74zmfc9.fsf@x220.int.ebiederm.org> <AM6PR03MB517071DEF894C3D72D2B4AE2E4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
+ <87k142lpfz.fsf@x220.int.ebiederm.org> <AM6PR03MB51704206634C009500A8080DE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
+ <875zfmloir.fsf@x220.int.ebiederm.org> <CAG48ez0iXMD0mduKWHG6GZZoR+s2jXy776zwiRd+tFADCEiBEw@mail.gmail.com>
+ <AM6PR03MB5170BD130F15CE1909F59B55E4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
+In-Reply-To: <AM6PR03MB5170BD130F15CE1909F59B55E4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
+From:   Jann Horn <jannh@google.com>
+Date:   Mon, 2 Mar 2020 18:37:27 +0100
+Message-ID: <CAG48ez1jj_J3PtENWvu8piFGsik6RvuyD38ie48TYr2k1Rbf3A@mail.gmail.com>
+Subject: Re: [PATCHv2] exec: Fix a deadlock in ptrace
+To:     Bernd Edlinger <bernd.edlinger@hotmail.de>
+Cc:     "Eric W. Biederman" <ebiederm@xmission.com>,
+        James Morris <jamorris@linux.microsoft.com>,
         Christian Brauner <christian.brauner@ubuntu.com>,
         Jonathan Corbet <corbet@lwn.net>,
         Alexander Viro <viro@zeniv.linux.org.uk>,
@@ -55,7 +73,6 @@ CC:     Jann Horn <jannh@google.com>,
         Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
         Anshuman Khandual <anshuman.khandual@arm.com>,
         David Howells <dhowells@redhat.com>,
-        James Morris <jamorris@linux.microsoft.com>,
         Kees Cook <keescook@chromium.org>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Shakeel Butt <shakeelb@google.com>,
@@ -68,130 +85,102 @@ CC:     Jann Horn <jannh@google.com>,
         "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
         "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
         "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "stable@vger.kernel.org" <stable@vger.kernel.org>
-Subject: Re: [PATCHv2] exec: Fix a deadlock in ptrace
-Thread-Topic: [PATCHv2] exec: Fix a deadlock in ptrace
-Thread-Index: AQHV8AjGwZG4WijWc0+aQpdADP+q6qg02ufjgACXoYCAAASqH4AAAMAAgAAEyVeAAA77AA==
-Date:   Mon, 2 Mar 2020 17:13:31 +0000
-Message-ID: <AM6PR03MB51707ABF20B6CBBECC34865FE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
-References: <AM6PR03MB5170B06F3A2B75EFB98D071AE4E60@AM6PR03MB5170.eurprd03.prod.outlook.com>
- <CAG48ez3QHVpMJ9Rb_Q4LEE6uAqQJeS1Myu82U=fgvUfoeiscgw@mail.gmail.com>
- <20200301185244.zkofjus6xtgkx4s3@wittgenstein>
- <CAG48ez3mnYc84iFCA25-rbJdSBi3jh9hkp569XZTbFc_9WYbZw@mail.gmail.com>
- <AM6PR03MB5170EB4427BF5C67EE98FF09E4E60@AM6PR03MB5170.eurprd03.prod.outlook.com>
- <87a74zmfc9.fsf@x220.int.ebiederm.org>
- <AM6PR03MB517071DEF894C3D72D2B4AE2E4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
- <87k142lpfz.fsf@x220.int.ebiederm.org>
- <AM6PR03MB51704206634C009500A8080DE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
- <875zfmloir.fsf@x220.int.ebiederm.org>
-In-Reply-To: <875zfmloir.fsf@x220.int.ebiederm.org>
-Accept-Language: en-US, en-GB, de-DE
-Content-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-clientproxiedby: AM4PR05CA0016.eurprd05.prod.outlook.com (2603:10a6:205::29)
- To AM6PR03MB5170.eurprd03.prod.outlook.com (2603:10a6:20b:ca::23)
-x-incomingtopheadermarker: OriginalChecksum:1EFB63CF3AF28D0CE965C79CF93DD2F8A834E2DCD45D2150F076C6F3B6452180;UpperCasedChecksum:E34ABCC5BF6FF0D37F9A3E2D38963EB269F629B1F0D78CFF8019DC3DD628152E;SizeAsReceived:9455;Count:50
-x-ms-exchange-messagesentrepresentingtype: 1
-x-tmn:  [iQMbvCt4QB+8RYQmxvOQCC70cu5hAA7g]
-x-microsoft-original-message-id: <8c11f6ae-fd06-1709-c2bc-9c14d4dc8e86@hotmail.de>
-x-ms-publictraffictype: Email
-x-incomingheadercount: 50
-x-eopattributedmessage: 0
-x-ms-office365-filtering-correlation-id: 085f4925-c2f8-4ea6-5d78-08d7becd080a
-x-ms-traffictypediagnostic: AM6EUR05HT022:
-x-microsoft-antispam: BCL:0;
-x-microsoft-antispam-message-info: 2kl4YEj/Wt7IFxUqz2HDx3Ve6X8We3z6+gcU3nAHyHPK48lqkyBMAiuqNoRh618KWY9DUb0W9tZK1aiApHrLewDLZFKqvxGhuATb3Uw9SiX2JwV1xgDcj+chq0+hd6O9eF942vhPzM8Oh4u1MM91ziWkrOciCvtjzmXNH0YHnDzA2m/quh3V+iWvfZ5n18WA
-x-ms-exchange-antispam-messagedata: FfPzUEdcNfmy1xcsymD7IjyWW4dbm0GNwEyEz0rgZ7vN4JV8uFK2I2uZLLKI5Xq5HsTr/6ndmhPiibZx9chTVLtTSONXd5+DbXMNdraBzElWD6VSOQZUXTYFamekJFPiN8OVzSxpVR2MvTfskngT6A==
-x-ms-exchange-transport-forked: True
-Content-Type: text/plain; charset="Windows-1252"
-Content-ID: <1BC8A6ED600912469119746F1E8115F3@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: 8BIT
-MIME-Version: 1.0
-X-OriginatorOrg: outlook.com
-X-MS-Exchange-CrossTenant-RMS-PersistedConsumerOrg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-Network-Message-Id: 085f4925-c2f8-4ea6-5d78-08d7becd080a
-X-MS-Exchange-CrossTenant-rms-persistedconsumerorg: 00000000-0000-0000-0000-000000000000
-X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Mar 2020 17:13:31.2172
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Internet
-X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6EUR05HT022
+        "stable@vger.kernel.org" <stable@vger.kernel.org>,
+        linux-security-module <linux-security-module@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Mon, Mar 2, 2020 at 6:01 PM Bernd Edlinger <bernd.edlinger@hotmail.de> wrote:
+> On 3/2/20 5:43 PM, Jann Horn wrote:
+> > On Mon, Mar 2, 2020 at 5:19 PM Eric W. Biederman <ebiederm@xmission.com> wrote:
+> >>
+> >> Bernd Edlinger <bernd.edlinger@hotmail.de> writes:
+> >>
+> >>> On 3/2/20 4:57 PM, Eric W. Biederman wrote:
+> >>>> Bernd Edlinger <bernd.edlinger@hotmail.de> writes:
+> >>>>
+> >>>>>
+> >>>>> I tried this with s/EACCESS/EACCES/.
+> >>>>>
+> >>>>> The test case in this patch is not fixed, but strace does not freeze,
+> >>>>> at least with my setup where it did freeze repeatable.
+> >>>>
+> >>>> Thanks, That is what I was aiming at.
+> >>>>
+> >>>> So we have one method we can pursue to fix this in practice.
+> >>>>
+> >>>>> That is
+> >>>>> obviously because it bypasses the cred_guard_mutex.  But all other
+> >>>>> process that access this file still freeze, and cannot be
+> >>>>> interrupted except with kill -9.
+> >>>>>
+> >>>>> However that smells like a denial of service, that this
+> >>>>> simple test case which can be executed by guest, creates a /proc/$pid/mem
+> >>>>> that freezes any process, even root, when it looks at it.
+> >>>>> I mean: "ln -s README /proc/$pid/mem" would be a nice bomb.
+> >>>>
+> >>>> Yes.  Your the test case in your patch a variant of the original
+> >>>> problem.
+> >>>>
+> >>>>
+> >>>> I have been staring at this trying to understand the fundamentals of the
+> >>>> original deeper problem.
+> >>>>
+> >>>> The current scope of cred_guard_mutex in exec is because being ptraced
+> >>>> causes suid exec to act differently.  So we need to know early if we are
+> >>>> ptraced.
+> >>>>
+> >>>
+> >>> It has a second use, that it prevents two threads entering execve,
+> >>> which would probably result in disaster.
+> >>
+> >> Exec can fail with an error code up until de_thread.  de_thread causes
+> >> exec to fail with the error code -EAGAIN for the second thread to get
+> >> into de_thread.
+> >>
+> >> So no.  The cred_guard_mutex is not needed for that case at all.
+> >>
+> >>>> If that case did not exist we could reduce the scope of the
+> >>>> cred_guard_mutex in exec to where your patch puts the cred_change_mutex.
+> >>>>
+> >>>> I am starting to think reworking how we deal with ptrace and exec is the
+> >>>> way to solve this problem.
+> >>
+> >>
+> >> I am 99% convinced that the fix is to move cred_guard_mutex down.
+> >
+> > "move cred_guard_mutex down" as in "take it once we've already set up
+> > the new process, past the point of no return"?
+> >
+> >> Then right after we take cred_guard_mutex do:
+> >>         if (ptraced) {
+> >>                 use_original_creds();
+> >>         }
+> >>
+> >> And call it a day.
+> >>
+> >> The details suck but I am 99% certain that would solve everyones
+> >> problems, and not be too bad to audit either.
+> >
+> > Ah, hmm, that sounds like it'll work fine at least when no LSMs are involved.
+> >
+> > SELinux normally doesn't do the execution-degrading thing, it just
+> > blocks the execution completely - see their selinux_bprm_set_creds()
+> > hook. So I think they'd still need to set some state on the task that
+> > says "we're currently in the middle of an execution where the target
+> > task will run in context X", and then check against that in the
+> > ptrace_may_access hook. Or I suppose they could just kill the task
+> > near the end of execve, although that'd be kinda ugly.
+> >
+>
+> We have current->in_execve for that, right?
+> I think when the cred_guard_mutex is taken only in the critical section,
+> then PTRACE_ATTACH could take the guard_mutex, and look at current->in_execve,
+> and just return -EAGAIN in that case, right, everybody happy :)
 
-
-On 3/2/20 5:17 PM, Eric W. Biederman wrote:
-> Bernd Edlinger <bernd.edlinger@hotmail.de> writes:
-> 
->> On 3/2/20 4:57 PM, Eric W. Biederman wrote:
->>> Bernd Edlinger <bernd.edlinger@hotmail.de> writes:
->>>
->>>>
->>>> I tried this with s/EACCESS/EACCES/.
->>>>
->>>> The test case in this patch is not fixed, but strace does not freeze,
->>>> at least with my setup where it did freeze repeatable.
->>>
->>> Thanks, That is what I was aiming at.
->>>
->>> So we have one method we can pursue to fix this in practice.
->>>
->>>> That is
->>>> obviously because it bypasses the cred_guard_mutex.  But all other
->>>> process that access this file still freeze, and cannot be
->>>> interrupted except with kill -9.
->>>>
->>>> However that smells like a denial of service, that this
->>>> simple test case which can be executed by guest, creates a /proc/$pid/mem
->>>> that freezes any process, even root, when it looks at it.
->>>> I mean: "ln -s README /proc/$pid/mem" would be a nice bomb.
->>>
->>> Yes.  Your the test case in your patch a variant of the original
->>> problem.
->>>
->>>
->>> I have been staring at this trying to understand the fundamentals of the
->>> original deeper problem.
->>>
->>> The current scope of cred_guard_mutex in exec is because being ptraced
->>> causes suid exec to act differently.  So we need to know early if we are
->>> ptraced.
->>>
->>
->> It has a second use, that it prevents two threads entering execve,
->> which would probably result in disaster.
-> 
-> Exec can fail with an error code up until de_thread.  de_thread causes
-> exec to fail with the error code -EAGAIN for the second thread to get
-> into de_thread.
-> 
-> So no.  The cred_guard_mutex is not needed for that case at all.
-> 
-
-Okay, but that will reset current->in_execve, right?
-
->>> If that case did not exist we could reduce the scope of the
->>> cred_guard_mutex in exec to where your patch puts the cred_change_mutex.
->>>
->>> I am starting to think reworking how we deal with ptrace and exec is the
->>> way to solve this problem.
-> 
-> 
-> I am 99% convinced that the fix is to move cred_guard_mutex down.
-> 
-> Then right after we take cred_guard_mutex do:
-> 	if (ptraced) {
-> 		use_original_creds();
-> 	}
-> 
-> And call it a day.
-> 
-> The details suck but I am 99% certain that would solve everyones
-> problems, and not be too bad to audit either.
-> 
-> Eric
-> 
+It's probably going to mean that things like strace will just randomly
+fail to attach to processes if they happen to be in the middle of
+execve... but I guess that works?
