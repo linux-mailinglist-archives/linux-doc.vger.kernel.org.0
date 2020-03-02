@@ -2,76 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 511F617678C
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 23:40:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 59C881767A2
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 23:46:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726947AbgCBWkM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 2 Mar 2020 17:40:12 -0500
-Received: from ms.lwn.net ([45.79.88.28]:59698 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726773AbgCBWkK (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 2 Mar 2020 17:40:10 -0500
-Received: from meer.lwn.net (localhost [127.0.0.1])
-        by ms.lwn.net (Postfix) with ESMTPA id 7D4809B1;
-        Mon,  2 Mar 2020 22:40:09 +0000 (UTC)
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     linux-kernel@vger.kernel.org
-Cc:     Kees Cook <keescook@chromium.org>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Michal Marek <michal.lkml@markovi.net>,
-        linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 3/3] docs: move core-api/ioctl.rst to driver-api/
-Date:   Mon,  2 Mar 2020 15:39:57 -0700
-Message-Id: <20200302223957.905473-4-corbet@lwn.net>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200302223957.905473-1-corbet@lwn.net>
-References: <20200302223957.905473-1-corbet@lwn.net>
+        id S1726979AbgCBWpf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Mar 2020 17:45:35 -0500
+Received: from mail-pg1-f193.google.com ([209.85.215.193]:46703 "EHLO
+        mail-pg1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726778AbgCBWpf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Mar 2020 17:45:35 -0500
+Received: by mail-pg1-f193.google.com with SMTP id y30so512819pga.13
+        for <linux-doc@vger.kernel.org>; Mon, 02 Mar 2020 14:45:33 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:mime-version:content-disposition
+         :in-reply-to;
+        bh=GFD8ViXColObn8FM0PtoZqKUGLmCPza4UuJiavcTlUk=;
+        b=WOFD+1Nf4ROrRkdcS2D5Dsei0yXLkev6qnAqaLDLHleCetNWzzamUGvlzp/253O8jh
+         3r03SkffB+wUd+5cZAcVQv7IP2C7/s6hLTVHBBxDMhIH9Zl/ntMVEcd/f6KslWykbsLn
+         tCMHnOUaFbey1oPEdx6KV21wnn0J36dc3JzMI=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+         :content-disposition:in-reply-to;
+        bh=GFD8ViXColObn8FM0PtoZqKUGLmCPza4UuJiavcTlUk=;
+        b=E5edAFlyhrfuhuw9OhwlwswYWySTXOpORXeeyQdSCrofcp7KQAkfpBN1z+dTdX2ipv
+         wC2MOLwf4HW1Gdml7zwzKodeKxFTzTTo1tQEdzqsBfbeARLO2CzM9Tf35iLIkvWl+vRM
+         9m/fCkiDTHTX3cEqAVLzHLr7D0nVrm1ob5NdK2KzKJtY9rYkt3SpmRFRJy5BCUyafax3
+         mWVKqn99367iTkS1+VZad7Q1rdbflD7Mn3QC1BuGu0FoUp9nvzDhfLufns695POCiI/U
+         FsSsL8jzYMv5QM2aRjCfaxd0izJyi9XwwAQR0MKT81Ry8uCHWXrbVxLWcVMrpPjMwAB0
+         Okyg==
+X-Gm-Message-State: ANhLgQ1fO0Up0U7oohziXkgpGMQmqF3nFz2PGI9prXdy4oDCGrdFClLd
+        RcO0nOq21+/Ou9QVBwbqUOq9Ow==
+X-Google-Smtp-Source: ADFU+vu7n6pQF0dWmSqvn0KXxGvBVGm4fqd9FgIsTrDfyQROBoSJtdUzEcRBWZnkK1aK2uDhIh2uwA==
+X-Received: by 2002:a63:4555:: with SMTP id u21mr1106380pgk.66.1583189132864;
+        Mon, 02 Mar 2020 14:45:32 -0800 (PST)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id a10sm21559754pgk.71.2020.03.02.14.45.31
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Mar 2020 14:45:31 -0800 (PST)
+Date:   Mon, 2 Mar 2020 14:45:30 -0800
+From:   Kees Cook <keescook@chromium.org>
+To:     Brendan Higgins <brendanhiggins@google.com>
+Cc:     Frank Rowand <frowand.list@gmail.com>, jdike@addtoit.com,
+        richard@nod.at, anton.ivanov@cambridgegreys.com, arnd@arndb.de,
+        skhan@linuxfoundation.org, alan.maguire@oracle.com,
+        yzaikin@google.com, davidgow@google.com, akpm@linux-foundation.org,
+        rppt@linux.ibm.com, gregkh@linuxfoundation.org, sboyd@kernel.org,
+        logang@deltatee.com, mcgrof@kernel.org,
+        linux-um@lists.infradead.org, linux-arch@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3 4/7] init: main: add KUnit to kernel init
+Message-ID: <202003021439.A6B6FD8@keescook>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200228012036.15682-5-brendanhiggins@google.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The ioctl() documentation belongs with the rest of the driver-oriented
-info, so move it there.
+On 2/27/20 7:20 PM, Brendan Higgins wrote:
+> Remove KUnit from init calls entirely, instead call directly from
+> kernel_init().
+> 
+> Co-developed-by: Alan Maguire <alan.maguire@oracle.com>
+> Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
+> Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
+> Reviewed-by: Stephen Boyd <sboyd@kernel.org>
+> [...]
+> diff --git a/init/main.c b/init/main.c
+> index ee4947af823f3..7875a5c486dc4 100644
+> --- a/init/main.c
+> +++ b/init/main.c
+> @@ -104,6 +104,8 @@
+>  #define CREATE_TRACE_POINTS
+>  #include <trace/events/initcall.h>
+>  
+> +#include <kunit/test.h>
+> +
+>  static int kernel_init(void *);
+>  
+>  extern void init_IRQ(void);
+> @@ -1444,6 +1446,8 @@ static noinline void __init kernel_init_freeable(void)
+>  
+>  	do_basic_setup();
+>  
+> +	kunit_run_all_tests();
+> +
+>  	console_on_rootfs();
+>  
+>  	/*
 
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
----
- Documentation/core-api/index.rst                 | 1 -
- Documentation/driver-api/index.rst               | 1 +
- Documentation/{core-api => driver-api}/ioctl.rst | 0
- 3 files changed, 1 insertion(+), 1 deletion(-)
- rename Documentation/{core-api => driver-api}/ioctl.rst (100%)
+I'm nervous about this happening before two key pieces of the kernel
+setup, which might lead to weird timing-sensitive bugs or false
+positives:
+	async_synchronize_full()
+	mark_readonly()
 
-diff --git a/Documentation/core-api/index.rst b/Documentation/core-api/index.rst
-index 9836a0ac09a3..0897ad12c119 100644
---- a/Documentation/core-api/index.rst
-+++ b/Documentation/core-api/index.rst
-@@ -102,7 +102,6 @@ Documents that don't fit elsewhere or which have yet to be categorized.
-    :maxdepth: 1
- 
-    librs
--   ioctl
- 
- .. only:: subproject and html
- 
-diff --git a/Documentation/driver-api/index.rst b/Documentation/driver-api/index.rst
-index ea3003b3c5e5..1d8c5599149b 100644
---- a/Documentation/driver-api/index.rst
-+++ b/Documentation/driver-api/index.rst
-@@ -17,6 +17,7 @@ available subsections can be seen below.
-    driver-model/index
-    basics
-    infrastructure
-+   ioctl
-    early-userspace/index
-    pm/index
-    clk
-diff --git a/Documentation/core-api/ioctl.rst b/Documentation/driver-api/ioctl.rst
-similarity index 100%
-rename from Documentation/core-api/ioctl.rst
-rename to Documentation/driver-api/ioctl.rst
+Now, I realize kunit tests _should_ be self-contained, but this seems
+like a possible robustness problem. Is there any reason this can't be
+moved after rcu_end_inkernel_boot() in kernel_init() instead?
+
 -- 
-2.24.1
-
+Kees Cook
