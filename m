@@ -2,92 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 02CE4175442
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 08:06:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DF2CC17548D
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 08:38:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726144AbgCBHGv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 2 Mar 2020 02:06:51 -0500
-Received: from bombadil.infradead.org ([198.137.202.133]:36206 "EHLO
-        bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725446AbgCBHGv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Mar 2020 02:06:51 -0500
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
-        Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:
-        Subject:Sender:Reply-To:Content-ID:Content-Description;
-        bh=e+UgOBP2C/fGrEWGLe7tJJaQdy33rX5WFPpAjGLY4fc=; b=i6ntJOgc4OfIEImyEteflOZcPZ
-        AYG+UzbtSIvtt+BilEHf4GRmGpw9I81IRGpvfb0LKOXg3Y9spOzerqUgJlCqX6szl71GyI6veBNmu
-        2mz683PEfZERQjHeRkYjNdbvlbrT8pWnE7YCEjv2gICYU/qczGnKWxj3eprw5OQ7WbQ3km+wJ1gHV
-        7hG4voO1hWM4HAwBVaO8nEI/cZclLXwtnlcFQo/g/08ic19bybo49n1j4DgVVR4dFs9YekY0Q1i7m
-        5sgf0xUGehZovAuBbkL6ic4vtrKPNFtGFfoV3CNBjrOuSa+97o3PKMEq5lBmxr+nIcoRqMB2pub+9
-        VQitlLSg==;
-Received: from [2601:1c0:6280:3f0::19c2]
-        by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1j8fA9-0006yk-Ii; Mon, 02 Mar 2020 07:06:49 +0000
-Subject: Re: [PATCH v2] Documentation: bootconfig: Update boot configuration
- documentation
-To:     Masami Hiramatsu <mhiramat@kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Markus Elfring <Markus.Elfring@web.de>
-References: <158287861133.18632.12035327305997207220.stgit@devnote2>
- <158287862131.18632.11822701514141299400.stgit@devnote2>
- <972ba3a8-9dd7-e043-d2f0-8fa8620686f7@infradead.org>
- <20200302155247.93558d4865a8bcd160ef39e5@kernel.org>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <2080a377-f03d-9df6-bb4a-c440d6f8ac11@infradead.org>
-Date:   Sun, 1 Mar 2020 23:06:48 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+        id S1727054AbgCBHiQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Mar 2020 02:38:16 -0500
+Received: from mail.kernel.org ([198.145.29.99]:44750 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726728AbgCBHiQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 2 Mar 2020 02:38:16 -0500
+Received: from mail.kernel.org (ip5f5ad4e9.dynamic.kabel-deutschland.de [95.90.212.233])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 75907246C3;
+        Mon,  2 Mar 2020 07:38:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1583134694;
+        bh=T8vFYILzC45eCW4Wh3WxrKNUOWDY4EPays1rr51QIiU=;
+        h=From:To:Cc:Subject:Date:From;
+        b=wzERUhC5bF+eOidCDFaJu9O4eO82gm15t2C5lmq0HYjReq3+oK2NBuEGyERqazTar
+         +CorwDJFnpmzkcHGkjXl42afKcuAwl48VntNy7JTAB7XnzL8p85eCpZWmaHxw8Xf3T
+         hYlyhvPZnC4zd4uIEAgzMO78fnMi0DLB+1CtA7aA=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1j8feV-0003VO-OT; Mon, 02 Mar 2020 08:38:11 +0100
+From:   Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Andy Whitcroft <apw@canonical.com>, devicetree@vger.kernel.org,
+        Harry Wei <harryxiyou@gmail.com>,
+        Frank Rowand <frowand.list@gmail.com>,
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Joe Perches <joe@perches.com>,
+        Pantelis Antoniou <pantelis.antoniou@konsulko.com>,
+        Lee Jones <lee.jones@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>
+Subject: [PATCH 00/12] Convert some DT documentation files to ReST
+Date:   Mon,  2 Mar 2020 08:37:55 +0100
+Message-Id: <cover.1583134242.git.mchehab+samsung@kernel.org>
+X-Mailer: git-send-email 2.21.1
 MIME-Version: 1.0
-In-Reply-To: <20200302155247.93558d4865a8bcd160ef39e5@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 3/1/20 10:52 PM, Masami Hiramatsu wrote:
-> On Fri, 28 Feb 2020 21:59:45 -0800
-> Randy Dunlap <rdunlap@infradead.org> wrote:
-> 
->> On 2/28/20 12:30 AM, Masami Hiramatsu wrote:
->>> Update boot configuration documentation.
->>>
->>>  - Not using "config" abbreviation but configuration or description.
->>>  - Rewrite descriptions of node and its maxinum number.
->>>  - Add a section of use cases of boot configuration.
->>>  - Move how to use bootconfig to earlier section.
->>>  - Fix some typos, indents and format mistakes.
->>>
->>> Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
->>> ---
->>> Changes in v2:
->>>  - Fixes additional typos (Thanks Markus and Randy!)
->>>  - Change a section title to "Tree Structured Key".
->>> ---
->>>  Documentation/admin-guide/bootconfig.rst |  180 +++++++++++++++++++-----------
->>>  Documentation/trace/boottime-trace.rst   |    2 
->>>  2 files changed, 116 insertions(+), 66 deletions(-)
+While most of the devicetree stuff has its own format (with is now being
+converted to YAML format), some documents there are actually
+describing the DT concepts and how to contribute to it.
 
+IMHO, those documents would fit perfectly as part of the documentation
+body, as part of the firmare documents set.
 
->>> +Also, some subsystem may depend on the boot configuration, and it has own
->>> +root key. For example, ftrace boot-time tracer uses "ftrace" root key to
->>> +describe its options [2]_. In this case, you need to use the boot
->>> +configuration.
->>
->> Does this say that "ftrace" requires use of bootconfig?
->> It seems to say that.
-> 
-> Ah, I got it. The last sentence is confusing. How about below?
-> 
-> "If you want to use the boot-time tracer, you need to use the boot configuration."
+This patch series manually converts some DT documents that, on my
+opinion, would belong to it.
 
-Yes, that is better. Thanks.
+If you want to see how this would show at the documentation body,
+a sneak peak of this series (together with the other pending
+doc patches from me) is available at:
+
+	https://www.infradead.org/~mchehab/kernel_docs/devicetree/index.html
+
+Mauro Carvalho Chehab (12):
+  docs: dt: add an index.rst file for devicetree
+  docs: dt: convert usage-model.txt to ReST
+  docs: dt: usage_model.rst: fix link for DT usage
+  docs: dt: convert booting-without-of.txt to ReST format
+  docs: dt: convert changesets to ReST
+  docs: dt: convert dynamic-resolution-notes.txt to ReST
+  docs: dt: convert of_unittest.txt to ReST
+  docs: dt: convert overlay-notes.txt to ReST format
+  docs: dt: minor adjustments at writing-schema.rst
+  docs: dt: convert ABI.txt to ReST format
+  docs: dt: convert submitting-patches.txt to ReST format
+  docs: dt: convert writing-bindings.txt to ReST
+
+ Documentation/arm/booting.rst                 |   2 +-
+ Documentation/arm/microchip.rst               |   2 +-
+ .../devicetree/bindings/{ABI.txt => ABI.rst}  |   5 +-
+ .../devicetree/bindings/arm/amlogic.yaml      |   2 +-
+ .../devicetree/bindings/arm/syna.txt          |   2 +-
+ Documentation/devicetree/bindings/index.rst   |  12 +
+ ...ing-patches.txt => submitting-patches.rst} |  12 +-
+ ...ting-bindings.txt => writing-bindings.rst} |   9 +-
+ ...-without-of.txt => booting-without-of.rst} | 299 ++++++++++--------
+ .../{changesets.txt => changesets.rst}        |  24 +-
+ ...notes.txt => dynamic-resolution-notes.rst} |   5 +-
+ Documentation/devicetree/index.rst            |  18 ++
+ .../{of_unittest.txt => of_unittest.rst}      | 186 +++++------
+ .../{overlay-notes.txt => overlay-notes.rst}  | 143 +++++----
+ .../{usage-model.txt => usage-model.rst}      |  35 +-
+ Documentation/devicetree/writing-schema.rst   |   9 +-
+ Documentation/index.rst                       |   3 +
+ Documentation/process/submitting-patches.rst  |   2 +-
+ .../it_IT/process/submitting-patches.rst      |   2 +-
+ Documentation/translations/zh_CN/arm/Booting  |   2 +-
+ MAINTAINERS                                   |   4 +-
+ include/linux/mfd/core.h                      |   2 +-
+ scripts/checkpatch.pl                         |   2 +-
+ 23 files changed, 446 insertions(+), 336 deletions(-)
+ rename Documentation/devicetree/bindings/{ABI.txt => ABI.rst} (94%)
+ create mode 100644 Documentation/devicetree/bindings/index.rst
+ rename Documentation/devicetree/bindings/{submitting-patches.txt => submitting-patches.rst} (92%)
+ rename Documentation/devicetree/bindings/{writing-bindings.txt => writing-bindings.rst} (89%)
+ rename Documentation/devicetree/{booting-without-of.txt => booting-without-of.rst} (90%)
+ rename Documentation/devicetree/{changesets.txt => changesets.rst} (59%)
+ rename Documentation/devicetree/{dynamic-resolution-notes.txt => dynamic-resolution-notes.rst} (90%)
+ create mode 100644 Documentation/devicetree/index.rst
+ rename Documentation/devicetree/{of_unittest.txt => of_unittest.rst} (54%)
+ rename Documentation/devicetree/{overlay-notes.txt => overlay-notes.rst} (56%)
+ rename Documentation/devicetree/{usage-model.txt => usage-model.rst} (97%)
 
 -- 
-~Randy
+2.21.1
+
 
