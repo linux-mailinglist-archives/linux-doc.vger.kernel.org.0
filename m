@@ -2,88 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E7F4176126
-	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 18:37:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 97A04176134
+	for <lists+linux-doc@lfdr.de>; Mon,  2 Mar 2020 18:40:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727030AbgCBRh3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 2 Mar 2020 12:37:29 -0500
-Received: from mga17.intel.com ([192.55.52.151]:10521 "EHLO mga17.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726997AbgCBRh3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 2 Mar 2020 12:37:29 -0500
-X-Amp-Result: UNKNOWN
-X-Amp-Original-Verdict: FILE UNKNOWN
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 02 Mar 2020 09:37:28 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.70,507,1574150400"; 
-   d="scan'208";a="228535252"
-Received: from otc-nc-03.jf.intel.com (HELO otc-nc-03) ([10.54.39.25])
-  by orsmga007.jf.intel.com with ESMTP; 02 Mar 2020 09:37:28 -0800
-Date:   Mon, 2 Mar 2020 09:37:28 -0800
-From:   "Raj, Ashok" <ashok.raj@intel.com>
-To:     Sinan Kaya <okaya@kernel.org>
-Cc:     Bjorn Helgaas <helgaas@kernel.org>,
-        "Spassov, Stanislav" <stanspas@amazon.de>,
-        "corbet@lwn.net" <corbet@lwn.net>,
-        "alex.williamson@redhat.com" <alex.williamson@redhat.com>,
-        "tglx@linutronix.de" <tglx@linutronix.de>,
-        "Wang, Wei" <wawei@amazon.de>,
-        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-        "Schoenherr, Jan H." <jschoenh@amazon.de>,
-        "rajatja@google.com" <rajatja@google.com>,
-        "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        Ashok Raj <ashok.raj@intel.com>
-Subject: Re: [PATCH 1/3] PCI: Make PCIE_RESET_READY_POLL_MS configurable
-Message-ID: <20200302173728.GA77115@otc-nc-03>
-References: <20200227214534.GA143139@google.com>
- <e162efcd-70fd-3390-2452-4915af1c9171@kernel.org>
- <20200228021855.GA57330@otc-nc-03>
- <51d5948e-8d53-432e-8ec2-46704c3e8d41@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <51d5948e-8d53-432e-8ec2-46704c3e8d41@kernel.org>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+        id S1727126AbgCBRkF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Mar 2020 12:40:05 -0500
+Received: from mail-pg1-f179.google.com ([209.85.215.179]:33007 "EHLO
+        mail-pg1-f179.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726997AbgCBRkF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Mar 2020 12:40:05 -0500
+Received: by mail-pg1-f179.google.com with SMTP id m5so170690pgg.0;
+        Mon, 02 Mar 2020 09:40:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=ccLgGlXJeyfNwA0nueYiFsMbc5nyvrsM97a1+xIUUac=;
+        b=W7fj8X3a8gokG5mZbNte3SvQJzMLyc6ZsZ3I18q1+2Qnam52farx0iNFiqbPc5+HxP
+         kJqiJEsRLC7eaogsdWtKTTkETP+UqktTIdofxDvV8J0WE8RmxhwxTk0dCADgqzImBe4l
+         jGDig8SgkU82S1wb93DXjj1hGpbSm+o1w0WuHdybfxaIoIE6I+tLhWOv69paXjU0w/3O
+         hPdgjlViSZdNcxbYiXUKUEy9EGlDS+84Dj5xOMt9yEGKBlEIwYy0BBaV5fX8UIuorLcD
+         YCuSfHRae8WrrTT2YFHLY1dJ59s3tN1dDGPnj9bl+337a/0xutqLOgpThGS2Uoo073ZM
+         fU2Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=ccLgGlXJeyfNwA0nueYiFsMbc5nyvrsM97a1+xIUUac=;
+        b=RrDA/lWJWvXsyqW96ktmN5wGPKRGJMyM+Wmj3QYLq9V6SK/suGDjc039Wz1BKvStvp
+         gZsDHHPU5IpOcJJl9yJVcQzOdqr3ewgsIHLRMts90+ZvMoDhb9Tav4i1QPK2X6evm3PK
+         NKnCVXMGcg1zFqWeE7/2q9l+Naci6YbSPUSlOIqNzy0XWMGs366FfmTyy1C4bDjhvkgl
+         1cN9tB5W4MHX4DgMpkvTs76Pl6aXvM1uhCVIR6BOfoL64UvBSkIPc8m6S347xEsePEA9
+         7Y4A8KDBu1ptrxY22OrtEEZI9aMngeJkcmZvxAxLz/DSiKqFjozGHx3ccWMbaPid++BM
+         XHaA==
+X-Gm-Message-State: ANhLgQ1J5r7iYg66GpfbpJOE1wXwTxPOoL2/5LzPbKaTJd29MkYa1JmE
+        bwuLkcfHRMR5ExLTyGVioVg04nSx74tIPg==
+X-Google-Smtp-Source: ADFU+vsmcgwBaN2ggQ2yDntxSGZzld20AoSwZIazsRFr8GSGi0fFrYx982ZdTaikc8pnRwYPy0tVLQ==
+X-Received: by 2002:aa7:8b17:: with SMTP id f23mr149223pfd.197.1583170804359;
+        Mon, 02 Mar 2020 09:40:04 -0800 (PST)
+Received: from localhost.localdomain ([2405:204:800a:15c3:b0b0:78ba:d728:349e])
+        by smtp.gmail.com with ESMTPSA id c184sm21764462pfa.39.2020.03.02.09.39.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 02 Mar 2020 09:40:03 -0800 (PST)
+From:   Pragat Pandya <pragat.pandya@gmail.com>
+To:     corbet@lwn.net
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        skhan@linuxfoundation.org, Pragat Pandya <pragat.pandya@gmail.com>
+Subject: [PATCH 0/2] Documentation: Add two new rst files
+Date:   Mon,  2 Mar 2020 23:09:18 +0530
+Message-Id: <20200302173920.24626-1-pragat.pandya@gmail.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Mar 02, 2020 at 11:39:39AM -0500, Sinan Kaya wrote:
-> On 2/27/2020 9:18 PM, Raj, Ashok wrote:
-> >> If I remember right, there was no time mention about how long to
-> >> wait. Spec says device should send CRS as long as it is not ready.
-> > Not exactly.. there are some requirements to follow for rules after
-> > a conventional reset. 
-> 
-> Yes, but CRS happens after functional reset, D3hot etc. too not just
-> conventional reset.
-> 
-> 1 second is too aggressive. We already have proof that several PCIe
-> cards take their time during FLR especially FPGA cards in the orders
-> of 10 seconds.
+This patchset adds following two rst files to the Documentation and
+references the newly added rst files into TOCTree of index.rst
+ -io_mapping.rst 
+ -io_ordering.rst
 
-Aren't the rules specified in 7.9.17 Rediness Time Reporting Extended Capability
-sufficient to cover this?
+Pragat Pandya (2):
+  Documentation: Add a new .rst file under Documentation
+  Documentation: Add a new .rst file under Documentation
 
-If a device doesn't have them we could let the driver supply this value
-as a device specific value to override the default.
+ Documentation/index.rst                       |  1 +
+ .../{io-mapping.txt => io_mapping.rst}        |  0
+ .../{io_ordering.txt => io_ordering.rst}      |  0
+ doc_make.log                                  | 35 +++++++++++++++++++
+ 4 files changed, 36 insertions(+)
+ rename Documentation/{io-mapping.txt => io_mapping.rst} (100%)
+ rename Documentation/{io_ordering.txt => io_ordering.rst} (100%)
+ create mode 100644 doc_make.log
 
-> 
-> Current code is waiting up to 60 seconds. If card shows up before that
-> we happily return.
-> 
+-- 
+2.17.1
 
-But in 7.9.17.2 Readiness Time Reporting 1 Register, says devices
-can defer reporting by not setting the valid bit, but if it remains
-clear after 60s system software can assume no valid values will be reported.
-
-Maybe keep the system default to something more reasonable (after some
-testing in the community), and do this insane 60s for devices that 
-support the optional reporting capability?
-
-Cheers,
-Ashok
