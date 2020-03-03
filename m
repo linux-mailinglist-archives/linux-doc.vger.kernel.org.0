@@ -2,84 +2,179 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 84D951777C6
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 14:51:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BBD141777CF
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 14:52:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725944AbgCCNvx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 08:51:53 -0500
-Received: from foss.arm.com ([217.140.110.172]:47326 "EHLO foss.arm.com"
+        id S1729051AbgCCNwL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 08:52:11 -0500
+Received: from mail.kernel.org ([198.145.29.99]:40370 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725932AbgCCNvx (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Mar 2020 08:51:53 -0500
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DC030FEC;
-        Tue,  3 Mar 2020 05:51:52 -0800 (PST)
-Received: from localhost (unknown [10.37.6.21])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 5F4F53F6C4;
-        Tue,  3 Mar 2020 05:51:52 -0800 (PST)
-Date:   Tue, 3 Mar 2020 13:51:50 +0000
-From:   Mark Brown <broonie@kernel.org>
-To:     Samuel Holland <samuel@sholland.org>
-Cc:     Liam Girdwood <lgirdwood@gmail.com>,
-        Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jerome Brunet <jbrunet@baylibre.com>,
-        Ondrej Jirman <megous@megous.com>, alsa-devel@alsa-project.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 3/3] ASoC: simple-card: Add support for codec2codec
- DAI links
-Message-ID: <20200303135150.GH3866@sirena.org.uk>
-References: <20200223034533.1035-1-samuel@sholland.org>
- <20200223034533.1035-4-samuel@sholland.org>
- <9cdcfcb6-63c2-5b76-9de1-46719e4e7139@sholland.org>
+        id S1725932AbgCCNwL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 08:52:11 -0500
+Received: from mail.kernel.org (tmo-101-56.customers.d1-online.com [80.187.101.56])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 4DD1620675;
+        Tue,  3 Mar 2020 13:52:10 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1583243530;
+        bh=oSAwJuwZZke99vm8rocsC6A/BaGIh2GI4Jpuuu+iYYY=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=WxnENgzxwpXsmE3dtubVuBr9/LU6NSl+HbofJ79fS7inJ2vHZvsx+oUvF+ICTsB4P
+         hUUTN4p4anj0+UoOAQxj+eXT9JsQ/hkb5f07gv50OX2EuUammhXSXLP3sgDvYVSI4b
+         zYdiq+QwJ0jPigAsscEk/0K1FqKMWBUwo9WExpAs=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1j97xw-001YXR-3Y; Tue, 03 Mar 2020 14:52:08 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-pm@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v2 2/5] docs: cpu-freq: convert index.txt to ReST
+Date:   Tue,  3 Mar 2020 14:52:03 +0100
+Message-Id: <7aed5eca5b3501328bc715c70613c21497467368.1583243272.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <cover.1583243272.git.mchehab+huawei@kernel.org>
+References: <cover.1583243272.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="9sSKoi6Rw660DLir"
-Content-Disposition: inline
-In-Reply-To: <9cdcfcb6-63c2-5b76-9de1-46719e4e7139@sholland.org>
-X-Cookie: Drilling for oil is boring.
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 8bit
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+most of the stuff there can be re-used with ReST format,
+but we need to add an empty TOC and remove the existing
+entries, as the following conversion patches will be re-adding
+them, as they're converted.
 
---9sSKoi6Rw660DLir
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ Documentation/cpu-freq/index.rst | 35 ++++++++++++++++++++
+ Documentation/cpu-freq/index.txt | 56 --------------------------------
+ Documentation/index.rst          |  1 +
+ 3 files changed, 36 insertions(+), 56 deletions(-)
+ create mode 100644 Documentation/cpu-freq/index.rst
+ delete mode 100644 Documentation/cpu-freq/index.txt
 
-On Tue, Mar 03, 2020 at 07:49:33AM -0600, Samuel Holland wrote:
-> On 2/22/20 9:45 PM, Samuel Holland wrote:
+diff --git a/Documentation/cpu-freq/index.rst b/Documentation/cpu-freq/index.rst
+new file mode 100644
+index 000000000000..1bff3dfddd23
+--- /dev/null
++++ b/Documentation/cpu-freq/index.rst
+@@ -0,0 +1,35 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++==============================================================================
++Linux CPUFreq - CPU frequency and voltage scaling code in the Linux(TM) kernel
++==============================================================================
++
++Author: Dominik Brodowski  <linux@brodo.de>
++
++   Clock scaling allows you to change the clock speed of the CPUs on the
++   fly. This is a nice method to save battery power, because the lower
++   the clock speed, the less power the CPU consumes.
++
++
++.. toctree::
++   :maxdepth: 1
++
++Mailing List
++------------
++There is a CPU frequency changing CVS commit and general list where
++you can report bugs, problems or submit patches. To post a message,
++send an email to linux-pm@vger.kernel.org.
++
++Links
++-----
++the FTP archives:
++* ftp://ftp.linux.org.uk/pub/linux/cpufreq/
++
++how to access the CVS repository:
++* http://cvs.arm.linux.org.uk/
++
++the CPUFreq Mailing list:
++* http://vger.kernel.org/vger-lists.html#linux-pm
++
++Clock and voltage scaling for the SA-1100:
++* http://www.lartmaker.nl/projects/scaling
+diff --git a/Documentation/cpu-freq/index.txt b/Documentation/cpu-freq/index.txt
+deleted file mode 100644
+index c15e75386a05..000000000000
+--- a/Documentation/cpu-freq/index.txt
++++ /dev/null
+@@ -1,56 +0,0 @@
+-     CPU frequency and voltage scaling code in the Linux(TM) kernel
+-
+-
+-		         L i n u x    C P U F r e q
+-
+-
+-
+-
+-		    Dominik Brodowski  <linux@brodo.de>
+-
+-
+-
+-   Clock scaling allows you to change the clock speed of the CPUs on the
+-    fly. This is a nice method to save battery power, because the lower
+-            the clock speed, the less power the CPU consumes.
+-
+-
+-
+-Documents in this directory:
+-----------------------------
+-
+-amd-powernow.txt -	AMD powernow driver specific file.
+-
+-core.txt	-	General description of the CPUFreq core and
+-			of CPUFreq notifiers.
+-
+-cpu-drivers.txt -	How to implement a new cpufreq processor driver.
+-
+-cpufreq-nforce2.txt -	nVidia nForce2 platform specific file.
+-
+-cpufreq-stats.txt -	General description of sysfs cpufreq stats.
+-
+-index.txt	-	File index, Mailing list and Links (this document)
+-
+-pcc-cpufreq.txt -	PCC cpufreq driver specific file.
+-
+-
+-Mailing List
+-------------
+-There is a CPU frequency changing CVS commit and general list where
+-you can report bugs, problems or submit patches. To post a message,
+-send an email to linux-pm@vger.kernel.org.
+-
+-Links
+------
+-the FTP archives:
+-* ftp://ftp.linux.org.uk/pub/linux/cpufreq/
+-
+-how to access the CVS repository:
+-* http://cvs.arm.linux.org.uk/
+-
+-the CPUFreq Mailing list:
+-* http://vger.kernel.org/vger-lists.html#linux-pm
+-
+-Clock and voltage scaling for the SA-1100:
+-* http://www.lartmaker.nl/projects/scaling
+diff --git a/Documentation/index.rst b/Documentation/index.rst
+index e99d0bd2589d..4cf37ad1cd1d 100644
+--- a/Documentation/index.rst
++++ b/Documentation/index.rst
+@@ -99,6 +99,7 @@ needed).
+    accounting/index
+    block/index
+    cdrom/index
++   cpu-freq/index
+    ide/index
+    fb/index
+    fpga/index
+-- 
+2.24.1
 
-> > +{
-> > +	struct snd_soc_dai_link *dai_link = rtd->dai_link;
-> > +	struct snd_soc_component *component;
-> > +	struct snd_soc_rtdcom_list *rtdcom;
-
-> This variable is unused in v3. I can send a v4.
-
-Please.
-
-Please delete unneeded context from mails when replying.  Doing this
-makes it much easier to find your reply in the message, helping ensure
-it won't be missed by people scrolling through the irrelevant quoted
-material.
-
---9sSKoi6Rw660DLir
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAl5eYPYACgkQJNaLcl1U
-h9B5rwf/St5QDX5SN1mRQ5ysQc2ewxADKkT6BzDewPm/0lDrJU52bnh0QWb80af6
-JUnm+B81S49IRZcdLono1Z0wGIgV8aXxYizB4YDZKZ+SFLveopQkNPQcUsAbS7nI
-4cWQaWI4vm4xKvhjFMzy5ew+Ux6sAVtjWJ9VQJ/mSM/fhRd6UBuniicbR/ue2Mm1
-p12yWoXMJEINSkh/JVK8jcT3+dXas4cNIk2IgPVUj0gD6ShyN12hJeLVec5YvXJo
-WPZE3ItsCAbqIjJ6EfDE2rvZxw8GLMVJhGYqlsst4i8ceetqStvJg941kxSu894l
-GckVXT0VFXGh2I0qNlSGQBDs6U4YtQ==
-=Q4dE
------END PGP SIGNATURE-----
-
---9sSKoi6Rw660DLir--
