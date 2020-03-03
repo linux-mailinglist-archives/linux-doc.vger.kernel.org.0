@@ -2,36 +2,36 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A0A271777FA
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 14:59:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5E4701777F2
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 14:59:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729352AbgCCN7e (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 08:59:34 -0500
-Received: from mail.kernel.org ([198.145.29.99]:45590 "EHLO mail.kernel.org"
+        id S1729128AbgCCN73 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 08:59:29 -0500
+Received: from mail.kernel.org ([198.145.29.99]:45340 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725796AbgCCN7e (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Mar 2020 08:59:34 -0500
-Received: from mail.kernel.org (tmo-101-56.customers.d1-online.com [80.187.101.56])
+        id S1728549AbgCCN73 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 08:59:29 -0500
+Received: from mail.kernel.org (ip-109-40-2-133.web.vodafone.de [109.40.2.133])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 6E87420863;
-        Tue,  3 Mar 2020 13:59:33 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 8D3A02086A;
+        Tue,  3 Mar 2020 13:59:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583243973;
-        bh=XeqIYzwWEr1Bp8XSUZu32Up8m7WqNhvtw8IXLKbyWVM=;
+        s=default; t=1583243968;
+        bh=l7H1FlGZAtH5V7csuITiXzF4fvtEJZ4FNkc+IiSZ+sU=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=HqgOpd9LXioXfGMCDeitlaHepAt7k2IhUFlir6qXqF7SBj8Gyrv4GQnCm5TuDQbTr
-         3IUMuq/NUiXQ8bwi+w8vXb8B30Rh23f7d3E7/XpUvKgiNrCihSclVLV9cENYu8CUIj
-         Kncsib+OOfi/PyYFqz95pWRYF7FJir28lZp11tl4=
+        b=OcoF/rkHrOg6k4nwMgU4hKukLXGR55mDThu9HXOUVoH0jMEX9OxzT/j1OP4pfSSTq
+         OVr0oUZUEgQOWEM/IzCAwsB2GoEHQgR1CkoRmH6x/npupp0ZIUX8caNRBpVgcUC2G3
+         gqsKO5zd7rl9/AmEvxr9faFGFRp06d4+3gQ4GGDY=
 Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
         (envelope-from <mchehab@kernel.org>)
-        id 1j9850-001YdY-Dc; Tue, 03 Mar 2020 14:59:26 +0100
+        id 1j9850-001Ydc-Eh; Tue, 03 Mar 2020 14:59:26 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH v3 10/18] docs: misc-devices/bh1770glc.txt: convert to ReST
-Date:   Tue,  3 Mar 2020 14:59:17 +0100
-Message-Id: <8ba31da3d73bcde02045b23571e34fb0f99727b9.1583243826.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v3 11/18] docs: misc-devices/apds990x.txt: convert to ReST format
+Date:   Tue,  3 Mar 2020 14:59:18 +0100
+Message-Id: <46c5f0238d736cf919463595fbf0584029f2c614.1583243826.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <cover.1583243826.git.mchehab+huawei@kernel.org>
 References: <cover.1583243826.git.mchehab+huawei@kernel.org>
@@ -43,66 +43,67 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-- Adjust document title markup;
-- use list markups;
-- Adjust identations to display properly at ReST output.
+- Adjust title markup;
+- Adjust identation.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- .../{bh1770glc.txt => bh1770glc.rst}          | 45 +++++++++++++------
+ .../{apds990x.txt => apds990x.rst}            | 31 ++++++++++++++-----
  Documentation/misc-devices/index.rst          |  1 +
- 2 files changed, 33 insertions(+), 13 deletions(-)
- rename Documentation/misc-devices/{bh1770glc.txt => bh1770glc.rst} (83%)
+ 2 files changed, 25 insertions(+), 7 deletions(-)
+ rename Documentation/misc-devices/{apds990x.txt => apds990x.rst} (86%)
 
-diff --git a/Documentation/misc-devices/bh1770glc.txt b/Documentation/misc-devices/bh1770glc.rst
-similarity index 83%
-rename from Documentation/misc-devices/bh1770glc.txt
-rename to Documentation/misc-devices/bh1770glc.rst
-index 7d64c014dc70..ea5ca58bb958 100644
---- a/Documentation/misc-devices/bh1770glc.txt
-+++ b/Documentation/misc-devices/bh1770glc.rst
-@@ -1,9 +1,13 @@
+diff --git a/Documentation/misc-devices/apds990x.txt b/Documentation/misc-devices/apds990x.rst
+similarity index 86%
+rename from Documentation/misc-devices/apds990x.txt
+rename to Documentation/misc-devices/apds990x.rst
+index 454d95d623b3..e2f75577f731 100644
+--- a/Documentation/misc-devices/apds990x.txt
++++ b/Documentation/misc-devices/apds990x.rst
+@@ -1,3 +1,6 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+=======================
- Kernel driver bh1770glc
- =======================
++======================
+ Kernel driver apds990x
+ ======================
  
- Supported chips:
--ROHM BH1770GLC
--OSRAM SFH7770
-+
-+- ROHM BH1770GLC
-+- OSRAM SFH7770
- 
- Data sheet:
- Not freely available
-@@ -48,12 +52,16 @@ chip_id
- 	RO - shows detected chip type and version
+@@ -50,14 +53,18 @@ chip_id
  
  power_state
--	RW - enable / disable chip. Uses counting logic
--	     1 enables the chip
--	     0 disables the chip
-+	RW - enable / disable chip
+ 	RW - enable / disable chip. Uses counting logic
 +
-+	Uses counting logic
-+
-+	     - 1 enables the chip
-+	     - 0 disables the chip
- 
+ 	     1 enables the chip
+ 	     0 disables the chip
  lux0_input
  	RO - measured lux value
 +
  	     sysfs_notify called when threshold interrupt occurs
  
  lux0_sensor_range
-@@ -66,16 +74,22 @@ lux0_rate_avail
+-	RO - lux0_input max value. Actually never reaches since sensor tends
++	RO - lux0_input max value.
++
++	     Actually never reaches since sensor tends
+ 	     to saturate much before that. Real max value varies depending
+ 	     on the light spectrum etc.
+ 
+@@ -68,7 +75,9 @@ lux0_rate_avail
  	RO - supported measurement rates
+ 
+ lux0_calibscale
+-	RW - calibration value. Set to neutral value by default.
++	RW - calibration value.
++
++	     Set to neutral value by default.
+ 	     Output results are multiplied with calibscale / calibscale_default
+ 	     value.
+ 
+@@ -76,16 +85,21 @@ lux0_calibscale_default
+ 	RO - neutral calibration value
  
  lux0_thresh_above_value
 -	RW - HI level threshold value. All results above the value
-+	RW - HI level threshold value
++	RW - HI level threshold value.
 +
 +	     All results above the value
  	     trigs an interrupt. 65535 (i.e. sensor_range) disables the above
@@ -110,20 +111,10 @@ index 7d64c014dc70..ea5ca58bb958 100644
  
  lux0_thresh_below_value
 -	RW - LO level threshold value. All results below the value
-+	RW - LO level threshold value
++	RW - LO level threshold value.
 +
 +	     All results below the value
  	     trigs an interrupt. 0 disables the below interrupt.
- 
- lux0_calibscale
--	RW - calibration value. Set to neutral value by default.
-+	RW - calibration value
-+
-+	     Set to neutral value by default.
- 	     Output results are multiplied with calibscale / calibscale_default
- 	     value.
- 
-@@ -84,32 +98,37 @@ lux0_calibscale_default
  
  prox0_raw
  	RO - measured proximity value
@@ -131,53 +122,36 @@ index 7d64c014dc70..ea5ca58bb958 100644
  	     sysfs_notify called when threshold interrupt occurs
  
  prox0_sensor_range
- 	RO - prox0_raw max value
+@@ -93,11 +107,14 @@ prox0_sensor_range
  
  prox0_raw_en
--	RW - enable / disable proximity - uses counting logic
+ 	RW - enable / disable proximity - uses counting logic
 -	     1 enables the proximity
 -	     0 disables the proximity
-+	RW - enable / disable proximity
-+
-+	     Uses counting logic
 +
 +	     - 1 enables the proximity
 +	     - 0 disables the proximity
  
- prox0_thresh_above_count
- 	RW - number of proximity interrupts needed before triggering the event
- 
- prox0_rate_above
- 	RW - Measurement rate (in Hz) when the level is above threshold
--	     i.e. when proximity on has been reported.
-+	i.e. when proximity on has been reported.
- 
- prox0_rate_below
- 	RW - Measurement rate (in Hz) when the level is below threshold
--	     i.e. when proximity off has been reported.
-+	i.e. when proximity off has been reported.
- 
- prox0_rate_avail
- 	RO - Supported proximity measurement rates in Hz
- 
- prox0_thresh_above0_value
- 	RW - threshold level which trigs proximity events.
+ prox0_reporting_mode
+-	RW - trigger / periodic. In "trigger" mode the driver tells two possible
++	RW - trigger / periodic.
 +
- 	     Filtered by persistence filter (prox0_thresh_above_count)
- 
- prox0_thresh_above1_value
++	     In "trigger" mode the driver tells two possible
+ 	     values: 0 or prox0_sensor_range value. 0 means no proximity,
+ 	     1023 means proximity. This causes minimal number of interrupts.
+ 	     In "periodic" mode the driver reports all values above
 diff --git a/Documentation/misc-devices/index.rst b/Documentation/misc-devices/index.rst
-index c2e880d78734..40a4c104e7a2 100644
+index 40a4c104e7a2..16973310d32e 100644
 --- a/Documentation/misc-devices/index.rst
 +++ b/Documentation/misc-devices/index.rst
 @@ -15,6 +15,7 @@ fit into other categories.
     :maxdepth: 2
  
     ad525x_dpot
-+   bh1770glc
++   apds990x
+    bh1770glc
     eeprom
     c2port
-    ibmvmc
 -- 
 2.24.1
 
