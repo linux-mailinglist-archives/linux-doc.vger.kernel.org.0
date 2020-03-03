@@ -2,103 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CD9091778B1
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 15:22:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 71FF017794D
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 15:42:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728771AbgCCOVY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 09:21:24 -0500
-Received: from youngberry.canonical.com ([91.189.89.112]:44158 "EHLO
-        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728113AbgCCOVY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Mar 2020 09:21:24 -0500
-Received: from ip5f5bf7ec.dynamic.kabel-deutschland.de ([95.91.247.236] helo=wittgenstein)
-        by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.86_2)
-        (envelope-from <christian.brauner@ubuntu.com>)
-        id 1j98Pg-0002Id-SV; Tue, 03 Mar 2020 14:20:49 +0000
-Date:   Tue, 3 Mar 2020 15:20:47 +0100
-From:   Christian Brauner <christian.brauner@ubuntu.com>
-To:     Bernd Edlinger <bernd.edlinger@hotmail.de>
-Cc:     Kees Cook <keescook@chromium.org>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        Jann Horn <jannh@google.com>, Jonathan Corbet <corbet@lwn.net>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Oleg Nesterov <oleg@redhat.com>,
-        Frederic Weisbecker <frederic@kernel.org>,
-        Andrei Vagin <avagin@gmail.com>,
-        Ingo Molnar <mingo@kernel.org>,
-        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
-        Yuyang Du <duyuyang@gmail.com>,
-        David Hildenbrand <david@redhat.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Anshuman Khandual <anshuman.khandual@arm.com>,
-        David Howells <dhowells@redhat.com>,
-        James Morris <jamorris@linux.microsoft.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Shakeel Butt <shakeelb@google.com>,
-        Jason Gunthorpe <jgg@ziepe.ca>,
-        Christian Kellner <christian@kellner.me>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Aleksa Sarai <cyphar@cyphar.com>,
-        "Dmitry V. Levin" <ldv@altlinux.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
-        "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "stable@vger.kernel.org" <stable@vger.kernel.org>
-Subject: Re: [PATCHv4] exec: Fix a deadlock in ptrace
-Message-ID: <20200303142047.mrenhvhihe5sm5wv@wittgenstein>
-References: <87k142lpfz.fsf@x220.int.ebiederm.org>
- <AM6PR03MB51704206634C009500A8080DE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
- <875zfmloir.fsf@x220.int.ebiederm.org>
- <AM6PR03MB51707ABF20B6CBBECC34865FE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
- <87v9nmjulm.fsf@x220.int.ebiederm.org>
- <AM6PR03MB5170B976E6387FDDAD59A118E4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
- <202003021531.C77EF10@keescook>
- <20200303085802.eqn6jbhwxtmz4j2x@wittgenstein>
- <AM6PR03MB5170E03613104B2ACE32F057E4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
- <AM6PR03MB51706AE0FE7DA0F3F507F6BAE4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        id S1729319AbgCCOkM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 09:40:12 -0500
+Received: from mail.kernel.org ([198.145.29.99]:35072 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729071AbgCCOkM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 09:40:12 -0500
+Received: from mail.kernel.org (x2f7fa80.dyn.telefonica.de [2.247.250.128])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id CEEFF20842;
+        Tue,  3 Mar 2020 14:40:11 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1583246412;
+        bh=OLtvri7lhnPMBPe2kuKdN8A2xr5mHeejJQsjos9PaT4=;
+        h=From:To:Cc:Subject:Date:From;
+        b=soQZS0PFPpb8dUqmzdhsEesrugGrP0eZXheu+g7uoWeoNg2UIVB3dqMjcrplvsndz
+         E3XOO8IujDiOdMXpH1/DDyuNxlHg8FJpfI0tZ4+XdP0gBElXPpcyL1T098hAfIhD2S
+         dK4kqE2pPhdGYZalpbUMK0EaCQSEG/KL3vjRySog=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1j98iP-001Z0l-Eu; Tue, 03 Mar 2020 15:40:09 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Tony Luck <tony.luck@intel.com>,
+        James Morse <james.morse@arm.com>,
+        Robert Richter <rrichter@marvell.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-edac@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH 1/2] docs: ras: get rid of some warnings
+Date:   Tue,  3 Mar 2020 15:40:07 +0100
+Message-Id: <0008bd9f16d5d02148501f5a1ba873245af1cab7.1583246400.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <AM6PR03MB51706AE0FE7DA0F3F507F6BAE4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
+Content-Transfer-Encoding: 8bit
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 03, 2020 at 11:23:31AM +0000, Bernd Edlinger wrote:
-> On 3/3/20 11:34 AM, Bernd Edlinger wrote:
-> > On 3/3/20 9:58 AM, Christian Brauner wrote:
-> >> So one issue I see with having to reacquire the cred_guard_mutex might
-> >> be that this would allow tasks holding the cred_guard_mutex to block a
-> >> killed exec'ing task from exiting, right?
-> >>
-> > 
-> > Yes maybe, but I think it will not be worse than it is now.
-> > Since the second time the mutex is acquired it is done with
-> > mutex_lock_killable, so at least kill -9 should get it terminated.
-> > 
-> 
-> 
-> 
-> >  static void free_bprm(struct linux_binprm *bprm)
-> >  {
-> >  	free_arg_pages(bprm);
-> >  	if (bprm->cred) {
-> > +		if (!bprm->called_flush_old_exec)
-> > +			mutex_lock(&current->signal->cred_guard_mutex);
-> > +		current->signal->cred_locked_for_ptrace = false;
-> >  		mutex_unlock(&current->signal->cred_guard_mutex);
-> 
-> 
-> Hmm, cough...
-> actually when the mutex_lock_killable fails, due to kill -9, in flush_old_exec
-> free_bprm locks the same mutex, this time unkillable, but I should better do
-> mutex_lock_killable here, and if that fails, I can leave cred_locked_for_ptrace,
-> it shouldn't matter, since this is a fatal signal anyway, right?
+Sphinx produce some warnings due to a bad table format:
 
-I think so, yes.
+    Documentation/admin-guide/ras.rst:358: WARNING: Definition list ends without a blank line; unexpected unindent.
+    Documentation/admin-guide/ras.rst:358: WARNING: Definition list ends without a blank line; unexpected unindent.
+    Documentation/admin-guide/ras.rst:363: WARNING: Definition list ends without a blank line; unexpected unindent.
+    Documentation/admin-guide/ras.rst:363: WARNING: Definition list ends without a blank line; unexpected unindent.
+
+Rearrange the things there in order to supress the warnings
+while being precise at the Sphinx output about how ranks are
+mapped into csrows.
+
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ Documentation/admin-guide/ras.rst | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/Documentation/admin-guide/ras.rst b/Documentation/admin-guide/ras.rst
+index 0310db624964..22b31bc7e129 100644
+--- a/Documentation/admin-guide/ras.rst
++++ b/Documentation/admin-guide/ras.rst
+@@ -351,15 +351,17 @@ controllers. The following example will assume 2 channels:
+ 	+------------+-----------+-----------+
+ 	|            |  ``ch0``  |  ``ch1``  |
+ 	+============+===========+===========+
+-	| ``csrow0`` |  DIMM_A0  |  DIMM_B0  |
+-	|            |   rank0   |   rank0   |
+-	+------------+     -     |     -     |
++	|            |**DIMM_A0**|**DIMM_B0**|
++	+------------+-----------+-----------+
++	| ``csrow0`` |   rank0   |   rank0   |
++	+------------+-----------+-----------+
+ 	| ``csrow1`` |   rank1   |   rank1   |
+ 	+------------+-----------+-----------+
+-	| ``csrow2`` |  DIMM_A1  | DIMM_B1   |
+-	|            |   rank0   |   rank0   |
+-	+------------+     -     |     -     |
+-	| ``csrow3`` |   rank1   |   rank1   |
++	|            |**DIMM_A1**|**DIMM_B1**|
++	+------------+-----------+-----------+
++	| ``csrow2`` |    rank0  |  rank0    |
++	+------------+-----------+-----------+
++	| ``csrow3`` |    rank1  |  rank1    |
+ 	+------------+-----------+-----------+
+ 
+ In the above example, there are 4 physical slots on the motherboard
+-- 
+2.24.1
+
