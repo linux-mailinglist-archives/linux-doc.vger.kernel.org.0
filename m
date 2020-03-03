@@ -2,41 +2,39 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A50F2177B0E
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 16:51:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5AA7A177B07
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 16:51:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730244AbgCCPuv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 10:50:51 -0500
-Received: from mail.kernel.org ([198.145.29.99]:60034 "EHLO mail.kernel.org"
+        id S1729615AbgCCPuq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 10:50:46 -0500
+Received: from mail.kernel.org ([198.145.29.99]:59864 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730243AbgCCPuv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Mar 2020 10:50:51 -0500
-Received: from mail.kernel.org (tmo-101-56.customers.d1-online.com [80.187.101.56])
+        id S1729099AbgCCPuq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 10:50:46 -0500
+Received: from mail.kernel.org (x2f7fa80.dyn.telefonica.de [2.247.250.128])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 97CB52051A;
-        Tue,  3 Mar 2020 15:50:49 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id CC07E20863;
+        Tue,  3 Mar 2020 15:50:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583250650;
-        bh=IxtlVm3ASGBK5BCboDOtjEtzjPaen2YTx4JZkDsuFTk=;
-        h=From:To:Cc:Subject:Date:From;
-        b=OH58s3JTKrxcJMGwuEzhyuul4yTsHsAKQqT93XkCHvIDqkalDXfleEYx8aeqTgR8h
-         QF3ZrWvIG3VlE8C7pJcXScsDULnwR5ffdK5AeMxD0rLtX5G+Cc49+a7YYEmJiu2v1G
-         U8gq10vwnkWYRB4SCkwfiyQJjmA9sHbju302HW9k=
+        s=default; t=1583250645;
+        bh=kC1Gboqrl+A1rtsfJT2sVhWnFHp6YEmecotGbmA5UQw=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=GJv4N9BiJ4s7+2P5hA7G0ETsoC4uJEQCuv+rY/SRrvfN2QgGILTJBYBdn035CTGOh
+         wgs965d+hyLcZ6p93SZH5aUzev/7o41deSMuRfpLPimRtl81wmtZHTZvIhYsaIet0p
+         TrHEdvByfS5Urg8T5Nwh1OXel4/t2CNEyvqDeTlA=
 Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
         (envelope-from <mchehab@kernel.org>)
-        id 1j99og-001ZOj-Cl; Tue, 03 Mar 2020 16:50:42 +0100
+        id 1j99og-001ZOm-E4; Tue, 03 Mar 2020 16:50:42 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "Steven Rostedt (VMware)" <rostedt@goodmis.org>,
-        Tom Zanussi <zanussi@kernel.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        linux-doc@vger.kernel.org
-Subject: [PATCH 1/9] docs: trace: events.rst: convert some new stuff to ReST format
-Date:   Tue,  3 Mar 2020 16:50:31 +0100
-Message-Id: <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [PATCH 2/9] docs: watch_queue.rst: supress some Sphinx warnings
+Date:   Tue,  3 Mar 2020 16:50:32 +0100
+Message-Id: <637fc605eb2fe6e27d9983ee5c30d78989618313.1583250595.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
+In-Reply-To: <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
+References: <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 To:     unlisted-recipients:; (no To-header on input)
@@ -45,313 +43,114 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Some new chapters were added to the documentation. This caused
-Sphinx to complain, as the literal blocks there are not properly
-tagged as such. Also, a new note added there doesn't follow
-the ReST format.
+Sphinx doesn't like multi-line literal blocks with ``foobar``:
 
-This fixes the following warnings:
+    Documentation/watch_queue.rst:109: WARNING: Inline literal start-string without end-string.
+    Documentation/watch_queue.rst:109: WARNING: Inline emphasis start-string without end-string.
+    Documentation/watch_queue.rst:109: WARNING: Inline emphasis start-string without end-string.
+    Documentation/watch_queue.rst:109: WARNING: Inline emphasis start-string without end-string.
+    Documentation/watch_queue.rst:186: WARNING: Inline literal start-string without end-string.
+    Documentation/watch_queue.rst:186: WARNING: Inline emphasis start-string without end-string.
+    Documentation/watch_queue.rst:185: WARNING: Inline emphasis start-string without end-string.
 
-    Documentation/trace/events.rst:589: WARNING: Definition list ends without a blank line; unexpected unindent.
-    Documentation/trace/events.rst:620: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:623: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:626: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:703: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:697: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:722: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:775: WARNING: Definition list ends without a blank line; unexpected unindent.
-    Documentation/trace/events.rst:814: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:817: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:820: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:823: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:826: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:829: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:832: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:844: WARNING: Unexpected indentation.
-    Documentation/trace/events.rst:845: WARNING: Block quote ends without a blank line; unexpected unindent.
-    Documentation/trace/events.rst:849: WARNING: Unexpected indentation.
-    Documentation/trace/events.rst:850: WARNING: Block quote ends without a blank line; unexpected unindent.
-    Documentation/trace/events.rst:883: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:886: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:889: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:895: WARNING: Bullet list ends without a blank line; unexpected unindent.
-    Documentation/trace/events.rst:895: WARNING: Inline emphasis start-string without end-string.
-    Documentation/trace/events.rst:968: WARNING: Inline emphasis start-string without end-string.
+So, let's use the "::" markup instead.
 
-Fixes: 34ed63573b66 ("tracing: Documentation for in-kernel synthetic event API")
+While we could do the fix only at the affected lines, let's
+do the same change along the entire file, in order to preserve
+the same look and feel at the entire doc.
+
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/trace/events.rst | 63 +++++++++++++++++-----------------
- 1 file changed, 32 insertions(+), 31 deletions(-)
+ Documentation/watch_queue.rst | 34 +++++++++++++++++++++++++---------
+ 1 file changed, 25 insertions(+), 9 deletions(-)
 
-diff --git a/Documentation/trace/events.rst b/Documentation/trace/events.rst
-index ed79b220bd07..4a2ebe0bd19b 100644
---- a/Documentation/trace/events.rst
-+++ b/Documentation/trace/events.rst
-@@ -342,7 +342,8 @@ section of Documentation/trace/ftrace.rst), but there are major
- differences and the implementation isn't currently tied to it in any
- way, so beware about making generalizations between the two.
- 
--Note: Writing into trace_marker (See Documentation/trace/ftrace.rst)
-+.. Note::
-+     Writing into trace_marker (See Documentation/trace/ftrace.rst)
-      can also enable triggers that are written into
-      /sys/kernel/tracing/events/ftrace/print/trigger
- 
-@@ -569,14 +570,14 @@ The first creates the event in one step, using synth_event_create().
- In this method, the name of the event to create and an array defining
- the fields is supplied to synth_event_create().  If successful, a
- synthetic event with that name and fields will exist following that
--call.  For example, to create a new "schedtest" synthetic event:
-+call.  For example, to create a new "schedtest" synthetic event::
- 
-   ret = synth_event_create("schedtest", sched_fields,
-                            ARRAY_SIZE(sched_fields), THIS_MODULE);
- 
- The sched_fields param in this example points to an array of struct
- synth_field_desc, each of which describes an event field by type and
--name:
-+name::
- 
-   static struct synth_field_desc sched_fields[] = {
-         { .type = "pid_t",              .name = "next_pid_field" },
-@@ -615,7 +616,7 @@ synth_event_gen_cmd_array_start(), the user should create and
- initialize a dynevent_cmd object using synth_event_cmd_init().
- 
- For example, to create a new "schedtest" synthetic event with two
--fields:
-+fields::
- 
-   struct dynevent_cmd cmd;
-   char *buf;
-@@ -631,7 +632,7 @@ fields:
-                                   "u64", "ts_ns");
- 
- Alternatively, using an array of struct synth_field_desc fields
--containing the same information:
-+containing the same information::
- 
-   ret = synth_event_gen_cmd_array_start(&cmd, "schedtest", THIS_MODULE,
-                                         fields, n_fields);
-@@ -640,7 +641,7 @@ Once the synthetic event object has been created, it can then be
- populated with more fields.  Fields are added one by one using
- synth_event_add_field(), supplying the dynevent_cmd object, a field
- type, and a field name.  For example, to add a new int field named
--"intfield", the following call should be made:
-+"intfield", the following call should be made::
- 
-   ret = synth_event_add_field(&cmd, "int", "intfield");
- 
-@@ -649,7 +650,7 @@ the field is considered to be an array.
- 
- A group of fields can also be added all at once using an array of
- synth_field_desc with add_synth_fields().  For example, this would add
--just the first four sched_fields:
-+just the first four sched_fields::
- 
-   ret = synth_event_add_fields(&cmd, sched_fields, 4);
- 
-@@ -658,7 +659,7 @@ synth_event_add_field_str() can be used to add it as-is; it will
- also automatically append a ';' to the string.
- 
- Once all the fields have been added, the event should be finalized and
--registered by calling the synth_event_gen_cmd_end() function:
-+registered by calling the synth_event_gen_cmd_end() function::
- 
-   ret = synth_event_gen_cmd_end(&cmd);
- 
-@@ -691,7 +692,7 @@ trace array)), along with an variable number of u64 args, one for each
- synthetic event field, and the number of values being passed.
- 
- So, to trace an event corresponding to the synthetic event definition
--above, code like the following could be used:
-+above, code like the following could be used::
- 
-   ret = synth_event_trace(create_synth_test, 7, /* number of values */
-                           444,             /* next_pid_field */
-@@ -715,7 +716,7 @@ trace array)), along with an array of u64, one for each synthetic
- event field.
- 
- To trace an event corresponding to the synthetic event definition
--above, code like the following could be used:
-+above, code like the following could be used::
- 
-   u64 vals[7];
- 
-@@ -739,7 +740,7 @@ In order to trace a synthetic event, a pointer to the trace event file
- is needed.  The trace_get_event_file() function can be used to get
- it - it will find the file in the given trace instance (in this case
- NULL since the top trace array is being used) while at the same time
--preventing the instance containing it from going away:
-+preventing the instance containing it from going away::
- 
-        schedtest_event_file = trace_get_event_file(NULL, "synthetic",
-                                                    "schedtest");
-@@ -751,31 +752,31 @@ To enable a synthetic event from the kernel, trace_array_set_clr_event()
- can be used (which is not specific to synthetic events, so does need
- the "synthetic" system name to be specified explicitly).
- 
--To enable the event, pass 'true' to it:
-+To enable the event, pass 'true' to it::
- 
-        trace_array_set_clr_event(schedtest_event_file->tr,
-                                  "synthetic", "schedtest", true);
- 
--To disable it pass false:
-+To disable it pass false::
- 
-        trace_array_set_clr_event(schedtest_event_file->tr,
-                                  "synthetic", "schedtest", false);
- 
- Finally, synth_event_trace_array() can be used to actually trace the
--event, which should be visible in the trace buffer afterwards:
-+event, which should be visible in the trace buffer afterwards::
- 
-        ret = synth_event_trace_array(schedtest_event_file, vals,
-                                      ARRAY_SIZE(vals));
- 
- To remove the synthetic event, the event should be disabled, and the
--trace instance should be 'put' back using trace_put_event_file():
-+trace instance should be 'put' back using trace_put_event_file()::
- 
-        trace_array_set_clr_event(schedtest_event_file->tr,
-                                  "synthetic", "schedtest", false);
-        trace_put_event_file(schedtest_event_file);
- 
- If those have been successful, synth_event_delete() can be called to
--remove the event:
-+remove the event::
- 
-        ret = synth_event_delete("schedtest");
- 
-@@ -784,7 +785,7 @@ remove the event:
- 
- To trace a synthetic using the piecewise method described above, the
- synth_event_trace_start() function is used to 'open' the synthetic
--event trace:
-+event trace::
- 
-        struct synth_trace_state trace_state;
- 
-@@ -809,7 +810,7 @@ along with the value to set the next field in the event.  After each
- field is set, the 'cursor' points to the next field, which will be set
- by the subsequent call, continuing until all the fields have been set
- in order.  The same sequence of calls as in the above examples using
--this method would be (without error-handling code):
-+this method would be (without error-handling code)::
- 
-        /* next_pid_field */
-        ret = synth_event_add_next_val(777, &trace_state);
-@@ -837,7 +838,7 @@ used.  Each call is passed the same synth_trace_state object used in
- the synth_event_trace_start(), along with the field name of the field
- to set and the value to set it to.  The same sequence of calls as in
- the above examples using this method would be (without error-handling
--code):
-+code)::
- 
-        ret = synth_event_add_val("next_pid_field", 777, &trace_state);
-        ret = synth_event_add_val("next_comm_field", (u64)"silly putty",
-@@ -855,7 +856,7 @@ can be used but not both at the same time.
- 
- Finally, the event won't be actually traced until it's 'closed',
- which is done using synth_event_trace_end(), which takes only the
--struct synth_trace_state object used in the previous calls:
-+struct synth_trace_state object used in the previous calls::
- 
-        ret = synth_event_trace_end(&trace_state);
- 
-@@ -878,7 +879,7 @@ function.  Before calling kprobe_event_gen_cmd_start(), the user
- should create and initialize a dynevent_cmd object using
- kprobe_event_cmd_init().
- 
--For example, to create a new "schedtest" kprobe event with two fields:
-+For example, to create a new "schedtest" kprobe event with two fields::
- 
-   struct dynevent_cmd cmd;
-   char *buf;
-@@ -900,18 +901,18 @@ Once the kprobe event object has been created, it can then be
- populated with more fields.  Fields can be added using
- kprobe_event_add_fields(), supplying the dynevent_cmd object along
- with a variable arg list of probe fields.  For example, to add a
--couple additional fields, the following call could be made:
-+couple additional fields, the following call could be made::
- 
-   ret = kprobe_event_add_fields(&cmd, "flags=%cx", "mode=+4($stack)");
- 
- Once all the fields have been added, the event should be finalized and
- registered by calling the kprobe_event_gen_cmd_end() or
- kretprobe_event_gen_cmd_end() functions, depending on whether a kprobe
--or kretprobe command was started:
-+or kretprobe command was started::
- 
-   ret = kprobe_event_gen_cmd_end(&cmd);
- 
--or
-+or::
- 
-   ret = kretprobe_event_gen_cmd_end(&cmd);
- 
-@@ -920,13 +921,13 @@ events.
- 
- Similarly, a kretprobe event can be created using
- kretprobe_event_gen_cmd_start() with a probe name and location and
--additional params such as $retval:
-+additional params such as $retval::
- 
-   ret = kretprobe_event_gen_cmd_start(&cmd, "gen_kretprobe_test",
-                                       "do_sys_open", "$retval");
- 
- Similar to the synthetic event case, code like the following can be
--used to enable the newly created kprobe event:
-+used to enable the newly created kprobe event::
- 
-   gen_kprobe_test = trace_get_event_file(NULL, "kprobes", "gen_kprobe_test");
- 
-@@ -934,7 +935,7 @@ used to enable the newly created kprobe event:
-                                   "kprobes", "gen_kprobe_test", true);
- 
- Finally, also similar to synthetic events, the following code can be
--used to give the kprobe event file back and delete the event:
-+used to give the kprobe event file back and delete the event::
- 
-   trace_put_event_file(gen_kprobe_test);
- 
-@@ -963,7 +964,7 @@ are described below.
- 
- The first step in building a new command string is to create and
- initialize an instance of a dynevent_cmd.  Here, for instance, we
--create a dynevent_cmd on the stack and initialize it:
-+create a dynevent_cmd on the stack and initialize it::
- 
-   struct dynevent_cmd cmd;
-   char *buf;
-@@ -989,7 +990,7 @@ calls to argument-adding functions.
- To add a single argument, define and initialize a struct dynevent_arg
- or struct dynevent_arg_pair object.  Here's an example of the simplest
- possible arg addition, which is simply to append the given string as
--a whitespace-separated argument to the command:
-+a whitespace-separated argument to the command::
- 
-   struct dynevent_arg arg;
- 
-@@ -1007,7 +1008,7 @@ the arg.
- Here's another more complicated example using an 'arg pair', which is
- used to create an argument that consists of a couple components added
- together as a unit, for example, a 'type field_name;' arg or a simple
--expression arg e.g. 'flags=%cx':
-+expression arg e.g. 'flags=%cx'::
- 
-   struct dynevent_arg_pair arg_pair;
- 
-@@ -1031,7 +1032,7 @@ Any number of dynevent_*_add() calls can be made to build up the string
- (until its length surpasses cmd->maxlen).  When all the arguments have
- been added and the command string is complete, the only thing left to
- do is run the command, which happens by simply calling
--dynevent_create():
-+dynevent_create()::
- 
-   ret = dynevent_create(&cmd);
- 
+diff --git a/Documentation/watch_queue.rst b/Documentation/watch_queue.rst
+index d8f70282d247..f1ffe9cdf81f 100644
+--- a/Documentation/watch_queue.rst
++++ b/Documentation/watch_queue.rst
+@@ -105,15 +105,19 @@ watch that specific key).
+ 
+ To manage a watch list, the following functions are provided:
+ 
+-  * ``void init_watch_list(struct watch_list *wlist,
+-			   void (*release_watch)(struct watch *wlist));``
++  * ::
++
++      void init_watch_list(struct watch_list *wlist,
++			   void (*release_watch)(struct watch *wlist));
+ 
+     Initialise a watch list.  If ``release_watch`` is not NULL, then this
+     indicates a function that should be called when the watch_list object is
+     destroyed to discard any references the watch list holds on the watched
+     object.
+ 
+-  * ``void remove_watch_list(struct watch_list *wlist);``
++  * ::
++
++      void remove_watch_list(struct watch_list *wlist);
+ 
+     This removes all of the watches subscribed to a watch_list and frees them
+     and then destroys the watch_list object itself.
+@@ -127,14 +131,18 @@ records will be written into.  The workings of this are hidden entirely inside
+ of the watch_queue device driver, but it is necessary to gain a reference to it
+ to set a watch.  These can be managed with:
+ 
+-  * ``struct watch_queue *get_watch_queue(int fd);``
++  * ::
++
++      struct watch_queue *get_watch_queue(int fd);``
+ 
+     Since watch queues are indicated to the kernel by the fd of the pipe that
+     implements the buffer, userspace must hand that fd through a system call.
+     This can be used to look up an opaque pointer to the watch queue from the
+     system call.
+ 
+-  * ``void put_watch_queue(struct watch_queue *wqueue);``
++  * ::
++
++      void put_watch_queue(struct watch_queue *wqueue);
+ 
+     This discards the reference obtained from ``get_watch_queue()``.
+ 
+@@ -170,18 +178,24 @@ different ID are ignored.
+ 
+ The following functions are provided to manage watches:
+ 
+-  * ``void init_watch(struct watch *watch, struct watch_queue *wqueue);``
++  * ::
++
++      void init_watch(struct watch *watch, struct watch_queue *wqueue);
+ 
+     Initialise a watch object, setting its pointer to the watch queue, using
+     appropriate barriering to avoid lockdep complaints.
+ 
+-  * ``int add_watch_to_object(struct watch *watch, struct watch_list *wlist);``
++  * ::
++
++      int add_watch_to_object(struct watch *watch, struct watch_list *wlist);
+ 
+     Subscribe a watch to a watch list (notification source).  The
+     driver-settable fields in the watch struct must have been set before this
+     is called.
+ 
+-  * ``int remove_watch_from_object(struct watch_list *wlist,
++  * ::
++
++      int remove_watch_from_object(struct watch_list *wlist,
+ 				   struct watch_queue *wqueue,
+ 				   u64 id, false);``
+ 
+@@ -190,7 +204,9 @@ The following functions are provided to manage watches:
+     (``WATCH_META_REMOVAL_NOTIFICATION``) is sent to the watch queue to
+     indicate that the watch got removed.
+ 
+-  * ``int remove_watch_from_object(struct watch_list *wlist, NULL, 0, true);``
++  * ::
++
++      int remove_watch_from_object(struct watch_list *wlist, NULL, 0, true);
+ 
+     Remove all the watches from a watch list.  It is expected that this will be
+     called preparatory to destruction and that the watch list will be
 -- 
 2.24.1
 
