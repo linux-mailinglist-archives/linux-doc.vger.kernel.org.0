@@ -2,66 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AEF93178182
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 20:02:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6BAFC178307
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 20:21:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388261AbgCCSCp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 13:02:45 -0500
-Received: from mail-io1-f66.google.com ([209.85.166.66]:36717 "EHLO
-        mail-io1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2388281AbgCCSCp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Mar 2020 13:02:45 -0500
-Received: by mail-io1-f66.google.com with SMTP id d15so4646842iog.3
-        for <linux-doc@vger.kernel.org>; Tue, 03 Mar 2020 10:02:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=42VRx4KA+cD1ZZnhz/34yl/kjJSKnU+ahvHX6e7S6BM=;
-        b=sMojBSgX2AjnHX2Txv0zHtK9beYs7QSHgQ+cvgvkgZTfxLZcX2yi5aa7ysMtkHeadA
-         yoGTN9clZfJACT5aUzE5E2HWeptbrmMOEdWWTjM6hZGwDQ5zOleElGvxxnmXV/3yG8lV
-         ZMpF3kpS2LSGgnq0FENACXX0QQaxMAI87wpX1uAEDY2ZrNilBsjKjTDDRIoqINmwn/0z
-         7MrDvi0u4Qy+eIpVqr2Pd+RkRvMcPKOhz8bo9K7gDHWCZ/YUR/fN4r+QI5nASu1G9tLC
-         TIwh9rzuwSvqVInXYdsR3ywUQfJa0c+oLMC7A4MwPGNbGg95JjXYu2IPezdALJnyjhED
-         gBcg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=42VRx4KA+cD1ZZnhz/34yl/kjJSKnU+ahvHX6e7S6BM=;
-        b=svjN2ehWgkBbYtvh7UtWMyw6AcDa984v2JN6bTOtAPptI9o8wmnDYpm8ggSsfYeQOc
-         hc8fHRbbaf/1UwyB+UxE8n4lGd/YIzfgRbMoPYHVTFEz70t82RmkfEQHGAMlb0axWWkm
-         xjhzWtYVO8cxCLGaEWcxnNkDaVgtYCGLim52fRXQ+gSrtcpXkZocEY4H4kGr5r3dFURU
-         47LV65loeHZiQiv8nSQofyzb527bX7tGXYNnCBBLNgOBKCRFfv8yPa9TXv+3838hhqmf
-         p+Q4I+xe+ca5jsdN9TfV7BM0RhRzpCknfk2rFE9W6ZZIabbBnAcCb95OcnCSr26P3UXv
-         l9DQ==
-X-Gm-Message-State: ANhLgQ0oQUR0LRkFxbqxPN2wSofwbEm+GdgbAfSBo5IVJk8jtrMhoy8I
-        NQkLlJe7/Pj84gywBaDdvYe4C0Z2nf9ZBs6VXl0=
-X-Google-Smtp-Source: ADFU+vsN+bzJwB5+7LXzOK2SjMcj4Y8QdaRXRgi+l5te41aDVIXr3go0heztXWBxx1Q4VBRaMlI0hlwewhgvVi9T1p0=
-X-Received: by 2002:a6b:6011:: with SMTP id r17mr4801779iog.220.1583258563490;
- Tue, 03 Mar 2020 10:02:43 -0800 (PST)
+        id S1729960AbgCCTVX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 14:21:23 -0500
+Received: from mout.gmx.net ([212.227.17.22]:35201 "EHLO mout.gmx.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729516AbgCCTVX (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 14:21:23 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1583263278;
+        bh=z5MdokEfnohRClHDpHvNTwSEsQsAEZU56XPFTiszgjQ=;
+        h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+        b=FBoRlyCmC3WWcgtT3nbPmB3SkrAwUgVgkhxQabrxUhtoVAlJ5io97hAwd2Sq4tdw4
+         xxzrXF73hE+Pb8oHR3Ap89aWjGMmdHn3KaJWaJ9XXiWVZO3kqpvSqk9um1cVxpZd0/
+         L/leIqBK161YDttYGkrVDcoP3c0f0yegMjNfHxj4=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from longitude ([5.146.195.177]) by mail.gmx.com (mrgmx104
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1N4QsY-1jXqki3JqQ-011RMb; Tue, 03
+ Mar 2020 20:21:18 +0100
+From:   =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
+To:     linux-doc@vger.kernel.org
+Cc:     =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org
+Subject: [PATCH] Documentation: management-style: Fix formatting of emphsized word
+Date:   Tue,  3 Mar 2020 20:21:12 +0100
+Message-Id: <20200303192113.20761-1-j.neuschaefer@gmx.net>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Received: by 2002:a02:9f04:0:0:0:0:0 with HTTP; Tue, 3 Mar 2020 10:02:43 -0800 (PST)
-Reply-To: dr.challynoah@gmail.com
-From:   DR CHALLY NOAH <mayorabrahamedge404@gmail.com>
-Date:   Tue, 3 Mar 2020 19:02:43 +0100
-Message-ID: <CALqVJWdGR1jGXzMtKtpnNmpDaH5VG=pKfUhFk3aMDgjaxMVZew@mail.gmail.com>
-Subject: Hello Dear
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:asG4HO3fQkYF44OwjHkqrNtzg8cnJIwXuYEfJr8bzc74H5Tm4iW
+ Itg01JLHuHBQr4bj3g75vJlPGFHTDuHToUuyStrii0XXY+i24phdtS5WVRisv18yHcTLJyO
+ ZwxY/XOEdKNyjqOt+QKw66f9+9c7Te9zUUWNs5PadfgciunW9JBVLOnyfljX7wEkL+PQ83N
+ Curd/Vxr2TkA/AZN+F5EA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:pV+ZI0r+ksc=:vU9kIoEpyVXr0hx0sw8XSk
+ XvZA15e5OcwyyfI5saPPbL6dqml6csbcWtTcOXWqHifV/UX9cQd5EhIw8qrT45GHnU2VqvM+N
+ 8yto4nKmQ6RkZ6OVxXNRXEsHz4+krgQydJLpUJfWnb7RY9/0107mUBKh2QHNfrhMq6W/jiPuM
+ Vg0fQUAY49vnhm0e9KlOeUjSGWIeMDwUUx1G+ynv4hFbs9lCQw/3t6IrgcieFjwounOSxKop9
+ TZOzSBPc007bdsCZeMiBUyxnbuIDXbye2lIVWs4DhIsVV05e0XZzbuP4jnTAwVbg1s7MpCT/c
+ Hxkyy6UmEItzHt32LSbgktVkVY6hQknhjiTKa9JOHeGJT8syHR9bUBfHyDlQ90jl5hU2De+tp
+ M/E5GMtiiFyhG0kXIXQJlyL3Oug/n4wzIYH6shYAJpiVaQFEXoHFjyeiUpkecmP/LZMZVBtdk
+ 5t/khNIObkQkfvimOAI3NDBLFncUltqUjc+IVgHH6gF8ieEx0E384E0EzNHUyHtRlBDhT0Zbl
+ NCiuQvxU15JxGGGzexQhfCVUTgmzEsYJ5PWHcaRAkePuoFXIbmp2Pfw0b0a8wP/3WDwWv1x67
+ LuDwWW5Yd43s8GKFHS/4qXb6CBZdmMM4FWmodKK1B1RJ5oAkY67BLD8o+JkmnrXcdirImJ3n6
+ Z4hepjw66obHkmfA5KqqS+I5nM0Aum37gU1y3Jkvm4kCpgtonnh9cSl1W8U7LNIzq5HJZ7uoW
+ I7UO1j5ibisTOOLZxtyYvD6skz95F2kOAFtkobobKBv0dbOoC0vC7uUskLbrXFm2rEJm7kPax
+ 72et1WwaizQBxrCWPa4Aneq9cOgZq/JkvuW2iykpkKzmJmzWetNvzEZqGErZnV4hpY2BglkdS
+ Gb9QCrXVQ//QSQw+ZCMXjitG1MyI3ICJVdu/xoy//uKgln5R1pGwWFElEwhnsiGU7zH3tmyK7
+ FbHzMVgOCjJas4SQ84qFHbohZii6FAnrgLGjOAZdag8rfhnO09QusQpMXlJxMdqrb1AEtFGYl
+ BpfZkd7dNNA8a+5qai3eJWaFgUt98CzW3NOaAUKLcn3w3kXJHBPNqfTPYSNuN11ZsDuguhoL5
+ iBFqkBRf+dq3Em/QXs5aDD8WIcEJRgsH4XxS3kT6npJlmdr9lwDlO35kR2GJW7ERUJhjX4KZ9
+ vTwIsxxgLc+2Df8LMlE3V26J8BvmUk6COpD0h66zcYDWdZ0d4Bsu8ec2mTlRaInUkKRKTKzfL
+ jH4cnoc/vmHja/tBx
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Dear,
-What Have Kept You Waiting To Claim Your $600,000.00 USD Compensation Award?
-This said fund was issued out by the UNITED NATIONS To compensate
-you.Please If You Have Not Claim Your Fund (Award),Kindly contact me
-at   DR.CHALLYNOAH@GMAIL.COM   for further details on how to proceed your
-fund (award)release to you or better still reply back Immediately You
-Receive This Information For An Urgent Confirmation And Release Of Your
-Fund To You Without Delays, as your email was listed among those to be
-compensated this year.Congratulations..
-Best Regards,
-Dr Chally Noah.
-Minister Of Finance On Foreign Remittance:
+Commit 7f2b3c65b9a1 ("Documentation/ManagementStyle: convert it to ReST
+markup") converted _underlined_ to *emphasized* words, but forgot about
+an underscore in this case.
+
+Signed-off-by: Jonathan Neusch=C3=A4fer <j.neuschaefer@gmx.net>
+=2D--
+ Documentation/process/management-style.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Documentation/process/management-style.rst b/Documentation/pr=
+ocess/management-style.rst
+index 186753ff3d2d..dfbc69bf49d4 100644
+=2D-- a/Documentation/process/management-style.rst
++++ b/Documentation/process/management-style.rst
+@@ -227,7 +227,7 @@ incompetence will grudgingly admit that you at least d=
+idn't try to weasel
+ out of it.
+
+ Then make the developer who really screwed up (if you can find them) know
+-**in_private** that they screwed up.  Not just so they can avoid it in th=
+e
++**in private** that they screwed up.  Not just so they can avoid it in th=
+e
+ future, but so that they know they owe you one.  And, perhaps even more
+ importantly, they're also likely the person who can fix it.  Because, let=
+'s
+ face it, it sure ain't you.
+=2D-
+2.20.1
+
