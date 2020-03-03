@@ -2,39 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1789C1777FD
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 14:59:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1E47B17780D
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 14:59:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729350AbgCCN7f (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 08:59:35 -0500
-Received: from mail.kernel.org ([198.145.29.99]:45724 "EHLO mail.kernel.org"
+        id S1726785AbgCCN7j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 08:59:39 -0500
+Received: from mail.kernel.org ([198.145.29.99]:45936 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729361AbgCCN7e (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Mar 2020 08:59:34 -0500
+        id S1729379AbgCCN7j (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 08:59:39 -0500
 Received: from mail.kernel.org (tmo-101-56.customers.d1-online.com [80.187.101.56])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id A7D2D2166E;
-        Tue,  3 Mar 2020 13:59:33 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id B8E0920863;
+        Tue,  3 Mar 2020 13:59:38 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583243973;
-        bh=Ot18DWlFBytWvI74fTpVOFcLADsv25orW6rh6cH6rsM=;
+        s=default; t=1583243978;
+        bh=ZxaefBKyKeSkKD4GBmwPevYPRyvImqVY0fhEFDK7rp8=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=g0CYCZHMxdjsi8yhkDgRJr4gZR12/iK8zGY5a6jdd52U+qHRbdH76+gm0o8X2Dxbg
-         99dikWMH9JO9NL6NRQsS/hqhMEXDj1pjUbynIx/2UqFjVEaMjNVyMLYpCqcVddT083
-         P+FrNiJhsJPEkmp2abuKr6IZi++rw3BcqzExpZPg=
+        b=yPujjbEv/gbBCwML2PhX9hEm+KvD2fbRz/tFylkWH5w1UQvfePR+QXMCmZa/dBfh+
+         OHQkSXwXXh4ICfOIAlRlUu4AqKGx6jHG6KEx32NaRdq9Bl09UuEglbx7YiozQqqr9K
+         S/JeEg6dNnY8z79tz1TgaG6x4raEtVRwO7zui7OE=
 Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
         (envelope-from <mchehab@kernel.org>)
-        id 1j9850-001Ydk-Go; Tue, 03 Mar 2020 14:59:26 +0100
+        id 1j9850-001Ydp-Hs; Tue, 03 Mar 2020 14:59:26 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Paul Mackerras <paulus@samba.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
         Jonathan Corbet <corbet@lwn.net>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org
-Subject: [PATCH v3 13/18] docs: arm64: convert perf.txt to ReST format
-Date:   Tue,  3 Mar 2020 14:59:20 +0100
-Message-Id: <464c57fc814c370d3c4002c6768c1eac83fbc9a9.1583243826.git.mchehab+huawei@kernel.org>
+        linuxppc-dev@lists.ozlabs.org, linux-doc@vger.kernel.org
+Subject: [PATCH v3 14/18] docs: powerpc: convert vcpudispatch_stats.txt to ReST
+Date:   Tue,  3 Mar 2020 14:59:21 +0100
+Message-Id: <b85d594912818721b84b3c9a0aafa472d6d4af44.1583243826.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <cover.1583243826.git.mchehab+huawei@kernel.org>
 References: <cover.1583243826.git.mchehab+huawei@kernel.org>
@@ -46,53 +47,82 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This file is almost in ReST. All it needs is a rename and
-adding a :field: for the two fields at the beginning
-(author and date).
-
-While here, add a proper SPDX header, and use the standard
-markup for document titles, just for consistency.
+- Add a SPDX header;
+- Use standard markup for document title;
+- Adjust identation on lists and add blank lines where
+  needed;
+- Add it to the powerpc index.rst file.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/arm64/index.rst              | 1 +
- Documentation/arm64/{perf.txt => perf.rst} | 7 +++++--
- 2 files changed, 6 insertions(+), 2 deletions(-)
- rename Documentation/arm64/{perf.txt => perf.rst} (95%)
+ Documentation/powerpc/index.rst                 |  1 +
+ ...ispatch_stats.txt => vcpudispatch_stats.rst} | 17 ++++++++++++-----
+ 2 files changed, 13 insertions(+), 5 deletions(-)
+ rename Documentation/powerpc/{vcpudispatch_stats.txt => vcpudispatch_stats.rst} (94%)
 
-diff --git a/Documentation/arm64/index.rst b/Documentation/arm64/index.rst
-index 5c0c69dc58aa..c51d0fa80318 100644
---- a/Documentation/arm64/index.rst
-+++ b/Documentation/arm64/index.rst
-@@ -13,6 +13,7 @@ ARM64 Architecture
-     hugetlbpage
-     legacy_instructions
-     memory
-+    perf
-     pointer-authentication
-     silicon-errata
-     sve
-diff --git a/Documentation/arm64/perf.txt b/Documentation/arm64/perf.rst
-similarity index 95%
-rename from Documentation/arm64/perf.txt
-rename to Documentation/arm64/perf.rst
-index 0d6a7d87d49e..9c76a97baf28 100644
---- a/Documentation/arm64/perf.txt
-+++ b/Documentation/arm64/perf.rst
-@@ -1,8 +1,11 @@
+diff --git a/Documentation/powerpc/index.rst b/Documentation/powerpc/index.rst
+index 0d45f0fc8e57..29b90b1b6f20 100644
+--- a/Documentation/powerpc/index.rst
++++ b/Documentation/powerpc/index.rst
+@@ -30,6 +30,7 @@ powerpc
+     syscall64-abi
+     transactional_memory
+     ultravisor
++    vcpudispatch_stats
+ 
+ .. only::  subproject and html
+ 
+diff --git a/Documentation/powerpc/vcpudispatch_stats.txt b/Documentation/powerpc/vcpudispatch_stats.rst
+similarity index 94%
+rename from Documentation/powerpc/vcpudispatch_stats.txt
+rename to Documentation/powerpc/vcpudispatch_stats.rst
+index e21476bfd78c..5704657a5987 100644
+--- a/Documentation/powerpc/vcpudispatch_stats.txt
++++ b/Documentation/powerpc/vcpudispatch_stats.rst
+@@ -1,5 +1,8 @@
+-VCPU Dispatch Statistics:
+-=========================
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+=====================
- Perf Event Attributes
- =====================
++========================
++VCPU Dispatch Statistics
++========================
  
--Author: Andrew Murray <andrew.murray@arm.com>
--Date: 2019-03-06
-+:Author: Andrew Murray <andrew.murray@arm.com>
-+:Date: 2019-03-06
+ For Shared Processor LPARs, the POWER Hypervisor maintains a relatively
+ static mapping of the LPAR processors (vcpus) to physical processor
+@@ -20,25 +23,29 @@ The statistics themselves are available by reading the procfs file
+ a vcpu as represented by the first field, followed by 8 numbers.
  
- exclude_user
- ------------
+ The first number corresponds to:
++
+ 1. total vcpu dispatches since the beginning of statistics collection
+ 
+ The next 4 numbers represent vcpu dispatch dispersions:
++
+ 2. number of times this vcpu was dispatched on the same processor as last
+    time
+ 3. number of times this vcpu was dispatched on a different processor core
+    as last time, but within the same chip
+ 4. number of times this vcpu was dispatched on a different chip
+ 5. number of times this vcpu was dispatches on a different socket/drawer
+-(next numa boundary)
++   (next numa boundary)
+ 
+ The final 3 numbers represent statistics in relation to the home node of
+ the vcpu:
++
+ 6. number of times this vcpu was dispatched in its home node (chip)
+ 7. number of times this vcpu was dispatched in a different node
+ 8. number of times this vcpu was dispatched in a node further away (numa
+-distance)
++   distance)
++
++An example output::
+ 
+-An example output:
+     $ sudo cat /proc/powerpc/vcpudispatch_stats
+     cpu0 6839 4126 2683 30 0 6821 18 0
+     cpu1 2515 1274 1229 12 0 2509 6 0
 -- 
 2.24.1
 
