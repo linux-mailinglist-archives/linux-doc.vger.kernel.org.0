@@ -2,83 +2,134 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D3139177B06
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 16:51:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2C853177BC1
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 17:21:03 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729544AbgCCPuq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 10:50:46 -0500
-Received: from mail.kernel.org ([198.145.29.99]:59912 "EHLO mail.kernel.org"
+        id S1729961AbgCCQUi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 11:20:38 -0500
+Received: from mail.kernel.org ([198.145.29.99]:41258 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729615AbgCCPuq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Mar 2020 10:50:46 -0500
-Received: from mail.kernel.org (ip-109-40-2-133.web.vodafone.de [109.40.2.133])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        id S1729382AbgCCQUi (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 11:20:38 -0500
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 2716B205C9;
-        Tue,  3 Mar 2020 15:50:45 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 950FF2083E;
+        Tue,  3 Mar 2020 16:20:37 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583250645;
-        bh=RMagY3Tqj95zViVvmt036N1M0PCbb11MoRNMSambxec=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=SHhXe8Co+xopJbjdy+T2m0NbgPJFn7lU3+Fja0CVZjLBaA5AW48N70C3W2dDkNr0j
-         2ZViAy7CQKOS76uppQ2O8KnCBISb+9NNK6a7MceLbXz4XMtKuirNjqm/Ok1NDe729O
-         0Vycwrctg5YOr98TcKYzd0NtC5NzlaJ8YfHd63TE=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1j99og-001ZPE-LX; Tue, 03 Mar 2020 16:50:42 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, Borislav Petkov <bp@suse.de>,
-        Tony Luck <tony.luck@intel.com>,
-        Antonio Gomez Iglesias <antonio.gomez.iglesias@intel.com>,
-        Waiman Long <longman@redhat.com>,
-        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-        linux-doc@vger.kernel.org
-Subject: [PATCH 9/9] docs: hw-vuln: tsx_async_abort.rst: get rid of an unused ref
-Date:   Tue,  3 Mar 2020 16:50:39 +0100
-Message-Id: <681c8e2916bf4943ac2277f181668bfbc5fdbc01.1583250595.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
-References: <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
+        s=default; t=1583252437;
+        bh=Zro81PjZvB79s/jq+XpT7vaGwIFOydrEpcLyBTIre54=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=sZ3DrP5arT5Uda74vumLAa2MSbiNfVIz2luVx9rFYxLtcTC+Oo7EmkFLEhd6nGgtt
+         As4a7DIpa9oZD61Zh6Lupbal35pfS6oGqT702EMqmCMvq6nNUoTNDo0IooWVwvyBVr
+         TTmvdioo2VKymQ3tSv+czlZGw+dYuvwe1sLSIV20=
+Received: by mail-qk1-f171.google.com with SMTP id p62so3978147qkb.0;
+        Tue, 03 Mar 2020 08:20:37 -0800 (PST)
+X-Gm-Message-State: ANhLgQ30HbpvgZ6+2NJAJr37vQ32zfIyyMHCWTMWRtxKBGg3Zqv4K/C5
+        ghrd5CixpyySh60F5F08gxlu0PshloXEEFHJkg==
+X-Google-Smtp-Source: ADFU+vuMjEgENnYXMgZ0DZmjYOU7SV2y7ndmmk013/U+mJxM6sg3qyyrWb9wOcVBJrSmdtBfV9DfCHaWZOqInJyC6r0=
+X-Received: by 2002:a05:620a:1015:: with SMTP id z21mr4780777qkj.393.1583252436658;
+ Tue, 03 Mar 2020 08:20:36 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-To:     unlisted-recipients:; (no To-header on input)
+References: <cover.1583135507.git.mchehab+huawei@kernel.org>
+ <20200302123554.08ac0c34@lwn.net> <20200303080947.5f381004@onda.lan>
+In-Reply-To: <20200303080947.5f381004@onda.lan>
+From:   Rob Herring <robh@kernel.org>
+Date:   Tue, 3 Mar 2020 10:20:25 -0600
+X-Gmail-Original-Message-ID: <CAL_JsqKsZNFDSsZJ+wzgD1Eaf0fBwZ7BeUv=32jAuE29TeRfnA@mail.gmail.com>
+Message-ID: <CAL_JsqKsZNFDSsZJ+wzgD1Eaf0fBwZ7BeUv=32jAuE29TeRfnA@mail.gmail.com>
+Subject: Re: [PATCH v2 00/12] Convert some DT documentation files to ReST
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        devicetree@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The virt_mechanism reference there points to a section
-called elsewhere (Virtualization mitigation). Also, it is
-not used anywere.
+On Tue, Mar 3, 2020 at 1:09 AM Mauro Carvalho Chehab
+<mchehab+huawei@kernel.org> wrote:
+>
+> Em Mon, 2 Mar 2020 12:35:54 -0700
+> Jonathan Corbet <corbet@lwn.net> escreveu:
+>
+> > On Mon,  2 Mar 2020 08:59:25 +0100
+> > Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+> >
+> > > While most of the devicetree stuff has its own format (with is now being
+> > > converted to YAML format), some documents there are actually
+> > > describing the DT concepts and how to contribute to it.
+> > >
+> > > IMHO, those documents would fit perfectly as part of the documentation
+> > > body, as part of the firmare documents set.
+> > >
+> > > This patch series manually converts some DT documents that, on my
+> > > opinion, would belong to it.
+> >
+> > Did you consider putting this stuff into the firmware-guide while you were
+> > at it?  It's not a perfect fit, I guess, but it doesn't seem too awkward
+> > either.
+>
+> I placed it just below the firmware-guide at the main index file.
+>
+> I have split thoughts about moving the files to there, though. From
+> one side, it may fit better from the PoV of organizing the documentation.
+>
+> From other side, newcomers working with DT may expect looking at the
+> text files inside Documentation/devicetree/.
+>
+> Maybe I could add an extra patch at the end of this series with the
+> move, adding a "RFC" on his title. This way, we can better discuss it,
+> and either merge the last one or not depending on the comments.
 
-Besides that, it conflicts with a label with the same name
-inside:
+Keep in mind that we generate a standalone DT only tree[1] with the
+documentation, dts files and headers. So things should be structured
+such that all the DT documentation could be built by itself without
+dependencies on the 'kernel documentation'. I'm not asking for that to
+be done in this series, but just don't do anything to make that
+harder. I don't *think* have, but just want to make sure that's clear.
 
-	Documentation/admin-guide/hw-vuln/mds.rst
+> > It also seems like it would be good to CC the devicetree folks, or at
+> > least the devicetree mailing list?
 
-Perhaps added due to some cut-and-paste?
+I was wondering what happened to the cover letter on v2...
 
-Anyway, as this is not used, let's just get rid of it.
+> Yeah, that would make sense. I'm using get-maintainers script to
+> prepare the c/c list, as it is simply too much work to find the
+> right maintainers by hand, for every single patch.
+>
+> I just noticed today that there's just *one entry* at MAINTAINERS
+> file for Documentation/devicetree, and that points to you:
+>
+>         DOCUMENTATION
+>         M:      Jonathan Corbet <corbet@lwn.net>
+>         L:      linux-doc@vger.kernel.org
+>         S:      Maintained
+>         F:      Documentation/
+>         F:      scripts/documentation-file-ref-check
+>         F:      scripts/kernel-doc
+>         F:      scripts/sphinx-pre-install
+>         X:      Documentation/ABI/
+>         X:      Documentation/firmware-guide/acpi/
+>         X:      Documentation/devicetree/
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/admin-guide/hw-vuln/tsx_async_abort.rst | 2 --
- 1 file changed, 2 deletions(-)
+You mean doesn't point to Jon as 'X' is exclude. You missed this entry:
 
-diff --git a/Documentation/admin-guide/hw-vuln/tsx_async_abort.rst b/Documentation/admin-guide/hw-vuln/tsx_async_abort.rst
-index af6865b822d2..68d96f0e9c95 100644
---- a/Documentation/admin-guide/hw-vuln/tsx_async_abort.rst
-+++ b/Documentation/admin-guide/hw-vuln/tsx_async_abort.rst
-@@ -136,8 +136,6 @@ enables the mitigation by default.
- The mitigation can be controlled at boot time via a kernel command line option.
- See :ref:`taa_mitigation_control_command_line`.
- 
--.. _virt_mechanism:
--
- Virtualization mitigation
- ^^^^^^^^^^^^^^^^^^^^^^^^^
- 
--- 
-2.24.1
+OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS
+M:      Rob Herring <robh+dt@kernel.org>
+M:      Mark Rutland <mark.rutland@arm.com>
+L:      devicetree@vger.kernel.org
+T:      git git://git.kernel.org/pub/scm/linux/kernel/git/robh/linux.git
+Q:      http://patchwork.ozlabs.org/project/devicetree-bindings/list/
+S:      Maintained
+F:      Documentation/devicetree/
+F:      arch/*/boot/dts/
+F:      include/dt-bindings/
 
+
+Rob
+
+[1] https://git.kernel.org/pub/scm/linux/kernel/git/devicetree/devicetree-rebasing.git/
