@@ -2,79 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5D26B1777F6
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 14:59:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1BD04177822
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 15:03:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726898AbgCCN73 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 08:59:29 -0500
-Received: from mail.kernel.org ([198.145.29.99]:45346 "EHLO mail.kernel.org"
+        id S1728468AbgCCOBW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 09:01:22 -0500
+Received: from mail.kernel.org ([198.145.29.99]:46720 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728037AbgCCN73 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Mar 2020 08:59:29 -0500
-Received: from mail.kernel.org (ip-109-40-2-133.web.vodafone.de [109.40.2.133])
+        id S1728443AbgCCOBW (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 09:01:22 -0500
+Received: from onda.lan (ip-109-40-2-133.web.vodafone.de [109.40.2.133])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id CA2692166E;
-        Tue,  3 Mar 2020 13:59:28 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 794622073D;
+        Tue,  3 Mar 2020 14:01:20 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583243969;
-        bh=s0m7dutvhHUxy0GagWG09NA7+534PrANWICiABloyXk=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=VHd1+Rd8iKbiniMJBzd3ZSrKtuo3VTCThxt/tGg4YtrBn8kgYQimTjGz6/kyZKI04
-         AovqYF4jNVqQyJIz8L6QNA6lPBPbX2IB6xEhMwhBJeGyWGuGvCf90jQKG1cpWF+bOH
-         +1h5fL0iOcwtUR60JNM7RD+zJ4h7iN2bp0GF6LCI=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1j9850-001Ye9-MH; Tue, 03 Mar 2020 14:59:26 +0100
+        s=default; t=1583244081;
+        bh=0jraC2vhT4/0rCJ9zdkEYr2ZoyzfD3nPO9KuM2YUf3U=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=XgfTOSViQ9Dh9lgvV1BhgLpP8NJah/z85viZZHlXUf/oovxZQr58rP5bTp30QXDyw
+         8O3NSztDDdNgMWoAPaSxixUNSeLeuxGtc68g9SMeZGtmAOlNw3STJwgu1yrgrhVy+h
+         a2NMk/OlPNXxA+YAwk2ab21yIZhdG4qllZ20QQGg=
+Date:   Tue, 3 Mar 2020 15:01:17 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v3 18/18] docs: kvm: get read of devices/README
-Date:   Tue,  3 Mar 2020 14:59:25 +0100
-Message-Id: <6e9c4aaf704cdc7b4e517122fb87cbe05f0ffd23.1583243827.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <cover.1583243826.git.mchehab+huawei@kernel.org>
-References: <cover.1583243826.git.mchehab+huawei@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        linux-pm@vger.kernel.org
+Subject: Re: [PATCH v2 14/24] docs: cpu-freq: convert index.txt to ReST
+Message-ID: <20200303150117.7094df6e@onda.lan>
+In-Reply-To: <20200302141916.1c6d8abe@lwn.net>
+References: <cover.1581956285.git.mchehab+huawei@kernel.org>
+        <7a89b0c82520d340d3c7f45bfd52ee9e6e23dbdf.1581956285.git.mchehab+huawei@kernel.org>
+        <20200302141916.1c6d8abe@lwn.net>
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add the information there inside devices/index.rst
+Em Mon, 2 Mar 2020 14:19:16 -0700
+Jonathan Corbet <corbet@lwn.net> escreveu:
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/virt/kvm/devices/README    | 1 -
- Documentation/virt/kvm/devices/index.rst | 3 +++
- 2 files changed, 3 insertions(+), 1 deletion(-)
- delete mode 100644 Documentation/virt/kvm/devices/README
+> On Mon, 17 Feb 2020 17:20:32 +0100
+> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+> 
+> > most of the stuff there can be re-used with ReST format,
+> > but we need to add an empty TOC and remove the existing
+> > entries, as the following conversion patches will be re-adding
+> > them, as they're converted.
+> > 
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>  
+> 
+> Rafael, do you want to carry the cpu-freq changes from this set, or should
+> I just apply the whole thing over here?
 
-diff --git a/Documentation/virt/kvm/devices/README b/Documentation/virt/kvm/devices/README
-deleted file mode 100644
-index 34a69834124a..000000000000
---- a/Documentation/virt/kvm/devices/README
-+++ /dev/null
-@@ -1 +0,0 @@
--This directory contains specific device bindings for KVM_CAP_DEVICE_CTRL.
-diff --git a/Documentation/virt/kvm/devices/index.rst b/Documentation/virt/kvm/devices/index.rst
-index 192cda7405c8..cbadafc0e36e 100644
---- a/Documentation/virt/kvm/devices/index.rst
-+++ b/Documentation/virt/kvm/devices/index.rst
-@@ -4,6 +4,9 @@
- Devices
- =======
- 
-+The following documentation contains specific device bindings
-+for KVM_CAP_DEVICE_CTRL.
-+
- .. toctree::
-    :maxdepth: 2
- 
--- 
-2.24.1
+Hi Jon,
 
+As Rafael should be applying the cpu-freq via his tree, I'm re-sending the
+remaining patches on this series as:
+
+	[PATCH v3 00/18] Manually convert  thermal, crypto and misc devices to ReST
+
+Regards,
+Mauro
