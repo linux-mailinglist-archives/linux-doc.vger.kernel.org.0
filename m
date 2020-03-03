@@ -2,237 +2,356 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 222E0177A44
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 16:21:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A50F2177B0E
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 16:51:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729466AbgCCPVM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 10:21:12 -0500
-Received: from out02.mta.xmission.com ([166.70.13.232]:51874 "EHLO
-        out02.mta.xmission.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728787AbgCCPVL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 3 Mar 2020 10:21:11 -0500
-Received: from in01.mta.xmission.com ([166.70.13.51])
-        by out02.mta.xmission.com with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.90_1)
-        (envelope-from <ebiederm@xmission.com>)
-        id 1j99Lt-0008Dj-DE; Tue, 03 Mar 2020 08:20:57 -0700
-Received: from ip68-227-160-95.om.om.cox.net ([68.227.160.95] helo=x220.xmission.com)
-        by in01.mta.xmission.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.87)
-        (envelope-from <ebiederm@xmission.com>)
-        id 1j99Ls-00074l-Ha; Tue, 03 Mar 2020 08:20:57 -0700
-From:   ebiederm@xmission.com (Eric W. Biederman)
-To:     Bernd Edlinger <bernd.edlinger@hotmail.de>
-Cc:     Christian Brauner <christian.brauner@ubuntu.com>,
-        Kees Cook <keescook@chromium.org>,
-        Jann Horn <jannh@google.com>, Jonathan Corbet <corbet@lwn.net>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Oleg Nesterov <oleg@redhat.com>,
-        Frederic Weisbecker <frederic@kernel.org>,
-        Andrei Vagin <avagin@gmail.com>,
-        Ingo Molnar <mingo@kernel.org>,
-        "Peter Zijlstra \(Intel\)" <peterz@infradead.org>,
-        Yuyang Du <duyuyang@gmail.com>,
-        David Hildenbrand <david@redhat.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Anshuman Khandual <anshuman.khandual@arm.com>,
-        David Howells <dhowells@redhat.com>,
-        James Morris <jamorris@linux.microsoft.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Shakeel Butt <shakeelb@google.com>,
-        Jason Gunthorpe <jgg@ziepe.ca>,
-        Christian Kellner <christian@kellner.me>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Aleksa Sarai <cyphar@cyphar.com>,
-        "Dmitry V. Levin" <ldv@altlinux.org>,
-        "linux-doc\@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel\@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-fsdevel\@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
-        "linux-mm\@kvack.org" <linux-mm@kvack.org>,
-        "stable\@vger.kernel.org" <stable@vger.kernel.org>,
-        <linux-api@vger.kernel.org>
-References: <AM6PR03MB5170EB4427BF5C67EE98FF09E4E60@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <87a74zmfc9.fsf@x220.int.ebiederm.org>
-        <AM6PR03MB517071DEF894C3D72D2B4AE2E4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <87k142lpfz.fsf@x220.int.ebiederm.org>
-        <AM6PR03MB51704206634C009500A8080DE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <875zfmloir.fsf@x220.int.ebiederm.org>
-        <AM6PR03MB51707ABF20B6CBBECC34865FE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <87v9nmjulm.fsf@x220.int.ebiederm.org>
-        <AM6PR03MB5170B976E6387FDDAD59A118E4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <202003021531.C77EF10@keescook>
-        <20200303085802.eqn6jbhwxtmz4j2x@wittgenstein>
-        <AM6PR03MB5170285B336790D3450E2644E4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
-Date:   Tue, 03 Mar 2020 09:18:44 -0600
-In-Reply-To: <AM6PR03MB5170285B336790D3450E2644E4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        (Bernd Edlinger's message of "Tue, 3 Mar 2020 13:02:51 +0000")
-Message-ID: <87v9nlii0b.fsf@x220.int.ebiederm.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
+        id S1730244AbgCCPuv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 10:50:51 -0500
+Received: from mail.kernel.org ([198.145.29.99]:60034 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1730243AbgCCPuv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 10:50:51 -0500
+Received: from mail.kernel.org (tmo-101-56.customers.d1-online.com [80.187.101.56])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 97CB52051A;
+        Tue,  3 Mar 2020 15:50:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1583250650;
+        bh=IxtlVm3ASGBK5BCboDOtjEtzjPaen2YTx4JZkDsuFTk=;
+        h=From:To:Cc:Subject:Date:From;
+        b=OH58s3JTKrxcJMGwuEzhyuul4yTsHsAKQqT93XkCHvIDqkalDXfleEYx8aeqTgR8h
+         QF3ZrWvIG3VlE8C7pJcXScsDULnwR5ffdK5AeMxD0rLtX5G+Cc49+a7YYEmJiu2v1G
+         U8gq10vwnkWYRB4SCkwfiyQJjmA9sHbju302HW9k=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1j99og-001ZOj-Cl; Tue, 03 Mar 2020 16:50:42 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "Steven Rostedt (VMware)" <rostedt@goodmis.org>,
+        Tom Zanussi <zanussi@kernel.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH 1/9] docs: trace: events.rst: convert some new stuff to ReST format
+Date:   Tue,  3 Mar 2020 16:50:31 +0100
+Message-Id: <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.24.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-XM-SPF: eid=1j99Ls-00074l-Ha;;;mid=<87v9nlii0b.fsf@x220.int.ebiederm.org>;;;hst=in01.mta.xmission.com;;;ip=68.227.160.95;;;frm=ebiederm@xmission.com;;;spf=neutral
-X-XM-AID: U2FsdGVkX19rGY6nP+Gy6pmv+g93hLTd2evDLDDhunA=
-X-SA-Exim-Connect-IP: 68.227.160.95
-X-SA-Exim-Mail-From: ebiederm@xmission.com
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on sa03.xmission.com
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=8.0 tests=ALL_TRUSTED,BAYES_40,
-        DCC_CHECK_NEGATIVE,T_TM2_M_HEADER_IN_MSG autolearn=disabled
-        version=3.4.2
-X-Spam-Virus: No
-X-Spam-Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
-        * -0.0 BAYES_40 BODY: Bayes spam probability is 20 to 40%
-        *      [score: 0.3807]
-        *  0.0 T_TM2_M_HEADER_IN_MSG BODY: No description available.
-        * -0.0 DCC_CHECK_NEGATIVE Not listed in DCC
-        *      [sa03 1397; Body=1 Fuz1=1 Fuz2=1]
-X-Spam-DCC: XMission; sa03 1397; Body=1 Fuz1=1 Fuz2=1 
-X-Spam-Combo: ;Bernd Edlinger <bernd.edlinger@hotmail.de>
-X-Spam-Relay-Country: 
-X-Spam-Timing: total 400 ms - load_scoreonly_sql: 0.03 (0.0%),
-        signal_user_changed: 2.4 (0.6%), b_tie_ro: 1.67 (0.4%), parse: 0.86
-        (0.2%), extract_message_metadata: 9 (2.3%), get_uri_detail_list: 1.73
-        (0.4%), tests_pri_-1000: 14 (3.5%), tests_pri_-950: 0.99 (0.2%),
-        tests_pri_-900: 0.84 (0.2%), tests_pri_-90: 36 (8.9%), check_bayes: 35
-        (8.6%), b_tokenize: 11 (2.7%), b_tok_get_all: 13 (3.3%), b_comp_prob:
-        2.4 (0.6%), b_tok_touch_all: 5 (1.3%), b_finish: 0.61 (0.2%),
-        tests_pri_0: 327 (81.7%), check_dkim_signature: 0.47 (0.1%),
-        check_dkim_adsp: 2.3 (0.6%), poll_dns_idle: 0.87 (0.2%), tests_pri_10:
-        1.70 (0.4%), tests_pri_500: 5.0 (1.2%), rewrite_mail: 0.00 (0.0%)
-Subject: Re: [PATCHv5] exec: Fix a deadlock in ptrace
-X-Spam-Flag: No
-X-SA-Exim-Version: 4.2.1 (built Thu, 05 May 2016 13:38:54 -0600)
-X-SA-Exim-Scanned: Yes (on in01.mta.xmission.com)
+Content-Transfer-Encoding: 8bit
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Bernd Edlinger <bernd.edlinger@hotmail.de> writes:
+Some new chapters were added to the documentation. This caused
+Sphinx to complain, as the literal blocks there are not properly
+tagged as such. Also, a new note added there doesn't follow
+the ReST format.
 
-> This fixes a deadlock in the tracer when tracing a multi-threaded
-> application that calls execve while more than one thread are running.
->
-> I observed that when running strace on the gcc test suite, it always
-> blocks after a while, when expect calls execve, because other threads
-> have to be terminated.  They send ptrace events, but the strace is no
-> longer able to respond, since it is blocked in vm_access.
->
-> The deadlock is always happening when strace needs to access the
-> tracees process mmap, while another thread in the tracee starts to
-> execve a child process, but that cannot continue until the
-> PTRACE_EVENT_EXIT is handled and the WIFEXITED event is received:
+This fixes the following warnings:
 
-A couple of things.
+    Documentation/trace/events.rst:589: WARNING: Definition list ends without a blank line; unexpected unindent.
+    Documentation/trace/events.rst:620: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:623: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:626: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:703: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:697: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:722: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:775: WARNING: Definition list ends without a blank line; unexpected unindent.
+    Documentation/trace/events.rst:814: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:817: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:820: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:823: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:826: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:829: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:832: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:844: WARNING: Unexpected indentation.
+    Documentation/trace/events.rst:845: WARNING: Block quote ends without a blank line; unexpected unindent.
+    Documentation/trace/events.rst:849: WARNING: Unexpected indentation.
+    Documentation/trace/events.rst:850: WARNING: Block quote ends without a blank line; unexpected unindent.
+    Documentation/trace/events.rst:883: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:886: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:889: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:895: WARNING: Bullet list ends without a blank line; unexpected unindent.
+    Documentation/trace/events.rst:895: WARNING: Inline emphasis start-string without end-string.
+    Documentation/trace/events.rst:968: WARNING: Inline emphasis start-string without end-string.
 
-Why do we think it is safe to change the behavior exposed to userspace?
-Not the deadlock but all of the times the current code would not
-deadlock?
+Fixes: 34ed63573b66 ("tracing: Documentation for in-kernel synthetic event API")
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ Documentation/trace/events.rst | 63 +++++++++++++++++-----------------
+ 1 file changed, 32 insertions(+), 31 deletions(-)
 
-Especially given that this is a small window it might be hard for people
-to track down and report so we need a strong argument that this won't
-break existing userspace before we just change things.
+diff --git a/Documentation/trace/events.rst b/Documentation/trace/events.rst
+index ed79b220bd07..4a2ebe0bd19b 100644
+--- a/Documentation/trace/events.rst
++++ b/Documentation/trace/events.rst
+@@ -342,7 +342,8 @@ section of Documentation/trace/ftrace.rst), but there are major
+ differences and the implementation isn't currently tied to it in any
+ way, so beware about making generalizations between the two.
+ 
+-Note: Writing into trace_marker (See Documentation/trace/ftrace.rst)
++.. Note::
++     Writing into trace_marker (See Documentation/trace/ftrace.rst)
+      can also enable triggers that are written into
+      /sys/kernel/tracing/events/ftrace/print/trigger
+ 
+@@ -569,14 +570,14 @@ The first creates the event in one step, using synth_event_create().
+ In this method, the name of the event to create and an array defining
+ the fields is supplied to synth_event_create().  If successful, a
+ synthetic event with that name and fields will exist following that
+-call.  For example, to create a new "schedtest" synthetic event:
++call.  For example, to create a new "schedtest" synthetic event::
+ 
+   ret = synth_event_create("schedtest", sched_fields,
+                            ARRAY_SIZE(sched_fields), THIS_MODULE);
+ 
+ The sched_fields param in this example points to an array of struct
+ synth_field_desc, each of which describes an event field by type and
+-name:
++name::
+ 
+   static struct synth_field_desc sched_fields[] = {
+         { .type = "pid_t",              .name = "next_pid_field" },
+@@ -615,7 +616,7 @@ synth_event_gen_cmd_array_start(), the user should create and
+ initialize a dynevent_cmd object using synth_event_cmd_init().
+ 
+ For example, to create a new "schedtest" synthetic event with two
+-fields:
++fields::
+ 
+   struct dynevent_cmd cmd;
+   char *buf;
+@@ -631,7 +632,7 @@ fields:
+                                   "u64", "ts_ns");
+ 
+ Alternatively, using an array of struct synth_field_desc fields
+-containing the same information:
++containing the same information::
+ 
+   ret = synth_event_gen_cmd_array_start(&cmd, "schedtest", THIS_MODULE,
+                                         fields, n_fields);
+@@ -640,7 +641,7 @@ Once the synthetic event object has been created, it can then be
+ populated with more fields.  Fields are added one by one using
+ synth_event_add_field(), supplying the dynevent_cmd object, a field
+ type, and a field name.  For example, to add a new int field named
+-"intfield", the following call should be made:
++"intfield", the following call should be made::
+ 
+   ret = synth_event_add_field(&cmd, "int", "intfield");
+ 
+@@ -649,7 +650,7 @@ the field is considered to be an array.
+ 
+ A group of fields can also be added all at once using an array of
+ synth_field_desc with add_synth_fields().  For example, this would add
+-just the first four sched_fields:
++just the first four sched_fields::
+ 
+   ret = synth_event_add_fields(&cmd, sched_fields, 4);
+ 
+@@ -658,7 +659,7 @@ synth_event_add_field_str() can be used to add it as-is; it will
+ also automatically append a ';' to the string.
+ 
+ Once all the fields have been added, the event should be finalized and
+-registered by calling the synth_event_gen_cmd_end() function:
++registered by calling the synth_event_gen_cmd_end() function::
+ 
+   ret = synth_event_gen_cmd_end(&cmd);
+ 
+@@ -691,7 +692,7 @@ trace array)), along with an variable number of u64 args, one for each
+ synthetic event field, and the number of values being passed.
+ 
+ So, to trace an event corresponding to the synthetic event definition
+-above, code like the following could be used:
++above, code like the following could be used::
+ 
+   ret = synth_event_trace(create_synth_test, 7, /* number of values */
+                           444,             /* next_pid_field */
+@@ -715,7 +716,7 @@ trace array)), along with an array of u64, one for each synthetic
+ event field.
+ 
+ To trace an event corresponding to the synthetic event definition
+-above, code like the following could be used:
++above, code like the following could be used::
+ 
+   u64 vals[7];
+ 
+@@ -739,7 +740,7 @@ In order to trace a synthetic event, a pointer to the trace event file
+ is needed.  The trace_get_event_file() function can be used to get
+ it - it will find the file in the given trace instance (in this case
+ NULL since the top trace array is being used) while at the same time
+-preventing the instance containing it from going away:
++preventing the instance containing it from going away::
+ 
+        schedtest_event_file = trace_get_event_file(NULL, "synthetic",
+                                                    "schedtest");
+@@ -751,31 +752,31 @@ To enable a synthetic event from the kernel, trace_array_set_clr_event()
+ can be used (which is not specific to synthetic events, so does need
+ the "synthetic" system name to be specified explicitly).
+ 
+-To enable the event, pass 'true' to it:
++To enable the event, pass 'true' to it::
+ 
+        trace_array_set_clr_event(schedtest_event_file->tr,
+                                  "synthetic", "schedtest", true);
+ 
+-To disable it pass false:
++To disable it pass false::
+ 
+        trace_array_set_clr_event(schedtest_event_file->tr,
+                                  "synthetic", "schedtest", false);
+ 
+ Finally, synth_event_trace_array() can be used to actually trace the
+-event, which should be visible in the trace buffer afterwards:
++event, which should be visible in the trace buffer afterwards::
+ 
+        ret = synth_event_trace_array(schedtest_event_file, vals,
+                                      ARRAY_SIZE(vals));
+ 
+ To remove the synthetic event, the event should be disabled, and the
+-trace instance should be 'put' back using trace_put_event_file():
++trace instance should be 'put' back using trace_put_event_file()::
+ 
+        trace_array_set_clr_event(schedtest_event_file->tr,
+                                  "synthetic", "schedtest", false);
+        trace_put_event_file(schedtest_event_file);
+ 
+ If those have been successful, synth_event_delete() can be called to
+-remove the event:
++remove the event::
+ 
+        ret = synth_event_delete("schedtest");
+ 
+@@ -784,7 +785,7 @@ remove the event:
+ 
+ To trace a synthetic using the piecewise method described above, the
+ synth_event_trace_start() function is used to 'open' the synthetic
+-event trace:
++event trace::
+ 
+        struct synth_trace_state trace_state;
+ 
+@@ -809,7 +810,7 @@ along with the value to set the next field in the event.  After each
+ field is set, the 'cursor' points to the next field, which will be set
+ by the subsequent call, continuing until all the fields have been set
+ in order.  The same sequence of calls as in the above examples using
+-this method would be (without error-handling code):
++this method would be (without error-handling code)::
+ 
+        /* next_pid_field */
+        ret = synth_event_add_next_val(777, &trace_state);
+@@ -837,7 +838,7 @@ used.  Each call is passed the same synth_trace_state object used in
+ the synth_event_trace_start(), along with the field name of the field
+ to set and the value to set it to.  The same sequence of calls as in
+ the above examples using this method would be (without error-handling
+-code):
++code)::
+ 
+        ret = synth_event_add_val("next_pid_field", 777, &trace_state);
+        ret = synth_event_add_val("next_comm_field", (u64)"silly putty",
+@@ -855,7 +856,7 @@ can be used but not both at the same time.
+ 
+ Finally, the event won't be actually traced until it's 'closed',
+ which is done using synth_event_trace_end(), which takes only the
+-struct synth_trace_state object used in the previous calls:
++struct synth_trace_state object used in the previous calls::
+ 
+        ret = synth_event_trace_end(&trace_state);
+ 
+@@ -878,7 +879,7 @@ function.  Before calling kprobe_event_gen_cmd_start(), the user
+ should create and initialize a dynevent_cmd object using
+ kprobe_event_cmd_init().
+ 
+-For example, to create a new "schedtest" kprobe event with two fields:
++For example, to create a new "schedtest" kprobe event with two fields::
+ 
+   struct dynevent_cmd cmd;
+   char *buf;
+@@ -900,18 +901,18 @@ Once the kprobe event object has been created, it can then be
+ populated with more fields.  Fields can be added using
+ kprobe_event_add_fields(), supplying the dynevent_cmd object along
+ with a variable arg list of probe fields.  For example, to add a
+-couple additional fields, the following call could be made:
++couple additional fields, the following call could be made::
+ 
+   ret = kprobe_event_add_fields(&cmd, "flags=%cx", "mode=+4($stack)");
+ 
+ Once all the fields have been added, the event should be finalized and
+ registered by calling the kprobe_event_gen_cmd_end() or
+ kretprobe_event_gen_cmd_end() functions, depending on whether a kprobe
+-or kretprobe command was started:
++or kretprobe command was started::
+ 
+   ret = kprobe_event_gen_cmd_end(&cmd);
+ 
+-or
++or::
+ 
+   ret = kretprobe_event_gen_cmd_end(&cmd);
+ 
+@@ -920,13 +921,13 @@ events.
+ 
+ Similarly, a kretprobe event can be created using
+ kretprobe_event_gen_cmd_start() with a probe name and location and
+-additional params such as $retval:
++additional params such as $retval::
+ 
+   ret = kretprobe_event_gen_cmd_start(&cmd, "gen_kretprobe_test",
+                                       "do_sys_open", "$retval");
+ 
+ Similar to the synthetic event case, code like the following can be
+-used to enable the newly created kprobe event:
++used to enable the newly created kprobe event::
+ 
+   gen_kprobe_test = trace_get_event_file(NULL, "kprobes", "gen_kprobe_test");
+ 
+@@ -934,7 +935,7 @@ used to enable the newly created kprobe event:
+                                   "kprobes", "gen_kprobe_test", true);
+ 
+ Finally, also similar to synthetic events, the following code can be
+-used to give the kprobe event file back and delete the event:
++used to give the kprobe event file back and delete the event::
+ 
+   trace_put_event_file(gen_kprobe_test);
+ 
+@@ -963,7 +964,7 @@ are described below.
+ 
+ The first step in building a new command string is to create and
+ initialize an instance of a dynevent_cmd.  Here, for instance, we
+-create a dynevent_cmd on the stack and initialize it:
++create a dynevent_cmd on the stack and initialize it::
+ 
+   struct dynevent_cmd cmd;
+   char *buf;
+@@ -989,7 +990,7 @@ calls to argument-adding functions.
+ To add a single argument, define and initialize a struct dynevent_arg
+ or struct dynevent_arg_pair object.  Here's an example of the simplest
+ possible arg addition, which is simply to append the given string as
+-a whitespace-separated argument to the command:
++a whitespace-separated argument to the command::
+ 
+   struct dynevent_arg arg;
+ 
+@@ -1007,7 +1008,7 @@ the arg.
+ Here's another more complicated example using an 'arg pair', which is
+ used to create an argument that consists of a couple components added
+ together as a unit, for example, a 'type field_name;' arg or a simple
+-expression arg e.g. 'flags=%cx':
++expression arg e.g. 'flags=%cx'::
+ 
+   struct dynevent_arg_pair arg_pair;
+ 
+@@ -1031,7 +1032,7 @@ Any number of dynevent_*_add() calls can be made to build up the string
+ (until its length surpasses cmd->maxlen).  When all the arguments have
+ been added and the command string is complete, the only thing left to
+ do is run the command, which happens by simply calling
+-dynevent_create():
++dynevent_create()::
+ 
+   ret = dynevent_create(&cmd);
+ 
+-- 
+2.24.1
 
-Usually surveying all of the users of a system call that we can find
-and checking to see if they might be affected by the change in behavior
-is difficult enough that we usually opt for not being lazy and
-preserving the behavior.
-
-This patch is up to two changes in behavior now, that could potentially
-affect a whole array of programs.  Adding linux-api so that this change
-in behavior can be documented if/when this change goes through.
-
-If you can split the documentation and test fixes out into separate
-patches that would help reviewing this code, or please make it explicit
-that the your are changing documentation about behavior that is changing
-with this patch.
-
-Eric
-
-> diff --git a/tools/testing/selftests/ptrace/vmaccess.c b/tools/testing/selftests/ptrace/vmaccess.c
-> new file mode 100644
-> index 0000000..6d8a048
-> --- /dev/null
-> +++ b/tools/testing/selftests/ptrace/vmaccess.c
-> @@ -0,0 +1,66 @@
-> +// SPDX-License-Identifier: GPL-2.0+
-> +/*
-> + * Copyright (c) 2020 Bernd Edlinger <bernd.edlinger@hotmail.de>
-> + * All rights reserved.
-> + *
-> + * Check whether /proc/$pid/mem can be accessed without causing deadlocks
-> + * when de_thread is blocked with ->cred_guard_mutex held.
-> + */
-> +
-> +#include "../kselftest_harness.h"
-> +#include <stdio.h>
-> +#include <fcntl.h>
-> +#include <pthread.h>
-> +#include <signal.h>
-> +#include <unistd.h>
-> +#include <sys/ptrace.h>
-> +
-> +static void *thread(void *arg)
-> +{
-> +	ptrace(PTRACE_TRACEME, 0, 0L, 0L);
-> +	return NULL;
-> +}
-> +
-> +TEST(vmaccess)
-> +{
-> +	int f, pid = fork();
-> +	char mm[64];
-> +
-> +	if (!pid) {
-> +		pthread_t pt;
-> +
-> +		pthread_create(&pt, NULL, thread, NULL);
-> +		pthread_join(pt, NULL);
-> +		execlp("true", "true", NULL);
-> +	}
-> +
-> +	sleep(1);
-> +	sprintf(mm, "/proc/%d/mem", pid);
-> +	f = open(mm, O_RDONLY);
-> +	ASSERT_LE(0, f);
-> +	close(f);
-> +	f = kill(pid, SIGCONT);
-> +	ASSERT_EQ(0, f);
-> +}
-> +
-> +TEST(attach)
-> +{
-> +	int f, pid = fork();
-> +
-> +	if (!pid) {
-> +		pthread_t pt;
-> +
-> +		pthread_create(&pt, NULL, thread, NULL);
-> +		pthread_join(pt, NULL);
-> +		execlp("true", "true", NULL);
-> +	}
-> +
-> +	sleep(1);
-> +	f = ptrace(PTRACE_ATTACH, pid, 0L, 0L);
-
-To be meaningful this code needs to learn to loop when
-ptrace returns -EAGAIN.
-
-Because that is pretty much what any self respecting user space
-process will do.
-
-At which point I am not certain we can say that the behavior has
-sufficiently improved not to be a deadlock.
-
-> +	ASSERT_EQ(EAGAIN, errno);
-> +	ASSERT_EQ(f, -1);
-> +	f = kill(pid, SIGCONT);
-> +	ASSERT_EQ(0, f);
-> +}
-> +
-> +TEST_HARNESS_MAIN
-
-Eric
