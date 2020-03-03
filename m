@@ -2,43 +2,43 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 33BCD177B0D
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 16:51:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 61B86177B04
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Mar 2020 16:51:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730245AbgCCPuv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Mar 2020 10:50:51 -0500
-Received: from mail.kernel.org ([198.145.29.99]:60046 "EHLO mail.kernel.org"
+        id S1729172AbgCCPuq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Mar 2020 10:50:46 -0500
+Received: from mail.kernel.org ([198.145.29.99]:59900 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730244AbgCCPuu (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Mar 2020 10:50:50 -0500
-Received: from mail.kernel.org (ip-109-40-2-133.web.vodafone.de [109.40.2.133])
+        id S1729544AbgCCPup (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Mar 2020 10:50:45 -0500
+Received: from mail.kernel.org (tmo-101-56.customers.d1-online.com [80.187.101.56])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id CA9E320828;
-        Tue,  3 Mar 2020 15:50:49 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id D206620866;
+        Tue,  3 Mar 2020 15:50:44 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583250650;
-        bh=JkmjXkfmpFr8fwRmsjjmP5TuFZyy2up30ayz+lIaM4A=;
+        s=default; t=1583250645;
+        bh=b58Lf8CIoQjoi+5KNDLUj4N4cQ+YWTjbtqQDRGQKxws=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=hntYcrzaB8veaIQrj/nRIdmwU+oxXnT/URQZf8cz50g18P61l0/jrJnPsOUj6YjPR
-         iFsUYdboVJifDeR/2RYky7P0APfFc63fN0DFJX6tpeDcEh5yT47J6rBLl+OHervJJl
-         YDQp2hE8lmlbA2Ho1HYd9PSJMax0bga6jRJgBw1c=
+        b=Xkuquamrzx0Hq70125iDbM1a9JbGUmNk0FyZmnQWU1j+FoZOvm4v9CfyIhgWpIGnp
+         eO5lGTHse4xT9hrUqOHh+BdZUa2J7//E7PtKJBGWOXBN4iyyQNfSZqRMdIt3YIyP7+
+         V15jfckffjPVGQ3DBxjDSKrdbOGElw1DKLlmHSL8=
 Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
         (envelope-from <mchehab@kernel.org>)
-        id 1j99og-001ZOy-HA; Tue, 03 Mar 2020 16:50:42 +0100
+        id 1j99og-001ZP2-IF; Tue, 03 Mar 2020 16:50:42 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-gpio@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: [PATCH 5/9] docs: gpio: driver.rst: don't mark literal blocks twice
-Date:   Tue,  3 Mar 2020 16:50:35 +0100
-Message-Id: <9ee92407b467fd0b482a680bcce447f907df2278.1583250595.git.mchehab+huawei@kernel.org>
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        clang-built-linux@googlegroups.com
+Subject: [PATCH 6/9] docs: translations: it: avoid duplicate refs at programming-language.rst
+Date:   Tue,  3 Mar 2020 16:50:36 +0100
+Message-Id: <e733111f3599dff96524ad09ace5204ac6bb496b.1583250595.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.24.1
 In-Reply-To: <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
 References: <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
@@ -46,62 +46,73 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Two literal blocks there are marked with both "::" and
-
-	.. code-block:: c
-
-This causes Sphinx (2.4.1) to do the wrong thing, causing
-lots of warnings:
-
-    Documentation/driver-api/gpio/driver.rst:425: WARNING: Unexpected indentation.
-    Documentation/driver-api/gpio/driver.rst:423: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:427: WARNING: Block quote ends without a blank line; unexpected unindent.
-    Documentation/driver-api/gpio/driver.rst:429: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:429: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:429: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:433: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:446: WARNING: Unexpected indentation.
-    Documentation/driver-api/gpio/driver.rst:440: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:440: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:447: WARNING: Block quote ends without a blank line; unexpected unindent.
-    Documentation/driver-api/gpio/driver.rst:449: WARNING: Definition list ends without a blank line; unexpected unindent.
-    Documentation/driver-api/gpio/driver.rst:462: WARNING: Unexpected indentation.
-    Documentation/driver-api/gpio/driver.rst:460: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:462: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:465: WARNING: Block quote ends without a blank line; unexpected unindent.
-    Documentation/driver-api/gpio/driver.rst:467: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:467: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:467: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:471: WARNING: Inline emphasis start-string without end-string.
-    Documentation/driver-api/gpio/driver.rst:478: WARNING: Inline emphasis start-string without end-string.
+As the translations document is part of the main body, we can't
+keep duplicated references there. So, prefix the Italian ones
+with "it-".
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/driver-api/gpio/driver.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../it_IT/process/programming-language.rst    | 30 +++++++++----------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/Documentation/driver-api/gpio/driver.rst b/Documentation/driver-api/gpio/driver.rst
-index 871922529332..9809f593c0ab 100644
---- a/Documentation/driver-api/gpio/driver.rst
-+++ b/Documentation/driver-api/gpio/driver.rst
-@@ -416,7 +416,7 @@ The preferred way to set up the helpers is to fill in the
- struct gpio_irq_chip inside struct gpio_chip before adding the gpio_chip.
- If you do this, the additional irq_chip will be set up by gpiolib at the
- same time as setting up the rest of the GPIO functionality. The following
--is a typical example of a cascaded interrupt handler using gpio_irq_chip::
-+is a typical example of a cascaded interrupt handler using gpio_irq_chip:
+diff --git a/Documentation/translations/it_IT/process/programming-language.rst b/Documentation/translations/it_IT/process/programming-language.rst
+index f4b006395849..c4fc9d394c29 100644
+--- a/Documentation/translations/it_IT/process/programming-language.rst
++++ b/Documentation/translations/it_IT/process/programming-language.rst
+@@ -8,26 +8,26 @@
+ Linguaggio di programmazione
+ ============================
  
- .. code-block:: c
+-Il kernel è scritto nel linguaggio di programmazione C [c-language]_.
+-Più precisamente, il kernel viene compilato con ``gcc`` [gcc]_ usando
+-l'opzione ``-std=gnu89`` [gcc-c-dialect-options]_: il dialetto GNU
++Il kernel è scritto nel linguaggio di programmazione C [it-c-language]_.
++Più precisamente, il kernel viene compilato con ``gcc`` [it-gcc]_ usando
++l'opzione ``-std=gnu89`` [it-gcc-c-dialect-options]_: il dialetto GNU
+ dello standard ISO C90 (con l'aggiunta di alcune funzionalità da C99)
  
-@@ -453,7 +453,7 @@ is a typical example of a cascaded interrupt handler using gpio_irq_chip::
-   return devm_gpiochip_add_data(dev, &g->gc, g);
+-Questo dialetto contiene diverse estensioni al linguaggio [gnu-extensions]_,
++Questo dialetto contiene diverse estensioni al linguaggio [it-gnu-extensions]_,
+ e molte di queste vengono usate sistematicamente dal kernel.
  
- The helper support using hierarchical interrupt controllers as well.
--In this case the typical set-up will look like this::
-+In this case the typical set-up will look like this:
+ Il kernel offre un certo livello di supporto per la compilazione con ``clang``
+-[clang]_ e ``icc`` [icc]_ su diverse architetture, tuttavia in questo momento
++[it-clang]_ e ``icc`` [it-icc]_ su diverse architetture, tuttavia in questo momento
+ il supporto non è completo e richiede delle patch aggiuntive.
  
- .. code-block:: c
+ Attributi
+ ---------
  
+ Una delle estensioni più comuni e usate nel kernel sono gli attributi
+-[gcc-attribute-syntax]_. Gli attributi permettono di aggiungere una semantica,
++[it-gcc-attribute-syntax]_. Gli attributi permettono di aggiungere una semantica,
+ definita dell'implementazione, alle entità del linguaggio (come le variabili,
+ le funzioni o i tipi) senza dover fare importanti modifiche sintattiche al
+-linguaggio stesso (come l'aggiunta di nuove parole chiave) [n2049]_.
++linguaggio stesso (come l'aggiunta di nuove parole chiave) [it-n2049]_.
+ 
+ In alcuni casi, gli attributi sono opzionali (ovvero un compilatore che non
+ dovesse supportarli dovrebbe produrre comunque codice corretto, anche se
+@@ -41,11 +41,11 @@ possono usare e/o per accorciare il codice.
+ Per maggiori informazioni consultate il file d'intestazione
+ ``include/linux/compiler_attributes.h``.
+ 
+-.. [c-language] http://www.open-std.org/jtc1/sc22/wg14/www/standards
+-.. [gcc] https://gcc.gnu.org
+-.. [clang] https://clang.llvm.org
+-.. [icc] https://software.intel.com/en-us/c-compilers
+-.. [gcc-c-dialect-options] https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html
+-.. [gnu-extensions] https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html
+-.. [gcc-attribute-syntax] https://gcc.gnu.org/onlinedocs/gcc/Attribute-Syntax.html
+-.. [n2049] http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2049.pdf
++.. [it-c-language] http://www.open-std.org/jtc1/sc22/wg14/www/standards
++.. [it-gcc] https://gcc.gnu.org
++.. [it-clang] https://clang.llvm.org
++.. [it-icc] https://software.intel.com/en-us/c-compilers
++.. [it-gcc-c-dialect-options] https://gcc.gnu.org/onlinedocs/gcc/C-Dialect-Options.html
++.. [it-gnu-extensions] https://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html
++.. [it-gcc-attribute-syntax] https://gcc.gnu.org/onlinedocs/gcc/Attribute-Syntax.html
++.. [it-n2049] http://www.open-std.org/jtc1/sc22/wg14/www/docs/n2049.pdf
 -- 
 2.24.1
 
