@@ -2,101 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 75C32178F51
-	for <lists+linux-doc@lfdr.de>; Wed,  4 Mar 2020 12:08:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 881F5178F5B
+	for <lists+linux-doc@lfdr.de>; Wed,  4 Mar 2020 12:08:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729430AbgCDLIE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 4 Mar 2020 06:08:04 -0500
-Received: from userp2130.oracle.com ([156.151.31.86]:44218 "EHLO
-        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729402AbgCDLIE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 4 Mar 2020 06:08:04 -0500
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
-        by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 024B46QH009153;
-        Wed, 4 Mar 2020 11:07:58 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2020-01-29;
- bh=7VBJTl4Wdx3eHqrnuzJdgiv043xJzQdX34w+pHL98Mg=;
- b=JzQp3XilmgUYOmc7RRfqRS3yyFVJglB4oCjHioBpEYbbVKHdwVVCKQHg86lm3CC5wzpg
- IYb7ZrNzZWuhjHzIrWt13W+hXK5GNfqYPZiZr8ZJteZ13VqWezaLN0uDZrQQQDGv1/2L
- 6vY6KGVKQWIYkEjRryL+UkxWh0FgVYLccnI4siHysfIvj8t5hiPh/qobVuwoi4UvownY
- 5VawOydOXmXF9aVhXoV754CzYDU/eQZLNjmgSXJPVgNpME5d8JBosOW9NLUkcIJNJJVW
- duJYQD64rJncqcqzrRAnY95+1QH4Y3smO+AJuDsIKuvIjPGMF3zHyBbgAPFA60lOXqLk 0w== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
-        by userp2130.oracle.com with ESMTP id 2yffcunq9n-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 04 Mar 2020 11:07:58 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
-        by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 024B2XGg048221;
-        Wed, 4 Mar 2020 11:07:58 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
-        by userp3020.oracle.com with ESMTP id 2yg1p772av-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 04 Mar 2020 11:07:58 +0000
-Received: from abhmp0015.oracle.com (abhmp0015.oracle.com [141.146.116.21])
-        by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 024B7uRS012793;
-        Wed, 4 Mar 2020 11:07:57 GMT
-Received: from dhcp-10-175-165-222.vpn.oracle.com (/10.175.165.222)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Wed, 04 Mar 2020 03:07:56 -0800
-From:   Alan Maguire <alan.maguire@oracle.com>
-To:     brendanhiggins@google.com, frowand.list@gmail.com,
-        gregkh@linuxfoundation.org, shuah@kernel.org
-Cc:     corbet@lwn.net, linux-kselftest@vger.kernel.org,
-        linux-kernel@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-doc@vger.kernel.org, Alan Maguire <alan.maguire@oracle.com>
-Subject: [PATCH v6 kunit-next 4/4] kunit: update documentation to describe debugfs representation
-Date:   Wed,  4 Mar 2020 11:07:16 +0000
-Message-Id: <1583320036-442-5-git-send-email-alan.maguire@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1583320036-442-1-git-send-email-alan.maguire@oracle.com>
-References: <1583320036-442-1-git-send-email-alan.maguire@oracle.com>
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9549 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 malwarescore=0
- mlxlogscore=999 mlxscore=0 spamscore=0 adultscore=0 bulkscore=0
- suspectscore=3 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2001150001 definitions=main-2003040086
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9549 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 mlxscore=0 bulkscore=0
- adultscore=0 suspectscore=3 spamscore=0 malwarescore=0 impostorscore=0
- priorityscore=1501 mlxlogscore=999 lowpriorityscore=0 clxscore=1015
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2001150001
- definitions=main-2003040086
+        id S1729478AbgCDLIb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 4 Mar 2020 06:08:31 -0500
+Received: from mail-ed1-f68.google.com ([209.85.208.68]:33910 "EHLO
+        mail-ed1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729283AbgCDLIb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 4 Mar 2020 06:08:31 -0500
+Received: by mail-ed1-f68.google.com with SMTP id c21so325639edt.1;
+        Wed, 04 Mar 2020 03:08:30 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=3yy/OH+uOLzdanIeOX7H2H64xTV/u4qsSGbI1/KJzyQ=;
+        b=LCcft+2QE7nFkT9X5HUWblXU5lWrxdJypIWyYJo3inXIcHdt0vKgmcK+IrS9h2dwro
+         qa7BWl8WjLE+T1r4EH2PRleIDulCN2puooKxfs9ZtRPiobwqs0Rb14VwbEkOfZTQwgn3
+         Ym2McuhANF2g8pWsych3r5aHBj0SN82uOP+vIjjbbxaGd2vuRnflMoCii7XWmOL8Pntg
+         0kyjp8rMjMYu2VnATJ+qoj1OpV3MibWfyDVuzupFeE6OTslpD0bWvABzyXRWRPpBKdDf
+         9s5HmswIkdR9d95fiOLl6UW6VAB91iHxRMXHr9NKD7UEr7PPjl7YdfdDHHjf4YTIRtXy
+         Hn5w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=3yy/OH+uOLzdanIeOX7H2H64xTV/u4qsSGbI1/KJzyQ=;
+        b=WPuwKFF1v1IoXaBQrqvhCH1PyZel58q6BG4jIJuhGLI2wavTk1WW3HtCpHMxfA4CSk
+         wmlWoZeZMVGQbtMdwa8AzRw6p6DKT1Owmsj96ZW2WmAUwS64EHogGlbiI2Y9Aoesl1Be
+         xFedDvlkxvcBB6zGFciWpkdRBSYs4+13Xbobmo91jTxfHlymsouxIzMqO2QwNmIUIfCb
+         G8P0fsFst1TmRwP51YBxqMd2XfusEWX8m9ArwJwHytNvV9zZLwFgtul/ky2NnBM1QKnc
+         pD50iLJuLpC/hiotHvl+v4wXF63NkHEKe12tjBnQ80LwLv3Z1X4kK6KpdZkbDn52hdk4
+         +ZbA==
+X-Gm-Message-State: ANhLgQ1E0H9zZpthsw2WlHpJd8k2Gfnr31VToiLyHGBeEaly6/P/tgwz
+        u3mhS9EXhDvZelgf++RATzYHEbm8qL8=
+X-Google-Smtp-Source: ADFU+vt49WpWk/Ua0NarpmOvy2WnwfqwmQwVx6samXjJI6itrKgzgZfzc16xKdY/y/XcYduymMXYBw==
+X-Received: by 2002:a50:fc85:: with SMTP id f5mr2142948edq.294.1583320109377;
+        Wed, 04 Mar 2020 03:08:29 -0800 (PST)
+Received: from felia.fritz.box ([2001:16b8:2d16:4100:3093:39f0:d3ca:23c6])
+        by smtp.gmail.com with ESMTPSA id d1sm425796edc.71.2020.03.04.03.08.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 04 Mar 2020 03:08:28 -0800 (PST)
+From:   Lukas Bulwahn <lukas.bulwahn@gmail.com>
+To:     Jonathan Corbet <corbet@lwn.net>, Sameer Rahmani <lxsameer@gnu.org>
+Cc:     linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
+        Joe Perches <joe@perches.com>, kernel-janitors@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Subject: [PATCH] MAINTAINERS: adjust to kobject doc ReST conversion
+Date:   Wed,  4 Mar 2020 12:08:21 +0100
+Message-Id: <20200304110821.7243-1-lukas.bulwahn@gmail.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Documentation should describe debugfs layout and semantics.
+Commit 5fed00dcaca8 ("Documentation: kobject.txt has been moved to
+core-api/kobject.rst") missed to adjust the entry in MAINTAINERS.
 
-Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
-Reviewed-by: Brendan Higgins <brendanhiggins@google.com>
+Since then, ./scripts/get_maintainer.pl --self-test complains:
+
+  warning: no file matches F: Documentation/kobject.txt
+
+Adjust DRIVER CORE, KOBJECTS, DEBUGFS AND SYSFS entry in MAINTAINERS.
+
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
 ---
- Documentation/dev-tools/kunit/usage.rst | 14 ++++++++++++++
- 1 file changed, 14 insertions(+)
+Sameer, please ack.
+Jonathan, pick pick this patch for doc-next.
 
-diff --git a/Documentation/dev-tools/kunit/usage.rst b/Documentation/dev-tools/kunit/usage.rst
-index 607758a..473a236 100644
---- a/Documentation/dev-tools/kunit/usage.rst
-+++ b/Documentation/dev-tools/kunit/usage.rst
-@@ -591,3 +591,17 @@ able to run one test case per invocation.
- 
- .. TODO(brendanhiggins@google.com): Add an actual example of an architecture
-    dependent KUnit test.
-+
-+KUnit debugfs representation
-+============================
-+When kunit test suites are initialized, they create an associated directory
-+in /sys/kernel/debug/kunit/<test-suite>.  The directory contains one file
-+
-+- results: "cat results" displays results of each test case and the results
-+  of the entire suite for the last test run.
-+
-+The debugfs representation is primarily of use when kunit test suites are
-+run in a native environment, either as modules or builtin.  Having a way
-+to display results like this is valuable as otherwise results can be
-+intermixed with other events in dmesg output.  The maximum size of each
-+results file is KUNIT_LOG_SIZE bytes (defined in include/kunit/test.h).
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index d064049aad1b..998d56e61a41 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -5213,7 +5213,7 @@ M:	Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+ R:	"Rafael J. Wysocki" <rafael@kernel.org>
+ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/gregkh/driver-core.git
+ S:	Supported
+-F:	Documentation/kobject.txt
++F:	Documentation/core-api/kobject.rst
+ F:	drivers/base/
+ F:	fs/debugfs/
+ F:	fs/sysfs/
 -- 
-1.8.3.1
+2.17.1
 
