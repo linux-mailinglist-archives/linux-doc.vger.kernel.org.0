@@ -2,179 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D146617A326
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2020 11:32:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EEE9617A402
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2020 12:16:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725903AbgCEKcy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Mar 2020 05:32:54 -0500
-Received: from mail.kernel.org ([198.145.29.99]:56914 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725897AbgCEKcx (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 5 Mar 2020 05:32:53 -0500
-Received: from devnote2 (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 9AC4F2073D;
-        Thu,  5 Mar 2020 10:32:51 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583404373;
-        bh=sr30sqa4SuM2XE80uZeHb0R8Wbi8yOclxBaVYaYJwn0=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=JdKxasopQqSxschhodSYnvdN8iO9+f6N5a72gnc4p4TfzFl8BDmuvun1BESUVOELF
-         bLNbifmeXRR33qwpXBWnwfc5nZ1zOUEwkoabuHarWiFi+f2GRYpC8/k0/NGWKIt9i2
-         3omCdgs/mbrHYoFavUhLpmsOOPfqkNuiu2ooXpyE=
-Date:   Thu, 5 Mar 2020 19:32:49 +0900
-From:   Masami Hiramatsu <mhiramat@kernel.org>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     Steven Rostedt <rostedt@goodmis.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Markus Elfring <Markus.Elfring@web.de>
-Subject: Re: [PATCH v5] Documentation: bootconfig: Update boot configuration
- documentation
-Message-Id: <20200305193249.4c5f993bb52e5874cd2df627@kernel.org>
-In-Reply-To: <ef820445-25c5-a312-57d4-25ff3b4d08cf@infradead.org>
-References: <158339065180.26602.26457588086834858.stgit@devnote2>
-        <158339066140.26602.7533299987467005089.stgit@devnote2>
-        <ef820445-25c5-a312-57d4-25ff3b4d08cf@infradead.org>
-X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+        id S1726049AbgCELQQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Mar 2020 06:16:16 -0500
+Received: from ulan.pagasa.dost.gov.ph ([202.90.128.205]:47754 "EHLO
+        mailgw.pagasa.dost.gov.ph" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1725880AbgCELQQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Mar 2020 06:16:16 -0500
+X-Greylist: delayed 1274 seconds by postgrey-1.27 at vger.kernel.org; Thu, 05 Mar 2020 06:16:06 EST
+Received: from webmail.pagasa.dost.int ([10.10.11.8])
+        by mailgw.pagasa.dost.gov.ph  with ESMTP id 025AseSK006737-025AseSM006737
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NO);
+        Thu, 5 Mar 2020 18:54:40 +0800
+Received: from localhost (localhost [127.0.0.1])
+        by webmail.pagasa.dost.int (Postfix) with ESMTP id 2FB4F2981A90;
+        Thu,  5 Mar 2020 18:46:49 +0800 (PST)
+Received: from webmail.pagasa.dost.int ([127.0.0.1])
+        by localhost (webmail.pagasa.dost.int [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id r7J1A0N3aHYl; Thu,  5 Mar 2020 18:46:48 +0800 (PST)
+Received: from localhost (localhost [127.0.0.1])
+        by webmail.pagasa.dost.int (Postfix) with ESMTP id 2232C2981A4C;
+        Thu,  5 Mar 2020 18:46:48 +0800 (PST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 webmail.pagasa.dost.int 2232C2981A4C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=pagasa.dost.gov.ph;
+        s=96B9A03E-48B0-11EA-A7E8-92F42F537CE2; t=1583405208;
+        bh=RC75T5p3JPNk7JUNB+lH0UfaFQO1Ac584gPL3SIL6h8=;
+        h=Date:From:Message-ID:MIME-Version;
+        b=vwxX3L8Z7uHnDJPZBIix9IBQi0XMBiY4sLQTc/9+h6pT2FHeTz61v6B+3f3w6WhXh
+         jUdnW3+FuZCvkf1pcG3LkjpsYvCQO7zO587a10BanpMqFFL6zPGTaTUsrqnCnsqpAd
+         CtN8Atz3iXBEFHZeiXsfNfnWSfk0n7tqEffbmBy8=
+X-Virus-Scanned: amavisd-new at pagasa.dost.int
+Received: from webmail.pagasa.dost.int ([127.0.0.1])
+        by localhost (webmail.pagasa.dost.int [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id WT2tTJV-1oie; Thu,  5 Mar 2020 18:46:47 +0800 (PST)
+Received: from webmail.pagasa.dost.int (webmail.pagasa.dost.int [10.11.1.8])
+        by webmail.pagasa.dost.int (Postfix) with ESMTP id 5119729819D2;
+        Thu,  5 Mar 2020 18:46:46 +0800 (PST)
+Date:   Thu, 5 Mar 2020 18:46:46 +0800 (PST)
+From:   "Juanito S. Galang" <juanito.galang@pagasa.dost.gov.ph>
+Message-ID: <1980644409.3575157.1583405206290.JavaMail.zimbra@pagasa.dost.gov.ph>
+Subject: 
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Mailer: Zimbra 8.8.15_GA_3899 (ZimbraWebClient - GC79 (Win)/8.8.15_GA_3895)
+Thread-Index: lWYDQbv6QI/eIWKrWUD3NPCXqIIr9A==
+Thread-Topic: 
+X-FEAS-DKIM: Valid
+Authentication-Results: mailgw.pagasa.dost.gov.ph;
+        dkim=pass header.i=@pagasa.dost.gov.ph
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 4 Mar 2020 23:01:21 -0800
-Randy Dunlap <rdunlap@infradead.org> wrote:
 
-> On 3/4/20 10:44 PM, Masami Hiramatsu wrote:
-> > Update boot configuration documentation.
-> > 
-> >  - Not using "config" abbreviation but configuration or description.
-> >  - Rewrite descriptions of node and its maxinum number.
-> >  - Add a section of use cases of boot configuration.
-> >  - Move how to use bootconfig to earlier section.
-> >  - Fix some typos, indents and format mistakes.
-> > 
-> > Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
-> 
-> Hi Masami,
-> 
-> I swear that I am not trying to cause another version...
 
-Oh, no problem. I'll go along with your reviews.
-
-> 
-> > ---
-> > Changes in v5:
-> >  - Elaborate the document.
-> >  - Fix some typos.
-> > Changes in v4:
-> >  - Remove O= option from examples.
-> > Changes in v3:
-> >  - Specify that comments also count in size.
-> >  - Fix a confusing sentence.
-> >  - Add O=<builddir> to make command.
-> > Changes in v2:
-> >  - Fixes additional typos (Thanks Markus and Randy!)
-> >  - Change a section title to "Tree Structured Key".
-> > ---
-> >  Documentation/admin-guide/bootconfig.rst |  201 +++++++++++++++++++-----------
-> >  Documentation/trace/boottime-trace.rst   |    2 
-> >  2 files changed, 131 insertions(+), 72 deletions(-)
-> > 
-> > diff --git a/Documentation/admin-guide/bootconfig.rst b/Documentation/admin-guide/bootconfig.rst
-> > index cf2edcd09183..3bfc9ddf68e1 100644
-> > --- a/Documentation/admin-guide/bootconfig.rst
-> > +++ b/Documentation/admin-guide/bootconfig.rst
-> > @@ -11,25 +11,106 @@ Boot Configuration
-> 
-> > +When to Use the Boot Configuration?
-> > +-----------------------------------
-> > +
-> > +The boot configuration supports kernel command line options and init daemon
-> > +boot options. All sub-keys under "kernel" root key are passed as a part of
-> > +the kernel command line [1]_, and ones under "init" root key are passed as
-> > +a part of the init daemon's command line. For example, ::
-> > +
-> > +   root=UUID=8cd79b08-bda0-4b9d-954c-5d5f34b98c82 ro quiet splash console=ttyS0,115200n8 console=tty0
-> > +
-> > +This can be written as following boot configuration file.::
-> > +
-> > +   kernel {
-> > +      root = "UUID=8cd79b08-bda0-4b9d-954c-5d5f34b98c82" # nvme0n1p3
-> > +      ro       # mount rootfs as read only
-> > +      quiet    # No console log
-> > +      splash   # show splash image on boot screen
-> > +      console = "ttyS0,115200n8" # 1st console to serial device
-> > +      console += tty0            # add 2nd console
-> > +   }
-> > +
-> > +If you think that kernel/init options becomes too long to write in boot-loader
-> 
->                                          become
-
-OK.
-
-> 
-> > +configuration file or you want to comment on each option, the boot
-> > +configuration may be suitable. If unsure, you can still continue to use the
-> > +legacy kernel command line.
-> 
-> 
-> > +Boot Configuration Syntax
-> > +=========================
-> > +
-> > +The boot configuration syntax is a simple structured key-value. Each key
-> > +consists of dot-connected-words, and key and value are connected by ``=``.
-> > +The value has to be terminated by semicolon (``;``) or newline (``\n``).
-> > +For an array, its entries are separated by comma (``,``). ::
-> > +
-> > +  KEY[.WORD[...]] = VALUE[, VALUE2[...]][;]
-> >  
-> >  Unlike the kernel command line syntax, spaces are OK around the comma and ``=``.
-> >  
-> >  Each key word must contain only alphabets, numbers, dash (``-``) or underscore
-> >  (``_``). And each value only contains printable characters or spaces except
-> > -for delimiters such as semi-colon (``;``), new-line (``\n``), comma (``,``),
-> > +for delimiters such as semicolon (``;``), new-line (``\n``), comma (``,``),
-> 
->             usually called:                  newline
-
-Yeah, I wonder why I have written so...
-
-> 
-> >  hash (``#``) and closing brace (``}``).
-> >  
-> >  If you want to use those delimiters in a value, you can use either double-
-> 
-> 
-> >  Comments
-> >  --------
-> >  
-> > -The config syntax accepts shell-script style comments. The comments starting
-> > -with hash ("#") until newline ("\n") will be ignored.
-> > -
-> > -::
-> > +The boot configuration accepts shell-script style comments. The comments,
-> > +beginning with hash (``#``) continues until newline (``\n``), will be
-> 
->                                and continuing until newline
-
-OK.
-
-> 
-> > +skipped.::
-> >  
-> >   # comment line
-> >   foo = value # value is set to foo.
-> 
-> 
-> Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
-
-Thank you!
-
--- 
-Masami Hiramatsu <mhiramat@kernel.org>
+Herzlichen Gl=C3=BCckwunsch Lieber Beg=C3=BCnstigter,Sie erhalten diese E-M=
+ail von der Robert Bailey Foundation. Ich bin ein pensionierter Regierungsa=
+ngestellter aus Harlem und ein Gewinner des Powerball Lottery Jackpot im We=
+rt von 343,8 Millionen US-Dollar. Ich bin der gr=C3=B6=C3=9Fte Jackpot-Gewi=
+nner in der Geschichte der New Yorker Lotterie im US-Bundesstaat Amerika. I=
+ch habe diese Lotterie am 27. Oktober 2018 gewonnen und m=C3=B6chte Sie dar=
+=C3=BCber informieren, dass Google in Zusammenarbeit mit Microsoft Ihre "E-=
+Mail-Adresse" auf meine Bitte, einen Spendenbetrag von 3.000.000,00 Million=
+en Euro zu erhalten, =C3=BCbermittelt hat. Ich spende diese 3 Millionen Eur=
+o an Sie, um den Wohlt=C3=A4tigkeitsheimen und armen Menschen in Ihrer Geme=
+inde zu helfen, damit wir die Welt f=C3=BCr alle verbessern k=C3=B6nnen.Wei=
+tere Informationen finden Sie auf der folgenden Website, damit Sie nicht sk=
+eptisch sind
+Diese Spende von 3 Mio. EUR.https://nypost.com/2018/11/14/meet-the-winner-o=
+f-the-biggest-lottery-jackpot-in-new-york-history/Sie k=C3=B6nnen auch mein=
+ YouTube f=C3=BCr mehr Best=C3=A4tigung aufpassen:
+https://www.youtube.com/watch?v=3DH5vT18Ysavc
+Bitte beachten Sie, dass alle Antworten an (robertdonation7@gmail.com=C2=A0=
+ ) gesendet werden, damit wir das k=C3=B6nnen
+Fahren Sie fort, um das gespendete Geld an Sie zu =C3=BCberweisen.E-Mail: r=
+obertdonation7@gmail.comFreundliche Gr=C3=BC=C3=9Fe,
+Robert Bailey
+* * * * * * * * * * * * * * * *
+Powerball Jackpot Gewinner
