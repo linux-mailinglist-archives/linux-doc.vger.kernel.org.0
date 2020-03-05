@@ -2,30 +2,30 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 5717A17AEEA
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2020 20:25:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0230317AEEF
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2020 20:26:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726079AbgCETZI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Mar 2020 14:25:08 -0500
-Received: from mail.kernel.org ([198.145.29.99]:55442 "EHLO mail.kernel.org"
+        id S1725991AbgCET0f convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Thu, 5 Mar 2020 14:26:35 -0500
+Received: from mail.kernel.org ([198.145.29.99]:56046 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725963AbgCETZI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 5 Mar 2020 14:25:08 -0500
+        id S1726004AbgCET0f (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 5 Mar 2020 14:26:35 -0500
 Received: from gandalf.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 5124E207FD;
-        Thu,  5 Mar 2020 19:25:07 +0000 (UTC)
-Date:   Thu, 5 Mar 2020 14:25:05 -0500
+        by mail.kernel.org (Postfix) with ESMTPSA id 2DAB7207FD;
+        Thu,  5 Mar 2020 19:26:34 +0000 (UTC)
+Date:   Thu, 5 Mar 2020 14:26:32 -0500
 From:   Steven Rostedt <rostedt@goodmis.org>
 To:     Markus Elfring <Markus.Elfring@web.de>
-Cc:     linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
+Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
         Masami Hiramatsu <mhiramat@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org
 Subject: Re: [v5] Documentation: bootconfig: Update boot configuration
  documentation
-Message-ID: <20200305142505.714a5121@gandalf.local.home>
-In-Reply-To: <af5d4af0-9e06-cc6e-c29e-4c4eebdb9b0e@web.de>
+Message-ID: <20200305142632.1ed2726d@gandalf.local.home>
+In-Reply-To: <ac1c953b-fa5d-818d-5232-19a28f52f556@web.de>
 References: <158339065180.26602.26457588086834858.stgit@devnote2>
         <158339066140.26602.7533299987467005089.stgit@devnote2>
         <ef820445-25c5-a312-57d4-25ff3b4d08cf@infradead.org>
@@ -36,18 +36,18 @@ References: <158339065180.26602.26457588086834858.stgit@devnote2>
         <dbef7b77-945a-585e-12fe-b5e30eb1a6bc@web.de>
         <e20f52a0-e522-c2cf-17a4-384a1f3308bc@infradead.org>
         <ecaffba3-fccd-32ee-763a-a2ec84a65148@web.de>
-        <20200305140004.535eeb1a@gandalf.local.home>
-        <af5d4af0-9e06-cc6e-c29e-4c4eebdb9b0e@web.de>
+        <a6a216ce-8e41-ca35-bd65-25bcacde1d28@infradead.org>
+        <ac1c953b-fa5d-818d-5232-19a28f52f556@web.de>
 X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 5 Mar 2020 20:14:00 +0100
+On Thu, 5 Mar 2020 20:06:47 +0100
 Markus Elfring <Markus.Elfring@web.de> wrote:
 
 > >>>> Which of the possibly unanswered issues do you find not concrete enough so far?  
@@ -57,31 +57,32 @@ Markus Elfring <Markus.Elfring@web.de> wrote:
 > >>
 > >> Do you expect that known open issues need to be repeated for each patch revision?  
 > >
-> > I'm clueless about what you are talking about.  
+> > Ideally not, but not very much is ideal.  
 > 
-> I suggest to take another look at review comments for previous patch versions.
+> Did you notice any aspects where I would be still looking for more helpful answers?
 
-I have, and I believe Masami has satisfactory addressed them, if they
-needed addressing.
+What does that even mean?
 
 > 
 > 
-> > Yes there's communication difficulties.  
+> > IOW, it is sometimes required (if one cares enough; sometimes
+> > one just gives up).  
 > 
-> I hope that we can reduce them somehow.
+> I find this communication detail unfortunate occasionally.
 
-Then please be more specific in your correspondence.
+Well, it's better than slamming one's head into their desk.
 
 > 
 > 
 > >> How do you think about the desired tracking of bug reports
 > >> also for this software?  
-> >
-> > What does that statement have to do with this patch series????  
+> …
+> > Masami seems to be responsive.  
 > 
-> Do you identify any feedback as a bug report (or clarification request) here?
+> The involved contributors show different response delays, don't they?
+> 
 
-I still don't have the foggiest clue what you are talking about. What bug
-are you reporting?
+Of course! Masami is in Japan, and is probably sleeping right now. That's
+what happens when you work in a global environment.
 
 -- Steve
