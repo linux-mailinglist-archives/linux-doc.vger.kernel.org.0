@@ -2,74 +2,64 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id D4B06179FE6
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2020 07:22:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7AACB17A013
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2020 07:44:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725861AbgCEGWk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Mar 2020 01:22:40 -0500
-Received: from youngberry.canonical.com ([91.189.89.112]:59780 "EHLO
-        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725839AbgCEGWk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Mar 2020 01:22:40 -0500
-Received: from 1.is.james.uk.vpn ([10.172.254.24] helo=malefic)
-        by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.86_2)
-        (envelope-from <james.troup@canonical.com>)
-        id 1j9ju0-0005S7-TL; Thu, 05 Mar 2020 06:22:37 +0000
-Received: from james by malefic with local (Exim 4.93 #3 (Debian))
-        id 1j9jtw-003dRU-Ie; Thu, 05 Mar 2020 07:22:32 +0100
-From:   James Troup <james.troup@canonical.com>
-To:     Kees Cook <keescook@chromium.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: deprecated.rst: Add %p to the list
-References: <202003041103.A5842AD@keescook>
-Mail-Copies-To: never
-Date:   Thu, 05 Mar 2020 07:22:31 +0100
-In-Reply-To: <202003041103.A5842AD@keescook> (Kees Cook's message of "Wed, 4
-        Mar 2020 11:13:28 -0800")
-Message-ID: <87mu8vtj6g.fsf@canonical.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.3 (gnu/linux)
+        id S1725818AbgCEGoQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Mar 2020 01:44:16 -0500
+Received: from mail.kernel.org ([198.145.29.99]:43572 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725830AbgCEGoQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 5 Mar 2020 01:44:16 -0500
+Received: from localhost.localdomain (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 5F945208CD;
+        Thu,  5 Mar 2020 06:44:14 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1583390656;
+        bh=a4aJEqUwvJ6/7STY08t7rKwFcED+LE1xGTYq8HoLoRA=;
+        h=From:To:Cc:Subject:Date:From;
+        b=vcRiLx5ON5PzsPLXKxh3FQZz4Ec+SMCO0kFvfohkqo00564mTrjuUuT/V5Zn7DYOb
+         yrGWAKwuS5Hh7wOxUXYlgEKZy7+Jxq4RS8JmIo6q/nyPEDZfFc+Qu4EN7gkgWDfFtk
+         xt5ZlWKLmkiMxWCJq8pZi0vrB/xfHxODIYODABEY=
+From:   Masami Hiramatsu <mhiramat@kernel.org>
+To:     Steven Rostedt <rostedt@goodmis.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Markus Elfring <Markus.Elfring@web.de>
+Subject: [PATCH v5 0/1] Documentation: bootconfig: Documentaiton updates
+Date:   Thu,  5 Mar 2020 15:44:12 +0900
+Message-Id: <158339065180.26602.26457588086834858.stgit@devnote2>
+X-Mailer: git-send-email 2.20.1
+User-Agent: StGit/0.17.1-dirty
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Kees Cook <keescook@chromium.org> writes:
+Hi,
 
-> diff --git a/Documentation/process/deprecated.rst b/Documentation/process/deprecated.rst
-> index f9f196d3a69b..a4db119f4e09 100644
-> --- a/Documentation/process/deprecated.rst
-> +++ b/Documentation/process/deprecated.rst
-> @@ -109,6 +109,23 @@ the given limit of bytes to copy. This is inefficient and can lead to
->  linear read overflows if a source string is not NUL-terminated. The
->  safe replacement is :c:func:`strscpy`.
->  
-> +%p format specifier
-> +-------------------
-> +Using %p in format strings leads to a huge number of address exposures.
+Here is the 5th version of the documentation update.
+- Elaborated according to Randy's comment.
+- Fix some typos.
 
-Perhaps this sentence should be in the past tense, since %p currently
-prints a hashed value?
+Thank you,
 
-> +Instead of leaving these to be exploitable, "%p" should not be used in
-> +the kernel.
+---
 
-On its face, this seems to contradict the guidance below?
+Masami Hiramatsu (1):
+      Documentation: bootconfig: Update boot configuration documentation
 
-> If used currently, it is a hashed value, rendering it
 
-Perhaps: s/it is/it prints/ ?
+ Documentation/admin-guide/bootconfig.rst |  201 +++++++++++++++++++-----------
+ Documentation/trace/boottime-trace.rst   |    2 
+ 2 files changed, 131 insertions(+), 72 deletions(-)
 
-> +unusable for addressing. Paraphrasing Linus's current `guideance
-> <https://lore.kernel.org/lkml/CA+55aFwQEd_d40g4mUCSsVRZzrFPUJt74vc6PPpb675hYNXcKw@mail.gmail.com/>`_:
-
-Typo: guidance
-
-> +- Just use %p and get the hashed value.
-
--- 
-James
+--
+Masami Hiramatsu (Linaro) <mhiramat@kernel.org>
