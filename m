@@ -2,179 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id F07FB179EF1
-	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2020 06:11:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6E2EC179F59
+	for <lists+linux-doc@lfdr.de>; Thu,  5 Mar 2020 06:40:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725990AbgCEFLv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Mar 2020 00:11:51 -0500
-Received: from new3-smtp.messagingengine.com ([66.111.4.229]:51259 "EHLO
-        new3-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1725858AbgCEFLr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Mar 2020 00:11:47 -0500
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-        by mailnew.nyi.internal (Postfix) with ESMTP id 5548A13FA;
-        Thu,  5 Mar 2020 00:11:46 -0500 (EST)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute3.internal (MEProxy); Thu, 05 Mar 2020 00:11:46 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
-        from:to:cc:subject:date:message-id:in-reply-to:references
-        :mime-version:content-transfer-encoding; s=fm2; bh=0dYXasnkpGOQZ
-        LFyXNdb8zxFf9H+yIuoHLwntjCQcYE=; b=szqNxEJqg4QyV52aLoqP+WYBelowo
-        eQ6BEYKCOFpgD+JXGqx2NZ8zCi5IlmLadM1ynCd3hdA9wF6wiMPqrn6C95LRqlH3
-        OI6OKss6LOzAcPykH02uDzlmxDWmuV7PQLDXGmuuUxxCIByXUO+AA4xRwh4Pb6LL
-        TRndzK085mhIXgWW0RKHnj6GOBgUU5tHvykmLpw82rBhHzVTNWDxqF9YHpORrbHm
-        fDWMIyPoWocTFr95WWg2cRuYfKfBjMnCY8v+SX+3SLpDq4V20EwpXJMBigfRt1x8
-        JqDi1X0LdN4/45+YB+0e3kh5RGL8RVF3deNBB2MNdW0Jnls9kcxo1Pkpg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=cc:content-transfer-encoding:date:from
-        :in-reply-to:message-id:mime-version:references:subject:to
-        :x-me-proxy:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-        fm2; bh=0dYXasnkpGOQZLFyXNdb8zxFf9H+yIuoHLwntjCQcYE=; b=BgPpJs9X
-        qsYUrb9w7uwYG19jMccmRazQAMNM546YSkycFXyGzqfy7hcSFCLBJj8e30U0O2zm
-        zwtGl4HcGFuJYOJSbzOQZfdQziPb2dXHjzUPN8HaAPW4tMlpPgl4x5d4HAFyJ38J
-        yEVmEaKqkRYaux+wLthEup7zSjN4t02GD6xmOmq9vlHsITLro6Mged8Q7OXBeaIU
-        HWdwXX/qcKg6UlhizRVNBKdrhbNuYTWhhkBtERsbVkVk04JTSkdL2ZoXznC9bEft
-        SW45YobGLe8dMjV/nGEjwffXu0o/AcJTNGK2JdE5wVToeipLwAMalDeawOlGyOEg
-        0bTrPZ6pn+IMSg==
-X-ME-Sender: <xms:EYpgXr6j67OazVuBPO9hACrMGV7_3SHA7XpD6g2LmPdpHkjMa2BTWQ>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedugedruddtledgkedtucetufdoteggodetrfdotf
-    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
-    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
-    cujfgurhephffvufffkffojghfggfgsedtkeertdertddtnecuhfhrohhmpefurghmuhgv
-    lhcujfholhhlrghnugcuoehsrghmuhgvlhesshhhohhllhgrnhgurdhorhhgqeenucfkph
-    epjedtrddufeehrddugeekrdduhedunecuvehluhhsthgvrhfuihiivgeptdenucfrrghr
-    rghmpehmrghilhhfrhhomhepshgrmhhuvghlsehshhholhhlrghnugdrohhrgh
-X-ME-Proxy: <xmx:EYpgXhGI7sRg5OEHhbkLiPFtze7OlPJqaHEE3WaXkSNID1MYGCqiLw>
-    <xmx:EYpgXlGaXqlC7FSaK9l_GMfgxFHAiD895wzeShRcFS2bUisNgGUXow>
-    <xmx:EYpgXntxGPM4zr3xWEW0WVHhFotmFeUToX0DEMZGee8om_Sgb3isrA>
-    <xmx:EopgXvo5zk0bawmLU3Hc_R0gLlq_TZdZO72Hk_z3Qf30ZBwDoZaVYw>
-Received: from titanium.stl.sholland.net (70-135-148-151.lightspeed.stlsmo.sbcglobal.net [70.135.148.151])
-        by mail.messagingengine.com (Postfix) with ESMTPA id 6C5853280067;
-        Thu,  5 Mar 2020 00:11:45 -0500 (EST)
-From:   Samuel Holland <samuel@sholland.org>
-To:     Mark Brown <broonie@kernel.org>,
-        Liam Girdwood <lgirdwood@gmail.com>,
-        Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jerome Brunet <jbrunet@baylibre.com>
-Cc:     Ondrej Jirman <megous@megous.com>, alsa-devel@alsa-project.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Samuel Holland <samuel@sholland.org>
-Subject: [PATCH v4 3/3] ASoC: simple-card: Add support for codec2codec DAI links
-Date:   Wed,  4 Mar 2020 23:11:43 -0600
-Message-Id: <20200305051143.60691-4-samuel@sholland.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <20200305051143.60691-1-samuel@sholland.org>
-References: <20200305051143.60691-1-samuel@sholland.org>
+        id S1725858AbgCEFko (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Mar 2020 00:40:44 -0500
+Received: from mail-qv1-f68.google.com ([209.85.219.68]:45554 "EHLO
+        mail-qv1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725818AbgCEFko (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Mar 2020 00:40:44 -0500
+Received: by mail-qv1-f68.google.com with SMTP id r8so1911337qvs.12;
+        Wed, 04 Mar 2020 21:40:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=THBYMEY1yGfalLtbzYiKSYkmAX5Lj+jvZpr5bKLPTp0=;
+        b=EZZv6hqD7ymuE6lbhHNuFocVxoT/8FJaP+Xdqv6NKFkH2BKU/X52VI7p/f0086Cvex
+         A1xR+vIZOTlfJFozjl7vvRT12YHemz/A6ZbTZe9FB5ikmBiBbxI9W/q4qBGKIMHmWz9n
+         tPAQnLeUfE67fU17daLSM8SxDrAaIJBF5vsbTbLMf87QcxItNe9GtxLwZFUBT1Ov/yDQ
+         p4VkR/YCQzHiq7P42dX/faOLX8Rg3fb8D1jgQZ1QWXDM8BrfdVVCRui5QMvSAD9jyQCb
+         xe9VDdDqfkk8qtrS/XaXQajELx7JA1AomSuxIJrZv+L+cYhrzmFyUyP3gmWH5B2Y8mko
+         qbRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=THBYMEY1yGfalLtbzYiKSYkmAX5Lj+jvZpr5bKLPTp0=;
+        b=Bqr6jnkWOuh93IqQwI8pmzyIyvbhjMFazHdJLt3U9uAZNGmuouklLQlWG/XQXg8o8X
+         17J76YM5cJy5J3T5cbvdd4ai957f1zEvh4++K6SEgmloplgvPyvHDwQwZRp54U3+Aw1C
+         WFeLR0Cr9DWsE5Y6EEUo4QrvXkrdz40VbuteKk4yDW50CPQ9GEhsKs2KSGyQf9eiN2EM
+         2MuWZJFWLcDT/Ga7BrPhuubxlLaGW8q7Gd8w+FIz3cNFXqtwYEBx5pMinW4mIJCVsX4i
+         XkwSy8Ga6bJ5J+7SYH9Ew+u3AUIEgY4PKu/yMUiw+09/1uJzVjLxDl+KUMrx7jvljeAf
+         U4QA==
+X-Gm-Message-State: ANhLgQ1Eoo6mHb3Vd/iH/tWEJx0gvGDx5lNYxPPz8I6Wxvd+o+BjXL1b
+        CpXixewA8xf7oV11COcp3bNo8P3HcwTdyyH30CM=
+X-Google-Smtp-Source: ADFU+vtfOIyH1BW9riEZRACvPgvUTdUP01Lk72U0ekfmC8baXSmHIuWMubjgSVFDnAmUEs9i1uAgEiXwdE9VRISclzc=
+X-Received: by 2002:ad4:4f87:: with SMTP id em7mr4923418qvb.97.1583386840011;
+ Wed, 04 Mar 2020 21:40:40 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200305050207.4159-1-luke.r.nels@gmail.com>
+In-Reply-To: <20200305050207.4159-1-luke.r.nels@gmail.com>
+From:   =?UTF-8?B?QmrDtnJuIFTDtnBlbA==?= <bjorn.topel@gmail.com>
+Date:   Thu, 5 Mar 2020 06:40:28 +0100
+Message-ID: <CAJ+HfNjrUxVqpBgC-WLHbZX7_7Gd-Lk7ghrmASTmaNySuXVUfg@mail.gmail.com>
+Subject: Re: [PATCH bpf-next v5 0/4] eBPF JIT for RV32G
+To:     Luke Nelson <lukenels@cs.washington.edu>
+Cc:     bpf <bpf@vger.kernel.org>, Luke Nelson <luke.r.nels@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        Andrii Nakryiko <andriin@fb.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>, Xi Wang <xi.wang@gmail.com>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Stephen Hemminger <stephen@networkplumber.org>,
+        Rob Herring <robh@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        Netdev <netdev@vger.kernel.org>, linux-riscv@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Following the example in cb2cf0de1174 ("ASoC: soc-core: care Codec <->
-Codec case by non_legacy_dai_naming"), determine if a DAI link contains
-only codec DAIs by examining the non_legacy_dai_naming flag in each
-DAI's component.
+On Thu, 5 Mar 2020 at 06:02, Luke Nelson <lukenels@cs.washington.edu> wrote=
+:
+>
+> This series adds an eBPF JIT for 32-bit RISC-V (RV32G) to the kernel,
+> adapted from the RV64 JIT and the 32-bit ARM JIT.
+>
 
-For now, we assume there is only one or a small set of valid PCM stream
-parameters, so num_params == 1 is good enough. We also assume that the
-same params are valid for all supported streams. params is set to the
-subset of parameters common among all DAIs, and then the existing code
-automatically chooses the highest quality of the remaining values when
-the link is brought up.
+Nice work! Thanks for hanging in there!
 
-Signed-off-by: Samuel Holland <samuel@sholland.org>
----
- Documentation/sound/soc/codec-to-codec.rst |  9 +++-
- sound/soc/generic/simple-card-utils.c      | 48 ++++++++++++++++++++++
- 2 files changed, 55 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/sound/soc/codec-to-codec.rst b/Documentation/sound/soc/codec-to-codec.rst
-index 810109d7500d..4eaa9a0c41fc 100644
---- a/Documentation/sound/soc/codec-to-codec.rst
-+++ b/Documentation/sound/soc/codec-to-codec.rst
-@@ -104,5 +104,10 @@ Make sure to name your corresponding cpu and codec playback and capture
- dai names ending with "Playback" and "Capture" respectively as dapm core
- will link and power those dais based on the name.
- 
--Note that in current device tree there is no way to mark a dai_link
--as codec to codec. However, it may change in future.
-+A dai_link in a "simple-audio-card" will automatically be detected as
-+codec to codec when all DAIs on the link belong to codec components.
-+The dai_link will be initialized with the subset of stream parameters
-+(channels, format, sample rate) supported by all DAIs on the link. Since
-+there is no way to provide these parameters in the device tree, this is
-+mostly useful for communication with simple fixed-function codecs, such
-+as a Bluetooth controller or cellular modem.
-diff --git a/sound/soc/generic/simple-card-utils.c b/sound/soc/generic/simple-card-utils.c
-index 9b794775df53..320e648f7499 100644
---- a/sound/soc/generic/simple-card-utils.c
-+++ b/sound/soc/generic/simple-card-utils.c
-@@ -331,6 +331,50 @@ static int asoc_simple_init_dai(struct snd_soc_dai *dai,
- 	return 0;
- }
- 
-+static int asoc_simple_init_dai_link_params(struct snd_soc_pcm_runtime *rtd,
-+					    struct simple_dai_props *dai_props)
-+{
-+	struct snd_soc_dai_link *dai_link = rtd->dai_link;
-+	struct snd_soc_component *component;
-+	struct snd_soc_pcm_stream *params;
-+	struct snd_pcm_hardware hw;
-+	int i, ret, stream;
-+
-+	/* Only codecs should have non_legacy_dai_naming set. */
-+	for_each_rtd_components(rtd, i, component) {
-+		if (!component->driver->non_legacy_dai_naming)
-+			return 0;
-+	}
-+
-+	/* Assumes the capabilities are the same for all supported streams */
-+	for (stream = 0; stream < 2; stream++) {
-+		ret = snd_soc_runtime_calc_hw(rtd, &hw, stream);
-+		if (ret == 0)
-+			break;
-+	}
-+
-+	if (ret < 0) {
-+		dev_err(rtd->dev, "simple-card: no valid dai_link params\n");
-+		return ret;
-+	}
-+
-+	params = devm_kzalloc(rtd->dev, sizeof(*params), GFP_KERNEL);
-+	if (!params)
-+		return -ENOMEM;
-+
-+	params->formats = hw.formats;
-+	params->rates = hw.rates;
-+	params->rate_min = hw.rate_min;
-+	params->rate_max = hw.rate_max;
-+	params->channels_min = hw.channels_min;
-+	params->channels_max = hw.channels_max;
-+
-+	dai_link->params = params;
-+	dai_link->num_params = 1;
-+
-+	return 0;
-+}
-+
- int asoc_simple_dai_init(struct snd_soc_pcm_runtime *rtd)
- {
- 	struct asoc_simple_priv *priv = snd_soc_card_get_drvdata(rtd->card);
-@@ -347,6 +391,10 @@ int asoc_simple_dai_init(struct snd_soc_pcm_runtime *rtd)
- 	if (ret < 0)
- 		return ret;
- 
-+	ret = asoc_simple_init_dai_link_params(rtd, dai_props);
-+	if (ret < 0)
-+		return ret;
-+
- 	return 0;
- }
- EXPORT_SYMBOL_GPL(asoc_simple_dai_init);
--- 
-2.24.1
-
+For the series,
+Acked-by: Bj=C3=B6rn T=C3=B6pel <bjorn.topel@gmail.com>
+Reviewed-by: Bj=C3=B6rn T=C3=B6pel <bjorn.topel@gmail.com>
