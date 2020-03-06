@@ -2,61 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0D0C017B2CC
-	for <lists+linux-doc@lfdr.de>; Fri,  6 Mar 2020 01:23:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9E40B17B2DE
+	for <lists+linux-doc@lfdr.de>; Fri,  6 Mar 2020 01:27:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726191AbgCFAX5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 5 Mar 2020 19:23:57 -0500
-Received: from youngberry.canonical.com ([91.189.89.112]:60703 "EHLO
-        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726128AbgCFAX5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 5 Mar 2020 19:23:57 -0500
-Received: from 2.general.alexhung.us.vpn ([10.172.65.255] helo=canonical.com)
-        by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.86_2)
-        (envelope-from <alex.hung@canonical.com>)
-        id 1jA0mP-0000j5-FO; Fri, 06 Mar 2020 00:23:53 +0000
-From:   Alex Hung <alex.hung@canonical.com>
-To:     rjw@rjwysocki.net, viresh.kumar@linaro.org, corbet@lwn.net,
-        linux-pm@vger.kernel.org, linux-doc@vger.kernel.org,
-        alex.hung@canonical.com
-Subject: [PATCH] Documentation: intel_pstate: update links for references
-Date:   Thu,  5 Mar 2020 17:23:50 -0700
-Message-Id: <20200306002350.9166-1-alex.hung@canonical.com>
-X-Mailer: git-send-email 2.17.1
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+        id S1726191AbgCFA1d (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 5 Mar 2020 19:27:33 -0500
+Received: from bilbo.ozlabs.org ([203.11.71.1]:43871 "EHLO ozlabs.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726162AbgCFA1c (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 5 Mar 2020 19:27:32 -0500
+Received: by ozlabs.org (Postfix, from userid 1034)
+        id 48YT3733F8z9sRR; Fri,  6 Mar 2020 11:27:31 +1100 (AEDT)
+X-powerpc-patch-notification: thanks
+X-powerpc-patch-commit: f52153ab383f04a45c38d8a7f55a4249477b20df
+In-Reply-To: <20191211160910.21656-2-sourabhjain@linux.ibm.com>
+To:     Sourabh Jain <sourabhjain@linux.ibm.com>
+From:   Michael Ellerman <patch-notifications@ellerman.id.au>
+Cc:     corbet@lwn.net, mahesh@linux.vnet.ibm.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Sourabh Jain <sourabhjain@linux.ibm.com>,
+        linuxppc-dev@ozlabs.org, gregkh@linuxfoundation.org,
+        hbathini@linux.ibm.com
+Subject: Re: [PATCH v6 1/6] Documentation/ABI: add ABI documentation for /sys/kernel/fadump_*
+Message-Id: <48YT3733F8z9sRR@ozlabs.org>
+Date:   Fri,  6 Mar 2020 11:27:31 +1100 (AEDT)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-URLs for presentation and Intel Software Developer’s Manual are updated
-as they were using "http" which are gradually replaced by "https".
+On Wed, 2019-12-11 at 16:09:05 UTC, Sourabh Jain wrote:
+> Add missing ABI documentation for existing FADump sysfs files.
+> 
+> Signed-off-by: Sourabh Jain <sourabhjain@linux.ibm.com>
 
-Signed-off-by: Alex Hung <alex.hung@canonical.com>
----
- Documentation/admin-guide/pm/intel_pstate.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Series applied to powerpc next, thanks.
 
-diff --git a/Documentation/admin-guide/pm/intel_pstate.rst b/Documentation/admin-guide/pm/intel_pstate.rst
-index 67e414e34f37..ad392f3aee06 100644
---- a/Documentation/admin-guide/pm/intel_pstate.rst
-+++ b/Documentation/admin-guide/pm/intel_pstate.rst
-@@ -734,10 +734,10 @@ References
- ==========
- 
- .. [1] Kristen Accardi, *Balancing Power and Performance in the Linux Kernel*,
--       http://events.linuxfoundation.org/sites/events/files/slides/LinuxConEurope_2015.pdf
-+       https://events.static.linuxfound.org/sites/events/files/slides/LinuxConEurope_2015.pdf
- 
- .. [2] *Intel® 64 and IA-32 Architectures Software Developer’s Manual Volume 3: System Programming Guide*,
--       http://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-system-programming-manual-325384.html
-+       https://www.intel.com/content/www/us/en/architecture-and-technology/64-ia-32-architectures-software-developer-system-programming-manual-325384.html
- 
- .. [3] *Advanced Configuration and Power Interface Specification*,
-        https://uefi.org/sites/default/files/resources/ACPI_6_3_final_Jan30.pdf
--- 
-2.17.1
+https://git.kernel.org/powerpc/c/f52153ab383f04a45c38d8a7f55a4249477b20df
 
+cheers
