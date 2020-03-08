@@ -2,121 +2,165 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3660E17D64E
-	for <lists+linux-doc@lfdr.de>; Sun,  8 Mar 2020 22:26:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B4C5C17D659
+	for <lists+linux-doc@lfdr.de>; Sun,  8 Mar 2020 22:37:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726346AbgCHV0N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 8 Mar 2020 17:26:13 -0400
-Received: from mout.gmx.net ([212.227.15.19]:37857 "EHLO mout.gmx.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726332AbgCHV0N (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 8 Mar 2020 17:26:13 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-        s=badeba3b8450; t=1583702751;
-        bh=Yi7lbxUNXC68w1fVUFuEzq9bidnvSVyt1lzmxMiOzYc=;
-        h=X-UI-Sender-Class:Date:From:To:Cc:Subject:References:In-Reply-To;
-        b=VbEOItHQu99JI/WzUZwH4KNKfLIGNQQo2W+hUBjr77xN8WogyXp5Ug5C3a0bz0NwN
-         b5fBorNHMlKX/+XS4Ajy7dL/YbeGuqAAZHMGnNqqkTrdCJa3zbNmN+tuiTd4gBkXan
-         cLUQCWrOSACXwBp4aLWfbxpUeAoXN+xnSGebWwy8=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from longitude ([37.201.214.212]) by mail.gmx.com (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mr9Fs-1jfQN71rvS-00oCaB; Sun, 08
- Mar 2020 22:25:51 +0100
-Date:   Sun, 8 Mar 2020 22:25:49 +0100
-From:   Jonathan =?utf-8?Q?Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     Jonathan =?utf-8?Q?Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
-        linux-doc@vger.kernel.org, Alan Stern <stern@rowland.harvard.edu>,
-        Andrea Parri <parri.andrea@gmail.com>,
-        Will Deacon <will@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Nicholas Piggin <npiggin@gmail.com>,
+        id S1726359AbgCHVhA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 8 Mar 2020 17:37:00 -0400
+Received: from out02.mta.xmission.com ([166.70.13.232]:45608 "EHLO
+        out02.mta.xmission.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726346AbgCHVg7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 8 Mar 2020 17:36:59 -0400
+Received: from in02.mta.xmission.com ([166.70.13.52])
+        by out02.mta.xmission.com with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.90_1)
+        (envelope-from <ebiederm@xmission.com>)
+        id 1jB3bT-0007ZJ-0B; Sun, 08 Mar 2020 15:36:55 -0600
+Received: from ip68-227-160-95.om.om.cox.net ([68.227.160.95] helo=x220.xmission.com)
+        by in02.mta.xmission.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.87)
+        (envelope-from <ebiederm@xmission.com>)
+        id 1jB3bS-00064F-7L; Sun, 08 Mar 2020 15:36:54 -0600
+From:   ebiederm@xmission.com (Eric W. Biederman)
+To:     Bernd Edlinger <bernd.edlinger@hotmail.de>
+Cc:     Christian Brauner <christian.brauner@ubuntu.com>,
+        Kees Cook <keescook@chromium.org>,
+        Jann Horn <jannh@google.com>, Jonathan Corbet <corbet@lwn.net>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Oleg Nesterov <oleg@redhat.com>,
+        Frederic Weisbecker <frederic@kernel.org>,
+        Andrei Vagin <avagin@gmail.com>,
+        Ingo Molnar <mingo@kernel.org>,
+        "Peter Zijlstra \(Intel\)" <peterz@infradead.org>,
+        Yuyang Du <duyuyang@gmail.com>,
+        David Hildenbrand <david@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Anshuman Khandual <anshuman.khandual@arm.com>,
         David Howells <dhowells@redhat.com>,
-        Jade Alglave <j.alglave@ucl.ac.uk>,
-        Luc Maranget <luc.maranget@inria.fr>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Akira Yokosawa <akiyks@gmail.com>,
-        Daniel Lustig <dlustig@nvidia.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-arch@vger.kernel.org
-Subject: Re: [PATCH 3/3] docs: atomic_ops: Steer readers towards using
- refcount_t for reference counts
-Message-ID: <20200308212549.GD2376@latitude>
-References: <20200308195618.22768-1-j.neuschaefer@gmx.net>
- <20200308200007.23314-1-j.neuschaefer@gmx.net>
- <7ff7dc4e-d606-e2a1-edce-a0485e948e48@infradead.org>
+        James Morris <jamorris@linux.microsoft.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Shakeel Butt <shakeelb@google.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        Christian Kellner <christian@kellner.me>,
+        Andrea Arcangeli <aarcange@redhat.com>,
+        Aleksa Sarai <cyphar@cyphar.com>,
+        "Dmitry V. Levin" <ldv@altlinux.org>,
+        "linux-doc\@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel\@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-fsdevel\@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+        "linux-mm\@kvack.org" <linux-mm@kvack.org>,
+        "stable\@vger.kernel.org" <stable@vger.kernel.org>,
+        "linux-api\@vger.kernel.org" <linux-api@vger.kernel.org>
+References: <AM6PR03MB5170EB4427BF5C67EE98FF09E4E60@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <87k142lpfz.fsf@x220.int.ebiederm.org>
+        <AM6PR03MB51704206634C009500A8080DE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <875zfmloir.fsf@x220.int.ebiederm.org>
+        <AM6PR03MB51707ABF20B6CBBECC34865FE4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <87v9nmjulm.fsf@x220.int.ebiederm.org>
+        <AM6PR03MB5170B976E6387FDDAD59A118E4E70@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <202003021531.C77EF10@keescook>
+        <20200303085802.eqn6jbhwxtmz4j2x@wittgenstein>
+        <AM6PR03MB5170285B336790D3450E2644E4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <87v9nlii0b.fsf@x220.int.ebiederm.org>
+        <AM6PR03MB5170609D44967E044FD1BE40E4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <87a74xi4kz.fsf@x220.int.ebiederm.org>
+        <AM6PR03MB51705AA3009B4986BB6EF92FE4E50@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <87r1y8dqqz.fsf@x220.int.ebiederm.org>
+        <AM6PR03MB517053AED7DC89F7C0704B7DE4E50@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <AM6PR03MB51703B44170EAB4626C9B2CAE4E20@AM6PR03MB5170.eurprd03.prod.outlook.com>
+        <87tv32cxmf.fsf_-_@x220.int.ebiederm.org>
+Date:   Sun, 08 Mar 2020 16:34:37 -0500
+In-Reply-To: <87tv32cxmf.fsf_-_@x220.int.ebiederm.org> (Eric W. Biederman's
+        message of "Thu, 05 Mar 2020 15:14:48 -0600")
+Message-ID: <87v9ne5y4y.fsf_-_@x220.int.ebiederm.org>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="UFHRwCdBEJvubb2X"
-Content-Disposition: inline
-In-Reply-To: <7ff7dc4e-d606-e2a1-edce-a0485e948e48@infradead.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Provags-ID: V03:K1:31tpsmX2Gc4XHZFgNmUMGC4L5JPVlXItfoeYC+QBaOB0PGXoDMW
- 708cPNcULQJEhwOBvM51ZAWsUOMfQS9O79xlO8u+k3fZMpS1F6PrEPhJFYJq0e25VsnqMbc
- eMjaOiHfO6IPe+F655FQdWYCls5tcxh8a/I+NNhR2aOM15YhHEAZRb/abow40xJ5ALSvKyq
- IZW3bFVWGBSeqpfSB3B/A==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:2qhi7sL3Vwc=:PiVsK3k6q8txHd14E9zckk
- txZhgvCNtdiRzdTqbhZwg1VN31OGFDhA/7O8UGauSKjiMqD3FTl8eF0E+SRgM7mQO0RCzauXs
- 0uMv1JgExncQVJ1grsElV1a2OGqC2sBVOy590+NWg8OAdHpqRhWQ3uIqtqWcPX2D2Hf2JAAeM
- XpbOfr5FP++G21SBRNeJ6laa5N9qfetcFTyhv1OXoghYinWyXrL013XgDtddICiZJ9e1iaUQz
- AAscmPj5D2sWCWOgi5CowZcG2WaS7EhCoUx7oK+nEfJ9tLFyBXnxS8+xWzvoQOFsP1lV/Wmd4
- hW4tyCJ/hMy5PxL1JG8cqnTOZS5Y/nuohcxoMAEZRhlItLjtN9tgblututVw6XnqV/AN2qIr6
- hAyHEi6XyF8r2qxalAUDfoUUj7PFbitfnsQZ4GRcDKRr9XljdT793ebMp3Kb4KEVQlWYStdO4
- j99c95PRpFVZrq19LwFRDgTsSrZ3PGFGmFNEK4ApkgU5lF3CF8hAjYyXnj2ku/L/nNWqElItT
- hhgKSjCfOFKuto22TEyKBx8QqQUqOFv4sHNZw0Nzh1rUNh2ODwai8Rsw9Ntcdrw+bCMOVO8Ae
- ZWTZMOW1HKu+MO5Qemv7zdl+DuQXd1Vz9VwnXXhmX/yqa49f081z37jTGO0QVITM18+3YKdnM
- vhcO44rZRVSuLz2+hP9Yh+6IMKDQ29dqhx39jtuSPWcCwj+CFNGDHQhwv3srKKZEPDiFWlGep
- jxA58RYcmcPUugoQm6VKiAG7X9qb1w8z7fZwQnOzc1Hh517T0N4+Lj74BZQRpUDtS/o1DuWUw
- brMtnlE1TWeXAV04DasHXAvnVMGp4esM3xrP4p5FLY1RP9ijx/FluJlU2Y3u/3F/gN/R3gRd3
- 1EPCZmxFJmGu3lmFmzS16pv2nJTQJ88nyqocjDhlAXYUoSnh+QkVZYI375coifhiwXkw0QduC
- Zf8Md1T5ZGPfWVxebmpCqjiiZATv+hXhMH5Bx1VHITBTiYcS0Ls54CLEkhQnkFjUBjv3TkNaF
- /Mmk4tyIDtQjje31PNk2cFa1rgatVSYr18nvtXdEiJqX8wNHYExcO7hJULuGH3W9BLql0RSGZ
- kjOclGnCFeIaMUbwBgFMEs0AlxTy3T1UqrD9SrkiaouvDrw32VNKZvzViS5yhGd5+bArc7Uxb
- HMILb2m0xZruyEx163z5f1A/kbaBNqj6txR3vzs3mtpe+J8iSHDtxyBOE0KbNetGGMJlOBnmD
- +boFJYrtTsP5cRjo7
+Content-Type: text/plain
+X-XM-SPF: eid=1jB3bS-00064F-7L;;;mid=<87v9ne5y4y.fsf_-_@x220.int.ebiederm.org>;;;hst=in02.mta.xmission.com;;;ip=68.227.160.95;;;frm=ebiederm@xmission.com;;;spf=neutral
+X-XM-AID: U2FsdGVkX18D3Lt6XSlAz5TMYYPswZO8/Y7S8x0tW1Y=
+X-SA-Exim-Connect-IP: 68.227.160.95
+X-SA-Exim-Mail-From: ebiederm@xmission.com
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on sa07.xmission.com
+X-Spam-Level: 
+X-Spam-Status: No, score=0.5 required=8.0 tests=ALL_TRUSTED,BAYES_40,
+        DCC_CHECK_NEGATIVE,XMNoVowels autolearn=disabled version=3.4.2
+X-Spam-Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
+        * -0.0 BAYES_40 BODY: Bayes spam probability is 20 to 40%
+        *      [score: 0.3850]
+        *  1.5 XMNoVowels Alpha-numberic number with no vowels
+        * -0.0 DCC_CHECK_NEGATIVE Not listed in DCC
+        *      [sa07 1397; Body=1 Fuz1=1 Fuz2=1]
+X-Spam-DCC: XMission; sa07 1397; Body=1 Fuz1=1 Fuz2=1 
+X-Spam-Combo: ;Bernd Edlinger <bernd.edlinger@hotmail.de>
+X-Spam-Relay-Country: 
+X-Spam-Timing: total 312 ms - load_scoreonly_sql: 0.04 (0.0%),
+        signal_user_changed: 3.1 (1.0%), b_tie_ro: 2.1 (0.7%), parse: 1.00
+        (0.3%), extract_message_metadata: 2.7 (0.9%), get_uri_detail_list:
+        0.93 (0.3%), tests_pri_-1000: 7 (2.3%), tests_pri_-950: 1.16 (0.4%),
+        tests_pri_-900: 1.12 (0.4%), tests_pri_-90: 38 (12.1%), check_bayes:
+        36 (11.4%), b_tokenize: 18 (5.7%), b_tok_get_all: 9 (2.8%),
+        b_comp_prob: 3.1 (1.0%), b_tok_touch_all: 3.6 (1.2%), b_finish: 0.98
+        (0.3%), tests_pri_0: 239 (76.5%), check_dkim_signature: 0.81 (0.3%),
+        check_dkim_adsp: 2.4 (0.8%), poll_dns_idle: 0.37 (0.1%), tests_pri_10:
+        2.1 (0.7%), tests_pri_500: 10 (3.1%), rewrite_mail: 0.00 (0.0%)
+Subject: [PATCH 0/5] Infrastructure to allow fixing exec deadlocks
+X-Spam-Flag: No
+X-SA-Exim-Version: 4.2.1 (built Thu, 05 May 2016 13:38:54 -0600)
+X-SA-Exim-Scanned: Yes (on in02.mta.xmission.com)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
---UFHRwCdBEJvubb2X
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Bernd, everyone
 
-On Sun, Mar 08, 2020 at 02:07:46PM -0700, Randy Dunlap wrote:
-> On 3/8/20 1:00 PM, Jonathan Neusch=C3=A4fer wrote:
-[...]
-> > +        More recently, reference counts are implement using the
->=20
->                                                implemented
+This is how I think the infrastructure change should look that makes way
+for fixing this issue.
 
-Indeed, good catch.
+- Cleanup and reorder the code so code that can potentially wait
+  indefinitely for userspace comes at the beginning for flush_old_exec.
+- Add a new mutex and take it after we have passed any potential
+  indefinite waits for userspace.
 
-Thanks,
-Jonathan Neusch=C3=A4fer
+Then I think it is just going through the existing users of
+cred_guard_mutex and fixing them to use the new one.
 
---UFHRwCdBEJvubb2X
-Content-Type: application/pgp-signature; name="signature.asc"
+There really aren't that many users of cred_guard_mutex so we should be
+able to get through the easy ones fairly quickly.  And anything that
+isn't easy we can wait until we have a good fix.
 
------BEGIN PGP SIGNATURE-----
+The users of cred_guard_mutex that I saw were:
+    fs/proc/base.c:
+       proc_pid_attr_write
+       do_io_accounting
+       proc_pid_stack
+       proc_pid_syscall
+       proc_pid_personality
+    
+    perf_event_open
+    mm_access
+    kcmp
+    pidfd_fget
+    seccomp_set_mode_filter
 
-iQIzBAABCgAdFiEEvHAHGBBjQPVy+qvDCDBEmo7zX9sFAl5lYtYACgkQCDBEmo7z
-X9sxeBAAoyLudMLbrFONlymj1JeXx3yBqw9ZfcOD64ryxfRRF2m1ubwkq6vR+prR
-YK0WpHHC9iG6gaW6cF0cZtyt+ees8p2KrOgrwVV9Zol8TRQjM9Y2MdOD6YO5+qQn
-AzzjKW6kA4F8la6p1YRXO5ZNZMfzZiJ+7/v7nPtsLzTPcU2TJsEgVGsyuLgh3uxd
-AyOtCQmzlQseb6F75DL4gz2gujhqp/UReekuSDrRpyeAHNs24z8ImDNm6CvLDGAH
-8bWD/XlopYXE50OalKh150cd1p6xlf8XO8fHIuUqhlJfb1caCBxLQy2Hsc13IyWR
-seT0BR+CCr219TO0K0fo2MMjK1gICUXpZqGH2q3Jv3Jbb77BDLsnugOyHQ2A7Bbr
-pb//s740vURsI3y3D0+GhttA6OuS5LY4RdmcRqcUDWdem5c4mEa//5F6C/d/vcV5
-9Wfuz7A7RAZJjW8RzY3d6G44GumNOaRav1CUm3z9Tuy7NHgzUP2KGxshZAT7pbRg
-JOUiNzwKjroh7+1qo6QB43p5q0SEt9WoiCNr6TItHRSaMTIKTWmk+t1MnQyJUwik
-AcgOcDfcvXhaGMMFHx9uweA9m7q9p6N+b2CD4KesE6PiYS3mU7lEBlTtBRBMZTMP
-w5AIXElmYgW3xubTKzsfe3Z8U2vCnEhIs/DWjBVc/36QJTWvhU4=
-=kF/P
------END PGP SIGNATURE-----
+Bernd I think I have addressed the issues you pointed out in v1.
+Please let me know if you see anything else.
 
---UFHRwCdBEJvubb2X--
+Eric W. Biederman (5):
+      exec: Only compute current once in flush_old_exec
+      exec: Factor unshare_sighand out of de_thread and call it separately
+      exec: Move cleanup of posix timers on exec out of de_thread
+      exec: Move exec_mmap right after de_thread in flush_old_exec
+      exec: Add a exec_update_mutex to replace cred_guard_mutex
+
+ fs/exec.c                    | 65 ++++++++++++++++++++++++++++++--------------
+ include/linux/sched/signal.h |  9 +++++-
+ init/init_task.c             |  1 +
+ kernel/fork.c                |  1 +
+ 4 files changed, 54 insertions(+), 22 deletions(-)
+
+
