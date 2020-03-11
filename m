@@ -2,129 +2,365 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 0941D181870
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2020 13:46:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4C37F181929
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2020 14:06:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729436AbgCKMq4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 Mar 2020 08:46:56 -0400
-Received: from youngberry.canonical.com ([91.189.89.112]:54252 "EHLO
-        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729279AbgCKMqz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Mar 2020 08:46:55 -0400
-Received: from mail-wm1-f71.google.com ([209.85.128.71])
-        by youngberry.canonical.com with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.86_2)
-        (envelope-from <gpiccoli@canonical.com>)
-        id 1jC0lB-0002tv-8Y
-        for linux-doc@vger.kernel.org; Wed, 11 Mar 2020 12:46:53 +0000
-Received: by mail-wm1-f71.google.com with SMTP id a23so857114wmm.8
-        for <linux-doc@vger.kernel.org>; Wed, 11 Mar 2020 05:46:53 -0700 (PDT)
+        id S1729527AbgCKNGj convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Wed, 11 Mar 2020 09:06:39 -0400
+Received: from mail-vs1-f66.google.com ([209.85.217.66]:32933 "EHLO
+        mail-vs1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729345AbgCKNGj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Mar 2020 09:06:39 -0400
+Received: by mail-vs1-f66.google.com with SMTP id n27so1272250vsa.0;
+        Wed, 11 Mar 2020 06:06:37 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:openpgp:autocrypt
-         :message-id:date:user-agent:mime-version:in-reply-to
-         :content-language:content-transfer-encoding;
-        bh=tvJQ44fhgXDdQWn9cAVor3F6zkLzPnJd2Xj0RCMCHmY=;
-        b=RMFDSN+PfqEx4OP5ozNzeK58pRgWSUTvwu0zYdevKjXSVdp+YvDgL9PL2iHfJ66B1H
-         zbNxP2kDblEbYIko5TIagCDBv/nWPMtn5c2bIAVPI78hERgj3p2srndK/6ijcVR0j8Ak
-         9ykIYvUIWvZY5o8dPnD3ZKXkSwHWYQHYPvNNBBpoBuY9YXIXKVcDifslE+xppQW3uzyR
-         /tlRF5Ve5x+eSgBOwgrcms8VIJoAaYCaQeKG6i/QziN+GgDhyIsAfj+jznxHIchPGuvl
-         Yk+XHgl7UCjJblfPtOKtIn2ewn7f5oSL1Z8GuSNa77p/EUDF3Cm2dXZr4dngYzH1OWI1
-         SGyg==
-X-Gm-Message-State: ANhLgQ1zDISMIdoq6h2a7sdGYvyQrqeW7bZj8qWvkVgkPkdvLcbCPTr3
-        BKXcvZDoUI1II89FaAo6Jiv/1W+yorn3X5FKJO2oFAyP/Ry6g/MqkPNrQRVQo6yLhD6LLPArueA
-        e1V9Jofju+gc9ck9jh0/uEJEA3h2EUy52abNwUA==
-X-Received: by 2002:adf:a4d2:: with SMTP id h18mr4479062wrb.90.1583930812954;
-        Wed, 11 Mar 2020 05:46:52 -0700 (PDT)
-X-Google-Smtp-Source: ADFU+vtAy92hJw4Au2IdrMrzzgrgGedx1iAVmYY2M7Bh+NAeJKr0TODVlWeXtDrPpdu/KAZGYTygCg==
-X-Received: by 2002:adf:a4d2:: with SMTP id h18mr4479040wrb.90.1583930812703;
-        Wed, 11 Mar 2020 05:46:52 -0700 (PDT)
-Received: from [192.168.1.75] (189-47-87-73.dsl.telesp.net.br. [189.47.87.73])
-        by smtp.gmail.com with ESMTPSA id b5sm28652028wrj.1.2020.03.11.05.46.49
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 11 Mar 2020 05:46:51 -0700 (PDT)
-Subject: Re: [PATCH] panic: Add sysctl/cmdline to dump all CPUs backtraces on
- oops event
-To:     Andrew Morton <akpm@linux-foundation.org>,
-        Randy Dunlap <rdunlap@infradead.org>
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        mcgrof@kernel.org, keescook@chromium.org, yzaikin@google.com,
-        tglx@linutronix.de, kernel@gpiccoli.net
-References: <20200310163700.19186-1-gpiccoli@canonical.com>
- <93f20e59-41b1-48ad-b0eb-e670b18994d5@infradead.org>
- <20200310182647.59f6ea73aad3aca619065f1e@linux-foundation.org>
-From:   "Guilherme G. Piccoli" <gpiccoli@canonical.com>
-Openpgp: preference=signencrypt
-Autocrypt: addr=gpiccoli@canonical.com; prefer-encrypt=mutual; keydata=
- mQENBFpVBxcBCADPNKmu2iNKLepiv8+Ssx7+fVR8lrL7cvakMNFPXsXk+f0Bgq9NazNKWJIn
- Qxpa1iEWTZcLS8ikjatHMECJJqWlt2YcjU5MGbH1mZh+bT3RxrJRhxONz5e5YILyNp7jX+Vh
- 30rhj3J0vdrlIhPS8/bAt5tvTb3ceWEic9mWZMsosPavsKVcLIO6iZFlzXVu2WJ9cov8eQM/
- irIgzvmFEcRyiQ4K+XUhuA0ccGwgvoJv4/GWVPJFHfMX9+dat0Ev8HQEbN/mko/bUS4Wprdv
- 7HR5tP9efSLucnsVzay0O6niZ61e5c97oUa9bdqHyApkCnGgKCpg7OZqLMM9Y3EcdMIJABEB
- AAG0LUd1aWxoZXJtZSBHLiBQaWNjb2xpIDxncGljY29saUBjYW5vbmljYWwuY29tPokBNwQT
- AQgAIQUCWmClvQIbAwULCQgHAgYVCAkKCwIEFgIDAQIeAQIXgAAKCRDOR5EF9K/7Gza3B/9d
- 5yczvEwvlh6ksYq+juyuElLvNwMFuyMPsvMfP38UslU8S3lf+ETukN1S8XVdeq9yscwtsRW/
- 4YoUwHinJGRovqy8gFlm3SAtjfdqysgJqUJwBmOtcsHkmvFXJmPPGVoH9rMCUr9s6VDPox8f
- q2W5M7XE9YpsfchS/0fMn+DenhQpV3W6pbLtuDvH/81GKrhxO8whSEkByZbbc+mqRhUSTdN3
- iMpRL0sULKPVYbVMbQEAnfJJ1LDkPqlTikAgt3peP7AaSpGs1e3pFzSEEW1VD2jIUmmDku0D
- LmTHRl4t9KpbU/H2/OPZkrm7809QovJGRAxjLLPcYOAP7DUeltveuQENBFpVBxcBCADbxD6J
- aNw/KgiSsbx5Sv8nNqO1ObTjhDR1wJw+02Bar9DGuFvx5/qs3ArSZkl8qX0X9Vhptk8rYnkn
- pfcrtPBYLoux8zmrGPA5vRgK2ItvSc0WN31YR/6nqnMfeC4CumFa/yLl26uzHJa5RYYQ47jg
- kZPehpc7IqEQ5IKy6cCKjgAkuvM1rDP1kWQ9noVhTUFr2SYVTT/WBHqUWorjhu57/OREo+Tl
- nxI1KrnmW0DbF52tYoHLt85dK10HQrV35OEFXuz0QPSNrYJT0CZHpUprkUxrupDgkM+2F5LI
- bIcaIQ4uDMWRyHpDbczQtmTke0x41AeIND3GUc+PQ4hWGp9XABEBAAGJAR8EGAEIAAkFAlpV
- BxcCGwwACgkQzkeRBfSv+xv1wwgAj39/45O3eHN5pK0XMyiRF4ihH9p1+8JVfBoSQw7AJ6oU
- 1Hoa+sZnlag/l2GTjC8dfEGNoZd3aRxqfkTrpu2TcfT6jIAsxGjnu+fUCoRNZzmjvRziw3T8
- egSPz+GbNXrTXB8g/nc9mqHPPprOiVHDSK8aGoBqkQAPZDjUtRwVx112wtaQwArT2+bDbb/Y
- Yh6gTrYoRYHo6FuQl5YsHop/fmTahpTx11IMjuh6IJQ+lvdpdfYJ6hmAZ9kiVszDF6pGFVkY
- kHWtnE2Aa5qkxnA2HoFpqFifNWn5TyvJFpyqwVhVI8XYtXyVHub/WbXLWQwSJA4OHmqU8gDl
- X18zwLgdiQ==
-Message-ID: <64a6c1c0-9514-e823-3507-a131c7daa578@canonical.com>
-Date:   Wed, 11 Mar 2020 09:46:45 -0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=oaTeqhC6qgLSXZl/UFMFW2Fmg1FWD9E96HastlfJM/o=;
+        b=V0lehw8G3MgX057tpXXzeVaBjco+QXY+0ZH8AwC84ftOrf2qihCZe2asnBfqfJyxNP
+         OMEJ0vNvKp7BDsuK/hAc0dfBgo4MCYsVudRuWCv9k1nxI23VCOxv/G4Z2uYK0jPAE+yp
+         aOCN/x4PCvTep01oM3a3OCXTdfZHU4cu+uG91k+wLtvuyj53PUOVBZlCU7yuRxPVnc6U
+         QUDzzzcBgdKiL9hgZ39DqFxHIytMTEU7OMas3fc7qJz2iFbBKDwqz/GRuMMgP1wnxFBg
+         tSheUxpIfDEsJFiqYf6xfnkFzqLEimbFW8V0/is/2QyLuCxONl4NVB2eGKJdDmacoB4Z
+         Ghmg==
+X-Gm-Message-State: ANhLgQ36J/aAPURkGDewbKepwjguwoR8i8HSIeABgukVtc2dP2MM/ag1
+        jfCwciQ6m5x0ejyY3mYk7iCKT02J5Yw92jARXV8=
+X-Google-Smtp-Source: ADFU+vvWAOxeEh3q5fXOdUlwbjev6h/RPoWQoIn4jFYvSrBr7JFgpO2C6xg1ZMko6lqbAhcN1p1CmI81qYmXgH6OeDY=
+X-Received: by 2002:a67:1b87:: with SMTP id b129mr1940386vsb.87.1583931996768;
+ Wed, 11 Mar 2020 06:06:36 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200310182647.59f6ea73aad3aca619065f1e@linux-foundation.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <cover.1583136624.git.mchehab+huawei@kernel.org> <6385a411d000dad005b78647629e43700580ecf0.1583136624.git.mchehab+huawei@kernel.org>
+In-Reply-To: <6385a411d000dad005b78647629e43700580ecf0.1583136624.git.mchehab+huawei@kernel.org>
+From:   Masanori Goto <gotom@debian.or.jp>
+Date:   Wed, 11 Mar 2020 22:06:25 +0900
+Message-ID: <CALZLnaHY7rtLXHNmUv77Sj6X06MGXoR_cXBmABp_CockmMJM+A@mail.gmail.com>
+Subject: Re: [PATCH 24/42] docs: scsi: convert NinjaSCSI.txt to ReST
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>,
+        "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        linux-scsi@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8BIT
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/03/2020 22:26, Andrew Morton wrote:
-> On Tue, 10 Mar 2020 13:59:15 -0700 Randy Dunlap <rdunlap@infradead.org> wrote:
-> 
->>> +oops_all_cpu_backtrace:
->>> +================
->>> +
->>> +Determines if kernel should NMI all CPUs to dump their backtraces when
->>
->> I would much prefer that to be written without using NMI as a verb.
-> 
-> "Non maskably interrupt" ;)
-> 
-> I think it's OK.  Concise and the meaning is clear.
+2020年3月2日(月) 17:17 Mauro Carvalho Chehab <mchehab+huawei@kernel.org>:
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Acked-by: GOTO Masanori <gotom@debian.or.jp>
 
-Hi Andrew, good idea heheh
-Thank you and all that reviewed the grammar/wording, certainly I can
-change that and resubmit.
-
-
-> 
-> 
-> Why do we need the kernel boot parameter?  Isn't
-> /proc/sys/kernel/oops_all_cpu_backtrace sufficient?
-> 
-
-I kept the kernel parameter as a consistency thing - every sysctl
-"*_all_cpubacktrace" has a respective kernel parameter, so I did the
-same (and if we get an oops booting a new kernel, this is maybe useful
-depending on the point we get the oops). But if it's a problem for you,
-I can remove the kernel parameter, your choice.
-
-Cheers,
-
-
-Guilherme
+> ---
+>  .../scsi/{NinjaSCSI.txt => NinjaSCSI.rst}     | 198 +++++++++++-------
+>  Documentation/scsi/index.rst                  |   1 +
+>  MAINTAINERS                                   |   4 +-
+>  drivers/scsi/pcmcia/Kconfig                   |   2 +-
+>  4 files changed, 121 insertions(+), 84 deletions(-)
+>  rename Documentation/scsi/{NinjaSCSI.txt => NinjaSCSI.rst} (28%)
+>
+> diff --git a/Documentation/scsi/NinjaSCSI.txt b/Documentation/scsi/NinjaSCSI.rst
+> similarity index 28%
+> rename from Documentation/scsi/NinjaSCSI.txt
+> rename to Documentation/scsi/NinjaSCSI.rst
+> index ac8db8ceec77..999a6ed5bf7e 100644
+> --- a/Documentation/scsi/NinjaSCSI.txt
+> +++ b/Documentation/scsi/NinjaSCSI.rst
+> @@ -1,127 +1,163 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+>
+> -         WorkBiT NinjaSCSI-3/32Bi driver for Linux
+> +=========================================
+> +WorkBiT NinjaSCSI-3/32Bi driver for Linux
+> +=========================================
+>
+>  1. Comment
+> - This is Workbit corp.'s(http://www.workbit.co.jp/) NinjaSCSI-3
+> +==========
+> +
+> +This is Workbit corp.'s(http://www.workbit.co.jp/) NinjaSCSI-3
+>  for Linux.
+>
+>  2. My Linux environment
+> -Linux kernel: 2.4.7 / 2.2.19
+> -pcmcia-cs:    3.1.27
+> -gcc:          gcc-2.95.4
+> -PC card:      I-O data PCSC-F (NinjaSCSI-3)
+> -              I-O data CBSC-II in 16 bit mode (NinjaSCSI-32Bi)
+> -SCSI device:  I-O data CDPS-PX24 (CD-ROM drive)
+> -              Media Intelligent MMO-640GT (Optical disk drive)
+> +=======================
+> +
+> +:Linux kernel: 2.4.7 / 2.2.19
+> +:pcmcia-cs:    3.1.27
+> +:gcc:          gcc-2.95.4
+> +:PC card:      I-O data PCSC-F (NinjaSCSI-3),
+> +               I-O data CBSC-II in 16 bit mode (NinjaSCSI-32Bi)
+> +:SCSI device:  I-O data CDPS-PX24 (CD-ROM drive),
+> +               Media Intelligent MMO-640GT (Optical disk drive)
+>
+>  3. Install
+> -[1] Check your PC card is true "NinjaSCSI-3" card.
+> +==========
+> +
+> +(a) Check your PC card is true "NinjaSCSI-3" card.
+> +
+>      If you installed pcmcia-cs already, pcmcia reports your card as UNKNOWN
+>      card, and write ["WBT", "NinjaSCSI-3", "R1.0"] or some other string to
+>      your console or log file.
+> +
+>      You can also use "cardctl" program (this program is in pcmcia-cs source
+>      code) to get more info.
+>
+> -# cat /var/log/messages
+> -...
+> -Jan  2 03:45:06 lindberg cardmgr[78]: unsupported card in socket 1
+> -Jan  2 03:45:06 lindberg cardmgr[78]:   product info: "WBT", "NinjaSCSI-3", "R1.0"
+> -...
+> -# cardctl ident
+> -Socket 0:
+> -  no product info available
+> -Socket 1:
+> -  product info: "IO DATA", "CBSC16       ", "1"
+> +    ::
+>
+> +       # cat /var/log/messages
+> +       ...
+> +       Jan  2 03:45:06 lindberg cardmgr[78]: unsupported card in socket 1
+> +       Jan  2 03:45:06 lindberg cardmgr[78]:   product info: "WBT", "NinjaSCSI-3", "R1.0"
+> +       ...
+> +       # cardctl ident
+> +       Socket 0:
+> +         no product info available
+> +       Socket 1:
+> +         product info: "IO DATA", "CBSC16       ", "1"
+>
+> -[2] Get the Linux kernel source, and extract it to /usr/src.
+> +
+> +(b) Get the Linux kernel source, and extract it to /usr/src.
+>      Because the NinjaSCSI driver requires some SCSI header files in Linux
+>      kernel source, I recommend rebuilding your kernel; this eliminates
+>      some versioning problems.
+> -$ cd /usr/src
+> -$ tar -zxvf linux-x.x.x.tar.gz
+> -$ cd linux
+> -$ make config
+> -...
+>
+> -[3] If you use this driver with Kernel 2.2, unpack pcmcia-cs in some directory
+> +    ::
+> +
+> +       $ cd /usr/src
+> +       $ tar -zxvf linux-x.x.x.tar.gz
+> +       $ cd linux
+> +       $ make config
+> +       ...
+> +
+> +(c) If you use this driver with Kernel 2.2, unpack pcmcia-cs in some directory
+>      and make & install. This driver requires the pcmcia-cs header file.
+> -$ cd /usr/src
+> -$ tar zxvf cs-pcmcia-cs-3.x.x.tar.gz
+> -...
+>
+> -[4] Extract this driver's archive somewhere, and edit Makefile, then do make.
+> -$ tar -zxvf nsp_cs-x.x.tar.gz
+> -$ cd nsp_cs-x.x
+> -$ emacs Makefile
+> -...
+> -$ make
+> +    ::
+>
+> -[5] Copy nsp_cs.ko to suitable place, like /lib/modules/<Kernel version>/pcmcia/ .
+> +       $ cd /usr/src
+> +       $ tar zxvf cs-pcmcia-cs-3.x.x.tar.gz
+> +       ...
+> +
+> +(d) Extract this driver's archive somewhere, and edit Makefile, then do make::
+> +
+> +       $ tar -zxvf nsp_cs-x.x.tar.gz
+> +       $ cd nsp_cs-x.x
+> +       $ emacs Makefile
+> +       ...
+> +       $ make
+> +
+> +(e) Copy nsp_cs.ko to suitable place, like /lib/modules/<Kernel version>/pcmcia/ .
+> +
+> +(f) Add these lines to /etc/pcmcia/config .
+>
+> -[6] Add these lines to /etc/pcmcia/config .
+>      If you use pcmcia-cs-3.1.8 or later, we can use "nsp_cs.conf" file.
+>      So, you don't need to edit file. Just copy to /etc/pcmcia/ .
+>
+> --------------------------------------
+> -device "nsp_cs"
+> -  class "scsi" module "nsp_cs"
+> -
+> -card "WorkBit NinjaSCSI-3"
+> -  version "WBT", "NinjaSCSI-3", "R1.0"
+> -  bind "nsp_cs"
+> -
+> -card "WorkBit NinjaSCSI-32Bi (16bit)"
+> -  version "WORKBIT", "UltraNinja-16", "1"
+> -  bind "nsp_cs"
+> -
+> -# OEM
+> -card "WorkBit NinjaSCSI-32Bi (16bit) / IO-DATA"
+> -  version "IO DATA", "CBSC16       ", "1"
+> -  bind "nsp_cs"
+> -
+> -# OEM
+> -card "WorkBit NinjaSCSI-32Bi (16bit) / KME-1"
+> -  version "KME    ", "SCSI-CARD-001", "1"
+> -  bind "nsp_cs"
+> -card "WorkBit NinjaSCSI-32Bi (16bit) / KME-2"
+> -  version "KME    ", "SCSI-CARD-002", "1"
+> -  bind "nsp_cs"
+> -card "WorkBit NinjaSCSI-32Bi (16bit) / KME-3"
+> -  version "KME    ", "SCSI-CARD-003", "1"
+> -  bind "nsp_cs"
+> -card "WorkBit NinjaSCSI-32Bi (16bit) / KME-4"
+> -  version "KME    ", "SCSI-CARD-004", "1"
+> -  bind "nsp_cs"
+> --------------------------------------
+> -
+> -[7] Start (or restart) pcmcia-cs.
+> -# /etc/rc.d/rc.pcmcia start        (BSD style)
+> -or
+> -# /etc/init.d/pcmcia start         (SYSV style)
+> +    ::
+> +
+> +       device "nsp_cs"
+> +         class "scsi" module "nsp_cs"
+> +
+> +       card "WorkBit NinjaSCSI-3"
+> +         version "WBT", "NinjaSCSI-3", "R1.0"
+> +         bind "nsp_cs"
+> +
+> +       card "WorkBit NinjaSCSI-32Bi (16bit)"
+> +         version "WORKBIT", "UltraNinja-16", "1"
+> +         bind "nsp_cs"
+> +
+> +       # OEM
+> +       card "WorkBit NinjaSCSI-32Bi (16bit) / IO-DATA"
+> +         version "IO DATA", "CBSC16       ", "1"
+> +         bind "nsp_cs"
+> +
+> +       # OEM
+> +       card "WorkBit NinjaSCSI-32Bi (16bit) / KME-1"
+> +         version "KME    ", "SCSI-CARD-001", "1"
+> +         bind "nsp_cs"
+> +       card "WorkBit NinjaSCSI-32Bi (16bit) / KME-2"
+> +         version "KME    ", "SCSI-CARD-002", "1"
+> +         bind "nsp_cs"
+> +       card "WorkBit NinjaSCSI-32Bi (16bit) / KME-3"
+> +         version "KME    ", "SCSI-CARD-003", "1"
+> +         bind "nsp_cs"
+> +       card "WorkBit NinjaSCSI-32Bi (16bit) / KME-4"
+> +         version "KME    ", "SCSI-CARD-004", "1"
+> +         bind "nsp_cs"
+> +
+> +(f) Start (or restart) pcmcia-cs::
+> +
+> +       # /etc/rc.d/rc.pcmcia start        (BSD style)
+> +
+> +    or::
+> +
+> +       # /etc/init.d/pcmcia start         (SYSV style)
+>
+>
+>  4. History
+> +==========
+> +
+>  See README.nin_cs .
+>
+>  5. Caution
+> - If you eject card when doing some operation for your SCSI device or suspend
+> +==========
+> +
+> +If you eject card when doing some operation for your SCSI device or suspend
+>  your computer, you encount some *BAD* error like disk crash.
+> - It works good when I using this driver right way. But I'm not guarantee
+> +
+> +It works good when I using this driver right way. But I'm not guarantee
+>  your data. Please backup your data when you use this driver.
+>
+>  6. Known Bugs
+> - In 2.4 kernel, you can't use 640MB Optical disk. This error comes from
+> +=============
+> +
+> +In 2.4 kernel, you can't use 640MB Optical disk. This error comes from
+>  high level SCSI driver.
+>
+>  7. Testing
+> - Please send me some reports(bug reports etc..) of this software.
+> +==========
+> +
+> +Please send me some reports(bug reports etc..) of this software.
+>  When you send report, please tell me these or more.
+> -       card name
+> -       kernel version
+> -       your SCSI device name(hard drive, CD-ROM, etc...)
+> +
+> +       - card name
+> +       - kernel version
+> +       - your SCSI device name(hard drive, CD-ROM, etc...)
+>
+>  8. Copyright
+> +============
+> +
+>   See GPL.
+>
+>
+> diff --git a/Documentation/scsi/index.rst b/Documentation/scsi/index.rst
+> index a2545efbb407..eb2df0e0dcb7 100644
+> --- a/Documentation/scsi/index.rst
+> +++ b/Documentation/scsi/index.rst
+> @@ -28,5 +28,6 @@ Linux SCSI Subsystem
+>     lpfc
+>     megaraid
+>     ncr53c8xx
+> +   NinjaSCSI
+>
+>     scsi_transport_srp/figures
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 6d28bfc72259..2f441cf59b4b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -11861,7 +11861,7 @@ NINJA SCSI-3 / NINJA SCSI-32Bi (16bit/CardBus) PCMCIA SCSI HOST ADAPTER DRIVER
+>  M:     YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>
+>  W:     http://www.netlab.is.tsukuba.ac.jp/~yokota/izumi/ninja/
+>  S:     Maintained
+> -F:     Documentation/scsi/NinjaSCSI.txt
+> +F:     Documentation/scsi/NinjaSCSI.rst
+>  F:     drivers/scsi/pcmcia/nsp_*
+>
+>  NINJA SCSI-32Bi/UDE PCI/CARDBUS SCSI HOST ADAPTER DRIVER
+> @@ -11869,7 +11869,7 @@ M:      GOTO Masanori <gotom@debian.or.jp>
+>  M:     YOKOTA Hiroshi <yokota@netlab.is.tsukuba.ac.jp>
+>  W:     http://www.netlab.is.tsukuba.ac.jp/~yokota/izumi/ninja/
+>  S:     Maintained
+> -F:     Documentation/scsi/NinjaSCSI.txt
+> +F:     Documentation/scsi/NinjaSCSI.rst
+>  F:     drivers/scsi/nsp32*
+>
+>  NIOS2 ARCHITECTURE
+> diff --git a/drivers/scsi/pcmcia/Kconfig b/drivers/scsi/pcmcia/Kconfig
+> index dc9b74c9348a..9696b6b5591f 100644
+> --- a/drivers/scsi/pcmcia/Kconfig
+> +++ b/drivers/scsi/pcmcia/Kconfig
+> @@ -36,7 +36,7 @@ config PCMCIA_NINJA_SCSI
+>         help
+>           If you intend to attach this type of PCMCIA SCSI host adapter to
+>           your computer, say Y here and read
+> -         <file:Documentation/scsi/NinjaSCSI.txt>.
+> +         <file:Documentation/scsi/NinjaSCSI.rst>.
+>
+>           Supported cards:
+>
+> --
+> 2.21.1
+>
