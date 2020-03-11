@@ -2,84 +2,117 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CDDA718178B
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2020 13:11:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B4A2C181873
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2020 13:47:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729130AbgCKMLH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 Mar 2020 08:11:07 -0400
-Received: from mail.kernel.org ([198.145.29.99]:54196 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729197AbgCKMLG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 11 Mar 2020 08:11:06 -0400
-Received: from onda.lan (unknown [217.110.198.118])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 601AF222C3;
-        Wed, 11 Mar 2020 12:11:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1583928666;
-        bh=one5XBXJgUhhoKcF+H5sPl+DICmByqxFNl6AR4lofY0=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=sSBY/jVGdJ+l5J7/zszCb4gzRncMxCay2OJdIq7SqMXQe7KTZUSZTj1+AkNlZMRVi
-         0/IbByai4RDHPBple3lvOW3PT5P/yLMSMDGfCMylKc/UIwzKBRm1osO7EKG1W1jjWg
-         U7AJzHoGiBvigHQT1QG9OpHbFkGNZ0OuB4+z7nzg=
-Date:   Wed, 11 Mar 2020 13:11:02 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     David Howells <dhowells@redhat.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH 2/9] docs: watch_queue.rst: supress some Sphinx warnings
-Message-ID: <20200311131102.65943e1b@onda.lan>
-In-Reply-To: <765154.1583864958@warthog.procyon.org.uk>
-References: <20200310115328.021999a7@lwn.net>
-        <afbe367ccb7b9abcb9fab7bc5cb5e0686c105a53.1583250595.git.mchehab+huawei@kernel.org>
-        <637fc605eb2fe6e27d9983ee5c30d78989618313.1583250595.git.mchehab+huawei@kernel.org>
-        <765154.1583864958@warthog.procyon.org.uk>
-X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1729447AbgCKMq4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 11 Mar 2020 08:46:56 -0400
+Received: from mail-wr1-f67.google.com ([209.85.221.67]:33522 "EHLO
+        mail-wr1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729434AbgCKMq4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Mar 2020 08:46:56 -0400
+Received: by mail-wr1-f67.google.com with SMTP id a25so2460804wrd.0
+        for <linux-doc@vger.kernel.org>; Wed, 11 Mar 2020 05:46:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9aHr7/EWopa+d5MVT7UWPgRiU9Syfo6iTheTFisLSBg=;
+        b=FXsN33JoJealTXC3dRRue6HkzhWSIRjvlNRUP49llb/Tp1/P6LLbWK2WENByBzb932
+         Vi1Fg8Ri+qgxJrwy5zjp/NXrbWtEhuMkRTQj1X4R9I44S53W3vZuVYp8IrCbYVblbQ3t
+         O28JXtBnjgkZqXtJcIVINkr/xuwcmJ4AcO+2ctUVBEJKMuSZEV7wYUoSaD3Zco3ZO7q/
+         ujjg+wfK4m1DiebSFJn9cbZqflg/q7DAWj/98GahfRpw7xqn470ERyL3IPCqRQQaQIB0
+         0zSlrkdrriSBVsPOQ4i+h5gPOwW+U83Jz9SjjpEDyMiKdpx/YTRM4O6K6sHqODrD7YCC
+         shxw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9aHr7/EWopa+d5MVT7UWPgRiU9Syfo6iTheTFisLSBg=;
+        b=p+hW5hJBhLRnPeXdZnye385nFHLvh+ojuFzwR4DmDgPXQuK57HQP1TTvc7MSXFHVMR
+         JnXPIytPv3EfXao89SnlIl8nbY7X8jniFs3VkD1bpT8yuOoYLoIKysb21i3QCUIY3P5A
+         w2SQwLjPUSm9/SYp/0+b8EGVLZPgDdvkMvFHmPNWTXrkqtAT3/rHUv1Yz12pCClM1qTI
+         gFh/44umk+ZJXJPFAfJhbPKkcKj9Wo26T0P4ZJCpXpumNstKHAw6MUuy2mpGFoc8M9zA
+         FfW0Ns+J9usJ9nO3ftZNg7Jj5YZwUAR5CU7pJ+KcmU3XV7PpkLGe0ZEVuwMPmbexu7Qo
+         mLjw==
+X-Gm-Message-State: ANhLgQ3IR9w1x1w9bZ35vx2KBAbqZwHPLetdKN8HX0wiCmezfztKgr/J
+        S/i+Po6ng2cwPqDQVtxZH9VjNQ==
+X-Google-Smtp-Source: ADFU+vvLjmlfZFee1kgQb0ezvJQIIb3y7DZjOUpYxqDYvVtYVhI9wjUkV+NDFpgxKBOntX41muaOsw==
+X-Received: by 2002:adf:bb81:: with SMTP id q1mr4344011wrg.110.1583930814354;
+        Wed, 11 Mar 2020 05:46:54 -0700 (PDT)
+Received: from localhost.localdomain ([2001:171b:c9a8:fbc0:116c:c27a:3e7f:5eaf])
+        by smtp.gmail.com with ESMTPSA id c2sm8380020wma.39.2020.03.11.05.46.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Mar 2020 05:46:53 -0700 (PDT)
+From:   Jean-Philippe Brucker <jean-philippe@linaro.org>
+To:     bhelgaas@google.com, will@kernel.org, robh+dt@kernel.org,
+        joro@8bytes.org, baolu.lu@linux.intel.com, sudeep.holla@arm.com,
+        linux-doc@vger.kernel.org, linux-pci@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, devicetree@vger.kernel.org,
+        linux-acpi@vger.kernel.org, iommu@lists.linux-foundation.org
+Cc:     lorenzo.pieralisi@arm.com, corbet@lwn.net, mark.rutland@arm.com,
+        liviu.dudau@arm.com, guohanjun@huawei.com, rjw@rjwysocki.net,
+        lenb@kernel.org, robin.murphy@arm.com, dwmw2@infradead.org,
+        amurray@thegoodpenguin.co.uk, frowand.list@gmail.com,
+        Jean-Philippe Brucker <jean-philippe@linaro.org>
+Subject: [PATCH v2 00/11] PCI/ATS: Device-tree support and other improvements
+Date:   Wed, 11 Mar 2020 13:44:55 +0100
+Message-Id: <20200311124506.208376-1-jean-philippe@linaro.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Tue, 10 Mar 2020 18:29:18 +0000
-David Howells <dhowells@redhat.com> escreveu:
+Enable ATS on device-tree based systems, and factor the common ATS
+enablement checks into pci_enable_ats().
 
-> Jonathan Corbet <corbet@lwn.net> wrote:
-> 
-> >  - We *really* don't want to be adding more files like this to the top
-> >    level; we have a directory hierarchy for a reason.  This looks like it
-> >    belongs (mostly) in the core-api manual.  
-> 
-> Sure.  Btw, the core-api/ is a bit of a miscellaneous bag - errseq, for
-> example, should probably be in filesystems/.
-> 
-> >  - Can the user-space example be instead turned into a working program
-> >    under samples (or perhaps a test under tests/)?  
-> 
-> There is a working sample under samples/ also. See:
-> 
-> 	https://lore.kernel.org/linux-fsdevel/158375623086.334846.16121725232323108842.stgit@warthog.procyon.org.uk/T/#t
-> 
-> patches 7, 14 and 17.
+Since v1 [1] I added acks and review tags, simplified patch 3 and tried
+to clarify the comment in patch 2.
 
-Well, you could include the complete example from samples at the end of
-this file, using a code block with:
+I'd like acks or comments on the following patches:
+* PCI on patches 2, 3 and 5
+* Arm SMMUv3 on patch 7
+* Intel VT-d on patch 8
+* arm64 DT on patch 10 
 
-	.. literalinclude:: /samples/foo.c
-	   :language: c
+Thanks,
+Jean
 
-This will display the Sphinx output files there at the html/pdf output,
-as if it is part of the watch_queue.rst, and use the C code highlight.
+[1] https://lore.kernel.org/linux-iommu/20200213165049.508908-1-jean-philippe@linaro.org/
 
-> 
-> But no, this needs to be documented in the documentation also.  Manual pages
-> and testing (at least of key notifications) are available in a branch of the
-> keyutils package.
-> 
-> Actually, I need to amend my document to remove references to usb and block
-> notifications.
-> 
-> David
-> 
+Jean-Philippe Brucker (11):
+  dt-bindings: PCI: generic: Add ats-supported property
+  PCI: Add ats_supported host bridge flag
+  PCI: OF: Check whether the host bridge supports ATS
+  ACPI/IORT: Check ATS capability in root complex node
+  PCI/ATS: Gather checks into pci_ats_supported()
+  iommu/amd: Use pci_ats_supported()
+  iommu/arm-smmu-v3: Use pci_ats_supported()
+  iommu/vt-d: Use pci_ats_supported()
+  ACPI/IORT: Drop ATS fwspec flag
+  arm64: dts: fast models: Enable PCIe ATS for Base RevC FVP
+  Documentation: Generalize the "pci=noats" boot parameter
+
+ .../admin-guide/kernel-parameters.txt         |  4 +-
+ .../bindings/pci/host-generic-pci.yaml        |  6 +++
+ arch/arm64/boot/dts/arm/fvp-base-revc.dts     |  1 +
+ drivers/acpi/arm64/iort.c                     | 38 +++++++++++++------
+ drivers/acpi/pci_root.c                       |  3 ++
+ drivers/iommu/amd_iommu.c                     | 12 ++----
+ drivers/iommu/arm-smmu-v3.c                   | 18 ++-------
+ drivers/iommu/intel-iommu.c                   |  9 ++---
+ drivers/pci/ats.c                             | 30 ++++++++++++++-
+ drivers/pci/controller/pci-host-common.c      | 11 ++++++
+ drivers/pci/probe.c                           |  8 ++++
+ include/linux/acpi_iort.h                     |  8 ++++
+ include/linux/iommu.h                         |  4 --
+ include/linux/pci-ats.h                       |  3 ++
+ include/linux/pci.h                           |  1 +
+ 15 files changed, 109 insertions(+), 47 deletions(-)
+
+-- 
+2.25.1
+
