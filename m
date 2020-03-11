@@ -2,202 +2,210 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 93B30181DE6
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2020 17:31:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1CFBD182010
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2020 18:52:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730052AbgCKQbm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 Mar 2020 12:31:42 -0400
-Received: from out01.mta.xmission.com ([166.70.13.231]:54052 "EHLO
-        out01.mta.xmission.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729675AbgCKQbm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Mar 2020 12:31:42 -0400
-Received: from in02.mta.xmission.com ([166.70.13.52])
-        by out01.mta.xmission.com with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.90_1)
-        (envelope-from <ebiederm@xmission.com>)
-        id 1jC4GW-0001qd-9w; Wed, 11 Mar 2020 10:31:28 -0600
-Received: from ip68-227-160-95.om.om.cox.net ([68.227.160.95] helo=x220.xmission.com)
-        by in02.mta.xmission.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        (Exim 4.87)
-        (envelope-from <ebiederm@xmission.com>)
-        id 1jC4GV-0006Xl-GD; Wed, 11 Mar 2020 10:31:28 -0600
-From:   ebiederm@xmission.com (Eric W. Biederman)
-To:     Bernd Edlinger <bernd.edlinger@hotmail.de>
-Cc:     Jann Horn <jannh@google.com>,
-        Christian Brauner <christian.brauner@ubuntu.com>,
-        Kees Cook <keescook@chromium.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Oleg Nesterov <oleg@redhat.com>,
-        Frederic Weisbecker <frederic@kernel.org>,
-        Andrei Vagin <avagin@gmail.com>,
-        Ingo Molnar <mingo@kernel.org>,
-        "Peter Zijlstra \(Intel\)" <peterz@infradead.org>,
-        Yuyang Du <duyuyang@gmail.com>,
-        David Hildenbrand <david@redhat.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Anshuman Khandual <anshuman.khandual@arm.com>,
-        David Howells <dhowells@redhat.com>,
-        James Morris <jamorris@linux.microsoft.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Shakeel Butt <shakeelb@google.com>,
-        Jason Gunthorpe <jgg@ziepe.ca>,
-        Christian Kellner <christian@kellner.me>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Aleksa Sarai <cyphar@cyphar.com>,
-        "Dmitry V. Levin" <ldv@altlinux.org>,
-        "linux-doc\@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-kernel\@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-fsdevel\@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
-        "linux-mm\@kvack.org" <linux-mm@kvack.org>,
-        "stable\@vger.kernel.org" <stable@vger.kernel.org>,
-        "linux-api\@vger.kernel.org" <linux-api@vger.kernel.org>
-References: <AM6PR03MB5170EB4427BF5C67EE98FF09E4E60@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <AM6PR03MB5170285B336790D3450E2644E4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <87v9nlii0b.fsf@x220.int.ebiederm.org>
-        <AM6PR03MB5170609D44967E044FD1BE40E4E40@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <87a74xi4kz.fsf@x220.int.ebiederm.org>
-        <AM6PR03MB51705AA3009B4986BB6EF92FE4E50@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <87r1y8dqqz.fsf@x220.int.ebiederm.org>
-        <AM6PR03MB517053AED7DC89F7C0704B7DE4E50@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <AM6PR03MB51703B44170EAB4626C9B2CAE4E20@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        <87tv32cxmf.fsf_-_@x220.int.ebiederm.org>
-        <87v9ne5y4y.fsf_-_@x220.int.ebiederm.org>
-        <87zhcq4jdj.fsf_-_@x220.int.ebiederm.org>
-        <CAG48ez13XXWNRLrPFRHRsvPKSwSK1-6k+1F7QujWOJtVuk0QHg@mail.gmail.com>
-        <87wo7roq2c.fsf@x220.int.ebiederm.org>
-        <CAG48ez1j2=pdj0nc1syHkh6X4d=aHuCH1srzA6hT7+32QD+6Gg@mail.gmail.com>
-        <87k13roigf.fsf@x220.int.ebiederm.org>
-        <AM6PR03MB51709C444F21281F6A40F039E4FC0@AM6PR03MB5170.eurprd03.prod.outlook.com>
-Date:   Wed, 11 Mar 2020 11:29:08 -0500
-In-Reply-To: <AM6PR03MB51709C444F21281F6A40F039E4FC0@AM6PR03MB5170.eurprd03.prod.outlook.com>
-        (Bernd Edlinger's message of "Wed, 11 Mar 2020 07:33:35 +0100")
-Message-ID: <87d09ionxn.fsf@x220.int.ebiederm.org>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/26.1 (gnu/linux)
+        id S1730641AbgCKRwE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 11 Mar 2020 13:52:04 -0400
+Received: from mx0a-002c1b01.pphosted.com ([148.163.151.68]:32298 "EHLO
+        mx0a-002c1b01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1730487AbgCKRwD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Mar 2020 13:52:03 -0400
+X-Greylist: delayed 342 seconds by postgrey-1.27 at vger.kernel.org; Wed, 11 Mar 2020 13:52:02 EDT
+Received: from pps.filterd (m0127839.ppops.net [127.0.0.1])
+        by mx0a-002c1b01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 02BHdsKC009693;
+        Wed, 11 Mar 2020 10:46:03 -0700
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=from : cc : subject
+ : date : message-id : content-type : content-transfer-encoding :
+ mime-version; s=proofpoint20171006;
+ bh=a5tyHGiOZ7VodHQW/R2x1iDgVGvIAFdY6LrUp+fRzx8=;
+ b=NORdWQqON4537YhTSCI9HfdR5xqfWx//9sThXUvVzemaZO7JcUoc9/TMyGkBNZJId3e4
+ l7unWhlSxGLUSMlzy7Hler8cCP6lIZeOS0VK6EfPXw3kOfvHt1cMUjZhORHEllxa7O7y
+ DeV7tPREcHn2K/qp09bWEXNgHaxf4uj1ZR1CfrxSxprJVGzi3ZRC6lKabvJIbTD8wtXk
+ sYQRwkonZrDL8fIPydFcsx/5TYzp2AdP6ULnyQzwx9Rh2SQmw5vLHY7NXwUycXpwIm4l
+ LGg98/vPYjo9JB74IK2MECEN+MB5sPhlLjxwsdGWb5tUxDbmiQi5AgF2N2FE5RGoZoCq PQ== 
+Received: from nam11-bn8-obe.outbound.protection.outlook.com (mail-bn8nam11lp2171.outbound.protection.outlook.com [104.47.58.171])
+        by mx0a-002c1b01.pphosted.com with ESMTP id 2ymbjq97mj-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Wed, 11 Mar 2020 10:46:03 -0700
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=ZO9mtbydoYoggIuv2+7Tu3S/7+kWQ7O3p8S/2SRqb+ORGZTTxZo8GFYeoZeEVzI7TtSKGVR+3IgQNEpcgG3ZzP7omc+K2WqfpbdV/ost/NhDMPovlZO2ddWq2f3ycRWUW2+Ov7CRArblcI3fQsDRmcgtgyr3uldtEbg6/+YW6g3vcSb2BFhOyVnzUHVhy2Pesi7iA7NmUKFejdklJMOUrnzQZ4GMhTD4PJDdutSSlwk+lvA1kE37Wt1yV5yDveTkZ1sm51wOfKmTRmcfaVyhhG/feaLoLKg37EAf2Ps38hlUYMFQ1fbxVCljHfOP42xtqdcHqxoL159ExbZsYnL9+w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=a5tyHGiOZ7VodHQW/R2x1iDgVGvIAFdY6LrUp+fRzx8=;
+ b=a4krwQyd6Nz9BMTCRAM1W1thY8OMDd/rgLb0uL0WVcNCub6/PB84f6Ph3ewNr1k26/purmIqPf1R2MKyctPKyzH7+hwgfgbwJSzFPrmKxfX+TqLpWoXIh4/VRThT2iSkfPnkgPmVOlfrVZt6iJly+G3KRb/SdzJa5pSbpaYK+L3w0I/+bY4pq5f+TdCl5UjNm4va8zVryoeNkg1n6XZfxz73gTlAIyUC7KpINjg7Vb8ilzSrwuD8sMEAww7SILCDP+0USksqT+KLmnaoJfrhGyr+F4ZvGxeW2QY9sMAznKXYEnPNNWUUV8pGZiIswBPcYjUjLe61qctU7nh6/0mTbQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
+ dkim=pass header.d=nutanix.com; arc=none
+Received: from BL0PR02MB5601.namprd02.prod.outlook.com (2603:10b6:208:88::10)
+ by BL0PR02MB4610.namprd02.prod.outlook.com (2603:10b6:208:4b::30) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2793.17; Wed, 11 Mar
+ 2020 17:45:58 +0000
+Received: from BL0PR02MB5601.namprd02.prod.outlook.com
+ ([fe80::ddf8:e6cc:908f:a98c]) by BL0PR02MB5601.namprd02.prod.outlook.com
+ ([fe80::ddf8:e6cc:908f:a98c%6]) with mapi id 15.20.2814.007; Wed, 11 Mar 2020
+ 17:45:58 +0000
+From:   Ivan Teterevkov <ivan.teterevkov@nutanix.com>
+CC:     "corbet@lwn.net" <corbet@lwn.net>,
+        "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
+        "mchehab+samsung@kernel.org" <mchehab+samsung@kernel.org>,
+        "tglx@linutronix.de" <tglx@linutronix.de>,
+        "jpoimboe@redhat.com" <jpoimboe@redhat.com>,
+        "pawan.kumar.gupta@linux.intel.com" 
+        <pawan.kumar.gupta@linux.intel.com>,
+        "jgross@suse.com" <jgross@suse.com>,
+        "oneukum@suse.com" <oneukum@suse.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        Ivan Teterevkov <ivan.teterevkov@nutanix.com>
+Subject: [PATCH] mm/vmscan: add vm_swappiness configuration knobs
+Thread-Topic: [PATCH] mm/vmscan: add vm_swappiness configuration knobs
+Thread-Index: AdX3zHNqbuFpQvKERxyPueA21j6FDg==
+Date:   Wed, 11 Mar 2020 17:45:58 +0000
+Message-ID: <BL0PR02MB560167492CA4094C91589930E9FC0@BL0PR02MB5601.namprd02.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [62.254.189.133]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: a175d3c5-408f-41b9-dd49-08d7c5e40ec0
+x-ms-traffictypediagnostic: BL0PR02MB4610:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <BL0PR02MB46109C4830A5FB6344FDB510E9FC0@BL0PR02MB4610.namprd02.prod.outlook.com>
+x-proofpoint-crosstenant: true
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-forefront-prvs: 0339F89554
+x-forefront-antispam-report: SFV:NSPM;SFS:(10019020)(39860400002)(346002)(136003)(366004)(376002)(396003)(199004)(86362001)(52536014)(26005)(9686003)(71200400001)(5660300002)(6506007)(478600001)(55016002)(44832011)(4326008)(33656002)(186003)(81156014)(54906003)(109986005)(7416002)(8936002)(8676002)(66946007)(66446008)(66476007)(66556008)(316002)(76116006)(2906002)(107886003)(81166006)(7696005)(64756008);DIR:OUT;SFP:1102;SCL:1;SRVR:BL0PR02MB4610;H:BL0PR02MB5601.namprd02.prod.outlook.com;FPR:;SPF:None;LANG:en;PTR:InfoNoRecords;A:1;
+received-spf: None (protection.outlook.com: nutanix.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: ZsfA2LQD4iHOqQCB8NaPXN36et9TIx6svVq/uRi1UkEhh8N5Jo4TVh0OFJDzdwyAp2JHqanKREyDp9nZO21jDijwGhRU+LOgcyhcn7KFBaZBblrDtRuQoKNIEQ/7mbLQNmpaWI2jyqq/Ijx3Xu8iIJ25k45rJb70ITA0W+Dcj71A0zLZj6Vy5+2cy/fwIlzodt5sdc/YgfLjquxGiw03NqbCbHSgL3Nw+C3X8BcQZJLp+QgdOwCQXcTcFqlkpxk4YLmKa8GTkXx5cVz2jeTiFgBqwpb2yPDbCV6IZtAGwhxaKstkZk9Vgp1x4hUz3Q+/4kYFH742mBYQdJ6LvzZlcOSYI+lNQ7VBDGezIshBAhSw1w2Tg9TwCBFnPcWm7seP5od1XDLEQXhwqk/jHU8vVNNtC+fs8PT0l7wUnTrJMk423IoLsceIwMFryI3k0z1R
+x-ms-exchange-antispam-messagedata: MxVWwqS+UikoQGxP2Z4b68PrYuL83cf3S9wfGTxQIVwn7muEzUBRNoEgp3Y+fkN6rGXXLZtQKoWHE0Xm6OwuX2MOprKEO9Jt3UX13QFfHoNajOdLRxjt/frS2nR9yRz5Vw+BrtaN0489G7M/BoLJTA==
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain
-X-XM-SPF: eid=1jC4GV-0006Xl-GD;;;mid=<87d09ionxn.fsf@x220.int.ebiederm.org>;;;hst=in02.mta.xmission.com;;;ip=68.227.160.95;;;frm=ebiederm@xmission.com;;;spf=neutral
-X-XM-AID: U2FsdGVkX19ZjP97Ct6MFalNH8PhJ+rPzWt746X6+Og=
-X-SA-Exim-Connect-IP: 68.227.160.95
-X-SA-Exim-Mail-From: ebiederm@xmission.com
-X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on sa04.xmission.com
-X-Spam-Level: 
-X-Spam-Status: No, score=0.5 required=8.0 tests=ALL_TRUSTED,BAYES_50,
-        DCC_CHECK_NEGATIVE,T_TM2_M_HEADER_IN_MSG,T_TooManySym_01,XMSubLong
-        autolearn=disabled version=3.4.2
-X-Spam-Report: * -1.0 ALL_TRUSTED Passed through trusted hosts only via SMTP
-        *  0.8 BAYES_50 BODY: Bayes spam probability is 40 to 60%
-        *      [score: 0.4984]
-        *  0.7 XMSubLong Long Subject
-        *  0.0 T_TM2_M_HEADER_IN_MSG BODY: No description available.
-        * -0.0 DCC_CHECK_NEGATIVE Not listed in DCC
-        *      [sa04 1397; Body=1 Fuz1=1 Fuz2=1]
-        *  0.0 T_TooManySym_01 4+ unique symbols in subject
-X-Spam-DCC: XMission; sa04 1397; Body=1 Fuz1=1 Fuz2=1 
-X-Spam-Combo: ;Bernd Edlinger <bernd.edlinger@hotmail.de>
-X-Spam-Relay-Country: 
-X-Spam-Timing: total 384 ms - load_scoreonly_sql: 0.05 (0.0%),
-        signal_user_changed: 5 (1.3%), b_tie_ro: 3.9 (1.0%), parse: 1.44
-        (0.4%), extract_message_metadata: 18 (4.7%), get_uri_detail_list: 2.8
-        (0.7%), tests_pri_-1000: 31 (8.0%), tests_pri_-950: 1.26 (0.3%),
-        tests_pri_-900: 0.91 (0.2%), tests_pri_-90: 34 (8.8%), check_bayes: 32
-        (8.4%), b_tokenize: 12 (3.2%), b_tok_get_all: 10 (2.6%), b_comp_prob:
-        3.1 (0.8%), b_tok_touch_all: 3.5 (0.9%), b_finish: 0.70 (0.2%),
-        tests_pri_0: 282 (73.4%), check_dkim_signature: 0.56 (0.1%),
-        check_dkim_adsp: 2.2 (0.6%), poll_dns_idle: 0.61 (0.2%), tests_pri_10:
-        1.80 (0.5%), tests_pri_500: 5 (1.4%), rewrite_mail: 0.00 (0.0%)
-Subject: Re: [PATCH v2 5/5] exec: Add a exec_update_mutex to replace cred_guard_mutex
-X-Spam-Flag: No
-X-SA-Exim-Version: 4.2.1 (built Thu, 05 May 2016 13:38:54 -0600)
-X-SA-Exim-Scanned: Yes (on in02.mta.xmission.com)
+X-OriginatorOrg: nutanix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a175d3c5-408f-41b9-dd49-08d7c5e40ec0
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Mar 2020 17:45:58.5551
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: bb047546-786f-4de1-bd75-24e5b6f79043
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ZP+5xltUGXBirbgVYOH7rvFy6hApq2hQUnVGd3OlR+ZyTaoVFhxvmA4edyOsTqeK85c+PWNwnaWzEvAvnLZE0D3t8teFyqT15LuWHnbA+OU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR02MB4610
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138,18.0.572
+ definitions=2020-03-11_07:2020-03-11,2020-03-11 signatures=0
+X-Proofpoint-Spam-Reason: safe
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Bernd Edlinger <bernd.edlinger@hotmail.de> writes:
+This patch adds a couple of knobs:
 
-> On 3/11/20 1:15 AM, Eric W. Biederman wrote:
->> Jann Horn <jannh@google.com> writes:
->> 
->>> On Tue, Mar 10, 2020 at 10:33 PM Eric W. Biederman
->>> <ebiederm@xmission.com> wrote:
->>>> Jann Horn <jannh@google.com> writes:
->>>>> On Sun, Mar 8, 2020 at 10:41 PM Eric W. Biederman <ebiederm@xmission.com> wrote:
->>>>>> The cred_guard_mutex is problematic.  The cred_guard_mutex is held
->>>>>> over the userspace accesses as the arguments from userspace are read.
->>>>>> The cred_guard_mutex is held of PTRACE_EVENT_EXIT as the the other
->>>>>> threads are killed.  The cred_guard_mutex is held over
->>>>>> "put_user(0, tsk->clear_child_tid)" in exit_mm().
->>>>>>
->>>>>> Any of those can result in deadlock, as the cred_guard_mutex is held
->>>>>> over a possible indefinite userspace waits for userspace.
->>>>>>
->>>>>> Add exec_update_mutex that is only held over exec updating process
->>>>>> with the new contents of exec, so that code that needs not to be
->>>>>> confused by exec changing the mm and the cred in ways that can not
->>>>>> happen during ordinary execution of a process.
->>>>>>
->>>>>> The plan is to switch the users of cred_guard_mutex to
->>>>>> exec_udpate_mutex one by one.  This lets us move forward while still
->>>>>> being careful and not introducing any regressions.
->>>>> [...]
->>>>>> @@ -1034,6 +1035,11 @@ static int exec_mmap(struct mm_struct *mm)
->>>>>>                         return -EINTR;
->>>>>>                 }
->>>>>>         }
->>>>>> +
->>>>>> +       ret = mutex_lock_killable(&tsk->signal->exec_update_mutex);
->>>>>> +       if (ret)
->>>>>> +               return ret;
->>>>>
->>>>> We're already holding the old mmap_sem, and now nest the
->>>>> exec_update_mutex inside it; but then while still holding the
->>>>> exec_update_mutex, we do mmput(), which can e.g. end up in ksm_exit(),
->>>>> which can do down_write(&mm->mmap_sem) from __ksm_exit(). So I think
->>>>> at least lockdep will be unhappy, and I'm not sure whether it's an
->>>>> actual problem or not.
->>>>
->>>> Good point.  I should double check the lock ordering here with mmap_sem.
->>>> It doesn't look like mmput takes mmap_sem
->>>
->>> You sure about that? mmput() -> __mmput() -> ksm_exit() ->
->>> __ksm_exit() -> down_write(&mm->mmap_sem)
->>>
->>> Or also: mmput() -> __mmput() -> khugepaged_exit() ->
->>> __khugepaged_exit() -> down_write(&mm->mmap_sem)
->>>
->>> Or is there a reason why those paths can't happen?
->> 
->> Clearly I didn't look far enough. 
->> 
->> I will adjust this so that exec_update_mutex is taken before mmap_sem.
->> Anything else is just asking for trouble.
->> 
->
-> Note that vm_access does also mmput under the exec_update_mutex.
-> So I don't see a huge problem here.
-> But maybe I missed something.
+- The configuration option (CONFIG_VM_SWAPPINESS).
+- The command line parameter (vm_swappiness).
 
-The issue is that to prevent deadlock locks must always be taken
-in the same order.
+The default value is preserved, but now defined by CONFIG_VM_SWAPPINESS.
 
-Taking mmap_sem then exec_update_mutex at the start of the function,
-then taking exec_update_mutex then mmap_sem in mmput, takes the
-two locks in two different orders.   Which means that in the right
-set or circumstances:
+Historically, the default swappiness is set to the well-known value 60,
+and this works well for the majority of cases. The vm_swappiness is also
+exposed as the kernel parameter that can be changed at runtime too, e.g.
+with sysctl.
 
-thread1:                                thread2:
-   obtain mmap_sem                      optain exec_update_mutex
-      wait for exec_update_mutex        wait for mmap_sem
+This approach might not suit well some configurations, e.g. systemd-based
+distros, where systemd is put in charge of the cgroup controllers,
+including the memory one. In such cases, the default swappiness 60
+is copied across the cgroup subtrees early at startup, when systemd
+is arranging the slices for its services, before the sysctl.conf
+or tmpfiles.d/*.conf changes are applied.
 
-Which guarantees that neither thread will make progress.
+One could run a script to traverse the cgroup trees later and set the
+desired memory.swappiness individually in each occurrence when the runtime
+is set up, but this would require some amount of work to implement
+properly. Instead, why not set the default swappiness as early as possible?
 
-The fix is easy I just need to take exec_update_mutex a few lines
-earlier.
+Signed-off-by: Ivan Teterevkov <ivan.teterevkov@nutanix.com>
+---
+ .../admin-guide/kernel-parameters.txt         |  4 ++++
+ mm/Kconfig                                    | 10 ++++++++
+ mm/vmscan.c                                   | 24 ++++++++++++++++++-
+ 3 files changed, 37 insertions(+), 1 deletion(-)
 
-Eric
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentatio=
+n/admin-guide/kernel-parameters.txt
+index c07815d230bc..5d54a4303522 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -5317,6 +5317,10 @@
+ 			  P	Enable page structure init time poisoning
+ 			  -	Disable all of the above options
+=20
++	vm_swappiness=3D	[KNL]
++			Sets the default vm_swappiness.
++			Ranges from 0 to 100, the default value is 60.
++
+ 	vmalloc=3Dnn[KMG]	[KNL,BOOT] Forces the vmalloc area to have an exact
+ 			size of <nn>. This can be used to increase the
+ 			minimum size (128MB on x86). It can also be used to diff --git a/mm/Kco=
+nfig b/mm/Kconfig index ab80933be65f..ec59c19e578e 100644
+--- a/mm/Kconfig
++++ b/mm/Kconfig
+@@ -739,4 +739,14 @@ config ARCH_HAS_HUGEPD  config MAPPING_DIRTY_HELPERS
+         bool
+=20
++config VM_SWAPPINESS
++	int "Default memory swappiness"
++	default 60
++	range 0 100
++	help
++	  Sets the default vm_swappiness, that could be changed later
++	  in the runtime, e.g. kernel command line, sysctl, etc.
++
++	  Higher value means more swappy. Historically, defaults to 60.
++
+ endmenu
+diff --git a/mm/vmscan.c b/mm/vmscan.c
+index 876370565455..7d2d3550f698 100644
+--- a/mm/vmscan.c
++++ b/mm/vmscan.c
+@@ -163,7 +163,29 @@ struct scan_control {
+ /*
+  * From 0 .. 100.  Higher means more swappy.
+  */
+-int vm_swappiness =3D 60;
++int vm_swappiness =3D CONFIG_VM_SWAPPINESS;
++
++static int __init swappiness_cmdline(char *str) {
++	int val, err;
++
++	if (!str)
++		return -EINVAL;
++
++	err =3D kstrtoint(str, 10, &val);
++	if (err)
++		return -EINVAL;
++
++	if (val < 0 || val > 100)
++		return -EINVAL;
++
++	vm_swappiness =3D val;
++
++	return 0;
++}
++
++early_param("vm_swappiness", swappiness_cmdline);
++
+ /*
+  * The total number of pages which are beyond the high watermark within al=
+l
+  * zones.
+--
+2.25.0
 
