@@ -2,97 +2,110 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 99B22181FE1
-	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2020 18:46:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 077AA182135
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Mar 2020 19:50:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730453AbgCKRqx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 11 Mar 2020 13:46:53 -0400
-Received: from mail-lj1-f195.google.com ([209.85.208.195]:36979 "EHLO
-        mail-lj1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730505AbgCKRqx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Mar 2020 13:46:53 -0400
-Received: by mail-lj1-f195.google.com with SMTP id r24so3343150ljd.4
-        for <linux-doc@vger.kernel.org>; Wed, 11 Mar 2020 10:46:52 -0700 (PDT)
+        id S1730956AbgCKSt6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 11 Mar 2020 14:49:58 -0400
+Received: from mail-pj1-f67.google.com ([209.85.216.67]:51651 "EHLO
+        mail-pj1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730953AbgCKSt5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 11 Mar 2020 14:49:57 -0400
+Received: by mail-pj1-f67.google.com with SMTP id y7so1403983pjn.1
+        for <linux-doc@vger.kernel.org>; Wed, 11 Mar 2020 11:49:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=mlpzXRhsMRDH1YY7GqVuVp0TT22uI+TLEFO2W2lrSms=;
-        b=bkrnUftXBQZT9mtbI/EX+cveDpBLPJw5YgtyI66gzgie3phE0v0QHsOzjvTZVZ9Sk5
-         LZ2SeHAHTgtVv59iU8D+Q7y72uG/GpzZXa2WL2mVl0sVqSY9OOVxXTrzzW8TJ3QRqwR9
-         D3x7FIW1oNXUbRu0geCKaQRCITuGpqDhunFslSWLg1b6t8soT29RKgj1UEZczzHuamxP
-         yr+uoZzFijDhwi/CPUOKKeXaPBi1t9Y7X22XObnK9HSc8gmO1V2npZZUMOpOPRT7DKRu
-         Erbbj3Pp4Dkg6QYdOABx0A91KfBGxJP1nWbHQGaUBWPLpbU60f66M0QrmL1Q2AQsT5hk
-         kJMA==
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=1O5mNwRKS3WQZf3p7S3pD40Ezb3WQVwbR9o3MD95weI=;
+        b=m+VDswWkn7oQWzwAESTvbUWn0hrwmnnEnt9dMsZtQKuIuHrc/4r8XX+lx3mOiCCcLf
+         wm8Cz5DjMVhJvDP2VVG0zJ6SHpUILyY5dzan67JIz+4vG+F5i9SL1nVUXx4dramPRkPf
+         S6tllCNLWc9gmhewcz7zNJik0de/BY4hu9fI8=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=mlpzXRhsMRDH1YY7GqVuVp0TT22uI+TLEFO2W2lrSms=;
-        b=PSTeBM7CJpkWOx4jgeAaGmuf9NbxJ8+eJZWIF+7VV5fSribTuPVeGvAgbVcfvQC28C
-         2OE+4sZIKQJVguvA1NdY3Wnshf+J3w1F+IdE+NshROew95zdsBBUve2suAPlmzNTHHK0
-         O7kIMIo/ia+gqnqsQfbaV7e7LR3ypfU3yaimgAFU/QNeA+7mkcAJ7+tEoI0EgeSU92kN
-         LnFGnGfCeu2RoGwzxdp+qmhmDoOt8i9PML09bD2eHJ7WzZ+vw4uDjDrC2L9xgm0g2Xfc
-         t6HWBLHTCP7UXaMHnNTgIE3G1quyMfUrFgUt27N5Nxg3497wRBeDnP7XtGQHUmW512pD
-         DhKA==
-X-Gm-Message-State: ANhLgQ3PEzzKk3nfwbc1I7NYWtiB4V3VONFK4IRP/VeCQZqxULrYmnRH
-        IhtxShP/5gz/MWkotjo9Bqf75sZvhZPom3A4SCUPTQ==
-X-Google-Smtp-Source: ADFU+vuv+Ke3zgGZnAERPw2KandsCR0n/RBp6MbjM/E+G39q41RYqt5YG3ZNzNUI16R+eGmxfkbQj35WzkWRmnMEg4Q=
-X-Received: by 2002:a2e:800a:: with SMTP id j10mr2690722ljg.23.1583948811038;
- Wed, 11 Mar 2020 10:46:51 -0700 (PDT)
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=1O5mNwRKS3WQZf3p7S3pD40Ezb3WQVwbR9o3MD95weI=;
+        b=Q/kWavXFZ77fw/PpmF1U0Jostr2ezs2g2UedOr7PoiizBAQ3omwvse0RahWobHyoPs
+         WRXRXz5Z+EGnGAj5LU8dO4vGQHgL84VUio8CFpy4KpkE9hRz1SBOwpy8hfKJD2IpJ51f
+         uzTOu2dX4vWTrBVf66Xp/IejM4GQ5Mnhr7zVZMjDm9e/6PTTNOlfbaRhZXX5+vTeKCeS
+         qfqV3tDYlF5CRiITtM6jbxdUT+0TaHoo1Z2gEVbeslvxDShYKZ52GN8EC1nVaqXoYUKd
+         JjuXF4u4BI3IS6tp/85HYjbPIhYrfrZV5/4fYQwL4hwxINZ4Lg9+6kCWaQZ2SQrrDejC
+         EcbA==
+X-Gm-Message-State: ANhLgQ12tqjqCxZDe6gIYd2J+zPo5jjMdlnckPeCwileBsnUV9cIL1d2
+        kM2KLeItRu4Xdqb4c9EpWhhwTQ==
+X-Google-Smtp-Source: ADFU+vuib6jYbHkTB4keLnEAQw9IkBZ0gBuO2NqH2stMX84aRVJNXeHWoxrV2IDBqjWVCcvlTbvu+Q==
+X-Received: by 2002:a17:90a:d80b:: with SMTP id a11mr131940pjv.21.1583952596740;
+        Wed, 11 Mar 2020 11:49:56 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id 13sm49989285pgo.13.2020.03.11.11.49.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 11 Mar 2020 11:49:55 -0700 (PDT)
+Date:   Wed, 11 Mar 2020 11:49:54 -0700
+From:   Kees Cook <keescook@chromium.org>
+To:     "Eric W. Biederman" <ebiederm@xmission.com>
+Cc:     Jann Horn <jannh@google.com>,
+        Christian Brauner <christian.brauner@ubuntu.com>,
+        Bernd Edlinger <bernd.edlinger@hotmail.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Oleg Nesterov <oleg@redhat.com>,
+        Frederic Weisbecker <frederic@kernel.org>,
+        Andrei Vagin <avagin@gmail.com>,
+        Ingo Molnar <mingo@kernel.org>,
+        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        Yuyang Du <duyuyang@gmail.com>,
+        David Hildenbrand <david@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Anshuman Khandual <anshuman.khandual@arm.com>,
+        David Howells <dhowells@redhat.com>,
+        James Morris <jamorris@linux.microsoft.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Shakeel Butt <shakeelb@google.com>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        Christian Kellner <christian@kellner.me>,
+        Andrea Arcangeli <aarcange@redhat.com>,
+        Aleksa Sarai <cyphar@cyphar.com>,
+        "Dmitry V. Levin" <ldv@altlinux.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
+        "linux-mm@kvack.org" <linux-mm@kvack.org>,
+        "stable@vger.kernel.org" <stable@vger.kernel.org>,
+        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Sargun Dhillon <sargun@sargun.me>
+Subject: Re: [PATCH] pidfd: Stop taking cred_guard_mutex
+Message-ID: <202003111148.19578AA@keescook>
+References: <877dztz415.fsf@x220.int.ebiederm.org>
+ <20200309201729.yk5sd26v4bz4gtou@wittgenstein>
+ <87k13txnig.fsf@x220.int.ebiederm.org>
+ <20200310085540.pztaty2mj62xt2nm@wittgenstein>
+ <87wo7svy96.fsf_-_@x220.int.ebiederm.org>
+ <CAG48ez2cUZMVOAXfHPNjKjYsMSaWkjUjOCHo0KYZ+oXQUW4viA@mail.gmail.com>
+ <87k13sui1p.fsf@x220.int.ebiederm.org>
+ <CAG48ez2vRgaEVJ=Rs8gn6HkGO6syL8MpSOUq7BNN+OUE1uYxCA@mail.gmail.com>
+ <CAG48ez1LjW1xAGe-5tNtstCWxG2bkiHaQUMOcJNjx=z-2Wc2Jw@mail.gmail.com>
+ <87lfo8rkqo.fsf@x220.int.ebiederm.org>
 MIME-Version: 1.0
-References: <20200219183231.50985-1-balejs@google.com> <20200303134855.GA186184@mtj.thefacebook.com>
-In-Reply-To: <20200303134855.GA186184@mtj.thefacebook.com>
-From:   Daniel Colascione <dancol@google.com>
-Date:   Wed, 11 Mar 2020 10:46:15 -0700
-Message-ID: <CAKOZuevzE=0Oa8gn--rkVJ8t69S+o2vK--pki65XXg6EVuOhMQ@mail.gmail.com>
-Subject: Re: [PATCH] cgroup-v1: freezer: optionally killable freezer
-To:     Tejun Heo <tj@kernel.org>
-Cc:     Marco Ballesio <balejs@google.com>, Roman Gushchin <guro@fb.com>,
-        cgroups@vger.kernel.org,
-        linux-kernel <linux-kernel@vger.kernel.org>, lizefan@huawei.com,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>, rjw@rjwysocki.net,
-        Pavel Machek <pavel@ucw.cz>, len.brown@intel.com,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-pm@vger.kernel.org, Minchan Kim <minchan@google.com>,
-        Suren Baghdasaryan <surenb@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87lfo8rkqo.fsf@x220.int.ebiederm.org>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 3, 2020 at 5:48 AM Tejun Heo <tj@kernel.org> wrote:
->
-> Hello,
->
-> On Wed, Feb 19, 2020 at 10:32:31AM -0800, Marco Ballesio wrote:
-> > @@ -94,6 +94,18 @@ The following cgroupfs files are created by cgroup freezer.
-> >    Shows the parent-state.  0 if none of the cgroup's ancestors is
-> >    frozen; otherwise, 1.
-> >
-> > +* freezer.killable: Read-write
-> > +
-> > +  When read, returns the killable state of a cgroup - "1" if frozen
-> > +  tasks will respond to fatal signals, or "0" if they won't.
-> > +
-> > +  When written, this property sets the killable state of the cgroup.
-> > +  A value equal to "1" will switch the state of all frozen tasks in
-> > +  the cgroup to TASK_INTERRUPTIBLE (similarly to cgroup v2) and will
-> > +  make them react to fatal signals. A value of "0" will switch the
-> > +  state of frozen tasks to TASK_UNINTERRUPTIBLE and they won't respond
-> > +  to signals unless thawed or unfrozen.
->
-> As Roman said, I'm not too sure about adding a new cgroup1 freezer
-> interface at this point. If we do this, *maybe* a mount option would
-> be more minimal?
+On Tue, Mar 10, 2020 at 03:57:35PM -0500, Eric W. Biederman wrote:
+> So ptrace_attach and seccomp use the cred_guard_mutex to guarantee
+> a deadlock.
 
-I'd still prefer a cgroup flag. A mount option is a bigger
-compatibility risk and isn't really any simpler than another cgroup
-flag. A mount option will affect anything using the cgroup mount
-point, potentially turning non-killable frozen processes into killable
-ones unexpectedly. (Sure, you could mount multiple times, but only one
-location is canonical, and that's the one that's going to get the flag
-flipped.) A per-cgroup flag allows people to opt into the new behavior
-only in specific contexts, so it's safer.
+Well, that's the result, but seccomp uses it because it wants to
+be certain that credentials and no_new_privs are changed together
+"atomically".
+
+-- 
+Kees Cook
