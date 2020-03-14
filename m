@@ -2,68 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DD86E18585C
-	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2020 03:04:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7C532185878
+	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2020 03:11:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727589AbgCOCEp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 14 Mar 2020 22:04:45 -0400
-Received: from www262.sakura.ne.jp ([202.181.97.72]:54034 "EHLO
-        www262.sakura.ne.jp" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726757AbgCOCEo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 14 Mar 2020 22:04:44 -0400
-Received: from fsav107.sakura.ne.jp (fsav107.sakura.ne.jp [27.133.134.234])
-        by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTP id 02E4RG0I007339;
-        Sat, 14 Mar 2020 13:27:16 +0900 (JST)
-        (envelope-from penguin-kernel@i-love.sakura.ne.jp)
-Received: from www262.sakura.ne.jp (202.181.97.72)
- by fsav107.sakura.ne.jp (F-Secure/fsigk_smtp/550/fsav107.sakura.ne.jp);
- Sat, 14 Mar 2020 13:27:16 +0900 (JST)
-X-Virus-Status: clean(F-Secure/fsigk_smtp/550/fsav107.sakura.ne.jp)
-Received: from [192.168.1.9] (M106072142033.v4.enabler.ne.jp [106.72.142.33])
-        (authenticated bits=0)
-        by www262.sakura.ne.jp (8.15.2/8.15.2) with ESMTPSA id 02E4RFiB007324
-        (version=TLSv1.2 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-        Sat, 14 Mar 2020 13:27:15 +0900 (JST)
-        (envelope-from penguin-kernel@i-love.sakura.ne.jp)
-Subject: Re: [PATCH] kernel/hung_task.c: Introduce sysctl to print all traces
- when a hung task is detected
-To:     Kees Cook <keescook@chromium.org>,
-        "Guilherme G. Piccoli" <gpiccoli@canonical.com>
-Cc:     linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org, mcgrof@kernel.org, yzaikin@google.com,
-        tglx@linutronix.de, kernel@gpiccoli.net
-References: <20200310155650.17968-1-gpiccoli@canonical.com>
- <ef3b3e9a-9d58-60ec-d638-88ad57d29aec@canonical.com>
- <202003132011.8143A71FE@keescook>
-From:   Tetsuo Handa <penguin-kernel@i-love.sakura.ne.jp>
-Message-ID: <c4b05b32-216a-e130-259f-0d9506ff9244@i-love.sakura.ne.jp>
-Date:   Sat, 14 Mar 2020 13:27:13 +0900
-User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+        id S1727698AbgCOCLI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 14 Mar 2020 22:11:08 -0400
+Received: from mail-io1-f65.google.com ([209.85.166.65]:42417 "EHLO
+        mail-io1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727141AbgCOCLH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 14 Mar 2020 22:11:07 -0400
+Received: by mail-io1-f65.google.com with SMTP id q128so13657816iof.9
+        for <linux-doc@vger.kernel.org>; Sat, 14 Mar 2020 19:11:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:sender:from:date:message-id:subject:to;
+        bh=rySLrb6e8pdxDloLytBEUWmIP8HvBNLPxIuJLcg1j9c=;
+        b=nUe4ov5J2eU2m6Q2U8O/gRHpvXz32wUztitC3J/seyOpJfHG1vkUnBE8DNfBm7Gf7u
+         Tbd6A2tj/+rYbzLRvwRl8zYnZw4EzS1ejG7Vv9g9H9yJhGTy202iorIpdKzg5kynzoa3
+         et/HDkJPLjkHQOlo8irQlY049W6plmzrxdNW2Rw67XyDw17lez70t2WtAeVbJ1DxLPfQ
+         aSkjfb7l9gArnwqtGVForp8DTD5Knb3UClQPKc7w6Iik8agOAukctJSS4ORTXXy65xfD
+         TWxedAgU6UaTx2yFOmHhvpL3x8JqIRWTRHkwlVXAX1+8R2tM+85c37Q7jyy79KCyd41l
+         0EMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+         :to;
+        bh=rySLrb6e8pdxDloLytBEUWmIP8HvBNLPxIuJLcg1j9c=;
+        b=acXf6XHu6L0YMY7dVH1Poc8iKVLpi2IVaWHZ/JAACICwka5nBULESACABtitWlVND/
+         yXzc/dB/CJPzfnznOtzqshuKXJQGddyUKG+OikbekVOtqcuQkO7VXLFv5froIhKRwBYc
+         vyqg+UScVEOWIiTqpOos5LeMnYDLy6gpd7QeZf7vnNW02xw11XxI94Ye/hagnXgVJMQM
+         YaHVgXrcTy+CHdXgf8MIvbtziiObo23ibJd35D/CPzILhASRfS4OHOEBAeAYvoVL43xl
+         c8nO7GXBL9nm0DHudbAdhgCwUSmSir7dq2glJtZ9k5e0VfiXf3vBQchGg60lPCmXIY4K
+         HBiw==
+X-Gm-Message-State: ANhLgQ2hVDt+cSz4zOcIsLxqJiFotgonflANtgkgwvCFqtVy63ilV9Fu
+        otGWQXpkaCrmZyhUONLuOCGb4LBQafRdcC4h5hSuAtQ1
+X-Google-Smtp-Source: ADFU+vvScZrTz1iG+7uXDnMpNvFdmZy+XeLP+n/jiAAm0H51YpA/k8xOjab2dmwVJwbiJdo9ABu7Fa2dFGUD9kjv/b4=
+X-Received: by 2002:a02:8184:: with SMTP id n4mr18586964jag.31.1584205557867;
+ Sat, 14 Mar 2020 10:05:57 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <202003132011.8143A71FE@keescook>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Received: by 2002:a4f:4447:0:0:0:0:0 with HTTP; Sat, 14 Mar 2020 10:05:57
+ -0700 (PDT)
+From:   Omar Ousman <omarousman25@gmail.com>
+Date:   Sat, 14 Mar 2020 18:05:57 +0100
+X-Google-Sender-Auth: HEZVTTIcE-s4aTNkTMNegYSP5fo
+Message-ID: <CAAai1fza4F+bWN=EQXho+38HzEL+AhKifRCQNAyUmw9QmtPNKw@mail.gmail.com>
+Subject: You received my last mail,,,,
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2020/03/14 12:12, Kees Cook wrote:
-> On Fri, Mar 13, 2020 at 02:23:37PM -0300, Guilherme G. Piccoli wrote:
->> Kees / Testsuo, are you OK with this patch once I resend with the
->> suggestions you gave me?
-> 
-> I think so, yes. Send a v2 (to akpm with us in CC).
-> 
->> Is there anybody else I should loop in the patch that should take a
->> look? Never sent sysctl stuff before, sorry if I forgot somebody heheh
-> 
-> akpm usually takes these kinds of things.
-> 
+I am Mr.Omar Ousman, a regional managing director (CORIS BANK
+INTERNATIONAL) Ouagadougou Burkina Faso, in my department we have
+US$9,500.0000 million united state dollars, to transfer into your
+account as a dormant fund.If you are interested to use this fund to
+help the orphans around the world contact and send me your personal
+information for more details to my email omarousman25@gmail.com
 
-Well, maybe sysctl_hung_task_all_cpu_backtrace = 1 by default is better for
-compatibility? Please CC or BCC kernel-testing people so that they can add
-hung_task_all_cpu_backtrace=1 kernel command line parameter to their testing
-environments if sysctl_hung_task_all_cpu_backtrace = 0 by default.
+Your full names..........
+Your country of origin..........
+Your occupation..........
+Your Age..........
+Your Mobile Number..........
+
+Best Regards,
