@@ -2,333 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 086D7185949
-	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2020 03:44:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 317DD185A0F
+	for <lists+linux-doc@lfdr.de>; Sun, 15 Mar 2020 05:28:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727124AbgCOCoA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 14 Mar 2020 22:44:00 -0400
-Received: from mail-wr1-f65.google.com ([209.85.221.65]:46810 "EHLO
-        mail-wr1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726811AbgCOCoA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 14 Mar 2020 22:44:00 -0400
-Received: by mail-wr1-f65.google.com with SMTP id w16so518144wrv.13;
-        Sat, 14 Mar 2020 19:43:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=Jf+RrC6mz5nv84gZ0MzKVxOOXoDeU+y88CTt66LoldU=;
-        b=U0yygjl5lv+zcKei2t1sWcD+BUWDAMmKr9iCEAnQVE0fk7Wtgu4P5m6etE17I6XZjI
-         xtXo7DbXs3NsHWTZUy/uRdJr/MlZgBS+UbEV6sKqoZYY9iXpfKi/rQCQYqsESVbwU0Ml
-         ns61vfMXkveiwOHsDDeQFJEi+zgsZciREasdPaKYfxaYQmzKivCJ8A1H2vryAMVes2Xi
-         2RVJ5gfsSv5dg3V5FWauG+MgyCmbztrmI7eun7BHAvGYIIjcQzTwz1QSGSLeBOGfUjVY
-         17DxeajvcCm8jA6KuUFhCm1Tq7YQ9YwKfGtU9p2IkUSMitj5mxbkbpmD5WPnshMAi8Te
-         +jZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=Jf+RrC6mz5nv84gZ0MzKVxOOXoDeU+y88CTt66LoldU=;
-        b=O4EhgIk3DGffey/kWEqZBvMwREY/1ilWaPWKfyoQCH8s5vEpcdO0ZXQlVCoBswwFWy
-         UWZQ70YGi8MsxiPF8mQFnmcvEoBdWsr2O21rGDjcCKrSZy2iZ8FJK2nmMrgjTLhm8s0u
-         9ufzFUN7dgB8g2iv6e/Iaakca34wtxPEDQNlyrfsJgsBFdGgjOhCIbT27rFOK7kCaLOe
-         KglWMdeuTAD8zGOYPo/LPzvlduXx5hZjptMSFJPwHVL0zmdSg0eM5YumHZ9pX/NKtu4c
-         q4o9NCOXLRFsL25qNX+WN8NvUbX3gj7Z1aWy5ZIk3uAyX1jYuDdcrGnPcpxrOYw4R8jT
-         ugUA==
-X-Gm-Message-State: ANhLgQ0SzjBj9PXAzYiexbjvtg5fsrLOhYf8syoSKNOX+CGEkiRG/PIc
-        9Zo9sTjEvrGFnxRGZ5wGjBU34B7m
-X-Google-Smtp-Source: ADFU+vtOhAEKysrjqj79AasYhiG4LYUcsxu1ei3KOCiBhXnrGHF8BgM7nFE0owH/Xoq+tj06daAGsg==
-X-Received: by 2002:a17:906:4001:: with SMTP id v1mr8429ejj.36.1584208240461;
-        Sat, 14 Mar 2020 10:50:40 -0700 (PDT)
-Received: from felia.fritz.box ([2001:16b8:2d83:b000:25e0:954:4866:25e4])
-        by smtp.gmail.com with ESMTPSA id b15sm2072157edn.69.2020.03.14.10.50.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 14 Mar 2020 10:50:39 -0700 (PDT)
-From:   Lukas Bulwahn <lukas.bulwahn@gmail.com>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        Joe Perches <joe@perches.com>, kernel-janitors@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Subject: [PATCH v2] MAINTAINERS: adjust to filesystem doc ReST conversion
-Date:   Sat, 14 Mar 2020 18:50:30 +0100
-Message-Id: <20200314175030.10436-1-lukas.bulwahn@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        id S1725995AbgCOE2B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 15 Mar 2020 00:28:01 -0400
+Received: from smtprelay0200.hostedemail.com ([216.40.44.200]:40474 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1725837AbgCOE2B (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 15 Mar 2020 00:28:01 -0400
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay08.hostedemail.com (Postfix) with ESMTP id 21D5F182CED28;
+        Sun, 15 Mar 2020 04:28:00 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:968:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1539:1593:1594:1711:1730:1747:1777:1792:2393:2553:2559:2562:2828:3138:3139:3140:3141:3142:3352:3622:3865:3866:3867:3868:3870:3872:3873:3874:4250:4321:5007:10004:10400:10848:11232:11658:11914:12297:12740:12760:12895:13069:13311:13357:13439:14659:21080:21433:21611:21627:21939:30034:30054:30090:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:1,LUA_SUMMARY:none
+X-HE-Tag: queen11_45b03e9819604
+X-Filterd-Recvd-Size: 1633
+Received: from XPS-9350.home (unknown [47.151.143.254])
+        (Authenticated sender: joe@perches.com)
+        by omf02.hostedemail.com (Postfix) with ESMTPA;
+        Sun, 15 Mar 2020 04:27:58 +0000 (UTC)
+Message-ID: <e8c0df0e7adb53c2e16f5a4f85de9f5a0f627b4f.camel@perches.com>
+Subject: Re: [PATCH] coding-style.rst: Add fallthrough as an emacs keyword
+From:   Joe Perches <joe@perches.com>
+To:     Matthew Wilcox <willy@infradead.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Date:   Sat, 14 Mar 2020 21:26:13 -0700
+In-Reply-To: <20200315021222.GU22433@bombadil.infradead.org>
+References: <7a2977ea9baacd1580ff80689f2c8f20d45b069d.camel@perches.com>
+         <20200315021222.GU22433@bombadil.infradead.org>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.34.1-2 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Mauro's patch series <cover.1581955849.git.mchehab+huawei@kernel.org>
-("[PATCH 00/44] Manually convert filesystem FS documents to ReST")
-converts many Documentation/filesystems/ files to ReST.
+On Sat, 2020-03-14 at 19:12 -0700, Matthew Wilcox wrote:
+> On Sat, Mar 14, 2020 at 02:13:59PM -0700, Joe Perches wrote:
+> > I've no idea how to remove the infinite monkeys jibe from the chinese translation
+> 
+> I don't think you should.  That's part of Linus' original text, and I
+> don't think it deters contributors.
+> 
+> > -uses are less than desirable (in fact, they are worse than random
+> > -typing - an infinite number of monkeys typing into GNU emacs would never
+> > -make a good program).
+> > +uses are less than desirable.
 
-Since then, ./scripts/get_maintainer.pl --self-test complains with 27
-warnings on Documentation/filesystems/ of this kind:
+It's silly, and moderately offensive,
+unrepresentative of the softer, modern Linus.
 
-  warning: no file matches F: Documentation/filesystems/...
-
-Adjust MAINTAINERS entries to all files converted from .txt to .rst in the
-patch series and address the 27 warnings.
-
-Link: https://lore.kernel.org/linux-erofs/cover.1581955849.git.mchehab+huawei@kernel.org
-Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
----
-v1 -> v2:
-Patch v2 is now based on today's docs-next (now with base-commit below)
-
-Jonathan, pick pick this patch v2 for docs-next.
-
-If still does not apply, let us reduce the churn---you can simply run
-this script if you want to produce the changes:
-
-  ./scripts/get_maintainer.pl --self-test > findings
-  grep "Documentation\/filesystems/" findings | \
-  sed 's#^.*\(Documentation\/filesystems\/.*\.\)txt$#sed -i "s!\1txt!\1rst!" MAINTAINERS#' | sh
-
-
- MAINTAINERS | 54 ++++++++++++++++++++++++++---------------------------
- 1 file changed, 27 insertions(+), 27 deletions(-)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 5ddc491bea55..38f58b85eb06 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -214,7 +214,7 @@ Q:	http://patchwork.kernel.org/project/v9fs-devel/list/
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/ericvh/v9fs.git
- T:	git git://github.com/martinetd/linux.git
- S:	Maintained
--F:	Documentation/filesystems/9p.txt
-+F:	Documentation/filesystems/9p.rst
- F:	fs/9p/
- F:	net/9p/
- F:	include/net/9p/
-@@ -584,7 +584,7 @@ AFFS FILE SYSTEM
- M:	David Sterba <dsterba@suse.com>
- L:	linux-fsdevel@vger.kernel.org
- S:	Odd Fixes
--F:	Documentation/filesystems/affs.txt
-+F:	Documentation/filesystems/affs.rst
- F:	fs/affs/
- 
- AFS FILESYSTEM
-@@ -593,7 +593,7 @@ L:	linux-afs@lists.infradead.org
- S:	Supported
- F:	fs/afs/
- F:	include/trace/events/afs.h
--F:	Documentation/filesystems/afs.txt
-+F:	Documentation/filesystems/afs.rst
- W:	https://www.infradead.org/~dhowells/kafs/
- 
- AGPGART DRIVER
-@@ -3063,7 +3063,7 @@ M:	Luis de Bethencourt <luisbg@kernel.org>
- M:	Salah Triki <salah.triki@gmail.com>
- S:	Maintained
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/luisbg/linux-befs.git
--F:	Documentation/filesystems/befs.txt
-+F:	Documentation/filesystems/befs.rst
- F:	fs/befs/
- 
- BFQ I/O SCHEDULER
-@@ -3077,7 +3077,7 @@ F:	Documentation/block/bfq-iosched.rst
- BFS FILE SYSTEM
- M:	"Tigran A. Aivazian" <aivazian.tigran@gmail.com>
- S:	Maintained
--F:	Documentation/filesystems/bfs.txt
-+F:	Documentation/filesystems/bfs.rst
- F:	fs/bfs/
- F:	include/uapi/linux/bfs_fs.h
- 
-@@ -3610,7 +3610,7 @@ W:	http://btrfs.wiki.kernel.org/
- Q:	http://patchwork.kernel.org/project/linux-btrfs/list/
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/mason/linux-btrfs.git
- S:	Maintained
--F:	Documentation/filesystems/btrfs.txt
-+F:	Documentation/filesystems/btrfs.rst
- F:	fs/btrfs/
- F:	include/linux/btrfs*
- F:	include/uapi/linux/btrfs*
-@@ -3906,7 +3906,7 @@ W:	http://ceph.com/
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/sage/ceph-client.git
- T:	git git://github.com/ceph/ceph-client.git
- S:	Supported
--F:	Documentation/filesystems/ceph.txt
-+F:	Documentation/filesystems/ceph.rst
- F:	fs/ceph/
- 
- CERTIFICATE HANDLING:
-@@ -4423,7 +4423,7 @@ F:	include/linux/cpuidle.h
- CRAMFS FILESYSTEM
- M:	Nicolas Pitre <nico@fluxnic.net>
- S:	Maintained
--F:	Documentation/filesystems/cramfs.txt
-+F:	Documentation/filesystems/cramfs.rst
- F:	fs/cramfs/
- 
- CREATIVE SB0540
-@@ -5938,7 +5938,7 @@ W:	http://ecryptfs.org
- W:	https://launchpad.net/ecryptfs
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/tyhicks/ecryptfs.git
- S:	Supported
--F:	Documentation/filesystems/ecryptfs.txt
-+F:	Documentation/filesystems/ecryptfs.rst
- F:	fs/ecryptfs/
- 
- EDAC-AMD64
-@@ -6254,7 +6254,7 @@ M:	Chao Yu <yuchao0@huawei.com>
- L:	linux-erofs@lists.ozlabs.org
- S:	Maintained
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/xiang/erofs.git
--F:	Documentation/filesystems/erofs.txt
-+F:	Documentation/filesystems/erofs.rst
- F:	fs/erofs/
- F:	include/trace/events/erofs.h
- 
-@@ -6315,7 +6315,7 @@ EXT2 FILE SYSTEM
- M:	Jan Kara <jack@suse.com>
- L:	linux-ext4@vger.kernel.org
- S:	Maintained
--F:	Documentation/filesystems/ext2.txt
-+F:	Documentation/filesystems/ext2.rst
- F:	fs/ext2/
- F:	include/linux/ext2*
- 
-@@ -6389,7 +6389,7 @@ L:	linux-f2fs-devel@lists.sourceforge.net
- W:	https://f2fs.wiki.kernel.org/
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs.git
- S:	Maintained
--F:	Documentation/filesystems/f2fs.txt
-+F:	Documentation/filesystems/f2fs.rst
- F:	Documentation/ABI/testing/sysfs-fs-f2fs
- F:	fs/f2fs/
- F:	include/linux/f2fs_fs.h
-@@ -7431,13 +7431,13 @@ F:	drivers/infiniband/hw/hfi1
- HFS FILESYSTEM
- L:	linux-fsdevel@vger.kernel.org
- S:	Orphan
--F:	Documentation/filesystems/hfs.txt
-+F:	Documentation/filesystems/hfs.rst
- F:	fs/hfs/
- 
- HFSPLUS FILESYSTEM
- L:	linux-fsdevel@vger.kernel.org
- S:	Orphan
--F:	Documentation/filesystems/hfsplus.txt
-+F:	Documentation/filesystems/hfsplus.rst
- F:	fs/hfsplus/
- 
- HGA FRAMEBUFFER DRIVER
-@@ -8308,7 +8308,7 @@ M:	Jan Kara <jack@suse.cz>
- R:	Amir Goldstein <amir73il@gmail.com>
- L:	linux-fsdevel@vger.kernel.org
- S:	Maintained
--F:	Documentation/filesystems/inotify.txt
-+F:	Documentation/filesystems/inotify.rst
- F:	fs/notify/inotify/
- F:	include/linux/inotify.h
- F:	include/uapi/linux/inotify.h
-@@ -11791,7 +11791,7 @@ W:	https://nilfs.sourceforge.io/
- W:	https://nilfs.osdn.jp/
- T:	git git://github.com/konis/nilfs2.git
- S:	Supported
--F:	Documentation/filesystems/nilfs2.txt
-+F:	Documentation/filesystems/nilfs2.rst
- F:	fs/nilfs2/
- F:	include/trace/events/nilfs2.h
- F:	include/uapi/linux/nilfs2_api.h
-@@ -11900,7 +11900,7 @@ L:	linux-ntfs-dev@lists.sourceforge.net
- W:	http://www.tuxera.com/
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/aia21/ntfs.git
- S:	Supported
--F:	Documentation/filesystems/ntfs.txt
-+F:	Documentation/filesystems/ntfs.rst
- F:	fs/ntfs/
- 
- NUBUS SUBSYSTEM
-@@ -12246,7 +12246,7 @@ OMFS FILESYSTEM
- M:	Bob Copeland <me@bobcopeland.com>
- L:	linux-karma-devel@lists.sourceforge.net
- S:	Maintained
--F:	Documentation/filesystems/omfs.txt
-+F:	Documentation/filesystems/omfs.rst
- F:	fs/omfs/
- 
- OMNIKEY CARDMAN 4000 DRIVER
-@@ -12495,8 +12495,8 @@ M:	Joseph Qi <joseph.qi@linux.alibaba.com>
- L:	ocfs2-devel@oss.oracle.com (moderated for non-subscribers)
- W:	http://ocfs2.wiki.kernel.org
- S:	Supported
--F:	Documentation/filesystems/ocfs2.txt
--F:	Documentation/filesystems/dlmfs.txt
-+F:	Documentation/filesystems/ocfs2.rst
-+F:	Documentation/filesystems/dlmfs.rst
- F:	fs/ocfs2/
- 
- ORANGEFS FILESYSTEM
-@@ -12506,7 +12506,7 @@ L:	devel@lists.orangefs.org
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/hubcap/linux.git
- S:	Supported
- F:	fs/orangefs/
--F:	Documentation/filesystems/orangefs.txt
-+F:	Documentation/filesystems/orangefs.rst
- 
- ORINOCO DRIVER
- L:	linux-wireless@vger.kernel.org
-@@ -13469,7 +13469,7 @@ S:	Maintained
- F:	fs/proc/
- F:	include/linux/proc_fs.h
- F:	tools/testing/selftests/proc/
--F:	Documentation/filesystems/proc.txt
-+F:	Documentation/filesystems/proc.rst
- 
- PROC SYSCTL
- M:	Luis Chamberlain <mcgrof@kernel.org>
-@@ -15738,7 +15738,7 @@ L:	squashfs-devel@lists.sourceforge.net (subscribers-only)
- W:	http://squashfs.org.uk
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/pkl/squashfs-next.git
- S:	Maintained
--F:	Documentation/filesystems/squashfs.txt
-+F:	Documentation/filesystems/squashfs.rst
- F:	fs/squashfs/
- 
- SRM (Alpha) environment access
-@@ -16181,7 +16181,7 @@ F:	drivers/platform/x86/system76_acpi.c
- SYSV FILESYSTEM
- M:	Christoph Hellwig <hch@infradead.org>
- S:	Maintained
--F:	Documentation/filesystems/sysv-fs.txt
-+F:	Documentation/filesystems/sysv-fs.rst
- F:	fs/sysv/
- F:	include/linux/sysv_fs.h
- 
-@@ -17046,7 +17046,7 @@ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/rw/ubifs.git next
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/rw/ubifs.git fixes
- W:	http://www.linux-mtd.infradead.org/doc/ubifs.html
- S:	Supported
--F:	Documentation/filesystems/ubifs.txt
-+F:	Documentation/filesystems/ubifs.rst
- F:	fs/ubifs/
- 
- UCLINUX (M68KNOMMU AND COLDFIRE)
-@@ -17065,7 +17065,7 @@ F:	arch/m68k/include/asm/*_no.*
- UDF FILESYSTEM
- M:	Jan Kara <jack@suse.com>
- S:	Maintained
--F:	Documentation/filesystems/udf.txt
-+F:	Documentation/filesystems/udf.rst
- F:	fs/udf/
- 
- UDRAW TABLET
-@@ -18504,7 +18504,7 @@ L:	linux-fsdevel@vger.kernel.org
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/dlemoal/zonefs.git
- S:	Maintained
- F:	fs/zonefs/
--F:	Documentation/filesystems/zonefs.txt
-+F:	Documentation/filesystems/zonefs.rst
- 
- ZPOOL COMPRESSED PAGE STORAGE API
- M:	Dan Streetman <ddstreet@ieee.org>
-
-base-commit: 7d3d3254adaa61cba896f71497f56901deb618e5
--- 
-2.17.1
 
