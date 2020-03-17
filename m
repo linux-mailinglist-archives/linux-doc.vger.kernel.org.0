@@ -2,61 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id DD7F21882EA
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2020 13:07:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 711591884F2
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2020 14:11:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726490AbgCQMH2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 Mar 2020 08:07:28 -0400
-Received: from sonic307-2.consmr.mail.ne1.yahoo.com ([66.163.190.121]:42012
-        "EHLO sonic307-2.consmr.mail.ne1.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726494AbgCQMH2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Mar 2020 08:07:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1584446847; bh=kcevCRoll2+Bsa3FDERpIV72LVcB1A4YV1b5N2AWYBk=; h=Date:From:Reply-To:Subject:References:From:Subject; b=TYJAYCz3bNTfsdt/MA1H3rmcfnRFhI9T8+SP/UJcAvmbR/C7oblQ2IrhUqKGKxYoXmzQvGYkCB/iOupWpGhpalUAoxX6u1M0qFLFSpmLJ+sYMD74nqCC79nbq3isVShXQv7Z1ZhXsY8aXbCzCCoyB1jie8WwbgDgA4ls4ZKWEdU+nSeP3iVKDtEhb0XdIl8cb8kRfWqJgXQ+LoNg+weDoVfnuLVmHvVuSOLCgKrLvAldM479wsa6QdaLJdRheUf5hI4NWO8hIsYVJkp/OnhIjpzmuxNqsqjrPJW22F9xi8wl33SvU5bWDhNUx+OwOkkatC0V7ghAwk7pMwgztiCI9w==
-X-YMail-OSG: kiwY3a0VM1lXG2yd0FMEXcFEq4d1_NqzrDF8PKCrEvjngq_DbKpy1GCppZ9sJgS
- swORTXPim.EGzeGl3jMh_7PJc4L5FQVIodQeQl8WbcgLGL2Ji3mYYeyOF9Qb32eAh1N6q7PYPMp_
- MHLHci0hlpx8TzJi_V5AkpKk.vkNsoCCObxCeN_.VrqTFf4nwQxBCNMmbVD.esgLPNv9UEjuSP.w
- c7Pt2nyPF6PJSEFjuWE.ZHmrFiknTHs1b69SWkQuOFeZS876SncSu314oOiqwvqk_0EktP.Ozxz9
- DMAW_xo16P0VFW.Hti2fLaRX437yOGcX8rXWv5_Scu7T7R_5A2ucke5EUk5hwDqh3egfpMX9Kpuy
- 8vciLBYPgaKQYiVlZyJq5Rn2xK0NjiN72PZkihcK4ia1AB44tYaUj8AvtxoECsozC482KXB_jrvl
- .sf.VPbnQ7qX.SsH6nU0kSzOBRymH6XdhiVl6FQ7PrapAHhwmnXKxnLKCnDVzf2IAruBblCYmPaU
- HnXAEgq76AePz8fm.1M8BoLzMdbpKVK9.mNyst0y7_qer615kKs4bHx4fLMOPvJVHTLJ83w6wlN.
- LNXp4X0D5y1OqP8NbnVuwGyDScMz2K4YobdSQ7PlOHB.Vysfp4iQSdN.ZIFbPy3Rldooz.HDHPKz
- sQhRKXM4Yii2zqTtRAppWIn_LzyCIblGjnm3PpFMHOTnSFWYLAOi5fG1BfsrYYdRhWNLxTqqzWHb
- q_fvTYvFm5oWMYggdElL9SaeqpWcrjsSoHnTdodoa6VM8UxQ_l1bX2EWOOolRdJRweXtqbP0vBUo
- WhYUmwOwXkJG.MBcFyMBiNG85cOyrRyAWO0cMKWj.01zBM1meJBQ3ds6amZoWmo.0ZyrS1xeoxbY
- rLaAasO3NDB25Sfl75t4xr8I.TUz8P4TDcf1QJCrsJG0Oc7QswtP.cUuKXnIrbmcTFC5Ci1eP_gn
- AJfl1yLgMGeMmg1WX1HQUPD3L1rhcBZ4P1jBHtHHYJA._8BVNJonIy2CspYYbTKkP.CUfqQI7Y4r
- gtBx9wAwpNVa4WjGqYPDD2qpHzfvrg3PC1J4clsinl2Qd_sRHpc_WnpsW.K39FU6j3pD3JathgtZ
- 4ySMlixwy5hw7I0.4d39zNoihOQTg9QVkPvZhkbwKGMcl453fFGNZFHRmV_H3NEYTSkMQgsIQx2D
- p.tMlfVmvJRqmy1xjIqIoYgav_0dnsuhiqGMDBkKVqrzQm09yqbYGWCaCdpBO8sLZeNy6Pc6MkyS
- VGgfDKHxv0U3l00pQKAtd56IWIWRTfTaVEiMNEvCNl35pgtDb5zedZhBa7TjiL3ZwZb55_vF5bor
- gT0GQrqGgw0kQ0jiV5JxkNBdMsvfcQrQGiQ--
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic307.consmr.mail.ne1.yahoo.com with HTTP; Tue, 17 Mar 2020 12:07:27 +0000
-Date:   Tue, 17 Mar 2020 12:05:26 +0000 (UTC)
-From:   Stephen Li <stenn8@gabg.net>
-Reply-To: stephli947701@gmail.com
-Message-ID: <877193668.1824808.1584446726464@mail.yahoo.com>
-Subject: REF
+        id S1726834AbgCQNK4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 Mar 2020 09:10:56 -0400
+Received: from mail.kernel.org ([198.145.29.99]:37698 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726112AbgCQNK4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 17 Mar 2020 09:10:56 -0400
+Received: from mail.kernel.org (ip5f5ad4e9.dynamic.kabel-deutschland.de [95.90.212.233])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 486B7206EC;
+        Tue, 17 Mar 2020 13:10:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1584450655;
+        bh=92ammI6uJRb3AZ8FcF6Fkf3W17Lp//0sZz89b0+sTMU=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=RRSzq/DjBIREptoAJ5kZbOdC7cO76YDgciz5tpSEnxjBfmMeLnwpFhIQ2YYY6N77I
+         pMQf4eKM4gpgiCzMYXFIQKT08RJNEYSQjU6mKoRS37VmDv/8I8Is/mDgkh176WYhnc
+         D8UfSo6SPJMfqtoE+7oLERAedMLmV+UVUa2/xjtk=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1jEBzh-0006Rp-FV; Tue, 17 Mar 2020 14:10:53 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Rob Herring <robh@kernel.org>,
+        Maxime Ripard <maxime@cerno.tech>
+Subject: [PATCH 01/12] MAINTAINERS: dt: update display/allwinner file entry
+Date:   Tue, 17 Mar 2020 14:10:40 +0100
+Message-Id: <3f84175b93dd54db4565abf560b59644f7245894.1584450500.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <cover.1584450500.git.mchehab+huawei@kernel.org>
+References: <cover.1584450500.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-References: <877193668.1824808.1584446726464.ref@mail.yahoo.com>
-X-Mailer: WebService/1.1.15342 YMailNodin Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36
-To:     unlisted-recipients:; (no To-header on input)
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Changeset f5a98bfe7b37 ("dt-bindings: display: Convert Allwinner display pipeline to schemas")
+split Documentation/devicetree/bindings/display/sunxi/sun4i-drm.txt
+into several files. Yet, it kept the old place at MAINTAINERS.
 
+Update it to point to the new place.
 
-Greetings,
-I was searching through a local business directory when I found your
-profile. I am Soliciting On-Behalf of my private client who is
-interested in having a serious business investment in your country. If
-you have a valid business, investment or project he can invest
-back to me for more details. Your swift response is highly needed.
-Sincerely
-Stephen Li
-Please response back to me with is my private email below for more details
-stephli947701@gmail.com
+Fixes: f5a98bfe7b37 ("dt-bindings: display: Convert Allwinner display pipeline to schemas")
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index be44251d1e04..9f3ce3f8df56 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -5552,7 +5552,7 @@ M:	Chen-Yu Tsai <wens@csie.org>
+ L:	dri-devel@lists.freedesktop.org
+ S:	Supported
+ F:	drivers/gpu/drm/sun4i/
+-F:	Documentation/devicetree/bindings/display/sunxi/sun4i-drm.txt
++F:	Documentation/devicetree/bindings/display/allwinner*
+ T:	git git://anongit.freedesktop.org/drm/drm-misc
+ 
+ DRM DRIVER FOR ALLWINNER DE2 AND DE3 ENGINE
+-- 
+2.24.1
+
