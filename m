@@ -2,51 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 16BF518860C
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2020 14:41:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CDD2C18861E
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2020 14:44:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726651AbgCQNlk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 Mar 2020 09:41:40 -0400
-Received: from bombadil.infradead.org ([198.137.202.133]:51718 "EHLO
+        id S1726541AbgCQNof (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 17 Mar 2020 09:44:35 -0400
+Received: from bombadil.infradead.org ([198.137.202.133]:55880 "EHLO
         bombadil.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726082AbgCQNlk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Mar 2020 09:41:40 -0400
+        with ESMTP id S1726521AbgCQNoe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Mar 2020 09:44:34 -0400
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
         :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
         Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=gbv7y7bVNyeKz7zfGV6EEYdTLGLit1jz1j4W2R6e7tg=; b=DxX6ePvyP+8VT3YwCSYuHRh0VU
-        xxCpngerlHkbZaGsEDHGpuZnEZjF0baD4/ZJmGPR3I7/VDeAG0sBleqGDvuIS93/KgNGaqJESvuZ4
-        7xb2NtJswsFLDCeE0o5IydbgEHnmknig4boIEvwos9tzz19Zofe1nopsdANBLmxmMxUx3zZpMj8wI
-        Cd1Vych8G42nd/pP0mzeLgqjw60FEmkkjH/QpHjdFbh3C6xCElPChlfRP9Up9n+Ddb4Jm3hzCO7jC
-        gJLmsdMVYH5LW8Dkv8V6rBxE9VR4hd0tNLAuCRu2G5Ss0v1wiP2jm2W0csM506Oy/C5Dnql6tSmXx
-        T+/NrheQ==;
+        bh=Ufve2virW4ALgDJ+q7Wgs5h7YmbZzdya8zKc7ZzwdaA=; b=bA9tcrXOdGO7zm4QPXm0NQIhPJ
+        iT8es212NFAEYGvMn25QKCRoLijX6QJ3tPkM9rH0xvghg/j5gDwENtEByC10w52MtXlmgZGaqp1uF
+        5qjBNHmToG33CgyhF/eZTLEusW8nMypdAC6Rr2VH2GAUy4JNmTwhAgd/uY/iwKbQqRih1WCtsAXtB
+        1YouUItWWeL8E3EbB1nquIH4b3F+eqwbfWdrLiS+slrAaa38pvrJIrHDJA7WFZFsFRHzHGZIOyDAG
+        7KSapjyEpaepBJaDcowfQEUU+CrlptdOY1hAj67TG0piwAIBNskmThDEdN/rTYX62uRT0klCRy3by
+        cmEgE5PA==;
 Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1jECTT-0001iF-Kg; Tue, 17 Mar 2020 13:41:39 +0000
-Date:   Tue, 17 Mar 2020 06:41:39 -0700
+        id 1jECWI-0002se-IW; Tue, 17 Mar 2020 13:44:34 +0000
+Date:   Tue, 17 Mar 2020 06:44:34 -0700
 From:   Christoph Hellwig <hch@infradead.org>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Hannes Reinecke <hare@suse.com>,
-        "James E.J. Bottomley" <jejb@linux.ibm.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        linux-scsi@vger.kernel.org
-Subject: Re: [PATCH 07/42] docs: scsi: convert aic79xx.txt to ReST
-Message-ID: <20200317134139.GA30968@infradead.org>
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
+Subject: Re: [PATCH 31/42] docs: scsi: convert scsi_mid_low_api.txt to ReST
+Message-ID: <20200317134434.GA10514@infradead.org>
 References: <cover.1583136624.git.mchehab+huawei@kernel.org>
- <e8a40337a2173f028c9ac569d3d71fd880f4fab5.1583136624.git.mchehab+huawei@kernel.org>
+ <881e7741dfed5d6f5f73e1dfc2826b200b8604aa.1583136624.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <e8a40337a2173f028c9ac569d3d71fd880f4fab5.1583136624.git.mchehab+huawei@kernel.org>
+In-Reply-To: <881e7741dfed5d6f5f73e1dfc2826b200b8604aa.1583136624.git.mchehab+huawei@kernel.org>
 X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Much of this file just duplicates the kerneldoc comments in the source
+files.  IF you convert it to rest it should reference those instead of
+duplicating them.
 
-If you touch this please remove the obsolete version history, and the
-very out of data version information.  Same for aic7xxx and probably
-a few other drivers as well.
+Then again I'm not sure this file is useful at all any more..
