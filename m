@@ -2,63 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 50D1418888F
-	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2020 16:06:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 94A4C1889F0
+	for <lists+linux-doc@lfdr.de>; Tue, 17 Mar 2020 17:13:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726836AbgCQPF6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 17 Mar 2020 11:05:58 -0400
-Received: from mail.kernel.org ([198.145.29.99]:46828 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726388AbgCQPF6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 17 Mar 2020 11:05:58 -0400
-Received: from coco.lan (ip5f5ad4e9.dynamic.kabel-deutschland.de [95.90.212.233])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 2B69F20714;
-        Tue, 17 Mar 2020 15:05:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1584457557;
-        bh=OwU2LE2IoKg+lQxkLtb4DQDIXWAPOFBX7/UD8iAQLuE=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=TY5dXTUF30PZED5B2tekjznH/47LJBKMu3UYOQvJ6y9LH/t1q+B9wQAgIs8pJFzeD
-         jOAKDfKMaN5mdCSrRptFDJmNjIiH1TizYi6bByP5sF5hgXSTzfRfkPOvb6Ywr/7Sss
-         gxGsStTVt0uXRovp3n3GxWMfRaq7I5UQeLrhazZA=
-Date:   Tue, 17 Mar 2020 16:05:49 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Wolfram Sang <wsa@the-dreams.de>
+        id S1726521AbgCQQND convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Tue, 17 Mar 2020 12:13:03 -0400
+Received: from relay10.mail.gandi.net ([217.70.178.230]:36951 "EHLO
+        relay10.mail.gandi.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726016AbgCQQND (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 17 Mar 2020 12:13:03 -0400
+Received: from xps13 (unknown [91.224.148.103])
+        (Authenticated sender: miquel.raynal@bootlin.com)
+        by relay10.mail.gandi.net (Postfix) with ESMTPSA id D937F240008;
+        Tue, 17 Mar 2020 16:12:57 +0000 (UTC)
+Date:   Tue, 17 Mar 2020 17:12:56 +0100
+From:   Miquel Raynal <miquel.raynal@bootlin.com>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-i2c@vger.kernel.org
-Subject: Re: [PATCH 13/17] i2c: include/linux/i2c.h: fix a doc warning
-Message-ID: <20200317160549.3c23bbda@coco.lan>
-In-Reply-To: <20200317150322.GB1134@ninjato>
-References: <cover.1584456635.git.mchehab+huawei@kernel.org>
-        <24cbf9166b21531186e5b6d37a3f9201f957abef.1584456635.git.mchehab+huawei@kernel.org>
-        <20200317150322.GB1134@ninjato>
-X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        Thierry Reding <thierry.reding@gmail.com>,
+        Uwe =?UTF-8?B?S2xlaW5lLUvDtm5pZw==?= 
+        <u.kleine-koenig@pengutronix.de>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Zhang Rui <rui.zhang@intel.com>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Amit Kucheria <amit.kucheria@verdurent.com>,
+        Ben Peled <bpeled@marvell.com>,
+        Gregory CLEMENT <gregory.clement@bootlin.com>,
+        linux-pwm@vger.kernel.org, linux-gpio@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-pm@vger.kernel.org
+Subject: Re: [PATCH 05/12] docs: dt: fix references to
+ ap806-system-controller.txt
+Message-ID: <20200317171256.7d56dcd6@xps13>
+In-Reply-To: <cf60ef88712e4f46f4e4bf40b2c646451d921827.1584450500.git.mchehab+huawei@kernel.org>
+References: <cover.1584450500.git.mchehab+huawei@kernel.org>
+        <cf60ef88712e4f46f4e4bf40b2c646451d921827.1584450500.git.mchehab+huawei@kernel.org>
+Organization: Bootlin
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Tue, 17 Mar 2020 16:03:22 +0100
-Wolfram Sang <wsa@the-dreams.de> escreveu:
+Hi Mauro,
 
-> On Tue, Mar 17, 2020 at 03:54:22PM +0100, Mauro Carvalho Chehab wrote:
-> > Don't let non-letters inside a literal block without escaping it, as
-> > the toolchain would mis-interpret it:
-> > 
-> > ./include/linux/i2c.h:518: WARNING: Inline strong start-string without end-string.
-> > 
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>  
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote on Tue, 17 Mar
+2020 14:10:44 +0100:
+
+> ap806-system-controller.txt was renamed to ap80x-system-controller.txt.
 > 
-> Shall I take this via I2C?
+> Update its references accordingly.
+> 
+> Fixes: 2537831bbc19 ("dt-bindings: ap80x: replace AP806 with AP80x")
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
 
-Yeah, feel free to pick it. The patches on this series are pretty
-much independent from the others.
+Reviewed-by: Miquel Raynal <miquel.raynal@bootlin.com>
 
 Thanks,
-Mauro
+Miquèl
