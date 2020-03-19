@@ -2,18 +2,18 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 38DA218AAEA
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Mar 2020 04:01:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6455B18AB1A
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Mar 2020 04:21:53 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726623AbgCSDBN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Mar 2020 23:01:13 -0400
-Received: from m17617.mail.qiye.163.com ([59.111.176.17]:54506 "EHLO
-        m17617.mail.qiye.163.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726596AbgCSDBN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Mar 2020 23:01:13 -0400
-Received: from lcc-VirtualBox.vivo.xyz (unknown [58.251.74.226])
-        by m17617.mail.qiye.163.com (Hmail) with ESMTPA id 85633261A91;
-        Thu, 19 Mar 2020 11:01:00 +0800 (CST)
+        id S1726623AbgCSDVw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Mar 2020 23:21:52 -0400
+Received: from m177134.mail.qiye.163.com ([123.58.177.134]:47524 "EHLO
+        m177134.mail.qiye.163.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726596AbgCSDVw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Mar 2020 23:21:52 -0400
+Received: from lcc-VirtualBox.vivo.xyz (unknown [58.251.74.227])
+        by m17617.mail.qiye.163.com (Hmail) with ESMTPA id 35C64261B7F;
+        Thu, 19 Mar 2020 11:21:04 +0800 (CST)
 From:   Chucheng Luo <luochucheng@vivo.com>
 To:     Harry Wei <harryxiyou@gmail.com>,
         Alex Shi <alex.shi@linux.alibaba.com>,
@@ -21,19 +21,19 @@ To:     Harry Wei <harryxiyou@gmail.com>,
         Chucheng Luo <luochucheng@vivo.com>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
 Cc:     kernel@vivo.com
-Subject: [PATCH v2] Translate Documentation/filesystems/debugfs.txt into Chinese
-Date:   Thu, 19 Mar 2020 11:00:25 +0800
-Message-Id: <20200319030039.29006-1-luochucheng@vivo.com>
+Subject: [PATCH v3] Translate Documentation/filesystems/debugfs.txt into Chinese
+Date:   Thu, 19 Mar 2020 11:20:43 +0800
+Message-Id: <20200319032057.29833-1-luochucheng@vivo.com>
 X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
 Content-Type: text/plain; charset=y
 Content-Transfer-Encoding: 8bit
-X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZTlVMS0JLS0tKSktNSU1JSVlXWShZQU
+X-HM-Spam-Status: e1kfGhgUHx5ZQUlXWQgYFAkeWUFZTVVDS0tCQkJNT0pPSkNPTVlXWShZQU
         hPN1dZLVlBSVdZCQ4XHghZQVk1NCk2OjckKS43PlkG
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PzY6PRw*HjgwHisUUSw9SRET
-        AwJPFE9VSlVKTkNPTkNNQ01LQkhOVTMWGhIXVRcOFBgTDhgTHhUcOw0SDRRVGBQWRVlXWRILWUFZ
-        TkNVSU5KVUxPVUlJTVlXWQgBWUFKSElPSTcG
-X-HM-Tid: 0a70f0bca9059375kuws85633261a91
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PBQ6HQw6MzgwMCtRUVFRLzFI
+        DBgaC0pVSlVKTkNPTkNDS01PTEpJVTMWGhIXVRcOFBgTDhgTHhUcOw0SDRRVGBQWRVlXWRILWUFZ
+        TkNVSU5KVUxPVUlJTFlXWQgBWUFKSEhDQzcG
+X-HM-Tid: 0a70f0cf06ed9375kuws35c64261b7f
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
@@ -42,17 +42,17 @@ X-Mailing-List: linux-doc@vger.kernel.org
 Translate debugfs.txt into Chinese and link it to the index.
 
 Signed-off-by: Chucheng Luo <luochucheng@vivo.com>
-Acked-by: Jonathan Corbet<corbet@lwn.net>
+Acked-by: Jonathan Corbet <corbet@lwn.net>
 ---
  .../zh_CN/filesystems/debugfs.rst             | 257 ++++++++++++++++++
- .../translations/zh_CN/filesystems/index.rst  |  19 ++
- Documentation/translations/zh_CN/index.rst    |   1 +
- 3 files changed, 277 insertions(+)
- create mode 100755 Documentation/translations/zh_CN/filesystems/debugfs.rst
- create mode 100755 Documentation/translations/zh_CN/filesystems/index.rst
+ .../translations/zh_CN/filesystems/index.rst  |  21 ++
+ Documentation/translations/zh_CN/index.rst    |   2 +
+ 3 files changed, 280 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/filesystems/debugfs.rst
+ create mode 100644 Documentation/translations/zh_CN/filesystems/index.rst
 
 diff --git a/Documentation/translations/zh_CN/filesystems/debugfs.rst b/Documentation/translations/zh_CN/filesystems/debugfs.rst
-new file mode 100755
+new file mode 100644
 index 000000000000..02f639445d3d
 --- /dev/null
 +++ b/Documentation/translations/zh_CN/filesystems/debugfs.rst
@@ -315,11 +315,13 @@ index 000000000000..02f639445d3d
 +注意：
 +[1] http://lwn.net/Articles/309298/
 diff --git a/Documentation/translations/zh_CN/filesystems/index.rst b/Documentation/translations/zh_CN/filesystems/index.rst
-new file mode 100755
-index 000000000000..79b6c20f9575
+new file mode 100644
+index 000000000000..3a7f5233767d
 --- /dev/null
 +++ b/Documentation/translations/zh_CN/filesystems/index.rst
-@@ -0,0 +1,19 @@
+@@ -0,0 +1,21 @@
++.. SPDX-License-Identifier: GPL-2.0
++
 +===============================
 +Linux 内核中的文件系统
 +===============================
@@ -340,10 +342,15 @@ index 000000000000..79b6c20f9575
 +
 +   debugfs
 diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
-index d3165535ec9e..76850a5dd982 100644
+index d3165535ec9e..770f886d081c 100644
 --- a/Documentation/translations/zh_CN/index.rst
 +++ b/Documentation/translations/zh_CN/index.rst
-@@ -14,6 +14,7 @@
+@@ -1,3 +1,4 @@
++.. SPDX-License-Identifier: GPL-2.0
+ .. raw:: latex
+ 
+ 	\renewcommand\thesection*
+@@ -14,6 +15,7 @@
     :maxdepth: 2
  
     process/index
