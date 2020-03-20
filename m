@@ -2,98 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9E3BC18D271
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2020 16:11:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E8DA018D2E2
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2020 16:28:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726954AbgCTPLH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Mar 2020 11:11:07 -0400
-Received: from mail.kernel.org ([198.145.29.99]:56046 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726913AbgCTPLH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 20 Mar 2020 11:11:07 -0400
-Received: from mail.kernel.org (ip5f5ad4e9.dynamic.kabel-deutschland.de [95.90.212.233])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id A31032072C;
-        Fri, 20 Mar 2020 15:11:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1584717066;
-        bh=wudnCbbJkjczxJlVMnm2x1ea/nxbRMb1+tCH6Lys7I0=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Nd3IfO1Jz3ojOLpMXR8IcWgatHz1bSFvGmD3lf26kmG0hyvaeI27BhRWgoKQvJ02n
-         aKePetfzIEYKee/x3WlS4K37C6KIsgCULzuH+UIzjPRFjTNuv0S0bX4BWb/zeaNa6U
-         LNcpnFxFqBQtDet+MgrYxPVjzTP8r8afTfGpnf+w=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1jFJIe-000ukj-Kb; Fri, 20 Mar 2020 16:11:04 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+        id S1727060AbgCTP2b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Mar 2020 11:28:31 -0400
+Received: from Galois.linutronix.de ([193.142.43.55]:36270 "EHLO
+        Galois.linutronix.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727049AbgCTP2b (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Mar 2020 11:28:31 -0400
+Received: from p5de0bf0b.dip0.t-ipconnect.de ([93.224.191.11] helo=nanos.tec.linutronix.de)
+        by Galois.linutronix.de with esmtpsa (TLS1.2:DHE_RSA_AES_256_CBC_SHA256:256)
+        (Exim 4.80)
+        (envelope-from <tglx@linutronix.de>)
+        id 1jFJZQ-0006lF-2N; Fri, 20 Mar 2020 16:28:24 +0100
+Received: by nanos.tec.linutronix.de (Postfix, from userid 1000)
+        id 8D8FC100375; Fri, 20 Mar 2020 16:28:23 +0100 (CET)
+From:   Thomas Gleixner <tglx@linutronix.de>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v2 2/2] docs: conf.py: avoid thousands of duplicate label warning on Sphinx
-Date:   Fri, 20 Mar 2020 16:11:03 +0100
-Message-Id: <74f4d8d91c648d7101c45b4b99cc93532f4dadc6.1584716446.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.24.1
-In-Reply-To: <cover.1584716446.git.mchehab+huawei@kernel.org>
-References: <cover.1584716446.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Darren Hart <dvhart@infradead.org>
+Subject: Re: [PATCH 04/17] kernel: futex.c: get rid of a docs build warning
+In-Reply-To: <aab1052263e340a3eada5522f32be318890314a1.1584456635.git.mchehab+huawei@kernel.org>
+References: <cover.1584456635.git.mchehab+huawei@kernel.org> <aab1052263e340a3eada5522f32be318890314a1.1584456635.git.mchehab+huawei@kernel.org>
+Date:   Fri, 20 Mar 2020 16:28:23 +0100
+Message-ID: <87h7yj59m0.fsf@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Linutronix-Spam-Score: -1.0
+X-Linutronix-Spam-Level: -
+X-Linutronix-Spam-Status: No , -1.0 points, 5.0 required,  ALL_TRUSTED=-1,SHORTCIRCUIT=-0.0001
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The autosectionlabel extension is nice, as it allows to refer to
-a section by its name without requiring any extra tag to create
-a reference name.
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
 
-However, on its default, it has two serious problems:
+The subject prefix for this is: 'futex:'
 
-1) the namespace is global. So, two files with different
-   "introduction" section would create a label with the
-   same name. This is easily solvable by forcing the extension
-   to prepend the file name with:
+> Adjust whitespaces and blank lines in order to get rid of this:
+>
+> 	./kernel/futex.c:491: WARNING: Definition list ends without a blank line; unexpected unindent.
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  kernel/futex.c | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/kernel/futex.c b/kernel/futex.c
+> index 67f004133061..dda6ddbc2e7d 100644
+> --- a/kernel/futex.c
+> +++ b/kernel/futex.c
+> @@ -486,7 +486,8 @@ static u64 get_inode_sequence_number(struct inode *inode)
+>   * The key words are stored in @key on success.
+>   *
+>   * For shared mappings (when @fshared), the key is:
+> - *   ( inode->i_sequence, page->index, offset_within_page )
+> + * ( inode->i_sequence, page->index, offset_within_page )
 
-	autosectionlabel_prefix_document = True
+Sigh. Is there no better way to make this look sane both in the file and
+in the docs?
 
-2) It doesn't work hierarchically. So, if there are two level 1
-   sessions (let's say, one labeled "open" and another one "ioctl")
-   and both have a level 2 "synopsis" label, both section 2 will
-   have the same identical name.
+Thanks,
 
-   Currently, there's no way to tell Sphinx to create an
-   hierarchical reference like:
+        tglx
 
-		open / synopsis
-		ioctl / synopsis
-
-  This causes around 800 warnings. So, the fix should be to
-  not let autosectionlabel to produce references for anything
-  that it is not at a chapter level within any doc, with:
-
-	autosectionlabel_maxdepth = 2
-
-Fixes: 58ad30cf91f0 ("docs: fix reference to core-api/namespaces.rst")
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/conf.py | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index fa2bfcd6df1d..9ae8e9abf846 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -40,6 +40,10 @@ extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain',
-               'kfigure', 'sphinx.ext.ifconfig', 'automarkup',
-               'maintainers_include', 'sphinx.ext.autosectionlabel' ]
- 
-+# Ensure that autosectionlabel will produce unique names
-+autosectionlabel_prefix_document = True
-+autosectionlabel_maxdepth = 2
-+
- # The name of the math extension changed on Sphinx 1.4
- if (major == 1 and minor > 3) or (major > 1):
-     extensions.append("sphinx.ext.imgmath")
--- 
-2.24.1
 
