@@ -2,70 +2,54 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id A226218DB8E
-	for <lists+linux-doc@lfdr.de>; Sat, 21 Mar 2020 00:10:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 06CA018DB97
+	for <lists+linux-doc@lfdr.de>; Sat, 21 Mar 2020 00:15:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726997AbgCTXKk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Mar 2020 19:10:40 -0400
-Received: from ms.lwn.net ([45.79.88.28]:44012 "EHLO ms.lwn.net"
+        id S1726801AbgCTXPe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Mar 2020 19:15:34 -0400
+Received: from ms.lwn.net ([45.79.88.28]:44072 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726955AbgCTXKk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 20 Mar 2020 19:10:40 -0400
+        id S1726773AbgCTXPd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 20 Mar 2020 19:15:33 -0400
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 5F6412D6;
-        Fri, 20 Mar 2020 23:10:38 +0000 (UTC)
-Date:   Fri, 20 Mar 2020 17:10:20 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id 43AF5537;
+        Fri, 20 Mar 2020 23:15:33 +0000 (UTC)
+Date:   Fri, 20 Mar 2020 17:15:32 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        Paul Mackerras <paulus@samba.org>,
-        Madhuparna Bhowmik <madhuparnabhowmik04@gmail.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Ricardo Ribalda Delgado <ribalda@kernel.org>,
-        Luca Ceresoli <luca@lucaceresoli.net>,
-        dmaengine@vger.kernel.org, Matthias Maennich <maennich@google.com>,
-        Harry Wei <harryxiyou@gmail.com>, x86@kernel.org,
-        ecryptfs@vger.kernel.org, Jakub Kicinski <kuba@kernel.org>,
-        target-devel@vger.kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Hans Verkuil <hverkuil-cisco@xs4all.nl>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Johannes Berg <johannes.berg@intel.com>,
-        Jacopo Mondi <jacopo@jmondi.org>,
-        Tyler Hicks <code@tyhicks.com>, Vinod Koul <vkoul@kernel.org>,
+To:     =?UTF-8?B?572X5qWa5oiQ?= <luochucheng@vivo.com>
+Cc:     Harry Wei <harryxiyou@gmail.com>,
         Alex Shi <alex.shi@linux.alibaba.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-scsi@vger.kernel.org,
-        Michael Ellerman <mpe@ellerman.id.au>, netdev@vger.kernel.org,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linuxppc-dev@lists.ozlabs.org, Borislav Petkov <bp@alien8.de>
-Subject: Re: [PATCH v2 0/2] Don't generate thousands of new warnings when
- building docs
-Message-ID: <20200320171020.78f045c5@lwn.net>
-In-Reply-To: <cover.1584716446.git.mchehab+huawei@kernel.org>
-References: <cover.1584716446.git.mchehab+huawei@kernel.org>
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        kernel@vivo.com
+Subject: Re: [PATCH v3] Translate Documentation/filesystems/debugfs.txt into
+ Chinese
+Message-ID: <20200320171532.5c1867e7@lwn.net>
+In-Reply-To: <AJMA1gBkCACQq0nG1FQtEapJ.3.1584675294189.Hmail.luochucheng@vivo.com>
+References: <20200319081307.14034870@lwn.net>
+        <AJMA1gBkCACQq0nG1FQtEapJ.3.1584675294189.Hmail.luochucheng@vivo.com>
 Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 20 Mar 2020 16:11:01 +0100
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+On Fri, 20 Mar 2020 11:34:54 +0800 (GMT+08:00)
+罗楚成 <luochucheng@vivo.com> wrote:
 
-> This small series address a regression caused by a new patch at
-> docs-next (and at linux-next).
+> OK， I mistook an answer from you as acked-by.
+> I won't use this tag next time.
 
-I don't know how I missed that mess, sorry.  I plead distracting times or
-something like that.  Heck, I think I'll blame everything on the plague
-for at least the next few weeks.
+Please, never add a tag like that unless the person named explicitly tells
+you to.
 
-Anyway, I've applied this, thanks for cleaning it up.
+Meanwhile, does the v3 you sent reflect the feedback from Alex Shi, or
+should I wait for a v4?
+
+Thanks,
 
 jon
