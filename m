@@ -2,166 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B45E818D489
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2020 17:34:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2C45918D4A8
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2020 17:40:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727534AbgCTQeX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Mar 2020 12:34:23 -0400
-Received: from userp2130.oracle.com ([156.151.31.86]:46694 "EHLO
-        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727163AbgCTQeU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Mar 2020 12:34:20 -0400
-Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
-        by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 02KGWwja015679;
-        Fri, 20 Mar 2020 16:34:15 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=corp-2020-01-29;
- bh=lwCAdVvaGEe0Pa0FjqbKPwUgNu+L4ZQODXgeLN8IzFY=;
- b=tg40sFNc+kyRodTAQWHhGeCxLpb2Mwn/PVsF8Tm1FJveCRlKyJvN87h1qCfMX3+f3d0t
- cJNU0djEayhDRcgStz595iZNkojXsIgZf1qrRxHl5bySaOvYlaB4nCg6jgPWJJlyFo31
- VF9GiorqfWxoeTtlQhzsrSJ9BB8jKP9DrQeYC9ouT5Mu1R3DSgdIEwI85gfjEg7s+vos
- 7oBsXcsmnwLie/4MQkR8bUwvD+1p1km5xnrNbY4oxT62XSP/TYXiACM6RY+2CB/DZaoS
- WN31HYWEKtvr4qthFWxozYh8eIyJ6bgJ98G14H/eNZGMpcJ+LFF+YNknDiRVh7mPa4up 1A== 
-Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
-        by userp2130.oracle.com with ESMTP id 2yrpprpq64-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 20 Mar 2020 16:34:15 +0000
-Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
-        by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 02KGWp87007638;
-        Fri, 20 Mar 2020 16:34:14 GMT
-Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
-        by aserp3030.oracle.com with ESMTP id 2ys8tydbxb-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 20 Mar 2020 16:34:14 +0000
-Received: from abhmp0004.oracle.com (abhmp0004.oracle.com [141.146.116.10])
-        by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 02KGYDYl007993;
-        Fri, 20 Mar 2020 16:34:13 GMT
-Received: from [10.159.140.128] (/10.159.140.128)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Fri, 20 Mar 2020 09:34:13 -0700
-Subject: Re: [PATCH] docs: Prefer 'python3' when building htmldocs
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     corbet@lwn.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <1584658842-778-1-git-send-email-victor.erminpour@oracle.com>
- <20200320121505.579fb6cc@coco.lan>
-From:   Victor Erminpour <victor.erminpour@oracle.com>
-Organization: Oracle America
-Message-ID: <a9961edf-e655-4ee0-163a-01907f7ac634@oracle.com>
-Date:   Fri, 20 Mar 2020 09:33:40 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.5.0
+        id S1727524AbgCTQkI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Mar 2020 12:40:08 -0400
+Received: from mail-wm1-f67.google.com ([209.85.128.67]:54287 "EHLO
+        mail-wm1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727269AbgCTQkH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Mar 2020 12:40:07 -0400
+Received: by mail-wm1-f67.google.com with SMTP id f130so6046156wmf.4
+        for <linux-doc@vger.kernel.org>; Fri, 20 Mar 2020 09:40:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
+        bh=gl8m333ia74OFZpNmB4o7kIcYlvQPFpoCsxlN0OXKb0=;
+        b=kNbuTShbw0IsSddVR16CskX9C06Ns3To2pv3t8zoQaDIVXEG3b70sK4t/FVJP15G5b
+         VGpDNjPP4wGCiR+EUBHVqJjOTl+8QscizeaDhWif9uTvhk1nDvdHImI1NK5AoxlnCy0j
+         n9oc49FHwt18TZouwE8SbjjPrFVevxob7LsR+s5wtun0QKcC95tIeof8wr26VPP0qnJ+
+         7DNotqBY8HmGVhlN4UEJRXGXn0hk2KXilc7f5hsUwbXbf2IYZPCNulD8iJpEOJc2oRtr
+         PtPy4rSSagV03aEH7ppWiqC5bGH9zt/GfKt8Y3sApVwh/xDe/VpU2+K8Yl8qfEakEuRI
+         ZIvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:sender:from:date
+         :message-id:subject:to;
+        bh=gl8m333ia74OFZpNmB4o7kIcYlvQPFpoCsxlN0OXKb0=;
+        b=CXWTlTGUX2GiAyWWalA48Xcwro81jY/sTGhg/KKTf5XDTbtDL+AZTTgosrl5/OYvGN
+         aO5ffXtrhPqZ5AsF6mDCsaL8hA8BfuadKn6o/iMAJgDpynNeHxHX6AHlQDzMGWCWqkAm
+         DvJYN20oBLoTyrwaJqrPYjQqv+TXBWJHazgiZRGlfdBA6t6Yrs+bDkXngLpFOW7S8U+A
+         G4b4MBdlKsJCcb2DNT/9VYdrv7TStiBSGv+RqS+0fqTQJDNvUwFOny99qRXJqUynnaHg
+         swxsyDgLy8vJ/GFtynZaTzO5ezXrfG0+7aIbMUvj4MxEvQ5uaHntk/2zX5U7Q2+1Qdb8
+         daMg==
+X-Gm-Message-State: ANhLgQ0DX7hLBrNY2r5sI1lUHIP1xCBku1klR0TG1jDisnAYiZtIF8v/
+        JxuZls/Ll/ajgJ4pDH/6+erhC6ryeOCDxcvgj6U=
+X-Google-Smtp-Source: ADFU+vun8LzndaAaMGSbzLFWuoHjP/a//v7fTHQFK5usPtGJwIpi6fos+vcOoC94XZ5NI01Scg+c2G5c2P2zU3JRam4=
+X-Received: by 2002:a1c:9ecb:: with SMTP id h194mr11768952wme.49.1584722403977;
+ Fri, 20 Mar 2020 09:40:03 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200320121505.579fb6cc@coco.lan>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9566 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 phishscore=0 mlxscore=0
- malwarescore=0 suspectscore=0 mlxlogscore=999 spamscore=0 bulkscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
- definitions=main-2003200067
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9566 signatures=668685
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 bulkscore=0
- suspectscore=0 lowpriorityscore=0 phishscore=0 adultscore=0 clxscore=1011
- impostorscore=0 priorityscore=1501 spamscore=0 mlxlogscore=999 mlxscore=0
- classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
- definitions=main-2003200067
+Reply-To: amahakim52@gmail.com
+Received: by 2002:a5d:5104:0:0:0:0:0 with HTTP; Fri, 20 Mar 2020 09:40:03
+ -0700 (PDT)
+From:   "Rev.Wright Watson" <azarara91@gmail.com>
+Date:   Fri, 20 Mar 2020 17:40:03 +0100
+X-Google-Sender-Auth: vJJkq6yrrjXXW3E162Z00Z9ZL0M
+Message-ID: <CAPmUj7JSQEaBW=GnFqdpU8UnP3DYHx1fggsLKxrJ=__fbQtZ9w@mail.gmail.com>
+Subject: Dear Beloved,
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Dear Beloved,
 
+I'm Reverend Wright Watson, I was born in USA, 1945, I was ordained
+into the Catholic Priesthood.
 
-On 3/20/20 4:15 AM, Mauro Carvalho Chehab wrote:
-> Em Thu, 19 Mar 2020 16:00:42 -0700
-> Victor Erminpour <victor.erminpour@oracle.com> escreveu:
-> 
->> Prefer 'python3' and 'sphinx-build-3' when building htmldocs.
->> Building htmldocs fails on systems that don't have 'python'
->> and 'sphinx-build' installed, but do have 'python3' and
->> 'sphinx-build-3' available.
->>
->> Signed-off-by: Victor Erminpour <victor.erminpour@oracle.com>
->> ---
->>   Documentation/Makefile | 15 ++++++++++++++-
->>   1 file changed, 14 insertions(+), 1 deletion(-)
->>
->> diff --git a/Documentation/Makefile b/Documentation/Makefile
->> index d77bb607aea4..00c400523e15 100644
->> --- a/Documentation/Makefile
->> +++ b/Documentation/Makefile
->> @@ -11,6 +11,7 @@ endif
->>   
->>   # You can set these variables from the command line.
->>   SPHINXBUILD   = sphinx-build
->> +SPHINXBUILD3  = sphinx-build-3
-> 
-> This will very likely break on some distros. For example, Fedora 31 with a
-> venv configured environment won't have a "sphinx-build-3" program.
->
+Please take your time to read this message, although we have never met
+before, this is no spam, It's a real message sent to you. I know also
+that you will be amazed at the level of trust that I am willing to
+place in a person that I have never seen nor spoken with. If I can
+receive favor from someone I barely know, its not bad entrusting this
+project to unknown person as long as my spirit directed me to you.
 
-Hi Mauro,
+I have been a catholic priest for over 22 years. I spent about 10
+years serving at Africa, Burkina Faso to be precise, I spend most time
+in Ouagadougou Cathedral.
+Presently, I had a heart surgery on the 23-11-2018 and the Doctors
+have informed me that I cannot live longer; I had a serious bleeding
+after the operation.
+Before I left Ouagadougou to my country for the surgery, a priest
+friend of mine visited me from Netherlands with three companion, when
+they went back, one among his companion Transferred 10M$ in my
+personal account with Bank of Africa and advised that I use the money
+to help the poor, handicaps and less privileges because he saw the
+level hardship then.
 
-Fair enough, I've noticed that some distros provide a symlink from
-sphinx-build to sphinx-build-3, but it's not guaranteed for every
-distro (if they have python3 at all).
+Because of my present health condition, I cannot live to proceed with
+the projects, therefore, I have decided to appoint you to reclaim the
+money which total sum of $10,970,000.00 (Ten million Nine Hundred and
+seventy Thousand US DOLLARS).
 
+I want you to use this sum to make the world a better place for the
+poor and less privileged, help the needy and also help your family
+members.
 
-> I have already a patchset addressing this. I'm testing it on several
-> different distros and versions.
-> 
-> My plan is to submit the patch series for it after the merge window. If you
-> want to do a sneak pick, there's a version of the patch series on my
-> experimental tree (probably not the latest version):
-> 
-> 	https://urldefense.com/v3/__https://git.linuxtv.org/mchehab/experimental.git/log/?h=random_doc_fixes__;!!GqivPVa7Brio!NJwqcbN8vCCZcaL8CGkgL27pxL0x4qCMpoQm6riFdb0Jo9_KuD6vROdjw_4owcdvncvO$
-> 
+I took this decision because I was raised in an Orphanage so I don't
+have relatives and presently, I'm still in the hospital, where I am
+undergoing treatment. That's why I have decided to contact you so that
+you can contact my account manager in Bank of Africa, reclaim the
+money and make good use of it.
 
-Valeu, aquele abraço!
+then you can contact me through private email
+addres(RevWrightWatson@yandex.com)
 
---Victor
-
-
-> 
->>   SPHINXOPTS    =
->>   SPHINXDIRS    = .
->>   _SPHINXDIRS   = $(patsubst $(srctree)/Documentation/%/index.rst,%,$(wildcard $(srctree)/Documentation/*/index.rst))
->> @@ -61,11 +62,23 @@ loop_cmd = $(echo-cmd) $(cmd_$(1)) || exit;
->>   # $5 reST source folder relative to $(srctree)/$(src),
->>   #    e.g. "media" for the linux-tv book-set at ./Documentation/media
->>   
->> +HAVE_PYTHON3 := $(shell if which $(PYTHON3) >/dev/null 2>&1; then echo 1; else echo 0; fi)
->> +HAVE_SPHINX3 := $(shell if which $(SPHINXBUILD3) >/dev/null 2>&1; then echo 1; else echo 0; fi)
->> +PYTHON_BIN = $(PYTHON)
->> +
->> +# If we have both python3 and sphinx-build-3,
->> +# prefer python3 over python.
->> +ifeq ($(HAVE_PYTHON3),1)
->> +    ifeq ($(HAVE_SPHINX3),1)
->> +        PYTHON_BIN = $(PYTHON3)
->> +    endif
->> +endif
->> +
->>   quiet_cmd_sphinx = SPHINX  $@ --> file://$(abspath $(BUILDDIR)/$3/$4)
->>         cmd_sphinx = $(MAKE) BUILDDIR=$(abspath $(BUILDDIR)) $(build)=Documentation/media $2 && \
->>   	PYTHONDONTWRITEBYTECODE=1 \
->>   	BUILDDIR=$(abspath $(BUILDDIR)) SPHINX_CONF=$(abspath $(srctree)/$(src)/$5/$(SPHINX_CONF)) \
->> -	$(PYTHON) $(srctree)/scripts/jobserver-exec \
->> +	$(PYTHON_BIN) $(srctree)/scripts/jobserver-exec \
->>   	$(SHELL) $(srctree)/Documentation/sphinx/parallel-wrapper.sh \
->>   	$(SPHINXBUILD) \
->>   	-b $2 \
-> 
-> 
-> 
-> Thanks,
-> Mauro
-> 
-
--- 
-Victor Hugo Erminpour
-Principal Member of Technical Staff
-Oracle America
+Regards,
+Rev.Wright Watson
