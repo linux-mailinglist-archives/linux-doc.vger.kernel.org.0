@@ -2,101 +2,160 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2C45918D4A8
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2020 17:40:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F253718D4B5
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2020 17:42:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727524AbgCTQkI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Mar 2020 12:40:08 -0400
-Received: from mail-wm1-f67.google.com ([209.85.128.67]:54287 "EHLO
-        mail-wm1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727269AbgCTQkH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Mar 2020 12:40:07 -0400
-Received: by mail-wm1-f67.google.com with SMTP id f130so6046156wmf.4
-        for <linux-doc@vger.kernel.org>; Fri, 20 Mar 2020 09:40:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
-        bh=gl8m333ia74OFZpNmB4o7kIcYlvQPFpoCsxlN0OXKb0=;
-        b=kNbuTShbw0IsSddVR16CskX9C06Ns3To2pv3t8zoQaDIVXEG3b70sK4t/FVJP15G5b
-         VGpDNjPP4wGCiR+EUBHVqJjOTl+8QscizeaDhWif9uTvhk1nDvdHImI1NK5AoxlnCy0j
-         n9oc49FHwt18TZouwE8SbjjPrFVevxob7LsR+s5wtun0QKcC95tIeof8wr26VPP0qnJ+
-         7DNotqBY8HmGVhlN4UEJRXGXn0hk2KXilc7f5hsUwbXbf2IYZPCNulD8iJpEOJc2oRtr
-         PtPy4rSSagV03aEH7ppWiqC5bGH9zt/GfKt8Y3sApVwh/xDe/VpU2+K8Yl8qfEakEuRI
-         ZIvw==
+        id S1727613AbgCTQmY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Mar 2020 12:42:24 -0400
+Received: from us-smtp-delivery-74.mimecast.com ([216.205.24.74]:30593 "EHLO
+        us-smtp-delivery-74.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727278AbgCTQmX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Mar 2020 12:42:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1584722542;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=JuSmP8mzKRWutGuMEZMfymlnZMnuod1hdzuq2jOD+58=;
+        b=JW+0sg1sBQ5zmb06AXpp3FVhNNw7rmHvyXSmgjAfBZ7l7oPo93aEOb3kMZQOHBsrwZWM2R
+        +w1s7MvBjNmRcVrSdRgcY/7AbAXCpNysE5qIYr5lyH2i8rvtoencRpNvpIteDbnaNKlLjC
+        IqjKl6sV9myC+Zhs9nNniC+jekorSYs=
+Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
+ [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-171-C_Yle4jhOaWd7-yNNXxkGg-1; Fri, 20 Mar 2020 12:42:04 -0400
+X-MC-Unique: C_Yle4jhOaWd7-yNNXxkGg-1
+Received: by mail-wr1-f70.google.com with SMTP id e10so1112141wru.6
+        for <linux-doc@vger.kernel.org>; Fri, 20 Mar 2020 09:42:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to;
-        bh=gl8m333ia74OFZpNmB4o7kIcYlvQPFpoCsxlN0OXKb0=;
-        b=CXWTlTGUX2GiAyWWalA48Xcwro81jY/sTGhg/KKTf5XDTbtDL+AZTTgosrl5/OYvGN
-         aO5ffXtrhPqZ5AsF6mDCsaL8hA8BfuadKn6o/iMAJgDpynNeHxHX6AHlQDzMGWCWqkAm
-         DvJYN20oBLoTyrwaJqrPYjQqv+TXBWJHazgiZRGlfdBA6t6Yrs+bDkXngLpFOW7S8U+A
-         G4b4MBdlKsJCcb2DNT/9VYdrv7TStiBSGv+RqS+0fqTQJDNvUwFOny99qRXJqUynnaHg
-         swxsyDgLy8vJ/GFtynZaTzO5ezXrfG0+7aIbMUvj4MxEvQ5uaHntk/2zX5U7Q2+1Qdb8
-         daMg==
-X-Gm-Message-State: ANhLgQ0DX7hLBrNY2r5sI1lUHIP1xCBku1klR0TG1jDisnAYiZtIF8v/
-        JxuZls/Ll/ajgJ4pDH/6+erhC6ryeOCDxcvgj6U=
-X-Google-Smtp-Source: ADFU+vun8LzndaAaMGSbzLFWuoHjP/a//v7fTHQFK5usPtGJwIpi6fos+vcOoC94XZ5NI01Scg+c2G5c2P2zU3JRam4=
-X-Received: by 2002:a1c:9ecb:: with SMTP id h194mr11768952wme.49.1584722403977;
- Fri, 20 Mar 2020 09:40:03 -0700 (PDT)
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=JuSmP8mzKRWutGuMEZMfymlnZMnuod1hdzuq2jOD+58=;
+        b=SYvD9clP831BehsTkfOfbpVCJ2sT7LI9GpAm6Yd2wQucN206/J+NGl1RTb/uRC+Ws4
+         RFxtlJJjaL5GlQjnDB6PXWBuYmyT4XXuPchPwCV53TrLqKg9y8Vz3aGEGm1G6MHAfT7A
+         rifBP5Cgwv+Mm9/UePy3xAWfsqb4A+ZgFKijxzQeKPR1d0Gh6V/hE7yBAtDpjYeNT/hQ
+         PeSXRE9rjZBijpWLeN8veVx5ue1x2XIseaL8HXRepa+KGbllb8TGNOYRdceFIKv7EvoZ
+         GHLEpabbmqoZFQJtf9is2EOmsjo/UUkKiPS2oIUaA+d67FJsSQZ5BI54+xlvrsHyPLKS
+         6oVA==
+X-Gm-Message-State: ANhLgQ1eSgOsYqzbbiELiBPOUm8HjKr1w5lFGBLErp2pIl93yk+/xQjZ
+        0ctLocJCT28ieyUndWmoSmQjUNHbGtPg6gs/f3Dp3vfSDQdV+J3PqHU4l+GnqcsMy0jWTw617BW
+        j0jshofEewaAtGZnzMKNS
+X-Received: by 2002:a7b:c62a:: with SMTP id p10mr10969805wmk.46.1584722523071;
+        Fri, 20 Mar 2020 09:42:03 -0700 (PDT)
+X-Google-Smtp-Source: ADFU+vtkHHEonfjGBQvTJugKUJaMlAw3gGqsGRrGUr+boHYRapviCIkmO3jmDajId8xSHmrus3yopw==
+X-Received: by 2002:a7b:c62a:: with SMTP id p10mr10969692wmk.46.1584722521899;
+        Fri, 20 Mar 2020 09:42:01 -0700 (PDT)
+Received: from x1.localdomain (2001-1c00-0c0c-fe00-fc7e-fd47-85c1-1ab3.cable.dynamic.v6.ziggo.nl. [2001:1c00:c0c:fe00:fc7e:fd47:85c1:1ab3])
+        by smtp.gmail.com with ESMTPSA id s7sm9067396wro.10.2020.03.20.09.42.00
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 20 Mar 2020 09:42:01 -0700 (PDT)
+Subject: Re: [PATCH v12 03/10] firmware: Rename FW_OPT_NOFALLBACK to
+ FW_OPT_NOFALLBACK_SYSFS
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Andy Lutomirski <luto@kernel.org>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Darren Hart <dvhart@infradead.org>,
+        Andy Shevchenko <andy@infradead.org>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+        Peter Jones <pjones@redhat.com>,
+        Dave Olsthoorn <dave@bewaar.me>, x86@kernel.org,
+        platform-driver-x86@vger.kernel.org, linux-efi@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-input@vger.kernel.org
+References: <20200115163554.101315-1-hdegoede@redhat.com>
+ <20200115163554.101315-4-hdegoede@redhat.com>
+ <20200124085751.GA2957916@kroah.com>
+ <d25d5d6e-0348-b19f-539e-048cfa70d6a6@redhat.com>
+ <20200318132741.GA2794545@kroah.com>
+ <8fa336bd-339f-40e0-08fe-e6b968736679@redhat.com>
+ <20200320140243.GA636547@kroah.com>
+From:   Hans de Goede <hdegoede@redhat.com>
+Message-ID: <1107490b-0290-5b65-c392-84de0d9dbe0e@redhat.com>
+Date:   Fri, 20 Mar 2020 17:41:59 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.6.0
 MIME-Version: 1.0
-Reply-To: amahakim52@gmail.com
-Received: by 2002:a5d:5104:0:0:0:0:0 with HTTP; Fri, 20 Mar 2020 09:40:03
- -0700 (PDT)
-From:   "Rev.Wright Watson" <azarara91@gmail.com>
-Date:   Fri, 20 Mar 2020 17:40:03 +0100
-X-Google-Sender-Auth: vJJkq6yrrjXXW3E162Z00Z9ZL0M
-Message-ID: <CAPmUj7JSQEaBW=GnFqdpU8UnP3DYHx1fggsLKxrJ=__fbQtZ9w@mail.gmail.com>
-Subject: Dear Beloved,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20200320140243.GA636547@kroah.com>
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear Beloved,
+Hi,
 
-I'm Reverend Wright Watson, I was born in USA, 1945, I was ordained
-into the Catholic Priesthood.
+On 3/20/20 3:02 PM, Greg Kroah-Hartman wrote:
+> On Wed, Mar 18, 2020 at 02:56:23PM +0100, Hans de Goede wrote:
+>> Hi Greg,
+>>
+>> On 3/18/20 2:27 PM, Greg Kroah-Hartman wrote:
+>>> On Fri, Jan 24, 2020 at 10:16:48AM +0100, Hans de Goede wrote:
+>>>> Hi,
+>>>>
+>>>> On 1/24/20 9:57 AM, Greg Kroah-Hartman wrote:
+>>>>> On Wed, Jan 15, 2020 at 05:35:47PM +0100, Hans de Goede wrote:
+>>>>>> This is a preparation patch for adding a new platform fallback mechanism,
+>>>>>> which will have its own enable/disable FW_OPT_xxx option.
+>>>>>>
+>>>>>> Note this also fixes a typo in one of the re-wordwrapped comments:
+>>>>>> enfoce -> enforce.
+>>>>>>
+>>>>>> Acked-by: Luis Chamberlain <mcgrof@kernel.org>
+>>>>>> Signed-off-by: Hans de Goede <hdegoede@redhat.com>
+>>>>>
+>>>>> I've taken this in my tree for now in a quest to try to get others to
+>>>>> pay attention to this series...
+>>>>
+>>>> Thank you.
+>>>>
+>>>> As mentioned before I believe that this series is ready for merging now.
+>>>>
+>>>> Andy Lutomirski had one last change request for v12 of the second
+>>>> patch in the series, specifically to replace the loop searching for
+>>>> the prefix with a memem, but the kernel does not have memmem.
+>>>>
+>>>> Andy, are you ok with v12 as is, given that we don't have memmem ?
+>>>>
+>>>> Assuming Andy is ok with v12 as is, then to merge this we need
+>>>> to probably wait for 5.6-rc1 and then have the x86/efi folks do
+>>>> an immutable branch with the first 2 patches of the series.
+>>>
+>>> Did this every happen?  Or do I need to dump this all into my tree?
+>>
+>> Ard has done a immutable branch with just the 2 patches:
+>>
+>> https://git.kernel.org/pub/scm/linux/kernel/git/efi/efi.git/tag/?h=stable-shared-branch-for-driver-tree
+>>
+>> I did not see any mails about this being pulled / merged, but I just
+>> checked and this has landed in the tip tree 10 days ago:
+>>
+>> https://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git/log/include/linux/efi.h?h=efi/core
+>>
+>> So if you merge the stable-shared-branch-for-driver-tree tag and then
+>> merge patches 3-8 of this series (or rather 4-8 since you already
+>> merged 3 IIRC) that would be great.
+> 
+> Ok, I've merged the above branch with just the two patches, and the rest
+> of yours now, 
 
-Please take your time to read this message, although we have never met
-before, this is no spam, It's a real message sent to you. I know also
-that you will be amazed at the level of trust that I am willing to
-place in a person that I have never seen nor spoken with. If I can
-receive favor from someone I barely know, its not bad entrusting this
-project to unknown person as long as my spirit directed me to you.
+Great, thank you!
 
-I have been a catholic priest for over 22 years. I spent about 10
-years serving at Africa, Burkina Faso to be precise, I spend most time
-in Ouagadougou Cathedral.
-Presently, I had a heart surgery on the 23-11-2018 and the Doctors
-have informed me that I cannot live longer; I had a serious bleeding
-after the operation.
-Before I left Ouagadougou to my country for the surgery, a priest
-friend of mine visited me from Netherlands with three companion, when
-they went back, one among his companion Transferred 10M$ in my
-personal account with Bank of Africa and advised that I use the money
-to help the poor, handicaps and less privileges because he saw the
-level hardship then.
+> sorry this took so long.
 
-Because of my present health condition, I cannot live to proceed with
-the projects, therefore, I have decided to appoint you to reclaim the
-money which total sum of $10,970,000.00 (Ten million Nine Hundred and
-seventy Thousand US DOLLARS).
-
-I want you to use this sum to make the world a better place for the
-poor and less privileged, help the needy and also help your family
-members.
-
-I took this decision because I was raised in an Orphanage so I don't
-have relatives and presently, I'm still in the hospital, where I am
-undergoing treatment. That's why I have decided to contact you so that
-you can contact my account manager in Bank of Africa, reclaim the
-money and make good use of it.
-
-then you can contact me through private email
-addres(RevWrightWatson@yandex.com)
+No problem, I'm quite happy this is queued for 5.7 now, I was
+afraid it was going to slip to 5.8.
 
 Regards,
-Rev.Wright Watson
+
+Hans
+
