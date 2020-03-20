@@ -2,70 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C3F4118CC32
-	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2020 12:06:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 356DE18CC75
+	for <lists+linux-doc@lfdr.de>; Fri, 20 Mar 2020 12:12:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726951AbgCTLGR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 20 Mar 2020 07:06:17 -0400
-Received: from mail-oi1-f194.google.com ([209.85.167.194]:36635 "EHLO
-        mail-oi1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726970AbgCTLGR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 20 Mar 2020 07:06:17 -0400
-Received: by mail-oi1-f194.google.com with SMTP id k18so6066443oib.3
-        for <linux-doc@vger.kernel.org>; Fri, 20 Mar 2020 04:06:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=kuhba0bbR9oJup1oQ7P5tNPZ9FqBHXE57QqcfHgaIHo=;
-        b=lGbdxdtfHMH1bdxL6+rDaq8rCWBtQLZIEklwy753/vlmYfl84DAdLqhl0bz1Xovn6Z
-         c17UdKvdkWjRqdAGDQRkOnXeTC+xCHtYKvfGfi44rO4yOxxnHSzJ4bl65hBz/QLQ9rSt
-         IXl8Ao+NGm9gBTVLqWuVZlAvU4Ngr/0IYvLW70A+7XYwTY+6W3fDiICK/pCqs7glKhm/
-         RZEl2iNbdQV3YQPcN6M66qdH7/zsqu4jC4RMBwKCttzrAnSJ72Cj4p26giYvJw+lZTIw
-         8SgPaFgUuKZRFTztgo6fhe5EvmUWjVYtHKxAavBKOOk9BXELpfQ4GkoTEO74LL32fHRE
-         V0SA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=kuhba0bbR9oJup1oQ7P5tNPZ9FqBHXE57QqcfHgaIHo=;
-        b=Xm99w9e3bKoa5hYaWztjYI/6F5Qj9JCOymoC4tbleEo4U73XgPCUSikH5o9F812vbM
-         gcuZg9dUYGE4k1YqoBbljWIFmjasjQMQXv/WsoX4rTx1MWjbMwOjOD4PmGKSWcWHgkAW
-         IRe6HRR/Zg55gHqzQRSVFAOjeLXHeE4EWpOjC1m9+038rXM9eK4ifD17IsGoDqj534He
-         kQ2Z4M2s74d3EPBsj45oR0SsQ/dopGRlb0L1VoIk5/h64aPcvzcHNbmWJqdPkD7Tdki/
-         OZLkGG5IVJhedDC39BhIxm1yYKhw4p6cXEZtns65ayROYdQMQbBm01uabYB5Ua9k7Oud
-         SUiA==
-X-Gm-Message-State: ANhLgQ1kw8eqnw342GS4YbuskHgVYJOK6DPl0+U/FCuJrL1YGad7ClPx
-        88uBOUK2hD7TLLJ4h4DwXy6PmvN2d4FTx2tlQp8=
-X-Google-Smtp-Source: ADFU+vsTHxzlZi8P2eKmSVIsOYYIDf8rI8BybGXh+/wiy+xq7amPuYigrq1NgvWcq7XgwjC2G2qOZeG+mJSYKsXKNME=
-X-Received: by 2002:aca:4bc5:: with SMTP id y188mr6024703oia.9.1584702376658;
- Fri, 20 Mar 2020 04:06:16 -0700 (PDT)
+        id S1726805AbgCTLMl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 20 Mar 2020 07:12:41 -0400
+Received: from mail.kernel.org ([198.145.29.99]:56506 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726726AbgCTLMl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 20 Mar 2020 07:12:41 -0400
+Received: from mail.kernel.org (ip5f5ad4e9.dynamic.kabel-deutschland.de [95.90.212.233])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 5841820732;
+        Fri, 20 Mar 2020 11:12:40 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1584702760;
+        bh=jrxRPo3Al4EllmStVtukK8u75F0dpWLR0x6+rUwc8jw=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=18UjZVsAMzB7G3D+8UiPRBRhGti9d8bXoDeEGqGx318Pa3fKia4NUxA3CWvEpPSl9
+         TL4gh7DyjePqjv3ICrxWu30RmHTzJt1BmlNmyks88SM/AYTa0gIFSMCdFtkbY60R7y
+         pSS5fPKhvhRUlYhThFheO4267115cyTZuv1IVf8w=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1jFFZu-000nqZ-9e; Fri, 20 Mar 2020 12:12:38 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH] docs: conf.py: avoid thousands of duplicate label warning on Sphinx
+Date:   Fri, 20 Mar 2020 12:12:35 +0100
+Message-Id: <16f1c270a9077032de379b1cb30dfbb3e3670aee.1584702515.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.24.1
+In-Reply-To: <20200320112122.48244ec4@coco.lan>
+References: <20200320112122.48244ec4@coco.lan>
 MIME-Version: 1.0
-Received: by 2002:a4a:c897:0:0:0:0:0 with HTTP; Fri, 20 Mar 2020 04:06:16
- -0700 (PDT)
-From:   federa bureau of inteligence <federabureauofinteligence@gmail.com>
-Date:   Fri, 20 Mar 2020 11:06:16 +0000
-Message-ID: <CAE9o6LCLC+GAA+1hM4-HjV_h688n_2PcSTUT9FMZeorRftidxA@mail.gmail.com>
-Subject: HAPPY SURVIVAL OF CORONAVIRUS
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear Sir,
+The autosectionlabel extension is nice, as it allows to refer to
+a section by its name without requiring any extra tag to create
+a reference name.
 
-HAPPY SURVIVAL OF CORONAVIRUS
+However, on its default, it has two serious problems:
 
-We are reaching for a very interesting business transaction which we
-feel will of great benefit.We the FBI unit in the western subregion of
-Africa have a fund which we confiscated and lodge it in a bank
+1) the namespace is global. So, two files with different
+   "introduction" section would create a label with the
+   same name. This is easily solvable by forcing the extension
+   to prepend the file name with:
 
-This fund is worth of $12.5 million dollars.We will need your
-assistance to recieve this fund into your account for investment in
-your country.
+	autosectionlabel_prefix_document = True
 
-We will need your urgent response for details
+2) It doesn't work hierarchically. So, if there are two level 1
+   sessions (let's say, one labeled "open" and another one "ioctl")
+   and both have a level 2 "synopsis" label, both section 2 will
+   have the same identical name.
 
-Inspector Greg Adams,
-For and on behalf of Cote D'Ivoire FBI
-Tel 00225 6716 6756
+   Currently, there's no way to tell Sphinx to create an
+   hierarchical reference like:
+
+		open / synopsis
+		ioctl / synopsis
+
+  This causes around 800 warnings. So, the fix should be to
+  not let autosectionlabel to produce references for anything
+  that it is not at level one, with:
+
+	autosectionlabel_maxdepth = 1
+
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ Documentation/conf.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/Documentation/conf.py b/Documentation/conf.py
+index fa2bfcd6df1d..f193bae85a36 100644
+--- a/Documentation/conf.py
++++ b/Documentation/conf.py
+@@ -40,6 +40,10 @@ extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain',
+               'kfigure', 'sphinx.ext.ifconfig', 'automarkup',
+               'maintainers_include', 'sphinx.ext.autosectionlabel' ]
+ 
++# Ensure that autosectionlabel will produce unique names
++autosectionlabel_prefix_document = True
++autosectionlabel_maxdepth = 1
++
+ # The name of the math extension changed on Sphinx 1.4
+ if (major == 1 and minor > 3) or (major > 1):
+     extensions.append("sphinx.ext.imgmath")
+-- 
+2.24.1
+
