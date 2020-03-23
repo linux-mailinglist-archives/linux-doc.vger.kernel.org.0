@@ -2,82 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 89A9518F50D
-	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2020 13:52:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 33E0518F687
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2020 15:06:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727326AbgCWMwr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 23 Mar 2020 08:52:47 -0400
-Received: from sonic316-11.consmr.mail.bf2.yahoo.com ([74.6.130.121]:42627
-        "EHLO sonic316-11.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728249AbgCWMwr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 23 Mar 2020 08:52:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1584967964; bh=/GcFFbn2btZiSKYiGCo/BleXlnSRHZPoMjv/YxR5ftE=; h=Date:From:Reply-To:Subject:References:From:Subject; b=JpPUYs32a9ukh8pJIquIEGqCdV9Qu6LGnqzSVdIbXTYKNYSQ+EPdgkFnNE3024S7nHrPwMISFKZ5GmeXJPx69wHUneNvz1IMO+u6NcwAp/Ok8XtjRomL6lWnfLBaGLkHlSOuti6/NtuFmmmd3B2bMD46jGWRogubrq+r/MsmEJ7136WpAHz9i9Ks5Vp4rn+f2Ysi7ShIvU4fTfi2+5ka+ak1cmt0krY0MnbgASzghVonV4DdY0nto9tv8psjfemNh9XScXwjlZkaOaumSwXgBqc+e1wPdi2xhq5kNMygXZBjI+mTNG1D/CEuonSS5zw3HV+nFt1apvOpDlaSi3KJsQ==
-X-YMail-OSG: HL8apOIVM1lgp.purCLLqQ3zJmy4ONwvBYVdwYQKDX7bek5159sx3swwFqn0ckC
- 5bDLBhDnR0nUBCvPWJZ0FhT9lkoSibHHSsbg0RRgGYxqOoYtnW2m8P8ZvyV7ybzXzowWbIVnbEkP
- g44s0gptK3BzGPAfpBUSUfw6Alf9VDmKhOvoeEn70Hxr6w3yvvO5odfC2PtwmkFnFTQgfpQ6QFEi
- _CNj1ea6zJfktUcSQ3IB533C_L7MHSVZeZN2vdBZlV2x1ZbqpkC8Gm5hX9qWQIps7nq2LhxKbmHK
- .XfdDQVfapGmb8Aie7.OqifIgE6l1TXPet4eFkcsnCHm6MQVcKS40IJ8OUEThpoczfhzwAQqGcKv
- 4pscFMzzT_W0c1jkFyI.FyEQkql7i1ncFbtOt79g9dRrztch2NGg3s6ir7CYajGZJC60QMJ.EkVx
- 1Ukk_PFsZdYrD8356qF31BjFDTInNgCAFLDybtDwV2Ds4l4Mggu8OnSjdKVnCm0EfkSTGsB7liz.
- 5uU4.Uq1Q5qOIqUAZx5EavtRSgXMxxp.NAAdWFW_tjZyJmsH5_CFvVh6bNLYEJW6tjF.CYnQ9GrV
- Mo_kKN.fEYiaoGqcgiPPR.g88ojAylNstbFZxL7.UgVZizBHESaXCga02hWAjGAiRt1OsDoC3Lqm
- awu0p0OSOKMmjWEKty6m6eFzNKAg4EAYp1ULfJnZq3DB_ytrok4IpdyJFZUdknf7kfYvZ.V9W.sP
- Pf_Lhjvlvp2EI6.IZjxkV7O3tVDvujjIzcAtb8W040.kvQ0blYxrFsfUluifOt23Q3OglDZ93OCi
- 6T4yi29iTku0XQl8uTEIwm8ZfOSESo1nnCmbY5L.A7KV19_qmvSEh3leEWmVYnwUCd0iPa7WHGXg
- SqwvnOIDw.gIA83A.OTPEE9z8VODcGJhUaXXxlJ5a66yCOPRmH22TI_PLsQWn.wn67UnNdC4Co1h
- r_cdMVTHDozobBsq.Q17XCRuOGMaTagUPZ.izKiZ62ZxDMBjaGc7.EbTrWZc_seoUP1ycChhM4T5
- Dnp1n7boWOH_uVwcrE04ocsawBPj7ACwugENlAGiRb4Dn.8uIV2pWBEywhMpuXDu1lsurSJwR9XO
- URBh_eSLXjWRGDUUn.sC9KUMOxQFZGQ0AiYuY15Qw59sxIlpzpiRJq1aH7BPKcBORb_OX3RF2hTF
- nVSx_E9ULElw38aUh8WkSDwL0_TpnLF8BDJ9WTO_4anWJySuYHhIY_KBe3Z47yLCy4H.A_9Q0BKR
- .a5f.UtAPmIC8oyHngJY9xM0FXGVXPxXtXHEWqkULO7FkSTacaarXPs891KQyhnSjYV9FvtVw17Y
- y
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic316.consmr.mail.bf2.yahoo.com with HTTP; Mon, 23 Mar 2020 12:52:44 +0000
-Date:   Mon, 23 Mar 2020 12:52:40 +0000 (UTC)
-From:   Jak Abdullah mishail <mjakabdullah@gmail.com>
-Reply-To: mishailjakabdullah@gmail.com
-Message-ID: <738434492.359534.1584967960652@mail.yahoo.com>
-Subject: GREETING,
+        id S1728538AbgCWOGG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 23 Mar 2020 10:06:06 -0400
+Received: from mail.kernel.org ([198.145.29.99]:38222 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728533AbgCWOGG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 23 Mar 2020 10:06:06 -0400
+Received: from mail-qk1-f171.google.com (mail-qk1-f171.google.com [209.85.222.171])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id CFD7420774;
+        Mon, 23 Mar 2020 14:06:05 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1584972366;
+        bh=rtWWonGLfxabgsUxnmMPRo60omiZSTtJ80dw6Vbw4es=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=SElm5W7pa722XBgeSvhII7RNPt+79YfN17KVpXWJeQwlBUHiIyy6Mm69BnVBGRcbb
+         IYy7bT+WHy50PQ73gJ9am9RicQKsJJpafJFUi+8v5BRqRxZT64FQ0jPvJ6jLQdz/Lk
+         zGASeP/jN8Oqrb2S7rZPRijZW1d/rIJDFy/2wrKs=
+Received: by mail-qk1-f171.google.com with SMTP id i6so6213312qke.1;
+        Mon, 23 Mar 2020 07:06:05 -0700 (PDT)
+X-Gm-Message-State: ANhLgQ2buaJ7g6cKVdivvB013insJmXnMzLe64Xjcr/Y1WW6CdeuDbZ+
+        0B74nHmrkZFZNECT65mmfMARdx/z6YPgBFFaWQ==
+X-Google-Smtp-Source: ADFU+vssGZPgRXjn5lVxKqjaxrDoxTeAGBRjs0X7b5X6jo0bCqsPmFn5vlA7NzuNLIW/8VWFJ4jmMC4dOnuNvGBspuc=
+X-Received: by 2002:a37:4a85:: with SMTP id x127mr21299038qka.152.1584972364987;
+ Mon, 23 Mar 2020 07:06:04 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-References: <738434492.359534.1584967960652.ref@mail.yahoo.com>
-X-Mailer: WebService/1.1.15518 YMailNodin Mozilla/5.0 (Windows NT 6.3; WOW64; rv:47.0) Gecko/20100101 Firefox/47.0
-To:     unlisted-recipients:; (no To-header on input)
+References: <66b8da28bbf0af6d8bd23953936e7feb6a7ed0c2.1584966325.git.mchehab+huawei@kernel.org>
+ <491d2928a47f59da3636bc63103a5f63fec72b1a.1584966325.git.mchehab+huawei@kernel.org>
+In-Reply-To: <491d2928a47f59da3636bc63103a5f63fec72b1a.1584966325.git.mchehab+huawei@kernel.org>
+From:   Rob Herring <robh@kernel.org>
+Date:   Mon, 23 Mar 2020 08:05:53 -0600
+X-Gmail-Original-Message-ID: <CAL_Jsq+KtuzU9tvWyka-e84PS+UMnS3=TQ=Q_5GE1tdige4hrg@mail.gmail.com>
+Message-ID: <CAL_Jsq+KtuzU9tvWyka-e84PS+UMnS3=TQ=Q_5GE1tdige4hrg@mail.gmail.com>
+Subject: Re: [PATCH 2/2] MAINTAINERS: dt: update reference for arm-integrator.txt
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Linus Walleij <linus.walleij@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Greeting,
+On Mon, Mar 23, 2020 at 6:25 AM Mauro Carvalho Chehab
+<mchehab+huawei@kernel.org> wrote:
+>
+> This file was renamed. Update references accordingly.
+>
+> Fixes: 78c7d8f96b6f ("dt-bindings: clock: Create YAML schema for ICST clocks")
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
-My Name is Mr.Jak Abdullah mishail from Damascus Syria, and I am now resign=
-ed from the government. I am a member of an opposition party goverment in S=
-yria and a business man also,
+Stephen should pick this up.
 
-I need a foreign partner to enable me transport my investment capital and t=
-hen Relocate with my family, honestly I wish I will discuss more and get al=
-ong I need a partner because my investment capital is in my international a=
-ccount. Am interested in buying Properties, houses, building real estates a=
-nd some tourist places, my capital for investment is ($16.5 million USD) Me=
-anwhile if there is any profitable investment that you have so much experie=
-nce on it then we can join together as partners since I=E2=80=99m a foreign=
-er.
-
-I came across your e-mail contact through private search while in need of y=
-our assistance and I decided to contact you directly to ask you if you know=
- any Lucrative Business Investment in your Country I can invest my Money si=
-nce my Country Syria Security and Economic Independent has lost to the Grea=
-test Lower level, and our Culture has lost forever including our happiness =
-has been taken away from us. Our Country has been on fire for many years no=
-w.
-
-If you are capable of handling this business Contact me for more details i =
-will appreciate it if you can contact me immediately.
-You may as well tell me little more about yourself. Contact me urgently to =
-enable us proceed with the business.
-
-I will be waiting for your respond.
-
-Sincerely Yours,
-
-Jak Abdullah mishail
+Acked-by: Rob Herring <robh@kernel.org>
