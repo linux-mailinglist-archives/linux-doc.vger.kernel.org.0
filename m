@@ -2,75 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 2378E18EA3F
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Mar 2020 17:21:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DE6F218EDC2
+	for <lists+linux-doc@lfdr.de>; Mon, 23 Mar 2020 02:57:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726583AbgCVQVM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 22 Mar 2020 12:21:12 -0400
-Received: from sauhun.de ([88.99.104.3]:51450 "EHLO pokefinder.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726538AbgCVQVM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 22 Mar 2020 12:21:12 -0400
-Received: from localhost (p54B33042.dip0.t-ipconnect.de [84.179.48.66])
-        by pokefinder.org (Postfix) with ESMTPSA id 260382C0064;
-        Sun, 22 Mar 2020 17:21:10 +0100 (CET)
-Date:   Sun, 22 Mar 2020 17:21:09 +0100
-From:   Wolfram Sang <wsa@the-dreams.de>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-i2c@vger.kernel.org
-Subject: Re: [PATCH 13/17] i2c: include/linux/i2c.h: fix a doc warning
-Message-ID: <20200322162109.GD6766@ninjato>
-References: <cover.1584456635.git.mchehab+huawei@kernel.org>
- <24cbf9166b21531186e5b6d37a3f9201f957abef.1584456635.git.mchehab+huawei@kernel.org>
+        id S1726971AbgCWB5n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 22 Mar 2020 21:57:43 -0400
+Received: from mail-qt1-f195.google.com ([209.85.160.195]:38142 "EHLO
+        mail-qt1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726954AbgCWB5n (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 22 Mar 2020 21:57:43 -0400
+Received: by mail-qt1-f195.google.com with SMTP id z12so10464499qtq.5
+        for <linux-doc@vger.kernel.org>; Sun, 22 Mar 2020 18:57:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=joelfernandes.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Sh3ZQXA8/fcOyDAMpc+/YELK5mbWwAuzgrwXdRovqek=;
+        b=gs956uThpOltmLqXIt+nbE6Rhd0UEn0Ql4aR97Sadj6fmyYgxDFKl5q0OnMA0As6Y2
+         om2Ms+zMVB53ikwKASnQLtWL8thktq+a43aCcCVn63aCzaGCoW/Ldc8384u/p7fGFpHm
+         tdo13KND88UkOwMF33F8znWrk3CgJ+gxz9C/I=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Sh3ZQXA8/fcOyDAMpc+/YELK5mbWwAuzgrwXdRovqek=;
+        b=SUZvAseNVK5lbmL9FWdHs1jdjjN4fbFH+hvR+b7UBBI2IGe3xyRDqW7yUOZWB8DPvO
+         8he+IeYkH0eQ9VHEDzy9K/sRqCdltYe+gXk3iTjfk6CT1zKd0RQyC8LpElPafahHONlv
+         Fk1RgHupPvS3NOI02bpZIMBUkn9vGP4aLg3bTpVY9Fr71ZeQpiqLMK7S4Ids5i892DYl
+         2scZisWngjqNnsrPL7bICzdkX3DMGsOOr9E4FNCON355GPZ+7m1g2+IVlVyuBb3DVYlC
+         SbylIdHTxC2OmRMhN0MOiX1iJ30S8z7m/s+sHWg5D3BqH2NIZ4jp96sUYglKZnww7IMP
+         +m0Q==
+X-Gm-Message-State: ANhLgQ3AOCszvmX0fEB1vUvt8uaXUA24/yroC2w0swi9Yplu/BVtUff4
+        VCwi9Ao0oRJkqw07yMwUdsiLzg==
+X-Google-Smtp-Source: ADFU+vttwBXstjGSt67NWuAcSW4ytpix/Zaxhp/bLD8Z3vcH09O+jTp5grPQNOP1R2gYu15wDLhhrg==
+X-Received: by 2002:ac8:5159:: with SMTP id h25mr19800618qtn.165.1584928661954;
+        Sun, 22 Mar 2020 18:57:41 -0700 (PDT)
+Received: from joelaf.cam.corp.google.com ([2620:15c:6:12:9c46:e0da:efbf:69cc])
+        by smtp.gmail.com with ESMTPSA id e66sm10146233qkd.129.2020.03.22.18.57.40
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 22 Mar 2020 18:57:41 -0700 (PDT)
+From:   "Joel Fernandes (Google)" <joel@joelfernandes.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     "Joel Fernandes (Google)" <joel@joelfernandes.org>,
+        vpillai@digitalocean.com, Jonathan Corbet <corbet@lwn.net>,
+        Alan Stern <stern@rowland.harvard.edu>,
+        Andrea Parri <parri.andrea@gmail.com>,
+        Will Deacon <will@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Boqun Feng <boqun.feng@gmail.com>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        David Howells <dhowells@redhat.com>,
+        Jade Alglave <j.alglave@ucl.ac.uk>,
+        Luc Maranget <luc.maranget@inria.fr>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Akira Yokosawa <akiyks@gmail.com>,
+        Daniel Lustig <dlustig@nvidia.com>, linux-doc@vger.kernel.org
+Subject: [PATCH v2 1/4] Documentation: LKMM: Move MP+onceassign+derefonce to new litmus-tests/rcu/
+Date:   Sun, 22 Mar 2020 21:57:32 -0400
+Message-Id: <20200323015735.236279-1-joel@joelfernandes.org>
+X-Mailer: git-send-email 2.25.1.696.g5e7596f4ac-goog
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
-        protocol="application/pgp-signature"; boundary="Hf61M2y+wYpnELGG"
-Content-Disposition: inline
-In-Reply-To: <24cbf9166b21531186e5b6d37a3f9201f957abef.1584456635.git.mchehab+huawei@kernel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Move MP+onceassign+derefonce to the new Documentation/litmus-tests/rcu/
+directory.
 
---Hf61M2y+wYpnELGG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+More RCU-related litmus tests would be added here.
 
-On Tue, Mar 17, 2020 at 03:54:22PM +0100, Mauro Carvalho Chehab wrote:
-> Don't let non-letters inside a literal block without escaping it, as
-> the toolchain would mis-interpret it:
->=20
-> ./include/linux/i2c.h:518: WARNING: Inline strong start-string without en=
-d-string.
->=20
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Signed-off-by: Joel Fernandes (Google) <joel@joelfernandes.org>
 
-Applied to for-current, thanks!
+---
+Cc: vpillai@digitalocean.com
 
+ Documentation/litmus-tests/README                        | 9 +++++++++
+ .../litmus-tests/rcu}/MP+onceassign+derefonce.litmus     | 0
+ tools/memory-model/litmus-tests/README                   | 3 ---
+ 3 files changed, 9 insertions(+), 3 deletions(-)
+ create mode 100644 Documentation/litmus-tests/README
+ rename {tools/memory-model/litmus-tests => Documentation/litmus-tests/rcu}/MP+onceassign+derefonce.litmus (100%)
 
---Hf61M2y+wYpnELGG
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAl53kHUACgkQFA3kzBSg
-KbaR/g//XGC6Arwv37/lpyGmllIA2LKJ9gXePjLavzZUFPQk6zXot7DD68Y9wTyj
-TyOyRYEhNB2wuv8W2HHvqQLzBav/vd85qNOkq72aoCdoYNPWBCP93pbx2sfcqO+F
-Uf7hwToamo9VBzbw/DdNCDj9ChnmOjfSgdy94vQr7NNCfwqcHTqMwj9ZC4oLHWk/
-XU961lX9rRO6UDQ57WtyVFw62SA6NffupUm0iOU6o1ITjzCQIM5fi+7xxM/JcLR7
-LQpm0vxljUabEHBUbNsHyOFj/NcysWwBV1sbz8rxUJsBg6lWx6qO3n3ZZgudsm9X
-72A6boD4FTK7TMVkyt+KOHV6qU7L6fjVqMfihJDu/1xI79sI5NiffakpCYkVIN5B
-ZnOBKJ7QmUN3yDK93ts/eL9XcCG1mV9v9ExAVBUL0cefsjlQPLI4TminofRmYSDH
-3xHxoTpWWZ824KmbTAqPuXMJLFwdBaQgwc6n4YiKhKiLgpWrp4H2VnysLaGuruXg
-udnNvKYxKXEA78lpZroUapYw0gyxk3YLXRd/h2GN5m6wbrr+CcTGxpOjSSaBGGgc
-18cnqaeWIuZb9rkLqLC2tUN9GW5KxL7KfOiTLH05LZ/0MV7rbNkhH7YJzx0FcFrn
-fV/GL6MCFVrmORzy53T7qwOBCKwcmd/z5Q1/3G1M+h03r/1w9TQ=
-=8TIH
------END PGP SIGNATURE-----
-
---Hf61M2y+wYpnELGG--
+diff --git a/Documentation/litmus-tests/README b/Documentation/litmus-tests/README
+new file mode 100644
+index 0000000000000..84208bc197f2e
+--- /dev/null
++++ b/Documentation/litmus-tests/README
+@@ -0,0 +1,9 @@
++============
++LITMUS TESTS
++============
++
++RCU (/rcu directory)
++--------------------
++MP+onceassign+derefonce.litmus
++    Demonstrates that rcu_assign_pointer() and rcu_dereference() to
++    ensure that an RCU reader will not see pre-initialization garbage.
+diff --git a/tools/memory-model/litmus-tests/MP+onceassign+derefonce.litmus b/Documentation/litmus-tests/rcu/MP+onceassign+derefonce.litmus
+similarity index 100%
+rename from tools/memory-model/litmus-tests/MP+onceassign+derefonce.litmus
+rename to Documentation/litmus-tests/rcu/MP+onceassign+derefonce.litmus
+diff --git a/tools/memory-model/litmus-tests/README b/tools/memory-model/litmus-tests/README
+index 681f9067fa9ed..79e1b1ed4929a 100644
+--- a/tools/memory-model/litmus-tests/README
++++ b/tools/memory-model/litmus-tests/README
+@@ -63,9 +63,6 @@ LB+poonceonces.litmus
+ 	As above, but with store-release replaced with WRITE_ONCE()
+ 	and load-acquire replaced with READ_ONCE().
+ 
+-MP+onceassign+derefonce.litmus
+-	As below, but with rcu_assign_pointer() and an rcu_dereference().
+-
+ MP+polockmbonce+poacquiresilsil.litmus
+ 	Protect the access with a lock and an smp_mb__after_spinlock()
+ 	in one process, and use an acquire load followed by a pair of
+-- 
+2.25.1.696.g5e7596f4ac-goog
