@@ -2,111 +2,231 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AB96A190832
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2020 09:51:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 814D7190A6A
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Mar 2020 11:16:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727425AbgCXIv1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 24 Mar 2020 04:51:27 -0400
-Received: from conuserg-09.nifty.com ([210.131.2.76]:17668 "EHLO
-        conuserg-09.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727388AbgCXIv0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 24 Mar 2020 04:51:26 -0400
-Received: from pug.e01.socionext.com (p14092-ipngnfx01kyoto.kyoto.ocn.ne.jp [153.142.97.92]) (authenticated)
-        by conuserg-09.nifty.com with ESMTP id 02O8mgsl011219;
-        Tue, 24 Mar 2020 17:49:01 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-09.nifty.com 02O8mgsl011219
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1585039742;
-        bh=s0I5SOuN4Cdii5q1Bnu+2uo8oY7Phl6nmh/yFk4bv3o=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=db6hzkHI/NUH249ZqcRDYDfDe7GjyhgWCZVEEqEZfEZI3S6EwdYG1NtOgjiK171el
-         MjI3tcpwCT0daxXBK+R/TOqQzVneYQsbupnIcxgg2QCaB7ZzDGOzLCDxr8rMTUUFXa
-         B3UBz9H/dfpDiBg64mTb2KNZZOHa85gzYOvTQCyDQ2Yf8CEdnNfKhDbXMhXnTlme5T
-         /vwMJ9P7KSCRdM8GtxROlB105f7gzUPGdScoGbm6cf/CFMcios3IkyOf+f8QRAHZG+
-         NKByMqsLhIOfmKaV0z6CaT+GIjfDMUF/whvLdFouvk7Zjffqz5Aw24Sn/M5pdVEQMU
-         crRjI6Rw5wUNg==
-X-Nifty-SrcIP: [153.142.97.92]
-From:   Masahiro Yamada <masahiroy@kernel.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     "David S . Miller" <davem@davemloft.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Kees Cook <keescook@chromium.org>,
-        clang-built-linux@googlegroups.com,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        linux-crypto@vger.kernel.org, Ingo Molnar <mingo@redhat.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Borislav Petkov <bp@alien8.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        "H . Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
-        linux-kbuild@vger.kernel.org, Borislav Petkov <bp@suse.de>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 14/16] Documentation/changes: Raise minimum supported binutils version to 2.23
-Date:   Tue, 24 Mar 2020 17:48:19 +0900
-Message-Id: <20200324084821.29944-15-masahiroy@kernel.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200324084821.29944-1-masahiroy@kernel.org>
-References: <20200324084821.29944-1-masahiroy@kernel.org>
+        id S1726994AbgCXKPZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 24 Mar 2020 06:15:25 -0400
+Received: from mail.kernel.org ([198.145.29.99]:49232 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727111AbgCXKPZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 24 Mar 2020 06:15:25 -0400
+Received: from mail.kernel.org (ip5f5ad4e9.dynamic.kabel-deutschland.de [95.90.212.233])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id E844D20719;
+        Tue, 24 Mar 2020 10:15:23 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1585044924;
+        bh=irZafchmJC4U0lv9GYjkF+aotrzrF07X8GyRS+i1tRo=;
+        h=From:To:Cc:Subject:Date:From;
+        b=TAHl1fBrhkLbzdCRhlijzeA/oMGBkpqbAR2eAHdU+H2Qhl1M8U4EviBu7wW3RTwFi
+         mRDt/zSZMXJIPG3vCXAhqENzVmAkqWB1XAufvlCNc2/bMmjMYf6rRy2KzkrdXAwKOt
+         RLCgEwr6i9Bg3YA3QfyFXbyg1+njPp/BVJMl4V4k=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1jGgag-001pjG-65; Tue, 24 Mar 2020 11:15:22 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Hans Verkuil <hverkuil-cisco@xs4all.nl>,
+        Helen Koike <helen.koike@collabora.com>
+Subject: [PATCH 0/8] Reorganize media Kconfig
+Date:   Tue, 24 Mar 2020 11:15:13 +0100
+Message-Id: <cover.1585044374.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.24.1
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Borislav Petkov <bp@suse.de>
+This patch series do some reorg at the media Kconfig options.
+It also move test drivers from platform dir to a new one.
 
-The currently minimum-supported binutils version 2.21 has the problem of
-promoting symbols which are defined outside of a section into absolute.
-According to Arvind:
+After this change, the main config is organized on 4 sections,
+indicated via "comment" directives:
 
-  binutils-2.21 and -2.22. An x86-64 defconfig will fail with
-          Invalid absolute R_X86_64_32S relocation: _etext
-  and after fixing that one, with
-          Invalid absolute R_X86_64_32S relocation: __end_of_kernel_reserve
+	- type of devices selection - the filtering options
+	- Media core options - with API and other core stuff
+	- Media drivers
+	- Media ancillary drivers
 
-Those two versions of binutils have a bug when it comes to handling
-symbols defined outside of a section and binutils 2.23 has the proper
-fix, see: https://sourceware.org/legacy-ml/binutils/2012-06/msg00155.html
+The "type of devices" menu has the filtering options for:
 
-Therefore, up to the fixed version directly, skipping the broken ones.
+	- Cameras and video grabbers
+	- Analog TV
+	- Digital TV
+	- AM/FM radio receivers/transmitters
+	- SDR
+	- CEC
+	- Embeded devices (SoC)
+	- Test drivers
 
-Currently shipping distros already have the fixed binutils version so
-there should be no breakage resulting from this.
+This way, one interested only on embedded devices can unselect
+everything but "Embedded devices (SoC)" option.
 
-For more details about the whole thing, see the thread in Link.
+Distros for PC/Laptops can enable everything but 
+"Embedded devices (SoC)" and "Test drivers".
 
-Signed-off-by: Borislav Petkov <bp@suse.de>
-Link: https://lkml.kernel.org/r/20200110202349.1881840-1-nivedita@alum.mit.edu
-Acked-by: Kees Cook <keescook@chromium.org>
-Acked-by: Jason A. Donenfeld <Jason@zx2c4.com>
-Acked-by: Nick Desaulniers <ndesaulniers@google.com>
-Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
----
+Users can select just what they want, without bothering with
+hundreds of options that he won't have any clue about their
+meanings.
 
- Documentation/process/changes.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Mauro Carvalho Chehab (8):
+  media: dvb-usb: auto-select CYPRESS_FIRMWARE
+  media: Kconfig: not all V4L2 platform drivers are for camera
+  media: pci: move VIDEO_PCI_SKELETON to a different Kconfig
+  media: reorganize the drivers menu options
+  media: Kconfig: update the MEDIA_SUPPORT help message
+  media: Kconfig: use a sub-menu to select supported devices
+  media: Kconfig: add an option to filter in/out the embedded drivers
+  media: split test drivers from platform directory
 
-diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
-index e47863575917..91c5ff8e161e 100644
---- a/Documentation/process/changes.rst
-+++ b/Documentation/process/changes.rst
-@@ -31,7 +31,7 @@ you probably needn't concern yourself with pcmciautils.
- ====================== ===============  ========================================
- GNU C                  4.6              gcc --version
- GNU make               3.81             make --version
--binutils               2.21             ld -v
-+binutils               2.23             ld -v
- flex                   2.5.35           flex --version
- bison                  2.0              bison --version
- util-linux             2.10o            fdformat --version
-@@ -76,7 +76,7 @@ You will need GNU make 3.81 or later to build the kernel.
- Binutils
- --------
- 
--Binutils 2.21 or newer is needed to build the kernel.
-+Binutils 2.23 or newer is needed to build the kernel.
- 
- pkg-config
- ----------
+ drivers/media/Kconfig                         | 65 ++++++++++++++-----
+ drivers/media/common/Kconfig                  |  2 +-
+ drivers/media/mmc/Kconfig                     |  2 +-
+ drivers/media/pci/Kconfig                     | 10 +++
+ drivers/media/platform/Kconfig                | 24 -------
+ drivers/media/platform/Makefile               |  5 --
+ drivers/media/test_drivers/Kconfig            | 28 ++++++++
+ drivers/media/test_drivers/Makefile           |  9 +++
+ .../vicodec/Kconfig                           |  0
+ .../vicodec/Makefile                          |  0
+ .../vicodec/codec-fwht.c                      |  0
+ .../vicodec/codec-fwht.h                      |  0
+ .../vicodec/codec-v4l2-fwht.c                 |  0
+ .../vicodec/codec-v4l2-fwht.h                 |  0
+ .../vicodec/vicodec-core.c                    |  0
+ .../media/{platform => test_drivers}/vim2m.c  |  0
+ .../{platform => test_drivers}/vimc/Kconfig   |  0
+ .../{platform => test_drivers}/vimc/Makefile  |  0
+ .../vimc/vimc-capture.c                       |  0
+ .../vimc/vimc-common.c                        |  0
+ .../vimc/vimc-common.h                        |  0
+ .../vimc/vimc-core.c                          |  0
+ .../vimc/vimc-debayer.c                       |  0
+ .../vimc/vimc-scaler.c                        |  0
+ .../vimc/vimc-sensor.c                        |  0
+ .../vimc/vimc-streamer.c                      |  0
+ .../vimc/vimc-streamer.h                      |  0
+ .../{platform => test_drivers}/vivid/Kconfig  |  0
+ .../{platform => test_drivers}/vivid/Makefile |  0
+ .../vivid/vivid-cec.c                         |  0
+ .../vivid/vivid-cec.h                         |  0
+ .../vivid/vivid-core.c                        |  0
+ .../vivid/vivid-core.h                        |  0
+ .../vivid/vivid-ctrls.c                       |  0
+ .../vivid/vivid-ctrls.h                       |  0
+ .../vivid/vivid-kthread-cap.c                 |  0
+ .../vivid/vivid-kthread-cap.h                 |  0
+ .../vivid/vivid-kthread-out.c                 |  0
+ .../vivid/vivid-kthread-out.h                 |  0
+ .../vivid/vivid-kthread-touch.c               |  0
+ .../vivid/vivid-kthread-touch.h               |  0
+ .../vivid/vivid-meta-cap.c                    |  0
+ .../vivid/vivid-meta-cap.h                    |  0
+ .../vivid/vivid-meta-out.c                    |  0
+ .../vivid/vivid-meta-out.h                    |  0
+ .../vivid/vivid-osd.c                         |  0
+ .../vivid/vivid-osd.h                         |  0
+ .../vivid/vivid-radio-common.c                |  0
+ .../vivid/vivid-radio-common.h                |  0
+ .../vivid/vivid-radio-rx.c                    |  0
+ .../vivid/vivid-radio-rx.h                    |  0
+ .../vivid/vivid-radio-tx.c                    |  0
+ .../vivid/vivid-radio-tx.h                    |  0
+ .../vivid/vivid-rds-gen.c                     |  0
+ .../vivid/vivid-rds-gen.h                     |  0
+ .../vivid/vivid-sdr-cap.c                     |  0
+ .../vivid/vivid-sdr-cap.h                     |  0
+ .../vivid/vivid-touch-cap.c                   |  0
+ .../vivid/vivid-touch-cap.h                   |  0
+ .../vivid/vivid-vbi-cap.c                     |  0
+ .../vivid/vivid-vbi-cap.h                     |  0
+ .../vivid/vivid-vbi-gen.c                     |  0
+ .../vivid/vivid-vbi-gen.h                     |  0
+ .../vivid/vivid-vbi-out.c                     |  0
+ .../vivid/vivid-vbi-out.h                     |  0
+ .../vivid/vivid-vid-cap.c                     |  0
+ .../vivid/vivid-vid-cap.h                     |  0
+ .../vivid/vivid-vid-common.c                  |  0
+ .../vivid/vivid-vid-common.h                  |  0
+ .../vivid/vivid-vid-out.c                     |  0
+ .../vivid/vivid-vid-out.h                     |  0
+ drivers/media/usb/dvb-usb/Kconfig             |  1 +
+ drivers/media/v4l2-core/Kconfig               | 10 ---
+ 73 files changed, 98 insertions(+), 58 deletions(-)
+ create mode 100644 drivers/media/test_drivers/Kconfig
+ create mode 100644 drivers/media/test_drivers/Makefile
+ rename drivers/media/{platform => test_drivers}/vicodec/Kconfig (100%)
+ rename drivers/media/{platform => test_drivers}/vicodec/Makefile (100%)
+ rename drivers/media/{platform => test_drivers}/vicodec/codec-fwht.c (100%)
+ rename drivers/media/{platform => test_drivers}/vicodec/codec-fwht.h (100%)
+ rename drivers/media/{platform => test_drivers}/vicodec/codec-v4l2-fwht.c (100%)
+ rename drivers/media/{platform => test_drivers}/vicodec/codec-v4l2-fwht.h (100%)
+ rename drivers/media/{platform => test_drivers}/vicodec/vicodec-core.c (100%)
+ rename drivers/media/{platform => test_drivers}/vim2m.c (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/Kconfig (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/Makefile (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-capture.c (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-common.c (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-common.h (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-core.c (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-debayer.c (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-scaler.c (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-sensor.c (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-streamer.c (100%)
+ rename drivers/media/{platform => test_drivers}/vimc/vimc-streamer.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/Kconfig (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/Makefile (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-cec.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-cec.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-core.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-core.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-ctrls.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-ctrls.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-kthread-cap.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-kthread-cap.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-kthread-out.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-kthread-out.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-kthread-touch.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-kthread-touch.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-meta-cap.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-meta-cap.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-meta-out.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-meta-out.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-osd.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-osd.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-radio-common.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-radio-common.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-radio-rx.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-radio-rx.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-radio-tx.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-radio-tx.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-rds-gen.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-rds-gen.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-sdr-cap.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-sdr-cap.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-touch-cap.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-touch-cap.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vbi-cap.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vbi-cap.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vbi-gen.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vbi-gen.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vbi-out.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vbi-out.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vid-cap.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vid-cap.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vid-common.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vid-common.h (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vid-out.c (100%)
+ rename drivers/media/{platform => test_drivers}/vivid/vivid-vid-out.h (100%)
+
 -- 
-2.17.1
+2.24.1
+
 
