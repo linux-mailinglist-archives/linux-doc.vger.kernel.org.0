@@ -2,149 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 3E267192053
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2020 06:10:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9A65B19236D
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2020 09:56:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725907AbgCYFKn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 25 Mar 2020 01:10:43 -0400
-Received: from conssluserg-03.nifty.com ([210.131.2.82]:23447 "EHLO
-        conssluserg-03.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725263AbgCYFKn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Mar 2020 01:10:43 -0400
-Received: from mail-vs1-f46.google.com (mail-vs1-f46.google.com [209.85.217.46]) (authenticated)
-        by conssluserg-03.nifty.com with ESMTP id 02P5ABfc011337;
-        Wed, 25 Mar 2020 14:10:12 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conssluserg-03.nifty.com 02P5ABfc011337
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1585113012;
-        bh=goHEK+Svl1j1CHZ8RGvjblzdAWdDcWxFnIuljEdud0o=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=DnT5KzDtk1VZ4bX5jz1F2rsdqsISqFkA3UcZ8xsfhN86oNs2j/XPmD5P0cCs/JhpC
-         4djo10x3J7e7VKuxZ6VaqctGHnlh7v8Y2a60Ld7EPdInTe+DqQnV3Yv2mMRbEtWync
-         MiWlzZhvtXqwbjoutaboaVOvFnOMo0MJcs+5uYk6RNu52LFYtiOci3i1kOmUu1RoBi
-         xhqivkrrBXMFOs8hfcQ/k+Do1CGoUI92UhBVNthIcvYQO4wcMswpJWLXGNNqUdh7Tw
-         n7tev83ZNX9rklVlt+woYh25RkzUKyFRAAw9ucZjUiaVa3CirJ/T2AZaRCO80gKTwU
-         bP6ZfZcCxvw5g==
-X-Nifty-SrcIP: [209.85.217.46]
-Received: by mail-vs1-f46.google.com with SMTP id u11so785408vsg.2;
-        Tue, 24 Mar 2020 22:10:11 -0700 (PDT)
-X-Gm-Message-State: ANhLgQ2vNbc2TrzjPxjgBIKbjx7jdeRQw5e6nOYp13rqZwpbzX8EPZmU
-        sPc59FID1rTdNjijqL5feN1mlNAWFqqvWJEvY4M=
-X-Google-Smtp-Source: ADFU+vu+bM6M5+X0alIJHo1ALDGfE82bX+MEHXukXjfTCtMpyx9j4+KKQCB6mj8BRZ3ztAMCXwbRLo3j/oOEZhFBzJo=
-X-Received: by 2002:a67:2d55:: with SMTP id t82mr1251970vst.215.1585113010953;
- Tue, 24 Mar 2020 22:10:10 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200324084821.29944-1-masahiroy@kernel.org> <20200325045940.GA24974@gmail.com>
-In-Reply-To: <20200325045940.GA24974@gmail.com>
-From:   Masahiro Yamada <masahiroy@kernel.org>
-Date:   Wed, 25 Mar 2020 14:09:34 +0900
-X-Gmail-Original-Message-ID: <CAK7LNAQvgT=OWVuBVrvgdZ7AAkoaV_K_Y+w9bOFxRPw_1TOSUA@mail.gmail.com>
-Message-ID: <CAK7LNAQvgT=OWVuBVrvgdZ7AAkoaV_K_Y+w9bOFxRPw_1TOSUA@mail.gmail.com>
-Subject: Re: [PATCH 00/16] x86, crypto: remove always-defined CONFIG_AS_* and
- cosolidate Kconfig/Makefiles
-To:     Ingo Molnar <mingo@kernel.org>
-Cc:     Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "David S . Miller" <davem@davemloft.net>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Kees Cook <keescook@chromium.org>,
-        clang-built-linux <clang-built-linux@googlegroups.com>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Borislav Petkov <bp@alien8.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        "H . Peter Anvin" <hpa@zytor.com>, X86 ML <x86@kernel.org>,
-        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        David Airlie <airlied@linux.ie>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Jim Kukunas <james.t.kukunas@linux.intel.com>,
+        id S1727674AbgCYI4G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 25 Mar 2020 04:56:06 -0400
+Received: from smtp2207-205.mail.aliyun.com ([121.197.207.205]:45550 "EHLO
+        smtp2207-205.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727434AbgCYI4F (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Mar 2020 04:56:05 -0400
+X-Alimail-AntiSpam: AC=CONTINUE;BC=0.07436284|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_system_inform|0.0720342-0.000775372-0.92719;FP=0|0|0|0|0|-1|-1|-1;HT=e01a16370;MF=liaoweixiong@allwinnertech.com;NM=1;PH=DS;RN=17;RT=17;SR=0;TI=SMTPD_---.H50xpyL_1585126516;
+Received: from PC-liaoweixiong.allwinnertech.com(mailfrom:liaoweixiong@allwinnertech.com fp:SMTPD_---.H50xpyL_1585126516)
+          by smtp.aliyun-inc.com(10.147.42.241);
+          Wed, 25 Mar 2020 16:55:25 +0800
+From:   WeiXiong Liao <liaoweixiong@allwinnertech.com>
+To:     Kees Cook <keescook@chromium.org>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        Tony Luck <tony.luck@intel.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        NeilBrown <neilb@suse.de>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Yuanhan Liu <yuanhan.liu@linux.intel.com>,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        intel-gfx@lists.freedesktop.org,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Peter Zijlstra <a.p.zijlstra@chello.nl>
-Content-Type: text/plain; charset="UTF-8"
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Richard Weinberger <richard@nod.at>,
+        Vignesh Raghavendra <vigneshr@ti.com>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mtd@lists.infradead.org,
+        WeiXiong Liao <liaoweixiong@allwinnertech.com>
+Subject: [PATCH v3 00/11] pstore: mtd: support crash log to block and mtd device
+Date:   Wed, 25 Mar 2020 16:54:55 +0800
+Message-Id: <1585126506-18635-1-git-send-email-liaoweixiong@allwinnertech.com>
+X-Mailer: git-send-email 1.9.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Ingo,
+Why do we need to log to block (mtd) device?
+1. Most embedded intelligent equipment have no persistent ram, which
+   increases costs. We perfer to cheaper solutions, like block devices.
+2. Do not any equipment have battery, which means that it lost all data
+   on general ram if power failure. Pstore has little to do for these
+   equipments.
 
-On Wed, Mar 25, 2020 at 1:59 PM Ingo Molnar <mingo@kernel.org> wrote:
->
->
-> * Masahiro Yamada <masahiroy@kernel.org> wrote:
->
-> > This series of cleanups was prompted by Linus:
-> > https://lkml.org/lkml/2020/3/12/726
-> >
-> > First, this series drop always-on CONFIG_AS_* options.
-> > Some of those options were introduced in old days.
-> > For example, the check for CONFIG_AS_CFI dates back to 2006.
-> >
-> > We raise the minimal tool versions from time to time.
-> > Currently, we require binutils 2.21
-> > (and we plan to bump it to 2.23 for v5.7-rc1).
-> >
-> > After cleaning away the old checks,
-> > as-instr calls are moved to Kconfig from Makefiles.
-> > (patch 11)
-> >
-> > This allows more Kconfig / Makefile cleanups.
-> > Patch 12 is complex, but I double-checked it does the equivalent.
-> >
-> > Patch 14 bumps the binutils version to 2.23,
-> > and patch 15 removes more CONFIG_AS_* options.
-> >
-> > I folded all relevanet patches into this series,
-> > as suggested by Jason A. Donenfeld.
-> >
-> > If x86 maintainers take care of this series, that's good.
-> >
-> > If it is OK to queue this up to Kbuild tree,
-> > I will send a pull request to Linus.
-> >
-> > Thank you.
->
-> LGTM. I've got these four from Jason A. Donenfeld queued up in
-> tip:WIP.x86/asm:
->
->  bd5b1283e41c: ("crypto: Curve25519 - do not pollute dispatcher based on assembler")
->  829f32d78588: ("crypto: X86 - rework configuration, based on Kconfig")
->  95ef9f80ed63: ("x86/build: Probe assembler from Kconfig instead of Kbuild")
->  1651e700664b: ("x86: Fix bitops.h warning with a moved cast")
->
-> I suppose these might interact (maybe even conflict), and are topically
-> related.
->
-> Would you like to pull these into the kbuild tree? You can find them in:
->
->    git://git.kernel.org/pub/scm/linux/kernel/git/tip/tip.git WIP.x86/asm
->
-> Thanks,
->
->         Ingo
+Why do we need mtdpstore instead of mtdoops?
+1. repetitive jobs between pstore and mtdoops
+   Both of pstore and mtdoops do the same jobs that store panic/oops log.
+2. do what a driver should do
+   To me, a driver should provide methods instead of policies. What MTD
+   should do is to provide read/write/erase operations, geting rid of codes
+   about chunk management, kmsg dumper and configuration.
+3. enhanced feature
+   Not only store log, but also show it as files.
+   Not only log, but also trigger time and trigger count.
+   Not only panic/oops log, but also log recorder for pmsg, console and
+   ftrace in the future.
 
+Before upstream submission, pstore/blk is tested on arch ARM and x84_64,
+block device and mtd device, built as modules and in kernel. Here are the
+details:
 
-I did not know that these had already landed in tip tree.
+	https://github.com/gmpy/articles/blob/master/pstore/Test-Pstore-Block.md
 
-They are immature version.
-(In fact CONFIG_AS_CFI and AS_ADX are false-negative
-if GCC that defaults to 32-bit is used.)
+[PATCH v3]:
+1. patch 1~10: a lot of improvements according to Kees Cook <keescook@chromium.org>
+               including rename module, typo, reorder, rewrite document, bugs
+			   and so on.
+2. patch 11: rename funtions of pstore/blk and update document.
+[PATCH v2]:
+1. fix syntax error in documents. Thank Randy Dunlap <rdunlap@infradead.org>
+2. replace pr_* with dev_* for mtdpstore.
+   Thank Vignesh Raghavendra <vigneshr@ti.com>
+3. improve mtdpstore. Thank Miquel Raynal <mraynal@kernel.org>
+[PATCH v1]:
+1. fix errors and warnings reported by kbuild test robot.
 
-Can you simply discard the WIP.x86/asm branch,
-and only reapply
-1651e700664b: ("x86: Fix bitops.h warning with a moved cast")
+WeiXiong Liao (11):
+  pstore/zone: a common layer to manage storage as zones
+  pstore/blk: new support logger for block devices
+  pstore/blk: respect for driver to pick pstore front-ends
+  pstore/blk: pstore/zone: support pmsg recorder
+  pstore/blk: blkoops: support console recorder
+  pstore/blk: blkoops: support ftrace recorder
+  Documentation: create document for pstore/blk
+  pstore/zone: skip broken zone for MTD device
+  pstore/blk: a way to get user configure about pstore front-ends.
+  pstore/zone: pstore/blk: support non-block devices
+  mtd: new support oops logger based on pstore/blk
 
-?
-
+ Documentation/admin-guide/pstore-block.rst |  237 +++++
+ MAINTAINERS                                |    1 +
+ drivers/mtd/Kconfig                        |   10 +
+ drivers/mtd/Makefile                       |    1 +
+ drivers/mtd/mtdpstore.c                    |  564 +++++++++++
+ fs/pstore/Kconfig                          |  107 ++
+ fs/pstore/Makefile                         |    4 +
+ fs/pstore/platform.c                       |    3 +-
+ fs/pstore/pstore_blk.c                     |  480 +++++++++
+ fs/pstore/pstore_zone.c                    | 1511 ++++++++++++++++++++++++++++
+ include/linux/pstore.h                     |    1 +
+ include/linux/pstore_blk.h                 |   77 ++
+ include/linux/pstore_zone.h                |   60 ++
+ 13 files changed, 3055 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/admin-guide/pstore-block.rst
+ create mode 100644 drivers/mtd/mtdpstore.c
+ create mode 100644 fs/pstore/pstore_blk.c
+ create mode 100644 fs/pstore/pstore_zone.c
+ create mode 100644 include/linux/pstore_blk.h
+ create mode 100644 include/linux/pstore_zone.h
 
 -- 
-Best Regards
-Masahiro Yamada
+1.9.1
+
