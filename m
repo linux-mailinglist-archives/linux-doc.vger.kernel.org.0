@@ -2,134 +2,133 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6FCE1193308
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2020 22:51:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 467F0193345
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Mar 2020 23:04:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727357AbgCYVvP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 25 Mar 2020 17:51:15 -0400
-Received: from mga14.intel.com ([192.55.52.115]:65091 "EHLO mga14.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726081AbgCYVvO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 25 Mar 2020 17:51:14 -0400
-IronPort-SDR: djFS2Wy2Bm0pYdKq90Kv16FTpCEzT3qGacrldRkPofD7BLTfivDxiwADK4KH3gQfJe67tkWQEH
- XYYarTIaPd7A==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Mar 2020 14:51:14 -0700
-IronPort-SDR: 6xgudFIjy1CzWRRc48LtFdeAxHVrlYFfTo63YZE4NYbvMjdkFxHVPJPGrO+UNQp0Xr2jTj3nKa
- WTzhXN/fIh5w==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.72,305,1580803200"; 
-   d="scan'208";a="238631971"
-Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
-  by fmsmga007.fm.intel.com with ESMTP; 25 Mar 2020 14:51:14 -0700
-Message-ID: <e1122e1d77dec0d5f0a698c855833050c740a4bc.camel@intel.com>
-Subject: Re: [RFC PATCH v9 25/27] x86/cet/shstk: Handle thread Shadow Stack
-From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
-To:     Kees Cook <keescook@chromium.org>
-Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>, x86-patch-review@intel.com
-Date:   Wed, 25 Mar 2020 14:51:13 -0700
-In-Reply-To: <202002251324.5D515260@keescook>
-References: <20200205181935.3712-1-yu-cheng.yu@intel.com>
-         <20200205181935.3712-26-yu-cheng.yu@intel.com>
-         <202002251324.5D515260@keescook>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.32.4 (3.32.4-1.fc30) 
+        id S1727401AbgCYWEJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 25 Mar 2020 18:04:09 -0400
+Received: from aserp2120.oracle.com ([141.146.126.78]:37042 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726081AbgCYWEJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Mar 2020 18:04:09 -0400
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 02PM35m1109673;
+        Wed, 25 Mar 2020 22:04:01 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
+ : subject : in-reply-to : message-id : references : mime-version :
+ content-type; s=corp-2020-01-29;
+ bh=gaA4GEcqi9j2CQxBte6tshCMih51XWIGLpE+4um3dyI=;
+ b=lO8+ptMyy3Hd+wTBQDCZqwarI3fgPTqvuHWVbdeNyohJt26hR4ulc9MUPu7IcDI8nSNp
+ koJ2natxAHqFLij/14heAIuQW7bJwANaNv8B8kjVxDQWUbaqxg6JAl3V6jGKV0QEMCAP
+ 6DRDvi0LQbO2MEoTvAX4a+Dtv4DkkBGOR2T8IGvjtUIbIj8XFyApNr+Qu8ZS+JJXSwHj
+ Q/87pahcU4dZ4nb5aVUeZSPd7NgQwaDOV+eGvztomrodhHSsmGCn5VMMEVtZWztBdI6z
+ nRqL15OWqG5KdTCTTFt2rNfei+0hg+oMJeVqj43a+pl4Yak848lZX/CncG7sq8t/gBvD 0g== 
+Received: from aserp3030.oracle.com (aserp3030.oracle.com [141.146.126.71])
+        by aserp2120.oracle.com with ESMTP id 2ywavmcc91-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 25 Mar 2020 22:04:01 +0000
+Received: from pps.filterd (aserp3030.oracle.com [127.0.0.1])
+        by aserp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 02PM1p0a021401;
+        Wed, 25 Mar 2020 22:04:01 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+        by aserp3030.oracle.com with ESMTP id 3006r7b4nj-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 25 Mar 2020 22:04:01 +0000
+Received: from abhmp0003.oracle.com (abhmp0003.oracle.com [141.146.116.9])
+        by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 02PM40ll008484;
+        Wed, 25 Mar 2020 22:04:00 GMT
+Received: from dhcp-10-175-163-133.vpn.oracle.com (/10.175.163.133)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Wed, 25 Mar 2020 15:03:59 -0700
+Date:   Wed, 25 Mar 2020 22:03:52 +0000 (GMT)
+From:   Alan Maguire <alan.maguire@oracle.com>
+X-X-Sender: alan@localhost
+To:     shuah <shuah@kernel.org>
+cc:     Alan Maguire <alan.maguire@oracle.com>, brendanhiggins@google.com,
+        frowand.list@gmail.com, gregkh@linuxfoundation.org, corbet@lwn.net,
+        linux-kselftest@vger.kernel.org, linux-kernel@vger.kernel.org,
+        kunit-dev@googlegroups.com, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v7 kunit-next 3/4] kunit: subtests should be indented 4
+ spaces according to TAP
+In-Reply-To: <dd82e9cb-6c88-58cf-933e-f2a644e09b15@kernel.org>
+Message-ID: <alpine.LRH.2.21.2003252202360.25268@localhost>
+References: <1584110682-3837-1-git-send-email-alan.maguire@oracle.com> <1584110682-3837-4-git-send-email-alan.maguire@oracle.com> <dd82e9cb-6c88-58cf-933e-f2a644e09b15@kernel.org>
+User-Agent: Alpine 2.21 (LRH 202 2017-01-01)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9571 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 adultscore=0 suspectscore=4
+ phishscore=0 spamscore=0 mlxscore=0 mlxlogscore=999 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2003250168
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9571 signatures=668685
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 malwarescore=0
+ priorityscore=1501 mlxscore=0 bulkscore=0 clxscore=1015 impostorscore=0
+ phishscore=0 suspectscore=4 mlxlogscore=999 spamscore=0 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2003250168
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 2020-02-25 at 13:29 -0800, Kees Cook wrote:
-> On Wed, Feb 05, 2020 at 10:19:33AM -0800, Yu-cheng Yu wrote:
-> > [...]
-> > A 64-bit SHSTK has a fixed size of RLIMIT_STACK. A compat-mode thread SHSTK
-> > has a fixed size of 1/4 RLIMIT_STACK.  This allows more threads to share a
-> > 32-bit address space.
+On Wed, 25 Mar 2020, shuah wrote:
+
+> On 3/13/20 8:44 AM, Alan Maguire wrote:
+> > Introduce KUNIT_INDENT macro which corresponds to 4-space indentation,
+> > and use it to modify indentation from tab to 4 spaces.
+> > 
+> > Suggested-by: Frank Rowand <frowand.list@gmail.com>
+> > Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
+> > Reviewed-by: Frank Rowand <frank.rowand@sony.com>
+> > ---
+> >   include/kunit/test.h                |  7 +++-
+> >   lib/kunit/assert.c                  | 79
+> >   +++++++++++++++++++------------------
+> >   lib/kunit/test.c                    |  6 +--
+> >   tools/testing/kunit/kunit_parser.py | 10 ++---
+> >   4 files changed, 54 insertions(+), 48 deletions(-)
+> > 
+> > diff --git a/include/kunit/test.h b/include/kunit/test.h
+> > index f7b2ed4c..d49cdb4 100644
+> > --- a/include/kunit/test.h
+> > +++ b/include/kunit/test.h
+> > @@ -84,6 +84,10 @@ struct kunit_resource {
+> >   /* Size of log associated with test. */
+> >   #define KUNIT_LOG_SIZE	512
+> >   
+> > +/* TAP specifies subtest indentation of 4 spaces. */
+> > +#define KUNIT_INDENT	"    "
+> > +#define KUNIT_INDENT2	KUNIT_INDENT KUNIT_INDENT
 > 
-> I am not understanding this part. :) Entries are sizeof(unsigned long),
-> yes? A 1/2 RLIMIT_STACK would cover 32-bit, but 1/4 is less, so why does
-> that provide for more threads?
-
-Each thread has a separate shadow stack.  If each shadow stack is smaller, the
-address space can accommodate more shadow stack allocations.
-
-> >[...]
-> > diff --git a/arch/x86/kernel/cet.c b/arch/x86/kernel/cet.c
-> > index cba5c7656aab..5b45abda80a1 100644
-> > --- a/arch/x86/kernel/cet.c
-> > +++ b/arch/x86/kernel/cet.c
-> > @@ -170,6 +170,47 @@ int cet_setup_shstk(void)
-> >  	return 0;
-> >  }
-> >  
-> > +int cet_setup_thread_shstk(struct task_struct *tsk)
-> > +{
-> > +	unsigned long addr, size;
-> > +	struct cet_user_state *state;
-> > +	struct cet_status *cet = &tsk->thread.cet;
-> > +
-> > +	if (!cet->shstk_enabled)
-> > +		return 0;
-> > +
-> > +	state = get_xsave_addr(&tsk->thread.fpu.state.xsave,
-> > +			       XFEATURE_CET_USER);
-> > +
-> > +	if (!state)
-> > +		return -EINVAL;
-> > +
-> > +	size = rlimit(RLIMIT_STACK);
+> Sorry for a late comment on this.
 > 
-> Is SHSTK incompatible with RLIM_INFINITY stack rlimits?
+> What's the reason to do it this way? Why wouldn't you define
+> it as 8 spaces long string?
+>
 
-I will change it to:
+I could have I suppose; I thought it makes it a bit easier
+to read as above (though it did generate a checkpatch
+warning; I thought readability was more important in this   
+case, but I can alter if needed).
+ 
+> Also can you please make sure to run checkpatch --strict on the
+> patches you send?
+>
 
-	size = min(rlimit(RLIMIT_STACK), 4 GB);
+Sure! There were also some other line-too-long warnings
+generated as a result of this patch, but when I fixed those
+checkpatch complained about splitting strings across multiple
+lines.  The only way out was to reduce the amount of information
+in the log messages, which I didn't want to do.  In future I can
+note checkpatch warnings that I couldn't find a way to fix in the
+commit message if that would help?
 
+Thanks for taking a look!
+
+Alan
+ 
+> thanks,
+> -- Shuah
 > 
-> > +
-> > +	/*
-> > +	 * Compat-mode pthreads share a limited address space.
-> > +	 * If each function call takes an average of four slots
-> > +	 * stack space, we need 1/4 of stack size for shadow stack.
-> > +	 */
-> > +	if (in_compat_syscall())
-> > +		size /= 4;
-> > +
-> > +	addr = alloc_shstk(size);
 > 
-> I assume it'd fail here, but I worry about Stack Clash style attacks.
-> I'd like to see test cases that make sure the SHSTK gap is working
-> correctly.
-
-I will work on some tests.
-
-Thanks,
-Yu-cheng
-
-
