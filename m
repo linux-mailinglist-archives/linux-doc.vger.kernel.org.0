@@ -2,107 +2,144 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 65ACF193722
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2020 04:44:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 412CA193A5B
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2020 09:04:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727655AbgCZDoj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 25 Mar 2020 23:44:39 -0400
-Received: from mail.kernel.org ([198.145.29.99]:59586 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727652AbgCZDoj (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 25 Mar 2020 23:44:39 -0400
-Received: from mail-wr1-f42.google.com (mail-wr1-f42.google.com [209.85.221.42])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id A5CBB20848
-        for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2020 03:44:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1585194278;
-        bh=VkmY0zQuX833GQpUGXaOUmvjdZ0nnkB4ejNGiO5v5uU=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=OdeBbNi0UFE6Xf5r9lnfVQhuzp+a/BFXy/IQWDQURZ4DuY9gq+dbEoACf45IaIlCz
-         Iq/SLbxgvTZZrQjifMGcmOZ5WJ1yxvDZoqcPVk/JTIHOdDqwzt0TWnKwG9FErPLnjv
-         0BMWgiPP8VxMl+NAz3cpZWsYBpwjnBXYv+1nyUTQ=
-Received: by mail-wr1-f42.google.com with SMTP id a25so6128562wrd.0
-        for <linux-doc@vger.kernel.org>; Wed, 25 Mar 2020 20:44:38 -0700 (PDT)
-X-Gm-Message-State: ANhLgQ0YMEIvV/jpLWxIlGi1/bonob7BQA9td+cwGbV1bewgok8KvHBM
-        kBhMp2oPTjmeLrFmbgsN4qSXsyut5CeuraarQZbTUg==
-X-Google-Smtp-Source: ADFU+vv0yft2oB0j81+Zpu1bdr8nwdQ3WjfpxQeoXpDnIznLh+VXYsHbOtp609GnoW6l+6LfrrAvNy4IRPTIME3mY5k=
-X-Received: by 2002:adf:9dc6:: with SMTP id q6mr6773133wre.70.1585194276996;
- Wed, 25 Mar 2020 20:44:36 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200325194317.526492-1-ross.philipson@oracle.com> <20200325194317.526492-4-ross.philipson@oracle.com>
-In-Reply-To: <20200325194317.526492-4-ross.philipson@oracle.com>
-From:   Andy Lutomirski <luto@kernel.org>
-Date:   Wed, 25 Mar 2020 20:44:25 -0700
-X-Gmail-Original-Message-ID: <CALCETrUoA9dgi2omjePtzjL9=5AqHKhy57UksnxbohZVdLo_pQ@mail.gmail.com>
-Message-ID: <CALCETrUoA9dgi2omjePtzjL9=5AqHKhy57UksnxbohZVdLo_pQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 03/12] x86: Add early SHA support for Secure Launch
- early measurements
-To:     Ross Philipson <ross.philipson@oracle.com>
-Cc:     LKML <linux-kernel@vger.kernel.org>, X86 ML <x86@kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        dpsmith@apertussolutions.com, Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "H. Peter Anvin" <hpa@zytor.com>, trenchboot-devel@googlegroups.com
-Content-Type: text/plain; charset="UTF-8"
+        id S1727711AbgCZIEd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Mar 2020 04:04:33 -0400
+Received: from conuserg-11.nifty.com ([210.131.2.78]:20009 "EHLO
+        conuserg-11.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727585AbgCZIEd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Mar 2020 04:04:33 -0400
+Received: from pug.e01.socionext.com (p14092-ipngnfx01kyoto.kyoto.ocn.ne.jp [153.142.97.92]) (authenticated)
+        by conuserg-11.nifty.com with ESMTP id 02Q81WpT002183;
+        Thu, 26 Mar 2020 17:01:32 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-11.nifty.com 02Q81WpT002183
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1585209694;
+        bh=pP2B3e2HIi5aiL8gQpMs8wNmwELktRFcv9my7u/AjTs=;
+        h=From:To:Cc:Subject:Date:From;
+        b=bzmVG4HAmlp7LgiUy5yPMNdC2iG1kMMwInKzoNZv1szrMcME6xMVXTR1XOUL1qzoZ
+         UXypNBLGmlWiyFbn8AGEg1DP67vhAiBAU9HRXNv1JINVe7WLdcTRF880YP/6P8P1+9
+         hxP3DnXfQ+AfCFeKc2l0PJ59q8E/XrbPagI9eW55k8R26xEu2vMzfSYDcnSuCE7Ekz
+         cNcbHs5t6C6XtBsfX9LVYo8kSbzcATH2qezUw8lKD/JPtQQxhcQ6uRYK5EQ4Ibf/5f
+         kIk+7YVoFx0fk4BpYs1xrJORYS45omf/l2ivmZpMddWLGj3TlGYyfrTvNHbrcuIME9
+         jBqXd0OeNAqFQ==
+X-Nifty-SrcIP: [153.142.97.92]
+From:   Masahiro Yamada <masahiroy@kernel.org>
+To:     linux-kbuild@vger.kernel.org
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        "H . Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
+        "Jason A . Donenfeld" <Jason@zx2c4.com>,
+        clang-built-linux@googlegroups.com,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>,
+        "David S. Miller" <davem@davemloft.net>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jim Kukunas <james.t.kukunas@linux.intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        NeilBrown <neilb@suse.de>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Yuanhan Liu <yuanhan.liu@linux.intel.com>,
+        dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+        linux-crypto@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v2 00/16] x86, crypto: remove always-defined CONFIG_AS_* and cosolidate Kconfig/Makefiles
+Date:   Thu, 26 Mar 2020 17:00:48 +0900
+Message-Id: <20200326080104.27286-1-masahiroy@kernel.org>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Mar 25, 2020 at 12:43 PM Ross Philipson
-<ross.philipson@oracle.com> wrote:
->
-> From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
->
-> The SHA algorithms are necessary to measure configuration information into
-> the TPM as early as possible before using the values. This implementation
-> uses the established approach of #including the SHA libraries directly in
-> the code since the compressed kernel is not uncompressed at this point.
->
-> The SHA1 code here has its origins in the code in
-> include/crypto/sha1_base.h. That code could not be pulled directly into
-> the setup portion of the compressed kernel because of other dependencies
-> it pulls in. So this is a modified copy of that code that still leverages
-> the core SHA1 algorithm.
->
-> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
-> ---
->  arch/x86/Kconfig                        |  24 +++
->  arch/x86/boot/compressed/Makefile       |   4 +
->  arch/x86/boot/compressed/early_sha1.c   | 104 ++++++++++++
->  arch/x86/boot/compressed/early_sha1.h   |  17 ++
->  arch/x86/boot/compressed/early_sha256.c |   6 +
->  arch/x86/boot/compressed/early_sha512.c |   6 +
->  include/linux/sha512.h                  |  21 +++
->  lib/sha1.c                              |   4 +
->  lib/sha512.c                            | 209 ++++++++++++++++++++++++
->  9 files changed, 395 insertions(+)
->  create mode 100644 arch/x86/boot/compressed/early_sha1.c
->  create mode 100644 arch/x86/boot/compressed/early_sha1.h
->  create mode 100644 arch/x86/boot/compressed/early_sha256.c
->  create mode 100644 arch/x86/boot/compressed/early_sha512.c
->  create mode 100644 include/linux/sha512.h
->  create mode 100644 lib/sha512.c
->
-> diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-> index 7f3406a9948b..f37057d3ce9f 100644
-> --- a/arch/x86/Kconfig
-> +++ b/arch/x86/Kconfig
-> @@ -2025,6 +2025,30 @@ config SECURE_LAUNCH
->           of all the modules and configuration information used for
->           boooting the operating system.
->
-> +choice
-> +       prompt "Select Secure Launch Algorithm for TPM2"
-> +       depends on SECURE_LAUNCH
-> +
-> +config SECURE_LAUNCH_SHA1
-> +       bool "Secure Launch TPM2 SHA1"
-> +       help
-> +         When using Secure Launch and TPM2 is present, use SHA1 hash
-> +         algorithm for measurements.
-> +
+This series of cleanups was prompted by Linus:
+https://lkml.org/lkml/2020/3/12/726
 
-I'm surprised this is supported at all.  Why allow SHA1?
+First, this series drop always-on CONFIG_AS_* options.
+Some of those options were introduced in old days.
+For example, the check for CONFIG_AS_CFI dates back to 2006.
+
+We raise the minimal tool versions from time to time.
+Currently, we require binutils 2.21
+(and we even plan to bump it to 2.23).
+
+After cleaning away the old checks,
+as-instr calls are moved to Kconfig from Makefiles,
+then more Kconfig / Makefile code is cleaned up.
+
+I folded all relevanet patches into this series,
+as suggested by Jason A. Donenfeld.
+
+The update for v2 is quite small.
+I just swapped the patch order of patch 8 and 11
+instead of moving comments around files,
+which was addressed by Nick Desaulniers.
+
+
+Borislav Petkov (1):
+  Documentation/changes: Raise minimum supported binutils version to
+    2.23
+
+Jason A. Donenfeld (4):
+  x86: probe assembler capabilities via kconfig instead of makefile
+  crypto: x86 - rework configuration based on Kconfig
+  crypto: curve25519 - do not pollute dispatcher based on assembler
+  x86: update AS_* macros to binutils >=2.23, supporting ADX and AVX2
+
+Masahiro Yamada (11):
+  lib/raid6/test: fix build on distros whose /bin/sh is not bash
+  x86: remove unneeded defined(__ASSEMBLY__) check from asm/dwarf2.h
+  x86: remove always-defined CONFIG_AS_CFI
+  x86: remove unneeded (CONFIG_AS_)CFI_SIGNAL_FRAME
+  x86: remove always-defined CONFIG_AS_CFI_SECTIONS
+  x86: remove always-defined CONFIG_AS_SSSE3
+  x86: remove always-defined CONFIG_AS_AVX
+  x86: replace arch macros from compiler with CONFIG_X86_{32,64}
+  drm/i915: remove always-defined CONFIG_AS_MOVNTDQA
+  x86: add comments about the binutils version to support code in
+    as-instr
+  crypto: x86 - clean up poly1305-x86_64-cryptogams.S by 'make clean'
+
+ Documentation/process/changes.rst             |   4 +-
+ arch/x86/Kconfig                              |   2 +
+ arch/x86/Kconfig.assembler                    |  17 ++
+ arch/x86/Makefile                             |  22 ---
+ arch/x86/crypto/Makefile                      | 162 +++++++-----------
+ arch/x86/crypto/aesni-intel_avx-x86_64.S      |   6 -
+ arch/x86/crypto/aesni-intel_glue.c            |  21 +--
+ arch/x86/crypto/blake2s-core.S                |   2 -
+ arch/x86/crypto/chacha_glue.c                 |   6 +-
+ arch/x86/crypto/poly1305-x86_64-cryptogams.pl |  16 --
+ arch/x86/crypto/poly1305_glue.c               |  11 +-
+ arch/x86/crypto/sha1_ssse3_asm.S              |   4 -
+ arch/x86/crypto/sha1_ssse3_glue.c             |  13 --
+ arch/x86/crypto/sha256-avx-asm.S              |   3 -
+ arch/x86/crypto/sha256-avx2-asm.S             |   3 -
+ arch/x86/crypto/sha256_ssse3_glue.c           |  12 --
+ arch/x86/crypto/sha512-avx-asm.S              |   2 -
+ arch/x86/crypto/sha512-avx2-asm.S             |   3 -
+ arch/x86/crypto/sha512_ssse3_glue.c           |  10 --
+ arch/x86/include/asm/dwarf2.h                 |  44 -----
+ arch/x86/include/asm/xor_avx.h                |   9 -
+ drivers/gpu/drm/i915/Makefile                 |   3 -
+ drivers/gpu/drm/i915/i915_memcpy.c            |   5 -
+ include/crypto/curve25519.h                   |   6 +-
+ kernel/signal.c                               |   2 +-
+ lib/raid6/algos.c                             |  12 +-
+ lib/raid6/avx2.c                              |   4 -
+ lib/raid6/recov_avx2.c                        |   6 -
+ lib/raid6/recov_ssse3.c                       |   6 -
+ lib/raid6/test/Makefile                       |   9 +-
+ 30 files changed, 101 insertions(+), 324 deletions(-)
+ create mode 100644 arch/x86/Kconfig.assembler
+
+-- 
+2.17.1
+
