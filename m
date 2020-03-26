@@ -2,110 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C33CD193A43
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2020 09:04:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5BD00193AAE
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2020 09:18:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727874AbgCZIEF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 26 Mar 2020 04:04:05 -0400
-Received: from conuserg-11.nifty.com ([210.131.2.78]:19078 "EHLO
-        conuserg-11.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727773AbgCZIEE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Mar 2020 04:04:04 -0400
-Received: from pug.e01.socionext.com (p14092-ipngnfx01kyoto.kyoto.ocn.ne.jp [153.142.97.92]) (authenticated)
-        by conuserg-11.nifty.com with ESMTP id 02Q81Wph002183;
-        Thu, 26 Mar 2020 17:01:55 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-11.nifty.com 02Q81Wph002183
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1585209716;
-        bh=LtWeUWp0ttfpJ5z1d5FhHMR2PikZUhMmjkf5NulQvsI=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Szxs/tTCNMGXvp9dbnrJo7rWZIdoBHZyT5Fzo7Pbi8ZeffchxaXiSxAtzNtc+vHTz
-         XKAG9pRATbl7MGvsSsrMosTS/bQbh8cH47qdZgh1HA+7jvNEhqT9l0Xmm57aTnS1tX
-         bPIenYGKfU2CHGWFxGlJRrARUMJwDptpPPj4HX9QGYeiOKjNxdzcsCk/ocNjhQVbm6
-         mmczgzkUY+RRFHWcTlnWpF3LOEjpWaAAIAHpeTlVDDNGDRxeua3gtVAU5mC0gk0d+4
-         qXI0/uhC/tFy89Od7THEkZdphwBmfu7cxG3P2F6TVhVtEcz9QGjVe2rJ0ZUaHmDN6x
-         518UG3b49nZXg==
-X-Nifty-SrcIP: [153.142.97.92]
-From:   Masahiro Yamada <masahiroy@kernel.org>
-To:     linux-kbuild@vger.kernel.org
-Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        id S1727865AbgCZISJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Mar 2020 04:18:09 -0400
+Received: from frisell.zx2c4.com ([192.95.5.64]:35275 "EHLO frisell.zx2c4.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727821AbgCZISJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 26 Mar 2020 04:18:09 -0400
+Received: by frisell.zx2c4.com (ZX2C4 Mail Server) with ESMTP id 293077ea;
+        Thu, 26 Mar 2020 08:10:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed; d=zx2c4.com; h=mime-version
+        :references:in-reply-to:from:date:message-id:subject:to:cc
+        :content-type; s=mail; bh=z54i3Rpd8bQwLDnVNFV/yezuxLU=; b=boOyqs
+        mCdG+80LeYcjASWpkQ1zMThj2uZPRyQj63aULJ1eho1PEeJxY053blYBVEDv/+X7
+        OBQ/dBvu36pqu+6GHtzv5FnIDYJ8+m+UpNZddescE9+TJew8ZdyolfWdn7qCgNwm
+        hCDQQZZIBJP70J+3MGGaus93N2IUKDn1UavfBtBSFRk4AtjJCPc/vVInIjmHn4rp
+        9nXPZ9Perj3Rk83uKKf3OPmeCafWNMnHZ2UW709Lpc/xjEXipaADr7IcjmiVm9Er
+        qA90IZHHNfiJD+f6KrFTRwRM8Vhig7u1XfQF2UZX5KM4Hl2qhbUe96EyxkSi5RwR
+        yE1MyvOm+wrsj6Vw==
+Received: by frisell.zx2c4.com (ZX2C4 Mail Server) with ESMTPSA id f22236e6 (TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256:NO);
+        Thu, 26 Mar 2020 08:10:45 +0000 (UTC)
+Received: by mail-io1-xd36.google.com with SMTP id k9so5139001iov.7;
+        Thu, 26 Mar 2020 01:18:06 -0700 (PDT)
+X-Gm-Message-State: ANhLgQ3XXTfJD2Ff639k67Y0c3BAp/U3FUB4V5ieGUaWa70y8GQopE/p
+        x7aUHw6BxH3iMuvq1jZNZ1glMxnQZEqeTiVu7ag=
+X-Google-Smtp-Source: ADFU+vsTJTCXcFJHQUwui8dbQzcKfWOUCgQIPLG0bwuItksw1ry6Mg259oUoldQgsVo9bcGoroXnNzuIzCxg8dcm+jA=
+X-Received: by 2002:a02:2a4a:: with SMTP id w71mr6759564jaw.75.1585210385536;
+ Thu, 26 Mar 2020 01:13:05 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200326080104.27286-1-masahiroy@kernel.org>
+In-Reply-To: <20200326080104.27286-1-masahiroy@kernel.org>
+From:   "Jason A. Donenfeld" <Jason@zx2c4.com>
+Date:   Thu, 26 Mar 2020 02:12:54 -0600
+X-Gmail-Original-Message-ID: <CAHmME9pnAvgErYkcvvdakvfMY8ZGKfwHHNYzpVtJ913Tgp16CQ@mail.gmail.com>
+Message-ID: <CAHmME9pnAvgErYkcvvdakvfMY8ZGKfwHHNYzpVtJ913Tgp16CQ@mail.gmail.com>
+Subject: Re: [PATCH v2 00/16] x86, crypto: remove always-defined CONFIG_AS_*
+ and cosolidate Kconfig/Makefiles
+To:     Masahiro Yamada <masahiroy@kernel.org>
+Cc:     Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
         Nick Desaulniers <ndesaulniers@google.com>,
         Borislav Petkov <bp@alien8.de>,
         Peter Zijlstra <peterz@infradead.org>,
-        "H . Peter Anvin" <hpa@zytor.com>, x86@kernel.org,
-        "Jason A . Donenfeld" <Jason@zx2c4.com>,
-        clang-built-linux@googlegroups.com, Borislav Petkov <bp@suse.de>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v2 14/16] Documentation/changes: Raise minimum supported binutils version to 2.23
-Date:   Thu, 26 Mar 2020 17:01:02 +0900
-Message-Id: <20200326080104.27286-15-masahiroy@kernel.org>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200326080104.27286-1-masahiroy@kernel.org>
-References: <20200326080104.27286-1-masahiroy@kernel.org>
+        "H . Peter Anvin" <hpa@zytor.com>, X86 ML <x86@kernel.org>,
+        clang-built-linux <clang-built-linux@googlegroups.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>,
+        "David S. Miller" <davem@davemloft.net>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Jim Kukunas <james.t.kukunas@linux.intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        NeilBrown <neilb@suse.de>, Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Yuanhan Liu <yuanhan.liu@linux.intel.com>,
+        dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
+        Linux Crypto Mailing List <linux-crypto@vger.kernel.org>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Borislav Petkov <bp@suse.de>
+Very little has changed from last time, and this whole series still
+looks good to me. I think I already ack'd most packages, but in case
+it helps:
 
-The currently minimum-supported binutils version 2.21 has the problem of
-promoting symbols which are defined outside of a section into absolute.
-According to Arvind:
+Reviewed-by: Jason A. Donenfeld <Jason@zx2c4.com>
 
-  binutils-2.21 and -2.22. An x86-64 defconfig will fail with
-          Invalid absolute R_X86_64_32S relocation: _etext
-  and after fixing that one, with
-          Invalid absolute R_X86_64_32S relocation: __end_of_kernel_reserve
-
-Those two versions of binutils have a bug when it comes to handling
-symbols defined outside of a section and binutils 2.23 has the proper
-fix, see: https://sourceware.org/legacy-ml/binutils/2012-06/msg00155.html
-
-Therefore, up to the fixed version directly, skipping the broken ones.
-
-Currently shipping distros already have the fixed binutils version so
-there should be no breakage resulting from this.
-
-For more details about the whole thing, see the thread in Link.
-
-Signed-off-by: Borislav Petkov <bp@suse.de>
-Link: https://lkml.kernel.org/r/20200110202349.1881840-1-nivedita@alum.mit.edu
-Acked-by: Kees Cook <keescook@chromium.org>
-Acked-by: Jason A. Donenfeld <Jason@zx2c4.com>
-Acked-by: Nick Desaulniers <ndesaulniers@google.com>
-Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
----
-
-Changes in v2: None
-
- Documentation/process/changes.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/process/changes.rst b/Documentation/process/changes.rst
-index e47863575917..91c5ff8e161e 100644
---- a/Documentation/process/changes.rst
-+++ b/Documentation/process/changes.rst
-@@ -31,7 +31,7 @@ you probably needn't concern yourself with pcmciautils.
- ====================== ===============  ========================================
- GNU C                  4.6              gcc --version
- GNU make               3.81             make --version
--binutils               2.21             ld -v
-+binutils               2.23             ld -v
- flex                   2.5.35           flex --version
- bison                  2.0              bison --version
- util-linux             2.10o            fdformat --version
-@@ -76,7 +76,7 @@ You will need GNU make 3.81 or later to build the kernel.
- Binutils
- --------
- 
--Binutils 2.21 or newer is needed to build the kernel.
-+Binutils 2.23 or newer is needed to build the kernel.
- 
- pkg-config
- ----------
--- 
-2.17.1
-
+Since this touches a lot of stuff, it might be best to get it in as
+early as possible during the merge window, as I imagine new code being
+added is going to want to be touching those makefiles too.
