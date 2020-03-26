@@ -2,60 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1492419493A
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2020 21:33:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5FBEC194957
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Mar 2020 21:40:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728043AbgCZUdZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 26 Mar 2020 16:33:25 -0400
-Received: from mail-pj1-f67.google.com ([209.85.216.67]:55814 "EHLO
-        mail-pj1-f67.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727880AbgCZUdW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Mar 2020 16:33:22 -0400
-Received: by mail-pj1-f67.google.com with SMTP id mj6so2952280pjb.5
-        for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2020 13:33:21 -0700 (PDT)
+        id S1726034AbgCZUky (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Mar 2020 16:40:54 -0400
+Received: from mail-il1-f195.google.com ([209.85.166.195]:39416 "EHLO
+        mail-il1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726281AbgCZUky (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Mar 2020 16:40:54 -0400
+Received: by mail-il1-f195.google.com with SMTP id r5so6748415ilq.6
+        for <linux-doc@vger.kernel.org>; Thu, 26 Mar 2020 13:40:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=amacapital-net.20150623.gappssmtp.com; s=20150623;
-        h=content-transfer-encoding:from:mime-version:subject:date:message-id
-         :references:cc:in-reply-to:to;
-        bh=31LBMmRcYe+yEGtoM08ZSaLwaQfDlxsblA8wVchHVi8=;
-        b=NrpPlECo6AI/hAQE3I/XEDAjdjtUo9LXqFqVAUMuzk1z6cbpF8zmw6aox8LpgFf6/D
-         e9DU2naiucIg6yd2Ts76fWA+ep+Gef7o5mHgq35y2n0lR8oGOCTdq8645lxKk264kt7M
-         fGlozyLZ/YECGQkKZp3ZuIQ9TuAVcsw7vmeEXm/dV6M5pNEWF2e+HRV35RyDCM2Gg4b6
-         QXl+vV0oSLfr7kuwXp1717znu1qp4xMgHFUHuCr0yvsK7sY6n/0WUSPg+IvDoZu0a/Db
-         Kb+kPOT74J/2lhYllCcc/XEgBWVZ2HG4UDhkPAFvX0GLeaE0/gpaNxU2/rL02Dm+OYiU
-         uU0w==
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=oPnIxP1F2bUl2Vqj4vcE9x/qsmiFe4D9+mAco5rF8w8=;
+        b=U1JZSvac6LlRtm/epOjONUgGEKFr582n6HvEnA1k+Ooa8XGren3qDlxVm6xr13+sDi
+         /s5fJPa0GuCMLyK8mqVPE497Z3J6r7euU7rEF9CfP3asSK85rDOjci8zfHSRIulto8A+
+         AmYKMwi9BAZlosf2ID7y2Z8XQqgl1ObsBptXCoWNfEJMuP8M2NXS4skDppAsvXpOFsZd
+         /kpguI0bKRHFVrC+RdhpZcJA8T3R9LC34LFMsWwvYwBHvSFZrsPcrL/O0tYVYgFvftED
+         5Tgu3RUXGaeLbUJcFenb05VQ9NNhZoOpjVmHOYbmUeHjDP9QfmJeZ/4XC+X1jMeUvypg
+         qdfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:content-transfer-encoding:from:mime-version
-         :subject:date:message-id:references:cc:in-reply-to:to;
-        bh=31LBMmRcYe+yEGtoM08ZSaLwaQfDlxsblA8wVchHVi8=;
-        b=NLax8FS2S/Pbz/LpCj3eBDas8Q+Mov/lKtVpCCOcl4haCzW69bKCBb+dlNbGMs+RIj
-         W2dFIMXOjSmL7yQnt9iyAzFHS9uuifJGthPhbfPL/LjurjDszHwTJd2rORZhm8Xksbhz
-         AFPCLRbifJTN5wbswG0phDfap9D6VTW1eH1McJL/PDBUvAJ5M3PreGzPVSVzGg1RpnJm
-         TGi+0CGiZ9R9rNgg9uQUprjIB+VcFrOJq7CeHtEwiYlvAihjQv35xyKPjs2vyhe5mT+c
-         CDbe3Av1BQo6nnhG3gM/P118P38i1CyoaTKci7M+IPRsCvJA2Iplc3bhwlsG7uVO++AN
-         5v4Q==
-X-Gm-Message-State: ANhLgQ2Aq0EJQ06OT3aCj4S1wZi8WhhdgkbBRgeQ12t6K8H+hnKlOZ5X
-        ibYZ5PtK8g1Xl2q3x820l/k1NQ==
-X-Google-Smtp-Source: ADFU+vu+gUBPTHCiLbo4oeQsnkYNtYX/UDxhFzKc+aeKr+GO4BTRKm7q6N09v+wRxLLr/n/j+YjkuA==
-X-Received: by 2002:a17:902:b088:: with SMTP id p8mr10115931plr.106.1585254800408;
-        Thu, 26 Mar 2020 13:33:20 -0700 (PDT)
-Received: from ?IPv6:2601:646:c200:1ef2:6dcf:5ef7:9489:9d02? ([2601:646:c200:1ef2:6dcf:5ef7:9489:9d02])
-        by smtp.gmail.com with ESMTPSA id 79sm2388418pfz.23.2020.03.26.13.33.19
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Mar 2020 13:33:19 -0700 (PDT)
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-From:   Andy Lutomirski <luto@amacapital.net>
-Mime-Version: 1.0 (1.0)
-Subject: Re: [RFC PATCH 00/12] x86: Trenchboot secure late launch Linux kernel support
-Date:   Thu, 26 Mar 2020 13:33:17 -0700
-Message-Id: <FE871C2B-15BB-4089-A912-40F2E9FE680B@amacapital.net>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=oPnIxP1F2bUl2Vqj4vcE9x/qsmiFe4D9+mAco5rF8w8=;
+        b=bw7b5UV3BbA73ot5iB+Xsi2sIsUWGwiEukIJ6kYlMoc5CQPAaLqfbSZuHCqnN1voMH
+         HDP91mb0y90FLFJPJ8W/w7Fs0NQfOMwL/RWBb5L4Qv6vN0aTc06uB5vvolWA9sjA7cuM
+         +vNDLmNPMQU619Vb/rOgRbBczTDo9UiSxtOLQ5ZChdVhASsbTxtsHr50gf8m2T+TfuPs
+         xjPSEKb1z7HfmXIOEfvHtXUaplxTEeuKqZ0j5upYC/RTP7vNKczGeSzwTRFRwB7y6cdh
+         nBy9wtDc+MndOOjKldw1e91tx7/5ws7uumpQaGmIavTdjCKaxiUyD770egYVIJuwo9im
+         bW4A==
+X-Gm-Message-State: ANhLgQ3MFlm5JA2nUdqtxb8f+JAt8OIZhTWgSVnNoJwvbhfzTYWZksQn
+        yxh0u6HcIGjae47mcPc2jqEvKTD04JEF2W2ixwZadyw5
+X-Google-Smtp-Source: ADFU+vsPhdCWgraaEVcB+eEYFG9fMTbQynR8rOzV4/9B08a/32qxVwyySynEVOR9HN0I1yktzWVo6KHXeU4ueQz6jho=
+X-Received: by 2002:a92:8316:: with SMTP id f22mr10695500ild.169.1585255253507;
+ Thu, 26 Mar 2020 13:40:53 -0700 (PDT)
+MIME-Version: 1.0
 References: <CACdnJutT1F7YJ5KFkyuaZv=nj8GqC+mrnoAsHZfMP1ZRNUQg3Q@mail.gmail.com>
+ <FE871C2B-15BB-4089-A912-40F2E9FE680B@amacapital.net>
+In-Reply-To: <FE871C2B-15BB-4089-A912-40F2E9FE680B@amacapital.net>
+From:   Matthew Garrett <mjg59@google.com>
+Date:   Thu, 26 Mar 2020 13:40:42 -0700
+Message-ID: <CACdnJusd7m-c0zLmAjSq9Sb9HxyCkhyyp5W=4FMdysgu7_g=Sw@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/12] x86: Trenchboot secure late launch Linux kernel support
+To:     Andy Lutomirski <luto@amacapital.net>
 Cc:     Daniel Kiper <daniel.kiper@oracle.com>,
         Ross Philipson <ross.philipson@oracle.com>,
         Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        the arch/x86 maintainers <x86@kernel.org>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
         linux-doc@vger.kernel.org, dpsmith@apertussolutions.com,
         Thomas Gleixner <tglx@linutronix.de>,
         Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
@@ -66,86 +63,37 @@ Cc:     Daniel Kiper <daniel.kiper@oracle.com>,
         krystian.hebel@3mdeb.com, michal.zygowski@3mdeb.com,
         James Bottomley <James.Bottomley@hansenpartnership.com>,
         andrew.cooper3@citrix.com
-In-Reply-To: <CACdnJutT1F7YJ5KFkyuaZv=nj8GqC+mrnoAsHZfMP1ZRNUQg3Q@mail.gmail.com>
-To:     Matthew Garrett <mjg59@google.com>
-X-Mailer: iPhone Mail (17D50)
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Thu, Mar 26, 2020 at 1:33 PM Andy Lutomirski <luto@amacapital.net> wrote=
+:
+> As a straw-man approach: make the rule that we never call EFI after secur=
+e launch. Instead we write out any firmware variables that we want to chang=
+e on disk somewhere.  When we want to commit those changes, we reboot, comm=
+it the changes, and re-launch. Or we deactivate the kernel kexec-style, sea=
+l the image against PCRs, blow away PCRs, call EFI, relaunch, unseal the PC=
+Rs, and continue on our merry way.
 
+That breaks the memory overwrite protection code, where a variable is
+set at boot and cleared on a controlled reboot. We'd also need to read
+every variable and pass those values to the kernel in some way so the
+read interfaces still work. Some platforms may also expect to be able
+to use the EFI reboot call. As for the second approach - how would we
+verify that the EFI code hadn't modified any user pages? Those
+wouldn't be measured during the second secure launch. If we're calling
+the code at runtime then I think we need to assert that it's trusted.
 
-> On Mar 26, 2020, at 1:19 PM, Matthew Garrett <mjg59@google.com> wrote:
->=20
-> =EF=BB=BFOn Thu, Mar 26, 2020 at 6:40 AM Daniel Kiper <daniel.kiper@oracle=
-.com> wrote:
->>> On Wed, Mar 25, 2020 at 01:29:03PM -0700, 'Matthew Garrett' via trenchbo=
-ot-devel wrote:
->>> On Wed, Mar 25, 2020 at 12:43 PM Ross Philipson
->>> <ross.philipson@oracle.com> wrote:
->>>> To enable the kernel to be launched by GETSEC or SKINIT, a stub must be=
+> I=E2=80=99m not sure how SMM fits in to this whole mess.
 
->>>> built into the setup section of the compressed kernel to handle the
->>>> specific state that the late launch process leaves the BSP. This is a
->>>> lot like the EFI stub that is found in the same area. Also this stub
->>>> must measure everything that is going to be used as early as possible.
->>>> This stub code and subsequent code must also deal with the specific
->>>> state that the late launch leaves the APs in.
->>>=20
->>> How does this integrate with the EFI entry point? That's the expected
->>=20
->> It does not. We do not want and need to tie secure launch with UEFI.
->=20
-> I agree that it shouldn't be required, but it should be possible. We
-> shouldn't add new entry points that don't integrate with the standard
-> way of booting the kernel.
->=20
->>> What's calling ExitBootServices() in
->>=20
->> Currently it is a bootloader, the GRUB which I am working on... OK, this
->> is not perfect but if we want to call ExitBootServices() from the kernel
->> then we have to move all pre-launch code from the bootloader to the
->> kernel. Not nice because then everybody who wants to implement secure
->> launch in different kernel, hypervisor, etc. has to re-implement whole
->> pre-launch code again.
->=20
-> We call ExitBootServices() in the EFI stub, so this is fine as long as
-> the EFI stub hands over control to the SL code. But yes, I think it's
-> a requirement that it be kernel-owned code calling ExitBootServices().
->=20
->>> this flow, and does the secure launch have to occur after it? It'd be
->>=20
->> Yes, it does.
->=20
-> Ok. The firmware TPM interfaces are gone after ExitBootServices(), so
-> we're going to need an additional implementation.
->=20
->> I think any post-launch code in the kernel should not call anything from
->> the gap. And UEFI belongs to the gap. OK, we can potentially re-use UEFI
->> TPM code in the pre-launch phase but I am not convinced that we should
->> (I am looking at it right now). And this leads us to other question
->> which pops up here and there. How to call UEFI runtime services, e.g. to
->> modify UEFI variables, update firmware, etc., from MLE or even from the
->> OS started from MLE? In my opinion it is not safe to call anything from
->> the gap after secure launch. However, on the other hand we have to give
->> an option to change the boot order or update the firmware. So, how to
->> do that? I do not have an easy answer yet...
->=20
-> How does Windows manage this? Retaining access to EFI runtime services
-> is necessary, and the areas in the memory map marked as runtime
-> services code or data should be considered part of the TCB and
-> measured - they're very much not part of the gap.
+SMM's basically an unsolved problem, which makes the whole DRTM
+approach somewhat questionable unless you include the whole firmware
+in the TCB, which is kind of what we're trying to get away from.
 
-As a straw-man approach: make the rule that we never call EFI after secure l=
-aunch. Instead we write out any firmware variables that we want to change on=
- disk somewhere.  When we want to commit those changes, we reboot, commit th=
-e changes, and re-launch. Or we deactivate the kernel kexec-style, seal the i=
-mage against PCRs, blow away PCRs, call EFI, relaunch, unseal the PCRs, and c=
-ontinue on our merry way.
-
-I=E2=80=99m not sure how SMM fits in to this whole mess.
-
-If we insist on allowing EFI calls and SMM, then we may be able to *measure*=
- our exposure to potentially malicious firmware, but we can=E2=80=99t elimin=
-ate it. I personally trust OEM firmware about as far as I can throw it.=
+> If we insist on allowing EFI calls and SMM, then we may be able to *measu=
+re* our exposure to potentially malicious firmware, but we can=E2=80=99t el=
+iminate it. I personally trust OEM firmware about as far as I can throw it.
