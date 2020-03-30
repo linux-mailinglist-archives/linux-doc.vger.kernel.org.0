@@ -2,279 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 6BFB4197437
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2020 08:06:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CA6B71975AC
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2020 09:30:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728671AbgC3GGQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 30 Mar 2020 02:06:16 -0400
-Received: from us-smtp-delivery-74.mimecast.com ([216.205.24.74]:50243 "EHLO
-        us-smtp-delivery-74.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728569AbgC3GGQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Mar 2020 02:06:16 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1585548375;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=3Z8MUb22p7ZiJoFtWbH8w9GnxOVCEYWuXorysUeb7ac=;
-        b=arJ+2m5XmphN3zfVUnEZdbbG9rWLUk+WROsNbozeX/chWmq4p3bodCmXrDy8CfLeGf2heh
-        CSTH4TCf76mbBU3Sw+6aD3tEPeOTKZkXKW2dYTC2YCxJqgxwA9LefDm2MwMqD/U9eXuUiL
-        Qsh0bOpETvDgD9pGwkirqWwB3sFvvlM=
-Received: from mail-il1-f199.google.com (mail-il1-f199.google.com
- [209.85.166.199]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-397-84QhVV9lP_mhwYRgwaxgeQ-1; Mon, 30 Mar 2020 02:06:13 -0400
-X-MC-Unique: 84QhVV9lP_mhwYRgwaxgeQ-1
-Received: by mail-il1-f199.google.com with SMTP id h10so15579806ilq.22
-        for <linux-doc@vger.kernel.org>; Sun, 29 Mar 2020 23:06:13 -0700 (PDT)
+        id S1729457AbgC3Hak (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 30 Mar 2020 03:30:40 -0400
+Received: from mail-qk1-f179.google.com ([209.85.222.179]:41739 "EHLO
+        mail-qk1-f179.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729197AbgC3Hak (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Mar 2020 03:30:40 -0400
+Received: by mail-qk1-f179.google.com with SMTP id q188so17934891qke.8;
+        Mon, 30 Mar 2020 00:30:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=KgOVarC5Gb1tAd5I3fGYDa2zpN7MJ6Uuz52KOLYGanQ=;
+        b=L/okOLdH86baVZyZ0NOr+A4oqr/SPdXBmtulKV97oshRvL1hxv4SP7BtkYpmFWi5T9
+         pytvP+qG2XqPxzyXXhRmbb0IjvZwy8vdBAHJ0Udb7vGbkCb+R40R18sJepqSElxnMw0W
+         daoMppxVRNM84Ngj/sljn4j/IIMjWw6WNdA+0jiByGexLvcEqpAitq98Sf0oP+KjI2/f
+         usySMgc6wYvubeQpoAuRgAV0Jkdl7/nPnofoZuEGP+5cVIFDg8f4PnNLppe0oKTIGhlX
+         DlDfWfecVsmSjBgDR12yQxwBkA+9KJ/JFG2gPR6lvUra1l4Gyf6C8vt/Pyn3PI5pU41f
+         0HwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=3Z8MUb22p7ZiJoFtWbH8w9GnxOVCEYWuXorysUeb7ac=;
-        b=GwVrk2MWfUpX4SgbJW0LY3XmVUMx0kz/pQzs9OEcBJUiZWXJg9EUI255mMVDTbIiPW
-         I8jVyiR+ePrGEB61PPDuRm4efvRamMtLL4hDcWrkPHTqT59RXMe8hGJOTDFpYgK+Ugi2
-         HjDu9l1Hf8m6HRuAylDfmwUC1ICUbtIzzk1wDfa6E8Cx5LrG3k8/NV3TNfzo/wPeQbSa
-         6RjLzb+k5ppZWXC3yE08xpnPgS3jJw1Lkgv3BUIzRWk7NCMRALFrE+JciL87ETvsPh4V
-         dkyoIQwx/xe4BbJMds3Yxakp6WUxi1goFx9dhoTkmo58zv17yp/gm4Gw6IVI9992Z/JG
-         KdPw==
-X-Gm-Message-State: ANhLgQ0lRtL2DaQTc7p0Ur1ffraTkfXrKw2WcSKSHnEXXmektxEchLKN
-        cgYbHWENNPkG7IjMjEgdb9HOUhzhNnlX7RcKPKE6T3uWFJP/QZs6qh2eg/rf5e8pCzXhAoT4MDQ
-        G/jPRBddL6HeRauzGEkbFRZbS0MXnPmx9FrXo
-X-Received: by 2002:a02:5886:: with SMTP id f128mr9562945jab.90.1585548372560;
-        Sun, 29 Mar 2020 23:06:12 -0700 (PDT)
-X-Google-Smtp-Source: ADFU+vtQT+OkauKtqxjcWqTugG3mPUS6iL3wOenAWEe+VQEhGQWTDfa7ppRS6Xx7Lin8b0dyX9tsWAk//LPtcMD1AbA=
-X-Received: by 2002:a02:5886:: with SMTP id f128mr9562920jab.90.1585548372218;
- Sun, 29 Mar 2020 23:06:12 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=KgOVarC5Gb1tAd5I3fGYDa2zpN7MJ6Uuz52KOLYGanQ=;
+        b=mXZLoeR/+eJTk3Rsl1ndAHdtxRQIyhjuvsexp1azZfqwfesJSQPMh16dAndflX7vLG
+         GdiSncMLdHLKeRsI++/TWL/oPaG5+dTBAhHKEMRupnfCBzF58146LRJ45R712CxWCaIy
+         9edTAJLYpSPogatT74vxHumm5g4Imlb6vmDUDp1FsFLvI3xcVEZokzYJOMQUivEAIR52
+         6fAplZ12a5i/8n6orRdfPmlKyvpUzEJlhMvQQJFZhKf08FDcNDTFKC4JFNPmchMdM0Dg
+         PXim9q75skZANDoEkXuQqRbR+ZtddKMt7QaR9kia8qqrLocQomfYGITCV1HAXO85L8iT
+         QHGQ==
+X-Gm-Message-State: ANhLgQ17+3A7zuGvZoHcIMaGiT+WBJk2x6rUtg8YrjSefS8r9ZHX4UuR
+        1AoQPYhli/09yYifwVVjLsY=
+X-Google-Smtp-Source: ADFU+vssqFPLcGdnO2Q89jK3dr/TohKRvbQBzjgTN5nI6NDUSGI7SDZRmc1O+sT+H7rwonU+43a19A==
+X-Received: by 2002:a37:79c6:: with SMTP id u189mr10225793qkc.96.1585553438353;
+        Mon, 30 Mar 2020 00:30:38 -0700 (PDT)
+Received: from stingray.lan (pool-173-76-255-234.bstnma.fios.verizon.net. [173.76.255.234])
+        by smtp.gmail.com with ESMTPSA id n63sm10078499qka.80.2020.03.30.00.30.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 30 Mar 2020 00:30:37 -0700 (PDT)
+From:   Thomas Hebb <tommyhebb@gmail.com>
+To:     alsa-devel@alsa-project.org, linux-kernel@vger.kernel.or
+Cc:     Kailang Yang <kailang@realtek.com>,
+        Thomas Hebb <tommyhebb@gmail.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Hui Wang <hui.wang@canonical.com>,
+        Jaroslav Kysela <perex@perex.cz>,
+        Jian-Hong Pan <jian-hong@endlessm.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kai-Heng Feng <kai.heng.feng@canonical.com>,
+        =?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>,
+        Sergey Bostandzhyan <jin@mediatomb.cc>,
+        Takashi Iwai <tiwai@suse.com>,
+        Tomas Espeleta <tomas.espeleta@gmail.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH 0/3] Properly fix headphone noise on the XPS 13 and other ALC256 devices
+Date:   Mon, 30 Mar 2020 03:30:29 -0400
+Message-Id: <cover.1585553414.git.tommyhebb@gmail.com>
+X-Mailer: git-send-email 2.25.2
 MIME-Version: 1.0
-References: <20200326162922.27085-1-graf@amazon.com> <20200328115733.GA67084@dhcp-128-65.nay.redhat.com>
-In-Reply-To: <20200328115733.GA67084@dhcp-128-65.nay.redhat.com>
-From:   Kairui Song <kasong@redhat.com>
-Date:   Mon, 30 Mar 2020 14:06:01 +0800
-Message-ID: <CACPcB9d_Pz9SRhSsRzqygRR6waV7r8MnGcCP952svnZtpFaxnQ@mail.gmail.com>
-Subject: Re: [PATCH] swiotlb: Allow swiotlb to live at pre-defined address
-To:     Dave Young <dyoung@redhat.com>
-Cc:     Alexander Graf <graf@amazon.com>, iommu@lists.linux-foundation.org,
-        Konrad Rzeszutek Wilk <konrad.wilk@oracle.com>,
-        "the arch/x86 maintainers" <x86@kernel.org>,
-        Christoph Hellwig <hch@lst.de>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Robin Murphy <robin.murphy@arm.com>, linux-doc@vger.kernel.org,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>, dwmw@amazon.com,
-        benh@amazon.com, Jan Kiszka <jan.kiszka@siemens.com>,
-        alcioa@amazon.com, aggh@amazon.com, aagch@amazon.com,
-        dhr@amazon.com, Laszlo Ersek <lersek@redhat.com>,
-        Baoquan He <bhe@redhat.com>, Lianbo Jiang <lijiang@redhat.com>,
-        brijesh.singh@amd.com,
-        "Lendacky, Thomas" <thomas.lendacky@amd.com>,
-        kexec@lists.infradead.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, Mar 28, 2020 at 7:57 PM Dave Young <dyoung@redhat.com> wrote:
->
-> On 03/26/20 at 05:29pm, Alexander Graf wrote:
-> > The swiotlb is a very convenient fallback mechanism for bounce buffering of
-> > DMAable data. It is usually used for the compatibility case where devices
-> > can only DMA to a "low region".
-> >
-> > However, in some scenarios this "low region" may be bound even more
-> > heavily. For example, there are embedded system where only an SRAM region
-> > is shared between device and CPU. There are also heterogeneous computing
-> > scenarios where only a subset of RAM is cache coherent between the
-> > components of the system. There are partitioning hypervisors, where
-> > a "control VM" that implements device emulation has limited view into a
-> > partition's memory for DMA capabilities due to safety concerns.
-> >
-> > This patch adds a command line driven mechanism to move all DMA memory into
-> > a predefined shared memory region which may or may not be part of the
-> > physical address layout of the Operating System.
-> >
-> > Ideally, the typical path to set this configuration would be through Device
-> > Tree or ACPI, but neither of the two mechanisms is standardized yet. Also,
-> > in the x86 MicroVM use case, we have neither ACPI nor Device Tree, but
-> > instead configure the system purely through kernel command line options.
-> >
-> > I'm sure other people will find the functionality useful going forward
-> > though and extend it to be triggered by DT/ACPI in the future.
->
-> Hmm, we have a use case for kdump, this maybe useful.  For example
-> swiotlb is enabled by default if AMD SME/SEV is active, and in kdump
-> kernel we have to increase the crashkernel reserved size for the extra
-> swiotlb requirement.  I wonder if we can just reuse the old kernel's
-> swiotlb region and pass the addr to kdump kernel.
->
 
-Yes, definitely helpful for kdump kernel. This can help reduce the
-crashkernel value.
+The root cause of various pervasive audio problems on the XPS 13
+9350/9360, mostly relating to the headphone jack, turns out to be an
+undocumented feature of the ALC256 and similar codecs that routes audio
+along paths not exposed in the HDA node graph. The best we've had so far
+to configure this feature is magic numbers provided by Realtek, none of
+which have fully fixed all issues.
 
-Previously I was thinking about something similar, play around the
-e820 entry passed to kdump and let it place swiotlb in wanted region.
-Simply remap it like in this patch looks much cleaner.
+This series documents the "PC Beep Hidden Register", which controls the
+feature and which I've reverse engineered using black box techniques,
+and uses my findings to hopefully fix the headphone issues on my XPS 13
+once and for all.
 
-If this patch is acceptable, one more patch is needed to expose the
-swiotlb in iomem, so kexec-tools can pass the right kernel cmdline to
-second kernel.
 
-> >
-> > Signed-off-by: Alexander Graf <graf@amazon.com>
-> > ---
-> >  Documentation/admin-guide/kernel-parameters.txt |  3 +-
-> >  Documentation/x86/x86_64/boot-options.rst       |  4 ++-
-> >  kernel/dma/swiotlb.c                            | 46 +++++++++++++++++++++++--
-> >  3 files changed, 49 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> > index c07815d230bc..d085d55c3cbe 100644
-> > --- a/Documentation/admin-guide/kernel-parameters.txt
-> > +++ b/Documentation/admin-guide/kernel-parameters.txt
-> > @@ -4785,11 +4785,12 @@
-> >                       it if 0 is given (See Documentation/admin-guide/cgroup-v1/memory.rst)
-> >
-> >       swiotlb=        [ARM,IA-64,PPC,MIPS,X86]
-> > -                     Format: { <int> | force | noforce }
-> > +                     Format: { <int> | force | noforce | addr=<phys addr> }
-> >                       <int> -- Number of I/O TLB slabs
-> >                       force -- force using of bounce buffers even if they
-> >                                wouldn't be automatically used by the kernel
-> >                       noforce -- Never use bounce buffers (for debugging)
-> > +                     addr=<phys addr> -- Try to allocate SWIOTLB at defined address
-> >
-> >       switches=       [HW,M68k]
-> >
-> > diff --git a/Documentation/x86/x86_64/boot-options.rst b/Documentation/x86/x86_64/boot-options.rst
-> > index 2b98efb5ba7f..ca46c57b68c9 100644
-> > --- a/Documentation/x86/x86_64/boot-options.rst
-> > +++ b/Documentation/x86/x86_64/boot-options.rst
-> > @@ -297,11 +297,13 @@ iommu options only relevant to the AMD GART hardware IOMMU:
-> >  iommu options only relevant to the software bounce buffering (SWIOTLB) IOMMU
-> >  implementation:
-> >
-> > -    swiotlb=<pages>[,force]
-> > +    swiotlb=<pages>[,force][,addr=<phys addr>]
-> >        <pages>
-> >          Prereserve that many 128K pages for the software IO bounce buffering.
-> >        force
-> >          Force all IO through the software TLB.
-> > +      addr=<phys addr>
-> > +        Try to allocate SWIOTLB at defined address
-> >
-> >  Settings for the IBM Calgary hardware IOMMU currently found in IBM
-> >  pSeries and xSeries machines
-> > diff --git a/kernel/dma/swiotlb.c b/kernel/dma/swiotlb.c
-> > index c19379fabd20..83da0caa2f93 100644
-> > --- a/kernel/dma/swiotlb.c
-> > +++ b/kernel/dma/swiotlb.c
-> > @@ -46,6 +46,7 @@
-> >  #include <linux/init.h>
-> >  #include <linux/memblock.h>
-> >  #include <linux/iommu-helper.h>
-> > +#include <linux/io.h>
-> >
-> >  #define CREATE_TRACE_POINTS
-> >  #include <trace/events/swiotlb.h>
-> > @@ -102,6 +103,12 @@ unsigned int max_segment;
-> >  #define INVALID_PHYS_ADDR (~(phys_addr_t)0)
-> >  static phys_addr_t *io_tlb_orig_addr;
-> >
-> > +/*
-> > + * The TLB phys addr may be defined on the command line. Store it here if it is.
-> > + */
-> > +static phys_addr_t io_tlb_addr = INVALID_PHYS_ADDR;
-> > +
-> > +
-> >  /*
-> >   * Protect the above data structures in the map and unmap calls
-> >   */
-> > @@ -119,11 +126,23 @@ setup_io_tlb_npages(char *str)
-> >       }
-> >       if (*str == ',')
-> >               ++str;
-> > -     if (!strcmp(str, "force")) {
-> > +     if (!strncmp(str, "force", 5)) {
-> >               swiotlb_force = SWIOTLB_FORCE;
-> > -     } else if (!strcmp(str, "noforce")) {
-> > +             str += 5;
-> > +     } else if (!strncmp(str, "noforce", 7)) {
-> >               swiotlb_force = SWIOTLB_NO_FORCE;
-> >               io_tlb_nslabs = 1;
-> > +             str += 7;
-> > +     }
-> > +
-> > +     if (*str == ',')
-> > +             ++str;
-> > +     if (!strncmp(str, "addr=", 5)) {
-> > +             char *addrstr = str + 5;
-> > +
-> > +             io_tlb_addr = kstrtoul(addrstr, 0, &str);
-> > +             if (addrstr == str)
-> > +                     io_tlb_addr = INVALID_PHYS_ADDR;
-> >       }
-> >
-> >       return 0;
-> > @@ -239,6 +258,25 @@ int __init swiotlb_init_with_tbl(char *tlb, unsigned long nslabs, int verbose)
-> >       return 0;
-> >  }
-> >
-> > +static int __init swiotlb_init_io(int verbose, unsigned long bytes)
-> > +{
-> > +     unsigned __iomem char *vstart;
-> > +
-> > +     if (io_tlb_addr == INVALID_PHYS_ADDR)
-> > +             return -EINVAL;
-> > +
-> > +     vstart = memremap(io_tlb_addr, bytes, MEMREMAP_WB);
-> > +     if (!vstart)
-> > +             return -EINVAL;
-> > +
-> > +     if (swiotlb_init_with_tbl(vstart, io_tlb_nslabs, verbose)) {
-> > +             memunmap(vstart);
-> > +             return -EINVAL;
-> > +     }
-> > +
-> > +     return 0;
-> > +}
-> > +
-> >  /*
-> >   * Statically reserve bounce buffer space and initialize bounce buffer data
-> >   * structures for the software IO TLB used to implement the DMA API.
-> > @@ -257,6 +295,10 @@ swiotlb_init(int verbose)
-> >
-> >       bytes = io_tlb_nslabs << IO_TLB_SHIFT;
-> >
-> > +     /* Map IO TLB from device memory */
-> > +     if (!swiotlb_init_io(verbose, bytes))
-> > +             return;
-> > +
-> >       /* Get IO TLB memory from the low pages */
-> >       vstart = memblock_alloc_low(PAGE_ALIGN(bytes), PAGE_SIZE);
-> >       if (vstart && !swiotlb_init_with_tbl(vstart, io_tlb_nslabs, verbose))
-> > --
-> > 2.16.4
-> >
-> >
-> >
-> >
-> > Amazon Development Center Germany GmbH
-> > Krausenstr. 38
-> > 10117 Berlin
-> > Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
-> > Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
-> > Sitz: Berlin
-> > Ust-ID: DE 289 237 879
-> >
-> >
-> >
->
-> Thanks
-> Dave
->
+Thomas Hebb (3):
+  ALSA: doc: Document PC Beep Hidden Register on Realtek ALC256
+  ALSA: hda/realtek - Set principled PC Beep configuration for ALC256
+  ALSA: hda/realtek - Remove now-unnecessary XPS 13 headphone noise
+    fixups
 
+ Documentation/sound/hd-audio/index.rst        |   1 +
+ Documentation/sound/hd-audio/models.rst       |   2 -
+ .../sound/hd-audio/realtek-pc-beep.rst        | 129 ++++++++++++++++++
+ sound/pci/hda/patch_realtek.c                 |  49 ++-----
+ 4 files changed, 139 insertions(+), 42 deletions(-)
+ create mode 100644 Documentation/sound/hd-audio/realtek-pc-beep.rst
 
 -- 
-Best Regards,
-Kairui Song
+2.25.2
 
