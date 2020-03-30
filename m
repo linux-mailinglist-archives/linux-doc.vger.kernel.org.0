@@ -2,211 +2,231 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id CBEBE198093
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2020 18:10:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0735219835D
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2020 20:26:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730094AbgC3QJ7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 30 Mar 2020 12:09:59 -0400
-Received: from mail-qt1-f195.google.com ([209.85.160.195]:44147 "EHLO
-        mail-qt1-f195.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730031AbgC3QJ6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Mar 2020 12:09:58 -0400
-Received: by mail-qt1-f195.google.com with SMTP id x16so15516076qts.11;
-        Mon, 30 Mar 2020 09:09:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=Ub7ScHk+nLkXNGoDRW/6X3tib9hB0debFlDw1vCHvmE=;
-        b=EwpufE1fsdpxxandyYt2l2BTwK6xYzstuZPrCh47XzSEk1ngPWDprS+QOa8luHUAdF
-         D5FO58SPvO/42H30j2T35ruUb7aPjLgla8hlbEhtird8DVW3oyng8wngWIiAPleyWozR
-         HIHiUNgAjQeQbRNf6Ige9clVmrR5B+AOD77i+U1cqAX5jEuuRzb0CHXRLtRV+xlyTo6E
-         7km4ejo9g6RyLyCyrbUlqwueEgpl0zncRSHEf1MCXFiWBVVIK6djIrlwchEcw9RhIpaY
-         NW6yaFgtu6ZKN6+/mOc9M2RDtPfMiGbXrPs83ZC0nCRRT/tdHGOuXAA8UKhzYDgFVdZD
-         gU9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Ub7ScHk+nLkXNGoDRW/6X3tib9hB0debFlDw1vCHvmE=;
-        b=FnLp2idXjo6UkliUgpX3Daoij/V4npZKJqpworVKhamfDr+6mzM1I1aBQrwlXIpuKA
-         gXPIzR5g9rc/FKji28ABmNlYkR6yUYVz6gwlg2taF9ovcnnKun8LMjMq/g7sX3aX5kIW
-         BDj4wq4KZ9zdaqgjFDCEQ2Rz3T8L0tPBv58or/MUqku7nH1ThiQCR1OAEtjVDnWuAJHi
-         TbPy5rjWTe5I3yuFYWOz3k0YC16xa6vYC+y8NPlGs8kn2M6GzmazoOnuP5xbxjUnAV6Z
-         mE0vpw7o8lPCq6teU8E56DOeAwFcT2zuEQrrYndtqHox2bidLyVOnzsbHVVVmyDsK7Pw
-         zUVQ==
-X-Gm-Message-State: ANhLgQ0/ojVJ3eCM+j/nkzncqwm5ciNdNF+0GQScCDovPw4gENx2QD3q
-        7bq6xn0uQZJaJgx2jfq2vHY=
-X-Google-Smtp-Source: ADFU+vsnkleV9IONCVxp6Oji0VctEpP9HCHyDUEUd/AphKLBAkzsLHCpJlaZBr7cZe5HRIUc9FRIgw==
-X-Received: by 2002:aed:38ea:: with SMTP id k97mr743011qte.66.1585584596357;
-        Mon, 30 Mar 2020 09:09:56 -0700 (PDT)
-Received: from stingray.lan (pool-173-76-255-234.bstnma.fios.verizon.net. [173.76.255.234])
-        by smtp.gmail.com with ESMTPSA id z18sm11789091qtz.77.2020.03.30.09.09.55
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 30 Mar 2020 09:09:55 -0700 (PDT)
-From:   Thomas Hebb <tommyhebb@gmail.com>
-To:     alsa-devel@alsa-project.org
-Cc:     linux-kernel@vger.kernel.org, Kailang Yang <kailang@realtek.com>,
-        Thomas Hebb <tommyhebb@gmail.com>, stable@vger.kernel.org,
-        Hui Wang <hui.wang@canonical.com>,
-        Jaroslav Kysela <perex@perex.cz>,
-        Jian-Hong Pan <jian-hong@endlessm.com>,
+        id S1726769AbgC3S0X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 30 Mar 2020 14:26:23 -0400
+Received: from smtp-190b.mail.infomaniak.ch ([185.125.25.11]:45237 "EHLO
+        smtp-190b.mail.infomaniak.ch" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726017AbgC3S0W (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Mar 2020 14:26:22 -0400
+Received: from smtp-2-0001.mail.infomaniak.ch (unknown [10.5.36.108])
+        by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 48rgrq4vzNzlj4P7;
+        Mon, 30 Mar 2020 20:26:19 +0200 (CEST)
+Received: from ns3096276.ip-94-23-54.eu (unknown [94.23.54.103])
+        by smtp-2-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 48rgrm6YdPzllGSS;
+        Mon, 30 Mar 2020 20:26:16 +0200 (CEST)
+Subject: Re: [RFC PATCH v14 00/10] Landlock LSM
+To:     Jann Horn <jannh@google.com>
+Cc:     kernel list <linux-kernel@vger.kernel.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Casey Schaufler <casey@schaufler-ca.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        James Morris <jmorris@namei.org>, Jann Horn <jann@thejh.net>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kai-Heng Feng <kai.heng.feng@canonical.com>,
-        =?UTF-8?q?Micha=C5=82=20Miros=C5=82aw?= <mirq-linux@rere.qmqm.pl>,
-        Sergey Bostandzhyan <jin@mediatomb.cc>,
-        Takashi Iwai <tiwai@suse.com>,
-        Tomas Espeleta <tomas.espeleta@gmail.com>,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v2 3/3] ALSA: hda/realtek - Remove now-unnecessary XPS 13 headphone noise fixups
-Date:   Mon, 30 Mar 2020 12:09:39 -0400
-Message-Id: <b649a00edfde150cf6eebbb4390e15e0c2deb39a.1585584498.git.tommyhebb@gmail.com>
-X-Mailer: git-send-email 2.25.2
-In-Reply-To: <cover.1585584498.git.tommyhebb@gmail.com>
-References: <cover.1585584498.git.tommyhebb@gmail.com>
+        Kees Cook <keescook@chromium.org>,
+        Michael Kerrisk <mtk.manpages@gmail.com>,
+        =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mickael.salaun@ssi.gouv.fr>,
+        "Serge E . Hallyn" <serge@hallyn.com>,
+        Shuah Khan <shuah@kernel.org>,
+        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
+        Kernel Hardening <kernel-hardening@lists.openwall.com>,
+        Linux API <linux-api@vger.kernel.org>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        linux-doc@vger.kernel.org,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        linux-security-module <linux-security-module@vger.kernel.org>,
+        the arch/x86 maintainers <x86@kernel.org>
+References: <20200224160215.4136-1-mic@digikod.net>
+ <CAG48ez21bEn0wL1bbmTiiu8j9jP5iEWtHOwz4tURUJ+ki0ydYw@mail.gmail.com>
+ <873d7419-bdd9-8a52-0a9b-dddbe31df4f9@digikod.net>
+ <CAG48ez0=0W5Ok-8nASqZrZ28JboXRRi3gDxV5u6mdcOtzwuRVA@mail.gmail.com>
+ <688dda0f-0907-34eb-c19e-3e9e5f613a74@digikod.net>
+ <CAG48ez16yT+zbK1WPxr2TnxrifW5c2DnpFLbWRRLUT_WpuFNmw@mail.gmail.com>
+ <e8530226-f295-a897-1132-7e6970dad49f@digikod.net>
+ <CAG48ez1K-7Lq2Ep_p9fOvXQ-fwj_8dA1CFd5SVDbT4ccqejDzA@mail.gmail.com>
+ <2d48e3e3-e7b2-ec33-91c5-be6a308a12d4@digikod.net>
+ <CAG48ez18LrDVLdp3agTwHNYxOBJyEb5PZ1dkwbNjpPVQoTsLcA@mail.gmail.com>
+From:   =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@digikod.net>
+Message-ID: <e07fe473-1801-01cc-12ae-b3167f95250e@digikod.net>
+Date:   Mon, 30 Mar 2020 20:26:03 +0200
+User-Agent: 
 MIME-Version: 1.0
+In-Reply-To: <CAG48ez18LrDVLdp3agTwHNYxOBJyEb5PZ1dkwbNjpPVQoTsLcA@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+X-Antivirus: Dr.Web (R) for Unix mail servers drweb plugin ver.6.0.2.8
+X-Antivirus-Code: 0x100000
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-patch_realtek.c has historically failed to properly configure the PC
-Beep Hidden Register for the ALC256 codec (among others). Depending on
-your kernel version, symptoms of this misconfiguration can range from
-chassis noise, picked up by a poorly-shielded PCBEEP trace, getting
-amplified and played on your internal speaker and/or headphones to loud
-feedback, which responds to the "Headphone Mic Boost" ALSA control,
-getting played through your headphones. For details of the problem, see
-the patch in this series titled "ALSA: hda/realtek - Set principled PC
-Beep configuration for ALC256", which fixes the configuration.
 
-These symptoms have been most noticed on the Dell XPS 13 9350 and 9360,
-popular laptops that use the ALC256. As a result, several model-specific
-fixups have been introduced to try and fix the problem, the most
-egregious of which locks the "Headphone Mic Boost" control as a hack to
-minimize noise from a feedback loop that shouldn't have been there in
-the first place.
+On 19/03/2020 22:17, Jann Horn wrote:
+> On Thu, Mar 19, 2020 at 5:58 PM Mickaël Salaün <mic@digikod.net> wrote:
+>> On 19/03/2020 00:33, Jann Horn wrote:
+>>> On Wed, Mar 18, 2020 at 1:06 PM Mickaël Salaün <mic@digikod.net> wrote:
+> [...]
+>>>> As I understand your proposition, we need to build the required_bits
+>>>> when adding a rule or enforcing/merging a ruleset with a domain. The
+>>>> issue is that a rule only refers to a struct inode, not a struct path.
+>>>> For your proposition to work, we would need to walk through the file
+>>>> path when adding a rule to a ruleset, which means that we need to depend
+>>>> of the current view of the process (i.e. its mount namespace), and its
+>>>> Landlock domain.
+>>>
+>>> I don't see why that is necessary. Why would we have to walk the file
+>>> path when adding a rule?
+>>>
+>>>> If the required_bits field is set when the ruleset is
+>>>> merged with the domain, it is not possible anymore to walk through the
+>>>> corresponding initial file path, which makes the enforcement step too
+>>>> late to check for such consistency. The important point is that a
+>>>> ruleset/domain doesn't have a notion of file hierarchy, a ruleset is
+>>>> only a set of tagged inodes.
+>>>>
+>>>> I'm not sure I got your proposition right, though. When and how would
+>>>> you generate the required_bits?
+>>>
+>>> Using your terminology:
+>>> A domain is a collection of N layers, which are assigned indices 0..N-1.
+>>> For each possible access type, a domain has a bitmask containing N
+>>> bits that stores which layers control that access type. (Basically a
+>>> per-layer version of fs_access_mask.)
+>>
+>> OK, so there is a bit for each domain, which means that you get a limit
+>> of, let's say 64 layers? Knowing that each layer can be created by a
+>> standalone application, potentially nested in a bunch of layers, this
+>> seems artificially limiting.
+> 
+> Yes, that is a downside of my approach.
+> 
+>>> To validate an access, you start by ORing together the bitmasks for
+>>> the requested access types; that gives you the required_bits mask,
+>>> which lists all layers that want to control the access.
+>>> Then you set seen_policy_bits=0, then do the
+>>> check_access_path_continue() loop while keeping track of which layers
+>>> you've seen with "seen_policy_bits |= access->contributing_policies",
+>>> or something like that.
+>>> And in the end, you check that seen_policy_bits is a superset of
+>>> required_bits - something like `(~seen_policy_bits) & required_bits ==
+>>> 0`.
+>>>
+>>> AFAICS to create a new domain from a bunch of layers, you wouldn't
+>>> have to do any path walking.
+>>
+>> Right, I misunderstood your previous email.
+>>
+>>>
+>>>> Here is my updated proposition: add a layer level and a depth to each
+>>>> rule (once enforced/merged with a domain), and a top layer level for a
+>>>> domain. When enforcing a ruleset (i.e. merging a ruleset into the
+>>>> current domain), the layer level of a new rule would be the incremented
+>>>> top layer level.
+>>>> If there is no rule (from this domain) tied to the same
+>>>> inode, then the depth of the new rule is 1. However, if there is already
+>>>> a rule tied to the same inode and if this rule's layer level is the
+>>>> previous top layer level, then the depth and the layer level are both
+>>>> incremented and the rule is updated with the new access rights (boolean
+>>>> AND).
+>>>>
+>>>> The policy looks like this:
+>>>> domain top_layer=2
+>>>> /a RW policy_bitmask=0x00000003 layer=1 depth=1
+>>>> /a/b R policy_bitmask=0x00000002 layer=2 depth=1
+>>>>
+>>>> The path walk access check walks through all inodes and start with a
+>>>> layer counter equal to the top layer of the current domain. For each
+>>>> encountered inode tied to a rule, the access rights are checked and a
+>>>> new check ensures that the layer of the matching rule is the same as the
+>>>> counter (this may be a merged ruleset containing rules pertaining to the
+>>>> same hierarchy, which is fine) or equal to the decremented counter (i.e.
+>>>> the path walk just reached the underlying layer). If the path walk
+>>>> encounter a rule with a layer strictly less than the counter minus one,
+>>>> there is a whole in the layers which means that the ruleset
+>>>> hierarchy/subset does not match, and the access must be denied.
+>>>>
+>>>> When accessing a file at /private/b/foo for a read access:
+>>>> /private/b/foo <no rules>
+>>>>   allowed_access=unknown layer_counter=2
+>>>> /private/b <access: R, policy_bitmask=0x00000002, layer=2, depth=1>
+>>>>   allowed_access=allowed layer_counter=2
+>>>> /private <no rules>
+>>>>   allowed_access=allowed layer_counter=2
+>>>> / <no rules>
+>>>>   allowed_access=allowed layer_counter=2
+>>>>
+>>>> Because the layer_counter didn't reach 1, the access request is then denied.
+>>>>
+>>>> This proposition enables not to rely on a parent ruleset at first, only
+>>>> when enforcing/merging a ruleset with a domain. This also solves the
+>>>> issue with multiple inherited/nested rules on the same inode (in which
+>>>> case the depth just grows). Moreover, this enables to safely stop the
+>>>> path walk as soon as we reach the layer 1.
+>>>
+>>> (FWIW, you could do the same optimization with the seen_policy_bits approach.)
+>>>
+>>> I guess the difference between your proposal and mine is that in my
+>>> proposal, the following would work, in effect permitting W access to
+>>> /foo/bar/baz (and nothing else)?
+>>>
+>>> first ruleset:
+>>>   /foo W
+>>> second ruleset:
+>>>   /foo/bar/baz W
+>>> third ruleset:
+>>>   /foo/bar W
+>>>
+>>> whereas in your proposal, IIUC it wouldn't be valid for a new ruleset
+>>> to whitelist a superset of what was whitelisted in a previous ruleset?
+>>>
+>>
+>> This behavior seems dangerous because a process which sandbox itself to
+>> only access /foo/bar W can bypass the restrictions from one of its
+>> parent domains (i.e. only access /foo/bar/baz W). Indeed, each layer is
+>> (most of the time) a different and standalone security policy.
+> 
+> It isn't actually bypassing the restriction: You still can't actually
+> access files like /foo/bar/blah, because a path walk from there
+> doesn't encounter any rules from the second ruleset.
 
-Now that the underlying issue has been fixed, remove all these fixups.
-Remaining fixups needed by the XPS 13 are all picked up by existing pin
-quirks.
+Right, this use case is legitimate, e.g. first giving access to
+~/Downloads and then another layer giving access to ~/ (because it
+doesn't know about the current restriction).
 
-This change should, for the XPS 13 9350/9360
+I think that neither my initial approach nor yours fit well, but I found
+a new one inspired from both approaches. The first solution I gave, and
+since implemented in the v15 [1], can manage 2^31-1 layers but it only
+works when refining a security policy *knowing the parent one* (i.e.
+refining an access tied to an inode, not a full file hierarchy). Instead
+of having a layer level and a layer depth, my new implementation (for
+v16) use a layer bitfield for each rule (and ruleset). We still AND
+access rights when merging rulesets, but instead of storing the last
+layer lever and depth, we set the corresponding bit in the layer
+bitfield of the rule. This way we don't consume more memory than the v15
+implementation (for 64 layers top, which would be 64 bits * number of
+access types with your approach, i.e. between 1KB and 2KB) and Landlock
+can properly manage supersets of access rights in nested hierarchies,
+whatever their stacking order. However, I don't see another solution to
+better handle more than 64 layers than a VLA, but that could come later.
 
- - Significantly increase volume and audio quality on headphones
- - Eliminate headphone popping on suspend/resume
- - Allow "Headphone Mic Boost" to be set again, making the headphone
-   jack fully usable as a microphone jack too.
+[1] https://lore.kernel.org/lkml/20200326202731.693608-6-mic@digikod.net/
 
-Fixes: 8c69729b4439 ("ALSA: hda - Fix headphone noise after Dell XPS 13 resume back from S3")
-Fixes: 423cd785619a ("ALSA: hda - Fix headphone noise on Dell XPS 13 9360")
-Fixes: e4c9fd10eb21 ("ALSA: hda - Apply headphone noise quirk for another Dell XPS 13 variant")
-Fixes: 1099f48457d0 ("ALSA: hda/realtek: Reduce the Headphone static noise on XPS 9350/9360")
-Cc: stable@vger.kernel.org
-Signed-off-by: Thomas Hebb <tommyhebb@gmail.com>
----
-
-Changes in v2: None
-
- Documentation/sound/hd-audio/models.rst |  2 --
- sound/pci/hda/patch_realtek.c           | 34 -------------------------
- 2 files changed, 36 deletions(-)
-
-diff --git a/Documentation/sound/hd-audio/models.rst b/Documentation/sound/hd-audio/models.rst
-index 11298f0ce44d..0ea967d34583 100644
---- a/Documentation/sound/hd-audio/models.rst
-+++ b/Documentation/sound/hd-audio/models.rst
-@@ -216,8 +216,6 @@ alc298-dell-aio
-     ALC298 fixups on Dell AIO machines
- alc275-dell-xps
-     ALC275 fixups on Dell XPS models
--alc256-dell-xps13
--    ALC256 fixups on Dell XPS13
- lenovo-spk-noise
-     Workaround for speaker noise on Lenovo machines
- lenovo-hotkey
-diff --git a/sound/pci/hda/patch_realtek.c b/sound/pci/hda/patch_realtek.c
-index 9efb0a858c64..38511f3fccfd 100644
---- a/sound/pci/hda/patch_realtek.c
-+++ b/sound/pci/hda/patch_realtek.c
-@@ -5378,17 +5378,6 @@ static void alc271_hp_gate_mic_jack(struct hda_codec *codec,
- 	}
- }
- 
--static void alc256_fixup_dell_xps_13_headphone_noise2(struct hda_codec *codec,
--						      const struct hda_fixup *fix,
--						      int action)
--{
--	if (action != HDA_FIXUP_ACT_PRE_PROBE)
--		return;
--
--	snd_hda_codec_amp_stereo(codec, 0x1a, HDA_INPUT, 0, HDA_AMP_VOLMASK, 1);
--	snd_hda_override_wcaps(codec, 0x1a, get_wcaps(codec, 0x1a) & ~AC_WCAP_IN_AMP);
--}
--
- static void alc269_fixup_limit_int_mic_boost(struct hda_codec *codec,
- 					     const struct hda_fixup *fix,
- 					     int action)
-@@ -5866,8 +5855,6 @@ enum {
- 	ALC298_FIXUP_DELL1_MIC_NO_PRESENCE,
- 	ALC298_FIXUP_DELL_AIO_MIC_NO_PRESENCE,
- 	ALC275_FIXUP_DELL_XPS,
--	ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE,
--	ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE2,
- 	ALC293_FIXUP_LENOVO_SPK_NOISE,
- 	ALC233_FIXUP_LENOVO_LINE2_MIC_HOTKEY,
- 	ALC255_FIXUP_DELL_SPK_NOISE,
-@@ -6607,23 +6594,6 @@ static const struct hda_fixup alc269_fixups[] = {
- 			{}
- 		}
- 	},
--	[ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE] = {
--		.type = HDA_FIXUP_VERBS,
--		.v.verbs = (const struct hda_verb[]) {
--			/* Disable pass-through path for FRONT 14h */
--			{0x20, AC_VERB_SET_COEF_INDEX, 0x36},
--			{0x20, AC_VERB_SET_PROC_COEF, 0x1737},
--			{}
--		},
--		.chained = true,
--		.chain_id = ALC255_FIXUP_DELL1_MIC_NO_PRESENCE
--	},
--	[ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE2] = {
--		.type = HDA_FIXUP_FUNC,
--		.v.func = alc256_fixup_dell_xps_13_headphone_noise2,
--		.chained = true,
--		.chain_id = ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE
--	},
- 	[ALC293_FIXUP_LENOVO_SPK_NOISE] = {
- 		.type = HDA_FIXUP_FUNC,
- 		.v.func = alc_fixup_disable_aamix,
-@@ -7117,17 +7087,14 @@ static const struct snd_pci_quirk alc269_fixup_tbl[] = {
- 	SND_PCI_QUIRK(0x1028, 0x06de, "Dell", ALC293_FIXUP_DISABLE_AAMIX_MULTIJACK),
- 	SND_PCI_QUIRK(0x1028, 0x06df, "Dell", ALC293_FIXUP_DISABLE_AAMIX_MULTIJACK),
- 	SND_PCI_QUIRK(0x1028, 0x06e0, "Dell", ALC293_FIXUP_DISABLE_AAMIX_MULTIJACK),
--	SND_PCI_QUIRK(0x1028, 0x0704, "Dell XPS 13 9350", ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE2),
- 	SND_PCI_QUIRK(0x1028, 0x0706, "Dell Inspiron 7559", ALC256_FIXUP_DELL_INSPIRON_7559_SUBWOOFER),
- 	SND_PCI_QUIRK(0x1028, 0x0725, "Dell Inspiron 3162", ALC255_FIXUP_DELL_SPK_NOISE),
- 	SND_PCI_QUIRK(0x1028, 0x0738, "Dell Precision 5820", ALC269_FIXUP_NO_SHUTUP),
--	SND_PCI_QUIRK(0x1028, 0x075b, "Dell XPS 13 9360", ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE2),
- 	SND_PCI_QUIRK(0x1028, 0x075c, "Dell XPS 27 7760", ALC298_FIXUP_SPK_VOLUME),
- 	SND_PCI_QUIRK(0x1028, 0x075d, "Dell AIO", ALC298_FIXUP_SPK_VOLUME),
- 	SND_PCI_QUIRK(0x1028, 0x07b0, "Dell Precision 7520", ALC295_FIXUP_DISABLE_DAC3),
- 	SND_PCI_QUIRK(0x1028, 0x0798, "Dell Inspiron 17 7000 Gaming", ALC256_FIXUP_DELL_INSPIRON_7559_SUBWOOFER),
- 	SND_PCI_QUIRK(0x1028, 0x080c, "Dell WYSE", ALC225_FIXUP_DELL_WYSE_MIC_NO_PRESENCE),
--	SND_PCI_QUIRK(0x1028, 0x082a, "Dell XPS 13 9360", ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE2),
- 	SND_PCI_QUIRK(0x1028, 0x084b, "Dell", ALC274_FIXUP_DELL_AIO_LINEOUT_VERB),
- 	SND_PCI_QUIRK(0x1028, 0x084e, "Dell", ALC274_FIXUP_DELL_AIO_LINEOUT_VERB),
- 	SND_PCI_QUIRK(0x1028, 0x0871, "Dell Precision 3630", ALC255_FIXUP_DELL_HEADSET_MIC),
-@@ -7480,7 +7447,6 @@ static const struct hda_model_fixup alc269_fixup_models[] = {
- 	{.id = ALC298_FIXUP_DELL1_MIC_NO_PRESENCE, .name = "alc298-dell1"},
- 	{.id = ALC298_FIXUP_DELL_AIO_MIC_NO_PRESENCE, .name = "alc298-dell-aio"},
- 	{.id = ALC275_FIXUP_DELL_XPS, .name = "alc275-dell-xps"},
--	{.id = ALC256_FIXUP_DELL_XPS_13_HEADPHONE_NOISE, .name = "alc256-dell-xps13"},
- 	{.id = ALC293_FIXUP_LENOVO_SPK_NOISE, .name = "lenovo-spk-noise"},
- 	{.id = ALC233_FIXUP_LENOVO_LINE2_MIC_HOTKEY, .name = "lenovo-hotkey"},
- 	{.id = ALC255_FIXUP_DELL_SPK_NOISE, .name = "dell-spk-noise"},
--- 
-2.25.2
-
+> 
+>> To sum up, the bitmask approach doesn't have the notion of layers
+>> ordering. It is then not possible to check that a rule comes from a
+>> domain which is the direct ancestor of a child's domain. I want each
+>> policy/layer to be really nested in the sense that a process sandboxing
+>> itself can only add more restriction to itself with regard to its parent
+>> domain (and the whole hierarchy). This is a similar approach to
+>> seccomp-bpf (with chained filters), except there is almost no overhead
+>> to nest several policies/layers together because they are flattened.
+>> Using the layer level and depth approach enables to implement this.
+> 
