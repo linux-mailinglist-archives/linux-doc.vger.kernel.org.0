@@ -2,44 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id C7A8619743C
-	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2020 08:07:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 63BCD19742F
+	for <lists+linux-doc@lfdr.de>; Mon, 30 Mar 2020 08:01:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728642AbgC3GHS convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Mon, 30 Mar 2020 02:07:18 -0400
-Received: from os3-362-14218.vs.sakura.ne.jp ([133.167.64.222]:38946 "EHLO
-        mail.j-snap.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1728857AbgC3GHS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Mar 2020 02:07:18 -0400
-Received: from emepride.com (ec2-18-236-227-90.us-west-2.compute.amazonaws.com [18.236.227.90])
-        (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mail.j-snap.com (Postfix) with ESMTPSA id DD9281DE4FD
-        for <linux-doc@vger.kernel.org>; Mon, 30 Mar 2020 12:30:41 +0900 (JST)
-Reply-To: Jx_838@163.com
-From:   Mar Cha <Project2020@emepride.com>
-To:     linux-doc@vger.kernel.org
-Subject: Project Collaboration.
-Date:   29 Mar 2020 20:30:28 -0700
-Message-ID: <20200329160858.55012753E04B709A@emepride.com>
-MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: 8BIT
+        id S1728806AbgC3GBq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 30 Mar 2020 02:01:46 -0400
+Received: from mail-wr1-f68.google.com ([209.85.221.68]:45381 "EHLO
+        mail-wr1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728569AbgC3GBq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 30 Mar 2020 02:01:46 -0400
+Received: by mail-wr1-f68.google.com with SMTP id t7so19996487wrw.12;
+        Sun, 29 Mar 2020 23:01:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=nAoWuGTW5ABog8Cj2M3nNOjqgYE3CWQNVmrgj5lQ1DA=;
+        b=Uwk1yEjZCOn098fCr015HhA6CtU8DlKpobKl/bvT0dzAwmCcM9JT4aAO6m+2sxMwUy
+         vgbkGFs7dQ15gS5dQ3mebfJPdFMPd0/QmCGP0sY1nJRwm03/MNevsr0sUrC1CS2a7vw3
+         27TraAA+T0hYkGwcPSaJk4NdpJSfVA3nrzBZu0aRFjCoU++3OxR/pjfZiKnyArrb7Df+
+         OgRqtxpry+cEfX46J6Lt5AZwPTlDhfHB0M/hnERd/sJZkDNdanqw7OtaXyOR9at829RP
+         Y+ukRPBVxmalsTiQ8AZZIL/6Llrr1mmz1ezJt8IEcVlSFV1YGLtSoQ/e1gDY51+mVp5w
+         xuVA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=nAoWuGTW5ABog8Cj2M3nNOjqgYE3CWQNVmrgj5lQ1DA=;
+        b=W6bcOYSQEVHUES/fzvvTc0lBvTGlZ9JTHldkvnlwxJk+0APeY24H6Ir3HyaxjimDd3
+         ie5bhZ3XDI0AEVPvg2VGKTSpvDLoW68vp2o0lSmy6O6yaeD/iIzYogQPCwBVW8iQch3b
+         9PzZjCA0rdaqyRq0tTVo10L2jMPlfl3RoA0eZMYymE/lY+5iZxyf/kcQOzboOjd+a7T8
+         zkW5hAJtY87xKWPBI49WPah+u6fBegASHLu47uybI20NSbmTL/mCOso9AWQMSQu0OSqn
+         dsAj+APdKZnovBPbpHUfKCGTBZ4l1OCHbOjkznvXUS0P7qy38f/BFnP/z+UKTu4cwHPM
+         M8LQ==
+X-Gm-Message-State: ANhLgQ1jnoaGZ8QFzbzQRtf6HVxqO34WwRI7PenD1dPHCCHD6wvJsZFi
+        CrCR5wHqDWkoD98amue5144=
+X-Google-Smtp-Source: ADFU+vtDLAgpvmczvP5q5OPEIH4YCVicaNDFiqQyOqSJLOTiSH3NCUDkUUkIImWvZ3B7ydu8itkhlA==
+X-Received: by 2002:adf:eb0c:: with SMTP id s12mr13013492wrn.293.1585548102862;
+        Sun, 29 Mar 2020 23:01:42 -0700 (PDT)
+Received: from felia.fritz.box ([2001:16b8:2daf:d500:b5da:a664:1d93:3ad3])
+        by smtp.gmail.com with ESMTPSA id v7sm18214296wrs.96.2020.03.29.23.01.41
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 29 Mar 2020 23:01:42 -0700 (PDT)
+From:   Lukas Bulwahn <lukas.bulwahn@gmail.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Subject: [PATCH] docs: driver-api: address duplicate label warning
+Date:   Mon, 30 Mar 2020 08:01:32 +0200
+Message-Id: <20200330060132.7773-1-lukas.bulwahn@gmail.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello linux-doc
+Delete identically named subsection to fix Documentation warning:
 
-My boss Jean Maynard has asked me to contact you at once. He 
-checked your profile and would like to collaborate with you on 
-some project Email him at ( l3606436169@163.com ) for briefs and 
-procedures because he has no LinkedIn account.
+  Documentation/driver-api/w1.rst:11: \
+  WARNING: duplicate label driver-api/w1:w1 api internal to the kernel, \
+  other instance in Documentation/driver-api/w1.rst
 
-His representative is presently in your country and he will meet 
-with you today after the briefs and procedures if you are 
-interested.
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+---
+One of many doc warnings...
+Jonathan, this patch is for you.
 
-Mar Cha
+ Documentation/driver-api/w1.rst | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/Documentation/driver-api/w1.rst b/Documentation/driver-api/w1.rst
+index 9963cca788a1..bda3ad60f655 100644
+--- a/Documentation/driver-api/w1.rst
++++ b/Documentation/driver-api/w1.rst
+@@ -7,9 +7,6 @@ W1: Dallas' 1-wire bus
+ W1 API internal to the kernel
+ =============================
+ 
+-W1 API internal to the kernel
+------------------------------
+-
+ include/linux/w1.h
+ ~~~~~~~~~~~~~~~~~~
+ 
+-- 
+2.17.1
+
