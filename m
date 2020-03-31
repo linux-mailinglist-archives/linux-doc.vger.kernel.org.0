@@ -2,89 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 9CCB819A1ED
-	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2020 00:29:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EAF3F19A218
+	for <lists+linux-doc@lfdr.de>; Wed,  1 Apr 2020 00:49:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731518AbgCaW3I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 31 Mar 2020 18:29:08 -0400
-Received: from mail-qk1-f194.google.com ([209.85.222.194]:37420 "EHLO
-        mail-qk1-f194.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731514AbgCaW3H (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 31 Mar 2020 18:29:07 -0400
-Received: by mail-qk1-f194.google.com with SMTP id x3so24997199qki.4
-        for <linux-doc@vger.kernel.org>; Tue, 31 Mar 2020 15:29:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=massaru-org.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=6nYFV2QWqYi47IsY2NnyndMBRfL9Zb689yvP+ZRhJYQ=;
-        b=WEbQhK9UN2CvW9DcH2pEKnkPZxZFQ66KstFZKM4h+j//VHXq4PrK0nS0kMDpen9JyH
-         8G7WfaWPzlYy9D7M2q8Ya/+zecQ3uVleocnuvM/goO7i2O9LkxiMkjczGQN6E/cY0Fdf
-         eukl1mMNKCk7+x6UJ5Y5svvrFY0qTgqmUdKii7Qp2hJ5UU4L1nZGOmGHOaGauF4SI85b
-         zq/V3aJh77372onSSRONdWyJNJtTc0h3pRBV7HCC9+NUlxtTC9UVjOSLZru4m7YRJSR/
-         mXX47pjtP9B+U4ZHHeWeXXBIns1Td/Gvc7E5ojSr94dLkemRYH5sV6u8a4c3RzHlm4ks
-         t7lw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=6nYFV2QWqYi47IsY2NnyndMBRfL9Zb689yvP+ZRhJYQ=;
-        b=GEO0eNnj6CKE8iIMI6S3qtnmd5fXsuQoKlObzktn5v3jcdCjQHKh2qXUWe3MYkrvCr
-         dU1RKde4y47MKHVZRlj9PQUh4lFvUzAXr1QcY948EDbvFbNicp9kQJ0pGV3bGkCVjfIH
-         PauRLghJwf03DBFaxXBZHUYMY4QcJg93uEpeEMVn539gcYM3uHv8Hp7wDPK60epBCOts
-         iu0xlaulDHLaKzZyUSCpJFkYe5DURnOQToXghZZbuZEFMSsqCQpQgTK3jZiFlTD7JZyb
-         re3jwkWYBUyyqxa9fzOhiBQLymxJ9M18SP7AaLavVGj4VCSBkEtDmdkdrwo7Ee5HTVW3
-         Alpw==
-X-Gm-Message-State: ANhLgQ2Ibn1VaIJfNs0EGB0/6R5uNikK79c5tMy6EpacFzGDgqP8it1T
-        +mjzZRmzHaUet+iEIxdtf0cc0nyNkf2T8w==
-X-Google-Smtp-Source: ADFU+vujLgQRKH4PKzJMmO4KEOhtyZLdp/89fmvgK6ikN22LNygxkkodSRrEqDYEtYdVOw+eHiht/w==
-X-Received: by 2002:ae9:efce:: with SMTP id d197mr7149016qkg.211.1585693745963;
-        Tue, 31 Mar 2020 15:29:05 -0700 (PDT)
-Received: from bbking.lan ([2804:14c:4a5:36c::cd2])
-        by smtp.gmail.com with ESMTPSA id 206sm238659qkn.36.2020.03.31.15.29.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 31 Mar 2020 15:29:05 -0700 (PDT)
-From:   Vitor Massaru Iha <vitor@massaru.org>
-To:     linux-doc@vger.kernel.org
-Cc:     corbet@lwn.net, linux-kernel@vger.kernel.org,
+        id S1731255AbgCaWt7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 31 Mar 2020 18:49:59 -0400
+Received: from ms.lwn.net ([45.79.88.28]:44686 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729153AbgCaWt6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 31 Mar 2020 18:49:58 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id F1393537;
+        Tue, 31 Mar 2020 22:49:57 +0000 (UTC)
+Date:   Tue, 31 Mar 2020 16:49:56 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Vitor Massaru Iha <vitor@massaru.org>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         brendanhiggins@google.com, skhan@linuxfoundation.org,
         linux-kernel-mentees@lists.linuxfoundation.org
-Subject: [PATCH 2/2] Documentation: filesystems: remove whitespaces
-Date:   Tue, 31 Mar 2020 19:28:57 -0300
-Message-Id: <97cb61253283b4054e9f00364eb08eeedb5bd95e.1585693146.git.vitor@massaru.org>
-X-Mailer: git-send-email 2.21.1
+Subject: Re: [PATCH 0/2] Documentation: Convert sysfs-pci to ReST
+Message-ID: <20200331164956.0e10b87e@lwn.net>
 In-Reply-To: <cover.1585693146.git.vitor@massaru.org>
 References: <cover.1585693146.git.vitor@massaru.org>
+Organization: LWN.net
 MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Signed-off-by: Vitor Massaru Iha <vitor@massaru.org>
----
- Documentation/filesystems/sysfs-pci.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Tue, 31 Mar 2020 19:28:55 -0300
+Vitor Massaru Iha <vitor@massaru.org> wrote:
 
-diff --git a/Documentation/filesystems/sysfs-pci.rst b/Documentation/filesystems/sysfs-pci.rst
-index 9b93e7444b15..e4df647ec9db 100644
---- a/Documentation/filesystems/sysfs-pci.rst
-+++ b/Documentation/filesystems/sysfs-pci.rst
-@@ -71,11 +71,11 @@ don't support mmapping of certain resources, so be sure to check the return
- value from any attempted mmap.  The most notable of these are I/O port
- resources, which also provide read/write access.
- 
--The 'enable' file provides a counter that indicates how many times the device 
-+The 'enable' file provides a counter that indicates how many times the device
- has been enabled.  If the 'enable' file currently returns '4', and a '1' is
- echoed into it, it will then return '5'.  Echoing a '0' into it will decrease
- the count.  Even when it returns to 0, though, some of the initialisation
--may not be reversed.  
-+may not be reversed.
- 
- The 'rom' file is special in that it provides read-only access to the device's
- ROM file, if available.  It's disabled by default, however, so applications
--- 
-2.21.1
+> Vitor Massaru Iha (2):
+>   Documentation: filesystems: Convert sysfs-pci to ReST
+>   Documentation: filesystems: remove whitespaces
+> 
+>  .../{sysfs-pci.txt => sysfs-pci.rst}          | 44 ++++++++++---------
+>  1 file changed, 24 insertions(+), 20 deletions(-)
+>  rename Documentation/filesystems/{sysfs-pci.txt => sysfs-pci.rst} (81%)
 
+Thanks for working on the documentation!  I do have a few comments...
+
+The purpose for including a cover letter on a patch series is to explain
+what the series as a whole is trying to accomplish.  Without that, it's
+not all the helpful.
+
+In this case, there is no real need for a series; just clean up that
+trailing whitespace while doing the conversion.  (It *is* normally good
+practice to separate such conversions from other changes, but that
+particular change is trivial enough that you should just do it while
+you're there).
+
+When you convert a file to RST, you need to add it to the index.rst file
+as well so that it can be a part of the documentation build.
+
+Thanks,
+
+jon
