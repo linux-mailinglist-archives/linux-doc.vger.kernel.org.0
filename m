@@ -2,80 +2,172 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 52BA91A0646
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Apr 2020 07:12:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 20F8D1A076F
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Apr 2020 08:39:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726894AbgDGFMm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Apr 2020 01:12:42 -0400
-Received: from mail-ua1-f68.google.com ([209.85.222.68]:45890 "EHLO
-        mail-ua1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726861AbgDGFMm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Apr 2020 01:12:42 -0400
-Received: by mail-ua1-f68.google.com with SMTP id 9so826683uav.12
-        for <linux-doc@vger.kernel.org>; Mon, 06 Apr 2020 22:12:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to;
-        bh=38NlpNEbzNFWb7RFQtfvRASB+B576yw7dNc7pozf3pc=;
-        b=m9m/DCsFRus/zRmIuphflM5sHyenmkMN/TOEnECOGthbLJHVg8u2+iqtFZpNbyb2/k
-         2tLF//qwyXGtNVJKRleGUy+KbEtVjN+06Aw6FbGL98d5M/QEqB9c9SHaIsBPFlQYoUCh
-         Lj+P9EPUGdvyQRip4KeH3oSvDVhqDTV0IJcbcI66BzYP/b9Y/1y4LF++1q0teLhPl3GM
-         v15gBTxOBB8qvH4CNaCnwdm2sugBL+St8qIlm7SqBWweWj6hdsos1F0mjeWO8qJt64R9
-         xl3tya8AfljNAFdSOkZ4tC7INitomO8JQPFHHcp+JAODUsaup01At9KIYDntXEoTQZb0
-         DmdQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-        bh=38NlpNEbzNFWb7RFQtfvRASB+B576yw7dNc7pozf3pc=;
-        b=p5BUqyKUMgG+zRG2oi7wi+eBZOb2qVqrB37H9wFzQi+js2nS2KaFNLfxTX9msujse7
-         Vp9Jl7NBc0YN1D4XznL/iAvDtLhBjYjX7XaYACYp4B248CxJZgj53rvncF+TEgJcNG0t
-         Eostli6pTbTimlXoMVf3KmuYordN+bCZhq7sgyZK3m2KUiYITOpUEtyGL+NW7VByapuf
-         LiPp+mjw+97hCPxfqminY1T2GjWU9tIz03Jdmu/qzrp9Np5UQGKnSvxzPl8cLx7wPqbX
-         VZzCxMPoYcxG+D2JjQ/PTi5lli+LgyGMn1LUIIyELlPQZwmt1EKmnv+9eIUbNtBoBf3Y
-         ZTbQ==
-X-Gm-Message-State: AGi0PuaDhe7dqXFxbBpeAKcN7dWLjg9ZtCAgwHGQxuEMNmwz31juBSqp
-        187GKnIq0gDNg/SPTN7dZk3jbciFaFQMYEEhXYI=
-X-Google-Smtp-Source: APiQypIYXniGQUHEpASwiGNjKth4Cu9ElCz4yjrJ2uXbYBYunhfz0887D/TRydUbTstl7MwaeVftG8QxF1P80ST3qos=
-X-Received: by 2002:ab0:a9:: with SMTP id 38mr504317uaj.61.1586236361040; Mon,
- 06 Apr 2020 22:12:41 -0700 (PDT)
+        id S1726808AbgDGGj5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Apr 2020 02:39:57 -0400
+Received: from out30-57.freemail.mail.aliyun.com ([115.124.30.57]:34233 "EHLO
+        out30-57.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726030AbgDGGj5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Apr 2020 02:39:57 -0400
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R201e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e01422;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=6;SR=0;TI=SMTPD_---0TusvTcJ_1586241590;
+Received: from IT-FVFX43SYHV2H.local(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0TusvTcJ_1586241590)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Tue, 07 Apr 2020 14:39:50 +0800
+Subject: Re: [PATCH v5] Translate debugfs.txt into Chinese and link it to the
+ index.
+To:     Chucheng Luo <luochucheng@vivo.com>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Cc:     opensource.kernel@vivo.com
+References: <20200328122315.4245-1-luochucheng@vivo.com>
+From:   Alex Shi <alex.shi@linux.alibaba.com>
+Message-ID: <83019620-ed71-7efb-7ccd-6bbb52f9ee3f@linux.alibaba.com>
+Date:   Tue, 7 Apr 2020 14:39:50 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.6.0
 MIME-Version: 1.0
-Received: by 2002:ab0:4929:0:0:0:0:0 with HTTP; Mon, 6 Apr 2020 22:12:40 -0700 (PDT)
-From:   SANDRA DEWI <dewisandra154@gmail.com>
-Date:   Tue, 7 Apr 2020 05:12:40 +0000
-Message-ID: <CABRVPWys0xe4CWBkaU0ZXQW+4d=tjDOjyo8cKohc5-VFkWPkcA@mail.gmail.com>
-Subject: whether this is your correct email address or not
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20200328122315.4245-1-luochucheng@vivo.com>
+Content-Type: text/plain; charset=gbk
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear ,Pastor
+Hi Chucheng,
+
+Sorry for a bit late.
+This patch is still have some place to improve.
 
 
+在 2020/3/28 下午8:23, Chucheng Luo 写道:
+> Translate Documentation/filesystems/debugfs.txt into Chinese.
+> 
+> Signed-off-by: Chucheng Luo <luochucheng@vivo.com>
+> ---
+> Changelog:
+> v5:
+>  - include disclaimer-zh_CN.rst
+>  - fix space missing between debugfs.txt and its reference
+>  - remove redundant '=' in caption
+>  - no 'introduction' in original file, remove it
+>  - keep each line less than 80 chars>  - change 'attention' to 'Note' in second last line
+> ---
+>  .../zh_CN/filesystems/debugfs.rst             | 258 ++++++++++++++++++
+>  .../translations/zh_CN/filesystems/index.rst  |  21 ++
+>  Documentation/translations/zh_CN/index.rst    |   2 +
+>  3 files changed, 281 insertions(+)
+>  create mode 100644 Documentation/translations/zh_CN/filesystems/debugfs.rst
+>  create mode 100644 Documentation/translations/zh_CN/filesystems/index.rst
+> 
+> diff --git a/Documentation/translations/zh_CN/filesystems/debugfs.rst b/Documentation/translations/zh_CN/filesystems/debugfs.rst
+> new file mode 100644
+> index 000000000000..c33d3c797b4a
+> --- /dev/null
+> +++ b/Documentation/translations/zh_CN/filesystems/debugfs.rst
+> @@ -0,0 +1,258 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +.. include:: ../disclaimer-zh_CN.rst
+> +
+> +:Original: :ref:`Documentation/filesystems/debugfs.txt <debugfs_index>`
+> +
+> +=======
+> +Debugfs
+> +=======
+> +
+> +译者
+> +::
+> +
+> +	中文版维护者： 罗楚成 Chucheng Luo <luochucheng@vivo.com>
+> +	中文版翻译者： 罗楚成 Chucheng Luo <luochucheng@vivo.com>
+> +	中文版校译者:  罗楚成 Chucheng Luo <luochucheng@vivo.com>
+> +
+> +
+> +
+> +版权所有2020 罗楚成 <luochucheng@vivo.com>
+> +
+> +
+> +Debugfs是内核开发人员在用户空间获取信息的简单方法。
+> +与/proc不同，proc只提供进程信息。
+> +也不像sysfs,具有严格的“每个文件一个值“的规则。
+> +debugfs根本没有规则,开发人员可以在这里放置他们
+> +想要的任何信息。debugfs文件系统也不能用作稳定的ABI接口。
+> +从理论上讲，debugfs导出文件的时候没有任何约束。
+> +但是[1]实际情况并不总是那么简单。
+> +即使是debugfs接口，也最好根据需要进行设计,
+> +并尽量保持接口不变。
 
-I have a client who is an oil business man and he made a fixed deposit
-of $26 million USD in my bank, where I am the director of the branch,
-My client died with his entire family in Jordanian
+This is one section, except no more 80 chars, we'd better
+to keep them as one section too. So fulfill each lines, and 
+don't close too ealry until 80 chars.
 
-50% of the fund will be for the church  for the work of God,the
-balance 50% we share it in the ratio of 50/50. Meaning 50% to you and
-50% for me
+And this requriment is also apply to following sections.
 
-intervention in the Syrian Civil War 2014 leaving behind no next of
-kin. I Propose to present you as next of kin to claim the funds, if
-interested reply me for full details and how we are to
+> +
+> +
+
+...
+
+> +注释：
+> +[1] http://lwn.net/Articles/309298/
+> diff --git a/Documentation/translations/zh_CN/filesystems/index.rst b/Documentation/translations/zh_CN/filesystems/index.rst
+> new file mode 100644
+> index 000000000000..3a7f5233767d
+> --- /dev/null
+> +++ b/Documentation/translations/zh_CN/filesystems/index.rst
+> @@ -0,0 +1,21 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +===============================
+> +Linux 内核中的文件系统
+> +===============================
+
+The '=' char is also too long to surpass contents. please change
+them too. (as well as the '-' in following lines)
+As to a same style issue. please check whole patch, not only
+the comment line.
 
 
+Btw, before sent out your patch, would you change the 
+'charset=y' to 'charset=UTF-8'?
 
-proceed to close this deal.
+Thanks
+Alex
 
-
-
-
-Mrs. Sandra Dewi
-
-
-
-Email  mrsdewi@gmx.com
+> +
+> +这个不完整的指南在某一天将会提供关于Linux 虚拟文件系统(VFS)层如何工作的
+> +完整信息。以及VFS以下的的文件系统。目前为止，我们提供了以下信息。
+> +
+> +
+> +
+> +
+> +文件系统
+> +===========> +
+> +关于文件系统实现的文档.
+> +
+> +.. toctree::
+> +   :maxdepth: 2
+> +
+> +   debugfs
+> diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
+> index d3165535ec9e..770f886d081c 100644
+> --- a/Documentation/translations/zh_CN/index.rst
+> +++ b/Documentation/translations/zh_CN/index.rst
+> @@ -1,3 +1,4 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+>  .. raw:: latex
+>  
+>  	\renewcommand\thesection*
+> @@ -14,6 +15,7 @@
+>     :maxdepth: 2
+>  
+>     process/index
+> +   filesystems/index
+>  
+>  目录和表格
+>  ----------
+> 
