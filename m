@@ -2,127 +2,201 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id B83841A2440
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2020 16:47:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 37A341A2501
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2020 17:23:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728930AbgDHOrA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Apr 2020 10:47:00 -0400
-Received: from mail-qk1-f196.google.com ([209.85.222.196]:39636 "EHLO
-        mail-qk1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728716AbgDHOrA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Apr 2020 10:47:00 -0400
-Received: by mail-qk1-f196.google.com with SMTP id b62so265977qkf.6;
-        Wed, 08 Apr 2020 07:46:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:mime-version:content-disposition;
-        bh=siVBmthAdHFgLF9uhM5UakhjcNDqrzY58cEVl3kJ2Nc=;
-        b=vBlULqKhI0EaYo7sydrnU5HqXR3aL1f+kq5OLCb2Lj1cHOMEgrrgyQIXph3wM1/moQ
-         bWQXZw7fNg3h2SFeUftpzgREJHR6Pdr+PidkooC8667S7xmtpE2SYCrnwaO9BUsTo1Cu
-         DVsv3Xs+zigpaiqUljyo/gCHFkjjNn6cWnjT0556ERKF+uPb8XKOF++xL89DGigAbQaT
-         F5M2aTkMTrxxvGWlZjKtvmtK1xCtFZIdF49cDSiRv/7U4Y1cJcYwdfeJ9PP4RgWpvc2K
-         bMFyMth2IFL0raT6Yz+Ut7l3krZngRCZQCJgn+rTwtqVWcbTTmInbwvGRfQ2kwXJOvWl
-         bqSg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-         :content-disposition;
-        bh=siVBmthAdHFgLF9uhM5UakhjcNDqrzY58cEVl3kJ2Nc=;
-        b=fv5h+hHPTINV6YA0rsQKH9GGrlyn0KgDla8hf6lVdVXBT0uJeUyFRJ8JU1ZtGkzMTt
-         IuO5dVLrRVpNrR1NWO7lwnbdTtxtenW9rmpgtzVTyC7uyT9a3d8dfec/Qw96RMtPUDpA
-         wKjzojfOZqY6Ieqi5/Lq4L+1I6y9pZejzsF+gnb7keV6mKIRPqeHpkgdly4hO81jID58
-         bFXnPm1IWcx31+ARZM+AgGECXFtcbgXt6LmX+xrvFCEJqywAxIjb8e1PpGq3CXjQwX1j
-         X9pLLy9TXggwVrM8YXhO58PZqtnrNpo5IX+u+6vtY7eluY15VTXaBpL8OV8YNh+yQuJ3
-         bWcg==
-X-Gm-Message-State: AGi0PuaWIr4VDrcZ+ZQnKTk3MkhoYRgNSv9K0AeaKMBrYyX2fdcZS8VW
-        oDdxCSTWFivzxqfgCf0Vg0HN8BB7EhP+Qw==
-X-Google-Smtp-Source: APiQypL/wSbX97KPtQPP+kbxWU8QDFrfXkx+WsbSyOgDYc9o3OsQ3pp+LYebwokSvcvqZj2PwzwIfw==
-X-Received: by 2002:a37:6616:: with SMTP id a22mr7706216qkc.391.1586357218692;
-        Wed, 08 Apr 2020 07:46:58 -0700 (PDT)
-Received: from darkstar ([177.89.165.183])
-        by smtp.gmail.com with ESMTPSA id m92sm19200936qtd.94.2020.04.08.07.46.56
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 08 Apr 2020 07:46:58 -0700 (PDT)
-Date:   Wed, 8 Apr 2020 11:46:53 -0300
-From:   Cristian Souza <cristianmsbr@gmail.com>
-To:     linux-kernel@vger.kernel.org
-Cc:     linux-doc@vger.kernel.org, corbet@lwn.net
-Subject: [PATCH v2] docs: admin-guide: Clarify sentences
-Message-ID: <20200408144653.GA123268@darkstar>
+        id S1729361AbgDHPWk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Apr 2020 11:22:40 -0400
+Received: from youngberry.canonical.com ([91.189.89.112]:39080 "EHLO
+        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728733AbgDHPWk (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Apr 2020 11:22:40 -0400
+Received: from ip5f5bd698.dynamic.kabel-deutschland.de ([95.91.214.152] helo=wittgenstein.fritz.box)
+        by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.86_2)
+        (envelope-from <christian.brauner@ubuntu.com>)
+        id 1jMCXA-0001BO-NU; Wed, 08 Apr 2020 15:22:32 +0000
+From:   Christian Brauner <christian.brauner@ubuntu.com>
+To:     Jens Axboe <axboe@kernel.dk>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
+        linux-api@vger.kernel.org
+Cc:     Jonathan Corbet <corbet@lwn.net>, Serge Hallyn <serge@hallyn.com>,
+        "Rafael J. Wysocki" <rafael@kernel.org>, Tejun Heo <tj@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Christian Brauner <christian.brauner@ubuntu.com>,
+        Saravana Kannan <saravanak@google.com>,
+        Jan Kara <jack@suse.cz>, David Howells <dhowells@redhat.com>,
+        Seth Forshee <seth.forshee@canonical.com>,
+        David Rheinsberg <david.rheinsberg@gmail.com>,
+        Tom Gundersen <teg@jklm.no>,
+        Christian Kellner <ckellner@redhat.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        =?UTF-8?q?St=C3=A9phane=20Graber?= <stgraber@ubuntu.com>,
+        linux-doc@vger.kernel.org, netdev@vger.kernel.org
+Subject: [PATCH 0/8] loopfs
+Date:   Wed,  8 Apr 2020 17:21:43 +0200
+Message-Id: <20200408152151.5780-1-christian.brauner@ubuntu.com>
+X-Mailer: git-send-email 2.26.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Changes to make the text more formal and organized. The reasons are now cited and described at the same time.
-Minor grammatical problems have also been fixed.
+Hey everyone,
 
-Signed-off-by: Cristian Souza <cristianmsbr@gmail.com>
----
- Documentation/admin-guide/init.rst | 35 ++++++++++++++----------------
- 1 file changed, 16 insertions(+), 19 deletions(-)
+After having been pinged about this by various people recently here's loopfs.
 
-diff --git a/Documentation/admin-guide/init.rst b/Documentation/admin-guide/init.rst
-index 68f2f6cf456b..0c2c9138f268 100644
---- a/Documentation/admin-guide/init.rst
-+++ b/Documentation/admin-guide/init.rst
-@@ -1,34 +1,30 @@
--Explaining the dreaded "No working init found." boot hang message
--=================================================================
-+Explaining the "No working init found." boot hang message
-+=========================================================
+This implements loopfs, a loop device filesystem. It takes inspiration
+from the binderfs filesystem I implemented about two years ago and with
+which we had overall good experiences so far. Parts of it are also
+based on [3] but it's mostly a new, imho cleaner and more complete
+approach.
 
--OK, so you have got this pretty unintuitive message (currently located
--in init/main.c) and are wondering what went wrong.
--Some high-level reasons for failure (listed roughly in order of execution)
--to load the init binary are:
-+Message location: ``init/main.c``
+To experiment, the patchset can be found in the following locations:
+https://git.kernel.org/pub/scm/linux/kernel/git/brauner/linux.git/log/?h=loopfs
+https://gitlab.com/brauner/linux/-/commits/loopfs
+https://github.com/brauner/linux/tree/loopfs
 
--A) Unable to mount root FS
--B) init binary doesn't exist on rootfs
--C) Broken console device
--D) Binary exists but dependencies not available
--E) Binary cannot be loaded
-+This document provides some high-level reasons for failure
-+(listed roughly in order of execution) to load the init binary.
+One of the use-cases for loopfs is to allow to dynamically allocate loop
+devices in sandboxed workloads without exposing /dev or
+/dev/loop-control to the workload in question and without having to
+implement a complex and also racy protocol to send around file
+descriptors for loop devices. With loopfs each mount is a new instance,
+i.e. loop devices created in one loopfs instance are independent of any
+loop devices created in another loopfs instance. This allows
+sufficiently privileged tools to have their own private stash of loop
+device instances. Dmitry has expressed his desire to use this for
+syzkaller in a private discussion. And various parties that want to use
+it are Cced here too.
 
--Detailed explanations:
--
--A) Set "debug" kernel parameter (in bootloader config file or CONFIG_CMDLINE)
-+1) **Unable to mount root FS**: Set "debug" kernel parameter (in bootloader config file or CONFIG_CMDLINE)
-    to get more detailed kernel messages.
--B) Make sure you have the correct root FS type
-+
-+2) **init binary doesn't exist on rootfs**: Make sure you have the correct root FS type
-    (and ``root=`` kernel parameter points to the correct partition),
-    required drivers such as storage hardware (such as SCSI or USB!)
-    and filesystem (ext3, jffs2, etc.) are builtin (alternatively as modules,
--   to be pre-loaded by an initrd)
--C) Possibly a conflict in ``console= setup`` --> initial console unavailable.
-+   to be pre-loaded by an initrd).
-+
-+3) **Broken console device**: Possibly a conflict in ``console= setup`` --> initial console unavailable.
-    E.g. some serial consoles are unreliable due to serial IRQ issues (e.g.
-    missing interrupt-based configuration).
-    Try using a different ``console= device`` or e.g. ``netconsole=``.
--D) E.g. required library dependencies of the init binary such as
-+
-+4) **Binary exists but dependencies not available**: E.g. required library dependencies of the init binary such as
-    ``/lib/ld-linux.so.2`` missing or broken. Use
-    ``readelf -d <INIT>|grep NEEDED`` to find out which libraries are required.
--E) Make sure the binary's architecture matches your hardware.
-+
-+5) **Binary cannot be loaded**: Make sure the binary's architecture matches your hardware.
-    E.g. i386 vs. x86_64 mismatch, or trying to load x86 on ARM hardware.
-    In case you tried loading a non-binary file here (shell script?),
-    you should make sure that the script specifies an interpreter in its shebang
-@@ -50,3 +46,4 @@ Further TODOs:
-   e.g. by providing additional error messages at affected places.
+In addition, the loopfs filesystem can be mounted by user namespace root
+and is thus suitable for use in containers. Combined with syscall
+interception this makes it possible to securely delegate mounting of
+images on loop devices, i.e. when a user calls mount -o loop <image>
+<mountpoint> it will be possible to completely setup the loop device.
+The final mount syscall to actually perform the mount will be handled
+through syscall interception and be performed by a sufficiently
+privileged process. Syscall interception is already supported through a
+new seccomp feature we implemented in [1] and extended in [2] and is
+actively used in production workloads. The additional loopfs work will
+be used there and in various other workloads too. You'll find a short
+illustration how this works with syscall interception below in [4].
 
- Andreas Mohr <andi at lisas period de>
-+Cristian Souza <cristianmsbr at gmail period com>
---
-2.25.1
+The number of loop devices available to a loopfs instance can be limited
+by setting the "max" mount option to a positive integer. This e.g.
+allows sufficiently privileged processes to dynamically enforce a limit
+on the number of devices. This limit is dynamic in contrast to the
+max_loop module option in that a sufficiently privileged process can
+update it with a simple remount operation.
+
+The loopfs filesystem is placed under a new config option and special
+care has been taken to not introduce any new code when users do not
+select this config option.
+
+Thanks!
+Christian
+
+[1]: 6a21cc50f0c7 ("seccomp: add a return code to trap to userspace")
+[2]: fb3c5386b382 ("seccomp: add SECCOMP_USER_NOTIF_FLAG_CONTINUE")
+[3]: https://lore.kernel.org/lkml/1401227936-15698-1-git-send-email-seth.forshee@canonical.com
+[4]:
+     root@f1:~# cat /proc/self/uid_map
+              0     100000 1000000000
+     root@f1:~# cat /proc/self/gid_map
+              0     100000 1000000000
+     root@f1:~# mkdir /dev/loopfs
+     root@f1:~# mount -t loop loop /dev/loopfs/
+     root@f1:~# ln -sf /dev/loopfs/loop-control /dev/loop-control
+     root@f1:~# losetup -f
+     /dev/loop9
+     root@f1:~# ln -sf /dev/loopfs/loop9 /dev/loop9
+     root@f1:~# ls -al /sys/class/block/loop9
+     lrwxrwxrwx 1 root root 0 Apr  8 14:53 /sys/class/block/loop9 -> ../../devices/virtual/block/loop9
+     root@f1:~# ls -al /sys/class/block/loop9/
+     total 0
+     drwxr-xr-x  9 root   root       0 Apr  8 14:53 .
+     drwxr-xr-x 13 nobody nogroup    0 Apr  8 14:53 ..
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 alignment_offset
+     lrwxrwxrwx  1 nobody nogroup    0 Apr  8 14:53 bdi -> ../../bdi/7:9
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 capability
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 dev
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 discard_alignment
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 events
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 events_async
+     -rw-r--r--  1 root   root    4096 Apr  8 14:53 events_poll_msecs
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 ext_range
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 hidden
+     drwxr-xr-x  2 nobody nogroup    0 Apr  8 14:53 holders
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 inflight
+     drwxr-xr-x  2 nobody nogroup    0 Apr  8 14:53 integrity
+     drwxr-xr-x  3 nobody nogroup    0 Apr  8 14:53 mq
+     drwxr-xr-x  2 root   root       0 Apr  8 14:53 power
+     drwxr-xr-x  3 nobody nogroup    0 Apr  8 14:53 queue
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 range
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 removable
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 ro
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 size
+     drwxr-xr-x  2 nobody nogroup    0 Apr  8 14:53 slaves
+     -r--r--r--  1 root   root    4096 Apr  8 14:53 stat
+     lrwxrwxrwx  1 nobody nogroup    0 Apr  8 14:53 subsystem -> ../../../../class/block
+     drwxr-xr-x  2 root   root       0 Apr  8 14:53 trace
+     -rw-r--r--  1 root   root    4096 Apr  8 14:53 uevent
+     root@f1:~#  
+     root@f1:~# stat --file-system /bla.img
+       File: "/bla.img"
+         ID: 4396dc4f5f3ffe1b Namelen: 255     Type: btrfs
+     Block size: 4096       Fundamental block size: 4096
+     Blocks: Total: 11230468   Free: 10851929   Available: 10738585
+     Inodes: Total: 0          Free: 0
+     root@f1:~# mount -o loop /bla.img /opt
+     root@f1:~# findmnt | grep opt
+     └─/opt                                /dev/loop9                            btrfs       rw,relatime,ssd,space_cache,subvolid=5,subvol=/
+
+Christian Brauner (8):
+  kobject_uevent: remove unneeded netlink_ns check
+  loopfs: implement loopfs
+  loop: use ns_capable for some loop operations
+  kernfs: handle multiple namespace tags
+  kernfs: let objects opt-in to propagating from the initial namespace
+  genhd: add minimal namespace infrastructure
+  loopfs: start attaching correct namespace during loop_add()
+  loopfs: only show devices in their correct instance
+
+ Documentation/filesystems/sysfs-tagging.txt |   1 -
+ MAINTAINERS                                 |   5 +
+ block/genhd.c                               |  79 ++++
+ drivers/base/devtmpfs.c                     |   4 +-
+ drivers/block/Kconfig                       |   4 +
+ drivers/block/Makefile                      |   1 +
+ drivers/block/loop.c                        | 186 +++++++--
+ drivers/block/loop.h                        |   8 +-
+ drivers/block/loopfs/Makefile               |   3 +
+ drivers/block/loopfs/loopfs.c               | 429 ++++++++++++++++++++
+ drivers/block/loopfs/loopfs.h               |  35 ++
+ fs/kernfs/dir.c                             |  38 +-
+ fs/kernfs/kernfs-internal.h                 |  26 +-
+ fs/kernfs/mount.c                           |  11 +-
+ fs/sysfs/mount.c                            |  14 +-
+ include/linux/device.h                      |   3 +
+ include/linux/genhd.h                       |   3 +
+ include/linux/kernfs.h                      |  44 +-
+ include/linux/kobject_ns.h                  |   7 +-
+ include/linux/sysfs.h                       |   8 +-
+ include/uapi/linux/magic.h                  |   1 +
+ lib/kobject.c                               |  17 +-
+ lib/kobject_uevent.c                        |   2 +-
+ net/core/net-sysfs.c                        |   6 -
+ 24 files changed, 834 insertions(+), 101 deletions(-)
+ create mode 100644 drivers/block/loopfs/Makefile
+ create mode 100644 drivers/block/loopfs/loopfs.c
+ create mode 100644 drivers/block/loopfs/loopfs.h
+
+
+base-commit: 7111951b8d4973bda27ff663f2cf18b663d15b48
+-- 
+2.26.0
+
