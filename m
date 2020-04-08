@@ -2,110 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 485A31A2655
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2020 17:52:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5AA641A2671
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2020 17:55:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729176AbgDHPv5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Apr 2020 11:51:57 -0400
-Received: from mx2.suse.de ([195.135.220.15]:47750 "EHLO mx2.suse.de"
+        id S1729890AbgDHPz3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Apr 2020 11:55:29 -0400
+Received: from mail.kernel.org ([198.145.29.99]:54886 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728062AbgDHPv5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 8 Apr 2020 11:51:57 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.220.254])
-        by mx2.suse.de (Postfix) with ESMTP id D9CC7AF6E;
-        Wed,  8 Apr 2020 15:51:51 +0000 (UTC)
-Received: by ds.suse.cz (Postfix, from userid 10065)
-        id 0B140DA730; Wed,  8 Apr 2020 17:51:10 +0200 (CEST)
-Date:   Wed, 8 Apr 2020 17:51:10 +0200
-From:   David Sterba <dsterba@suse.cz>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        id S1729824AbgDHPz3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 8 Apr 2020 11:55:29 -0400
+Received: from mail.kernel.org (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id B73B52075E;
+        Wed,  8 Apr 2020 15:55:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1586361328;
+        bh=qp3qEYEeHjKKxIsRa+ChwJ5Ycbkeaz0aFxGnu0R/3g0=;
+        h=From:To:Cc:Subject:Date:From;
+        b=r9d7FEi/HI76EEOUJNA+TD9ORGT9eWPIkLUEanPgtfogQhipauzvcUXWUr88FdY9X
+         bsWa6FAeXE+nsKzrXShusODWGE4DQ0lvElthVIOsfF9cZlbxQwbG0FqCiq6FJl3JNr
+         eIas/O4S1y2H1oUqCxjJZiqT8q05FaG0EzV9KSHk=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1jMD30-000cGh-TQ; Wed, 08 Apr 2020 17:55:26 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Jan Kara <jack@suse.cz>, Amir Goldstein <amir73il@gmail.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        Federico Vaga <federico.vaga@vaga.pv.it>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Rob Clark <robdclark@gmail.com>, Sean Paul <sean@poorly.run>,
-        David Airlie <airlied@linux.ie>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        David Sterba <dsterba@suse.com>,
-        David Howells <dhowells@redhat.com>,
-        "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
-        Nicolas Pitre <nico@fluxnic.net>,
-        Tyler Hicks <code@tyhicks.com>,
-        Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
-        Anton Altaparmakov <anton@tuxera.com>,
-        Mark Fasheh <mark@fasheh.com>,
-        Joel Becker <jlbec@evilplan.org>,
-        Joseph Qi <joseph.qi@linux.alibaba.com>,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Christoph Hellwig <hch@infradead.org>,
-        linux-fsdevel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-afs@lists.infradead.org,
-        ecryptfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
-        ocfs2-devel@oss.oracle.com
-Subject: Re: [PATCH 05/35] docs: filesystems: fix renamed references
-Message-ID: <20200408155110.GW5920@suse.cz>
-Reply-To: dsterba@suse.cz
-Mail-Followup-To: dsterba@suse.cz,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Jan Kara <jack@suse.cz>, Amir Goldstein <amir73il@gmail.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        Federico Vaga <federico.vaga@vaga.pv.it>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Rob Clark <robdclark@gmail.com>, Sean Paul <sean@poorly.run>,
-        David Airlie <airlied@linux.ie>, Daniel Vetter <daniel@ffwll.ch>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        David Sterba <dsterba@suse.com>,
-        David Howells <dhowells@redhat.com>,
-        "Tigran A. Aivazian" <aivazian.tigran@gmail.com>,
-        Nicolas Pitre <nico@fluxnic.net>, Tyler Hicks <code@tyhicks.com>,
-        Mikulas Patocka <mikulas@artax.karlin.mff.cuni.cz>,
-        Anton Altaparmakov <anton@tuxera.com>,
-        Mark Fasheh <mark@fasheh.com>, Joel Becker <jlbec@evilplan.org>,
-        Joseph Qi <joseph.qi@linux.alibaba.com>,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Christoph Hellwig <hch@infradead.org>,
-        linux-fsdevel@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-        linux-arm-msm@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        freedreno@lists.freedesktop.org, linux-afs@lists.infradead.org,
-        ecryptfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
-        ocfs2-devel@oss.oracle.com
-References: <cover.1586359676.git.mchehab+huawei@kernel.org>
- <bcfddf36f60d928c78473af4e6a0b29904213c44.1586359676.git.mchehab+huawei@kernel.org>
+        Tim Bird <Tim.Bird@sony.com>,
+        Markus Heiser <markus.heiser@darmarit.de>
+Subject: [PATCH 0/6] sphinx-pre-install improvements for Kernel 5.8
+Date:   Wed,  8 Apr 2020 17:55:19 +0200
+Message-Id: <cover.1586361086.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.25.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <bcfddf36f60d928c78473af4e6a0b29904213c44.1586359676.git.mchehab+huawei@kernel.org>
-User-Agent: Mutt/1.5.23.1-rc1 (2014-03-12)
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Apr 08, 2020 at 05:45:57PM +0200, Mauro Carvalho Chehab wrote:
-> Some filesystem references got broken by a previous patch
-> series I submitted. Address those.
-> 
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+This patch series is based on the discussions we had with regards to use
 
-For
+	python -m venv
 
->  fs/affs/Kconfig                                             | 2 +-
+to create python3 virtual machines.
 
-Acked-by: David Sterba <dsterba@suse.com>
+After this series, the script will be smarter when detecting python3 and
+python2.
+
+As I had to re-test it with different distributions, it also do several
+improvements and fixes at the detection logic and at the support for
+some distributions that I don't use (except when testing this script)
+and/or for some corner cases.
+
+Mauro Carvalho Chehab (6):
+  scripts: sphinx-pre-install: improve distro detection check
+  scripts: sphinx-pre-install: improve openSuse Tumbleweed check
+  scripts: sphinx-pre-install: fix a dependency hint with Ubuntu 16.04
+  scripts: sphinx-pre-install: address some issues with Gentoo
+  scripts: sphinx-pre-install: add support for OpenMandriva
+  scripts: sphinx-pre-install: add support for python -m venv
+
+ scripts/sphinx-pre-install | 168 +++++++++++++++++++++++++++----------
+ 1 file changed, 122 insertions(+), 46 deletions(-)
+
+-- 
+2.25.2
+
+
