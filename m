@@ -2,39 +2,37 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 73D5E1A263A
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2020 17:48:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1723D1A2601
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2020 17:47:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729790AbgDHPsv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Apr 2020 11:48:51 -0400
-Received: from mail.kernel.org ([198.145.29.99]:49214 "EHLO mail.kernel.org"
+        id S1729670AbgDHPqd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Apr 2020 11:46:33 -0400
+Received: from mail.kernel.org ([198.145.29.99]:49290 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729620AbgDHPqc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S1729644AbgDHPqc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Wed, 8 Apr 2020 11:46:32 -0400
 Received: from mail.kernel.org (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 3F34B212CC;
+        by mail.kernel.org (Postfix) with ESMTPSA id 3BE4220BED;
         Wed,  8 Apr 2020 15:46:31 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1586360791;
-        bh=kEy4QClsDKqYpuy6jSsVkkfgbzM9x8NxA08DUYZUD4M=;
+        bh=djdizYUF8P2UkZPkY2sLJI5bKLZqZSwRhGddHALE768=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=FLF4PpVLKQgEDnLiFuvvYM5lBC5QFyyZMVUMwonVPgxMLClLz4EpGaIJ3J85vqcKB
-         UXZ96AaqI2utO+Qg8nwHHIOV+uZkusgZycq2y25KeRpptuyhzkytPQIuHnlkB0hNeC
-         yTOCYnzfaSVEy3btF5hkKOcCocZP+3opjC2TAWTI=
+        b=U6mJnpirWd768ymAkegEDrM0PTsqOd1rHesjskcNjn19PhahQWlauN0fUK3NlLoyg
+         KXKpGhjmquO0nRglgQIjNEYlaUM18FcykFS+IYHWiEWT8RU1RpIWTrMdrl/Jv0NZ8h
+         sbx/AmLD8xT1HLv9NXwmo4dgwkvgXnK9z4XHtV9U=
 Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
         (envelope-from <mchehab@kernel.org>)
-        id 1jMCuL-000cB1-ES; Wed, 08 Apr 2020 17:46:29 +0200
+        id 1jMCuL-000cB6-Fp; Wed, 08 Apr 2020 17:46:29 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Stefan Richter <stefanr@s5r6.in-berlin.de>,
-        linux1394-devel@lists.sourceforge.net
-Subject: [PATCH 10/35] firewire: firewire-cdev.hL get rid of a docs warning
-Date:   Wed,  8 Apr 2020 17:46:02 +0200
-Message-Id: <9953f9ef2982babd4c6128af4566a8bb3e416fba.1586359676.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH 11/35] scripts: kernel-doc: proper handle @foo->bar()
+Date:   Wed,  8 Apr 2020 17:46:03 +0200
+Message-Id: <a388c88a1eebd4e0fb6147adb666289ef769aa51.1586359676.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.25.2
 In-Reply-To: <cover.1586359676.git.mchehab+huawei@kernel.org>
 References: <cover.1586359676.git.mchehab+huawei@kernel.org>
@@ -45,33 +43,55 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This warning:
+The pattern @foo->bar() is valid, as it can be used by a
+function pointer inside a struct passed as a parameter.
 
-	./include/uapi/linux/firewire-cdev.h:312: WARNING: Inline literal start-string without end-string.
+Right now, it causes a warning:
 
-is because %FOO doesn't work if there's a parenthesis at the
-string (as a parenthesis may indicate a function). So, mark
-the literal block using the alternate ``FOO`` syntax.
+	./drivers/firewire/core-transaction.c:606: WARNING: Inline strong start-string without end-string.
 
-Acked-by: Stefan Richter <stefanr@s5r6.in-berlin.de>
+In this specific case, the kernel-doc markup is:
+
+	/**
+	 * fw_core_remove_address_handler() - unregister an address handler
+	 * @handler: callback
+	 *
+	 * To be called in process context.
+	 *
+	 * When fw_core_remove_address_handler() returns, @handler->callback() is
+	 * guaranteed to not run on any CPU anymore.
+	 */
+
+With seems valid on my eyes. So, instead of trying to hack
+the kernel-doc markup, let's teach it about how to handle
+such things. This should likely remove lots of other similar
+warnings as well.
+
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- include/uapi/linux/firewire-cdev.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ scripts/kernel-doc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/include/uapi/linux/firewire-cdev.h b/include/uapi/linux/firewire-cdev.h
-index 1acd2b179aef..7e5b5c10a49c 100644
---- a/include/uapi/linux/firewire-cdev.h
-+++ b/include/uapi/linux/firewire-cdev.h
-@@ -308,7 +308,7 @@ struct fw_cdev_event_iso_interrupt_mc {
- /**
-  * struct fw_cdev_event_iso_resource - Iso resources were allocated or freed
-  * @closure:	See &fw_cdev_event_common;
-- *		set by %FW_CDEV_IOC_(DE)ALLOCATE_ISO_RESOURCE(_ONCE) ioctl
-+ *		set by``FW_CDEV_IOC_(DE)ALLOCATE_ISO_RESOURCE(_ONCE)`` ioctl
-  * @type:	%FW_CDEV_EVENT_ISO_RESOURCE_ALLOCATED or
-  *		%FW_CDEV_EVENT_ISO_RESOURCE_DEALLOCATED
-  * @handle:	Reference by which an allocated resource can be deallocated
+diff --git a/scripts/kernel-doc b/scripts/kernel-doc
+index f2d73f04e71d..d15c8ea95d93 100755
+--- a/scripts/kernel-doc
++++ b/scripts/kernel-doc
+@@ -214,6 +214,7 @@ my $type_constant2 = '\%([-_\w]+)';
+ my $type_func = '(\w+)\(\)';
+ my $type_param = '\@(\w*((\.\w+)|(->\w+))*(\.\.\.)?)';
+ my $type_fp_param = '\@(\w+)\(\)';  # Special RST handling for func ptr params
++my $type_fp_param2 = '\@(\w+->\S+)\(\)';  # Special RST handling for structs with func ptr params
+ my $type_env = '(\$\w+)';
+ my $type_enum = '\&(enum\s*([_\w]+))';
+ my $type_struct = '\&(struct\s*([_\w]+))';
+@@ -249,6 +250,7 @@ my @highlights_rst = (
+                        [$type_member_func, "\\:c\\:type\\:`\$1\$2\$3\\\\(\\\\) <\$1>`"],
+                        [$type_member, "\\:c\\:type\\:`\$1\$2\$3 <\$1>`"],
+ 		       [$type_fp_param, "**\$1\\\\(\\\\)**"],
++		       [$type_fp_param2, "**\$1\\\\(\\\\)**"],
+                        [$type_func, "\$1()"],
+                        [$type_enum, "\\:c\\:type\\:`\$1 <\$2>`"],
+                        [$type_struct, "\\:c\\:type\\:`\$1 <\$2>`"],
 -- 
 2.25.2
 
