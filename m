@@ -2,114 +2,153 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 1E03C1A2761
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2020 18:42:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 409D01A27A6
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Apr 2020 19:01:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730371AbgDHQmP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Apr 2020 12:42:15 -0400
-Received: from mail.kernel.org ([198.145.29.99]:44848 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730369AbgDHQmP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 8 Apr 2020 12:42:15 -0400
-Received: from coco.lan (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 7CC9420769;
-        Wed,  8 Apr 2020 16:42:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1586364134;
-        bh=dZflYwtdOE4WpeF55n3a5433aJ25TRS76smK0BBXLRc=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=pX91x5p/ex8/LllfJiIeej2SPjWU/d1wcD7IAD90y5SaEHcvFWXo85xGJ6QFBMt1u
-         ZiJGS26q3FFxWcH4/RHQQO1EgOWg5eAFYZtiHFCUXlkUkUnqv1soXL7RpTyJsVE5zd
-         k0B9JNAg2QY85+hKcn3mTGujmOGS6djP0timfAgw=
-Date:   Wed, 8 Apr 2020 18:42:10 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Mark Brown <broonie@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-spi@vger.kernel.org
-Subject: Re: [PATCH 21/35] docs: spi: spi.h: fix a doc building warning
-Message-ID: <20200408184210.43c4411b@coco.lan>
-In-Reply-To: <20200408161629.GC5177@sirena.org.uk>
-References: <cover.1586359676.git.mchehab+huawei@kernel.org>
-        <d62f3f3536c0da2062bad87524fb184ad5a9a5f2.1586359676.git.mchehab+huawei@kernel.org>
-        <20200408154925.GA5177@sirena.org.uk>
-        <20200408181154.6c290772@coco.lan>
-        <20200408161629.GC5177@sirena.org.uk>
-X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1727798AbgDHRBY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Apr 2020 13:01:24 -0400
+Received: from mail-eopbgr680120.outbound.protection.outlook.com ([40.107.68.120]:29060
+        "EHLO NAM04-BN3-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726550AbgDHRBY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 8 Apr 2020 13:01:24 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=N8msTDaCwqgj8/z1wTo6zTgchc9jsTwrYRevY5zmvQcYZ6G/ZFonVMKV439Qj5tIupZu4J3Der+rqdVLLDh2N6Z7tQp9cmfwsMVLZYUb19mCJPeNxO/2qP03cksORyu6h8LzWLUvG/dvGAYvOP5J/75gnlUfRpQfXAGEG9etYcml1NCraUlQ68meLQjW+reYAf4zQxhFojQxB51b9omBGmuoo0JGaJ6S5sx5J2P2qrNZAPwL/sCguTc33JHcpXE724sg8jVU1DuWfPF3VwsRUdnmBPJ7OvHUE576taqv1yBKsE9/7X5kD/Em6hnxryYWZDDn9KIqj/kWIKWa35m4fg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=G0ipXFG+hsotlA1ggq0sTO2n4IpjtmKdzNbJH3lowvU=;
+ b=EKx90jpJlbCQ68G6LhuFTcqB7a1/ys9DahrzEepVxGWsMU5yGE+8sUNB9JuAQS3iNhviwYO7qa3lX/3vv8AYOjfPKPBIUzvuKna533YcbVfD2WA0tI950HxRfMnouO4qJT79pYa0GN1oU8UxIO/LA8LAjrgtfK/qBMIw+oTPtSVDhs8lx7pwPtmxFy7YJhiWEsFLfPWliiYIK3DJBi7PA3E3ioNBl6y+hMRJdkTgxhvhBMEbJu4yJHwcYozO31wZwtcR8gloeCOjMziNxRQ5E5eN6HPm3CsLiNngGFQtu46WwFvnFCRivSyvaotaPZ0OZ2srvWsXAczPkpYGPLyuWg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=sony.com; dmarc=pass action=none header.from=sony.com;
+ dkim=pass header.d=sony.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Sony.onmicrosoft.com;
+ s=selector2-Sony-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=G0ipXFG+hsotlA1ggq0sTO2n4IpjtmKdzNbJH3lowvU=;
+ b=VuC13j7XyRjnevXHbl1zJffQqgkiGuXECJZ4YTNvM8fplf8N5bikl0vGPtHResGaReIpyv7XAomCH7Ih/xxKRJGQsgSU7SSTbNCihewoonTBZTdJwImmWvcJsTbDkXjN3EtZxwH/kS9wUq9MBhxBR4oXOop7/PiAWJr6OpPg3uY=
+Received: from MWHPR13MB0895.namprd13.prod.outlook.com (2603:10b6:300:2::27)
+ by MWHPR13MB1838.namprd13.prod.outlook.com (2603:10b6:300:132::8) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2900.12; Wed, 8 Apr
+ 2020 17:01:20 +0000
+Received: from MWHPR13MB0895.namprd13.prod.outlook.com
+ ([fe80::7c:8ba0:7659:de57]) by MWHPR13MB0895.namprd13.prod.outlook.com
+ ([fe80::7c:8ba0:7659:de57%7]) with mapi id 15.20.2900.012; Wed, 8 Apr 2020
+ 17:01:20 +0000
+From:   "Bird, Tim" <Tim.Bird@sony.com>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+CC:     "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Markus Heiser <markus.heiser@darmarit.de>
+Subject: RE: [PATCH 1/6] scripts: sphinx-pre-install: improve distro detection
+ check
+Thread-Topic: [PATCH 1/6] scripts: sphinx-pre-install: improve distro
+ detection check
+Thread-Index: AQHWDb5iIjm0kAhwrECaQ7vbPFdNK6hvcodA
+Date:   Wed, 8 Apr 2020 17:01:20 +0000
+Message-ID: <MWHPR13MB08950C5CC92A0C0FE0532AFAFDC00@MWHPR13MB0895.namprd13.prod.outlook.com>
+References: <cover.1586361086.git.mchehab+huawei@kernel.org>
+ <2f22c8a80a4740176fabdee0d0cd23dbe7395b03.1586361086.git.mchehab+huawei@kernel.org>
+In-Reply-To: <2f22c8a80a4740176fabdee0d0cd23dbe7395b03.1586361086.git.mchehab+huawei@kernel.org>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+ smtp.mailfrom=Tim.Bird@sony.com; 
+x-originating-ip: [160.33.66.122]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: 6d77e18d-3675-4ea5-5bb6-08d7dbde7623
+x-ms-traffictypediagnostic: MWHPR13MB1838:
+x-microsoft-antispam-prvs: <MWHPR13MB1838F2D0266BE78F912AF166FDC00@MWHPR13MB1838.namprd13.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:1060;
+x-forefront-prvs: 0367A50BB1
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MWHPR13MB0895.namprd13.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(10019020)(4636009)(366004)(396003)(136003)(346002)(39860400002)(376002)(55016002)(66556008)(66476007)(66946007)(4326008)(186003)(71200400001)(64756008)(66446008)(478600001)(81156014)(5660300002)(52536014)(316002)(76116006)(7696005)(2906002)(86362001)(6506007)(54906003)(110136005)(26005)(81166007)(9686003)(8936002)(33656002)(8676002);DIR:OUT;SFP:1102;
+received-spf: None (protection.outlook.com: sony.com does not designate
+ permitted sender hosts)
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: 7A8Vo4vT1vb/9EN4B/bxwvjJL1MLU2eYiFv0ehMuzpV3k/XEXyAsZCFjIDKpZUutwTYt/rMi9Z93LMc7Y05aabI4KYjbrhHZdxG2kFDZrIBCigPu8SsErn+yweFCRZfdULUtxAzC6zU+Ocfvei1u/MbWXK380hIJuxjiMOfItKA0LaCPeRsFI5WQ2HVpKk8t6PllKcuYU0hkjqpr9o8z0vX5Q928j9AwXJfctnnv/aH2OJOBrPzI/3rFdxEPqQ3URuWLAOOOyq80ffdz0HJg3Fkt+4FSTn/K3UiKFxcOiYu5OD6fb6BIAk3Eejnqsg3VRyEpC3J7kRbV7LeDm6d6CIbN7J8v32EAbj38SkXzEMDz360oy91/mA5UKRgidD68d3YGbP/DDj2Srz+w1TBeAJ8d19owkIadlYoGAjzI1d+AQeKmmuIqleLFXFNBbUGg
+x-ms-exchange-antispam-messagedata: KNqU3ozymJkWKoMVdueqsai0dkWDbYpAPuYNI1jd0yureebe6rvlCuWjXSPoJd7lgwGpSl91ieSNWllznE+71RrigTl4T1bnDYbhTFEXf93ow950XBakWS1sJFMerhuoUinbu7tDEtXnQNIwvpVh2g==
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-OriginatorOrg: sony.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6d77e18d-3675-4ea5-5bb6-08d7dbde7623
+X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Apr 2020 17:01:20.5037
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 66c65d8a-9158-4521-a2d8-664963db48e4
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 7z3LLFwKM5aPleDHVJ4frcXBw4InjDDvWb+TgpaYQusDW6iKBiubAGEq8sc8VINekhRnEkS8gsWGGrcOb6jzmA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR13MB1838
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Wed, 8 Apr 2020 17:16:29 +0100
-Mark Brown <broonie@kernel.org> escreveu:
 
-> On Wed, Apr 08, 2020 at 06:11:54PM +0200, Mauro Carvalho Chehab wrote:
-> > Mark Brown <broonie@kernel.org> escreveu:  
-> 
-> > > Are you sure this is a sensible fix?  The following lines should be part
-> > > of the documentation for transfer_one, will that be the case after your
-> > > change?  
-> 
-> > Without that, Sphinx will warn and may produce something unexpected.  
-> 
-> Right, but if the warning is telling us something useful we want to
-> handle it rather than just shutting it up.
 
-True. Without adding the blank line, kernel-doc would output this as:
+> -----Original Message-----
+> From: Mauro Carvalho Chehab <mchehab@kernel.org> On Behalf Of Mauro Carva=
+lho Chehab
+>=20
+> The Arch-linux detection is hit by catting /etc/issue, whose
+> contents is (nowadays):
+>=20
+> 	Arch Linux \r (\l)
+>=20
+> It sounds a little ackward to print such string, so,
+> instead, let's use the /etc/os-release file, with exists
+> on lots of distributions and should provide a more reliable
+> result.
+>=20
+> We'll keep the old tests before it, in order to avoid possible
+> regressions with the other distros, although the new way should
+> probably work on all the currently supported distributions.
+>=20
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  scripts/sphinx-pre-install | 18 ++++++++++++++++++
+>  1 file changed, 18 insertions(+)
+>=20
+> diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
+> index fa3fb05cd54b..c2071a1c69ea 100755
+> --- a/scripts/sphinx-pre-install
+> +++ b/scripts/sphinx-pre-install
+> @@ -780,6 +780,24 @@ $system_release =3D catcheck("/etc/system-release") =
+if !$system_release;
+>  $system_release =3D catcheck("/etc/redhat-release") if !$system_release;
+>  $system_release =3D catcheck("/etc/lsb-release") if !$system_release;
+>  $system_release =3D catcheck("/etc/gentoo-release") if !$system_release;
+> +
+> +# This seems more common than LSB those days
+should 'those' be 'these'?
 
-``transfer_one``
-  transfer a single spi_transfer.
-  - return 0 if the transfer is finished,
-  - return 1 if the transfer is still in progress. When
-    the driver is finished with this transfer it must
-    call spi_finalize_current_transfer() so the subsystem
-    can issue the next transfer. Note: transfer_one and
-    transfer_one_message are mutually exclusive; when both
-    are set, the generic subsystem does not call your
-    transfer_one callback.
+> +if (!$system_release) {
+> +	my %os_var;
+> +	if (open IN, "cat /etc/os-release|") {
+> +		while (<IN>) {
+> +			if (m/^([\w\d\_]+)=3D\"?([^\"]*)\"?\n/) {
+> +				$os_var{$1}=3D$2;
+> +			}
+> +		}
+> +		$system_release =3D $os_var{"NAME"};
+> +		if (defined($os_var{"VERSION_ID"})) {
+> +			$system_release .=3D " " . $os_var{"VERSION_ID"} if (defined($os_var{=
+"VERSION_ID"}));
+> +		} else {
+> +			$system_release .=3D " " . $os_var{"VERSION"};
+> +		}
+> +	}
+> +}
+>  $system_release =3D catcheck("/etc/issue") if !$system_release;
+>  $system_release =3D~ s/\s+$//;
+>=20
+> --
+> 2.25.2
 
-This would be parsed by Sphinx (newer versions) as if the second line:
-
-	transfer a single spi_transfer.
-	
-would be a sort of subtitle that should be highlighted with a
-vertical line before that. E. g. something equivalent to:
-
-	 ============
-	|transfer_one|
-
-	 -------------------------------
-	|transfer a single spi_transfer.|
-
-	  - return 0 if the transfer is finished,
-	  - return 1 if the transfer is still in progress. When
-	    the driver is finished with this transfer it must
-	    call spi_finalize_current_transfer() so the subsystem
-	    can issue the next transfer. Note: transfer_one and
-	    transfer_one_message are mutually exclusive; when both
-	    are set, the generic subsystem does not call your
-	    transfer_one callback.
-
-Which is not the desired result.
-
-Adding a blank line after it fixes the issue, making it produce the
-expected output.
-
-> 
-> > If this patch is applied after 20/25, the output should produce the
-> > correct result:  
-> 
-> > 	https://www.infradead.org/~mchehab/kernel_docs/driver-api/spi.html#spi-master-methods  
-> 
-> OK.
-> 
-> Acked-by: Mark Brown <broonie@kernel.org>
-
-Thanks,
-Mauro
