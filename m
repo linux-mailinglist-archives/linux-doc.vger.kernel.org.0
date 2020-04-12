@@ -2,56 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id AEF8B1A5224
-	for <lists+linux-doc@lfdr.de>; Sat, 11 Apr 2020 14:54:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DAE321A5BA8
+	for <lists+linux-doc@lfdr.de>; Sun, 12 Apr 2020 02:33:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726047AbgDKMyG convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Sat, 11 Apr 2020 08:54:06 -0400
-Received: from mail.07d05.mspz7.gob.ec ([186.46.59.139]:34056 "EHLO
-        mail.07d05.mspz7.gob.ec" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726037AbgDKMyG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 11 Apr 2020 08:54:06 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by mail.07d05.mspz7.gob.ec (Postfix) with ESMTP id 5FBB1202E591;
-        Sat, 11 Apr 2020 03:27:51 -0500 (-05)
-Received: from mail.07d05.mspz7.gob.ec ([127.0.0.1])
-        by localhost (mail.07d05.mspz7.gob.ec [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id 8CPMUQPeVVIy; Sat, 11 Apr 2020 03:27:51 -0500 (-05)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.07d05.mspz7.gob.ec (Postfix) with ESMTP id 10BB3202CD19;
-        Sat, 11 Apr 2020 03:08:40 -0500 (-05)
-X-Virus-Scanned: amavisd-new at 07d05.mspz7.gob.ec
-Received: from mail.07d05.mspz7.gob.ec ([127.0.0.1])
-        by localhost (mail.07d05.mspz7.gob.ec [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id nRKcbhFZ1w7y; Sat, 11 Apr 2020 03:08:40 -0500 (-05)
-Received: from [10.4.231.87] (unknown [105.0.1.50])
-        by mail.07d05.mspz7.gob.ec (Postfix) with ESMTPSA id 487F2202BE1E;
-        Sat, 11 Apr 2020 03:01:13 -0500 (-05)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726759AbgDLAdu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 11 Apr 2020 20:33:50 -0400
+Received: from mail-lf1-f66.google.com ([209.85.167.66]:36208 "EHLO
+        mail-lf1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726108AbgDLAdu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 11 Apr 2020 20:33:50 -0400
+Received: by mail-lf1-f66.google.com with SMTP id w145so3956119lff.3
+        for <linux-doc@vger.kernel.org>; Sat, 11 Apr 2020 17:33:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=zsyaQJSTyWtQU6SNb3d/B5KGEXk22uVClxXXTgsbd6E=;
+        b=kV/LeCGT51tDEQA6jixYwmFJMhwu+sfWPjZdgnLCFvMfPYUoeMciBwTxKz8slhIA9Q
+         QWA2SQ0DoEF4KcBJ2ugrGlY6oybNlOP3mTjUj02Wr0RrkcNl2xtc81cOXyImM4uRmfCh
+         qHFe6s3jbXCLQZHpY1gfAD4pb0z7WUFQaZtVlYfD3husYMs4QPBsa7IqM7dVgNiBcm0j
+         l+CqzwLgWhQyQ6lYBMOXmRaHGTqL3jxOCcQSriocgol9p2VvpZTL7/pWWZWy4UhhPTI8
+         w07GlQOHtAFmejubyEhftiSAWmxQa3xOjY0uZlHCLUd6DBp11BdB5BddyZZUhdfxf268
+         Yyrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=zsyaQJSTyWtQU6SNb3d/B5KGEXk22uVClxXXTgsbd6E=;
+        b=e/ggIfgPPN8YcjSXKJg6oi/ECbxXPEzW1X8/OcG8QCFJky3Lazq12/9fn3YWdDVwA3
+         IW5VVX+/tRZlXOpLPgO/7XWhLb2MLsLW+zWYLRAKYHp95PBSRnlhYAGjtum4lRvfQrXc
+         NAqN/pS8T9P/iBWV9Nvm9/wJyE5qTg6s/crKw1KxoOBdzU0+Q+hSCy155cBEo0Zsj2hs
+         UFQzMYIG+0CQlBkcD8c2PGq4BEDzi4SwUj9fUmee9AdcC+1Wq4XgzYO7CKWqXwdH8uNs
+         4fV7+CYVjjJ/nEV+oz+WFmumTJNCfRdP1SM9SvcHpZCm1TZJ9ydBe/oRnnV+1venhzEu
+         LFGw==
+X-Gm-Message-State: AGi0PuZDzYZ9JxlH7gYQXCjusuLajD1MH03qV4Th3pehnAWi0neQUxcH
+        zy3MhhYbuL0sQmXRWbMxqUcqGZ4hZ1hGe3tPk+ILEQ==
+X-Google-Smtp-Source: APiQypL4dP3s3w7dYreIWE/U9Pw7ftEq+ZzcH56ILtKHt9LXITsoPKEt+dyrtZrmqSv0ag9Tqx6r+iOrde8l3AYonrY=
+X-Received: by 2002:a19:48c3:: with SMTP id v186mr6282470lfa.194.1586651629741;
+ Sat, 11 Apr 2020 17:33:49 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: =?utf-8?q?Wohlt=C3=A4tigkeitsspende_von_2=2E000=2E000_Millionen_Euro?=
-To:     Recipients <jorge.mena@mail.07d05.mspz7.gob.ec>
-From:   ''Michael weirsky'' <jorge.mena@mail.07d05.mspz7.gob.ec>
-Date:   Sat, 11 Apr 2020 09:57:38 +0200
-Reply-To: mikeweirskyspende@gmail.com
-Message-Id: <20200411080115.487F2202BE1E@mail.07d05.mspz7.gob.ec>
+References: <20200117224839.23531-1-f.fainelli@gmail.com> <20200117224839.23531-8-f.fainelli@gmail.com>
+ <CAKv+Gu_6wWhi418=GpMjfMpE2E+XHbL-DYKT8MJ1jE3+VybrAg@mail.gmail.com>
+In-Reply-To: <CAKv+Gu_6wWhi418=GpMjfMpE2E+XHbL-DYKT8MJ1jE3+VybrAg@mail.gmail.com>
+From:   Linus Walleij <linus.walleij@linaro.org>
+Date:   Sun, 12 Apr 2020 02:33:38 +0200
+Message-ID: <CACRpkdbR2VG422X0-nhOeWtS3Mhm7M1+RKMozBZbg0Jv5c_TTQ@mail.gmail.com>
+Subject: Re: [PATCH v7 7/7] ARM: Enable KASan for ARM
+To:     Ard Biesheuvel <ardb@kernel.org>
+Cc:     Florian Fainelli <f.fainelli@gmail.com>,
+        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+        Andrey Ryabinin <ryabinin@virtuozzo.com>,
+        Abbott Liu <liuwenliang@huawei.com>,
+        bcm-kernel-feedback-list <bcm-kernel-feedback-list@broadcom.com>,
+        Alexander Potapenko <glider@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Russell King <linux@armlinux.org.uk>,
+        Christoffer Dall <christoffer.dall@arm.com>,
+        Marc Zyngier <marc.zyngier@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Nicolas Pitre <nico@fluxnic.net>,
+        Vladimir Murzin <vladimir.murzin@arm.com>,
+        Kees Cook <keescook@chromium.org>,
+        Jinbum Park <jinb.park7@gmail.com>,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Philippe Ombredanne <pombredanne@nexb.com>,
+        Rob Landley <rob@landley.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Masahiro Yamada <yamada.masahiro@socionext.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Thomas Garnier <thgarnie@google.com>,
+        David Howells <dhowells@redhat.com>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Andre Przywara <andre.przywara@arm.com>,
+        Julien Thierry <julien.thierry@arm.com>,
+        Andrew Jones <drjones@redhat.com>,
+        Philip Derrin <philip@cog.systems>,
+        Michal Hocko <mhocko@suse.com>,
+        "Kirill A. Shutemov" <kirill.shutemov@linux.intel.com>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        kvmarm <kvmarm@lists.cs.columbia.edu>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Lieber Freund,
+On Fri, Apr 10, 2020 at 12:45 PM Ard Biesheuvel <ardb@kernel.org> wrote:
 
-Ich bin Herr Mike Weirsky, New Jersey, Vereinigte Staaten von Amerika, der Mega-Gewinner von $ 273million In Mega Millions Jackpot, spende ich an 5 zuf&auml;llige Personen, wenn Sie diese E-Mail erhalten, dann wurde Ihre E-Mail nach einem Spinball ausgew&auml;hlt.Ich habe den gr&ouml;&szlig;ten Teil meines Verm&ouml;gens auf eine Reihe von Wohlt&auml;tigkeitsorganisationen und Organisationen verteilt.Ich habe mich freiwillig dazu entschieden, die Summe von &euro; 2.000.000,00 an Sie als eine der ausgew&auml;hlten 5 zu spenden, um meine Gewinne zu &uuml;berpr&uuml;fen.
-Das ist dein Spendencode: [MW530342019]
-www.youtube.com/watch?v=un8yRTmrYMY
+> > +CFLAGS_KERNEL          += -D__SANITIZE_ADDRESS__
+(...)
+> > -                                  $(call cc-option,-mno-single-pic-base)
+> > +                                  $(call cc-option,-mno-single-pic-base) \
+> > +                                  -D__SANITIZE_ADDRESS__
+>
+> I am not too crazy about this need to unconditionally 'enable' KASAN
+> on the command line like this, in order to be able to disable it again
+> when CONFIG_KASAN=y.
+>
+> Could we instead add something like this at the top of
+> arch/arm/boot/compressed/string.c?
+>
+> #ifdef CONFIG_KASAN
+> #undef memcpy
+> #undef memmove
+> #undef memset
+> void *__memcpy(void *__dest, __const void *__src, size_t __n) __alias(memcpy);
+> void *__memmove(void *__dest, __const void *__src, size_t count)
+> __alias(memmove);
+> void *__memset(void *s, int c, size_t count) __alias(memset);
+> #endif
 
-Antworten Sie mit dem SPENDE-CODE an diese
-E-Mail:mikeweirskyspende@gmail.com
+I obviously missed this before I sent out my new version of the series.
+It bothers me too.
 
-Ich hoffe, Sie und Ihre Familie gl&uuml;cklich zu machen.
+I will try this approach when I prepare the next iteration.
 
-Gr&uuml;&szlig;e
-Herr Mike Weirsky
+Thanks a lot!
+
+Yours,
+Linus Walleij
