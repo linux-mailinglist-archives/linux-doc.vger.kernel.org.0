@@ -1,197 +1,111 @@
 Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
-Received: from vger.kernel.org (unknown [209.132.180.67])
-	by mail.lfdr.de (Postfix) with ESMTP id 337DF1A62E4
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2020 08:05:43 +0200 (CEST)
+Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
+	by mail.lfdr.de (Postfix) with ESMTP id A99201A65BE
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Apr 2020 13:49:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727951AbgDMGFS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 13 Apr 2020 02:05:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.18]:46800 "EHLO
+        id S1729182AbgDMLtr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 13 Apr 2020 07:49:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43782 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726967AbgDMGFS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Apr 2020 02:05:18 -0400
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CEBDFC0A3BE0;
-        Sun, 12 Apr 2020 23:05:17 -0700 (PDT)
-IronPort-SDR: FRepka7+hZp85/uLRdpjNCgcSugSrwuqA5aWIX//Rzqn4gX0sN2zYKL35ofY3K1Ln8+3VRKW9z
- OpoLOYxnV25w==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Apr 2020 23:05:17 -0700
-IronPort-SDR: roeKVt03RrchyMNuA8CrXSyOrbiZ5X+JKJ9kqReJE3JUUjKofhNcZ7rvaWNpS8f5VdpZlMviVm
- 2Are1mH2PCgw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.72,377,1580803200"; 
-   d="scan'208";a="245065924"
-Received: from joy-optiplex-7040.sh.intel.com ([10.239.13.16])
-  by fmsmga008.fm.intel.com with ESMTP; 12 Apr 2020 23:05:10 -0700
-From:   Yan Zhao <yan.y.zhao@intel.com>
-To:     intel-gvt-dev@lists.freedesktop.org
-Cc:     libvir-list@redhat.com, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        aik@ozlabs.ru, Zhengxiao.zx@alibaba-inc.com,
-        shuangtai.tst@alibaba-inc.com, qemu-devel@nongnu.org,
-        eauger@redhat.com, yi.l.liu@intel.com, xin.zeng@intel.com,
-        ziye.yang@intel.com, mlevitsk@redhat.com, pasic@linux.ibm.com,
-        felipe@nutanix.com, changpeng.liu@intel.com, Ken.Xue@amd.com,
-        jonathan.davies@nutanix.com, shaopeng.he@intel.com,
-        alex.williamson@redhat.com, eskultet@redhat.com,
-        dgilbert@redhat.com, cohuck@redhat.com, kevin.tian@intel.com,
-        zhenyuw@linux.intel.com, zhi.a.wang@intel.com, cjia@nvidia.com,
-        kwankhede@nvidia.com, berrange@redhat.com, dinechin@redhat.com,
-        corbet@lwn.net, Yan Zhao <yan.y.zhao@intel.com>
-Subject: [PATCH v5 4/4] drm/i915/gvt: export migration_version to mdev sysfs (under mdev device node)
-Date:   Mon, 13 Apr 2020 01:55:32 -0400
-Message-Id: <20200413055532.27363-1-yan.y.zhao@intel.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200413055201.27053-1-yan.y.zhao@intel.com>
-References: <20200413055201.27053-1-yan.y.zhao@intel.com>
+        with ESMTP id S1729158AbgDMLto (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 13 Apr 2020 07:49:44 -0400
+X-Greylist: delayed 514 seconds by postgrey-1.27 at vger.kernel.org; Mon, 13 Apr 2020 07:49:44 EDT
+Received: from mail-il1-x12e.google.com (mail-il1-x12e.google.com [IPv6:2607:f8b0:4864:20::12e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C2F5EC008618
+        for <linux-doc@vger.kernel.org>; Mon, 13 Apr 2020 04:41:09 -0700 (PDT)
+Received: by mail-il1-x12e.google.com with SMTP id t10so991598ilg.9
+        for <linux-doc@vger.kernel.org>; Mon, 13 Apr 2020 04:41:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=qlKWExEze9qCqlwbpw1q4+d2Zjr4ETGVa64TcX+dTlk=;
+        b=HxOaFJZljqXQIeSLw7dw+YeTIVe76Yo57NkC3rYQjPPsruaWLZEetJYgTw7mDA7iYw
+         4KM/sQKuVdxfTyBgHy0QGrcgvhBAp/s2WR+7lhwMEms7c5U3ARzlxX4w9gHN6kyIVCTo
+         InVjjBwajQbgYMLlLr/dGAnfAOq75HLmi2bmQShdg5UrDH6ZNHdmpjirCjsFE3E+W3lI
+         4HPNdhIk9GHy3wOVy8qt79oLhQ3V0WJ+l2R8YfTk5No8OB207Mc1ssyzLdiNdU6iDIon
+         HSnId1sWR9JHq8BkscMOY+TVCS7WuDDdfTSRJRDObUGUY3pKdsd/NGq97n4qtv5szVJr
+         IEMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=qlKWExEze9qCqlwbpw1q4+d2Zjr4ETGVa64TcX+dTlk=;
+        b=OGD4Xmia5S9W+nQSOdoca8YCeCPU0CwjugBoxl15pmif+3TYQph3y0r4uF3R1xbKAU
+         fbmiJq7th5wmAO8iueLp6yXtIu7lcwhqsa9u8ROvlzAaDRulwhv2avwoyos9kVdlXGDw
+         jdPakLDnXuTKJJIJdhd6xdHS3joy86WCvaVi7b6QN+F74cUbEQFKezGQypNvq3NYiflx
+         JiHW+oGCNTrVaxTafik5Uk5vEm75LvfQjDLziUNzSqJUSbd4oVTJdQUuLYrNzfSjTFwK
+         qdWDFYwsU5exjx71oHGNrzh4clIbLBsjvpIJXgGPV7Z9fWgv8KTlrxREjOf21TFkm2pQ
+         XGUQ==
+X-Gm-Message-State: AGi0PuaRESRWWnvTv210Lv/UlhirBO//Oa8eedKJJX9aGdN6fThN3H/6
+        4I4kTKg8LCKtsdWIYeau/jdYBDUmkol2Ti19Gg==
+X-Google-Smtp-Source: APiQypJ8Xf5JZIaJmuakcegBHklRN/w3ObzOY1fG2hZhiF0393fUgrxf6qaSVcLD5pLEm/4TEQgoj9oGK8tQ5EeyGAU=
+X-Received: by 2002:a05:6e02:c8f:: with SMTP id b15mr14965961ile.35.1586778068198;
+ Mon, 13 Apr 2020 04:41:08 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a02:5e49:0:0:0:0:0 with HTTP; Mon, 13 Apr 2020 04:41:07
+ -0700 (PDT)
+Reply-To: mgbenin903@gmail.com
+From:   Barrister Robert Richter UN-Attorney at Law Court-Benin 
+        <info.zennitbankplcnigerian@gmail.com>
+Date:   Mon, 13 Apr 2020 13:41:07 +0200
+Message-ID: <CABHzvrm3rWryg1yAooKeHwdxzrKD47PRAEfC+ay1A6i5z3Wdiw@mail.gmail.com>
+Subject: I have already sent you first payment US$5000.00 this morning through
+ MONEY Gram service.it is available to pick up in address now.
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-mdev device par of migration_version attribute for Intel vGPU is rw.
-It is located at
-/sys/bus/pci/devices/0000\:00\:02.0/$mdev_UUID/migration_version,
-or /sys/bus/mdev/devices/$mdev_UUID/migration_version
+ATTN DEAR BENEFICIARY.
 
-It's used to check migration compatibility for two vGPUs.
-migration_version string is defined by vendor driver and opaque to
-userspace.
+GOOD NEWS.
 
-For Intel vGPU of gen8 and gen9, the format of migration_version string
-is:
-  <vendor id>-<device id>-<vgpu type>-<software version>.
+I have already sent you first payment US$5000.00 this morning through
+MONEY Gram service.it is available to pick up in address now.
 
-For future software versions, e.g. when vGPUs have aggregations, it may
-also include aggregation count into migration_version string of a vGPU.
+So we advise you to Contact This Money Gram office to pick up your
+transfer $US5000.00 today.
 
-For future platforms, the format of migration_version string is to be
-expanded to include more meta data to identify Intel vGPUs for live
-migration compatibility check
 
-For old platforms, and for GVT not supporting vGPU live migration
-feature, -ENODEV is returned on read(2)/write(2) of migration_version
-attribute.
-For vGPUs running old GVT who do not expose migration_version
-attribute, live migration is regarded as not supported for those vGPUs.
+Note that your compensation payment funds is total amount $US2.800,000
+Million Dollars.We have instructed the Money Gram Agent,Mr. James
+Gadner to keep sending the transfer to you daily, but the maximum
+amount you will be receiving everyday is US$5000.00. Contact Agent now
+to pick up your first payment $US5000.00 immediately.
 
-Cc: Alex Williamson <alex.williamson@redhat.com>
-Cc: Erik Skultety <eskultet@redhat.com>
-Cc: "Dr. David Alan Gilbert" <dgilbert@redhat.com>
-Cc: Cornelia Huck <cohuck@redhat.com>
-Cc: "Tian, Kevin" <kevin.tian@intel.com>
-Cc: Zhenyu Wang <zhenyuw@linux.intel.com>
-Cc: "Wang, Zhi A" <zhi.a.wang@intel.com>
-c: Neo Jia <cjia@nvidia.com>
-Cc: Kirti Wankhede <kwankhede@nvidia.com>
+Contact Person, Mr. James Gadner, Dir. Money Gram Benin.
+Email: mgbenin903@gmail.com
+Telephone Numbers: +229 62819378/ +229 98477762
 
-Signed-off-by: Yan Zhao <yan.y.zhao@intel.com>
----
- drivers/gpu/drm/i915/gvt/gvt.h   |  2 ++
- drivers/gpu/drm/i915/gvt/kvmgt.c | 55 ++++++++++++++++++++++++++++++++
- 2 files changed, 57 insertions(+)
+HERE IS YOUR PAYMENT DETAILS FOR THE FIRST =C2=A3US5000.00 SENT TODAY.
 
-diff --git a/drivers/gpu/drm/i915/gvt/gvt.h b/drivers/gpu/drm/i915/gvt/gvt.h
-index b26e42596565..664efc83f82e 100644
---- a/drivers/gpu/drm/i915/gvt/gvt.h
-+++ b/drivers/gpu/drm/i915/gvt/gvt.h
-@@ -205,6 +205,8 @@ struct intel_vgpu {
- 	struct idr object_idr;
- 
- 	u32 scan_nonprivbb;
-+
-+	char *migration_version;
- };
- 
- static inline void *intel_vgpu_vdev(struct intel_vgpu *vgpu)
-diff --git a/drivers/gpu/drm/i915/gvt/kvmgt.c b/drivers/gpu/drm/i915/gvt/kvmgt.c
-index 2f2d4c40f966..4903599cb0ef 100644
---- a/drivers/gpu/drm/i915/gvt/kvmgt.c
-+++ b/drivers/gpu/drm/i915/gvt/kvmgt.c
-@@ -728,8 +728,13 @@ static int intel_vgpu_create(struct kobject *kobj, struct mdev_device *mdev)
- 	kvmgt_vdev(vgpu)->mdev = mdev;
- 	mdev_set_drvdata(mdev, vgpu);
- 
-+	vgpu->migration_version =
-+		intel_gvt_get_vfio_migration_version(gvt, type->name);
-+
- 	gvt_dbg_core("intel_vgpu_create succeeded for mdev: %s\n",
- 		     dev_name(mdev_dev(mdev)));
-+
-+
- 	ret = 0;
- 
- out:
-@@ -744,6 +749,7 @@ static int intel_vgpu_remove(struct mdev_device *mdev)
- 		return -EBUSY;
- 
- 	intel_gvt_ops->vgpu_destroy(vgpu);
-+	kfree(vgpu->migration_version);
- 	return 0;
- }
- 
-@@ -1964,8 +1970,57 @@ static const struct attribute_group intel_vgpu_group = {
- 	.attrs = intel_vgpu_attrs,
- };
- 
-+static ssize_t migration_version_show(struct device *dev,
-+				      struct device_attribute *attr, char *buf)
-+{
-+	struct mdev_device *mdev = mdev_from_dev(dev);
-+	struct intel_vgpu *vgpu = mdev_get_drvdata(mdev);
-+
-+	if (!vgpu->migration_version) {
-+		gvt_vgpu_err("Migration not supported on this vgpu. Please search previous detailed log\n");
-+		return -ENODEV;
-+	}
-+
-+	return snprintf(buf, strlen(vgpu->migration_version) + 2,
-+			"%s\n", vgpu->migration_version);
-+
-+}
-+
-+static ssize_t migration_version_store(struct device *dev,
-+				       struct device_attribute *attr,
-+				       const char *buf, size_t count)
-+{
-+	struct mdev_device *mdev = mdev_from_dev(dev);
-+	struct intel_vgpu *vgpu = mdev_get_drvdata(mdev);
-+	struct intel_gvt *gvt = vgpu->gvt;
-+	int ret = 0;
-+
-+	if (!vgpu->migration_version) {
-+		gvt_vgpu_err("Migration not supported on this vgpu. Please search previous detailed log\n");
-+		return -ENODEV;
-+	}
-+
-+	ret = intel_gvt_check_vfio_migration_version(gvt,
-+			vgpu->migration_version, buf);
-+	return (ret < 0 ? ret : count);
-+}
-+
-+static DEVICE_ATTR_RW(migration_version);
-+
-+static struct attribute *intel_vgpu_migration_attrs[] = {
-+	&dev_attr_migration_version.attr,
-+	NULL,
-+};
-+/* this group has no name, so will be displayed
-+ * immediately under sysfs node of the mdev device
-+ */
-+static const struct attribute_group intel_vgpu_group_empty_name = {
-+	.attrs = intel_vgpu_migration_attrs,
-+};
-+
- static const struct attribute_group *intel_vgpu_groups[] = {
- 	&intel_vgpu_group,
-+	&intel_vgpu_group_empty_name,
- 	NULL,
- };
- 
--- 
-2.17.1
+Track View Website link:
+https://secure.moneygram.com/track
+Sender=E2=80=99s First name: David
+Sender=E2=80=99s Last Name: Joiner
+Money Transfer Control Number (MTCN) (REFERENCE)# 26046856
 
+Contact the Mmoney Gram Urgent and reconfirm your address to the
+office before, they will allow you to pick up the transfer today.
+
+HERE IS WHAT REQUIRED OF YOU.
+
+YOUR FULL NAME---------
+ADDRESS--------------
+COUNTRY-----------------------------
+TELEPHONE NUMBERS-----------------
+
+Note, I paid the transfer fee for you, but only you are required to
+send to the office is $75 only,Been Your Payment File activation fee,
+Send once you contact the office,before you can able to pick up your
+transfer today.
+
+Let me know once you pick up first payment today.
+
+Barrister Robert Richter UN-Attorney at Law Court-Benin
