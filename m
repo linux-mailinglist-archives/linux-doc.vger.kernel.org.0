@@ -2,126 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A26E51A767F
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2020 10:51:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1BAE51A7725
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Apr 2020 11:16:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2437120AbgDNIvZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Apr 2020 04:51:25 -0400
-Received: from mail.kernel.org ([198.145.29.99]:52238 "EHLO mail.kernel.org"
+        id S2437508AbgDNJPy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 Apr 2020 05:15:54 -0400
+Received: from mga06.intel.com ([134.134.136.31]:6671 "EHLO mga06.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2437109AbgDNIvR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 14 Apr 2020 04:51:17 -0400
-Received: from mail.kernel.org (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 64DE021835;
-        Tue, 14 Apr 2020 08:51:09 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1586854269;
-        bh=/ifeaDL4BrNJknQlHPAW9qNRsoNoUa9p55HHjDYHVCI=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Z7PfZSgcaCQAHv/qK3qVgRu0yKS92Ny5Q0WMn7hBVsGs2LpkW5xAUR0SkWQw959jV
-         adWo9h8aOLu/RybOsNWy5FJMLp/JGNaFqn/JmwaaLYZAKM454pMl3ZinW2hkN9qFl9
-         Rk9I61Lh7pqzGurbRQJ+UfElxgScEShdWWBBA1So=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1jOHHf-002x0E-M0; Tue, 14 Apr 2020 10:51:07 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Media Mailing List <linux-media@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 19/19] media: docs: add cros-references to the other media guides
-Date:   Tue, 14 Apr 2020 10:51:05 +0200
-Message-Id: <47cda41623dbb81d65fc22be92266df3efc1c328.1586854191.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.25.2
-In-Reply-To: <cover.1586854191.git.mchehab+huawei@kernel.org>
-References: <cover.1586854191.git.mchehab+huawei@kernel.org>
+        id S2437501AbgDNJPw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 14 Apr 2020 05:15:52 -0400
+IronPort-SDR: vsAFenhHhBG8uNqmm57MCkbFvgULZIV3BdLdLZHCibLXQHxMDlClqqrBlZXzPStZ53R2DBg18X
+ qHlPgU1yQXaw==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Apr 2020 02:15:51 -0700
+IronPort-SDR: XaAYwih13kluB8Qgni89e9NJqmeCKNVE2sToDlr5+9vgt6ce6+duySDm202IkG2rAZDr8JHY8B
+ xm/SXmfn0eag==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.72,382,1580803200"; 
+   d="scan'208";a="241932506"
+Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
+  by orsmga007.jf.intel.com with ESMTP; 14 Apr 2020 02:15:46 -0700
+Received: from andy by smile with local (Exim 4.93)
+        (envelope-from <andriy.shevchenko@linux.intel.com>)
+        id 1jOHfY-000UKW-Di; Tue, 14 Apr 2020 12:15:48 +0300
+Date:   Tue, 14 Apr 2020 12:15:48 +0300
+From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To:     Ernesto Corona <ernesto.corona@intel.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        linux-aspeed@lists.ozlabs.org,
+        Oleksandr Shamray <oleksandrs@mellanox.com>,
+        Jiri Pirko <jiri@mellanox.com>,
+        Vadim Pasternak <vadimp@mellanox.com>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "David S . Miller" <davem@davemloft.net>,
+        Nicolas Ferre <nicolas.ferre@microchip.com>,
+        Rob Herring <robh@kernel.org>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+        Steven Filary <steven.a.filary@intel.com>,
+        Amithash Prasad <amithash@fb.com>,
+        Patrick Williams <patrickw3@fb.com>, Rgrs <rgrs@protonmail.com>
+Subject: Re: [PATCH v29 6/6] drivers: jtag: Add JTAG core driver Maintainers
+Message-ID: <20200414091548.GH34613@smile.fi.intel.com>
+References: <20200413222920.4722-1-ernesto.corona@intel.com>
+ <20200413222920.4722-7-ernesto.corona@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200413222920.4722-7-ernesto.corona@intel.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In order to make easier for people to navigate between the
-three media guides, add cross-references between them
+On Mon, Apr 13, 2020 at 03:29:20PM -0700, Ernesto Corona wrote:
+> JTAG class driver provide infrastructure to support hardware/software
+> JTAG platform drivers. It provide user layer API interface for flashing
+> and debugging external devices which equipped with JTAG interface
+> using standard transactions.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/admin-guide/media/index.rst   | 12 ++++++++++++
- Documentation/driver-api/media/index.rst    |  8 ++++++++
- Documentation/userspace-api/media/index.rst | 11 +++++++++++
- 3 files changed, 31 insertions(+)
+Don't forget to run
+      scripts/parse-maintainers.pl --input=MAINTAINERS --output=MAINTAINERS --order
 
-diff --git a/Documentation/admin-guide/media/index.rst b/Documentation/admin-guide/media/index.rst
-index eb1d82dffcc9..6e5e6bdb6d4b 100644
---- a/Documentation/admin-guide/media/index.rst
-+++ b/Documentation/admin-guide/media/index.rst
-@@ -2,9 +2,21 @@
- 
- .. include:: <isonum.txt>
- 
-+============================
-+Media subsystem usage guides
-+============================
- 
-+This section contains usage information about media subsystem and
-+its supported drivers.
- 
-+Please see:
- 
-+- :doc:`/userspace-api/media/index`
-+     for the userspace APIs used on media devices.
-+
-+- :doc:`/driver-api/media/index`
-+     for driver development information and Kernel APIs used by
-+     media devices;
- 
- .. _uapi-v4l-drivers:
- 
-diff --git a/Documentation/driver-api/media/index.rst b/Documentation/driver-api/media/index.rst
-index 5e9f67f34081..328350924853 100644
---- a/Documentation/driver-api/media/index.rst
-+++ b/Documentation/driver-api/media/index.rst
-@@ -6,8 +6,16 @@
- Media subsystem kernel internal API
- ===================================
- 
-+This section contains usage information about media subsystem and
-+its supported drivers.
- 
-+Please see:
- 
-+- :doc:`/admin-guide/media/index`
-+    for usage information about media subsystem and supported drivers;
-+
-+- :doc:`/userspace-api/media/index`
-+     for the userspace APIs used on media devices.
- 
- 
- .. only:: html
-diff --git a/Documentation/userspace-api/media/index.rst b/Documentation/userspace-api/media/index.rst
-index b20010f414b3..70a3f3d73698 100644
---- a/Documentation/userspace-api/media/index.rst
-+++ b/Documentation/userspace-api/media/index.rst
-@@ -6,6 +6,17 @@
- Linux Media Infrastructure userspace API
- ########################################
- 
-+This section contains the  driver development information and Kernel APIs
-+used by media devices.
-+
-+Please see:
-+
-+- :doc:`/admin-guide/media/index`
-+    for usage information about media subsystem and supported drivers;
-+
-+- :doc:`/driver-api/media/index`
-+     for driver development information and Kernel APIs used by
-+     media devices;
- 
- 
- .. only:: html
+> Signed-off-by: Oleksandr Shamray <oleksandrs@mellanox.com>
+> Signed-off-by: Ernesto Corona <ernesto.corona@intel.com>
+> Acked-by: Arnd Bergmann <arnd@arndb.de>
+> Cc: Jiri Pirko <jiri@mellanox.com>
+> Cc: Vadim Pasternak <vadimp@mellanox.com>
+> Cc: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: David S. Miller <davem@davemloft.net>
+> Cc: Nicolas Ferre <nicolas.ferre@microchip.com>
+> Cc: Rob Herring <robh@kernel.org>
+> Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+> Cc: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+> Cc: Steven Filary <steven.a.filary@intel.com>
+> Cc: Amithash Prasad <amithash@fb.com>
+> Cc: Patrick Williams <patrickw3@fb.com>
+> Cc: Rgrs <rgrs@protonmail.com>
+> ---
+>  MAINTAINERS | 11 +++++++++++
+>  1 file changed, 11 insertions(+)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index e64e5db31497..96d20fbb719c 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -9144,6 +9144,17 @@ L:	linux-serial@vger.kernel.org
+>  S:	Orphan
+>  F:	drivers/tty/serial/jsm/
+>  
+> +JTAG SUBSYSTEM
+> +M:	Oleksandr Shamray <oleksandrs@mellanox.com>
+> +M:	Vadim Pasternak <vadimp@mellanox.com>
+> +M	Ernesto Corona <ernesto.corona@intel.com>
+> +S:	Maintained
+> +F:	include/linux/jtag.h
+> +F:	include/uapi/linux/jtag.h
+> +F:	drivers/jtag/
+> +F:	Documentation/devicetree/bindings/jtag/
+> +F:	Documentation/ABI/testing/jtag-dev
+> +
+>  K10TEMP HARDWARE MONITORING DRIVER
+>  M:	Clemens Ladisch <clemens@ladisch.de>
+>  L:	linux-hwmon@vger.kernel.org
+> -- 
+> 2.17.1
+> 
+
 -- 
-2.25.2
+With Best Regards,
+Andy Shevchenko
+
 
