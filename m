@@ -2,37 +2,38 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3DF991AAA86
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2020 16:52:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 255511AAA3E
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2020 16:40:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2407824AbgDOOmp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Apr 2020 10:42:45 -0400
-Received: from mail.kernel.org ([198.145.29.99]:45448 "EHLO mail.kernel.org"
+        id S2636691AbgDOOir (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Apr 2020 10:38:47 -0400
+Received: from mail.kernel.org ([198.145.29.99]:45454 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2394042AbgDOOc6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 15 Apr 2020 10:32:58 -0400
+        id S2394080AbgDOOdD (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 15 Apr 2020 10:33:03 -0400
 Received: from mail.kernel.org (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 161FD2168B;
+        by mail.kernel.org (Postfix) with ESMTPSA id 9150121D7E;
         Wed, 15 Apr 2020 14:32:51 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1586961171;
-        bh=MiIvbtHL1OOpkMTzHlJyILRiWhj8sVsuaKqqb675qZ4=;
+        bh=8XWaSPQEn2foEpJeuRzmwtKfRSy0jcH1jiL1DK6qlto=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=edQAPFixUEwxFA1DMbFuOpVW6etWZM5+/X34ROZRkwbwBV6gP5c7JgT5CqUdKdGfQ
-         cvUyKyo1ryZgXTL9JkXTxixoZ4TRx4KHsKZicoP6rfSIQ0f9GfNP15I9fObk6fbRCm
-         IlB16LK+3RHhOmhAZJmzRuDVdD69MJMsrBJ43tjs=
+        b=AP+f0GmvQ6G0JBFmdKJqZshPjHodSus0vbl5J9sBS9owW+n7b0zrdxk8xFyNAesV5
+         h+xIAakhmIVrieT1xjBycxZzwICap5J9XK9ksadIen6XF85K70JTbLtXmKazT593He
+         r7jVCWLjqIEsinUQiPR5uZO5srTuMjowi/fCqq0A=
 Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
         (envelope-from <mchehab@kernel.org>)
-        id 1jOj5t-006kOU-AF; Wed, 15 Apr 2020 16:32:49 +0200
+        id 1jOj5t-006kOe-DB; Wed, 15 Apr 2020 16:32:49 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 10/34] docs: filesystems: convert automount-support.txt to ReST
-Date:   Wed, 15 Apr 2020 16:32:23 +0200
-Message-Id: <677813b103b87ad5dc714d88f3b0e6b9175aa393.1586960617.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Jan Kara <jack@suse.com>, linux-ext4@vger.kernel.org
+Subject: [PATCH 12/34] docs: filesystems: convert dax.txt to ReST
+Date:   Wed, 15 Apr 2020 16:32:25 +0200
+Message-Id: <71b1f910b2c3569a9fdaa8778378dd734f4f0091.1586960617.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.25.2
 In-Reply-To: <cover.1586960617.git.mchehab+huawei@kernel.org>
 References: <cover.1586960617.git.mchehab+huawei@kernel.org>
@@ -44,104 +45,98 @@ List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 - Add a SPDX header;
-- Add a document title;
-- Adjust section titles;
-- Mark literal blocks as such;
+- Adjust document title;
+- Some whitespace fixes and new line breaks;
 - Add it to filesystems/index.rst.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- ...ount-support.txt => automount-support.rst} | 23 +++++++++++--------
- Documentation/filesystems/index.rst           |  2 ++
- 2 files changed, 16 insertions(+), 9 deletions(-)
- rename Documentation/filesystems/{automount-support.txt => automount-support.rst} (92%)
+ Documentation/admin-guide/ext4.rst             | 2 +-
+ Documentation/filesystems/{dax.txt => dax.rst} | 9 +++++++--
+ Documentation/filesystems/ext2.rst             | 2 +-
+ Documentation/filesystems/index.rst            | 1 +
+ 4 files changed, 10 insertions(+), 4 deletions(-)
+ rename Documentation/filesystems/{dax.txt => dax.rst} (97%)
 
-diff --git a/Documentation/filesystems/automount-support.txt b/Documentation/filesystems/automount-support.rst
-similarity index 92%
-rename from Documentation/filesystems/automount-support.txt
-rename to Documentation/filesystems/automount-support.rst
-index 7d9f82607562..430f0b40796b 100644
---- a/Documentation/filesystems/automount-support.txt
-+++ b/Documentation/filesystems/automount-support.rst
-@@ -1,3 +1,10 @@
+diff --git a/Documentation/admin-guide/ext4.rst b/Documentation/admin-guide/ext4.rst
+index 9443fcef1876..103bcc345bad 100644
+--- a/Documentation/admin-guide/ext4.rst
++++ b/Documentation/admin-guide/ext4.rst
+@@ -392,7 +392,7 @@ When mounting an ext4 filesystem, the following option are accepted:
+ 
+   dax
+         Use direct access (no page cache).  See
+-        Documentation/filesystems/dax.txt.  Note that this option is
++        Documentation/filesystems/dax.rst.  Note that this option is
+         incompatible with data=journal.
+ 
+ Data Mode
+diff --git a/Documentation/filesystems/dax.txt b/Documentation/filesystems/dax.rst
+similarity index 97%
+rename from Documentation/filesystems/dax.txt
+rename to Documentation/filesystems/dax.rst
+index 735f3859b19f..5838144f80f0 100644
+--- a/Documentation/filesystems/dax.txt
++++ b/Documentation/filesystems/dax.rst
+@@ -1,5 +1,8 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+=================
-+Automount Support
-+=================
++=======================
+ Direct Access for files
+------------------------
++=======================
+ 
+ Motivation
+ ----------
+@@ -46,6 +49,7 @@ stall the CPU for an extended period, you should also not attempt to
+ implement direct_access.
+ 
+ These block devices may be used for inspiration:
 +
+ - brd: RAM backed block device driver
+ - dcssblk: s390 dcss block device driver
+ - pmem: NVDIMM persistent memory driver
+@@ -55,6 +59,7 @@ Implementation Tips for Filesystem Writers
+ ------------------------------------------
+ 
+ Filesystem support consists of
 +
- Support is available for filesystems that wish to do automounting
- support (such as kAFS which can be found in fs/afs/ and NFS in
- fs/nfs/). This facility includes allowing in-kernel mounts to be
-@@ -5,13 +12,12 @@ performed and mountpoint degradation to be requested. The latter can
- also be requested by userspace.
+ - adding support to mark inodes as being DAX by setting the S_DAX flag in
+   i_flags
+ - implementing ->read_iter and ->write_iter operations which use dax_iomap_rw()
+@@ -127,6 +132,6 @@ by adding optional struct page support for pages under the control of
+ the driver (see CONFIG_NVDIMM_PFN in drivers/nvdimm for an example of
+ how to do this). In the non struct page cases O_DIRECT reads/writes to
+ those memory ranges from a non-DAX file will fail (note that O_DIRECT
+-reads/writes _of a DAX file_ do work, it is the memory that is being
++reads/writes _of a DAX ``file_`` do work, it is the memory that is being
+ accessed that is key here).  Other things that will not work in the
+ non struct page case include RDMA, sendfile() and splice().
+diff --git a/Documentation/filesystems/ext2.rst b/Documentation/filesystems/ext2.rst
+index d83dbbb162e2..fa416b7a5802 100644
+--- a/Documentation/filesystems/ext2.rst
++++ b/Documentation/filesystems/ext2.rst
+@@ -24,7 +24,7 @@ check=none, nocheck	(*)	Don't do extra checking of bitmaps on mount
+ 				(check=normal and check=strict options removed)
  
+ dax				Use direct access (no page cache).  See
+-				Documentation/filesystems/dax.txt.
++				Documentation/filesystems/dax.rst.
  
--======================
--IN-KERNEL AUTOMOUNTING
-+In-Kernel Automounting
- ======================
- 
- See section "Mount Traps" of  Documentation/filesystems/autofs.rst
- 
--Then from userspace, you can just do something like:
-+Then from userspace, you can just do something like::
- 
- 	[root@andromeda root]# mount -t afs \#root.afs. /afs
- 	[root@andromeda root]# ls /afs
-@@ -21,7 +27,7 @@ Then from userspace, you can just do something like:
- 	[root@andromeda root]# ls /afs/cambridge/afsdoc/
- 	ChangeLog  html  LICENSE  pdf  RELNOTES-1.2.2
- 
--And then if you look in the mountpoint catalogue, you'll see something like:
-+And then if you look in the mountpoint catalogue, you'll see something like::
- 
- 	[root@andromeda root]# cat /proc/mounts
- 	...
-@@ -30,8 +36,7 @@ And then if you look in the mountpoint catalogue, you'll see something like:
- 	#afsdoc. /afs/cambridge.redhat.com/afsdoc afs rw 0 0
- 
- 
--===========================
--AUTOMATIC MOUNTPOINT EXPIRY
-+Automatic Mountpoint Expiry
- ===========================
- 
- Automatic expiration of mountpoints is easy, provided you've mounted the
-@@ -43,7 +48,8 @@ To do expiration, you need to follow these steps:
-      hung.
- 
-  (2) When a new mountpoint is created in the ->d_automount method, add
--     the mnt to the list using mnt_set_expiry()
-+     the mnt to the list using mnt_set_expiry()::
-+
-              mnt_set_expiry(newmnt, &afs_vfsmounts);
- 
-  (3) When you want mountpoints to be expired, call mark_mounts_for_expiry()
-@@ -70,8 +76,7 @@ and the copies of those that are on an expiration list will be added to the
- same expiration list.
- 
- 
--=======================
--USERSPACE DRIVEN EXPIRY
-+Userspace Driven Expiry
- =======================
- 
- As an alternative, it is possible for userspace to request expiry of any
+ debug				Extra debugging information is sent to the
+ 				kernel syslog.  Useful for developers.
 diff --git a/Documentation/filesystems/index.rst b/Documentation/filesystems/index.rst
-index 5f4ba0e40e72..fc566c68a458 100644
+index c4f95f76ba6a..8e3ccb4ed483 100644
 --- a/Documentation/filesystems/index.rst
 +++ b/Documentation/filesystems/index.rst
-@@ -25,6 +25,8 @@ algorithms work.
+@@ -24,6 +24,7 @@ algorithms work.
+    splice
     locking
     directory-locking
++   dax
  
-+   automount-support
-+
-    caching/index
+    automount-support
  
-    porting
 -- 
 2.25.2
 
