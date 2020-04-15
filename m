@@ -2,109 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 015DD1AAAA7
-	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2020 16:52:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0E4831AAAD0
+	for <lists+linux-doc@lfdr.de>; Wed, 15 Apr 2020 16:52:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2636798AbgDOOpj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 15 Apr 2020 10:45:39 -0400
-Received: from mail.kernel.org ([198.145.29.99]:40254 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2636795AbgDOOpd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 15 Apr 2020 10:45:33 -0400
-Received: from mail.kernel.org (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 46D72218AC;
-        Wed, 15 Apr 2020 14:45:29 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1586961929;
-        bh=Tgx8bhgHklE3FDZN9i6EsAGZk7UfLJB3Oy+zSTpJTjQ=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Qy38bo6tXyunOd7fssISCteEmQC1jwS+lxtVXlNgBuwUsCE1XBnGqltK8LvvfU38O
-         N2qgx9t7zxpsbTrfhqCb2N3TorkMRnTTDQBaX02kYlJNP+Rn28JogIJyaA5xT8Wmdw
-         hjai+vMqj0Mhhi6NEwCsGQmds4IRE5GmSuy6ng84=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1jOjI7-006ka3-I8; Wed, 15 Apr 2020 16:45:27 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Rob Herring <robh+dt@kernel.org>, devicetree@vger.kernel.org
-Subject: [PATCH v3 12/12] docs: dt: convert writing-bindings.txt to ReST
-Date:   Wed, 15 Apr 2020 16:45:26 +0200
-Message-Id: <f2fb27f86a12c16d4b20d9051dec405d4f29a2bb.1586961793.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.25.2
-In-Reply-To: <cover.1586961793.git.mchehab+huawei@kernel.org>
-References: <cover.1586961793.git.mchehab+huawei@kernel.org>
+        id S2392433AbgDOOrv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 15 Apr 2020 10:47:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41670 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S2392410AbgDOOrs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 15 Apr 2020 10:47:48 -0400
+Received: from mail-qk1-x72a.google.com (mail-qk1-x72a.google.com [IPv6:2607:f8b0:4864:20::72a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E5BD6C061A0C;
+        Wed, 15 Apr 2020 07:47:47 -0700 (PDT)
+Received: by mail-qk1-x72a.google.com with SMTP id b62so17453548qkf.6;
+        Wed, 15 Apr 2020 07:47:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=EZ4iMxtLmyt1fidTbl+NFGEvP3aHTCvbYm4rWcaVlyA=;
+        b=Yt4KqbBYzrcQoQQlbdCqsuee3b+HaiUsutQD8Qbx5syhE1/i1Cw+VMzbLyCKcYaRYi
+         WAa0/Tvi6yhSrD3vkuaptsmzvS5iqXwB8vfcW40nQ8iC7S6SHHv6vSE/1fblaHpM7xPd
+         INyYDeTWPradXrWH0Te8CMeemJUNXr1N6tnq7e7HIaeDgeTLK0uYENrtc6B181jOAytd
+         kENWGTYOc074TwDs0ADlLkl7NssWed71MbxwMz5AIQpugB4nBUdrlFmViwh/4LDbffo7
+         j2sYfHlFC4fGGkxGRMrmkcXPAUWvDANSAxFpooShlv547O6GeNpnSRrpzBY7T1nDdaiP
+         qQew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=EZ4iMxtLmyt1fidTbl+NFGEvP3aHTCvbYm4rWcaVlyA=;
+        b=QR+kqWnUg6Iu1UgZNwSXDYrSvleYfh5Q9tpoY3SPRijHw+5ISY31N9lGNnsb6Es5p7
+         wTnrx59a6k9bi6074raDnHPopx3NYoutDzG4RNrKGnVD3An4kA/MyJDtHndMQyBsQU/I
+         imyiKX8RudygS2bkcYcS1WtKx3652GxWdaGhtImkWzWwLO3XduXwJ8kkmjSOuk01vzYG
+         hHYC/K7ylLUImK6AQW9UYkt5szTfKiW+h9Li7XtM5zVrYoVn4NO/fpkADuUv/O3FlZhK
+         r1TUL9SY1gUmxWu7xZPo575L4jia3no9TLdWuFXXn91uIda0fL9mIFRiNsetp0rwXOdl
+         iKpw==
+X-Gm-Message-State: AGi0PuYMyJqRu0xkA7vGQ9G+w8sxByzaj3nsSK6p7aI7z0TjuGfc7SsC
+        OvQcrUBAIrsYeQ0ptNzJ02z5qM9P2OoCdR1FY5WUfUdX
+X-Google-Smtp-Source: APiQypJUfL/gNlmbIS5arKSbG7lka+aMpwLuCQIZtSnNdCJg0n76Xjm5HPKezGAW0zBKEBD4gJjv8CJLffCHkEBpaoM=
+X-Received: by 2002:a37:a7cd:: with SMTP id q196mr2235781qke.160.1586962066994;
+ Wed, 15 Apr 2020 07:47:46 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <CALUj-gsRgkEyRe3vubEeWx8ENwEyE+Fzv4bKKDZ+iq3urRG0BA@mail.gmail.com>
+ <20200415163851.2e5f96f8@coco.lan>
+In-Reply-To: <20200415163851.2e5f96f8@coco.lan>
+From:   rishi gupta <gupt21@gmail.com>
+Date:   Wed, 15 Apr 2020 20:17:35 +0530
+Message-ID: <CALUj-gvYeXFv8TwypuyPygypW-izmgTcRY1mOGHyMGb-RGt2tw@mail.gmail.com>
+Subject: Re: Correct place to put the new doc for "How to use this driver"
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     linux-doc@vger.kernel.org, corbet@lwn.net,
+        lkml <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-- Add a SPDX header;
-- Adjust document and section titles;
-- Mark literal blocks as such;
-- Add it to bindings/index.rst.
+Thanks Mauro. I will put doc in admin-guide folder.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/devicetree/bindings/index.rst                | 1 +
- .../{writing-bindings.txt => writing-bindings.rst}         | 7 +++++++
- 2 files changed, 8 insertions(+)
- rename Documentation/devicetree/bindings/{writing-bindings.txt => writing-bindings.rst} (92%)
-
-diff --git a/Documentation/devicetree/bindings/index.rst b/Documentation/devicetree/bindings/index.rst
-index 6b87875a049c..3837b17c234f 100644
---- a/Documentation/devicetree/bindings/index.rst
-+++ b/Documentation/devicetree/bindings/index.rst
-@@ -9,3 +9,4 @@ Device Tree
- 
-    ABI
-    submitting-patches
-+   writing-bindings
-diff --git a/Documentation/devicetree/bindings/writing-bindings.txt b/Documentation/devicetree/bindings/writing-bindings.rst
-similarity index 92%
-rename from Documentation/devicetree/bindings/writing-bindings.txt
-rename to Documentation/devicetree/bindings/writing-bindings.rst
-index ca024b9c7433..45ff426d0019 100644
---- a/Documentation/devicetree/bindings/writing-bindings.txt
-+++ b/Documentation/devicetree/bindings/writing-bindings.rst
-@@ -1,4 +1,8 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+============================================================
- DOs and DON'Ts for designing and writing Devicetree bindings
-+============================================================
- 
- This is a list of common review feedback items focused on binding design. With
- every rule, there are exceptions and bindings have many gray areas.
-@@ -8,6 +12,7 @@ Documentation/devicetree/bindings/submitting-patches.rst
- 
- 
- Overall design
-+==============
- 
- - DO attempt to make bindings complete even if a driver doesn't support some
-   features. For example, if a device has an interrupt, then include the
-@@ -32,6 +37,7 @@ Overall design
- 
- 
- Properties
-+==========
- 
- - DO make 'compatible' properties specific. DON'T use wildcards in compatible
-   strings. DO use fallback compatibles when devices are the same as or a subset
-@@ -53,6 +59,7 @@ Properties
- 
- 
- Board/SoC .dts Files
-+====================
- 
- - DO put all MMIO devices under a bus node and not at the top-level.
- 
--- 
-2.25.2
-
+On Wed, Apr 15, 2020 at 8:08 PM Mauro Carvalho Chehab
+<mchehab+huawei@kernel.org> wrote:
+>
+> Em Wed, 15 Apr 2020 09:25:02 +0530
+> rishi gupta <gupt21@gmail.com> escreveu:
+>
+> > Hi Team,
+> >
+> > I need to add a documentation file to let users know "how to use this driver".
+> > Specifically this one (tty-ttyvs.rst): https://lkml.org/lkml/2020/2/15/153
+> >
+> > (1) I am unable to find any directory where it will fit. This driver
+> > belongs to Virtual TTY device category.
+> > Any suggestions where to put it?
+>
+> Docs focused on driver usage belongs to the admin-guide.
+>
+> >
+> > (2) After putting it is it mandatory to link it to
+> > Documentation/index.rst as suggested here
+> > https://www.kernel.org/doc/html/latest/doc-guide/index.html
+>
+> You should actually add it to Documentation/admin-guide/index.rst.
+>
+> >
+> > Regards,
+> > Rishi
+>
+>
+>
+> Thanks,
+> Mauro
