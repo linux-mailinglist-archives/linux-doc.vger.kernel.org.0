@@ -2,85 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 08F491ABEAF
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2020 13:00:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 31F6E1ACF13
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2020 19:47:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2505970AbgDPLAC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Apr 2020 07:00:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60858 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2505949AbgDPK7v (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Apr 2020 06:59:51 -0400
-Received: from mail-lj1-x244.google.com (mail-lj1-x244.google.com [IPv6:2a00:1450:4864:20::244])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B845CC03C1AB
-        for <linux-doc@vger.kernel.org>; Thu, 16 Apr 2020 03:52:19 -0700 (PDT)
-Received: by mail-lj1-x244.google.com with SMTP id u6so5690139ljl.6
-        for <linux-doc@vger.kernel.org>; Thu, 16 Apr 2020 03:52:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=YqF+/z+LBaU8X8GuG/beRb7kQZb2oP+PKGTiqRFntc4=;
-        b=O61jTEnjgd/MFLC0C7gD3v1f1K7hyNHbLJ95BLTIPmXhpMdq8JPWImgV01LKxrHzWm
-         igTpaZEUPXh7MExhOaBMX5tEjxpldqlveCYsKibvzkrPDDL06Ziieaj1qJ7z+ZUrqp4i
-         uCjsUClcCcMwMaVHft8rA5XJkEcLdYMkYvKfZMSVYCDsQdNkPVGCCxjxIUv8h0nKSeJm
-         Uk69cVP7q6OIVern4CJxyHsctCSRUd7O8kNGCbCe7tflbdhqHJwibVNgjk7z6H6Uhf9M
-         hYPA9tDCf6KamVuL+lF+bE9gSfx38ZsvU3mkfA6aWhuQxlie52caYXgMBN7Vg0SIRZn+
-         uJoA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=YqF+/z+LBaU8X8GuG/beRb7kQZb2oP+PKGTiqRFntc4=;
-        b=HHG36sYECnVOFkmc34PN2+bOdvvQWP8SowoQnKBQbP/+xoiG9hKc1ldKVkUkB1als/
-         I6tIowfkgxLImUtGJHlAZhlA9U9+K7guAS24vUeNYzfHWh5XjNpxIIx5kVhT30HfXAwX
-         5Qv4DhPMqKHEbhQFiV46cQjkY43/hy9gR4xR8e1SKehk8AqPcx8DlnwA9cLGMeqm412f
-         FHeTclpwmxeCzw1JCbtk421Mw6CFzBPsz5n1cgreWHrFRCpVlmLY3BMPw1fFUsctzIYi
-         txDiyCKLLnqq2cC/DwrttxvySOOZ0wXpd/U8GLK7l6k/zjTqW2FeJkBDUW79e6UK0jIA
-         ZAZA==
-X-Gm-Message-State: AGi0Pua7SoNUX8fe+A1aRlvnJBeF8aHR8aYMhmLdp77mFoEz6x7/avq6
-        c1K5wj83DKKs01lEJEbJq/vwxj/rFei5I2bw1xpt7Q==
-X-Google-Smtp-Source: APiQypJDV4zLPL0CbEVbqxkKUu4/iTCpV9lW81D7Y7R39PbjZq6AW9MqfediIKTHTI1HTYan1cmCNF4yfqCv5rHzELk=
-X-Received: by 2002:a2e:8805:: with SMTP id x5mr2581058ljh.223.1587034338213;
- Thu, 16 Apr 2020 03:52:18 -0700 (PDT)
+        id S1730210AbgDPRqW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Apr 2020 13:46:22 -0400
+Received: from mga12.intel.com ([192.55.52.136]:10730 "EHLO mga12.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726330AbgDPRqV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 16 Apr 2020 13:46:21 -0400
+IronPort-SDR: iuNe52aiEs5NuXZJDXBVyQDW4ZjNLa+iYhtAjDcDxHaGVYLdTqAKVxVUrlSVYglgDG/qMJhejB
+ IDts2bfniNUA==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga007.fm.intel.com ([10.253.24.52])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Apr 2020 10:46:21 -0700
+IronPort-SDR: YgiUGzOeMW41WCgj58lcvyywAJ8VFffHfyg+MotUV93rXD8YWnSAN7qxNX7jWJ/qRTgJ2ZpPwp
+ T9v6ExxYRFDg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.72,391,1580803200"; 
+   d="scan'208";a="244462208"
+Received: from otazetdi-mobl.ccr.corp.intel.com (HELO localhost) ([10.249.42.128])
+  by fmsmga007.fm.intel.com with ESMTP; 16 Apr 2020 10:46:17 -0700
+Date:   Thu, 16 Apr 2020 20:46:17 +0300
+From:   Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
+To:     Sumit Garg <sumit.garg@linaro.org>
+Cc:     zohar@linux.ibm.com, jejb@linux.ibm.com, corbet@lwn.net,
+        casey@schaufler-ca.com, janne.karhunen@gmail.com,
+        kgoldman@us.ibm.com, david.safford@ge.com, monty.wiseman@ge.com,
+        daniel.thompson@linaro.org, keyrings@vger.kernel.org,
+        linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, tee-dev@lists.linaro.org
+Subject: Re: [PATCH] doc: trusted-encrypted: updates with TEE as a new trust
+ source
+Message-ID: <20200416174617.GI199110@linux.intel.com>
+References: <1585636165-22481-1-git-send-email-sumit.garg@linaro.org>
 MIME-Version: 1.0
-References: <cover.1586359676.git.mchehab+huawei@kernel.org> <d8b0656cb3f1eacb10ca6168babb235d59a853a1.1586359676.git.mchehab+huawei@kernel.org>
-In-Reply-To: <d8b0656cb3f1eacb10ca6168babb235d59a853a1.1586359676.git.mchehab+huawei@kernel.org>
-From:   Linus Walleij <linus.walleij@linaro.org>
-Date:   Thu, 16 Apr 2020 12:52:07 +0200
-Message-ID: <CACRpkda+5VET+dyyQZk4GKjKCDNDYMP43VXL=0u5FOhEd0C=ww@mail.gmail.com>
-Subject: Re: [PATCH 29/35] MAINTAINERS: dt: fix pointers for ARM Integrator,
- Versatile and RealView
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Rob Herring <robh@kernel.org>,
-        Sudeep Holla <sudeep.holla@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1585636165-22481-1-git-send-email-sumit.garg@linaro.org>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Apr 8, 2020 at 5:46 PM Mauro Carvalho Chehab
-<mchehab+huawei@kernel.org> wrote:
+On Tue, Mar 31, 2020 at 11:59:25AM +0530, Sumit Garg wrote:
+> Update documentation for Trusted and Encrypted Keys with TEE as a new
+> trust source. Following is brief description of updates:
+> 
+> - Add a section to demostrate a list of supported devices along with
+>   their security properties/guarantees.
+> - Add a key generation section.
+> - Updates for usage section including differences specific to a trust
+>   source.
+> 
+> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
 
-> There's a conversion from a plain text binding file into 4 yaml ones.
-> The old file got removed, causing this new warning:
->
->         Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/arm/arm-boards
->
-> Address it by replacing the old reference by the new ones
->
-> Fixes: 2d483550b6d2 ("dt-bindings: arm: Drop the non-YAML bindings")
-> Fixes: 33fbfb3eaf4e ("dt-bindings: arm: Add Integrator YAML schema")
-> Fixes: 4b900070d50d ("dt-bindings: arm: Add Versatile YAML schema")
-> Fixes: 7db625b9fa75 ("dt-bindings: arm: Add RealView YAML schema")
-> Fixes: 4fb00d9066c1 ("dt-bindings: arm: Add Versatile Express and Juno YAML schema")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Overally this works for me. Can you bundle this with the code
+changes. Maybe some details needs to be fine tuned but easier
+to look into them in the context of rest of the patches.
 
-Acked-by: Linus Walleij <linus.walleij@linaro.org>
-
-Yours,
-Linus Walleij
+/Jarkko
