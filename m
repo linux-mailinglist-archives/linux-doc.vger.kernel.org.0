@@ -2,80 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9D01C1AD0F2
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Apr 2020 22:16:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4901A1AD34A
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2020 01:35:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728745AbgDPUPy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Apr 2020 16:15:54 -0400
-Received: from mail-ot1-f65.google.com ([209.85.210.65]:34541 "EHLO
-        mail-ot1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726523AbgDPUPt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Apr 2020 16:15:49 -0400
-Received: by mail-ot1-f65.google.com with SMTP id m2so4216784otr.1;
-        Thu, 16 Apr 2020 13:15:47 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=1P8yKmsIvoKMG/emgLl0/MHDjpc5RU9WDXXNgLV3Wdo=;
-        b=LWW5qgAFjuo+3fS+wvZ1U4JIwNcyZHsNC8/qo/vnefr6qX8pGIl9tRUI3zZcV0/GTv
-         kepo4ykmj0Kr1D2Y1twXaTFZ+eJNac7EGVjU2waoGf5SIC+WN31oLR9QAFXE0l1mxuk9
-         f702y5JTcCN2gthlhwkfRNOMuUTLaRa2Ioinsl5ubE0VWnGRhJ5VAHYqGilq0L88xT6d
-         d95ZG3Dddl3ieaB93hXNjfVPkyC9+bO/Ky2ynLbwI+v86OqcsZQU4Nhhtmzrmha1811L
-         sANy8eppo2zc5gMKkzHhy7EXGtcACXuUKowng9NCgTfqcG9UgsXc/IdAU6+TwvlTL2BS
-         vwgw==
-X-Gm-Message-State: AGi0PuaXYrmstcmOBv/7waGXcVOM/fO4K8dGjYpFf/mezG8qS2LICYee
-        BhRxa5Z47B7+0gOqfYxtZw==
-X-Google-Smtp-Source: APiQypJYATkzNqD1aOs3NsiPGqQoj9fe+miZIzifCuLxvAFoelYIaGEuOG4n+UvKF/rnltbQaG+fIg==
-X-Received: by 2002:a9d:77d5:: with SMTP id w21mr16346328otl.5.1587068147529;
-        Thu, 16 Apr 2020 13:15:47 -0700 (PDT)
-Received: from rob-hp-laptop (24-155-109-49.dyn.grandenetworks.net. [24.155.109.49])
-        by smtp.gmail.com with ESMTPSA id c81sm7140920oib.35.2020.04.16.13.15.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 16 Apr 2020 13:15:47 -0700 (PDT)
-Received: (nullmailer pid 6335 invoked by uid 1000);
-        Thu, 16 Apr 2020 20:15:46 -0000
-Date:   Thu, 16 Apr 2020 15:15:46 -0500
-From:   Rob Herring <robh@kernel.org>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Sudeep Holla <sudeep.holla@arm.com>
-Subject: Re: [PATCH 29/35] MAINTAINERS: dt: fix pointers for ARM Integrator,
- Versatile and RealView
-Message-ID: <20200416201546.GA6021@bogus>
-References: <cover.1586359676.git.mchehab+huawei@kernel.org>
- <d8b0656cb3f1eacb10ca6168babb235d59a853a1.1586359676.git.mchehab+huawei@kernel.org>
+        id S1726441AbgDPXfD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Apr 2020 19:35:03 -0400
+Received: from mail.dsns.gov.ua ([194.0.148.99]:37970 "EHLO mail.dsns.gov.ua"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725770AbgDPXfD (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 16 Apr 2020 19:35:03 -0400
+X-Greylist: delayed 9287 seconds by postgrey-1.27 at vger.kernel.org; Thu, 16 Apr 2020 19:34:56 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by mail.dsns.gov.ua (Postfix) with ESMTP id 6223A1EC85AF;
+        Thu, 16 Apr 2020 23:35:36 +0300 (EEST)
+Received: from mail.dsns.gov.ua ([127.0.0.1])
+        by localhost (mail.dsns.gov.ua [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id ekdCUR6pZ0Aa; Thu, 16 Apr 2020 23:35:36 +0300 (EEST)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.dsns.gov.ua (Postfix) with ESMTP id 67C3E1EC85F9;
+        Thu, 16 Apr 2020 23:35:26 +0300 (EEST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mail.dsns.gov.ua 67C3E1EC85F9
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=dsns.gov.ua;
+        s=1E60DAC0-2607-11E9-81E6-7A77C2B36653; t=1587069326;
+        bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+        h=Date:From:Message-ID:MIME-Version;
+        b=BFrHb0sdI6ttGZUrYrU3NgniYtd1aDAhnXXb2vKIb2B9styAswbm0NbzZRAHiMp0y
+         hUE3veWMbUD+qTP/VmiRFig+sJh7tgrjRSipmI8jEPDH4mLyVFQtPdyPojLkpu/SlT
+         y/CjSPHdIqozfsh/zyWU9aeO41yKuuO77HTVyT/eVGDUtLYGTijz0IeETvwB1Yur4I
+         5RegLOWC96rliENvAjVU5IoM4JfcadYa95Q959RRtGyCSnevHOMfGycVhDjkxX/p7G
+         0gUYzq9GdO73hW8YI3AV2m5dSWB1tPfsxP4FJUwoBTp88jIZZeY7uAiDenSeAUtBdj
+         PKl/BScyij7GQ==
+X-Virus-Scanned: amavisd-new at dsns.gov.ua
+Received: from mail.dsns.gov.ua ([127.0.0.1])
+        by localhost (mail.dsns.gov.ua [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id U4DcK3mdlYyf; Thu, 16 Apr 2020 23:35:26 +0300 (EEST)
+Received: from mail.dsns.gov.ua (localhost [127.0.0.1])
+        by mail.dsns.gov.ua (Postfix) with ESMTP id 9BAF81EC8118;
+        Thu, 16 Apr 2020 23:35:15 +0300 (EEST)
+Date:   Thu, 16 Apr 2020 23:35:15 +0300 (EEST)
+From:   Saleem Netanyahu <duchenko@dsns.gov.ua>
+Reply-To: Saleem Netanyahu <saleemnetu@gmail.com>
+Message-ID: <1255292802.718114.1587069315574.JavaMail.zimbra@dsns.gov.ua>
+Subject: Hey, how are u, can we talk?
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <d8b0656cb3f1eacb10ca6168babb235d59a853a1.1586359676.git.mchehab+huawei@kernel.org>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [45.82.223.36, 172.69.54.54]
+X-Mailer: Zimbra 8.8.15_GA_3918 (zclient/8.8.15_GA_3918)
+Thread-Index: oV9MZN6+Sh4gFPdsGziQ2IngcJhATw==
+Thread-Topic: Hey, how are u, can we talk?
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Apr 08, 2020 at 05:46:21PM +0200, Mauro Carvalho Chehab wrote:
-> There's a conversion from a plain text binding file into 4 yaml ones.
-> The old file got removed, causing this new warning:
-> 
-> 	Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/arm/arm-boards
-> 
-> Address it by replacing the old reference by the new ones
-> 
-> Fixes: 4b900070d50d ("dt-bindings: arm: Add Versatile YAML schema")
-> Fixes: 2d483550b6d2 ("dt-bindings: arm: Drop the non-YAML bindings")
-> Fixes: 7db625b9fa75 ("dt-bindings: arm: Add RealView YAML schema")
-> Fixes: 4fb00d9066c1 ("dt-bindings: arm: Add Versatile Express and Juno YAML schema")
-> Fixes: 33fbfb3eaf4e ("dt-bindings: arm: Add Integrator YAML schema")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> Acked-by: Linus Walleij <linus.walleij@linaro.org>
-> ---
->  MAINTAINERS | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
-
-Applied.
-
-Rob
