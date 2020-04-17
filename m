@@ -2,102 +2,153 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B885D1ADFF3
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2020 16:32:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A676D1AE534
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Apr 2020 20:54:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727823AbgDQObd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 17 Apr 2020 10:31:33 -0400
-Received: from mail.kernel.org ([198.145.29.99]:53196 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726065AbgDQObc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 17 Apr 2020 10:31:32 -0400
-Received: from mail-qt1-f177.google.com (mail-qt1-f177.google.com [209.85.160.177])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id E0ABF2223C;
-        Fri, 17 Apr 2020 14:31:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1587133892;
-        bh=pT6+doLxhDBboeLR9o8Dpw1tvc89tREvWl1biQA46lM=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=gkh6DENAZFbDzJIf3gFlleyZJHAgpIxRXuIbcQaYJRwCKVr5jxuSl5wprhsHK8NQv
-         d70cg4H/hlDv7pzVdq0X9RSmWonyibSgmMLQVrRgpQCNjkdh7j9FH4xNyqYZgK+ya1
-         BlDA5SWyRdDvV/b1wK2lwC9TpR2q0Mgy4dAk/xCs=
-Received: by mail-qt1-f177.google.com with SMTP id x8so870257qtp.13;
-        Fri, 17 Apr 2020 07:31:31 -0700 (PDT)
-X-Gm-Message-State: AGi0PuZrs86WVckx3vkSdLOF8oUK8m+P+M8JjcMNG1xcO1yqCXswpky/
-        b6jyV/LRHGHCwqXMMjwts1BjjR/UzYNwFpbxfw==
-X-Google-Smtp-Source: APiQypIyrumUQTKQyuwVJdKoY42ZUrD4HU0jijHUYuJE36Rvv09bfA43tUGFPkwi5wV/2LSEiXno09uVRo0AKF6NNfE=
-X-Received: by 2002:ac8:6695:: with SMTP id d21mr3248533qtp.110.1587133890922;
- Fri, 17 Apr 2020 07:31:30 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1586359676.git.mchehab+huawei@kernel.org>
- <24b30222392569e7aa5d61d46642a4c38a964512.1586359676.git.mchehab+huawei@kernel.org>
- <87h7xicvht.fsf@kernel.org>
-In-Reply-To: <87h7xicvht.fsf@kernel.org>
-From:   Rob Herring <robh+dt@kernel.org>
-Date:   Fri, 17 Apr 2020 09:31:17 -0500
-X-Gmail-Original-Message-ID: <CAL_JsqLrKYTJTiPrzJAR7M-uCVa-S8sLMWUL4Xcy9x=XsY8mcg@mail.gmail.com>
-Message-ID: <CAL_JsqLrKYTJTiPrzJAR7M-uCVa-S8sLMWUL4Xcy9x=XsY8mcg@mail.gmail.com>
-Subject: Re: [PATCH 28/35] docs: dt: qcom,dwc3.txt: fix cross-reference for a
- converted file
-To:     Felipe Balbi <balbi@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        id S1728531AbgDQSyB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 17 Apr 2020 14:54:01 -0400
+Received: from userp2130.oracle.com ([156.151.31.86]:56388 "EHLO
+        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726432AbgDQSyB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Apr 2020 14:54:01 -0400
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+        by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03HIqHgt124145;
+        Fri, 17 Apr 2020 18:53:11 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding;
+ s=corp-2020-01-29; bh=gYVwjW9uIr3S+PxyOOpBOdl7Nnodqy4JmhYGCNmfQWM=;
+ b=PCK2CWPBOxDZpbIRlSU/o+jYUMdyVvyKxjAMbW+oUxjYTSaHIambzyU7BFyZHbzeF4L9
+ jaKxiLm80n8l4nnHnZPGPepMUpf+V4l11YuMmLQTgL/OLSY2Mz2vAHKWucWhtfR0llkY
+ l6FnrY9EjQzQknGNZpicgor/igM+VAitMhMbeYS+Ljh1G29ma/aYl84zvZNDQqNvFV1T
+ I0DqNzDqA385q7pXjl+nwBs8ea8SGWdQYBnLwrPWWfNbrGTBulSYfDmkAUXiA0aLipGE
+ aN2SOyDIr6aERMsWJLNV0utldXu2OdLE9KOASoTm/CY2HsDa4VHth5atxrHeASpUqunP xw== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+        by userp2130.oracle.com with ESMTP id 30e0aae8rg-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 17 Apr 2020 18:53:11 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+        by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03HIcJ0Z118535;
+        Fri, 17 Apr 2020 18:51:10 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+        by aserp3020.oracle.com with ESMTP id 30dn9ks84n-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 17 Apr 2020 18:51:10 +0000
+Received: from abhmp0006.oracle.com (abhmp0006.oracle.com [141.146.116.12])
+        by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 03HIotrG025242;
+        Fri, 17 Apr 2020 18:50:55 GMT
+Received: from monkey.oracle.com (/71.63.128.209)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Fri, 17 Apr 2020 11:50:55 -0700
+From:   Mike Kravetz <mike.kravetz@oracle.com>
+To:     linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org,
+        linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
+        linux-s390@vger.kernel.org, sparclinux@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Cc:     Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Paul Mackerras <paulus@samba.org>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Heiko Carstens <heiko.carstens@de.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        "David S . Miller" <davem@davemloft.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Andy Gross <agross@kernel.org>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Sandeep Maheswaram <sanm@codeaurora.org>,
-        Matthias Kaehlcke <mka@chromium.org>,
-        Stephen Boyd <swboyd@chromium.org>,
-        Kishon Vijay Abraham I <kishon@ti.com>,
-        linux-arm-msm <linux-arm-msm@vger.kernel.org>,
-        Linux USB List <linux-usb@vger.kernel.org>,
-        devicetree@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+        Longpeng <longpeng2@huawei.com>,
+        Christophe Leroy <christophe.leroy@c-s.fr>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Mina Almasry <almasrymina@google.com>,
+        Peter Xu <peterx@redhat.com>,
+        Nitesh Narayan Lal <nitesh@redhat.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>
+Subject: [PATCH v3 0/4] Clean up hugetlb boot command line processing
+Date:   Fri, 17 Apr 2020 11:50:45 -0700
+Message-Id: <20200417185049.275845-1-mike.kravetz@oracle.com>
+X-Mailer: git-send-email 2.25.2
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9594 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 mlxscore=0 adultscore=0
+ spamscore=0 phishscore=0 bulkscore=0 suspectscore=0 malwarescore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2004170142
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9594 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 clxscore=1015
+ impostorscore=0 mlxlogscore=999 mlxscore=0 lowpriorityscore=0
+ suspectscore=0 adultscore=0 spamscore=0 malwarescore=0 phishscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2003020000 definitions=main-2004170142
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Apr 17, 2020 at 4:27 AM Felipe Balbi <balbi@kernel.org> wrote:
->
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
->
-> > The qcom-qusb2-phy.txt file was converted and renamed to yaml.
-> > Update cross-reference accordingly.
-> >
-> > Fixes: 8ce65d8d38df ("dt-bindings: phy: qcom,qusb2: Convert QUSB2 phy bindings to yaml")
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> > ---
-> >  Documentation/devicetree/bindings/usb/qcom,dwc3.txt | 4 ++--
-> >  1 file changed, 2 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/Documentation/devicetree/bindings/usb/qcom,dwc3.txt b/Documentation/devicetree/bindings/usb/qcom,dwc3.txt
-> > index cb695aa3fba4..fbdd01756752 100644
-> > --- a/Documentation/devicetree/bindings/usb/qcom,dwc3.txt
-> > +++ b/Documentation/devicetree/bindings/usb/qcom,dwc3.txt
-> > @@ -52,8 +52,8 @@ A child node must exist to represent the core DWC3 IP block. The name of
-> >  the node is not important. The content of the node is defined in dwc3.txt.
-> >
-> >  Phy documentation is provided in the following places:
-> > -Documentation/devicetree/bindings/phy/qcom-qmp-phy.txt   - USB3 QMP PHY
-> > -Documentation/devicetree/bindings/phy/qcom-qusb2-phy.txt - USB2 QUSB2 PHY
-> > +Documentation/devicetree/bindings/phy/qcom-qmp-phy.txt    - USB3 QMP PHY
-> > +Documentation/devicetree/bindings/phy/qcom,qusb2-phy.yaml - USB2 QUSB2 PHY
-> >
-> >  Example device nodes:
->
-> Should I take this or will it go via e.g. trivial?
+v3 -
+   Used weak attribute method of defining arch_hugetlb_valid_size.
+     This eliminates changes to arch specific hugetlb.h files (Peter)
+   Updated documentation (Peter, Randy)
+   Fixed handling of implicitly specified gigantic page preallocation
+     in existing code and removed documentation of such.  There is now
+     no difference between handling of gigantic and non-gigantic pages.
+     (Peter, Nitesh).
+     This requires the most review as there is a small change to
+     undocumented behavior.  See patch 4 commit message for details.
+   Added Acks and Reviews (Mina, Peter)
 
-I already queued up v2 of this.
+v2 -
+   Fix build errors with patch 1 (Will)
+   Change arch_hugetlb_valid_size arg to unsigned long and remove
+     irrelevant 'extern' keyword (Christophe)
+   Documentation and other misc changes (Randy, Christophe, Mina)
+   Do not process command line options if !hugepages_supported()
+     (Dave, but it sounds like we may want to additional changes to
+      hugepages_supported() for x86?  If that is needed I would prefer
+      a separate patch.)
 
->
-> In any case:
->
-> Acked-by: Felipe Balbi <balbi@kernel.org>
->
-> --
-> balbi
+Longpeng(Mike) reported a weird message from hugetlb command line processing
+and proposed a solution [1].  While the proposed patch does address the
+specific issue, there are other related issues in command line processing.
+As hugetlbfs evolved, updates to command line processing have been made to
+meet immediate needs and not necessarily in a coordinated manner.  The result
+is that some processing is done in arch specific code, some is done in arch
+independent code and coordination is problematic.  Semantics can vary between
+architectures.
+
+The patch series does the following:
+- Define arch specific arch_hugetlb_valid_size routine used to validate
+  passed huge page sizes.
+- Move hugepagesz= command line parsing out of arch specific code and into
+  an arch independent routine.
+- Clean up command line processing to follow desired semantics and
+  document those semantics.
+
+[1] https://lore.kernel.org/linux-mm/20200305033014.1152-1-longpeng2@huawei.com
+
+Mike Kravetz (4):
+  hugetlbfs: add arch_hugetlb_valid_size
+  hugetlbfs: move hugepagesz= parsing to arch independent code
+  hugetlbfs: remove hugetlb_add_hstate() warning for existing hstate
+  hugetlbfs: clean up command line processing
+
+ .../admin-guide/kernel-parameters.txt         |  40 ++--
+ Documentation/admin-guide/mm/hugetlbpage.rst  |  35 ++++
+ arch/arm64/mm/hugetlbpage.c                   |  30 +--
+ arch/powerpc/mm/hugetlbpage.c                 |  30 +--
+ arch/riscv/mm/hugetlbpage.c                   |  24 +--
+ arch/s390/mm/hugetlbpage.c                    |  24 +--
+ arch/sparc/mm/init_64.c                       |  43 +---
+ arch/x86/mm/hugetlbpage.c                     |  23 +--
+ include/linux/hugetlb.h                       |   2 +-
+ mm/hugetlb.c                                  | 190 +++++++++++++++---
+ 10 files changed, 271 insertions(+), 170 deletions(-)
+
+-- 
+2.25.2
+
