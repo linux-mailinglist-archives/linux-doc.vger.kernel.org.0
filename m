@@ -2,124 +2,62 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 84C7A1B0852
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2020 13:55:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9CDEE1B0D79
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2020 15:55:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726830AbgDTLyw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Apr 2020 07:54:52 -0400
-Received: from mail.kernel.org ([198.145.29.99]:38608 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726821AbgDTLyv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 20 Apr 2020 07:54:51 -0400
-Received: from quaco.ghostprotocols.net (unknown [179.97.37.151])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 8202A21927;
-        Mon, 20 Apr 2020 11:54:45 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1587383690;
-        bh=VEov1HC8kgX2JVYBtf5NvQb82wHeJ2/NnuqpEyj7U+U=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=K2wA/sfFxecLv7R81Z3L8nQRfJzTKMqNt+FJN7nLvkxV66mZfO5u6jy9LnBfkf7ed
-         5jEJkZFGY7O11EbRbNmJ3pqEsYFpuOjmCkheRSJjCJxnsyW0RoFGzomKUWICd6Rzqx
-         HE2UHsV3PClSWDXhumCf8dh4djMaGw2rLR076hRY=
-From:   Arnaldo Carvalho de Melo <acme@kernel.org>
-To:     Ingo Molnar <mingo@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>
-Cc:     Jiri Olsa <jolsa@kernel.org>, Namhyung Kim <namhyung@kernel.org>,
-        Clark Williams <williams@redhat.com>,
-        linux-kernel@vger.kernel.org, linux-perf-users@vger.kernel.org,
-        Alexey Budankov <alexey.budankov@linux.intel.com>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Andi Kleen <ak@linux.intel.com>,
-        Igor Lubashev <ilubashe@akamai.com>,
-        James Morris <jmorris@namei.org>, Jiri Olsa <jolsa@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Serge Hallyn <serge@hallyn.com>,
-        Song Liu <songliubraving@fb.com>,
-        Stephane Eranian <eranian@google.com>,
-        intel-gfx@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        linux-man@vger.kernel.org, linux-security-module@vger.kernel.org,
-        selinux@vger.kernel.org, Arnaldo Carvalho de Melo <acme@redhat.com>
-Subject: [PATCH 16/60] doc/admin-guide: update kernel.rst with CAP_PERFMON information
-Date:   Mon, 20 Apr 2020 08:52:32 -0300
-Message-Id: <20200420115316.18781-17-acme@kernel.org>
-X-Mailer: git-send-email 2.21.1
-In-Reply-To: <20200420115316.18781-1-acme@kernel.org>
-References: <20200420115316.18781-1-acme@kernel.org>
+        id S1727783AbgDTNz2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Apr 2020 09:55:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43996 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726984AbgDTNz2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Apr 2020 09:55:28 -0400
+Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com [IPv6:2607:f8b0:4864:20::344])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1917EC061A0C
+        for <linux-doc@vger.kernel.org>; Mon, 20 Apr 2020 06:55:28 -0700 (PDT)
+Received: by mail-ot1-x344.google.com with SMTP id m18so8115724otq.9
+        for <linux-doc@vger.kernel.org>; Mon, 20 Apr 2020 06:55:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=BW35r6rcBUIKGaJVQbDZwXgA3m4JhzXLkjRiPFjYnCg=;
+        b=k7CkjARpSpvl+9l69SrC+hjrY+ns+/hQ7h5i6ky8ikqrVfeIwRsOOk3Oj54qTwPiTl
+         RLN3DpCmw7nxzHcqxklBiQ5i6iKRy3VJB1SuNf1Ig1ePqNkP/n92hpXf3mhjP1HkEZZH
+         G0nJDLv+NFB/3dbTSqTkuR/yxqMMzR+KocZ+kvS5RXpM+ScFffZTnUOyRr0FAH2ACv0w
+         0ITJAypgyQAIVydzxV+RwQjxVcCrw4EO/r1flJPiK+tbhJ3X7x6j0ioBtswr78x20H0Z
+         hbAgSJK8dsuhoLW/6oswIEUhePPTfXVo+6d70GEigge1M7RnhJ7ubykJUaPKsadq4h0a
+         7HgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=BW35r6rcBUIKGaJVQbDZwXgA3m4JhzXLkjRiPFjYnCg=;
+        b=QLAytyslvUBtlaDGJSiuduqI4qafO5awGuF4YqSUdhYV59Xm2EU6UZoAvrxJWPoF5r
+         mJKVcANFYLWO0259UhSVRreD/SgMka/rdPee9Gsp2KlhmBmIpIrA3jPJS2XnPYguyXn5
+         JRJ7pelhcMmpEqItuM9FtE3OU/IVh6113Y9+Iy3zHFzKKKQkwSFvQ2y987vxMvgxYRYs
+         XmlBVjwzDedss+W8oEKB0elABzY0PoZvMRYL6TaGXgIjmFaFPCMq76b+PHEYQAU59lpu
+         GzyXolTfxo+g7DVL9TKBJOOMtrQyB8q4ov90kJPpiuEzKD4ckTzTRPeBtm51CcCir72+
+         /5Qg==
+X-Gm-Message-State: AGi0Pub/iI301C4x0HaBaCunD+zeAdFl13U12sW9tdqnjzgGaX2zg5D1
+        t7S43X2GcoF0nOCw8ttLy2wneFJxnJkgqap9v2I=
+X-Google-Smtp-Source: APiQypJHsuuIlAFBeD63tn9XuSLRKhoQVrT1Nv4Uf+X5OWEhrJmUy5Yo/rxDd5SGMMPkEUy24yRHJ1845UebQs14AcM=
+X-Received: by 2002:a9d:740d:: with SMTP id n13mr9549840otk.114.1587390927527;
+ Mon, 20 Apr 2020 06:55:27 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Received: by 2002:a4a:d096:0:0:0:0:0 with HTTP; Mon, 20 Apr 2020 06:55:27
+ -0700 (PDT)
+Reply-To: michellegoodman45@gmail.com
+From:   Shayma <shaymamarwan03@gmail.com>
+Date:   Mon, 20 Apr 2020 13:55:27 +0000
+Message-ID: <CANMGuejJ8jPWCUf0enWXzTgUdRDd-AjbzSpd-3tE95b88FmXag@mail.gmail.com>
+Subject: Hallo
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Alexey Budankov <alexey.budankov@linux.intel.com>
-
-Update the kernel.rst documentation file with the information related to
-usage of CAP_PERFMON capability to secure performance monitoring and
-observability operations in system.
-
-Signed-off-by: Alexey Budankov <alexey.budankov@linux.intel.com>
-Cc: Alexei Starovoitov <ast@kernel.org>
-Cc: Andi Kleen <ak@linux.intel.com>
-Cc: Igor Lubashev <ilubashe@akamai.com>
-Cc: James Morris <jmorris@namei.org>
-Cc: Jiri Olsa <jolsa@redhat.com>
-Cc: Namhyung Kim <namhyung@kernel.org>
-Cc: Peter Zijlstra <peterz@infradead.org>
-Cc: Serge Hallyn <serge@hallyn.com>
-Cc: Song Liu <songliubraving@fb.com>
-Cc: Stephane Eranian <eranian@google.com>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: intel-gfx@lists.freedesktop.org
-Cc: linux-doc@vger.kernel.org
-Cc: linux-man@vger.kernel.org
-Cc: linux-security-module@vger.kernel.org
-Cc: selinux@vger.kernel.org
-Link: http://lore.kernel.org/lkml/84c32383-14a2-fa35-16b6-f9e59bd37240@linux.intel.com
-Signed-off-by: Arnaldo Carvalho de Melo <acme@redhat.com>
----
- Documentation/admin-guide/sysctl/kernel.rst | 16 +++++++++++-----
- 1 file changed, 11 insertions(+), 5 deletions(-)
-
-diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
-index 39c95c0e13d3..7e4c28dfc9ca 100644
---- a/Documentation/admin-guide/sysctl/kernel.rst
-+++ b/Documentation/admin-guide/sysctl/kernel.rst
-@@ -730,7 +730,13 @@ perf_event_paranoid
- ===================
- 
- Controls use of the performance events system by unprivileged
--users (without CAP_SYS_ADMIN).  The default value is 2.
-+users (without CAP_PERFMON).  The default value is 2.
-+
-+For backward compatibility reasons access to system performance
-+monitoring and observability remains open for CAP_SYS_ADMIN
-+privileged processes but CAP_SYS_ADMIN usage for secure system
-+performance monitoring and observability operations is discouraged
-+with respect to CAP_PERFMON use cases.
- 
- ===  ==================================================================
-  -1  Allow use of (almost) all events by all users.
-@@ -739,13 +745,13 @@ users (without CAP_SYS_ADMIN).  The default value is 2.
-      ``CAP_IPC_LOCK``.
- 
- >=0  Disallow ftrace function tracepoint by users without
--     ``CAP_SYS_ADMIN``.
-+     ``CAP_PERFMON``.
- 
--     Disallow raw tracepoint access by users without ``CAP_SYS_ADMIN``.
-+     Disallow raw tracepoint access by users without ``CAP_PERFMON``.
- 
-->=1  Disallow CPU event access by users without ``CAP_SYS_ADMIN``.
-+>=1  Disallow CPU event access by users without ``CAP_PERFMON``.
- 
-->=2  Disallow kernel profiling by users without ``CAP_SYS_ADMIN``.
-+>=2  Disallow kernel profiling by users without ``CAP_PERFMON``.
- ===  ==================================================================
- 
- 
--- 
-2.21.1
-
+Hallo liebe Hoffnung, hast du bitte meine Nachricht erhalten?
+Ich brauche eine sofortige Antwort
+danke u
+Michelle
