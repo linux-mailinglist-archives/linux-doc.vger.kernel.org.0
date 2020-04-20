@@ -2,91 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 969C21B189A
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Apr 2020 23:43:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 996B71B1939
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2020 00:13:57 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727854AbgDTVnU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Apr 2020 17:43:20 -0400
-Received: from ms.lwn.net ([45.79.88.28]:53958 "EHLO ms.lwn.net"
+        id S1728533AbgDTWNA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Apr 2020 18:13:00 -0400
+Received: from mail.kernel.org ([198.145.29.99]:37880 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725989AbgDTVnT (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 20 Apr 2020 17:43:19 -0400
-Received: from lwn.net (localhost [127.0.0.1])
+        id S1727944AbgDTWM7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 20 Apr 2020 18:12:59 -0400
+Received: from coco.lan (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 632E4823;
-        Mon, 20 Apr 2020 21:43:17 +0000 (UTC)
-Date:   Mon, 20 Apr 2020 15:43:16 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+        by mail.kernel.org (Postfix) with ESMTPSA id 4053E206E9;
+        Mon, 20 Apr 2020 22:12:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1587420779;
+        bh=u8p0jHaF21T4UpqWTkdDV4RwTi3BMeCpFwuNvwfsqJU=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=glBJYPYaB1Kjc2rK8ALzFmYe5Y8oxFn04YU/W79os1OPzcQ9wLbQjhyZIDiybTDdj
+         yv7BaL0HUSVRelCLSKXaNZB3UIUreLhknpimvro5ePfnGawX0uZPMpoBpaXYxawf0Y
+         4ENEUpZXJmR3jX6AU4FIcV9beDga5F+fE8Gz6Mhg=
+Date:   Tue, 21 Apr 2020 00:12:55 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Rob Herring <robh@kernel.org>,
-        Maxime Ripard <maxime@cerno.tech>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Kishon Vijay Abraham I <kishon@ti.com>,
-        Yuti Amonkar <yamonkar@cadence.com>,
-        devicetree@vger.kernel.org, linux-arch@vger.kernel.org,
-        kvm@vger.kernel.org, kvm-ppc@vger.kernel.org,
-        linuxppc-dev@lists.ozlabs.org, dri-devel@lists.freedesktop.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-fsdevel@vger.kernel.org, linux-unionfs@vger.kernel.org,
-        linux-mm@kvack.org, linux-rdma@vger.kernel.org,
-        kvmarm@lists.cs.columbia.edu, linux-crypto@vger.kernel.org,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        freedreno@lists.freedesktop.org, linux-afs@lists.infradead.org,
-        ecryptfs@vger.kernel.org, linux-ntfs-dev@lists.sourceforge.net,
-        ocfs2-devel@oss.oracle.com, linux-pci@vger.kernel.org,
-        linux-edac@vger.kernel.org, linux-spi@vger.kernel.org,
-        Sandeep Maheswaram <sanm@codeaurora.org>,
-        Stephen Boyd <swboyd@chromium.org>,
-        Matthias Kaehlcke <mka@chromium.org>,
-        linux-usb@vger.kernel.org,
-        Geert Uytterhoeven <geert+renesas@glider.be>,
-        Matthias Brugger <mbrugger@suse.com>, netdev@vger.kernel.org,
-        linux-i2c@vger.kernel.org, linux-rockchip@lists.infradead.org,
-        linux-ide@vger.kernel.org, linux1394-devel@lists.sourceforge.net
-Subject: Re: [PATCH v2 00/33] Documentation fixes for Kernel 5.8
-Message-ID: <20200420154316.28e42905@lwn.net>
-In-Reply-To: <cover.1586881715.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 04/33] docs: update recommended Sphinx version to
+ 2.4.4
+Message-ID: <20200421001255.7c7e5065@coco.lan>
+In-Reply-To: <20200420152729.40cb10e1@lwn.net>
 References: <cover.1586881715.git.mchehab+huawei@kernel.org>
-Organization: LWN.net
+        <498f701c618f7d0cf5f0a37e5889ee926f7c8bf4.1586881715.git.mchehab+huawei@kernel.org>
+        <20200420152729.40cb10e1@lwn.net>
+X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 14 Apr 2020 18:48:26 +0200
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+Em Mon, 20 Apr 2020 15:27:29 -0600
+Jonathan Corbet <corbet@lwn.net> escreveu:
 
-> Patches 1 to 5 contain changes to the documentation toolset:
+> On Tue, 14 Apr 2020 18:48:30 +0200
+> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 > 
-> - The first 3 patches help to reduce a lot the number of reported
->   kernel-doc issues, by making the tool more smart.
+> > The Sphinx check script is already smart enough to keep
+> > working, with older versions, warning the users that
+> > an upgrade is recommended (and explaining how):
+> > 
+> > 	Sphinx version 1.7.9
+> > 	Warning: It is recommended at least Sphinx version 2.4.4.
+> > 	Detected OS: Fedora release 31 (Thirty One).
+> > 
+> > 	To upgrade Sphinx, use:
+> > 
+> > 		/usr/bin/virtualenv sphinx_2.4.4
+> > 		. sphinx_2.4.4/bin/activate
+> > 		pip install -r ./Documentation/sphinx/requirements.txt  
 > 
-> - Patches 4 and 5 are meant to partially address the PDF
->   build, with now requires Sphinx version 2.4 or upper.
-> 
-> The remaining patches fix broken references detected by
-> this tool:
-> 
->         ./scripts/documentation-file-ref-check
-> 
-> and address other random errors due to tags being mis-interpreted
-> or mis-used.
-> 
-> They are independent each other, but some may depend on
-> the kernel-doc improvements.
-> 
-> PS.: Due to the large number of C/C, I opted to keep a smaller
-> set of C/C at this first e-mail (only e-mails with "L:" tag from
-> MAINTAINERS file).
+> Sigh...that version is all of a month and some old.  I hate to be pushing
+> people that hard on the upgrade treadmill.
 
-OK, I've applied this set, minus #17 which was applied elsewhere.
+Yeah, I see the point. 
+
+Please notice that the above will only appear if someone calls "make htmldocs"
+and no sphinx-build is found at the patch (or if the version is below the
+lower bond - 1.4.x).
+
+> I'm still looking over the set, and will probably apply this, but I think
+> we should consider tweaking this before 5.8:
+> 
+>  - Can we make the warning more explicit that 2.4.4 is needed *if you are
+>    generating PDF*?  Most people, I think, don't do that, and can live
+>    happily with an older version.
+
+Sure. I can work on a patch for such purpose. 
+
+>  - Perhaps the time has come to raise the lower bound to, say, 1.7?  That
+>    might let us get rid of a bit of cruft.
+
+If we move the lower bound, it will start to refuse running "make htmldocs"
+with versions below 1.7.
+
+I'm ok on rising the lower limit. Yet, not sure if this is worth.
+I mean, last time I checked, html builds fine with older versions.
+
+Ok, if we rise the bar, we may be able to do some cleanups at the
+extensions, removing some backward-compatible code. So, I would wait
+for some future Sphinx version where the extensions would stop working,
+requiring someone to touch them.
 
 Thanks,
-
-jon
+Mauro
