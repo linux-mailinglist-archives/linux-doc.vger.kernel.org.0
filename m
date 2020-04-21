@@ -2,90 +2,47 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 671191B2DC1
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2020 19:05:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D072D1B2E3B
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2020 19:23:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729151AbgDUREQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 Apr 2020 13:04:16 -0400
-Received: from mail.kernel.org ([198.145.29.99]:33648 "EHLO mail.kernel.org"
+        id S1725963AbgDURXl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Apr 2020 13:23:41 -0400
+Received: from verein.lst.de ([213.95.11.211]:47982 "EHLO verein.lst.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728956AbgDUREP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 21 Apr 2020 13:04:15 -0400
-Received: from mail.kernel.org (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 1F65E2074B;
-        Tue, 21 Apr 2020 17:04:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1587488654;
-        bh=KOSXgY1unDOeRzswCJwrDcxcwNLE7Z9tDt1GWUVn2c8=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=M1S+VTU4DV4AtzQnb/fUz1DTMMZA1ZVDwebDLNTWnmSYC3l0r/EuY0jZXOB5ClXhV
-         bvnHgm8yp6JfIZ1StUEfpZ67/ythA5EvYNeEciuDPp/bOvsKoLLvjTwAfPbUTvEOs5
-         iiaVxsmqQQMUlCwVVdlisHD7IhWS9RNwyaYWWdqw=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1jQwJg-00CmMA-A9; Tue, 21 Apr 2020 19:04:12 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        id S1725930AbgDURXl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 21 Apr 2020 13:23:41 -0400
+Received: by verein.lst.de (Postfix, from userid 2407)
+        id C37F468C4E; Tue, 21 Apr 2020 19:23:37 +0200 (CEST)
+Date:   Tue, 21 Apr 2020 19:23:37 +0200
+From:   Christoph Hellwig <hch@lst.de>
+To:     Matthew Wilcox <willy@infradead.org>
+Cc:     Christoph Hellwig <hch@lst.de>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Josh Triplett <josh@joshtriplett.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-        Lai Jiangshan <jiangshanlai@gmail.com>,
-        Joel Fernandes <joel@joelfernandes.org>, rcu@vger.kernel.org
-Subject: [PATCH 10/10] docs: RCU: rculist_nulls.rst: don't duplicate chapter names
-Date:   Tue, 21 Apr 2020 19:04:11 +0200
-Message-Id: <6ec433635785b2f25f952c70fb7bcfbab858a6a4.1587488137.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.25.2
-In-Reply-To: <cover.1587488137.git.mchehab+huawei@kernel.org>
-References: <cover.1587488137.git.mchehab+huawei@kernel.org>
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Joel Becker <jlbec@evilplan.org>, linux-usb@vger.kernel.org
+Subject: Re: [PATCH v2 08/29] docs: filesystems: convert configfs.txt to
+ ReST
+Message-ID: <20200421172337.GA18305@lst.de>
+References: <cover.1587487612.git.mchehab+huawei@kernel.org> <278a9befc98b49ea866c9b687d070c70cde20628.1587487612.git.mchehab+huawei@kernel.org> <20200421165534.GA16511@lst.de> <20200421170223.GP5820@bombadil.infradead.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200421170223.GP5820@bombadil.infradead.org>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Since changeset 58ad30cf91f0 ("docs: fix reference to core-api/namespaces.rst"),
-auto-references for chapters are generated. This is a nice feature, but
-has a drawback: no chapters can have the same sumber.
+On Tue, Apr 21, 2020 at 10:02:23AM -0700, Matthew Wilcox wrote:
+> On Tue, Apr 21, 2020 at 06:55:34PM +0200, Christoph Hellwig wrote:
+> > NAK, this makes the document significantly harder to read.
+> 
+> Really?  It reads more easily to me in the new format.  Enclosing
+> section headers in [] is really weird.
 
-So, we need to add two higher hierarchy chapters on this document,
-in order to avoid such duplication.
-
-Fixes: 58ad30cf91f0 ("docs: fix reference to core-api/namespaces.rst")
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/RCU/rculist_nulls.rst | 6 ++++++
- 1 file changed, 6 insertions(+)
-
-diff --git a/Documentation/RCU/rculist_nulls.rst b/Documentation/RCU/rculist_nulls.rst
-index d40374221d69..a9fc774bc400 100644
---- a/Documentation/RCU/rculist_nulls.rst
-+++ b/Documentation/RCU/rculist_nulls.rst
-@@ -10,6 +10,9 @@ objects using SLAB_TYPESAFE_BY_RCU allocations.
- 
- Please read the basics in Documentation/RCU/listRCU.rst
- 
-+Using 'nulls'
-+=============
-+
- Using special makers (called 'nulls') is a convenient way
- to solve following problem :
- 
-@@ -126,6 +129,9 @@ very very fast (before the end of RCU grace period)
- 
- --------------------------------------------------------------------------
- 
-+Avoiding extra smp_rmb()
-+========================
-+
- With hlist_nulls we can avoid extra smp_rmb() in lockless_lookup()
- and extra smp_wmb() in insert function.
- 
--- 
-2.25.2
-
+It wasn't entirely uncommon, but that's not really the point.  The
+Problem is all the weird ".." or "::" annotations that really kill
+the flow, or things like "|copy|" that have no reason to exist.
