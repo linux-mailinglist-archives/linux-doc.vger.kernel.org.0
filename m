@@ -2,110 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 634A51B29CA
-	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2020 16:32:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E20E81B2A99
+	for <lists+linux-doc@lfdr.de>; Tue, 21 Apr 2020 17:03:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729206AbgDUOba (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 21 Apr 2020 10:31:30 -0400
-Received: from mail.kernel.org ([198.145.29.99]:43684 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728874AbgDUObN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 21 Apr 2020 10:31:13 -0400
-Received: from mail.kernel.org (ip5f5ad4d8.dynamic.kabel-deutschland.de [95.90.212.216])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 60E632070B;
-        Tue, 21 Apr 2020 14:31:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1587479472;
-        bh=54uiv8HvGiefwFGF8O1bh0la64TVnoBMhV0VYuxsv8M=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=m8Ry624qufMZup3aC4Na0dx0DyBBLRIKNgezfzhexpgj3jPIzDGZxVZlVk7wCT3Z4
-         A6zqf7MpzjBa+IZDGnXRIu8luQYicFV5bi1TsnAbACsGy6I8joGufH3rlcgl1UK/fV
-         EhawSZH/l/w9EZb0SQuW59maVYAWh/fj6LzshEZE=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1jQtva-00Bkqa-K8; Tue, 21 Apr 2020 16:31:10 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 5/5] scripts: sphinx-pre-install: change the output order
-Date:   Tue, 21 Apr 2020 16:31:09 +0200
-Message-Id: <36cecf7fe19d165db8e93f8a0f6fc88ec705d131.1587478901.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.25.2
-In-Reply-To: <cover.1587478901.git.mchehab+huawei@kernel.org>
-References: <cover.1587478901.git.mchehab+huawei@kernel.org>
+        id S1728864AbgDUPCv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Apr 2020 11:02:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53726 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726628AbgDUPCu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Apr 2020 11:02:50 -0400
+X-Greylist: delayed 370 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 21 Apr 2020 08:02:50 PDT
+Received: from omr1.cc.vt.edu (omr1.cc.ipv6.vt.edu [IPv6:2607:b400:92:8300:0:c6:2117:b0e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 33AD4C061A10
+        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2020 08:02:50 -0700 (PDT)
+Received: from mr4.cc.vt.edu (inbound.smtp.ipv6.vt.edu [IPv6:2607:b400:92:9:0:9d:8fcb:4116])
+        by omr1.cc.vt.edu (8.14.4/8.14.4) with ESMTP id 03LEubjL031108
+        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2020 10:56:37 -0400
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com [209.85.221.71])
+        by mr4.cc.vt.edu (8.14.7/8.14.7) with ESMTP id 03LEuV2p008610
+        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2020 10:56:36 -0400
+Received: by mail-wr1-f71.google.com with SMTP id d17so7577823wrr.17
+        for <linux-doc@vger.kernel.org>; Tue, 21 Apr 2020 07:56:36 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=jFr+l/9NrRUnuu1XyMEc4CbumNQfH4WoE3fGU6r6v68=;
+        b=k2OLn8NiozsmspC5ea9Uq31yd2Qsvfd+IeTbBYQbuD86Zv1CkeFQ8AkFK7v8YMCqnT
+         ObI6/gOMembpalHguUuA/LwDp7euF/YHuv3+a97Zqm4n4ndVbswfY5vdE6O2QYKsXT7B
+         cfhSry1WCiEIh5QOkmZx9CX53+V2BbX5kpAv78bPE1HxHxRmjwWMQsDxVBvrFiVtYdcl
+         0T0nftXtFU5/rZbdym4HU1cVktgrtUnHsjqG6JquPGvndIustOUFZE+fphnVIIapdcy8
+         taLooZE2RU793HMmyhEq44CiChC9Y1sd4zP09yKQqT9Hq7Ah1UwrUeKf5frsb/ewgQ3G
+         AaXw==
+X-Gm-Message-State: AGi0PuaeNEo0NZOn+5U8Q1iXgaLHy6O4cd4egE4pemX3ecOcGYnLdMGG
+        l23gcmvgC3ewvVWjH0v0Y7rYngGdvjireFTGaWVLa38e+Ph/vvNu0utATXgYAFDjVlN2hCeHhQ1
+        rr64h7PfZDqufkNE3WMwlJG1fBbYXHQs=
+X-Received: by 2002:adf:aa8e:: with SMTP id h14mr23431851wrc.371.1587480991390;
+        Tue, 21 Apr 2020 07:56:31 -0700 (PDT)
+X-Google-Smtp-Source: APiQypKNlYRKMvZZnWWabDg53tb4Xc5YOD+62vwyQnIJmhPMcPgdojeM5loR8SqItscHjX1ocxI4DA==
+X-Received: by 2002:adf:aa8e:: with SMTP id h14mr23431836wrc.371.1587480991130;
+        Tue, 21 Apr 2020 07:56:31 -0700 (PDT)
+Received: from localhost.localdomain (36.red-79-155-141.dynamicip.rima-tde.net. [79.155.141.36])
+        by smtp.gmail.com with ESMTPSA id w18sm3912915wrn.55.2020.04.21.07.56.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 21 Apr 2020 07:56:30 -0700 (PDT)
+From:   Carlos Bilbao <bilbao@vt.edu>
+To:     tglx@linutronix.de
+Cc:     mingo@redhat.com, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, bilbao@vt.edu, Zildj1an <cbilbao@ucm.es>
+Subject: [PATCH] Documentation: Fixed typo in Documentation/x86/x86_64/5level-paging.rst
+Date:   Tue, 21 Apr 2020 16:56:25 +0200
+Message-Id: <20200421145625.8575-1-bilbao@vt.edu>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When the script detects the need for an upgrade, it will
-print either a warning or a note.
+From: Zildj1an <cbilbao@ucm.es>
 
-Let's change a little bit the order where messages will be
-displayed, in order to make easier for the user to identify
-the more important messages.
+Mispelled word "paging" corrected.
 
-It should now be like this:
-
-	Detected OS: Fedora release 31 (Thirty One).
-	Sphinx version: 1.7.9
-
-	Note: It is recommended at least Sphinx version 2.4.4 if you need PDF support.
-	To upgrade Sphinx, use:
-
-		/usr/bin/python3 -m venv sphinx_2.4.4
-		. sphinx_2.4.4/bin/activate
-		pip install -r ./Documentation/sphinx/requirements.txt
-
-	If you want to exit the virtualenv, you can use:
-		deactivate
-
-All optional dependencies are met.
-Needed package dependencies are met.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Signed-off-by: Carlos Bilbao Muñoz <bilbao@vt.edu>
 ---
- scripts/sphinx-pre-install | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ Documentation/x86/x86_64/5level-paging.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
-index 987aebf7e3a0..2c7a4f9594cd 100755
---- a/scripts/sphinx-pre-install
-+++ b/scripts/sphinx-pre-install
-@@ -321,14 +321,11 @@ sub check_sphinx()
+diff --git a/Documentation/x86/x86_64/5level-paging.rst b/Documentation/x86/x86_64/5level-paging.rst
+index 44856417e6a5..8d7a45a582a7 100644
+--- a/Documentation/x86/x86_64/5level-paging.rst
++++ b/Documentation/x86/x86_64/5level-paging.rst
+@@ -6,7 +6,7 @@
  
- 	if ($cur_version lt $rec_version) {
- 		printf "Sphinx version %s\n", $cur_version;
--		print "Warning: It is recommended at least Sphinx version $rec_version.\n";
--		print "         If you want pdf, you need at least $min_pdf_version.\n";
- 		$rec_sphinx_upgrade = 1;
- 		return;
- 	}
- 	if ($cur_version lt $min_pdf_version) {
- 		printf "Sphinx version %s\n", $cur_version;
--		print "Note: It is recommended at least Sphinx version $min_pdf_version if you need PDF support.\n";
- 		$rec_sphinx_upgrade = 1;
- 		return;
- 	}
-@@ -799,6 +796,13 @@ sub check_needs()
- 		my $min_activate = "$ENV{'PWD'}/${virtenv_prefix}${min_version}/bin/activate";
- 		my @activates = glob "$ENV{'PWD'}/${virtenv_prefix}*/bin/activate";
+ Overview
+ ========
+-Original x86-64 was limited by 4-level paing to 256 TiB of virtual address
++Original x86-64 was limited by 4-level paging to 256 TiB of virtual address
+ space and 64 TiB of physical address space. We are already bumping into
+ this limit: some vendors offers servers with 64 TiB of memory today.
  
-+		if ($cur_version lt $rec_version) {
-+			print "Warning: It is recommended at least Sphinx version $rec_version.\n";
-+			print "         If you want pdf, you need at least $min_pdf_version.\n";
-+		}
-+		if ($cur_version lt $min_pdf_version) {
-+			print "Note: It is recommended at least Sphinx version $min_pdf_version if you need PDF support.\n";
-+		}
- 		@activates = sort {$b cmp $a} @activates;
- 		my ($activate, $ver);
- 		foreach my $f (@activates) {
 -- 
-2.25.2
+2.17.1
 
