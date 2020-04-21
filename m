@@ -2,60 +2,62 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B2DF1B3276
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2020 00:07:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F0A2F1B32AF
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2020 00:39:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726061AbgDUWHg convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Tue, 21 Apr 2020 18:07:36 -0400
-Received: from mail.ac.gov.br ([179.252.114.240]:60098 "EHLO
-        srvifs070.ac.gov.br" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725850AbgDUWHg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Apr 2020 18:07:36 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by srvifs070.ac.gov.br (Postfix) with ESMTP id BA42E36C2C12;
-        Tue, 21 Apr 2020 17:08:04 -0500 (ACT)
-Received: from srvifs070.ac.gov.br ([127.0.0.1])
-        by localhost (srvifs070.ac.gov.br [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id UafOKOAphWEh; Tue, 21 Apr 2020 17:08:03 -0500 (ACT)
-Received: from srvifs070.ac.gov.br (localhost [127.0.0.1])
-        by srvifs070.ac.gov.br (Postfix) with ESMTP id E276036C2C26;
-        Tue, 21 Apr 2020 17:08:01 -0500 (ACT)
-Received: from srvifs070.ac.gov.br (srvifs070.ac.gov.br [10.1.4.71])
-        by srvifs070.ac.gov.br (Postfix) with ESMTP id D148836C2BEB;
-        Tue, 21 Apr 2020 17:07:57 -0500 (ACT)
-Date:   Tue, 21 Apr 2020 18:07:57 -0400 (AMT)
-From:   Azim Hashim premji <angela.magalhaes@ac.gov.br>
-Reply-To: Azim Hashim premji <Azimhashimpremjiunion@outlook.co.id>
-Message-ID: <1298426669.108986.1587506877563.JavaMail.zimbra@ac.gov.br>
-Subject: Eine Spende wurde Ihnen genehmigt
+        id S1726316AbgDUWjs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 21 Apr 2020 18:39:48 -0400
+Received: from outgoing-auth-1.mit.edu ([18.9.28.11]:51534 "EHLO
+        outgoing.mit.edu" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1726061AbgDUWjr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 21 Apr 2020 18:39:47 -0400
+Received: from callcc.thunk.org (pool-100-0-195-244.bstnma.fios.verizon.net [100.0.195.244])
+        (authenticated bits=0)
+        (User authenticated as tytso@ATHENA.MIT.EDU)
+        by outgoing.mit.edu (8.14.7/8.12.4) with ESMTP id 03LMdGMJ026666
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 21 Apr 2020 18:39:16 -0400
+Received: by callcc.thunk.org (Postfix, from userid 15806)
+        id D771542030C; Tue, 21 Apr 2020 18:39:15 -0400 (EDT)
+Date:   Tue, 21 Apr 2020 18:39:15 -0400
+From:   "Theodore Y. Ts'o" <tytso@mit.edu>
+To:     Christoph Hellwig <hch@lst.de>
+Cc:     Matthew Wilcox <willy@infradead.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Joel Becker <jlbec@evilplan.org>, linux-usb@vger.kernel.org
+Subject: Re: [PATCH v2 08/29] docs: filesystems: convert configfs.txt to ReST
+Message-ID: <20200421223915.GA4278@mit.edu>
+References: <cover.1587487612.git.mchehab+huawei@kernel.org>
+ <278a9befc98b49ea866c9b687d070c70cde20628.1587487612.git.mchehab+huawei@kernel.org>
+ <20200421165534.GA16511@lst.de>
+ <20200421170223.GP5820@bombadil.infradead.org>
+ <20200421172337.GA18305@lst.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8BIT
-X-Originating-IP: [41.80.120.141]
-X-Mailer: Zimbra 8.0.6_GA_5922 (zclient/8.0.6_GA_5922)
-Thread-Topic: Eine Spende wurde Ihnen genehmigt
-Thread-Index: GZcbaDhN2psHAKu4nmuGUqMNUOu/4w==
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200421172337.GA18305@lst.de>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Tue, Apr 21, 2020 at 07:23:37PM +0200, Christoph Hellwig wrote:
+> On Tue, Apr 21, 2020 at 10:02:23AM -0700, Matthew Wilcox wrote:
+> > On Tue, Apr 21, 2020 at 06:55:34PM +0200, Christoph Hellwig wrote:
+> > > NAK, this makes the document significantly harder to read.
+> > 
+> > Really?  It reads more easily to me in the new format.  Enclosing
+> > section headers in [] is really weird.
+> 
+> It wasn't entirely uncommon, but that's not really the point.  The
+> Problem is all the weird ".." or "::" annotations that really kill
+> the flow, or things like "|copy|" that have no reason to exist.
 
+FWIW, I consider the rst transformations to be an improvement, even
+when reading them as a text mode.
 
--- 
-Ich bin Azim Hashim Premji, ein indischer Geschäftsmagnat, Investor und Philanthrop. Ich bin der Vorsitzende von Wipro Limited. Ich habe 25 Prozent meines persönlichen Vermögens für wohltätige Zwecke gespendet. Und ich habe auch versprochen, den Rest von 25% in diesem Jahr 2020 zu verschenken.
+				- Ted
 
-Sie wurden ausgewählt, um die Summe von "Eine Million, zweihunderttausend Euro" in meinem laufenden Wohltätigkeitsprogramm zu erhalten. Für weitere Informationen senden Sie bitte eine E-Mail an:
-
-azimhashimpremjiunion@outlook.co.id
-oder auf WhatsApp Messenger: +19372662402
-Wenn Sie an meiner Spende interessiert sind, kontaktieren Sie mich für weitere Informationen. Ich möchte auch, dass Sie Teil meiner Wohltätigkeitsstiftung sind, sobald Sie dieses Geld erhalten, damit wir Hand in Hand zusammenarbeiten können, um den Bedürftigen zu helfen.
-
-Über diesen Link können Sie auch mehr über mich lesen
-
-https://en.wikipedia.org/wiki/Azim_Premji
-
-Kontaktieren Sie sie per E-Mail für weitere Informationen: azimhashimpremjiunion@outlook.co.id
-oder auf WhatsApp Messenger: +19372662402
-Herzlichen Gruß,
