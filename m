@@ -2,132 +2,150 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 377791B47D8
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2020 16:55:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 072E21B487C
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2020 17:22:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728037AbgDVOzX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 22 Apr 2020 10:55:23 -0400
-Received: from youngberry.canonical.com ([91.189.89.112]:49646 "EHLO
-        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727920AbgDVOzT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Apr 2020 10:55:19 -0400
-Received: from ip5f5af183.dynamic.kabel-deutschland.de ([95.90.241.131] helo=wittgenstein.fritz.box)
-        by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.86_2)
-        (envelope-from <christian.brauner@ubuntu.com>)
-        id 1jRGmR-0006CM-Oh; Wed, 22 Apr 2020 14:55:15 +0000
-From:   Christian Brauner <christian.brauner@ubuntu.com>
-To:     Jens Axboe <axboe@kernel.dk>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
-        linux-api@vger.kernel.org
-Cc:     Jonathan Corbet <corbet@lwn.net>, Serge Hallyn <serge@hallyn.com>,
-        "Rafael J. Wysocki" <rafael@kernel.org>, Tejun Heo <tj@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Christian Brauner <christian.brauner@ubuntu.com>,
-        Saravana Kannan <saravanak@google.com>,
-        Jan Kara <jack@suse.cz>, David Howells <dhowells@redhat.com>,
-        Seth Forshee <seth.forshee@canonical.com>,
-        David Rheinsberg <david.rheinsberg@gmail.com>,
-        Tom Gundersen <teg@jklm.no>,
-        Christian Kellner <ckellner@redhat.com>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        =?UTF-8?q?St=C3=A9phane=20Graber?= <stgraber@ubuntu.com>,
-        linux-doc@vger.kernel.org, netdev@vger.kernel.org,
-        Steve Barber <smbarber@google.com>,
-        Dylan Reid <dgreid@google.com>,
-        Filipe Brandenburger <filbranden@gmail.com>,
-        Kees Cook <keescook@chromium.org>,
-        Benjamin Elder <bentheelder@google.com>,
-        Akihiro Suda <suda.kyoto@gmail.com>
-Subject: [PATCH v2 7/7] loopfs: only show devices in their correct instance
-Date:   Wed, 22 Apr 2020 16:54:37 +0200
-Message-Id: <20200422145437.176057-8-christian.brauner@ubuntu.com>
-X-Mailer: git-send-email 2.26.1
-In-Reply-To: <20200422145437.176057-1-christian.brauner@ubuntu.com>
-References: <20200422145437.176057-1-christian.brauner@ubuntu.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1726296AbgDVPWY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 22 Apr 2020 11:22:24 -0400
+Received: from userp2130.oracle.com ([156.151.31.86]:32884 "EHLO
+        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725980AbgDVPWX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Apr 2020 11:22:23 -0400
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+        by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03MFJ070049163;
+        Wed, 22 Apr 2020 15:22:00 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=content-type :
+ mime-version : subject : from : in-reply-to : date : cc :
+ content-transfer-encoding : message-id : references : to;
+ s=corp-2020-01-29; bh=URGddE/rla++MvolJEfSZrKgtDDP+qOWMmeR82gZX2A=;
+ b=U4iDnYZn5mArrrPDO/jPJ5tpWfk04o1vdsyNldlo4hs3VJA2YgKf/AhTSnr5T7zh8ROK
+ TRWnI4KDJc4Z0KZlxbVd+u73ZzAZtgV+HRdFYEtweQFCXnUaWkXGOENSZAGcpa3+azUZ
+ ciP1Zu1J/+6bFTOw+z3Cfj4cPmvy24nJ16rS0k7VbkFtUvrvfCJCmT9RvE2xQ23Rc0Af
+ U6qUdoxnLHs9s6MPxdTo3E57S8vpiVO63AS2/cV5B0l1m9qTzEPMoIyk2wWwrCFeoTcj
+ K+cMRp4Ry5BvhGtVZ89eSiZc3vdlDu4ErCavlBB5u84UJPwsuEeQu5smP7KXZpX4Qagt kA== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+        by userp2130.oracle.com with ESMTP id 30grpgqyss-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 22 Apr 2020 15:22:00 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+        by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03MFIJLQ180656;
+        Wed, 22 Apr 2020 15:21:59 GMT
+Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
+        by userp3030.oracle.com with ESMTP id 30gb1jt2f4-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 22 Apr 2020 15:21:59 +0000
+Received: from abhmp0019.oracle.com (abhmp0019.oracle.com [141.146.116.25])
+        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 03MFLtvK001754;
+        Wed, 22 Apr 2020 15:21:55 GMT
+Received: from [10.175.186.214] (/10.175.186.214)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Wed, 22 Apr 2020 08:21:54 -0700
+Content-Type: text/plain;
+        charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.80.23.2.2\))
+Subject: Re: [PATCH 1/1] x86/fpu: Allow clearcpuid= to clear several bits
+From:   John Haxby <john.haxby@oracle.com>
+In-Reply-To: <20200422143554.GI608746@tassilo.jf.intel.com>
+Date:   Wed, 22 Apr 2020 16:21:51 +0100
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        "H. Peter Anvin" <hpa@zytor.com>, Jonathan Corbet <corbet@lwn.net>,
+        x86@kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <96EA2DF4-7490-4FF0-BB3E-EC9157517918@oracle.com>
+References: <cover.1587555769.git.john.haxby@oracle.com>
+ <03a3a4d135b17115db9ad91413e21af73e244500.1587555769.git.john.haxby@oracle.com>
+ <20200422143554.GI608746@tassilo.jf.intel.com>
+To:     Andi Kleen <ak@linux.intel.com>
+X-Mailer: Apple Mail (2.3608.80.23.2.2)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9599 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 suspectscore=0 spamscore=0
+ mlxlogscore=999 mlxscore=0 malwarescore=0 bulkscore=0 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2004220119
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9599 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 mlxscore=0
+ lowpriorityscore=0 adultscore=0 suspectscore=0 bulkscore=0 clxscore=1015
+ malwarescore=0 phishscore=0 spamscore=0 priorityscore=1501 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2004220119
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Since loopfs devices belong to a loopfs instance they have no business
-polluting the host's devtmpfs mount and should not propagate out of the
-namespace they belong to.
 
-Cc: Jens Axboe <axboe@kernel.dk>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
----
-/* v2 */
-unchanged
----
- drivers/base/devtmpfs.c | 4 ++--
- drivers/block/loop.c    | 4 +++-
- include/linux/device.h  | 3 +++
- 3 files changed, 8 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/base/devtmpfs.c b/drivers/base/devtmpfs.c
-index c9017e0584c0..77371ceb88fa 100644
---- a/drivers/base/devtmpfs.c
-+++ b/drivers/base/devtmpfs.c
-@@ -111,7 +111,7 @@ int devtmpfs_create_node(struct device *dev)
- 	const char *tmp = NULL;
- 	struct req req;
- 
--	if (!thread)
-+	if (!thread || dev->no_devnode)
- 		return 0;
- 
- 	req.mode = 0;
-@@ -138,7 +138,7 @@ int devtmpfs_delete_node(struct device *dev)
- 	const char *tmp = NULL;
- 	struct req req;
- 
--	if (!thread)
-+	if (!thread || dev->no_devnode)
- 		return 0;
- 
- 	req.name = device_get_devnode(dev, NULL, NULL, NULL, &tmp);
-diff --git a/drivers/block/loop.c b/drivers/block/loop.c
-index 2dc53bad4b48..5548151b9f11 100644
---- a/drivers/block/loop.c
-+++ b/drivers/block/loop.c
-@@ -2213,8 +2213,10 @@ static int loop_add(struct loop_device **l, int i, struct inode *inode)
- 	disk->queue		= lo->lo_queue;
- 	sprintf(disk->disk_name, "loop%d", i);
- #ifdef CONFIG_BLK_DEV_LOOPFS
--	if (loopfs_i_sb(inode))
-+	if (loopfs_i_sb(inode)) {
- 		disk->user_ns = loopfs_i_sb(inode)->s_user_ns;
-+		disk_to_dev(disk)->no_devnode = true;
-+	}
- #endif
- 
- 	add_disk(disk);
-diff --git a/include/linux/device.h b/include/linux/device.h
-index ac8e37cd716a..c69ef1c5a0ef 100644
---- a/include/linux/device.h
-+++ b/include/linux/device.h
-@@ -523,6 +523,8 @@ struct dev_links_info {
-  *		  sync_state() callback.
-  * @dma_coherent: this particular device is dma coherent, even if the
-  *		architecture supports non-coherent devices.
-+ * @no_devnode: whether device nodes associated with this device are kept out
-+ *		of devtmpfs (e.g. due to separate filesystem)
-  *
-  * At the lowest level, every device in a Linux system is represented by an
-  * instance of struct device. The device structure contains the information
-@@ -622,6 +624,7 @@ struct device {
-     defined(CONFIG_ARCH_HAS_SYNC_DMA_FOR_CPU_ALL)
- 	bool			dma_coherent:1;
- #endif
-+	bool			no_devnode:1;
- };
- 
- static inline struct device *kobj_to_dev(struct kobject *kobj)
--- 
-2.26.1
+> On 22 Apr 2020, at 15:35, Andi Kleen <ak@linux.intel.com> wrote:
+>=20
+>=20
+> Thanks good catch.
+>=20
+>> 	if (cmdline_find_option(boot_command_line, "clearcpuid", arg,
+>> -				sizeof(arg)) &&
+>> -	    get_option(&argptr, &bit) &&
+>> -	    bit >=3D 0 &&
+>> -	    bit < NCAPINTS * 32)
+>> -		setup_clear_cpu_cap(bit);
+>> +				sizeof(arg))) {
+>> +		/* cpuid bit numbers are mostly three digits */
+>> +		enum  { nints =3D sizeof(arg)/(3+1) + 1 };
+>=20
+> Not sure what the digits have to do with the stack space of an int =
+array.
+>=20
+> We should have enough stack to afford some more than 8.
+
+sizeof(arg) =3D=3D 32; room enough for eight three-digit with their =
+trailing commas.   If sizeof(arg) =3D=3D 1024 instead then there'd be =
+more than enough room to remove every single feature.   TBH, 512 is more =
+than enough for the 89 flags I have listed on this machine I'm looking =
+at here.   I'll grow sizeof(arg) and nints accordingly.
+
+>=20
+> Would be good to have a warning if the arguments are longer.
+>=20
+
+Yes, I should definitely do that -- coming to a V2 soon.
+
+
+> Maybe it would be simpler to fix the early arg parser
+> to allow multiple instances again? That would also avoid the limit,
+> and keep everything compatible.
+>=20
+
+I did wonder about that.   However, cmdline_find_option() is =
+specifically documented as=20
+
+ * Find a non-boolean option (i.e. option=3Dargument). In accordance =
+with
+ * standard Linux practice, if this option is repeated, this returns the
+ * last instance on the command line.
+
+And since that appeared in 2017 I decided to stick with the new-fangled =
+interface :)   This is a little-used feature; I'm not sure it's worth =
+the effort of parsing the command line for the old style.  What do you =
+think?
+
+jch
+
+
+> -Andi
+>=20
+>=20
+>> +		int i, bits[nints];
+>> +
+>> +		get_options(arg, nints, bits);
+>> +		for (i =3D 1; i <=3D bits[0]; i++) {
+>> +			if (bits[i] >=3D 0 && bits[i] < NCAPINTS * 32)
+>> +				setup_clear_cpu_cap(bits[i]);
+>> +		}
+>> +	}
+>> }
+>>=20
+>> /*
+>> --=20
+>> 2.25.3
+>>=20
 
