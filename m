@@ -2,130 +2,161 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 84E181B402F
-	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2020 12:44:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 237421B4254
+	for <lists+linux-doc@lfdr.de>; Wed, 22 Apr 2020 13:00:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731609AbgDVKoJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 22 Apr 2020 06:44:09 -0400
-Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:36152 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1731500AbgDVKoF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 22 Apr 2020 06:44:05 -0400
-Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
-        by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 03MAYWdd060141;
-        Wed, 22 Apr 2020 06:43:02 -0400
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0b-001b2d01.pphosted.com with ESMTP id 30jh8xp4ea-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Wed, 22 Apr 2020 06:43:02 -0400
-Received: from m0098420.ppops.net (m0098420.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 03MAdcXn070893;
-        Wed, 22 Apr 2020 06:43:01 -0400
-Received: from ppma01dal.us.ibm.com (83.d6.3fa9.ip4.static.sl-reverse.com [169.63.214.131])
-        by mx0b-001b2d01.pphosted.com with ESMTP id 30jh8xp4dj-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Wed, 22 Apr 2020 06:43:01 -0400
-Received: from pps.filterd (ppma01dal.us.ibm.com [127.0.0.1])
-        by ppma01dal.us.ibm.com (8.16.0.27/8.16.0.27) with SMTP id 03MAeZbo005876;
-        Wed, 22 Apr 2020 10:42:59 GMT
-Received: from b03cxnp08025.gho.boulder.ibm.com (b03cxnp08025.gho.boulder.ibm.com [9.17.130.17])
-        by ppma01dal.us.ibm.com with ESMTP id 30fs670rje-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Wed, 22 Apr 2020 10:42:59 +0000
-Received: from b03ledav001.gho.boulder.ibm.com (b03ledav001.gho.boulder.ibm.com [9.17.130.232])
-        by b03cxnp08025.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 03MAgumL56820100
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Wed, 22 Apr 2020 10:42:56 GMT
-Received: from b03ledav001.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 99EC96E050;
-        Wed, 22 Apr 2020 10:42:56 +0000 (GMT)
-Received: from b03ledav001.gho.boulder.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id DCFE26E04C;
-        Wed, 22 Apr 2020 10:42:31 +0000 (GMT)
-Received: from skywalker.linux.ibm.com (unknown [9.79.185.239])
-        by b03ledav001.gho.boulder.ibm.com (Postfix) with ESMTP;
-        Wed, 22 Apr 2020 10:42:30 +0000 (GMT)
-X-Mailer: emacs 27.0.91 (via feedmail 11-beta-1 I)
-From:   "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>
-To:     Mike Kravetz <mike.kravetz@oracle.com>, linux-mm@kvack.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linuxppc-dev@lists.ozlabs.org, linux-riscv@lists.infradead.org,
-        linux-s390@vger.kernel.org, sparclinux@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Cc:     Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Albert Ou <aou@eecs.berkeley.edu>,
-        Heiko Carstens <heiko.carstens@de.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        "David S . Miller" <davem@davemloft.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
+        id S1729129AbgDVLAI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 22 Apr 2020 07:00:08 -0400
+Received: from foss.arm.com ([217.140.110.172]:47506 "EHLO foss.arm.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726976AbgDVK7y (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 22 Apr 2020 06:59:54 -0400
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 3768931B;
+        Wed, 22 Apr 2020 03:59:53 -0700 (PDT)
+Received: from [192.168.0.7] (unknown [172.31.20.19])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 8DDE83F6CF;
+        Wed, 22 Apr 2020 03:59:49 -0700 (PDT)
+Subject: Re: [PATCH 1/2] sched/uclamp: Add a new sysctl to control RT default
+ boost value
+To:     Qais Yousef <qais.yousef@arm.com>
+Cc:     Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Longpeng <longpeng2@huawei.com>,
-        Christophe Leroy <christophe.leroy@c-s.fr>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Mina Almasry <almasrymina@google.com>,
-        Peter Xu <peterx@redhat.com>,
-        Nitesh Narayan Lal <nitesh@redhat.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>
-Subject: Re: [PATCH v3 3/4] hugetlbfs: remove hugetlb_add_hstate() warning
- for existing hstate
-In-Reply-To: <20200417185049.275845-4-mike.kravetz@oracle.com>
-References: <20200417185049.275845-1-mike.kravetz@oracle.com>
- <20200417185049.275845-4-mike.kravetz@oracle.com>
-Date:   Wed, 22 Apr 2020 16:12:26 +0530
-Message-ID: <87blnj4x9p.fsf@linux.ibm.com>
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Iurii Zaikin <yzaikin@google.com>,
+        Quentin Perret <qperret@google.com>,
+        Valentin Schneider <valentin.schneider@arm.com>,
+        Patrick Bellasi <patrick.bellasi@matbug.net>,
+        Pavan Kondeti <pkondeti@codeaurora.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org
+References: <20200403123020.13897-1-qais.yousef@arm.com>
+ <292dbd54-e590-dc4f-41e6-5f86e478c0ee@arm.com>
+ <20200420151341.7zni3bwroso2kpdc@e107158-lin.cambridge.arm.com>
+ <de020088-3b06-3674-dab9-244ae577cc54@arm.com>
+ <20200421112733.4jbguidgbqwzhv23@e107158-lin.cambridge.arm.com>
+From:   Dietmar Eggemann <dietmar.eggemann@arm.com>
+Message-ID: <45236ccd-24d2-3b99-cd9b-bac13cfaceab@arm.com>
+Date:   Wed, 22 Apr 2020 12:59:47 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138,18.0.676
- definitions=2020-04-22_03:2020-04-22,2020-04-22 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 phishscore=0
- lowpriorityscore=0 suspectscore=0 bulkscore=0 mlxlogscore=935 spamscore=0
- mlxscore=0 priorityscore=1501 impostorscore=0 malwarescore=0 clxscore=1011
- adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2003020000 definitions=main-2004220083
+In-Reply-To: <20200421112733.4jbguidgbqwzhv23@e107158-lin.cambridge.arm.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Mike Kravetz <mike.kravetz@oracle.com> writes:
+On 21/04/2020 13:27, Qais Yousef wrote:
+> On 04/21/20 13:18, Dietmar Eggemann wrote:
+>> On 20/04/2020 17:13, Qais Yousef wrote:
+>>> On 04/20/20 10:29, Dietmar Eggemann wrote:
+>>>> On 03.04.20 14:30, Qais Yousef wrote:
+>>>>
+>>>> [...]
+>>>>
+>>>>> @@ -924,6 +945,14 @@ uclamp_eff_get(struct task_struct *p, enum uclamp_id clamp_id)
+>>>>>  	return uc_req;
+>>>>>  }
+>>>>>  
+>>>>> +static void uclamp_rt_sync_default_util_min(struct task_struct *p)
+>>>>> +{
+>>>>> +	struct uclamp_se *uc_se = &p->uclamp_req[UCLAMP_MIN];
+>>>>> +
+>>>>> +	if (!uc_se->user_defined)
+>>>>> +		uclamp_se_set(uc_se, sysctl_sched_rt_default_uclamp_util_min, false);
+>>>>> +}
+>>>>> +
+>>>>>  unsigned long uclamp_eff_value(struct task_struct *p, enum uclamp_id clamp_id)
+>>>>>  {
+>>>>>  	struct uclamp_se uc_eff;
+>>>>> @@ -1030,6 +1059,12 @@ static inline void uclamp_rq_inc(struct rq *rq, struct task_struct *p)
+>>>>>  	if (unlikely(!p->sched_class->uclamp_enabled))
+>>>>>  		return;
+>>>>>  
+>>>>> +	/*
+>>>>> +	 * When sysctl_sched_rt_default_uclamp_util_min value is changed by the
+>>>>> +	 * user, we apply any new value on the next wakeup, which is here.
+>>>>> +	 */
+>>>>> +	uclamp_rt_sync_default_util_min(p);
+>>>>> +
+>>>>
+>>>> Does this have to be an extra function? Can we not reuse
+>>>> uclamp_tg_restrict() by slightly rename it to uclamp_restrict()?
 
-> The routine hugetlb_add_hstate prints a warning if the hstate already
-> exists.  This was originally done as part of kernel command line
-> parsing.  If 'hugepagesz=' was specified more than once, the warning
-> 	pr_warn("hugepagesz= specified twice, ignoring\n");
-> would be printed.
->
-> Some architectures want to enable all huge page sizes.  They would
-> call hugetlb_add_hstate for all supported sizes.  However, this was
-> done after command line processing and as a result hstates could have
-> already been created for some sizes.  To make sure no warning were
-> printed, there would often be code like:
-> 	if (!size_to_hstate(size)
-> 		hugetlb_add_hstate(ilog2(size) - PAGE_SHIFT)
->
-> The only time we want to print the warning is as the result of command
-> line processing.
-
-Does this patch break hugepages=x command line? I haven't tested this
-yet. But one of the details w.r.t. skipping that hugetlb_add_hstate is
-to make sure we can configure the max_huge_pages. 
+Btw, there was an issue in my little snippet. I used uc_req.user_defined
+uninitialized in uclamp_restrict().
 
 
->So, remove the warning from hugetlb_add_hstate and
-> add it to the single arch independent routine processing "hugepagesz=".
-> After this, calls to size_to_hstate() in arch specific code can be
-> removed and hugetlb_add_hstate can be called without worrying about
-> warning messages.
->
+diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+index f3706dad32ce..7e6b2b7cd1e5 100644
+--- a/kernel/sched/core.c
++++ b/kernel/sched/core.c
+@@ -903,12 +903,11 @@ uclamp_restrict(struct task_struct *p, enum uclamp_id clamp_id)
+ {
+ 	struct uclamp_se uc_req, __maybe_unused uc_max;
+ 
+-	if (unlikely(rt_task(p)) && clamp_id == UCLAMP_MIN &&
+-	    !uc_req.user_defined) {
++	if (unlikely(rt_task(p)) && clamp_id == UCLAMP_MIN) {
+ 		struct uclamp_se *uc_se = &p->uclamp_req[UCLAMP_MIN];
+ 		int rt_min = sysctl_sched_rt_default_uclamp_util_min;
+ 
+-		if (uc_se->value != rt_min) {
++		if (!uc_se->user_defined && uc_se->value != rt_min) {
+ 			uclamp_se_set(uc_se, rt_min, false);
+ 			printk("uclamp_restrict() [%s %d] p->uclamp_req[%d].value=%d\n",
+ 			       p->comm, p->pid, clamp_id, uc_se->value);
 
--aneesh
+>>> Hmm the thing is that we're not restricting here. In contrary we're boosting,
+>>> so the name would be misleading.
+>>
+>> I always thought that we're restricting p->uclamp_req[UCLAMP_MIN].value (default 1024) to
+>> sysctl_sched_rt_default_uclamp_util_min (0-1024)?
+> 
+> The way I look at it is that we're *setting* it to
+> sysctl_sched_rt_default_uclamp_util_min if !user_defined.
+> 
+> The restriction mechanism that ensures this set value doesn't escape
+> cgroup/global restrictions setup.
+
+I guess we overall agree here. 
+
+I see 3 restriction levels: (!user_defined) task -> taskgroup -> system
+
+I see sysctl_sched_rt_default_uclamp_util_min (min_rt_default) as a
+restriction on task level.
+
+It's true that the task level restriction is setting the value at the same time.
+
+For CFS (id=UCLAMP_[MIN\|MAX]) and RT (id=UCLAMP_MAX) we use
+uclamp_none(id) and those values (0, 1024) are fixed so these task level
+values don't need to be further restricted.
+
+For RT (id=UCLAMP_MIN) we use 'min_rt_default' and since it can change
+we have to check the task level restriction in 'uclamp_eff_get() ->
+uclamp_(tg)_restrict()'.
+
+root@h960:~# echo 999 > /proc/sys/kernel/sched_rt_default_util_clamp_min
+
+[ 2540.507236] uclamp_eff_get() [rtkit-daemon 419] tag=0 uclamp_id=0 uc_req.value=1024
+[ 2540.514947] uclamp_eff_get() [rtkit-daemon 419] tag=1 uclamp_id=0 uc_req.value=1024
+[ 2548.015208] uclamp_restrict() [rtkit-daemon 419] p->uclamp_req[0].value=999
+
+root@h960:~# echo 666 > /proc/sys/kernel/sched_util_clamp_min
+
+[ 2548.022219] uclamp_eff_get() [rtkit-daemon 419] tag=0 uclamp_id=0 uc_req.value=999
+[ 2548.029825] uclamp_eff_get() [rtkit-daemon 419] tag=1 uclamp_id=0 uc_req.value=999
+[ 2553.479509] uclamp_eff_get() [rtkit-daemon 419] tag=0 uclamp_id=0 uc_max.value=666
+[ 2553.487131] uclamp_eff_get() [rtkit-daemon 419] tag=1 uclamp_id=0 uc_max.value=666
+
+Haven't tried to put an rt task into a taskgroup other than root.
