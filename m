@@ -2,91 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F2CCD1B63B0
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 20:27:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7E5AD1B63E3
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 20:41:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730286AbgDWS1p (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Apr 2020 14:27:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52824 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730282AbgDWS0v (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Apr 2020 14:26:51 -0400
-Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com [IPv6:2607:f8b0:4864:20::d42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 55FB9C09B04E
-        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2020 11:26:51 -0700 (PDT)
-Received: by mail-io1-xd42.google.com with SMTP id i3so7467159ioo.13
-        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2020 11:26:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=DHzQtr3OkXyFWXbvXEU307GvVJtF7cl8Gt7nfdQPyE8=;
-        b=g40sBMuaO0eKdotmx6qgQBl63DKBmrekz5bvyEQHA4wVZtcqrxc+aFVgh/QD84O9VQ
-         7GeGJGwCstc5CQBYUut5JFB/SR9hiHRBoNucBdQ5+M/xcZE7LYnQNVriX94nlJDQQ53M
-         WWNnGuPMmJMtuCxOc6M3BOG48McWyi9pwkfv1qCbwmDhh95byI3UmcGK9ZJ59xQm/kqA
-         giNgZwxUHu+XTIAoqn/uu1orK63Ur+6hMBQW2TB101zb0oJ5HpVThkCq6id/TjpQtg27
-         HPMb1DcYsj7bM6wQaeV1UkPK6mgUhECRFNV10F5zDhvx1RXP4ikb8uuEIGMKOSNWVb51
-         vLew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=DHzQtr3OkXyFWXbvXEU307GvVJtF7cl8Gt7nfdQPyE8=;
-        b=CqITjGvf4UkCG714oH7SZzXR2rVTnFabDnkMyPMgQkCPpH+M2QHvhyJjXVSzYqPLbN
-         Ea+1OjH6lhRD3WF6eY+UHsCfpNjhGqMdDxFff+IO40Q+i4w8MjftpY2DPLmNBpUNIPAN
-         nj0yjjQEcHp0r95394XnOUGkLB9319NoR6aaOZZpug15RU3WOCOABWD5mp5//4ZAf3yR
-         8uc/aNk4/NpoqzZxx6MSB161B9mn/YyIOang2krfG6CuBR74fh+ozhDWAAsyFMozfBLt
-         JoxB7pv7ga7zORqBo989eRxRRN2hr0Ld94LD9kiBN6V8dzaz3t/cbfVjQN4KkCcCSker
-         88/w==
-X-Gm-Message-State: AGi0PubUnEAzdW0jarBp6FA2tHYoTeVDDfRs0RMmittI6CeZlQ1OcorR
-        KUTWK7vmkXjRfIQlNvEaTxKHLR9BwNnI3+RGdQ==
-X-Google-Smtp-Source: APiQypKZ88CB7WlyCjo0k9+cU4PX0VcggKkKtzSKgRJHkcPGizF0yZXAjzEMBgo6XH4xzBXv0KAOMjPM9p1sgpp6/70=
-X-Received: by 2002:a5e:9416:: with SMTP id q22mr2547966ioj.93.1587666410194;
- Thu, 23 Apr 2020 11:26:50 -0700 (PDT)
+        id S1730102AbgDWSlg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Apr 2020 14:41:36 -0400
+Received: from 9.mo69.mail-out.ovh.net ([46.105.56.78]:35937 "EHLO
+        9.mo69.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730056AbgDWSlg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Apr 2020 14:41:36 -0400
+Received: from player746.ha.ovh.net (unknown [10.110.115.36])
+        by mo69.mail-out.ovh.net (Postfix) with ESMTP id 7D5668AEF7
+        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2020 20:32:37 +0200 (CEST)
+Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
+        (Authenticated sender: steve@sk2.org)
+        by player746.ha.ovh.net (Postfix) with ESMTPSA id 0C0B911C624B8;
+        Thu, 23 Apr 2020 18:32:32 +0000 (UTC)
+Date:   Thu, 23 Apr 2020 20:32:31 +0200
+From:   Stephen Kitt <steve@sk2.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4] docs: sysctl/kernel: document BPF entries
+Message-ID: <20200423203231.5f682a52@heffalump.sk2.org>
+In-Reply-To: <20200420165949.14dc0752@lwn.net>
+References: <20200315122648.20558-1-steve@sk2.org>
+        <20200420165949.14dc0752@lwn.net>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Received: by 2002:a02:c845:0:0:0:0:0 with HTTP; Thu, 23 Apr 2020 11:26:49
- -0700 (PDT)
-Reply-To: boa.benin107@yahoo.com
-From:   "Mrs. Angella Michelle" <info.zennitbankplcnigerian@gmail.com>
-Date:   Thu, 23 Apr 2020 20:26:49 +0200
-Message-ID: <CABHzvr=N78snvtMHePMOa+RLFdcZEjXLPkuhkojt4VoZGNzBsQ@mail.gmail.com>
-Subject: Contact Bank of Africa-Benin to receive your payment funds transfer
- amount of $12.800.000,00 Million USD,approved this morning by IMF.
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ boundary="Sig_/o1onwjijsn/X1nkA2sVL9pS"; protocol="application/pgp-signature"
+X-Ovh-Tracer-Id: 16088265247455071621
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrgeelgdelhecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvuffkjghfofggtgesghdtreerredtjeenucfhrhhomhepufhtvghphhgvnhcumfhithhtuceoshhtvghvvgesshhkvddrohhrgheqnecukfhppedtrddtrddtrddtpdekvddrieehrddvhedrvddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejgeeirdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Attn Dear.
-Contact Bank of Africa-Benin to receive your payment funds transfer amount =
-of
-$12.800.000,00 Million USD,approved this morning by IMF.
-Happy to inform you, we have finally deposited your payment funds
-$12.8 million us dollars with the Paying Bank of Africa-Benin
-to transfer the payment amount of $12.800,000,00 Million Us Dollars to you
-Contact the bank immediately you receive this email now.
-Director Bank of Africa-Benin: Dr. Festus Obiara
-Email id:  boa.benin107@yahoo.com
-Tel/mobile, (229) 62819378
-BOA-BENIN | GROUPE BANK OF AFRICA, boa-benin
-Avenue Jean-Paul II - 08 BP 0879 - Cotonou - B=C3=A9nin
-Phone:(229) 62819378.
-2020 GROUPE BANK OF AFRICA
-Be advised to re-confirm your bank details to this bank as listed.
-Your account Holder's name----------------
-Bank Name----------------------------------------------------------
-Bank address----------------------------------------------
-Account Numbers---------------------------------------
-Rounting-----------------------------------------------------------------
-Your direct Phone Numbers----------------------------------------------
-Note,I have paid the deposit and insurance fees for you
-But the only money you are to send to this bank is $150.00 us dollars
-Been for the wire transfer fees of your funds
-Contact Him now to receive your transfer deposited this morning
-I wait for your reply upon confirmation
-Mrs. Angella Michelle
-Editor, Zenith Bank- Companies Benin
-mrsa9389@gmail.com
+--Sig_/o1onwjijsn/X1nkA2sVL9pS
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+On Mon, 20 Apr 2020 16:59:49 -0600, Jonathan Corbet <corbet@lwn.net> wrote:
+> On Sun, 15 Mar 2020 13:26:48 +0100
+> Stephen Kitt <steve@sk2.org> wrote:
+>=20
+> > Based on the implementation in kernel/bpf/syscall.c,
+> > kernel/bpf/trampoline.c, include/linux/filter.h, and the documentation
+> > in bpftool-prog.rst.
+> >=20
+> > Signed-off-by: Stephen Kitt <steve@sk2.org>
+> > ---
+> >=20
+> > Notes:
+> >     This patch is intended for docs-next, but I'd appreciate reviews fr=
+om
+> >     BPF developers. =20
+>=20
+> Haven't seen a whole lot of those...it's been a month, so I'll ahead and
+> apply this; it can be fixed up later if need be.
+
+Thanks, I=E2=80=99ll start pushing my remaining sysctl doc patches.
+
+Regards,
+
+Stephen
+
+--Sig_/o1onwjijsn/X1nkA2sVL9pS
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEnPVX/hPLkMoq7x0ggNMC9Yhtg5wFAl6h3z8ACgkQgNMC9Yht
+g5yBYxAAnAhijFdCY555e/sspMaOXstZhLe2ieWHr+OE1sZwokukp99cPd8xavzr
+4VvCL/MLTCmxEdiF1u2OWcar5qb1jmNsz3kuvP4lImpranerkN+j4nC0SiNrO9oW
+P76NRx6Zi/vZIRDNPEsoJjp2pl/i00YppayfGEYkT5UxeCOsNfTn3j1zQctWN/6v
+eLGtfkghS+6emGqCcEBoTrhkxxCqiv6VrDpGWNe+tEoseEm1I6NUm/gRqr8i6iM3
+EQzM7w+R8oiSy8JsIJR0ay03IGzUii5b3hkKZLQW/rAm1+MJVRaQaaHYsJn2JdD7
+/418UZwMZAJxZILek6bDNMQF3EHZgO6QbTDLjBPTm6ZeTJqqQEwfJ0DAVDG7sN/6
+MYjXUDrqYhj3XLziu0tf8DkS9ujvzcaLhyYRealessJy6WxFXDfYNt8t7IlbIRY1
+L0U2Euzl8akF5L6p4wfRy0C5ZYWQxgqNvPWhbuX+5DBATA76XIGtFHn5aRDZEMzD
+tSs0pkIre0oIPzD0Q93qVTcmHoIqUIyq3cLG+5mImhveBC4GDKMc6ULXJW2G+CY0
+1saNKu93Xvs6p9iioEE2lC/i0/NRvCfxT4DEfTJWl5nnyz3ZfzZ3gOJJ4CDVqLJZ
+ODgpRYY9+IkLj//4HyR34DE8M2hvQ+L0UYHo/K0qrfHw0Xm2ZhY=
+=6H/Z
+-----END PGP SIGNATURE-----
+
+--Sig_/o1onwjijsn/X1nkA2sVL9pS--
