@@ -2,190 +2,382 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7FE431B5CEC
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 15:50:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E534C1B607B
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 18:13:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728431AbgDWNuf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Apr 2020 09:50:35 -0400
-Received: from mail.kernel.org ([198.145.29.99]:39132 "EHLO mail.kernel.org"
+        id S1729419AbgDWQNh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Apr 2020 12:13:37 -0400
+Received: from mail.hallyn.com ([178.63.66.53]:47294 "EHLO mail.hallyn.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726926AbgDWNue (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 23 Apr 2020 09:50:34 -0400
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 3BFEB20728;
-        Thu, 23 Apr 2020 13:50:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1587649833;
-        bh=Zl7NuDjGvPHVLfMVDJIvKZWGpQWblUX8qdNJAHq1Tr8=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=rtRmKMGa59ZzrLxzNTg+TXuM9mxHpLgKLQhjZLLNvtfpddzm7hI1VwnniqsV6bwDM
-         8N2/eCvUHDcmPP+1YOGNEgVBevpeEo4iTDASVgWq5AsAVxMYnUxdtxKHJBHn4Zn5Y9
-         oqFsLK6AoMDPqJDKJaVwDNwTkxQhVsA5qPT2HBuE=
-Date:   Thu, 23 Apr 2020 15:50:31 +0200
-From:   Greg KH <gregkh@linuxfoundation.org>
-To:     Douglas Anderson <dianders@chromium.org>
-Cc:     jason.wessel@windriver.com, daniel.thompson@linaro.org,
-        kgdb-bugreport@lists.sourceforge.net, mingo@redhat.com,
-        hpa@zytor.com, bp@alien8.de, linux-serial@vger.kernel.org,
-        agross@kernel.org, tglx@linutronix.de, frowand.list@gmail.com,
-        bjorn.andersson@linaro.org, jslaby@suse.com,
-        catalin.marinas@arm.com, corbet@lwn.net, will@kernel.org,
-        Alexios Zavras <alexios.zavras@intel.com>,
-        Allison Randal <allison@lohutok.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Arnd Bergmann <arnd@arndb.de>, Borislav Petkov <bp@suse.de>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Enrico Weigelt <info@metux.net>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        James Morse <james.morse@arm.com>,
-        Juergen Gross <jgross@suse.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Matt Mullins <mmullins@fb.com>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Nadav Amit <namit@vmware.com>,
-        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Rick Edgecombe <rick.p.edgecombe@intel.com>,
-        jinho lim <jordan.lim@samsung.com>,
-        linux-arm-kernel@lists.infradead.org,
-        linux-arm-msm@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org,
-        x86@kernel.org
-Subject: Re: [PATCH v2 0/9] kgdb: Support late serial drivers; enable early
- debug w/ boot consoles
-Message-ID: <20200423135031.GA4091353@kroah.com>
-References: <20200421211447.193860-1-dianders@chromium.org>
+        id S1728865AbgDWQNh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 23 Apr 2020 12:13:37 -0400
+Received: by mail.hallyn.com (Postfix, from userid 1001)
+        id EB425B24; Thu, 23 Apr 2020 11:13:33 -0500 (CDT)
+Date:   Thu, 23 Apr 2020 11:13:33 -0500
+From:   "Serge E. Hallyn" <serge@hallyn.com>
+To:     Christian Brauner <christian.brauner@ubuntu.com>
+Cc:     "Serge E. Hallyn" <serge@hallyn.com>, Jens Axboe <axboe@kernel.dk>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
+        linux-api@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        "Rafael J. Wysocki" <rafael@kernel.org>, Tejun Heo <tj@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Saravana Kannan <saravanak@google.com>,
+        Jan Kara <jack@suse.cz>, David Howells <dhowells@redhat.com>,
+        Seth Forshee <seth.forshee@canonical.com>,
+        David Rheinsberg <david.rheinsberg@gmail.com>,
+        Tom Gundersen <teg@jklm.no>,
+        Christian Kellner <ckellner@redhat.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        =?iso-8859-1?Q?St=E9phane?= Graber <stgraber@ubuntu.com>,
+        linux-doc@vger.kernel.org, netdev@vger.kernel.org,
+        Steve Barber <smbarber@google.com>,
+        Dylan Reid <dgreid@google.com>,
+        Filipe Brandenburger <filbranden@gmail.com>,
+        Kees Cook <keescook@chromium.org>,
+        Benjamin Elder <bentheelder@google.com>,
+        Akihiro Suda <suda.kyoto@gmail.com>
+Subject: Re: [PATCH v2 5/7] loop: preserve sysfs backwards compatibility
+Message-ID: <20200423161333.GA12201@mail.hallyn.com>
+References: <20200422145437.176057-1-christian.brauner@ubuntu.com>
+ <20200422145437.176057-6-christian.brauner@ubuntu.com>
+ <20200423011706.GA2982@mail.hallyn.com>
+ <20200423111524.2u3auxkfrdqpt3hr@wittgenstein>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200421211447.193860-1-dianders@chromium.org>
+In-Reply-To: <20200423111524.2u3auxkfrdqpt3hr@wittgenstein>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Apr 21, 2020 at 02:14:38PM -0700, Douglas Anderson wrote:
-> This whole pile of patches was motivated by me trying to get kgdb to
-> work properly on a platform where my serial driver ended up being hit
-> by the -EPROBE_DEFER virus (it wasn't practicing social distancing
-> from other drivers).  Specifically my serial driver's parent device
-> depended on a resource that wasn't available when its probe was first
-> called.  It returned -EPROBE_DEFER which meant that when "kgdboc"
-> tried to run its setup the serial driver wasn't there.  Unfortunately
-> "kgdboc" never tried again, so that meant that kgdb was disabled until
-> I manually enalbed it via sysfs.
+On Thu, Apr 23, 2020 at 01:15:24PM +0200, Christian Brauner wrote:
+> On Wed, Apr 22, 2020 at 08:17:06PM -0500, Serge Hallyn wrote:
+> > On Wed, Apr 22, 2020 at 04:54:35PM +0200, Christian Brauner wrote:
+> > > For sysfs the initial namespace is special. All devices currently
+> > > propagate into all non-initial namespaces. For example, sysfs is usually
+> > > mounted in a privileged or unprivileged container and all devices are
+> > > visible to the container but are owned by global root. Even though none
+> > > of the propagated files can be used there are still a lot of read-only
+> > > values that are accessed or read by tools running in non-initial
+> > > namespaces. Some devices though, which can be moved or created in
+> > > another namespace, will only show up in the corresponding namespace.
+> > > This currently includes network and loop devices but no other ones.
+> > > Since all current workloads depend on devices from the inital namespace
+> > > being visible this behavior cannot be simply changed. This patch just
+> > > makes sure to keep propagating devices that share the same device class
+> > > with loop devices from the initial namespaces into all non-initial
+> > > namespaces as before. In short, nothing changes only loopfs loop devices
+> > > will be shown in their correct namespace.
+> > > 
+> > > Cc: Jens Axboe <axboe@kernel.dk>
+> > > Cc: Tejun Heo <tj@kernel.org>
+> > > Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> > > Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
+> > 
+> > Hi,
+> > 
+> > two comments below:
+> > 
+> > > ---
+> > > /* v2 */
+> > > - Christian Brauner <christian.brauner@ubuntu.com>:
+> > >   - Protect init_net with a CONFIG_NET ifdef in case it is set to "n".
+> > >   - As Tejun pointed out there is argument to be made that a new mount
+> > >     option for sysfs could be added that would change how devices are
+> > >     propagated. This patch does not prevent this but it is an orthogonal
+> > >     problem.
+> > > ---
+> > >  block/genhd.c               | 79 +++++++++++++++++++++++++++++++++++++
+> > >  fs/kernfs/dir.c             | 34 +++++++++++++---
+> > >  fs/kernfs/kernfs-internal.h | 24 +++++++++++
+> > >  fs/sysfs/mount.c            |  4 ++
+> > >  include/linux/genhd.h       |  3 ++
+> > >  include/linux/kernfs.h      | 22 +++++++++++
+> > >  include/linux/kobject_ns.h  |  4 ++
+> > >  lib/kobject.c               |  2 +
+> > >  8 files changed, 167 insertions(+), 5 deletions(-)
+> > > 
+> > > diff --git a/block/genhd.c b/block/genhd.c
+> > > index 06b642b23a07..b5b2601c4311 100644
+> > > --- a/block/genhd.c
+> > > +++ b/block/genhd.c
+> > > @@ -1198,11 +1198,81 @@ static struct kobject *base_probe(dev_t devt, int *partno, void *data)
+> > >  	return NULL;
+> > >  }
+> > >  
+> > > +#ifdef CONFIG_BLK_DEV_LOOPFS
+> > > +static void *user_grab_current_ns(void)
+> > > +{
+> > > +	struct user_namespace *ns = current_user_ns();
+> > > +	return get_user_ns(ns);
+> > > +}
+> > > +
+> > > +static const void *user_initial_ns(void)
+> > > +{
+> > > +	return &init_user_ns;
+> > > +}
+> > > +
+> > > +static void user_put_ns(void *p)
+> > > +{
+> > > +	struct user_namespace *ns = p;
+> > > +	put_user_ns(ns);
+> > > +}
+> > > +
+> > > +static bool user_current_may_mount(void)
+> > > +{
+> > > +	return ns_capable(current_user_ns(), CAP_SYS_ADMIN);
+> > > +}
+> > > +
+> > > +const struct kobj_ns_type_operations user_ns_type_operations = {
+> > > +	.type			= KOBJ_NS_TYPE_USER,
+> > > +	.current_may_mount	= user_current_may_mount,
+> > > +	.grab_current_ns	= user_grab_current_ns,
+> > > +	.initial_ns		= user_initial_ns,
+> > > +	.drop_ns		= user_put_ns,
+> > > +};
+> > > +
+> > > +static const void *block_class_user_namespace(struct device *dev)
+> > > +{
+> > > +	struct gendisk *disk;
+> > > +
+> > > +	if (dev->type == &part_type)
+> > > +		disk = part_to_disk(dev_to_part(dev));
+> > > +	else
+> > > +		disk = dev_to_disk(dev);
+> > > +
+> > > +	return disk->user_ns;
+> > > +}
+> > > +
+> > > +static void block_class_get_ownership(struct device *dev, kuid_t *uid, kgid_t *gid)
+> > > +{
+> > > +	struct gendisk *disk;
+> > > +	struct user_namespace *ns;
+> > > +
+> > > +	if (dev->type == &part_type)
+> > > +		disk = part_to_disk(dev_to_part(dev));
+> > > +	else
+> > > +		disk = dev_to_disk(dev);
+> > > +
+> > > +	ns = disk->user_ns;
+> > > +	if (ns && ns != &init_user_ns) {
+> > > +		kuid_t ns_root_uid = make_kuid(ns, 0);
+> > > +		kgid_t ns_root_gid = make_kgid(ns, 0);
+> > > +
+> > > +		if (uid_valid(ns_root_uid))
+> > > +			*uid = ns_root_uid;
+> > > +
+> > > +		if (gid_valid(ns_root_gid))
+> > > +			*gid = ns_root_gid;
+> > > +	}
+> > 
+> > You're not setting uid and gid in the else case?
 > 
-> While I could try to figure out how to get around the -EPROBE_DEFER
-> somehow, the above problems could happen to anyone and -EPROBE_DEFER
-> is generally considered something you just have to live with.  In any
-> case the current "kgdboc" setup is a bit of a race waiting to happen.
-> I _think_ I saw during early testing that even adding a msleep() in
-> the typical serial driver's probe() is enough to trigger similar
-> issues.
-> 
-> I decided that for the above race the best attitude to get kgdb to
-> register at boot was probably "if you can't beat 'em, join 'em".
-> Thus, "kgdboc" now jumps on the -EPROBE_DEFER bandwagon (now that my
-> driver uses it it's no longer a virus).  It does so a little awkwardly
-> because "kgdboc" hasn't normally had a "struct device" associated with
-> it, but it's really not _that_ ugly to make a platform device and
-> seems less ugly than alternatives.
-> 
-> Unfortunately now on my system the debugger is one of the last things
-> to register at boot.  That's OK for debugging problems that show up
-> significantly after boot, but isn't so hot for all the boot problems
-> that I end up debugging.  This motivated me to try to get something
-> working a little earlier.
-> 
-> My first attempt was to try to get the existing "ekgdboc" to work
-> earlier.  I tried that for a bit until I realized that it needed to
-> work at the tty layer and I couldn't find any serial drivers that
-> managed to register themselves to the tty layer super early at boot.
-> The only documented use of "ekgdboc" is "ekgdboc=kbd" and that's a bit
-> of a special snowflake.  Trying to get my serial driver and all its
-> dependencies to probe normally and register the tty driver super early
-> at boot seemed like a bad way to go.  In fact, all the complexity
-> needed to do something like this is why the system already has a
-> special concept of a "boot console" that lives only long enough to
-> transition to the normal console.
-> 
-> Leveraging the boot console seemed like a good way to go and that's
-> what this series does.  I found that consoles could have a read()
-> function, though I couldn't find anyone who implemented it.  I
-> implemented it for two serial drivers for the devices I had easy
-> access to, making the assumption that for boot consoles that we could
-> assume read() and write() were polling-compatible (seems sane I
-> think).
-> 
-> Now anyone who makes a small change to their serial driver can easily
-> enable early kgdb debugging!
-> 
-> The devices I had for testing were:
-> - arm32: rk3288-veyron-jerry
-> - arm64: rk3399-gru-kevin
-> - arm64: qcom-sc7180-trogdor (not mainline yet)
-> 
-> These are the devices I tested this series on.  I tried to test
-> various combinations of enabling/disabling various options and I
-> hopefully caught the corner cases, but I'd appreciate any extra
-> testing people can do.  Notably I didn't test on x86, but (I think) I
-> didn't touch much there so I shouldn't have broken anything.
-> 
-> When testing I found a few problems with actually dropping into the
-> debugger super early on arm and arm64 devices.  Patches in this series
-> should help with this.  For arm I just avoid dropping into the
-> debugger until a little later and for arm64 I actually enable
-> debugging super early.
-> 
-> I realize that bits of this series might feel a little hacky, though
-> I've tried to do things in the cleanest way I could without overly
-> interferring with the rest of the kernel.  If you hate the way I
-> solved a problem I would love it if you could provide guidance on how
-> you think I could solve the problem better.
-> 
-> This series (and my comments / documentation / commit messages) are
-> now long enough that my eyes glaze over when I try to read it all over
-> to double-check.  I've nontheless tried to double-check it, but I'm
-> pretty sure I did something stupid.  Thank you ahead of time for
-> pointing it out to me so I can fix it in v3.  If somehow I managed to
-> not do anything stupid (really?) then thank you for double-checking me
-> anyway.
-> 
-> Changes in v2:
-> - ("kgdb: Disable WARN_CONSOLE_UNLOCKED for all kgdb") new for v2.
-> - ("Revert "kgdboc: disable the console lock when in kgdb"") new for v2.
-> - Assumes we have ("kgdb: Disable WARN_CONSOLE_UNLOCKED for all kgdb")
-> - Fix kgdbts, tty/mips_ejtag_fdc, and usb/early/ehci-dbgp
-> 
-> Douglas Anderson (9):
->   kgdb: Disable WARN_CONSOLE_UNLOCKED for all kgdb
->   Revert "kgdboc: disable the console lock when in kgdb"
->   kgdboc: Use a platform device to handle tty drivers showing up late
->   kgdb: Delay "kgdbwait" to dbg_late_init() by default
->   arm64: Add call_break_hook() to early_brk64() for early kgdb
->   kgdboc: Add earlycon_kgdboc to support early kgdb using boot consoles
->   Documentation: kgdboc: Document new earlycon_kgdboc parameter
->   serial: qcom_geni_serial: Support earlycon_kgdboc
->   serial: 8250_early: Support earlycon_kgdboc
-> 
->  .../admin-guide/kernel-parameters.txt         |  20 ++
->  Documentation/dev-tools/kgdb.rst              |  14 +
->  arch/arm64/include/asm/debug-monitors.h       |   2 +
->  arch/arm64/kernel/debug-monitors.c            |   2 +-
->  arch/arm64/kernel/kgdb.c                      |   5 +
->  arch/arm64/kernel/traps.c                     |   3 +
->  arch/x86/kernel/kgdb.c                        |   5 +
->  drivers/misc/kgdbts.c                         |   2 +-
->  drivers/tty/mips_ejtag_fdc.c                  |   2 +-
->  drivers/tty/serial/8250/8250_early.c          |  23 ++
->  drivers/tty/serial/kgdboc.c                   | 262 ++++++++++++++++--
->  drivers/tty/serial/qcom_geni_serial.c         |  32 +++
->  drivers/usb/early/ehci-dbgp.c                 |   2 +-
->  include/linux/kgdb.h                          |  25 +-
->  kernel/debug/debug_core.c                     |  48 +++-
->  15 files changed, 400 insertions(+), 47 deletions(-)
+> Right, the reason being that sysfs and the associated kobject
+> infrastructure will always set global root as the default. So the
 
-Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Oh, ok, I had thought that would be the case but failed to find
+it yesterday :)  thx
+
+Reviewed-by: Serge Hallyn <serge@hallyn.com>
+
+> callchain is:
+> kobject_get_ownership()
+> and this calls the ktype callbacks which hits
+> -> device_get_ownership()
+> which calls into the device class specific callbacks which in this is
+> case calls block_class_get_ownership().
+> 
+> And there's no direct callers of, say <device-class>->get_ownership()
+> that all needs to always go through the callback infrastructure.
+> 
+> > 
+> > > +}
+> > > +#endif /* CONFIG_BLK_DEV_LOOPFS */
+> > > +
+> > >  static int __init genhd_device_init(void)
+> > >  {
+> > >  	int error;
+> > >  
+> > >  	block_class.dev_kobj = sysfs_dev_block_kobj;
+> > > +#ifdef CONFIG_BLK_DEV_LOOPFS
+> > > +	kobj_ns_type_register(&user_ns_type_operations);
+> > > +#endif
+> > >  	error = class_register(&block_class);
+> > >  	if (unlikely(error))
+> > >  		return error;
+> > > @@ -1524,8 +1594,14 @@ static void disk_release(struct device *dev)
+> > >  		blk_put_queue(disk->queue);
+> > >  	kfree(disk);
+> > >  }
+> > > +
+> > >  struct class block_class = {
+> > >  	.name		= "block",
+> > > +#ifdef CONFIG_BLK_DEV_LOOPFS
+> > > +	.ns_type	= &user_ns_type_operations,
+> > > +	.namespace	= block_class_user_namespace,
+> > > +	.get_ownership	= block_class_get_ownership,
+> > > +#endif
+> > >  };
+> > >  
+> > >  static char *block_devnode(struct device *dev, umode_t *mode,
+> > > @@ -1715,6 +1791,9 @@ struct gendisk *__alloc_disk_node(int minors, int node_id)
+> > >  		disk_to_dev(disk)->class = &block_class;
+> > >  		disk_to_dev(disk)->type = &disk_type;
+> > >  		device_initialize(disk_to_dev(disk));
+> > > +#ifdef CONFIG_BLK_DEV_LOOPFS
+> > > +		disk->user_ns = &init_user_ns;
+> > > +#endif
+> > >  	}
+> > >  	return disk;
+> > >  }
+> > > diff --git a/fs/kernfs/dir.c b/fs/kernfs/dir.c
+> > > index 1f2d894ae454..02796ba6521a 100644
+> > > --- a/fs/kernfs/dir.c
+> > > +++ b/fs/kernfs/dir.c
+> > > @@ -575,10 +575,15 @@ static int kernfs_dop_revalidate(struct dentry *dentry, unsigned int flags)
+> > >  		goto out_bad;
+> > >  
+> > >  	/* The kernfs node has been moved to a different namespace */
+> > > -	if (kn->parent && kernfs_ns_enabled(kn->parent) &&
+> > > -	    kernfs_info(dentry->d_sb)->ns[kn->ns_type] != kn->ns)
+> > > -		goto out_bad;
+> > > +	if (kn->parent && kernfs_ns_enabled(kn->parent)) {
+> > > +		if (kernfs_init_ns_propagates(kn->parent) &&
+> > > +		    kn->ns == kernfs_init_ns(kn->parent->ns_type))
+> > > +			goto out_good;
+> > > +		if (kernfs_info(dentry->d_sb)->ns[kn->parent->ns_type] != kn->ns)
+> > > +			goto out_bad;
+> > > +	}
+> > >  
+> > > +out_good:
+> > >  	mutex_unlock(&kernfs_mutex);
+> > >  	return 1;
+> > >  out_bad:
+> > > @@ -1090,6 +1095,10 @@ static struct dentry *kernfs_iop_lookup(struct inode *dir,
+> > >  		ns = kernfs_info(dir->i_sb)->ns[parent->ns_type];
+> > >  
+> > >  	kn = kernfs_find_ns(parent, dentry->d_name.name, ns);
+> > > +	if (!kn && kernfs_init_ns_propagates(parent)) {
+> > > +		ns = kernfs_init_ns(parent->ns_type);
+> > > +		kn = kernfs_find_ns(parent, dentry->d_name.name, ns);
+> > > +	}
+> > >  
+> > >  	/* no such entry */
+> > >  	if (!kn || !kernfs_active(kn)) {
+> > > @@ -1614,6 +1623,8 @@ static int kernfs_dir_fop_release(struct inode *inode, struct file *filp)
+> > >  static struct kernfs_node *kernfs_dir_pos(const void *ns,
+> > >  	struct kernfs_node *parent, loff_t hash, struct kernfs_node *pos)
+> > >  {
+> > > +	const void *init_ns;
+> > > +
+> > >  	if (pos) {
+> > >  		int valid = kernfs_active(pos) &&
+> > >  			pos->parent == parent && hash == pos->hash;
+> > > @@ -1621,6 +1632,12 @@ static struct kernfs_node *kernfs_dir_pos(const void *ns,
+> > >  		if (!valid)
+> > >  			pos = NULL;
+> > >  	}
+> > > +
+> > > +	if (kernfs_init_ns_propagates(parent))
+> > > +		init_ns = kernfs_init_ns(parent->ns_type);
+> > > +	else
+> > > +		init_ns = NULL;
+> > > +
+> > >  	if (!pos && (hash > 1) && (hash < INT_MAX)) {
+> > >  		struct rb_node *node = parent->dir.children.rb_node;
+> > >  		while (node) {
+> > > @@ -1635,7 +1652,7 @@ static struct kernfs_node *kernfs_dir_pos(const void *ns,
+> > >  		}
+> > >  	}
+> > >  	/* Skip over entries which are dying/dead or in the wrong namespace */
+> > > -	while (pos && (!kernfs_active(pos) || pos->ns != ns)) {
+> > > +	while (pos && (!kernfs_active(pos) || (pos->ns != ns && pos->ns != init_ns))) {
+> > >  		struct rb_node *node = rb_next(&pos->rb);
+> > >  		if (!node)
+> > >  			pos = NULL;
+> > > @@ -1650,13 +1667,20 @@ static struct kernfs_node *kernfs_dir_next_pos(const void *ns,
+> > >  {
+> > >  	pos = kernfs_dir_pos(ns, parent, ino, pos);
+> > >  	if (pos) {
+> > > +		const void *init_ns;
+> > > +		if (kernfs_init_ns_propagates(parent))
+> > > +			init_ns = kernfs_init_ns(parent->ns_type);
+> > > +		else
+> > > +			init_ns = NULL;
+> > > +
+> > >  		do {
+> > >  			struct rb_node *node = rb_next(&pos->rb);
+> > >  			if (!node)
+> > >  				pos = NULL;
+> > >  			else
+> > >  				pos = rb_to_kn(node);
+> > > -		} while (pos && (!kernfs_active(pos) || pos->ns != ns));
+> > > +		} while (pos && (!kernfs_active(pos) ||
+> > > +				 (pos->ns != ns && pos->ns != init_ns)));
+> > >  	}
+> > >  	return pos;
+> > >  }
+> > > diff --git a/fs/kernfs/kernfs-internal.h b/fs/kernfs/kernfs-internal.h
+> > > index 7c972c00f84a..74eb6c447361 100644
+> > > --- a/fs/kernfs/kernfs-internal.h
+> > > +++ b/fs/kernfs/kernfs-internal.h
+> > > @@ -80,6 +80,30 @@ static inline struct kernfs_node *kernfs_dentry_node(struct dentry *dentry)
+> > >  	return d_inode(dentry)->i_private;
+> > >  }
+> > >  
+> > > +#ifdef CONFIG_NET
+> > > +extern struct net init_net;
+> > > +#endif
+> > > +
+> > > +extern struct user_namespace init_user_ns;
+> > > +
+> > > +static inline const void *kernfs_init_ns(enum kobj_ns_type ns_type)
+> > > +{
+> > > +	switch (ns_type) {
+> > > +	case KOBJ_NS_TYPE_NET:
+> > > +#ifdef CONFIG_NET
+> > > +		return &init_net;
+> > > +#else
+> > > +		break;
+> > > +#endif
+> > > +	case KOBJ_NS_TYPE_USER:
+> > > +		return &init_user_ns;
+> > > +	default:
+> > > +		pr_debug("Unsupported namespace type %d for kernfs\n", ns_type);
+> > > +	}
+> > > +
+> > > +	return NULL;
+> > > +}
+> > > +
+> > >  extern const struct super_operations kernfs_sops;
+> > >  extern struct kmem_cache *kernfs_node_cache, *kernfs_iattrs_cache;
+> > >  
+> > > diff --git a/fs/sysfs/mount.c b/fs/sysfs/mount.c
+> > > index 5e2ec88a709e..99b82a0ae7ea 100644
+> > > --- a/fs/sysfs/mount.c
+> > > +++ b/fs/sysfs/mount.c
+> > > @@ -43,6 +43,8 @@ static void sysfs_fs_context_free(struct fs_context *fc)
+> > >  
+> > >  	if (kfc->ns_tag[KOBJ_NS_TYPE_NET])
+> > >  		kobj_ns_drop(KOBJ_NS_TYPE_NET, kfc->ns_tag[KOBJ_NS_TYPE_NET]);
+> > > +	if (kfc->ns_tag[KOBJ_NS_TYPE_USER])
+> > > +		kobj_ns_drop(KOBJ_NS_TYPE_USER, kfc->ns_tag[KOBJ_NS_TYPE_USER]);
+> > >  	kernfs_free_fs_context(fc);
+> > >  	kfree(kfc);
+> > >  }
+> > > @@ -67,6 +69,7 @@ static int sysfs_init_fs_context(struct fs_context *fc)
+> > >  		return -ENOMEM;
+> > >  
+> > >  	kfc->ns_tag[KOBJ_NS_TYPE_NET] = netns = kobj_ns_grab_current(KOBJ_NS_TYPE_NET);
+> > > +	kfc->ns_tag[KOBJ_NS_TYPE_USER] = kobj_ns_grab_current(KOBJ_NS_TYPE_USER);
+> > 
+> > It's nice and tidy this way so maybe worth it, but getting
+> > the kobj_ns_type_lock spinlock twice in a row here seems
+> > unfortunate.
+> 
+> Let me see if I can do something non-ugly and moderately simple about
+> this. If not, it's probably fine as it is since it only happens on sysfs
+> mount.
