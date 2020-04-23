@@ -2,419 +2,376 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1FE981B5629
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 09:45:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 36C731B5A4B
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 13:18:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727782AbgDWHln (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Apr 2020 03:41:43 -0400
-Received: from conuserg-10.nifty.com ([210.131.2.77]:33795 "EHLO
-        conuserg-10.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727106AbgDWHlk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Apr 2020 03:41:40 -0400
-Received: from oscar.flets-west.jp (softbank126090202047.bbtec.net [126.90.202.47]) (authenticated)
-        by conuserg-10.nifty.com with ESMTP id 03N7dV9R000368;
-        Thu, 23 Apr 2020 16:39:39 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-10.nifty.com 03N7dV9R000368
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1587627580;
-        bh=2uL21BIwaVwy5ZlKAP5x8RgRo+VUSnEZH7H0mEqmtro=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=hO1hmCLwP3+43OS/YL2BlKOMgoLKsvHErD+6fZ9YIH5ORyNtfojkuf9yzkE98gMLe
-         WUwSDtd+9JJsfOewpjuZ3oGGjUnhRlXqrSM9Vfz0Rlfr/0r9ds0RCioSwqpXp7auU4
-         GvrIJfBmbKZx/ED43ZC+Z3257cstL5ZtOaN+WIf22CLY4JdYEkGabC5VdOfVJcZo8f
-         9V7C2NgOWOqhAhxgGhZ0ncanBbCYde09PghhM4peHQqbOACHDTXQicQncLqmyawpx5
-         dn0Kl4hW2cWQpOctVKIeXd9nbpZ0gLpDoOmvEul29BIzyY6I0GNuQGfVS8jouPnnCE
-         Zu/BtPRYW2KUQ==
-X-Nifty-SrcIP: [126.90.202.47]
-From:   Masahiro Yamada <masahiroy@kernel.org>
-To:     linux-kbuild@vger.kernel.org
-Cc:     bpf@vger.kernel.org, Sam Ravnborg <sam@ravnborg.org>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Andrii Nakryiko <andriin@fb.com>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        John Fastabend <john.fastabend@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        KP Singh <kpsingh@chromium.org>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        netdev@vger.kernel.org
-Subject: [PATCH 06/16] kbuild: doc: document the new syntax 'userprogs'
-Date:   Thu, 23 Apr 2020 16:39:19 +0900
-Message-Id: <20200423073929.127521-7-masahiroy@kernel.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200423073929.127521-1-masahiroy@kernel.org>
-References: <20200423073929.127521-1-masahiroy@kernel.org>
+        id S1727928AbgDWLST (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Apr 2020 07:18:19 -0400
+Received: from youngberry.canonical.com ([91.189.89.112]:35019 "EHLO
+        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727941AbgDWLST (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Apr 2020 07:18:19 -0400
+Received: from ip5f5af183.dynamic.kabel-deutschland.de ([95.90.241.131] helo=wittgenstein)
+        by youngberry.canonical.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.86_2)
+        (envelope-from <christian.brauner@ubuntu.com>)
+        id 1jRZpG-0002qQ-5v; Thu, 23 Apr 2020 11:15:26 +0000
+Date:   Thu, 23 Apr 2020 13:15:24 +0200
+From:   Christian Brauner <christian.brauner@ubuntu.com>
+To:     "Serge E. Hallyn" <serge@hallyn.com>
+Cc:     Jens Axboe <axboe@kernel.dk>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-kernel@vger.kernel.org, linux-block@vger.kernel.org,
+        linux-api@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        "Rafael J. Wysocki" <rafael@kernel.org>, Tejun Heo <tj@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Saravana Kannan <saravanak@google.com>,
+        Jan Kara <jack@suse.cz>, David Howells <dhowells@redhat.com>,
+        Seth Forshee <seth.forshee@canonical.com>,
+        David Rheinsberg <david.rheinsberg@gmail.com>,
+        Tom Gundersen <teg@jklm.no>,
+        Christian Kellner <ckellner@redhat.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        =?utf-8?B?U3TDqXBoYW5l?= Graber <stgraber@ubuntu.com>,
+        linux-doc@vger.kernel.org, netdev@vger.kernel.org,
+        Steve Barber <smbarber@google.com>,
+        Dylan Reid <dgreid@google.com>,
+        Filipe Brandenburger <filbranden@gmail.com>,
+        Kees Cook <keescook@chromium.org>,
+        Benjamin Elder <bentheelder@google.com>,
+        Akihiro Suda <suda.kyoto@gmail.com>
+Subject: Re: [PATCH v2 5/7] loop: preserve sysfs backwards compatibility
+Message-ID: <20200423111524.2u3auxkfrdqpt3hr@wittgenstein>
+References: <20200422145437.176057-1-christian.brauner@ubuntu.com>
+ <20200422145437.176057-6-christian.brauner@ubuntu.com>
+ <20200423011706.GA2982@mail.hallyn.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20200423011706.GA2982@mail.hallyn.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Kbuild now supports the syntax 'userprogs' to compile userspace
-programs for the same architecture as the kernel.
+On Wed, Apr 22, 2020 at 08:17:06PM -0500, Serge Hallyn wrote:
+> On Wed, Apr 22, 2020 at 04:54:35PM +0200, Christian Brauner wrote:
+> > For sysfs the initial namespace is special. All devices currently
+> > propagate into all non-initial namespaces. For example, sysfs is usually
+> > mounted in a privileged or unprivileged container and all devices are
+> > visible to the container but are owned by global root. Even though none
+> > of the propagated files can be used there are still a lot of read-only
+> > values that are accessed or read by tools running in non-initial
+> > namespaces. Some devices though, which can be moved or created in
+> > another namespace, will only show up in the corresponding namespace.
+> > This currently includes network and loop devices but no other ones.
+> > Since all current workloads depend on devices from the inital namespace
+> > being visible this behavior cannot be simply changed. This patch just
+> > makes sure to keep propagating devices that share the same device class
+> > with loop devices from the initial namespaces into all non-initial
+> > namespaces as before. In short, nothing changes only loopfs loop devices
+> > will be shown in their correct namespace.
+> > 
+> > Cc: Jens Axboe <axboe@kernel.dk>
+> > Cc: Tejun Heo <tj@kernel.org>
+> > Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> > Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
+> 
+> Hi,
+> 
+> two comments below:
+> 
+> > ---
+> > /* v2 */
+> > - Christian Brauner <christian.brauner@ubuntu.com>:
+> >   - Protect init_net with a CONFIG_NET ifdef in case it is set to "n".
+> >   - As Tejun pointed out there is argument to be made that a new mount
+> >     option for sysfs could be added that would change how devices are
+> >     propagated. This patch does not prevent this but it is an orthogonal
+> >     problem.
+> > ---
+> >  block/genhd.c               | 79 +++++++++++++++++++++++++++++++++++++
+> >  fs/kernfs/dir.c             | 34 +++++++++++++---
+> >  fs/kernfs/kernfs-internal.h | 24 +++++++++++
+> >  fs/sysfs/mount.c            |  4 ++
+> >  include/linux/genhd.h       |  3 ++
+> >  include/linux/kernfs.h      | 22 +++++++++++
+> >  include/linux/kobject_ns.h  |  4 ++
+> >  lib/kobject.c               |  2 +
+> >  8 files changed, 167 insertions(+), 5 deletions(-)
+> > 
+> > diff --git a/block/genhd.c b/block/genhd.c
+> > index 06b642b23a07..b5b2601c4311 100644
+> > --- a/block/genhd.c
+> > +++ b/block/genhd.c
+> > @@ -1198,11 +1198,81 @@ static struct kobject *base_probe(dev_t devt, int *partno, void *data)
+> >  	return NULL;
+> >  }
+> >  
+> > +#ifdef CONFIG_BLK_DEV_LOOPFS
+> > +static void *user_grab_current_ns(void)
+> > +{
+> > +	struct user_namespace *ns = current_user_ns();
+> > +	return get_user_ns(ns);
+> > +}
+> > +
+> > +static const void *user_initial_ns(void)
+> > +{
+> > +	return &init_user_ns;
+> > +}
+> > +
+> > +static void user_put_ns(void *p)
+> > +{
+> > +	struct user_namespace *ns = p;
+> > +	put_user_ns(ns);
+> > +}
+> > +
+> > +static bool user_current_may_mount(void)
+> > +{
+> > +	return ns_capable(current_user_ns(), CAP_SYS_ADMIN);
+> > +}
+> > +
+> > +const struct kobj_ns_type_operations user_ns_type_operations = {
+> > +	.type			= KOBJ_NS_TYPE_USER,
+> > +	.current_may_mount	= user_current_may_mount,
+> > +	.grab_current_ns	= user_grab_current_ns,
+> > +	.initial_ns		= user_initial_ns,
+> > +	.drop_ns		= user_put_ns,
+> > +};
+> > +
+> > +static const void *block_class_user_namespace(struct device *dev)
+> > +{
+> > +	struct gendisk *disk;
+> > +
+> > +	if (dev->type == &part_type)
+> > +		disk = part_to_disk(dev_to_part(dev));
+> > +	else
+> > +		disk = dev_to_disk(dev);
+> > +
+> > +	return disk->user_ns;
+> > +}
+> > +
+> > +static void block_class_get_ownership(struct device *dev, kuid_t *uid, kgid_t *gid)
+> > +{
+> > +	struct gendisk *disk;
+> > +	struct user_namespace *ns;
+> > +
+> > +	if (dev->type == &part_type)
+> > +		disk = part_to_disk(dev_to_part(dev));
+> > +	else
+> > +		disk = dev_to_disk(dev);
+> > +
+> > +	ns = disk->user_ns;
+> > +	if (ns && ns != &init_user_ns) {
+> > +		kuid_t ns_root_uid = make_kuid(ns, 0);
+> > +		kgid_t ns_root_gid = make_kgid(ns, 0);
+> > +
+> > +		if (uid_valid(ns_root_uid))
+> > +			*uid = ns_root_uid;
+> > +
+> > +		if (gid_valid(ns_root_gid))
+> > +			*gid = ns_root_gid;
+> > +	}
+> 
+> You're not setting uid and gid in the else case?
 
-Insert the section '5 Userspace Program support' to explain it.
+Right, the reason being that sysfs and the associated kobject
+infrastructure will always set global root as the default. So the
+callchain is:
+kobject_get_ownership()
+and this calls the ktype callbacks which hits
+-> device_get_ownership()
+which calls into the device class specific callbacks which in this is
+case calls block_class_get_ownership().
 
-I copy-pasted '4 Host Program support' and fixed it up.
+And there's no direct callers of, say <device-class>->get_ownership()
+that all needs to always go through the callback infrastructure.
 
-Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
----
+> 
+> > +}
+> > +#endif /* CONFIG_BLK_DEV_LOOPFS */
+> > +
+> >  static int __init genhd_device_init(void)
+> >  {
+> >  	int error;
+> >  
+> >  	block_class.dev_kobj = sysfs_dev_block_kobj;
+> > +#ifdef CONFIG_BLK_DEV_LOOPFS
+> > +	kobj_ns_type_register(&user_ns_type_operations);
+> > +#endif
+> >  	error = class_register(&block_class);
+> >  	if (unlikely(error))
+> >  		return error;
+> > @@ -1524,8 +1594,14 @@ static void disk_release(struct device *dev)
+> >  		blk_put_queue(disk->queue);
+> >  	kfree(disk);
+> >  }
+> > +
+> >  struct class block_class = {
+> >  	.name		= "block",
+> > +#ifdef CONFIG_BLK_DEV_LOOPFS
+> > +	.ns_type	= &user_ns_type_operations,
+> > +	.namespace	= block_class_user_namespace,
+> > +	.get_ownership	= block_class_get_ownership,
+> > +#endif
+> >  };
+> >  
+> >  static char *block_devnode(struct device *dev, umode_t *mode,
+> > @@ -1715,6 +1791,9 @@ struct gendisk *__alloc_disk_node(int minors, int node_id)
+> >  		disk_to_dev(disk)->class = &block_class;
+> >  		disk_to_dev(disk)->type = &disk_type;
+> >  		device_initialize(disk_to_dev(disk));
+> > +#ifdef CONFIG_BLK_DEV_LOOPFS
+> > +		disk->user_ns = &init_user_ns;
+> > +#endif
+> >  	}
+> >  	return disk;
+> >  }
+> > diff --git a/fs/kernfs/dir.c b/fs/kernfs/dir.c
+> > index 1f2d894ae454..02796ba6521a 100644
+> > --- a/fs/kernfs/dir.c
+> > +++ b/fs/kernfs/dir.c
+> > @@ -575,10 +575,15 @@ static int kernfs_dop_revalidate(struct dentry *dentry, unsigned int flags)
+> >  		goto out_bad;
+> >  
+> >  	/* The kernfs node has been moved to a different namespace */
+> > -	if (kn->parent && kernfs_ns_enabled(kn->parent) &&
+> > -	    kernfs_info(dentry->d_sb)->ns[kn->ns_type] != kn->ns)
+> > -		goto out_bad;
+> > +	if (kn->parent && kernfs_ns_enabled(kn->parent)) {
+> > +		if (kernfs_init_ns_propagates(kn->parent) &&
+> > +		    kn->ns == kernfs_init_ns(kn->parent->ns_type))
+> > +			goto out_good;
+> > +		if (kernfs_info(dentry->d_sb)->ns[kn->parent->ns_type] != kn->ns)
+> > +			goto out_bad;
+> > +	}
+> >  
+> > +out_good:
+> >  	mutex_unlock(&kernfs_mutex);
+> >  	return 1;
+> >  out_bad:
+> > @@ -1090,6 +1095,10 @@ static struct dentry *kernfs_iop_lookup(struct inode *dir,
+> >  		ns = kernfs_info(dir->i_sb)->ns[parent->ns_type];
+> >  
+> >  	kn = kernfs_find_ns(parent, dentry->d_name.name, ns);
+> > +	if (!kn && kernfs_init_ns_propagates(parent)) {
+> > +		ns = kernfs_init_ns(parent->ns_type);
+> > +		kn = kernfs_find_ns(parent, dentry->d_name.name, ns);
+> > +	}
+> >  
+> >  	/* no such entry */
+> >  	if (!kn || !kernfs_active(kn)) {
+> > @@ -1614,6 +1623,8 @@ static int kernfs_dir_fop_release(struct inode *inode, struct file *filp)
+> >  static struct kernfs_node *kernfs_dir_pos(const void *ns,
+> >  	struct kernfs_node *parent, loff_t hash, struct kernfs_node *pos)
+> >  {
+> > +	const void *init_ns;
+> > +
+> >  	if (pos) {
+> >  		int valid = kernfs_active(pos) &&
+> >  			pos->parent == parent && hash == pos->hash;
+> > @@ -1621,6 +1632,12 @@ static struct kernfs_node *kernfs_dir_pos(const void *ns,
+> >  		if (!valid)
+> >  			pos = NULL;
+> >  	}
+> > +
+> > +	if (kernfs_init_ns_propagates(parent))
+> > +		init_ns = kernfs_init_ns(parent->ns_type);
+> > +	else
+> > +		init_ns = NULL;
+> > +
+> >  	if (!pos && (hash > 1) && (hash < INT_MAX)) {
+> >  		struct rb_node *node = parent->dir.children.rb_node;
+> >  		while (node) {
+> > @@ -1635,7 +1652,7 @@ static struct kernfs_node *kernfs_dir_pos(const void *ns,
+> >  		}
+> >  	}
+> >  	/* Skip over entries which are dying/dead or in the wrong namespace */
+> > -	while (pos && (!kernfs_active(pos) || pos->ns != ns)) {
+> > +	while (pos && (!kernfs_active(pos) || (pos->ns != ns && pos->ns != init_ns))) {
+> >  		struct rb_node *node = rb_next(&pos->rb);
+> >  		if (!node)
+> >  			pos = NULL;
+> > @@ -1650,13 +1667,20 @@ static struct kernfs_node *kernfs_dir_next_pos(const void *ns,
+> >  {
+> >  	pos = kernfs_dir_pos(ns, parent, ino, pos);
+> >  	if (pos) {
+> > +		const void *init_ns;
+> > +		if (kernfs_init_ns_propagates(parent))
+> > +			init_ns = kernfs_init_ns(parent->ns_type);
+> > +		else
+> > +			init_ns = NULL;
+> > +
+> >  		do {
+> >  			struct rb_node *node = rb_next(&pos->rb);
+> >  			if (!node)
+> >  				pos = NULL;
+> >  			else
+> >  				pos = rb_to_kn(node);
+> > -		} while (pos && (!kernfs_active(pos) || pos->ns != ns));
+> > +		} while (pos && (!kernfs_active(pos) ||
+> > +				 (pos->ns != ns && pos->ns != init_ns)));
+> >  	}
+> >  	return pos;
+> >  }
+> > diff --git a/fs/kernfs/kernfs-internal.h b/fs/kernfs/kernfs-internal.h
+> > index 7c972c00f84a..74eb6c447361 100644
+> > --- a/fs/kernfs/kernfs-internal.h
+> > +++ b/fs/kernfs/kernfs-internal.h
+> > @@ -80,6 +80,30 @@ static inline struct kernfs_node *kernfs_dentry_node(struct dentry *dentry)
+> >  	return d_inode(dentry)->i_private;
+> >  }
+> >  
+> > +#ifdef CONFIG_NET
+> > +extern struct net init_net;
+> > +#endif
+> > +
+> > +extern struct user_namespace init_user_ns;
+> > +
+> > +static inline const void *kernfs_init_ns(enum kobj_ns_type ns_type)
+> > +{
+> > +	switch (ns_type) {
+> > +	case KOBJ_NS_TYPE_NET:
+> > +#ifdef CONFIG_NET
+> > +		return &init_net;
+> > +#else
+> > +		break;
+> > +#endif
+> > +	case KOBJ_NS_TYPE_USER:
+> > +		return &init_user_ns;
+> > +	default:
+> > +		pr_debug("Unsupported namespace type %d for kernfs\n", ns_type);
+> > +	}
+> > +
+> > +	return NULL;
+> > +}
+> > +
+> >  extern const struct super_operations kernfs_sops;
+> >  extern struct kmem_cache *kernfs_node_cache, *kernfs_iattrs_cache;
+> >  
+> > diff --git a/fs/sysfs/mount.c b/fs/sysfs/mount.c
+> > index 5e2ec88a709e..99b82a0ae7ea 100644
+> > --- a/fs/sysfs/mount.c
+> > +++ b/fs/sysfs/mount.c
+> > @@ -43,6 +43,8 @@ static void sysfs_fs_context_free(struct fs_context *fc)
+> >  
+> >  	if (kfc->ns_tag[KOBJ_NS_TYPE_NET])
+> >  		kobj_ns_drop(KOBJ_NS_TYPE_NET, kfc->ns_tag[KOBJ_NS_TYPE_NET]);
+> > +	if (kfc->ns_tag[KOBJ_NS_TYPE_USER])
+> > +		kobj_ns_drop(KOBJ_NS_TYPE_USER, kfc->ns_tag[KOBJ_NS_TYPE_USER]);
+> >  	kernfs_free_fs_context(fc);
+> >  	kfree(kfc);
+> >  }
+> > @@ -67,6 +69,7 @@ static int sysfs_init_fs_context(struct fs_context *fc)
+> >  		return -ENOMEM;
+> >  
+> >  	kfc->ns_tag[KOBJ_NS_TYPE_NET] = netns = kobj_ns_grab_current(KOBJ_NS_TYPE_NET);
+> > +	kfc->ns_tag[KOBJ_NS_TYPE_USER] = kobj_ns_grab_current(KOBJ_NS_TYPE_USER);
+> 
+> It's nice and tidy this way so maybe worth it, but getting
+> the kobj_ns_type_lock spinlock twice in a row here seems
+> unfortunate.
 
- Documentation/kbuild/makefiles.rst | 184 +++++++++++++++++++++--------
- 1 file changed, 136 insertions(+), 48 deletions(-)
-
-diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/makefiles.rst
-index b80257a03830..251e5431276e 100644
---- a/Documentation/kbuild/makefiles.rst
-+++ b/Documentation/kbuild/makefiles.rst
-@@ -29,31 +29,37 @@ This document describes the Linux kernel Makefiles.
- 	   --- 4.4 Controlling compiler options for host programs
- 	   --- 4.5 When host programs are actually built
- 
--	=== 5 Kbuild clean infrastructure
--
--	=== 6 Architecture Makefiles
--	   --- 6.1 Set variables to tweak the build to the architecture
--	   --- 6.2 Add prerequisites to archheaders:
--	   --- 6.3 Add prerequisites to archprepare:
--	   --- 6.4 List directories to visit when descending
--	   --- 6.5 Architecture-specific boot images
--	   --- 6.6 Building non-kbuild targets
--	   --- 6.7 Commands useful for building a boot image
--	   --- 6.8 Custom kbuild commands
--	   --- 6.9 Preprocessing linker scripts
--	   --- 6.10 Generic header files
--	   --- 6.11 Post-link pass
--
--	=== 7 Kbuild syntax for exported headers
--		--- 7.1 no-export-headers
--		--- 7.2 generic-y
--		--- 7.3 generated-y
--		--- 7.4 mandatory-y
--
--	=== 8 Kbuild Variables
--	=== 9 Makefile language
--	=== 10 Credits
--	=== 11 TODO
-+	=== 5 Userspace Program support
-+	   --- 5.1 Simple Userspace Program
-+	   --- 5.2 Composite Userspace Programs
-+	   --- 5.3 Controlling compiler options for userspace programs
-+	   --- 5.4 When userspace programs are actually built
-+
-+	=== 6 Kbuild clean infrastructure
-+
-+	=== 7 Architecture Makefiles
-+	   --- 7.1 Set variables to tweak the build to the architecture
-+	   --- 7.2 Add prerequisites to archheaders:
-+	   --- 7.3 Add prerequisites to archprepare:
-+	   --- 7.4 List directories to visit when descending
-+	   --- 7.5 Architecture-specific boot images
-+	   --- 7.6 Building non-kbuild targets
-+	   --- 7.7 Commands useful for building a boot image
-+	   --- 7.8 Custom kbuild commands
-+	   --- 7.9 Preprocessing linker scripts
-+	   --- 7.10 Generic header files
-+	   --- 7.11 Post-link pass
-+
-+	=== 8 Kbuild syntax for exported headers
-+		--- 8.1 no-export-headers
-+		--- 8.2 generic-y
-+		--- 8.3 generated-y
-+		--- 8.4 mandatory-y
-+
-+	=== 9 Kbuild Variables
-+	=== 10 Makefile language
-+	=== 11 Credits
-+	=== 12 TODO
- 
- 1 Overview
- ==========
-@@ -732,7 +738,89 @@ Both possibilities are described in the following.
- 	This will tell kbuild to build lxdialog even if not referenced in
- 	any rule.
- 
--5 Kbuild clean infrastructure
-+5 Userspace Program support
-+===========================
-+
-+Just like host programs, Kbuild also supports building userspace executables
-+for the target architecture (i.e. the same architecture as you are building
-+the kernel for).
-+
-+The syntax is quite similar. The difference is to use "userprogs" instead of
-+"hostprogs".
-+
-+5.1 Simple Userspace Program
-+----------------------------
-+
-+	The following line tells kbuild that the program bpf-direct shall be
-+	built for the target architecture.
-+
-+	Example::
-+
-+		userprogs := bpf-direct
-+
-+	Kbuild assumes in the above example that bpf-direct is made from a
-+	single C source file named bpf-direct.c located in the same directory
-+	as the Makefile.
-+
-+5.2 Composite Userspace Programs
-+--------------------------------
-+
-+	Userspace programs can be made up based on composite objects.
-+	The syntax used to define composite objects for userspace programs is
-+	similar to the syntax used for kernel objects.
-+	$(<executable>-objs) lists all objects used to link the final
-+	executable.
-+
-+	Example::
-+
-+		#samples/seccomp/Makefile
-+		userprogs      := bpf-fancy
-+		bpf-fancy-objs := bpf-fancy.o bpf-helper.o
-+
-+	Objects with extension .o are compiled from the corresponding .c
-+	files. In the above example, bpf-fancy.c is compiled to bpf-fancy.o
-+	and bpf-helper.c is compiled to bpf-helper.o.
-+
-+	Finally, the two .o files are linked to the executable, bpf-fancy.
-+	Note: The syntax <executable>-y is not permitted for userspace programs.
-+
-+5.3 Controlling compiler options for userspace programs
-+-------------------------------------------------------
-+
-+	When compiling userspace programs, it is possible to set specific flags.
-+	The programs will always be compiled utilising $(CC) passed
-+	the options specified in $(KBUILD_USERCFLAGS).
-+	To set flags that will take effect for all userspace programs created
-+	in that Makefile, use the variable user-ccflags.
-+
-+	Example::
-+
-+		# samples/seccomp/Makefile
-+		user-ccflags += -I usr/include
-+
-+	To set specific flags for a single file the following construction
-+	is used:
-+
-+	Example::
-+
-+		bpf-helper-ccflags += -I user/include
-+
-+	It is also possible to specify additional options to the linker.
-+
-+	Example::
-+
-+		# net/bpfilter/Makefile
-+		bpfilter_umh-ldflags += -static
-+
-+	When linking bpfilter_umh-ldflags, it will be passed the extra option
-+	-static.
-+
-+5.4 When userspace programs are actually built
-+----------------------------------------------
-+
-+	Same as "When host programs are actually built".
-+
-+6 Kbuild clean infrastructure
- =============================
- 
- "make clean" deletes most generated files in the obj tree where the kernel
-@@ -790,7 +878,7 @@ is not operational at that point.
- Note 2: All directories listed in core-y, libs-y, drivers-y and net-y will
- be visited during "make clean".
- 
--6 Architecture Makefiles
-+7 Architecture Makefiles
- ========================
- 
- The top level Makefile sets up the environment and does the preparation,
-@@ -820,7 +908,7 @@ When kbuild executes, the following steps are followed (roughly):
-    - Preparing initrd images and the like
- 
- 
--6.1 Set variables to tweak the build to the architecture
-+7.1 Set variables to tweak the build to the architecture
- --------------------------------------------------------
- 
-     LDFLAGS
-@@ -967,7 +1055,7 @@ When kbuild executes, the following steps are followed (roughly):
- 	KBUILD_VMLINUX_LIBS together specify all the object files used to
- 	link vmlinux.
- 
--6.2 Add prerequisites to archheaders
-+7.2 Add prerequisites to archheaders
- ------------------------------------
- 
- 	The archheaders: rule is used to generate header files that
-@@ -977,7 +1065,7 @@ When kbuild executes, the following steps are followed (roughly):
- 	architecture itself.
- 
- 
--6.3 Add prerequisites to archprepare
-+7.3 Add prerequisites to archprepare
- ------------------------------------
- 
- 	The archprepare: rule is used to list prerequisites that need to be
-@@ -995,7 +1083,7 @@ When kbuild executes, the following steps are followed (roughly):
- 	generating offset header files.
- 
- 
--6.4 List directories to visit when descending
-+7.4 List directories to visit when descending
- ---------------------------------------------
- 
- 	An arch Makefile cooperates with the top Makefile to define variables
-@@ -1030,7 +1118,7 @@ When kbuild executes, the following steps are followed (roughly):
- 		drivers-$(CONFIG_OPROFILE)  += arch/sparc64/oprofile/
- 
- 
--6.5 Architecture-specific boot images
-+7.5 Architecture-specific boot images
- -------------------------------------
- 
- 	An arch Makefile specifies goals that take the vmlinux file, compress
-@@ -1085,7 +1173,7 @@ When kbuild executes, the following steps are followed (roughly):
- 
- 	When "make" is executed without arguments, bzImage will be built.
- 
--6.6 Building non-kbuild targets
-+7.6 Building non-kbuild targets
- -------------------------------
- 
-     extra-y
-@@ -1108,7 +1196,7 @@ When kbuild executes, the following steps are followed (roughly):
- 	In this example, extra-y is used to list object files that
- 	shall be built, but shall not be linked as part of built-in.a.
- 
--6.7 Commands useful for building a boot image
-+7.7 Commands useful for building a boot image
- ---------------------------------------------
- 
-     Kbuild provides a few macros that are useful when building a
-@@ -1211,7 +1299,7 @@ When kbuild executes, the following steps are followed (roughly):
- 		targets += $(dtb-y)
- 		DTC_FLAGS ?= -p 1024
- 
--6.8 Custom kbuild commands
-+7.8 Custom kbuild commands
- --------------------------
- 
- 	When kbuild is executing with KBUILD_VERBOSE=0, then only a shorthand
-@@ -1241,7 +1329,7 @@ When kbuild executes, the following steps are followed (roughly):
- 	will be displayed with "make KBUILD_VERBOSE=0".
- 
- 
--6.9 Preprocessing linker scripts
-+7.9 Preprocessing linker scripts
- --------------------------------
- 
- 	When the vmlinux image is built, the linker script
-@@ -1274,7 +1362,7 @@ When kbuild executes, the following steps are followed (roughly):
- 	The kbuild infrastructure for `*lds` files is used in several
- 	architecture-specific files.
- 
--6.10 Generic header files
-+7.10 Generic header files
- -------------------------
- 
- 	The directory include/asm-generic contains the header files
-@@ -1283,7 +1371,7 @@ When kbuild executes, the following steps are followed (roughly):
- 	to list the file in the Kbuild file.
- 	See "7.2 generic-y" for further info on syntax etc.
- 
--6.11 Post-link pass
-+7.11 Post-link pass
- -------------------
- 
- 	If the file arch/xxx/Makefile.postlink exists, this makefile
-@@ -1299,7 +1387,7 @@ When kbuild executes, the following steps are followed (roughly):
- 	For example, powerpc uses this to check relocation sanity of
- 	the linked vmlinux file.
- 
--7 Kbuild syntax for exported headers
-+8 Kbuild syntax for exported headers
- ------------------------------------
- 
- The kernel includes a set of headers that is exported to userspace.
-@@ -1319,14 +1407,14 @@ A Kbuild file may be defined under arch/<arch>/include/uapi/asm/ and
- arch/<arch>/include/asm/ to list asm files coming from asm-generic.
- See subsequent chapter for the syntax of the Kbuild file.
- 
--7.1 no-export-headers
-+8.1 no-export-headers
- ---------------------
- 
- 	no-export-headers is essentially used by include/uapi/linux/Kbuild to
- 	avoid exporting specific headers (e.g. kvm.h) on architectures that do
- 	not support it. It should be avoided as much as possible.
- 
--7.2 generic-y
-+8.2 generic-y
- -------------
- 
- 	If an architecture uses a verbatim copy of a header from
-@@ -1356,7 +1444,7 @@ See subsequent chapter for the syntax of the Kbuild file.
- 
- 			#include <asm-generic/termios.h>
- 
--7.3 generated-y
-+8.3 generated-y
- ---------------
- 
- 	If an architecture generates other header files alongside generic-y
-@@ -1370,7 +1458,7 @@ See subsequent chapter for the syntax of the Kbuild file.
- 			#arch/x86/include/asm/Kbuild
- 			generated-y += syscalls_32.h
- 
--7.4 mandatory-y
-+8.4 mandatory-y
- ---------------
- 
- 	mandatory-y is essentially used by include/(uapi/)asm-generic/Kbuild
-@@ -1380,7 +1468,7 @@ See subsequent chapter for the syntax of the Kbuild file.
- 	in arch/$(ARCH)/include/(uapi/)/asm, Kbuild will automatically generate
- 	a wrapper of the asm-generic one.
- 
--8 Kbuild Variables
-+9 Kbuild Variables
- ==================
- 
- The top Makefile exports the following variables:
-@@ -1438,8 +1526,8 @@ The top Makefile exports the following variables:
- 	command.
- 
- 
--9 Makefile language
--===================
-+10 Makefile language
-+====================
- 
- The kernel Makefiles are designed to be run with GNU Make.  The Makefiles
- use only the documented features of GNU Make, but they do use many
-@@ -1458,7 +1546,7 @@ time the left-hand side is used.
- There are some cases where "=" is appropriate.  Usually, though, ":="
- is the right choice.
- 
--10 Credits
-+11 Credits
- ==========
- 
- - Original version made by Michael Elizabeth Chastain, <mailto:mec@shout.net>
-@@ -1466,7 +1554,7 @@ is the right choice.
- - Updates by Sam Ravnborg <sam@ravnborg.org>
- - Language QA by Jan Engelhardt <jengelh@gmx.de>
- 
--11 TODO
-+12 TODO
- =======
- 
- - Describe how kbuild supports shipped files with _shipped.
--- 
-2.25.1
-
+Let me see if I can do something non-ugly and moderately simple about
+this. If not, it's probably fine as it is since it only happens on sysfs
+mount.
