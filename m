@@ -2,92 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7E5AD1B63E3
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 20:41:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 48AC31B6452
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 21:14:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730102AbgDWSlg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Apr 2020 14:41:36 -0400
-Received: from 9.mo69.mail-out.ovh.net ([46.105.56.78]:35937 "EHLO
-        9.mo69.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730056AbgDWSlg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Apr 2020 14:41:36 -0400
-Received: from player746.ha.ovh.net (unknown [10.110.115.36])
-        by mo69.mail-out.ovh.net (Postfix) with ESMTP id 7D5668AEF7
-        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2020 20:32:37 +0200 (CEST)
+        id S1726181AbgDWTOi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Apr 2020 15:14:38 -0400
+Received: from 19.mo7.mail-out.ovh.net ([178.33.251.118]:45547 "EHLO
+        19.mo7.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726068AbgDWTOi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Apr 2020 15:14:38 -0400
+X-Greylist: delayed 2519 seconds by postgrey-1.27 at vger.kernel.org; Thu, 23 Apr 2020 15:14:37 EDT
+Received: from player796.ha.ovh.net (unknown [10.108.35.110])
+        by mo7.mail-out.ovh.net (Postfix) with ESMTP id D313B160095
+        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2020 20:37:12 +0200 (CEST)
 Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
         (Authenticated sender: steve@sk2.org)
-        by player746.ha.ovh.net (Postfix) with ESMTPSA id 0C0B911C624B8;
-        Thu, 23 Apr 2020 18:32:32 +0000 (UTC)
-Date:   Thu, 23 Apr 2020 20:32:31 +0200
+        by player796.ha.ovh.net (Postfix) with ESMTPSA id DBDDC11A47C5D;
+        Thu, 23 Apr 2020 18:37:06 +0000 (UTC)
 From:   Stephen Kitt <steve@sk2.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4] docs: sysctl/kernel: document BPF entries
-Message-ID: <20200423203231.5f682a52@heffalump.sk2.org>
-In-Reply-To: <20200420165949.14dc0752@lwn.net>
-References: <20200315122648.20558-1-steve@sk2.org>
-        <20200420165949.14dc0752@lwn.net>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, Stephen Kitt <steve@sk2.org>
+Subject: [PATCH 1/3] docs: sysctl/kernel: document cad_pid
+Date:   Thu, 23 Apr 2020 20:36:49 +0200
+Message-Id: <20200423183651.15365-1-steve@sk2.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- boundary="Sig_/o1onwjijsn/X1nkA2sVL9pS"; protocol="application/pgp-signature"
-X-Ovh-Tracer-Id: 16088265247455071621
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 16165670866134453637
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrgeelgdelhecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpeffhffvuffkjghfofggtgesghdtreerredtjeenucfhrhhomhepufhtvghphhgvnhcumfhithhtuceoshhtvghvvgesshhkvddrohhrgheqnecukfhppedtrddtrddtrddtpdekvddrieehrddvhedrvddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejgeeirdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrgeelgdeljecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvffufffkofgggfestdekredtredttdenucfhrhhomhepufhtvghphhgvnhcumfhithhtuceoshhtvghvvgesshhkvddrohhrgheqnecukfhppedtrddtrddtrddtpdekvddrieehrddvhedrvddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejleeirdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---Sig_/o1onwjijsn/X1nkA2sVL9pS
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Based on the implementation in kernel/sysctl.c (the proc_do_cad_pid()
+function), kernel/reboot.c, and include/linux/sched/signal.h.
 
-On Mon, 20 Apr 2020 16:59:49 -0600, Jonathan Corbet <corbet@lwn.net> wrote:
-> On Sun, 15 Mar 2020 13:26:48 +0100
-> Stephen Kitt <steve@sk2.org> wrote:
->=20
-> > Based on the implementation in kernel/bpf/syscall.c,
-> > kernel/bpf/trampoline.c, include/linux/filter.h, and the documentation
-> > in bpftool-prog.rst.
-> >=20
-> > Signed-off-by: Stephen Kitt <steve@sk2.org>
-> > ---
-> >=20
-> > Notes:
-> >     This patch is intended for docs-next, but I'd appreciate reviews fr=
-om
-> >     BPF developers. =20
->=20
-> Haven't seen a whole lot of those...it's been a month, so I'll ahead and
-> apply this; it can be fixed up later if need be.
+Signed-off-by: Stephen Kitt <steve@sk2.org>
+---
+ Documentation/admin-guide/sysctl/kernel.rst | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-Thanks, I=E2=80=99ll start pushing my remaining sysctl doc patches.
+diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
+index 55b24eada13c..82bfd5892663 100644
+--- a/Documentation/admin-guide/sysctl/kernel.rst
++++ b/Documentation/admin-guide/sysctl/kernel.rst
+@@ -116,6 +116,16 @@ run. The statistics can be seen using ``bpftool``.
+ = ===================================
+ 
+ 
++cad_pid
++=======
++
++This is the pid which will be signalled on reboot (notably, by
++Ctrl-Alt-Delete). Writing a value to this file which doesn't
++correspond to a running process will result in ``-ESRCH``.
++
++See also `ctrl-alt-del`_.
++
++
+ cap_last_cap
+ ============
+ 
 
-Regards,
+base-commit: 7b9121040d83eb9e332f7dbc140eca17643d3586
+-- 
+2.20.1
 
-Stephen
-
---Sig_/o1onwjijsn/X1nkA2sVL9pS
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCgAdFiEEnPVX/hPLkMoq7x0ggNMC9Yhtg5wFAl6h3z8ACgkQgNMC9Yht
-g5yBYxAAnAhijFdCY555e/sspMaOXstZhLe2ieWHr+OE1sZwokukp99cPd8xavzr
-4VvCL/MLTCmxEdiF1u2OWcar5qb1jmNsz3kuvP4lImpranerkN+j4nC0SiNrO9oW
-P76NRx6Zi/vZIRDNPEsoJjp2pl/i00YppayfGEYkT5UxeCOsNfTn3j1zQctWN/6v
-eLGtfkghS+6emGqCcEBoTrhkxxCqiv6VrDpGWNe+tEoseEm1I6NUm/gRqr8i6iM3
-EQzM7w+R8oiSy8JsIJR0ay03IGzUii5b3hkKZLQW/rAm1+MJVRaQaaHYsJn2JdD7
-/418UZwMZAJxZILek6bDNMQF3EHZgO6QbTDLjBPTm6ZeTJqqQEwfJ0DAVDG7sN/6
-MYjXUDrqYhj3XLziu0tf8DkS9ujvzcaLhyYRealessJy6WxFXDfYNt8t7IlbIRY1
-L0U2Euzl8akF5L6p4wfRy0C5ZYWQxgqNvPWhbuX+5DBATA76XIGtFHn5aRDZEMzD
-tSs0pkIre0oIPzD0Q93qVTcmHoIqUIyq3cLG+5mImhveBC4GDKMc6ULXJW2G+CY0
-1saNKu93Xvs6p9iioEE2lC/i0/NRvCfxT4DEfTJWl5nnyz3ZfzZ3gOJJ4CDVqLJZ
-ODgpRYY9+IkLj//4HyR34DE8M2hvQ+L0UYHo/K0qrfHw0Xm2ZhY=
-=6H/Z
------END PGP SIGNATURE-----
-
---Sig_/o1onwjijsn/X1nkA2sVL9pS--
