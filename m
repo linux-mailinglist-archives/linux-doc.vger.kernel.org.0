@@ -2,105 +2,75 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 151D51B5AB5
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 13:46:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C05FA1B5C0E
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Apr 2020 15:02:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728139AbgDWLqs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Apr 2020 07:46:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46612 "EHLO
+        id S1728434AbgDWNCd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Apr 2020 09:02:33 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58440 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1727088AbgDWLqs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Apr 2020 07:46:48 -0400
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com [IPv6:2607:f8b0:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CB046C035494
-        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2020 04:46:46 -0700 (PDT)
-Received: by mail-ot1-x343.google.com with SMTP id j26so5496132ots.0
-        for <linux-doc@vger.kernel.org>; Thu, 23 Apr 2020 04:46:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ffwll.ch; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=soBENWxtv1Jx6Q4M8NjC2VsgjFKXOfQejEBroBd8f4g=;
-        b=NXx4YPgvtOlyiKjB650mQVqamk7mwKi2f5oD1cAMtY5EWRnaThyz0h+QPOfwI1jQ9w
-         6Nx1NeQyKFKmVdgwiYV71tS6SUDsNJ+4BS5yWOt41z7u06V3K9qAR9zAsV0eciBZ82NB
-         MVwTigSQtl3NWsR6OlpVgGl3p8JXDydOI5XDQ=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=soBENWxtv1Jx6Q4M8NjC2VsgjFKXOfQejEBroBd8f4g=;
-        b=jlJDsZld+59hj5nrJejN3PRPl/+5jmnvA4IIkyKSZGptaCkJbiCbGx0112CqRLvZ1m
-         9EzihfLc9xiImAIzEd4WQs92Q/cV7SnilmERjN7sP2CzYStmhZF0hjvD5rqQDUQ9AhRo
-         qfqXdnApaYCu+PKv10Jt8TyC9iNQZKh4MOQPrSWcx17p+ZYLShiTHiti56bhy+JuKlvb
-         ohjRRTxCAJ5gghVlO9fOrxiBVeIRC/UhDMtF8p3OFV8iS1gHBtFqLtYmX2rsmfEYukKY
-         kQ4vty2PR/RzMXcCoNuXVIx/6LOrdmlr+vEaU94s4x4hl5CBgqVIM3etpRwkB0KDdDU6
-         bYKQ==
-X-Gm-Message-State: AGi0PuZN9xlKfWMY5eN740LRcdl51bOg7g0h1eWRmszN1TcKLLdvp+ao
-        GN1EiLPCsAhysG5yKNnjJ2Q9+GsvuC5N5n/7fHypbQ==
-X-Google-Smtp-Source: APiQypKhOGBw+yldUeb3d73cJTyCIRTooxDShKtfsXpDubxWoQUNatT4V7/wpGHO6fgRNhipZQ5IOE3srpPVZe4TbtA=
-X-Received: by 2002:a9d:2056:: with SMTP id n80mr3147281ota.281.1587642406180;
- Thu, 23 Apr 2020 04:46:46 -0700 (PDT)
+        by vger.kernel.org with ESMTP id S1728357AbgDWNCd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 23 Apr 2020 09:02:33 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 89C15C08E934;
+        Thu, 23 Apr 2020 06:02:33 -0700 (PDT)
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 649DA5A0;
+        Thu, 23 Apr 2020 13:02:31 +0000 (UTC)
+Date:   Thu, 23 Apr 2020 07:02:30 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Bolarinwa Olayemi Saheed <refactormyself@gmail.com>
+Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        skhan@linuxfoundation.org,
+        linux-kernel-mentees@lists.linuxfoundation.org,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        Andrii Nakryiko <andriin@fb.com>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@chromium.org>, Stephen Kitt <steve@sk2.org>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        "Guilherme G. Piccoli" <gpiccoli@canonical.com>,
+        Kees Cook <keescook@chromium.org>,
+        Masanari Iida <standby24x7@gmail.com>,
+        Eric Biggers <ebiggers@google.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
+        bpf@vger.kernel.org
+Subject: Re: [PATCH] docs: Fix WARNING - Title underline too short
+Message-ID: <20200423070230.3fd863ba@lwn.net>
+In-Reply-To: <20200423114517.18074-1-refactormyself@users.noreply.github.com>
+References: <20200423114517.18074-1-refactormyself@users.noreply.github.com>
+Organization: LWN.net
 MIME-Version: 1.0
-References: <20200420074115.23931-1-galpress@amazon.com> <20200420170059.5a42693e@lwn.net>
- <20200421123837.GZ3456981@phenom.ffwll.local> <20200421103236.4b64155c@lwn.net>
-In-Reply-To: <20200421103236.4b64155c@lwn.net>
-From:   Daniel Vetter <daniel@ffwll.ch>
-Date:   Thu, 23 Apr 2020 13:46:35 +0200
-Message-ID: <CAKMK7uGTP93tbpsZhc1On2ka+YiVhwHk32cWHEdvS5O5DGODTg@mail.gmail.com>
-Subject: Re: [PATCH] dma-buf: Couple of documentation typo fixes
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Gal Pressman <galpress@amazon.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        "open list:DMA BUFFER SHARING FRAMEWORK" 
-        <linux-media@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Apr 21, 2020 at 6:32 PM Jonathan Corbet <corbet@lwn.net> wrote:
->
-> On Tue, 21 Apr 2020 14:38:37 +0200
-> Daniel Vetter <daniel@ffwll.ch> wrote:
->
-> > On Mon, Apr 20, 2020 at 05:00:59PM -0600, Jonathan Corbet wrote:
-> > > On Mon, 20 Apr 2020 10:41:15 +0300
-> > > Gal Pressman <galpress@amazon.com> wrote:
-> > >
-> > > > Fix a couple of typos: "as" -> "has" and "int" -> "in".
-> > > >
-> > > > Signed-off-by: Gal Pressman <galpress@amazon.com>
-> > >
-> > > Applied, thanks.
-> >
-> > Also applied to drm-misc-next, the dma-buf stuff is maintained as part of
-> > drm. And maybe I actually get around to doing the doc polish for all
-> > things dma-buf that I've been promised to do since months :-)
->
-> I actually looked for it in linux-next before applying, but didn't (and
-> don't) see it there...?
+On Thu, 23 Apr 2020 13:45:17 +0200
+Bolarinwa Olayemi Saheed <refactormyself@gmail.com> wrote:
 
-I only spotted the patch after I've seen your notification, so it was
-indeed not there back then. But now it should be there:
+> From: Bolarinwa Olayemi Saheed <refactormyself@gmail.com>
+> 
+> There were two instances of "Title underline too short" and they were
+> increased to match the title text.
+> 
+> Signed-off-by: Bolarinwa Olayemi Saheed <refactormyself@gmail.com>
+> ---
+>  Documentation/admin-guide/sysctl/kernel.rst | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 
-commit 776d58823a60c689816972b51100cb322a0834ce (HEAD ->
-drm-misc-next, drm-misc/for-linux-next, drm-misc/drm-misc-next)
-Author: Gal Pressman <galpress@amazon.com>
-Date:   Mon Apr 20 10:41:15 2020 +0300
+These warnings are caused by a patch entering linux-next via the -mm tree;
+Randy has already sent a patch to fix them.
 
-    dma-buf: Couple of documentation typo fixes
+[Next time you might want to examine the recipient list a bit; this patch
+was broadcast a bit more widely than was really necessary.]
 
-drm-misc/for-linux-next is included in linux-next (we have some
-special branches for linux-next because of some different rules than
-usual for our committers). Latest linux-next also seems to have it by
-now.
--Daniel
+Thanks,
 
-
-
--- 
-Daniel Vetter
-Software Engineer, Intel Corporation
-+41 (0) 79 365 57 48 - http://blog.ffwll.ch
+jon
