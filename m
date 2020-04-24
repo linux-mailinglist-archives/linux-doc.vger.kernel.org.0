@@ -2,59 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F09381B7FA3
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2020 22:02:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3C6FA1B7F9D
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2020 22:02:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729441AbgDXUCd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Apr 2020 16:02:33 -0400
+        id S1729422AbgDXUBt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Apr 2020 16:01:49 -0400
 Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39264 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729431AbgDXUBr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Apr 2020 16:01:47 -0400
-Received: from mail-pj1-x1043.google.com (mail-pj1-x1043.google.com [IPv6:2607:f8b0:4864:20::1043])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 10230C09B049
-        for <linux-doc@vger.kernel.org>; Fri, 24 Apr 2020 13:01:47 -0700 (PDT)
-Received: by mail-pj1-x1043.google.com with SMTP id 7so4949291pjo.0
-        for <linux-doc@vger.kernel.org>; Fri, 24 Apr 2020 13:01:47 -0700 (PDT)
+        with ESMTP id S1729425AbgDXUBs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Apr 2020 16:01:48 -0400
+Received: from mail-pj1-x1042.google.com (mail-pj1-x1042.google.com [IPv6:2607:f8b0:4864:20::1042])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7164CC09B04A
+        for <linux-doc@vger.kernel.org>; Fri, 24 Apr 2020 13:01:48 -0700 (PDT)
+Received: by mail-pj1-x1042.google.com with SMTP id a32so4300022pje.5
+        for <linux-doc@vger.kernel.org>; Fri, 24 Apr 2020 13:01:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=linaro.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=FBdqDq0VMaj7zwangCHWNwKrKJkwsKj44UAlSOD4+hI=;
-        b=d7r4l7Na8FJeJ/BgUKfyHxZF4kOAr524AMcWcrx7Wl+nAP2MT1cVwKm/K0x9jC+E9V
-         wjGCifTbwvuY97Xaq96AhpZHGRgLSPU3cdsjiiqXcQ7aW/+RmZcf82B+NWqq25RYCYDH
-         EkbZxXecCLTk5//7lSBZE5YfxTyslPWOt3vMrME4zrLiOeJ1eeuFoHg0YEGdi7d0ImDy
-         VNNmm0xrZIv5JnoW0JgPK4uHDhhlOqdaciDoHtcwPTvR3w8NQMWPAEdRVNuSkIOxGc76
-         O7g7EYBKtLjvfVeEw1Z42FjkUEqCMV+Kr1HT65HBvr86KoVlBJ+v713FQhFQq2UTZdSA
-         NSyg==
+        bh=ACPRkKaJUyZo8C7iIU0IKcYFjC5Ccd7f4ibW90mBkI0=;
+        b=r/j9BvpKD2+h7VVgkG6ZqnvbwTKfJUON8chtw0D9EhgYbrohwaxbHnSVC6DKEdMEoe
+         oUXUi8/KX/T7uSpfkE4CekO3PnJenQRoXtAgul+AqPvsi9ow75wBY9tjEYhz6nTdaqVv
+         4rG72mUD5zmnY1U56LkaTOIe79apgYVIYuaDdelF24YVNO12eYio7lJ/BvWIwgM/Dfjc
+         oTm1k2Zqjev5iWhdRYVG1o2lZQ0HszP/yehulR/satJVmmY7IK32kv4qPzMJgc5Ip3DC
+         c0kEPOPrsCds0d6wzib3xL7J3JBfcXPJbr9I1gFyucTNRsTuVHqP+okYgh+Uapw2Eot6
+         sUGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=FBdqDq0VMaj7zwangCHWNwKrKJkwsKj44UAlSOD4+hI=;
-        b=ATi+dgxlQnPXI7nH84R4/oDYVY8a71Ga7Ksek79tk6qebyCfAkMIt1pOIPvPGdLzoN
-         SsLKP/EoccJswc1wQWaFWVAw8BlDBttUGw252FoJg6wzk5i3l5+DspRuKM9zaXNSPhNj
-         yyBbxHBoMxYnsekHkrOHAIEy2gb+gKNtvfpu5jeOA77FCnIV67IVsLchyCeUhU4KEAUO
-         6zKyCEBVUxINDOqRxblIwwDIYpC+HVt09S39ey71MofeBlzDUUFZSSmLs8hPU2IscJEM
-         dxnhkg09nAHLpZA+ezzpV7FLG5yUvsPj+80WP8+2RsLofneDLexUiyfcd9WZ9nsh+sbR
-         dMwQ==
-X-Gm-Message-State: AGi0PuY2nGqsRIYJiICBZCxZ9OUsWdEWayNLDiEDoA4RJHlBylvjnanr
-        m5/mDBOV2G/AxTulFXCDCdVBmA==
-X-Google-Smtp-Source: APiQypLgAeie2x7ivDbbviyB5xQucMuPuY1GziJxdG1upZHceYt6LjmgNtHV4dxErjTY9cA3zY8Rdg==
-X-Received: by 2002:a17:90a:a591:: with SMTP id b17mr8308969pjq.90.1587758506525;
-        Fri, 24 Apr 2020 13:01:46 -0700 (PDT)
+        bh=ACPRkKaJUyZo8C7iIU0IKcYFjC5Ccd7f4ibW90mBkI0=;
+        b=QRZzlWMegubvNbLiEhdTA423DRyODOiBK/TJLnagqYA6aXUZ2QLnrYcoHXcOfSBe9a
+         FxdkrPL9EB8adIRGlJxs1jeoAy7ah9AFWDcHLeINEjQgxt7sOtdk/+DRBPyPwJQa67uu
+         aaBklpIFMMnwDxNhIJx75TWmDeILm2ALb8/cNuEl354Jit3vOCxq229gAjEeAS4fhisw
+         1aB8DkfmSWjPuD4gcpuE/1gElfKP8AzdUgIvYO1J3vnGdCAqtIKppkk0sXCWtLJbEVHL
+         Wm1ML6Zq06vhqwcInOlGHB7Z7I5PwSzyl5IJNOP//p1KervgLC66VlBaTNTToyUJJDY5
+         6Bog==
+X-Gm-Message-State: AGi0PuYNvzsf3G2sDy6qE3VP5Afin1ZuyPfir+bX4vIZx2liboC4mtaq
+        tmgmpYlGgQA378bLus8QmCGSmQ==
+X-Google-Smtp-Source: APiQypKfmGSdN3v0D8zcRUOZanqmk0b+MRKxMtXLO8IYCYWXEgvCIFclKnMbij53lOKaXmiqTriYqA==
+X-Received: by 2002:a17:90a:276a:: with SMTP id o97mr8248471pje.194.1587758507788;
+        Fri, 24 Apr 2020 13:01:47 -0700 (PDT)
 Received: from xps15.cg.shawcable.net (S0106002369de4dac.cg.shawcable.net. [68.147.8.254])
-        by smtp.gmail.com with ESMTPSA id o11sm5532224pgd.58.2020.04.24.13.01.45
+        by smtp.gmail.com with ESMTPSA id o11sm5532224pgd.58.2020.04.24.13.01.46
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Apr 2020 13:01:46 -0700 (PDT)
+        Fri, 24 Apr 2020 13:01:47 -0700 (PDT)
 From:   Mathieu Poirier <mathieu.poirier@linaro.org>
 To:     bjorn.andersson@linaro.org, ohad@wizery.com
 Cc:     loic.pallardy@st.com, arnaud.pouliquen@st.com, s-anna@ti.com,
         linux-remoteproc@vger.kernel.org, corbet@lwn.net,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v3 07/14] remoteproc: Introducting new start and stop functions
-Date:   Fri, 24 Apr 2020 14:01:28 -0600
-Message-Id: <20200424200135.28825-8-mathieu.poirier@linaro.org>
+Subject: [PATCH v3 08/14] remoteproc: Call core functions based on synchronisation flag
+Date:   Fri, 24 Apr 2020 14:01:29 -0600
+Message-Id: <20200424200135.28825-9-mathieu.poirier@linaro.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200424200135.28825-1-mathieu.poirier@linaro.org>
 References: <20200424200135.28825-1-mathieu.poirier@linaro.org>
@@ -65,74 +65,124 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add new functions to replace direct calling of rproc->ops->start() and
-rproc->ops->stop().  That way different behaviour can be played out
-when booting a remote processor or synchronising with it.
+Call the right core function based on whether we should synchronise
+with a remote processor or boot it from scratch.
 
 Signed-off-by: Mathieu Poirier <mathieu.poirier@linaro.org>
 ---
- drivers/remoteproc/remoteproc_core.c     |  6 +++---
- drivers/remoteproc/remoteproc_internal.h | 16 ++++++++++++++++
- 2 files changed, 19 insertions(+), 3 deletions(-)
+ drivers/remoteproc/remoteproc_internal.h | 50 ++++++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
 
-diff --git a/drivers/remoteproc/remoteproc_core.c b/drivers/remoteproc/remoteproc_core.c
-index 9de0e2b7ca2b..ef88d3e84bfb 100644
---- a/drivers/remoteproc/remoteproc_core.c
-+++ b/drivers/remoteproc/remoteproc_core.c
-@@ -1339,7 +1339,7 @@ static int rproc_start(struct rproc *rproc, const struct firmware *fw)
- 	}
- 
- 	/* power up the remote processor */
--	ret = rproc->ops->start(rproc);
-+	ret = rproc_start_device(rproc);
- 	if (ret) {
- 		dev_err(dev, "can't start rproc %s: %d\n", rproc->name, ret);
- 		goto unprepare_subdevices;
-@@ -1360,7 +1360,7 @@ static int rproc_start(struct rproc *rproc, const struct firmware *fw)
- 	return 0;
- 
- stop_rproc:
--	rproc->ops->stop(rproc);
-+	rproc_stop_device(rproc);
- unprepare_subdevices:
- 	rproc_unprepare_subdevices(rproc);
- reset_table_ptr:
-@@ -1493,7 +1493,7 @@ static int rproc_stop(struct rproc *rproc, bool crashed)
- 	rproc->table_ptr = rproc->cached_table;
- 
- 	/* power off the remote processor */
--	ret = rproc->ops->stop(rproc);
-+	ret = rproc_stop_device(rproc);
- 	if (ret) {
- 		dev_err(dev, "can't stop rproc: %d\n", ret);
- 		return ret;
 diff --git a/drivers/remoteproc/remoteproc_internal.h b/drivers/remoteproc/remoteproc_internal.h
-index 47b500e40dd9..dda7044c4b3e 100644
+index dda7044c4b3e..3985c084b184 100644
 --- a/drivers/remoteproc/remoteproc_internal.h
 +++ b/drivers/remoteproc/remoteproc_internal.h
-@@ -125,6 +125,22 @@ struct resource_table *rproc_find_loaded_rsc_table(struct rproc *rproc,
- 	return NULL;
- }
- 
-+static inline int rproc_start_device(struct rproc *rproc)
-+{
-+	if (rproc->ops && rproc->ops->start)
-+		return rproc->ops->start(rproc);
-+
-+	return 0;
-+}
-+
-+static inline int rproc_stop_device(struct rproc *rproc)
-+{
-+	if (rproc->ops && rproc->ops->stop)
-+		return rproc->ops->stop(rproc);
-+
-+	return 0;
-+}
-+
+@@ -72,6 +72,12 @@ static inline bool rproc_needs_syncing(struct rproc *rproc)
  static inline
- bool rproc_u64_fit_in_size_t(u64 val)
+ int rproc_fw_sanity_check(struct rproc *rproc, const struct firmware *fw)
  {
++	if (rproc_needs_syncing(rproc)) {
++		if (rproc->sync_ops && rproc->sync_ops->sanity_check)
++			return rproc->sync_ops->sanity_check(rproc, fw);
++		return 0;
++	}
++
+ 	if (rproc->ops && rproc->ops->sanity_check)
+ 		return rproc->ops->sanity_check(rproc, fw);
+ 
+@@ -81,6 +87,12 @@ int rproc_fw_sanity_check(struct rproc *rproc, const struct firmware *fw)
+ static inline
+ u64 rproc_get_boot_addr(struct rproc *rproc, const struct firmware *fw)
+ {
++	if (rproc_needs_syncing(rproc)) {
++		if (rproc->sync_ops && rproc->sync_ops->get_boot_addr)
++			return rproc->sync_ops->get_boot_addr(rproc, fw);
++		return 0;
++	}
++
+ 	if (rproc->ops && rproc->ops->get_boot_addr)
+ 		return rproc->ops->get_boot_addr(rproc, fw);
+ 
+@@ -90,6 +102,12 @@ u64 rproc_get_boot_addr(struct rproc *rproc, const struct firmware *fw)
+ static inline
+ int rproc_load_segments(struct rproc *rproc, const struct firmware *fw)
+ {
++	if (rproc_needs_syncing(rproc)) {
++		if (rproc->sync_ops && rproc->sync_ops->load)
++			return rproc->sync_ops->load(rproc, fw);
++		return 0;
++	}
++
+ 	if (rproc->ops && rproc->ops->load)
+ 		return rproc->ops->load(rproc, fw);
+ 
+@@ -98,6 +116,12 @@ int rproc_load_segments(struct rproc *rproc, const struct firmware *fw)
+ 
+ static inline int rproc_parse_fw(struct rproc *rproc, const struct firmware *fw)
+ {
++	if (rproc_needs_syncing(rproc)) {
++		if (rproc->sync_ops && rproc->sync_ops->parse_fw)
++			return rproc->sync_ops->parse_fw(rproc, fw);
++		return 0;
++	}
++
+ 	if (rproc->ops && rproc->ops->parse_fw)
+ 		return rproc->ops->parse_fw(rproc, fw);
+ 
+@@ -108,6 +132,13 @@ static inline
+ int rproc_handle_rsc(struct rproc *rproc, u32 rsc_type, void *rsc, int offset,
+ 		     int avail)
+ {
++	if (rproc_needs_syncing(rproc)) {
++		if (rproc->sync_ops && rproc->sync_ops->handle_rsc)
++			return rproc->sync_ops->handle_rsc(rproc, rsc_type,
++							   rsc, offset, avail);
++		return 0;
++	}
++
+ 	if (rproc->ops && rproc->ops->handle_rsc)
+ 		return rproc->ops->handle_rsc(rproc, rsc_type, rsc, offset,
+ 					      avail);
+@@ -119,6 +150,13 @@ static inline
+ struct resource_table *rproc_find_loaded_rsc_table(struct rproc *rproc,
+ 						   const struct firmware *fw)
+ {
++	if (rproc_needs_syncing(rproc)) {
++		if (rproc->sync_ops && rproc->sync_ops->find_loaded_rsc_table)
++			return rproc->sync_ops->find_loaded_rsc_table(rproc,
++								      fw);
++		return NULL;
++	}
++
+ 	if (rproc->ops && rproc->ops->find_loaded_rsc_table)
+ 		return rproc->ops->find_loaded_rsc_table(rproc, fw);
+ 
+@@ -127,6 +165,12 @@ struct resource_table *rproc_find_loaded_rsc_table(struct rproc *rproc,
+ 
+ static inline int rproc_start_device(struct rproc *rproc)
+ {
++	if (rproc_needs_syncing(rproc)) {
++		if (rproc->sync_ops && rproc->sync_ops->start)
++			return rproc->sync_ops->start(rproc);
++		return 0;
++	}
++
+ 	if (rproc->ops && rproc->ops->start)
+ 		return rproc->ops->start(rproc);
+ 
+@@ -135,6 +179,12 @@ static inline int rproc_start_device(struct rproc *rproc)
+ 
+ static inline int rproc_stop_device(struct rproc *rproc)
+ {
++	if (rproc_needs_syncing(rproc)) {
++		if (rproc->sync_ops && rproc->sync_ops->stop)
++			return rproc->sync_ops->stop(rproc);
++		return 0;
++	}
++
+ 	if (rproc->ops && rproc->ops->stop)
+ 		return rproc->ops->stop(rproc);
+ 
 -- 
 2.20.1
 
