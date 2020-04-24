@@ -2,116 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 13B751B7F90
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2020 22:02:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DAC891B8054
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Apr 2020 22:16:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729500AbgDXUCI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Apr 2020 16:02:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39314 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729501AbgDXUB4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Apr 2020 16:01:56 -0400
-Received: from mail-pg1-x543.google.com (mail-pg1-x543.google.com [IPv6:2607:f8b0:4864:20::543])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 693FDC09B04D
-        for <linux-doc@vger.kernel.org>; Fri, 24 Apr 2020 13:01:56 -0700 (PDT)
-Received: by mail-pg1-x543.google.com with SMTP id n16so5112873pgb.7
-        for <linux-doc@vger.kernel.org>; Fri, 24 Apr 2020 13:01:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=eewTcbuSLQRCFeSiAoYYX0+XB7BDJvlp2EU0H6eGjY4=;
-        b=HmiyDdp1jKoJRJ08HAwnGFrLp2BqyTXeVlxNgf+lTmmyTS8yOuVzEJl6XmSBvWkAS/
-         v/JwQlGdlmMeH1Xd2BZ21I5FEC/BV6wHAGRCVgAcB1lwzZxKnZIpNlLZKOWVsyGJbyoC
-         KtPcO3HbrrJWEEOr6guTSb+qPCw8jozVoSA/MrrMeuM6iNlHvF1jx3hXzlHEcdZn6hpj
-         5NatL9qSFglUvtASP78GysB2bsqBosJIQfd3d0g1fkisR7rgNut1AfGdF+fffrUNEz71
-         r6AvQvD/tP1ZkkRjfAX8kAyamS0lQCLChUKc9kr/vLDxhkPNWR10WS1BDEXYXm6d3zVP
-         kBBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=eewTcbuSLQRCFeSiAoYYX0+XB7BDJvlp2EU0H6eGjY4=;
-        b=medv4eCUoEXx1FYgLC9Auhgot+JWs1YfMgEoByv7R2plhr5T0qQOxglYphxRQfdvWo
-         BfLr047Kdz6EjN5la1d0trXXKu/6RegS5J293Jd5LkTaPnhe20F36/yP2uHm0bPQv3a+
-         JkHjtzJjRPxTHhLwplpZsYdq5fVjEgsS3PMttMrk+y4xFNGx9GvDOyTxO6C59avv/slj
-         ZngSp9mO1zbFCn77fb4J6sw4Ekon99cu03GY6jSughefA25bFV6EZ12fbFTP6eJYg+lL
-         lYr7CEUOBAICUY9bXw6LaGqmbFoNzv9esLcF7acuGvtu9k6A6BFqDo6xBDg2Dt6YQ6MW
-         be2g==
-X-Gm-Message-State: AGi0PuYGHg1/BG4+eJz4qk+ZM7IXQwd3fuLTvndOjwoxdPdKT9nlBAMQ
-        HvtN1FpG6UNi1OzOMdjP/4wCvQ==
-X-Google-Smtp-Source: APiQypKrHJCG5PxycsdeNY28g4yilDbLzXrizVM7n33WA5yRahh5tr3biAmtw3GGMoaVwRFNakd1jA==
-X-Received: by 2002:a62:2b06:: with SMTP id r6mr11126923pfr.249.1587758515825;
-        Fri, 24 Apr 2020 13:01:55 -0700 (PDT)
-Received: from xps15.cg.shawcable.net (S0106002369de4dac.cg.shawcable.net. [68.147.8.254])
-        by smtp.gmail.com with ESMTPSA id o11sm5532224pgd.58.2020.04.24.13.01.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 24 Apr 2020 13:01:55 -0700 (PDT)
-From:   Mathieu Poirier <mathieu.poirier@linaro.org>
-To:     bjorn.andersson@linaro.org, ohad@wizery.com
-Cc:     loic.pallardy@st.com, arnaud.pouliquen@st.com, s-anna@ti.com,
-        linux-remoteproc@vger.kernel.org, corbet@lwn.net,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v3 14/14] remoteproc: Expose synchronisation flags via debugfs
-Date:   Fri, 24 Apr 2020 14:01:35 -0600
-Message-Id: <20200424200135.28825-15-mathieu.poirier@linaro.org>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200424200135.28825-1-mathieu.poirier@linaro.org>
-References: <20200424200135.28825-1-mathieu.poirier@linaro.org>
+        id S1727031AbgDXUQC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Apr 2020 16:16:02 -0400
+Received: from us-smtp-1.mimecast.com ([205.139.110.61]:35665 "EHLO
+        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1727059AbgDXUQC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Apr 2020 16:16:02 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1587759360;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=mijZ0deIMv+7N52HZ2/oeSJuKxO51O9zwfYwlf/bvUU=;
+        b=LM9epuzexSiF2slJwrZ5gfMuU0H/glRthazJd0nGhYhaIgZIsPEPea2A4fTf80io5qe1Gi
+        7zVlsZRm7Wqx9pGqCvOOLu6/1gTqDP3EO6c7lE2zBW95myXZhei/ju8dLwGGq4DHKQIhx/
+        drkGRjmMEmmsu7tpXp/lQ5hzrI5SCB8=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-342-D4Qq4ngMOX6rlbMg-FH6uw-1; Fri, 24 Apr 2020 16:15:56 -0400
+X-MC-Unique: D4Qq4ngMOX6rlbMg-FH6uw-1
+Received: from smtp.corp.redhat.com (int-mx07.intmail.prod.int.phx2.redhat.com [10.5.11.22])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id A496D107BEFE;
+        Fri, 24 Apr 2020 20:15:53 +0000 (UTC)
+Received: from w520.home (ovpn-112-162.phx2.redhat.com [10.3.112.162])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id C2F531002380;
+        Fri, 24 Apr 2020 20:15:51 +0000 (UTC)
+Date:   Fri, 24 Apr 2020 14:15:48 -0600
+From:   Alex Williamson <alex.williamson@redhat.com>
+To:     John Hubbard <jhubbard@nvidia.com>
+Cc:     LKML <linux-kernel@vger.kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Christoph Hellwig <hch@infradead.org>,
+        "Dan Williams" <dan.j.williams@intel.com>,
+        Dave Chinner <david@fromorbit.com>,
+        "Ira Weiny" <ira.weiny@intel.com>, Jan Kara <jack@suse.cz>,
+        Jason Gunthorpe <jgg@ziepe.ca>,
+        Jonathan Corbet <corbet@lwn.net>,
+        =?UTF-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
+        "Kirill A . Shutemov" <kirill@shutemov.name>,
+        Michal Hocko <mhocko@suse.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Shuah Khan <shuah@kernel.org>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Matthew Wilcox <willy@infradead.org>,
+        <linux-doc@vger.kernel.org>, <linux-fsdevel@vger.kernel.org>,
+        <linux-kselftest@vger.kernel.org>, <linux-rdma@vger.kernel.org>,
+        <linux-mm@kvack.org>,
+        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
+Subject: Re: [regression] Re: [PATCH v6 06/12] mm/gup: track FOLL_PIN pages
+Message-ID: <20200424141548.5afdd2bb@w520.home>
+In-Reply-To: <5b901542-d949-8d7e-89c7-f8d5ee20f6e9@nvidia.com>
+References: <20200211001536.1027652-1-jhubbard@nvidia.com>
+        <20200211001536.1027652-7-jhubbard@nvidia.com>
+        <20200424121846.5ee2685f@w520.home>
+        <5b901542-d949-8d7e-89c7-f8d5ee20f6e9@nvidia.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.22
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a debugfs entry that reflects the value of the current
-synchronisation flags used by the remoteproc core.
+On Fri, 24 Apr 2020 12:20:03 -0700
+John Hubbard <jhubbard@nvidia.com> wrote:
 
-Signed-off-by: Mathieu Poirier <mathieu.poirier@linaro.org>
----
- drivers/remoteproc/remoteproc_debugfs.c | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
+> On 2020-04-24 11:18, Alex Williamson wrote:
+> ...
+> > Hi John,
+> > 
+> > I'm seeing a regression bisected back to this commit (3faa52c03f44
+> > mm/gup: track FOLL_PIN pages).  I've attached some vfio-pci test code
+> > that reproduces this by mmap'ing a page of MMIO space of a device and
+> > then tries to map that through the IOMMU, so this should be attempting
+> > a gup/pin of a PFNMAP page.  Previously this failed gracefully (-EFAULT),
+> > but now results in:  
+> 
+> 
+> Hi Alex,
+> 
+> Thanks for this report, and especially for source code to test it, 
+> seeing as how I can't immediately spot the problem just from the crash
+> data so far.  I'll get set up and attempt a repro.
+> 
+> Actually this looks like it should be relatively easier than the usual 
+> sort of "oops, we leaked a pin_user_pages() or unpin_user_pages() call,
+> good luck finding which one" report that I fear the most. :) This one 
+> looks more like a crash that happens directly, when calling into the 
+> pin_user_pages_remote() code. Which should be a lot easier to solve...
+> 
+> btw, if you are set up for it, it would be nice to know what source file 
+> and line number corresponds to the RIP (get_pfnblock_flags_mask+0x22) 
+> below. But if not, no problem, because I've likely got to do the repro 
+> in any case.
 
-diff --git a/drivers/remoteproc/remoteproc_debugfs.c b/drivers/remoteproc/remoteproc_debugfs.c
-index 732770e92b99..3dde24e62cd8 100644
---- a/drivers/remoteproc/remoteproc_debugfs.c
-+++ b/drivers/remoteproc/remoteproc_debugfs.c
-@@ -291,6 +291,25 @@ static int rproc_carveouts_show(struct seq_file *seq, void *p)
- 
- DEFINE_SHOW_ATTRIBUTE(rproc_carveouts);
- 
-+ /* Expose synchronisation states via debugfs */
-+static int rproc_sync_flags_show(struct seq_file *seq, void *p)
-+{
-+	struct rproc *rproc = seq->private;
-+
-+	seq_printf(seq, "Sync with rproc: %s\n",
-+		   rproc->sync_with_rproc ? "true" : "false");
-+	seq_printf(seq, "On init: %s\n",
-+		   rproc->sync_flags.on_init ? "true" : "false");
-+	seq_printf(seq, "After stop: %s\n",
-+		   rproc->sync_flags.after_stop ? "true" : "false");
-+	seq_printf(seq, "After crash: %s\n",
-+		   rproc->sync_flags.after_crash ? "true" : "false");
-+
-+	return 0;
-+}
-+
-+DEFINE_SHOW_ATTRIBUTE(rproc_sync_flags);
-+
- void rproc_remove_trace_file(struct dentry *tfile)
- {
- 	debugfs_remove(tfile);
-@@ -337,6 +356,8 @@ void rproc_create_debug_dir(struct rproc *rproc)
- 			    rproc, &rproc_rsc_table_fops);
- 	debugfs_create_file("carveout_memories", 0400, rproc->dbg_dir,
- 			    rproc, &rproc_carveouts_fops);
-+	debugfs_create_file("sync_flags", 0400, rproc->dbg_dir,
-+			    rproc, &rproc_sync_flags_fops);
- }
- 
- void __init rproc_init_debugfs(void)
--- 
-2.20.1
+Hey John,
+
+TBH I'm feeling a lot less confident about this bisect.  This was
+readily reproducible to me on a clean tree a bit ago, but now it
+eludes me.  Let me go back and figure out what's going on before you
+spend any more time on it.  Thanks,
+
+Alex
 
