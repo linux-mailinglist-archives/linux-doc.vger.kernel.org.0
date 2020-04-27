@@ -2,74 +2,225 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BF7601BB0B8
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2020 23:46:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 158641BB148
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 00:05:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726204AbgD0Vqe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 Apr 2020 17:46:34 -0400
-Received: from smtprelay0169.hostedemail.com ([216.40.44.169]:52642 "EHLO
-        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726182AbgD0Vqe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 Apr 2020 17:46:34 -0400
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
-        by smtprelay02.hostedemail.com (Postfix) with ESMTP id DEC1752AD;
-        Mon, 27 Apr 2020 21:46:32 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:334:355:368:369:379:599:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1540:1593:1594:1711:1730:1747:1777:1792:2393:2538:2559:2562:2693:2828:3138:3139:3140:3141:3142:3352:3622:3865:3867:3868:3871:3872:3874:4250:4321:5007:6117:6119:6120:7875:10004:10400:11232:11657:11658:11914:12043:12291:12297:12679:12683:12740:12760:12895:13019:13069:13076:13311:13357:13439:14181:14659:14721:21080:21451:21627:21939:30054:30060:30067:30089:30090:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:1,LUA_SUMMARY:none
-X-HE-Tag: anger90_903895eead545
-X-Filterd-Recvd-Size: 2218
-Received: from XPS-9350.home (unknown [47.151.136.130])
-        (Authenticated sender: joe@perches.com)
-        by omf14.hostedemail.com (Postfix) with ESMTPA;
-        Mon, 27 Apr 2020 21:46:30 +0000 (UTC)
-Message-ID: <e9f534ef6c90d98d9cae0cbf133c8d83ecdce790.camel@perches.com>
-Subject: Re: [PATCH v3.1] docs: filesystems: convert configfs.txt to ReST
-From:   Joe Perches <joe@perches.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Joel Becker <jlbec@evilplan.org>,
-        Christoph Hellwig <hch@lst.de>, Jan Kara <jack@suse.cz>,
-        Stefan Hajnoczi <stefanha@redhat.com>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        linux-usb@vger.kernel.org
-Date:   Mon, 27 Apr 2020 14:46:29 -0700
-In-Reply-To: <5f005c5a846b3fd4382a24166a1ba736ff697b86.1588022310.git.mchehab+huawei@kernel.org>
-References: <c2424ec2ad4d735751434ff7f52144c44aa02d5a.1588021877.git.mchehab+huawei@kernel.org>
-         <5f005c5a846b3fd4382a24166a1ba736ff697b86.1588022310.git.mchehab+huawei@kernel.org>
-Content-Type: text/plain; charset="ISO-8859-1"
-User-Agent: Evolution 3.36.1-2 
+        id S1726547AbgD0WFT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 Apr 2020 18:05:19 -0400
+Received: from mail.kernel.org ([198.145.29.99]:47572 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726204AbgD0WB6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 27 Apr 2020 18:01:58 -0400
+Received: from mail.kernel.org (ip5f5ad5c5.dynamic.kabel-deutschland.de [95.90.213.197])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 49E132082E;
+        Mon, 27 Apr 2020 22:01:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1588024916;
+        bh=6hICUJOm73tC7mybOqnlsNRDxZD2tv+mEL2WRMC0A40=;
+        h=From:To:Cc:Subject:Date:From;
+        b=WYg28824GL3DwqDlANPhGsSSLnLCt+nOUarYdI+8iK8EnAlq74+LHuJNW6rd/NOH5
+         oTUvcy5e4wOKxSC4GuXp+IABhcvwc1W2XSXkjunBIJ9G3botBuK/jslIHLS2Uid7wJ
+         H5Wm1uLFOHUzoyYKgayq/3HfAxgkHCPKSiRuDjIs=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1jTBp4-000Inf-FO; Tue, 28 Apr 2020 00:01:54 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        netdev@vger.kernel.org, linux-hams@vger.kernel.org,
+        intel-wired-lan@lists.osuosl.org,
+        linux-decnet-user@lists.sourceforge.net,
+        ceph-devel@vger.kernel.org, bpf@vger.kernel.org,
+        linux-atm-general@lists.sourceforge.net, lvs-devel@vger.kernel.org
+Subject: [PATCH 00/38] net: manually convert files to ReST format - part 1
+Date:   Tue, 28 Apr 2020 00:01:15 +0200
+Message-Id: <cover.1588024424.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 2020-04-27 at 23:43 +0200, Mauro Carvalho Chehab wrote:
-> - Add a SPDX header;
-> - Adjust document and section titles;
-> - Use copyright symbol;
-> - Some whitespace fixes and new line breaks;
-> - Mark literal blocks as such;
-> - Add it to filesystems/index.rst.
-> 
-> Also, as this file is alone on its own dir, and it doesn't
-> seem too likely that other documents will follow it, let's
-> move it to the filesystems/ root documentation dir.
-[]
-> diff --git a/Documentation/filesystems/configfs/configfs.txt b/Documentation/filesystems/configfs.rst
-[]
-> +++ b/Documentation/filesystems/configfs.rst
-> @@ -1,5 +1,6 @@
-> -
-> -configfs - Userspace-driven kernel object configuration.
-> +=======================================================
-> +Configfs - Userspace-driven Kernel Object Configuration
+There are very few documents upstream that aren't converted upstream.
 
-trivia: likely this "Configfs" shouldn't be capitalized.
+This series convert part of the networking text files into ReST.
+It is part of a bigger set of patches, which were split on parts,
+in order to make reviewing task easier.
 
+The full series (including those ones) are at:
+
+	https://git.linuxtv.org/mchehab/experimental.git/log/?h=net-docs
+
+And the documents, converted to HTML via the building system
+are at:
+
+	https://www.infradead.org/~mchehab/kernel_docs/networking/
+
+
+Mauro Carvalho Chehab (38):
+  docs: networking: convert caif files to ReST
+  docs: networking: convert 6pack.txt to ReST
+  docs: networking: convert altera_tse.txt to ReST
+  docs: networking: convert arcnet-hardware.txt to ReST
+  docs: networking: convert arcnet.txt to ReST
+  docs: networking: convert atm.txt to ReST
+  docs: networking: convert ax25.txt to ReST
+  docs: networking: convert baycom.txt to ReST
+  docs: networking: convert bonding.txt to ReST
+  docs: networking: convert cdc_mbim.txt to ReST
+  docs: networking: convert cops.txt to ReST
+  docs: networking: convert cxacru.txt to ReST
+  docs: networking: convert dccp.txt to ReST
+  docs: networking: convert dctcp.txt to ReST
+  docs: networking: convert decnet.txt to ReST
+  docs: networking: convert defza.txt to ReST
+  docs: networking: convert dns_resolver.txt to ReST
+  docs: networking: convert driver.txt to ReST
+  docs: networking: convert eql.txt to ReST
+  docs: networking: convert fib_trie.txt to ReST
+  docs: networking: convert filter.txt to ReST
+  docs: networking: convert fore200e.txt to ReST
+  docs: networking: convert framerelay.txt to ReST
+  docs: networking: convert generic-hdlc.txt to ReST
+  docs: networking: convert generic_netlink.txt to ReST
+  docs: networking: convert gen_stats.txt to ReST
+  docs: networking: convert gtp.txt to ReST
+  docs: networking: convert hinic.txt to ReST
+  docs: networking: convert ila.txt to ReST
+  docs: networking: convert ipddp.txt to ReST
+  docs: networking: convert ip_dynaddr.txt to ReST
+  docs: networking: convert iphase.txt to ReST
+  docs: networking: convert ipsec.txt to ReST
+  docs: networking: convert ip-sysctl.txt to ReST
+  docs: networking: convert ipv6.txt to ReST
+  docs: networking: convert ipvlan.txt to ReST
+  docs: networking: convert ipvs-sysctl.txt to ReST
+  docs: networking: convert kcm.txt to ReST
+
+ .../admin-guide/kernel-parameters.txt         |   10 +-
+ Documentation/admin-guide/sysctl/net.rst      |    4 +-
+ Documentation/bpf/index.rst                   |    4 +-
+ .../networking/{6pack.txt => 6pack.rst}       |   46 +-
+ .../{altera_tse.txt => altera_tse.rst}        |   87 +-
+ ...rcnet-hardware.txt => arcnet-hardware.rst} | 2169 +++++++++--------
+ .../networking/{arcnet.txt => arcnet.rst}     |  348 +--
+ Documentation/networking/{atm.txt => atm.rst} |    6 +
+ .../networking/{ax25.txt => ax25.rst}         |    6 +
+ .../networking/{baycom.txt => baycom.rst}     |  110 +-
+ .../networking/{bonding.txt => bonding.rst}   | 1275 +++++-----
+ Documentation/networking/caif/caif.rst        |    2 -
+ Documentation/networking/caif/index.rst       |   13 +
+ .../caif/{Linux-CAIF.txt => linux_caif.rst}   |   54 +-
+ Documentation/networking/caif/spi_porting.rst |  229 ++
+ Documentation/networking/caif/spi_porting.txt |  208 --
+ .../networking/{cdc_mbim.txt => cdc_mbim.rst} |   76 +-
+ Documentation/networking/cops.rst             |   80 +
+ Documentation/networking/cops.txt             |   63 -
+ .../networking/{cxacru.txt => cxacru.rst}     |   86 +-
+ .../networking/{dccp.txt => dccp.rst}         |   39 +-
+ .../networking/{dctcp.txt => dctcp.rst}       |   14 +-
+ .../networking/{decnet.txt => decnet.rst}     |   77 +-
+ .../networking/{defza.txt => defza.rst}       |    8 +-
+ .../networking/device_drivers/intel/e100.rst  |    2 +-
+ .../networking/device_drivers/intel/ixgb.rst  |    2 +-
+ .../{dns_resolver.txt => dns_resolver.rst}    |   52 +-
+ .../networking/{driver.txt => driver.rst}     |   22 +-
+ Documentation/networking/{eql.txt => eql.rst} |  445 ++--
+ .../networking/{fib_trie.txt => fib_trie.rst} |   16 +-
+ .../networking/{filter.txt => filter.rst}     |  850 ++++---
+ .../networking/{fore200e.txt => fore200e.rst} |    8 +-
+ .../{framerelay.txt => framerelay.rst}        |   21 +-
+ .../{gen_stats.txt => gen_stats.rst}          |   98 +-
+ .../{generic-hdlc.txt => generic-hdlc.rst}    |   86 +-
+ ...eneric_netlink.txt => generic_netlink.rst} |    6 +
+ Documentation/networking/{gtp.txt => gtp.rst} |   95 +-
+ .../networking/{hinic.txt => hinic.rst}       |    5 +-
+ Documentation/networking/{ila.txt => ila.rst} |   81 +-
+ Documentation/networking/index.rst            |   38 +
+ .../{ip-sysctl.txt => ip-sysctl.rst}          |  829 ++++---
+ .../{ip_dynaddr.txt => ip_dynaddr.rst}        |   29 +-
+ .../networking/{ipddp.txt => ipddp.rst}       |   13 +-
+ .../networking/{iphase.txt => iphase.rst}     |  185 +-
+ .../networking/{ipsec.txt => ipsec.rst}       |   14 +-
+ .../networking/{ipv6.txt => ipv6.rst}         |    8 +-
+ .../networking/{ipvlan.txt => ipvlan.rst}     |  159 +-
+ .../{ipvs-sysctl.txt => ipvs-sysctl.rst}      |  180 +-
+ Documentation/networking/{kcm.txt => kcm.rst} |   83 +-
+ Documentation/networking/ltpc.txt             |    2 +-
+ Documentation/networking/packet_mmap.txt      |    2 +-
+ Documentation/networking/snmp_counter.rst     |    2 +-
+ MAINTAINERS                                   |    8 +-
+ drivers/atm/Kconfig                           |    4 +-
+ drivers/net/Kconfig                           |    4 +-
+ drivers/net/appletalk/Kconfig                 |    6 +-
+ drivers/net/arcnet/Kconfig                    |    6 +-
+ drivers/net/caif/Kconfig                      |    2 +-
+ drivers/net/hamradio/Kconfig                  |   10 +-
+ drivers/net/wan/Kconfig                       |    4 +-
+ net/Kconfig                                   |    2 +-
+ net/atm/Kconfig                               |    2 +-
+ net/ax25/Kconfig                              |    6 +-
+ net/ceph/Kconfig                              |    2 +-
+ net/core/gen_stats.c                          |    2 +-
+ net/decnet/Kconfig                            |    4 +-
+ net/dns_resolver/Kconfig                      |    2 +-
+ net/dns_resolver/dns_key.c                    |    2 +-
+ net/dns_resolver/dns_query.c                  |    2 +-
+ net/ipv4/Kconfig                              |    2 +-
+ net/ipv4/icmp.c                               |    2 +-
+ net/ipv6/Kconfig                              |    2 +-
+ tools/bpf/bpf_asm.c                           |    2 +-
+ tools/bpf/bpf_dbg.c                           |    2 +-
+ 74 files changed, 4656 insertions(+), 3769 deletions(-)
+ rename Documentation/networking/{6pack.txt => 6pack.rst} (90%)
+ rename Documentation/networking/{altera_tse.txt => altera_tse.rst} (85%)
+ rename Documentation/networking/{arcnet-hardware.txt => arcnet-hardware.rst} (66%)
+ rename Documentation/networking/{arcnet.txt => arcnet.rst} (76%)
+ rename Documentation/networking/{atm.txt => atm.rst} (89%)
+ rename Documentation/networking/{ax25.txt => ax25.rst} (91%)
+ rename Documentation/networking/{baycom.txt => baycom.rst} (58%)
+ rename Documentation/networking/{bonding.txt => bonding.rst} (75%)
+ create mode 100644 Documentation/networking/caif/index.rst
+ rename Documentation/networking/caif/{Linux-CAIF.txt => linux_caif.rst} (90%)
+ create mode 100644 Documentation/networking/caif/spi_porting.rst
+ delete mode 100644 Documentation/networking/caif/spi_porting.txt
+ rename Documentation/networking/{cdc_mbim.txt => cdc_mbim.rst} (88%)
+ create mode 100644 Documentation/networking/cops.rst
+ delete mode 100644 Documentation/networking/cops.txt
+ rename Documentation/networking/{cxacru.txt => cxacru.rst} (66%)
+ rename Documentation/networking/{dccp.txt => dccp.rst} (94%)
+ rename Documentation/networking/{dctcp.txt => dctcp.rst} (89%)
+ rename Documentation/networking/{decnet.txt => decnet.rst} (87%)
+ rename Documentation/networking/{defza.txt => defza.rst} (91%)
+ rename Documentation/networking/{dns_resolver.txt => dns_resolver.rst} (89%)
+ rename Documentation/networking/{driver.txt => driver.rst} (85%)
+ rename Documentation/networking/{eql.txt => eql.rst} (62%)
+ rename Documentation/networking/{fib_trie.txt => fib_trie.rst} (96%)
+ rename Documentation/networking/{filter.txt => filter.rst} (77%)
+ rename Documentation/networking/{fore200e.txt => fore200e.rst} (94%)
+ rename Documentation/networking/{framerelay.txt => framerelay.rst} (93%)
+ rename Documentation/networking/{gen_stats.txt => gen_stats.rst} (60%)
+ rename Documentation/networking/{generic-hdlc.txt => generic-hdlc.rst} (75%)
+ rename Documentation/networking/{generic_netlink.txt => generic_netlink.rst} (64%)
+ rename Documentation/networking/{gtp.txt => gtp.rst} (79%)
+ rename Documentation/networking/{hinic.txt => hinic.rst} (97%)
+ rename Documentation/networking/{ila.txt => ila.rst} (82%)
+ rename Documentation/networking/{ip-sysctl.txt => ip-sysctl.rst} (83%)
+ rename Documentation/networking/{ip_dynaddr.txt => ip_dynaddr.rst} (65%)
+ rename Documentation/networking/{ipddp.txt => ipddp.rst} (89%)
+ rename Documentation/networking/{iphase.txt => iphase.rst} (50%)
+ rename Documentation/networking/{ipsec.txt => ipsec.rst} (90%)
+ rename Documentation/networking/{ipv6.txt => ipv6.rst} (93%)
+ rename Documentation/networking/{ipvlan.txt => ipvlan.rst} (54%)
+ rename Documentation/networking/{ipvs-sysctl.txt => ipvs-sysctl.rst} (62%)
+ rename Documentation/networking/{kcm.txt => kcm.rst} (84%)
+
+-- 
+2.25.4
 
 
