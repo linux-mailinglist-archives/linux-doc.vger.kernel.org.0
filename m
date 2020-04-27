@@ -2,37 +2,37 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2BC961BB059
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2020 23:19:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3C05C1BB057
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2020 23:19:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726344AbgD0VTP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 Apr 2020 17:19:15 -0400
-Received: from mail.kernel.org ([198.145.29.99]:34030 "EHLO mail.kernel.org"
+        id S1726257AbgD0VTK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 Apr 2020 17:19:10 -0400
+Received: from mail.kernel.org ([198.145.29.99]:34128 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726312AbgD0VRZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S1726344AbgD0VRZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Mon, 27 Apr 2020 17:17:25 -0400
 Received: from mail.kernel.org (ip5f5ad5c5.dynamic.kabel-deutschland.de [95.90.213.197])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 2AD5E218AC;
+        by mail.kernel.org (Postfix) with ESMTPSA id 5324721BE5;
         Mon, 27 Apr 2020 21:17:24 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1588022244;
-        bh=+ieEmoJoXhOnArmJeGUFVxajW87wrXdn+E+vuFCpxGI=;
+        bh=lgU5kQJKALcK/8kZC7aKJ8WIXmn4TvXevTBP41xPg8w=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=QJ2u3R4STvxIg5cL337/EbIQ7o/8H7scS6k+Y6AA5dvI2bBUtXhbfbhAQu1CzfRlh
-         swVBcdR2sMs/3mU5Wrbopc3URsF2niZjWnbx1h3wcXsAaWMe5D8ZDudpVThu8r+oee
-         9aBDyVgpG9fW5ad5KR5VgAtwKmnAtTJ+sUOT4rCY=
+        b=Q4J4cCfqihrVC7CO2CYq5CGeorm9gdyNVZjW2EqBq6dhxHWbCcgtXbvnJvLCmHo7s
+         wjxoubYj/WumY37FO8Z899gILQvTGYGXxeWdytLjOMBeRxhSLxt019JV6n9gaboeK6
+         dRykYy7lWYEnSk7DK9GrHaF9c6d5j9OldKPo1NkM=
 Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
         (envelope-from <mchehab@kernel.org>)
-        id 1jTB7y-000HkE-D7; Mon, 27 Apr 2020 23:17:22 +0200
+        id 1jTB7y-000HkO-IL; Mon, 27 Apr 2020 23:17:22 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH v3 08/29] docs: filesystems: convert automount-support.txt to ReST
-Date:   Mon, 27 Apr 2020 23:17:00 +0200
-Message-Id: <ba7e2f2bf9aa2c7096772f5e7e8e609cb5fce07c.1588021877.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v3 10/29] docs: filesystems: convert devpts.txt to ReST
+Date:   Mon, 27 Apr 2020 23:17:02 +0200
+Message-Id: <4ac8f3a7edd4d817acf0d173ead7ef74fe010c6c.1588021877.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.25.4
 In-Reply-To: <cover.1588021877.git.mchehab+huawei@kernel.org>
 References: <cover.1588021877.git.mchehab+huawei@kernel.org>
@@ -45,103 +45,119 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 - Add a SPDX header;
 - Add a document title;
-- Adjust section titles;
+- Some whitespace fixes and new line breaks;
 - Mark literal blocks as such;
 - Add it to filesystems/index.rst.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- ...ount-support.txt => automount-support.rst} | 23 +++++++++++--------
- Documentation/filesystems/index.rst           |  2 ++
- 2 files changed, 16 insertions(+), 9 deletions(-)
- rename Documentation/filesystems/{automount-support.txt => automount-support.rst} (92%)
+ Documentation/admin-guide/sysctl/kernel.rst |  2 +-
+ Documentation/filesystems/devpts.rst        | 36 +++++++++++++++++++++
+ Documentation/filesystems/devpts.txt        | 26 ---------------
+ Documentation/filesystems/index.rst         |  1 +
+ 4 files changed, 38 insertions(+), 27 deletions(-)
+ create mode 100644 Documentation/filesystems/devpts.rst
+ delete mode 100644 Documentation/filesystems/devpts.txt
 
-diff --git a/Documentation/filesystems/automount-support.txt b/Documentation/filesystems/automount-support.rst
-similarity index 92%
-rename from Documentation/filesystems/automount-support.txt
-rename to Documentation/filesystems/automount-support.rst
-index 7d9f82607562..430f0b40796b 100644
---- a/Documentation/filesystems/automount-support.txt
-+++ b/Documentation/filesystems/automount-support.rst
-@@ -1,3 +1,10 @@
+diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
+index fce1c059fbab..474cabfac468 100644
+--- a/Documentation/admin-guide/sysctl/kernel.rst
++++ b/Documentation/admin-guide/sysctl/kernel.rst
+@@ -921,7 +921,7 @@ this sysctl interface anymore.
+ pty
+ ===
+ 
+-See Documentation/filesystems/devpts.txt.
++See Documentation/filesystems/devpts.rst.
+ 
+ 
+ randomize_va_space
+diff --git a/Documentation/filesystems/devpts.rst b/Documentation/filesystems/devpts.rst
+new file mode 100644
+index 000000000000..a03248ddfb4c
+--- /dev/null
++++ b/Documentation/filesystems/devpts.rst
+@@ -0,0 +1,36 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
-+=================
-+Automount Support
-+=================
++=====================
++The Devpts Filesystem
++=====================
 +
++Each mount of the devpts filesystem is now distinct such that ptys
++and their indicies allocated in one mount are independent from ptys
++and their indicies in all other mounts.
 +
- Support is available for filesystems that wish to do automounting
- support (such as kAFS which can be found in fs/afs/ and NFS in
- fs/nfs/). This facility includes allowing in-kernel mounts to be
-@@ -5,13 +12,12 @@ performed and mountpoint degradation to be requested. The latter can
- also be requested by userspace.
- 
- 
--======================
--IN-KERNEL AUTOMOUNTING
-+In-Kernel Automounting
- ======================
- 
- See section "Mount Traps" of  Documentation/filesystems/autofs.rst
- 
--Then from userspace, you can just do something like:
-+Then from userspace, you can just do something like::
- 
- 	[root@andromeda root]# mount -t afs \#root.afs. /afs
- 	[root@andromeda root]# ls /afs
-@@ -21,7 +27,7 @@ Then from userspace, you can just do something like:
- 	[root@andromeda root]# ls /afs/cambridge/afsdoc/
- 	ChangeLog  html  LICENSE  pdf  RELNOTES-1.2.2
- 
--And then if you look in the mountpoint catalogue, you'll see something like:
-+And then if you look in the mountpoint catalogue, you'll see something like::
- 
- 	[root@andromeda root]# cat /proc/mounts
- 	...
-@@ -30,8 +36,7 @@ And then if you look in the mountpoint catalogue, you'll see something like:
- 	#afsdoc. /afs/cambridge.redhat.com/afsdoc afs rw 0 0
- 
- 
--===========================
--AUTOMATIC MOUNTPOINT EXPIRY
-+Automatic Mountpoint Expiry
- ===========================
- 
- Automatic expiration of mountpoints is easy, provided you've mounted the
-@@ -43,7 +48,8 @@ To do expiration, you need to follow these steps:
-      hung.
- 
-  (2) When a new mountpoint is created in the ->d_automount method, add
--     the mnt to the list using mnt_set_expiry()
-+     the mnt to the list using mnt_set_expiry()::
++All mounts of the devpts filesystem now create a ``/dev/pts/ptmx`` node
++with permissions ``0000``.
 +
-              mnt_set_expiry(newmnt, &afs_vfsmounts);
- 
-  (3) When you want mountpoints to be expired, call mark_mounts_for_expiry()
-@@ -70,8 +76,7 @@ and the copies of those that are on an expiration list will be added to the
- same expiration list.
- 
- 
--=======================
--USERSPACE DRIVEN EXPIRY
-+Userspace Driven Expiry
- =======================
- 
- As an alternative, it is possible for userspace to request expiry of any
++To retain backwards compatibility the a ptmx device node (aka any node
++created with ``mknod name c 5 2``) when opened will look for an instance
++of devpts under the name ``pts`` in the same directory as the ptmx device
++node.
++
++As an option instead of placing a ``/dev/ptmx`` device node at ``/dev/ptmx``
++it is possible to place a symlink to ``/dev/pts/ptmx`` at ``/dev/ptmx`` or
++to bind mount ``/dev/ptx/ptmx`` to ``/dev/ptmx``.  If you opt for using
++the devpts filesystem in this manner devpts should be mounted with
++the ``ptmxmode=0666``, or ``chmod 0666 /dev/pts/ptmx`` should be called.
++
++Total count of pty pairs in all instances is limited by sysctls::
++
++    kernel.pty.max = 4096	- global limit
++    kernel.pty.reserve = 1024	- reserved for filesystems mounted from the initial mount namespace
++    kernel.pty.nr		- current count of ptys
++
++Per-instance limit could be set by adding mount option ``max=<count>``.
++
++This feature was added in kernel 3.4 together with
++``sysctl kernel.pty.reserve``.
++
++In kernels older than 3.4 sysctl ``kernel.pty.max`` works as per-instance limit.
+diff --git a/Documentation/filesystems/devpts.txt b/Documentation/filesystems/devpts.txt
+deleted file mode 100644
+index 9f94fe276dea..000000000000
+--- a/Documentation/filesystems/devpts.txt
++++ /dev/null
+@@ -1,26 +0,0 @@
+-Each mount of the devpts filesystem is now distinct such that ptys
+-and their indicies allocated in one mount are independent from ptys
+-and their indicies in all other mounts.
+-
+-All mounts of the devpts filesystem now create a /dev/pts/ptmx node
+-with permissions 0000.
+-
+-To retain backwards compatibility the a ptmx device node (aka any node
+-created with "mknod name c 5 2") when opened will look for an instance
+-of devpts under the name "pts" in the same directory as the ptmx device
+-node.
+-
+-As an option instead of placing a /dev/ptmx device node at /dev/ptmx
+-it is possible to place a symlink to /dev/pts/ptmx at /dev/ptmx or
+-to bind mount /dev/ptx/ptmx to /dev/ptmx.  If you opt for using
+-the devpts filesystem in this manner devpts should be mounted with
+-the ptmxmode=0666, or chmod 0666 /dev/pts/ptmx should be called.
+-
+-Total count of pty pairs in all instances is limited by sysctls:
+-kernel.pty.max = 4096		- global limit
+-kernel.pty.reserve = 1024	- reserved for filesystems mounted from the initial mount namespace
+-kernel.pty.nr			- current count of ptys
+-
+-Per-instance limit could be set by adding mount option "max=<count>".
+-This feature was added in kernel 3.4 together with sysctl kernel.pty.reserve.
+-In kernels older than 3.4 sysctl kernel.pty.max works as per-instance limit.
 diff --git a/Documentation/filesystems/index.rst b/Documentation/filesystems/index.rst
-index 2ad8a207523e..71aba402aa2c 100644
+index 9a7021bcb91f..10207f158a3e 100644
 --- a/Documentation/filesystems/index.rst
 +++ b/Documentation/filesystems/index.rst
-@@ -25,6 +25,8 @@ algorithms work.
+@@ -24,6 +24,7 @@ algorithms work.
+    splice
     locking
     directory-locking
++   devpts
  
-+   automount-support
-+
-    caching/index
+    automount-support
  
-    porting
 -- 
 2.25.4
 
