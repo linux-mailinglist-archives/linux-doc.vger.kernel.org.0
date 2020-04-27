@@ -2,40 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E8A481B9708
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2020 08:09:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 293051B981E
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2020 09:07:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726242AbgD0GJq convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Mon, 27 Apr 2020 02:09:46 -0400
-Received: from ex2016-01.tversu.net ([82.179.130.111]:22309 "EHLO
-        mail.tversu.net" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726221AbgD0GJq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 Apr 2020 02:09:46 -0400
-X-Greylist: delayed 908 seconds by postgrey-1.27 at vger.kernel.org; Mon, 27 Apr 2020 02:09:45 EDT
-Received: from [192.168.8.101] (197.211.61.167) by ex2013mbx01.tversu.net
- (192.168.21.12) with Microsoft SMTP Server (TLS) id 15.0.1263.5; Mon, 27 Apr
- 2020 08:54:32 +0300
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726349AbgD0HHQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 Apr 2020 03:07:16 -0400
+Received: from mx.kolabnow.com ([95.128.36.40]:4584 "EHLO mx.kolabnow.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726429AbgD0HHQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 27 Apr 2020 03:07:16 -0400
+Received: from localhost (unknown [127.0.0.1])
+        by ext-mx-out003.mykolab.com (Postfix) with ESMTP id 0C83F40410;
+        Mon, 27 Apr 2020 09:07:13 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
+        content-type:content-type:content-transfer-encoding:mime-version
+        :references:in-reply-to:message-id:date:date:subject:subject
+        :from:from:received:received:received; s=dkim20160331; t=
+        1587971232; x=1589785633; bh=KOul0JhjsNsr5gVqZ2Ua7WlRGFklfSdIDR9
+        jODchJFE=; b=ULGukOzHhDCV80cEhmCx+XSBPQkI/Ml0WDCtm0lbBdb02mUlE8O
+        OR0rLJszpKkrBT7Lye5wPBf7ni7ZPUL4HPzN3CFBOPpaMrSBNBNEMiGLRjHkA6IX
+        UOHsa+LkQa74thf4sLaVctZXv4zQxur/xPNCxCUJXsvkgzLFlcfjBG+dJv8MQy+z
+        DX2FGRAMYzBHjSLY1qc/cJOnMfkTvRnZusqAmA8m9Ppg+7bHhjuV7gvSPsnGpoRr
+        10mvkNDLgFCE05iaiB38Y24yhNQWihhO4kDD3nxPOenUOo4pHpI3CBILlFN3Qk4v
+        MIeRPeJ1B9vA1Zojb5P+tu+ACOHsNaJFYwTCnNVmg5BVn/x9Djby5SMrv+P5Vyhf
+        w8FRo8yx2Vsr7Jy/i8B0TAQ3niQ8331O5zPrr0bax00bTSlvbRu2fX6FcixmPQNO
+        0AmiOzt6ACllU2vRk1IRFR6jDlheUBYbZhZ4jXDO4zp2stChL0wE5d/Lnj5U/PFc
+        Uq5PvYbFJyC+jL9vHBWnXxSQgemrgHkbhHe/amLpTX4gwtTNAwlPpQF7CsEUAn3d
+        23hndfjDt/XOiiB+r/CCpX60+UKC6jLgUifaKrk89x2SLmOS5OsTsGifB1t7nx2N
+        cYVFl1MpzukL90vZJjIWzyj+ZfPQ9RFtXdzzmOzwLZPZF9MFKwBCe6oc=
+X-Virus-Scanned: amavisd-new at mykolab.com
+X-Spam-Flag: NO
+X-Spam-Score: -1.9
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
+        tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
+Received: from mx.kolabnow.com ([127.0.0.1])
+        by localhost (ext-mx-out003.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id TOWl0PSb2oEO; Mon, 27 Apr 2020 09:07:12 +0200 (CEST)
+Received: from int-mx001.mykolab.com (unknown [10.9.13.1])
+        by ext-mx-out003.mykolab.com (Postfix) with ESMTPS id 81C7340381;
+        Mon, 27 Apr 2020 09:07:12 +0200 (CEST)
+Received: from ext-subm003.mykolab.com (unknown [10.9.6.3])
+        by int-mx001.mykolab.com (Postfix) with ESMTPS id 2C72D30B0;
+        Mon, 27 Apr 2020 09:07:12 +0200 (CEST)
+From:   Federico Vaga <federico.vaga@vaga.pv.it>
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [INFO] Documentation/RCU ReST format
+Date:   Mon, 27 Apr 2020 09:07:10 +0200
+Message-ID: <2030968.IMgURSL4OB@harkonnen>
+In-Reply-To: <918903f9-2cfc-b368-98a1-d81337d7fdf5@infradead.org>
+References: <2106522.Q2ZRUUiV7S@harkonnen> <918903f9-2cfc-b368-98a1-d81337d7fdf5@infradead.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Vorschlag..
-To:     Recipients <Ignatev.DI@tversu.ru>
-From:   Yi Huiman <Ignatev.DI@tversu.ru>
-Date:   Mon, 27 Apr 2020 06:54:32 +0100
-Reply-To: <info@huiman.cf>
-Message-ID: <2f2d6d45528546e19fc2a8b21f88c94b@ex2013mbx01.tversu.net>
-X-Originating-IP: [197.211.61.167]
-X-ClientProxiedBy: ex2013cas01.tversu.net (82.179.131.67) To
- ex2013mbx01.tversu.net (192.168.21.12)
-X-KSE-AntiSpam-Interceptor-Info: trusted connection
-X-KSE-ServerInfo: ex2013mbx01.tversu.net, 9
-X-KSE-Antivirus-Interceptor-Info: scan successful
-X-KSE-Antivirus-Info: Clean
-X-KSE-Dlp-Interceptor-Info: license violation
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-I have a Proposal for you
+Thanks I missed that
+
+On Monday, April 27, 2020 12:36:01 AM CEST Randy Dunlap wrote:
+> On 4/26/20 3:23 PM, Federico Vaga wrote:
+> > Hi,
+> > 
+> > is there a reason for not converting the .txt files in Documentation/RCU?
+> 
+> Mauro sent this patch series last week for RCU.
+> 
+> https://lore.kernel.org/linux-doc/20200421175818.GS17661@paulmck-ThinkPad-P7
+> 2/T/#m711283ef658e4c2c5acd4dcca0279f3532211cd6
+
+
+
+
