@@ -2,78 +2,137 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 293051B981E
-	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2020 09:07:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1563E1B996F
+	for <lists+linux-doc@lfdr.de>; Mon, 27 Apr 2020 10:10:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726349AbgD0HHQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 Apr 2020 03:07:16 -0400
-Received: from mx.kolabnow.com ([95.128.36.40]:4584 "EHLO mx.kolabnow.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726429AbgD0HHQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 27 Apr 2020 03:07:16 -0400
-Received: from localhost (unknown [127.0.0.1])
-        by ext-mx-out003.mykolab.com (Postfix) with ESMTP id 0C83F40410;
-        Mon, 27 Apr 2020 09:07:13 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
-        content-type:content-type:content-transfer-encoding:mime-version
-        :references:in-reply-to:message-id:date:date:subject:subject
-        :from:from:received:received:received; s=dkim20160331; t=
-        1587971232; x=1589785633; bh=KOul0JhjsNsr5gVqZ2Ua7WlRGFklfSdIDR9
-        jODchJFE=; b=ULGukOzHhDCV80cEhmCx+XSBPQkI/Ml0WDCtm0lbBdb02mUlE8O
-        OR0rLJszpKkrBT7Lye5wPBf7ni7ZPUL4HPzN3CFBOPpaMrSBNBNEMiGLRjHkA6IX
-        UOHsa+LkQa74thf4sLaVctZXv4zQxur/xPNCxCUJXsvkgzLFlcfjBG+dJv8MQy+z
-        DX2FGRAMYzBHjSLY1qc/cJOnMfkTvRnZusqAmA8m9Ppg+7bHhjuV7gvSPsnGpoRr
-        10mvkNDLgFCE05iaiB38Y24yhNQWihhO4kDD3nxPOenUOo4pHpI3CBILlFN3Qk4v
-        MIeRPeJ1B9vA1Zojb5P+tu+ACOHsNaJFYwTCnNVmg5BVn/x9Djby5SMrv+P5Vyhf
-        w8FRo8yx2Vsr7Jy/i8B0TAQ3niQ8331O5zPrr0bax00bTSlvbRu2fX6FcixmPQNO
-        0AmiOzt6ACllU2vRk1IRFR6jDlheUBYbZhZ4jXDO4zp2stChL0wE5d/Lnj5U/PFc
-        Uq5PvYbFJyC+jL9vHBWnXxSQgemrgHkbhHe/amLpTX4gwtTNAwlPpQF7CsEUAn3d
-        23hndfjDt/XOiiB+r/CCpX60+UKC6jLgUifaKrk89x2SLmOS5OsTsGifB1t7nx2N
-        cYVFl1MpzukL90vZJjIWzyj+ZfPQ9RFtXdzzmOzwLZPZF9MFKwBCe6oc=
-X-Virus-Scanned: amavisd-new at mykolab.com
-X-Spam-Flag: NO
-X-Spam-Score: -1.9
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
-        tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
-Received: from mx.kolabnow.com ([127.0.0.1])
-        by localhost (ext-mx-out003.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id TOWl0PSb2oEO; Mon, 27 Apr 2020 09:07:12 +0200 (CEST)
-Received: from int-mx001.mykolab.com (unknown [10.9.13.1])
-        by ext-mx-out003.mykolab.com (Postfix) with ESMTPS id 81C7340381;
-        Mon, 27 Apr 2020 09:07:12 +0200 (CEST)
-Received: from ext-subm003.mykolab.com (unknown [10.9.6.3])
-        by int-mx001.mykolab.com (Postfix) with ESMTPS id 2C72D30B0;
-        Mon, 27 Apr 2020 09:07:12 +0200 (CEST)
-From:   Federico Vaga <federico.vaga@vaga.pv.it>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: Re: [INFO] Documentation/RCU ReST format
-Date:   Mon, 27 Apr 2020 09:07:10 +0200
-Message-ID: <2030968.IMgURSL4OB@harkonnen>
-In-Reply-To: <918903f9-2cfc-b368-98a1-d81337d7fdf5@infradead.org>
-References: <2106522.Q2ZRUUiV7S@harkonnen> <918903f9-2cfc-b368-98a1-d81337d7fdf5@infradead.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+        id S1726790AbgD0IKn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 Apr 2020 04:10:43 -0400
+Received: from userp2130.oracle.com ([156.151.31.86]:58904 "EHLO
+        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726003AbgD0IKn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 27 Apr 2020 04:10:43 -0400
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+        by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03R896uw078562;
+        Mon, 27 Apr 2020 08:10:29 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id; s=corp-2020-01-29;
+ bh=V3dV4HI5/iBpkFy0uWsc3l23+oYkKV87jXoYnULnNi8=;
+ b=IVeRpo0myI/VzgHl/s1tcU8crZNOCsO3OPPm0GXeGOggql2mDJKyACe/6nSoewt9mKoa
+ 3zSSX3PghqlC3dCi018qHus8qkrXH7zuPuY1ADaqJFoAYx10c+LRsEQCf/aSDEQbaE8e
+ CVW29U3bmDPH6Jpid0z5Bvxk1l+aLaeAA8xBrNYlZr+7pVjcWijEYSi42eFiodWGn4tR
+ oZ3EW+b5EAMzBt86YxtAn+E5Oc4i9qst9366IXipYC2MJZMksvYc6mhxLqUQVxX1970U
+ xVzOerfo7hVE1+U7OtYVUUKf+mMJR8qKU0rIX0j5uyUtnrBWTpn3CVwd5fb7A/3o7aTD Qw== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+        by userp2130.oracle.com with ESMTP id 30mcmqw2eh-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 27 Apr 2020 08:10:29 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+        by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 03R871Lu172217;
+        Mon, 27 Apr 2020 08:08:28 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+        by aserp3020.oracle.com with ESMTP id 30my08nbq5-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 27 Apr 2020 08:08:28 +0000
+Received: from abhmp0015.oracle.com (abhmp0015.oracle.com [141.146.116.21])
+        by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 03R88Ie3018689;
+        Mon, 27 Apr 2020 08:08:18 GMT
+Received: from mihai.localdomain (/10.153.73.25)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Mon, 27 Apr 2020 01:08:18 -0700
+From:   Mihai Carabas <mihai.carabas@oracle.com>
+To:     linux-kernel@vger.kernel.org
+Cc:     Mihai Carabas <mihai.carabas@oracle.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [PATCH RFC] Microcode late loading feature identification
+Date:   Mon, 27 Apr 2020 10:27:56 +0300
+Message-Id: <1587972479-10971-1-git-send-email-mihai.carabas@oracle.com>
+X-Mailer: git-send-email 1.8.3.1
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9603 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 malwarescore=0 spamscore=0
+ suspectscore=0 adultscore=0 mlxlogscore=999 bulkscore=0 phishscore=0
+ mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2003020000 definitions=main-2004270072
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9603 signatures=668686
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 spamscore=0 clxscore=1015
+ priorityscore=1501 suspectscore=0 impostorscore=0 adultscore=0
+ malwarescore=0 bulkscore=0 lowpriorityscore=0 mlxlogscore=999 mlxscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2004270072
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Thanks I missed that
+This RFC patch set aims to provide a way to identify the modifications
+brought in by the new microcode updated at runtime (aka microcode late
+loading). This was debated last year and this patch set implements
+point #1 from Thomas Gleixner's idea:
+https://lore.kernel.org/lkml/alpine.DEB.2.21.1909062237580.1902@nanos.tec.linutronix.de/
 
-On Monday, April 27, 2020 12:36:01 AM CEST Randy Dunlap wrote:
-> On 4/26/20 3:23 PM, Federico Vaga wrote:
-> > Hi,
-> > 
-> > is there a reason for not converting the .txt files in Documentation/RCU?
-> 
-> Mauro sent this patch series last week for RCU.
-> 
-> https://lore.kernel.org/linux-doc/20200421175818.GS17661@paulmck-ThinkPad-P7
-> 2/T/#m711283ef658e4c2c5acd4dcca0279f3532211cd6
+This patch set has the following patches:
+
+- patch 1 is introducing a new metadata file that comes with the microcode
+(provided by the CPU manufacture) that describes what modifications are
+done by loading the new microcode
+
+- patch 2 parses the metadata file and is verifying it against kernel
+policy. In this patch, as an RFC, as a kernel policy, it was imposed
+the rule of not allowing to remove any feature. If so, it won't be
+loaded a new microcode. The policy can be further extended and describe
+in different ways
+
+- patch 3 adds the documentation of the metadata file format
 
 
+How to test:
 
+- place metadata file in /lib/firmware/intel-ucode/ together with the
+microcode blob:
+
+[root@ovs108 ~]# ls -l /lib/firmware/intel-ucode
+total 96
+-rw-r--r--.   1 root root 34816 Mar 11 00:27 06-55-04
+-rw-r--r--.   1 root root    84 Mar 25 03:13 06-55-04.metadata
+
+The microcode blob can be taken from the microcode_ctl package.
+
+- after installing the kernel and rebooting the machine run "dracut -f
+--no-early-microcode" to create an initramfs without the microcode (and
+avoid early loading)
+
+- reboot
+
+- after rebooting issue: echo 1 > /sys/devices/system/cpu/microcode/reload
+
+[root@ovs108 ~]# cat /lib/firmware/intel-ucode/06-55-04.metadata
+m - 0x00000122
+c + 0x00000007 0x00 0x00000000 0x021cbfbb 0x00000000 0x00000000
+
+[root@ovs108 ~]# echo 1 > /sys/devices/system/cpu/microcode/reload
+[root@ovs108 ~]# dmesg | tail -2
+[ 1285.729841] microcode: Kernel policy does not allow to remove MSR: 122
+[ 1285.737144] microcode: kernel does not support the new microcode: intel-ucode/06-55-04
+
+[root@ovs108 ~]# cat /lib/firmware/intel-ucode/06-55-04.metadata
+m + 0x00000122
+c + 0x00000007 0x00 0x00000000 0x021cbfbb 0x00000000 0x00000000
+[root@ovs108 ~]# echo 1 > /sys/devices/system/cpu/microcode/reload
+[root@ovs108 ~]# dmesg | tail -10
+[ 1220.212415] microcode: updated to revision 0x2000065, date = 2019-09-05
+[ 1220.212645] microcode: Reload completed, microcode revision: 0x2000065
+
+Mihai Carabas (3):
+  x86: microcode: intel: read microcode metadata file
+  x86: microcode: intel: process microcode metadata
+  Documentation: x86: microcode: add description for metadata file
+
+ Documentation/x86/microcode.rst       | 36 +++++++++++++
+ arch/x86/kernel/cpu/microcode/intel.c | 97 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 133 insertions(+)
+
+-- 
+1.8.3.1
 
