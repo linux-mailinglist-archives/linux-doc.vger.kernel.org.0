@@ -2,278 +2,376 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 74B8F1BB0E5
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 00:02:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C25571BB339
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 03:04:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726450AbgD0WCD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 27 Apr 2020 18:02:03 -0400
-Received: from mail.kernel.org ([198.145.29.99]:48162 "EHLO mail.kernel.org"
+        id S1726419AbgD1BEW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 27 Apr 2020 21:04:22 -0400
+Received: from mga11.intel.com ([192.55.52.93]:23033 "EHLO mga11.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726406AbgD0WCC (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 27 Apr 2020 18:02:02 -0400
-Received: from mail.kernel.org (ip5f5ad5c5.dynamic.kabel-deutschland.de [95.90.213.197])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 423C122314;
-        Mon, 27 Apr 2020 22:01:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1588024917;
-        bh=XWSRuvHlX2fDgbkytqilwkTrzeheEmYKB9PQNJEdzhs=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=c5Egj1akShGt9xE8DPZxFqyn3yA2/dE1bGjgLKzuQIae/FgRLt78xuWGvYdwchGW3
-         EipQ/bR0CxnYKPhBfil3GakiuaLJpa+w1xQhAGybbAwyIbVA0kih9F3d2ts8k8vOn5
-         ikrsusiRxDPgXOkDBpp4hL2SDZ6pWFRhionKsQ0U=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1jTBp5-000Iqg-G5; Tue, 28 Apr 2020 00:01:55 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
-        Andrii Nakryiko <andriin@fb.com>,
-        John Fastabend <john.fastabend@gmail.com>,
-        KP Singh <kpsingh@chromium.org>, netdev@vger.kernel.org,
-        bpf@vger.kernel.org
-Subject: [PATCH 38/38] docs: networking: convert kcm.txt to ReST
-Date:   Tue, 28 Apr 2020 00:01:53 +0200
-Message-Id: <2658edf4e16bc11fb9b3d7bc25ab8cda2f24f88a.1588024424.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.25.4
-In-Reply-To: <cover.1588024424.git.mchehab+huawei@kernel.org>
-References: <cover.1588024424.git.mchehab+huawei@kernel.org>
+        id S1726526AbgD1BEV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 27 Apr 2020 21:04:21 -0400
+IronPort-SDR: PJEKi80KgElesi5dRPfieqJ4JbzR27D2PayM+9G7UZEsE6XsvHH5sLp3Dwt4GkV+GzxKvx+E9p
+ kSgccc2KWvow==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Apr 2020 18:04:21 -0700
+IronPort-SDR: /OgPjKQLqGW0dazR7C5+g5qKwUQ9gEtbYMc94xEtbrMextw6H04uF6g4BJIQtESaIAoBC9Pz0h
+ ospD7fj3JFAg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,325,1583222400"; 
+   d="scan'208";a="246339926"
+Received: from joy-optiplex-7040.sh.intel.com (HELO joy-OptiPlex-7040) ([10.239.13.16])
+  by orsmga007.jf.intel.com with ESMTP; 27 Apr 2020 18:04:12 -0700
+Date:   Mon, 27 Apr 2020 20:54:29 -0400
+From:   Yan Zhao <yan.y.zhao@intel.com>
+To:     "Dr. David Alan Gilbert" <dgilbert@redhat.com>
+Cc:     "Tian, Kevin" <kevin.tian@intel.com>,
+        Alex Williamson <alex.williamson@redhat.com>,
+        "cjia@nvidia.com" <cjia@nvidia.com>,
+        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "libvir-list@redhat.com" <libvir-list@redhat.com>,
+        "Zhengxiao.zx@alibaba-inc.com" <Zhengxiao.zx@alibaba-inc.com>,
+        "shuangtai.tst@alibaba-inc.com" <shuangtai.tst@alibaba-inc.com>,
+        "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+        "kwankhede@nvidia.com" <kwankhede@nvidia.com>,
+        "eauger@redhat.com" <eauger@redhat.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "Liu, Yi L" <yi.l.liu@intel.com>,
+        "eskultet@redhat.com" <eskultet@redhat.com>,
+        "Yang, Ziye" <ziye.yang@intel.com>,
+        "mlevitsk@redhat.com" <mlevitsk@redhat.com>,
+        "pasic@linux.ibm.com" <pasic@linux.ibm.com>,
+        "aik@ozlabs.ru" <aik@ozlabs.ru>,
+        "felipe@nutanix.com" <felipe@nutanix.com>,
+        "Ken.Xue@amd.com" <Ken.Xue@amd.com>,
+        "Zeng, Xin" <xin.zeng@intel.com>,
+        "zhenyuw@linux.intel.com" <zhenyuw@linux.intel.com>,
+        "dinechin@redhat.com" <dinechin@redhat.com>,
+        "intel-gvt-dev@lists.freedesktop.org" 
+        <intel-gvt-dev@lists.freedesktop.org>,
+        "Liu, Changpeng" <changpeng.liu@intel.com>,
+        "berrange@redhat.com" <berrange@redhat.com>,
+        Cornelia Huck <cohuck@redhat.com>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "Wang, Zhi A" <zhi.a.wang@intel.com>,
+        "jonathan.davies@nutanix.com" <jonathan.davies@nutanix.com>,
+        "He, Shaopeng" <shaopeng.he@intel.com>
+Subject: Re: [PATCH v5 0/4] introduction of migration_version attribute for
+ VFIO live migration
+Message-ID: <20200428005429.GJ12879@joy-OptiPlex-7040>
+Reply-To: Yan Zhao <yan.y.zhao@intel.com>
+References: <20200417095202.GD16688@joy-OptiPlex-7040>
+ <20200417132457.45d91fe3.cohuck@redhat.com>
+ <20200420012457.GE16688@joy-OptiPlex-7040>
+ <20200420165600.4951ae82@w520.home>
+ <20200421023718.GA12111@joy-OptiPlex-7040>
+ <AADFC41AFE54684AB9EE6CBC0274A5D19D86DF06@SHSMSX104.ccr.corp.intel.com>
+ <20200422073628.GA12879@joy-OptiPlex-7040>
+ <20200424191049.GU3106@work-vm>
+ <20200426013628.GC12879@joy-OptiPlex-7040>
+ <20200427153743.GK2923@work-vm>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200427153743.GK2923@work-vm>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-- add SPDX header;
-- adjust titles and chapters, adding proper markups;
-- mark code blocks and literals as such;
-- adjust identation, whitespaces and blank lines;
-- add to networking/index.rst.
+On Mon, Apr 27, 2020 at 11:37:43PM +0800, Dr. David Alan Gilbert wrote:
+> * Yan Zhao (yan.y.zhao@intel.com) wrote:
+> > On Sat, Apr 25, 2020 at 03:10:49AM +0800, Dr. David Alan Gilbert wrote:
+> > > * Yan Zhao (yan.y.zhao@intel.com) wrote:
+> > > > On Tue, Apr 21, 2020 at 08:08:49PM +0800, Tian, Kevin wrote:
+> > > > > > From: Yan Zhao
+> > > > > > Sent: Tuesday, April 21, 2020 10:37 AM
+> > > > > > 
+> > > > > > On Tue, Apr 21, 2020 at 06:56:00AM +0800, Alex Williamson wrote:
+> > > > > > > On Sun, 19 Apr 2020 21:24:57 -0400
+> > > > > > > Yan Zhao <yan.y.zhao@intel.com> wrote:
+> > > > > > >
+> > > > > > > > On Fri, Apr 17, 2020 at 07:24:57PM +0800, Cornelia Huck wrote:
+> > > > > > > > > On Fri, 17 Apr 2020 05:52:02 -0400
+> > > > > > > > > Yan Zhao <yan.y.zhao@intel.com> wrote:
+> > > > > > > > >
+> > > > > > > > > > On Fri, Apr 17, 2020 at 04:44:50PM +0800, Cornelia Huck wrote:
+> > > > > > > > > > > On Mon, 13 Apr 2020 01:52:01 -0400
+> > > > > > > > > > > Yan Zhao <yan.y.zhao@intel.com> wrote:
+> > > > > > > > > > >
+> > > > > > > > > > > > This patchset introduces a migration_version attribute under sysfs
+> > > > > > of VFIO
+> > > > > > > > > > > > Mediated devices.
+> > > > > > > > > > > >
+> > > > > > > > > > > > This migration_version attribute is used to check migration
+> > > > > > compatibility
+> > > > > > > > > > > > between two mdev devices.
+> > > > > > > > > > > >
+> > > > > > > > > > > > Currently, it has two locations:
+> > > > > > > > > > > > (1) under mdev_type node,
+> > > > > > > > > > > >     which can be used even before device creation, but only for
+> > > > > > mdev
+> > > > > > > > > > > >     devices of the same mdev type.
+> > > > > > > > > > > > (2) under mdev device node,
+> > > > > > > > > > > >     which can only be used after the mdev devices are created, but
+> > > > > > the src
+> > > > > > > > > > > >     and target mdev devices are not necessarily be of the same
+> > > > > > mdev type
+> > > > > > > > > > > > (The second location is newly added in v5, in order to keep
+> > > > > > consistent
+> > > > > > > > > > > > with the migration_version node for migratable pass-though
+> > > > > > devices)
+> > > > > > > > > > >
+> > > > > > > > > > > What is the relationship between those two attributes?
+> > > > > > > > > > >
+> > > > > > > > > > (1) is for mdev devices specifically, and (2) is provided to keep the
+> > > > > > same
+> > > > > > > > > > sysfs interface as with non-mdev cases. so (2) is for both mdev
+> > > > > > devices and
+> > > > > > > > > > non-mdev devices.
+> > > > > > > > > >
+> > > > > > > > > > in future, if we enable vfio-pci vendor ops, (i.e. a non-mdev device
+> > > > > > > > > > is binding to vfio-pci, but is able to register migration region and do
+> > > > > > > > > > migration transactions from a vendor provided affiliate driver),
+> > > > > > > > > > the vendor driver would export (2) directly, under device node.
+> > > > > > > > > > It is not able to provide (1) as there're no mdev devices involved.
+> > > > > > > > >
+> > > > > > > > > Ok, creating an alternate attribute for non-mdev devices makes sense.
+> > > > > > > > > However, wouldn't that rather be a case (3)? The change here only
+> > > > > > > > > refers to mdev devices.
+> > > > > > > > >
+> > > > > > > > as you pointed below, (3) and (2) serve the same purpose.
+> > > > > > > > and I think a possible usage is to migrate between a non-mdev device and
+> > > > > > > > an mdev device. so I think it's better for them both to use (2) rather
+> > > > > > > > than creating (3).
+> > > > > > >
+> > > > > > > An mdev type is meant to define a software compatible interface, so in
+> > > > > > > the case of mdev->mdev migration, doesn't migrating to a different type
+> > > > > > > fail the most basic of compatibility tests that we expect userspace to
+> > > > > > > perform?  IOW, if two mdev types are migration compatible, it seems a
+> > > > > > > prerequisite to that is that they provide the same software interface,
+> > > > > > > which means they should be the same mdev type.
+> > > > > > >
+> > > > > > > In the hybrid cases of mdev->phys or phys->mdev, how does a
+> > > > > > management
+> > > > > > > tool begin to even guess what might be compatible?  Are we expecting
+> > > > > > > libvirt to probe ever device with this attribute in the system?  Is
+> > > > > > > there going to be a new class hierarchy created to enumerate all
+> > > > > > > possible migrate-able devices?
+> > > > > > >
+> > > > > > yes, management tool needs to guess and test migration compatible
+> > > > > > between two devices. But I think it's not the problem only for
+> > > > > > mdev->phys or phys->mdev. even for mdev->mdev, management tool needs
+> > > > > > to
+> > > > > > first assume that the two mdevs have the same type of parent devices
+> > > > > > (e.g.their pciids are equal). otherwise, it's still enumerating
+> > > > > > possibilities.
+> > > > > > 
+> > > > > > on the other hand, for two mdevs,
+> > > > > > mdev1 from pdev1, its mdev_type is 1/2 of pdev1;
+> > > > > > mdev2 from pdev2, its mdev_type is 1/4 of pdev2;
+> > > > > > if pdev2 is exactly 2 times of pdev1, why not allow migration between
+> > > > > > mdev1 <-> mdev2.
+> > > > > 
+> > > > > How could the manage tool figure out that 1/2 of pdev1 is equivalent 
+> > > > > to 1/4 of pdev2? If we really want to allow such thing happen, the best
+> > > > > choice is to report the same mdev type on both pdev1 and pdev2.
+> > > > I think that's exactly the value of this migration_version interface.
+> > > > the management tool can take advantage of this interface to know if two
+> > > > devices are migration compatible, no matter they are mdevs, non-mdevs,
+> > > > or mix.
+> > > > 
+> > > > as I know, (please correct me if not right), current libvirt still
+> > > > requires manually generating mdev devices, and it just duplicates src vm
+> > > > configuration to the target vm.
+> > > > for libvirt, currently it's always phys->phys and mdev->mdev (and of the
+> > > > same mdev type).
+> > > > But it does not justify that hybrid cases should not be allowed. otherwise,
+> > > > why do we need to introduce this migration_version interface and leave
+> > > > the judgement of migration compatibility to vendor driver? why not simply
+> > > > set the criteria to something like "pciids of parent devices are equal,
+> > > > and mdev types are equal" ?
+> > > > 
+> > > > 
+> > > > > btw mdev<->phys just brings trouble to upper stack as Alex pointed out. 
+> > > > could you help me understand why it will bring trouble to upper stack?
+> > > > 
+> > > > I think it just needs to read src migration_version under src dev node,
+> > > > and test it in target migration version under target dev node. 
+> > > > 
+> > > > after all, through this interface we just help the upper layer
+> > > > knowing available options through reading and testing, and they decide
+> > > > to use it or not.
+> > > > 
+> > > > > Can we simplify the requirement by allowing only mdev<->mdev and 
+> > > > > phys<->phys migration? If an customer does want to migrate between a 
+> > > > > mdev and phys, he could wrap physical device into a wrapped mdev 
+> > > > > instance (with the same type as the source mdev) instead of using vendor 
+> > > > > ops. Doing so does add some burden but if mdev<->phys is not dominant 
+> > > > > usage then such tradeoff might be worthywhile...
+> > > > >
+> > > > If the interfaces for phys<->phys and mdev<->mdev are consistent, it makes no
+> > > > difference to phys<->mdev, right?
+> > > > I think the vendor string for a mdev device is something like:
+> > > > "Parent PCIID + mdev type + software version", and
+> > > > that for a phys device is something like:
+> > > > "PCIID + software version".
+> > > > as long as we don't migrate between devices from different vendors, it's
+> > > > easy for vendor driver to tell if a phys device is migration compatible
+> > > > to a mdev device according it supports it or not.
+> > > 
+> > > It surprises me that the PCIID matching is a requirement; I'd assumed
+> > > with this clever mdev name setup that you could migrate between two
+> > > different models in a series, or to a newer model, as long as they
+> > > both supported the same mdev view.
+> > > 
+> > hi Dave
+> > the migration_version string is transparent to userspace, and is
+> > completely defined by vendor driver.
+> > I put it there just as an example of how vendor driver may implement it.
+> > e.g.
+> > the src migration_version string is "src PCIID + src software version", 
+> > then when this string is write to target migration_version node,
+> > the vendor driver in the target device will compare it with its own
+> > device info and software version.
+> > If different models are allowed, the write just succeeds even
+> > PCIIDs in src and target are different.
+> > 
+> > so, it is the vendor driver to define whether two devices are able to
+> > migrate, no matter their PCIIDs, mdev types, software versions..., which
+> > provides vendor driver full flexibility.
+> > 
+> > do you think it's good?
+> 
+> Yeh that's OK; I guess it's going to need to have a big table in their
+> with all the PCIIDs in.
+> The alternative would be to abstract it a little; e.g. to say it's
+> an Intel-gpu-core-v4  and then it would be less worried about the exact
+> clock speed etc - but yes you might be right htat PCIIDs might be best
+> for checking for quirks.
+>
+glad that you are agreed with it:)
+I think the vendor driver still can choose a way to abstract a little
+(e.g. Intel-gpu-core-v4...) if they think it's better. In that case, the
+migration_string would be something like "Intel-gpu-core-v4 + instance
+number + software version".
+IOW, they can choose anything they think appropriate to identify migration
+compatibility of a device.
+But Alex is right, we have to prevent namespace overlapping. So I think
+we need to ensure src and target devices are from the same vendors.
+or, any other ideas?
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/networking/index.rst            |  1 +
- Documentation/networking/{kcm.txt => kcm.rst} | 83 ++++++++++---------
- 2 files changed, 45 insertions(+), 39 deletions(-)
- rename Documentation/networking/{kcm.txt => kcm.rst} (84%)
+Thanks
+Yan
 
-diff --git a/Documentation/networking/index.rst b/Documentation/networking/index.rst
-index bbd4e0041457..e1ff08b94d90 100644
---- a/Documentation/networking/index.rst
-+++ b/Documentation/networking/index.rst
-@@ -73,6 +73,7 @@ Contents:
-    ipv6
-    ipvlan
-    ipvs-sysctl
-+   kcm
- 
- .. only::  subproject and html
- 
-diff --git a/Documentation/networking/kcm.txt b/Documentation/networking/kcm.rst
-similarity index 84%
-rename from Documentation/networking/kcm.txt
-rename to Documentation/networking/kcm.rst
-index b773a5278ac4..db0f5560ac1c 100644
---- a/Documentation/networking/kcm.txt
-+++ b/Documentation/networking/kcm.rst
-@@ -1,35 +1,38 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=============================
- Kernel Connection Multiplexor
-------------------------------
-+=============================
- 
- Kernel Connection Multiplexor (KCM) is a mechanism that provides a message based
- interface over TCP for generic application protocols. With KCM an application
- can efficiently send and receive application protocol messages over TCP using
- datagram sockets.
- 
--KCM implements an NxM multiplexor in the kernel as diagrammed below:
-+KCM implements an NxM multiplexor in the kernel as diagrammed below::
- 
--+------------+   +------------+   +------------+   +------------+
--| KCM socket |   | KCM socket |   | KCM socket |   | KCM socket |
--+------------+   +------------+   +------------+   +------------+
--      |                 |               |                |
--      +-----------+     |               |     +----------+
--                  |     |               |     |
--               +----------------------------------+
--               |           Multiplexor            |
--               +----------------------------------+
--                 |   |           |           |  |
--       +---------+   |           |           |  ------------+
--       |             |           |           |              |
--+----------+  +----------+  +----------+  +----------+ +----------+
--|  Psock   |  |  Psock   |  |  Psock   |  |  Psock   | |  Psock   |
--+----------+  +----------+  +----------+  +----------+ +----------+
--      |              |           |            |             |
--+----------+  +----------+  +----------+  +----------+ +----------+
--| TCP sock |  | TCP sock |  | TCP sock |  | TCP sock | | TCP sock |
--+----------+  +----------+  +----------+  +----------+ +----------+
-+    +------------+   +------------+   +------------+   +------------+
-+    | KCM socket |   | KCM socket |   | KCM socket |   | KCM socket |
-+    +------------+   +------------+   +------------+   +------------+
-+	|                 |               |                |
-+	+-----------+     |               |     +----------+
-+		    |     |               |     |
-+		+----------------------------------+
-+		|           Multiplexor            |
-+		+----------------------------------+
-+		    |   |           |           |  |
-+	+---------+   |           |           |  ------------+
-+	|             |           |           |              |
-+    +----------+  +----------+  +----------+  +----------+ +----------+
-+    |  Psock   |  |  Psock   |  |  Psock   |  |  Psock   | |  Psock   |
-+    +----------+  +----------+  +----------+  +----------+ +----------+
-+	|              |           |            |             |
-+    +----------+  +----------+  +----------+  +----------+ +----------+
-+    | TCP sock |  | TCP sock |  | TCP sock |  | TCP sock | | TCP sock |
-+    +----------+  +----------+  +----------+  +----------+ +----------+
- 
- KCM sockets
-------------
-+===========
- 
- The KCM sockets provide the user interface to the multiplexor. All the KCM sockets
- bound to a multiplexor are considered to have equivalent function, and I/O
-@@ -37,7 +40,7 @@ operations in different sockets may be done in parallel without the need for
- synchronization between threads in userspace.
- 
- Multiplexor
-------------
-+===========
- 
- The multiplexor provides the message steering. In the transmit path, messages
- written on a KCM socket are sent atomically on an appropriate TCP socket.
-@@ -45,14 +48,14 @@ Similarly, in the receive path, messages are constructed on each TCP socket
- (Psock) and complete messages are steered to a KCM socket.
- 
- TCP sockets & Psocks
----------------------
-+====================
- 
- TCP sockets may be bound to a KCM multiplexor. A Psock structure is allocated
- for each bound TCP socket, this structure holds the state for constructing
- messages on receive as well as other connection specific information for KCM.
- 
- Connected mode semantics
--------------------------
-+========================
- 
- Each multiplexor assumes that all attached TCP connections are to the same
- destination and can use the different connections for load balancing when
-@@ -60,7 +63,7 @@ transmitting. The normal send and recv calls (include sendmmsg and recvmmsg)
- can be used to send and receive messages from the KCM socket.
- 
- Socket types
--------------
-+============
- 
- KCM supports SOCK_DGRAM and SOCK_SEQPACKET socket types.
- 
-@@ -110,23 +113,23 @@ User interface
- Creating a multiplexor
- ----------------------
- 
--A new multiplexor and initial KCM socket is created by a socket call:
-+A new multiplexor and initial KCM socket is created by a socket call::
- 
-   socket(AF_KCM, type, protocol)
- 
--  - type is either SOCK_DGRAM or SOCK_SEQPACKET
--  - protocol is KCMPROTO_CONNECTED
-+- type is either SOCK_DGRAM or SOCK_SEQPACKET
-+- protocol is KCMPROTO_CONNECTED
- 
- Cloning KCM sockets
- -------------------
- 
- After the first KCM socket is created using the socket call as described
- above, additional sockets for the multiplexor can be created by cloning
--a KCM socket. This is accomplished by an ioctl on a KCM socket:
-+a KCM socket. This is accomplished by an ioctl on a KCM socket::
- 
-   /* From linux/kcm.h */
-   struct kcm_clone {
--        int fd;
-+	int fd;
-   };
- 
-   struct kcm_clone info;
-@@ -142,11 +145,11 @@ Attach transport sockets
- ------------------------
- 
- Attaching of transport sockets to a multiplexor is performed by calling an
--ioctl on a KCM socket for the multiplexor. e.g.:
-+ioctl on a KCM socket for the multiplexor. e.g.::
- 
-   /* From linux/kcm.h */
-   struct kcm_attach {
--        int fd;
-+	int fd;
- 	int bpf_fd;
-   };
- 
-@@ -160,18 +163,19 @@ ioctl on a KCM socket for the multiplexor. e.g.:
-   ioctl(kcmfd, SIOCKCMATTACH, &info);
- 
- The kcm_attach structure contains:
--  fd: file descriptor for TCP socket being attached
--  bpf_prog_fd: file descriptor for compiled BPF program downloaded
-+
-+  - fd: file descriptor for TCP socket being attached
-+  - bpf_prog_fd: file descriptor for compiled BPF program downloaded
- 
- Unattach transport sockets
- --------------------------
- 
- Unattaching a transport socket from a multiplexor is straightforward. An
--"unattach" ioctl is done with the kcm_unattach structure as the argument:
-+"unattach" ioctl is done with the kcm_unattach structure as the argument::
- 
-   /* From linux/kcm.h */
-   struct kcm_unattach {
--        int fd;
-+	int fd;
-   };
- 
-   struct kcm_unattach info;
-@@ -190,7 +194,7 @@ When receive is disabled, any pending messages in the socket's
- receive buffer are moved to other sockets. This feature is useful
- if an application thread knows that it will be doing a lot of
- work on a request and won't be able to service new messages for a
--while. Example use:
-+while. Example use::
- 
-   int val = 1;
- 
-@@ -200,7 +204,7 @@ BFP programs for message delineation
- ------------------------------------
- 
- BPF programs can be compiled using the BPF LLVM backend. For example,
--the BPF program for parsing Thrift is:
-+the BPF program for parsing Thrift is::
- 
-   #include "bpf.h" /* for __sk_buff */
-   #include "bpf_helpers.h" /* for load_word intrinsic */
-@@ -250,6 +254,7 @@ based on groups, or batches of messages, can be beneficial for performance.
- 
- On transmit, there are three ways an application can batch (pipeline)
- messages on a KCM socket.
-+
-   1) Send multiple messages in a single sendmmsg.
-   2) Send a group of messages each with a sendmsg call, where all messages
-      except the last have MSG_BATCH in the flags of sendmsg call.
--- 
-2.25.4
 
+> > > > > > 
+> > > > > > 
+> > > > > > > I agree that there was a gap in the previous proposal for non-mdev
+> > > > > > > devices, but I think this bring a lot of questions that we need to
+> > > > > > > puzzle through and libvirt will need to re-evaluate how they might
+> > > > > > > decide to pick a migration target device.  For example, I'm sure
+> > > > > > > libvirt would reject any policy decisions regarding picking a physical
+> > > > > > > device versus an mdev device.  Had we previously left it that only a
+> > > > > > > layer above libvirt would select a target device and libvirt only tests
+> > > > > > > compatibility to that target device?
+> > > > > > I'm not sure if there's a layer above libvirt would select a target
+> > > > > > device. but if there is such a layer (even it's human), we need to
+> > > > > > provide an interface for them to know whether their decision is suitable
+> > > > > > for migration. The migration_version interface provides a potential to
+> > > > > > allow mdev->phys migration, even libvirt may currently reject it.
+> > > > > > 
+> > > > > > 
+> > > > > > > We also need to consider that this expands the namespace.  If we no
+> > > > > > > longer require matching types as the first level of comparison, then
+> > > > > > > vendor migration strings can theoretically collide.  How do we
+> > > > > > > coordinate that can't happen?  Thanks,
+> > > > > > yes, it's indeed a problem.
+> > > > > > could only allowing migration beteen devices from the same vendor be a
+> > > > > > good
+> > > > > > prerequisite?
+> > > > > > 
+> > > > > > Thanks
+> > > > > > Yan
+> > > > > > >
+> > > > > > > > > > > Is existence (and compatibility) of (1) a pre-req for possible
+> > > > > > > > > > > existence (and compatibility) of (2)?
+> > > > > > > > > > >
+> > > > > > > > > > no. (2) does not reply on (1).
+> > > > > > > > >
+> > > > > > > > > Hm. Non-existence of (1) seems to imply "this type does not support
+> > > > > > > > > migration". If an mdev created for such a type suddenly does support
+> > > > > > > > > migration, it feels a bit odd.
+> > > > > > > > >
+> > > > > > > > yes. but I think if the condition happens, it should be reported a bug
+> > > > > > > > to vendor driver.
+> > > > > > > > should I add a line in the doc like "vendor driver should ensure that the
+> > > > > > > > migration compatibility from migration_version under mdev_type should
+> > > > > > be
+> > > > > > > > consistent with that from migration_version under device node" ?
+> > > > > > > >
+> > > > > > > > > (It obviously cannot be a prereq for what I called (3) above.)
+> > > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > > Does userspace need to check (1) or can it completely rely on (2), if
+> > > > > > > > > > > it so chooses?
+> > > > > > > > > > >
+> > > > > > > > > > I think it can completely reply on (2) if compatibility check before
+> > > > > > > > > > mdev creation is not required.
+> > > > > > > > > >
+> > > > > > > > > > > If devices with a different mdev type are indeed compatible, it
+> > > > > > seems
+> > > > > > > > > > > userspace can only find out after the devices have actually been
+> > > > > > > > > > > created, as (1) does not apply?
+> > > > > > > > > > yes, I think so.
+> > > > > > > > >
+> > > > > > > > > How useful would it be for userspace to even look at (1) in that case?
+> > > > > > > > > It only knows if things have a chance of working if it actually goes
+> > > > > > > > > ahead and creates devices.
+> > > > > > > > >
+> > > > > > > > hmm, is it useful for userspace to test the migration_version under mdev
+> > > > > > > > type before it knows what mdev device to generate ?
+> > > > > > > > like when the userspace wants to migrate an mdev device in src vm,
+> > > > > > > > but it has not created target vm and the target mdev device.
+> > > > > > > >
+> > > > > > > > > >
+> > > > > > > > > > > One of my worries is that the existence of an attribute with the
+> > > > > > same
+> > > > > > > > > > > name in two similar locations might lead to confusion. But maybe it
+> > > > > > > > > > > isn't a problem.
+> > > > > > > > > > >
+> > > > > > > > > > Yes, I have the same feeling. but as (2) is for sysfs interface
+> > > > > > > > > > consistency, to make it transparent to userspace tools like libvirt,
+> > > > > > > > > > I guess the same name is necessary?
+> > > > > > > > >
+> > > > > > > > > What do we actually need here, I wonder? (1) and (2) seem to serve
+> > > > > > > > > slightly different purposes, while (2) and what I called (3) have the
+> > > > > > > > > same purpose. Is it important to userspace that (1) and (2) have the
+> > > > > > > > > same name?
+> > > > > > > > so change (1) to migration_type_version and (2) to
+> > > > > > > > migration_instance_version?
+> > > > > > > > But as they are under different locations, could that location imply
+> > > > > > > > enough information?
+> > > > > > > >
+> > > > > > > >
+> > > > > > > > Thanks
+> > > > > > > > Yan
+> > > > > > > >
+> > > > > > > >
+> > > > > > >
+> > > > > > _______________________________________________
+> > > > > > intel-gvt-dev mailing list
+> > > > > > intel-gvt-dev@lists.freedesktop.org
+> > > > > > https://lists.freedesktop.org/mailman/listinfo/intel-gvt-dev
+> > > > 
+> > > --
+> > > Dr. David Alan Gilbert / dgilbert@redhat.com / Manchester, UK
+> > > 
+> > 
+> --
+> Dr. David Alan Gilbert / dgilbert@redhat.com / Manchester, UK
+> 
