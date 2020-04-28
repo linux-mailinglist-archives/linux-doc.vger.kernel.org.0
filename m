@@ -2,29 +2,35 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 46C271BCAE8
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 20:53:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A485A1BCBFA
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 21:02:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730081AbgD1SxO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Apr 2020 14:53:14 -0400
-Received: from ms.lwn.net ([45.79.88.28]:41470 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729503AbgD1SxN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 28 Apr 2020 14:53:13 -0400
+        id S1729219AbgD1TBc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Apr 2020 15:01:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48574 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1728625AbgD1TBb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Apr 2020 15:01:31 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2F8DDC03C1AB;
+        Tue, 28 Apr 2020 12:01:31 -0700 (PDT)
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 6E7352D6;
-        Tue, 28 Apr 2020 18:53:13 +0000 (UTC)
-Date:   Tue, 28 Apr 2020 12:53:12 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id 9121944A;
+        Tue, 28 Apr 2020 19:01:29 +0000 (UTC)
+Date:   Tue, 28 Apr 2020 13:01:28 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 0/5] More changes for sphinx-pre-install script
-Message-ID: <20200428125312.1bfb20f4@lwn.net>
-In-Reply-To: <cover.1587478901.git.mchehab+huawei@kernel.org>
-References: <cover.1587478901.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org, linux-cachefs@redhat.com,
+        codalist@coda.cs.cmu.edu, linux-fsdevel@vger.kernel.org,
+        linuxppc-dev@lists.ozlabs.org, linux-xfs@vger.kernel.org,
+        linux-usb@vger.kernel.org
+Subject: Re: [PATCH v3 00/29] Convert files to ReST - part 2
+Message-ID: <20200428130128.22c4b973@lwn.net>
+In-Reply-To: <cover.1588021877.git.mchehab+huawei@kernel.org>
+References: <cover.1588021877.git.mchehab+huawei@kernel.org>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -34,39 +40,49 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 21 Apr 2020 16:31:04 +0200
+On Mon, 27 Apr 2020 23:16:52 +0200
 Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 
-> As asked, I changed the sphinx-pre-install script to print a different message
-> for the PDF minimal recommended version. This change itself was easy,
-> but, while testing the patch, I noticed some new weird behaviors when python
-> venv is used.
+> This is the second part of a series I wrote sometime ago where I manually
+> convert lots of files to be properly parsed by Sphinx as ReST files.
 > 
-> Basically, when using python venv, the venv environment will contain python
-> itself. So, an attempt to create a new virtual environment to upgrade a version
-> fails (at least here with Fedora 31). As I didn't notice this behavior before,
-> maybe the problem was due to some Fedora upgrade.
+> As it touches on lot of stuff, this series is based on today's linux-next, 
+> at tag next-20190617.
 > 
-> In any case, the approach I took should be generic enough to work past eventual
-> distro packaging differences.
+> The first version of this series had 57 patches. The first part with 28 patches
+> were already merged. Right now, there are still ~76  patches pending applying
+> (including this series), and that's because I opted to do ~1 patch per converted
+>  directory.
 > 
-> -
+> That sounds too much to be send on a single round. So, I'm opting to split
+> it on 3 parts for the conversion, plus a final patch adding orphaned books
+> to existing ones. 
 > 
-> At the end,  instead of a single patch, I ended needing to fix some other stuff, 
-> for this to work better. Oh well...
-> 
-> The good news is that, at the cost of a slicely more complex logic, the script
-> should now detect if a virtual environment works and to recommend activating
-> a newer environment if it exists (instead of recommending to reinstall a
-> venv using the name of an already-existing directory).
-> 
-> Mauro Carvalho Chehab (5):
->   scripts: sphinx-pre-install: only ask to activate valid venvs
->   scripts: sphinx-pre-install: change the warning for version < 2.4.4
->   scripts: sphinx-pre-install: change recommendation text if venv exists
->   scripts: sphinx-pre-install: fix a bug when using with venv
->   scripts: sphinx-pre-install: change the output order
+> Those patches should probably be good to be merged either by subsystem
+> maintainers or via the docs tree.
 
-Series applied, thanks.
+So I'm happy to merge this set, but there is one thing that worries me a
+bit... 
+
+>  fs/cachefiles/Kconfig                         |    4 +-
+>  fs/coda/Kconfig                               |    2 +-
+>  fs/configfs/inode.c                           |    2 +-
+>  fs/configfs/item.c                            |    2 +-
+>  fs/fscache/Kconfig                            |    8 +-
+>  fs/fscache/cache.c                            |    8 +-
+>  fs/fscache/cookie.c                           |    2 +-
+>  fs/fscache/object.c                           |    4 +-
+>  fs/fscache/operation.c                        |    2 +-
+>  fs/locks.c                                    |    2 +-
+>  include/linux/configfs.h                      |    2 +-
+>  include/linux/fs_context.h                    |    2 +-
+>  include/linux/fscache-cache.h                 |    4 +-
+>  include/linux/fscache.h                       |   42 +-
+>  include/linux/lsm_hooks.h                     |    2 +-
+
+I'd feel a bit better if I could get an ack or two from filesystem folks
+before I venture that far out of my own yard...what say you all?
+
+Thanks,
 
 jon
