@@ -2,155 +2,294 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4A9FF1BC561
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 18:38:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D02B51BC57F
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 18:42:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728084AbgD1Qiy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Apr 2020 12:38:54 -0400
-Received: from mx08-00178001.pphosted.com ([91.207.212.93]:47834 "EHLO
-        mx07-00178001.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1728037AbgD1Qix (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Apr 2020 12:38:53 -0400
-Received: from pps.filterd (m0046661.ppops.net [127.0.0.1])
-        by mx07-00178001.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 03SGcWQr007658;
-        Tue, 28 Apr 2020 18:38:44 +0200
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=st.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=STMicroelectronics;
- bh=ho062TRS0YdQ6wUnxTpdhRHNh/WM5Lgej+B4b4n+1WU=;
- b=Y4JojaNBtGP9CoyX+sKdfiEZeYVNiE9SsaFXBE4sApdQ179oDInnlsJfgIXrRuYmOkuq
- PpLyX1racB7DlJrMZ55V4evElOtb9DjKjwj99Jed3EPuNJWxWiHxZbAJ7GTfqWSfkuGX
- sAYKpOfqtCJxYrSz91Oj+jGyv9o7sy5UgYrIzibaiKunR9TMB4tm+n7IRTya7TEs0l4f
- TX6ZD9mrw+Pb2l7/zuoM/NhG9PJkf6yobA7mUMfoq2vA5KBItp+OZibVbQv/WZw9GfSA
- bG9+FPzeHXZNj/6XWPERS5fqs4VuRFeHQ1QQ5T7ZwRODPgJDfME3ZMF+X/fcPjAFYSTQ LQ== 
-Received: from beta.dmz-eu.st.com (beta.dmz-eu.st.com [164.129.1.35])
-        by mx07-00178001.pphosted.com with ESMTP id 30mhjws5jb-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Tue, 28 Apr 2020 18:38:44 +0200
-Received: from euls16034.sgp.st.com (euls16034.sgp.st.com [10.75.44.20])
-        by beta.dmz-eu.st.com (STMicroelectronics) with ESMTP id A9B9310002A;
-        Tue, 28 Apr 2020 18:38:43 +0200 (CEST)
-Received: from Webmail-eu.st.com (sfhdag3node1.st.com [10.75.127.7])
-        by euls16034.sgp.st.com (STMicroelectronics) with ESMTP id 95B912B5F4B;
-        Tue, 28 Apr 2020 18:38:43 +0200 (CEST)
-Received: from lmecxl0889.tpe.st.com (10.75.127.44) by SFHDAG3NODE1.st.com
- (10.75.127.7) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Tue, 28 Apr
- 2020 18:38:42 +0200
-Subject: Re: [PATCH v3 03/14] remoteproc: Add new operation and flags for
- synchronistation
-To:     Mathieu Poirier <mathieu.poirier@linaro.org>,
-        <bjorn.andersson@linaro.org>, <ohad@wizery.com>
-CC:     <loic.pallardy@st.com>, <s-anna@ti.com>,
-        <linux-remoteproc@vger.kernel.org>, <corbet@lwn.net>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
-References: <20200424200135.28825-1-mathieu.poirier@linaro.org>
- <20200424200135.28825-4-mathieu.poirier@linaro.org>
-From:   Arnaud POULIQUEN <arnaud.pouliquen@st.com>
-Message-ID: <7c5c8d5e-feb7-74ad-a2eb-1ccb8192b0ae@st.com>
-Date:   Tue, 28 Apr 2020 18:38:41 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-MIME-Version: 1.0
-In-Reply-To: <20200424200135.28825-4-mathieu.poirier@linaro.org>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.75.127.44]
-X-ClientProxiedBy: SFHDAG1NODE1.st.com (10.75.127.1) To SFHDAG3NODE1.st.com
- (10.75.127.7)
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.138,18.0.676
- definitions=2020-04-28_11:2020-04-28,2020-04-28 signatures=0
+        id S1728250AbgD1QmB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Apr 2020 12:42:01 -0400
+Received: from foss.arm.com ([217.140.110.172]:55314 "EHLO foss.arm.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728037AbgD1QmA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 28 Apr 2020 12:42:00 -0400
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 52F5F30E;
+        Tue, 28 Apr 2020 09:41:59 -0700 (PDT)
+Received: from e107158-lin.cambridge.arm.com (e107158-lin.cambridge.arm.com [10.1.195.21])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BA89D3F305;
+        Tue, 28 Apr 2020 09:41:56 -0700 (PDT)
+From:   Qais Yousef <qais.yousef@arm.com>
+To:     Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>
+Cc:     Qais Yousef <qais.yousef@arm.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Kees Cook <keescook@chromium.org>,
+        Iurii Zaikin <yzaikin@google.com>,
+        Quentin Perret <qperret@google.com>,
+        Valentin Schneider <valentin.schneider@arm.com>,
+        Patrick Bellasi <patrick.bellasi@matbug.net>,
+        Pavan Kondeti <pkondeti@codeaurora.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org
+Subject: [PATCH v3 1/2] sched/uclamp: Add a new sysctl to control RT default boost value
+Date:   Tue, 28 Apr 2020 17:41:33 +0100
+Message-Id: <20200428164134.5588-1-qais.yousef@arm.com>
+X-Mailer: git-send-email 2.17.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+RT tasks by default run at the highest capacity/performance level. When
+uclamp is selected this default behavior is retained by enforcing the
+requested uclamp.min (p->uclamp_req[UCLAMP_MIN]) of the RT tasks to be
+uclamp_none(UCLAMP_MAX), which is SCHED_CAPACITY_SCALE; the maximum
+value.
 
+This is also referred to as 'the default boost value of RT tasks'.
 
-On 4/24/20 10:01 PM, Mathieu Poirier wrote:
-> Add a new sync_ops to support use cases where the remoteproc
-> core is synchronising with the remote processor.  Exactly when to use
-> the synchronisation operations is directed by the flags in structure
-> rproc_sync_flags.
-> 
-> Signed-off-by: Mathieu Poirier <mathieu.poirier@linaro.org>
-> ---
->  include/linux/remoteproc.h | 24 ++++++++++++++++++++++++
->  1 file changed, 24 insertions(+)
-> 
-> diff --git a/include/linux/remoteproc.h b/include/linux/remoteproc.h
-> index ac4082f12e8b..ceb3b2bba824 100644
-> --- a/include/linux/remoteproc.h
-> +++ b/include/linux/remoteproc.h
-> @@ -353,6 +353,23 @@ enum rsc_handling_status {
->  	RSC_IGNORED	= 1,
->  };
->  
-> +/**
-> + * struct rproc_sync_flags - platform specific flags indicating which
-> + *			      rproc_ops to use at specific times during
-> + *			      the rproc lifecycle.
-> + * @on_init: true if synchronising with the remote processor at
-> + *	     initialisation time
-> + * @after_stop: true if synchronising with the remote processor after it was
-> + *		stopped from the cmmand line
-typo command
-> + * @after_crash: true if synchronising with the remote processor after
-> + *		 it has crashed
-> + */
-> +struct rproc_sync_flags {
-> +	bool on_init;
-> +	bool after_stop;
-> +	bool after_crash;
-> +};
-> +
-how about a bit field instead (just a proposition)?
-Platform driver would set the sync flag and rproc_set_sync_flag could be a 
-simple mask instead of a switch case.
+See commit 1a00d999971c ("sched/uclamp: Set default clamps for RT tasks").
 
-Is it possible to split this patch in a different ways because difficult to understand as
-rproc_sync_flags seems not used before 
-[PATCH v3 09/14] remoteproc: Deal with synchronisation when crashing
+On battery powered devices, it is desired to control this default
+(currently hardcoded) behavior at runtime to reduce energy consumed by
+RT tasks.
 
-Thanks
-Arnaud  
+For example, a mobile device manufacturer where big.LITTLE architecture
+is dominant, the performance of the little cores varies across SoCs, and
+on high end ones the big cores could be too power hungry.
 
->  /**
->   * struct rproc_ops - platform-specific device handlers
->   * @start:	power on the device and boot it
-> @@ -459,6 +476,9 @@ struct rproc_dump_segment {
->   * @firmware: name of firmware file to be loaded
->   * @priv: private data which belongs to the platform-specific rproc module
->   * @ops: platform-specific start/stop rproc handlers
-> + * @sync_ops: platform-specific start/stop rproc handlers when
-> + *	      synchronising with a remote processor.
-> + * @sync_flags: Determine the rproc_ops to choose in specific states.
->   * @dev: virtual device for refcounting and common remoteproc behavior
->   * @power: refcount of users who need this rproc powered up
->   * @state: state of the device
-> @@ -482,6 +502,7 @@ struct rproc_dump_segment {
->   * @table_sz: size of @cached_table
->   * @has_iommu: flag to indicate if remote processor is behind an MMU
->   * @auto_boot: flag to indicate if remote processor should be auto-started
-> + * @sync_with_rproc: true if currently synchronising with the rproc
->   * @dump_segments: list of segments in the firmware
->   * @nb_vdev: number of vdev currently handled by rproc
->   */
-> @@ -492,6 +513,8 @@ struct rproc {
->  	const char *firmware;
->  	void *priv;
->  	struct rproc_ops *ops;
-> +	struct rproc_ops *sync_ops;
-> +	struct rproc_sync_flags sync_flags;
->  	struct device dev;
->  	atomic_t power;
->  	unsigned int state;
-> @@ -515,6 +538,7 @@ struct rproc {
->  	size_t table_sz;
->  	bool has_iommu;
->  	bool auto_boot;
-> +	bool sync_with_rproc;
->  	struct list_head dump_segments;
->  	int nb_vdev;
->  	u8 elf_class;
-> 
+Given the diversity of SoCs, the new knob allows manufactures to tune
+the best performance/power for RT tasks for the particular hardware they
+run on.
+
+They could opt to further tune the value when the user selects
+a different power saving mode or when the device is actively charging.
+
+The runtime aspect of it further helps in creating a single kernel image
+that can be run on multiple devices that require different tuning.
+
+Keep in mind that a lot of RT tasks in the system are created by the
+kernel. On Android for instance I can see over 50 RT tasks, only
+a handful of which created by the Android framework.
+
+To control the default behavior globally by system admins and device
+integrators, introduce the new sysctl_sched_uclamp_util_min_rt_default
+to change the default boost value of the RT tasks.
+
+I anticipate this to be mostly in the form of modifying the init script
+of a particular device.
+
+Whenever the new default changes, it'd be applied lazily on the next
+opportunity the scheduler needs to calculate the effective uclamp.min
+value for the task, assuming that it still uses the system default value
+and not a user applied one.
+
+Tested on Juno-r2 in combination with the RT capacity awareness [1].
+By default an RT task will go to the highest capacity CPU and run at the
+maximum frequency, which is particularly energy inefficient on high end
+mobile devices because the biggest core[s] are 'huge' and power hungry.
+
+With this patch the RT task can be controlled to run anywhere by
+default, and doesn't cause the frequency to be maximum all the time.
+Yet any task that really needs to be boosted can easily escape this
+default behavior by modifying its requested uclamp.min value
+(p->uclamp_req[UCLAMP_MIN]) via sched_setattr() syscall.
+
+[1] 804d402fb6f6: ("sched/rt: Make RT capacity-aware")
+
+Signed-off-by: Qais Yousef <qais.yousef@arm.com>
+CC: Jonathan Corbet <corbet@lwn.net>
+CC: Juri Lelli <juri.lelli@redhat.com>
+CC: Vincent Guittot <vincent.guittot@linaro.org>
+CC: Dietmar Eggemann <dietmar.eggemann@arm.com>
+CC: Steven Rostedt <rostedt@goodmis.org>
+CC: Ben Segall <bsegall@google.com>
+CC: Mel Gorman <mgorman@suse.de>
+CC: Luis Chamberlain <mcgrof@kernel.org>
+CC: Kees Cook <keescook@chromium.org>
+CC: Iurii Zaikin <yzaikin@google.com>
+CC: Quentin Perret <qperret@google.com>
+CC: Valentin Schneider <valentin.schneider@arm.com>
+CC: Patrick Bellasi <patrick.bellasi@matbug.net>
+CC: Pavan Kondeti <pkondeti@codeaurora.org>
+CC: linux-doc@vger.kernel.org
+CC: linux-kernel@vger.kernel.org
+CC: linux-fsdevel@vger.kernel.org
+---
+
+Changes in v3:
+
+	* Do the sync in uclamp_eff_get() (Patrck & Dietmar)
+	* Rename to sysctl_sched_uclamp_util_min_rt_default (Patrick, Steve,
+	  Dietmar)
+	* Ensure the sync is applied only to RT tasks (Patrick)
+
+v2 can be found here (apologies forgot to mark it as v2 in the subject)
+
+https://lore.kernel.org/lkml/20200403123020.13897-1-qais.yousef@arm.com/
+
+ include/linux/sched/sysctl.h |  1 +
+ kernel/sched/core.c          | 63 +++++++++++++++++++++++++++++++++---
+ kernel/sysctl.c              |  7 ++++
+ 3 files changed, 66 insertions(+), 5 deletions(-)
+
+diff --git a/include/linux/sched/sysctl.h b/include/linux/sched/sysctl.h
+index d4f6215ee03f..e62cef019094 100644
+--- a/include/linux/sched/sysctl.h
++++ b/include/linux/sched/sysctl.h
+@@ -59,6 +59,7 @@ extern int sysctl_sched_rt_runtime;
+ #ifdef CONFIG_UCLAMP_TASK
+ extern unsigned int sysctl_sched_uclamp_util_min;
+ extern unsigned int sysctl_sched_uclamp_util_max;
++extern unsigned int sysctl_sched_uclamp_util_min_rt_default;
+ #endif
+ 
+ #ifdef CONFIG_CFS_BANDWIDTH
+diff --git a/kernel/sched/core.c b/kernel/sched/core.c
+index 9a2fbf98fd6f..17325b4aa451 100644
+--- a/kernel/sched/core.c
++++ b/kernel/sched/core.c
+@@ -790,6 +790,26 @@ unsigned int sysctl_sched_uclamp_util_min = SCHED_CAPACITY_SCALE;
+ /* Max allowed maximum utilization */
+ unsigned int sysctl_sched_uclamp_util_max = SCHED_CAPACITY_SCALE;
+ 
++/*
++ * By default RT tasks run at the maximum performance point/capacity of the
++ * system. Uclamp enforces this by always setting UCLAMP_MIN of RT tasks to
++ * SCHED_CAPACITY_SCALE.
++ *
++ * This knob allows admins to change the default behavior when uclamp is being
++ * used. In battery powered devices, particularly, running at the maximum
++ * capacity and frequency will increase energy consumption and shorten the
++ * battery life.
++ *
++ * This knob only affects RT tasks that their uclamp_se->user_defined == false.
++ *
++ * This knob will not override the system default sched_util_clamp_min defined
++ * above.
++ *
++ * Any modification is applied lazily on the next attempt to calculate the
++ * effective value of the task.
++ */
++unsigned int sysctl_sched_uclamp_util_min_rt_default = SCHED_CAPACITY_SCALE;
++
+ /* All clamps are required to be less or equal than these values */
+ static struct uclamp_se uclamp_default[UCLAMP_CNT];
+ 
+@@ -872,6 +892,14 @@ unsigned int uclamp_rq_max_value(struct rq *rq, enum uclamp_id clamp_id,
+ 	return uclamp_idle_value(rq, clamp_id, clamp_value);
+ }
+ 
++static void uclamp_sync_util_min_rt_default(struct task_struct *p)
++{
++	struct uclamp_se *uc_se = &p->uclamp_req[UCLAMP_MIN];
++
++	if (unlikely(rt_task(p)) && !uc_se->user_defined)
++		uclamp_se_set(uc_se, sysctl_sched_uclamp_util_min_rt_default, false);
++}
++
+ static inline struct uclamp_se
+ uclamp_tg_restrict(struct task_struct *p, enum uclamp_id clamp_id)
+ {
+@@ -907,8 +935,15 @@ uclamp_tg_restrict(struct task_struct *p, enum uclamp_id clamp_id)
+ static inline struct uclamp_se
+ uclamp_eff_get(struct task_struct *p, enum uclamp_id clamp_id)
+ {
+-	struct uclamp_se uc_req = uclamp_tg_restrict(p, clamp_id);
+-	struct uclamp_se uc_max = uclamp_default[clamp_id];
++	struct uclamp_se uc_req, uc_max;
++
++	/*
++	 * Sync up any change to sysctl_sched_uclamp_util_min_rt_default value.
++	 */
++	uclamp_sync_util_min_rt_default(p);
++
++	uc_req = uclamp_tg_restrict(p, clamp_id);
++	uc_max = uclamp_default[clamp_id];
+ 
+ 	/* System default restrictions always apply */
+ 	if (unlikely(uc_req.value > uc_max.value))
+@@ -1114,12 +1149,13 @@ int sysctl_sched_uclamp_handler(struct ctl_table *table, int write,
+ 				loff_t *ppos)
+ {
+ 	bool update_root_tg = false;
+-	int old_min, old_max;
++	int old_min, old_max, old_min_rt;
+ 	int result;
+ 
+ 	mutex_lock(&uclamp_mutex);
+ 	old_min = sysctl_sched_uclamp_util_min;
+ 	old_max = sysctl_sched_uclamp_util_max;
++	old_min_rt = sysctl_sched_uclamp_util_min_rt_default;
+ 
+ 	result = proc_dointvec(table, write, buffer, lenp, ppos);
+ 	if (result)
+@@ -1133,6 +1169,18 @@ int sysctl_sched_uclamp_handler(struct ctl_table *table, int write,
+ 		goto undo;
+ 	}
+ 
++	/*
++	 * The new value will be applied to RT tasks the next time the
++	 * scheduler needs to calculate the effective uclamp.min for that task,
++	 * assuming the task is using the system default and not a user
++	 * specified value. In the latter we shall leave the value as the user
++	 * requested.
++	 */
++	if (sysctl_sched_uclamp_util_min_rt_default > SCHED_CAPACITY_SCALE) {
++		result = -EINVAL;
++		goto undo;
++	}
++
+ 	if (old_min != sysctl_sched_uclamp_util_min) {
+ 		uclamp_se_set(&uclamp_default[UCLAMP_MIN],
+ 			      sysctl_sched_uclamp_util_min, false);
+@@ -1158,6 +1206,7 @@ int sysctl_sched_uclamp_handler(struct ctl_table *table, int write,
+ undo:
+ 	sysctl_sched_uclamp_util_min = old_min;
+ 	sysctl_sched_uclamp_util_max = old_max;
++	sysctl_sched_uclamp_util_min_rt_default = old_min_rt;
+ done:
+ 	mutex_unlock(&uclamp_mutex);
+ 
+@@ -1200,9 +1249,13 @@ static void __setscheduler_uclamp(struct task_struct *p,
+ 		if (uc_se->user_defined)
+ 			continue;
+ 
+-		/* By default, RT tasks always get 100% boost */
++		/*
++		 * By default, RT tasks always get 100% boost, which the admins
++		 * are allowed to change via
++		 * sysctl_sched_uclamp_util_min_rt_default knob.
++		 */
+ 		if (unlikely(rt_task(p) && clamp_id == UCLAMP_MIN))
+-			clamp_value = uclamp_none(UCLAMP_MAX);
++			clamp_value = sysctl_sched_uclamp_util_min_rt_default;
+ 
+ 		uclamp_se_set(uc_se, clamp_value, false);
+ 	}
+diff --git a/kernel/sysctl.c b/kernel/sysctl.c
+index 8a176d8727a3..64117363c502 100644
+--- a/kernel/sysctl.c
++++ b/kernel/sysctl.c
+@@ -453,6 +453,13 @@ static struct ctl_table kern_table[] = {
+ 		.mode		= 0644,
+ 		.proc_handler	= sysctl_sched_uclamp_handler,
+ 	},
++	{
++		.procname	= "sched_util_clamp_min_rt_default",
++		.data		= &sysctl_sched_uclamp_util_min_rt_default,
++		.maxlen		= sizeof(unsigned int),
++		.mode		= 0644,
++		.proc_handler	= sysctl_sched_uclamp_handler,
++	},
+ #endif
+ #ifdef CONFIG_SCHED_AUTOGROUP
+ 	{
+-- 
+2.17.1
+
