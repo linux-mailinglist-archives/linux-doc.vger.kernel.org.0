@@ -2,33 +2,29 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E7D431BCA1E
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 20:48:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 46C271BCAE8
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 20:53:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731194AbgD1Sqe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Apr 2020 14:46:34 -0400
-Received: from ms.lwn.net ([45.79.88.28]:41458 "EHLO ms.lwn.net"
+        id S1730081AbgD1SxO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Apr 2020 14:53:14 -0400
+Received: from ms.lwn.net ([45.79.88.28]:41470 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730729AbgD1Sq2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 28 Apr 2020 14:46:28 -0400
+        id S1729503AbgD1SxN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 28 Apr 2020 14:53:13 -0400
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 8E1452D6;
-        Tue, 28 Apr 2020 18:46:27 +0000 (UTC)
-Date:   Tue, 28 Apr 2020 12:46:26 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id 6E7352D6;
+        Tue, 28 Apr 2020 18:53:13 +0000 (UTC)
+Date:   Tue, 28 Apr 2020 12:53:12 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Michal Suchanek <msuchanek@suse.de>
-Cc:     linux-nvdimm@lists.01.org,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Shiyang Ruan <ruansy.fnst@cn.fujitsu.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] doc: nvdimm: remove reference to non-existent
- CONFIG_NFIT_TEST
-Message-ID: <20200428124626.1e80e23a@lwn.net>
-In-Reply-To: <20200415211654.10827-1-msuchanek@suse.de>
-References: <20200415211654.10827-1-msuchanek@suse.de>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 0/5] More changes for sphinx-pre-install script
+Message-ID: <20200428125312.1bfb20f4@lwn.net>
+In-Reply-To: <cover.1587478901.git.mchehab+huawei@kernel.org>
+References: <cover.1587478901.git.mchehab+huawei@kernel.org>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -38,31 +34,39 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 15 Apr 2020 23:16:50 +0200
-Michal Suchanek <msuchanek@suse.de> wrote:
+On Tue, 21 Apr 2020 16:31:04 +0200
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 
-> The test driver is in tools/testing/nvdimm and cannot be selected by a
-> config option.
+> As asked, I changed the sphinx-pre-install script to print a different message
+> for the PDF minimal recommended version. This change itself was easy,
+> but, while testing the patch, I noticed some new weird behaviors when python
+> venv is used.
 > 
-> Signed-off-by: Michal Suchanek <msuchanek@suse.de>
-> ---
->  Documentation/driver-api/nvdimm/nvdimm.rst | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
+> Basically, when using python venv, the venv environment will contain python
+> itself. So, an attempt to create a new virtual environment to upgrade a version
+> fails (at least here with Fedora 31). As I didn't notice this behavior before,
+> maybe the problem was due to some Fedora upgrade.
 > 
-> diff --git a/Documentation/driver-api/nvdimm/nvdimm.rst b/Documentation/driver-api/nvdimm/nvdimm.rst
-> index 08f855cbb4e6..79c0fd39f2af 100644
-> --- a/Documentation/driver-api/nvdimm/nvdimm.rst
-> +++ b/Documentation/driver-api/nvdimm/nvdimm.rst
-> @@ -278,8 +278,8 @@ by a region device with a dynamically assigned id (REGION0 - REGION5).
->         be contiguous in DPA-space.
->  
->      This bus is provided by the kernel under the device
-> -    /sys/devices/platform/nfit_test.0 when CONFIG_NFIT_TEST is enabled and
-> -    the nfit_test.ko module is loaded.  This not only test LIBNVDIMM but the
-> +    /sys/devices/platform/nfit_test.0 when the nfit_test.ko module from
-> +    tools/testing/nvdimm is loaded.  This not only test LIBNVDIMM but the
->      acpi_nfit.ko driver as well.
+> In any case, the approach I took should be generic enough to work past eventual
+> distro packaging differences.
+> 
+> -
+> 
+> At the end,  instead of a single patch, I ended needing to fix some other stuff, 
+> for this to work better. Oh well...
+> 
+> The good news is that, at the cost of a slicely more complex logic, the script
+> should now detect if a virtual environment works and to recommend activating
+> a newer environment if it exists (instead of recommending to reinstall a
+> venv using the name of an already-existing directory).
+> 
+> Mauro Carvalho Chehab (5):
+>   scripts: sphinx-pre-install: only ask to activate valid venvs
+>   scripts: sphinx-pre-install: change the warning for version < 2.4.4
+>   scripts: sphinx-pre-install: change recommendation text if venv exists
+>   scripts: sphinx-pre-install: fix a bug when using with venv
+>   scripts: sphinx-pre-install: change the output order
 
-Applied, thanks.
+Series applied, thanks.
 
 jon
