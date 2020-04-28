@@ -2,80 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F82A1BB61F
-	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 08:01:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 771251BB6D6
+	for <lists+linux-doc@lfdr.de>; Tue, 28 Apr 2020 08:36:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726042AbgD1GBm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Apr 2020 02:01:42 -0400
-Received: from out30-133.freemail.mail.aliyun.com ([115.124.30.133]:38964 "EHLO
-        out30-133.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1725792AbgD1GBm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Apr 2020 02:01:42 -0400
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R161e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e07488;MF=tianjia.zhang@linux.alibaba.com;NM=1;PH=DS;RN=11;SR=0;TI=SMTPD_---0Twvsm2a_1588053698;
-Received: from 30.27.118.60(mailfrom:tianjia.zhang@linux.alibaba.com fp:SMTPD_---0Twvsm2a_1588053698)
-          by smtp.aliyun-inc.com(127.0.0.1);
-          Tue, 28 Apr 2020 14:01:38 +0800
-Subject: Re: [PATCH v2] module: Allow to disable modsign in kernel cmdline
-To:     Randy Dunlap <rdunlap@infradead.org>, jeyu@kernel.org,
-        corbet@lwn.net, mchehab+samsung@kernel.org, tglx@linutronix.de,
-        akpm@linux-foundation.org, gregkh@linuxfoundation.org,
-        pawan.kumar.gupta@linux.intel.com, jgross@suse.com
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20200428050523.47253-1-tianjia.zhang@linux.alibaba.com>
- <aff03dbb-a1a3-c95e-1c24-60279b14970a@infradead.org>
-From:   Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
-Message-ID: <aecb37fd-e99e-c6e2-ac80-ccf1ae2b0295@linux.alibaba.com>
-Date:   Tue, 28 Apr 2020 14:01:37 +0800
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+        id S1726282AbgD1Gf0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Apr 2020 02:35:26 -0400
+Received: from mail.kernel.org ([198.145.29.99]:51536 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726284AbgD1GfZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 28 Apr 2020 02:35:25 -0400
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id A29A62051A;
+        Tue, 28 Apr 2020 06:35:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1588055725;
+        bh=k7tWYJkX8W/ar65FHR8zYw4w5XEC1lW5qZA/g/JFiVQ=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=RLvjilNyud8QmW8Zo6v4xSzQMp3+7zg1YPyGm3NJfs1m53OGfuIN8LHS3kLa34I8u
+         mFGoMiGe40IoDUty2S2Be/jWbYiITLWJoj0MlxlSKIznTT8Cd76+3O0D3J9hU+VUEr
+         2dPDqSPXqvJeAz5EE2o1W49OslkvXFUv0MPKgNRY=
+Date:   Tue, 28 Apr 2020 08:35:22 +0200
+From:   Greg KH <gregkh@linuxfoundation.org>
+To:     Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+Cc:     jeyu@kernel.org, corbet@lwn.net, rdunlap@infradead.org,
+        mchehab+samsung@kernel.org, tglx@linutronix.de,
+        akpm@linux-foundation.org, pawan.kumar.gupta@linux.intel.com,
+        jgross@suse.com, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3] module: Allow to disable modsign in kernel cmdline
+Message-ID: <20200428063522.GA990431@kroah.com>
+References: <20200428060008.50417-1-tianjia.zhang@linux.alibaba.com>
 MIME-Version: 1.0
-In-Reply-To: <aff03dbb-a1a3-c95e-1c24-60279b14970a@infradead.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200428060008.50417-1-tianjia.zhang@linux.alibaba.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Tue, Apr 28, 2020 at 02:00:08PM +0800, Tianjia Zhang wrote:
+> This option allows to disable modsign completely at the beginning,
+> and turn off by set the kernel cmdline `no_modsig_enforce` when
+> `CONFIG_MODULE_SIG_FORCE` is enabled.
+> 
+> Yet another change allows to always show the current status of
+> modsign through `/sys/module/module/parameters/sig_enforce`.
+> 
+> Signed-off-by: Jia Zhang <zhang.jia@linux.alibaba.com>
+> Signed-off-by: Tianjia Zhang <tianjia.zhang@linux.alibaba.com>
+> ---
+> 
+> v3 change:
+>   Beautify the document description according to the recommendation.
+> 
+> v2 change:
+>   document this new option.
+> 
+>  Documentation/admin-guide/kernel-parameters.txt | 6 ++++++
+>  kernel/module.c                                 | 8 ++++++++
+>  2 files changed, 14 insertions(+)
+> 
+> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> index 7bc83f3d9bdf..b30f013fb8c5 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -3190,6 +3190,12 @@
+>  	noirqdebug	[X86-32] Disables the code which attempts to detect and
+>  			disable unhandled interrupt sources.
+>  
+> +	no_modsig_enforce
+> +			[KNL] When CONFIG_MODULE_SIG_FORCE is set, this option
+> +			allows to disable modsign completely at the beginning.
+> +			This means that modules without (valid) signatures will
+> +			be loaded successfully.
+> +
 
+So now we have module.sig_enforce and this one?  That feels really
+confusing, why can't you just use the existing option?
 
-On 2020/4/28 13:52, Randy Dunlap wrote:
-> Hi,
-> 
-> On 4/27/20 10:05 PM, Tianjia Zhang wrote:
->> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
->> index 7bc83f3d9bdf..00ed7566959f 100644
->> --- a/Documentation/admin-guide/kernel-parameters.txt
->> +++ b/Documentation/admin-guide/kernel-parameters.txt
->> @@ -3190,6 +3190,12 @@
->>   	noirqdebug	[X86-32] Disables the code which attempts to detect and
->>   			disable unhandled interrupt sources.
->>   
->> +	no_modsig_enforce
->> +			[KNL] When CONFIG_MODULE_SIG_FORCE is set, this option
->> +			allows to disable modsign completely at the beginning.
->> +			This means that modules without (valid) signatures will
->> +			success to load.
-> 
-> 			succeed to load.
-> 
-> 			succeed in loading.
-> 
-> 			load successfully.
-> I prefer this one.....  ^^^^^^^^^^^^^^^^^^^^^
-> 
-> 			be loaded successfully.
-> 
-> 
->> +
->>   	no_timer_check	[X86,APIC] Disables the code which tests for
->>   			broken timer IRQ sources.
->>   
-> 
-> thanks.
-> 
+And why would you want to allow the bootloader to override a kernel
+build option like this?  That feels risky.
 
-v3 patch has been submitted, thank you for your suggestion.
+thanks,
 
-Thanks,
-Tianjia
+greg k-h
