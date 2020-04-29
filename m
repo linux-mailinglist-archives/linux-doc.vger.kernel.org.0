@@ -2,142 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 25DED1BE7EE
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2020 21:56:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 97E811BECA3
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2020 01:27:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726800AbgD2T4m (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Apr 2020 15:56:42 -0400
-Received: from us-smtp-2.mimecast.com ([205.139.110.61]:39751 "EHLO
-        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726456AbgD2T4m (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Apr 2020 15:56:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1588190200;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=X6rk25Tv2imwj4OrlKEUTzABdfyr8dyAJgvrX//k5fs=;
-        b=D1S0Ba1qaQQe6L/411Vh8WBHUHWaZ0mIyejkNERPzR1DZvwRPzs2h1RG4OiNz0ociyqy1l
-        a7Su5UMGHALKfY5SBS28UpovBcowFSjjUbf+s2so/fg057U3c6J/F2CM6TbeouE20Ytf6C
-        HPmCTY1hZIYpNREXrTRUaoNtI6+EkGE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-264-Jn-7UCXpM_6y8Jb0umYfuw-1; Wed, 29 Apr 2020 15:56:38 -0400
-X-MC-Unique: Jn-7UCXpM_6y8Jb0umYfuw-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 3D5CC107ACCA;
-        Wed, 29 Apr 2020 19:56:35 +0000 (UTC)
-Received: from w520.home (ovpn-112-162.phx2.redhat.com [10.3.112.162])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 9425366062;
-        Wed, 29 Apr 2020 19:56:33 +0000 (UTC)
-Date:   Wed, 29 Apr 2020 13:56:33 -0600
-From:   Alex Williamson <alex.williamson@redhat.com>
-To:     Jason Gunthorpe <jgg@ziepe.ca>
-Cc:     linux-doc@vger.kernel.org, John Hubbard <jhubbard@nvidia.com>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Christoph Hellwig <hch@infradead.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Dave Chinner <david@fromorbit.com>,
-        Ira Weiny <ira.weiny@intel.com>, Jan Kara <jack@suse.cz>,
-        Jonathan Corbet <corbet@lwn.net>,
-        =?UTF-8?B?SsOpcsO0bWU=?= Glisse <jglisse@redhat.com>,
-        "Kirill A . Shutemov" <kirill@shutemov.name>,
-        Michal Hocko <mhocko@suse.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Shuah Khan <shuah@kernel.org>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Matthew Wilcox <willy@infradead.org>,
-        linux-fsdevel@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        linux-rdma@vger.kernel.org, linux-mm@kvack.org,
-        "Kirill A . Shutemov" <kirill.shutemov@linux.intel.com>
-Subject: Re: [regression?] Re: [PATCH v6 06/12] mm/gup: track FOLL_PIN pages
-Message-ID: <20200429135633.626a8411@w520.home>
-In-Reply-To: <20200429002903.GZ26002@ziepe.ca>
-References: <20200211001536.1027652-7-jhubbard@nvidia.com>
-        <20200424121846.5ee2685f@w520.home>
-        <5b901542-d949-8d7e-89c7-f8d5ee20f6e9@nvidia.com>
-        <20200424141548.5afdd2bb@w520.home>
-        <665ffb48-d498-90f4-f945-997a922fc370@nvidia.com>
-        <20200428105455.30343fb4@w520.home>
-        <20200428174957.GV26002@ziepe.ca>
-        <20200428130752.75c153bd@w520.home>
-        <20200428192251.GW26002@ziepe.ca>
-        <20200428141223.5b1653db@w520.home>
-        <20200429002903.GZ26002@ziepe.ca>
+        id S1726775AbgD2X1C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Apr 2020 19:27:02 -0400
+Received: from 4.mo5.mail-out.ovh.net ([178.33.111.247]:48093 "EHLO
+        4.mo5.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726511AbgD2X1C (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Apr 2020 19:27:02 -0400
+Received: from player787.ha.ovh.net (unknown [10.108.35.95])
+        by mo5.mail-out.ovh.net (Postfix) with ESMTP id D7351277CF2
+        for <linux-doc@vger.kernel.org>; Wed, 29 Apr 2020 22:57:08 +0200 (CEST)
+Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
+        (Authenticated sender: steve@sk2.org)
+        by player787.ha.ovh.net (Postfix) with ESMTPSA id C950B12118E6D;
+        Wed, 29 Apr 2020 20:56:57 +0000 (UTC)
+Date:   Wed, 29 Apr 2020 22:56:56 +0200
+From:   Stephen Kitt <steve@sk2.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Steven Rostedt <rostedt@goodmis.org>
+Subject: Re: [PATCH 2/3] docs: sysctl/kernel: document ftrace entries
+Message-ID: <20200429225656.43aed6f9@heffalump.sk2.org>
+In-Reply-To: <20200428124133.0fbaf7c5@lwn.net>
+References: <20200423183651.15365-1-steve@sk2.org>
+        <20200423183651.15365-2-steve@sk2.org>
+        <20200428124133.0fbaf7c5@lwn.net>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ boundary="Sig_/FW_R1QjDCvmBdAlezO_Ci08"; protocol="application/pgp-signature"
+X-Ovh-Tracer-Id: 16871610105530371461
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrieefgdduheegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvffukfgjfhfogggtsehgtderreertdejnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucggtffrrghtthgvrhhnpeevledvueefvdeivefftdeugeekveethefftdffteelheejkeejjeduffeiudetkeenucfkpheptddrtddrtddrtddpkedvrdeihedrvdehrddvtddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepphhlrgihvghrjeekjedrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehsthgvvhgvsehskhdvrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 28 Apr 2020 21:29:03 -0300
-Jason Gunthorpe <jgg@ziepe.ca> wrote:
+--Sig_/FW_R1QjDCvmBdAlezO_Ci08
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-> On Tue, Apr 28, 2020 at 02:12:23PM -0600, Alex Williamson wrote:
-> 
-> > > > Maybe I was just getting lucky before this commit.  For a
-> > > > VM_PFNMAP, vaddr_get_pfn() only needs pin_user_pages_remote() to return
-> > > > error and the vma information that we setup in vfio_pci_mmap().    
-> > > 
-> > > I've written on this before, vfio should not be passing pages to the
-> > > iommu that it cannot pin eg it should not touch VM_PFNMAP vma's in the
-> > > first place.
-> > > 
-> > > It is a use-after-free security issue the way it is..  
-> > 
-> > Where is the user after free?  Here I'm trying to map device mmio space
-> > through the iommu, which we need to enable p2p when the user owns
-> > multiple devices.  
-> 
-> Yes, I gathered what the intent was..
-> 
-> > The device is owned by the user, bound to vfio-pci, and can't be
-> > unbound while the user has it open.  The iommu mappings are torn
-> > down on release.  I guess I don't understand the problem.  
-> 
-> For PFNMAP VMAs the lifecycle rule is basically that the PFN inside
-> the VMA can only be used inside the mmap_sem that read it. Ie you
-> cannot take a PFN outside the mmap_sem and continue to use it.
-> 
-> This is because the owner of the VMA owns the lifetime of that PFN,
-> and under the write side of the mmap_sem it can zap the PFN, or close
-> the VMA. Afterwards the VMA owner knows that there are no active
-> reference to the PFN in the system and can reclaim the PFN
-> 
-> ie the PFNMAP has no per-page pin counter. All lifetime revolves around
-> the mmap_sem and the vma.
-> 
-> What vfio does is take the PFN out of the mmap_sem and program it into
-> the iommu.
-> 
-> So when the VMA owner decides the PFN has no references, it actually
-> doesn't: vfio continues to access it beyond its permitted lifetime.
-> 
-> HW like mlx5 and GPUs have BAR pages which have security
-> properties. Once the PFN is returned to the driver the security
-> context of the PFN can be reset and re-assigned to another
-> process. Using VFIO a hostile user space can retain access to the BAR
-> page and upon its reassignment access a security context they were not
-> permitted to access.
-> 
-> This is why GUP does not return PFNMAP pages and vfio should not carry
-> a reference outside the mmap_sem. It breaks all the lifetime rules.
+On Tue, 28 Apr 2020 12:41:33 -0600, Jonathan Corbet <corbet@lwn.net> wrote:
+> On Thu, 23 Apr 2020 20:36:50 +0200
+> Stephen Kitt <steve@sk2.org> wrote:
+> > Based on the ftrace documentation, the tp_printk boot parameter
+> > documentation, and the implementation in kernel/trace/trace.c.
+> >=20
+> > Signed-off-by: Stephen Kitt <steve@sk2.org> =20
+>=20
+> This one could benefit from an ack from Steve (CC'd).  Also one other
+> little nit below:
 
-Thanks for the explanation.  I'm inferring that there is no solution to
-this, but why can't we use mmu notifiers to invalidate the iommu on zap
-or close?  I know that at least QEMU won't consider these sorts of
-mapping fatal, so we could possibly change the default and make support
-for such mappings opt-in, but I don't know if I'd break DPDK, or
-potentially users within QEMU that make use of p2p between devices.
-Thanks,
+Thanks (and thanks for the review Steve). I=E2=80=99ll follow up with v2 sh=
+ortly,
+fixing the spelling and grammar here:
 
-Alex
+> > +the console.  This is very useful for capturing traces that lead to
+> > +crashes and outputing it to a serial console.
 
+in addition to this:
+
+> > +will stop tracepoints from being sent to printk(), and
+> > +
+> > +:: =20
+>=20
+> I would just make that ", and::" and avoid the separate line.
+
+Regards,
+
+Stephen
+
+--Sig_/FW_R1QjDCvmBdAlezO_Ci08
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEnPVX/hPLkMoq7x0ggNMC9Yhtg5wFAl6p6hgACgkQgNMC9Yht
+g5z7Mw/9HsTuQXsity9hRkNzrwr4hTozShBtlUDgcUSictJoPGuhOGChizQsCQUU
+6yOvLYAEEqj9ywVInKXWG30lne3dQGdVTSlUj3rRLBt96aVbr0JfzksS8Ea6aFkU
+0YHZrdOBcdScpAy8W6Fx3bwEdue4Tv1/vihE6nS10SAIq6YaJOPMmTC9oNCPmxx3
+3url0e6O753LM8PNoPngonA5SA6KBLfDEuTTPrmokE6Pte6nJbo0fkL0naCOJ/t7
+yD21WuNtvc2Jep62foDoyFkTzIleek2Vl+ALxqNhCXAJ/bNktrl87gBU1UMaRkXk
+AP6MD3WRBwQ8VQaqMB7Af91vH7zVyVbbAyZ7bJ3+XBy2A5n34x7CdMreTV8EOH7j
+kLidI9NrHJCJgc3W08TF1ZF6MW79YmOT+knyvDFmtk/a7RgBTPeqLu/3qAvxz5xN
+Jl5lXwkxcDAshHbpGSPcfiOXATC6IjdaWe93jiIZy47YEcNgNKVDwef8/wEXWSyq
+SpVSCDj1fAFV78CAhUdKjlP7WqKEv1kqHeWEJoz4LFRU6OP+Efpj7Sb/ftzYFQ1H
+cKE0DUGK0bxFRHqXR2r68tNbHlzUq6jNxiRAuCueTYZSVR1fjKp+TsVuSuJ6+nKX
+GLrXsyTPhD+1I6NTVXkJJi6Zw1PKP68UFONxGKYAxDF4LsTmegY=
+=JIW3
+-----END PGP SIGNATURE-----
+
+--Sig_/FW_R1QjDCvmBdAlezO_Ci08--
