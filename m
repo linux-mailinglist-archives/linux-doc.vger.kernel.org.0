@@ -2,101 +2,64 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1A0B81BD24F
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2020 04:39:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 508B71BD2AB
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Apr 2020 04:53:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726430AbgD2Cj0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 28 Apr 2020 22:39:26 -0400
-Received: from conssluserg-03.nifty.com ([210.131.2.82]:38533 "EHLO
-        conssluserg-03.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726345AbgD2Cj0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Apr 2020 22:39:26 -0400
-Received: from mail-vs1-f42.google.com (mail-vs1-f42.google.com [209.85.217.42]) (authenticated)
-        by conssluserg-03.nifty.com with ESMTP id 03T2cw95003502;
-        Wed, 29 Apr 2020 11:38:59 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conssluserg-03.nifty.com 03T2cw95003502
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1588127939;
-        bh=kIACvKnbNQjmmvD9XNnXXeDcJn3YI4tRb66fZvzH6o0=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=1cVlTgtdT4Ze4na5pj7IAc2NYgNk2ylZxPHOfpt61kpTZIbSilpO7JhIq30479+FY
-         nlw6qbetxb6UzLkfMk0q39EBaAFGpppH1WTvlZJNZ/R7R8U/IqkB82fno6HNhEQjeA
-         DVGKsjqI9rBAU75zCuBhh1Ys0FhcNJeWx/PRIH4lrlEgG+M8Sdaf9ZMSClBXtommLX
-         8kkCtxlK3KB7/1CEpnheJblngxDGCUckcUhCapePv+/kAz8/ihRy85BB15osC2Fp3Y
-         HWz6lQAfDrhWJsQXaFyfheRKbUp8t8WJCiHZc+o83HKnNRR5ujg+zI8mRPlVFPkdqk
-         rgF5kTwNhPASw==
-X-Nifty-SrcIP: [209.85.217.42]
-Received: by mail-vs1-f42.google.com with SMTP id s11so357926vsm.3;
-        Tue, 28 Apr 2020 19:38:59 -0700 (PDT)
-X-Gm-Message-State: AGi0Pua2LuB2zvD8DI0EYTyDVh3qUAIx/Cs4x3I0+0BAZjoJIOJmJEDA
-        mrji9wueqgWUrUgmk/k9pGfUjRyrSal38HhULFo=
-X-Google-Smtp-Source: APiQypL9CzoFbaf4j03sWX7eNvmAC6tL/Lcuadex+fAZ5CS6CzTX3uUDunisReRWfuw07vnycbUbrt1H7bvxqgJy6Zg=
-X-Received: by 2002:a67:e94d:: with SMTP id p13mr23892835vso.215.1588127938122;
- Tue, 28 Apr 2020 19:38:58 -0700 (PDT)
+        id S1726631AbgD2Cx0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 28 Apr 2020 22:53:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37460 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726399AbgD2CxZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 28 Apr 2020 22:53:25 -0400
+Received: from mail-wm1-x342.google.com (mail-wm1-x342.google.com [IPv6:2a00:1450:4864:20::342])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61969C03C1AC
+        for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2020 19:53:25 -0700 (PDT)
+Received: by mail-wm1-x342.google.com with SMTP id h4so280377wmb.4
+        for <linux-doc@vger.kernel.org>; Tue, 28 Apr 2020 19:53:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=8LAzAiQJxImzDJ0y6vnsDTSb4b/uaAsNN5wGkmBPsdE=;
+        b=vMCotp7TBFNxNOvJp9TMWKpADzixnRs09mFkAmVuA4/NW5tMu7l+4BbyjIUzumlsTe
+         hbxgcTHDwbDBzjxWPwczkBCq/eFPDIv3aiNSNTeW2MR2m4SG1IH/sb6++P+dFNcS5mdU
+         uzTW08uWL8lHp473WpSgSz3wQd+47/QTrfJNlXTqWQiZnQcjiZo+VkKDwI5GK0Bto4fc
+         Qu5aFWilhTSCToZckM5Y8Z4jEsemAtSAorLyam3vig/od/WokAp/gvRruySwM/s9ZmbJ
+         CBr/IQC9e/v2Esd7xC+2aTqd+22FI27Yu3l30gc+ZOCzDLO7YssNVLRpUcS2994UFq9A
+         +3zQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=8LAzAiQJxImzDJ0y6vnsDTSb4b/uaAsNN5wGkmBPsdE=;
+        b=YJ/tMu/3EFSB2Lg35pKnJ/tY2zjKCmCShBP7FIl3fQXi92QS04fxUm0dNaBiusQXab
+         xisYGgv1porjbOmFjzg6dHR7qp4TlWTIldPyFmJ7gO6Ev9/iHyhuEmM813thqMyNyU8/
+         kuEOjfn1n1+C/KSBxg0ak/tTc+tBpOENhMwP2UpWMIbShI+87yzXktcZDYx4Sr0kx3C1
+         Iph34Ij1pB0NKbycUkDcGWYRPPoPkfTtp6IxAU/JkGvvTtUtPLXDYt6SZdZ4WFS0ETUs
+         2a+I9bfz1mKSjO4s4swJ7jp5P6EtW/MridZ9KBkeKQ7k+8Kic7mH0NtiNbBVG4GiNBTg
+         3iNw==
+X-Gm-Message-State: AGi0PuZJJLjpggIRP+T5y7cYscb9RTDWOYrIbERcwmHN5AZsOMYDBnqM
+        N4wAeOVVdr61fb3XpMMGQZlFyfE4KOZ+vDgb6s0=
+X-Google-Smtp-Source: APiQypKfrfGBeKvCYNXtdbt5WxC6llcT8MZtOTls7dpsmPfAxeOGxwkuMoZOBe/RRcKUAq2EKKPqLTr8D4g37mXzWa4=
+X-Received: by 2002:a1c:f012:: with SMTP id a18mr508524wmb.41.1588128803980;
+ Tue, 28 Apr 2020 19:53:23 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200423073929.127521-1-masahiroy@kernel.org> <20200425115303.GA10048@ravnborg.org>
-In-Reply-To: <20200425115303.GA10048@ravnborg.org>
-From:   Masahiro Yamada <masahiroy@kernel.org>
-Date:   Wed, 29 Apr 2020 11:38:22 +0900
-X-Gmail-Original-Message-ID: <CAK7LNARRxS6nnbBAa495Bh4nCdDAixinpMG1Tn6SV_w38uOzdg@mail.gmail.com>
-Message-ID: <CAK7LNARRxS6nnbBAa495Bh4nCdDAixinpMG1Tn6SV_w38uOzdg@mail.gmail.com>
-Subject: Re: [PATCH 00/16] kbuild: support 'userprogs' syntax
-To:     Sam Ravnborg <sam@ravnborg.org>
-Cc:     Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
-        bpf <bpf@vger.kernel.org>, Alexei Starovoitov <ast@kernel.org>,
-        Andrii Nakryiko <andriin@fb.com>,
-        Christian Brauner <christian@brauner.io>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        John Fastabend <john.fastabend@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        KP Singh <kpsingh@chromium.org>,
-        Martin KaFai Lau <kafai@fb.com>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Song Liu <songliubraving@fb.com>,
-        Tomas Winkler <tomas.winkler@intel.com>,
-        Yonghong Song <yhs@fb.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Networking <netdev@vger.kernel.org>
+Received: by 2002:adf:9cd1:0:0:0:0:0 with HTTP; Tue, 28 Apr 2020 19:53:23
+ -0700 (PDT)
+Reply-To: peterjoe2002@hotmail.com
+From:   Peter Joe <law.peterjoe3@gmail.com>
+Date:   Wed, 29 Apr 2020 04:53:23 +0200
+Message-ID: <CAA5SiqH7MXhkxJx4hZDX0Cu7Wo1h8dbQK2pmFzUzXAd0f1OgVA@mail.gmail.com>
+Subject: Peter Joe
+To:     undisclosed-recipients:;
 Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Sam,
+Dear,
 
-On Sat, Apr 25, 2020 at 8:53 PM Sam Ravnborg <sam@ravnborg.org> wrote:
->
-> Hi Masahiro
->
-> On Thu, Apr 23, 2020 at 04:39:13PM +0900, Masahiro Yamada wrote:
-> >
-> > Several Makefiles use 'hostprogs' for building the code for
-> > the host architecture is not appropriate.
-> >
-> > This is just because Kbuild does not provide the syntax to do it.
-> >
-> > This series introduce 'userprogs' syntax and use it from
-> > sample and bpf Makefiles.
-> >
-> > Sam worked on this in 2014.
-> > https://lkml.org/lkml/2014/7/13/154
->
-> I wonder how you managed to dig that up, but thanks for the reference.
+Did you receive the message i sent to you?
 
-
-I just remembered your work back in 2014.
-
-I did not remember the patch title exactly,
-but I searched for 'From: Sam Ravnborg' and
-'To: linux-kbuild@vger.kernel.org' in my mail box.
-
-
-
-
--- 
-Best Regards
-Masahiro Yamada
+Regards,
+Peter Joe
