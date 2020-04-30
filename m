@@ -2,129 +2,240 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1EE081BFC8A
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2020 16:06:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 405051C01B8
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2020 18:09:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728064AbgD3OGh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 30 Apr 2020 10:06:37 -0400
-Received: from mout.web.de ([212.227.15.4]:44323 "EHLO mout.web.de"
+        id S1728540AbgD3QIG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 30 Apr 2020 12:08:06 -0400
+Received: from mail.kernel.org ([198.145.29.99]:50450 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728283AbgD3OGf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 30 Apr 2020 10:06:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
-        s=dbaedf251592; t=1588255587;
-        bh=a8CsPTsb0Rnh07ZEvOHAFMQL0ZBBV4dnc48d3lm8fCI=;
-        h=X-UI-Sender-Class:Subject:To:References:From:Cc:Date:In-Reply-To;
-        b=AdGOuVd9lHS08wwlC1uq4KYwJ4SSYN/JNOr90LNnQrESvZKMYrPw+hSKtu+7WI0k+
-         nnl1S1wuFvmvFR4Kc/cmPajft2NByz8OvlWQIYgBEWil5s5hZjwDvezqR08T6UfGph
-         ZRpUOYxnHQiX8CMEem+S+uE8UDO+bRsNUrGY/NpM=
-X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.2] ([93.131.175.216]) by smtp.web.de (mrweb002
- [213.165.67.108]) with ESMTPSA (Nemesis) id 0MFLQi-1jQsZb0RJk-00EQEe; Thu, 30
- Apr 2020 16:06:27 +0200
-Subject: Re: checkpatch: Support for alternative quotation characters around
- commit title?
-To:     Wang YanQing <udknight@gmail.com>, Joe Perches <joe@perches.com>,
-        Andy Whitcroft <apw@canonical.com>,
-        kernel-janitors@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20200429163645.GA13810@udknight>
- <4112ab7e-1f06-d880-e471-084c78bc84d4@web.de>
- <20200430125614.GA30691@udknight>
-From:   Markus Elfring <Markus.Elfring@web.de>
-Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
- 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 FEE=
-Cc:     linux-kernel@vger.kernel.org,
-        Alexei Starovoitov <alexei.starovoitov@gmail.com>,
-        Matteo Croce <mcroce@redhat.com>
-Message-ID: <dee7be7c-cbb9-688e-662a-34549d2df35a@web.de>
-Date:   Thu, 30 Apr 2020 16:06:25 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+        id S1726761AbgD3QEh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 30 Apr 2020 12:04:37 -0400
+Received: from mail.kernel.org (ip5f5ad5c5.dynamic.kabel-deutschland.de [95.90.213.197])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id D1A81208D5;
+        Thu, 30 Apr 2020 16:04:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1588262676;
+        bh=htL5CBKoN0WCDcYQWi30eM6Fpz9wSc9gmJDRu0SQ/NI=;
+        h=From:To:Cc:Subject:Date:From;
+        b=unU5CxMku37iTcODJkr/My/DCiuY6c7gGAUz/nAMxHPid7wUgnKJN7TIkX32+xzAE
+         LaNUyPunTxlMUmMWOxf8nrGoMgwV6nioZLtQ6AY+8pCNjmTJpZEtKL/ngWXECpueqz
+         gmp7pUE+yyWwIAa56XTDl09fGP1NFHQBOR2lpjN0=
+Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
+        (envelope-from <mchehab@kernel.org>)
+        id 1jUBft-00AxE8-VJ; Thu, 30 Apr 2020 18:04:33 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        devel@driverdev.osuosl.org, coreteam@netfilter.org,
+        netfilter-devel@vger.kernel.org,
+        Ishizaki Kou <kou.ishizaki@toshiba.co.jp>,
+        netdev@vger.kernel.org, Paul Mackerras <paulus@samba.org>,
+        linuxppc-dev@lists.ozlabs.org,
+        Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>,
+        Jozsef Kadlecsik <kadlec@netfilter.org>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        Florian Westphal <fw@strlen.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jakub Kicinski <kuba@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        linux-wireless@vger.kernel.org, Geoff Levand <geoff@infradead.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        linux-can@vger.kernel.org, Ioana Ciornei <ioana.ciornei@nxp.com>,
+        linux-sctp@vger.kernel.org, Vlad Yasevich <vyasevich@gmail.com>,
+        rds-devel@oss.oracle.com,
+        Ioana Radulescu <ruxandra.radulescu@nxp.com>,
+        David Howells <dhowells@redhat.com>,
+        Pablo Neira Ayuso <pablo@netfilter.org>,
+        Kalle Valo <kvalo@codeaurora.org>,
+        Santosh Shilimkar <santosh.shilimkar@oracle.com>,
+        Oliver Hartkopp <socketcan@hartkopp.net>,
+        Neil Horman <nhorman@tuxdriver.com>,
+        Remi Denis-Courmont <courmisch@gmail.com>,
+        linux-rdma@vger.kernel.org, linux-afs@lists.infradead.org,
+        linux-x25@vger.kernel.org, Marc Kleine-Budde <mkl@pengutronix.de>
+Subject: [PATCH 00/37] net: manually convert files to ReST format - part 2
+Date:   Thu, 30 Apr 2020 18:03:55 +0200
+Message-Id: <cover.1588261997.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.25.4
 MIME-Version: 1.0
-In-Reply-To: <20200430125614.GA30691@udknight>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:QreoYv2Q90lndpAnA9rF6yVbhksQG/cW0RX7Eoabwv7SUpOph/D
- MkZweskGQ3QYZJmT636PceKB70uNcl6uQJpYpHbm6mmvpz75/oy6nyZO10/mpKLZ1BgkQEP
- 68J2OaiL4vujyKeaKcmjw6SQiMltJt8BfU1ldEiDuuR0V9VFS+F0VPWVd0AVDwYWCU8+1MH
- GG/6/4Q1TP4cBYPTdIRDA==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:oCQabBRKl4M=:LV9DAdFMC3fojM0M6apAI4
- 1piZa5/kOZa7tQlhtilqwYZHq+AbWszFb2CkQgdVqpoU6ZBki/3F9yTP+yayqvHkXfIC5Y3JP
- q0iz0B9IYN5Zq+mhrB1GZer2vVwXVJ+MHQLvDyryglzAKRUycijU28zXQwqqGpJldiUgMaAoM
- rj4JOIAig38+AUDAk4r3neHy0bjXU0c0MBbCbVoFa+2ji4MKtFrfUnv1atl79w60qotn74JfR
- KLOkOgWvFpSpFwxB07vJJ8HIKLilFmuxxJqmBBfYi3Z4sRtR45Ytv+SYMGM6P9q2S43i9Fkot
- 7sTOelkEjOqnOTYNFfcuWYj/0E3m+92B6p6PRrDcXEIukbsb83cuBIUbCYitzJ85Y2zUZdYiY
- TgicCBCuWHZBpdM48luim+H+zl0pJ7GfXXwRJC4nXrz6goedy3NCMz8WA8YJBNTk50nGhKBC9
- DKnliP2EDJHuq75sAP7msSWNktSP4TRgBSR6l0Vkj2Kp/OkB/IB/nsZyVkVtGnlQoAZjZI+Tu
- Gw2czhURrM0HccSL6Fz9waO/IXk1oSSiH28C627NEANf5qXKiU8hnhWr832CuGozmRT3IVVXx
- z5f62u4O/nUudctZuuVoVViMyRNYr4syvMhJ8QgSFD0ILtz2KUI2XGUTMmevq2Ckvu5kzhmXP
- Y6aug9NBchFLZERb3/SXVJGYflj/QHR/i1DcL57tZWO2QrRtawEQTYihxhEsFxJrdDN7b8bAa
- XA5JoVanenEzA0C8hitFLO3Kjn+jT/BtBu50ixrwcbSY1nMG40weekdCVyOBLQ4zIWaFpsqEZ
- rM21gp1CjHzSIXuvj/m5tAMLU/ptwFdHWSJKLalQG+PdtlahmYW2mHr7Yo4uFC70co8GQD5oI
- +RNR0t7A74/KW1HTvQk8pK+A/zCmfw7PtBKXG5FDnA6VrK1rRcStqaWXHIJGmX+A4k+4X3teI
- /UunhOkRPHBIyMCTCM4bpv4i75EMLN3HmVtluxG2ckWHz+Grjmt0itFAeFrGPl3VHuFiJGh6Z
- 95aX8x/a2ccKTcESoqE+Pj1xp67vCYpS2bVsHoRhOkbdeXv12lYUWjkL6XqqOIk6JAGUmvlnz
- DabNR9yetC0qy5nxt76pKfF9wZiDSnB/h9bycKXU2bU8pirSzm6QEw1mA/NXBbtA8O9lvtvLQ
- HksEY9GTLl4Ipz1e478bf7ZVKDn6PBRJ+N8PeCW3E2gW/MmEYOLio/Vk2NuJCRuHrvfEUt8d6
- c8k8dfcDaUlQ0FLps
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> No, we don't need to support other quotation character for 'Fixes:' tag
-> at least now. The submitting-patches.rst tells us the pretty format is:
-> =E2=80=9C...
-> Fixes: %h (\"%s\")
-> ...=E2=80=9D
+That's the second part of my work to convert the networking
+text files into ReST. it is based on today's linux-next (next-20200430).
 
-Can such a data structure still be correctly parsed if the commit title
-would contain double quotes?
+The full series (including those ones) are at:
 
-How do you think about to discuss delimiter variations?
+	https://git.linuxtv.org/mchehab/experimental.git/log/?h=net-docs
 
-Regards,
-Markus
+I should be sending the remaining patches (another /38 series)
+after getting those merged at -next.
+
+The documents, converted to HTML via the building system are at:
+
+	https://www.infradead.org/~mchehab/kernel_docs/networking/
+
+Mauro Carvalho Chehab (37):
+  docs: networking: convert l2tp.txt to ReST
+  docs: networking: convert lapb-module.txt to ReST
+  docs: networking: convert ltpc.txt to ReST
+  docs: networking: convert mac80211-injection.txt to ReST
+  docs: networking: convert mpls-sysctl.txt to ReST
+  docs: networking: convert multiqueue.txt to ReST
+  docs: networking: convert netconsole.txt to ReST
+  docs: networking: convert netdev-features.txt to ReST
+  docs: networking: convert netdevices.txt to ReST
+  docs: networking: convert netfilter-sysctl.txt to ReST
+  docs: networking: convert netif-msg.txt to ReST
+  docs: networking: convert nf_conntrack-sysctl.txt to ReST
+  docs: networking: convert nf_flowtable.txt to ReST
+  docs: networking: convert openvswitch.txt to ReST
+  docs: networking: convert operstates.txt to ReST
+  docs: networking: convert packet_mmap.txt to ReST
+  docs: networking: convert phonet.txt to ReST
+  docs: networking: convert pktgen.txt to ReST
+  docs: networking: convert PLIP.txt to ReST
+  docs: networking: convert ppp_generic.txt to ReST
+  docs: networking: convert proc_net_tcp.txt to ReST
+  docs: networking: convert radiotap-headers.txt to ReST
+  docs: networking: convert ray_cs.txt to ReST
+  docs: networking: convert rds.txt to ReST
+  docs: networking: convert regulatory.txt to ReST
+  docs: networking: convert rxrpc.txt to ReST
+  docs: networking: convert sctp.txt to ReST
+  docs: networking: convert secid.txt to ReST
+  docs: networking: convert seg6-sysctl.txt to ReST
+  docs: networking: convert skfp.txt to ReST
+  docs: networking: convert strparser.txt to ReST
+  docs: networking: convert switchdev.txt to ReST
+  docs: networking: convert tc-actions-env-rules.txt to ReST
+  docs: networking: convert tcp-thin.txt to ReST
+  docs: networking: convert team.txt to ReST
+  docs: networking: convert timestamping.txt to ReST
+  docs: networking: convert tproxy.txt to ReST
+
+ .../admin-guide/kernel-parameters.txt         |    2 +-
+ Documentation/admin-guide/serial-console.rst  |    2 +-
+ Documentation/filesystems/afs.rst             |    2 +-
+ Documentation/networking/bonding.rst          |    2 +-
+ Documentation/networking/can.rst              |    2 +-
+ .../networking/checksum-offloads.rst          |    2 +-
+ Documentation/networking/index.rst            |   37 +
+ Documentation/networking/ip-sysctl.rst        |    2 +-
+ .../networking/{l2tp.txt => l2tp.rst}         |  145 ++-
+ .../{lapb-module.txt => lapb-module.rst}      |  120 +-
+ .../networking/{ltpc.txt => ltpc.rst}         |   45 +-
+ ...1-injection.txt => mac80211-injection.rst} |   41 +-
+ .../{mpls-sysctl.txt => mpls-sysctl.rst}      |   17 +-
+ .../{multiqueue.txt => multiqueue.rst}        |   41 +-
+ .../{netconsole.txt => netconsole.rst}        |  125 +-
+ ...etdev-features.txt => netdev-features.rst} |   19 +-
+ .../{netdevices.txt => netdevices.rst}        |   21 +-
+ ...filter-sysctl.txt => netfilter-sysctl.rst} |   11 +-
+ Documentation/networking/netif-msg.rst        |   95 ++
+ Documentation/networking/netif-msg.txt        |   79 --
+ ...ack-sysctl.txt => nf_conntrack-sysctl.rst} |   51 +-
+ .../{nf_flowtable.txt => nf_flowtable.rst}    |   55 +-
+ .../{openvswitch.txt => openvswitch.rst}      |   23 +-
+ .../{operstates.txt => operstates.rst}        |   45 +-
+ Documentation/networking/packet_mmap.rst      | 1084 +++++++++++++++++
+ Documentation/networking/packet_mmap.txt      | 1061 ----------------
+ .../networking/{phonet.txt => phonet.rst}     |   56 +-
+ .../networking/{pktgen.txt => pktgen.rst}     |  316 ++---
+ .../networking/{PLIP.txt => plip.rst}         |   43 +-
+ .../{ppp_generic.txt => ppp_generic.rst}      |   52 +-
+ .../{proc_net_tcp.txt => proc_net_tcp.rst}    |   23 +-
+ ...iotap-headers.txt => radiotap-headers.rst} |   99 +-
+ .../networking/{ray_cs.txt => ray_cs.rst}     |  101 +-
+ Documentation/networking/{rds.txt => rds.rst} |  295 +++--
+ .../{regulatory.txt => regulatory.rst}        |   29 +-
+ .../networking/{rxrpc.txt => rxrpc.rst}       |  306 ++---
+ .../networking/{sctp.txt => sctp.rst}         |   37 +-
+ .../networking/{secid.txt => secid.rst}       |    6 +
+ Documentation/networking/seg6-sysctl.rst      |   26 +
+ Documentation/networking/seg6-sysctl.txt      |   18 -
+ .../networking/{skfp.txt => skfp.rst}         |  153 ++-
+ .../{strparser.txt => strparser.rst}          |   85 +-
+ .../{switchdev.txt => switchdev.rst}          |  114 +-
+ .../networking/tc-actions-env-rules.rst       |   29 +
+ .../networking/tc-actions-env-rules.txt       |   24 -
+ .../networking/{tcp-thin.txt => tcp-thin.rst} |    5 +
+ .../networking/{team.txt => team.rst}         |    6 +
+ .../{timestamping.txt => timestamping.rst}    |  154 ++-
+ .../networking/{tproxy.txt => tproxy.rst}     |   55 +-
+ MAINTAINERS                                   |   14 +-
+ drivers/net/Kconfig                           |    4 +-
+ drivers/net/appletalk/Kconfig                 |    2 +-
+ drivers/net/ethernet/toshiba/ps3_gelic_net.c  |    2 +-
+ drivers/net/ethernet/toshiba/spider_net.c     |    2 +-
+ drivers/net/fddi/Kconfig                      |    2 +-
+ drivers/net/plip/Kconfig                      |    2 +-
+ drivers/net/wireless/Kconfig                  |    2 +-
+ drivers/staging/fsl-dpaa2/ethsw/README        |    2 +-
+ include/linux/netdev_features.h               |    2 +-
+ include/net/cfg80211.h                        |    2 +-
+ include/uapi/linux/errqueue.h                 |    2 +-
+ net/Kconfig                                   |    2 +-
+ net/core/pktgen.c                             |    2 +-
+ net/lapb/Kconfig                              |    2 +-
+ net/mac80211/tx.c                             |    2 +-
+ net/netfilter/Kconfig                         |    2 +-
+ net/rxrpc/Kconfig                             |    6 +-
+ net/rxrpc/sysctl.c                            |    2 +-
+ net/wireless/radiotap.c                       |    2 +-
+ samples/pktgen/README.rst                     |    2 +-
+ 70 files changed, 2864 insertions(+), 2357 deletions(-)
+ rename Documentation/networking/{l2tp.txt => l2tp.rst} (79%)
+ rename Documentation/networking/{lapb-module.txt => lapb-module.rst} (74%)
+ rename Documentation/networking/{ltpc.txt => ltpc.rst} (86%)
+ rename Documentation/networking/{mac80211-injection.txt => mac80211-injection.rst} (67%)
+ rename Documentation/networking/{mpls-sysctl.txt => mpls-sysctl.rst} (82%)
+ rename Documentation/networking/{multiqueue.txt => multiqueue.rst} (76%)
+ rename Documentation/networking/{netconsole.txt => netconsole.rst} (66%)
+ rename Documentation/networking/{netdev-features.txt => netdev-features.rst} (95%)
+ rename Documentation/networking/{netdevices.txt => netdevices.rst} (89%)
+ rename Documentation/networking/{netfilter-sysctl.txt => netfilter-sysctl.rst} (62%)
+ create mode 100644 Documentation/networking/netif-msg.rst
+ delete mode 100644 Documentation/networking/netif-msg.txt
+ rename Documentation/networking/{nf_conntrack-sysctl.txt => nf_conntrack-sysctl.rst} (85%)
+ rename Documentation/networking/{nf_flowtable.txt => nf_flowtable.rst} (76%)
+ rename Documentation/networking/{openvswitch.txt => openvswitch.rst} (95%)
+ rename Documentation/networking/{operstates.txt => operstates.rst} (87%)
+ create mode 100644 Documentation/networking/packet_mmap.rst
+ delete mode 100644 Documentation/networking/packet_mmap.txt
+ rename Documentation/networking/{phonet.txt => phonet.rst} (82%)
+ rename Documentation/networking/{pktgen.txt => pktgen.rst} (62%)
+ rename Documentation/networking/{PLIP.txt => plip.rst} (92%)
+ rename Documentation/networking/{ppp_generic.txt => ppp_generic.rst} (91%)
+ rename Documentation/networking/{proc_net_tcp.txt => proc_net_tcp.rst} (83%)
+ rename Documentation/networking/{radiotap-headers.txt => radiotap-headers.rst} (70%)
+ rename Documentation/networking/{ray_cs.txt => ray_cs.rst} (65%)
+ rename Documentation/networking/{rds.txt => rds.rst} (59%)
+ rename Documentation/networking/{regulatory.txt => regulatory.rst} (94%)
+ rename Documentation/networking/{rxrpc.txt => rxrpc.rst} (85%)
+ rename Documentation/networking/{sctp.txt => sctp.rst} (64%)
+ rename Documentation/networking/{secid.txt => secid.rst} (87%)
+ create mode 100644 Documentation/networking/seg6-sysctl.rst
+ delete mode 100644 Documentation/networking/seg6-sysctl.txt
+ rename Documentation/networking/{skfp.txt => skfp.rst} (68%)
+ rename Documentation/networking/{strparser.txt => strparser.rst} (80%)
+ rename Documentation/networking/{switchdev.txt => switchdev.rst} (84%)
+ create mode 100644 Documentation/networking/tc-actions-env-rules.rst
+ delete mode 100644 Documentation/networking/tc-actions-env-rules.txt
+ rename Documentation/networking/{tcp-thin.txt => tcp-thin.rst} (97%)
+ rename Documentation/networking/{team.txt => team.rst} (67%)
+ rename Documentation/networking/{timestamping.txt => timestamping.rst} (89%)
+ rename Documentation/networking/{tproxy.txt => tproxy.rst} (70%)
+
+-- 
+2.25.4
+
+
