@@ -2,214 +2,291 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A51E81BEC65
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2020 01:04:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 30A2B1BED27
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2020 02:49:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726481AbgD2XEI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Apr 2020 19:04:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57654 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727789AbgD2XEH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Apr 2020 19:04:07 -0400
-Received: from mail-pf1-x441.google.com (mail-pf1-x441.google.com [IPv6:2607:f8b0:4864:20::441])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 84898C035494
-        for <linux-doc@vger.kernel.org>; Wed, 29 Apr 2020 16:04:07 -0700 (PDT)
-Received: by mail-pf1-x441.google.com with SMTP id w65so1844996pfc.12
-        for <linux-doc@vger.kernel.org>; Wed, 29 Apr 2020 16:04:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=broadcom.com; s=google;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=pTsAs2CDlbVr46p0BUoXzORZ7PJqz3PIVNdyQM5hvA4=;
-        b=CdmBNX7N3jvCxhnclyKjAisrCfjyJw95MD3shTrp1r6CmwGIN7H1/Pe2hnfly4p4PO
-         0fzH1jsEO3VwWjfzTAlMTeXo1sP8SzpQEvZpEEAk7t/sUBLMMCH1yx3D/tl4Xy4G5z72
-         AC7iaQy3XJAbuU0T+mYFO3vRkqx4GL0oQiEQw=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=pTsAs2CDlbVr46p0BUoXzORZ7PJqz3PIVNdyQM5hvA4=;
-        b=ICVqBCTyZDa5IGt22CYGp7EW0H1MnFcUvlIb3P4ruV75tWjUjNdFW7trp/e2sX2B9J
-         6aDLD0slzw/rzifoz3Ml33hLGITxTUdit812aGnh6G/VBmW2UZHa8mUdnm644LuIUJyW
-         7FQkAVulrH3AJkcz5+nU1+RBa8uaX0jpjGaSypEH2gl+XXeZ+eiqPb3wFSStPCWXGt+h
-         j3gEbQGOPXZwRHEkiFh+UC/x0/nDj/5/XUUoHW+hoPCS83StInoBk9UYHTAb2vSPI2rR
-         P0fxWzzNUljLhKPwC7mn+DkoDh8O6SHs5S+8O0Cfezu7noDytG9AVn/By/5fwpQ27Rpz
-         XR2g==
-X-Gm-Message-State: AGi0PuZ7/AbRVXyVzRT7oORy2DNzMxIlLYmbBjRAkXxYvpe6geyvaiQr
-        h9dMfQzr3yAxEUtomOeEb5/Zrw==
-X-Google-Smtp-Source: APiQypKUxErsH+JxyFE5+lXNYp86SmB717RFqVubaZnyDLfFMUyyoUO8X3/GyvAYk7iDD2eJBJY2tQ==
-X-Received: by 2002:aa7:8042:: with SMTP id y2mr504718pfm.94.1588201446938;
-        Wed, 29 Apr 2020 16:04:06 -0700 (PDT)
-Received: from [10.136.13.65] ([192.19.228.250])
-        by smtp.gmail.com with ESMTPSA id l37sm255572pje.12.2020.04.29.16.04.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 29 Apr 2020 16:04:06 -0700 (PDT)
-Subject: Re: Re: [RESEND PATCH v5 2/5] arm64/crash_core: Export TCR_EL1.T1SZ
- in vmcoreinfo
-To:     Bhupesh Sharma <bhsharma@redhat.com>,
-        Amit Kachhap <amit.kachhap@arm.com>
-Cc:     Mark Rutland <mark.rutland@arm.com>, x86@kernel.org,
-        Will Deacon <will@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Ard Biesheuvel <ard.biesheuvel@linaro.org>,
-        kexec mailing list <kexec@lists.infradead.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Kazuhito Hagio <k-hagio@ab.jp.nec.com>,
-        James Morse <james.morse@arm.com>,
-        Dave Anderson <anderson@redhat.com>,
-        bhupesh linux <bhupesh.linux@gmail.com>,
-        linuxppc-dev@lists.ozlabs.org,
-        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-        Steve Capper <steve.capper@arm.com>,
-        Ray Jui <ray.jui@broadcom.com>,
-        Bharat Gooty <bharat.gooty@broadcom.com>
-References: <1575057559-25496-1-git-send-email-bhsharma@redhat.com>
- <1575057559-25496-3-git-send-email-bhsharma@redhat.com>
- <63d6e63c-7218-d2dd-8767-4464be83603f@arm.com>
- <af0fd2b0-99db-9d58-bc8d-0dd9d640b1eb@redhat.com>
- <f791e777-781c-86ce-7619-1de3fe3e7b90@arm.com>
- <351975548.1986001.1578682810951.JavaMail.zimbra@redhat.com>
- <04287d60-e99e-631b-c134-d6dc39e6a193@redhat.com>
- <974f3601-25f8-f4e6-43a8-ff4275e9c174@arm.com>
- <CACi5LpOK6Q3ud3M3zakexLJNOtHy9TODHyYSHVwE3JHVakKzqA@mail.gmail.com>
-From:   Scott Branden <scott.branden@broadcom.com>
-Message-ID: <d401b003-af3e-c525-ba00-0de48486b7a0@broadcom.com>
-Date:   Wed, 29 Apr 2020 16:04:03 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+        id S1726545AbgD3Atk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Apr 2020 20:49:40 -0400
+Received: from mga12.intel.com ([192.55.52.136]:37871 "EHLO mga12.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726309AbgD3Atk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 29 Apr 2020 20:49:40 -0400
+IronPort-SDR: uvVv1plS+nB0cwtKXKzzbRnai1Gpga8r+X98KYJKhKkBuC0LlzLkxtXgqefrnrT+puLBuUM/xT
+ onWLH+vxg/Tw==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Apr 2020 17:49:40 -0700
+IronPort-SDR: Gu7bxkV3d6H5AxKhC9r67Y2KEW0N8wqsuKw2oF4WCoqXWvNAJmrGHv4u1xQk576m6AsU4UZ89Q
+ Nogm238Tg/Hw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,333,1583222400"; 
+   d="scan'208";a="459385009"
+Received: from joy-optiplex-7040.sh.intel.com (HELO joy-OptiPlex-7040) ([10.239.13.16])
+  by fmsmga005.fm.intel.com with ESMTP; 29 Apr 2020 17:49:33 -0700
+Date:   Wed, 29 Apr 2020 20:39:50 -0400
+From:   Yan Zhao <yan.y.zhao@intel.com>
+To:     "Dr. David Alan Gilbert" <dgilbert@redhat.com>
+Cc:     "Tian, Kevin" <kevin.tian@intel.com>,
+        Alex Williamson <alex.williamson@redhat.com>,
+        "cjia@nvidia.com" <cjia@nvidia.com>,
+        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "libvir-list@redhat.com" <libvir-list@redhat.com>,
+        "Zhengxiao.zx@alibaba-inc.com" <Zhengxiao.zx@alibaba-inc.com>,
+        "shuangtai.tst@alibaba-inc.com" <shuangtai.tst@alibaba-inc.com>,
+        "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+        "kwankhede@nvidia.com" <kwankhede@nvidia.com>,
+        "eauger@redhat.com" <eauger@redhat.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "Liu, Yi L" <yi.l.liu@intel.com>,
+        "eskultet@redhat.com" <eskultet@redhat.com>,
+        "Yang, Ziye" <ziye.yang@intel.com>,
+        "mlevitsk@redhat.com" <mlevitsk@redhat.com>,
+        "pasic@linux.ibm.com" <pasic@linux.ibm.com>,
+        "aik@ozlabs.ru" <aik@ozlabs.ru>,
+        "felipe@nutanix.com" <felipe@nutanix.com>,
+        "Ken.Xue@amd.com" <Ken.Xue@amd.com>,
+        "Zeng, Xin" <xin.zeng@intel.com>,
+        "zhenyuw@linux.intel.com" <zhenyuw@linux.intel.com>,
+        "dinechin@redhat.com" <dinechin@redhat.com>,
+        "intel-gvt-dev@lists.freedesktop.org" 
+        <intel-gvt-dev@lists.freedesktop.org>,
+        "Liu, Changpeng" <changpeng.liu@intel.com>,
+        "berrange@redhat.com" <berrange@redhat.com>,
+        Cornelia Huck <cohuck@redhat.com>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "Wang, Zhi A" <zhi.a.wang@intel.com>,
+        "jonathan.davies@nutanix.com" <jonathan.davies@nutanix.com>,
+        "He, Shaopeng" <shaopeng.he@intel.com>
+Subject: Re: [PATCH v5 0/4] introduction of migration_version attribute for
+ VFIO live migration
+Message-ID: <20200430003949.GN12879@joy-OptiPlex-7040>
+Reply-To: Yan Zhao <yan.y.zhao@intel.com>
+References: <20200422073628.GA12879@joy-OptiPlex-7040>
+ <20200424191049.GU3106@work-vm>
+ <20200426013628.GC12879@joy-OptiPlex-7040>
+ <20200427153743.GK2923@work-vm>
+ <20200428005429.GJ12879@joy-OptiPlex-7040>
+ <20200428141437.GG2794@work-vm>
+ <20200429072616.GL12879@joy-OptiPlex-7040>
+ <20200429082201.GA2834@work-vm>
+ <20200429093555.GM12879@joy-OptiPlex-7040>
+ <20200429094844.GE2834@work-vm>
 MIME-Version: 1.0
-In-Reply-To: <CACi5LpOK6Q3ud3M3zakexLJNOtHy9TODHyYSHVwE3JHVakKzqA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200429094844.GE2834@work-vm>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Bhupesh,
+On Wed, Apr 29, 2020 at 05:48:44PM +0800, Dr. David Alan Gilbert wrote:
+<snip>
+> > > > > > > > > > > > > An mdev type is meant to define a software compatible interface, so in
+> > > > > > > > > > > > > the case of mdev->mdev migration, doesn't migrating to a different type
+> > > > > > > > > > > > > fail the most basic of compatibility tests that we expect userspace to
+> > > > > > > > > > > > > perform?  IOW, if two mdev types are migration compatible, it seems a
+> > > > > > > > > > > > > prerequisite to that is that they provide the same software interface,
+> > > > > > > > > > > > > which means they should be the same mdev type.
+> > > > > > > > > > > > >
+> > > > > > > > > > > > > In the hybrid cases of mdev->phys or phys->mdev, how does a
+> > > > > > > > > > > > management
+> > > > > > > > > > > > > tool begin to even guess what might be compatible?  Are we expecting
+> > > > > > > > > > > > > libvirt to probe ever device with this attribute in the system?  Is
+> > > > > > > > > > > > > there going to be a new class hierarchy created to enumerate all
+> > > > > > > > > > > > > possible migrate-able devices?
+> > > > > > > > > > > > >
+> > > > > > > > > > > > yes, management tool needs to guess and test migration compatible
+> > > > > > > > > > > > between two devices. But I think it's not the problem only for
+> > > > > > > > > > > > mdev->phys or phys->mdev. even for mdev->mdev, management tool needs
+> > > > > > > > > > > > to
+> > > > > > > > > > > > first assume that the two mdevs have the same type of parent devices
+> > > > > > > > > > > > (e.g.their pciids are equal). otherwise, it's still enumerating
+> > > > > > > > > > > > possibilities.
+> > > > > > > > > > > > 
+> > > > > > > > > > > > on the other hand, for two mdevs,
+> > > > > > > > > > > > mdev1 from pdev1, its mdev_type is 1/2 of pdev1;
+> > > > > > > > > > > > mdev2 from pdev2, its mdev_type is 1/4 of pdev2;
+> > > > > > > > > > > > if pdev2 is exactly 2 times of pdev1, why not allow migration between
+> > > > > > > > > > > > mdev1 <-> mdev2.
+> > > > > > > > > > > 
+> > > > > > > > > > > How could the manage tool figure out that 1/2 of pdev1 is equivalent 
+> > > > > > > > > > > to 1/4 of pdev2? If we really want to allow such thing happen, the best
+> > > > > > > > > > > choice is to report the same mdev type on both pdev1 and pdev2.
+> > > > > > > > > > I think that's exactly the value of this migration_version interface.
+> > > > > > > > > > the management tool can take advantage of this interface to know if two
+> > > > > > > > > > devices are migration compatible, no matter they are mdevs, non-mdevs,
+> > > > > > > > > > or mix.
+> > > > > > > > > > 
+> > > > > > > > > > as I know, (please correct me if not right), current libvirt still
+> > > > > > > > > > requires manually generating mdev devices, and it just duplicates src vm
+> > > > > > > > > > configuration to the target vm.
+> > > > > > > > > > for libvirt, currently it's always phys->phys and mdev->mdev (and of the
+> > > > > > > > > > same mdev type).
+> > > > > > > > > > But it does not justify that hybrid cases should not be allowed. otherwise,
+> > > > > > > > > > why do we need to introduce this migration_version interface and leave
+> > > > > > > > > > the judgement of migration compatibility to vendor driver? why not simply
+> > > > > > > > > > set the criteria to something like "pciids of parent devices are equal,
+> > > > > > > > > > and mdev types are equal" ?
+> > > > > > > > > > 
+> > > > > > > > > > 
+> > > > > > > > > > > btw mdev<->phys just brings trouble to upper stack as Alex pointed out. 
+> > > > > > > > > > could you help me understand why it will bring trouble to upper stack?
+> > > > > > > > > > 
+> > > > > > > > > > I think it just needs to read src migration_version under src dev node,
+> > > > > > > > > > and test it in target migration version under target dev node. 
+> > > > > > > > > > 
+> > > > > > > > > > after all, through this interface we just help the upper layer
+> > > > > > > > > > knowing available options through reading and testing, and they decide
+> > > > > > > > > > to use it or not.
+> > > > > > > > > > 
+> > > > > > > > > > > Can we simplify the requirement by allowing only mdev<->mdev and 
+> > > > > > > > > > > phys<->phys migration? If an customer does want to migrate between a 
+> > > > > > > > > > > mdev and phys, he could wrap physical device into a wrapped mdev 
+> > > > > > > > > > > instance (with the same type as the source mdev) instead of using vendor 
+> > > > > > > > > > > ops. Doing so does add some burden but if mdev<->phys is not dominant 
+> > > > > > > > > > > usage then such tradeoff might be worthywhile...
+> > > > > > > > > > >
+> > > > > > > > > > If the interfaces for phys<->phys and mdev<->mdev are consistent, it makes no
+> > > > > > > > > > difference to phys<->mdev, right?
+> > > > > > > > > > I think the vendor string for a mdev device is something like:
+> > > > > > > > > > "Parent PCIID + mdev type + software version", and
+> > > > > > > > > > that for a phys device is something like:
+> > > > > > > > > > "PCIID + software version".
+> > > > > > > > > > as long as we don't migrate between devices from different vendors, it's
+> > > > > > > > > > easy for vendor driver to tell if a phys device is migration compatible
+> > > > > > > > > > to a mdev device according it supports it or not.
+> > > > > > > > > 
+> > > > > > > > > It surprises me that the PCIID matching is a requirement; I'd assumed
+> > > > > > > > > with this clever mdev name setup that you could migrate between two
+> > > > > > > > > different models in a series, or to a newer model, as long as they
+> > > > > > > > > both supported the same mdev view.
+> > > > > > > > > 
+> > > > > > > > hi Dave
+> > > > > > > > the migration_version string is transparent to userspace, and is
+> > > > > > > > completely defined by vendor driver.
+> > > > > > > > I put it there just as an example of how vendor driver may implement it.
+> > > > > > > > e.g.
+> > > > > > > > the src migration_version string is "src PCIID + src software version", 
+> > > > > > > > then when this string is write to target migration_version node,
+> > > > > > > > the vendor driver in the target device will compare it with its own
+> > > > > > > > device info and software version.
+> > > > > > > > If different models are allowed, the write just succeeds even
+> > > > > > > > PCIIDs in src and target are different.
+> > > > > > > > 
+> > > > > > > > so, it is the vendor driver to define whether two devices are able to
+> > > > > > > > migrate, no matter their PCIIDs, mdev types, software versions..., which
+> > > > > > > > provides vendor driver full flexibility.
+> > > > > > > > 
+> > > > > > > > do you think it's good?
+> > > > > > > 
+> > > > > > > Yeh that's OK; I guess it's going to need to have a big table in their
+> > > > > > > with all the PCIIDs in.
+> > > > > > > The alternative would be to abstract it a little; e.g. to say it's
+> > > > > > > an Intel-gpu-core-v4  and then it would be less worried about the exact
+> > > > > > > clock speed etc - but yes you might be right htat PCIIDs might be best
+> > > > > > > for checking for quirks.
+> > > > > > >
+> > > > > > glad that you are agreed with it:)
+> > > > > > I think the vendor driver still can choose a way to abstract a little
+> > > > > > (e.g. Intel-gpu-core-v4...) if they think it's better. In that case, the
+> > > > > > migration_string would be something like "Intel-gpu-core-v4 + instance
+> > > > > > number + software version".
+> > > > > > IOW, they can choose anything they think appropriate to identify migration
+> > > > > > compatibility of a device.
+> > > > > > But Alex is right, we have to prevent namespace overlapping. So I think
+> > > > > > we need to ensure src and target devices are from the same vendors.
+> > > > > > or, any other ideas?
+> > > > > 
+> > > > > That's why I kept the 'Intel' in that example; or PCI vendor ID; I was
+> > > > Yes, it's a good idea!
+> > > > could we add a line in the doc saying that
+> > > > it is the vendor driver to add a unique string to avoid namespace
+> > > > collision?
+> > > 
+> > > So why don't we split the difference; lets say that it should start with
+> > > the hex PCI Vendor ID.
+> > >
+> > The problem is for mdev devices, if the parent devices are not PCI devices, 
+> > they don't have PCI vendor IDs.
+> 
+> Hmm it would be best not to invent a whole new way of giving unique
+> idenitifiers for vendors if we can.
+> 
+what about leveraging the flags in vfio device info ?
 
-On 2020-02-23 10:25 p.m., Bhupesh Sharma wrote:
-> Hi Amit,
->
-> On Fri, Feb 21, 2020 at 2:36 PM Amit Kachhap <amit.kachhap@arm.com> wrote:
->> Hi Bhupesh,
->>
->> On 1/13/20 5:44 PM, Bhupesh Sharma wrote:
->>> Hi James,
->>>
->>> On 01/11/2020 12:30 AM, Dave Anderson wrote:
->>>> ----- Original Message -----
->>>>> Hi Bhupesh,
->>>>>
->>>>> On 25/12/2019 19:01, Bhupesh Sharma wrote:
->>>>>> On 12/12/2019 04:02 PM, James Morse wrote:
->>>>>>> On 29/11/2019 19:59, Bhupesh Sharma wrote:
->>>>>>>> vabits_actual variable on arm64 indicates the actual VA space size,
->>>>>>>> and allows a single binary to support both 48-bit and 52-bit VA
->>>>>>>> spaces.
->>>>>>>>
->>>>>>>> If the ARMv8.2-LVA optional feature is present, and we are running
->>>>>>>> with a 64KB page size; then it is possible to use 52-bits of address
->>>>>>>> space for both userspace and kernel addresses. However, any kernel
->>>>>>>> binary that supports 52-bit must also be able to fall back to 48-bit
->>>>>>>> at early boot time if the hardware feature is not present.
->>>>>>>>
->>>>>>>> Since TCR_EL1.T1SZ indicates the size offset of the memory region
->>>>>>>> addressed by TTBR1_EL1 (and hence can be used for determining the
->>>>>>>> vabits_actual value) it makes more sense to export the same in
->>>>>>>> vmcoreinfo rather than vabits_actual variable, as the name of the
->>>>>>>> variable can change in future kernel versions, but the architectural
->>>>>>>> constructs like TCR_EL1.T1SZ can be used better to indicate intended
->>>>>>>> specific fields to user-space.
->>>>>>>>
->>>>>>>> User-space utilities like makedumpfile and crash-utility, need to
->>>>>>>> read/write this value from/to vmcoreinfo
->>>>>>> (write?)
->>>>>> Yes, also write so that the vmcoreinfo from an (crashing) arm64
->>>>>> system can
->>>>>> be used for
->>>>>> analysis of the root-cause of panic/crash on say an x86_64 host using
->>>>>> utilities like
->>>>>> crash-utility/gdb.
->>>>> I read this as as "User-space [...] needs to write to vmcoreinfo".
->>> That's correct. But for writing to vmcore dump in the kdump kernel, we
->>> need to read the symbols from the vmcoreinfo in the primary kernel.
->>>
->>>>>>>> for determining if a virtual address lies in the linear map range.
->>>>>>> I think this is a fragile example. The debugger shouldn't need to know
->>>>>>> this.
->>>>>> Well that the current user-space utility design, so I am not sure we
->>>>>> can
->>>>>> tweak that too much.
->>>>>>
->>>>>>>> The user-space computation for determining whether an address lies in
->>>>>>>> the linear map range is the same as we have in kernel-space:
->>>>>>>>
->>>>>>>>      #define __is_lm_address(addr)    (!(((u64)addr) &
->>>>>>>> BIT(vabits_actual -
->>>>>>>>      1)))
->>>>>>> This was changed with 14c127c957c1 ("arm64: mm: Flip kernel VA
->>>>>>> space"). If
->>>>>>> user-space
->>>>>>> tools rely on 'knowing' the kernel memory layout, they must have to
->>>>>>> constantly be fixed
->>>>>>> and updated. This is a poor argument for adding this to something that
->>>>>>> ends up as ABI.
->>>>>> See above. The user-space has to rely on some ABI/guaranteed
->>>>>> hardware-symbols which can be
->>>>>> used for 'determining' the kernel memory layout.
->>>>> I disagree. Everything and anything in the kernel will change. The
->>>>> ABI rules apply to
->>>>> stuff exposed via syscalls and kernel filesystems. It does not apply
->>>>> to kernel internals,
->>>>> like the memory layout we used yesterday. 14c127c957c1 is a case in
->>>>> point.
->>>>>
->>>>> A debugger trying to rely on this sort of thing would have to play
->>>>> catchup whenever it
->>>>> changes.
->>>> Exactly.  That's the whole point.
->>>>
->>>> The crash utility and makedumpfile are not in the same league as other
->>>> user-space tools.
->>>> They have always had to "play catchup" precisely because they depend
->>>> upon kernel internals,
->>>> which constantly change.
->>> I agree with you and DaveA here. Software user-space debuggers are
->>> dependent on kernel internals (which can change from time-to-time) and
->>> will have to play catch-up (which has been the case since the very start).
->>>
->>> Unfortunately we don't have any clear ABI for software debugging tools -
->>> may be something to look for in future.
->>>
->>> A case in point is gdb/kgdb, which still needs to run with KASLR
->>> turned-off (nokaslr) for debugging, as it confuses gdb which resolve
->>> kernel symbol address from symbol table of vmlinux. But we can
->>> work-around the same in makedumpfile/crash by reading the 'kaslr_offset'
->>> value. And I have several users telling me now they cannot use gdb on
->>> KASLR enabled kernel to debug panics, but can makedumpfile + crash
->>> combination to achieve the same.
->>>
->>> So, we should be looking to fix these utilities which are broken since
->>> the 52-bit changes for arm64. Accordingly, I will try to send the v6
->>> soon while incorporating the comments posted on the v5.
->> Any update on the next v6 version. Since this patch series is fixing the
->> current broken kdump so need this series to add some more fields in
->> vmcoreinfo for Pointer Authentication work.
-> Sorry for the delay. I was caught up in some other urgent arm64
-> user-space issues.
-> I am preparing the v6 now and hopefully will be able to post it out
-> for review later today.
+#define VFIO_DEVICE_FLAGS_RESET (1 << 0)        /* Device supports reset */
+#define VFIO_DEVICE_FLAGS_PCI   (1 << 1)        /* vfio-pci device */
+#define VFIO_DEVICE_FLAGS_PLATFORM (1 << 2)     /* vfio-platform device */
+#define VFIO_DEVICE_FLAGS_AMBA  (1 << 3)        /* vfio-amba device */
+#define VFIO_DEVICE_FLAGS_CCW   (1 << 4)        /* vfio-ccw device */
+#define VFIO_DEVICE_FLAGS_AP    (1 << 5)        /* vfio-ap device */
 
-Did v6 get sent out?
+Then for migration_version string,
+The first 64 bits are for device type, the second 64 bits are for device id.
+e.g.
+for PCI devices, it could be
+VFIO_DEVICE_FLAGS_PCI + PCI ID.
 
->
-> Thanks,
-> Bhupesh
->
->
-Regards,
-Scott
+Currently in the doc, we only define PCI devices to use PCI ID as the second
+64 bits. In future, if other types of devices want to support migration,
+they can define their own parts of device id. e.g. use ACPI ID as the
+second 64-bit...
+
+sounds good?
+
+Thanks
+Yan
+
+> > 
+> > 
+> > > > > only really trying to say that within one vendors range there are often
+> > > > > a lot of PCI-IDs that have really minor variations.
+> > > > Yes. I also prefer to include PCI-IDs.
+> > > > BTW, sometimes even the same PCI-ID does not guarantee two devices are of no
+> > > > difference or are migration compatible. for example, two local NVMe
+> > > > devices may have the same PCI-ID but are configured to two different remote NVMe
+> > > > devices. the vendor driver needs to add extra info besides PCI-IDs then.
+> > > 
+> > > Ah, yes that's an interesting example.
+> > > 
+> > > Dave
+> > > 
+> > > > 
+> > > > > 
+> > > > > 
+> > > > > > 
+> > > > > > 
+> > > > > > > > > > > > 
+> > > > > > > > > > > > 
+> > > > > > > > > > > > > I agree that there was a gap in the previous proposal for non-mdev
+> > > > > > > > > > > > > devices, but I think this bring a lot of questions that we need to
+> > > > > > > > > > > > > puzzle through and libvirt will need to re-evaluate how they might
+> > > > > > > > > > > > > decide to pick a migration target device.  For example, I'm sure
+> > > > > > > > > > > > > libvirt would reject any policy decisions regarding picking a physical
+> > > > > > > > > > > > > device versus an mdev device.  Had we previously left it that only a
+> > > > > > > > > > > > > layer above libvirt would select a target device and libvirt only tests
+> > > > > > > > > > > > > compatibility to that target device?
+> > > > > > > > > > > > I'm not sure if there's a layer above libvirt would select a target
+> > > > > > > > > > > > device. but if there is such a layer (even it's human), we need to
+> > > > > > > > > > > > provide an interface for them to know whether their decision is suitable
+> > > > > > > > > > > > for migration. The migration_version interface provides a potential to
+> > > > > > > > > > > > allow mdev->phys migration, even libvirt may currently reject it.
+> > > > > > > > > > > > 
+> > > > > > > > > > > > 
+> > > > > > > > > > > > > We also need to consider that this expands the namespace.  If we no
+> > > > > > > > > > > > > longer require matching types as the first level of comparison, then
+> > > > > > > > > > > > > vendor migration strings can theoretically collide.  How do we
+> > > > > > > > > > > > > coordinate that can't happen?  Thanks,
+> > > > > > > > > > > > yes, it's indeed a problem.
+> > > > > > > > > > > > could only allowing migration beteen devices from the same vendor be a
+> > > > > > > > > > > > good
+> > > > > > > > > > > > prerequisite?
+> > > > > > > > > > > > 
+> > > > > > > > > > > > Thanks
+> > > > > > > > > > > > Yan
+> > > > > > > > > > > > >
+<snip>
