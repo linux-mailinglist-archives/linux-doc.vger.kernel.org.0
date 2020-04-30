@@ -2,128 +2,46 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A5A7A1BED41
-	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2020 02:58:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BEC621BEE9E
+	for <lists+linux-doc@lfdr.de>; Thu, 30 Apr 2020 05:22:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726309AbgD3A6D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Apr 2020 20:58:03 -0400
-Received: from mail.kernel.org ([198.145.29.99]:58822 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726279AbgD3A6D (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 29 Apr 2020 20:58:03 -0400
-Received: from oasis.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id CF92E20787;
-        Thu, 30 Apr 2020 00:58:02 +0000 (UTC)
-Date:   Wed, 29 Apr 2020 20:58:01 -0400
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     Stephen Kitt <steve@sk2.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 1/2] docs: sysctl/kernel: document ftrace entries
-Message-ID: <20200429205801.5ce95ab3@oasis.local.home>
-In-Reply-To: <20200429205757.8677-1-steve@sk2.org>
-References: <20200429205757.8677-1-steve@sk2.org>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+        id S1726357AbgD3DWC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Apr 2020 23:22:02 -0400
+Received: from mail.ac.gov.br ([179.252.114.240]:39506 "EHLO
+        srvifs070.ac.gov.br" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726309AbgD3DWC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Apr 2020 23:22:02 -0400
+Received: from localhost (localhost [127.0.0.1])
+        by srvifs070.ac.gov.br (Postfix) with ESMTP id CB86A31C9B25;
+        Wed, 29 Apr 2020 22:07:11 -0500 (ACT)
+Received: from srvifs070.ac.gov.br ([127.0.0.1])
+        by localhost (srvifs070.ac.gov.br [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id zTnLaEsz5DgI; Wed, 29 Apr 2020 22:07:11 -0500 (ACT)
+Received: from srvifs070.ac.gov.br (localhost [127.0.0.1])
+        by srvifs070.ac.gov.br (Postfix) with ESMTP id DECA431C9B34;
+        Wed, 29 Apr 2020 22:07:08 -0500 (ACT)
+Received: from srvifs070.ac.gov.br (srvifs070.ac.gov.br [10.1.4.71])
+        by srvifs070.ac.gov.br (Postfix) with ESMTP id D981231C9B0E;
+        Wed, 29 Apr 2020 22:07:03 -0500 (ACT)
+Date:   Wed, 29 Apr 2020 23:07:02 -0400 (AMT)
+From:   Morgan Stanley <angela.magalhaes@ac.gov.br>
+Reply-To: Morgan Stanley <invest-Morgan.stanley@outlook.co.id>
+Message-ID: <1207990856.544963.1588216022257.JavaMail.zimbra@ac.gov.br>
+Subject: Beantragen Sie eine dringende Gutschrift
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
+X-Originating-IP: [102.166.83.42]
+X-Mailer: Zimbra 8.0.6_GA_5922 (zclient/8.0.6_GA_5922)
+Thread-Topic: Beantragen Sie eine dringende Gutschrift
+Thread-Index: dAZW0C1qt4i+vjRL8l1nucnvbk2ICQ==
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 29 Apr 2020 22:57:56 +0200
-Stephen Kitt <steve@sk2.org> wrote:
-
-> Based on the ftrace documentation, the tp_printk boot parameter
-> documentation, and the implementation in kernel/trace/trace.c.
-> 
-> Signed-off-by: Stephen Kitt <steve@sk2.org>
-> ---
-> Changes since v2:
->   - spelling and grammar fixes in ftrace_dump_on_oops ("outputing it"
->     -> "outputting them")  
->   - "and::" in a single line in tracepoint_printk
-
-I didn't re-read or compare this patch with v1, but if the only changes
-were the above:
-
-Acked-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
-
--- Steve
 
 
-> 
-> Documentation/admin-guide/sysctl/kernel.rst | 48 +++++++++++++++++++++
->  1 file changed, 48 insertions(+)
-> 
-> diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
-> index 82bfd5892663..b1ad4c86274d 100644
-> --- a/Documentation/admin-guide/sysctl/kernel.rst
-> +++ b/Documentation/admin-guide/sysctl/kernel.rst
-> @@ -265,6 +265,27 @@ domain names are in general different. For a detailed discussion
->  see the ``hostname(1)`` man page.
->  
->  
-> +ftrace_dump_on_oops
-> +===================
-> +
-> +Determines whether ``ftrace_dump()`` should be called on an oops (or
-> +kernel panic). This will output the contents of the ftrace buffers to
-> +the console.  This is very useful for capturing traces that lead to
-> +crashes and outputting them to a serial console.
-> +
-> += ===================================================
-> +0 Disabled (default).
-> +1 Dump buffers of all CPUs.
-> +2 Dump the buffer of the CPU that triggered the oops.
-> += ===================================================
-> +
-> +
-> +ftrace_enabled, stack_tracer_enabled
-> +====================================
-> +
-> +See :doc:`/trace/ftrace`.
-> +
-> +
->  hardlockup_all_cpu_backtrace
->  ============================
->  
-> @@ -1191,6 +1212,33 @@ If a value outside of this range is written to ``threads-max`` an
->  ``EINVAL`` error occurs.
->  
->  
-> +traceoff_on_warning
-> +===================
-> +
-> +When set, disables tracing (see :doc:`/trace/ftrace`) when a
-> +``WARN()`` is hit.
-> +
-> +
-> +tracepoint_printk
-> +=================
-> +
-> +When tracepoints are sent to printk() (enabled by the ``tp_printk``
-> +boot parameter), this entry provides runtime control::
-> +
-> +    echo 0 > /proc/sys/kernel/tracepoint_printk
-> +
-> +will stop tracepoints from being sent to printk(), and::
-> +
-> +    echo 1 > /proc/sys/kernel/tracepoint_printk
-> +
-> +will send them to printk() again.
-> +
-> +This only works if the kernel was booted with ``tp_printk`` enabled.
-> +
-> +See :doc:`/admin-guide/kernel-parameters` and
-> +:doc:`/trace/boottime-trace`.
-> +
-> +
->  unknown_nmi_panic
->  =================
->  
-
+-- 
+Sind Sie ein Gesch&auml;ftsmann oder eine Gesch&auml;ftsfrau? Befinden Sie sich in einer Finanzkrise oder ben&ouml;tigen Sie Mittel, um ein eigenes Unternehmen zu gr&uuml;nden? Ben&ouml;tigen Sie einen Kredit, um Ihre Schulden zu begleichen, Ihre Rechnungen zu bezahlen oder ein gutes Gesch&auml;ft zu er&ouml;ffnen? Haben Sie eine niedrige Kreditw&uuml;rdigkeit und es f&auml;llt Ihnen schwer, einen Kapitalkredit von lokalen Banken und anderen Finanzinstituten zu erhalten? Hier ist Ihre Chance, einen Kredit von unserem Unternehmen zu erhalten. Wir bieten Privatpersonen Kredite f&uuml;r folgende Zwecke und mehr an. Privatkredit, Gesch&auml;ftsausweitung, Unternehmensgr&uuml;ndung, Bildung, Schuldenkonsolidierung, Hartgeldkredite. Wir bieten Darlehen zu einem niedrigen Zinssatz von 2%. Bewerben Sie sich jetzt per E-Mail: (invest-Morgan.stanley@outlook.co.id)
