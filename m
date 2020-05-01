@@ -2,88 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 479641C1842
-	for <lists+linux-doc@lfdr.de>; Fri,  1 May 2020 16:47:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5DE941C18C7
+	for <lists+linux-doc@lfdr.de>; Fri,  1 May 2020 16:58:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728929AbgEAOpz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 1 May 2020 10:45:55 -0400
-Received: from mail.kernel.org ([198.145.29.99]:52702 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729631AbgEAOpL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 1 May 2020 10:45:11 -0400
-Received: from mail.kernel.org (ip5f5ad5c5.dynamic.kabel-deutschland.de [95.90.213.197])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id E92D224963;
-        Fri,  1 May 2020 14:45:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1588344308;
-        bh=10r26z69r9wu8Pq+TQWNjuhSpIIYfOTBaBhJ/i5UtVw=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=fKOl8p+sEWPnaOBMIxC3Zz2MKex5RfAXLalcBFKIF2tho9+twe61M6SXDRWmpiHVx
-         iUwjhEdbATDgePPfx4bdMehyjzv93NZi/qU9ECKC3B42ffBDwscjjcndoS+XoVsTWo
-         3M7bS78L6Wo2Pbn/tUrmx++pwMGzsBULrdB/eqWQ=
-Received: from mchehab by mail.kernel.org with local (Exim 4.92.3)
-        (envelope-from <mchehab@kernel.org>)
-        id 1jUWuU-00FCfV-6x; Fri, 01 May 2020 16:45:02 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        id S1728873AbgEAOvc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 1 May 2020 10:51:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35380 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728737AbgEAOvb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 1 May 2020 10:51:31 -0400
+Received: from mail-qk1-x744.google.com (mail-qk1-x744.google.com [IPv6:2607:f8b0:4864:20::744])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A1AAAC061A0C;
+        Fri,  1 May 2020 07:51:31 -0700 (PDT)
+Received: by mail-qk1-x744.google.com with SMTP id q7so9450583qkf.3;
+        Fri, 01 May 2020 07:51:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=iSF8qkyzOWCTJWVtIv/KwIUFYxZnWd76ArT3iSBhPAs=;
+        b=aBwfdaI5kzqFOE6foEl5YSlIVohmWNm0VSsIsIyw4DoiMSb3trTNF6MW5I/8i38nBr
+         7o+sjRUrSMrqPTvIszk/NBk8VotsDFZEVWbCiifR1tjPOyo/m2+yvRcU5Op9+yISUm4O
+         1CLZuOpLy5YmuwieyEqX6DA9nnC5t4Cu4G+NtqYdW+k+m9tyPhkabzK2Lic6avfSwS/+
+         LMQBUFFVgOGppTRBj5i4IBwBh3Bdz8WycXWW26g5Zi8n1M9vK05NzB1f/Jd4QqUF8qLu
+         rz8HnO5ev46glsYThvSyfInERjfIS4ANRphIDFSyerbzu1KHQvTORObBZOa97jgf1TKD
+         7fdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=iSF8qkyzOWCTJWVtIv/KwIUFYxZnWd76ArT3iSBhPAs=;
+        b=jtiN3ntbh1vqUGkrSkktC3jeRD3Sn0Ds5PPq5cRTygL74nWUdg1PrGAnF63Dl0mjcg
+         K9h+6yTAqkfKFNAr2Z6kAzPNLLxOtiIp0IAE6PV57j1j8lfFmilEtN9roBm7gI292H6Q
+         n2AAddEmzn9xvRnkkFZIt87pF7Ebs8lWGSj3D7UQ+JXje+0dqUAE5Ia7EufmBle8k160
+         MCELoKilg9jckB1AZeiWjhbl4tkGTTS1dbxCbIIFnTTh4fMPkzUm6uCSD++x80io6424
+         5IB/vAutjHAzQkatFcz4EL/4BibrpvPC1o6ZtXt+hCBeW6w3sE/X2Tgb25Yub8pNcRTf
+         TrrQ==
+X-Gm-Message-State: AGi0PuYAB5h9QeXz3Ue3qmxREPboQNoOPpm/J0qHdNxTGS3UNza8m8+N
+        pKoMaLuO16SCBUWUpG+YBVTJkWiy
+X-Google-Smtp-Source: APiQypJIa6cdu+IKsx/LXE513SnU1kaYCk/ynYtFDjRz9LKo3QE4dI5s32VnrTFjrTGNvTQVBn7okw==
+X-Received: by 2002:a37:b185:: with SMTP id a127mr3829339qkf.87.1588344690768;
+        Fri, 01 May 2020 07:51:30 -0700 (PDT)
+Received: from ?IPv6:2601:282:803:7700:b01c:ec8e:d8ff:35b1? ([2601:282:803:7700:b01c:ec8e:d8ff:35b1])
+        by smtp.googlemail.com with ESMTPSA id i2sm2791303qki.54.2020.05.01.07.51.29
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 01 May 2020 07:51:30 -0700 (PDT)
+Subject: Re: [PATCH 03/37] docs: networking: convert vrf.txt to ReST
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
         "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>, netdev@vger.kernel.org
-Subject: [PATCH 37/37] docs: networking: arcnet-hardware.rst: don't duplicate chapter names
-Date:   Fri,  1 May 2020 16:44:59 +0200
-Message-Id: <9cbadbb1186788433909bd365c8a3f01543b9d40.1588344146.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.25.4
-In-Reply-To: <cover.1588344146.git.mchehab+huawei@kernel.org>
+        Jakub Kicinski <kuba@kernel.org>,
+        David Ahern <dsahern@kernel.org>,
+        Shrijeet Mukherjee <shrijeet@gmail.com>, netdev@vger.kernel.org
 References: <cover.1588344146.git.mchehab+huawei@kernel.org>
+ <af2ba2c29e8dfa9fb66dda16311a28a9f7c8cf43.1588344146.git.mchehab+huawei@kernel.org>
+From:   David Ahern <dsahern@gmail.com>
+Message-ID: <5e6de21b-c26d-8d76-901d-f588575c3b0d@gmail.com>
+Date:   Fri, 1 May 2020 08:51:27 -0600
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <af2ba2c29e8dfa9fb66dda16311a28a9f7c8cf43.1588344146.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Since changeset 58ad30cf91f0 ("docs: fix reference to core-api/namespaces.rst"),
-auto-references for chapters are generated. This is a nice feature, but
-has a drawback: no chapters can have the same sumber.
+On 5/1/20 8:44 AM, Mauro Carvalho Chehab wrote:
+> - add SPDX header;
+> - adjust title markup;
+> - Add a subtitle for the first section;
+> - mark code blocks and literals as such;
+> - adjust identation, whitespaces and blank lines;
+> - add to networking/index.rst.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  Documentation/networking/index.rst |   1 +
+>  Documentation/networking/vrf.rst   | 451 +++++++++++++++++++++++++++++
+>  Documentation/networking/vrf.txt   | 418 --------------------------
+>  MAINTAINERS                        |   2 +-
+>  4 files changed, 453 insertions(+), 419 deletions(-)
+>  create mode 100644 Documentation/networking/vrf.rst
+>  delete mode 100644 Documentation/networking/vrf.txt
+> 
 
-So, we need to change two chapter titles, to avoid warnings when
-building the docs.
+Acked-by: David Ahern <dsahern@gmail.com>
 
-Fixes: 58ad30cf91f0 ("docs: fix reference to core-api/namespaces.rst")
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/networking/arcnet-hardware.rst | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/Documentation/networking/arcnet-hardware.rst b/Documentation/networking/arcnet-hardware.rst
-index b5a1a020c824..ac249ac8fcf2 100644
---- a/Documentation/networking/arcnet-hardware.rst
-+++ b/Documentation/networking/arcnet-hardware.rst
-@@ -1296,8 +1296,8 @@ DIP Switches:
- 	11111           0xC400 (guessed - crashes tested system)
- 	=============   ============================================
- 
--CNet Technology Inc.
--====================
-+CNet Technology Inc. (8-bit cards)
-+==================================
- 
- 120 Series (8-bit cards)
- ------------------------
-@@ -1520,8 +1520,8 @@ The jumpers labeled EXT1 and EXT2 are used to determine the timeout
- parameters. These two jumpers are normally left open.
- 
- 
--CNet Technology Inc.
--====================
-+CNet Technology Inc. (16-bit cards)
-+===================================
- 
- 160 Series (16-bit cards)
- -------------------------
--- 
-2.25.4
 
