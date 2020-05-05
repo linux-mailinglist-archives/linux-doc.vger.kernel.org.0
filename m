@@ -2,31 +2,32 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1C89B1C5BAD
-	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2020 17:40:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B95121C5BB9
+	for <lists+linux-doc@lfdr.de>; Tue,  5 May 2020 17:41:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729663AbgEEPkI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 5 May 2020 11:40:08 -0400
-Received: from ms.lwn.net ([45.79.88.28]:50152 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729317AbgEEPkI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 5 May 2020 11:40:08 -0400
+        id S1729561AbgEEPlQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 5 May 2020 11:41:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34304 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729317AbgEEPlQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 5 May 2020 11:41:16 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 13825C061A0F;
+        Tue,  5 May 2020 08:41:16 -0700 (PDT)
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 45E12737;
-        Tue,  5 May 2020 15:40:08 +0000 (UTC)
-Date:   Tue, 5 May 2020 09:40:07 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id ADE5A737;
+        Tue,  5 May 2020 15:41:15 +0000 (UTC)
+Date:   Tue, 5 May 2020 09:41:14 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Wolfram Sang <wsa@kernel.org>
-Cc:     linux-kernel@vger.kernel.org, kernel@pengutronix.de,
-        Wim Van Sebroeck <wim@linux-watchdog.org>,
-        Guenter Roeck <linux@roeck-us.net>,
-        linux-watchdog@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] watchdog: update email address in conversion doc
-Message-ID: <20200505094007.5449d2d2@lwn.net>
-In-Reply-To: <20200502143103.19473-1-wsa@kernel.org>
-References: <20200502143103.19473-1-wsa@kernel.org>
+To:     Joshua Abraham <j.abraham1776@gmail.com>
+Cc:     pbonzini@redhat.com, kvm@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] docs: kvm: Fix KVM_KVMCLOCK_CTRL API doc
+Message-ID: <20200505094114.5b346623@lwn.net>
+In-Reply-To: <20200501223624.GA25826@josh-ZenBook>
+References: <20200501223624.GA25826@josh-ZenBook>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -36,30 +37,21 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat,  2 May 2020 16:30:58 +0200
-Wolfram Sang <wsa@kernel.org> wrote:
+On Fri, 1 May 2020 18:36:24 -0400
+Joshua Abraham <j.abraham1776@gmail.com> wrote:
 
-> The old one is defunct. However, I think it makes sense that I am still
-> the primary contact person for updates here.
+> The KVM_KVMCLOCK_CTRL ioctl signals to supported KVM guests
+> that the hypervisor has paused it. Update the documentation to
+> reflect that the guest is notified by this API.
 > 
-> Signed-off-by: Wolfram Sang <wsa@kernel.org>
+> Signed-off-by: Joshua Abraham <sinisterpatrician@gmail.com>
 > ---
+> Changes in v2:
+>     - Re-word documentation to be clearer. Also fix a small grammar
+>       error.
 > 
-> ... if there will be any. Let me know if you agree.
-> 
->  Documentation/watchdog/convert_drivers_to_kernel_api.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/watchdog/convert_drivers_to_kernel_api.rst b/Documentation/watchdog/convert_drivers_to_kernel_api.rst
-> index dd934cc08e40..b972ef4c7cff 100644
-> --- a/Documentation/watchdog/convert_drivers_to_kernel_api.rst
-> +++ b/Documentation/watchdog/convert_drivers_to_kernel_api.rst
-> @@ -2,7 +2,7 @@
->  Converting old watchdog drivers to the watchdog framework
->  =========================================================
->  
-> -by Wolfram Sang <w.sang@pengutronix.de>
-> +by Wolfram Sang <wsa@kernel.org>
+>  Documentation/virt/kvm/api.rst | 12 +++++++-----
+>  1 file changed, 7 insertions(+), 5 deletions(-)
 
 Applied, thanks.
 
