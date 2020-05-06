@@ -2,115 +2,147 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4AF671C7A67
-	for <lists+linux-doc@lfdr.de>; Wed,  6 May 2020 21:38:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D772B1C7C2B
+	for <lists+linux-doc@lfdr.de>; Wed,  6 May 2020 23:16:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729320AbgEFTiX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 May 2020 15:38:23 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:37184 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1729279AbgEFTiW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 May 2020 15:38:22 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1588793901;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=4yGP/vMyHodm9DIXtqpc9Y5085eYUUAufi7jwsRMqFY=;
-        b=bJBtLCbpiYSfHeOTzpKfxlnfTdkiWiffsuNOi8hZY/kUUDYAgDYF4H+1DYaUuUdnO1cYPx
-        g+LFd4QUn8FTapE7XEndlCuW8mPDfovnDjEveKLgzgHm/QJkQbnugEyy2P+HykxUDJ98Li
-        pwG3EDYCKx2GHvMna8U9W8VkfxAEMDc=
-Received: from mail-qk1-f197.google.com (mail-qk1-f197.google.com
- [209.85.222.197]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-127-igwSq4QOPW2ClWPUgnsuYA-1; Wed, 06 May 2020 15:38:19 -0400
-X-MC-Unique: igwSq4QOPW2ClWPUgnsuYA-1
-Received: by mail-qk1-f197.google.com with SMTP id d187so2941634qkc.18
-        for <linux-doc@vger.kernel.org>; Wed, 06 May 2020 12:38:19 -0700 (PDT)
+        id S1729870AbgEFVPz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 May 2020 17:15:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57360 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1729819AbgEFVPd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 May 2020 17:15:33 -0400
+Received: from mail-pg1-x542.google.com (mail-pg1-x542.google.com [IPv6:2607:f8b0:4864:20::542])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 65F76C0610D5
+        for <linux-doc@vger.kernel.org>; Wed,  6 May 2020 14:15:33 -0700 (PDT)
+Received: by mail-pg1-x542.google.com with SMTP id b8so1421285pgi.11
+        for <linux-doc@vger.kernel.org>; Wed, 06 May 2020 14:15:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=u/XCL1fsewz1wv+0YN1B6q5DwndvHtJ46IG2XGKxKkc=;
+        b=LJ17gtKZ5RCiSk4FFPSrLts9kY+6gVoaJHhHAK4elrJ5HYs7Re8PekuMrTMDTbowO/
+         SSluTHjRjYjytzyAq6hHqEC1n5fB2I22oH2gq4YFrhQCpZnhRo1qDJK3q5787DBLZiUz
+         R62JQc4JS07Vmp2QpY7YmwMyVoRd5SXQcqqIU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=4yGP/vMyHodm9DIXtqpc9Y5085eYUUAufi7jwsRMqFY=;
-        b=DwIKUI2zb0oGfJ9BoOi8emifT9H1R98ewy+9MAFErrQuiKGmDQivRhmoUuRUAsqUDJ
-         CESzGQe/GyfaRFC9hWkImNf1IesyrTVoFTIbeG6zSV15Rzuo/LTsw+MH1vrYCRGA8U06
-         yzNPUNlSEKvtWnuPnsjQBi2EujCUz7Gsw2/FmzQLkcaEaRfIk1S60XyVWzAAD63zfXiI
-         SnKxT3ua8XiatlazsS/6lr3PCoK4qHtudi81ksdkhYZ1FcI9H3L8wOlQ7f2EQ9s0xQHt
-         KWSy3rsO17EAx3ov+C3jdQ/o6+37WDPu/N8RG2BYcnnIUpzf4OTDqS18zeNEtmtHJoc6
-         Q8UA==
-X-Gm-Message-State: AGi0PuYiUWMD8mUdG6e7enrRy8X1MHdwryP2Zb7vlYoABXKrcQUDVXR5
-        330QcG4tPqJhpXcIMwEIvzfH+Jw099axUvudhZY0G7yvx+b9OFmMukxaDpga5AqHmmgaS0k4DP2
-        Oe5duNZ4jkiSEI2ExBjXm
-X-Received: by 2002:ac8:6cf:: with SMTP id j15mr10289653qth.143.1588793899434;
-        Wed, 06 May 2020 12:38:19 -0700 (PDT)
-X-Google-Smtp-Source: APiQypJgeGRbgQoROxq+NzNkpj9p1DQBrBYEowm2aG2YpEWn4T7EEcbZzi+caA0aMstz/KZmNOVVMA==
-X-Received: by 2002:ac8:6cf:: with SMTP id j15mr10289631qth.143.1588793899217;
-        Wed, 06 May 2020 12:38:19 -0700 (PDT)
-Received: from xz-x1 ([2607:9880:19c0:32::2])
-        by smtp.gmail.com with ESMTPSA id h188sm2445057qke.82.2020.05.06.12.38.17
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=u/XCL1fsewz1wv+0YN1B6q5DwndvHtJ46IG2XGKxKkc=;
+        b=nrq6P/0SS0/g28loXSaLhgsQACL8Yzu5b4nWEkFXjzZujqleC8hxRtb+jUHPmONGkp
+         E3E9hFULRK+f+kg/kS35JFWR5+w0RIifQpG2U8No5ey0oHgSnzaVQm3ZHrD56gXDdSPi
+         vQbERln58rMvWGKf5opjMqQWOEQUgXV7Nr0QRGG7R6XnddOR5ecxFH5NpZYXInMYIbTR
+         4Ck6EUoJVUlI6CH0+I2WsjW2SKbg35JAdbvRIZz0vbHxmWevxF+KMBu9bO2tczdRqQmi
+         lsibGGqu/BPppYwSQ39q5KJ+1PjJiCVhNOxqRB96It7TD8eCFfHndwrN6pGdf0l36Oj2
+         Wwqg==
+X-Gm-Message-State: AGi0PubhnWPzF/f8bOAN024MTLKPOMIQhYxuR/CrrHi5kcoZyXigPAVJ
+        diVIbv2Dpmepo7lkQBHXuHtAwQ==
+X-Google-Smtp-Source: APiQypI/pTh6kOO0ohxDbY5vssPPtVaFSIZETH0t6dPMEwVl4GH4h+EMDj98Y0NsEBc9c6g4zYaF4w==
+X-Received: by 2002:a62:a11c:: with SMTP id b28mr2765864pff.180.1588799732927;
+        Wed, 06 May 2020 14:15:32 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id d2sm2752547pfc.7.2020.05.06.14.15.29
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 06 May 2020 12:38:18 -0700 (PDT)
-Date:   Wed, 6 May 2020 15:38:16 -0400
-From:   Peter Xu <peterx@redhat.com>
-To:     Daniel Colascione <dancol@google.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Iurii Zaikin <yzaikin@google.com>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Mel Gorman <mgorman@techsingularity.net>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Andrea Arcangeli <aarcange@redhat.com>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Jerome Glisse <jglisse@redhat.com>, Shaohua Li <shli@fb.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, timmurray@google.com,
-        minchan@google.com, sspatil@google.com, lokeshgidra@google.com
-Subject: Re: [PATCH 2/2] Add a new sysctl knob:
- unprivileged_userfaultfd_user_mode_only
-Message-ID: <20200506193816.GB228260@xz-x1>
-References: <20200423002632.224776-1-dancol@google.com>
- <20200423002632.224776-3-dancol@google.com>
+        Wed, 06 May 2020 14:15:29 -0700 (PDT)
+From:   Kees Cook <keescook@chromium.org>
+To:     Pavel Tatashin <pasha.tatashin@soleen.com>
+Cc:     Kees Cook <keescook@chromium.org>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Rob Herring <robh+dt@kernel.org>,
+        Benson Leung <bleung@chromium.org>,
+        Enric Balletbo i Serra <enric.balletbo@collabora.com>,
+        Petr Mladek <pmladek@suse.com>,
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>, jmorris@namei.org,
+        sashal@kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org
+Subject: [PATCH v3 0/6] allow ramoops to collect all kmesg_dump events
+Date:   Wed,  6 May 2020 14:15:17 -0700
+Message-Id: <20200506211523.15077-1-keescook@chromium.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20200423002632.224776-3-dancol@google.com>
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Apr 22, 2020 at 05:26:32PM -0700, Daniel Colascione wrote:
-> +unprivileged_userfaultfd_user_mode_only
-> +========================================
-> +
-> +This flag controls whether unprivileged users can use the userfaultfd
-> +system calls to handle page faults in kernel mode.  If set to zero,
-> +userfaultfd works with or without UFFD_USER_MODE_ONLY, modulo
-> +unprivileged_userfaultfd above.  If set to one, users without
-> +SYS_CAP_PTRACE must pass UFFD_USER_MODE_ONLY in order for userfaultfd
-> +to succeed.  Prohibiting use of userfaultfd for handling faults from
-> +kernel mode may make certain vulnerabilities more difficult
-> +to exploit.
-> +
-> +The default value is 0.
+Hi!
 
-If this is going to be added... I am thinking whether it should be easier to
-add another value for unprivileged_userfaultfd, rather than a new sysctl. E.g.:
+This is my stab at rearranging a few things based on Pavel's series. Most
+things remain the same; I just tweaked how defaults are arranged and
+detected and expanded the wording in a few places. Pavel, how does this
+v3 look to you?
 
-  "0": unprivileged userfaultfd forbidden
-  "1": unprivileged userfaultfd allowed (both user/kernel faults)
-  "2": unprivileged userfaultfd allowed (only user faults)
+Pavel's original cover letter:
 
-Because after all unprivileged_userfaultfd_user_mode_only will be meaningless
-(iiuc) if unprivileged_userfaultfd=0.  The default value will also be the same
-as before ("1") then.
+pstore /mnt/console-ramoops-0 outputs only messages below the console
+loglevel, and our console loglevel is set to 3 due to slowness of
+serial console. Which means only errors and worse types of messages
+are recorded. There is no way to have different log levels for
+different consoles.
 
-Thanks,
+This patch series adds a new option to ramoops: max_reason that enables
+it to collect kmdesg dumps for other reasons beside oops and panics.
+
+How to quickly test:
+
+virtme-run --mods=auto --kdir --mods=auto --kdir . \
+	-a memmap=1G$8G -a ramoops.mem_address=0x200000000 \
+	-a ramoops.mem_size=0x100000 -a ramoops.record_size=32768 \
+	-a ramoops.max_reason=5 -a quiet --qemu-opts -m 8G
+..
+# reboot -f
+
+After VM is back:
+
+# mount -t pstore pstore /mnt
+# head /mnt/dmesg-ramoops-0
+Restart#1 Part1
+...
+
+
+Changelog:
+
+v3:
+ - expanded several comments and commit logs
+ - move max_reason member earlier in the structure
+ - refactored DT parsing to allow setting defaults
+ - changed how deprecated dump_oops fields are detected and parsed
+ - cleaned up some module param permissions
+v2: https://lore.kernel.org/lkml/20200505154510.93506-1-pasha.tatashin@soleen.com
+v1: https://lore.kernel.org/lkml/20200502143555.543636-1-pasha.tatashin@soleen.com
+
+
+Thanks!
+
+-Kees
+
+
+Kees Cook (2):
+  pstore/ram: Refactor DT size parsing
+  pstore/ram: Adjust module param permissions to reflect reality
+
+Pavel Tatashin (4):
+  printk: honor the max_reason field in kmsg_dumper
+  pstore/platform: Pass max_reason to kmesg dump
+  pstore/ram: Introduce max_reason and convert dump_oops
+  ramoops: Add max_reason optional field to ramoops DT node
+
+ Documentation/admin-guide/ramoops.rst         | 14 +++-
+ .../bindings/reserved-memory/ramoops.txt      | 13 ++-
+ drivers/platform/chrome/chromeos_pstore.c     |  2 +-
+ fs/pstore/platform.c                          |  4 +-
+ fs/pstore/ram.c                               | 83 ++++++++++++-------
+ include/linux/kmsg_dump.h                     |  1 +
+ include/linux/pstore.h                        |  7 ++
+ include/linux/pstore_ram.h                    |  2 +-
+ kernel/printk/printk.c                        | 15 +++-
+ 9 files changed, 97 insertions(+), 44 deletions(-)
 
 -- 
-Peter Xu
+2.20.1
 
