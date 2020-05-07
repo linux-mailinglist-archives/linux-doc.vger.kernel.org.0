@@ -2,71 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9F21C1C9DBA
-	for <lists+linux-doc@lfdr.de>; Thu,  7 May 2020 23:45:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B86A1C9E3D
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2020 00:07:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726776AbgEGVp1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 7 May 2020 17:45:27 -0400
-Received: from mail-oi1-f193.google.com ([209.85.167.193]:42309 "EHLO
-        mail-oi1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726518AbgEGVp1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 7 May 2020 17:45:27 -0400
-Received: by mail-oi1-f193.google.com with SMTP id i13so6600761oie.9;
-        Thu, 07 May 2020 14:45:26 -0700 (PDT)
+        id S1726843AbgEGWHo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 7 May 2020 18:07:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36028 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726480AbgEGWHo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 7 May 2020 18:07:44 -0400
+Received: from mail-qt1-x841.google.com (mail-qt1-x841.google.com [IPv6:2607:f8b0:4864:20::841])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4806FC05BD09
+        for <linux-doc@vger.kernel.org>; Thu,  7 May 2020 15:07:44 -0700 (PDT)
+Received: by mail-qt1-x841.google.com with SMTP id o10so634259qtr.6
+        for <linux-doc@vger.kernel.org>; Thu, 07 May 2020 15:07:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=lca.pw; s=google;
+        h=mime-version:subject:from:in-reply-to:date:cc
+         :content-transfer-encoding:message-id:references:to;
+        bh=en4GHRy/JYPyqA5v6A21rwrH4iUeiYDglj3PCm7zaTE=;
+        b=NsTphQo3KrIot3EHRR9MKfhiB8/WsOHq01/hLgkb+H//7PrOqvCj5NTxbnaFUnfyCm
+         0iwuvrNpoPVetfRb67BNbjybK6/uoNcUveymSiiNlXA45tEK0EtsQ5rzNJPrjzwGfrNZ
+         RYuwS6foMYX9JtD8p/lE+cd5djCyYEqiAn3kIIyUNO+d5VF1/CTPg8jdMFLrI6/DZ95k
+         OEh0TDXAiOnZ7ahcPGDPGCQcFv2LK27gK0aLjSyXsAk46ZO2MfZ0r/v4SpluZNwKJAUM
+         2mQyVIqlXMDWClY69c2WULVjuPG+YFgSDAi+ZsWeevurvhZ45jn6p8zAOo30BIB1h9Sa
+         LxRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=gTgkAMD5H8rgyuCMVoM1GZ6vxGFkeOOtPKc0hA6/v6g=;
-        b=IlsjMflHyX06VF3afVWQm4YVLZF8teeR5biGx94IxIasyo1+HkgNOYWPRyfFZeRIvJ
-         fcfvfN92ZO46UjHB3/tEl10L2SYJuNTuNPgr6tr1auT11eqiSBto7cHMyFpSRsMbubWY
-         ytONM0bHSEerbL3+R32OXASpAcDPRisfFH8jb2+BXLqgW7DkOoYI9WdZmVCMERLq0uUF
-         JxeNFGJvtnkevRZcJpqOilc2oRpBFUXtOapOmibcen/kFLgY/P8MU7w5qkXs4JQvvFO4
-         aizHeqw/SD9+AxYoyRJz0nqBywDY9TFateUEja7+FiONzl60nTuOdJ0FDwU01E4p2fSk
-         37Cw==
-X-Gm-Message-State: AGi0PuaKzyQhEwoQrikEencOMWb/rs45gVW3QX3SXJY38RQ9SDGxkX3s
-        ZCJpXHGVv0j19ZKnrayRI4nIodE=
-X-Google-Smtp-Source: APiQypKjY64v9Gi+LayxZeUg1fXvmqL4d6kQfQSJqw/hOeJFCrQO83K05YVCsbUfJKnLRvkYnvJcfQ==
-X-Received: by 2002:aca:4541:: with SMTP id s62mr8420362oia.100.1588887926515;
-        Thu, 07 May 2020 14:45:26 -0700 (PDT)
-Received: from rob-hp-laptop (24-155-109-49.dyn.grandenetworks.net. [24.155.109.49])
-        by smtp.gmail.com with ESMTPSA id y2sm1795675oot.16.2020.05.07.14.45.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 07 May 2020 14:45:25 -0700 (PDT)
-Received: (nullmailer pid 26907 invoked by uid 1000);
-        Thu, 07 May 2020 21:45:25 -0000
-Date:   Thu, 7 May 2020 16:45:25 -0500
-From:   Rob Herring <robh@kernel.org>
-To:     Bryce Willey <bryce.steven.willey@gmail.com>
-Cc:     corbet@lwn.net, linux-doc@vger.kernel.org,
-        linux-pci@vger.kernel.org,
-        Bryce Willey <Bryce.Steven.Willey@gmail.com>
-Subject: Re: [PATCH] Documentation: PCI: gave unique labels to sections
-Message-ID: <20200507214525.GA26840@bogus>
-References: <20200503214926.23748-1-bryce.steven.willey@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200503214926.23748-1-bryce.steven.willey@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+         :content-transfer-encoding:message-id:references:to;
+        bh=en4GHRy/JYPyqA5v6A21rwrH4iUeiYDglj3PCm7zaTE=;
+        b=ZigRvenMvkxpTzdoXUkX7tuROYQIuSgaDkRtqu2z9sI3VtzNwIRy4fSXeAjdZx+gXw
+         ++KTalefaFAHX1qp96RonffW+eGuN6mhxI3Lsga24RUtqPYDyFPVXX8RlPDAWp5XesvC
+         aPPkwGlD/60wtfhT0JVuDfCUamSc3JevQw8gk5GKMAjvImmCtbQ3S+dq1At4qcX9lvvc
+         sqrFwVJXvONTeOpjDHk4EENnOn7NhRSnUucH+vL+dP37mA8vr2gzxn0vsLOnQvyTa4Em
+         I8I/UftP5gnynWqKHRh71DnkxtBhH3hqNBrGPw5KO8XuzB6htFHhdsZEvy9wlxAfd5iR
+         Sm5Q==
+X-Gm-Message-State: AGi0PuZKHZv+N9KbKcPw42RgtlmfEfxiell8qcE8o23zExmj9MK7+bLc
+        Xhkx5Eqk6z5dwgNyjoXxNI64d6xOuq3mxw==
+X-Google-Smtp-Source: APiQypLmtknqWg6mIBNX7BYpFLD0P6MpzAP9oT8r+HqSraCfQP4KlBhA65zzanXtvuiNlwwIZjxRSw==
+X-Received: by 2002:aed:2dc1:: with SMTP id i59mr16899053qtd.182.1588889263247;
+        Thu, 07 May 2020 15:07:43 -0700 (PDT)
+Received: from qians-mbp.fios-router.home (pool-71-184-117-43.bstnma.fios.verizon.net. [71.184.117.43])
+        by smtp.gmail.com with ESMTPSA id 10sm6045321qtp.4.2020.05.07.15.07.41
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 07 May 2020 15:07:42 -0700 (PDT)
+Content-Type: text/plain;
+        charset=us-ascii
+Mime-Version: 1.0 (Mac OS X Mail 13.4 \(3608.80.23.2.2\))
+Subject: Re: [PATCH] kernel: add panic_on_taint
+From:   Qian Cai <cai@lca.pw>
+In-Reply-To: <20200507204219.GJ205881@optiplex-lnx>
+Date:   Thu, 7 May 2020 18:05:27 -0400
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        LKML <linux-kernel@vger.kernel.org>, linux-doc@vger.kernel.org,
+        kexec@lists.infradead.org, linux-fsdevel@vger.kernel.org,
+        dyoung@redhat.com, Baoquan He <bhe@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Kees Cook <keescook@chromium.org>
+Content-Transfer-Encoding: quoted-printable
+Message-Id: <27AA744E-930A-492A-BE87-05A119FE1549@lca.pw>
+References: <20200506222815.274570-1-aquini@redhat.com>
+ <C5E11731-5503-45CC-9F72-41E8863ACD27@lca.pw>
+ <20200507204219.GJ205881@optiplex-lnx>
+To:     Rafael Aquini <aquini@redhat.com>
+X-Mailer: Apple Mail (2.3608.80.23.2.2)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun,  3 May 2020 17:49:26 -0400, Bryce Willey wrote:
-> From: Bryce Willey <Bryce.Steven.Willey@gmail.com>
-> 
-> Made subsection label more specific to avoid sphinx warnings
-> 
-> Exact warning:
->  Documentation/PCI/endpoint/pci-endpoint.rst:208: WARNING: duplicate label
-> pci/endpoint/pci-endpoint:other apis, other instance in Documentation/PCI/endpoint/pci-endpoint.rst
-> 
-> Signed-off-by: Bryce Willey <Bryce.Steven.Willey@gmail.com>
-> ---
->  Documentation/PCI/endpoint/pci-endpoint.rst | 16 ++++++++--------
->  1 file changed, 8 insertions(+), 8 deletions(-)
-> 
 
-Acked-by: Rob Herring <robh@kernel.org>
+
+> On May 7, 2020, at 4:42 PM, Rafael Aquini <aquini@redhat.com> wrote:
+>=20
+> On Wed, May 06, 2020 at 10:50:19PM -0400, Qian Cai wrote:
+>>=20
+>>=20
+>>> On May 6, 2020, at 6:28 PM, Rafael Aquini <aquini@redhat.com> wrote:
+>>>=20
+>>> Analogously to the introduction of panic_on_warn, this patch
+>>> introduces a kernel option named panic_on_taint in order to
+>>> provide a simple and generic way to stop execution and catch
+>>> a coredump when the kernel gets tainted by any given taint flag.
+>>>=20
+>>> This is useful for debugging sessions as it avoids rebuilding
+>>> the kernel to explicitly add calls to panic() or BUG() into
+>>> code sites that introduce the taint flags of interest.
+>>> Another, perhaps less frequent, use for this option would be
+>>> as a mean for assuring a security policy (in paranoid mode)
+>>> case where no single taint is allowed for the running system.
+>>=20
+>> Andrew, you can drop the patch below from -mm now because that one is =
+now obsolete,
+>>=20
+>> mm-slub-add-panic_on_error-to-the-debug-facilities.patch
+>>=20
+> Please, don't drop it yet. I'll send a patch to get rid of the bits,
+> once this one gets accepted, if it gets accepted.
+
+Why do you ever want that obsolete patch even show up in linux-next to =
+potentailly waste other people/bots time to test it and develop things =
+on top of it?=
