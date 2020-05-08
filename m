@@ -2,43 +2,45 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2A2081CA8D8
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2020 12:58:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 024A01CAEBD
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2020 15:16:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726770AbgEHK6l (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 8 May 2020 06:58:41 -0400
-Received: from foss.arm.com ([217.140.110.172]:46518 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726091AbgEHK6l (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 8 May 2020 06:58:41 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D6C3A30E;
-        Fri,  8 May 2020 03:58:40 -0700 (PDT)
-Received: from [192.168.0.7] (unknown [172.31.20.19])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D040A3F71F;
-        Fri,  8 May 2020 03:58:37 -0700 (PDT)
-Subject: Re: [RFC PATCH v3 2/3] docs: scheduler: Add scheduler overview
- documentation
-To:     Valentin Schneider <valentin.schneider@arm.com>,
-        John Mathew <john.mathew@unikie.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        corbet@lwn.net, mingo@redhat.com, peterz@infradead.org,
-        juri.lelli@redhat.com, vincent.guittot@linaro.org,
-        rostedt@goodmis.org, bsegall@google.com, mgorman@suse.de,
-        bristot@redhat.com, tsbogend@alpha.franken.de,
-        lukas.bulwahn@gmail.com, x86@kernel.org,
-        linux-mips@vger.kernel.org, tglx@linutronix.de,
-        mostafa.chamanara@basemark.com, rdunlap@infradead.org,
-        Oleg Tsymbal <oleg.tsymbal@unikie.com>
-References: <20200507180553.9993-1-john.mathew@unikie.com>
- <20200507180553.9993-3-john.mathew@unikie.com> <jhjh7wrtpjk.mognet@arm.com>
-From:   Dietmar Eggemann <dietmar.eggemann@arm.com>
-Message-ID: <b974b959-7b9a-2874-dca6-674b74ad5b42@arm.com>
-Date:   Fri, 8 May 2020 12:58:36 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+        id S1729494AbgEHMq4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 8 May 2020 08:46:56 -0400
+Received: from smtp2207-205.mail.aliyun.com ([121.197.207.205]:39588 "EHLO
+        smtp2207-205.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1729485AbgEHMqz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 8 May 2020 08:46:55 -0400
+X-Alimail-AntiSpam: AC=CONTINUE;BC=0.07441439|-1;CH=green;DM=|CONTINUE|false|;DS=CONTINUE|ham_system_inform|0.221532-0.00382694-0.774641;FP=0|0|0|0|0|-1|-1|-1;HT=e02c03293;MF=liaoweixiong@allwinnertech.com;NM=1;PH=DS;RN=16;RT=16;SR=0;TI=SMTPD_---.HVGJWfr_1588942007;
+Received: from 172.16.10.102(mailfrom:liaoweixiong@allwinnertech.com fp:SMTPD_---.HVGJWfr_1588942007)
+          by smtp.aliyun-inc.com(10.147.41.121);
+          Fri, 08 May 2020 20:46:48 +0800
+Subject: Re: [PATCH v3 02/11] pstore/blk: new support logger for block devices
+To:     Kees Cook <keescook@chromium.org>
+Cc:     Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        Tony Luck <tony.luck@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Richard Weinberger <richard@nod.at>,
+        Vignesh Raghavendra <vigneshr@ti.com>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Rob Herring <robh@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mtd@lists.infradead.org
+References: <1585126506-18635-1-git-send-email-liaoweixiong@allwinnertech.com>
+ <1585126506-18635-3-git-send-email-liaoweixiong@allwinnertech.com>
+ <202005072301.57F73B61CC@keescook>
+From:   WeiXiong Liao <liaoweixiong@allwinnertech.com>
+Message-ID: <6dcadbb0-8720-7973-8b33-747ae0579567@allwinnertech.com>
+Date:   Fri, 8 May 2020 20:46:52 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.6.1
 MIME-Version: 1.0
-In-Reply-To: <jhjh7wrtpjk.mognet@arm.com>
+In-Reply-To: <202005072301.57F73B61CC@keescook>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -47,39 +49,102 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 07/05/2020 23:15, Valentin Schneider wrote:
+hi Kees Cook,
+
+On 2020/5/8 PM 2:07, Kees Cook wrote:
+> On Wed, Mar 25, 2020 at 04:54:57PM +0800, WeiXiong Liao wrote:
+>> pstore/blk is similar to pstore/ram, but dump log to block device
+>> rather than persistent ram.
+>> [...]
+>> +int psblk_register_blkdev(unsigned int major, psblk_panic_write_op panic_write)
+>> +{
+>> +	struct block_device *bdev;
+>> +	struct psblk_device dev = {0};
+>> +	struct bdev_info *binfo;
+>> +	int ret = -ENODEV;
+>> +	void *holder = blkdev;
+>> +
+>> +	binfo = psblk_get_bdev_info();
+>> +	if (IS_ERR(binfo))
+>> +		return PTR_ERR(binfo);
+>> +
+>> +	/* only allow driver matching the @blkdev */
+>> +	if (!binfo->devt || MAJOR(binfo->devt) != major) {
+>> +		pr_debug("invalid major %u (expect %u)\n",
+>> +				major, MAJOR(binfo->devt));
+>> +		return -ENODEV;
+>> +	}
+>> +
+>> +	/* hold bdev exclusively */
+>> +	bdev = psblk_get_bdev(holder);
+>> +	if (IS_ERR(bdev)) {
+>> +		pr_err("failed to open '%s'!\n", blkdev);
+>> +		return PTR_ERR(bdev);
+>> +	}
+>> +
+>> +	/* psblk_bdev must be assigned before register to pstore/blk */
+>> +	psblk_bdev = bdev;
+>> +	blkdev_panic_write = panic_write;
+>> +
+>> +	dev.total_size = psblk_bdev_size(bdev);
+>> +	dev.panic_write = panic_write ? psblk_blk_panic_write : NULL;
+>> +	dev.read = psblk_generic_blk_read;
+>> +	dev.write = psblk_generic_blk_write;
+>> +
+>> +	ret = psblk_register_do(&dev);
+>> +	if (ret)
+>> +		goto err_put_bdev;
+>> +
+>> +	pr_info("using '%s'\n", blkdev);
+>> +	return 0;
+>> +
+>> +err_put_bdev:
+>> +	psblk_bdev = NULL;
+>> +	blkdev_panic_write = NULL;
+>> +	psblk_put_bdev(bdev, holder);
+>> +	return ret;
+>> +}
+>> +EXPORT_SYMBOL_GPL(psblk_register_blkdev);
 > 
-> On 07/05/20 19:05, John Mathew wrote:
-
-[...]
-
-> It would also be an opportunity to have one place to (at least briefly)
-> describe what the different sched classes do wrt capacity asymmetry - CFS
-> does one thing, RT now does one thing (see Qais' work), and DL will
-> hopefully soon follow (see Dietmar's work).
+> I've gotten this series refactored on top of current pstore, and I've
+> been making various bikeshed changes to names, etc, and as I went to go
+> start testing, I realized that nothing actually uses
+> psblk_register_blkdev().
 > 
-> I'd be happy to contribute (some of) that, if it can be deemed useful (I
-> personally think it might).
+> It seems like it should be possible to just start using this on any
+> block device of the user's choosing. I assume the idea is to allow for
+> drivers to register panic_write handlers, but even without that, it'd be
+> nice to just be able to test this with something like /dev/loop0.
+> 
 
-I like the idea.
+Yes. psblk_register_blkdev() is there for block drivers to register
+panic_write()
+handlers. The panic_wrire() is used only when panic occurs. Not only the
+panic
+log, but also all data on dirty zones. I implement the panic_write() of mmc
+and nand on the platform of Allwinner, but I think it is not ready to
+submit to
+community.
 
-Essentially all the code which is guarded by the 'if
-(static_branch_unlikely(&sched_asym_cpucapacity)' condition or which
-sets it during bring-up.
+All other front-ends but dmesg for panic are available since pstore/blk
+provides
+the general write/read through IO stack. That's why /dev/loop0 seemed to
+works well.
 
-* 'Cpu capacity < SCHED_LOAD_SCALE for non-big' CPUs setting during
-   bringup (necessary dt binding, CPUfreq influence)
+> What's your thinking on how this would happen? It seems like if
+> pstore/blk uses pstore/zone, and mtdpstore uses pstore/blk, there should
+> be a blkoops that uses pstore/blk too?  I guess I need to learn a bit> more about how block device probing works so pstore/blk can notice
+> devices as they're brought online, etc.
+> 
 
-* CFS capacity awareness:
+pstore/blk provides all  user options and register function for device
+drivers.
+The mtdpstore is the implementation case using pstore/blk. How about
+'mmc_pstore' for mmc and *_pstore for others block device?
 
-  * wakeup - select_idle_capacity() (replaced wake_cap() & slow path to
-             cover DynamIQ and classical big.LITTLE)
+I guess I need to learn more about how pstore/blk can notice devices too.
+I think pstore/blk can be better if block device can do like mtd device that
+not only notifies but also provides generic panic_write().
 
-  * load_balance - misfit handling
-
-* RT & DL capacity awareness
-
-* ... & the relation to EAS (Documentation/scheduler/sched-energy.rst)
-
-This is what we referred to (at least internally) as CAS (Capacity-Aware
-Scheduling).
+-- 
+WeiXiong Liao
