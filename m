@@ -2,100 +2,211 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9F58A1CABDC
-	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2020 14:47:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3C9441CB13B
+	for <lists+linux-doc@lfdr.de>; Fri,  8 May 2020 16:01:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728272AbgEHMrn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 8 May 2020 08:47:43 -0400
-Received: from us-smtp-1.mimecast.com ([205.139.110.61]:42897 "EHLO
-        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1729579AbgEHMrl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 8 May 2020 08:47:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1588942061;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=scLEqBSEllA/rWbrO6NS8p6P9loIqw6BnJNugdMi+eA=;
-        b=BTX3qZbTH+QtFr8upuhFr+MjiTJREQX+CkuYleZ4No22mzMYGuygzfxqSApugan3fAWVPn
-        elsZrAKG1e9W9C+ntLXqh9H9ipq00hyM1Jdz1FXRZ00n1XHnHVym9J7MGgxaYH1szynJjP
-        OZVfpJOcG3xqSIei/WpOSvYulKHxeJ8=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-390-amwZP0r1MEyVfmBB0iyacA-1; Fri, 08 May 2020 08:47:36 -0400
-X-MC-Unique: amwZP0r1MEyVfmBB0iyacA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 4516080183C;
-        Fri,  8 May 2020 12:47:34 +0000 (UTC)
-Received: from optiplex-lnx (unknown [10.3.128.26])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 21623707A6;
-        Fri,  8 May 2020 12:47:22 +0000 (UTC)
-Date:   Fri, 8 May 2020 08:47:19 -0400
-From:   Rafael Aquini <aquini@redhat.com>
-To:     Luis Chamberlain <mcgrof@kernel.org>
-Cc:     Tso Ted <tytso@mit.edu>, Adrian Bunk <bunk@kernel.org>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Laura Abbott <labbott@redhat.com>,
-        Jeff Mahoney <jeffm@suse.com>, Jiri Kosina <jikos@kernel.org>,
-        Jessica Yu <jeyu@suse.de>, Takashi Iwai <tiwai@suse.de>,
-        Ann Davis <AnDavis@suse.com>,
-        Richard Palethorpe <rpalethorpe@suse.de>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        kexec@lists.infradead.org, linux-fsdevel@vger.kernel.org,
-        dyoung@redhat.com, bhe@redhat.com, corbet@lwn.net,
-        keescook@chromium.org, akpm@linux-foundation.org, cai@lca.pw,
-        rdunlap@infradead.org
-Subject: Re: [PATCH v2] kernel: add panic_on_taint
-Message-ID: <20200508124719.GB367616@optiplex-lnx>
-References: <20200507180631.308441-1-aquini@redhat.com>
- <20200507182257.GX11244@42.do-not-panic.com>
- <20200507184307.GF205881@optiplex-lnx>
- <20200507184705.GG205881@optiplex-lnx>
- <20200507203340.GZ11244@42.do-not-panic.com>
- <20200507220606.GK205881@optiplex-lnx>
- <20200507222558.GA11244@42.do-not-panic.com>
+        id S1727841AbgEHOA6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 8 May 2020 10:00:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43424 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1726767AbgEHOA5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 8 May 2020 10:00:57 -0400
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AA87BC05BD43;
+        Fri,  8 May 2020 07:00:57 -0700 (PDT)
+Received: by mail-pf1-x442.google.com with SMTP id x15so386508pfa.1;
+        Fri, 08 May 2020 07:00:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=BrhHlE2Zmb8qG7aodLCCwPMutnU0QeSrvMETJzhMIzo=;
+        b=GfSvnW/M6U6IuLYoHa4fNyMJj8DlRFSRdgmYXkgG/AK82dCbbFbgtZRWEZkQOxCGVp
+         K3Tu2JeYqM/XkqHDIlF/fZxXxI45eWiY5Q0FI+WZxikJ6zb5FXldONUG0MxrWjd2/zJ9
+         qjXDBPfotNh5uahFaI3EwJUHDgzuu31YAj7U46CRTE46zs95JLFmEyNWSYkcpbFUNmc2
+         wgz7esvtbU3/TW1zTYt+YOJh61m3ZYL9OmRI1zbvP5lIoaYq7xeAeYe1UO0+U/BPJGBK
+         icdGGF1vQcd84o7e+57Zf+BdF1qfrxjMBHRTUmLM4xLBHeMpysSsa64Jbo9kDCy5Z2gp
+         wJjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=BrhHlE2Zmb8qG7aodLCCwPMutnU0QeSrvMETJzhMIzo=;
+        b=Cemh5Fvr8fjdeAyQr2NC++xASPJEX2ezPJKUjphYv0lZn0yjUbnMDa1F1zPGmH6H20
+         DsjDbfyr0+FnpzBwZbKa6KMgYqHrK3kpZNxgrOr2xxz8RF3OCUvZUuDq+7Hw8XTnmM7y
+         Rn3wqauormmZrNzJ68HHhHzvDZX6rgqjEK7N51OMtFt9NbI/e2NvdHAYdx8xcYGv5ctx
+         oIxCb37Bettz3OzBrnR/X7bkW+JMBp6aj5Hk9CiOSkofG1V+EBt8boMkxnabu4F14VLA
+         wx6SWyKNXWExfJYDkJNTuzPImp+JjQqvnYUCTxrRJXSl/E1JazfcZfNcZA5lWlBbNcM4
+         gOEw==
+X-Gm-Message-State: AGi0PuZ1rXmEd3n0ilSWDyc4MPD9GrFVtNQy1EB3qF/t/y55oZ0gRAWS
+        Ys3FRY6pOckp4Q1HHqyi1fgY0g72rH4=
+X-Google-Smtp-Source: APiQypK4DubtHwM1Vu8C8FpSXFjuCvRo/r5RQVxEQi5FWF3UHohrmabVSVe8bPGqMapjaOjvGqe4Zw==
+X-Received: by 2002:a62:7982:: with SMTP id u124mr800006pfc.298.1588946457081;
+        Fri, 08 May 2020 07:00:57 -0700 (PDT)
+Received: from mail.google.com ([149.248.10.52])
+        by smtp.gmail.com with ESMTPSA id 207sm1458329pgh.34.2020.05.08.07.00.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 08 May 2020 07:00:55 -0700 (PDT)
+Date:   Fri, 8 May 2020 22:00:47 +0800
+From:   Changbin Du <changbin.du@gmail.com>
+To:     Steven Rostedt <rostedt@goodmis.org>
+Cc:     Masahiro Yamada <masahiroy@kernel.org>,
+        Changbin Du <changbin.du@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        Randy Dunlap <rdunlap@infradead.org>
+Subject: Re: [PATCH v4] streamline_config.pl: add LMC_KEEP to preserve some
+ kconfigs
+Message-ID: <20200508140047.rln4iogroxw7esxa@mail.google.com>
+References: <20200503001141.9647-1-changbin.du@gmail.com>
+ <CAK7LNATBt1NxRSWiv8Ab-pKBRemp43WUs96KWELTf+vFq_VPTA@mail.gmail.com>
+ <20200507091807.0a789fbd@gandalf.local.home>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200507222558.GA11244@42.do-not-panic.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+In-Reply-To: <20200507091807.0a789fbd@gandalf.local.home>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, May 07, 2020 at 10:25:58PM +0000, Luis Chamberlain wrote:
-> On Thu, May 07, 2020 at 06:06:06PM -0400, Rafael Aquini wrote:
-> > On Thu, May 07, 2020 at 08:33:40PM +0000, Luis Chamberlain wrote:
-> > > I *think* that a cmdline route to enable this would likely remove the
-> > > need for the kernel config for this. But even with Vlastimil's work
-> > > merged, I think we'd want yet-another value to enable / disable this
-> > > feature. Do we need yet-another-taint flag to tell us that this feature
-> > > was enabled?
+On Thu, May 07, 2020 at 09:18:07AM -0400, Steven Rostedt wrote:
+> On Thu, 7 May 2020 12:19:57 +0900
+> Masahiro Yamada <masahiroy@kernel.org> wrote:
+> 
+> > On Sun, May 3, 2020 at 9:11 AM Changbin Du <changbin.du@gmail.com> wrote:
 > > >
+> > > Sometimes it is useful to preserve batches of configs when making
+> > > localmodconfig. For example, I usually don't want any usb and fs
+> > > modules to be disabled. Now we can do it by:
+> > >
+> > >  $ make LMC_KEEP="drivers/usb;fs" localmodconfig
+> > >
+> > > Signed-off-by: Changbin Du <changbin.du@gmail.com>
+> > >
+> > > ---
+> > > v4: fix typo.
+> > > v3: rename LOCALMODCONFIG_PRESERVE to shorter LMC_KEEP.
+> > > v2: fix typo in documentation. (Randy Dunlap)
+> > > ---  
 > > 
-> > I guess it makes sense to get rid of the sysctl interface for
-> > proc_on_taint, and only keep it as a cmdline option. 
+> > 
+> > Personally, I do not mind the long LOCALMODCONFIG_PRESERVE,
 > 
-> That would be easier to support and k3eps this simple.
+> Perhasp we allow both? ;-)
 > 
-> > But the real issue seems to be, regardless we go with a cmdline-only option
-> > or not, the ability of proc_taint() to set any arbitrary taint flag 
-> > other than just marking the kernel with TAINT_USER. 
+> And just have one set to the other.
 > 
-> I think we would have no other option but to add a new TAINT flag so
-> that we know that the taint flag was modified by a user. Perhaps just
-> re-using TAINT_USER when proc_taint() would suffice.
+> > but this tends to be bike-sheding.
+> > I do not have a strong opinion.
+> > 
+> > 
+> > >  Documentation/admin-guide/README.rst |  8 +++++++-
+> > >  scripts/kconfig/Makefile             |  1 +
+> > >  scripts/kconfig/streamline_config.pl | 23 +++++++++++++++++++++++
+> > >  3 files changed, 31 insertions(+), 1 deletion(-)
+> > >
+> > > diff --git a/Documentation/admin-guide/README.rst b/Documentation/admin-guide/README.rst
+> > > index cc6151fc0845..1371deab8bc7 100644
+> > > --- a/Documentation/admin-guide/README.rst
+> > > +++ b/Documentation/admin-guide/README.rst
+> > > @@ -209,10 +209,16 @@ Configuring the kernel
+> > >                             store the lsmod of that machine into a file
+> > >                             and pass it in as a LSMOD parameter.
+> > >
+> > > +                           Also, you can preserve modules in certain folders
+> > > +                           or kconfig files by specifying their paths in
+> > > +                           parameter LMC_KEEP.
+> > > +
+> > >                     target$ lsmod > /tmp/mylsmod
+> > >                     target$ scp /tmp/mylsmod host:/tmp
+> > >
+> > > -                   host$ make LSMOD=/tmp/mylsmod localmodconfig
+> > > +                   host$ make LSMOD=/tmp/mylsmod \
+> > > +                           LMC_KEEP="drivers/usb;drivers/gpu;fs" \  
+> > 
+> > 
+> > This might be another bike-sheding item, but
+> > can you use a space for the delimiter?
+> > 
+> > 
+> > LMC_KEEP="drivers/usb drivers/gpu fs"
+> > 
+> > If you pass multiple directories,
+> > you will need to surround them with double-quotes.
+> 
+> I agree that spaces look better.
 >
+I am okay with space. But what about ":" which is used by shell PATH and many
+others?
 
-We might not need an extra taint flag if, perhaps, we could make these
-two features mutually exclusive. The idea here is that bitmasks added 
-via panic_on_taint get filtered out in proc_taint(), so a malicious 
-user couldn't exploit the latter interface to easily panic the system,
-when the first one is also in use. 
- 
--- Rafael
+> > 
+> > 
+> > 
+> > 
+> > > +                           localmodconfig
+> > >
+> > >                             The above also works when cross compiling.
+> > >
+> > > diff --git a/scripts/kconfig/Makefile b/scripts/kconfig/Makefile
+> > > index c9d0a4a8efb3..e0abbf5805f5 100644
+> > > --- a/scripts/kconfig/Makefile
+> > > +++ b/scripts/kconfig/Makefile
+> > > @@ -123,6 +123,7 @@ help:
+> > >         @echo  '  gconfig         - Update current config utilising a GTK+ based front-end'
+> > >         @echo  '  oldconfig       - Update current config utilising a provided .config as base'
+> > >         @echo  '  localmodconfig  - Update current config disabling modules not loaded'
+> > > +       @echo  '                    except those preserved by LMC_KEEP environment variable'
+> > >         @echo  '  localyesconfig  - Update current config converting local mods to core'
+> > >         @echo  '  defconfig       - New config with default from ARCH supplied defconfig'
+> > >         @echo  '  savedefconfig   - Save current config as ./defconfig (minimal config)'
+> > > diff --git a/scripts/kconfig/streamline_config.pl b/scripts/kconfig/streamline_config.pl
+> > > index e2f8504f5a2d..d26543a807c9 100755
+> > > --- a/scripts/kconfig/streamline_config.pl
+> > > +++ b/scripts/kconfig/streamline_config.pl
+> > > @@ -143,6 +143,7 @@ my %depends;
+> > >  my %selects;
+> > >  my %prompts;
+> > >  my %objects;
+> > > +my %config2kfile;
+> > >  my $var;
+> > >  my $iflevel = 0;
+> > >  my @ifdeps;
+> > > @@ -201,6 +202,7 @@ sub read_kconfig {
+> > >         if (/^\s*(menu)?config\s+(\S+)\s*$/) {
+> > >             $state = "NEW";
+> > >             $config = $2;
+> > > +           $config2kfile{"CONFIG_$config"} = $kconfig;
+> > >
+> > >             # Add depends for 'if' nesting
+> > >             for (my $i = 0; $i < $iflevel; $i++) {
+> > > @@ -592,6 +594,22 @@ while ($repeat) {
+> > >
+> > >  my %setconfigs;
+> > >
+> > > +my @preserved_kconfigs;
+> > > +@preserved_kconfigs = split(/;/,$ENV{LMC_KEEP}) if (defined($ENV{LMC_KEEP}));  
+> > 
+> > Maybe, you can do 'my' declaration and the assignment
+> > in a single line?
+> > 
+> > Can you drop the 'if ...' conditional?
+> > 
+> > 
+> > Does this work for you?
+> > 
+> > my @preserved_kconfigs = split(/;/,$ENV{LMC_KEEP});
+> > 
+> > 
+> 
+> Will an undefined warning happen if LMC_KEEP isn't defined?
+> 
+I just verifed there is no warning raised.
 
+> -- Steve
+
+-- 
+Cheers,
+Changbin Du
