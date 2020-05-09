@@ -2,46 +2,46 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A5D7D1CC54E
-	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2020 01:42:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B578C1CC528
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2020 01:41:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726521AbgEIXlJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 9 May 2020 19:41:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46584 "EHLO
+        id S1728387AbgEIXlN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 9 May 2020 19:41:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46590 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726320AbgEIXlJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 9 May 2020 19:41:09 -0400
-Received: from mail-pj1-x1041.google.com (mail-pj1-x1041.google.com [IPv6:2607:f8b0:4864:20::1041])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DCCBFC05BD0A
-        for <linux-doc@vger.kernel.org>; Sat,  9 May 2020 16:41:08 -0700 (PDT)
-Received: by mail-pj1-x1041.google.com with SMTP id e6so5918985pjt.4
-        for <linux-doc@vger.kernel.org>; Sat, 09 May 2020 16:41:08 -0700 (PDT)
+        by vger.kernel.org with ESMTP id S1726026AbgEIXlK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 9 May 2020 19:41:10 -0400
+Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com [IPv6:2607:f8b0:4864:20::643])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C99AC061A0C
+        for <linux-doc@vger.kernel.org>; Sat,  9 May 2020 16:41:10 -0700 (PDT)
+Received: by mail-pl1-x643.google.com with SMTP id t7so2309259plr.0
+        for <linux-doc@vger.kernel.org>; Sat, 09 May 2020 16:41:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=BH7oPYzXzVGddb2eusJn7dvCiiIlEUY0aB5rJA7D8Lo=;
-        b=UniSr7amz9GtvTZ3gNf0nCaC6CAuwsYMTWMdmRh5DoJfNsF/WyWVrlQtjp3jsIuOt0
-         h+tjUZVl42fYv4WcZ5oGufdIKYuCZfD8BZ9mDkiHTOiBaL8hYcCuWOzEMWmGxOXmI+xW
-         Ebyr3kfvu1QQ3T+7M0deAJEw2Y5H53WKIISyo=
+        bh=a6bXV7bt3FJwO+6h7hS9wdbWbj+cKT2R8klgQdvy5V4=;
+        b=PA3J3jqxZhR7QLeqwjId3MPNynQJYjylfFHuFHDO93eKIYh0iQYwhqZLfhDgt0tNPx
+         NxHMmZui4QlIyuKxLjsRMXG4PNIvSBqEGu3OoFLfiibivil4eA41JBZI/UtGxAjYryLj
+         xFanC6zXk4byjitJUGh5BrMI4F3rjAjk6STjc=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=BH7oPYzXzVGddb2eusJn7dvCiiIlEUY0aB5rJA7D8Lo=;
-        b=Irp7gkUZE9T+km3n+Un9zhPMpfxLr3vg3h/zUoCEPE7t4THTHUXEuYXNs5GaUMp5Lc
-         KzlJf+O+5m/0dCII5h6Ji7RHYnbSCHTfzAkI1lwoOv9KDOIXuyWyPWo8S4qihKPdYZpX
-         QGNZ1MUI3MEox/m5h+8aqCVnyPxAPu584t1z1NxvVe0Er7ZPGqPlEHGYmueg60c96tAl
-         dknPypDarwjEA+PLWsKFFrzy3jjT6cHU06df12aIjuZ3VtxjfI09DrShc40f6zmiuznE
-         N0o67dnNeWSBS1QJBxdGuD2ARk6c4i/r1+GpxvDQXT9NH1uS0H0n+XYAI3AaaJDmnuHq
-         YZKQ==
-X-Gm-Message-State: AGi0PubwtLkUzM61SJYQ5x3KX+8Bz6RCH/RFQEb1nqL8HEJObcsyJIsk
-        cFiYGLGeHzCTbjkGPB/SRgddgg==
-X-Google-Smtp-Source: APiQypK15qi0ZKxUvetpLu0eCL68R0LMHd+TRd7RVmybuxclXGoJ7hR0ZH4TIAZAl+JKB3vSh67M6Q==
-X-Received: by 2002:a17:90a:1b67:: with SMTP id q94mr13615379pjq.84.1589067668421;
-        Sat, 09 May 2020 16:41:08 -0700 (PDT)
+        bh=a6bXV7bt3FJwO+6h7hS9wdbWbj+cKT2R8klgQdvy5V4=;
+        b=hidnNMZvl7ESAs6dRBBBGZtUUz3acVx3DQmPRAER+5JaGEv0agRBpPp9q5uEd2RtEJ
+         wCwZXNwy5O/EOxY0M8rKl5Y34zwxHk0DuEYmHQAXG+MLPXGmMptR07rZl6BE5t9Q/0JE
+         c5CY8RTLfSAS1QyEuVLZE6CgyfH5WdsYgkKAq+DXH8ez3BgoEpCLD41Cdb0e3RKAOCMy
+         9BcxQ7fPmc2YeRnTQ6rS8rEJ1GfLIDFgTsfAwuS/zSOK8LLaN9YY83QYFFWO31uw2Ov6
+         U9JUpbrBuI4tlCM5NU2yEfqtRygcmFT7tiyYgzGF0MOK79NAq/ql0UUgA+oxMeRy8/l5
+         rOIA==
+X-Gm-Message-State: AGi0PuYS7+7oK+eT0nlYKXvUrifyRhyIneTIPQDagrfExsjH4wYWopzI
+        wABLpbaRMKCEmlHNBDmmknN20Q==
+X-Google-Smtp-Source: APiQypIYGFFNE4CP/IEMoDRh7mGwo0o4z+2NMypaNjHCF3aRnPBRNu9ocJUCntHiguWss1r6vpDHyg==
+X-Received: by 2002:a17:90a:8b82:: with SMTP id z2mr14034741pjn.124.1589067669999;
+        Sat, 09 May 2020 16:41:09 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id z190sm5455053pfz.84.2020.05.09.16.41.06
+        by smtp.gmail.com with ESMTPSA id n23sm5722167pjq.18.2020.05.09.16.41.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Sat, 09 May 2020 16:41:06 -0700 (PDT)
 From:   Kees Cook <keescook@chromium.org>
@@ -61,9 +61,9 @@ Cc:     Kees Cook <keescook@chromium.org>,
         Pavel Tatashin <pasha.tatashin@soleen.com>,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
         linux-mtd@lists.infradead.org
-Subject: [PATCH v6 01/18] pstore/ram: Move dump_oops to end of module_param list
-Date:   Sat,  9 May 2020 16:40:46 -0700
-Message-Id: <20200509234103.46544-2-keescook@chromium.org>
+Subject: [PATCH v6 02/18] pstore/platform: Switch pstore_info::name to const
+Date:   Sat,  9 May 2020 16:40:47 -0700
+Message-Id: <20200509234103.46544-3-keescook@chromium.org>
 X-Mailer: git-send-email 2.20.1
 In-Reply-To: <20200509234103.46544-1-keescook@chromium.org>
 References: <20200509234103.46544-1-keescook@chromium.org>
@@ -74,43 +74,51 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When reading "modinfo" details, dump_oops was before max_reason, which
-seems odd given dump_oops is now considered deprecated. Move it to the
-very end instead.
+In order to more cleanly pass around backend names, make the "name" member
+const. This means the module param needs to be dynamic (technically, it
+was before, so this actually cleans up a minor memory leak if a backend
+was specified and then gets unloaded.)
 
 Signed-off-by: Kees Cook <keescook@chromium.org>
 ---
- fs/pstore/ram.c | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+ fs/pstore/platform.c   | 3 ++-
+ include/linux/pstore.h | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/fs/pstore/ram.c b/fs/pstore/ram.c
-index 198d04cceb3e..7f956053f4e5 100644
---- a/fs/pstore/ram.c
-+++ b/fs/pstore/ram.c
-@@ -57,11 +57,6 @@ module_param(mem_type, uint, 0400);
- MODULE_PARM_DESC(mem_type,
- 		"set to 1 to try to use unbuffered memory (default 0)");
+diff --git a/fs/pstore/platform.c b/fs/pstore/platform.c
+index b882919b8784..e7bf22f01928 100644
+--- a/fs/pstore/platform.c
++++ b/fs/pstore/platform.c
+@@ -626,7 +626,7 @@ int pstore_register(struct pstore_info *psi)
+ 	 * Update the module parameter backend, so it is visible
+ 	 * through /sys/module/pstore/parameters/backend
+ 	 */
+-	backend = psi->name;
++	backend = kstrdup(psi->name, GFP_KERNEL);
  
--static int ramoops_dump_oops = -1;
--module_param_named(dump_oops, ramoops_dump_oops, int, 0400);
--MODULE_PARM_DESC(dump_oops,
--		 "set to 1 to dump oopses & panics, 0 to only dump panics (deprecated: use max_reason instead)");
--
- static int ramoops_max_reason = KMSG_DUMP_OOPS;
- module_param_named(max_reason, ramoops_max_reason, int, 0400);
- MODULE_PARM_DESC(max_reason,
-@@ -74,6 +69,11 @@ MODULE_PARM_DESC(ramoops_ecc,
- 		"ECC buffer size in bytes (1 is a special value, means 16 "
- 		"bytes ECC)");
+ 	pr_info("Registered %s as persistent store backend\n", psi->name);
  
-+static int ramoops_dump_oops = -1;
-+module_param_named(dump_oops, ramoops_dump_oops, int, 0400);
-+MODULE_PARM_DESC(dump_oops,
-+		 "(deprecated: use max_reason instead) set to 1 to dump oopses & panics, 0 to only dump panics");
-+
- struct ramoops_context {
- 	struct persistent_ram_zone **dprzs;	/* Oops dump zones */
- 	struct persistent_ram_zone *cprz;	/* Console zone */
+@@ -669,6 +669,7 @@ void pstore_unregister(struct pstore_info *psi)
+ 	free_buf_for_compression();
+ 
+ 	psinfo = NULL;
++	kfree(backend);
+ 	backend = NULL;
+ 	mutex_unlock(&psinfo_lock);
+ }
+diff --git a/include/linux/pstore.h b/include/linux/pstore.h
+index 16a1fdafc167..eb93a54cff31 100644
+--- a/include/linux/pstore.h
++++ b/include/linux/pstore.h
+@@ -176,7 +176,7 @@ struct pstore_record {
+  */
+ struct pstore_info {
+ 	struct module	*owner;
+-	char		*name;
++	const char	*name;
+ 
+ 	struct semaphore buf_lock;
+ 	char		*buf;
 -- 
 2.20.1
 
