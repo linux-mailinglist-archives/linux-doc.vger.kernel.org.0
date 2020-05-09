@@ -2,100 +2,167 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 835371CC3F0
-	for <lists+linux-doc@lfdr.de>; Sat,  9 May 2020 21:10:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 47E971CC527
+	for <lists+linux-doc@lfdr.de>; Sun, 10 May 2020 01:41:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728210AbgEITKv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 9 May 2020 15:10:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33062 "EHLO
+        id S1728340AbgEIXlN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 9 May 2020 19:41:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46602 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1727938AbgEITKu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 9 May 2020 15:10:50 -0400
-Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com [IPv6:2607:f8b0:4864:20::443])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D324C05BD09
-        for <linux-doc@vger.kernel.org>; Sat,  9 May 2020 12:10:49 -0700 (PDT)
-Received: by mail-pf1-x443.google.com with SMTP id x2so2700598pfx.7
-        for <linux-doc@vger.kernel.org>; Sat, 09 May 2020 12:10:49 -0700 (PDT)
+        by vger.kernel.org with ESMTP id S1728196AbgEIXlL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 9 May 2020 19:41:11 -0400
+Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com [IPv6:2607:f8b0:4864:20::52c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4CADEC05BD0B
+        for <linux-doc@vger.kernel.org>; Sat,  9 May 2020 16:41:11 -0700 (PDT)
+Received: by mail-pg1-x52c.google.com with SMTP id a4so2687369pgc.0
+        for <linux-doc@vger.kernel.org>; Sat, 09 May 2020 16:41:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=wf1n+hj5e8dyRivUQoz1C3c50QpmiVcBTEYF2ohJ06I=;
-        b=ic2jDBAUdykvb8NzpOOfuQtQCAJskZi9+smoiPzH0xhkiX4pmSJiinej0vTVKH/221
-         gnrKMP7IOys7u092mkVJTRxQoojh82vCi5NVTTM9PF5p0zLJ9waRrFkClTf7fi/2WpPA
-         uBgj5Ja5hpJz90iREzYY3zV5EovyF5+UvyYYQ=
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LN02kQGLgElFDT6YhRYkfrDyShhneRM4gygOe7piDXw=;
+        b=a2OffO+4m00dWKoHHUMauc+9jzQitgt4pi5ica/PG9O+dw/0wGtT6L+v2xUTv9XT1e
+         iNdEQJVHXZOZW0hpuyCL4cSKScaWt/EWbnysgj0OTX9SwhZiWxil5wqslLkSp25G6e3m
+         JEcY8KRnfLgY67mjWFvFRdcLvho/YQqSPY/WI=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=wf1n+hj5e8dyRivUQoz1C3c50QpmiVcBTEYF2ohJ06I=;
-        b=ByPWlmX0PJpHhC9Yr5vj+KIEs2RU3j4JZQQUoNoJYqP31rE4nXm7DSNzIzrJ735XM4
-         nn851Q1tKNeO3qNfJWtrB4QRLA1cckuhMJdSRt7BT8VWxGO7plOeV0+mR8z9o3cWW12S
-         aLMs7/q5t/cRC3edkNHC4QAcraseE1EgvMgXWI13qsfQzf62Y9PVcJ8OT61ikMqdxiQW
-         llrztB4tvm0gr3j1+G5+m4wYiiU4y4lmGGccGgaJScZ2kezK05g8mnajLKpUYkzM651V
-         BQGIVTkfjm4Fhl8I3y65oX/WK8b3EHuvE0MGC6WCuHoKcF5A1mX+i2A0GwtMvjYb/pf8
-         g+Ig==
-X-Gm-Message-State: AGi0PubRT+kCODfer7KVB4ZzKaRs4uk7kHiN8HPU6kTZpYpYOmaJ4VZh
-        Eap2a0AenJOH2nLMS7D13JgOaA==
-X-Google-Smtp-Source: APiQypIUCMS5XnSujPmoONFpTKJIcwb1UPhXWiVcur5+r5JlPaWLbFnndT7Bb71vHTwjtrn39ZObjQ==
-X-Received: by 2002:a63:7b42:: with SMTP id k2mr7065532pgn.299.1589051448671;
-        Sat, 09 May 2020 12:10:48 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=LN02kQGLgElFDT6YhRYkfrDyShhneRM4gygOe7piDXw=;
+        b=nYTj/eS41dzRGNZQ8rb0tGp4QsldoALkcYYhCclmRACryXeA92tUR1u22puNJCeckk
+         3mWzMKnN45mF3401do5UmkWwWQl1h4zsxKAsOSgqrV64plKYgDpGaZ/G+Z1f89JrxNcd
+         iUJkK6oXWjSKQyE9YnX2nNoN1ePxgcOoJcieII2+0onBj/kfUUVWeAJDtPSlumUf4pwq
+         BpcAfpBkS5VHRTY+/wreNUbEI231xCBKGxLwO4QVlat8o9CJooVh9c1Y3xpJyvQ4ASUt
+         SnSvc56+rxFA/lAdi5ypjzGr2dwTX2PwuPS3+ozrR/Wxg2nz/Nne+7g81X2PIof6pHsp
+         rUzg==
+X-Gm-Message-State: AGi0PuamSAdDHD9CoaQVhivwviFc5dihnSci8CC9njz+Z8EXYbUKa57U
+        Se+2mSYNVsvcS/Mz2BftoK4/Og==
+X-Google-Smtp-Source: APiQypIkzVjEFHa2Lrg3QC1KeNRQ6+ilOe2KWxjDWNTEq5yVdbPKmnUsIO6mBJKyCEQYBRh4Q1LiuA==
+X-Received: by 2002:a63:9e53:: with SMTP id r19mr8385908pgo.5.1589067670765;
+        Sat, 09 May 2020 16:41:10 -0700 (PDT)
 Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id x7sm5289404pfj.122.2020.05.09.12.10.47
+        by smtp.gmail.com with ESMTPSA id b16sm5448636pfp.89.2020.05.09.16.41.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 09 May 2020 12:10:47 -0700 (PDT)
-Date:   Sat, 9 May 2020 12:10:46 -0700
+        Sat, 09 May 2020 16:41:06 -0700 (PDT)
 From:   Kees Cook <keescook@chromium.org>
 To:     WeiXiong Liao <liaoweixiong@allwinnertech.com>
-Cc:     Anton Vorontsov <anton@enomsg.org>,
+Cc:     Kees Cook <keescook@chromium.org>,
+        Anton Vorontsov <anton@enomsg.org>,
         Colin Cross <ccross@android.com>,
         Tony Luck <tony.luck@intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Miquel Raynal <miquel.raynal@bootlin.com>,
+        Richard Weinberger <richard@nod.at>,
+        Vignesh Raghavendra <vigneshr@ti.com>,
         Petr Mladek <pmladek@suse.com>,
         Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
         Steven Rostedt <rostedt@goodmis.org>,
-        linux-doc@vger.kernel.org, linux-mtd@lists.infradead.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 00/12] pstore: mtd: support crash log to block and mtd
- device
-Message-ID: <202005091209.406DB4C@keescook>
-References: <20200508064004.57898-1-keescook@chromium.org>
- <202005080020.41C33738@keescook>
- <c1583001-bf03-d198-ad57-3d2a0baf93ca@allwinnertech.com>
+        Rob Herring <robh@kernel.org>,
+        Pavel Tatashin <pasha.tatashin@soleen.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mtd@lists.infradead.org
+Subject: [PATCH v6 00/18] pstore: mtd: support crash log to block and mtd device
+Date:   Sat,  9 May 2020 16:40:45 -0700
+Message-Id: <20200509234103.46544-1-keescook@chromium.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <c1583001-bf03-d198-ad57-3d2a0baf93ca@allwinnertech.com>
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, May 09, 2020 at 06:32:28PM +0800, WeiXiong Liao wrote:
-> The following diff is to fix "rmmod" bug.
-> 
-> @@ -1273,8 +1273,8 @@ static void psz_free_zones(struct pstore_zone
-> ***pszones, unsigned int *cnt)
->                 return;
-> 
->         while (*cnt > 0) {
-> -               psz_free_zone(&zones[*cnt]);
->                 (*cnt)--;
-> +               psz_free_zone(&zones[*cnt]);
->         }
->         kfree(zones);
->         *pszones = NULL;
+Hi,
 
-Ah-ha! Thanks; I'd almost found that. I got confused because I wasn't
-see NULL free()s, and I finally noticed that the zones had left over
-ERR_PTRs:
+Okay, I'm happy enough with this series to get it landed so we can start
+doing incremental changes, etc. Here's the v6 I'll land in for-next/pstore
+unless there's some objection.
 
-        if (IS_ERR(cxt->fpszs)) {
-                err = PTR_ERR(cxt->fpszs);
-+               cxt->fpszs = NULL;
-                goto free_out;
-        }
+Thank you again for all your patience! As you can see, I had a lot of
+things I needed to fix up in the core pstore code, and I had a lot of
+opinions about names. ;) I'm glad to have a block device backend for
+this -- it makes testing the core much easier.
 
-I'll fix those and your v5 and my lastest tree merged.
+After spending so much time looking at pstore/zone, I've got some ideas
+about how to merge it with pstore/ram's way of doing things. For example,
+I'd like to get ECC support into pstore/zone, and once it's generalized
+enough, I think other storage systems (EFI?) could use it to solve
+some problems there (growing without bounds, not supporting the other
+frontends, etc).
+
+One last thought I had on naming would be to have mtdpstore be named
+pstore_mtd.c, etc. That'd make it more like pstore/zone,blk,ram,
+etc. (I'd really like to get pstore/ram renamed and keep the "ramoops"
+name for backward compat.) What do you think about that?
+
+Thanks!
+
+-Kees
+
+
+v6:
+- more renamings, typo fixes, rewordings
+- reset pstore_zone global counters/state on unregister
+- add best_effort param to allow easy block device testing
+- extract ftrace merging code from ram.c to avoid duplication
+- use backend name for console name
+- rearrange module parameters
+
+v5: https://lore.kernel.org/lkml/1589022854-19821-1-git-send-email-liaoweixiong@allwinnertech.com/
+v4: https://lore.kernel.org/lkml/20200508064004.57898-1-keescook@chromium.org/
+v3: https://lore.kernel.org/lkml/1585126506-18635-1-git-send-email-liaoweixiong@allwinnertech.com/
+v2: https://lore.kernel.org/lkml/1581078355-19647-1-git-send-email-liaoweixiong@allwinnertech.com/
+v1: https://lore.kernel.org/lkml/1579482233-2672-1-git-send-email-liaoweixiong@allwinnertech.com/
+
+
+Kees Cook (8):
+  pstore/ram: Move dump_oops to end of module_param list
+  pstore/platform: Switch pstore_info::name to const
+  pstore/platform: Move module params after declarations
+  pstore/platform: Use backend name for console registration
+  pstore/ram: Refactor ftrace buffer merging
+  pstore/ftrace: Provide ftrace log merging routine
+  printk: Introduce kmsg_dump_reason_str()
+  pstore/blk: Introduce "best_effort" mode
+
+WeiXiong Liao (10):
+  pstore/zone: Introduce common layer to manage storage zones
+  pstore/blk: Introduce backend for block devices
+  pstore/zone,blk: Add support for pmsg frontend
+  pstore/zone,blk: Add console frontend support
+  pstore/zone,blk: Add ftrace frontend support
+  Documentation: Add details for pstore/blk
+  pstore/zone: Provide way to skip "broken" zone for MTD devices
+  pstore/blk: Provide way to query pstore configuration
+  pstore/blk: Support non-block storage devices
+  mtd: Support kmsg dumper based on pstore/blk
+
+ Documentation/admin-guide/pstore-blk.rst |  243 ++++
+ MAINTAINERS                              |    1 +
+ drivers/mtd/Kconfig                      |   10 +
+ drivers/mtd/Makefile                     |    1 +
+ drivers/mtd/mtdpstore.c                  |  564 +++++++++
+ fs/pstore/Kconfig                        |  109 ++
+ fs/pstore/Makefile                       |    6 +
+ fs/pstore/blk.c                          |  571 +++++++++
+ fs/pstore/ftrace.c                       |   54 +
+ fs/pstore/internal.h                     |    9 +
+ fs/pstore/platform.c                     |   40 +-
+ fs/pstore/ram.c                          |   70 +-
+ fs/pstore/zone.c                         | 1463 ++++++++++++++++++++++
+ include/linux/kmsg_dump.h                |    7 +
+ include/linux/pstore.h                   |    2 +-
+ include/linux/pstore_blk.h               |   77 ++
+ include/linux/pstore_zone.h              |   60 +
+ kernel/printk/printk.c                   |   21 +
+ 18 files changed, 3220 insertions(+), 88 deletions(-)
+ create mode 100644 Documentation/admin-guide/pstore-blk.rst
+ create mode 100644 drivers/mtd/mtdpstore.c
+ create mode 100644 fs/pstore/blk.c
+ create mode 100644 fs/pstore/zone.c
+ create mode 100644 include/linux/pstore_blk.h
+ create mode 100644 include/linux/pstore_zone.h
 
 -- 
-Kees Cook
+2.20.1
+
