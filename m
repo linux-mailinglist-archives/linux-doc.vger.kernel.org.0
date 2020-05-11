@@ -2,164 +2,234 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3A72B1CDBBF
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2020 15:49:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 246861CDC53
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2020 15:59:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730166AbgEKNtN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 May 2020 09:49:13 -0400
-Received: from mail-bn8nam11on2054.outbound.protection.outlook.com ([40.107.236.54]:30209
-        "EHLO NAM11-BN8-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1729741AbgEKNtM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 11 May 2020 09:49:12 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=DHuZUG2XqDiAeHEzHG7stEjJ9queoLjmTmJNNsDVzkkW6PzrIkAJBykfQNro4B1CGTwYs44XZEV2QgzNbETin7krautx0qIGn1qElcxNKH87BoIEUkAZJgfJC2t2qq1TEYpNAqBFdpA4/TBKSgHNhmZEuoHMO3IqDCQv/WhPdGejNy8dEVeDQTq/xDObkGHIkM6b1e14dcMrla5olbczX1DJaXhWVZ7+siUq9A5tyjlc0JKLiStrbu1zp78f3bu9+r5H80C5/EzQN0CSkrAAO1psdee0Bb3KIEJIOgGR/pvKQfLrTFQWck3NAKKPkX/7uYVnT0OOq/iS03YSWZvWCw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zo/7Jq60TiX1A69TavXWGlbg4Qrw0AlJdWNoNLqVvgQ=;
- b=UdCfyBl/LhjTU/PaKsA5TtvnyfGhwhpdAs02bM4FxhuSJ3Qmt6DF7YSj1+ZWu7yjLOt4hnAYixZqvBI4+CcXOJWeVxMt8vw8zbcGMrE6uQ1ez125o8Ls46WUUFbA6kMgRh087fQS0DZGu9hcwV/Zb2Wccb7+fThnVSE17WcvIsTNBdiCvx5c+N2yoD5u+pNi9Qwye4S8LqVSNqbNYcS+DSlXsfBlVcFKJAonPmkiHCatIzuzHXUzYy6fK97TT5dGc71s2b9e9EHOlNOES5xY5OkCNgUOE/3Lr19+b4bGkTC0HUpuC3DI9WBzOTRcdxW9mvTvQJJ28LgBwAp0zRSioA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
- d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zo/7Jq60TiX1A69TavXWGlbg4Qrw0AlJdWNoNLqVvgQ=;
- b=2wMyGPfa+vSJh8OmEp9jeTC0qKEuaWjqKwx22tyw6DOCvyvmnrXCmkB6BOV2M64MO86em3Va9vhg7zjnOlJCa7e+IhEZZbcQ56KO4IXpe7GittCAtPrl91+aLQLzpM4ipRuh0a6vGVHU6itOj7yJYy6DeUZg9KVfIuYz9fUalL8=
-Authentication-Results: vger.kernel.org; dkim=none (message not signed)
- header.d=none;vger.kernel.org; dmarc=none action=none header.from=amd.com;
-Received: from SN1PR12MB2560.namprd12.prod.outlook.com (2603:10b6:802:26::19)
- by SN1PR12MB2558.namprd12.prod.outlook.com (2603:10b6:802:2b::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2979.28; Mon, 11 May
- 2020 13:49:06 +0000
-Received: from SN1PR12MB2560.namprd12.prod.outlook.com
- ([fe80::c0f:2938:784f:ed8d]) by SN1PR12MB2560.namprd12.prod.outlook.com
- ([fe80::c0f:2938:784f:ed8d%7]) with mapi id 15.20.2979.033; Mon, 11 May 2020
- 13:49:06 +0000
-Subject: Re: [PATCH v2 2/3] KVM: x86: Move pkru save/restore to x86.c
-To:     Paolo Bonzini <pbonzini@redhat.com>,
-        Jim Mattson <jmattson@google.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        Sean Christopherson <sean.j.christopherson@intel.com>,
-        the arch/x86 maintainers <x86@kernel.org>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        mchehab+samsung@kernel.org, changbin.du@intel.com,
-        Nadav Amit <namit@vmware.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        yang.shi@linux.alibaba.com, asteinhauser@google.com,
-        anshuman.khandual@arm.com, Jan Kiszka <jan.kiszka@siemens.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        steven.price@arm.com, rppt@linux.vnet.ibm.com, peterx@redhat.com,
-        Dan Williams <dan.j.williams@intel.com>, arjunroy@google.com,
-        logang@deltatee.com, Thomas Hellstrom <thellstrom@vmware.com>,
-        Andrea Arcangeli <aarcange@redhat.com>, justin.he@arm.com,
-        robin.murphy@arm.com, ira.weiny@intel.com,
-        Kees Cook <keescook@chromium.org>,
-        Juergen Gross <jgross@suse.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        pawan.kumar.gupta@linux.intel.com,
-        "Yu, Fenghua" <fenghua.yu@intel.com>,
-        vineela.tummalapalli@intel.com, yamada.masahiro@socionext.com,
-        sam@ravnborg.org, acme@redhat.com, linux-doc@vger.kernel.org,
-        LKML <linux-kernel@vger.kernel.org>,
-        kvm list <kvm@vger.kernel.org>
-References: <158897190718.22378.3974700869904223395.stgit@naples-babu.amd.com>
- <158897219574.22378.9077333868984828038.stgit@naples-babu.amd.com>
- <CALMp9eQj_aFcqR+v9SvFjKFxVjaHHzU44udcczJVqOR5vLQbWQ@mail.gmail.com>
- <90657d4b-cb2b-0678-fd9c-a281bb85fadf@redhat.com>
-From:   Babu Moger <babu.moger@amd.com>
-Message-ID: <6bdf365d-f283-d26c-2465-2be28d7b55bf@amd.com>
-Date:   Mon, 11 May 2020 08:49:03 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
-In-Reply-To: <90657d4b-cb2b-0678-fd9c-a281bb85fadf@redhat.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SN4PR0801CA0011.namprd08.prod.outlook.com
- (2603:10b6:803:29::21) To SN1PR12MB2560.namprd12.prod.outlook.com
- (2603:10b6:802:26::19)
+        id S1730300AbgEKN6o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 May 2020 09:58:44 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:6984 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1730153AbgEKN6o (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 May 2020 09:58:44 -0400
+Received: from pps.filterd (m0098396.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 04BDZnJP187294;
+        Mon, 11 May 2020 09:57:40 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 30wrvye4ev-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 11 May 2020 09:57:40 -0400
+Received: from m0098396.ppops.net (m0098396.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 04BDZvDJ188154;
+        Mon, 11 May 2020 09:57:39 -0400
+Received: from ppma04ams.nl.ibm.com (63.31.33a9.ip4.static.sl-reverse.com [169.51.49.99])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 30wrvye4dg-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 11 May 2020 09:57:39 -0400
+Received: from pps.filterd (ppma04ams.nl.ibm.com [127.0.0.1])
+        by ppma04ams.nl.ibm.com (8.16.0.27/8.16.0.27) with SMTP id 04BDQIJl026532;
+        Mon, 11 May 2020 13:57:36 GMT
+Received: from b06cxnps4075.portsmouth.uk.ibm.com (d06relay12.portsmouth.uk.ibm.com [9.149.109.197])
+        by ppma04ams.nl.ibm.com with ESMTP id 30wm55cgv4-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 11 May 2020 13:57:36 +0000
+Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
+        by b06cxnps4075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 04BDvXGV47579358
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 11 May 2020 13:57:33 GMT
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id C0CD8A4055;
+        Mon, 11 May 2020 13:57:33 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id BA810A4053;
+        Mon, 11 May 2020 13:57:29 +0000 (GMT)
+Received: from linux.ibm.com (unknown [9.148.203.187])
+        by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
+        Mon, 11 May 2020 13:57:29 +0000 (GMT)
+Date:   Mon, 11 May 2020 16:57:27 +0300
+From:   Mike Rapoport <rppt@linux.ibm.com>
+To:     Anthony Yznaga <anthony.yznaga@oracle.com>
+Cc:     linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+        willy@infradead.org, corbet@lwn.net, tglx@linutronix.de,
+        mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
+        dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
+        akpm@linux-foundation.org, hughd@google.com, ebiederm@xmission.com,
+        masahiroy@kernel.org, ardb@kernel.org, ndesaulniers@google.com,
+        dima@golovin.in, daniel.kiper@oracle.com, nivedita@alum.mit.edu,
+        rafael.j.wysocki@intel.com, dan.j.williams@intel.com,
+        zhenzhong.duan@oracle.com, jroedel@suse.de, bhe@redhat.com,
+        guro@fb.com, Thomas.Lendacky@amd.com,
+        andriy.shevchenko@linux.intel.com, keescook@chromium.org,
+        hannes@cmpxchg.org, minchan@kernel.org, mhocko@kernel.org,
+        ying.huang@intel.com, yang.shi@linux.alibaba.com,
+        gustavo@embeddedor.com, ziqian.lzq@antfin.com,
+        vdavydov.dev@gmail.com, jason.zeng@intel.com, kevin.tian@intel.com,
+        zhiyuan.lv@intel.com, lei.l.li@intel.com, paul.c.lai@intel.com,
+        ashok.raj@intel.com, linux-fsdevel@vger.kernel.org,
+        linux-doc@vger.kernel.org, kexec@lists.infradead.org
+Subject: Re: [RFC 14/43] mm: memblock: PKRAM: prevent memblock resize from
+ clobbering preserved pages
+Message-ID: <20200511135727.GA983798@linux.ibm.com>
+References: <1588812129-8596-1-git-send-email-anthony.yznaga@oracle.com>
+ <1588812129-8596-15-git-send-email-anthony.yznaga@oracle.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from [10.236.30.87] (165.204.77.1) by SN4PR0801CA0011.namprd08.prod.outlook.com (2603:10b6:803:29::21) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.2979.26 via Frontend Transport; Mon, 11 May 2020 13:49:04 +0000
-X-Originating-IP: [165.204.77.1]
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-HT: Tenant
-X-MS-Office365-Filtering-Correlation-Id: 26426fb4-81e4-451b-fbf2-08d7f5b21279
-X-MS-TrafficTypeDiagnostic: SN1PR12MB2558:
-X-Microsoft-Antispam-PRVS: <SN1PR12MB25586C6D51AA7B297E0D3E1C95A10@SN1PR12MB2558.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:7691;
-X-Forefront-PRVS: 04004D94E2
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: 0q4Khsa0gyZsctNlSgdFblXEQwSVvw+pEXSCB2HgYZ4jJNzi54y1AL/rz9siNJakoTctxBR13Rq/m5MH1FjcnOWuGfeYRi/XXmxc0Ky8whvl1kMiohZpG5jGDl+C0Bky7v0jezGm+eK4y4r0zexcjAIZc6nu8QBhAW8mG3wkdhTg6ahwKHmBEvTKdqctxmL7SnL5bDgzNJkhysb5A73a53f8QSDrer5B7rsAtrBDj4lo/3vTqpn7bbPdDqVf9pw3uvNs+MuCOSlYG9KkrskzmhXQUecp8fP6VE5FkPFc2Z806CnuyFfqR+SlUgjAjzCt3ALdvc2h7aLh5xuwLtbFZ7A3iQZvKzVxXAO8oBWBRMxI6OJxs1rcW5T15O7Ob02krr0cYQMbD6JsCLEXlhUxdJ/eWfQA9244tiDVQoOw6w1i8MvU0Ui5LyXc4lBk6GpS+JL6khLMGJJ/A5nxOf4d8E0EO4Y2cDeWDrOHCrAkgkXj/DV2LkpJ/l4HxsqVXgRfelsaacZfx59FM+YJLjyLWaE9/MWA9w4DP+M3d/3QRdDVKcNqmPbRnMiugNjC/K+4
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SN1PR12MB2560.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(4636009)(39860400002)(346002)(136003)(396003)(376002)(366004)(33430700001)(4326008)(478600001)(5660300002)(31686004)(2906002)(956004)(44832011)(2616005)(6486002)(33440700001)(8936002)(7416002)(7406005)(8676002)(66946007)(66476007)(66556008)(86362001)(31696002)(36756003)(52116002)(110136005)(186003)(316002)(16576012)(53546011)(54906003)(26005)(16526019)(43740500002);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: 7TRexuNWePNl69CPRTLGZWlWACB/bfW8H9JBg6EZ/+TIZ6aPcJtFf57O7+XheQ8wvyRFaJ0LIG1UCwj4GpWmZ9JCiHA4gvEogzfThUDTqhNMoXpFMWjScCSr70dNixY4rkxL5Jpe5N2d1FSDqUpMNwS/9FzMqgCERT1JzracbJFm85bLThY+Hamz7XzwOBGb8sce78MjsPSl510qUKz5WJ8S7YAraW1Is0aAYPelx2ykiuN7HeuYfvgQArhqoZmApOGcdTq9ga17tnk8oXctr0Mgzbe+YNrzkwxXY3u64sk6Qb9/m3q3ffNjB46FWsTch5fi+KEJWcQ7tEaigqNkm1ykCvYpgjNUaPYgSCkz6h5rs87W/uhluvVEfV0VSP19nr86gVMaPW9PQT8IJqnp+DyUwZvLcXRWCdQIyvP8Bcuo7HcPqPoLy6Ppm1vL0DcwIcUJlqyN/XMWQFWjoqF+92yza1Pk++56DqBcgxjlyk8=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 26426fb4-81e4-451b-fbf2-08d7f5b21279
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 May 2020 13:49:06.3320
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: X5tsROczz7DxGoVULoFTlsHU7rmiIu5R5sw4k6lI6YQTTHH7AxI7r6AQP1J0HO9K
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN1PR12MB2558
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1588812129-8596-15-git-send-email-anthony.yznaga@oracle.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216,18.0.676
+ definitions=2020-05-11_06:2020-05-11,2020-05-11 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 bulkscore=0
+ adultscore=0 mlxlogscore=999 clxscore=1011 mlxscore=0 impostorscore=0
+ lowpriorityscore=0 phishscore=0 priorityscore=1501 suspectscore=5
+ malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2003020000 definitions=main-2005110112
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Wed, May 06, 2020 at 05:41:40PM -0700, Anthony Yznaga wrote:
+> The size of the memblock reserved array may be increased while preserved
+> pages are being reserved. When this happens, preserved pages that have
+> not yet been reserved are at risk for being clobbered when space for a
+> larger array is allocated.
+> When called from memblock_double_array(), a wrapper around
+> memblock_find_in_range() walks the preserved pages pagetable to find
+> sufficiently sized ranges without preserved pages and passes them to
+> memblock_find_in_range().
 
+I'd suggest to create an array of memblock_region's that will contain
+the PKRAM ranges before kexec and pass this array to the new kernel.
+Then, somewhere in start_kerenel() replace replace
+memblock.reserved->regions with that array. 
 
-On 5/9/20 7:59 AM, Paolo Bonzini wrote:
-> On 09/05/20 00:09, Jim Mattson wrote:
->>> +       if (static_cpu_has(X86_FEATURE_PKU) &&
->>> +           kvm_read_cr4_bits(vcpu, X86_CR4_PKE) &&
->>> +           vcpu->arch.pkru != vcpu->arch.host_pkru)
->>> +               __write_pkru(vcpu->arch.pkru);
->> This doesn't seem quite right to me. Though rdpkru and wrpkru are
->> contingent upon CR4.PKE, the PKRU resource isn't. It can be read with
->> XSAVE and written with XRSTOR. So, if we don't set the guest PKRU
->> value here, the guest can read the host value, which seems dodgy at
->> best.
->>
->> Perhaps the second conjunct should be: (kvm_read_cr4_bits(vcpu,
->> X86_CR4_PKE) || (vcpu->arch.xcr0 & XFEATURE_MASK_PKRU)).
+> Signed-off-by: Anthony Yznaga <anthony.yznaga@oracle.com>
+> ---
+>  include/linux/pkram.h |  3 +++
+>  mm/memblock.c         | 15 +++++++++++++--
+>  mm/pkram.c            | 51 +++++++++++++++++++++++++++++++++++++++++++++++++++
+>  3 files changed, 67 insertions(+), 2 deletions(-)
+> 
+> diff --git a/include/linux/pkram.h b/include/linux/pkram.h
+> index edc5d8bef9d3..409022e1472f 100644
+> --- a/include/linux/pkram.h
+> +++ b/include/linux/pkram.h
+> @@ -62,6 +62,9 @@ struct page *pkram_load_page(struct pkram_stream *ps, unsigned long *index,
+>  ssize_t pkram_write(struct pkram_stream *ps, const void *buf, size_t count);
+>  size_t pkram_read(struct pkram_stream *ps, void *buf, size_t count);
+>  
+> +phys_addr_t pkram_memblock_find_in_range(phys_addr_t start, phys_addr_t end,
+> +					 phys_addr_t size, phys_addr_t align);
+> +
+>  #ifdef CONFIG_PKRAM
+>  extern unsigned long pkram_reserved_pages;
+>  void pkram_reserve(void);
+> diff --git a/mm/memblock.c b/mm/memblock.c
+> index c79ba6f9920c..69ae883b8d21 100644
+> --- a/mm/memblock.c
+> +++ b/mm/memblock.c
+> @@ -16,6 +16,7 @@
+>  #include <linux/kmemleak.h>
+>  #include <linux/seq_file.h>
+>  #include <linux/memblock.h>
+> +#include <linux/pkram.h>
+>  
+>  #include <asm/sections.h>
+>  #include <linux/io.h>
+> @@ -349,6 +350,16 @@ phys_addr_t __init_memblock memblock_find_in_range(phys_addr_t start,
+>  	return ret;
+>  }
+>  
+> +phys_addr_t __init_memblock __memblock_find_in_range(phys_addr_t start,
+> +					phys_addr_t end, phys_addr_t size,
+> +					phys_addr_t align)
+> +{
+> +	if (IS_ENABLED(CONFIG_PKRAM))
+> +		return pkram_memblock_find_in_range(start, end, size, align);
+> +	else
+> +		return memblock_find_in_range(start, end, size, align);
+> +}
+> +
+>  static void __init_memblock memblock_remove_region(struct memblock_type *type, unsigned long r)
+>  {
+>  	type->total_size -= type->regions[r].size;
+> @@ -447,11 +458,11 @@ static int __init_memblock memblock_double_array(struct memblock_type *type,
+>  		if (type != &memblock.reserved)
+>  			new_area_start = new_area_size = 0;
+>  
+> -		addr = memblock_find_in_range(new_area_start + new_area_size,
+> +		addr = __memblock_find_in_range(new_area_start + new_area_size,
+>  						memblock.current_limit,
+>  						new_alloc_size, PAGE_SIZE);
+>  		if (!addr && new_area_size)
+> -			addr = memblock_find_in_range(0,
+> +			addr = __memblock_find_in_range(0,
+>  				min(new_area_start, memblock.current_limit),
+>  				new_alloc_size, PAGE_SIZE);
+>  
+> diff --git a/mm/pkram.c b/mm/pkram.c
+> index dd3c89614010..e49c9bcd3854 100644
+> --- a/mm/pkram.c
+> +++ b/mm/pkram.c
+> @@ -1238,3 +1238,54 @@ void pkram_free_pgt(void)
+>  	__free_pages_core(virt_to_page(pkram_pgd), 0);
+>  	pkram_pgd = NULL;
+>  }
+> +
+> +static int __init_memblock pkram_memblock_find_cb(struct pkram_pg_state *st, unsigned long base, unsigned long size)
+> +{
+> +	unsigned long end = base + size;
+> +	unsigned long addr;
+> +
+> +	if (size < st->min_size)
+> +		return 0;
+> +
+> +	addr =  memblock_find_in_range(base, end, st->min_size, PAGE_SIZE);
+> +	if (!addr)
+> +		return 0;
+> +
+> +	st->retval = addr;
+> +	return 1;
+> +}
+> +
+> +/*
+> + * It may be necessary to allocate a larger reserved memblock array
+> + * while populating it with ranges of preserved pages.  To avoid
+> + * trampling preserved pages that have not yet been added to the
+> + * memblock reserved list this function implements a wrapper around
+> + * memblock_find_in_range() that restricts searches to subranges
+> + * that do not contain preserved pages.
+> + */
+> +phys_addr_t __init_memblock pkram_memblock_find_in_range(phys_addr_t start,
+> +					phys_addr_t end, phys_addr_t size,
+> +					phys_addr_t align)
+> +{
+> +	struct pkram_pg_state st = {
+> +		.range_cb = pkram_memblock_find_cb,
+> +		.min_addr = start,
+> +		.max_addr = end,
+> +		.min_size = PAGE_ALIGN(size),
+> +		.find_holes = true,
+> +	};
+> +
+> +	if (!pkram_reservation_in_progress)
+> +		return memblock_find_in_range(start, end, size, align);
+> +
+> +	if (!pkram_pgd) {
+> +		WARN_ONCE(1, "No preserved pages pagetable\n");
+> +		return memblock_find_in_range(start, end, size, align);
+> +	}
+> +
+> +	WARN_ONCE(memblock_bottom_up(), "PKRAM: bottom up memblock allocation not yet supported\n");
+> +
+> +	pkram_walk_pgt_rev(&st, pkram_pgd);
+> +
+> +	return st.retval;
+> +}
+> -- 
+> 2.13.3
+> 
 
-Thanks Jim.
-> 
-> You're right.  The bug was preexistent, but we should fix it in 5.7 and
-> stable as well.
-Paolo, Do you want me to send this fix separately? Or I will send v3 just
-adding this fix. Thanks
-
-> 
->>>  }
->>>  EXPORT_SYMBOL_GPL(kvm_load_guest_xsave_state);
->>>
->>>  void kvm_load_host_xsave_state(struct kvm_vcpu *vcpu)
->>>  {
->>> +       /*
->>> +        * eager fpu is enabled if PKEY is supported and CR4 is switched
->>> +        * back on host, so it is safe to read guest PKRU from current
->>> +        * XSAVE.
->>> +        */
->> I don't understand the relevance of this comment to the code below.
->>
-> 
-> It's probably stale.
-
-Will remove it.
-> 
-> Paolo
-> 
+-- 
+Sincerely yours,
+Mike.
