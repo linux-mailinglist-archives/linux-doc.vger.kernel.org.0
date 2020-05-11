@@ -2,117 +2,152 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1A4011CDC45
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2020 15:58:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B774A1CDCCE
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2020 16:14:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729680AbgEKN5n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 May 2020 09:57:43 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([205.139.110.120]:38866 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726068AbgEKN5m (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 May 2020 09:57:42 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1589205461;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=Qu5keUQWIvRVuFIzG8iXBNOvDiRSfTi8I/5cNG9scEw=;
-        b=ZoVMfWiMElR5AmRrH7hYRFI1SAzhUQvM/0/QhCZEb1BdemBxWvRAsijXnn707qNEfCxDS1
-        mKvNQkqIvl+KBWk/07PP1YfQ7ShqLRVJyp0r7QLlR8tyO2MJFKvN+bWATUh1gw2v1XIjuz
-        lgnhiExwyD9wMLqPZW70URt6Iq+9jAs=
-Received: from mail-wm1-f71.google.com (mail-wm1-f71.google.com
- [209.85.128.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-22-RJPIDMo_N7G9B13hQlxuEg-1; Mon, 11 May 2020 09:57:39 -0400
-X-MC-Unique: RJPIDMo_N7G9B13hQlxuEg-1
-Received: by mail-wm1-f71.google.com with SMTP id o26so5283957wmh.1
-        for <linux-doc@vger.kernel.org>; Mon, 11 May 2020 06:57:39 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=Qu5keUQWIvRVuFIzG8iXBNOvDiRSfTi8I/5cNG9scEw=;
-        b=j/PLToQUvUblMHcX6quAeZV8K9ULNyIOkElhNxyHJS70V+N5mMURb0pfGh0KEDDgUo
-         mdolGeO+CuCX1hexOfX3zI8sRyOGR36Sd+/IWx65TBRzTqwxHE/EFzAVkuVnPVmLRVlP
-         i+AvbsqamCuhcC8SQkbZYkRsL+HM/WOT6uVvYbG2DzalTT74t+VMeQ8Yu5wGpBTmYX//
-         BAGd2XnGPrUlZNt7+U4qSNckiGFrNdpZPSZRwO4YucMZ/G9kP5IJw+8dD/DPP8IdnP25
-         sD3/oYX+YeFDBPfRX7aBFw5CVfZbeno0JNHO3eEKfoSupFY70OgQcotOzaWtbSVV50g7
-         FK3w==
-X-Gm-Message-State: AGi0PuZeAA6nJHBEpsT2aYDUymkuy+bi7ZZ4UR6435OSLWM6rPAiNg3B
-        JZDfs3zRXhbCWRMQqUoWtjb8Gi6v4CFn2jJ+0KDy5xwUk5TkNTfdVDYXI5nTsPDRmR5dGWUmh5N
-        QuLg2Ebet0nFMg2yp39Mz
-X-Received: by 2002:a5d:4389:: with SMTP id i9mr19788447wrq.374.1589205458607;
-        Mon, 11 May 2020 06:57:38 -0700 (PDT)
-X-Google-Smtp-Source: APiQypK+oszeYy+zb4b0I7GCZK3EzKZDubtrqvtNKrhSQzpgjjL+dk19vgHydykKT3gaICjPgrMiIA==
-X-Received: by 2002:a5d:4389:: with SMTP id i9mr19788411wrq.374.1589205458377;
-        Mon, 11 May 2020 06:57:38 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:4c95:a679:8cf7:9fb6? ([2001:b07:6468:f312:4c95:a679:8cf7:9fb6])
-        by smtp.gmail.com with ESMTPSA id p190sm26875233wmp.38.2020.05.11.06.57.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 11 May 2020 06:57:37 -0700 (PDT)
-Subject: Re: [PATCH v2 2/3] KVM: x86: Move pkru save/restore to x86.c
-To:     Babu Moger <babu.moger@amd.com>, Jim Mattson <jmattson@google.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
+        id S1730227AbgEKOOA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 May 2020 10:14:00 -0400
+Received: from userp2120.oracle.com ([156.151.31.85]:51342 "EHLO
+        userp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730489AbgEKON7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 May 2020 10:13:59 -0400
+Received: from pps.filterd (userp2120.oracle.com [127.0.0.1])
+        by userp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 04BDZjdf007101;
+        Mon, 11 May 2020 14:13:32 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=corp-2020-01-29;
+ bh=8prh65ahEbXqnO+VBBdG5CKN1+9p3No5FuVaz0SanQY=;
+ b=qqvMDhzsqjY+TBfq5ylIDgiuLwKEQY/dLMyH9BE4aJLTbEdXnPjhhj0gBH5OZ+5oqUb3
+ mQGOh5povasQMMYG8MUidlFgyZ6mjYlluJZdeBz3J6CGgn+Iyf8dzGALNYqpfwZ6i0Yn
+ zXSp3MiKSSdhdk+k4CrYsLJh8h2gpaUCG3o+c+FK/JREEDu9RcLVeKCgxYt8dvckA8IW
+ MH9WuUKsgaODHBfO8Rjp9N+qBsKLjFKLONSI99vGuKERFb+ffoDNRSc/7AyI0WgVnabm
+ UeOYBlxs/3ROAbGaGtlncCSzgIOiGrBaMw1ffJ90uRI4VcJx399i/OCClEdELpS46UMB nQ== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+        by userp2120.oracle.com with ESMTP id 30x3mbn9un-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Mon, 11 May 2020 14:13:32 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+        by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 04BDXwLW136961;
+        Mon, 11 May 2020 14:11:32 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+        by userp3030.oracle.com with ESMTP id 30x6ew3km3-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 11 May 2020 14:11:32 +0000
+Received: from abhmp0006.oracle.com (abhmp0006.oracle.com [141.146.116.12])
+        by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 04BEBQrr005761;
+        Mon, 11 May 2020 14:11:26 GMT
+Received: from [10.175.13.248] (/10.175.13.248)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Mon, 11 May 2020 07:11:26 -0700
+Subject: Re: [PATCH RFC] Microcode late loading feature identification
+To:     linux-kernel@vger.kernel.org
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
         Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        Sean Christopherson <sean.j.christopherson@intel.com>,
-        the arch/x86 maintainers <x86@kernel.org>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        mchehab+samsung@kernel.org, changbin.du@intel.com,
-        Nadav Amit <namit@vmware.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        yang.shi@linux.alibaba.com, asteinhauser@google.com,
-        anshuman.khandual@arm.com, Jan Kiszka <jan.kiszka@siemens.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        steven.price@arm.com, rppt@linux.vnet.ibm.com, peterx@redhat.com,
-        Dan Williams <dan.j.williams@intel.com>, arjunroy@google.com,
-        logang@deltatee.com, Thomas Hellstrom <thellstrom@vmware.com>,
-        Andrea Arcangeli <aarcange@redhat.com>, justin.he@arm.com,
-        robin.murphy@arm.com, ira.weiny@intel.com,
-        Kees Cook <keescook@chromium.org>,
-        Juergen Gross <jgross@suse.com>,
-        Andrew Cooper <andrew.cooper3@citrix.com>,
-        pawan.kumar.gupta@linux.intel.com,
-        "Yu, Fenghua" <fenghua.yu@intel.com>,
-        vineela.tummalapalli@intel.com, yamada.masahiro@socionext.com,
-        sam@ravnborg.org, acme@redhat.com, linux-doc@vger.kernel.org,
-        LKML <linux-kernel@vger.kernel.org>,
-        kvm list <kvm@vger.kernel.org>
-References: <158897190718.22378.3974700869904223395.stgit@naples-babu.amd.com>
- <158897219574.22378.9077333868984828038.stgit@naples-babu.amd.com>
- <CALMp9eQj_aFcqR+v9SvFjKFxVjaHHzU44udcczJVqOR5vLQbWQ@mail.gmail.com>
- <90657d4b-cb2b-0678-fd9c-a281bb85fadf@redhat.com>
- <6bdf365d-f283-d26c-2465-2be28d7b55bf@amd.com>
-From:   Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <3f66b718-dfc5-9ad1-cb33-87906e0ff48c@redhat.com>
-Date:   Mon, 11 May 2020 15:57:35 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.6.0
+        x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        "Raj, Ashok" <ashok.raj@intel.com>,
+        Tom Lendacky <thomas.lendacky@amd.com>
+References: <1587972479-10971-1-git-send-email-mihai.carabas@oracle.com>
+From:   Mihai Carabas <mihai.carabas@oracle.com>
+Message-ID: <56ae9070-5960-1498-c021-74ef4451c222@oracle.com>
+Date:   Mon, 11 May 2020 17:11:23 +0300
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-In-Reply-To: <6bdf365d-f283-d26c-2465-2be28d7b55bf@amd.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+In-Reply-To: <1587972479-10971-1-git-send-email-mihai.carabas@oracle.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: ro
 Content-Transfer-Encoding: 7bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9617 signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 spamscore=0 phishscore=0
+ mlxlogscore=999 mlxscore=0 malwarescore=0 bulkscore=0 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2005110112
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9617 signatures=668687
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 priorityscore=1501 impostorscore=0
+ mlxscore=0 suspectscore=0 bulkscore=0 mlxlogscore=999 phishscore=0
+ malwarescore=0 lowpriorityscore=0 spamscore=0 adultscore=0 clxscore=1011
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2003020000
+ definitions=main-2005110112
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11/05/20 15:49, Babu Moger wrote:
->> You're right.  The bug was preexistent, but we should fix it in 5.7 and
->> stable as well.
-> Paolo, Do you want me to send this fix separately? Or I will send v3 just
-> adding this fix. Thanks
+La 27.04.2020 10:27, Mihai Carabas a scris:
+> This RFC patch set aims to provide a way to identify the modifications
+> brought in by the new microcode updated at runtime (aka microcode late
+> loading). This was debated last year and this patch set implements
+> point #1 from Thomas Gleixner's idea:
+> https://lore.kernel.org/lkml/alpine.DEB.2.21.1909062237580.1902@nanos.tec.linutronix.de/
 > 
 
-Yes, please do.
++Ashok and Thomas to get a feedback from vendor side on file 
+format/integration in the microcode blob and signature.
 
-Paolo
+Thank you,
+Mihai
+
+> This patch set has the following patches:
+> 
+> - patch 1 is introducing a new metadata file that comes with the microcode
+> (provided by the CPU manufacture) that describes what modifications are
+> done by loading the new microcode
+> 
+> - patch 2 parses the metadata file and is verifying it against kernel
+> policy. In this patch, as an RFC, as a kernel policy, it was imposed
+> the rule of not allowing to remove any feature. If so, it won't be
+> loaded a new microcode. The policy can be further extended and describe
+> in different ways
+> 
+> - patch 3 adds the documentation of the metadata file format
+> 
+> 
+> How to test:
+> 
+> - place metadata file in /lib/firmware/intel-ucode/ together with the
+> microcode blob:
+> 
+> [root@ovs108 ~]# ls -l /lib/firmware/intel-ucode
+> total 96
+> -rw-r--r--.   1 root root 34816 Mar 11 00:27 06-55-04
+> -rw-r--r--.   1 root root    84 Mar 25 03:13 06-55-04.metadata
+> 
+> The microcode blob can be taken from the microcode_ctl package.
+> 
+> - after installing the kernel and rebooting the machine run "dracut -f
+> --no-early-microcode" to create an initramfs without the microcode (and
+> avoid early loading)
+> 
+> - reboot
+> 
+> - after rebooting issue: echo 1 > /sys/devices/system/cpu/microcode/reload
+> 
+> [root@ovs108 ~]# cat /lib/firmware/intel-ucode/06-55-04.metadata
+> m - 0x00000122
+> c + 0x00000007 0x00 0x00000000 0x021cbfbb 0x00000000 0x00000000
+> 
+> [root@ovs108 ~]# echo 1 > /sys/devices/system/cpu/microcode/reload
+> [root@ovs108 ~]# dmesg | tail -2
+> [ 1285.729841] microcode: Kernel policy does not allow to remove MSR: 122
+> [ 1285.737144] microcode: kernel does not support the new microcode: intel-ucode/06-55-04
+> 
+> [root@ovs108 ~]# cat /lib/firmware/intel-ucode/06-55-04.metadata
+> m + 0x00000122
+> c + 0x00000007 0x00 0x00000000 0x021cbfbb 0x00000000 0x00000000
+> [root@ovs108 ~]# echo 1 > /sys/devices/system/cpu/microcode/reload
+> [root@ovs108 ~]# dmesg | tail -10
+> [ 1220.212415] microcode: updated to revision 0x2000065, date = 2019-09-05
+> [ 1220.212645] microcode: Reload completed, microcode revision: 0x2000065
+> 
+> Mihai Carabas (3):
+>    x86: microcode: intel: read microcode metadata file
+>    x86: microcode: intel: process microcode metadata
+>    Documentation: x86: microcode: add description for metadata file
+> 
+>   Documentation/x86/microcode.rst       | 36 +++++++++++++
+>   arch/x86/kernel/cpu/microcode/intel.c | 97 +++++++++++++++++++++++++++++++++++
+>   2 files changed, 133 insertions(+)
+> 
 
