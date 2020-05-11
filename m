@@ -2,98 +2,119 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C05C61CDDEC
-	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2020 16:58:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E44861CDEC4
+	for <lists+linux-doc@lfdr.de>; Mon, 11 May 2020 17:23:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729465AbgEKO6N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 May 2020 10:58:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43972 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726687AbgEKO6M (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 May 2020 10:58:12 -0400
-Received: from xavier.telenet-ops.be (xavier.telenet-ops.be [IPv6:2a02:1800:120:4::f00:14])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4DCC0C061A0C
-        for <linux-doc@vger.kernel.org>; Mon, 11 May 2020 07:58:12 -0700 (PDT)
-Received: from ramsan ([IPv6:2a02:1810:ac12:ed60:702c:fb99:3097:2049])
-        by xavier.telenet-ops.be with bizsmtp
-        id dSsy2200D0GoAb601SsyQf; Mon, 11 May 2020 16:53:09 +0200
-Received: from rox.of.borg ([192.168.97.57])
-        by ramsan with esmtp (Exim 4.90_1)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1jY9ne-00082s-8S; Mon, 11 May 2020 16:52:58 +0200
-Received: from geert by rox.of.borg with local (Exim 4.90_1)
-        (envelope-from <geert@linux-m68k.org>)
-        id 1jY9ne-0005zg-6l; Mon, 11 May 2020 16:52:58 +0200
-From:   Geert Uytterhoeven <geert+renesas@glider.be>
-To:     Linus Walleij <linus.walleij@linaro.org>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Harish Jenny K N <harish_kandiga@mentor.com>,
-        Eugeniu Rosca <erosca@de.adit-jv.com>
-Cc:     Alexander Graf <graf@amazon.com>,
-        Peter Maydell <peter.maydell@linaro.org>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Phil Reid <preid@electromag.com.au>,
-        Marc Zyngier <marc.zyngier@arm.com>,
-        Christoffer Dall <christoffer.dall@arm.com>,
-        Magnus Damm <magnus.damm@gmail.com>,
-        linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-renesas-soc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        qemu-devel@nongnu.org, Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: [PATCH v7 6/6] MAINTAINERS: Add GPIO Aggregator section
-Date:   Mon, 11 May 2020 16:52:57 +0200
-Message-Id: <20200511145257.22970-7-geert+renesas@glider.be>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200511145257.22970-1-geert+renesas@glider.be>
-References: <20200511145257.22970-1-geert+renesas@glider.be>
+        id S1728556AbgEKPXb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 May 2020 11:23:31 -0400
+Received: from mga17.intel.com ([192.55.52.151]:1038 "EHLO mga17.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726410AbgEKPXa (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 11 May 2020 11:23:30 -0400
+IronPort-SDR: f9TUY7F23pBoNev8MB6oOJHI+gjokQfE/+IEgYPARLQAI8b2Cwk3cg72DqzwL4uHA1cPtvZY9P
+ FguKoTdYlW8A==
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 May 2020 08:23:30 -0700
+IronPort-SDR: gWRS8Uw2Cii8V8cNVBn4P2RMuZ1yscVv4ucq0aFDc5Q2/90YH2yCy8tmyoIKf6MesNgpfTDeEj
+ 7PDEnSQ5lgHg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.73,380,1583222400"; 
+   d="scan'208";a="286310905"
+Received: from otc-nc-03.jf.intel.com (HELO otc-nc-03) ([10.54.39.25])
+  by fmsmga004.fm.intel.com with ESMTP; 11 May 2020 08:23:30 -0700
+Date:   Mon, 11 May 2020 08:23:30 -0700
+From:   "Raj, Ashok" <ashok.raj@intel.com>
+To:     Mihai Carabas <mihai.carabas@oracle.com>
+Cc:     linux-kernel@vger.kernel.org, Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Tom Lendacky <thomas.lendacky@amd.com>,
+        Ashok Raj <ashok.raj@intel.com>
+Subject: Re: [PATCH RFC] Microcode late loading feature identification
+Message-ID: <20200511152329.GB79981@otc-nc-03>
+References: <1587972479-10971-1-git-send-email-mihai.carabas@oracle.com>
+ <56ae9070-5960-1498-c021-74ef4451c222@oracle.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <56ae9070-5960-1498-c021-74ef4451c222@oracle.com>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a maintainership section for the GPIO Aggregator, covering
-documentation and driver source code.
+Hi Mihai
 
-Signed-off-by: Geert Uytterhoeven <geert+renesas@glider.be>
-Reviewed-by: Eugeniu Rosca <erosca@de.adit-jv.com>
-Tested-by: Eugeniu Rosca <erosca@de.adit-jv.com>
----
-v7:
-  - Maintained => Supported,
+Thanks for an attempt to find a fix. To solve this for real there
+are several other factors to consider and I'm afraid its not as simple
+as you have articulated here. There are lots of practical limitations that
+prevent us from solving this completely. But we haven't given up :-)
 
-v6:
-  - No changes,
+In order to be successful, this needs to be factored in by the vendor either
+as part of the development process or somehow generated automatically. Both
+have pitfalls, and as you read below some of it might become clear.
 
-v5:
-  - Add Reviewed-by, Tested-by,
+On Mon, May 11, 2020 at 05:11:23PM +0300, Mihai Carabas wrote:
+> La 27.04.2020 10:27, Mihai Carabas a scris:
+> >This RFC patch set aims to provide a way to identify the modifications
+> >brought in by the new microcode updated at runtime (aka microcode late
+> >loading). This was debated last year and this patch set implements
+> >point #1 from Thomas Gleixner's idea:
+> >https://lore.kernel.org/lkml/alpine.DEB.2.21.1909062237580.1902@nanos.tec.linutronix.de/
+> >
+> 
+> +Ashok and Thomas to get a feedback from vendor side on file
+> format/integration in the microcode blob and signature.
 
-v4:
-  - Drop controversial GPIO repeater,
+To understand the complications of microcode there are a few things to consider.
 
-v3:
-  - New.
----
- MAINTAINERS | 7 +++++++
- 1 file changed, 7 insertions(+)
+We have been working on this internally, and here is why its difficult to 
+simplify it as +msr/-msr, +cpuid etc. Yes these are things that possibly
+controlled by microcode, but microcode has several parts, not just CPU microcode.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index fb124a4a29cb539e..4f14c1a88ad45c5b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -7232,6 +7232,13 @@ F:	Documentation/firmware-guide/acpi/gpio-properties.rst
- F:	drivers/gpio/gpiolib-acpi.c
- F:	drivers/gpio/gpiolib-acpi.h
- 
-+GPIO AGGREGATOR
-+M:	Geert Uytterhoeven <geert+renesas@glider.be>
-+L:	linux-gpio@vger.kernel.org
-+S:	Supported
-+F:	Documentation/admin-guide/gpio/gpio-aggregator.rst
-+F:	drivers/gpio/gpio-aggregator.c
-+
- GPIO IR Transmitter
- M:	Sean Young <sean@mess.org>
- L:	linux-media@vger.kernel.org
--- 
-2.17.1
+The revision you see is just one big running number. There are other parts of the 
+microcode that you don't see its internal version. In addition some parts of the
+microcode are effective only when deployed by FIT. That cpu picks up right after
+reset. During late load, even though you see the version updated, it doesn't
+mean all the internal versions of ucode are latched and effective.
 
+In addition, there are differences how some mitigations are deployed, as you know
+some have MSR's that OS can find, there are others that need BIOS/early boot to 
+make the mitigations effective. In order to get a full picture of weather a microcode 
+file is late-loadable you need to know a lot more about how we got here to this
+version loaded on the CPU.
+> 
+> Thank you,
+> Mihai
+> 
+> >This patch set has the following patches:
+> >
+> >- patch 1 is introducing a new metadata file that comes with the microcode
+> >(provided by the CPU manufacture) that describes what modifications are
+> >done by loading the new microcode
+> >
+> >- patch 2 parses the metadata file and is verifying it against kernel
+> >policy. In this patch, as an RFC, as a kernel policy, it was imposed
+> >the rule of not allowing to remove any feature. If so, it won't be
+> >loaded a new microcode. The policy can be further extended and describe
+> >in different ways
+
+Haven't read the individual patches yet. but you would need every interim
+patch metadata to be always available. 
+
+Since if you move from patch x->y you can find that an msr was removed.
+But say you go from patch x->z, but there was no msr removed in patch y-z.
+You need to process and collate all the msr/cpuid to comprehend what changing
+between x->z since that also removes the msr for e.g.
+
+To add more complications CPU has fuses and each patch content can be effective
+on some but not all SKU's. So the exact same microcode can have different behavior
+depending on which SKU its loaded into. So generating the common meta-data file
+is also not a trivial process.
+
+Cheers,
+Ashok
