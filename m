@@ -2,195 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8ECB61CEA9D
-	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2020 04:13:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 73EB11CEB21
+	for <lists+linux-doc@lfdr.de>; Tue, 12 May 2020 05:09:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728617AbgELCNM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 May 2020 22:13:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36240 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727892AbgELCNM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 May 2020 22:13:12 -0400
-Received: from mail-qt1-x842.google.com (mail-qt1-x842.google.com [IPv6:2607:f8b0:4864:20::842])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1127CC061A0C
-        for <linux-doc@vger.kernel.org>; Mon, 11 May 2020 19:13:12 -0700 (PDT)
-Received: by mail-qt1-x842.google.com with SMTP id g16so9098636qtp.11
-        for <linux-doc@vger.kernel.org>; Mon, 11 May 2020 19:13:12 -0700 (PDT)
+        id S1728301AbgELDJK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 May 2020 23:09:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44912 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-FAIL-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1727942AbgELDJJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 May 2020 23:09:09 -0400
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com [IPv6:2a00:1450:4864:20::444])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 17C36C061A0C
+        for <linux-doc@vger.kernel.org>; Mon, 11 May 2020 20:09:09 -0700 (PDT)
+Received: by mail-wr1-x444.google.com with SMTP id j5so13492838wrq.2
+        for <linux-doc@vger.kernel.org>; Mon, 11 May 2020 20:09:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=joelfernandes.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=MewUrkMigkKlQmP2yHq/YZSMSKPg5TATAzdJOc9dyuY=;
-        b=DN2iet1cBdLkJhx2RMAez/0nP/iPNK0+HdUwv4mgEe7pMCCAYht3u9PGn60rKk5B8F
-         3NLsvMmqcz4lBs4bzO+3iGKzke7PsxAmbpWuyif9k4Yrary4bzFEevorUdzRhqbyE07t
-         CzcdESn7klx1x9Z/MiBsVcCHRcaNd/UCHXwE4=
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
+        bh=/f5FL1X1JNjKC8X7IV1LVF/oUqEdfaWNE8EPlcXSEkg=;
+        b=evN85VA8D+wR2TvJ0jMGOae/gPelGw1KwQsM96BscXK0lsd1EsDWylWQ2am2xaZuRO
+         bno38GnZDaavp/I7vQe0nvCvr7AWmIjC/JtC9Tq6yq8Bpx4EG31K2vnobIRPQidr/zwc
+         TbbR3bBs2zstjy4dGFde9hoxNwOi+gA10SnIDqiHq4WkgsjroBIo+sNFTwUK3arfiXwP
+         Xxih+zaUQ6X+6JLUk9v7gEUZHFMZO2urXgIaZHPLXpFDI5f4w8RsI7S1rFuTp4s1KzqV
+         5s9ASXsTmYla99MlwKH7Xud0K6JmCuEbGglzcN63iQESPX3z+JM9+vAzkWUBeAI024qN
+         akfA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=MewUrkMigkKlQmP2yHq/YZSMSKPg5TATAzdJOc9dyuY=;
-        b=Au+nEonKxYPt0vQv05vk+hcazMtite7xopEttidO1cLednNzgqH4P064DnZ32ZOQ0j
-         daaF46JEtmvshi9zS5rLfs9dcutTHUHx502YRDRKsSdB30mYHu+IKMJ4lCSgQt1QZEgx
-         TUAyxjE7usrpNs03UFMjKRS4p/dS1WVYBLiN8kdhKfIHC7wDKwKFb6fK/KlvWmxqoPwR
-         WNwOv/iR6lCpIG62J4VO645g0ydt82DrUg46moZbly2+0MnxzHFJzwsHcrAEIB86IGyS
-         Il/oEXqh/XW+/l36DnVLb+/YID/BZUCIhx8x/O28tNhjgTaeQSFB7KBxWWh+SOai/xTC
-         cB+w==
-X-Gm-Message-State: AGi0PuYiSlieYJwsxywERN+sZ+BjgP6StIQ1H3qQoxRisj9chAG5TxsC
-        Qb4OsZyExJ08b6Xks0cRsdxjzQ==
-X-Google-Smtp-Source: APiQypIFuInau4ChfG+cPw0A+wXE+FBBTF7FlrEm69TgH1hNypoK9S5UgslSyAZ3xpHxx5ZFFduV1g==
-X-Received: by 2002:ac8:690c:: with SMTP id e12mr20723789qtr.357.1589249591171;
-        Mon, 11 May 2020 19:13:11 -0700 (PDT)
-Received: from localhost ([2620:15c:6:12:9c46:e0da:efbf:69cc])
-        by smtp.gmail.com with ESMTPSA id j90sm10919026qte.20.2020.05.11.19.13.10
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 11 May 2020 19:13:10 -0700 (PDT)
-Date:   Mon, 11 May 2020 22:13:09 -0400
-From:   Joel Fernandes <joel@joelfernandes.org>
-To:     "Paul E. McKenney" <paulmck@kernel.org>
-Cc:     Akira Yokosawa <akiyks@gmail.com>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        linux-kernel@vger.kernel.org, vpillai@digitalocean.com,
-        Jonathan Corbet <corbet@lwn.net>,
-        Alan Stern <stern@rowland.harvard.edu>,
-        Andrea Parri <parri.andrea@gmail.com>,
-        Will Deacon <will@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        David Howells <dhowells@redhat.com>,
-        Jade Alglave <j.alglave@ucl.ac.uk>,
-        Luc Maranget <luc.maranget@inria.fr>,
-        Daniel Lustig <dlustig@nvidia.com>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH 0/3] tools/memory-model, Documentation/litmus-test: Sort
- out location of litmus test and README
-Message-ID: <20200512021309.GA197229@google.com>
-References: <20200323015735.236279-1-joel@joelfernandes.org>
- <7809dbfa-7a76-8663-799a-908c4ead8d30@gmail.com>
- <21e1ba24-22d0-8083-770c-53d320ba5420@gmail.com>
- <20200511173348.GX2869@paulmck-ThinkPad-P72>
+        h=x-gm-message-state:mime-version:reply-to:sender:from:date
+         :message-id:subject:to;
+        bh=/f5FL1X1JNjKC8X7IV1LVF/oUqEdfaWNE8EPlcXSEkg=;
+        b=UCeOvrvo7cfU6PBTobx6QqKOjIZ/M+CE+ZksHtMdnF6T+Yj92aSktewi5NH/s6+cSg
+         0vgPx/zPeSwS9NR5Xszrpxw67spx9hPqNNAtvQB9VlUQMtjr6HN7p56N4+WzkTcmh8cR
+         rXGj6/UbejMx76nXXXnu1df3vf6eB05edR6gHtzZTk4B/hohcn9gQhFHYX0hNW7UuHBZ
+         El2YFuhpaJOrhStZKfquPyZSuEkX0h41M2P1UklzLkum5wsGkKSuB3AFX27JJA+xmI5q
+         +DsKkKNHmEV7yszsnRm/mBmLTHx8NDgKSRq4q4sLzROVSBSq8HAYNTAvgAoiij+mnfTJ
+         6Itg==
+X-Gm-Message-State: AGi0PuYzTuiE0B8tLjf70YdBR7Z3QQ5yaNLY+1PnbV7TdTDLYnGfho7a
+        uPfKzlbq7XXkuWVKD5zvKYbVz4zbt4doPJZ4T1w=
+X-Google-Smtp-Source: APiQypK20PbVvsLSQ7oDpGi3R5GD8i5vto20jQdgtt/bUUQRRVOED/OF96WxCWcUBVlNAAHHXcIUxLwzljl4iSsxATg=
+X-Received: by 2002:adf:ed8d:: with SMTP id c13mr22777835wro.154.1589252947917;
+ Mon, 11 May 2020 20:09:07 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200511173348.GX2869@paulmck-ThinkPad-P72>
+Reply-To: abd747591@gmail.com
+Received: by 2002:a5d:40ca:0:0:0:0:0 with HTTP; Mon, 11 May 2020 20:09:07
+ -0700 (PDT)
+From:   Mr Abd Manaf <abdmanaf2002@gmail.com>
+Date:   Tue, 12 May 2020 04:09:07 +0100
+X-Google-Sender-Auth: 3-9Jcr4I1_PW0GMo1HQnkTCxRn4
+Message-ID: <CAJDZiB8s_vGhG-zfZjXRPHzvMUagQM4YPyEMkewSPzZtzTuJmg@mail.gmail.com>
+Subject: Good Morning!
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, May 11, 2020 at 10:33:48AM -0700, Paul E. McKenney wrote:
-> On Sun, May 10, 2020 at 04:21:02PM +0900, Akira Yokosawa wrote:
-> > On Sat, 9 May 2020 12:43:30 +0900, Akira Yokosawa wrote:
-> > > Hi Joel,
-> > > 
-> > > Sorry for the late response but I've noticed some glitches.
-> > >  
-> > > On Sun, 22 Mar 2020 21:57:32 -0400, Joel Fernandes (Google) wrote:
-> > >> Move MP+onceassign+derefonce to the new Documentation/litmus-tests/rcu/
-> > >> directory.
-> > > 
-> > > MP+onceassign+derefonce.litmus is called out in
-> > > tools/memory-model/Documentation/recipes.txt as a representative example
-> > > of RCU related litmus test.
-> > > 
-> > > So I think it should be kept under tools/memory-model/litmus-tests.
-> > > 
-> > > Further RCU-related litmus tests can be added under Documentation/litmus-tests/.
-> > > 
-> > > IIUC, this change is not picked up by tip tree yet. So we have time to respin
-> > > the series targeting v5.9.
-> > > 
-> > >>
-> > >> More RCU-related litmus tests would be added here.
-> > >>
-> > >> Signed-off-by: Joel Fernandes (Google) <joel@joelfernandes.org>
-> > >>
-> > >> ---
-> > >> Cc: vpillai@digitalocean.com
-> > >>
-> > >>  Documentation/litmus-tests/README                        | 9 +++++++++
-> > > 
-> > > Please note that later patches to add atomic litmus tests under
-> > > Documentation/litmus-tests/ by Boqun put README as
-> > > Documentation/litums-tests/atomic/README.
-> > > 
-> > > This patch's location of RCU's README as Documentation/litmus-tests/README
-> > > looks asymmetric to me.
-> > > 
-> > > I'm OK with either merging atomic's README with the top-level one or
-> > > moving RCU's README to under Documentation/litmus-tests/rcu.
-> > > 
-> > > Joel, Boqum, can you sort out the location of README?
-> > 
-> > So something like this?
-> > 
-> > Patch 1/3 is an independent typo fix in recipes.txt.
-> > Patch 2/3 reverts the MP+onceassign+derefonce relocation.
-> > Patch 3/3 merges atomic's README into the top-level one.
-> > 
-> > This is relative to -rcu's lkmm branch.
-> > 
-> > Thoughts?
-> 
-> Looks plausible to me, and thank you for reviewing this.
-> 
-> Joel, thoughts?
+Dear Sir/Madam.
 
-Sorry for the delays (OSPM conference in progress). I'm Ok with moving it
-back to tools/memory-model/.
+I am, MR.Abd Manaf,I have (15.5 M Dollars) to transfer into your
+account, I will send you more details about this deal and the
+procedures to follow when I receive a positive response from you,
 
-I think on top of this patch, I'd like to add a reference to the to the
-litmus test in tools/memory-model/ from Documentation/rcu/.
-
-Just to mention my rationale for Documentation/litmus-tests/rcu/, I was
-basically looking for a central place for RCU related litmus tests in the
-kernel sources and the idea of this new directory came up.
-
-For Akira's series,
-Acked-by: Joel Fernandes (Google) <joel@joelfernandes.org>
-
-And could we add the following patch on top of Akira's series so we still
-maintain a reference to the moved RCU test?
-
----8<-----------------------
-
-From 52fdb57551cc769d8bd690f4f2b22de36ddece99 Mon Sep 17 00:00:00 2001
-From: "Joel Fernandes (Google)" <joel@joelfernandes.org>
-Date: Mon, 11 May 2020 22:06:46 -0400
-Subject: [PATCH] docs: litmus-tests: Clarify about the RCU pre-initialization
- test
-
-Since this test was moved to tools/memory-model/, make sure that it is
-at least referenced from Documentation/litmus-tests/'s README.
-
-Signed-off-by: Joel Fernandes (Google) <joel@joelfernandes.org>
----
- Documentation/litmus-tests/README | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/litmus-tests/README b/Documentation/litmus-tests/README
-index ac0b270b456c1..53f09e74734a4 100644
---- a/Documentation/litmus-tests/README
-+++ b/Documentation/litmus-tests/README
-@@ -11,7 +11,6 @@ tools/memory-model/README.
- 
- atomic (/atomic derectory)
- --------------------------
--
- Atomic-RMW+mb__after_atomic-is-stronger-than-acquire.litmus
-     Test that an atomic RMW followed by a smp_mb__after_atomic() is
-     stronger than a normal acquire: both the read and write parts of
-@@ -23,8 +22,11 @@ Atomic-RMW-ops-are-atomic-WRT-atomic_set.litmus
- 
- RCU (/rcu directory)
- --------------------
--
- RCU+sync+read.litmus
- RCU+sync+free.litmus
-     Both the above litmus tests demonstrate the RCU grace period guarantee
-     that an RCU read-side critical section can never span a grace period.
-+
-+MP+onceassign+derefonce.litmus (moved to tools/memory-model/litmus-tests/)
-+   Demonstrates that rcu_assign_pointer() and rcu_dereference() to
-+   ensure that an RCU reader will not see pre-initialization garbage.
--- 
-2.26.2.645.ge9eca65c58-goog
-
+Yours Sincerely,
