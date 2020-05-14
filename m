@@ -2,100 +2,160 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E3ADF1D3699
-	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2020 18:36:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9C1A61D37CA
+	for <lists+linux-doc@lfdr.de>; Thu, 14 May 2020 19:16:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726032AbgENQgg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 May 2020 12:36:36 -0400
-Received: from mail.kernel.org ([198.145.29.99]:53588 "EHLO mail.kernel.org"
+        id S1726050AbgENRQ5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 May 2020 13:16:57 -0400
+Received: from mail.kernel.org ([198.145.29.99]:39496 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725999AbgENQgg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 14 May 2020 12:36:36 -0400
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
+        id S1726027AbgENRQ5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 14 May 2020 13:16:57 -0400
+Received: from paulmck-ThinkPad-P72.home (unknown [50.39.105.78])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id EB5F220675;
-        Thu, 14 May 2020 16:36:34 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id C7CE32065D;
+        Thu, 14 May 2020 17:16:56 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1589474195;
-        bh=/Oud4+Cb5VEN+0rjyvNjdi0y40dgg0LowyeDFy6iBQM=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=wlserAR3KAJqd5xHY94MD8nIrVksbeDqOZ15lIrwLhDydAbHRrjPzYK1z2GmIDIff
-         Nty/yTzlxgyCM94tWna6ZmJT4C7xT+pZCPw7JdJoMqK3Cc6RBmnfgu1oiBM+lCS2gj
-         q4TNirepiFdHOwljbHbA7YMdvPzupJFclkt+QGDY=
-Date:   Thu, 14 May 2020 18:36:33 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Doug Anderson <dianders@chromium.org>
-Cc:     Daniel Thompson <daniel.thompson@linaro.org>,
-        Will Deacon <will@kernel.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Jason Wessel <jason.wessel@windriver.com>,
+        s=default; t=1589476616;
+        bh=fFnBlGAlMw+wP20EqKk+Oz6IVDzE2zDUpn8juggLf38=;
+        h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
+        b=zNpksnBjYg93pGCAzKDGWckXwDHTkZoKnM5HbbwDQjCBbkZmzmi/oC0bZZJvrB3oL
+         /FvQelsmUUlmXtoKseg0l0TrN5lUrZ9+5DEUzj9BNZ86JqJYE/pXwSvTuU/LHSrazk
+         8v88CcrCoJyCCxQPCjsguQkyzK1cz9QbqKTb77Ss=
+Received: by paulmck-ThinkPad-P72.home (Postfix, from userid 1000)
+        id B5B1E35229C8; Thu, 14 May 2020 10:16:56 -0700 (PDT)
+Date:   Thu, 14 May 2020 10:16:56 -0700
+From:   "Paul E. McKenney" <paulmck@kernel.org>
+To:     Boqun Feng <boqun.feng@gmail.com>
+Cc:     Akira Yokosawa <akiyks@gmail.com>,
+        Joel Fernandes <joel@joelfernandes.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Vineeth Remanan Pillai <vpillai@digitalocean.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Frank Rowand <frowand.list@gmail.com>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>,
-        linux-serial@vger.kernel.org, Ingo Molnar <mingo@redhat.com>,
-        "H. Peter Anvin" <hpa@zytor.com>, Jiri Slaby <jslaby@suse.com>,
-        kgdb-bugreport@lists.sourceforge.net,
-        Sumit Garg <sumit.garg@linaro.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Andy Gross <agross@kernel.org>, bp@alien8.de,
-        Alexios Zavras <alexios.zavras@intel.com>,
-        Allison Randal <allison@lohutok.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Enrico Weigelt <info@metux.net>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        James Morse <james.morse@arm.com>,
-        Juergen Gross <jgross@suse.com>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-        Russell King <linux@armlinux.org.uk>,
-        jinho lim <jordan.lim@samsung.com>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        linux-arm-msm <linux-arm-msm@vger.kernel.org>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        x86@kernel.org
-Subject: Re: [PATCH v4 00/12] kgdb: Support late serial drivers; enable early
- debug w/ boot consoles
-Message-ID: <20200514163633.GA3154055@kroah.com>
-References: <20200507200850.60646-1-dianders@chromium.org>
- <20200514162109.6qt5drd27hpilijh@holly.lan>
- <CAD=FV=X+t_Wg5KadZBTGHMSEXY3c-t6DZAtdaLXys31QJJpGGA@mail.gmail.com>
+        Alan Stern <stern@rowland.harvard.edu>,
+        Andrea Parri <parri.andrea@gmail.com>,
+        Will Deacon <will@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        David Howells <dhowells@redhat.com>,
+        Jade Alglave <j.alglave@ucl.ac.uk>,
+        Luc Maranget <luc.maranget@inria.fr>,
+        Daniel Lustig <dlustig@nvidia.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH RESEND 3/4] Documentation/litmus-tests: Merge atomic's
+ README into top-level one
+Message-ID: <20200514171656.GR2869@paulmck-ThinkPad-P72>
+Reply-To: paulmck@kernel.org
+References: <20200323015735.236279-1-joel@joelfernandes.org>
+ <7809dbfa-7a76-8663-799a-908c4ead8d30@gmail.com>
+ <21e1ba24-22d0-8083-770c-53d320ba5420@gmail.com>
+ <fd7e7c6f-fda1-7f2b-19f3-a09b73b10de8@gmail.com>
+ <CAEXW_YSjo2hgvg-FN_MR7FVEcp-7gH17jb0-262k+ydSuuDjuQ@mail.gmail.com>
+ <20200512163022.GI2869@paulmck-ThinkPad-P72>
+ <09a8f418-0a46-87ea-dbdb-a43efc66476c@gmail.com>
+ <6d162e69-5d2f-1fbf-1588-ab19c30e7311@gmail.com>
+ <20200514004618.GA94665@debian-boqun.qqnc3lrjykvubdpftowmye0fmh.lx.internal.cloudapp.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAD=FV=X+t_Wg5KadZBTGHMSEXY3c-t6DZAtdaLXys31QJJpGGA@mail.gmail.com>
+In-Reply-To: <20200514004618.GA94665@debian-boqun.qqnc3lrjykvubdpftowmye0fmh.lx.internal.cloudapp.net>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, May 14, 2020 at 09:34:26AM -0700, Doug Anderson wrote:
-> > (though we must keep
-> > changes to drivers/tty/serial/kgdboc alongside the kgdb changes).
-> >
-> > I can hoover them up but I'd need a solid set of acks and
-> > I don't think we've got that yet.
+On Thu, May 14, 2020 at 08:46:18AM +0800, Boqun Feng wrote:
+> On Wed, May 13, 2020 at 06:39:03AM +0900, Akira Yokosawa wrote:
+> > From 96fa6680e3b990633ecbb6d11acf03a161b790bd Mon Sep 17 00:00:00 2001
+> > From: Akira Yokosawa <akiyks@gmail.com>
+> > Date: Sun, 10 May 2020 15:12:57 +0900
+> > Subject: [PATCH RESEND 3/4] Documentation/litmus-tests: Merge atomic's README into top-level one
+> > 
+> > Where Documentation/litmus-tests/README lists RCU litmus tests,
+> > Documentation/litmus-tests/atomic/README lists atomic litmus tests.
+> > For symmetry, merge the latter into former, with some context
+> > adjustment in the introduction.
+> > 
+> > Signed-off-by: Akira Yokosawa <akiyks@gmail.com>
+> > Acked-by: Andrea Parri <parri.andrea@gmail.com>
+> > Acked-by: Joel Fernandes (Google) <joel@joelfernandes.org>
 > 
-> It would be nice for it to be explicit, but "get_maintainer" says that
-> Greg KH is the maintainer of serial drivers.  Git log confirms that he
-> also has been the one landing changes to these files.  Early-on he
-> provided his Reviewed-by for the series as a whole, so he's aware of
-> it and maybe would be fine w/ the serial changes landing through the
-> kgdb tree?
+> Acked-by: Boqun Feng <boqun.feng@gmail.com>
 > 
-> Greg: is that correct?
+> Thanks!
 
-I have no objection for all of these to go through any other tree that
-wants to take them :)
+Applied, and thank you all!
 
-But if you want me to take them in the serial tree, to make it easier
-for you or any other serial driver issues, I will be glad to do that,
-just send them my way.  It's your call.
+I rebased, cancelling the revert with the original, resulting in an
+updated lkmm branch on -rcu.  There was one minor conflict, so could
+one of you please check to make sure that I resolved things appropriately?
 
-thanks,
+							Thanx, Paul
 
-greg k-h
+> Regards,
+> Boqun
+> 
+> > ---
+> >  Documentation/litmus-tests/README        | 19 +++++++++++++++++++
+> >  Documentation/litmus-tests/atomic/README | 16 ----------------
+> >  2 files changed, 19 insertions(+), 16 deletions(-)
+> >  delete mode 100644 Documentation/litmus-tests/atomic/README
+> > 
+> > diff --git a/Documentation/litmus-tests/README b/Documentation/litmus-tests/README
+> > index c4307ea9f996..ac0b270b456c 100644
+> > --- a/Documentation/litmus-tests/README
+> > +++ b/Documentation/litmus-tests/README
+> > @@ -2,6 +2,25 @@
+> >  LITMUS TESTS
+> >  ============
+> >  
+> > +Each subdirectory contains litmus tests that are typical to describe the
+> > +semantics of respective kernel APIs.
+> > +For more information about how to "run" a litmus test or how to generate
+> > +a kernel test module based on a litmus test, please see
+> > +tools/memory-model/README.
+> > +
+> > +
+> > +atomic (/atomic derectory)
+> > +--------------------------
+> > +
+> > +Atomic-RMW+mb__after_atomic-is-stronger-than-acquire.litmus
+> > +    Test that an atomic RMW followed by a smp_mb__after_atomic() is
+> > +    stronger than a normal acquire: both the read and write parts of
+> > +    the RMW are ordered before the subsequential memory accesses.
+> > +
+> > +Atomic-RMW-ops-are-atomic-WRT-atomic_set.litmus
+> > +    Test that atomic_set() cannot break the atomicity of atomic RMWs.
+> > +
+> > +
+> >  RCU (/rcu directory)
+> >  --------------------
+> >  
+> > diff --git a/Documentation/litmus-tests/atomic/README b/Documentation/litmus-tests/atomic/README
+> > deleted file mode 100644
+> > index 714cf93816ea..000000000000
+> > --- a/Documentation/litmus-tests/atomic/README
+> > +++ /dev/null
+> > @@ -1,16 +0,0 @@
+> > -This directory contains litmus tests that are typical to describe the semantics
+> > -of our atomic APIs. For more information about how to "run" a litmus test or
+> > -how to generate a kernel test module based on a litmus test, please see
+> > -tools/memory-model/README.
+> > -
+> > -============
+> > -LITMUS TESTS
+> > -============
+> > -
+> > -Atomic-RMW+mb__after_atomic-is-stronger-than-acquire
+> > -	Test that an atomic RMW followed by a smp_mb__after_atomic() is
+> > -	stronger than a normal acquire: both the read and write parts of
+> > -	the RMW are ordered before the subsequential memory accesses.
+> > -
+> > -Atomic-RMW-ops-are-atomic-WRT-atomic_set.litmus
+> > -	Test that atomic_set() cannot break the atomicity of atomic RMWs.
+> > -- 
+> > 2.17.1
+> > 
+> > 
