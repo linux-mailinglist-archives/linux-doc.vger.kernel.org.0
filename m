@@ -2,97 +2,146 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CD1941D5575
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2020 18:03:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6257E1D55D6
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2020 18:23:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726703AbgEOQC6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 15 May 2020 12:02:58 -0400
-Received: from 8.mo7.mail-out.ovh.net ([46.105.77.114]:39835 "EHLO
-        8.mo7.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726504AbgEOQC6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 May 2020 12:02:58 -0400
-Received: from player758.ha.ovh.net (unknown [10.110.103.132])
-        by mo7.mail-out.ovh.net (Postfix) with ESMTP id 01B561647DB
-        for <linux-doc@vger.kernel.org>; Fri, 15 May 2020 18:02:55 +0200 (CEST)
+        id S1726179AbgEOQXp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 15 May 2020 12:23:45 -0400
+Received: from 4.mo2.mail-out.ovh.net ([87.98.172.75]:36357 "EHLO
+        4.mo2.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726407AbgEOQXp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 May 2020 12:23:45 -0400
+X-Greylist: delayed 1159 seconds by postgrey-1.27 at vger.kernel.org; Fri, 15 May 2020 12:23:44 EDT
+Received: from player168.ha.ovh.net (unknown [10.108.54.52])
+        by mo2.mail-out.ovh.net (Postfix) with ESMTP id D2F201D5374
+        for <linux-doc@vger.kernel.org>; Fri, 15 May 2020 18:04:23 +0200 (CEST)
 Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
         (Authenticated sender: steve@sk2.org)
-        by player758.ha.ovh.net (Postfix) with ESMTPSA id 59D39126FF844;
-        Fri, 15 May 2020 16:02:43 +0000 (UTC)
+        by player168.ha.ovh.net (Postfix) with ESMTPSA id 285AB1262277F;
+        Fri, 15 May 2020 16:04:19 +0000 (UTC)
 From:   Stephen Kitt <steve@sk2.org>
 To:     Jonathan Corbet <corbet@lwn.net>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Iurii Zaikin <yzaikin@google.com>, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        linux-doc@vger.kernel.org
 Cc:     linux-kernel@vger.kernel.org, Stephen Kitt <steve@sk2.org>
-Subject: [PATCH] docs: sysctl/kernel: document ngroups_max
-Date:   Fri, 15 May 2020 18:02:22 +0200
-Message-Id: <20200515160222.7994-1-steve@sk2.org>
+Subject: [PATCH] docs: sysctl/kernel: document unaligned controls
+Date:   Fri, 15 May 2020 18:04:06 +0200
+Message-Id: <20200515160406.8649-1-steve@sk2.org>
 X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Ovh-Tracer-Id: 13632114599481396613
+X-Ovh-Tracer-Id: 13656884397983419781
 X-VR-SPAMSTATE: OK
 X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrleekgdelfecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvffufffkofgggfestdekredtredttdenucfhrhhomhepufhtvghphhgvnhcumfhithhtuceoshhtvghvvgesshhkvddrohhrgheqnecuggftrfgrthhtvghrnhepteegudfgleekieekteeggeetveefueefteeugfduieeitdfhhedtfeefkedvfeefnecukfhppedtrddtrddtrddtpdekvddrieehrddvhedrvddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejheekrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrleekgdelfecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvffufffkofggtgfgsehtkeertdertdejnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucggtffrrghtthgvrhhnpeeikeethfdtfffgfeevhedujedvieelfeffvddtfeegffffhedukeduueehvdeludenucfkpheptddrtddrtddrtddpkedvrdeihedrvdehrddvtddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepphhlrgihvghrudeikedrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehsthgvvhgvsehskhdvrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This is a read-only export of NGROUPS_MAX, so this patch also changes
-the declarations in kernel/sysctl.c to const.
+This documents ignore-unaligned-usertrap, unaligned-dump-stack, and
+unaligned-trap, based on arch/arc/kernel/unaligned.c,
+arch/ia64/kernel/unaligned.c, and arch/parisc/kernel/unaligned.c.
+
+While we’re at it, integrate unaligned-memory-access.txt into the docs
+tree.
 
 Signed-off-by: Stephen Kitt <steve@sk2.org>
 ---
- Documentation/admin-guide/sysctl/kernel.rst | 9 +++++++++
- kernel/sysctl.c                             | 4 ++--
- 2 files changed, 11 insertions(+), 2 deletions(-)
+ Documentation/admin-guide/sysctl/kernel.rst   | 51 +++++++++++++++++++
+ Documentation/index.rst                       |  1 +
+ ...access.txt => unaligned-memory-access.rst} |  0
+ 3 files changed, 52 insertions(+)
+ rename Documentation/{unaligned-memory-access.txt => unaligned-memory-access.rst} (100%)
 
 diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
-index 0d427fd10941..5f12ee07665c 100644
+index eb6bc9cc0318..4bb4d55f20ff 100644
 --- a/Documentation/admin-guide/sysctl/kernel.rst
 +++ b/Documentation/admin-guide/sysctl/kernel.rst
-@@ -459,6 +459,15 @@ Notes:
-      successful IPC object allocation. If an IPC object allocation syscall
-      fails, it is undefined if the value remains unmodified or is reset to -1.
+@@ -402,6 +402,25 @@ Controls whether the panic kmsg data should be reported to Hyper-V.
+ = =========================================================
  
-+
-+ngroups_max
-+===========
-+
-+Maximum number of supplementary groups, _i.e._ the maximum size which
-+``setgroups`` will accept. Exports ``NGROUPS_MAX`` from the kernel.
-+
-+
-+
- nmi_watchdog
- ============
  
-diff --git a/kernel/sysctl.c b/kernel/sysctl.c
-index 8a176d8727a3..2ba9f449d273 100644
---- a/kernel/sysctl.c
-+++ b/kernel/sysctl.c
-@@ -146,7 +146,7 @@ static unsigned long dirty_bytes_min = 2 * PAGE_SIZE;
- static int maxolduid = 65535;
- static int minolduid;
++ignore-unaligned-usertrap
++=========================
++
++On architectures where unaligned accesses cause traps, and where this
++feature is supported (``CONFIG_SYSCTL_ARCH_UNALIGN_NO_WARN``;
++currently, ``arc`` and ``ia64``), controls whether all unaligned traps
++are logged.
++
++= =============================================================
++0 Log all unaligned accesses.
++1 Only warn the first time a process traps. This is the default
++  setting.
++= =============================================================
++
++See also `unaligned-trap`_ and `unaligned-dump-stack`_. On ``ia64``,
++this allows system administrators to override the
++``IA64_THREAD_UAC_NOPRINT`` ``prctl`` and avoid logs being flooded.
++
++
+ kexec_load_disabled
+ ===================
  
--static int ngroups_max = NGROUPS_MAX;
-+static const int ngroups_max = NGROUPS_MAX;
- static const int cap_last_cap = CAP_LAST_CAP;
+@@ -1252,6 +1271,38 @@ See :doc:`/admin-guide/kernel-parameters` and
+ :doc:`/trace/boottime-trace`.
  
- /*
-@@ -883,7 +883,7 @@ static struct ctl_table kern_table[] = {
- #endif
- 	{
- 		.procname	= "ngroups_max",
--		.data		= &ngroups_max,
-+		.data		= (void *)&ngroups_max,
- 		.maxlen		= sizeof (int),
- 		.mode		= 0444,
- 		.proc_handler	= proc_dointvec,
+ 
++.. _unaligned-dump-stack:
++
++unaligned-dump-stack (ia64)
++===========================
++
++When logging unaligned accesses, controls whether the stack is
++dumped.
++
++= ===================================================
++0 Do not dump the stack. This is the default setting.
++1 Dump the stack.
++= ===================================================
++
++See also `ignore-unaligned-usertrap`_.
++
++
++unaligned-trap
++==============
++
++On architectures where unaligned accesses cause traps, and where this
++feature is supported (``CONFIG_SYSCTL_ARCH_UNALIGN_ALLOW``; currently,
++``arc`` and ``parisc``), controls whether unaligned traps are caught
++and emulated (instead of failing).
++
++= ========================================================
++0 Do not emulate unaligned accesses.
++1 Emulate unaligned accesses. This is the default setting.
++= ========================================================
++
++See also `ignore-unaligned-usertrap`_.
++
++
+ unknown_nmi_panic
+ =================
+ 
+diff --git a/Documentation/index.rst b/Documentation/index.rst
+index 9599c0f3eea8..17c38d899572 100644
+--- a/Documentation/index.rst
++++ b/Documentation/index.rst
+@@ -143,6 +143,7 @@ Architecture-agnostic documentation
+    :maxdepth: 2
+ 
+    asm-annotations
++   unaligned-memory-access
+ 
+ Architecture-specific documentation
+ -----------------------------------
+diff --git a/Documentation/unaligned-memory-access.txt b/Documentation/unaligned-memory-access.rst
+similarity index 100%
+rename from Documentation/unaligned-memory-access.txt
+rename to Documentation/unaligned-memory-access.rst
 
-base-commit: 1ae7efb388540adc1653a51a3bc3b2c9cef5ec1a
+base-commit: 56b62540782bfde459acc8eb15b949eaf151c881
 -- 
 2.20.1
 
