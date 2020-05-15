@@ -2,85 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1CA4A1D5AB0
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2020 22:29:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6181F1D5BF1
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2020 23:50:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726231AbgEOU1A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 15 May 2020 16:27:00 -0400
-Received: from mail-pf1-f196.google.com ([209.85.210.196]:43785 "EHLO
-        mail-pf1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726179AbgEOU1A (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 May 2020 16:27:00 -0400
-Received: by mail-pf1-f196.google.com with SMTP id v63so1515480pfb.10;
-        Fri, 15 May 2020 13:26:59 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=BjLEoH1/onS9gWc/WGPUDHWQzqwo7CrmGrZOV7KWi24=;
-        b=UamxaYbhgmj4ujJONx9S2X0l7P6wumcxE4lCGY7L+hC75LuNCGzJEMVPtzKi3tAkm0
-         ZjNsthL6BZX6hgsdieTZuM9UDtBXG8JjW+SzW2IK6F79BYnh925FesrYfzhtQncTuhal
-         scZM6DgFKImNeRAgxcq4e2L0t6eq6+ttNwcm4DENzstvSE2jVtnucOitxtaEUsIgt5Uo
-         nv4EHBREXpcwTKl9VfV9+oZbIT1y9pUpMPCJBFAVewlTHeyEMsUp384i7UGYKPzllDHK
-         UHfopQlU+IticbbiN9Q5dwMZfEKeJZN8Jr4rDW0PpF3dl2H/Gg/IJjFoIQwg7yDLaarJ
-         +Hzg==
-X-Gm-Message-State: AOAM531FQfaSSrvtxOHnfCYDpvINMx4IMb4Bzn63zur9rX2DuWdGAeY+
-        X4bQZPds47HkgnQFgaml8rE=
-X-Google-Smtp-Source: ABdhPJw55POBvLJW1yTqamx/YQ9pJ9208HAhysD6+dQoHJdWvvegvrWWTUXGJdA6DaxsTXI4n7DFIw==
-X-Received: by 2002:a65:608c:: with SMTP id t12mr4951599pgu.46.1589574418563;
-        Fri, 15 May 2020 13:26:58 -0700 (PDT)
-Received: from 42.do-not-panic.com (42.do-not-panic.com. [157.230.128.187])
-        by smtp.gmail.com with ESMTPSA id d18sm2638767pfq.177.2020.05.15.13.26.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 15 May 2020 13:26:57 -0700 (PDT)
-Received: by 42.do-not-panic.com (Postfix, from userid 1000)
-        id B49A240246; Fri, 15 May 2020 20:26:56 +0000 (UTC)
-Date:   Fri, 15 May 2020 20:26:56 +0000
-From:   Luis Chamberlain <mcgrof@kernel.org>
-To:     Rafael Aquini <aquini@redhat.com>
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        kexec@lists.infradead.org, linux-fsdevel@vger.kernel.org,
-        dyoung@redhat.com, bhe@redhat.com, corbet@lwn.net,
-        keescook@chromium.org, akpm@linux-foundation.org, cai@lca.pw,
-        rdunlap@infradead.org, tytso@mit.edu, bunk@kernel.org,
-        torvalds@linux-foundation.org, gregkh@linuxfoundation.org,
-        labbott@redhat.com, jeffm@suse.com, jikos@kernel.org, jeyu@suse.de,
-        tiwai@suse.de, AnDavis@suse.com, rpalethorpe@suse.de
-Subject: Re: [PATCH v5] kernel: add panic_on_taint
-Message-ID: <20200515202656.GZ11244@42.do-not-panic.com>
-References: <20200515175502.146720-1-aquini@redhat.com>
+        id S1727098AbgEOVue convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 15 May 2020 17:50:34 -0400
+Received: from mtaextp1.scidom.de ([146.107.3.202]:56012 "EHLO
+        mtaextp1.scidom.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726945AbgEOVue (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 May 2020 17:50:34 -0400
+X-Greylist: delayed 342 seconds by postgrey-1.27 at vger.kernel.org; Fri, 15 May 2020 17:50:33 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by mtaextp1.scidom.de (Postfix) with ESMTP id 40E5618279420;
+        Fri, 15 May 2020 23:44:44 +0200 (CEST)
+Received: from mtaextp1.scidom.de ([127.0.0.1])
+        by localhost (mtaextp1.scidom.de [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id IMS3bgtcC3A9; Fri, 15 May 2020 23:44:39 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+        by mtaextp1.scidom.de (Postfix) with ESMTP id 546B9181FB07D;
+        Fri, 15 May 2020 23:04:46 +0200 (CEST)
+X-Amavis-Modified: Mail body modified (using disclaimer) - mtaextp1.scidom.de
+X-Virus-Scanned: amavisd-new at 
+Received: from mtaextp1.scidom.de ([127.0.0.1])
+        by localhost (mtaextp1.scidom.de [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id jvpdDzeajqBk; Fri, 15 May 2020 23:04:46 +0200 (CEST)
+Received: from [192.168.8.101] (unknown [197.211.61.35])
+        by mtaextp1.scidom.de (Postfix) with ESMTPSA id CD0461822569D;
+        Fri, 15 May 2020 22:51:58 +0200 (CEST)
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200515175502.146720-1-aquini@redhat.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: Vorschlag
+To:     Recipients <min.fan@helmholtz-muenchen.de>
+From:   Yi Huiman <min.fan@helmholtz-muenchen.de>
+Date:   Fri, 15 May 2020 21:52:03 +0100
+Reply-To: info@huiman.cf
+Message-Id: <20200515205158.CD0461822569D@mtaextp1.scidom.de>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, May 15, 2020 at 01:55:02PM -0400, Rafael Aquini wrote:
-> Analogously to the introduction of panic_on_warn, this patch introduces a kernel
-> option named panic_on_taint in order to provide a simple and generic way to stop
-> execution and catch a coredump when the kernel gets tainted by any given flag.
-> 
-> This is useful for debugging sessions as it avoids having to rebuild the kernel
-> to explicitly add calls to panic() into the code sites that introduce the taint
-> flags of interest. For instance, if one is interested in proceeding with a
-> post-mortem analysis at the point a given code path is hitting a bad page
-> (i.e. unaccount_page_cache_page(), or slab_bug()), a coredump can be collected
-> by rebooting the kernel with 'panic_on_taint=0x20' amended to the command line.
-> 
-> Another, perhaps less frequent, use for this option would be as a mean for
-> assuring a security policy case where only a subset of taints, or no single
-> taint (in paranoid mode), is allowed for the running system.
-> The optional switch 'nousertaint' is handy in this particular scenario,
-> as it will avoid userspace induced crashes by writes to sysctl interface
-> /proc/sys/kernel/tainted causing false positive hits for such policies.
-> 
-> Suggested-by: Qian Cai <cai@lca.pw>
-> Signed-off-by: Rafael Aquini <aquini@redhat.com>
+Ein Vorschlag für Sie
 
-Reviewed-by: Luis Chamberlain <mcgrof@kernel.org>
 
-  Luis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Helmholtz Zentrum Muenchen
+Deutsches Forschungszentrum fuer Gesundheit und Umwelt (GmbH)
+Ingolstaedter Landstr. 1
+85764 Neuherberg
+www.helmholtz-muenchen.de
+Aufsichtsratsvorsitzende: MinDir.in Prof. Dr. Veronika von Messling
+Geschaeftsfuehrung: Prof. Dr. med. Dr. h.c. Matthias Tschoep, Kerstin Guenther
+Registergericht: Amtsgericht Muenchen HRB 6466
+USt-IdNr: DE 129521671
+
+
