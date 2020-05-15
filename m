@@ -2,109 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6181F1D5BF1
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2020 23:50:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D9C431D5BFA
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2020 23:56:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727098AbgEOVue convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Fri, 15 May 2020 17:50:34 -0400
-Received: from mtaextp1.scidom.de ([146.107.3.202]:56012 "EHLO
-        mtaextp1.scidom.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726945AbgEOVue (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 May 2020 17:50:34 -0400
-X-Greylist: delayed 342 seconds by postgrey-1.27 at vger.kernel.org; Fri, 15 May 2020 17:50:33 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by mtaextp1.scidom.de (Postfix) with ESMTP id 40E5618279420;
-        Fri, 15 May 2020 23:44:44 +0200 (CEST)
-Received: from mtaextp1.scidom.de ([127.0.0.1])
-        by localhost (mtaextp1.scidom.de [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id IMS3bgtcC3A9; Fri, 15 May 2020 23:44:39 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-        by mtaextp1.scidom.de (Postfix) with ESMTP id 546B9181FB07D;
-        Fri, 15 May 2020 23:04:46 +0200 (CEST)
-X-Amavis-Modified: Mail body modified (using disclaimer) - mtaextp1.scidom.de
-X-Virus-Scanned: amavisd-new at 
-Received: from mtaextp1.scidom.de ([127.0.0.1])
-        by localhost (mtaextp1.scidom.de [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id jvpdDzeajqBk; Fri, 15 May 2020 23:04:46 +0200 (CEST)
-Received: from [192.168.8.101] (unknown [197.211.61.35])
-        by mtaextp1.scidom.de (Postfix) with ESMTPSA id CD0461822569D;
-        Fri, 15 May 2020 22:51:58 +0200 (CEST)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726266AbgEOV4r (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 15 May 2020 17:56:47 -0400
+Received: from 17.mo5.mail-out.ovh.net ([46.105.56.132]:35953 "EHLO
+        17.mo5.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726261AbgEOV4r (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 May 2020 17:56:47 -0400
+Received: from player730.ha.ovh.net (unknown [10.110.115.231])
+        by mo5.mail-out.ovh.net (Postfix) with ESMTP id 3248027C64D
+        for <linux-doc@vger.kernel.org>; Fri, 15 May 2020 23:17:22 +0200 (CEST)
+Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
+        (Authenticated sender: steve@sk2.org)
+        by player730.ha.ovh.net (Postfix) with ESMTPSA id 6DB3312444F3A;
+        Fri, 15 May 2020 21:17:17 +0000 (UTC)
+Date:   Fri, 15 May 2020 23:17:01 +0200
+From:   Stephen Kitt <steve@sk2.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: sysctl/kernel: document unaligned controls
+Message-ID: <20200515231701.7dc1e6b2@heffalump.sk2.org>
+In-Reply-To: <20200515203601.401a46a9@heffalump.sk2.org>
+References: <20200515160406.8649-1-steve@sk2.org>
+        <20200515112735.67ee1148@lwn.net>
+        <20200515203601.401a46a9@heffalump.sk2.org>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Vorschlag
-To:     Recipients <min.fan@helmholtz-muenchen.de>
-From:   Yi Huiman <min.fan@helmholtz-muenchen.de>
-Date:   Fri, 15 May 2020 21:52:03 +0100
-Reply-To: info@huiman.cf
-Message-Id: <20200515205158.CD0461822569D@mtaextp1.scidom.de>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ boundary="Sig_/9ft7adtb_zW.icq2dphbXhV"; protocol="application/pgp-signature"
+X-Ovh-Tracer-Id: 495958913122520453
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrleekgdduheejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvffukfgjfhfogggtsehgtderreertdejnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucggtffrrghtthgvrhhnpeevledvueefvdeivefftdeugeekveethefftdffteelheejkeejjeduffeiudetkeenucfkpheptddrtddrtddrtddpkedvrdeihedrvdehrddvtddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepphhlrgihvghrjeeftddrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehsthgvvhgvsehskhdvrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Ein Vorschlag für Sie
+--Sig_/9ft7adtb_zW.icq2dphbXhV
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, 15 May 2020 20:36:01 +0200, Stephen Kitt <steve@sk2.org> wrote:
 
+> On Fri, 15 May 2020 11:27:35 -0600, Jonathan Corbet <corbet@lwn.net> wrot=
+e:
+> > On Fri, 15 May 2020 18:04:06 +0200
+> > Stephen Kitt <steve@sk2.org> wrote:
+> >  =20
+> > > diff --git a/Documentation/index.rst b/Documentation/index.rst
+> > > index 9599c0f3eea8..17c38d899572 100644
+> > > --- a/Documentation/index.rst
+> > > +++ b/Documentation/index.rst
+> > > @@ -143,6 +143,7 @@ Architecture-agnostic documentation
+> > >     :maxdepth: 2
+> > > =20
+> > >     asm-annotations
+> > > +   unaligned-memory-access
+> > > =20
+> > >  Architecture-specific documentation
+> > >  -----------------------------------
+> > > diff --git a/Documentation/unaligned-memory-access.txt
+> > > b/Documentation/unaligned-memory-access.rst similarity index 100%
+> > > rename from Documentation/unaligned-memory-access.txt
+> > > rename to Documentation/unaligned-memory-access.rst   =20
+> >=20
+> > Adding this to the toctree is great, but I'd just as soon not leave it =
+in
+> > the top-level directory while we do that.  Since you're renaming it
+> > anyway, can you move it into process/?  It's not a perfect fit, but tha=
+t's
+> > where that type of material has been going so far. =20
+>=20
+> I can indeed. Should it still be listed in the main toctree, or in the
+> process toctree?
 
+Never mind, I found the answer, =E2=80=9Csome overall technical guides that=
+ have been
+put here for now for lack of a better place=E2=80=9D ;-).
 
+Regards,
 
+Stephen
 
+--Sig_/9ft7adtb_zW.icq2dphbXhV
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
 
+-----BEGIN PGP SIGNATURE-----
 
+iQIzBAEBCgAdFiEEnPVX/hPLkMoq7x0ggNMC9Yhtg5wFAl6/Bs0ACgkQgNMC9Yht
+g5ywhw/7Bu2YpW1FvW89RSQHRuV7ZdECufLxUkKFP7tUo+q0ocnt9pY4qiQfJCuu
+nZCJUtCjNX9eietABq9szmiOg5wXuJCDSgcJ/WGEcZ+FSqXsMIod8/rnnycOcdAr
+7ofwrWGUNkN51sDYowtNK2+/kaRj1xDIwKmciR1qI3P6EX2owLf7G6mrzm7V3QBi
+lfrEZKOjzfurMGosMDH27oomJKSZXzrGiR8ozJcX23jiAIw2R6Vt+wlBG6oyeM6x
+NKHibprJFNU6eXlQRHaxjo1Q/eSYv2y4KmkISvy6J26cJuW3RgxJWbVAUq7V4dDE
+D1t7f09GWYPBv5iZewZvJAUkE+UhwwPUvWZ0OvWT/3rg13ddsaI4dB9ywQdN0Iy4
+hs9izvpZlZEj/jUxumm99F3Y2gOac0xwVUSg45qwuy/RvK81ZNTL9f84UA2T37pp
+fN2YY6KXQHsKwda4WqeDS7GstgmU1GXWlE2iR1d/MRwo0TsrP4FuiV/g/HGmUeed
+Pg0jftUKnkjdZ52Ch2TNmSYhyBqDib84y/nhuDvoUyG5TJxIE8bjWF4xg7iiXFhq
+6PAbgg5pYuhgqWaJECiHd+GGYf7SvnyYP8LswYoYdhXdn3W5Rh+4q0iaFiNA3P+1
+mFDzvfgGShFzjK2Sntg6+a0l9c2Sf6QNBi4krTRooB44gM50JZw=
+=7I5b
+-----END PGP SIGNATURE-----
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Helmholtz Zentrum Muenchen
-Deutsches Forschungszentrum fuer Gesundheit und Umwelt (GmbH)
-Ingolstaedter Landstr. 1
-85764 Neuherberg
-www.helmholtz-muenchen.de
-Aufsichtsratsvorsitzende: MinDir.in Prof. Dr. Veronika von Messling
-Geschaeftsfuehrung: Prof. Dr. med. Dr. h.c. Matthias Tschoep, Kerstin Guenther
-Registergericht: Amtsgericht Muenchen HRB 6466
-USt-IdNr: DE 129521671
-
-
+--Sig_/9ft7adtb_zW.icq2dphbXhV--
