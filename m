@@ -2,105 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B67EB1D58B0
-	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2020 20:10:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 32E9E1D5943
+	for <lists+linux-doc@lfdr.de>; Fri, 15 May 2020 20:43:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726550AbgEOSKL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 15 May 2020 14:10:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41250 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726144AbgEOSKL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 May 2020 14:10:11 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A9A1FC061A0C;
-        Fri, 15 May 2020 11:10:11 -0700 (PDT)
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id A0FC572D;
-        Fri, 15 May 2020 18:10:09 +0000 (UTC)
-Date:   Fri, 15 May 2020 12:10:08 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, David Airlie <airlied@linux.ie>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Peter Xu <peterx@redhat.com>,
-        Masahiro Yamada <yamada.masahiro@socionext.com>,
-        Daniel Jordan <daniel.m.jordan@oracle.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Ingo Molnar <mingo@kernel.org>,
-        Alexandre Ghiti <alex@ghiti.fr>, Arnd Bergmann <arnd@arndb.de>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Peter Collingbourne <pcc@google.com>,
-        Frederic Weisbecker <frederic@kernel.org>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Will Deacon <will@kernel.org>,
-        "Steven Rostedt (VMware)" <rostedt@goodmis.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Tejun Heo <tj@kernel.org>,
-        Patrick Bellasi <patrick.bellasi@arm.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        "Joel Fernandes (Google)" <joel@joelfernandes.org>,
-        dri-devel@lists.freedesktop.org, linux-mm@kvack.org
-Subject: Re: [PATCH 11/14] docs: move other kAPI documents to core-api
-Message-ID: <20200515121008.4debe669@lwn.net>
-In-Reply-To: <70cca102282ccd36b107487c60346f414011c684.1588345503.git.mchehab+huawei@kernel.org>
-References: <cover.1588345503.git.mchehab+huawei@kernel.org>
-        <70cca102282ccd36b107487c60346f414011c684.1588345503.git.mchehab+huawei@kernel.org>
-Organization: LWN.net
+        id S1726238AbgEOSni (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 15 May 2020 14:43:38 -0400
+Received: from 6.mo179.mail-out.ovh.net ([46.105.56.76]:59436 "EHLO
+        6.mo179.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726206AbgEOSni (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 May 2020 14:43:38 -0400
+Received: from player770.ha.ovh.net (unknown [10.110.208.115])
+        by mo179.mail-out.ovh.net (Postfix) with ESMTP id 0D294167BA0
+        for <linux-doc@vger.kernel.org>; Fri, 15 May 2020 20:36:18 +0200 (CEST)
+Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
+        (Authenticated sender: steve@sk2.org)
+        by player770.ha.ovh.net (Postfix) with ESMTPSA id 2FA3F127F3DB2;
+        Fri, 15 May 2020 18:36:08 +0000 (UTC)
+Date:   Fri, 15 May 2020 20:36:01 +0200
+From:   Stephen Kitt <steve@sk2.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: sysctl/kernel: document unaligned controls
+Message-ID: <20200515203601.401a46a9@heffalump.sk2.org>
+In-Reply-To: <20200515112735.67ee1148@lwn.net>
+References: <20200515160406.8649-1-steve@sk2.org>
+        <20200515112735.67ee1148@lwn.net>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ boundary="Sig_/NfKkTxFuCefmYlDAsI+Q.k4"; protocol="application/pgp-signature"
+X-Ovh-Tracer-Id: 16222528811018177925
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgeduhedrleekgdduvdegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvffukfgjfhfogggtsehgtderreertddvnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucggtffrrghtthgvrhhnpeejkeffvdfhjeekffdukeehvddtvdfhieehhedvheekteekudefjeffueeuvedvvdenucfkpheptddrtddrtddrtddpkedvrdeihedrvdehrddvtddunecuvehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmohguvgepshhmthhpqdhouhhtpdhhvghlohepphhlrgihvghrjeejtddrhhgrrdhovhhhrdhnvghtpdhinhgvtheptddrtddrtddrtddpmhgrihhlfhhrohhmpehsthgvvhgvsehskhdvrdhorhhgpdhrtghpthhtoheplhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrgh
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri,  1 May 2020 17:37:55 +0200
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+--Sig_/NfKkTxFuCefmYlDAsI+Q.k4
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
 
-> There are a number of random documents that seem to be
-> describing some aspects of the core-api. Move them to such
-> directory, adding them at the core-api/index.rst file.
-> 
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->  Documentation/admin-guide/sysctl/vm.rst                     | 2 +-
->  Documentation/core-api/index.rst                            | 6 ++++++
->  Documentation/{mailbox.txt => core-api/mailbox.rst}         | 0
->  Documentation/{nommu-mmap.txt => core-api/nommu-mmap.rst}   | 0
->  .../{this_cpu_ops.txt => core-api/this_cpu_ops.rst}         | 0
->  .../unaligned-memory-access.rst}                            | 0
->  Documentation/gpu/drm-mm.rst                                | 2 +-
->  arch/Kconfig                                                | 2 +-
->  init/Kconfig                                                | 2 +-
->  mm/Kconfig                                                  | 2 +-
->  mm/nommu.c                                                  | 2 +-
->  11 files changed, 12 insertions(+), 6 deletions(-)
->  rename Documentation/{mailbox.txt => core-api/mailbox.rst} (100%)
->  rename Documentation/{nommu-mmap.txt => core-api/nommu-mmap.rst} (100%)
->  rename Documentation/{this_cpu_ops.txt => core-api/this_cpu_ops.rst} (100%)
->  rename Documentation/{unaligned-memory-access.txt => core-api/unaligned-memory-access.rst} (100%)
+On Fri, 15 May 2020 11:27:35 -0600, Jonathan Corbet <corbet@lwn.net> wrote:
+> On Fri, 15 May 2020 18:04:06 +0200
+> Stephen Kitt <steve@sk2.org> wrote:
+>=20
+> > diff --git a/Documentation/index.rst b/Documentation/index.rst
+> > index 9599c0f3eea8..17c38d899572 100644
+> > --- a/Documentation/index.rst
+> > +++ b/Documentation/index.rst
+> > @@ -143,6 +143,7 @@ Architecture-agnostic documentation
+> >     :maxdepth: 2
+> > =20
+> >     asm-annotations
+> > +   unaligned-memory-access
+> > =20
+> >  Architecture-specific documentation
+> >  -----------------------------------
+> > diff --git a/Documentation/unaligned-memory-access.txt
+> > b/Documentation/unaligned-memory-access.rst similarity index 100%
+> > rename from Documentation/unaligned-memory-access.txt
+> > rename to Documentation/unaligned-memory-access.rst =20
+>=20
+> Adding this to the toctree is great, but I'd just as soon not leave it in
+> the top-level directory while we do that.  Since you're renaming it
+> anyway, can you move it into process/?  It's not a perfect fit, but that's
+> where that type of material has been going so far.
 
-This one doesn't apply for me.  Beyond that, I'm not entirely convinced
-about a couple of the moves...
+I can indeed. Should it still be listed in the main toctree, or in the
+process toctree?
 
- - mailbox.txt seems like driver-api stuff to me?
- - nommu-mmap.txt is mostly (though not completely) about the semantic of
-   mmap() options as seen by user space, so perhaps belongs in that
-   manual...?
+Regards,
 
-Thanks,
+Stephen
 
-jon
+--Sig_/NfKkTxFuCefmYlDAsI+Q.k4
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEnPVX/hPLkMoq7x0ggNMC9Yhtg5wFAl6+4REACgkQgNMC9Yht
+g5w1kRAAkBV4HprjDLUML9+vxm4/2RzhUEp6iN3jvH4NYDsGgHpdMoBUy8Ssa5EO
+3V4KOrLyMcAulHn5/jBt/9fEoOJXHmeR8bR7J/PcMpXeqxMI0fnp7weZebb+xZhV
+5aygqbhIG277DX9Pvnd6ke5nVYjoQVwoDAaOvBx7ZOriE6wSl5v3r0GBYKQ2JOcf
+Jolc6dxkuoiSV+szebdbq8Ucgq1wASxsA5NYeasOl/f1GeH7Yafv7X8zbKQzfz3H
+UYIktCvJFvDX30NGC1Qhx2L2Q45wToWYY7COgdT9pxPpsZJ9ibwh9VLgu59UAzVR
+Hs09rN0sN5cTqYuxGKQl7K+f/y9ipWb2R8KxwSEeXLT8PNu9OdsUsVqjernz1JgR
+ef49rLz2pBByn12m8n21PLPQuOsETKx+N9CN9wn3fyEfUV3UqKC63ADvOBtEN8lr
+3CoXoQZgGkMXnfI1nBQPp+/1F4gVEPAz1aPgG0pTuFprO0uG/4iTBUQt7Au2ZwXn
+tM6effqFDvdex2KEXpISHv/VqHyNXlM4Lc5ypPan5wKpV+smoDbZbkmTagqJ8NSd
+/TY3jngXCy/qBbfzTo6j3jI3EKzYUVZsO0rtLYcJhmxOr4nS3Spdni9cVdeoBQEH
+Bwbh8/F4Pq/uoyhXhRTarzU+EZtK1ebzyjjiJTfaRMGoAQI79qU=
+=GqR/
+-----END PGP SIGNATURE-----
+
+--Sig_/NfKkTxFuCefmYlDAsI+Q.k4--
