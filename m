@@ -2,77 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8D5B81DC8C0
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2020 10:36:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BD5721DCA22
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2020 11:35:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728641AbgEUIf7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 May 2020 04:35:59 -0400
-Received: from smtp2.goneo.de ([85.220.129.33]:48894 "EHLO smtp2.goneo.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728571AbgEUIf7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 21 May 2020 04:35:59 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by smtp2.goneo.de (Postfix) with ESMTP id A5C4423F8D5;
-        Thu, 21 May 2020 10:35:52 +0200 (CEST)
-X-Virus-Scanned: by goneo
-X-Spam-Flag: NO
-X-Spam-Score: -2.767
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.767 tagged_above=-999 tests=[ALL_TRUSTED=-1,
-        AWL=0.133, BAYES_00=-1.9] autolearn=ham
-Received: from smtp2.goneo.de ([127.0.0.1])
-        by localhost (smtp2.goneo.de [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id YhK-pfrT3lRX; Thu, 21 May 2020 10:35:51 +0200 (CEST)
-Received: from [192.168.1.137] (dyndsl-091-096-160-238.ewe-ip-backbone.de [91.96.160.238])
-        by smtp2.goneo.de (Postfix) with ESMTPSA id 6075623F8C0;
-        Thu, 21 May 2020 10:35:51 +0200 (CEST)
-Subject: Re: Building directly with sphinx
-To:     linux-doc@vger.kernel.org, konstantin@linuxfoundation.org
-References: <20200520215343.btkr7avo3ruu2iap@chatter.i7.local>
-From:   Markus Heiser <markus.heiser@darmarit.de>
-Message-ID: <153afc64-542f-3965-0fd3-d1ae93e3a913@darmarit.de>
-Date:   Thu, 21 May 2020 10:35:51 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.7.0
+        id S1728861AbgEUJfO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 May 2020 05:35:14 -0400
+Received: from szxga06-in.huawei.com ([45.249.212.32]:48810 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1728700AbgEUJfL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 21 May 2020 05:35:11 -0400
+Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.59])
+        by Forcepoint Email with ESMTP id 7F2FEE3A1CFA707ED67B;
+        Thu, 21 May 2020 17:35:02 +0800 (CST)
+Received: from localhost.localdomain.localdomain (10.175.113.25) by
+ DGGEMS406-HUB.china.huawei.com (10.3.19.206) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 21 May 2020 17:34:56 +0800
+From:   Chen Zhou <chenzhou10@huawei.com>
+To:     <tglx@linutronix.de>, <mingo@redhat.com>,
+        <catalin.marinas@arm.com>, <will@kernel.org>, <dyoung@redhat.com>,
+        <bhe@redhat.com>, <robh+dt@kernel.org>
+CC:     <arnd@arndb.de>, <John.p.donnelly@oracle.com>,
+        <pkushwaha@marvell.com>, <horms@verge.net.au>,
+        <guohanjun@huawei.com>, <chenzhou10@huawei.com>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <devicetree@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <kexec@lists.infradead.org>
+Subject: [PATCH v8 0/5] support reserving crashkernel above 4G on arm64 kdump
+Date:   Thu, 21 May 2020 17:38:00 +0800
+Message-ID: <20200521093805.64398-1-chenzhou10@huawei.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-In-Reply-To: <20200520215343.btkr7avo3ruu2iap@chatter.i7.local>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: de-DE
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-Originating-IP: [10.175.113.25]
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Am 20.05.20 um 23:53 schrieb Konstantin Ryabitsev:
-> Hi, all:
-> 
-> I was playing around with readthedocs.org recently and wanted to see if
-> I could build kernel docs there. I cannot directly run "make htmldocs"
-> there, and it proved to be quite tricky to make sphinx do the right
-> thing without all the things that are being defined in the Makefile.
-> 
-> Is it possible at all, or am I wasting my time?
+This patch series enable reserving crashkernel above 4G in arm64.
 
-It is wasting time ;) .. The Makefile targets do build intermedaiate
-files using perl and other scripts, this will never work on RTD.
+There are following issues in arm64 kdump:
+1. We use crashkernel=X to reserve crashkernel below 4G, which will fail
+when there is no enough low memory.
+2. Currently, crashkernel=Y@X can be used to reserve crashkernel above 4G,
+in this case, if swiotlb or DMA buffers are required, crash dump kernel
+will boot failure because there is no low memory available for allocation.
 
-FWIW: in other projects I worked some time with RTD but at the end
-I gave up: If you have e.g. auto generated content in your build
-process which is not generated by the python developer-mainstream
-tools, RTD gives you too little freedom to implement your more
-or less complex build procedures.  And .. often I get the RTD-Oops
-links from search engines ..  RTD is (my experience is a  while
-ago; "was") not very comfortable to to rebind obsolete URLs to
-new content.
+To solve these issues, introduce crashkernel=X,low to reserve specified
+size low memory.
+Crashkernel=X tries to reserve memory for the crash dump kernel under
+4G. If crashkernel=Y,low is specified simultaneously, reserve spcified
+size low memory for crash kdump kernel devices firstly and then reserve
+memory above 4G.
 
-Overall I think kernel.org does a good job .. since years, no need
-for additional RTD confusions;
+When crashkernel is reserved above 4G in memory, that is, crashkernel=X,low
+is specified simultaneously, kernel should reserve specified size low memory
+for crash dump kernel devices. So there may be two crash kernel regions, one
+is below 4G, the other is above 4G.
+In order to distinct from the high region and make no effect to the use of
+kexec-tools, rename the low region as "Crash kernel (low)", and add DT property
+"linux,low-memory-range" to crash dump kernel's dtb to pass the low region.
 
-    https://www.kernel.org/doc/html/latest/
+Besides, we need to modify kexec-tools:
+arm64: kdump: add another DT property to crash dump kernel's dtb(see [1])
 
--- Markus --
+The previous changes and discussions can be retrieved from:
 
-> 
-> -K
-> 
+Changes since [v7]
+- Move x86 CRASH_ALIGN to 2M
+Suggested by Dave and do some test, move x86 CRASH_ALIGN to 2M.
+- Update Documentation/devicetree/bindings/chosen.txt 
+Add corresponding documentation to Documentation/devicetree/bindings/chosen.txt suggested by Arnd.
+- Add Tested-by from Jhon and pk
+
+Changes since [v6]
+- Fix build errors reported by kbuild test robot.
+
+Changes since [v5]
+- Move reserve_crashkernel_low() into kernel/crash_core.c.
+- Delete crashkernel=X,high.
+- Modify crashkernel=X,low.
+If crashkernel=X,low is specified simultaneously, reserve spcified size low
+memory for crash kdump kernel devices firstly and then reserve memory above 4G.
+In addition, rename crashk_low_res as "Crash kernel (low)" for arm64, and then
+pass to crash dump kernel by DT property "linux,low-memory-range".
+- Update Documentation/admin-guide/kdump/kdump.rst.
+
+Changes since [v4]
+- Reimplement memblock_cap_memory_ranges for multiple ranges by Mike.
+
+Changes since [v3]
+- Add memblock_cap_memory_ranges back for multiple ranges.
+- Fix some compiling warnings.
+
+Changes since [v2]
+- Split patch "arm64: kdump: support reserving crashkernel above 4G" as
+two. Put "move reserve_crashkernel_low() into kexec_core.c" in a separate
+patch.
+
+Changes since [v1]:
+- Move common reserve_crashkernel_low() code into kernel/kexec_core.c.
+- Remove memblock_cap_memory_ranges() i added in v1 and implement that
+in fdt_enforce_memory_region().
+There are at most two crash kernel regions, for two crash kernel regions
+case, we cap the memory range [min(regs[*].start), max(regs[*].end)]
+and then remove the memory range in the middle.
+
+[1]: http://lists.infradead.org/pipermail/kexec/2020-May/025128.html
+[v1]: https://lkml.org/lkml/2019/4/2/1174
+[v2]: https://lkml.org/lkml/2019/4/9/86
+[v3]: https://lkml.org/lkml/2019/4/9/306
+[v4]: https://lkml.org/lkml/2019/4/15/273
+[v5]: https://lkml.org/lkml/2019/5/6/1360
+[v6]: https://lkml.org/lkml/2019/8/30/142
+[v7]: https://lkml.org/lkml/2019/12/23/411
+
+Chen Zhou (5):
+  x86: kdump: move reserve_crashkernel_low() into crash_core.c
+  arm64: kdump: reserve crashkenel above 4G for crash dump kernel
+  arm64: kdump: add memory for devices by DT property, low-memory-range
+  kdump: update Documentation about crashkernel on arm64
+  dt-bindings: chosen: Document linux,low-memory-range for arm64 kdump
+
+ Documentation/admin-guide/kdump/kdump.rst     | 13 ++-
+ .../admin-guide/kernel-parameters.txt         | 12 ++-
+ Documentation/devicetree/bindings/chosen.txt  | 25 ++++++
+ arch/arm64/kernel/setup.c                     |  8 +-
+ arch/arm64/mm/init.c                          | 61 ++++++++++++-
+ arch/x86/kernel/setup.c                       | 66 ++------------
+ include/linux/crash_core.h                    |  3 +
+ include/linux/kexec.h                         |  2 -
+ kernel/crash_core.c                           | 85 +++++++++++++++++++
+ kernel/kexec_core.c                           | 17 ----
+ 10 files changed, 208 insertions(+), 84 deletions(-)
+
+-- 
+2.20.1
+
