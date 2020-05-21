@@ -2,93 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 921681DCA26
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2020 11:35:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 37D1B1DCDF8
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2020 15:29:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728960AbgEUJf0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 May 2020 05:35:26 -0400
-Received: from szxga06-in.huawei.com ([45.249.212.32]:49102 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1728720AbgEUJfO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 21 May 2020 05:35:14 -0400
-Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.58])
-        by Forcepoint Email with ESMTP id 9BA5FE96E50757FA2EB1;
-        Thu, 21 May 2020 17:35:12 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.175.113.25) by
- DGGEMS406-HUB.china.huawei.com (10.3.19.206) with Microsoft SMTP Server id
- 14.3.487.0; Thu, 21 May 2020 17:35:06 +0800
-From:   Chen Zhou <chenzhou10@huawei.com>
-To:     <tglx@linutronix.de>, <mingo@redhat.com>,
-        <catalin.marinas@arm.com>, <will@kernel.org>, <dyoung@redhat.com>,
-        <bhe@redhat.com>, <robh+dt@kernel.org>
-CC:     <arnd@arndb.de>, <John.p.donnelly@oracle.com>,
-        <pkushwaha@marvell.com>, <horms@verge.net.au>,
-        <guohanjun@huawei.com>, <chenzhou10@huawei.com>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <devicetree@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <kexec@lists.infradead.org>
-Subject: [PATCH v8 5/5] dt-bindings: chosen: Document linux,low-memory-range for arm64 kdump
-Date:   Thu, 21 May 2020 17:38:05 +0800
-Message-ID: <20200521093805.64398-6-chenzhou10@huawei.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200521093805.64398-1-chenzhou10@huawei.com>
-References: <20200521093805.64398-1-chenzhou10@huawei.com>
+        id S1729362AbgEUN3a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 May 2020 09:29:30 -0400
+Received: from mail.kernel.org ([198.145.29.99]:35576 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729354AbgEUN3a (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 21 May 2020 09:29:30 -0400
+Received: from mail-ot1-f45.google.com (mail-ot1-f45.google.com [209.85.210.45])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 75B2520872;
+        Thu, 21 May 2020 13:29:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1590067769;
+        bh=+Vul0RFPdVZB0vQS1vT3FMvkdRIwInL6j//NVC1qhzU=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=RnR7LQDq/x9Ij28pJbJmM6lvZTtP5kEYvMwF8rieOVu/rNm+FHySqrnsIpxMZWBHX
+         GYOoUmXROau+GrCoaKOJ+QGWRx9oyNLmHaajGax+M/19uf94LxIcXmO61c4AKPllos
+         jEwGPIwlV5CxQgeEAMFlDM2V7QSfNpK5DrC5F4To=
+Received: by mail-ot1-f45.google.com with SMTP id x22so5492490otq.4;
+        Thu, 21 May 2020 06:29:29 -0700 (PDT)
+X-Gm-Message-State: AOAM533NNjD2DP9gkwF06u9LrLPeegbp4Vx5swO8EXYBwkjAt+VUlUrn
+        bMLOcC48fuuZj6Db3HHRVQJuCBHwYTLQESm8aQ==
+X-Google-Smtp-Source: ABdhPJwr4rrTCR/Idttk5JgrSALx4SScRiwigbIhOO/HiSRN+KNXysfUOLEjfhqUUsjN5MDORr7rgIYX7slyHD18ORM=
+X-Received: by 2002:a9d:1441:: with SMTP id h59mr7152607oth.192.1590067768679;
+ Thu, 21 May 2020 06:29:28 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.175.113.25]
-X-CFilter-Loop: Reflected
+References: <20200521093805.64398-1-chenzhou10@huawei.com> <20200521093805.64398-6-chenzhou10@huawei.com>
+In-Reply-To: <20200521093805.64398-6-chenzhou10@huawei.com>
+From:   Rob Herring <robh+dt@kernel.org>
+Date:   Thu, 21 May 2020 07:29:17 -0600
+X-Gmail-Original-Message-ID: <CAL_Jsq+EV02YBqEGoJrsJW8Y+g_GkB_LkTwWCxNCb3F+8MSdyw@mail.gmail.com>
+Message-ID: <CAL_Jsq+EV02YBqEGoJrsJW8Y+g_GkB_LkTwWCxNCb3F+8MSdyw@mail.gmail.com>
+Subject: Re: [PATCH v8 5/5] dt-bindings: chosen: Document linux,low-memory-range
+ for arm64 kdump
+To:     Chen Zhou <chenzhou10@huawei.com>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, dyoung@redhat.com,
+        Baoquan He <bhe@redhat.com>, Arnd Bergmann <arnd@arndb.de>,
+        John.p.donnelly@oracle.com, pkushwaha@marvell.com,
+        Simon Horman <horms@verge.net.au>,
+        Hanjun Guo <guohanjun@huawei.com>,
+        "moderated list:ARM/FREESCALE IMX / MXC ARM ARCHITECTURE" 
+        <linux-arm-kernel@lists.infradead.org>, devicetree@vger.kernel.org,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        kexec@lists.infradead.org
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add documentation for DT property used by arm64 kdump:
-linux,low-memory-range.
-"linux,low-memory-range" is an another memory region used for crash
-dump kernel devices.
+On Thu, May 21, 2020 at 3:35 AM Chen Zhou <chenzhou10@huawei.com> wrote:
+>
+> Add documentation for DT property used by arm64 kdump:
+> linux,low-memory-range.
+> "linux,low-memory-range" is an another memory region used for crash
+> dump kernel devices.
+>
+> Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
+> ---
+>  Documentation/devicetree/bindings/chosen.txt | 25 ++++++++++++++++++++
+>  1 file changed, 25 insertions(+)
 
-Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
----
- Documentation/devicetree/bindings/chosen.txt | 25 ++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+chosen is now a schema documented here[1].
 
-diff --git a/Documentation/devicetree/bindings/chosen.txt b/Documentation/devicetree/bindings/chosen.txt
-index 45e79172a646..bfe6fb6976e6 100644
---- a/Documentation/devicetree/bindings/chosen.txt
-+++ b/Documentation/devicetree/bindings/chosen.txt
-@@ -103,6 +103,31 @@ While this property does not represent a real hardware, the address
- and the size are expressed in #address-cells and #size-cells,
- respectively, of the root node.
- 
-+linux,low-memory-range
-+----------------------
-+This property (arm64 only) holds a base address and size, describing a
-+limited region below 4G. Similar to "linux,usable-memory-range", it is
-+an another memory range which may be considered available for use by the
-+kernel.
-+
-+e.g.
-+
-+/ {
-+	chosen {
-+		linux,low-memory-range = <0x0 0x70000000 0x0 0x10000000>;
-+		linux,usable-memory-range = <0x202f 0xc0000000 0x0 0x40000000>;
-+	};
-+};
-+
-+The main usage is for crash dump kernel devices when reserving crashkernel
-+above 4G. When reserving crashkernel above 4G, there may be two crash kernel
-+regions, one is below 4G, the other is above 4G. In order to distinct from
-+the high region, use this property to pass the low region.
-+
-+While this property does not represent a real hardware, the address
-+and the size are expressed in #address-cells and #size-cells,
-+respectively, of the root node.
-+
- linux,elfcorehdr
- ----------------
- 
--- 
-2.20.1
+> diff --git a/Documentation/devicetree/bindings/chosen.txt b/Documentation/devicetree/bindings/chosen.txt
+> index 45e79172a646..bfe6fb6976e6 100644
+> --- a/Documentation/devicetree/bindings/chosen.txt
+> +++ b/Documentation/devicetree/bindings/chosen.txt
+> @@ -103,6 +103,31 @@ While this property does not represent a real hardware, the address
+>  and the size are expressed in #address-cells and #size-cells,
+>  respectively, of the root node.
+>
+> +linux,low-memory-range
+> +----------------------
+> +This property (arm64 only) holds a base address and size, describing a
+> +limited region below 4G. Similar to "linux,usable-memory-range", it is
+> +an another memory range which may be considered available for use by the
+> +kernel.
 
+Why can't you just add a range to "linux,usable-memory-range"? It
+shouldn't be hard to figure out which part is below 4G.
+
+Rob
+
+[1] https://github.com/devicetree-org/dt-schema/blob/master/schemas/chosen.yaml
