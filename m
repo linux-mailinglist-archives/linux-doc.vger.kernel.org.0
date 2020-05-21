@@ -2,45 +2,82 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ABA291DC604
-	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2020 06:00:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9C6C01DC646
+	for <lists+linux-doc@lfdr.de>; Thu, 21 May 2020 06:32:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726181AbgEUEAn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 May 2020 00:00:43 -0400
-Received: from smtp.axitech.ru ([109.236.69.98]:19499 "EHLO mail.axitech.ru"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1725945AbgEUEAn (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 21 May 2020 00:00:43 -0400
-X-Greylist: delayed 7061 seconds by postgrey-1.27 at vger.kernel.org; Thu, 21 May 2020 00:00:43 EDT
-Received: from localhost ([127.0.0.1] helo=mail.axitech.ru)
-        by mail.axitech.ru with esmtp (Exim 4.80 (FreeBSD))
-        (envelope-from <jerry45make@gmail.com>)
-        id 1jbZyD-000IV0-9T; Thu, 21 May 2020 04:26:01 +0300
+        id S1727064AbgEUEcS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 May 2020 00:32:18 -0400
+Received: from conuserg-08.nifty.com ([210.131.2.75]:50204 "EHLO
+        conuserg-08.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726282AbgEUEcQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 May 2020 00:32:16 -0400
+Received: from oscar.flets-west.jp (softbank126090202047.bbtec.net [126.90.202.47]) (authenticated)
+        by conuserg-08.nifty.com with ESMTP id 04L4VLtS007830;
+        Thu, 21 May 2020 13:31:22 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-08.nifty.com 04L4VLtS007830
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1590035482;
+        bh=XREDi7cQniQC6JrUn15gjq7aAsHa5WcXOyjUiUSR7A4=;
+        h=From:To:Cc:Subject:Date:From;
+        b=JY+7/RM4sCtjM07H0fmsksiUfo7OBpAdZLavpsAfodrMPX2Xf1wYJNAfxO56Dz1PL
+         0TpL0H7H1r41QviMcWm7l+ZMn/+fvdLTyIBdBXorQODItT0oCCyNkGnWSQMoCQ4+SS
+         K46ijVSmGVoMlRjYox1JdO77xiIwVPUx2yekOkxaC8DwVAuk9QDG8uEmmwMEAfvEd8
+         noPU1bKoyptvf/EZ+zbO/b/9LtN6zFRUTnSJ4yDCTKcyswil4jYbMMMheoFqD6sscQ
+         a7H75p+lkk9Y/1aKY/wJ6FGDgrdISLa4abNXzcNO6Nw6v8Ol2NietWu7NUlliXwhBS
+         2sFb3oK8UT7Rg==
+X-Nifty-SrcIP: [126.90.202.47]
+From:   Masahiro Yamada <masahiroy@kernel.org>
+To:     linux-kbuild@vger.kernel.org
+Cc:     Jessica Yu <jeyu@kernel.org>,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Michal Marek <michal.lkml@markovi.net>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] kbuild: doc: remove documentation about copying Module.symvers around
+Date:   Thu, 21 May 2020 13:31:17 +0900
+Message-Id: <20200521043117.242585-1-masahiroy@kernel.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
 Content-Transfer-Encoding: 8bit
-Date:   Thu, 21 May 2020 05:26:00 +0400
-From:   Jerry Machel <jerry45make@gmail.com>
-To:     undisclosed-recipients:;
-Subject: Hi
-Reply-To: <o_a19193@yahoo.com>
-Mail-Reply-To: <o_a19193@yahoo.com>
-Message-ID: <3f5de0c75ef301d012061546b405da74@axitech.ru>
-X-Sender: jerry45make@gmail.com
-User-Agent: Roundcube Webmail/RCMAIL_VERSION
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+This is a left-over of commit 39808e451fdf ("kbuild: do not read
+$(KBUILD_EXTMOD)/Module.symvers").
 
-Hi,
+Kbuild no longer supports this way.
 
-I write to inform you of a great business opportunity. My names is 
-Jerry Machel Ivoirien Français, there is a business proposal i will like 
-to discuss with you or your ORG. If it interests you please let me know 
-and let's work it together.
-Regards
+Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
+---
 
-Jerry Machel.
+ Documentation/kbuild/modules.rst | 12 ------------
+ 1 file changed, 12 deletions(-)
+
+diff --git a/Documentation/kbuild/modules.rst b/Documentation/kbuild/modules.rst
+index e0b45a257f21..a45cccff467d 100644
+--- a/Documentation/kbuild/modules.rst
++++ b/Documentation/kbuild/modules.rst
+@@ -528,18 +528,6 @@ build.
+ 		will then do the expected and compile both modules with
+ 		full knowledge of symbols from either module.
+ 
+-	Use an extra Module.symvers file
+-		When an external module is built, a Module.symvers file
+-		is generated containing all exported symbols which are
+-		not defined in the kernel. To get access to symbols
+-		from bar.ko, copy the Module.symvers file from the
+-		compilation of bar.ko to the directory where foo.ko is
+-		built. During the module build, kbuild will read the
+-		Module.symvers file in the directory of the external
+-		module, and when the build is finished, a new
+-		Module.symvers file is created containing the sum of
+-		all symbols defined and not part of the kernel.
+-
+ 	Use "make" variable KBUILD_EXTRA_SYMBOLS
+ 		If it is impractical to add a top-level kbuild file,
+ 		you can assign a space separated list
+-- 
+2.25.1
+
