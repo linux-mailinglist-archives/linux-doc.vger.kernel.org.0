@@ -2,139 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 31E641DE704
-	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2020 14:37:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EE9C91DE8D5
+	for <lists+linux-doc@lfdr.de>; Fri, 22 May 2020 16:27:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728853AbgEVMho (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 22 May 2020 08:37:44 -0400
-Received: from mail.kernel.org ([198.145.29.99]:35822 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728717AbgEVMho (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 22 May 2020 08:37:44 -0400
-Received: from gandalf.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
+        id S1730180AbgEVO1C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 22 May 2020 10:27:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53346 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728947AbgEVO1C (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 22 May 2020 10:27:02 -0400
+X-Greylist: delayed 977 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 22 May 2020 07:27:02 PDT
+Received: from ulukai.org (ulukai.org [IPv6:2a01:488:66:1000:b01c:1258:0:1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3CCA7C061A0E;
+        Fri, 22 May 2020 07:27:02 -0700 (PDT)
+Received: from arona (unknown [46.114.108.139])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 3B400206D5;
-        Fri, 22 May 2020 12:37:43 +0000 (UTC)
-Date:   Fri, 22 May 2020 08:37:41 -0400
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     Tom Zanussi <zanussi@kernel.org>
-Cc:     lixinhai.lxh@gmail.com,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] tracing: Fix events.rst section numbering
-Message-ID: <20200522083741.7d489e91@gandalf.local.home>
-In-Reply-To: <90ea854dfb728390b50ddf8a8675238973ee014a.camel@kernel.org>
-References: <90ea854dfb728390b50ddf8a8675238973ee014a.camel@kernel.org>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+        (Client did not present a certificate)
+        by ulukai.org (Postfix) with ESMTPSA id 49T7gP4fXhz3GvB;
+        Fri, 22 May 2020 16:10:41 +0200 (CEST)
+X-Virus-Status: Clean
+X-Virus-Scanned: clamav-milter 0.102.2 at ulukai.org
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=ulukai.org; s=ulukai;
+        t=1590156641; bh=sWdSGL53EfDwJLVKZKFLd7/vKcGqH4BG8g+uuzQqTLA=;
+        h=From:To:Cc:Subject:Date:From;
+        b=joORiURJ/QVNi7zV97rNXb2YTaVXn/+sjlSISaOdyaNYQRtBT3/3pLwB1W2FrVcVR
+         PBPVPrhoVAbw6hDi9pvdn53lCLzm856ZGNfgscfF8ClZTkmMvXgalSqgl4HC/TBhRV
+         cuPP9sQivpF7aIB15MF9q6FY/VClGcD4P+b68X4E=
+From:   "C. Masloch" <pushbx@ulukai.org>
+To:     linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Dave Rodgman <dave.rodgman@arm.com>, Willy Tarreau <w@1wt.eu>,
+        Andrew Morton <akpm@linux-foundation.org>
+Subject: [PATCH 1/2] docs: lzo: fix first byte interpretation off-by-one
+Date:   Fri, 22 May 2020 16:10:39 +0200
+Message-Id: <20200522141040.1353769-1-pushbx@ulukai.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-Spam-Status: No, score=-1.0 required=5.0 tests=ALL_TRUSTED,SHORTCIRCUIT
+        shortcircuit=ham autolearn=disabled version=3.4.2
+X-Spam-Checker-Version: SpamAssassin 3.4.2 (2018-09-13) on ulukai.org
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 18 May 2020 13:29:24 -0500
-Tom Zanussi <zanussi@kernel.org> wrote:
+There was an error in the description of the initial byte's
+interpretation. While "18..21" was listed as  "copy 0..3 literals",
+it should actually be interpreted as "copy 1..4 literals".
 
-> The in-kernel trace event API should have its own section, and the
-> duplicate section numbers need fixing as well.
-> 
-> Signed-off-by: Tom Zanussi <zanussi@kernel.org>
+The "byte - 17" part is correct. 17 would encode copying "zero"
+literals, but does not occur. 18 encodes copying 1 literal,
+19 then 2 literals, 20 for 3 literals, 21 for 4 literals.
+The description should read "18..21" as "copy 1..4 literals".
+Likewise, 22 indicates "copying 5 literals", not "4 literals".
+However, the state is indeed always set to "byte - 17" (which
+for 21 results in 4 too).
 
-Acked-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
+Signed-off-by: C. Masloch <pushbx@ulukai.org>
+---
+ Documentation/lzo.txt | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-Jon,
-
-Care to take this in your tree?
-
--- Steve
-
-> Reported-by: Li Xinhai <lixinhai.lxh@gmail.com>
-> ---
->  Documentation/trace/events.rst | 28 ++++++++++++++--------------
->  1 file changed, 14 insertions(+), 14 deletions(-)
-> 
-> diff --git a/Documentation/trace/events.rst b/Documentation/trace/events.rst
-> index ed79b220bd07..1a3b7762cb0f 100644
-> --- a/Documentation/trace/events.rst
-> +++ b/Documentation/trace/events.rst
-> @@ -526,8 +526,8 @@ The following commands are supported:
->  
->    See Documentation/trace/histogram.rst for details and examples.
->  
-> -6.3 In-kernel trace event API
-> ------------------------------
-> +7. In-kernel trace event API
-> +============================
->  
->  In most cases, the command-line interface to trace events is more than
->  sufficient.  Sometimes, however, applications might find the need for
-> @@ -559,8 +559,8 @@ following:
->    - tracing synthetic events from in-kernel code
->    - the low-level "dynevent_cmd" API
->  
-> -6.3.1 Dyamically creating synthetic event definitions
-> ------------------------------------------------------
-> +7.1 Dyamically creating synthetic event definitions
-> +---------------------------------------------------
->  
->  There are a couple ways to create a new synthetic event from a kernel
->  module or other kernel code.
-> @@ -665,8 +665,8 @@ registered by calling the synth_event_gen_cmd_end() function:
->  At this point, the event object is ready to be used for tracing new
->  events.
->  
-> -6.3.3 Tracing synthetic events from in-kernel code
-> ---------------------------------------------------
-> +7.2 Tracing synthetic events from in-kernel code
-> +------------------------------------------------
->  
->  To trace a synthetic event, there are several options.  The first
->  option is to trace the event in one call, using synth_event_trace()
-> @@ -677,8 +677,8 @@ synth_event_trace_start() and synth_event_trace_end() along with
->  synth_event_add_next_val() or synth_event_add_val() to add the values
->  piecewise.
->  
-> -6.3.3.1 Tracing a synthetic event all at once
-> ----------------------------------------------
-> +7.2.1 Tracing a synthetic event all at once
-> +-------------------------------------------
->  
->  To trace a synthetic event all at once, the synth_event_trace() or
->  synth_event_trace_array() functions can be used.
-> @@ -779,8 +779,8 @@ remove the event:
->  
->         ret = synth_event_delete("schedtest");
->  
-> -6.3.3.1 Tracing a synthetic event piecewise
-> --------------------------------------------
-> +7.2.2 Tracing a synthetic event piecewise
-> +-----------------------------------------
->  
->  To trace a synthetic using the piecewise method described above, the
->  synth_event_trace_start() function is used to 'open' the synthetic
-> @@ -863,8 +863,8 @@ Note that synth_event_trace_end() must be called at the end regardless
->  of whether any of the add calls failed (say due to a bad field name
->  being passed in).
->  
-> -6.3.4 Dyamically creating kprobe and kretprobe event definitions
-> -----------------------------------------------------------------
-> +7.3 Dyamically creating kprobe and kretprobe event definitions
-> +--------------------------------------------------------------
->  
->  To create a kprobe or kretprobe trace event from kernel code, the
->  kprobe_event_gen_cmd_start() or kretprobe_event_gen_cmd_start()
-> @@ -940,8 +940,8 @@ used to give the kprobe event file back and delete the event:
->  
->    ret = kprobe_event_delete("gen_kprobe_test");
->  
-> -6.3.4 The "dynevent_cmd" low-level API
-> ---------------------------------------
-> +7.4 The "dynevent_cmd" low-level API
-> +------------------------------------
->  
->  Both the in-kernel synthetic event and kprobe interfaces are built on
->  top of a lower-level "dynevent_cmd" interface.  This interface is
+diff --git a/Documentation/lzo.txt b/Documentation/lzo.txt
+index ca9833289..f839d104d 100644
+--- a/Documentation/lzo.txt
++++ b/Documentation/lzo.txt
+@@ -108,12 +108,12 @@ Byte sequences
+                 (version 1 only).
+                 Otherwise, the bitstream version is 0.
+ 
+-      18..21  : copy 0..3 literals
+-                state = (byte - 17) = 0..3  [ copy <state> literals ]
++      18..21  : copy 1..4 literals
++                state = (byte - 17) = 1..4  [ copy <state> literals ]
+                 skip byte
+ 
+       22..255 : copy literal string
+-                length = (byte - 17) = 4..238
++                length = (byte - 17) = 5..238
+                 state = 4 [ don't copy extra literals ]
+                 skip byte
+ 
+-- 
+2.26.2
 
