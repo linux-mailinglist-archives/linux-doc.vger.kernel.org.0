@@ -2,61 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EB2851E0187
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2020 20:49:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AD0521E037D
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2020 23:53:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387920AbgEXStg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 24 May 2020 14:49:36 -0400
-Received: from mxs.msl.ua ([185.128.235.3]:49232 "EHLO mxs.msl.ua"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2387903AbgEXStf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 24 May 2020 14:49:35 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by mxs.msl.ua (Postfix) with ESMTP id 63EC27760B0;
-        Sun, 24 May 2020 21:44:17 +0300 (EEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=msl.ua; h=
-        message-id:reply-to:date:from:to:subject:content-description
-        :content-transfer-encoding:mime-version:content-type; s=dkim; t=
-        1590345857; bh=lVmqvJvUiFqa6qLeWANj8Je/lK5X7z4VhB1Yqprfafo=; b=V
-        g38hgEQ35RKvOwoASDaUtfOF0ccgkc4IU/O5uFq+2XWo7wD0uoM99ghIT9wm6OVt
-        lUgvRDuu+YZIynPb5at6QsnRrNVbQmuhcFN6YyG4S/mRBQld4faw4b8K3Kw5NjFk
-        i3iz7Sjx73Z3tg02FHSnsCVWZ1PKpqdbkgkLHVJA9o=
-X-Virus-Scanned: amavisd-new at msl.ua
-Content-Type: text/plain; charset="utf-8"
+        id S2388319AbgEXVxE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 24 May 2020 17:53:04 -0400
+Received: from mail-io1-f70.google.com ([209.85.166.70]:36807 "EHLO
+        mail-io1-f70.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2387850AbgEXVxE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 24 May 2020 17:53:04 -0400
+Received: by mail-io1-f70.google.com with SMTP id n20so11395404iog.3
+        for <linux-doc@vger.kernel.org>; Sun, 24 May 2020 14:53:04 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:date:in-reply-to:message-id:subject
+         :from:to;
+        bh=W2XSpdpI4imP3oFttp3ea6rQjy1+gsYM/fLbimKy0J8=;
+        b=KrsuCICGeuAHcjZasTKtMVsKPuK/JHlLqUbFjNV7XKe+my/9bfeI6ZmWhNM8oNHxaV
+         0lf1C07dyVWw/vAoOe14bS6P0vcTd7+Ji5YgsxePhP7ZeMbQVpuIcuAFaWEw8kfJPr3d
+         HMbZNDmtwL4biSaMRgIKlZci0Q/Yh1MqR/BmNdn1pY7iW6bGTFSPEGLvKOkqAGNt1NK9
+         zXg9jCzvu6U9Xd8OFB8RISPlCd5UGasEeVfM3jmcgPAJumKayE/NdRrzDMcViD/956H6
+         MThAdTUsvDOtnXgLLNqg2jzZg6zAi1vbvH29MeupS9aVUMztf31FmJ3M/qOXyyCfQijO
+         +RkQ==
+X-Gm-Message-State: AOAM530AQTFQc+QFr82EcS2ui+uxJ/+UxBTP9vOwhF/GvIfRHpC+ndyH
+        G6z3PUezSeBJuUy8p3XO5UauY4wzDVRlPcKiP8PEIzY0ko0b
+X-Google-Smtp-Source: ABdhPJxqwdoquD6CD1t/4vURcXUY094C2cwyZVIZOKx/NGCIbF4xF4jKrwBVk0W6TIG38UReDIw9O+Vu9CfgTfvRCzjbz4MkjNyl
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: =?utf-8?q?GL=C3=9CCKWUNSCH=2C_3_MILLIONEN_EURO_F=C3=9CR_SIE_UND_IHRE_GEME?=
- =?utf-8?q?INDE_AUS_MEINEN_LOTTERIEGEWINNEN=2E_=23Helfen_Sie_den_Bed=C3=BC?=
- =?utf-8?q?rftigen!!!?=
-To:     Recipients <o.sapelkin@msl.ua>
-From:   "MANUEL FRANCO" <o.sapelkin@msl.ua>
-Date:   Sun, 24 May 2020 20:44:00 +0200
-Reply-To: s.manuelfranco95@gmail.com
-X-Antivirus: Avast (VPS 200524-0, 05/24/2020), Outbound message
-X-Antivirus-Status: Clean
-Message-Id: <20200524184408.A2A706E2B74C9@zimbra.msl.intranet>
+X-Received: by 2002:a92:885c:: with SMTP id h89mr22924691ild.16.1590357183712;
+ Sun, 24 May 2020 14:53:03 -0700 (PDT)
+Date:   Sun, 24 May 2020 14:53:03 -0700
+In-Reply-To: <000000000000cd404e058c9de28b@google.com>
+X-Google-Appengine-App-Id: s~syzkaller
+X-Google-Appengine-App-Id-Alias: syzkaller
+Message-ID: <00000000000000537605a66be3a8@google.com>
+Subject: Re: WARNING in dlfb_submit_urb/usb_submit_urb
+From:   syzbot <syzbot+53ce4a4246d0fe0fee34@syzkaller.appspotmail.com>
+To:     andreyknvl@google.com, balbi@kernel.org, corbet@lwn.net,
+        gregkh@linuxfoundation.org, gustavo@embeddedor.com,
+        ingrassia@epigenesys.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org,
+        syzkaller-bugs@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Ich bin Manuel Franco. Ich bin der Gewinner des 776-millionsten Lotterie-Ja=
-ckpots. Ich beschloss, 5 zuf=C3=A4llig ausgew=C3=A4hlte Personen auszuw=C3=
-=A4hlen, die im Rahmen meines Wohlt=C3=A4tigkeitsprojekts und um den Mensch=
-en Gutes zu tun, jeweils 3.000.000,00 =E2=82=AC erhalten werden. Sie wurden=
- ausgew=C3=A4hlt, jeweils 3.000.000,00 =E2=82=AC aus meinem Wohlt=C3=A4tigk=
-eitsfonds =C3=BCber die Suchmaschine Google zu erhalten. Visit these pages =
-below for an interview about my lottery win: https://www.youtube.com/watch?=
-v=3DMMC3DHoGhP8.
+syzbot has bisected this bug to:
 
-Kontaktieren Sie mich, um die Gelder f=C3=BCr Polen zu sammeln.
+commit c61769bd4777a922952aed0d042a2572e5bd9b74
+Author: Andrey Konovalov <andreyknvl@google.com>
+Date:   Thu May 7 17:06:57 2020 +0000
 
-Seien Sie sicher und geborgen,
-MANUEL FRANCO
-+ 1 754-231-3468 (nur Whatsapp)
+    usb: raw-gadget: support stalling/halting/wedging endpoints
 
--- 
-This email has been checked for viruses by Avast antivirus software.
-https://www.avast.com/antivirus
+bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=14add53c100000
+start commit:   051143e1 Merge tag 'apparmor-pr-2020-05-21' of git://git.k..
+git tree:       upstream
+final crash:    https://syzkaller.appspot.com/x/report.txt?x=16add53c100000
+console output: https://syzkaller.appspot.com/x/log.txt?x=12add53c100000
+kernel config:  https://syzkaller.appspot.com/x/.config?x=b3368ce0cc5f5ace
+dashboard link: https://syzkaller.appspot.com/bug?extid=53ce4a4246d0fe0fee34
+syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=15be3ad6100000
+C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=1559676e100000
 
+Reported-by: syzbot+53ce4a4246d0fe0fee34@syzkaller.appspotmail.com
+Fixes: c61769bd4777 ("usb: raw-gadget: support stalling/halting/wedging endpoints")
+
+For information about bisection process see: https://goo.gl/tpsmEJ#bisection
