@@ -2,95 +2,62 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 77D831DFD59
-	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2020 07:33:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A618B1E0139
+	for <lists+linux-doc@lfdr.de>; Sun, 24 May 2020 19:41:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726331AbgEXFdl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 24 May 2020 01:33:41 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49970 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725856AbgEXFdk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 24 May 2020 01:33:40 -0400
-Received: from mail-ed1-x534.google.com (mail-ed1-x534.google.com [IPv6:2a00:1450:4864:20::534])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4BB0CC061A0E;
-        Sat, 23 May 2020 22:33:40 -0700 (PDT)
-Received: by mail-ed1-x534.google.com with SMTP id h16so12468137eds.5;
-        Sat, 23 May 2020 22:33:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:date:to:cc:subject:message-id:user-agent:mime-version;
-        bh=mUlXuaPdGF8MyrNkvvQ+W8qtB5P6ns9XkeFGoT1hV9g=;
-        b=du/akGfRVb0CNDOxQ2VjUqmu19WuellI8oCk2MEGLZ+NLsAAh/jVLvXIzqu9Qg+wSv
-         as4DoCMSHRpbFXQDIEn8o0tfVu4FLHTn6NYXaZZ14sbQwFroe/9chPqi8KR5tS2zRFny
-         dpNg2YpFuUhntjlF8bqBt+4IJXgds0dxj/LQq+8OSzRDlFESv2+iJyXgEuEdGdlqxFWF
-         BYq+eNFttygKKgAmiSnEhojzAHCGTsNangGDBuXJmjOFLv5+Us3ApZ1gDkQXt8aAof2b
-         0hWcTubRBuyF+javMxVQIRwj1mFRpC484aB9wcfqLbTR9mfzvSHqbTo6YTK2XUtGoxJa
-         S05w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:date:to:cc:subject:message-id:user-agent
-         :mime-version;
-        bh=mUlXuaPdGF8MyrNkvvQ+W8qtB5P6ns9XkeFGoT1hV9g=;
-        b=AJ+4kvtUmCbQ7yoUxNh9iC1lT98n8bprupPnwLd1A0zN02syKarxkC35nL2TRYV1oi
-         qu91VvdThgKEqkr6o/3adQKb+MTztwYBijcDBN+Gp6UiFU5LIzexM6boxaYk0F4WU3FU
-         8JYrg8eNKO0R7y1S1gZ1iX1wOMupdVkgpW+p+Qxic0ZondyTu+3Q3fzXx5CwcAR9jW2D
-         BEHCtWXbHQZvSIENKJJ7mliXPMTy2GUZt8Fvmqpn6y5oIXLwowL9OMGwNyfpCd/YBr54
-         tu/ane3eO6OVvb979nqcStx8vh4hbmdf0oLhDXD0+9Czi8kvPD0cOTnsBJQbp24Smdzh
-         +t2A==
-X-Gm-Message-State: AOAM531EH+MsXM0tVj2T3TOgdpaOKmfCNCFNLKIWugdS6mJWbBvgQNog
-        mGEQXdLXI/IYZ7ExsrTVCm4Z5j2XCJ0=
-X-Google-Smtp-Source: ABdhPJzGvODHU1b2elyOcjbhnVj3d36TWrWRd5uO/sMjFW1GM/baq4IibwWvKOcTNfWv0SdqfR16Kg==
-X-Received: by 2002:a05:6402:946:: with SMTP id h6mr9956287edz.245.1590298418966;
-        Sat, 23 May 2020 22:33:38 -0700 (PDT)
-Received: from felia ([2001:16b8:2d08:1b00:68f5:8079:cd02:67ba])
-        by smtp.gmail.com with ESMTPSA id w14sm12607719ejk.13.2020.05.23.22.33.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 23 May 2020 22:33:38 -0700 (PDT)
-From:   Lukas Bulwahn <lukas.bulwahn@gmail.com>
-X-Google-Original-From: Lukas Bulwahn <lukas@gmail.com>
-Date:   Sun, 24 May 2020 07:33:29 +0200 (CEST)
-X-X-Sender: lukas@felia
-To:     Jonathan Corbet <corbet@lwn.net>
-cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: reference to Linux Foundation NDA program obsolete?
-Message-ID: <alpine.DEB.2.21.2005240722560.5201@felia>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+        id S2387656AbgEXRlu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 24 May 2020 13:41:50 -0400
+Received: from mxs.msl.ua ([185.128.235.3]:60782 "EHLO mxs.msl.ua"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2387812AbgEXRlu (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 24 May 2020 13:41:50 -0400
+X-Greylist: delayed 3855 seconds by postgrey-1.27 at vger.kernel.org; Sun, 24 May 2020 13:41:49 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by mxs.msl.ua (Postfix) with ESMTP id 2C1AE59445E;
+        Sun, 24 May 2020 19:35:19 +0300 (EEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=msl.ua; h=
+        message-id:reply-to:date:from:to:subject:content-description
+        :content-transfer-encoding:mime-version:content-type; s=dkim; t=
+        1590338119; bh=lVmqvJvUiFqa6qLeWANj8Je/lK5X7z4VhB1Yqprfafo=; b=Z
+        cvSUQfY6gXrsfgeMLf/w/0qmG7o2WIZxWi440VYVsTVWwYsFsFFZBhkCYHC2xe8L
+        8OU6N+HK1+EieB7xKbwFJ/vCDuE35Se2tFSWO4YJCuqK1TCh4kLXsoY9hug8X+LF
+        8oV/UMWFStXFry40OioCc4js1ICG/u6GHehJkC2OPs=
+X-Virus-Scanned: amavisd-new at msl.ua
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: =?utf-8?q?GL=C3=9CCKWUNSCH=2C_3_MILLIONEN_EURO_F=C3=9CR_SIE_UND_IHRE_GEME?=
+ =?utf-8?q?INDE_AUS_MEINEN_LOTTERIEGEWINNEN=2E_=23Helfen_Sie_den_Bed=C3=BC?=
+ =?utf-8?q?rftigen!!!?=
+To:     Recipients <o.sapelkin@msl.ua>
+From:   "MANUEL FRANCO" <o.sapelkin@msl.ua>
+Date:   Sun, 24 May 2020 18:35:02 +0200
+Reply-To: s.manuelfranco95@gmail.com
+X-Antivirus: Avast (VPS 200524-0, 05/24/2020), Outbound message
+X-Antivirus-Status: Clean
+Message-Id: <20200524163510.C4D106E2B74D0@zimbra.msl.intranet>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Jonathan,
+Ich bin Manuel Franco. Ich bin der Gewinner des 776-millionsten Lotterie-Ja=
+ckpots. Ich beschloss, 5 zuf=C3=A4llig ausgew=C3=A4hlte Personen auszuw=C3=
+=A4hlen, die im Rahmen meines Wohlt=C3=A4tigkeitsprojekts und um den Mensch=
+en Gutes zu tun, jeweils 3.000.000,00 =E2=82=AC erhalten werden. Sie wurden=
+ ausgew=C3=A4hlt, jeweils 3.000.000,00 =E2=82=AC aus meinem Wohlt=C3=A4tigk=
+eitsfonds =C3=BCber die Suchmaschine Google zu erhalten. Visit these pages =
+below for an interview about my lottery win: https://www.youtube.com/watch?=
+v=3DMMC3DHoGhP8.
 
-while reading the process documentation, I noticed this reference to the 
-Linux Foundation NDA program in Documentation/process/3.Early-stage.rst:
+Kontaktieren Sie mich, um die Gelder f=C3=BCr Polen zu sammeln.
 
--->
+Seien Sie sicher und geborgen,
+MANUEL FRANCO
++ 1 754-231-3468 (nur Whatsapp)
 
-That said, there are also cases where a company legitimately cannot
-disclose its plans early in the development process.  Companies with
-experienced kernel developers may choose to proceed in an open-loop manner
-on the assumption that they will be able to avoid serious integration
-problems later.  For companies without that sort of in-house expertise, 
-the best option is often to hire an outside developer to review the plans 
-undera non-disclosure agreement.  The Linux Foundation operates an NDA 
-program designed to help with this sort of situation; more information can 
-be found at:
+-- 
+This email has been checked for viruses by Avast antivirus software.
+https://www.avast.com/antivirus
 
-    http://www.linuxfoundation.org/en/NDA_program
-
-This kind of review is often enough to avoid serious problems later on
-without requiring public disclosure of the project.
-
-<--
-
-The link is dead; internet search only showed some references from 
-meeting minutes in 2008, but nothing more since then.
-
-Has this LF NDA program simply been phased out?
-
-If so, I will provide a clean-up patch to remove this historic reference.
-
-Lukas
