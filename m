@@ -2,37 +2,31 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9F9741E1284
-	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2020 18:19:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 95C4E1E12A2
+	for <lists+linux-doc@lfdr.de>; Mon, 25 May 2020 18:28:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731363AbgEYQTP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 25 May 2020 12:19:15 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35446 "EHLO
+        id S1731459AbgEYQ21 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 25 May 2020 12:28:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36870 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726514AbgEYQTP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 May 2020 12:19:15 -0400
+        with ESMTP id S1731458AbgEYQ21 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 May 2020 12:28:27 -0400
 Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 584A3C061A0E;
-        Mon, 25 May 2020 09:19:15 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9906FC061A0E;
+        Mon, 25 May 2020 09:28:27 -0700 (PDT)
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id DBA9C2DC;
-        Mon, 25 May 2020 16:19:14 +0000 (UTC)
-Date:   Mon, 25 May 2020 10:19:13 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id DCC394A2;
+        Mon, 25 May 2020 16:28:26 +0000 (UTC)
+Date:   Mon, 25 May 2020 10:28:25 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     LKML <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        linux-nvdimm <linux-nvdimm@lists.01.org>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Vishal Verma <vishal.l.verma@intel.com>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Ira Weiny <ira.weiny@intel.com>
-Subject: Re: [PATCH] nvdimm: fixes to maintainter-entry-profile
-Message-ID: <20200525101913.07735d91@lwn.net>
-In-Reply-To: <103a0e71-28b5-e4c2-fdf2-80d2dd005b44@infradead.org>
-References: <103a0e71-28b5-e4c2-fdf2-80d2dd005b44@infradead.org>
+To:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Replace HTTP links with HTTPS ones: documentation
+Message-ID: <20200525102825.63d72ed2@lwn.net>
+In-Reply-To: <20200520200037.88705-1-grandmaster@al2klimov.de>
+References: <20200520200037.88705-1-grandmaster@al2klimov.de>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -42,25 +36,68 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 21 May 2020 09:51:37 -0700
-Randy Dunlap <rdunlap@infradead.org> wrote:
+On Wed, 20 May 2020 22:00:37 +0200
+"Alexander A. Klimov" <grandmaster@al2klimov.de> wrote:
 
-> From: Randy Dunlap <rdunlap@infradead.org>
+> Rationale: Reduces attack surface on kernel devs for MITM.
 > 
-> Fix punctuation and wording in a few places.
-> 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Dan Williams <dan.j.williams@intel.com>
-> Cc: Vishal Verma <vishal.l.verma@intel.com>
-> Cc: Dave Jiang <dave.jiang@intel.com>
-> Cc: Ira Weiny <ira.weiny@intel.com>
-> Cc: linux-nvdimm@lists.01.org
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: linux-doc@vger.kernel.org
+> Deterministic algorithm:
+> For each file:
+>   For each line:
+>     If doesn't contain `\bxmlns\b`:
+>       For each link, `\bhttp://[^# \t\r\n]*(?:\w|/)`:
+>         If both the HTTP and HTTPS versions
+>         return 200 OK and serve the same content:
+>           Replace HTTP with HTTPS.
 > ---
->  Documentation/nvdimm/maintainer-entry-profile.rst |   14 ++++++------
->  1 file changed, 7 insertions(+), 7 deletions(-)
+>  Documentation/COPYING-logo                       |  2 +-
+>  Documentation/admin-guide/LSM/tomoyo.rst         | 16 ++++++++--------
+>  .../admin-guide/acpi/initrd_table_override.rst   |  2 +-
+>  Documentation/admin-guide/bcache.rst             |  4 ++--
+>  Documentation/admin-guide/devices.rst            |  2 +-
+>  Documentation/admin-guide/initrd.rst             |  2 +-
+>  Documentation/admin-guide/md.rst                 |  2 +-
+>  Documentation/admin-guide/mono.rst               |  4 ++--
+>  Documentation/admin-guide/reporting-bugs.rst     |  2 +-
+>  Documentation/admin-guide/unicode.rst            |  4 ++--
+>  Documentation/conf.py                            |  2 +-
+>  Documentation/dev-tools/gdb-kernel-debugging.rst |  2 +-
+>  Documentation/doc-guide/parse-headers.rst        |  2 +-
+>  .../driver-api/acpi/linuxized-acpica.rst         |  6 +++---
+>  Documentation/driver-api/usb/bulk-streams.rst    |  4 ++--
+>  .../driver-api/usb/writing_musb_glue_layer.rst   |  6 +++---
+>  Documentation/filesystems/path-lookup.txt        |  2 +-
+>  Documentation/filesystems/seq_file.txt           |  4 ++--
+>  Documentation/misc-devices/c2port.txt            |  6 +++---
+>  Documentation/process/3.Early-stage.rst          |  2 +-
+>  Documentation/process/7.AdvancedTopics.rst       |  8 ++++----
+>  Documentation/process/8.Conclusion.rst           | 14 +++++++-------
+>  Documentation/process/adding-syscalls.rst        |  4 ++--
+>  Documentation/process/applying-patches.rst       |  4 ++--
+>  .../process/volatile-considered-harmful.rst      |  4 ++--
+>  Documentation/rbtree.txt                         |  4 ++--
+>  Documentation/security/SCTP.rst                  |  2 +-
+>  Documentation/sphinx/kfigure.py                  |  6 +++---
+>  Documentation/static-keys.txt                    |  2 +-
+>  Documentation/trace/events-msr.rst               |  2 +-
+>  Documentation/trace/mmiotrace.rst                |  2 +-
+>  Documentation/vm/ksm.rst                         |  2 +-
+>  Documentation/xz.txt                             |  6 +++---
+>  scripts/kernel-doc                               |  2 +-
+>  34 files changed, 69 insertions(+), 69 deletions(-)
 
-Applied, thanks.
+OK, so this is still pretty large; I had asked you to narrow things
+further.  And the rationale is still pretty thin.  And I would *really*
+rather see the docs updated in a more thoughtful way that considers the
+value of the links rather than just the protocol used.
+
+But this does not seem to do harm at this point, so I have gone ahead and
+applied it.
+
+If you proceed with this work, I'd encourage you to be narrow in your
+focus, be sure to copy the right people, and to justify the changes well,
+or you may well run into pushback.
+
+Thanks,
 
 jon
