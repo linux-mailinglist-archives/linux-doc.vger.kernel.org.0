@@ -2,47 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8DBFD1E329C
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2020 00:31:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 751D21E32D8
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2020 00:46:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2392094AbgEZWbd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 May 2020 18:31:33 -0400
-Received: from mail.kernel.org ([198.145.29.99]:54538 "EHLO mail.kernel.org"
+        id S2391304AbgEZWqL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 May 2020 18:46:11 -0400
+Received: from mail.kernel.org ([198.145.29.99]:57650 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2389482AbgEZWbd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 26 May 2020 18:31:33 -0400
+        id S2389755AbgEZWqK (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 26 May 2020 18:46:10 -0400
 Received: from kicinski-fedora-PC1C0HJN.hsd1.ca.comcast.net (unknown [163.114.132.6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 9454F20899;
-        Tue, 26 May 2020 22:31:31 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 7FDBB206D5;
+        Tue, 26 May 2020 22:46:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1590532292;
-        bh=i/LsJ/7HDxl1uraGohIpTv1UEEpLZgqDBmcvFSkYrRs=;
+        s=default; t=1590533169;
+        bh=4VoXxRVTE3aUe4DriyuaiIDULO39iyZazGY56WATyv0=;
         h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=L1hQtRDvn7ylGIClnE51U8xDbKeptk9RRRcxjD8KvV0vnGtqXOx6okqH3wGQU2F4s
-         AMxHim9tkh3trTRi+/Dihhe2jPHiIQ7YHpjVMePw/F7mtxQxe5ipm41gvPbE0O1/f+
-         WqWQhzzVJGfznE1VeNIwnVlo+h9/gVYBJXg1JpOk=
-Date:   Tue, 26 May 2020 15:31:28 -0700
+        b=cb0Eibk505H8ZxcbbJZVkrpORxeYQZmf0ZrrYrbipHCaqg7YlUb/TTqp3zb7BDBWx
+         Vi3vWmeo/d8/1jYP09Qb9Qnrw7t31w6GKTFZQHx5ws1SHsoWDVhXP6qbMItUDJmsKI
+         RQx1zpkIVOc62sRLCh+zvSjnS0HpLl+lGyK1HzSg=
+Date:   Tue, 26 May 2020 15:46:06 -0700
 From:   Jakub Kicinski <kuba@kernel.org>
-To:     Emanuele Giuseppe Esposito <eesposit@redhat.com>
-Cc:     kvm@vger.kernel.org,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jim Mattson <jmattson@google.com>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Emanuele Giuseppe Esposito <e.emanuelegiuseppe@gmail.com>,
-        David Rientjes <rientjes@google.com>,
-        Jonathan Adams <jwadams@google.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-mips@vger.kernel.org, kvm-ppc@vger.kernel.org,
-        linuxppc-dev@lists.ozlabs.org, linux-s390@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, netdev@vger.kernel.org
-Subject: Re: [PATCH v3 0/7] Statsfs: a new ram-based file system for Linux
- kernel statistics
-Message-ID: <20200526153128.448bfb43@kicinski-fedora-PC1C0HJN.hsd1.ca.comcast.net>
-In-Reply-To: <20200526110318.69006-1-eesposit@redhat.com>
-References: <20200526110318.69006-1-eesposit@redhat.com>
+To:     Luis Chamberlain <mcgrof@kernel.org>
+Cc:     jeyu@kernel.org, davem@davemloft.net, michael.chan@broadcom.com,
+        dchickles@marvell.com, sburla@marvell.com, fmanlunas@marvell.com,
+        aelior@marvell.com, GR-everest-linux-l2@marvell.com,
+        kvalo@codeaurora.org, johannes@sipsolutions.net,
+        akpm@linux-foundation.org, arnd@arndb.de, rostedt@goodmis.org,
+        mingo@redhat.com, aquini@redhat.com, cai@lca.pw, dyoung@redhat.com,
+        bhe@redhat.com, peterz@infradead.org, tglx@linutronix.de,
+        gpiccoli@canonical.com, pmladek@suse.com, tiwai@suse.de,
+        schlad@suse.de, andriy.shevchenko@linux.intel.com,
+        derosier@gmail.com, keescook@chromium.org, daniel.vetter@ffwll.ch,
+        will@kernel.org, mchehab+samsung@kernel.org, vkoul@kernel.org,
+        mchehab+huawei@kernel.org, robh@kernel.org, mhiramat@kernel.org,
+        sfr@canb.auug.org.au, linux@dominikbrodowski.net,
+        glider@google.com, paulmck@kernel.org, elver@google.com,
+        bauerman@linux.ibm.com, yamada.masahiro@socionext.com,
+        samitolvanen@google.com, yzaikin@google.com, dvyukov@google.com,
+        rdunlap@infradead.org, corbet@lwn.net, dianders@chromium.org,
+        netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3 0/8] kernel: taint when the driver firmware crashes
+Message-ID: <20200526154606.6a2be01f@kicinski-fedora-PC1C0HJN.hsd1.ca.comcast.net>
+In-Reply-To: <20200526145815.6415-1-mcgrof@kernel.org>
+References: <20200526145815.6415-1-mcgrof@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -51,39 +57,40 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 26 May 2020 13:03:10 +0200 Emanuele Giuseppe Esposito wrote:
-> There is currently no common way for Linux kernel subsystems to expose
-> statistics to userspace shared throughout the Linux kernel; subsystems have
-> to take care of gathering and displaying statistics by themselves, for
-> example in the form of files in debugfs. For example KVM has its own code
-> section that takes care of this in virt/kvm/kvm_main.c, where it sets up
-> debugfs handlers for displaying values and aggregating them from various
-> subfolders to obtain information about the system state (i.e. displaying
-> the total number of exits, calculated by summing all exits of all cpus of
-> all running virtual machines).
+On Tue, 26 May 2020 14:58:07 +0000 Luis Chamberlain wrote:
+> To those new on CC -- this is intended to be a simple generic interface
+> to the kernel to annotate when the firwmare has crashed leaving the
+> driver or system in a questionable state, in the worst case requiring
+> full system reboot. This series is first addressing only a few
+> networking patches, however, I already have an idea of where such
+> firmware crashes happen across the tree. The goal with this series then
+> is to first introduce the simple framework, and only if that moves
+> forward will I continue to chug on with the rest of the drivers /
+> subsystems.
 > 
-> Allowing each section of the kernel to do so has two disadvantages. First,
-> it will introduce redundant code. Second, debugfs is anyway not the right
-> place for statistics (for example it is affected by lockdown)
+> This is *not* a networking specific problem only.
 > 
-> In this patch series I introduce statsfs, a synthetic ram-based virtual
-> filesystem that takes care of gathering and displaying statistics for the
-> Linux kernel subsystems.
+> This v3 augments the last series by introducing the uevent for panic
+> events, one of them is during tainting. The uvent mechanism is
+> independent from any of this firmware taint mechanism. I've also
+> addressed Jessica Yu's feedback. Given I've extended the patches a bit
+> with other minor cleanup which checkpatch.pl complains over, and since
+> this infrastructure is still being discussed, I've trimmed the patch
+> series size to only cover drivers for which I've received an Acked-by
+> from the respective driver maintainer, or where we have bug reports to
+> support such dire situations on the driver such as ath10k.
 > 
-> The file system is mounted on /sys/kernel/stats and would be already used
-> by kvm. Statsfs was initially introduced by Paolo Bonzini [1].
+> During the last v2 it was discussed that we should instead use devlink
+> for this work, however the initial RFC patches produced by Jakub
+> Kicinski [0] shows how devlink is networking specific, and the intent
+> behind this series is to produce simple helpers which can be used by *any*
+> device driver, for any subsystem, not just networking. Subsystem
+> specific infrastructure to help address firwmare crashes may still make
+> sense, however that does not mean we *don't* need something even more
+> generic regardless of the subsystem the issue happens on. Since uevents
+> for taints are exposed, we now expose these through uapi as well, and
+> that was something which eventually had to happen given that the current
+> scheme of relying on sensible character representations for each taint
+> will not scale beyond the alphabet.
 
-What's the direct motivation for this work? Moving KVM stats out of
-debugfs?
-
-In my experience stats belong in the API used for creating/enumerating
-objects, statsfs sounds like going in the exact opposite direction -
-creating a parallel structure / hierarchy for exposing stats. I know
-nothing about KVM but are you sure all the info that has to be exposed
-will be stats?
-
-In case of networking we have the basic stats in sysfs, under the
-netdevice's kobject. But since we're not using sysfs much any more 
-for config, new stats are added in netlink APIs. Again - same APIs
-used for enumeration and config.
-
+Nacked-by: Jakub Kicinski <kuba@kernel.org>
