@@ -2,54 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D325A1E44FC
-	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2020 15:59:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BB8211E45B5
+	for <lists+linux-doc@lfdr.de>; Wed, 27 May 2020 16:22:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388989AbgE0N71 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 May 2020 09:59:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39728 "EHLO
+        id S2389146AbgE0OWA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 May 2020 10:22:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43292 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2388623AbgE0N70 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 May 2020 09:59:26 -0400
-Received: from msa11.plala.or.jp (msa11.plala.or.jp [IPv6:2400:7800:0:502e::11])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 5B7F7C08C5C1;
-        Wed, 27 May 2020 06:59:26 -0700 (PDT)
-Received: from mwebp13 ([172.23.13.133]) by msa11.plala.or.jp with ESMTP
-          id <20200527135925.LILK32305.msa11.plala.or.jp@mwebp13>;
-          Wed, 27 May 2020 22:59:25 +0900
-Date:   Wed, 27 May 2020 22:59:25 +0900
-From:   "Mrs.Judith Rice" <hamurafujimi@tmail.plala.or.jp>
-Reply-To: jonesevansje@gmail.com
-Message-ID: <20200527225925.5C0N3.1031.root@mwebp13>
-Subject: Spende
+        with ESMTP id S2389103AbgE0OWA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 May 2020 10:22:00 -0400
+Received: from mail-pg1-x542.google.com (mail-pg1-x542.google.com [IPv6:2607:f8b0:4864:20::542])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3ACB3C08C5C2;
+        Wed, 27 May 2020 07:22:00 -0700 (PDT)
+Received: by mail-pg1-x542.google.com with SMTP id u5so11832905pgn.5;
+        Wed, 27 May 2020 07:22:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=CJWWlFowHHNM256k17yETc+XHlbxbBX4AAuZRvOBnEA=;
+        b=H/mH86Zc+uqXPHsur/+idcfytxqQuoLsEYM/GP0wDJaNuH0KuMM/hmfRnLtE6eWILQ
+         IdNBX/+t/EN+cKNLe9p2ngYcFcNzJQf45k6sQRYlE+HVUUe2vqS+j9VvjTFTaMGaNLXD
+         DbmN49q6cujvyx5MAACH6Oost4PvqRfkPMCw8oxggWFKxFcxwTq6gpJTEfDdGZwryDS7
+         N1gESVq7py8B9b1nZT+ggOaVJKAZypEyYGduUmc3ecR5BmZWtRTbGelW7dGcliKq6zQF
+         pS74cKtx2WqJKqjR7aZhqsDCn9ntBx56I9VgPAdu9W0kTadoSYLLnn4mF8NTowC2u4DY
+         hIgA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=CJWWlFowHHNM256k17yETc+XHlbxbBX4AAuZRvOBnEA=;
+        b=CamilqAwvVpR/6dV7badrIIMeWpufzxUFzOYWF8BKhCtlIwGzmYKq+8HoVNvkYvLxt
+         JgEu4sVi+ppIQzEcUWkx4Tmo85jT7Bllslicmeoi5qZ7dCFyJxq9S+SSoZkaPgKyRAxv
+         9zgytfR7ClxQNGrTpx057wKlhlVJNDhIms5eejUbrQrF6lbSIovphwknltYsbBJc4KPw
+         Scy42KILuz4ut6TIEWchTLOKgSb55ZiyNFWNkcrYGUpJSoOZCUVdRp9rNm1LEN/e6n1/
+         26kPXqx1Xba9ixxvF3tSaE9JAfVMnj3prmpwkdiyfa7H/eEMh2LYsYlXrzdpPF9XPISM
+         l+AQ==
+X-Gm-Message-State: AOAM5315exFFy2eZKR/h1Q99WyDA7HnsIE6iUlQNYUCGngXXDQ4tsY/9
+        jf1q/PJJLcRgiejmQyA2+Wk=
+X-Google-Smtp-Source: ABdhPJz+x5u0WY6FQMlMKbfoixKcK/iAmz/7r51nMPJKL9jhfw9HM0ZDj76SUy33XYN0RBLzXKNOhg==
+X-Received: by 2002:a62:b40b:: with SMTP id h11mr4042841pfn.183.1590589319773;
+        Wed, 27 May 2020 07:21:59 -0700 (PDT)
+Received: from localhost ([144.34.194.82])
+        by smtp.gmail.com with ESMTPSA id c2sm3045711pjg.51.2020.05.27.07.21.58
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Wed, 27 May 2020 07:21:59 -0700 (PDT)
+From:   Dejin Zheng <zhengdejin5@gmail.com>
+To:     corbet@lwn.net, gregkh@linuxfoundation.org, f.fainelli@gmail.com,
+        michal.simek@xilinx.com, wsa+renesas@sang-engineering.com,
+        paul@crapouillou.net, shawnguo@kernel.org,
+        linus.walleij@linaro.org, linux-doc@vger.kernel.org,
+        linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc:     Dejin Zheng <zhengdejin5@gmail.com>
+Subject: [PATCH v3 0/2] drivers: provide devm_platform_request_irq()
+Date:   Wed, 27 May 2020 22:21:44 +0800
+Message-Id: <20200527142146.8940-1-zhengdejin5@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-2022-jp
-Content-Transfer-Encoding: 7bit
-X-Priority: 3 (Normal)
-Sensitivity: Normal
-X-VirusScan: Outbound; mvir-ac11; Wed, 27 May 2020 22:59:25 +0900
-To:     unlisted-recipients:; (no To-header on input)
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Attn:
+It will call devm_request_irq() after platform_get_irq() function
+in many drivers, sometimes, it is not right for the error handling
+of these two functions in some drivers. so provide this function
+to simplify the driver.
 
-Es tut uns leid, dass wir Sie aufgrund eines Mismanagent of Beneficaries-Fonds von unseren ernannten Zonal Managern versp&#228;tet kontaktiert haben. Bitte beachten Sie, dass Sie qualifiziert sind, die Zahlung von 900.000,00 USD an der ATM-Karte mit neunhunderttausend Dollar zu erhalten.
+the first patch will provide devm_platform_request_irq(), and the
+other patch will convert to devm_platform_request_irq() in some
+i2c bus dirver.
 
-Als Entsch&#228;digung von WORLD BANK / IWF (Internationaler W&#228;hrungsfonds) f&#252;r die automatisch &#252;ber einen E-Mail-Wahlautomaten gezogenen, die in der Vergangenheit noch nicht abgeschlossene Transaktionen hatten.
+v2 -> v3:
+	- add devm_platform_request_irq() to devres.rst by Grygorii's
+	  suggestion.
+	- And also Thanks Michal, Wolfram and Linus's review and
+	  comments.
+v1 -> v2:
+	- I give up this series of patches in v1 version. I resend this
+	  patches v2 by that discussion:
+	  https://patchwork.ozlabs.org/project/linux-i2c/patch/20200520144821.8069-1-zhengdejin5@gmail.com/
+	  The patch content has not changed.
 
-F&#252;r weitere Informationen kontaktieren Sie bitte Rev.EVANS JONES ( jonesevansje@gmail.com )
+Dejin Zheng (2):
+  drivers: provide devm_platform_request_irq()
+  i2c: busses: convert to devm_platform_request_irq()
 
-Bitte senden Sie ihm Ihre pers&#246;nlichen Daten wie:
+ .../driver-api/driver-model/devres.rst        |  1 +
+ drivers/base/platform.c                       | 33 +++++++++++++++++++
+ drivers/i2c/busses/i2c-bcm-kona.c             | 16 ++-------
+ drivers/i2c/busses/i2c-cadence.c              | 10 ++----
+ drivers/i2c/busses/i2c-digicolor.c            | 10 ++----
+ drivers/i2c/busses/i2c-emev2.c                |  5 ++-
+ drivers/i2c/busses/i2c-jz4780.c               |  5 ++-
+ drivers/i2c/busses/i2c-meson.c                | 13 +++-----
+ drivers/i2c/busses/i2c-mxs.c                  |  9 ++---
+ drivers/i2c/busses/i2c-pnx.c                  |  9 ++---
+ drivers/i2c/busses/i2c-rcar.c                 |  9 ++---
+ drivers/i2c/busses/i2c-rk3x.c                 | 14 ++------
+ drivers/i2c/busses/i2c-sirf.c                 | 10 ++----
+ drivers/i2c/busses/i2c-stu300.c               |  4 +--
+ drivers/i2c/busses/i2c-synquacer.c            | 12 ++-----
+ include/linux/platform_device.h               |  4 +++
+ 16 files changed, 73 insertions(+), 91 deletions(-)
 
-Vollst&#228;ndiger Name:
-Wohnanschrift:
-Telefonnummer:
-Herkunftsland:
+-- 
+2.25.0
 
-Gr&#252;&#223;e,
-Mrs. Judith Rice
-
-Spende
