@@ -2,27 +2,27 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 253551E6C4A
-	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2020 22:17:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 930651E6C23
+	for <lists+linux-doc@lfdr.de>; Thu, 28 May 2020 22:14:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2407203AbgE1UQb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 28 May 2020 16:16:31 -0400
-Received: from mail.kernel.org ([198.145.29.99]:41800 "EHLO mail.kernel.org"
+        id S2406973AbgE1UO2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 28 May 2020 16:14:28 -0400
+Received: from mail.kernel.org ([198.145.29.99]:41870 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2407014AbgE1UOY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 28 May 2020 16:14:24 -0400
+        id S2407019AbgE1UO0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 28 May 2020 16:14:26 -0400
 Received: from sasha-vm.mshome.net (c-73-47-72-35.hsd1.nh.comcast.net [73.47.72.35])
         (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 1E02020C56;
-        Thu, 28 May 2020 20:14:22 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id EE06E2088E;
+        Thu, 28 May 2020 20:14:23 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1590696863;
-        bh=ZFtNDFUkX5FhGp1GJ9nd7mzQ/8252J+q8Uqx5krh7o4=;
+        s=default; t=1590696865;
+        bh=Cbug4Zw6pLdPJMyM6ewVPi8za9fxR3JM1cojC9EnM+s=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=YkWZgvMetxlljQNeIKyVd5XK9R+PUaJcMK5SJoQBAu4GcxrWj7xJgjsE/co7kndru
-         4LnNufidwJVjSfempbmjj6KNx/zB10Jqmbz9JqyFWrfyehp/dR1c/N09ZKMHcEfduZ
-         ZrP753FzXN4cooDUcANHxZ3h0HWCaguKCN+x03eI=
+        b=k4AEdmZm0JNgL/s0oKV0nM8NQEtvV6FVP+zpgtOHyGsyffMn6AxwzOQXx0Qhl5raN
+         rQdeD3rlf9SHPYNeGSHLlkQLrUSO5SQaJKvouupTtButX4L8jUewo3SCzNZMTMx2eJ
+         a+dSGyhGVU/1cRPAohlORhLGnA1RlgocBEFGsmEs=
 From:   Sasha Levin <sashal@kernel.org>
 To:     tglx@linutronix.de, luto@kernel.org, ak@linux.intel.com
 Cc:     corbet@lwn.net, mingo@redhat.com, bp@alien8.de, x86@kernel.org,
@@ -30,10 +30,12 @@ Cc:     corbet@lwn.net, mingo@redhat.com, bp@alien8.de, x86@kernel.org,
         chang.seok.bae@intel.com, dave.hansen@linux.intel.com,
         peterz@infradead.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, jarkko.sakkinen@linux.intel.com,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        Ravi Shankar <ravi.v.shankar@intel.com>,
         Sasha Levin <sashal@kernel.org>
-Subject: [PATCH v13 06/16] x86/process/64: Make save_fsgs() public available
-Date:   Thu, 28 May 2020 16:13:52 -0400
-Message-Id: <20200528201402.1708239-7-sashal@kernel.org>
+Subject: [PATCH v13 07/16] x86/process/64: Use FSGSBASE instructions on thread copy and ptrace
+Date:   Thu, 28 May 2020 16:13:53 -0400
+Message-Id: <20200528201402.1708239-8-sashal@kernel.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20200528201402.1708239-1-sashal@kernel.org>
 References: <20200528201402.1708239-1-sashal@kernel.org>
@@ -44,77 +46,77 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Thomas Gleixner <tglx@linutronix.de>
+From: "Chang S. Bae" <chang.seok.bae@intel.com>
 
+When FSGSBASE is enabled, copying threads and reading fsbase and gsbase
+using ptrace must read the actual values.
+
+When copying a thread, use save_fsgs() and copy the saved values.  For
+ptrace, the bases must be read from memory regardless of the selector if
+FSGSBASE is enabled.
+
+[ tglx: Invoke __rdgsbase_inactive() with interrupts disabled ]
+[ luto: Massage changelog ]
+
+Suggested-by: Andy Lutomirski <luto@kernel.org>
+Signed-off-by: Chang S. Bae <chang.seok.bae@intel.com>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: "H . Peter Anvin" <hpa@zytor.com>
+Cc: Andi Kleen <ak@linux.intel.com>
+Cc: Ravi Shankar <ravi.v.shankar@intel.com>
+Cc: H. Peter Anvin <hpa@zytor.com>
+Link: https://lkml.kernel.org/r/1557309753-24073-9-git-send-email-chang.seok.bae@intel.com
 Signed-off-by: Sasha Levin <sashal@kernel.org>
 ---
- arch/x86/include/asm/processor.h |  4 +---
- arch/x86/kernel/process_64.c     | 15 +++++++++------
- arch/x86/kvm/vmx/vmx.c           |  2 +-
- 3 files changed, 11 insertions(+), 10 deletions(-)
+ arch/x86/kernel/process.c    | 10 ++++++----
+ arch/x86/kernel/process_64.c |  6 ++++--
+ 2 files changed, 10 insertions(+), 6 deletions(-)
 
-diff --git a/arch/x86/include/asm/processor.h b/arch/x86/include/asm/processor.h
-index 3bcf27caf6c9..809bc013db70 100644
---- a/arch/x86/include/asm/processor.h
-+++ b/arch/x86/include/asm/processor.h
-@@ -456,10 +456,8 @@ static inline unsigned long cpu_kernelmode_gs_base(int cpu)
- DECLARE_PER_CPU(unsigned int, irq_count);
- extern asmlinkage void ignore_sysret(void);
+diff --git a/arch/x86/kernel/process.c b/arch/x86/kernel/process.c
+index 9da70b279dad..0264d9bb8991 100644
+--- a/arch/x86/kernel/process.c
++++ b/arch/x86/kernel/process.c
+@@ -140,10 +140,12 @@ int copy_thread_tls(unsigned long clone_flags, unsigned long sp,
+ 	memset(p->thread.ptrace_bps, 0, sizeof(p->thread.ptrace_bps));
  
--#if IS_ENABLED(CONFIG_KVM)
- /* Save actual FS/GS selectors and bases to current->thread */
--void save_fsgs_for_kvm(void);
--#endif
-+void current_save_fsgs(void);
- #else	/* X86_64 */
- #ifdef CONFIG_STACKPROTECTOR
- /*
+ #ifdef CONFIG_X86_64
+-	savesegment(gs, p->thread.gsindex);
+-	p->thread.gsbase = p->thread.gsindex ? 0 : current->thread.gsbase;
+-	savesegment(fs, p->thread.fsindex);
+-	p->thread.fsbase = p->thread.fsindex ? 0 : current->thread.fsbase;
++	current_save_fsgs();
++	p->thread.fsindex = current->thread.fsindex;
++	p->thread.fsbase = current->thread.fsbase;
++	p->thread.gsindex = current->thread.gsindex;
++	p->thread.gsbase = current->thread.gsbase;
++
+ 	savesegment(es, p->thread.es);
+ 	savesegment(ds, p->thread.ds);
+ #else
 diff --git a/arch/x86/kernel/process_64.c b/arch/x86/kernel/process_64.c
-index 85c7f9cabde2..aefb30bc56bc 100644
+index aefb30bc56bc..0bcb48a1264a 100644
 --- a/arch/x86/kernel/process_64.c
 +++ b/arch/x86/kernel/process_64.c
-@@ -247,18 +247,21 @@ static __always_inline void save_fsgs(struct task_struct *task)
- 	}
- }
+@@ -423,7 +423,8 @@ unsigned long x86_fsbase_read_task(struct task_struct *task)
  
--#if IS_ENABLED(CONFIG_KVM)
- /*
-  * While a process is running,current->thread.fsbase and current->thread.gsbase
-- * may not match the corresponding CPU registers (see save_base_legacy()). KVM
-- * wants an efficient way to save and restore FSBASE and GSBASE.
-- * When FSGSBASE extensions are enabled, this will have to use RD{FS,GS}BASE.
-+ * may not match the corresponding CPU registers (see save_base_legacy()).
-  */
--void save_fsgs_for_kvm(void)
-+void current_save_fsgs(void)
- {
-+	unsigned long flags;
-+
-+	/* Interrupts need to be off for FSGSBASE */
-+	local_irq_save(flags);
- 	save_fsgs(current);
-+	local_irq_restore(flags);
- }
--EXPORT_SYMBOL_GPL(save_fsgs_for_kvm);
-+#if IS_ENABLED(CONFIG_KVM)
-+EXPORT_SYMBOL_GPL(current_save_fsgs);
- #endif
+ 	if (task == current)
+ 		fsbase = x86_fsbase_read_cpu();
+-	else if (task->thread.fsindex == 0)
++	else if (static_cpu_has(X86_FEATURE_FSGSBASE) ||
++		 (task->thread.fsindex == 0))
+ 		fsbase = task->thread.fsbase;
+ 	else
+ 		fsbase = x86_fsgsbase_read_task(task, task->thread.fsindex);
+@@ -437,7 +438,8 @@ unsigned long x86_gsbase_read_task(struct task_struct *task)
  
- static __always_inline void loadseg(enum which_selector which,
-diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-index 89c766fad889..309e6dc975d5 100644
---- a/arch/x86/kvm/vmx/vmx.c
-+++ b/arch/x86/kvm/vmx/vmx.c
-@@ -1167,7 +1167,7 @@ void vmx_prepare_switch_to_guest(struct kvm_vcpu *vcpu)
- 
- 	gs_base = cpu_kernelmode_gs_base(cpu);
- 	if (likely(is_64bit_mm(current->mm))) {
--		save_fsgs_for_kvm();
-+		current_save_fsgs();
- 		fs_sel = current->thread.fsindex;
- 		gs_sel = current->thread.gsindex;
- 		fs_base = current->thread.fsbase;
+ 	if (task == current)
+ 		gsbase = x86_gsbase_read_cpu_inactive();
+-	else if (task->thread.gsindex == 0)
++	else if (static_cpu_has(X86_FEATURE_FSGSBASE) ||
++		 (task->thread.gsindex == 0))
+ 		gsbase = task->thread.gsbase;
+ 	else
+ 		gsbase = x86_fsgsbase_read_task(task, task->thread.gsindex);
 -- 
 2.25.1
 
