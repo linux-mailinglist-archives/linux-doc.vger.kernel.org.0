@@ -2,101 +2,157 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AED891ED130
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2020 15:48:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BB3E01ED1CB
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Jun 2020 16:12:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726061AbgFCNsv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 3 Jun 2020 09:48:51 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50110 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725983AbgFCNst (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 3 Jun 2020 09:48:49 -0400
-Received: from mail-lf1-x141.google.com (mail-lf1-x141.google.com [IPv6:2a00:1450:4864:20::141])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1084DC08C5CA
-        for <linux-doc@vger.kernel.org>; Wed,  3 Jun 2020 06:48:49 -0700 (PDT)
-Received: by mail-lf1-x141.google.com with SMTP id d7so1345649lfi.12
-        for <linux-doc@vger.kernel.org>; Wed, 03 Jun 2020 06:48:48 -0700 (PDT)
+        id S1725981AbgFCOMb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 3 Jun 2020 10:12:31 -0400
+Received: from smtp-fw-6001.amazon.com ([52.95.48.154]:36119 "EHLO
+        smtp-fw-6001.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726013AbgFCOMa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 3 Jun 2020 10:12:30 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:sender:from:date:message-id:subject:to;
-        bh=H8rDQEJouwBJIElP/Vpqq+PrvTZxQQy2H7A/MvyMMB0=;
-        b=LImzFWfFZ5MGhzJT1qzCsgEXVo7xW37sUIdrDLCKiXHQE0/Tq0rYX6Af/ld5dvlhmE
-         opFt8B8vUrhAfyxGIRs7eIQZmnu+cHCt7Dz4gEu/fnBWHDlMa8iVHDbM7XgqJUtNcgor
-         I4Oj1yGJ3ygOniFn6Dr+FHDS5BV48N/ldz+eBwWbR5/ADnYCL6KuztRZu9mrKJOxMODU
-         fmVICwwGmTYXXsgICTxE6unupuMdGq6+YZvkWKysZVLYK3Wwxrg7U2ecMo3WGycHWcU1
-         w35jxyjuynpm30G3kj/I18A4vO2Y2WN0kfTajUkGc1Xe9t84eQuWhnB4AGlAS8dbrawc
-         iC3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:sender:from:date
-         :message-id:subject:to;
-        bh=H8rDQEJouwBJIElP/Vpqq+PrvTZxQQy2H7A/MvyMMB0=;
-        b=YwtPFBcaacyh8L8fnTcVDaFN2NCbKNnsC6S2/Wwmi4h79xliEi57AjcCAIGdV52YCR
-         nfV3CVnzXZfih8eaxjCo/aWL8nix0NsHhL0B7826BuOOM3QIjwlvUmtSbCDnlgITB/ut
-         9CZzyFTglhY20IRMcXFqxIe0HS0IVMcfjbOR26V0yu8ejWRV0r53+taEYC/S3pbwCYVq
-         2R/y7KONvK2wzv/nuIUEqXhPyOnWE8wUb6aKBIAA3ydLHkA8zaAivVFKYkHQjnbhZB38
-         vIKun/PM+X04qZI2g+tiYppGwVXa+JuDnHp3+vNlnI/5OLCMdrNAGTzm5Lewc08JpunB
-         JMmw==
-X-Gm-Message-State: AOAM530yI3poKqRqDxD+YZd7sHJftl7j1Wqmwkh9WHtT5yyACeFCAvcY
-        A4XhQeZ3u4kIfWRQEEuTHNvaQqA4FlbUyAtmNd0=
-X-Google-Smtp-Source: ABdhPJzc66PsPJ7uf2JiXrqj7zfh07Ra5BpBms0TPKeexmxkWkfXYY+ch/Os+E85wJbdOE6Lm+0ANdybV/7KRG4HAcU=
-X-Received: by 2002:a05:6512:308e:: with SMTP id z14mr2566308lfd.29.1591192127287;
- Wed, 03 Jun 2020 06:48:47 -0700 (PDT)
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1591193549; x=1622729549;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=VSSWvrN/6ooCF8jN2b2oKAZsBnPFQ1RB7gDwHK0r5D4=;
+  b=aNasTH6HaEjK8tTVsGuQvODTnVcuBQe0IENjrHWtqp2CWi9eD265D7cF
+   Na5seeJB0guAHBqU6dSgW2Uos9wzU/9q2Knu42B20zvul+uftQvq9sjqy
+   5ZawGcgxfB0CvoYq1PwqmId3mjIuaGW2T6FfS7/khclk5G7Mj8y5nE5H8
+   E=;
+IronPort-SDR: yCKBXwgrtQgb/fi7ejpvwX8zGmhPIgPob1X0YePWNE2rKJke1i0rPsb1y5UjPcmOq9TMn+Nxdz
+ Vsg8FwzHCUzQ==
+X-IronPort-AV: E=Sophos;i="5.73,467,1583193600"; 
+   d="scan'208";a="35572869"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-2a-1c1b5cdd.us-west-2.amazon.com) ([10.43.8.6])
+  by smtp-border-fw-out-6001.iad6.amazon.com with ESMTP; 03 Jun 2020 14:12:13 +0000
+Received: from EX13MTAUEA002.ant.amazon.com (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+        by email-inbound-relay-2a-1c1b5cdd.us-west-2.amazon.com (Postfix) with ESMTPS id 47D09A22AA;
+        Wed,  3 Jun 2020 14:12:10 +0000 (UTC)
+Received: from EX13D31EUA001.ant.amazon.com (10.43.165.15) by
+ EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Wed, 3 Jun 2020 14:12:09 +0000
+Received: from u886c93fd17d25d.ant.amazon.com (10.43.160.90) by
+ EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Wed, 3 Jun 2020 14:11:52 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     <akpm@linux-foundation.org>
+CC:     SeongJae Park <sjpark@amazon.de>, <Jonathan.Cameron@Huawei.com>,
+        <aarcange@redhat.com>, <acme@kernel.org>,
+        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
+        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
+        <brendanhiggins@google.com>, <cai@lca.pw>,
+        <colin.king@canonical.com>, <corbet@lwn.net>, <dwmw@amazon.com>,
+        <foersleo@amazon.de>, <irogers@google.com>, <jolsa@redhat.com>,
+        <kirill@shutemov.name>, <mark.rutland@arm.com>, <mgorman@suse.de>,
+        <minchan@kernel.org>, <mingo@redhat.com>, <namhyung@kernel.org>,
+        <peterz@infradead.org>, <rdunlap@infradead.org>,
+        <riel@surriel.com>, <rientjes@google.com>, <rostedt@goodmis.org>,
+        <sblbir@amazon.com>, <shakeelb@google.com>, <shuah@kernel.org>,
+        <sj38.park@gmail.com>, <snu@amazon.de>, <vbabka@suse.cz>,
+        <vdavydov.dev@gmail.com>, <yang.shi@linux.alibaba.com>,
+        <ying.huang@intel.com>, <linux-damon@amazon.com>,
+        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: [RFC v2 0/9] DAMON: Support Access Monitoring of Any Address Space Including Physical Memory
+Date:   Wed, 3 Jun 2020 16:11:26 +0200
+Message-ID: <20200603141135.10575-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Reply-To: susanjones.wife@gmail.com
-Received: by 2002:a19:a405:0:0:0:0:0 with HTTP; Wed, 3 Jun 2020 06:48:46 -0700 (PDT)
-From:   "Mrs.Susan Jones" <joneswife.susan@gmail.com>
-Date:   Wed, 3 Jun 2020 14:48:46 +0100
-X-Google-Sender-Auth: aH2vam-ZraP3yG1gz3ryctMgTE4
-Message-ID: <CALBhdBfusXWup1N4iFuTS3D1AZxWbZbTDS_qa-wA3FkbkE7MrQ@mail.gmail.com>
-Subject: HELLO: I AM MRS SUSAN JONES
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.43.160.90]
+X-ClientProxiedBy: EX13D45UWB002.ant.amazon.com (10.43.161.78) To
+ EX13D31EUA001.ant.amazon.com (10.43.165.15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+From: SeongJae Park <sjpark@amazon.de>
+
+Currently, DAMON[1] supports only virtual memory address spaces because it
+utilizes PTE Accessed bits as its low-level access check primitive and ``struct
+vma`` as a way to address the monitoring target regions.  However, the core
+idea of DAMON, which makes it able to provide the accurate, efficient, and
+scalable monitoring, is in a separate higher layer.  Therefore, DAMON can be
+extended for other various address spaces by changing the two low primitives to
+others for the address spaces.
+
+This patchset makes the DAMON's low level primitives configurable and provide
+reference implementation of the primitives for the virtual memory address
+spaces and the physical memory address space.  Therefore, users can monitor
+both of the two address spaces by simply configuring the provided low level
+primitives.
+
+Kernel space users can also implement the primitives by themselves for their
+special use cases.  Clean/dirty/entire page cache, NUMA nodes, specific files,
+or block devices would be examples of such special use cases.
+
+[1] https://lore.kernel.org/linux-mm/20200602130125.20467-1-sjpark@amazon.com/
+
+
+Baseline and Complete Git Trees
+===============================
+
+The patches are based on the v5.7 plus DAMON v14 patchset and DAMOS RFC v10
+patchset.  You can also clone the complete git tree:
+
+    $ git clone git://github.com/sjp38/linux -b cdamon/rfc/v2
+
+The web is also available:
+https://github.com/sjp38/linux/releases/tag/cdamon/rfc/v2
+
+[1] https://lore.kernel.org/linux-mm/20200602130125.20467-1-sjpark@amazon.com/
+[2] https://lore.kernel.org/linux-mm/20200603071138.8152-1-sjpark@amazon.com/
+
+
+Sequence of Patches
+===================
+
+The sequence of patches is as follow.  The 1st patch defines the monitoring
+region again based on pure address range abstraction so that no assumption of
+virtual memory is in there.  The following 2nd patch cleans up code using the
+new abstraction.
+
+The 3rd patch allows users to configure the low level pritimives for
+initialization and dynamic update of the target address regions, which were
+previously coupled with virtual memory area.  Then, the 4th patch allow user
+space to also be able to set the monitoring target regions and document it in
+the 5th patch.
+
+The 6th patch further makes the access check primitives, which were based on
+PTE Accessed bit, configurable.  Now any address space can be supported.  The
+7th patch provides the reference implementations of the configurable primitives
+for physical memory monitoring.  The 8th patch makes the debugfs interface to
+be able to use the physical memory monitoring, and finally the 9th patch
+documents this.
+
+
+Patch History
+=============
+
+Changes from RFC v1
+(https://lore.kernel.org/linux-mm/20200409094232.29680-1-sjpark@amazon.com/)
+ - Provide the reference primitive implementations for the physical memory
+ - Connect the extensions with the debugfs interface
+
+SeongJae Park (9):
+  mm/damon: Use vm-independent address range concept
+  mm/damon: Clean up code using 'struct damon_addr_range'
+  mm/damon: Make monitoring target regions init/update configurable
+  mm/damon/debugfs: Allow users to set initial monitoring target regions
+  Docs/damon: Document 'initial_regions' feature
+  mm/damon: Make access check primitive configurable
+  mm/damon: Implement callbacks for physical memory monitoring
+  mm/damon/debugfs: Support physical memory monitoring
+  Docs/damon: Document physical memory monitoring support
+
+ Documentation/admin-guide/mm/damon/usage.rst |  56 ++-
+ include/linux/damon.h                        |  47 +-
+ mm/damon-test.h                              |  78 +--
+ mm/damon.c                                   | 504 ++++++++++++++++---
+ 4 files changed, 564 insertions(+), 121 deletions(-)
+
 -- 
-OUR GOLDEN OPPORTUNITY
+2.17.1
 
-Hello Dear Friend,
-
-Complement of the day, i hope you are doing great today. However, I am
-Mrs.Susan Jones, an auditor with one of the new generation banks here
-in Burkina Faso.
-
-I am writing you this letter based on the latest development at my
-Department. i discovered some abandoned huge amount of money, Ten
-Million, Five hundred thousand  United States Dollars.($10.500.000).
-Now I am only contacting you as a foreigner because this money cannot
-be approved to a local bank account here, but can only be approved to
-any foreign account and foreign beneficiary because the money is in US
-dollars
-
-This will be  a legitimate transaction once you accept to build trust
-with me and follow simple instruction doing the transfer process,
-until the total sum transfer out of the bank here to your own bank
-account any where in the world, and I agreed to share the total money
-50/50 with you once you successful confirmed it in your bank account.
-But any expenses doing the transfer process will be deduct from the
-amount before sharing, If you are interested to work with me and
-provide a good receiving bank account, get back to me as soon as
-possible with the following details below.
-
-Your full name
-Your Profession
-Your direct mobile phone number
-Your Scanned International passport or any of your identity
-
-NOTE: PLEASE IT YOU ARE NOT INTERESTED DON'T BORDER TO RESPOND BACK TO
-AVOID TIME WASTED.
-
-As soon as I receive these data's, I will forward to you the
-application form which you will send to the bank for the claim and
-transfer of the fund into your bank account as the  new beneficial.
-
-I am waiting to hear from you soon
-
-Yours
-Mrs.Susan Jones
