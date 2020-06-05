@@ -2,60 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2B86F1EFDC8
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Jun 2020 18:28:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 365E31EFDD5
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Jun 2020 18:28:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728548AbgFEQ1x (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 5 Jun 2020 12:27:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41084 "EHLO
+        id S1726024AbgFEQ2O (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 5 Jun 2020 12:28:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41124 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728545AbgFEQ1x (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Jun 2020 12:27:53 -0400
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com [IPv6:2607:f8b0:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45840C08C5C2;
-        Fri,  5 Jun 2020 09:27:52 -0700 (PDT)
-Received: by mail-ot1-x343.google.com with SMTP id k15so8075934otp.8;
-        Fri, 05 Jun 2020 09:27:52 -0700 (PDT)
+        with ESMTP id S1728593AbgFEQ2E (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Jun 2020 12:28:04 -0400
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com [IPv6:2607:f8b0:4864:20::342])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11A4FC08C5C2;
+        Fri,  5 Jun 2020 09:28:04 -0700 (PDT)
+Received: by mail-ot1-x342.google.com with SMTP id s13so8060479otd.7;
+        Fri, 05 Jun 2020 09:28:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=qaWHgv7G8arGLqeN9f/mRB2aVImrUHIGEHN6Of9KPb8=;
-        b=XF0Q6xNJdJiwi7qMy9P3Oc31JAnTkIsZIl1j+uxMq7JiwB8I//GKd2mCa5xT7dSXCb
-         cIZshXQ1nqiGvGDA3NgSHD1SN1qy6QUtiKMWrv40FYlCMGEip+3SAlP05J0GK3AGID0m
-         ikiPF/Lv88I1iTArJex7I82t2dZXsiT2yeKoRgPSkVVyIPeKdl3ytWMzsU2dZ1F/CblW
-         GMcgGhZAUu8ExUJZqrW3g1tQcXs1WhIyb8ktrf8duTedmiQenPFMuA6FuvhZb+LZ+JjD
-         UFCQq9GNd+GpNZM+1TZbX4F44QsqQE64DRLcSHwY5U7yUkz2EDBAYTsSJXprzMhaEnF/
-         /Nrg==
+        bh=/oUceEEdytDmHRfTQhpFS2WzwHNKr0aNr163SQEkf6I=;
+        b=CEsnFpinX3I865NmQLP7DvnIRAXAajmqoLq7xpAt6Juh7IUg6VVtWPPj7H4g+PR4Do
+         zYvLbji+muIZH7rhoCmpKQo2c0ii8SzNNatqcpilhq54x6h7f3qVj73agHUfPvO6WgTW
+         BjVRWV9sPgC0M+eRgqecJBTmXWOaXS0R138y/bUx4ZyBvj3G0YflFpHjeIYEWwLwTvHq
+         jXQaYa0O0kkKYhUQTjQv0B1xDWcliPrmskQmaOOC8YQdeTwUdX0Xa5TciwlzbO1+6Xsj
+         k7Fs85FuLwLRSnsQuC/BzEF+BZI53ktAR8UbydJG8dAJksY/Bw4EtTC5Sh71cVcvvzxl
+         WWjw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=qaWHgv7G8arGLqeN9f/mRB2aVImrUHIGEHN6Of9KPb8=;
-        b=IVyNddnrKx/4NWN03aN93LsF+bRcikTessZTEaofJAduuvggwJ7cnMOi9Bk6GCKmhV
-         jjAzcfnG/56PznJf5B/rnM1LrvdyKHeNNTQuZLWaaM2ay45w4dEbRoBRl6jFHm43tB4O
-         yzpuYFqZyZwo0wx/KroW1V9wBrfoiviUddpuUWcealtdRoIebWRVhDoPKCuLq6C6X8gP
-         pURn7BGjzStClJ0xeKG8aNecUpY0IeOE9ShKm36Q3YxElREwrBY2ekD9adbXG0t7PWm0
-         /AiYlxxwfxkLWT+1x/D7ZwiWTn4NsGEgyNl6lnVw/P9/+QdFYSZXmKd5QBGK7rCp69s6
-         YGkg==
-X-Gm-Message-State: AOAM531qry46z1eBI4pUa7VBhkw6yG+b12FWOWoaavyHh1EZMwkJHsnq
-        Kz6f4py4dLcXGXD7WDvPK2k=
-X-Google-Smtp-Source: ABdhPJxiqYFERsbUoOslSOqfxKe50BVyJLzgdDjZ3ssgdZfjFB6DYbHuWn7UHUzCJJGo7+zXtQCprw==
-X-Received: by 2002:a9d:3623:: with SMTP id w32mr8079587otb.91.1591374471607;
-        Fri, 05 Jun 2020 09:27:51 -0700 (PDT)
+        bh=/oUceEEdytDmHRfTQhpFS2WzwHNKr0aNr163SQEkf6I=;
+        b=OhPNjzzW/ti6wSI3LHAa8yCIk+/Al0/Woq+yCO12wCqAjSE431S8ZJDDv8L26awzuk
+         wcvIEf+akBiHwtgJQON0KrmXqo2JEPQ4Pl6HgT6YM4N+44RuhOMycDw1lQ/bQ/zAQSvl
+         vvzBMwcftgtCSz/0oPzMzZJR9VLp1g+l7Arl+E7O53yMUtb3jW0jpGheenNiXOFd+O2r
+         mBvHbVB+yamjmjrz/h7Zs5kCOdfdY+6Gs5VeQLq1JD2Pk/OzlbojSLDa9mX+BZNabe/h
+         ns0GnzwXnJW9m0stj4tF8FRNrjfhAOu/efIbvJoj/LxiTsBPdvPvYpuA3SM8iOOfUJfr
+         KO3Q==
+X-Gm-Message-State: AOAM533CUfsdyeqKdaPvDusdSPsAU0ov63y4qKsnlEGjHSfSULYUFvIK
+        +JxWe0XdP0DPye6ANNENr9g=
+X-Google-Smtp-Source: ABdhPJwbInfd1k/guqnCfu8qXaqvZZYTk7PGs9wTxq3qjLt4wKsMNeOHD88XRQY+ITEYKw5lGyjVtw==
+X-Received: by 2002:a9d:6044:: with SMTP id v4mr5705327otj.157.1591374483421;
+        Fri, 05 Jun 2020 09:28:03 -0700 (PDT)
 Received: from frodo.hsd1.co.comcast.net ([2601:284:8204:6ba0::aaac])
-        by smtp.googlemail.com with ESMTPSA id z13sm813894ooa.28.2020.06.05.09.27.50
+        by smtp.googlemail.com with ESMTPSA id z13sm813894ooa.28.2020.06.05.09.28.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 05 Jun 2020 09:27:50 -0700 (PDT)
+        Fri, 05 Jun 2020 09:28:02 -0700 (PDT)
 From:   Jim Cromie <jim.cromie@gmail.com>
 To:     jbaron@akamai.com, linux-kernel@vger.kernel.org,
         akpm@linuxfoundation.org, gregkh@linuxfoundation.org
 Cc:     linux@rasmusvillemoes.dk, Jim Cromie <jim.cromie@gmail.com>,
         Jonathan Corbet <corbet@lwn.net>,
         Will Deacon <will@kernel.org>, linux-doc@vger.kernel.org
-Subject: [PATCH 09/16] dyndbg: accept 'file foo.c:func1' and 'file foo.c:10-100'
-Date:   Fri,  5 Jun 2020 10:26:38 -0600
-Message-Id: <20200605162645.289174-10-jim.cromie@gmail.com>
+Subject: [PATCH 13/16] dyndbg: extend ddebug_parse_flags to accept optional leading filter-flags
+Date:   Fri,  5 Jun 2020 10:26:42 -0600
+Message-Id: <20200605162645.289174-14-jim.cromie@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200605162645.289174-1-jim.cromie@gmail.com>
 References: <20200605162645.289174-1-jim.cromie@gmail.com>
@@ -66,102 +66,100 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Accept these additional query forms:
-
-   echo "file $filestr +_" > control
-
-       path/to/file.c:100	# as from control, column 1
-       path/to/file.c:1-100	# or any legal line-range
-       path/to/file.c:func_A	# as from an editor/browser
-       path/to/file.c:drm_\*	# wildcards still work
-       path/to/file.c:*_foo	# lead wildcard too
-
-1st 2 examples are treated as line-ranges, 3,4 are treated as func's
-
-Doc these changes, and sprinkle in a few extra wild-card examples and
-trailing # explanation texts.
+change ddebug_parse_flags to accept optional filterflags before OP.
+this now sets the parameter added in ~1
 
 Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
 ---
- .../admin-guide/dynamic-debug-howto.rst       |  5 +++++
- lib/dynamic_debug.c                           | 20 ++++++++++++++++++-
- 2 files changed, 24 insertions(+), 1 deletion(-)
+ .../admin-guide/dynamic-debug-howto.rst       | 18 +++++++----
+ lib/dynamic_debug.c                           | 30 ++++++++++---------
+ 2 files changed, 28 insertions(+), 20 deletions(-)
 
 diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index 2854d418b31b..880d33d1782f 100644
+index 880d33d1782f..250ab30e2080 100644
 --- a/Documentation/admin-guide/dynamic-debug-howto.rst
 +++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -159,6 +159,7 @@ func
-     of each callsite.  Example::
+@@ -212,13 +212,19 @@ line
+ 	line -1605          // the 1605 lines from line 1 to line 1605
+ 	line 1600-          // all lines from line 1600 to the end of the file
  
- 	func svc_tcp_accept
-+	func *recv*		# in rfcomm, bluetooth, ping, tcp
+-The flags specification comprises a change operation followed
+-by one or more flag characters.  The change operation is one
+-of the characters::
++Flags Specification::
  
- file
-     The given string is compared against either the src-root relative
-@@ -167,6 +168,9 @@ file
+-  -    remove the given flags
+-  +    add the given flags
+-  =    set the flags to the given flags
++  flagspec	::= filterflags? OP modflags
++  filterflags	::= flagset
++  modflags	::= flagset
++  flagset	::= ([pfmltu_] | [PFMLTU_])+	# also cant have pP etc
++  OP		::= [-+=]
++
++OP: modify callsites per following flagset::
++
++  -    remove the following flags
++  +    add the following flags
++  =    set the flags to the following flags
  
- 	file svcsock.c
- 	file kernel/freezer.c	# ie column 1 of control file
-+	file drivers/usb/*	# all callsites under it
-+	file inode.c:start_*	# parse :tail as a func (above)
-+	file inode.c:1-100	# parse :tail as a line-range (above)
+ The flags are::
  
- module
-     The given string is compared against the module name
-@@ -176,6 +180,7 @@ module
- 
- 	module sunrpc
- 	module nfsd
-+	module drm*	# both drm, drm_kms_helper
- 
- format
-     The given string is searched for in the dynamic debug format
 diff --git a/lib/dynamic_debug.c b/lib/dynamic_debug.c
-index d43bc3547d3a..8f250c67acbe 100644
+index 32eb7d9545c7..90061833ef3f 100644
 --- a/lib/dynamic_debug.c
 +++ b/lib/dynamic_debug.c
-@@ -321,6 +321,8 @@ static int parse_linerange(struct ddebug_query *query, const char *first)
- 	} else {
- 		query->last_lineno = query->first_lineno;
- 	}
-+	vpr_info("parsed line %d-%d\n", query->first_lineno,
-+		 query->last_lineno);
- 	return 0;
+@@ -440,34 +440,36 @@ static int ddebug_read_flags(const char *str, struct flagsettings *f)
  }
  
-@@ -357,6 +359,7 @@ static int ddebug_parse_query(char *words[], int nwords,
+ /*
+- * Parse `str' as a flags specification, format [-+=][p]+.
+- * Sets up *maskp and *flagsp to be used when changing the
+- * flags fields of matched _ddebug's.  Returns 0 on success
+- * or <0 on error.
++ * Parse `str' as a flags-spec, ie: [pfmlt_]*[-+=][pfmlt_]+
++ * Fills flagsettings provided.  Returns 0 on success or <0 on error.
+  */
+-
+ static int ddebug_parse_flags(const char *str,
+ 			      struct flagsettings *mods,
+ 			      struct flagsettings *filter)
  {
- 	unsigned int i;
- 	int rc = 0;
-+	char *fline;
+ 	int op;
++	char *opp = strpbrk(str, "-+=");
  
- 	/* check we have an even number of words */
- 	if (nwords % 2 != 0) {
-@@ -373,7 +376,22 @@ static int ddebug_parse_query(char *words[], int nwords,
- 		if (!strcmp(words[i], "func")) {
- 			rc = check_set(&query->function, words[i+1], "func");
- 		} else if (!strcmp(words[i], "file")) {
--			rc = check_set(&query->filename, words[i+1], "file");
-+			if (check_set(&query->filename, words[i+1], "file"))
-+				return -EINVAL;
+-	switch (*str) {
+-	case '+':
+-	case '-':
+-	case '=':
+-		op = *str++;
+-		break;
+-	default:
+-		pr_err("bad flag-op %c, at start of %s\n", *str, str);
++	if (!opp) {
++		pr_err("no OP given in %s\n", str);
+ 		return -EINVAL;
+ 	}
++	op = *opp;
+ 	vpr_info("op='%c'\n", op);
+ 
++	if (opp != str) {
++		/* filterflags precedes OP, grab it */
++		*opp++ = '\0';
++		if (ddebug_read_flags(str, filter))
++			return -EINVAL;
++		str = opp;
++	} else
++		str++;
 +
-+			/* tail :$info is function or line-range */
-+			fline = strchr(query->filename, ':');
-+			if (!fline)
-+				break;
-+			*fline++ = '\0';
-+			if (isalpha(*fline) || *fline == '*' || *fline == '?') {
-+				/* take as function name */
-+				if (check_set(&query->function, fline, "func"))
-+					return -EINVAL;
-+			} else
-+				if (parse_linerange(query, fline))
-+					return -EINVAL;
-+
- 		} else if (!strcmp(words[i], "module")) {
- 			rc = check_set(&query->module, words[i+1], "module");
- 		} else if (!strcmp(words[i], "format")) {
+ 	if (ddebug_read_flags(str, mods))
+ 		return -EINVAL;
+ 
+-	/* calculate final flags, mask based upon op */
++	/* calculate final mods: flags, mask based upon op */
+ 	switch (op) {
+ 	case '=':
+ 		mods->mask = 0;
 -- 
 2.26.2
 
