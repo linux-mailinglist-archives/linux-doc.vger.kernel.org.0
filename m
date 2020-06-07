@@ -2,194 +2,163 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5FE7E1F08EB
-	for <lists+linux-doc@lfdr.de>; Sun,  7 Jun 2020 00:06:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D4BD11F0C30
+	for <lists+linux-doc@lfdr.de>; Sun,  7 Jun 2020 17:00:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728553AbgFFWGL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 6 Jun 2020 18:06:11 -0400
-Received: from mx.kolabnow.com ([95.128.36.40]:63954 "EHLO mx.kolabnow.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728205AbgFFWGK (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 6 Jun 2020 18:06:10 -0400
-Received: from localhost (unknown [127.0.0.1])
-        by ext-mx-out003.mykolab.com (Postfix) with ESMTP id E1B41407B9;
-        Sun,  7 Jun 2020 00:06:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
-        content-type:content-type:content-transfer-encoding:mime-version
-        :references:in-reply-to:message-id:date:date:subject:subject
-        :from:from:received:received:received; s=dkim20160331; t=
-        1591481165; x=1593295566; bh=dyX9DvLsSYBOsgK3WI7TcbDQj5A+EpzkvRh
-        0jzuyU5s=; b=VqfPcIN9AOAWLW9Mbn98dnKLKg6Zx8s9UgmasM9CISHRCk4vwil
-        F67X+Id/moe6J5jdVcs9I2A8zCM/WNDwKZ/wLAZAHT+hSCha886kaB4HamjGUloL
-        lhiKTbdeteqZKEY6iAq8Usnihqd5vK4DwG9gs0ZIq9+ekJQzn/R9feb+b97FfVPs
-        9X35hjaBDbPaRd4iHzTWWneHsQfmfbBpfY38qH0uGCVxFTF2XyMdqYPtl5qWJi4H
-        MiRJS6f9f2WOdAkH/9h4Axmreq+czpkD8S3aw2oSq/CKZJXShEKqElsbXbhbENnQ
-        QKorQAaTHrPyGDfOBQs65HOjBLk7V0TKDK/z2b7b2gWtW9lr5kzk99Py91Dyh3B4
-        xskeBLopXZ3F7JIymgmkdRWAevKVMgPVcUrpiE7nzUcvyOlUwBnjvlxnG+yg3ATb
-        uxDKO9sI2GTHLBtSGq5MTgmEQu/kqEZ1ypvQGFSz7Ae7nGvquttDuLucKs+VVyS9
-        uZynxGVyzZfiOwVl1t5uuHt5P/xmMfjXJ94xMrx1Br3fjeblm+9KYK0D5bBCJ0e7
-        MsGreTCCTAeBd+AesGVIwG21XQ9A4xT18Tlv92fBE6qF7LgC+P3ftwAkEgy8X/Qh
-        BBDiEpcVBPr274KgEf3vH0JIdN++zZ2rRRxaYihARaouXC74dOgIh06o=
-X-Virus-Scanned: amavisd-new at mykolab.com
-X-Spam-Flag: NO
-X-Spam-Score: -1.9
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
-        tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
-Received: from mx.kolabnow.com ([127.0.0.1])
-        by localhost (ext-mx-out003.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id l5Vsk_TJD0xR; Sun,  7 Jun 2020 00:06:05 +0200 (CEST)
-Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
-        by ext-mx-out003.mykolab.com (Postfix) with ESMTPS id 7F059403F7;
-        Sun,  7 Jun 2020 00:06:04 +0200 (CEST)
-Received: from ext-subm002.mykolab.com (unknown [10.9.6.2])
-        by int-mx003.mykolab.com (Postfix) with ESMTPS id 109022D9E;
-        Sun,  7 Jun 2020 00:06:04 +0200 (CEST)
-From:   Federico Vaga <federico.vaga@vaga.pv.it>
-To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Cc:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: it_IT: address invalid reference warnings
-Date:   Sun, 07 Jun 2020 00:06:02 +0200
-Message-ID: <11587824.O9o76ZdvQC@harkonnen>
-In-Reply-To: <3060760.44csPzL39Z@harkonnen>
-References: <20200531185618.7099-1-lukas.bulwahn@gmail.com> <3060760.44csPzL39Z@harkonnen>
+        id S1726619AbgFGPAL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 7 Jun 2020 11:00:11 -0400
+Received: from mail-am6eur05on2089.outbound.protection.outlook.com ([40.107.22.89]:48904
+        "EHLO EUR05-AM6-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726528AbgFGPAL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 7 Jun 2020 11:00:11 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=AbrNYNAYSN34ytYPjzX1Sh4cVh1i7y9yUHTZM9UFtf84q3EK+aibo2J3959yBnrkR/bqdJ1fcQaWeS8roFYF2Wn4hLrPbv9fHn/6cXHANLzplSL+eJRQvRH8ihWKOXmMft36B3MI4ADWhglMjS3UW47CUHkRPUnInQhERkfqDe0xxgxGkWrSdXsiB4n8hSRM7eR7GcrkTTGw1IJxSij8yGdeqYPIl25mIq6O6+AVckRxbLgf8uS54IBgbf0/vtMyAcC9LJu3aIAWVN//h2LFvjhmBlaPBqEmXdg3RHJeZdzm45DKRgDoIOOVEhS1hXFgPjMxyMfRpUS6v/KGbxFIuA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4H3ZYKBD0d8wSPg3602TbYTzd2fx+MyhEmZNwptvcF0=;
+ b=Pq+vxI32ODa0Na+SKXJPx6RwD8quVkOwNXh7ohYneH2IarLUlTVjvEmjKLt4axq16yiqQsyYsfQIsMq1XNq/wtAgRkUEEWYmSQPJlhndthtJfy20qp7nS5FF6taIiFC7bWiBhVRaaVRsIh/TGeRy/uL8AkZYnORiciXAsN5Oq3UD/iOoXxFsuQsJhuLpfqoxsT+9cfcZfsDEo7T40NZ44ATKTGKN6034Z72ujurU3uHlIDLOixLs6SwsqdNUklcrlqV/U6YEdJ4ra+0qNv704s9HTjno8xtrGo5omfZ6SCwwfy8UPmDAulogEzcYhcKIUJ+Ih2ZAZgyoWiIp2xEdQA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=mellanox.com; dmarc=pass action=none header.from=mellanox.com;
+ dkim=pass header.d=mellanox.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Mellanox.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=4H3ZYKBD0d8wSPg3602TbYTzd2fx+MyhEmZNwptvcF0=;
+ b=NRypGVuT5+WL1Uk9a9Q6dswAl9FTaYg8XRvvVHM2Uq+x8V9DH6Ssm1BwGrlGOOFNHMRziRrgIZBeJIXdd3GGU+KQ3JuYckx7pUBAKgm4iPDWNXtrObFepL9Apfxo4qqcB7Ywl22Um1JPekAwfwbFGpu7J6imdOURyKHNFuY/e3Y=
+Authentication-Results: vger.kernel.org; dkim=none (message not signed)
+ header.d=none;vger.kernel.org; dmarc=none action=none
+ header.from=mellanox.com;
+Received: from AM0PR0502MB3826.eurprd05.prod.outlook.com
+ (2603:10a6:208:1b::25) by AM0PR0502MB4003.eurprd05.prod.outlook.com
+ (2603:10a6:208:2::26) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.23; Sun, 7 Jun
+ 2020 15:00:05 +0000
+Received: from AM0PR0502MB3826.eurprd05.prod.outlook.com
+ ([fe80::2dae:c2a2:c26a:f5b]) by AM0PR0502MB3826.eurprd05.prod.outlook.com
+ ([fe80::2dae:c2a2:c26a:f5b%7]) with mapi id 15.20.3066.023; Sun, 7 Jun 2020
+ 15:00:05 +0000
+From:   Amit Cohen <amitc@mellanox.com>
+To:     netdev@vger.kernel.org
+Cc:     davem@davemloft.net, kuba@kernel.org, corbet@lwn.net,
+        jiri@mellanox.com, idosch@mellanox.com, shuah@kernel.org,
+        mkubecek@suse.cz, gustavo@embeddedor.com, amitc@mellanox.com,
+        cforno12@linux.vnet.ibm.com, andrew@lunn.ch, f.fainelli@gmail.com,
+        linux@rempel-privat.de, alexandru.ardelean@analog.com,
+        ayal@mellanox.com, petrm@mellanox.com, mlxsw@mellanox.com,
+        liuhangbin@gmail.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org
+Subject: [RFC PATCH net-next 00/10] Add extended state
+Date:   Sun,  7 Jun 2020 17:59:35 +0300
+Message-Id: <20200607145945.30559-1-amitc@mellanox.com>
+X-Mailer: git-send-email 2.20.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AM0PR10CA0015.EURPRD10.PROD.OUTLOOK.COM
+ (2603:10a6:208:17c::25) To AM0PR0502MB3826.eurprd05.prod.outlook.com
+ (2603:10a6:208:1b::25)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset="iso-8859-1"
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from dev-r-vrt-155.mtr.labs.mlnx (37.142.13.130) by AM0PR10CA0015.EURPRD10.PROD.OUTLOOK.COM (2603:10a6:208:17c::25) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3066.18 via Frontend Transport; Sun, 7 Jun 2020 15:00:03 +0000
+X-Mailer: git-send-email 2.20.1
+X-Originating-IP: [37.142.13.130]
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: b30a47bb-2987-4403-fca6-08d80af3767a
+X-MS-TrafficTypeDiagnostic: AM0PR0502MB4003:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <AM0PR0502MB40035F250984EF19CA155D49D7840@AM0PR0502MB4003.eurprd05.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:6430;
+X-Forefront-PRVS: 04270EF89C
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: gW3RjIla2duUG6hmSylELTC2O6rgHUwNmW51bnqtDMNrZ14dioM2PRyGm/Z+SbKqpvZRUOq9jU2RbCq2t54KOJ+yEZbpmnpJ4MEol7G4gQuBeX1f5Tjzic4k7owvbprrHHROg+VL32atKo5cx+eAIbolCF4TE0xbizOwx0TNWLLMu2TWE+yCnlB53x396pqq48xUAbpI0eoYYng3ZL3wpm0lne9+zSa8IfwTYLz1AyyJ+vMZlNdlSKB6+R71jucGQ4Nwa17V32SjhaQaYi+X0RCsbjB0Ufxi2AFbWBq1ykjrTu7+oEJCdNCIJ3A57P+6X/Qpy0ftebwUdjF5x9380A==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM0PR0502MB3826.eurprd05.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(4636009)(396003)(376002)(366004)(346002)(136003)(39860400002)(66476007)(66946007)(66556008)(1076003)(186003)(8936002)(16526019)(26005)(52116002)(478600001)(6506007)(36756003)(2906002)(6666004)(7416002)(5660300002)(8676002)(4326008)(83380400001)(6486002)(316002)(86362001)(6916009)(2616005)(956004)(6512007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: XaVXTVBnwVv4dzgwqMfkqcWVeClQsqtmMClljLKhv63X3BCPzbIUiZyHw9WuBIxe8Z8T9ZPnRww2Ib76EGyXaIxu6LK4Vs5VbR0FlZUmRhkdor8En1CGv9snX/RBDArA8uLqu/YGiN6oT4J1Kym0Yynllgm1K+2s8Ys2uKVVlhvVwPF8cXRZ9qwwYnnK8NOdz9Pu3KPQx0CGn2bMR9dJabMdpS9jf/Om0+E99fxvNp+At5kugQDUJ+DfhnGpDRbJC4dmPYMrg0/Pw7HL/gTEBVjVOtLH7glR49EYoZn8eiiRyMAfXq4Atzg6ORbEoIocwSc7++Hjq3LWDlMiXaLgI7h8qAy5wvMF+ADxcE8JfOMY9/H+f2To9LPNVC2hrmHYdwhRdX690A6r4SHiBYt54s1aLBU8/jK5nk6IzNYNnC9VrysMY4GQrpywmg/uyrliLK4orqKusjEk1SQaxN7zUppd50p/PuQAeu8R+JA5v9U=
+X-OriginatorOrg: Mellanox.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b30a47bb-2987-4403-fca6-08d80af3767a
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Jun 2020 15:00:05.6735
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: a652971c-7d2e-4d9b-a6a4-d149256f461b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: y2HrzcMKhN68ByauLRWJ6NjZ6ZbGhss5ex2Y2BITizoicgQSlhMSl92FMZJGSitc9VWFKzlbhE0vJG0LxYSDWg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM0PR0502MB4003
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-I re-read the documents with the full context.
+Currently, drivers can only tell whether the link is up/down,
+but no additional information is given.
 
-Moving to the directive :doc: for only those two references (like I was=20
-arguing in the previous email) will make the document inconsistent.
-So, the patch is fine for me as it is.
+This patch set provides an infrastructure that allows drivers to expose
+to the user more information in addition to the link state.
 
-I will finish and push the translation for ../core-api/symbol-namespace.rst
-and move the link again
+This information can save users time which will not be wasted
+trying to understand why the link is not up for example.
 
-On Tuesday, June 2, 2020 10:37:21 AM CEST Federico Vaga wrote:
-> On Sunday, May 31, 2020 8:56:18 PM CEST Lukas Bulwahn wrote:
-> > Documentation generation warns:
-> >   it_IT/kernel-hacking/hacking.rst:
-> >     WARNING: unknown document: ../core-api/symbol/namespaces
-> >  =20
-> >   it_IT/process/5.Posting.rst:
-> >     WARNING: undefined label: it_email_clients
-> >  =20
-> >   it_IT/process/submitting-patches.rst:
-> >     WARNING: undefined label: it_email_clients
-> >  =20
-> >   it_IT/process/howto.rst:
-> >      WARNING: undefined label: it_managementstyle
-> >=20
-> > Refer to English documentation, as Italian translation does not exist,
-> > and
->=20
-> The file exists! On my disk :D
-> My mistake, I have an almost done translation for that and of course I do
-> not see the warning.
->=20
-> > add labels for Italian process documents to resolve label references.
->=20
-> I think we have agreed to not use labels but instead to sue the directive
->=20
-> :doc: instead. This fix should happen in the document that points here. W=
-hen
-> :I
-> posted the new translations I removed those labels but forgot to fix:
-> it_IT/process/5.Posting.rst, it_IT/process/submitting-patches.rst and it_=
-IT/
-> process/howto.rst
->=20
-> :doc:`../process/email-clients`
-> :doc:`../process/management-style`
->=20
-> I should be more meticulous and regenerate the full translation every tim=
-e.
-> Lesson learned. Sorry for that and thanks
->=20
-> > Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-> > ---
-> > Jonathan, please pick this quick fix of warnings.
-> >=20
-> > applies on doc-next and next-20200529
-> >=20
-> >  Documentation/translations/it_IT/kernel-hacking/hacking.rst   | 4 ++--
-> >  Documentation/translations/it_IT/process/email-clients.rst    | 2 ++
-> >  Documentation/translations/it_IT/process/management-style.rst | 2 ++
-> >  3 files changed, 6 insertions(+), 2 deletions(-)
-> >=20
-> > diff --git a/Documentation/translations/it_IT/kernel-hacking/hacking.rst
-> > b/Documentation/translations/it_IT/kernel-hacking/hacking.rst index
-> > 6aab27a8d323..e9a2e92134f0 100644
-> > --- a/Documentation/translations/it_IT/kernel-hacking/hacking.rst
-> > +++ b/Documentation/translations/it_IT/kernel-hacking/hacking.rst
-> > @@ -634,7 +634,7 @@ Definita in ``include/linux/export.h``
-> >=20
-> >  Questa =E8 una variate di `EXPORT_SYMBOL()` che permette di specificar=
-e uno
-> >  spazio dei nomi. Lo spazio dei nomi =E8 documentato in
-> >=20
-> > -:doc:`../core-api/symbol-namespaces`
-> > +:doc:`../../../core-api/symbol-namespaces`
-> >=20
-> >  :c:func:`EXPORT_SYMBOL_NS_GPL()`
-> > =20
-> >  --------------------------------
-> >=20
-> > @@ -643,7 +643,7 @@ Definita in ``include/linux/export.h``
-> >=20
-> >  Questa =E8 una variate di `EXPORT_SYMBOL_GPL()` che permette di specif=
-icare
-> >=20
-> > uno spazio dei nomi. Lo spazio dei nomi =E8 documentato in
-> > -:doc:`../core-api/symbol-namespaces`
-> > +:doc:`../../../core-api/symbol-namespaces`
-> >=20
-> >  Procedure e convenzioni
-> >  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >=20
-> > diff --git a/Documentation/translations/it_IT/process/email-clients.rst
-> > b/Documentation/translations/it_IT/process/email-clients.rst index
-> > 89abf6d325f2..66d3d65776f7 100644
-> > --- a/Documentation/translations/it_IT/process/email-clients.rst
-> > +++ b/Documentation/translations/it_IT/process/email-clients.rst
-> > @@ -3,6 +3,8 @@
-> >=20
-> >  :Original: :doc:`../../../process/email-clients`
-> >  :Translator: Alessia Mantegazza <amantegazza@vaga.pv.it>
-> >=20
-> > +.. _it_email_clients:
-> > +
-> >=20
-> >  Informazioni sui programmi di posta elettronica per Linux
-> >  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> >=20
-> > diff --git a/Documentation/translations/it_IT/process/management-style.=
-rst
-> > b/Documentation/translations/it_IT/process/management-style.rst index
-> > c709285138a7..76ed074082ea 100644
-> > --- a/Documentation/translations/it_IT/process/management-style.rst
-> > +++ b/Documentation/translations/it_IT/process/management-style.rst
-> > @@ -3,6 +3,8 @@
-> >=20
-> >  :Original: :doc:`../../../process/management-style`
-> >  :Translator: Alessia Mantegazza <amantegazza@vaga.pv.it>
-> >=20
-> > +.. _it_managementstyle:
-> > +
-> >=20
-> >  Il modello di gestione del kernel Linux
-> >  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Expand the existing LINKSTATE_GET command with attributes for extended
+state.
 
+From userspace, user can see the extended state like:
+$ ethtool ethX
+...
+Link detected: no (No cable)
 
+In addition, when drivers have another information about the general
+extended state, it can be passed also using substate field.
 
+From userspace:
+$ ethtool ethX
+...
+Link detected: no (Autoneg failure, No partner detected)
+
+In the future the infrastructure can be used for example by PHY drivers to
+report whether a downshift to a lower speed occurred, something like:
+$ ethtool ethX
+...
+Link detected: yes (downshifted)
+
+Patches #1-#3 Move mlxsw ethtool code to separate file
+Patches #4-#5 Add infrastructure in ethtool
+Patches #6-#7 Add support of extended state in mlxsw driver
+Patches #8-#10 Add tests cases
+
+Amit Cohen (10):
+  mlxsw: spectrum_dcb: Rename mlxsw_sp_port_headroom_set()
+  mlxsw: Move ethtool_ops to spectrum_ethtool.c
+  mlxsw: spectrum_ethtool: Move mlxsw_sp_port_type_speed_ops structs
+  ethtool: Add link extended state
+  Documentation: networking: ethtool-netlink: Add link extended state
+  mlxsw: reg: Port Diagnostics Database Register
+  mlxsw: spectrum_ethtool: Add link extended state
+  selftests: forwarding: ethtool: Move different_speeds_get() to
+    ethtool_lib
+  selftests: forwarding: forwarding.config.sample: Add port with no
+    cable connected
+  selftests: forwarding: Add tests for ethtool extended state
+
+ Documentation/networking/ethtool-netlink.rst  |   56 +-
+ drivers/net/ethernet/mellanox/mlxsw/Makefile  |    3 +-
+ drivers/net/ethernet/mellanox/mlxsw/reg.h     |   51 +
+ .../net/ethernet/mellanox/mlxsw/spectrum.c    | 1540 +---------------
+ .../net/ethernet/mellanox/mlxsw/spectrum.h    |   45 +
+ .../ethernet/mellanox/mlxsw/spectrum_dcb.c    |    6 +-
+ .../mellanox/mlxsw/spectrum_ethtool.c         | 1641 +++++++++++++++++
+ include/linux/ethtool.h                       |   22 +
+ include/uapi/linux/ethtool.h                  |   70 +
+ include/uapi/linux/ethtool_netlink.h          |    2 +
+ net/ethtool/linkstate.c                       |   40 +
+ .../selftests/net/forwarding/ethtool.sh       |   17 -
+ .../net/forwarding/ethtool_extended_state.sh  |  103 ++
+ .../selftests/net/forwarding/ethtool_lib.sh   |   17 +
+ .../net/forwarding/forwarding.config.sample   |    3 +
+ 15 files changed, 2057 insertions(+), 1559 deletions(-)
+ create mode 100644 drivers/net/ethernet/mellanox/mlxsw/spectrum_ethtool.c
+ create mode 100755 tools/testing/selftests/net/forwarding/ethtool_extended_state.sh
+
+-- 
+2.20.1
 
