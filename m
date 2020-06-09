@@ -2,109 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 147A11F4091
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2020 18:22:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 80EC51F4127
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2020 18:40:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726286AbgFIQWv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 9 Jun 2020 12:22:51 -0400
-Received: from mga01.intel.com ([192.55.52.88]:64397 "EHLO mga01.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725894AbgFIQWv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 9 Jun 2020 12:22:51 -0400
-IronPort-SDR: ygPXPU273i+Y56NthJaHSQ8MplyXOI8FicpPcQgiF6yXFsfE/uadEFkmw2X20XEQRQAWet+s1g
- hykR9GTkPN6w==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Jun 2020 09:22:50 -0700
-IronPort-SDR: u3wLAA8jj9T4eckHnT2rBy6BcpvPBTqQNd6uftqv3XbmTuAaa6yaqsI0W4n0B2oc0tCM9TpqsM
- MsBnNJWQ6D4A==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,492,1583222400"; 
-   d="scan'208";a="349568491"
-Received: from gklab-125-110.igk.intel.com ([10.91.125.110])
-  by orsmga001.jf.intel.com with ESMTP; 09 Jun 2020 09:22:46 -0700
-From:   Piotr Stankiewicz <piotr.stankiewicz@intel.com>
-To:     Bjorn Helgaas <bhelgaas@google.com>, linux-pci@vger.kernel.org
-Cc:     Piotr Stankiewicz <piotr.stankiewicz@intel.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andrew Murray <amurray@thegoodpenguin.co.uk>,
-        Logan Gunthorpe <logang@deltatee.com>,
-        Andy Shevchenko <andriy.shevchenko@intel.com>,
-        Zenghui Yu <yuzenghui@huawei.com>,
-        Kelsey Skunberg <skunberg.kelsey@gmail.com>,
-        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
-        Krzysztof Wilczynski <kw@linux.com>,
-        Kuppuswamy Sathyanarayanan 
-        <sathyanarayanan.kuppuswamy@linux.intel.com>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        Yicong Yang <yangyicong@hisilicon.com>,
-        Denis Efremov <efremov@linux.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v3 02/15] PCI: Add macro for message signalled interrupt types
-Date:   Tue,  9 Jun 2020 18:22:40 +0200
-Message-Id: <20200609162243.9102-1-piotr.stankiewicz@intel.com>
-X-Mailer: git-send-email 2.17.2
-In-Reply-To: <20200609091148.32749-1-piotr.stankiewicz@intel.com>
-References: <20200609091148.32749-1-piotr.stankiewicz@intel.com>
+        id S1731074AbgFIQkb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 Jun 2020 12:40:31 -0400
+Received: from smtprelay0150.hostedemail.com ([216.40.44.150]:44916 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1731073AbgFIQkb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Jun 2020 12:40:31 -0400
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay06.hostedemail.com (Postfix) with ESMTP id 2F7D4183B25B7;
+        Tue,  9 Jun 2020 16:40:29 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 50,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:967:973:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1540:1593:1594:1711:1730:1747:1777:1792:1981:2194:2199:2393:2525:2560:2563:2682:2685:2828:2859:2933:2937:2939:2942:2945:2947:2951:2954:3022:3138:3139:3140:3141:3142:3352:3622:3865:3866:3867:3868:3870:3871:3872:3874:3934:3936:3938:3941:3944:3947:3950:3953:3956:3959:4321:4361:5007:6691:7807:7875:7903:7974:9025:10004:10400:10848:11026:11232:11658:11914:12043:12048:12296:12297:12740:12760:12895:13069:13311:13357:13439:14180:14181:14659:14721:21080:21451:21627:21740:21788:21810:30054:30070:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:1,LUA_SUMMARY:none
+X-HE-Tag: paste04_0b0768b26dc4
+X-Filterd-Recvd-Size: 1978
+Received: from XPS-9350.home (unknown [47.151.136.130])
+        (Authenticated sender: joe@perches.com)
+        by omf14.hostedemail.com (Postfix) with ESMTPA;
+        Tue,  9 Jun 2020 16:40:27 +0000 (UTC)
+Message-ID: <2bf362d58b320b3081703d75ea419274fb889e9a.camel@perches.com>
+Subject: Re: [PATCH v3 0/7] Venus dynamic debug
+From:   Joe Perches <joe@perches.com>
+To:     Stanimir Varbanov <stanimir.varbanov@linaro.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-btrfs@vger.kernel.org, linux-acpi@vger.kernel.org,
+        netdev@vger.kernel.org
+Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jason Baron <jbaron@akamai.com>
+Date:   Tue, 09 Jun 2020 09:40:26 -0700
+In-Reply-To: <20200609104604.1594-1-stanimir.varbanov@linaro.org>
+References: <20200609104604.1594-1-stanimir.varbanov@linaro.org>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.36.2-0ubuntu1 
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-There are several places in the kernel which check/ask for MSI or MSI-X
-interrupts. It would make sense to have a macro which defines all types
-of message signalled interrupts, to use in such situations. Add
-PCI_IRQ_MSI_TYPES, for this purpose.
+On Tue, 2020-06-09 at 13:45 +0300, Stanimir Varbanov wrote:
+> Hello,
+> 
+> Here is the third version of dynamic debug improvements in Venus
+> driver.  As has been suggested on previous version by Joe [1] I've
+> made the relevant changes in dynamic debug core to handle leveling
+> as more generic way and not open-code/workaround it in the driver.
+> 
+> About changes:
+>  - added change in the dynamic_debug and in documentation
+>  - added respective pr_debug_level and dev_dbg_level
+> 
+> regards,
+> Stan
+> 
+> [1] https://lkml.org/lkml/2020/5/21/668
 
-Signed-off-by: Piotr Stankiewicz <piotr.stankiewicz@intel.com>
-Suggested-by: Andy Shevchenko <andriy.shevchenko@intel.com>
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@intel.com>
-Reviewed-by: Logan Gunthorpe <logang@deltatee.com>
----
- Documentation/PCI/msi-howto.rst | 5 +++--
- include/linux/pci.h             | 4 ++--
- 2 files changed, 5 insertions(+), 4 deletions(-)
+This capability is already clumsily used by many
+drivers that use a module level "debug" flag.
 
-diff --git a/Documentation/PCI/msi-howto.rst b/Documentation/PCI/msi-howto.rst
-index aa2046af69f7..2800ff5aa395 100644
---- a/Documentation/PCI/msi-howto.rst
-+++ b/Documentation/PCI/msi-howto.rst
-@@ -105,7 +105,8 @@ if it can't meet the minimum number of vectors.
- The flags argument is used to specify which type of interrupt can be used
- by the device and the driver (PCI_IRQ_LEGACY, PCI_IRQ_MSI, PCI_IRQ_MSIX).
- A convenient short-hand (PCI_IRQ_ALL_TYPES) is also available to ask for
--any possible kind of interrupt.  If the PCI_IRQ_AFFINITY flag is set,
-+any possible kind of interrupt, and (PCI_IRQ_MSI_TYPES) to ask for message
-+signalled interrupts (MSI or MSI-X).  If the PCI_IRQ_AFFINITY flag is set,
- pci_alloc_irq_vectors() will spread the interrupts around the available CPUs.
- 
- To get the Linux IRQ numbers passed to request_irq() and free_irq() and the
-@@ -160,7 +161,7 @@ the single MSI mode for a device.  It could be done by passing two 1s as
- Some devices might not support using legacy line interrupts, in which case
- the driver can specify that only MSI or MSI-X is acceptable::
- 
--	nvec = pci_alloc_irq_vectors(pdev, 1, nvec, PCI_IRQ_MSI | PCI_IRQ_MSIX);
-+	nvec = pci_alloc_irq_vectors(pdev, 1, nvec, PCI_IRQ_MSI_TYPES);
- 	if (nvec < 0)
- 		goto out_err;
- 
-diff --git a/include/linux/pci.h b/include/linux/pci.h
-index c79d83304e52..a99094f17b21 100644
---- a/include/linux/pci.h
-+++ b/include/linux/pci.h
-@@ -1431,8 +1431,8 @@ int pci_set_vga_state(struct pci_dev *pdev, bool decode,
-  */
- #define PCI_IRQ_VIRTUAL		(1 << 4)
- 
--#define PCI_IRQ_ALL_TYPES \
--	(PCI_IRQ_LEGACY | PCI_IRQ_MSI | PCI_IRQ_MSIX)
-+#define PCI_IRQ_MSI_TYPES	(PCI_IRQ_MSI | PCI_IRQ_MSIX)
-+#define PCI_IRQ_ALL_TYPES	(PCI_IRQ_LEGACY | PCI_IRQ_MSI_TYPES)
- 
- /* kmem_cache style wrapper around pci_alloc_consistent() */
- 
--- 
-2.17.2
+$ git grep -P "MODULE_PARM.*\bdebug\b"|wc -l
+501
+
+That's a _lot_ of homebrewed mechanisms.
+
+Making dynamic debug have this as a feature would
+help consolidate and standardize the capability.
+
+ftrace is definitely useful, but not quite as
+lightweight and doesn't have the typical uses.
+
 
