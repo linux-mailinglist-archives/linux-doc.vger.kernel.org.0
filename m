@@ -2,70 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0A7381F3216
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2020 03:45:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D42561F3412
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Jun 2020 08:26:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727114AbgFIBp4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 Jun 2020 21:45:56 -0400
-Received: from mga14.intel.com ([192.55.52.115]:17503 "EHLO mga14.intel.com"
+        id S1727868AbgFIG0A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 Jun 2020 02:26:00 -0400
+Received: from m43-7.mailgun.net ([69.72.43.7]:48010 "EHLO m43-7.mailgun.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726960AbgFIBpz (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 8 Jun 2020 21:45:55 -0400
-IronPort-SDR: mXe1OjZDjqhtK7CAVNpBkmzYwdLym7wXJ3mk8Tec+YTiA5H7sHp0Evejc990yG4dF1tMd9+kuB
- tTDRSYOgbj0A==
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 08 Jun 2020 18:45:55 -0700
-IronPort-SDR: jmJ9jh+uT03iIvLaD2I5xqbipPHwU1APUl1lUSh7ZiNJr0EDR+YzvPZZgcLtuzcpXyYTgOo8kO
- 6sxB/lur4uhw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.73,490,1583222400"; 
-   d="scan'208";a="306119714"
-Received: from lkp-server01.sh.intel.com (HELO 12d5c0ac8e64) ([10.239.97.150])
-  by orsmga008.jf.intel.com with ESMTP; 08 Jun 2020 18:45:52 -0700
-Received: from kbuild by 12d5c0ac8e64 with local (Exim 4.92)
-        (envelope-from <lkp@intel.com>)
-        id 1jiTKq-00006V-2k; Tue, 09 Jun 2020 01:45:52 +0000
-Date:   Tue, 9 Jun 2020 09:45:05 +0800
-From:   kernel test robot <lkp@intel.com>
-To:     Sean Paul <sean@poorly.run>, dri-devel@lists.freedesktop.org
-Cc:     kbuild-all@lists.01.org, linux-doc@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        David Airlie <airlied@linux.ie>, daniel.vetter@ffwll.ch,
-        Chris Wilson <chris@chris-wilson.co.uk>,
-        Sean Paul <seanpaul@chromium.org>, tzimmermann@suse.de,
-        Steven Rostedt <rostedt@goodmis.org>
-Subject: [RFC PATCH] drm/print: trace_arr can be static
-Message-ID: <20200609014505.GA50763@37d9db08ab2a>
-References: <20200608210505.48519-14-sean@poorly.run>
+        id S1727040AbgFIGZ5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 9 Jun 2020 02:25:57 -0400
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
+ s=smtp; t=1591683957; h=Date: Message-Id: Cc: To: References:
+ In-Reply-To: From: Subject: Content-Transfer-Encoding: MIME-Version:
+ Content-Type: Sender; bh=Vx2GPsWxM6ireZ0v4FaW6ZxUHXpBk99SgBRd9srXTWQ=;
+ b=IctOi5jEooa3xb84gCCiS8pteD+Ibgy96u8+My67WCxqtXsG12YePYLJNqKBJjHJ56TVJGSD
+ 7bosWbm6hCKhjgsNSgHdLzXRe6jB4jbBccN+/OjP5tbv9qPEpgxzZaFu6KVht52SdIh6xjAx
+ /6DQ+hN871n6Fjm4aLyGcplrkmE=
+X-Mailgun-Sending-Ip: 69.72.43.7
+X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n02.prod.us-east-1.postgun.com with SMTP id
+ 5edf2b70f9a707134514296d (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Tue, 09 Jun 2020 06:25:52
+ GMT
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+        id 8860AC433CA; Tue,  9 Jun 2020 06:25:51 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+        aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=0.5 required=2.0 tests=ALL_TRUSTED,MISSING_DATE,
+        MISSING_MID,SPF_NONE,URIBL_BLOCKED autolearn=no autolearn_force=no
+        version=3.4.0
+Received: from potku.adurom.net (88-114-240-156.elisa-laajakaista.fi [88.114.240.156])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        (Authenticated sender: kvalo)
+        by smtp.codeaurora.org (Postfix) with ESMTPSA id A63A9C433CA;
+        Tue,  9 Jun 2020 06:25:46 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org A63A9C433CA
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=none smtp.mailfrom=kvalo@codeaurora.org
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200608210505.48519-14-sean@poorly.run>
-X-Patchwork-Hint: ignore
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 3/9] net: wireless: ath: fix wiki website url
+From:   Kalle Valo <kvalo@codeaurora.org>
+In-Reply-To: <20200605154112.16277-4-f.suligoi@asem.it>
+References: <20200605154112.16277-4-f.suligoi@asem.it>
+To:     Flavio Suligoi <f.suligoi@asem.it>
+Cc:     Johannes Berg <johannes@sipsolutions.net>,
+        "David S . Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Christian Lamparter <chunkeey@googlemail.com>,
+        Johan Hovold <johan@kernel.org>,
+        Saurav Girepunje <saurav.girepunje@gmail.com>,
+        Larry Finger <Larry.Finger@lwfinger.net>,
+        Emmanuel Grumbach <emmanuel.grumbach@intel.com>,
+        Luca Coelho <luciano.coelho@intel.com>,
+        <linux-wireless@vger.kernel.org>, <b43-dev@lists.infradead.org>,
+        Intel Linux Wireless <linuxwifi@intel.com>,
+        <netdev@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, Flavio Suligoi <f.suligoi@asem.it>
+User-Agent: pwcli/0.1.0-git (https://github.com/kvalo/pwcli/) Python/3.5.2
+Message-Id: <20200609062551.8860AC433CA@smtp.codeaurora.org>
+Date:   Tue,  9 Jun 2020 06:25:51 +0000 (UTC)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Flavio Suligoi <f.suligoi@asem.it> wrote:
 
-Signed-off-by: kernel test robot <lkp@intel.com>
----
- drm_print.c |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+> In some ath files, the wiki url is still the old
+> "wireless.kernel.org" instead of the new
+> "wireless.wiki.kernel.org"
+> 
+> Signed-off-by: Flavio Suligoi <f.suligoi@asem.it>
+> Signed-off-by: Kalle Valo <kvalo@codeaurora.org>
 
-diff --git a/drivers/gpu/drm/drm_print.c b/drivers/gpu/drm/drm_print.c
-index c4bef38921db1..a50d0b24c911f 100644
---- a/drivers/gpu/drm/drm_print.c
-+++ b/drivers/gpu/drm/drm_print.c
-@@ -69,7 +69,7 @@ MODULE_PARM_DESC(trace, DEBUG_PARM_DESC("tracefs"));
- module_param_named(trace, __drm_debug_trace, int, 0600);
- 
- #ifdef CONFIG_TRACING
--struct trace_array *trace_arr;
-+static struct trace_array *trace_arr;
- #endif
- 
- void __drm_puts_coredump(struct drm_printer *p, const char *str)
+Patch applied to ath-next branch of ath.git, thanks.
+
+1141215c745b ath: fix wiki website url
+
+-- 
+https://patchwork.kernel.org/patch/11589901/
+
+https://wireless.wiki.kernel.org/en/developers/documentation/submittingpatches
+
