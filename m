@@ -2,81 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CC7401F4E48
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2020 08:35:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E18E21F4E8B
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Jun 2020 09:08:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726072AbgFJGfg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 10 Jun 2020 02:35:36 -0400
-Received: from smtprelay0048.hostedemail.com ([216.40.44.48]:35340 "EHLO
-        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1725988AbgFJGfg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Jun 2020 02:35:36 -0400
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
-        by smtprelay08.hostedemail.com (Postfix) with ESMTP id 90372182CF665;
-        Wed, 10 Jun 2020 06:35:34 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:968:973:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1541:1593:1594:1711:1730:1747:1777:1792:2393:2553:2559:2562:2828:3138:3139:3140:3141:3142:3353:3622:3865:3866:3867:3868:3870:3871:3872:3873:3874:4321:5007:6119:6742:7903:8604:9393:10004:10400:10848:11232:11658:11914:12297:12663:12740:12760:12895:13069:13255:13311:13357:13439:14659:14721:21080:21433:21627:30054:30062:30075:30090:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:1,LUA_SUMMARY:none
-X-HE-Tag: fork19_2e0cbf626dc9
-X-Filterd-Recvd-Size: 2396
-Received: from XPS-9350.home (unknown [47.151.136.130])
-        (Authenticated sender: joe@perches.com)
-        by omf05.hostedemail.com (Postfix) with ESMTPA;
-        Wed, 10 Jun 2020 06:35:32 +0000 (UTC)
-Message-ID: <f94b2abe85d7c849ca76677ff5a1e0b272bb3bdf.camel@perches.com>
-Subject: Re: [PATCH v3 1/7] Documentation: dynamic-debug: Add description of
- level bitmask
-From:   Joe Perches <joe@perches.com>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Stanimir Varbanov <stanimir.varbanov@linaro.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-media@vger.kernel.org, linux-arm-msm@vger.kernel.org,
-        linux-btrfs@vger.kernel.org, linux-acpi@vger.kernel.org,
-        netdev@vger.kernel.org, Jason Baron <jbaron@akamai.com>,
+        id S1726309AbgFJHIc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 10 Jun 2020 03:08:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51664 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726095AbgFJHIb (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Jun 2020 03:08:31 -0400
+Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AC23EC03E96B;
+        Wed, 10 Jun 2020 00:08:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=bombadil.20170209; h=In-Reply-To:Content-Type:MIME-Version
+        :References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=Uz81Z+0BCBNqLv4PQFmkR/zfQQ+FgD1974AzuRQ6XTg=; b=LaT2eRoYttZjSzfpscy3GH1Bgz
+        cmrv+2X+EcRvPARdeRGxi2ZZcElfyYLyNY2gOPbjMH73bC0SzCvdWQaUnQNsbhjSN/l7EFvwDl4id
+        hoM9IzulHRSVPoeXuND/BBiPWYi9/RhduLG9jFdKRjd8bSSqp1ipDXmUJf69Pi98QGXr19JrqA+L7
+        v/W1ZPdsemFSgMZyfVjcRiKeGAC7q50Hu/5I6WfF1QZkoY60Xtfpyt4xru99E+235tv+GK67GHivH
+        CXXj0VDiU/As2RT5RzLxmAwzXA+c0lEW6iaWluKaK5SeLH36uzj4PNJF/ePxJ071DRjKrW7iWA5MQ
+        4KIoTAKQ==;
+Received: from hch by bombadil.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1jiuqa-00086x-9d; Wed, 10 Jun 2020 07:08:28 +0000
+Date:   Wed, 10 Jun 2020 00:08:28 -0700
+From:   Christoph Hellwig <hch@infradead.org>
+To:     Piotr Stankiewicz <piotr.stankiewicz@intel.com>
+Cc:     Bjorn Helgaas <bhelgaas@google.com>, linux-pci@vger.kernel.org,
         Jonathan Corbet <corbet@lwn.net>,
-        Jim Cromie <jim.cromie@gmail.com>
-Date:   Tue, 09 Jun 2020 23:35:31 -0700
-In-Reply-To: <20200610063103.GD1907120@kroah.com>
-References: <20200609104604.1594-1-stanimir.varbanov@linaro.org>
-         <20200609104604.1594-2-stanimir.varbanov@linaro.org>
-         <20200609111615.GD780233@kroah.com>
-         <ba32bfa93ac2e147c2e0d3a4724815a7bbf41c59.camel@perches.com>
-         <20200610063103.GD1907120@kroah.com>
-Content-Type: text/plain; charset="ISO-8859-1"
-User-Agent: Evolution 3.36.2-0ubuntu1 
+        Andrew Murray <amurray@thegoodpenguin.co.uk>,
+        Logan Gunthorpe <logang@deltatee.com>,
+        Andy Shevchenko <andriy.shevchenko@intel.com>,
+        Zenghui Yu <yuzenghui@huawei.com>,
+        Kelsey Skunberg <skunberg.kelsey@gmail.com>,
+        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+        Krzysztof Wilczynski <kw@linux.com>,
+        Kuppuswamy Sathyanarayanan 
+        <sathyanarayanan.kuppuswamy@linux.intel.com>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        Yicong Yang <yangyicong@hisilicon.com>,
+        Denis Efremov <efremov@linux.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 02/15] PCI: Add macro for message signalled interrupt
+ types
+Message-ID: <20200610070828.GA29678@infradead.org>
+References: <20200609091148.32749-1-piotr.stankiewicz@intel.com>
+ <20200609162243.9102-1-piotr.stankiewicz@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200609162243.9102-1-piotr.stankiewicz@intel.com>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by bombadil.infradead.org. See http://www.infradead.org/rpr.html
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 2020-06-10 at 08:31 +0200, Greg Kroah-Hartman wrote:
-> On Tue, Jun 09, 2020 at 09:58:07AM -0700, Joe Perches wrote:
-> > On Tue, 2020-06-09 at 13:16 +0200, Greg Kroah-Hartman wrote:
-> > > What is wrong with the existing control of dynamic
-> > > debug messages that you want to add another type of arbitrary grouping
-> > > to it? 
-> > 
-> > There is no existing grouping mechanism.
-> 
-> info/warn/err/dbg is what I am referring to.
-> 
-> > Many drivers and some subsystems used an internal one
-> > before dynamic debug.
-> > 
-> > $ git grep "MODULE_PARM.*\bdebug\b"|wc -l
-> > 501
-> 
-> Yes, and it's horrid and needs to be cleaned up, not added to.
+On Tue, Jun 09, 2020 at 06:22:40PM +0200, Piotr Stankiewicz wrote:
+> There are several places in the kernel which check/ask for MSI or MSI-X
+> interrupts. It would make sense to have a macro which defines all types
+> of message signalled interrupts, to use in such situations. Add
+> PCI_IRQ_MSI_TYPES, for this purpose.
 
-Or unified so driver authors have a standardized mechanism
-rather than reinventing or doing things differently.
+To state my objection voices in patch 3 here again:
 
-> In the beginning, yes, adding loads of different types of debugging
-> options to a driver is needed by the author, but by the time it is added
-> to the kernel, all of that should be able to be removed and only a
-> single "enable debug" should be all that is needed.
+I think this is a very bad idea.  Everyone knows what MSI and MSI-X
+mean and that directly maps to specification.  The new IMS interrupt
+scheme from the Intel SIOV spec for example is a message signalled
+interrupt type as well and should not be picked up automatically.
 
-No one does that.
-
-
+If we want to change anything in this area we should probably remove
+PCI_IRQ_ALL_TYPES instead..
