@@ -2,31 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E8DF61F6F94
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Jun 2020 23:49:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5F28C1F6FC8
+	for <lists+linux-doc@lfdr.de>; Fri, 12 Jun 2020 00:18:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726414AbgFKVtF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 11 Jun 2020 17:49:05 -0400
-Received: from mail.kernel.org ([198.145.29.99]:39408 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726339AbgFKVtE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 11 Jun 2020 17:49:04 -0400
-Received: from kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com (unknown [163.114.132.4])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 4751420760;
-        Thu, 11 Jun 2020 21:49:03 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1591912144;
-        bh=kG9tJvQSXQuwDEKvpJKWIByUTyvPzHfBKCwYfJp9Z/o=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=S6PBGVh4qrxhz8+j4g5EwKhjPg24DwXRZv8ElOCXrDbUrhTSiluVgvBCB/16+KnKF
-         qQ/hNesvQzdOOl21yfhtRmHOzODjP5JWT+aBmWildpESnGTQnR568I6OA0LWoRb+/V
-         LVmmDoACpFo+yeU4/YyUUbX1bYTMiOwxxB5kN3LQ=
-Date:   Thu, 11 Jun 2020 14:49:01 -0700
-From:   Jakub Kicinski <kuba@kernel.org>
+        id S1726306AbgFKWSy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 11 Jun 2020 18:18:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47704 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726251AbgFKWSx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Jun 2020 18:18:53 -0400
+Received: from mail-pj1-x1044.google.com (mail-pj1-x1044.google.com [IPv6:2607:f8b0:4864:20::1044])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 39063C03E96F
+        for <linux-doc@vger.kernel.org>; Thu, 11 Jun 2020 15:18:52 -0700 (PDT)
+Received: by mail-pj1-x1044.google.com with SMTP id k2so2780800pjs.2
+        for <linux-doc@vger.kernel.org>; Thu, 11 Jun 2020 15:18:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=networkplumber-org.20150623.gappssmtp.com; s=20150623;
+        h=date:from:to:cc:subject:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=eIuvM/OKnK+zQ/LartuQZpG8vXnwcvR8INYrEn0R5R4=;
+        b=NUyFh8Q2TnsU8ltEQNe7J7LwTSvZrB6Cq9gkQ7p5A+Clk29jyYVy8MNifGzGpV0zyZ
+         PEefeHax6ZoqLeSb3VVRP+PWkxrj+RrpbBJvfMYIik97YLFmrzXlPgFlbQz5KZjU8gy6
+         FD+sskFw5KdEPWJsl4GqjpBpU/RMvJH+MIeGfKV8MYs70gu+EUZF+hWwSPw0kfDwHPle
+         ZbucTPb38yKN7iGYzkXH9gaSR7BxD7Mht9ZCh5JiXI/1CkOOqHHKvlkmi7otROPHv3e2
+         l1jqDX7qi+7Ebe4cwalx9dTi+SXNrcCsHzUONy8SCpODoHUcEfAsjN7me19JZKYjoVqy
+         VUcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=eIuvM/OKnK+zQ/LartuQZpG8vXnwcvR8INYrEn0R5R4=;
+        b=avuyT7gDn+rWlEokscZAzr/YEGDfhm+U9wO0DDPqdvt+2XOsdb/1whVTk3DV3Zau9p
+         dAssm3skXa9ojAKckQUkf/OigTqiIRD/gSEg67twN+VqVLYhM43qo8UC+k4AzMD18M1a
+         /AEVYAGP8eWD76GeUifeX7/00m6q33ha65AX0MQaVXsQF9NhY5RLY8gOKDKmUQPbvPxI
+         m4L+hHRari/3eZ4/scmkcrUk8aQCgzYWufECZiVMm/bUn1JuQAKOrxSk7Ckha+2fvrqQ
+         fr9jocF4ASyXX2oHTc239JJqJ8BPk14i3jrZPchC+4ZajW5GM3BekvnSXI8UtM8JUpDl
+         Q9uQ==
+X-Gm-Message-State: AOAM5328hh7pmhan8wxqwcr8OeHXXvunT42MeTwitFpZGluaV1omQjo2
+        QKS/1UsJrd0t8Kf/0iiDbKlUEs4trUs=
+X-Google-Smtp-Source: ABdhPJwGLgBVqD466hTlBYJLbaLCOy72mLHwmyH1kGI2DFm6zhwNicxqC3HQ2ZEkoZ3+VYJ2qM7xvg==
+X-Received: by 2002:a17:90a:b013:: with SMTP id x19mr10429690pjq.229.1591913931484;
+        Thu, 11 Jun 2020 15:18:51 -0700 (PDT)
+Received: from hermes.lan (204-195-22-127.wavecable.com. [204.195.22.127])
+        by smtp.gmail.com with ESMTPSA id t186sm2670253pfc.39.2020.06.11.15.18.50
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 11 Jun 2020 15:18:51 -0700 (PDT)
+Date:   Thu, 11 Jun 2020 15:18:42 -0700
+From:   Stephen Hemminger <stephen@networkplumber.org>
 To:     "Kirsher, Jeffrey T" <jeffrey.t.kirsher@intel.com>
-Cc:     "davem@davemloft.net" <davem@davemloft.net>,
+Cc:     Jakub Kicinski <kuba@kernel.org>,
+        "davem@davemloft.net" <davem@davemloft.net>,
         "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
         "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
         "klassert@kernel.org" <klassert@kernel.org>,
@@ -47,7 +72,7 @@ Cc:     "davem@davemloft.net" <davem@davemloft.net>,
         "chessman@tux.org" <chessman@tux.org>
 Subject: Re: [RFC 1/8] docs: networking: reorganize driver documentation
  again
-Message-ID: <20200611144901.42120dfc@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+Message-ID: <20200611151842.392642c5@hermes.lan>
 In-Reply-To: <61CC2BC414934749BD9F5BF3D5D94044986F4FAE@ORSMSX112.amr.corp.intel.com>
 References: <20200611173010.474475-1-kuba@kernel.org>
         <20200611173010.474475-2-kuba@kernel.org>
@@ -60,41 +85,40 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 11 Jun 2020 21:17:49 +0000 Kirsher, Jeffrey T wrote:
-> > @@ -8626,18 +8626,18 @@ W:	http://e1000.sourceforge.net/
-> >  Q:	http://patchwork.ozlabs.org/project/intel-wired-lan/list/
-> >  T:	git git://git.kernel.org/pub/scm/linux/kernel/git/jkirsher/net-queue.git
-> >  T:	git git://git.kernel.org/pub/scm/linux/kernel/git/jkirsher/next-queue.git
-> > -F:	Documentation/networking/device_drivers/intel/e100.rst
-> > -F:	Documentation/networking/device_drivers/intel/e1000.rst
-> > -F:	Documentation/networking/device_drivers/intel/e1000e.rst
-> > -F:	Documentation/networking/device_drivers/intel/fm10k.rst
-> > -F:	Documentation/networking/device_drivers/intel/i40e.rst
-> > -F:	Documentation/networking/device_drivers/intel/iavf.rst
-> > -F:	Documentation/networking/device_drivers/intel/ice.rst
-> > -F:	Documentation/networking/device_drivers/intel/igb.rst
-> > -F:	Documentation/networking/device_drivers/intel/igbvf.rst
-> > -F:	Documentation/networking/device_drivers/intel/ixgb.rst
-> > -F:	Documentation/networking/device_drivers/intel/ixgbe.rst
-> > -F:	Documentation/networking/device_drivers/intel/ixgbevf.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/e100.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/e1000.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/e1000e.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/fm10k.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/i40e.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/iavf.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/ice.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/igb.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/igbvf.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/ixgb.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/ixgbe.rst
-> > +F:	Documentation/networking/device_drivers/ethernet/intel/ixgbevf.rst  
-> [Kirsher, Jeffrey T] 
-> 
-> With this patch, the above MAINTAIERS entries can be reduced to a single line.  This can now become:
-> 
-> F: Documentation/networking/device_drivers/ethernet/intel/*
-> 
-> No need to list out all the documented files now that I support/maintain all documentation in the above folder.
+On Thu, 11 Jun 2020 21:17:49 +0000
+"Kirsher, Jeffrey T" <jeffrey.t.kirsher@intel.com> wrote:
 
-Ah, good point, the Wi-Fi is no longer there!
+> > -----Original Message-----
+> > From: Jakub Kicinski <kuba@kernel.org>
+> > Sent: Thursday, June 11, 2020 10:30
+> > To: davem@davemloft.net
+> > Cc: netdev@vger.kernel.org; linux-doc@vger.kernel.org; Jakub Kicinski
+> > <kuba@kernel.org>; klassert@kernel.org; akiyano@amazon.com;
+> > irusskikh@marvell.com; ioana.ciornei@nxp.com; kys@microsoft.com;
+> > saeedm@mellanox.com; jdmason@kudzu.us; snelson@pensando.io; GR-Linux-
+> > NIC-Dev@marvell.com; stuyoder@gmail.com; Kirsher, Jeffrey T
+> > <jeffrey.t.kirsher@intel.com>; sgoutham@marvell.com; luobin9@huawei.com;
+> > csully@google.com; kou.ishizaki@toshiba.co.jp; peppe.cavallaro@st.com;
+> > chessman@tux.org
+> > Subject: [RFC 1/8] docs: networking: reorganize driver documentation again
+> > 
+> > Organize driver documentation by device type. Most documents
+> > have fairly verbose yet uninformative names, so let users
+> > first select a well defined device type, and then search for
+> > a particular driver.
+> > 
+> > While at it rename the section from Vendor drivers to
+> > Hardware drivers. This seems more accurate, besides people
+> > sometimes refer to out-of-tree drivers as vendor drivers.
+> > 
+> > Signed-off-by: Jakub Kicinski <kuba@kernel.org>
+
+
+How much of it is still relevant and useful?
+
+The last time I checked, lots of this had bad advice about settings.
+And there was lots of drivers documenting what was generic Linux
+functionality
+
+And still there were references to old commands like ifconfig or ifenslave.
+
