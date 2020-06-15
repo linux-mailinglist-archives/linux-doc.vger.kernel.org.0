@@ -2,44 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C08691F8C5F
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2020 04:59:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C61471F8C6F
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Jun 2020 05:22:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728028AbgFOC7N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 14 Jun 2020 22:59:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44696 "EHLO
+        id S1728044AbgFODWX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 14 Jun 2020 23:22:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48214 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727946AbgFOC7N (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 14 Jun 2020 22:59:13 -0400
+        with ESMTP id S1728034AbgFODWX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 14 Jun 2020 23:22:23 -0400
 Received: from bombadil.infradead.org (bombadil.infradead.org [IPv6:2607:7c80:54:e::133])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 20546C061A0E;
-        Sun, 14 Jun 2020 19:59:13 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 33951C061A0E;
+        Sun, 14 Jun 2020 20:22:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
         d=infradead.org; s=bombadil.20170209; h=Content-Transfer-Encoding:
         Content-Type:MIME-Version:Date:Message-ID:Subject:From:Cc:To:Sender:Reply-To:
         Content-ID:Content-Description:In-Reply-To:References;
-        bh=zMs2S73ZRwT7pTwkzGE7eHsG3b9G7ZiyeRv99uoKbqo=; b=QdrmcYg2iPlcqcJ+My5P2SyN3W
-        pf3VQaZGyauCZG93aJj/9cmG2CPzppRgiG8Jl0I8LIa7jfWiex2YgRPLjeFF2VYOMB+E3VQRtXKxd
-        mL7p+XJ6ReWiR42Bh2GVQyN1pXMwBzclSstfKpyRh3D6HXm+NrlJZwIcit9xPmVazKs3nv8KQ2zIN
-        XozM/5Y8qjT47ElTAkBRgLJz0Kn00W6WUJludlFKHRcd82I0xI7zU/pL1SW/RfP6Q+QoID3XB3OYw
-        jTl80VCBAsh0rL1oTajQYn8jkYMb7SfVZmGgY2T9kF4E1qtMvnBLjc/sP7U4IfAnHQmXSxEPwd0m1
-        YhpIjAvA==;
+        bh=WsF94qVVL3zbAw5XLTLmD0BKXAsD4rIRKIfvjwWdoZc=; b=cVuZRDYsYTZnjFwLT/9HNauGZJ
+        YiIK5bEvH2swlOTiY82gp41LRsMwpOnc9tyRKD8rwSWFvzFR9M8i+ynMBjw5c+4E9C6sfBGOfREBO
+        MUNJdBCg9uMgKSmprqVHBxYTes9vKK92jkxMjLd/s90facgTOrWMSyDDDfJaji5NUMBNhvt5xUuy3
+        /ht4q+LgiNDO9UxR61GUSVktj3jleMPtgT8RImeHrglH4c4pz8P2BfSmrpoI0QbioDGA7/lgKvmdv
+        3kPMzqOsk4Jv9u7iG8mFyv42Dg5xcZS2B6HYlhKqwkCo1K/IuDqkVqi4lyvcgxHbhaKPAM+dIw+zf
+        0JDed3ww==;
 Received: from [2601:1c0:6280:3f0::19c2]
         by bombadil.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1jkfL2-0002YI-M8; Mon, 15 Jun 2020 02:59:08 +0000
+        id 1jkfhU-0000Ap-S8; Mon, 15 Jun 2020 03:22:20 +0000
 To:     LKML <linux-kernel@vger.kernel.org>,
-        Linux-sh list <linux-sh@vger.kernel.org>
-Cc:     Rich Felker <dalias@libc.org>, Christoph Hellwig <hch@lst.de>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Yoshinori Sato <ysato@users.sourceforge.jp>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+        Andrew Morton <akpm@linux-foundation.org>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        Michel Lespinasse <walken@google.com>
 From:   Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH] Documentation: remove SH-5 index entries
-Message-ID: <71e1f336-ef5c-f5e9-25cf-16bd4439b9f9@infradead.org>
-Date:   Sun, 14 Jun 2020 19:59:07 -0700
+Subject: [PATCH] Documentation: fix filesystems/locking.rst malformed table
+ warnings
+Message-ID: <12c2afd1-2dcf-2ea0-02aa-bc2759729c77@infradead.org>
+Date:   Sun, 14 Jun 2020 20:22:19 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.9.0
 MIME-Version: 1.0
@@ -53,46 +51,64 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Randy Dunlap <rdunlap@infradead.org>
 
-Remove SH-5 documentation index entries following the removal
-of SH-5 source code.
+Fix Sphinx malformed table warnings in filesystems/locking.rst:
 
-Error: Cannot open file ../arch/sh/mm/tlb-sh5.c
-Error: Cannot open file ../arch/sh/mm/tlb-sh5.c
-Error: Cannot open file ../arch/sh/include/asm/tlb_64.h
-Error: Cannot open file ../arch/sh/include/asm/tlb_64.h
+lnx-58-rc1/Documentation/filesystems/locking.rst:443: WARNING: Malformed table.
+Text in column margin in table line 8.
 
-Fixes: 3b69e8b45711 ("Merge tag 'sh-for-5.8' of git://git.libc.org/linux-sh")
+lnx-58-rc1/Documentation/filesystems/locking.rst:620: WARNING: Malformed table.
+Text in column margin in table line 2.
+
+Fixes: ec23eb54fbc7 ("docs: fs: convert docs without extension to ReST")
+Fixes: c1e8d7c6a7a6 ("mmap locking API: convert mmap_sem comments")
 Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: Rich Felker <dalias@libc.org>
-Cc: Christoph Hellwig <hch@infradead.org>
-Cc: Arnd Bergmann <arnd@arndb.de>
-Cc: ysato@users.sourceforge.jp
-Cc: linux-sh@vger.kernel.org
-Cc: Geert Uytterhoeven <geert@linux-m68k.org>
-Cc: Linus Torvalds <torvalds@linux-foundation.org>
+Cc: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Cc: Michel Lespinasse <walken@google.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>
 ---
- Documentation/sh/index.rst |   12 ------------
- 1 file changed, 12 deletions(-)
+ Documentation/filesystems/locking.rst |   12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
---- lnx-58-rc1.orig/Documentation/sh/index.rst
-+++ lnx-58-rc1/Documentation/sh/index.rst
-@@ -16,18 +16,6 @@ Store Queue API
- .. kernel-doc:: arch/sh/kernel/cpu/sh4/sq.c
-    :export:
+--- lnx-58-rc1.orig/Documentation/filesystems/locking.rst
++++ lnx-58-rc1/Documentation/filesystems/locking.rst
+@@ -433,15 +433,15 @@ prototypes::
  
--SH-5
------
--
--TLB Interfaces
--~~~~~~~~~~~~~~
--
--.. kernel-doc:: arch/sh/mm/tlb-sh5.c
--   :internal:
--
--.. kernel-doc:: arch/sh/include/asm/tlb_64.h
--   :internal:
--
- Machine Specific Interfaces
- ===========================
+ locking rules:
  
+-==========		=============	=================	=========
++======================	=============	=================	=========
+ ops			inode->i_lock	blocked_lock_lock	may block
+-==========		=============	=================	=========
++======================	=============	=================	=========
+ lm_notify:		yes		yes			no
+ lm_grant:		no		no			no
+ lm_break:		yes		no			no
+ lm_change		yes		no			no
+ lm_breaker_owns_lease:	no		no			no
+-==========		=============	=================	=========
++======================	=============	=================	=========
+ 
+ buffer_head
+ ===========
+@@ -616,9 +616,9 @@ prototypes::
+ 
+ locking rules:
+ 
+-=============	========	===========================
++=============	=========	===========================
+ ops		mmap_lock	PageLocked(page)
+-=============	========	===========================
++=============	=========	===========================
+ open:		yes
+ close:		yes
+ fault:		yes		can return with page locked
+@@ -626,7 +626,7 @@ map_pages:	yes
+ page_mkwrite:	yes		can return with page locked
+ pfn_mkwrite:	yes
+ access:		yes
+-=============	========	===========================
++=============	=========	===========================
+ 
+ ->fault() is called when a previously not present pte is about
+ to be faulted in. The filesystem must find and return the page associated
 
