@@ -2,63 +2,62 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 730611FD1F1
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2020 18:26:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 32E061FD1FE
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2020 18:29:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726927AbgFQQ0D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 17 Jun 2020 12:26:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48950 "EHLO
+        id S1727031AbgFQQ0V (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 17 Jun 2020 12:26:21 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49018 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726329AbgFQQ0A (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jun 2020 12:26:00 -0400
-Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com [IPv6:2607:f8b0:4864:20::344])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BAF59C06174E;
-        Wed, 17 Jun 2020 09:26:00 -0700 (PDT)
-Received: by mail-ot1-x344.google.com with SMTP id u23so2079978otq.10;
-        Wed, 17 Jun 2020 09:26:00 -0700 (PDT)
+        with ESMTP id S1727027AbgFQQ0T (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jun 2020 12:26:19 -0400
+Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com [IPv6:2607:f8b0:4864:20::241])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 81735C06174E;
+        Wed, 17 Jun 2020 09:26:19 -0700 (PDT)
+Received: by mail-oi1-x241.google.com with SMTP id d67so2289987oig.6;
+        Wed, 17 Jun 2020 09:26:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=Ps1bO1kQHItdDmcSsrlnZa+L4139j2nCHXNY+hwPMZE=;
-        b=rY7aGYuyvGNoUcTS7ONAtIYM5RurX0RW/QQNDXRPImZ8Ns72rgQ+9lL89BY04XrgP8
-         NNsTigo+RUdiNYGJ3DKTqgVKZWlUI1F6mARW2PfatGc5JfNaJyTdpgIlqVG4MfBSW4/3
-         KYkPLhiJGh9qTplV+grMuX7YOwoVxqsE5xkw9Y2fE/G77K+JJKzFjqt9Xts7Q5JccKIG
-         P2NJ+t7LS60oBQzECRupva66jKa2HFQUVaswXz4J+4Gu6a+u9ItOkBolT8izkaKMaW9k
-         Mm3LhOtuS7tgqHnvQRYS5hJff6MAG+ihe+Nq8SkOi/RNVjPom0DaCE5ECGbigalUmueg
-         s9XA==
+        bh=PdkZKVR16MdSVQoBLIpL51nmGbmD1+v/7iGjqOOjmME=;
+        b=Dbtvu4xLzqPGcKfLMjUwQN4Gpb6HMSfY5tu1ARyHNMcGaez4cOxIsNnwXf2tgShq/J
+         RM60ruOCD3AvM7RyihbPeCNX1rl6JSZUKWIVHaNlkl9e9bk3Gwh4zd/VXC3SDRPHNYTK
+         nezaf11htO8ELBzUyGQl67u8vZI0wL6OX27t0Uu+oUb6WIy/eweVWHvCqd2oOcfV/dPX
+         vvNgcO76EVZmuGuQG1t/gBDxGsjKYZUlYn90YxGIulT82K6mIliaj9Epa+gDibz0tRT/
+         J8K1AHlpipHFid4rMFoc6UC8mG++Z28YE6tRPUw0Y59kfZxK0X3K4MoYc8nCb/+n6swT
+         aewA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Ps1bO1kQHItdDmcSsrlnZa+L4139j2nCHXNY+hwPMZE=;
-        b=fWbUqSV+pOtjI3qyncvSEIuJX2zbKL2L4PfiXfuM+vQWirddp4X+MYkU0PjNige+8E
-         4nh7uGLrOISqc/FAGQgBSOMpA6Wi/PLXcXDYX2ohwO29wR4hjuIuxOCNaGQmoLgpYrBU
-         cxf9w+5a5XYMny0UEcEySPNR4+Dt6wjToSuFfsRj2OZvmondKlZuAh7Hiv+K6/Zh7IT4
-         qQkDa7KXdp7SCbjmKzPkmSwh4DnUmBoxmKm602gbAiK9oEOMRfVthNZkNb4P6l3eHFHb
-         tswDltOAbghvo7aIQ5Ed0Ygh8pzuOBtzyXp74/JuN8Tb/fXL3c2080+GWL1G5b4ujXyR
-         A0QA==
-X-Gm-Message-State: AOAM532eS150PFGj53ZomHOldHgPN7jgogt7VS7Ib9R0ptqjkmzHsnNP
-        j8rJF1NYInqDa/iwW1GZgXY=
-X-Google-Smtp-Source: ABdhPJx06rIE7+OLPegglj+QtfIReATt29iqjezv+3U/G3UzLsUWDwl0LUmNk6PX8CsR4sqcS4bEcw==
-X-Received: by 2002:a9d:22aa:: with SMTP id y39mr7326189ota.76.1592411160154;
-        Wed, 17 Jun 2020 09:26:00 -0700 (PDT)
+        bh=PdkZKVR16MdSVQoBLIpL51nmGbmD1+v/7iGjqOOjmME=;
+        b=eJN/ds+8+9xyAaXXrLova8iD933CmmGOFhUlwZG1Ovwj+071qSet53eqvpkICxpEHB
+         0Pl8lbMwMi4kzNteh1gEEEXaI3/QXLe04t/NtbvBCfbl716GmHgYZphgyNwwpTI42LFu
+         QDRcUVL8YqD2wd6rJg28jy0cp56xJSejX52RJ9jvZgKtglwskK88zEC4LdkN0bH59b6S
+         XWOQLBF85oPEMbVAQtIvKFd0fgmqo0BpQjdRbh7oUWs1SNgV5/iL7S3ndKz4xL1Wgd5u
+         IOk8bj2aDKarJSeuj2PU36ZnGUxFi5qcOCq2Jl7QKKEO3Ekt1+TmOFh1JRcMc7xz1rEa
+         aeOA==
+X-Gm-Message-State: AOAM530blsZDYEMrHy9Ak0a9xaMY136SYKGKH4T39t6yq3pVSuXIMj5F
+        ZuV7TeBSnkJ9qwu1py8ltCA=
+X-Google-Smtp-Source: ABdhPJztQ+bknChtbESszSkftZkjZaxn/m4Y7o2pLnYH60MsTa6VRoauNVY0nWOBMSSmz29H9t7dtQ==
+X-Received: by 2002:a54:4889:: with SMTP id r9mr8214025oic.107.1592411178874;
+        Wed, 17 Jun 2020 09:26:18 -0700 (PDT)
 Received: from frodo.hsd1.co.comcast.net ([2601:284:8204:6ba0::ae4b])
-        by smtp.googlemail.com with ESMTPSA id h7sm95877otk.48.2020.06.17.09.25.58
+        by smtp.googlemail.com with ESMTPSA id h7sm95877otk.48.2020.06.17.09.26.17
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Jun 2020 09:25:59 -0700 (PDT)
+        Wed, 17 Jun 2020 09:26:18 -0700 (PDT)
 From:   Jim Cromie <jim.cromie@gmail.com>
 To:     jbaron@akamai.com, linux-kernel@vger.kernel.org,
         akpm@linuxfoundation.org, gregkh@linuxfoundation.org
 Cc:     linux@rasmusvillemoes.dk, Jim Cromie <jim.cromie@gmail.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Orson Zhai <orson.zhai@unisoc.com>,
         Andrew Morton <akpm@linux-foundation.org>,
-        Will Deacon <will@kernel.org>, Petr Mladek <pmladek@suse.com>,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v3 02/21] dyndbg-docs: initialization is done early, not arch
-Date:   Wed, 17 Jun 2020 10:25:15 -0600
-Message-Id: <20200617162536.611386-3-jim.cromie@gmail.com>
+        Petr Mladek <pmladek@suse.com>, Will Deacon <will@kernel.org>,
+        Orson Zhai <orson.zhai@unisoc.com>, linux-doc@vger.kernel.org
+Subject: [PATCH v3 13/21] dyndbg: accept 'file foo.c:func1' and 'file foo.c:10-100'
+Date:   Wed, 17 Jun 2020 10:25:26 -0600
+Message-Id: <20200617162536.611386-14-jim.cromie@gmail.com>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <20200617162536.611386-1-jim.cromie@gmail.com>
 References: <20200617162536.611386-1-jim.cromie@gmail.com>
@@ -69,29 +68,102 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-since cf964976484 in 2012, initialization is done with early_initcall,
-update the Docs, which still say arch_initcall.
+Accept these additional query forms:
+
+   echo "file $filestr +_" > control
+
+       path/to/file.c:100	# as from control, column 1
+       path/to/file.c:1-100	# or any legal line-range
+       path/to/file.c:func_A	# as from an editor/browser
+       path/to/file.c:drm_\*	# wildcards still work
+       path/to/file.c:*_foo	# lead wildcard too
+
+1st 2 examples are treated as line-ranges, 3,4 are treated as func's
+
+Doc these changes, and sprinkle in a few extra wild-card examples and
+trailing # explanation texts.
 
 Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
 ---
- Documentation/admin-guide/dynamic-debug-howto.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ .../admin-guide/dynamic-debug-howto.rst       |  5 +++++
+ lib/dynamic_debug.c                           | 20 ++++++++++++++++++-
+ 2 files changed, 24 insertions(+), 1 deletion(-)
 
 diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index 57108f64afc8..1423af580bed 100644
+index 1423af580bed..6c04aea8f4cd 100644
 --- a/Documentation/admin-guide/dynamic-debug-howto.rst
 +++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -250,8 +250,8 @@ the syntax described above, but must not exceed 1023 characters.  Your
- bootloader may impose lower limits.
+@@ -164,6 +164,7 @@ func
+     of each callsite.  Example::
  
- These ``dyndbg`` params are processed just after the ddebug tables are
--processed, as part of the arch_initcall.  Thus you can enable debug
--messages in all code run after this arch_initcall via this boot
-+processed, as part of the early_initcall.  Thus you can enable debug
-+messages in all code run after this early_initcall via this boot
- parameter.
+ 	func svc_tcp_accept
++	func *recv*		# in rfcomm, bluetooth, ping, tcp
  
- On an x86 system for example ACPI enablement is a subsys_initcall and::
+ file
+     The given string is compared against either the src-root relative
+@@ -172,6 +173,9 @@ file
+ 
+ 	file svcsock.c
+ 	file kernel/freezer.c	# ie column 1 of control file
++	file drivers/usb/*	# all callsites under it
++	file inode.c:start_*	# parse :tail as a func (above)
++	file inode.c:1-100	# parse :tail as a line-range (above)
+ 
+ module
+     The given string is compared against the module name
+@@ -181,6 +185,7 @@ module
+ 
+ 	module sunrpc
+ 	module nfsd
++	module drm*	# both drm, drm_kms_helper
+ 
+ format
+     The given string is searched for in the dynamic debug format
+diff --git a/lib/dynamic_debug.c b/lib/dynamic_debug.c
+index ae6e523fdecd..7eb963b1bd11 100644
+--- a/lib/dynamic_debug.c
++++ b/lib/dynamic_debug.c
+@@ -321,6 +321,8 @@ static int parse_linerange(struct ddebug_query *query, const char *first)
+ 	} else {
+ 		query->last_lineno = query->first_lineno;
+ 	}
++	vpr_info("parsed line %d-%d\n", query->first_lineno,
++		 query->last_lineno);
+ 	return 0;
+ }
+ 
+@@ -357,6 +359,7 @@ static int ddebug_parse_query(char *words[], int nwords,
+ {
+ 	unsigned int i;
+ 	int rc = 0;
++	char *fline;
+ 
+ 	/* check we have an even number of words */
+ 	if (nwords % 2 != 0) {
+@@ -372,7 +375,22 @@ static int ddebug_parse_query(char *words[], int nwords,
+ 		if (!strcmp(words[i], "func")) {
+ 			rc = check_set(&query->function, words[i+1], "func");
+ 		} else if (!strcmp(words[i], "file")) {
+-			rc = check_set(&query->filename, words[i+1], "file");
++			if (check_set(&query->filename, words[i+1], "file"))
++				return -EINVAL;
++
++			/* tail :$info is function or line-range */
++			fline = strchr(query->filename, ':');
++			if (!fline)
++				break;
++			*fline++ = '\0';
++			if (isalpha(*fline) || *fline == '*' || *fline == '?') {
++				/* take as function name */
++				if (check_set(&query->function, fline, "func"))
++					return -EINVAL;
++			} else {
++				if (parse_linerange(query, fline))
++					return -EINVAL;
++			}
+ 		} else if (!strcmp(words[i], "module")) {
+ 			rc = check_set(&query->module, words[i+1], "module");
+ 		} else if (!strcmp(words[i], "format")) {
 -- 
 2.26.2
 
