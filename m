@@ -2,154 +2,167 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 24FC51FD20C
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2020 18:29:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 42B0D1FD4FE
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2020 20:59:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727796AbgFQQ0w (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 17 Jun 2020 12:26:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49094 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727123AbgFQQ0l (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jun 2020 12:26:41 -0400
-Received: from mail-ot1-x341.google.com (mail-ot1-x341.google.com [IPv6:2607:f8b0:4864:20::341])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2F9D3C06174E;
-        Wed, 17 Jun 2020 09:26:41 -0700 (PDT)
-Received: by mail-ot1-x341.google.com with SMTP id 97so2104235otg.3;
-        Wed, 17 Jun 2020 09:26:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=xcutluLP+7Js3WRjnKBmD6q3bRgL5hNvRJ1jP16HZuA=;
-        b=FCk35xGB/WfDsD0tb2+CCp+Dak+divhn+pb/Kn/3+RKa2pjp0Lxhz8vgR74/QvSih6
-         65OoCaJwfWPKIBzVEIJ4jUkmUAWmgr/ybGlGsZJlU10ueXOyc2dhucE2qII6VnkQBtxe
-         0z35UTUwrCg4qBN0JSEJyOLxGuRuqR6mVz+8AYqTMYM58Awzd3ZFs9c81jh3uXP1Zk2t
-         a9mSs+Zz8Qs+pOcjAUkNnaa+76+HY9M9fdFDn+LwTBJQpjnea5N6xfN7DK+iqZmi2iV7
-         7P6EGf42R4OME07KsAXGTAcFrYSKDs9eWZZL9+Och48k4YZLmxj+wkTklbfFcfh4B9Xk
-         gL7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=xcutluLP+7Js3WRjnKBmD6q3bRgL5hNvRJ1jP16HZuA=;
-        b=Hqwvxxth7T/CREfTn8ilshDrMrE6wc5SATChB80+rwFXdbq6uKCxG47ANnSdq/tMuT
-         MpLwGEV3t7wDaCQD/rHqB6qgW44CNlNn7NnFudUBWb6eBtOnPZJGsQkV4aeEAVTPZ4U9
-         1i5PZkpy3y3XtgNam4belJFRv7bZCucvjQxgSADpFZBlT5dpDf/pKz/R5Iz24PbwuY9w
-         38NtizzDyiK48DKS8NrXecDlEeMCCYMnKjnRNQTfyFIp8EeySSV5hWad4LQqHB/jAn7R
-         nfQocJf5lZXM2ajEBwNPplxSD6mvPEzZhj4uK0waBHrSW5yVHoeLHRC+ryYf3XPHKLJq
-         G+zQ==
-X-Gm-Message-State: AOAM531R0T3uZeBIjcgxUD0mbw+rmkmxf0Bu/lXSge6QHWTvGBnEu/VP
-        4ENWjsV/FnvXHrj+xtyVSCI=
-X-Google-Smtp-Source: ABdhPJxf2pQKn/ztL5UPiTLt/eEv9oZU4kh58ajz+6j7rtMaEJudvUJwgoB3dnghu7mpegd3LGtamA==
-X-Received: by 2002:a9d:d13:: with SMTP id 19mr5891869oti.83.1592411200517;
-        Wed, 17 Jun 2020 09:26:40 -0700 (PDT)
-Received: from frodo.hsd1.co.comcast.net ([2601:284:8204:6ba0::ae4b])
-        by smtp.googlemail.com with ESMTPSA id h7sm95877otk.48.2020.06.17.09.26.39
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Jun 2020 09:26:39 -0700 (PDT)
-From:   Jim Cromie <jim.cromie@gmail.com>
-To:     jbaron@akamai.com, linux-kernel@vger.kernel.org,
-        akpm@linuxfoundation.org, gregkh@linuxfoundation.org
-Cc:     linux@rasmusvillemoes.dk, Jim Cromie <jim.cromie@gmail.com>,
+        id S1726971AbgFQS7n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 17 Jun 2020 14:59:43 -0400
+Received: from fourecks.uuid.uk ([147.135.211.183]:38598 "EHLO
+        fourecks.uuid.uk" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726835AbgFQS7n (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jun 2020 14:59:43 -0400
+X-Greylist: delayed 571 seconds by postgrey-1.27 at vger.kernel.org; Wed, 17 Jun 2020 14:59:42 EDT
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=octiron.net
+        ; s=20180214; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
+        Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:
+        Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+        In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+        List-Post:List-Owner:List-Archive;
+        bh=ewfhDKKfirLitYkJROxTzREvtN9Z3svV6HuKAzBz5NY=; b=jIlPqCadnZCOcMUWh4u/CTqQhi
+        EH0zl9OabqyC2bInmjRLrgQeKll0B4holKyNI6PoZF/dKbGFCaPi9xZ0xPLrDrBq6e+mTsURhmr5W
+        oqF3P4SWjtR/gPIFLL3ngSwx1b4+qlI7mKc2yhuGAxtjghSlSTkoLQvPyASIWNx4R1d11oFW9/dhH
+        re24nrAetgrW/cnLYMM+1g7MpBLEANkMP6czip6lQdijIq63XbbFk3Jr+mdyT45qzhW/kXKwwPlFY
+        V0VagrpCTnPh6QT4dCmY9hmCEI+oie0PwndbSq1nBfzilu5kIQCiqGJnxdEwMnH75JfMe2aNg/VWX
+        bws7YBMw==;
+Received: by fourecks.uuid.uk with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.90_1)
+        (envelope-from <simon@octiron.net>)
+        id 1jld8L-0007kd-Mh; Wed, 17 Jun 2020 19:50:09 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=octiron.net
+        ; s=20180214; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
+        Message-ID:Subject:From:To; bh=ewfhDKKfirLitYkJROxTzREvtN9Z3svV6HuKAzBz5NY=;
+         b=YrkV8arWRnPaoaVVWFFpJUon2CJzTo8EWW/5dNaLDNQog1Xr3/zWJP73sh0mAQjflWg8nvtTbJ
+        9aqvhKCWTZfULTv4vmF0MkCVNm9uG3/++jeZ6Rta9XoOrGZHM2+uuAbNjdEHIPc0m0v60K6WBwz0t
+        ypKLgn6FXhc2WZ9tGsNkoC2P0ADW0ZWvJ+JIjciy2DDv9apHvXgPv+N5AZBcPs9I4NfYEQcRMXHRh
+        Gc6baFVOhXM6DVamcGu86jsXlN+hb0krRiuWc7AWUrb+wXQ1idjAcwmdjj9YWs58cxtujdesJb2RN
+        usdgu3CJHBFrxORGy3KItUp1y9WP/XP4qRMcA==;
+Received: by tsort.uuid.uk with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.86_2)
+        (envelope-from <simon@octiron.net>)
+        id 1jld8I-0005LZ-1O; Wed, 17 Jun 2020 19:49:58 +0100
+To:     "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Will Deacon <will@kernel.org>,
-        Orson Zhai <orson.zhai@unisoc.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Petr Mladek <pmladek@suse.com>, linux-doc@vger.kernel.org
-Subject: [PATCH v3 21/21] dyndbg: allow negating flag-chars in modifier flags
-Date:   Wed, 17 Jun 2020 10:25:36 -0600
-Message-Id: <20200617162536.611386-24-jim.cromie@gmail.com>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200617162536.611386-1-jim.cromie@gmail.com>
-References: <20200617162536.611386-1-jim.cromie@gmail.com>
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        linux-scsi@vger.kernel.org, linux-doc@vger.kernel.org
+From:   Simon Arlott <simon@octiron.net>
+Subject: [PATCH] scsi: sd: stop SSD (non-rotational) disks before reboot
+Message-ID: <499138c8-b6d5-ef4a-2780-4f750ed337d3@0882a8b5-c6c3-11e9-b005-00805fc181fe>
+Date:   Wed, 17 Jun 2020 19:49:57 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This allows a user to set some flags and clear others at the same
-time.  This will make it easier to use the flags for creation of
-transient sets, by making it easier to change the markings on those
-sets by one flag, or all flags.
+I need to use "reboot=p" on my desktop because one of the PCIe devices
+does not appear after a warm boot. This results in a very cold boot
+because the BIOS turns the PSU off and on.
 
-Consider the 3 operators [+-=]
- = resets entire flag-set, no memory of before
- - clears flags only, but preserves otherwise
- + sets flags only, but preserves otherwise
+The scsi sd shutdown process does not send a stop command to disks
+before the reboot happens (stop commands are only sent for a shutdown).
 
-It would be nice to be able to set or clear all bits, or any subset,
-while preserving untouched bits.  Using -/+ and negating flags
-together let you do so.
+The result is that all of my SSDs experience a sudden power loss on
+every reboot, which is undesirable behaviour. These events are recorded
+in the SMART attributes.
 
-    echo -ft > control		# in all callsites, clear 2 bits, preserve others
-    echo f-ft > control		# if f-bit is true, clear 2 bits, preserve others
+Avoiding a stop of the disk on a reboot is appropriate for HDDs because
+they're likely to continue to be powered (and should not be told to spin
+down only to spin up again) but the default behaviour for SSDs should
+be changed to stop them before the reboot.
 
-using non-empty query terms gives another dimension of selectivity
+Add a "stop_before_reboot" module parameter that can be used to control
+the shutdown behaviour of disks before a reboot. The default will be
+to stop non-rotational disks (SSDs) only, but it can be configured to
+stop all disks if it is known that power will be lost completely on a
+reboot.
 
-    echo $qtrms -ft > control	# for a callsite subset, clear 2 bits, preserve others
-    echo $qtrms f-ft > control	# for a callsite subset, if f-bit is true, clear 2 bits, preserve others
+  sd_mod.stop_before_reboot=<integer>
+    0 = never
+    1 = non-rotational disks only (default)
+    2 = all disks
 
-Signed-off-by: Jim Cromie <jim.cromie@gmail.com>
+The behaviour on shutdown is unchanged: all disks are unconditionally
+stopped.
+
+The disk I/O will be mostly quiescent at reboot time (and there is a
+sync first) but this should be added to stable kernels to protect all
+SSDs from unexpected power loss during a reboot by default. There is
+the potential for an unexpected power loss to corrupt data depending
+on the SSD model/firmware.
+
+Cc: stable@vger.kernel.org
+Signed-off-by: Simon Arlott <simon@octiron.net>
 ---
- Documentation/admin-guide/dynamic-debug-howto.rst | 10 ++++++----
- lib/dynamic_debug.c                               |  6 ++++--
- 2 files changed, 10 insertions(+), 6 deletions(-)
+ Documentation/scsi/scsi-parameters.rst |  7 +++++++
+ drivers/scsi/sd.c                      | 22 +++++++++++++++++++---
+ 2 files changed, 26 insertions(+), 3 deletions(-)
 
-diff --git a/Documentation/admin-guide/dynamic-debug-howto.rst b/Documentation/admin-guide/dynamic-debug-howto.rst
-index e910865b2edc..4539793e39bf 100644
---- a/Documentation/admin-guide/dynamic-debug-howto.rst
-+++ b/Documentation/admin-guide/dynamic-debug-howto.rst
-@@ -258,9 +258,11 @@ only callsites with ``u`` and ``f`` cleared.
+diff --git a/Documentation/scsi/scsi-parameters.rst b/Documentation/scsi/scsi-parameters.rst
+index 9aba897c97ac..fd64d0d43861 100644
+--- a/Documentation/scsi/scsi-parameters.rst
++++ b/Documentation/scsi/scsi-parameters.rst
+@@ -101,6 +101,13 @@ parameters may be changed at runtime by the command
+ 			allowing boot to proceed.  none ignores them, expecting
+ 			user space to do the scan.
  
- Flagsets cannot contain ``pP`` etc, a flag cannot be true and false.
++	sd_mod.stop_before_reboot=
++			[SCSI] configure stop action for disks before a reboot
++			Format: <integer>
++			0 = never
++			1 = non-rotational disks only (default)
++			2 = all disks
++
+ 	sim710=		[SCSI,HW]
+ 			See header of drivers/scsi/sim710.c.
  
--modflags containing upper-case flags is reserved/undefined for now.
--inverted-flags are currently ignored, usage gets trickier if given
--``-pXy``, it should leave x set.
-+modflags may contain upper-case flags also, using these lets you
-+invert the flag setting implied by the OP; '-pU' means disable
-+printing, and mark that callsite with the user-flag to create a group,
-+for optional further manipulation.  Generally, '+p' and '-p' is your
-+main choice, and use of negating flags in modflags is rare.
+diff --git a/drivers/scsi/sd.c b/drivers/scsi/sd.c
+index d90fefffe31b..1cd652e037ab 100644
+--- a/drivers/scsi/sd.c
++++ b/drivers/scsi/sd.c
+@@ -98,6 +98,12 @@ MODULE_ALIAS_SCSI_DEVICE(TYPE_MOD);
+ MODULE_ALIAS_SCSI_DEVICE(TYPE_RBC);
+ MODULE_ALIAS_SCSI_DEVICE(TYPE_ZBC);
  
- Notes::
- 
-@@ -270,7 +272,7 @@ For ``print_hex_dump_debug()`` and ``print_hex_dump_bytes()``, only
- For display, the flags are preceded by ``=``
- (mnemonic: what the flags are currently equal to).
- 
--Note the regexp ``^[-+=][flmptu_]+$`` matches a flags specification.
-+Note the regexp ``/^[-+=][flmptu_]+$/i`` matches a flags specification.
- To clear all flags at once, use ``=_`` or ``-flmptu``.
- 
- 
-diff --git a/lib/dynamic_debug.c b/lib/dynamic_debug.c
-index a302a7d8a722..c539bdd7fbe3 100644
---- a/lib/dynamic_debug.c
-+++ b/lib/dynamic_debug.c
-@@ -498,16 +498,18 @@ static int ddebug_parse_flags(const char *str,
- 
- 	/* calculate final mods: flags, mask based upon op */
- 	switch (op) {
-+		unsigned int tmp;
- 	case '=':
- 		/* modifiers->flags already set */
- 		modifiers->mask = 0;
- 		break;
- 	case '+':
--		modifiers->mask = ~0U;
-+		modifiers->mask = ~modifiers->mask;
- 		break;
- 	case '-':
-+		tmp = modifiers->mask;
- 		modifiers->mask = ~modifiers->flags;
--		modifiers->flags = 0;
-+		modifiers->flags = tmp;
- 		break;
++static unsigned int stop_before_reboot = 1;
++
++module_param(stop_before_reboot, uint, 0644);
++MODULE_PARM_DESC(stop_before_reboot,
++		 "stop disks before reboot (1=non-rotational, 2=all)");
++
+ #if !defined(CONFIG_DEBUG_BLOCK_EXT_DEVT)
+ #define SD_MINORS	16
+ #else
+@@ -3576,9 +3582,19 @@ static void sd_shutdown(struct device *dev)
+ 		sd_sync_cache(sdkp, NULL);
  	}
- 	vpr_info("mods:flags=0x%x,mask=0x%x filter:flags=0x%x,mask=0x%x\n",
+ 
+-	if (system_state != SYSTEM_RESTART && sdkp->device->manage_start_stop) {
+-		sd_printk(KERN_NOTICE, sdkp, "Stopping disk\n");
+-		sd_start_stop_device(sdkp, 0);
++	if (sdkp->device->manage_start_stop) {
++		bool stop_disk = (system_state != SYSTEM_RESTART);
++
++		if (stop_before_reboot > 1) { /* stop all disks */
++			stop_disk = true;
++		} else if (stop_before_reboot) { /* non-rotational only */
++			stop_disk |= blk_queue_nonrot(sdkp->disk->queue);
++		}
++
++		if (stop_disk) {
++			sd_printk(KERN_NOTICE, sdkp, "Stopping disk\n");
++			sd_start_stop_device(sdkp, 0);
++		}
+ 	}
+ }
+ 
 -- 
-2.26.2
+2.17.1
 
+-- 
+Simon Arlott
