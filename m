@@ -2,84 +2,119 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3D20B1FD87B
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2020 00:13:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 96BF61FD94A
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Jun 2020 00:58:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726927AbgFQWNc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 17 Jun 2020 18:13:32 -0400
-Received: from smtprelay0248.hostedemail.com ([216.40.44.248]:44702 "EHLO
-        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726835AbgFQWNc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jun 2020 18:13:32 -0400
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
-        by smtprelay04.hostedemail.com (Postfix) with ESMTP id 816CB180905DE;
-        Wed, 17 Jun 2020 22:13:31 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:973:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1541:1593:1594:1711:1730:1747:1777:1792:2393:2559:2562:2828:2898:3138:3139:3140:3141:3142:3353:3622:3865:3866:3867:3868:3870:3872:3873:4321:5007:6119:10004:10400:10848:11026:11232:11658:11914:12048:12297:12740:12760:12895:13069:13255:13311:13357:13439:14096:14097:14659:14721:21080:21220:21451:21627:21740:21795:21990:30012:30051:30054:30070:30079:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:1,LUA_SUMMARY:none
-X-HE-Tag: boys91_3f16e1d26e0b
-X-Filterd-Recvd-Size: 2453
-Received: from XPS-9350.home (unknown [47.151.133.149])
-        (Authenticated sender: joe@perches.com)
-        by omf17.hostedemail.com (Postfix) with ESMTPA;
-        Wed, 17 Jun 2020 22:13:29 +0000 (UTC)
-Message-ID: <dddfef643fc5bef1ff440f18c3dd12f586195a7c.camel@perches.com>
+        id S1726761AbgFQW6M (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 17 Jun 2020 18:58:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53320 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726763AbgFQW6M (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jun 2020 18:58:12 -0400
+Received: from mail-vs1-xe44.google.com (mail-vs1-xe44.google.com [IPv6:2607:f8b0:4864:20::e44])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1AB21C06174E;
+        Wed, 17 Jun 2020 15:58:12 -0700 (PDT)
+Received: by mail-vs1-xe44.google.com with SMTP id 190so2402456vsr.9;
+        Wed, 17 Jun 2020 15:58:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BG8boI9i4hvxy73OVw5syqVlITws7pDbDreExM7+Kyo=;
+        b=ZKgCZEiHMPZlSK79v7B/RMDzy040q5vp1nhxswINjnkURubO6rXmOwwemoApYwNZaK
+         EsPjIxaS1G4sh/02VtRKbMjPNMsqgcw1+An/4Z+1uXqBAUUMngu08xFDx0sfygVM01l1
+         VcDM9N9GJPiH/v5WRXOg9vXZuLg5mnU43Es+LZhzbUjDg51T36H9eSfSj8JqmZeWSU2N
+         VD//N4VedeVYvtuzoAJsHv8a5K9mRXZ1tCrzzrCz1Bxib5rQXS0nhgtsNmol+NJDXe87
+         3G+bC5FD6szi4kWfpSdMvV+W3cfUYVRLhW/5ULXvTeXgzKA6HD+5tmlI2ch7VQDYYRMy
+         sW3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=BG8boI9i4hvxy73OVw5syqVlITws7pDbDreExM7+Kyo=;
+        b=IUDHtLZgSeW5MaL459VKysrEt47j6uj5NpguMSuOhkikvKWgBgAobF8+33PPPttLsY
+         174XjoPl7mUa/FKQsZrblM98paZpJEr3+WsUpISL4jiYKmOakfsN/9wm8xV4OHLBbdoG
+         Tt/kqbbiT76ZD9FyzmavGlPgDYVeb4ltw434cZlbGgiEWP7JIZqyfOTx3Jt6NLWhprXm
+         cSdU4BScGEH7TOsqtgyVB5MrnsPdDKn4PnVzXAaGSnTpGLEnap5lKWiTngs2OslJU9SL
+         I1qDVqq5S3tJbqootmeRVWEVm2TB3bsVcFTQ/r3Jh+SK8VU4LI3eJmHloJQ34d/JyIf5
+         4KTg==
+X-Gm-Message-State: AOAM532C4VWddImH9xOC1QAqi/+0wIWwdJMGGv9MDwdUi9Pn12/oBSkA
+        dDu8qYqgUEzZUwBX16oeeNNVPry2ilcwXNYXETvqRwNy
+X-Google-Smtp-Source: ABdhPJyTTrUyU+lUfy7Sq7wK2lb3CJJlPFJQKtPnu5d8YcLZ8fbmu955dgpPrZaGeqJixmn5TDBsbtARuet4ERxgAL4=
+X-Received: by 2002:a67:fc17:: with SMTP id o23mr1342081vsq.92.1592434691199;
+ Wed, 17 Jun 2020 15:58:11 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200617162536.611386-1-jim.cromie@gmail.com> <20200617162536.611386-23-jim.cromie@gmail.com>
+ <dddfef643fc5bef1ff440f18c3dd12f586195a7c.camel@perches.com>
+In-Reply-To: <dddfef643fc5bef1ff440f18c3dd12f586195a7c.camel@perches.com>
+From:   jim.cromie@gmail.com
+Date:   Wed, 17 Jun 2020 16:57:45 -0600
+Message-ID: <CAJfuBxzG_VkZ_g1c7E1z-fGyeg_Q0ngWRazLF2PDy9Nb0U4HzA@mail.gmail.com>
 Subject: Re: [PATCH v3 20/21] dyndbg: add user-flag, negating-flags, and
  filtering on flags
-From:   Joe Perches <joe@perches.com>
-To:     Jim Cromie <jim.cromie@gmail.com>, jbaron@akamai.com,
-        linux-kernel@vger.kernel.org, akpm@linuxfoundation.org,
-        gregkh@linuxfoundation.org
-Cc:     linux@rasmusvillemoes.dk, Jonathan Corbet <corbet@lwn.net>,
+To:     Joe Perches <joe@perches.com>
+Cc:     Jason Baron <jbaron@akamai.com>,
+        LKML <linux-kernel@vger.kernel.org>, akpm@linuxfoundation.org,
+        Greg KH <gregkh@linuxfoundation.org>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Jonathan Corbet <corbet@lwn.net>,
         Andrew Morton <akpm@linux-foundation.org>,
         Will Deacon <will@kernel.org>,
         Orson Zhai <orson.zhai@unisoc.com>,
-        Petr Mladek <pmladek@suse.com>, linux-doc@vger.kernel.org
-Date:   Wed, 17 Jun 2020 15:13:28 -0700
-In-Reply-To: <20200617162536.611386-23-jim.cromie@gmail.com>
-References: <20200617162536.611386-1-jim.cromie@gmail.com>
-         <20200617162536.611386-23-jim.cromie@gmail.com>
-Content-Type: text/plain; charset="ISO-8859-1"
-User-Agent: Evolution 3.36.2-0ubuntu1 
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+        Petr Mladek <pmladek@suse.com>,
+        Linux Documentation List <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 2020-06-17 at 10:25 -0600, Jim Cromie wrote:
-> 1. Add a user-flag [u] which works like the [pfmlt] flags, but has no
-> effect on callsite behavior; it allows incremental marking of
-> arbitrary sets of callsites.
-> 
-> 2. Add [PFMLTU] flags, which negate their counterparts; P===!p etc.
-> And in ddebug_read_flags():
->    current code does:	[pfmltu_] -> flags
->    copy it to:		[PFMLTU_] -> mask
-> 
-> also disallow both of a pair: ie no 'pP', no true & false.
-> 
-> 3. Add filtering ops into ddebug_change(), right after all the
-> callsite-property selections are complete.  These filter on the
-> callsite's current flagstate before applying modflags.
-> 
-> Why ?
-> 
-> The u-flag & filter flags
-> 
-> The 'u' flag lets the user assemble an arbitary set of callsites.
-> Then using filter flags, user can activate the 'u' callsite set.
-> 
->   #> echo 'file foo.c +u; file bar.c +u' > control   # and repeat
->   #> echo 'u+p' > control
-> 
-> Of course, you can continue to just activate your set without ever
-> marking it 1st, but you could trivially add the markup as you go, then
-> be able to use it as a constraint later, to undo or modify your set.
+On Wed, Jun 17, 2020 at 4:13 PM Joe Perches <joe@perches.com> wrote:
+>
+> On Wed, 2020-06-17 at 10:25 -0600, Jim Cromie wrote:
+> > 1. Add a user-flag [u] which works like the [pfmlt] flags, but has no
+> > effect on callsite behavior; it allows incremental marking of
+> > arbitrary sets of callsites.
+> >
+> > 2. Add [PFMLTU] flags, which negate their counterparts; P===!p etc.
+> > And in ddebug_read_flags():
+> >    current code does: [pfmltu_] -> flags
+> >    copy it to:                [PFMLTU_] -> mask
+> >
+> > also disallow both of a pair: ie no 'pP', no true & false.
+> >
+> > 3. Add filtering ops into ddebug_change(), right after all the
+> > callsite-property selections are complete.  These filter on the
+> > callsite's current flagstate before applying modflags.
+> >
+> > Why ?
+> >
+> > The u-flag & filter flags
+> >
+> > The 'u' flag lets the user assemble an arbitary set of callsites.
+> > Then using filter flags, user can activate the 'u' callsite set.
+> >
+> >   #> echo 'file foo.c +u; file bar.c +u' > control   # and repeat
+> >   #> echo 'u+p' > control
+> >
+> > Of course, you can continue to just activate your set without ever
+> > marking it 1st, but you could trivially add the markup as you go, then
+> > be able to use it as a constraint later, to undo or modify your set.
+>
+> Does this set selection also allow for selection by
+> increasing decimal level?
+>
+> Can sites be enabled for a value less than x?
+>
+>
 
-Does this set selection also allow for selection by
-increasing decimal level?
+no, theres no levels added here.
+that would be a variation on the WIP pr-class patch in v2, dropped from v3
 
-Can sites be enabled for a value less than x?
+legacy dyndbg - select on RO callsite info only - file, module, func, line.
+    flag state is write only.
+filterflags -   additionally select on callsite's flagstate, ie
+reading the current flagstate
 
-
+please look at the export patch 15/21
+for how I now think levels, and drm.debug=0x03 can be done.
