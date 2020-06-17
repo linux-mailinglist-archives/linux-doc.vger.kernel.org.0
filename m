@@ -2,85 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D45D01FD542
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2020 21:18:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 02BCA1FD580
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Jun 2020 21:38:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726540AbgFQTSu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 17 Jun 2020 15:18:50 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47708 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726511AbgFQTSt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jun 2020 15:18:49 -0400
-Received: from mail-pl1-x641.google.com (mail-pl1-x641.google.com [IPv6:2607:f8b0:4864:20::641])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4E012C06174E;
-        Wed, 17 Jun 2020 12:18:49 -0700 (PDT)
-Received: by mail-pl1-x641.google.com with SMTP id n2so1369783pld.13;
-        Wed, 17 Jun 2020 12:18:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=W/Xf3bmFylXPA0/Ku6n2kmtAEIVKn/C+zo5fkI8WJZo=;
-        b=HHueoL6emGfjIzlbwjbMvftTk32wDHhgohFoOYYybjTrJO+tGLX+7oz7EWCBwKfCl4
-         Q8RxPs5TI0HpyIZcb4dWh5xzGKSq6m48vpEUICpbaafegqlHm6xfurM6yGm6xw7JyJri
-         m6WqPnGDCfl1p9adKC8OlO1QSJuwFi0ivJW61d4XoqUEkFDD++QSZ3/mkaVcAa05wAcj
-         aGm2InRrrlzVg4e3KvUrJrvv+MBzmMN475I5kXlo6Wg9CJo7IczJ6Ldp+rl1DDY5wQBv
-         3ASxCtUvSHSxhlV9lHc2m3v8O05m6AqbZbrYsgXoPbx+lbUYrU3gj+BJOCUa+IgD15yJ
-         6lDA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=W/Xf3bmFylXPA0/Ku6n2kmtAEIVKn/C+zo5fkI8WJZo=;
-        b=Og0b24dn3uT8tc0rtohWPMy88RUtNj26Dy2lZr7WGeKXNB5sL0WVM5vhU7YWY9lOpT
-         ZElvvTG9wjwIQ1FKSaI6E6yMWztOkTIwaq45aaD125x2NZWQcUH2jnribQDRXW3/cId8
-         i1wABq/86Eoi8xSYssIh7H17Y9sxLgSZ8jSMZ00tzABXuyGH7OkkesbVdxfdR0n50+v8
-         Wr4tQPezKGoZRq5uAl/xo2Q1jq4eg9yurmzsVC2xl8rOSYG6hURb2wCCGeMfX1F+hMV9
-         FAWDQWfxYGn/W2tpKFTK448nSHcHUPjCLa6mG60othast6D4zIPVhElQx1qzaw/53bjL
-         OCeQ==
-X-Gm-Message-State: AOAM533EPAzmw+J90gQNji4EUcJiUUHvAA91AeDrLc9Xpa23tEhdotby
-        lEX4PsyxkghAKIgUKZiHW7g=
-X-Google-Smtp-Source: ABdhPJzAu5Yu0qRuGhCUgdqB5mDjjwjEDzVQf65Xnb1CFi6m5/cYKAYbr4TDUoIiElq+MvN5rYhA/g==
-X-Received: by 2002:a17:902:9342:: with SMTP id g2mr575203plp.36.1592421528265;
-        Wed, 17 Jun 2020 12:18:48 -0700 (PDT)
-Received: from jordon-HP-15-Notebook-PC.domain.name ([122.182.224.179])
-        by smtp.gmail.com with ESMTPSA id z8sm309548pjr.41.2020.06.17.12.18.44
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 17 Jun 2020 12:18:47 -0700 (PDT)
-From:   Souptick Joarder <jrdr.linux@gmail.com>
-To:     corbet@lwn.net, akpm@linux-foundation.org, jack@suse.cz,
-        kirill.shutemov@linux.intel.com
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Souptick Joarder <jrdr.linux@gmail.com>,
-        John Hubbard <jhubbard@nvidia.com>
-Subject: [PATCH] docs: mm/gup: Minor documentation update
-Date:   Thu, 18 Jun 2020 00:57:03 +0530
-Message-Id: <1592422023-7401-1-git-send-email-jrdr.linux@gmail.com>
-X-Mailer: git-send-email 1.9.1
+        id S1726912AbgFQTit (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 17 Jun 2020 15:38:49 -0400
+Received: from djelibeybi.uuid.uk ([45.91.101.70]:57950 "EHLO
+        djelibeybi.uuid.uk" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726597AbgFQTis (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Jun 2020 15:38:48 -0400
+X-Greylist: delayed 389 seconds by postgrey-1.27 at vger.kernel.org; Wed, 17 Jun 2020 15:38:46 EDT
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=octiron.net
+        ; s=20180214; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+        MIME-Version:Date:Message-ID:From:References:To:Subject:Sender:Reply-To:Cc:
+        Content-ID:Content-Description:Resent-Date:Resent-From:Resent-Sender:
+        Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:List-Unsubscribe:
+        List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=CBFAg6s+vq5P374WzvzyZ5LF5sqRXWLUvi7gDQCysuQ=; b=s4niYvrhMPjKxPqwZfV/XTAR6X
+        iqawHB1UE2brS2dFuRjx2BU/xoVl7uZN77L6+lV00LVJkldfRno8zX0HrZ8wLzQdqfWS1RYGNUgEu
+        rfjfFsLmKcHLU3hTd5Diwj/dmRc8qPan8G0sp3/FftcuLt5Ba9RdqUkStAUskP6k0Kx/yDwP3Wb0b
+        XCllNmx+7J9zxkPSem743Ksy483GZJmUUgmMYghnHdRlEJB/iXU8KT10IWJeNkfI0tDnSHHVsB49/
+        IRKXRKuVWIyJCGM0wRLfS3VDQGu1ovwVtYT5QcfRPRUFDpo95gN0uE4Jjqh31rs3pD6tLCX+D3iQM
+        tYodPY3w==;
+Received: by djelibeybi.uuid.uk with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.90_1)
+        (envelope-from <simon@octiron.net>)
+        id 1jldn9-0001NO-4a; Wed, 17 Jun 2020 20:32:15 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=octiron.net
+        ; s=20180214; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:
+        MIME-Version:Date:Message-ID:From:References:To:Subject;
+        bh=CBFAg6s+vq5P374WzvzyZ5LF5sqRXWLUvi7gDQCysuQ=; b=iNRgLuzImYOvm7B2xpgqc+VmTG
+        wSOj8XmLpCXMk8XZWAPtXq10UdhX85+0B0vNcO7HZS7RxhBYV60tW8QQ0G1zeuLYXnzFYf4MgO00K
+        dphadsBfZCgcLuk1U1LytGUTHTEz4bSPbumr0a8kRhAfRS4PeJm+7sfPW4kfv3J5QPlI1FDfZ08VT
+        jFBZOdQ3FM7D3Ah5tDYzMnAASIc2JR94Uq4v76bohe315pkXZ5Gqyrrevf48Sb2bftgKr98QEL8P3
+        njaYk/7yR6fHUz9GoQ9zq5EDv2Hj/t8KtGtMluUIwXM7Hl+7XiA3e4l3AQjNBT08bFnMYKgQUDt3u
+        43Jqp2ZA==;
+Received: by tsort.uuid.uk with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.86_2)
+        (envelope-from <simon@octiron.net>)
+        id 1jldn7-00062R-3q; Wed, 17 Jun 2020 20:32:09 +0100
+Subject: Re: [PATCH] scsi: sd: stop SSD (non-rotational) disks before reboot
+To:     Bart Van Assche <bvanassche@acm.org>,
+        "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        linux-scsi@vger.kernel.org, linux-doc@vger.kernel.org
+References: <499138c8-b6d5-ef4a-2780-4f750ed337d3@0882a8b5-c6c3-11e9-b005-00805fc181fe>
+ <b92ce48a-55d8-9377-f6c5-510d7e3beb1b@acm.org>
+From:   Simon Arlott <simon@octiron.net>
+Message-ID: <04bf3c02-85f4-3fbc-525a-4189aadf9241@0882a8b5-c6c3-11e9-b005-00805fc181fe>
+Date:   Wed, 17 Jun 2020 20:32:08 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
+MIME-Version: 1.0
+In-Reply-To: <b92ce48a-55d8-9377-f6c5-510d7e3beb1b@acm.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now there are 5 cases. Updated the same.
+On 17/06/2020 20:19, Bart Van Assche wrote:
+> On 2020-06-17 11:49, Simon Arlott wrote:
+>> @@ -3576,9 +3582,19 @@ static void sd_shutdown(struct device *dev)
+>>  		sd_sync_cache(sdkp, NULL);
+>>  	}
+>>  
+>> -	if (system_state != SYSTEM_RESTART && sdkp->device->manage_start_stop) {
+>> -		sd_printk(KERN_NOTICE, sdkp, "Stopping disk\n");
+>> -		sd_start_stop_device(sdkp, 0);
+>> +	if (sdkp->device->manage_start_stop) {
+>> +		bool stop_disk = (system_state != SYSTEM_RESTART);
+>> +
+>> +		if (stop_before_reboot > 1) { /* stop all disks */
+>> +			stop_disk = true;
+>> +		} else if (stop_before_reboot) { /* non-rotational only */
+>> +			stop_disk |= blk_queue_nonrot(sdkp->disk->queue);
+>> +		}
+>> +
+>> +		if (stop_disk) {
+>> +			sd_printk(KERN_NOTICE, sdkp, "Stopping disk\n");
+>> +			sd_start_stop_device(sdkp, 0);
+>> +		}
+>>  	}
+>>  }
+> 
+> Is introduction of a new kernel module parameter essential?
 
-Signed-off-by: Souptick Joarder <jrdr.linux@gmail.com>
-Cc: John Hubbard <jhubbard@nvidia.com>
----
- Documentation/core-api/pin_user_pages.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+It is system-dependent whether or not a reboot is going to result in a
+loss of power, so it's required to be able to stop the HDDs too.
 
-diff --git a/Documentation/core-api/pin_user_pages.rst b/Documentation/core-api/pin_user_pages.rst
-index 6068266..7ca8c7b 100644
---- a/Documentation/core-api/pin_user_pages.rst
-+++ b/Documentation/core-api/pin_user_pages.rst
-@@ -33,7 +33,7 @@ all combinations of get*(), pin*(), FOLL_LONGTERM, and more. Also, the
- pin_user_pages*() APIs are clearly distinct from the get_user_pages*() APIs, so
- that's a natural dividing line, and a good point to make separate wrapper calls.
- In other words, use pin_user_pages*() for DMA-pinned pages, and
--get_user_pages*() for other cases. There are four cases described later on in
-+get_user_pages*() for other cases. There are five cases described later on in
- this document, to further clarify that concept.
- 
- FOLL_PIN and FOLL_GET are mutually exclusive for a given gup call. However,
+They're already always stopped on shutdown where power is definitely
+going to be lost. I can't do that by default on a reboot because the
+usual convention is that the power stays on during a reboot and it would
+be expected that the HDDs keep spinning.
+
+> Or in other
+> words, has it been considered to apply the new behavior to all SSDs?
+
+The default value is 1, so it does apply to all SSDs. I want to be able
+to configure it to apply to HDDs too.
+
 -- 
-1.9.1
-
+Simon Arlott
