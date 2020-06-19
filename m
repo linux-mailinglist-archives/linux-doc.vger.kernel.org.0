@@ -2,29 +2,38 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 31E2A201B21
-	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2020 21:20:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 32EE7201B24
+	for <lists+linux-doc@lfdr.de>; Fri, 19 Jun 2020 21:22:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387529AbgFSTUr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 19 Jun 2020 15:20:47 -0400
-Received: from ms.lwn.net ([45.79.88.28]:55246 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1733142AbgFSTUq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 19 Jun 2020 15:20:46 -0400
+        id S2387661AbgFSTWN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 19 Jun 2020 15:22:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39790 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1733142AbgFSTWN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 19 Jun 2020 15:22:13 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 04B6EC06174E;
+        Fri, 19 Jun 2020 12:22:13 -0700 (PDT)
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 886DE23B;
-        Fri, 19 Jun 2020 19:20:46 +0000 (UTC)
-Date:   Fri, 19 Jun 2020 13:20:45 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id 5FFFB23B;
+        Fri, 19 Jun 2020 19:22:12 +0000 (UTC)
+Date:   Fri, 19 Jun 2020 13:22:11 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Joe Perches <joe@perches.com>
-Cc:     linux-doc <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] Documentation: Fix most typos
-Message-ID: <20200619132045.6120f4eb@lwn.net>
-In-Reply-To: <9587fe318ac88299131e751a07bdd1f4b69ae0de.camel@perches.com>
-References: <9587fe318ac88299131e751a07bdd1f4b69ae0de.camel@perches.com>
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     LKML <linux-kernel@vger.kernel.org>,
+        Linux-sh list <linux-sh@vger.kernel.org>,
+        Rich Felker <dalias@libc.org>, Christoph Hellwig <hch@lst.de>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Yoshinori Sato <ysato@users.sourceforge.jp>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH] Documentation: remove SH-5 index entries
+Message-ID: <20200619132211.0d2b19db@lwn.net>
+In-Reply-To: <71e1f336-ef5c-f5e9-25cf-16bd4439b9f9@infradead.org>
+References: <71e1f336-ef5c-f5e9-25cf-16bd4439b9f9@infradead.org>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -34,33 +43,32 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 10 Jun 2020 16:07:32 -0700
-Joe Perches <joe@perches.com> wrote:
+On Sun, 14 Jun 2020 19:59:07 -0700
+Randy Dunlap <rdunlap@infradead.org> wrote:
 
-> These are the typos found in scripts/spelling.txt for
-> most of the Documentation/ tree.
+> From: Randy Dunlap <rdunlap@infradead.org>
 > 
-> Scripted with:
+> Remove SH-5 documentation index entries following the removal
+> of SH-5 source code.
 > 
-> $ cat scripts/spelling.txt | \
->   grep -v -P "^\s*\#" | \
->   while read line ; do \
->     from=$(echo $line | cut -f1 -d'|'); \
->     to=$(echo $line | cut -f3 -d'|'); \
->     echo "from: $from to: $to" ; \
->     git grep -w --name-only $from | \
->     xargs sed -i "s/\b$from\b/$to/" ; \
->     git checkout scripts/spelling.txt ; \
->   done
+> Error: Cannot open file ../arch/sh/mm/tlb-sh5.c
+> Error: Cannot open file ../arch/sh/mm/tlb-sh5.c
+> Error: Cannot open file ../arch/sh/include/asm/tlb_64.h
+> Error: Cannot open file ../arch/sh/include/asm/tlb_64.h
 > 
-> And some removal of inappropriate conversions
-> in Documentation/translations and a few files
-> where the conversions were incorrect.
-> 
-> Signed-off-by: Joe Perches <joe@perches.com>
+> Fixes: 3b69e8b45711 ("Merge tag 'sh-for-5.8' of git://git.libc.org/linux-sh")
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Rich Felker <dalias@libc.org>
+> Cc: Christoph Hellwig <hch@infradead.org>
+> Cc: Arnd Bergmann <arnd@arndb.de>
+> Cc: ysato@users.sourceforge.jp
+> Cc: linux-sh@vger.kernel.org
+> Cc: Geert Uytterhoeven <geert@linux-m68k.org>
+> Cc: Linus Torvalds <torvalds@linux-foundation.org>
+> ---
+>  Documentation/sh/index.rst |   12 ------------
+>  1 file changed, 12 deletions(-)
 
-So this fails badly against current docs-next...any chance of a redo?
-
-Thanks,
+Applied, thanks.
 
 jon
