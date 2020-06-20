@@ -2,105 +2,131 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1B628202092
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2020 05:31:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A52D920211B
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Jun 2020 05:55:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1733263AbgFTDbX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 19 Jun 2020 23:31:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58250 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1733194AbgFTDbO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 19 Jun 2020 23:31:14 -0400
-Received: from mail-pl1-x641.google.com (mail-pl1-x641.google.com [IPv6:2607:f8b0:4864:20::641])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87808C061D7C
-        for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2020 20:30:28 -0700 (PDT)
-Received: by mail-pl1-x641.google.com with SMTP id y17so4805547plb.8
-        for <linux-doc@vger.kernel.org>; Fri, 19 Jun 2020 20:30:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=QVK7j0hx8FBwbrQRQLiAwPLU1M0hFNtAd7ZF9cg10jo=;
-        b=TZW89t7zN77H873mcFo8WLKtwyPOC4zRyfDeh6db7mO8VCfzF/bLHMfK7vcAzedFuv
-         1RpGH6tOBLqduS8I/DdeF83mRRrdAlWtjSzOSaXCEmWDNlYtfmcl5HjH5pc0lKbkP/sk
-         L+yXY5n0mIFfGtE2LVxuNzfT527bZqkW9h24Q=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=QVK7j0hx8FBwbrQRQLiAwPLU1M0hFNtAd7ZF9cg10jo=;
-        b=dgaFJB365+KdU81sX3uC6LqGTsRUhg5b/Mq1a5t7g7tDTJ00fMq7rwvUm2U45WfJ5v
-         T2GGRjo46s699dCO5DBgJCGd59YdxJLyoooWCsAUeOeEAl3JDc5+bQHYkpRNGVsWhRX0
-         6aJx5WkOK3rJ0FIOxVCwd+7DN5RihpR9m7oZHZEI8oG/tLt91GY73eReh8cNHQHeW06V
-         GvajkUKrVbZ0jR7JQXpdVKmaNj0mOMlC/vrvd8AYc2pdmLoCrkrX2mJgeV0QvVuiC2KU
-         mvRP/Yp0sfC5ftE2ROmJxCie8lKN15ix9ACMDD6mZUrrj+wcxy6XFF/zD7pL6OMgOfFA
-         eI7g==
-X-Gm-Message-State: AOAM532ACUoTkWpu6C0XAhswEhp4nJFCYgjfMu68dUMQd2ChLrHi1mK2
-        vmgVyMf6H/eO2mnv+sm6Z3NWbA==
-X-Google-Smtp-Source: ABdhPJz8KX7mQAqh+M5lriaij/q9w5lLW8mo5TU5HFqGc/qxPYSRCJFCyD55HX6pgmlCF9isgzBqNQ==
-X-Received: by 2002:a17:90a:778c:: with SMTP id v12mr6634388pjk.34.1592623828165;
-        Fri, 19 Jun 2020 20:30:28 -0700 (PDT)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id r1sm824770pjd.47.2020.06.19.20.30.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 19 Jun 2020 20:30:26 -0700 (PDT)
-From:   Kees Cook <keescook@chromium.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Kees Cook <keescook@chromium.org>,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-        Alexander Potapenko <glider@google.com>,
-        Joe Perches <joe@perches.com>,
-        Andy Whitcroft <apw@canonical.com>, x86@kernel.org,
-        drbd-dev@lists.linbit.com, linux-block@vger.kernel.org,
-        b43-dev@lists.infradead.org, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-wireless@vger.kernel.org,
-        linux-ide@vger.kernel.org, linux-clk@vger.kernel.org,
-        linux-spi@vger.kernel.org, linux-mm@kvack.org,
-        clang-built-linux@googlegroups.com
-Subject: [PATCH v2 13/16] mm/debug_vm_pgtable: Remove uninitialized_var() usage
-Date:   Fri, 19 Jun 2020 20:30:07 -0700
-Message-Id: <20200620033007.1444705-17-keescook@chromium.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200620033007.1444705-1-keescook@chromium.org>
-References: <20200620033007.1444705-1-keescook@chromium.org>
+        id S1726874AbgFTDzF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 19 Jun 2020 23:55:05 -0400
+Received: from szxga07-in.huawei.com ([45.249.212.35]:54744 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1725290AbgFTDzE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 19 Jun 2020 23:55:04 -0400
+Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.59])
+        by Forcepoint Email with ESMTP id 1D6AD24E770376062A29;
+        Sat, 20 Jun 2020 11:54:58 +0800 (CST)
+Received: from [127.0.0.1] (10.166.213.90) by DGGEMS407-HUB.china.huawei.com
+ (10.3.19.207) with Microsoft SMTP Server id 14.3.487.0; Sat, 20 Jun 2020
+ 11:54:48 +0800
+Subject: Re: [PATCH v8 5/5] dt-bindings: chosen: Document
+ linux,low-memory-range for arm64 kdump
+To:     James Morse <james.morse@arm.com>, Rob Herring <robh@kernel.org>
+References: <20200521093805.64398-1-chenzhou10@huawei.com>
+ <20200521093805.64398-6-chenzhou10@huawei.com>
+ <CAL_Jsq+EV02YBqEGoJrsJW8Y+g_GkB_LkTwWCxNCb3F+8MSdyw@mail.gmail.com>
+ <a419602e-6a85-ca35-39de-b3c26d433199@huawei.com>
+ <20200526211800.GA352001@bogus>
+ <ff7c9f68-b578-3a1a-0815-e61c6f87bc4e@arm.com>
+CC:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, <dyoung@redhat.com>,
+        Baoquan He <bhe@redhat.com>, Arnd Bergmann <arnd@arndb.de>,
+        <John.p.donnelly@oracle.com>, <pkushwaha@marvell.com>,
+        "Simon Horman" <horms@verge.net.au>,
+        Hanjun Guo <guohanjun@huawei.com>,
+        "moderated list:ARM/FREESCALE IMX / MXC ARM ARCHITECTURE" 
+        <linux-arm-kernel@lists.infradead.org>,
+        <devicetree@vger.kernel.org>,
+        "Linux Doc Mailing List" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        <kexec@lists.infradead.org>,
+        "Nicolas Saenz Julienne" <nsaenzjulienne@suse.de>,
+        Bhupesh Sharma <bhsharma@redhat.com>
+From:   chenzhou <chenzhou10@huawei.com>
+Message-ID: <5339140e-41ee-ab20-0a3b-fcf7da82796b@huawei.com>
+Date:   Sat, 20 Jun 2020 11:54:48 +0800
+User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101
+ Thunderbird/45.7.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <ff7c9f68-b578-3a1a-0815-e61c6f87bc4e@arm.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.166.213.90]
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Using uninitialized_var() is dangerous as it papers over real bugs[1]
-(or can in the future), and suppresses unrelated compiler warnings (e.g.
-"unused variable"). If the compiler thinks it is uninitialized, either
-simply initialize the variable or make compiler changes. As a precursor
-to removing[2] this[3] macro[4], just initialize this variable to NULL.
+Hi James, Rob,
 
-[1] https://lore.kernel.org/lkml/20200603174714.192027-1-glider@google.com/
-[2] https://lore.kernel.org/lkml/CA+55aFw+Vbj0i=1TGqCR5vQkCzWJ0QxK6CernOU6eedsudAixw@mail.gmail.com/
-[3] https://lore.kernel.org/lkml/CA+55aFwgbgqhbp1fkxvRKEpzyR5J8n1vKT1VZdz9knmPuXhOeg@mail.gmail.com/
-[4] https://lore.kernel.org/lkml/CA+55aFz2500WfbKXAx8s67wrm9=yVJu65TpLgN_ybYNv0VEOKA@mail.gmail.com/
 
-Fixes: 399145f9eb6c ("mm/debug: add tests validating architecture page table helpers")
-Signed-off-by: Kees Cook <keescook@chromium.org>
----
- mm/debug_vm_pgtable.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 2020/5/30 0:11, James Morse wrote:
+> Hi guys,
+>
+> On 26/05/2020 22:18, Rob Herring wrote:
+>> On Fri, May 22, 2020 at 11:24:11AM +0800, chenzhou wrote:
+>>> On 2020/5/21 21:29, Rob Herring wrote:
+>>>> On Thu, May 21, 2020 at 3:35 AM Chen Zhou <chenzhou10@huawei.com> wrote:
+>>>>> Add documentation for DT property used by arm64 kdump:
+>>>>> linux,low-memory-range.
+>>>>> "linux,low-memory-range" is an another memory region used for crash
+>>>>> dump kernel devices.
+>>>>> diff --git a/Documentation/devicetree/bindings/chosen.txt b/Documentation/devicetree/bindings/chosen.txt
+>>>>> index 45e79172a646..bfe6fb6976e6 100644
+>>>>> --- a/Documentation/devicetree/bindings/chosen.txt
+>>>>> +++ b/Documentation/devicetree/bindings/chosen.txt
+>>>>> +linux,low-memory-range
+>>>>> +----------------------
+>>>>> +This property (arm64 only) holds a base address and size, describing a
+>>>>> +limited region below 4G. Similar to "linux,usable-memory-range", it is
+>>>>> +an another memory range which may be considered available for use by the
+>>>>> +kernel.
+>>>> Why can't you just add a range to "linux,usable-memory-range"? It
+>>>> shouldn't be hard to figure out which part is below 4G.
+>>> The comments from James:
+>>> Won't this break if your kdump kernel doesn't know what the extra parameters are?
+>>> Or if it expects two ranges, but only gets one? These DT properties should be treated as
+>>> ABI between kernel versions, we can't really change it like this.
+>>>
+>>> I think the 'low' region is an optional-extra, that is never mapped by the first kernel. I
+>>> think the simplest thing to do is to add an 'linux,low-memory-range' that we
+>>> memblock_add() after memblock_cap_memory_range() has been called.
+>>> If its missing, or the new kernel doesn't know what its for, everything keeps working.
+>>
+>> I don't think there's a compatibility issue here though. The current 
+>> kernel doesn't care if the property is longer than 1 base+size. It only 
+>> checks if the size is less than 1 base+size.
+> Aha! I missed that.
+>
+>
+>> And yes, we can rely on 
+>> that implementation detail. It's only an ABI if an existing user 
+>> notices.
+>>
+>> Now, if the low memory is listed first, then an older kdump kernel 
+>> would get a different memory range. If that's a problem, then define 
+>> that low memory goes last. 
+> This first entry would need to be the 'crashkernel' range where the kdump kernel is
+> placed, otherwise an older kernel won't boot. The rest can be optional extras, as long as
+> we are tolerant of it being missing...
+How about like this:
 
-diff --git a/mm/debug_vm_pgtable.c b/mm/debug_vm_pgtable.c
-index e45623016aea..83c9e88a052a 100644
---- a/mm/debug_vm_pgtable.c
-+++ b/mm/debug_vm_pgtable.c
-@@ -307,7 +307,7 @@ static int __init debug_vm_pgtable(void)
- 	phys_addr_t paddr;
- 	unsigned long vaddr, pte_aligned, pmd_aligned;
- 	unsigned long pud_aligned, p4d_aligned, pgd_aligned;
--	spinlock_t *uninitialized_var(ptl);
-+	spinlock_t *ptl = NULL;
- 
- 	pr_info("Validating architecture page table helpers\n");
- 	prot = vm_get_page_prot(VMFLAGS);
--- 
-2.25.1
+1. The low memory region remained as "Crash kernel (low)".
+2. Userspace will find "Crash kernel" and "Crash kernel (low)" region in /proc/iomem,
+and add "Crash kernel (low)" as the last range of property "linux,usable-memory-range".
+
+Thanks,
+Chen Zhou
+>
+> I'll try and look at the rest of this series on Monday,
+>
+>
+> Thanks,
+>
+> James
+>
+> .
+>
+
 
