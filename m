@@ -2,136 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3BB93203435
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2020 12:01:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C983A20371A
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2020 14:45:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727868AbgFVKB2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 22 Jun 2020 06:01:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43872 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727861AbgFVKBZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Jun 2020 06:01:25 -0400
-Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com [IPv6:2a00:1450:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1134BC061794
-        for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2020 03:01:25 -0700 (PDT)
-Received: by mail-wm1-x343.google.com with SMTP id x16so5121559wmj.1
-        for <linux-doc@vger.kernel.org>; Mon, 22 Jun 2020 03:01:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=7pEL+pOqyLTkwaRij99JSBZiVqVmOtzJ61ge9c76alE=;
-        b=eaQDTmoIva7YgqUT7n4mmFYcgVR8tYbiSv+EsIHLIkQIJviMpTReLXYVtvFOol2q0e
-         LdphqNn3acWhpQSuesmQgbP86SDv2CFnYiE9kY21eMu86QB0XYrJByJRId49gHAlMstK
-         B4PEF9TayTWp8MPD7056GMzylW6Q4ubJ6zSD88ao0ofMVT8s1OPaucGSs+G1NKXCU30e
-         StG0ZCrSCfsoa1hh3rlMOqh0cMq2OsJKG43o3A8mXuwgeMr2MQBldeFEmmaxo9KTVZVr
-         OFBWf0C3jGOzn1RbJXOwkVbboUkef6zzBQaj44aHFBunXxesBGFG26tktECmHQNvp0dY
-         2sXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=7pEL+pOqyLTkwaRij99JSBZiVqVmOtzJ61ge9c76alE=;
-        b=miFmBrqOIkoeG4xXXw762Vb8j+vMIdswzlzHmkkPcC5qciynFc8uZqWhMfkIikK8Vo
-         A0RZTOH3jjvOvApU1ukQOMBWMtEvxJeuSbQjskGgvtgLEQIMw+prnzIZoKTGR/sj+lDz
-         F91pS8cqfs2uQ87d6yoO3s/86Uu+iFbEghrAS0SwCcAma1usu4m87G60v5MoIfodlIfh
-         gRPneNyT+EfYaDUPC12bbzBu+nfDSmsvVfvUgfaJZmUXIj8RTjLde33/0fdi6+n2nRWZ
-         8/D6hQ9YdYgv5UP6mdklIs9RE6WA2M0cSQsryrqyrpHBuEcxAM1gyVcUPwROKXqs4hnz
-         kpYA==
-X-Gm-Message-State: AOAM53316Wd8WFumYAqRJ/Pn2Q1dA6qgOgj1aHoM1O4IJR1BdHKIuhzF
-        AO0MOSXan1iKDGxZUlAdY3MJ6w==
-X-Google-Smtp-Source: ABdhPJzbn3QUtTBkSaHKKRlQD+NAcxXoZjCO6pjuNjVVzgSeYV529/r6h+a5y21qbFYnMCH6f96pIg==
-X-Received: by 2002:a1c:804c:: with SMTP id b73mr699546wmd.59.1592820083830;
-        Mon, 22 Jun 2020 03:01:23 -0700 (PDT)
-Received: from localhost.localdomain (lfbn-nic-1-65-232.w2-15.abo.wanadoo.fr. [2.15.156.232])
-        by smtp.gmail.com with ESMTPSA id x205sm16822187wmx.21.2020.06.22.03.01.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 22 Jun 2020 03:01:23 -0700 (PDT)
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Jeff Kirsher <jeffrey.t.kirsher@intel.com>,
-        "David S . Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        John Crispin <john@phrozen.org>,
-        Sean Wang <sean.wang@mediatek.com>,
-        Mark Lee <Mark-MC.Lee@mediatek.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        Realtek linux nic maintainers <nic_swsd@realtek.com>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Andrew Lunn <andrew@lunn.ch>,
-        Florian Fainelli <f.fainelli@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        intel-wired-lan@lists.osuosl.org, netdev@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-mediatek@lists.infradead.org, devicetree@vger.kernel.org,
-        Fabien Parent <fparent@baylibre.com>,
-        Stephane Le Provost <stephane.leprovost@mediatek.com>,
-        Pedro Tsai <pedro.tsai@mediatek.com>,
-        Andrew Perepech <andrew.perepech@mediatek.com>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH 11/11] net: ethernet: mtk-star-emac: use devm_of_mdiobus_register()
-Date:   Mon, 22 Jun 2020 12:00:56 +0200
-Message-Id: <20200622100056.10151-12-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.26.1
-In-Reply-To: <20200622100056.10151-1-brgl@bgdev.pl>
-References: <20200622100056.10151-1-brgl@bgdev.pl>
+        id S1728056AbgFVMpD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 22 Jun 2020 08:45:03 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:4626 "EHLO
+        mx0b-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727940AbgFVMpD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Jun 2020 08:45:03 -0400
+Received: from pps.filterd (m0127361.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 05MCWhka016981;
+        Mon, 22 Jun 2020 08:44:15 -0400
+Received: from ppma02wdc.us.ibm.com (aa.5b.37a9.ip4.static.sl-reverse.com [169.55.91.170])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 31t02g1xnb-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 22 Jun 2020 08:44:14 -0400
+Received: from pps.filterd (ppma02wdc.us.ibm.com [127.0.0.1])
+        by ppma02wdc.us.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 05MCa44q018692;
+        Mon, 22 Jun 2020 12:44:10 GMT
+Received: from b03cxnp08025.gho.boulder.ibm.com (b03cxnp08025.gho.boulder.ibm.com [9.17.130.17])
+        by ppma02wdc.us.ibm.com with ESMTP id 31sa38qj93-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 22 Jun 2020 12:44:09 +0000
+Received: from b03ledav002.gho.boulder.ibm.com (b03ledav002.gho.boulder.ibm.com [9.17.130.233])
+        by b03cxnp08025.gho.boulder.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 05MCi74722675964
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Mon, 22 Jun 2020 12:44:08 GMT
+Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 243D813604F;
+        Mon, 22 Jun 2020 12:44:09 +0000 (GMT)
+Received: from b03ledav002.gho.boulder.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 5BF58136060;
+        Mon, 22 Jun 2020 12:44:08 +0000 (GMT)
+Received: from amdrome1.watson.ibm.com (unknown [9.2.130.16])
+        by b03ledav002.gho.boulder.ibm.com (Postfix) with ESMTP;
+        Mon, 22 Jun 2020 12:44:08 +0000 (GMT)
+From:   Dov Murik <dovmurik@linux.vnet.ibm.com>
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Cc:     Masahiro Yamada <masahiroy@kernel.org>,
+        Michal Marek <michal.lkml@markovi.net>,
+        linux-kbuild@vger.kernel.org,
+        Dov Murik <dovmurik@linux.vnet.ibm.com>
+Subject: [PATCH] docs: kbuild: fix ReST formatting
+Date:   Mon, 22 Jun 2020 12:43:43 +0000
+Message-Id: <20200622124343.121043-1-dovmurik@linux.vnet.ibm.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.216,18.0.687
+ definitions=2020-06-22_07:2020-06-22,2020-06-22 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 spamscore=0
+ phishscore=0 adultscore=0 clxscore=1011 cotscore=-2147483648 mlxscore=0
+ bulkscore=0 mlxlogscore=986 suspectscore=0 lowpriorityscore=0
+ priorityscore=1501 impostorscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2004280000 definitions=main-2006220094
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Commit cd238effefa2 ("docs: kbuild: convert docs to ReST and rename to
+*.rst") missed a ReST header and a verbatim file content area.
 
-Shrink the code by using the managed variant of of_mdiobus_register().
-
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Signed-off-by: Dov Murik <dovmurik@linux.vnet.ibm.com>
 ---
- drivers/net/ethernet/mediatek/mtk_star_emac.c | 13 +------------
- 1 file changed, 1 insertion(+), 12 deletions(-)
+ Documentation/kbuild/modules.rst | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/net/ethernet/mediatek/mtk_star_emac.c b/drivers/net/ethernet/mediatek/mtk_star_emac.c
-index 3e765bdcf9e1..13250553263b 100644
---- a/drivers/net/ethernet/mediatek/mtk_star_emac.c
-+++ b/drivers/net/ethernet/mediatek/mtk_star_emac.c
-@@ -1389,7 +1389,7 @@ static int mtk_star_mdio_init(struct net_device *ndev)
- 	priv->mii->write = mtk_star_mdio_write;
- 	priv->mii->priv = priv;
+diff --git a/Documentation/kbuild/modules.rst b/Documentation/kbuild/modules.rst
+index a45cccff467d..85ccc878895e 100644
+--- a/Documentation/kbuild/modules.rst
++++ b/Documentation/kbuild/modules.rst
+@@ -182,7 +182,8 @@ module 8123.ko, which is built from the following files::
+ 	8123_pci.c
+ 	8123_bin.o_shipped	<= Binary blob
  
--	ret = of_mdiobus_register(priv->mii, mdio_node);
-+	ret = devm_of_mdiobus_register(dev, priv->mii, mdio_node);
+---- 3.1 Shared Makefile
++3.1 Shared Makefile
++-------------------
  
- out_put_node:
- 	of_node_put(mdio_node);
-@@ -1441,13 +1441,6 @@ static void mtk_star_clk_disable_unprepare(void *data)
- 	clk_bulk_disable_unprepare(MTK_STAR_NCLKS, priv->clks);
- }
+ 	An external module always includes a wrapper makefile that
+ 	supports building the module using "make" with no arguments.
+@@ -470,9 +471,9 @@ build.
  
--static void mtk_star_mdiobus_unregister(void *data)
--{
--	struct mtk_star_priv *priv = data;
--
--	mdiobus_unregister(priv->mii);
--}
--
- static int mtk_star_probe(struct platform_device *pdev)
- {
- 	struct device_node *of_node;
-@@ -1549,10 +1542,6 @@ static int mtk_star_probe(struct platform_device *pdev)
- 	if (ret)
- 		return ret;
+ 	The syntax of the Module.symvers file is::
  
--	ret = devm_add_action_or_reset(dev, mtk_star_mdiobus_unregister, priv);
--	if (ret)
--		return ret;
--
- 	ret = eth_platform_get_mac_address(dev, ndev->dev_addr);
- 	if (ret || !is_valid_ether_addr(ndev->dev_addr))
- 		eth_hw_addr_random(ndev);
+-	<CRC>       <Symbol>         <Module>                         <Export Type>     <Namespace>
++		<CRC>       <Symbol>         <Module>                         <Export Type>     <Namespace>
+ 
+-	0xe1cc2a05  usb_stor_suspend drivers/usb/storage/usb-storage  EXPORT_SYMBOL_GPL USB_STORAGE
++		0xe1cc2a05  usb_stor_suspend drivers/usb/storage/usb-storage  EXPORT_SYMBOL_GPL USB_STORAGE
+ 
+ 	The fields are separated by tabs and values may be empty (e.g.
+ 	if no namespace is defined for an exported symbol).
+
+base-commit: b103c607654e55dcb1da40557628a2044b72c936
 -- 
-2.26.1
+2.20.1
 
