@@ -2,96 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 083932041C3
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2020 22:16:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 825DF2041FA
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Jun 2020 22:30:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728532AbgFVUQF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 22 Jun 2020 16:16:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54772 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728333AbgFVUQF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Jun 2020 16:16:05 -0400
-Received: from smtp.al2klimov.de (smtp.al2klimov.de [IPv6:2a01:4f8:c0c:1465::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 40978C061573;
-        Mon, 22 Jun 2020 13:16:05 -0700 (PDT)
-Received: from authenticated-user (PRIMARY_HOSTNAME [PUBLIC_IP])
-        by smtp.al2klimov.de (Postfix) with ESMTPA id 2060F3F0CE;
-        Mon, 22 Jun 2020 20:15:57 +0000 (UTC)
-Subject: Re: [PATCH] Replace HTTP links with HTTPS ones: Documentation/process
-To:     Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-        Joe Perches <joe@perches.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Tony Fischetti <tony.fischetti@gmail.com>,
-        Chris Packham <chris.packham@alliedtelesis.co.nz>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        "Jason A. Donenfeld" <Jason@zx2c4.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Borislav Petkov <bp@suse.de>, Will Deacon <will@kernel.org>,
-        "Chang S. Bae" <chang.seok.bae@intel.com>,
-        Pankaj Bharadiya <pankaj.laxminarayan.bharadiya@intel.com>,
-        Kees Cook <keescook@chromium.org>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Jacob Huisman <jacobhuisman@kernelthusiast.com>,
-        Federico Vaga <federico.vaga@vaga.pv.it>,
-        =?UTF-8?Q?Jonathan_Neusch=c3=a4fer?= <j.neuschaefer@gmx.net>,
-        Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        clang-built-linux <clang-built-linux@googlegroups.com>
-References: <20200621133630.46435-1-grandmaster@al2klimov.de>
- <CANiq72kA==S-G481VHx2qrKkJmaVK7ZOuYmin4xVr3XKB8x8ug@mail.gmail.com>
- <b7ba0047-8993-d3bf-327c-1fb70bc0282c@al2klimov.de>
- <CANiq72=Y+beqZ8Dmieo_GKbyaLN8Nf1n3bVntj_o90Cn-nADRQ@mail.gmail.com>
- <20200622070623.086f1623@lwn.net>
- <CANiq72m6BNYe2ETNXJ2oLc6Jzad6kBBJK7_dz+BwZCeqYFXZqg@mail.gmail.com>
- <adf85348dcbfbf64157e6519115b3a0c9f35df55.camel@perches.com>
- <CANiq72mSz+LWLwOCa=9YtzKaD+NjhjZdRdwFiZ-gLMbjYd=QzA@mail.gmail.com>
-From:   "Alexander A. Klimov" <grandmaster@al2klimov.de>
-Message-ID: <b2eeb299-d43b-54db-07a8-b50f5b66e7b7@al2klimov.de>
-Date:   Mon, 22 Jun 2020 22:15:57 +0200
+        id S1728512AbgFVUah (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 22 Jun 2020 16:30:37 -0400
+Received: from smtprelay0210.hostedemail.com ([216.40.44.210]:35320 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1728361AbgFVUah (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Jun 2020 16:30:37 -0400
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay06.hostedemail.com (Postfix) with ESMTP id 1ACF5180431F9;
+        Mon, 22 Jun 2020 20:30:36 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:973:982:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1541:1593:1594:1711:1730:1747:1777:1792:2393:2559:2562:2828:3138:3139:3140:3141:3142:3353:3622:3865:3866:3867:3868:3870:3871:4250:4321:4605:5007:7875:7903:10004:10400:10848:11026:11232:11657:11658:11914:12043:12296:12297:12438:12740:12760:12895:13069:13095:13138:13231:13311:13357:13439:14181:14659:14721:21080:21433:21451:21627:21990:30030:30054:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:2,LUA_SUMMARY:none
+X-HE-Tag: coach14_36080fd26e35
+X-Filterd-Recvd-Size: 2596
+Received: from XPS-9350.home (unknown [47.151.133.149])
+        (Authenticated sender: joe@perches.com)
+        by omf07.hostedemail.com (Postfix) with ESMTPA;
+        Mon, 22 Jun 2020 20:30:34 +0000 (UTC)
+Message-ID: <6b0649c53e853fd2a35e9996f13e702daa0d7e2f.camel@perches.com>
+Subject: Re: [PATCH] trivial: fix kerneldoc comments
+From:   Joe Perches <joe@perches.com>
+To:     Julia Lawall <Julia.Lawall@inria.fr>, trivial@kernel.org
+Cc:     kernel-janitors@vger.kernel.org, corbet@lwn.net,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Date:   Mon, 22 Jun 2020 13:30:33 -0700
+In-Reply-To: <1592854669-20606-1-git-send-email-Julia.Lawall@inria.fr>
+References: <1592854669-20606-1-git-send-email-Julia.Lawall@inria.fr>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.36.2-0ubuntu1 
 MIME-Version: 1.0
-In-Reply-To: <CANiq72mSz+LWLwOCa=9YtzKaD+NjhjZdRdwFiZ-gLMbjYd=QzA@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-Authentication-Results: smtp.al2klimov.de;
-        auth=pass smtp.auth=aklimov@al2klimov.de smtp.mailfrom=grandmaster@al2klimov.de
-X-Spamd-Bar: /
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-
-Am 22.06.20 um 22:06 schrieb Miguel Ojeda:
-> On Mon, Jun 22, 2020 at 7:29 PM Joe Perches <joe@perches.com> wrote:
->>
->> scripts/get_maintainer.pl --self-test=links has a reachability test
->> using wget.
->>
->> Perhaps a script like that could be used for http:// vs https://
+On Mon, 2020-06-22 at 21:37 +0200, Julia Lawall wrote:
+> Fix the parameter names in the comment to correspond to those in the
+> function header.
 > 
-> +1
-> 
-> Not sure about `--no-check-certificate` if the goal is to move to
-> "proper HTTPS". Perhaps we can try first without it and if that fails,
-> print a warning and try with `--no-check-certificate` etc.
-To be honest my script even blocked HTTPS->HTTP redirections, so I opt 
-for maximum security.
+> Drop comments about return values when there is no return value.
 
-> 
-> Cheers,
-> Miguel
-> 
-Also I opt for freezing the discussion about eventual future runs of the 
-script until everything from the first run[1] has been applied.
+Done by hand or script?
+
+[]
+> diff --git a/arch/mips/cavium-octeon/executive/cvmx-spi.c b/arch/mips/cavium-octeon/executive/cvmx-spi.c
+[]
+> @@ -69,9 +69,7 @@ static cvmx_spi_callbacks_t cvmx_spi_callbacks = {
+>  /**
+>   * Get current SPI4 initialization callbacks
+>   *
+> - * @callbacks:	Pointer to the callbacks structure.to fill
+> - *
+> - * Returns Pointer to cvmx_spi_callbacks_t structure.
+> + * @callbacks:	Pointer to the callbacks structure, to fill.
+
+If scripted, odd comma after structure
+
+> diff --git a/drivers/crypto/bcm/spu.c b/drivers/crypto/bcm/spu.c
+[]
+> @@ -519,7 +519,7 @@ u32 spum_assoc_resp_len(enum spu_cipher_mode cipher_mode,
+>   * spu_aead_ivlen() - Calculate the length of the AEAD IV to be included
+>   * in a SPU request after the AAD and before the payload.
+>   * @cipher_mode:  cipher mode
+> - * @iv_ctr_len:   initialization vector length in bytes
+> + * @iv_len:   initialization vector length in bytes
+>   *
+>   * In Linux ~4.2 and later, the assoc_data sg includes the IV. So no need
+>   * to include the IV as a separate field in the SPU request msg.
+> @@ -917,7 +917,7 @@ u16 spum_cipher_req_init(u8 *spu_hdr, struct spu_cipher_parms *cipher_parms)
+>   * setkey() time in spu_cipher_req_init().
+>   * @spu_hdr:         Start of the request message header (MH field)
+>   * @spu_req_hdr_len: Length in bytes of the SPU request header
+> - * @isInbound:       0 encrypt, 1 decrypt
+> + * @is_inbound:       0 encrypt, 1 decrypt
+
+odd alignments
+
+etc...
 
 
-[1]
-➜  linux git:(master) git stash show --shortstat
-  1857 files changed, 2664 insertions(+), 2664 deletions(-)
-➜  linux git:(master)
