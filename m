@@ -2,118 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1F25F204D99
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2020 11:12:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 74C0B204E0E
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2020 11:34:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731921AbgFWJMg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Jun 2020 05:12:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33408 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731775AbgFWJMg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Jun 2020 05:12:36 -0400
-Received: from mail-il1-x143.google.com (mail-il1-x143.google.com [IPv6:2607:f8b0:4864:20::143])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0CC58C061755
-        for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2020 02:12:36 -0700 (PDT)
-Received: by mail-il1-x143.google.com with SMTP id c75so18590018ila.8
-        for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2020 02:12:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=ArED5WuE5vKbhzC135CloJUx+24YnwYK5ybAFszEdN0=;
-        b=ASFYFZLD4aP93JKRZIyA6O0H0NHUXDOOfNLHL/aMSsgdBZOsNnH3zT0gCrhdXgK8nW
-         UZDPqMRx5OCS70CZy1VvFgEANzq+vvMA9DkFdMTApsspNXbeKXUaS0QTHNEblOzMxoul
-         g+FdxpIqYFHTabKh1lUt2b2iybw5OvjuO7k6R7CoBft0DpYj3dsf39s5Kb0DNOOT3s9j
-         LDJTxdGAiwclMZ69BAQmr1FOsIRembCoClHnAnDybsAeZz+xxw/3EHmpT7OuiHsH1krE
-         eW/Q5gK2odDWFp6exLEKTP21ly+TvdRk4LNDDTmrHXsHbiKlZMNfOBHZCPU9i8aDsbAT
-         xxew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=ArED5WuE5vKbhzC135CloJUx+24YnwYK5ybAFszEdN0=;
-        b=eoTn3BdwagXYrLX/0XCeOFIaoOc7z6lsHnmFNLqXf15BxhXWig3Ic3/siVFHHmCt7P
-         VGHxqEgyIZuzX+stCjsk6v1KvVqlHjhmuFqN5OhBIRqprfxCQQlYmpWkEMnh1QSUVu2D
-         OhBW7LVpLAnTCngrKv4t+Wxj1cvUi3AlTnoJNnyDN9dGfJW09yGAGqNchfLrsD3Ym94Y
-         md4aeau/KBIbub8jxyhVTB89gXnyEG8lvdnWh+XhcrZTb9Se6n2QWx6ADEpXGBmqageN
-         bUxFX7qTzUza3MqFmSg00X5BjY8shReN4l3xEbj57rRmitpQ31+rWkKbin/87bzSwikz
-         KJVg==
-X-Gm-Message-State: AOAM5336FWNAb93bUA/FEggP6dRIucq1JZqF5IsjPYfk2qXu/XoR9p4k
-        pByRFQwam38fdSYxKE5wvr71a543Eun0k121Q2LiOA==
-X-Google-Smtp-Source: ABdhPJxU72/5mqONl5oZETdKCZkVmtw1I/YvVqqrx1X4F9E+xx1C98ZJHbHv94J5cjJ0DUueC4XDcam6w5sx7T2+tmk=
-X-Received: by 2002:a92:c509:: with SMTP id r9mr21034414ilg.189.1592903555407;
- Tue, 23 Jun 2020 02:12:35 -0700 (PDT)
+        id S1731968AbgFWJet (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Jun 2020 05:34:49 -0400
+Received: from userp2130.oracle.com ([156.151.31.86]:39658 "EHLO
+        userp2130.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731947AbgFWJes (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Jun 2020 05:34:48 -0400
+Received: from pps.filterd (userp2130.oracle.com [127.0.0.1])
+        by userp2130.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05N9GQYR018709;
+        Tue, 23 Jun 2020 09:34:38 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=date : from : to : cc
+ : subject : message-id : references : mime-version : content-type :
+ in-reply-to; s=corp-2020-01-29;
+ bh=4GZ+lAHaQT1ZwUI8rD/MMNRHeM2iw7kQTbeUV+DTFfc=;
+ b=uCJ+3MMMjtAzIAKPVHM4tivjv0fWPilltvMkeN0HCWauR4EToFJm9s91W8zURFu7uSCg
+ d8VDLP9fnFewVOGNFmVBidfcuQLObrVoykYCDMD7Mihe1QcrERe9s4cocpORqBCbBZGX
+ dM7GH35qalQC0c/f4e4pzUNyBrlEi6+UPNUZ8Ti3wH2EeSYkYeTdV4lBTZsoiutfEMSr
+ JztWBfnQYbXT8dWMo9KZtIcbqWdJhvCTaFhpUD28GBA5+FBFBpH9VNB6CZ8gXBi5T1PZ
+ cdAyFHu+ZZMilsqVU2u88qH/4gO9adlqSXy7ju2/G64S3vqNJtHaZRY1qDSQmM2xy+Mz 4g== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+        by userp2130.oracle.com with ESMTP id 31sebbm72b-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Tue, 23 Jun 2020 09:34:37 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+        by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05N9I0qZ034859;
+        Tue, 23 Jun 2020 09:32:37 GMT
+Received: from aserv0122.oracle.com (aserv0122.oracle.com [141.146.126.236])
+        by aserp3020.oracle.com with ESMTP id 31svc3nj4p-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 23 Jun 2020 09:32:37 +0000
+Received: from abhmp0005.oracle.com (abhmp0005.oracle.com [141.146.116.11])
+        by aserv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 05N9WZbN021581;
+        Tue, 23 Jun 2020 09:32:36 GMT
+Received: from kadam (/41.57.98.10)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Tue, 23 Jun 2020 09:32:35 +0000
+Date:   Tue, 23 Jun 2020 12:32:28 +0300
+From:   Dan Carpenter <dan.carpenter@oracle.com>
+To:     Julia Lawall <julia.lawall@inria.fr>
+Cc:     Joe Perches <joe@perches.com>, trivial@kernel.org,
+        kernel-janitors@vger.kernel.org, corbet@lwn.net,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] trivial: fix kerneldoc comments
+Message-ID: <20200623093228.GI4151@kadam>
+References: <1592854669-20606-1-git-send-email-Julia.Lawall@inria.fr>
+ <6b0649c53e853fd2a35e9996f13e702daa0d7e2f.camel@perches.com>
+ <alpine.DEB.2.22.394.2006230954560.2367@hadrien>
 MIME-Version: 1.0
-References: <20200622100056.10151-1-brgl@bgdev.pl> <20200622100056.10151-4-brgl@bgdev.pl>
- <20200622154943.02782b5a@kicinski-fedora-PC1C0HJN>
-In-Reply-To: <20200622154943.02782b5a@kicinski-fedora-PC1C0HJN>
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-Date:   Tue, 23 Jun 2020 11:12:24 +0200
-Message-ID: <CAMRc=MfF1RbQCJ62QhscFLu1HKYRc9M-2SMep1_vTJ2xhKjLAA@mail.gmail.com>
-Subject: Re: [PATCH 03/11] net: devres: relax devm_register_netdev()
-To:     Jakub Kicinski <kuba@kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Jeff Kirsher <jeffrey.t.kirsher@intel.com>,
-        "David S . Miller" <davem@davemloft.net>,
-        John Crispin <john@phrozen.org>,
-        Sean Wang <sean.wang@mediatek.com>,
-        Mark Lee <Mark-MC.Lee@mediatek.com>,
-        Matthias Brugger <matthias.bgg@gmail.com>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Andrew Lunn <andrew@lunn.ch>,
-        Florian Fainelli <f.fainelli@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Rob Herring <robh+dt@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        linux-doc <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        intel-wired-lan@lists.osuosl.org, netdev <netdev@vger.kernel.org>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        "moderated list:ARM/Mediatek SoC..." 
-        <linux-mediatek@lists.infradead.org>,
-        devicetree <devicetree@vger.kernel.org>,
-        Fabien Parent <fparent@baylibre.com>,
-        Stephane Le Provost <stephane.leprovost@mediatek.com>,
-        Pedro Tsai <pedro.tsai@mediatek.com>,
-        Andrew Perepech <andrew.perepech@mediatek.com>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <alpine.DEB.2.22.394.2006230954560.2367@hadrien>
+User-Agent: Mutt/1.9.4 (2018-02-28)
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9660 signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxscore=0 phishscore=0 bulkscore=0
+ spamscore=0 suspectscore=0 mlxlogscore=999 malwarescore=0 adultscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2004280000
+ definitions=main-2006230074
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9660 signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 lowpriorityscore=0
+ mlxlogscore=999 cotscore=-2147483648 mlxscore=0 phishscore=0
+ priorityscore=1501 malwarescore=0 bulkscore=0 suspectscore=0 clxscore=1011
+ impostorscore=0 spamscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2004280000 definitions=main-2006230074
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-wt., 23 cze 2020 o 00:49 Jakub Kicinski <kuba@kernel.org> napisa=C5=82(a):
->
-> On Mon, 22 Jun 2020 12:00:48 +0200 Bartosz Golaszewski wrote:
-> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Tue, Jun 23, 2020 at 09:59:57AM +0200, Julia Lawall wrote:
+> > > diff --git a/drivers/crypto/bcm/spu.c b/drivers/crypto/bcm/spu.c
+> > []
+> > > @@ -519,7 +519,7 @@ u32 spum_assoc_resp_len(enum spu_cipher_mode cipher_mode,
+> > >   * spu_aead_ivlen() - Calculate the length of the AEAD IV to be included
+> > >   * in a SPU request after the AAD and before the payload.
+> > >   * @cipher_mode:  cipher mode
+> > > - * @iv_ctr_len:   initialization vector length in bytes
+> > > + * @iv_len:   initialization vector length in bytes
+> > >   *
+> > >   * In Linux ~4.2 and later, the assoc_data sg includes the IV. So no need
+> > >   * to include the IV as a separate field in the SPU request msg.
+> > > @@ -917,7 +917,7 @@ u16 spum_cipher_req_init(u8 *spu_hdr, struct spu_cipher_parms *cipher_parms)
+> > >   * setkey() time in spu_cipher_req_init().
+> > >   * @spu_hdr:         Start of the request message header (MH field)
+> > >   * @spu_req_hdr_len: Length in bytes of the SPU request header
+> > > - * @isInbound:       0 encrypt, 1 decrypt
+> > > + * @is_inbound:       0 encrypt, 1 decrypt
 > >
-> > This devres helper registers a release callback that only unregisters
-> > the net_device. It works perfectly fine with netdev structs that are
-> > not managed on their own. There's no reason to check this - drop the
-> > warning.
-> >
-> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
->
-> I think the reasoning for this suggestion was to catch possible UAF
-> errors. The netdev doesn't necessarily has to be from devm_alloc_*
-> but it has to be part of devm-ed memory or memory which is freed
-> after driver's remove callback.
->
+> > odd alignments
+> 
+> Sorry to have missed these.
+> 
+> > etc...
+> 
+> Are there a lot of other such problems?  I did look through the whole
+> patch several times by hand, but perhaps it is just too big to see
+> everything.
 
-Yes I understand that UAF was the concern here, but this limitation is
-unnecessary. In its current form devm_register_netdev() only works for
-struct net_device allocated with devm_alloc_etherdev(). Meanwhile
-calling alloc_netdev() (which doesn't have its devm counterpart yet -
-I may look into it shortly), then registering a devm action with
-devm_add_action_or_reset() which would free this memory is a perfectly
-fine use case. This patch would make it possible.
+Probably the comments for spum_assoc_resp_len() could be tweaked.
 
-> Are there cases in practice where you've seen the netdev not being
-> devm allocated?
+I had written an email about this one that Joe mentioned and
+spum_assoc_resp_len() but then I decided that it wasn't enough to worry
+about so I deleted the email instead of sending it.
 
-As I said above - alloc_netdev() used by wireless, can, usb etc.
-drivers doesn't have a devres variant.
+regards,
+dan carpenter
 
-Bartosz
