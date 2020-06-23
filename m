@@ -2,173 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5BAD1204C43
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2020 10:25:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 23AEA204D9E
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2020 11:13:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731579AbgFWIY7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Jun 2020 04:24:59 -0400
-Received: from mail.kernel.org ([198.145.29.99]:51916 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731567AbgFWIY7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 23 Jun 2020 04:24:59 -0400
-Received: from coco.lan (unknown [95.90.213.197])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 43FEE2072E;
-        Tue, 23 Jun 2020 08:24:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1592900698;
-        bh=hlJ9LORbnEGGoe61FJRAAwA6gCTDCRI6rwTib7m7SFU=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=JPNdRhZBYg7QeDl5hOx4AJ7HAdJPHLP3k/shl92PI6pXgDw+Kncj4Cv0dqYcK/7/Y
-         EhEvrtC3isHRy3poyej0xQyl3LSpY/jIZlZ4FgEp7SQV0KiFQwRwClDMR+4ZGoxMRU
-         rcmEsa4hJtnTG/dpgAPMqgquFDNRgjCgWbFrEozw=
-Date:   Tue, 23 Jun 2020 10:24:54 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Steven Rostedt <rostedt@goodmis.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 18/22] docs: trace: ring-buffer-design.txt: convert to
- ReST format
-Message-ID: <20200623102454.4ca57b61@coco.lan>
-In-Reply-To: <20200619164114.00379740@oasis.local.home>
-References: <cover.1592203650.git.mchehab+huawei@kernel.org>
-        <c11ee0be2bf63626887d7cd38e7572b31e2a2ce2.1592203650.git.mchehab+huawei@kernel.org>
-        <20200619141329.3867e57e@lwn.net>
-        <20200619164114.00379740@oasis.local.home>
-X-Mailer: Claws Mail 3.17.5 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1731904AbgFWJNm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Jun 2020 05:13:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33578 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731894AbgFWJNm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Jun 2020 05:13:42 -0400
+X-Greylist: delayed 374 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 23 Jun 2020 02:13:41 PDT
+Received: from pandora.armlinux.org.uk (pandora.armlinux.org.uk [IPv6:2001:4d48:ad52:32c8:5054:ff:fe00:142])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D2452C061573
+        for <linux-doc@vger.kernel.org>; Tue, 23 Jun 2020 02:13:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=armlinux.org.uk; s=pandora-2019; h=Sender:In-Reply-To:Content-Type:
+        MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description:Resent-Date:
+        Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:
+        List-Help:List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
+         bh=ldF/aN/WggG+cvw07PS2qf0wY+Ysa/Xufqs3vIX/7fs=; b=CfNyO82vWkKTd5/tOSOB91ztt
+        gG2fiGzCuEWqnH3MABNjqRySpjdWdWACCUb0Swu7px6H/OceAZGBHBeAvpE520Qg6VezpvNCC6QyW
+        mMpdTLkn+H9snD1Xd2nXA88ixm/UIQY/q6/eLd3RselqnScIMFgB6/XSH0dFbH9Z+1UZZNsHBhPHA
+        8BOdfsY0Bq8vFoDHrkP01zbTs5qD0mF0B6j9MxLFXwiCHIWEcz13NcRYA52eHFcJEmX9kD8h1iqpT
+        1UoWct/v8vAsi7L7dEKMnJZDk7Rk8/JHPrWbRXHrfpNXA+APnehvlZ8Sfaj9icJpxB+f7LxFX7CiI
+        M3f376coQ==;
+Received: from shell.armlinux.org.uk ([fd8f:7570:feb6:1:5054:ff:fe00:4ec]:59008)
+        by pandora.armlinux.org.uk with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.92)
+        (envelope-from <linux@armlinux.org.uk>)
+        id 1jnetn-0001XI-Dr; Tue, 23 Jun 2020 10:07:23 +0100
+Received: from linux by shell.armlinux.org.uk with local (Exim 4.92)
+        (envelope-from <linux@shell.armlinux.org.uk>)
+        id 1jneti-0000tY-Fs; Tue, 23 Jun 2020 10:07:18 +0100
+Date:   Tue, 23 Jun 2020 10:07:18 +0100
+From:   Russell King - ARM Linux admin <linux@armlinux.org.uk>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        "David S. Miller" <davem@davemloft.net>,
+        Florian Fainelli <f.fainelli@gmail.com>, netdev@vger.kernel.org
+Subject: Re: [PATCH v2 05/15] net: pylink.h: add kernel-doc descriptions for
+ new fields at phylink_config
+Message-ID: <20200623090718.GR1551@shell.armlinux.org.uk>
+References: <cover.1592895969.git.mchehab+huawei@kernel.org>
+ <34970f447ff86415a6cef10a785fbef81c2819a7.1592895969.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <34970f447ff86415a6cef10a785fbef81c2819a7.1592895969.git.mchehab+huawei@kernel.org>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Fri, 19 Jun 2020 16:41:14 -0400
-Steven Rostedt <rostedt@goodmis.org> escreveu:
-
-> On Fri, 19 Jun 2020 14:13:29 -0600
-> Jonathan Corbet <corbet@lwn.net> wrote:
+On Tue, Jun 23, 2020 at 09:09:01AM +0200, Mauro Carvalho Chehab wrote:
+> Some fields were moved from struct phylink into phylink_config.
+> Update the kernel-doc markups for the config struct accordingly
 > 
-> > On Mon, 15 Jun 2020 08:50:23 +0200
-> > Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-> > 
-> > [CC += Steve]  
+> Fixes: 5c05c1dbb177 ("net: phylink, dsa: eliminate phylink_fixed_state_cb()")
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+
+Reviewed-by: Russell King <rmk+kernel@armlinux.org.uk>
+
+Thanks.
+
+> ---
+>  include/linux/phylink.h | 4 ++++
+>  1 file changed, 4 insertions(+)
 > 
-> Thanks.
-> 
-> >   
-> > > - Just like some media documents, this file is dual licensed
-> > >   with GPL and GFDL. As right now the GFDL SPDX definition is
-> > >   bogus (as it doesn't tell anything about invariant parts),
-> > >   let's not use SPDX here. Let's use, instead, the same test
-> > >   as we have on media.    
-> > 
-> > The dual-licensing really can't be expressed with an SPDX tag?  Because...  
-> 
-> A SPDX dual license should be possible, as it's used for GPL and BSD in
-> several locations.
-
-Until one week ago, this was not possible, because SPDX headers
-were broken for GFDL:
-
-	https://github.com/spdx/license-list-XML/issues/686
-	https://github.com/spdx/license-list-XML/issues/970
-
-There are 2 types of GFDL licenses:
-	- a Free license where the entire document allows
-	  reviewing/changing;
-	- a non-free variant, were some parts of the document
-	  have a non-free license, where only the author can
-	  change (called invariant parts).
-
-Basically, some distro policies don't allow shipping documents
-under the non-free version of GFDL.
-
-The SPDX spec (up to version 3.9) doesn't allow differentiating
-between them.
-
--
-
-There's now an upstream patch (at SPDX) to be merged on the upcoming
-versin 3.10 that will allow us to finally get rid of those:
-
-	https://github.com/spdx/license-list-XML/pull/1048/commits/f695d2ac65230d0f4161ba58fff2f9d87bb5a053#diff-b948674e5c5cf6341e44e76b2565e80c
-
-The GFDL-1.2 with no invariant sections is defined as:
-
-	<SPDXLicenseCollection xmlns="http://www.spdx.org/license">
-	  <license licenseId="GFDL-1.2-only-no-invariants" isOsiApproved="false"
-	  name="GNU Free Documentation License v1.2 only - no invariants">
-	    <crossRefs>
-	      <crossRef>https://www.gnu.org/licenses/old-licenses/fdl-1.2.txt</crossRef>
-	    </crossRefs>
-	    <standardLicenseHeader>
-	      Copyright (c) <alt name="copyright" match=".+">YEAR YOUR NAME</alt>.
-	      Permission is granted to copy, distribute and/or modify this
-	      document under the terms of the GNU Free Documentation License,
-	      Version 1.2; with no Invariant Sections, no Front-Cover Texts,
-	      and no Back-Cover Texts. A copy of the license is included
-	      in the section entitled "GNU Free Documentation License".
-	    </standardLicenseHeader>
-	    <notes>
-	      This license was released November 2002. The identifier 
-	      GFDL-1.2-only-no-invariants should only be used when there are 
-	      no Invariant Sections, Front-Cover Texts or Back-Cover Texts. 
-	      See GFDL-1.2-only and GFDL-1.2-only-invariants for alternatives.
-	    </notes>
-
-> 
-> > 
-> > [...]
-> >   
-> > > +.. This file is dual-licensed: you can use it either under the terms
-> > > +.. of the GPL 2.0 or the GFDL 1.2+ license, at your option. Note that this  
-> 
-> And I never said GFDL 1.2+
-
-Ah, right. I'll fix it.
-
-> 
->  Copyright 2009 Red Hat Inc.                                                                                                                                                                  
-> -   Author:   Steven Rostedt <srostedt@redhat.com>                                                                                                                                            
-> -  License:   The GNU Free Documentation License, Version 1.2                                                                                                                                 
-> -               (dual licensed under the GPL v2)                                                                                                                                              
-> -Reviewers:   Mathieu Desnoyers, Huang Ying, Hidetoshi Seto,
-> 
-> There is no "+" sign here.
+> diff --git a/include/linux/phylink.h b/include/linux/phylink.h
+> index cc5b452a184e..02ff1419d4be 100644
+> --- a/include/linux/phylink.h
+> +++ b/include/linux/phylink.h
+> @@ -62,6 +62,10 @@ enum phylink_op_type {
+>   * @dev: a pointer to a struct device associated with the MAC
+>   * @type: operation type of PHYLINK instance
+>   * @pcs_poll: MAC PCS cannot provide link change interrupt
+> + * @poll_fixed_state: if true, starts link_poll,
+> + *		      if MAC link is at %MLO_AN_FIXED mode.
+> + * @get_fixed_state: callback to execute to determine the fixed link state,
+> + *		     if MAC link is at %MLO_AN_FIXED mode.
+>   */
+>  struct phylink_config {
+>  	struct device *dev;
+> -- 
+> 2.26.2
 > 
 > 
-> > > +.. dual licensing only applies to this file, and not this project as a
-> > > +.. whole.
-> > > +..
-> > > +.. a) This file is free software; you can redistribute it and/or
-> > > +..    modify it under the terms of the GNU General Public License as
-> > > +..    published by the Free Software Foundation version 2 of
-> > > +..    the License.
-> > > +..
-> > > +..    This file is distributed in the hope that it will be useful,
-> > > +..    but WITHOUT ANY WARRANTY; without even the implied warranty of
-> > > +..    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-> > > +..    GNU General Public License for more details.
-> > > +..
-> > > +.. Or, alternatively,
-> > > +..
-> > > +.. b) Permission is granted to copy, distribute and/or modify this
-> > > +..    document under the terms of the GNU Free Documentation License,
-> > > +..    Version 1.1 or any later version published by the Free Software
-> > > +..    Foundation, with no Invariant Sections, no Front-Cover Texts
-> > > +..    and no Back-Cover Texts. A copy of the license is available at
-> > > +..    https://www.gnu.org/licenses/old-licenses/fdl-1.2.html
-> > > +..
-> > > +.. TODO: replace it to GPL-2.0 OR GFDL-1.2-or-later WITH no-invariant-sections    
-> 
->   "GPL-2.0 OR GFDL-1.2"
 
-It should actually be:
-
-	"GPL-2.0 OR GFDL-1.2-only-no-invariants"
-
-Thanks,
-Mauro
+-- 
+RMK's Patch system: https://www.armlinux.org.uk/developer/patches/
+FTTP is here! 40Mbps down 10Mbps up. Decent connectivity at last!
