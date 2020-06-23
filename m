@@ -2,190 +2,229 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ACE45205200
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2020 14:11:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 062D72052B0
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Jun 2020 14:40:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732721AbgFWMKr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Jun 2020 08:10:47 -0400
-Received: from aserp2120.oracle.com ([141.146.126.78]:51414 "EHLO
-        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1732666AbgFWMKU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Jun 2020 08:10:20 -0400
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
-        by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05NC7xCi052195;
-        Tue, 23 Jun 2020 12:09:40 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id : in-reply-to : references; s=corp-2020-01-29;
- bh=piFlB25aXkJeCvTSRN6LVwlMTEUrblHlqEexrR32XGs=;
- b=QmlGLwknNLwBN3UCIr/tPbO8gUgcHm01+B9FITPQ6NMnwF4Nk/Os4M4zdIRpepH4Q8P6
- ZVmB25IcXm1ZcZc/tsQMlj4BlKAdL2+MOJut3OXzwvm8fF0m7O/L57GNuk/thnyvyOBI
- s0y2VjsD6FVGKYeFcsW+yHLkX6MDtfMM+Lz6x6rr+vGjoi2YSJFLiGbgkBorz2pCh2kw
- lI2xrd3/tyN7gOxm9jNYSnVQgStWUZKmMQ9C//f8USeZwXCZd1HuGFmLcuOffkbGONO5
- oXnX6/T3iHQXdUK9HasdVO4t1+mUXaidC/s7yE+rHy5+oEs++o04ZWJTtJH/MQWq+86Y tA== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
-        by aserp2120.oracle.com with ESMTP id 31sebbcvc8-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-        Tue, 23 Jun 2020 12:09:39 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
-        by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 05NC884p185787;
-        Tue, 23 Jun 2020 12:09:39 GMT
-Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
-        by userp3020.oracle.com with ESMTP id 31sv7rq6nj-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Tue, 23 Jun 2020 12:09:39 +0000
-Received: from abhmp0017.oracle.com (abhmp0017.oracle.com [141.146.116.23])
-        by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 05NC9bio026996;
-        Tue, 23 Jun 2020 12:09:37 GMT
-Received: from localhost.uk.oracle.com (/10.175.166.3)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Tue, 23 Jun 2020 12:09:37 +0000
-From:   Alan Maguire <alan.maguire@oracle.com>
-To:     ast@kernel.org, daniel@iogearbox.net, yhs@fb.com, andriin@fb.com,
-        arnaldo.melo@gmail.com
-Cc:     kafai@fb.com, songliubraving@fb.com, john.fastabend@gmail.com,
-        kpsingh@chromium.org, linux@rasmusvillemoes.dk, joe@perches.com,
-        pmladek@suse.com, rostedt@goodmis.org,
-        sergey.senozhatsky@gmail.com, andriy.shevchenko@linux.intel.com,
-        corbet@lwn.net, bpf@vger.kernel.org, netdev@vger.kernel.org,
+        id S1732569AbgFWMkR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Jun 2020 08:40:17 -0400
+Received: from mga02.intel.com ([134.134.136.20]:43994 "EHLO mga02.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729667AbgFWMkQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 23 Jun 2020 08:40:16 -0400
+IronPort-SDR: gpBueS7DOmCnqwOvGG1aSv1LxeztbThOqTj2rMqDBtfy0mHrlvUX9d7aCJmibfWTQ3JKXx9Ojc
+ ayo6wgpExhcg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9660"; a="132456225"
+X-IronPort-AV: E=Sophos;i="5.75,271,1589266800"; 
+   d="scan'208";a="132456225"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Jun 2020 05:40:16 -0700
+IronPort-SDR: 5lRppJexD/ARHDG5mePXGJ6sfnJXLRvXiDKtvitz2J+G7BLb6RJ6uxLoFK4H0s7hzIyWJkiQF1
+ s23kOdoFhmpA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.75,271,1589266800"; 
+   d="scan'208";a="293186482"
+Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
+  by orsmga002.jf.intel.com with ESMTP; 23 Jun 2020 05:40:11 -0700
+Received: from andy by smile with local (Exim 4.94)
+        (envelope-from <andriy.shevchenko@linux.intel.com>)
+        id 1jniDk-00FMag-OT; Tue, 23 Jun 2020 15:40:12 +0300
+Date:   Tue, 23 Jun 2020 15:40:12 +0300
+From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To:     Alan Maguire <alan.maguire@oracle.com>
+Cc:     ast@kernel.org, daniel@iogearbox.net, yhs@fb.com, andriin@fb.com,
+        arnaldo.melo@gmail.com, kafai@fb.com, songliubraving@fb.com,
+        john.fastabend@gmail.com, kpsingh@chromium.org,
+        linux@rasmusvillemoes.dk, joe@perches.com, pmladek@suse.com,
+        rostedt@goodmis.org, sergey.senozhatsky@gmail.com, corbet@lwn.net,
+        bpf@vger.kernel.org, netdev@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH v3 bpf-next 8/8] bpf/selftests: add tests for %pT format specifier
-Date:   Tue, 23 Jun 2020 13:07:11 +0100
-Message-Id: <1592914031-31049-9-git-send-email-alan.maguire@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-In-Reply-To: <1592914031-31049-1-git-send-email-alan.maguire@oracle.com>
+Subject: Re: [PATCH v3 bpf-next 4/8] printk: add type-printing %pT format
+ specifier which uses BTF
+Message-ID: <20200623124012.GV2428291@smile.fi.intel.com>
 References: <1592914031-31049-1-git-send-email-alan.maguire@oracle.com>
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9660 signatures=668680
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 malwarescore=0
- phishscore=0 bulkscore=0 spamscore=0 suspectscore=0 mlxlogscore=999
- mlxscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2004280000 definitions=main-2006230097
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9660 signatures=668680
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 mlxlogscore=999 cotscore=-2147483648
- lowpriorityscore=0 phishscore=0 bulkscore=0 clxscore=1015 impostorscore=0
- malwarescore=0 priorityscore=1501 spamscore=0 mlxscore=0 adultscore=0
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2004280000 definitions=main-2006230097
+ <1592914031-31049-5-git-send-email-alan.maguire@oracle.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1592914031-31049-5-git-send-email-alan.maguire@oracle.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-tests verify we get 0 return value from bpf_trace_print()
-using %pT format specifier with various modifiers/pointer
-values.
+On Tue, Jun 23, 2020 at 01:07:07PM +0100, Alan Maguire wrote:
+> printk supports multiple pointer object type specifiers (printing
+> netdev features etc).  Extend this support using BTF to cover
+> arbitrary types.
 
-Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
----
- .../selftests/bpf/prog_tests/trace_printk_btf.c    | 45 +++++++++++++++++++++
- .../selftests/bpf/progs/netif_receive_skb.c        | 47 ++++++++++++++++++++++
- 2 files changed, 92 insertions(+)
- create mode 100644 tools/testing/selftests/bpf/prog_tests/trace_printk_btf.c
- create mode 100644 tools/testing/selftests/bpf/progs/netif_receive_skb.c
+Is there any plans to cover (all?) existing %p extensions?
 
-diff --git a/tools/testing/selftests/bpf/prog_tests/trace_printk_btf.c b/tools/testing/selftests/bpf/prog_tests/trace_printk_btf.c
-new file mode 100644
-index 0000000..791eb97
---- /dev/null
-+++ b/tools/testing/selftests/bpf/prog_tests/trace_printk_btf.c
-@@ -0,0 +1,45 @@
-+// SPDX-License-Identifier: GPL-2.0
-+#include <test_progs.h>
-+
-+#include "netif_receive_skb.skel.h"
-+
-+void test_trace_printk_btf(void)
-+{
-+	struct netif_receive_skb *skel;
-+	struct netif_receive_skb__bss *bss;
-+	int err, duration = 0;
-+
-+	skel = netif_receive_skb__open();
-+	if (CHECK(!skel, "skel_open", "failed to open skeleton\n"))
-+		return;
-+
-+	err = netif_receive_skb__load(skel);
-+	if (CHECK(err, "skel_load", "failed to load skeleton: %d\n", err))
-+		goto cleanup;
-+
-+	bss = skel->bss;
-+
-+	err = netif_receive_skb__attach(skel);
-+	if (CHECK(err, "skel_attach", "skeleton attach failed: %d\n", err))
-+		goto cleanup;
-+
-+	/* generate receive event */
-+	system("ping -c 1 127.0.0.1 >/dev/null");
-+
-+	/*
-+	 * Make sure netif_receive_skb program was triggered
-+	 * and it set expected return values from bpf_trace_printk()s
-+	 * and all tests ran.
-+	 */
-+	if (CHECK(bss->ret <= 0,
-+		  "bpf_trace_printk: got return value",
-+		  "ret <= 0 %d test %d\n", bss->ret, bss->num_subtests))
-+		goto cleanup;
-+
-+	CHECK(bss->num_subtests != bss->ran_subtests, "check all subtests ran",
-+	      "only ran %d of %d tests\n", bss->num_subtests,
-+	      bss->ran_subtests);
-+
-+cleanup:
-+	netif_receive_skb__destroy(skel);
-+}
-diff --git a/tools/testing/selftests/bpf/progs/netif_receive_skb.c b/tools/testing/selftests/bpf/progs/netif_receive_skb.c
-new file mode 100644
-index 0000000..03ca1d8
---- /dev/null
-+++ b/tools/testing/selftests/bpf/progs/netif_receive_skb.c
-@@ -0,0 +1,47 @@
-+// SPDX-License-Identifier: GPL-2.0
-+/* Copyright (c) 2020, Oracle and/or its affiliates. */
-+#include "vmlinux.h"
-+#include <bpf/bpf_helpers.h>
-+#include <bpf/bpf_tracing.h>
-+
-+char _license[] SEC("license") = "GPL";
-+
-+int ret;
-+int num_subtests;
-+int ran_subtests;
-+
-+#define CHECK_PRINTK(_fmt, _p, res)					\
-+	do {								\
-+		char fmt[] = _fmt;					\
-+		++num_subtests;						\
-+		if (ret >= 0) {						\
-+			++ran_subtests;					\
-+			ret = bpf_trace_printk(fmt, sizeof(fmt), (_p));	\
-+		}							\
-+	} while (0)
-+
-+/* TRACE_EVENT(netif_receive_skb,
-+ *	TP_PROTO(struct sk_buff *skb),
-+ */
-+SEC("tp_btf/netif_receive_skb")
-+int BPF_PROG(trace_netif_receive_skb, struct sk_buff *skb)
-+{
-+	char skb_type[] = "struct sk_buff";
-+	struct btf_ptr nullp = { .ptr = 0, .type = skb_type };
-+	struct btf_ptr p = { .ptr = skb, .type = skb_type };
-+
-+	CHECK_PRINTK("%pT\n", &p, &res);
-+	CHECK_PRINTK("%pTc\n", &p, &res);
-+	CHECK_PRINTK("%pTN\n", &p, &res);
-+	CHECK_PRINTK("%pTx\n", &p, &res);
-+	CHECK_PRINTK("%pT0\n", &p, &res);
-+	CHECK_PRINTK("%pTcNx0\n", &p, &res);
-+	CHECK_PRINTK("%pT\n", &nullp, &res);
-+	CHECK_PRINTK("%pTc\n", &nullp, &res);
-+	CHECK_PRINTK("%pTN\n", &nullp, &res);
-+	CHECK_PRINTK("%pTx\n", &nullp, &res);
-+	CHECK_PRINTK("%pT0\n", &nullp, &res);
-+	CHECK_PRINTK("%pTcNx0\n", &nullp, &res);
-+
-+	return 0;
-+}
+> "%pT"
+
+One letter namespace is quite busy area. Perhaps %pOT ?
+
+> specifies the typed format, and the pointer
+> argument is a "struct btf_ptr *" where struct btf_ptr is as follows:
+> 
+> struct btf_ptr {
+>         void *ptr;
+>         const char *type;
+>         u32 id;
+> };
+> 
+> Either the "type" string ("struct sk_buff") or the BTF "id" can be
+> used to identify the type to use in displaying the associated "ptr"
+> value.  A convenience function to create and point at the struct
+> is provided:
+> 
+>         printk(KERN_INFO "%pT", BTF_PTR_TYPE(skb, struct sk_buff));
+> 
+> When invoked, BTF information is used to traverse the sk_buff *
+> and display it.  Support is present for structs, unions, enums,
+> typedefs and core types (though in the latter case there's not
+> much value in using this feature of course).
+> 
+> Default output is indented, but compact output can be specified
+> via the 'c' option.  Type names/member values can be suppressed
+> using the 'N' option.  Zero values are not displayed by default
+> but can be using the '0' option.  Pointer values are obfuscated
+> unless the 'x' option is specified.  As an example:
+> 
+>   struct sk_buff *skb = alloc_skb(64, GFP_KERNEL);
+>   pr_info("%pT", BTF_PTR_TYPE(skb, struct sk_buff));
+> 
+> ...gives us:
+> 
+> (struct sk_buff){
+>  .transport_header = (__u16)65535,
+>  .mac_header = (__u16)65535,
+>  .end = (sk_buff_data_t)192,
+>  .head = (unsigned char *)0x000000006b71155a,
+>  .data = (unsigned char *)0x000000006b71155a,
+>  .truesize = (unsigned int)768,
+>  .users = (refcount_t){
+>   .refs = (atomic_t){
+>    .counter = (int)1,
+>   },
+>  },
+>  .extensions = (struct skb_ext *)0x00000000f486a130,
+> }
+
+I don't see how it looks on a real console when kernel dumps something.
+Care to provide? These examples better to have documented.
+
+> printk output is truncated at 1024 bytes.  For cases where overflow
+> is likely, the compact/no type names display modes may be used.
+
+How * is handled? (I mean %*pOT case)
+
+...
+
+> +#define	BTF_PTR_TYPE(ptrval, typeval) \
+> +	(&((struct btf_ptr){.ptr = ptrval, .type = #typeval}))
+> +
+> +#define BTF_PTR_ID(ptrval, idval) \
+> +	(&((struct btf_ptr){.ptr = ptrval, .id = idval}))
+
+Wouldn't be better if these will leave in its own (linker) section?
+
+...
+
+> +static noinline_for_stack
+> +char *btf_string(char *buf, char *end, void *ptr, struct printf_spec spec,
+> +		 const char *fmt)
+> +{
+
+> +	struct btf_ptr *bp = (struct btf_ptr *)ptr;
+
+Unneeded casting.
+
+> +	u8 btf_kind = BTF_KIND_TYPEDEF;
+> +	const struct btf_type *t;
+> +	const struct btf *btf;
+> +	char *buf_start = buf;
+> +	const char *btf_type;
+> +	u64 flags = 0, mod;
+> +	s32 btf_id;
+> +
+> +	if (check_pointer(&buf, end, ptr, spec))
+> +		return buf;
+> +
+> +	if (check_pointer(&buf, end, bp->ptr, spec))
+> +		return buf;
+
+> +	while (isalnum(*fmt)) {
+> +		mod = btf_modifier_flag(*fmt);
+> +		if (!mod)
+> +			break;
+> +		flags |= mod;
+> +		fmt++;
+> +	}
+
+Can't we have explicitly all handled flags here, like other extensions do?
+
+> +	btf = bpf_get_btf_vmlinux();
+> +	if (IS_ERR_OR_NULL(btf))
+> +		return ptr_to_id(buf, end, bp->ptr, spec);
+> +
+> +	if (bp->type != NULL) {
+> +		btf_type = bp->type;
+> +
+> +		if (strncmp(bp->type, "struct ", strlen("struct ")) == 0) {
+> +			btf_kind = BTF_KIND_STRUCT;
+> +			btf_type += strlen("struct ");
+> +		} else if (strncmp(btf_type, "union ", strlen("union ")) == 0) {
+> +			btf_kind = BTF_KIND_UNION;
+> +			btf_type += strlen("union ");
+> +		} else if (strncmp(btf_type, "enum ", strlen("enum ")) == 0) {
+> +			btf_kind = BTF_KIND_ENUM;
+> +			btf_type += strlen("enum ");
+> +		}
+
+Can't you provide a simple structure and do this in a loop?
+Or even something like match_[partial]string() to implement?
+
+> +		if (strlen(btf_type) == 0)
+
+Interesting way of checking btf_type == '\0'.
+
+> +			return ptr_to_id(buf, end, bp->ptr, spec);
+> +
+> +		/*
+> +		 * Assume type specified is a typedef as there's not much
+> +		 * benefit in specifying int types other than wasting time
+> +		 * on BTF lookups; we optimize for the most useful path.
+> +		 *
+> +		 * Fall back to BTF_KIND_INT if this fails.
+> +		 */
+> +		btf_id = btf_find_by_name_kind(btf, btf_type, btf_kind);
+> +		if (btf_id < 0)
+> +			btf_id = btf_find_by_name_kind(btf, btf_type,
+> +						       BTF_KIND_INT);
+> +	} else if (bp->id > 0)
+> +		btf_id = bp->id;
+> +	else
+> +		return ptr_to_id(buf, end, bp->ptr, spec);
+> +
+
+> +	if (btf_id > 0)
+> +		t = btf_type_by_id(btf, btf_id);
+> +	if (btf_id <= 0 || !t)
+> +		return ptr_to_id(buf, end, bp->ptr, spec);
+
+This can be easily incorporated in previous conditional tree.
+
+> +	buf += btf_type_snprintf_show(btf, btf_id, bp->ptr, buf,
+> +				      end - buf_start, flags);
+> +
+> +	return widen_string(buf, buf - buf_start, end, spec);
+> +}
+
 -- 
-1.8.3.1
+With Best Regards,
+Andy Shevchenko
+
 
