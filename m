@@ -2,101 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8D32F20BB1F
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2020 23:10:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5318E20BAF6
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2020 23:09:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726515AbgFZVKN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Jun 2020 17:10:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48696 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726373AbgFZVJf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jun 2020 17:09:35 -0400
-Received: from mail-qv1-xf4a.google.com (mail-qv1-xf4a.google.com [IPv6:2607:f8b0:4864:20::f4a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 302C2C08C5E2
-        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2020 14:09:34 -0700 (PDT)
-Received: by mail-qv1-xf4a.google.com with SMTP id v20so7241756qvt.15
-        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2020 14:09:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=hVa5/5YjHA4HA55L6gqApWSV/fHdhhYIjiCaFnqYV3g=;
-        b=QoyX5QkLkeZufbY3DPWqVcx8p1G2Pf6aerfPyt2zQE/ujAwEYOP4MavORdpoC0kiKu
-         EBTjnDggRXo0KQe45lMKlqgesoVoq2M/WZaVEKYilzw17KOXTZudXtu6crQek7qlLud6
-         wgqfeApVUIS2o9DKhJa1hfmORSYPYOqHxCziPwrSa4G+57ASkLll7CukI9nktN3Owv9v
-         NukYDAxu7zl52PVDoi+7jdhfKkThnizMJ68rg/tVzgIVSHiP3aAKWELQxmH03U/bRKpt
-         6Wgu+YeU85Wm8LsbzjbD34Ud+5/9JGpyI65sawIxfi18MEFZnvGjX41U/bIx6IVwD7H1
-         RvYQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=hVa5/5YjHA4HA55L6gqApWSV/fHdhhYIjiCaFnqYV3g=;
-        b=X3A3fZNb08/KZ6TP4B5hLAaM42hwsyyV/JBcWnwXtyLJoWcozlXhzuWyvE3+h8EdaB
-         UZcEz9rKW7D5xRoxrnnyUuneP50sWCw209eHh+00ICtSEpCtLiP/ZibjW44RNV8IVtB4
-         xbf4bfeBKFx96LSMEEz5CnQKtxAVlG9t9MOylmoxkb9hoI3AEIlbVM8LyQtUR/iV9hFN
-         tUF0+CeSFfDrx7ukrxM7t2xPYSMrekzVHSA04luWoZHjRmSS6AYP8kcfmY7EWv3dUXug
-         PJLN0ZLh4SbWiX871sNvqAsT9Bf7NmDwEG/7hkPinriWjm7fjHknK9vdCwKnU+8UhOZ/
-         MQng==
-X-Gm-Message-State: AOAM530l4nMdFKtXZTP9nJlQY7kKX7/r/R7rAhS0N7PZ6hJBNTeEE50s
-        rMV0zcbiBxRjSJcWAkXUhjdy2snEaI0qnBe0yafnog==
-X-Google-Smtp-Source: ABdhPJypYrK6iZse6cCSs4YnSv2AzXM6d8Vad2NCnBdBrfM4NUTiqCIXIvHzUdHQAv3Yb81UEf64dXgB2cs8yGqX9AXtcw==
-X-Received: by 2002:a0c:8e8c:: with SMTP id x12mr5032791qvb.55.1593205773222;
- Fri, 26 Jun 2020 14:09:33 -0700 (PDT)
-Date:   Fri, 26 Jun 2020 14:09:10 -0700
-In-Reply-To: <20200626210917.358969-1-brendanhiggins@google.com>
-Message-Id: <20200626210917.358969-6-brendanhiggins@google.com>
-Mime-Version: 1.0
-References: <20200626210917.358969-1-brendanhiggins@google.com>
-X-Mailer: git-send-email 2.27.0.212.ge8ba1cc988-goog
-Subject: [PATCH v5 05/12] arch: um: add linker section for KUnit test suites
-From:   Brendan Higgins <brendanhiggins@google.com>
-To:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
-        arnd@arndb.de, keescook@chromium.org, skhan@linuxfoundation.org,
-        alan.maguire@oracle.com, yzaikin@google.com, davidgow@google.com,
-        akpm@linux-foundation.org, rppt@linux.ibm.com,
-        frowand.list@gmail.com, catalin.marinas@arm.com, will@kernel.org,
-        monstr@monstr.eu, mpe@ellerman.id.au, benh@kernel.crashing.org,
-        paulus@samba.org, chris@zankel.net, jcmvbkbc@gmail.com
-Cc:     gregkh@linuxfoundation.org, sboyd@kernel.org, logang@deltatee.com,
-        mcgrof@kernel.org, linux-um@lists.infradead.org,
-        linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        kunit-dev@googlegroups.com, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linuxppc-dev@lists.ozlabs.org, linux-xtensa@linux-xtensa.org,
-        Brendan Higgins <brendanhiggins@google.com>
-Content-Type: text/plain; charset="UTF-8"
+        id S1725831AbgFZVJN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Jun 2020 17:09:13 -0400
+Received: from ms.lwn.net ([45.79.88.28]:36368 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725793AbgFZVJN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 26 Jun 2020 17:09:13 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 23BDF7DB;
+        Fri, 26 Jun 2020 21:09:13 +0000 (UTC)
+Date:   Fri, 26 Jun 2020 15:09:11 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
+Cc:     mchehab+samsung@kernel.org, alexandre.belloni@bootlin.com,
+        nicolas.ferre@microchip.com, robh@kernel.org,
+        j.neuschaefer@gmx.net, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] Replace HTTP links with HTTPS ones:
+ Documentation/arm
+Message-ID: <20200626150911.3d4f9ca7@lwn.net>
+In-Reply-To: <20200626194408.61245-1-grandmaster@al2klimov.de>
+References: <20200626194408.61245-1-grandmaster@al2klimov.de>
+Organization: LWN.net
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a linker section to UML where KUnit can put references to its test
-suites. This patch is an early step in transitioning to dispatching all
-KUnit tests from a centralized executor rather than having each as its
-own separate late_initcall.
+On Fri, 26 Jun 2020 21:44:08 +0200
+"Alexander A. Klimov" <grandmaster@al2klimov.de> wrote:
 
-Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
-Reviewed-by: Stephen Boyd <sboyd@kernel.org>
----
- arch/um/include/asm/common.lds.S | 4 ++++
- 1 file changed, 4 insertions(+)
+> Rationale:
+> Reduces attack surface on kernel devs opening the links for MITM
+> as HTTPS traffic is much harder to manipulate.
+> 
+> Deterministic algorithm:
+> For each file:
+>   If not .svg:
+>     For each line:
+>       If doesn't contain `\bxmlns\b`:
+>         For each link, `\bhttp://[^# \t\r\n]*(?:\w|/)`:
+>           If both the HTTP and HTTPS versions
+>           return 200 OK and serve the same content:
+>             Replace HTTP with HTTPS.
+> 
+> Signed-off-by: Alexander A. Klimov <grandmaster@al2klimov.de>
+> ---
+>  Changes in v2:
+>  Undone all handhelds.org changes and 0 of 0 wearablegroup.org changes.
 
-diff --git a/arch/um/include/asm/common.lds.S b/arch/um/include/asm/common.lds.S
-index eca6c452a41bd..9a9c97f45694c 100644
---- a/arch/um/include/asm/common.lds.S
-+++ b/arch/um/include/asm/common.lds.S
-@@ -52,6 +52,10 @@
- 	CON_INITCALL
-   }
- 
-+  .kunit_test_suites : {
-+	KUNIT_TEST_SUITES
-+  }
-+
-   .exitcall : {
- 	__exitcall_begin = .;
- 	*(.exitcall.exit)
--- 
-2.27.0.212.ge8ba1cc988-goog
+I wasn't asking that the changes be undone, I was asking that those links
+simply be removed.  They are actively harmful - much more so than any http:
+links - and shouldn't be there.  *Sigh*.  I guess I'll just do that.
 
+jon
