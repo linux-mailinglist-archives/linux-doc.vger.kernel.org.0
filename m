@@ -2,97 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B10E020BBE5
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2020 23:52:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B910720BC10
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2020 00:01:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725861AbgFZVwk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Jun 2020 17:52:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55494 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725793AbgFZVwk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jun 2020 17:52:40 -0400
-Received: from mail-pf1-x441.google.com (mail-pf1-x441.google.com [IPv6:2607:f8b0:4864:20::441])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 25F4AC03E97A
-        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2020 14:52:40 -0700 (PDT)
-Received: by mail-pf1-x441.google.com with SMTP id b16so5168675pfi.13
-        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2020 14:52:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=Q757IDXyRukGvX5SZOHlJdoHJ/1n6S14vTGyo4zvXBQ=;
-        b=VIGOIHNEEU9j/QBCfkBjGdBcqAkDVMSPH2V6E9pYYKa7w0oI1NtGdugkcB6s2J7djs
-         DSZ85QWa+gMBeGdBreMiRKvPJcdHicHe0ZZZe3JPNlhdZodj/p1tvl8Xip3Cc2IPrr+s
-         lsiie+VLCThaSSaloZS5eYhO67RiKTuNXrYns=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=Q757IDXyRukGvX5SZOHlJdoHJ/1n6S14vTGyo4zvXBQ=;
-        b=MZrICn91TwIasePoUfiapGSitzhfbtpK1IyCfdzDLBZXz22MIVtfDScITcTUFjcsHv
-         esSPN3SICa1JCb33zknJLhW/iooSnKffpFslFAdqdgrx34ym1dltaIW9sZhno5Rq3rKX
-         cp70B3Pb2yuFOyknByCcrP65VD0plHvgtH+tlP21yIbnkFbts3V1EpUwh+ChD4AmJ4bb
-         r+QV45UO/SbM/rHQZPotFntCcwA/ju4xxqcq8+zIeQP483yExpwzmKbI22i6aouL/dTo
-         9cwDRBHbxPWqHE1e9tSdenZbExvMyhes2LIxfuX9XLC6xHfWikIXq9PsYokQIxOSsiWW
-         Zijg==
-X-Gm-Message-State: AOAM531JTPvb4fdIbne1yl2cqyQISfm/1eI/gHNhlIjhXnW3FxZJ1dOI
-        fZ7azezeRHzrsUeY4P6oriPHrA==
-X-Google-Smtp-Source: ABdhPJxjew6vuVd8xK7z4Or0D8mu7tCMflIKF0q/SKBZ2je3Uo1yszhe7quUG/VVVAWRTDES/M5wNg==
-X-Received: by 2002:a62:ea0b:: with SMTP id t11mr4824646pfh.276.1593208359728;
-        Fri, 26 Jun 2020 14:52:39 -0700 (PDT)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id o16sm23597011pgg.57.2020.06.26.14.52.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Jun 2020 14:52:38 -0700 (PDT)
-Date:   Fri, 26 Jun 2020 14:52:37 -0700
-From:   Kees Cook <keescook@chromium.org>
-To:     Brendan Higgins <brendanhiggins@google.com>
-Cc:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
-        arnd@arndb.de, skhan@linuxfoundation.org, alan.maguire@oracle.com,
-        yzaikin@google.com, davidgow@google.com, akpm@linux-foundation.org,
-        rppt@linux.ibm.com, frowand.list@gmail.com,
-        catalin.marinas@arm.com, will@kernel.org, monstr@monstr.eu,
-        mpe@ellerman.id.au, benh@kernel.crashing.org, paulus@samba.org,
-        chris@zankel.net, jcmvbkbc@gmail.com, gregkh@linuxfoundation.org,
-        sboyd@kernel.org, logang@deltatee.com, mcgrof@kernel.org,
-        linux-um@lists.infradead.org, linux-arch@vger.kernel.org,
-        linux-kselftest@vger.kernel.org, kunit-dev@googlegroups.com,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org,
-        linuxppc-dev@lists.ozlabs.org, linux-xtensa@linux-xtensa.org
-Subject: Re: [PATCH v5 00/12] kunit: create a centralized executor to
- dispatch all KUnit tests
-Message-ID: <202006261442.5C245709@keescook>
-References: <20200626210917.358969-1-brendanhiggins@google.com>
+        id S1725832AbgFZWBf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Jun 2020 18:01:35 -0400
+Received: from smtprelay0204.hostedemail.com ([216.40.44.204]:42576 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1725803AbgFZWBf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jun 2020 18:01:35 -0400
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay03.hostedemail.com (Postfix) with ESMTP id E4384837F24A;
+        Fri, 26 Jun 2020 22:01:33 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 10,1,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:116:355:379:599:800:901:960:967:968:973:988:989:1260:1263:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1541:1593:1594:1711:1730:1747:1777:1792:2393:2525:2553:2560:2563:2682:2685:2687:2828:2859:2933:2937:2939:2942:2945:2947:2951:2954:3022:3138:3139:3140:3141:3142:3352:3622:3657:3865:3866:3867:3868:3870:3871:3872:3874:3934:3936:3938:3941:3944:3947:3950:3953:3956:3959:4037:4250:4321:5007:6117:7875:7901:8599:9025:9388:10004:10400:10848:10967:11232:11658:11854:11914:12043:12297:12555:12679:12740:12760:12776:12895:12986:13069:13161:13229:13311:13357:13439:13845:14094:14096:14181:14651:14659:14721:14764:21080:21627:21881:30054:30090:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:3,LUA_SUMMARY:none
+X-HE-Tag: silk04_4e0f1b526e58
+X-Filterd-Recvd-Size: 2139
+Received: from XPS-9350.home (unknown [47.151.133.149])
+        (Authenticated sender: joe@perches.com)
+        by omf09.hostedemail.com (Postfix) with ESMTPA;
+        Fri, 26 Jun 2020 22:01:32 +0000 (UTC)
+Message-ID: <58f25e61b285362ab28d14ac55d1cd632c460fa8.camel@perches.com>
+Subject: Re: [PATCH v2] Replace HTTP links with HTTPS ones: Documentation/arm
+From:   Joe Perches <joe@perches.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        "Alexander A. Klimov" <grandmaster@al2klimov.de>
+Cc:     mchehab+samsung@kernel.org, alexandre.belloni@bootlin.com,
+        nicolas.ferre@microchip.com, robh@kernel.org,
+        j.neuschaefer@gmx.net, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Date:   Fri, 26 Jun 2020 15:01:31 -0700
+In-Reply-To: <20200626150911.3d4f9ca7@lwn.net>
+References: <20200626194408.61245-1-grandmaster@al2klimov.de>
+         <20200626150911.3d4f9ca7@lwn.net>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.36.2-0ubuntu1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200626210917.358969-1-brendanhiggins@google.com>
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jun 26, 2020 at 02:09:05PM -0700, Brendan Higgins wrote:
-> This patchset adds a centralized executor to dispatch tests rather than
-> relying on late_initcall to schedule each test suite separately along
-> with a couple of new features that depend on it.
+On Fri, 2020-06-26 at 15:09 -0600, Jonathan Corbet wrote:
+> On Fri, 26 Jun 2020 21:44:08 +0200
+> "Alexander A. Klimov" <grandmaster@al2klimov.de> wrote:
+> 
+> > Rationale:
+> > Reduces attack surface on kernel devs opening the links for MITM
+> > as HTTPS traffic is much harder to manipulate.
+[]
+> >  Changes in v2:
+> >  Undone all handhelds.org changes and 0 of 0 wearablegroup.org changes.
+> 
+> I wasn't asking that the changes be undone, I was asking that those links
+> simply be removed.  They are actively harmful - much more so than any http:
+> links - and shouldn't be there.  *Sigh*.  I guess I'll just do that.
 
-So, the new section looks fine to me (modulo the INIT_DATA change). The
-plumbing to start the tests, though, I think is redundant. Why not just
-add a sysctl that starts all known tests?
+One argument to mark old/invalid links differently somehow is
+that the wayback machine at archive.org may still have them.
 
-That way you don't need the plumbing into init/main.c, and you can have
-a mode where builtin tests can be started on a fully booted system too.
+But when the domain has been transferred to a 3rd party, it is
+possibly harmful.
 
-i.e. boot with "sysctl.kernel.kunit=start" or when fully booted with
-"echo start > /proc/sys/kernel/kunit"
+Another option might be to grab any archive.org content and
+put it into a Documentation/archived/outdated directory or
+the like.
 
-And instead of the kunit-specific halt/reboot stuff, how about moving
-/proc/sysrq-trigger into /proc/sys instead? Then you (or anything) could
-do:
+For instance:
 
-sysctl.kernel.kunit=start sysctl.kernel.sysrq-trigger=b
+https://web.archive.org/web/20090423133742/http://www.handhelds.org/projects/h1940.html
 
--- 
-Kees Cook
+Then gain, this might as well be prehistoric content.
+
