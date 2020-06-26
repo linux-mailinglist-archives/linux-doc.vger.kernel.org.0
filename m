@@ -2,286 +2,189 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2EF1520B970
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2020 21:44:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7A21620BAF8
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2020 23:09:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725781AbgFZToX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Jun 2020 15:44:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35456 "EHLO
+        id S1726104AbgFZVJZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Jun 2020 17:09:25 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48626 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725780AbgFZToW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jun 2020 15:44:22 -0400
-Received: from smtp.al2klimov.de (smtp.al2klimov.de [IPv6:2a01:4f8:c0c:1465::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8369DC03E979;
-        Fri, 26 Jun 2020 12:44:22 -0700 (PDT)
-Received: from authenticated-user (PRIMARY_HOSTNAME [PUBLIC_IP])
-        by smtp.al2klimov.de (Postfix) with ESMTPA id C949ABC130;
-        Fri, 26 Jun 2020 19:44:18 +0000 (UTC)
-From:   "Alexander A. Klimov" <grandmaster@al2klimov.de>
-To:     corbet@lwn.net, grandmaster@al2klimov.de,
-        mchehab+samsung@kernel.org, alexandre.belloni@bootlin.com,
-        nicolas.ferre@microchip.com, robh@kernel.org,
-        j.neuschaefer@gmx.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v2] Replace HTTP links with HTTPS ones: Documentation/arm
-Date:   Fri, 26 Jun 2020 21:44:08 +0200
-Message-Id: <20200626194408.61245-1-grandmaster@al2klimov.de>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: ++++++
-X-Spam-Level: ******
-Authentication-Results: smtp.al2klimov.de;
-        auth=pass smtp.auth=aklimov@al2klimov.de smtp.mailfrom=grandmaster@al2klimov.de
-X-Spam: Yes
+        with ESMTP id S1725834AbgFZVJY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jun 2020 17:09:24 -0400
+Received: from mail-pg1-x549.google.com (mail-pg1-x549.google.com [IPv6:2607:f8b0:4864:20::549])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 034DBC03E97A
+        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2020 14:09:24 -0700 (PDT)
+Received: by mail-pg1-x549.google.com with SMTP id i1so7470428pgn.13
+        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2020 14:09:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=yoOABEWG1/6h2iOQDoaXra3teAZCdH+g3IIeVI61zqU=;
+        b=lnctVzA6Jf/UU0td8ovSYbI8I4nDkekzGOb/PJTTsaZY6zqu5N5ZjWDd4YDayRX+Ov
+         mjTvKPepzFqMBoF606g4y4X/150dujV+9wnwuvpZVFCMfwiXOdJp/tK7t1PRsv8gCr8y
+         5SZtgb3I8tPyj2j3PXdYTUEHH9wNAX77svB/vS8vPnb5mMH0Z0CXiK81tdR4FdLoHv0f
+         pJg1ZG9FQkUneT3PgQmDKjNHeIr2cIfameUdzQz90+lZLEl3KLRlZ8kh8zlnmst756zz
+         LisdpllMi++KsnD4cFidh3dMP2W5bJ9jjhgS7+HvlBEP/fUGoTFg/tSAaGY8WT0mUfwL
+         btUQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=yoOABEWG1/6h2iOQDoaXra3teAZCdH+g3IIeVI61zqU=;
+        b=kibmuFG0wGRXUGAnx4H1vjbMD+dRBUrmyUQhl/7jnQ5mEP8Lf2QSGusnxl7EhOmjYc
+         HGooJUOFhYVrm/gxzLc8DMQtr+ilI/3yxA96grhRrR4sa1g22Iz1h7vk5r+QSM/Z/vrQ
+         w3XFogL65Gp3Td8Lt5tarzlj1F49Zg+J4LkyjKfS2hshqF06HkQ4/si8m9rAyqen3ubu
+         6hPrFStIFYLTrQf/MN4YzJDU5ymZsGqAINxKLngVViaVcl6B/7J7jRVwf+RsL5iqGdq+
+         uXU0MG+2LgAo4V4u9M5HDVng1bX2M/3ZdwyN4w39PunO+FvO/Oypb2KL5+7z1YTd56RN
+         rzZg==
+X-Gm-Message-State: AOAM530o4CC6rUcvqCdLbJRGAJVKYrHcjU7Ok3yG6UDtJhPB2k97hOVS
+        sQaAfFA+cdAs5Lleiea7SrUCtMe6ystBgoouXZzMug==
+X-Google-Smtp-Source: ABdhPJzOkuCMJcWBTIQFtPbukWtzW86GMVGbL6qXJmvDDdcWRcAfYZDZf3JuQ+iDFThI6ZaHADTtDBKoYShd/uVlWE2ElA==
+X-Received: by 2002:a62:196:: with SMTP id 144mr4487477pfb.316.1593205763212;
+ Fri, 26 Jun 2020 14:09:23 -0700 (PDT)
+Date:   Fri, 26 Jun 2020 14:09:05 -0700
+Message-Id: <20200626210917.358969-1-brendanhiggins@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.27.0.212.ge8ba1cc988-goog
+Subject: [PATCH v5 00/12] kunit: create a centralized executor to dispatch all
+ KUnit tests
+From:   Brendan Higgins <brendanhiggins@google.com>
+To:     jdike@addtoit.com, richard@nod.at, anton.ivanov@cambridgegreys.com,
+        arnd@arndb.de, keescook@chromium.org, skhan@linuxfoundation.org,
+        alan.maguire@oracle.com, yzaikin@google.com, davidgow@google.com,
+        akpm@linux-foundation.org, rppt@linux.ibm.com,
+        frowand.list@gmail.com, catalin.marinas@arm.com, will@kernel.org,
+        monstr@monstr.eu, mpe@ellerman.id.au, benh@kernel.crashing.org,
+        paulus@samba.org, chris@zankel.net, jcmvbkbc@gmail.com
+Cc:     gregkh@linuxfoundation.org, sboyd@kernel.org, logang@deltatee.com,
+        mcgrof@kernel.org, linux-um@lists.infradead.org,
+        linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        kunit-dev@googlegroups.com, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linuxppc-dev@lists.ozlabs.org, linux-xtensa@linux-xtensa.org,
+        Brendan Higgins <brendanhiggins@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Rationale:
-Reduces attack surface on kernel devs opening the links for MITM
-as HTTPS traffic is much harder to manipulate.
+## TL;DR
 
-Deterministic algorithm:
-For each file:
-  If not .svg:
-    For each line:
-      If doesn't contain `\bxmlns\b`:
-        For each link, `\bhttp://[^# \t\r\n]*(?:\w|/)`:
-          If both the HTTP and HTTPS versions
-          return 200 OK and serve the same content:
-            Replace HTTP with HTTPS.
+This patchset adds a centralized executor to dispatch tests rather than
+relying on late_initcall to schedule each test suite separately along
+with a couple of new features that depend on it.
 
-Signed-off-by: Alexander A. Klimov <grandmaster@al2klimov.de>
----
- Changes in v2:
- Undone all handhelds.org changes and 0 of 0 wearablegroup.org changes.
+## What am I trying to do?
 
- Documentation/arm/arm.rst                     |  8 ++---
- Documentation/arm/keystone/overview.rst       |  4 +--
- Documentation/arm/microchip.rst               | 30 +++++++++----------
- Documentation/arm/sa1100/assabet.rst          |  2 +-
- .../arm/samsung-s3c24xx/overview.rst          |  4 +--
- 5 files changed, 24 insertions(+), 24 deletions(-)
+Conceptually, I am trying to provide a mechanism by which test suites
+can be grouped together so that they can be reasoned about collectively.
+The last two of three patches in this series add features which depend
+on this:
 
-diff --git a/Documentation/arm/arm.rst b/Documentation/arm/arm.rst
-index 2edc509df92a..4f8c4985191f 100644
---- a/Documentation/arm/arm.rst
-+++ b/Documentation/arm/arm.rst
-@@ -48,12 +48,12 @@ Bug reports etc
- ---------------
- 
-   Please send patches to the patch system.  For more information, see
--  http://www.arm.linux.org.uk/developer/patches/info.php Always include some
-+  https://www.arm.linux.org.uk/developer/patches/info.php Always include some
-   explanation as to what the patch does and why it is needed.
- 
-   Bug reports should be sent to linux-arm-kernel@lists.arm.linux.org.uk,
-   or submitted through the web form at
--  http://www.arm.linux.org.uk/developer/
-+  https://www.arm.linux.org.uk/developer/
- 
-   When sending bug reports, please ensure that they contain all relevant
-   information, eg. the kernel messages that were printed before/during
-@@ -169,7 +169,7 @@ ST506 hard drives
- 
-   Previous registrations may be found online.
- 
--    <http://www.arm.linux.org.uk/developer/machines/>
-+    <https://www.arm.linux.org.uk/developer/machines/>
- 
- Kernel entry (head.S)
- ---------------------
-@@ -204,7 +204,7 @@ Kernel entry (head.S)
-   compile-time code selection method.  You can register a new machine via the
-   web site at:
- 
--    <http://www.arm.linux.org.uk/developer/machines/>
-+    <https://www.arm.linux.org.uk/developer/machines/>
- 
-   Note: Please do not register a machine type for DT-only platforms.  If your
-   platform is DT-only, you do not need a registered machine type.
-diff --git a/Documentation/arm/keystone/overview.rst b/Documentation/arm/keystone/overview.rst
-index cd90298c493c..3e4b2f8f5e8b 100644
---- a/Documentation/arm/keystone/overview.rst
-+++ b/Documentation/arm/keystone/overview.rst
-@@ -16,7 +16,7 @@ K2HK SoC and EVM
- a.k.a Keystone 2 Hawking/Kepler SoC
- TCI6636K2H & TCI6636K2K: See documentation at
- 
--	http://www.ti.com/product/tci6638k2k
-+	https://www.ti.com/product/tci6638k2k
- 	http://www.ti.com/product/tci6638k2h
- 
- EVM:
-@@ -31,7 +31,7 @@ K2E  -  66AK2E05:
- 
- See documentation at
- 
--	http://www.ti.com/product/66AK2E05/technicaldocuments
-+	https://www.ti.com/product/66AK2E05/technicaldocuments
- 
- EVM:
-    https://www.einfochips.com/index.php/partnerships/texas-instruments/k2e-evm.html
-diff --git a/Documentation/arm/microchip.rst b/Documentation/arm/microchip.rst
-index 9c013299fd3b..4786dd68d325 100644
---- a/Documentation/arm/microchip.rst
-+++ b/Documentation/arm/microchip.rst
-@@ -26,44 +26,44 @@ the Microchip website: http://www.microchip.com.
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-1768-32-bit-ARM920T-Embedded-Microprocessor-AT91RM9200_Datasheet.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-1768-32-bit-ARM920T-Embedded-Microprocessor-AT91RM9200_Datasheet.pdf
- 
-     * ARM 926 based SoCs
-       - at91sam9260
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6221-32-bit-ARM926EJ-S-Embedded-Microprocessor-SAM9260_Datasheet.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6221-32-bit-ARM926EJ-S-Embedded-Microprocessor-SAM9260_Datasheet.pdf
- 
-       - at91sam9xe
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6254-32-bit-ARM926EJ-S-Embedded-Microprocessor-SAM9XE_Datasheet.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6254-32-bit-ARM926EJ-S-Embedded-Microprocessor-SAM9XE_Datasheet.pdf
- 
-       - at91sam9261
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6062-ARM926EJ-S-Microprocessor-SAM9261_Datasheet.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6062-ARM926EJ-S-Microprocessor-SAM9261_Datasheet.pdf
- 
-       - at91sam9263
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6249-32-bit-ARM926EJ-S-Embedded-Microprocessor-SAM9263_Datasheet.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6249-32-bit-ARM926EJ-S-Embedded-Microprocessor-SAM9263_Datasheet.pdf
- 
-       - at91sam9rl
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/doc6289.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/doc6289.pdf
- 
-       - at91sam9g20
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/DS60001516A.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/DS60001516A.pdf
- 
-       - at91sam9g45 family
-         - at91sam9g45
-@@ -73,7 +73,7 @@ the Microchip website: http://www.microchip.com.
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6437-32-bit-ARM926-Embedded-Microprocessor-SAM9M11_Datasheet.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-6437-32-bit-ARM926-Embedded-Microprocessor-SAM9M11_Datasheet.pdf
- 
-       - at91sam9x5 family (aka "The 5 series")
-         - at91sam9g15
-@@ -84,19 +84,19 @@ the Microchip website: http://www.microchip.com.
- 
-           * Datasheet (can be considered as covering the whole family)
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11055-32-bit-ARM926EJ-S-Microcontroller-SAM9X35_Datasheet.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11055-32-bit-ARM926EJ-S-Microcontroller-SAM9X35_Datasheet.pdf
- 
-       - at91sam9n12
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/DS60001517A.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/DS60001517A.pdf
- 
-       - sam9x60
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/SAM9X60-Data-Sheet-DS60001579A.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/SAM9X60-Data-Sheet-DS60001579A.pdf
- 
-     * ARM Cortex-A5 based SoCs
-       - sama5d3 family
-@@ -109,7 +109,7 @@ the Microchip website: http://www.microchip.com.
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11121-32-bit-Cortex-A5-Microcontroller-SAMA5D3_Datasheet_B.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-11121-32-bit-Cortex-A5-Microcontroller-SAMA5D3_Datasheet_B.pdf
- 
-     * ARM Cortex-A5 + NEON based SoCs
-       - sama5d4 family
-@@ -121,7 +121,7 @@ the Microchip website: http://www.microchip.com.
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/60001525A.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/60001525A.pdf
- 
-       - sama5d2 family
- 
-@@ -135,7 +135,7 @@ the Microchip website: http://www.microchip.com.
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/DS60001476B.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/DS60001476B.pdf
- 
-     * ARM Cortex-M7 MCUs
-       - sams70 family
-@@ -173,7 +173,7 @@ the Microchip website: http://www.microchip.com.
- 
-           * Datasheet
- 
--          http://ww1.microchip.com/downloads/en/DeviceDoc/SAM-E70-S70-V70-V71-Family-Data-Sheet-DS60001527D.pdf
-+          https://ww1.microchip.com/downloads/en/DeviceDoc/SAM-E70-S70-V70-V71-Family-Data-Sheet-DS60001527D.pdf
- 
- 
- Linux kernel information
-diff --git a/Documentation/arm/sa1100/assabet.rst b/Documentation/arm/sa1100/assabet.rst
-index a761e128fb08..eef26909686a 100644
---- a/Documentation/arm/sa1100/assabet.rst
-+++ b/Documentation/arm/sa1100/assabet.rst
-@@ -6,7 +6,7 @@ Please see:
- http://developer.intel.com
- 
- Also some notes from John G Dorsey <jd5q@andrew.cmu.edu>:
--http://www.cs.cmu.edu/~wearable/software/assabet.html
-+https://www.cs.cmu.edu/~wearable/software/assabet.html
- 
- 
- Building the kernel
-diff --git a/Documentation/arm/samsung-s3c24xx/overview.rst b/Documentation/arm/samsung-s3c24xx/overview.rst
-index e9a1dc7276b5..b2eae4d86c96 100644
---- a/Documentation/arm/samsung-s3c24xx/overview.rst
-+++ b/Documentation/arm/samsung-s3c24xx/overview.rst
-@@ -140,7 +140,7 @@ Adding New Machines
-   Read the kernel patch submission policies as well as the
-   Documentation/arm directory before submitting patches. The
-   ARM kernel series is managed by Russell King, and has a patch system
--  located at http://www.arm.linux.org.uk/developer/patches/
-+  located at https://www.arm.linux.org.uk/developer/patches/
-   as well as mailing lists that can be found from the same site.
- 
-   As a courtesy, please notify <ben-linux@fluff.org> of any new
-@@ -148,7 +148,7 @@ Adding New Machines
- 
-   Any large scale modifications, or new drivers should be discussed
-   on the ARM kernel mailing list (linux-arm-kernel) before being
--  attempted. See http://www.arm.linux.org.uk/mailinglists/ for the
-+  attempted. See https://www.arm.linux.org.uk/mailinglists/ for the
-   mailing list information.
- 
- 
+PATCH 09/12 Prints out a test plan[1] right before KUnit tests are run;
+            this is valuable because it makes it possible for a test
+            harness to detect whether the number of tests run matches
+            the number of tests expected to be run, ensuring that no
+            tests silently failed. The test plan includes a count of
+            tests that will run. With the centralized executor, the
+            tests are located in a single data structure and thus can be
+            counted.
+
+PATCH 10/12 Add a new kernel command-line option which allows the user
+            to specify that the kernel poweroff, halt, or reboot after
+            completing all KUnit tests; this is very handy for running
+            KUnit tests on UML or a VM so that the UML/VM process exits
+            cleanly immediately after running all tests without needing
+            a special initramfs. The centralized executor provides a
+            definitive point when all tests have completed and the
+            poweroff, halt, or reboot could occur.
+
+In addition, by dispatching tests from a single location, we can
+guarantee that all KUnit tests run after late_init is complete, which
+was a concern during the initial KUnit patchset review (this has not
+been a problem in practice, but resolving with certainty is nevertheless
+desirable).
+
+Other use cases for this exist, but the above features should provide an
+idea of the value that this could provide.
+
+## Changes since last revision:
+ - Fixed a compilation error in the centralized executor patch (07/12).
+   I had forgotten to test the patches when building as modules. I
+   verified that works now.
+ - I accidentally merged patches 09/12 and 10/12 in the previous
+   revision (v4), and made them separate patches again.
+
+## Changes since v3:
+ - On the last revision I got some messages from 0day that showed that
+   this patchset didn't work on several architectures, one issue that
+   this patchset addresses is that we were aligning both memory segments
+   as well as structures in the segments to specific byte boundaries
+   which was incorrect.
+ - The issue mentioned above also caused me to test on additional
+   architectures which revealed that some architectures other than UML
+   do not use the default init linker section macro that most
+   architectures use. There are now several new patches (2, 3, 4, and
+   6).
+ - Fixed a formatting consistency issue in the kernel params
+   documentation patch (11/12).
+ - Add a brief blurb on how and when the kunit_test_suite macro works.
+
+## Remaining work to be done:
+
+The only architecture for which I was able to get a compiler, but was
+apparently unable to get KUnit into a section that the executor to see
+was m68k - not sure why.
+
+Alan Maguire (1):
+  kunit: test: create a single centralized executor for all tests
+
+Brendan Higgins (10):
+  vmlinux.lds.h: add linker section for KUnit test suites
+  arch: arm64: add linker section for KUnit test suites
+  arch: microblaze: add linker section for KUnit test suites
+  arch: powerpc: add linker section for KUnit test suites
+  arch: um: add linker section for KUnit test suites
+  arch: xtensa: add linker section for KUnit test suites
+  init: main: add KUnit to kernel init
+  kunit: test: add test plan to KUnit TAP format
+  Documentation: Add kunit_shutdown to kernel-parameters.txt
+  Documentation: kunit: add a brief blurb about kunit_test_suite
+
+David Gow (1):
+  kunit: Add 'kunit_shutdown' option
+
+ .../admin-guide/kernel-parameters.txt         |   8 ++
+ Documentation/dev-tools/kunit/usage.rst       |   5 ++
+ arch/arm64/kernel/vmlinux.lds.S               |   3 +
+ arch/microblaze/kernel/vmlinux.lds.S          |   4 +
+ arch/powerpc/kernel/vmlinux.lds.S             |   4 +
+ arch/um/include/asm/common.lds.S              |   4 +
+ arch/xtensa/kernel/vmlinux.lds.S              |   4 +
+ include/asm-generic/vmlinux.lds.h             |   8 ++
+ include/kunit/test.h                          |  76 +++++++++++++-----
+ init/main.c                                   |   4 +
+ lib/kunit/Makefile                            |   3 +-
+ lib/kunit/executor.c                          |  63 +++++++++++++++
+ lib/kunit/test.c                              |  13 +--
+ tools/testing/kunit/kunit_kernel.py           |   2 +-
+ tools/testing/kunit/kunit_parser.py           |  74 ++++++++++++++---
+ .../test_is_test_passed-all_passed.log        | Bin 1562 -> 1567 bytes
+ .../test_data/test_is_test_passed-crash.log   | Bin 3016 -> 3021 bytes
+ .../test_data/test_is_test_passed-failure.log | Bin 1700 -> 1705 bytes
+ 18 files changed, 227 insertions(+), 48 deletions(-)
+ create mode 100644 lib/kunit/executor.c
+
+These patches are available for download with dependencies here:
+
+https://kunit-review.googlesource.com/c/linux/+/3829
+
+[1] https://github.com/isaacs/testanything.github.io/blob/tap14/tap-version-14-specification.md#the-plan
+[2] https://patchwork.kernel.org/patch/11383635/
+
+base-commit: 4333a9b0b67bb4e8bcd91bdd80da80b0ec151162
+prerequisite-patch-id: 2d4b5aa9fa8ada9ae04c8584b47c299a822b9455
+prerequisite-patch-id: 582b6d9d28ce4b71628890ec832df6522ca68de0
 -- 
-2.27.0
+2.27.0.212.ge8ba1cc988-goog
 
