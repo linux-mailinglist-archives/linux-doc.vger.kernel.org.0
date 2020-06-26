@@ -2,158 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3516220B666
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2020 18:56:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F0CFF20B680
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Jun 2020 19:02:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728112AbgFZQ4I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Jun 2020 12:56:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37796 "EHLO
+        id S1726500AbgFZRCW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Jun 2020 13:02:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38784 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728100AbgFZQ4A (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jun 2020 12:56:00 -0400
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C444EC03E979
-        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2020 09:55:59 -0700 (PDT)
-Received: by mail-wr1-x443.google.com with SMTP id z13so10166404wrw.5
-        for <linux-doc@vger.kernel.org>; Fri, 26 Jun 2020 09:55:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=sza+GT2lqcd6jmiOYegQQQLgqoPbDI9CeS4XhKI3V1o=;
-        b=KoEiu9OdEBcBWWP+UosBbqAfR1V47vQAzO8kl+t1wgf0SG1vI7+YdJmA7Wys11RMex
-         ZMXx+mBH/viOzmxJj160qrt0OrYr92gNS4xmUzOC0X2/dr2qeiQ9Ece18Tbq0Z5Vk1id
-         nR2RNxEZXUeZerlrtFotgtBYWJ8eEaiSmCMBwCfcc1ATLbcrhsZ8bpf7kr8CyoZUNofo
-         Fi7UswHyjnS7p4q/0aqVUk7v6CvzEAoU6wozvFuFBFvguMxBvB/zm+AhU0+cgp15Uxj/
-         qtstFFn3hZZFA0q7vM3b0/m5UxZcjGWJk6ec5oB+LU1JDjH1Nszdn/6NnI6Zu21L7NUw
-         P3pw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=sza+GT2lqcd6jmiOYegQQQLgqoPbDI9CeS4XhKI3V1o=;
-        b=TX0Uj6QQsz5FCBW/Q1X2th/cFNxyPr44NyiWKeY3TIRpWqHyvaKEgw8Pwuj4iqnRKg
-         3YdvCot5l9kkti0GMgcN1X8VAhlFN/5+b48A7nuvYMa8NUU1kaTXc7yXp4vkLq5ldZem
-         /jMHysLUwGWn7oIRB1e9C2z1DGhPTr5Sg6GXN8JI39ZIjI0/iJ/pTwxg/4g4uULJGhN4
-         Dz7VWcJYPeZ06eWcguK8Jv+Uif1bXK5Kvpxcx+7UNF2FlpxMfz5Se5e8SbU0WODUJdee
-         ZxrJqM8Y/caX3vZNYoa/4s0gogHNboaZy59ypnQr9ZsZb33bb3tYLwORpv1TH6yP7XKH
-         tHvw==
-X-Gm-Message-State: AOAM5329baR6IDa+PqswV8R9wYCQZK+CHEh85ITfKbPMJBYdRuej5I0q
-        ajPW8EQWUfG4Hdb4tLTboxBSfw==
-X-Google-Smtp-Source: ABdhPJzCV6/MN+xqvykEQMSCCNNo3cu4VV3JYPC+A7Y7onUQZRBgd+j3p7NkVTzX64hm46KgPbdFjA==
-X-Received: by 2002:adf:a49c:: with SMTP id g28mr5051129wrb.118.1593190558547;
-        Fri, 26 Jun 2020 09:55:58 -0700 (PDT)
-Received: from localhost.localdomain (lfbn-nic-1-65-232.w2-15.abo.wanadoo.fr. [2.15.156.232])
-        by smtp.gmail.com with ESMTPSA id x5sm18654706wmg.2.2020.06.26.09.55.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 26 Jun 2020 09:55:58 -0700 (PDT)
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jean Delvare <jdelvare@suse.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-hwmon@vger.kernel.org,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH 5/5] hwmon: pmbus: use more devres helpers
-Date:   Fri, 26 Jun 2020 18:55:35 +0200
-Message-Id: <20200626165535.7662-6-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.26.1
-In-Reply-To: <20200626165535.7662-1-brgl@bgdev.pl>
-References: <20200626165535.7662-1-brgl@bgdev.pl>
+        with ESMTP id S1726381AbgFZRCW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Jun 2020 13:02:22 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 85424C03E979;
+        Fri, 26 Jun 2020 10:02:22 -0700 (PDT)
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id C15A6374;
+        Fri, 26 Jun 2020 17:02:20 +0000 (UTC)
+Date:   Fri, 26 Jun 2020 11:02:19 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
+Cc:     changbin.du@intel.com, masahiroy@kernel.org, rostedt@goodmis.org,
+        j.neuschaefer@gmx.net, andy.shevchenko@gmail.com,
+        mchehab+samsung@kernel.org, logang@deltatee.com, abbotti@mev.co.uk,
+        jacob.e.keller@intel.com, colin.king@canonical.com,
+        gregkh@linuxfoundation.org, mgreer@animalcreek.com, tytso@mit.edu,
+        jack@suse.cz, ebiggers@google.com, tglx@linutronix.de,
+        akpm@linux-foundation.org, paulmck@kernel.org,
+        pawan.kumar.gupta@linux.intel.com, jgross@suse.com,
+        mike.kravetz@oracle.com, cohuck@redhat.com,
+        jacek.anaszewski@gmail.com, pavel@ucw.cz, alex@alexanderweb.de,
+        dwlsalmeida@gmail.com, dsterba@suse.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] Replace HTTP links with HTTPS ones:
+ Documentation/admin-guide
+Message-ID: <20200626110219.7ae21265@lwn.net>
+In-Reply-To: <20200621132049.45624-1-grandmaster@al2klimov.de>
+References: <20200621132049.45624-1-grandmaster@al2klimov.de>
+Organization: LWN.net
 MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Sun, 21 Jun 2020 15:20:49 +0200
+"Alexander A. Klimov" <grandmaster@al2klimov.de> wrote:
 
-Shrink pmbus code by using devm_hwmon_device_register_with_groups()
-and devm_krealloc() instead of their non-managed variants.
+So for this one ...
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
- drivers/hwmon/pmbus/pmbus_core.c | 27 +++++++++------------------
- 1 file changed, 9 insertions(+), 18 deletions(-)
+> diff --git a/Documentation/admin-guide/README.rst b/Documentation/admin-guide/README.rst
+> index 5fb526900023..7186ed9b42fe 100644
+> --- a/Documentation/admin-guide/README.rst
+> +++ b/Documentation/admin-guide/README.rst
+> @@ -1,6 +1,6 @@
+>  .. _readme:
+>  
+> -Linux kernel release 5.x <http://kernel.org/>
+> +Linux kernel release 5.x <https://kernel.org/>
+>  =============================================
 
-diff --git a/drivers/hwmon/pmbus/pmbus_core.c b/drivers/hwmon/pmbus/pmbus_core.c
-index a420877ba533..af74504647b8 100644
---- a/drivers/hwmon/pmbus/pmbus_core.c
-+++ b/drivers/hwmon/pmbus/pmbus_core.c
-@@ -1022,9 +1022,9 @@ static int pmbus_add_attribute(struct pmbus_data *data, struct attribute *attr)
- {
- 	if (data->num_attributes >= data->max_attributes - 1) {
- 		int new_max_attrs = data->max_attributes + PMBUS_ATTR_ALLOC_SIZE;
--		void *new_attrs = krealloc(data->group.attrs,
--					   new_max_attrs * sizeof(void *),
--					   GFP_KERNEL);
-+		void *new_attrs = devm_krealloc(data->dev, data->group.attrs,
-+						new_max_attrs * sizeof(void *),
-+						GFP_KERNEL);
- 		if (!new_attrs)
- 			return -ENOMEM;
- 		data->group.attrs = new_attrs;
-@@ -2538,7 +2538,7 @@ int pmbus_do_probe(struct i2c_client *client, const struct i2c_device_id *id,
- 
- 	ret = pmbus_find_attributes(client, data);
- 	if (ret)
--		goto out_kfree;
-+		return ret;
- 
- 	/*
- 	 * If there are no attributes, something is wrong.
-@@ -2546,35 +2546,27 @@ int pmbus_do_probe(struct i2c_client *client, const struct i2c_device_id *id,
- 	 */
- 	if (!data->num_attributes) {
- 		dev_err(dev, "No attributes found\n");
--		ret = -ENODEV;
--		goto out_kfree;
-+		return -ENODEV;
- 	}
- 
- 	data->groups[0] = &data->group;
- 	memcpy(data->groups + 1, info->groups, sizeof(void *) * groups_num);
--	data->hwmon_dev = hwmon_device_register_with_groups(dev, client->name,
--							    data, data->groups);
-+	data->hwmon_dev = devm_hwmon_device_register_with_groups(dev,
-+					client->name, data, data->groups);
- 	if (IS_ERR(data->hwmon_dev)) {
--		ret = PTR_ERR(data->hwmon_dev);
- 		dev_err(dev, "Failed to register hwmon device\n");
--		goto out_kfree;
-+		return PTR_ERR(data->hwmon_dev);
- 	}
- 
- 	ret = pmbus_regulator_register(data);
- 	if (ret)
--		goto out_unregister;
-+		return ret;
- 
- 	ret = pmbus_init_debugfs(client, data);
- 	if (ret)
- 		dev_warn(dev, "Failed to register debugfs\n");
- 
- 	return 0;
--
--out_unregister:
--	hwmon_device_unregister(data->hwmon_dev);
--out_kfree:
--	kfree(data->group.attrs);
--	return ret;
- }
- EXPORT_SYMBOL_GPL(pmbus_do_probe);
- 
-@@ -2585,7 +2577,6 @@ int pmbus_do_remove(struct i2c_client *client)
- 	debugfs_remove_recursive(data->debugfs);
- 
- 	hwmon_device_unregister(data->hwmon_dev);
--	kfree(data->group.attrs);
- 	return 0;
- }
- EXPORT_SYMBOL_GPL(pmbus_do_remove);
--- 
-2.26.1
+I'd really rather just take that URL out of there, it makes no sense in the
+heading. 
 
+[...]
+
+> index 9443fcef1876..bc3abfb33476 100644
+> --- a/Documentation/admin-guide/ext4.rst
+> +++ b/Documentation/admin-guide/ext4.rst
+> @@ -611,7 +611,7 @@ kernel source:	<file:fs/ext4/>
+>  
+>  programs:	http://e2fsprogs.sourceforge.net/
+>  
+> -useful links:	http://fedoraproject.org/wiki/ext3-devel
+> +useful links:	https://fedoraproject.org/wiki/ext3-devel
+>  		http://www.bullopensource.org/ext4/
+
+This link looks pretty obviously dead, you should just take it out while
+you're in the neighborhood.
+
+>  		http://ext4.wiki.kernel.org/index.php/Main_Page
+
+And this one already redirects to https, is there a reason why you didn't
+change it?
+
+> index fb95fad81c79..b333ba5cb144 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -2786,7 +2786,7 @@
+>  			touchscreen support is not enabled in the mainstream
+>  			kernel as of 2.6.30, a preliminary port can be found
+>  			in the "bleeding edge" mini2440 support kernel at
+> -			http://repo.or.cz/w/linux-2.6/mini2440.git
+> +			https://repo.or.cz/w/linux-2.6/mini2440.git
+
+A repo that hasn't seen a commit since 2009 doesn't quite qualify as
+"bleeding edge" IMO, but I guess we can let that one slide...:)
+
+
+> index 874eb0c77d34..e87bf0135edf 100644
+> --- a/Documentation/admin-guide/mm/ksm.rst
+> +++ b/Documentation/admin-guide/mm/ksm.rst
+> @@ -9,7 +9,7 @@ Overview
+>  
+>  KSM is a memory-saving de-duplication feature, enabled by CONFIG_KSM=y,
+>  added to the Linux kernel in 2.6.32.  See ``mm/ksm.c`` for its implementation,
+> -and http://lwn.net/Articles/306704/ and http://lwn.net/Articles/330589/
+> +and http://lwn.net/Articles/306704/ and https://lwn.net/Articles/330589/
+
+Why did you only change one of those?
+
+Thanks,
+
+jon
