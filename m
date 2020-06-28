@@ -2,89 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0D1D920C464
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Jun 2020 23:54:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B4BF20C560
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2020 04:17:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726101AbgF0Vyf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 27 Jun 2020 17:54:35 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49352 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725907AbgF0Vye (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 27 Jun 2020 17:54:34 -0400
-Received: from mail-ed1-x535.google.com (mail-ed1-x535.google.com [IPv6:2a00:1450:4864:20::535])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B3CF5C061794
-        for <linux-doc@vger.kernel.org>; Sat, 27 Jun 2020 14:54:33 -0700 (PDT)
-Received: by mail-ed1-x535.google.com with SMTP id a8so8391898edy.1
-        for <linux-doc@vger.kernel.org>; Sat, 27 Jun 2020 14:54:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=hDm0J70xfMLbVvceQHwxPddZCp69UMTk2d0jtKg2a8s=;
-        b=PYwOu/B9Zh1rGzZM903Cpprywb83FCHUtNAUuiOO0o6zs6WHjlze2LXOC3hVAaGqcP
-         lg7H4pa9zGY5Ifm/Occ0RSYzXURL4hgFya6cts8HRx910s07nHPIQwuHOvC3CwSKWut7
-         W7lHESSwdkUYp3mu8F/+ONYut3Xpn3qtWv5jbLpGSjBshJ6ekhTBSCO1eoCC+HE4g/pN
-         3Oq9TtTNO3vJkKpqsqb3C/rPMy7fWmWmLKFmTu0RNDEBF2l3QJGtADAOwr4WGY+PWDtj
-         ZF9Zp08l9P41yL3JuvQth6+fpngrtjfi+iLA8IyUin9bEaOUirNwHBVJYrXrLbKq6R8z
-         N31g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=hDm0J70xfMLbVvceQHwxPddZCp69UMTk2d0jtKg2a8s=;
-        b=kefOIxp0a+PPhBrVy//cAcgDTtj+dM+GC+LBUT+bndRKGQ4Tt+gHXU05NO+SE7wgHZ
-         +8ZgXxgD5/cRSEqbdsh2QsOLaMvuXdJHHo3R6utD8kIF7gZW6YKiNBLitAz2EF8tXTap
-         2G6gbrrIaOIyg6v7d66jekLKLwoaLq5yEIeg7GQ+FsuTOydHu/+g2RFW8b3DzE3q1p/d
-         9er+zilpbV1jbifVNw0GUwKgDQzaQnFo8vw7UVg8tQ+I+sTj6K9RnMT0cWKLFHT2w5+q
-         LltOOWivYbwQN96Nfxe9uf9vxAmMmfq/v52IE/x4Li/3E9F7+9zquy2tqjpLsa75NYVH
-         gIbQ==
-X-Gm-Message-State: AOAM532tpkBgCdu8rPQ/R+RBtU7azd6BqxRznhkvkvAz+QUVoZKkQTV8
-        CF8r0CQeyZjajBeBUTJuuPPASZz3M9XxS1aHYTQ=
-X-Google-Smtp-Source: ABdhPJy7OcR58Wulf3SrU9Hht/iHCkUTpvI0mqyV7myFOjn+5WspC4moqDhEDDIlhUbuX6rLtkz2lPM5XKvW/5XrhRs=
-X-Received: by 2002:a50:ee84:: with SMTP id f4mr9900212edr.183.1593294872387;
- Sat, 27 Jun 2020 14:54:32 -0700 (PDT)
+        id S1725866AbgF1CRY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 27 Jun 2020 22:17:24 -0400
+Received: from conssluserg-06.nifty.com ([210.131.2.91]:45700 "EHLO
+        conssluserg-06.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725838AbgF1CRW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 27 Jun 2020 22:17:22 -0400
+Received: from mail-vs1-f43.google.com (mail-vs1-f43.google.com [209.85.217.43]) (authenticated)
+        by conssluserg-06.nifty.com with ESMTP id 05S2GpKY019135;
+        Sun, 28 Jun 2020 11:16:51 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conssluserg-06.nifty.com 05S2GpKY019135
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1593310612;
+        bh=rY/0X8wDdH/OppPIbg3bn9miQy2NtSJWkHyvn81VgTQ=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=zWk6Ubxh7EeIJwHsGsYANQrAwipL/H+0loj7+02Lb+6oq+tVMdMsffEQmfZVb4Uf3
+         A8Q7xE5hapq8Vp3Lj4jmjAW9Z4aLxNbnuMocpoLWmXEqlxpRehycBpgkhc0oDpZgjH
+         /GAL1D55zpCNDy7cM5R6auuyNyAoqscUMb8ogS80iKCFbXV53vDvI52QglzjG6A2Sl
+         WWtWxalQ0rvWqrv/LHshcVRt2qp3q5liBDWQC4rYHjW6sKR4yXptydGtpjVe68+OMc
+         YULkKW63xIDWvLkkXYOP1fNaQxigfUCmtlc8dqGqdTJTjeD7URptODYeFWN1ZGLxJ5
+         AdBCoMPrqrjJg==
+X-Nifty-SrcIP: [209.85.217.43]
+Received: by mail-vs1-f43.google.com with SMTP id s18so7480616vsi.6;
+        Sat, 27 Jun 2020 19:16:51 -0700 (PDT)
+X-Gm-Message-State: AOAM5319Esou97ZJm5yTE2JyTRsTPAcNSi9hV8tj30t1TG0mnc5nBA6r
+        r7QcGCh6dqVOY1sG6ruzYmVsPddZ8T9Cj/O+fbg=
+X-Google-Smtp-Source: ABdhPJyV0+QzYH9ugRIW/wmYF8Yh1BKt0nhPYLIEFJRYPjbO8Dv67C5Xl+tH/RG9xCvtlJzTVvZ/lZKUXU2YVgn3Shg=
+X-Received: by 2002:a67:6c84:: with SMTP id h126mr5653011vsc.181.1593310610605;
+ Sat, 27 Jun 2020 19:16:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 2002:a50:2842:0:0:0:0:0 with HTTP; Sat, 27 Jun 2020 14:54:31
- -0700 (PDT)
-Reply-To: un.org@i.ua
-From:   helen <info.isaacgeorge@gmail.com>
-Date:   Sat, 27 Jun 2020 22:54:31 +0100
-Message-ID: <CAABX3N8zm7a58jU5g8fzjfpsKNf48aUsUHECRV0m9PDLWU814A@mail.gmail.com>
-Subject: 
-To:     zhang@intel.com
+References: <20200622124343.121043-1-dovmurik@linux.vnet.ibm.com>
+In-Reply-To: <20200622124343.121043-1-dovmurik@linux.vnet.ibm.com>
+From:   Masahiro Yamada <masahiroy@kernel.org>
+Date:   Sun, 28 Jun 2020 11:16:13 +0900
+X-Gmail-Original-Message-ID: <CAK7LNASD4ha4AGSPY4=mALo4JY0WfSLTrmJBUPeiH8yWjSsO=Q@mail.gmail.com>
+Message-ID: <CAK7LNASD4ha4AGSPY4=mALo4JY0WfSLTrmJBUPeiH8yWjSsO=Q@mail.gmail.com>
+Subject: Re: [PATCH] docs: kbuild: fix ReST formatting
+To:     Dov Murik <dovmurik@linux.vnet.ibm.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Michal Marek <michal.lkml@markovi.net>,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-MONEY-GRAM TRANSFERRED PAYMENT INFO:
+On Mon, Jun 22, 2020 at 9:44 PM Dov Murik <dovmurik@linux.vnet.ibm.com> wrote:
+>
+> Commit cd238effefa2 ("docs: kbuild: convert docs to ReST and rename to
+> *.rst") missed a ReST header and a verbatim file content area.
+>
+> Signed-off-by: Dov Murik <dovmurik@linux.vnet.ibm.com>
+> ---
 
-Below is the sender=E2=80=99s information
-
-
-
-1. MG. REFERENCE NO#: 36360857
-
-2. SENDER'S NAME: Johnson Williams
-
-3. AMOUNT TO PICKUP: US$10,000
-
+Applied to linux-kbuild.
+Thanks.
 
 
-Go to any Money Gram office near you and pick up the payment Track the
+>  Documentation/kbuild/modules.rst | 7 ++++---
+>  1 file changed, 4 insertions(+), 3 deletions(-)
+>
+> diff --git a/Documentation/kbuild/modules.rst b/Documentation/kbuild/modules.rst
+> index a45cccff467d..85ccc878895e 100644
+> --- a/Documentation/kbuild/modules.rst
+> +++ b/Documentation/kbuild/modules.rst
+> @@ -182,7 +182,8 @@ module 8123.ko, which is built from the following files::
+>         8123_pci.c
+>         8123_bin.o_shipped      <= Binary blob
+>
+> ---- 3.1 Shared Makefile
+> +3.1 Shared Makefile
+> +-------------------
+>
+>         An external module always includes a wrapper makefile that
+>         supports building the module using "make" with no arguments.
+> @@ -470,9 +471,9 @@ build.
+>
+>         The syntax of the Module.symvers file is::
+>
+> -       <CRC>       <Symbol>         <Module>                         <Export Type>     <Namespace>
+> +               <CRC>       <Symbol>         <Module>                         <Export Type>     <Namespace>
+>
+> -       0xe1cc2a05  usb_stor_suspend drivers/usb/storage/usb-storage  EXPORT_SYMBOL_GPL USB_STORAGE
+> +               0xe1cc2a05  usb_stor_suspend drivers/usb/storage/usb-storage  EXPORT_SYMBOL_GPL USB_STORAGE
+>
+>         The fields are separated by tabs and values may be empty (e.g.
+>         if no namespace is defined for an exported symbol).
+>
+> base-commit: b103c607654e55dcb1da40557628a2044b72c936
+> --
+> 2.20.1
+>
 
-Reference Number by visiting and click the link below
 
-(https://secure.moneygram.com/embed/track) and enter the Reference
-
-Number: 36360857 and the Last Name: Williams, you will find the payment
-
-available for pickup instantly.
-
-Yours Sincerely,
-
-Mrs. Helen Marvis
-United Nations Liaison Office
-Directorate for International Payments
+-- 
+Best Regards
+Masahiro Yamada
