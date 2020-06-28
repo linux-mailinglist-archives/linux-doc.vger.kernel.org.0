@@ -2,133 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F2B2220C705
-	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2020 10:31:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 41A1320C748
+	for <lists+linux-doc@lfdr.de>; Sun, 28 Jun 2020 11:50:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726216AbgF1Iau (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 28 Jun 2020 04:30:50 -0400
-Received: from szxga06-in.huawei.com ([45.249.212.32]:59026 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1726202AbgF1Iat (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 28 Jun 2020 04:30:49 -0400
-Received: from DGGEMS407-HUB.china.huawei.com (unknown [172.30.72.58])
-        by Forcepoint Email with ESMTP id 25BDD937DB0F724DA0A4;
-        Sun, 28 Jun 2020 16:30:45 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.175.113.25) by
- DGGEMS407-HUB.china.huawei.com (10.3.19.207) with Microsoft SMTP Server id
- 14.3.487.0; Sun, 28 Jun 2020 16:30:37 +0800
-From:   Chen Zhou <chenzhou10@huawei.com>
-To:     <tglx@linutronix.de>, <mingo@redhat.com>, <dyoung@redhat.com>,
-        <bhe@redhat.com>, <catalin.marinas@arm.com>, <will@kernel.org>,
-        <james.morse@arm.com>, <robh+dt@kernel.org>, <arnd@arndb.de>,
-        <John.P.donnelly@oracle.com>, <prabhakar.pkin@gmail.com>,
-        <nsaenzjulienne@suse.de>, <corbet@lwn.net>, <bhsharma@redhat.com>,
-        <horms@verge.net.au>
-CC:     <guohanjun@huawei.com>, <xiexiuqi@huawei.com>,
-        <huawei.libin@huawei.com>, <linux-kernel@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <kexec@lists.infradead.org>, <linux-doc@vger.kernel.org>,
-        <chenzhou10@huawei.com>
-Subject: [PATCH v9 5/5] kdump: update Documentation about crashkernel on arm64
-Date:   Sun, 28 Jun 2020 16:34:58 +0800
-Message-ID: <20200628083458.40066-6-chenzhou10@huawei.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200628083458.40066-1-chenzhou10@huawei.com>
-References: <20200628083458.40066-1-chenzhou10@huawei.com>
+        id S1725999AbgF1Jum (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 28 Jun 2020 05:50:42 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45454 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725928AbgF1Jul (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 28 Jun 2020 05:50:41 -0400
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2D8FFC061794;
+        Sun, 28 Jun 2020 02:50:41 -0700 (PDT)
+Received: by mail-ej1-x642.google.com with SMTP id dp18so13361871ejc.8;
+        Sun, 28 Jun 2020 02:50:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=bfr2aGGQYCi1OBcYJwYVyRR0s+ow2RNYRbf369d5eIM=;
+        b=USs1td2Ju7+gYidHoQNcqMMzmJ6RgRroMs0GEn1BoBqWpMHzT+o7bALH696lXDro3J
+         M9anXAQEa3I97vT/oN/yLZSck0hkAGtQt7YlLwbD4eDoOChldaFzKAkXi+Ra2cqH+xMk
+         zEwfwu6dXZjYqHPyTGuJdnFWKFw83wsZ0owAvaRu+E+FpHRH6Zs0vfV6oa0t+OHrX/KI
+         nei9fHxeu0hgRbGtwzypG3pE8vdChSl4lTJhO5QAgUrEHUbUrs01Q8zRXOZSRE+CGyv/
+         IgkrkNAfFgQ02svtR2pEhbeFrYNxK3mHa1ASi3GSZJ//I8WQzD6A1lgWkRkgGmhkeUIX
+         9Bag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=bfr2aGGQYCi1OBcYJwYVyRR0s+ow2RNYRbf369d5eIM=;
+        b=HbrSwwApPpOymNaLQiVHvQhbWK5DeVSL8F13vKaizFeHKItX1Obz0CUHPmu1dLd598
+         2P02kjzCCOaED2oGedxeJGSys7epU1H/B9d/JvX5kf5oBArpGgohThxURa8LbHUqQhWS
+         5XnaOtriKY1PWRrlrgASyvJSL1IwaKwX1GR1j5mua50U+leUUifWOTeWjvY95UtGpzbW
+         WmPmbgDkECpUGnwx+KCTSWOzs1VdPCXGiNAAFXPv7PWDIlLnUEyCWSce/FOMwWERAnRd
+         AtDtqtH1iAT/dxk9QKLFvgn84dq0SLMGk49APajvBnJGYPevCkWpPoj0cZXnyyFwomRa
+         r60Q==
+X-Gm-Message-State: AOAM5329816ts2FaD7wZLr+KmyNzOg8QO4l5XUX1aoizvMsy4AYwxeQC
+        /T08C+Oep4/GhcWxiAJ9Wdo=
+X-Google-Smtp-Source: ABdhPJwGhhv5So5Hz7j9nfv2pcFu2L2HkphZe/Oww+j5SM8cnSXf5iXUrD2FWhSiOJ+9z1VaQzdqlw==
+X-Received: by 2002:a17:906:c285:: with SMTP id r5mr9332627ejz.153.1593337839901;
+        Sun, 28 Jun 2020 02:50:39 -0700 (PDT)
+Received: from localhost.localdomain ([2a02:a03f:b7f9:7600:f51f:7c31:2fc7:f95b])
+        by smtp.gmail.com with ESMTPSA id s21sm2327055edw.37.2020.06.28.02.50.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 28 Jun 2020 02:50:39 -0700 (PDT)
+From:   Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
+Subject: [PATCH] doc: add link to sparse's home page/internal docs
+Date:   Sun, 28 Jun 2020 11:50:34 +0200
+Message-Id: <20200628095034.69520-1-luc.vanoostenryck@gmail.com>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20200626112349.1292a654@lwn.net>
+References: <20200626112349.1292a654@lwn.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.175.113.25]
-X-CFilter-Loop: Reflected
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now we support crashkernel=X,[low] on arm64, update the Documentation.
-We could use parameters "crashkernel=X crashkernel=Y,low" to reserve
-memory above 4G.
+Sparse's home page used to be a wiki (sparse.wiki.kernel.org)
+but this wiki only contained a short intro and the release notes.
+But nowadays, sparse's main page is sparse.docs.kernel.org,
+which contains all what was in the wiki but also other documentation,
+mainly oriented about sparse's internals.
 
-Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
-Tested-by: John Donnelly <John.p.donnelly@oracle.com>
-Tested-by: Prabhakar Kushwaha <pkushwaha@marvell.com>
+So, add a link to this in the kernel documentation.
+
+Signed-off-by: Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
 ---
- Documentation/admin-guide/kdump/kdump.rst       | 13 +++++++++++--
- Documentation/admin-guide/kernel-parameters.txt | 17 +++++++++++++++--
- 2 files changed, 26 insertions(+), 4 deletions(-)
+ Documentation/dev-tools/sparse.rst | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/Documentation/admin-guide/kdump/kdump.rst b/Documentation/admin-guide/kdump/kdump.rst
-index 2da65fef2a1c..6ba294d425c9 100644
---- a/Documentation/admin-guide/kdump/kdump.rst
-+++ b/Documentation/admin-guide/kdump/kdump.rst
-@@ -299,7 +299,13 @@ Boot into System Kernel
-    "crashkernel=64M@16M" tells the system kernel to reserve 64 MB of memory
-    starting at physical address 0x01000000 (16MB) for the dump-capture kernel.
+diff --git a/Documentation/dev-tools/sparse.rst b/Documentation/dev-tools/sparse.rst
+index 6f4870528226..e20b8b8b78ed 100644
+--- a/Documentation/dev-tools/sparse.rst
++++ b/Documentation/dev-tools/sparse.rst
+@@ -9,6 +9,8 @@ Sparse is a semantic checker for C programs; it can be used to find a
+ number of potential problems with kernel code.  See
+ https://lwn.net/Articles/689907/ for an overview of sparse; this document
+ contains some kernel-specific sparse information.
++More information on sparse, mainly about its internals, can be found in
++its official pages at https://sparse.docs.kernl.org.
  
--   On x86 and x86_64, use "crashkernel=64M@16M".
-+   On x86 use "crashkernel=64M@16M".
-+
-+   On x86_64, use "crashkernel=Y[@X]" to select a region under 4G first, and
-+   fall back to reserve region above 4G when '@offset' hasn't been specified.
-+   We can also use "crashkernel=X,high" to select a region above 4G, which
-+   also tries to allocate at least 256M below 4G automatically and
-+   "crashkernel=Y,low" can be used to allocate specified size low memory.
  
-    On ppc64, use "crashkernel=128M@32M".
- 
-@@ -316,8 +322,11 @@ Boot into System Kernel
-    kernel will automatically locate the crash kernel image within the
-    first 512MB of RAM if X is not given.
- 
--   On arm64, use "crashkernel=Y[@X]".  Note that the start address of
-+   On arm64, use "crashkernel=Y[@X]". Note that the start address of
-    the kernel, X if explicitly specified, must be aligned to 2MiB (0x200000).
-+   If crashkernel=Z,low is specified simultaneously, reserve spcified size
-+   low memory for crash kdump kernel devices firstly and then reserve memory
-+   above 4G.
- 
- Load the Dump-capture Kernel
- ============================
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index fb95fad81c79..335431a351c0 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -722,6 +722,9 @@
- 			[KNL, x86_64] select a region under 4G first, and
- 			fall back to reserve region above 4G when '@offset'
- 			hasn't been specified.
-+			[KNL, arm64] If crashkernel=X,low is specified, reserve
-+			spcified size low memory for crash kdump kernel devices
-+			firstly, and then reserve memory above 4G.
- 			See Documentation/admin-guide/kdump/kdump.rst for further details.
- 
- 	crashkernel=range1:size1[,range2:size2,...][@offset]
-@@ -746,13 +749,23 @@
- 			requires at least 64M+32K low memory, also enough extra
- 			low memory is needed to make sure DMA buffers for 32-bit
- 			devices won't run out. Kernel would try to allocate at
--			at least 256M below 4G automatically.
-+			least 256M below 4G automatically.
- 			This one let user to specify own low range under 4G
- 			for second kernel instead.
- 			0: to disable low allocation.
- 			It will be ignored when crashkernel=X,high is not used
- 			or memory reserved is below 4G.
--
-+			[KNL, arm64] range under 4G.
-+			This one let user to specify own low range under 4G
-+			for crash dump kernel instead.
-+			Different with x86_64, kernel allocates specified size
-+			physical memory region only when this parameter is specified
-+			instead of trying to allocate at least 256M below 4G
-+			automatically.
-+			This parameter is used along with crashkernel=X when we
-+			want to reserve crashkernel above 4G. If there are devices
-+			need to use ZONE_DMA in crash dump kernel, it is also
-+			a good choice.
- 	cryptomgr.notests
- 			[KNL] Disable crypto self-tests
- 
+ Using sparse for typechecking
 -- 
-2.20.1
+2.27.0
 
