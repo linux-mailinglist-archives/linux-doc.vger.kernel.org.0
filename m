@@ -2,86 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6D69D20E062
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:56:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9CB7520E108
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:58:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730428AbgF2Upy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 16:45:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43384 "EHLO
+        id S2389047AbgF2Uvp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 16:51:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43364 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731570AbgF2TN5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:13:57 -0400
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com [IPv6:2a00:1450:4864:20::444])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E395C014AA4
-        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 01:04:04 -0700 (PDT)
-Received: by mail-wr1-x444.google.com with SMTP id z13so15535788wrw.5
-        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 01:04:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=wJu5T05EGIesmOT82QcK4tvM42NAPTrHSyac4x7F7pM=;
-        b=OQ0O/ji3YWaPUA5LVTl2z+7oIv8oHPXXajbTo7gN+ypY32l7m2S8IHDthtPNy8PmUI
-         3/RB2boMvLnFXERxlvImDeRSrAmCnr84vqbj+hoK2UVr5jSFPlXCeqfbMYmnw1DtZoCz
-         wfz1yX5KxVKQ6+reINQnT84GX4kzt3f1463mWC00vcmx89o7eIJH2WBtTTb6QhFyW9zQ
-         hvK7Bmre+NIIGJTAvrlFsQZAcOAzcIg6D0DdL6rfZhqpV/wAzAA6fh29DpdZ9ZNAxsLf
-         s3cb2tlXJHAcIrAd+N8AfFxDQm6sFD8UFJa97ojLl9pmTExTdys+BJ+NBS1K6M7wPhlo
-         e2TQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=wJu5T05EGIesmOT82QcK4tvM42NAPTrHSyac4x7F7pM=;
-        b=nMeTundv/jkKV/LalukvdeeJzKXlRC8ec5zeh5MG/8brR1WfRZC0rDTJXR6Q6Ojsg0
-         9BhMqzZzEX/w11cTaA/urtwCKJmcrTEmQnyAx1kDv4HnfqWknV/VFkvcvSJKpSl5HBre
-         t6NNs3FFu+/afF6qC8ZabSg8K/SIsMS8/rrj0H5wMUjvhsakOJiKZMuyaZIRlV11soT5
-         xCCvy4NZyWIqcdkR4UC5qs9GHrD1lYjC4LfZV/AUNIpkj+FieA6R46p4/kNsrdSoeNEw
-         Xnr1cQzuIZJlvedlBWSdNp6LUzlbEZCwpgj0s86WxQlkJ5saDEO1PjAy7xIYSycEIa62
-         XIlQ==
-X-Gm-Message-State: AOAM532pmnQlgwJVr/G+5BGiQaHj8dj0Lx/iaNwdtuDIhqkfIqGrtQEo
-        zCIN/UTv/lW1KeJfX1DIijls6Q==
-X-Google-Smtp-Source: ABdhPJxjhHOLK/OLS+QpmEsbDw2KsR8ghE7pxziLY6KM8n7B0r5tY5LBX2zBH+b5fLJzKBlhjiImZg==
-X-Received: by 2002:a5d:6a01:: with SMTP id m1mr16758755wru.115.1593417842938;
-        Mon, 29 Jun 2020 01:04:02 -0700 (PDT)
-Received: from google.com ([2a00:79e0:d:110:d6cc:2030:37c1:9964])
-        by smtp.gmail.com with ESMTPSA id a2sm31496362wrn.68.2020.06.29.01.04.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jun 2020 01:04:02 -0700 (PDT)
-Date:   Mon, 29 Jun 2020 09:03:58 +0100
-From:   Quentin Perret <qperret@google.com>
-To:     Viresh Kumar <viresh.kumar@linaro.org>
-Cc:     Rafael Wysocki <rjw@rjwysocki.net>,
-        Jonathan Corbet <corbet@lwn.net>, linux-pm@vger.kernel.org,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        kernel-team@android.com, tkjos@google.com, adharmap@codeaurora.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH V3 3/3] cpufreq: Specify default governor on command line
-Message-ID: <20200629080358.GA1217385@google.com>
-References: <cover.1593143118.git.viresh.kumar@linaro.org>
- <7eb38608b2b32c0c72dfb160c51206ec42e74e35.1593143118.git.viresh.kumar@linaro.org>
- <20200626155750.GA540785@google.com>
- <20200629020843.erntkwfprgi5ugqu@vireshk-i7>
+        with ESMTP id S1731378AbgF2TN1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:13:27 -0400
+Received: from casper.infradead.org (unknown [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D8697C014A47;
+        Mon, 29 Jun 2020 01:10:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=uAiRDghuOCMpDAFAHvQM5BdGNUMLZuFGW1APRakoSus=; b=ara8FOJJmyGTsZZYwrSNPjWLqN
+        qQal0ttJBdaZfhpLC0Z/0FVu0TGsBscGI7gHKZlxfygbnCKljVmd6EliGkUjiCeua5Lqlw+SqUGri
+        YDF/uUjkMqsGFUIUIlu6dP/HMLfagIiCfP7CnCNO/HR3E0DtZg3r6JVkQbErGPJrBmWjpHJNnZqFi
+        dvaPuTG2pAlmYGYVTzI+Iei0zvDBYbJVhGbqE40iWteYnODY0StwXQAzxsjKFuSER8akZL6L3IWxR
+        XnPxi6siVqTpD8pKccFNJr5E7a4Iutb0TtgFybcU7WiUAYpmFodShSUWbg4RziXqhwwdibXeVKeVq
+        /ShvQPnw==;
+Received: from hch by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1jporL-0007T7-3F; Mon, 29 Jun 2020 08:09:47 +0000
+Date:   Mon, 29 Jun 2020 09:09:47 +0100
+From:   Christoph Hellwig <hch@infradead.org>
+To:     Simon Arlott <simon@octiron.net>
+Cc:     "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        linux-scsi@vger.kernel.org, linux-doc@vger.kernel.org,
+        Bart Van Assche <bvanassche@acm.org>,
+        Christoph Hellwig <hch@infradead.org>,
+        Damien Le Moal <Damien.LeMoal@wdc.com>,
+        Pavel Machek <pavel@ucw.cz>,
+        Henrique de Moraes Holschuh <hmh@hmh.eng.br>
+Subject: Re: [PATCH (v2)] scsi: sd: add parameter to stop disks before reboot
+Message-ID: <20200629080947.GA28551@infradead.org>
+References: <e726ffd8-8897-4a79-c3d6-6271eda8aebb@0882a8b5-c6c3-11e9-b005-00805fc181fe>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20200629020843.erntkwfprgi5ugqu@vireshk-i7>
+In-Reply-To: <e726ffd8-8897-4a79-c3d6-6271eda8aebb@0882a8b5-c6c3-11e9-b005-00805fc181fe>
+X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Monday 29 Jun 2020 at 07:38:43 (+0530), Viresh Kumar wrote:
-> On 26-06-20, 16:57, Quentin Perret wrote:
-> > Do we need both cpufreq_param_governor and default_governor?
-> > Could we move everything to only one of them? Something a little bit
-> > like that maybe?
+On Sun, Jun 28, 2020 at 07:32:51PM +0100, Simon Arlott wrote:
+> I need to use "reboot=p" on my desktop because one of the PCIe devices
+> does not appear after a warm boot. This results in a very cold boot
+> because the BIOS turns the PSU off and on.
 > 
-> No because we want to fallback to the default governor when the
-> governor shown by the cpufreq_param_governor is valid but missing.
+> The scsi sd shutdown process does not send a stop command to disks
+> before the reboot happens (stop commands are only sent for a shutdown).
+> 
+> The result is that all of my SSDs experience a sudden power loss on
+> every reboot, which is undesirable behaviour because it could cause data
+> to be corrupted. These events are recorded in the SMART attributes.
+> 
+> Add a "stop_before_reboot" module parameter that can be used to control
+> the shutdown behaviour of disks before a reboot. The default will be
+> the existing behaviour (disks are not stopped).
+> 
+>   sd_mod.stop_before_reboot=<integer>
+>     0 = disabled (default)
+>     1 = enabled
+> 
+> The behaviour on shutdown is unchanged: all disks are unconditionally
+> stopped.
 
-But that would still work with my suggestion no? You still fallback to
-calling cpufreq_default_governor() in cpufreq_init_policy() if
-get_governor(default_governor) doesn't succeed, so we should be covered.
-
-Thanks,
-Quentin
+What happened to the suggestion to treat reboot=p like a poweroff
+instead?  That seems to be fundamentally the right thing to do.
