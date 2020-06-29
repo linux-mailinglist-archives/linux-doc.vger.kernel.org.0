@@ -2,136 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B43A420D3B3
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 21:13:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E7E1C20D46E
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 21:14:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730008AbgF2TBZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 15:01:25 -0400
-Received: from mx2.suse.de ([195.135.220.15]:48448 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728101AbgF2TBY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 29 Jun 2020 15:01:24 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 7BA11AD8D;
-        Mon, 29 Jun 2020 09:44:40 +0000 (UTC)
-Date:   Mon, 29 Jun 2020 11:43:50 +0200
-From:   Petr Mladek <pmladek@suse.com>
-To:     Alan Maguire <alan.maguire@oracle.com>
-Cc:     rostedt@goodmis.org, sergey.senozhatsky@gmail.com,
-        Linus Torvalds <torvalds@linux-foundation.org>, ast@kernel.org,
-        daniel@iogearbox.net, yhs@fb.com, andriin@fb.com,
-        arnaldo.melo@gmail.com, kafai@fb.com, songliubraving@fb.com,
-        john.fastabend@gmail.com, kpsingh@chromium.org,
-        linux@rasmusvillemoes.dk, joe@perches.com,
-        andriy.shevchenko@linux.intel.com, corbet@lwn.net,
-        bpf@vger.kernel.org, netdev@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v3 bpf-next 4/8] printk: add type-printing %pT format
- specifier which uses BTF
-Message-ID: <20200629094349.GQ8444@alley>
-References: <1592914031-31049-1-git-send-email-alan.maguire@oracle.com>
- <1592914031-31049-5-git-send-email-alan.maguire@oracle.com>
- <20200626101523.GM8444@alley>
- <alpine.LRH.2.21.2006261147130.417@localhost>
+        id S1729993AbgF2TIW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 15:08:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41736 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730518AbgF2TCm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:02:42 -0400
+Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com [IPv6:2607:f8b0:4864:20::443])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C13FAC030F1F;
+        Mon, 29 Jun 2020 09:32:53 -0700 (PDT)
+Received: by mail-pf1-x443.google.com with SMTP id u185so6088212pfu.1;
+        Mon, 29 Jun 2020 09:32:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=da39VVe9VP5T/e+C8JHxMlj+Kybnqkg4N1aw6KhL+T4=;
+        b=sT8xhrOECEHRXKWwOR2jxn87IGYL2kJ1l4F2kL7ZD8FLaUxwLTYUitf4r5KXgba7es
+         2SnRQW0LEpMlgpuCu8aHX3SEnFDMkEn7TnIWKaZv78S0hlUUkPsMIgjs/61BWPw0CG5J
+         2ZWj+DWzNjdOzxlwrblgNHO8VW9UU+1h8VwHH7H2txpLbVssWHbCUbv9EKi504IfyZjR
+         /tD1K1PoD5yJQTYuTykPekiAmWV7G8JvOXnczhyXUcatx/jcJEbr50NYgI7HdDn38uha
+         AunMBNxqmPqNPwDAqehx+oCKqCRiPeEqkl74hCQjq2pk93CR3s+C0tW3LbhWKP5qM3lM
+         Z/bw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to:user-agent;
+        bh=da39VVe9VP5T/e+C8JHxMlj+Kybnqkg4N1aw6KhL+T4=;
+        b=J5sz/PrOTaptIdrklWtBjHsPqKYd57QwuvQ3DS7ufLtGlEyGzP5HnhyxYDJ6jdwYbF
+         27oywj2dR5ReDLdp2u4gs1GxsRru4ORkZ2YJbmsVfCajD+1bKhIP+7tpp1UHMzF4SdP3
+         kbwQNT+j5Z315Ob8UPS2YB9jLA2cVJWfXx9T0mP3Nzxu0QzvR8wM8MIlKmZG1HzreQ1M
+         BIA6avPkZKcpl7QmYTIQEMP0tKDoejPQ3nCs598Xm1f3KqOIBQ5LrDQ4Tv8uqQ/xJw3p
+         D8SL4+Gk09YdVrexUlriymKKOq0D2p5Ks+CwRsHcBfcKxkgCBnwcQjY791beNcH6ekhZ
+         dYZw==
+X-Gm-Message-State: AOAM532dZWEH4h88PcmccelCfGSgjn/Lxk/f13DDMdR0OE9ekbPfA1jO
+        xpcVxTfUxuGCkrUd/5wI5Os=
+X-Google-Smtp-Source: ABdhPJywWQc6qI3490FIO81xYxyg6Iwnhb79XiLfzm1JW/pzgcHctYxrVXg7XCyAWghyw/PXZgzecQ==
+X-Received: by 2002:a62:2743:: with SMTP id n64mr14828108pfn.163.1593448373261;
+        Mon, 29 Jun 2020 09:32:53 -0700 (PDT)
+Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id h9sm74743pjs.50.2020.06.29.09.32.52
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Mon, 29 Jun 2020 09:32:52 -0700 (PDT)
+Date:   Mon, 29 Jun 2020 09:32:51 -0700
+From:   Guenter Roeck <linux@roeck-us.net>
+To:     Bartosz Golaszewski <brgl@bgdev.pl>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Jean Delvare <jdelvare@suse.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-hwmon@vger.kernel.org,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: Re: [PATCH v2 6/6] hwmon: pmbus: use more devres helpers
+Message-ID: <20200629163251.GA113813@roeck-us.net>
+References: <20200629065008.27620-1-brgl@bgdev.pl>
+ <20200629065008.27620-7-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <alpine.LRH.2.21.2006261147130.417@localhost>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20200629065008.27620-7-brgl@bgdev.pl>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri 2020-06-26 12:37:19, Alan Maguire wrote:
+On Mon, Jun 29, 2020 at 08:50:08AM +0200, Bartosz Golaszewski wrote:
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 > 
-> On Fri, 26 Jun 2020, Petr Mladek wrote:
+> Shrink pmbus code by using devm_hwmon_device_register_with_groups()
+> and devm_krealloc() instead of their non-managed variants.
 > 
-> > On Tue 2020-06-23 13:07:07, Alan Maguire wrote:
-> > > 
-> > >         printk(KERN_INFO "%pT", BTF_PTR_TYPE(skb, struct sk_buff));
-> > > 
-> > >   struct sk_buff *skb = alloc_skb(64, GFP_KERNEL);
-> > >   pr_info("%pT", BTF_PTR_TYPE(skb, struct sk_buff));
-> > > 
-> > > ...gives us:
-> > > 
-> > > (struct sk_buff){
-> > >  .transport_header = (__u16)65535,
-> > >  .mac_header = (__u16)65535,
-> > >  .end = (sk_buff_data_t)192,
-> > >  .head = (unsigned char *)0x000000006b71155a,
-> > >  .data = (unsigned char *)0x000000006b71155a,
-> > >  .truesize = (unsigned int)768,
-> > >  .users = (refcount_t){
-> > >   .refs = (atomic_t){
-> > >    .counter = (int)1,
-> > >   },
-> > >  },
-> > >  .extensions = (struct skb_ext *)0x00000000f486a130,
-> > > }
-> > > 
-> > > printk output is truncated at 1024 bytes.  For cases where overflow
-> > > is likely, the compact/no type names display modes may be used.
-> > 
-> > Hmm, this scares me:
-> > 
-> >    1. The long message and many lines are going to stretch printk
-> >       design in another dimensions.
-> > 
-> >    2. vsprintf() is important for debugging the system. It has to be
-> >       stable. But the btf code is too complex.
-> >
-> 
-> Right on both points, and there's no way around that really. Representing 
-> even small data structures will stretch us to or beyond the 1024 byte 
-> limit.  This can be mitigated by using compact display mode and not 
-> printing field names, but the output becomes hard to parse then.
->
-> I think a better approach might be to start small, adding the core
-> btf_show functionality to BPF, allowing consumers to use it there,
-> perhaps via a custom helper.
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Sounds good to me.
+Acked-by: Guenter Roeck <linux@roeck-us.net>
 
-> In the current model bpf_trace_printk() inherits the functionality
-> to display data from core printk, so a different approach would
-> be needed there.
-
-BTW: Even the trace buffer has a limitation, see BUF_MAX_DATA_SIZE
-in kernel/trace/ring_buffer.c. It is internally implemented as
-a list of memory pages, see the comments above RB_BUFFER_OFF
-definition.
-
-It is typically 4k. I think that you might hit this limit as well.
-We had to increase per-CPU buffers used by printk() in NMI context
-because 4k was not enough for some backtraces.
-
-So, using different approach would make sense even when using trace
-buffer.
-
-> Other consumers outside of BPF
-> could potentially avail of the show functionality directly via the btf_show
-> functions in the future, but at least it would have one consumer at the 
-> outset, and wouldn't present problems like these for printk.
-
-Sounds good to me.
-
-> > I would strongly prefer to keep this outside vsprintf and printk.
-> > Please, invert the logic and convert it into using separate printk()
-> > call for each printed line.
-> > 
-> 
-> I think the above is in line with what you're suggesting?
-
-Yes, as far as I understand it.
-
-> Yep, no way round this either. I'll try a different approach. Thanks for 
-> taking a look!
-
-Uff, thanks a lot for understanding. I hope that most of the code will
-be reusable in some form.
-
-Best Regards,
-Petr
+Thanks,
+Guenter
