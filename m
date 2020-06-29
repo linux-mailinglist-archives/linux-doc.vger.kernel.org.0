@@ -2,220 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A1C1D20E3BC
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2020 00:03:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8452220E79A
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2020 00:11:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730013AbgF2VRW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 17:17:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35394 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730116AbgF2VRU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 17:17:20 -0400
-Received: from casper.infradead.org (unknown [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 27BFFC061755;
-        Mon, 29 Jun 2020 14:17:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-        MIME-Version:Date:Message-ID:Subject:From:Cc:To:Sender:Reply-To:Content-ID:
-        Content-Description:In-Reply-To:References;
-        bh=FQONZLCxNSFZb1sXC8Tkaq9Lqm1oP8ToJp0lQbwhQuo=; b=WAQpUjlemzxM4jBwSWLATlfa8H
-        fI/iCi+M2v3b1GCJBCm/YYUY1lGd5Ooapahjre8NbyoFy90T0etv6nMYZMmQa5ImC+QUCw18ohpaR
-        gLMaJAbPwnyLNqLiFzrmqxG+2e67Z6yz9NqXz2rLYOxDGhXBIRQHqZeBGc6V5+a9kj3M7hhYtYQFH
-        42QBTLqVbsi83yqOculdzhcHdcjJSPsh+GKhuee1c+EtO+ScCXyXD1Zd7+VG+Co8JyZZsBjlrUUI+
-        kFoMXJQJG5CLCg2+FsyDk+nxsiluXklse49asdGZEK1YEouIBMAmy7CmTOEmCWtFHAzJEugWiDvql
-        XPAsVKhA==;
-Received: from [2601:1c0:6280:3f0::19c2]
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1jq192-0005gR-KC; Mon, 29 Jun 2020 21:16:53 +0000
-To:     LKML <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Julia Lawall <julia.lawall@lip6.fr>
-Cc:     Gilles Muller <Gilles.Muller@lip6.fr>,
-        Nicolas Palix <nicolas.palix@imag.fr>,
-        Michal Marek <michal.lkml@markovi.net>, cocci@systeme.lip6.fr,
-        Markus Elfring <Markus.Elfring@web.de>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Subject: [PATCH v2] Documentation: Coccinelle: fix typos and command example
-Message-ID: <0616dd0c-bb86-be2b-3dc6-1c695a92c3ca@infradead.org>
-Date:   Mon, 29 Jun 2020 14:16:48 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
+        id S2404432AbgF2V6n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 17:58:43 -0400
+Received: from mail-il1-f193.google.com ([209.85.166.193]:39213 "EHLO
+        mail-il1-f193.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729176AbgF2V6m (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 17:58:42 -0400
+Received: by mail-il1-f193.google.com with SMTP id k6so15862732ili.6;
+        Mon, 29 Jun 2020 14:58:41 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=6QT2CxKngMlY2p6AbcTTZAUqsEvoLy2nz/okkRGauIc=;
+        b=lUp/19A7OQSUweoHI2QEAowtTQzqfc2lloX74hWdQME3l6d04TbFg9uaAKJkEZgTVG
+         P7rRIS3F1R3SShw2kyEAjSVL1YDPeDbfIIByNwf7RDW+95blrcRu77A1x3i8+17nEcnC
+         dbE89/8fqM8FS09XGD4CmFtwIv4J6sqSYfWax0HsIbPwSsiQ6nozeoZOLRMnM/FGIUzK
+         6rObPbd7dfRmV1z6ZoxJPXRYrsZ779rSrLHnVldNMrboR5+CruKN392Zwk3QGqMl9fyx
+         Mi01wCC05p7NADXAB8xJBqQ0qe9jwRmPii4L2SvQWKO1X2dkdmLRwIK7cDDIwh2/QgpC
+         CBZQ==
+X-Gm-Message-State: AOAM530kYFx0mchKQIasRRp81PyQLwgO3FrzYBgB7Ly0JozI8yel7UsC
+        2vtxG2ldVr1x3oQZ0bh+hg==
+X-Google-Smtp-Source: ABdhPJylefPN6e1fWTB8vAdKMAzJZl6DuCBfuuXfmf35nWeNuXIU1oLVRKCxPnf1E3+V6I0ZxzpOqw==
+X-Received: by 2002:a92:bf0c:: with SMTP id z12mr17464216ilh.151.1593467921338;
+        Mon, 29 Jun 2020 14:58:41 -0700 (PDT)
+Received: from xps15 ([64.188.179.255])
+        by smtp.gmail.com with ESMTPSA id b8sm669748ilc.42.2020.06.29.14.58.39
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 29 Jun 2020 14:58:40 -0700 (PDT)
+Received: (nullmailer pid 3006922 invoked by uid 1000);
+        Mon, 29 Jun 2020 21:58:39 -0000
+Date:   Mon, 29 Jun 2020 15:58:39 -0600
+From:   Rob Herring <robh@kernel.org>
+To:     Florinel Iordache <florinel.iordache@nxp.com>
+Cc:     kuba@kernel.org, robh+dt@kernel.org, shawnguo@kernel.org,
+        linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
+        davem@davemloft.net, andrew@lunn.ch, mark.rutland@arm.com,
+        linux@armlinux.org.uk, corbet@lwn.net, ioana.ciornei@nxp.com,
+        linux-kernel@vger.kernel.org, hkallweit1@gmail.com,
+        f.fainelli@gmail.com, leoyang.li@nxp.com, netdev@vger.kernel.org,
+        madalin.bucur@oss.nxp.com
+Subject: Re: [PATCH net-next v3 2/7] dt-bindings: net: add backplane dt
+ bindings
+Message-ID: <20200629215839.GA3004274@bogus>
+References: <1592832924-31733-1-git-send-email-florinel.iordache@nxp.com>
+ <1592832924-31733-3-git-send-email-florinel.iordache@nxp.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1592832924-31733-3-git-send-email-florinel.iordache@nxp.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Randy Dunlap <rdunlap@infradead.org>
+On Mon, 22 Jun 2020 16:35:19 +0300, Florinel Iordache wrote:
+> Add ethernet backplane device tree bindings
+> 
+> Signed-off-by: Florinel Iordache <florinel.iordache@nxp.com>
+> ---
+>  .../bindings/net/ethernet-controller.yaml          |  7 ++-
+>  .../devicetree/bindings/net/ethernet-phy.yaml      | 50 ++++++++++++++++++++++
+>  .../devicetree/bindings/net/serdes-lane.yaml       | 49 +++++++++++++++++++++
+>  Documentation/devicetree/bindings/net/serdes.yaml  | 42 ++++++++++++++++++
+>  4 files changed, 146 insertions(+), 2 deletions(-)
+>  create mode 100644 Documentation/devicetree/bindings/net/serdes-lane.yaml
+>  create mode 100644 Documentation/devicetree/bindings/net/serdes.yaml
+> 
 
-Fix various typos etc. in dev-tools/coccinelle.rst:
 
-- punctuation, grammar, wording
-- add "path/to/file.c" when using Coccinelle to check a single file
+My bot found errors running 'make dt_binding_check' on your patch:
 
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: Julia Lawall <Julia.Lawall@lip6.fr>
-Cc: Gilles Muller <Gilles.Muller@lip6.fr>
-Cc: Nicolas Palix <nicolas.palix@imag.fr>
-Cc: Michal Marek <michal.lkml@markovi.net>
-Cc: cocci@systeme.lip6.fr
-Cc: Markus Elfring <Markus.Elfring@web.de>
----
-v2: s/at minimum/a minimum/ (Julia and Markus)
- Documentation/dev-tools/coccinelle.rst |   44 +++++++++++------------
- 1 file changed, 22 insertions(+), 22 deletions(-)
+/builds/robherring/linux-dt-review/Documentation/devicetree/bindings/net/serdes.example.dt.yaml: example-0: serdes@1ea0000:reg:0: [0, 32112640, 0, 8192] is too long
+/builds/robherring/linux-dt-review/Documentation/devicetree/bindings/net/serdes-lane.example.dt.yaml: example-0: serdes@1ea0000:reg:0: [0, 32112640, 0, 8192] is too long
 
---- linux-next-20200629.orig/Documentation/dev-tools/coccinelle.rst
-+++ linux-next-20200629/Documentation/dev-tools/coccinelle.rst
-@@ -85,7 +85,7 @@ Four basic modes are defined: ``patch``,
-   file:line:column-column: message
- 
- - ``context`` highlights lines of interest and their context in a
--  diff-like style.Lines of interest are indicated with ``-``.
-+  diff-like style. Lines of interest are indicated with ``-``.
- 
- - ``org`` generates a report in the Org mode format of Emacs.
- 
-@@ -119,7 +119,7 @@ For each semantic patch, a commit messag
- description of the problem being checked by the semantic patch, and
- includes a reference to Coccinelle.
- 
--As any static code analyzer, Coccinelle produces false
-+As with any static code analyzer, Coccinelle produces false
- positives. Thus, reports must be carefully checked, and patches
- reviewed.
- 
-@@ -135,18 +135,18 @@ the parallelism, set the J= variable. Fo
- 
-    make coccicheck MODE=report J=4
- 
--As of Coccinelle 1.0.2 Coccinelle uses Ocaml parmap for parallelization,
-+As of Coccinelle 1.0.2 Coccinelle uses Ocaml parmap for parallelization;
- if support for this is detected you will benefit from parmap parallelization.
- 
- When parmap is enabled coccicheck will enable dynamic load balancing by using
--``--chunksize 1`` argument, this ensures we keep feeding threads with work
-+``--chunksize 1`` argument. This ensures we keep feeding threads with work
- one by one, so that we avoid the situation where most work gets done by only
- a few threads. With dynamic load balancing, if a thread finishes early we keep
- feeding it more work.
- 
- When parmap is enabled, if an error occurs in Coccinelle, this error
--value is propagated back, the return value of the ``make coccicheck``
--captures this return value.
-+value is propagated back, and the return value of the ``make coccicheck``
-+command captures this return value.
- 
- Using Coccinelle with a single semantic patch
- ---------------------------------------------
-@@ -177,13 +177,13 @@ For example, to check drivers/net/wirele
- To apply Coccinelle on a file basis, instead of a directory basis, the
- following command may be used::
- 
--    make C=1 CHECK="scripts/coccicheck"
-+    make C=1 CHECK="scripts/coccicheck" path/to/file.c
- 
- To check only newly edited code, use the value 2 for the C flag, i.e.::
- 
--    make C=2 CHECK="scripts/coccicheck"
-+    make C=2 CHECK="scripts/coccicheck" path/to/file.c
- 
--In these modes, which works on a file basis, there is no information
-+In these modes, which work on a file basis, there is no information
- about semantic patches displayed, and no commit message proposed.
- 
- This runs every semantic patch in scripts/coccinelle by default. The
-@@ -198,12 +198,12 @@ Debugging Coccinelle SmPL patches
- 
- Using coccicheck is best as it provides in the spatch command line
- include options matching the options used when we compile the kernel.
--You can learn what these options are by using V=1, you could then
-+You can learn what these options are by using V=1; you could then
- manually run Coccinelle with debug options added.
- 
- Alternatively you can debug running Coccinelle against SmPL patches
--by asking for stderr to be redirected to stderr, by default stderr
--is redirected to /dev/null, if you'd like to capture stderr you
-+by asking for stderr to be redirected to stderr. By default stderr
-+is redirected to /dev/null; if you'd like to capture stderr you
- can specify the ``DEBUG_FILE="file.txt"`` option to coccicheck. For
- instance::
- 
-@@ -211,8 +211,8 @@ instance::
-     make coccicheck COCCI=scripts/coccinelle/free/kfree.cocci MODE=report DEBUG_FILE=cocci.err
-     cat cocci.err
- 
--You can use SPFLAGS to add debugging flags, for instance you may want to
--add both --profile --show-trying to SPFLAGS when debugging. For instance
-+You can use SPFLAGS to add debugging flags; for instance you may want to
-+add both --profile --show-trying to SPFLAGS when debugging. For example
- you may want to use::
- 
-     rm -f err.log
-@@ -229,7 +229,7 @@ DEBUG_FILE support is only supported whe
- --------------------
- 
- Coccinelle supports reading .cocciconfig for default Coccinelle options that
--should be used every time spatch is spawned, the order of precedence for
-+should be used every time spatch is spawned. The order of precedence for
- variables for .cocciconfig is as follows:
- 
- - Your current user's home directory is processed first
-@@ -237,7 +237,7 @@ variables for .cocciconfig is as follows
- - The directory provided with the --dir option is processed last, if used
- 
- Since coccicheck runs through make, it naturally runs from the kernel
--proper dir, as such the second rule above would be implied for picking up a
-+proper dir; as such the second rule above would be implied for picking up a
- .cocciconfig when using ``make coccicheck``.
- 
- ``make coccicheck`` also supports using M= targets. If you do not supply
-@@ -260,13 +260,13 @@ If not using the kernel's coccicheck tar
- order logic of .cocciconfig reading. If using the kernel's coccicheck target,
- override any of the kernel's .coccicheck's settings using SPFLAGS.
- 
--We help Coccinelle when used against Linux with a set of sensible defaults
-+We help Coccinelle when used against Linux with a set of sensible default
- options for Linux with our own Linux .cocciconfig. This hints to coccinelle
--git can be used for ``git grep`` queries over coccigrep. A timeout of 200
-+that git can be used for ``git grep`` queries over coccigrep. A timeout of 200
- seconds should suffice for now.
- 
- The options picked up by coccinelle when reading a .cocciconfig do not appear
--as arguments to spatch processes running on your system, to confirm what
-+as arguments to spatch processes running on your system. To confirm what
- options will be used by Coccinelle run::
- 
-       spatch --print-options-only
-@@ -290,7 +290,7 @@ given to it when options are in conflict
- 
- Coccinelle supports idutils as well but requires coccinelle >= 1.0.6.
- When no ID file is specified coccinelle assumes your ID database file
--is in the file .id-utils.index on the top level of the kernel, coccinelle
-+is in the file .id-utils.index on the top level of the kernel. Coccinelle
- carries a script scripts/idutils_index.sh which creates the database with::
- 
-     mkid -i C --output .id-utils.index
-@@ -317,7 +317,7 @@ SmPL patch specific options
- ---------------------------
- 
- SmPL patches can have their own requirements for options passed
--to Coccinelle. SmPL patch specific options can be provided by
-+to Coccinelle. SmPL patch-specific options can be provided by
- providing them at the top of the SmPL patch, for instance::
- 
- 	// Options: --no-includes --include-headers
-@@ -327,7 +327,7 @@ SmPL patch Coccinelle requirements
- 
- As Coccinelle features get added some more advanced SmPL patches
- may require newer versions of Coccinelle. If an SmPL patch requires
--at least a version of Coccinelle, this can be specified as follows,
-+a minimum version of Coccinelle, this can be specified as follows,
- as an example if requiring at least Coccinelle >= 1.0.5::
- 
- 	// Requires: 1.0.5
+
+See https://patchwork.ozlabs.org/patch/1314386
+
+If you already ran 'make dt_binding_check' and didn't see the above
+error(s), then make sure dt-schema is up to date:
+
+pip3 install git+https://github.com/devicetree-org/dt-schema.git@master --upgrade
+
+Please check and re-submit.
 
