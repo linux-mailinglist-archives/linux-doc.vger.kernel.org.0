@@ -2,78 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9CB7520E108
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:58:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8E79620E257
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2020 00:00:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389047AbgF2Uvp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 16:51:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43364 "EHLO
+        id S1731194AbgF2VEY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 17:04:24 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43358 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731378AbgF2TN1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:13:27 -0400
-Received: from casper.infradead.org (unknown [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D8697C014A47;
-        Mon, 29 Jun 2020 01:10:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=uAiRDghuOCMpDAFAHvQM5BdGNUMLZuFGW1APRakoSus=; b=ara8FOJJmyGTsZZYwrSNPjWLqN
-        qQal0ttJBdaZfhpLC0Z/0FVu0TGsBscGI7gHKZlxfygbnCKljVmd6EliGkUjiCeua5Lqlw+SqUGri
-        YDF/uUjkMqsGFUIUIlu6dP/HMLfagIiCfP7CnCNO/HR3E0DtZg3r6JVkQbErGPJrBmWjpHJNnZqFi
-        dvaPuTG2pAlmYGYVTzI+Iei0zvDBYbJVhGbqE40iWteYnODY0StwXQAzxsjKFuSER8akZL6L3IWxR
-        XnPxi6siVqTpD8pKccFNJr5E7a4Iutb0TtgFybcU7WiUAYpmFodShSUWbg4RziXqhwwdibXeVKeVq
-        /ShvQPnw==;
-Received: from hch by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1jporL-0007T7-3F; Mon, 29 Jun 2020 08:09:47 +0000
-Date:   Mon, 29 Jun 2020 09:09:47 +0100
-From:   Christoph Hellwig <hch@infradead.org>
-To:     Simon Arlott <simon@octiron.net>
-Cc:     "James E.J. Bottomley" <jejb@linux.ibm.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        with ESMTP id S1731113AbgF2TMo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:12:44 -0400
+Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com [IPv6:2607:f8b0:4864:20::643])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EACBEC0147C1
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 01:25:08 -0700 (PDT)
+Received: by mail-pl1-x643.google.com with SMTP id u9so3205391pls.13
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 01:25:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9NfPVc9X1tGAaTQ7LTtkR4j1ayN5pMJRPHgx7xTYQLA=;
+        b=LdqciQKkXx0vF40NVmUbSHqVzrdkPFKV3dLzzHZQ0CmTxL0oifFIHpiE1eOCfrV+cj
+         3cVFOU1CWsgeA4WPaCLwixL8fpHf2gD4VmBWCeugFP0phu7dzgx0EP4jXAFdYovq5cJG
+         mqrifK45bUERCQFkFNqN5CCv0cbp9O0w33VxEH9fSjt8seAUkgCj5NWfSlx7GXbXerH+
+         3zTNgotZ4LFOJ+OuIfxb02TkTqZNjsAvm094siM8wm3CPW3Xw1zLi37XGdZb0Rf/F3fj
+         b5purGoOvV/g6TdTCZgkSYAkw1VmcplH6qmVLCU/WwZMug1lxsBcwO8BPtFaLkGUy4cC
+         Y6ig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=9NfPVc9X1tGAaTQ7LTtkR4j1ayN5pMJRPHgx7xTYQLA=;
+        b=bSv4TN6x2jXyfgXucVliZfzpsr2GXnwBOlVNdT0LrMEp3rUukDT1fEL+YoW+ULtc6J
+         PmYgjf5odPBte8E/08BpJeZLcINXXm61q3lgfJo0anY3hKf77iaiOcIV449XystGpODP
+         XgfcUj1pUhaqhtKJqL7J88bUC3itIk1dn4YvP4o+g774i9v9TKVbM+V40BznbHZry3Uc
+         T0Q5fKXmYX/dS6Drp7MYNPp7RHoIcwB+7RrCCCL2u1uXTz8UFCjSmTLJpjrgxWxWfzMH
+         /VSVqEL3H8xHWhAbAMjaUyuPz0zomPYpV4kysJ7mHwqdSK61PNB9mZYJKGKWTtSPHTC6
+         1M3A==
+X-Gm-Message-State: AOAM533aE11fAmIL/63jEXmfiWW5Qm82uqXaHj1hyWRKQr7DV83+Wfg7
+        huQ3Vm+Wgmv2MXnW4D3Ftpvmdg==
+X-Google-Smtp-Source: ABdhPJyR6iTPdisyGhDmgEwBMsi6ZvJ9kAEpwNBdUll/2hJsHd7ZMJ+XKDb/SY3trQjtVNUA1QgVcA==
+X-Received: by 2002:a17:902:694b:: with SMTP id k11mr13062647plt.245.1593419108221;
+        Mon, 29 Jun 2020 01:25:08 -0700 (PDT)
+Received: from localhost ([122.172.127.76])
+        by smtp.gmail.com with ESMTPSA id u2sm8807092pfl.21.2020.06.29.01.25.07
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Mon, 29 Jun 2020 01:25:07 -0700 (PDT)
+From:   Viresh Kumar <viresh.kumar@linaro.org>
+To:     Rafael Wysocki <rjw@rjwysocki.net>, Arnd Bergmann <arnd@arndb.de>,
+        Ben Segall <bsegall@google.com>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Ingo Molnar <mingo@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-scsi@vger.kernel.org, linux-doc@vger.kernel.org,
-        Bart Van Assche <bvanassche@acm.org>,
-        Christoph Hellwig <hch@infradead.org>,
-        Damien Le Moal <Damien.LeMoal@wdc.com>,
-        Pavel Machek <pavel@ucw.cz>,
-        Henrique de Moraes Holschuh <hmh@hmh.eng.br>
-Subject: Re: [PATCH (v2)] scsi: sd: add parameter to stop disks before reboot
-Message-ID: <20200629080947.GA28551@infradead.org>
-References: <e726ffd8-8897-4a79-c3d6-6271eda8aebb@0882a8b5-c6c3-11e9-b005-00805fc181fe>
+        Juri Lelli <juri.lelli@redhat.com>,
+        Mel Gorman <mgorman@suse.de>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Viresh Kumar <viresh.kumar@linaro.org>
+Cc:     linux-pm@vger.kernel.org, kernel-team@android.com,
+        tkjos@google.com, adharmap@codeaurora.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linuxppc-dev@lists.ozlabs.org, Quentin Perret <qperret@google.com>
+Subject: [PATCH V4 0/3] cpufreq: Allow default governor on cmdline and fix locking issues
+Date:   Mon, 29 Jun 2020 13:54:57 +0530
+Message-Id: <cover.1593418662.git.viresh.kumar@linaro.org>
+X-Mailer: git-send-email 2.25.0.rc1.19.g042ed3e048af
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <e726ffd8-8897-4a79-c3d6-6271eda8aebb@0882a8b5-c6c3-11e9-b005-00805fc181fe>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, Jun 28, 2020 at 07:32:51PM +0100, Simon Arlott wrote:
-> I need to use "reboot=p" on my desktop because one of the PCIe devices
-> does not appear after a warm boot. This results in a very cold boot
-> because the BIOS turns the PSU off and on.
-> 
-> The scsi sd shutdown process does not send a stop command to disks
-> before the reboot happens (stop commands are only sent for a shutdown).
-> 
-> The result is that all of my SSDs experience a sudden power loss on
-> every reboot, which is undesirable behaviour because it could cause data
-> to be corrupted. These events are recorded in the SMART attributes.
-> 
-> Add a "stop_before_reboot" module parameter that can be used to control
-> the shutdown behaviour of disks before a reboot. The default will be
-> the existing behaviour (disks are not stopped).
-> 
->   sd_mod.stop_before_reboot=<integer>
->     0 = disabled (default)
->     1 = enabled
-> 
-> The behaviour on shutdown is unchanged: all disks are unconditionally
-> stopped.
+Hi,
 
-What happened to the suggestion to treat reboot=p like a poweroff
-instead?  That seems to be fundamentally the right thing to do.
+I have picked Quentin's series over my patch, modified both and tested.
+
+V3->V4:
+- Do __module_get() for cpufreq_default_governor() case as well and get
+  rid of an extra variable.
+- Use a single character array, default_governor, instead of two of them.
+
+V2->V3:
+- default_governor is a string now and we don't set it on governor
+  registration or unregistration anymore.
+- Fixed locking issues in cpufreq_init_policy().
+
+--
+Viresh
+
+Original cover letter fro Quentin:
+
+This series enables users of prebuilt kernels (e.g. distro kernels) to
+specify their CPUfreq governor of choice using the kernel command line,
+instead of having to wait for the system to fully boot to userspace to
+switch using the sysfs interface. This is helpful for 2 reasons:
+  1. users get to choose the governor that runs during the actual boot;
+  2. it simplifies the userspace boot procedure a bit (one less thing to
+     worry about).
+
+To enable this, the first patch moves all governor init calls to
+core_initcall, to make sure they are registered by the time the drivers
+probe. This should be relatively low impact as registering a governor
+is a simple procedure (it gets added to a llist), and all governors
+already load at core_initcall anyway when they're set as the default
+in Kconfig. This also allows to clean-up the governors' init/exit code,
+and reduces boilerplate.
+
+The second patch introduces the new command line parameter, inspired by
+its cpuidle counterpart. More details can be found in the respective
+patch headers.
+
+Changes in v2:
+ - added Viresh's ack to patch 01
+ - moved the assignment of 'default_governor' in patch 02 to the governor
+   registration path instead of the driver registration (Viresh)
+
+Quentin Perret (2):
+  cpufreq: Register governors at core_initcall
+  cpufreq: Specify default governor on command line
+
+Viresh Kumar (1):
+  cpufreq: Fix locking issues with governors
+
+ .../admin-guide/kernel-parameters.txt         |  5 ++
+ Documentation/admin-guide/pm/cpufreq.rst      |  6 +-
+ .../platforms/cell/cpufreq_spudemand.c        | 26 +-----
+ drivers/cpufreq/cpufreq.c                     | 87 ++++++++++++-------
+ drivers/cpufreq/cpufreq_conservative.c        | 22 ++---
+ drivers/cpufreq/cpufreq_ondemand.c            | 24 ++---
+ drivers/cpufreq/cpufreq_performance.c         | 14 +--
+ drivers/cpufreq/cpufreq_powersave.c           | 18 +---
+ drivers/cpufreq/cpufreq_userspace.c           | 18 +---
+ include/linux/cpufreq.h                       | 14 +++
+ kernel/sched/cpufreq_schedutil.c              |  6 +-
+ 11 files changed, 100 insertions(+), 140 deletions(-)
+
+-- 
+2.25.0.rc1.19.g042ed3e048af
+
