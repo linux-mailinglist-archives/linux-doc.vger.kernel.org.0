@@ -2,115 +2,143 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CE95820E126
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:58:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3DF2620DFC9
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:55:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729223AbgF2Uwh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 16:52:37 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43394 "EHLO
+        id S1729438AbgF2Uj4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 16:39:56 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43370 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731349AbgF2TNY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:13:24 -0400
-Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com [IPv6:2a00:1450:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D8F36C0086FD
-        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 02:55:32 -0700 (PDT)
-Received: by mail-wm1-x343.google.com with SMTP id l2so13997932wmf.0
-        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 02:55:32 -0700 (PDT)
+        with ESMTP id S1731715AbgF2TON (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:14:13 -0400
+Received: from mail-wr1-x449.google.com (mail-wr1-x449.google.com [IPv6:2a00:1450:4864:20::449])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 11088C008622
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 03:42:25 -0700 (PDT)
+Received: by mail-wr1-x449.google.com with SMTP id h28so16313188wrc.18
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 03:42:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=LfaVHK95vP+/yqyPSsgOJ96CzY9z3S8IGFhM8d1JksE=;
-        b=kQvFRp2JCmd6+CWcro1viq1NDZbcQv9QXvxVyS+hc5tHddsqQYQk7lFWuGFM+wLAWb
-         0Mj3h23R6/dowPu/lo0Vo8jHCAyPBgh1OTB2rrKQBkT8Y8D7I+JI1OAH3OnoXii6MDbh
-         nx7md3+03mL4EQdUjNWheQ+4NJcnnVEps8ShZdhsAqwODJA2rxxrCHtksxuMIm9kxLl5
-         WDGMUj35pWLJxEHxpPTLQWvJX8U0iGBXmg6SjDN/D9KARgH5LqqQoVBBgndxNH5etBts
-         cgPdp7PM5zn9sYE7VF7zerZt8LyMmO4keA94BFx7ItlgpkhocVTH9laEg29GIW5W8RMY
-         /JUg==
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=cd/DuDkUFEfbY/EbJHKe01td49IpW+ZHgFOrWbd6mno=;
+        b=EOmizTnmdW1stEhyikixAOAJYGNG4JoVNWc2K1UIoT2JVQHjKWidyg6GyKAfxeutDo
+         Izz6Jb9AabLjANhiyZ1a51F4CzD6c9LtAZ/GOpx6AfFdiW8D7phD7bDT+tXG0Lo5Ouc/
+         Lb/RgLaaYJmf5aDyZk+27Eom2mSnHL1jztE/Fn308ky7gMOfKxFlWWr8GG3JLQcPHCte
+         a9ibrJCVH/AtS6TnRrPA8ECia7qZhTlL3vsVK6eBhl+oanmtWmzattunVuJq3HeY+w4/
+         XHIgMgHxvNAAzqoE5KXLAvT/LsTMdnBVfj8vaIEGnh/ZHVZgl4wyhueBOaWoqg5RlBxs
+         zOvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=LfaVHK95vP+/yqyPSsgOJ96CzY9z3S8IGFhM8d1JksE=;
-        b=PigfnyyLtJ8cpVMdgEDnl2UcQP87Z9aXd1JArzsBJDALElzT/IfGcisllHQQJPHh3d
-         yv+IbZE+q3BOGGcfnAfFTtuopFav5bRBcIBL5ThEYi6le90z4jHSy6t/E/zrUDYaWg/q
-         VHui6ORHvMw47khIHF7LBGVEAUzYVyZ4+AdcyZIvsnEW35a9clHnu0Vy1Uh3Es3Wm1nA
-         H5eaGgRwH18R49a3EfBhUm8ghryBkrW7xZHXDqPg188+gMFBuMy8iIrJDgdAVV6zRN7L
-         Pn6SjEWVkQeusXQLMHMf9mzObWV0/kemYOMJOCh7T3hOrxgGae8z2R9lSjOS6M5rp0HQ
-         iIZw==
-X-Gm-Message-State: AOAM531VQrmB1Agd84mDbwp5NoZYKdRA2XYTJWKIDcZWyOIkmWC6rTDb
-        P4cbxFpRq65i9EitcdCdGVh7uA==
-X-Google-Smtp-Source: ABdhPJzJxBVIN7hpGpbilBwf8akgBE11lXjQGHA8rMwku6sqv13n9ShBOAAlVqTSAR4t6FB2yXe43w==
-X-Received: by 2002:a1c:48e:: with SMTP id 136mr15305628wme.164.1593424531474;
-        Mon, 29 Jun 2020 02:55:31 -0700 (PDT)
-Received: from google.com ([2a00:79e0:d:110:d6cc:2030:37c1:9964])
-        by smtp.gmail.com with ESMTPSA id u84sm16341010wmg.7.2020.06.29.02.55.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jun 2020 02:55:30 -0700 (PDT)
-Date:   Mon, 29 Jun 2020 10:55:27 +0100
-From:   Quentin Perret <qperret@google.com>
-To:     Viresh Kumar <viresh.kumar@linaro.org>
-Cc:     Rafael Wysocki <rjw@rjwysocki.net>,
-        Jonathan Corbet <corbet@lwn.net>, linux-pm@vger.kernel.org,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        kernel-team@android.com, tkjos@google.com, adharmap@codeaurora.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH V4 3/3] cpufreq: Specify default governor on command line
-Message-ID: <20200629095527.GA1232873@google.com>
-References: <cover.1593418662.git.viresh.kumar@linaro.org>
- <96b6e6ca02b664194ff3e57e1ec768fbc597bf38.1593418662.git.viresh.kumar@linaro.org>
- <20200629094452.GB1228312@google.com>
- <20200629094627.jh7pwhftcdqj6nhm@vireshk-i7>
- <20200629094825.GA1231692@google.com>
- <20200629095038.GB1231692@google.com>
- <20200629095423.xengjk5z2ezshrdb@vireshk-i7>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200629095423.xengjk5z2ezshrdb@vireshk-i7>
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=cd/DuDkUFEfbY/EbJHKe01td49IpW+ZHgFOrWbd6mno=;
+        b=ZF+bRtv/TTLs1HPavOQl/qSbHIntuURF3l1mdPk771AuBwRTbFlqzbNfuqpuldNG4s
+         BRiRxcOvjeka+AmuRI2Zi61q/PKJ8oQ+J6shvlVYFmu8bC/TizMfkdvzCsUygxsT/Nwo
+         +cFZfX6s394yJOaN5wgKuXw5AD/uMsZfMJID/JVnJNLqzLIqPoQTUeSLIzCElKpPq4Ob
+         bO06xNbUu6lix1S90ars2srG+XGgctwMKLBnvJMsAhlVhi+vAB5PjSCUdr8zGdtx/b/5
+         r1AS0tMUlpmyuTKDlfnt9XabfcqXgKUmx/hQaQkABHQMgOlsV3pyh5ReLPon1JSQSC7p
+         ON3g==
+X-Gm-Message-State: AOAM532vIMrIU9Llu3aEBRd6s/3SODX/UWHSqtF59//GUl3B3LaXgQ7U
+        kJzLdwU0/f7cNoh9sw/0iMIGUK8iIA==
+X-Google-Smtp-Source: ABdhPJwcer+5LT1CvjxBJy31tjF/CKb14qtGBiWuvjYtpLPhyBTlm1yqEYg+TmCM21m65nLocFTZVkZDPg==
+X-Received: by 2002:a7b:ce87:: with SMTP id q7mr16866593wmj.39.1593427343578;
+ Mon, 29 Jun 2020 03:42:23 -0700 (PDT)
+Date:   Mon, 29 Jun 2020 12:41:56 +0200
+Message-Id: <20200629104157.3242503-1-elver@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.27.0.212.ge8ba1cc988-goog
+Subject: [PATCH 1/2] kasan: Improve and simplify Kconfig.kasan
+From:   Marco Elver <elver@google.com>
+To:     elver@google.com, akpm@linux-foundation.org
+Cc:     dvyukov@google.com, glider@google.com, andreyknvl@google.com,
+        linux-kernel@vger.kernel.org, kasan-dev@googlegroups.com,
+        aryabinin@virtuozzo.com, ndesaulniers@google.com,
+        walter-zh.wu@mediatek.com, arnd@arndb.de, dja@axtens.net,
+        linux-doc@vger.kernel.org, clang-built-linux@googlegroups.com
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Monday 29 Jun 2020 at 15:24:23 (+0530), Viresh Kumar wrote:
-> On 29-06-20, 10:50, Quentin Perret wrote:
-> > On Monday 29 Jun 2020 at 10:48:25 (+0100), Quentin Perret wrote:
-> > > On Monday 29 Jun 2020 at 15:16:27 (+0530), Viresh Kumar wrote:
-> > > > On 29-06-20, 10:44, Quentin Perret wrote:
-> > > > > On Monday 29 Jun 2020 at 13:55:00 (+0530), Viresh Kumar wrote:
-> > > > > >  static int __init cpufreq_core_init(void)
-> > > > > >  {
-> > > > > > +	struct cpufreq_governor *gov = cpufreq_default_governor();
-> > > > > > +
-> > > > > >  	if (cpufreq_disabled())
-> > > > > >  		return -ENODEV;
-> > > > > >  
-> > > > > >  	cpufreq_global_kobject = kobject_create_and_add("cpufreq", &cpu_subsys.dev_root->kobj);
-> > > > > >  	BUG_ON(!cpufreq_global_kobject);
-> > > > > >  
-> > > > > > +	if (!strlen(default_governor))
-> > > > > 
-> > > > > Should we test '!strlen(default_governor) && gov' here actually?
-> > > > > We check the return value of cpufreq_default_governor() in
-> > > > > cpufreq_init_policy(), so I'm guessing we should do the same here to be
-> > > > > on the safe side.
-> > > > 
-> > > > With the current setup (the Kconfig option being a choice which
-> > > > selects one governor at least), it is not possible for gov to be NULL
-> > > > here. And so I didn't worry about it :)
-> > > 
-> > > Right, so should we remove the check in cpufreq_init_policy() then?
-> > > I don't mind either way as long as we are consitent :)
-> > 
-> > And actually maybe we should remove the weakly defined
-> > cpufreq_default_governor() implementation too? That'd make sure we get a
-> > link-time error if for some reason things change in the Kconfig options.
-> 
-> That would be fine I believe. I will do all that in a separate patch
-> then and let this series go through with no more changes :)
+Turn 'KASAN' into a menuconfig, to avoid cluttering its parent menu with
+the suboptions if enabled. Use 'if KASAN ... endif' instead of having
+to 'depend on KASAN' for each entry.
 
-OK, that works for me.
+Signed-off-by: Marco Elver <elver@google.com>
+---
+ lib/Kconfig.kasan | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
 
-Thanks!
-Quentin
+diff --git a/lib/Kconfig.kasan b/lib/Kconfig.kasan
+index 34b84bcbd3d9..89053defc0d9 100644
+--- a/lib/Kconfig.kasan
++++ b/lib/Kconfig.kasan
+@@ -18,7 +18,7 @@ config CC_HAS_KASAN_SW_TAGS
+ config CC_HAS_WORKING_NOSANITIZE_ADDRESS
+ 	def_bool !CC_IS_GCC || GCC_VERSION >= 80300
+ 
+-config KASAN
++menuconfig KASAN
+ 	bool "KASAN: runtime memory debugger"
+ 	depends on (HAVE_ARCH_KASAN && CC_HAS_KASAN_GENERIC) || \
+ 		   (HAVE_ARCH_KASAN_SW_TAGS && CC_HAS_KASAN_SW_TAGS)
+@@ -29,9 +29,10 @@ config KASAN
+ 	  designed to find out-of-bounds accesses and use-after-free bugs.
+ 	  See Documentation/dev-tools/kasan.rst for details.
+ 
++if KASAN
++
+ choice
+ 	prompt "KASAN mode"
+-	depends on KASAN
+ 	default KASAN_GENERIC
+ 	help
+ 	  KASAN has two modes: generic KASAN (similar to userspace ASan,
+@@ -88,7 +89,6 @@ endchoice
+ 
+ choice
+ 	prompt "Instrumentation type"
+-	depends on KASAN
+ 	default KASAN_OUTLINE
+ 
+ config KASAN_OUTLINE
+@@ -113,7 +113,6 @@ endchoice
+ 
+ config KASAN_STACK_ENABLE
+ 	bool "Enable stack instrumentation (unsafe)" if CC_IS_CLANG && !COMPILE_TEST
+-	depends on KASAN
+ 	help
+ 	  The LLVM stack address sanitizer has a know problem that
+ 	  causes excessive stack usage in a lot of functions, see
+@@ -134,7 +133,7 @@ config KASAN_STACK
+ 
+ config KASAN_S390_4_LEVEL_PAGING
+ 	bool "KASan: use 4-level paging"
+-	depends on KASAN && S390
++	depends on S390
+ 	help
+ 	  Compiling the kernel with KASan disables automatic 3-level vs
+ 	  4-level paging selection. 3-level paging is used by default (up
+@@ -151,7 +150,7 @@ config KASAN_SW_TAGS_IDENTIFY
+ 
+ config KASAN_VMALLOC
+ 	bool "Back mappings in vmalloc space with real shadow memory"
+-	depends on KASAN && HAVE_ARCH_KASAN_VMALLOC
++	depends on HAVE_ARCH_KASAN_VMALLOC
+ 	help
+ 	  By default, the shadow region for vmalloc space is the read-only
+ 	  zero page. This means that KASAN cannot detect errors involving
+@@ -164,8 +163,10 @@ config KASAN_VMALLOC
+ 
+ config TEST_KASAN
+ 	tristate "Module for testing KASAN for bug detection"
+-	depends on m && KASAN
++	depends on m
+ 	help
+ 	  This is a test module doing various nasty things like
+ 	  out of bounds accesses, use after free. It is useful for testing
+ 	  kernel debugging features like KASAN.
++
++endif # KASAN
+-- 
+2.27.0.212.ge8ba1cc988-goog
+
