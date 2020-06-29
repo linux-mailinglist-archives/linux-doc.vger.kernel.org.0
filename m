@@ -2,330 +2,185 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9874620DF0D
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:54:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 67E9820E197
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:59:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732621AbgF2Ubw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 16:31:52 -0400
-Received: from smtp.al2klimov.de ([78.46.175.9]:60912 "EHLO smtp.al2klimov.de"
+        id S1731118AbgF2U5j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 16:57:39 -0400
+Received: from chalk.uuid.uk ([51.68.227.198]:52730 "EHLO chalk.uuid.uk"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1732478AbgF2Ubv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 29 Jun 2020 16:31:51 -0400
-Received: from authenticated-user (PRIMARY_HOSTNAME [PUBLIC_IP])
-        by smtp.al2klimov.de (Postfix) with ESMTPA id 29768BC140;
-        Mon, 29 Jun 2020 20:31:33 +0000 (UTC)
-From:   "Alexander A. Klimov" <grandmaster@al2klimov.de>
-To:     corbet@lwn.net, aaro.koskinen@iki.fi, tony@atomide.com,
-        linux@armlinux.org.uk, daniel@zonque.org, haojian.zhuang@gmail.com,
-        robert.jarzmik@free.fr, kgene@kernel.org, krzk@kernel.org,
-        dmitry.torokhov@gmail.com, lee.jones@linaro.org,
-        wsa+renesas@sang-engineering.com, ulf.hansson@linaro.org,
-        davem@davemloft.net, kuba@kernel.org, b.zolnierkie@samsung.com,
-        j.neuschaefer@gmx.net, mchehab+samsung@kernel.org,
-        gustavo@embeddedor.com, gregkh@linuxfoundation.org,
-        yanaijie@huawei.com, daniel.vetter@ffwll.ch,
-        rafael.j.wysocki@intel.com, Julia.Lawall@inria.fr,
-        linus.walleij@linaro.org, viresh.kumar@linaro.org, arnd@arndb.de,
-        jani.nikula@intel.com, yuehaibing@huawei.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-samsung-soc@vger.kernel.org, linux-input@vger.kernel.org,
-        linux-mmc@vger.kernel.org, netdev@vger.kernel.org,
-        linux-parisc@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linux-fbdev@vger.kernel.org
-Cc:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
-Subject: [PATCH] Remove handhelds.org links and email addresses
-Date:   Mon, 29 Jun 2020 22:31:21 +0200
-Message-Id: <20200629203121.7892-1-grandmaster@al2klimov.de>
+        id S1729386AbgF2U5g (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 29 Jun 2020 16:57:36 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=octiron.net
+        ; s=20180214; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
+        Message-ID:Subject:Cc:From:To:Sender:Reply-To:Content-ID:Content-Description:
+        Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+        In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+        List-Post:List-Owner:List-Archive;
+        bh=+rLOlLyhvnP0f8oiGdEmdKJzbVAQvAR2f04vwtNycPY=; b=UiVw7iCXk5sZQYWfvPvaRktzpg
+        f8FxSZLDsWaht/5ia9EPIFFj+/H+RyzbEd49rLwwgYgVsca2khq8wupvfcmiDODVw3vmnkTklFLU0
+        dKodZuxzUKp+i9KNE6DiYBzO3fFHJr41VIl1SMZ6DzImbMnscvJsBqvsBYp26YGlm97Ljo65hbGur
+        7cG04inkYugNldNfBuFVswsSTMPM5v49O4ScLpkqbPpAFxoUYqUb1gfGxE3OYEGR6kL1xBj9TFxz/
+        BM8lspwxtb/qYIBMQE5QjaMZeROuw3vYewsOltABvOjXiBLtDwtwN13aR/k7hqw271gyOpdUeHx22
+        J7P91tjA==;
+Received: by chalk.uuid.uk with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.90_1)
+        (envelope-from <simon@octiron.net>)
+        id 1jq0pl-0000O4-5c; Mon, 29 Jun 2020 21:57:04 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=octiron.net
+        ; s=20180214; h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
+        Message-ID:Subject:Cc:From:To;
+        bh=+rLOlLyhvnP0f8oiGdEmdKJzbVAQvAR2f04vwtNycPY=; b=e9ofXEjOwK1Md4paqP/5no9yI9
+        qdPejM1TrHUE0fQXeQkd76Q6S96ZdVfVHGLStwp23xjop+6PNG1vp013Csw1BWeoudxy6KGlfmAN+
+        994tI2azKqNG9iy1XnS/JiuIjQRnu75sLufWqgVWyD//lPP19aleHUf1v5HPDVvI/yc/qgQTZBax2
+        b6kk6Ci9EE0AOXUTuOiGIVJH6mBAEJ2CxxJSsaRwN+z3zGfxaBANpF4q6yYXbXrh8EmNpeCTm8Evk
+        X51UsQZHj8x4h6PYC7dpePuXgtQGp8H8FCj2QlElOOTTfB3TiW9Zcr6ZxekwZTa5/JTcOS61l/ICC
+        5n1og10A==;
+Received: by tsort.uuid.uk with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.86_2)
+        (envelope-from <simon@octiron.net>)
+        id 1jq0pe-0008G2-10; Mon, 29 Jun 2020 21:56:55 +0100
+To:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+From:   Simon Arlott <simon@octiron.net>
+Cc:     "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        linux-scsi@vger.kernel.org, Bart Van Assche <bvanassche@acm.org>,
+        Christoph Hellwig <hch@infradead.org>,
+        Damien Le Moal <Damien.LeMoal@wdc.com>,
+        Pavel Machek <pavel@ucw.cz>,
+        Henrique de Moraes Holschuh <hmh@hmh.eng.br>
+Subject: [PATCH 1/2] reboot: add a "power cycle" quirk to prepare for a power
+ off on reboot
+Message-ID: <f4a7b539-eeac-1a59-2350-3eefc8c17801@0882a8b5-c6c3-11e9-b005-00805fc181fe>
+Date:   Mon, 29 Jun 2020 21:56:49 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.8.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: ++
-X-Spam-Level: **
-Authentication-Results: smtp.al2klimov.de;
-        auth=pass smtp.auth=aklimov@al2klimov.de smtp.mailfrom=grandmaster@al2klimov.de
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Rationale:
-https://lore.kernel.org/linux-doc/20200626110706.7b5d4a38@lwn.net/
+I need to use "reboot=p" on my desktop because one of the PCIe devices
+does not appear after a warm boot. This results in a very cold boot
+because the BIOS turns the PSU off and on.
 
-Signed-off-by: Alexander A. Klimov <grandmaster@al2klimov.de>
+The scsi sd shutdown process does not send a stop command to disks
+before the reboot happens (stop commands are only sent for a shutdown).
+
+The result is that all of my SSDs experience a sudden power loss on
+every reboot, which is undesirable behaviour because it could cause data
+to be corrupted. These events are recorded in the SMART attributes.
+
+Add a "power cycle" quirk to the reboot options to prepare all devices for
+a power off by setting the system_state to SYSTEM_POWER_OFF instead of
+SYSTEM_RESTART while still performing a restart as requested.
+
+This uses the letter "C" for the parameter because of numerous uses of
+"reboot=pci" that would otherwise trigger this behaviour if "c" was used.
+
+Signed-off-by: Simon Arlott <simon@octiron.net>
 ---
- @Jon I thought about what I said and *no*, unfortunately I *can't* automate
- the detection of such as easy as the HTTPSifying. As you maybe see below
- cleaning up is even "harder".
+Previous patches to make scsi/sd stop before a reboot:
+https://lore.kernel.org/lkml/499138c8-b6d5-ef4a-2780-4f750ed337d3@0882a8b5-c6c3-11e9-b005-00805fc181fe/
+https://lore.kernel.org/lkml/e726ffd8-8897-4a79-c3d6-6271eda8aebb@0882a8b5-c6c3-11e9-b005-00805fc181fe/
 
- We have only 17 files and one domain here. Shall I split it up per subsystem
- or can we let it as is?
+ Documentation/admin-guide/kernel-parameters.txt |  8 ++++++--
+ include/linux/reboot.h                          |  4 ++++
+ kernel/reboot.c                                 | 15 ++++++++++++++-
+ 3 files changed, 24 insertions(+), 3 deletions(-)
 
- Documentation/arm/sa1100/assabet.rst           |  2 --
- Documentation/arm/samsung-s3c24xx/h1940.rst    | 10 ----------
- Documentation/arm/samsung-s3c24xx/overview.rst |  3 +--
- Documentation/arm/samsung-s3c24xx/smdk2440.rst |  4 ----
- arch/arm/mach-omap1/Kconfig                    |  4 +---
- arch/arm/mach-pxa/h5000.c                      |  2 +-
- arch/arm/mach-s3c24xx/mach-h1940.c             |  2 --
- arch/arm/mach-s3c24xx/mach-n30.c               |  3 ---
- arch/arm/mach-s3c24xx/mach-rx3715.c            |  2 --
- drivers/input/keyboard/gpio_keys.c             |  2 +-
- drivers/input/keyboard/jornada720_kbd.c        |  2 +-
- drivers/input/touchscreen/jornada720_ts.c      |  2 +-
- drivers/mfd/asic3.c                            |  2 +-
- drivers/mmc/host/renesas_sdhi_core.c           |  2 +-
- drivers/net/ethernet/dec/tulip/de4x5.c         |  1 -
- drivers/video/fbdev/sa1100fb.c                 |  2 +-
- include/linux/apm-emulation.h                  |  2 --
- 17 files changed, 9 insertions(+), 38 deletions(-)
-
-diff --git a/Documentation/arm/sa1100/assabet.rst b/Documentation/arm/sa1100/assabet.rst
-index a761e128fb08..c9e75ae3f077 100644
---- a/Documentation/arm/sa1100/assabet.rst
-+++ b/Documentation/arm/sa1100/assabet.rst
-@@ -32,7 +32,6 @@ BLOB (http://www.lartmaker.nl/lartware/blob/)
-    patches were merged into BLOB to add support for Assabet.
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index bee3b83d6f84..91359fd4fbcc 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -4422,9 +4422,10 @@
+ 	reboot=		[KNL]
+ 			Format (x86 or x86_64):
+ 				[w[arm] | c[old] | h[ard] | s[oft] | g[pio]] \
+-				[[,]s[mp]#### \
++				[[,]s[mp]####] \
+ 				[[,]b[ios] | a[cpi] | k[bd] | t[riple] | e[fi] | p[ci]] \
+-				[[,]f[orce]
++				[[,]f[orce]] \
++				[[,]C]
+ 			Where reboot_mode is one of warm (soft) or cold (hard) or gpio
+ 					(prefix with 'panic_' to set mode for panic
+ 					reboot only),
+@@ -4432,6 +4433,9 @@
+ 			      reboot_force is either force or not specified,
+ 			      reboot_cpu is s[mp]#### with #### being the processor
+ 					to be used for rebooting.
++			Quirks:
++				C = Rebooting includes a power cycle, prepare
++				    for a power off instead of a restart.
  
- Compaq's Bootldr + John Dorsey's patch for Assabet support
--(http://www.handhelds.org/Compaq/bootldr.html)
- (http://www.wearablegroup.org/software/bootldr/)
+ 	refscale.holdoff= [KNL]
+ 			Set test-start holdoff period.  The purpose of
+diff --git a/include/linux/reboot.h b/include/linux/reboot.h
+index 3734cd8f38a8..b49559ba825a 100644
+--- a/include/linux/reboot.h
++++ b/include/linux/reboot.h
+@@ -39,6 +39,10 @@ extern int reboot_default;
+ extern int reboot_cpu;
+ extern int reboot_force;
  
-    Bootldr is the bootloader developed by Compaq for the iPAQ Pocket PC.
-@@ -54,7 +53,6 @@ precompiled RedBoot binary is available from the following location:
++#define REBOOT_QUIRK_POWER_CYCLE                BIT(0)
++
++extern int reboot_quirks;
++
  
- - ftp://ftp.netwinder.org/users/n/nico/
- - ftp://ftp.arm.linux.org.uk/pub/linux/arm/people/nico/
--- ftp://ftp.handhelds.org/pub/linux/arm/sa-1100-patches/
+ extern int register_reboot_notifier(struct notifier_block *);
+ extern int unregister_reboot_notifier(struct notifier_block *);
+diff --git a/kernel/reboot.c b/kernel/reboot.c
+index 491f1347bf43..5605c2894f2b 100644
+--- a/kernel/reboot.c
++++ b/kernel/reboot.c
+@@ -45,6 +45,7 @@ int reboot_default = 1;
+ int reboot_cpu;
+ enum reboot_type reboot_type = BOOT_ACPI;
+ int reboot_force;
++int reboot_quirks;
  
- Look for redboot-assabet*.tgz.  Some installation infos are provided in
- redboot-assabet*.txt.
-diff --git a/Documentation/arm/samsung-s3c24xx/h1940.rst b/Documentation/arm/samsung-s3c24xx/h1940.rst
-index 62a562c178e3..e7ce61ada9ee 100644
---- a/Documentation/arm/samsung-s3c24xx/h1940.rst
-+++ b/Documentation/arm/samsung-s3c24xx/h1940.rst
-@@ -2,8 +2,6 @@
- HP IPAQ H1940
- =============
+ /*
+  * If set, this is used for preparing the system to power off.
+@@ -71,7 +72,15 @@ EXPORT_SYMBOL_GPL(emergency_restart);
+ void kernel_restart_prepare(char *cmd)
+ {
+ 	blocking_notifier_call_chain(&reboot_notifier_list, SYS_RESTART, cmd);
+-	system_state = SYSTEM_RESTART;
++	if (reboot_quirks & REBOOT_QUIRK_POWER_CYCLE) {
++		/*
++		 * The reboot will include a power cycle, so prepare all
++		 * devices for a power off.
++		 */
++		system_state = SYSTEM_POWER_OFF;
++	} else {
++		system_state = SYSTEM_RESTART;
++	}
+ 	usermodehelper_disable();
+ 	device_shutdown();
+ }
+@@ -583,6 +592,10 @@ static int __init reboot_setup(char *str)
+ 		case 'f':
+ 			reboot_force = 1;
+ 			break;
++
++		case 'C':
++			reboot_quirks |= REBOOT_QUIRK_POWER_CYCLE;
++			break;
+ 		}
  
--http://www.handhelds.org/projects/h1940.html
--
- Introduction
- ------------
- 
-@@ -16,14 +14,6 @@ Support
- 
-   A variety of information is available
- 
--  handhelds.org project page:
--
--    http://www.handhelds.org/projects/h1940.html
--
--  handhelds.org wiki page:
--
--    http://handhelds.org/moin/moin.cgi/HpIpaqH1940
--
-   Herbert Pötzl pages:
- 
-     http://vserver.13thfloor.at/H1940/
-diff --git a/Documentation/arm/samsung-s3c24xx/overview.rst b/Documentation/arm/samsung-s3c24xx/overview.rst
-index e9a1dc7276b5..ed17c2a86edf 100644
---- a/Documentation/arm/samsung-s3c24xx/overview.rst
-+++ b/Documentation/arm/samsung-s3c24xx/overview.rst
-@@ -113,8 +113,7 @@ Machines
- 
-   Acer N30
- 
--    A S3C2410 based PDA from Acer.  There is a Wiki page at
--    http://handhelds.org/moin/moin.cgi/AcerN30Documentation .
-+    A S3C2410 based PDA from Acer.
- 
-   AML M5900
- 
-diff --git a/Documentation/arm/samsung-s3c24xx/smdk2440.rst b/Documentation/arm/samsung-s3c24xx/smdk2440.rst
-index 524fd0b4afaf..c2681815e585 100644
---- a/Documentation/arm/samsung-s3c24xx/smdk2440.rst
-+++ b/Documentation/arm/samsung-s3c24xx/smdk2440.rst
-@@ -25,10 +25,6 @@ Support
-   Ben Dooks' SMDK2440 site at http://www.fluff.org/ben/smdk2440/ which
-   includes linux based USB download tools.
- 
--  Some of the h1940 patches that can be found from the H1940 project
--  site at http://www.handhelds.org/projects/h1940.html can also be
--  applied to this board.
--
- 
- Peripherals
- -----------
-diff --git a/arch/arm/mach-omap1/Kconfig b/arch/arm/mach-omap1/Kconfig
-index 948da556162e..8631a2f4e746 100644
---- a/arch/arm/mach-omap1/Kconfig
-+++ b/arch/arm/mach-omap1/Kconfig
-@@ -145,9 +145,7 @@ config MACH_SX1
- 	help
- 	  Support for the Siemens SX1 phone. To boot the kernel,
- 	  you'll need a SX1 compatible bootloader; check out
--	  http://forum.oslik.ru and
--	  http://www.handhelds.org/moin/moin.cgi/SiemensSX1
--	  for more information.
-+	  http://forum.oslik.ru for more information.
- 	  Say Y here if you have such a phone, say NO otherwise.
- 
- config MACH_NOKIA770
-diff --git a/arch/arm/mach-pxa/h5000.c b/arch/arm/mach-pxa/h5000.c
-index ece1e71c90a9..679aa780b004 100644
---- a/arch/arm/mach-pxa/h5000.c
-+++ b/arch/arm/mach-pxa/h5000.c
-@@ -4,7 +4,7 @@
-  *
-  * Copyright 2000-2003  Hewlett-Packard Company.
-  * Copyright 2002       Jamey Hicks <jamey.hicks@hp.com>
-- * Copyright 2004-2005  Phil Blundell <pb@handhelds.org>
-+ * Copyright 2004-2005  Phil Blundell
-  * Copyright 2007-2008  Anton Vorontsov <cbouatmailru@gmail.com>
-  *
-  * COMPAQ COMPUTER CORPORATION MAKES NO WARRANTIES, EXPRESSED OR IMPLIED,
-diff --git a/arch/arm/mach-s3c24xx/mach-h1940.c b/arch/arm/mach-s3c24xx/mach-h1940.c
-index e1c372e5447b..da8debc28282 100644
---- a/arch/arm/mach-s3c24xx/mach-h1940.c
-+++ b/arch/arm/mach-s3c24xx/mach-h1940.c
-@@ -2,8 +2,6 @@
- //
- // Copyright (c) 2003-2005 Simtec Electronics
- //   Ben Dooks <ben@simtec.co.uk>
--//
--// http://www.handhelds.org/projects/h1940.html
- 
- #include <linux/kernel.h>
- #include <linux/types.h>
-diff --git a/arch/arm/mach-s3c24xx/mach-n30.c b/arch/arm/mach-s3c24xx/mach-n30.c
-index d856f23939af..210cadfd8168 100644
---- a/arch/arm/mach-s3c24xx/mach-n30.c
-+++ b/arch/arm/mach-s3c24xx/mach-n30.c
-@@ -7,9 +7,6 @@
- //	Ben Dooks <ben@simtec.co.uk>
- //
- // Copyright (c) 2005-2008 Christer Weinigel <christer@weinigel.se>
--//
--// There is a wiki with more information about the n30 port at
--// http://handhelds.org/moin/moin.cgi/AcerN30Documentation .
- 
- #include <linux/kernel.h>
- #include <linux/types.h>
-diff --git a/arch/arm/mach-s3c24xx/mach-rx3715.c b/arch/arm/mach-s3c24xx/mach-rx3715.c
-index 529c6faf862f..669b96ec79a7 100644
---- a/arch/arm/mach-s3c24xx/mach-rx3715.c
-+++ b/arch/arm/mach-s3c24xx/mach-rx3715.c
-@@ -2,8 +2,6 @@
- //
- // Copyright (c) 2003-2004 Simtec Electronics
- //	Ben Dooks <ben@simtec.co.uk>
--//
--// http://www.handhelds.org/projects/rx3715.html
- 
- #include <linux/kernel.h>
- #include <linux/types.h>
-diff --git a/drivers/input/keyboard/gpio_keys.c b/drivers/input/keyboard/gpio_keys.c
-index 53c9ff338dea..f455f6efdd26 100644
---- a/drivers/input/keyboard/gpio_keys.c
-+++ b/drivers/input/keyboard/gpio_keys.c
-@@ -1032,6 +1032,6 @@ late_initcall(gpio_keys_init);
- module_exit(gpio_keys_exit);
- 
- MODULE_LICENSE("GPL");
--MODULE_AUTHOR("Phil Blundell <pb@handhelds.org>");
-+MODULE_AUTHOR("Phil Blundell");
- MODULE_DESCRIPTION("Keyboard driver for GPIOs");
- MODULE_ALIAS("platform:gpio-keys");
-diff --git a/drivers/input/keyboard/jornada720_kbd.c b/drivers/input/keyboard/jornada720_kbd.c
-index cd9af5221c3d..6c1ca741a405 100644
---- a/drivers/input/keyboard/jornada720_kbd.c
-+++ b/drivers/input/keyboard/jornada720_kbd.c
-@@ -9,7 +9,7 @@
-  *    Copyright (C) 2006 jornada 720 kbd driver by
- 		Filip Zyzniewsk <Filip.Zyzniewski@tefnet.plX
-  *     based on (C) 2004 jornada 720 kbd driver by
--		Alex Lange <chicken@handhelds.org>
-+		Alex Lange
-  */
- #include <linux/device.h>
- #include <linux/errno.h>
-diff --git a/drivers/input/touchscreen/jornada720_ts.c b/drivers/input/touchscreen/jornada720_ts.c
-index 974521102178..be17592b431c 100644
---- a/drivers/input/touchscreen/jornada720_ts.c
-+++ b/drivers/input/touchscreen/jornada720_ts.c
-@@ -5,7 +5,7 @@
-  * Copyright (C) 2007 Kristoffer Ericson <Kristoffer.Ericson@gmail.com>
-  *
-  *  Copyright (C) 2006 Filip Zyzniewski <filip.zyzniewski@tefnet.pl>
-- *  based on HP Jornada 56x touchscreen driver by Alex Lange <chicken@handhelds.org>
-+ *  based on HP Jornada 56x touchscreen driver by Alex Lange
-  *
-  * HP Jornada 710/720/729 Touchscreen Driver
-  */
-diff --git a/drivers/mfd/asic3.c b/drivers/mfd/asic3.c
-index a6bd2134cea2..e9fdc402eddd 100644
---- a/drivers/mfd/asic3.c
-+++ b/drivers/mfd/asic3.c
-@@ -8,7 +8,7 @@
-  * Copyright 2004-2005 Phil Blundell
-  * Copyright 2007-2008 OpenedHand Ltd.
-  *
-- * Authors: Phil Blundell <pb@handhelds.org>,
-+ * Authors: Phil Blundell,
-  *	    Samuel Ortiz <sameo@openedhand.com>
-  */
- 
-diff --git a/drivers/mmc/host/renesas_sdhi_core.c b/drivers/mmc/host/renesas_sdhi_core.c
-index 15e21894bd44..1fc640fa4784 100644
---- a/drivers/mmc/host/renesas_sdhi_core.c
-+++ b/drivers/mmc/host/renesas_sdhi_core.c
-@@ -13,7 +13,7 @@
-  * Copyright 2004-2005 Phil Blundell
-  * Copyright 2007-2008 OpenedHand Ltd.
-  *
-- * Authors: Phil Blundell <pb@handhelds.org>,
-+ * Authors: Phil Blundell,
-  *	    Samuel Ortiz <sameo@openedhand.com>
-  *
-  */
-diff --git a/drivers/net/ethernet/dec/tulip/de4x5.c b/drivers/net/ethernet/dec/tulip/de4x5.c
-index 0ccd9994ad45..3f0e5cdb538f 100644
---- a/drivers/net/ethernet/dec/tulip/de4x5.c
-+++ b/drivers/net/ethernet/dec/tulip/de4x5.c
-@@ -435,7 +435,6 @@
-                            case a PCI bridge (DEC chip 21152). The value of
-                            'pb' is now only initialized if a de4x5 chip is
-                            present.
--                           <france@handhelds.org>
-       0.547  08-Nov-01    Use library crc32 functions by <Matt_Domsch@dell.com>
-       0.548  30-Aug-03    Big 2.6 cleanup. Ported to PCI/EISA probing and
-                            generic DMA APIs. Fixed DE425 support on Alpha.
-diff --git a/drivers/video/fbdev/sa1100fb.c b/drivers/video/fbdev/sa1100fb.c
-index 3e6e13f7a831..0d273b02cba0 100644
---- a/drivers/video/fbdev/sa1100fb.c
-+++ b/drivers/video/fbdev/sa1100fb.c
-@@ -144,7 +144,7 @@
-  *	  manufactured by Prime View, model no V16C6448AB
-  *
-  * 2001/07/23: <rmk@arm.linux.org.uk>
-- *	- Hand merge version from handhelds.org CVS tree.  See patch
-+ *	- Hand merge version from CVS tree.  See patch
-  *	  notes for 595/1 for more information.
-  *	- Drop 12bpp (it's 16bpp with different colour register mappings).
-  *	- This hardware can not do direct colour.  Therefore we don't
-diff --git a/include/linux/apm-emulation.h b/include/linux/apm-emulation.h
-index 94c036957948..b5d63358c61b 100644
---- a/include/linux/apm-emulation.h
-+++ b/include/linux/apm-emulation.h
-@@ -1,7 +1,5 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- /* -*- linux-c -*-
-- *
-- * (C) 2003 zecke@handhelds.org
-  *
-  * based on arch/arm/kernel/apm.c
-  * factor out the information needed by architectures to provide
+ 		str = strchr(str, ',');
 -- 
-2.27.0
+2.17.1
 
+-- 
+Simon Arlott
