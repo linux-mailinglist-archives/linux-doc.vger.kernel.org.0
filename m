@@ -2,83 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A3DD220DB46
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 22:15:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E0E8D20E0ED
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:57:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388519AbgF2UFQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 16:05:16 -0400
-Received: from mail.kernel.org ([198.145.29.99]:40416 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1732035AbgF2UFQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 29 Jun 2020 16:05:16 -0400
-Received: from kernel.org (unknown [87.71.40.38])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 92A2020702;
-        Mon, 29 Jun 2020 20:05:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1593461116;
-        bh=u/7iyrvQ3LzsCNLl/ZBd2xHjBP2XLskqDAzPtHt/Jw4=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=QHUr5A6mJj30a5qZEXoAkoLFDQ0EUls2Wd/7WNsTQhe16JoK8NOEYZuv25mCbFGME
-         Ythz2afVpxY19lU4XHuWTN74WSn4/wSjmScPOHt1Et5R5+9bNn+qN7Fif8scE5iVha
-         V/nVKaNKwuiaPjYveohhRgIDPVLqujmjyYn3CGLA=
-Date:   Mon, 29 Jun 2020 23:05:09 +0300
-From:   Mike Rapoport <rppt@kernel.org>
-To:     Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] doc: add link to sparse's home page/internal docs
-Message-ID: <20200629200509.GE1492837@kernel.org>
-References: <20200629044154.GB1492837@kernel.org>
- <20200629161310.89783-1-luc.vanoostenryck@gmail.com>
+        id S1730499AbgF2UvC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 16:51:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43388 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731419AbgF2TNd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:13:33 -0400
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 42BDEC08EC35
+        for <linux-doc@vger.kernel.org>; Sun, 28 Jun 2020 23:50:15 -0700 (PDT)
+Received: by mail-wr1-x443.google.com with SMTP id q5so15322117wru.6
+        for <linux-doc@vger.kernel.org>; Sun, 28 Jun 2020 23:50:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0FbmkW7UOcYY7LkyFQeYD+n43SXMQXYjstj7AfGPBFY=;
+        b=MFHsR5IDjPY0E1cBnmOdDmaaexsDnuGaeCom8ugM6D2bx/csHHWIKc48ZfoIzQ1WnQ
+         wH2T1DsKev7yAD8X37BfHZeGwcp165BuatzBqWpk9PKAHPFguntRaNcNM+9ylDmq1Njl
+         NVuN0ckQWhi9I84VLdztbSBWb2IQ1+HBDHXb622lxqQpwfrwmNWd9Mkyxhm4TdXQF1a6
+         Qu7nv7GnKuaQtAdamC+YNXe2VGuqkZAdM7PXqkyxRPuNL0QCsk4OeEyOd44jJct2xsgz
+         /DRypuk9B9Sua+ocxb2STpKn4HHeSpfcsjEMcVSUlGI2ghJFdvn2DzB6bgnCgXysJtma
+         CCag==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=0FbmkW7UOcYY7LkyFQeYD+n43SXMQXYjstj7AfGPBFY=;
+        b=sAkV+w0brdxYeZiaooEDTWSszAB2A2s3GTDQ0RRNgm/AvEyhPnV+Cb/qUG+sTN55kx
+         2iRcxVzMvGouVXJwd6/NjFswEy2VlTbW7IYGL3tJItCVsjsUtDB3/bCLamOjU8/TiJBe
+         nWJwrIMYBJdYpeHxxwXDY8ONAjoiR0D5gUdL6SRupgVJ+1hMFyeXLvTivSEGIDXsk00I
+         bffaokQaO8SOqSONM0yIdycKIvUsEDyvGbUHRBVOrF2aKTG8l2QT+TTGELIed9S1H1s1
+         Sb6ffc6l2sqg+xwW6C9HupJfrSFafWOqrBzWzaM2At6/52qW1jD/UqqkMPEHMIdz8sey
+         1i6g==
+X-Gm-Message-State: AOAM530pblnby5f/SMTuXT+7ViQ0l0FyVidQj3yqPGVg9NQbPhSxHXwb
+        HkbOHwQMTS516kwss/Bbl1otZQ==
+X-Google-Smtp-Source: ABdhPJxSUzNN1zV4gXxXOT8r64Q07nF/D8nrR8lGdd7yU4bCgcU0Q04rNUK9eOM5Le0U05BUn4D0PA==
+X-Received: by 2002:a5d:4ec7:: with SMTP id s7mr15362311wrv.400.1593413413900;
+        Sun, 28 Jun 2020 23:50:13 -0700 (PDT)
+Received: from localhost.localdomain (lfbn-nic-1-65-232.w2-15.abo.wanadoo.fr. [2.15.156.232])
+        by smtp.gmail.com with ESMTPSA id z25sm26400850wmk.28.2020.06.28.23.50.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 28 Jun 2020 23:50:13 -0700 (PDT)
+From:   Bartosz Golaszewski <brgl@bgdev.pl>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jean Delvare <jdelvare@suse.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-hwmon@vger.kernel.org,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: [PATCH v2 0/6] devres: provide and use devm_krealloc()
+Date:   Mon, 29 Jun 2020 08:50:02 +0200
+Message-Id: <20200629065008.27620-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.26.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200629161310.89783-1-luc.vanoostenryck@gmail.com>
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jun 29, 2020 at 06:13:10PM +0200, Luc Van Oostenryck wrote:
-> Sparse's home page used to be a wiki (sparse.wiki.kernel.org)
-> but this wiki only contained a short intro and the release notes.
-> But nowadays, sparse's main page is sparse.docs.kernel.org,
-> which contains all what was in the wiki but also other documentation,
-> mainly oriented about sparse's internals.
-> 
-> So, add a link to this in the kernel documentation.
-> 
-> Signed-off-by: Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
+From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-Acked-by: Mike Rapoport <rppt@linux.ibm.com>
+Regular krealloc() obviously can't work with managed memory. This series
+implements devm_krealloc() and adds the first user with hope that this
+helper will be adopted by other drivers currently using non-managed
+krealloc().
 
-> ---
-> 
-> Changes since v1:
-> * fix a typo (s/kernl/kernel/) thanks to Mike Rapoport.
-> 
->  Documentation/dev-tools/sparse.rst | 2 ++
->  1 file changed, 2 insertions(+)
-> 
-> diff --git a/Documentation/dev-tools/sparse.rst b/Documentation/dev-tools/sparse.rst
-> index 8a7055593c31..02102be7ff49 100644
-> --- a/Documentation/dev-tools/sparse.rst
-> +++ b/Documentation/dev-tools/sparse.rst
-> @@ -9,6 +9,8 @@ Sparse is a semantic checker for C programs; it can be used to find a
->  number of potential problems with kernel code.  See
->  https://lwn.net/Articles/689907/ for an overview of sparse; this document
->  contains some kernel-specific sparse information.
-> +More information on sparse, mainly about its internals, can be found in
-> +its official pages at https://sparse.docs.kernel.org.
->  
->  
->  Using sparse for typechecking
-> -- 
-> 2.27.0
-> 
+Some additional changes to the code modified by main patches are included.
+
+v1 -> v2:
+- remove leftover call to hwmon_device_unregister() from pmbus_core.c
+- add a patch extending devm_kmalloc() to handle zero size case
+- use WARN_ON() instead of WARN_ONCE() in devm_krealloc() when passed
+  a pointer to non-managed memory
+- correctly handle the case when devm_krealloc() is passed a pointer to
+  memory in .rodata (potentially returned by devm_kstrdup_const())
+- correctly handle ZERO_SIZE_PTR passed as the ptr argument in devm_krealloc()
+
+Bartosz Golaszewski (6):
+  devres: remove stray space from devm_kmalloc() definition
+  devres: move the size check from alloc_dr() into a separate function
+  device: remove 'extern' attribute from function prototypes in device.h
+  devres: handle zero size in devm_kmalloc()
+  devres: provide devm_krealloc()
+  hwmon: pmbus: use more devres helpers
+
+ .../driver-api/driver-model/devres.rst        |   1 +
+ drivers/base/devres.c                         |  75 +++++-
+ drivers/hwmon/pmbus/pmbus_core.c              |  28 +--
+ include/linux/device.h                        | 225 +++++++++---------
+ 4 files changed, 187 insertions(+), 142 deletions(-)
 
 -- 
-Sincerely yours,
-Mike.
+2.26.1
+
