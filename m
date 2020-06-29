@@ -2,57 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4A91D20D0DF
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 20:37:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B43A420D3B3
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 21:13:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727048AbgF2Sg5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 14:36:57 -0400
-Received: from ms.lwn.net ([45.79.88.28]:46808 "EHLO ms.lwn.net"
+        id S1730008AbgF2TBZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 15:01:25 -0400
+Received: from mx2.suse.de ([195.135.220.15]:48448 "EHLO mx2.suse.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726087AbgF2Sg4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 29 Jun 2020 14:36:56 -0400
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 959E92B7;
-        Mon, 29 Jun 2020 18:36:55 +0000 (UTC)
-Date:   Mon, 29 Jun 2020 12:36:54 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
-Cc:     mchehab+samsung@kernel.org, alexandre.belloni@bootlin.com,
-        nicolas.ferre@microchip.com, robh@kernel.org,
-        j.neuschaefer@gmx.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] Replace HTTP links with HTTPS ones:
- Documentation/arm
-Message-ID: <20200629123654.1d1b62ce@lwn.net>
-In-Reply-To: <c5d49d66-7765-d6e3-003a-c17bdef1c6b0@al2klimov.de>
-References: <20200626194408.61245-1-grandmaster@al2klimov.de>
-        <20200626150911.3d4f9ca7@lwn.net>
-        <c5d49d66-7765-d6e3-003a-c17bdef1c6b0@al2klimov.de>
-Organization: LWN.net
+        id S1728101AbgF2TBY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 29 Jun 2020 15:01:24 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id 7BA11AD8D;
+        Mon, 29 Jun 2020 09:44:40 +0000 (UTC)
+Date:   Mon, 29 Jun 2020 11:43:50 +0200
+From:   Petr Mladek <pmladek@suse.com>
+To:     Alan Maguire <alan.maguire@oracle.com>
+Cc:     rostedt@goodmis.org, sergey.senozhatsky@gmail.com,
+        Linus Torvalds <torvalds@linux-foundation.org>, ast@kernel.org,
+        daniel@iogearbox.net, yhs@fb.com, andriin@fb.com,
+        arnaldo.melo@gmail.com, kafai@fb.com, songliubraving@fb.com,
+        john.fastabend@gmail.com, kpsingh@chromium.org,
+        linux@rasmusvillemoes.dk, joe@perches.com,
+        andriy.shevchenko@linux.intel.com, corbet@lwn.net,
+        bpf@vger.kernel.org, netdev@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v3 bpf-next 4/8] printk: add type-printing %pT format
+ specifier which uses BTF
+Message-ID: <20200629094349.GQ8444@alley>
+References: <1592914031-31049-1-git-send-email-alan.maguire@oracle.com>
+ <1592914031-31049-5-git-send-email-alan.maguire@oracle.com>
+ <20200626101523.GM8444@alley>
+ <alpine.LRH.2.21.2006261147130.417@localhost>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <alpine.LRH.2.21.2006261147130.417@localhost>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, 27 Jun 2020 09:10:58 +0200
-"Alexander A. Klimov" <grandmaster@al2klimov.de> wrote:
-
-> You know what: I totally agree with you! They are actively harmful and 
-> shall not be there. End of story.
+On Fri 2020-06-26 12:37:19, Alan Maguire wrote:
 > 
-> But *why* you don't let me work step-by-step and *focus on one task* at 
-> a time?
+> On Fri, 26 Jun 2020, Petr Mladek wrote:
+> 
+> > On Tue 2020-06-23 13:07:07, Alan Maguire wrote:
+> > > 
+> > >         printk(KERN_INFO "%pT", BTF_PTR_TYPE(skb, struct sk_buff));
+> > > 
+> > >   struct sk_buff *skb = alloc_skb(64, GFP_KERNEL);
+> > >   pr_info("%pT", BTF_PTR_TYPE(skb, struct sk_buff));
+> > > 
+> > > ...gives us:
+> > > 
+> > > (struct sk_buff){
+> > >  .transport_header = (__u16)65535,
+> > >  .mac_header = (__u16)65535,
+> > >  .end = (sk_buff_data_t)192,
+> > >  .head = (unsigned char *)0x000000006b71155a,
+> > >  .data = (unsigned char *)0x000000006b71155a,
+> > >  .truesize = (unsigned int)768,
+> > >  .users = (refcount_t){
+> > >   .refs = (atomic_t){
+> > >    .counter = (int)1,
+> > >   },
+> > >  },
+> > >  .extensions = (struct skb_ext *)0x00000000f486a130,
+> > > }
+> > > 
+> > > printk output is truncated at 1024 bytes.  For cases where overflow
+> > > is likely, the compact/no type names display modes may be used.
+> > 
+> > Hmm, this scares me:
+> > 
+> >    1. The long message and many lines are going to stretch printk
+> >       design in another dimensions.
+> > 
+> >    2. vsprintf() is important for debugging the system. It has to be
+> >       stable. But the btf code is too complex.
+> >
+> 
+> Right on both points, and there's no way around that really. Representing 
+> even small data structures will stretch us to or beyond the 1024 byte 
+> limit.  This can be mitigated by using compact display mode and not 
+> printing field names, but the output becomes hard to parse then.
+>
+> I think a better approach might be to start small, adding the core
+> btf_show functionality to BPF, allowing consumers to use it there,
+> perhaps via a custom helper.
 
-Nobody is preventing you from doing that.  But this work *does* require
-corresponding work from me and others, so I don't think it's inappropriate
-to say that there are other, related projects that, in my mind, have a
-rather higher priority.
+Sounds good to me.
 
-Thanks,
+> In the current model bpf_trace_printk() inherits the functionality
+> to display data from core printk, so a different approach would
+> be needed there.
 
-jon
+BTW: Even the trace buffer has a limitation, see BUF_MAX_DATA_SIZE
+in kernel/trace/ring_buffer.c. It is internally implemented as
+a list of memory pages, see the comments above RB_BUFFER_OFF
+definition.
+
+It is typically 4k. I think that you might hit this limit as well.
+We had to increase per-CPU buffers used by printk() in NMI context
+because 4k was not enough for some backtraces.
+
+So, using different approach would make sense even when using trace
+buffer.
+
+> Other consumers outside of BPF
+> could potentially avail of the show functionality directly via the btf_show
+> functions in the future, but at least it would have one consumer at the 
+> outset, and wouldn't present problems like these for printk.
+
+Sounds good to me.
+
+> > I would strongly prefer to keep this outside vsprintf and printk.
+> > Please, invert the logic and convert it into using separate printk()
+> > call for each printed line.
+> > 
+> 
+> I think the above is in line with what you're suggesting?
+
+Yes, as far as I understand it.
+
+> Yep, no way round this either. I'll try a different approach. Thanks for 
+> taking a look!
+
+Uff, thanks a lot for understanding. I hope that most of the code will
+be reusable in some form.
+
+Best Regards,
+Petr
