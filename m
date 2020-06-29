@@ -2,159 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C418E20E214
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2020 00:00:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6D69D20E062
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Jun 2020 23:56:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387847AbgF2VCU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 17:02:20 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43352 "EHLO
+        id S1730428AbgF2Upy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 16:45:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43384 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731163AbgF2TMu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:12:50 -0400
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com [IPv6:2a00:1450:4864:20::442])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9A112C08ECB2
-        for <linux-doc@vger.kernel.org>; Sun, 28 Jun 2020 23:50:22 -0700 (PDT)
-Received: by mail-wr1-x442.google.com with SMTP id j4so12871402wrp.10
-        for <linux-doc@vger.kernel.org>; Sun, 28 Jun 2020 23:50:22 -0700 (PDT)
+        with ESMTP id S1731570AbgF2TN5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 15:13:57 -0400
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com [IPv6:2a00:1450:4864:20::444])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E395C014AA4
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 01:04:04 -0700 (PDT)
+Received: by mail-wr1-x444.google.com with SMTP id z13so15535788wrw.5
+        for <linux-doc@vger.kernel.org>; Mon, 29 Jun 2020 01:04:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=aJcoTCCNzlFqdkD2IQ5/+inRuV3iTmw7U1wrbHYsCXY=;
-        b=yQNBIfth1iVmJ6MlsArzRkfMw8p3OlqAJFnPjZ9jDWZ8Ckq89NZ8HbCJp70g7E8YCL
-         2JY3b42faBfp+pI9Wj+q3iC3i4AZyTUy1GEkfEUcBsqlmw8y8AvYgv5WcS2C2MW5u0JL
-         zpbB9ruLU8gyxebla6lw8iGRWOyQDsCc5QzcNd8GacOCDvBNnYL3QOwwMzM23Zf9QFs2
-         Iv5wKlZhCSNSPWT5AoW8QvVFYWoTZNDQbgoayzreAzhHe2dFIE9MQe0QbnDRPPdsflBy
-         ssKY8pQVsk/0DwYidUKAHysQwmVOmtON7Mggt89l+RXLWxm7hlhn5VM7hDk0VhHUwDrK
-         t9uw==
+        d=google.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=wJu5T05EGIesmOT82QcK4tvM42NAPTrHSyac4x7F7pM=;
+        b=OQ0O/ji3YWaPUA5LVTl2z+7oIv8oHPXXajbTo7gN+ypY32l7m2S8IHDthtPNy8PmUI
+         3/RB2boMvLnFXERxlvImDeRSrAmCnr84vqbj+hoK2UVr5jSFPlXCeqfbMYmnw1DtZoCz
+         wfz1yX5KxVKQ6+reINQnT84GX4kzt3f1463mWC00vcmx89o7eIJH2WBtTTb6QhFyW9zQ
+         hvK7Bmre+NIIGJTAvrlFsQZAcOAzcIg6D0DdL6rfZhqpV/wAzAA6fh29DpdZ9ZNAxsLf
+         s3cb2tlXJHAcIrAd+N8AfFxDQm6sFD8UFJa97ojLl9pmTExTdys+BJ+NBS1K6M7wPhlo
+         e2TQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=aJcoTCCNzlFqdkD2IQ5/+inRuV3iTmw7U1wrbHYsCXY=;
-        b=TWAB8j51sLl266hgGMDHS5PkbS39yZWia9TsVbTYgOmDUqOHCBvtmSkwsYyQcIDlq+
-         lLbg0DjiJ/NNQm3Ngi0GSsx3ZCe54OUxfZtdo+8MJxeAPwXzjbtyDMeXONrF5OoCOHaF
-         P4W1a7dxJ33q+nJz48Be62vdTNEylMwP24Y3K4yTAnzn94JJ4GwY5l0fIJsZzvpNKlTK
-         0QZlIFpcNYaSBP3n2sE5Zxxu9F/MXMVUS7GFoMtZEOMdCEoeVRHBzhjECfZVD+QjjUjn
-         2kPmlaPD0PyFQJK/vMUcvpA4RWCryayfkbxs1QDKlCHJb7pG+rK3bcxaVy9sWjClz/oy
-         QG7A==
-X-Gm-Message-State: AOAM533g96dUhLaw6Q+2oaueMgBWL5bI4wmNHZ6ITbDEmpsgm5rhuiAn
-        Hww6E6G/iy2OpDfxWYPr2uQCuA==
-X-Google-Smtp-Source: ABdhPJzt8Ln/xndbl27Fr/QEAXZT87zNp1KC2QGgpukfa3lZmG8mDlVvRIemD49AvoDQJ3zM4pnmjg==
-X-Received: by 2002:a5d:6786:: with SMTP id v6mr15360274wru.258.1593413421366;
-        Sun, 28 Jun 2020 23:50:21 -0700 (PDT)
-Received: from localhost.localdomain (lfbn-nic-1-65-232.w2-15.abo.wanadoo.fr. [2.15.156.232])
-        by smtp.gmail.com with ESMTPSA id z25sm26400850wmk.28.2020.06.28.23.50.20
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=wJu5T05EGIesmOT82QcK4tvM42NAPTrHSyac4x7F7pM=;
+        b=nMeTundv/jkKV/LalukvdeeJzKXlRC8ec5zeh5MG/8brR1WfRZC0rDTJXR6Q6Ojsg0
+         9BhMqzZzEX/w11cTaA/urtwCKJmcrTEmQnyAx1kDv4HnfqWknV/VFkvcvSJKpSl5HBre
+         t6NNs3FFu+/afF6qC8ZabSg8K/SIsMS8/rrj0H5wMUjvhsakOJiKZMuyaZIRlV11soT5
+         xCCvy4NZyWIqcdkR4UC5qs9GHrD1lYjC4LfZV/AUNIpkj+FieA6R46p4/kNsrdSoeNEw
+         Xnr1cQzuIZJlvedlBWSdNp6LUzlbEZCwpgj0s86WxQlkJ5saDEO1PjAy7xIYSycEIa62
+         XIlQ==
+X-Gm-Message-State: AOAM532pmnQlgwJVr/G+5BGiQaHj8dj0Lx/iaNwdtuDIhqkfIqGrtQEo
+        zCIN/UTv/lW1KeJfX1DIijls6Q==
+X-Google-Smtp-Source: ABdhPJxjhHOLK/OLS+QpmEsbDw2KsR8ghE7pxziLY6KM8n7B0r5tY5LBX2zBH+b5fLJzKBlhjiImZg==
+X-Received: by 2002:a5d:6a01:: with SMTP id m1mr16758755wru.115.1593417842938;
+        Mon, 29 Jun 2020 01:04:02 -0700 (PDT)
+Received: from google.com ([2a00:79e0:d:110:d6cc:2030:37c1:9964])
+        by smtp.gmail.com with ESMTPSA id a2sm31496362wrn.68.2020.06.29.01.04.02
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Jun 2020 23:50:20 -0700 (PDT)
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jean Delvare <jdelvare@suse.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-hwmon@vger.kernel.org,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH v2 6/6] hwmon: pmbus: use more devres helpers
-Date:   Mon, 29 Jun 2020 08:50:08 +0200
-Message-Id: <20200629065008.27620-7-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.26.1
-In-Reply-To: <20200629065008.27620-1-brgl@bgdev.pl>
-References: <20200629065008.27620-1-brgl@bgdev.pl>
+        Mon, 29 Jun 2020 01:04:02 -0700 (PDT)
+Date:   Mon, 29 Jun 2020 09:03:58 +0100
+From:   Quentin Perret <qperret@google.com>
+To:     Viresh Kumar <viresh.kumar@linaro.org>
+Cc:     Rafael Wysocki <rjw@rjwysocki.net>,
+        Jonathan Corbet <corbet@lwn.net>, linux-pm@vger.kernel.org,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        kernel-team@android.com, tkjos@google.com, adharmap@codeaurora.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH V3 3/3] cpufreq: Specify default governor on command line
+Message-ID: <20200629080358.GA1217385@google.com>
+References: <cover.1593143118.git.viresh.kumar@linaro.org>
+ <7eb38608b2b32c0c72dfb160c51206ec42e74e35.1593143118.git.viresh.kumar@linaro.org>
+ <20200626155750.GA540785@google.com>
+ <20200629020843.erntkwfprgi5ugqu@vireshk-i7>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200629020843.erntkwfprgi5ugqu@vireshk-i7>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Monday 29 Jun 2020 at 07:38:43 (+0530), Viresh Kumar wrote:
+> On 26-06-20, 16:57, Quentin Perret wrote:
+> > Do we need both cpufreq_param_governor and default_governor?
+> > Could we move everything to only one of them? Something a little bit
+> > like that maybe?
+> 
+> No because we want to fallback to the default governor when the
+> governor shown by the cpufreq_param_governor is valid but missing.
 
-Shrink pmbus code by using devm_hwmon_device_register_with_groups()
-and devm_krealloc() instead of their non-managed variants.
+But that would still work with my suggestion no? You still fallback to
+calling cpufreq_default_governor() in cpufreq_init_policy() if
+get_governor(default_governor) doesn't succeed, so we should be covered.
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
- drivers/hwmon/pmbus/pmbus_core.c | 28 +++++++++-------------------
- 1 file changed, 9 insertions(+), 19 deletions(-)
-
-diff --git a/drivers/hwmon/pmbus/pmbus_core.c b/drivers/hwmon/pmbus/pmbus_core.c
-index a420877ba533..225d0ac162c7 100644
---- a/drivers/hwmon/pmbus/pmbus_core.c
-+++ b/drivers/hwmon/pmbus/pmbus_core.c
-@@ -1022,9 +1022,9 @@ static int pmbus_add_attribute(struct pmbus_data *data, struct attribute *attr)
- {
- 	if (data->num_attributes >= data->max_attributes - 1) {
- 		int new_max_attrs = data->max_attributes + PMBUS_ATTR_ALLOC_SIZE;
--		void *new_attrs = krealloc(data->group.attrs,
--					   new_max_attrs * sizeof(void *),
--					   GFP_KERNEL);
-+		void *new_attrs = devm_krealloc(data->dev, data->group.attrs,
-+						new_max_attrs * sizeof(void *),
-+						GFP_KERNEL);
- 		if (!new_attrs)
- 			return -ENOMEM;
- 		data->group.attrs = new_attrs;
-@@ -2538,7 +2538,7 @@ int pmbus_do_probe(struct i2c_client *client, const struct i2c_device_id *id,
- 
- 	ret = pmbus_find_attributes(client, data);
- 	if (ret)
--		goto out_kfree;
-+		return ret;
- 
- 	/*
- 	 * If there are no attributes, something is wrong.
-@@ -2546,35 +2546,27 @@ int pmbus_do_probe(struct i2c_client *client, const struct i2c_device_id *id,
- 	 */
- 	if (!data->num_attributes) {
- 		dev_err(dev, "No attributes found\n");
--		ret = -ENODEV;
--		goto out_kfree;
-+		return -ENODEV;
- 	}
- 
- 	data->groups[0] = &data->group;
- 	memcpy(data->groups + 1, info->groups, sizeof(void *) * groups_num);
--	data->hwmon_dev = hwmon_device_register_with_groups(dev, client->name,
--							    data, data->groups);
-+	data->hwmon_dev = devm_hwmon_device_register_with_groups(dev,
-+					client->name, data, data->groups);
- 	if (IS_ERR(data->hwmon_dev)) {
--		ret = PTR_ERR(data->hwmon_dev);
- 		dev_err(dev, "Failed to register hwmon device\n");
--		goto out_kfree;
-+		return PTR_ERR(data->hwmon_dev);
- 	}
- 
- 	ret = pmbus_regulator_register(data);
- 	if (ret)
--		goto out_unregister;
-+		return ret;
- 
- 	ret = pmbus_init_debugfs(client, data);
- 	if (ret)
- 		dev_warn(dev, "Failed to register debugfs\n");
- 
- 	return 0;
--
--out_unregister:
--	hwmon_device_unregister(data->hwmon_dev);
--out_kfree:
--	kfree(data->group.attrs);
--	return ret;
- }
- EXPORT_SYMBOL_GPL(pmbus_do_probe);
- 
-@@ -2584,8 +2576,6 @@ int pmbus_do_remove(struct i2c_client *client)
- 
- 	debugfs_remove_recursive(data->debugfs);
- 
--	hwmon_device_unregister(data->hwmon_dev);
--	kfree(data->group.attrs);
- 	return 0;
- }
- EXPORT_SYMBOL_GPL(pmbus_do_remove);
--- 
-2.26.1
-
+Thanks,
+Quentin
