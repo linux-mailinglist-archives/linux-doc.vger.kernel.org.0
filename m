@@ -2,99 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6C8B420E46C
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2020 00:05:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0471220E2C0
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Jun 2020 00:01:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726311AbgF2VZV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Jun 2020 17:25:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38368 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729123AbgF2Smv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 14:42:51 -0400
-Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com [IPv6:2a00:1450:4864:20::641])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 79FF4C030F05;
-        Mon, 29 Jun 2020 09:13:18 -0700 (PDT)
-Received: by mail-ej1-x641.google.com with SMTP id o18so12702400eje.7;
-        Mon, 29 Jun 2020 09:13:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=ZdeFEpNDYkXFwTK4R5nfayVzl1J/Ocu3hnRhqkjhhqg=;
-        b=FpwdF7V1gcTCIKfgLOQYaXG7D5pZHEOv2lGFKzleZXMdNHT09dvKTyMItQ4HR6jw5Y
-         Jn1uJKAT3IKyK5wua6R4aKYRCSoZo1w1VhHVcmVVnswhrM7QW694+fjN0hd3bWxPkDGx
-         xK3hLXGvQPqAfzFJ5XEV/JF2Dd6PB+LD2Ae33nTPyvaANMoWkFDyV5BR0Rl+A96BHNXe
-         CPY5G4klZQI/aD7U5KuruNhhBf7tH3HtnhReiQ7RtnsLWsBUt/uuXnj3tm2qc/b32v1w
-         kfDRIpwqeDPHNcpCiiaphYtEwFMHWEmQnHZy4VM9C8Zcyly67SJk9+8AdbL2khyWCnyp
-         jhdA==
+        id S2388204AbgF2VI0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Jun 2020 17:08:26 -0400
+Received: from mail-ed1-f65.google.com ([209.85.208.65]:38415 "EHLO
+        mail-ed1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2390229AbgF2VIZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Jun 2020 17:08:25 -0400
+Received: by mail-ed1-f65.google.com with SMTP id n2so5209653edr.5;
+        Mon, 29 Jun 2020 14:08:22 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=ZdeFEpNDYkXFwTK4R5nfayVzl1J/Ocu3hnRhqkjhhqg=;
-        b=rMcdN1rhKPGpbdymli0Fye89pK8TTumgt3u1a06EZolSucmi9f7ZWmsK1jUPbe4mVQ
-         mx8iPBK4keGO9CdHGXHK/euCQXzoM3mzUyfItrBOViDBkAG4Jw44mKHJ2V5ZaxdMZ6BN
-         c9Nkrk6E4IoWnOo8Owrp324qT6qHiaJRDMHaRP6VIqqldztQTMcEqhsxCpDtFycCVPns
-         kRRXKk1evfVcqhEGl2xH79oXRFPgUUHEC+BY3jFsluhWg5r/zcG9r9qB/GwwMNaX3RRC
-         ckjRNWSKHVLAwccsnxwtM/LS1nILoV3c08CBAV7aOK0VQpW8HGj1aFXflD8MIuDxZBRq
-         cEuw==
-X-Gm-Message-State: AOAM530EK7ofJ00/v6b5FGd2hxAz5tXxJ7oi9bQpCm5DbWEWf2ErShZ2
-        KDi7I0Ni7wE23MwuZsPpFR0=
-X-Google-Smtp-Source: ABdhPJyYH8JXIDkgPspXRN2vNPMMQ+uX2Q9v7t9x0iqMg6ZIkNek0dm4JqwSffuIxDQxiUiNWQCxMQ==
-X-Received: by 2002:a17:906:71d4:: with SMTP id i20mr15394732ejk.533.1593447197127;
-        Mon, 29 Jun 2020 09:13:17 -0700 (PDT)
-Received: from localhost.localdomain ([2a02:a03f:b7f9:7600:8d8b:2aae:ac29:9590])
-        by smtp.gmail.com with ESMTPSA id l1sm222822edi.33.2020.06.29.09.13.15
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 29 Jun 2020 09:13:16 -0700 (PDT)
-From:   Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Mike Rapoport <rppt@kernel.org>,
-        Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
-Subject: [PATCH v2] doc: add link to sparse's home page/internal docs
-Date:   Mon, 29 Jun 2020 18:13:10 +0200
-Message-Id: <20200629161310.89783-1-luc.vanoostenryck@gmail.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20200629044154.GB1492837@kernel.org>
-References: <20200629044154.GB1492837@kernel.org>
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=WVzOc0zshIAzur/W9UldDSamNUZIg6bYwU7gViF4xjM=;
+        b=XUXYJW1YjmtF6PwxsLRs3RzxxVAxAPl7iKRiELCzxj0g2cn0itGuB0hAxZWMlVWLz9
+         mB/GxGKY1TNMXWRU3RyUPszljbezvgimuF6zmQ0AUbEHJuhn5+x1GZYaLrRDElgjbSS7
+         tr0XrGMtbul0eR19pifhTezdUkD5WSsa7vIzIGTgYm2mpC0vO3G70xoKufwmcU+2ps1k
+         7xV+f1JuuXwcGNa+V4U00pMduOQX/3MwZ5Qe+fxzAnl5SjnNtYGamDSIL8apuZ/WdfZB
+         FrgtdWnROwzVaJs8oBJco62GMCT7Gck1SN5QKUVSVVl1OdVPJVU/Ub29R1fKnBhFF6X0
+         T9vw==
+X-Gm-Message-State: AOAM531cBYxiOkNeTnLFpykwfPa4/2XJFJMFgqXxfIHsM/ztjxcTxXHk
+        eAS3ol0jBFkx/OeDL/YUclE=
+X-Google-Smtp-Source: ABdhPJz7uJ34zkR7UdIcDmO5eQD/05KE/U7ACuTf+SbkMdyaKDXIEt+RJAAp/9n0LB1FcwdSrdDevA==
+X-Received: by 2002:aa7:d6cc:: with SMTP id x12mr11487518edr.354.1593464901568;
+        Mon, 29 Jun 2020 14:08:21 -0700 (PDT)
+Received: from kozik-lap ([194.230.155.195])
+        by smtp.googlemail.com with ESMTPSA id q3sm736869eds.0.2020.06.29.14.08.19
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Mon, 29 Jun 2020 14:08:20 -0700 (PDT)
+Date:   Mon, 29 Jun 2020 23:08:17 +0200
+From:   Krzysztof Kozlowski <krzk@kernel.org>
+To:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
+Cc:     corbet@lwn.net, aaro.koskinen@iki.fi, tony@atomide.com,
+        linux@armlinux.org.uk, daniel@zonque.org, haojian.zhuang@gmail.com,
+        robert.jarzmik@free.fr, kgene@kernel.org,
+        dmitry.torokhov@gmail.com, lee.jones@linaro.org,
+        wsa+renesas@sang-engineering.com, ulf.hansson@linaro.org,
+        davem@davemloft.net, kuba@kernel.org, b.zolnierkie@samsung.com,
+        j.neuschaefer@gmx.net, mchehab+samsung@kernel.org,
+        gustavo@embeddedor.com, gregkh@linuxfoundation.org,
+        yanaijie@huawei.com, daniel.vetter@ffwll.ch,
+        rafael.j.wysocki@intel.com, Julia.Lawall@inria.fr,
+        linus.walleij@linaro.org, viresh.kumar@linaro.org, arnd@arndb.de,
+        jani.nikula@intel.com, yuehaibing@huawei.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-samsung-soc@vger.kernel.org, linux-input@vger.kernel.org,
+        linux-mmc@vger.kernel.org, netdev@vger.kernel.org,
+        linux-parisc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linux-fbdev@vger.kernel.org
+Subject: Re: [PATCH] Remove handhelds.org links and email addresses
+Message-ID: <20200629210817.GA32399@kozik-lap>
+References: <20200629203121.7892-1-grandmaster@al2klimov.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20200629203121.7892-1-grandmaster@al2klimov.de>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Sparse's home page used to be a wiki (sparse.wiki.kernel.org)
-but this wiki only contained a short intro and the release notes.
-But nowadays, sparse's main page is sparse.docs.kernel.org,
-which contains all what was in the wiki but also other documentation,
-mainly oriented about sparse's internals.
+On Mon, Jun 29, 2020 at 10:31:21PM +0200, Alexander A. Klimov wrote:
+> Rationale:
+> https://lore.kernel.org/linux-doc/20200626110706.7b5d4a38@lwn.net/
+> 
+> Signed-off-by: Alexander A. Klimov <grandmaster@al2klimov.de>
+> ---
+>  @Jon I thought about what I said and *no*, unfortunately I *can't* automate
+>  the detection of such as easy as the HTTPSifying. As you maybe see below
+>  cleaning up is even "harder".
+> 
+>  We have only 17 files and one domain here. Shall I split it up per subsystem
+>  or can we let it as is?
+> 
+>  Documentation/arm/sa1100/assabet.rst           |  2 --
+>  Documentation/arm/samsung-s3c24xx/h1940.rst    | 10 ----------
+>  Documentation/arm/samsung-s3c24xx/overview.rst |  3 +--
+>  Documentation/arm/samsung-s3c24xx/smdk2440.rst |  4 ----
+>  arch/arm/mach-omap1/Kconfig                    |  4 +---
+>  arch/arm/mach-pxa/h5000.c                      |  2 +-
+>  arch/arm/mach-s3c24xx/mach-h1940.c             |  2 --
+>  arch/arm/mach-s3c24xx/mach-n30.c               |  3 ---
+>  arch/arm/mach-s3c24xx/mach-rx3715.c            |  2 --
 
-So, add a link to this in the kernel documentation.
+For s3c24xx, I am fine taking it through docs tree:
+Acked-by: Krzysztof Kozlowski <krzk@kernel.org>
 
-Signed-off-by: Luc Van Oostenryck <luc.vanoostenryck@gmail.com>
----
+Otherwise, after splitting, I could take the s3c-24xx bits.
 
-Changes since v1:
-* fix a typo (s/kernl/kernel/) thanks to Mike Rapoport.
+Best regards,
+Krzysztof
 
- Documentation/dev-tools/sparse.rst | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/Documentation/dev-tools/sparse.rst b/Documentation/dev-tools/sparse.rst
-index 8a7055593c31..02102be7ff49 100644
---- a/Documentation/dev-tools/sparse.rst
-+++ b/Documentation/dev-tools/sparse.rst
-@@ -9,6 +9,8 @@ Sparse is a semantic checker for C programs; it can be used to find a
- number of potential problems with kernel code.  See
- https://lwn.net/Articles/689907/ for an overview of sparse; this document
- contains some kernel-specific sparse information.
-+More information on sparse, mainly about its internals, can be found in
-+its official pages at https://sparse.docs.kernel.org.
- 
- 
- Using sparse for typechecking
--- 
-2.27.0
-
+>  drivers/input/keyboard/gpio_keys.c             |  2 +-
+>  drivers/input/keyboard/jornada720_kbd.c        |  2 +-
+>  drivers/input/touchscreen/jornada720_ts.c      |  2 +-
+>  drivers/mfd/asic3.c                            |  2 +-
+>  drivers/mmc/host/renesas_sdhi_core.c           |  2 +-
+>  drivers/net/ethernet/dec/tulip/de4x5.c         |  1 -
+>  drivers/video/fbdev/sa1100fb.c                 |  2 +-
+>  include/linux/apm-emulation.h                  |  2 --
+>  17 files changed, 9 insertions(+), 38 deletions(-)
