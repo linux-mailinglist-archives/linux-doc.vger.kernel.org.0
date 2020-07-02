@@ -2,125 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 22958212DC3
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2020 22:19:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BE3F9212E9D
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2020 23:17:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726003AbgGBUTV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Jul 2020 16:19:21 -0400
-Received: from smtprelay0192.hostedemail.com ([216.40.44.192]:47470 "EHLO
-        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1725937AbgGBUTU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Jul 2020 16:19:20 -0400
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
-        by smtprelay01.hostedemail.com (Postfix) with ESMTP id E89C7100E7B40;
-        Thu,  2 Jul 2020 20:19:18 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 50,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:800:960:967:973:982:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1542:1593:1594:1711:1730:1747:1777:1792:2197:2199:2393:2525:2553:2561:2564:2682:2685:2828:2829:2859:2902:2933:2937:2939:2942:2945:2947:2951:2954:3022:3138:3139:3140:3141:3142:3354:3622:3653:3865:3866:3867:3868:3870:3872:3873:3874:3934:3936:3938:3941:3944:3947:3950:3953:3956:3959:4321:5007:6117:6742:6743:7903:7914:9010:9025:9040:10004:10400:10848:10967:11026:11232:11658:11914:12043:12297:12438:12679:12740:12760:12895:13095:13439:14181:14659:14721:21080:21221:21433:21451:21627:21740:21819:21881:21939:30022:30054:30062:30090:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:2,LUA_SUMMARY:none
-X-HE-Tag: feast33_4f102f026e8c
-X-Filterd-Recvd-Size: 3791
-Received: from XPS-9350.home (unknown [47.151.133.149])
-        (Authenticated sender: joe@perches.com)
-        by omf11.hostedemail.com (Postfix) with ESMTPA;
-        Thu,  2 Jul 2020 20:19:14 +0000 (UTC)
-Message-ID: <66df632598aeafc48ecb15434e3d997438414e7f.camel@perches.com>
-Subject: Re: PCI: Replace lkml.org, spinics, gmane with lore.kernel.org
-From:   Joe Perches <joe@perches.com>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Bjorn Helgaas <helgaas@kernel.org>
-Cc:     "Alexander A. Klimov" <grandmaster@al2klimov.de>,
-        bhelgaas@google.com, robh+dt@kernel.org, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        kishon@ti.com, lorenzo.pieralisi@arm.com, hongxing.zhu@nxp.com,
-        l.stach@pengutronix.de, shawnguo@kernel.org,
-        s.hauer@pengutronix.de, kernel@pengutronix.de, festevam@gmail.com,
-        linux-imx@nxp.com, m-karicheri2@ti.com, songxiaowei@hisilicon.com,
-        wangbinghui@hisilicon.com, amurray@thegoodpenguin.co.uk,
-        sathyanarayanan.kuppuswamy@linux.intel.com, hkallweit1@gmail.com,
-        rafael.j.wysocki@intel.com, rdunlap@infradead.org,
-        linux-pci@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-omap@vger.kernel.org, linux-arm-kernel@lists.infradead.org
-Date:   Thu, 02 Jul 2020 13:19:12 -0700
-In-Reply-To: <707b05c95ae3292a6b9eb04e146b1f1f6d52c125.camel@perches.com>
-References: <20200627103050.71712-1-grandmaster@al2klimov.de>
-         <20200630180917.GA3455699@bjorn-Precision-5520>
-         <20200630140417.3a2dba67@lwn.net>
-         <707b05c95ae3292a6b9eb04e146b1f1f6d52c125.camel@perches.com>
-Content-Type: text/plain; charset="ISO-8859-1"
-User-Agent: Evolution 3.36.3-0ubuntu1 
+        id S1726148AbgGBVQ6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Jul 2020 17:16:58 -0400
+Received: from jabberwock.ucw.cz ([46.255.230.98]:41860 "EHLO
+        jabberwock.ucw.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726015AbgGBVQ5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Jul 2020 17:16:57 -0400
+Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
+        id 356E01C0BD2; Thu,  2 Jul 2020 23:16:55 +0200 (CEST)
+Date:   Thu, 2 Jul 2020 23:16:54 +0200
+From:   Pavel Machek <pavel@ucw.cz>
+To:     Ming Lei <tom.leiming@gmail.com>
+Cc:     Henrique de Moraes Holschuh <hmh@hmh.eng.br>,
+        Damien Le Moal <Damien.LeMoal@wdc.com>,
+        Simon Arlott <simon@octiron.net>,
+        "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH] scsi: sd: stop SSD (non-rotational) disks before reboot
+Message-ID: <20200702211653.GB5787@amd>
+References: <499138c8-b6d5-ef4a-2780-4f750ed337d3@0882a8b5-c6c3-11e9-b005-00805fc181fe>
+ <CY4PR04MB37511505492E9EC6A245CFB1E79B0@CY4PR04MB3751.namprd04.prod.outlook.com>
+ <20200623204234.GA16156@khazad-dum.debian.net>
+ <CACVXFVNdC1U-gXdMr-B6i0WJdiYF+JvBcF3MkhFApEw_ZPx7pA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: multipart/signed; micalg=pgp-sha1;
+        protocol="application/pgp-signature"; boundary="MW5yreqqjyrRcusr"
+Content-Disposition: inline
+In-Reply-To: <CACVXFVNdC1U-gXdMr-B6i0WJdiYF+JvBcF3MkhFApEw_ZPx7pA@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 2020-06-30 at 22:35 -0700, Joe Perches wrote:
-> On Tue, 2020-06-30 at 14:04 -0600, Jonathan Corbet wrote:
-> > On Tue, 30 Jun 2020 13:09:17 -0500
-> > Bjorn Helgaas <helgaas@kernel.org> wrote:
-> > 
-> > > PCI: Replace lkml.org, spinics, gmane with lore.kernel.org
-> > > 
-> > > The lkml.org, spinics.net, and gmane.org archives are not very reliable
-> > > and, in some cases, not even easily accessible.  Replace links to them with
-> > > links to lore.kernel.org, the archives hosted by kernel.org.
-> > > 
-> > > I found the gmane items via the Wayback Machine archive at
-> > > https://web.archive.org/.
-> > 
-> > Heh...now *that* sounds like a project that could generate a lot of churn,
-> > and perhaps even be worth it.  Settling on a consistent (and working!)
-> > email archive would improve the docs quite a bit.  I'll add that to the
-> > list...
-> 
-> At least for the lkml.org/lkml links
-> here's the current -next diff done by a
-> script that looks at the message-id of
-> each lkml.org link.
 
-btw: if you want to run the script for specific
-paths, here's the script.
+--MW5yreqqjyrRcusr
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-You could run it using:
+Hi!
 
-bash convert_lkml_to_lore.sh <path>
+> > during a FLASH write or erase can cause from weakened cells, to much
+> > larger damage.  It is possible to harden the chip or the design against
+> > this, but it is *expensive*.  And even if warded off by hardening and no
+> > FLASH damage happens, an erase/program cycle must be done on the whole
+> > erase block to clean up the incomplete program cycle.
+>=20
+> It should have been SSD's(including FW) responsibility to avoid data loss=
+ when
+> the SSD is doing its own BG writing, because power cut can happen any time
+> from SSD's viewpoint.
 
----
-$ cat convert_lkml_to_lore.sh
-#!/bin/bash
+It should be their responsibility. But we know how well that works
+(not well), so we try hard (and should try hard) to power SSDs down
+cleanly.
 
-cvt_lkml_to_lore ()
-{
-    tmpfile=$(mktemp ./.cvt_links.XXXXXXX)
+In a similar way, it is ext4's responsibility not to corrupt itself,
+and we still prefer clean shutdowns.
 
-    header=$(echo $1 | sed 's@/lkml/@/lkml/headers/@')
+Plus, HDDs normally do handle unexpected power offs well, but it puts
+extra stress on their hardware, so we should avoid that...
 
-    wget -qO - $header > $tmpfile
-    if [[ $? == 0 ]] ; then 
-	link=$(grep -i '^Message-Id:' $tmpfile | head -1 | \
-		   sed -r -e 's/^\s*Message-Id:\s*<\s*//' -e  's/\s*>\s*$//' -e 's@^@https://lore.kernel.org/r/@')
-	#    echo "testlink: $link"
-	if [ -n "$link" ] ; then
-	    wget -qO - $link > /dev/null
-	    if [[ $? == 0 ]] ; then
-		echo $link
-	    fi
-	fi
-    fi
+Best regards,
+									Pavel
+--=20
+(english) http://www.livejournal.com/~pavelmachek
+(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
+g.html
 
-    rm -f $tmpfile
-}
+--MW5yreqqjyrRcusr
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-git grep -P -o "\bhttps?://(?:www.)?lkml.org/lkml[\/\w]+" $@ |
-    while read line ; do
-	echo $line
-	file=$(echo $line | cut -f1 -d':')
-	link=$(echo $line | cut -f2- -d':')
-	newlink=$(cvt_lkml_to_lore $link)
-	if [[ -n "$newlink" ]] ; then
-	    sed -i -e "s#\b$link\b#$newlink#" $file
-	fi
-    done
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
 
+iEYEARECAAYFAl7+TsUACgkQMOfwapXb+vKGzACgk0GX74ERX5Pl/uVrV+tG1mWX
+ZGYAniwvujTlx/B3a4xN4uas0M1MVcwW
+=dm1G
+-----END PGP SIGNATURE-----
 
+--MW5yreqqjyrRcusr--
