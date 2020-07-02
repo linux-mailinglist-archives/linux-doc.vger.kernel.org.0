@@ -2,150 +2,180 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 98BC0211E4B
-	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2020 10:23:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 86005211F08
+	for <lists+linux-doc@lfdr.de>; Thu,  2 Jul 2020 10:41:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728600AbgGBIXV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 2 Jul 2020 04:23:21 -0400
-Received: from mout.web.de ([212.227.15.4]:46825 "EHLO mout.web.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728529AbgGBIXH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 2 Jul 2020 04:23:07 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=web.de;
-        s=dbaedf251592; t=1593678148;
-        bh=r50khE4f8sNvlXWIvRv2gpF4lDQ2DJgm5qYt9RNo5BA=;
-        h=X-UI-Sender-Class:Subject:To:References:From:Cc:Date:In-Reply-To;
-        b=HhjnybzjP2ZwI6CK8BVSRo8XS/Zrz5h9d8dgROS1MZP9mUkCuhM4JroZpQz28b/6w
-         PY9IdEnm3Efz0zJvcR0ciHWXvR310+cz0KqJSDJ8TrKxL9be3rsrkObAZ8ZrOxAw2V
-         nSY1Txa6xrd5jyQslm1u/AOJQjrmg7BakL6Ut+iI=
-X-UI-Sender-Class: c548c8c5-30a9-4db5-a2e7-cb6cb037b8f9
-Received: from [192.168.1.2] ([93.132.138.52]) by smtp.web.de (mrweb001
- [213.165.67.108]) with ESMTPSA (Nemesis) id 0M24vT-1iy72t2hD9-00u21X; Thu, 02
- Jul 2020 10:22:28 +0200
-Subject: Re: [v2] Documentation: Coccinelle: fix typos and command example
-To:     Julia Lawall <julia.lawall@inria.fr>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Coccinelle <cocci@systeme.lip6.fr>, linux-doc@vger.kernel.org
-References: <0616dd0c-bb86-be2b-3dc6-1c695a92c3ca@infradead.org>
- <c2c1dec0-2bd1-b0e2-1aa4-38d0e954d5ba@web.de>
- <efc8b0c9-db3b-3c9c-d876-897b53a9e278@infradead.org>
- <2a3940de-6a81-1aff-8109-53c1c5a6aa1b@web.de>
- <f2aaa91a-f935-bc2d-26f2-712576c1bbd7@infradead.org>
- <2f80fb10-dc7f-29be-dc3e-2715f8bafc6d@web.de>
- <dfa2ed9f-fe68-58d1-c3d0-ac436f9bee09@infradead.org>
- <648d287e-3636-1858-1439-103d317f8571@web.de>
- <34065299-03cf-5b62-db37-0acc9830be72@infradead.org>
- <65db3f88-1ac8-374d-e3fe-2ea0970ffd67@web.de>
- <30b722ca-1bd8-2b96-ca41-1e9bc7212b66@infradead.org>
- <bd4033cd-f564-0414-4dbf-4ff58f841648@web.de>
- <05f8cb2b-c76e-e2ba-24a8-5676c1792255@infradead.org>
- <5e83b473-8764-fbfc-394c-1acffa74943c@web.de>
- <alpine.DEB.2.22.394.2007012232510.2540@hadrien>
-From:   Markus Elfring <Markus.Elfring@web.de>
-Autocrypt: addr=Markus.Elfring@web.de; prefer-encrypt=mutual; keydata=
- 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 FEE=
-Cc:     kernel-janitors@vger.kernel.org,
-        LKML <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Nicolas Palix <nicolas.palix@imag.fr>,
-        Gilles Muller <Gilles.Muller@lip6.fr>
-Message-ID: <0b4bdb33-2b67-bc08-cfc1-0cd82c8551d0@web.de>
-Date:   Thu, 2 Jul 2020 10:22:27 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.9.0
-MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.22.394.2007012232510.2540@hadrien>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
+        id S1727916AbgGBIlK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 2 Jul 2020 04:41:10 -0400
+Received: from esa3.hgst.iphmx.com ([216.71.153.141]:22908 "EHLO
+        esa3.hgst.iphmx.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726442AbgGBIlJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 2 Jul 2020 04:41:09 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=wdc.com; i=@wdc.com; q=dns/txt; s=dkim.wdc.com;
+  t=1593679269; x=1625215269;
+  h=from:to:cc:subject:date:message-id:references:
+   in-reply-to:content-id:content-transfer-encoding:
+   mime-version;
+  bh=+dDiG4qpRmfshEeRv6xwYI70Yj4gH0uPhch+7f9kfPU=;
+  b=Ewzt/yc3irzvP4CYz59wtHgDDE0mG1hrUjk0rYV0MJXlh4MMkprMQG7e
+   PtzBD3W7P2GcKC21yDU8NfsXbPJZ5IMw9xEFZ8sEkQ3JJVFqPG9Rh+Adi
+   YfP1x6Td87u9Ov6Ay20uf0X9fT6Q8tth4WcuxL2W2O3bUX704C7+hIZVE
+   li0CjC9faUU8fPU2+p3v9PFTthK2lOXYnAM+l1RqP90haIIA5wX2HSVRs
+   3vA0niX5XpoMmRzCCtCUOC1UctPxGfbvZTUbBlfTSZJ5V8vI0ywvsgnQh
+   G5XsP2cQrJf3A8+oTma6lwR3ghjJeO8ReMw7ghAUk5gSx2+8WVLh7jLsg
+   Q==;
+IronPort-SDR: WFbOym90J41xoZqo8+KXSRuzbo8DKsd2DQuSFeuySOG3/6XmqlxwWAB16+3Qz1Mi6hPZ5hjzbW
+ nbJ4RHNsCGAmgBLE07EW1BtTURRs1SUk33pFlJajWobb0j0tf/3w5jSOmJq39bGnNObtBt5fNf
+ Gp1Rd7V0IdaiN9SgnXu8+HYG2X4QepwoWO+AloTF68hceoRYo73OzMnNhB9oz0xqY1ZUdKrrAS
+ vtiuiI6KqDwiunMgrKIvHF3bEccWMedfhTn42SYClYXMWWTohMy7En3AsEQI8XsbftvBEJpinV
+ CWo=
+X-IronPort-AV: E=Sophos;i="5.75,303,1589212800"; 
+   d="scan'208";a="145792956"
+Received: from mail-dm6nam10lp2106.outbound.protection.outlook.com (HELO NAM10-DM6-obe.outbound.protection.outlook.com) ([104.47.58.106])
+  by ob1.hgst.iphmx.com with ESMTP; 02 Jul 2020 16:41:08 +0800
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=jCBCwljt5/O7uhqxBGByze7R/09Mo3DYq2GLK6iYk9o8R1V/6fE57VC6qe1f017Xv7SXJnnqFbci4WO3Rqs9AiniBVaXr3Lzgl2puwd7ArD+KoMY+zRprr5/8dBv+paDwfRYhTc/xXWCLjA2Lye4R5AbxrnoTCvajwGBu/Vgbv3YJrq+s4m+pWN+1ylPKAu1P1m6pwx/0OzQc/f2/G8qh7PogZz3kGVCH03HUbeuXQDJPJvz4qYhi30KAmCE/W/L9qcWV7sDnXGNJfbijS5Srl9irdhRZnO+4TfufthdfbSEnkOvE3YOpUOp5q6SD39qTtnewgIPSp3IOZN9io8/KQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+dDiG4qpRmfshEeRv6xwYI70Yj4gH0uPhch+7f9kfPU=;
+ b=oD9Ta234vkwpIxZ0oxNmaaCdCzCPM3ULPRb0nKRMGPk0ijG5OjUdiYZS0HDKiKypXVJNHPRr6BbvJBAx0v2r6ifygZ9QzxD4vweXhJ6k8MZUoORlfR+eqwrFoyGVF+2yflzYYWsdVVX1pqY9Zvumd7j/AhKKygfhC2g8tVv4/iVptxdLqj2AF96HYu7efPmKUm2Tz/vCroKHi9Mc9GF5e9WVxLVPfuWEgxcvMZFDvtLlTUMlD2/ULyzJoPfl6Bq05+Nig1h3jlnba9YCcRdI8at3Yp5BTTU14Fzdy0XsMVF5BMaZPaziB5frVbmAfGhsi9RUyvaooi7P/l+QVOj6Wg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=wdc.com; dmarc=pass action=none header.from=wdc.com; dkim=pass
+ header.d=wdc.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=sharedspace.onmicrosoft.com; s=selector2-sharedspace-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+dDiG4qpRmfshEeRv6xwYI70Yj4gH0uPhch+7f9kfPU=;
+ b=RJ9MTxzd5ZJDiq0FQwVQkTYs7oLfElaS30ZNhL0GRHsERiCCfonGFpAmjOzXmH/hiFtUFttkSIx6Qp0xlxrfi9D6iLtA0GxbqJ0lrpJNuiwKC/uiFi8pzNpPEWWT+7f2hHNL7FTizm/V0UhDX5N5sGLLbcKYspdPiyRUXOBmI9Y=
+Received: from BYAPR04MB5112.namprd04.prod.outlook.com (2603:10b6:a03:45::10)
+ by BYAPR04MB4934.namprd04.prod.outlook.com (2603:10b6:a03:4f::23) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3131.24; Thu, 2 Jul
+ 2020 08:41:05 +0000
+Received: from BYAPR04MB5112.namprd04.prod.outlook.com
+ ([fe80::a442:4836:baba:c84b]) by BYAPR04MB5112.namprd04.prod.outlook.com
+ ([fe80::a442:4836:baba:c84b%6]) with mapi id 15.20.3131.036; Thu, 2 Jul 2020
+ 08:41:05 +0000
+From:   Niklas Cassel <Niklas.Cassel@wdc.com>
+To:     =?iso-8859-1?Q?Javier_Gonz=E1lez?= <javier@javigon.com>
+CC:     Jonathan Corbet <corbet@lwn.net>, Jens Axboe <axboe@kernel.dk>,
+        Keith Busch <kbusch@kernel.org>,
+        Christoph Hellwig <hch@lst.de>,
+        Sagi Grimberg <sagi@grimberg.me>,
+        "James E.J. Bottomley" <jejb@linux.ibm.com>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        "linux-scsi@vger.kernel.org" <linux-scsi@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-nvme@lists.infradead.org" <linux-nvme@lists.infradead.org>,
+        "linux-block@vger.kernel.org" <linux-block@vger.kernel.org>
+Subject: Re: [PATCH 2/2] block: add max_active_zones to blk-sysfs
+Thread-Topic: [PATCH 2/2] block: add max_active_zones to blk-sysfs
+Thread-Index: AQHWQ8iQJj1cyFXZ4EOOAcdNj7JGfqjyqqwAgAFmzQA=
+Date:   Thu, 2 Jul 2020 08:41:05 +0000
+Message-ID: <20200702084104.GA607715@localhost.localdomain>
+References: <20200616102546.491961-1-niklas.cassel@wdc.com>
+ <20200616102546.491961-3-niklas.cassel@wdc.com>
+ <20200701111330.3vpivrovh3i46maa@mpHalley.local>
+In-Reply-To: <20200701111330.3vpivrovh3i46maa@mpHalley.local>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: javigon.com; dkim=none (message not signed)
+ header.d=none;javigon.com; dmarc=none action=none header.from=wdc.com;
+x-originating-ip: [85.224.200.150]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-ht: Tenant
+x-ms-office365-filtering-correlation-id: be7026da-0a5e-4620-f32f-08d81e63a8da
+x-ms-traffictypediagnostic: BYAPR04MB4934:
+x-microsoft-antispam-prvs: <BYAPR04MB4934C8167CBE6B4E0180D95BF26D0@BYAPR04MB4934.namprd04.prod.outlook.com>
+wdcipoutbound: EOP-TRUE
+x-ms-oob-tlc-oobclassifiers: OLM:10000;
+x-forefront-prvs: 0452022BE1
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: QoQbkdbu4cgiKlj3AtgXXJZF/l+5sq4fiuG31alrdsk8SKT1KM1l1YQbqGlYQK8rvlvrdCBATgsRMOmJ3ewdk0QJNZJj4S4yQEmJcVCpg4Xd/ERfBuWS5wkzJkdHJVvtAqUWyQyu70r4QsETy+y6S4T78fmTCJ8NmJn47iZGGm5DpwAcoh+u3BbaJqL+r2BDlh7bvbyzkyMtqmnXFRH5z00Hcm3e6IVbHI9CbycTL5c55zyPB/uikci8szsQbvpOsCUNMow97Fxy1kSGl1H3B4KZfsDlFvin7+8sTvNzg4OZAj3xhSNz3G/da6yqHDeTxs542sCJ3tz93F2kzfGpEw==
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BYAPR04MB5112.namprd04.prod.outlook.com;PTR:;CAT:NONE;SFTY:;SFS:(4636009)(396003)(346002)(366004)(39860400002)(136003)(376002)(6486002)(9686003)(54906003)(6512007)(71200400001)(478600001)(4326008)(8676002)(66946007)(6916009)(66446008)(53546011)(66476007)(66556008)(316002)(76116006)(66574015)(26005)(186003)(64756008)(6506007)(91956017)(86362001)(83380400001)(2906002)(33656002)(7416002)(5660300002)(8936002)(1076003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata: NBt/luJiIEMUJ7q3E814qU4pjb9Zp7UFgE+4KV8yUiSmHT6aRwLeppTht61T8Uy7OFkXymgKJiCHy+Cb4ndJZSYLhyYKe0mZs+Y9Co3pky/dfCyj+o4KPttScD/2N2P1AOvXWZqgsYbPoWIbxFdNcra7tmyze3Tu4gufFjILtfOj1D4vXeHcO0FFqf0zg51/EFJBmgAXgd1fE8JgTztQL5RsTTejLpcWVqdkAqsXfmRqAdtA/EybqEC9bTf53wd6FHIVWI6aYfoHAeywrW5j++QOlqRNGuhGCpfGdIirbmBZtMHPHbUaSsbqqtuQ6RPr1C663rjyG6diUjuSF3ueQyJ0o8sL39uPacbUSQGwEJTOV36E/9WAznFyFU/Bj9UUD/lvblf3G3seMNUN2DDJ8Odwpen/Sfjxc+DHsKrPrFKOB2smZzxwUbzG7rU0IEtAptODDXAnPNSdFRiddTjbNlnttssnSBeLdi/HA1Jd7KsezBzXzpZ4oWm7ZYaPXEXC
+x-ms-exchange-transport-forked: True
+Content-Type: text/plain; charset="iso-8859-1"
+Content-ID: <19353BAB97C4E8439B6A6481F7A385D2@namprd04.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:9yvsi1GEbaoTzPF2KcVG7QWBwCdu+yQyAfxOuTUMqMROIVS7DPl
- oSXq6Waw8yw8sbwdbv3ohNMCh3W+nv7qhvHo2ug4C/lmem4HZT1/Vf27MxOPKykTMBiprUl
- Z1XFhFEEsKWg+T4XH2Z/rjzJc3od+TeVYiXMLXCu8L08kZBR4vitM+NbYdpMhIhs2yCKgZL
- WOgiQNUtUswZ+83/msunQ==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:VBNkLLNT1Fw=:i/f1Oa5UZovOwvZ/B0crOg
- zSvTxVOn1XQUqWSaLBcthT7JUyrAqldZ9TU/ruO7srPBrhogN+9rbHNolfZOxOq5oZu57CIwU
- JPFFSO/6HSQKqsjq3Vb+KbTLr9cTqjm1+hCvINH4dx8GaGjYNE9vVODhqS9bYSV4tJYdEWEbL
- XW2FUaFS54lFzSjI02nnUnQHPHsAvVLNDKlPa6lNY37C/TO2hxZZ2jwW+FvZS/i95HxmZ7bWJ
- waNLNkvx2Ke4Rx/RTrAs4ipO+x2uVyACeziRMfr2sSH8tLPvAzWq0AGZwQY4F3xuEh/k21O1C
- fes/URR2HBLzC1ynaCYDqVvaxUXcS2Obsms6+hubaGERCuaIKtz7iDINDQ+EuoepbuFaw/9zn
- 3d4ltOnFa+YcohK+vuhTfvkxkR3WHawo5KocDcr6KSBXs59UdKqsMiG7fSFpQQ7EY3Is8GRCc
- BDKEgR2g9OfxmVcfmBeKtQlD3D6edleSlhUxXjYgoVnrvuY6dsreLMPlOnDI2DPYVOu0tD2xT
- wk4uzeKLfiCk8sOoPdOth7EiprHZnuVJyHfRzWOQCVy2Ys9BFj9tU8NucBYbjwrh/c+fZVJA4
- lMf8tVpcB54ywZJUejKZr+XHbLg1lf5j8oFhxMzWB3QPdmdb37uQzfn6SB55ep1uWvMbRTcUh
- eY1Bvs4nl64SrY3zXYLq9bQ3z+t6RulwK6Mafn4Liglx5lzPXoBAeZdv2czZEMUSmSRJdiHk+
- 4siYmdM5pAJjChU5s2FYwjNQmJoErEejicrrejPtAxa7r6JrYj1W35A7vteddTaRHzq5l+KL8
- R6HIaOwhwAl6+XIvod+LRv5Yik7FbKCFcSaVWbuELcWFYO7XTQfRxF5d1Pxgrw8n9k6WkBiDv
- paCyETvl6P2T+4DHdifxwBw8XD9TeYY+yZoov5upfBR2fWIFJuyvztRI9K/pnQJ2QjitQQasl
- /B3FK+EtYv+Pvpb8VGUA6D+w6aYb2K+JdJ+QJk889SUSbyn2JwhpEEI1D/WX81Byapd6MEG+X
- Z/GGWYDppyBuH0nCEKkYpxV90OioYbxtx6U9P6bYHg1d76F6d3amU2V8o/qQcRT/pLiMUh93H
- ps/oi2GGyO4mSaB9c6X4c8EDbYD2EiHORO0TAHjf3aHZOMoMdLaa+s5i0mYhjtwUqKyTbESNy
- Xz2wqxbO99sa3Foz4n5Lm2ELn5+xvYWad51oFnj/5fVZHlTTaOCAgRzqSTPjjNyQ3+OEFUcuq
- DtpTKpncQlZYJyImPWik80tTUQCu3xR4tjZxD3w==
+MIME-Version: 1.0
+X-OriginatorOrg: wdc.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BYAPR04MB5112.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: be7026da-0a5e-4620-f32f-08d81e63a8da
+X-MS-Exchange-CrossTenant-originalarrivaltime: 02 Jul 2020 08:41:05.5452
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b61c8803-16f3-4c35-9b17-6f65f441df86
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: CMCEhO+Zr+42GZcycNkXw9hVi9Nv8tyPZxdgm0x59ln7GJ14gDCKmpo8m9Zdj2ZBETDia65oBGkg/wSnZMg9tw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR04MB4934
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
->>   elfring@Sonne:~/Projekte/Linux/next-patched> make J=3D1 C=3D1 CHECK=
-=3D'scripts/coccicheck' MODE=3Dcontext COCCI=3D~/Projekte/Linux/next-patch=
-ed/scripts/coccinelle/null/show_pointer_usage_before_null_check-20200701.c=
-occi drivers/usb/mtu3/mtu3_gadget.o
->
-> This is not what is intended.  What is intended has never worked.  The
-> coccicheck script expects that the file name is received on its command
-> line, and that is not the case.
+On Wed, Jul 01, 2020 at 01:16:52PM +0200, Javier Gonz=E1lez wrote:
+> On 16.06.2020 12:25, Niklas Cassel wrote:
+> > Add a new max_active zones definition in the sysfs documentation.
+> > This definition will be common for all devices utilizing the zoned bloc=
+k
+> > device support in the kernel.
+> >=20
+> > Export max_active_zones according to this new definition for NVMe Zoned
+> > Namespace devices, ZAC ATA devices (which are treated as SCSI devices b=
+y
+> > the kernel), and ZBC SCSI devices.
+> >=20
+> > Add the new max_active_zones struct member to the request_queue, rather
+> > than as a queue limit, since this property cannot be split across stack=
+ing
+> > drivers.
+> >=20
+> > For SCSI devices, even though max active zones is not part of the ZBC/Z=
+AC
+> > spec, export max_active_zones as 0, signifying "no limit".
+> >=20
+> > Signed-off-by: Niklas Cassel <niklas.cassel@wdc.com>
+> > ---
 
-I suggest to take another look at information from the verbose execution v=
-ariant
-for such a command example.
+(snip)
+=20
+> Looking a second time at these patches, wouldn't it make sense to move
+> this to queue_limits?
 
-* Do the generated program calls look more appropriate then?
+Hello Javier,
 
-* Are you still missing any relevant data (or corresponding descriptions)?
+The problem with having MAR/MOR as queue_limits, is that they
+then would be split across stacking drivers/device-mapper targets.
+However, MAR/MOR are not splittable, at least not the way the
+block layer works today.
 
-Regards,
-Markus
+If the block layer and drivers ever change so that they do
+accounting of zone conditions, then we could divide the MAR/MOR to
+be split over stacking drivers, but because of performance reasons,
+this will probably never happen.
+In the unlikely event that it did happen, we would still use the
+same sysfs-path for these properties, the only thing that would
+change would be that these would be moved into queue_limits.
+
+
+So the way the code looks right now, these properties cannot
+be split, therefore I chose to put them inside request_queue
+(just like nr_zones), rather than request_queue->limits
+(which is of type struct queue_limits).
+
+nr_zones is also exposed as a sysfs property, even though it
+is part of request_queue, so I don't see why MAR/MOR can't do
+the same. Also see Damien's replies to PATCH 1/2 of this series,
+which reaches the same conclusion.
+
+
+Kind regards,
+Niklas=
