@@ -2,79 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7734F2143C5
-	for <lists+linux-doc@lfdr.de>; Sat,  4 Jul 2020 05:47:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6057C214446
+	for <lists+linux-doc@lfdr.de>; Sat,  4 Jul 2020 08:08:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728134AbgGDDqp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 3 Jul 2020 23:46:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52760 "EHLO
+        id S1726999AbgGDGIw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 4 Jul 2020 02:08:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46158 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728051AbgGDDqm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 3 Jul 2020 23:46:42 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 15CA4C061794;
-        Fri,  3 Jul 2020 20:46:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
-        References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-        Content-Type:Content-ID:Content-Description;
-        bh=QMUoZdBV4wse9lG8bnGaYE8IXC2pAaw0z4G8gYRTTas=; b=twiINFJbNLpQTiX+61YMRDPQ7P
-        Ih4JzjvMGpS/7co6aGhmYZ1snZh0VmzNAo8ri2YrNhS8zoVk1giZdDlpOU5Rn1V7vSb8wxLsEkds3
-        LW6DwFhnksRRYmEUCnDnC0kgfGsmeNcGUGkg7OJB1cXe5h+q6e8GWOj2KlMypltNJYGARtLBoKsuu
-        qIwB5yLKA6jD9zzxRl5301Z8EldaWs3/x5EaQq5ODvudFnfk5lGrUS+jcb6iVGixaS1WuEE5rKlTk
-        gYwayt4ffNIsoPjU91v/FUf2M4DkReF69U2OOA2ND3wXinIvmvqPOAj9W12NAZbh2q054EbNmBE0X
-        WtMgmQ1w==;
-Received: from [2601:1c0:6280:3f0::19c2] (helo=smtpauth.infradead.org)
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1jrZ8R-0001Xb-Dk; Sat, 04 Jul 2020 03:46:40 +0000
-From:   Randy Dunlap <rdunlap@infradead.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Randy Dunlap <rdunlap@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Vinod Koul <vkoul@kernel.org>, dmaengine@vger.kernel.org,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        William Breathitt Gray <vilhelm.gray@gmail.com>,
-        linux-iio@vger.kernel.org,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        linux-media@vger.kernel.org, Jon Mason <jdmason@kudzu.us>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Allen Hubbe <allenbh@gmail.com>, linux-ntb@googlegroups.com,
-        Dan Williams <dan.j.williams@intel.com>,
-        Vishal Verma <vishal.l.verma@intel.com>,
-        Ira Weiny <ira.weiny@intel.com>, linux-nvdimm@lists.01.org,
-        linux-usb@vger.kernel.org, Eli Billauer <eli.billauer@gmail.com>
-Subject: [PATCH 17/17] Documentation/driver-api: xillybus: drop doubled word
-Date:   Fri,  3 Jul 2020 20:45:02 -0700
-Message-Id: <20200704034502.17199-18-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200704034502.17199-1-rdunlap@infradead.org>
-References: <20200704034502.17199-1-rdunlap@infradead.org>
+        with ESMTP id S1725822AbgGDGIt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 4 Jul 2020 02:08:49 -0400
+Received: from mail-vs1-xe41.google.com (mail-vs1-xe41.google.com [IPv6:2607:f8b0:4864:20::e41])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7BB45C061794;
+        Fri,  3 Jul 2020 23:08:49 -0700 (PDT)
+Received: by mail-vs1-xe41.google.com with SMTP id u133so4557813vsc.0;
+        Fri, 03 Jul 2020 23:08:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:reply-to:from:date:message-id
+         :subject:to:cc;
+        bh=Y/a/zbYT3mheg8JLw87yQei4Q/XEwYAs7jxL9Z5JTyA=;
+        b=cKJb+1anPH5nx0QokPkWHc1eslRDIE7n2q60lYmUJZe1VQK3oYQhMrfx+BSxBinah9
+         EkqH0pkjTZGeG/+jqTt7xVcuR22gO8kdN8uz4cyurD7XJHeZbvIpZem9aGVqfBgX9ju2
+         f/Qz5CdmVy9m2YOcz21Sk31SKm2KC+0Oh3N8UPjBHz47iAXbwa09kmYfzzgGtcuA45Kw
+         LCDX/ImEHUUPPcaUyorYRBTz986sb+bzkItcwKHjcqKwo3UpGfoVA0xkhWXJ2omjASpM
+         cgy4zz4SxaNh4Pt2dnFF2TKPNuCU+Ox02PyROhOuzAAW1Z/ppBmO0S6tda8FA5ZbfGvV
+         H1zg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
+         :from:date:message-id:subject:to:cc;
+        bh=Y/a/zbYT3mheg8JLw87yQei4Q/XEwYAs7jxL9Z5JTyA=;
+        b=lfeBu7NmCOtl4ajUlxVEygPgC995Bgl67uvzPBCa7cjN7QEhHor7lnQw3ac6gSbgVj
+         6d8+fHjDSkkDtoVgI7VospZUZg4scs8E0tkDoYelfGGExALdz9MLuA3cQ21tbxP+9rys
+         kQ7Ipe04Z2/5i5+wKHyY7MfDdl/NAMT4Ra9eQtCT38U3tDqGcncQBTmCFhjd3QQb5PFb
+         e0wNmfLRmk8b0avN26Rttw3QNua1a8DFR3tX/y92t3r0rCmO3uH2PeGeNdB8UMjBWpgi
+         r29FchRoz/oetP2ujSkNVgULsKLLjMNXauguqjupDY54Phz+vmJHmECY05OPD5nYUqdd
+         kUCQ==
+X-Gm-Message-State: AOAM532tA6NGAZFqwITZMXlioyP+qYyY8QJnwGUk0KHOgJtv0+lzqzsm
+        UFAQ5dRjBylAYQLLiHIXK0dtkmvAv4g5bDjpSRo=
+X-Google-Smtp-Source: ABdhPJxmPJv+Coy9OsgrxrRmX/6vRF26FjAiHxnnt+EkjQKkjggARFe9Os8KR1MbhyAbMfgRBsxJclA/7NIzZx7L18g=
+X-Received: by 2002:a05:6102:5e1:: with SMTP id w1mr21239002vsf.147.1593842928615;
+ Fri, 03 Jul 2020 23:08:48 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200703212156.30453-1-rdunlap@infradead.org> <20200703212156.30453-4-rdunlap@infradead.org>
+In-Reply-To: <20200703212156.30453-4-rdunlap@infradead.org>
+Reply-To: linasvepstas@gmail.com
+From:   Linas Vepstas <linasvepstas@gmail.com>
+Date:   Sat, 4 Jul 2020 01:08:36 -0500
+Message-ID: <CAHrUA35-ocneW=B+P+qjTTtBztS3ZtDcoESXOBz0sc5nSw1xew@mail.gmail.com>
+Subject: Re: [PATCH 3/4] Documentation: PCI: pci-error-recovery: drop doubled words
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Kishon Vijay Abraham I <kishon@ti.com>,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        linux-pci@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Drop the doubled word "the".
+Acked-by: Linas Vepstas <linasvepstas@gmail.com>
 
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Cc: Eli Billauer <eli.billauer@gmail.com>
----
- Documentation/driver-api/xillybus.rst |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+for this and the other patches in the series.
 
---- linux-next-20200701.orig/Documentation/driver-api/xillybus.rst
-+++ linux-next-20200701/Documentation/driver-api/xillybus.rst
-@@ -273,7 +273,7 @@ buffer is full, the FPGA informs the hos
- XILLYMSG_OPCODE_RELEASEBUF message channel 0 and sending an interrupt if
- necessary). The host responds by making the data available for reading through
- the character device. When all data has been read, the host writes on the
--the FPGA's buffer control register, allowing the buffer's overwriting. Flow
-+FPGA's buffer control register, allowing the buffer's overwriting. Flow
- control mechanisms exist on both sides to prevent underflows and overflows.
- 
- This is not good enough for creating a TCP/IP-like stream: If the data flow
+
+On Fri, Jul 3, 2020 at 4:22 PM Randy Dunlap <rdunlap@infradead.org> wrote:
+>
+> Drop the doubled word "the".
+>
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: linux-doc@vger.kernel.org
+> Cc: Bjorn Helgaas <bhelgaas@google.com>
+> Cc: Linas Vepstas <linasvepstas@gmail.com>
+> Cc: linux-pci@vger.kernel.org
+> ---
+>  Documentation/PCI/pci-error-recovery.rst |    2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> --- linux-next-20200701.orig/Documentation/PCI/pci-error-recovery.rst
+> +++ linux-next-20200701/Documentation/PCI/pci-error-recovery.rst
+> @@ -248,7 +248,7 @@ STEP 4: Slot Reset
+>  ------------------
+>
+>  In response to a return value of PCI_ERS_RESULT_NEED_RESET, the
+> -the platform will perform a slot reset on the requesting PCI device(s).
+> +platform will perform a slot reset on the requesting PCI device(s).
+>  The actual steps taken by a platform to perform a slot reset
+>  will be platform-dependent. Upon completion of slot reset, the
+>  platform will call the device slot_reset() callback.
+
+
+
+-- 
+Verbogeny is one of the pleasurettes of a creatific thinkerizer.
+        --Peter da Silva
