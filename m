@@ -2,245 +2,228 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6196D216FB3
-	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2020 17:08:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AFEDA21762C
+	for <lists+linux-doc@lfdr.de>; Tue,  7 Jul 2020 20:16:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727995AbgGGPIC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 7 Jul 2020 11:08:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58384 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725944AbgGGPIC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jul 2020 11:08:02 -0400
-Received: from mail-wm1-x343.google.com (mail-wm1-x343.google.com [IPv6:2a00:1450:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A16ABC061755;
-        Tue,  7 Jul 2020 08:08:01 -0700 (PDT)
-Received: by mail-wm1-x343.google.com with SMTP id o2so46895851wmh.2;
-        Tue, 07 Jul 2020 08:08:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=M6BV5c7GorEWs2/docPZWbdVobbwC05M0F5l2kuEJhY=;
-        b=Vs27DYnDqO9a35ks/Wv6aMUwNy9xFVR8p18Nvb7vO6wX95Cy6fsmB1rU4/1thR7zXC
-         e1/Mk6cHvVpABEaIsNGCtJuNcqImVGH8zhbyvS5TXQC30do5WjxGwukaU2FUIBiWop8v
-         aUlcJI8pLbUcegVSVlyjI7mYOQQJvCAzgdCC2dTl9wS81Yl9xJ8/jHeOmoogUbXvBKYP
-         ticsQy4rYuD70mX6zhpiMXMebPdLKJTMIS8J/XTm5XxC1iUN43wRYMMEPHuEcHCQBzGB
-         Mi5+IebW5qB7hcXMecyoBv110X4VRHxaSwhr0LvdJ0uF7vxJE4OKaV9ZzBfJbW0EIb7F
-         RFvA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-         :mime-version:content-transfer-encoding;
-        bh=M6BV5c7GorEWs2/docPZWbdVobbwC05M0F5l2kuEJhY=;
-        b=YZEWsnehExMDFaZ5lLIFxy68I72lemt+udldx8AHnJZCEhOuR15+7j3s4OwXZxP13E
-         vfR4WteXTOu6ABEAgrWXRoUcDYRSDOcsXPsKuiknn3zkK3lPGUt5Sk46HN6FHWWcfuz+
-         cuSz5HxxrWXxHhwiFyOMVmJr2tw1UmBFYE82AD6gPauTXLuxkd3Vtb1iN2Id0sy/9Il4
-         tph/6in9luLD/lZPneEN+HOGtmo585yF3a1RPQM9G3fFB0+rtNNBOA6loDi3gkpQwLgy
-         POmY5L88TwmaXQ31pN7qrYh/qV0j4NRUi6KgnB1kJhlL4m+HXyFA7ihq0vtTg1G3PAs8
-         4VMA==
-X-Gm-Message-State: AOAM533/TzEYD4sZywCZJ/752KDc0zzSabr6x3sIwdLIBGEKxsmytY3b
-        P+NUWEpdeVAj5fy6t2buXhqEkBRUultz8w==
-X-Google-Smtp-Source: ABdhPJw3uu5XW1AIN9bCVkNNsTt1jsZSNk03Bs513KYmzIrWkZcCF6ZvU9vC+U9q2Co1plIOC3JXNA==
-X-Received: by 2002:a1c:804c:: with SMTP id b73mr4637763wmd.59.1594134480351;
-        Tue, 07 Jul 2020 08:08:00 -0700 (PDT)
-Received: from localhost.localdomain ([2a01:4262:1ab:c:984b:540d:db53:2adb])
-        by smtp.gmail.com with ESMTPSA id d13sm1452605wrn.61.2020.07.07.08.07.58
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 07 Jul 2020 08:07:59 -0700 (PDT)
-From:   Emil Renner Berthing <kernel@esmil.dk>
-To:     linux-riscv@lists.infradead.org
-Cc:     Emil Renner Berthing <kernel@esmil.dk>,
-        =?UTF-8?q?Bj=C3=B6rn=20T=C3=B6pel?= <bjorn.topel@gmail.com>,
-        Palmer Dabbelt <palmer@dabbelt.com>,
-        Paul Walmsley <paul.walmsley@sifive.com>,
-        linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v1] riscv: Add jump-label implementation
-Date:   Tue,  7 Jul 2020 17:07:48 +0200
-Message-Id: <20200707150748.14651-1-kernel@esmil.dk>
+        id S1728571AbgGGSQW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 7 Jul 2020 14:16:22 -0400
+Received: from smtp-8faa.mail.infomaniak.ch ([83.166.143.170]:44177 "EHLO
+        smtp-8faa.mail.infomaniak.ch" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1728149AbgGGSQW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 7 Jul 2020 14:16:22 -0400
+Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
+        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4B1VpL6QMVzlhcWl;
+        Tue,  7 Jul 2020 20:10:02 +0200 (CEST)
+Received: from localhost (unknown [94.23.54.103])
+        by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4B1VpG0jcQzlh8TC;
+        Tue,  7 Jul 2020 20:09:58 +0200 (CEST)
+From:   =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
+To:     linux-kernel@vger.kernel.org
+Cc:     =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Casey Schaufler <casey@schaufler-ca.com>,
+        James Morris <jmorris@namei.org>, Jann Horn <jannh@google.com>,
+        Jeff Dike <jdike@addtoit.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Michael Kerrisk <mtk.manpages@gmail.com>,
+        =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mickael.salaun@ssi.gouv.fr>,
+        Richard Weinberger <richard@nod.at>,
+        "Serge E . Hallyn" <serge@hallyn.com>,
+        Shuah Khan <shuah@kernel.org>,
+        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
+        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-security-module@vger.kernel.org, x86@kernel.org
+Subject: [PATCH v19 00/12] Landlock LSM
+Date:   Tue,  7 Jul 2020 20:09:43 +0200
+Message-Id: <20200707180955.53024-1-mic@digikod.net>
 X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-Antivirus: Dr.Web (R) for Unix mail servers drweb plugin ver.6.0.2.8
+X-Antivirus-Code: 0x100000
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add jump-label implementation based on the ARM64 version.
+Hi,
 
-Tested on the HiFive Unleashed board.
+This new patch series is a light update of the previous one, with some
+minor fixes and cosmetic changes.  All reviews have been taken into
+account.
 
-Signed-off-by: Emil Renner Berthing <kernel@esmil.dk>
----
+The SLOC count is 1299 for security/landlock/ and 1752 for
+tools/testing/selftest/landlock/ .  Test coverage for security/landlock/
+is 93.6% of lines.  The code not covered only deals with internal kernel
+errors (e.g. memory allocation) and race conditions.
 
-Changes since RFC:
-- Use RISCV_PTR and RISCV_LGPTR macros to match struct jump_table
-  also in 32bit kernels.
-- Remove unneeded branch ? 1 : 0, thanks Björn
-- Fix \n\n instead of \n\t mistake
+The compiled documentation is available here:
+https://landlock.io/linux-doc/landlock-v19/security/landlock/index.html
 
- .../core/jump-labels/arch-support.txt         |  2 +-
- arch/riscv/Kconfig                            |  2 +
- arch/riscv/include/asm/jump_label.h           | 59 +++++++++++++++++++
- arch/riscv/kernel/Makefile                    |  2 +
- arch/riscv/kernel/jump_label.c                | 44 ++++++++++++++
- 5 files changed, 108 insertions(+), 1 deletion(-)
- create mode 100644 arch/riscv/include/asm/jump_label.h
- create mode 100644 arch/riscv/kernel/jump_label.c
+This series can be applied on top of v5.8-rc4 .  This can be tested with
+CONFIG_SECURITY_LANDLOCK and CONFIG_SAMPLE_LANDLOCK.  This patch series
+can be found in a Git repository here:
+https://github.com/landlock-lsm/linux/commits/landlock-v19
+I would really appreciate constructive comments on this patch series.
 
-diff --git a/Documentation/features/core/jump-labels/arch-support.txt b/Documentation/features/core/jump-labels/arch-support.txt
-index 632a1c7aefa2..760243d18ed7 100644
---- a/Documentation/features/core/jump-labels/arch-support.txt
-+++ b/Documentation/features/core/jump-labels/arch-support.txt
-@@ -23,7 +23,7 @@
-     |    openrisc: | TODO |
-     |      parisc: |  ok  |
-     |     powerpc: |  ok  |
--    |       riscv: | TODO |
-+    |       riscv: |  ok  |
-     |        s390: |  ok  |
-     |          sh: | TODO |
-     |       sparc: |  ok  |
-diff --git a/arch/riscv/Kconfig b/arch/riscv/Kconfig
-index fd639937e251..d2f5c53fdc19 100644
---- a/arch/riscv/Kconfig
-+++ b/arch/riscv/Kconfig
-@@ -46,6 +46,8 @@ config RISCV
- 	select GENERIC_TIME_VSYSCALL if MMU && 64BIT
- 	select HANDLE_DOMAIN_IRQ
- 	select HAVE_ARCH_AUDITSYSCALL
-+	select HAVE_ARCH_JUMP_LABEL
-+	select HAVE_ARCH_JUMP_LABEL_RELATIVE
- 	select HAVE_ARCH_KASAN if MMU && 64BIT
- 	select HAVE_ARCH_KGDB
- 	select HAVE_ARCH_KGDB_QXFER_PKT
-diff --git a/arch/riscv/include/asm/jump_label.h b/arch/riscv/include/asm/jump_label.h
-new file mode 100644
-index 000000000000..d5fb342bfccf
---- /dev/null
-+++ b/arch/riscv/include/asm/jump_label.h
-@@ -0,0 +1,59 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (C) 2020 Emil Renner Berthing
-+ *
-+ * Based on arch/arm64/include/asm/jump_label.h
-+ */
-+#ifndef __ASM_JUMP_LABEL_H
-+#define __ASM_JUMP_LABEL_H
-+
-+#ifndef __ASSEMBLY__
-+
-+#include <linux/types.h>
-+
-+#define JUMP_LABEL_NOP_SIZE 4
-+
-+static __always_inline bool arch_static_branch(struct static_key *key,
-+					       bool branch)
-+{
-+	asm_volatile_goto(
-+		"	.option push				\n\t"
-+		"	.option norelax				\n\t"
-+		"	.option norvc				\n\t"
-+		"1:	nop					\n\t"
-+		"	.option pop				\n\t"
-+		"	.pushsection	__jump_table, \"aw\"	\n\t"
-+		"	.align		" RISCV_LGPTR "		\n\t"
-+		"	.long		1b - ., %l[label] - .	\n\t"
-+		"	" RISCV_PTR "	%0 - .			\n\t"
-+		"	.popsection				\n\t"
-+		:  :  "i"(&((char *)key)[branch]) :  : label);
-+
-+	return false;
-+label:
-+	return true;
-+}
-+
-+static __always_inline bool arch_static_branch_jump(struct static_key *key,
-+						    bool branch)
-+{
-+	asm_volatile_goto(
-+		"	.option push				\n\t"
-+		"	.option norelax				\n\t"
-+		"	.option norvc				\n\t"
-+		"1:	jal		zero, %l[label]		\n\t"
-+		"	.option pop				\n\t"
-+		"	.pushsection	__jump_table, \"aw\"	\n\t"
-+		"	.align		" RISCV_LGPTR "		\n\t"
-+		"	.long		1b - ., %l[label] - .	\n\t"
-+		"	" RISCV_PTR "	%0 - .			\n\t"
-+		"	.popsection				\n\t"
-+		:  :  "i"(&((char *)key)[branch]) :  : label);
-+
-+	return false;
-+label:
-+	return true;
-+}
-+
-+#endif  /* __ASSEMBLY__ */
-+#endif	/* __ASM_JUMP_LABEL_H */
-diff --git a/arch/riscv/kernel/Makefile b/arch/riscv/kernel/Makefile
-index b355cf485671..a5287ab9f7f2 100644
---- a/arch/riscv/kernel/Makefile
-+++ b/arch/riscv/kernel/Makefile
-@@ -53,4 +53,6 @@ endif
- obj-$(CONFIG_HOTPLUG_CPU)	+= cpu-hotplug.o
- obj-$(CONFIG_KGDB)		+= kgdb.o
- 
-+obj-$(CONFIG_JUMP_LABEL)	+= jump_label.o
-+
- clean:
-diff --git a/arch/riscv/kernel/jump_label.c b/arch/riscv/kernel/jump_label.c
-new file mode 100644
-index 000000000000..55b2d742efe1
---- /dev/null
-+++ b/arch/riscv/kernel/jump_label.c
-@@ -0,0 +1,44 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * Copyright (C) 2020 Emil Renner Berthing
-+ *
-+ * Based on arch/arm64/kernel/jump_label.c
-+ */
-+#include <linux/kernel.h>
-+#include <linux/jump_label.h>
-+#include <asm/patch.h>
-+
-+#define RISCV_INSN_NOP 0x00000013
-+#define RISCV_INSN_JAL 0x0000006f
-+
-+void arch_jump_label_transform(struct jump_entry *entry,
-+			       enum jump_label_type type)
-+{
-+	void *addr = (void *)jump_entry_code(entry);
-+	u32 insn;
-+
-+	if (type == JUMP_LABEL_JMP) {
-+		u32 offset = jump_entry_target(entry) - jump_entry_code(entry);
-+
-+		insn = RISCV_INSN_JAL |
-+			((offset & GENMASK(19, 12)) << (12 - 12)) |
-+			((offset & GENMASK(11, 11)) << (20 - 11)) |
-+			((offset & GENMASK(10,  1)) << (21 -  1)) |
-+			((offset & GENMASK(20, 20)) << (31 - 20));
-+	} else
-+		insn = RISCV_INSN_NOP;
-+
-+	patch_text_nosync(addr, &insn, sizeof(insn));
-+}
-+
-+void arch_jump_label_transform_static(struct jump_entry *entry,
-+				      enum jump_label_type type)
-+{
-+	/*
-+	 * We use the same instructions in the arch_static_branch and
-+	 * arch_static_branch_jump inline functions, so there's no
-+	 * need to patch them up here.
-+	 * The core will call arch_jump_label_transform  when those
-+	 * instructions need to be replaced.
-+	 */
-+}
+
+# Landlock LSM
+
+The goal of Landlock is to enable to restrict ambient rights (e.g.
+global filesystem access) for a set of processes.  Because Landlock is a
+stackable LSM [1], it makes possible to create safe security sandboxes
+as new security layers in addition to the existing system-wide
+access-controls. This kind of sandbox is expected to help mitigate the
+security impact of bugs or unexpected/malicious behaviors in user-space
+applications. Landlock empowers any process, including unprivileged
+ones, to securely restrict themselves.
+
+Landlock is inspired by seccomp-bpf but instead of filtering syscalls
+and their raw arguments, a Landlock rule can restrict the use of kernel
+objects like file hierarchies, according to the kernel semantic.
+Landlock also takes inspiration from other OS sandbox mechanisms: XNU
+Sandbox, FreeBSD Capsicum or OpenBSD Pledge/Unveil.
+
+In this current form, Landlock misses some access-control features.
+This enables to minimize this patch series and ease review.  This series
+still addresses multiple use cases, especially with the combined use of
+seccomp-bpf: applications with built-in sandboxing, init systems,
+security sandbox tools and security-oriented APIs [2].
+
+Previous version:
+https://lore.kernel.org/lkml/20200526205322.23465-1-mic@digikod.net/
+
+[1] https://lore.kernel.org/lkml/50db058a-7dde-441b-a7f9-f6837fe8b69f@schaufler-ca.com/
+[2] https://lore.kernel.org/lkml/f646e1c7-33cf-333f-070c-0a40ad0468cd@digikod.net/
+
+
+Casey Schaufler (1):
+  LSM: Infrastructure management of the superblock
+
+Mickaël Salaün (11):
+  landlock: Add object management
+  landlock: Add ruleset and domain management
+  landlock: Set up the security framework and manage credentials
+  landlock: Add ptrace restrictions
+  fs,security: Add sb_delete hook
+  landlock: Support filesystem access-control
+  landlock: Add syscall implementation
+  arch: Wire up landlock() syscall
+  selftests/landlock: Add initial tests
+  samples/landlock: Add a sandbox manager example
+  landlock: Add user and kernel documentation
+
+ Documentation/security/index.rst              |    1 +
+ Documentation/security/landlock/index.rst     |   18 +
+ Documentation/security/landlock/kernel.rst    |   69 +
+ Documentation/security/landlock/user.rst      |  268 +++
+ MAINTAINERS                                   |   11 +
+ arch/Kconfig                                  |    7 +
+ arch/alpha/kernel/syscalls/syscall.tbl        |    1 +
+ arch/arm/tools/syscall.tbl                    |    1 +
+ arch/arm64/include/asm/unistd.h               |    2 +-
+ arch/arm64/include/asm/unistd32.h             |    2 +
+ arch/ia64/kernel/syscalls/syscall.tbl         |    1 +
+ arch/m68k/kernel/syscalls/syscall.tbl         |    1 +
+ arch/microblaze/kernel/syscalls/syscall.tbl   |    1 +
+ arch/mips/kernel/syscalls/syscall_n32.tbl     |    1 +
+ arch/mips/kernel/syscalls/syscall_n64.tbl     |    1 +
+ arch/mips/kernel/syscalls/syscall_o32.tbl     |    1 +
+ arch/parisc/kernel/syscalls/syscall.tbl       |    1 +
+ arch/powerpc/kernel/syscalls/syscall.tbl      |    1 +
+ arch/s390/kernel/syscalls/syscall.tbl         |    1 +
+ arch/sh/kernel/syscalls/syscall.tbl           |    1 +
+ arch/sparc/kernel/syscalls/syscall.tbl        |    1 +
+ arch/um/Kconfig                               |    1 +
+ arch/x86/entry/syscalls/syscall_32.tbl        |    1 +
+ arch/x86/entry/syscalls/syscall_64.tbl        |    1 +
+ arch/xtensa/kernel/syscalls/syscall.tbl       |    1 +
+ fs/super.c                                    |    1 +
+ include/linux/lsm_hook_defs.h                 |    1 +
+ include/linux/lsm_hooks.h                     |    3 +
+ include/linux/security.h                      |    4 +
+ include/linux/syscalls.h                      |    3 +
+ include/uapi/asm-generic/unistd.h             |    4 +-
+ include/uapi/linux/landlock.h                 |  302 +++
+ kernel/sys_ni.c                               |    3 +
+ samples/Kconfig                               |    7 +
+ samples/Makefile                              |    1 +
+ samples/landlock/.gitignore                   |    1 +
+ samples/landlock/Makefile                     |   15 +
+ samples/landlock/sandboxer.c                  |  228 +++
+ security/Kconfig                              |   11 +-
+ security/Makefile                             |    2 +
+ security/landlock/Kconfig                     |   18 +
+ security/landlock/Makefile                    |    4 +
+ security/landlock/common.h                    |   20 +
+ security/landlock/cred.c                      |   46 +
+ security/landlock/cred.h                      |   58 +
+ security/landlock/fs.c                        |  609 ++++++
+ security/landlock/fs.h                        |   60 +
+ security/landlock/object.c                    |   66 +
+ security/landlock/object.h                    |   91 +
+ security/landlock/ptrace.c                    |  120 ++
+ security/landlock/ptrace.h                    |   14 +
+ security/landlock/ruleset.c                   |  342 ++++
+ security/landlock/ruleset.h                   |  157 ++
+ security/landlock/setup.c                     |   40 +
+ security/landlock/setup.h                     |   18 +
+ security/landlock/syscall.c                   |  526 +++++
+ security/security.c                           |   51 +-
+ security/selinux/hooks.c                      |   58 +-
+ security/selinux/include/objsec.h             |    6 +
+ security/selinux/ss/services.c                |    3 +-
+ security/smack/smack.h                        |    6 +
+ security/smack/smack_lsm.c                    |   35 +-
+ tools/testing/selftests/Makefile              |    1 +
+ tools/testing/selftests/landlock/.gitignore   |    2 +
+ tools/testing/selftests/landlock/Makefile     |   29 +
+ tools/testing/selftests/landlock/base_test.c  |  163 ++
+ tools/testing/selftests/landlock/common.h     |   93 +
+ tools/testing/selftests/landlock/config       |    5 +
+ tools/testing/selftests/landlock/fs_test.c    | 1740 +++++++++++++++++
+ .../testing/selftests/landlock/ptrace_test.c  |  321 +++
+ tools/testing/selftests/landlock/true.c       |    5 +
+ 71 files changed, 5611 insertions(+), 77 deletions(-)
+ create mode 100644 Documentation/security/landlock/index.rst
+ create mode 100644 Documentation/security/landlock/kernel.rst
+ create mode 100644 Documentation/security/landlock/user.rst
+ create mode 100644 include/uapi/linux/landlock.h
+ create mode 100644 samples/landlock/.gitignore
+ create mode 100644 samples/landlock/Makefile
+ create mode 100644 samples/landlock/sandboxer.c
+ create mode 100644 security/landlock/Kconfig
+ create mode 100644 security/landlock/Makefile
+ create mode 100644 security/landlock/common.h
+ create mode 100644 security/landlock/cred.c
+ create mode 100644 security/landlock/cred.h
+ create mode 100644 security/landlock/fs.c
+ create mode 100644 security/landlock/fs.h
+ create mode 100644 security/landlock/object.c
+ create mode 100644 security/landlock/object.h
+ create mode 100644 security/landlock/ptrace.c
+ create mode 100644 security/landlock/ptrace.h
+ create mode 100644 security/landlock/ruleset.c
+ create mode 100644 security/landlock/ruleset.h
+ create mode 100644 security/landlock/setup.c
+ create mode 100644 security/landlock/setup.h
+ create mode 100644 security/landlock/syscall.c
+ create mode 100644 tools/testing/selftests/landlock/.gitignore
+ create mode 100644 tools/testing/selftests/landlock/Makefile
+ create mode 100644 tools/testing/selftests/landlock/base_test.c
+ create mode 100644 tools/testing/selftests/landlock/common.h
+ create mode 100644 tools/testing/selftests/landlock/config
+ create mode 100644 tools/testing/selftests/landlock/fs_test.c
+ create mode 100644 tools/testing/selftests/landlock/ptrace_test.c
+ create mode 100644 tools/testing/selftests/landlock/true.c
+
 -- 
 2.27.0
 
