@@ -2,86 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 27139218123
-	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2020 09:25:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AE4E621802C
+	for <lists+linux-doc@lfdr.de>; Wed,  8 Jul 2020 09:03:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730224AbgGHHZg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 8 Jul 2020 03:25:36 -0400
-Received: from mail.elsol.com.pe ([170.231.82.35]:42815 "EHLO
-        mail.elsol.com.pe" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730042AbgGHHZg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Jul 2020 03:25:36 -0400
-X-Greylist: delayed 1581 seconds by postgrey-1.27 at vger.kernel.org; Wed, 08 Jul 2020 03:25:35 EDT
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by mail.elsol.com.pe (Postfix) with ESMTP id E45C7606AF7;
-        Wed,  8 Jul 2020 02:00:40 -0500 (-05)
-Authentication-Results: mail.elsol.com.pe (amavisd-new); dkim=neutral
-        reason="invalid (public key: not available)" header.d=elsol.com.pe
-Received: from mail.elsol.com.pe ([127.0.0.1])
-        by localhost (mail.elsol.com.pe [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id 4uh0O2F-qxfi; Wed,  8 Jul 2020 02:00:40 -0500 (-05)
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by mail.elsol.com.pe (Postfix) with ESMTP id BF9EC605ED9;
-        Wed,  8 Jul 2020 02:00:39 -0500 (-05)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mail.elsol.com.pe BF9EC605ED9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=elsol.com.pe;
-        s=17F39D2A-FFD0-11E7-BCBF-081969246B0E; t=1594191639;
-        bh=7Y6RtNhSVAIVHdJEU2gHHWYvaP8LRgEAhMNj0EoKaAA=;
-        h=MIME-Version:To:From:Date:Message-Id;
-        b=VUSxB+VQQMzRLuuzX6+uUEzxD1YqpqXSz3fb9P4G5DNfpOngPYynhDiHJ0autpIaT
-         7iABDnezQ+6VefPDU8qLYOSV3oQYneShigH1AyO7Ad/GA+ZqpRmpP6V3dsQGq1zFyY
-         ysitAz2kco894aJDao+vr5KaiORkzFus4cSzs4KUJ5N8NcT0ooycKcuFITeTSTzMS0
-         8WGzYAC4vr52u/heQNU6mZofEGhDfucrtAukpb1nlRq9RnKY37apepq+A6O0qMzQz8
-         2fZFdnb+28j3Vxz1s/zoaVIEyWxGWeNK3kY+Cjy0RCKgM61/wxFBeXqpSkShaIPwmO
-         I5X+GOzRWi3uw==
-X-Virus-Scanned: amavisd-new at elsol.com.pe
-Received: from mail.elsol.com.pe ([127.0.0.1])
-        by localhost (mail.elsol.com.pe [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id MJF0-hfZvdTr; Wed,  8 Jul 2020 02:00:39 -0500 (-05)
-Received: from [10.86.65.172] (unknown [105.8.7.225])
-        by mail.elsol.com.pe (Postfix) with ESMTPSA id 716E9606AF0;
-        Wed,  8 Jul 2020 02:00:29 -0500 (-05)
-Content-Type: text/plain; charset="utf-8"
+        id S1729867AbgGHHD6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 8 Jul 2020 03:03:58 -0400
+Received: from smtp-190d.mail.infomaniak.ch ([185.125.25.13]:39853 "EHLO
+        smtp-190d.mail.infomaniak.ch" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1729821AbgGHHD5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 8 Jul 2020 03:03:57 -0400
+X-Greylist: delayed 46432 seconds by postgrey-1.27 at vger.kernel.org; Wed, 08 Jul 2020 03:03:56 EDT
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
+        by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4B1qzH2Lhxzlhcqk;
+        Wed,  8 Jul 2020 09:03:55 +0200 (CEST)
+Received: from ns3096276.ip-94-23-54.eu (unknown [94.23.54.103])
+        by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4B1qz772rqzlh8TH;
+        Wed,  8 Jul 2020 09:03:47 +0200 (CEST)
+Subject: Re: [PATCH v19 07/12] landlock: Support filesystem access-control
+To:     Randy Dunlap <rdunlap@infradead.org>, linux-kernel@vger.kernel.org
+Cc:     Al Viro <viro@zeniv.linux.org.uk>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Casey Schaufler <casey@schaufler-ca.com>,
+        James Morris <jmorris@namei.org>, Jann Horn <jannh@google.com>,
+        Jeff Dike <jdike@addtoit.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Michael Kerrisk <mtk.manpages@gmail.com>,
+        =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mickael.salaun@ssi.gouv.fr>,
+        Richard Weinberger <richard@nod.at>,
+        "Serge E . Hallyn" <serge@hallyn.com>,
+        Shuah Khan <shuah@kernel.org>,
+        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
+        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-security-module@vger.kernel.org, x86@kernel.org
+References: <20200707180955.53024-1-mic@digikod.net>
+ <20200707180955.53024-8-mic@digikod.net>
+ <6a80b712-a7b9-7b47-083a-08b7769016f8@infradead.org>
+From:   =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@digikod.net>
+Message-ID: <b5d5326f-cf37-36f0-7bce-8494c5a65cb5@digikod.net>
+Date:   Wed, 8 Jul 2020 09:03:46 +0200
+User-Agent: 
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: =?utf-8?q?Covid_19_Wohlt=C3=A4tigkeitsfonds?=
-To:     Recipients <dreyes@elsol.com.pe>
-From:   ''Tayeb Souami'' <dreyes@elsol.com.pe>
-Date:   Wed, 08 Jul 2020 08:56:47 +0200
-Reply-To: Tayebsouam.spende@gmail.com
-Message-Id: <20200708070029.716E9606AF0@mail.elsol.com.pe>
+In-Reply-To: <6a80b712-a7b9-7b47-083a-08b7769016f8@infradead.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: fr
+Content-Transfer-Encoding: 8bit
+X-Antivirus: Dr.Web (R) for Unix mail servers drweb plugin ver.6.0.2.8
+X-Antivirus-Code: 0x100000
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Lieber Freund,
 
-Ich bin Herr Tayeb Souami, New Jersey, Vereinigte Staaten von Amerika, der =
-Mega-Gewinner von $ 315million In Mega Millions Jackpot, spende ich an 5 zu=
-f=C3=A4llige Personen, wenn Sie diese E-Mail erhalten, dann wurde Ihre E-Ma=
-il nach einem Spinball ausgew=C3=A4hlt.Ich habe den gr=C3=B6=C3=9Ften Teil =
-meines Verm=C3=B6gens auf eine Reihe von Wohlt=C3=A4tigkeitsorganisationen =
-und Organisationen verteilt.Ich habe mich freiwillig dazu entschieden, die =
-Summe von =E2=82=AC 2.000.000,00 an Sie als eine der ausgew=C3=A4hlten 5 zu=
- spenden, um meine Gewinne zu =C3=BCberpr=C3=BCfen, sehen Sie bitte meine Y=
-ou Tube Seite unten.
+On 07/07/2020 22:11, Randy Dunlap wrote:
+> Hi--
+> 
+> On 7/7/20 11:09 AM, Mickaël Salaün wrote:
+>> ---
+>>  arch/Kconfig                  |   7 +
+>>  arch/um/Kconfig               |   1 +
+>>  include/uapi/linux/landlock.h |  78 +++++
+>>  security/landlock/Kconfig     |   2 +-
+>>  security/landlock/Makefile    |   2 +-
+>>  security/landlock/fs.c        | 609 ++++++++++++++++++++++++++++++++++
+>>  security/landlock/fs.h        |  60 ++++
+>>  security/landlock/setup.c     |   7 +
+>>  security/landlock/setup.h     |   2 +
+>>  9 files changed, 766 insertions(+), 2 deletions(-)
+>>  create mode 100644 include/uapi/linux/landlock.h
+>>  create mode 100644 security/landlock/fs.c
+>>  create mode 100644 security/landlock/fs.h
+>>
+>> diff --git a/arch/Kconfig b/arch/Kconfig
+>> index 8cc35dc556c7..483b7476ac69 100644
+>> --- a/arch/Kconfig
+>> +++ b/arch/Kconfig
+>> @@ -845,6 +845,13 @@ config COMPAT_32BIT_TIME
+>>  config ARCH_NO_PREEMPT
+>>  	bool
+>>  
+>> +config ARCH_EPHEMERAL_STATES
+>> +	def_bool n
+>> +	help
+>> +	  An arch should select this symbol if it do not keep an internal kernel
+> 
+> 	                                       it does not
+> 
+>> +	  state for kernel objects such as inodes, but instead rely on something
+> 
+> 	                                               instead relies on
+> 
+>> +	  else (e.g. the host kernel for an UML kernel).
+>> +
+>>  config ARCH_SUPPORTS_RT
+>>  	bool
+>>  
+> 
+> thanks.
+> 
 
-UHR MICH HIER: https://www.youtube.com/watch?v=3DZ6ui8ZDQ6Ks
-
-
-
-Das ist dein Spendencode: [TS530342018]
-
-
-
-Antworten Sie mit dem SPENDE-CODE an diese
-
-E-Mail:Tayebsouam.spende@gmail.com
-
-
-Ich hoffe, Sie und Ihre Familie gl=C3=BCcklich zu machen.
-
-Gr=C3=BC=C3=9Fe
-Herr Tayeb Souami
+Thanks Randy!
