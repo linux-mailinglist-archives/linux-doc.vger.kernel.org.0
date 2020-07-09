@@ -2,226 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E123521A1DD
-	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2020 16:14:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 642D021A2C7
+	for <lists+linux-doc@lfdr.de>; Thu,  9 Jul 2020 16:57:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726605AbgGIOOg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 9 Jul 2020 10:14:36 -0400
-Received: from ms-10.1blu.de ([178.254.4.101]:58628 "EHLO ms-10.1blu.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726371AbgGIOOg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 9 Jul 2020 10:14:36 -0400
-Received: from [78.43.71.214] (helo=marius.fritz.box)
-        by ms-10.1blu.de with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        (Exim 4.90_1)
-        (envelope-from <mail@mariuszachmann.de>)
-        id 1jtXJm-00085F-Ka; Thu, 09 Jul 2020 16:14:30 +0200
-From:   Marius Zachmann <mail@mariuszachmann.de>
-To:     Guenter Roeck <linux@roeck-us.net>
-Cc:     Marius Zachmann <mail@mariuszachmann.de>,
-        Jean Delvare <jdelvare@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2] hwmon: corsair-cpro: add fan_target
-Date:   Thu,  9 Jul 2020 16:14:13 +0200
-Message-Id: <20200709141413.30790-1-mail@mariuszachmann.de>
-X-Mailer: git-send-email 2.27.0
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Con-Id: 241080
-X-Con-U: 0-mail
-X-Originating-IP: 78.43.71.214
+        id S1728305AbgGIO4L (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 9 Jul 2020 10:56:11 -0400
+Received: from mx0b-002e3701.pphosted.com ([148.163.143.35]:63290 "EHLO
+        mx0b-002e3701.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1728207AbgGIOzn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 9 Jul 2020 10:55:43 -0400
+Received: from pps.filterd (m0134425.ppops.net [127.0.0.1])
+        by mx0b-002e3701.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 069Es3vS001346;
+        Thu, 9 Jul 2020 14:54:51 GMT
+Received: from g2t2352.austin.hpe.com (g2t2352.austin.hpe.com [15.233.44.25])
+        by mx0b-002e3701.pphosted.com with ESMTP id 325k23qskp-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Thu, 09 Jul 2020 14:54:51 +0000
+Received: from stormcage.eag.rdlabs.hpecorp.net (stormcage.eag.rdlabs.hpecorp.net [128.162.236.70])
+        by g2t2352.austin.hpe.com (Postfix) with ESMTP id 22D89BC;
+        Thu,  9 Jul 2020 14:54:47 +0000 (UTC)
+Received: by stormcage.eag.rdlabs.hpecorp.net (Postfix, from userid 200934)
+        id ABF3F202032F8; Thu,  9 Jul 2020 09:54:47 -0500 (CDT)
+Message-ID: <20200709145447.549145421@hpe.com>
+User-Agent: quilt/0.66
+Date:   Thu, 09 Jul 2020 09:54:47 -0500
+From:   steve.wahl@hpe.com
+To:     Steve Wahl <steve.wahl@hpe.com>, Jonathan Corbet <corbet@lwn.net>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Darren Hart <dvhart@infradead.org>,
+        Andy Shevchenko <andy@infradead.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+        Juergen Gross <jgross@suse.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Oliver Neukum <oneukum@suse.com>,
+        Mike Travis <mike.travis@hpe.com>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Benjamin Thiel <b.thiel@posteo.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        James Morris <jmorris@namei.org>,
+        David Howells <dhowells@redhat.com>,
+        Kees Cook <keescook@chromium.org>,
+        Dave Young <dyoung@redhat.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Logan Gunthorpe <logang@deltatee.com>,
+        Alexandre Chartre <alexandre.chartre@oracle.com>,
+        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        Austin Kim <austindh.kim@gmail.com>,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-efi@vger.kernel.org
+Cc:     Russ Anderson <rja@hpe.com>
+Subject: [patch v2 00/13] Remove UV1 platform support and associated efi=oldmap option
+X-HPE-SCL: -1
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
+ definitions=2020-07-09_08:2020-07-09,2020-07-09 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 bulkscore=0 clxscore=1015
+ suspectscore=0 mlxlogscore=999 adultscore=0 impostorscore=0 malwarescore=0
+ spamscore=0 mlxscore=0 priorityscore=1501 phishscore=0 lowpriorityscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
+ definitions=main-2007090112
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This adds fan_target entries to the corsair-cpro driver.
-Reading the attribute from the device does not seem possible, so
-it returns the last set value. (same as pwm)
 
-send_usb_cmd now has one more argument, which is needed for the
-  fan_target command.
+This series of patches removes support for the UV1 platform and the
+efi=old_map kernel command line option.
 
-Signed-off-by: Marius Zachmann <mail@mariuszachmann.de>
----
-Change from v1:
-- use clamp_val instead of bounds checking
+The documentation for efi=old_map in
+Documentation/admin-guide/kernel-parameters.txt was recently touched
+and differs between linux-next and the mainline tree.  I will send a
+separate patch to fix the documentation when this gets accepted.
 
----
- Documentation/hwmon/corsair-cpro.rst |  3 ++
- drivers/hwmon/corsair-cpro.c         | 61 ++++++++++++++++++++++------
- 2 files changed, 52 insertions(+), 12 deletions(-)
+The UV1 platform has been out of support for a number of years, has
+not had a BIOS update for at least 5 years, and we have not had access
+to hardware to test changes on for a while now, either.  
 
-diff --git a/Documentation/hwmon/corsair-cpro.rst b/Documentation/hwmon/corsair-cpro.rst
-index 5913e23d764c..78820156f07d 100644
---- a/Documentation/hwmon/corsair-cpro.rst
-+++ b/Documentation/hwmon/corsair-cpro.rst
-@@ -33,6 +33,9 @@ in2_input		Voltage on SATA 3.3v
- temp[1-4]_input		Temperature on connected temperature sensors
- fan[1-6]_input		Connected fan rpm.
- fan[1-6]_label		Shows fan type as detected by the device.
-+fan[1-6]_target		Sets fan speed target rpm.
-+			When reading, it reports the last value if it was set by the driver.
-+			Otherwise returns 0.
- pwm[1-6]		Sets the fan speed. Values from 0-255.
- 			When reading, it reports the last value if it was set by the driver.
- 			Otherwise returns 0.
-diff --git a/drivers/hwmon/corsair-cpro.c b/drivers/hwmon/corsair-cpro.c
-index a22583acc229..fe625190e3a1 100644
---- a/drivers/hwmon/corsair-cpro.c
-+++ b/drivers/hwmon/corsair-cpro.c
-@@ -5,8 +5,8 @@
-  */
+Removing the UV1 platform will improve the clarity of the changes we
+would like to make for our forthcoming UV5 Sapphire Rapids platform,
+making them easier to review.  And removing the UV1 platform allows
+this patch set to also remove the efi=old_map boot option, which seems
+to be a natural progression from commit 1f299fad1e312947c974
+("efi/x86: Limit EFI old memory map to SGI UV machines")
 
- #include <linux/bitops.h>
--#include <linux/kernel.h>
- #include <linux/hwmon.h>
-+#include <linux/kernel.h>
- #include <linux/module.h>
- #include <linux/mutex.h>
- #include <linux/slab.h>
-@@ -51,6 +51,12 @@
- 					 * send: byte 1 is fan number
- 					 * send: byte 2 is percentage from 0 - 100
- 					 */
-+#define CTL_SET_FAN_TARGET	0x24	/*
-+					 * set target rpm
-+					 * send: byte 1 is fan number
-+					 * send: byte 2-3 is target
-+					 * device accepts all values from 0x00 - 0xFFFF
-+					 */
+Changes for v2:
+- Diffstats regenerated so they should be accurate now.
+- Removed unused variable timeout_base_ns in tlb_uv.c found by lkp@intel.com
+- added x86 subsystem to subject line.
 
- #define NUM_FANS		6
- #define NUM_TEMP_SENSORS	4
-@@ -60,13 +66,14 @@ struct ccp_device {
- 	struct mutex mutex; /* whenever buffer is used, lock before send_usb_cmd */
- 	u8 *buffer;
- 	int pwm[6];
-+	int target[6];
- 	DECLARE_BITMAP(temp_cnct, NUM_TEMP_SENSORS);
- 	DECLARE_BITMAP(fan_cnct, NUM_FANS);
- 	char fan_label[6][LABEL_LENGTH];
- };
-
- /* send command, check for error in response, response in ccp->buffer */
--static int send_usb_cmd(struct ccp_device *ccp, u8 command, u8 byte1, u8 byte2)
-+static int send_usb_cmd(struct ccp_device *ccp, u8 command, u8 byte1, u8 byte2, u8 byte3)
- {
- 	int actual_length;
- 	int ret;
-@@ -75,6 +82,7 @@ static int send_usb_cmd(struct ccp_device *ccp, u8 command, u8 byte1, u8 byte2)
- 	ccp->buffer[0] = command;
- 	ccp->buffer[1] = byte1;
- 	ccp->buffer[2] = byte2;
-+	ccp->buffer[3] = byte3;
-
- 	ret = usb_bulk_msg(ccp->udev, usb_sndintpipe(ccp->udev, 2), ccp->buffer, OUT_BUFFER_SIZE,
- 			   &actual_length, 1000);
-@@ -103,7 +111,7 @@ static int get_data(struct ccp_device *ccp, int command, int channel)
-
- 	mutex_lock(&ccp->mutex);
-
--	ret = send_usb_cmd(ccp, command, channel, 0);
-+	ret = send_usb_cmd(ccp, command, channel, 0, 0);
- 	if (ret)
- 		goto out_unlock;
-
-@@ -128,7 +136,22 @@ static int set_pwm(struct ccp_device *ccp, int channel, long val)
-
- 	mutex_lock(&ccp->mutex);
-
--	ret = send_usb_cmd(ccp, CTL_SET_FAN_FPWM, channel, val);
-+	ret = send_usb_cmd(ccp, CTL_SET_FAN_FPWM, channel, val, 0);
-+
-+	mutex_unlock(&ccp->mutex);
-+	return ret;
-+}
-+
-+static int set_target(struct ccp_device *ccp, int channel, long val)
-+{
-+	int ret;
-+
-+	val = clamp_val(val, 0, 0xFFFF);
-+	ccp->target[channel] = val;
-+
-+	mutex_lock(&ccp->mutex);
-+
-+	ret = send_usb_cmd(ccp, CTL_SET_FAN_TARGET, channel, val >> 8, val);
-
- 	mutex_unlock(&ccp->mutex);
- 	return ret;
-@@ -183,6 +206,11 @@ static int ccp_read(struct device *dev, enum hwmon_sensor_types type,
- 				return ret;
- 			*val = ret;
- 			return 0;
-+		case hwmon_fan_target:
-+			/* how to read target values from the device is unknown */
-+			/* driver returns last set value or 0			*/
-+			*val = ccp->target[channel];
-+			return 0;
- 		default:
- 			break;
- 		}
-@@ -231,6 +259,13 @@ static int ccp_write(struct device *dev, enum hwmon_sensor_types type,
- 			break;
- 		}
- 		break;
-+	case hwmon_fan:
-+		switch (attr) {
-+		case hwmon_fan_target:
-+			return set_target(ccp, channel, val);
-+		default:
-+			break;
-+		}
- 	default:
- 		break;
- 	}
-@@ -266,6 +301,8 @@ static umode_t ccp_is_visible(const void *data, enum hwmon_sensor_types type,
- 			return 0444;
- 		case hwmon_fan_label:
- 			return 0444;
-+		case hwmon_fan_target:
-+			return 0644;
- 		default:
- 			break;
- 		}
-@@ -313,12 +350,12 @@ static const struct hwmon_channel_info *ccp_info[] = {
- 			   HWMON_T_INPUT
- 			   ),
- 	HWMON_CHANNEL_INFO(fan,
--			   HWMON_F_INPUT | HWMON_F_LABEL,
--			   HWMON_F_INPUT | HWMON_F_LABEL,
--			   HWMON_F_INPUT | HWMON_F_LABEL,
--			   HWMON_F_INPUT | HWMON_F_LABEL,
--			   HWMON_F_INPUT | HWMON_F_LABEL,
--			   HWMON_F_INPUT | HWMON_F_LABEL
-+			   HWMON_F_INPUT | HWMON_F_LABEL | HWMON_F_TARGET,
-+			   HWMON_F_INPUT | HWMON_F_LABEL | HWMON_F_TARGET,
-+			   HWMON_F_INPUT | HWMON_F_LABEL | HWMON_F_TARGET,
-+			   HWMON_F_INPUT | HWMON_F_LABEL | HWMON_F_TARGET,
-+			   HWMON_F_INPUT | HWMON_F_LABEL | HWMON_F_TARGET,
-+			   HWMON_F_INPUT | HWMON_F_LABEL | HWMON_F_TARGET
- 			   ),
- 	HWMON_CHANNEL_INFO(pwm,
- 			   HWMON_PWM_INPUT,
-@@ -348,7 +385,7 @@ static int get_fan_cnct(struct ccp_device *ccp)
- 	int mode;
- 	int ret;
-
--	ret = send_usb_cmd(ccp, CTL_GET_FAN_CNCT, 0, 0);
-+	ret = send_usb_cmd(ccp, CTL_GET_FAN_CNCT, 0, 0, 0);
- 	if (ret)
- 		return ret;
-
-@@ -385,7 +422,7 @@ static int get_temp_cnct(struct ccp_device *ccp)
- 	int mode;
- 	int ret;
-
--	ret = send_usb_cmd(ccp, CTL_GET_TMP_CNCT, 0, 0);
-+	ret = send_usb_cmd(ccp, CTL_GET_TMP_CNCT, 0, 0, 0);
- 	if (ret)
- 		return ret;
-
---
-2.27.0
