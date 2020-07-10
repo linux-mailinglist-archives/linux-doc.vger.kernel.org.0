@@ -2,276 +2,240 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DE88D21B5D1
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2020 15:06:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 05A1D21B683
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2020 15:34:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726774AbgGJNGR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 10 Jul 2020 09:06:17 -0400
-Received: from mail.kernel.org ([198.145.29.99]:47232 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726725AbgGJNGP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 10 Jul 2020 09:06:15 -0400
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id C2CBD20748;
-        Fri, 10 Jul 2020 13:06:13 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1594386374;
-        bh=AFiXCQc5+jR58Qr4a3fqv2UX5FqAsVk0dAT+xIdXxDU=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=XUeTwQcEqQisAlE++7Z0h7ZVgVfvnG6eRLvKKn/vWXkMklYVklH0hbYUsx7Uo/4W+
-         u2jwtJQUnpYHp2EZZCtxLyUW6cnB9fChhK0snP3GHfLIHH873iMD9PRSh0D5zJR7I4
-         6rbEiZVl6uOi6mP4HaabdPpoY5EJVcV+sLHW60t8=
-Date:   Fri, 10 Jul 2020 15:06:19 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Peter Enderborg <peter.enderborg@sony.com>
-Cc:     linux-kernel@vger.kernel.org,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ingo Molnar <mingo@redhat.com>
-Subject: Re: [PATCH 2/2] debugfs: Add access restriction option
-Message-ID: <20200710130619.GB1667030@kroah.com>
-References: <20200617133738.6631-1-peter.enderborg@sony.com>
- <20200622083019.15479-1-peter.enderborg@sony.com>
- <20200622083019.15479-3-peter.enderborg@sony.com>
+        id S1727907AbgGJNeY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 10 Jul 2020 09:34:24 -0400
+Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:17662 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726840AbgGJNeX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 10 Jul 2020 09:34:23 -0400
+Received: from pps.filterd (m0187473.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 06ADW6mL006648;
+        Fri, 10 Jul 2020 09:33:46 -0400
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 326bpr3apw-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 10 Jul 2020 09:33:46 -0400
+Received: from m0187473.ppops.net (m0187473.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 06ADWPAd007505;
+        Fri, 10 Jul 2020 09:33:42 -0400
+Received: from ppma02fra.de.ibm.com (47.49.7a9f.ip4.static.sl-reverse.com [159.122.73.71])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 326bpr39v3-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 10 Jul 2020 09:33:42 -0400
+Received: from pps.filterd (ppma02fra.de.ibm.com [127.0.0.1])
+        by ppma02fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 06AD4wgt012132;
+        Fri, 10 Jul 2020 13:32:42 GMT
+Received: from b06cxnps4074.portsmouth.uk.ibm.com (d06relay11.portsmouth.uk.ibm.com [9.149.109.196])
+        by ppma02fra.de.ibm.com with ESMTP id 326bcf0ngm-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 10 Jul 2020 13:32:42 +0000
+Received: from d06av23.portsmouth.uk.ibm.com (d06av23.portsmouth.uk.ibm.com [9.149.105.59])
+        by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 06ADVPdD59965518
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 10 Jul 2020 13:31:25 GMT
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 4E7BAA4051;
+        Fri, 10 Jul 2020 13:31:25 +0000 (GMT)
+Received: from d06av23.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id E7A08A404D;
+        Fri, 10 Jul 2020 13:31:21 +0000 (GMT)
+Received: from [9.199.38.25] (unknown [9.199.38.25])
+        by d06av23.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+        Fri, 10 Jul 2020 13:31:21 +0000 (GMT)
+From:   Ravi Bangoria <ravi.bangoria@linux.ibm.com>
+Subject: Re: [PATCH v8 00/12] Introduce CAP_PERFMON to secure system
+ performance monitoring and observability
+To:     Alexey Budankov <alexey.budankov@linux.intel.com>
+Cc:     Peter Zijlstra <peterz@infradead.org>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        James Morris <jmorris@namei.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Serge Hallyn <serge@hallyn.com>, Jiri Olsa <jolsa@redhat.com>,
+        Song Liu <songliubraving@fb.com>,
+        Andi Kleen <ak@linux.intel.com>,
+        Stephane Eranian <eranian@google.com>,
+        Igor Lubashev <ilubashe@akamai.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        linux-kernel <linux-kernel@vger.kernel.org>,
+        "linux-security-module@vger.kernel.org" 
+        <linux-security-module@vger.kernel.org>,
+        "selinux@vger.kernel.org" <selinux@vger.kernel.org>,
+        "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        linux-man@vger.kernel.org,
+        Ravi Bangoria <ravi.bangoria@linux.ibm.com>
+References: <f96f8f8a-e65c-3f36-dc85-fc3f5191e8c5@linux.intel.com>
+Message-ID: <76718dc6-5483-5e2e-85b8-64e70306ee1f@linux.ibm.com>
+Date:   Fri, 10 Jul 2020 19:01:21 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.9.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200622083019.15479-3-peter.enderborg@sony.com>
+In-Reply-To: <f96f8f8a-e65c-3f36-dc85-fc3f5191e8c5@linux.intel.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
+ definitions=2020-07-10_07:2020-07-10,2020-07-10 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0
+ lowpriorityscore=0 clxscore=1011 priorityscore=1501 mlxlogscore=999
+ malwarescore=0 adultscore=0 bulkscore=0 suspectscore=0 mlxscore=0
+ impostorscore=0 phishscore=0 classifier=spam adjust=0 reason=mlx
+ scancount=1 engine=8.12.0-2006250000 definitions=main-2007100093
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jun 22, 2020 at 10:30:19AM +0200, Peter Enderborg wrote:
-> Since debugfs include sensitive information it need to be treated
-> carefully. But it also has many very useful debug functions for userspace.
-> With this option we can have same configuration for system with
-> need of debugfs and a way to turn it off. This gives a extra protection
-> for exposure on systems where user-space services with system
-> access are attacked.
+Hi Alexey,
+
+> Currently access to perf_events, i915_perf and other performance
+> monitoring and observability subsystems of the kernel is open only for
+> a privileged process [1] with CAP_SYS_ADMIN capability enabled in the
+> process effective set [2].
 > 
-> It is controlled by a configurable default value that can be override
-> with a kernel command line parameter. (debugfs=)
-> 
-> It can be on or off, but also internally on but not seen from user-space.
-> This no-fs mode do not register a debugfs as filesystem, but client can
-> register their parts in the internal structures. This data can be readed
-> with a debugger or saved with a crashkernel. When it is off clients
-> get EPERM error when accessing the functions for registering their
-> components.
-> 
-> Signed-off-by: Peter Enderborg <peter.enderborg@sony.com>
-> ---
->  .../admin-guide/kernel-parameters.txt         | 12 ++++++
->  fs/debugfs/inode.c                            | 37 +++++++++++++++++++
->  fs/debugfs/internal.h                         | 14 +++++++
->  lib/Kconfig.debug                             | 32 ++++++++++++++++
->  4 files changed, 95 insertions(+)
-> 
-> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> index fb95fad81c79..236aacaceaf5 100644
-> --- a/Documentation/admin-guide/kernel-parameters.txt
-> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> @@ -827,6 +827,18 @@
->  			useful to also enable the page_owner functionality.
->  			on: enable the feature
->  
-> +	debugfs=    	[KNL] This parameter enables what is exposed to userspace
-> +			and debugfs internal clients.
-> +			Format: { on, no-fs, off }
-> +			on: 	All functions are enabled.
-> +			no-fs: 	Filesystem is not registered but kernel clients can
-> +			        access APIs and a crashkernel can be used to read
-> +				its content. There is nothing to mount.
-> +			off: 	Filesystem is not registered and clients
-> +			        get a -EPERM as result when trying to register files
-> +				or directories within debugfs.
+> This patch set introduces CAP_PERFMON capability designed to secure
+> system performance monitoring and observability operations so that
+> CAP_PERFMON would assist CAP_SYS_ADMIN capability in its governing role
+> for performance monitoring and observability subsystems of the kernel.
 
-Can you add "This is equilivant of the runtime functionality if debugfs
-was not enabled in the kernel at all." to the "off" option?
+I'm seeing an issue with CAP_PERFMON when I try to record data for a
+specific target. I don't know whether this is sort of a regression or
+an expected behavior.
 
+Without setting CAP_PERFMON:
 
+   $ getcap ./perf
+   $ ./perf stat -a ls
+     Error:
+     Access to performance monitoring and observability operations is limited.
+   $ ./perf stat ls
+     Performance counter stats for 'ls':
+    
+                  2.06 msec task-clock:u              #    0.418 CPUs utilized
+                     0      context-switches:u        #    0.000 K/sec
+                     0      cpu-migrations:u          #    0.000 K/sec
 
-> +			Default value is set in build-time with a kernel configuration.
-> +
->  	debugpat	[X86] Enable PAT debugging
->  
->  	decnet.addr=	[HW,NET]
-> diff --git a/fs/debugfs/inode.c b/fs/debugfs/inode.c
-> index b7f2e971ecbc..a4a1c92ae478 100644
-> --- a/fs/debugfs/inode.c
-> +++ b/fs/debugfs/inode.c
-> @@ -35,6 +35,7 @@
->  static struct vfsmount *debugfs_mount;
->  static int debugfs_mount_count;
->  static bool debugfs_registered;
-> +static unsigned int debugfs_allow = DEFAULT_DEBUGFS_ACCESS_BITS;
->  
->  /*
->   * Don't allow access attributes to be changed whilst the kernel is locked down
-> @@ -266,6 +267,9 @@ static struct dentry *debug_mount(struct file_system_type *fs_type,
->  			int flags, const char *dev_name,
->  			void *data)
->  {
-> +	if (!(debugfs_allow & DEBUGFS_ALLOW_API_BIT))
-> +		return ERR_CAST(ERR_PTR(-EPERM));
+With CAP_PERFMON:
 
-Shouldn't ERR_PTR() be all that is needed here?  I don't see any
-ERR_CAST() usages in this format in the kernel today.
+   $ getcap ./perf
+     ./perf = cap_perfmon+ep
+   $ ./perf stat -a ls
+     Performance counter stats for 'system wide':
+    
+                142.42 msec cpu-clock                 #   25.062 CPUs utilized
+                   182      context-switches          #    0.001 M/sec
+                    48      cpu-migrations            #    0.337 K/sec
+   $ ./perf stat ls
+     Error:
+     Access to performance monitoring and observability operations is limited.
 
-> +
->  	return mount_single(fs_type, flags, data, debug_fill_super);
->  }
->  
-> @@ -311,6 +315,9 @@ static struct dentry *start_creating(const char *name, struct dentry *parent)
->  	struct dentry *dentry;
->  	int error;
->  
-> +	if (!(debugfs_allow & DEBUGFS_ALLOW_API_BIT))
-> +		return ERR_PTR(-EPERM);
+Am I missing something silly?
 
-See, you don't use it here :)
+Analysis:
+---------
+A bit more analysis lead me to below kernel code fs/exec.c:
 
+   begin_new_exec()
+   {
+         ...
+         if (bprm->interp_flags & BINPRM_FLAGS_ENFORCE_NONDUMP ||
+             !(uid_eq(current_euid(), current_uid()) &&
+               gid_eq(current_egid(), current_gid())))
+                 set_dumpable(current->mm, suid_dumpable);
+         else
+                 set_dumpable(current->mm, SUID_DUMP_USER);
 
+         ...
+         commit_creds(bprm->cred);
+   }
 
-> +
->  	pr_debug("creating file '%s'\n", name);
->  
->  	if (IS_ERR(parent))
-> @@ -385,6 +392,11 @@ static struct dentry *__debugfs_create_file(const char *name, umode_t mode,
->  	if (IS_ERR(dentry))
->  		return dentry;
->  
-> +	if (!(debugfs_allow & DEBUGFS_ALLOW_API_BIT)) {
-> +		failed_creating(dentry);
-> +		return ERR_PTR(-EPERM);
-> +	}
-> +
->  	inode = debugfs_get_inode(dentry->d_sb);
->  	if (unlikely(!inode)) {
->  		pr_err("out of free dentries, can not create file '%s'\n",
-> @@ -541,6 +553,11 @@ struct dentry *debugfs_create_dir(const char *name, struct dentry *parent)
->  	if (IS_ERR(dentry))
->  		return dentry;
->  
-> +	if (!(debugfs_allow & DEBUGFS_ALLOW_API_BIT)) {
-> +		failed_creating(dentry);
-> +		return ERR_PTR(-EPERM);
-> +	}
-> +
->  	inode = debugfs_get_inode(dentry->d_sb);
->  	if (unlikely(!inode)) {
->  		pr_err("out of free dentries, can not create directory '%s'\n",
-> @@ -583,6 +600,11 @@ struct dentry *debugfs_create_automount(const char *name,
->  	if (IS_ERR(dentry))
->  		return dentry;
->  
-> +	if (!(debugfs_allow & DEBUGFS_ALLOW_API_BIT)) {
-> +		failed_creating(dentry);
-> +		return ERR_PTR(-EPERM);
-> +	}
-> +
->  	inode = debugfs_get_inode(dentry->d_sb);
->  	if (unlikely(!inode)) {
->  		pr_err("out of free dentries, can not create automount '%s'\n",
-> @@ -786,10 +808,25 @@ bool debugfs_initialized(void)
->  }
->  EXPORT_SYMBOL_GPL(debugfs_initialized);
->  
-> +static int __init debugfs_kernel(char *str)
-> +{
-> +	if (str && !strcmp(str, "on"))
-> +		debugfs_allow = DEBUGFS_ALLOW_API_BIT | DEBUGFS_ALLOW_FS_BIT;
-> +	if (str && !strcmp(str, "no-fs"))
-> +		debugfs_allow = DEBUGFS_ALLOW_API_BIT;
-> +	if (str && !strcmp(str, "off"))
-> +		debugfs_allow = 0;
-> +
-> +	return 0;
-> +}
-> +early_param("debugfs", debugfs_kernel);
->  static int __init debugfs_init(void)
->  {
->  	int retval;
->  
-> +	if (!(debugfs_allow & DEBUGFS_ALLOW_FS_BIT))
-> +		return -EPERM;
-> +
->  	retval = sysfs_create_mount_point(kernel_kobj, "debug");
->  	if (retval)
->  		return retval;
-> diff --git a/fs/debugfs/internal.h b/fs/debugfs/internal.h
-> index 034e6973cead..dba138f8d418 100644
-> --- a/fs/debugfs/internal.h
-> +++ b/fs/debugfs/internal.h
-> @@ -29,4 +29,18 @@ struct debugfs_fsdata {
->   */
->  #define DEBUGFS_FSDATA_IS_REAL_FOPS_BIT BIT(0)
->  
-> +/* Access BITS */
-> +#define DEBUGFS_ALLOW_API_BIT BIT(0)
-> +#define DEBUGFS_ALLOW_FS_BIT BIT(1)
+When I execute './perf stat ls', it's going into else condition and thus sets
+dumpable flag as SUID_DUMP_USER. Then in commit_creds():
 
-tabs please.
+   int commit_creds(struct cred *new)
+   {
+         ...
+         /* dumpability changes */
+         if (...
+             !cred_cap_issubset(old, new)) {
+                 if (task->mm)
+                         set_dumpable(task->mm, suid_dumpable);
+   }
 
-And no need for _BIT in the string, right?
+!cred_cap_issubset(old, new) fails for perf without any capability and thus
+it doesn't execute set_dumpable(). Whereas that condition passes for perf
+with CAP_PERFMON and thus it overwrites old value (SUID_DUMP_USER) with
+suid_dumpable in mm_flags. On an Ubuntu, suid_dumpable default value is
+SUID_DUMP_ROOT. On Fedora, it's SUID_DUMP_DISABLE. (/proc/sys/fs/suid_dumpable).
 
-> +
-> +#ifdef CONFIG_DEBUG_FS_ACCESS_ALL
-> +#define DEFAULT_DEBUGFS_ACCESS_BITS (DEBUGFS_ALLOW_FS_BIT|DEBUGFS_ALLOW_API_BIT)
+Now while opening an event:
 
-' ' is your friend :)
+   perf_event_open()
+     ptrace_may_access()
+       __ptrace_may_access() {
+                 ...
+                 if (mm &&
+                     ((get_dumpable(mm) != SUID_DUMP_USER) &&
+                      !ptrace_has_cap(cred, mm->user_ns, mode)))
+                     return -EPERM;
+       }
 
-> +#endif
-> +#ifdef CONFIG_DEBUG_FS_ACCESS_NO_FS
-> +#define DEFAULT_DEBUGFS_ACCESS_BITS (DEBUGFS_ALLOW_API_BIT)
-> +#endif
-> +#ifdef CONFIG_DEBUG_FS_ACCESS_NONE
-> +#define DEFAULT_DEBUGFS_ACCESS_BITS (0)
-> +#endif
-> +
->  #endif /* _DEBUGFS_INTERNAL_H_ */
-> diff --git a/lib/Kconfig.debug b/lib/Kconfig.debug
-> index d74ac0fd6b2d..4c699ffad1fb 100644
-> --- a/lib/Kconfig.debug
-> +++ b/lib/Kconfig.debug
-> @@ -477,6 +477,38 @@ config DEBUG_FS
->  
->  	  If unsure, say N.
->  
-> +choice
-> +	prompt "Debugfs default access"
-> +	depends on DEBUG_FS
-> +	default DEBUG_FS_ACCESS_ALL
-> +	help
-> +	  This select the default access restricions for debugfs.
-> +	  It can be overridden with kernel command line option
-> +	  debugfs=[on,no-fs,off] The restrictions apply for API access
-> +	  and filesystem registration. .
-> +
-> +config DEBUG_FS_ACCESS_ALL
-> +       bool "Access all"
+This if condition passes for perf with CAP_PERFMON and thus it returns -EPERM.
+But it fails for perf without CAP_PERFMON and thus it goes ahead and returns
+success. So opening an event fails when perf has CAP_PREFMON and tries to open
+process specific event as normal user.
 
-"Normal access" as this is what we have today, "Access all" doesn't
-really explain what this is.
+Workarounds:
+------------
+Based on above analysis, I found couple of workarounds (examples are on
+Ubuntu 18.04.4 powerpc):
 
-> +       help
-> +	  No restrictions applies. Both API and filesystem registration
-> +	  is on.
+Workaround1:
+Setting SUID_DUMP_USER as default (in /proc/sys/fs/suid_dumpable) solves the
+issue.
 
-Add:
-	"This is the normal default operation"
+   # echo 1 > /proc/sys/fs/suid_dumpable
+   $ getcap ./perf
+     ./perf = cap_perfmon+ep
+   $ ./perf stat ls
+     Performance counter stats for 'ls':
+    
+                  1.47 msec task-clock                #    0.806 CPUs utilized
+                     0      context-switches          #    0.000 K/sec
+                     0      cpu-migrations            #    0.000 K/sec
 
-Or something like that?
+Workaround2:
+Using CAP_SYS_PTRACE along with CAP_PERFMON solves the issue.
 
-And you mix tabs and spaces a bunch in this patch for this file, did
-checkpatch not complain?
+   $ cat /proc/sys/fs/suid_dumpable
+     2
+   # setcap "cap_perfmon,cap_sys_ptrace=ep" ./perf
+   $ ./perf stat ls
+     Performance counter stats for 'ls':
+    
+                  1.41 msec task-clock                #    0.826 CPUs utilized
+                     0      context-switches          #    0.000 K/sec
+                     0      cpu-migrations            #    0.000 K/sec
 
-thanks,
+Workaround3:
+Adding CAP_PERFMON to parent of perf (/bin/bash) also solves the issue.
 
-greg k-h
+   $ cat /proc/sys/fs/suid_dumpable
+     2
+   # setcap "cap_perfmon=ep" /bin/bash
+   # setcap "cap_perfmon=ep" ./perf
+   $ bash
+   $ ./perf stat ls
+     Performance counter stats for 'ls':
+    
+                  1.47 msec task-clock                #    0.806 CPUs utilized
+                     0      context-switches          #    0.000 K/sec
+                     0      cpu-migrations            #    0.000 K/sec
+
+- Ravi
