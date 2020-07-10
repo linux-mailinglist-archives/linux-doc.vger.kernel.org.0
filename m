@@ -2,98 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 20C0421B674
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2020 15:32:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C6CF221B6DA
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2020 15:45:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726820AbgGJNca (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 10 Jul 2020 09:32:30 -0400
-Received: from mail.kernel.org ([198.145.29.99]:33866 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726774AbgGJNc3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 10 Jul 2020 09:32:29 -0400
-Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 9325B20578;
-        Fri, 10 Jul 2020 13:32:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1594387949;
-        bh=9y+my926ME1p94KfUdkLzGLiRlZaCyk67/e5gDCocg0=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=2JCZMgQKj3K58eTw9BWMeyi9bR80QX55penvLqOxmb6Vnd+XcRh737//Ky7+05ry7
-         wEjB0DJSQ21bEKeJx7zA81Iv9gNaBjj0Oq44+HxmTb8gJCuuMBq+0j/e/4BzERmSQz
-         syuICEbiwK44UrcaRyzhFFST9GxHkiTiaogFy60k=
-Date:   Fri, 10 Jul 2020 15:32:33 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Bartosz Golaszewski <brgl@bgdev.pl>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jean Delvare <jdelvare@suse.com>,
-        linux-doc <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-hwmon@vger.kernel.org,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: Re: [PATCH v2 5/6] devres: provide devm_krealloc()
-Message-ID: <20200710133233.GB2085030@kroah.com>
-References: <20200629065008.27620-1-brgl@bgdev.pl>
- <20200629065008.27620-6-brgl@bgdev.pl>
- <20200702124258.GA1882489@kroah.com>
- <CAMRc=Mc6dWCtnFT_SMGLUsggf68i3y7Njr61NyDQ7KeQ-rSErg@mail.gmail.com>
- <CAMRc=McxekKgEFe2y3R1SiA0ZhLZXsUrzMXWgwXVtHtymG75ow@mail.gmail.com>
+        id S1727966AbgGJNpM convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 10 Jul 2020 09:45:12 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:20362 "EHLO
+        mx0b-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1728260AbgGJNpF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 10 Jul 2020 09:45:05 -0400
+Received: from pps.filterd (m0098417.ppops.net [127.0.0.1])
+        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 06AD2jma124518;
+        Fri, 10 Jul 2020 09:44:57 -0400
+Received: from ppma05fra.de.ibm.com (6c.4a.5195.ip4.static.sl-reverse.com [149.81.74.108])
+        by mx0a-001b2d01.pphosted.com with ESMTP id 326bpsd2yq-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 10 Jul 2020 09:44:57 -0400
+Received: from pps.filterd (ppma05fra.de.ibm.com [127.0.0.1])
+        by ppma05fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 06ADYktp029804;
+        Fri, 10 Jul 2020 13:44:55 GMT
+Received: from b06avi18878370.portsmouth.uk.ibm.com (b06avi18878370.portsmouth.uk.ibm.com [9.149.26.194])
+        by ppma05fra.de.ibm.com with ESMTP id 326bc90auh-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 10 Jul 2020 13:44:55 +0000
+Received: from b06wcsmtp001.portsmouth.uk.ibm.com (b06wcsmtp001.portsmouth.uk.ibm.com [9.149.105.160])
+        by b06avi18878370.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 06ADiroA63308182
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 10 Jul 2020 13:44:53 GMT
+Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 17B18A405C;
+        Fri, 10 Jul 2020 13:44:53 +0000 (GMT)
+Received: from b06wcsmtp001.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id A2F2BA4054;
+        Fri, 10 Jul 2020 13:44:52 +0000 (GMT)
+Received: from localhost (unknown [9.102.22.220])
+        by b06wcsmtp001.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+        Fri, 10 Jul 2020 13:44:52 +0000 (GMT)
+Date:   Fri, 10 Jul 2020 19:14:47 +0530
+From:   "Naveen N. Rao" <naveen.n.rao@linux.ibm.com>
+Subject: Re: [PATCH] Replace HTTP links with HTTPS ones: kprobes
+To:     "Alexander A. Klimov" <grandmaster@al2klimov.de>,
+        Masami Hiramatsu <mhiramat@kernel.org>
+Cc:     anil.s.keshavamurthy@intel.com, corbet@lwn.net,
+        davem@davemloft.net, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Ananth N Mavinakayanahalli <ananth@linux.ibm.com>
+References: <20200707194959.52487-1-grandmaster@al2klimov.de>
+        <20200708184201.611d929ae6017c87ea98b114@kernel.org>
+In-Reply-To: <20200708184201.611d929ae6017c87ea98b114@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAMRc=McxekKgEFe2y3R1SiA0ZhLZXsUrzMXWgwXVtHtymG75ow@mail.gmail.com>
+User-Agent: astroid/v0.15-13-gb675b421
+ (https://github.com/astroidmail/astroid)
+Message-Id: <1594388442.4mjtjyic5z.naveen@linux.ibm.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8BIT
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
+ definitions=2020-07-10_07:2020-07-10,2020-07-10 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 clxscore=1011 spamscore=0
+ mlxlogscore=999 impostorscore=0 priorityscore=1501 lowpriorityscore=0
+ bulkscore=0 malwarescore=0 mlxscore=0 phishscore=0 adultscore=0
+ suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2006250000 definitions=main-2007100093
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jul 06, 2020 at 06:38:10PM +0200, Bartosz Golaszewski wrote:
-> On Thu, Jul 2, 2020 at 3:11 PM Bartosz Golaszewski <brgl@bgdev.pl> wrote:
-> >
-> > On Thu, Jul 2, 2020 at 2:42 PM Greg Kroah-Hartman
-> > <gregkh@linuxfoundation.org> wrote:
-> > >
-> > > On Mon, Jun 29, 2020 at 08:50:07AM +0200, Bartosz Golaszewski wrote:
-> > > > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> > > >
-> > > > Implement the managed variant of krealloc(). This function works with
-> > > > all memory allocated by devm_kmalloc() (or devres functions using it
-> > > > implicitly like devm_kmemdup(), devm_kstrdup() etc.).
-> > > >
-> > > > Managed realloc'ed chunks can be manually released with devm_kfree().
-> > > >
-> > > > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> >
-> > [snip!]
-> >
-> > >
-> > > That's a lot of logic that does not seem to match up with the krealloc()
-> > > logic in mm/slab_common.c, are you sure we need to do all of that?
-> > >
-> >
-> > What are you referring to exactly? The check for rodata? It's because
-> > devm_kfree() handles this case, while regular kfree() (or krealloc())
-> > doesn't - there's kfree_const() but no devm_kfree_const().
-> >
-> > > Who wants this?
-> >
-> > The hwmon commit I mentioned in my response to patch 6/6 explicitly
-> > mentions the lack of this helper.
-> >
-> > Bartosz
+Masami Hiramatsu wrote:
+> On Tue,  7 Jul 2020 21:49:59 +0200
+> "Alexander A. Klimov" <grandmaster@al2klimov.de> wrote:
 > 
-> Hi Greg,
+>> Rationale:
+>> Reduces attack surface on kernel devs opening the links for MITM
+>> as HTTPS traffic is much harder to manipulate.
+>> 
+>> Deterministic algorithm:
+>> For each file:
+>>   If not .svg:
+>>     For each line:
+>>       If doesn't contain `\bxmlns\b`:
+>>         For each link, `\bhttp://[^# \t\r\n]*(?:\w|/)`:
+>>           If both the HTTP and HTTPS versions
+>>           return 200 OK and serve the same content:
+>>             Replace HTTP with HTTPS.
 > 
-> As we've established in the discussion under the iio patch that there
-> will in fact be more users of this - can this now be merged too?
+> OK, but it seems that some of them are disappeared :(
+> 
+>  http://www-106.ibm.com/developerworks/library/l-kprobes.html?ca=dgr-lnxw42Kprobe
+> 
+>  -> https://www.ibm.com/developerworks/library/l-kprobes/index.html
 
-Can you resend the remaining patches, along with the users, and I'll
-review it?  I just worry about having to duplicate all of that mm code
-in there that it will grow stale over time...
+That looks right.
 
-thanks,
+> 
+>  http://www.redhat.com/magazine/005mar05/features/kprobes/
+> 
+>  -> I can not find that.
 
-greg k-h
+Ditto, we should drop that.
+
+> 
+>>  - http://www-users.cs.umn.edu/~boutcher/kprobes/
+>>  - http://www.linuxsymposium.org/2006/linuxsymposium_procv2.pdf (pages 101-115)
+> 
+> Both are not found.
+
+It looks like the first link is gone, but there seems to be a copy in 
+the web archive:
+https://web.archive.org/web/20061106154519/http://www-users.cs.umn.edu/~boutcher/kprobes/
+
+I suppose we can drop that link.
+
+> 
+> (OT, it seems http://www.linuxsymposium.org/ has been left from historical
+>  Linux Symposium, we must remove it asap)
+
+Indeed, I think that link pointed to the Kprobes paper:
+https://www.kernel.org/doc/ols/2006/ols2006v2-pages-109-124.pdf
+
+
+- Naveen
+
