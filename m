@@ -2,84 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5F40E21AF4C
-	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2020 08:20:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1BBA721AFBA
+	for <lists+linux-doc@lfdr.de>; Fri, 10 Jul 2020 08:49:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726004AbgGJGU3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 10 Jul 2020 02:20:29 -0400
-Received: from smtp.al2klimov.de ([78.46.175.9]:41122 "EHLO smtp.al2klimov.de"
+        id S1726004AbgGJGtx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 10 Jul 2020 02:49:53 -0400
+Received: from mail.kernel.org ([198.145.29.99]:48026 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725851AbgGJGU3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 10 Jul 2020 02:20:29 -0400
-Received: from authenticated-user (PRIMARY_HOSTNAME [PUBLIC_IP])
-        by smtp.al2klimov.de (Postfix) with ESMTPA id 78888BC0D1;
-        Fri, 10 Jul 2020 06:20:25 +0000 (UTC)
-From:   "Alexander A. Klimov" <grandmaster@al2klimov.de>
-To:     jonas@southpole.se, stefan.kristiansson@saunalahti.fi,
-        shorne@gmail.com, corbet@lwn.net, openrisc@lists.librecores.org,
+        id S1725851AbgGJGtx (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 10 Jul 2020 02:49:53 -0400
+Received: from localhost (83-86-89-107.cable.dynamic.v4.ziggo.nl [83.86.89.107])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id AF2872076A;
+        Fri, 10 Jul 2020 06:49:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1594363793;
+        bh=bRWuQNkHECWTyQMZsQP4+1acSBX7AB0jqxNKFd5+IKM=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=fAmQ2WbkDIRI1296wzyNiDZT5X9/7PzqcS9UDvAAtieatcfiyuXzMB5l5QR0O7/fc
+         4iXBw7koBCCIyIbp4MZomBPe16GboVTNO7NLg4C6vg1UEka0GbL8N5C7de20KUnfAW
+         eZ++N5UqN3m33PTqGVksc6gQ7tVuZPYvCVBDdnMg=
+Date:   Fri, 10 Jul 2020 08:49:58 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Kees Cook <keescook@chromium.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, security@kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
-Subject: [PATCH] OPENRISC ARCHITECTURE: Replace HTTP links with HTTPS ones
-Date:   Fri, 10 Jul 2020 08:20:19 +0200
-Message-Id: <20200710062019.28755-1-grandmaster@al2klimov.de>
+Subject: Re: [PATCH] Documentation/security-bugs: Explain why plain text is
+ preferred
+Message-ID: <20200710064958.GA1116538@kroah.com>
+References: <202007091110.205DC6A9@keescook>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Bar: +++++
-X-Spam-Level: *****
-Authentication-Results: smtp.al2klimov.de;
-        auth=pass smtp.auth=aklimov@al2klimov.de smtp.mailfrom=grandmaster@al2klimov.de
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <202007091110.205DC6A9@keescook>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Rationale:
-Reduces attack surface on kernel devs opening the links for MITM
-as HTTPS traffic is much harder to manipulate.
+On Thu, Jul 09, 2020 at 11:11:30AM -0700, Kees Cook wrote:
+> The security contact list gets regular reports contained in archive
+> attachments. This tends to add some back-and-forth delay in dealing with
+> security reports since we have to ask for plain text, etc.
+> 
+> Signed-off-by: Kees Cook <keescook@chromium.org>
 
-Deterministic algorithm:
-For each file:
-  If not .svg:
-    For each line:
-      If doesn't contain `\bxmlns\b`:
-        For each link, `\bhttp://[^# \t\r\n]*(?:\w|/)`:
-	  If neither `\bgnu\.org/license`, nor `\bmozilla\.org/MPL\b`:
-            If both the HTTP and HTTPS versions
-            return 200 OK and serve the same content:
-              Replace HTTP with HTTPS.
+Thanks for this, that will hopefully keep us from having to say the same
+thing over and over :)
 
-Signed-off-by: Alexander A. Klimov <grandmaster@al2klimov.de>
----
- Continuing my work started at 93431e0607e5.
- See also: git log --oneline '--author=Alexander A. Klimov <grandmaster@al2klimov.de>' v5.7..master
- (Actually letting a shell for loop submit all this stuff for me.)
-
- If there are any URLs to be removed completely or at least not HTTPSified:
- Just clearly say so and I'll *undo my change*.
- See also: https://lkml.org/lkml/2020/6/27/64
-
- If there are any valid, but yet not changed URLs:
- See: https://lkml.org/lkml/2020/6/26/837
-
- If you apply the patch, please let me know.
-
-
- Documentation/openrisc/openrisc_port.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/Documentation/openrisc/openrisc_port.rst b/Documentation/openrisc/openrisc_port.rst
-index 4b2c437942a0..657ac4af7be6 100644
---- a/Documentation/openrisc/openrisc_port.rst
-+++ b/Documentation/openrisc/openrisc_port.rst
-@@ -8,7 +8,7 @@ target architecture, specifically, is the 32-bit OpenRISC 1000 family (or1k).
- For information about OpenRISC processors and ongoing development:
- 
- 	=======		=============================
--	website		http://openrisc.io
-+	website		https://openrisc.io
- 	email		openrisc@lists.librecores.org
- 	=======		=============================
- 
--- 
-2.27.0
-
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
