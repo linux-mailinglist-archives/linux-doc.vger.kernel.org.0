@@ -2,30 +2,30 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3BC3221DA11
-	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2020 17:31:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 84E0C21DA1D
+	for <lists+linux-doc@lfdr.de>; Mon, 13 Jul 2020 17:32:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729492AbgGMPbE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 13 Jul 2020 11:31:04 -0400
-Received: from ms.lwn.net ([45.79.88.28]:35506 "EHLO ms.lwn.net"
+        id S1730084AbgGMPc5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 13 Jul 2020 11:32:57 -0400
+Received: from ms.lwn.net ([45.79.88.28]:35520 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729027AbgGMPbE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 13 Jul 2020 11:31:04 -0400
+        id S1729846AbgGMPc5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 13 Jul 2020 11:32:57 -0400
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id ACFB32E2;
-        Mon, 13 Jul 2020 15:31:03 +0000 (UTC)
-Date:   Mon, 13 Jul 2020 09:31:02 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id 9B2A62E2;
+        Mon, 13 Jul 2020 15:32:56 +0000 (UTC)
+Date:   Mon, 13 Jul 2020 09:32:55 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
 To:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
-Cc:     gregkh@linuxfoundation.org, rafael@kernel.org,
+Cc:     bbrezillon@kernel.org, linux-i3c@lists.infradead.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] kobject: documentation: Replace HTTP links with HTTPS
+Subject: Re: [PATCH] docs: driver-api: i3c: Replace HTTP links with HTTPS
  ones
-Message-ID: <20200713093102.0fe0557e@lwn.net>
-In-Reply-To: <20200713144103.35049-1-grandmaster@al2klimov.de>
-References: <20200713144103.35049-1-grandmaster@al2klimov.de>
+Message-ID: <20200713093255.0a181730@lwn.net>
+In-Reply-To: <20200713112657.33694-1-grandmaster@al2klimov.de>
+References: <20200713112657.33694-1-grandmaster@al2klimov.de>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -35,19 +35,22 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 13 Jul 2020 16:41:03 +0200
+On Mon, 13 Jul 2020 13:26:57 +0200
 "Alexander A. Klimov" <grandmaster@al2klimov.de> wrote:
 
-> diff --git a/Documentation/core-api/kobject.rst b/Documentation/core-api/kobject.rst
-> index e93dc8cf52dd..2739f8b72575 100644
-> --- a/Documentation/core-api/kobject.rst
-> +++ b/Documentation/core-api/kobject.rst
-> @@ -6,7 +6,7 @@ Everything you never wanted to know about kobjects, ksets, and ktypes
->  :Last updated: December 19, 2007
->  
->  Based on an original article by Jon Corbet for lwn.net written October 1,
-> -2003 and located at http://lwn.net/Articles/51437/
-> +2003 and located at https://lwn.net/Articles/51437/
+>  Documentation/driver-api/i3c/protocol.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/driver-api/i3c/protocol.rst b/Documentation/driver-api/i3c/protocol.rst
+> index dae3b6d32c6b..02653defa011 100644
+> --- a/Documentation/driver-api/i3c/protocol.rst
+> +++ b/Documentation/driver-api/i3c/protocol.rst
+> @@ -14,7 +14,7 @@ collisions are prevented, ...) please have a look at the I3C specification.
+>  This document is just a brief introduction to the I3C protocol and the concepts
+>  it brings to the table. If you need more information, please refer to the MIPI
+>  I3C specification (can be downloaded here
+> -http://resources.mipi.org/mipi-i3c-v1-download).
+> +https://resources.mipi.org/mipi-i3c-v1-download).
 
 Applied, thanks.
 
