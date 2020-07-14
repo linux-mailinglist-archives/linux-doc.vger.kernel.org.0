@@ -2,100 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2AA0B21E930
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2020 09:04:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6D43521E9F5
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2020 09:22:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727052AbgGNHEe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Jul 2020 03:04:34 -0400
-Received: from mga04.intel.com ([192.55.52.120]:50389 "EHLO mga04.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727034AbgGNHEb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 14 Jul 2020 03:04:31 -0400
-IronPort-SDR: ich8xV8hFnmzCz3xenXCt5Gwp+Pu22XqcldrFpG6x50tDs0YTP3pCyVSc5MvlINldsLKGEd0I+
- MNn2n1F8J6TA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9681"; a="146304368"
-X-IronPort-AV: E=Sophos;i="5.75,350,1589266800"; 
-   d="scan'208";a="146304368"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2020 00:04:30 -0700
-IronPort-SDR: OlctpnIJwdlGQxS+Bsa4EvBdFZhgaMgi6E93HtogmUqsYd+MIKqgpv8ZX2Fg+6KeQMAbeYu29A
- wm1rPhIk0yOg==
-X-IronPort-AV: E=Sophos;i="5.75,350,1589266800"; 
-   d="scan'208";a="459583558"
-Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Jul 2020 00:04:29 -0700
-From:   ira.weiny@intel.com
-To:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>
-Cc:     Ira Weiny <ira.weiny@intel.com>, x86@kernel.org,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Vishal Verma <vishal.l.verma@intel.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Fenghua Yu <fenghua.yu@intel.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-nvdimm@lists.01.org,
-        linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
-        linux-kselftest@vger.kernel.org
-Subject: [RFC PATCH 15/15] [dax|pmem]: Enable stray write protection
-Date:   Tue, 14 Jul 2020 00:02:20 -0700
-Message-Id: <20200714070220.3500839-16-ira.weiny@intel.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200714070220.3500839-1-ira.weiny@intel.com>
-References: <20200714070220.3500839-1-ira.weiny@intel.com>
+        id S1725884AbgGNHWv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 Jul 2020 03:22:51 -0400
+Received: from mail-ot1-f66.google.com ([209.85.210.66]:45232 "EHLO
+        mail-ot1-f66.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726050AbgGNHWv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Jul 2020 03:22:51 -0400
+Received: by mail-ot1-f66.google.com with SMTP id h1so12255340otq.12;
+        Tue, 14 Jul 2020 00:22:50 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=zQc3b3cEG4qoV3UIOktn0Ijwe/EIk3WLKFZosqYyBVs=;
+        b=PsmL6a9oltMwdBJvv7Gv+u2qO9gVFjcGaGIXPgWk9S0BEgiXmg4/MzyGV9DG5a+hmy
+         rkAwwv0Gxz5S6Va1Vp0IbBhJosKfGbrWGp6zBMKP0scPMVe2dxi5WET7QFoIwTIw6hCX
+         hhZ31JeNdMqOsn0jFJ2cZpTavrnOzgOw5i6G8tAK1XMJt5V+etAgdlXQKlFicCI/J/3X
+         iAfcCaUvovjWfhlGMxC4bVyr5LAq0BYofBIwo7FFfXBwtvkjYRAYnAi8Q2dMikRcY0Bq
+         tI74zliDqqxqdqp0xc4/D76iU8uQwwBbs7Y8mGgxnM1WvUMP9tNonPoSbIh5cAk3oSgQ
+         /6HA==
+X-Gm-Message-State: AOAM5319VQea9YC73jhQnB+rjH63HdnPlWrR8hOxpiO6qpsUuaUgZaTT
+        nv1//mnKwO+umToMbyTCOEl/adlYNTG7Bt3PAI4=
+X-Google-Smtp-Source: ABdhPJz1sAOdS6D9PESw3CKqn8GGA2iUl9nNfnBianI8jxVmwEadGYyk0M5nb2M82d5LxVc36lQQSerNhEHLzoOzfSM=
+X-Received: by 2002:a9d:1b0d:: with SMTP id l13mr2887577otl.145.1594711370357;
+ Tue, 14 Jul 2020 00:22:50 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200710062019.28755-1-grandmaster@al2klimov.de> <20200713113430.1c1777bb@lwn.net>
+In-Reply-To: <20200713113430.1c1777bb@lwn.net>
+From:   Geert Uytterhoeven <geert@linux-m68k.org>
+Date:   Tue, 14 Jul 2020 09:22:39 +0200
+Message-ID: <CAMuHMdXoUME_dCOZP1N0tXyMv61edfNECM4-n4NPa56YbBCncw@mail.gmail.com>
+Subject: Re: [PATCH] OPENRISC ARCHITECTURE: Replace HTTP links with HTTPS ones
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     "Alexander A. Klimov" <grandmaster@al2klimov.de>,
+        Jonas Bonn <jonas@southpole.se>,
+        Stefan Kristiansson <stefan.kristiansson@saunalahti.fi>,
+        Stafford Horne <shorne@gmail.com>,
+        Openrisc <openrisc@lists.librecores.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Ira Weiny <ira.weiny@intel.com>
+On Mon, Jul 13, 2020 at 7:37 PM Jonathan Corbet <corbet@lwn.net> wrote:
+> On Fri, 10 Jul 2020 08:20:19 +0200
+> "Alexander A. Klimov" <grandmaster@al2klimov.de> wrote:
+> >  Documentation/openrisc/openrisc_port.rst | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/Documentation/openrisc/openrisc_port.rst b/Documentation/openrisc/openrisc_port.rst
+> > index 4b2c437942a0..657ac4af7be6 100644
+> > --- a/Documentation/openrisc/openrisc_port.rst
+> > +++ b/Documentation/openrisc/openrisc_port.rst
+> > @@ -8,7 +8,7 @@ target architecture, specifically, is the 32-bit OpenRISC 1000 family (or1k).
+> >  For information about OpenRISC processors and ongoing development:
+> >
+> >       =======         =============================
+> > -     website         http://openrisc.io
+> > +     website         https://openrisc.io
+> >       email           openrisc@lists.librecores.org
+> >       =======         =============================
+>
+> Applied, thanks.
 
-Protecting against stray writes is particularly important for PMEM
-because, unlike writes to anonymous memory, writes to PMEM persists
-across a reboot.  Thus data corruption could result in permanent loss of
-data.  Therefore, there is no option presented to the user.
+Is that site accessible for anyone? It times out for me.
 
-Enable stray write protection by setting the flag in pgmap which
-requests it.  Note if Zone Device Access Protection not be supported
-this flag will have no affect.
+Gr{oetje,eeting}s,
 
-Signed-off-by: Ira Weiny <ira.weiny@intel.com>
----
- drivers/dax/device.c  | 2 ++
- drivers/nvdimm/pmem.c | 2 ++
- 2 files changed, 4 insertions(+)
+                        Geert
 
-diff --git a/drivers/dax/device.c b/drivers/dax/device.c
-index 4c0af2eb7e19..884f66d73d32 100644
---- a/drivers/dax/device.c
-+++ b/drivers/dax/device.c
-@@ -430,6 +430,8 @@ int dev_dax_probe(struct device *dev)
- 	}
- 
- 	dev_dax->pgmap.type = MEMORY_DEVICE_DEVDAX;
-+	dev_dax->pgmap.flags |= PGMAP_PROT_ENABLED;
-+
- 	addr = devm_memremap_pages(dev, &dev_dax->pgmap);
- 	if (IS_ERR(addr))
- 		return PTR_ERR(addr);
-diff --git a/drivers/nvdimm/pmem.c b/drivers/nvdimm/pmem.c
-index 46c11a09b813..9416a660eede 100644
---- a/drivers/nvdimm/pmem.c
-+++ b/drivers/nvdimm/pmem.c
-@@ -427,6 +427,8 @@ static int pmem_attach_disk(struct device *dev,
- 		return -EBUSY;
- 	}
- 
-+	pmem->pgmap.flags |= PGMAP_PROT_ENABLED;
-+
- 	q = blk_alloc_queue(pmem_make_request, dev_to_node(dev));
- 	if (!q)
- 		return -ENOMEM;
 -- 
-2.25.1
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
