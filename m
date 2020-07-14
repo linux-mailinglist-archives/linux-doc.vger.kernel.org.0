@@ -2,125 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5485A21F623
-	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2020 17:29:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 30F6721F84E
+	for <lists+linux-doc@lfdr.de>; Tue, 14 Jul 2020 19:34:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726763AbgGNP1l (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 14 Jul 2020 11:27:41 -0400
-Received: from mail.kernel.org ([198.145.29.99]:47622 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725884AbgGNP1k (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 14 Jul 2020 11:27:40 -0400
-Received: from quaco.ghostprotocols.net (unknown [179.97.37.151])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id E4F1F221EF;
-        Tue, 14 Jul 2020 15:27:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1594740460;
-        bh=QoYjwUwCr8iv3vS0vUx9ZHDJWPjQ+QNqL1IS1uCDfws=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=IlF+/jEnPt4EseeRoIoPFjobQsVIxxHoMUxeaU6x4iPB5I+zcKXAo29Qsj3LrlSOt
-         F6aKwji3bHjIa+iFYvuEuppwWSC+Pr6wSidVxI+lDpf5/hUfxbTwvOv1iYZzWp3Zte
-         6KaHlCF6JXLRFZMGMOyPUXEr32zu95cx5ogg8TB4=
-Received: by quaco.ghostprotocols.net (Postfix, from userid 1000)
-        id 1478540094; Tue, 14 Jul 2020 12:27:38 -0300 (-03)
-Date:   Tue, 14 Jul 2020 12:27:38 -0300
-From:   Arnaldo Carvalho de Melo <acme@kernel.org>
-To:     Peter Zijlstra <peterz@infradead.org>
-Cc:     Alexey Budankov <alexey.budankov@linux.intel.com>,
-        Ravi Bangoria <ravi.bangoria@linux.ibm.com>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        James Morris <jmorris@namei.org>,
-        Namhyung Kim <namhyung@kernel.org>,
-        Serge Hallyn <serge@hallyn.com>, Jiri Olsa <jolsa@redhat.com>,
-        Song Liu <songliubraving@fb.com>,
-        Andi Kleen <ak@linux.intel.com>,
-        Stephane Eranian <eranian@google.com>,
-        Igor Lubashev <ilubashe@akamai.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        linux-kernel <linux-kernel@vger.kernel.org>,
-        "linux-security-module@vger.kernel.org" 
-        <linux-security-module@vger.kernel.org>,
-        "selinux@vger.kernel.org" <selinux@vger.kernel.org>,
-        "intel-gfx@lists.freedesktop.org" <intel-gfx@lists.freedesktop.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        linux-man@vger.kernel.org
-Subject: Re: [PATCH v8 00/12] Introduce CAP_PERFMON to secure system
- performance monitoring and observability
-Message-ID: <20200714152738.GB43671@kernel.org>
-References: <f96f8f8a-e65c-3f36-dc85-fc3f5191e8c5@linux.intel.com>
- <76718dc6-5483-5e2e-85b8-64e70306ee1f@linux.ibm.com>
- <7776fa40-6c65-2aa6-1322-eb3a01201000@linux.intel.com>
- <20200710170911.GD7487@kernel.org>
- <0d2e2306-22b2-a730-dc3f-edb3538b6561@linux.intel.com>
- <20200713121746.GA7029@kernel.org>
- <0fadcf78-8b0e-ed03-a554-cc172b7d249c@linux.intel.com>
- <20200713185152.GA18094@kernel.org>
- <20200714105934.GU10769@hirez.programming.kicks-ass.net>
+        id S1726817AbgGNRed (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 14 Jul 2020 13:34:33 -0400
+Received: from pbmsgap02.intersil.com ([192.157.179.202]:60974 "EHLO
+        pbmsgap02.intersil.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726169AbgGNRed (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 14 Jul 2020 13:34:33 -0400
+X-Greylist: delayed 1119 seconds by postgrey-1.27 at vger.kernel.org; Tue, 14 Jul 2020 13:34:32 EDT
+Received: from pps.filterd (pbmsgap02.intersil.com [127.0.0.1])
+        by pbmsgap02.intersil.com (8.16.0.27/8.16.0.27) with SMTP id 06EHDIkX023308;
+        Tue, 14 Jul 2020 13:15:50 -0400
+Received: from pbmxdp02.intersil.corp (pbmxdp02.pb.intersil.com [132.158.200.223])
+        by pbmsgap02.intersil.com with ESMTP id 3277kcs6pa-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+        Tue, 14 Jul 2020 13:15:50 -0400
+Received: from pbmxdp03.intersil.corp (132.158.200.224) by
+ pbmxdp02.intersil.corp (132.158.200.223) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id
+ 15.1.1979.3; Tue, 14 Jul 2020 13:15:49 -0400
+Received: from localhost (132.158.202.109) by pbmxdp03.intersil.corp
+ (132.158.200.224) with Microsoft SMTP Server id 15.1.1979.3 via Frontend
+ Transport; Tue, 14 Jul 2020 13:15:48 -0400
+From:   <min.li.xe@renesas.com>
+To:     <richardcochran@gmail.com>, <corbet@lwn.net>
+CC:     <netdev@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, Min Li <min.li.xe@renesas.com>
+Subject: [PATCH net 1/1] docs: ptp.rst: add support for Renesas (IDT) ClockMatrix
+Date:   Tue, 14 Jul 2020 13:15:20 -0400
+Message-ID: <1594746920-28760-1-git-send-email-min.li.xe@renesas.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200714105934.GU10769@hirez.programming.kicks-ass.net>
-X-Url:  http://acmel.wordpress.com
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-TM-AS-MML: disable
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
+ definitions=2020-07-14_06:2020-07-14,2020-07-14 signatures=0
+X-Proofpoint-Spam-Details: rule=junk_notspam policy=junk score=0 suspectscore=2 malwarescore=0
+ phishscore=0 bulkscore=0 spamscore=0 mlxscore=0 mlxlogscore=999
+ adultscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.0.1-2006250000 definitions=main-2007140126
+X-Proofpoint-Spam-Reason: mlx
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Tue, Jul 14, 2020 at 12:59:34PM +0200, Peter Zijlstra escreveu:
-> On Mon, Jul 13, 2020 at 03:51:52PM -0300, Arnaldo Carvalho de Melo wrote:
-> 
-> > > > diff --git a/kernel/events/core.c b/kernel/events/core.c
-> > > > index 856d98c36f56..a2397f724c10 100644
-> > > > --- a/kernel/events/core.c
-> > > > +++ b/kernel/events/core.c
-> > > > @@ -11595,7 +11595,7 @@ SYSCALL_DEFINE5(perf_event_open,
-> > > >  		 * perf_event_exit_task() that could imply).
-> > > >  		 */
-> > > >  		err = -EACCES;
-> > > > -		if (!ptrace_may_access(task, PTRACE_MODE_READ_REALCREDS))
-> > > > +		if (!perfmon_capable() && !ptrace_may_access(task, PTRACE_MODE_READ_REALCREDS))
-> > > >  			goto err_cred;
-> > > >  	}
+From: Min Li <min.li.xe@renesas.com>
 
-> > > >> makes monitoring simpler and even more secure to use since Perf tool need
-> > > >> not to start/stop/single-step and read/write registers and memory and so on
-> > > >> like a debugger or strace-like tool. What do you think?
+Add below to “Ancillary clock features” section
+  - Low Pass Filter (LPF) access from user space
 
-> > > > I tend to agree, Peter?
+Add below to list of “Supported hardware” section
+  + Renesas (IDT) ClockMatrix™
 
-> So this basically says that if CAP_PERFMON, we don't care about the
-> ptrace() permissions? Just like how CAP_SYS_PTRACE would always allow
-> the ptrace checks?
+Signed-off-by: Min Li <min.li.xe@renesas.com>
+---
+ Documentation/driver-api/ptp.rst | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
 
-> I suppose that makes sense.
+diff --git a/Documentation/driver-api/ptp.rst b/Documentation/driver-api/ptp.rst
+index a15192e..664838a 100644
+--- a/Documentation/driver-api/ptp.rst
++++ b/Documentation/driver-api/ptp.rst
+@@ -23,6 +23,7 @@ PTP hardware clock infrastructure for Linux
+   + Ancillary clock features
+     - Time stamp external events
+     - Period output signals configurable from user space
++    - Low Pass Filter (LPF) access from user space
+     - Synchronization of the Linux system time via the PPS subsystem
+ 
+ PTP hardware clock kernel API
+@@ -94,3 +95,14 @@ Supported hardware
+ 
+      - Auxiliary Slave/Master Mode Snapshot (optional interrupt)
+      - Target Time (optional interrupt)
++
++   * Renesas (IDT) ClockMatrix™
++
++     - Up to 4 independent PHC channels
++     - Integrated low pass filter (LPF), access via .adjPhase (compliant to ITU-T G.8273.2)
++     - Programmable output periodic signals
++     - Programmable inputs can time stamp external triggers
++     - Driver and/or hardware configuration through firmware (idtcm.bin)
++          - LPF settings (bandwidth, phase limiting, automatic holdover, physical layer assist (per ITU-T G.8273.2))
++          - Programmable output PTP clocks, any frequency up to 1GHz (to other PHY/MAC time stampers, refclk to ASSPs/SoCs/FPGAs)
++          - Lock to GNSS input, automatic switching between GNSS and user-space PHC control (optional)
+-- 
+2.7.4
 
-Yeah, it in fact addresses the comment right above it:
-
-        if (task) {
-                err = mutex_lock_interruptible(&task->signal->exec_update_mutex);
-                if (err)
-                        goto err_task;
-
-                /*
-                 * Reuse ptrace permission checks for now.
-                 *
-                 * We must hold exec_update_mutex across this and any potential
-                 * perf_install_in_context() call for this new event to
-                 * serialize against exec() altering our credentials (and the
-                 * perf_event_exit_task() that could imply).
-                 */
-                err = -EACCES;
-                if (!ptrace_may_access(task, PTRACE_MODE_READ_REALCREDS))
-                        goto err_cred;
-        }
-
-
-that "for now" part :-)
-
-Idea is to not require CAP_PTRACE for that, i.e. the attack surface for the
-perf binary is reduced.
-
-- Arnaldo
