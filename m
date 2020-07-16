@@ -2,92 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8FC98222887
-	for <lists+linux-doc@lfdr.de>; Thu, 16 Jul 2020 18:50:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6C285222A22
+	for <lists+linux-doc@lfdr.de>; Thu, 16 Jul 2020 19:43:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728182AbgGPQuB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 16 Jul 2020 12:50:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41252 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725867AbgGPQuA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Jul 2020 12:50:00 -0400
-Received: from mail-vs1-xe43.google.com (mail-vs1-xe43.google.com [IPv6:2607:f8b0:4864:20::e43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4C571C061755;
-        Thu, 16 Jul 2020 09:49:58 -0700 (PDT)
-Received: by mail-vs1-xe43.google.com with SMTP id p25so3366588vsg.4;
-        Thu, 16 Jul 2020 09:49:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=3wSUvUaS6cRd+frWVKlR9DEyTRqvNIifJtDj8gqJC1k=;
-        b=Y78pB0MWKHWb0xMcZpVD+JD0mnaMYlz1PHxJys1Ud/+l+NbYSDV3ok5xmAjkwaWj8D
-         urjXWNwgQcL9/mykSLKsBfm23Z1UpVxu2RxfLysEh/60jyyPHTD+vxB4z+DSZOYYEYYn
-         kWNZmMwvj5pZMffkYPIo5QII1vBlyJwc+FG1UkIhON9WLCKCegPufUYUFeX+q1b/HsD6
-         2xa+Wi9MgLd9V0tshGT/PFR7srao02KkHQRY8unbIHhx5lDV6NY59qsDnMGV1izOZsR/
-         BHGv+dfEeoGGHCk4m2HtC72pMIlV7NOjwIaW7jgPVl1zUv38sDyb0Duh3grgvdLtYJ8/
-         Dovg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=3wSUvUaS6cRd+frWVKlR9DEyTRqvNIifJtDj8gqJC1k=;
-        b=QXxI13p6WKyZ13L5/z/W3MjUiUYEdQW55QU1NgWYlaoBSp728t5y6fLd+ZF8T55jty
-         IjRod2mPbLOotL33/2mrQkVqqBFxiv2QCRx14n5+F+20lLPkHxcy31JojD61fE/wNp2T
-         u2v9HvV7tZM1K4sTBvLli8Txk5uHG6WYKIJv1QZFi2ySYO1nXk+glO7i23240JKPJBpj
-         a4wWN6A21U7trrgC5V+lgDuAqGqB3xIZShJK5bLLnRNfkhIpPYr6lnWQjAxt4QW7WjpB
-         GYWzzeXI1xSVYcpmH9qagELnpWaZhcW79gJyuXn1rxUJ00w41ExWDty44YXZtRlF5lcI
-         Yn5Q==
-X-Gm-Message-State: AOAM5326wo2udMeea412Qd2wbQ1rpyE7Fx7+iEXbgAMA+a2Q6dQWf86c
-        OZ13A7VEdoGlQuEA6fDCvhsIOztiSCBNFkhYtnc=
-X-Google-Smtp-Source: ABdhPJxEEuUzAe3HPLSdKHrS6zY0Au5HEuw0f1/7tM4pxLGyYe5P9HtqUbBoZkJpapEfRcOxsF8zjrCXlF0wloEuh58=
-X-Received: by 2002:a67:1183:: with SMTP id 125mr4212880vsr.56.1594918196381;
- Thu, 16 Jul 2020 09:49:56 -0700 (PDT)
+        id S1728257AbgGPRm2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 16 Jul 2020 13:42:28 -0400
+Received: from cloudserver094114.home.pl ([79.96.170.134]:58898 "EHLO
+        cloudserver094114.home.pl" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728807AbgGPRm0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 16 Jul 2020 13:42:26 -0400
+Received: from 89-64-86-30.dynamic.chello.pl (89.64.86.30) (HELO kreacher.localnet)
+ by serwer1319399.home.pl (79.96.170.134) with SMTP (IdeaSmtpServer 0.83.415)
+ id 02801ab9c384c3c3; Thu, 16 Jul 2020 19:42:24 +0200
+From:   "Rafael J. Wysocki" <rjw@rjwysocki.net>
+To:     Linux PM <linux-pm@vger.kernel.org>
+Cc:     Linux Documentation <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+        Giovanni Gherdovich <ggherdovich@suse.cz>,
+        Doug Smythies <dsmythies@telus.net>,
+        Francisco Jerez <francisco.jerez.plata@intel.com>
+Subject: [PATCH v2 0/2] cpufreq: intel_pstate: Implement passive mode with HWP enabled
+Date:   Thu, 16 Jul 2020 19:37:04 +0200
+Message-ID: <4981405.3kqTVLv5tO@kreacher>
 MIME-Version: 1.0
-References: <20200620180643.887546-1-jim.cromie@gmail.com> <20200620180643.887546-14-jim.cromie@gmail.com>
- <30de6359-e56b-0915-5742-a360ef1b2814@akamai.com>
-In-Reply-To: <30de6359-e56b-0915-5742-a360ef1b2814@akamai.com>
-From:   jim.cromie@gmail.com
-Date:   Thu, 16 Jul 2020 10:49:30 -0600
-Message-ID: <CAJfuBxww0VhwBymScJP-eyag0JB=jEa4v5ch14TiZZybq7EOsA@mail.gmail.com>
-Subject: Re: [PATCH v4 13/17] dyndbg: accept 'file foo.c:func1' and 'file foo.c:10-100'
-To:     Jason Baron <jbaron@akamai.com>
-Cc:     LKML <linux-kernel@vger.kernel.org>, akpm@linuxfoundation.org,
-        Greg KH <gregkh@linuxfoundation.org>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Orson Zhai <orson.zhai@unisoc.com>,
-        Will Deacon <will@kernel.org>, Petr Mladek <pmladek@suse.com>,
-        Linux Documentation List <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> > @@ -321,6 +321,8 @@ static int parse_linerange(struct ddebug_query *query, const char *first)
-> >       } else {
-> >               query->last_lineno = query->first_lineno;
-> >       }
-> > +     vpr_info("parsed line %d-%d\n", query->first_lineno,
-> > +              query->last_lineno);
-> >       return 0;
-> >  }
->
-> This bit seems like its unrelated to this patch and makes more sense in the
-> previous patch, or as separate patch...
->
-> Thanks,
->
-> -Jason
->
+Hi All,
 
-ok, I'll split it out, maybe merge with prior.
+This really is a v2 of this patch:
 
-Any other tweaks ?
-maybe move export last in series ?
-how do you feel about changing the pr_fmt
-to just mod-name "dynamic_debug" or "dyndbg"
+https://patchwork.kernel.org/patch/11663271/
 
-Jim
+with an extra preceding cleanup patch to avoid making unrelated changes in the
+[2/2].
+
+Thanks!
+
+
+
