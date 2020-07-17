@@ -2,61 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 85B33224038
-	for <lists+linux-doc@lfdr.de>; Fri, 17 Jul 2020 18:10:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B09D922403A
+	for <lists+linux-doc@lfdr.de>; Fri, 17 Jul 2020 18:10:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726929AbgGQQKs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 17 Jul 2020 12:10:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59696 "EHLO
+        id S1726973AbgGQQKz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 17 Jul 2020 12:10:55 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59718 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726322AbgGQQKr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Jul 2020 12:10:47 -0400
-Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com [IPv6:2a00:1450:4864:20::542])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C0E37C0619D4;
-        Fri, 17 Jul 2020 09:10:46 -0700 (PDT)
-Received: by mail-ed1-x542.google.com with SMTP id e22so8130124edq.8;
-        Fri, 17 Jul 2020 09:10:46 -0700 (PDT)
+        with ESMTP id S1726322AbgGQQKx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 17 Jul 2020 12:10:53 -0400
+Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com [IPv6:2607:f8b0:4864:20::443])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7F42EC0619D2;
+        Fri, 17 Jul 2020 09:10:53 -0700 (PDT)
+Received: by mail-pf1-x443.google.com with SMTP id z3so5580702pfn.12;
+        Fri, 17 Jul 2020 09:10:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=K4sG738MbURXIMMMIi7Zp6H9aMqQB1Y7Bdr3nf17Kdk=;
-        b=J5JChlwHPZAM4iIWaf1qXMMQS+Qh/XSGCaDJNUskE0aIw7hlxsSkaggbhpF4IXcpW6
-         vTxF0rWXsK5Q8oQKsnvMf0qCgWOewdbUkJ93wO7JIw0qnD76KtxduZqWi0isskpt7Xx6
-         cJhzg3bJpfUpEP3jioWZhDe1doATxlA4/TaVudRhdaYSp8CQink+v3zTqtcxd5HYvqNx
-         1T/DXPVYJ2kafol29iGG6sVJ7X5ubQzLKB1SEr5u/UBc3qyWZVTU+7iTlXsFf44IaOwv
-         yKHKuU/q7uNRHv/mSUKWHTb9D21dhs0erJRAAb2oQjJay7Lgev9gvQUp20jciqPhYWca
-         89ZQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=THfYUaDXgdHi7xOdNZjiSROuNXEFCr7diXe1yGMo3qI=;
+        b=IwxcUmz2XFrQueIBSjOsg08tB1mxglvkCpvRqLsc8zVpTmX0MgSeQLZGVoWCvszY9r
+         ghCfOwQ2Tvh17dQsQJNySf4oXjUBNU01piFZmcN+sqmN4Rx0O/UQRxOBE+ToMydaSg8T
+         BIIte/MTTsbKtyalTemSj3AHd01h2LhjoGTqkRTa/CgcJ9ng9aDK5KO7Y1IM5G8F7Dzd
+         S3zHJ+Z7gu3xAXUdZXvp1Th+8i3Spp+5CpJvjsmh+q9m5lsZo+mLkvyAUPtR2fUF0a4j
+         LcK5ltSVRr/RPH1UinriTGZaRnjzT+6tF+qnmitM7ska2z0/EatC975z7nOgdlQ6xRZV
+         JE8A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=K4sG738MbURXIMMMIi7Zp6H9aMqQB1Y7Bdr3nf17Kdk=;
-        b=ccRSlIj3sjY0O9IMD0FPNZG2hmaoMoCEH3GDhNSn2swGCDuVZO+6nIRAQeUmK4K2ZJ
-         mFddm5gKyF7ZslVxO82qj1jK+ICINgtXrtTwlGLSXtF02T7lnGnJj2ajydGGH8aU91kt
-         23Hs1/9LxP1zk9cv335bSS8DUrk82Wg15y3jhKanQBr7ZeaC8knKFtMAiJgYMOye9fts
-         Qf6JkXBl3NV5k83uva/PdcNl8nZ2K/R2tFjyfzpEun/loxaQbqLsEPykt5MeGYkGUWVh
-         GZA6cW7oB0LXnqGSsMSmGga1+AcnJoJMnuIDeDFP+m/hMB3g3bTsP6aHybW8jLS4Do3T
-         E2kA==
-X-Gm-Message-State: AOAM533jD0RCq8qpDzlFeCr6SepW9aStEmN9Gjb4d5tX5kA3ei45l8sb
-        QfdLoZRG6y6Ar3IEAsHTeeE=
-X-Google-Smtp-Source: ABdhPJwyjyGYXQ8dAmACicqp1imUPUmH4GWUq+zskNgcEvFNHDBMZYxJDzYEnCBRSoVzW1lnU4NaSQ==
-X-Received: by 2002:a05:6402:203c:: with SMTP id ay28mr10258244edb.271.1595002245476;
-        Fri, 17 Jul 2020 09:10:45 -0700 (PDT)
-Received: from localhost.localdomain ([188.25.219.134])
-        by smtp.gmail.com with ESMTPSA id bc23sm8578253edb.90.2020.07.17.09.10.44
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 17 Jul 2020 09:10:45 -0700 (PDT)
-From:   Vladimir Oltean <olteanv@gmail.com>
-To:     kuba@kernel.org, davem@davemloft.net, netdev@vger.kernel.org
-Cc:     richardcochran@gmail.com, sorganov@gmail.com,
-        linux-doc@vger.kernel.org
-Subject: [PATCH net-next 3/3] docs: networking: timestamping: add a set of frequently asked questions
-Date:   Fri, 17 Jul 2020 19:10:27 +0300
-Message-Id: <20200717161027.1408240-4-olteanv@gmail.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20200717161027.1408240-1-olteanv@gmail.com>
-References: <20200717161027.1408240-1-olteanv@gmail.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=THfYUaDXgdHi7xOdNZjiSROuNXEFCr7diXe1yGMo3qI=;
+        b=C9xdJbF5EPf4sHVqNBfyK+2Br84k6t1bFIWKrCrjiL0JOqqfyc1iJgfxdkQsFb4TiH
+         s92xijSwfYNdYKDc0n1qj8lbs57aykuyN/lk5M1WgR/vmyNHDLgbyny32FUlpokKwf5e
+         RC1ucsDcqVwEKTgj7f8VsgrrXSkKjIndDgxot7rLbk51tk5DhhC1qnyTrzBQj1x2HUR3
+         NcQaMoLuyL226S6YqTmM/D+ybyUHtelXpnXMCv1t6fwEv89uEgtpcpCBMT0xQ5MiWymE
+         CbAaiYBKsublfNl9hjMS17Mmo9UBEI0KNDerXVmX583VmfDI7b8vUy+OifXt5fd7rjFF
+         5q5A==
+X-Gm-Message-State: AOAM532l39tra5DsjKep1ievPORszRMNX31kEJgrW4UJ3nMZ8POEck9a
+        pDBdqRoMUypNjAn642+hCt8=
+X-Google-Smtp-Source: ABdhPJwgmrLwESJyWit/vqNOwVQ1MgTrBNf+Wutx7ZIg8OVw/fi5c6NXIUy6mDOfrF36KIScWySKLA==
+X-Received: by 2002:a62:768d:: with SMTP id r135mr9281279pfc.198.1595002253031;
+        Fri, 17 Jul 2020 09:10:53 -0700 (PDT)
+Received: from localhost ([89.208.244.139])
+        by smtp.gmail.com with ESMTPSA id ji2sm3170303pjb.1.2020.07.17.09.10.52
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Fri, 17 Jul 2020 09:10:52 -0700 (PDT)
+From:   Dejin Zheng <zhengdejin5@gmail.com>
+To:     corbet@lwn.net, gregkh@linuxfoundation.org, rafael@kernel.org,
+        f.fainelli@gmail.com, heiko@sntech.de, linux-doc@vger.kernel.org,
+        linux-i2c@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, Dejin Zheng <zhengdejin5@gmail.com>
+Subject: [PATCH v4 0/2] drivers: provide devm_platform_request_irq()
+Date:   Sat, 18 Jul 2020 00:10:43 +0800
+Message-Id: <20200717161045.11458-1-zhengdejin5@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
@@ -64,49 +63,54 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-These are some questions I had while trying to explain the behavior of
-some drivers with respect to software timestamping. Answered with the
-help of Richard Cochran.
+It will call devm_request_irq() after platform_get_irq() function
+in many drivers, And sometimes, the error handling of these two functions
+is incorrect in some drivers. So this function is provided to simplify
+the driver.
 
-Signed-off-by: Vladimir Oltean <olteanv@gmail.com>
----
- Documentation/networking/timestamping.rst | 26 +++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
+the first patch will provide devm_platform_request_irq(), and the
+second patch will convert to devm_platform_request_irq() in some
+dirver of i2c bus.
 
-diff --git a/Documentation/networking/timestamping.rst b/Documentation/networking/timestamping.rst
-index 4004c5d2771d..e01ec01179fe 100644
---- a/Documentation/networking/timestamping.rst
-+++ b/Documentation/networking/timestamping.rst
-@@ -791,3 +791,29 @@ The correct solution to this problem is to implement the PHY timestamping
- requirements in the MAC driver found broken, and submit as a bug fix patch to
- netdev@vger.kernel.org. See :ref:`Documentation/process/stable-kernel-rules.rst
- <stable_kernel_rules>` for more details.
-+
-+3.4 Frequently asked questions
-+------------------------------
-+
-+Q: When should drivers set SKBTX_IN_PROGRESS?
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+When the interface they represent offers both ``SOF_TIMESTAMPING_TX_HARDWARE``
-+and ``SOF_TIMESTAMPING_TX_SOFTWARE``.
-+Originally, the network stack could deliver either a hardware or a software
-+time stamp, but not both. This flag prevents software timestamp delivery.
-+This restriction was eventually lifted via the ``SOF_TIMESTAMPING_OPT_TX_SWHW``
-+option, but still the original behavior is preserved as the default.
-+
-+Q: Should drivers that don't offer SOF_TIMESTAMPING_TX_SOFTWARE call skb_tx_timestamp()?
-+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-+
-+The ``skb_clone_tx_timestamp()`` function from its body helps with propagation
-+of TX timestamps from PTP PHYs, and the required placement of this call is the
-+same as for software TX timestamping.
-+Additionally, since PTP is broken on ports with timestamping PHYs and unmet
-+requirements, the consequence is that any driver which may be ever coupled to
-+a timestamping-capable PHY in ``netdev->phydev`` should call at least
-+``skb_clone_tx_timestamp()``. However, calling the higher-level
-+``skb_tx_timestamp()`` instead achieves the same purpose, but also offers
-+additional compliance to ``SOF_TIMESTAMPING_TX_SOFTWARE``.
+v3 -> v4:
+	- The patch v3 sent on May 27 may be lost somewhere in the
+	  world, so resend it.
+	- add Michal's Acked-by tag in the second patch. and Thanks
+	  for Michal's help.
+
+v2 -> v3:
+	- add devm_platform_request_irq() to devres.rst by Grygorii's
+	  suggestion.
+	- And also Thanks Michal, Wolfram and Linus's review and
+	  comments.
+v1 -> v2:
+	- I give up this series of patches in v1 version. I resend this
+	  patches v2 by that discussion:
+	  https://patchwork.ozlabs.org/project/linux-i2c/patch/20200520144821.8069-1-zhengdejin5@gmail.com/
+	  The patch content has not changed.
+
+Dejin Zheng (2):
+  drivers: provide devm_platform_request_irq()
+  i2c: busses: convert to devm_platform_request_irq()
+
+ .../driver-api/driver-model/devres.rst        |  1 +
+ drivers/base/platform.c                       | 33 +++++++++++++++++++
+ drivers/i2c/busses/i2c-bcm-kona.c             | 16 ++-------
+ drivers/i2c/busses/i2c-cadence.c              | 10 ++----
+ drivers/i2c/busses/i2c-digicolor.c            | 10 ++----
+ drivers/i2c/busses/i2c-emev2.c                |  5 ++-
+ drivers/i2c/busses/i2c-jz4780.c               |  5 ++-
+ drivers/i2c/busses/i2c-meson.c                | 13 +++-----
+ drivers/i2c/busses/i2c-mxs.c                  |  9 ++---
+ drivers/i2c/busses/i2c-pnx.c                  |  9 ++---
+ drivers/i2c/busses/i2c-rcar.c                 |  9 ++---
+ drivers/i2c/busses/i2c-rk3x.c                 | 14 ++------
+ drivers/i2c/busses/i2c-sirf.c                 | 10 ++----
+ drivers/i2c/busses/i2c-stu300.c               |  4 +--
+ drivers/i2c/busses/i2c-synquacer.c            | 12 ++-----
+ include/linux/platform_device.h               |  4 +++
+ 16 files changed, 73 insertions(+), 91 deletions(-)
+
 -- 
-2.25.1
+2.25.0
 
