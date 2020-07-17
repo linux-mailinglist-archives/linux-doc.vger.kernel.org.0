@@ -2,104 +2,102 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A73E6224621
-	for <lists+linux-doc@lfdr.de>; Sat, 18 Jul 2020 00:05:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 555AF224657
+	for <lists+linux-doc@lfdr.de>; Sat, 18 Jul 2020 00:34:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727926AbgGQWFJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 17 Jul 2020 18:05:09 -0400
-Received: from mga03.intel.com ([134.134.136.65]:7980 "EHLO mga03.intel.com"
+        id S1726512AbgGQWeJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 17 Jul 2020 18:34:09 -0400
+Received: from mga09.intel.com ([134.134.136.24]:49086 "EHLO mga09.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727105AbgGQWFI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 17 Jul 2020 18:05:08 -0400
-IronPort-SDR: zZsHE0MR7mlUFxfCy4AcNWdexRbx3ceDyRdISc49nhM5lYxE2b4c/AXR//QIrUvPDjShIGSqOb
- nPw99FIUuwxw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9685"; a="149672642"
+        id S1726399AbgGQWeI (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 17 Jul 2020 18:34:08 -0400
+IronPort-SDR: N6PXGVbL9Nm2n2WT61S7xBMhTrgGfpDFQkgzxM/PbjIuza0WdXZzdOFALg9UycVlTls8FvJzNS
+ p+aos1ATWC5Q==
+X-IronPort-AV: E=McAfee;i="6000,8403,9685"; a="151049456"
 X-IronPort-AV: E=Sophos;i="5.75,364,1589266800"; 
-   d="scan'208";a="149672642"
+   d="scan'208";a="151049456"
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jul 2020 15:05:08 -0700
-IronPort-SDR: aoSwOedjzN+h4QAfwehahZGErEBSzwcnY67T1+hWY1ak0veXEwxed0aPzRKBVjc5mil06a5GA9
- 7CTzQYaWCBsg==
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Jul 2020 15:34:08 -0700
+IronPort-SDR: kthQsGLObtwSWoOzzNwTRSgtMFbfQX/Q/Mq09Zc/Drf8BGiuQ5/EGHNB8Hy/cRd2302wOqsyVi
+ VatOSgUZMZjQ==
 X-ExtLoop1: 1
 X-IronPort-AV: E=Sophos;i="5.75,364,1589266800"; 
-   d="scan'208";a="460993570"
-Received: from jekeller-mobl1.amr.corp.intel.com (HELO [10.212.94.160]) ([10.212.94.160])
-  by orsmga005.jf.intel.com with ESMTP; 17 Jul 2020 15:05:07 -0700
-Subject: Re: [PATCH net-next 1/3] docs: networking: timestamping: rename last
- section to "Known bugs".
-To:     Vladimir Oltean <olteanv@gmail.com>, kuba@kernel.org,
-        davem@davemloft.net, netdev@vger.kernel.org
-Cc:     richardcochran@gmail.com, sorganov@gmail.com,
-        linux-doc@vger.kernel.org
-References: <20200717161027.1408240-1-olteanv@gmail.com>
- <20200717161027.1408240-2-olteanv@gmail.com>
-From:   Jacob Keller <jacob.e.keller@intel.com>
-Organization: Intel Corporation
-Message-ID: <ba9626e0-e82f-bf6c-25fc-856aedb2a8ec@intel.com>
-Date:   Fri, 17 Jul 2020 15:05:07 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+   d="scan'208";a="487118249"
+Received: from iweiny-desk2.sc.intel.com ([10.3.52.147])
+  by fmsmga005.fm.intel.com with ESMTP; 17 Jul 2020 15:34:07 -0700
+Date:   Fri, 17 Jul 2020 15:34:07 -0700
+From:   Ira Weiny <ira.weiny@intel.com>
+To:     Peter Zijlstra <peterz@infradead.org>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Fenghua Yu <fenghua.yu@intel.com>, x86@kernel.org,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Vishal Verma <vishal.l.verma@intel.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-nvdimm@lists.01.org, linux-fsdevel@vger.kernel.org,
+        linux-mm@kvack.org, linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH RFC V2 04/17] x86/pks: Preserve the PKRS MSR on context
+ switch
+Message-ID: <20200717223407.GS3008823@iweiny-DESK2.sc.intel.com>
+References: <20200717072056.73134-1-ira.weiny@intel.com>
+ <20200717072056.73134-5-ira.weiny@intel.com>
+ <20200717085954.GY10769@hirez.programming.kicks-ass.net>
 MIME-Version: 1.0
-In-Reply-To: <20200717161027.1408240-2-olteanv@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200717085954.GY10769@hirez.programming.kicks-ass.net>
+User-Agent: Mutt/1.11.1 (2018-12-01)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-
-
-On 7/17/2020 9:10 AM, Vladimir Oltean wrote:
-> One more quirk of the timestamping infrastructure will be documented
-> shortly. Rename the section from "Other caveats for MAC drivers" to
-> simply "Known bugs". This uncovers some bad phrasing at the beginning of
-> the section, which is now corrected.
+On Fri, Jul 17, 2020 at 10:59:54AM +0200, Peter Zijlstra wrote:
+> On Fri, Jul 17, 2020 at 12:20:43AM -0700, ira.weiny@intel.com wrote:
+> > +/*
+> > + * Write the PKey Register Supervisor.  This must be run with preemption
+> > + * disabled as it does not guarantee the atomicity of updating the pkrs_cache
+> > + * and MSR on its own.
+> > + */
+> > +void write_pkrs(u32 pkrs_val)
+> > +{
+> > +	this_cpu_write(pkrs_cache, pkrs_val);
+> > +	wrmsrl(MSR_IA32_PKRS, pkrs_val);
+> > +}
 > 
-> Signed-off-by: Vladimir Oltean <olteanv@gmail.com>
-> ---
->  Documentation/networking/timestamping.rst | 16 ++++++++--------
->  1 file changed, 8 insertions(+), 8 deletions(-)
+> Should we write that like:
 > 
-> diff --git a/Documentation/networking/timestamping.rst b/Documentation/networking/timestamping.rst
-> index 5fa4e2274dd9..9a1f4cb4ce9e 100644
-> --- a/Documentation/networking/timestamping.rst
-> +++ b/Documentation/networking/timestamping.rst
-> @@ -711,14 +711,14 @@ discoverable and attachable to a ``struct phy_device`` through Device Tree, and
->  for the rest, they use the same mii_ts infrastructure as those. See
->  Documentation/devicetree/bindings/ptp/timestamper.txt for more details.
->  
-> -3.2.4 Other caveats for MAC drivers
-> -^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-> -
-> -Stacked PHCs, especially DSA (but not only) - since that doesn't require any
-> -modification to MAC drivers, so it is more difficult to ensure correctness of
-> -all possible code paths - is that they uncover bugs which were impossible to
-> -trigger before the existence of stacked PTP clocks.  One example has to do with
-> -this line of code, already presented earlier::
-> +3.2.4 Known bugs
-> +^^^^^^^^^^^^^^^^
-> +
-> +One caveat with stacked PHCs, especially DSA (but not only) - since that
-> +doesn't require any modification to MAC drivers, so it is more difficult to
-> +ensure correctness of all possible code paths - is that they uncover bugs which
-> +were impossible to trigger before the existence of stacked PTP clocks.
-> +One example has to do with this line of code, already presented earlier::
->  
-
-The interjection between - - is really long and made it difficult to
-parse this statement. Maybe re-word it like
-
-One caveat with stacked PHCs is that they uncover bugs which were
-impossible to trigger otherwise, as it is more difficult to ensure
-correctness of all possible code flows. This is especially true of DSA
-since it does not require any modifications to the MAC drivers to setup.
-One example has to do with this line of code, already presented earlier::
-
-
->        skb_shinfo(skb)->tx_flags |= SKBTX_IN_PROGRESS;
->  
+> void write_pkrs(u32 pkr)
+> {
+> 	u32 *pkrs = get_cpu_ptr(pkrs_cache);
+> 	if (*pkrs != pkr) {
+> 		*pkrs = pkr;
+> 		wrmsrl(MSR_IA32_PKRS, pkr);
+> 	}
+> 	put_cpu_ptrpkrs_cache);
+> }
 > 
+> given that we fundamentally need to serialize againt schedule() here.
+
+Yes.  That seems better.
+
+That also means pks_sched_in() can be simplified to just
+
+static inline void pks_sched_in(void)
+{
+	write_pkrs(current->thread.saved_pkrs);
+}
+
+Because of the built WRMSR avoidance.
+
+However, pkrs_cache is static so I think I need to use {get,put}_cpu_var() here
+don't I?
+
+Thanks!
+Ira
+
