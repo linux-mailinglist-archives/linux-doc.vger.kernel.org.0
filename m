@@ -2,94 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B3F86224AEA
-	for <lists+linux-doc@lfdr.de>; Sat, 18 Jul 2020 13:21:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 910CE224AF8
+	for <lists+linux-doc@lfdr.de>; Sat, 18 Jul 2020 13:30:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727052AbgGRLVZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 18 Jul 2020 07:21:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38564 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726566AbgGRLVY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 18 Jul 2020 07:21:24 -0400
-Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com [IPv6:2a00:1450:4864:20::243])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 79823C0619D2;
-        Sat, 18 Jul 2020 04:21:24 -0700 (PDT)
-Received: by mail-lj1-x243.google.com with SMTP id f5so15485202ljj.10;
-        Sat, 18 Jul 2020 04:21:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:references:date:in-reply-to:message-id
-         :user-agent:mime-version;
-        bh=X09d7UPuMWINbpOrjh3wyufNwVTJRpmt4Rb0SetFYPA=;
-        b=ZOgceqUjsb1sQhFZ4MGVt4xfmrut/K3zHJjVI0Fxmh9okFHe2JvOQlfooUzb5JoL+a
-         5VTsWEDIXr+RXm0gd5TJrV2D3GySCovXXcj4rc5yDg1gvRr4tpsHWnmuUHK2Eh+l5+qr
-         fJNyftuUpLHgDFMeyBfLsURkA/GgALtF0PvfESNRWaEWRfyoeIgooeGJPSGjdDeJL1Z5
-         9sv/BLOvqdZKhz9FuuNZbH1iiUQdz68utExGdgztcr59d+ZFMakqUXO0isWi2bNjlp8H
-         82BIEUVYluu7xRIrMkA4vUU+/TzDnHnNvP+BuqLPTjql5xfSZXHrfgawuTMO4WpLrsIO
-         GDKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:references:date:in-reply-to
-         :message-id:user-agent:mime-version;
-        bh=X09d7UPuMWINbpOrjh3wyufNwVTJRpmt4Rb0SetFYPA=;
-        b=eQr1HO5xyzv5XfXwPbrjA/cB0v1Ilt/qaOOuJvKwyD/CPbz73l/Fcu6hq7+Lgn/BXF
-         KH18PdofASCRfLLC4QJqtuEWgK5QvkyUPWufLx9niJmNgstElEMP+AyIYaMA3Bxy2peg
-         xd+GxpaPxiEBV9XzvhwwDI7meRPNPPPEmGK7UYVGKJEaVRIJlpJdHcXTik/qHzgniv6r
-         /9k4qbFWQf4jjtnynucp1Do6fd3U002apGHjSNN3sZReVO501nt84YEhUWDBZTOoMdPp
-         DrJN/DwoIlhrqaXcf433FlVo89AhZ//lTJf4wNOjHQDxxqXTOb8HM2qNzIyVge54dXnA
-         ocrw==
-X-Gm-Message-State: AOAM531Ep//zk1MTd/C1GFnT/c+r5T7M1n7mz33HdmJOVaVK5SXqjmy1
-        PB6ZVBCreHINVvlQvoRPy9EKBQH3
-X-Google-Smtp-Source: ABdhPJx+W/SgaDvYiOspanRHv2qyhpJVZy7vMo0WzSmB3b/k3m+i++ryMK+JYhgGbAWwBezgPh29XQ==
-X-Received: by 2002:a2e:81d5:: with SMTP id s21mr6679587ljg.362.1595071282943;
-        Sat, 18 Jul 2020 04:21:22 -0700 (PDT)
-Received: from osv.localdomain ([89.175.180.246])
-        by smtp.gmail.com with ESMTPSA id x13sm2148002ljj.92.2020.07.18.04.21.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 18 Jul 2020 04:21:22 -0700 (PDT)
-From:   Sergey Organov <sorganov@gmail.com>
-To:     Vladimir Oltean <olteanv@gmail.com>
-Cc:     kuba@kernel.org, davem@davemloft.net, netdev@vger.kernel.org,
-        richardcochran@gmail.com, linux-doc@vger.kernel.org,
-        Eugene Syromiatnikov <esyr@redhat.com>
-Subject: Re: [PATCH net-next 0/3] Document more PTP timestamping known quirks
-References: <20200717161027.1408240-1-olteanv@gmail.com>
-Date:   Sat, 18 Jul 2020 14:21:21 +0300
-In-Reply-To: <20200717161027.1408240-1-olteanv@gmail.com> (Vladimir Oltean's
-        message of "Fri, 17 Jul 2020 19:10:24 +0300")
-Message-ID: <878sfh132m.fsf@osv.gnss.ru>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/28.0.50 (gnu/linux)
+        id S1726439AbgGRLa1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 18 Jul 2020 07:30:27 -0400
+Received: from smtp.al2klimov.de ([78.46.175.9]:50464 "EHLO smtp.al2klimov.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726294AbgGRLa1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 18 Jul 2020 07:30:27 -0400
+Received: from authenticated-user (PRIMARY_HOSTNAME [PUBLIC_IP])
+        by smtp.al2klimov.de (Postfix) with ESMTPA id D8FD5BC095;
+        Sat, 18 Jul 2020 11:30:22 +0000 (UTC)
+From:   "Alexander A. Klimov" <grandmaster@al2klimov.de>
+To:     linux@highpoint-tech.com, corbet@lwn.net, jejb@linux.ibm.com,
+        martin.petersen@oracle.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-scsi@vger.kernel.org
+Cc:     "Alexander A. Klimov" <grandmaster@al2klimov.de>
+Subject: [PATCH] scsi: hptiop: Replace HTTP links with HTTPS ones
+Date:   Sat, 18 Jul 2020 13:30:16 +0200
+Message-Id: <20200718113016.15647-1-grandmaster@al2klimov.de>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Transfer-Encoding: 8bit
+X-Spamd-Bar: ++++++
+X-Spam-Level: ******
+Authentication-Results: smtp.al2klimov.de;
+        auth=pass smtp.auth=aklimov@al2klimov.de smtp.mailfrom=grandmaster@al2klimov.de
+X-Spam: Yes
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Vladimir Oltean <olteanv@gmail.com> writes:
+Rationale:
+Reduces attack surface on kernel devs opening the links for MITM
+as HTTPS traffic is much harder to manipulate.
 
-> I've tried to collect and summarize the conclusions of these discussions:
-> https://patchwork.ozlabs.org/project/netdev/patch/20200711120842.2631-1-sorganov@gmail.com/
-> https://patchwork.ozlabs.org/project/netdev/patch/20200710113611.3398-5-kurt@linutronix.de/
-> which were a bit surprising to me. Make sure they are present in the
-> documentation.
+Deterministic algorithm:
+For each file:
+  If not .svg:
+    For each line:
+      If doesn't contain `\bxmlns\b`:
+        For each link, `\bhttp://[^# \t\r\n]*(?:\w|/)`:
+	  If neither `\bgnu\.org/license`, nor `\bmozilla\.org/MPL\b`:
+            If both the HTTP and HTTPS versions
+            return 200 OK and serve the same content:
+              Replace HTTP with HTTPS.
 
-By the way, there is another somewhat related issue that needs to be
-addressed. I believe kernel needs to free user space from this trick
-found even in kernel sources themselves:
+Signed-off-by: Alexander A. Klimov <grandmaster@al2klimov.de>
+---
+ Continuing my work started at 93431e0607e5.
+ See also: git log --oneline '--author=Alexander A. Klimov <grandmaster@al2klimov.de>' v5.7..master
 
-tools/testing/selftests/ptp/testptp.c:87:
+ If there are any URLs to be removed completely
+ or at least not (just) HTTPSified:
+ Just clearly say so and I'll *undo my change*.
+ See also: https://lkml.org/lkml/2020/6/27/64
 
-static clockid_t get_clockid(int fd)
-{
-#define CLOCKFD 3
-        return (((unsigned int) ~fd) << 3) | CLOCKFD;
-}
+ If there are any valid, but yet not changed URLs:
+ See: https://lkml.org/lkml/2020/6/26/837
 
-Once upon a time there was a patch for that, but I don't think it
-addressed the issue correctly, here is more background:
+ If you apply the patch, please let me know.
 
-https://lore.kernel.org/lkml/87y2pxvsbr.fsf@osv.gnss.ru/
 
-Thanks,
--- Sergey
+ Documentation/scsi/hptiop.rst | 2 +-
+ drivers/scsi/hptiop.c         | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Documentation/scsi/hptiop.rst b/Documentation/scsi/hptiop.rst
+index 23ae7ae36971..1a6900b456c0 100644
+--- a/Documentation/scsi/hptiop.rst
++++ b/Documentation/scsi/hptiop.rst
+@@ -212,4 +212,4 @@ Copyright |copy| 2006-2012 HighPoint Technologies, Inc. All Rights Reserved.
+ 
+   linux@highpoint-tech.com
+ 
+-  http://www.highpoint-tech.com
++  https://www.highpoint-tech.com
+diff --git a/drivers/scsi/hptiop.c b/drivers/scsi/hptiop.c
+index 6a2561f26e38..3299624e41ce 100644
+--- a/drivers/scsi/hptiop.c
++++ b/drivers/scsi/hptiop.c
+@@ -5,7 +5,7 @@
+  *
+  * Please report bugs/comments/suggestions to linux@highpoint-tech.com
+  *
+- * For more information, visit http://www.highpoint-tech.com
++ * For more information, visit https://www.highpoint-tech.com
+  */
+ #include <linux/module.h>
+ #include <linux/types.h>
+-- 
+2.27.0
+
