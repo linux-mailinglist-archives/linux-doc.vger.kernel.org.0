@@ -2,118 +2,171 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A21F02264AD
-	for <lists+linux-doc@lfdr.de>; Mon, 20 Jul 2020 17:47:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8132D226A15
+	for <lists+linux-doc@lfdr.de>; Mon, 20 Jul 2020 18:35:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730347AbgGTPrH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 20 Jul 2020 11:47:07 -0400
-Received: from us-smtp-delivery-1.mimecast.com ([207.211.31.120]:30619 "EHLO
-        us-smtp-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1730735AbgGTPrG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Jul 2020 11:47:06 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1595260024;
+        id S1731429AbgGTPze (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 20 Jul 2020 11:55:34 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41396 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730669AbgGTPzd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 20 Jul 2020 11:55:33 -0400
+Received: from galois.linutronix.de (Galois.linutronix.de [IPv6:2a0a:51c0:0:12e:550::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5E0D9C061794;
+        Mon, 20 Jul 2020 08:55:33 -0700 (PDT)
+From:   "Ahmed S. Darwish" <a.darwish@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020; t=1595260531;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type;
-        bh=Kgdcn0E7Ouk2st1ZJu/uYjUMSJLu1cQ6giaK+jHaBOI=;
-        b=H0NBxyOVil3oU4bI8bHkh59m6tD0oa9AblbyGg2fG3yOhiSD7XqExAFzccM0DEwCr58wYy
-        SYlIhBAYjiQJcTfas0YSNEYCFOJrlXSq6qMv/5SKHZ7J4kiBiNm7byHZqRrVtl0hLVFQcm
-        Do9zpx6Pp9MrNAH/Czq3KlqR/oc6Yg4=
-Received: from mail-wr1-f70.google.com (mail-wr1-f70.google.com
- [209.85.221.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-63-Og_tO7x_NpmHW7iJjpPIeA-1; Mon, 20 Jul 2020 11:47:02 -0400
-X-MC-Unique: Og_tO7x_NpmHW7iJjpPIeA-1
-Received: by mail-wr1-f70.google.com with SMTP id a18so12298320wrm.14
-        for <linux-doc@vger.kernel.org>; Mon, 20 Jul 2020 08:47:02 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
-         :content-disposition;
-        bh=Kgdcn0E7Ouk2st1ZJu/uYjUMSJLu1cQ6giaK+jHaBOI=;
-        b=HFiKJXWgf7AMDCMQHwBR1OVpbQs/IYic5p7pMm3o0P/UYwGNeCSgPLPUEqPBvpwBHY
-         oNyQmALpqOGKdC8zR8/vYlwYJIbiznjLrllsYHjphaXoZ3EDsE/Cbe0oQ3n/+26TmORB
-         LsRwI1dVkzDHH9QVpu7DB4ND72+Z+IrhVZkUdWQ8+Ex5mqR0puVqZGa3UFowxzKj8BqC
-         fcBOAuSz6c9jdYS9v11OIiEWITBnmHRWedMcAfidPj/2OHSK0siVIIHSww0E3NtZWtsE
-         NFknuJrgdfHHkxKKQN9JfgG+9JLL/IEn+4oUBCmpndm4dOy9Qp71/qJHdyFuTltU8zJa
-         5Tog==
-X-Gm-Message-State: AOAM530nyxdACeBTva7vm7dNaapmqi7sbu7LemcWoWNrnoOlDmRtdLQZ
-        V0cLU+Au7AkdGq1dEt07kXDAHPMkG4635CfHbg5UJpI6WtfDXAaq6i2rw1Kqn7kQUlkWOPl0EZa
-        U4wMve1jzyPbmejX/H2WX
-X-Received: by 2002:a5d:6692:: with SMTP id l18mr2993688wru.211.1595260021521;
-        Mon, 20 Jul 2020 08:47:01 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxH/9THfSAwsOq2vXIRMnukH6yIdzxmBCr1Ep6/MSnK/FAw8uA0E+iDWPgSVX/5OVMFV/u4Cw==
-X-Received: by 2002:a5d:6692:: with SMTP id l18mr2993656wru.211.1595260021133;
-        Mon, 20 Jul 2020 08:47:01 -0700 (PDT)
-Received: from pc-2.home (2a01cb058529bf0075b0798a7f5975cb.ipv6.abo.wanadoo.fr. [2a01:cb05:8529:bf00:75b0:798a:7f59:75cb])
-        by smtp.gmail.com with ESMTPSA id 22sm36719902wmb.11.2020.07.20.08.47.00
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 20 Jul 2020 08:47:00 -0700 (PDT)
-Date:   Mon, 20 Jul 2020 17:46:58 +0200
-From:   Guillaume Nault <gnault@redhat.com>
-To:     David Miller <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>
-Cc:     netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Martin Varghese <martin.varghese@nokia.com>
-Subject: [PATCH net] Documentation: bareudp: update iproute2 sample commands
-Message-ID: <57d0fff72970fdc7d49ab969f940438728f10754.1595259799.git.gnault@redhat.com>
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=2jbWthf/sjZFiaxrDbdSXd7IDu0n+zAeGRM5n6XQ12Q=;
+        b=cm5VzJaz5qrAkoZitAhzUZDycS7yfhS15HX/+qK23ajutc5u5UwdCxFcqwQzLus/vh7EWX
+        UyDw/ZPHkHN0liJK3lBqbLf/i9L+sWnoSe6WIs1Gwx0jp3TkBs4IYDOE1YG7MPnC878s3w
+        miPatgXK3fxnduOAlyFX1rDdxV+nxkYn47JxWpPmVWWwd7Glvmu7qAv3Wyil3jAmMaDY0v
+        t9TgnD9Echr0UPz3HIcpF4TyuPgtaatVtc/2O94aTqnAy7T4WnHmjJF6O1OnQ9sedFqgKE
+        SgF9i7DxWT0Af0lsIBTlGl05ZNKEBKMpJB1XK2TR2FaerXgz/IbL3NL1yn2O4g==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020e; t=1595260531;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=2jbWthf/sjZFiaxrDbdSXd7IDu0n+zAeGRM5n6XQ12Q=;
+        b=ZAFWlyQoaZ+tWxi7yUUbv462J9muSHDnco6CRcWa+luXz/lRxaZdbaNGE+wDp+0kF4FYvu
+        h9M+wZzjsYe0YpDw==
+To:     Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        "Sebastian A. Siewior" <bigeasy@linutronix.de>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "Ahmed S. Darwish" <a.darwish@linutronix.de>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        "David S. Miller" <davem@davemloft.net>, netdev@vger.kernel.org,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        linux-fsdevel@vger.kernel.org
+Subject: [PATCH v4 00/24] seqlock: Extend seqcount API with associated locks
+Date:   Mon, 20 Jul 2020 17:55:06 +0200
+Message-Id: <20200720155530.1173732-1-a.darwish@linutronix.de>
+In-Reply-To: <20200519214547.352050-1-a.darwish@linutronix.de>
+References: <20200519214547.352050-1-a.darwish@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-bareudp.rst was written before iproute2 gained support for this new
-type of tunnel. Therefore, the sample command lines didn't match the
-final iproute2 implementation.
+Hi,
 
-Signed-off-by: Guillaume Nault <gnault@redhat.com>
----
- Documentation/networking/bareudp.rst | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+This is v4 of the seqlock patch series:
 
-diff --git a/Documentation/networking/bareudp.rst b/Documentation/networking/bareudp.rst
-index 465a8b251bfe..ff406563ea88 100644
---- a/Documentation/networking/bareudp.rst
-+++ b/Documentation/networking/bareudp.rst
-@@ -26,7 +26,7 @@ Usage
- 
- 1) Device creation & deletion
- 
--    a) ip link add dev bareudp0 type bareudp dstport 6635 ethertype 0x8847.
-+    a) ip link add dev bareudp0 type bareudp dstport 6635 ethertype mpls_uc
- 
-        This creates a bareudp tunnel device which tunnels L3 traffic with ethertype
-        0x8847 (MPLS traffic). The destination port of the UDP header will be set to
-@@ -34,14 +34,21 @@ Usage
- 
-     b) ip link delete bareudp0
- 
--2) Device creation with multiple proto mode enabled
-+2) Device creation with multiproto mode enabled
- 
--There are two ways to create a bareudp device for MPLS & IP with multiproto mode
--enabled.
-+The multiproto mode allows bareudp tunnels to handle several protocols of the
-+same family. It is currently only available for IP and MPLS. This mode has to
-+be enabled explicitly with the "multiproto" flag.
- 
--    a) ip link add dev  bareudp0 type bareudp dstport 6635 ethertype 0x8847 multiproto
-+    a) ip link add dev bareudp0 type bareudp dstport 6635 ethertype ipv4 multiproto
- 
--    b) ip link add dev  bareudp0 type bareudp dstport 6635 ethertype mpls
-+       For an IPv4 tunnel the multiproto mode allows the tunnel to also handle
-+       IPv6.
-+
-+    b) ip link add dev bareudp0 type bareudp dstport 6635 ethertype mpls_uc multiproto
-+
-+       For MPLS, the multiproto mode allows the tunnel to handle both unicast
-+       and multicast MPLS packets.
- 
- 3) Device Usage
- 
--- 
-2.21.3
+   [PATCH v1 00/25]
+   https://lore.kernel.org/lkml/20200519214547.352050-1-a.darwish@linutronix.de
 
+   [PATCH v2 00/06] (bugfixes-only, merged)
+   https://lore.kernel.org/lkml/20200603144949.1122421-1-a.darwish@linutronix.de
+
+   [PATCH v2 00/18]
+   https://lore.kernel.org/lkml/20200608005729.1874024-1-a.darwish@linutronix.de
+
+   [PATCH v3 00/20]
+   https://lore.kernel.org/lkml/20200630054452.3675847-1-a.darwish@linutronix.de
+
+It is based over:
+
+   git://git.kernel.org/pub/scm/linux/kernel/git/peterz/queue.git :: locking/core
+
+Changelog
+=========
+
+ - Unconditionally use C11 _Generic() expressions for seqcount_locktype_t
+   switching. Thanks to Peter, pushing for 6ec4476ac825 ("Raise gcc
+   version requirement to 4.9").
+
+ - Compress the new seqcount_locktype_t code code by using generative
+   macros, as suggested by Peter here:
+
+   https://lkml.kernel.org/r/20200708122938.GQ4800@hirez.programming.kicks-ass.net
+
+   Keep *all* functions that are to be invoked by call-sites out of such
+   generative macros though. This simplifies the generative macros code,
+   and (more importantly) make the newly exported seqlock.h API explicit.
+
+ - Make all documentation "RST-lite", for better readability from text
+   editors.
+
+ - Add additional clean-ups at the start of the series for better
+   overall readability of seqlock.h code, and for future extensibility.
+
+Thanks,
+
+8<--------------
+
+Ahmed S. Darwish (24):
+  Documentation: locking: Describe seqlock design and usage
+  seqlock: Properly format kernel-doc code samples
+  seqlock: seqcount_t latch: End read sections with
+    read_seqcount_retry()
+  seqlock: Reorder seqcount_t and seqlock_t API definitions
+  seqlock: Add kernel-doc for seqcount_t and seqlock_t APIs
+  seqlock: Implement raw_seqcount_begin() in terms of
+    raw_read_seqcount()
+  lockdep: Add preemption enabled/disabled assertion APIs
+  seqlock: lockdep assert non-preemptibility on seqcount_t write
+  seqlock: Extend seqcount API with associated locks
+  seqlock: Align multi-line macros newline escapes at 72 columns
+  dma-buf: Remove custom seqcount lockdep class key
+  dma-buf: Use sequence counter with associated wound/wait mutex
+  sched: tasks: Use sequence counter with associated spinlock
+  netfilter: conntrack: Use sequence counter with associated spinlock
+  netfilter: nft_set_rbtree: Use sequence counter with associated rwlock
+  xfrm: policy: Use sequence counters with associated lock
+  timekeeping: Use sequence counter with associated raw spinlock
+  vfs: Use sequence counter with associated spinlock
+  raid5: Use sequence counter with associated spinlock
+  iocost: Use sequence counter with associated spinlock
+  NFSv4: Use sequence counter with associated spinlock
+  userfaultfd: Use sequence counter with associated spinlock
+  kvm/eventfd: Use sequence counter with associated spinlock
+  hrtimer: Use sequence counter with associated raw spinlock
+
+ Documentation/locking/index.rst               |    1 +
+ Documentation/locking/seqlock.rst             |  222 ++++
+ block/blk-iocost.c                            |    5 +-
+ drivers/dma-buf/dma-resv.c                    |   15 +-
+ .../gpu/drm/amd/amdgpu/amdgpu_amdkfd_gpuvm.c  |    2 -
+ drivers/md/raid5.c                            |    2 +-
+ drivers/md/raid5.h                            |    2 +-
+ fs/dcache.c                                   |    2 +-
+ fs/fs_struct.c                                |    4 +-
+ fs/nfs/nfs4_fs.h                              |    2 +-
+ fs/nfs/nfs4state.c                            |    2 +-
+ fs/userfaultfd.c                              |    4 +-
+ include/linux/dcache.h                        |    2 +-
+ include/linux/dma-resv.h                      |    4 +-
+ include/linux/fs_struct.h                     |    2 +-
+ include/linux/hrtimer.h                       |    2 +-
+ include/linux/kvm_irqfd.h                     |    2 +-
+ include/linux/lockdep.h                       |   19 +
+ include/linux/sched.h                         |    2 +-
+ include/linux/seqlock.h                       | 1139 +++++++++++++----
+ include/net/netfilter/nf_conntrack.h          |    2 +-
+ init/init_task.c                              |    3 +-
+ kernel/fork.c                                 |    2 +-
+ kernel/time/hrtimer.c                         |   13 +-
+ kernel/time/timekeeping.c                     |   19 +-
+ lib/Kconfig.debug                             |    1 +
+ net/netfilter/nf_conntrack_core.c             |    5 +-
+ net/netfilter/nft_set_rbtree.c                |    4 +-
+ net/xfrm/xfrm_policy.c                        |   10 +-
+ virt/kvm/eventfd.c                            |    2 +-
+ 30 files changed, 1173 insertions(+), 323 deletions(-)
+ create mode 100644 Documentation/locking/seqlock.rst
+
+base-commit: a9232dc5607dbada801f2fe83ea307cda762969a
+--
+2.20.1
