@@ -2,28 +2,31 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3D36B22B7EA
-	for <lists+linux-doc@lfdr.de>; Thu, 23 Jul 2020 22:40:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4838122B805
+	for <lists+linux-doc@lfdr.de>; Thu, 23 Jul 2020 22:43:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726331AbgGWUkL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 23 Jul 2020 16:40:11 -0400
-Received: from ms.lwn.net ([45.79.88.28]:42594 "EHLO ms.lwn.net"
+        id S1726331AbgGWUnx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 23 Jul 2020 16:43:53 -0400
+Received: from ms.lwn.net ([45.79.88.28]:42616 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725979AbgGWUkL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 23 Jul 2020 16:40:11 -0400
+        id S1726146AbgGWUnw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 23 Jul 2020 16:43:52 -0400
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 168312BA;
-        Thu, 23 Jul 2020 20:40:11 +0000 (UTC)
-Date:   Thu, 23 Jul 2020 14:40:09 -0600
+        by ms.lwn.net (Postfix) with ESMTPSA id B13782BA;
+        Thu, 23 Jul 2020 20:43:52 +0000 (UTC)
+Date:   Thu, 23 Jul 2020 14:43:51 -0600
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Tao Zhou <ouwen210@hotmail.com>
-Cc:     Alex Shi <alex.shi@linux.alibaba.com>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] doc/zh_CN: add cpu-load Chinese version
-Message-ID: <20200723144009.2f85578e@lwn.net>
-In-Reply-To: <BL0PR14MB37791BB5BC0E7224102B686A9A7C0@BL0PR14MB3779.namprd14.prod.outlook.com>
-References: <BL0PR14MB37791BB5BC0E7224102B686A9A7C0@BL0PR14MB3779.namprd14.prod.outlook.com>
+To:     Lee Jones <lee.jones@linaro.org>
+Cc:     linux-kernel@vger.kernel.org,
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        linux-doc@vger.kernel.org, clang-built-linux@googlegroups.com
+Subject: Re: [PATCH 1/1] doc:it_IT: process: coding-style.rst: Correct
+ __maybe_unused compiler label
+Message-ID: <20200723144351.333341d2@lwn.net>
+In-Reply-To: <20200715122328.3882187-1-lee.jones@linaro.org>
+References: <20200715122328.3882187-1-lee.jones@linaro.org>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -33,26 +36,32 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 17 Jul 2020 12:58:48 +0800
-Tao Zhou <ouwen210@hotmail.com> wrote:
+On Wed, 15 Jul 2020 13:23:28 +0100
+Lee Jones <lee.jones@linaro.org> wrote:
 
-> Add cpu-load Chinese version and link it into admin-guide.
-> Based on Alex's recent thread:
+> Flag is __maybe_unused, not __maybe_used.
 > 
->   https://lkml.kernel.org/r/20200713115807.56362-1-alex.shi@linux.alibaba.com
-> 
-> Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
-> Signed-off-by: Tao Zhou <ouwen210@hotmail.com>
+> Cc: Federico Vaga <federico.vaga@vaga.pv.it>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: linux-doc@vger.kernel.org
+> Cc: clang-built-linux@googlegroups.com
+> Signed-off-by: Lee Jones <lee.jones@linaro.org>
 > ---
->  .../zh_CN/admin-guide/cpu-load.rst            | 105 ++++++++++++++++++
->  .../translations/zh_CN/admin-guide/index.rst  |   2 +-
->  2 files changed, 106 insertions(+), 1 deletion(-)
->  create mode 100644 Documentation/translations/zh_CN/admin-guide/cpu-load.rst
+>  Documentation/translations/it_IT/process/coding-style.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/translations/it_IT/process/coding-style.rst b/Documentation/translations/it_IT/process/coding-style.rst
+> index 6f4f85832deea..a346f1f2ce21f 100644
+> --- a/Documentation/translations/it_IT/process/coding-style.rst
+> +++ b/Documentation/translations/it_IT/process/coding-style.rst
+> @@ -1097,7 +1097,7 @@ la direttiva condizionale su di esse.
+>  
+>  Se avete una variabile o funzione che potrebbe non essere usata in alcune
+>  configurazioni, e quindi il compilatore potrebbe avvisarvi circa la definizione
+> -inutilizzata, marcate questa definizione come __maybe_used piuttosto che
+> +inutilizzata, marcate questa definizione come __maybe_unused piuttosto che
+>  racchiuderla in una direttiva condizionale del preprocessore.  (Comunque,
 
-So I get "corrupt patch" errors when I try to apply this.  Could I ask you
-please to regenerate it, send it to yourself, and verify that you can
-apply it, then resend to me?
-
-Thanks,
+Applied, thanks.
 
 jon
