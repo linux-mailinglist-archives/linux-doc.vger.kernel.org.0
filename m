@@ -2,135 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1725822C1DE
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Jul 2020 11:16:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CD00922C584
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Jul 2020 14:44:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727784AbgGXJQ3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Jul 2020 05:16:29 -0400
-Received: from foss.arm.com ([217.140.110.172]:58284 "EHLO foss.arm.com"
+        id S1726887AbgGXMou convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 24 Jul 2020 08:44:50 -0400
+Received: from mx2.itam.mx ([148.205.229.36]:43100 "EHLO mx2.itam.mx"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726801AbgGXJQ3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 24 Jul 2020 05:16:29 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 942FCD6E;
-        Fri, 24 Jul 2020 02:16:28 -0700 (PDT)
-Received: from e107158-lin.cambridge.arm.com (e107158-lin.cambridge.arm.com [10.1.195.21])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 298433F66E;
-        Fri, 24 Jul 2020 02:16:26 -0700 (PDT)
-Date:   Fri, 24 Jul 2020 10:16:23 +0100
-From:   Qais Yousef <qais.yousef@arm.com>
-To:     Peter Zijlstra <peterz@infradead.org>
-Cc:     Ingo Molnar <mingo@redhat.com>,
-        Doug Anderson <dianders@chromium.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Iurii Zaikin <yzaikin@google.com>,
-        Quentin Perret <qperret@google.com>,
-        Valentin Schneider <valentin.schneider@arm.com>,
-        Patrick Bellasi <patrick.bellasi@matbug.net>,
-        Pavan Kondeti <pkondeti@codeaurora.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v7 1/3] sched/uclamp: Add a new sysctl to control RT
- default boost value
-Message-ID: <20200724091623.juqepztp5xtqgzrr@e107158-lin.cambridge.arm.com>
-References: <20200716110347.19553-1-qais.yousef@arm.com>
- <20200716110347.19553-2-qais.yousef@arm.com>
- <20200724085405.GW10769@hirez.programming.kicks-ass.net>
+        id S1726483AbgGXMou (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 24 Jul 2020 08:44:50 -0400
+Received: from cronos2.itam.mx (cronos2.itam.mx [148.205.148.141])
+        by mx2.itam.mx  with ESMTP id 06OChd3Y005048-06OChd3r005048
+        (version=TLSv1.0 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
+        Fri, 24 Jul 2020 07:43:41 -0500
+Received: from [10.28.175.153] (105.0.7.102) by cronos2.itam.mx
+ (148.205.148.141) with Microsoft SMTP Server (TLS) id 14.3.468.0; Fri, 24 Jul
+ 2020 07:41:17 -0500
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20200724085405.GW10769@hirez.programming.kicks-ass.net>
-User-Agent: NeoMutt/20171215
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: =?utf-8?q?Covid_19_Wohlt=C3=A4tigkeitsfonds?=
+To:     Recipients@vger.kernel.org
+From:   ''Tayeb@vger.kernel.org, Souami''@vger.kernel.org
+Date:   Fri, 24 Jul 2020 14:41:07 +0200
+Reply-To: <charlesjacksonjr001@gmail.com>
+Message-ID: <ef4138f9-120a-45f2-a673-0a8bad90c72a@CRONOS2.itam.mx>
+X-Originating-IP: [105.0.7.102]
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 07/24/20 10:54, Peter Zijlstra wrote:
-> On Thu, Jul 16, 2020 at 12:03:45PM +0100, Qais Yousef wrote:
-> 
-> Would you mind terribly if I rename things like so?
+Hallo
 
-Nope, the new name is good for me too.
+Ich bin Charles W. Jackson aus North Carolina, Vereinigte Staaten von Amerika, und ich bin der Gewinner des Mega-Millionen-Jackpots von 344 Millionen US-Dollar. Ich spende die Summe von 2.000.000 Millionen Euro als Teil der Hilfsgelder für das Corona-Virus.
 
-> 
-> I tried and failed to come up with a shorter name in general, these
-> functions names are somewhat unwieldy. I considered s/_default//.
+Dies ist Ihr Spendencode: [CJ530342019]
 
-Can do. Me thinking that maybe we need to sprinkle more comments then. But if
-I felt the need for more comments, I can always post another patch on top :-)
+www.youtube.com/watch?v=BSr8myiLPMQ
 
-If you'd like a shorter name, a slightly shorter one would be
+Bitte antworten Sie auf diese E-Mail mit dem SPENDERCODE:
 
-	update_uclamp_min_rt()
+charlesjacksonjr001@gmail.com
 
-Thanks
+Ich hoffe, dass Sie und Ihre Familie dies durchkommen
 
---
-Qais Yousef
 
-> 
-> ---
-> --- a/kernel/sched/core.c
-> +++ b/kernel/sched/core.c
-> @@ -914,7 +914,7 @@ unsigned int uclamp_rq_max_value(struct
->  	return uclamp_idle_value(rq, clamp_id, clamp_value);
->  }
->  
-> -static void __uclamp_sync_util_min_rt_default_locked(struct task_struct *p)
-> +static void __uclamp_update_util_min_rt_default(struct task_struct *p)
->  {
->  	unsigned int default_util_min;
->  	struct uclamp_se *uc_se;
-> @@ -931,7 +931,7 @@ static void __uclamp_sync_util_min_rt_de
->  	uclamp_se_set(uc_se, default_util_min, false);
->  }
->  
-> -static void __uclamp_sync_util_min_rt_default(struct task_struct *p)
-> +static void uclamp_update_util_min_rt_default(struct task_struct *p)
->  {
->  	struct rq_flags rf;
->  	struct rq *rq;
-> @@ -941,7 +941,7 @@ static void __uclamp_sync_util_min_rt_de
->  
->  	/* Protect updates to p->uclamp_* */
->  	rq = task_rq_lock(p, &rf);
-> -	__uclamp_sync_util_min_rt_default_locked(p);
-> +	__uclamp_update_util_min_rt_default(p);
->  	task_rq_unlock(rq, p, &rf);
->  }
->  
-> @@ -968,7 +968,7 @@ static void uclamp_sync_util_min_rt_defa
->  
->  	rcu_read_lock();
->  	for_each_process_thread(g, p)
-> -		__uclamp_sync_util_min_rt_default(p);
-> +		uclamp_update_util_min_rt_default(p);
->  	rcu_read_unlock();
->  }
->  
-> @@ -1360,7 +1360,7 @@ static void __setscheduler_uclamp(struct
->  		 * at runtime.
->  		 */
->  		if (unlikely(rt_task(p) && clamp_id == UCLAMP_MIN))
-> -			__uclamp_sync_util_min_rt_default_locked(p);
-> +			__uclamp_update_util_min_rt_default(p);
->  		else
->  			uclamp_se_set(uc_se, uclamp_none(clamp_id), false);
->  
-> @@ -1404,7 +1404,7 @@ static void uclamp_fork(struct task_stru
->  
->  static void uclamp_post_fork(struct task_struct *p)
->  {
-> -	__uclamp_sync_util_min_rt_default(p);
-> +	uclamp_update_util_min_rt_default(p);
->  }
->  
->  static void __init init_uclamp_rq(struct rq *rq)
+Herr Charles Jackson
