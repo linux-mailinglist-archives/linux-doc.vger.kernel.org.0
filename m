@@ -2,51 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CD00922C584
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Jul 2020 14:44:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7847D22C648
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Jul 2020 15:25:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726887AbgGXMou convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Fri, 24 Jul 2020 08:44:50 -0400
-Received: from mx2.itam.mx ([148.205.229.36]:43100 "EHLO mx2.itam.mx"
+        id S1726493AbgGXNYw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Jul 2020 09:24:52 -0400
+Received: from ozlabs.org ([203.11.71.1]:54591 "EHLO ozlabs.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726483AbgGXMou (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 24 Jul 2020 08:44:50 -0400
-Received: from cronos2.itam.mx (cronos2.itam.mx [148.205.148.141])
-        by mx2.itam.mx  with ESMTP id 06OChd3Y005048-06OChd3r005048
-        (version=TLSv1.0 cipher=DHE-RSA-AES256-SHA bits=256 verify=FAIL);
-        Fri, 24 Jul 2020 07:43:41 -0500
-Received: from [10.28.175.153] (105.0.7.102) by cronos2.itam.mx
- (148.205.148.141) with Microsoft SMTP Server (TLS) id 14.3.468.0; Fri, 24 Jul
- 2020 07:41:17 -0500
-Content-Type: text/plain; charset="iso-8859-1"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: =?utf-8?q?Covid_19_Wohlt=C3=A4tigkeitsfonds?=
-To:     Recipients@vger.kernel.org
-From:   ''Tayeb@vger.kernel.org, Souami''@vger.kernel.org
-Date:   Fri, 24 Jul 2020 14:41:07 +0200
-Reply-To: <charlesjacksonjr001@gmail.com>
-Message-ID: <ef4138f9-120a-45f2-a673-0a8bad90c72a@CRONOS2.itam.mx>
-X-Originating-IP: [105.0.7.102]
+        id S1726892AbgGXNYw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 24 Jul 2020 09:24:52 -0400
+Received: by ozlabs.org (Postfix, from userid 1034)
+        id 4BCqgL0JnKz9sTT; Fri, 24 Jul 2020 23:24:44 +1000 (AEST)
+From:   Michael Ellerman <patch-notifications@ellerman.id.au>
+To:     nayna@linux.ibm.com, linuxppc-dev@lists.ozlabs.org,
+        pfsmorigo@gmail.com, herbert@gondor.apana.org.au,
+        "Alexander A. Klimov" <grandmaster@al2klimov.de>, corbet@lwn.net,
+        davem@davemloft.net, linux-doc@vger.kernel.org, paulus@samba.org,
+        benh@kernel.crashing.org, linux-crypto@vger.kernel.org,
+        leitao@debian.org, linux-kernel@vger.kernel.org, mpe@ellerman.id.au
+In-Reply-To: <20200718103958.5455-1-grandmaster@al2klimov.de>
+References: <20200718103958.5455-1-grandmaster@al2klimov.de>
+Subject: Re: [PATCH] powerpc: Replace HTTP links with HTTPS ones
+Message-Id: <159559696781.1657499.3467682028636656801.b4-ty@ellerman.id.au>
+Date:   Fri, 24 Jul 2020 23:24:44 +1000 (AEST)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hallo
+On Sat, 18 Jul 2020 12:39:58 +0200, Alexander A. Klimov wrote:
+> Rationale:
+> Reduces attack surface on kernel devs opening the links for MITM
+> as HTTPS traffic is much harder to manipulate.
+> 
+> Deterministic algorithm:
+> For each file:
+>   If not .svg:
+>     For each line:
+>       If doesn't contain `\bxmlns\b`:
+>         For each link, `\bhttp://[^# \t\r\n]*(?:\w|/)`:
+> 	  If neither `\bgnu\.org/license`, nor `\bmozilla\.org/MPL\b`:
+>             If both the HTTP and HTTPS versions
+>             return 200 OK and serve the same content:
+>               Replace HTTP with HTTPS.
 
-Ich bin Charles W. Jackson aus North Carolina, Vereinigte Staaten von Amerika, und ich bin der Gewinner des Mega-Millionen-Jackpots von 344 Millionen US-Dollar. Ich spende die Summe von 2.000.000 Millionen Euro als Teil der Hilfsgelder für das Corona-Virus.
+Applied to powerpc/next.
 
-Dies ist Ihr Spendencode: [CJ530342019]
+[1/1] powerpc: Replace HTTP links with HTTPS ones
+      https://git.kernel.org/powerpc/c/c8ed9fc9d29e24dafd08971e6a0c6b302a8ade2d
 
-www.youtube.com/watch?v=BSr8myiLPMQ
-
-Bitte antworten Sie auf diese E-Mail mit dem SPENDERCODE:
-
-charlesjacksonjr001@gmail.com
-
-Ich hoffe, dass Sie und Ihre Familie dies durchkommen
-
-
-Herr Charles Jackson
+cheers
