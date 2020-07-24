@@ -2,48 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 050B422C908
-	for <lists+linux-doc@lfdr.de>; Fri, 24 Jul 2020 17:29:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4378722CB80
+	for <lists+linux-doc@lfdr.de>; Fri, 24 Jul 2020 18:54:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726801AbgGXP32 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Jul 2020 11:29:28 -0400
-Received: from [125.140.134.231] ([125.140.134.231]:53505 "EHLO
-        WIN-DAONO245HJF" rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726643AbgGXP32 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Jul 2020 11:29:28 -0400
-Received: from User ([66.154.113.229]) by WIN-DAONO245HJF with Microsoft SMTPSVC(8.5.9600.16384);
-         Sat, 25 Jul 2020 00:23:25 +0900
-Reply-To: <christopherwang36@gmail.com>
-From:   "CHRISTOPHER WANG" <christopherwang36@gmail.com>
-Subject: INVESTMENT
-Date:   Fri, 24 Jul 2020 08:23:43 -0700
-MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="Windows-1251"
+        id S1726593AbgGXQyw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 24 Jul 2020 12:54:52 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60664 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726326AbgGXQyw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 24 Jul 2020 12:54:52 -0400
+Received: from devnote2 (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id E05642067D;
+        Fri, 24 Jul 2020 16:54:47 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1595609691;
+        bh=azXTuPtD0wyxhJb8+S80ttgXv1X66U18s0TnoZF41UA=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=zloXNCE9NRhNj/XI9NCCd6p1AAExb8vucsyQl478RGtY28vDzOVkDucgKtkbl8La8
+         ibNTj5s/UOlYsUTV0n7bVo5QY7ig4T2uODiZsILUzoTZuQJUHnsEnH+2hrNdH4jtC4
+         p92gnj/uPjhZ6Pe74RteAMaWm7x0NS99W8shLD2M=
+Date:   Sat, 25 Jul 2020 01:54:45 +0900
+From:   Masami Hiramatsu <mhiramat@kernel.org>
+To:     Jisheng Zhang <Jisheng.Zhang@synaptics.com>
+Cc:     Mark Rutland <mark.rutland@arm.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        Anil S Keshavamurthy <anil.s.keshavamurthy@intel.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        "Naveen N. Rao" <naveen.n.rao@linux.ibm.com>,
+        Will Deacon <will@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        "linux-arm-kernel@lists.infradead.org" 
+        <linux-arm-kernel@lists.infradead.org>
+Subject: Re: [PATCH v7 3/3] arm64: implement KPROBES_ON_FTRACE
+Message-Id: <20200725015445.d789abc36fcef2d7bd3436dd@kernel.org>
+In-Reply-To: <20200724150611.40b17827@xhacker.debian>
+References: <20191225172625.69811b3e@xhacker.debian>
+        <20191225173001.6c0e3fb2@xhacker.debian>
+        <20191226115707.902545688aa90b34e2e550b3@kernel.org>
+        <20191226110348.146bb80b@xhacker.debian>
+        <20191226121108.0cd1b078@xhacker.debian>
+        <20191226182607.06770598a00507090a046951@kernel.org>
+        <20200721222455.e99fb8660f69f61ad1bc8942@kernel.org>
+        <20200724150611.40b17827@xhacker.debian>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2600.0000
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
-Message-ID: <WIN-DAONO245HJFyTcs008ef901@WIN-DAONO245HJF>
-X-OriginalArrivalTime: 24 Jul 2020 15:23:26.0051 (UTC) FILETIME=[60483330:01D661CE]
-To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Fri, 24 Jul 2020 15:06:11 +0800
+Jisheng Zhang <Jisheng.Zhang@synaptics.com> wrote:
 
+> 
+> On Tue, 21 Jul 2020 22:24:55 +0900 Masami Hiramatsu wrote:
+> 
+> > 
+> > 
+> > Hi Jisheng,
+> 
+> Hi,
+> 
+> > 
+> > Would you be still working on this series?
+> 
+> I will rebase the implementation on the latest code, then try to address
+> your comments and Mark's comments. I will send out patches in this weekend.
+> 
+> > 
+> > If you are still want to put a probe on func+4, it is OK if you can
+> > completely emulate the 1st instruction. (lr save on the stack and
+> > change the regs->sp)
+> 
+> Will check which is the better solution.
 
-Good day,
+Thanks Jisheng!
 
-You were recommended by a mutual associate. I write you regarding an investment of bearer bonds I made on behalf of a client. 
+What I'm considering is the consistency of pre_handler()@addr and 
+post_handler()@addr+4. Also, whether the value of regs (and stacks) is
+same as the user expected.
 
-       The investment was made in 2009 and has been under my management. The said investor is deceased. The window is now available to assign these bonds to any name or company of my choice. I have all the necessary information to achieve this within 10 banking days.
-      
-       The total value of the bond is 100million pounds sterling, in a million pound denominations.
-      
-        If you can handle this, do contact me at your earliest convenience via my email christopherwang36@gmail.com
-So we can discuss the final details Thank you.
- 
-Mr CHRISTOPHER WANG
+Thank you,
+
+-- 
+Masami Hiramatsu <mhiramat@kernel.org>
