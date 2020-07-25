@@ -2,87 +2,110 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A6ECA22D3BF
-	for <lists+linux-doc@lfdr.de>; Sat, 25 Jul 2020 04:25:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4A59B22D721
+	for <lists+linux-doc@lfdr.de>; Sat, 25 Jul 2020 13:44:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726592AbgGYCZM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 24 Jul 2020 22:25:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45892 "EHLO
+        id S1726612AbgGYLoh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 25 Jul 2020 07:44:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47454 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726572AbgGYCZM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 24 Jul 2020 22:25:12 -0400
-Received: from mail-pj1-x1042.google.com (mail-pj1-x1042.google.com [IPv6:2607:f8b0:4864:20::1042])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67686C0619D3
-        for <linux-doc@vger.kernel.org>; Fri, 24 Jul 2020 19:25:12 -0700 (PDT)
-Received: by mail-pj1-x1042.google.com with SMTP id il6so701949pjb.0
-        for <linux-doc@vger.kernel.org>; Fri, 24 Jul 2020 19:25:12 -0700 (PDT)
+        with ESMTP id S1726583AbgGYLoh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 25 Jul 2020 07:44:37 -0400
+Received: from mail-vk1-xa43.google.com (mail-vk1-xa43.google.com [IPv6:2607:f8b0:4864:20::a43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E6BBC0619D3
+        for <linux-doc@vger.kernel.org>; Sat, 25 Jul 2020 04:44:37 -0700 (PDT)
+Received: by mail-vk1-xa43.google.com with SMTP id l184so1709426vki.10
+        for <linux-doc@vger.kernel.org>; Sat, 25 Jul 2020 04:44:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
+        h=mime-version:reply-to:from:date:message-id:subject:to
          :content-transfer-encoding;
-        bh=plNbccrGNuKgYL7jCXUuhHMq/5cuypXgcbP/jbp0W68=;
-        b=TLgWNuclqVMP1kwksgnFc3VDTZawBo7RFaPea885RjfO9TaGfEhf2WKRCpTMxonXeI
-         CHfr/3oh1b86+LIz5zLO01qU8YMSMmWEhxpK9gnuaX2+BIFtFQ2wrFzGIJHpPuAhhAWa
-         Hfm2QeKO8SIQiZlo44mI5EngszSanhLJ3B4lsbGd5jq67PrNTQIPhPF3wPvQg6Mjn5pb
-         qTGVT1lyfMgiY1TrLF/NJ9JwRJntWduWD+AnQi7M7HLRax++Yw5NXeWkd7CtvefF/7NE
-         3YQmRpz99f8xIyR42K335zKCEOueZbqTvPP0QJ/qgabYlt3UvzEHl9Ym3jMTFCfQ4Hsh
-         TLpQ==
+        bh=SVNb5Kg1ASfdMgyLG2rKAFbrfA3Kua0kChvKzVn56jI=;
+        b=cPRA8sOHYfNMYxx9+ab6gImoB40rVJddA2cHLujTvCgk+WEiQNRtjeBue+uAgodLqf
+         /iaCf/I50g2owCHu+282Cn4DZNIR4zEcE89sSONUnjhYNRI+TinFsnNMVaS3ORo/8N15
+         j7Dlsun+9AGFyZOZE8N5INrSkGZZgMN6aYj6Hqqes02ErFqsn5Fzwen61kMacyXFnRkt
+         tI8/LzH7bPG4ObUqSZTD5IAAdZ49nYHo0OZFp56kcBddrBi4pKja+E+paNGLRUHRwc6n
+         WFJUs9h+5VC9T8xbiFbkd6wKjmzcthWDL4uBtgxi7SSihdSw3Ihi8k5z/UQYfv5VmHyz
+         Cfmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=plNbccrGNuKgYL7jCXUuhHMq/5cuypXgcbP/jbp0W68=;
-        b=HRJOeULnPZmE1fEdrgyIvqOZGFesl3MVMOsjq8sPLyLeSkwsy0WuaZsgCT4Gh0z/Na
-         HrZCnfo0MBZP+Yzkw75v5nSm9XjvYsAdVI5U0fvsYgn+9WJiXqXfgXOs2oGk7PZIfTZZ
-         lLZTNa3JttpWKmHRAAemftrKCHHaCagMiCkX9WtVT0nH9u6qTgxVYHAd2W59dHhC6vES
-         3re3G0xQk5LQT0zSo7b1pvZUoQzl9vI8vP01OP05rr/3PaM0SsaL5yHNuhtEneeqdOVK
-         4WLmJrRu5t/q8L1S7iD16t62eQUv5DkOzOnMVAe3Lsexnlcnj7PrS7ruebVl6pMXhJcA
-         J4ew==
-X-Gm-Message-State: AOAM5306XJDxA89vbpkAJ3drHfTSrdEXThcSQOssebsFgF2Q9jTelv82
-        3eYi4tUc9jgXonlYZLHnmt2kiWDr
-X-Google-Smtp-Source: ABdhPJxiSC0RwFLKPixkyjDq12bShS6h/pD9rpD1fhS2btXJcztBKp/QEhfiZDxtDB1elNqZ/0pQog==
-X-Received: by 2002:a17:902:6194:: with SMTP id u20mr10848465plj.68.1595643911804;
-        Fri, 24 Jul 2020 19:25:11 -0700 (PDT)
-Received: from huyue2.ccdomain.com ([103.29.143.67])
-        by smtp.gmail.com with ESMTPSA id o10sm6847507pjs.27.2020.07.24.19.25.09
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 24 Jul 2020 19:25:11 -0700 (PDT)
-From:   Yue Hu <zbestahu@gmail.com>
-To:     corbet@lwn.net
-Cc:     linux-doc@vger.kernel.org, huyue2@yulong.com
-Subject: [PATCH] Documentation/admin-guide: tainted-kernels: fix spelling mistake
-Date:   Sat, 25 Jul 2020 10:24:44 +0800
-Message-Id: <20200725022444.10976-1-zbestahu@gmail.com>
-X-Mailer: git-send-email 2.19.1.windows.1
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=SVNb5Kg1ASfdMgyLG2rKAFbrfA3Kua0kChvKzVn56jI=;
+        b=GBVQVRBz7TC/SuZtKieX2fz877mT3e5lqc0IhS/q6hL6yHOhmM8HImDOchNQhWzOVR
+         UaELke3N6GTlDGn5xYTqSMcLLVcfh84q2PE+EZsUleGczBTC5JIMVyoa5UYw26XSf9wo
+         Sn/rmZMShF5HVt/uY005HSl9p0QdF3PxzFGbFDTVPLEjCGnoAc/4ABuXJvnpy5syi/qI
+         XGISRykTCqMGq06LafEo8WfJ0fdBpcFsY4KtfTOXrrpw1ksgphxiar88Wu5mI7u32XzK
+         W+hLIPo0CetfnO42PoROulvBWBNtYEkNVlgTrpMaOT8Kl4r9Ht1h7RlNUJLyA2mSwu2g
+         hKsA==
+X-Gm-Message-State: AOAM530kcluMsnaZNzSv6tC1QdFtGJPMUGbaKcNgMY/xbC3mhTDtNNtH
+        cXGSdwfMqgUBXbiHub7eJhYFIJMIIkCmCdzl6ls=
+X-Google-Smtp-Source: ABdhPJy8H/Ol7e9I/JIen+DjWvTMTH+CcvFbxgR5Ffb3t5ZXhZVOteW/uXOa5f+okKjRKV3PXAmV4bupp+wOcJ/ptm0=
+X-Received: by 2002:a1f:5ec9:: with SMTP id s192mr11013405vkb.97.1595677476006;
+ Sat, 25 Jul 2020 04:44:36 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Received: by 2002:ab0:993:0:0:0:0:0 with HTTP; Sat, 25 Jul 2020 04:44:35 -0700 (PDT)
+Reply-To: jolsonfinancialgroup@gmail.com
+From:   OLSON ERIC <ericolson862@gmail.com>
+Date:   Sat, 25 Jul 2020 04:44:35 -0700
+Message-ID: <CANxXwSSeQ3_XhAUKy6eGL0XpgYoFqc5-rX_yV8_fKJspi0kSfQ@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Yue Hu <huyue2@yulong.com>
+--=20
+Ben=C3=B6tigen Sie ein Darlehen, ben=C3=B6tigen Sie ein gesch=C3=A4ftliches=
+ oder
+pers=C3=B6nliches Darlehen?
+M=C3=B6chten Sie Ihr Unternehmen refinanzieren?
+Wir sind ein zertifiziertes Finanzunternehmen, das Mittel f=C3=BCr alle
+Arten von Projekten genehmigt.
+Wir vergeben Kredite an Einzelpersonen und Unternehmen zu einem
+j=C3=A4hrlichen Zinssatz von 2%.
+Sie k=C3=B6nnen auch in unser Unternehmen investieren und Ihr Interesse ste=
+igt ab
+ =E2=82=AC 20.000,00 in 14 Wochen, abh=C3=A4ngig von dem Betrag, den Sie in=
+ unser
+Unternehmen investieren m=C3=B6chten. Sie k=C3=B6nnen von 50.000,00 =E2=82=
+=AC bis
+500.000.000,00 =E2=82=AC in Pfund und Euro ETC investieren. Wir bieten alle
+Arten von Darlehen und vieles mehr:
 
-Fix typo "tis" -> "this".
+* Vertragsabwicklung
+* Pers=C3=B6nliche Darlehen
+* Gesch=C3=A4ftskredite
+* Autokredit
+* Autokredit
+* Reha-Darlehen
+* Expansionsdarlehen
+* Gesundheitswesen
+* Konsolidierungsdarlehen (ETC).
 
-Signed-off-by: Yue Hu <huyue2@yulong.com>
----
- Documentation/admin-guide/tainted-kernels.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+DARLEHEN ANTRAGSFORMULAR
+Ihr vollst=C3=A4ndiger Name:
+Dein Land:
+Ihr Bundesstaat:
+Adresse:
+Dein Alter:
+Telefonnummer:
+Besetzung:
+Als Darlehen ben=C3=B6tigter Betrag:
+Der Grund f=C3=BCr den Kredit:
+Leihdauer:
+Haben Sie schon einmal einen Kredit beantragt?
 
-diff --git a/Documentation/admin-guide/tainted-kernels.rst b/Documentation/admin-guide/tainted-kernels.rst
-index 71e9184..0fbaa0f 100644
---- a/Documentation/admin-guide/tainted-kernels.rst
-+++ b/Documentation/admin-guide/tainted-kernels.rst
-@@ -38,7 +38,7 @@ either letters or blanks. In above example it looks like this::
- 
- 	Tainted: P        W  O
- 
--The meaning of those characters is explained in the table below. In tis case
-+The meaning of those characters is explained in the table below. In this case
- the kernel got tainted earlier because a proprietary Module (``P``) was loaded,
- a warning occurred (``W``), and an externally-built module was loaded (``O``).
- To decode other letters use the table below.
--- 
-1.9.1
+Sicherheiten- und Nicht-Sicherheiten-Kredite bieten @ 2% Kredite f=C3=BCr
+Ihre Unternehmensgr=C3=BCndung: Kredite f=C3=BCr alle zu einem niedrigen
+Zinssatz.
+Senden Sie uns noch heute eine E-Mail an
+jolsonfinancialgroup@gmail.com, um weitere Informationen zu erhalten.
+Wir warten auf Ihre dringende Antwort. Vielen Dank f=C3=BCr Ihre Mitarbeit.
 
+Freundliche Gr=C3=BC=C3=9Fe,
+
+- OLSON ERIC FINANCIAL COMPANY
