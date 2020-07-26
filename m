@@ -2,54 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 446B622E149
-	for <lists+linux-doc@lfdr.de>; Sun, 26 Jul 2020 18:28:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6107022E11B
+	for <lists+linux-doc@lfdr.de>; Sun, 26 Jul 2020 18:06:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726244AbgGZQ2u (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 26 Jul 2020 12:28:50 -0400
-Received: from mail3-relais-sop.national.inria.fr ([192.134.164.104]:36001
+        id S1726674AbgGZQGO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 26 Jul 2020 12:06:14 -0400
+Received: from mail3-relais-sop.national.inria.fr ([192.134.164.104]:40373
         "EHLO mail3-relais-sop.national.inria.fr" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726044AbgGZQ2u (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 26 Jul 2020 12:28:50 -0400
+        by vger.kernel.org with ESMTP id S1726666AbgGZQGN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 26 Jul 2020 12:06:13 -0400
 X-IronPort-AV: E=Sophos;i="5.75,399,1589234400"; 
-   d="scan'208";a="355317949"
-Received: from palace.rsr.lip6.fr (HELO palace.lip6.fr) ([132.227.105.202])
-  by mail3-relais-sop.national.inria.fr with ESMTP/TLS/AES256-SHA256; 26 Jul 2020 18:28:48 +0200
-From:   Julia Lawall <Julia.Lawall@inria.fr>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Bjorn Helgaas <bhelgaas@google.com>, linux-pci@vger.kernel.org
-Cc:     kernel-janitors@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH] PCI: correct flag name
-Date:   Sun, 26 Jul 2020 17:47:35 +0200
-Message-Id: <1595778455-12132-1-git-send-email-Julia.Lawall@inria.fr>
-X-Mailer: git-send-email 1.9.1
+   d="scan'208";a="355317427"
+Received: from abo-173-121-68.mrs.modulonet.fr (HELO hadrien) ([85.68.121.173])
+  by mail3-relais-sop.national.inria.fr with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 26 Jul 2020 18:06:12 +0200
+Date:   Sun, 26 Jul 2020 18:06:11 +0200 (CEST)
+From:   Julia Lawall <julia.lawall@inria.fr>
+X-X-Sender: jll@hadrien
+To:     viro@zeniv.linux.org.uk, linux-fsdevel@vger.kernel.org,
+        linux-kernel@vger.kernel.org, corbet@lwn.net,
+        linux-doc@vger.kernel.org
+Subject: question about sharedsubtree.rst
+Message-ID: <alpine.DEB.2.22.394.2007261801150.13826@hadrien>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-RESOURCE_IO does not exist.  Rename to IORESOURCE_IO.
+Hello,
 
-Signed-off-by: Julia Lawall <Julia.Lawall@inria.fr>
+Documentation/filesystems/sharedsubtree.rst contains the following:
 
----
-Just a guess based on the most similar name...
+        ->mnt_flags
+	        takes two more flags to indicate the propagation status of
+	        the vfsmount.  MNT_SHARE indicates that the vfsmount is a shared
+	        vfsmount.  MNT_UNCLONABLE indicates that the vfsmount cannot be
+		replicated.
 
- Documentation/filesystems/sysfs-pci.rst |    2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I guess that MNT_SHARE should be MNT_SHARED.  More seriously,
+MNT_UNCLONABLE seems to have never existed, except in a patch proposed in
+2005: https://lists.linuxcoding.com/kernel/2005-q3/msg01881.html
+Should there be a description of MNT_UNBINDABLE instead?  Or something
+else?
 
-diff --git a/Documentation/filesystems/sysfs-pci.rst b/Documentation/filesystems/sysfs-pci.rst
-index a265f3e..742fbd2 100644
---- a/Documentation/filesystems/sysfs-pci.rst
-+++ b/Documentation/filesystems/sysfs-pci.rst
-@@ -63,7 +63,7 @@ files, each with their own function.
-   binary - file contains binary data
-   cpumask - file contains a cpumask type
- 
--.. [1] rw for RESOURCE_IO (I/O port) regions only
-+.. [1] rw for IORESOURCE_IO (I/O port) regions only
- 
- The read only files are informational, writes to them will be ignored, with
- the exception of the 'rom' file.  Writable files can be used to perform
-
+thanks,
+julia
