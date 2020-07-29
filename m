@@ -2,94 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8665B232362
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jul 2020 19:33:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0E669232391
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jul 2020 19:40:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726509AbgG2RdQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Jul 2020 13:33:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59958 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726480AbgG2RdQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Jul 2020 13:33:16 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 27BF9C061794
-        for <linux-doc@vger.kernel.org>; Wed, 29 Jul 2020 10:33:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
-        :Reply-To:Content-ID:Content-Description;
-        bh=EHFOPfesjGxscZfs70crUk5/FQqBqlH1MNHu6mjS6S0=; b=eByDfxve0neV1p/KdG5GNp0j1u
-        M95ecuMpFkyOztnVEX+as3vlv+VHjJWm6hMJHYYfDdayo9bYVry92ttT+9lzjmMt+PQq+fkWKpKLz
-        7/OtlNi1ROdUEjmiLRD7AMTZY6dDGFvGIlsT80UpHIdA4xaTban44RWHgv0zOrLzERz/tIQbnGnoM
-        RAX/FTka1s1Lcw7WcEMGnSg6nLvxfr8z2EKCDjPQj5xk0rGtg+RVsaSoaNirtjS2wZPXG+TIhjh83
-        bfeyvivucw+lTJcbtD6YP9M9ytwfHmyfx1CofjqoVP4XY32YozekUVNTe9luI7YbeM632l2SwVPow
-        InI3TL1g==;
-Received: from [2601:1c0:6280:3f0::19c2]
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1k0px4-0003bB-5A; Wed, 29 Jul 2020 17:33:14 +0000
-Subject: Re: Documentation/scsi/aha152x.rst
-To:     Julia Lawall <julia.lawall@inria.fr>, mchehab+huawei@kernel.org,
+        id S1726909AbgG2Rkk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Jul 2020 13:40:40 -0400
+Received: from m43-7.mailgun.net ([69.72.43.7]:19508 "EHLO m43-7.mailgun.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726365AbgG2Rkj (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 29 Jul 2020 13:40:39 -0400
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
+ s=smtp; t=1596044438; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=I/IQdNkreYiTRKc48552j/BGYeKsZ+oHQdQeMynB8Og=; b=en3H06H8fupCLBVQSezRDC/URFPt6rhsTgLNgofv+woJpyBgrlxmtJmnaarg5Bc3p1L6zH++
+ IZPqn54OWJq0ovmEiQc3dlsPOGHXN+XNFA70Y0N7tBWnvRuRU4lwzxcvlvezgUbMW6RDDAjX
+ hDeLwouHXTlt/6/l4mFXO+6nhKs=
+X-Mailgun-Sending-Ip: 69.72.43.7
+X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n07.prod.us-east-1.postgun.com with SMTP id
+ 5f21b48370ff737ddb4cfa34 (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Wed, 29 Jul 2020 17:40:19
+ GMT
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+        id B4D39C433A0; Wed, 29 Jul 2020 17:40:18 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+        aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE
+        autolearn=unavailable autolearn_force=no version=3.4.0
+Received: from sidgup-linux.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+        (No client certificate requested)
+        (Authenticated sender: sidgup)
+        by smtp.codeaurora.org (Postfix) with ESMTPSA id 4E151C433C9;
+        Wed, 29 Jul 2020 17:40:17 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 4E151C433C9
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=none smtp.mailfrom=sidgup@codeaurora.org
+From:   Siddharth Gupta <sidgup@codeaurora.org>
+To:     agross@kernel.org, bjorn.andersson@linaro.org, ohad@wizery.com,
         corbet@lwn.net
-Cc:     linux-doc@vger.kernel.org
-References: <alpine.DEB.2.22.394.2007291908280.2459@hadrien>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <da610848-322c-3bcf-e351-bead548d8961@infradead.org>
-Date:   Wed, 29 Jul 2020 10:33:10 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.22.394.2007291908280.2459@hadrien>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Cc:     Siddharth Gupta <sidgup@codeaurora.org>,
+        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, tsoni@codeaurora.org,
+        psodagud@codeaurora.org, rishabhb@codeaurora.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v5 0/2] Add character device interface to remoteproc
+Date:   Wed, 29 Jul 2020 10:39:59 -0700
+Message-Id: <1596044401-22083-1-git-send-email-sidgup@codeaurora.org>
+X-Mailer: git-send-email 2.7.4
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 7/29/20 10:16 AM, Julia Lawall wrote:
-> Hello,
-> 
-> The ada152 documentation mentions some compilation flags.  This was
-> converted to ReST as eg:
-> 
-> +- DAUTOCONF
-> +    use configuration the controller reports (AHA-152x only)
-> 
-> --DAUTOCONF
-> - use configuration the controller reports (AHA-152x only)
-> 
-> This is clearly not correct.  The - should be attached to the D, and not
-> be converted to a bullet.  I tried replacing:
-> 
-> - DAUTOCONF
-> 
-> by
-> 
-> - -DAUTOCONF
-> 
-> but the result with rst2html was not very satisfactory.  The DAUTOCONF
-> seems to be slightly raised with respect to the rest of the text.  And a
-> subsequent case:
-> 
-> - DSETUP0="{ IOPORT, IRQ, SCSI_ID, RECONNECT, PARITY, SYNCHRONOUS, DELAY, EXT_TRANS }"
-> 
-> comes out different from the ones that have no associated list of possible
-> values (larger letters, different font).
-> 
-> What should be done instead?
-> 
-> Also, does the kernel include some scripts for testing the documentation?
-> make Documentation/scsi/aha152x.html doesn't seem to work.
+This patch series adds a character device interface to remoteproc
+framework. Currently there is only a sysfs interface which the userspace
+clients can use. If a usersapce application crashes after booting
+the remote processor through the sysfs interface the remote processor
+does not get any indication about the crash. It might still assume
+that the  application is running.
+For example modem uses remotefs service to data from disk/flash memory.
+If the remotefs service crashes, modem still keeps on requesting data
+which might lead to crash on modem. Even if the service is restarted the
+file handles modem requested previously would become stale.
+Adding a character device interface makes the remote processor tightly
+coupled with the user space application. A crash of the application
+leads to a close on the file descriptors therefore shutting down the
+remoteproc.
 
-I would do this:
+Changelog:
+v4 -> v5:
+- Addressed comments from Bjorn and Mathieu.
+- Added cdev_set_parent call to set remoteproc device as parent of cdev.
+- Fixed error with rproc_major introduced in the last patch.
+- Fixed implementation for compat calls. With previous implementation 64bit
+  userspace applications failed to perform the ioctl call, returning errno 25,
+  or "Inappropriate ioctl for device."
+- Removed exit functions from the driver as remoteproc framework is statically
+  compiled.
 
-$ make SPHINXDIRS="scsi" htmldocs
+v3 -> v4:
+- Addressed comments from Mathieu and Arnaud.
+- Added locks while writing/reading from the automatic-shutdown-on-release bool.
+- Changed return value when failing to copy to/from userspace.
+- Changed logic for calling shutdown on release.
+- Moved around code after the increase of max line length from 80 to 100.
+- Moved the call adding character device before device_add in rproc_add to add
+  both sysfs and character device interface together.
 
-to limit the htmldocs build to Documentation/scsi/.
-I don't know of a way to build only one output file.
+v2 -> v3:
+- Move booting of remoteproc from open to a write call.
+- Add ioctl interface for future functionality extension.
+- Add an ioctl call to default to rproc shutdown on release.
 
+v1 -> v2:
+- Fixed comments from Bjorn and Matthew.
+
+Siddharth Gupta (2):
+  remoteproc: Add remoteproc character device interface
+  remoteproc: core: Register the character device interface
+
+ Documentation/userspace-api/ioctl/ioctl-number.rst |   1 +
+ drivers/remoteproc/Kconfig                         |   9 ++
+ drivers/remoteproc/Makefile                        |   1 +
+ drivers/remoteproc/remoteproc_cdev.c               | 124 +++++++++++++++++++++
+ drivers/remoteproc/remoteproc_core.c               |   7 ++
+ drivers/remoteproc/remoteproc_internal.h           |  28 +++++
+ include/linux/remoteproc.h                         |   5 +
+ include/uapi/linux/remoteproc_cdev.h               |  37 ++++++
+ 8 files changed, 212 insertions(+)
+ create mode 100644 drivers/remoteproc/remoteproc_cdev.c
+ create mode 100644 include/uapi/linux/remoteproc_cdev.h
 
 -- 
-~Randy
+Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
+a Linux Foundation Collaborative Project
 
