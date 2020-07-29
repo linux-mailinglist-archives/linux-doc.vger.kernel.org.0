@@ -2,109 +2,213 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ACC1023238E
-	for <lists+linux-doc@lfdr.de>; Wed, 29 Jul 2020 19:40:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 995682323C6
+	for <lists+linux-doc@lfdr.de>; Wed, 29 Jul 2020 19:53:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727061AbgG2Rkj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 29 Jul 2020 13:40:39 -0400
-Received: from m43-7.mailgun.net ([69.72.43.7]:22258 "EHLO m43-7.mailgun.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726876AbgG2Rkh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 29 Jul 2020 13:40:37 -0400
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
- s=smtp; t=1596044436; h=References: In-Reply-To: Message-Id: Date:
- Subject: Cc: To: From: Sender;
- bh=a8pbIaMcmccol9wdyUafwsFuwnvkkW/9i7k9bh+MNUk=; b=JfqmNEpLW+vwAF5kjLBUAHykP++AZDzrFMYif2kgBHA+vrd6HR4PNWuGpK7D+jr5MDcn7BY6
- fvOxaR93qYSPWmXs2Jp1tcP7alkekNAOkJ3DquSP50/D6S5O6C5pXswtMjWfSXSIzKw9IICz
- +tlYXEfJCWW7/UC34c4QOWW4X3U=
-X-Mailgun-Sending-Ip: 69.72.43.7
-X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
-Received: from smtp.codeaurora.org
- (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
- smtp-out-n08.prod.us-east-1.postgun.com with SMTP id
- 5f21b485ca55a5604c70e994 (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Wed, 29 Jul 2020 17:40:21
- GMT
-Received: by smtp.codeaurora.org (Postfix, from userid 1001)
-        id 0B70CC433B2; Wed, 29 Jul 2020 17:40:20 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-        aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-1.0 required=2.0 tests=ALL_TRUSTED,SPF_NONE
-        autolearn=unavailable autolearn_force=no version=3.4.0
-Received: from sidgup-linux.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
-        (No client certificate requested)
-        (Authenticated sender: sidgup)
-        by smtp.codeaurora.org (Postfix) with ESMTPSA id 05F6BC433AF;
-        Wed, 29 Jul 2020 17:40:18 +0000 (UTC)
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 05F6BC433AF
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=none smtp.mailfrom=sidgup@codeaurora.org
-From:   Siddharth Gupta <sidgup@codeaurora.org>
-To:     agross@kernel.org, bjorn.andersson@linaro.org, ohad@wizery.com,
-        corbet@lwn.net
-Cc:     Siddharth Gupta <sidgup@codeaurora.org>,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, tsoni@codeaurora.org,
-        psodagud@codeaurora.org, rishabhb@codeaurora.org,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v5 2/2] remoteproc: core: Register the character device interface
-Date:   Wed, 29 Jul 2020 10:40:01 -0700
-Message-Id: <1596044401-22083-3-git-send-email-sidgup@codeaurora.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1596044401-22083-1-git-send-email-sidgup@codeaurora.org>
-References: <1596044401-22083-1-git-send-email-sidgup@codeaurora.org>
+        id S1727006AbgG2RxS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 29 Jul 2020 13:53:18 -0400
+Received: from cloudserver094114.home.pl ([79.96.170.134]:56218 "EHLO
+        cloudserver094114.home.pl" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726509AbgG2RxS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 29 Jul 2020 13:53:18 -0400
+Received: from 89-64-89-103.dynamic.chello.pl (89.64.89.103) (HELO kreacher.localnet)
+ by serwer1319399.home.pl (79.96.170.134) with SMTP (IdeaSmtpServer 0.83.415)
+ id a89a326552f6a4de; Wed, 29 Jul 2020 19:52:45 +0200
+From:   "Rafael J. Wysocki" <rjw@rjwysocki.net>
+To:     Francisco Jerez <currojerez@riseup.net>
+Cc:     "Rafael J. Wysocki" <rafael@kernel.org>,
+        Linux PM <linux-pm@vger.kernel.org>,
+        Linux Documentation <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+        Giovanni Gherdovich <ggherdovich@suse.cz>,
+        Doug Smythies <dsmythies@telus.net>
+Subject: Re: [PATCH] cpufreq: intel_pstate: Implement passive mode with HWP enabled
+Date:   Wed, 29 Jul 2020 19:52:44 +0200
+Message-ID: <4159348.LxVl7G3d3V@kreacher>
+In-Reply-To: <87v9i6g9gf.fsf@riseup.net>
+References: <3955470.QvD6XneCf3@kreacher> <2440238.9qpzlEPeD7@kreacher> <87v9i6g9gf.fsf@riseup.net>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add the character device during rproc_add. This would create
-a character device node at /dev/remoteproc<index>. Userspace
-applications can interact with the remote processor using this
-interface.
+On Wednesday, July 29, 2020 7:46:08 AM CEST Francisco Jerez wrote:
+> 
+> --==-=-=
+> Content-Type: multipart/mixed; boundary="=-=-="
+> 
+> --=-=-=
+> Content-Type: text/plain; charset=utf-8
+> Content-Disposition: inline
+> Content-Transfer-Encoding: quoted-printable
+> 
+> "Rafael J. Wysocki" <rjw@rjwysocki.net> writes:
+> 
+> > On Tuesday, July 28, 2020 4:32:22 AM CEST Francisco Jerez wrote:
+> >>
+> >> "Rafael J. Wysocki" <rjw@rjwysocki.net> writes:
+> >>=20
+> >> > On Tuesday, July 21, 2020 1:20:14 AM CEST Francisco Jerez wrote:
+> >> >
+> >> > [cut]
+> >> >
+> >> >> >
+> >> >> > However, in the active mode the only updater of hwp_req_cached is
+> >> >> > intel_pstate_hwp_set() and this patch doesn't introduce any
+> >> >> > differences in behavior in that case.
+> >> >> >
+> >> >>=3D20
+> >> >> intel_pstate_hwp_set() is the only updater, but there are other
+> >> >> consumers that can get out of sync with the HWP request value written=
+>  by
+> >> >> intel_pstate_set_energy_pref_index().  intel_pstate_hwp_boost_up() se=
+> ems
+> >> >> like the most concerning example I named earlier.
+> >> >>=3D20
+> >> >> >> > So there may be a short time window after the
+> >> >> >> > intel_pstate_set_energy_pref_index() invocation in which the new=
+>  EPP
+> >> >> >> > value may not be in effect, but in general there is no guarantee=
+>  th=3D
+> >> at
+> >> >> >> > the new EPP will take effect immediately after updating the MSR
+> >> >> >> > anyway, so that race doesn't matter.
+> >> >> >> >
+> >> >> >> > That said, that race is avoidable, but I was thinking that tryin=
+> g to
+> >> >> >> > avoid it might not be worth it.  Now I see a better way to avoid=
+>  it,
+> >> >> >> > though, so I'm going to update the patch to that end.
+> >> >> >> >
+> >> >> >> >> Seems like a bug to me.
+> >> >> >> >
+> >> >> >> > It is racy, but not every race is a bug.
+> >> >> >> >
+> >> >> >>
+> >> >> >> Still seems like there is a bug in intel_pstate_set_energy_pref_in=
+> dex=3D
+> >> ()
+> >> >> >> AFAICT.
+> >> >> >
+> >> >> > If there is a bug, then what exactly is it, from the users' perspec=
+> tiv=3D
+> >> e?
+> >> >> >
+> >> >>=3D20
+> >> >> It can be reproduced easily as follows:
+> >> >>=3D20
+> >> >> | echo 1 > /sys/devices/system/cpu/intel_pstate/hwp_dynamic_boost
+> >> >> | for p in /sys/devices/system/cpu/cpufreq/policy*/energy_performance=
+> _pr=3D
+> >> eference; do echo performance > $p; done
+> >> >
+> >> > Is this the active mode or the passive mode with the $subject patch ap=
+> pli=3D
+> >> ed?
+> >> >
+> >> > If the former, the issue is there regardless of the patch, so it needs=
+>  to=3D
+> >>  be
+> >> > fixed.
+> >> >
+> >> > If the latter, there should be no effect of hwp_dynamic_boost (which w=
+> as
+> >> > overlooked by me).
+> >> >
+> >>=20
+> >> This seems to be a problem in active mode only, so yeah the bug exists
+> >> regardless of your patch, but the fix is likely to allow you to simplify
+> >> this series slightly if it allows you to take full advantage of
+> >> hwp_req_cached and drop the additional EPP cache.
+> >
+> > The additional EPP cache is there to avoid synchronizing the scheduler
+> > context directly with a random process running on another CPU and doing
+> > things that may take time.
+> >
+> > The difference between the active mode and the passive mode in this respe=
+> ct
+> > is that in the latter case hwp_req_cached generally needs to be updated f=
+> rom
+> > the scheduler context, whereas in the former case it does not.
+> >
+> 
+> Hm, that's unfortunate.  Though I'd be surprised to see any appreciable
+> performance penalty from synchronizing with a sysfs handler that should
+> hardly ever be called.  Anyway thanks for the fix.
 
-Signed-off-by: Rishabh Bhatnagar <rishabhb@codeaurora.org>
-Signed-off-by: Siddharth Gupta <sidgup@codeaurora.org>
----
- drivers/remoteproc/remoteproc_core.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+No problem.
 
-diff --git a/drivers/remoteproc/remoteproc_core.c b/drivers/remoteproc/remoteproc_core.c
-index 277d3bf..7f90eee 100644
---- a/drivers/remoteproc/remoteproc_core.c
-+++ b/drivers/remoteproc/remoteproc_core.c
-@@ -1986,6 +1986,11 @@ int rproc_add(struct rproc *rproc)
- 	/* create debugfs entries */
- 	rproc_create_debug_dir(rproc);
- 
-+	/* add char device for this remoteproc */
-+	ret = rproc_char_device_add(rproc);
-+	if (ret < 0)
-+		return ret;
-+
- 	/*
- 	 * Remind ourselves the remote processor has been attached to rather
- 	 * than booted by the remoteproc core.  This is important because the
-@@ -2262,6 +2267,7 @@ int rproc_del(struct rproc *rproc)
- 	mutex_unlock(&rproc->lock);
- 
- 	rproc_delete_debug_dir(rproc);
-+	rproc_char_device_remove(rproc);
- 
- 	/* the rproc is downref'ed as soon as it's removed from the klist */
- 	mutex_lock(&rproc_list_mutex);
-@@ -2430,6 +2436,7 @@ static int __init remoteproc_init(void)
- {
- 	rproc_init_sysfs();
- 	rproc_init_debugfs();
-+	rproc_init_cdev();
- 	rproc_init_panic();
- 
- 	return 0;
--- 
-Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
-a Linux Foundation Collaborative Project
+> > [cut]
+> >
+> >> >> No, I explicitly dismissed that in my previous reply.
+> >> >
+> >> > But at the same time you seem to agree that without the non-CPU compon=
+> ent
+> >> > (or thermal pressure) the existing CPU performance scaling would be
+> >> > sufficient.
+> >> >
+> >>=20
+> >> Yes, but not necessarily in order to allow the non-CPU component to draw
+> >> more power as you said above, but also because the existence of a
+> >> bottleneck in a non-CPU component gives us an opportunity to improve the
+> >> energy efficiency of the CPU, regardless of whether that allows the
+> >> workload to run faster.
+> >
+> > But why would the bottleneck be there otherwise?
+> >
+> 
+> Because some resource of the system (e.g. memory bandwidth, GPU fill
+> rate) may be close to 100% utilized, causing a bottleneck for reasons
+> unrelated to its energy usage.
+
+Well, not quite.  Or at least in that case the performance cannot be improved
+by limiting the CPU frequency below the frequency looked for by scaling
+governors, AFAICS.
+
+Scaling governors generally look for the maximum frequency at which there is no
+CPU idle time in the workload.  At that frequency the CPU time required by the
+workload to achieve the maximum performance is equal to the total CPU time
+available to it.  I till refer to that frequency as the maximum effective
+frequency (MEF) of the workload.
+
+By definition, running at frequencies above the MEF does not improve
+performance, but it causes CPU idle time to appear.  OTOH running at
+frequencies below the MEF increases the CPU time required by the workload
+to achieve the maximum performance, so effectively the workload does
+not get enough CPU time for the performance to be maximum, so it is lower
+than at the MEF.
+
+Of course, the MEF is well-defined as long as the processor does not share
+the power budget with another component that is also used by the workload
+(say, a GPU).  Without the sharing of a power budget, the MEF can be determined
+by looking at the CPU idle time (or CPU busy time, or CPU load, whichever is
+the most convenient) alone, because it already depends on the speed of any
+memory etc accessed by the workload and slowing down the processor doesn't
+improve the performance (because the other components don't run any faster
+as a result of that).
+
+However, if the processor is sharing the power budget with a GPU (say), it
+is not enough to look at the CPU idle time to determine the MEF, because
+slowing down the processor generally causes the GPU to get more power which
+allows it to run faster and CPUs can do more work, because they spend less
+time waiting for the GPU, so the CPU time available to the workload effectively
+increases and it can achieve the maximum performance at a lower frequency.
+So there is "effective MEF" depending on the relative performance balance
+between the processor and the GPU and on what "fraction" of the workload
+runs on the GPU.
+
+This means that the power budget sharing is essential here and the "if the
+energy-efficiency of the processor is improved, the other components get
+more power as a bonus" argument is not really valid.
+
+The frequency of the processor gets limited in order for the other components
+to get more power, which then allows the processor to do more work in the
+same time at the same frequency, so it becomes more energy-efficient.
+
+
 
