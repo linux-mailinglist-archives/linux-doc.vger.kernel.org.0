@@ -2,72 +2,52 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 366B7234B8C
-	for <lists+linux-doc@lfdr.de>; Fri, 31 Jul 2020 21:21:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 66E61234BF7
+	for <lists+linux-doc@lfdr.de>; Fri, 31 Jul 2020 22:09:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729738AbgGaTU6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 31 Jul 2020 15:20:58 -0400
-Received: from foss.arm.com ([217.140.110.172]:36352 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730133AbgGaTU4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 31 Jul 2020 15:20:56 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id EDC3D106F;
-        Fri, 31 Jul 2020 12:20:55 -0700 (PDT)
-Received: from e113632-lin.cambridge.arm.com (e113632-lin.cambridge.arm.com [10.1.194.46])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPA id 9CD4A3F71F;
-        Fri, 31 Jul 2020 12:20:54 -0700 (PDT)
-From:   Valentin Schneider <valentin.schneider@arm.com>
-To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Cc:     mingo@kernel.org, peterz@infradead.org, vincent.guittot@linaro.org,
-        dietmar.eggemann@arm.com, morten.rasmussen@arm.com,
-        Quentin Perret <qperret@google.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH 3/3] sched/doc: Factorize bits between sched-energy.rst & sched-capacity.rst
-Date:   Fri, 31 Jul 2020 20:20:16 +0100
-Message-Id: <20200731192016.7484-4-valentin.schneider@arm.com>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20200731192016.7484-1-valentin.schneider@arm.com>
-References: <20200731192016.7484-1-valentin.schneider@arm.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1726916AbgGaUJp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 31 Jul 2020 16:09:45 -0400
+Received: from mail2-relais-roc.national.inria.fr ([192.134.164.83]:55820 "EHLO
+        mail2-relais-roc.national.inria.fr" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726257AbgGaUJp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 31 Jul 2020 16:09:45 -0400
+X-IronPort-AV: E=Sophos;i="5.75,419,1589234400"; 
+   d="scan'208";a="462075190"
+Received: from palace.rsr.lip6.fr (HELO palace.lip6.fr) ([132.227.105.202])
+  by mail2-relais-roc.national.inria.fr with ESMTP/TLS/AES256-SHA256; 31 Jul 2020 22:09:43 +0200
+From:   Julia Lawall <Julia.Lawall@inria.fr>
+To:     Jaroslav Kysela <perex@perex.cz>
+Cc:     kernel-janitors@vger.kernel.org, Takashi Iwai <tiwai@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>, alsa-devel@alsa-project.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] ALSA: doc: use correct config variable name
+Date:   Fri, 31 Jul 2020 21:28:21 +0200
+Message-Id: <1596223701-7558-1-git-send-email-Julia.Lawall@inria.fr>
+X-Mailer: git-send-email 1.9.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Documentation/scheduler/sched-capacity.rst ought to be the canonical place
-to blabber about SD_ASYM_CPUCAPACITY, so remove its explanation from
-sched-energy.rst and point to sched-capacity.rst instead.
+CONFIG_PCM_XRUN_DEBUG should be CONFIG_SND_PCM_XRUN_DEBUG
 
-Signed-off-by: Valentin Schneider <valentin.schneider@arm.com>
+Signed-off-by: Julia Lawall <Julia.Lawall@inria.fr>
+
 ---
- Documentation/scheduler/sched-energy.rst | 12 ++----------
- 1 file changed, 2 insertions(+), 10 deletions(-)
+ Documentation/sound/designs/procfile.rst |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/scheduler/sched-energy.rst b/Documentation/scheduler/sched-energy.rst
-index 9580c57a52bc..78f850778982 100644
---- a/Documentation/scheduler/sched-energy.rst
-+++ b/Documentation/scheduler/sched-energy.rst
-@@ -331,16 +331,8 @@ asymmetric CPU topologies for now. This requirement is checked at run-time by
- looking for the presence of the SD_ASYM_CPUCAPACITY flag when the scheduling
- domains are built.
+diff --git a/Documentation/sound/designs/procfile.rst b/Documentation/sound/designs/procfile.rst
+index 29a4668..e9f7e0c 100644
+--- a/Documentation/sound/designs/procfile.rst
++++ b/Documentation/sound/designs/procfile.rst
+@@ -91,7 +91,7 @@ PCM Proc Files
  
--The flag is set/cleared automatically by the scheduler topology code whenever
--there are CPUs with different capacities in a root domain. The capacities of
--CPUs are provided by arch-specific code through the arch_scale_cpu_capacity()
--callback. As an example, arm and arm64 share an implementation of this callback
--which uses a combination of CPUFreq data and device-tree bindings to compute the
--capacity of CPUs (see drivers/base/arch_topology.c for more details).
--
--So, in order to use EAS on your platform your architecture must implement the
--arch_scale_cpu_capacity() callback, and some of the CPUs must have a lower
--capacity than others.
-+See Documentation/sched/sched-capacity.rst for requirements to be met for this
-+flag to be set in the sched_domain hierarchy.
- 
- Please note that EAS is not fundamentally incompatible with SMP, but no
- significant savings on SMP platforms have been observed yet. This restriction
--- 
-2.27.0
+ ``card*/pcm*/xrun_debug``
+ 	This file appears when ``CONFIG_SND_DEBUG=y`` and
+-	``CONFIG_PCM_XRUN_DEBUG=y``.
++	``CONFIG_SND_PCM_XRUN_DEBUG=y``.
+ 	This shows the status of xrun (= buffer overrun/xrun) and
+ 	invalid PCM position debug/check of ALSA PCM middle layer.
+ 	It takes an integer value, can be changed by writing to this
 
