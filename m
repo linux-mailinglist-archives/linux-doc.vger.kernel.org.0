@@ -2,85 +2,63 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 30112239E0B
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 06:15:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7CF9D239FE7
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 08:57:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725268AbgHCEPx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Aug 2020 00:15:53 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51438 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725924AbgHCEPt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Aug 2020 00:15:49 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5D4FBC06174A
-        for <linux-doc@vger.kernel.org>; Sun,  2 Aug 2020 21:15:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=wYTRpjfymCgNRLej5wa/gQSa8PBvdtAZGCPIUw1orIo=; b=s0z2n5m6s1IMkI7HeCbgC2dlPf
-        yOPQ7BAYBx8xmZVunwFYfWN6nYPt2x1KIyS4lLLOgdNFTKvWGE3D6Hz8Fs7CFfPz7MZrU7FKpf+He
-        0f2MnechNqzWqFvqwXebGadiknhHgLO+GyC+wC8MWnmPga/96miDjjZ0BjO6cxzUYfOgpyTeGCUqD
-        ZWCjR3OtOz+GGYf6k0OVKpl6w1WFCRDWFRU/T8VyyWFTeI0nqLzVyKMPJ0Gh7b8eFxen2dVvGmtyd
-        CD/MeQ1G2iuvQRH+x/whh1+kZv4JCaWg4G/iUrADUtJvDi+dkKHTLzkq7kGreM6LnKrt2arjVrndp
-        k/WWaalA==;
-Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1k2Rt5-0006Ub-5j; Mon, 03 Aug 2020 04:15:47 +0000
-Date:   Mon, 3 Aug 2020 05:15:47 +0100
-From:   Matthew Wilcox <willy@infradead.org>
-To:     David Niklas <Hgntkwis@vfemail.net>
-Cc:     linux-doc@vger.kernel.org, corbet@lwn.net
-Subject: Re: PROBLEM: Missing debug instructions when EIP is not present
-Message-ID: <20200803041547.GZ23808@casper.infradead.org>
-References: <20200802224652.6be413fe@Phenom-II-x6.niklas.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200802224652.6be413fe@Phenom-II-x6.niklas.com>
+        id S1727814AbgHCG5D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Aug 2020 02:57:03 -0400
+Received: from m17616.mail.qiye.163.com ([59.111.176.16]:63648 "EHLO
+        m17616.mail.qiye.163.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725867AbgHCG5C (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Aug 2020 02:57:02 -0400
+X-Greylist: delayed 670 seconds by postgrey-1.27 at vger.kernel.org; Mon, 03 Aug 2020 02:57:01 EDT
+Received: from wwh-vos.localdomain (unknown [58.251.74.226])
+        by m17616.mail.qiye.163.com (Hmail) with ESMTPA id AB959108499;
+        Mon,  3 Aug 2020 14:45:48 +0800 (CST)
+From:   Wang Wenhu <wenhu.wang@vivo.com>
+To:     Marco Elver <elver@google.com>, Dmitry Vyukov <dvyukov@google.com>,
+        Jonathan Corbet <corbet@lwn.net>, kasan-dev@googlegroups.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        clang-built-linux@googlegroups.com
+Cc:     Wang Wenhu <wenhu.wang@vivo.com>
+Subject: [PATCH] doc: kcsan: add support info of gcc for kcsan
+Date:   Mon,  3 Aug 2020 14:45:12 +0800
+Message-Id: <20200803064512.85589-1-wenhu.wang@vivo.com>
+X-Mailer: git-send-email 2.17.1
+X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+        oVCBIfWUFZGkJPSB4dHUlITB5CVkpOQk1PSExKT0JLQkpVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWU
+        FZT0tIVUpKS09ISFVKS0tZBg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PFE6FRw4Cz8eDwEjIQMxCT4T
+        Dx5PC01VSlVKTkJNT0hMSk9CTU5JVTMWGhIXVQweFRMOVQwaFRw7DRINFFUYFBZFWVdZEgtZQVlO
+        Q1VJTkpVTE9VSUlNWVdZCAFZQUpMQ0s3Bg++
+X-HM-Tid: 0a73b311b53f9374kuwsab959108499
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, Aug 02, 2020 at 10:46:52PM -0400, David Niklas wrote:
-> The file: Documentation/admin-guide/bug-hunting.rst
-> gives instructions on how to find the offending line of code using EIP.
-> My particular bug that I need to report doesn't have EIP listed -- at
-> least not by name. I tried to guess what EIP was in
-> my case "__schedule+0x29e/0x6c0" but that didn't produce any results in
-> gdb on my debug kernel.
+KCSAN is also supported in GCC version 7.3.0 or later.
+For Clang, the supported versions are 7.0.0 and later.
 
-EIP is the x86-32 name for what x86-64 calls RIP.  Not much help in
-this case, because it's pointing to a userspace address (actually, I
-think it's the vdso).  
+Signed-off-by: Wang Wenhu <wenhu.wang@vivo.com>
+---
+ Documentation/dev-tools/kcsan.rst | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-> I don't appear to have the referenced module type problem:
-> "[<ffffffff8802c8e9>] :jbd:log_wait_commit+0xa3/0xf5"
-> 
-> I'm totally new to kernel debugging so the documentation is really
-> important and I'm rather frustrated in even bothering to read it as it's
-> incomplete/unhelpful.
-> 
-> Here's the exact bug I'm trying to tackle.
-> 
-> [68812.480447] INFO: task CacheThread_Blo:9414 blocked for more than 480
-> seconds.
-
-That's the important bit.  Your task tried to take a mutex and 480
-seconds later, it still didn't have it.
-
-> [68812.480459]       Not tainted 4.14.184-nopreempt-AMDGPU-dav9
-> #1 [68812.480464] "echo 0 > /proc/sys/kernel/hung_task_timeout_secs"
-> disables this message. [68812.480469] CacheThread_Blo D    0  9414   9082
-> 0x00000080 [68812.480476] Call Trace:
-> [68812.480494]  __schedule+0x29e/0x6c0
-> [68812.480505]  schedule+0x32/0x80
-> [68812.480513]  schedule_preempt_disabled+0xa/0x10
-> [68812.480520]  __mutex_lock.isra.1+0x26b/0x4e0
-> [68812.480550]  ? do_journal_begin_r+0xbe/0x390 [reiserfs]
-> [68812.480570]  do_journal_begin_r+0xbe/0x390 [reiserfs]
-
-The mutex it tried to take was in the function do_journal_begin_r().
-Best of luck debugging reiserfs problems these days.  It doesn't get
-a lot of love.
+diff --git a/Documentation/dev-tools/kcsan.rst b/Documentation/dev-tools/kcsan.rst
+index b38379f06194..05a4578839cf 100644
+--- a/Documentation/dev-tools/kcsan.rst
++++ b/Documentation/dev-tools/kcsan.rst
+@@ -8,7 +8,8 @@ approach to detect races. KCSAN's primary purpose is to detect `data races`_.
+ Usage
+ -----
+ 
+-KCSAN requires Clang version 11 or later.
++KCSAN is supported in both GCC and Clang. With GCC it requires version 7.3.0
++or later. With Clang it requires version 7.0.0 or later.
+ 
+ To enable KCSAN configure the kernel with::
+ 
+-- 
+2.17.1
 
