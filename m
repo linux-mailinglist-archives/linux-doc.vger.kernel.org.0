@@ -2,118 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0E17423A85F
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 16:27:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 77EC623A8D8
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 16:50:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727792AbgHCO1A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Aug 2020 10:27:00 -0400
-Received: from mailgw01.mediatek.com ([210.61.82.183]:22471 "EHLO
-        mailgw01.mediatek.com" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1726358AbgHCO05 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Aug 2020 10:26:57 -0400
-X-UUID: 7193e7c75086493c8a7fb88a8c40c227-20200803
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=mediatek.com; s=dk;
-        h=Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:CC:To:From; bh=nsGyLTdk49+hu3aL4BVtR/HEa0bcGywBTHa+PUZ1YqE=;
-        b=fFYFvccDWrq7Lije/hVzXNWnFd6YGcDWHPY0/P2f8vXN3JtHTBA5DRvH6VxVpr6/m7sKXczUtWUb+oJfZS9g0PFeL0hh4YmGDgWCtf3Hj3nEHWOwcVh1aaAWCjI3SlnE7JLd3QICaB+qjrFap0+uN+xXQfQaB6HvG8Hjan36fJ8=;
-X-UUID: 7193e7c75086493c8a7fb88a8c40c227-20200803
-Received: from mtkcas10.mediatek.inc [(172.21.101.39)] by mailgw01.mediatek.com
-        (envelope-from <phil.chang@mediatek.com>)
-        (Cellopoint E-mail Firewall v4.1.10 Build 0809 with TLS)
-        with ESMTP id 208211624; Mon, 03 Aug 2020 22:26:52 +0800
-Received: from MTKCAS06.mediatek.inc (172.21.101.30) by
- mtkmbs06n2.mediatek.inc (172.21.101.130) with Microsoft SMTP Server (TLS) id
- 15.0.1497.2; Mon, 3 Aug 2020 22:26:50 +0800
-Received: from mtksdccf07.mediatek.inc (172.21.84.99) by MTKCAS06.mediatek.inc
- (172.21.101.73) with Microsoft SMTP Server id 15.0.1497.2 via Frontend
- Transport; Mon, 3 Aug 2020 22:26:49 +0800
-From:   Phil Chang <phil.chang@mediatek.com>
-To:     <linux-arm-kernel@lists.infradead.org>
-CC:     Jonathan Corbet <corbet@lwn.net>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        "Paul E . McKenney" <paulmck@kernel.org>,
-        Steve Capper <steve.capper@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Phil Chang <phil.chang@mediatek.com>,
-        Alix Wu <alix.wu@mediatek.com>,
-        YJ Chiang <yj.chiang@mediatek.com>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-mediatek@lists.infradead.org>
-Subject: [PATCH] ARM64: Setup DMA32 zone size by bootargs
-Date:   Mon, 3 Aug 2020 22:26:47 +0800
-Message-ID: <20200803142647.16737-1-phil.chang@mediatek.com>
-X-Mailer: git-send-email 2.18.0
-MIME-Version: 1.0
-Content-Type: text/plain
-X-TM-SNTS-SMTP: 62935B82062BCF856BA87E395D17F26700271321499917426F984D3EA0F62E462000:8
-X-MTK:  N
-Content-Transfer-Encoding: base64
+        id S1727078AbgHCOrp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Aug 2020 10:47:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35834 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726707AbgHCOrp (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Aug 2020 10:47:45 -0400
+Received: from mail-qk1-x74a.google.com (mail-qk1-x74a.google.com [IPv6:2607:f8b0:4864:20::74a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC88CC061757
+        for <linux-doc@vger.kernel.org>; Mon,  3 Aug 2020 07:47:44 -0700 (PDT)
+Received: by mail-qk1-x74a.google.com with SMTP id x20so26319696qki.20
+        for <linux-doc@vger.kernel.org>; Mon, 03 Aug 2020 07:47:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=date:message-id:mime-version:subject:from:to:cc;
+        bh=jSEcpjJOquc529ZwoycPhflNQKRcL97Z3GUPK/MTFhg=;
+        b=NGJ+cGs/7Y5yanvxauvBQNlpaQtun8x5OXswBR95fjESI+Q1GyxIm26mBIJiQZlchx
+         DnHpQPnaiAYiQeJ7fbILu6QdY5Rd11V8/qKJe4l/2w1iWVLomfjMRhY7F1HbDB+a88/v
+         OxW7fJVYu/9qupGnZQbIDl8RQ39QYHWJjpj6Y7eEVD2A8NOnmSLcJvTqsh8RSUHTZPrm
+         iB78LpIkLOgboZguy+rRN/6HLRUkZASiQtIdBkfmKC7u09IfxeH6wtHsiiiO6m7p/yy5
+         JixVWy5wqO/esbMdb7V3i86xLFulz50ivT2vhoOcOZ+NFnlgeqV1YkGRMJJ5EjFVX0il
+         hJDg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:message-id:mime-version:subject:from:to:cc;
+        bh=jSEcpjJOquc529ZwoycPhflNQKRcL97Z3GUPK/MTFhg=;
+        b=FZorpBUCWrcnOP4iThywqTllShJiYyBl1JDgtN6yeqesisGFSUAxAdSY/aty0PV3eO
+         v3MYgErQHYwPkZD6EBkdIieLauTS5uiAygwFgqcE088xpnelloy0xYEe5ZbGf5mw8i7v
+         l1DFobVQPeMt8f8PjoRLsmqJ2duDl/dfAOAve3nRbAy+3byHRq/xo/GpEZS50+R202DI
+         DrX2LqQxUSt5TJrYjtWcMfPI/OSlPFGyzAKJ1FdBWwu8/xqy5At2I/jK91s3bFJJDIe7
+         YootSuk6UugKGaxgz8nuEjy/QppKjZGbsnZW3f0uuzAFMR8D3wfQc/6V6GXs5bzTYKFZ
+         QINw==
+X-Gm-Message-State: AOAM5302R464o/3dbWt3n8NR/+uBBZy9Oxr+Sq3sE00dR9XNg++Szdsk
+        bUT/ap6jmECaHbEUqlhE5OE7oEKNMlKXBShYgQ==
+X-Google-Smtp-Source: ABdhPJw7sHEqkxXBQdZEh6QBRcoghAHfysqJXJXhfAsQDkKtCR//v760mqThiImnXfcrSB5dpdxJ6/pM/TKRNguNpQ==
+X-Received: by 2002:ad4:4482:: with SMTP id m2mr15332118qvt.102.1596466063346;
+ Mon, 03 Aug 2020 07:47:43 -0700 (PDT)
+Date:   Mon,  3 Aug 2020 14:47:17 +0000
+Message-Id: <20200803144719.3184138-1-kaleshsingh@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.28.0.163.g6104cc2f0b6-goog
+Subject: [PATCH 0/2] Per process tracking of dma buffers
+From:   Kalesh Singh <kaleshsingh@google.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Sumit Semwal <sumit.semwal@linaro.org>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ingo Molnar <mingo@redhat.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org,
+        Suren Baghdasaryan <surenb@google.com>,
+        Hridya Valsaraju <hridya@google.com>,
+        Ioannis Ilkos <ilkos@google.com>,
+        John Stultz <john.stultz@linaro.org>, kernel-team@android.com,
+        Kalesh Singh <kaleshsingh@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-dGhpcyBwYXRjaCBhbGxvd2luZyB0aGUgYXJtNjQgRE1BIHpvbmUgYmUgY29uZmlndXJhYmxlLg0K
-DQpTaWduZWQtb2ZmLWJ5OiBBbGl4IFd1IDxhbGl4Lnd1QG1lZGlhdGVrLmNvbT4NClNpZ25lZC1v
-ZmYtYnk6IFlKIENoaWFuZyA8eWouY2hpYW5nQG1lZGlhdGVrLmNvbT4NClNpZ25lZC1vZmYtYnk6
-IFBoaWwgQ2hhbmcgPHBoaWwuY2hhbmdAbWVkaWF0ZWsuY29tPg0KLS0tDQpIaQ0KDQpGb3Igc29t
-ZSBkZXZpY2VzLCB0aGUgbWFpbiBtZW1vcnkgc3BsaXQgaW50byAyIHBhcnQgZHVlIHRvIHRoZSBt
-ZW1vcnkgYXJjaGl0ZWN0dXJlLA0KdGhlIGVmZmljaWVudCBhbmQgbGVzcyBpbmVmZmljaWVudCBw
-YXJ0Lg0KT25lIG9mIHRoZSB1c2UgY2FzZSBpcyBmaW5lLXR1bmUgdGhlIGRtYTMyIHNpemUgdG8g
-Y29udGFpbiBhbGwgdGhlDQplZmZpY2llbnQgcGFydCBvZiBtZW1vcnkgYmxvY2sgb24gdGhpcyBr
-aW5kIG9mIGFyY2hpdGVjdHVyZSwNCmJ1dCBpbiBnZW5lcmFsLCB0aGUgRE1BMzIgem9uZSBzaXpl
-IGlzIGhhcmRjb2RlIHRvIDRHLg0KDQogLi4uL2FkbWluLWd1aWRlL2tlcm5lbC1wYXJhbWV0ZXJz
-LnR4dCAgICAgICAgIHwgIDMgKysNCiBhcmNoL2FybTY0L2luY2x1ZGUvYXNtL21lbW9yeS5oICAg
-ICAgICAgICAgICAgfCAgMiArKw0KIGFyY2gvYXJtNjQvbW0vaW5pdC5jICAgICAgICAgICAgICAg
-ICAgICAgICAgICB8IDMzICsrKysrKysrKysrKysrKysrLS0NCiAzIGZpbGVzIGNoYW5nZWQsIDM1
-IGluc2VydGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQoNCmRpZmYgLS1naXQgYS9Eb2N1bWVudGF0
-aW9uL2FkbWluLWd1aWRlL2tlcm5lbC1wYXJhbWV0ZXJzLnR4dCBiL0RvY3VtZW50YXRpb24vYWRt
-aW4tZ3VpZGUva2VybmVsLXBhcmFtZXRlcnMudHh0DQppbmRleCBmYjk1ZmFkODFjNzkuLjQ0MWFk
-M2NiOGVlOCAxMDA2NDQNCi0tLSBhL0RvY3VtZW50YXRpb24vYWRtaW4tZ3VpZGUva2VybmVsLXBh
-cmFtZXRlcnMudHh0DQorKysgYi9Eb2N1bWVudGF0aW9uL2FkbWluLWd1aWRlL2tlcm5lbC1wYXJh
-bWV0ZXJzLnR4dA0KQEAgLTk1Niw2ICs5NTYsOSBAQA0KIAkJCVRoZSBmaWx0ZXIgY2FuIGJlIGRp
-c2FibGVkIG9yIGNoYW5nZWQgdG8gYW5vdGhlcg0KIAkJCWRyaXZlciBsYXRlciB1c2luZyBzeXNm
-cy4NCiANCisJZG1hMzJfem9uZT1ubglbS01HXSBbS05MLEJPT1RdDQorCQkJRm9yY2VzIHRoZSBE
-TUEzMiB6b25lIHNpemUgb2YgPG5uPiBpbiBtYiwgYXJtNjQgb25seS4NCisNCiAJZHJpdmVyX2Fz
-eW5jX3Byb2JlPSAgW0tOTF0NCiAJCQlMaXN0IG9mIGRyaXZlciBuYW1lcyB0byBiZSBwcm9iZWQg
-YXN5bmNocm9ub3VzbHkuDQogCQkJRm9ybWF0OiA8ZHJpdmVyX25hbWUxPiw8ZHJpdmVyX25hbWUy
-Pi4uLg0KZGlmZiAtLWdpdCBhL2FyY2gvYXJtNjQvaW5jbHVkZS9hc20vbWVtb3J5LmggYi9hcmNo
-L2FybTY0L2luY2x1ZGUvYXNtL21lbW9yeS5oDQppbmRleCBhMTg3MWJiMzJiYjEuLjM3N2YyMjUy
-NjE4YSAxMDA2NDQNCi0tLSBhL2FyY2gvYXJtNjQvaW5jbHVkZS9hc20vbWVtb3J5LmgNCisrKyBi
-L2FyY2gvYXJtNjQvaW5jbHVkZS9hc20vbWVtb3J5LmgNCkBAIC0xNzQsNiArMTc0LDggQEAgZXh0
-ZXJuIHU2NAkJCWtpbWFnZV92YWRkcjsNCiAvKiB0aGUgb2Zmc2V0IGJldHdlZW4gdGhlIGtlcm5l
-bCB2aXJ0dWFsIGFuZCBwaHlzaWNhbCBtYXBwaW5ncyAqLw0KIGV4dGVybiB1NjQJCQlraW1hZ2Vf
-dm9mZnNldDsNCiANCitleHRlcm4gcGh5c19hZGRyX3QJCWFybV9kbWFfem9uZV9zaXplOw0KKw0K
-IHN0YXRpYyBpbmxpbmUgdW5zaWduZWQgbG9uZyBrYXNscl9vZmZzZXQodm9pZCkNCiB7DQogCXJl
-dHVybiBraW1hZ2VfdmFkZHIgLSBLSU1BR0VfVkFERFI7DQpkaWZmIC0tZ2l0IGEvYXJjaC9hcm02
-NC9tbS9pbml0LmMgYi9hcmNoL2FybTY0L21tL2luaXQuYw0KaW5kZXggMWU5M2NmYzdjNDdhLi42
-NDJhYjMyMzM5MmMgMTAwNjQ0DQotLS0gYS9hcmNoL2FybTY0L21tL2luaXQuYw0KKysrIGIvYXJj
-aC9hcm02NC9tbS9pbml0LmMNCkBAIC02MCw2ICs2MCw5IEBAIEVYUE9SVF9TWU1CT0wocGh5c3Zp
-cnRfb2Zmc2V0KTsNCiBzdHJ1Y3QgcGFnZSAqdm1lbW1hcCBfX3JvX2FmdGVyX2luaXQ7DQogRVhQ
-T1JUX1NZTUJPTCh2bWVtbWFwKTsNCiANCitwaHlzX2FkZHJfdCBhcm1fZG1hX3pvbmVfc2l6ZSBf
-X3JvX2FmdGVyX2luaXQ7DQorRVhQT1JUX1NZTUJPTChhcm1fZG1hX3pvbmVfc2l6ZSk7DQorDQog
-LyoNCiAgKiBXZSBjcmVhdGUgYm90aCBaT05FX0RNQSBhbmQgWk9ORV9ETUEzMi4gWk9ORV9ETUEg
-Y292ZXJzIHRoZSBmaXJzdCAxRyBvZg0KICAqIG1lbW9yeSBhcyBzb21lIGRldmljZXMsIG5hbWVs
-eSB0aGUgUmFzcGJlcnJ5IFBpIDQsIGhhdmUgcGVyaXBoZXJhbHMgd2l0aA0KQEAgLTI0Miw2ICsy
-NDUsMjUgQEAgc3RhdGljIGludCBfX2luaXQgZWFybHlfbWVtKGNoYXIgKnApDQogfQ0KIGVhcmx5
-X3BhcmFtKCJtZW0iLCBlYXJseV9tZW0pOw0KIA0KKy8qDQorICogU2V0dXAgdGhlIGRtYTMyIHpv
-bmUgc2l6ZQ0KKyAqLw0KK3N0YXRpYyBpbnQgX19pbml0IHNldHVwX2RtYTMyX3pvbmUoY2hhciAq
-cCkNCit7DQorCWlmICghcCkNCisJCXJldHVybiAtRUlOVkFMOw0KKw0KKwlpZiAoa3N0cnRvdWxs
-KHAsIDAsICZhcm1fZG1hX3pvbmVfc2l6ZSkpDQorCQlyZXR1cm4gLUVJTlZBTDsNCisNCisJYXJt
-X2RtYV96b25lX3NpemUgKj0gU1pfMU07DQorCXByX25vdGljZSgiU2V0dXAgZG1hMzIgem9uZSBz
-aXplIHRvICVsbHUgTWJcbiIsIGFybV9kbWFfem9uZV9zaXplKTsNCisNCisJcmV0dXJuIDA7DQor
-fQ0KKw0KK2Vhcmx5X3BhcmFtKCJkbWEzMl96b25lIiwgc2V0dXBfZG1hMzJfem9uZSk7DQorDQog
-c3RhdGljIGludCBfX2luaXQgZWFybHlfaW5pdF9kdF9zY2FuX3VzYWJsZW1lbSh1bnNpZ25lZCBs
-b25nIG5vZGUsDQogCQljb25zdCBjaGFyICp1bmFtZSwgaW50IGRlcHRoLCB2b2lkICpkYXRhKQ0K
-IHsNCkBAIC0zOTIsMTAgKzQxNCwxNSBAQCB2b2lkIF9faW5pdCBhcm02NF9tZW1ibG9ja19pbml0
-KHZvaWQpDQogCQlhcm02NF9kbWFfcGh5c19saW1pdCA9IG1heF96b25lX3BoeXMoQVJNNjRfWk9O
-RV9ETUFfQklUUyk7DQogCX0NCiANCi0JaWYgKElTX0VOQUJMRUQoQ09ORklHX1pPTkVfRE1BMzIp
-KQ0KLQkJYXJtNjRfZG1hMzJfcGh5c19saW1pdCA9IG1heF96b25lX3BoeXMoMzIpOw0KLQllbHNl
-DQorCWlmIChJU19FTkFCTEVEKENPTkZJR19aT05FX0RNQTMyKSkgew0KKwkJaWYgKGFybV9kbWFf
-em9uZV9zaXplKQ0KKwkJCWFybTY0X2RtYTMyX3BoeXNfbGltaXQgPSBhcm1fZG1hX3pvbmVfc2l6
-ZSArDQorCQkJCQkJbWVtYmxvY2tfc3RhcnRfb2ZfRFJBTSgpOw0KKwkJZWxzZQ0KKwkJCWFybTY0
-X2RtYTMyX3BoeXNfbGltaXQgPSBtYXhfem9uZV9waHlzKDMyKTsNCisJfSBlbHNlIHsNCiAJCWFy
-bTY0X2RtYTMyX3BoeXNfbGltaXQgPSBQSFlTX01BU0sgKyAxOw0KKwl9DQogDQogCXJlc2VydmVf
-Y3Jhc2hrZXJuZWwoKTsNCiANCi0tIA0KMi4xOC4wDQo=
+Since debugfs doesn't have stable abi. This patch series enables per
+process accounting of dma buffers using trace events.
+
+Kalesh Singh (2):
+  fs: Add fd_install file operation
+  dmabuf/tracing: Add dma-buf trace events
+
+ Documentation/filesystems/vfs.rst |  5 ++
+ drivers/dma-buf/dma-buf.c         | 29 ++++++++++++
+ fs/file.c                         |  3 ++
+ include/linux/fs.h                |  1 +
+ include/trace/events/dma_buf.h    | 77 +++++++++++++++++++++++++++++++
+ 5 files changed, 115 insertions(+)
+ create mode 100644 include/trace/events/dma_buf.h
+
+-- 
+2.28.0.163.g6104cc2f0b6-goog
 
