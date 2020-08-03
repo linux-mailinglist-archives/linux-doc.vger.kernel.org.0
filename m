@@ -2,63 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7CF9D239FE7
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 08:57:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ED972239FCE
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 08:50:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727814AbgHCG5D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Aug 2020 02:57:03 -0400
-Received: from m17616.mail.qiye.163.com ([59.111.176.16]:63648 "EHLO
-        m17616.mail.qiye.163.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725867AbgHCG5C (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Aug 2020 02:57:02 -0400
-X-Greylist: delayed 670 seconds by postgrey-1.27 at vger.kernel.org; Mon, 03 Aug 2020 02:57:01 EDT
-Received: from wwh-vos.localdomain (unknown [58.251.74.226])
-        by m17616.mail.qiye.163.com (Hmail) with ESMTPA id AB959108499;
-        Mon,  3 Aug 2020 14:45:48 +0800 (CST)
-From:   Wang Wenhu <wenhu.wang@vivo.com>
-To:     Marco Elver <elver@google.com>, Dmitry Vyukov <dvyukov@google.com>,
-        Jonathan Corbet <corbet@lwn.net>, kasan-dev@googlegroups.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        clang-built-linux@googlegroups.com
-Cc:     Wang Wenhu <wenhu.wang@vivo.com>
-Subject: [PATCH] doc: kcsan: add support info of gcc for kcsan
-Date:   Mon,  3 Aug 2020 14:45:12 +0800
-Message-Id: <20200803064512.85589-1-wenhu.wang@vivo.com>
-X-Mailer: git-send-email 2.17.1
-X-HM-Spam-Status: e1kfGhgUHx5ZQUpXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
-        oVCBIfWUFZGkJPSB4dHUlITB5CVkpOQk1PSExKT0JLQkpVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWU
-        FZT0tIVUpKS09ISFVKS0tZBg++
-X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6PFE6FRw4Cz8eDwEjIQMxCT4T
-        Dx5PC01VSlVKTkJNT0hMSk9CTU5JVTMWGhIXVQweFRMOVQwaFRw7DRINFFUYFBZFWVdZEgtZQVlO
-        Q1VJTkpVTE9VSUlNWVdZCAFZQUpMQ0s3Bg++
-X-HM-Tid: 0a73b311b53f9374kuwsab959108499
+        id S1726644AbgHCGu3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Aug 2020 02:50:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46796 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726224AbgHCGu2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Aug 2020 02:50:28 -0400
+Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com [IPv6:2607:f8b0:4864:20::343])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A8C40C061756
+        for <linux-doc@vger.kernel.org>; Sun,  2 Aug 2020 23:50:28 -0700 (PDT)
+Received: by mail-ot1-x343.google.com with SMTP id z18so6692647otk.6
+        for <linux-doc@vger.kernel.org>; Sun, 02 Aug 2020 23:50:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=4KSdlAYLfq6oYXP5DVeyrt3CYvkgO3dsvD8hzUOr0Pg=;
+        b=HjvwRpvoC8uQQvmnUQwqQqSclfNQZDlVWpLOEJGi2uT/0rm+sxjw5UwQInrCDi/Fmf
+         /LVxI1DWQ7rl/9KBmKp9FcrV6NjSP2cPpoO5pjNNFIlbMCNMMTExTXno43BxJlq8wovk
+         BzxlQ6ri8YdxEcnnD8IMfIElj9B42cd6ukcMLT+3seGSgpOrhMK3XVNI26SwqSDzZoGW
+         jAq5v6EixU9NK15WkhDThVF3H99G2yrinNGq5MV4B2y91jQie13jzyMevZqt6GtUs6nJ
+         aTno6gjP0cYJeW9IHr1Vi9OaB/sHYwta6ypWUW5c/xYW7Khbs6oRu+t7Hk9r53f/wk5b
+         kRVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=4KSdlAYLfq6oYXP5DVeyrt3CYvkgO3dsvD8hzUOr0Pg=;
+        b=D3DJV8r6acr3xKyM9vvMsX5x443EfVaDJc5dMoo/l9NBVcVBnGhAvzM5k6i5ep2ike
+         Dde2LcJgqy8Vp94kc9VzM+i/poVWH/Yg35PK2+irCH2BgHJc5xEm4wWnQzZ6K8+JKbcy
+         7l+jDZkUghxtG5M0HOvKUxeoOoqIBPW9JiWz/LW1PILtLB8i+k/N7et3q6295G6frEa6
+         QcMybAJrKI19kLnjTlP0KSKq0gBViGvwmj6Y5Gz5/FLU+rwfwcGVRRV9uZpPOh43JfB0
+         a9G7Y9OOreKnIi725kFv0119Qen87DJwpaObtYG/N3Xk2cxZy9kY+CocFxFK3ag84Hd2
+         G4fA==
+X-Gm-Message-State: AOAM532atTghELiQz1QUOBXNNsEzARe/KJ5rpj12eSAlqj371juGKInb
+        qvwkPJHA8QCcnQN3/SCyUE2NyvQUCbqkhq/3SJULCg==
+X-Google-Smtp-Source: ABdhPJx3CdTlScwAxzpstIdr9TgdXDYCZxvjyWYAbsdBRhTTM+iKMgS9ngCxfmOprZVCdGrTx7LXqkXwxAKn1dDRFJ4=
+X-Received: by 2002:a05:6830:1612:: with SMTP id g18mr11624412otr.251.1596437427272;
+ Sun, 02 Aug 2020 23:50:27 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200803064512.85589-1-wenhu.wang@vivo.com>
+In-Reply-To: <20200803064512.85589-1-wenhu.wang@vivo.com>
+From:   Marco Elver <elver@google.com>
+Date:   Mon, 3 Aug 2020 08:50:15 +0200
+Message-ID: <CANpmjNNH7Szgnbg+7Q_TGCma6z4OXcSELtvgvndx=6zvok=sAA@mail.gmail.com>
+Subject: Re: [PATCH] doc: kcsan: add support info of gcc for kcsan
+To:     Wang Wenhu <wenhu.wang@vivo.com>
+Cc:     Dmitry Vyukov <dvyukov@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        clang-built-linux <clang-built-linux@googlegroups.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-KCSAN is also supported in GCC version 7.3.0 or later.
-For Clang, the supported versions are 7.0.0 and later.
+On Mon, 3 Aug 2020 at 08:45, Wang Wenhu <wenhu.wang@vivo.com> wrote:
+>
+> KCSAN is also supported in GCC version 7.3.0 or later.
+> For Clang, the supported versions are 7.0.0 and later.
+>
+> Signed-off-by: Wang Wenhu <wenhu.wang@vivo.com>
+> ---
 
-Signed-off-by: Wang Wenhu <wenhu.wang@vivo.com>
----
- Documentation/dev-tools/kcsan.rst | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Nack.
 
-diff --git a/Documentation/dev-tools/kcsan.rst b/Documentation/dev-tools/kcsan.rst
-index b38379f06194..05a4578839cf 100644
---- a/Documentation/dev-tools/kcsan.rst
-+++ b/Documentation/dev-tools/kcsan.rst
-@@ -8,7 +8,8 @@ approach to detect races. KCSAN's primary purpose is to detect `data races`_.
- Usage
- -----
- 
--KCSAN requires Clang version 11 or later.
-+KCSAN is supported in both GCC and Clang. With GCC it requires version 7.3.0
-+or later. With Clang it requires version 7.0.0 or later.
- 
- To enable KCSAN configure the kernel with::
- 
--- 
-2.17.1
+Did you mean K-A-SAN?
 
+In which case this is the wrong file (kasan.rst also has the right
+information FWIW).
+
+>  Documentation/dev-tools/kcsan.rst | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/Documentation/dev-tools/kcsan.rst b/Documentation/dev-tools/kcsan.rst
+> index b38379f06194..05a4578839cf 100644
+> --- a/Documentation/dev-tools/kcsan.rst
+> +++ b/Documentation/dev-tools/kcsan.rst
+> @@ -8,7 +8,8 @@ approach to detect races. KCSAN's primary purpose is to detect `data races`_.
+>  Usage
+>  -----
+>
+> -KCSAN requires Clang version 11 or later.
+> +KCSAN is supported in both GCC and Clang. With GCC it requires version 7.3.0
+> +or later. With Clang it requires version 7.0.0 or later.
+>
+>  To enable KCSAN configure the kernel with::
+>
+> --
+> 2.17.1
+>
