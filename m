@@ -2,658 +2,342 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CA0F123AC51
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 20:27:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D30623ACD6
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 21:18:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728515AbgHCS1A (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Aug 2020 14:27:00 -0400
-Received: from ms.lwn.net ([45.79.88.28]:42284 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726130AbgHCS07 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 3 Aug 2020 14:26:59 -0400
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id C384A2D3;
-        Mon,  3 Aug 2020 18:26:58 +0000 (UTC)
-Date:   Mon, 3 Aug 2020 12:26:57 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
+        id S1726906AbgHCTQ7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Aug 2020 15:16:59 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49248 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726825AbgHCTQ7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Aug 2020 15:16:59 -0400
+Received: from mail-pl1-x642.google.com (mail-pl1-x642.google.com [IPv6:2607:f8b0:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2AE5AC061756
+        for <linux-doc@vger.kernel.org>; Mon,  3 Aug 2020 12:16:59 -0700 (PDT)
+Received: by mail-pl1-x642.google.com with SMTP id r4so10746055pls.2
+        for <linux-doc@vger.kernel.org>; Mon, 03 Aug 2020 12:16:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:mime-version:content-disposition;
+        bh=K3xR+Mjlmw7VJ1KlSnnnRlCZomuqPP6T/oWBeSA7i0s=;
+        b=H7JhbGjdQX4JAAykRvrrY28GwxUGNrtEs+2zRVtE2ISJ9NvhHowtQchtf/eLI1qQlG
+         /0aVphDpwKWqpykGZmkHwuE8IXwm8UN+pDOaz+1k8X+vumiu1wnbY6nxXwRb2jiFVJ3f
+         JeunzMi2fjfTyk0CyULdS/70ut6mO/A45Ahd4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+         :content-disposition;
+        bh=K3xR+Mjlmw7VJ1KlSnnnRlCZomuqPP6T/oWBeSA7i0s=;
+        b=Ds3sOw3kbAqIDaTZpY0M0/PVXiL+gMROr/UOXD+JtjafP3XT17/OFhByVKTixvDwtY
+         cgA91fk3YDPHjxLSi71HcVNpzWE1tRebOZ2H3HAYR4+KhzaYcR8AlUxIHNaTHY99xXxo
+         mpBjjgjkQBB+xD9Hw2n06cw2MWnHqcOw176CxIMN+OLqSrHRiBHfDnDZLz3vVeqwH8+W
+         sjriMAzovUpwEtgwXXLH+2H7mVZkrM60uEpoPs2tuwxLZ7+YCDKoIiVHU0TK+dEh/3MQ
+         dbhkPIDJ2pEZUSCNsLpVSrV+A7QO1XCpHkw6iINJlt2idMwFUOIkI8hy48q28rajiZ/G
+         XLIA==
+X-Gm-Message-State: AOAM5322cVCB6L/CTPMLS60LaA5A0NryZ0V1m02rWQqL6K6GkxstOnQS
+        UGgbuKFH962BPo4XmQR7VcTXdw==
+X-Google-Smtp-Source: ABdhPJw5uofMAr+Zqq1y8zXtojIXjy5K5mprswhWnmC4cw7fFKxCD/J2d3VWZLL9oRbHs9eLYcV1MA==
+X-Received: by 2002:a17:90a:bd0e:: with SMTP id y14mr753168pjr.13.1596482218518;
+        Mon, 03 Aug 2020 12:16:58 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id j11sm20330067pfn.38.2020.08.03.12.16.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 03 Aug 2020 12:16:57 -0700 (PDT)
+Date:   Mon, 3 Aug 2020 12:16:56 -0700
+From:   Kees Cook <keescook@chromium.org>
 To:     Linus Torvalds <torvalds@linux-foundation.org>
-Cc:     LKML <linux-kernel@vger.kernel.org>, linux-doc@vger.kernel.org
-Subject: [GIT PULL] Documentation for 5.9
-Message-ID: <20200803122657.635aee87@lwn.net>
-Organization: LWN.net
+Cc:     linux-kernel@vger.kernel.org, Bart van Assche <bvanassche@acm.org>,
+        Chao Yu <yuchao0@huawei.com>,
+        "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+        Jason Gunthorpe <jgg@mellanox.com>,
+        Jason Yan <yanaijie@huawei.com>, Joe Perches <joe@perches.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kalle Valo <kvalo@codeaurora.org>,
+        Kees Cook <keescook@chromium.org>,
+        Leon Romanovsky <leonro@mellanox.com>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        linux-doc@vger.kernel.org, Mark Brown <broonie@kernel.org>,
+        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
+        Nathan Chancellor <natechancellor@gmail.com>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Sedat Dilek <sedat.dilek@gmail.com>,
+        Stephen Boyd <sboyd@kernel.org>
+Subject: [GIT PULL] Remove uninitialized_var() for v5.9-rc1
+Message-ID: <202008031209.CB5CC23@keescook>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The following changes since commit
-b3a9e3b9622ae10064826dccb4f7a52bd88c7407:
+Hi Linus,
 
-  Linux 5.8-rc1 (2020-06-14 12:45:04 -0700)
+Please pull this uninitialized_var() macro removal series for v5.9-rc1.
+This is long overdue, and has hidden too many bugs over the years. The
+series has several "by hand" fixes, and then a trivial treewide
+replacement. As you might imagine, this had a few conflicts while
+living in -next. Resolution is easy, of course: just remove any
+uninitialize_var() wrappings, but if you want to see the specifics,
+they are:
+
+kernel/debug/kdb/kdb_io.c
+https://lore.kernel.org/linux-next/20200629154305.0067d113@canb.auug.org.au/
+
+drivers/gpu/drm/drm_edid.c
+https://lore.kernel.org/linux-next/20200703143550.7ebbe771@canb.auug.org.au/
+
+net/ipv6/ip6_flowlabel.c
+https://lore.kernel.org/linux-next/20200727192721.53af345a@canb.auug.org.au/
+
+drivers/infiniband/core/uverbs_cmd.c
+https://lore.kernel.org/linux-next/20200728184520.5634a0a0@canb.auug.org.au/
+
+If you prefer, I can rebase and re-run my script, but your default
+position has been to let you deal with conflicts, so here we are. :)
+
+Thanks!
+
+-Kees
+
+The following changes since commit 9ebcfadb0610322ac537dd7aa5d9cbc2b2894c68:
+
+  Linux 5.8-rc3 (2020-06-28 15:00:24 -0700)
 
 are available in the Git repository at:
 
-  git://git.lwn.net/linux.git tags/docs-5.9
+  https://git.kernel.org/pub/scm/linux/kernel/git/kees/linux.git tags/uninit-macro-v5.9-rc1
 
-for you to fetch changes up to 2c12c8103d8f15790cf880f1545dafa36acb004a:
+for you to fetch changes up to 63a0895d960aa3d3653ef0ecad5bd8579388f14b:
 
-  scripts/kernel-doc: optionally treat warnings as errors (2020-07-31 11:11:17 -0600)
+  compiler: Remove uninitialized_var() macro (2020-07-16 12:35:31 -0700)
 
 ----------------------------------------------------------------
-It's been a busy cycle for documentation - hopefully the busiest for a
-while to come.  Changes include:
+Remove uninitialized_var() macro for v5.9-rc1
 
- - Some new Chinese translations
+- Clean up non-trivial uses of uninitialized_var()
+- Update documentation and checkpatch for uninitialized_var() removal
+- Treewide removal of uninitialized_var()
 
- - Progress on the battle against double words words and non-HTTPS URLs
-
- - Some block-mq documentation
-
- - More RST conversions from Mauro.  At this point, that task is
-   essentially complete, so we shouldn't see this kind of churn again for a
-   while.  Unless we decide to switch to asciidoc or something...:)
-
- - Lots of typo fixes, warning fixes, and more.
-
-Once again there's some obnoxious merge conflicts with other trees (arm64,
-f2fs, crypto, mm) which shouldn't be too painful to figure out.  I'm really
-hoping that, with the RST conversion done, future pulls will have fewer of
-these as well.
 ----------------------------------------------------------------
-Alex Shi (3):
-      doc/zh_CN: add admin-guide index
-      doc/zh_CN: add clearing-warn-once Chinese version
-      doc/zh_CN: add Chinese translation prefer section
+Jason Yan (1):
+      f2fs: Eliminate usage of uninitialized_var() macro
 
-Alexander A. Klimov (24):
-      Replace HTTP links with HTTPS ones: Documentation/translations/zh_CN
-      Replace HTTP links with HTTPS ones: Documentation/sphinx/parse-headers.pl
-      Replace HTTP links with HTTPS ones: Documentation/driver-api
-      Replace HTTP links with HTTPS ones: Documentation/filesystems
-      Replace HTTP links with HTTPS ones: Documentation/process
-      Replace HTTP links with HTTPS ones: Documentation/admin-guide
-      Replace HTTP links with HTTPS ones: DRBD driver
-      Replace HTTP links with HTTPS ones: CIFS
-      Replace HTTP links with HTTPS ones: LVM
-      kobject: documentation: Replace HTTP links with HTTPS ones
-      docs: driver-api: i3c: Replace HTTP links with HTTPS ones
-      docs: filesystems: Replace HTTP links with HTTPS ones
-      docs: kvm: Replace HTTP links with HTTPS ones
-      docs: locking: Replace HTTP links with HTTPS ones
-      Replace HTTP links with HTTPS ones: OMFS
-      Replace HTTP links with HTTPS ones: AFS FILESYSTEM
-      docs: hid: Convert link to https
-      Replace HTTP links with HTTPS ones: 9P FILE SYSTEM
-      docs: gcov: replace links with HTTPS
-      docs: ipmi: Replace HTTP links with HTTPS ones
-      S390: Replace HTTP links with HTTPS ones
-      docs: openrisc: Replace HTTP links with HTTPS ones
-      arm64: Replace HTTP links with HTTPS ones
-      CREDITS: Replace HTTP links with HTTPS ones
+Kees Cook (15):
+      docs: deprecated.rst: Add uninitialized_var()
+      x86/mm/numa: Remove uninitialized_var() usage
+      drbd: Remove uninitialized_var() usage
+      b43: Remove uninitialized_var() usage
+      rtlwifi: rtl8192cu: Remove uninitialized_var() usage
+      ide: Remove uninitialized_var() usage
+      spi: davinci: Remove uninitialized_var() usage
+      clk: st: Remove uninitialized_var() usage
+      clk: spear: Remove uninitialized_var() usage
+      KVM: PPC: Book3S PR: Remove uninitialized_var() usage
+      media: sur40: Remove uninitialized_var() usage
+      mm/debug_vm_pgtable: Remove uninitialized_var() usage
+      checkpatch: Remove awareness of uninitialized_var() macro
+      treewide: Remove uninitialized_var() usage
+      compiler: Remove uninitialized_var() macro
 
-Alexander Lobakin (2):
-      mailmap: add entries for Alexander Lobakin
-      mailmap: add entry for <alobakin@marvell.com>
+ Documentation/process/deprecated.rst                | 18 ++++++++++++++++++
+ arch/arm/mach-sa1100/assabet.c                      |  2 +-
+ arch/arm/mm/alignment.c                             |  2 +-
+ arch/ia64/kernel/process.c                          |  2 +-
+ arch/ia64/mm/discontig.c                            |  2 +-
+ arch/ia64/mm/tlb.c                                  |  2 +-
+ arch/mips/lib/dump_tlb.c                            |  2 +-
+ arch/mips/mm/init.c                                 |  2 +-
+ arch/mips/mm/tlb-r4k.c                              |  6 +++---
+ arch/powerpc/kvm/book3s_64_mmu_radix.c              |  2 +-
+ arch/powerpc/kvm/book3s_pr.c                        |  3 ---
+ arch/powerpc/kvm/powerpc.c                          |  2 +-
+ arch/powerpc/platforms/52xx/mpc52xx_pic.c           |  2 +-
+ arch/s390/kernel/smp.c                              |  2 +-
+ arch/x86/kernel/quirks.c                            | 10 +++++-----
+ arch/x86/kvm/mmu/mmu.c                              |  2 +-
+ arch/x86/kvm/mmu/paging_tmpl.h                      |  2 +-
+ arch/x86/kvm/x86.c                                  |  2 +-
+ arch/x86/mm/numa.c                                  | 18 +++++++++---------
+ block/blk-merge.c                                   |  2 +-
+ drivers/acpi/acpi_pad.c                             |  2 +-
+ drivers/ata/libata-scsi.c                           |  2 +-
+ drivers/atm/zatm.c                                  |  2 +-
+ drivers/block/drbd/drbd_nl.c                        |  6 +++---
+ drivers/block/drbd/drbd_state.c                     |  2 +-
+ drivers/block/rbd.c                                 |  2 +-
+ drivers/clk/clk-gate.c                              |  2 +-
+ drivers/clk/spear/clk-vco-pll.c                     |  2 +-
+ drivers/clk/st/clkgen-fsyn.c                        |  1 -
+ drivers/firewire/ohci.c                             | 14 +++++++-------
+ drivers/gpu/drm/bridge/sil-sii8620.c                |  2 +-
+ drivers/gpu/drm/drm_edid.c                          |  2 +-
+ drivers/gpu/drm/exynos/exynos_drm_dsi.c             |  6 +++---
+ drivers/gpu/drm/i915/display/intel_fbc.c            |  2 +-
+ drivers/gpu/drm/i915/gt/intel_lrc.c                 |  2 +-
+ drivers/gpu/drm/i915/intel_uncore.c                 |  2 +-
+ drivers/gpu/drm/rockchip/dw-mipi-dsi-rockchip.c     |  4 ++--
+ drivers/i2c/busses/i2c-rk3x.c                       |  2 +-
+ drivers/ide/ide-acpi.c                              |  2 +-
+ drivers/ide/ide-atapi.c                             |  2 +-
+ drivers/ide/ide-io-std.c                            |  4 ++--
+ drivers/ide/ide-io.c                                |  8 ++++----
+ drivers/ide/ide-sysfs.c                             |  2 +-
+ drivers/ide/ide-taskfile.c                          |  1 -
+ drivers/ide/umc8672.c                               |  2 +-
+ drivers/idle/intel_idle.c                           |  2 +-
+ drivers/infiniband/core/uverbs_cmd.c                |  4 ++--
+ drivers/infiniband/hw/cxgb4/cm.c                    |  2 +-
+ drivers/infiniband/hw/cxgb4/cq.c                    |  2 +-
+ drivers/infiniband/hw/mlx4/qp.c                     |  6 +++---
+ drivers/infiniband/hw/mlx5/cq.c                     |  6 +++---
+ drivers/infiniband/hw/mlx5/devx.c                   |  2 +-
+ drivers/infiniband/hw/mlx5/wr.c                     |  2 +-
+ drivers/infiniband/hw/mthca/mthca_qp.c              | 10 +++++-----
+ drivers/infiniband/sw/siw/siw_qp_rx.c               |  2 +-
+ drivers/input/serio/serio_raw.c                     |  2 +-
+ drivers/input/touchscreen/sur40.c                   |  4 +---
+ drivers/iommu/intel/iommu.c                         |  2 +-
+ drivers/md/dm-io.c                                  |  2 +-
+ drivers/md/dm-ioctl.c                               |  2 +-
+ drivers/md/dm-snap-persistent.c                     |  2 +-
+ drivers/md/dm-table.c                               |  2 +-
+ drivers/md/dm-writecache.c                          |  2 +-
+ drivers/md/raid5.c                                  |  2 +-
+ drivers/media/dvb-frontends/rtl2832.c               |  2 +-
+ drivers/media/tuners/qt1010.c                       |  4 ++--
+ drivers/media/usb/gspca/vicam.c                     |  2 +-
+ drivers/media/usb/uvc/uvc_video.c                   |  8 ++++----
+ drivers/memstick/host/jmb38x_ms.c                   |  2 +-
+ drivers/memstick/host/tifm_ms.c                     |  2 +-
+ drivers/mmc/host/sdhci.c                            |  2 +-
+ drivers/mtd/nand/raw/nand_ecc.c                     |  2 +-
+ drivers/mtd/nand/raw/s3c2410.c                      |  2 +-
+ drivers/mtd/parsers/afs.c                           |  4 ++--
+ drivers/mtd/ubi/eba.c                               |  2 +-
+ drivers/net/can/janz-ican3.c                        |  2 +-
+ drivers/net/ethernet/broadcom/bnx2.c                |  4 ++--
+ drivers/net/ethernet/mellanox/mlx5/core/pagealloc.c |  4 ++--
+ drivers/net/ethernet/neterion/s2io.c                |  2 +-
+ drivers/net/ethernet/qlogic/qla3xxx.c               |  2 +-
+ drivers/net/ethernet/sun/cassini.c                  |  2 +-
+ drivers/net/ethernet/sun/niu.c                      |  6 +++---
+ drivers/net/wan/z85230.c                            |  2 +-
+ drivers/net/wireless/ath/ath10k/core.c              |  2 +-
+ drivers/net/wireless/ath/ath6kl/init.c              |  2 +-
+ drivers/net/wireless/ath/ath9k/init.c               |  2 +-
+ drivers/net/wireless/broadcom/b43/debugfs.c         |  2 +-
+ drivers/net/wireless/broadcom/b43/dma.c             |  2 +-
+ drivers/net/wireless/broadcom/b43/lo.c              |  2 +-
+ drivers/net/wireless/broadcom/b43/phy_n.c           |  4 ++--
+ drivers/net/wireless/broadcom/b43/xmit.c            | 12 ++++++------
+ drivers/net/wireless/broadcom/b43legacy/debugfs.c   |  2 +-
+ drivers/net/wireless/broadcom/b43legacy/main.c      |  2 +-
+ drivers/net/wireless/intel/iwlegacy/3945.c          |  2 +-
+ drivers/net/wireless/intel/iwlegacy/4965-mac.c      |  2 +-
+ drivers/net/wireless/realtek/rtlwifi/rtl8192cu/hw.c |  8 ++++----
+ drivers/pci/pcie/aer.c                              |  2 +-
+ drivers/platform/x86/hdaps.c                        |  4 ++--
+ drivers/scsi/dc395x.c                               |  2 +-
+ drivers/scsi/pm8001/pm8001_hwi.c                    |  2 +-
+ drivers/scsi/pm8001/pm80xx_hwi.c                    |  2 +-
+ drivers/spi/spi-davinci.c                           |  1 -
+ drivers/ssb/driver_chipcommon.c                     |  4 ++--
+ drivers/tty/cyclades.c                              |  2 +-
+ drivers/tty/isicom.c                                |  2 +-
+ drivers/usb/musb/cppi_dma.c                         |  2 +-
+ drivers/usb/storage/sddr55.c                        |  4 ++--
+ drivers/vhost/net.c                                 |  6 +++---
+ drivers/video/fbdev/matrox/matroxfb_maven.c         |  6 +++---
+ drivers/video/fbdev/pm3fb.c                         |  6 +++---
+ drivers/video/fbdev/riva/riva_hw.c                  |  3 +--
+ drivers/virtio/virtio_ring.c                        |  6 +++---
+ fs/afs/dir.c                                        |  2 +-
+ fs/afs/security.c                                   |  2 +-
+ fs/dlm/netlink.c                                    |  2 +-
+ fs/erofs/data.c                                     |  4 ++--
+ fs/erofs/zdata.c                                    |  2 +-
+ fs/f2fs/data.c                                      |  4 +---
+ fs/fat/dir.c                                        |  2 +-
+ fs/fuse/control.c                                   |  4 ++--
+ fs/fuse/cuse.c                                      |  2 +-
+ fs/fuse/file.c                                      |  2 +-
+ fs/gfs2/aops.c                                      |  2 +-
+ fs/gfs2/bmap.c                                      |  2 +-
+ fs/gfs2/lops.c                                      |  2 +-
+ fs/hfsplus/unicode.c                                |  2 +-
+ fs/isofs/namei.c                                    |  4 ++--
+ fs/jffs2/erase.c                                    |  2 +-
+ fs/nfsd/nfsctl.c                                    |  2 +-
+ fs/ocfs2/alloc.c                                    |  4 ++--
+ fs/ocfs2/dir.c                                      | 14 +++++++-------
+ fs/ocfs2/extent_map.c                               |  4 ++--
+ fs/ocfs2/namei.c                                    |  2 +-
+ fs/ocfs2/refcounttree.c                             |  2 +-
+ fs/ocfs2/xattr.c                                    |  2 +-
+ fs/omfs/file.c                                      |  2 +-
+ fs/overlayfs/copy_up.c                              |  2 +-
+ fs/ubifs/commit.c                                   |  6 +++---
+ fs/ubifs/dir.c                                      |  2 +-
+ fs/ubifs/file.c                                     |  4 ++--
+ fs/ubifs/journal.c                                  |  4 ++--
+ fs/ubifs/lpt.c                                      |  2 +-
+ fs/ubifs/tnc.c                                      |  6 +++---
+ fs/ubifs/tnc_misc.c                                 |  4 ++--
+ fs/udf/balloc.c                                     |  2 +-
+ fs/xfs/xfs_bmap_util.c                              |  2 +-
+ include/linux/compiler-clang.h                      |  2 --
+ include/linux/compiler-gcc.h                        |  6 ------
+ include/linux/page-flags-layout.h                   |  4 +++-
+ include/net/flow_offload.h                          |  2 +-
+ kernel/async.c                                      |  4 ++--
+ kernel/audit.c                                      |  2 +-
+ kernel/debug/kdb/kdb_io.c                           |  2 +-
+ kernel/dma/debug.c                                  |  2 +-
+ kernel/events/core.c                                |  2 +-
+ kernel/events/uprobes.c                             |  2 +-
+ kernel/exit.c                                       |  2 +-
+ kernel/futex.c                                      | 14 +++++++-------
+ kernel/locking/lockdep.c                            | 16 ++++++++--------
+ kernel/trace/ring_buffer.c                          |  2 +-
+ lib/radix-tree.c                                    |  2 +-
+ lib/test_lockup.c                                   |  2 +-
+ mm/debug_vm_pgtable.c                               |  2 +-
+ mm/frontswap.c                                      |  2 +-
+ mm/ksm.c                                            |  2 +-
+ mm/memcontrol.c                                     |  2 +-
+ mm/memory.c                                         |  2 +-
+ mm/mempolicy.c                                      |  4 ++--
+ mm/page_alloc.c                                     |  2 +-
+ mm/percpu.c                                         |  2 +-
+ mm/slub.c                                           |  4 ++--
+ mm/swap.c                                           |  4 ++--
+ net/dccp/options.c                                  |  2 +-
+ net/ipv4/netfilter/nf_socket_ipv4.c                 |  6 +++---
+ net/ipv6/ip6_flowlabel.c                            |  2 +-
+ net/ipv6/netfilter/nf_socket_ipv6.c                 |  2 +-
+ net/netfilter/nf_conntrack_ftp.c                    |  2 +-
+ net/netfilter/nfnetlink_log.c                       |  2 +-
+ net/netfilter/nfnetlink_queue.c                     |  4 ++--
+ net/sched/cls_flow.c                                |  2 +-
+ net/sched/sch_cake.c                                |  2 +-
+ net/sched/sch_cbq.c                                 |  2 +-
+ net/sched/sch_fq_codel.c                            |  2 +-
+ net/sched/sch_fq_pie.c                              |  2 +-
+ net/sched/sch_hfsc.c                                |  2 +-
+ net/sched/sch_htb.c                                 |  2 +-
+ net/sched/sch_sfq.c                                 |  2 +-
+ net/sunrpc/svcsock.c                                |  4 ++--
+ net/sunrpc/xprtsock.c                               | 10 +++++-----
+ net/tls/tls_sw.c                                    |  2 +-
+ scripts/checkpatch.pl                               | 16 +++++-----------
+ sound/core/control_compat.c                         |  2 +-
+ sound/isa/sb/sb16_csp.c                             |  2 +-
+ sound/usb/endpoint.c                                |  2 +-
+ tools/include/linux/compiler.h                      |  2 --
+ tools/virtio/linux/kernel.h                         |  2 --
+ 196 files changed, 321 insertions(+), 330 deletions(-)
 
-André Almeida (2):
-      docs: block: Create blk-mq documentation
-      futex: MAINTAINERS: Re-add selftests directory
-
-Bhaskar Chowdhury (1):
-      docs/mm: concepts.rst: remove unnecessary word
-
-Chen Zhou (1):
-      docs/zh_CN: update sysfs.txt about show() usage
-
-Daniel W. S. Almeida (9):
-      docs: index.rst: Add watch_queue
-      docs: trace/index.rst: add histogram-design.rst
-      docs: bpf/index.rst: Add ringbuf.rst
-      docs: admin-guide/index.rst: Add pstore-blk.rst
-      docs: admin-guide/mm/index: Fix reference to nonexistent document
-      docs: staging/tee.rst: convert into definition list
-      docs: process/index.rst: Fix reference to nonexistent document
-      docs: bpf/bpf_devel_QA.rst: fix reference to nonexistent document
-      docs: core-api/printk-formats.rst: use literal block syntax
-
-Eric Sandeen (1):
-      doc: cgroup: add f2fs and xfs to supported list for writeback
-
-Federico Vaga (1):
-      doc:it_IT: add symbol-namespace translation
-
-Gustavo A. R. Silva (1):
-      docs: deprecated.rst: Add zero-length and one-element arrays
-
-Heinrich Schuchardt (2):
-      doc: add novamap to efi kernel command line parameters
-      doc: x86/speculation: length of underlines
-
-Jiri Slaby (2):
-      MAINTAINERS: use my kernel.org address
-      Documentation: fb, fix path to modedb.c
-
-Jonathan Corbet (5):
-      docs: Don't push Sphinx upgrades quite so readily
-      docs: f2fs: fix a broken table
-      Merge branch 'docs-fixes' into docs-next
-      Merge branch 'mauro' into docs-next
-      docs: CIFS: remove a spam-site URL
-
-Julia Lawall (5):
-      docs: timers: drop documentation about LB_BIAS
-      docs: filesystems: vfs: correct sync_mode flag names
-      docs: filesystems: vfs: correct flag name
-      PCI: correct flag name
-      docs: ia64: correct typo
-
-Kees Cook (3):
-      Documentation: Clarify f_cred vs current_cred() use
-      Documentation/security-bugs: Explain why plain text is preferred
-      doc: yama: Swap HTTP for HTTPS and replace dead link
-
-Konstantin Khlebnikov (1):
-      mailmap: add entry for obsolete email address
-
-Lee Jones (1):
-      doc:it_IT: process: coding-style.rst: Correct __maybe_unused compiler label
-
-Luc Van Oostenryck (2):
-      doc: update URL for sparse's tarballs
-      doc: add link to sparse's home page/internal docs
-
-Lukas Bulwahn (1):
-      MAINTAINERS: adjust kprobes.rst entry to new location
-
-Manbing (1):
-      trace doc: correct names of varous tracing documents
-
-Mauro Carvalho Chehab (40):
-      docs: fs: proc.rst: fix a warning due to a merge conflict
-      docs: thermal: convert cpu-idle-cooling.rst to ReST
-      docs: crypto: convert asymmetric-keys.txt to ReST
-      docs: crypto: convert api-intro.txt to ReST format
-      docs: crypto: convert async-tx-api.txt to ReST format
-      docs: crypto: descore-readme.txt: convert to ReST format
-      docs: misc-devices/spear-pcie-gadget.txt: convert to ReST
-      docs: misc-devices/pci-endpoint-test.txt: convert to ReST
-      docs: misc-devices/pci-endpoint-test.txt: convert to ReST
-      docs: misc-devices/c2port.txt: convert to ReST format
-      docs: misc-devices/bh1770glc.txt: convert to ReST
-      docs: misc-devices/apds990x.txt: convert to ReST format
-      docs: pci: endpoint/function/binding/pci-test.txt convert to ReST
-      docs: arm64: convert perf.txt to ReST format
-      docs: powerpc: convert vcpudispatch_stats.txt to ReST
-      docs: sh: convert new-machine.txt to ReST
-      docs: sh: convert register-banks.txt to ReST
-      docs: move remaining stuff under Documentation/*.txt to Documentation/staging
-      docs: staging: don't use literalinclude
-      net: dev: add a missing kernel-doc annotation
-      net: netdevice.h: add a description for napi_defer_hard_irqs
-      scripts/kernel-doc: parse __ETHTOOL_DECLARE_LINK_MODE_MASK
-      net: pylink.h: add kernel-doc descriptions for new fields at phylink_config
-      scripts/kernel-doc: handle function pointer prototypes
-      fs: fs.h: fix a kernel-doc parameter description
-      kcsan: fix a kernel-doc warning
-      selftests/vm/keys: fix a broken reference at protection_keys.c
-      docs: hugetlbpage.rst: fix some warnings
-      docs: powerpc: fix some issues at vas-api.rst
-      docs: driver-model: remove a duplicated markup at driver.rst
-      docs: ABI: fix a typo when pointing to w1-generic.rst
-      docs: fix references for DMA*.txt files
-      docs: fs: proc.rst: convert a new chapter to ReST
-      docs: dt: convert booting-without-of.txt to ReST format
-      docs: trace: ring-buffer-design.txt: convert to ReST format
-      docs: move nommu-mmap.txt to admin-guide and rename to ReST
-      docs: move mailbox.txt to driver-api and rename it
-      docs: move other kAPI documents to core-api
-      docs: Add remaining Documentation/*.txt at staging/index.rst
-      docs: staging: use small font for literal includes
-
-Mike Rapoport (1):
-      docs/core-api: memory-allocation: describe reclaim behaviour
-
-Naveen N. Rao (3):
-      docs: staging/kprobes.rst: Update some of the references
-      docs: staging/kprobes.rst: Move references to a separate appendix
-      docs: Move kprobes.rst from staging/ to trace/
-
-Pavel Machek (1):
-      devices.txt: document rfkill allocation
-
-Pierre-Louis Bossart (1):
-      scripts/kernel-doc: optionally treat warnings as errors
-
-Puranjay Mohan (2):
-      Security: Documentation: Replace deprecated :c:func: Usage
-      Driver-API: Documentation: Replace deprecated :c:func: Usage
-
-Randy Dunlap (66):
-      Documentation: remove SH-5 index entries
-      Documentation: fix filesystems/locking.rst malformed table warnings
-      Documentation: fix sysctl/kernel.rst heading format warnings
-      Documentation/admin-guide: cgroup-v2: drop doubled word
-      Documentation/admin-guide: cgroup-v1/rdma: drop doubled word
-      Documentation/admin-guide: dm-integrity: drop doubled words
-      Documentation/admin-guide: media/building: drop doubled words
-      Documentation/admin-guide: mm/ksm: drop doubled word
-      Documentation/admin-guide: pnfs-block-server: drop doubled word
-      Documentation/admin-guide: pnfs-scsi-server: drop doubled word
-      Documentation/admin-guide: arm-ccn: drop doubled word
-      Documentation/admin-guide: intel_pstate: drop doubled word
-      Documentation/admin-guide: intel-speed-select: drop doubled words
-      Documentation/admin-guide: sysctl/kernel: drop doubled word
-      Documentation/admin-guide: tainted-kernels: drop doubled word
-      Documentation/admin-guide: xfs: drop doubled word
-      Documentation: Coccinelle: fix various typos etc.
-      Documentation: arm64/arm-acpi: drop duplicate words
-      Documentation: arm64/acpi_object_usage: drop duplicate words
-      Documentation: arm64/sve: drop duplicate words
-      Documentation: PCI: pci-endpoint-cfs: drop doubled words
-      Documentation: PCI: pci-endpoint: drop doubled words
-      Documentation: PCI: pci-error-recovery: drop doubled words
-      Documentation: PCI: pci.rst: drop doubled words
-      Documentation: trace/ftrace: drop doubled words
-      Documentation: trace/histogram-design: drop doubled words
-      Documentation: trace/stm: drop doubled words
-      Documentation: virt: kvm/api: drop doubled words
-      Documentation: virt: kvm/s390-pv: drop doubled words
-      Documentation: filesystems: autofs-mount-control: drop doubled words
-      Documentation: filesystems: caching/operations: drop doubled word
-      Documentation: filesystems: configfs: drop doubled word
-      Documentation: filesystems: directory-locking: drop doubled word
-      Documentation: filesystems: fsverity: drop doubled word
-      Documentation: filesystems: mount_api: drop doubled word
-      Documentation: filesystems: overlayfs: drop doubled word
-      Documentation: filesystems: path-lookup: drop doubled word
-      Documentation: filesystems: sysfs-tagging: drop doubled word
-      Documentation: filesystems: vfs: drop doubled words
-      Documentation: numaperf: eliminate duplicated word
-      Documentation: block: eliminate duplicated word
-      Documentation: printk-basics: eliminate duplicated word
-      Documentation: kgdb: eliminate duplicated word
-      Documentation: fpga: eliminate duplicated word
-      Documentation: gpu/komeda-kms: eliminate duplicated word
-      Documentation: gpu/drm-uapi: eliminate duplicated word
-      Documentation: hid/intel-ish-hid: eliminate duplicated word
-      Documentation: i2c: eliminate duplicated word
-      Documentation: kbuild/kconfig-language: eliminate duplicated word
-      Documentation: leds/ledtrig-transient: eliminate duplicated word
-      Documentation: maintainer-entry-profile: eliminate duplicated word
-      Documentation: mips/ingenic-tcu: eliminate duplicated word
-      Documentation: misc/xilinx_sdfec: eliminate duplicated word
-      Documentation: powerpc/vas-api: eliminate duplicated word
-      Documentation: s390/vfio-ap: eliminate duplicated word
-      Documentation: security/keys: eliminate duplicated word
-      Documentation: virt/kvm/api: eliminate duplicated word
-      Documentation: vm/memory-model: eliminate duplicated word
-      Documentation: x86: machinecheck: drop doubled words
-      Documentation: x86: earlyprintk: drop doubled words
-      Documentation: locking: mutex-design: fix duplicated word
-      Documentation: locking: ww-mutex-design: drop duplicated word
-      Documentation: coda: annotate duplicated words
-      Documentation/driver-api: ntb: drop doubled word
-      Documentation/driver-api: nvdimm: drop doubled word
-      Documentation/filesystems/proc.rst: copy-editing cleanup
-
-Shuli Zhang (1):
-      Documentation/features: Add KGDB support on RISC-V
-
-Souptick Joarder (1):
-      docs: mm/gup: Minor documentation update
-
-Stephen Kitt (1):
-      docs: sysctl/kernel: document random
-
-Sumit Garg (1):
-      Documentation: tee: Document TEE kernel interface
-
-Tao Zhou (1):
-      doc/zh_CN: add cpu-load Chinese version
-
-Tobias Klauser (3):
-      Documentation/features: Add kmemleak
-      Documentation/features: Add kcov
-      Documentation/features: Remove unicore32 from kcov and kmemleak
-
-Tom Rix (1):
-      docs: process: Add an example for creating a fixes tag
-
-Vegard Nossum (3):
-      docs: path-lookup: fix HTML entity mojibake
-      docs: path-lookup: more markup fixes
-      docs: path-lookup: markup fixes for emphasis
-
-Wang Long (1):
-      Documentation: driver-api: update kernel connector
-
-Yaohui Wang (1):
-      Documentation: fix typo for core-api/cpu_hotplug documentation
-
-Yue Hu (1):
-      Documentation/admin-guide: tainted-kernels: fix spelling mistake
-
- .mailmap                                           |   9 +
- CREDITS                                            |  72 +-
- Documentation/ABI/testing/sysfs-driver-w1_therm    |   2 +-
- .../PCI/endpoint/function/binding/pci-test.rst     |  26 +
- .../PCI/endpoint/function/binding/pci-test.txt     |  19 -
- Documentation/PCI/endpoint/index.rst               |   2 +
- Documentation/PCI/endpoint/pci-endpoint-cfs.rst    |   2 +-
- Documentation/PCI/endpoint/pci-endpoint.rst        |   2 +-
- Documentation/PCI/pci-error-recovery.rst           |   2 +-
- Documentation/PCI/pci.rst                          |   8 +-
- Documentation/admin-guide/LSM/Yama.rst             |   7 +-
- Documentation/admin-guide/blockdev/drbd/index.rst  |   2 +-
- Documentation/admin-guide/blockdev/floppy.rst      |   6 +-
- Documentation/admin-guide/cgroup-v1/rdma.rst       |   2 +-
- Documentation/admin-guide/cgroup-v2.rst            |   8 +-
- Documentation/admin-guide/cifs/todo.rst            |   2 +-
- Documentation/admin-guide/cifs/usage.rst           |   7 +-
- Documentation/admin-guide/cifs/winucase_convert.pl |   2 +-
- Documentation/admin-guide/dell_rbu.rst             |   2 +-
- .../admin-guide/device-mapper/dm-integrity.rst     |   4 +-
- .../admin-guide/device-mapper/dm-raid.rst          |   2 +-
- .../admin-guide/device-mapper/dm-zoned.rst         |   2 +-
- Documentation/admin-guide/devices.txt              |   9 +-
- Documentation/admin-guide/ext4.rst                 |   4 +-
- .../special-register-buffer-data-sampling.rst      |   6 +-
- Documentation/admin-guide/index.rst                |   1 +
- Documentation/admin-guide/kernel-parameters.txt    |  20 +-
- .../admin-guide/laptops/disk-shock-protection.rst  |   2 +-
- Documentation/admin-guide/laptops/sonypi.rst       |   2 +-
- .../admin-guide/laptops/thinkpad-acpi.rst          |   6 +-
- Documentation/admin-guide/media/building.rst       |   4 +-
- Documentation/admin-guide/mm/concepts.rst          |   2 +-
- Documentation/admin-guide/mm/hugetlbpage.rst       |  23 +-
- Documentation/admin-guide/mm/index.rst             |   1 +
- Documentation/admin-guide/mm/ksm.rst               |   4 +-
- .../mm/nommu-mmap.rst}                             |   0
- Documentation/admin-guide/mm/numaperf.rst          |   2 +-
- Documentation/admin-guide/nfs/nfs-client.rst       |   4 +-
- Documentation/admin-guide/nfs/nfs-rdma.rst         |   2 +-
- Documentation/admin-guide/nfs/nfsroot.rst          |   6 +-
- .../admin-guide/nfs/pnfs-block-server.rst          |   2 +-
- Documentation/admin-guide/nfs/pnfs-scsi-server.rst |   2 +-
- Documentation/admin-guide/perf/arm-ccn.rst         |   2 +-
- .../admin-guide/pm/intel-speed-select.rst          |   4 +-
- Documentation/admin-guide/pm/intel_pstate.rst      |   2 +-
- Documentation/admin-guide/security-bugs.rst        |   9 +-
- Documentation/admin-guide/sysctl/fs.rst            |   2 +-
- Documentation/admin-guide/sysctl/kernel.rst        |  42 +-
- Documentation/admin-guide/sysctl/vm.rst            |   2 +-
- Documentation/admin-guide/tainted-kernels.rst      |   4 +-
- Documentation/admin-guide/xfs.rst                  |   2 +-
- Documentation/arm/booting.rst                      |   2 +-
- Documentation/arm64/acpi_object_usage.rst          |   2 +-
- Documentation/arm64/arm-acpi.rst                   |   4 +-
- Documentation/arm64/index.rst                      |   1 +
- Documentation/arm64/{perf.txt => perf.rst}         |   7 +-
- Documentation/arm64/sve.rst                        |   2 +-
- Documentation/block/biodoc.rst                     |   2 +-
- Documentation/block/blk-mq.rst                     | 153 ++++
- Documentation/block/index.rst                      |   1 +
- Documentation/block/pr.rst                         |   2 +-
- Documentation/bpf/bpf_devel_QA.rst                 |   1 +
- Documentation/bpf/index.rst                        |   8 +
- .../bus-virt-phys-mapping.rst}                     |   2 +-
- Documentation/core-api/cpu_hotplug.rst             |   4 +-
- Documentation/core-api/dma-api.rst                 |   6 +-
- Documentation/core-api/dma-isa-lpc.rst             |   2 +-
- Documentation/core-api/index.rst                   |   3 +
- Documentation/core-api/kobject.rst                 |   2 +-
- Documentation/core-api/memory-allocation.rst       |  44 ++
- Documentation/core-api/pin_user_pages.rst          |   2 +-
- Documentation/core-api/printk-basics.rst           |   2 +-
- Documentation/core-api/printk-formats.rst          |   4 +-
- .../this_cpu_ops.rst}                              |   0
- .../unaligned-memory-access.rst                    |   0
- .../crypto/{api-intro.txt => api-intro.rst}        | 186 ++---
- .../{asymmetric-keys.txt => asymmetric-keys.rst}   |  91 ++-
- .../crypto/{async-tx-api.txt => async-tx-api.rst}  | 255 ++++---
- .../{descore-readme.txt => descore-readme.rst}     | 152 ++--
- Documentation/crypto/index.rst                     |   5 +
- Documentation/dev-tools/coccinelle.rst             |  40 +-
- Documentation/dev-tools/gcov.rst                   |   4 +-
- Documentation/dev-tools/kgdb.rst                   |   2 +-
- Documentation/dev-tools/kmemleak.rst               |   2 -
- Documentation/dev-tools/sparse.rst                 |   6 +-
- ...oting-without-of.txt => booting-without-of.rst} | 302 ++++----
- Documentation/devicetree/index.rst                 |   1 +
- Documentation/driver-api/connector.rst             |   5 +-
- Documentation/driver-api/device-io.rst             |  22 +-
- Documentation/driver-api/dmaengine/client.rst      |   2 +-
- Documentation/driver-api/dmaengine/provider.rst    |   2 +-
- Documentation/driver-api/driver-model/driver.rst   |   2 -
- .../early-userspace/early_userspace_support.rst    |   4 +-
- Documentation/driver-api/i3c/protocol.rst          |   2 +-
- Documentation/driver-api/index.rst                 |   1 +
- Documentation/driver-api/ipmi.rst                  |   2 +-
- .../{mailbox.txt => driver-api/mailbox.rst}        |   0
- .../driver-api/memory-devices/ti-gpmc.rst          |   2 +-
- Documentation/driver-api/mmc/mmc-tools.rst         |   2 +-
- Documentation/driver-api/ntb.rst                   |   2 +-
- Documentation/driver-api/nvdimm/nvdimm.rst         |  14 +-
- Documentation/driver-api/nvdimm/security.rst       |   2 +-
- Documentation/driver-api/rapidio/rapidio.rst       |   4 +-
- .../driver-api/thermal/cpu-idle-cooling.rst        |  14 +-
- .../driver-api/thermal/nouveau_thermal.rst         |   2 +-
- Documentation/driver-api/usb/dma.rst               |   6 +-
- .../driver-api/usb/writing_usb_driver.rst          |   4 +-
- Documentation/fb/modedb.rst                        |   2 +-
- Documentation/features/debug/kcov/arch-support.txt |  33 +
- Documentation/features/debug/kgdb/arch-support.txt |   2 +-
- .../features/debug/kmemleak/arch-support.txt       |  33 +
- Documentation/filesystems/9p.rst                   |   2 +-
- Documentation/filesystems/afs.rst                  |   2 +-
- Documentation/filesystems/autofs-mount-control.rst |   6 +-
- Documentation/filesystems/caching/cachefiles.rst   |   2 +-
- Documentation/filesystems/caching/operations.rst   |   2 +-
- Documentation/filesystems/coda.rst                 |   4 +-
- Documentation/filesystems/configfs.rst             |   2 +-
- Documentation/filesystems/directory-locking.rst    |   4 +-
- Documentation/filesystems/f2fs.rst                 | 312 ++++----
- Documentation/filesystems/fsverity.rst             |   2 +-
- Documentation/filesystems/hfs.rst                  |   2 +-
- Documentation/filesystems/hpfs.rst                 |   2 +-
- Documentation/filesystems/locking.rst              |  12 +-
- Documentation/filesystems/mount_api.rst            |   4 +-
- Documentation/filesystems/nfs/rpc-server-gss.rst   |   6 +-
- Documentation/filesystems/omfs.rst                 |   2 +-
- Documentation/filesystems/overlayfs.rst            |   2 +-
- Documentation/filesystems/path-lookup.rst          |  32 +-
- Documentation/filesystems/proc.rst                 | 155 ++--
- .../filesystems/ramfs-rootfs-initramfs.rst         |   8 +-
- Documentation/filesystems/sysfs-pci.rst            |   2 +-
- Documentation/filesystems/sysfs-tagging.rst        |   2 +-
- Documentation/filesystems/ubifs-authentication.rst |   4 +-
- Documentation/filesystems/vfs.rst                  |  16 +-
- Documentation/fpga/dfl.rst                         |   2 +-
- Documentation/gpu/drm-mm.rst                       |   2 +-
- Documentation/gpu/drm-uapi.rst                     |   2 +-
- Documentation/gpu/komeda-kms.rst                   |   2 +-
- Documentation/hid/hiddev.rst                       |   2 +-
- Documentation/hid/intel-ish-hid.rst                |   2 +-
- Documentation/i2c/upgrading-clients.rst            |   2 +-
- Documentation/ia64/efirtc.rst                      |   2 +-
- Documentation/index.rst                            |  14 +
- Documentation/kbuild/kconfig-language.rst          |   2 +-
- Documentation/leds/ledtrig-transient.rst           |   2 +-
- Documentation/locking/mutex-design.rst             |   4 +-
- Documentation/locking/ww-mutex-design.rst          |   2 +-
- .../maintainer/maintainer-entry-profile.rst        |   2 +-
- Documentation/mips/ingenic-tcu.rst                 |   2 +-
- .../{ad525x_dpot.txt => ad525x_dpot.rst}           |  24 +-
- .../misc-devices/{apds990x.txt => apds990x.rst}    |  31 +-
- .../misc-devices/{bh1770glc.txt => bh1770glc.rst}  |  45 +-
- .../misc-devices/{c2port.txt => c2port.rst}        |  56 +-
- Documentation/misc-devices/index.rst               |   6 +
- Documentation/misc-devices/pci-endpoint-test.rst   |  56 ++
- Documentation/misc-devices/pci-endpoint-test.txt   |  41 -
- Documentation/misc-devices/spear-pcie-gadget.rst   | 170 +++++
- Documentation/misc-devices/spear-pcie-gadget.txt   | 130 ----
- Documentation/misc-devices/xilinx_sdfec.rst        |   2 +-
- Documentation/openrisc/openrisc_port.rst           |   2 +-
- Documentation/powerpc/index.rst                    |   1 +
- Documentation/powerpc/vas-api.rst                  |  25 +-
- ...pudispatch_stats.txt => vcpudispatch_stats.rst} |  17 +-
- Documentation/process/2.Process.rst                |  12 +-
- Documentation/process/4.Coding.rst                 |   4 +-
- Documentation/process/botching-up-ioctls.rst       |   2 +-
- Documentation/process/changes.rst                  |   6 +-
- Documentation/process/clang-format.rst             |   2 +-
- Documentation/process/coding-style.rst             |   2 +-
- Documentation/process/deprecated.rst               | 118 +++
- Documentation/process/howto.rst                    |   2 +-
- Documentation/process/index.rst                    |   4 +-
- Documentation/process/kernel-docs.rst              |  28 +-
- Documentation/process/maintainer-pgp-guide.rst     |   2 +-
- Documentation/process/submitting-drivers.rst       |  22 +-
- Documentation/process/submitting-patches.rst       |   9 +-
- Documentation/s390/monreader.rst                   |   2 +-
- Documentation/s390/vfio-ap.rst                     |   2 +-
- Documentation/security/credentials.rst             |  10 +-
- Documentation/security/keys/core.rst               |   2 +-
- Documentation/security/keys/trusted-encrypted.rst  |   2 +-
- Documentation/sh/index.rst                         |  18 +-
- .../sh/{new-machine.txt => new-machine.rst}        | 199 ++---
- .../sh/{register-banks.txt => register-banks.rst}  |  13 +-
- Documentation/sphinx/parse-headers.pl              |   2 +-
- Documentation/{crc32.txt => staging/crc32.rst}     |   0
- Documentation/staging/index.rst                    |  58 ++
- Documentation/{lzo.txt => staging/lzo.rst}         |   0
- .../{remoteproc.txt => staging/remoteproc.rst}     |   2 +-
- Documentation/{rpmsg.txt => staging/rpmsg.rst}     |   0
- .../{speculation.txt => staging/speculation.rst}   |   8 +-
- .../{static-keys.txt => staging/static-keys.rst}   |   0
- Documentation/{tee.txt => staging/tee.rst}         |  73 ++
- Documentation/{xz.txt => staging/xz.rst}           |   0
- Documentation/timers/no_hz.rst                     |   2 -
- Documentation/trace/ftrace.rst                     |  18 +-
- Documentation/trace/histogram-design.rst           |   4 +-
- Documentation/trace/index.rst                      |   3 +
- Documentation/{kprobes.txt => trace/kprobes.rst}   |  16 +-
- Documentation/trace/kprobetrace.rst                |   2 +-
- ...ng-buffer-design.txt => ring-buffer-design.rst} | 836 +++++++++++----------
- Documentation/trace/stm.rst                        |   4 +-
- .../translations/it_IT/core-api/index.rst          |  18 +
- .../it_IT/core-api/symbol-namespaces.rst           | 166 ++++
- Documentation/translations/it_IT/index.rst         |   5 +-
- .../translations/it_IT/kernel-hacking/hacking.rst  |   4 +-
- .../translations/it_IT/process/coding-style.rst    |   2 +-
- .../translations/ko_KR/memory-barriers.txt         |   6 +-
- .../zh_CN/admin-guide/clearing-warn-once.rst       |   9 +
- .../translations/zh_CN/admin-guide/cpu-load.rst    | 105 +++
- .../translations/zh_CN/admin-guide/index.rst       | 125 +++
- Documentation/translations/zh_CN/arm/Booting       |   2 +-
- .../translations/zh_CN/filesystems/sysfs.txt       |   6 +-
- Documentation/translations/zh_CN/index.rst         |   4 +
- .../translations/zh_CN/process/2.Process.rst       |   8 +-
- .../translations/zh_CN/process/4.Coding.rst        |   2 +-
- .../zh_CN/process/7.AdvancedTopics.rst             |   6 +-
- .../translations/zh_CN/process/8.Conclusion.rst    |  10 +-
- .../translations/zh_CN/process/coding-style.rst    |   2 +-
- Documentation/translations/zh_CN/process/howto.rst |  12 +-
- .../zh_CN/process/submitting-drivers.rst           |  18 +-
- .../zh_CN/process/submitting-patches.rst           |   4 +-
- .../zh_CN/process/volatile-considered-harmful.rst  |   4 +-
- Documentation/virt/kvm/amd-memory-encryption.rst   |   6 +-
- Documentation/virt/kvm/api.rst                     |  18 +-
- Documentation/virt/kvm/mmu.rst                     |   2 +-
- Documentation/virt/kvm/nested-vmx.rst              |   2 +-
- Documentation/virt/kvm/s390-pv.rst                 |   2 +-
- Documentation/vm/memory-model.rst                  |   2 +-
- Documentation/x86/earlyprintk.rst                  |   2 +-
- Documentation/x86/x86_64/machinecheck.rst          |   2 +-
- MAINTAINERS                                        |  22 +-
- arch/Kconfig                                       |   2 +-
- arch/ia64/hp/common/sba_iommu.c                    |  12 +-
- arch/parisc/kernel/pci-dma.c                       |   2 +-
- arch/sh/Kconfig.cpu                                |   2 +-
- arch/x86/include/asm/dma-mapping.h                 |   4 +-
- arch/x86/kernel/amd_gart_64.c                      |   2 +-
- crypto/asymmetric_keys/asymmetric_type.c           |   2 +-
- crypto/asymmetric_keys/public_key.c                |   2 +-
- crypto/asymmetric_keys/signature.c                 |   2 +-
- drivers/block/drbd/Kconfig                         |   2 +-
- drivers/md/Kconfig                                 |   8 +-
- drivers/md/dm-crypt.c                              |   2 +-
- drivers/misc/Kconfig                               |   2 +-
- drivers/misc/ad525x_dpot.c                         |   2 +-
- drivers/parisc/sba_iommu.c                         |  14 +-
- fs/cifs/cifsacl.c                                  |   4 +-
- fs/cifs/cifsglob.h                                 |   2 +-
- fs/cifs/winucase.c                                 |   2 +-
- include/crypto/public_key.h                        |   2 +-
- include/keys/asymmetric-parser.h                   |   2 +-
- include/keys/asymmetric-subtype.h                  |   2 +-
- include/keys/asymmetric-type.h                     |   2 +-
- include/linux/dma-mapping.h                        |   2 +-
- include/linux/fs.h                                 |   2 +-
- include/linux/jump_label.h                         |   2 +-
- include/linux/kcsan-checks.h                       |  10 +-
- include/linux/netdevice.h                          |   2 +
- include/linux/phylink.h                            |   4 +
- include/media/videobuf-dma-sg.h                    |   2 +-
- init/Kconfig                                       |   2 +-
- kernel/dma/debug.c                                 |   2 +-
- lib/crc32.c                                        |   2 +-
- lib/lzo/lzo1x_decompress_safe.c                    |   2 +-
- lib/xz/Kconfig                                     |   2 +-
- mm/Kconfig                                         |   2 +-
- mm/nommu.c                                         |   2 +-
- net/core/dev.c                                     |   1 +
- samples/kprobes/kprobe_example.c                   |   2 +-
- samples/kprobes/kretprobe_example.c                |   2 +-
- scripts/kernel-doc                                 |  30 +-
- scripts/sphinx-pre-install                         |   4 -
- tools/testing/selftests/vm/protection_keys.c       |   2 +-
- 275 files changed, 3356 insertions(+), 1928 deletions(-)
- create mode 100644 Documentation/PCI/endpoint/function/binding/pci-test.rst
- delete mode 100644 Documentation/PCI/endpoint/function/binding/pci-test.txt
- rename Documentation/{nommu-mmap.txt => admin-guide/mm/nommu-mmap.rst} (100%)
- rename Documentation/arm64/{perf.txt => perf.rst} (95%)
- create mode 100644 Documentation/block/blk-mq.rst
- rename Documentation/{bus-virt-phys-mapping.txt => core-api/bus-virt-phys-mapping.rst} (99%)
- rename Documentation/{this_cpu_ops.txt => core-api/this_cpu_ops.rst} (100%)
- rename Documentation/{process => core-api}/unaligned-memory-access.rst (100%)
- rename Documentation/crypto/{api-intro.txt => api-intro.rst} (70%)
- rename Documentation/crypto/{asymmetric-keys.txt => asymmetric-keys.rst} (91%)
- rename Documentation/crypto/{async-tx-api.txt => async-tx-api.rst} (55%)
- rename Documentation/crypto/{descore-readme.txt => descore-readme.rst} (81%)
- rename Documentation/devicetree/{booting-without-of.txt => booting-without-of.rst} (90%)
- rename Documentation/{mailbox.txt => driver-api/mailbox.rst} (100%)
- create mode 100644 Documentation/features/debug/kcov/arch-support.txt
- create mode 100644 Documentation/features/debug/kmemleak/arch-support.txt
- rename Documentation/misc-devices/{ad525x_dpot.txt => ad525x_dpot.rst} (85%)
- rename Documentation/misc-devices/{apds990x.txt => apds990x.rst} (86%)
- rename Documentation/misc-devices/{bh1770glc.txt => bh1770glc.rst} (83%)
- rename Documentation/misc-devices/{c2port.txt => c2port.rst} (61%)
- create mode 100644 Documentation/misc-devices/pci-endpoint-test.rst
- delete mode 100644 Documentation/misc-devices/pci-endpoint-test.txt
- create mode 100644 Documentation/misc-devices/spear-pcie-gadget.rst
- delete mode 100644 Documentation/misc-devices/spear-pcie-gadget.txt
- rename Documentation/powerpc/{vcpudispatch_stats.txt => vcpudispatch_stats.rst} (94%)
- rename Documentation/sh/{new-machine.txt => new-machine.rst} (73%)
- rename Documentation/sh/{register-banks.txt => register-banks.rst} (88%)
- rename Documentation/{crc32.txt => staging/crc32.rst} (100%)
- create mode 100644 Documentation/staging/index.rst
- rename Documentation/{lzo.txt => staging/lzo.rst} (100%)
- rename Documentation/{remoteproc.txt => staging/remoteproc.rst} (99%)
- rename Documentation/{rpmsg.txt => staging/rpmsg.rst} (100%)
- rename Documentation/{speculation.txt => staging/speculation.rst} (97%)
- rename Documentation/{static-keys.txt => staging/static-keys.rst} (100%)
- rename Documentation/{tee.txt => staging/tee.rst} (80%)
- rename Documentation/{xz.txt => staging/xz.rst} (100%)
- rename Documentation/{kprobes.txt => trace/kprobes.rst} (99%)
- rename Documentation/trace/{ring-buffer-design.txt => ring-buffer-design.rst} (55%)
- create mode 100644 Documentation/translations/it_IT/core-api/index.rst
- create mode 100644 Documentation/translations/it_IT/core-api/symbol-namespaces.rst
- create mode 100644 Documentation/translations/zh_CN/admin-guide/clearing-warn-once.rst
- create mode 100644 Documentation/translations/zh_CN/admin-guide/cpu-load.rst
- create mode 100644 Documentation/translations/zh_CN/admin-guide/index.rst
+-- 
+Kees Cook
