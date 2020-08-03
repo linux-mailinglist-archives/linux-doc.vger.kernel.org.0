@@ -2,245 +2,181 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0D8D323A8CE
-	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 16:50:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8799B23A90F
+	for <lists+linux-doc@lfdr.de>; Mon,  3 Aug 2020 17:04:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728024AbgHCOuV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 Aug 2020 10:50:21 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35858 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727995AbgHCOrt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 Aug 2020 10:47:49 -0400
-Received: from mail-qk1-x74a.google.com (mail-qk1-x74a.google.com [IPv6:2607:f8b0:4864:20::74a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E60B5C061756
-        for <linux-doc@vger.kernel.org>; Mon,  3 Aug 2020 07:47:48 -0700 (PDT)
-Received: by mail-qk1-x74a.google.com with SMTP id x20so26319797qki.20
-        for <linux-doc@vger.kernel.org>; Mon, 03 Aug 2020 07:47:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=yEtE51ZkZ89myWk79FRCGMzR6DiPPNgcqkWBItHzQ6s=;
-        b=t1rTR3609fZavoZD6hGkSsSWDr9nI1/YkdhLNf0ojphXhpqrjYtn2QmhC+W/gkvimg
-         AMTj6PP4Rr26vC5qnxMVLP8ZXj2mvSyHcLtN7NTD3GvFDmmeReFr0s4F/UMZqW82I1g+
-         Dr2Z/WzdPu1RdbA1YmGLFdz8BghYnww1NBBlSY+6I9r3aq9SpAN2yEXku55avULjgjeR
-         wbdd0+d7Js097V3esnE9Zp3yRqLvLrD/D5lAoObteLNHtFqv+wIpvThQwIPjxSfSQHJA
-         7Nvv9QfJik4hcZHlF/286VGx9pliyj8hQuAw0OzqKiZAgbFEPs15yA8D9Br8GJTj/mTJ
-         PaOg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=yEtE51ZkZ89myWk79FRCGMzR6DiPPNgcqkWBItHzQ6s=;
-        b=ulEb9d3cn+oAPYt6dMjoJf8iRvae/PQEbLVmGyVtUj0nhbbK4Wh6HGO67ZZvEoBsRi
-         EAJfQv0NVASWtKF8RVtwkAy6mh9gF0RUWS302/mwmLiVzk2dNt/ZxkA8ia8vC7sWKaUN
-         urzMd9pxSMCuTW7pzwGXz0miUnp75f4mSuef56ymMpZ8qVeOB19gMi4N44e3+f9SIHkf
-         vNvOWchCijl5wqrD8otCp3WsKmOcx4MLAVvUo9uDKXP92+v5Dh6JvkxFiCwV99JyfjJU
-         2L+7Nn9jCv6AM/F4b9BEn0Isk1f8373jLws7ByetHSABJ5zybL+a1n+q6c+VVdt5okQB
-         m6EQ==
-X-Gm-Message-State: AOAM532B0bsle3ZKEsajulp5nZhP5lF7tD3Mm96DJNmZXJ6TvlhMmGsJ
-        h5YEvgvWqvpZERegKRpTSO/9H1oBCeE+uW7cCA==
-X-Google-Smtp-Source: ABdhPJw9FuulIu0ymOE9kGuQtwFH4SdlEeYnPFzJ+4tzAm9Tdqz+V6p7Q/zMMMduM+pHUwYFb/16WTJ/nRJFAJbl1A==
-X-Received: by 2002:a0c:c3d0:: with SMTP id p16mr17210039qvi.54.1596466068074;
- Mon, 03 Aug 2020 07:47:48 -0700 (PDT)
-Date:   Mon,  3 Aug 2020 14:47:19 +0000
-In-Reply-To: <20200803144719.3184138-1-kaleshsingh@google.com>
-Message-Id: <20200803144719.3184138-3-kaleshsingh@google.com>
+        id S1726579AbgHCPDy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 Aug 2020 11:03:54 -0400
+Received: from mail.kernel.org ([198.145.29.99]:47380 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726189AbgHCPDx (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 3 Aug 2020 11:03:53 -0400
+Received: from devnote2 (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 7A94420775;
+        Mon,  3 Aug 2020 15:03:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1596467032;
+        bh=VgYBpfCh+3wvKx5qa1i7epOht5IPxmnIi4NnDsqf3aU=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=E41ov8+ZhoApVBXsj5oknZt2xOSS0wtzfMGrn86vnBcUm4QdzZANM9Dp8sVKBMIm+
+         7BOvhbCHkmFRN+0PjSDHbE/XcS5IQGcbAVM4Y3lgBfs8zDPOq53KYkr86VlBbQRCL4
+         7+YQu7dwGCZYc0uKH9PqbsWoUUwjFAWwVDRxpS+w=
+Date:   Tue, 4 Aug 2020 00:03:45 +0900
+From:   Masami Hiramatsu <mhiramat@kernel.org>
+To:     Arvind Sankar <nivedita@alum.mit.edu>
+Cc:     Steven Rostedt <rostedt@goodmis.org>,
+        Kees Cook <keescook@chromium.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Frank Rowand <frowand.list@gmail.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Namhyung Kim <namhyung@kernel.org>,
+        Tim Bird <Tim.Bird@sony.com>, Jiri Olsa <jolsa@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Tom Zanussi <tom.zanussi@linux.intel.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        linux-doc@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 08/22] bootconfig: init: Allow admin to use
+ bootconfig for init command line
+Message-Id: <20200804000345.f5727ac28647aa8c092cc109@kernel.org>
+In-Reply-To: <20200802023318.GA3981683@rani.riverdale.lan>
+References: <157867220019.17873.13377985653744804396.stgit@devnote2>
+        <157867229521.17873.654222294326542349.stgit@devnote2>
+        <202002070954.C18E7F58B@keescook>
+        <20200207144603.30688b94@oasis.local.home>
+        <20200802023318.GA3981683@rani.riverdale.lan>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 Mime-Version: 1.0
-References: <20200803144719.3184138-1-kaleshsingh@google.com>
-X-Mailer: git-send-email 2.28.0.163.g6104cc2f0b6-goog
-Subject: [PATCH 2/2] dmabuf/tracing: Add dma-buf trace events
-From:   Kalesh Singh <kaleshsingh@google.com>
-To:     Jonathan Corbet <corbet@lwn.net>,
-        Sumit Semwal <sumit.semwal@linaro.org>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ingo Molnar <mingo@redhat.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-media@vger.kernel.org, dri-devel@lists.freedesktop.org,
-        linaro-mm-sig@lists.linaro.org, linux-fsdevel@vger.kernel.org,
-        Suren Baghdasaryan <surenb@google.com>,
-        Hridya Valsaraju <hridya@google.com>,
-        Ioannis Ilkos <ilkos@google.com>,
-        John Stultz <john.stultz@linaro.org>, kernel-team@android.com,
-        Kalesh Singh <kaleshsingh@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Being able to analyze the per process usage of shared
-dma buffers prodives useful insights in situations where
-the system is experiencing high memory pressure. This would
-allow us to see exactly which processes are holding references
-to the shared buffer.
+On Sat, 1 Aug 2020 22:33:18 -0400
+Arvind Sankar <nivedita@alum.mit.edu> wrote:
 
-Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
+> On Fri, Feb 07, 2020 at 02:46:03PM -0500, Steven Rostedt wrote:
+> > 
+> > diff --git a/init/main.c b/init/main.c
+> > index 491f1cdb3105..113c8244e5f0 100644
+> > --- a/init/main.c
+> > +++ b/init/main.c
+> > @@ -142,6 +142,15 @@ static char *extra_command_line;
+> >  /* Extra init arguments */
+> >  static char *extra_init_args;
+> >  
+> > +#ifdef CONFIG_BOOT_CONFIG
+> > +/* Is bootconfig on command line? */
+> > +static bool bootconfig_found;
+> > +static bool initargs_found;
+> > +#else
+> > +# define bootconfig_found false
+> > +# define initargs_found false
+> > +#endif
+> > +
+> >  static char *execute_command;
+> >  static char *ramdisk_execute_command;
+> >  
+> > @@ -336,17 +345,32 @@ u32 boot_config_checksum(unsigned char *p, u32 size)
+> >  	return ret;
+> >  }
+> >  
+> > +static int __init bootconfig_params(char *param, char *val,
+> > +				    const char *unused, void *arg)
+> > +{
+> > +	if (strcmp(param, "bootconfig") == 0) {
+> > +		bootconfig_found = true;
+> > +	} else if (strcmp(param, "--") == 0) {
+> > +		initargs_found = true;
+> > +	}
+> > +	return 0;
+> > +}
+> > +
+> 
+> I came across this as I was poking around some of the command line
+> parsing. AFAICT, initargs_found will never be set to true here, because
+> parse_args handles "--" itself by immediately returning: it doesn't
+> invoke the callback for it. So you'd instead have to check the return of
+> parse_args("bootconfig"...) to detect the initargs_found case.
+
+Oops, good catch!
+Does this fixes the problem?
+
+From b078e8b02ad54aea74f8c3645fc11dd3a1cdc1e7 Mon Sep 17 00:00:00 2001
+From: Masami Hiramatsu <mhiramat@kernel.org>
+Date: Mon, 3 Aug 2020 23:57:29 +0900
+Subject: [PATCH] bootconfig: Fix to find the initargs correctly
+
+Since the parse_args() stops parsing at '--', bootconfig_params()
+will never get the '--' as param and initargs_found never be true.
+In the result, if we pass some init arguments via the bootconfig,
+those are always appended to the kernel command line with '--'
+and user will see double '--'.
+
+To fix this correctly, check the return value of parse_args()
+and set initargs_found true if the return value is not an error
+but a valid address.
+
+Fixes: f61872bb58a1 ("bootconfig: Use parse_args() to find bootconfig and '--'")
+Cc: stable@vger.kernel.org
+Reported-by: Arvind Sankar <nivedita@alum.mit.edu>
+Suggested-by: Arvind Sankar <nivedita@alum.mit.edu>
+Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
 ---
- drivers/dma-buf/dma-buf.c      | 29 +++++++++++++
- include/trace/events/dma_buf.h | 77 ++++++++++++++++++++++++++++++++++
- 2 files changed, 106 insertions(+)
- create mode 100644 include/trace/events/dma_buf.h
+ init/main.c | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
 
-diff --git a/drivers/dma-buf/dma-buf.c b/drivers/dma-buf/dma-buf.c
-index 1ca609f66fdf..1729191ac9ca 100644
---- a/drivers/dma-buf/dma-buf.c
-+++ b/drivers/dma-buf/dma-buf.c
-@@ -29,6 +29,9 @@
- #include <uapi/linux/dma-buf.h>
- #include <uapi/linux/magic.h>
- 
-+#define CREATE_TRACE_POINTS
-+#include <trace/events/dma_buf.h>
-+
- static inline int is_dma_buf_file(struct file *);
- 
- struct dma_buf_list {
-@@ -110,6 +113,15 @@ static struct file_system_type dma_buf_fs_type = {
- 	.kill_sb = kill_anon_super,
- };
- 
-+static void dma_buf_vma_close(struct vm_area_struct *area)
-+{
-+	trace_dma_buf_map_ref_dec(current, area->vm_file);
-+}
-+
-+static const struct vm_operations_struct dma_buf_vm_ops = {
-+	.close = dma_buf_vma_close,
-+};
-+
- static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
+diff --git a/init/main.c b/init/main.c
+index 0ead83e86b5a..627f9230dbe8 100644
+--- a/init/main.c
++++ b/init/main.c
+@@ -387,8 +387,6 @@ static int __init bootconfig_params(char *param, char *val,
  {
- 	struct dma_buf *dmabuf;
-@@ -128,6 +140,9 @@ static int dma_buf_mmap_internal(struct file *file, struct vm_area_struct *vma)
- 	    dmabuf->size >> PAGE_SHIFT)
- 		return -EINVAL;
- 
-+	trace_dma_buf_map_ref_inc(current, file);
-+	vma->vm_ops = &dma_buf_vm_ops;
-+
- 	return dmabuf->ops->mmap(dmabuf, vma);
- }
- 
-@@ -410,6 +425,17 @@ static void dma_buf_show_fdinfo(struct seq_file *m, struct file *file)
- 	spin_unlock(&dmabuf->name_lock);
- }
- 
-+static int dma_buf_flush(struct file *filp, fl_owner_t id)
-+{
-+	trace_dma_buf_fd_ref_dec(current, filp);
-+	return 0;
-+}
-+
-+static void dma_buf_fd_install(int fd, struct file *filp)
-+{
-+	trace_dma_buf_fd_ref_inc(current, filp);
-+}
-+
- static const struct file_operations dma_buf_fops = {
- 	.mmap		= dma_buf_mmap_internal,
- 	.llseek		= dma_buf_llseek,
-@@ -417,6 +443,8 @@ static const struct file_operations dma_buf_fops = {
- 	.unlocked_ioctl	= dma_buf_ioctl,
- 	.compat_ioctl	= compat_ptr_ioctl,
- 	.show_fdinfo	= dma_buf_show_fdinfo,
-+	.fd_install	= dma_buf_fd_install,
-+	.flush		= dma_buf_flush,
- };
- 
- /*
-@@ -1177,6 +1205,7 @@ int dma_buf_mmap(struct dma_buf *dmabuf, struct vm_area_struct *vma,
- 		if (oldfile)
- 			fput(oldfile);
+ 	if (strcmp(param, "bootconfig") == 0) {
+ 		bootconfig_found = true;
+-	} else if (strcmp(param, "--") == 0) {
+-		initargs_found = true;
  	}
-+
- 	return ret;
- 
+ 	return 0;
  }
-diff --git a/include/trace/events/dma_buf.h b/include/trace/events/dma_buf.h
-new file mode 100644
-index 000000000000..05af336cd849
---- /dev/null
-+++ b/include/trace/events/dma_buf.h
-@@ -0,0 +1,77 @@
-+/* SPDX-License-Identifier: GPL-2.0 */
-+#undef TRACE_SYSTEM
-+#define TRACE_SYSTEM dma_buf
+@@ -399,19 +397,23 @@ static void __init setup_boot_config(const char *cmdline)
+ 	const char *msg;
+ 	int pos;
+ 	u32 size, csum;
+-	char *data, *copy;
++	char *data, *copy, *err;
+ 	int ret;
+ 
+ 	/* Cut out the bootconfig data even if we have no bootconfig option */
+ 	data = get_boot_config_from_initrd(&size, &csum);
+ 
+ 	strlcpy(tmp_cmdline, boot_command_line, COMMAND_LINE_SIZE);
+-	parse_args("bootconfig", tmp_cmdline, NULL, 0, 0, 0, NULL,
+-		   bootconfig_params);
++	err = parse_args("bootconfig", tmp_cmdline, NULL, 0, 0, 0, NULL,
++			 bootconfig_params);
+ 
+-	if (!bootconfig_found)
++	if (IS_ERR(err) || !bootconfig_found)
+ 		return;
+ 
++	/* parse_args() stops at '--' and returns an address */
++	if (!IS_ERR(err) && err)
++		initargs_found = true;
 +
-+#if !defined(_TRACE_DMA_BUF_H) || defined(TRACE_HEADER_MULTI_READ)
-+#define _TRACE_DMA_BUF_H
-+
-+#include <linux/dma-buf.h>
-+#include <linux/tracepoint.h>
-+#include <linux/types.h>
-+
-+#define UNKNOWN "<unknown>"
-+
-+#ifdef CREATE_TRACE_POINTS
-+static inline struct dma_buf *dma_buffer(struct file *filp)
-+{
-+	return filp->private_data;
-+}
-+#endif
-+
-+DECLARE_EVENT_CLASS(dma_buf_ref_template,
-+
-+	TP_PROTO(struct task_struct *task, struct file *filp),
-+
-+	TP_ARGS(task,  filp),
-+
-+	TP_STRUCT__entry(
-+		__field(u32, tgid)
-+		__field(u32, pid)
-+		__field(u64, size)
-+		__field(s64, count)
-+		__string(exp_name, dma_buffer(filp)->exp_name)
-+		__string(name, dma_buffer(filp)->name ? dma_buffer(filp)->name : UNKNOWN)
-+		__field(u64, i_ino)
-+	),
-+
-+	TP_fast_assign(
-+		__entry->tgid = task->tgid;
-+		__entry->pid = task->pid;
-+		__entry->size = dma_buffer(filp)->size;
-+		__entry->count = file_count(filp);
-+		__assign_str(exp_name, dma_buffer(filp)->exp_name);
-+		__assign_str(name, dma_buffer(filp)->name ? dma_buffer(filp)->name : UNKNOWN);
-+		__entry->i_ino = filp->f_inode->i_ino;
-+	),
-+
-+	TP_printk("tgid=%u pid=%u size=%llu count=%lld exp_name=%s name=%s i_ino=%llu",
-+		__entry->tgid,
-+		__entry->pid,
-+		__entry->size,
-+		__entry->count,
-+		__get_str(exp_name),
-+		__get_str(name),
-+		__entry->i_ino
-+	)
-+);
-+
-+DEFINE_EVENT(dma_buf_ref_template, dma_buf_fd_ref_inc,
-+	TP_PROTO(struct task_struct *task, struct file *filp),
-+	TP_ARGS(task,  filp));
-+
-+DEFINE_EVENT(dma_buf_ref_template, dma_buf_fd_ref_dec,
-+	TP_PROTO(struct task_struct *task, struct file *filp),
-+	TP_ARGS(task,  filp));
-+
-+DEFINE_EVENT(dma_buf_ref_template, dma_buf_map_ref_inc,
-+	TP_PROTO(struct task_struct *task, struct file *filp),
-+	TP_ARGS(task,  filp));
-+
-+DEFINE_EVENT(dma_buf_ref_template, dma_buf_map_ref_dec,
-+	TP_PROTO(struct task_struct *task, struct file *filp),
-+	TP_ARGS(task,  filp));
-+
-+#endif /* _TRACE_DMA_BUF_H */
-+
-+/* This part must be outside protection */
-+#include <trace/define_trace.h>
+ 	if (!data) {
+ 		pr_err("'bootconfig' found on command line, but no bootconfig found\n");
+ 		return;
 -- 
-2.28.0.163.g6104cc2f0b6-goog
-
+2.25.1
