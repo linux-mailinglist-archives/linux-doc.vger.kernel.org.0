@@ -2,66 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 37BA523C266
-	for <lists+linux-doc@lfdr.de>; Wed,  5 Aug 2020 01:52:53 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B032323C584
+	for <lists+linux-doc@lfdr.de>; Wed,  5 Aug 2020 08:01:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727792AbgHDXw3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 4 Aug 2020 19:52:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59272 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726011AbgHDXw2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 4 Aug 2020 19:52:28 -0400
-X-Greylist: delayed 86248 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Tue, 04 Aug 2020 16:52:27 PDT
-Received: from dockerbox (unknown [IPv6:2001:4800:7817:101:be76:4eff:fe04:a215])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id BC72FC061756;
-        Tue,  4 Aug 2020 16:52:27 -0700 (PDT)
-Received: from 127.0.0.1 (localhost [127.0.0.1])
-        by dockerbox (Postfix) with SMTP id 6F4DA5EC5A;
-        Mon,  7 Oct 2019 19:30:12 -0500 (CDT)
-Received: from [32.188.209.113] by 127.0.0.1 with SMTP; Mon, 07 Oct 2019 18:22:17 -0600
-Message-ID: <80v-q$4-o4pqyq0@6eeih174.p55>
-From:   "Mr Barrister Hans Erich" <dave@dbsoundfactory.com>
-Reply-To: "Mr Barrister Hans Erich" <dave@dbsoundfactory.com>
-To:     linkos@binet.lv
-Subject: RE:PERSONAL LETTER FROM MRS RASHIA AMIRA
-Date:   Mon, 07 Oct 19 18:22:17 GMT
-X-Mailer: Microsoft Outlook Express 5.00.2615.200
+        id S1727921AbgHEGBF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 5 Aug 2020 02:01:05 -0400
+Received: from mail.kernel.org ([198.145.29.99]:53776 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726382AbgHEGBC (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 5 Aug 2020 02:01:02 -0400
+Received: from kernel.org (unknown [104.132.0.74])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 327A020842;
+        Wed,  5 Aug 2020 06:01:02 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1596607262;
+        bh=GwODHQP5f3m1ZPOaXoOR2GBwrPzaDHh5wSknqwF8wIM=;
+        h=In-Reply-To:References:Subject:From:Cc:To:Date:From;
+        b=R7sn2dyDd5RQkvjd02GllD6XEFhU/fWt1RyrqkPk7FXA3d8GUX+nL8YqafM92yU4R
+         7gcrKWgqfj52viL9XuEU+zze7w0QZ1hF1m/K7T9xdmP53NjhNsfom6oswJIzSO7wNU
+         9eDfZKv8ytYNuD8zDfkXPi6xpZjohJdWmjtdnfAc=
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: multipart/alternative;
-        boundary="_.A4476ECDD73A3"
-X-Priority: 3
-X-MSMail-Priority: Normal
+Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <20200804204745.987648-6-brendanhiggins@google.com>
+References: <20200804204745.987648-1-brendanhiggins@google.com> <20200804204745.987648-6-brendanhiggins@google.com>
+Subject: Re: [PATCH v6 5/5] Documentation: kunit: add a brief blurb about kunit_test_suite
+From:   Stephen Boyd <sboyd@kernel.org>
+Cc:     gregkh@linuxfoundation.org, logang@deltatee.com, mcgrof@kernel.org,
+        linux-arch@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        kunit-dev@googlegroups.com, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org,
+        Brendan Higgins <brendanhiggins@google.com>
+To:     Brendan Higgins <brendanhiggins@google.com>,
+        akpm@linux-foundation.org, alan.maguire@oracle.com,
+        anton.ivanov@cambridgegreys.com, arnd@arndb.de,
+        davidgow@google.com, frowand.list@gmail.com, jdike@addtoit.com,
+        keescook@chromium.org, richard@nod.at, rppt@linux.ibm.com,
+        skhan@linuxfoundation.org, yzaikin@google.com
+Date:   Tue, 04 Aug 2020 23:01:01 -0700
+Message-ID: <159660726105.1360974.11438808412702251122@swboyd.mtv.corp.google.com>
+User-Agent: alot/0.9.1
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Quoting Brendan Higgins (2020-08-04 13:47:45)
+> Add a brief blurb saying how and when the kunit_test_suite() macro
+> works to the usage documentation.
+>=20
+> Signed-off-by: Brendan Higgins <brendanhiggins@google.com>
+> ---
+>  Documentation/dev-tools/kunit/usage.rst | 5 +++++
+>  1 file changed, 5 insertions(+)
+>=20
+> diff --git a/Documentation/dev-tools/kunit/usage.rst b/Documentation/dev-=
+tools/kunit/usage.rst
+> index 3c3fe8b5feccf..961d3ea3ca19a 100644
+> --- a/Documentation/dev-tools/kunit/usage.rst
+> +++ b/Documentation/dev-tools/kunit/usage.rst
+> @@ -211,6 +211,11 @@ KUnit test framework.
+>  .. note::
+>     A test case will only be run if it is associated with a test suite.
+> =20
+> +``kunit_test_suite(...)`` is a macro which tells the linker to put the s=
+pecified
+> +test suite in a special linker section so that it can be run by KUnit ei=
+ther
+> +after late_init, or when the test module is loaded (depending on whether=
+ the
 
---_.A4476ECDD73A3
-Content-Type: text/plain;
-Content-Transfer-Encoding: quoted-printable
+"late_init" probably needs some italics or something, but otherwise.
 
-Greetings
-
-My name is Barrister Hans Erich.
-
-I have a client who is interested to invest in your country, she is a well=
- known politician in her country and deserve a lucrative investment partne=
-rship with you outside her country without any delay   Please can you mana=
-ge such investment please Kindly reply for further details.
-
-Your full names --------
-
-
-Your urgent response will be appreciated
-
-Thank you and God bless you.
-
-Barrister Hans Erich
-
-Yours sincerely,
-Barrister Hans Erich
-CONTACT: hanserich9helmut@gmail.com
-
---_.A4476ECDD73A3--
-
+Reviewed-by: Stephen Boyd <sboyd@kernel.org>
