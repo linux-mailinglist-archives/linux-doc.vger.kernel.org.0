@@ -2,100 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 466AC23DD48
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Aug 2020 19:07:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 306E423DD2F
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Aug 2020 19:05:14 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729412AbgHFRHc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Aug 2020 13:07:32 -0400
-Received: from cloudserver094114.home.pl ([79.96.170.134]:63876 "EHLO
-        cloudserver094114.home.pl" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729728AbgHFRGl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Aug 2020 13:06:41 -0400
-Received: from 89-64-86-116.dynamic.chello.pl (89.64.86.116) (HELO kreacher.localnet)
- by serwer1319399.home.pl (79.96.170.134) with SMTP (IdeaSmtpServer 0.83.415)
- id a0952d0a893f35a5; Thu, 6 Aug 2020 13:39:54 +0200
-From:   "Rafael J. Wysocki" <rjw@rjwysocki.net>
-To:     Doug Smythies <dsmythies@telus.net>
-Cc:     "'Rafael J. Wysocki'" <rafael@kernel.org>,
-        'Linux Documentation' <linux-doc@vger.kernel.org>,
-        'LKML' <linux-kernel@vger.kernel.org>,
-        'Peter Zijlstra' <peterz@infradead.org>,
-        'Srinivas Pandruvada' <srinivas.pandruvada@linux.intel.com>,
-        'Giovanni Gherdovich' <ggherdovich@suse.cz>,
-        'Francisco Jerez' <francisco.jerez.plata@intel.com>,
-        'Linux PM' <linux-pm@vger.kernel.org>
-Subject: Re: [PATCH] cpufreq: intel_pstate: Implement passive mode with HWP enabled
-Date:   Thu, 06 Aug 2020 13:39:53 +0200
-Message-ID: <5275102.Ez0hqPNOlg@kreacher>
-In-Reply-To: <004601d66bb6$199ce1a0$4cd6a4e0$@net>
-References: <3955470.QvD6XneCf3@kreacher> <2418846.A4mPlhI7ni@kreacher> <004601d66bb6$199ce1a0$4cd6a4e0$@net>
+        id S1729780AbgHFRFF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Aug 2020 13:05:05 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44992 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729922AbgHFREh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Aug 2020 13:04:37 -0400
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3D6ACC034627;
+        Thu,  6 Aug 2020 06:36:32 -0700 (PDT)
+Received: by mail-ej1-x642.google.com with SMTP id a26so24554335ejc.2;
+        Thu, 06 Aug 2020 06:36:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=gIDHrckbjX7A25XdrR7+VuHvfE++wIYqYDxklPozcMs=;
+        b=ogSom+x8Vy+lrAdhx1aGY5/eZbaKav0gVy1rtsnre4Wxvro3UESENnKfnCp/QxCtmG
+         fW5QRMvekFqUn3rRvHSO0BVG77bAIelCG1bTOXD3LZh+CjPOWHHlBw6YNgv4yxyWxZ1A
+         C2MtbtQJlwXe0jG5hKajDsyJBM1ZI881zSKQnR1JyP/vsNpY/I4tAkQEfGlTqBz4ikWO
+         8uiMs17fIiTulh4cHi8R/rcX/ZP3A6ZBHdcA2FT6m7uZyIoFs7mEANUdpHknqNVgI7xv
+         geOQu7Af/PNjiCUOmAWBleQ8MnuxaZLIhkPbbGEI7EYs0CjOlF5400DjzClFHZI+z9ii
+         Qt3w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to;
+        bh=gIDHrckbjX7A25XdrR7+VuHvfE++wIYqYDxklPozcMs=;
+        b=kM3nsUP0pF6E9AdOjLoAVx4mRxszl9T5Zs+EBFwp8TvVKTStDaF0JnR22MNVr3ksf5
+         GiRrISKGykfgJe6abQgDTgH1OA2AGAJkNa5KaY1mvO/Ws3gEltnho6jIRV6ZD7OQjpWI
+         G6wV9M5W8aJDVdDAv/sveyeWHVtqgiqCKT3oIvHJp+lNbR55C+DjTDLg6ZCjQLhqNenS
+         nDcS0UwKYwUnpNn0jM97QUt1eoE6htdzz6QZJpxdEsT4xOUzz67zMsR8gpc4EW1qHTLv
+         b4dKoSzqLL838BqTyueXRPE7prsCQw86mFccSlynZWZA3IdymYFeYtN3skD+4JhWGXrv
+         7jPg==
+X-Gm-Message-State: AOAM530laNci504X9mHnc0aZJAD46qv/Iabfx+rwI+xDDXTLwc61Td6C
+        Z0+ZrNUH5O+84swvyd34WMs=
+X-Google-Smtp-Source: ABdhPJxwl1YXqFobKjLCcATa/wMS8MPiG3+A3CHWjljmnJY2ertpfCVqc4nVSOG5Fs9xOTTwnb/N0A==
+X-Received: by 2002:a17:906:b59:: with SMTP id v25mr4357184ejg.436.1596720991043;
+        Thu, 06 Aug 2020 06:36:31 -0700 (PDT)
+Received: from gmail.com (54033286.catv.pool.telekom.hu. [84.3.50.134])
+        by smtp.gmail.com with ESMTPSA id pv28sm3788137ejb.71.2020.08.06.06.36.28
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 06 Aug 2020 06:36:29 -0700 (PDT)
+Date:   Thu, 6 Aug 2020 15:36:27 +0200
+From:   Ingo Molnar <mingo@kernel.org>
+To:     Chen Zhou <chenzhou10@huawei.com>
+Cc:     catalin.marinas@arm.com, will@kernel.org, james.morse@arm.com,
+        tglx@linutronix.de, mingo@redhat.com, dyoung@redhat.com,
+        bhe@redhat.com, corbet@lwn.net, John.P.donnelly@oracle.com,
+        prabhakar.pkin@gmail.com, bhsharma@redhat.com, horms@verge.net.au,
+        robh+dt@kernel.org, arnd@arndb.de, nsaenzjulienne@suse.de,
+        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+        kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        guohanjun@huawei.com, xiexiuqi@huawei.com, huawei.libin@huawei.com,
+        wangkefeng.wang@huawei.com
+Subject: Re: [PATCH v11 2/5] x86: kdump: move reserve_crashkernel_low() into
+ crash_core.c
+Message-ID: <20200806133627.GB2077191@gmail.com>
+References: <20200801130856.86625-1-chenzhou10@huawei.com>
+ <20200801130856.86625-3-chenzhou10@huawei.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200801130856.86625-3-chenzhou10@huawei.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thursday, August 6, 2020 7:54:47 AM CEST Doug Smythies wrote:
-> On 2020.08.03 10:09 Rafael J. Wysocki wrote:
-> > On Sunday, August 2, 2020 5:17:39 PM CEST Doug Smythies wrote:
-> > > On 2020.07.19 04:43 Rafael J. Wysocki wrote:
-> > > > On Fri, Jul 17, 2020 at 3:37 PM Doug Smythies <dsmythies@telus.net> wrote:
-> > > > > On 2020.07.16 05:08 Rafael J. Wysocki wrote:
-> > > > > > On Wed, Jul 15, 2020 at 10:39 PM Doug Smythies <dsmythies@telus.net> wrote:
-> > > > > >> On 2020.07.14 11:16 Rafael J. Wysocki wrote:
-> > > > > >> >
-> > > > > >> > From: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-> > > > > >> ...
-> > > > > >> > Since the passive mode hasn't worked with HWP at all, and it is not going to
-> > > > > >> > the default for HWP systems anyway, I don't see any drawbacks related to making
-> > > > > >> > this change, so I would consider this as 5.9 material unless there are any
-> > > > > >> > serious objections.
-> > > > > >>
-> > > > > >> Good point.
-> > > > >
-> > > > > Actually, for those users that default to passive mode upon boot,
-> > > > > this would mean they would find themselves using this.
-> > > > > Also, it isn't obvious, from the typical "what driver and what governor"
-> > > > > inquiry.
-> > > >
-> > > > So the change in behavior is that after this patch
-> > > > intel_pstate=passive doesn't imply no_hwp any more.
-> > > >
-> > > > That's a very minor difference though and I'm not aware of any adverse
-> > > > effects it can cause on HWP systems anyway.
-> > >
-> > > My point was, that it will now default to something where
-> > > testing has not been completed.
-> > >
-> > > > The "what governor" is straightforward in the passive mode: that's
-> > > > whatever cpufreq governor has been selected.
-> > >
-> > > I think you might have missed my point.
-> > > From the normal methods of inquiry one does not know
-> > > if HWP is being used or not. Why? Because with
-> > > or without HWP one gets the same answers under:
-> > >
-> > > /sys/devices/system/cpu/cpu*/cpufreq/scaling_driver
-> > > /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
-> > 
-> > Yes, but this is also the case in the active mode, isn't it?
+
+* Chen Zhou <chenzhou10@huawei.com> wrote:
+
+> In preparation for supporting reserve_crashkernel_low in arm64 as
+> x86_64 does, move reserve_crashkernel_low() into kernel/crash_core.c.
 > 
-> Yes, fair enough.
-> But we aren't changing what it means by default
-> between kernel 5.8 and 5.9-rc1.
+> BTW, move x86_64 CRASH_ALIGN to 2M suggested by Dave. CONFIG_PHYSICAL_ALIGN
+> can be selected from 2M to 16M, move to the same as arm64.
+> 
+> Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
+> ---
+>  arch/x86/include/asm/kexec.h | 24 ++++++++++
+>  arch/x86/kernel/setup.c      | 86 +++---------------------------------
+>  include/linux/crash_core.h   |  3 ++
+>  include/linux/kexec.h        |  2 -
+>  kernel/crash_core.c          | 74 +++++++++++++++++++++++++++++++
+>  kernel/kexec_core.c          | 17 -------
+>  6 files changed, 107 insertions(+), 99 deletions(-)
 
-No, we aren't.
+Since the changes are centered around arm64, I suppose the arm64 tree 
+will carry this patchset?
 
-The only (expected) change is when booting with intel_pstate=passive and
-without intel_pstate=no_hwp in the command line.
+Assuming that this is a 100% invariant moving of code that doesn't 
+regress on x86:
 
-Which should be easy enough to address by adding intel_pstate=no_hwp to the
-command line in 5.9-rc1 and later (to achieve the same behavior after a
-fresh boot).
+  Acked-by: Ingo Molnar <mingo@kernel.org>
 
-Cheers!
+Thanks,
 
-
-
+	Ingo
