@@ -2,104 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 306E423DD2F
-	for <lists+linux-doc@lfdr.de>; Thu,  6 Aug 2020 19:05:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 41E6C23DFBD
+	for <lists+linux-doc@lfdr.de>; Thu,  6 Aug 2020 19:52:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729780AbgHFRFF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 6 Aug 2020 13:05:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44992 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729922AbgHFREh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Aug 2020 13:04:37 -0400
-Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3D6ACC034627;
-        Thu,  6 Aug 2020 06:36:32 -0700 (PDT)
-Received: by mail-ej1-x642.google.com with SMTP id a26so24554335ejc.2;
-        Thu, 06 Aug 2020 06:36:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=gIDHrckbjX7A25XdrR7+VuHvfE++wIYqYDxklPozcMs=;
-        b=ogSom+x8Vy+lrAdhx1aGY5/eZbaKav0gVy1rtsnre4Wxvro3UESENnKfnCp/QxCtmG
-         fW5QRMvekFqUn3rRvHSO0BVG77bAIelCG1bTOXD3LZh+CjPOWHHlBw6YNgv4yxyWxZ1A
-         C2MtbtQJlwXe0jG5hKajDsyJBM1ZI881zSKQnR1JyP/vsNpY/I4tAkQEfGlTqBz4ikWO
-         8uiMs17fIiTulh4cHi8R/rcX/ZP3A6ZBHdcA2FT6m7uZyIoFs7mEANUdpHknqNVgI7xv
-         geOQu7Af/PNjiCUOmAWBleQ8MnuxaZLIhkPbbGEI7EYs0CjOlF5400DjzClFHZI+z9ii
-         Qt3w==
+        id S1730498AbgHFRwu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 6 Aug 2020 13:52:50 -0400
+Received: from mail-yb1-f196.google.com ([209.85.219.196]:42113 "EHLO
+        mail-yb1-f196.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728399AbgHFRwt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 6 Aug 2020 13:52:49 -0400
+Received: by mail-yb1-f196.google.com with SMTP id a34so21128399ybj.9;
+        Thu, 06 Aug 2020 10:52:48 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-         :references:mime-version:content-disposition:in-reply-to;
-        bh=gIDHrckbjX7A25XdrR7+VuHvfE++wIYqYDxklPozcMs=;
-        b=kM3nsUP0pF6E9AdOjLoAVx4mRxszl9T5Zs+EBFwp8TvVKTStDaF0JnR22MNVr3ksf5
-         GiRrISKGykfgJe6abQgDTgH1OA2AGAJkNa5KaY1mvO/Ws3gEltnho6jIRV6ZD7OQjpWI
-         G6wV9M5W8aJDVdDAv/sveyeWHVtqgiqCKT3oIvHJp+lNbR55C+DjTDLg6ZCjQLhqNenS
-         nDcS0UwKYwUnpNn0jM97QUt1eoE6htdzz6QZJpxdEsT4xOUzz67zMsR8gpc4EW1qHTLv
-         b4dKoSzqLL838BqTyueXRPE7prsCQw86mFccSlynZWZA3IdymYFeYtN3skD+4JhWGXrv
-         7jPg==
-X-Gm-Message-State: AOAM530laNci504X9mHnc0aZJAD46qv/Iabfx+rwI+xDDXTLwc61Td6C
-        Z0+ZrNUH5O+84swvyd34WMs=
-X-Google-Smtp-Source: ABdhPJxwl1YXqFobKjLCcATa/wMS8MPiG3+A3CHWjljmnJY2ertpfCVqc4nVSOG5Fs9xOTTwnb/N0A==
-X-Received: by 2002:a17:906:b59:: with SMTP id v25mr4357184ejg.436.1596720991043;
-        Thu, 06 Aug 2020 06:36:31 -0700 (PDT)
-Received: from gmail.com (54033286.catv.pool.telekom.hu. [84.3.50.134])
-        by smtp.gmail.com with ESMTPSA id pv28sm3788137ejb.71.2020.08.06.06.36.28
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 06 Aug 2020 06:36:29 -0700 (PDT)
-Date:   Thu, 6 Aug 2020 15:36:27 +0200
-From:   Ingo Molnar <mingo@kernel.org>
-To:     Chen Zhou <chenzhou10@huawei.com>
-Cc:     catalin.marinas@arm.com, will@kernel.org, james.morse@arm.com,
-        tglx@linutronix.de, mingo@redhat.com, dyoung@redhat.com,
-        bhe@redhat.com, corbet@lwn.net, John.P.donnelly@oracle.com,
-        prabhakar.pkin@gmail.com, bhsharma@redhat.com, horms@verge.net.au,
-        robh+dt@kernel.org, arnd@arndb.de, nsaenzjulienne@suse.de,
-        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-        kexec@lists.infradead.org, linux-doc@vger.kernel.org,
-        guohanjun@huawei.com, xiexiuqi@huawei.com, huawei.libin@huawei.com,
-        wangkefeng.wang@huawei.com
-Subject: Re: [PATCH v11 2/5] x86: kdump: move reserve_crashkernel_low() into
- crash_core.c
-Message-ID: <20200806133627.GB2077191@gmail.com>
-References: <20200801130856.86625-1-chenzhou10@huawei.com>
- <20200801130856.86625-3-chenzhou10@huawei.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=hgg7zjRmtBHf2LasBRhwIDC6917kX0SOQm5jVjzS8IY=;
+        b=nCh3eFAgcnGVQJwt76xeSrzviRhoMjBHsIuHNXqkAq8EOA6dy151e3y+EG3BLYtRsh
+         QVeqmj+OgHWIwCP9EHVbkmOZsDgAbBuH0dI7NHHm319inLAaqbVq/v+48emOBsxM6sWB
+         4Uou/DL6sXdDtY+GNzLwQ0+7EzprdDbQfmVlF0N+uCoYrknPp3yYJZ6yA+knEqTqoBsU
+         XVN16pumaeUUCx+7anFWCojmZ0K8GyeljDlxH4WvNJlOFyN76PG3WtFTD8rFogDet6Z8
+         yOvGcAKvVIEHQsT1SH3N+Xmmmu/i9Lfmau5NboSDdDGB1SlooRci5+T8xpI66ULIppIl
+         BKiA==
+X-Gm-Message-State: AOAM53190UqgjPg+EZxVr2A0wv07M7iXN69bNIdS4VZwdt5D43irDMsD
+        2tGgc1XaPcR21iWPafAUO1lK94+qINHbf97L/4p8cg==
+X-Google-Smtp-Source: ABdhPJxULzaMdb2r5HtAoGgvyO5tjHQhRFpUAVkZo1s1fFBs4k39zAEGh6ZRygcyIDYC1Ra54huZqcZBjxPgAvBb0BE=
+X-Received: by 2002:a9d:590a:: with SMTP id t10mr6761257oth.262.1596713126064;
+ Thu, 06 Aug 2020 04:25:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200801130856.86625-3-chenzhou10@huawei.com>
+References: <4981405.3kqTVLv5tO@kreacher> <1709487.Bxjb1zNRZM@kreacher>
+ <3226770.pJcYkdRNc2@kreacher> <004701d66bb6$22a11410$67e33c30$@net>
+In-Reply-To: <004701d66bb6$22a11410$67e33c30$@net>
+From:   "Rafael J. Wysocki" <rafael@kernel.org>
+Date:   Thu, 6 Aug 2020 13:25:13 +0200
+Message-ID: <CAJZ5v0gz89CXmNmFE50oB78JigrDzo=EPYcGQORRtz7WbWv9fQ@mail.gmail.com>
+Subject: Re: [PATCH v7] cpufreq: intel_pstate: Implement passive mode with HWP enabled
+To:     Doug Smythies <dsmythies@telus.net>
+Cc:     "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+        Linux Documentation <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+        Giovanni Gherdovich <ggherdovich@suse.cz>,
+        Francisco Jerez <francisco.jerez.plata@intel.com>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        Linux PM <linux-pm@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Thu, Aug 6, 2020 at 1:04 PM Doug Smythies <dsmythies@telus.net> wrote:
+>
+> On 2020.08.05 09:56 Rafael J. Wysocki wrote:
+>
+> > v6 -> v7:
+> >    * Cosmetic changes in store_energy_performance_prefernce() to reduce the
+> >      LoC number and make it a bit easier to read.  No intentional functional
+> >      impact.
+>
+> ??
+> V7 is identical to V6.
+>
+> Diff:
 
-* Chen Zhou <chenzhou10@huawei.com> wrote:
+Oh.
 
-> In preparation for supporting reserve_crashkernel_low in arm64 as
-> x86_64 does, move reserve_crashkernel_low() into kernel/crash_core.c.
-> 
-> BTW, move x86_64 CRASH_ALIGN to 2M suggested by Dave. CONFIG_PHYSICAL_ALIGN
-> can be selected from 2M to 16M, move to the same as arm64.
-> 
-> Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
-> ---
->  arch/x86/include/asm/kexec.h | 24 ++++++++++
->  arch/x86/kernel/setup.c      | 86 +++---------------------------------
->  include/linux/crash_core.h   |  3 ++
->  include/linux/kexec.h        |  2 -
->  kernel/crash_core.c          | 74 +++++++++++++++++++++++++++++++
->  kernel/kexec_core.c          | 17 -------
->  6 files changed, 107 insertions(+), 99 deletions(-)
+It looks like I sent the v6 instead of it, then.
 
-Since the changes are centered around arm64, I suppose the arm64 tree 
-will carry this patchset?
-
-Assuming that this is a 100% invariant moving of code that doesn't 
-regress on x86:
-
-  Acked-by: Ingo Molnar <mingo@kernel.org>
-
-Thanks,
-
-	Ingo
+I'll send the right one shortly, sorry for the confusion.
