@@ -2,57 +2,160 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6A18E23EF90
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Aug 2020 16:52:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 174C623F045
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Aug 2020 17:57:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726955AbgHGOw2 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Fri, 7 Aug 2020 10:52:28 -0400
-Received: from mail.furshetcrimea.ru ([193.27.243.220]:51882 "EHLO
-        furshetcrimea.ru" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726918AbgHGOwX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Aug 2020 10:52:23 -0400
-X-Greylist: delayed 5015 seconds by postgrey-1.27 at vger.kernel.org; Fri, 07 Aug 2020 10:51:24 EDT
-Received: from [154.118.61.214] (account info@furshetcrimea.ru HELO [192.168.8.100])
-  by furshetcrimea.ru (CommuniGate Pro SMTP 6.1.10)
-  with ESMTPA id 11132971; Fri, 07 Aug 2020 17:58:10 +0300
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726061AbgHGP5G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 7 Aug 2020 11:57:06 -0400
+Received: from smtp-fw-4101.amazon.com ([72.21.198.25]:65242 "EHLO
+        smtp-fw-4101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725993AbgHGP5F (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Aug 2020 11:57:05 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1596815825; x=1628351825;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=aRi9Uy05R53LS40Cl2TUQpYE2SoFuLjkjihkP3mfagk=;
+  b=r9DSZhRnLAY3Lh6WxwtvX3DDXDaKH9jxGXflXD9pZy/Sz4SZcuitD84+
+   H2uvc+IM/6DDhlbPRTgmSN5ZYWafYjJcpgKUBYFR3UK82ujDWfJU7J9S9
+   tjn39cgpvI3go0c5c53dBMEDiuvCdz/wtZBKu0AhMrUvPc63PXyumoFty
+   w=;
+IronPort-SDR: y4XqMm+0kzfvW4yIpAFwF1Tu+qCceBTtGffx1tonMt08r4cNIV5o41CNIGp5ooiDazwJVjVxQj
+ gmheqMJRHdNg==
+X-IronPort-AV: E=Sophos;i="5.75,446,1589241600"; 
+   d="scan'208";a="46730315"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-1a-e34f1ddc.us-east-1.amazon.com) ([10.43.8.6])
+  by smtp-border-fw-out-4101.iad4.amazon.com with ESMTP; 07 Aug 2020 15:57:03 +0000
+Received: from EX13MTAUWC001.ant.amazon.com (iad55-ws-svc-p15-lb9-vlan3.iad.amazon.com [10.40.159.166])
+        by email-inbound-relay-1a-e34f1ddc.us-east-1.amazon.com (Postfix) with ESMTPS id 9A85FA211B;
+        Fri,  7 Aug 2020 15:56:59 +0000 (UTC)
+Received: from EX13D20UWC001.ant.amazon.com (10.43.162.244) by
+ EX13MTAUWC001.ant.amazon.com (10.43.162.135) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 7 Aug 2020 15:56:58 +0000
+Received: from u79c5a0a55de558.ant.amazon.com (10.43.162.140) by
+ EX13D20UWC001.ant.amazon.com (10.43.162.244) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 7 Aug 2020 15:56:55 +0000
+From:   Alexander Graf <graf@amazon.com>
+To:     Paolo Bonzini <pbonzini@redhat.com>
+CC:     Jonathan Corbet <corbet@lwn.net>,
+        Sean Christopherson <sean.j.christopherson@intel.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        "Joerg Roedel" <joro@8bytes.org>,
+        KarimAllah Raslan <karahmed@amazon.de>,
+        Aaron Lewis <aaronlewis@google.com>, <kvm@vger.kernel.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+Subject: [PATCH v5 0/3] Allow user space to restrict and augment MSR emulation
+Date:   Fri, 7 Aug 2020 17:56:45 +0200
+Message-ID: <20200807155648.8602-1-graf@amazon.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: Bei Interesse antworten.
-To:     Recipients <info@furshetcrimea.ru>
-From:   info@furshetcrimea.ru
-Date:   Fri, 07 Aug 2020 15:45:33 +0100
-Reply-To: mattiassjoborg751@gmail.com
-X-Antivirus: Avast (VPS 200807-2, 08/07/2020), Outbound message
-X-Antivirus-Status: Clean
-Message-ID: <auto-000011132971@furshetcrimea.ru>
+Content-Type: text/plain
+X-Originating-IP: [10.43.162.140]
+X-ClientProxiedBy: EX13D29UWA001.ant.amazon.com (10.43.160.187) To
+ EX13D20UWC001.ant.amazon.com (10.43.162.244)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Schöne Grüße,
+While tying to add support for the MSR_CORE_THREAD_COUNT MSR in KVM,
+I realized that we were still in a world where user space has no control
+over what happens with MSR emulation in KVM.
 
-Mein Name ist MATTIAS SJOBORG, ich bin Schweizer Staatsbürger und (Vorsitzender des Vergütungs- und Nominierungsausschusses) von Tethys Petroleum, einem multinationalen Ölkonzern mit Sitz in London-England, Großbritannien. Ich bitte Sie um Ihre Hilfe, um die Summe von vierzig Millionen Dollar abzurufen, die aus zwei Sendungsboxen besteht.
+That is bad for multiple reasons. In my case, I wanted to emulate the
+MSR in user space, because it's a CPU specific register that does not
+exist on older CPUs and that really only contains informational data that
+is on the package level, so it's a natural fit for user space to provide
+it.
 
-Dieses Geld wurde von der Firma erworben und von einem Diplomaten begleitet und korrekt in einer Sicherheitsfirma in Amerika hinterlegt. Mein Grund dafür ist, dass ich von der Firma zu lange um meine Ansprüche betrogen wurde, nur weil ich kein bin Britisch. Die Kontaktdaten des Diplomaten erhalten Sie, wenn Sie Ihr Interesse bekunden, mir zu helfen.
+However, it is also bad on a platform compatibility level. Currrently,
+KVM has no way to expose different MSRs based on the selected target CPU
+type.
 
-Jede der Schachteln enthält 20 Mio. USD. Für Ihre Hilfe bin ich bereit, 40% an Sie freizugeben. Aus Sicherheitsgründen wurde die Sendung als VERTRAULICHE DIPLOMATISCHE DOKUMENTE registriert, und ich kann erklären, warum dies so erklärt wurde. Denken Sie daran, dass der Diplomat den Inhalt der Sendung nicht kennt. Er ist seit einem Monat dort, während ich nach einem zuverlässigen Partner suchen möchte. Ich werde das Land verlassen, sobald die Sendung für Sie an Sie geliefert wird Private Investitionen und ich haben geschworen, niemals nach London zurückzukehren. Bitte, ich brauche Ihre dringende Antwort, bevor meine Pläne, das Unternehmen zu verlassen, entdeckt werden.
+This patch set introduces a way for user space to indicate to KVM which
+MSRs should be handled in kernel space. With that, we can solve part of
+the platform compatibility story. Or at least we can not handle AMD specific
+MSRs on an Intel platform and vice versa.
 
-www.tethyspetroleum.com/tethys/static/EN_US/au_seniormanagement.html
+In addition, it introduces a way for user space to get into the loop
+when an MSR access would generate a #GP fault, such as when KVM finds an
+MSR that is not handled by the in-kernel MSR emulation or when the guest
+is trying to access reserved registers.
 
-Im Moment ist die sicherste Form der Korrespondenz meine eigene E-Mail-Adresse. Bitte antworten Sie im Interesse der Vertraulichkeit nur über meine direkte E-Mail-Adresse. Antworten Sie zusammen mit Ihrer direkten Telefon- und Faxnummer, unter der ich Sie alternativ erreichen kann.
+In combination with the allow list, the user space trapping allows us
+to emulate arbitrary MSRs in user space, paving the way for target CPU
+specific MSR implementations from user space.
 
-Bitte, wenn Sie nicht bereit und interessiert sind, mir zu helfen, löschen Sie bitte diese E-Mail aus Ihrer E-Mail und tun Sie so, als hätten Sie sie nie erhalten.
+v1 -> v2:
 
-Freundliche Grüße,
-Mr.Mattias Sjoborg
-(Vorsitzender des Vergütungs- und Nominierungsausschusses)
-Tethys Petroleum.
-London, England
+  - s/ETRAP_TO_USER_SPACE/ENOENT/g
+  - deflect all #GP injection events to user space, not just unknown MSRs.
+    That was we can also deflect allowlist errors later
+  - fix emulator case
+  - new patch: KVM: x86: Introduce allow list for MSR emulation
+  - new patch: KVM: selftests: Add test for user space MSR handling
+
+v2 -> v3:
+
+  - return r if r == X86EMUL_IO_NEEDED
+  - s/KVM_EXIT_RDMSR/KVM_EXIT_X86_RDMSR/g
+  - s/KVM_EXIT_WRMSR/KVM_EXIT_X86_WRMSR/g
+  - Use complete_userspace_io logic instead of reply field
+  - Simplify trapping code
+  - document flags for KVM_X86_ADD_MSR_ALLOWLIST
+  - generalize exit path, always unlock when returning
+  - s/KVM_CAP_ADD_MSR_ALLOWLIST/KVM_CAP_X86_MSR_ALLOWLIST/g
+  - Add KVM_X86_CLEAR_MSR_ALLOWLIST
+  - Add test to clear whitelist
+  - Adjust to reply-less API
+  - Fix asserts
+  - Actually trap on MSR_IA32_POWER_CTL writes
+
+v3 -> v4:
+
+  - Mention exit reasons in re-enter mandatory section of API documentation
+  - Clear padding bytes
+  - Generalize get/set deflect functions
+  - Remove redundant pending_user_msr field
+  - lock allow check and clearing
+  - free bitmaps on clear
+
+v4 -> v5:
+
+  - use srcu 
+
+Alexander Graf (3):
+  KVM: x86: Deflect unknown MSR accesses to user space
+  KVM: x86: Introduce allow list for MSR emulation
+  KVM: selftests: Add test for user space MSR handling
+
+ Documentation/virt/kvm/api.rst                | 157 ++++++++++-
+ arch/x86/include/asm/kvm_host.h               |  13 +
+ arch/x86/include/uapi/asm/kvm.h               |  15 +
+ arch/x86/kvm/emulate.c                        |  18 +-
+ arch/x86/kvm/x86.c                            | 266 +++++++++++++++++-
+ include/trace/events/kvm.h                    |   2 +-
+ include/uapi/linux/kvm.h                      |  15 +
+ tools/testing/selftests/kvm/Makefile          |   1 +
+ .../selftests/kvm/x86_64/user_msr_test.c      | 221 +++++++++++++++
+ 9 files changed, 699 insertions(+), 9 deletions(-)
+ create mode 100644 tools/testing/selftests/kvm/x86_64/user_msr_test.c
 
 -- 
-This email has been checked for viruses by Avast antivirus software.
-https://www.avast.com/antivirus
+2.17.1
+
+
+
+
+Amazon Development Center Germany GmbH
+Krausenstr. 38
+10117 Berlin
+Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
+Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
+Sitz: Berlin
+Ust-ID: DE 289 237 879
+
+
 
