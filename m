@@ -2,104 +2,57 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 54ED423ECEE
-	for <lists+linux-doc@lfdr.de>; Fri,  7 Aug 2020 13:52:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D76723EF4E
+	for <lists+linux-doc@lfdr.de>; Fri,  7 Aug 2020 16:50:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728401AbgHGLvp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 7 Aug 2020 07:51:45 -0400
-Received: from aserp2120.oracle.com ([141.146.126.78]:36502 "EHLO
-        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726293AbgHGLvp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Aug 2020 07:51:45 -0400
-Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
-        by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 077BmC3q067021;
-        Fri, 7 Aug 2020 11:51:00 GMT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
- subject : date : message-id; s=corp-2020-01-29;
- bh=BzRCQKw4HJidRU+uGZjtCmLzqvvN9xHo3BaIpDfHdFI=;
- b=eC3rj+WqLjibfxMc8cBJn3xQ7T5RWcR9Fi15EaKyTm3zJsjjs7fJmMcg8ohGQvKzdZFJ
- Og8lRTpa0h4W3dX+/Vh+DsTgo0JKdFbRAyqQBt9xbs7p0reXCUN0OTUAlbaFdghOE3J6
- yp3LMKkv3LxUY8/MHjTcUr8fNgemJyml4rNVywNyd1vdX9VHe566w7cOU1QfTRXU7sc7
- TgLDBkczJBpfDIPezM9A8O04JcrCm30jQotAMyqXNA8CPmTXBILPQInF5lmA0FNZH6oa
- SPzgvASaHBWOGA5mxqRCU/p4Vn161eY+rpexvUNPHSbGyl24IKMQenr5bzjMHKjnQicP 7A== 
-Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
-        by aserp2120.oracle.com with ESMTP id 32r6ep84af-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
-        Fri, 07 Aug 2020 11:50:59 +0000
-Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
-        by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 077BnEcx045454;
-        Fri, 7 Aug 2020 11:50:59 GMT
-Received: from aserv0121.oracle.com (aserv0121.oracle.com [141.146.126.235])
-        by userp3020.oracle.com with ESMTP id 32qy8qfmuy-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 07 Aug 2020 11:50:59 +0000
-Received: from abhmp0003.oracle.com (abhmp0003.oracle.com [141.146.116.9])
-        by aserv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 077BosmC014478;
-        Fri, 7 Aug 2020 11:50:54 GMT
-Received: from localhost.uk.oracle.com (/10.175.183.82)
-        by default (Oracle Beehive Gateway v4.0)
-        with ESMTP ; Fri, 07 Aug 2020 04:50:54 -0700
-From:   Alan Maguire <alan.maguire@oracle.com>
-To:     ast@kernel.org, daniel@iogearbox.net
-Cc:     kafai@fb.com, songliubraving@fb.com, yhs@fb.com, andriin@fb.com,
-        john.fastabend@gmail.com, kpsingh@chromium.org,
-        rostedt@goodmis.org, linux-doc@vger.kernel.org, corbet@lwn.net,
-        netdev@vger.kernel.org, bpf@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Alan Maguire <alan.maguire@oracle.com>
-Subject: [PATCH bpf] bpf: doc: remove references to warning message when using bpf_trace_printk()
-Date:   Fri,  7 Aug 2020 12:50:29 +0100
-Message-Id: <1596801029-32395-1-git-send-email-alan.maguire@oracle.com>
-X-Mailer: git-send-email 1.8.3.1
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9705 signatures=668679
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 malwarescore=0
- spamscore=0 bulkscore=0 mlxscore=0 mlxlogscore=999 adultscore=0
- phishscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2008070085
-X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9705 signatures=668679
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 bulkscore=0
- malwarescore=0 clxscore=1011 mlxscore=0 priorityscore=1501 adultscore=0
- impostorscore=0 lowpriorityscore=0 phishscore=0 spamscore=0
- mlxlogscore=999 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2008070085
+        id S1726384AbgHGOuK convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 7 Aug 2020 10:50:10 -0400
+Received: from mail.furshetcrimea.ru ([193.27.243.220]:51882 "EHLO
+        furshetcrimea.ru" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726640AbgHGOuE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 7 Aug 2020 10:50:04 -0400
+X-Greylist: delayed 4982 seconds by postgrey-1.27 at vger.kernel.org; Fri, 07 Aug 2020 10:50:03 EDT
+Received: from [154.118.61.214] (account info@furshetcrimea.ru HELO [192.168.8.100])
+  by furshetcrimea.ru (CommuniGate Pro SMTP 6.1.10)
+  with ESMTPA id 11097411; Fri, 07 Aug 2020 16:34:37 +0300
+Content-Type: text/plain; charset="iso-8859-1"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: Bei Interesse antworten.
+To:     Recipients <info@furshetcrimea.ru>
+From:   info@furshetcrimea.ru
+Date:   Fri, 07 Aug 2020 14:22:00 +0100
+Reply-To: mattiassjoborg751@gmail.com
+X-Antivirus: Avast (VPS 200807-0, 08/07/2020), Outbound message
+X-Antivirus-Status: Clean
+Message-ID: <auto-000011097411@furshetcrimea.ru>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The BPF helper bpf_trace_printk() no longer uses trace_printk();
-it is now triggers a dedicated trace event.  Hence the described
-warning is no longer present, so remove the discussion of it as
-it may confuse people.
+Schöne Grüße,
 
-Fixes: ac5a72ea5c89 ("bpf: Use dedicated bpf_trace_printk event instead of trace_printk()")
-Signed-off-by: Alan Maguire <alan.maguire@oracle.com>
----
- Documentation/bpf/bpf_design_QA.rst | 11 -----------
- 1 file changed, 11 deletions(-)
+Mein Name ist MATTIAS SJOBORG, ich bin Schweizer Staatsbürger und (Vorsitzender des Vergütungs- und Nominierungsausschusses) von Tethys Petroleum, einem multinationalen Ölkonzern mit Sitz in London-England, Großbritannien. Ich bitte Sie um Ihre Hilfe, um die Summe von vierzig Millionen Dollar abzurufen, die aus zwei Sendungsboxen besteht.
 
-diff --git a/Documentation/bpf/bpf_design_QA.rst b/Documentation/bpf/bpf_design_QA.rst
-index 12a246f..2df7b06 100644
---- a/Documentation/bpf/bpf_design_QA.rst
-+++ b/Documentation/bpf/bpf_design_QA.rst
-@@ -246,17 +246,6 @@ program is loaded the kernel will print warning message, so
- this helper is only useful for experiments and prototypes.
- Tracing BPF programs are root only.
- 
--Q: bpf_trace_printk() helper warning
--------------------------------------
--Q: When bpf_trace_printk() helper is used the kernel prints nasty
--warning message. Why is that?
--
--A: This is done to nudge program authors into better interfaces when
--programs need to pass data to user space. Like bpf_perf_event_output()
--can be used to efficiently stream data via perf ring buffer.
--BPF maps can be used for asynchronous data sharing between kernel
--and user space. bpf_trace_printk() should only be used for debugging.
--
- Q: New functionality via kernel modules?
- ----------------------------------------
- Q: Can BPF functionality such as new program or map types, new
+Dieses Geld wurde von der Firma erworben und von einem Diplomaten begleitet und korrekt in einer Sicherheitsfirma in Amerika hinterlegt. Mein Grund dafür ist, dass ich von der Firma zu lange um meine Ansprüche betrogen wurde, nur weil ich kein bin Britisch. Die Kontaktdaten des Diplomaten erhalten Sie, wenn Sie Ihr Interesse bekunden, mir zu helfen.
+
+Jede der Schachteln enthält 20 Mio. USD. Für Ihre Hilfe bin ich bereit, 40% an Sie freizugeben. Aus Sicherheitsgründen wurde die Sendung als VERTRAULICHE DIPLOMATISCHE DOKUMENTE registriert, und ich kann erklären, warum dies so erklärt wurde. Denken Sie daran, dass der Diplomat den Inhalt der Sendung nicht kennt. Er ist seit einem Monat dort, während ich nach einem zuverlässigen Partner suchen möchte. Ich werde das Land verlassen, sobald die Sendung für Sie an Sie geliefert wird Private Investitionen und ich haben geschworen, niemals nach London zurückzukehren. Bitte, ich brauche Ihre dringende Antwort, bevor meine Pläne, das Unternehmen zu verlassen, entdeckt werden.
+
+www.tethyspetroleum.com/tethys/static/EN_US/au_seniormanagement.html
+
+Im Moment ist die sicherste Form der Korrespondenz meine eigene E-Mail-Adresse. Bitte antworten Sie im Interesse der Vertraulichkeit nur über meine direkte E-Mail-Adresse. Antworten Sie zusammen mit Ihrer direkten Telefon- und Faxnummer, unter der ich Sie alternativ erreichen kann.
+
+Bitte, wenn Sie nicht bereit und interessiert sind, mir zu helfen, löschen Sie bitte diese E-Mail aus Ihrer E-Mail und tun Sie so, als hätten Sie sie nie erhalten.
+
+Freundliche Grüße,
+Mr.Mattias Sjoborg
+(Vorsitzender des Vergütungs- und Nominierungsausschusses)
+Tethys Petroleum.
+London, England
+
 -- 
-1.8.3.1
+This email has been checked for viruses by Avast antivirus software.
+https://www.avast.com/antivirus
 
