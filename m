@@ -2,45 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5408C241F89
-	for <lists+linux-doc@lfdr.de>; Tue, 11 Aug 2020 20:12:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BC4DD24209E
+	for <lists+linux-doc@lfdr.de>; Tue, 11 Aug 2020 21:53:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725873AbgHKSMo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 11 Aug 2020 14:12:44 -0400
-Received: from relay6-d.mail.gandi.net ([217.70.183.198]:53401 "EHLO
-        relay6-d.mail.gandi.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725862AbgHKSMo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Aug 2020 14:12:44 -0400
-X-Originating-IP: 50.39.163.217
-Received: from localhost (50-39-163-217.bvtn.or.frontiernet.net [50.39.163.217])
-        (Authenticated sender: josh@joshtriplett.org)
-        by relay6-d.mail.gandi.net (Postfix) with ESMTPSA id C79A1C0006;
-        Tue, 11 Aug 2020 18:12:39 +0000 (UTC)
-Date:   Tue, 11 Aug 2020 11:12:36 -0700
-From:   Josh Triplett <josh@joshtriplett.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Christian Brauner <christian@brauner.io>,
-        Jens Axboe <axboe@kernel.dk>,
-        Michael Kerrisk <mtk.manpages@gmail.com>,
-        linux-doc@vger.kernel.org
-Subject: pidfd and O_NONBLOCK
-Message-ID: <20200811181236.GA18763@localhost>
+        id S1726329AbgHKTxq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 11 Aug 2020 15:53:46 -0400
+Received: from mail3-relais-sop.national.inria.fr ([192.134.164.104]:37196
+        "EHLO mail3-relais-sop.national.inria.fr" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726355AbgHKTxq (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 11 Aug 2020 15:53:46 -0400
+X-IronPort-AV: E=Sophos;i="5.76,301,1592863200"; 
+   d="scan'208";a="356370612"
+Received: from abo-173-121-68.mrs.modulonet.fr (HELO hadrien) ([85.68.121.173])
+  by mail3-relais-sop.national.inria.fr with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384; 11 Aug 2020 21:53:43 +0200
+Date:   Tue, 11 Aug 2020 21:53:42 +0200 (CEST)
+From:   Julia Lawall <julia.lawall@inria.fr>
+X-X-Sender: jll@hadrien
+To:     Sumera Priyadarsini <sylphrenadin@gmail.com>
+cc:     Julia Lawall <Julia.Lawall@lip6.fr>, michal.lkml@markovi.net,
+        linux-doc@vger.kernel.org, corbet@lwn.net,
+        gregkh@linuxfoundation.org, Gilles.Muller@lip6.fr,
+        nicolas.palix@imag.fr, linux-kernel@vger.kernel.org,
+        cocci@systeme.lip6.fr
+Subject: Re: [Cocci] [PATCH v4] documentation: coccinelle: Improve command
+ example for make C={1, 2}
+In-Reply-To: <20200811002350.5553-1-sylphrenadin@gmail.com>
+Message-ID: <alpine.DEB.2.22.394.2008112153280.4263@hadrien>
+References: <20200811002350.5553-1-sylphrenadin@gmail.com>
+User-Agent: Alpine 2.22 (DEB 394 2020-01-19)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Content-Type: text/plain; charset=US-ASCII
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-As far as I can tell, O_NONBLOCK has no effect on a pidfd. When calling
-waitid on a pidfd for a running process, it always blocks unless you
-provide WNOHANG.
 
-I don't think anything depends on that behavior. Would it be possible to
-make O_NONBLOCK on a pidfd cause waitid on a running process to return
-EWOULDBLOCK?
 
-This would make it easier to use pidfd in some non-blocking event loops.
+On Tue, 11 Aug 2020, Sumera Priyadarsini wrote:
 
-- Josh Triplett
+> Modify coccinelle documentation to further clarify
+> the usage of the makefile C variable by coccicheck.
+>
+> Signed-off-by: Sumera Priyadarsini <sylphrenadin@gmail.com>
+
+Acked-by: Julia Lawall <julia.lawall@inria.fr>
+
+Thanks.
+
+
+>
+> ---
+> Changes in v4:
+>         - Modify commit message to clarify C is a variable
+> ---
+>  Documentation/dev-tools/coccinelle.rst | 15 +++++++++++----
+>  1 file changed, 11 insertions(+), 4 deletions(-)
+>
+> diff --git a/Documentation/dev-tools/coccinelle.rst b/Documentation/dev-tools/coccinelle.rst
+> index 6c791af1c859..74c5e6aeeff5 100644
+> --- a/Documentation/dev-tools/coccinelle.rst
+> +++ b/Documentation/dev-tools/coccinelle.rst
+> @@ -175,13 +175,20 @@ For example, to check drivers/net/wireless/ one may write::
+>      make coccicheck M=drivers/net/wireless/
+>
+>  To apply Coccinelle on a file basis, instead of a directory basis, the
+> -following command may be used::
+> +C variable is used by the makefile to select which files to work with.
+> +This variable can be used to run scripts for the entire kernel, a
+> +specific directory, or for a single file.
+>
+> -    make C=1 CHECK="scripts/coccicheck"
+> +For example, to check drivers/bluetooth/bfusb.c, the value 1 is
+> +passed to the C variable to check files that make considers
+> +need to be compiled.::
+>
+> -To check only newly edited code, use the value 2 for the C flag, i.e.::
+> +    make C=1 CHECK=scripts/coccicheck drivers/bluetooth/bfusb.o
+>
+> -    make C=2 CHECK="scripts/coccicheck"
+> +The value 2 is passed to the C variable to check files regardless of
+> +whether they need to be compiled or not.::
+> +
+> +    make C=2 CHECK=scripts/coccicheck drivers/bluetooth/bfusb.o
+>
+>  In these modes, which work on a file basis, there is no information
+>  about semantic patches displayed, and no commit message proposed.
+> --
+> 2.17.1
+>
+> _______________________________________________
+> Cocci mailing list
+> Cocci@systeme.lip6.fr
+> https://systeme.lip6.fr/mailman/listinfo/cocci
+>
