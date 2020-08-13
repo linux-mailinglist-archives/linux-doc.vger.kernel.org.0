@@ -2,52 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C37CC244031
-	for <lists+linux-doc@lfdr.de>; Thu, 13 Aug 2020 22:59:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 92AF92441C9
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Aug 2020 01:43:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726615AbgHMU7H (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 13 Aug 2020 16:59:07 -0400
-Received: from mail.kernel.org ([198.145.29.99]:32940 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726499AbgHMU7H (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 13 Aug 2020 16:59:07 -0400
-Subject: Re: [GIT PULL] Documentation fixes for 5.9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1597352346;
-        bh=OJn82vLl4fFMo2GhZtXhSmwvILS0DfzST7/ebcn9ZXA=;
-        h=From:In-Reply-To:References:Date:To:Cc:From;
-        b=iJmwv/te1KZGynuVdpF04wZtWmBDlX227ebUvbrlDtkRanVR3JoTCC8GWsPYDMNCY
-         SDsRD8DbbTJCNS5fcnrYM7vLdxn+s5UyOiUteMq+cu4V9Oqn4MagjBOWOXLcneKx8p
-         1wxxAOt9TqdfUm7NfDTgMI7NuAJDiR4aXQhtmIT0=
-From:   pr-tracker-bot@kernel.org
-In-Reply-To: <20200813145207.0a4a3078@lwn.net>
-References: <20200813145207.0a4a3078@lwn.net>
-X-PR-Tracked-List-Id: <linux-doc.vger.kernel.org>
-X-PR-Tracked-Message-Id: <20200813145207.0a4a3078@lwn.net>
-X-PR-Tracked-Remote: git://git.lwn.net/linux.git tags/docs-5.9-2
-X-PR-Tracked-Commit-Id: 1edcd4675e44dc0e6e3b34e8e29000d8a05f998c
-X-PR-Merge-Tree: torvalds/linux.git
-X-PR-Merge-Refname: refs/heads/master
-X-PR-Merge-Commit-Id: dddcbc139e96bd18d8c65ef7b7e440f0d32457c2
-Message-Id: <159735234672.28438.17329561494462832932.pr-tracker-bot@kernel.org>
-Date:   Thu, 13 Aug 2020 20:59:06 +0000
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Linus Torvalds <torvalds@linux-foundation.org>,
-        LKML <linux-kernel@vger.kernel.org>, linux-doc@vger.kernel.org
+        id S1726639AbgHMXnK convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Thu, 13 Aug 2020 19:43:10 -0400
+Received: from [186.47.21.114] ([186.47.21.114]:36080 "EHLO mail.hmvi.gob.ec"
+        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726526AbgHMXnK (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 13 Aug 2020 19:43:10 -0400
+X-Greylist: delayed 22539 seconds by postgrey-1.27 at vger.kernel.org; Thu, 13 Aug 2020 19:43:09 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by mail.hmvi.gob.ec (Postfix) with ESMTP id C371FC03352E7;
+        Thu, 13 Aug 2020 11:44:40 -0500 (-05)
+Received: from mail.hmvi.gob.ec ([127.0.0.1])
+        by localhost (mail.hmvi.gob.ec [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id QLv4_-3eSGS1; Thu, 13 Aug 2020 11:44:40 -0500 (-05)
+Received: from localhost (localhost [127.0.0.1])
+        by mail.hmvi.gob.ec (Postfix) with ESMTP id 93723C0331D9F;
+        Thu, 13 Aug 2020 11:42:40 -0500 (-05)
+X-Virus-Scanned: amavisd-new at hmvi.gob.ec
+Received: from mail.hmvi.gob.ec ([127.0.0.1])
+        by localhost (mail.hmvi.gob.ec [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id 4DBJdWvQGMOe; Thu, 13 Aug 2020 11:42:39 -0500 (-05)
+Received: from [10.73.80.190] (unknown [105.8.3.183])
+        by mail.hmvi.gob.ec (Postfix) with ESMTPSA id 3F636C032D002;
+        Thu, 13 Aug 2020 11:39:44 -0500 (-05)
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8BIT
+Content-Description: Mail message body
+Subject: =?utf-8?q?Covid_19_Wohlt=C3=A4tigkeitsfonds?=
+To:     Recipients <danny.puetate@mail.hmvi.gob.ec>
+From:   ''Tayeb Souami'' <danny.puetate@mail.hmvi.gob.ec>
+Date:   Thu, 13 Aug 2020 18:39:34 +0200
+Reply-To: Tayebsouam.spende@gmail.com
+Message-Id: <20200813163945.3F636C032D002@mail.hmvi.gob.ec>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The pull request you sent on Thu, 13 Aug 2020 14:52:07 -0600:
+Lieber Freund,
 
-> git://git.lwn.net/linux.git tags/docs-5.9-2
+Ich bin Herr Tayeb Souami, New Jersey, Vereinigte Staaten von Amerika,
+der Mega-Gewinner von $ 315million In Mega Millions Jackpot, spende ich
+an 5 zufällige Personen, wenn Sie diese E-Mail erhalten, dann wurde Ihre
+E-Mail nach einem Spinball ausgewählt.Ich habe den größten Teil meines
+Vermögens auf eine Reihe von Wohltätigkeitsorganisationen und
+Organisationen verteilt.Ich habe mich freiwillig dazu entschieden, die
+Summe von € 2.000.000,00 an Sie als eine der ausgewählten 5 zu spenden,
+um meine Gewinne zu überprüfen, sehen Sie bitte meine You Tube Seite
+unten.
 
-has been merged into torvalds/linux.git:
-https://git.kernel.org/torvalds/c/dddcbc139e96bd18d8c65ef7b7e440f0d32457c2
 
-Thank you!
+UHR MICH HIER: https://www.youtube.com/watch?v=Z6ui8ZDQ6Ks
 
--- 
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/prtracker.html
+
+Das ist dein Spendencode: [TS530342018]
+
+
+Antworten Sie mit dem SPENDE-CODE an diese
+
+E-Mail:Tayebsouam.spende@gmail.com
+
+
+Ich hoffe, Sie und Ihre Familie glücklich zu machen.
+
+
+Grüße
+
+Herr Tayeb Souami
