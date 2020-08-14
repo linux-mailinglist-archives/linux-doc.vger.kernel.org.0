@@ -2,60 +2,160 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E836C24454F
-	for <lists+linux-doc@lfdr.de>; Fri, 14 Aug 2020 09:11:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 76F54244707
+	for <lists+linux-doc@lfdr.de>; Fri, 14 Aug 2020 11:30:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726298AbgHNHLS convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Fri, 14 Aug 2020 03:11:18 -0400
-Received: from mail.munisurquillo.gob.pe ([190.187.155.157]:36968 "EHLO
-        mail.munisurquillo.gob.pe" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1726297AbgHNHLS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Aug 2020 03:11:18 -0400
-X-Greylist: delayed 1565 seconds by postgrey-1.27 at vger.kernel.org; Fri, 14 Aug 2020 03:11:17 EDT
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by mail.munisurquillo.gob.pe (Postfix) with ESMTP id E73824006A0D0;
-        Fri, 14 Aug 2020 01:45:09 -0500 (-05)
-Received: from mail.munisurquillo.gob.pe ([127.0.0.1])
-        by localhost (mail.munisurquillo.gob.pe [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id x8ibeSDkHRAP; Fri, 14 Aug 2020 01:45:09 -0500 (-05)
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by mail.munisurquillo.gob.pe (Postfix) with ESMTP id 9420A400A4CA3;
-        Fri, 14 Aug 2020 01:45:09 -0500 (-05)
-X-Virus-Scanned: amavisd-new at munisurquillo.gob.pe
-Received: from mail.munisurquillo.gob.pe ([127.0.0.1])
-        by localhost (mail.munisurquillo.gob.pe [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id jQahUZl-U99B; Fri, 14 Aug 2020 01:45:09 -0500 (-05)
-Received: from [10.54.17.114] (unknown [105.4.7.153])
-        by mail.munisurquillo.gob.pe (Postfix) with ESMTPSA id B3B654006A0F4;
-        Fri, 14 Aug 2020 01:45:00 -0500 (-05)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726444AbgHNJaz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 14 Aug 2020 05:30:55 -0400
+Received: from smtp-fw-6002.amazon.com ([52.95.49.90]:50486 "EHLO
+        smtp-fw-6002.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726283AbgHNJaz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 14 Aug 2020 05:30:55 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1597397454; x=1628933454;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   mime-version;
+  bh=DWYiNSJcpNwDZKN5Kuj5dAFDPbsEqJda5Km3YKwIhpI=;
+  b=t98AOgt6QMfYp/X6McJc1Y4IdfZBXp1kb7MBYq7phWEzqEhHd2TGRA4h
+   qgW5hrTjG0HW0vF/HOLsaXWnXxailjPl3s42UsYXk6GiJfV1555RfL3SH
+   /PIBTLBlUCVGEVXo2P4Hp2k20NlYRHrvkV2pnGjHxiSxFnyAuAJAjqKk4
+   o=;
+X-IronPort-AV: E=Sophos;i="5.76,311,1592870400"; 
+   d="scan'208";a="47821021"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-2a-f14f4a47.us-west-2.amazon.com) ([10.43.8.6])
+  by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP; 14 Aug 2020 09:30:49 +0000
+Received: from EX13MTAUEA002.ant.amazon.com (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
+        by email-inbound-relay-2a-f14f4a47.us-west-2.amazon.com (Postfix) with ESMTPS id DA2DCA277C;
+        Fri, 14 Aug 2020 09:30:46 +0000 (UTC)
+Received: from EX13D31EUA001.ant.amazon.com (10.43.165.15) by
+ EX13MTAUEA002.ant.amazon.com (10.43.61.77) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 14 Aug 2020 09:30:33 +0000
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.161.34) by
+ EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 14 Aug 2020 09:30:12 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     SeongJae Park <sjpark@amazon.com>
+CC:     <akpm@linux-foundation.org>, <Jonathan.Cameron@Huawei.com>,
+        <aarcange@redhat.com>, <acme@kernel.org>,
+        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
+        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
+        <brendanhiggins@google.com>, <cai@lca.pw>,
+        <colin.king@canonical.com>, <corbet@lwn.net>, <david@redhat.com>,
+        <dwmw@amazon.com>, <fan.du@intel.com>, <foersleo@amazon.de>,
+        <gthelen@google.com>, <irogers@google.com>, <jolsa@redhat.com>,
+        <kirill@shutemov.name>, <mark.rutland@arm.com>, <mgorman@suse.de>,
+        <minchan@kernel.org>, <mingo@redhat.com>, <namhyung@kernel.org>,
+        <peterz@infradead.org>, <rdunlap@infradead.org>,
+        <riel@surriel.com>, <rientjes@google.com>, <rostedt@goodmis.org>,
+        <rppt@kernel.org>, <sblbir@amazon.com>, <shakeelb@google.com>,
+        <shuah@kernel.org>, <sj38.park@gmail.com>, <snu@amazon.de>,
+        <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
+        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
+        <linux-damon@amazon.com>, <linux-mm@kvack.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v19 02/15] mm/damon: Implement region based sampling
+Date:   Fri, 14 Aug 2020 11:29:51 +0200
+Message-ID: <20200814092951.13988-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200804091416.31039-3-sjpark@amazon.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: =?utf-8?q?Covid_19_Wohlt=C3=A4tigkeitsfonds?=
-To:     Recipients <lu.marin@munisurquillo.gob.pe>
-From:   ''charles jackson'' <lu.marin@munisurquillo.gob.pe>
-Date:   Fri, 14 Aug 2020 08:44:56 +0200
-Reply-To: charlesjacksonjr001@gmail.com
-Message-Id: <20200814064500.B3B654006A0F4@mail.munisurquillo.gob.pe>
+Content-Type: text/plain
+X-Originating-IP: [10.43.161.34]
+X-ClientProxiedBy: EX13D35UWC004.ant.amazon.com (10.43.162.180) To
+ EX13D31EUA001.ant.amazon.com (10.43.165.15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hallo
+On Tue, 4 Aug 2020 11:14:03 +0200 SeongJae Park <sjpark@amazon.com> wrote:
 
-Ich bin Charles W. Jackson aus North Carolina, Vereinigte Staaten von Amerika, und ich bin der Gewinner des Mega-Millionen-Jackpots von 344 Millionen US-Dollar. Ich spende die Summe von 2.000.000 Millionen Euro als Teil der Hilfsgelder für das Corona-Virus.
+> From: SeongJae Park <sjpark@amazon.de>
+> 
+> DAMON separates its monitoring target address space independent high
+> level logics from the target space dependent low level primitives for
+> flexible support of various address spaces.
+> 
+> This commit implements DAMON's target address space independent high
+> level logics for basic access check and region based sampling.  Hence,
+> without the target address space specific parts implementations, this
+> doesn't work alone.  A reference implementation of those will be
+> provided by a later commit.
+[...]
+> Signed-off-by: SeongJae Park <sjpark@amazon.de>
+> Reviewed-by: Leonard Foerster <foersleo@amazon.de>
+> ---
+>  include/linux/damon.h |  89 ++++++++++++++-
+>  mm/damon.c            | 256 +++++++++++++++++++++++++++++++++++++++++-
+>  2 files changed, 342 insertions(+), 3 deletions(-)
+> 
+> diff --git a/include/linux/damon.h b/include/linux/damon.h
+> index a6e839a236f4..0b1153971e6d 100644
+> --- a/include/linux/damon.h
+> +++ b/include/linux/damon.h
+> @@ -11,6 +11,8 @@
+>  #define _DAMON_H_
+>  
+>  #include <linux/random.h>
+> +#include <linux/mutex.h>
+> +#include <linux/time64.h>
+>  #include <linux/types.h>
+>  
+>  /**
+> @@ -56,11 +58,96 @@ struct damon_target {
+>  };
+>  
+>  /**
+> - * struct damon_ctx - Represents a context for each monitoring.
+> + * struct damon_ctx - Represents a context for each monitoring.  This is the
+> + * main interface that allows users to set the attributes and get the results
+> + * of the monitoring.
+> + *
+> + * @sample_interval:		The time between access samplings.
+> + * @aggr_interval:		The time between monitor results aggregations.
+> + * @nr_regions:			The number of monitoring regions.
+> + *
+> + * For each @sample_interval, DAMON checks whether each region is accessed or
+> + * not.  It aggregates and keeps the access information (number of accesses to
+> + * each region) for @aggr_interval time.  All time intervals are in
+> + * micro-seconds.
+> + *
+> + * @kdamond:		Kernel thread who does the monitoring.
+> + * @kdamond_stop:	Notifies whether kdamond should stop.
+> + * @kdamond_lock:	Mutex for the synchronizations with @kdamond.
+> + *
+> + * For each monitoring request (damon_start()), a kernel thread for the
+> + * monitoring is created.  The pointer to the thread is stored in @kdamond.
 
-Dies ist Ihr Spendencode: [CJ530342019]
+This means that multiple monitoring threads can concurrently run.  This is an
+intended design to let users utilize multiple CPUs.  For example, let's suppose
+the user need super high accuracy of the monitoring results which require
+multiple CPU power.  If use of the multiple CPUs are allowed, the user can
+split the monitoring target regions into multiple contexts and call
+'damon_start()' for each of the context.
 
-www.youtube.com/watch?v=BSr8myiLPMQ
+If multiple monitoring threads has conflicting target regions, they will
+interfere each other.  Currently, avoidance of such conflict should be done by
+'damon_start()' users.  The synchronization would be complicated.
 
-Bitte antworten Sie auf diese E-Mail mit dem SPENDERCODE:
+To make the situation simple, I will make the 'damon_start()' receive a group
+of 'damon_ctx' objects and creates a group of monitoring threads for the
+objects at once.  This will only reduce number of 'damon_start()' calls
+required to run multiple monitoring threads.  In addition to this, the groups
+of monitoring threads will be mutual exclusive.  In other words,
+'damon_start()' will fail if a group of monitoring threads that started by
+other 'damon_start()' call is currently running.
 
-charlesjacksonjr001@gmail.com
+This still ask the users to protect each monitoring threads by taking care in
+their requests.  But, because the requests are made by the user on its own,
+avoiding the conflict will be quite easy.  Further, intentional conflict is
+also possible, though I'm unsure how the intentional conflict can be required.
 
-Ich hoffe, dass Sie und Ihre Familie dies durchkommen
+The change will be made in the next spin.
 
 
-Herr Charles Jackson
+Thanks,
+SeongJae Park
+
+[...]
