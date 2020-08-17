@@ -2,108 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1CF632464FB
-	for <lists+linux-doc@lfdr.de>; Mon, 17 Aug 2020 12:58:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0DEAE246802
+	for <lists+linux-doc@lfdr.de>; Mon, 17 Aug 2020 16:09:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728260AbgHQK5z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 17 Aug 2020 06:57:55 -0400
-Received: from smtp-fw-6002.amazon.com ([52.95.49.90]:24981 "EHLO
-        smtp-fw-6002.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726694AbgHQK5r (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Aug 2020 06:57:47 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1597661867; x=1629197867;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=H6NR4mgfPt8AtxhAMDAgS1C8p7wWuitVReqKZYdUmNk=;
-  b=bbMij36n7/b00J5VOC0LF40ntvJn46aPbvFLiui18P+vdGb+zO6NSKvs
-   UDNEl++CZFS3tJUNiRdw6i5RqCSrSmyxp06MnokgTqW3eXybhKkKwZa/a
-   M5B7tF4SMMRJCjSL7zFq9AlJx48HInF7G+Vme49f+rwn0n/gfsK0Dt55L
-   Y=;
-X-IronPort-AV: E=Sophos;i="5.76,322,1592870400"; 
-   d="scan'208";a="48182517"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-2b-c7131dcf.us-west-2.amazon.com) ([10.43.8.6])
-  by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP; 17 Aug 2020 10:57:43 +0000
-Received: from EX13MTAUEA001.ant.amazon.com (pdx4-ws-svc-p6-lb7-vlan2.pdx.amazon.com [10.170.41.162])
-        by email-inbound-relay-2b-c7131dcf.us-west-2.amazon.com (Postfix) with ESMTPS id B596CA24AF;
-        Mon, 17 Aug 2020 10:57:31 +0000 (UTC)
-Received: from EX13D31EUA001.ant.amazon.com (10.43.165.15) by
- EX13MTAUEA001.ant.amazon.com (10.43.61.82) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Mon, 17 Aug 2020 10:57:30 +0000
-Received: from u3f2cd687b01c55.ant.amazon.com (10.43.160.192) by
- EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Mon, 17 Aug 2020 10:57:14 +0000
-From:   SeongJae Park <sjpark@amazon.com>
-To:     <akpm@linux-foundation.org>
-CC:     SeongJae Park <sjpark@amazon.de>, <Jonathan.Cameron@Huawei.com>,
-        <aarcange@redhat.com>, <acme@kernel.org>,
-        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
-        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
-        <brendanhiggins@google.com>, <cai@lca.pw>,
-        <colin.king@canonical.com>, <corbet@lwn.net>, <david@redhat.com>,
-        <dwmw@amazon.com>, <fan.du@intel.com>, <foersleo@amazon.de>,
-        <gthelen@google.com>, <irogers@google.com>, <jolsa@redhat.com>,
-        <kirill@shutemov.name>, <mark.rutland@arm.com>, <mgorman@suse.de>,
-        <minchan@kernel.org>, <mingo@redhat.com>, <namhyung@kernel.org>,
-        <peterz@infradead.org>, <rdunlap@infradead.org>,
-        <riel@surriel.com>, <rientjes@google.com>, <rostedt@goodmis.org>,
-        <rppt@kernel.org>, <sblbir@amazon.com>, <shakeelb@google.com>,
-        <shuah@kernel.org>, <sj38.park@gmail.com>, <snu@amazon.de>,
-        <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
-        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
-        <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
-        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>
-Subject: [PATCH v20 15/15] MAINTAINERS: Update for DAMON
-Date:   Mon, 17 Aug 2020 12:51:37 +0200
-Message-ID: <20200817105137.19296-16-sjpark@amazon.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200817105137.19296-1-sjpark@amazon.com>
-References: <20200817105137.19296-1-sjpark@amazon.com>
-MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.43.160.192]
-X-ClientProxiedBy: EX13D02UWC004.ant.amazon.com (10.43.162.236) To
- EX13D31EUA001.ant.amazon.com (10.43.165.15)
+        id S1728906AbgHQOJy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 17 Aug 2020 10:09:54 -0400
+Received: from us-smtp-2.mimecast.com ([205.139.110.61]:39137 "EHLO
+        us-smtp-delivery-1.mimecast.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1728894AbgHQOJw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 17 Aug 2020 10:09:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1597673391;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc; bh=+lmlYQx2uz53YfMyFrKjqL1FinoRZitUJmdbvkIY3+4=;
+        b=O1lMOhR/ZwxLiHxgvd8pefOfMvFy460VENnRCg4mQP+oZ7VXpOPIthpprK4n1C7rrxkrSt
+        vZu570eoKMRLqd4CHzKAnUedCvvE40+vbTP+0Qekk/aXQJcNJhHOASLwAVhdv2hh3DYcab
+        cDnRvyCWOWdguNYVXGnzp+40SuvOgHQ=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-414-z0VJS0sDPW6M5J-0AMqYtA-1; Mon, 17 Aug 2020 10:09:49 -0400
+X-MC-Unique: z0VJS0sDPW6M5J-0AMqYtA-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9DCE281F001;
+        Mon, 17 Aug 2020 14:09:47 +0000 (UTC)
+Received: from llong.com (ovpn-118-35.rdu2.redhat.com [10.10.118.35])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 11C7926323;
+        Mon, 17 Aug 2020 14:09:38 +0000 (UTC)
+From:   Waiman Long <longman@redhat.com>
+To:     Andrew Morton <akpm@linux-foundation.org>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Michal Hocko <mhocko@kernel.org>,
+        Vladimir Davydov <vdavydov.dev@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        Ingo Molnar <mingo@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, cgroups@vger.kernel.org,
+        linux-mm@kvack.org, Waiman Long <longman@redhat.com>
+Subject: [RFC PATCH 0/8] memcg: Enable fine-grained per process memory control
+Date:   Mon, 17 Aug 2020 10:08:23 -0400
+Message-Id: <20200817140831.30260-1-longman@redhat.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: SeongJae Park <sjpark@amazon.de>
+Memory controller can be used to control and limit the amount of
+physical memory used by a task. When a limit is set in "memory.high" in
+a v2 non-root memory cgroup, the memory controller will try to reclaim
+memory if the limit has been exceeded. Normally, that will be enough
+to keep the physical memory consumption of tasks in the memory cgroup
+to be around or below the "memory.high" limit.
 
-This commit updates MAINTAINERS file for DAMON related files.
+Sometimes, memory reclaim may not be able to recover memory in a rate
+that can catch up to the physical memory allocation rate. In this case,
+the physical memory consumption will keep on increasing.  When it reaches
+"memory.max" for memory cgroup v2 or when the system is running out of
+free memory, the OOM killer will be invoked to kill some tasks to free
+up additional memory. However, one has little control of which tasks
+are going to be killed by an OOM killer. Killing tasks that hold some
+important resources without freeing them first can create other system
+problems down the road.
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- MAINTAINERS | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+Users who do not want the OOM killer to be invoked to kill random
+tasks in an out-of-memory situation can use the memory control
+facility provided by this new patchset via prctl(2) to better manage
+the mitigation action that needs to be performed to various tasks when
+the specified memory limit is exceeded with memory cgroup v2 being used.
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 4e2698cc7e23..3d6050d693e3 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -4751,6 +4751,19 @@ F:	net/ax25/ax25_out.c
- F:	net/ax25/ax25_timer.c
- F:	net/ax25/sysctl_net_ax25.c
- 
-+DATA ACCESS MONITOR
-+M:	SeongJae Park <sjpark@amazon.de>
-+L:	linux-mm@kvack.org
-+S:	Maintained
-+F:	Documentation/admin-guide/mm/damon/*
-+F:	Documentation/vm/damon/*
-+F:	include/linux/damon.h
-+F:	include/trace/events/damon.h
-+F:	mm/damon-test.h
-+F:	mm/damon.c
-+F:	tools/damon/*
-+F:	tools/testing/selftests/damon/*
-+
- DAVICOM FAST ETHERNET (DMFE) NETWORK DRIVER
- L:	netdev@vger.kernel.org
- S:	Orphan
+The currently supported mitigation actions include the followings:
+
+ 1) Return ENOMEM for some syscalls that allocate or handle memory
+ 2) Slow down the process for memory reclaim to catch up
+ 3) Send a specific signal to the task
+ 4) Kill the task
+
+The users that want better memory control for their applicatons can
+either modify their applications to call the prctl(2) syscall directly
+with the new memory control command code or write the desired action to
+the newly provided memctl procfs files of their applications provided
+that those applications run in a non-root v2 memory cgroup.
+
+Waiman Long (8):
+  memcg: Enable fine-grained control of over memory.high action
+  memcg, mm: Return ENOMEM or delay if memcg_over_limit
+  memcg: Allow the use of task RSS memory as over-high action trigger
+  fs/proc: Support a new procfs memctl file
+  memcg: Allow direct per-task memory limit checking
+  memcg: Introduce additional memory control slowdown if needed
+  memcg: Enable logging of memory control mitigation action
+  memcg: Add over-high action prctl() documentation
+
+ Documentation/userspace-api/index.rst      |   1 +
+ Documentation/userspace-api/memcontrol.rst | 174 ++++++++++++++++
+ fs/proc/base.c                             | 109 ++++++++++
+ include/linux/memcontrol.h                 |   4 +
+ include/linux/sched.h                      |  24 +++
+ include/uapi/linux/prctl.h                 |  48 +++++
+ kernel/fork.c                              |   1 +
+ kernel/sys.c                               |  16 ++
+ mm/memcontrol.c                            | 227 +++++++++++++++++++++
+ mm/mlock.c                                 |   6 +
+ mm/mmap.c                                  |  12 ++
+ mm/mprotect.c                              |   3 +
+ 12 files changed, 625 insertions(+)
+ create mode 100644 Documentation/userspace-api/memcontrol.rst
+
 -- 
-2.17.1
+2.18.1
 
