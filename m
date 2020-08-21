@@ -2,46 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0646024C6DA
-	for <lists+linux-doc@lfdr.de>; Thu, 20 Aug 2020 22:47:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A444724C970
+	for <lists+linux-doc@lfdr.de>; Fri, 21 Aug 2020 03:09:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728467AbgHTUr1 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Thu, 20 Aug 2020 16:47:27 -0400
-Received: from mx1.mse.messcube.it ([83.221.120.12]:39404 "EHLO
-        mx1.mse.messcube.it" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727917AbgHTUr0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Aug 2020 16:47:26 -0400
-Received: from localhost (unknown [127.0.0.1])
-        by mx1.mse.messcube.it (MSG3smtpd) with ESMTP id 399A99B35;
-        Thu, 20 Aug 2020 20:47:21 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at mse.messcube.it
-Received: from mx1.mse.messcube.it ([127.0.0.1])
-        by localhost (mx1.mse.messcube.it [127.0.0.1]) (amavisd-new, port 10024)
-        with ESMTP id BSqvy-Revgug; Thu, 20 Aug 2020 22:47:19 +0200 (CEST)
-Received: from mail.messagecubelite.it (unknown [10.35.253.13])
-        by mx1.mse.messcube.it (MSG3smtpd) with ESMTPS id 8EAB49B1E;
-        Thu, 20 Aug 2020 22:47:19 +0200 (CEST)
-Received: from [192.168.8.106] (129.205.124.250) by
- MT01EX03N02.MT01.mse.messcube.it (10.35.253.13) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id
- 15.1.1913.5; Thu, 20 Aug 2020 22:47:06 +0200
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1726810AbgHUBJU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 20 Aug 2020 21:09:20 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33044 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726957AbgHUBJR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 20 Aug 2020 21:09:17 -0400
+Received: from gate2.alliedtelesis.co.nz (gate2.alliedtelesis.co.nz [IPv6:2001:df5:b000:5::4])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 29DFEC061386
+        for <linux-doc@vger.kernel.org>; Thu, 20 Aug 2020 18:09:17 -0700 (PDT)
+Received: from mmarshal3.atlnz.lc (mmarshal3.atlnz.lc [10.32.18.43])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (Client did not present a certificate)
+        by gate2.alliedtelesis.co.nz (Postfix) with ESMTPS id 6F267891B0;
+        Fri, 21 Aug 2020 13:09:05 +1200 (NZST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alliedtelesis.co.nz;
+        s=mail181024; t=1597972145;
+        bh=ea61aITYXCZhhViYI/miCG03GiKcr8uYJNlbvLWSTo8=;
+        h=From:To:Cc:Subject:Date;
+        b=FPqjK4QCA44XQpH+5bCsog9UcVGDYvr1C37CCFyP6ZsMLtnjbD3/RDt+ySuMlEDg8
+         kzTxwI8GZqgBjUjYAMBiVJ37SqXPGjC2TfI11ZVQpXFbH+ndNowJiHEDlRJUrySFH5
+         ZOU7DB2P60eir4hWSvo5lRjodnrhArImWYj0mOgY9VAH9N+YDlr3BWhl3mFuUP1T1k
+         cGSDsfOUj/ZCMnJiEWlF+VxvVQ4jw/u77o8JYbPe9A0xvgsMvElfS3dMxvDWFshAEP
+         iaiWtu+1pO8Vc+YbQLTxmiDAhAW0p89XJPxNKyrq+hUPWCFhYXr8NQ/EhUX/L99zIJ
+         xL6Rm9O6X2CsA==
+Received: from smtp (Not Verified[10.32.16.33]) by mmarshal3.atlnz.lc with Trustwave SEG (v7,5,8,10121)
+        id <B5f3f1eb10000>; Fri, 21 Aug 2020 13:09:05 +1200
+Received: from chrisp-dl.ws.atlnz.lc (chrisp-dl.ws.atlnz.lc [10.33.22.20])
+        by smtp (Postfix) with ESMTP id 1EBD413ED33;
+        Fri, 21 Aug 2020 13:09:04 +1200 (NZST)
+Received: by chrisp-dl.ws.atlnz.lc (Postfix, from userid 1030)
+        id 39A4F283B16; Fri, 21 Aug 2020 13:09:05 +1200 (NZST)
+From:   Chris Packham <chris.packham@alliedtelesis.co.nz>
+To:     corbet@lwn.net
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Chris Packham <chris.packham@alliedtelesis.co.nz>
+Subject: [PATCH 0/2] docs: Remove stray ()
+Date:   Fri, 21 Aug 2020 13:08:58 +1200
+Message-Id: <20200821010900.6362-1-chris.packham@alliedtelesis.co.nz>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: =?utf-8?q?Ihr_E-Mail-Konto_wurde_f=C3=BCr_eine_Spende_von_3=2E500=2E000?=
- =?utf-8?q?=2C00_US?=
-From:   <>
-Date:   Thu, 20 Aug 2020 12:46:54 -0800
-Reply-To: <charlesjacskson35@gmail.com>
-Message-ID: <659feb5c-b0cf-4218-9e34-0fe48f55d666@MT01EX03N02.MT01.mse.messcube.it>
-X-Originating-IP: [129.205.124.250]
-X-ClientProxiedBy: MT01EX06N01.MT01.mse.messcube.it (10.35.253.24) To
- MT01EX03N02.MT01.mse.messcube.it (10.35.253.13)
-To:     unlisted-recipients:; (no To-header on input)
+Content-Transfer-Encoding: quoted-printable
+x-atlnz-ls: pat
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Ihr E-Mail-Konto wurde für eine Spende von 3.500.000,00 USD für wohltätige Zwecke ausgewählt. BITTE KONTAKTIEREN SIE UNS FÜR WEITERE INFORMATIONEN
+I noticed the stray () while reading over deprecated.rst. I found the RCU=
+ one
+when grepping around.
+
+Chris Packham (2):
+  docs: deprecated.rst: Remove stray ()
+  docs: RCU: Remove stray ()
+
+ Documentation/RCU/lockdep.rst                           | 2 +-
+ Documentation/process/deprecated.rst                    | 2 +-
+ Documentation/translations/it_IT/process/deprecated.rst | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+--=20
+2.28.0
+
