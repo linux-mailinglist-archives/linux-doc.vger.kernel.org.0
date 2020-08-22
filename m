@@ -2,70 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DC2E224E181
-	for <lists+linux-doc@lfdr.de>; Fri, 21 Aug 2020 21:58:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6DCF424E48A
+	for <lists+linux-doc@lfdr.de>; Sat, 22 Aug 2020 03:40:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727805AbgHUT54 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 21 Aug 2020 15:57:56 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38750 "EHLO
+        id S1725991AbgHVBks (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 21 Aug 2020 21:40:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35142 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727108AbgHUT4u (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Aug 2020 15:56:50 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D85FBC061573;
-        Fri, 21 Aug 2020 12:56:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=BN55ErogQ3phnIHH8Zm42eA6QwhldaEoRNqesYPn+jo=; b=gaPnkgprWrM0XYk7nb2X8+2I5l
-        c6ruzrsLrcyCHvA3gYAboWs4eynSBFR2tVCbQ3g3eGf8/IFLgseWVFxT7ucNFU2Ha0FKhz4ylDMyk
-        w97f7aDZebpCfDPl5e8LoPFQz6vWX8fSOhszxq2deYs81IHpCJ6LDfTXW43Ii+ILHHt4qpr/O7GRM
-        hOo08htFbP9UlbARFbLmVbl6icD1K7zOwPl4YhyueLQqU/ETuQqpHf8mMqD5ATdHUYm1iyMapVPbQ
-        nVkUnrojnAGvg6SX/QVcPetPdflPq9XygRHqkbtYfu6OpWe2isibGCwIEl/nT4yPEgK/PV9OLfBNC
-        2IwhKhiA==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=worktop.programming.kicks-ass.net)
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1k9D9W-0006ix-W7; Fri, 21 Aug 2020 19:56:45 +0000
-Received: by worktop.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 99F90980DF7; Fri, 21 Aug 2020 21:56:41 +0200 (CEST)
-Date:   Fri, 21 Aug 2020 21:56:41 +0200
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Boqun Feng <boqun.feng@gmail.com>
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Waiman Long <longman@redhat.com>
-Subject: Re: [RFC v7 00/19] lockdep: Support deadlock detection for recursive
- read locks
-Message-ID: <20200821195641.GV3982@worktop.programming.kicks-ass.net>
-References: <20200807074238.1632519-1-boqun.feng@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200807074238.1632519-1-boqun.feng@gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        with ESMTP id S1725938AbgHVBkY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 21 Aug 2020 21:40:24 -0400
+Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com [IPv6:2607:f8b0:4864:20::b4a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87FA4C061575
+        for <linux-doc@vger.kernel.org>; Fri, 21 Aug 2020 18:40:24 -0700 (PDT)
+Received: by mail-yb1-xb4a.google.com with SMTP id k11so4057697ybp.1
+        for <linux-doc@vger.kernel.org>; Fri, 21 Aug 2020 18:40:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=sender:date:message-id:mime-version:subject:from:to:cc;
+        bh=yI2W6XOAECLWWz1vxp8A2D0OjzZ6EM2hcqCHiaj5HuY=;
+        b=TGR+lsyK3bcOwfDOvhbrkZPJhPT7NSLH+l9HfLzVxRnJO1cucaMAPrlFYr3SollIVB
+         Q8DeGaUQyFQvckXiCZEFjkV5oPHLtoTDNqSua0q1QHpQj/OSZZBuzhelPf5BC0OXuUmg
+         C3MSmkgDFvDVUOA1UBzE67AwHnDAbZSHmxKKibDFE3HhAhaWaigNxMlKUUVCLRCE9Ooy
+         9K6pNdw5tZvtjXf8NB/d8SmutZT3n+SIjFoRnCq1PgHNOpgJBfpLct7R0F1hptU0G8TE
+         PdO0h47aCJjsJsbOztR74D4U42GTILnjnM91A43CkbHk/G79/cZXSb0BoiBPDno+MK0z
+         zsHQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:message-id:mime-version:subject:from
+         :to:cc;
+        bh=yI2W6XOAECLWWz1vxp8A2D0OjzZ6EM2hcqCHiaj5HuY=;
+        b=q7DcnLaIOuWvK5S7OtxA9V+c7/jrLRsUIuGlAfG8LPXMexnDYeQB6MsLjwbzFVdJuX
+         hQasMz7XUAUREIxHgZNvgjzxOLdXGzdKnFULANELcAZUKZyu9azG8UGbWbRbuCXDSd3x
+         IB3+zGfEJ8/5ue2TOP3gJMwpTp7YjwXEyQxbpnRf6y307zj0fY/EEqqJBg5C9YcTtYeU
+         WMi96AVny6VQu6q0aAw+j9fa1wTgK9ql2F9Sm2Uu7zObFOd62fAYtou1UZYmvzO/kzJs
+         2PY8n1+yygAw8DH4pw6+0mYS1FwITTfyOaVJNnZe79pLoMyYk6IONiSh3IjXfkvcc3OA
+         SDlw==
+X-Gm-Message-State: AOAM5313DgnchSbW9S9imhcu9mg5nCW6uDF/eofEoog/UwWJC8avs9kM
+        ll3zTQksgpTPImEN62Qfin5jtTdLqg9qf+EAWw==
+X-Google-Smtp-Source: ABdhPJyMbZ5EQZgoIAE5xx9h3TpYZZz10xRs8x2nvbqmtq7u7p4MrurW+Xl6HKu/QGhj9B4xBqwrRRAqe6zZStZSjw==
+X-Received: from lg.mtv.corp.google.com ([2620:15c:211:202:f693:9fff:fef4:29dd])
+ (user=lokeshgidra job=sendgmr) by 2002:a5b:c44:: with SMTP id
+ d4mr6981423ybr.488.1598060423377; Fri, 21 Aug 2020 18:40:23 -0700 (PDT)
+Date:   Fri, 21 Aug 2020 18:40:16 -0700
+Message-Id: <20200822014018.913868-1-lokeshgidra@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.28.0.297.g1956fa8f8d-goog
+Subject: [PATCH v2 0/2] Control over userfaultfd kernel-fault handling
+From:   Lokesh Gidra <lokeshgidra@google.com>
+To:     Kees Cook <keescook@chromium.org>,
+        Jonathan Corbet <corbet@lwn.net>, Peter Xu <peterx@redhat.com>,
+        Andrea Arcangeli <aarcange@redhat.com>,
+        Andrew Morton <akpm@linux-foundation.org>
+Cc:     Alexander Viro <viro@zeniv.linux.org.uk>,
+        Stephen Smalley <stephen.smalley.work@gmail.com>,
+        Eric Biggers <ebiggers@kernel.com>,
+        Lokesh Gidra <lokeshgidra@google.com>,
+        Daniel Colascione <dancol@dancol.org>,
+        "Joel Fernandes (Google)" <joel@joelfernandes.org>,
+        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, kaleshsingh@google.com,
+        calin@google.com, surenb@google.com, nnk@google.com,
+        jeffv@google.com, kernel-team@android.com,
+        Mike Rapoport <rppt@linux.vnet.ibm.com>,
+        Shaohua Li <shli@fb.com>, Jerome Glisse <jglisse@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Mel Gorman <mgorman@techsingularity.net>,
+        Nitin Gupta <nigupta@nvidia.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Iurii Zaikin <yzaikin@google.com>,
+        Luis Chamberlain <mcgrof@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Aug 07, 2020 at 03:42:19PM +0800, Boqun Feng wrote:
-> Hi Peter and Waiman,
-> 
-> As promised, this is the updated version of my previous lockdep patchset
-> for recursive read lock support. It's based on v5.8. Previous versions
-> can be found at:
+This patch series is split from [1]. The other series enables SELinux
+support for userfaultfd file descriptors so that its creation and
+movement can be controlled.
 
-OK, this all looks really nice.
+It has been demonstrated on various occasions that suspending kernel
+code execution for an arbitrary amount of time at any access to
+userspace memory (copy_from_user()/copy_to_user()/...) can be exploited
+to change the intended behavior of the kernel. For instance, handling
+page faults in kernel-mode using userfaultfd has been exploited in [2, 3].
+Likewise, FUSE, which is similar to userfaultfd in this respect, has been
+exploited in [4, 5] for similar outcome.
 
-I've stuck it in my locking/core branch for testing, I've had to fix a
-few minor rejects (my bad for being to slow), made a few minor edits and
-fixed that one masking thing.
+This small patch series adds a new flag to userfaultfd(2) that allows
+callers to give up the ability to handle kernel-mode faults with the
+resulting UFFD file object. It then adds a 'user-mode only' option to
+the unprivileged_userfaultfd sysctl knob to require unprivileged
+callers to use this new flag.
 
-It seems to boot with the selftests all green, haven't done much else
-with it yet, we'll see.
+The purpose of this new interface is to decrease the chance of an
+unprivileged userfaultfd user taking advantage of userfaultfd to
+enhance security vulnerabilities by lengthening the race window in
+kernel code.
 
-  git://git.kernel.org/pub/scm/linux/kernel/git/peterz/queue.git locking/core
+[1] https://lore.kernel.org/lkml/20200211225547.235083-1-dancol@google.com/
+[2] https://duasynt.com/blog/linux-kernel-heap-spray
+[3] https://duasynt.com/blog/cve-2016-6187-heap-off-by-one-exploit
+[4] https://googleprojectzero.blogspot.com/2016/06/exploiting-recursion-in-linux-kernel_20.html
+[5] https://bugs.chromium.org/p/project-zero/issues/detail?id=808
 
-Thanks!
+Changes since v1:
+
+  - Added external references to the threats from allowing unprivileged
+    users to handle page faults from kernel-mode.
+  - Removed the new sysctl knob restricting handling of page
+    faults from kernel-mode, and added an option for the same
+    in the existing 'unprivileged_userfaultfd' knob.
+
+Lokesh Gidra (2):
+  Add UFFD_USER_MODE_ONLY
+  Add user-mode only option to unprivileged_userfaultfd sysctl knob
+
+ Documentation/admin-guide/sysctl/vm.rst | 10 +++++++---
+ fs/userfaultfd.c                        | 17 ++++++++++++++---
+ include/uapi/linux/userfaultfd.h        |  9 +++++++++
+ kernel/sysctl.c                         |  2 +-
+ 4 files changed, 31 insertions(+), 7 deletions(-)
+
+-- 
+2.28.0.297.g1956fa8f8d-goog
+
