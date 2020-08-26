@@ -2,51 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A1DE5252FC1
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Aug 2020 15:28:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 18098252FF5
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Aug 2020 15:32:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729549AbgHZN2I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Aug 2020 09:28:08 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48850 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728276AbgHZN2C (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Aug 2020 09:28:02 -0400
-Received: from jupiter.au-plovdiv.bg (jupiter.au-plovdiv.bg [IPv6:2001:4b58:37:900::10])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BA674C061574
-        for <linux-doc@vger.kernel.org>; Wed, 26 Aug 2020 06:28:00 -0700 (PDT)
-Received: from mail.au-plovdiv.bg (localhost [127.0.0.1])
-        by jupiter.au-plovdiv.bg (8.15.2/8.15.2) with ESMTP id 07QCCiKZ092690;
-        Wed, 26 Aug 2020 15:12:49 +0300 (EEST)
-        (envelope-from sarewov460@bpghmag.com)
+        id S1730284AbgHZNb6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Aug 2020 09:31:58 -0400
+Received: from mail.kernel.org ([198.145.29.99]:45786 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1730288AbgHZNb5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 26 Aug 2020 09:31:57 -0400
+Received: from coco.lan (ip5f5ad5c5.dynamic.kabel-deutschland.de [95.90.213.197])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 97A0621741;
+        Wed, 26 Aug 2020 13:31:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1598448716;
+        bh=N7hZxylonpulq+kvN5bIqiP/e2mXO2Jt1hFduoiS2vk=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=HHHbW4O+lFudLOGG8w10yrHscW841Md6gaw0W5oaXoZM0peA8oJAYZJza+fpfjTek
+         I8e+fqSVTuGp3U9k4VGGuUeYAwzpaVI0jkaJwC4DQb+5m3+jra3hoNLkYd+ElQ8Dbm
+         b4xlH4UAyzGHgp7yjTOR593NTzAvN7l44aXcTst4=
+Date:   Wed, 26 Aug 2020 15:31:52 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org,
+        "Frank A. Cancio Bello" <frank@generalsoftwareinc.com>,
+        "Joel Fernandes (Google)" <joel@joelfernandes.org>,
+        "Steven Rostedt (VMware)" <rostedt@goodmis.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Christoph Hellwig <hch@lst.de>
+Subject: Re: [PATCH] docs: trace: ring-buffer-design.rst: use the new SPDX
+ tag
+Message-ID: <20200826153152.54ce996a@coco.lan>
+In-Reply-To: <20200826064733.33c22a2c@lwn.net>
+References: <290d101bee434e54acec13778c67c77802fbc953.1598426895.git.mchehab+huawei@kernel.org>
+        <20200826064733.33c22a2c@lwn.net>
+X-Mailer: Claws Mail 3.17.6 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-Date:   Wed, 26 Aug 2020 05:12:44 -0700
-From:   Azim Premji <sarewov460@bpghmag.com>
-To:     undisclosed-recipients:;
-Subject: Re: Spende
-Organization: Wirpo
-Reply-To: nobbleme15@gmail.com
-Mail-Reply-To: nobbleme15@gmail.com
-Message-ID: <ff8a41b2a26e02d9dbca6a797e70c7de@bpghmag.com>
-X-Sender: sarewov460@bpghmag.com
-User-Agent: Roundcube Webmail/1.2.3
-X-Virus-Scanned: clamav-milter 0.99.2 at jupiter.au-plovdiv.bg
-X-Virus-Status: Clean
-X-Spam-Status: No, score=1.8 required=7.1 tests=ALL_TRUSTED=-1,
-        FREEMAIL_FORGED_REPLYTO=2.503,FREEMAIL_REPLYTO_END_DIGIT=0.25
-        jupiter.au-plovdiv.bg 1290; Body=3 Fuz1=5  <dns:bpghmag.com?type=MX> [10
-        mail.bpghmag.com.] autolearn=no autolearn_force=no version=3.4.1
-X-Spam-Level: *
-X-Spam-Checker-Version: SpamAssassin 3.4.1 (2015-04-28) on
-        jupiter.au-plovdiv.bg
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Em Wed, 26 Aug 2020 06:47:33 -0600
+Jonathan Corbet <corbet@lwn.net> escreveu:
 
+> On Wed, 26 Aug 2020 09:28:24 +0200
+> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+> 
+> > SPDX v3.10 gained support for GFDL-1.2 with no invariant sections:
+> > 
+> > 	https://spdx.org/licenses/GFDL-1.2-invariants-only.html
+> > 
+> > Let's use it, instead of keeping a license text for this file.
+> > 
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> > ---
+> >  Documentation/trace/ring-buffer-design.rst | 26 +---------------------
+> >  1 file changed, 1 insertion(+), 25 deletions(-)  
+> 
+> [CC expanded]
+> 
+> If we're going to do this, I think we should also add GFDL to the right
+> place in the LICENSES directory - deprecated/ or at best dual/.  But even
+> SPDX (https://spdx.org/licenses/GFDL-1.2.html) says this license is
+> deprecated.
 
--- 
-Ihre E-Mail wurde ausgewählt, um eine finanzielle Spende zu erhalten
+Right. I'll send a separate patch adding it to deprecated/
+together with GFDL-1.1-no-invariants-or-later, which is used
+at the media uAPI documentation. There, GFDL 1.1 is used both
+together with GPL (dual licensed is required for new files) and 
+alone (for the legacy document files).
+
+> 
+> Beyond that, https://spdx.org/licenses/GFDL-1.2-invariants-only.html seems
+> to disagree with your interpretation; it seems you would want 
+> GFDL-1.2-only-no-invariants ?
+
+Thanks for reviewing! Yeah, indeed I mangled this one. It
+should be, instead:
+
+	GFDL-1.2-no-invariants-only
+
+https://spdx.org/licenses/GFDL-1.2-no-invariants-only.html
+
+I'll send a second version fix it.
+
+Thanks,
+Mauro
