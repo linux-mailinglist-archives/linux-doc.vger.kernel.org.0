@@ -2,75 +2,52 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 71946252BDC
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Aug 2020 12:57:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A7B84252EA3
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Aug 2020 14:26:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728820AbgHZK5j (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Aug 2020 06:57:39 -0400
-Received: from foss.arm.com ([217.140.110.172]:44176 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728719AbgHZK5i (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 26 Aug 2020 06:57:38 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id A35C71FB;
-        Wed, 26 Aug 2020 03:57:32 -0700 (PDT)
-Received: from e113632-lin (e113632-lin.cambridge.arm.com [10.1.194.46])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id F20823F71F;
-        Wed, 26 Aug 2020 03:57:31 -0700 (PDT)
-References: <20200826104720.530040-1-mchehab+huawei@kernel.org>
-User-agent: mu4e 0.9.17; emacs 26.3
-From:   Valentin Schneider <valentin.schneider@arm.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH] docs: scheduler: fix the directory name on two files
-In-reply-to: <20200826104720.530040-1-mchehab+huawei@kernel.org>
-Date:   Wed, 26 Aug 2020 11:57:24 +0100
-Message-ID: <jhj8se1ektn.mognet@arm.com>
+        id S1729296AbgHZM0I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Aug 2020 08:26:08 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39322 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729263AbgHZM0H (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 26 Aug 2020 08:26:07 -0400
+X-Greylist: delayed 173 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Wed, 26 Aug 2020 05:26:06 PDT
+Received: from jupiter.au-plovdiv.bg (jupiter.au-plovdiv.bg [IPv6:2001:4b58:37:900::10])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CDD1BC061574
+        for <linux-doc@vger.kernel.org>; Wed, 26 Aug 2020 05:26:05 -0700 (PDT)
+Received: from mail.au-plovdiv.bg (localhost [127.0.0.1])
+        by jupiter.au-plovdiv.bg (8.15.2/8.15.2) with ESMTP id 07QCCB48092654;
+        Wed, 26 Aug 2020 15:12:16 +0300 (EEST)
+        (envelope-from sarewov460@bpghmag.com)
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+Date:   Wed, 26 Aug 2020 05:12:11 -0700
+From:   Azim Premji <sarewov460@bpghmag.com>
+To:     undisclosed-recipients:;
+Subject: Re: Spende
+Organization: Wirpo
+Reply-To: nobbleme15@gmail.com
+Mail-Reply-To: nobbleme15@gmail.com
+Message-ID: <2b7a549e59b1092e34b8e0b443a3d914@bpghmag.com>
+X-Sender: sarewov460@bpghmag.com
+User-Agent: Roundcube Webmail/1.2.3
+X-Virus-Scanned: clamav-milter 0.99.2 at jupiter.au-plovdiv.bg
+X-Virus-Status: Clean
+X-Spam-Status: No, score=1.8 required=7.1 tests=ALL_TRUSTED=-1,
+        FREEMAIL_FORGED_REPLYTO=2.503,FREEMAIL_REPLYTO_END_DIGIT=0.25
+        jupiter.au-plovdiv.bg 1290; Body=2 Fuz1=4  <dns:bpghmag.com?type=MX> [10
+        mail.bpghmag.com.] autolearn=no autolearn_force=no version=3.4.1
+X-Spam-Level: *
+X-Spam-Checker-Version: SpamAssassin 3.4.1 (2015-04-28) on
+        jupiter.au-plovdiv.bg
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
 
-On 26/08/20 11:47, Mauro Carvalho Chehab wrote:
-> The name of the directory where the schedule docs are
-> stored are wrong on those files.
->
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Reviewed-by: Valentin Schneider <valentin.schneider@arm.com>
-
-> ---
->  Documentation/scheduler/sched-capacity.rst | 2 +-
->  Documentation/scheduler/sched-energy.rst   | 2 +-
->  2 files changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/Documentation/scheduler/sched-capacity.rst b/Documentation/scheduler/sched-capacity.rst
-> index 00bf0d011e2a..9b7cbe43b2d1 100644
-> --- a/Documentation/scheduler/sched-capacity.rst
-> +++ b/Documentation/scheduler/sched-capacity.rst
-> @@ -365,7 +365,7 @@ giving it a high uclamp.min value.
->  .. note::
->
->    Wakeup CPU selection in CFS can be eclipsed by Energy Aware Scheduling
-> -  (EAS), which is described in Documentation/scheduling/sched-energy.rst.
-> +  (EAS), which is described in Documentation/scheduler/sched-energy.rst.
->
->  5.1.3 Load balancing
->  ~~~~~~~~~~~~~~~~~~~~
-> diff --git a/Documentation/scheduler/sched-energy.rst b/Documentation/scheduler/sched-energy.rst
-> index 78f850778982..001e09c95e1d 100644
-> --- a/Documentation/scheduler/sched-energy.rst
-> +++ b/Documentation/scheduler/sched-energy.rst
-> @@ -331,7 +331,7 @@ asymmetric CPU topologies for now. This requirement is checked at run-time by
->  looking for the presence of the SD_ASYM_CPUCAPACITY flag when the scheduling
->  domains are built.
->
-> -See Documentation/sched/sched-capacity.rst for requirements to be met for this
-> +See Documentation/scheduler/sched-capacity.rst for requirements to be met for this
->  flag to be set in the sched_domain hierarchy.
->
->  Please note that EAS is not fundamentally incompatible with SMP, but no
+-- 
+Ihre E-Mail wurde ausgewählt, um eine finanzielle Spende zu erhalten
