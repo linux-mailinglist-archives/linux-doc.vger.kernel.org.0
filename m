@@ -2,39 +2,37 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2C96A252A0F
-	for <lists+linux-doc@lfdr.de>; Wed, 26 Aug 2020 11:32:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 71240252B8E
+	for <lists+linux-doc@lfdr.de>; Wed, 26 Aug 2020 12:47:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727966AbgHZJcT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 26 Aug 2020 05:32:19 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60120 "EHLO mail.kernel.org"
+        id S1726745AbgHZKrK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 26 Aug 2020 06:47:10 -0400
+Received: from mail.kernel.org ([198.145.29.99]:34896 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727956AbgHZJcS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 26 Aug 2020 05:32:18 -0400
+        id S1726104AbgHZKrJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 26 Aug 2020 06:47:09 -0400
 Received: from mail.kernel.org (ip5f5ad5c5.dynamic.kabel-deutschland.de [95.90.213.197])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 58A6D2071E;
-        Wed, 26 Aug 2020 09:32:17 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 0260A206EB;
+        Wed, 26 Aug 2020 10:47:09 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1598434337;
-        bh=1uKAtHgq/9N9ximK/Z3MWdo14t/JYBeezQuBCqsx+Xg=;
+        s=default; t=1598438829;
+        bh=Ge8bCOe4Iv5pqs/jRkc5OuqiE2EUk7j6IN03gI+k+5o=;
         h=From:To:Cc:Subject:Date:From;
-        b=zeaFssWIXmjAn2szjpkPkY3GWdKnO7C9aPjh4eih7wLsYCQ0ug4Llt63UuK1BPdKh
-         MMy41Ikb2PKjN2PQa2p2XGS+uh8yVLv8YkcLc/oN8qrmraK+FyucdLKyKa0xmWmyLO
-         L58xJ3ZLGoSPjQGKepgSL5lfYIUXHmKd61eO5mKE=
+        b=Mj1zfS6GfOwr2mKpnxfNvtSARXgbY9Yp3zSusU5prRwb8DQhVl7wv5GTGFF94sDbd
+         BWOI+4SXMWZyfUOo+3xeds1GT+/64sSQPo06opGWWbcN+pxXxyne6UDXGQBd9JJwcF
+         8x1PhLw5TQO+u+zDlDIPxK0/8iI52VBvcRVgbJRI=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kArmx-002BZN-6P; Wed, 26 Aug 2020 11:32:15 +0200
+        id 1kAsxP-002DVF-2m; Wed, 26 Aug 2020 12:47:07 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        devel@driverdev.osuosl.org
-Subject: [PATCH RFC] staging: hikey9xx: update references inside the yaml files
-Date:   Wed, 26 Aug 2020 11:32:12 +0200
-Message-Id: <809bce085b0a9a9ede74d619d160e1e04723709d.1598434228.git.mchehab+huawei@kernel.org>
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH] .gitignore: docs: ignore sphinx_*/ directories
+Date:   Wed, 26 Aug 2020 12:47:05 +0200
+Message-Id: <20200826104705.528522-1-mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -43,61 +41,34 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The references inside those files were not assuming that
-they would end at the staging tree.
+The default way of building documentation is to use
+Sphinx toolchain installed via pip, inside the
+Kernel tree main directory. That's what's recommended by:
+
+	scripts/sphinx-pre-install
+
+As it usually provides a better version of this package
+than the one installed, specially on LTS distros.
+
+So, add the directories created by running the commands
+suggested by the script.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
+ .gitignore | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Greg,
-
-I noticed this when running ./scripts/documentation-file-ref-check.
-
-Not sure if it is worth applying this patch, as this should be
-reverted when moving those files out of staging. 
-
-That's why I'm sending it as RFC.
-
- drivers/staging/hikey9xx/hisilicon,hi6421-spmi-pmic.yaml     | 2 +-
- drivers/staging/hikey9xx/hisilicon,hisi-spmi-controller.yaml | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/drivers/staging/hikey9xx/hisilicon,hi6421-spmi-pmic.yaml b/drivers/staging/hikey9xx/hisilicon,hi6421-spmi-pmic.yaml
-index c76093f320f1..80e74c261e05 100644
---- a/drivers/staging/hikey9xx/hisilicon,hi6421-spmi-pmic.yaml
-+++ b/drivers/staging/hikey9xx/hisilicon,hi6421-spmi-pmic.yaml
-@@ -17,7 +17,7 @@ description: |
-   node.
+diff --git a/.gitignore b/.gitignore
+index 162bd2b67bdf..d01cda8e1177 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -152,3 +152,6 @@ x509.genkey
  
-   The SPMI controller part is provided by
--  Documentation/devicetree/bindings/spmi/hisilicon,hisi-spmi-controller.yaml.
-+  drivers/staging/hikey9xx/hisilicon,hisi-spmi-controller.yaml.
- 
- properties:
-   $nodename:
-diff --git a/drivers/staging/hikey9xx/hisilicon,hisi-spmi-controller.yaml b/drivers/staging/hikey9xx/hisilicon,hisi-spmi-controller.yaml
-index b1cfa9c3aca6..f2a56fa4e78e 100644
---- a/drivers/staging/hikey9xx/hisilicon,hisi-spmi-controller.yaml
-+++ b/drivers/staging/hikey9xx/hisilicon,hisi-spmi-controller.yaml
-@@ -14,7 +14,7 @@ description: |
-   It is a MIPI System Power Management (SPMI) controller.
- 
-   The PMIC part is provided by
--  Documentation/devicetree/bindings/mfd/hisilicon,hi6421-spmi-pmic.yaml.
-+  drivers/staging/hikey9xx/hisilicon,hi6421-spmi-pmic.yaml.
- 
- properties:
-   $nodename:
-@@ -41,7 +41,7 @@ patternProperties:
-       PMIC properties, which are specific to the used SPMI PMIC device(s).
-       When used in combination with HiSilicon 6421v600, the properties
-       are documented at
--      Documentation/devicetree/bindings/mfd/hisilicon,hi6421-spmi-pmic.yaml.
-+      drivers/staging/hikey9xx/hisilicon,hi6421-spmi-pmic.yaml.
- 
- examples:
-   - |
+ # Clang's compilation database file
+ /compile_commands.json
++
++# Documentation toolchain
++sphinx_*/
 -- 
 2.26.2
-
 
