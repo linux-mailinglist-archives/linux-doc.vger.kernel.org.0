@@ -2,154 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 52CFD253EF1
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Aug 2020 09:22:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3F7E8253F7B
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Aug 2020 09:47:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728107AbgH0HV4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Aug 2020 03:21:56 -0400
-Received: from mail.kernel.org ([198.145.29.99]:55640 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728098AbgH0HVx (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 27 Aug 2020 03:21:53 -0400
-Received: from mail.kernel.org (ip5f5ad5a8.dynamic.kabel-deutschland.de [95.90.213.168])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 579AC22CAF;
-        Thu, 27 Aug 2020 07:21:52 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1598512912;
-        bh=ijiJsy842E2W8CaSP8r0issb9p3P15IoOFSdRUCujvE=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=JkbugvyfRdY/EeyLM/himOSRzrflsJYqgXqfJ5m1E6fkpE8h5tY3zGHG6djLnXa5T
-         VyCrjQQbULeemn087fBIsdizF3nYsueyYkWXlZhsgbG+1MA9PNOCt3ELVXBo8f17tR
-         mhXaxqIxqyBxBz7sMWWgHDXqyO1rKXkjsnpLkkKw=
-Received: from mchehab by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1kBCEI-002s5L-DK; Thu, 27 Aug 2020 09:21:50 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Hans Verkuil <hans.verkuil@cisco.com>,
-        Sakari Ailus <sakari.ailus@linux.intel.com>,
-        linux-media@vger.kernel.org
-Subject: [PATCH v10 4/4] media: open.rst: document mc-centric and video-node-centric
-Date:   Thu, 27 Aug 2020 09:21:48 +0200
-Message-Id: <ce0a0412fb21ba3256c42aa7aeceb7b33bd358ab.1598512802.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <cover.1598512802.git.mchehab+huawei@kernel.org>
-References: <cover.1598512802.git.mchehab+huawei@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+        id S1728312AbgH0Hq7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Aug 2020 03:46:59 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51350 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726851AbgH0Hq7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Aug 2020 03:46:59 -0400
+Received: from ozlabs.org (bilbo.ozlabs.org [IPv6:2401:3900:2:1::2])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F2E07C06121A;
+        Thu, 27 Aug 2020 00:46:58 -0700 (PDT)
+Received: by ozlabs.org (Postfix, from userid 1034)
+        id 4BcZYr2ZqWz9sTK; Thu, 27 Aug 2020 17:46:55 +1000 (AEST)
+From:   Michael Ellerman <patch-notifications@ellerman.id.au>
+To:     Michael Ellerman <mpe@ellerman.id.au>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        linuxppc-dev@lists.ozlabs.org
+In-Reply-To: <e06de4d3-a36f-2745-9775-467e125436cc@infradead.org>
+References: <e06de4d3-a36f-2745-9775-467e125436cc@infradead.org>
+Subject: Re: [PATCH] Documentation/powerpc: fix malformed table in syscall64-abi
+Message-Id: <159851436088.52163.10131581013009684108.b4-ty@ellerman.id.au>
+Date:   Thu, 27 Aug 2020 17:46:55 +1000 (AEST)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When we added support for omap3, back in 2010, we added a new
-type of V4L2 devices that aren't fully controlled via the V4L2
-device node.
+On Sun, 23 Aug 2020 17:31:16 -0700, Randy Dunlap wrote:
+> Fix malformed table warning in powerpc/syscall64-abi.rst by making
+> two tables and moving the headings.
+> 
+> Documentation/powerpc/syscall64-abi.rst:53: WARNING: Malformed table.
+> Text in column margin in table line 2.
+> 
+> =========== ============= ========================================
+> --- For the sc instruction, differences with the ELF ABI ---
+> r0          Volatile      (System call number.)
+> r3          Volatile      (Parameter 1, and return value.)
+> r4-r8       Volatile      (Parameters 2-6.)
+> cr0         Volatile      (cr0.SO is the return error condition.)
+> cr1, cr5-7  Nonvolatile
+> lr          Nonvolatile
+> 
+> [...]
 
-Yet, we have never clearly documented in the V4L2 specification
-the differences between the two types.
+Applied to powerpc/fixes.
 
-Let's document them based on the the current implementation.
+[1/1] Documentation/powerpc: fix malformed table in syscall64-abi
+      https://git.kernel.org/powerpc/c/aa661d7fab436d8a782618b3138da1a84ca28a31
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- .../userspace-api/media/v4l/open.rst          | 58 +++++++++++++++++--
- 1 file changed, 52 insertions(+), 6 deletions(-)
-
-diff --git a/Documentation/userspace-api/media/v4l/open.rst b/Documentation/userspace-api/media/v4l/open.rst
-index b9367e02b884..e9cfbe954918 100644
---- a/Documentation/userspace-api/media/v4l/open.rst
-+++ b/Documentation/userspace-api/media/v4l/open.rst
-@@ -13,6 +13,52 @@
- Opening and Closing Devices
- ***************************
- 
-+.. _v4l2_hardware_control:
-+
-+Controlling a hardware peripheral via V4L2
-+==========================================
-+
-+A V4L2 hardware peripheral is usually complex: support for it is
-+implemented via a bridge driver and often by several additional drivers.
-+The bridge driver exposes one or more V4L2 device nodes
-+(see :ref:`v4l2_device_naming`).
-+
-+There are other drivers providing support for other components of
-+the hardware, which may also expose device nodes, called V4L2 sub-devices.
-+
-+When such V4L2 sub-devices are exposed, they allow controlling those
-+other hardware components - usually connected via a serial bus (like
-+I²C, SMBus or SPI). Depending on the bridge driver, those sub-devices
-+can be controlled indirectly via the bridge driver or explicitly via
-+the :ref:`Media Controller <media_controller>` and via the
-+:ref:`V4L2 sub-devices <subdev>`.
-+
-+The devices that require the use of the
-+:ref:`Media Controller <media_controller>` are called **MC-centric**
-+devices. The devices that are fully controlled via V4L2 device nodes
-+are called **video-node-centric**.
-+
-+Userspace can check if a V4L2 hardware peripheral is MC-centric by
-+calling :ref:`VIDIOC_QUERYCAP` and checking the
-+:ref:`device_caps field <device-capabilities>`.
-+
-+If the device returns ``V4L2_CAP_IO_MC`` flag at ``device_caps``,
-+then it is MC-centric, otherwise, it is video-node-centric.
-+
-+It is required for MC-centric hardware to identify the V4L2
-+sub-devices and to configure the pipelines via the
-+:ref:`media controller API <media_controller>` before using the peripheral.
-+Also, the sub-devices' configuration shall be controlled via the
-+:ref:`sub-device API <subdev>`.
-+
-+.. note::
-+
-+   A video-node-centric may still provide media-controller and
-+   sub-device interfaces as well.
-+
-+  However, in that case the media-controller and the sub-device
-+  interfaces are read-only and just provide information about the
-+  device. The actual configuration is done via the video nodes.
- 
- .. _v4l2_device_naming:
- 
-@@ -109,7 +155,7 @@ Related Devices
- Devices can support several functions. For example video capturing, VBI
- capturing and radio support.
- 
--The V4L2 API creates different nodes for each of these functions.
-+The V4L2 API creates different V4L2 device nodes for each of these functions.
- 
- The V4L2 API was designed with the idea that one device node could
- support all functions. However, in practice this never worked: this
-@@ -119,17 +165,17 @@ switching a device node between different functions only works when
- using the streaming I/O API, not with the
- :ref:`read() <func-read>`/\ :ref:`write() <func-write>` API.
- 
--Today each device node supports just one function.
-+Today each V4L2 device node supports just one function.
- 
- Besides video input or output the hardware may also support audio
- sampling or playback. If so, these functions are implemented as ALSA PCM
- devices with optional ALSA audio mixer devices.
- 
- One problem with all these devices is that the V4L2 API makes no
--provisions to find these related devices. Some really complex devices
--use the Media Controller (see :ref:`media_controller`) which can be
--used for this purpose. But most drivers do not use it, and while some
--code exists that uses sysfs to discover related devices (see
-+provisions to find these related V4L2 device nodes. Some really complex
-+hardware use the Media Controller (see :ref:`media_controller`) which can
-+be used for this purpose. But several drivers do not use it, and while some
-+code exists that uses sysfs to discover related V4L2 device nodes (see
- libmedia_dev in the
- `v4l-utils <http://git.linuxtv.org/cgit.cgi/v4l-utils.git/>`__ git
- repository), there is no library yet that can provide a single API
--- 
-2.26.2
-
+cheers
