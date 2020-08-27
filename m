@@ -2,86 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D57222545CE
-	for <lists+linux-doc@lfdr.de>; Thu, 27 Aug 2020 15:20:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E94FC2545EA
+	for <lists+linux-doc@lfdr.de>; Thu, 27 Aug 2020 15:29:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727892AbgH0NUe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 27 Aug 2020 09:20:34 -0400
-Received: from mail-ej1-f65.google.com ([209.85.218.65]:41219 "EHLO
-        mail-ej1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727926AbgH0NUV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Aug 2020 09:20:21 -0400
-Received: by mail-ej1-f65.google.com with SMTP id b17so7606537ejq.8;
-        Thu, 27 Aug 2020 06:20:19 -0700 (PDT)
+        id S1728218AbgH0N3q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 27 Aug 2020 09:29:46 -0400
+Received: from mail-wm1-f68.google.com ([209.85.128.68]:50990 "EHLO
+        mail-wm1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727056AbgH0N20 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 27 Aug 2020 09:28:26 -0400
+Received: by mail-wm1-f68.google.com with SMTP id t2so5193122wma.0;
+        Thu, 27 Aug 2020 06:28:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=1+KqXoKi8jzmcX+Sa9PiCc9RKtqp2ZYsWQ4PPSxBca0=;
-        b=TKkFSj5YDXyDVPyOwbDMHWXv6dxo4ZN5sZJu1id0iJqhZknVkgsq+oS5tHo9wJp02c
-         ksuloFF6vb4NqYWDrnnZVyKmirLaK4a3Qb5RhcNkV1/a9EmPkY8yHqOf0tYV3o/asnK7
-         x6Rs2HKhYkFZGsbvY3rwiBYJzKme7xucN2mimswuJLvEyHNdgeLnNZO6JSbLMCRnBAh8
-         WiTDF3c1V/5YsRAch0THA4VoWa5woLBWhiCqk9DJUKZr8f+nW6chntnNXB27xKUIW9QS
-         7mVb5X2ZkopFFUpd2p7URFgGhmplCL8dTW5XqXxLtB5GHzHj8glGm5d1qkbGqjQInrTJ
-         eyJA==
-X-Gm-Message-State: AOAM530Ddcr44acDj+atUuL0bRZMQBE4OisbmsH+mWUTITquF5dS+Lz3
-        qP+olvyGcskElOA7sAUpE/E=
-X-Google-Smtp-Source: ABdhPJxPyw+OJB1aU+cC1IAmQc4RN+hp++iPrN/DqEjJmUPSL4qvfu4VUa27lZCy7xAoFrk/ffMtHg==
-X-Received: by 2002:a17:906:dbd2:: with SMTP id yc18mr22000122ejb.394.1598534418938;
-        Thu, 27 Aug 2020 06:20:18 -0700 (PDT)
-Received: from kozik-lap ([194.230.155.216])
-        by smtp.googlemail.com with ESMTPSA id w23sm1520480edr.24.2020.08.27.06.20.17
-        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Thu, 27 Aug 2020 06:20:18 -0700 (PDT)
-Date:   Thu, 27 Aug 2020 15:20:16 +0200
-From:   Krzysztof Kozlowski <krzk@kernel.org>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Security Officers <security@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] MAINTAINERS: Add security docs to SECURITY CONTACT
-Message-ID: <20200827132016.GA4384@kozik-lap>
-References: <20200827131330.3732-1-krzk@kernel.org>
- <20200827131827.GA546898@kroah.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=vnE5XnOAU04RtRGwnc1i8f81QJg38PEA9j5A7dNJ4Dc=;
+        b=GkHeP2iRhPxkCVA7Fyc+uq5HUmrhCKI8wAqNcZ2gj0nw6Qw1qL53mbC1N3p8aeJBOz
+         gSBpiXSIAKyODf6QZ4K69Q5Kd37E3ocS2vKyxBJUC0Dt99qSvdUMnwz+/pXGXJYzbokm
+         M61dm6xltNhH0MsphBhqka82k0hxSh6kfcqch/4SXDDov5LY850QtslfnJDB4/SvsBl0
+         Yd0zO5TJ/8Msh3I25qtg40Pm1/JQKAF5MVBFKg/PxDXTwJ0cIJjeq+mRNYVYRzO/LzIU
+         UO8DaTwZFeLe90G3gfQvFQN8ySX4ft5SVlq2JEB1I1Dcu3zcpJRu4TDYNcgdrEDnkF3w
+         zIEw==
+X-Gm-Message-State: AOAM531qm/A0xEvBU1N19v+RSJGtt4M7Wrt90UXDmQLS9Z2h2BafycRp
+        L37kmTQMYBk7YMcEH2+AFwWnGW5bZg//cQi2EfQ=
+X-Google-Smtp-Source: ABdhPJx4dIiFkTVYZkCo8Usm4/wlasCA/mql8y1esdJoewkf9uGAcahvQ3llViFThqjXE8FVFWbuiSYQ9kYrB+/QG5k=
+X-Received: by 2002:a1c:105:: with SMTP id 5mr11756863wmb.175.1598534904287;
+ Thu, 27 Aug 2020 06:28:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20200827131827.GA546898@kroah.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+References: <20200827105319.9734-1-krzk@kernel.org>
+In-Reply-To: <20200827105319.9734-1-krzk@kernel.org>
+From:   Felipe Balbi <balbi@kernel.org>
+Date:   Thu, 27 Aug 2020 16:28:13 +0300
+Message-ID: <CAH8TKc_Wk6F1nRAJL95asjyyOW78QCjgVhC8bUAMd7WK_wzeHA@mail.gmail.com>
+Subject: Re: [PATCH 1/2] docs: process: Add cross-link to security-bugs
+To:     Krzysztof Kozlowski <krzk@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Konstantin Ryabitsev <konstantin@linuxfoundation.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Kernel development list <linux-kernel@vger.kernel.org>,
+        Marek Szyprowski <m.szyprowski@samsung.com>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Brooke Basile <brookebasile@gmail.com>,
+        Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Aug 27, 2020 at 03:18:27PM +0200, Greg Kroah-Hartman wrote:
-> On Thu, Aug 27, 2020 at 03:13:30PM +0200, Krzysztof Kozlowski wrote:
-> > When changing the documents related to kernel security workflow, notify
-> > the security mailing list as its concerned by this.
-> > 
-> > Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-> > Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
-> > ---
-> >  MAINTAINERS | 2 ++
-> >  1 file changed, 2 insertions(+)
-> > 
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index 8107b3d5d6df..a1e07d0f3205 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -15620,6 +15620,8 @@ F:	include/uapi/linux/sed*
-> >  
-> >  SECURITY CONTACT
-> >  M:	Security Officers <security@kernel.org>
-> > +F:	Documentation/admin-guide/security-bugs.rst
-> > +F:	Documentation/process/embargoed-hardware-issues.rst
-> 
-> The hardware-issues document is "owned" by a different group of
-> suckers^Wdevelopers, that is independant of security@k.o, so that file
-> shouldn't be added to them here.
+Hi,
 
-True, but isn't this broader security group involved in designing and
-discussing the HW security process?
+On Thu, Aug 27, 2020 at 1:54 PM Krzysztof Kozlowski <krzk@kernel.org> wrote:
+>
+> The submitting patches mentions criteria for a fix to be called
+> "security fix".  Add a link to document explaining the entire process
+> of handling security bugs.
+>
+> Cc: Greg KH <gregkh@linuxfoundation.org>
+> Cc: Marek Szyprowski <m.szyprowski@samsung.com>
+> Cc: Linus Torvalds <torvalds@linux-foundation.org>
+> Cc: Kees Cook <keescook@chromium.org>
+> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+> ---
+>  Documentation/process/submitting-patches.rst | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
+> index 5219bf3cddfc..d5b3c5a74d5d 100644
+> --- a/Documentation/process/submitting-patches.rst
+> +++ b/Documentation/process/submitting-patches.rst
+> @@ -299,7 +299,8 @@ sending him e-mail.
+>  If you have a patch that fixes an exploitable security bug, send that patch
+>  to security@kernel.org.  For severe bugs, a short embargo may be considered
+>  to allow distributors to get the patch out to users; in such cases,
+> -obviously, the patch should not be sent to any public lists.
+> +obviously, the patch should not be sent to any public lists. See also
+> +:ref:`Documentation/admin-guide/security-bugs.rst <security-bugs>`.
+>
+>  Patches that fix a severe bug in a released kernel should be directed
+>  toward the stable maintainers by putting a line like this::
+> --
+> 2.17.1
 
-Best regards,
-Krzysztof
+Reviewed-by: Felipe Balbi <balbi@kernel.org>
 
+-- 
+balbi
