@@ -2,57 +2,44 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 279C3255A85
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Aug 2020 14:48:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F3719255A2E
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Aug 2020 14:31:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729172AbgH1MsD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Aug 2020 08:48:03 -0400
-Received: from contraloriadf.gob.mx ([187.141.35.90]:25192 "EHLO
-        contraloriadf.gob.mx" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729343AbgH1MrU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Aug 2020 08:47:20 -0400
-X-Greylist: delayed 865 seconds by postgrey-1.27 at vger.kernel.org; Fri, 28 Aug 2020 08:47:17 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by contraloriadf.gob.mx (Postfix) with ESMTP id 20EA41410C8;
-        Fri, 28 Aug 2020 07:21:54 -0500 (CDT)
-Received: from contraloriadf.gob.mx ([127.0.0.1])
-        by localhost (contraloriadf.gob.mx [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id YQqycd-1SFVE; Fri, 28 Aug 2020 07:21:53 -0500 (CDT)
-Received: from localhost (localhost [127.0.0.1])
-        by contraloriadf.gob.mx (Postfix) with ESMTP id 20EEF1410B6;
-        Fri, 28 Aug 2020 07:21:47 -0500 (CDT)
-DKIM-Filter: OpenDKIM Filter v2.8.4 contraloriadf.gob.mx 20EEF1410B6
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=contraloriadf.gob.mx; s=D26545A4-B627-11E5-8BF2-997FD958E9DA;
-        t=1598617307; bh=KcANx4A7q+g5zHDmVJ5WbrZVEP0qkEDoq2vv4O4kDm0=;
-        h=Date:From:Reply-To:Message-ID:Subject:MIME-Version:Content-Type:
-         Content-Transfer-Encoding;
-        b=p8lNnQY/R5Yy8c1tc7rLg1QrWGlpaD07uYlzg8DqCb/lYxzdjQBqS4uDbU9OJpJ0U
-         pZ1c9+cEDcpd3UOSoSIQ5cj3dbpwyX1VimIqh3/xco0f68qkdZxb0mYks1MinDgr/5
-         xcwRQE9AV7IGLJt0Rh01DmBuuCNZfm7SFNZzKqdI=
-X-Virus-Scanned: amavisd-new at contraloriadf.gob.mx
-Received: from contraloriadf.gob.mx ([127.0.0.1])
-        by localhost (contraloriadf.gob.mx [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id VGb8cBBkipor; Fri, 28 Aug 2020 07:21:47 -0500 (CDT)
-Received: from contraloriadf.gob.mx (contraloriadf [10.250.102.152])
-        by contraloriadf.gob.mx (Postfix) with ESMTP id F190314103A;
-        Fri, 28 Aug 2020 07:21:39 -0500 (CDT)
-Date:   Fri, 28 Aug 2020 07:21:33 -0500 (CDT)
-From:   Alfredo Aguilar Feregrino <aaguilarf@contraloriadf.gob.mx>
-Reply-To: Azim Premji <nobbleme15@gmail.com>
-Message-ID: <953294163.140006.1598617293838.JavaMail.zimbra@contraloriadf.gob.mx>
-Subject: Spenden
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+        id S1729374AbgH1Mbv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Aug 2020 08:31:51 -0400
+Received: from mail.cmpwn.com ([45.56.77.53]:49410 "EHLO mail.cmpwn.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729373AbgH1Mb1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 28 Aug 2020 08:31:27 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=cmpwn.com; s=cmpwn;
+        t=1598617885; bh=SpsMbmscgm8+Hox2YZmY1fIw+La4ndA1aSnFTjNpENo=;
+        h=Cc:Subject:From:To:Date:In-Reply-To;
+        b=Akuaq03TCfKd4sKJTBRLzIkN/0+P42fVfb5qaWtJjsClKbkyMEVE9o/0q/LiZJSqT
+         gOjpzXzKgvtCp/2H3tG8yYd8dH2Mene82Oi4ocAEU59gSgx7JQOShDl2Y49+xlY4CS
+         Q5uJnAdRFDcfbzJw6vIseMgx+j3HAkBB7VimUsiA=
+Mime-Version: 1.0
 Content-Transfer-Encoding: quoted-printable
-X-Originating-IP: [129.205.113.206]
-X-Mailer: Zimbra 8.0.5_GA_5839 (zclient/8.0.5_GA_5839)
-Thread-Topic: Spenden
-Thread-Index: ecW3DIWipH+ht3DLVmyJr5kju1OQgg==
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: text/plain; charset=UTF-8
+Cc:     "Drew DeVault" <sir@cmpwn.com>
+Subject: Re: [PATCH] submitting-patches.rst: streamline for git usage
+From:   "Drew DeVault" <sir@cmpwn.com>
+To:     "Jani Nikula" <jani.nikula@linux.intel.com>,
+        <linux-doc@vger.kernel.org>, "Jonathan Corbet" <corbet@lwn.net>
+Date:   Fri, 28 Aug 2020 08:31:00 -0400
+Message-Id: <C58MQIQSGGUI.1I8IVCR8DPW0C@homura>
+In-Reply-To: <87y2lz3xwe.fsf@intel.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Ihre E-Mail wurde ausgew=C3=A4hlt, um eine finanzielle Spende
+On Fri Aug 28, 2020 at 5:47 AM EDT, Jani Nikula wrote:
+> > -2) Describe your changes
+> > +1) Describe your changes
+> >  ------------------------
+>
+> I suggest just tossing the numbering altoghether while at it.
+
+Because there are so many headings, I think the numbering is still
+useful for being able to easily refer to a specific step when asking
+questions.
