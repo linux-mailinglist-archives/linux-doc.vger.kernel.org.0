@@ -2,107 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AEF62255B84
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Aug 2020 15:47:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F1B6B255C1D
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Aug 2020 16:16:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726654AbgH1NrL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Aug 2020 09:47:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49126 "EHLO
+        id S1726828AbgH1OOx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Aug 2020 10:14:53 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53436 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726563AbgH1Nqm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Aug 2020 09:46:42 -0400
-Received: from mail-pf1-x444.google.com (mail-pf1-x444.google.com [IPv6:2607:f8b0:4864:20::444])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3237AC061232
-        for <linux-doc@vger.kernel.org>; Fri, 28 Aug 2020 06:40:22 -0700 (PDT)
-Received: by mail-pf1-x444.google.com with SMTP id c142so610921pfb.7
-        for <linux-doc@vger.kernel.org>; Fri, 28 Aug 2020 06:40:22 -0700 (PDT)
+        with ESMTP id S1726400AbgH1OOU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 28 Aug 2020 10:14:20 -0400
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com [IPv6:2a00:1450:4864:20::444])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C349EC061264;
+        Fri, 28 Aug 2020 07:14:15 -0700 (PDT)
+Received: by mail-wr1-x444.google.com with SMTP id k15so1439191wrn.10;
+        Fri, 28 Aug 2020 07:14:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=FG3XCoXB/aty+ooJaX6AfmzW3u7+uhF6LOoAHszXFMo=;
-        b=klaFOwH0ElHAR7McpnZD67Y7Y2E4ysRVd65Eh0X8Xr9Z5ZyWbIBjWtyCrwOB4Od/DA
-         XRJMjfQSPlBZrjbgkR+aWt+dMTPdm3RfYYKFYmMffLNpvXiND2Idjh7oautoaA2MYL+q
-         /aMHMhbMTXmSQQM3HOmFP7V4IB7vdF95uncZUymzdTq0dWQt129AmStxuUL6cEE+bT4X
-         ToHwNGA6N4Gj9pNw6HzkGUknEsJK+o2/5MFoKW275e2o2HRQHyMHs2gDiU2W4mbgmwCP
-         XasIdGHL8WGH0oaEbsJ7Xh/05/Dwf1tS5KwbhE/Qhy1BOMowRz0YOo1D2uxsKLKSaOvR
-         A8ZQ==
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Zlt5UNWrrUfldyXAKmHrnUn5NEQ0elR0Vt5Pg2JGln8=;
+        b=kzMp7c0AdIAC5mQQZmdYUf6jblzE71CtRJtKTuuwgWIb97aI25qdH9h6CFAj2ozClI
+         kjKQ6UKCCcb8VPdBlIBMY4/ApJyKLLvWA0NJxy9gezTKJbO2LmDk5KeUyewNj/LJRhNK
+         t0UJSE7FHDYdEl3yfav4iDej5uzWCL+sgLYXkpMHzf1djcwbwUWRxNxg0y7vTf1X799O
+         GniYDvB0XjXTT8+FcL+qdX1fXmAGpXUU7uGyqhtdCOaEP0KFCukHlLRXU/VfbednUJJm
+         6Ys3pFJXgkq9s8R+7YlfVjIoI1FY3XKcI+jkRrQJzNSm6WItLcCORz7p46G9mqmznhc6
+         lw5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=FG3XCoXB/aty+ooJaX6AfmzW3u7+uhF6LOoAHszXFMo=;
-        b=Zu9IWKnaCd8FWg/cs3MCTGVQs7BIalzF213JcJk0UYBuVSZHgnfXqH0N2aobY23hsd
-         csVMWMiYbVqEUieF8HaDa3D82cUUneY5oEcdl7SoHDhuJNXTVG2q7+iOvZmLXPIecJWE
-         O4F39bBgBVzebzsa0pkUg4YD3YA4cbGr3Kew2hU2iv5u4bNSGIVUAxNLgg/GtU9k6WzI
-         JuutnHRlJg5+gMKTNRrzKTlhmkLxMSr1NV1IikSIMb9kA1nKrkhhNTvDM5aJAjLxdMSy
-         kVV16lDqQHrASY1F8glUk3Zw9wCEMPwCXUhWhKpD7Sk/cPDNzoPLzAYE7h3LKsLnnh1U
-         cHJg==
-X-Gm-Message-State: AOAM530pISadTUuzwJH3hfIjkLd91spqcsVUsefO7L596RXbVLGQB7Ai
-        Oc19k7cubTTrjLgZQfxM+Q==
-X-Google-Smtp-Source: ABdhPJwM7vdnpfEicNNMs9GsRsbhv34l6T2Wg0n67dn0Hmq86jCu4vPZ+wdNmQARVjSSpiwV50Risw==
-X-Received: by 2002:a63:b10a:: with SMTP id r10mr1314017pgf.431.1598622021821;
-        Fri, 28 Aug 2020 06:40:21 -0700 (PDT)
-Received: from mylaptop.redhat.com ([209.132.188.80])
-        by smtp.gmail.com with ESMTPSA id k1sm1806559pfp.86.2020.08.28.06.40.17
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 28 Aug 2020 06:40:21 -0700 (PDT)
-From:   Pingfan Liu <kernelfans@gmail.com>
-To:     linux-arm-kernel@lists.infradead.org
-Cc:     Pingfan Liu <kernelfans@gmail.com>,
-        James Morse <james.morse@arm.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Geoff Levand <geoff@infradead.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Julien Thierry <julien.thierry.kdev@gmail.com>,
-        Suzuki K Poulose <suzuki.poulose@arm.com>,
-        linux-doc@vger.kernel.org, kvmarm@lists.cs.columbia.edu
-Subject: [PATCHv2 2/2] Documentation/kvm/arm: improve description of HVC_SOFT_RESTART
-Date:   Fri, 28 Aug 2020 21:39:58 +0800
-Message-Id: <1598621998-20563-2-git-send-email-kernelfans@gmail.com>
-X-Mailer: git-send-email 2.7.5
-In-Reply-To: <1598621998-20563-1-git-send-email-kernelfans@gmail.com>
-References: <1598621998-20563-1-git-send-email-kernelfans@gmail.com>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Zlt5UNWrrUfldyXAKmHrnUn5NEQ0elR0Vt5Pg2JGln8=;
+        b=EyqECl71bDPoWOoMY4SnddUSHAfh258qSU1Sbf2oJhsBuSLvl7Ze8SornnstLoSZTH
+         M0w2z+fJoIsmYwhWpIQgFPIhblqGQzz+pE4yc/tnpv6ITpmvylPwzEYV4CY21SlhYT9E
+         ruOTdx9bjMVMfHkOYIf6AIt4nLAkjgC0Hlk3WfsAQ9QYfqPlAk3/TIe5fkVBnIPCSAgE
+         hrSRw9q3ONELf/IXii0z/KO1pAtCnLrICZTY/8FlZL7JaqPXUcyJGsoPFuG0ZfS/Btkz
+         i4e3H1fnACSKtWYRYPjLL734yGMpHV5lQPuy+Y5MfQ+6wgR2bPTWD7qke6rq3LPhw0Hm
+         pGUg==
+X-Gm-Message-State: AOAM533AYKuvPTl3NlIYfN6RfthIznagvb0UGsCuJfGCQ6zrfF59zJmH
+        WFoct0efkPNutA0L8J//Pzg=
+X-Google-Smtp-Source: ABdhPJxZMGdWa6syImFZ1Rpg1i8h5r50MIv9UEemFtniL2GpHk/rKW5vb9dDjGmujLjKTbhrW1KHxg==
+X-Received: by 2002:a5d:544a:: with SMTP id w10mr1728874wrv.317.1598624054401;
+        Fri, 28 Aug 2020 07:14:14 -0700 (PDT)
+Received: from alinde.c.googlers.com.com (88.140.78.34.bc.googleusercontent.com. [34.78.140.88])
+        by smtp.gmail.com with ESMTPSA id t4sm2248235wre.30.2020.08.28.07.14.12
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 28 Aug 2020 07:14:13 -0700 (PDT)
+From:   albert.linde@gmail.com
+X-Google-Original-From: alinde@google.com
+To:     akpm@linux-foundation.org, bp@alien8.de, mingo@redhat.com,
+        corbet@lwn.net, tglx@linutronix.de, arnd@arndb.de
+Cc:     akinobu.mita@gmail.com, hpa@zytor.com, viro@zeniv.linux.org.uk,
+        glider@google.com, andreyknvl@google.com, dvyukov@google.com,
+        elver@google.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
+        x86@kernel.org, albert.linde@gmail.com,
+        Albert van der Linde <alinde@google.com>
+Subject: [PATCH v2 0/3] add fault injection to user memory access
+Date:   Fri, 28 Aug 2020 14:13:41 +0000
+Message-Id: <20200828141344.2277088-1-alinde@google.com>
+X-Mailer: git-send-email 2.28.0.402.g5ffc5be6b7-goog
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Besides disabling MMU, HVC_SOFT_RESTART also clears I+D bits. These behaviors
-are what kexec-reboot expects, so describe it more precisely.
+From: Albert van der Linde <alinde@google.com>
 
-Signed-off-by: Pingfan Liu <kernelfans@gmail.com>
-Cc: James Morse <james.morse@arm.com>
-Cc: Marc Zyngier <maz@kernel.org>
-Cc: Geoff Levand <geoff@infradead.org>
-Cc: Catalin Marinas <catalin.marinas@arm.com>
-Cc: Will Deacon <will@kernel.org>
-Cc: Julien Thierry <julien.thierry.kdev@gmail.com>
-Cc: Suzuki K Poulose <suzuki.poulose@arm.com>
-Cc: linux-doc@vger.kernel.org
-Cc: kvmarm@lists.cs.columbia.edu
-To: linux-arm-kernel@lists.infradead.org
----
- Documentation/virt/kvm/arm/hyp-abi.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+The goal of this series is to improve testing of fault-tolerance in
+usages of user memory access functions, by adding support for fault
+injection.
 
-diff --git a/Documentation/virt/kvm/arm/hyp-abi.rst b/Documentation/virt/kvm/arm/hyp-abi.rst
-index d9eba93..83cadd8 100644
---- a/Documentation/virt/kvm/arm/hyp-abi.rst
-+++ b/Documentation/virt/kvm/arm/hyp-abi.rst
-@@ -54,9 +54,9 @@ these functions (see arch/arm{,64}/include/asm/virt.h):
-     x3 = x1's value when entering the next payload (arm64)
-     x4 = x2's value when entering the next payload (arm64)
- 
--  Mask all exceptions, disable the MMU, move the arguments into place
--  (arm64 only), and jump to the restart address while at HYP/EL2. This
--  hypercall is not expected to return to its caller.
-+  Mask all exceptions, disable the MMU, clear I+D bits, move the arguments
-+  into place (arm64 only), and jump to the restart address while at HYP/EL2.
-+  This hypercall is not expected to return to its caller.
- 
- Any other value of r0/x0 triggers a hypervisor-specific handling,
- which is not documented here.
+The first patch adds failure injection capability for usercopy
+functions. The second changes usercopy functions to use this new failure
+capability (copy_from_user, ...). The third patch adds
+get/put/clear_user failures to x86.
+
+Changes in v2:
+ - simplified overall failure capability by either failing or not, without
+   having functions fail partially by copying/clearing only some bytes
+
+Albert van der Linde (3):
+  lib, include/linux: add usercopy failure capability
+  lib, uaccess: add failure injection to usercopy functions
+  x86: add failure injection to get/put/clear_user
+
+ .../admin-guide/kernel-parameters.txt         |  1 +
+ .../fault-injection/fault-injection.rst       |  7 +-
+ arch/x86/include/asm/uaccess.h                | 68 +++++++++++--------
+ arch/x86/lib/usercopy_64.c                    |  3 +
+ include/linux/fault-inject-usercopy.h         | 22 ++++++
+ include/linux/uaccess.h                       | 11 ++-
+ lib/Kconfig.debug                             |  7 ++
+ lib/Makefile                                  |  1 +
+ lib/fault-inject-usercopy.c                   | 39 +++++++++++
+ lib/iov_iter.c                                |  5 ++
+ lib/strncpy_from_user.c                       |  3 +
+ lib/usercopy.c                                |  5 +-
+ 12 files changed, 140 insertions(+), 32 deletions(-)
+ create mode 100644 include/linux/fault-inject-usercopy.h
+ create mode 100644 lib/fault-inject-usercopy.c
+
 -- 
-2.7.5
+2.28.0.402.g5ffc5be6b7-goog
 
