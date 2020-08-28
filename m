@@ -2,155 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4705625575B
-	for <lists+linux-doc@lfdr.de>; Fri, 28 Aug 2020 11:17:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A965C2557F5
+	for <lists+linux-doc@lfdr.de>; Fri, 28 Aug 2020 11:47:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728444AbgH1JRI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 28 Aug 2020 05:17:08 -0400
-Received: from mail.kernel.org ([198.145.29.99]:48546 "EHLO mail.kernel.org"
+        id S1728362AbgH1JrX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 28 Aug 2020 05:47:23 -0400
+Received: from mga02.intel.com ([134.134.136.20]:38834 "EHLO mga02.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728548AbgH1JQy (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 28 Aug 2020 05:16:54 -0400
-Received: from mail.kernel.org (unknown [95.90.213.181])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 3D68520C56;
-        Fri, 28 Aug 2020 09:16:53 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1598606213;
-        bh=qf3s74BFMfzPaXEhkWfFmaoIcsmrt/xu5Ve7JjjrqSI=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=o/uh8mxaO6aCUHIiw2fwZiZV736BMezCvVZ65ayjQd+uNMxyLAfU1Wnnke7NimkcA
-         JQwQYJ0gDv34xBMFZlJvL3TtZzLXKFS3l0DYmV2BPolWYsMIfobj6knnDaF602uTJS
-         eMwJpIuapVR7lg5zsX0f3IVpajA3zGxemaSiEKvM=
-Received: from mchehab by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1kBaV9-0047AH-Ap; Fri, 28 Aug 2020 11:16:51 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Hans Verkuil <hans.verkuil@cisco.com>,
-        Sakari Ailus <sakari.ailus@linux.intel.com>,
-        linux-media@vger.kernel.org
-Subject: [PATCH v11 4/4] media: open.rst: document mc-centric and video-node-centric
-Date:   Fri, 28 Aug 2020 11:16:50 +0200
-Message-Id: <99929cf3d951ff9dbe0e70e9380dfb2c13408869.1598606093.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <cover.1598606093.git.mchehab+huawei@kernel.org>
-References: <cover.1598606093.git.mchehab+huawei@kernel.org>
+        id S1728016AbgH1JrU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 28 Aug 2020 05:47:20 -0400
+IronPort-SDR: +0zdhMDHpA44RekPHMUnEGkCiZBPnKVLnQcPmZMmBrkXhFCiYEZXPkSdO1vv69WLvrLawkOkCJ
+ M2vK2CM1La6A==
+X-IronPort-AV: E=McAfee;i="6000,8403,9726"; a="144387749"
+X-IronPort-AV: E=Sophos;i="5.76,363,1592895600"; 
+   d="scan'208";a="144387749"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Aug 2020 02:47:18 -0700
+IronPort-SDR: ++VrUVoAlkokasVkojxlqn1kLHsMNY+Gx5ZBRGKTzMqemdjZC21ihTVD5f8YPYdEq+6qzaq50o
+ 3/nGZ6oqzMUA==
+X-IronPort-AV: E=Sophos;i="5.76,363,1592895600"; 
+   d="scan'208";a="475617485"
+Received: from junhoson-mobl1.ger.corp.intel.com (HELO localhost) ([10.249.35.131])
+  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Aug 2020 02:47:16 -0700
+From:   Jani Nikula <jani.nikula@linux.intel.com>
+To:     Drew DeVault <sir@cmpwn.com>, linux-doc@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Drew DeVault <sir@cmpwn.com>
+Subject: Re: [PATCH] submitting-patches.rst: streamline for git usage
+In-Reply-To: <20200827174237.121004-1-sir@cmpwn.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20200827174237.121004-1-sir@cmpwn.com>
+Date:   Fri, 28 Aug 2020 12:47:13 +0300
+Message-ID: <87y2lz3xwe.fsf@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When we added support for omap3, back in 2010, we added a new
-type of V4L2 devices that aren't fully controlled via the V4L2
-device node.
+On Thu, 27 Aug 2020, Drew DeVault <sir@cmpwn.com> wrote:
+> This document is a bit intimidating to new patch submitters, and this
+> change streamlines it a bit. We presume git usage, because it's much
+> easier to use and most devs coming at the kernel are likely to be
+> familiar with it.
 
-Yet, we have never clearly documented in the V4L2 specification
-the differences between the two types.
+...and those who deviate from git should know what they're doing without
+this.
 
-Let's document them based on the the current implementation.
+> -2) Describe your changes
+> +1) Describe your changes
+>  ------------------------
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- .../userspace-api/media/v4l/open.rst          | 59 +++++++++++++++++--
- 1 file changed, 53 insertions(+), 6 deletions(-)
+I suggest just tossing the numbering altoghether while at it.
 
-diff --git a/Documentation/userspace-api/media/v4l/open.rst b/Documentation/userspace-api/media/v4l/open.rst
-index 4928f636c576..d20f98969294 100644
---- a/Documentation/userspace-api/media/v4l/open.rst
-+++ b/Documentation/userspace-api/media/v4l/open.rst
-@@ -13,6 +13,53 @@
- Opening and Closing Devices
- ***************************
- 
-+.. _v4l2_hardware_control:
-+
-+Controlling a hardware peripheral via V4L2
-+==========================================
-+
-+Hardware that is supported using the V4L2 uAPI often consists of multiple
-+devices or peripherals, each of which have their own driver.
-+
-+The bridge driver exposes one or more V4L2 device nodes
-+(see :ref:`v4l2_device_naming`).
-+
-+There are other drivers providing support for other components of
-+the hardware, which may also expose device nodes, called V4L2 sub-devices.
-+
-+When such V4L2 sub-devices are exposed, they allow controlling those
-+other hardware components - usually connected via a serial bus (like
-+I²C, SMBus or SPI). Depending on the bridge driver, those sub-devices
-+can be controlled indirectly via the bridge driver or explicitly via
-+the :ref:`Media Controller <media_controller>` and via the
-+:ref:`V4L2 sub-devices <subdev>`.
-+
-+The devices that require the use of the
-+:ref:`Media Controller <media_controller>` are called **MC-centric**
-+devices. The devices that are fully controlled via V4L2 device nodes
-+are called **video-node-centric**.
-+
-+Userspace can check if a V4L2 hardware peripheral is MC-centric by
-+calling :ref:`VIDIOC_QUERYCAP` and checking the
-+:ref:`device_caps field <device-capabilities>`.
-+
-+If the device returns ``V4L2_CAP_IO_MC`` flag at ``device_caps``,
-+then it is MC-centric, otherwise, it is video-node-centric.
-+
-+It is required for MC-centric drivers to identify the V4L2
-+sub-devices and to configure the pipelines via the
-+:ref:`media controller API <media_controller>` before using the peripheral.
-+Also, the sub-devices' configuration shall be controlled via the
-+:ref:`sub-device API <subdev>`.
-+
-+.. note::
-+
-+   A video-node-centric may still provide media-controller and
-+   sub-device interfaces as well.
-+
-+  However, in that case the media-controller and the sub-device
-+  interfaces are read-only and just provide information about the
-+  device. The actual configuration is done via the video nodes.
- 
- .. _v4l2_device_naming:
- 
-@@ -109,7 +156,7 @@ Related Devices
- Devices can support several functions. For example video capturing, VBI
- capturing and radio support.
- 
--The V4L2 API creates different nodes for each of these functions.
-+The V4L2 API creates different V4L2 device nodes for each of these functions.
- 
- The V4L2 API was designed with the idea that one device node could
- support all functions. However, in practice this never worked: this
-@@ -119,17 +166,17 @@ switching a device node between different functions only works when
- using the streaming I/O API, not with the
- :ref:`read() <func-read>`/\ :ref:`write() <func-write>` API.
- 
--Today each device node supports just one function.
-+Today each V4L2 device node supports just one function.
- 
- Besides video input or output the hardware may also support audio
- sampling or playback. If so, these functions are implemented as ALSA PCM
- devices with optional ALSA audio mixer devices.
- 
- One problem with all these devices is that the V4L2 API makes no
--provisions to find these related devices. Some really complex devices
--use the Media Controller (see :ref:`media_controller`) which can be
--used for this purpose. But most drivers do not use it, and while some
--code exists that uses sysfs to discover related devices (see
-+provisions to find these related V4L2 device nodes. Some really complex
-+hardware use the Media Controller (see :ref:`media_controller`) which can
-+be used for this purpose. But several drivers do not use it, and while some
-+code exists that uses sysfs to discover related V4L2 device nodes (see
- libmedia_dev in the
- `v4l-utils <http://git.linuxtv.org/cgit.cgi/v4l-utils.git/>`__ git
- repository), there is no library yet that can provide a single API
+BR,
+Jani.
+
+
 -- 
-2.26.2
-
+Jani Nikula, Intel Open Source Graphics Center
