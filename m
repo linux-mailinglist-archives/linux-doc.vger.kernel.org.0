@@ -2,107 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AA6282565B8
-	for <lists+linux-doc@lfdr.de>; Sat, 29 Aug 2020 10:05:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2AB302565C2
+	for <lists+linux-doc@lfdr.de>; Sat, 29 Aug 2020 10:08:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727819AbgH2IFA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 29 Aug 2020 04:05:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49848 "EHLO
+        id S1726876AbgH2II3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 29 Aug 2020 04:08:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50394 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727813AbgH2IEu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 29 Aug 2020 04:04:50 -0400
-Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com [IPv6:2a00:1450:4864:20::541])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1536AC061239;
-        Sat, 29 Aug 2020 01:04:50 -0700 (PDT)
-Received: by mail-ed1-x541.google.com with SMTP id n13so1099474edo.10;
-        Sat, 29 Aug 2020 01:04:50 -0700 (PDT)
+        with ESMTP id S1726105AbgH2II0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 29 Aug 2020 04:08:26 -0400
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com [IPv6:2a00:1450:4864:20::543])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 158E2C061236;
+        Sat, 29 Aug 2020 01:08:25 -0700 (PDT)
+Received: by mail-ed1-x543.google.com with SMTP id u1so1139324edi.4;
+        Sat, 29 Aug 2020 01:08:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=NScaUaUB/lFvvOsMW5OFZGDv5IzEPsheGuFUDe0DEQ0=;
-        b=sCxKjVqXS1qPmF21kWPqjJb/g979i2SuPgYy7RJVKNW7l6SFAllCdCFXgK5mrI9jVF
-         CPbrBXifLRVTCwBxnrCWbaJmlg+C4HpY0hlbkM8x4UkFNYzr/O7EnbLtO/wceoL1O67z
-         QfwQ7VgU8nSvzRtXoHL38ZoEssZumpESb0h+5Ja3GP+JkpA3F+r3S1bY1F1YB+L9FfM8
-         /4fiF45VeeFzqdBuYZJjTMW2KzO9KcEP4yLNc9VFDvF9dfivaTKB1tYskYuwvXKj/9JK
-         JGseD9cW8cXTH1qxcjgPvgI0HDb1bTCPCdjLQXYkm9K55b0vwF4/hH2nKcpZl84735MP
-         DYxA==
+        h=from:to:cc:subject:date:message-id;
+        bh=dcPTzvRLlTI6xHLAGh4Hges33sLkvHOakU2B8m2O5A0=;
+        b=Xqlny0HUc0wfxwPg0SfcOh/WgfmTxE4M5qk14Gm3NE2zP2qd/Tf1yok4QAbkhwyhrF
+         tZfDjjduoPcOkVP9Wo1jVA1VeK1qOoVfVkf1YD7AQ4dy7A1DcwFwU+ESVaHS04CDS2q3
+         S0F6LVA7WD7zvAYXN1SJNnJMmCGjM3p7NU7TcdgK3Iq94EgYJEafjQ/zyGbmECUqyu99
+         u7UKB6BNJZew/jc+82oKjy/c2ikV3Xq7gA3QMAKsKne+4MdwetD6+MNevGSVMFFiAfd+
+         644Sem6hrCY1S/s3BY7s1dTdjCu52mwnUWTjc+H8mVhYHBoaTBu3sjHaC4NeYaAmat11
+         md0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=NScaUaUB/lFvvOsMW5OFZGDv5IzEPsheGuFUDe0DEQ0=;
-        b=ma75AtkajfG5ip1x4bGzgsZHzdepSa4ba5RZ2rSyHnQhvON+tnvDbjv9rsSCeAa31K
-         s5tw0vSBaYKDRKpYPHPvNeI48Ab6THzrXUXkKzUmnm4Xp1/hBxfZuFx9LfYpinZqxJtk
-         rfJ3lXforLLlqTFsFhVJu+BG8zw6w/kxZZxJpkjyrtb45bfqnUdcyn5V/rVQQ9Q48v15
-         fflTtvFIfFDsWSvMIPtUlfVKYwJWcqojM/YHnp3nXRm1UeFz5apof/1AzRdRleB0mDtm
-         vxFc7dtnM4XfnIWWyIIBslmRKfJ1bIZEN4r+8AEiYkf+31zOHD39VRzcWowQfy+U98e6
-         9ORA==
-X-Gm-Message-State: AOAM5336jDmO+a8uCGNwp+og7hEGmZ4+U5zMD6oBXW03T359mPQz3Nag
-        /wMzTOnl9OQwiDg4qCa+o4E=
-X-Google-Smtp-Source: ABdhPJwozVWYZA8ThsgkhN7l67eONiDdpyKZ0QRjbnyfqHdv1jNJOD+baUfc6Cfu85Qhbis1IokVCw==
-X-Received: by 2002:a05:6402:1d12:: with SMTP id dg18mr2364480edb.183.1598688288708;
-        Sat, 29 Aug 2020 01:04:48 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=dcPTzvRLlTI6xHLAGh4Hges33sLkvHOakU2B8m2O5A0=;
+        b=OAqKbS+kV1rQAbBlHw8CliVFJUYQUKqJYMWK5DxsmzmV6lWJxlsieE4xKR7PTg9H3p
+         eflUjMMoUGhLIXJh+Tpc/t2n8YAu1Y/Vuh5BxaW9pew7Ico5bJr7hn4Te9NMeCvY11md
+         bjai5S5PXqJ0/sAL/PpUtQWOYdW3q9wI26/E76tA0hB3K0UBklXg4tsberrXKcpsyVNe
+         J9YL6gmN3fUXndcd30moPjyP7d9/hBCSmet7ZzE33VtHDGkWnrVhGgtOaioJQerBw7xn
+         3iwA0I/zjH6gHnTDFAPpXreJxxsmTRSfanM2ZQuwN5ld9xHmQCiIX3zBtgIQ0dUnYbfW
+         PmCg==
+X-Gm-Message-State: AOAM531kLu+O5/MgMgNSrpcKc/66776JaI95WgRpkZKkE1dWxM5FxDEp
+        MXJb6w+OPwlKqvSXQ8ff7YN5Tc9sSTw=
+X-Google-Smtp-Source: ABdhPJzfhiMfW/vnm5JpeZVezG9+LQnLYvD8MdVgxYlQrAHxPABkr/TWWSMe4T5wsCJPdyXj+54VqQ==
+X-Received: by 2002:a05:6402:b32:: with SMTP id bo18mr2511762edb.201.1598688504620;
+        Sat, 29 Aug 2020 01:08:24 -0700 (PDT)
 Received: from localhost.localdomain ([2a02:2450:10d2:194d:f90b:b3a9:1300:5b1a])
-        by smtp.gmail.com with ESMTPSA id ec11sm1512036ejb.123.2020.08.29.01.04.47
+        by smtp.gmail.com with ESMTPSA id h25sm1568923ejq.12.2020.08.29.01.08.23
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 29 Aug 2020 01:04:48 -0700 (PDT)
+        Sat, 29 Aug 2020 01:08:23 -0700 (PDT)
 From:   SeongJae Park <sj38.park@gmail.com>
 X-Google-Original-From: SeongJae Park <sjpark@amazon.de>
-To:     corbet@lwn.net
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        SeongJae Park <sjpark@amazon.de>
-Subject: [PATCH 2/2] Documentation/kokr/howto: Wordsmith
-Date:   Sat, 29 Aug 2020 10:04:28 +0200
-Message-Id: <20200829080428.1219-3-sjpark@amazon.de>
+To:     paulmck@kernel.org, corbet@lwn.net
+Cc:     linux-doc@vger.kernel.org, linux-arch@vger.kernel.org,
+        linux-kernel@vger.kernel.org, SeongJae Park <sjpark@amazon.de>
+Subject: [PATCH 0/3] memory-barriers: Apply missed changes
+Date:   Sat, 29 Aug 2020 10:08:13 +0200
+Message-Id: <20200829080816.1440-1-sjpark@amazon.de>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20200829080428.1219-1-sjpark@amazon.de>
-References: <20200829080428.1219-1-sjpark@amazon.de>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The sentence regarding version numbers of '-stable' kernels is quite
-ambiguous.  This commit makes the sentence more clear and fix
-inconsistent uses of the terms for 'version'.
+This patchset applies missed changes that should land in the
+memory-barriers.txt and its Korean translation.
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- Documentation/translations/ko_KR/howto.rst | 10 +++++-----
- 1 file changed, 5 insertions(+), 5 deletions(-)
+The patches are based on v5.9-rc2.
 
-diff --git a/Documentation/translations/ko_KR/howto.rst b/Documentation/translations/ko_KR/howto.rst
-index 6731378bd842..240d29be38f2 100644
---- a/Documentation/translations/ko_KR/howto.rst
-+++ b/Documentation/translations/ko_KR/howto.rst
-@@ -284,10 +284,10 @@ Andrew Morton의 글이 있다.
- 여러 메이저 넘버를 갖는 다양한 안정된 커널 트리들
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
--3 자리 숫자로 이루어진 버젼의 커널들은 -stable 커널들이다. 그것들은 해당 메이저
--메인라인 릴리즈에서 발견된 큰 회귀들이나 보안 문제들 중 비교적 작고 중요한
--수정들을 포함한다.  주요 stable 시리즈 릴리즈는 세번째 버전 넘버를 증가시키며
--앞의 두 버전 넘버는 그대로 유지한다.
-+세개의 버젼 넘버로 이루어진 버젼의 커널들은 -stable 커널들이다. 그것들은 해당
-+메이저 메인라인 릴리즈에서 발견된 큰 회귀들이나 보안 문제들 중 비교적 작고
-+중요한 수정들을 포함한다.  주요 stable 시리즈 릴리즈는 세번째 버젼 넘버를
-+증가시키며 앞의 두 버젼 넘버는 그대로 유지한다.
- 
- 이것은 가장 최근의 안정적인 커널을 원하는 사용자에게 추천되는 브랜치이며,
- 개발/실험적 버젼을 테스트하는 것을 돕고자 하는 사용자들과는 별로 관련이 없다.
-@@ -317,7 +317,7 @@ Andrew Morton의 글이 있다.
- 제안된 패치는 서브시스템 트리에 커밋되기 전에 메일링 리스트를 통해
- 리뷰된다(아래의 관련 섹션을 참고하기 바란다). 일부 커널 서브시스템의 경우, 이
- 리뷰 프로세스는 patchwork라는 도구를 통해 추적된다. patchwork은 등록된 패치와
--패치에 대한 코멘트, 패치의 버전을 볼 수 있는 웹 인터페이스를 제공하고,
-+패치에 대한 코멘트, 패치의 버젼을 볼 수 있는 웹 인터페이스를 제공하고,
- 메인테이너는 패치를 리뷰 중, 리뷰 통과, 또는 반려됨으로 표시할 수 있다.
- 대부분의 이러한 patchwork 사이트는 https://patchwork.kernel.org/ 에 나열되어
- 있다.
+SeongJae Park (3):
+  docs/memory-barriers.txt: Fix references for DMA*.txt files
+  docs/memory-barriers.txt/kokr: Remove remaining references to mmiowb()
+  dics/memory-barriers.txt/kokr: Allow architecture to override the
+    flush barrier
+
+ Documentation/memory-barriers.txt             |  8 ++---
+ .../translations/ko_KR/memory-barriers.txt    | 32 ++++++++++++-------
+ 2 files changed, 24 insertions(+), 16 deletions(-)
+
 -- 
 2.17.1
 
