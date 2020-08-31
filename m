@@ -2,72 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 41722258423
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Sep 2020 00:37:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2A8B1258449
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Sep 2020 01:04:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726384AbgHaWhX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 31 Aug 2020 18:37:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37854 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726117AbgHaWhX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 31 Aug 2020 18:37:23 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 41535C061573;
-        Mon, 31 Aug 2020 15:37:22 -0700 (PDT)
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 57BFB537;
-        Mon, 31 Aug 2020 22:37:21 +0000 (UTC)
-Date:   Mon, 31 Aug 2020 16:37:20 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Dave Hansen <dave.hansen@linux.intel.com>
-Cc:     linux-kernel@vger.kernel.org, dan.j.williams@intel.com,
-        h.peter.anvin@intel.com, tglx@linutronix.de,
-        gregkh@linuxfoundation.org, linux-spdx@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH] [v2] Documentation: clarify driver licensing rules
-Message-ID: <20200831163720.3c70d17d@lwn.net>
-In-Reply-To: <20200814145625.8B708079@viggo.jf.intel.com>
-References: <20200814145625.8B708079@viggo.jf.intel.com>
-Organization: LWN.net
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+        id S1725993AbgHaXEI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 31 Aug 2020 19:04:08 -0400
+Received: from mail.cmpwn.com ([45.56.77.53]:57292 "EHLO mail.cmpwn.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725941AbgHaXEH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 31 Aug 2020 19:04:07 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=cmpwn.com; s=cmpwn;
+        t=1598915047; bh=OFoNm9JTAPDRV0Buvs+ATuGcgyShIvQx0V1H5bfZoNY=;
+        h=To:Cc:Subject:From:Date:In-Reply-To;
+        b=G9Qy7xALw+e3x2wNto/dpn7VB5QbYfuX2hErJx8Q+U1+gg4TsDao5jo9b3bhg+/9P
+         pNvBY8TffJe4tpGYy1gLMcqDmoKF2YJGXeT3FgNBsszJ/HhN1syzBOlHbJzPXVWER9
+         Lh/M2hASKhj6Y6cm6kpAFCrJDyCoBIcrHxtPYbJY=
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+To:     "Jonathan Corbet" <corbet@lwn.net>
+Cc:     <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH] submitting-patches.rst: streamline for git usage
+From:   "Drew DeVault" <sir@cmpwn.com>
+Date:   Mon, 31 Aug 2020 19:01:51 -0400
+Message-Id: <C5BK160QTFK2.1M3TL4ZI5HWW3@homura>
+In-Reply-To: <20200831162641.16e90bb8@lwn.net>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 14 Aug 2020 07:56:25 -0700
-Dave Hansen <dave.hansen@linux.intel.com> wrote:
+Thanks for the feedback!
 
-> Greg has challenged some recent driver submitters on their license
-> choices. He was correct to do so, as the choices in these instances
-> did not always advance the aims of the submitters.
-> 
-> But, this left submitters (and the folks who help them pick licenses)
-> a bit confused. They have read things like
-> Documentation/process/license-rules.rst which says:
-> 
-> 	individual source files can have a different license
-> 	which is required to be compatible with the GPL-2.0
-> 
-> and Documentation/process/submitting-drivers.rst:
-> 
-> 	We don't insist on any kind of exclusive GPL licensing,
-> 	and if you wish ... you may well wish to release under
-> 	multiple licenses.
-> 
-> As written, these appear a _bit_ more laissez faire than we've been in
-> practice lately. It sounds like we at least expect submitters to make
-> a well-reasoned license choice and to explain their rationale. It does
-> not appear that we blindly accept anything that is simply
-> GPLv2-compatible.
-> 
-> Drivers appear to be the most acute source of misunderstanding, so fix
-> the driver documentation first. Update it to clarify expectations.
+On Mon Aug 31, 2020 at 6:26 PM EDT, Jonathan Corbet wrote:
+> - We have a document on configuring email clients for use in kernel
+> development; we should be pointing there rather than to outside sites.
+> There might well be a place for a pointer to useplaintext.email in
+> Documentation/process/email-clients.rst, but that's a separate patch.
 
-Applied, thanks.
+Yeah, I was wondering if this'd come up. There are an awful lot of email
+clients and keeping an up-to-date list of instructions for configuring
+plaintext is unfortunately an entire project in and of itself.
 
-jon
+Will move to email-clients.rst in a separate patch for further
+discussion.
+
+> - In general we've been removing manual section numbers for the reasons
+> amply demonstrated in this patch; maintaining them is a pain and, once
+> you've gone through and changed them all, referring to sections by
+> number doesn't work as well anymore. My own feeling is that they should
+> come out.
+
+Should this be split into its own patch?
+
+> - Please don't just remove maintainer information like that. If it needs
+> a new home, fine, find a new home for it. We have a nascent maintainers
+> manual that could certainly use some help.
+
+Totally fair, I'll look for a new home for this info.
