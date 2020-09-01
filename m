@@ -2,176 +2,193 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 44C38259F79
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Sep 2020 21:52:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CB5F0259FC5
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Sep 2020 22:16:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728253AbgIATwd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 1 Sep 2020 15:52:33 -0400
-Received: from smtp-fw-9101.amazon.com ([207.171.184.25]:64352 "EHLO
-        smtp-fw-9101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727769AbgIATwc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Sep 2020 15:52:32 -0400
+        id S1728899AbgIAUPg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 1 Sep 2020 16:15:36 -0400
+Received: from smtp-fw-2101.amazon.com ([72.21.196.25]:23808 "EHLO
+        smtp-fw-2101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726323AbgIAUPf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Sep 2020 16:15:35 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1598989952; x=1630525952;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=fRZXTd6tTanOj6fuNvwe2B5pe+PpMShYr5x63b3HgOc=;
-  b=QjoLyqfigj9MgCFCO6pUsZrKkpDOddOYIavVBrh1w16MwlLHe/PeIWZP
-   2EZSxlwFuvXkZaw87uPaJw9aYMZVv7/uYPhMm1yLRYlwQO96KiMAJ3Tki
-   lgxCshHga0A9fHigpoH6DaeDVl0T2mhq4qZuyx4whTSCVfFGzYxuzHgxk
+  t=1598991335; x=1630527335;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=3EnOz/3Rmff/sgE96/Smy7EzDfB4zcQK8Cuf3LKrUSg=;
+  b=EMAd95arIFU/VydIlwl0eQurIUojnyuFqua0ooGUbhsX1dWt8ha8W4Vf
+   s2zU4ijBu4ciTkReChgWWx0UpjwwfRr3JQAZ2ugwuo/F4jRhCGSMT0/IC
+   RYV688ky/Bx6LwQ3tI9eDGfBl9gq/z2rFQIjM6vPD7sHTKR6KZAOL/09i
    w=;
 X-IronPort-AV: E=Sophos;i="5.76,380,1592870400"; 
-   d="scan'208";a="64597815"
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1d-5dd976cd.us-east-1.amazon.com) ([10.47.23.38])
-  by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP; 01 Sep 2020 19:52:24 +0000
-Received: from EX13MTAUWC002.ant.amazon.com (iad55-ws-svc-p15-lb9-vlan2.iad.amazon.com [10.40.159.162])
-        by email-inbound-relay-1d-5dd976cd.us-east-1.amazon.com (Postfix) with ESMTPS id AB9A0A1A05;
-        Tue,  1 Sep 2020 19:52:19 +0000 (UTC)
+   d="scan'208";a="51310818"
+Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO email-inbound-relay-2a-22cc717f.us-west-2.amazon.com) ([10.43.8.2])
+  by smtp-border-fw-out-2101.iad2.amazon.com with ESMTP; 01 Sep 2020 20:15:32 +0000
+Received: from EX13MTAUWC002.ant.amazon.com (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
+        by email-inbound-relay-2a-22cc717f.us-west-2.amazon.com (Postfix) with ESMTPS id 6E9C7A2028;
+        Tue,  1 Sep 2020 20:15:30 +0000 (UTC)
 Received: from EX13D20UWC001.ant.amazon.com (10.43.162.244) by
  EX13MTAUWC002.ant.amazon.com (10.43.162.240) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Tue, 1 Sep 2020 19:52:19 +0000
-Received: from freeip.amazon.com (10.43.161.34) by
+ id 15.0.1497.2; Tue, 1 Sep 2020 20:15:28 +0000
+Received: from u79c5a0a55de558.ant.amazon.com (10.43.160.229) by
  EX13D20UWC001.ant.amazon.com (10.43.162.244) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Tue, 1 Sep 2020 19:52:15 +0000
-Subject: Re: [PATCH v4 2/3] KVM: x86: Introduce allow list for MSR emulation
-To:     Jim Mattson <jmattson@google.com>
-CC:     Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
+ id 15.0.1497.2; Tue, 1 Sep 2020 20:15:25 +0000
+From:   Alexander Graf <graf@amazon.com>
+To:     Paolo Bonzini <pbonzini@redhat.com>
+CC:     Jonathan Corbet <corbet@lwn.net>,
         Sean Christopherson <sean.j.christopherson@intel.com>,
         Vitaly Kuznetsov <vkuznets@redhat.com>,
         Wanpeng Li <wanpengli@tencent.com>,
-        Joerg Roedel <joro@8bytes.org>,
+        Jim Mattson <jmattson@google.com>,
+        "Joerg Roedel" <joro@8bytes.org>,
         KarimAllah Raslan <karahmed@amazon.de>,
         Aaron Lewis <aaronlewis@google.com>,
-        kvm list <kvm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>
-References: <20200803211423.29398-1-graf@amazon.com>
- <20200803211423.29398-3-graf@amazon.com>
- <CALMp9eS3Y845mPMD6H+5nmYDMvhPcDcFCWUXpLiscxo_9--EYQ@mail.gmail.com>
-From:   Alexander Graf <graf@amazon.com>
-Message-ID: <c69c5a53-04d4-a7f5-147f-209fe218eada@amazon.com>
-Date:   Tue, 1 Sep 2020 21:52:13 +0200
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.2.0
+        Dan Carpenter <dan.carpenter@oracle.com>,
+        <kvm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: [PATCH v6 0/7] Allow user space to restrict and augment MSR emulation
+Date:   Tue, 1 Sep 2020 22:15:10 +0200
+Message-ID: <20200901201517.29086-1-graf@amazon.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <CALMp9eS3Y845mPMD6H+5nmYDMvhPcDcFCWUXpLiscxo_9--EYQ@mail.gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.43.161.34]
-X-ClientProxiedBy: EX13D07UWB004.ant.amazon.com (10.43.161.196) To
+Content-Type: text/plain
+X-Originating-IP: [10.43.160.229]
+X-ClientProxiedBy: EX13D18UWC001.ant.amazon.com (10.43.162.105) To
  EX13D20UWC001.ant.amazon.com (10.43.162.244)
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-CgpPbiAyMC4wOC4yMCAwMDo0OSwgSmltIE1hdHRzb24gd3JvdGU6Cj4gCj4gT24gTW9uLCBBdWcg
-MywgMjAyMCBhdCAyOjE0IFBNIEFsZXhhbmRlciBHcmFmIDxncmFmQGFtYXpvbi5jb20+IHdyb3Rl
-Ogo+IAo+PiAtLS0gYS9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9rdm1faG9zdC5oCj4+ICsrKyBiL2Fy
-Y2gveDg2L2luY2x1ZGUvYXNtL2t2bV9ob3N0LmgKPj4gQEAgLTkwMSw2ICs5MDEsMTMgQEAgc3Ry
-dWN0IGt2bV9odiB7Cj4+ICAgICAgICAgIHN0cnVjdCBrdm1faHZfc3luZGJnIGh2X3N5bmRiZzsK
-Pj4gICB9Owo+Pgo+PiArc3RydWN0IG1zcl9iaXRtYXBfcmFuZ2Ugewo+PiArICAgICAgIHUzMiBm
-bGFnczsKPj4gKyAgICAgICB1MzIgbm1zcnM7Cj4+ICsgICAgICAgdTMyIGJhc2U7Cj4+ICsgICAg
-ICAgdW5zaWduZWQgbG9uZyAqYml0bWFwOwo+PiArfTsKPj4gKwo+PiAgIGVudW0ga3ZtX2lycWNo
-aXBfbW9kZSB7Cj4+ICAgICAgICAgIEtWTV9JUlFDSElQX05PTkUsCj4+ICAgICAgICAgIEtWTV9J
-UlFDSElQX0tFUk5FTCwgICAgICAgLyogY3JlYXRlZCB3aXRoIEtWTV9DUkVBVEVfSVJRQ0hJUCAq
-Lwo+PiBAQCAtMTAwNSw2ICsxMDEyLDkgQEAgc3RydWN0IGt2bV9hcmNoIHsKPj4gICAgICAgICAg
-LyogRGVmbGVjdCBSRE1TUiBhbmQgV1JNU1IgdG8gdXNlciBzcGFjZSB3aGVuIHRoZXkgdHJpZ2dl
-ciBhICNHUCAqLwo+PiAgICAgICAgICBib29sIHVzZXJfc3BhY2VfbXNyX2VuYWJsZWQ7Cj4+Cj4+
-ICsgICAgICAgc3RydWN0IG1zcl9iaXRtYXBfcmFuZ2UgbXNyX2FsbG93bGlzdF9yYW5nZXNbMTBd
-Owo+IAo+IFdoeSAxMD8gSSB0aGluayB0aGlzIGlzIHRoZSBvbmx5IHVzZSBvZiB0aGlzIGNvbnN0
-YW50LCBidXQgYSBtYWNybwo+IHdvdWxkIHN0aWxsIGJlIG5pY2UsIGVzcGVjaWFsbHkgc2luY2Ug
-dGhlIG51bWJlciBhcHBlYXJzIHRvIGJlCj4gYXJiaXRyYXJ5Lgo+IAo+PiBkaWZmIC0tZ2l0IGEv
-YXJjaC94ODYvaW5jbHVkZS91YXBpL2FzbS9rdm0uaCBiL2FyY2gveDg2L2luY2x1ZGUvdWFwaS9h
-c20va3ZtLmgKPj4gaW5kZXggMDc4MGY5N2MxODUwLi5jMzNmYjFkNzJkNTIgMTAwNjQ0Cj4+IC0t
-LSBhL2FyY2gveDg2L2luY2x1ZGUvdWFwaS9hc20va3ZtLmgKPj4gKysrIGIvYXJjaC94ODYvaW5j
-bHVkZS91YXBpL2FzbS9rdm0uaAo+PiBAQCAtMTkyLDYgKzE5MiwyMSBAQCBzdHJ1Y3Qga3ZtX21z
-cl9saXN0IHsKPj4gICAgICAgICAgX191MzIgaW5kaWNlc1swXTsKPj4gICB9Owo+Pgo+PiArI2Rl
-ZmluZSBLVk1fTVNSX0FMTE9XX1JFQUQgICgxIDw8IDApCj4+ICsjZGVmaW5lIEtWTV9NU1JfQUxM
-T1dfV1JJVEUgKDEgPDwgMSkKPj4gKwo+PiArLyogTWF4aW11bSBzaXplIG9mIHRoZSBvZiB0aGUg
-Yml0bWFwIGluIGJ5dGVzICovCj4+ICsjZGVmaW5lIEtWTV9NU1JfQUxMT1dMSVNUX01BWF9MRU4g
-MHg2MDAKPiAKPiBXb3VsZG4ndCAweDQwMCBiZSBhIG1vcmUgbmF0dXJhbCBzaXplLCBzaW5jZSBi
-b3RoIEludGVsIGFuZCBBTUQgTVNSCj4gcGVybWlzc2lvbiBiaXRtYXBzIGNvdmVyIHJhbmdlcyBv
-ZiA4MTkyIE1TUnM/CgpZb3UgY2FuIGFsd2F5cyBtYWtlIHlvdXIgYml0bWFwcyAweDQwMCA6KS4g
-SSBoYWQgdG8gY2hvb3NlIHNvbWV0aGluZyAKdGhhdCBsaW1pdHMgb3VyIG1lbW9yeSBmb290cHJp
-bnQsIHNvIHRoYXQgdXNlciBzcGFjZSBjYW4ndCBhbGxvY2F0ZSAKaW5maW5pdGUgYW1vdW50cyBv
-ZiBtZW1vcnkuCgo+IAo+PiBkaWZmIC0tZ2l0IGEvYXJjaC94ODYva3ZtL3g4Ni5jIGIvYXJjaC94
-ODYva3ZtL3g4Ni5jCj4+IGluZGV4IGUxMTM5MTI0MzUwZi4uMjVlNThjZWIxOWRlIDEwMDY0NAo+
-PiAtLS0gYS9hcmNoL3g4Ni9rdm0veDg2LmMKPj4gKysrIGIvYXJjaC94ODYva3ZtL3g4Ni5jCj4+
-IEBAIC0xNDcyLDYgKzE0NzIsMzggQEAgdm9pZCBrdm1fZW5hYmxlX2VmZXJfYml0cyh1NjQgbWFz
-aykKPj4gICB9Cj4+ICAgRVhQT1JUX1NZTUJPTF9HUEwoa3ZtX2VuYWJsZV9lZmVyX2JpdHMpOwo+
-Pgo+PiArc3RhdGljIGJvb2wga3ZtX21zcl9hbGxvd2VkKHN0cnVjdCBrdm1fdmNwdSAqdmNwdSwg
-dTMyIGluZGV4LCB1MzIgdHlwZSkKPiAKPiBJbiBhbm90aGVyIHRocmVhZCwgd2hlbiBJIHN1Z2dl
-c3RlZCB0aGF0IGEgZnVuY3Rpb24gc2hvdWxkIHJldHVybgo+IGJvb2wsIHlvdSBzYWlkLCAiJ0kn
-bSBub3QgYSBiaWcgZmFuIG9mIGJvb2wgcmV0dXJuaW5nIEFQSXMgdW5sZXNzIHRoZXkKPiBoYXZl
-IGFuICJpcyIgaW4gdGhlaXIgbmFtZS4nIFRoaXMgZnVuY3Rpb24gZG9lc24ndCBoYXZlICJpcyIg
-aW4gaXRzCj4gbmFtZS4gOi0pCgpJJ3ZlIGxlZnQgdGhpcyB1bmFuc3dlcmVkIGZvciB3YXkgdG9v
-IGxvbmcgOikuIElNSE8sIHBhc3NpdmUgaXMgZmluZSAKdG9vLCBhcyBpdCBpbXBsaWVzIGFuICJp
-cyIgaW4gbXkgYnJhaW4uIE9yIHRvIHB1dCBpdCBkaWZmZXJlbnRseToKCiAgIGJhZDogYm9vbCBr
-dm1fZ2V0X21zcigpCiAgIGJhZDogYm9vbCBrdm1fZ2V0X21zcl91c2VyX3NwYWNlKCkKICAgZ29v
-ZDogYm9vbCBrdm1fbXNyX2Jsb2NrZWQoKQogICBnb29kOiBib29sIGt2bV9tc3JfYWxsb3dlZCgp
-CiAgIGdvb2Q6IGJvb2wgaXNfa3ZtX21zcl9hbGxvd2VkKCkKCj4gCj4+ICt7Cj4+ICsgICAgICAg
-c3RydWN0IGt2bSAqa3ZtID0gdmNwdS0+a3ZtOwo+PiArICAgICAgIHN0cnVjdCBtc3JfYml0bWFw
-X3JhbmdlICpyYW5nZXMgPSBrdm0tPmFyY2gubXNyX2FsbG93bGlzdF9yYW5nZXM7Cj4+ICsgICAg
-ICAgdTMyIGNvdW50ID0ga3ZtLT5hcmNoLm1zcl9hbGxvd2xpc3RfcmFuZ2VzX2NvdW50Owo+IAo+
-IFNob3VsZG4ndCB0aGUgcmVhZCBvZiBrdm0tPmFyY2gubXNyX2FsbG93bGlzdF9yYW5nZXNfY291
-bnQgYmUgZ3VhcmRlZAo+IGJ5IHRoZSBtdXRleCwgYmVsb3c/Cj4gCj4+ICsgICAgICAgdTMyIGk7
-Cj4+ICsgICAgICAgYm9vbCByID0gZmFsc2U7Cj4+ICsKPj4gKyAgICAgICAvKiBNU1IgYWxsb3ds
-aXN0IG5vdCBzZXQgdXAsIGFsbG93IGV2ZXJ5dGhpbmcgKi8KPj4gKyAgICAgICBpZiAoIWNvdW50
-KQo+PiArICAgICAgICAgICAgICAgcmV0dXJuIHRydWU7Cj4+ICsKPj4gKyAgICAgICAvKiBQcmV2
-ZW50IGNvbGxpc2lvbiB3aXRoIGNsZWFyX21zcl9hbGxvd2xpc3QgKi8KPj4gKyAgICAgICBtdXRl
-eF9sb2NrKCZrdm0tPmxvY2spOwo+PiArCj4+ICsgICAgICAgZm9yIChpID0gMDsgaSA8IGNvdW50
-OyBpKyspIHsKPj4gKyAgICAgICAgICAgICAgIHUzMiBzdGFydCA9IHJhbmdlc1tpXS5iYXNlOwo+
-PiArICAgICAgICAgICAgICAgdTMyIGVuZCA9IHN0YXJ0ICsgcmFuZ2VzW2ldLm5tc3JzOwo+PiAr
-ICAgICAgICAgICAgICAgdTMyIGZsYWdzID0gcmFuZ2VzW2ldLmZsYWdzOwo+PiArICAgICAgICAg
-ICAgICAgdW5zaWduZWQgbG9uZyAqYml0bWFwID0gcmFuZ2VzW2ldLmJpdG1hcDsKPj4gKwo+PiAr
-ICAgICAgICAgICAgICAgaWYgKChpbmRleCA+PSBzdGFydCkgJiYgKGluZGV4IDwgZW5kKSAmJiAo
-ZmxhZ3MgJiB0eXBlKSkgewo+PiArICAgICAgICAgICAgICAgICAgICAgICByID0gISF0ZXN0X2Jp
-dChpbmRleCAtIHN0YXJ0LCBiaXRtYXApOwo+IAo+IFRoZSAhISBzZWVtcyBncmF0dWl0b3VzLCBz
-aW5jZSByIGlzIG9mIHR5cGUgYm9vbC4KPiAKPj4gQEAgLTE0ODMsNiArMTUxNSw5IEBAIHN0YXRp
-YyBpbnQgX19rdm1fc2V0X21zcihzdHJ1Y3Qga3ZtX3ZjcHUgKnZjcHUsIHUzMiBpbmRleCwgdTY0
-IGRhdGEsCj4+ICAgewo+PiAgICAgICAgICBzdHJ1Y3QgbXNyX2RhdGEgbXNyOwo+Pgo+PiArICAg
-ICAgIGlmICghaG9zdF9pbml0aWF0ZWQgJiYgIWt2bV9tc3JfYWxsb3dlZCh2Y3B1LCBpbmRleCwg
-S1ZNX01TUl9BTExPV19XUklURSkpCj4+ICsgICAgICAgICAgICAgICByZXR1cm4gLUVOT0VOVDsK
-PiAKPiBQZXJoYXBzIC1FUEVSTSBpcyBtb3JlIGFwcHJvcHJpYXRlIGhlcmU/Cj4gCj4+ICAgICAg
-ICAgIHN3aXRjaCAoaW5kZXgpIHsKPj4gICAgICAgICAgY2FzZSBNU1JfRlNfQkFTRToKPj4gICAg
-ICAgICAgY2FzZSBNU1JfR1NfQkFTRToKPj4gQEAgLTE1MjgsNiArMTU2Myw5IEBAIGludCBfX2t2
-bV9nZXRfbXNyKHN0cnVjdCBrdm1fdmNwdSAqdmNwdSwgdTMyIGluZGV4LCB1NjQgKmRhdGEsCj4+
-ICAgICAgICAgIHN0cnVjdCBtc3JfZGF0YSBtc3I7Cj4+ICAgICAgICAgIGludCByZXQ7Cj4+Cj4+
-ICsgICAgICAgaWYgKCFob3N0X2luaXRpYXRlZCAmJiAha3ZtX21zcl9hbGxvd2VkKHZjcHUsIGlu
-ZGV4LCBLVk1fTVNSX0FMTE9XX1JFQUQpKQo+PiArICAgICAgICAgICAgICAgcmV0dXJuIC1FTk9F
-TlQ7Cj4gCj4gLi4uYW5kIGhlcmU/Cj4gCj4+ICtzdGF0aWMgYm9vbCBtc3JfcmFuZ2Vfb3Zlcmxh
-cHMoc3RydWN0IGt2bSAqa3ZtLCBzdHJ1Y3QgbXNyX2JpdG1hcF9yYW5nZSAqcmFuZ2UpCj4gCj4g
-QW5vdGhlciBib29sIGZ1bmN0aW9uIHdpdGggbm8gImlzIj8gOi0pCj4gCj4+ICt7Cj4+ICsgICAg
-ICAgc3RydWN0IG1zcl9iaXRtYXBfcmFuZ2UgKnJhbmdlcyA9IGt2bS0+YXJjaC5tc3JfYWxsb3ds
-aXN0X3JhbmdlczsKPj4gKyAgICAgICB1MzIgaSwgY291bnQgPSBrdm0tPmFyY2gubXNyX2FsbG93
-bGlzdF9yYW5nZXNfY291bnQ7Cj4+ICsgICAgICAgYm9vbCByID0gZmFsc2U7Cj4+ICsKPj4gKyAg
-ICAgICBmb3IgKGkgPSAwOyBpIDwgY291bnQ7IGkrKykgewo+PiArICAgICAgICAgICAgICAgdTMy
-IHN0YXJ0ID0gbWF4KHJhbmdlLT5iYXNlLCByYW5nZXNbaV0uYmFzZSk7Cj4+ICsgICAgICAgICAg
-ICAgICB1MzIgZW5kID0gbWluKHJhbmdlLT5iYXNlICsgcmFuZ2UtPm5tc3JzLAo+PiArICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICByYW5nZXNbaV0uYmFzZSArIHJhbmdlc1tpXS5ubXNycyk7
-Cj4+ICsKPj4gKyAgICAgICAgICAgICAgIGlmICgoc3RhcnQgPCBlbmQpICYmIChyYW5nZS0+Zmxh
-Z3MgJiByYW5nZXNbaV0uZmxhZ3MpKSB7Cj4+ICsgICAgICAgICAgICAgICAgICAgICAgIHIgPSB0
-cnVlOwo+PiArICAgICAgICAgICAgICAgICAgICAgICBicmVhazsKPj4gKyAgICAgICAgICAgICAg
-IH0KPj4gKyAgICAgICB9Cj4+ICsKPj4gKyAgICAgICByZXR1cm4gcjsKPj4gK30KPiAKPiBUaGlz
-IHNlZW1zIGxpa2UgYW4gYXdrd2FyZCBjb25zdHJhaW50LiBXb3VsZCBpdCBiZSBwb3NzaWJsZSB0
-byBhbGxvdwo+IG92ZXJsYXBwaW5nIHJhbmdlcyBhcyBsb25nIGFzIHRoZSBhY2Nlc3MgdHlwZXMg
-ZG9uJ3QgY2xhc2g/IFNvLCBmb3IKPiBleGFtcGxlLCBjb3VsZCBJIHNwZWNpZnkgYW4gYWxsb3cg
-bGlzdCBmb3IgUkVBRCBvZiBNU1JzIDAtMHgxZmZmZiBhbmQKPiBhbiBhbGxvdyBsaXN0IGZvciBX
-UklURSBvZiBNU1JzIDAtMHgxZmZmZj8gQWN0dWFsbHksIEkgZG9uJ3Qgc2VlIHdoeQo+IHlvdSBo
-YXZlIHRvIHByb2hpYml0IG92ZXJsYXBwaW5nIHJhbmdlcyBhdCBhbGwuCgpJIHRlbmQgdG8gYWdy
-ZWUuIE5vdyB0aGF0IHRoZSBvcmRlciBpcyBvYnZpb3VzIHRocm91Z2ggdGhlIG5ldyBBUEksIHdl
-IApubyBsb25nZXIgbmVlZCB0byBjaGVjayBmb3Igb3ZlcmxhcHMuCgo+IAo+IAo+PiArc3RhdGlj
-IGludCBrdm1fdm1faW9jdGxfY2xlYXJfbXNyX2FsbG93bGlzdChzdHJ1Y3Qga3ZtICprdm0pCj4+
-ICt7Cj4+ICsgICAgICAgaW50IGk7Cj4gCj4gTml0OiBJbiBlYXJsaWVyIGNvZGUsIHlvdSB1c2Ug
-dTMyIGZvciB0aGlzIGluZGV4LiAoSSdtIGFjdHVhbGx5IGEgZmFuCj4gb2YgaW50LCBteXNlbGYu
-KQoKSSB1c3VhbGx5IHVzZSBpbnQgYXMgd2VsbCBiZWNhdXNlIGl0J3MgZWFzaWVyIHRvIHR5cGUs
-IGJ1dCBkb2luZyBzaWduZWQgCmluZGV4ZXMgaXMganVzdCBzbyB3cm9uZyBvbiBzbyBtYW55IGxl
-dmVscyA6KS4gSSdsbCBmaXggdGhlbSB1cCB0b28gYmUgCmFsbCB1MzIuCgoKQWxleAoKCgpBbWF6
-b24gRGV2ZWxvcG1lbnQgQ2VudGVyIEdlcm1hbnkgR21iSApLcmF1c2Vuc3RyLiAzOAoxMDExNyBC
-ZXJsaW4KR2VzY2hhZWZ0c2Z1ZWhydW5nOiBDaHJpc3RpYW4gU2NobGFlZ2VyLCBKb25hdGhhbiBX
-ZWlzcwpFaW5nZXRyYWdlbiBhbSBBbXRzZ2VyaWNodCBDaGFybG90dGVuYnVyZyB1bnRlciBIUkIg
-MTQ5MTczIEIKU2l0ejogQmVybGluClVzdC1JRDogREUgMjg5IDIzNyA4NzkKCgo=
+While tying to add support for the MSR_CORE_THREAD_COUNT MSR in KVM,
+I realized that we were still in a world where user space has no control
+over what happens with MSR emulation in KVM.
+
+That is bad for multiple reasons. In my case, I wanted to emulate the
+MSR in user space, because it's a CPU specific register that does not
+exist on older CPUs and that really only contains informational data that
+is on the package level, so it's a natural fit for user space to provide
+it.
+
+However, it is also bad on a platform compatibility level. Currrently,
+KVM has no way to expose different MSRs based on the selected target CPU
+type.
+
+This patch set introduces a way for user space to indicate to KVM which
+MSRs should be handled in kernel space. With that, we can solve part of
+the platform compatibility story. Or at least we can not handle AMD specific
+MSRs on an Intel platform and vice versa.
+
+In addition, it introduces a way for user space to get into the loop
+when an MSR access would generate a #GP fault, such as when KVM finds an
+MSR that is not handled by the in-kernel MSR emulation or when the guest
+is trying to access reserved registers.
+
+In combination with filtering, user space trapping allows us to emulate
+arbitrary MSRs in user space, paving the way for target CPU specific MSR
+implementations from user space.
+
+v1 -> v2:
+
+  - s/ETRAP_TO_USER_SPACE/ENOENT/g
+  - deflect all #GP injection events to user space, not just unknown MSRs.
+    That was we can also deflect allowlist errors later
+  - fix emulator case
+  - new patch: KVM: x86: Introduce allow list for MSR emulation
+  - new patch: KVM: selftests: Add test for user space MSR handling
+
+v2 -> v3:
+
+  - return r if r == X86EMUL_IO_NEEDED
+  - s/KVM_EXIT_RDMSR/KVM_EXIT_X86_RDMSR/g
+  - s/KVM_EXIT_WRMSR/KVM_EXIT_X86_WRMSR/g
+  - Use complete_userspace_io logic instead of reply field
+  - Simplify trapping code
+  - document flags for KVM_X86_ADD_MSR_ALLOWLIST
+  - generalize exit path, always unlock when returning
+  - s/KVM_CAP_ADD_MSR_ALLOWLIST/KVM_CAP_X86_MSR_ALLOWLIST/g
+  - Add KVM_X86_CLEAR_MSR_ALLOWLIST
+  - Add test to clear whitelist
+  - Adjust to reply-less API
+  - Fix asserts
+  - Actually trap on MSR_IA32_POWER_CTL writes
+
+v3 -> v4:
+
+  - Mention exit reasons in re-enter mandatory section of API documentation
+  - Clear padding bytes
+  - Generalize get/set deflect functions
+  - Remove redundant pending_user_msr field
+  - lock allow check and clearing
+  - free bitmaps on clear
+
+v4 -> v5:
+
+  - use srcu 
+
+v5 -> v6:
+
+  - Switch from allow list to filtering API with explicit fallback option
+  - Support and test passthrough MSR filtering
+  - Check for filter exit reason
+  - Add .gitignore
+  - send filter change notification
+  - change to atomic set_msr_filter ioctl with fallback flag
+  - use EPERM for filter blocks
+  - add bit for MSR user space deflection
+  - check for overflow of BITS_TO_LONGS (thanks Dan Carpenter!)
+  - s/int i;/u32 i;/
+  - remove overlap check
+  - Introduce exit reason mask to allow for future expansion and filtering
+  - s/emul_to_vcpu(ctxt)/vcpu/
+  - imported patch: KVM: x86: Prepare MSR bitmaps for userspace tracked MSRs
+  - new patch: KVM: x86: Add infrastructure for MSR filtering
+  - new patch: KVM: x86: SVM: Prevent MSR passthrough when MSR access is denied
+  - new patch: KVM: x86: VMX: Prevent MSR passthrough when MSR access is denied
+
+Aaron Lewis (1):
+  KVM: x86: Prepare MSR bitmaps for userspace tracked MSRs
+
+Alexander Graf (6):
+  KVM: x86: Deflect unknown MSR accesses to user space
+  KVM: x86: Add infrastructure for MSR filtering
+  KVM: x86: SVM: Prevent MSR passthrough when MSR access is denied
+  KVM: x86: VMX: Prevent MSR passthrough when MSR access is denied
+  KVM: x86: Introduce MSR filtering
+  KVM: selftests: Add test for user space MSR handling
+
+ Documentation/virt/kvm/api.rst                | 176 +++++++++-
+ arch/x86/include/asm/kvm_host.h               |  18 ++
+ arch/x86/include/uapi/asm/kvm.h               |  19 ++
+ arch/x86/kvm/emulate.c                        |  18 +-
+ arch/x86/kvm/svm/svm.c                        | 122 +++++--
+ arch/x86/kvm/svm/svm.h                        |   7 +
+ arch/x86/kvm/vmx/nested.c                     |   2 +-
+ arch/x86/kvm/vmx/vmx.c                        | 303 ++++++++++++------
+ arch/x86/kvm/vmx/vmx.h                        |   9 +-
+ arch/x86/kvm/x86.c                            | 267 ++++++++++++++-
+ arch/x86/kvm/x86.h                            |   1 +
+ include/trace/events/kvm.h                    |   2 +-
+ include/uapi/linux/kvm.h                      |  17 +
+ tools/testing/selftests/kvm/.gitignore        |   1 +
+ tools/testing/selftests/kvm/Makefile          |   1 +
+ .../selftests/kvm/x86_64/user_msr_test.c      | 224 +++++++++++++
+ 16 files changed, 1055 insertions(+), 132 deletions(-)
+ create mode 100644 tools/testing/selftests/kvm/x86_64/user_msr_test.c
+
+-- 
+2.17.1
+
+
+
+
+Amazon Development Center Germany GmbH
+Krausenstr. 38
+10117 Berlin
+Geschaeftsfuehrung: Christian Schlaeger, Jonathan Weiss
+Eingetragen am Amtsgericht Charlottenburg unter HRB 149173 B
+Sitz: Berlin
+Ust-ID: DE 289 237 879
+
+
 
