@@ -2,47 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 75FA325C3B1
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Sep 2020 16:56:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DF97325C34C
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Sep 2020 16:48:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729177AbgICO4T (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Sep 2020 10:56:19 -0400
-Received: from szxga05-in.huawei.com ([45.249.212.191]:10764 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1729175AbgICOKy (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 3 Sep 2020 10:10:54 -0400
-Received: from DGGEMS405-HUB.china.huawei.com (unknown [172.30.72.58])
-        by Forcepoint Email with ESMTP id C91757B51C7D80ACF500;
-        Thu,  3 Sep 2020 21:18:59 +0800 (CST)
-Received: from [127.0.0.1] (10.174.176.220) by DGGEMS405-HUB.china.huawei.com
- (10.3.19.205) with Microsoft SMTP Server id 14.3.487.0; Thu, 3 Sep 2020
- 21:18:53 +0800
-Subject: Re: [PATCH v11 3/5] arm64: kdump: reimplement crashkernel=X
-To:     Catalin Marinas <catalin.marinas@arm.com>
-References: <20200801130856.86625-1-chenzhou10@huawei.com>
- <20200801130856.86625-4-chenzhou10@huawei.com> <20200902170910.GB16673@gaia>
- <f33a0ce6-552e-2f1a-e720-4f7124f15d1e@huawei.com>
-CC:     <wangkefeng.wang@huawei.com>, <linux-doc@vger.kernel.org>,
-        <bhsharma@redhat.com>, <huawei.libin@huawei.com>,
-        <guohanjun@huawei.com>, <will@kernel.org>, <bhe@redhat.com>,
-        <corbet@lwn.net>, <mingo@redhat.com>, <dyoung@redhat.com>,
-        <John.P.donnelly@oracle.com>, <arnd@arndb.de>,
-        <xiexiuqi@huawei.com>, <horms@verge.net.au>, <tglx@linutronix.de>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <kexec@lists.infradead.org>, <linux-kernel@vger.kernel.org>,
-        <robh+dt@kernel.org>, <james.morse@arm.com>,
-        <prabhakar.pkin@gmail.com>, <nsaenzjulienne@suse.de>
-From:   chenzhou <chenzhou10@huawei.com>
-Message-ID: <779fd86d-4d1a-c2ac-ffc8-79f05526a00c@huawei.com>
-Date:   Thu, 3 Sep 2020 21:18:51 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101
- Thunderbird/45.7.1
+        id S1729341AbgICOsw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Sep 2020 10:48:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34896 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729281AbgICOWU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Sep 2020 10:22:20 -0400
+Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com [IPv6:2607:f8b0:4864:20::544])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4219FC061247;
+        Thu,  3 Sep 2020 07:21:53 -0700 (PDT)
+Received: by mail-pg1-x544.google.com with SMTP id h12so2260767pgm.7;
+        Thu, 03 Sep 2020 07:21:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=Pj7ZEa7B2UgPnwhBiY5PHRS6mRxiKDa+9/aWldMxXZg=;
+        b=MB4dl5UHJMLEepcNb8gBmywFKXlLS5jf8KvnwztwZfd6lraxS/6PQSyjEv1M2+iDPh
+         8ZZz4XNo8BzSP3NhmTR57to07WN8ELnJqaC9y41x3m0Kmwl8cZDFJIbWi3czAWrGo4Jn
+         A0XK+OA36mm/kv9zsvTSMZXqNhSkSSpbE10KMOux1FTQMrlDw5HvZVXTzL6Z+ybuxwRn
+         iG5tdozF8vgoE0HUjWtMMGwxYtFfItnf4ulwxZdS8oW8q4MPYYDmtjWT+KGokKFc/ojN
+         JE8dLU30KURSG6gO9Az8DIAudDmA7bQ7Ny9bvKupdOqFngmjxqA5z0GrS+mx+5l8rbl7
+         0M/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=Pj7ZEa7B2UgPnwhBiY5PHRS6mRxiKDa+9/aWldMxXZg=;
+        b=SKsSyhHWbiU0jIeP2j+QnF6prVFbmn4xzzPEN4UfLHFXU+bN/P2+VrmCMAh+Mdl90c
+         +HSHtmEq4UWvn3SA9L50ZV9+sOoKyhEf34n5KuUpQSNuSJxMT0xgSPROtA/VWApDTHav
+         SzFmX7AOWaT7mgUMzr6j4kyph+ZqjnFFG0Z2nOoeKdCZrFyr6/fMvboqexln8GsVf+nb
+         29zWNQ9CnPchT6bm5UhvUE9Ff04jLuKMEmAtqvts8e40gLjdFKbGqxSFzBvg5FdVyG2N
+         hTgkVnHuhJa4k7ZURkZc+r8yFAjVnxlEooTu40Pa0w3IxXtaDo5wIjE+gV3Pvzv9vpii
+         92BA==
+X-Gm-Message-State: AOAM532SJ1P2TWqgYxe9jqhitsUvlEQ1Kxy72Vw8tmFM3NY70k3IOlRE
+        DfP1JYrh4GwmmwUtXvigS7Qwr9jtVW4=
+X-Google-Smtp-Source: ABdhPJzpoqY0tpXcZF2ratDQLsgk6IQez1dwLsaWo3nPB3AsQ+AOBT4nELos8ePMxGM71f8yBx/Kkg==
+X-Received: by 2002:a17:902:758d:: with SMTP id j13mr4189581pll.174.1599142912788;
+        Thu, 03 Sep 2020 07:21:52 -0700 (PDT)
+Received: from [192.168.1.3] (ip68-111-84-250.oc.oc.cox.net. [68.111.84.250])
+        by smtp.gmail.com with ESMTPSA id t33sm2980489pga.72.2020.09.03.07.21.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 03 Sep 2020 07:21:51 -0700 (PDT)
+Subject: Re: [PATCH] doc: net: dsa: Fix typo in config code sample
+To:     Paul Barker <pbarker@konsulko.com>, Andrew Lunn <andrew@lunn.ch>,
+        Vivien Didelot <vivien.didelot@gmail.com>,
+        "David S . Miller" <davem@davemloft.net>
+Cc:     netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+        trivial@kernel.org
+References: <20200903084925.124494-1-pbarker@konsulko.com>
+From:   Florian Fainelli <f.fainelli@gmail.com>
+Message-ID: <4f50fcff-a253-647b-3b81-08662a56f278@gmail.com>
+Date:   Thu, 3 Sep 2020 07:21:50 -0700
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Firefox/78.0 Thunderbird/78.1.1
 MIME-Version: 1.0
-In-Reply-To: <f33a0ce6-552e-2f1a-e720-4f7124f15d1e@huawei.com>
-Content-Type: text/plain; charset="windows-1252"
+In-Reply-To: <20200903084925.124494-1-pbarker@konsulko.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.176.220]
-X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
@@ -50,60 +72,15 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 
 
-On 2020/9/3 19:26, chenzhou wrote:
-> Hi Catalin,
->
->
-> On 2020/9/3 1:09, Catalin Marinas wrote:
->> On Sat, Aug 01, 2020 at 09:08:54PM +0800, Chen Zhou wrote:
->>> There are following issues in arm64 kdump:
->>> 1. We use crashkernel=X to reserve crashkernel below 4G, which
->>> will fail when there is no enough low memory.
->>> 2. If reserving crashkernel above 4G, in this case, crash dump
->>> kernel will boot failure because there is no low memory available
->>> for allocation.
->>> 3. Since commit 1a8e1cef7603 ("arm64: use both ZONE_DMA and ZONE_DMA32"),
->>> if the memory reserved for crash dump kernel falled in ZONE_DMA32,
->>> the devices in crash dump kernel need to use ZONE_DMA will alloc
->>> fail.
->>>
->>> To solve these issues, change the behavior of crashkernel=X.
->>> crashkernel=X tries low allocation in ZONE_DMA, and fall back to
->>> high allocation if it fails.
->>>
->>> If requized size X is too large and leads to very little free memory
->>> in ZONE_DMA after low allocation, the system may not work normally.
->>> So add a threshold and go for high allocation directly if the required
->>> size is too large. The value of threshold is set as the half of
->>> the low memory.
->>>
->>> If crash_base is outside ZONE_DMA, try to allocate at least 256M in
->>> ZONE_DMA automatically. "crashkernel=Y,low" can be used to allocate
->>> specified size low memory.
->> Except for the threshold to keep zone ZONE_DMA memory,
->> reserve_crashkernel() looks very close to the x86 version. Shall we try
->> to make this generic as well? In the first instance, you could avoid the
->> threshold check if it takes an explicit ",high" option.
-> Ok, i will try to do this.
->
-> I look into the function reserve_crashkernel() of x86 and found the start address is
-> CRASH_ALIGN in function memblock_find_in_range(), which is different with arm64.
->
-> I don't figure out why is CRASH_ALIGN in x86, is there any specific reason?
-Besides, in function reserve_crashkernel_low() of x86, the start address is 0.
+On 9/3/2020 1:49 AM, Paul Barker wrote:
+> In the "single port" example code for configuring a DSA switch without
+> tagging support from userspace the command to bring up the "lan2" link
+> was typo'd.
+> 
+> Signed-off-by: Paul Barker <pbarker@konsulko.com>
 
->
-> Thanks,
-> Chen Zhou
->
->
->
-> _______________________________________________
-> linux-arm-kernel mailing list
-> linux-arm-kernel@lists.infradead.org
-> http://lists.infradead.org/mailman/listinfo/linux-arm-kernel
->
-> .
->
+Acked-by: Florian Fainelli <f.fainelli@gmail.com>
 
-
+Ah yes, thanks!
+-- 
+Florian
