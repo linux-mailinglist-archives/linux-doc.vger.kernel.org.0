@@ -2,255 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DA21B25C61E
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Sep 2020 18:05:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C0EF725C633
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Sep 2020 18:09:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728468AbgICQFy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Sep 2020 12:05:54 -0400
-Received: from mail.cmpwn.com ([45.56.77.53]:39300 "EHLO mail.cmpwn.com"
+        id S1728431AbgICQJE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Sep 2020 12:09:04 -0400
+Received: from mga12.intel.com ([192.55.52.136]:42295 "EHLO mga12.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728706AbgICQFv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 3 Sep 2020 12:05:51 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=cmpwn.com; s=cmpwn;
-        t=1599149149; bh=6zdgByrZJIvEvPqVl8UQ5eGy7hCOPIiDaGyfANPhpVc=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References;
-        b=2noFDspzCrIgD1FiZTsfomsDrUSXFgfbiqfDIPpm3Nmu++46pOz88j6c2/9rJxtJr
-         fPV2qa5aIcMurwKPzH60wwh8D3u8Qm/SqxfY+pWw6IQw5k7NIU09bjeJwqDp7a/txj
-         REzwf2MOK9yiLMrdmJyLBPSAg9HMWGYs/dZDWY+E=
-From:   Drew DeVault <sir@cmpwn.com>
-To:     "Jonathan Corbet" <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     Drew DeVault <sir@cmpwn.com>
-Subject: [PATCH v3 4/4] submitting-patches.rst: presume git will be used
-Date:   Thu,  3 Sep 2020 12:05:45 -0400
-Message-Id: <20200903160545.83185-5-sir@cmpwn.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200903160545.83185-1-sir@cmpwn.com>
-References: <20200903160545.83185-1-sir@cmpwn.com>
+        id S1727786AbgICQJE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 3 Sep 2020 12:09:04 -0400
+IronPort-SDR: 1NhuyrsD94GV8ZMw89w7t0V1xuNWB8VuXgSJVnoettkb83VcOdd55dOpGtC+ZON/LuG7CYlF6c
+ b7y8ofnHa3Fw==
+X-IronPort-AV: E=McAfee;i="6000,8403,9733"; a="137127466"
+X-IronPort-AV: E=Sophos;i="5.76,387,1592895600"; 
+   d="scan'208";a="137127466"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Sep 2020 09:09:03 -0700
+IronPort-SDR: +C92qNo6vPQliFbZvRVoLeCI4c58RtTTyJZLqSfKqMdZx/NGqhVaiuZEkTHCzNP6ihEpbCixYB
+ VQvGXEsgZUUQ==
+X-IronPort-AV: E=Sophos;i="5.76,387,1592895600"; 
+   d="scan'208";a="503116307"
+Received: from yyu32-mobl1.amr.corp.intel.com (HELO [10.209.173.133]) ([10.209.173.133])
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Sep 2020 09:09:01 -0700
+Subject: Re: [PATCH v11 6/9] x86/cet: Add PTRACE interface for CET
+To:     Dave Hansen <dave.hansen@intel.com>,
+        Andy Lutomirski <luto@amacapital.net>
+Cc:     Jann Horn <jannh@google.com>,
+        the arch/x86 maintainers <x86@kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        kernel list <linux-kernel@vger.kernel.org>,
+        linux-doc@vger.kernel.org, Linux-MM <linux-mm@kvack.org>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        Linux API <linux-api@vger.kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>
+References: <46e42e5e-0bca-5f3f-efc9-5ab15827cc0b@intel.com>
+ <40BC093A-F430-4DCC-8DC0-2BA90A6FC3FA@amacapital.net>
+ <b3809dd7-8566-0517-2389-8089475135b7@intel.com>
+From:   "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
+Message-ID: <88261152-2de1-fe8d-7ab0-acb108e97e04@intel.com>
+Date:   Thu, 3 Sep 2020 09:09:01 -0700
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
+In-Reply-To: <b3809dd7-8566-0517-2389-8089475135b7@intel.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Git is fairly ubiquitous these days, and the additional information in
-this documentation for preparing patches without it is not especially
-relevant anymore and may serve to confuse new contributors.
+On 9/3/2020 7:26 AM, Dave Hansen wrote:
+> On 9/2/20 9:35 PM, Andy Lutomirski wrote:
+>>>>>>> +       fpu__prepare_read(fpu);
+>>>>>>> +       cetregs = get_xsave_addr(&fpu->state.xsave, XFEATURE_CET_USER);
+>>>>>>> +       if (!cetregs)
+>>>>>>> +               return -EFAULT;
+>>>>>> Can this branch ever be hit without a kernel bug? If yes, I think
+>>>>>> -EFAULT is probably a weird error code to choose here. If no, this
+>>>>>> should probably use WARN_ON(). Same thing in cetregs_set().
+>>>>> When a thread is not CET-enabled, its CET state does not exist.  I looked at EFAULT, and it means "Bad address".  Maybe this can be ENODEV, which means "No such device"?
+>> Having read the code, I’m unconvinced. It looks like a get_xsave_addr() failure means “state not saved; task sees INIT state”.  So *maybe* it’s reasonable -ENODEV this, but I’m not really convinced. I tend to think we should return the actual INIT state and that we should permit writes and handle them correctly.
+> 
+> PTRACE is asking for access to the values in the *registers*, not for
+> the value in the kernel XSAVE buffer.  We just happen to only have the
+> kernel XSAVE buffer around.
 
-The git request-pull comments were also removed, given that it is not a
-tool well-suited to novice contributors, nor do maintainers especially
-appreciate receiving unexpected request-pulls from new contributors.
+When get_xsave_addr() returns NULL, there are three possibilities:
+- XSAVE is not enabled or not supported;
+- The kernel does not support the requested feature;
+- The requested feature is in INIT state.
 
-Signed-off-by: Drew DeVault <sir@cmpwn.com>
----
- Documentation/process/submitting-patches.rst | 148 ++-----------------
- 1 file changed, 16 insertions(+), 132 deletions(-)
+If the debugger is going to write an MSR, only in the third case would 
+this make a slight sense.  For example, if the system has CET enabled, 
+but the task does not have CET enabled, and GDB is writing to a CET MSR. 
+  But still, this is strange to me.
 
-diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
-index 9072ed879696..567c1f95ef82 100644
---- a/Documentation/process/submitting-patches.rst
-+++ b/Documentation/process/submitting-patches.rst
-@@ -18,11 +18,10 @@ submitting code.  If you are submitting a driver, also read
- for device tree binding patches, read
- Documentation/devicetree/bindings/submitting-patches.rst.
- 
--Many of these steps describe the default behavior of the ``git`` version
--control system; if you use ``git`` to prepare your patches, you'll find much
--of the mechanical work done for you, though you'll still need to prepare
--and document a sensible set of patches.  In general, use of ``git`` will make
--your life as a kernel developer easier.
-+This documentation assumes that you're using ``git`` to prepare your patches.
-+If you're unfamiliar with ``git``, you would be well-advised to learn how to
-+use it, it will make your life as a kernel developer and in general much
-+easier.
- 
- Obtain a current source tree
- ----------------------------
-@@ -39,64 +38,6 @@ patches prepared against those trees.  See the **T:** entry for the subsystem
- in the MAINTAINERS file to find that tree, or simply ask the maintainer if
- the tree is not listed there.
- 
--It is still possible to download kernel releases via tarballs (as described
--in the next section), but that is the hard way to do kernel development.
--
--1) ``diff -up``
-----------------
--
--If you must generate your patches by hand, use ``diff -up`` or ``diff -uprN``
--to create patches.  Git generates patches in this form by default; if
--you're using ``git``, you can skip this section entirely.
--
--All changes to the Linux kernel occur in the form of patches, as
--generated by :manpage:`diff(1)`.  When creating your patch, make sure to
--create it in "unified diff" format, as supplied by the ``-u`` argument
--to :manpage:`diff(1)`.
--Also, please use the ``-p`` argument which shows which C function each
--change is in - that makes the resultant ``diff`` a lot easier to read.
--Patches should be based in the root kernel source directory,
--not in any lower subdirectory.
--
--To create a patch for a single file, it is often sufficient to do::
--
--	SRCTREE=linux
--	MYFILE=drivers/net/mydriver.c
--
--	cd $SRCTREE
--	cp $MYFILE $MYFILE.orig
--	vi $MYFILE	# make your change
--	cd ..
--	diff -up $SRCTREE/$MYFILE{.orig,} > /tmp/patch
--
--To create a patch for multiple files, you should unpack a "vanilla",
--or unmodified kernel source tree, and generate a ``diff`` against your
--own source tree.  For example::
--
--	MYSRC=/devel/linux
--
--	tar xvfz linux-3.19.tar.gz
--	mv linux-3.19 linux-3.19-vanilla
--	diff -uprN -X linux-3.19-vanilla/Documentation/dontdiff \
--		linux-3.19-vanilla $MYSRC > /tmp/patch
--
--``dontdiff`` is a list of files which are generated by the kernel during
--the build process, and should be ignored in any :manpage:`diff(1)`-generated
--patch.
--
--Make sure your patch does not include any extra files which do not
--belong in a patch submission.  Make sure to review your patch -after-
--generating it with :manpage:`diff(1)`, to ensure accuracy.
--
--If your changes produce a lot of deltas, you need to split them into
--individual patches which modify things in logical stages; see
--:ref:`split_changes`.  This will facilitate review by other kernel developers,
--very important if you want your patch accepted.
--
--If you're using ``git``, ``git rebase -i`` can help you with this process.  If
--you're not using ``git``, ``quilt`` <https://savannah.nongnu.org/projects/quilt>
--is another popular alternative.
--
- .. _describe_changes:
- 
- Describe your changes
-@@ -350,7 +291,12 @@ on the changes you are submitting.  It is important for a kernel
- developer to be able to "quote" your changes, using standard e-mail
- tools, so that they may comment on specific portions of your code.
- 
--For this reason, all patches should be submitted by e-mail "inline".
-+For this reason, all patches should be submitted by e-mail "inline". The
-+easiest way to do this is with ``git send-email``, which is strongly
-+recommended.  An interactive tutorial for ``git send-email`` is available at
-+https://git-send-email.io.
-+
-+If you choose not to use ``git send-email``:
- 
- .. warning::
- 
-@@ -370,23 +316,14 @@ See :ref:`Documentation/process/email-clients.rst <email_clients>`
- for hints about configuring your e-mail client so that it sends your patches
- untouched.
- 
--E-mail size
-------------
--
--Large changes are not appropriate for mailing lists, and some
--maintainers.  If your patch, uncompressed, exceeds 300 kB in size,
--it is preferred that you store your patch on an Internet-accessible
--server, and provide instead a URL (link) pointing to your patch.  But note
--that if your patch exceeds 300 kB, it almost certainly needs to be broken up
--anyway.
--
- Respond to review comments
- --------------------------
- 
- Your patch will almost certainly get comments from reviewers on ways in
--which the patch can be improved.  You must respond to those comments;
--ignoring reviewers is a good way to get ignored in return.  Review comments
--or questions that do not lead to a code change should almost certainly
-+which the patch can be improved, in the form of a reply to your email. You must
-+respond to those comments; ignoring reviewers is a good way to get ignored in
-+return. You can simply reply to their emails to answer their comments. Review
-+comments or questions that do not lead to a code change should almost certainly
- bring about a comment or changelog entry so that the next reviewer better
- understands what is going on.
- 
-@@ -421,6 +358,7 @@ convention to prefix your subject line with [PATCH].  This lets Linus
- and other kernel developers more easily distinguish patches from other
- e-mail discussions.
- 
-+``git send-email`` will do this for you automatically.
- 
- 
- Sign your work - the Developer's Certificate of Origin
-@@ -468,6 +406,7 @@ then you just add a line saying::
- 	Signed-off-by: Random J Developer <random@developer.example.org>
- 
- using your real name (sorry, no pseudonyms or anonymous contributions.)
-+This will be done for you automatically if you use ``git commit -s``.
- 
- Some people also put extra tags at the end.  They'll just be ignored for
- now, but you can do this to mark internal company procedures or just
-@@ -795,61 +734,6 @@ either below the ``---`` line or at the very bottom of all other
- content, right before your email signature.
- 
- 
--Sending ``git pull`` requests
-------------------------------
--
--If you have a series of patches, it may be most convenient to have the
--maintainer pull them directly into the subsystem repository with a
--``git pull`` operation.  Note, however, that pulling patches from a developer
--requires a higher degree of trust than taking patches from a mailing list.
--As a result, many subsystem maintainers are reluctant to take pull
--requests, especially from new, unknown developers.  If in doubt you can use
--the pull request as the cover letter for a normal posting of the patch
--series, giving the maintainer the option of using either.
--
--A pull request should have [GIT PULL] in the subject line.  The
--request itself should include the repository name and the branch of
--interest on a single line; it should look something like::
--
--  Please pull from
--
--      git://jdelvare.pck.nerim.net/jdelvare-2.6 i2c-for-linus
--
--  to get these changes:
--
--A pull request should also include an overall message saying what will be
--included in the request, a ``git shortlog`` listing of the patches
--themselves, and a ``diffstat`` showing the overall effect of the patch series.
--The easiest way to get all this information together is, of course, to let
--``git`` do it for you with the ``git request-pull`` command.
--
--Some maintainers (including Linus) want to see pull requests from signed
--commits; that increases their confidence that the request actually came
--from you.  Linus, in particular, will not pull from public hosting sites
--like GitHub in the absence of a signed tag.
--
--The first step toward creating such tags is to make a GNUPG key and get it
--signed by one or more core kernel developers.  This step can be hard for
--new developers, but there is no way around it.  Attending conferences can
--be a good way to find developers who can sign your key.
--
--Once you have prepared a patch series in ``git`` that you wish to have somebody
--pull, create a signed tag with ``git tag -s``.  This will create a new tag
--identifying the last commit in the series and containing a signature
--created with your private key.  You will also have the opportunity to add a
--changelog-style message to the tag; this is an ideal place to describe the
--effects of the pull request as a whole.
--
--If the tree the maintainer will be pulling from is not the repository you
--are working from, don't forget to push the signed tag explicitly to the
--public tree.
--
--When generating your pull request, use the signed tag as the target.  A
--command like this will do the trick::
--
--  git request-pull master git://my.public.tree/linux.git my-signed-tag
--
--
- References
- ----------
- 
--- 
-2.28.0
+> 
+> If we want to really support PTRACE we have to allow the registers to be
+> get/set, regardless of what state they are in, INIT state or not.  So,
+> yeah I agree with Andy.
+> 
 
+GDB does not have a WRMSR mechanism.  If GDB is going to write an MSR, 
+it will call arch_prctl or an assembly routine in memory.
+
+Yu-cheng
