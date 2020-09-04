@@ -2,91 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3E31625DFCE
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Sep 2020 18:29:34 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 97D3325DFFB
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Sep 2020 18:43:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726267AbgIDQ3d (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 4 Sep 2020 12:29:33 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50684 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725966AbgIDQ3c (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Sep 2020 12:29:32 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AE95DC061245
-        for <linux-doc@vger.kernel.org>; Fri,  4 Sep 2020 09:29:32 -0700 (PDT)
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id DD11E44A;
-        Fri,  4 Sep 2020 16:29:26 +0000 (UTC)
-Date:   Fri, 4 Sep 2020 10:29:25 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     linux-doc@vger.kernel.org
-Cc:     Mauro Carvalho Chehab <mchehab@infradead.org>,
-        Markus Heiser <markus.heiser@darmarit.de>
-Subject: [PATCH RFC] Make the docs build "work" with Sphinx 3.x
-Message-ID: <20200904102925.52fcd2a1@lwn.net>
-Organization: LWN.net
+        id S1727044AbgIDQmz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 4 Sep 2020 12:42:55 -0400
+Received: from mga06.intel.com ([134.134.136.31]:31602 "EHLO mga06.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726114AbgIDQmz (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 4 Sep 2020 12:42:55 -0400
+IronPort-SDR: vc3iZkitfcnB934+apVa/Rrpg57K149hZbxAnu1RGG8BVPha1VK8uZcRBDdSswgmrdSH0maY5u
+ ZgCDAI2mECYw==
+X-IronPort-AV: E=McAfee;i="6000,8403,9734"; a="219337142"
+X-IronPort-AV: E=Sophos;i="5.76,390,1592895600"; 
+   d="scan'208";a="219337142"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 04 Sep 2020 09:42:54 -0700
+IronPort-SDR: tpi1BOHeyc/3bUdy1tLlVqxhknbQM6rWuITrHIw0cYx/ddFawv/kCVr0vngQSnYvIW4DfaPBrx
+ cUNAWhEBhrRg==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.76,390,1592895600"; 
+   d="scan'208";a="332217258"
+Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
+  by orsmga008.jf.intel.com with ESMTP; 04 Sep 2020 09:42:52 -0700
+Received: from andy by smile with local (Exim 4.94)
+        (envelope-from <andriy.shevchenko@linux.intel.com>)
+        id 1kEEat-00EKFU-4B; Fri, 04 Sep 2020 19:29:43 +0300
+Date:   Fri, 4 Sep 2020 19:29:43 +0300
+From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To:     Bartosz Golaszewski <brgl@bgdev.pl>
+Cc:     Linus Walleij <linus.walleij@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mika Westerberg <mika.westerberg@linux.intel.com>,
+        Kent Gibson <warthog618@gmail.com>, linux-gpio@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-acpi@vger.kernel.org,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Subject: Re: [PATCH 08/23] gpio: mockup: use pr_fmt()
+Message-ID: <20200904162943.GT1891694@smile.fi.intel.com>
+References: <20200904154547.3836-1-brgl@bgdev.pl>
+ <20200904154547.3836-9-brgl@bgdev.pl>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200904154547.3836-9-brgl@bgdev.pl>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The Sphinx 3.x upgrade broke a number of things in our special "cdomain"
-module that are not easy to fix.  For now, just disable that module for the
-3.x build and put out a warning that the build will not be perfect.  The
-problems affect primarily the media documentation where :name: is used.
+On Fri, Sep 04, 2020 at 05:45:32PM +0200, Bartosz Golaszewski wrote:
+> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> 
+> We don't need a custom logging helper. Let's use the standard pr_fmt()
+> macro which allows us to use all pr_*() routines with custom format.
+> 
+> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> ---
+>  drivers/gpio/gpio-mockup.c | 9 +++++----
+>  1 file changed, 5 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/gpio/gpio-mockup.c b/drivers/gpio/gpio-mockup.c
+> index 349782cdb4d7..73cd51459c2a 100644
+> --- a/drivers/gpio/gpio-mockup.c
+> +++ b/drivers/gpio/gpio-mockup.c
+> @@ -21,6 +21,9 @@
+>  
+>  #include "gpiolib.h"
 
-This is not a great solution, but it at least allows the docs build to
-proceed on systems running 3.x until somebody has the time to put together
-a proper fix.
+> +#undef pr_fmt
+> +#define pr_fmt(fmt)		GPIO_MOCKUP_NAME ": " fmt
+> +
 
-Signed-off-by: Jonathan Corbet <corbet@lwn.net>
----
-It seems that much of what we have in cdomain.cpy isn't needed with 3.x,
-though that has to be verified.  But the :name: extension is problematic.
-That needs a hard look, it's guaranteed to be a hard thing to maintain
-going forward and it would be nice if we could find a way to do without it.
+Just put definition to be first line of code before other inclusions and drop
+unnecessary #undef.
 
-Meanwhile, building the docs with Sphinx 3.2.1 takes nearly twice as long
-as with 2.2.2.  Given that the process was not exactly fast before, this
-is not a welcome change.  Sigh.
+>  #define GPIO_MOCKUP_NAME	"gpio-mockup"
+>  #define GPIO_MOCKUP_MAX_GC	10
+>  /*
+> @@ -31,8 +34,6 @@
+>  /* Maximum of three properties + the sentinel. */
+>  #define GPIO_MOCKUP_MAX_PROP	4
+>  
+> -#define gpio_mockup_err(...)	pr_err(GPIO_MOCKUP_NAME ": " __VA_ARGS__)
+> -
+>  /*
+>   * struct gpio_pin_status - structure describing a GPIO status
+>   * @dir:       Configures direction of gpio as "in" or "out"
+> @@ -549,7 +550,7 @@ static int __init gpio_mockup_init(void)
+>  
+>  	err = platform_driver_register(&gpio_mockup_driver);
+>  	if (err) {
+> -		gpio_mockup_err("error registering platform driver\n");
+> +		pr_err("error registering platform driver\n");
+>  		return err;
+>  	}
+>  
+> @@ -577,7 +578,7 @@ static int __init gpio_mockup_init(void)
+>  
+>  		pdev = platform_device_register_full(&pdevinfo);
+>  		if (IS_ERR(pdev)) {
+> -			gpio_mockup_err("error registering device");
+> +			pr_err("error registering device");
+>  			platform_driver_unregister(&gpio_mockup_driver);
+>  			gpio_mockup_unregister_pdevs();
+>  			return PTR_ERR(pdev);
+> -- 
+> 2.26.1
+> 
 
- Documentation/conf.py | 15 ++++++++++++++-
- 1 file changed, 14 insertions(+), 1 deletion(-)
-
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index c503188880d9..0a102d57437d 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -36,10 +36,23 @@ needs_sphinx = '1.3'
- # Add any Sphinx extension module names here, as strings. They can be
- # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
- # ones.
--extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include', 'cdomain',
-+extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include',
-               'kfigure', 'sphinx.ext.ifconfig', 'automarkup',
-               'maintainers_include', 'sphinx.ext.autosectionlabel' ]
- 
-+#
-+# cdomain is badly broken in Sphinx 3+.  Leaving it out generates *most*
-+# of the docs correctly, but not all.  Scream bloody murder but allow
-+# the process to proceed; hopefully somebody will fix this properly soon.
-+#
-+if major >= 3:
-+    sys.stderr.write('''WARNING: The kernel documentation build process
-+	does not work correctly with Sphinx v3.0 and above.  Expect errors
-+	in the generated output.
-+	''')
-+else:
-+    extensions.append('cdomain')
-+
- # Ensure that autosectionlabel will produce unique names
- autosectionlabel_prefix_document = True
- autosectionlabel_maxdepth = 2
 -- 
-2.26.2
+With Best Regards,
+Andy Shevchenko
+
 
