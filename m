@@ -2,177 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A7C6B25D7C1
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Sep 2020 13:47:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9C27F25D904
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Sep 2020 14:55:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729753AbgIDLrb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 4 Sep 2020 07:47:31 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:53672 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1729297AbgIDLr3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Sep 2020 07:47:29 -0400
-Received: from pps.filterd (m0098399.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 084BX1Mu180994;
-        Fri, 4 Sep 2020 07:47:14 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : subject :
- from : to : cc : date : in-reply-to : references : content-type :
- mime-version : content-transfer-encoding; s=pp1;
- bh=4Sbnt809dMBXF6cKluyEYXfuJYTsWdN/zlL8Yb9u6rY=;
- b=E8HMmcq7MTFKqRrv7/lvPB7s8oTwc6WBUQ6cz2ETXBs29yrBiUN5azhCdUKrfM5O0duc
- M5c7wjfZRPpw+lin9pmpfOED8q5Ti6TuomZtDJ2Evb+uJkLd28japrdPH95Uhe4hggxA
- YRWJpSciy3IfJT/5u+m7DN9F71oIPxo74nKHtUSt+irBwVG85OuGKASRjAJgTkMxj4ve
- jhty50GvknBZDPKd+GgRzwFugbaQtrX95KJDh11dDRk0avcPU+vmjfSxZG1hxkp6mqBx
- neuQK+dyYmugDeGglXZ+zpPW6WesdT+JzR7dVJFItyOqy8dn8RVZtfHZFDEPyTJLF835 Rg== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 33bmh5rtvu-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 04 Sep 2020 07:47:14 -0400
-Received: from m0098399.ppops.net (m0098399.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 084BX1FF180986;
-        Fri, 4 Sep 2020 07:47:14 -0400
-Received: from ppma06fra.de.ibm.com (48.49.7a9f.ip4.static.sl-reverse.com [159.122.73.72])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 33bmh5rtuy-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 04 Sep 2020 07:47:13 -0400
-Received: from pps.filterd (ppma06fra.de.ibm.com [127.0.0.1])
-        by ppma06fra.de.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 084BfjPk029412;
-        Fri, 4 Sep 2020 11:47:11 GMT
-Received: from b06cxnps3075.portsmouth.uk.ibm.com (d06relay10.portsmouth.uk.ibm.com [9.149.109.195])
-        by ppma06fra.de.ibm.com with ESMTP id 337e9h46es-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 04 Sep 2020 11:47:11 +0000
-Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com [9.149.105.62])
-        by b06cxnps3075.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 084Bl8lV32112904
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 4 Sep 2020 11:47:08 GMT
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id B684FAE053;
-        Fri,  4 Sep 2020 11:47:08 +0000 (GMT)
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 76F45AE045;
-        Fri,  4 Sep 2020 11:47:06 +0000 (GMT)
-Received: from li-f45666cc-3089-11b2-a85c-c57d1a57929f.ibm.com (unknown [9.160.87.223])
-        by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTP;
-        Fri,  4 Sep 2020 11:47:06 +0000 (GMT)
-Message-ID: <f18986930ddc2823994b549f1ff1cd742706e188.camel@linux.ibm.com>
-Subject: Re: [PATCH 5/6] arm64/ima: add ima arch support
-From:   Mimi Zohar <zohar@linux.ibm.com>
-To:     Chester Lin <clin@suse.com>, ardb@kernel.org,
-        catalin.marinas@arm.com, will@kernel.org,
-        dmitry.kasatkin@gmail.com, corbet@lwn.net, mark.rutland@arm.com,
-        vincenzo.frascino@arm.com, samitolvanen@google.com,
-        masahiroy@kernel.org, mingo@kernel.org
-Cc:     linux-kernel@vger.kernel.org, linux-efi@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-integrity@vger.kernel.org, linux-doc@vger.kernel.org,
-        jlee@suse.com
-Date:   Fri, 04 Sep 2020 07:47:05 -0400
-In-Reply-To: <20200904072905.25332-6-clin@suse.com>
-References: <20200904072905.25332-1-clin@suse.com>
-         <20200904072905.25332-6-clin@suse.com>
-Content-Type: text/plain; charset="ISO-8859-15"
-X-Mailer: Evolution 3.28.5 (3.28.5-12.el8) 
-Mime-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
- definitions=2020-09-04_06:2020-09-04,2020-09-04 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxscore=0 spamscore=0
- lowpriorityscore=0 bulkscore=0 priorityscore=1501 mlxlogscore=999
- adultscore=0 suspectscore=0 clxscore=1011 phishscore=0 impostorscore=0
- malwarescore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2009040106
+        id S1730218AbgIDMz1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 4 Sep 2020 08:55:27 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45652 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730018AbgIDMzU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Sep 2020 08:55:20 -0400
+Received: from mail-io1-xd41.google.com (mail-io1-xd41.google.com [IPv6:2607:f8b0:4864:20::d41])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0CAE4C061245
+        for <linux-doc@vger.kernel.org>; Fri,  4 Sep 2020 05:55:17 -0700 (PDT)
+Received: by mail-io1-xd41.google.com with SMTP id b6so6961461iof.6
+        for <linux-doc@vger.kernel.org>; Fri, 04 Sep 2020 05:55:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=W2Yrc8EmVMyvmKs3hnNcpX4KAZYwMH/LneJrTxAjdY0=;
+        b=NOInk+6qulCx71PLTfBW20+ac5pJklAQk3okPu2X0hISmFa2EzB+FKTTl1sMxErlxy
+         IpbfeGqBbkWeHU/jLBfa2GUsikyMiKylnLKeVAe5+jefLMauJIklaWfyT2tXv0eRqrOb
+         UNaMnNtAxBQlF7g+MqrVCJ3O6Gh/ibBL8OdYmVwQfq93ImWF7aOdzaQgiExrGQp/IXeQ
+         PD+gT5GbrEhsac9HMAfpKA2GZjRS4CSdCKE9VuvVFdqL3JumRsImStGCtkT/XzksCXLP
+         51axjO5nFTnSXu7zr+GrBYW8nlnFYcDnLD9WcDKALk4kfQCUhPAdYc/dAYyx08+A0vEy
+         c85w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=W2Yrc8EmVMyvmKs3hnNcpX4KAZYwMH/LneJrTxAjdY0=;
+        b=Ubwi444M80SZrVwb4VrWOJkE+MtTKGZt5eF1vti8kDiCv0KJeuiaszaBizmPng0LYp
+         DeoH8tnDpgPkTUy0m1/uovwq5PCwajWl79PUAuRhx3hvAsp5Fqa0/xm+o5h2lEFlAIrh
+         ExSZ10tSFxZdE1/TQJOIkPuAifa6PeM8NzeOoaAktF3RvR9zJgRkIhfMuJKAKhjdIgrk
+         q9sBrNz2Jf+Db2C+sAdBy4GYKC07KO0RZ2jZ2vAV9IJFVFzxZtxaprQHUo05XFYSu615
+         cbvg9Lgus9k0GK62EU+sUgqxdLvSvMrhgXEWeMpVUcgJXa2Izs8sfpxizHjie3Sql1L8
+         ZdJw==
+X-Gm-Message-State: AOAM531aA6LBUOYnzBTg/rXf0mmHhuTZh90gWwwqdkS1TvXZNELt7gtT
+        quCjXBqa9Tq/3yE3908sNcRuFy7mmcMEJBFFIAg=
+X-Google-Smtp-Source: ABdhPJxG1RIOTVCVar9Bc7VS/QHR0usCrEEJE4Ns1+6QPCdLoLIUb+VZ1x6bRUeozxLNdo6NSQMxS/wdXAoxjJUPYAE=
+X-Received: by 2002:a02:8802:: with SMTP id r2mr8249679jai.75.1599224116749;
+ Fri, 04 Sep 2020 05:55:16 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 2002:a92:650f:0:0:0:0:0 with HTTP; Fri, 4 Sep 2020 05:55:16 -0700 (PDT)
+Reply-To: robertandersonhappy1@gmail.com
+From:   robert <andersonrobertpass11@gmail.com>
+Date:   Fri, 4 Sep 2020 05:55:16 -0700
+Message-ID: <CAOga3ccMCrU9SGyhqMd2X1fNrWLOaQDa3P9ZA6SVR45xMt7E0w@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: base64
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 2020-09-04 at 15:29 +0800, Chester Lin wrote:
-> Add arm64 IMA arch support. The arch policy is inherited from x86.
-> 
-> Signed-off-by: Chester Lin <clin@suse.com>
-
-The "secureboot arch rules" comment should be updated to reflect that
-the policy is both "secure and trusted boot arch rules", both here and
-in x86.
-
-Reviewed-by: Mimi Zohar <zohar@linux.ibm.com>
-
-thanks,
-
-Mimi
-
-> ---
->  arch/arm64/Kconfig           |  1 +
->  arch/arm64/kernel/Makefile   |  2 ++
->  arch/arm64/kernel/ima_arch.c | 37 ++++++++++++++++++++++++++++++++++++
->  3 files changed, 40 insertions(+)
->  create mode 100644 arch/arm64/kernel/ima_arch.c
-> 
-> diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-> index 6d232837cbee..b5518e7b604d 100644
-> --- a/arch/arm64/Kconfig
-> +++ b/arch/arm64/Kconfig
-> @@ -196,6 +196,7 @@ config ARM64
->  	select SWIOTLB
->  	select SYSCTL_EXCEPTION_TRACE
->  	select THREAD_INFO_IN_TASK
-> +	imply IMA_SECURE_AND_OR_TRUSTED_BOOT    if EFI
->  	help
->  	  ARM 64-bit (AArch64) Linux support.
->  
-> diff --git a/arch/arm64/kernel/Makefile b/arch/arm64/kernel/Makefile
-> index a561cbb91d4d..0300ab60785d 100644
-> --- a/arch/arm64/kernel/Makefile
-> +++ b/arch/arm64/kernel/Makefile
-> @@ -71,3 +71,5 @@ extra-y					+= $(head-y) vmlinux.lds
->  ifeq ($(CONFIG_DEBUG_EFI),y)
->  AFLAGS_head.o += -DVMLINUX_PATH="\"$(realpath $(objtree)/vmlinux)\""
->  endif
-> +
-> +obj-$(CONFIG_IMA_SECURE_AND_OR_TRUSTED_BOOT)	+= ima_arch.o
-> diff --git a/arch/arm64/kernel/ima_arch.c b/arch/arm64/kernel/ima_arch.c
-> new file mode 100644
-> index 000000000000..46f5641c3da5
-> --- /dev/null
-> +++ b/arch/arm64/kernel/ima_arch.c
-> @@ -0,0 +1,37 @@
-> +/* SPDX-License-Identifier: GPL-2.0+ */
-> +/*
-> + * Copyright (C) 2018 IBM Corporation
-> + */
-> +#include <linux/efi.h>
-> +#include <linux/module.h>
-> +
-> +bool arch_ima_get_secureboot(void)
-> +{
-> +	if (efi_enabled(EFI_SECURE_BOOT))
-> +		return true;
-> +
-> +	return false;
-> +}
-> +
-> +/* secureboot arch rules */
-> +static const char * const sb_arch_rules[] = {
-> +#if !IS_ENABLED(CONFIG_KEXEC_SIG)
-> +	"appraise func=KEXEC_KERNEL_CHECK appraise_type=imasig",
-> +#endif /* CONFIG_KEXEC_SIG */
-> +	"measure func=KEXEC_KERNEL_CHECK",
-> +#if !IS_ENABLED(CONFIG_MODULE_SIG)
-> +	"appraise func=MODULE_CHECK appraise_type=imasig",
-> +#endif
-> +	"measure func=MODULE_CHECK",
-> +	NULL
-> +};
-> +
-> +const char * const *arch_get_ima_policy(void)
-> +{
-> +	if (IS_ENABLED(CONFIG_IMA_ARCH_POLICY) && arch_ima_get_secureboot()) {
-> +		if (IS_ENABLED(CONFIG_MODULE_SIG))
-> +			set_module_sig_enforced();
-> +		return sb_arch_rules;
-> +	}
-> +	return NULL;
-> +}
-
-
+576O5aW955qE5LiA5aSp77yM5oiR55qE5aW95pyL5Y+L44CCDQoNCuS7iuWkqei/h+W+l+WlveWQ
+l++8n+aIkeW3sue7j+W+iOS5heayoeacieaUtuWIsOaCqOeahOadpeS/oeS6hg0K5Zyo5L2g6Lqr
+6L655LuK5aSp77yM5oiR5b6I6auY5YW05Zyw6YCa55+l5oKo5oiR5ZyoDQrov5nkupvpgZfkvKDo
+tYTph5HnmoTmjqXmlLbvvIzlnKjmlrDnmoTlkIjkvZzkuIvovaznp7sNCuadpeiHquWNsOW6puS6
+mua0sueahOWQiOS9nOS8meS8tOOAguS7luaYr+WKoOaLv+Wkp+S6uu+8jOS9huS9j+WcqOWNsOW6
+pu+8jOS9huebruWJjQ0K5oiR5p2l5Y2w5bqm5LuO5LqL5oqV6LWE6aG555uu77yM5Y2g5oiR55qE
+5YWo6YOo5Lu96aKdDQrmlbDnmb7kuIfnvo7lhYPjgILlkIzml7bvvIzmiJHmsqHmnInlv5jorrDk
+vaDov4fljrvnmoTliqrlipvlkozlsJ3or5UNCuW4ruWKqeaIkemAmui/h+i/meS6m+mBl+S8oOeW
+l+azle+8jOWNs+S9v+Wksei0peS6hg0K5pyJ5pe277yM5oiR5Lus5biM5pyb5oKo5LiO5oiR5Zyo
+6KW/5aSa5ZOl5YWx5ZKM5Zu95rSb576O55qE56eY5Lmm6IGU57O7DQrpnZ7mtLLvvIzlpbnlj6tT
+b2xvbW9uIEJyYW5kee+8jOi/meaYr+S7lueahOeUteWtkOmCruS7tuWcsOWdgO+8iHNvbG9tb25i
+cmFuZHkwMDRAZ21haWwuY29t77yJDQror7forqnku5bogZTns7vpnZ7mtLLlvIDlj5Hpk7booYwN
+CuS/neeVmSQgMzUwLDAwMC4wMOS9nOS4uuaCqOeahOi1lOWBv+mHke+8jOi/meeslOi1lOWBv+mH
+kQ0K6L+H5Y6755qE5omA5pyJ5Yqq5Yqb5ZKM6L+H5Y675a+55oiR55qE5biu5YqpDQrlpITnkIbj
+gILmiJHnnJ/nmoTlvojmhJ/osKLmgqjlvZPml7bnmoTliqrlipvjgILmhJ/op4nlpoLmraQNCuWF
+jei0ue+8jOS4juaIkeeahOenmOS5puaJgOe9l+mXqMK35biD5YWw6L+q5YWI55Sf6IGU57O777yM
+5bm25ZGK6K+J5aW55Zyo5ZOq6YeMDQrpnZ7mtLLlvIDlj5Hpk7booYzlsIbmjZDotaDmgLvorqEz
+NTAsMDAw576O5YWD44CCDQoNCuivt+eri+WNs+mAmuefpeaIkemdnua0suW8gOWPkemTtuihjOi9
+rOW4kA0K6LWE6YeRJCAzNTAuMDAwLjAwDQrliLDmiJHnmoTpk7booYzluJDmiLfvvIznjrDlnKjm
+iJHlm6DkuLoNCuWboOatpO+8jOaIkeS4juaWsOWQiOS8meS6uuS4gOi1t+i/m+ihjOeahOaKlei1
+hOmhueebrg0K6YCa6L+H5LuW55qE55S15a2Q6YKu5Lu25Zyw5Z2A6IGU57O75omA572X6Zeowrfl
+uIPlhbDov6rlhYjnlJ/vvIwNCueri+WNs+S7o+ihqOaCqOS4jumdnua0suW8gOWPkemTtuihjOiB
+lOezu+OAgg0K6L+c56a7Q292aWQgMTnjgIINCg0K5bCK5pWs77yMDQrnvZfkvK/nibnCt+WuieW+
+t+ajruWNmuWjqw0K
