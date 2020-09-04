@@ -2,83 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9C27F25D904
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Sep 2020 14:55:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 53F5E25DB5B
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Sep 2020 16:21:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730218AbgIDMz1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 4 Sep 2020 08:55:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45652 "EHLO
+        id S1730470AbgIDOVr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 4 Sep 2020 10:21:47 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58944 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730018AbgIDMzU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Sep 2020 08:55:20 -0400
-Received: from mail-io1-xd41.google.com (mail-io1-xd41.google.com [IPv6:2607:f8b0:4864:20::d41])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0CAE4C061245
-        for <linux-doc@vger.kernel.org>; Fri,  4 Sep 2020 05:55:17 -0700 (PDT)
-Received: by mail-io1-xd41.google.com with SMTP id b6so6961461iof.6
-        for <linux-doc@vger.kernel.org>; Fri, 04 Sep 2020 05:55:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=W2Yrc8EmVMyvmKs3hnNcpX4KAZYwMH/LneJrTxAjdY0=;
-        b=NOInk+6qulCx71PLTfBW20+ac5pJklAQk3okPu2X0hISmFa2EzB+FKTTl1sMxErlxy
-         IpbfeGqBbkWeHU/jLBfa2GUsikyMiKylnLKeVAe5+jefLMauJIklaWfyT2tXv0eRqrOb
-         UNaMnNtAxBQlF7g+MqrVCJ3O6Gh/ibBL8OdYmVwQfq93ImWF7aOdzaQgiExrGQp/IXeQ
-         PD+gT5GbrEhsac9HMAfpKA2GZjRS4CSdCKE9VuvVFdqL3JumRsImStGCtkT/XzksCXLP
-         51axjO5nFTnSXu7zr+GrBYW8nlnFYcDnLD9WcDKALk4kfQCUhPAdYc/dAYyx08+A0vEy
-         c85w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=W2Yrc8EmVMyvmKs3hnNcpX4KAZYwMH/LneJrTxAjdY0=;
-        b=Ubwi444M80SZrVwb4VrWOJkE+MtTKGZt5eF1vti8kDiCv0KJeuiaszaBizmPng0LYp
-         DeoH8tnDpgPkTUy0m1/uovwq5PCwajWl79PUAuRhx3hvAsp5Fqa0/xm+o5h2lEFlAIrh
-         ExSZ10tSFxZdE1/TQJOIkPuAifa6PeM8NzeOoaAktF3RvR9zJgRkIhfMuJKAKhjdIgrk
-         q9sBrNz2Jf+Db2C+sAdBy4GYKC07KO0RZ2jZ2vAV9IJFVFzxZtxaprQHUo05XFYSu615
-         cbvg9Lgus9k0GK62EU+sUgqxdLvSvMrhgXEWeMpVUcgJXa2Izs8sfpxizHjie3Sql1L8
-         ZdJw==
-X-Gm-Message-State: AOAM531aA6LBUOYnzBTg/rXf0mmHhuTZh90gWwwqdkS1TvXZNELt7gtT
-        quCjXBqa9Tq/3yE3908sNcRuFy7mmcMEJBFFIAg=
-X-Google-Smtp-Source: ABdhPJxG1RIOTVCVar9Bc7VS/QHR0usCrEEJE4Ns1+6QPCdLoLIUb+VZ1x6bRUeozxLNdo6NSQMxS/wdXAoxjJUPYAE=
-X-Received: by 2002:a02:8802:: with SMTP id r2mr8249679jai.75.1599224116749;
- Fri, 04 Sep 2020 05:55:16 -0700 (PDT)
+        with ESMTP id S1730565AbgIDOVf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Sep 2020 10:21:35 -0400
+X-Greylist: delayed 1517 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 04 Sep 2020 07:21:33 PDT
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CAEABC061245
+        for <linux-doc@vger.kernel.org>; Fri,  4 Sep 2020 07:21:32 -0700 (PDT)
+Received: from ip4d14bc8c.dynamic.kabel-deutschland.de ([77.20.188.140] helo=[192.168.66.101]); authenticated
+        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        id 1kECCB-0000UN-Ox; Fri, 04 Sep 2020 15:56:03 +0200
+To:     Mauro Carvalho Chehab <mchehab@kernel.org>
+From:   Thorsten Leemhuis <linux@leemhuis.info>
+Subject: sphinx-pre-install: dvipng not checked by default, python-sphinx
+ added always for --no-virtualenv
+Autocrypt: addr=linux@leemhuis.info; prefer-encrypt=mutual; keydata=
+ mQINBFJ4AQ0BEADCz16x4kl/YGBegAsYXJMjFRi3QOr2YMmcNuu1fdsi3XnM+xMRaukWby47
+ JcsZYLDKRHTQ/Lalw9L1HI3NRwK+9ayjg31wFdekgsuPbu4x5RGDIfyNpd378Upa8SUmvHik
+ apCnzsxPTEE4Z2KUxBIwTvg+snEjgZ03EIQEi5cKmnlaUynNqv3xaGstx5jMCEnR2X54rH8j
+ QPvo2l5/79Po58f6DhxV2RrOrOjQIQcPZ6kUqwLi6EQOi92NS9Uy6jbZcrMqPIRqJZ/tTKIR
+ OLWsEjNrc3PMcve+NmORiEgLFclN8kHbPl1tLo4M5jN9xmsa0OZv3M0katqW8kC1hzR7mhz+
+ Rv4MgnbkPDDO086HjQBlS6Zzo49fQB2JErs5nZ0mwkqlETu6emhxneAMcc67+ZtTeUj54K2y
+ Iu8kk6ghaUAfgMqkdIzeSfhO8eURMhvwzSpsqhUs7pIj4u0TPN8OFAvxE/3adoUwMaB+/plk
+ sNe9RsHHPV+7LGADZ6OzOWWftk34QLTVTcz02bGyxLNIkhY+vIJpZWX9UrfGdHSiyYThHCIy
+ /dLz95b9EG+1tbCIyNynr9TjIOmtLOk7ssB3kL3XQGgmdQ+rJ3zckJUQapLKP2YfBi+8P1iP
+ rKkYtbWk0u/FmCbxcBA31KqXQZoR4cd1PJ1PDCe7/DxeoYMVuwARAQABtCdUaG9yc3RlbiBM
+ ZWVtaHVpcyA8bGludXhAbGVlbWh1aXMuaW5mbz6JAj0EEwEKACcFAlJ4A3UCGwMFCQ0oaIAF
+ CwkIBwMFFQoJCAsFFgIDAQACHgECF4AACgkQcrbm70xYPS0OOw/+OM+pakOz+MDn9vAgc5Xj
+ dVqxjH1+cg7UWkW6UrkniT3i+THv535lGwwB93iQpG0eaLqIPcfFqWGHCJDY4ys8AdCiGA55
+ D8eX/A/94Dboz6hzxfu2M4KvpiV2FQrklIZXGiLfr0+ybBUu+PoiS4OA8UzNc/rtAZivb6qm
+ T62uUGtmWoj86hDSual9Syi1dn4ff9PVJcGMFk4URkg83qZpVeU/iOnPO7mfhV5l9yfuvP9h
+ zhHQOTDrcOm8vJVgcs3TAd8WKke7ueBxuwlDS4a9X0ohT3MycO1sUSx5VpnHsZynvvyITEOW
+ njjuBhIJrbjt+c/9HWz+5cJJ7QZOE1KrOAN+u6N4yFZrMFFKKug/s/z9wy7Cg5ANphJ/35to
+ nZDV9MCw96sDONEdwEl2u4ZwN5oNJGdFm93odoGSvzu0LNgGi1AWE38pOKmq8EVDYJNMhsv+
+ V0oj9vJJso22F5LBJjg233PIdvkF6KwihTiryVZUi3rX1RSwH8HFzVDCETW7bp3EAyUPuoTD
+ f8vb7/5RZpNFzy/WtAt80hqp773+PAgPJuXGliI2uJol3nz9PWRhf6yn3U2VSkbiIG3MjwpJ
+ vJL/dbiiKWn932U/JV8OKA4m7GKy44ZnTL0nYf/30/5gEVMM8FiPiY1Cybw907WYUxW+dboi
+ eu8fdvHIi0xIBWu5Ag0EUngBDQEQAM7v97GrVs5cuvi6ouXUxUvfoSrxTLXUW/71uKPQkLDK
+ i9gSRqBOLl78t3Gp3L3MqHc01wlMW3rDT++/Sanh8rO1pBdprS1V9pZ8l0lAZvzjcGrLiuyi
+ 8/KrrLHlLLL4yTw3cPJkSwFr43LGLGdKoCFOpAW72HJFFpGyY/9JLkApprpUTHGkEa0WK5O2
+ XVDo2mJoykflCR5Y8S4Hq3oMol7pUScQqYT+ZooKMoqGtXrHrfIhfX4W/mFmNel9SN057nFQ
+ ol4sc8cJ97sIlRoNvJ/r3X2eZWnJAjo+oiuPpX85Xc+DXyFyvvP0dcA/cjo9a69zrIw6jmro
+ KDMYBBTosIUA4iZUSlWg235gtRuTdWH0CJ/dM5xGHDO/kqfEXOUVIDecn7sMonInyCUArYlo
+ IxfLbXCBLioNE5hm+h0BwLRmgVyslxkLpQ9QpgRyFs4O2xoHuUeuoXW6tQYjF+UHZP6N0q9j
+ iwq8VoajHa3iRS826BHNEtdwQsVYJZz6nb+bHe73m9Gs+Sxkus8lU3U27j1LuAtWW7LT27gg
+ cEsHtxEab6ZnSMx7SCuBvYhiEd0nqNKFjs0L5BZ/JtpOh9vw3pc/SHBxHn0nubtBoyANfG2R
+ Le0dpPAjGfOL6cljnIYMFytgzVwDs6uM8FfFuE4mIhYiFV30o9fObwqbhO49LoKdABEBAAGJ
+ AiUEGAEKAA8FAlJ4AQ0CGwwFCQ0oaIAACgkQcrbm70xYPS2OxxAAr8OqW+bEjQV2PLLAHIh6
+ fmhajXtSn9bzULofgyD4PsgMsG25di74GbegGyTIwt7cS7Z5ZR5KL7ZkN1GTDFGlWyiZ+6NC
+ VsWR62+eujnYvtHsQPaTo8A/uFV+Too4v4ikS4ZD0ondWa1FimLouem9QwOSnyn4yErxUQcU
+ yUXHLhUtYs7MO5R4G++Ev+9eK7rRqPeUOqTjQV6Eigi5Ny4536fKMJDNp+YhlRopWBA0fVjf
+ tF0MJTV0ShFK1YWLOADJYo9NG+KOeyUqesOvRSxtpQcdcrwPFjkJ3JcknxZstvWid4goqMY7
+ l/vGoG7zQDSxUDpXcG9X70yHrmVK/w0dn/PHalfUnOsQpvQYTjGhZ4UnXAVaBsouYLGFo9AL
+ lLNERHY4eRR4MEYvk6ABZ1AEaJwiwyZuPRt/iN1EIMM7fnQQcdBYHGJzaV8a3jwHeLAPY1e/
+ hS1OsrR9pqGvqQsagYkiZFOCjZxx0IQhokMSIxbFvNfLHTqXXpJzlCv9QGj3s2ZG6o36u42k
+ yc+mP1ya8uxIFEwcp6C1h4TTisVFC2DXxDi7pqUd9oTuI4Hg19/i07cdYUHDiraDXSXW5zH9
+ 5ZDV+rSqDU3ercoRd2qjGUOIXWOytHTeJhVOWqM0vOmXDUwwYHuEb0HFn3d/tz+idSrXUSXZ
+ 5iv6NKaV29GWHbY=
+Cc:     linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
+Message-ID: <d5d42023-9cbc-614f-d85c-a2a483a8b700@leemhuis.info>
+Date:   Fri, 4 Sep 2020 15:56:03 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.11.0
 MIME-Version: 1.0
-Received: by 2002:a92:650f:0:0:0:0:0 with HTTP; Fri, 4 Sep 2020 05:55:16 -0700 (PDT)
-Reply-To: robertandersonhappy1@gmail.com
-From:   robert <andersonrobertpass11@gmail.com>
-Date:   Fri, 4 Sep 2020 05:55:16 -0700
-Message-ID: <CAOga3ccMCrU9SGyhqMd2X1fNrWLOaQDa3P9ZA6SVR45xMt7E0w@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-AU
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1599229293;e204492b;
+X-HE-SMSGID: 1kECCB-0000UN-Ox
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-576O5aW955qE5LiA5aSp77yM5oiR55qE5aW95pyL5Y+L44CCDQoNCuS7iuWkqei/h+W+l+WlveWQ
-l++8n+aIkeW3sue7j+W+iOS5heayoeacieaUtuWIsOaCqOeahOadpeS/oeS6hg0K5Zyo5L2g6Lqr
-6L655LuK5aSp77yM5oiR5b6I6auY5YW05Zyw6YCa55+l5oKo5oiR5ZyoDQrov5nkupvpgZfkvKDo
-tYTph5HnmoTmjqXmlLbvvIzlnKjmlrDnmoTlkIjkvZzkuIvovaznp7sNCuadpeiHquWNsOW6puS6
-mua0sueahOWQiOS9nOS8meS8tOOAguS7luaYr+WKoOaLv+Wkp+S6uu+8jOS9huS9j+WcqOWNsOW6
-pu+8jOS9huebruWJjQ0K5oiR5p2l5Y2w5bqm5LuO5LqL5oqV6LWE6aG555uu77yM5Y2g5oiR55qE
-5YWo6YOo5Lu96aKdDQrmlbDnmb7kuIfnvo7lhYPjgILlkIzml7bvvIzmiJHmsqHmnInlv5jorrDk
-vaDov4fljrvnmoTliqrlipvlkozlsJ3or5UNCuW4ruWKqeaIkemAmui/h+i/meS6m+mBl+S8oOeW
-l+azle+8jOWNs+S9v+Wksei0peS6hg0K5pyJ5pe277yM5oiR5Lus5biM5pyb5oKo5LiO5oiR5Zyo
-6KW/5aSa5ZOl5YWx5ZKM5Zu95rSb576O55qE56eY5Lmm6IGU57O7DQrpnZ7mtLLvvIzlpbnlj6tT
-b2xvbW9uIEJyYW5kee+8jOi/meaYr+S7lueahOeUteWtkOmCruS7tuWcsOWdgO+8iHNvbG9tb25i
-cmFuZHkwMDRAZ21haWwuY29t77yJDQror7forqnku5bogZTns7vpnZ7mtLLlvIDlj5Hpk7booYwN
-CuS/neeVmSQgMzUwLDAwMC4wMOS9nOS4uuaCqOeahOi1lOWBv+mHke+8jOi/meeslOi1lOWBv+mH
-kQ0K6L+H5Y6755qE5omA5pyJ5Yqq5Yqb5ZKM6L+H5Y675a+55oiR55qE5biu5YqpDQrlpITnkIbj
-gILmiJHnnJ/nmoTlvojmhJ/osKLmgqjlvZPml7bnmoTliqrlipvjgILmhJ/op4nlpoLmraQNCuWF
-jei0ue+8jOS4juaIkeeahOenmOS5puaJgOe9l+mXqMK35biD5YWw6L+q5YWI55Sf6IGU57O777yM
-5bm25ZGK6K+J5aW55Zyo5ZOq6YeMDQrpnZ7mtLLlvIDlj5Hpk7booYzlsIbmjZDotaDmgLvorqEz
-NTAsMDAw576O5YWD44CCDQoNCuivt+eri+WNs+mAmuefpeaIkemdnua0suW8gOWPkemTtuihjOi9
-rOW4kA0K6LWE6YeRJCAzNTAuMDAwLjAwDQrliLDmiJHnmoTpk7booYzluJDmiLfvvIznjrDlnKjm
-iJHlm6DkuLoNCuWboOatpO+8jOaIkeS4juaWsOWQiOS8meS6uuS4gOi1t+i/m+ihjOeahOaKlei1
-hOmhueebrg0K6YCa6L+H5LuW55qE55S15a2Q6YKu5Lu25Zyw5Z2A6IGU57O75omA572X6Zeowrfl
-uIPlhbDov6rlhYjnlJ/vvIwNCueri+WNs+S7o+ihqOaCqOS4jumdnua0suW8gOWPkemTtuihjOiB
-lOezu+OAgg0K6L+c56a7Q292aWQgMTnjgIINCg0K5bCK5pWs77yMDQrnvZfkvK/nibnCt+WuieW+
-t+ajruWNmuWjqw0K
+Hi Mauro! I noticed two small oddities with sphinx-pre-install I wanted
+to quickly tell your about:
+
+(1) running "./scripts/sphinx-pre-install --no-virtualenv" always tells
+me to run "sudo dnf install -y python3-sphinx
+", even if it's already installed on the system. On a quick look that
+seems to happen due to line 738 (on docs-next), that afaics always does...
+
+> add_package("python-sphinx", 0);
+
+...when running with "--no-virtualenv". Doesn't matter too much, but I
+thought I mentioned it while reporting the issue that made me write this
+mail:
+
+(2) when running 'make htmldocs' I saw this warning:
+
+> WARNING: dvipng command 'dvipng' cannot be run (needed for math display), check the imgmath_dvipng setting 
+
+I had run "sphinx-pre-install --no-virtualenv" earlier to get everything
+I needed, but it had not told me to install dvipng. So it might be wise
+to fix this with a patch like the one below. Please let me know if
+that's the right approach, that I submit it as proper patch.
+
+Ciao, Thorsten
+
+
+diff --git a/scripts/sphinx-pre-install b/scripts/sphinx-pre-install
+index 40fa6923e80a..5515cac027ef 100755
+--- a/scripts/sphinx-pre-install
++++ b/scripts/sphinx-pre-install
+@@ -379,7 +379,6 @@ sub give_debian_hints()
+ 				   "fonts-noto-cjk", 2);
+ 	}
+
+-	check_program("dvipng", 2) if ($pdf);
+ 	check_missing(\%map);
+
+ 	return if (!$need && !$optional);
+@@ -397,6 +396,7 @@ sub give_redhat_hints()
+ 		"Pod::Usage"		=> "perl-Pod-Usage",
+ 		"xelatex"		=> "texlive-xetex-bin",
+ 		"rsvg-convert"		=> "librsvg2-tools",
++		"dvipng"		=> "texlive-dvipng",
+ 	);
+
+ 	my @fedora26_opt_pkgs = (
+@@ -757,6 +757,7 @@ sub check_needs()
+ 	check_python_module("sphinx_rtd_theme", 1) if (!$virtualenv);
+ 	check_program("dot", 1);
+ 	check_program("convert", 1);
++	check_program("dvipng", 2);
+
+ 	# Extra PDF files - should use 2 for is_optional
+ 	check_program("xelatex", 2) if ($pdf);
