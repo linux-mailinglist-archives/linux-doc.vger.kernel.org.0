@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A74E825DE63
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Sep 2020 17:50:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1F91525DE56
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Sep 2020 17:49:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726789AbgIDPtg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 4 Sep 2020 11:49:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43994 "EHLO
+        id S1727921AbgIDPtR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 4 Sep 2020 11:49:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43964 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726928AbgIDPq4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Sep 2020 11:46:56 -0400
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B9F6AC06125C
-        for <linux-doc@vger.kernel.org>; Fri,  4 Sep 2020 08:46:45 -0700 (PDT)
-Received: by mail-wr1-x443.google.com with SMTP id x14so7168696wrl.12
-        for <linux-doc@vger.kernel.org>; Fri, 04 Sep 2020 08:46:45 -0700 (PDT)
+        with ESMTP id S1726063AbgIDPq6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Sep 2020 11:46:58 -0400
+Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com [IPv6:2a00:1450:4864:20::444])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B1334C0619C2
+        for <linux-doc@vger.kernel.org>; Fri,  4 Sep 2020 08:46:46 -0700 (PDT)
+Received: by mail-wr1-x444.google.com with SMTP id x14so7168751wrl.12
+        for <linux-doc@vger.kernel.org>; Fri, 04 Sep 2020 08:46:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=YwQjX4axi1OAM1Fql28FiCukUb0sTZUG4ARXSE9mD5M=;
-        b=W5igfhsJBABdupfuJeKs8ZFBc1NM6C1W6FgO9n8jRfloEFZuHfxm40QAS/h0T+mdla
-         GxyRPVVnObFB5k5pT6P7LzWkxPcP/MWzPisHbMilF4BtXGUxAQrmAkLC2SYa0ju3givG
-         KiDdwKVX7TmcUC0CDNP1LOrZJIVzrN6tcy2SQs/cRHBk9SBGF0OnzDbEHmReLwI8YbG5
-         curcoJCjYPuMzo5FLZ6jFnrkMlNHbYkNDhaAR9TyFHkFsgDKgsoKwNFbjc2NMsKI1R6k
-         W1rLSx82J/qPz/AUX5iCXYPb5sjOPuUGwZzOSxdHC2Yc2zVz0qy+R7vGvyvw8faAPsBr
-         sboA==
+        bh=/FOPTskD02+rqmTy1Q+lvepWRalQafDGjAwi3K9HfYU=;
+        b=DWSFeeLRu39HrwTsgIJnFObS4Eo0vIUxkcPBLAQ8iMkew4JxxJi2HeGJEwHFlAzsSC
+         V4nymy+PcpCDVaRs1xvaygnoO+ldD8YU2XK9eLt5FRlZOI3wYRcprZQ7u0nHSojZmi94
+         J6tKrqYyKczLhXpI/uxNrYUoFv129bNqR7YAXvmIq+RP/NU7cK0nUX6Fgw98DTzmsGkN
+         OUBuerym7ms3eO6VilqR+cBH+FVtnJZ3cGCpmkzMc3e+F/SDdlMcOPxZi7D0wzC1gYPs
+         CrL5Mb1Bqwd4ozdqBulR2kAIQQ2V2cv5mN44+Kac1+HItigj9IaT5KWXHVJcsq/QfAOI
+         pTAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=YwQjX4axi1OAM1Fql28FiCukUb0sTZUG4ARXSE9mD5M=;
-        b=MPLppBYA6/E1NRMWXO0VvSMbHbattdsQOKHguQr/At5/qOUBOLttB+un6zaYAlnYf7
-         oh9edTqmDNn8fSlap57WqKeLhJ66REBgurBgP3M7yyqko1dI25He1F5Gjvim3rkyCP9r
-         kGAxdSAGVw0yeQL+xID5RvqaVe+7fmBv71NTsH4gHbxp3H1649ioNSg2QEroD77PMqyk
-         vs1+aWYEL3cQzBkUZQXKwonG3OQlfvuDe+JwZTkiMiwuCcx7BO40Zx2n8RFXrvF7mQb1
-         x2z8rCl3JLhaiD55/HwpAWBMKJBOLx6jEwKchDh67/+vTG+rQ+qqA7E/6vfye+S2DI3/
-         lUQw==
-X-Gm-Message-State: AOAM5319KvHhb1WAfjXlau0IePRAJ5ArexAT7x/jeiY2/Tvc9cltnSWW
-        mqDSsv31qj4XcSCCYIbksi7B2g==
-X-Google-Smtp-Source: ABdhPJzGE6+N2EUSel1NKTUZ8lWtVuw8qctovGj3qxe1uNDtwPtrgatR9NUrM3Nh2Oj68SMpkZq+Bg==
-X-Received: by 2002:a5d:69c2:: with SMTP id s2mr8226288wrw.389.1599234404374;
-        Fri, 04 Sep 2020 08:46:44 -0700 (PDT)
+        bh=/FOPTskD02+rqmTy1Q+lvepWRalQafDGjAwi3K9HfYU=;
+        b=VAuynv5qZeiZLW25FoWLOyVP6EOnzihJVnnUxag9iXxZ4z1+UUIcIymwZGcbCmhNqz
+         pCfOusywHlfxEh+M5HrZeBQGnROkHg4LKPofBbTSv1RICA1ke7X+RPDSa3z58sAWlUWO
+         9YW1c7L11cpCva5CQIYD64uIdhY9sHtRxFUzsHitCQYMQA3ZR/ku8FAteBJM5xLuL5LG
+         duvtlyDUqlIg+LZg+CPWgPFLxyw5yL2NwNUy1zm0yB4l0HtuGrsKuTQiJsz0ri8hT6OB
+         nW0JU2SHlHqsYs7TF4aF2eZwNN/vs7ZgU1HnAjho9mtTNQxSZgHCMNr7bEPMdR6u8kar
+         kKgw==
+X-Gm-Message-State: AOAM532vx+vDlCmlfzHJYc17D19tIYRN4a61LKez51TmrNiW7zPHAkq2
+        gpepv7494Oeb+NgBYfdBNMQbWw==
+X-Google-Smtp-Source: ABdhPJw/DYVsfbaGxg5IdpYA3yk8QnzF9jmg3mpJzGx7H7H6XBFu4ZqlmzQ4gBrGlTt8uzkbc4SHKQ==
+X-Received: by 2002:a5d:61c2:: with SMTP id q2mr8972511wrv.25.1599234405459;
+        Fri, 04 Sep 2020 08:46:45 -0700 (PDT)
 Received: from debian-brgl.home (lfbn-nic-1-68-20.w2-15.abo.wanadoo.fr. [2.15.159.20])
-        by smtp.gmail.com with ESMTPSA id q4sm11983375wru.65.2020.09.04.08.46.43
+        by smtp.gmail.com with ESMTPSA id q4sm11983375wru.65.2020.09.04.08.46.44
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 04 Sep 2020 08:46:43 -0700 (PDT)
+        Fri, 04 Sep 2020 08:46:45 -0700 (PDT)
 From:   Bartosz Golaszewski <brgl@bgdev.pl>
 To:     Linus Walleij <linus.walleij@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
@@ -56,9 +56,9 @@ To:     Linus Walleij <linus.walleij@linaro.org>,
 Cc:     linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org,
         Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH 11/23] gpio: mockup: remove the limit on number of dummy chips
-Date:   Fri,  4 Sep 2020 17:45:35 +0200
-Message-Id: <20200904154547.3836-12-brgl@bgdev.pl>
+Subject: [PATCH 12/23] gpio: mockup: define a constant for chip label size
+Date:   Fri,  4 Sep 2020 17:45:36 +0200
+Message-Id: <20200904154547.3836-13-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.26.1
 In-Reply-To: <20200904154547.3836-1-brgl@bgdev.pl>
 References: <20200904154547.3836-1-brgl@bgdev.pl>
@@ -71,144 +71,26 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-As a preparation for implementing dynamically created dummy GPIO chips:
-drop the limit on the number of chips. Let's use a linked list to store
-the chip context structures.
-
-Let's rename gpio_mockup_unregister_pdevs() to
-gpio_mockup_unregister_devices() as we're now handling structures in
-which struct platform_device is embedded instead of operating on
-platform devices directly.
-
-Note: this does not remove the limit on the number of ranges passed as a
-module parameter. For now nothing changes in how the module works for
-user-space. This patch will however allow us to create a higher number
-of chips once we can do this dynamically.
+We'll be using this value in many places in this driver soon so define
+a constant to avoid using magic values.
 
 Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 ---
- drivers/gpio/gpio-mockup.c | 59 ++++++++++++++++++++++++++------------
- 1 file changed, 40 insertions(+), 19 deletions(-)
+ drivers/gpio/gpio-mockup.c | 1 +
+ 1 file changed, 1 insertion(+)
 
 diff --git a/drivers/gpio/gpio-mockup.c b/drivers/gpio/gpio-mockup.c
-index 19c092f814fd..801fba6496a4 100644
+index 801fba6496a4..e8a19a28ed13 100644
 --- a/drivers/gpio/gpio-mockup.c
 +++ b/drivers/gpio/gpio-mockup.c
-@@ -13,6 +13,7 @@
- #include <linux/irq.h>
- #include <linux/irq_sim.h>
- #include <linux/irqdomain.h>
-+#include <linux/list.h>
- #include <linux/module.h>
- #include <linux/platform_device.h>
- #include <linux/property.h>
-@@ -24,12 +25,11 @@
- #undef pr_fmt
- #define pr_fmt(fmt)		KBUILD_MODNAME ": " fmt
- 
--#define GPIO_MOCKUP_MAX_GC	10
- /*
-  * We're storing two values per chip: the GPIO base and the number
-  * of GPIO lines.
-  */
--#define GPIO_MOCKUP_MAX_RANGES	(GPIO_MOCKUP_MAX_GC * 2)
-+#define GPIO_MOCKUP_MAX_RANGES	(10 * 2)
+@@ -32,6 +32,7 @@
+ #define GPIO_MOCKUP_MAX_RANGES	(10 * 2)
  /* Maximum of three properties + the sentinel. */
  #define GPIO_MOCKUP_MAX_PROP	4
++#define GPIO_MOCKUP_LABEL_SIZE	32
  
-@@ -505,27 +505,37 @@ static struct platform_driver gpio_mockup_driver = {
- 	.probe = gpio_mockup_probe,
- };
- 
--static struct platform_device *gpio_mockup_pdevs[GPIO_MOCKUP_MAX_GC];
-+struct gpio_mockup_device {
-+	struct list_head list;
-+	struct platform_device *pdev;
-+};
- 
--static void gpio_mockup_unregister_pdevs(void)
-+static LIST_HEAD(gpio_mockup_devices);
-+
-+static void gpio_mockup_unregister_one_device(struct gpio_mockup_device *dev)
- {
--	struct platform_device *pdev;
--	int i;
-+	list_del(&dev->list);
-+	platform_device_unregister(dev->pdev);
-+	kfree(dev);
-+}
- 
--	for (i = 0; i < GPIO_MOCKUP_MAX_GC; i++) {
--		pdev = gpio_mockup_pdevs[i];
-+static void gpio_mockup_unregister_devices(void)
-+{
-+	struct gpio_mockup_device *mockup_dev;
-+	struct list_head *curr, *next;
- 
--		if (pdev)
--			platform_device_unregister(pdev);
-+	list_for_each_safe(curr, next, &gpio_mockup_devices) {
-+		mockup_dev = list_entry(curr, struct gpio_mockup_device, list);
-+		gpio_mockup_unregister_one_device(mockup_dev);
- 	}
- }
- 
- static int __init gpio_mockup_init(void)
- {
- 	struct property_entry properties[GPIO_MOCKUP_MAX_PROP];
-+	struct gpio_mockup_device *mockup_dev;
- 	int i, prop, num_chips, err = 0, base;
- 	struct platform_device_info pdevinfo;
--	struct platform_device *pdev;
- 	u16 ngpio;
- 
- 	if ((gpio_mockup_num_ranges < 2) ||
-@@ -576,26 +586,37 @@ static int __init gpio_mockup_init(void)
- 		pdevinfo.id = i;
- 		pdevinfo.properties = properties;
- 
--		pdev = platform_device_register_full(&pdevinfo);
--		if (IS_ERR(pdev)) {
-+		mockup_dev = kzalloc(sizeof(*mockup_dev), GFP_KERNEL);
-+		if (!mockup_dev) {
-+			err = -ENOMEM;
-+			goto err_out;
-+		}
-+
-+		mockup_dev->pdev = platform_device_register_full(&pdevinfo);
-+		if (IS_ERR(mockup_dev->pdev)) {
- 			pr_err("error registering device");
--			platform_driver_unregister(&gpio_mockup_driver);
--			gpio_mockup_unregister_pdevs();
--			debugfs_remove_recursive(gpio_mockup_dbg_dir);
--			return PTR_ERR(pdev);
-+			kfree(mockup_dev);
-+			err = PTR_ERR(mockup_dev->pdev);
-+			goto err_out;
- 		}
- 
--		gpio_mockup_pdevs[i] = pdev;
-+		list_add(&mockup_dev->list, &gpio_mockup_devices);
- 	}
- 
- 	return 0;
-+
-+err_out:
-+	platform_driver_unregister(&gpio_mockup_driver);
-+	gpio_mockup_unregister_devices();
-+	debugfs_remove_recursive(gpio_mockup_dbg_dir);
-+	return err;
- }
- 
- static void __exit gpio_mockup_exit(void)
- {
- 	debugfs_remove_recursive(gpio_mockup_dbg_dir);
- 	platform_driver_unregister(&gpio_mockup_driver);
--	gpio_mockup_unregister_pdevs();
-+	gpio_mockup_unregister_devices();
- }
- 
- module_init(gpio_mockup_init);
+ /*
+  * struct gpio_pin_status - structure describing a GPIO status
 -- 
 2.26.1
 
