@@ -2,96 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 01F8E25E6E4
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Sep 2020 12:11:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9B4FE25E9C1
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Sep 2020 20:41:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726597AbgIEKLH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 5 Sep 2020 06:11:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43588 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726372AbgIEKLF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 5 Sep 2020 06:11:05 -0400
-Received: from mail-lj1-x242.google.com (mail-lj1-x242.google.com [IPv6:2a00:1450:4864:20::242])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 16C7EC061244
-        for <linux-doc@vger.kernel.org>; Sat,  5 Sep 2020 03:11:02 -0700 (PDT)
-Received: by mail-lj1-x242.google.com with SMTP id u21so474715ljl.6
-        for <linux-doc@vger.kernel.org>; Sat, 05 Sep 2020 03:11:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to;
-        bh=SKxC3XlLyGL0xVctMOXhc67FHJ4uwUh1WYwPN/PJGpg=;
-        b=FeAkpAch7VXMzIINeQ2TpcbiVmZwohcqCoP5vrtdJTTTZQxcuQ5lTozRPXvFKsRQUe
-         ZCxRakwGdbT9Wz9EenQb1dEff1Y0ZQfgoany5PlJxA/MxDXILU2OvUG00CH5WX53zl3g
-         Ok5iva4kX2qP+Yggfo9ZevW7R1x6Z4/EO/yQP7hRYPlSb14RY5Qz06VvkE/1tcKL8+jq
-         szeLJ4AuO70EZ4cS/z1v5Oar2TDXnlPgX4mqEkFA+Mtuq7daNjfu7Hb539gHBvvxEx52
-         M6ITubqXEDmXjM8+Qsjd2RKE2pk2ImGexDFDM1ezjWqkp/p5s379HA6p+vJPkp9qnAkm
-         fEEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to;
-        bh=SKxC3XlLyGL0xVctMOXhc67FHJ4uwUh1WYwPN/PJGpg=;
-        b=VuF1S9K0YOwkSAaYT9qObLsGEcSXR6ny7seOBp6AmaXMNIetVIR4+DKwjYBQtTY782
-         lU2cLCcQ6UEW/aUoTCj7Qe/TLikxuNqn6rvyuE7ZmzSYudBiwxszNUQI8n+BtKg0XG3I
-         ttCHNHR3yOTsfldXBEIAzoSsmJ6tukYGzzRGX+wOT3u+JSX42b2cnEkqTJiaMp/DlzSr
-         Ljsnco51s12KUKWgMIzX57njZf5ipPInXpvRoMN4d77RIcZZDk3YfwDUIjhXDhMVo0k9
-         XtpR/r8F5wALBuwR1xi/2UjGg0QlDi6079jAQ4J8Cf0ok1P2cY77+ncuOYWwhE955oqU
-         loWg==
-X-Gm-Message-State: AOAM530I/uSUIIY8XEuFnmg69w8YU1kccpCHjv0b65n7nqXf16So6321
-        SxaLGvuTtW1C2IbX/SaYjsXkpb4caukGkr9wlKE=
-X-Google-Smtp-Source: ABdhPJz7XloAvFuV5QCdsF9aWczCvgFncj8DCLBeQZa/MYc1mlcvI87HSNFH3Rnsjqmu3/TgE3C/qBAbnf64xZvhu10=
-X-Received: by 2002:a2e:9c15:: with SMTP id s21mr5811097lji.27.1599300660798;
- Sat, 05 Sep 2020 03:11:00 -0700 (PDT)
+        id S1728397AbgIESlx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 5 Sep 2020 14:41:53 -0400
+Received: from mout.gmx.net ([212.227.15.15]:44853 "EHLO mout.gmx.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728393AbgIESlw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 5 Sep 2020 14:41:52 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1599331303;
+        bh=0Z88wMNKjODEhVbrLNthLoTct+0CZsnhohBGameaszE=;
+        h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+        b=ECxkn2YjdfbF29gd53eH8o1kZ7xAMiQKgRFt1LjkuTrAJ/rO39No0bNl5hDsDdYzA
+         Q/W3S614NwQlO8OgCG/f8jrHNMF0z5JlHxvOrC7yGDktKBQZ7N/x+Q8SEtVyl+UT7Q
+         iUPYsf2hHx1nKtYRlJaKU+QXiFv11LxX1QPcSfrQ=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from longitude ([5.146.195.151]) by mail.gmx.com (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MhU9Z-1kiRds1ZKt-00earg; Sat, 05
+ Sep 2020 20:41:43 +0200
+From:   =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
+To:     linux-doc@vger.kernel.org
+Cc:     =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Hans de Goede <hdegoede@redhat.com>,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH] docs: driver-api: firmware: fallback-mechanisms: Fix rendering of bullet point
+Date:   Sat,  5 Sep 2020 20:41:30 +0200
+Message-Id: <20200905184131.1280337-1-j.neuschaefer@gmx.net>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Received: by 2002:a05:651c:306:0:0:0:0 with HTTP; Sat, 5 Sep 2020 03:11:00
- -0700 (PDT)
-Reply-To: barrattasi.dodo@hotmail.com
-From:   "Attasi.dodo" <el2094303@gmail.com>
-Date:   Sat, 5 Sep 2020 01:11:00 -0900
-Message-ID: <CADSUJnr=FLJQuuR6=E4veY6eJeEzEn4mCe3nMdDKUu+KiFLowA@mail.gmail.com>
-Subject: Dear Respected Friend,
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:Is+1nVBMCodTpEsmt6XDtWrHb47bnhd0gIpCFGj05LxIx/Lv8T7
+ Kl11NsLhbIdYylI/M9uKrA5wLPpvnf4SLIiPpSNoq6ppXQg6rBBJNa2cOsuln1y0JumJJq9
+ FDnIioBV5l1BFCKBwRedVPAzsuOBU8CTxurSsEgGVrN3wgoBaSf4UOLvLojv6KjVhyITG6r
+ HpMV9svnV//KW0H+Gd/nw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:TKxAAmXorPQ=:IPm5oaR4gjs+SdWvqmZhRZ
+ 0bQbZyUSX+CqzVsuGGK9eCvi0YscAwFyGIN5xNZaqHfNMJKgA9Ox1nNrxdrD0Yf4N3LCG8gOx
+ WQF0ZoiDVrsfazCEoK6YsMaLwYp5hq2NbR7p7sr4WYfQJn1I5ubZoaz5BuTQhZludGtBNQIkW
+ 9lnbHAz5uEfR2Con/bYAJHw9XH1UOsO2Iv+1xoBw7c/zgM0NkqAzBYXcEAvAG9K6pJ3OHzw8V
+ ovg+kgRXeoz4ju8H5I/X1AY6qwIoRg+jIPljczoG/geIBs+mB2az7vNkqHj/rrF3gEB2qyzwF
+ 4e/+5y4zMNzXRkNhWoQHALhoa7Rp1DuP26UrPLawceJG8KD8g3XYLei2uLS9wRMUDDUnYK83M
+ yC2RioWAE6DfhM4UuAlOXk9v+T58BIiGq6TAP5qysdqXVlI91pt8OuQgYGs5/nPD7pvMCC6Mf
+ ULLeKa36PQGfslPxM2sTSI7vx/Bj2bypW+IW7Q/tY9n1i7lVDB3OWbNENVv8vZSpEEIHb5bvz
+ Es0cFLsWIGK+6d2ZzhryTaUEr9ySM+GV3z+vwx0MqiDxjda0ey5AZWqKKbHscNhWfuJsKJ2j8
+ cvnxUrli94uUeNskMX3ppN6CYe0X5Rgwvj5bajpxK8TW5MHb6zLSUBfrgyHV4zI/KOdMvTW8F
+ yRwiyJLEidUf3LIij46zIZnLytJC2BxNk4a0/HbdXWZUcJNWWtfKdPmwN0JU67LH4GcCHFEZl
+ 1oxGFNdCLO+0XimdTuFI22jhkSyIl3AM9JNLv5b00MfrzjRai5d1eukKx5DYoKKWSc8Ix6pRh
+ iQvRbiEcgF0O5bIsFUGYVGVR3oAXFTlhCozweKJefArA67buGUSCWerPLnIpo/M5jIvkz85Kl
+ v28gNTLAGQDbH3hrgogb1DxkuQYnK6q33wQz8FYjk6CmkipyXt16oS8kEqLIvBntYtvVxQqrn
+ aKXiqrQPH84h7CW80VJp5CdkWmpcXDzURYT9DtPxRX6lXBfzqgSylikswqB2uiC/+0tKgxZWU
+ 0VhMdO7Q/SlkhN5BdoxuQUlW3I3hTqUp2bZzSgBmWvC784QUsTrQnEsIu7ysscRDGrHyqOljK
+ ksLTawTKdTHnBIXerazD87BHSw25AjqaPvfQSLaJFcq7w62/BBKl1K8kn6Dh40qEulBedoiTc
+ yXk3eYxWyiVPlGIJ7wR3Bivgog/Ik6FrUxGieem8v3o6uRKhz0f2iQCrkbdTO2skHyQCVx0iU
+ 8GjjQcRHs05bC5zIV6jYV+yJPwxFCNbhKig4iMQ==
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear Respected Friend,
+Without this patch, the "Firmware is not accessible [...]" line is
+rendered in bold, which does not seem intentional.
 
-I am Attasi Dodo, an attorney at law.  I know this might sound somehow
-to you because of a lot of activities going on in the world
-thesedays.But I assure you that this is real. A deceased client of
-mine Mr.Jack Seo, from South Korea who died as the result of a heart
-attack in March 12th 2005. His heart sudden demise was due to the
-death of all the members of his family in the tsunami disaster on the
-26th December 2004 in Sumatra Indonesia.
+Signed-off-by: Jonathan Neusch=C3=A4fer <j.neuschaefer@gmx.net>
+=2D--
+ Documentation/driver-api/firmware/fallback-mechanisms.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-http://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake I have
-contacted you to assist in retrieving the estate deposit left behind
-by my client in a security company here in Togo before it is
-confiscated or declared abandon property  by the said security company
-where this deposit valued at Eighteen million dollars (US$18.5 million
-dollars) is lodged. This security company has issued me a notice to
-contact the next of kin, or the deposit will be confiscated.
+diff --git a/Documentation/driver-api/firmware/fallback-mechanisms.rst b/D=
+ocumentation/driver-api/firmware/fallback-mechanisms.rst
+index 036383dad6d66..5f04c3bcdf0c5 100644
+=2D-- a/Documentation/driver-api/firmware/fallback-mechanisms.rst
++++ b/Documentation/driver-api/firmware/fallback-mechanisms.rst
+@@ -42,6 +42,7 @@ fallback mechanism:
+   supported for request_firmware_into_buf().
 
+ * Firmware is not accessible through typical means:
++
+         * It cannot be installed into the root filesystem
+         * The firmware provides very unique device specific data tailored=
+ for
+           the unit gathered with local information. An example is calibra=
+tion
+=2D-
+2.28.0
 
-My proposition to you is to seek your consent to present you as the
-next-of-kin and beneficiary of my late client Mr.Jack Seo, since you
-are from the same territory with him, then we can share the money on a
-mutually agreed-upon percentage of 50/50%.. All legal documents to
-back up your claim as my client's next-of-kin will be provided. All I
-require is your honest cooperation to enable us see this transaction
-through.This will be executed under a legitimate arrangement that will
-protect you from any breach of the law.  If this business proposition
-offends your moral values, do accept my apology. I must use this
-opportunity to implore you to exercise the utmost indulgence to keep
-this matter extraordinary confidential, whatever your decision, while
-I await your prompt response. Please contact me at once to indicate
-your interest. I will like you to acknowledge the receipt of this
-e-mail as soon as possible via my PRIVATE EMAIL and treat with
-absolute confidentiality and sincerity. I look forward to your quick
-reply.
-
-Best regards,
-Attasi Dodo
