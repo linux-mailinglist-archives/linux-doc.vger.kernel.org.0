@@ -2,123 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2A82425EAA9
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Sep 2020 22:45:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C96E525EAE5
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Sep 2020 23:03:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728687AbgIEUpV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 5 Sep 2020 16:45:21 -0400
-Received: from mout.gmx.net ([212.227.15.19]:55085 "EHLO mout.gmx.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728772AbgIEUoh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 5 Sep 2020 16:44:37 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-        s=badeba3b8450; t=1599338649;
-        bh=Be/pWWRCdG9k6oAZQXTcja1Tc2WaPrzbgsSdvaLxfZ4=;
-        h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
-        b=Q+F3ABzxf6onrrkrNJBPuXNu0dHuu9JfTv44cr3smoCoqnowKl48cJP03RfzrOOgV
-         W4NVpd2hjTXwrX9EEkoZAaocaQdV6foAoBm/Vx4baoGrLkHw1eoYcT5xjH8psHIz33
-         gM07c/GiOEtF8MWNhGf6Ef9XereN855HQXghhVyE=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from longitude ([5.146.195.151]) by mail.gmx.com (mrgmx005
- [212.227.17.190]) with ESMTPSA (Nemesis) id 1Mof5H-1ktzCz3e93-00p6n5; Sat, 05
- Sep 2020 22:44:09 +0200
-From:   =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
-To:     linux-mtd@lists.infradead.org
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Richard Weinberger <richard@nod.at>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Miklos Szeredi <mszeredi@redhat.com>,
-        "Daniel W. S. Almeida" <dwlsalmeida@gmail.com>,
-        Jaskaran Singh <jaskaransingh7654321@gmail.com>,
-        =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
-        "Tobin C. Harding" <tobin@kernel.org>,
-        Stefan Hajnoczi <stefanha@redhat.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Rob Herring <robh@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/2] docs: ubifs-authentication: Add a top-level heading
-Date:   Sat,  5 Sep 2020 22:43:26 +0200
-Message-Id: <20200905204326.1378339-3-j.neuschaefer@gmx.net>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200905204326.1378339-1-j.neuschaefer@gmx.net>
-References: <20200905204326.1378339-1-j.neuschaefer@gmx.net>
+        id S1728505AbgIEVDH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 5 Sep 2020 17:03:07 -0400
+Received: from mail-40134.protonmail.ch ([185.70.40.134]:34639 "EHLO
+        mail-40134.protonmail.ch" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728426AbgIEVDG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 5 Sep 2020 17:03:06 -0400
+Date:   Sat, 05 Sep 2020 21:03:00 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+        s=protonmail; t=1599339783;
+        bh=LMc0+1Hk9Afqm2G2fAFvBrU4ZxBzAUSkkiTlQeegv3s=;
+        h=Date:To:From:Cc:Reply-To:Subject:From;
+        b=nUA7y/Sn9q9y//BxtOdoNpUQnuv7q0AcPHKpHu7vsmNhgKtCQOVv2+ghMkLiHRjx7
+         3wsnrmvURegws2+JgOYC0WJ8Km+hUm0G+RBkMOPRKJ/VfaYjnmBPe8EdNGeaA1iQnD
+         z1Va/YFrz7JTG2uLW1r8QyeTuRDq+d1gy+avWtSE=
+To:     "Martin K . Petersen" <martin.petersen@oracle.com>,
+        "James E . J . Bottomley" <jejb@linux.ibm.com>,
+        Jonathan Corbet <corbet@lwn.net>
+From:   =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
+        <nfraprado@protonmail.com>
+Cc:     linux-scsi@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
+        lkcamp@lists.libreplanetbr.org, andrealmeid@collabora.com
+Reply-To: =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
+          <nfraprado@protonmail.com>
+Subject: [PATCH] scsi: docs: Remove obsolete scsi typedef text from scsi_mid_low_api
+Message-ID: <20200905210211.2286172-1-nfraprado@protonmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:JCZ9dogxu6N+RKhbMPfW1OC69oFNA7oU53WsieXUXkqlBdaEgxw
- hYf9C8XKUtNhM+adsNx2AyU1FWtSjEi+tJO0PI+5RcAUrSnXgUcPBfYmjkkpKs9VgnoA3kc
- CoWDSA6KjQrnwq8KD1aov7dV1gi3/NoD1xAKaeeI7z5nMBrZMP9rGI03q/b5ofl6UVzBVFF
- 27/UcfcBJroX8S6wxPeHg==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:/tKJFPdbk3k=:gQcm/T0WkZ6j+W/XpL/lxc
- wV5Wkmt829NuLGiAFrCJPtKya5IXazn/hlJWwEjxSrB7oSj+BGzBXeMeX0Kg2dVEU5ZRZa+DH
- 46/B2zyQFsIDjC6mYTSVv+XbMStQE3/Ani/Swt4mSu1Q8ZdMre1L0GXgJZ5SIFB8FKXp7cHmE
- 5tuR81mWAFCTaEuPFedO/H8h4LSWSohFfnrDlKsDh/cfoiKjWBD13111rWMDPOos98/ZI5aXC
- k9c4cD6pzaR2biKqpiLw34T0AieqQ6v7ubNC/rDuMn8gKgA3DhGNr3RJ/1MSsCR9p+DU0KN27
- pMKNgsK6QDuI2xUJ+FVwXbIi6sFNvf+gpNeeoeYkd0jLj5590EcvV20QYcu/Qo0hACnNE46gO
- HPC3hmjS/g9BEtDi8u4vI5d6GvcC/fqwkLYRCIHekx+Bq50hDpR8nIbzMRQIWOfia119NswpZ
- VtX4RmW2KWe3pgndT1BUNx6liyQyTz3tFHpVN7JxavtuW2kLKubc3LvXnp/5zvgkuH3BJKaHx
- iDcQNKix1kD9b8mrmrkodrFB0VLRAtwgs+gzcJgK5YC0W2CND38ZwJoSAzCWIKmakm68OzSLw
- fk8PwbMFkeiQh6G8eteFm0Kjbeo88GpEgjPYDTVHvb+3Bn3vpV6P0E7qfA9SXaQb4mqilLk9h
- z3hOu9w25HnAakxUivbJblwBirV+EnXft5scev6UKtFc6qfcX5wkrqEiuzXh5fZRfC1JVWikX
- +qaUemnQ8n6yY79YA3jQ6Po+awvTuELETQXBedzzqwruDfDDA+BgJ7O7xw3khq0YB8uxbVcVv
- RpbW/O0fNL66YyeuxW6Hm17+ubi7Xj+yQ456NNoDp82/8ngxNXj11HyylOIFY8UH9lPA9obqB
- Iu6G0yf8ypjB6HZaBcLksEcxZaFFHZhsDM7IG7qzi73qgBRvtLkB5CSAlD17J1weAjBImuEPO
- qal/sV5wFVkJbl7oFPlXqjKm3W0xgdx2vXcvLqTOWyNRcdr3F9tEZHTT0PBM/RYSepem9+Z1D
- iD0QHnkIvNRl8NHlKc4pUaM8Wj1YWRZC8VZfSx5dvwB9DSki+HPR83EJOOEXj8dmvOrDLK8DC
- QhPCvhpyLBzZ/hiPA58ih8/JsoromNyNTGg/EVT07WoBemWtiIOP2ixTR1G+qnM3EdaDIG/oT
- KoM8aXAkbdj9zmxOdXk5tmMEzcmKAEBDMXvh55D+H4WrM8j/NIHVEjiXt3NcccQuDs8lQqI8K
- kIdSIiTFQitcFOpHSs0AK3unodCkOrvKIeNTv5g==
+X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM shortcircuit=no
+        autolearn=disabled version=3.4.4
+X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
+        mailout.protonmail.ch
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This prevents the chapter headings from showing up in the table of
-contents in filesystems/index.html.
+Commit 91ebc1facd77 ("scsi: core: remove Scsi_Cmnd typedef") removed
+the Scsi_cmnd typedef but it was still mentioned in a paragraph in the
+"SCSI mid_level - lower_level driver interface" documentation page.
+Remove this obsolete paragraph.
 
-Note that I didn't pick "UBIFS Authentication" as the document title,
-because there is a chapter of the same name, and Sphinx complains about
-multiple headings with the same name:
+Suggested-by: Randy Dunlap <rdunlap@infradead.org>
+Suggested-by: Jonathan Corbet <corbet@lwn.net>
+Signed-off-by: N=C3=ADcolas F. R. A. Prado <nfraprado@protonmail.com>
+---
 
-  /.../Documentation/filesystems/ubifs-authentication.rst:207:
-  WARNING: duplicate label filesystems/ubifs-authentication:ubifs
-  authentication, other instance in
-  /.../Documentation/filesystems/ubifs-authentication.rst
+Hi,
 
-Remove the :orphan: tag, as the document has been included into the
-toctree.
+Is this documentation page still relevant or should it be removed? I'm aski=
+ng
+since it hasn't been updated in a while and there's mention of 2.6 kernel.
 
-Signed-off-by: Jonathan Neusch=C3=A4fer <j.neuschaefer@gmx.net>
-=2D--
- Documentation/filesystems/ubifs-authentication.rst | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
+In case it is still relevant, would patches changing the embedded kernel-do=
+cs
+for references to the kernel-docs in the source files be welcome?
+Also, I see that for example, scsi_add_device, has a kernel-doc in this pag=
+e,
+even though there isn't any in the source code. Would a patch moving this
+function description to the source code be welcome?
 
-diff --git a/Documentation/filesystems/ubifs-authentication.rst b/Document=
-ation/filesystems/ubifs-authentication.rst
-index 1f39c8cea7029..5210aed2afbc3 100644
-=2D-- a/Documentation/filesystems/ubifs-authentication.rst
-+++ b/Documentation/filesystems/ubifs-authentication.rst
-@@ -1,11 +1,13 @@
- .. SPDX-License-Identifier: GPL-2.0
+Thanks,
+N=C3=ADcolas
 
--:orphan:
+ Documentation/scsi/scsi_mid_low_api.rst | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/Documentation/scsi/scsi_mid_low_api.rst b/Documentation/scsi/s=
+csi_mid_low_api.rst
+index 5358bc10689e..5bc17d012b25 100644
+--- a/Documentation/scsi/scsi_mid_low_api.rst
++++ b/Documentation/scsi/scsi_mid_low_api.rst
+@@ -271,12 +271,6 @@ Conventions
+ First, Linus Torvalds's thoughts on C coding style can be found in the
+ Documentation/process/coding-style.rst file.
+=20
+-Next, there is a movement to "outlaw" typedefs introducing synonyms for
+-struct tags. Both can be still found in the SCSI subsystem, but
+-the typedefs have been moved to a single file, scsi_typedefs.h to
+-make their future removal easier, for example:
+-"typedef struct scsi_cmnd Scsi_Cmnd;"
 -
- .. UBIFS Authentication
- .. sigma star gmbh
- .. 2018
-
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-+UBIFS Authentication Support
-+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D
-+
- Introduction
- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-=2D-
+ Also, most C99 enhancements are encouraged to the extent they are supporte=
+d
+ by the relevant gcc compilers. So C99 style structure and array
+ initializers are encouraged where appropriate. Don't go too far,
+--=20
 2.28.0
+
 
