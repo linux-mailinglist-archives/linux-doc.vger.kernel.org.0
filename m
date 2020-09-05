@@ -2,58 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DCEFC25EA60
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Sep 2020 22:23:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F202025EAAE
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Sep 2020 22:45:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728400AbgIEUXm convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Sat, 5 Sep 2020 16:23:42 -0400
-Received: from mx.metalurgs.lv ([81.198.125.103]:64964 "EHLO mx.metalurgs.lv"
+        id S1728760AbgIEUpW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 5 Sep 2020 16:45:22 -0400
+Received: from mout.gmx.net ([212.227.15.19]:40847 "EHLO mout.gmx.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727875AbgIEUXl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 5 Sep 2020 16:23:41 -0400
-Received: from mx.metalurgs.lv (localhost [127.0.0.1])
-        by mx.metalurgs.lv (Postfix) with ESMTP id CF8B67CE64
-        for <linux-doc@vger.kernel.org>; Sat,  5 Sep 2020 23:09:52 +0300 (EEST)
-Received: from kas30pipe.localhost (localhost [127.0.0.1])
-        by mx.metalurgs.lv (Postfix) with ESMTP id 5D1CA71897
-        for <linux-doc@vger.kernel.org>; Sat,  5 Sep 2020 22:42:41 +0300 (EEST)
-Received: by mx.metalurgs.lv (Postfix, from userid 1005)
-        id 617858416A; Sat,  5 Sep 2020 22:07:58 +0300 (EEST)
-Received: from [192.168.8.10] (ip168-243-231-195.intercom.com.sv [168.243.231.195])
-        (using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        (Authenticated sender: admin)
-        by mx.metalurgs.lv (Postfix) with ESMTPSA id CC2AE7AE44
-        for <linux-doc@vger.kernel.org>; Sat,  5 Sep 2020 21:36:59 +0300 (EEST)
+        id S1728771AbgIEUoV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 5 Sep 2020 16:44:21 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1599338612;
+        bh=bor4CEdYF1V2mtU3/M6bTkzsiyDSM5d0H+HasDvMa98=;
+        h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
+        b=BRNqQB+U7XaqYbK8YClKi8BjTqQGx3k7rJuKGfQaFkhlkMDGHNXrvfsvQbShjGvMJ
+         ICWjHJ8QM6VaqvymrFcEMsCpwCjd8no1EUN3eT8Jv/bpTGM0LkdVev90DJeeEiVgCd
+         57qmvz0UzIYYSj7VWVENGW5S7I1eKx9zQT47pThs=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from longitude ([5.146.195.151]) by mail.gmx.com (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1MMXUD-1jxH8d0oMh-00JeMR; Sat, 05
+ Sep 2020 22:43:32 +0200
+From:   =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
+To:     linux-mtd@lists.infradead.org
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Richard Weinberger <richard@nod.at>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Miklos Szeredi <mszeredi@redhat.com>,
+        "Daniel W. S. Almeida" <dwlsalmeida@gmail.com>,
+        Jaskaran Singh <jaskaransingh7654321@gmail.com>,
+        =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
+        "Tobin C. Harding" <tobin@kernel.org>,
+        Stefan Hajnoczi <stefanha@redhat.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Rob Herring <robh@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/2] ubifs: Fixes around ubifs-authentication.rst
+Date:   Sat,  5 Sep 2020 22:43:24 +0200
+Message-Id: <20200905204326.1378339-1-j.neuschaefer@gmx.net>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Description: Mail message body
-To:     linux-doc@vger.kernel.org
-From:   "Angel Investors" <info@unituscapital.com>
-Date:   Sat, 05 Sep 2020 12:36:44 -0600
-Reply-To: andrewmacklin12@gmail.com
-X-SpamTest-Envelope-From: info@unituscapital.com
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 71303 [Jan 01 2015]
-X-SpamTest-Info: {RECEIVED: dynamic ip detected}
-X-SpamTest-Info: {DATE: unreal year}
-X-SpamTest-Method: none
-X-SpamTest-Rate: 35
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-Message-ID: <20200905190758.617858416A@mx.metalurgs.lv>
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8BIT
-Subject: GREETINGS!!!  
-X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.39/RELEASE,
-         bases: 20140401 #7726142, check: 20200905 notchecked
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:6Mu0SdARJcxwbmery0IeDoo6tYPNLibtRBfZ3PBuSS279pqe03n
+ t99PeIZEDrGDlKLxiRYfUcaGosOTs+g6UYhcG9lIHc7Kd4qdtdlbtCA8wKRfV7/lllCegE1
+ G4dhk0svxySQcGcUfwTCt3MaXjaAqZQgmzjk8A7MDeCzCQpsM6SxToPoXXmrVqBZtUij4i2
+ VxGp6soRb/MdvhAVw96cQ==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:Yjg9DmiD66A=:gcQuXrtC0vq3wkc0nOHdKT
+ gJ0+Up+6T5F8z0crIxm886kZ6Iu9EMzzw+8fbW7N7h9EJpwtwFXCq3x9kBHc5xy6cxTHwVPic
+ ziFOwJMEDrLMaTtTEvWFs5NNdZ4JpdGMnvkaKMBJ9YgPEfDWqfuamZpJo2gd5hI+ArnWKyBId
+ DUYtJxiG0BmVCyQqBFBmubSx+mTlq/rHUESyTjdoUBLoqI2/RxKlSVOJ/HAApjJoVa6qGqhNc
+ NLPeXW9qlWm2LWiUjKcw8xvMcFdbwdgmrcs5GCUnyRZWWcexn8+82N/N2yOnUIgt0INQptYgO
+ pw7IUAt26O0+IhPERQOqxvuqF+MJiS+ArKoGJqMsQFCVvTGKg7/sRJDBk4SvSfGK0bqJCvlLi
+ qHMl6+rjaOB1MXPlTOlDOeS0qBXxXZw6dF4akMJ7D8dKm/W/YDq6j1peV7F6WsmF/O4CwQ5kQ
+ Bk62QJttFQbtUJUNxnY4vnbODKhqFAE22M1v4mGWhMPdVT/Mg2vXWBH6I5G4mXcP1GJrrWI/C
+ DB6jFlpgcz/Iv/RcKe7FO8UAJANQybvd8ZA6PoVsh7D8BVNotbXPWqtTjT3xmF2+3ACz2AZeA
+ O/GTQjSSDvI2xEZG+3tAdv5S5I/bTQJyqlvY/BNHS6ndwdsbdqjQORdgPAVuNitvaqLb2IAry
+ GrMSjQfeBh7JumZrWZlfw6PwPsLFOzcp67yBeko2aVMp6Q90vYHX5XftAu4H/8ehKLdOwM6Yd
+ bdfVDqIRd11O28v3S7MBfQ2j4gTFWeUAsCk1arvIrnHzrkeBlZID7C1CqTnHdbKqrvUp7Oh11
+ OmoNUyugGsvHzXaUt2biXdB6Gq59FgfxEmBVInJFXYJbfk7GYaq0EZmEXRbUXK+sztWtbqT4a
+ rDZ5lNS9BglVFYNed7iXrz9lMWdtmp5WP6+OSo2R5K9uSeIDikMk89iLVbtloaj28NRUbOhaF
+ PDnTm8L6TD9hmrKytfAz0wV9tlIRZznxWRMF1EseCn9I8ysVlYQyR8swz5bNPucOVWxTZpaOu
+ tkWE377lFwk8CL5WcFFrVbc0hBEm6jMbFPBISLQ3LPCiD6UgfqudigcxClyNRdp9/T5I8SLWN
+ U1Od/fXIkV51aN8fpisJaGQW8pqsbajp0vjxJE6eKSGeGEXOTqoPz4tEgyiERwhyzcVd5V9hT
+ HFjRQilG54of6VRKQJ1LXWHhGy8/n7pjn+sHxEIKjkND601JZGQGUjwOGycQ2pHoRtcsSf40f
+ 9cMdxyOo20BgUCz1ectxTlGBpS9rScfsMryW6Tg==
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Attention To Email : linux-doc@vger.kernel.org
-Good Day Sir,
-Our Group have the financial capability to finance any investment portfolio as far as is genuine, all we need is a capable business partner that possesses investment strategies for profitable business information for good turn over within 10-30years. Our Partners are willing to invest 10million — 5billon USD. We can provide proof of funds on demand, after certification of your documents/details. Please write me back if you can work with me on this project. Thank You,
-Best Regards
-Andrew Macklin
+In these two patches, I add ubifs-authentication.rst to MAINTAINERS and
+add a heading to prevent the chapter headings from being listed in
+filesystems/index.html.
+
+v2:
+- Rebased on 5.9-rc3
+- Removed patches that have become obsolete
+
+v1:
+- https://lore.kernel.org/lkml/20200214170833.25803-1-j.neuschaefer@gmx.ne=
+t/
+
+Jonathan Neusch=C3=A4fer (2):
+  MAINTAINERS: Add ubifs-authentication.rst to UBIFS
+  docs: ubifs-authentication: Add a top-level heading
+
+ Documentation/filesystems/ubifs-authentication.rst | 6 ++++--
+ MAINTAINERS                                        | 1 +
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+=2D-
+2.28.0
+
