@@ -2,181 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 08DCA25E53D
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Sep 2020 05:16:57 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 01F8E25E6E4
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Sep 2020 12:11:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726329AbgIEDQO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 4 Sep 2020 23:16:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37140 "EHLO
+        id S1726597AbgIEKLH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 5 Sep 2020 06:11:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43588 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726317AbgIEDQO (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 4 Sep 2020 23:16:14 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 57646C061244;
-        Fri,  4 Sep 2020 20:16:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
-        :Reply-To:Content-ID:Content-Description;
-        bh=hzcswmMwNT559dhICIggfDQsKXgz2tnBEKWAXq1CvMk=; b=EbPjQKy5mHuEsRvHD0LtSju15w
-        e/POC6OtiTd1jGuxH1WfatomtddnS4izVIfMw4H7ouCTmd8YCzYovYM/hDgKKtLpmGK1aQUzEMfqB
-        ubipMtPQPfHcknIORAAyBQWzbiZnBOmQ1L9ujgYEmrcjuLii5bb1uHyGMPshwQANL3vk1eDVMiBBL
-        N1bwF2asqr7X7j9AJst6mllFwwCySdPeKyNKjLL1OLt6vpsQTe1suGXGgFv/RqBoGLSi5DwqiyIBj
-        sjD/8VNv61TTlqDto46NALwdTuTz0glQPDLcZXZNRntCUjHjwvGJhMOlT04F0gay9iBeF29i0awXB
-        fX5Mrh0g==;
-Received: from [2601:1c0:6280:3f0::19c2]
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kEOgQ-0001Ei-9v; Sat, 05 Sep 2020 03:16:07 +0000
-Subject: Re: [PATCH 23/23] Documentation: gpio: add documentation for
- gpio-mockup
-To:     Bartosz Golaszewski <brgl@bgdev.pl>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mika Westerberg <mika.westerberg@linux.intel.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Kent Gibson <warthog618@gmail.com>
-Cc:     linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-acpi@vger.kernel.org,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-References: <20200904154547.3836-1-brgl@bgdev.pl>
- <20200904154547.3836-24-brgl@bgdev.pl>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <26ea1683-da8f-30e7-f004-3616e96d56b3@infradead.org>
-Date:   Fri, 4 Sep 2020 20:15:59 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+        with ESMTP id S1726372AbgIEKLF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 5 Sep 2020 06:11:05 -0400
+Received: from mail-lj1-x242.google.com (mail-lj1-x242.google.com [IPv6:2a00:1450:4864:20::242])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 16C7EC061244
+        for <linux-doc@vger.kernel.org>; Sat,  5 Sep 2020 03:11:02 -0700 (PDT)
+Received: by mail-lj1-x242.google.com with SMTP id u21so474715ljl.6
+        for <linux-doc@vger.kernel.org>; Sat, 05 Sep 2020 03:11:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=SKxC3XlLyGL0xVctMOXhc67FHJ4uwUh1WYwPN/PJGpg=;
+        b=FeAkpAch7VXMzIINeQ2TpcbiVmZwohcqCoP5vrtdJTTTZQxcuQ5lTozRPXvFKsRQUe
+         ZCxRakwGdbT9Wz9EenQb1dEff1Y0ZQfgoany5PlJxA/MxDXILU2OvUG00CH5WX53zl3g
+         Ok5iva4kX2qP+Yggfo9ZevW7R1x6Z4/EO/yQP7hRYPlSb14RY5Qz06VvkE/1tcKL8+jq
+         szeLJ4AuO70EZ4cS/z1v5Oar2TDXnlPgX4mqEkFA+Mtuq7daNjfu7Hb539gHBvvxEx52
+         M6ITubqXEDmXjM8+Qsjd2RKE2pk2ImGexDFDM1ezjWqkp/p5s379HA6p+vJPkp9qnAkm
+         fEEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=SKxC3XlLyGL0xVctMOXhc67FHJ4uwUh1WYwPN/PJGpg=;
+        b=VuF1S9K0YOwkSAaYT9qObLsGEcSXR6ny7seOBp6AmaXMNIetVIR4+DKwjYBQtTY782
+         lU2cLCcQ6UEW/aUoTCj7Qe/TLikxuNqn6rvyuE7ZmzSYudBiwxszNUQI8n+BtKg0XG3I
+         ttCHNHR3yOTsfldXBEIAzoSsmJ6tukYGzzRGX+wOT3u+JSX42b2cnEkqTJiaMp/DlzSr
+         Ljsnco51s12KUKWgMIzX57njZf5ipPInXpvRoMN4d77RIcZZDk3YfwDUIjhXDhMVo0k9
+         XtpR/r8F5wALBuwR1xi/2UjGg0QlDi6079jAQ4J8Cf0ok1P2cY77+ncuOYWwhE955oqU
+         loWg==
+X-Gm-Message-State: AOAM530I/uSUIIY8XEuFnmg69w8YU1kccpCHjv0b65n7nqXf16So6321
+        SxaLGvuTtW1C2IbX/SaYjsXkpb4caukGkr9wlKE=
+X-Google-Smtp-Source: ABdhPJz7XloAvFuV5QCdsF9aWczCvgFncj8DCLBeQZa/MYc1mlcvI87HSNFH3Rnsjqmu3/TgE3C/qBAbnf64xZvhu10=
+X-Received: by 2002:a2e:9c15:: with SMTP id s21mr5811097lji.27.1599300660798;
+ Sat, 05 Sep 2020 03:11:00 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200904154547.3836-24-brgl@bgdev.pl>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Received: by 2002:a05:651c:306:0:0:0:0 with HTTP; Sat, 5 Sep 2020 03:11:00
+ -0700 (PDT)
+Reply-To: barrattasi.dodo@hotmail.com
+From:   "Attasi.dodo" <el2094303@gmail.com>
+Date:   Sat, 5 Sep 2020 01:11:00 -0900
+Message-ID: <CADSUJnr=FLJQuuR6=E4veY6eJeEzEn4mCe3nMdDKUu+KiFLowA@mail.gmail.com>
+Subject: Dear Respected Friend,
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+Dear Respected Friend,
 
-On 9/4/20 8:45 AM, Bartosz Golaszewski wrote:
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> 
-> There's some documentation for gpio-mockup's debugfs interface in the
-> driver's source but it's not much. Add proper documentation for this
-> testing module.
-> 
-> Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> ---
->  .../admin-guide/gpio/gpio-mockup.rst          | 87 +++++++++++++++++++
->  1 file changed, 87 insertions(+)
->  create mode 100644 Documentation/admin-guide/gpio/gpio-mockup.rst
-> 
-> diff --git a/Documentation/admin-guide/gpio/gpio-mockup.rst b/Documentation/admin-guide/gpio/gpio-mockup.rst
-> new file mode 100644
-> index 000000000000..1d452ee55f8d
-> --- /dev/null
-> +++ b/Documentation/admin-guide/gpio/gpio-mockup.rst
-> @@ -0,0 +1,87 @@
-> +.. SPDX-License-Identifier: GPL-2.0-only
-> +
-> +GPIO Testing Driver
-> +===================
-> +
-> +The GPIO Testing Driver (gpio-mockup) provides a way to create simulated GPIO
-> +chips for testing purposes. There are two ways of configuring the chips exposed
-> +by the module. The lines can be accessed using the standard GPIO character
-> +device interface as well as manipulated using the dedicated debugfs directory
-> +structure.
+I am Attasi Dodo, an attorney at law.  I know this might sound somehow
+to you because of a lot of activities going on in the world
+thesedays.But I assure you that this is real. A deceased client of
+mine Mr.Jack Seo, from South Korea who died as the result of a heart
+attack in March 12th 2005. His heart sudden demise was due to the
+death of all the members of his family in the tsunami disaster on the
+26th December 2004 in Sumatra Indonesia.
 
-Could configfs be used for this instead of debugfs?
-debugfs is ad hoc.
-
-> +
-> +Creating simulated chips using debugfs
-> +--------------------------------------
-> +
-> +When the gpio-mockup module is loaded (or builtin) it creates its own directory
-> +in debugfs. Assuming debugfs is mounted at /sys/kernel/debug/, the directory
-> +will be located at /sys/kernel/debug/gpio-mockup/. Inside this directory there
-> +are two attributes: new_device and delete_device.
-> +
-> +New chips can be created by writing a single line containing a number of
-> +options to "new_device". For example:
-> +
-> +.. code-block:: sh
-> +
-> +    $ echo "label=my-mockup num_lines=4 named_lines" > /sys/kernel/debug/gpio-mockup/new_device
-> +
-> +Supported options:
-> +
-> +    num_lines=<num_lines> - number of GPIO lines to expose
-> +
-> +    label=<label> - label of the dummy chip
-> +
-> +    named_lines - defines whether dummy lines should be named, the names are
-> +                  of the form X-Y where X is the chip's label and Y is the
-> +                  line's offset
-> +
-> +Note: only num_lines is mandatory.
-> +
-> +Chips can be dynamically removed by writing the chip's label to
-> +"delete_device". For example:
-> +
-> +.. code-block:: sh
-> +
-> +    echo "gpio-mockup.0" > /sys/kernel/debug/gpio-mockup/delete_device
-> +
-> +Creating simulated chips using module params
-> +--------------------------------------------
-> +
-> +Note: this is an older, now deprecated method kept for backward compatibility
-> +for user-space tools.
-> +
-> +When loading the gpio-mockup driver a number of parameters can be passed to the
-> +module.
-> +
-> +    gpio_mockup_ranges
-> +
-> +        This parameter takes an argument in the form of an array of integer
-> +        pairs. Each pair defines the base GPIO number (if any) and the number
-> +        of lines exposed by the chip. If the base GPIO is -1, the gpiolib
-> +        will assign it automatically.
-> +
-> +        Example: gpio_mockup_ranges=-1,8,-1,16,405,4
-> +
-> +        The line above creates three chips. The first one will expose 8 lines,
-> +        the second 16 and the third 4. The base GPIO for the third chip is set
-> +        to 405 while for two first chips it will be assigned automatically.
-> +
-> +    gpio_named_lines
-> +
-> +        This parameter doesn't take any arguments. It lets the driver know that
-> +        GPIO lines exposed by it should be named.
-> +
-> +        The name format is: gpio-mockup-X-Y where X is the letter associated
-> +        with the mockup chip and Y is the line offset.
-
-Where does this 'X' letter associated with the mockup chip come from?
-
-> +
-> +Manipulating simulated lines
-> +----------------------------
-> +
-> +Each mockup chip creates its own subdirectory in /sys/kernel/debug/gpio-mockup/.
-> +The directory is named after the chip's label. A symlink is also created, named
-> +after the chip's name, which points to the label directory.
-> +
-> +Inside each subdirectory, there's a separate attribute for each GPIO line. The
-> +name of the attribute represents the line's offset in the chip.
-> +
-> +Reading from a line attribute returns the current value. Writing to it (0 or 1)
-> +changes its pull.
-
-What does "pull" mean here?
+http://en.wikipedia.org/wiki/2004_Indian_Ocean_earthquake I have
+contacted you to assist in retrieving the estate deposit left behind
+by my client in a security company here in Togo before it is
+confiscated or declared abandon property  by the said security company
+where this deposit valued at Eighteen million dollars (US$18.5 million
+dollars) is lodged. This security company has issued me a notice to
+contact the next of kin, or the deposit will be confiscated.
 
 
-thanks.
+My proposition to you is to seek your consent to present you as the
+next-of-kin and beneficiary of my late client Mr.Jack Seo, since you
+are from the same territory with him, then we can share the money on a
+mutually agreed-upon percentage of 50/50%.. All legal documents to
+back up your claim as my client's next-of-kin will be provided. All I
+require is your honest cooperation to enable us see this transaction
+through.This will be executed under a legitimate arrangement that will
+protect you from any breach of the law.  If this business proposition
+offends your moral values, do accept my apology. I must use this
+opportunity to implore you to exercise the utmost indulgence to keep
+this matter extraordinary confidential, whatever your decision, while
+I await your prompt response. Please contact me at once to indicate
+your interest. I will like you to acknowledge the receipt of this
+e-mail as soon as possible via my PRIVATE EMAIL and treat with
+absolute confidentiality and sincerity. I look forward to your quick
+reply.
 
--- 
-~Randy
-
+Best regards,
+Attasi Dodo
