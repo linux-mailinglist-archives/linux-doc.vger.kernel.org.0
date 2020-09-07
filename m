@@ -2,55 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7344D25F8E8
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Sep 2020 12:54:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7AB5F25F90F
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Sep 2020 13:11:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728642AbgIGKyS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Sep 2020 06:54:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38096 "EHLO
+        id S1728651AbgIGLK7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Sep 2020 07:10:59 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38484 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728957AbgIGKyI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Sep 2020 06:54:08 -0400
-Received: from mail-il1-x141.google.com (mail-il1-x141.google.com [IPv6:2607:f8b0:4864:20::141])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EE881C061574
-        for <linux-doc@vger.kernel.org>; Mon,  7 Sep 2020 03:54:02 -0700 (PDT)
-Received: by mail-il1-x141.google.com with SMTP id x2so12151058ilm.0
-        for <linux-doc@vger.kernel.org>; Mon, 07 Sep 2020 03:54:02 -0700 (PDT)
+        with ESMTP id S1729004AbgIGK4c (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Sep 2020 06:56:32 -0400
+Received: from mail-il1-x142.google.com (mail-il1-x142.google.com [IPv6:2607:f8b0:4864:20::142])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8DBC2C061573
+        for <linux-doc@vger.kernel.org>; Mon,  7 Sep 2020 03:56:30 -0700 (PDT)
+Received: by mail-il1-x142.google.com with SMTP id u20so3287935ilk.6
+        for <linux-doc@vger.kernel.org>; Mon, 07 Sep 2020 03:56:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=F9or7F3N4uGJ5u794zyeeQfJsXAWR+DFA8Gx8lvKsws=;
-        b=SKDKiay1D03pgiV+UpJzmTyefaJ/beR1td+hpIw98akjdM8VTUCwuMVeLlb3osZuE9
-         /KX4TukEYGI1vwQo8XNn0elPXGJ/94SDE7VmsuDbdAeXPNF3Tr21rzW8zr8TqLTlTyYE
-         1dLxcfZcjsxI15aCI4Bwujp8aEg7SyTQlu/1Xvz9KT5p1Roko10bQo9WqMrLhKId6ZUG
-         FHXGNWLYNCX+8Pnw/3+wyi60zjyrVtjbyqfaUxlJn8FQFVZoLyaV6pWJb9wRwJ88PnnS
-         2no0sLak8d1PFbnic9JnssKk8fw3Qyp486n1lAo5X7xgmIkEPmiHVQNl6UdfGL4qDc5+
-         +BDQ==
+        bh=5RpqzXli+XwCeMDV3owXAXqs2l8fk/xVY+BAwh0ak7Y=;
+        b=UdJojwKSlBl1Tz+n0b1d7FQshL4EUtEIMahQ4fGtI2Y2E4fryVcKbeE0sXH9qI7yPm
+         ht/QXwE8hxsAbPH1+Lle01u/vcrJm1XxLztsetw7WKfv6RKaZk0+VtY3wrXz/taGbnhi
+         BUpskNdAvj8qCP98GPh4jgZSDszAfYsVkJNZNmuS97HqgwWBDAC9G4xgYiMaE9Ll4IW2
+         dv89Z5sjugBIhI33dMFvXroe7cuI/54CVfFHkOupSnM7ORAguKkXoN2aeXvuRT87mqm4
+         IzSdxnCuu6913KmUrirpZd9GKBd9MuFYho3sTMT3c5mJai5KCZBDm/WE5pzGlS0VsfgI
+         FDSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=F9or7F3N4uGJ5u794zyeeQfJsXAWR+DFA8Gx8lvKsws=;
-        b=CwrBEs1QNl2hT/FgM1ppZv7GNG42p/ypiDueC3JucR2ByhD/GF+o7R0r4bXQ4O7NuY
-         4xw31WIjzT35xDAKvCQNd9lJI5QvfjOdm0MwB9jfoGMW6hm76xppBEQkcF2PsKBOamh4
-         t2lTauVsQvJG06TNqk3BF6x8owiWfoAx00cWJZTCYzerQ6DkRrkjlo3kcb392sk0RKun
-         k6BTmtEwdgAU6FmbMVc9iigwpxAF4GUOcCIk4b/Y7TUcJS/AJzYefGsj9/d5TxHBG74m
-         o9pU8gP4WsvT7g4QX/v/i/McrPunjPteesTFmNvM9LgpLw/XcpcxKVg6HneUj61R0nMv
-         obiA==
-X-Gm-Message-State: AOAM532BKEFAbU/n7Wvc4f+ezF8S1DEfmukIjXXvQkiKiw9oYXeqbDop
-        fcQBziCFNYhQsE/d5RW2lHbxdmiIOZpZB/9KO82uIw==
-X-Google-Smtp-Source: ABdhPJxBpaWjVX3fkFg/bcWAsiU5ccj4QQBFPEMsNaOmvDrtar3fGAFBHYqxEdQBwc585SSw+vfckGQqg3PvOdHAs0M=
-X-Received: by 2002:a92:1b0b:: with SMTP id b11mr18780714ilb.287.1599476041805;
- Mon, 07 Sep 2020 03:54:01 -0700 (PDT)
+        bh=5RpqzXli+XwCeMDV3owXAXqs2l8fk/xVY+BAwh0ak7Y=;
+        b=m2TdWIFPlChplhh9HHmBicJ8H1As919BXfQDXrJ/zMtmzzwqQbFP4ybyOwP589IFAg
+         rFWvqxSyZtgJUOKh8N1LsL/ICmWt561BZAAkrpWAhJ+bCC2QMhVWNGCI7FvFQUBvc/Wn
+         rVLST2ZStYmt4mew3+NnzcNXKvwn2FyIRB5cCf6GfpaDQ+LEKTJpptNlTRn13d8PA5IJ
+         +onx0hPHcKt5tzfGC4bYUVNgzVeeOzIPVrumq0l6Tul/KuKJCg51obuhRmADY5IKbXhI
+         sOFylsxy/7ZzvQOco6pp1Eh6QMCrTdAjBGVxgPwsWVeUsddmTQDSH2VbnEWWfaezO/JQ
+         4x/Q==
+X-Gm-Message-State: AOAM532L3swfWHnjjJcBMsg2bJmoLhOHf5HkKTxJH+tHvAt1ejK+6m/M
+        3ytG5/nY0u1oSxWwSdkRRkMlBxou/7a39mG4BPcRTA==
+X-Google-Smtp-Source: ABdhPJzrrBWKvS/0CytuqACgZ2NZ/VYj5Aa6yYN+qHpPMg92bY9CYtJjq/jiXt/5mZGa37+9U5ia18jssb2wZ1ZnqRM=
+X-Received: by 2002:a92:1b0b:: with SMTP id b11mr18787396ilb.287.1599476189880;
+ Mon, 07 Sep 2020 03:56:29 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200904154547.3836-1-brgl@bgdev.pl> <20200904154547.3836-6-brgl@bgdev.pl>
- <20200904164015.GY1891694@smile.fi.intel.com>
-In-Reply-To: <20200904164015.GY1891694@smile.fi.intel.com>
+References: <20200904154547.3836-1-brgl@bgdev.pl> <20200904154547.3836-5-brgl@bgdev.pl>
+ <20200904163820.GX1891694@smile.fi.intel.com>
+In-Reply-To: <20200904163820.GX1891694@smile.fi.intel.com>
 From:   Bartosz Golaszewski <brgl@bgdev.pl>
-Date:   Mon, 7 Sep 2020 12:53:51 +0200
-Message-ID: <CAMRc=MdprNhsRZm=kxkEHFbpftwgMB0a-SR4HjLgiG0tjfWM=Q@mail.gmail.com>
-Subject: Re: [PATCH 05/23] gpiolib: unexport devprop_gpiochip_set_names()
+Date:   Mon, 7 Sep 2020 12:56:19 +0200
+Message-ID: <CAMRc=Mc2mhsNo10RDVLGNPCADivYNco21+QZfehAgMRzZW3Sfg@mail.gmail.com>
+Subject: Re: [PATCH 04/23] gpiolib: generalize devprop_gpiochip_set_names()
+ for device properties
 To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
 Cc:     Linus Walleij <linus.walleij@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
@@ -67,25 +68,81 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Sep 4, 2020 at 6:42 PM Andy Shevchenko
+On Fri, Sep 4, 2020 at 6:44 PM Andy Shevchenko
 <andriy.shevchenko@linux.intel.com> wrote:
 >
-> On Fri, Sep 04, 2020 at 05:45:29PM +0200, Bartosz Golaszewski wrote:
+> On Fri, Sep 04, 2020 at 05:45:28PM +0200, Bartosz Golaszewski wrote:
 > > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 > >
-> > Now that devprop_gpiochip_set_names() is only used in a single place
-> > inside drivers/gpio/gpiolib.c, there's no need anymore for it to be
-> > exported or to even live in its own source file. Pull this function into
-> > the core source file for gpiolib.
+> > devprop_gpiochip_set_names() is overly complicated with taking the
+> > fwnode argument (which requires using dev_fwnode() & of_fwnode_handle()
+> > in ACPI and OF GPIO code respectively). Let's just switch to using the
+> > generic device properties.
+> >
+> > This allows us to pull the code setting line names directly into
+> > gpiochip_add_data_with_key() instead of handling it separately for
+> > ACPI and OF.
+> >
+> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> > ---
+> >  drivers/gpio/gpiolib-acpi.c    |  3 ---
+> >  drivers/gpio/gpiolib-devprop.c | 19 ++++++++++---------
+> >  drivers/gpio/gpiolib-of.c      |  5 -----
+> >  drivers/gpio/gpiolib.c         |  8 ++++----
+> >  include/linux/gpio/driver.h    |  3 +--
+> >  5 files changed, 15 insertions(+), 23 deletions(-)
+> >
+> > diff --git a/drivers/gpio/gpiolib-acpi.c b/drivers/gpio/gpiolib-acpi.c
+> > index 54ca3c18b291..834a12f3219e 100644
+> > --- a/drivers/gpio/gpiolib-acpi.c
+> > +++ b/drivers/gpio/gpiolib-acpi.c
+> > @@ -1221,9 +1221,6 @@ void acpi_gpiochip_add(struct gpio_chip *chip)
+> >               return;
+> >       }
+> >
+> > -     if (!chip->names)
+> > -             devprop_gpiochip_set_names(chip, dev_fwnode(chip->parent));
+> > -
+> >       acpi_gpiochip_request_regions(acpi_gpio);
+> >       acpi_gpiochip_scan_gpios(acpi_gpio);
+> >       acpi_walk_dep_device_list(handle);
+> > diff --git a/drivers/gpio/gpiolib-devprop.c b/drivers/gpio/gpiolib-devprop.c
+> > index 26741032fa9e..a28659b4f9c9 100644
+> > --- a/drivers/gpio/gpiolib-devprop.c
+> > +++ b/drivers/gpio/gpiolib-devprop.c
+> > @@ -17,25 +17,24 @@
+> >  /**
+> >   * devprop_gpiochip_set_names - Set GPIO line names using device properties
+> >   * @chip: GPIO chip whose lines should be named, if possible
+> > - * @fwnode: Property Node containing the gpio-line-names property
+> >   *
+> >   * Looks for device property "gpio-line-names" and if it exists assigns
+> >   * GPIO line names for the chip. The memory allocated for the assigned
+> > - * names belong to the underlying firmware node and should not be released
+> > + * names belong to the underlying software node and should not be released
+> >   * by the caller.
+> >   */
+> > -void devprop_gpiochip_set_names(struct gpio_chip *chip,
+> > -                             const struct fwnode_handle *fwnode)
+> > +int devprop_gpiochip_set_names(struct gpio_chip *chip)
+> >  {
+> >       struct gpio_device *gdev = chip->gpiodev;
+> > +     struct device *dev = chip->parent;
+> >       const char **names;
+> >       int ret, i;
+> >       int count;
+> >
+> > -     count = fwnode_property_read_string_array(fwnode, "gpio-line-names",
+> > +     count = device_property_read_string_array(dev, "gpio-line-names",
+> >                                                 NULL, 0);
+> >       if (count < 0)
+> > -             return;
+> > +             return 0;
 >
-> I have mixed feelings about this. We may simply unexport and attach object file
-> to gpiolib.o. Would it be expected to see more functions in this file in the
-> future?
+> Can we introduce a followup to 33ee09cd59ce ("device property: Add helpers to
+> count items in an array") for strings?
 >
 
-This file was created for this function alone over 4 years ago and
-never saw any new routines. Personally I think there's no reason to
-keep a single helper in its own file. We usually only split big chunks
-of code out of gpiolib.c.
+Sure, I'll do this in v2.
 
 Bart
