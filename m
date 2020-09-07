@@ -2,211 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6144B25F8FF
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Sep 2020 13:05:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B884B25F9FA
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Sep 2020 13:56:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729026AbgIGLBc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Sep 2020 07:01:32 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38760 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728985AbgIGK6Q (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Sep 2020 06:58:16 -0400
-Received: from mail-il1-x143.google.com (mail-il1-x143.google.com [IPv6:2607:f8b0:4864:20::143])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 52626C061575
-        for <linux-doc@vger.kernel.org>; Mon,  7 Sep 2020 03:58:16 -0700 (PDT)
-Received: by mail-il1-x143.google.com with SMTP id u20so3291914ilk.6
-        for <linux-doc@vger.kernel.org>; Mon, 07 Sep 2020 03:58:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Ka86XCBq/V19GD6GyrylhsG/kDUnrrNEHVjokRO/B1o=;
-        b=u6wEcfF4clytfMFn0Q3+4RSrEe5oYy0Eg72vGdNb06r0CxO4wt0j8j6zbN7uNszbq5
-         Zn1mzZjmbyJWkWk147E4JJzTuQAOUsccp7NG1VL5akR8xQBzQAXxU8ArfuOEWHRPpPly
-         vQKJYOvlUrR2krVgQkYEEGKF6HBwJd1Y+aZX1wd/PoPmFFZytSJ0q8qFxASTfQKd0Ehz
-         cGCEdD/ubMHct2jM1yn1B2nk0oLr4QKAXxaoSM7WXgrJwTg8Zgk+2EOfhXxe5uvUZm4U
-         RfouBH+2KAsHGY/oCUtPdF9eJr8xDUvPFrWwIqF3HQ1+vu7TrSHnicyx5B6ultfUmDeD
-         qDZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Ka86XCBq/V19GD6GyrylhsG/kDUnrrNEHVjokRO/B1o=;
-        b=uPJspw14p2Ljh2xi9Y9+U/bzoVJf6RU+r3DA153BR5EOBPa9hPwFgpe1wG9CM0Hkr9
-         9LV4wyaog6L6KQWP8PsXPOcoUPoNZBcmxl+gX3JRlWtOih8BcwzRF/8vr+wRGrzyrijy
-         jTKBD5UNxDlOEqo/NdGBrxosjLVFS9RFdPBPs3v2mLXNkg3K17YM0teau2XJdo/ibg7v
-         jME9wH6vPZMkO5WgZmyn3aeynjPG1PX48/YRBWy1+CvZr5P5ANOIJ8FrXpU66SkGuprh
-         aUvwRjUs/1v2oRYnhFjEPphKI9wk9TpdEEyGf3pYdYSyj/5z00GwSmIC4kV2Ec/RRDwr
-         ni4g==
-X-Gm-Message-State: AOAM531r9gIwesSMWdpF4yNjmZTe8BjopBauEqxOxnVz4GFoX3UKo8GO
-        YkDcLv6uHPqsakpE4g+U/YukB7Wjrl6JEdoadUxOUA==
-X-Google-Smtp-Source: ABdhPJyNcXQHYQOHmSkHGrSedNl1b2pAVW8V+P3eGn98BQdjrgtp0HrsHhorKZbx6MoDWMtUhO8X6plpcOqKOMQaQiI=
-X-Received: by 2002:a92:9604:: with SMTP id g4mr619710ilh.6.1599476295553;
- Mon, 07 Sep 2020 03:58:15 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200904154547.3836-1-brgl@bgdev.pl> <20200904154547.3836-15-brgl@bgdev.pl>
- <20200904164624.GA1891694@smile.fi.intel.com>
-In-Reply-To: <20200904164624.GA1891694@smile.fi.intel.com>
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-Date:   Mon, 7 Sep 2020 12:58:04 +0200
-Message-ID: <CAMRc=MdDPQGtDVjwdVCuNESTqguXDUGZzo_eT-OHwnNJtnmCWQ@mail.gmail.com>
-Subject: Re: [PATCH 14/23] gpio: mockup: use the generic 'gpio-line-names' property
-To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc:     Linus Walleij <linus.walleij@linaro.org>,
+        id S1729125AbgIGLrr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Sep 2020 07:47:47 -0400
+Received: from mga01.intel.com ([192.55.52.88]:18497 "EHLO mga01.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729109AbgIGLq3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 7 Sep 2020 07:46:29 -0400
+IronPort-SDR: u4KohBcvYcG9RbkmPJ3ozmpfiYzDMsjWNloDyxd9KR012bFb7MH/gw1Y3NYSAU8MddCr0BTx8J
+ BVlYhcWaDl4A==
+X-IronPort-AV: E=McAfee;i="6000,8403,9736"; a="176046003"
+X-IronPort-AV: E=Sophos;i="5.76,401,1592895600"; 
+   d="scan'208";a="176046003"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Sep 2020 04:45:57 -0700
+IronPort-SDR: 2c5/thtWfGsvF/VAAo2KUZsh1d3mpudhrE42tnry+4xfAzgIgzUSc25JQ7BeBaa6gPcu27O6tp
+ kRAMhOH3CdHA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.76,401,1592895600"; 
+   d="scan'208";a="333141071"
+Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
+  by orsmga008.jf.intel.com with ESMTP; 07 Sep 2020 04:45:54 -0700
+Received: from andy by smile with local (Exim 4.94)
+        (envelope-from <andy.shevchenko@gmail.com>)
+        id 1kFFap-00EwG6-Fz; Mon, 07 Sep 2020 14:45:51 +0300
+Date:   Mon, 7 Sep 2020 14:45:51 +0300
+From:   Andy Shevchenko <andy.shevchenko@gmail.com>
+To:     Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Cc:     Bartosz Golaszewski <brgl@bgdev.pl>,
+        Linus Walleij <linus.walleij@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
         Mika Westerberg <mika.westerberg@linux.intel.com>,
         Kent Gibson <warthog618@gmail.com>,
-        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+        linux-gpio <linux-gpio@vger.kernel.org>,
         linux-doc <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-acpi@vger.kernel.org,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
+        LKML <linux-kernel@vger.kernel.org>,
+        ACPI Devel Maling List <linux-acpi@vger.kernel.org>
+Subject: Re: [PATCH 03/23] lib: uaccess: provide getline_from_user()
+Message-ID: <20200907114551.GV1891694@smile.fi.intel.com>
+References: <20200904154547.3836-1-brgl@bgdev.pl>
+ <20200904154547.3836-4-brgl@bgdev.pl>
+ <20200904163517.GW1891694@smile.fi.intel.com>
+ <CAMpxmJWQsgV5WZrdPW3UUOVTEy1L6Y_rb7ThQK1QTRinmHSqWA@mail.gmail.com>
+ <CAHp75VdOWdwT-e5ufsZ8MEH=YtdBgm1=TDKn3f8fJxXY4YKh9A@mail.gmail.com>
+ <CAMpxmJXmY8oBpPue5v0wBvmjHkFGaUmzHScHoV-1pNEQ59am4w@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMpxmJXmY8oBpPue5v0wBvmjHkFGaUmzHScHoV-1pNEQ59am4w@mail.gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Sep 4, 2020 at 6:46 PM Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
->
-> On Fri, Sep 04, 2020 at 05:45:38PM +0200, Bartosz Golaszewski wrote:
-> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+On Mon, Sep 07, 2020 at 12:28:05PM +0200, Bartosz Golaszewski wrote:
+> On Mon, Sep 7, 2020 at 12:19 PM Andy Shevchenko
+> <andy.shevchenko@gmail.com> wrote:
 > >
-> > GPIO line names are currently created by the driver from the chip label.
-> > We'll want to support custom formats for line names (for instance: to
-> > name all lines the same) for user-space tests so create them in the
-> > module init function and pass them to the driver using the standard
-> > 'gpio-line-names' property.
+> > On Mon, Sep 7, 2020 at 1:05 PM Bartosz Golaszewski
+> > <bgolaszewski@baylibre.com> wrote:
+> > > On Fri, Sep 4, 2020 at 6:35 PM Andy Shevchenko
+> > > <andriy.shevchenko@linux.intel.com> wrote:
+> > > > On Fri, Sep 04, 2020 at 05:45:27PM +0200, Bartosz Golaszewski wrote:
+> > > > > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 > >
-> > Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> > ---
-> >  drivers/gpio/gpio-mockup.c | 70 +++++++++++++++++++++-----------------
-> >  1 file changed, 38 insertions(+), 32 deletions(-)
+> > > > Doesn't mm/util.c provides us something like this?
+> > > > strndup_user()?
+> > > >
+> > >
+> > > Yes, there's both strndup_user() as well as strncpy_from_user(). The
+> > > problem is that they rely on the strings being NULL-terminated. This
+> > > is not guaranteed for debugfs file_operations write callbacks. We need
+> > > some helper that takes the minimum of bytes provided by userspace and
+> > > the buffer size and figure out how many bytes to actually copy IMO.
 > >
-> > diff --git a/drivers/gpio/gpio-mockup.c b/drivers/gpio/gpio-mockup.c
-> > index ce83f1df1933..96976ba66598 100644
-> > --- a/drivers/gpio/gpio-mockup.c
-> > +++ b/drivers/gpio/gpio-mockup.c
-> > @@ -18,6 +18,7 @@
-> >  #include <linux/platform_device.h>
-> >  #include <linux/property.h>
-> >  #include <linux/slab.h>
-> > +#include <linux/string_helpers.h>
-> >  #include <linux/uaccess.h>
+> > Wouldn't this [1] approach work?
 > >
-> >  #include "gpiolib.h"
-> > @@ -378,29 +379,6 @@ static void gpio_mockup_debugfs_setup(struct device *dev,
-> >       return;
-> >  }
+> > [1]: https://elixir.bootlin.com/linux/v5.9-rc3/source/arch/x86/kernel/cpu/mtrr/if.c#L93
 > >
-> > -static int gpio_mockup_name_lines(struct device *dev,
-> > -                               struct gpio_mockup_chip *chip)
-> > -{
-> > -     struct gpio_chip *gc = &chip->gc;
-> > -     char **names;
-> > -     int i;
-> > -
-> > -     names = devm_kcalloc(dev, gc->ngpio, sizeof(char *), GFP_KERNEL);
-> > -     if (!names)
-> > -             return -ENOMEM;
-> > -
-> > -     for (i = 0; i < gc->ngpio; i++) {
-> > -             names[i] = devm_kasprintf(dev, GFP_KERNEL,
-> > -                                       "%s-%d", gc->label, i);
-> > -             if (!names[i])
-> > -                     return -ENOMEM;
-> > -     }
-> > -
-> > -     gc->names = (const char *const *)names;
-> > -
-> > -     return 0;
-> > -}
-> > -
-> >  static void gpio_mockup_dispose_mappings(void *data)
-> >  {
-> >       struct gpio_mockup_chip *chip = data;
-> > @@ -468,12 +446,6 @@ static int gpio_mockup_probe(struct platform_device *pdev)
-> >       for (i = 0; i < gc->ngpio; i++)
-> >               chip->lines[i].dir = GPIO_LINE_DIRECTION_IN;
-> >
-> > -     if (device_property_read_bool(dev, "named-gpio-lines")) {
-> > -             rv = gpio_mockup_name_lines(dev, chip);
-> > -             if (rv)
-> > -                     return rv;
-> > -     }
-> > -
-> >       chip->irq_sim_domain = devm_irq_domain_create_sim(dev, NULL,
-> >                                                         gc->ngpio);
-> >       if (IS_ERR(chip->irq_sim_domain))
-> > @@ -524,6 +496,27 @@ static void gpio_mockup_unregister_devices(void)
-> >       }
-> >  }
-> >
-> > +static __init char **gpio_mockup_make_line_names(const char *label,
-> > +                                              unsigned int num_lines)
-> > +{
-> > +     unsigned int i;
-> > +     char **names;
-> > +
-> > +     names = kcalloc(num_lines + 1, sizeof(char *), GFP_KERNEL);
-> > +     if (!names)
-> > +             return NULL;
-> > +
-> > +     for (i = 0; i < num_lines; i++) {
-> > +             names[i] = kasprintf(GFP_KERNEL, "%s-%u", label, i);
-> > +             if (!names[i]) {
-> > +                     kfree_strarray(names, i);
-> > +                     return NULL;
-> > +             }
-> > +     }
-> > +
-> > +     return names;
-> > +}
-> > +
-> >  static int __init gpio_mockup_init(void)
-> >  {
-> >       struct property_entry properties[GPIO_MOCKUP_MAX_PROP];
-> > @@ -531,6 +524,7 @@ static int __init gpio_mockup_init(void)
-> >       struct gpio_mockup_device *mockup_dev;
-> >       int i, prop, num_chips, err = 0, base;
-> >       struct platform_device_info pdevinfo;
-> > +     char **line_names;
-> >       u16 ngpio;
-> >
-> >       if ((gpio_mockup_num_ranges < 2) ||
-> > @@ -563,6 +557,7 @@ static int __init gpio_mockup_init(void)
-> >               memset(properties, 0, sizeof(properties));
-> >               memset(&pdevinfo, 0, sizeof(pdevinfo));
-> >               prop = 0;
-> > +             line_names = NULL;
-> >
-> >               snprintf(chip_label, sizeof(chip_label),
-> >                        "gpio-mockup-%c", i + 'A');
-> > @@ -578,9 +573,18 @@ static int __init gpio_mockup_init(void)
-> >                                : gpio_mockup_range_ngpio(i) - base;
-> >               properties[prop++] = PROPERTY_ENTRY_U16("nr-gpios", ngpio);
-> >
-> > -             if (gpio_mockup_named_lines)
-> > -                     properties[prop++] = PROPERTY_ENTRY_BOOL(
-> > -                                             "named-gpio-lines");
-> > +             if (gpio_mockup_named_lines) {
-> > +                     line_names = gpio_mockup_make_line_names(chip_label,
-> > +                                                              ngpio);
-> > +                     if (!line_names) {
-> > +                             err = -ENOMEM;
-> > +                             goto err_out;
-> > +                     }
-> > +
-> > +                     properties[prop++] = PROPERTY_ENTRY_STRING_ARRAY_LEN(
-> > +                                             "gpio-line-names",
-> > +                                             line_names, ngpio);
-> > +             }
->
-> Indentation here looks quite deep. Maybe introduce a helper in between where
-> you assign properties?
->
+> 
+> Sure, but this is pretty much what I do in getline_from_user(). If
+> anything we should port mtrr_write() to using getline_from_user() once
+> it's available upstream, no?
 
-No need for that - this gets flattened later on in the series.
+But you may provide getline_from_user() as inline in the same header where
+strncpy_from_user() is declared. It will be like 3 LOCs?
 
-Bart
+-- 
+With Best Regards,
+Andy Shevchenko
+
+
