@@ -2,159 +2,150 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7AB1926024A
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Sep 2020 19:22:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CB61B26022A
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Sep 2020 19:19:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729970AbgIGRVj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Sep 2020 13:21:39 -0400
-Received: from szxga07-in.huawei.com ([45.249.212.35]:53352 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1729678AbgIGNrh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 7 Sep 2020 09:47:37 -0400
-Received: from DGGEMS404-HUB.china.huawei.com (unknown [172.30.72.59])
-        by Forcepoint Email with ESMTP id 37044B73E2F5FB36280A;
-        Mon,  7 Sep 2020 21:47:04 +0800 (CST)
-Received: from localhost.localdomain.localdomain (10.175.113.25) by
- DGGEMS404-HUB.china.huawei.com (10.3.19.204) with Microsoft SMTP Server id
- 14.3.487.0; Mon, 7 Sep 2020 21:46:55 +0800
-From:   Chen Zhou <chenzhou10@huawei.com>
-To:     <catalin.marinas@arm.com>, <will@kernel.org>,
-        <james.morse@arm.com>, <tglx@linutronix.de>, <mingo@redhat.com>,
-        <dyoung@redhat.com>, <bhe@redhat.com>, <corbet@lwn.net>,
-        <John.P.donnelly@oracle.com>, <prabhakar.pkin@gmail.com>,
-        <bhsharma@redhat.com>
-CC:     <horms@verge.net.au>, <robh+dt@kernel.org>, <arnd@arndb.de>,
-        <nsaenzjulienne@suse.de>, <linux-arm-kernel@lists.infradead.org>,
-        <linux-kernel@vger.kernel.org>, <kexec@lists.infradead.org>,
-        <linux-doc@vger.kernel.org>, <guohanjun@huawei.com>,
-        <xiexiuqi@huawei.com>, <huawei.libin@huawei.com>,
-        <wangkefeng.wang@huawei.com>, <chenzhou10@huawei.com>
-Subject: [PATCH v12 9/9] kdump: update Documentation about crashkernel
-Date:   Mon, 7 Sep 2020 21:47:45 +0800
-Message-ID: <20200907134745.25732-10-chenzhou10@huawei.com>
-X-Mailer: git-send-email 2.20.1
-In-Reply-To: <20200907134745.25732-1-chenzhou10@huawei.com>
-References: <20200907134745.25732-1-chenzhou10@huawei.com>
+        id S1729710AbgIGRT5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Sep 2020 13:19:57 -0400
+Received: from mga18.intel.com ([134.134.136.126]:40312 "EHLO mga18.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729565AbgIGNxU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 7 Sep 2020 09:53:20 -0400
+IronPort-SDR: FRYaLof1Stayp3r3/A32d5+SC8+T5VqW7lqR0RbEAO/jzyH5EFlBK9vI/KoWBMSiCe7k3u8MIU
+ 3BNpHFBBnQWQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9736"; a="145714274"
+X-IronPort-AV: E=Sophos;i="5.76,401,1592895600"; 
+   d="scan'208";a="145714274"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Sep 2020 06:53:04 -0700
+IronPort-SDR: ZpD+nR3zD5cFp9j3Cc3dwR1QwVccLWIgbyDzO5RuQx1ta5A3XEWYaZZ2XACE5B4yL8bRHhiDEr
+ hX9xYuaV/5pA==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.76,401,1592895600"; 
+   d="scan'208";a="333169481"
+Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
+  by orsmga008.jf.intel.com with ESMTP; 07 Sep 2020 06:53:01 -0700
+Received: from andy by smile with local (Exim 4.94)
+        (envelope-from <andriy.shevchenko@linux.intel.com>)
+        id 1kFHZq-00ExvU-05; Mon, 07 Sep 2020 16:52:58 +0300
+Date:   Mon, 7 Sep 2020 16:52:57 +0300
+From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+To:     Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Cc:     Randy Dunlap <rdunlap@infradead.org>,
+        Bartosz Golaszewski <brgl@bgdev.pl>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mika Westerberg <mika.westerberg@linux.intel.com>,
+        Kent Gibson <warthog618@gmail.com>,
+        linux-gpio <linux-gpio@vger.kernel.org>,
+        linux-doc <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        ACPI Devel Maling List <linux-acpi@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Subject: Re: [PATCH 23/23] Documentation: gpio: add documentation for
+ gpio-mockup
+Message-ID: <20200907135257.GJ1891694@smile.fi.intel.com>
+References: <20200904154547.3836-1-brgl@bgdev.pl>
+ <20200904154547.3836-24-brgl@bgdev.pl>
+ <26ea1683-da8f-30e7-f004-3616e96d56b3@infradead.org>
+ <20200907095932.GU1891694@smile.fi.intel.com>
+ <CAMpxmJXvhYOVkZY7LLf=v+o8E2xKTh1RYhLrdVsS9nN1XZ5QJQ@mail.gmail.com>
+ <20200907115310.GA1891694@smile.fi.intel.com>
+ <CAMpxmJUfNkko4Rrb4N5CF_rdwRAWGhVr9DSOHfhYyTxYSH7dsQ@mail.gmail.com>
+ <20200907123837.GG1891694@smile.fi.intel.com>
+ <CAMpxmJXNYZb66SPuzR_3CEVwD=PQ6z6Ew3ia7ZL=wSU0QGhjEA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-Originating-IP: [10.175.113.25]
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMpxmJXNYZb66SPuzR_3CEVwD=PQ6z6Ew3ia7ZL=wSU0QGhjEA@mail.gmail.com>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-For arm64, the behavior of crashkernel=X has been changed, which
-tries low allocation in DMA zone, and fall back to high allocation
-if it fails.
-We can also use "crashkernel=X,high" to select a high region above
-DMA zone, which also tries to allocate at least 256M low memory in
-DMA zone automatically.
-"crashkernel=Y,low" can be used to allocate specified size low memory
-in DMA zone.
-For non-RPi4 platforms, change DMA zone memtioned above to DMA32 zone.
+On Mon, Sep 07, 2020 at 02:57:29PM +0200, Bartosz Golaszewski wrote:
+> On Mon, Sep 7, 2020 at 2:38 PM Andy Shevchenko
+> <andriy.shevchenko@linux.intel.com> wrote:
+> >
+> > On Mon, Sep 07, 2020 at 02:06:15PM +0200, Bartosz Golaszewski wrote:
+> > > On Mon, Sep 7, 2020 at 1:53 PM Andy Shevchenko
+> > > <andriy.shevchenko@linux.intel.com> wrote:
+> > > > On Mon, Sep 07, 2020 at 12:26:34PM +0200, Bartosz Golaszewski wrote:
+> > > > > On Mon, Sep 7, 2020 at 11:59 AM Andy Shevchenko
+> > > > > <andriy.shevchenko@linux.intel.com> wrote:
+> > > > > > On Fri, Sep 04, 2020 at 08:15:59PM -0700, Randy Dunlap wrote:
+> > > > > > > On 9/4/20 8:45 AM, Bartosz Golaszewski wrote:
+> >
+> > ...
+> >
+> > > > > > > > +GPIO Testing Driver
+> > > > > > > > +===================
+> > > > > > > > +
+> > > > > > > > +The GPIO Testing Driver (gpio-mockup) provides a way to create simulated GPIO
+> > > > > > > > +chips for testing purposes. There are two ways of configuring the chips exposed
+> > > > > > > > +by the module. The lines can be accessed using the standard GPIO character
+> > > > > > > > +device interface as well as manipulated using the dedicated debugfs directory
+> > > > > > > > +structure.
+> > > > > > >
+> > > > > > > Could configfs be used for this instead of debugfs?
+> > > > > > > debugfs is ad hoc.
+> > > > > >
+> > > > > > Actually sounds like a good idea.
+> > > > > >
+> > > > >
+> > > > > Well, then we can go on and write an entirely new mockup driver
+> > > > > (ditching module params and dropping any backwards compatibility)
+> > > > > because we're already using debugfs for line values.
+> > > > >
+> > > > > How would we pass the device properties to configfs created GPIO chips
+> > > > > anyway? Devices seem to only be created using mkdir. Am I missing
+> > > > > something?
+> > > >
+> > > > Same way how USB composite works, no?
+> > > >
+> > >
+> > > OK, so create a new chip directory in configfs, configure it using
+> > > some defined configfs attributes and then finally instantiate it from
+> > > sysfs?
+> > >
+> > > Makes sense and is probably the right way to go. Now the question is:
+> > > is it fine to just entirely remove the previous gpio-mockup?
+> >
+> > Since, for example, I never saw device property bindings for that driver I
+> > assume that it was never considered as an ABI, so feel free to hack it in
+> > either direction.
+> >
+> > > Should we
+> > > keep some backwards compatibility?
+> >
+> > I wouldn't probably spend time on this.
+> >
+> > > Should we introduce an entirely new
+> > > module and have a transition period before removing previous
+> > > gpio-mockup?
+> >
+> > Neither transition period.
+> >
+> 
+> I wouldn't rush this actually. gpio-mockup is used a lot by libgpiod
+> and probably by Kent's Go library. My main goal with this series is to
+> extend it to allow for more advanced testing like simulating spurious
+> irqs to test the software debouncer or custom line name formats to
+> test name lookups.
 
-For x86 and arm64, we introduce threshold for the required memory.
-if required size X is too large and leads to very little free low
-memory after low allocation, the system may not work well.
-So add a threshold and go for high allocation directly if the required
-size is too large. The threshold is set as the half of low memory.
+When I wrote above I didn't mean this should be done in a hurry. Just during
+one release to make all parties ready for the change.
 
-So update the Documentation.
+> I need to think about it some more. An entirely new configfs interface
+> would take time too.
 
-Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
----
- Documentation/admin-guide/kdump/kdump.rst     | 25 ++++++++++++++++---
- .../admin-guide/kernel-parameters.txt         | 13 ++++++++--
- 2 files changed, 33 insertions(+), 5 deletions(-)
+Sure!
 
-diff --git a/Documentation/admin-guide/kdump/kdump.rst b/Documentation/admin-guide/kdump/kdump.rst
-index 2da65fef2a1c..549611abc581 100644
---- a/Documentation/admin-guide/kdump/kdump.rst
-+++ b/Documentation/admin-guide/kdump/kdump.rst
-@@ -299,7 +299,16 @@ Boot into System Kernel
-    "crashkernel=64M@16M" tells the system kernel to reserve 64 MB of memory
-    starting at physical address 0x01000000 (16MB) for the dump-capture kernel.
- 
--   On x86 and x86_64, use "crashkernel=64M@16M".
-+   On x86 use "crashkernel=64M@16M".
-+
-+   On x86_64, use "crashkernel=X" to select a region under 4G first, and
-+   fall back to reserve region above 4G. And go for high allocation
-+   directly if the required size is too large.
-+   We can also use "crashkernel=X,high" to select a region above 4G, which
-+   also tries to allocate at least 256M below 4G automatically and
-+   "crashkernel=Y,low" can be used to allocate specified size low memory.
-+   Use "crashkernel=Y@X" if you really have to reserve memory from specified
-+   start address X.
- 
-    On ppc64, use "crashkernel=128M@32M".
- 
-@@ -316,8 +325,18 @@ Boot into System Kernel
-    kernel will automatically locate the crash kernel image within the
-    first 512MB of RAM if X is not given.
- 
--   On arm64, use "crashkernel=Y[@X]".  Note that the start address of
--   the kernel, X if explicitly specified, must be aligned to 2MiB (0x200000).
-+   On arm64, use "crashkernel=X" to try low allocation in DMA zone, and
-+   fall back to high allocation if it fails. And go for high allocation
-+   directly if the required size is too large.
-+   We can also use "crashkernel=X,high" to select a high region above
-+   DMA zone, which also tries to allocate at least 256M low memory in
-+   DMA zone automatically.
-+   "crashkernel=Y,low" can be used to allocate specified size low memory
-+   in DMA zone.
-+   For non-RPi4 platforms, change DMA zone memtioned above to DMA32 zone.
-+   Use "crashkernel=Y@X" if you really have to reserve memory from
-+   specified start address X. Note that the start address of the kernel,
-+   X if explicitly specified, must be aligned to 2MiB (0x200000).
- 
- Load the Dump-capture Kernel
- ============================
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index a1068742a6df..f7df572d8f64 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -727,6 +727,10 @@
- 			[KNL, X86-64] Select a region under 4G first, and
- 			fall back to reserve region above 4G when '@offset'
- 			hasn't been specified.
-+			[KNL, arm64] Try low allocation in DMA zone, fall back
-+			to high allocation if it fails when '@offset' hasn't been
-+			specified. For non-RPi4 platforms, change DMA zone to
-+			DMA32 zone.
- 			See Documentation/admin-guide/kdump/kdump.rst for further details.
- 
- 	crashkernel=range1:size1[,range2:size2,...][@offset]
-@@ -743,6 +747,8 @@
- 			Otherwise memory region will be allocated below 4G, if
- 			available.
- 			It will be ignored if crashkernel=X is specified.
-+			[KNL, arm64] range in high memory.
-+			Allow kernel to allocate physical memory region from top.
- 	crashkernel=size[KMG],low
- 			[KNL, X86-64] range under 4G. When crashkernel=X,high
- 			is passed, kernel could allocate physical memory region
-@@ -751,13 +757,16 @@
- 			requires at least 64M+32K low memory, also enough extra
- 			low memory is needed to make sure DMA buffers for 32-bit
- 			devices won't run out. Kernel would try to allocate at
--			at least 256M below 4G automatically.
-+			least 256M below 4G automatically.
- 			This one let user to specify own low range under 4G
- 			for second kernel instead.
- 			0: to disable low allocation.
- 			It will be ignored when crashkernel=X,high is not used
- 			or memory reserved is below 4G.
--
-+			[KNL, arm64] range in low memory.
-+			This one let user to specify a low range in DMA zone for
-+			crash dump kernel. For non-RPi4 platforms, change DMA zone
-+			to DMA32 zone.
- 	cryptomgr.notests
- 			[KNL] Disable crypto self-tests
- 
 -- 
-2.20.1
+With Best Regards,
+Andy Shevchenko
+
 
