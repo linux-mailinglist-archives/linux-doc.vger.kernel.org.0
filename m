@@ -2,134 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DA36C25F15A
-	for <lists+linux-doc@lfdr.de>; Mon,  7 Sep 2020 03:12:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 12F7025F2CF
+	for <lists+linux-doc@lfdr.de>; Mon,  7 Sep 2020 07:49:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726628AbgIGBMi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 6 Sep 2020 21:12:38 -0400
-Received: from mail.kernel.org ([198.145.29.99]:33570 "EHLO mail.kernel.org"
+        id S1727016AbgIGFsk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Sep 2020 01:48:40 -0400
+Received: from mail.kernel.org ([198.145.29.99]:43850 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726564AbgIGBMh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 6 Sep 2020 21:12:37 -0400
-Received: from devnote2 (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
+        id S1726984AbgIGFsf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 7 Sep 2020 01:48:35 -0400
+Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id A6EA82080A;
-        Mon,  7 Sep 2020 01:12:28 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 8C64B20732;
+        Mon,  7 Sep 2020 05:48:32 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1599441156;
-        bh=xyTSMPG3pyBCZv5zMohBYPXtrUS10O0YxLED9qNXz1I=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=z4ctw8TGu/NMj1f6Hv2KXkrBHHa+hL7RZJDYAkBwkP7Zi0ELinKFYmIOB4m2bj+Br
-         REdUI3oczw2sfJo0SbI9XIY3sEtUK+33VKxfvPvGwHzxwMucx5Nbb4xzObhrn0k+Zq
-         pn0XJDjrIvvplQXYJSINInsZBA/KoOuJSe+bM3zE=
-Date:   Mon, 7 Sep 2020 10:12:26 +0900
-From:   Masami Hiramatsu <mhiramat@kernel.org>
-To:     Christian Brauner <christian.brauner@ubuntu.com>
-Cc:     linux-arch@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Yoshinori Sato <ysato@users.sourceforge.jp>,
-        Tony Luck <tony.luck@intel.com>,
-        Fenghua Yu <fenghua.yu@intel.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Ley Foon Tan <ley.foon.tan@intel.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        x86@kernel.org, Arnd Bergmann <arnd@arndb.de>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Stafford Horne <shorne@gmail.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Kars de Jong <jongk@linux-m68k.org>,
+        s=default; t=1599457713;
+        bh=kydM5vc3pHKLMrAc5q87T/B4UAcHcYV48KRlM3SnTaw=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=D1ehEq9CdIVbqmWoEHkUdqqgpOZdOsGk6sVQrIriOlwsHsWUJjXVyryp/ZUtQRFd9
+         NhnMKZK8bCPo07ZJ4OWGs/bAPS0/rDx+F+hdFQEF/edLZwQHLT11hlOx19g5WunOqR
+         OYrY9/w+NhajnG4XRv/89VnuMpCly0RC2oSEPyVU=
+Date:   Mon, 7 Sep 2020 07:48:29 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Joe Perches <joe@perches.com>
+Cc:     "Rafael J. Wysocki" <rafael@kernel.org>,
         Kees Cook <keescook@chromium.org>,
-        Greentime Hu <green.hu@gmail.com>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Alexandre Chartre <alexandre.chartre@oracle.com>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Tom Zanussi <zanussi@kernel.org>,
-        Xiao Yang <yangx.jy@cn.fujitsu.com>, linux-doc@vger.kernel.org,
-        uclinux-h8-devel@lists.sourceforge.jp, linux-ia64@vger.kernel.org,
-        linux-m68k@lists.linux-m68k.org, sparclinux@vger.kernel.org,
-        kgdb-bugreport@lists.sourceforge.net,
-        linux-kselftest@vger.kernel.org,
-        Linus Torvalds <torvalds@linux-foundation.org>,
-        Christoph Hewllig <hch@infradead.org>,
-        Matthew Wilcox <willy@infradead.org>
-Subject: Re: [PATCH v2 08/11] kprobes: switch to kernel_clone()
-Message-Id: <20200907101226.ab0d00639be953e81d4576c2@kernel.org>
-In-Reply-To: <20200819104655.436656-9-christian.brauner@ubuntu.com>
-References: <20200819104655.436656-1-christian.brauner@ubuntu.com>
-        <20200819104655.436656-9-christian.brauner@ubuntu.com>
-X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+        "Gustavo A . R . Silva" <gustavoars@kernel.org>,
+        Denis Efremov <efremov@linux.com>,
+        Julia Lawall <julia.lawall@inria.fr>,
+        Alex Dewar <alex.dewar90@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH V2] sysfs: Add sysfs_emit and sysfs_emit_at to format
+ sysfs output
+Message-ID: <20200907054829.GB280798@kroah.com>
+References: <a9054fb521e65f2809671fa9c18e2453061e9d91.1598744610.git.joe@perches.com>
+ <743a648dc817cddd2e7046283c868f1c08742f29.camel@perches.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <743a648dc817cddd2e7046283c868f1c08742f29.camel@perches.com>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
-
-On Wed, 19 Aug 2020 12:46:52 +0200
-Christian Brauner <christian.brauner@ubuntu.com> wrote:
-
-> The old _do_fork() helper is removed in favor of the new kernel_clone() helper.
-> The latter adheres to naming conventions for kernel internal syscall helpers.
-
-This looks good to me.
-
-Acked-by: Masami Hiramatsu <mhiramat@kernel.org>
-
-Thank you!
-
+On Sun, Sep 06, 2020 at 10:24:20AM -0700, Joe Perches wrote:
+> On Sat, 2020-08-29 at 16:48 -0700, Joe Perches wrote:
+> > Output defects can exist in sysfs content using sprintf and snprintf.
+> > 
+> > sprintf does not know the PAGE_SIZE maximum of the temporary buffer
+> > used for outputting sysfs content and it's possible to overrun the
+> > PAGE_SIZE buffer length.
+> > 
+> > Add a generic sysfs_emit function that knows that the size of the
+> > temporary buffer and ensures that no overrun is done.
+> > 
+> > Add a generic sysfs_emit_at function that can be used in multiple
+> > call situations that also ensures that no overrun is done.
+> > 
+> > Signed-off-by: Joe Perches <joe@perches.com>
+> > ---
+> > 
+> > V2: Simplify sysfs_emit and add sysfs_emit_at
+> >     Include Documentation change
 > 
-> Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> Cc: Alexandre Chartre <alexandre.chartre@oracle.com>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Masami Hiramatsu <mhiramat@kernel.org>
-> Signed-off-by: Christian Brauner <christian.brauner@ubuntu.com>
-> ---
-> /* v2 */
-> unchanged
-> ---
->  samples/kprobes/kprobe_example.c | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> diff --git a/samples/kprobes/kprobe_example.c b/samples/kprobes/kprobe_example.c
-> index 240f2435ce6f..a02f53836ee1 100644
-> --- a/samples/kprobes/kprobe_example.c
-> +++ b/samples/kprobes/kprobe_example.c
-> @@ -2,13 +2,13 @@
->  /*
->   * NOTE: This example is works on x86 and powerpc.
->   * Here's a sample kernel module showing the use of kprobes to dump a
-> - * stack trace and selected registers when _do_fork() is called.
-> + * stack trace and selected registers when kernel_clone() is called.
->   *
->   * For more information on theory of operation of kprobes, see
->   * Documentation/staging/kprobes.rst
->   *
->   * You will see the trace data in /var/log/messages and on the console
-> - * whenever _do_fork() is invoked to create a new process.
-> + * whenever kernel_clone() is invoked to create a new process.
->   */
->  
->  #include <linux/kernel.h>
-> @@ -16,7 +16,7 @@
->  #include <linux/kprobes.h>
->  
->  #define MAX_SYMBOL_LEN	64
-> -static char symbol[MAX_SYMBOL_LEN] = "_do_fork";
-> +static char symbol[MAX_SYMBOL_LEN] = "kernel_clone";
->  module_param_string(symbol, symbol, sizeof(symbol), 0644);
->  
->  /* For each probe you need to allocate a kprobe structure */
-> -- 
-> 2.28.0
-> 
+> Greg?  Rafael? Thoughts on this?
 
+I like the idea, give me a chance to catch up on patches, it's still in
+my to-review queue...
 
--- 
-Masami Hiramatsu <mhiramat@kernel.org>
+thanks,
+
+greg k-h
