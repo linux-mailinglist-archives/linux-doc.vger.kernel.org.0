@@ -2,134 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4B1942608F3
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Sep 2020 05:19:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 35D13260943
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Sep 2020 06:17:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728430AbgIHDTz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Sep 2020 23:19:55 -0400
-Received: from szxga06-in.huawei.com ([45.249.212.32]:55430 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1728417AbgIHDTz (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 7 Sep 2020 23:19:55 -0400
-Received: from DGGEMS406-HUB.china.huawei.com (unknown [172.30.72.59])
-        by Forcepoint Email with ESMTP id 2C1BBABCE4975FAC3F91;
-        Tue,  8 Sep 2020 11:19:53 +0800 (CST)
-Received: from [127.0.0.1] (10.174.176.220) by DGGEMS406-HUB.china.huawei.com
- (10.3.19.206) with Microsoft SMTP Server id 14.3.487.0; Tue, 8 Sep 2020
- 11:19:44 +0800
-Subject: Re: [PATCH v12 1/9] x86: kdump: move CRASH_ALIGN to 2M
-To:     Dave Young <dyoung@redhat.com>
-References: <20200907134745.25732-1-chenzhou10@huawei.com>
- <20200907134745.25732-2-chenzhou10@huawei.com>
- <20200908012138.GA3058@dhcp-128-65.nay.redhat.com>
-CC:     <catalin.marinas@arm.com>, <will@kernel.org>,
-        <james.morse@arm.com>, <tglx@linutronix.de>, <mingo@redhat.com>,
-        <bhe@redhat.com>, <corbet@lwn.net>, <John.P.donnelly@oracle.com>,
-        <prabhakar.pkin@gmail.com>, <bhsharma@redhat.com>,
-        <horms@verge.net.au>, <robh+dt@kernel.org>, <arnd@arndb.de>,
-        <nsaenzjulienne@suse.de>, <linux-arm-kernel@lists.infradead.org>,
-        <linux-kernel@vger.kernel.org>, <kexec@lists.infradead.org>,
-        <linux-doc@vger.kernel.org>, <guohanjun@huawei.com>,
-        <xiexiuqi@huawei.com>, <huawei.libin@huawei.com>,
-        <wangkefeng.wang@huawei.com>
-From:   chenzhou <chenzhou10@huawei.com>
-Message-ID: <c0fc35d0-a9e3-6349-08bc-d2f7a12e3680@huawei.com>
-Date:   Tue, 8 Sep 2020 11:19:42 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101
- Thunderbird/45.7.1
+        id S1725828AbgIHERp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Sep 2020 00:17:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59232 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725804AbgIHERo (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Sep 2020 00:17:44 -0400
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8D33EC061573
+        for <linux-doc@vger.kernel.org>; Mon,  7 Sep 2020 21:17:43 -0700 (PDT)
+Received: by mail-ej1-x642.google.com with SMTP id p9so20521291ejf.6
+        for <linux-doc@vger.kernel.org>; Mon, 07 Sep 2020 21:17:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to
+         :content-transfer-encoding;
+        bh=zdxUWMWXTEs/zs0LJh1bxLoOHpDg1k5nkLimqXptzik=;
+        b=K9XHuuLGTzNyJ6c0RJn8++O/WFnL1UNjFWG4473ctJ/uzgosuXp1oQcnmv3ycgEYT8
+         s4zB4suhYQ2eYl4iEnFSj1NCWQmP/QanAucgF4hOmAATkA8W6aFCm+CE1jJAP0w16N8R
+         rlkWYshr0JoImGQnLNwVMHj37r+ilVvu25BNI50P51MHRU56k266+5iQfobYYv4JWG7J
+         mfEOtUnbkR3ywMnlX62FfcJ8s3izvqDuNdD3pY71lD4BQMBgmaNPWtLFRyC1ZK7srkHJ
+         SLm7adEHVkOWJF95DTxJ+vjD9+TE7nsjMNAY0miP14POvo/GUDOztRNoWK2JolHJ/aLz
+         lMjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to:content-transfer-encoding;
+        bh=zdxUWMWXTEs/zs0LJh1bxLoOHpDg1k5nkLimqXptzik=;
+        b=hqTtifzKvEMofc+ACa77CRl6Sd2Kx1Y+0M7q220SIUcPCoKVEYgWmxrCnrJ+y9Wf13
+         Sp4DmoArmla7XpQ9/ZPHqkeciQyOAEqWh3Ok5WzNFUQMD2fu4eAd3xSHfy1WszhvYo1h
+         WTYN8hW/LudwiPaKwDwAG2EGQkJMQ9WCPije9lfnWlF6pXhRuGN0xBTzMoVJ390iAX4X
+         mRzpezsHCeCGFBw1nj9djPmD/lQ9q2sZ6Y97PXbu4dqCo/m94TXJrplV4rINnVhjWeVh
+         TC/LoQeD7sdqtk/yGZ6iw8CZ1xt7bDtPEjpi1hIVIiGXTpD0xeFVm5rOpKustbkX+Psx
+         DCDQ==
+X-Gm-Message-State: AOAM532mEtF9M96FjChL0iQqOEvZQ0GSAn+hr+/ZhUbC+DYDC7NZ8VIt
+        ja+RAFTE440IyVb/RwLYRp/QmEXj+oJGBtRQmAc=
+X-Google-Smtp-Source: ABdhPJxo5tZSkrOiusaKAmI1W5fNgw6E+OMCZvTk9tRx9VaE5gATrysMtmVXjRds1YFVeeDQ33umbI7+Yop/BJkxdfc=
+X-Received: by 2002:a17:906:2f17:: with SMTP id v23mr23454441eji.343.1599538660476;
+ Mon, 07 Sep 2020 21:17:40 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20200908012138.GA3058@dhcp-128-65.nay.redhat.com>
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.176.220]
-X-CFilter-Loop: Reflected
+Received: by 2002:a54:34cd:0:0:0:0:0 with HTTP; Mon, 7 Sep 2020 21:17:39 -0700 (PDT)
+Reply-To: ayishagddafio@mail.ru
+From:   AISHA GADDAFI <floradarpin.d@gmail.com>
+Date:   Mon, 7 Sep 2020 21:17:39 -0700
+Message-ID: <CAPX4zWwsWwRLg8mUHT5J0x3CWchpzHTaCStHV1Cpd5OMw2YrNg@mail.gmail.com>
+Subject: Lieber Freund (Assalamu Alaikum),?
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+--=20
+Lieber Freund (Assalamu Alaikum),
 
+Ich bin vor einer privaten Suche auf Ihren E-Mail-Kontakt gesto=C3=9Fen
+Ihre Hilfe. Mein Name ist Aisha Al-Qaddafi, eine alleinerziehende
+Mutter und eine Witwe
+mit drei Kindern. Ich bin die einzige leibliche Tochter des Sp=C3=A4tlibysc=
+hen
+Pr=C3=A4sident (verstorbener Oberst Muammar Gaddafi).
 
-On 2020/9/8 9:21, Dave Young wrote:
-> Hi,
->
-> On 09/07/20 at 09:47pm, Chen Zhou wrote:
->> CONFIG_PHYSICAL_ALIGN can be selected from 2M to 16M and default
->> value is 2M, so move CRASH_ALIGN to 2M, with smaller value reservation
->> can have more chance to succeed.
-> Seems still some misunderstanding about the change :(  I'm sorry if I
-> did not explain it clearly.
->
-> Previously I missed the PHYSICAL_ALIGN can change according to .config
-> I mean we should change the value to CONFIG_PHYSICAL_ALIGN for X86
-> And I suggest to move back to keep using 16M.  And do not change it in
-> this series.
-Hi Dave,
+Ich habe Investmentfonds im Wert von siebenundzwanzig Millionen
+f=C3=BCnfhunderttausend
+United State Dollar ($ 27.500.000.00) und ich brauche eine
+vertrauensw=C3=BCrdige Investition
+Manager / Partner aufgrund meines aktuellen Fl=C3=BCchtlingsstatus bin ich =
+jedoch
+M=C3=B6glicherweise interessieren Sie sich f=C3=BCr die Unterst=C3=BCtzung =
+von
+Investitionsprojekten in Ihrem Land
+Von dort aus k=C3=B6nnen wir in naher Zukunft Gesch=C3=A4ftsbeziehungen auf=
+bauen.
 
-Sorry, i misunderstood about this.
+Ich bin bereit, mit Ihnen =C3=BCber das Verh=C3=A4ltnis zwischen Investitio=
+n und
+Unternehmensgewinn zu verhandeln
+Basis f=C3=BCr die zuk=C3=BCnftige Investition Gewinne zu erzielen.
 
-Ok, this patch will keep the value of CRASH_ALIGN as it is,
-just move CRASH_ALIGN to header asm/kexec.h and replace the hard-coded alignment
-with macro CRASH_ALIGN in function reserve_crashkernel().
+Wenn Sie bereit sind, dieses Projekt in meinem Namen zu bearbeiten,
+antworten Sie bitte dringend
+Damit ich Ihnen mehr Informationen =C3=BCber die Investmentfonds geben kann=
+.
 
-Thanks,
-Chen Zhou
->
->> And replace the hard-coded alignment with macro CRASH_ALIGN in function
->> reserve_crashkernel().
->>
->> Suggested-by: Dave Young <dyoung@redhat.com>
->> Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
->> ---
->>  arch/x86/include/asm/kexec.h | 3 +++
->>  arch/x86/kernel/setup.c      | 5 +----
->>  2 files changed, 4 insertions(+), 4 deletions(-)
->>
->> diff --git a/arch/x86/include/asm/kexec.h b/arch/x86/include/asm/kexec.h
->> index 6802c59e8252..83f200dd54a1 100644
->> --- a/arch/x86/include/asm/kexec.h
->> +++ b/arch/x86/include/asm/kexec.h
->> @@ -18,6 +18,9 @@
->>  
->>  # define KEXEC_CONTROL_CODE_MAX_SIZE	2048
->>  
->> +/* 2M alignment for crash kernel regions */
->> +#define CRASH_ALIGN		SZ_2M
->> +
->>  #ifndef __ASSEMBLY__
->>  
->>  #include <linux/string.h>
->> diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
->> index 3511736fbc74..296294ad0dd8 100644
->> --- a/arch/x86/kernel/setup.c
->> +++ b/arch/x86/kernel/setup.c
->> @@ -402,9 +402,6 @@ static void __init memblock_x86_reserve_range_setup_data(void)
->>  
->>  #ifdef CONFIG_KEXEC_CORE
->>  
->> -/* 16M alignment for crash kernel regions */
->> -#define CRASH_ALIGN		SZ_16M
->> -
->>  /*
->>   * Keep the crash kernel below this limit.
->>   *
->> @@ -530,7 +527,7 @@ static void __init reserve_crashkernel(void)
->>  
->>  		start = memblock_find_in_range(crash_base,
->>  					       crash_base + crash_size,
->> -					       crash_size, 1 << 20);
->> +					       crash_size, CRASH_ALIGN);
->>  		if (start != crash_base) {
->>  			pr_info("crashkernel reservation failed - memory is in use.\n");
->>  			return;
->> -- 
->> 2.20.1
->>
-> Thanks
-> Dave
->
->
-> .
->
+Ihre dringende Antwort wird gesch=C3=A4tzt. schreibe mir an diese email adr=
+esse (
+ayishagddafio@mail.ru ) zur weiteren Diskussion.
 
-
+Freundliche Gr=C3=BC=C3=9Fe
+Frau Aisha Al-Qaddafi
