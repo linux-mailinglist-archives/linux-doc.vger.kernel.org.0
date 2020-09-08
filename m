@@ -2,152 +2,196 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DF194261623
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Sep 2020 19:04:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6AAA82617E4
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Sep 2020 19:45:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731980AbgIHREJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Sep 2020 13:04:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36566 "EHLO
+        id S1731683AbgIHRow (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Sep 2020 13:44:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56706 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1732078AbgIHRDr (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Sep 2020 13:03:47 -0400
-Received: from mail-il1-x141.google.com (mail-il1-x141.google.com [IPv6:2607:f8b0:4864:20::141])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A969BC061755
-        for <linux-doc@vger.kernel.org>; Tue,  8 Sep 2020 10:03:41 -0700 (PDT)
-Received: by mail-il1-x141.google.com with SMTP id p13so16111352ils.3
-        for <linux-doc@vger.kernel.org>; Tue, 08 Sep 2020 10:03:41 -0700 (PDT)
+        with ESMTP id S1731658AbgIHQOE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Sep 2020 12:14:04 -0400
+Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com [IPv6:2a00:1450:4864:20::341])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6FA13C0617B1
+        for <linux-doc@vger.kernel.org>; Tue,  8 Sep 2020 05:16:22 -0700 (PDT)
+Received: by mail-wm1-x341.google.com with SMTP id a65so17044904wme.5
+        for <linux-doc@vger.kernel.org>; Tue, 08 Sep 2020 05:16:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        d=google.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=ZNS3GRvMOTeZUyA2sVYVT7axCdo6ttiBNGmu42dBjv0=;
-        b=npjYldHdaKN5sNer+//ioO2vd9ZSVt9HRwo/GOz64WLrI1EApu0/oVVpSTuxBpaETH
-         zdGBQ1cmVWfRfzBpvEygk0e/Fp1/SJWo0V3MDfwI7uOYbujcbc+EgdlnCvoMMGyWdorN
-         Ch0dMop8qmboQmcQ3HM+FjgNWOndFL2BTCgUoiKdJehhEJdoap2e078A90wr5gAxeCsQ
-         /RrrJPONIApVqG45o9UVb+oIhU+db+SXQ4Ek6X1+ay0n5jrwUq9T80W+l/s3tK6L0DpE
-         H3abAhf3ldad3rCQYdZdGwfEWAvIKImuxO/EYXyb1SfmLSaNac6ePbX1OyihycfpogaN
-         3C+A==
+         :cc:content-transfer-encoding;
+        bh=25SuQDI0eyCRm9y5WDHzplEK9oGtQL3VKe10BEOjmTA=;
+        b=QPX3it+b0HCvDkvbnLXnuah4CoH16gftRJ7806vrwP3qNieZtYGGzWOWb5H6s2Ymo6
+         tFciYxxHwZ+bLk25IzxWbtHz0zL7hPxojHfBsUJqxOPoVKqSYMw4s5Jhs4CWSe+lLKvZ
+         c5AwWr450MpqcX6CXpFhLMMNrVYkQ9Fjd8nqLWMfFi9LnzsfdtWd0LpKQYtzz+NCxHB3
+         J637fA5b93NLgh+gh4KvKv3RMjqzd73wNSnuCBKM/un+6MXqTcJ0HEPCNbet4mb1L5NA
+         cKFb0yVJxMPcpuUS6t+uXVXwP2CwZFGY4q8U86OqXN4i0oaciML3l3t5SgA2Rsr+bZIa
+         dFfg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=ZNS3GRvMOTeZUyA2sVYVT7axCdo6ttiBNGmu42dBjv0=;
-        b=GGvyJag8Hj+HzHPeMXEAIC6nNDYj/wibSqdXvLdb9s5u7Cw/Si0RvwIIvpMqnFew1O
-         78b+plZff20TScEeEI1QqlYsgNfdr/LJ2KWs1Yd+/GLQAlPHjy5txJKojaK/Y+8mwJbG
-         1Pq5EkHNk30nrsAOQt2JHCjh+7Xd93MiTbsnsL895v+/FDfJDtz3w2Xw9W3asY+ubPuc
-         TRfEFx/OkuopJ27vl3sC8pBAnNkR9XqY+arM9HTmtc2bAjF5sn3AJa7ZyC4n8oyiqM0l
-         Rg8gjASVxA0xbVD9HVFWaqiwN2E8NKuL/bQNW12X+BKFQsDSRS7jSflur/3wGd9ZYcxA
-         4rcg==
-X-Gm-Message-State: AOAM532YcifkzHkmqYLsShZF5Powcykl4lgOMB2z6EwZmgctQ7Q/U8Jd
-        Ouz4YbMswKzd0uRAyB8VAolYgxgKZ2GxFbl2v/UJsw==
-X-Google-Smtp-Source: ABdhPJwOhRRAeSvUfM7aXnDLV+8iSGJDTYZ7p05b46NMWtlXoPSG1kGZXtFg8PzijNzZ5d2ig2phLPuE10vzV0zX6Ps=
-X-Received: by 2002:a92:1b0b:: with SMTP id b11mr24464248ilb.287.1599584621007;
- Tue, 08 Sep 2020 10:03:41 -0700 (PDT)
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=25SuQDI0eyCRm9y5WDHzplEK9oGtQL3VKe10BEOjmTA=;
+        b=oEQxznpXD+Dz92fws8drRE9LvLUswo3b4dJWlu9GMO3PYYB6ftP8OgSc76IOGoqqGe
+         lzMjt9SZDtCHCSr+e3I88MDS6mqpsq0QMaxYQAW0W94QyN3gek/iuXlEGQ523IUeSKnS
+         nbKpALxCHwWxfHYm+5RlnnTaoZh0/J1nOuISGWVy5FhuUiD2426EAfwHawRmfqgTKIwh
+         9ruU9+A7bMia/7QacKIlgpZMyX0S2XfIsVm4sxc5ztA+M5a3zzNKDgQ+F6i4biDOhBEQ
+         1CwI4ptW82amhuWnYZr6NxDw8ACV53yR39L2yeoZvVvD+fPmYNCpB136lJNY1aL7qNDe
+         psfg==
+X-Gm-Message-State: AOAM5326znrtcQzS1MTYbVAoKaKRgnDnI/dpGL0vpLRs4J+RQ1+ctogz
+        VFqWXEK2CuvyqPEjoFfBdBEyORu4DIMBcGOy7yPe2Q==
+X-Google-Smtp-Source: ABdhPJzNFarnK0nYdbKJBLU0NMJuC6Hpm534oaFYqrVkXTx051ncwUm57xW2hX6Fd0DEO38hfYKPpM9pZm6/JEEqxdA=
+X-Received: by 2002:a1c:105:: with SMTP id 5mr4078883wmb.175.1599567380842;
+ Tue, 08 Sep 2020 05:16:20 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200904154547.3836-1-brgl@bgdev.pl> <20200904154547.3836-24-brgl@bgdev.pl>
- <26ea1683-da8f-30e7-f004-3616e96d56b3@infradead.org> <20200907095932.GU1891694@smile.fi.intel.com>
- <CAMpxmJXvhYOVkZY7LLf=v+o8E2xKTh1RYhLrdVsS9nN1XZ5QJQ@mail.gmail.com>
- <20200907115310.GA1891694@smile.fi.intel.com> <CAMpxmJUfNkko4Rrb4N5CF_rdwRAWGhVr9DSOHfhYyTxYSH7dsQ@mail.gmail.com>
- <20200907122238.GA1849893@kroah.com>
-In-Reply-To: <20200907122238.GA1849893@kroah.com>
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-Date:   Tue, 8 Sep 2020 19:03:30 +0200
-Message-ID: <CAMRc=MexhEbnxCN3aN57k4V-mO-vQL=+8z9QFEzOCPkmn16-XQ@mail.gmail.com>
-Subject: Re: [PATCH 23/23] Documentation: gpio: add documentation for gpio-mockup
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
+References: <20200907134055.2878499-1-elver@google.com> <4dc8852a-120d-0835-1dc4-1a91f8391c8a@suse.cz>
+In-Reply-To: <4dc8852a-120d-0835-1dc4-1a91f8391c8a@suse.cz>
+From:   Alexander Potapenko <glider@google.com>
+Date:   Tue, 8 Sep 2020 14:16:09 +0200
+Message-ID: <CAG_fn=UdnN4EL6OtAV8RY7kuqO+VXqSsf+grx2Le64UQJOUMvQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 00/10] KFENCE: A low-overhead sampling-based memory
+ safety error detector
+To:     Vlastimil Babka <vbabka@suse.cz>
+Cc:     Marco Elver <elver@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoph Lameter <cl@linux.com>,
+        David Rientjes <rientjes@google.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>, paulmck@kernel.org,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Borislav Petkov <bp@alien8.de>, dave.hansen@linux.intel.com,
+        Dmitriy Vyukov <dvyukov@google.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Mika Westerberg <mika.westerberg@linux.intel.com>,
-        Kent Gibson <warthog618@gmail.com>,
-        linux-gpio <linux-gpio@vger.kernel.org>,
-        linux-doc <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        ACPI Devel Maling List <linux-acpi@vger.kernel.org>
+        Kees Cook <keescook@chromium.org>,
+        Peter Zijlstra <peterz@infradead.org>, Qian Cai <cai@lca.pw>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Will Deacon <will@kernel.org>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        linux-arm-kernel@lists.infradead.org,
+        Linux Memory Management List <linux-mm@kvack.org>
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Sep 7, 2020 at 2:22 PM Greg Kroah-Hartman
-<gregkh@linuxfoundation.org> wrote:
+> Toggling a static branch is AFAIK quite disruptive (PeterZ will probably =
+tell
+> you better), and with the default 100ms sample interval, I'd think it's n=
+ot good
+> to toggle it so often? Did you measure what performance would you get, if=
+ the
+> static key was only for long-term toggling the whole feature on and off (=
+boot
+> time or even runtime), but the decisions "am I in a sample interval right=
+ now?"
+> would be normal tests behind this static key? Thanks.
+
+100ms is the default that we use for testing, but for production it
+should be fine to pick a longer interval (e.g. 1 second or more).
+We haven't noticed any performance impact with neither 100ms nor bigger val=
+ues.
+
+Regarding using normal branches, they are quite expensive.
+E.g. at some point we used to have a branch in slab_free() to check
+whether the freed object belonged to KFENCE pool.
+When the pool address was taken from memory, this resulted in some
+non-zero performance penalty.
+
+As for enabling the whole feature at runtime, our intention is to let
+the users have it enabled by default, otherwise someone will need to
+tell every machine in the fleet when the feature is to be enabled.
 >
-> On Mon, Sep 07, 2020 at 02:06:15PM +0200, Bartosz Golaszewski wrote:
-> > On Mon, Sep 7, 2020 at 1:53 PM Andy Shevchenko
-> > <andriy.shevchenko@linux.intel.com> wrote:
-> > >
-> > > On Mon, Sep 07, 2020 at 12:26:34PM +0200, Bartosz Golaszewski wrote:
-> > > > On Mon, Sep 7, 2020 at 11:59 AM Andy Shevchenko
-> > > > <andriy.shevchenko@linux.intel.com> wrote:
-> > > > >
-> > > > > On Fri, Sep 04, 2020 at 08:15:59PM -0700, Randy Dunlap wrote:
-> > > > > > On 9/4/20 8:45 AM, Bartosz Golaszewski wrote:
-> > > > >
-> > > > > ...
-> > > > >
-> > > > > > > +GPIO Testing Driver
-> > > > > > > +===================
-> > > > > > > +
-> > > > > > > +The GPIO Testing Driver (gpio-mockup) provides a way to create simulated GPIO
-> > > > > > > +chips for testing purposes. There are two ways of configuring the chips exposed
-> > > > > > > +by the module. The lines can be accessed using the standard GPIO character
-> > > > > > > +device interface as well as manipulated using the dedicated debugfs directory
-> > > > > > > +structure.
-> > > > > >
-> > > > > > Could configfs be used for this instead of debugfs?
-> > > > > > debugfs is ad hoc.
-> > > > >
-> > > > > Actually sounds like a good idea.
-> > > > >
-> > > >
-> > > > Well, then we can go on and write an entirely new mockup driver
-> > > > (ditching module params and dropping any backwards compatibility)
-> > > > because we're already using debugfs for line values.
-> > > >
-> > > > How would we pass the device properties to configfs created GPIO chips
-> > > > anyway? Devices seem to only be created using mkdir. Am I missing
-> > > > something?
-> > >
-> > > Same way how USB composite works, no?
-> > >
+> > We have verified by running synthetic benchmarks (sysbench I/O,
+> > hackbench) that a kernel with KFENCE is performance-neutral compared to
+> > a non-KFENCE baseline kernel.
 > >
-> > OK, so create a new chip directory in configfs, configure it using
-> > some defined configfs attributes and then finally instantiate it from
-> > sysfs?
+> > KFENCE is inspired by GWP-ASan [1], a userspace tool with similar
+> > properties. The name "KFENCE" is a homage to the Electric Fence Malloc
+> > Debugger [2].
 > >
-> > Makes sense and is probably the right way to go. Now the question is:
-> > is it fine to just entirely remove the previous gpio-mockup? Should we
-> > keep some backwards compatibility? Should we introduce an entirely new
-> > module and have a transition period before removing previous
-> > gpio-mockup?
+> > For more details, see Documentation/dev-tools/kfence.rst added in the
+> > series -- also viewable here:
 > >
-> > Also: this is a testing module so to me debugfs is just fine. Is
-> > configfs considered stable ABI like sysfs?
+> >       https://raw.githubusercontent.com/google/kasan/kfence/Documentati=
+on/dev-tools/kfence.rst
+> >
+> > [1] http://llvm.org/docs/GwpAsan.html
+> > [2] https://linux.die.net/man/3/efence
+> >
+> > Alexander Potapenko (6):
+> >   mm: add Kernel Electric-Fence infrastructure
+> >   x86, kfence: enable KFENCE for x86
+> >   mm, kfence: insert KFENCE hooks for SLAB
+> >   mm, kfence: insert KFENCE hooks for SLUB
+> >   kfence, kasan: make KFENCE compatible with KASAN
+> >   kfence, kmemleak: make KFENCE compatible with KMEMLEAK
+> >
+> > Marco Elver (4):
+> >   arm64, kfence: enable KFENCE for ARM64
+> >   kfence, lockdep: make KFENCE compatible with lockdep
+> >   kfence, Documentation: add KFENCE documentation
+> >   kfence: add test suite
+> >
+> >  Documentation/dev-tools/index.rst  |   1 +
+> >  Documentation/dev-tools/kfence.rst | 285 +++++++++++
+> >  MAINTAINERS                        |  11 +
+> >  arch/arm64/Kconfig                 |   1 +
+> >  arch/arm64/include/asm/kfence.h    |  39 ++
+> >  arch/arm64/mm/fault.c              |   4 +
+> >  arch/x86/Kconfig                   |   2 +
+> >  arch/x86/include/asm/kfence.h      |  60 +++
+> >  arch/x86/mm/fault.c                |   4 +
+> >  include/linux/kfence.h             | 174 +++++++
+> >  init/main.c                        |   2 +
+> >  kernel/locking/lockdep.c           |   8 +
+> >  lib/Kconfig.debug                  |   1 +
+> >  lib/Kconfig.kfence                 |  70 +++
+> >  mm/Makefile                        |   1 +
+> >  mm/kasan/common.c                  |   7 +
+> >  mm/kfence/Makefile                 |   6 +
+> >  mm/kfence/core.c                   | 730 +++++++++++++++++++++++++++
+> >  mm/kfence/kfence-test.c            | 777 +++++++++++++++++++++++++++++
+> >  mm/kfence/kfence.h                 | 104 ++++
+> >  mm/kfence/report.c                 | 201 ++++++++
+> >  mm/kmemleak.c                      |  11 +
+> >  mm/slab.c                          |  46 +-
+> >  mm/slab_common.c                   |   6 +-
+> >  mm/slub.c                          |  72 ++-
+> >  25 files changed, 2591 insertions(+), 32 deletions(-)
+> >  create mode 100644 Documentation/dev-tools/kfence.rst
+> >  create mode 100644 arch/arm64/include/asm/kfence.h
+> >  create mode 100644 arch/x86/include/asm/kfence.h
+> >  create mode 100644 include/linux/kfence.h
+> >  create mode 100644 lib/Kconfig.kfence
+> >  create mode 100644 mm/kfence/Makefile
+> >  create mode 100644 mm/kfence/core.c
+> >  create mode 100644 mm/kfence/kfence-test.c
+> >  create mode 100644 mm/kfence/kfence.h
+> >  create mode 100644 mm/kfence/report.c
+> >
 >
-> Yes it is.  Or at least until you fix all existing users so that if you
-> do change it, no one notices it happening :)
->
 
-Got it. One more question: the current debugfs interface we're using
-in gpio-mockup exists to allow to read current values of GPIO lines in
-output mode (check how the user drives dummy lines) and to set their
-simulated pull-up/pull-down resistors (what values the user reads in
-input mode).
 
-This works like this: in /sys/kernel/debug/gpio-mockup every dummy
-chip creates its own directory (e.g.
-/sys/kernel/debug/gpio-mockup/gpiochip0) and inside this directory
-there's an attribute per line named after the line's offset (e.g.
-/sys/kernel/debug/gpio-mockup/gpiochip0/4). Writing 0 or 1 to this
-attribute sets the pull resistor. Reading from it yields the current
-value (0 or 1 as well).
+--=20
+Alexander Potapenko
+Software Engineer
 
-This is pretty non-standard so I proposed to put it in debugfs. If we
-were to use configfs - is this where something like this should go? Or
-rather sysfs? Is it even suitable/acceptable for sysfs?
+Google Germany GmbH
+Erika-Mann-Stra=C3=9Fe, 33
+80636 M=C3=BCnchen
 
-Thanks,
-Bartosz
+Gesch=C3=A4ftsf=C3=BChrer: Paul Manicle, Halimah DeLaine Prado
+Registergericht und -nummer: Hamburg, HRB 86891
+Sitz der Gesellschaft: Hamburg
