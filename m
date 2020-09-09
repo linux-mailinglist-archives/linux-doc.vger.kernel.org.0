@@ -2,108 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6B5F726339D
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 19:07:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 59ECE2633F0
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 19:12:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728350AbgIIRHi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Sep 2020 13:07:38 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48390 "EHLO
+        id S1727976AbgIIRMg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Sep 2020 13:12:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35258 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730396AbgIIPhU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 11:37:20 -0400
-Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com [IPv6:2607:f8b0:4864:20::244])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8156FC0619C4
-        for <linux-doc@vger.kernel.org>; Wed,  9 Sep 2020 08:13:59 -0700 (PDT)
-Received: by mail-oi1-x244.google.com with SMTP id x19so2710520oix.3
-        for <linux-doc@vger.kernel.org>; Wed, 09 Sep 2020 08:13:59 -0700 (PDT)
+        with ESMTP id S1731248AbgIIRMQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 13:12:16 -0400
+Received: from mail-pg1-x542.google.com (mail-pg1-x542.google.com [IPv6:2607:f8b0:4864:20::542])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4D3A1C061757
+        for <linux-doc@vger.kernel.org>; Wed,  9 Sep 2020 10:12:16 -0700 (PDT)
+Received: by mail-pg1-x542.google.com with SMTP id t14so2514499pgl.10
+        for <linux-doc@vger.kernel.org>; Wed, 09 Sep 2020 10:12:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=krZf25HoLYNOs+89jtLjxVuIVVFDL/DS0/iONN95wCA=;
-        b=OL93yWh7YYd3Kjpp++lmqusu98KBOYAUlFtscMPkxq3j+FlurgE872aMXM+jYrZLfA
-         slVo0YeMasFlKvpatP/yG3NYkdN7G9zeOdYYDSr/jO1YA4PDmwsY3l3/g2a+UUUUk0sh
-         N/9n/d0axxncRngDQDQ73AzQCMoaR1Qi3RTeH2s7jWwOLkvp7DY3rFzAbiSaUOkyiI0j
-         GbFHlK7xl53jSwXJVpwDyLq1COKTawKzlznu/fwxR2F5MYpx+55Ea2pfphDixt40qy/O
-         4WUi+T1ptbN4Z8SKmtiSt+QhKD3pGAaSGq2pBDoVmB67cUexujsDH5uHp7kmk03dwp6Y
-         27qA==
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=CosBFDAizRNCISZV5eHVCzVDJVKQR4om2vS5xFZC3xc=;
+        b=cT3ohcSj+rnWge0Nez3Heio2GDlTkUAedSsaOMSCyZ1XX47xxJRN/fvhoZM61JBJnI
+         XNJwIA8eXAsyh/cC/8cwIgvWWgjjilJLUAmiOw+LcaaPoWKK5N9G6Nxjf0ndjKQs8eoj
+         3LWq48FHhLfpq69l4uYmYS9P0AKNeHV/fl7uw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=krZf25HoLYNOs+89jtLjxVuIVVFDL/DS0/iONN95wCA=;
-        b=dFI0QbttThXTpx4DSxloI7y1FHox4Z1uDbkdb603MPudJgEdqoZJnAYP4wSyGYDpqY
-         nU/HaftrsHeMY5DuAeGEbyQTrcfzhkAp2ih7RkekpKs/4VM9xTV27iQOTPiyU9mAMsEq
-         Y1ch9ITA88i5h+AJbK9sUxFh/FvBaus6ulr5y+vfurglZxxneJaUaGpp72m024zO8u+W
-         V3fryRKXkNDn73xW9NzNGTafGkZPppJO9ghSzhTGgLhPsrVtpirN7dqw8goAP1hiApSo
-         DqK2KpvOpcomr8vcv7/hvIifX0veKj536SscLT2SckdkoLNW8HVrV812o4iRUwCk31Ce
-         bNhQ==
-X-Gm-Message-State: AOAM533fH/2lD4iA2mfUL1U3j6q4KHyhnvyDfOD5lfPDWO8MLdZmyF3w
-        rt5fy48rv13VwlT/mnzOArRHl5NKAAtmsrNrhsChwg==
-X-Google-Smtp-Source: ABdhPJxUwoCrzBiq+mXsi/+rblK6OvwTU4QXrdeC28cSOlaNtqbrVQKyBMOckNHPSlXH4EYREa5LAoQDUNJklnzlV5o=
-X-Received: by 2002:aca:5158:: with SMTP id f85mr992820oib.121.1599664437260;
- Wed, 09 Sep 2020 08:13:57 -0700 (PDT)
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=CosBFDAizRNCISZV5eHVCzVDJVKQR4om2vS5xFZC3xc=;
+        b=N+BIP5XAseJVCWksTD3nkibaSNhRd0P7m7K1NeDSg1End9tIbZYYyYabYdhT2m3iKI
+         yK20e+J6oG5I580KZU+uuluQplaDq54PXHtk+YLjYMhmJO9wzqqfYPWfHkB8MmNOJWY/
+         ViOw6ZRoxjGDjel6Ql/dt1EiW+hIjhhrNEMi17rs3Qpyh7mY/HJUYpTUpBbThKB+Pp0R
+         fQB8Nv60DNjdLh753nTTBsN2dav2wuG4hUb8Yow962Wnc8taZnpbu/ds1GztvLz52Z4e
+         sf/xBtF/kG7gRXn9NG0dts9fzeKxmyIHbZMPNZBMXnYgVLNpZgY9HQc4lrcrO7h27jJ3
+         wWPQ==
+X-Gm-Message-State: AOAM5301n2aTC+ifJONve1IwDSYJG1+YExazNFYu2kELYuRO/tAWXW6c
+        1nNLQ/Qz+Vjzi/UYW1ICh9XzQmye9QPd9g==
+X-Google-Smtp-Source: ABdhPJxYjSzhB5uOfoaKKpdMENNizIwt9gyBznrahFk5i+IgdOKycZBi7etQDhEcw8TNcJftOjuAYA==
+X-Received: by 2002:a63:3d0e:: with SMTP id k14mr1356378pga.219.1599671535897;
+        Wed, 09 Sep 2020 10:12:15 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id m20sm3314282pfa.115.2020.09.09.10.12.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 09 Sep 2020 10:12:14 -0700 (PDT)
+Date:   Wed, 9 Sep 2020 10:12:13 -0700
+From:   Kees Cook <keescook@chromium.org>
+To:     "Gustavo A. R. Silva" <gustavoars@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: deprecated.rst: Update zero-length/one-element
+ arrays section
+Message-ID: <202009091012.ADA0342C8@keescook>
+References: <20200901010949.GA21398@embeddedor>
 MIME-Version: 1.0
-References: <20200907134055.2878499-1-elver@google.com> <20200907134055.2878499-4-elver@google.com>
-In-Reply-To: <20200907134055.2878499-4-elver@google.com>
-From:   Marco Elver <elver@google.com>
-Date:   Wed, 9 Sep 2020 17:13:45 +0200
-Message-ID: <CANpmjNMRMkFxdGHuyyWEPhMiW-uF4qjiKKRRrd_s13X2P6cv9Q@mail.gmail.com>
-Subject: Re: [PATCH RFC 03/10] arm64, kfence: enable KFENCE for ARM64
-To:     Catalin Marinas <catalin.marinas@arm.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>
-Cc:     Alexander Potapenko <glider@google.com>,
-        Christoph Lameter <cl@linux.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Rientjes <rientjes@google.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        Eric Dumazet <edumazet@google.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Peter Zijlstra <peterz@infradead.org>, Qian Cai <cai@lca.pw>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        "the arch/x86 maintainers" <x86@kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        kasan-dev <kasan-dev@googlegroups.com>,
-        Linux Memory Management List <linux-mm@kvack.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200901010949.GA21398@embeddedor>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello arm64 maintainers,
+On Mon, Aug 31, 2020 at 08:09:49PM -0500, Gustavo A. R. Silva wrote:
+> Update information in the zero-length and one-element arrays section
+> and illustrate how to make use of the new flex_array_size() helper,
+> together with struct_size() and a flexible-array member.
+> 
+> Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
 
-On Mon, 7 Sep 2020 at 15:41, Marco Elver <elver@google.com> wrote:
-> Add architecture specific implementation details for KFENCE and enable
-> KFENCE for the arm64 architecture. In particular, this implements the
-> required interface in <asm/kfence.h>. Currently, the arm64 version does
-> not yet use a statically allocated memory pool, at the cost of a pointer
-> load for each is_kfence_address().
+Looks great!
 
-> For ARM64, we would like to solicit feedback on what the best option is
-> to obtain a constant address for __kfence_pool. One option is to declare
-> a memory range in the memory layout to be dedicated to KFENCE (like is
-> done for KASAN), however, it is unclear if this is the best available
-> option. We would like to avoid touching the memory layout.
+Acked-by: Kees Cook <keescook@chromium.org>
 
-We can't yet tell what the best option for this might be. So, any
-suggestions on how to go about switching to a static pool would be
-much appreciated.
-
-Many thanks,
--- Marco
+-- 
+Kees Cook
