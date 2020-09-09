@@ -2,63 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B6890262856
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 09:19:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AB5F7262A43
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 10:28:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729719AbgIIHTj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Sep 2020 03:19:39 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56026 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726738AbgIIHTc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 03:19:32 -0400
-Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0F19EC061573
-        for <linux-doc@vger.kernel.org>; Wed,  9 Sep 2020 00:19:32 -0700 (PDT)
-Received: by mail-pf1-x442.google.com with SMTP id x123so1361890pfc.7
-        for <linux-doc@vger.kernel.org>; Wed, 09 Sep 2020 00:19:32 -0700 (PDT)
+        id S1726226AbgIII2i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Sep 2020 04:28:38 -0400
+Received: from smtp-fw-9102.amazon.com ([207.171.184.29]:62303 "EHLO
+        smtp-fw-9102.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726169AbgIII2h (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 04:28:37 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=5iR5TZqX8l1VRIQw4eJ0OlzsbiIqiD3mLa9uGQMoFns=;
-        b=Jb0/41I0M2lFqGAbrI0daKT90Y53PIh/W7fawCAFaLO3d9njIhwshDnnSx2YlgMV0Q
-         dj8MhyKd74/yk/oM/EuRF86foeTgyxn03U+kq5dd8ET8xu9LJlTFI+Fgxjbp5+1EJjTO
-         1Ce8kiLOI6eSvn5Sb1tBC8zyKuZadgECnPN/fRc6CQaGMr3UNIm4rTmMfVF0Qtfw2Rmq
-         JRbetGKn477Ls6zTZ6216dI4nm9lD1HV/x50n+5d7ilnfSLAVFV+9/625UbfjdPVAsn/
-         Ut88r/75OLK35EzzsbrfuXHJEG6SB0F3U+Z3UrCUSNIOVbh9jjbKPxu8G0wpZyrkghgv
-         +zvg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=5iR5TZqX8l1VRIQw4eJ0OlzsbiIqiD3mLa9uGQMoFns=;
-        b=fFAUYsQRd9VSzcWx98vrocVAQo4ow92xsKFC4nFxCYlLiZk8gsY9RlQ4wwo4cETf2t
-         VKBVsC9vRlTIHuk3l7zinOKd0PlAEoVTLWbmZIAcESs0+gSlTFBsL56PKRzZYZ5gFC82
-         WjljBCQD/VRklcE0Hde8u/xwqGgpC8Q638H8Kkk3PhUfDZuKLRQlzsMzZH26BZsQF2Ia
-         JiYKIx+tMhtGA0blsHTX++9ciu/FkSMa6umD0jbqdZrblLrvzL5VANGcb5Z97UivbX8K
-         8ZWliSn9hbMioepb3OnUp36x7BT9d9jqfLTUvrDV04xj/R7j3PC9uIZqBGmlSkEXDHwD
-         Am4A==
-X-Gm-Message-State: AOAM530mHBX+e9GJFbm6mIEOd8up5iOoNrM9vvms4SLQNV9nniGm7lB2
-        ifXOGBr2+rXC9ty4/iOAv0o7IoeE2XyZIdJkOSQ=
-X-Google-Smtp-Source: ABdhPJwV5U+eXse18Qsr6MweF9eBzoLHRAyuXXEmhvxFwKvg9Tplql95rgx2s9MobLeMLslKGqRf5GYtGCMsvXnrdYc=
-X-Received: by 2002:a63:2a96:: with SMTP id q144mr2053208pgq.447.1599635971688;
- Wed, 09 Sep 2020 00:19:31 -0700 (PDT)
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1599640117; x=1631176117;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   mime-version;
+  bh=GENylIwQBH3LyyfHrwy82Vo/xLO0QlxQ3lBEYTaVnrA=;
+  b=dF9C7ubU90fx8YezXNkMW+IdIvQllmzN5Vs0/dXx3qvWOq+DXo/Ezj8o
+   iQGqe+G6Wm9RDMP9P+heWNfCJe+z7v6ZqcIhl8ch/UzI3Ls/922nOgFcQ
+   svN2AhUsbcJcHNcg0f6YYYWr8FEIjxSN7PSaS0YtGH6+V3KTNdH+34HiW
+   g=;
+X-IronPort-AV: E=Sophos;i="5.76,409,1592870400"; 
+   d="scan'208";a="74715101"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1e-62350142.us-east-1.amazon.com) ([10.47.23.38])
+  by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP; 09 Sep 2020 08:28:14 +0000
+Received: from EX13D31EUA001.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan2.iad.amazon.com [10.40.163.34])
+        by email-inbound-relay-1e-62350142.us-east-1.amazon.com (Postfix) with ESMTPS id 95984A27FE;
+        Wed,  9 Sep 2020 08:28:11 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.160.100) by
+ EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Wed, 9 Sep 2020 08:27:54 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     SeongJae Park <sjpark@amazon.com>
+CC:     <akpm@linux-foundation.org>, <Jonathan.Cameron@Huawei.com>,
+        <aarcange@redhat.com>, <acme@kernel.org>,
+        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
+        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
+        <brendanhiggins@google.com>, <cai@lca.pw>,
+        <colin.king@canonical.com>, <corbet@lwn.net>, <david@redhat.com>,
+        <dwmw@amazon.com>, <fan.du@intel.com>, <foersleo@amazon.de>,
+        <gthelen@google.com>, <irogers@google.com>, <jolsa@redhat.com>,
+        <kirill@shutemov.name>, <mark.rutland@arm.com>, <mgorman@suse.de>,
+        <minchan@kernel.org>, <mingo@redhat.com>, <namhyung@kernel.org>,
+        <peterz@infradead.org>, <rdunlap@infradead.org>,
+        <riel@surriel.com>, <rientjes@google.com>, <rostedt@goodmis.org>,
+        <rppt@kernel.org>, <sblbir@amazon.com>, <shakeelb@google.com>,
+        <shuah@kernel.org>, <sj38.park@gmail.com>, <snu@amazon.de>,
+        <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
+        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
+        <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
+        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v20 00/15] Introduce Data Access MONitor (DAMON)
+Date:   Wed, 9 Sep 2020 10:27:38 +0200
+Message-ID: <20200909082738.10167-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200817105137.19296-1-sjpark@amazon.com>
 MIME-Version: 1.0
-Received: by 2002:a05:6a10:a17a:0:0:0:0 with HTTP; Wed, 9 Sep 2020 00:19:31
- -0700 (PDT)
-Reply-To: wm076282@gmail.com
-From:   maria <christbenson605@gmail.com>
-Date:   Wed, 9 Sep 2020 00:19:31 -0700
-Message-ID: <CACYOwurf6FoCu2dKp0WO8QrctCY1MMorEv0N2-4NwvXgCmcFWQ@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+X-Originating-IP: [10.43.160.100]
+X-ClientProxiedBy: EX13D13UWA001.ant.amazon.com (10.43.160.136) To
+ EX13D31EUA001.ant.amazon.com (10.43.165.15)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---=20
-Sie wurden ausgew=C3=A4hlt, um eine Spende per E-Mail an wm076282@gmail.com
-f=C3=BCr clami zu erhalten
+This is just a reminder ping to let you know I'm still waiting more reviews!
+Any comments will be appreciated!
+
+
+Thanks,
+SeongJae Park
