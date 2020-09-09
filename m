@@ -2,70 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E695326334E
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 19:01:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B5F726339D
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 19:07:50 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731246AbgIIRBV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Sep 2020 13:01:21 -0400
-Received: from mail.kernel.org ([198.145.29.99]:51128 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730412AbgIIPuu (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 9 Sep 2020 11:50:50 -0400
-Received: from mail.kernel.org (ip5f5ad5d6.dynamic.kabel-deutschland.de [95.90.213.214])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 9F18222246;
-        Wed,  9 Sep 2020 14:11:05 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1599660665;
-        bh=hi1aczpcTujPkeB1XjLIT9pw1YvDNzWxbCRXWh+zmzw=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=PAOPNSU7PZLRYcxfKYvB6irFXTnLKl4yDt4ElhNaFw5wkAlcG+iuAQRNH5/eZF33m
-         Bnee4+mzj+gSc5XZTe8tG1zUFTHkV4EFZuno5Jo77PCiPis5xvkTlI12K9q5kpjkP5
-         6GhYI7BH8CygUJ5tkt4YoCd7BceJdY/4/vCcvHK0=
-Received: from mchehab by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1kG0oR-00DUXh-OS; Wed, 09 Sep 2020 16:11:03 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 25/30] docs: admin-guide: net.rst: add a missing blank line
-Date:   Wed,  9 Sep 2020 16:10:56 +0200
-Message-Id: <6207e85187596f1de4f178414f741965e32f4b7d.1599660067.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <cover.1599660067.git.mchehab+huawei@kernel.org>
-References: <cover.1599660067.git.mchehab+huawei@kernel.org>
+        id S1728350AbgIIRHi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Sep 2020 13:07:38 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48390 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730396AbgIIPhU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 11:37:20 -0400
+Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com [IPv6:2607:f8b0:4864:20::244])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8156FC0619C4
+        for <linux-doc@vger.kernel.org>; Wed,  9 Sep 2020 08:13:59 -0700 (PDT)
+Received: by mail-oi1-x244.google.com with SMTP id x19so2710520oix.3
+        for <linux-doc@vger.kernel.org>; Wed, 09 Sep 2020 08:13:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=krZf25HoLYNOs+89jtLjxVuIVVFDL/DS0/iONN95wCA=;
+        b=OL93yWh7YYd3Kjpp++lmqusu98KBOYAUlFtscMPkxq3j+FlurgE872aMXM+jYrZLfA
+         slVo0YeMasFlKvpatP/yG3NYkdN7G9zeOdYYDSr/jO1YA4PDmwsY3l3/g2a+UUUUk0sh
+         N/9n/d0axxncRngDQDQ73AzQCMoaR1Qi3RTeH2s7jWwOLkvp7DY3rFzAbiSaUOkyiI0j
+         GbFHlK7xl53jSwXJVpwDyLq1COKTawKzlznu/fwxR2F5MYpx+55Ea2pfphDixt40qy/O
+         4WUi+T1ptbN4Z8SKmtiSt+QhKD3pGAaSGq2pBDoVmB67cUexujsDH5uHp7kmk03dwp6Y
+         27qA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=krZf25HoLYNOs+89jtLjxVuIVVFDL/DS0/iONN95wCA=;
+        b=dFI0QbttThXTpx4DSxloI7y1FHox4Z1uDbkdb603MPudJgEdqoZJnAYP4wSyGYDpqY
+         nU/HaftrsHeMY5DuAeGEbyQTrcfzhkAp2ih7RkekpKs/4VM9xTV27iQOTPiyU9mAMsEq
+         Y1ch9ITA88i5h+AJbK9sUxFh/FvBaus6ulr5y+vfurglZxxneJaUaGpp72m024zO8u+W
+         V3fryRKXkNDn73xW9NzNGTafGkZPppJO9ghSzhTGgLhPsrVtpirN7dqw8goAP1hiApSo
+         DqK2KpvOpcomr8vcv7/hvIifX0veKj536SscLT2SckdkoLNW8HVrV812o4iRUwCk31Ce
+         bNhQ==
+X-Gm-Message-State: AOAM533fH/2lD4iA2mfUL1U3j6q4KHyhnvyDfOD5lfPDWO8MLdZmyF3w
+        rt5fy48rv13VwlT/mnzOArRHl5NKAAtmsrNrhsChwg==
+X-Google-Smtp-Source: ABdhPJxUwoCrzBiq+mXsi/+rblK6OvwTU4QXrdeC28cSOlaNtqbrVQKyBMOckNHPSlXH4EYREa5LAoQDUNJklnzlV5o=
+X-Received: by 2002:aca:5158:: with SMTP id f85mr992820oib.121.1599664437260;
+ Wed, 09 Sep 2020 08:13:57 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200907134055.2878499-1-elver@google.com> <20200907134055.2878499-4-elver@google.com>
+In-Reply-To: <20200907134055.2878499-4-elver@google.com>
+From:   Marco Elver <elver@google.com>
+Date:   Wed, 9 Sep 2020 17:13:45 +0200
+Message-ID: <CANpmjNMRMkFxdGHuyyWEPhMiW-uF4qjiKKRRrd_s13X2P6cv9Q@mail.gmail.com>
+Subject: Re: [PATCH RFC 03/10] arm64, kfence: enable KFENCE for ARM64
+To:     Catalin Marinas <catalin.marinas@arm.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>
+Cc:     Alexander Potapenko <glider@google.com>,
+        Christoph Lameter <cl@linux.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        David Rientjes <rientjes@google.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Peter Zijlstra <peterz@infradead.org>, Qian Cai <cai@lca.pw>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        Linux Memory Management List <linux-mm@kvack.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-There's a missing blank line after a literal block, which
-causes this warning:
+Hello arm64 maintainers,
 
-	Documentation/admin-guide/sysctl/net.rst:303: WARNING: Literal block ends without a blank line; unexpected unindent.
+On Mon, 7 Sep 2020 at 15:41, Marco Elver <elver@google.com> wrote:
+> Add architecture specific implementation details for KFENCE and enable
+> KFENCE for the arm64 architecture. In particular, this implements the
+> required interface in <asm/kfence.h>. Currently, the arm64 version does
+> not yet use a statically allocated memory pool, at the cost of a pointer
+> load for each is_kfence_address().
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/admin-guide/sysctl/net.rst | 1 +
- 1 file changed, 1 insertion(+)
+> For ARM64, we would like to solicit feedback on what the best option is
+> to obtain a constant address for __kfence_pool. One option is to declare
+> a memory range in the memory layout to be dedicated to KFENCE (like is
+> done for KASAN), however, it is unclear if this is the best available
+> option. We would like to avoid touching the memory layout.
 
-diff --git a/Documentation/admin-guide/sysctl/net.rst b/Documentation/admin-guide/sysctl/net.rst
-index 57fd6ce68fe0..f2ab8a5b6a4b 100644
---- a/Documentation/admin-guide/sysctl/net.rst
-+++ b/Documentation/admin-guide/sysctl/net.rst
-@@ -300,6 +300,7 @@ Note:
-       0:    0     1     2     3     4     5     6     7
-   RSS hash key:
-   84:50:f4:00:a8:15:d1:a7:e9:7f:1d:60:35:c7:47:25:42:97:74:ca:56:bb:b6:a1:d8:43:e3:c9:0c:fd:17:55:c2:3a:4d:69:ed:f1:42:89
-+
- netdev_tstamp_prequeue
- ----------------------
- 
--- 
-2.26.2
+We can't yet tell what the best option for this might be. So, any
+suggestions on how to go about switching to a static pool would be
+much appreciated.
 
+Many thanks,
+-- Marco
