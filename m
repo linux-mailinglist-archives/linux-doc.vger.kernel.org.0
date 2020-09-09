@@ -2,38 +2,38 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 407A4263313
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 18:57:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7EE9726330C
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 18:56:47 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730463AbgIIQ47 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Sep 2020 12:56:59 -0400
-Received: from mail.kernel.org ([198.145.29.99]:51932 "EHLO mail.kernel.org"
+        id S1730200AbgIIPw2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Sep 2020 11:52:28 -0400
+Received: from mail.kernel.org ([198.145.29.99]:51430 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730687AbgIIPvT (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 9 Sep 2020 11:51:19 -0400
+        id S1730547AbgIIPvV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 9 Sep 2020 11:51:21 -0400
 Received: from mail.kernel.org (ip5f5ad5d6.dynamic.kabel-deutschland.de [95.90.213.214])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 4CDCE221EB;
+        by mail.kernel.org (Postfix) with ESMTPSA id 44546221E8;
         Wed,  9 Sep 2020 14:11:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1599660665;
-        bh=ATKawdvCB71UvotVwExkRA/n8DtvhQrqGIQq/nxGV7Q=;
+        bh=iY6OqVOcgu1zhpou4oMMQ2MqoLuggzVS9uTeM1VK3V8=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Y51UL8ClYsVGkmT1YqO/ajQfhB3fZYfqQpG3Qie2xXkAml2cxKwHVnasK7wKt2vXJ
-         ZX53JYyFIiIFWtxdr/XdxJJhE5sMCjCMXojbcjP6k2Fif/NAnWUYr+1x4Mlm3JOYGz
-         mM3trgahSSLfbZiHL9ANO/EVZ66p4Z0/YPKXXGrk=
+        b=eCdjr+F3S/SUxOlc1bDPVGLdKtcVY4Cm21Hs3RkfNxm6TUWoGhAKvXl0HtKTPnuJc
+         eWiRXuu0xCS5Iy19k6LbQdtChs1cGtoRFavApk2arVzpZ0B4XOoXVokg9tFi8CZojt
+         V4tXBxnhPnoiRs8McKT3J7lXwWd9q1E1nw3icZEU=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kG0oR-00DUWo-74; Wed, 09 Sep 2020 16:11:03 +0200
+        id 1kG0oR-00DUWr-8U; Wed, 09 Sep 2020 16:11:03 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         linux-kernel@vger.kernel.org
-Subject: [PATCH 07/30] MAINTAINERS: fix location of qlogic/LICENSE.qla3xxx
-Date:   Wed,  9 Sep 2020 16:10:38 +0200
-Message-Id: <4260c56b52dd269716f78c5f4369a14994014480.1599660067.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 08/30] docs: fix location of nommu-mmap.rst file
+Date:   Wed,  9 Sep 2020 16:10:39 +0200
+Message-Id: <275a0c634408d89a3b3fb51ca93a6c0e8b4f7905.1599660067.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1599660067.git.mchehab+huawei@kernel.org>
 References: <cover.1599660067.git.mchehab+huawei@kernel.org>
@@ -44,26 +44,55 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-ethernet/qlogic/LICENSE.qla3xxx -> qlogic/LICENSE.qla3xxx
+mm/nommu-mmap.rst -> admin-guide/mm/ nommu-mmap.rst
 
+Fixes: 800c02f5d030 ("docs: move nommu-mmap.txt to admin-guide and rename to ReST")
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- MAINTAINERS | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ init/Kconfig | 2 +-
+ mm/Kconfig   | 2 +-
+ mm/nommu.c   | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f3fee4140272..f9d044b6aa42 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -14322,7 +14322,7 @@ QLOGIC QLA3XXX NETWORK DRIVER
- M:	GR-Linux-NIC-Dev@marvell.com
- L:	netdev@vger.kernel.org
- S:	Supported
--F:	Documentation/networking/device_drivers/ethernet/qlogic/LICENSE.qla3xxx
-+F:	Documentation/networking/device_drivers/qlogic/LICENSE.qla3xxx
- F:	drivers/net/ethernet/qlogic/qla3xxx.*
+diff --git a/init/Kconfig b/init/Kconfig
+index 91456ac0ef20..c9446911cf41 100644
+--- a/init/Kconfig
++++ b/init/Kconfig
+@@ -1990,7 +1990,7 @@ config MMAP_ALLOW_UNINITIALIZED
+ 	  userspace.  Since that isn't generally a problem on no-MMU systems,
+ 	  it is normally safe to say Y here.
  
- QLOGIC QLA4XXX iSCSI DRIVER
+-	  See Documentation/mm/nommu-mmap.rst for more information.
++	  See Documentation/admin-guide/mm/nommu-mmap.rst for more information.
+ 
+ config SYSTEM_DATA_VERIFICATION
+ 	def_bool n
+diff --git a/mm/Kconfig b/mm/Kconfig
+index 7d56281ff41e..c7f30f8b282b 100644
+--- a/mm/Kconfig
++++ b/mm/Kconfig
+@@ -383,7 +383,7 @@ config NOMMU_INITIAL_TRIM_EXCESS
+ 	  This option specifies the initial value of this option.  The default
+ 	  of 1 says that all excess pages should be trimmed.
+ 
+-	  See Documentation/mm/nommu-mmap.rst for more information.
++	  See Documentation/admin-guide/mm/nommu-mmap.rst for more information.
+ 
+ config TRANSPARENT_HUGEPAGE
+ 	bool "Transparent Hugepage Support"
+diff --git a/mm/nommu.c b/mm/nommu.c
+index 75a327149af1..0df7ca321314 100644
+--- a/mm/nommu.c
++++ b/mm/nommu.c
+@@ -5,7 +5,7 @@
+  *  Replacement code for mm functions to support CPU's that don't
+  *  have any form of memory management unit (thus no virtual memory).
+  *
+- *  See Documentation/mm/nommu-mmap.rst
++ *  See Documentation/admin-guide/mm/nommu-mmap.rst
+  *
+  *  Copyright (c) 2004-2008 David Howells <dhowells@redhat.com>
+  *  Copyright (c) 2000-2003 David McCullough <davidm@snapgear.com>
 -- 
 2.26.2
 
