@@ -2,38 +2,38 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7EE9726330C
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 18:56:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D71D726333D
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Sep 2020 19:00:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730200AbgIIPw2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Sep 2020 11:52:28 -0400
-Received: from mail.kernel.org ([198.145.29.99]:51430 "EHLO mail.kernel.org"
+        id S1730715AbgIIRAE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Sep 2020 13:00:04 -0400
+Received: from mail.kernel.org ([198.145.29.99]:51826 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730547AbgIIPvV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 9 Sep 2020 11:51:21 -0400
+        id S1730650AbgIIPvM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 9 Sep 2020 11:51:12 -0400
 Received: from mail.kernel.org (ip5f5ad5d6.dynamic.kabel-deutschland.de [95.90.213.214])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 44546221E8;
+        by mail.kernel.org (Postfix) with ESMTPSA id 357B121D95;
         Wed,  9 Sep 2020 14:11:05 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1599660665;
-        bh=iY6OqVOcgu1zhpou4oMMQ2MqoLuggzVS9uTeM1VK3V8=;
+        bh=sA+LLjFnYe1xhNIVyej80xZ8cWbaGG48uMqipjGVTpU=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=eCdjr+F3S/SUxOlc1bDPVGLdKtcVY4Cm21Hs3RkfNxm6TUWoGhAKvXl0HtKTPnuJc
-         eWiRXuu0xCS5Iy19k6LbQdtChs1cGtoRFavApk2arVzpZ0B4XOoXVokg9tFi8CZojt
-         V4tXBxnhPnoiRs8McKT3J7lXwWd9q1E1nw3icZEU=
+        b=Y0s4UGw8uwPhFFL1bqO4NHlJLwLH44WwGwavmTdZ2+/uRWioUCN2P7be5w5+41mPa
+         KPOpfqRkXaeEpEpIUknf7/FU0tesknPh8airdPYYL8XQcRa7A20Ns+XRZxTVHQ2N+X
+         RENYU7F34Jmu9EF4mEBk7OZ5DT1jyOSPW3aNBg+g=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kG0oR-00DUWr-8U; Wed, 09 Sep 2020 16:11:03 +0200
+        id 1kG0oR-00DUWx-Al; Wed, 09 Sep 2020 16:11:03 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         linux-kernel@vger.kernel.org
-Subject: [PATCH 08/30] docs: fix location of nommu-mmap.rst file
-Date:   Wed,  9 Sep 2020 16:10:39 +0200
-Message-Id: <275a0c634408d89a3b3fb51ca93a6c0e8b4f7905.1599660067.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 10/30] drivers: net: hamradio: fix document location
+Date:   Wed,  9 Sep 2020 16:10:41 +0200
+Message-Id: <fae51e67eb39e808352bbd9010add75bb8ede118.1599660067.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1599660067.git.mchehab+huawei@kernel.org>
 References: <cover.1599660067.git.mchehab+huawei@kernel.org>
@@ -44,55 +44,29 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-mm/nommu-mmap.rst -> admin-guide/mm/ nommu-mmap.rst
+The hamradio docs were moved to a different dir.
+Update its location accordingly.
 
-Fixes: 800c02f5d030 ("docs: move nommu-mmap.txt to admin-guide and rename to ReST")
+Fixes: 14474950252c ("docs: networking: move z8530 to the hw driver section")
+
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- init/Kconfig | 2 +-
- mm/Kconfig   | 2 +-
- mm/nommu.c   | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ drivers/net/hamradio/scc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/init/Kconfig b/init/Kconfig
-index 91456ac0ef20..c9446911cf41 100644
---- a/init/Kconfig
-+++ b/init/Kconfig
-@@ -1990,7 +1990,7 @@ config MMAP_ALLOW_UNINITIALIZED
- 	  userspace.  Since that isn't generally a problem on no-MMU systems,
- 	  it is normally safe to say Y here.
- 
--	  See Documentation/mm/nommu-mmap.rst for more information.
-+	  See Documentation/admin-guide/mm/nommu-mmap.rst for more information.
- 
- config SYSTEM_DATA_VERIFICATION
- 	def_bool n
-diff --git a/mm/Kconfig b/mm/Kconfig
-index 7d56281ff41e..c7f30f8b282b 100644
---- a/mm/Kconfig
-+++ b/mm/Kconfig
-@@ -383,7 +383,7 @@ config NOMMU_INITIAL_TRIM_EXCESS
- 	  This option specifies the initial value of this option.  The default
- 	  of 1 says that all excess pages should be trimmed.
- 
--	  See Documentation/mm/nommu-mmap.rst for more information.
-+	  See Documentation/admin-guide/mm/nommu-mmap.rst for more information.
- 
- config TRANSPARENT_HUGEPAGE
- 	bool "Transparent Hugepage Support"
-diff --git a/mm/nommu.c b/mm/nommu.c
-index 75a327149af1..0df7ca321314 100644
---- a/mm/nommu.c
-+++ b/mm/nommu.c
-@@ -5,7 +5,7 @@
-  *  Replacement code for mm functions to support CPU's that don't
-  *  have any form of memory management unit (thus no virtual memory).
+diff --git a/drivers/net/hamradio/scc.c b/drivers/net/hamradio/scc.c
+index 1e915871baa7..36eeb80406f2 100644
+--- a/drivers/net/hamradio/scc.c
++++ b/drivers/net/hamradio/scc.c
+@@ -7,7 +7,7 @@
+  *            ------------------
   *
-- *  See Documentation/mm/nommu-mmap.rst
-+ *  See Documentation/admin-guide/mm/nommu-mmap.rst
-  *
-  *  Copyright (c) 2004-2008 David Howells <dhowells@redhat.com>
-  *  Copyright (c) 2000-2003 David McCullough <davidm@snapgear.com>
+  * You can find a subset of the documentation in 
+- * Documentation/networking/device_drivers/wan/z8530drv.rst.
++ * Documentation/networking/device_drivers/hamradio/z8530drv.rst.
+  */
+ 
+ /*
 -- 
 2.26.2
 
