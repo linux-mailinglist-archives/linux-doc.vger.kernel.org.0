@@ -2,115 +2,155 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 263FC2640BE
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 10:58:25 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B2BC9264415
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 12:29:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730453AbgIJI6X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Sep 2020 04:58:23 -0400
-Received: from mail.kernel.org ([198.145.29.99]:37444 "EHLO mail.kernel.org"
+        id S1730940AbgIJK0n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Sep 2020 06:26:43 -0400
+Received: from mail.kernel.org ([198.145.29.99]:35470 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730437AbgIJI40 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 10 Sep 2020 04:56:26 -0400
-Received: from localhost.localdomain (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        id S1730108AbgIJKYN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 10 Sep 2020 06:24:13 -0400
+Received: from mail.kernel.org (ip5f5ad5ac.dynamic.kabel-deutschland.de [95.90.213.172])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id C4C6920C09;
-        Thu, 10 Sep 2020 08:56:18 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 85BB721D79;
+        Thu, 10 Sep 2020 10:24:10 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1599728180;
-        bh=0PJbxvzO5I5gMwLMCGZyMr4dYyj6eWzJKi8tvIfw5go=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=M15lyRNu+GUJ399GEB6RWtOfd2Huf3GoD7Y4J6wNiX2mVL8R2UaJR4CqkplFi01Op
-         b5MtW+7sNCMFtZA4N8jYufN5ROy2atU09kOCsaG7+nYogQgRWRMMhpm++Y/9JPfwaL
-         p/AXm+Z45K/Hv+r7kVizMjmJBqMy9s4fvleql/BA=
-From:   Masami Hiramatsu <mhiramat@kernel.org>
-To:     Steven Rostedt <rostedt@goodmis.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Shuah Khan <skhan@linuxfoundation.org>
-Cc:     mhiramat@kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
-        Ingo Molnar <mingo@kernel.org>, linux-kselftest@vger.kernel.org
-Subject: [PATCH v3 8/8] selftests/ftrace: Add %return suffix tests
-Date:   Thu, 10 Sep 2020 17:56:16 +0900
-Message-Id: <159972817653.428528.9180599115849301184.stgit@devnote2>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <159972809455.428528.4737752126800169128.stgit@devnote2>
-References: <159972809455.428528.4737752126800169128.stgit@devnote2>
-User-Agent: StGit/0.19
+        s=default; t=1599733450;
+        bh=tRtzpV/EaF+F+QPhRVFzfaGCqPgsZhD/m9MP9pqx2tU=;
+        h=From:To:Cc:Subject:Date:From;
+        b=GfvHfC3hvpMyqbY1P+AWvVdzenAOXwch1FJsK65zZvz43xH6l07AsEgOEyTaX39yN
+         Qk9MY75s7B3FTZcnds+w3c0SAjZ8vqhHeNCnqaN8Bi9XhNkAH8zGRyCXkQvMYJ5rCj
+         3+tsRBiYcE3xjGP/4CvZHV3XNymiNb+F0khkE3q8=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kGJkO-00EINc-7a; Thu, 10 Sep 2020 12:24:08 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org,
+        "David S. Miller" <davem@davemloft.net>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>,
+        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
+        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+        Jakub Kicinski <kuba@kernel.org>, Jens Axboe <axboe@kernel.dk>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        Jonathan Cameron <jic23@kernel.org>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH 00/14] get rid of the remaining kernel-doc warnings when building the docs
+Date:   Thu, 10 Sep 2020 12:23:53 +0200
+Message-Id: <cover.1599732764.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add kprobe %return suffix testcase and syntax error tests
-for %return suffix.
+As described on its subject, this series finally get rid of all kernel-doc warnings.
 
-Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
----
- .../ftrace/test.d/kprobe/kprobe_syntax_errors.tc   |    6 ++++++
- .../test.d/kprobe/kretprobe_return_suffix.tc       |   21 ++++++++++++++++++++
- .../ftrace/test.d/kprobe/uprobe_syntax_errors.tc   |    6 ++++++
- 3 files changed, 33 insertions(+)
- create mode 100644 tools/testing/selftests/ftrace/test.d/kprobe/kretprobe_return_suffix.tc
+With this series applied (plus my last series fixing other warnings), building
+the docs is now clean[1] against next-20200909:
 
-diff --git a/tools/testing/selftests/ftrace/test.d/kprobe/kprobe_syntax_errors.tc b/tools/testing/selftests/ftrace/test.d/kprobe/kprobe_syntax_errors.tc
-index b4d834675e59..56b3f36c722b 100644
---- a/tools/testing/selftests/ftrace/test.d/kprobe/kprobe_syntax_errors.tc
-+++ b/tools/testing/selftests/ftrace/test.d/kprobe/kprobe_syntax_errors.tc
-@@ -97,4 +97,10 @@ check_error 'p:kprobes/testevent _do_fork ^abcd=\"foo"'	# DIFF_ARG_TYPE
- check_error '^p:kprobes/testevent _do_fork abcd=\1'	# SAME_PROBE
- fi
- 
-+# %return suffix errors
-+if grep -q "place (kretprobe): .*%return.*" README; then
-+check_error 'p vfs_read^%hoge'		# BAD_ADDR_SUFFIX
-+check_error 'p ^vfs_read+10%return'	# BAD_RETPROBE
-+fi
-+
- exit 0
-diff --git a/tools/testing/selftests/ftrace/test.d/kprobe/kretprobe_return_suffix.tc b/tools/testing/selftests/ftrace/test.d/kprobe/kretprobe_return_suffix.tc
-new file mode 100644
-index 000000000000..f07bd15cc033
---- /dev/null
-+++ b/tools/testing/selftests/ftrace/test.d/kprobe/kretprobe_return_suffix.tc
-@@ -0,0 +1,21 @@
-+#!/bin/sh
-+# SPDX-License-Identifier: GPL-2.0
-+# description: Kretprobe %%return suffix test
-+# requires: kprobe_events '<symbol>[+<offset>]%return':README
-+
-+# Test for kretprobe by "r"
-+echo 'r:myprobeaccept vfs_read' > kprobe_events
-+RESULT1=`cat kprobe_events`
-+
-+# Test for kretprobe by "%return"
-+echo 'p:myprobeaccept vfs_read%return' > kprobe_events
-+RESULT2=`cat kprobe_events`
-+
-+if [ "$RESULT1" != "$RESULT2" ]; then
-+	echo "Error: %return suffix didn't make a return probe."
-+	echo "r-command: $RESULT1"
-+	echo "%return: $RESULT2"
-+	exit_fail
-+fi
-+
-+echo > kprobe_events
-diff --git a/tools/testing/selftests/ftrace/test.d/kprobe/uprobe_syntax_errors.tc b/tools/testing/selftests/ftrace/test.d/kprobe/uprobe_syntax_errors.tc
-index 7b5b60c3c5a2..f5e3f9e4a01f 100644
---- a/tools/testing/selftests/ftrace/test.d/kprobe/uprobe_syntax_errors.tc
-+++ b/tools/testing/selftests/ftrace/test.d/kprobe/uprobe_syntax_errors.tc
-@@ -17,4 +17,10 @@ check_error 'p /bin/sh:10(10)^a'	# BAD_REFCNT_SUFFIX
- check_error 'p /bin/sh:10 ^@+ab'	# BAD_FILE_OFFS
- check_error 'p /bin/sh:10 ^@symbol'	# SYM_ON_UPROBE
- 
-+# %return suffix error
-+if grep -q "place (uprobe): .*%return.*" README; then
-+check_error 'p /bin/sh:10^%hoge'	# BAD_ADDR_SUFFIX
-+check_error 'p /bin/sh:10(10)^%return'	# BAD_REFCNT_SUFFIX
-+fi
-+
- exit 0
+    $ make cleandocs >/dev/null 2>/dev/null && make htmldocs
+    Warning: Documentation/bpf/ringbuf.rst references a file that doesn't exist: Documentation/litmus_tests/bpf-rb/_
+    rm -f   /devel/v4l/docs/Documentation/output/audio.h.rst /devel/v4l/docs/Documentation/output/ca.h.rst /devel/v4l/docs/Documentation/output/dmx.h.rst /devel/v4l/docs/Documentation/output/frontend.h.rst /devel/v4l/docs/Documentation/output/net.h.rst /devel/v4l/docs/Documentation/output/video.h.rst /devel/v4l/docs/Documentation/output/videodev2.h.rst /devel/v4l/docs/Documentation/output/media.h.rst /devel/v4l/docs/Documentation/output/cec.h.rst /devel/v4l/docs/Documentation/output/lirc.h.rst 2>/dev/null
+    Warning: Documentation/bpf/ringbuf.rst references a file that doesn't exist: Documentation/litmus_tests/bpf-rb/_
+      SPHINX  htmldocs --> file:///devel/v4l/docs/Documentation/output
+      PARSE   include/uapi/linux/dvb/audio.h
+      PARSE   include/uapi/linux/dvb/ca.h
+      PARSE   include/uapi/linux/dvb/dmx.h
+      PARSE   include/uapi/linux/dvb/frontend.h
+      PARSE   include/uapi/linux/dvb/net.h
+      PARSE   include/uapi/linux/dvb/video.h
+      PARSE   include/uapi/linux/videodev2.h
+      PARSE   include/uapi/linux/media.h
+      PARSE   include/uapi/linux/cec.h
+      PARSE   include/uapi/linux/lirc.h
+    Running Sphinx v2.4.4
+    enabling CJK for LaTeX builder
+    building [mo]: targets for 0 po files that are out of date
+    building [html]: targets for 2672 source files that are out of date
+    updating environment: [new config] 2672 added, 0 changed, 0 removed
+    reading sources... [100%] x86/kernel-stacks .. xtensa/mmu                                                                                                                                     
+    waiting for workers...
+    /devel/v4l/docs/Documentation/bpf/ringbuf.rst:197: WARNING: Unknown target name: "bench_ringbuf.c".
+    looking for now-outdated files... none found
+    pickling environment... done
+    checking consistency... done
+    preparing documents... done
+    writing output... [100%] w1/w1-netlink .. xtensa/mmu                                                                                                                                          
+    waiting for workers...
+    generating indices...  genindexdone
+    writing additional pages...  searchdone
+    copying images... [100%] userspace-api/media/v4l/constraints.svg                                                                                                                              
+    copying static files... ... done
+    copying extra files... done
+    dumping search index in English (code: en)... done
+    dumping object inventory... done
+    build succeeded, 1 warning.
+    
+    The HTML pages are in Documentation/output.
+
+
+At least part of those patches won't apply against docs-next, as they depend
+on stuff at linux-next. So, it is preferred if they can be applied via each
+sub-maintainer's tree.
+
+I'll rebase those during the next merge window. This way, if some
+patches ended being missed, they can be applied by the end of the
+merge window.
+
+Hopefully, we can make Kernel 5.10 free of documentation warnings.
+
+[1] with the exception of two latmus warnings that seems to require a patch
+      that it was not merged yet.
+
+Regards,
+Mauro
+
+Mauro Carvalho Chehab (14):
+  locking/refcount: document the new "oldp" pointer value
+  usb: docs: document altmode register/unregister functions
+  XArray: docs: add missing kernel-doc parameters for xas_split_alloc()
+  blk-mq: docs: add kernel-doc description for a new struct member
+  iio: docs: add description for a new function member
+  nl80211: docs: add a description for s1g_cap parameter
+  IB/srpt: docs: add a description for cq_size member
+  rcu/tree: docs: document bkvcache new members at struct kfree_rcu_cpu
+  Input: sparse-keymap: add a description for @sw
+  drm: amdgpu: kernel-doc: update some adev parameters
+  drm/amd/display: kernel-doc: document force_timing_sync
+  drm: kernel-doc: document drm_dp_set_subconnector_property() params
+  drm: kernel-doc: drm_dp_helper.h: fix a typo
+  gpu: docs: amdgpu.rst: get rid of wrong kernel-doc markups
+
+ Documentation/driver-api/usb/typec_bus.rst       |  8 +++++++-
+ Documentation/gpu/amdgpu.rst                     |  7 -------
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c       |  2 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c      |  6 +++---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c     |  5 ++---
+ .../gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h    |  2 ++
+ drivers/gpu/drm/drm_dp_helper.c                  |  7 ++++++-
+ drivers/iio/industrialio-core.c                  |  2 ++
+ drivers/infiniband/ulp/srpt/ib_srpt.h            |  1 +
+ include/drm/drm_dp_helper.h                      |  2 +-
+ include/linux/blk-mq.h                           |  2 ++
+ include/linux/input/sparse-keymap.h              |  1 +
+ include/linux/refcount.h                         |  7 +++++++
+ include/linux/usb/typec_altmode.h                | 16 ++++++++++++++++
+ include/net/cfg80211.h                           |  1 +
+ kernel/rcu/tree.c                                | 14 ++++++--------
+ lib/xarray.c                                     | 11 +++++++++--
+ 17 files changed, 67 insertions(+), 27 deletions(-)
+
+-- 
+2.26.2
+
 
