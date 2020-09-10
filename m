@@ -2,104 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 210EB2652BA
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 23:23:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AC7FA265497
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 23:58:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727821AbgIJVWz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Sep 2020 17:22:55 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36030 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726286AbgIJVW1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Sep 2020 17:22:27 -0400
-Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com [IPv6:2a00:1450:4864:20::643])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 19632C0613ED
-        for <linux-doc@vger.kernel.org>; Thu, 10 Sep 2020 14:22:26 -0700 (PDT)
-Received: by mail-ej1-x643.google.com with SMTP id gr14so10891909ejb.1
-        for <linux-doc@vger.kernel.org>; Thu, 10 Sep 2020 14:22:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=N10c9+tEMvd+V1v5/kjFg7uIplbi+YryLR/t+QNnqsU=;
-        b=Pmbtzx/w5PJRKpuyzWZgUthB5SqsFujhymQl5gJo8f6W3hvApNoms7SWH1Ie3t+Xhv
-         G4BzucZpRgNaCDRkBPiUSWCjEuLpi8agAsdGI/QBUu92rYGZ8Pp3MkAt2a24+m/S5x3B
-         6epqPgVItTvZ5dHCiaBsFReRRMDht3h8fKCaRGh1IkHnw2lateEx0y9mDjHKtpX8Y8Nz
-         pj8E/O7vvbiRPAFHA3pzg1fCXA5Q5JExBVpXPTHZUF0gtsfus/hcwcxmf9RfgHDwtSxq
-         1bx0ofN7Nm21fcXiPRlbKh/d5ruR2ePp3ji5Py5uWlztcfvuDu+7GtC29bjR7vEOzNWS
-         NI6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=N10c9+tEMvd+V1v5/kjFg7uIplbi+YryLR/t+QNnqsU=;
-        b=cFTTiI+L1rxg/cZu4gUkBxZpMTBmr7VrlKj2r6AvkIO2lLWYgQS2pgHZ74WdqijLP3
-         1r5u5UyTwDDSj0ApqU5RQ067zADBpPq1JQnyY7mfv5UwBylUzsnBPG0Y5PyBxsNGd1M+
-         qbZG+fw3DT5NY0kP4nQci6qRLwl2YMe4vYeP6SWO3ctLAlSjWr+fxmHddU5iB93V0PnC
-         I8lzfKSbo1BwYoIeQsLoMCtPIMq2H8mmXaooKNj1esnrQw04P+EUKR7lwd5OXQGAcEGf
-         JNPY2L1xyWY0XcdelIOJbs4wjQXzcad7bRy0FdKljrrWk4riDDN4ijwNFTl2BXFqIIh1
-         VY1w==
-X-Gm-Message-State: AOAM531nr8Ly6WYwOtiAsADOy2z4A3Aqy2Z6hL2sQ2k+AhYX6xUbY59d
-        rwDDGac/EfVW/P8GBeoEUoeUE+t9yexgiadlej0k7A==
-X-Google-Smtp-Source: ABdhPJz1ZXFqvRU0UEmWsJMjbaIMk2L+dkrdUn+tEviQSYc6CnuQg/EudEOu/jzT2CS0AbLrfEZiZReKFnSsXFJuWYE=
-X-Received: by 2002:a17:906:4088:: with SMTP id u8mr11408126ejj.184.1599772945031;
- Thu, 10 Sep 2020 14:22:25 -0700 (PDT)
+        id S1725801AbgIJV6s (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Sep 2020 17:58:48 -0400
+Received: from mail.kernel.org ([198.145.29.99]:54250 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725887AbgIJLLC (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 10 Sep 2020 07:11:02 -0400
+Received: from mail.kernel.org (ip5f5ad5ac.dynamic.kabel-deutschland.de [95.90.213.172])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id C788220684;
+        Thu, 10 Sep 2020 11:10:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1599736256;
+        bh=hwbguJAyWYPwpsu2D9i8rT7/tZ9bdITwH1YQjeqWGeY=;
+        h=From:To:Cc:Subject:Date:From;
+        b=yU9kK7kDFEFEj4H2bNq6YF57ElD9FDd6tMPu4RNKVVzIr6NO1swabRB0YYIl1rBus
+         cH149spIdCImg539GhPPFyBg20iIAuna9Qwz4jgm9JwX/Qu2UfzxF9Ng5PcL7eqdLn
+         hUaQNH1qaHSsJAtSudoIgt0yJyK17f3H90cv+0AE=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kGKTd-00ELvC-8a; Thu, 10 Sep 2020 13:10:53 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH] drm: kernel-doc: add description for a new function parameter
+Date:   Thu, 10 Sep 2020 13:10:51 +0200
+Message-Id: <c089fc458b7347e5ab287dab9fb661979736566d.1599736241.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-References: <20200910202107.3799376-1-keescook@chromium.org> <20200910202107.3799376-2-keescook@chromium.org>
-In-Reply-To: <20200910202107.3799376-2-keescook@chromium.org>
-From:   Jann Horn <jannh@google.com>
-Date:   Thu, 10 Sep 2020 23:21:58 +0200
-Message-ID: <CAG48ez1V=oVczCCSuRaWX=bbN2cOi0Y9q48=e-Fuhg7mwMOi0A@mail.gmail.com>
-Subject: Re: [RFC PATCH 1/6] security/fbfam: Add a Kconfig to enable the fbfam feature
-To:     Kees Cook <keescook@chromium.org>, John Wood <john.wood@gmx.com>
-Cc:     Kernel Hardening <kernel-hardening@lists.openwall.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Iurii Zaikin <yzaikin@google.com>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>, linux-doc@vger.kernel.org,
-        kernel list <linux-kernel@vger.kernel.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-        linux-security-module <linux-security-module@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Sep 10, 2020 at 10:21 PM Kees Cook <keescook@chromium.org> wrote:
-> From: John Wood <john.wood@gmx.com>
->
-> Add a menu entry under "Security options" to enable the "Fork brute
-> force attack mitigation" feature.
-[...]
-> +config FBFAM
+As reported by "make htmldocs":
 
-Please give this a more descriptive name than FBFAM. Some name where,
-if a random kernel developer sees an "#ifdef" with that name in some
-random piece of kernel code, they immediately have a rough idea for
-what kind of feature this is.
+	./drivers/gpu/drm/drm_prime.c:808: warning: Function parameter or member 'dev' not described in 'drm_prime_pages_to_sg'
 
-Perhaps something like THROTTLE_FORK_CRASHES. Or something else that
-is equally descriptive.
+Add a description for the new parameter.
 
-> +       bool "Fork brute force attack mitigation"
-> +       default n
+Fixes: 707d561f77b5 ("drm: allow limiting the scatter list size.")
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ drivers/gpu/drm/drm_prime.c | 1 +
+ 1 file changed, 1 insertion(+)
 
-"default n" is superfluous and should AFAIK be omitted.
+diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
+index 8a6a3c99b7d8..45e70ecdfa45 100644
+--- a/drivers/gpu/drm/drm_prime.c
++++ b/drivers/gpu/drm/drm_prime.c
+@@ -793,6 +793,7 @@ static const struct dma_buf_ops drm_gem_prime_dmabuf_ops =  {
+ 
+ /**
+  * drm_prime_pages_to_sg - converts a page array into an sg list
++ * @dev: DRM device
+  * @pages: pointer to the array of page pointers to convert
+  * @nr_pages: length of the page vector
+  *
+-- 
+2.26.2
 
-> +       help
-> +         This is a user defense that detects any fork brute force attack
-> +         based on the application's crashing rate. When this measure is
-> +         triggered the fork system call is blocked.
-
-This help text claims that the mitigation will block fork(), but patch
-6/6 actually kills the process hierarchy.
