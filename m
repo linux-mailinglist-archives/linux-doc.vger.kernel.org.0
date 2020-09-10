@@ -2,127 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 761482650C1
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 22:27:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 960A12650CA
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 22:28:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726947AbgIJU0X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Sep 2020 16:26:23 -0400
-Received: from mail.kernel.org ([198.145.29.99]:53384 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726267AbgIJUZ2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 10 Sep 2020 16:25:28 -0400
-Received: from paulmck-ThinkPad-P72.home (unknown [50.45.173.55])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 4E83E20829;
-        Thu, 10 Sep 2020 20:25:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1599769527;
-        bh=j1D8IPJ4Y08qnoWlFLiDNLrabhQVaPZSJO9zVTmslg8=;
-        h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To:From;
-        b=doPdBnJsbif/E+6P+b8WZBM0DPFyC8Ar2wQffAXUnGxFuH8CuQy6cIoH1ChJxEEdp
-         T/094BXQngRogk0hZw0MrLqFPTkSpdB3jz95pU+oOeYJExyZ+BkHTDqXzi+TVSEyPF
-         W22Q8DV32RdLZ+Yl4WNrQphSoWVZuPu3oZHwDtKg=
-Received: by paulmck-ThinkPad-P72.home (Postfix, from userid 1000)
-        id CF0923523080; Thu, 10 Sep 2020 13:25:26 -0700 (PDT)
-Date:   Thu, 10 Sep 2020 13:25:26 -0700
-From:   "Paul E. McKenney" <paulmck@kernel.org>
-To:     Dmitry Vyukov <dvyukov@google.com>
-Cc:     Alexander Potapenko <glider@google.com>,
-        Marco Elver <elver@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Christoph Lameter <cl@linux.com>,
-        David Rientjes <rientjes@google.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eric Dumazet <edumazet@google.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Peter Zijlstra <peterz@infradead.org>, Qian Cai <cai@lca.pw>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Will Deacon <will@kernel.org>,
-        the arch/x86 maintainers <x86@kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        kasan-dev <kasan-dev@googlegroups.com>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Linux-MM <linux-mm@kvack.org>
-Subject: Re: [PATCH RFC 01/10] mm: add Kernel Electric-Fence infrastructure
-Message-ID: <20200910202526.GU29330@paulmck-ThinkPad-P72>
-Reply-To: paulmck@kernel.org
-References: <20200907134055.2878499-1-elver@google.com>
- <20200907134055.2878499-2-elver@google.com>
- <CACT4Y+bfp2ch2KbSMkUd3142aA4p2CiMOmdXrr0-muu6bQ5xXg@mail.gmail.com>
- <CAG_fn=W4es7jaTotDORt2SwspE4A804mdwAY1j4gcaSEKtRjiw@mail.gmail.com>
- <CACT4Y+awrz-j8y5Qc8OS9qkov4doMnw1V=obwp3MB_LTvaUFXw@mail.gmail.com>
+        id S1725864AbgIJU2p (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Sep 2020 16:28:45 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55882 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726951AbgIJU2U (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Sep 2020 16:28:20 -0400
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com [IPv6:2a00:1450:4864:20::543])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3512FC0613ED
+        for <linux-doc@vger.kernel.org>; Thu, 10 Sep 2020 13:28:05 -0700 (PDT)
+Received: by mail-ed1-x543.google.com with SMTP id w1so7715338edr.3
+        for <linux-doc@vger.kernel.org>; Thu, 10 Sep 2020 13:28:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=dOtT3N7XbGpRxpxc8ChGzc7KDQ9tSEwlVL00HtmCks8=;
+        b=C/Nbbf4T5rPk5brkoe050E2pcKCOvUasKnRCCFebyKdoxklwvBx0WXCmqjsDrbtpQV
+         jR6WiarrGjbLiEQkOEZuNuB/YvertASUjGXTd4haT9x7o9clqXR3JKVcu0UMmGqYZUmU
+         VAsc6ulw4hGipMG2uE+lsgPcKmNCYpytB/IHs6Oxg8HuAoZWBCKBvclBqizD+4L+LwfK
+         nsSI43tbcdKmURrSC9zJfS5oLkDHyWRaABxsMPLIICw+pxAgpBCM5dVXdO+OuZg2E//b
+         2h5kExRMIJy0tPvpHdEeBK6feABcxtN2G01klGZ6ScnLzyaR3hPS/Of9tc91a739PUWU
+         5RXw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=dOtT3N7XbGpRxpxc8ChGzc7KDQ9tSEwlVL00HtmCks8=;
+        b=MvafeUMRFzDChBd2bISCLX+5YrKzz4xKAUVKueontcliMDWCheDtmh9h8O3xwmdreR
+         Oq8LedR+8FDZxIVD/K/lLKdr0/ws4kXF97pwXK3Bgh4TItetmJwUWWs1W/Q4e8fp5aFq
+         0827HZWxcSjFelXdybzvjrJBp8SzNgQnKmjEbbdw5WT+3JyP+lwqM7jF1Q/diIknKFWd
+         pAfpE9dyDeJDZjoeTKNQrRUrhaACPllcWkGjyniL3lIb8ohfj6Fb225Pcz7axOaOwcic
+         fpNIiDamJeUikMe4DZv3zNgPvVs9baNZHItXbUeLUUsJwXU2Wznw+RHA5QTWBttjLIDH
+         c21A==
+X-Gm-Message-State: AOAM531U8m/wp2vrq2QMnOyyr5MSMe7h2JKFzWDxtGJr4GutvFRROGFe
+        rdUNoMcuYzViMfwTa33WMp1x5WMTTNiwQ9U8RcYxcA==
+X-Google-Smtp-Source: ABdhPJw5R/5Ez4aDdMGu21cR5k0AUCPks8j2VqSHJM0t1OaVkhoHiaB7U2J+4k9K0u43oPA3YLYttkRf9QTiPALFrsk=
+X-Received: by 2002:a50:fe98:: with SMTP id d24mr11069998edt.223.1599769681295;
+ Thu, 10 Sep 2020 13:28:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CACT4Y+awrz-j8y5Qc8OS9qkov4doMnw1V=obwp3MB_LTvaUFXw@mail.gmail.com>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+References: <20200910202107.3799376-1-keescook@chromium.org> <20200910202107.3799376-4-keescook@chromium.org>
+In-Reply-To: <20200910202107.3799376-4-keescook@chromium.org>
+From:   Jann Horn <jannh@google.com>
+Date:   Thu, 10 Sep 2020 22:27:35 +0200
+Message-ID: <CAG48ez3om6tRSjZhq4RBtbRCZaupTPJewEYbtN9Q-NCUzDjkqA@mail.gmail.com>
+Subject: Re: [RFC PATCH 3/6] security/fbfam: Use the api to manage statistics
+To:     Kees Cook <keescook@chromium.org>
+Cc:     Kernel Hardening <kernel-hardening@lists.openwall.com>,
+        John Wood <john.wood@gmx.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Iurii Zaikin <yzaikin@google.com>,
+        James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>, linux-doc@vger.kernel.org,
+        kernel list <linux-kernel@vger.kernel.org>,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+        linux-security-module <linux-security-module@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Sep 10, 2020 at 07:11:41PM +0200, Dmitry Vyukov wrote:
-> On Thu, Sep 10, 2020 at 6:19 PM Alexander Potapenko <glider@google.com> wrote:
-> >
-> > On Thu, Sep 10, 2020 at 5:43 PM Dmitry Vyukov <dvyukov@google.com> wrote:
-> >
-> >
-> > > > +       /* Calculate address for this allocation. */
-> > > > +       if (right)
-> > > > +               meta->addr += PAGE_SIZE - size;
-> > > > +       meta->addr = ALIGN_DOWN(meta->addr, cache->align);
-> > >
-> > > I would move this ALIGN_DOWN under the (right) if.
-> > > Do I understand it correctly that it will work, but we expect it to do
-> > > nothing for !right? If cache align is >PAGE_SIZE, nothing good will
-> > > happen anyway, right?
-> > > The previous 2 lines look like part of the same calculation -- "figure
-> > > out the addr for the right case".
-> >
-> > Yes, makes sense.
-> >
-> > > > +
-> > > > +       schedule_delayed_work(&kfence_timer, 0);
-> > > > +       WRITE_ONCE(kfence_enabled, true);
-> > >
-> > > Can toggle_allocation_gate run before we set kfence_enabled? If yes,
-> > > it can break. If not, it's still somewhat confusing.
-> >
-> > Correct, it should go after we enable KFENCE. We'll fix that in v2.
-> >
-> > > > +void __kfence_free(void *addr)
-> > > > +{
-> > > > +       struct kfence_metadata *meta = addr_to_metadata((unsigned long)addr);
-> > > > +
-> > > > +       if (unlikely(meta->cache->flags & SLAB_TYPESAFE_BY_RCU))
-> > >
-> > > This may deserve a comment as to why we apply rcu on object level
-> > > whereas SLAB_TYPESAFE_BY_RCU means slab level only.
-> >
-> > Sorry, what do you mean by "slab level"?
-> > SLAB_TYPESAFE_BY_RCU means we have to wait for possible RCU accesses
-> > in flight before freeing objects from that slab - that's basically
-> > what we are doing here below:
-> 
-> Exactly! You see it is confusing :)
-> SLAB_TYPESAFE_BY_RCU does not mean that. rcu-freeing only applies to
-> whole pages, that's what I mean by "slab level" (whole slabs are freed
-> by rcu).
+On Thu, Sep 10, 2020 at 10:21 PM Kees Cook <keescook@chromium.org> wrote:
+> Use the previous defined api to manage statistics calling it accordingly
+> when a task forks, calls execve or exits.
 
-Just confirming Dmitry's description of SLAB_TYPESAFE_BY_RCU semantics.
+You defined functions that return error codes in the previous patch,
+but here you ignore the return values. That's a bad idea.
 
-							Thanx, Paul
+You should probably check the return value in execve() (and fail the
+execution in the case where memory allocation fails), and make it so
+that the other functions always succeed.
