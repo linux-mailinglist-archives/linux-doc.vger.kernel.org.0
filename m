@@ -2,71 +2,63 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AC7FA265497
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 23:58:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 920DB2653F4
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 23:42:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725801AbgIJV6s (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Sep 2020 17:58:48 -0400
-Received: from mail.kernel.org ([198.145.29.99]:54250 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725887AbgIJLLC (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 10 Sep 2020 07:11:02 -0400
-Received: from mail.kernel.org (ip5f5ad5ac.dynamic.kabel-deutschland.de [95.90.213.172])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id C788220684;
-        Thu, 10 Sep 2020 11:10:55 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1599736256;
-        bh=hwbguJAyWYPwpsu2D9i8rT7/tZ9bdITwH1YQjeqWGeY=;
-        h=From:To:Cc:Subject:Date:From;
-        b=yU9kK7kDFEFEj4H2bNq6YF57ElD9FDd6tMPu4RNKVVzIr6NO1swabRB0YYIl1rBus
-         cH149spIdCImg539GhPPFyBg20iIAuna9Qwz4jgm9JwX/Qu2UfzxF9Ng5PcL7eqdLn
-         hUaQNH1qaHSsJAtSudoIgt0yJyK17f3H90cv+0AE=
-Received: from mchehab by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1kGKTd-00ELvC-8a; Thu, 10 Sep 2020 13:10:53 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        David Airlie <airlied@linux.ie>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-Subject: [PATCH] drm: kernel-doc: add description for a new function parameter
-Date:   Thu, 10 Sep 2020 13:10:51 +0200
-Message-Id: <c089fc458b7347e5ab287dab9fb661979736566d.1599736241.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.26.2
+        id S1728491AbgIJVmb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Sep 2020 17:42:31 -0400
+Received: from szxga06-in.huawei.com ([45.249.212.32]:37380 "EHLO huawei.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1730596AbgIJMWV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 10 Sep 2020 08:22:21 -0400
+Received: from DGGEMS412-HUB.china.huawei.com (unknown [172.30.72.60])
+        by Forcepoint Email with ESMTP id C02707340C5C77DDC16C;
+        Thu, 10 Sep 2020 20:22:11 +0800 (CST)
+Received: from localhost.localdomain (10.69.192.56) by
+ DGGEMS412-HUB.china.huawei.com (10.3.19.212) with Microsoft SMTP Server id
+ 14.3.487.0; Thu, 10 Sep 2020 20:22:05 +0800
+From:   Tian Tao <tiantao6@hisilicon.com>
+To:     <corbet@lwn.net>, <keescook@chromium.org>, <anton@enomsg.org>,
+        <ccross@android.com>, <tony.luck@intel.com>, <paulmck@kernel.org>,
+        <tglx@linutronix.de>, <akpm@linux-foundation.org>,
+        <gregkh@linuxfoundation.org>, <mchehab+huawei@kernel.org>,
+        <pawan.kumar.gupta@linux.intel.com>, <rdunlap@infradead.org>,
+        <mike.kravetz@oracle.com>, <oneukum@suse.com>,
+        <linux-doc@vger.kernel.org>
+CC:     <linuxarm@huawei.com>
+Subject: [PATCH] Documentation: arm64 also supports disable hugeiomap
+Date:   Thu, 10 Sep 2020 20:19:46 +0800
+Message-ID: <1599740386-47210-1-git-send-email-tiantao6@hisilicon.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.69.192.56]
+X-CFilter-Loop: Reflected
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-As reported by "make htmldocs":
+arm64 also supports disable hugeiomap,updated documentation.
 
-	./drivers/gpu/drm/drm_prime.c:808: warning: Function parameter or member 'dev' not described in 'drm_prime_pages_to_sg'
-
-Add a description for the new parameter.
-
-Fixes: 707d561f77b5 ("drm: allow limiting the scatter list size.")
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Signed-off-by: Tian Tao <tiantao6@hisilicon.com>
 ---
- drivers/gpu/drm/drm_prime.c | 1 +
- 1 file changed, 1 insertion(+)
+ Documentation/admin-guide/kernel-parameters.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/drivers/gpu/drm/drm_prime.c b/drivers/gpu/drm/drm_prime.c
-index 8a6a3c99b7d8..45e70ecdfa45 100644
---- a/drivers/gpu/drm/drm_prime.c
-+++ b/drivers/gpu/drm/drm_prime.c
-@@ -793,6 +793,7 @@ static const struct dma_buf_ops drm_gem_prime_dmabuf_ops =  {
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 5debfe2..86a5e37 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -3206,7 +3206,7 @@
+ 			register save and restore. The kernel will only save
+ 			legacy floating-point registers on task switch.
  
- /**
-  * drm_prime_pages_to_sg - converts a page array into an sg list
-+ * @dev: DRM device
-  * @pages: pointer to the array of page pointers to convert
-  * @nr_pages: length of the page vector
-  *
+-	nohugeiomap	[KNL,X86,PPC] Disable kernel huge I/O mappings.
++	nohugeiomap	[KNL,X86,PPC,ARM64] Disable kernel huge I/O mappings.
+ 
+ 	nosmt		[KNL,S390] Disable symmetric multithreading (SMT).
+ 			Equivalent to smt=1.
 -- 
-2.26.2
+2.7.4
 
