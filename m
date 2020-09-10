@@ -2,162 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3CD5A2649BC
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 18:30:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C4C6E264994
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 18:21:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726451AbgIJQ3o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Sep 2020 12:29:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46330 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726612AbgIJQ16 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Sep 2020 12:27:58 -0400
-Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com [IPv6:2607:f8b0:4864:20::344])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61A93C0617BD
-        for <linux-doc@vger.kernel.org>; Thu, 10 Sep 2020 08:06:38 -0700 (PDT)
-Received: by mail-ot1-x344.google.com with SMTP id e23so5612635otk.7
-        for <linux-doc@vger.kernel.org>; Thu, 10 Sep 2020 08:06:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=2DiBsMVuHaQKweeTOQHLBykKJQg8tEScxOxVWMIr6f4=;
-        b=d7rj+8QpSjUscxArZ7XYKcuFoi7B/GFxbmwxY/YeAJFpXkDE4GqonTwAilQRs3eHCr
-         9wgqUUGp2M2uZqGrS8oyOuUHtC72NS+g+HPsaSoYo3tcxRVgrIlDea7prwP0aii0bjkR
-         WJcgjPHMGb1+5uTKdiVpFY05RsxeiG/It4ZrCaBrC3jeXnxUb3JdE5uIwvrsGaNyS4x7
-         Dq11bilXPZ9dpQgxS66wkRODkNr/rumXomg4AH7YlQffk8K2MBnEZSd4mbQm+F4nV39/
-         Hyi0MLbwb0o8rTE3Z9b1JJf241U+CBVEHuof+AYwXeSrnN4RIb7n+OlXgrSBFjT/81j6
-         ySxQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=2DiBsMVuHaQKweeTOQHLBykKJQg8tEScxOxVWMIr6f4=;
-        b=fVVIU7OHBYtJfLIYUONFZPOlWXX/W8Y6UIErNzoNTRIET2Ls3mdORrhqQNkkmP1lcF
-         eVTTAam+CfRQlAYvOa20la7R+39DHKyqoWvG90Yo2HtWjbVGIGijzP4QH5V9ba6XUJPc
-         yucrOtaztRnNFQ9XsJz3DjmSLv5LS7gQID0GfxEkHmcrSFxW/wyy9Ck0GHGvo/vqFmct
-         U+VMjxs80uHbOAd2KkadG3h3qGi0wkAp4/s/SyIkS3hN2LH8m9vC9jrbyfsg7wMM9rhI
-         u++XDxaVVfLVJ82DtNdW/sjt0HGZYAZb3y65/YcggBY7NappHnYZ95XC+D06v30slPHE
-         kQaw==
-X-Gm-Message-State: AOAM5315EKEMvjVex/07qiui5v4kA4+ES6FqJ22Bt2oKp+MJrV4/RXGq
-        i3a0ypErfuQd8X9d5YLN6jqh6rD5WACW6d9CU3rHow==
-X-Google-Smtp-Source: ABdhPJxdJ+UeiRt911/9A7d8J232d9N9212FdeXDAshArM9b5lcwP3AeLW4qnCw6pMgyGhpwo76X6VTJZQhXKQnltDA=
-X-Received: by 2002:a9d:3da1:: with SMTP id l30mr4426034otc.233.1599750397232;
- Thu, 10 Sep 2020 08:06:37 -0700 (PDT)
+        id S1726605AbgIJQVN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Sep 2020 12:21:13 -0400
+Received: from mail.kernel.org ([198.145.29.99]:36164 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726841AbgIJQU1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 10 Sep 2020 12:20:27 -0400
+Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id E84D920BED;
+        Thu, 10 Sep 2020 16:18:54 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1599754735;
+        bh=eYB7NVQ0w8fEmrT5JGCldNlkgVi29FDwCgpinZyi2XQ=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=jHIvIfNsKVPc9XIzCo8yq2jod8gfmfg1He2Wu7Vdq/HqnG4w2/SjjTAf7quC2jVdh
+         6lWNtY4ubxIJkErPeecN+N0iHCMn36Du911dNUbYJSDSPHFfwuzvQWA4u633Zt3v4c
+         lKUVIfb8nqPfA+0oZiQCwRXygSk5ApyiR2M5NOCI=
+Date:   Thu, 10 Sep 2020 18:19:02 +0200
+From:   Greg KH <gregkh@linuxfoundation.org>
+To:     Stephen Boyd <swboyd@chromium.org>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        linux-kernel@vger.kernel.org, Tri Vo <trong@android.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Matthew Wilcox <willy@infradead.org>
+Subject: Re: [PATCH v3 1/2] idr: Document calling context for IDA APIs
+ mustn't use locks
+Message-ID: <20200910161902.GB1180022@kroah.com>
+References: <20200910055246.2297797-1-swboyd@chromium.org>
 MIME-Version: 1.0
-References: <20200907134055.2878499-1-elver@google.com> <20200907134055.2878499-2-elver@google.com>
- <CACT4Y+aBpeQYOWGrCoaJ=HAa0BsSekyL88kcLBTGwc--C+Ch0w@mail.gmail.com>
-In-Reply-To: <CACT4Y+aBpeQYOWGrCoaJ=HAa0BsSekyL88kcLBTGwc--C+Ch0w@mail.gmail.com>
-From:   Marco Elver <elver@google.com>
-Date:   Thu, 10 Sep 2020 17:06:25 +0200
-Message-ID: <CANpmjNN7qAtnUmibwGJEnxd+UcjBM1WeocoLeW0SO24NW3SkVA@mail.gmail.com>
-Subject: Re: [PATCH RFC 01/10] mm: add Kernel Electric-Fence infrastructure
-To:     Dmitry Vyukov <dvyukov@google.com>
-Cc:     Alexander Potapenko <glider@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Christoph Lameter <cl@linux.com>,
-        David Rientjes <rientjes@google.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eric Dumazet <edumazet@google.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Peter Zijlstra <peterz@infradead.org>, Qian Cai <cai@lca.pw>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Will Deacon <will@kernel.org>,
-        "the arch/x86 maintainers" <x86@kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        kasan-dev <kasan-dev@googlegroups.com>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Linux-MM <linux-mm@kvack.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200910055246.2297797-1-swboyd@chromium.org>
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 10 Sep 2020 at 16:58, Dmitry Vyukov <dvyukov@google.com> wrote:
->
-> On Mon, Sep 7, 2020 at 3:41 PM Marco Elver <elver@google.com> wrote:
-> > +config KFENCE_NUM_OBJECTS
-> > +       int "Number of guarded objects available"
-> > +       default 255
-> > +       range 1 65535
-> > +       help
-> > +         The number of guarded objects available. For each KFENCE object, 2
-> > +         pages are required; with one containing the object and two adjacent
-> > +         ones used as guard pages.
->
-> Hi Marco,
->
-> Wonder if you tested build/boot with KFENCE_NUM_OBJECTS=65535? Can a
-> compiler create such a large object?
+On Wed, Sep 09, 2020 at 10:52:45PM -0700, Stephen Boyd wrote:
+> The documentation for these functions indicates that callers don't need
+> to hold a lock while calling them, but that documentation is only in one
+> place under "IDA Usage". Let's state the same information on each IDA
+> function so that it's clear what the calling context requires.
+> Furthermore, let's document ida_simple_get() with the same information
+> so that callers know how this API works.
 
-Indeed, I get a "ld: kernel image bigger than KERNEL_IMAGE_SIZE".
-Let's lower it to something more reasonable.
+Thank you for this, I always have to go look it up too...
 
-The main reason to have the limit is to constrain random configs and
-avoid the inevitable error reports.
-
-> > +config KFENCE_FAULT_INJECTION
-> > +       int "Fault injection for stress testing"
-> > +       default 0
-> > +       depends on EXPERT
-> > +       help
-> > +         The inverse probability with which to randomly protect KFENCE object
-> > +         pages, resulting in spurious use-after-frees. The main purpose of
-> > +         this option is to stress-test KFENCE with concurrent error reports
-> > +         and allocations/frees. A value of 0 disables fault injection.
->
-> I would name this differently. "FAULT_INJECTION" is already taken for
-> a different thing, so it's a bit confusing.
-> KFENCE_DEBUG_SOMETHING may be a better name.
-> It would also be good to make it very clear in the short description
-> that this is for testing of KFENCE itself. When I configure syzbot I
-> routinely can't figure out if various DEBUG configs detect user
-> errors, or enable additional unit tests, or something else.
-
-Makes sense, we'll change the name.
-
-> Maybe it should depend on DEBUG_KERNEL as well?
-
-EXPERT selects DEBUG_KERNEL, so depending on DEBUG_KERNEL doesn't make sense.
-
-> > +/*
-> > + * Get the canary byte pattern for @addr. Use a pattern that varies based on the
-> > + * lower 3 bits of the address, to detect memory corruptions with higher
-> > + * probability, where similar constants are used.
-> > + */
-> > +#define KFENCE_CANARY_PATTERN(addr) ((u8)0xaa ^ (u8)((unsigned long)addr & 0x7))
->
-> (addr) in macro body
-
-Done for v2.
-
-> > +       seq_con_printf(seq,
-> > +                      "kfence-#%zd [0x" PTR_FMT "-0x" PTR_FMT
->
-> PTR_FMT is only used in this file, should it be declared in report.c?
-
-It's also used by the test.
-
-> Please post example reports somewhere. It's hard to figure out all
-> details of the reporting/formatting.
-
-They can be seen in Documentation added later in the series (also
-viewable here: https://github.com/google/kasan/blob/kfence/Documentation/dev-tools/kfence.rst)
-
-Thank you!
-
--- Marco
+Reviewed-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
