@@ -2,80 +2,126 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BE38A263A4D
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 04:26:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1A9D62639DC
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 04:08:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730478AbgIJCYW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Sep 2020 22:24:22 -0400
-Received: from a27-185.smtp-out.us-west-2.amazonses.com ([54.240.27.185]:46216
-        "EHLO a27-185.smtp-out.us-west-2.amazonses.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1730638AbgIJCIb (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 22:08:31 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-        s=zsmsymrwgfyinv5wlfyidntwsjeeldzt; d=codeaurora.org; t=1599696160;
-        h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References;
-        bh=RXbn1DWMYAZ/35A4Quy1kciFUeBroO2XMUKTixP81u8=;
-        b=SSdf49bXNSkyITUrNrsFYmvJdow5ybQbUcmAXzzOKBVA7wRlk2NKVKHN39OSn+YW
-        Kpt4dB+fPzoDIWxBEyKCn2ZkJ6uw7NFWAJpuG6A3R3Pk5/3geNV7YZmIQrjbJb/WEiU
-        wHByHE/nGw2a2v4iPcYgVINt5FZK57J+YJ+4DF9g=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-        s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1599696160;
-        h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:Feedback-ID;
-        bh=RXbn1DWMYAZ/35A4Quy1kciFUeBroO2XMUKTixP81u8=;
-        b=IXvcYt7lm3IylKhmQTwjJsufMpraLy+JMyJRn4MiqAdvfiVGTcnWkZBqKS8uNtlW
-        tbAqIgtDzq80ed4TM7Cq19DZHiDZFkdGjKqKmkZ0VvNHiTrKOlMtnCAkYj5wvs46Yop
-        Q7Ut62RYHBIi6ilUFkdPyTJoJ5ini5u2sqt3PTdA=
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-        aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00,SPF_FAIL,
-        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 5D416C433F0
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=fail smtp.mailfrom=sidgup@codeaurora.org
-From:   Siddharth Gupta <sidgup@codeaurora.org>
-To:     agross@kernel.org, bjorn.andersson@linaro.org, ohad@wizery.com
-Cc:     Siddharth Gupta <sidgup@codeaurora.org>,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, tsoni@codeaurora.org,
-        psodagud@codeaurora.org, rishabhb@codeaurora.org,
-        linux-doc@vger.kernel.org, Gurbir Arora <gurbaror@codeaurora.org>
-Subject: [PATCH v3 3/3] remoteproc: qcom: Add minidump id for sm8150 modem remoteproc
-Date:   Thu, 10 Sep 2020 00:02:39 +0000
-Message-ID: <01010174755244c8-4654df20-f3df-49ae-94ce-eea0af121a99-000000@us-west-2.amazonses.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1599696147-30585-1-git-send-email-sidgup@codeaurora.org>
-References: <1599696147-30585-1-git-send-email-sidgup@codeaurora.org>
-X-SES-Outgoing: 2020.09.10-54.240.27.185
-Feedback-ID: 1.us-west-2.CZuq2qbDmUIuT3qdvXlRHZZCpfZqZ4GtG9v3VKgRyF0=:AmazonSES
+        id S1729298AbgIJCIO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Sep 2020 22:08:14 -0400
+Received: from mail.kernel.org ([198.145.29.99]:46620 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1730293AbgIJCFa (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 9 Sep 2020 22:05:30 -0400
+Received: from devnote2 (NE2965lan1.rev.em-net.ne.jp [210.141.244.193])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 6A20E22208;
+        Thu, 10 Sep 2020 00:49:25 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1599698967;
+        bh=YEfWR7IEaqpfFI93JDRFeAj2BOIyU5cOkPCI9C/TtrM=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=tmmKd3yHd58nbE9ocQ5k/aIp8qRZXpLBtS0FOw4HyBRApEWn4ol78gscrpe66XFgH
+         avoRg+gmM2VxlWpWt/p0GSIxo/c3KBLwerCB/17nWWPjp/zPltr4yB/SSHfrVrUCrE
+         /tXojWCMkETu0nBQUkIid9e9nS/3CWv+k62Y+tb0=
+Date:   Thu, 10 Sep 2020 09:49:23 +0900
+From:   Masami Hiramatsu <mhiramat@kernel.org>
+To:     Masami Hiramatsu <mhiramat@kernel.org>
+Cc:     Steven Rostedt <rostedt@goodmis.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
+        Ingo Molnar <mingo@kernel.org>, Oleg Nesterov <oleg@redhat.com>
+Subject: Re: [PATCH v2 4/6] tracing/kprobes: Support perf-style return probe
+Message-Id: <20200910094923.42a09f8f75f84cdbeac743c8@kernel.org>
+In-Reply-To: <159894703070.1478826.15755889933157654537.stgit@devnote2>
+References: <159894698993.1478826.2813843560314595660.stgit@devnote2>
+        <159894703070.1478826.15755889933157654537.stgit@devnote2>
+X-Mailer: Sylpheed 3.7.0 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add minidump id for modem in sm8150 chipset.
+On Tue,  1 Sep 2020 16:57:10 +0900
+Masami Hiramatsu <mhiramat@kernel.org> wrote:
 
-Signed-off-by: Rishabh Bhatnagar <rishabhb@codeaurora.org>
-Signed-off-by: Gurbir Arora <gurbaror@codeaurora.org>
-Signed-off-by: Siddharth Gupta <sidgup@codeaurora.org>
----
- drivers/remoteproc/qcom_q6v5_pas.c | 1 +
- 1 file changed, 1 insertion(+)
+> Support perf-style return probe ("SYMBOL%return") in kprobe events.
+> This will allow boot-time tracing user to define a return probe event.
+> 
 
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 3879921..fa2d077 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -709,6 +709,7 @@ static const struct adsp_data mpss_resource_init = {
- 	.crash_reason_smem = 421,
- 	.firmware_name = "modem.mdt",
- 	.pas_id = 4,
-+	.minidump_id = 3,
- 	.has_aggre2_clk = false,
- 	.auto_boot = false,
- 	.active_pd_names = (char*[]){
+Hmm, I think I should add this for uprobe event too.
+I'll update the series.
+
+Thank you,
+
+> Signed-off-by: Masami Hiramatsu <mhiramat@kernel.org>
+> ---
+>  kernel/trace/trace_kprobe.c |   21 ++++++++++++++++++++-
+>  1 file changed, 20 insertions(+), 1 deletion(-)
+> 
+> diff --git a/kernel/trace/trace_kprobe.c b/kernel/trace/trace_kprobe.c
+> index aefb6065b508..391361b67c8f 100644
+> --- a/kernel/trace/trace_kprobe.c
+> +++ b/kernel/trace/trace_kprobe.c
+> @@ -709,6 +709,18 @@ static inline void sanitize_event_name(char *name)
+>  			*name = '_';
+>  }
+>  
+> +static inline bool split_return_suffix(char *symbol)
+> +{
+> +	char *p = strchr(symbol, '%');
+> +
+> +	if (p && !strcmp(p, "%return")) {
+> +		*p = '\0';
+> +		return true;
+> +	}
+> +
+> +	return false;
+> +}
+> +
+>  static int trace_kprobe_create(int argc, const char *argv[])
+>  {
+>  	/*
+> @@ -717,6 +729,9 @@ static int trace_kprobe_create(int argc, const char *argv[])
+>  	 *      p[:[GRP/]EVENT] [MOD:]KSYM[+OFFS]|KADDR [FETCHARGS]
+>  	 *  - Add kretprobe:
+>  	 *      r[MAXACTIVE][:[GRP/]EVENT] [MOD:]KSYM[+0] [FETCHARGS]
+> +	 *    Or
+> +	 *      p:[GRP/]EVENT] [MOD:]KSYM[+0]%return [FETCHARGS]
+> +	 *
+>  	 * Fetch args:
+>  	 *  $retval	: fetch return value
+>  	 *  $stack	: fetch stack address
+> @@ -746,7 +761,6 @@ static int trace_kprobe_create(int argc, const char *argv[])
+>  	switch (argv[0][0]) {
+>  	case 'r':
+>  		is_return = true;
+> -		flags |= TPARG_FL_RETURN;
+>  		break;
+>  	case 'p':
+>  		break;
+> @@ -804,12 +818,17 @@ static int trace_kprobe_create(int argc, const char *argv[])
+>  		symbol = kstrdup(argv[1], GFP_KERNEL);
+>  		if (!symbol)
+>  			return -ENOMEM;
+> +
+> +		is_return = split_return_suffix(symbol) || is_return;
+> +
+>  		/* TODO: support .init module functions */
+>  		ret = traceprobe_split_symbol_offset(symbol, &offset);
+>  		if (ret || offset < 0 || offset > UINT_MAX) {
+>  			trace_probe_log_err(0, BAD_PROBE_ADDR);
+>  			goto parse_error;
+>  		}
+> +		if (is_return)
+> +			flags |= TPARG_FL_RETURN;
+>  		if (kprobe_on_func_entry(NULL, symbol, offset))
+>  			flags |= TPARG_FL_FENTRY;
+>  		if (offset && is_return && !(flags & TPARG_FL_FENTRY)) {
+> 
+
+
 -- 
-Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
-a Linux Foundation Collaborative Project
-
+Masami Hiramatsu <mhiramat@kernel.org>
