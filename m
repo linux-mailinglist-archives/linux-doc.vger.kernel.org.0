@@ -2,533 +2,358 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3B608263B1B
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 04:58:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7CACE263A7F
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 04:30:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729781AbgIJC6n (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Sep 2020 22:58:43 -0400
-Received: from a27-185.smtp-out.us-west-2.amazonses.com ([54.240.27.185]:38070
-        "EHLO a27-185.smtp-out.us-west-2.amazonses.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726426AbgIJC5o (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 22:57:44 -0400
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-        s=zsmsymrwgfyinv5wlfyidntwsjeeldzt; d=codeaurora.org; t=1599696160;
-        h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References;
-        bh=8Z1hZ6OlhvjUW/7tGHmW7ObGwbYGpbyAFTSLrbVWFtw=;
-        b=MwpPxFRU2dlT/dNx5aHzzUnvlq+MtGN48c02goV+WW6zUu73B39PriYWfTLX1Wm5
-        JmbOor894l2fQCQbtz/OMnR738v2l76Gemsyjk58hR7pGCrpOEKeagxXYOh7ubz4xvl
-        VGorDBgiVBWu1zKIus5kvqylpWAoqPpHrsNGzuic=
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
-        s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1599696160;
-        h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:Feedback-ID;
-        bh=8Z1hZ6OlhvjUW/7tGHmW7ObGwbYGpbyAFTSLrbVWFtw=;
-        b=AjEroO9cRxRuorm1nD9YYCwqntVOtQcQVaygnhmt36K0KxPw98N5vYi6fdz85Gr7
-        hcgPPATAAi7uaVXDlE2YW/j/CvhFsEXw6S3W3B7xKUbJB39eCM0G/dblIMVPUzlSAbE
-        QjmVgJj32rIcVNRdpnnQBi5kng6/+VNERBpB8pa0=
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-        aws-us-west-2-caf-mail-1.web.codeaurora.org
+        id S1729719AbgIJCao (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Sep 2020 22:30:44 -0400
+Received: from mx.kolabnow.com ([95.128.36.40]:61662 "EHLO mx.kolabnow.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1730394AbgIJC2p (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 9 Sep 2020 22:28:45 -0400
+Received: from localhost (unknown [127.0.0.1])
+        by ext-mx-out003.mykolab.com (Postfix) with ESMTP id 171BA40CA0;
+        Thu, 10 Sep 2020 02:33:50 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
+        content-transfer-encoding:content-type:content-type:mime-version
+        :message-id:date:date:subject:subject:from:from:received
+        :received:received; s=dkim20160331; t=1599698028; x=1601512429;
+         bh=u0tD/dQH0K/+AzVwj70GEe2tWdob7q7dwNloaWvlhVY=; b=aQ6yzIdbg1gp
+        K96lG7iDSjUR1MhDqBQ8aSdxVtIiF9G33RYYrDrsxI6VvOXMcdDFAD+2XBB3cz5p
+        tUcOKSGXdgVMltc7Yi7LtdTnj7QktgwE2tOosBnS82YiWykz9rz4+4lAurhbtIBd
+        hv3xiFfB6xnj/eA6Pu+lSph4jHFTKrb0c8FVl3TkTYoJzIQ1FnP+02c8K4tXlWVX
+        kUQ+AhuXJT6K01Wv8ZaEVnBHEI64eBBiiecaJKE8mPG/OY5+hB8X3Wrt6ecUHp+c
+        oCvDOOLHQ3/wwGpkz5GY6ndowiBKUMh5VBrnn0MlrK9U6GpUrSj+sWzLgN+arVja
+        iPGei3U4AUGSm070yVOSuX2xFEyR6WtE0kZiFVVVKkvLh0VhYw48jxkTLuF24QQ0
+        lZlYV06NJEoVSsvm6fbUmdPOUSD6YhZ49/yOtmFUq/Xc9/RLmrcSTHoAbJs24FzB
+        jLKuXGuT34wTpvWVxvwA2HOosFvF+W74C+jCy25qXKGrtIqLxLxmuGw0oP/15o2E
+        xsqdt2bYLfIkIa2Opfi3p6eg5Mhs6MU3pxmLBFF7lvmfJVJ16YDfF+CFuXeSVMIx
+        dhgtQi1xCyKfSXzgixsczX/FKv8c9Hq1nRdjNeWbpUcJyVlAefF/E+tGwEjESS51
+        SvwzhMf7xzMZiCkCN7+JqB/zYsnPPCk=
+X-Virus-Scanned: amavisd-new at mykolab.com
+X-Spam-Flag: NO
+X-Spam-Score: -1.9
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00,SPF_FAIL,
-        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
-DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 6F4D7C433FE
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
-Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=fail smtp.mailfrom=sidgup@codeaurora.org
-From:   Siddharth Gupta <sidgup@codeaurora.org>
-To:     agross@kernel.org, bjorn.andersson@linaro.org, ohad@wizery.com
-Cc:     Siddharth Gupta <sidgup@codeaurora.org>,
-        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, tsoni@codeaurora.org,
-        psodagud@codeaurora.org, rishabhb@codeaurora.org,
-        linux-doc@vger.kernel.org, Gurbir Arora <gurbaror@codeaurora.org>
-Subject: [PATCH v3 2/3] remoteproc: qcom: Add capability to collect minidumps
-Date:   Thu, 10 Sep 2020 00:02:40 +0000
-Message-ID: <01010174755245f4-aebf6d48-64ce-4144-88ae-aefbb437370b-000000@us-west-2.amazonses.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1599696147-30585-1-git-send-email-sidgup@codeaurora.org>
-References: <1599696147-30585-1-git-send-email-sidgup@codeaurora.org>
-X-SES-Outgoing: 2020.09.10-54.240.27.185
-Feedback-ID: 1.us-west-2.CZuq2qbDmUIuT3qdvXlRHZZCpfZqZ4GtG9v3VKgRyF0=:AmazonSES
+X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
+        tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
+Received: from mx.kolabnow.com ([127.0.0.1])
+        by localhost (ext-mx-out003.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id ib7Uh48itTmi; Thu, 10 Sep 2020 02:33:48 +0200 (CEST)
+Received: from int-mx002.mykolab.com (unknown [10.9.13.2])
+        by ext-mx-out003.mykolab.com (Postfix) with ESMTPS id 700E740A9B;
+        Thu, 10 Sep 2020 02:33:48 +0200 (CEST)
+Received: from ext-subm002.mykolab.com (unknown [10.9.6.2])
+        by int-mx002.mykolab.com (Postfix) with ESMTPS id 08B5B2366;
+        Thu, 10 Sep 2020 02:33:48 +0200 (CEST)
+From:   Federico Vaga <federico.vaga@vaga.pv.it>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Federico Vaga <federico.vaga@vaga.pv.it>
+Subject: [PATCH] doc: fix file references
+Date:   Thu, 10 Sep 2020 02:33:37 +0200
+Message-Id: <20200910003337.9745-1-federico.vaga@vaga.pv.it>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch adds support for collecting minidump in the event of remoteproc
-crash. Parse the minidump table based on remoteproc's unique minidump-id,
-read all memory regions from the remoteproc's minidump table entry and
-expose the memory to userspace. The remoteproc platform driver can choose
-to collect a full/mini dump by specifying the coredump op.
+Patch generated with
 
-Signed-off-by: Rishabh Bhatnagar <rishabhb@codeaurora.org>
-Signed-off-by: Gurbir Arora <gurbaror@codeaurora.org>
-Signed-off-by: Siddharth Gupta <sidgup@codeaurora.org>
+    ./scripts/documentation-file-ref-check --fix
+
+Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
 ---
- drivers/remoteproc/qcom_minidump.h          |  64 +++++++++++++
- drivers/remoteproc/qcom_q6v5_pas.c          | 106 ++++++++++++++++++++-
- drivers/remoteproc/remoteproc_coredump.c    | 138 ++++++++++++++++++++++++++++
- drivers/remoteproc/remoteproc_elf_helpers.h |  27 ++++++
- include/linux/remoteproc.h                  |   1 +
- 5 files changed, 334 insertions(+), 2 deletions(-)
- create mode 100644 drivers/remoteproc/qcom_minidump.h
+ .../bindings/display/tilcdc/tilcdc.txt           |  2 +-
+ .../devicetree/bindings/media/i2c/tvp5150.txt    |  2 +-
+ .../bindings/soc/qcom/qcom,smd-rpm.yaml          |  2 +-
+ Documentation/scheduler/sched-capacity.rst       |  2 +-
+ Documentation/scheduler/sched-energy.rst         |  2 +-
+ Documentation/trace/kprobetrace.rst              |  2 +-
+ MAINTAINERS                                      | 16 ++++++++--------
+ drivers/net/appletalk/Kconfig                    |  2 +-
+ drivers/net/hamradio/scc.c                       |  2 +-
+ .../bindings/net/wireless/siliabs,wfx.txt        |  2 +-
+ init/Kconfig                                     |  2 +-
+ mm/Kconfig                                       |  2 +-
+ mm/nommu.c                                       |  2 +-
+ samples/kprobes/kprobe_example.c                 |  2 +-
+ samples/kprobes/kretprobe_example.c              |  2 +-
+ scripts/coccinelle/api/device_attr_show.cocci    |  2 +-
+ 16 files changed, 23 insertions(+), 23 deletions(-)
 
-diff --git a/drivers/remoteproc/qcom_minidump.h b/drivers/remoteproc/qcom_minidump.h
-new file mode 100644
-index 0000000..437e030
---- /dev/null
-+++ b/drivers/remoteproc/qcom_minidump.h
-@@ -0,0 +1,64 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*
-+ * Copyright (c) 2020, The Linux Foundation. All rights reserved.
-+ */
-+
-+#ifndef __QCOM_MINIDUMP_H
-+#define __QCOM_MINIDUMP_H
-+
-+#define MAX_NUM_OF_SS           10
-+#define MAX_REGION_NAME_LENGTH  16
-+#define SBL_MINIDUMP_SMEM_ID	602
-+#define MD_REGION_VALID		('V' << 24 | 'A' << 16 | 'L' << 8 | 'I' << 0)
-+#define MD_SS_ENCR_DONE		('D' << 24 | 'O' << 16 | 'N' << 8 | 'E' << 0)
-+#define MD_SS_ENABLED		('E' << 24 | 'N' << 16 | 'B' << 8 | 'L' << 0)
-+
-+/**
-+ * md_ss_region - Minidump region
-+ * @name		: Name of the region to be dumped
-+ * @seq_num:		: Use to differentiate regions with same name.
-+ * @md_valid		: This entry to be dumped (if set to 1)
-+ * @region_base_address	: Physical address of region to be dumped
-+ * @region_size		: Size of the region
-+ */
-+struct md_ss_region {
-+	char	name[MAX_REGION_NAME_LENGTH];
-+	u32	seq_num;
-+	u32	md_valid;
-+	u64	region_base_address;
-+	u64	region_size;
-+};
-+
-+/**
-+ * md_ss_toc: Subsystem's SMEM Table of content
-+ * @md_ss_toc_init : Subsystem toc init status
-+ * @md_ss_enable_status : if set to 1, this region would be copied during coredump
-+ * @encryption_status: Encryption status for this subsystem
-+ * @encryption_required : Decides to encrypt the subsystem regions or not
-+ * @ss_region_count : Number of regions added in this subsystem toc
-+ * @md_ss_smem_regions_baseptr : regions base pointer of the subsystem
-+ */
-+struct md_ss_toc {
-+	u32			md_ss_toc_init;
-+	u32			md_ss_enable_status;
-+	u32			encryption_status;
-+	u32			encryption_required;
-+	u32			ss_region_count;
-+	u64			md_ss_smem_regions_baseptr;
-+};
-+
-+/**
-+ * md_global_toc: Global Table of Content
-+ * @md_toc_init : Global Minidump init status
-+ * @md_revision : Minidump revision
-+ * @md_enable_status : Minidump enable status
-+ * @md_ss_toc : Array of subsystems toc
-+ */
-+struct md_global_toc {
-+	u32			md_toc_init;
-+	u32			md_revision;
-+	u32			md_enable_status;
-+	struct md_ss_toc	md_ss_toc[MAX_NUM_OF_SS];
-+};
-+
-+#endif
-diff --git a/drivers/remoteproc/qcom_q6v5_pas.c b/drivers/remoteproc/qcom_q6v5_pas.c
-index 3837f23..3879921 100644
---- a/drivers/remoteproc/qcom_q6v5_pas.c
-+++ b/drivers/remoteproc/qcom_q6v5_pas.c
-@@ -28,11 +28,15 @@
- #include "qcom_pil_info.h"
- #include "qcom_q6v5.h"
- #include "remoteproc_internal.h"
-+#include "qcom_minidump.h"
-+
-+static struct md_global_toc *g_md_toc;
+diff --git a/Documentation/devicetree/bindings/display/tilcdc/tilcdc.txt b/Documentation/devicetree/bindings/display/tilcdc/tilcdc.txt
+index 8b2a71395647..3e64075ac7ec 100644
+--- a/Documentation/devicetree/bindings/display/tilcdc/tilcdc.txt
++++ b/Documentation/devicetree/bindings/display/tilcdc/tilcdc.txt
+@@ -37,7 +37,7 @@ Optional nodes:
+    supports a single port with a single endpoint.
  
- struct adsp_data {
- 	int crash_reason_smem;
- 	const char *firmware_name;
- 	int pas_id;
-+	unsigned int minidump_id;
- 	bool has_aggre2_clk;
- 	bool auto_boot;
+  - See also Documentation/devicetree/bindings/display/tilcdc/panel.txt and
+-   Documentation/devicetree/bindings/display/bridge/ti,tfp410.txt for connecting
++   Documentation/devicetree/bindings/display/bridge/ti,tfp410.yaml for connecting
+    tfp410 DVI encoder or lcd panel to lcdc
  
-@@ -63,6 +67,7 @@ struct qcom_adsp {
- 	int proxy_pd_count;
+ [1] There is an errata about AM335x color wiring. For 16-bit color mode
+diff --git a/Documentation/devicetree/bindings/media/i2c/tvp5150.txt b/Documentation/devicetree/bindings/media/i2c/tvp5150.txt
+index 6c88ce858d08..719b2995dc17 100644
+--- a/Documentation/devicetree/bindings/media/i2c/tvp5150.txt
++++ b/Documentation/devicetree/bindings/media/i2c/tvp5150.txt
+@@ -56,7 +56,7 @@ Optional Connector Properties:
+                   instead of using the autodetection mechnism. Please look at
+                   [1] for more information.
  
- 	int pas_id;
-+	unsigned int minidump_id;
- 	int crash_reason_smem;
- 	bool has_aggre2_clk;
- 	const char *info_name;
-@@ -116,6 +121,88 @@ static void adsp_pds_disable(struct qcom_adsp *adsp, struct device **pds,
- 	}
- }
+-[1] Documentation/devicetree/bindings/display/connector/analog-tv-connector.txt.
++[1] Documentation/devicetree/bindings/display/connector/analog-tv-connector.yaml.
  
-+static void adsp_add_minidump_segments(struct rproc *rproc, struct md_ss_toc *minidump_ss)
-+{
-+	struct md_ss_region __iomem *region_info;
-+	int seg_cnt = 0, i;
-+	void __iomem *ptr;
-+	dma_addr_t da;
-+	size_t size;
-+	char *name;
-+
-+	seg_cnt = minidump_ss->ss_region_count;
-+	ptr = ioremap((unsigned long)minidump_ss->md_ss_smem_regions_baseptr,
-+		      seg_cnt * sizeof(struct md_ss_region));
-+
-+	if (!ptr)
-+		return;
-+
-+	region_info = ptr;
-+
-+	if (!list_empty(&rproc->dump_segments)) {
-+		dev_info(&rproc->dev, "dump segment list already populated\n");
-+		goto unmap_iomem;
-+	}
-+
-+	for (i = 0; i < seg_cnt; i++) {
-+		if (__raw_readl(&region_info->md_valid) == MD_REGION_VALID) {
-+			name = kmalloc(MAX_REGION_NAME_LENGTH, GFP_KERNEL);
-+			memcpy(name, region_info->name, sizeof(region_info->name));
-+			da = region_info->region_base_address;
-+			size = region_info->region_size;
-+			rproc_coredump_add_custom_segment(rproc, da, size, NULL, name);
-+		}
-+		region_info++;
-+	}
-+
-+unmap_iomem:
-+	iounmap(ptr);
-+}
-+
-+static void adsp_dump(struct rproc *rproc)
-+{
-+	struct qcom_adsp *adsp = (struct qcom_adsp *)rproc->priv;
-+	struct md_ss_toc *minidump_ss;
-+	size_t size;
-+
-+	/* Get Global minidump ToC*/
-+	if (!g_md_toc)
-+		g_md_toc = qcom_smem_get(QCOM_SMEM_HOST_ANY,
-+					 SBL_MINIDUMP_SMEM_ID, &size);
-+
-+	/* check if global table pointer exists and init is set */
-+	if (IS_ERR(g_md_toc) || !(g_md_toc->md_toc_init)) {
-+		dev_err(&rproc->dev, "SMEM is not initialized.\n");
-+		return;
-+	}
-+
-+	/* Get subsystem table of contents using the minidump id */
-+	minidump_ss = &g_md_toc->md_ss_toc[adsp->minidump_id];
-+
-+	/**
-+	 * Collect minidump if SS ToC is valid and segment table
-+	 * is initialized in memory and encryption status is set.
-+	 */
-+	if (minidump_ss->md_ss_smem_regions_baseptr == 0 ||
-+	    minidump_ss->md_ss_toc_init != 1 ||
-+	    minidump_ss->md_ss_enable_status != MD_SS_ENABLED ||
-+	    minidump_ss->encryption_status != MD_SS_ENCR_DONE) {
-+		dev_err(&rproc->dev, "Minidump not ready!! Aborting\n");
-+		return;
-+	}
-+
-+	adsp_add_minidump_segments(rproc, minidump_ss);
-+	rproc_minidump(rproc);
-+}
-+
-+void adsp_priv_cleanup(struct rproc *rproc)
-+{
-+	struct rproc_dump_segment *segment;
-+
-+	list_for_each_entry(segment, &rproc->dump_segments, node)
-+		kfree(segment->priv);
-+}
-+
- static int adsp_load(struct rproc *rproc, const struct firmware *fw)
- {
- 	struct qcom_adsp *adsp = (struct qcom_adsp *)rproc->priv;
-@@ -258,6 +345,15 @@ static const struct rproc_ops adsp_ops = {
- 	.panic = adsp_panic,
- };
+ Example - three input sources:
+ #include <dt-bindings/display/sdtv-standards.h>
+diff --git a/Documentation/devicetree/bindings/soc/qcom/qcom,smd-rpm.yaml b/Documentation/devicetree/bindings/soc/qcom/qcom,smd-rpm.yaml
+index 468d658ce3e7..2684f22a1d85 100644
+--- a/Documentation/devicetree/bindings/soc/qcom/qcom,smd-rpm.yaml
++++ b/Documentation/devicetree/bindings/soc/qcom/qcom,smd-rpm.yaml
+@@ -20,7 +20,7 @@ description: |
+   present and this subnode may contain children that designate regulator
+   resources.
  
-+static const struct rproc_ops adsp_minidump_ops = {
-+	.start = adsp_start,
-+	.stop = adsp_stop,
-+	.da_to_va = adsp_da_to_va,
-+	.load = adsp_load,
-+	.coredump = adsp_dump,
-+	.priv_cleanup = adsp_priv_cleanup,
-+};
-+
- static int adsp_init_clock(struct qcom_adsp *adsp)
- {
- 	int ret;
-@@ -398,8 +494,13 @@ static int adsp_probe(struct platform_device *pdev)
- 	if (ret < 0 && ret != -EINVAL)
- 		return ret;
+-  Refer to Documentation/devicetree/bindings/regulator/qcom,smd-rpm-regulator.txt
++  Refer to Documentation/devicetree/bindings/regulator/qcom,smd-rpm-regulator.yaml
+   for information on the regulator subnodes that can exist under the
+   rpm_requests.
  
--	rproc = rproc_alloc(&pdev->dev, pdev->name, &adsp_ops,
--			    fw_name, sizeof(*adsp));
-+	if (desc->minidump_id)
-+		rproc = rproc_alloc(&pdev->dev, pdev->name, &adsp_minidump_ops, fw_name,
-+				    sizeof(*adsp));
-+	else
-+		rproc = rproc_alloc(&pdev->dev, pdev->name, &adsp_ops, fw_name,
-+				    sizeof(*adsp));
-+
- 	if (!rproc) {
- 		dev_err(&pdev->dev, "unable to allocate remoteproc\n");
- 		return -ENOMEM;
-@@ -411,6 +512,7 @@ static int adsp_probe(struct platform_device *pdev)
- 	adsp = (struct qcom_adsp *)rproc->priv;
- 	adsp->dev = &pdev->dev;
- 	adsp->rproc = rproc;
-+	adsp->minidump_id = desc->minidump_id;
- 	adsp->pas_id = desc->pas_id;
- 	adsp->has_aggre2_clk = desc->has_aggre2_clk;
- 	adsp->info_name = desc->sysmon_name;
-diff --git a/drivers/remoteproc/remoteproc_coredump.c b/drivers/remoteproc/remoteproc_coredump.c
-index bb15a29..0495389 100644
---- a/drivers/remoteproc/remoteproc_coredump.c
-+++ b/drivers/remoteproc/remoteproc_coredump.c
-@@ -13,6 +13,8 @@
- #include "remoteproc_internal.h"
- #include "remoteproc_elf_helpers.h"
+diff --git a/Documentation/scheduler/sched-capacity.rst b/Documentation/scheduler/sched-capacity.rst
+index 00bf0d011e2a..9b7cbe43b2d1 100644
+--- a/Documentation/scheduler/sched-capacity.rst
++++ b/Documentation/scheduler/sched-capacity.rst
+@@ -365,7 +365,7 @@ giving it a high uclamp.min value.
+ .. note::
  
-+#define MAX_STRTBL_SIZE 512
-+
- struct rproc_coredump_state {
- 	struct rproc *rproc;
- 	void *header;
-@@ -27,6 +29,9 @@ void rproc_coredump_cleanup(struct rproc *rproc)
- {
- 	struct rproc_dump_segment *entry, *tmp;
+   Wakeup CPU selection in CFS can be eclipsed by Energy Aware Scheduling
+-  (EAS), which is described in Documentation/scheduling/sched-energy.rst.
++  (EAS), which is described in Documentation/scheduler/sched-energy.rst.
  
-+	if (rproc->ops->priv_cleanup)
-+		rproc->ops->priv_cleanup(rproc);
-+
- 	list_for_each_entry_safe(entry, tmp, &rproc->dump_segments, node) {
- 		list_del(&entry->node);
- 		kfree(entry);
-@@ -323,3 +328,136 @@ void rproc_coredump(struct rproc *rproc)
- 	 */
- 	wait_for_completion(&dump_state.dump_done);
- }
-+
-+/**
-+ * rproc_minidump() - perform minidump
-+ * @rproc:	rproc handle
-+ *
-+ * This function will generate an ELF header for the registered sections of
-+ * segments and create a devcoredump device associated with rproc. Based on
-+ * the coredump configuration this function will directly copy the segments
-+ * from device memory to userspace or copy segments from device memory to
-+ * a separate buffer, which can then be read by userspace.
-+ * The first approach avoids using extra vmalloc memory. But it will stall
-+ * recovery flow until dump is read by userspace.
-+ */
-+void rproc_minidump(struct rproc *rproc)
-+{
-+	struct rproc_dump_segment *segment;
-+	void *shdr;
-+	void *ehdr;
-+	size_t data_size;
-+	size_t offset;
-+	void *data;
-+	u8 class = rproc->elf_class;
-+	int shnum;
-+	struct rproc_coredump_state dump_state;
-+	unsigned int dump_conf = rproc->dump_conf;
-+	char *str_tbl = "STR_TBL";
-+
-+	if (list_empty(&rproc->dump_segments) ||
-+	    dump_conf == RPROC_COREDUMP_DISABLED)
-+		return;
-+
-+	if (class == ELFCLASSNONE) {
-+		dev_err(&rproc->dev, "Elf class is not set\n");
-+		return;
-+	}
-+
-+	/*
-+	 * We allocate two extra section headers. The first one is null.
-+	 * Second section header is for the string table. Also space is
-+	 * allocated for string table.
-+	 */
-+	data_size = elf_size_of_hdr(class) + 2 * elf_size_of_shdr(class) +
-+		    MAX_STRTBL_SIZE;
-+	shnum = 2;
-+
-+	list_for_each_entry(segment, &rproc->dump_segments, node) {
-+		data_size += elf_size_of_shdr(class);
-+		if (dump_conf == RPROC_COREDUMP_DEFAULT)
-+			data_size += segment->size;
-+		shnum++;
-+	}
-+
-+	data = vmalloc(data_size);
-+	if (!data)
-+		return;
-+
-+	ehdr = data;
-+	memset(ehdr, 0, elf_size_of_hdr(class));
-+	/* e_ident field is common for both elf32 and elf64 */
-+	elf_hdr_init_ident(ehdr, class);
-+
-+	elf_hdr_set_e_type(class, ehdr, ET_CORE);
-+	elf_hdr_set_e_machine(class, ehdr, rproc->elf_machine);
-+	elf_hdr_set_e_version(class, ehdr, EV_CURRENT);
-+	elf_hdr_set_e_entry(class, ehdr, rproc->bootaddr);
-+	elf_hdr_set_e_shoff(class, ehdr, elf_size_of_hdr(class));
-+	elf_hdr_set_e_ehsize(class, ehdr, elf_size_of_hdr(class));
-+	elf_hdr_set_e_shentsize(class, ehdr, elf_size_of_shdr(class));
-+	elf_hdr_set_e_shnum(class, ehdr, shnum);
-+	elf_hdr_set_e_shstrndx(class, ehdr, 1);
-+
-+	/* Set the first section header as null and move to the next one. */
-+	shdr = data + elf_hdr_get_e_shoff(class, ehdr);
-+	memset(shdr, 0, elf_size_of_shdr(class));
-+	shdr += elf_size_of_shdr(class);
-+
-+	/* Initialize the string table. */
-+	offset = elf_hdr_get_e_shoff(class, ehdr) +
-+		 elf_size_of_shdr(class) * elf_hdr_get_e_shnum(class, ehdr);
-+	memset(data + offset, 0, MAX_STRTBL_SIZE);
-+
-+	/* Fill in the string table section header. */
-+	memset(shdr, 0, elf_size_of_shdr(class));
-+	elf_shdr_set_sh_type(class, shdr, SHT_STRTAB);
-+	elf_shdr_set_sh_offset(class, shdr, offset);
-+	elf_shdr_set_sh_size(class, shdr, MAX_STRTBL_SIZE);
-+	elf_shdr_set_sh_entsize(class, shdr, 0);
-+	elf_shdr_set_sh_flags(class, shdr, 0);
-+	elf_shdr_set_sh_name(class, shdr, set_section_name(str_tbl, ehdr, class));
-+	offset += elf_shdr_get_sh_size(class, shdr);
-+	shdr += elf_size_of_shdr(class);
-+
-+	list_for_each_entry(segment, &rproc->dump_segments, node) {
-+		memset(shdr, 0, elf_size_of_shdr(class));
-+		elf_shdr_set_sh_type(class, shdr, SHT_PROGBITS);
-+		elf_shdr_set_sh_offset(class, shdr, offset);
-+		elf_shdr_set_sh_addr(class, shdr, segment->da);
-+		elf_shdr_set_sh_size(class, shdr, segment->size);
-+		elf_shdr_set_sh_entsize(class, shdr, 0);
-+		elf_shdr_set_sh_flags(class, shdr, SHF_WRITE);
-+		elf_shdr_set_sh_name(class, shdr,
-+				     set_section_name(segment->priv, ehdr, class));
-+
-+		/* No need to copy segments for inline dumps */
-+		if (dump_conf == RPROC_COREDUMP_DEFAULT)
-+			rproc_copy_segment(rproc, data + offset, segment, 0,
-+					   segment->size);
-+		offset += elf_shdr_get_sh_size(class, shdr);
-+		shdr += elf_size_of_shdr(class);
-+	}
-+
-+	if (dump_conf == RPROC_COREDUMP_DEFAULT) {
-+		dev_coredumpv(&rproc->dev, data, data_size, GFP_KERNEL);
-+		return;
-+	}
-+
-+	/* Initialize the dump state struct to be used by rproc_coredump_read */
-+	dump_state.rproc = rproc;
-+	dump_state.header = data;
-+	init_completion(&dump_state.dump_done);
-+
-+	dev_coredumpm(&rproc->dev, NULL, &dump_state, data_size, GFP_KERNEL,
-+		      rproc_coredump_read, rproc_coredump_free);
-+
-+	/* Wait until the dump is read and free is called. Data is freed
-+	 * by devcoredump framework automatically after 5 minutes.
-+	 */
-+	wait_for_completion(&dump_state.dump_done);
-+
-+	list_for_each_entry(segment, &rproc->dump_segments, node)
-+		kfree(segment->priv);
-+}
-+EXPORT_SYMBOL(rproc_minidump);
-diff --git a/drivers/remoteproc/remoteproc_elf_helpers.h b/drivers/remoteproc/remoteproc_elf_helpers.h
-index 4b6be7b..d83ebca 100644
---- a/drivers/remoteproc/remoteproc_elf_helpers.h
-+++ b/drivers/remoteproc/remoteproc_elf_helpers.h
-@@ -11,6 +11,7 @@
- #include <linux/elf.h>
- #include <linux/types.h>
+ 5.1.3 Load balancing
+ ~~~~~~~~~~~~~~~~~~~~
+diff --git a/Documentation/scheduler/sched-energy.rst b/Documentation/scheduler/sched-energy.rst
+index 78f850778982..001e09c95e1d 100644
+--- a/Documentation/scheduler/sched-energy.rst
++++ b/Documentation/scheduler/sched-energy.rst
+@@ -331,7 +331,7 @@ asymmetric CPU topologies for now. This requirement is checked at run-time by
+ looking for the presence of the SD_ASYM_CPUCAPACITY flag when the scheduling
+ domains are built.
  
-+#define MAX_NAME_LENGTH 16
- /**
-  * fw_elf_get_class - Get elf class
-  * @fw: the ELF firmware image
-@@ -65,6 +66,7 @@ ELF_GEN_FIELD_GET_SET(hdr, e_type, u16)
- ELF_GEN_FIELD_GET_SET(hdr, e_version, u32)
- ELF_GEN_FIELD_GET_SET(hdr, e_ehsize, u32)
- ELF_GEN_FIELD_GET_SET(hdr, e_phentsize, u16)
-+ELF_GEN_FIELD_GET_SET(hdr, e_shentsize, u16)
+-See Documentation/sched/sched-capacity.rst for requirements to be met for this
++See Documentation/scheduler/sched-capacity.rst for requirements to be met for this
+ flag to be set in the sched_domain hierarchy.
  
- ELF_GEN_FIELD_GET_SET(phdr, p_paddr, u64)
- ELF_GEN_FIELD_GET_SET(phdr, p_vaddr, u64)
-@@ -74,6 +76,9 @@ ELF_GEN_FIELD_GET_SET(phdr, p_type, u32)
- ELF_GEN_FIELD_GET_SET(phdr, p_offset, u64)
- ELF_GEN_FIELD_GET_SET(phdr, p_flags, u32)
- ELF_GEN_FIELD_GET_SET(phdr, p_align, u64)
-+ELF_GEN_FIELD_GET_SET(shdr, sh_type, u32)
-+ELF_GEN_FIELD_GET_SET(shdr, sh_flags, u32)
-+ELF_GEN_FIELD_GET_SET(shdr, sh_entsize, u16)
+ Please note that EAS is not fundamentally incompatible with SMP, but no
+diff --git a/Documentation/trace/kprobetrace.rst b/Documentation/trace/kprobetrace.rst
+index c1709165c553..10850a9e9af3 100644
+--- a/Documentation/trace/kprobetrace.rst
++++ b/Documentation/trace/kprobetrace.rst
+@@ -40,7 +40,7 @@ Synopsis of kprobe_events
+  MEMADDR	: Address where the probe is inserted.
+  MAXACTIVE	: Maximum number of instances of the specified function that
+ 		  can be probed simultaneously, or 0 for the default value
+-		  as defined in Documentation/staging/kprobes.rst section 1.3.1.
++		  as defined in Documentation/trace/kprobes.rst section 1.3.1.
  
- ELF_GEN_FIELD_GET_SET(shdr, sh_size, u64)
- ELF_GEN_FIELD_GET_SET(shdr, sh_offset, u64)
-@@ -93,4 +98,26 @@ ELF_STRUCT_SIZE(shdr)
- ELF_STRUCT_SIZE(phdr)
- ELF_STRUCT_SIZE(hdr)
+  FETCHARGS	: Arguments. Each probe can have up to 128 args.
+   %REG		: Fetch register REG
+diff --git a/MAINTAINERS b/MAINTAINERS
+index dfffa1f534fa..7f4630828c41 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1523,7 +1523,7 @@ L:	linux-arm-kernel@lists.infradead.org (moderated for non-subscribers)
+ S:	Maintained
+ F:	Documentation/devicetree/bindings/arm/actions.yaml
+ F:	Documentation/devicetree/bindings/clock/actions,owl-cmu.txt
+-F:	Documentation/devicetree/bindings/dma/owl-dma.txt
++F:	Documentation/devicetree/bindings/dma/owl-dma.yaml
+ F:	Documentation/devicetree/bindings/i2c/i2c-owl.txt
+ F:	Documentation/devicetree/bindings/mmc/owl-mmc.yaml
+ F:	Documentation/devicetree/bindings/pinctrl/actions,s900-pinctrl.txt
+@@ -5567,7 +5567,7 @@ DRM DRIVER FOR ROCKTECH JH057N00900 PANELS
+ M:	Guido Günther <agx@sigxcpu.org>
+ R:	Purism Kernel Team <kernel@puri.sm>
+ S:	Maintained
+-F:	Documentation/devicetree/bindings/display/panel/rocktech,jh057n00900.txt
++F:	Documentation/devicetree/bindings/display/panel/rocktech,jh057n00900.yaml
+ F:	drivers/gpu/drm/panel/panel-rocktech-jh057n00900.c
  
-+static inline unsigned int set_section_name(const char *name, void *ehdr,
-+					    u8 class)
-+{
-+	u16 shstrndx = elf_hdr_get_e_shstrndx(class, ehdr);
-+	void *shdr;
-+	char *strtab;
-+	static int strtable_idx = 1;
-+	int idx, ret = 0;
-+
-+	shdr = ehdr + elf_size_of_hdr(class) + shstrndx * elf_size_of_shdr(class);
-+	strtab = ehdr + elf_shdr_get_sh_offset(class, shdr);
-+	idx = strtable_idx;
-+	if (!strtab || !name)
-+		return 0;
-+
-+	ret = idx;
-+	idx += strlcpy((strtab + idx), name, MAX_NAME_LENGTH);
-+	strtable_idx = idx + 1;
-+
-+	return ret;
-+}
-+
- #endif /* REMOTEPROC_ELF_LOADER_H */
-diff --git a/include/linux/remoteproc.h b/include/linux/remoteproc.h
-index a489aec..b7a5f93 100644
---- a/include/linux/remoteproc.h
-+++ b/include/linux/remoteproc.h
-@@ -658,6 +658,7 @@ rproc_of_resm_mem_entry_init(struct device *dev, u32 of_resm_idx, size_t len,
- int rproc_boot(struct rproc *rproc);
- void rproc_shutdown(struct rproc *rproc);
- void rproc_report_crash(struct rproc *rproc, enum rproc_crash_type type);
-+void rproc_minidump(struct rproc *rproc);
- int rproc_coredump_add_segment(struct rproc *rproc, dma_addr_t da, size_t size);
- int rproc_coredump_add_custom_segment(struct rproc *rproc,
- 				      dma_addr_t da, size_t size,
+ DRM DRIVER FOR SAVAGE VIDEO CARDS
+@@ -5815,7 +5815,7 @@ L:	linux-renesas-soc@vger.kernel.org
+ S:	Supported
+ T:	git git://linuxtv.org/pinchartl/media drm/du/next
+ F:	Documentation/devicetree/bindings/display/bridge/renesas,dw-hdmi.txt
+-F:	Documentation/devicetree/bindings/display/bridge/renesas,lvds.txt
++F:	Documentation/devicetree/bindings/display/bridge/renesas,lvds.yaml
+ F:	Documentation/devicetree/bindings/display/renesas,du.txt
+ F:	drivers/gpu/drm/rcar-du/
+ F:	drivers/gpu/drm/shmobile/
+@@ -6942,7 +6942,7 @@ M:	Oleksij Rempel <o.rempel@pengutronix.de>
+ R:	Pengutronix Kernel Team <kernel@pengutronix.de>
+ L:	linux-i2c@vger.kernel.org
+ S:	Maintained
+-F:	Documentation/devicetree/bindings/i2c/i2c-imx.txt
++F:	Documentation/devicetree/bindings/i2c/i2c-imx.yaml
+ F:	drivers/i2c/busses/i2c-imx.c
+ 
+ FREESCALE IMX LPI2C DRIVER
+@@ -6950,7 +6950,7 @@ M:	Dong Aisheng <aisheng.dong@nxp.com>
+ L:	linux-i2c@vger.kernel.org
+ L:	linux-imx@nxp.com
+ S:	Maintained
+-F:	Documentation/devicetree/bindings/i2c/i2c-imx-lpi2c.txt
++F:	Documentation/devicetree/bindings/i2c/i2c-imx-lpi2c.yaml
+ F:	drivers/i2c/busses/i2c-imx-lpi2c.c
+ 
+ FREESCALE QORIQ DPAA ETHERNET DRIVER
+@@ -11581,7 +11581,7 @@ MIPS GENERIC PLATFORM
+ M:	Paul Burton <paulburton@kernel.org>
+ L:	linux-mips@vger.kernel.org
+ S:	Supported
+-F:	Documentation/devicetree/bindings/power/mti,mips-cpc.txt
++F:	Documentation/devicetree/bindings/power/mti,mips-cpc.yaml
+ F:	arch/mips/generic/
+ F:	arch/mips/tools/generic-board-config.sh
+ 
+@@ -12435,7 +12435,7 @@ NXP SGTL5000 DRIVER
+ M:	Fabio Estevam <festevam@gmail.com>
+ L:	alsa-devel@alsa-project.org (moderated for non-subscribers)
+ S:	Maintained
+-F:	Documentation/devicetree/bindings/sound/sgtl5000.txt
++F:	Documentation/devicetree/bindings/sound/sgtl5000.yaml
+ F:	sound/soc/codecs/sgtl5000*
+ 
+ NXP SJA1105 ETHERNET SWITCH DRIVER
+@@ -14208,7 +14208,7 @@ QLOGIC QLA3XXX NETWORK DRIVER
+ M:	GR-Linux-NIC-Dev@marvell.com
+ L:	netdev@vger.kernel.org
+ S:	Supported
+-F:	Documentation/networking/device_drivers/ethernet/qlogic/LICENSE.qla3xxx
++F:	Documentation/networking/device_drivers/qlogic/LICENSE.qla3xxx
+ F:	drivers/net/ethernet/qlogic/qla3xxx.*
+ 
+ QLOGIC QLA4XXX iSCSI DRIVER
+diff --git a/drivers/net/appletalk/Kconfig b/drivers/net/appletalk/Kconfig
+index d4f22a2e5be4..43918398f0d3 100644
+--- a/drivers/net/appletalk/Kconfig
++++ b/drivers/net/appletalk/Kconfig
+@@ -48,7 +48,7 @@ config LTPC
+ 	  If you are in doubt, this card is the one with the 65C02 chip on it.
+ 	  You also need version 1.3.3 or later of the netatalk package.
+ 	  This driver is experimental, which means that it may not work.
+-	  See the file <file:Documentation/networking/ltpc.rst>.
++	  See the file <file:Documentation/networking/device_drivers/appletalk/ltpc.rst>.
+ 
+ config COPS
+ 	tristate "COPS LocalTalk PC support"
+diff --git a/drivers/net/hamradio/scc.c b/drivers/net/hamradio/scc.c
+index 1e915871baa7..36eeb80406f2 100644
+--- a/drivers/net/hamradio/scc.c
++++ b/drivers/net/hamradio/scc.c
+@@ -7,7 +7,7 @@
+  *            ------------------
+  *
+  * You can find a subset of the documentation in 
+- * Documentation/networking/device_drivers/wan/z8530drv.rst.
++ * Documentation/networking/device_drivers/hamradio/z8530drv.rst.
+  */
+ 
+ /*
+diff --git a/drivers/staging/wfx/Documentation/devicetree/bindings/net/wireless/siliabs,wfx.txt b/drivers/staging/wfx/Documentation/devicetree/bindings/net/wireless/siliabs,wfx.txt
+index 17db67559f5e..362af9f0b7e3 100644
+--- a/drivers/staging/wfx/Documentation/devicetree/bindings/net/wireless/siliabs,wfx.txt
++++ b/drivers/staging/wfx/Documentation/devicetree/bindings/net/wireless/siliabs,wfx.txt
+@@ -51,7 +51,7 @@ Required properties:
+ In addition, it is recommended to declare a mmc-pwrseq on SDIO host above WFx.
+ Without it, you may encounter issues with warm boot. mmc-pwrseq should be
+ compatible with mmc-pwrseq-simple. Please consult
+-Documentation/devicetree/bindings/mmc/mmc-pwrseq-simple.txt for more
++Documentation/devicetree/bindings/mmc/mmc-pwrseq-simple.yaml for more
+ information.
+ 
+ Example:
+diff --git a/init/Kconfig b/init/Kconfig
+index d6a0b31b13dc..c0f56e455dce 100644
+--- a/init/Kconfig
++++ b/init/Kconfig
+@@ -1986,7 +1986,7 @@ config MMAP_ALLOW_UNINITIALIZED
+ 	  userspace.  Since that isn't generally a problem on no-MMU systems,
+ 	  it is normally safe to say Y here.
+ 
+-	  See Documentation/mm/nommu-mmap.rst for more information.
++	  See Documentation/admin-guide/mm/nommu-mmap.rst for more information.
+ 
+ config SYSTEM_DATA_VERIFICATION
+ 	def_bool n
+diff --git a/mm/Kconfig b/mm/Kconfig
+index 6c974888f86f..e3ee7b32c637 100644
+--- a/mm/Kconfig
++++ b/mm/Kconfig
+@@ -383,7 +383,7 @@ config NOMMU_INITIAL_TRIM_EXCESS
+ 	  This option specifies the initial value of this option.  The default
+ 	  of 1 says that all excess pages should be trimmed.
+ 
+-	  See Documentation/mm/nommu-mmap.rst for more information.
++	  See Documentation/admin-guide/mm/nommu-mmap.rst for more information.
+ 
+ config TRANSPARENT_HUGEPAGE
+ 	bool "Transparent Hugepage Support"
+diff --git a/mm/nommu.c b/mm/nommu.c
+index 75a327149af1..0df7ca321314 100644
+--- a/mm/nommu.c
++++ b/mm/nommu.c
+@@ -5,7 +5,7 @@
+  *  Replacement code for mm functions to support CPU's that don't
+  *  have any form of memory management unit (thus no virtual memory).
+  *
+- *  See Documentation/mm/nommu-mmap.rst
++ *  See Documentation/admin-guide/mm/nommu-mmap.rst
+  *
+  *  Copyright (c) 2004-2008 David Howells <dhowells@redhat.com>
+  *  Copyright (c) 2000-2003 David McCullough <davidm@snapgear.com>
+diff --git a/samples/kprobes/kprobe_example.c b/samples/kprobes/kprobe_example.c
+index 240f2435ce6f..8b718943d603 100644
+--- a/samples/kprobes/kprobe_example.c
++++ b/samples/kprobes/kprobe_example.c
+@@ -5,7 +5,7 @@
+  * stack trace and selected registers when _do_fork() is called.
+  *
+  * For more information on theory of operation of kprobes, see
+- * Documentation/staging/kprobes.rst
++ * Documentation/trace/kprobes.rst
+  *
+  * You will see the trace data in /var/log/messages and on the console
+  * whenever _do_fork() is invoked to create a new process.
+diff --git a/samples/kprobes/kretprobe_example.c b/samples/kprobes/kretprobe_example.c
+index 78a2da6fb3cd..69fd1235108a 100644
+--- a/samples/kprobes/kretprobe_example.c
++++ b/samples/kprobes/kretprobe_example.c
+@@ -11,7 +11,7 @@
+  * If no func_name is specified, _do_fork is instrumented
+  *
+  * For more information on theory of operation of kretprobes, see
+- * Documentation/staging/kprobes.rst
++ * Documentation/trace/kprobes.rst
+  *
+  * Build and insert the kernel module as done in the kprobe example.
+  * You will see the trace data in /var/log/messages and on the console
+diff --git a/scripts/coccinelle/api/device_attr_show.cocci b/scripts/coccinelle/api/device_attr_show.cocci
+index d8ec4bb8ac41..a28dc061653a 100644
+--- a/scripts/coccinelle/api/device_attr_show.cocci
++++ b/scripts/coccinelle/api/device_attr_show.cocci
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0-only
+ ///
+-/// From Documentation/filesystems/sysfs.txt:
++/// From Documentation/filesystems/sysfs.rst:
+ ///  show() must not use snprintf() when formatting the value to be
+ ///  returned to user space. If you can guarantee that an overflow
+ ///  will never happen you can use sprintf() otherwise you must use
 -- 
-Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
-a Linux Foundation Collaborative Project
+2.20.1
 
