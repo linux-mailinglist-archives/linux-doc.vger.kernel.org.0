@@ -2,69 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 47022263B6D
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 05:27:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 71420263B85
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Sep 2020 05:42:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730251AbgIJD0p (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Sep 2020 23:26:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37336 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726642AbgIJD0T (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 23:26:19 -0400
-Received: from merlin.infradead.org (merlin.infradead.org [IPv6:2001:8b0:10b:1231::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 49F87C0613ED;
-        Wed,  9 Sep 2020 20:26:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:MIME-Version:
-        References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-        Content-Type:Content-ID:Content-Description;
-        bh=PO7aEW0T3IkS0F8WxlPuWO3uzY5WLy4/PEV7R6Fm92Y=; b=YBzOWM+473iDNGf0tqrCsfnVVg
-        6EICnUdAiPaGy31jDdtvyC+TL3FbzGxCBWZk0qWQYWqJZsopT//UK/PVydlfeUaJX0cxTtPcEeJTV
-        /Gbzk1GaavQ9NcH6lu3C3cHNnFa3fAlbv2yGZiRtYKV9jdCoTV6yBXh/kxbLoU4HPqmwGHMC5d4kv
-        1VgVfS4150lf5cF93/cCK9/CwUa/ptPhvQ/RQbNttsRR4amBp50VBMBxGTH8tKfYbG97USo4lR1gq
-        xV9H7XbW+bN5JUw1w07BDl5vlqYRP+pp3PosEmMKb3Zv1GR8PP84aLhU12bo8yp4jPVgCydED9bHo
-        Zazn+ZNA==;
-Received: from [2601:1c0:6280:3f0::19c2] (helo=smtpauth.infradead.org)
-        by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kGDE0-000659-TW; Thu, 10 Sep 2020 03:26:17 +0000
-From:   Randy Dunlap <rdunlap@infradead.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Randy Dunlap <rdunlap@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 3/3] Documentation/admin-guide: kernel-parameters: add early_param() to list of types of boot parameters
-Date:   Wed,  9 Sep 2020 20:26:06 -0700
-Message-Id: <20200910032606.7355-4-rdunlap@infradead.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20200910032606.7355-1-rdunlap@infradead.org>
-References: <20200910032606.7355-1-rdunlap@infradead.org>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1728971AbgIJDmQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Sep 2020 23:42:16 -0400
+Received: from a27-187.smtp-out.us-west-2.amazonses.com ([54.240.27.187]:53292
+        "EHLO a27-187.smtp-out.us-west-2.amazonses.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1725773AbgIJDmP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Sep 2020 23:42:15 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+        s=zsmsymrwgfyinv5wlfyidntwsjeeldzt; d=codeaurora.org; t=1599696158;
+        h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References;
+        bh=k0CVrHNZHjKDxCYHpx5Zfcww4H7NJod+HjFj1v8y6r8=;
+        b=OPo6HIRRoh+itG87IiC0xOtfzjIfYwaDz5cUI5+ORDXexmX+4WkcMOW+C1jRdP5/
+        dvbaqsNaMfff0lMTZOkalczdvBO5coX+79NyzjqpHzXUj1ijH8myOM/m5iuwdBa5M2G
+        xrq9MWVsfR5Doa1sJVYjouJM6X9g1zT3HNb1j74Q=
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/simple;
+        s=hsbnp7p3ensaochzwyq5wwmceodymuwv; d=amazonses.com; t=1599696158;
+        h=From:To:Cc:Subject:Date:Message-Id:In-Reply-To:References:Feedback-ID;
+        bh=k0CVrHNZHjKDxCYHpx5Zfcww4H7NJod+HjFj1v8y6r8=;
+        b=LThhPK0i3L1gsbZJ1rGSfYvhkH1wz8uhapBdXIUZv7FAXjloJTrahEh405vksW1I
+        5OV2DdbMHR+M7MV69n8vu+V5gUVYf721iZasYaHOxKxfQvrZFPrkxtKiFnQPeF81Byg
+        xtClDm4wbxKKw0Hon6kn0/H60zmHqYRO4okKeHZE=
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+        aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00,SPF_FAIL,
+        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 98448C433C6
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=fail smtp.mailfrom=sidgup@codeaurora.org
+From:   Siddharth Gupta <sidgup@codeaurora.org>
+To:     agross@kernel.org, bjorn.andersson@linaro.org, ohad@wizery.com
+Cc:     Siddharth Gupta <sidgup@codeaurora.org>,
+        linux-remoteproc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, tsoni@codeaurora.org,
+        psodagud@codeaurora.org, rishabhb@codeaurora.org,
+        linux-doc@vger.kernel.org, Gurbir Arora <gurbaror@codeaurora.org>
+Subject: [PATCH v3 1/3] remoteproc: core: Add ops to enable custom coredump functionality
+Date:   Thu, 10 Sep 2020 00:02:38 +0000
+Message-ID: <0101017475523e2d-7bba9c78-bfd2-4c08-854a-cac8f3cc1cf3-000000@us-west-2.amazonses.com>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1599696147-30585-1-git-send-email-sidgup@codeaurora.org>
+References: <1599696147-30585-1-git-send-email-sidgup@codeaurora.org>
+X-SES-Outgoing: 2020.09.10-54.240.27.187
+Feedback-ID: 1.us-west-2.CZuq2qbDmUIuT3qdvXlRHZZCpfZqZ4GtG9v3VKgRyF0=:AmazonSES
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-early_param() is missing from the list of types of kernel command line
-parameters that are listed in kernel-parameters.txt, so add it
-(so that I can find parameters more easily).
+Each remoteproc might have different requirements for coredumps and might
+want to choose the type of dumps it wants to collect. This change allows
+remoteproc drivers to specify their own custom dump function to be executed
+in place of rproc_coredump. If the coredump op is not specified by the
+remoteproc driver it will be set to rproc_coredump by default.The
+priv_cleanup op cleans up the private resources used by the remoteproc.
 
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
+Signed-off-by: Rishabh Bhatnagar <rishabhb@codeaurora.org>
+Signed-off-by: Gurbir Arora <gurbaror@codeaurora.org>
+Signed-off-by: Siddharth Gupta <sidgup@codeaurora.org>
 ---
- Documentation/admin-guide/kernel-parameters.rst |    4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ drivers/remoteproc/remoteproc_core.c | 6 +++++-
+ include/linux/remoteproc.h           | 4 ++++
+ 2 files changed, 9 insertions(+), 1 deletion(-)
 
---- linux-next-20200909.orig/Documentation/admin-guide/kernel-parameters.rst
-+++ linux-next-20200909/Documentation/admin-guide/kernel-parameters.rst
-@@ -3,8 +3,8 @@
- The kernel's command-line parameters
- ====================================
+diff --git a/drivers/remoteproc/remoteproc_core.c b/drivers/remoteproc/remoteproc_core.c
+index 7f90eee..dcc1341 100644
+--- a/drivers/remoteproc/remoteproc_core.c
++++ b/drivers/remoteproc/remoteproc_core.c
+@@ -1681,7 +1681,7 @@ int rproc_trigger_recovery(struct rproc *rproc)
+ 		goto unlock_mutex;
  
--The following is a consolidated list of the kernel parameters as
--implemented by the __setup(), core_param() and module_param() macros
-+The following is a consolidated list of the kernel parameters as implemented
-+by the __setup(), early_param(), core_param() and module_param() macros
- and sorted into English Dictionary order (defined as ignoring all
- punctuation and sorting digits before letters in a case insensitive
- manner), and with descriptions where known.
+ 	/* generate coredump */
+-	rproc_coredump(rproc);
++	rproc->ops->coredump(rproc);
+ 
+ 	/* load firmware */
+ 	ret = request_firmware(&firmware_p, rproc->firmware, dev);
+@@ -2103,6 +2103,10 @@ static int rproc_alloc_ops(struct rproc *rproc, const struct rproc_ops *ops)
+ 	if (!rproc->ops)
+ 		return -ENOMEM;
+ 
++	/* Default to rproc_coredump if no coredump function is specified */
++	if (!rproc->ops->coredump)
++		rproc->ops->coredump = rproc_coredump;
++
+ 	if (rproc->ops->load)
+ 		return 0;
+ 
+diff --git a/include/linux/remoteproc.h b/include/linux/remoteproc.h
+index 2fa68bf..a489aec 100644
+--- a/include/linux/remoteproc.h
++++ b/include/linux/remoteproc.h
+@@ -375,6 +375,8 @@ enum rsc_handling_status {
+  * @get_boot_addr:	get boot address to entry point specified in firmware
+  * @panic:	optional callback to react to system panic, core will delay
+  *		panic at least the returned number of milliseconds
++ * @coredump:	  collect firmware dump after the subsystem is shutdown
++ * @priv_cleanup: cleans up the private resources used by the rproc
+  */
+ struct rproc_ops {
+ 	int (*prepare)(struct rproc *rproc);
+@@ -393,6 +395,8 @@ struct rproc_ops {
+ 	int (*sanity_check)(struct rproc *rproc, const struct firmware *fw);
+ 	u64 (*get_boot_addr)(struct rproc *rproc, const struct firmware *fw);
+ 	unsigned long (*panic)(struct rproc *rproc);
++	void (*coredump)(struct rproc *rproc);
++	void (*priv_cleanup)(struct rproc *rproc);
+ };
+ 
+ /**
+-- 
+Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
+a Linux Foundation Collaborative Project
+
