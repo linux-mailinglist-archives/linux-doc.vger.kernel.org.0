@@ -2,63 +2,212 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A974B265F22
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Sep 2020 14:01:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 89B88265F7A
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Sep 2020 14:25:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725776AbgIKMBS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Sep 2020 08:01:18 -0400
-Received: from mail.kernel.org ([198.145.29.99]:39234 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725774AbgIKMBR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 11 Sep 2020 08:01:17 -0400
-Received: from embeddedor (187-162-31-110.static.axtel.net [187.162.31.110])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 764A9221E7;
-        Fri, 11 Sep 2020 12:01:16 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1599825677;
-        bh=FLamW02FvThhT+wWFt/TaKcylAxjJRk43AQJ6UlwNXw=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=T/TIIjpGKf6gz8pTn8bbOz2TMojhAP5ZjEFbkSjqv5kJa6JRPrgU3VjhfPSdlVb3u
-         aggJjGhr1iBtzbm8ngI6YBEcSrJHtdBWcCDLoiv3nUTrzyS89g+wrwSI/WgmUDSyqE
-         kRpwst74Q17x8Hrkx8X4vrYnTSQqwOKmFTEH7tSE=
-Date:   Fri, 11 Sep 2020 07:06:39 -0500
-From:   "Gustavo A. R. Silva" <gustavoars@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Kees Cook <keescook@chromium.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: deprecated.rst: Update zero-length/one-element
- arrays section
-Message-ID: <20200911120639.GC4162@embeddedor>
-References: <20200901010949.GA21398@embeddedor>
- <20200909113823.50014d58@lwn.net>
+        id S1725882AbgIKMZB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Sep 2020 08:25:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33504 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725908AbgIKMYW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Sep 2020 08:24:22 -0400
+Received: from mail-ot1-x344.google.com (mail-ot1-x344.google.com [IPv6:2607:f8b0:4864:20::344])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9D3BCC061757
+        for <linux-doc@vger.kernel.org>; Fri, 11 Sep 2020 05:24:20 -0700 (PDT)
+Received: by mail-ot1-x344.google.com with SMTP id w25so6931935otk.8
+        for <linux-doc@vger.kernel.org>; Fri, 11 Sep 2020 05:24:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=zszRmbpQKBS0800usmmxgfyOo7qtmKwLO7PwkfuP3F8=;
+        b=AmQEQaDwdqKJEzBUQY5LjoMckUpmTiNa/rA3A6EyryNH5Q3YCUm/WD8+II8tBEbfkf
+         ReuQdzPVdnmecQIYWueOlcTfY17HwKnj4IID2x0dAsR1+kMv5MZDWlDpFMRzo+CGyGlR
+         Bh7iwTMpNIbD/tZDMU/CQZghNGaAT3u//6VOnELzpB5Iteowtb2ourR3U9ycUtkHxTdq
+         isLv7eIX/+kCQVTyqdbwaDg36ceXn+sm9A9EYIy/fCtX3t9dECkFwtRofM+QmtZQ4Vs1
+         8iSSuDyWJCmPXzF9i8yDc/n8I7BXKUh0deZFZEAnx5CahcEDu1FpOzw+UfmtxzcQ3sKu
+         M1BA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=zszRmbpQKBS0800usmmxgfyOo7qtmKwLO7PwkfuP3F8=;
+        b=ZhWJN/HFe+QZxOMnJuN89BjxGkDU6qHWv6Fe3Pd3UBvJWrZeu2mL91bK+WHtrSk/Zw
+         mp06YvpmaB53Cb0YOYfoh4nbNjQMwxPEbErMogdPCaB0A0oqwPD1529/Vs1bR+8FwYbA
+         VXuO5Sr9JO4JkWEsW5FvMX2W1hD22kHK3WppTxucDkH7Nd4lrlyNLUB2TcQw7iLjbfwd
+         nX8kSIpTCLQtqOqZkr9ukFlslbjNzpg3gHUDnkCU793mk8nlsDSOXvDIefROkBP2gfNU
+         3A4HoZIzdil2cpAI39ZKgq1N+MXWNAE+9qYoa/5a4bD1ELMQqwjiLSxzStSALd1HnssV
+         nlbw==
+X-Gm-Message-State: AOAM530Cg92JAMi5/b/WA0cqcHVqJtnDL5nyTHLwCXjgMoUF6ffNSPxl
+        qOFJND41HuO2tBm42WuTByUWEBycfSAW5YiVbX5Rmw==
+X-Google-Smtp-Source: ABdhPJwyGPMTPiRrUQ8QlagiNFgDDsDdayzyw2LOiwIJAAkn/SqZj/czRiWsWF0W2681jWFFmgtDjxaB1KbubSYDgMM=
+X-Received: by 2002:a05:6830:1e8c:: with SMTP id n12mr1091647otr.17.1599827058228;
+ Fri, 11 Sep 2020 05:24:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200909113823.50014d58@lwn.net>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+References: <20200907134055.2878499-1-elver@google.com> <20200907134055.2878499-5-elver@google.com>
+ <CACT4Y+aXNmQzp6J+mP+ELj8kUHmRPkibc1--KtV9a3ud_X8miw@mail.gmail.com>
+In-Reply-To: <CACT4Y+aXNmQzp6J+mP+ELj8kUHmRPkibc1--KtV9a3ud_X8miw@mail.gmail.com>
+From:   Marco Elver <elver@google.com>
+Date:   Fri, 11 Sep 2020 14:24:06 +0200
+Message-ID: <CANpmjNNGZ-bnzzG+nbnCMCNCWGxakJ3wq+pmDjsD5LyWmwmyoQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 04/10] mm, kfence: insert KFENCE hooks for SLAB
+To:     Dmitry Vyukov <dvyukov@google.com>
+Cc:     Alexander Potapenko <glider@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoph Lameter <cl@linux.com>,
+        David Rientjes <rientjes@google.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Peter Zijlstra <peterz@infradead.org>, Qian Cai <cai@lca.pw>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Will Deacon <will@kernel.org>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        Linux-MM <linux-mm@kvack.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 09, 2020 at 11:38:23AM -0600, Jonathan Corbet wrote:
-> On Mon, 31 Aug 2020 20:09:49 -0500
-> "Gustavo A. R. Silva" <gustavoars@kernel.org> wrote:
-> 
-> > Update information in the zero-length and one-element arrays section
-> > and illustrate how to make use of the new flex_array_size() helper,
-> > together with struct_size() and a flexible-array member.
-> > 
-> > Signed-off-by: Gustavo A. R. Silva <gustavoars@kernel.org>
+On Fri, 11 Sep 2020 at 09:17, Dmitry Vyukov <dvyukov@google.com> wrote:
+>
+> On Mon, Sep 7, 2020 at 3:41 PM Marco Elver <elver@google.com> wrote:
+> >
+> > From: Alexander Potapenko <glider@google.com>
+> >
+> > Inserts KFENCE hooks into the SLAB allocator.
+> >
+> > We note the addition of the 'orig_size' argument to slab_alloc*()
+> > functions, to be able to pass the originally requested size to KFENCE.
+> > When KFENCE is disabled, there is no additional overhead, since these
+> > functions are __always_inline.
+> >
+> > Co-developed-by: Marco Elver <elver@google.com>
+> > Signed-off-by: Marco Elver <elver@google.com>
+> > Signed-off-by: Alexander Potapenko <glider@google.com>
 > > ---
-> >  Documentation/process/deprecated.rst | 6 +++---
-> >  1 file changed, 3 insertions(+), 3 deletions(-)
-> 
-> Applied, thanks.
+> >  mm/slab.c        | 46 ++++++++++++++++++++++++++++++++++------------
+> >  mm/slab_common.c |  6 +++++-
+> >  2 files changed, 39 insertions(+), 13 deletions(-)
+> >
+> > diff --git a/mm/slab.c b/mm/slab.c
+> > index 3160dff6fd76..30aba06ae02b 100644
+> > --- a/mm/slab.c
+> > +++ b/mm/slab.c
+> > @@ -100,6 +100,7 @@
+> >  #include       <linux/seq_file.h>
+> >  #include       <linux/notifier.h>
+> >  #include       <linux/kallsyms.h>
+> > +#include       <linux/kfence.h>
+> >  #include       <linux/cpu.h>
+> >  #include       <linux/sysctl.h>
+> >  #include       <linux/module.h>
+> > @@ -3206,7 +3207,7 @@ static void *____cache_alloc_node(struct kmem_cache *cachep, gfp_t flags,
+> >  }
+> >
+> >  static __always_inline void *
+> > -slab_alloc_node(struct kmem_cache *cachep, gfp_t flags, int nodeid,
+> > +slab_alloc_node(struct kmem_cache *cachep, gfp_t flags, int nodeid, size_t orig_size,
+> >                    unsigned long caller)
+> >  {
+> >         unsigned long save_flags;
+> > @@ -3219,6 +3220,10 @@ slab_alloc_node(struct kmem_cache *cachep, gfp_t flags, int nodeid,
+> >         if (unlikely(!cachep))
+> >                 return NULL;
+> >
+> > +       ptr = kfence_alloc(cachep, orig_size, flags);
+> > +       if (unlikely(ptr))
+> > +               goto out_hooks;
+> > +
+> >         cache_alloc_debugcheck_before(cachep, flags);
+> >         local_irq_save(save_flags);
+> >
+> > @@ -3251,6 +3256,7 @@ slab_alloc_node(struct kmem_cache *cachep, gfp_t flags, int nodeid,
+> >         if (unlikely(slab_want_init_on_alloc(flags, cachep)) && ptr)
+> >                 memset(ptr, 0, cachep->object_size);
+> >
+> > +out_hooks:
+> >         slab_post_alloc_hook(cachep, objcg, flags, 1, &ptr);
+> >         return ptr;
+> >  }
+> > @@ -3288,7 +3294,7 @@ __do_cache_alloc(struct kmem_cache *cachep, gfp_t flags)
+> >  #endif /* CONFIG_NUMA */
+> >
+> >  static __always_inline void *
+> > -slab_alloc(struct kmem_cache *cachep, gfp_t flags, unsigned long caller)
+> > +slab_alloc(struct kmem_cache *cachep, gfp_t flags, size_t orig_size, unsigned long caller)
+> >  {
+> >         unsigned long save_flags;
+> >         void *objp;
+> > @@ -3299,6 +3305,10 @@ slab_alloc(struct kmem_cache *cachep, gfp_t flags, unsigned long caller)
+> >         if (unlikely(!cachep))
+> >                 return NULL;
+> >
+> > +       objp = kfence_alloc(cachep, orig_size, flags);
+> > +       if (unlikely(objp))
+> > +               goto leave;
+> > +
+> >         cache_alloc_debugcheck_before(cachep, flags);
+> >         local_irq_save(save_flags);
+> >         objp = __do_cache_alloc(cachep, flags);
+> > @@ -3309,6 +3319,7 @@ slab_alloc(struct kmem_cache *cachep, gfp_t flags, unsigned long caller)
+> >         if (unlikely(slab_want_init_on_alloc(flags, cachep)) && objp)
+> >                 memset(objp, 0, cachep->object_size);
+> >
+> > +leave:
+> >         slab_post_alloc_hook(cachep, objcg, flags, 1, &objp);
+> >         return objp;
+> >  }
+> > @@ -3414,6 +3425,11 @@ static void cache_flusharray(struct kmem_cache *cachep, struct array_cache *ac)
+> >  static __always_inline void __cache_free(struct kmem_cache *cachep, void *objp,
+> >                                          unsigned long caller)
+> >  {
+> > +       if (kfence_free(objp)) {
+> > +               kmemleak_free_recursive(objp, cachep->flags);
+> > +               return;
+> > +       }
+> > +
+> >         /* Put the object into the quarantine, don't touch it for now. */
+> >         if (kasan_slab_free(cachep, objp, _RET_IP_))
+> >                 return;
+> > @@ -3479,7 +3495,7 @@ void ___cache_free(struct kmem_cache *cachep, void *objp,
+> >   */
+> >  void *kmem_cache_alloc(struct kmem_cache *cachep, gfp_t flags)
+> >  {
+> > -       void *ret = slab_alloc(cachep, flags, _RET_IP_);
+> > +       void *ret = slab_alloc(cachep, flags, cachep->object_size, _RET_IP_);
+>
+>
+> It's kinda minor, but since we are talking about malloc fast path:
+> will passing 0 instead of cachep->object_size (here and everywhere
+> else) and then using cachep->object_size on the slow path if 0 is
+> passed as size improve codegen?
 
-Thank you, both. :)
+It doesn't save us much, maybe 1 instruction based on what I'm looking
+at right now. The main worry I have is that the 'orig_size' argument
+is now part of slab_alloc, and changing its semantics may cause
+problems in future if it's no longer just passed to kfence_alloc().
+Today, we can do the 'size = size ?: cache->object_size' trick inside
+kfence_alloc(), but at the cost breaking the intuitive semantics of
+slab_alloc's orig_size argument for future users. Is it worth it?
 
---
-Gustavo
+Thanks,
+-- Marco
