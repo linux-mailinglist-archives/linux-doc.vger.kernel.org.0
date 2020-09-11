@@ -2,141 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1AC9C2662E0
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Sep 2020 18:05:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D883926635C
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Sep 2020 18:14:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726583AbgIKQEx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Sep 2020 12:04:53 -0400
-Received: from mail-41103.protonmail.ch ([185.70.41.103]:51370 "EHLO
-        mail-41103.protonmail.ch" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726580AbgIKQDw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Sep 2020 12:03:52 -0400
-Received: from mail-02.mail-europe.com (mail-02.mail-europe.com [51.89.119.103])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange X25519 server-signature RSA-PSS (4096 bits))
+        id S1726118AbgIKPco (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Sep 2020 11:32:44 -0400
+Received: from mail.kernel.org ([198.145.29.99]:58832 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726521AbgIKPaa (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 11 Sep 2020 11:30:30 -0400
+Received: from willie-the-truck (236.31.169.217.in-addr.arpa [217.169.31.236])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail-41103.protonmail.ch (Postfix) with ESMTPS id 2541B200BECF
-        for <linux-doc@vger.kernel.org>; Fri, 11 Sep 2020 13:36:53 +0000 (UTC)
-Authentication-Results: mail-41103.protonmail.ch;
-        dkim=pass (1024-bit key) header.d=protonmail.com header.i=@protonmail.com header.b="m3qIqcqa"
-Date:   Fri, 11 Sep 2020 13:34:39 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-        s=protonmail; t=1599831289;
-        bh=wBAL3KNSf46hGOkih/JyGKEDyIFMOn3a0k5iOcpB9C4=;
-        h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
-        b=m3qIqcqa098sS8XekOZEjH/qHXHIa+KZI06RzjozVpiIfy7SDv7RH3PvBA4vAr/MI
-         J5riN4LyHXJh4ywJJb/MXdJlDozUOO1LbVht3ZHFxPk+v5X1O2uaW1WUU786saXthY
-         9pzT0A122+1q4jvcXMSn8IGPc8LvUV6qQU+uHHZU=
-To:     Jonathan Corbet <corbet@lwn.net>
-From:   =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
-        <nfraprado@protonmail.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        lkcamp@lists.libreplanetbr.org, andrealmeid@collabora.com
-Reply-To: =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
-          <nfraprado@protonmail.com>
-Subject: [PATCH 2/3] docs: Add automatic cross-reference for documentation pages
-Message-ID: <20200911133339.327721-3-nfraprado@protonmail.com>
-In-Reply-To: <20200911133339.327721-1-nfraprado@protonmail.com>
-References: <20200911133339.327721-1-nfraprado@protonmail.com>
+        by mail.kernel.org (Postfix) with ESMTPSA id 61FEC21D47;
+        Fri, 11 Sep 2020 14:02:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1599832945;
+        bh=ugt57UudOowWxtW+wZwTzUmbFy/FfUpWgsziWteq/yQ=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=iyMk4uzpjZpEepjpkfSV+Fi7J2/MfhDLNcdKUrA/C32d5IjiQL4/4bGPB0/+2NVUl
+         bBJg0nHnRrt6D6mXYZgu3cQ77PmKM8/BjP/7Kqlm5qjyIKRXDuEzUSUO8NebUNVoLA
+         SazSpnykjUAV4ZS+ytntTdBOjbPleH2bVha2mTyM=
+Date:   Fri, 11 Sep 2020 15:02:19 +0100
+From:   Will Deacon <will@kernel.org>
+To:     Fox Chen <foxhlchen@gmail.com>
+Cc:     stern@rowland.harvard.edu, parri.andrea@gmail.com,
+        peterz@infradead.org, boqun.feng@gmail.com, npiggin@gmail.com,
+        dhowells@redhat.com, j.alglave@ucl.ac.uk, luc.maranget@inria.fr,
+        paulmck@kernel.org, akiyks@gmail.com, dlustig@nvidia.com,
+        joel@joelfernandes.org, corbet@lwn.net,
+        linux-kernel@vger.kernel.org, linux-arch@vger.kernel.org,
+        linux-doc@vger.kernel.org, gregkh@linuxfoundation.org
+Subject: Re: [PATCH] docs/memory-barriers.txt: Fix a typo in CPU MEMORY
+ BARRIERS section
+Message-ID: <20200911140218.GB19961@willie-the-truck>
+References: <20200909065340.118264-1-foxhlchen@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM shortcircuit=no
-        autolearn=disabled version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
-        mailout.protonmail.ch
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20200909065340.118264-1-foxhlchen@gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Cross-referencing to other documentation pages is possible using the
-:doc:`doc-file` directive from Sphinx.
+On Wed, Sep 09, 2020 at 02:53:40PM +0800, Fox Chen wrote:
+> Commit 39323c6 smp_mb__{before,after}_atomic(): update Documentation
+> has a typo in CPU MEORY BARRIERS section:
+> "RMW functions that do not imply are memory barrier are ..." should be
+> "RMW functions that do not imply a memory barrier are ...".
+> 
+> This patch fixes this typo.
+> 
+> Signed-off-by: Fox Chen <foxhlchen@gmail.com>
+> ---
+>  Documentation/memory-barriers.txt | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/memory-barriers.txt b/Documentation/memory-barriers.txt
+> index 96186332e5f4..20b8a7b30320 100644
+> --- a/Documentation/memory-barriers.txt
+> +++ b/Documentation/memory-barriers.txt
+> @@ -1870,7 +1870,7 @@ There are some more advanced barrier functions:
+>  
+>       These are for use with atomic RMW functions that do not imply memory
+>       barriers, but where the code needs a memory barrier. Examples for atomic
+> -     RMW functions that do not imply are memory barrier are e.g. add,
+> +     RMW functions that do not imply a memory barrier are e.g. add,
+>       subtract, (failed) conditional operations, _relaxed functions,
+>       but not atomic_read or atomic_set. A common example where a memory
+>       barrier may be required is when atomic ops are used for reference
 
-Add automatic markup for references to other documentation pages in the
-format Documentation/subfolder/doc-file.rst (the extension being
-optional).
-This requires that the path be passed all the way from the Documentation
-folder, which can be longer than passing a relative path through the
-:doc: directive, but avoids the markup, making the text cleaner when
-read in plain text.
+The document remains unreadable, but this is still worth fixing!
 
-Signed-off-by: N=C3=ADcolas F. R. A. Prado <nfraprado@protonmail.com>
----
- Documentation/sphinx/automarkup.py | 39 +++++++++++++++++++++++++++++-
- 1 file changed, 38 insertions(+), 1 deletion(-)
+Acked-by: Will Deacon <will@kernel.org>
 
-diff --git a/Documentation/sphinx/automarkup.py b/Documentation/sphinx/auto=
-markup.py
-index 6c8e8475eddb..a1b0f554cd82 100644
---- a/Documentation/sphinx/automarkup.py
-+++ b/Documentation/sphinx/automarkup.py
-@@ -24,6 +24,11 @@ from itertools import chain
- #
- RE_function =3D re.compile(r'(([\w_][\w\d_]+)\(\))')
- RE_type =3D re.compile(r'(struct|union|enum|typedef)\s+([\w_][\w\d_]+)')
-+#
-+# Detects a reference to a documentation page of the form Documentation/..=
-. with
-+# an optional extension
-+#
-+RE_doc =3D re.compile(r'Documentation(/[\w\-_/]+)(\.\w+)*')
-=20
- #
- # Many places in the docs refer to common system calls.  It is
-@@ -44,7 +49,8 @@ def markup_refs(docname, app, node):
-     # Associate each regex with the function that will markup its matches
-     #
-     markup_func =3D {RE_type: markup_c_ref,
--                   RE_function: markup_c_ref}
-+                   RE_function: markup_c_ref,
-+                   RE_doc: markup_doc_ref}
-     match_iterators =3D [regex.finditer(t) for regex in markup_func]
-     #
-     # Sort all references by the starting position in text
-@@ -108,6 +114,37 @@ def markup_c_ref(docname, app, match):
-     else:
-         return target_text
-=20
-+#
-+# Try to replace a documentation reference of the form Documentation/... w=
-ith a
-+# cross reference to that page
-+#
-+def markup_doc_ref(docname, app, match):
-+    stddom =3D app.env.domains['std']
-+    #
-+    # Go through the dance of getting an xref out of the std domain
-+    #
-+    target =3D match.group(1)
-+    xref =3D None
-+    pxref =3D addnodes.pending_xref('', refdomain =3D 'std', reftype =3D '=
-doc',
-+                                  reftarget =3D target, modname =3D None,
-+                                  classname =3D None, refexplicit =3D Fals=
-e)
-+    #
-+    # XXX The Latex builder will throw NoUri exceptions here,
-+    # work around that by ignoring them.
-+    #
-+    try:
-+        xref =3D stddom.resolve_xref(app.env, docname, app.builder, 'doc',
-+                                   target, pxref, None)
-+    except NoUri:
-+        xref =3D None
-+    #
-+    # Return the xref if we got it; otherwise just return the plain text.
-+    #
-+    if xref:
-+        return xref
-+    else:
-+        return nodes.Text(match.group(0))
-+
- def auto_markup(app, doctree, name):
-     #
-     # This loop could eventually be improved on.  Someday maybe we
---=20
-2.28.0
-
-
+Will
