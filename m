@@ -2,169 +2,119 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CF9CC266617
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Sep 2020 19:21:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 73B7A2665A8
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Sep 2020 19:09:37 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726170AbgIKRUk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Sep 2020 13:20:40 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39142 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726152AbgIKNBU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Sep 2020 09:01:20 -0400
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com [IPv6:2607:f8b0:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 796AFC061756
-        for <linux-doc@vger.kernel.org>; Fri, 11 Sep 2020 06:01:07 -0700 (PDT)
-Received: by mail-ot1-x343.google.com with SMTP id g10so8235492otq.9
-        for <linux-doc@vger.kernel.org>; Fri, 11 Sep 2020 06:01:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=ge/FjJXhyj8+NsSSsvCMLGtUiAk37fA1+cTelebZ4Go=;
-        b=T96RFKKMbfGXmGKQW/wQkQusFFYQX5igqwU6L75Yeso5+r11VBgv0lztFH9rNbHlY3
-         5B0LrTTcrBZveyQWzWcwQCKeRcyEas+n8CGz3zVLjk3BHBmngz6iniRoFzLHyeCEKgD0
-         SfihZ41/sKpTvQWRFJLJgc9OiULTEBppsdBLOZxSHyOPU/g9QcvvDXQh4dY//h83F68D
-         ESzkFo2LP1uYXPiZlMAQQce8uhNDJFIRPkcEU8JQ+J90kOfx32MrFwTnj/mS1FW0RD1e
-         qGrx8cYDqjBlz9uoLUveNlE+9hLQk8moh/ndBUm2Yp5Ev3Kn7jiVpo/Fnwdz/WXss1W+
-         TXHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=ge/FjJXhyj8+NsSSsvCMLGtUiAk37fA1+cTelebZ4Go=;
-        b=uYUe4z9uMfMBjLSsqgvV3iM6gCud8VSsnuARHnLMci+6H+KGadAFfyZUeJ0xTHzT5s
-         ktpCFgxsCchzY9Mn0dIl8Aom8DKSIE8OV3SaRw1xqAT9WX/X/GIwmZP2f5W/mxT2+tGU
-         Aiu/n2wD/OJPsrpUyWETrowMDSldnU2+c/8nWwtYMcSTWLUo6yKBEqXGYrOPS8OuMAPn
-         D5Ea+oDZEjtNQjsk/9TSbZwxclUw1aqJbI1KoD2yRZq1sStB1z1q/NR9u+8ODRAYSZHa
-         2TtcN1hxfL295gcErWhb977q4zleoxBa6WLNCaBjkRHWmYJffw/Lrv2Ax0jaCC96h+nn
-         xcNw==
-X-Gm-Message-State: AOAM530pxu/bX7NCwN/Np+wgfKFX+y48MsrsdZTPcXZP7Ubptc/bM2oA
-        yDXeLE1PpbugNMV6yhIBQdzXAaqfX853+TrvA605AQ==
-X-Google-Smtp-Source: ABdhPJyvnEkxpzeJQj2l5oqacEmEr9jCCxehUw6cPnNOvxF93kxRylc4qW/tdBx2vsUZCsc/aeHXDTxenucOjpbTbWU=
-X-Received: by 2002:a9d:758b:: with SMTP id s11mr1038835otk.251.1599829266141;
- Fri, 11 Sep 2020 06:01:06 -0700 (PDT)
+        id S1726164AbgIKRJO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Sep 2020 13:09:14 -0400
+Received: from mail-41104.protonmail.ch ([185.70.41.104]:23688 "EHLO
+        mail-41104.protonmail.ch" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726175AbgIKO7X (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Sep 2020 10:59:23 -0400
+Received: from mail-02.mail-europe.com (mail-02.mail-europe.com [51.89.119.103])
+        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+         key-exchange X25519 server-signature RSA-PSS (4096 bits))
+        (No client certificate requested)
+        by mail-41104.protonmail.ch (Postfix) with ESMTPS id 4503520164A7
+        for <linux-doc@vger.kernel.org>; Fri, 11 Sep 2020 13:36:43 +0000 (UTC)
+Authentication-Results: mail-41104.protonmail.ch;
+        dkim=pass (1024-bit key) header.d=protonmail.com header.i=@protonmail.com header.b="uE0t+iaG"
+Date:   Fri, 11 Sep 2020 13:34:27 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+        s=protonmail; t=1599831274;
+        bh=i1YSY0XyxQ3SaC8ZJ4PtKWoRmK1OW12T7faRuAJSgLY=;
+        h=Date:To:From:Cc:Reply-To:Subject:From;
+        b=uE0t+iaGURnDMbw/jWB2/rKtG+/t5YOF50uKPjidH1p8qUskaIDjCqT8+5nFqhqtb
+         GCrkrjGxKH+/W80ODPbrO7Lc89E6eWtHknGyZvx2eYmCzaibIiMC0gt9ol14Y1uT7/
+         CzUBAu/y3JcvuYwLO1F/h8MY0d9u+rKIZqFIc6PA=
+To:     Jonathan Corbet <corbet@lwn.net>
+From:   =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
+        <nfraprado@protonmail.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        lkcamp@lists.libreplanetbr.org, andrealmeid@collabora.com
+Reply-To: =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
+          <nfraprado@protonmail.com>
+Subject: [PATCH 0/3] docs: Add automatic cross-reference for documentation pages
+Message-ID: <20200911133339.327721-1-nfraprado@protonmail.com>
 MIME-Version: 1.0
-References: <20200907134055.2878499-1-elver@google.com> <20200907134055.2878499-7-elver@google.com>
- <CACT4Y+b=Ph-fD_K5F_TNMp_dTNjD7GXGT=OXogrKc_HwH+HHwQ@mail.gmail.com>
-In-Reply-To: <CACT4Y+b=Ph-fD_K5F_TNMp_dTNjD7GXGT=OXogrKc_HwH+HHwQ@mail.gmail.com>
-From:   Marco Elver <elver@google.com>
-Date:   Fri, 11 Sep 2020 15:00:54 +0200
-Message-ID: <CANpmjNMHHWjdLiWi+vhffcWq=UNFVGV7so6AggezcvnoOFHvKA@mail.gmail.com>
-Subject: Re: [PATCH RFC 06/10] kfence, kasan: make KFENCE compatible with KASAN
-To:     Dmitry Vyukov <dvyukov@google.com>
-Cc:     Alexander Potapenko <glider@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Christoph Lameter <cl@linux.com>,
-        David Rientjes <rientjes@google.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Borislav Petkov <bp@alien8.de>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eric Dumazet <edumazet@google.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Peter Zijlstra <peterz@infradead.org>, Qian Cai <cai@lca.pw>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Will Deacon <will@kernel.org>,
-        "the arch/x86 maintainers" <x86@kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        kasan-dev <kasan-dev@googlegroups.com>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Linux-MM <linux-mm@kvack.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM shortcircuit=no
+        autolearn=disabled version=3.4.4
+X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
+        mailout.protonmail.ch
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 11 Sep 2020 at 09:05, Dmitry Vyukov <dvyukov@google.com> wrote:
->
-> On Mon, Sep 7, 2020 at 3:41 PM Marco Elver <elver@google.com> wrote:
-> >
-> > From: Alexander Potapenko <glider@google.com>
-> >
-> > We make KFENCE compatible with KASAN for testing KFENCE itself. In
-> > particular, KASAN helps to catch any potential corruptions to KFENCE
-> > state, or other corruptions that may be a result of freepointer
-> > corruptions in the main allocators.
-> >
-> > To indicate that the combination of the two is generally discouraged,
-> > CONFIG_EXPERT=y should be set. It also gives us the nice property that
-> > KFENCE will be build-tested by allyesconfig builds.
-> >
-> > Co-developed-by: Marco Elver <elver@google.com>
-> > Signed-off-by: Marco Elver <elver@google.com>
-> > Signed-off-by: Alexander Potapenko <glider@google.com>
-> > ---
-> >  lib/Kconfig.kfence | 2 +-
-> >  mm/kasan/common.c  | 7 +++++++
-> >  2 files changed, 8 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/lib/Kconfig.kfence b/lib/Kconfig.kfence
-> > index 7ac91162edb0..b080e49e15d4 100644
-> > --- a/lib/Kconfig.kfence
-> > +++ b/lib/Kconfig.kfence
-> > @@ -10,7 +10,7 @@ config HAVE_ARCH_KFENCE_STATIC_POOL
-> >
-> >  menuconfig KFENCE
-> >         bool "KFENCE: low-overhead sampling-based memory safety error detector"
-> > -       depends on HAVE_ARCH_KFENCE && !KASAN && (SLAB || SLUB)
-> > +       depends on HAVE_ARCH_KFENCE && (!KASAN || EXPERT) && (SLAB || SLUB)
-> >         depends on JUMP_LABEL # To ensure performance, require jump labels
-> >         select STACKTRACE
-> >         help
-> > diff --git a/mm/kasan/common.c b/mm/kasan/common.c
-> > index 950fd372a07e..f5c49f0fdeff 100644
-> > --- a/mm/kasan/common.c
-> > +++ b/mm/kasan/common.c
-> > @@ -18,6 +18,7 @@
-> >  #include <linux/init.h>
-> >  #include <linux/kasan.h>
-> >  #include <linux/kernel.h>
-> > +#include <linux/kfence.h>
-> >  #include <linux/kmemleak.h>
-> >  #include <linux/linkage.h>
-> >  #include <linux/memblock.h>
-> > @@ -396,6 +397,9 @@ static bool __kasan_slab_free(struct kmem_cache *cache, void *object,
-> >         tagged_object = object;
-> >         object = reset_tag(object);
-> >
-> > +       if (is_kfence_address(object))
-> > +               return false;
->
-> Is this needed?
-> At least in the slab patch I see that we do :
->
-> if (kfence_free(objp)) {
->   kmemleak_free_recursive(objp, cachep->flags);
->   return;
-> }
->
-> before:
->
-> /* Put the object into the quarantine, don't touch it for now. */ /*
-> Put the object into the quarantine, don't touch it for now. */
-> if (kasan_slab_free(cachep, objp, _RET_IP_)) if
-> (kasan_slab_free(cachep, objp, _RET_IP_))
->   return; return;
->
->
-> If it's not supposed to be triggered, it can make sense to replace
-> with BUG/WARN.
+Cross-referencing from a documentation page to another can be done using th=
+e
+:doc:`doc-file` directive from Sphinx.
+This however introduces markup that could be avoided to increase readabilit=
+y in
+plain text.
+This patch series adds automatic markup for cross-referencing between
+documentation pages.
 
-It is required for SLUB. For SLAB, it seems it might not be necessary.
-Making the check in kasan/common.c conditional on the allocator seems
-ugly, so I propose we keep it there.
+This patch series depends on [1].
+
+The first patch refactors the automarkup script to split regex matching and
+iteration into one function and text markup substitution into another.
+This enables each regex to have its own function that substitutes its match=
+es'
+text for the appropriate markup and is necessary for the automatic markup o=
+f
+documentation pages since it requires slightly different logic from marking=
+ up
+C references.
+
+The second patch adds automatic markup for cross-referencing documentation
+pages by adding an appropriate regex and function to do the markup.
+This enables a text like "See Documentation/doc-guide/sphinx.rst." to be
+substituted by a cross-reference to that document without any additional ma=
+rkup.
+Since this automarkup doesn't work with relative paths (they always need to
+start at Documentation/), it will almost always require more typing than th=
+e
+equivalent :doc:`sphinx`, but it's purpose is to avoid the markup, making i=
+t
+more readable in plain text.
+The .rst extension was left as optional in the regex matching, even though =
+it
+only makes sense for .rst documents, because I thought not specifying the
+extension, like "See Documentation/doc-guide/sphinx." also made sense as a
+cross-reference.
+
+The third patch adds a section about cross-referencing in the "Writing
+Documentation" chapter since there was none (other than the one regarding
+kernel-doc).
+The section describes how to use the new automatic cross-referencing for
+documentation pages, and also how to use the already in place Sphinx doc
+directive.
+It also points to the kernel-doc document for information on cross-referenc=
+ing
+kernel-doc functions and types (using the new automarkup, so it also serves=
+ as a
+testcase for it).
 
 Thanks,
--- Marco
+N=C3=ADcolas
+
+[1]: https://lore.kernel.org/linux-doc/20200903005747.3900333-1-nfraprado@p=
+rotonmail.com/
+
+N=C3=ADcolas F. R. A. Prado (3):
+  docs: Allow multiple automarkup functions
+  docs: Add automatic cross-reference for documentation pages
+  docs: Document cross-referencing between documentation pages
+
+ Documentation/doc-guide/sphinx.rst |  17 ++++
+ Documentation/sphinx/automarkup.py | 134 ++++++++++++++++++++---------
+ 2 files changed, 109 insertions(+), 42 deletions(-)
+
+--=20
+2.28.0
+
+
