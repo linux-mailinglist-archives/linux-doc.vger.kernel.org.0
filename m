@@ -2,79 +2,177 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 275C6265A6F
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Sep 2020 09:22:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1CAC62659F8
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Sep 2020 09:05:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725562AbgIKHWS convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Fri, 11 Sep 2020 03:22:18 -0400
-Received: from mail.flex.co.jp ([211.8.82.123]:58973 "EHLO www.flex.co.jp"
-        rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1725535AbgIKHWS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 11 Sep 2020 03:22:18 -0400
-Received: from live.com.mx ([103.89.89.225])
-        (authenticated bits=0)
-        by www.flex.co.jp (MTA) with ESMTP id 0898nU6x009153
-        for <linux-doc@vger.kernel.org>; Wed, 9 Sep 2020 17:49:49 +0900
-Reply-To: powerinthewords@yahoo.co.jp
-From:   piyin.crhe@live.com.mx
-To:     linux-doc@vger.kernel.org
-Subject: =?utf-8?Q?=5BSpam=5D?=
- We are still waiting for your email...
-Date:   09 Sep 2020 01:49:47 -0700
-Message-ID: <20200909014947.E6E391CA0BFAEA03@live.com.mx>
+        id S1725773AbgIKHF0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Sep 2020 03:05:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40846 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725868AbgIKHFI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Sep 2020 03:05:08 -0400
+Received: from mail-qv1-xf42.google.com (mail-qv1-xf42.google.com [IPv6:2607:f8b0:4864:20::f42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CD64DC061573
+        for <linux-doc@vger.kernel.org>; Fri, 11 Sep 2020 00:05:06 -0700 (PDT)
+Received: by mail-qv1-xf42.google.com with SMTP id f11so4721872qvw.3
+        for <linux-doc@vger.kernel.org>; Fri, 11 Sep 2020 00:05:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=8qYTA7a/mDb0x7v76SumPW6fQ7bLMrnrWY5ltUv9JNU=;
+        b=l6I1g9C1SvoJBjGEU0JNeOK0OUWWHuh+ALTBHG8Q61JGEqU4KeeE5IlLbk4bq+biRP
+         GLthBBCFLV74aP/hQaHI2M0uCtoZz+JpOo4lFoxKTjE1iW7bCuJswGKKAlv+zaA9qnkp
+         TlS1NPVdFNmHAqjPSNR659dB1WOgl7sIIp5R9vb7NnibPcG7TDweMFV/AUK/qXe6Nlww
+         O3k9zPK1DfyWXuhengm0F807rZ57VgNbELKS6QRJ5VAQEYFRAIBEj+paw0bj8u/keVzB
+         +KusOeic/b8Aqz8saD0zP8EvoIS5TolTvFwZtAgF/VFApLsHX/JUnGw3O8psBt3RKhyr
+         ibtQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=8qYTA7a/mDb0x7v76SumPW6fQ7bLMrnrWY5ltUv9JNU=;
+        b=GWNhQEbYhA3+wD9sT9Ip57Akq8qes0cTGTss/OLQaC0rpkKHvZDuSesBuOvHrDoEnM
+         t/q+pFW3sd7z/L7N2Ty9P1S9k1+k3Tz/3hkzCnzk6B7QYpeAUW30hhiesm3QuJu/zzk6
+         z5BiqCCA5MDhy/l8ahtfWljQiAfki9uQf/qwmujh7a8C++5RvI8ORymrsCIGc1YliN3J
+         iQ0iMdfa5+5dgTkvwz1FXnbh8gU1Pzt9f78FKcKf3cRXfN0nkmqon3Uq1kLyRNobkaGq
+         M2or2EPGk58uXgfotAzrmXel62mij3fQ3jhNFH7VINAM8/kSotdMoQxiLOf7GUGCnNcR
+         ozgA==
+X-Gm-Message-State: AOAM5325LNWF69Y/0LUndTtmSFxWhU6/23wL3EL/J/0I9fQLO/bKR/rn
+        Pg3UFgo8P+Yh4rT4sx71BvUtDNycYjGIP/lJs/P7+Q==
+X-Google-Smtp-Source: ABdhPJwPLAUEsAzaSMCLt+v28C4/YXeXs4UpRMTYz0l4idhp0Mt0npwu+vanlcme90OTrVPya2wrVj/k/dc78p5FmYU=
+X-Received: by 2002:a0c:c24a:: with SMTP id w10mr609462qvh.99.1599807905731;
+ Fri, 11 Sep 2020 00:05:05 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: 8BIT
-X-SpamInfo: FortiGuard-AntiSpam ip, connection black ip 103.89.89.225
+References: <20200907134055.2878499-1-elver@google.com> <20200907134055.2878499-7-elver@google.com>
+In-Reply-To: <20200907134055.2878499-7-elver@google.com>
+From:   Dmitry Vyukov <dvyukov@google.com>
+Date:   Fri, 11 Sep 2020 09:04:54 +0200
+Message-ID: <CACT4Y+b=Ph-fD_K5F_TNMp_dTNjD7GXGT=OXogrKc_HwH+HHwQ@mail.gmail.com>
+Subject: Re: [PATCH RFC 06/10] kfence, kasan: make KFENCE compatible with KASAN
+To:     Marco Elver <elver@google.com>
+Cc:     Alexander Potapenko <glider@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoph Lameter <cl@linux.com>,
+        David Rientjes <rientjes@google.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Ingo Molnar <mingo@redhat.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Peter Zijlstra <peterz@infradead.org>, Qian Cai <cai@lca.pw>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Will Deacon <will@kernel.org>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        Linux-MM <linux-mm@kvack.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Dear Beneficiary,
+On Mon, Sep 7, 2020 at 3:41 PM Marco Elver <elver@google.com> wrote:
+>
+> From: Alexander Potapenko <glider@google.com>
+>
+> We make KFENCE compatible with KASAN for testing KFENCE itself. In
+> particular, KASAN helps to catch any potential corruptions to KFENCE
+> state, or other corruptions that may be a result of freepointer
+> corruptions in the main allocators.
+>
+> To indicate that the combination of the two is generally discouraged,
+> CONFIG_EXPERT=y should be set. It also gives us the nice property that
+> KFENCE will be build-tested by allyesconfig builds.
+>
+> Co-developed-by: Marco Elver <elver@google.com>
+> Signed-off-by: Marco Elver <elver@google.com>
+> Signed-off-by: Alexander Potapenko <glider@google.com>
+> ---
+>  lib/Kconfig.kfence | 2 +-
+>  mm/kasan/common.c  | 7 +++++++
+>  2 files changed, 8 insertions(+), 1 deletion(-)
+>
+> diff --git a/lib/Kconfig.kfence b/lib/Kconfig.kfence
+> index 7ac91162edb0..b080e49e15d4 100644
+> --- a/lib/Kconfig.kfence
+> +++ b/lib/Kconfig.kfence
+> @@ -10,7 +10,7 @@ config HAVE_ARCH_KFENCE_STATIC_POOL
+>
+>  menuconfig KFENCE
+>         bool "KFENCE: low-overhead sampling-based memory safety error detector"
+> -       depends on HAVE_ARCH_KFENCE && !KASAN && (SLAB || SLUB)
+> +       depends on HAVE_ARCH_KFENCE && (!KASAN || EXPERT) && (SLAB || SLUB)
+>         depends on JUMP_LABEL # To ensure performance, require jump labels
+>         select STACKTRACE
+>         help
+> diff --git a/mm/kasan/common.c b/mm/kasan/common.c
+> index 950fd372a07e..f5c49f0fdeff 100644
+> --- a/mm/kasan/common.c
+> +++ b/mm/kasan/common.c
+> @@ -18,6 +18,7 @@
+>  #include <linux/init.h>
+>  #include <linux/kasan.h>
+>  #include <linux/kernel.h>
+> +#include <linux/kfence.h>
+>  #include <linux/kmemleak.h>
+>  #include <linux/linkage.h>
+>  #include <linux/memblock.h>
+> @@ -396,6 +397,9 @@ static bool __kasan_slab_free(struct kmem_cache *cache, void *object,
+>         tagged_object = object;
+>         object = reset_tag(object);
+>
+> +       if (is_kfence_address(object))
+> +               return false;
 
-We wish to inform you that a power of attorney was forwarded to 
-our office  by two gentlemen regarding your unclaimed fund of $56 
-Million Dollar. One of them is an American citizen named Mr. 
-Robert Porter and the other is Mr. Wilhelm Berg a Swedish 
-citizen.We have be waiting for you to contact us since last year.
+Is this needed?
+At least in the slab patch I see that we do :
 
-The document claims these gentlemen to be your authorized 
-representatives, and the power of attorney states that you are 
-already deceased.  It further states that your death was due to 
-lung cancer, with your date of death being January 27th, 2020.
+if (kfence_free(objp)) {
+  kmemleak_free_recursive(objp, cachep->flags);
+  return;
+}
 
-They have now submitted a new account to replace the receiving 
-account that was in the original claim of funds. These funds have 
-remained unclaimed for quite some time and the need for 
-resolution is pressing. Below is the new account they have 
-submitted.
+before:
 
-Account Name's :  Robert Porter /Wilhelm Berg
-Account: 5007-29 438 66
-IBAN-nr: SE4150000000050072943866
-Bic-kod: ESSESESS
-Skandinaviska Enskilda Banken. (SEB :)
-SWEDEN .
+/* Put the object into the quarantine, don't touch it for now. */ /*
+Put the object into the quarantine, don't touch it for now. */
+if (kasan_slab_free(cachep, objp, _RET_IP_)) if
+(kasan_slab_free(cachep, objp, _RET_IP_))
+  return; return;
 
-In the event that you are in fact still alive, we ask that you 
-confirm your existence by responding to this email. You are to 
-view this as a matter requiring immediate attention and response. 
-We have 48 hr monitoring of all activities within Federal Reserve 
-Bank.On this regard,you will be directed to any of our office 
-center that you will go in person to sign the final papers,
-because we have our payment center in Europe,Asia,America and 
-Canada.You will go to any of the office that you will be directed 
-to with the copy of the documents of your fund.
 
-We have contacted the bank in the Sweden asking them to wait for 
-further directives from Federal Reserve Bank, prior to 
-authorizing any withdrawals in any form.  Our request is based 
-entirely on our attempt to verify that you are in fact deceased, 
-before money is wrongly disbursed.
+If it's not supposed to be triggered, it can make sense to replace
+with BUG/WARN.
 
-Your in Service,
 
-Robert Steven Kaplan
-2200 N Pearl St, Dallas, TX 75201, United States
+>         if (unlikely(nearest_obj(cache, virt_to_head_page(object), object) !=
+>             object)) {
+>                 kasan_report_invalid_free(tagged_object, ip);
+> @@ -444,6 +448,9 @@ static void *__kasan_kmalloc(struct kmem_cache *cache, const void *object,
+>         if (unlikely(object == NULL))
+>                 return NULL;
+>
+> +       if (is_kfence_address(object))
+> +               return (void *)object;
+> +
+>         redzone_start = round_up((unsigned long)(object + size),
+>                                 KASAN_SHADOW_SCALE_SIZE);
+>         redzone_end = round_up((unsigned long)object + cache->object_size,
+> --
+> 2.28.0.526.ge36021eeef-goog
+>
