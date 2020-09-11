@@ -2,104 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 972AD267B0B
-	for <lists+linux-doc@lfdr.de>; Sat, 12 Sep 2020 16:51:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5826D267B36
+	for <lists+linux-doc@lfdr.de>; Sat, 12 Sep 2020 17:22:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725850AbgILOvR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 12 Sep 2020 10:51:17 -0400
-Received: from mx2.suse.de ([195.135.220.15]:40796 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725966AbgILOrb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 12 Sep 2020 10:47:31 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 7EB33AB91;
-        Sat, 12 Sep 2020 14:47:41 +0000 (UTC)
-Date:   Sat, 12 Sep 2020 15:47:22 +0100
-From:   Mel Gorman <mgorman@suse.de>
-To:     John Wood <john.wood@gmx.com>
-Cc:     James Morris <jmorris@namei.org>,
-        Kees Cook <keescook@chromium.org>,
-        kernel-hardening@lists.openwall.com,
-        Matthew Wilcox <willy@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ben Segall <bsegall@google.com>,
-        Luis Chamberlain <mcgrof@kernel.org>,
-        Iurii Zaikin <yzaikin@google.com>,
-        "Serge E. Hallyn" <serge@hallyn.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-security-module@vger.kernel.org
-Subject: Re: [RESEND][RFC PATCH 0/6] Fork brute force attack mitigation
- (fbfam)
-Message-ID: <20200912144722.GE3117@suse.de>
-References: <20200910202107.3799376-1-keescook@chromium.org>
- <alpine.LRH.2.21.2009121002100.17638@namei.org>
- <202009120055.F6BF704620@keescook>
- <20200912093652.GA3041@ubuntu>
+        id S1725850AbgILPWv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 12 Sep 2020 11:22:51 -0400
+Received: from aluxe.matcuer.unam.mx ([132.248.41.2]:43864 "EHLO
+        aluxe.matcuer.unam.mx" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725846AbgILPWv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 12 Sep 2020 11:22:51 -0400
+X-Greylist: delayed 51720 seconds by postgrey-1.27 at vger.kernel.org; Sat, 12 Sep 2020 11:22:50 EDT
+Received: from localhost (ip6-localhost [127.0.0.1])
+        by aluxe.matcuer.unam.mx (Postfix) with ESMTP id 7141610C4EB2;
+        Fri, 11 Sep 2020 13:45:29 -0500 (CDT)
+X-Virus-Scanned: Debian amavisd-new at matcuer.unam.mx
+Received: from aluxe.matcuer.unam.mx ([127.0.0.1])
+        by localhost (aluxe.matcuer.unam.mx [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id 9MoAOox5Exk4; Fri, 11 Sep 2020 13:45:27 -0500 (CDT)
+Received: from correo.matcuer.unam.mx (ip6-localhost [127.0.0.1])
+        by aluxe.matcuer.unam.mx (Postfix) with ESMTP id 3D1F410C1383;
+        Fri, 11 Sep 2020 06:30:10 -0500 (CDT)
+Received: from 105.112.102.124
+        (SquirrelMail authenticated user otto)
+        by correo.matcuer.unam.mx with HTTP;
+        Fri, 11 Sep 2020 06:30:10 -0500
+Message-ID: <21e8ad34cb762a3a1dabd0b2d29d1785.squirrel@correo.matcuer.unam.mx>
+Date:   Fri, 11 Sep 2020 06:30:10 -0500
+Subject: 
+From:   "Mikhail Fridman" <otto@matcuer.unam.mx>
+Reply-To: mikhai.fridman261@gmail.com
+User-Agent: SquirrelMail/1.4.23 [SVN]
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-15
-Content-Disposition: inline
-In-Reply-To: <20200912093652.GA3041@ubuntu>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type:   text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7BIT
+X-Priority: 3 (Normal)
+Importance: Normal
+To:     unlisted-recipients:; (no To-header on input)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, Sep 12, 2020 at 11:36:52AM +0200, John Wood wrote:
-> On Sat, Sep 12, 2020 at 12:56:18AM -0700, Kees Cook wrote:
-> > On Sat, Sep 12, 2020 at 10:03:23AM +1000, James Morris wrote:
-> > > On Thu, 10 Sep 2020, Kees Cook wrote:
-> > >
-> > > > [kees: re-sending this series on behalf of John Wood <john.wood@gmx.com>
-> > > >  also visible at https://github.com/johwood/linux fbfam]
-> > > >
-> > > > From: John Wood <john.wood@gmx.com>
-> > >
-> > > Why are you resending this? The author of the code needs to be able to
-> > > send and receive emails directly as part of development and maintenance.
-> 
-> I tried to send the full patch serie by myself but my email got blocked. After
-> get support from my email provider it told to me that my account is young,
-> and due to its spam policie I am not allow, for now, to send a big amount
-> of mails in a short period. They also informed me that soon I will be able
-> to send more mails. The quantity increase with the age of the account.
-> 
 
-If you're using "git send-email" then specify --confirm=always and
-either manually send a mail every few seconds or use an expect script
-like
 
-#!/bin/bash
-EXPECT_SCRIPT=
-function cleanup() {
-	if [ "$EXPECT_SCRIPT" != "" ]; then
-		rm $EXPECT_SCRIPT
-	fi
-}
-trap cleanup EXIT
-
-EXPECT_SCRIPT=`mktemp`
-cat > $EXPECT_SCRIPT <<EOF
-spawn sh ./SEND
-expect {
-	"Send this email"   { sleep 10; exp_send y\\r; exp_continue }
-}
-EOF
-
-expect -f $EXPECT_SCRIPT
-exit $?
-
-This will work if your provider limits the rate mails are sent rather
-than the total amount.
 
 -- 
-Mel Gorman
-SUSE Labs
+I, Mikhail Fridman have selected you specifically as one of my
+beneficiaries for my Charitable Donation of $5 Million Dollars,
+
+Check the link below for confirmation:
+
+https://www.rt.com/business/343781-mikhail-fridman-will-charity/
+
+I await your earliest response for further directives.
+
+Best Regards,
+Mikhail Fridman.
+
