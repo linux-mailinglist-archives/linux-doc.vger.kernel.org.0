@@ -2,70 +2,181 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 579DE2691D4
-	for <lists+linux-doc@lfdr.de>; Mon, 14 Sep 2020 18:41:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CE3D2269253
+	for <lists+linux-doc@lfdr.de>; Mon, 14 Sep 2020 18:59:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726347AbgINPOs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 14 Sep 2020 11:14:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44910 "EHLO
+        id S1726064AbgINQ7B (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 14 Sep 2020 12:59:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60626 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726098AbgINPO3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Sep 2020 11:14:29 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 975C4C061788;
-        Mon, 14 Sep 2020 08:14:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=qoTdF1K8QZfe59Hsr5727q9mC8g2Jr5rOYMLLk2l1RQ=; b=JD1+mg3m8jvSPy3g4VSjTLAnne
-        36W7CEcoAjxEVt2IAtPzrSLLevxJXWdpbHQIw28Hd8heE9NT0eLFI3udQPI9fiPX78IfhNKa6ks+t
-        B6qOI+lbhHblw0gjtrh7b4QFmisAWGkdYGLVZMa2FALPb3LmhFrZ/EhI1n0frpG3jT/9G2onhyqti
-        +JAkxxX8vEDs8hVliKzd7NKSOO7+clLbM8f4UpsVvfAezc/NiKnlHpgaH4hmhufya8Q6/AXWqwdjv
-        2yxTbv35hihTfi1UKALD5FKKVyct2R0rgRXAei//GMv4/Wl+PzWkc0P9X7kAFL7918W/mYBUUblZB
-        Ej1HafoQ==;
-Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kHqB4-0003Xz-OV; Mon, 14 Sep 2020 15:13:58 +0000
-Date:   Mon, 14 Sep 2020 16:13:58 +0100
-From:   Matthew Wilcox <willy@infradead.org>
-To:     Christoph Hellwig <hch@lst.de>
-Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-        Joonyoung Shim <jy0922.shim@samsung.com>,
-        Seung-Woo Kim <sw0312.kim@samsung.com>,
-        Ben Skeggs <bskeggs@redhat.com>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Tomasz Figa <tfiga@chromium.org>,
-        Matt Porter <mporter@kernel.crashing.org>,
-        iommu@lists.linux-foundation.org,
-        Stefan Richter <stefanr@s5r6.in-berlin.de>,
-        linux1394-devel@lists.sourceforge.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
-        linux-parisc@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
-        nouveau@lists.freedesktop.org, netdev@vger.kernel.org,
-        linux-scsi@vger.kernel.org, linux-mm@kvack.org,
-        alsa-devel@alsa-project.org
-Subject: Re: [PATCH 11/17] sgiseeq: convert to dma_alloc_noncoherent
-Message-ID: <20200914151358.GQ6583@casper.infradead.org>
-References: <20200914144433.1622958-1-hch@lst.de>
- <20200914144433.1622958-12-hch@lst.de>
+        with ESMTP id S1726019AbgINQz1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 14 Sep 2020 12:55:27 -0400
+Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com [IPv6:2607:f8b0:4864:20::544])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 365F7C06174A
+        for <linux-doc@vger.kernel.org>; Mon, 14 Sep 2020 09:55:27 -0700 (PDT)
+Received: by mail-pg1-x544.google.com with SMTP id s65so287568pgb.0
+        for <linux-doc@vger.kernel.org>; Mon, 14 Sep 2020 09:55:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=nn8uGO9a9X0XwaIfMVFd2VgaWgHbpK8dvPYHd7Sq/nA=;
+        b=RB+2IbSgUvQBoAdsF0OTSCz20nt98NJ5VHwnf9jRx7zYNTMQeX4LZz03zL76irCDsG
+         0mdg45wZp2YAKNVNcAwTPfapLTrblMQfnEi5juhLmTb8jSzbarIx3WRVlOGm1lwO0q4M
+         JQXKYTnJSK2DV38j5skJQDiuqxCdrQ3kOy8gMmaXArc3C/XUvXxCidE0P/u3zhA62+yi
+         xxn5pXMlfzPSghT6dqYreCTRbu1o6GiEEvmXJk4bl7fHVfWaL8keJwVa0PHKeirScjuK
+         prJC8gaEvEx5yF4bvJyP9nUjr2ef9WkOsxRj3i4EAEkOXmG5T4VYP6A9imu3h5LqM1Nm
+         5WRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=nn8uGO9a9X0XwaIfMVFd2VgaWgHbpK8dvPYHd7Sq/nA=;
+        b=lsbCccUo5TyQ/Ynx+OjcqY+OwHMXbkD6d8N3bAPCSWUgZSKCTSaUqFDjDNDQZVORbP
+         hLokRqAn8HA4okSrCXPEctkdIvBN3sZl1DkZXpfK9lnYt5/LtprTAOItdnwdSUPn+FwZ
+         Lbpe22yphdfBml5+Ihfz20WUVEMZg+iSN1AjVcv+lI/qIwaAeF2O+X1KKz1H6IF2kFWN
+         6uvmkw404jc0igGz6Yn/QLkaos1WlK/eOutgsBk2EL7pwjuSJ4l2R+ND1Dw1pcu3hAXB
+         WKh2iGHz1fVhtetc0lHrYxRQUmxlrhi8NFbTGjf8iBfsUwpPfpidtNvFRnCgG2TW3TIq
+         cYbQ==
+X-Gm-Message-State: AOAM531GCXYbaGf6NNKWqEH9VfhS55lhe1jM8toCg8zGcK5hkDiS2aYK
+        Z+kvCCGbLmlgby8iNzbsRMasPhAhUYCnzx7b60WY/A==
+X-Google-Smtp-Source: ABdhPJxzhrEWtHfAz9YebgAYjnUP/OKSRvXH7hybqZE4UdLRz9e4pHdbh/Rl/limT4J8drQRD3Oae84qwNQP5k5X5fM=
+X-Received: by 2002:a62:8f4c:: with SMTP id n73mr13928326pfd.65.1600102526730;
+ Mon, 14 Sep 2020 09:55:26 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200914144433.1622958-12-hch@lst.de>
+References: <20200913070010.44053-1-songmuchun@bytedance.com> <CALvZod7VH3NDwBXrY9w95pUY7DV+R-b_chBHuygmwH_bhpULkQ@mail.gmail.com>
+In-Reply-To: <CALvZod7VH3NDwBXrY9w95pUY7DV+R-b_chBHuygmwH_bhpULkQ@mail.gmail.com>
+From:   Muchun Song <songmuchun@bytedance.com>
+Date:   Tue, 15 Sep 2020 00:54:50 +0800
+Message-ID: <CAMZfGtXoBrFioh=FqRA82ZRSt=2oW=ie8BgZE0hAvtCOBRMXiw@mail.gmail.com>
+Subject: Re: [External] Re: [PATCH v3] mm: memcontrol: Add the missing
+ numa_stat interface for cgroup v2
+To:     Shakeel Butt <shakeelb@google.com>
+Cc:     Tejun Heo <tj@kernel.org>, Li Zefan <lizefan@huawei.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Michal Hocko <mhocko@kernel.org>,
+        Vladimir Davydov <vdavydov.dev@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Roman Gushchin <guro@fb.com>,
+        Cgroups <cgroups@vger.kernel.org>, linux-doc@vger.kernel.org,
+        LKML <linux-kernel@vger.kernel.org>,
+        Linux MM <linux-mm@kvack.org>,
+        kernel test robot <lkp@intel.com>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Sep 14, 2020 at 04:44:27PM +0200, Christoph Hellwig wrote:
->  drivers/net/ethernet/i825xx/lasi_82596.c |  25 ++---
->  drivers/net/ethernet/i825xx/lib82596.c   | 114 ++++++++++++++---------
->  drivers/net/ethernet/i825xx/sni_82596.c  |   4 -
->  drivers/net/ethernet/seeq/sgiseeq.c      |  28 ++++--
->  drivers/scsi/53c700.c                    |   9 +-
->  5 files changed, 103 insertions(+), 77 deletions(-)
+On Tue, Sep 15, 2020 at 12:07 AM Shakeel Butt <shakeelb@google.com> wrote:
+>
+> On Sun, Sep 13, 2020 at 12:01 AM Muchun Song <songmuchun@bytedance.com> wrote:
+> >
+> > In the cgroup v1, we have a numa_stat interface. This is useful for
+> > providing visibility into the numa locality information within an
+> > memcg since the pages are allowed to be allocated from any physical
+> > node. One of the use cases is evaluating application performance by
+> > combining this information with the application's CPU allocation.
+> > But the cgroup v2 does not. So this patch adds the missing information.
+> >
+> > Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+> > Suggested-by: Shakeel Butt <shakeelb@google.com>
+> > Reported-by: kernel test robot <lkp@intel.com>
+> > ---
+> [snip]
+> > +
+> > +static struct numa_stat numa_stats[] = {
+> > +       { "anon", PAGE_SIZE, NR_ANON_MAPPED },
+> > +       { "file", PAGE_SIZE, NR_FILE_PAGES },
+> > +       { "kernel_stack", 1024, NR_KERNEL_STACK_KB },
+> > +       { "shmem", PAGE_SIZE, NR_SHMEM },
+> > +       { "file_mapped", PAGE_SIZE, NR_FILE_MAPPED },
+> > +       { "file_dirty", PAGE_SIZE, NR_FILE_DIRTY },
+> > +       { "file_writeback", PAGE_SIZE, NR_WRITEBACK },
+> > +#ifdef CONFIG_TRANSPARENT_HUGEPAGE
+> > +       /*
+> > +        * The ratio will be initialized in numa_stats_init(). Because
+> > +        * on some architectures, the macro of HPAGE_PMD_SIZE is not
+> > +        * constant(e.g. powerpc).
+> > +        */
+> > +       { "anon_thp", 0, NR_ANON_THPS },
+> > +#endif
+> > +       { "inactive_anon", PAGE_SIZE, NR_INACTIVE_ANON },
+> > +       { "active_anon", PAGE_SIZE, NR_ACTIVE_ANON },
+> > +       { "inactive_file", PAGE_SIZE, NR_INACTIVE_FILE },
+> > +       { "active_file", PAGE_SIZE, NR_ACTIVE_FILE },
+> > +       { "unevictable", PAGE_SIZE, NR_UNEVICTABLE },
+> > +       { "slab_reclaimable", 1, NR_SLAB_RECLAIMABLE_B },
+> > +       { "slab_unreclaimable", 1, NR_SLAB_UNRECLAIMABLE_B },
+> > +};
+> > +
+> > +static int __init numa_stats_init(void)
+> > +{
+> > +       int i;
+> > +
+> > +       for (i = 0; i < ARRAY_SIZE(numa_stats); i++) {
+> > +#ifdef CONFIG_TRANSPARENT_HUGEPAGE
+> > +               if (numa_stats[i].idx == NR_ANON_THPS)
+> > +                       numa_stats[i].ratio = HPAGE_PMD_SIZE;
+> > +#endif
+> > +       }
+>
+> The for loop seems excessive but I don't really have a good alternative.
 
-I think your patch slicing-and-dicing went wrong here ;-(
+Yeah, I also have no good alternative. The numa_stats is only initialized
+once. So there may be no problem :).
+
+>
+> > +
+> > +       return 0;
+> > +}
+> > +pure_initcall(numa_stats_init);
+> > +
+> > +static unsigned long memcg_node_page_state(struct mem_cgroup *memcg,
+> > +                                          unsigned int nid,
+> > +                                          enum node_stat_item idx)
+> > +{
+> > +       VM_BUG_ON(nid >= nr_node_ids);
+> > +       return lruvec_page_state(mem_cgroup_lruvec(memcg, NODE_DATA(nid)), idx);
+> > +}
+> > +
+> > +static const char *memory_numa_stat_format(struct mem_cgroup *memcg)
+> > +{
+> > +       int i;
+> > +       struct seq_buf s;
+> > +
+> > +       /* Reserve a byte for the trailing null */
+> > +       seq_buf_init(&s, kmalloc(PAGE_SIZE, GFP_KERNEL), PAGE_SIZE - 1);
+> > +       if (!s.buffer)
+> > +               return NULL;
+> > +
+> > +       for (i = 0; i < ARRAY_SIZE(numa_stats); i++) {
+> > +               int nid;
+> > +
+> > +               seq_buf_printf(&s, "%s", numa_stats[i].name);
+> > +               for_each_node_state(nid, N_MEMORY) {
+> > +                       u64 size;
+> > +
+> > +                       size = memcg_node_page_state(memcg, nid,
+> > +                                                    numa_stats[i].idx);
+> > +                       size *= numa_stats[i].ratio;
+> > +                       seq_buf_printf(&s, " N%d=%llu", nid, size);
+> > +               }
+> > +               seq_buf_putc(&s, '\n');
+> > +       }
+> > +
+> > +       /* The above should easily fit into one page */
+> > +       if (WARN_ON_ONCE(seq_buf_putc(&s, '\0')))
+> > +               s.buffer[PAGE_SIZE - 1] = '\0';
+>
+> I think you should follow Michal's recommendation at
+> http://lkml.kernel.org/r/20200914115724.GO16999@dhcp22.suse.cz
+
+Here is different, because the seq_buf_putc(&s, '\n') will not add \0 unless
+we use seq_buf_puts(&s, "\n").
+
+
+-- 
+Yours,
+Muchun
