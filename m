@@ -2,293 +2,185 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E9FB826AC9E
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Sep 2020 20:54:19 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E117726AC2F
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Sep 2020 20:39:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727813AbgIOSyS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Sep 2020 14:54:18 -0400
-Received: from lelv0143.ext.ti.com ([198.47.23.248]:52734 "EHLO
-        lelv0143.ext.ti.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727222AbgIORXI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 13:23:08 -0400
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-        by lelv0143.ext.ti.com (8.15.2/8.15.2) with ESMTP id 08FFm4P5007907;
-        Tue, 15 Sep 2020 10:48:04 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-        s=ti-com-17Q1; t=1600184884;
-        bh=jtPuMyFLqNYxSalBBSBkvCc2uQoE2YZgaf6m96gJsIA=;
-        h=Subject:To:CC:References:From:Date:In-Reply-To;
-        b=qBkSaaGGQmJ79Mvpn7qPcy57kOYVC9NrqiZ3MX+IGv3lD6pzEWBtgn/ppObTwv7ta
-         OnxrQ36lWLa26HG2eW0UJCdcaUxepoUURvm/xUOwTcAzb2+n95WmfccawD+FHGcXOf
-         NKCtWBxHZ+Uo4TxjGy0iq70PPQt1++WtV4ZJgK8E=
-Received: from DFLE103.ent.ti.com (dfle103.ent.ti.com [10.64.6.24])
-        by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 08FFm47i037284
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-        Tue, 15 Sep 2020 10:48:04 -0500
-Received: from DFLE103.ent.ti.com (10.64.6.24) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 15
- Sep 2020 10:48:04 -0500
-Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE103.ent.ti.com
- (10.64.6.24) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Tue, 15 Sep 2020 10:48:04 -0500
-Received: from [10.250.232.147] (ileax41-snat.itg.ti.com [10.172.224.153])
-        by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 08FFlv31034789;
-        Tue, 15 Sep 2020 10:47:58 -0500
-Subject: Re: [RFC PATCH 00/22] Enhance VHOST to enable SoC-to-SoC
- communication
-To:     Jason Wang <jasowang@redhat.com>, Cornelia Huck <cohuck@redhat.com>
-CC:     "Michael S. Tsirkin" <mst@redhat.com>,
-        Ohad Ben-Cohen <ohad@wizery.com>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>,
-        Jon Mason <jdmason@kudzu.us>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Allen Hubbe <allenbh@gmail.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Bjorn Helgaas <bhelgaas@google.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Stefan Hajnoczi <stefanha@redhat.com>,
-        Stefano Garzarella <sgarzare@redhat.com>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-remoteproc@vger.kernel.org>, <linux-ntb@googlegroups.com>,
-        <linux-pci@vger.kernel.org>, <kvm@vger.kernel.org>,
-        <virtualization@lists.linux-foundation.org>,
-        <netdev@vger.kernel.org>
-References: <20200702082143.25259-1-kishon@ti.com>
- <20200702055026-mutt-send-email-mst@kernel.org>
- <603970f5-3289-cd53-82a9-aa62b292c552@redhat.com>
- <14c6cad7-9361-7fa4-e1c6-715ccc7e5f6b@ti.com>
- <59fd6a0b-8566-44b7-3dae-bb52b468219b@redhat.com>
- <ce9eb6a5-cd3a-a390-5684-525827b30f64@ti.com>
- <da2b671c-b05d-a57f-7bdf-8b1043a41240@redhat.com>
- <fee8a0fb-f862-03bd-5ede-8f105b6af529@ti.com>
- <b2178e1d-2f5c-e8a3-72fb-70f2f8d6aa45@redhat.com>
- <45a8a97c-2061-13ee-5da8-9877a4a3b8aa@ti.com>
- <c8739d7f-e12e-f6a2-7018-9eeaf6feb054@redhat.com>
- <20200828123409.4cd2a812.cohuck@redhat.com>
- <ac8f7e4f-9f46-919a-f5c2-89b07794f0ab@ti.com>
- <9cd58cd1-0041-3d98-baf7-6e5bc2e7e317@redhat.com>
- <edf25301-93c0-4ba6-aa85-5f04137d0906@ti.com>
- <5733dbfc-76c1-45dc-6dce-ef5449eacc73@redhat.com>
-From:   Kishon Vijay Abraham I <kishon@ti.com>
-Message-ID: <181ae83d-edeb-9406-27cc-1195fe29ae95@ti.com>
-Date:   Tue, 15 Sep 2020 21:17:51 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        id S1727912AbgIOSir (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Sep 2020 14:38:47 -0400
+Received: from mout.gmx.net ([212.227.17.20]:50887 "EHLO mout.gmx.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727941AbgIORjc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 15 Sep 2020 13:39:32 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1600191432;
+        bh=NJ6O5rFyFRlQXoAS3XFVS8BQi/rApnd7lWRwhfK2Xlg=;
+        h=X-UI-Sender-Class:Date:From:To:Cc:Subject:References:In-Reply-To;
+        b=eeQDvAacH1VlXwy4iH3Fxv2qyTjt32iVfeKBKyzgI7+LGScpg5JNVDryxc0pkFL7N
+         zqoJ1hZ3D0VN3JGismE3Z9ckMhtWuP06kvJvEVLGhRUkTahazF+9UvM7UneJRJLpW9
+         Z5eKxS0WNWMmopdQzAW4AkXHnNEFwNzlLAhdqHfM=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from ubuntu ([79.150.73.70]) by mail.gmx.com (mrgmx104
+ [212.227.17.174]) with ESMTPSA (Nemesis) id 1MEUz4-1kGWkE0klW-00G08s; Tue, 15
+ Sep 2020 19:37:12 +0200
+Date:   Tue, 15 Sep 2020 19:36:27 +0200
+From:   John Wood <john.wood@gmx.com>
+To:     Jann Horn <jannh@google.com>
+Cc:     John Wood <john.wood@gmx.com>, Kees Cook <keescook@chromium.org>,
+        Kernel Hardening <kernel-hardening@lists.openwall.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Juri Lelli <juri.lelli@redhat.com>,
+        Vincent Guittot <vincent.guittot@linaro.org>,
+        Dietmar Eggemann <dietmar.eggemann@arm.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ben Segall <bsegall@google.com>, Mel Gorman <mgorman@suse.de>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Iurii Zaikin <yzaikin@google.com>,
+        James Morris <jmorris@namei.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>, linux-doc@vger.kernel.org,
+        kernel list <linux-kernel@vger.kernel.org>,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+        linux-security-module <linux-security-module@vger.kernel.org>
+Subject: Re: [RFC PATCH 5/6] security/fbfam: Detect a fork brute force attack
+Message-ID: <20200915173627.GA2900@ubuntu>
+References: <20200910202107.3799376-1-keescook@chromium.org>
+ <20200910202107.3799376-6-keescook@chromium.org>
+ <202009101634.52ED6751AD@keescook>
+ <CAG48ez2fP7yupg6Th+Hg0tL3o06p2PR1HtQcvy4Ro+Q5T2Nfkw@mail.gmail.com>
+ <20200913152724.GB2873@ubuntu>
+ <CAG48ez3aQXb3EuGRVvLLo7BxycqJ4Y2mL83QhY9-QMK_qkfCuQ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <5733dbfc-76c1-45dc-6dce-ef5449eacc73@redhat.com>
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAG48ez3aQXb3EuGRVvLLo7BxycqJ4Y2mL83QhY9-QMK_qkfCuQ@mail.gmail.com>
+X-Provags-ID: V03:K1:+Tv9EY0th3c1INR7wYqsaQT1v7XmqULQmf1mCMF8tBv7us+6tmw
+ 383m5XxCtjIbCae841iMOqJ2Kb5mfB5OzM0d7bWnQ/N2gDAhnuzMcocEglMiEwyJSk3JQJY
+ A8urH8HcByeEI58owhYnERH7vdI+cm29w8O8VDx8RuXDp3riBg1FpBliC3UfpGBZw8KurB1
+ T/YoWfU4tpzRllQytfgJQ==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:4Yu2qoJjF0U=:HHZzV9mfG2ygAGqXu5SlIO
+ b6fw//682jHONr9ldrDNb1XyJothxmBz6Vmqu5LRz+VzKi+Iobvg71yk1utVXXrr4ydn7w1i4
+ Bo8DAIv8PN4nGmuQR0RWyRtNXdKVtbVhLrZ0aZNjY74rEbgcOZ5GvhU03dXUlp6uiVNWc8TqQ
+ NGsPryfvIf3RXG18FTT4H8dvxc9A/Y6QFhgEv/z1GGEUNFkqS52ZarT2g5pt9KF1UNKJUNOG+
+ rV2I1k1OS49aa+PEZcbx+C4I/mT7T2mB15tgn+t42ZMBKUYChBtQS1VZvuP2v29vNARx+8vUH
+ McELVzXcPTYr5DuNcjjTYcfmow++F314PGCjv8akNZxqbrdRa+8sZ++pA9sKQ5XvRpsHrM2Ak
+ KSxXaA5SjItMhrt9SttV05Zd4wVNNa5IK6KSAoESbQCF7XT3dscdb+CCO3cWaiqoeZCRLCFqi
+ o4bOlv01jjtpTBD3UboqgTQBIPAcZsAMi8D8rzM7A/mJID5///rWiIPwQVccM8/0VBsdgBqOR
+ e/kEkRQ6ngbozYc1hfQ2g3zEJEUe/wx7fc/IB0FE8cmZhQDiN23foVrbrebSKdIJO5j0pgk1a
+ jz3wW4Y/A3oyDGMpsmuzCG4JkhpXEnVH0qogH2t8jb/sxii946biEIJX1YJiMxMugB0e0BAm9
+ w8iZuq1aeviwjREDIGBOK/znjdQSDs8mDTxlEsRgYKpjebiHBtnkZlzRu/k+JJ5xOwR9kc0Y9
+ mO0Fdl3Hh34SSKOiutb8SORvzXNnIRVpc3M7Vp/WyLRJLQ8PgL2znh+Iz3HzSxiwrW11BCiCv
+ 6SOjKvurvS/n5cvweUytu7zv3ZGkGcyT1Ysuee/GfgH809X/ExdqBIb3914Q6GdRH1pZGh+1F
+ UPo7Ir5FJsba4vmFFpTTRycPRNP7YuiC7w89snTutAfOrHXwiQIzbqoJE5eX54BP11hzCOu+o
+ kfSX6Q627hloSFcUUu+Qa4FeNLTSCDId4gHZ4s6PuDotn6DGIvbzvuB35j3FgZxZrgZshZg0+
+ U/rivOUkkySAi5J9pHKIWcY4Pe+pZYs+5viKmvT1uqldov+53m53Bq8tnNzUNi1vA778qzrd8
+ afJ7aIRJOoUeCmyAcuT0SrwjKu2GPVZZWN7iiuRHqHjcjLfxaoUq+Br+e2i2VF67MG0wFHoIf
+ K71Wpu1k0LR0wCuAoUFm2wXJOIl+tFJMKd5Riwoy7QO8/52Tfoke+fdGEv7LLWDUZxPoEN1TX
+ 78MvWsWqHA0c669IvrfXYcskGlGCPN7xB8N4Bfg==
+Content-Transfer-Encoding: quoted-printable
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Jason,
+Hi,
 
-On 15/09/20 1:48 pm, Jason Wang wrote:
-> Hi Kishon:
-> 
-> On 2020/9/14 下午3:23, Kishon Vijay Abraham I wrote:
->>> Then you need something that is functional equivalent to virtio PCI
->>> which is actually the concept of vDPA (e.g vDPA provides alternatives if
->>> the queue_sel is hard in the EP implementation).
->> Okay, I just tried to compare the 'struct vdpa_config_ops' and 'struct
->> vhost_config_ops' ( introduced in [RFC PATCH 03/22] vhost: Add ops for
->> the VHOST driver to configure VHOST device).
->>
->> struct vdpa_config_ops {
->>     /* Virtqueue ops */
->>     int (*set_vq_address)(struct vdpa_device *vdev,
->>                   u16 idx, u64 desc_area, u64 driver_area,
->>                   u64 device_area);
->>     void (*set_vq_num)(struct vdpa_device *vdev, u16 idx, u32 num);
->>     void (*kick_vq)(struct vdpa_device *vdev, u16 idx);
->>     void (*set_vq_cb)(struct vdpa_device *vdev, u16 idx,
->>               struct vdpa_callback *cb);
->>     void (*set_vq_ready)(struct vdpa_device *vdev, u16 idx, bool ready);
->>     bool (*get_vq_ready)(struct vdpa_device *vdev, u16 idx);
->>     int (*set_vq_state)(struct vdpa_device *vdev, u16 idx,
->>                 const struct vdpa_vq_state *state);
->>     int (*get_vq_state)(struct vdpa_device *vdev, u16 idx,
->>                 struct vdpa_vq_state *state);
->>     struct vdpa_notification_area
->>     (*get_vq_notification)(struct vdpa_device *vdev, u16 idx);
->>     /* vq irq is not expected to be changed once DRIVER_OK is set */
->>     int (*get_vq_irq)(struct vdpa_device *vdv, u16 idx);
->>
->>     /* Device ops */
->>     u32 (*get_vq_align)(struct vdpa_device *vdev);
->>     u64 (*get_features)(struct vdpa_device *vdev);
->>     int (*set_features)(struct vdpa_device *vdev, u64 features);
->>     void (*set_config_cb)(struct vdpa_device *vdev,
->>                   struct vdpa_callback *cb);
->>     u16 (*get_vq_num_max)(struct vdpa_device *vdev);
->>     u32 (*get_device_id)(struct vdpa_device *vdev);
->>     u32 (*get_vendor_id)(struct vdpa_device *vdev);
->>     u8 (*get_status)(struct vdpa_device *vdev);
->>     void (*set_status)(struct vdpa_device *vdev, u8 status);
->>     void (*get_config)(struct vdpa_device *vdev, unsigned int offset,
->>                void *buf, unsigned int len);
->>     void (*set_config)(struct vdpa_device *vdev, unsigned int offset,
->>                const void *buf, unsigned int len);
->>     u32 (*get_generation)(struct vdpa_device *vdev);
->>
->>     /* DMA ops */
->>     int (*set_map)(struct vdpa_device *vdev, struct vhost_iotlb *iotlb);
->>     int (*dma_map)(struct vdpa_device *vdev, u64 iova, u64 size,
->>                u64 pa, u32 perm);
->>     int (*dma_unmap)(struct vdpa_device *vdev, u64 iova, u64 size);
->>
->>     /* Free device resources */
->>     void (*free)(struct vdpa_device *vdev);
->> };
->>
->> +struct vhost_config_ops {
->> +    int (*create_vqs)(struct vhost_dev *vdev, unsigned int nvqs,
->> +              unsigned int num_bufs, struct vhost_virtqueue *vqs[],
->> +              vhost_vq_callback_t *callbacks[],
->> +              const char * const names[]);
->> +    void (*del_vqs)(struct vhost_dev *vdev);
->> +    int (*write)(struct vhost_dev *vdev, u64 vhost_dst, void *src,
->> int len);
->> +    int (*read)(struct vhost_dev *vdev, void *dst, u64 vhost_src, int
->> len);
->> +    int (*set_features)(struct vhost_dev *vdev, u64 device_features);
->> +    int (*set_status)(struct vhost_dev *vdev, u8 status);
->> +    u8 (*get_status)(struct vhost_dev *vdev);
->> +};
->> +
->> struct virtio_config_ops
->> I think there's some overlap here and some of the ops tries to do the
->> same thing.
->>
->> I think it differs in (*set_vq_address)() and (*create_vqs)().
->> [create_vqs() introduced in struct vhost_config_ops provides
->> complimentary functionality to (*find_vqs)() in struct
->> virtio_config_ops. It seemingly encapsulates the functionality of
->> (*set_vq_address)(), (*set_vq_num)(), (*set_vq_cb)(),..].
->>
->> Back to the difference between (*set_vq_address)() and (*create_vqs)(),
->> set_vq_address() directly provides the virtqueue address to the vdpa
->> device but create_vqs() only provides the parameters of the virtqueue
->> (like the number of virtqueues, number of buffers) but does not directly
->> provide the address. IMO the backend client drivers (like net or vhost)
->> shouldn't/cannot by itself know how to access the vring created on
->> virtio front-end. The vdpa device/vhost device should have logic for
->> that. That will help the client drivers to work with different types of
->> vdpa device/vhost device and can access the vring created by virtio
->> irrespective of whether the vring can be accessed via mmio or kernel
->> space or user space.
->>
->> I think vdpa always works with client drivers in userspace and providing
->> userspace address for vring.
-> 
-> 
-> Sorry for being unclear. What I meant is not replacing vDPA with the
-> vhost(bus) you proposed but the possibility of replacing virtio-pci-epf
-> with vDPA in:
+On Mon, Sep 14, 2020 at 09:39:10PM +0200, Jann Horn wrote:
+> On Sun, Sep 13, 2020 at 6:56 PM John Wood <john.wood@gmx.com> wrote:
+> > On Fri, Sep 11, 2020 at 02:01:56AM +0200, Jann Horn wrote:
+> > > On Fri, Sep 11, 2020 at 1:49 AM Kees Cook <keescook@chromium.org> wr=
+ote:
+> > > > On Thu, Sep 10, 2020 at 01:21:06PM -0700, Kees Cook wrote:
+> > > > [...]
+> > > > I don't think this is the right place for detecting a crash -- isn=
+'t
+> > > > this only for the "dumping core" condition? In other words, don't =
+you
+> > > > want to do this in get_signal()'s "fatal" block? (i.e. very close =
+to the
+> > > > do_coredump, but without the "should I dump?" check?)
+> > > >
+> > > > Hmm, but maybe I'm wrong? It looks like you're looking at noticing=
+ the
+> > > > process taking a signal from SIG_KERNEL_COREDUMP_MASK ?
+> > > >
+> > > > (Better yet: what are fatal conditions that do NOT match
+> > > > SIG_KERNEL_COREDUMP_MASK, and should those be covered?)
+> > > >
+> > > > Regardless, *this* looks like the only place without an LSM hook. =
+And it
+> > > > doesn't seem unreasonable to add one here. I assume it would proba=
+bly
+> > > > just take the siginfo pointer, which is also what you're checking.
+> > >
+> > > Good point, making this an LSM might be a good idea.
+> > >
+> > > > e.g. for include/linux/lsm_hook_defs.h:
+> > > >
+> > > > LSM_HOOK(int, 0, task_coredump, const kernel_siginfo_t *siginfo);
+> > >
+> > > I guess it should probably be an LSM_RET_VOID hook? And since, as yo=
+u
+> > > said, it's not really semantically about core dumping, maybe it shou=
+ld
+> > > be named task_fatal_signal or something like that.
+> >
+> > If I understand correctly you propose to add a new LSM hook without re=
+turn
+> > value and place it here:
+> >
+> > diff --git a/kernel/signal.c b/kernel/signal.c
+> > index a38b3edc6851..074492d23e98 100644
+> > --- a/kernel/signal.c
+> > +++ b/kernel/signal.c
+> > @@ -2751,6 +2751,8 @@ bool get_signal(struct ksignal *ksig)
+> >                         do_coredump(&ksig->info);
+> >                 }
+> >
+> > +               // Add the new LSM hook here
+> > +
+> >                 /*
+> >                  * Death signals, no core dump.
+> >                  */
+>
+> It should probably be in the "if (sig_kernel_coredump(signr)) {"
+> branch. And I'm not sure whether it should be before or after
+> do_coredump() - if you do it after do_coredump(), the hook will have
+> to wait until the core dump file has been written, which may take a
+> little bit of time.
 
-Okay, so the virtio back-end still use vhost and front end should use
-vDPA. I see. So the host side PCI driver for EPF should populate
-vdpa_config_ops and invoke vdpa_register_device().
-> 
-> My question is basically for the part of virtio_pci_epf_send_command(),
-> so it looks to me you have a vendor specific API to replace the
-> virtio-pci layout of the BAR:
+But if the LSM hook is placed in the "if (sig_kernel_coredump(signr)) {"
+branch, then only the following signals will be passed to it.
 
-Even when we use vDPA, we have to use some sort of
-virtio_pci_epf_send_command() to communicate with virtio backend right?
+SIGQUIT, SIGILL, SIGTRAP, SIGABRT, SIGFPE, SIGSEGV, SIGBUS, SIGSYS,
+SIGXCPU, SIGXFSZ, SIGEMT
 
-Right, the layout is slightly different from the standard layout.
+The above signals are extracted from SIG_KERNEL_COREDUMP_MASK macro, and
+are only related to coredump.
 
-This is the layout
-struct epf_vhost_reg_queue {
-        u8 cmd;
-        u8 cmd_status;
-        u16 status;
-        u16 num_buffers;
-        u16 msix_vector;
-        u64 queue_addr;
-} __packed;
+So, if we add a new LSM hook (named task_fatal_signal) to detect a fatal
+signal it would be better to place it just above the if statement.
 
-struct epf_vhost_reg {
-        u64 host_features;
-        u64 guest_features;
-        u16 msix_config;
-        u16 num_queues;
-        u8 device_status;
-        u8 config_generation;
-        u32 isr;
-        u8 cmd;
-        u8 cmd_status;
-        struct epf_vhost_reg_queue vq[MAX_VQS];
-} __packed;
-> 
-> 
-> +static int virtio_pci_epf_send_command(struct virtio_pci_device *vp_dev,
-> +                       u32 command)
-> +{
-> +    struct virtio_pci_epf *pci_epf;
-> +    void __iomem *ioaddr;
-> +    ktime_t timeout;
-> +    bool timedout;
-> +    int ret = 0;
-> +    u8 status;
-> +
-> +    pci_epf = to_virtio_pci_epf(vp_dev);
-> +    ioaddr = vp_dev->ioaddr;
-> +
-> +    mutex_lock(&pci_epf->lock);
-> +    writeb(command, ioaddr + HOST_CMD);
-> +    timeout = ktime_add_ms(ktime_get(), COMMAND_TIMEOUT);
-> +    while (1) {
-> +        timedout = ktime_after(ktime_get(), timeout);
-> +        status = readb(ioaddr + HOST_CMD_STATUS);
-> +
-> 
-> Several questions:
-> 
-> - It's not clear to me how the synchronization is done between the RC
-> and EP. E.g how and when the value of HOST_CMD_STATUS can be changed.
+diff --git a/kernel/signal.c b/kernel/signal.c
+index a38b3edc6851..406af87f2f96 100644
+=2D-- a/kernel/signal.c
++++ b/kernel/signal.c
+@@ -2736,6 +2736,8 @@ bool get_signal(struct ksignal *ksig)
+                 */
+                current->flags |=3D PF_SIGNALED;
 
-The HOST_CMD (commands sent to the EP) is serialized by using mutex.
-Once the EP reads the command, it resets the value in HOST_CMD. So
-HOST_CMD is less likely an issue.
++               // Place the new LSM hook here
++
+                if (sig_kernel_coredump(signr)) {
+                        if (print_fatal_signals)
+                                print_fatal_signal(ksig->info.si_signo);
 
-A sufficiently large time is given for the EP to complete it's operation
-(1 Sec) where the EP provides the status in HOST_CMD_STATUS. After it
-expires, HOST_CMD_STATUS_NONE is written to HOST_CMD_STATUS. There could
-be case where EP updates HOST_CMD_STATUS after RC writes
-HOST_CMD_STATUS_NONE, but by then HOST has already detected this as
-failure and error-ed out.
- 
-> If you still want to introduce a new transport, a virtio spec patch
-> would be helpful for us to understand the device API.
+This way all the fatal signals are caught and we also avoid the commented
+delay if a core dump is necessary.
 
-Okay, that should be on https://github.com/oasis-tcs/virtio-spec.git?
-> - You have you vendor specific layout (according to
-> virtio_pci_epb_table()), so I guess you it's better to have a vendor
-> specific vDPA driver instead
+Thanks,
+John Wood
 
-Okay, with vDPA, we are free to define our own layouts.
-> - The advantage of vendor specific vDPA driver is that it can 1) have
-> less codes 2) support userspace drivers through vhost-vDPA (instead of
-> inventing new APIs since we can't use vfio-pci here).
-
-I see there's an additional level of indirection from virtio to vDPA and
-probably no need for spec update but don't exactly see how it'll reduce
-code.
-
-For 2, Isn't vhost-vdpa supposed to run on virtio backend?
-
-From a high level, I think I should be able to use vDPA for
-virtio_pci_epf.c. Would you also suggest using vDPA for ntb_virtio.c?
-([RFC PATCH 20/22] NTB: Add a new NTB client driver to implement VIRTIO
-functionality).
-
-Thanks
-Kishon
