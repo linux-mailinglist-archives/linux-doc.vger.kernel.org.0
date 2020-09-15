@@ -2,191 +2,286 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A24EA26A9B4
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Sep 2020 18:26:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E5EBD26AA59
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Sep 2020 19:18:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727136AbgIOQ0X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Sep 2020 12:26:23 -0400
-Received: from mail.kernel.org ([198.145.29.99]:34478 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727682AbgIOQZ5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 15 Sep 2020 12:25:57 -0400
-Received: from kernel.org (unknown [87.71.73.56])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 96A0920936;
-        Tue, 15 Sep 2020 16:18:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1600186696;
-        bh=kNS2VFYnEd/KPhRHtnmjYC2U0lgvccEpIWWRdZorjVQ=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=UuLTJKI/2BDlkCzhAdZXdO7Phze+fU6p3ap+8i/sd3vdr/I5Hi5U4yp9o6PB13lH0
-         ZuDFlAbkp3tgU9RFrayVzFqYW4WJCxXIWagM397axnyN9OCpPbLSgg6bdhU9c5PFF/
-         sRar6wzjO68M3MXjSEmVY0h5IDBQ7UJv15+bCkLU=
-Date:   Tue, 15 Sep 2020 19:18:08 +0300
-From:   Mike Rapoport <rppt@kernel.org>
-To:     Phil Chang <phil.chang@mediatek.com>
-Cc:     linux-arm-kernel@lists.infradead.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Will Deacon <will@kernel.org>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Anshuman Khandual <anshuman.khandual@arm.com>,
-        YJ Chiang <yj.chiang@mediatek.com>,
-        Alix Wu <alix.wu@mediatek.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mediatek@lists.infradead.org
-Subject: Re: [PATCH] [PATCH] ARM64: Setup DMA32 zone size by bootargs
-Message-ID: <20200915161808.GH2142832@kernel.org>
-References: <20200915150855.24825-1-phil.chang@mediatek.com>
+        id S1727723AbgIORSe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Sep 2020 13:18:34 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60698 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727733AbgIORSS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 13:18:18 -0400
+Received: from mail-pj1-x1041.google.com (mail-pj1-x1041.google.com [IPv6:2607:f8b0:4864:20::1041])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D7884C0612F2
+        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 10:18:17 -0700 (PDT)
+Received: by mail-pj1-x1041.google.com with SMTP id s14so251223pju.1
+        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 10:18:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Ebq9sJqx9UJfmyOfsvRZlBUi0Qw5FSlq2i9Oj0M7RmI=;
+        b=JFmmJqAVabMeTcUBUWN6RX+HbyA9sYDZ9qn8tZT6RcHuObbQlE6QO9G3cMBvIkWhJX
+         AlEGQMF7askN6OXy3BA/YK4qC6WsPdBYvMdgE+FMqy8KmZT99k6DaiboSw/YVWkNfEIH
+         0FBUz3PRQj+gW/3hexhkEskZO1crML8glUQObahiAwGIaUzoroy2EheK0Iip4b+3bsMH
+         OXDsTYshIE86YKl8SM1erM6EedDtTH7KRimm+rq7bhOpUHoA0IF/tjSmw6zrtlOiss0W
+         YhW2/M7telw1H8Zu+H91wgKSdkH5Az4C1Lu7ictO2MyHYSm8JorAuoOG0jViRUNNWgC3
+         dRJQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=Ebq9sJqx9UJfmyOfsvRZlBUi0Qw5FSlq2i9Oj0M7RmI=;
+        b=pnrM0ou4eUT0WlGFaXINNKsXA9FnCtz5XMFacq6xhKzaHuNjVq2d/5i6SHECmD0MDO
+         AsMLKP92+AxVIE20sXVHX111DZ4we8ebmkPBhv/WwjA+JdyBBnPgjymrWD/pVEIW4i5q
+         +FzKXW3uwSJ62Lx7fUwXf56tN3cOfgxN/H+rcDdgy0+jm/JLFl0ft5AuWaWr1N4C9+a5
+         0uxfJ9OzUH19TotAJwM1P7beSEVBwylw0c8smDv8bqM072mojK0pmPab/kES14/fmcIP
+         msnM2DPEXEzVY1oZWwduIFN/Mf8aONlAOT3oiB2YVJEyKQD2wOynRypDr1eUKXih8FJH
+         mIGg==
+X-Gm-Message-State: AOAM531YjBFBGdjhLRrbnLcEHbtonvAISGLpy75AKmFCIUdMzl2ynJEB
+        +X6FMUzTafOE5+hawZHPVNvvUA==
+X-Google-Smtp-Source: ABdhPJwHQ5urJIBe7RR9E3kUyb++A2iLD/ExYs4YJBipu9rFJkl9lnCLKBxHHnefI0F9dXcyO2x2DQ==
+X-Received: by 2002:a17:90b:50e:: with SMTP id r14mr344616pjz.230.1600190297236;
+        Tue, 15 Sep 2020 10:18:17 -0700 (PDT)
+Received: from localhost.localdomain ([103.136.220.66])
+        by smtp.gmail.com with ESMTPSA id x4sm14288294pfm.86.2020.09.15.10.18.11
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 15 Sep 2020 10:18:16 -0700 (PDT)
+From:   Muchun Song <songmuchun@bytedance.com>
+To:     tj@kernel.org, lizefan@huawei.com, hannes@cmpxchg.org,
+        corbet@lwn.net, mhocko@kernel.org, vdavydov.dev@gmail.com,
+        akpm@linux-foundation.org, shakeelb@google.com, guro@fb.com,
+        rdunlap@infradead.org
+Cc:     cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        Muchun Song <songmuchun@bytedance.com>
+Subject: [PATCH v5] mm: memcontrol: Add the missing numa_stat interface for cgroup v2
+Date:   Wed, 16 Sep 2020 01:18:01 +0800
+Message-Id: <20200915171801.39761-1-songmuchun@bytedance.com>
+X-Mailer: git-send-email 2.21.0 (Apple Git-122)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200915150855.24825-1-phil.chang@mediatek.com>
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Sep 15, 2020 at 11:08:55PM +0800, Phil Chang wrote:
-> Allowing the DMA32 zone be configurable in ARM64 but at most 4Gb.
+In the cgroup v1, we have a numa_stat interface. This is useful for
+providing visibility into the numa locality information within an
+memcg since the pages are allowed to be allocated from any physical
+node. One of the use cases is evaluating application performance by
+combining this information with the application's CPU allocation.
+But the cgroup v2 does not. So this patch adds the missing information.
 
-Please add more details why would you like to limit the DMA32 zone.
+Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+Suggested-by: Shakeel Butt <shakeelb@google.com>
+Reviewed-by: Shakeel Butt <shakeelb@google.com>
+---
+ changelog in v5:
+ 1. Fix small nits pointed out by Shakeel Butt
 
-> Signed-off-by: Alix Wu <alix.wu@mediatek.com>
-> Signed-off-by: YJ Chiang <yj.chiang@mediatek.com>
-> Signed-off-by: Phil Chang <phil.chang@mediatek.com>
-> ---
-> 
->  .../admin-guide/kernel-parameters.txt         |  3 ++
->  arch/arm64/include/asm/memory.h               |  2 +
->  arch/arm64/mm/init.c                          | 39 +++++++++++++++++--
->  3 files changed, 41 insertions(+), 3 deletions(-)
-> 
-> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-> index bdc1f33fd3d1..5be6259e9ba8 100644
-> --- a/Documentation/admin-guide/kernel-parameters.txt
-> +++ b/Documentation/admin-guide/kernel-parameters.txt
-> @@ -980,6 +980,9 @@
->  			The filter can be disabled or changed to another
->  			driver later using sysfs.
->  
-> +	dma32_size=nn[MG]  [KNL,BOOT,ARM64]
-> +			Forces the DMA32 zone size of <nn> in MB.
+ changelog in v4:
+ 1. Fix some document problems pointed out by Randy Dunlap.
+ 2. Remove memory_numa_stat_format() suggested by Shakeel Butt.
 
-Most of the kernel parameters that deal with memory sizes allow either
-of [KMG] suffixes.
+ changelog in v3:
+ 1. Fix compiler error on powerpc architecture reported by kernel test robot.
+ 2. Fix a typo from "anno" to "anon".
 
-> +
->  	driver_async_probe=  [KNL]
->  			List of driver names to be probed asynchronously.
->  			Format: <driver_name1>,<driver_name2>...
-> diff --git a/arch/arm64/include/asm/memory.h b/arch/arm64/include/asm/memory.h
-> index afa722504bfd..710de08ae8ae 100644
-> --- a/arch/arm64/include/asm/memory.h
-> +++ b/arch/arm64/include/asm/memory.h
-> @@ -175,6 +175,8 @@ extern u64			kimage_vaddr;
->  /* the offset between the kernel virtual and physical mappings */
->  extern u64			kimage_voffset;
->  
-> +extern phys_addr_t		dma32_zone_size;
-> +
->  static inline unsigned long kaslr_offset(void)
->  {
->  	return kimage_vaddr - KIMAGE_VADDR;
-> diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
-> index 481d22c32a2e..c8af53680d46 100644
-> --- a/arch/arm64/mm/init.c
-> +++ b/arch/arm64/mm/init.c
-> @@ -60,6 +60,9 @@ EXPORT_SYMBOL(physvirt_offset);
->  struct page *vmemmap __ro_after_init;
->  EXPORT_SYMBOL(vmemmap);
->  
-> +phys_addr_t dma32_zone_size __ro_after_init;
-> +EXPORT_SYMBOL(dma32_zone_size);
-> +
->  /*
->   * We create both ZONE_DMA and ZONE_DMA32. ZONE_DMA covers the first 1G of
->   * memory as some devices, namely the Raspberry Pi 4, have peripherals with
-> @@ -242,6 +245,29 @@ static int __init early_mem(char *p)
->  }
->  early_param("mem", early_mem);
->  
-> +static int __init setup_dma32_zone(char *p)
-> +{
-> +	u64 size;
-> +
-> +	if (!p)
-> +		return -EINVAL;
-> +
-> +	if (kstrtoull(p, 0, &size))
-> +		return -EINVAL;
+ changelog in v2:
+ 1. Add memory.numa_stat interface in cgroup v2.
 
-Better to use memparse() here.
+ Documentation/admin-guide/cgroup-v2.rst | 72 +++++++++++++++++++++
+ mm/memcontrol.c                         | 86 +++++++++++++++++++++++++
+ 2 files changed, 158 insertions(+)
 
-> +
-> +	/* DMA32 zone size should never grater than 4G */
-> +	if (size > max_zone_phys(32) / SZ_1M)
-> +		return -EINVAL;
-> +
-> +	pr_notice("Setup dma32 zone size to %llu Mb\n", size);
-> +
-> +	dma32_zone_size = size * SZ_1M;
-> +
-> +	return 0;
-> +}
-> +
-> +early_param("dma32_size", setup_dma32_zone);
-> +
->  static int __init early_init_dt_scan_usablemem(unsigned long node,
->  		const char *uname, int depth, void *data)
->  {
-> @@ -392,10 +418,17 @@ void __init arm64_memblock_init(void)
->  		arm64_dma_phys_limit = max_zone_phys(ARM64_ZONE_DMA_BITS);
->  	}
->  
-> -	if (IS_ENABLED(CONFIG_ZONE_DMA32))
-> -		arm64_dma32_phys_limit = max_zone_phys(32);
-> -	else
-> +	if (IS_ENABLED(CONFIG_ZONE_DMA32)) {
-> +		if (dma32_zone_size) {
-> +			arm64_dma32_phys_limit = min(max_zone_phys(32),
-> +				dma32_zone_size + memblock_start_of_DRAM());
-> +		} else {
-> +			arm64_dma32_phys_limit = max_zone_phys(32);
-> +			dma32_zone_size = arm64_dma32_phys_limit;
-> +		}
-
-I think this calculations can be hidden in max_zone_phys(), e.g.
-
-diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
-index 481d22c32a2e..be3fdfb35a56 100644
---- a/arch/arm64/mm/init.c
-+++ b/arch/arm64/mm/init.c
-@@ -189,7 +189,12 @@ static void __init reserve_elfcorehdr(void)
- static phys_addr_t __init max_zone_phys(unsigned int zone_bits)
- {
- 	phys_addr_t offset = memblock_start_of_DRAM() & GENMASK_ULL(63, zone_bits);
--	return min(offset + (1ULL << zone_bits), memblock_end_of_DRAM());
-+	phys_addr_t zone_size = (1ULL << zone_bits);
+diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+index 6be43781ec7f..48bb12fc7622 100644
+--- a/Documentation/admin-guide/cgroup-v2.rst
++++ b/Documentation/admin-guide/cgroup-v2.rst
+@@ -1368,6 +1368,78 @@ PAGE_SIZE multiple when read back.
+ 		collapsing an existing range of pages. This counter is not
+ 		present when CONFIG_TRANSPARENT_HUGEPAGE is not set.
+ 
++  memory.numa_stat
++	A read-only flat-keyed file which exists on non-root cgroups.
 +
-+	if (IS_ENABLED(CONFIG_ZONE_DMA32) && zone_bits == 32 && dma32_zone_size)
-+		zone_bits = min(zone_size,dma32_zone_size);
++	This breaks down the cgroup's memory footprint into different
++	types of memory, type-specific details, and other information
++	per node on the state of the memory management system.
 +
-+	return min(offset + zone_size, memblock_end_of_DRAM());
++	This is useful for providing visibility into the NUMA locality
++	information within an memcg since the pages are allowed to be
++	allocated from any physical node. One of the use case is evaluating
++	application performance by combining this information with the
++	application's CPU allocation.
++
++	All memory amounts are in bytes.
++
++	The output format of memory.numa_stat is::
++
++	  type N0=<bytes in node 0> N1=<bytes in node 1> ...
++
++	The entries are ordered to be human readable, and new entries
++	can show up in the middle. Don't rely on items remaining in a
++	fixed position; use the keys to look up specific values!
++
++	  anon
++		Amount of memory per node used in anonymous mappings such
++		as brk(), sbrk(), and mmap(MAP_ANONYMOUS).
++
++	  file
++		Amount of memory per node used to cache filesystem data,
++		including tmpfs and shared memory.
++
++	  kernel_stack
++		Amount of memory per node allocated to kernel stacks.
++
++	  shmem
++		Amount of cached filesystem data per node that is swap-backed,
++		such as tmpfs, shm segments, shared anonymous mmap()s.
++
++	  file_mapped
++		Amount of cached filesystem data per node mapped with mmap().
++
++	  file_dirty
++		Amount of cached filesystem data per node that was modified but
++		not yet written back to disk.
++
++	  file_writeback
++		Amount of cached filesystem data per node that was modified and
++		is currently being written back to disk.
++
++	  anon_thp
++		Amount of memory per node used in anonymous mappings backed by
++		transparent hugepages.
++
++	  inactive_anon, active_anon, inactive_file, active_file, unevictable
++		Amount of memory, swap-backed and filesystem-backed,
++		per node on the internal memory management lists used
++		by the page reclaim algorithm.
++
++		As these represent internal list state (e.g. shmem pages are on
++		anon memory management lists), inactive_foo + active_foo may not
++		be equal to the value for the foo counter, since the foo counter
++		is type-based, not list-based.
++
++	  slab_reclaimable
++		Amount of memory per node used for storing in-kernel data
++		structures which might be reclaimed, such as dentries and
++		inodes.
++
++	  slab_unreclaimable
++		Amount of memory per node used for storing in-kernel data
++		structures which cannot be reclaimed on memory pressure.
++
+   memory.swap.current
+ 	A read-only single value file which exists on non-root
+ 	cgroups.
+diff --git a/mm/memcontrol.c b/mm/memcontrol.c
+index 75cd1a1e66c8..ff919ef3b57b 100644
+--- a/mm/memcontrol.c
++++ b/mm/memcontrol.c
+@@ -6425,6 +6425,86 @@ static int memory_stat_show(struct seq_file *m, void *v)
+ 	return 0;
  }
  
- static void __init zone_sizes_init(unsigned long min, unsigned long max)
-
-> +	} else {
->  		arm64_dma32_phys_limit = PHYS_MASK + 1;
-> +	}
->  
->  	reserve_crashkernel();
->  
-> -- 
-> 2.18.0
-
++#ifdef CONFIG_NUMA
++struct numa_stat {
++	const char *name;
++	unsigned int ratio;
++	enum node_stat_item idx;
++};
++
++static struct numa_stat numa_stats[] = {
++	{ "anon", PAGE_SIZE, NR_ANON_MAPPED },
++	{ "file", PAGE_SIZE, NR_FILE_PAGES },
++	{ "kernel_stack", 1024, NR_KERNEL_STACK_KB },
++	{ "shmem", PAGE_SIZE, NR_SHMEM },
++	{ "file_mapped", PAGE_SIZE, NR_FILE_MAPPED },
++	{ "file_dirty", PAGE_SIZE, NR_FILE_DIRTY },
++	{ "file_writeback", PAGE_SIZE, NR_WRITEBACK },
++#ifdef CONFIG_TRANSPARENT_HUGEPAGE
++	/*
++	 * The ratio will be initialized in numa_stats_init(). Because
++	 * on some architectures, the macro of HPAGE_PMD_SIZE is not
++	 * constant(e.g. powerpc).
++	 */
++	{ "anon_thp", 0, NR_ANON_THPS },
++#endif
++	{ "inactive_anon", PAGE_SIZE, NR_INACTIVE_ANON },
++	{ "active_anon", PAGE_SIZE, NR_ACTIVE_ANON },
++	{ "inactive_file", PAGE_SIZE, NR_INACTIVE_FILE },
++	{ "active_file", PAGE_SIZE, NR_ACTIVE_FILE },
++	{ "unevictable", PAGE_SIZE, NR_UNEVICTABLE },
++	{ "slab_reclaimable", 1, NR_SLAB_RECLAIMABLE_B },
++	{ "slab_unreclaimable", 1, NR_SLAB_UNRECLAIMABLE_B },
++};
++
++static int __init numa_stats_init(void)
++{
++	int i;
++
++	for (i = 0; i < ARRAY_SIZE(numa_stats); i++) {
++#ifdef CONFIG_TRANSPARENT_HUGEPAGE
++		if (numa_stats[i].idx == NR_ANON_THPS)
++			numa_stats[i].ratio = HPAGE_PMD_SIZE;
++#endif
++	}
++
++	return 0;
++}
++pure_initcall(numa_stats_init);
++
++static unsigned long memcg_node_page_state(struct mem_cgroup *memcg,
++					   unsigned int nid,
++					   enum node_stat_item idx)
++{
++	VM_BUG_ON(nid >= nr_node_ids);
++	return lruvec_page_state(mem_cgroup_lruvec(memcg, NODE_DATA(nid)), idx);
++}
++
++static int memory_numa_stat_show(struct seq_file *m, void *v)
++{
++	int i;
++	struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
++
++	for (i = 0; i < ARRAY_SIZE(numa_stats); i++) {
++		int nid;
++
++		seq_printf(m, "%s", numa_stats[i].name);
++		for_each_node_state(nid, N_MEMORY) {
++			u64 size;
++
++			size = memcg_node_page_state(memcg, nid,
++						     numa_stats[i].idx);
++			VM_WARN_ON_ONCE(!numa_stats[i].ratio);
++			size *= numa_stats[i].ratio;
++			seq_printf(m, " N%d=%llu", nid, size);
++		}
++		seq_putc(m, '\n');
++	}
++
++	return 0;
++}
++#endif
++
+ static int memory_oom_group_show(struct seq_file *m, void *v)
+ {
+ 	struct mem_cgroup *memcg = mem_cgroup_from_seq(m);
+@@ -6502,6 +6582,12 @@ static struct cftype memory_files[] = {
+ 		.name = "stat",
+ 		.seq_show = memory_stat_show,
+ 	},
++#ifdef CONFIG_NUMA
++	{
++		.name = "numa_stat",
++		.seq_show = memory_numa_stat_show,
++	},
++#endif
+ 	{
+ 		.name = "oom.group",
+ 		.flags = CFTYPE_NOT_ON_ROOT | CFTYPE_NS_DELEGATABLE,
 -- 
-Sincerely yours,
-Mike.
+2.20.1
+
