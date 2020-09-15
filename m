@@ -2,147 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BFADE26AB70
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Sep 2020 20:04:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E4A5326AB8E
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Sep 2020 20:10:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727987AbgIOSER (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Sep 2020 14:04:17 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39578 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727793AbgIOSDx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 14:03:53 -0400
-Received: from mail-pg1-x541.google.com (mail-pg1-x541.google.com [IPv6:2607:f8b0:4864:20::541])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 39356C06174A
-        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 11:03:52 -0700 (PDT)
-Received: by mail-pg1-x541.google.com with SMTP id k14so2380117pgi.9
-        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 11:03:52 -0700 (PDT)
+        id S1727964AbgIOSJ6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Sep 2020 14:09:58 -0400
+Received: from smtp-fw-4101.amazon.com ([72.21.198.25]:58239 "EHLO
+        smtp-fw-4101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727733AbgIOSJQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 14:09:16 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=nhPPje+UUTBY8kYUEvCGJHYilZbBe703Z6BQl0hi82o=;
-        b=znz6kYk2M1HfniaapdTD5ndtoDBHFcJW8m8WFdFuJRD4CHnMx3DVnNgZbGlkGcfQyY
-         /4/c6GGgxz1i1ALrxb0wjC/itd3L9/KDfk32rpsOmyXzHIf75v2j8TpIGouU0IfRo0A4
-         hNrCHJ1HpCS84uJ8dU70fbB0EthZ+75cxB3hrWAgn2YAiDkXlwel6axWVgtX+SH0iVzV
-         IiTWNsM7oRf3tuTa3LzvDQNw4zskrFBDebDPRIme32GBauJ3YzgwqMTKmEAngzw6nxtU
-         plv5nAAPRqeytkF/yTH5+YyooJJ2tzFWevNGTmDPPZq/scJ0B7wyCnHC+ZI+OUqMHVp9
-         olBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=nhPPje+UUTBY8kYUEvCGJHYilZbBe703Z6BQl0hi82o=;
-        b=pwUOSob9mTHlF4GDaNXnnvsfcjb6z6K4cta0zOzaXMd9+lxGyrXZWxRrNcaj1GzXUU
-         LJOq7X+08F+WZn1+rpeaKGNEv067kyWgvhhRXTWR6enu03HrmLClsog/9tRgGNg/Uhvf
-         k55lTE5OiQWwhNXIwKsSRYG0QtGHJSKEflOmK91Hh68+2/siqgCmzyz5pFOVdN8L/xMj
-         efi09uZXCvw9lULq79r0+ZAqlD5aLwmvV1T249ZTikoR8zJ2didGNKvuZoDKz+bDYgY6
-         hezO1rSFMLZvRfDKgOylr6QuCwz3JUVuOJjs0/Vax6qsAMItCoBSPHjAC6Qtof64cNsB
-         /gHg==
-X-Gm-Message-State: AOAM530jbbqFv9oYCOuQVMz4rz+fpeUOXzhItaJXXDbavkas8gWddtDk
-        vlIUSOIA8lywzCcuix+ZUSKmMuZ+s1rzNgSUrktVdg==
-X-Google-Smtp-Source: ABdhPJxm8mfbd1RkNg+nNZEp7K1x8W811B13DkAefYfGlQ8VvBcsuWI2MpSoCr5ODfRzGBd9GbAXzfHNNbAMFtRvCl4=
-X-Received: by 2002:a62:e40c:0:b029:13f:d777:f70e with SMTP id
- r12-20020a62e40c0000b029013fd777f70emr12683616pfh.2.1600193031738; Tue, 15
- Sep 2020 11:03:51 -0700 (PDT)
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1600193356; x=1631729356;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version;
+  bh=hFApYuTtXawBb/Q1U5pmebyMoxtW2mY4qfAUML9XXzE=;
+  b=Oqy7yp9+xQNOx88MKXfHF+3CTjK7kW2k3NGIE4mo6hUtGiq0p7YYHjMs
+   kvHChWCgEQvcE3ToRwMjrmJjuMDW29U9nnwwk8QucIxfaCaiz1RsHuGsH
+   X9nvs1AnAwg3FBBKLcMD3f57yaFONy6uIUfb51TTzD2mc13Zn5nPdFpFf
+   M=;
+X-IronPort-AV: E=Sophos;i="5.76,430,1592870400"; 
+   d="scan'208";a="54192495"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-1d-474bcd9f.us-east-1.amazon.com) ([10.43.8.6])
+  by smtp-border-fw-out-4101.iad4.amazon.com with ESMTP; 15 Sep 2020 18:08:53 +0000
+Received: from EX13D31EUA004.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
+        by email-inbound-relay-1d-474bcd9f.us-east-1.amazon.com (Postfix) with ESMTPS id 6A613A1E4E;
+        Tue, 15 Sep 2020 18:08:40 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.162.85) by
+ EX13D31EUA004.ant.amazon.com (10.43.165.161) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Tue, 15 Sep 2020 18:08:22 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     <akpm@linux-foundation.org>
+CC:     SeongJae Park <sjpark@amazon.de>, <Jonathan.Cameron@Huawei.com>,
+        <aarcange@redhat.com>, <acme@kernel.org>,
+        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
+        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
+        <brendanhiggins@google.com>, <cai@lca.pw>,
+        <colin.king@canonical.com>, <corbet@lwn.net>, <david@redhat.com>,
+        <dwmw@amazon.com>, <elver@google.com>, <fan.du@intel.com>,
+        <foersleo@amazon.de>, <gthelen@google.com>, <irogers@google.com>,
+        <jolsa@redhat.com>, <kirill@shutemov.name>, <mark.rutland@arm.com>,
+        <mgorman@suse.de>, <minchan@kernel.org>, <mingo@redhat.com>,
+        <namhyung@kernel.org>, <peterz@infradead.org>,
+        <rdunlap@infradead.org>, <riel@surriel.com>, <rientjes@google.com>,
+        <rostedt@goodmis.org>, <rppt@kernel.org>, <sblbir@amazon.com>,
+        <shakeelb@google.com>, <shuah@kernel.org>, <sj38.park@gmail.com>,
+        <snu@amazon.de>, <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
+        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
+        <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
+        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: [RFC PATCH 0/2] DAMON: Improve User Space Interface
+Date:   Tue, 15 Sep 2020 20:08:07 +0200
+Message-ID: <20200915180807.18812-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20200915180225.17439-2-sjpark@amazon.com>
+References: <20200915180225.17439-2-sjpark@amazon.com>
 MIME-Version: 1.0
-References: <20200915125947.26204-1-songmuchun@bytedance.com>
- <20200915143241.GH5449@casper.infradead.org> <CAMZfGtW0PqU6SLihLABA8rU+FuBqm8NksDW=EkLXy1RZfYeDGA@mail.gmail.com>
- <20200915154213.GI5449@casper.infradead.org> <CAMZfGtVTjopGgFv4xCDcF1+iGeRva_ypH4EQWcDUFBdsfqhQbA@mail.gmail.com>
- <20200915173948.GK5449@casper.infradead.org>
-In-Reply-To: <20200915173948.GK5449@casper.infradead.org>
-From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Wed, 16 Sep 2020 02:03:15 +0800
-Message-ID: <CAMZfGtW3S8kGJwff6oH14QWPXKTuQEAGdYwcLRUZxuJ7q8s7sA@mail.gmail.com>
-Subject: Re: [External] Re: [RFC PATCH 00/24] mm/hugetlb: Free some vmemmap
- pages of hugetlb page
-To:     Matthew Wilcox <willy@infradead.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org,
-        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
-        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
-        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
-        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
-        anshuman.khandual@arm.com, jroedel@suse.de, almasrymina@google.com,
-        David Rientjes <rientjes@google.com>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        linux-fsdevel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.43.162.85]
+X-ClientProxiedBy: EX13D46UWB004.ant.amazon.com (10.43.161.204) To
+ EX13D31EUA004.ant.amazon.com (10.43.165.161)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 16, 2020 at 1:39 AM Matthew Wilcox <willy@infradead.org> wrote:
->
-> On Wed, Sep 16, 2020 at 01:32:46AM +0800, Muchun Song wrote:
-> > On Tue, Sep 15, 2020 at 11:42 PM Matthew Wilcox <willy@infradead.org> wrote:
-> > >
-> > > On Tue, Sep 15, 2020 at 11:28:01PM +0800, Muchun Song wrote:
-> > > > On Tue, Sep 15, 2020 at 10:32 PM Matthew Wilcox <willy@infradead.org> wrote:
-> > > > >
-> > > > > On Tue, Sep 15, 2020 at 08:59:23PM +0800, Muchun Song wrote:
-> > > > > > This patch series will free some vmemmap pages(struct page structures)
-> > > > > > associated with each hugetlbpage when preallocated to save memory.
-> > > > >
-> > > > > It would be lovely to be able to do this.  Unfortunately, it's completely
-> > > > > impossible right now.  Consider, for example, get_user_pages() called
-> > > > > on the fifth page of a hugetlb page.
-> > > >
-> > > > Can you elaborate on the problem? Thanks so much.
-> > >
-> > > OK, let's say you want to do a 2kB I/O to offset 0x5000 of a 2MB page
-> > > on a 4kB base page system.  Today, that results in a bio_vec containing
-> > > {head+5, 0, 0x800}.  Then we call page_to_phys() on that (head+5) struct
-> > > page to get the physical address of the I/O, and we turn it into a struct
-> > > scatterlist, which similarly has a reference to the page (head+5).
-> >
-> > As I know, in this case, the get_user_pages() will get a reference
-> > to the head page (head+0) before returning such that the hugetlb
-> > page can not be freed. Although get_user_pages() returns the
-> > page (head+5) and the scatterlist has a reference to the page
-> > (head+5), this patch series can handle this situation. I can not
-> > figure out where the problem is. What I missed? Thanks.
->
-> You freed pages 4-511 from the vmemmap so they could be used for
-> something else.  Page 5 isn't there any more.  So if you return head+5,
-> then when we complete the I/O, we'll look for the compound_head() of
-> head+5 and we won't find head.
->
+From: SeongJae Park <sjpark@amazon.de>
 
-We do not free pages 4-511 from the vmemmap. Actually, we only
-free pages 128-511 from the vmemmap.
+Seems lore.kernel.org missed original posting of this mail.  Resending.
 
-The 512 struct pages occupy 8 pages of physical memory. We only
-free 6 physical page frames to the buddy. But we will create a new
-mapping just like below. The virtual address of the freed pages will
-remap to the second page frame. So the second page frame is
-reused.
+NOTE: This is only an RFC for future features of DAMON patchset[1], which is
+not merged in the mainline yet.  The aim of this RFC is to show how DAMON would
+be evolved once it is merged in.  So, if you have some interest in this RFC,
+please consider reviewing the DAMON patchset, either.
 
-When a hugetlbpage is preallocated, we can change the mapping to
-bellow.
+After posting DAMON patchset[1], we received a number of comments.  Based on
+those, we listed and shared future works for DAMON in the kernel summit
+2020[2] and had a poll for the priorities of the works.  As a result, the user
+space interface improvement received a second highest priority[3].  For the
+reason, this patchset is came out.
 
-   hugetlbpage                   struct page(8 pages)          page
-frame(8 pages)
-  +-----------+ ---virt_to_page---> +-----------+   mapping to   +-----------+
-  |           |                     |     0     | -------------> |     0     |
-  |           |                     |     1     | -------------> |     1     |
-  |           |                     |     2     | -------------> +-----------+
-  |           |                     |     3     | -----------------^ ^ ^ ^ ^
-  |           |                     |     4     | -------------------+ | | |
-  |     2M    |                     |     5     | ---------------------+ | |
-  |           |                     |     6     | -----------------------+ |
-  |           |                     |     7     | -------------------------+
-  |           |                     +-----------+
-  |           |
-  |           |
-  +-----------+
+The 1st patch puts more information in the monitoring thread name so that user
+space could charge the DAMON's CPU usage on them by themselves, in fine
+granularity.  The 2nd patch makes multiple monitoring contexts available using
+the debugfs interface.
 
-As you can see, we reuse the first tail page.
+[1] https://lore.kernel.org/linux-mm/20200817105137.19296-1-sjpark@amazon.com/
+[2] https://linuxplumbersconf.org/event/7/contributions/659/
+[3] https://lore.kernel.org/linux-mm/20200831112235.2675-1-sjpark@amazon.com/
+
+Baseline and Complete Git Trees
+===============================
+
+The patches are based on the v5.8 plus DAMON v20 patchset[1], RFC v14 of DAMOS
+patchset, RFC v8 of physical address space support patchset, and some more
+trivial fixes (s/snprintf/scnprintf).  You can also clone the complete git
+tree:
+
+    $ git clone git://github.com/sjp38/linux -b damon-usi/rfc/v1
+
+The web is also available:
+https://github.com/sjp38/linux/releases/tag/damon-usi/rfc/v1
+
+[1] https://lore.kernel.org/linux-mm/20200817105137.19296-1-sjpark@amazon.com/
+[2] https://lore.kernel.org/linux-mm/20200804142430.15384-1-sjpark@amazon.com/
+[3] https://lore.kernel.org/linux-mm/20200831104730.28970-1-sjpark@amazon.com/
+
+SeongJae Park (2):
+  mm/damon: Put more information in kdamond thread name
+  mm/damon/debugfs: Support multiple contexts
+
+ include/linux/damon.h |   2 +
+ mm/damon-test.h       |  34 ++--
+ mm/damon.c            | 361 +++++++++++++++++++++++++++++++++---------
+ 3 files changed, 308 insertions(+), 89 deletions(-)
 
 -- 
-Yours,
-Muchun
+2.17.1
+
