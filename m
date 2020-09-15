@@ -2,130 +2,274 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8515D26B0B0
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 00:17:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id ED95026B0E1
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 00:21:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727767AbgIOWQ5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Sep 2020 18:16:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53688 "EHLO
+        id S1727302AbgIOWVV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Sep 2020 18:21:21 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52800 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727701AbgIOQdY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 12:33:24 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C8C3DC06178A;
-        Tue, 15 Sep 2020 09:33:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
-        References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-        Content-Type:Content-ID:Content-Description;
-        bh=3uuWATlux5CLwoYUg+NN5gOtHb6T7EXPohKT/lTJKJI=; b=n3p/yVJZRK+wbxyYEp8pkVnF7d
-        hOOHcYTdFzo7akNyeet0DZXxccLdgZIoOr6taxspBy/6Nw2HzuudIL5cO3cux/0Ps1kPOPpCaDuiZ
-        71xYegixSYfkkcrW3QjKCgmzELBA6x8wDtzWuiR4saDycE2AC35+V5oi4+daZIEjq2ToSWnv4R9cJ
-        boT1A66ZJ9G2igo0eQXvpTU9Ka7B0HiUCVukCMermJx4dV3Bpp33w8WLP0t3lZ8ajE4VQW97wGslQ
-        7cj3CUwUESH+xL2nh4b2897z9ZoRIetEyG0yjYlRcvvUAz2cF1ga1smN8Gnx/99jq8B/YKpwQ7hY/
-        2LJFzrkw==;
-Received: from 089144214092.atnat0023.highway.a1.net ([89.144.214.92] helo=localhost)
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kIDt1-0006DO-8d; Tue, 15 Sep 2020 16:32:55 +0000
-From:   Christoph Hellwig <hch@lst.de>
-To:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-        "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-        Joonyoung Shim <jy0922.shim@samsung.com>,
-        Seung-Woo Kim <sw0312.kim@samsung.com>,
-        Ben Skeggs <bskeggs@redhat.com>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Tomasz Figa <tfiga@chromium.org>,
-        Matt Porter <mporter@kernel.crashing.org>,
-        iommu@lists.linux-foundation.org
-Cc:     Stefan Richter <stefanr@s5r6.in-berlin.de>,
-        linux1394-devel@lists.sourceforge.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
-        linux-parisc@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
-        nouveau@lists.freedesktop.org, netdev@vger.kernel.org,
-        linux-scsi@vger.kernel.org, linux-mm@kvack.org,
-        alsa-devel@alsa-project.org
-Subject: [PATCH 18/18] firewire-ohci: use dma_alloc_pages
-Date:   Tue, 15 Sep 2020 17:51:22 +0200
-Message-Id: <20200915155122.1768241-19-hch@lst.de>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200915155122.1768241-1-hch@lst.de>
-References: <20200915155122.1768241-1-hch@lst.de>
+        with ESMTP id S1727651AbgIOQ1y (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 12:27:54 -0400
+Received: from mail-pg1-x543.google.com (mail-pg1-x543.google.com [IPv6:2607:f8b0:4864:20::543])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EBAB8C0612F2
+        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 09:02:17 -0700 (PDT)
+Received: by mail-pg1-x543.google.com with SMTP id d13so2217573pgl.6
+        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 09:02:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Rnn7brXuIav3vAJTNVyPdEtGBil0goNlmFybmIVcOOc=;
+        b=PTyR5b3m8PvFl4k4qRhRZIkSU9mFdibCwuJoEEZyE7EFbYgXGr4CcNzaev27AjjfNc
+         HoCamxH5F/HWhJfSDX+OxZ3APaUc1piqWZ5C+iIe+CPpXvToy3TDWysXE1tG4T9cGFdk
+         +qASkYp6nF/cB/pFMhLJF+WxCtaZk+IsKBKpOcXI59vQSqFNxEVWVlP384in/vbsvdMv
+         NF0Zer0ktFfIbKm+vjp/5IKg2aq4fkoIkaVyBrV4eH/EoF1oIq9hEI8ZZz6dxJ2DK/lM
+         LiFfSrW505/AmnrJ0giADbQGzmcL0R899C73AmhF4l+Gszx/MbcuPpM9CmtC75eOBOC5
+         PDxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Rnn7brXuIav3vAJTNVyPdEtGBil0goNlmFybmIVcOOc=;
+        b=uaFu7EnLZUuvvjDMl2q6OKZbozCozrYJwYdcGG5AXqgViJatR1YiU0V4cPk9B99isN
+         jU9AbVVXu1pce/NVC5loEfEdwrX2+KpKj4Pz1GhqFZst/osFXc9tey6rJWcPE5tXuGf1
+         Co0ptOiYFJMxptcCc4a751MgUOr0B8wZlWUPTnx6rzEr4vDOreq/62hwNaitJh2S5WJ3
+         26Z75UpMgpQJcWqRnd8L9TxTp/S0YDUUeDFTPF0BTFPhtxVonlr/i6kAjT0q3Efk97Mo
+         Y9W19pK35D1NmXRVeYuGYxRP1PgmLPezExaendhcfRyNzMghzULlAiZbPq5a0LLE7TcR
+         mi/g==
+X-Gm-Message-State: AOAM533oWTqJJKqEybZud7j0rO143PrSYWvaEflJecMpauRo3LVfFSl/
+        ActJin7SsI8pffGmCOsQvALwBQRYfEpVE2eTH8b1kQ==
+X-Google-Smtp-Source: ABdhPJxYqEDxVz62ieN2AkMu385Z+pLr9lUwQA8maNGW5KsfZeFpud0ENKNwr9poUj8Nq7YH9OZn5uAuafp5wRwdhOM=
+X-Received: by 2002:a62:e40c:0:b029:13f:d777:f70e with SMTP id
+ r12-20020a62e40c0000b029013fd777f70emr12244289pfh.2.1600185737371; Tue, 15
+ Sep 2020 09:02:17 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+References: <20200915055825.5279-1-songmuchun@bytedance.com> <a3e2a7bf-ae5a-9ca8-74f9-57af795f0380@infradead.org>
+In-Reply-To: <a3e2a7bf-ae5a-9ca8-74f9-57af795f0380@infradead.org>
+From:   Muchun Song <songmuchun@bytedance.com>
+Date:   Wed, 16 Sep 2020 00:01:41 +0800
+Message-ID: <CAMZfGtVQtsFmU_5DVSZ1mFCnqZrPHrJFKT81Zg8TXDM7c74TDQ@mail.gmail.com>
+Subject: Re: [External] Re: [PATCH v4] mm: memcontrol: Add the missing
+ numa_stat interface for cgroup v2
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     Tejun Heo <tj@kernel.org>, Zefan Li <lizefan@huawei.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Michal Hocko <mhocko@kernel.org>,
+        Vladimir Davydov <vdavydov.dev@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Shakeel Butt <shakeelb@google.com>,
+        Roman Gushchin <guro@fb.com>,
+        Cgroups <cgroups@vger.kernel.org>, linux-doc@vger.kernel.org,
+        LKML <linux-kernel@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Use dma_alloc_pages to allocate DMAable pages instead of hoping that
-the architecture either has GFP_DMA32 or not more than 4G of memory.
+On Tue, Sep 15, 2020 at 11:45 PM Randy Dunlap <rdunlap@infradead.org> wrote:
+>
+> Hi,
+>
+> On 9/14/20 10:58 PM, Muchun Song wrote:
+> > In the cgroup v1, we have a numa_stat interface. This is useful for
+> > providing visibility into the numa locality information within an
+> > memcg since the pages are allowed to be allocated from any physical
+> > node. One of the use cases is evaluating application performance by
+> > combining this information with the application's CPU allocation.
+> > But the cgroup v2 does not. So this patch adds the missing information.
+> >
+> > Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+> > Suggested-by: Shakeel Butt <shakeelb@google.com>
+> > ---
+> >  changelog in v4:
+> >  1. Fix some document problems pointed out by Randy Dunlap.
+> >  2. Remove memory_numa_stat_format() suggested by Shakeel Butt.
+> >
+> >  changelog in v3:
+> >  1. Fix compiler error on powerpc architecture reported by kernel test robot.
+> >  2. Fix a typo from "anno" to "anon".
+> >
+> >  changelog in v2:
+> >  1. Add memory.numa_stat interface in cgroup v2.
+> >
+> >  Documentation/admin-guide/cgroup-v2.rst | 72 +++++++++++++++++++++
+> >  mm/memcontrol.c                         | 86 +++++++++++++++++++++++++
+> >  2 files changed, 158 insertions(+)
+> >
+> > diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+> > index 6be43781ec7f..bcb7b202e88d 100644
+> > --- a/Documentation/admin-guide/cgroup-v2.rst
+> > +++ b/Documentation/admin-guide/cgroup-v2.rst
+> > @@ -1368,6 +1368,78 @@ PAGE_SIZE multiple when read back.
+> >               collapsing an existing range of pages. This counter is not
+> >               present when CONFIG_TRANSPARENT_HUGEPAGE is not set.
+> >
+> > +  memory.numa_stat
+> > +     A read-only flat-keyed file which exists on non-root cgroups.
+> > +
+> > +     This breaks down the cgroup's memory footprint into different
+> > +     types of memory, type-specific details, and other information
+> > +     per node on the state of the memory management system.
+> > +
+> > +     This is useful for providing visibility into the NUMA locality
+> > +     information within an memcg since the pages are allowed to be
+> > +     allocated from any physical node. One of the use cases is evaluating
+> > +     application performance by combining this information with the
+> > +     application's CPU allocation.
+> > +
+> > +     All memory amounts are in bytes.
+> > +
+> > +     The output format of memory.numa_stat is::
+> > +
+> > +       type N0=<bytes in node 0 pages> N1=<bytes in node 1 pages> ...
+>
+> I'm OK with Shakeel's suggested change here.
+>
+> > +     The entries are ordered to be human readable, and new entries
+> > +     can show up in the middle. Don't rely on items remaining in a
+> > +     fixed position; use the keys to look up specific values!
+> > +
+> > +       anon
+> > +             Amount of memory per node used in anonymous mappings such
+> > +             as brk(), sbrk(), and mmap(MAP_ANONYMOUS).
+> > +
+> > +       file
+> > +             Amount of memory per node used to cache filesystem data,
+> > +             including tmpfs and shared memory.
+> > +
+> > +       kernel_stack
+> > +             Amount of memory per node allocated to kernel stacks.
+> > +
+> > +       shmem
+> > +             Amount of cached filesystem data per node that is swap-backed,
+> > +             such as tmpfs, shm segments, shared anonymous mmap()s.
+> > +
+> > +       file_mapped
+> > +             Amount of cached filesystem data per node mapped with mmap().
+> > +
+> > +       file_dirty
+> > +             Amount of cached filesystem data per node that was modified but
+> > +             not yet written back to disk.
+> > +
+> > +       file_writeback
+> > +             Amount of cached filesystem data per node that was modified and
+> > +             is currently being written back to disk.
+> > +
+> > +       anon_thp
+> > +             Amount of memory per node used in anonymous mappings backed by
+> > +             transparent hugepages.
+> > +
+> > +       inactive_anon, active_anon, inactive_file, active_file, unevictable
+> > +             Amount of memory, swap-backed and filesystem-backed,
+> > +             per node on the internal memory management lists used
+> > +             by the page reclaim algorithm.
+> > +
+> > +             As these represent internal list state (e.g. shmem pages are on
+> > +             anon memory management lists), inactive_foo + active_foo may not
+> > +             be equal to the value for the foo counter, since the foo counter
+> > +             is type-based, not list-based.
+> > +
+> > +       slab_reclaimable
+> > +             Amount of memory per node used for storing in-kernel data
+> > +             structures which might be reclaimed, such as dentries and
+> > +             inodes.
+> > +
+> > +       slab_unreclaimable
+> > +             Amount of memory per node used for storing in-kernel data
+> > +             structures which cannot be reclaimed on memory pressure.
+> > +
+> >    memory.swap.current
+> >       A read-only single value file which exists on non-root
+> >       cgroups.
+> > diff --git a/mm/memcontrol.c b/mm/memcontrol.c
+> > index 75cd1a1e66c8..ff919ef3b57b 100644
+> > --- a/mm/memcontrol.c
+> > +++ b/mm/memcontrol.c
+> > @@ -6425,6 +6425,86 @@ static int memory_stat_show(struct seq_file *m, void *v)
+> >       return 0;
+> >  }
+> >
+> > +#ifdef CONFIG_NUMA
+> > +struct numa_stat {
+> > +     const char *name;
+> > +     unsigned int ratio;
+> > +     enum node_stat_item idx;
+> > +};
+> > +
+> > +static struct numa_stat numa_stats[] = {
+> > +     { "anon", PAGE_SIZE, NR_ANON_MAPPED },
+> > +     { "file", PAGE_SIZE, NR_FILE_PAGES },
+> > +     { "kernel_stack", 1024, NR_KERNEL_STACK_KB },
+> > +     { "shmem", PAGE_SIZE, NR_SHMEM },
+> > +     { "file_mapped", PAGE_SIZE, NR_FILE_MAPPED },
+> > +     { "file_dirty", PAGE_SIZE, NR_FILE_DIRTY },
+> > +     { "file_writeback", PAGE_SIZE, NR_WRITEBACK },
+> > +#ifdef CONFIG_TRANSPARENT_HUGEPAGE
+> > +     /*
+> > +      * The ratio will be initialized in numa_stats_init(). Because
+> > +      * on some architectures, the macro of HPAGE_PMD_SIZE is not
+> > +      * constant(e.g. powerpc).
+> > +      */
+> > +     { "anon_thp", 0, NR_ANON_THPS },
+> > +#endif
+> > +     { "inactive_anon", PAGE_SIZE, NR_INACTIVE_ANON },
+> > +     { "active_anon", PAGE_SIZE, NR_ACTIVE_ANON },
+> > +     { "inactive_file", PAGE_SIZE, NR_INACTIVE_FILE },
+> > +     { "active_file", PAGE_SIZE, NR_ACTIVE_FILE },
+> > +     { "unevictable", PAGE_SIZE, NR_UNEVICTABLE },
+> > +     { "slab_reclaimable", 1, NR_SLAB_RECLAIMABLE_B },
+> > +     { "slab_unreclaimable", 1, NR_SLAB_UNRECLAIMABLE_B },
+> > +};
+> > +
+> > +static int __init numa_stats_init(void)
+> > +{
+> > +     int i;
+> > +
+> > +     for (i = 0; i < ARRAY_SIZE(numa_stats); i++) {
+> > +#ifdef CONFIG_TRANSPARENT_HUGEPAGE
+> > +             if (numa_stats[i].idx == NR_ANON_THPS)
+> > +                     numa_stats[i].ratio = HPAGE_PMD_SIZE;
+> > +#endif
+> > +     }
+>
+> Although the loop may be needed sometime in the future due to
+> other changes.. why couldn't it be like this for now?
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
----
- drivers/firewire/ohci.c | 26 +++++++++++---------------
- 1 file changed, 11 insertions(+), 15 deletions(-)
+The compiler is so smart, so there is nothing difference between
+them. I disassemble the numa_stats_init when
+!CONFIG_TRANSPARENT_HUGEPAGE.
 
-diff --git a/drivers/firewire/ohci.c b/drivers/firewire/ohci.c
-index 020cb15a4d8fcc..9811c40956e54d 100644
---- a/drivers/firewire/ohci.c
-+++ b/drivers/firewire/ohci.c
-@@ -674,17 +674,16 @@ static void ar_context_link_page(struct ar_context *ctx, unsigned int index)
- 
- static void ar_context_release(struct ar_context *ctx)
- {
-+	struct device *dev = ctx->ohci->card.device;
- 	unsigned int i;
- 
- 	vunmap(ctx->buffer);
- 
--	for (i = 0; i < AR_BUFFERS; i++)
--		if (ctx->pages[i]) {
--			dma_unmap_page(ctx->ohci->card.device,
--				       ar_buffer_bus(ctx, i),
--				       PAGE_SIZE, DMA_FROM_DEVICE);
--			__free_page(ctx->pages[i]);
--		}
-+	for (i = 0; i < AR_BUFFERS; i++) {
-+		if (ctx->pages[i])
-+			dma_free_pages(dev, PAGE_SIZE, ctx->pages[i],
-+				       ar_buffer_bus(ctx, i), DMA_FROM_DEVICE);
-+	}
- }
- 
- static void ar_context_abort(struct ar_context *ctx, const char *error_msg)
-@@ -970,6 +969,7 @@ static void ar_context_tasklet(unsigned long data)
- static int ar_context_init(struct ar_context *ctx, struct fw_ohci *ohci,
- 			   unsigned int descriptors_offset, u32 regs)
- {
-+	struct device *dev = ohci->card.device;
- 	unsigned int i;
- 	dma_addr_t dma_addr;
- 	struct page *pages[AR_BUFFERS + AR_WRAPAROUND_PAGES];
-@@ -980,17 +980,13 @@ static int ar_context_init(struct ar_context *ctx, struct fw_ohci *ohci,
- 	tasklet_init(&ctx->tasklet, ar_context_tasklet, (unsigned long)ctx);
- 
- 	for (i = 0; i < AR_BUFFERS; i++) {
--		ctx->pages[i] = alloc_page(GFP_KERNEL | GFP_DMA32);
-+		ctx->pages[i] = dma_alloc_pages(dev, PAGE_SIZE, &dma_addr,
-+						DMA_FROM_DEVICE, GFP_KERNEL);
- 		if (!ctx->pages[i])
- 			goto out_of_memory;
--		dma_addr = dma_map_page(ohci->card.device, ctx->pages[i],
--					0, PAGE_SIZE, DMA_FROM_DEVICE);
--		if (dma_mapping_error(ohci->card.device, dma_addr)) {
--			__free_page(ctx->pages[i]);
--			ctx->pages[i] = NULL;
--			goto out_of_memory;
--		}
- 		set_page_private(ctx->pages[i], dma_addr);
-+		dma_sync_single_for_device(dev, dma_addr, PAGE_SIZE,
-+					   DMA_FROM_DEVICE);
- 	}
- 
- 	for (i = 0; i < AR_BUFFERS; i++)
+Dump of assembler code for function numa_stats_init:
+   0xffffffff8273b061 <+0>: callq  0xffffffff81057490 <__fentry__>
+   0xffffffff8273b066 <+5>: xor    %eax,%eax
+   0xffffffff8273b068 <+7>: retq
+
+>
+>
+> > +#ifdef CONFIG_TRANSPARENT_HUGEPAGE
+> > +     for (i = 0; i < ARRAY_SIZE(numa_stats); i++) {
+> > +             if (numa_stats[i].idx == NR_ANON_THPS)
+> > +                     numa_stats[i].ratio = HPAGE_PMD_SIZE;
+> > +     }
+> > +#endif
+>
+>
+> > +
+> > +     return 0;
+> > +}
+> > +pure_initcall(numa_stats_init);
+>
+>
+> thanks.
+> --
+> ~Randy
+>
+
+
 -- 
-2.28.0
-
+Yours,
+Muchun
