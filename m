@@ -2,116 +2,154 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 92C2E26B063
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 00:09:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C995B26B149
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 00:28:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728016AbgIOWJe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Sep 2020 18:09:34 -0400
-Received: from mga09.intel.com ([134.134.136.24]:23273 "EHLO mga09.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727917AbgIOUSl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 15 Sep 2020 16:18:41 -0400
-IronPort-SDR: +rDzzhe/010fi/TR/LXEWHPuGLskjGLU7DF1MixvvBD3J2PSvMINWSvp+/vuSlp4D6ftU85u7s
- mDBMzWHDcupg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9745"; a="160274392"
-X-IronPort-AV: E=Sophos;i="5.76,430,1592895600"; 
-   d="scan'208";a="160274392"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2020 13:16:44 -0700
-IronPort-SDR: C21JFcp5L3IyVaR6VNoNRpn9g5UUxFHa0FtfPv5gaDUxRuFfz+O+12WK+kTXZovTK9h1xkn+TF
- gyWGw97/7pKA==
-X-IronPort-AV: E=Sophos;i="5.76,430,1592895600"; 
-   d="scan'208";a="302292684"
-Received: from yyu32-mobl1.amr.corp.intel.com (HELO [10.209.27.25]) ([10.209.27.25])
-  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Sep 2020 13:16:42 -0700
-Subject: Re: [NEEDS-REVIEW] Re: [PATCH v11 25/25] x86/cet/shstk: Add
- arch_prctl functions for shadow stack
-To:     Dave Hansen <dave.hansen@intel.com>,
-        Andy Lutomirski <luto@kernel.org>
-Cc:     Dave Martin <Dave.Martin@arm.com>, "H.J. Lu" <hjl.tools@gmail.com>,
-        Florian Weimer <fweimer@redhat.com>, X86 ML <x86@kernel.org>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>,
-        LKML <linux-kernel@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux-MM <linux-mm@kvack.org>,
-        linux-arch <linux-arch@vger.kernel.org>,
-        Linux API <linux-api@vger.kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Jann Horn <jannh@google.com>, Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Weijiang Yang <weijiang.yang@intel.com>
-References: <086c73d8-9b06-f074-e315-9964eb666db9@intel.com>
- <20200901102758.GY6642@arm.com>
- <c91bbad8-9e45-724b-4526-fe3674310c57@intel.com>
- <CALCETrWJQgtO_tP1pEaDYYsFgkZ=fOxhyTRE50THcxYoHyTTwg@mail.gmail.com>
- <32005d57-e51a-7c7f-4e86-612c2ff067f3@intel.com>
- <46dffdfd-92f8-0f05-6164-945f217b0958@intel.com>
- <ed929729-4677-3d3b-6bfd-b379af9272b8@intel.com>
- <6e1e22a5-1b7f-2783-351e-c8ed2d4893b8@intel.com>
- <5979c58d-a6e3-d14d-df92-72cdeb97298d@intel.com>
- <ab1a3344-60f4-9b9d-81d4-e6538fdcafcf@intel.com>
- <08c91835-8486-9da5-a7d1-75e716fc5d36@intel.com>
- <a881837d-c844-30e8-a614-8b92be814ef6@intel.com>
- <cbec8861-8722-ec31-2c02-1cfed20255eb@intel.com>
- <b3379d26-d8a7-deb7-59f1-c994bb297dcb@intel.com>
- <a1efc4330a3beff10671949eddbba96f8cde96da.camel@intel.com>
- <41aa5e8f-ad88-2934-6d10-6a78fcbe019b@intel.com>
- <bf2ab309-f8c4-83da-1c0a-5684e5bc5c82@intel.com>
- <2f137667122486a0cea3b0dbfa99d02f74870673.camel@intel.com>
- <6a04252c-da02-0217-270b-650bd3d852c7@intel.com>
-From:   "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Message-ID: <439e1e08-58c0-ac91-b073-a471111ad8e2@intel.com>
-Date:   Tue, 15 Sep 2020 13:16:41 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+        id S1726762AbgIOW22 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Sep 2020 18:28:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52760 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727660AbgIOW2A (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 18:28:00 -0400
+Received: from mail-pj1-x1041.google.com (mail-pj1-x1041.google.com [IPv6:2607:f8b0:4864:20::1041])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 85C8FC06174A;
+        Tue, 15 Sep 2020 15:27:59 -0700 (PDT)
+Received: by mail-pj1-x1041.google.com with SMTP id v14so499285pjd.4;
+        Tue, 15 Sep 2020 15:27:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HqPwY8D5/2Rw/0M6IfuCI4L/UKIJJbUOuXp1DTvLlRA=;
+        b=BkzjLz5kiB/xuGCmoqqZxpS2LzVFv1Ex8tWMw9Gz3y3tcX9m21lRC8umgl3+FT7tra
+         wJplU2JBCidttN5t2XZEhDzFtBvAe0gGMeHhk0bxket7A5Z6DqlqGHh3+PI+8s3bHRv/
+         fTtOZJLDkc2B8BTdgCpLLHrIsn5bjYqeBeK/he1gyUUXkXjBMq1fVupqvjFoA9UJ3WXJ
+         M9krBtcHhd3NqtiLIkwsM5+MWra38TEUzQJfnbC9F7oTwSpuQi5uGcZqSKk28GtyMepo
+         6PYLgbjEtBnNZHDDnZI/8R4lSDTr3gEBr9EJeSrtynU0XWFn87oLzy3UiEVx7dExycjZ
+         tGIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=HqPwY8D5/2Rw/0M6IfuCI4L/UKIJJbUOuXp1DTvLlRA=;
+        b=hDuvEM7KY1gtm5Ni4zzwVgDtK62u3Zl9WfIrjia2YN5Gn38ZfdjrAdz+HDvXoyF7SV
+         PNCGyofJN8L2TmW8y6wVx6DP4+fRLvNFNaZsmuQswV1v4NZ5569b0eVrzlJkU1E4lxbD
+         gxBHH5xZu7kJ6XG/UiPpi9xJkUQUVA8u8BHuQ+52Jy7/Ypid1cLrVvbpLRf34e+1mz8Z
+         HZxNCjlSB5+W+RFtuPjBQ3mcao/H8YNjGH9p3tIVhzx4rtHy+JE0mmPybLR8T7YfI/nu
+         QzgxFbP4lf1IDIH0AH2KgjtByTxlM9bdwi05QNVaDtcHJJJktUw5OTyFiq3igj/lfz62
+         GTIw==
+X-Gm-Message-State: AOAM533bA2rFnGsiquHGnsFVWC+PuqpBMll0zICCFL/xYyeatdyewe5/
+        7fDsOfNDPN74UoShEFryHp8=
+X-Google-Smtp-Source: ABdhPJyYpoBwd236OANinSrbO3oKUuVxCwfV5vxtAk5hZv5ChrdZt+X9Z3WxHzAR9HbgvAXYo7UtFQ==
+X-Received: by 2002:a17:902:7:b029:d1:e5e7:be08 with SMTP id 7-20020a1709020007b02900d1e5e7be08mr3702095pla.59.1600208877626;
+        Tue, 15 Sep 2020 15:27:57 -0700 (PDT)
+Received: from localhost.localdomain (sau-ff5be-or.servercontrol.com.au. [43.250.207.3])
+        by smtp.gmail.com with ESMTPSA id y6sm472038pji.1.2020.09.15.15.27.46
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Sep 2020 15:27:56 -0700 (PDT)
+From:   Bhaskar Chowdhury <unixbhaskar@gmail.com>
+To:     b.zolnierkie@samsung.com, linux-fbdev@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc:     corbet@lwn.net, rdunlap@infradead.org, gregkh@linuxfoundation.org,
+        daniel@ffwll.ch, yuanmingbuaa@gmail.com, w@1wt.eu,
+        nopitydays@gmail.com, zhangyunhai@nsfocus.com, luto@amacapital.net,
+        torvalds@linux-foundation.org,
+        Bhaskar Chowdhury <unixbhaskar@gmail.com>
+Subject: [PATCH] docs: fb: Remove framebuffer scrollback option for boot
+Date:   Wed, 16 Sep 2020 03:55:11 +0530
+Message-Id: <20200915222511.17140-1-unixbhaskar@gmail.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <6a04252c-da02-0217-270b-650bd3d852c7@intel.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 9/15/2020 12:24 PM, Dave Hansen wrote:
-> On 9/15/20 12:08 PM, Yu-cheng Yu wrote:
->> On Mon, 2020-09-14 at 17:12 -0700, Yu, Yu-cheng wrote:
->>> On 9/14/2020 7:50 AM, Dave Hansen wrote:
->>>> On 9/11/20 3:59 PM, Yu-cheng Yu wrote:
->>>> ...
->>>>> Here are the changes if we take the mprotect(PROT_SHSTK) approach.
->>>>> Any comments/suggestions?
->>>> I still don't like it. :)
->>>>
->>>> I'll also be much happier when there's a proper changelog to accompany
->>>> this which also spells out the alternatives any why they suck so much.
->> [...]
->>
->> I revised it.  If this turns out needing more work/discussion, we can split it
->> out from the shadow stack series.
-> 
-> Where does that leave things?  You only get shadow stacks for
-> single-threaded apps which have the ELF bits set?
-> 
+This patch remove the scrollback option under boot options.
+Plus readjust the numbers for the options in that section.
 
-As long as the system supports shadow stack, any application can 
-mmap()/mprotect() a shadow stack.  A pthread can allocate a shadow stack 
-too.  However, only shadow stack-enabled programs can activate/use the 
-shadow stack.
+Commit 973c096f6a85(vgacon: remove software scrollback support)
+Commit 50145474f6ef(fbcon: remove soft scrollback code)
+
+Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+---
+ Documentation/fb/fbcon.rst | 21 +++++++--------------
+ 1 file changed, 7 insertions(+), 14 deletions(-)
+
+diff --git a/Documentation/fb/fbcon.rst b/Documentation/fb/fbcon.rst
+index e57a3d1d085a..328f6980698c 100644
+--- a/Documentation/fb/fbcon.rst
++++ b/Documentation/fb/fbcon.rst
+@@ -87,15 +87,8 @@ C. Boot options
+ 	Note, not all drivers can handle font with widths not divisible by 8,
+ 	such as vga16fb.
+ 
+-2. fbcon=scrollback:<value>[k]
+ 
+-	The scrollback buffer is memory that is used to preserve display
+-	contents that has already scrolled past your view.  This is accessed
+-	by using the Shift-PageUp key combination.  The value 'value' is any
+-	integer. It defaults to 32KB.  The 'k' suffix is optional, and will
+-	multiply the 'value' by 1024.
+-
+-3. fbcon=map:<0123>
++2. fbcon=map:<0123>
+ 
+ 	This is an interesting option. It tells which driver gets mapped to
+ 	which console. The value '0123' is a sequence that gets repeated until
+@@ -116,7 +109,7 @@ C. Boot options
+ 	Later on, when you want to map the console the to the framebuffer
+ 	device, you can use the con2fbmap utility.
+ 
+-4. fbcon=vc:<n1>-<n2>
++3. fbcon=vc:<n1>-<n2>
+ 
+ 	This option tells fbcon to take over only a range of consoles as
+ 	specified by the values 'n1' and 'n2'. The rest of the consoles
+@@ -127,7 +120,7 @@ C. Boot options
+ 	is typically located on the same video card.  Thus, the consoles that
+ 	are controlled by the VGA console will be garbled.
+ 
+-5. fbcon=rotate:<n>
++4. fbcon=rotate:<n>
+ 
+ 	This option changes the orientation angle of the console display. The
+ 	value 'n' accepts the following:
+@@ -152,21 +145,21 @@ C. Boot options
+ 	Actually, the underlying fb driver is totally ignorant of console
+ 	rotation.
+ 
+-6. fbcon=margin:<color>
++5. fbcon=margin:<color>
+ 
+ 	This option specifies the color of the margins. The margins are the
+ 	leftover area at the right and the bottom of the screen that are not
+ 	used by text. By default, this area will be black. The 'color' value
+ 	is an integer number that depends on the framebuffer driver being used.
+ 
+-7. fbcon=nodefer
++6. fbcon=nodefer
+ 
+ 	If the kernel is compiled with deferred fbcon takeover support, normally
+ 	the framebuffer contents, left in place by the firmware/bootloader, will
+ 	be preserved until there actually is some text is output to the console.
+ 	This option causes fbcon to bind immediately to the fbdev device.
+ 
+-8. fbcon=logo-pos:<location>
++7. fbcon=logo-pos:<location>
+ 
+ 	The only possible 'location' is 'center' (without quotes), and when
+ 	given, the bootup logo is moved from the default top-left corner
+@@ -174,7 +167,7 @@ C. Boot options
+ 	displayed due to multiple CPUs, the collected line of logos is moved
+ 	as a whole.
+ 
+-9. fbcon=logo-count:<n>
++8. fbcon=logo-count:<n>
+ 
+ 	The value 'n' overrides the number of bootup logos. 0 disables the
+ 	logo, and -1 gives the default which is the number of online CPUs.
+-- 
+2.26.2
+
