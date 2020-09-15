@@ -2,210 +2,169 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9A39326B172
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 00:30:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 086B626B24C
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 00:45:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727596AbgIOWaQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Sep 2020 18:30:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50904 "EHLO
+        id S1727525AbgIOWpB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Sep 2020 18:45:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47466 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727562AbgIOQRe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 12:17:34 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 00772C061A31;
-        Tue, 15 Sep 2020 09:15:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:MIME-Version:
-        References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From:Sender:Reply-To:
-        Content-Type:Content-ID:Content-Description;
-        bh=Hd44flV0rNOoconJIhItgKEmFIKY+u0t7YJsM9KNpfo=; b=i+b+ljMR1A6ObLbOtGAVyydudC
-        hto/8SEYTIbCYCenMcupFPtRyH7ImLDp6gIyHT9pL4NzgFI5182Hcg7Ggm7J+LIkLTVdFa2sp+2PG
-        PqiknmmvK74L8/T/83E7Xj30UtplIhbdP2/9Fxn/BMtux8bFLmv6LGWx97MHmk3GGb4KSzJFRE5vM
-        vAmjOp+wlLeaV84dEL54D5ju5ydcP/XD2cOjf4F8aK5TOUF15+thz3bEfyEej0tQTq2lPph2FP6ap
-        nCckCVZFsansqhCtEIqSzIPAnl7pv6Kj3AGy6JP3svH8kK9NEdRu3bgPD/it2hQbUUuNJrVBioAsR
-        fVRtUXRg==;
-Received: from 089144214092.atnat0023.highway.a1.net ([89.144.214.92] helo=localhost)
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kIDc4-0004wT-LD; Tue, 15 Sep 2020 16:15:24 +0000
-From:   Christoph Hellwig <hch@lst.de>
-To:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-        "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
-        Joonyoung Shim <jy0922.shim@samsung.com>,
-        Seung-Woo Kim <sw0312.kim@samsung.com>,
-        Ben Skeggs <bskeggs@redhat.com>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Tomasz Figa <tfiga@chromium.org>,
-        Matt Porter <mporter@kernel.crashing.org>,
-        iommu@lists.linux-foundation.org
-Cc:     Stefan Richter <stefanr@s5r6.in-berlin.de>,
-        linux1394-devel@lists.sourceforge.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-media@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-mips@vger.kernel.org,
-        linux-parisc@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
-        nouveau@lists.freedesktop.org, netdev@vger.kernel.org,
-        linux-scsi@vger.kernel.org, linux-mm@kvack.org,
-        alsa-devel@alsa-project.org
-Subject: [PATCH 10/18] hal2: convert to dma_alloc_noncoherent
-Date:   Tue, 15 Sep 2020 17:51:14 +0200
-Message-Id: <20200915155122.1768241-11-hch@lst.de>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20200915155122.1768241-1-hch@lst.de>
-References: <20200915155122.1768241-1-hch@lst.de>
+        with ESMTP id S1727441AbgIOPx7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 11:53:59 -0400
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5E65BC06174A
+        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 08:53:58 -0700 (PDT)
+Received: by mail-pf1-x442.google.com with SMTP id n14so2180167pff.6
+        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 08:53:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kU2nEMhjCVWVrMXPlsQXavcJV9QfPkKaCh123WirJUY=;
+        b=fZ2zBCziQ3BDs46gAsEfUI7yxJtBST2rD1IAijko7XSzcOwptW4Ut8cyp/pKulyFN5
+         Ya4+QRLBdUkedXev1V3EdJCBcWw7K2d1vm39dZMITMuBww53C+M6rM4NEoxRfDq+96Yq
+         2hILdPF14cQEnz3v9ybLMFkS5pimkLRnuRTMrfCq5Hqy0KBcOcUjxpRFWbPMDZMUJqMZ
+         JPJbtE/cVWhEHuZd7qbloKU9e+hR+nATFMV8pU+Rx6w1VBa40PqCN6W+dSAz4PQVeQeJ
+         kt8jlvKwp4uuM6KWcCHU8nbzruP+ox0zWXUzIfgBxlatJaEpX6d7VdrCYvQraoKKotZH
+         aM1g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=kU2nEMhjCVWVrMXPlsQXavcJV9QfPkKaCh123WirJUY=;
+        b=YQFc+ipczhnlwWKPCLYX/ZRJ3ra3GSCA5pOTPa+WMicEdW1rNSzwIwUqjWtTA0LB0Z
+         tOdmSsUOoIUmbZXr4jKc/5HPNtGBD/2Azctv5kwf1w7T87T8Ucjiwx0EPl5ADIKFkZU4
+         YYJsZkvw1QqZpgSVMiyeydUsRCvyGQAAzKb0CFW+3dkeAgTi4oxrVVhupdbThKIufYjj
+         0AStWMiOYVNUg27g8BNuONJ4VfSPQwRTiqBkwuXG1723QK/lKbjD1uRGAuS/kvKfG9Kx
+         CH1tTarLa5RwqvmiffDLSHwS+aPeTLzRCvAbhLkjbz8HrOEJXKA7ztU7Sn/VBiYzG3e8
+         PDmw==
+X-Gm-Message-State: AOAM533Lro+YGJIEORzbzHsFT2yCbUzD+pE+0Hhh3mKwRdVFPKSx7lFK
+        7q/dksezMdF7/lVAjJoTy0qx3g==
+X-Google-Smtp-Source: ABdhPJwi4fkNDvtVlto8KWYR1aJj5ID6DauHtUvOTVllokb0/rs8ghVhOYd/5I+QLqtz7r8sPEBupg==
+X-Received: by 2002:a62:1bc7:0:b029:13e:d13d:a0f6 with SMTP id b190-20020a621bc70000b029013ed13da0f6mr18184752pfb.18.1600185237926;
+        Tue, 15 Sep 2020 08:53:57 -0700 (PDT)
+Received: from localhost.localdomain ([103.136.221.70])
+        by smtp.gmail.com with ESMTPSA id b20sm14808636pfb.198.2020.09.15.08.53.53
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 15 Sep 2020 08:53:57 -0700 (PDT)
+From:   Chengming Zhou <zhouchengming@bytedance.com>
+To:     tj@kernel.org, lizefan@huawei.com, hannes@cmpxchg.org,
+        corbet@lwn.net, cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Cc:     zhouchengming@bytedance.com, luodaowen.backend@bytedance.com,
+        songmuchun@bytedance.com
+Subject: [PATCH] cgroup: Add cgroupstats numbers to cgroup.stat file
+Date:   Tue, 15 Sep 2020 23:53:49 +0800
+Message-Id: <20200915155349.15181-1-zhouchengming@bytedance.com>
+X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Use the new non-coherent DMA API including proper ownership transfers.
-This also means we can allocate the buffer memory with the proper
-direction instead of bidirectional.
+In the cgroup v1, we can use netlink interface to get cgroupstats for
+a cgroup. But it has been excluded from cgroup v2 interface intentionally
+due to the duplication and inconsistencies with other statistics.
+To make container monitor tool like "cadvisor" continue to work, we add
+these cgroupstats numbers to the cgroup.stat file, and change the
+admin-guide doc accordingly.
 
-Signed-off-by: Christoph Hellwig <hch@lst.de>
+Reported-by: Daowen Luo <luodaowen.backend@bytedance.com>
+Tested-by: Chengming Zhou <zhouchengming@bytedance.com>
+Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+Signed-off-by: Chengming Zhou <zhouchengming@bytedance.com>
 ---
- sound/mips/hal2.c | 58 ++++++++++++++++++++++-------------------------
- 1 file changed, 27 insertions(+), 31 deletions(-)
+ Documentation/admin-guide/cgroup-v2.rst | 15 ++++++++++++++
+ kernel/cgroup/cgroup.c                  | 36 +++++++++++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+)
 
-diff --git a/sound/mips/hal2.c b/sound/mips/hal2.c
-index ec84bc4c3a6e77..9ac9b58d7c8cdd 100644
---- a/sound/mips/hal2.c
-+++ b/sound/mips/hal2.c
-@@ -441,7 +441,8 @@ static inline void hal2_stop_adc(struct snd_hal2 *hal2)
- 	hal2->adc.pbus.pbus->pbdma_ctrl = HPC3_PDMACTRL_LD;
- }
+diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+index 6be43781ec7f..9f781edca95a 100644
+--- a/Documentation/admin-guide/cgroup-v2.rst
++++ b/Documentation/admin-guide/cgroup-v2.rst
+@@ -925,6 +925,21 @@ All cgroup core files are prefixed with "cgroup."
+ 		A dying cgroup can consume system resources not exceeding
+ 		limits, which were active at the moment of cgroup deletion.
  
--static int hal2_alloc_dmabuf(struct snd_hal2 *hal2, struct hal2_codec *codec)
-+static int hal2_alloc_dmabuf(struct snd_hal2 *hal2, struct hal2_codec *codec,
-+		enum dma_data_direction buffer_dir)
++          nr_running
++                Number of tasks running.
++
++          nr_sleeping
++                Number of tasks sleeping.
++
++          nr_uninterruptible
++                Number of tasks in uninterruptible state.
++
++          nr_stopped
++                Number of tasks in stopped state.
++
++          nr_io_wait
++                Number of tasks waiting on IO.
++
+   cgroup.freeze
+ 	A read-write single value file which exists on non-root cgroups.
+ 	Allowed values are "0" and "1". The default is "0".
+diff --git a/kernel/cgroup/cgroup.c b/kernel/cgroup/cgroup.c
+index 0e23ae3b1e56..c6ccacaf812d 100644
+--- a/kernel/cgroup/cgroup.c
++++ b/kernel/cgroup/cgroup.c
+@@ -42,6 +42,7 @@
+ #include <linux/rcupdate.h>
+ #include <linux/sched.h>
+ #include <linux/sched/task.h>
++#include <linux/delayacct.h>
+ #include <linux/slab.h>
+ #include <linux/spinlock.h>
+ #include <linux/percpu-rwsem.h>
+@@ -3499,11 +3500,46 @@ static int cgroup_events_show(struct seq_file *seq, void *v)
+ static int cgroup_stat_show(struct seq_file *seq, void *v)
  {
- 	struct device *dev = hal2->card->dev;
- 	struct hal2_desc *desc;
-@@ -449,15 +450,15 @@ static int hal2_alloc_dmabuf(struct snd_hal2 *hal2, struct hal2_codec *codec)
- 	int count = H2_BUF_SIZE / H2_BLOCK_SIZE;
- 	int i;
+ 	struct cgroup *cgroup = seq_css(seq)->cgroup;
++	struct css_task_iter it;
++	struct task_struct *tsk;
++	u64 nr_running = 0;
++	u64 nr_sleeping = 0;
++	u64 nr_uninterruptible = 0;
++	u64 nr_stopped = 0;
++	u64 nr_io_wait = 0;
++
++	css_task_iter_start(&cgroup->self, 0, &it);
++	while ((tsk = css_task_iter_next(&it))) {
++		switch (tsk->state) {
++		case TASK_RUNNING:
++			nr_running++;
++			break;
++		case TASK_INTERRUPTIBLE:
++			nr_sleeping++;
++			break;
++		case TASK_UNINTERRUPTIBLE:
++			nr_uninterruptible++;
++			break;
++		case TASK_STOPPED:
++			nr_stopped++;
++			break;
++		default:
++			if (delayacct_is_task_waiting_on_io(tsk))
++				nr_io_wait++;
++			break;
++		}
++	}
++	css_task_iter_end(&it);
  
--	codec->buffer = dma_alloc_attrs(dev, H2_BUF_SIZE, &buffer_dma,
--					GFP_KERNEL, DMA_ATTR_NON_CONSISTENT);
-+	codec->buffer = dma_alloc_noncoherent(dev, H2_BUF_SIZE, &buffer_dma,
-+					buffer_dir, GFP_KERNEL);
- 	if (!codec->buffer)
- 		return -ENOMEM;
--	desc = dma_alloc_attrs(dev, count * sizeof(struct hal2_desc),
--			       &desc_dma, GFP_KERNEL, DMA_ATTR_NON_CONSISTENT);
-+	desc = dma_alloc_noncoherent(dev, count * sizeof(struct hal2_desc),
-+			&desc_dma, DMA_BIDIRECTIONAL, GFP_KERNEL);
- 	if (!desc) {
--		dma_free_attrs(dev, H2_BUF_SIZE, codec->buffer, buffer_dma,
--			       DMA_ATTR_NON_CONSISTENT);
-+		dma_free_noncoherent(dev, H2_BUF_SIZE, codec->buffer, buffer_dma,
-+				buffer_dir);
- 		return -ENOMEM;
- 	}
- 	codec->buffer_dma = buffer_dma;
-@@ -470,20 +471,22 @@ static int hal2_alloc_dmabuf(struct snd_hal2 *hal2, struct hal2_codec *codec)
- 		      desc_dma : desc_dma + (i + 1) * sizeof(struct hal2_desc);
- 		desc++;
- 	}
--	dma_cache_sync(dev, codec->desc, count * sizeof(struct hal2_desc),
--		       DMA_TO_DEVICE);
-+	dma_sync_single_for_device(dev, codec->desc_dma,
-+				   count * sizeof(struct hal2_desc),
-+				   DMA_BIDIRECTIONAL);
- 	codec->desc_count = count;
+ 	seq_printf(seq, "nr_descendants %d\n",
+ 		   cgroup->nr_descendants);
+ 	seq_printf(seq, "nr_dying_descendants %d\n",
+ 		   cgroup->nr_dying_descendants);
++	seq_printf(seq, "nr_running %llu\n", nr_running);
++	seq_printf(seq, "nr_sleeping %llu\n", nr_sleeping);
++	seq_printf(seq, "nr_uninterruptible %llu\n", nr_uninterruptible);
++	seq_printf(seq, "nr_stopped %llu\n", nr_stopped);
++	seq_printf(seq, "nr_io_wait %llu\n", nr_io_wait);
+ 
  	return 0;
  }
- 
--static void hal2_free_dmabuf(struct snd_hal2 *hal2, struct hal2_codec *codec)
-+static void hal2_free_dmabuf(struct snd_hal2 *hal2, struct hal2_codec *codec,
-+		enum dma_data_direction buffer_dir)
- {
- 	struct device *dev = hal2->card->dev;
- 
--	dma_free_attrs(dev, codec->desc_count * sizeof(struct hal2_desc),
--		       codec->desc, codec->desc_dma, DMA_ATTR_NON_CONSISTENT);
--	dma_free_attrs(dev, H2_BUF_SIZE, codec->buffer, codec->buffer_dma,
--		       DMA_ATTR_NON_CONSISTENT);
-+	dma_free_noncoherent(dev, codec->desc_count * sizeof(struct hal2_desc),
-+		       codec->desc, codec->desc_dma, DMA_BIDIRECTIONAL);
-+	dma_free_noncoherent(dev, H2_BUF_SIZE, codec->buffer, codec->buffer_dma,
-+			buffer_dir);
- }
- 
- static const struct snd_pcm_hardware hal2_pcm_hw = {
-@@ -509,21 +512,16 @@ static int hal2_playback_open(struct snd_pcm_substream *substream)
- {
- 	struct snd_pcm_runtime *runtime = substream->runtime;
- 	struct snd_hal2 *hal2 = snd_pcm_substream_chip(substream);
--	int err;
- 
- 	runtime->hw = hal2_pcm_hw;
--
--	err = hal2_alloc_dmabuf(hal2, &hal2->dac);
--	if (err)
--		return err;
--	return 0;
-+	return hal2_alloc_dmabuf(hal2, &hal2->dac, DMA_TO_DEVICE);
- }
- 
- static int hal2_playback_close(struct snd_pcm_substream *substream)
- {
- 	struct snd_hal2 *hal2 = snd_pcm_substream_chip(substream);
- 
--	hal2_free_dmabuf(hal2, &hal2->dac);
-+	hal2_free_dmabuf(hal2, &hal2->dac, DMA_TO_DEVICE);
- 	return 0;
- }
- 
-@@ -579,7 +577,9 @@ static void hal2_playback_transfer(struct snd_pcm_substream *substream,
- 	unsigned char *buf = hal2->dac.buffer + rec->hw_data;
- 
- 	memcpy(buf, substream->runtime->dma_area + rec->sw_data, bytes);
--	dma_cache_sync(hal2->card->dev, buf, bytes, DMA_TO_DEVICE);
-+	dma_sync_single_for_device(hal2->card->dev,
-+			hal2->dac.buffer_dma + rec->hw_data, bytes,
-+			DMA_TO_DEVICE);
- 
- }
- 
-@@ -597,22 +597,16 @@ static int hal2_capture_open(struct snd_pcm_substream *substream)
- {
- 	struct snd_pcm_runtime *runtime = substream->runtime;
- 	struct snd_hal2 *hal2 = snd_pcm_substream_chip(substream);
--	struct hal2_codec *adc = &hal2->adc;
--	int err;
- 
- 	runtime->hw = hal2_pcm_hw;
--
--	err = hal2_alloc_dmabuf(hal2, adc);
--	if (err)
--		return err;
--	return 0;
-+	return hal2_alloc_dmabuf(hal2, &hal2->adc, DMA_FROM_DEVICE);
- }
- 
- static int hal2_capture_close(struct snd_pcm_substream *substream)
- {
- 	struct snd_hal2 *hal2 = snd_pcm_substream_chip(substream);
- 
--	hal2_free_dmabuf(hal2, &hal2->adc);
-+	hal2_free_dmabuf(hal2, &hal2->adc, DMA_FROM_DEVICE);
- 	return 0;
- }
- 
-@@ -667,7 +661,9 @@ static void hal2_capture_transfer(struct snd_pcm_substream *substream,
- 	struct snd_hal2 *hal2 = snd_pcm_substream_chip(substream);
- 	unsigned char *buf = hal2->adc.buffer + rec->hw_data;
- 
--	dma_cache_sync(hal2->card->dev, buf, bytes, DMA_FROM_DEVICE);
-+	dma_sync_single_for_cpu(hal2->card->dev,
-+			hal2->adc.buffer_dma + rec->hw_data, bytes,
-+			DMA_FROM_DEVICE);
- 	memcpy(substream->runtime->dma_area + rec->sw_data, buf, bytes);
- }
- 
 -- 
-2.28.0
+2.11.0
 
