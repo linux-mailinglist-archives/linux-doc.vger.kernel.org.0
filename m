@@ -2,154 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C995B26B149
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 00:28:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D6FE826B2D5
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 00:54:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726762AbgIOW22 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Sep 2020 18:28:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52760 "EHLO
+        id S1727453AbgIOWyR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Sep 2020 18:54:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44910 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727660AbgIOW2A (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 18:28:00 -0400
-Received: from mail-pj1-x1041.google.com (mail-pj1-x1041.google.com [IPv6:2607:f8b0:4864:20::1041])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 85C8FC06174A;
-        Tue, 15 Sep 2020 15:27:59 -0700 (PDT)
-Received: by mail-pj1-x1041.google.com with SMTP id v14so499285pjd.4;
-        Tue, 15 Sep 2020 15:27:59 -0700 (PDT)
+        with ESMTP id S1727333AbgIOPil (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Sep 2020 11:38:41 -0400
+Received: from mail-pf1-x441.google.com (mail-pf1-x441.google.com [IPv6:2607:f8b0:4864:20::441])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ED574C06174A
+        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 08:28:37 -0700 (PDT)
+Received: by mail-pf1-x441.google.com with SMTP id z19so2124449pfn.8
+        for <linux-doc@vger.kernel.org>; Tue, 15 Sep 2020 08:28:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=HqPwY8D5/2Rw/0M6IfuCI4L/UKIJJbUOuXp1DTvLlRA=;
-        b=BkzjLz5kiB/xuGCmoqqZxpS2LzVFv1Ex8tWMw9Gz3y3tcX9m21lRC8umgl3+FT7tra
-         wJplU2JBCidttN5t2XZEhDzFtBvAe0gGMeHhk0bxket7A5Z6DqlqGHh3+PI+8s3bHRv/
-         fTtOZJLDkc2B8BTdgCpLLHrIsn5bjYqeBeK/he1gyUUXkXjBMq1fVupqvjFoA9UJ3WXJ
-         M9krBtcHhd3NqtiLIkwsM5+MWra38TEUzQJfnbC9F7oTwSpuQi5uGcZqSKk28GtyMepo
-         6PYLgbjEtBnNZHDDnZI/8R4lSDTr3gEBr9EJeSrtynU0XWFn87oLzy3UiEVx7dExycjZ
-         tGIA==
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=3hFA+AYRcOFg15m1pODeTESDGf29GxzkowTbH/0FwhE=;
+        b=NvD9FH7jzHdmmVqx2+B3GaZyyb7SzVJCGbxcurxADdLywqS4prFZe+m15IKNLz/lZb
+         uufZgZRL5fc24zy97GUZiwuSjWy5SmkECf811W3pWN5ZmcZNLUppvpAj0LRvDeW5fg15
+         oxG0UXwRhqo/E0iSVuDLvwhhwAx6ZwjTAngSWBzPBAbBn+umSmm1DTYlDuAIMdMnoQTv
+         0Ffe/ORg2/b1UkMDmEKFU7XkXQUBqYfUZk1WNhhn6lDem+yq/j1f+uzz1zHXTBjRU+yO
+         2GqP9m9QdmD7dghZrVk93zAxLCXvJeT4QxQrEIhB4kRwR81ZyPu3Ikwm8LeaqyvlVhxo
+         MssA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=HqPwY8D5/2Rw/0M6IfuCI4L/UKIJJbUOuXp1DTvLlRA=;
-        b=hDuvEM7KY1gtm5Ni4zzwVgDtK62u3Zl9WfIrjia2YN5Gn38ZfdjrAdz+HDvXoyF7SV
-         PNCGyofJN8L2TmW8y6wVx6DP4+fRLvNFNaZsmuQswV1v4NZ5569b0eVrzlJkU1E4lxbD
-         gxBHH5xZu7kJ6XG/UiPpi9xJkUQUVA8u8BHuQ+52Jy7/Ypid1cLrVvbpLRf34e+1mz8Z
-         HZxNCjlSB5+W+RFtuPjBQ3mcao/H8YNjGH9p3tIVhzx4rtHy+JE0mmPybLR8T7YfI/nu
-         QzgxFbP4lf1IDIH0AH2KgjtByTxlM9bdwi05QNVaDtcHJJJktUw5OTyFiq3igj/lfz62
-         GTIw==
-X-Gm-Message-State: AOAM533bA2rFnGsiquHGnsFVWC+PuqpBMll0zICCFL/xYyeatdyewe5/
-        7fDsOfNDPN74UoShEFryHp8=
-X-Google-Smtp-Source: ABdhPJyYpoBwd236OANinSrbO3oKUuVxCwfV5vxtAk5hZv5ChrdZt+X9Z3WxHzAR9HbgvAXYo7UtFQ==
-X-Received: by 2002:a17:902:7:b029:d1:e5e7:be08 with SMTP id 7-20020a1709020007b02900d1e5e7be08mr3702095pla.59.1600208877626;
-        Tue, 15 Sep 2020 15:27:57 -0700 (PDT)
-Received: from localhost.localdomain (sau-ff5be-or.servercontrol.com.au. [43.250.207.3])
-        by smtp.gmail.com with ESMTPSA id y6sm472038pji.1.2020.09.15.15.27.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 15 Sep 2020 15:27:56 -0700 (PDT)
-From:   Bhaskar Chowdhury <unixbhaskar@gmail.com>
-To:     b.zolnierkie@samsung.com, linux-fbdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     corbet@lwn.net, rdunlap@infradead.org, gregkh@linuxfoundation.org,
-        daniel@ffwll.ch, yuanmingbuaa@gmail.com, w@1wt.eu,
-        nopitydays@gmail.com, zhangyunhai@nsfocus.com, luto@amacapital.net,
-        torvalds@linux-foundation.org,
-        Bhaskar Chowdhury <unixbhaskar@gmail.com>
-Subject: [PATCH] docs: fb: Remove framebuffer scrollback option for boot
-Date:   Wed, 16 Sep 2020 03:55:11 +0530
-Message-Id: <20200915222511.17140-1-unixbhaskar@gmail.com>
-X-Mailer: git-send-email 2.26.2
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=3hFA+AYRcOFg15m1pODeTESDGf29GxzkowTbH/0FwhE=;
+        b=GW+jfssZTfyXnZ9Jmi6IcEcVCALzBXzfNy5+6Rn3bfrl/U3U9t3FKgXaQTo7QYDx1o
+         pBtqwT1wxTCkur0FMHINeMWzGmCVwl/wAA73dx7e298Y7nJGd20/6kNA+WLOND93BHGU
+         hySYEgJwEt5BO40RWyYuGdkmKpMsjP4TS8hjsaHJPOAoxs9ccKkreu1jg31mbpfWSMkh
+         i0NvKuJvNmItoVgCGcs6yqofUCO6PInp2F+UMfIqrr+BSkJT4Bd5rt7tGeqtGAgDyFvu
+         pAJ8o7cILXTz9hWAtPTu0Qrusr5lGBUSPR95/05cKrt5f1G0tZ6chHMdE8BIEABQRpUy
+         dJSA==
+X-Gm-Message-State: AOAM532L2xZy+hhhmycdcj2XRLGeW72GyBeBi35EF8r5tddw5EMXja3T
+        sgaRE5myiLtUl5/WL8J0TqVg7YWrY9qpyKte6n/E5Q==
+X-Google-Smtp-Source: ABdhPJxqFxl0ezhOPvlUoXv87DU4ARGU0sUArN1IhU04uIEVn+Sze3RMVgqCcwOmxVDT3336+MmXOQXZxq6T9WdXFms=
+X-Received: by 2002:aa7:8287:0:b029:142:2501:39ec with SMTP id
+ s7-20020aa782870000b0290142250139ecmr2349117pfm.59.1600183717500; Tue, 15 Sep
+ 2020 08:28:37 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20200915125947.26204-1-songmuchun@bytedance.com> <20200915143241.GH5449@casper.infradead.org>
+In-Reply-To: <20200915143241.GH5449@casper.infradead.org>
+From:   Muchun Song <songmuchun@bytedance.com>
+Date:   Tue, 15 Sep 2020 23:28:01 +0800
+Message-ID: <CAMZfGtW0PqU6SLihLABA8rU+FuBqm8NksDW=EkLXy1RZfYeDGA@mail.gmail.com>
+Subject: Re: [External] Re: [RFC PATCH 00/24] mm/hugetlb: Free some vmemmap
+ pages of hugetlb page
+To:     Matthew Wilcox <willy@infradead.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
+        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
+        dave.hansen@linux.intel.com, luto@kernel.org,
+        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
+        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
+        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
+        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
+        anshuman.khandual@arm.com, jroedel@suse.de, almasrymina@google.com,
+        David Rientjes <rientjes@google.com>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>,
+        linux-fsdevel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch remove the scrollback option under boot options.
-Plus readjust the numbers for the options in that section.
+On Tue, Sep 15, 2020 at 10:32 PM Matthew Wilcox <willy@infradead.org> wrote:
+>
+> On Tue, Sep 15, 2020 at 08:59:23PM +0800, Muchun Song wrote:
+> > This patch series will free some vmemmap pages(struct page structures)
+> > associated with each hugetlbpage when preallocated to save memory.
+>
+> It would be lovely to be able to do this.  Unfortunately, it's completely
+> impossible right now.  Consider, for example, get_user_pages() called
+> on the fifth page of a hugetlb page.
 
-Commit 973c096f6a85(vgacon: remove software scrollback support)
-Commit 50145474f6ef(fbcon: remove soft scrollback code)
+Can you elaborate on the problem? Thanks so much.
 
-Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
----
- Documentation/fb/fbcon.rst | 21 +++++++--------------
- 1 file changed, 7 insertions(+), 14 deletions(-)
+>
+> I've spent a lot of time thinking about this, and there's a lot of work
+> that needs to happen before we can do this, mostly in device drivers.
+> Do you want to help?  It's a multi-year project.
 
-diff --git a/Documentation/fb/fbcon.rst b/Documentation/fb/fbcon.rst
-index e57a3d1d085a..328f6980698c 100644
---- a/Documentation/fb/fbcon.rst
-+++ b/Documentation/fb/fbcon.rst
-@@ -87,15 +87,8 @@ C. Boot options
- 	Note, not all drivers can handle font with widths not divisible by 8,
- 	such as vga16fb.
- 
--2. fbcon=scrollback:<value>[k]
- 
--	The scrollback buffer is memory that is used to preserve display
--	contents that has already scrolled past your view.  This is accessed
--	by using the Shift-PageUp key combination.  The value 'value' is any
--	integer. It defaults to 32KB.  The 'k' suffix is optional, and will
--	multiply the 'value' by 1024.
--
--3. fbcon=map:<0123>
-+2. fbcon=map:<0123>
- 
- 	This is an interesting option. It tells which driver gets mapped to
- 	which console. The value '0123' is a sequence that gets repeated until
-@@ -116,7 +109,7 @@ C. Boot options
- 	Later on, when you want to map the console the to the framebuffer
- 	device, you can use the con2fbmap utility.
- 
--4. fbcon=vc:<n1>-<n2>
-+3. fbcon=vc:<n1>-<n2>
- 
- 	This option tells fbcon to take over only a range of consoles as
- 	specified by the values 'n1' and 'n2'. The rest of the consoles
-@@ -127,7 +120,7 @@ C. Boot options
- 	is typically located on the same video card.  Thus, the consoles that
- 	are controlled by the VGA console will be garbled.
- 
--5. fbcon=rotate:<n>
-+4. fbcon=rotate:<n>
- 
- 	This option changes the orientation angle of the console display. The
- 	value 'n' accepts the following:
-@@ -152,21 +145,21 @@ C. Boot options
- 	Actually, the underlying fb driver is totally ignorant of console
- 	rotation.
- 
--6. fbcon=margin:<color>
-+5. fbcon=margin:<color>
- 
- 	This option specifies the color of the margins. The margins are the
- 	leftover area at the right and the bottom of the screen that are not
- 	used by text. By default, this area will be black. The 'color' value
- 	is an integer number that depends on the framebuffer driver being used.
- 
--7. fbcon=nodefer
-+6. fbcon=nodefer
- 
- 	If the kernel is compiled with deferred fbcon takeover support, normally
- 	the framebuffer contents, left in place by the firmware/bootloader, will
- 	be preserved until there actually is some text is output to the console.
- 	This option causes fbcon to bind immediately to the fbdev device.
- 
--8. fbcon=logo-pos:<location>
-+7. fbcon=logo-pos:<location>
- 
- 	The only possible 'location' is 'center' (without quotes), and when
- 	given, the bootup logo is moved from the default top-left corner
-@@ -174,7 +167,7 @@ C. Boot options
- 	displayed due to multiple CPUs, the collected line of logos is moved
- 	as a whole.
- 
--9. fbcon=logo-count:<n>
-+8. fbcon=logo-count:<n>
- 
- 	The value 'n' overrides the number of bootup logos. 0 disables the
- 	logo, and -1 gives the default which is the number of online CPUs.
+Welcome, we can work together.
+
+
 -- 
-2.26.2
-
+Yours,
+Muchun
