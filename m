@@ -2,69 +2,52 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B3CAD26C94A
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 21:06:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8ECB626C8FC
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 21:01:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727529AbgIPTGR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Sep 2020 15:06:17 -0400
-Received: from mail.kernel.org ([198.145.29.99]:36642 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727398AbgIPRpm (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 16 Sep 2020 13:45:42 -0400
-Received: from gaia (unknown [46.69.195.48])
+        id S1728261AbgIPTBt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Sep 2020 15:01:49 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35708 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727533AbgIPRsy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 13:48:54 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 54BA3C061756;
+        Wed, 16 Sep 2020 10:48:16 -0700 (PDT)
+Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 902F222283;
-        Wed, 16 Sep 2020 14:56:42 +0000 (UTC)
-Date:   Wed, 16 Sep 2020 15:56:40 +0100
-From:   Catalin Marinas <catalin.marinas@arm.com>
-To:     Phil Chang <phil.chang@mediatek.com>
-Cc:     linux-arm-kernel@lists.infradead.org,
-        Jonathan Corbet <corbet@lwn.net>,
-        Will Deacon <will@kernel.org>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Anshuman Khandual <anshuman.khandual@arm.com>,
-        YJ Chiang <yj.chiang@mediatek.com>,
-        Alix Wu <alix.wu@mediatek.com>,
-        Mike Rapoport <rppt@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mediatek@lists.infradead.org
-Subject: Re: [PATCH] [PATCH] ARM64: Setup DMA32 zone size by bootargs
-Message-ID: <20200916145639.GC3122@gaia>
-References: <20200916083703.GA26411@infradead.org>
- <20200916133324.6280-1-phil.chang@mediatek.com>
+        by ms.lwn.net (Postfix) with ESMTPSA id C54F92E5;
+        Wed, 16 Sep 2020 17:48:12 +0000 (UTC)
+Date:   Wed, 16 Sep 2020 11:48:11 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     "=?UTF-8?B?TsOtY29sYXM=?= F. R. A. Prado" <nfraprado@protonmail.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        lkcamp@lists.libreplanetbr.org, andrealmeid@collabora.com
+Subject: Re: [PATCH 0/3] docs: Add automatic cross-reference for
+ documentation pages
+Message-ID: <20200916114811.61721553@lwn.net>
+In-Reply-To: <20200911133339.327721-1-nfraprado@protonmail.com>
+References: <20200911133339.327721-1-nfraprado@protonmail.com>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200916133324.6280-1-phil.chang@mediatek.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 16, 2020 at 09:33:24PM +0800, Phil Chang wrote:
-> this patch allowing the DMA32 zone be configurable in ARM64.
-> For some devices, the main memory split into 2 part due to the memory
-> architecture, the efficient and less inefficient part.
-> One of the use case is fine-tune the dma32 size to contain all the
-> efficient part of memory block on this kind of architecture
-> 
-> Signed-off-by: Alix Wu <alix.wu@mediatek.com>
-> Signed-off-by: YJ Chiang <yj.chiang@mediatek.com>
-> Signed-off-by: Phil Chang <phil.chang@mediatek.com>
-> ---
-> Hi
-> 
-> supplement the reason of this usage.
+On Fri, 11 Sep 2020 13:34:27 +0000
+Nícolas F. R. A. Prado <nfraprado@protonmail.com> wrote:
 
-That's really not a good enough justification to merge such patch. As
-Christoph said, DMA32 is defined as addressing the first 4GB of RAM.
+> Cross-referencing from a documentation page to another can be done using the
+> :doc:`doc-file` directive from Sphinx.
+> This however introduces markup that could be avoided to increase readability in
+> plain text.
+> This patch series adds automatic markup for cross-referencing between
+> documentation pages.
 
-Is the memory inefficient (presumably slow) for device or for the CPU?
-Maybe you can pretend it's a separate NUMA node for the CPU.
-Alternatively, change your device DMA coherent mask and allocate only
-from ZONE_DMA (currently first 1GB on arm64).
+Once again, this looks great.  I've applied it, many thanks!
 
--- 
-Catalin
+jon
