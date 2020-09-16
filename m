@@ -2,109 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A138026CD2A
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 22:54:54 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 43C7E26CE6B
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 00:13:09 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728507AbgIPUyk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Sep 2020 16:54:40 -0400
-Received: from jabberwock.ucw.cz ([46.255.230.98]:43338 "EHLO
-        jabberwock.ucw.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726904AbgIPUyh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 16:54:37 -0400
-Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
-        id DC5031C0B76; Wed, 16 Sep 2020 22:54:34 +0200 (CEST)
-Date:   Wed, 16 Sep 2020 22:54:34 +0200
-From:   Pavel Machek <pavel@ucw.cz>
-To:     Linus Torvalds <torvalds@linux-foundation.org>
-Cc:     Randy Dunlap <rdunlap@infradead.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Yuan Ming <yuanmingbuaa@gmail.com>, Willy Tarreau <w@1wt.eu>,
-        Bartlomiej Zolnierkiewicz <b.zolnierkie@samsung.com>,
-        NopNop Nop <nopitydays@gmail.com>,
-        =?utf-8?B?5byg5LqR5rW3?= <zhangyunhai@nsfocus.com>,
-        Andy Lutomirski <luto@amacapital.net>
-Subject: Re: fbcon: remove soft scrollback code (missing Doc. patch)
-Message-ID: <20200916205434.GA10389@duo.ucw.cz>
-References: <git-mailbomb-linux-master-50145474f6ef4a9c19205b173da6264a644c7489@kernel.org>
- <c9cd22ec-60dc-d761-b488-d3a1392708c0@infradead.org>
- <CAHk-=wiNTWpqUF0HgzoyPGEaaAjxD-Bor+EE3DbJ52S30cfCWg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-        protocol="application/pgp-signature"; boundary="bp/iNruPH9dso1Pn"
-Content-Disposition: inline
-In-Reply-To: <CAHk-=wiNTWpqUF0HgzoyPGEaaAjxD-Bor+EE3DbJ52S30cfCWg@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-Sender: linux-doc-owner@vger.kernel.org
+        id S1726365AbgIPWNH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Sep 2020 18:13:07 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:36032 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726408AbgIPWNF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 18:13:05 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1600294384;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=kpo7xwAZ6M+ZyAMOUgacMMQsd0LMITNlkn7wYNkHEHg=;
+        b=S9FjfvIz1v7gkCgWORx5fnOlMzoK+OF7K4b1lNhj37xGbjBzWAyPqb0Mb6Migz876tA3mQ
+        yDmEUWV/FdHTzCA2p8QMviYZWdB3MOiGnhFdnQ6ips/coHVB/GHBJ/7rGztA6VUkF5sbAV
+        QuqNCTlW8kjHDTB2v4D5L6KQ3tUPrk4=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-30-2-RlLNKvP9eVaFvRR19N3A-1; Wed, 16 Sep 2020 17:12:05 -0400
+X-MC-Unique: 2-RlLNKvP9eVaFvRR19N3A-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 69CA81868431;
+        Wed, 16 Sep 2020 21:12:04 +0000 (UTC)
+Received: from ovpn-66-86.rdu2.redhat.com (ovpn-66-86.rdu2.redhat.com [10.10.66.86])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 9F4CE19D61;
+        Wed, 16 Sep 2020 21:11:59 +0000 (UTC)
+Message-ID: <607c446bc8d3a0cc6e96aa9792e075913ad6b2c6.camel@redhat.com>
+Subject: Re: [RFC v7 11/19] lockdep: Fix recursive read lock related
+ safe->unsafe detection
+From:   Qian Cai <cai@redhat.com>
+To:     Boqun Feng <boqun.feng@gmail.com>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Peter Zijlstra <peterz@infradead.org>,
+        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Waiman Long <longman@redhat.com>
+Date:   Wed, 16 Sep 2020 17:11:59 -0400
+In-Reply-To: <20200916161404.GD127490@debian-boqun.qqnc3lrjykvubdpftowmye0fmh.lx.internal.cloudapp.net>
+References: <20200807074238.1632519-1-boqun.feng@gmail.com>
+         <20200807074238.1632519-12-boqun.feng@gmail.com>
+         <17343f6f7f2438fc376125384133c5ba70c2a681.camel@redhat.com>
+         <20200916081046.GC127490@debian-boqun.qqnc3lrjykvubdpftowmye0fmh.lx.internal.cloudapp.net>
+         <20200916161404.GD127490@debian-boqun.qqnc3lrjykvubdpftowmye0fmh.lx.internal.cloudapp.net>
+Content-Type: text/plain; charset="UTF-8"
+Mime-Version: 1.0
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Thu, 2020-09-17 at 00:14 +0800, Boqun Feng wrote:
+> Found a way to resolve this while still keeping the BFS. Every time when
+> we want to enqueue a lock_list, we basically enqueue a whole dep list of
+> entries from the previous lock_list, so we can use a trick here: instead
+> enqueue all the entries, we only enqueue the first entry and we can
+> fetch other silbing entries with list_next_or_null_rcu(). Patch as
+> below, I also took the chance to clear the code up and add more
+> comments. I could see this number (in /proc/lockdep_stats):
+> 
+> 	max bfs queue depth:                   201
+> 
+> down to (after apply this patch)
+> 
+> 	max bfs queue depth:                   61
+> 
+> with x86_64_defconfig along with lockdep and selftest configs.
+> 
+> Qian, could you give it a try?
 
---bp/iNruPH9dso1Pn
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+It works fine as the number went down from around 3000 to 500 on our workloads.
 
-On Mon 2020-09-14 18:28:34, Linus Torvalds wrote:
-> On Mon, Sep 14, 2020 at 6:19 PM Randy Dunlap <rdunlap@infradead.org> wrot=
-e:
-> >
-> > Now someone can remove the documentation for scrollback (and "no-scroll=
-")...
->=20
-> Note that scrollback hasn't actually gone away entirely - the original
-> scrollback supported by _hardware_ still exists.
->=20
-> Of course, that's really just the old-fashioned text VGA console, but
-> that one actually scrolls not by moving any bytes around, but by
-> moving the screen start address. And the scrollback similarly isn't
-> about any software buffering, but about the ability of moving back
-> that screen start address.
->=20
-> Do people use that? Probably not. But it wasn't removed because it
-> didn't have any of the complexities and bitrot that all the software
-> buffering code had.
->=20
-> That said, I didn't check how much of the documentation is for the VGA
-> text console, and how much of it is for the actual software scrollback
-> for fbcon etc. So it is entirely possible that all the docs are about
-> the removed parts.
-
-Could we pause this madness? Scrollback is still useful. I needed it
-today... it was too small, so command results I was looking for
-already scrolled away, but... life will be really painful with 0 scrollback.
-
-You'll need it, too... as soon as you get oops and will want to see
-errors just prior to that oops.
-
-If it means I get to maintain it... I'm not happy about it but that's
-better than no scrollback.
-
- Kernel is now very verbose, so important messages
- during bootup scroll away. It is way bigger deal when you can no
- longer get to them using shift-pageup.
-
- fsck is rather verbose, too, and there's no easy way to run that under
- X terminal... and yes, that makes scrollback very useful, too.
-
-Best regards,
-								Pavel
---=20
-(english) http://www.livejournal.com/~pavelmachek
-(cesky, pictures) http://atrey.karlin.mff.cuni.cz/~pavel/picture/horses/blo=
-g.html
-
---bp/iNruPH9dso1Pn
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iF0EABECAB0WIQRPfPO7r0eAhk010v0w5/Bqldv68gUCX2J7igAKCRAw5/Bqldv6
-8uAQAKCJl9d/+C94slkWoDEqnA9Sxe/f1ACePzzUiVttoyERR+W9wtLGIlFDYHU=
-=//6K
------END PGP SIGNATURE-----
-
---bp/iNruPH9dso1Pn--
