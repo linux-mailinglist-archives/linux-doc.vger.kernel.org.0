@@ -2,69 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9665F26C8EB
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 21:00:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7A57626C7F5
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 20:37:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727390AbgIPRua (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Sep 2020 13:50:30 -0400
-Received: from mail-wm1-f68.google.com ([209.85.128.68]:36772 "EHLO
-        mail-wm1-f68.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727552AbgIPRtG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 13:49:06 -0400
-Received: by mail-wm1-f68.google.com with SMTP id z9so3940882wmk.1;
-        Wed, 16 Sep 2020 10:48:55 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=9YduFabkaAz51UI756numtXbvX9M9QxKpDfQ0I1NJKI=;
-        b=gmmBuO/LxKkUV0a6H1DwGn8wC8eQVSludYcEeEoxVWkKhrZgcFI/mf6qsUz04bq1j3
-         beIRlm5JYDkYkq0y0ChKoJHYR0ApRt58+Cd+xQXqhrg6eUArXdD6d3t44TII3nGN2daa
-         hnY39I1D1qyUqRCX/CtUqeaoqcx53dyj+onWY6UIiY0sUBaXt2yJVB7QqnVtf38rRVii
-         swwM1L1QN0FbDkulVXTontLQafOpTXvJU+JJpXK0F7aP9PU9IBhArXm0GFCe1aZI3ZeG
-         71a7mMZbQMRKPmFH48GM4MsFDtCpbg9BV00e5qFnwRsohJoBjW2MuymTfSTSE5RZ5tew
-         k0rA==
-X-Gm-Message-State: AOAM533X3WFG7oLOjjDpoldYZLysxNVm3BF34T/SgTNorLfqdqIGJ7Nu
-        8EqyRltrCDHOeDiSTJBjgtc=
-X-Google-Smtp-Source: ABdhPJyO/sEeRuiNIVE/sPTGt/TEZkcbizXPspGpU49mJITjkoAMu1miylOrL2A27nAiAcaaihq7hg==
-X-Received: by 2002:a1c:4943:: with SMTP id w64mr5751806wma.62.1600278534553;
-        Wed, 16 Sep 2020 10:48:54 -0700 (PDT)
-Received: from kozik-lap ([194.230.155.191])
-        by smtp.googlemail.com with ESMTPSA id q18sm33240468wre.78.2020.09.16.10.48.52
-        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
-        Wed, 16 Sep 2020 10:48:53 -0700 (PDT)
-Date:   Wed, 16 Sep 2020 19:48:51 +0200
-From:   Krzysztof Kozlowski <krzk@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>, Kukjin Kim <kgene@kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        linux-samsung-soc@vger.kernel.org, netdev@vger.kernel.org
-Subject: Re: [PATCH 3/3] ARM: s3c: Bring back notes from removed debug-macro.S
-Message-ID: <20200916174851.GA23474@kozik-lap>
-References: <20200911143343.498-1-krzk@kernel.org>
- <20200911143343.498-3-krzk@kernel.org>
+        id S1727828AbgIPShK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Sep 2020 14:37:10 -0400
+Received: from ms.lwn.net ([45.79.88.28]:41692 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728229AbgIPSg7 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 16 Sep 2020 14:36:59 -0400
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 9A70F2E5;
+        Wed, 16 Sep 2020 18:36:50 +0000 (UTC)
+Date:   Wed, 16 Sep 2020 12:36:49 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Jonathan Cameron <jic23@kernel.org>
+Cc:     linux-doc@vger.kernel.org, linux-iio@vger.kernel.org,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Lee Jones <lee.jones@linaro.org>
+Subject: Re: [PATCH] kernel-doc: add support for ____cacheline_aligned
+ attribute
+Message-ID: <20200916123649.20d7d999@lwn.net>
+In-Reply-To: <20200910185415.653139-1-jic23@kernel.org>
+References: <20200910185415.653139-1-jic23@kernel.org>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <20200911143343.498-3-krzk@kernel.org>
-User-Agent: Mutt/1.9.4 (2018-02-28)
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Sep 11, 2020 at 04:33:43PM +0200, Krzysztof Kozlowski wrote:
-> Documentation references notes from a removed debug-macro.S file so
-> bring the contents here.
+On Thu, 10 Sep 2020 19:54:15 +0100
+Jonathan Cameron <jic23@kernel.org> wrote:
+
+> Subroutine dump_struct uses type attributes to check if the struct
+> syntax is valid. Then, it removes all attributes before using it for
+> output. `____cacheline_aligned` is an attribute that is
+> not included in both steps. Add it, since it is used by kernel structs.
 > 
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+> Based on previous patch to add ____cacheline_aligned_in_smp.
+> Motivated by patches to reorder this attribute to before the
+> variable name.   Whilst we could do that in all cases, that would
+> be a massive change and it is more common in the kernel to place
+> this particular attribute after the variable name. A quick grep
+> suggests approximately 400 instances of which 341 have this
+> attribute just before a semicolon and hence after the variable name.
+> 
+> Signed-off-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+> Cc: Lee Jones <lee.jones@linaro.org>
 > ---
->  arch/arm/mach-s3c/s3c64xx.c | 7 ++++++-
->  1 file changed, 6 insertions(+), 1 deletion(-)
+> 
+> Note I haven't figured out what this is actually doing and hence the
+> patch is done by copying the changes made for ____cacheline_aligned_in_smp.
+> It seems to work. :)
 
-Applied.
+The little secret is that *nobody* really understands what all the regexes
+in kernel-doc do :)  Anyway, it does indeed seem to work; applied, thanks.
 
-Best regards,
-Krzysztof
-
+jon
