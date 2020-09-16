@@ -2,122 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B56E26C9CB
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 21:26:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E9AD226CA33
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 21:51:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727267AbgIPT0U (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Sep 2020 15:26:20 -0400
-Received: from mga06.intel.com ([134.134.136.31]:27693 "EHLO mga06.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727269AbgIPTZO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 16 Sep 2020 15:25:14 -0400
-IronPort-SDR: Elx3oz4ZLtqSKa/D6RMCTUrl2Y2uaEvFDMMBDDa2k/6fptnJeOAa2FaMylOTv6dYpOUHOL++23
- ks/l5P6vV8+Q==
-X-IronPort-AV: E=McAfee;i="6000,8403,9746"; a="221106327"
-X-IronPort-AV: E=Sophos;i="5.76,434,1592895600"; 
-   d="scan'208";a="221106327"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2020 12:25:13 -0700
-IronPort-SDR: eg/Zchq5mOXDbpxpZFJ33RXMAD8TeVG7Z6YeVuuDo5eZiEwZNocXGb+rGVRDmIBihv4mUFVhg8
- Lk6TY0hQd4LA==
-X-IronPort-AV: E=Sophos;i="5.76,434,1592895600"; 
-   d="scan'208";a="451983016"
-Received: from yyu32-mobl1.amr.corp.intel.com (HELO [10.212.184.15]) ([10.212.184.15])
-  by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2020 12:25:12 -0700
-From:   "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Subject: Re: [PATCH v11 25/25] x86/cet/shstk: Add arch_prctl functions for
- shadow stack
-To:     Andy Lutomirski <luto@kernel.org>,
-        Dave Hansen <dave.hansen@intel.com>
-Cc:     Dave Martin <Dave.Martin@arm.com>, "H.J. Lu" <hjl.tools@gmail.com>,
-        Florian Weimer <fweimer@redhat.com>, X86 ML <x86@kernel.org>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>,
-        LKML <linux-kernel@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux-MM <linux-mm@kvack.org>,
-        linux-arch <linux-arch@vger.kernel.org>,
-        Linux API <linux-api@vger.kernel.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Jann Horn <jannh@google.com>, Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Weijiang Yang <weijiang.yang@intel.com>
-References: <086c73d8-9b06-f074-e315-9964eb666db9@intel.com>
- <20200901102758.GY6642@arm.com>
- <c91bbad8-9e45-724b-4526-fe3674310c57@intel.com>
- <CALCETrWJQgtO_tP1pEaDYYsFgkZ=fOxhyTRE50THcxYoHyTTwg@mail.gmail.com>
- <32005d57-e51a-7c7f-4e86-612c2ff067f3@intel.com>
- <46dffdfd-92f8-0f05-6164-945f217b0958@intel.com>
- <ed929729-4677-3d3b-6bfd-b379af9272b8@intel.com>
- <6e1e22a5-1b7f-2783-351e-c8ed2d4893b8@intel.com>
- <5979c58d-a6e3-d14d-df92-72cdeb97298d@intel.com>
- <ab1a3344-60f4-9b9d-81d4-e6538fdcafcf@intel.com>
- <08c91835-8486-9da5-a7d1-75e716fc5d36@intel.com>
- <a881837d-c844-30e8-a614-8b92be814ef6@intel.com>
- <cbec8861-8722-ec31-2c02-1cfed20255eb@intel.com>
- <b3379d26-d8a7-deb7-59f1-c994bb297dcb@intel.com>
- <a1efc4330a3beff10671949eddbba96f8cde96da.camel@intel.com>
- <41aa5e8f-ad88-2934-6d10-6a78fcbe019b@intel.com>
- <CALCETrX5qJAZBe9sHL6+HFvre-bbo+us1==q9KHNCyRrzaUsjw@mail.gmail.com>
- <c61c9bf3-4097-089c-4e6d-d0ae0e4480f3@intel.com>
- <CALCETrXGSXzqdAOK7tnDDYMJ5Uj4=u=AEvgdroS3BxRoyO3r+g@mail.gmail.com>
-Message-ID: <35af3052-324f-06e3-5092-ac6d435f1725@intel.com>
-Date:   Wed, 16 Sep 2020 12:25:11 -0700
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+        id S1727258AbgIPTvo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Sep 2020 15:51:44 -0400
+Received: from lelv0142.ext.ti.com ([198.47.23.249]:59956 "EHLO
+        lelv0142.ext.ti.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727249AbgIPRht (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 13:37:49 -0400
+Received: from lelv0265.itg.ti.com ([10.180.67.224])
+        by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 08GBlfvq027172;
+        Wed, 16 Sep 2020 06:47:41 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+        s=ti-com-17Q1; t=1600256861;
+        bh=3AGiro3FnSBmxJs2uBGM1pA1oOZ6S/GI8y/Cm28nbw4=;
+        h=Subject:To:CC:References:From:Date:In-Reply-To;
+        b=IfP1zphgUN6Zw2XJNKhMMVG/ylE5qbF4CVR+eQjef20EE7290yM6Ev4B5FFBMsmUF
+         rfNfsVNlbINmL9HkKfqTMRzWqWK2vxDVPch5F2rlPfFI1NZ3OrWXYFNS8daLeRbE2a
+         bTE2BrjGT8jdqaBADcJk3RiseeaORT6KKSxI2z5w=
+Received: from DLEE112.ent.ti.com (dlee112.ent.ti.com [157.170.170.23])
+        by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 08GBlfhS000950
+        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Wed, 16 Sep 2020 06:47:41 -0500
+Received: from DLEE114.ent.ti.com (157.170.170.25) by DLEE112.ent.ti.com
+ (157.170.170.23) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 16
+ Sep 2020 06:47:40 -0500
+Received: from lelv0326.itg.ti.com (10.180.67.84) by DLEE114.ent.ti.com
+ (157.170.170.25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Wed, 16 Sep 2020 06:47:41 -0500
+Received: from [10.250.232.147] (ileax41-snat.itg.ti.com [10.172.224.153])
+        by lelv0326.itg.ti.com (8.15.2/8.15.2) with ESMTP id 08GBlXSA024715;
+        Wed, 16 Sep 2020 06:47:34 -0500
+Subject: Re: [RFC PATCH 00/22] Enhance VHOST to enable SoC-to-SoC
+ communication
+To:     Jason Wang <jasowang@redhat.com>, Cornelia Huck <cohuck@redhat.com>
+CC:     "Michael S. Tsirkin" <mst@redhat.com>,
+        Ohad Ben-Cohen <ohad@wizery.com>,
+        Bjorn Andersson <bjorn.andersson@linaro.org>,
+        Jon Mason <jdmason@kudzu.us>,
+        Dave Jiang <dave.jiang@intel.com>,
+        Allen Hubbe <allenbh@gmail.com>,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Stefan Hajnoczi <stefanha@redhat.com>,
+        Stefano Garzarella <sgarzare@redhat.com>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-remoteproc@vger.kernel.org>, <linux-ntb@googlegroups.com>,
+        <linux-pci@vger.kernel.org>, <kvm@vger.kernel.org>,
+        <virtualization@lists.linux-foundation.org>,
+        <netdev@vger.kernel.org>
+References: <20200702082143.25259-1-kishon@ti.com>
+ <20200702055026-mutt-send-email-mst@kernel.org>
+ <603970f5-3289-cd53-82a9-aa62b292c552@redhat.com>
+ <14c6cad7-9361-7fa4-e1c6-715ccc7e5f6b@ti.com>
+ <59fd6a0b-8566-44b7-3dae-bb52b468219b@redhat.com>
+ <ce9eb6a5-cd3a-a390-5684-525827b30f64@ti.com>
+ <da2b671c-b05d-a57f-7bdf-8b1043a41240@redhat.com>
+ <fee8a0fb-f862-03bd-5ede-8f105b6af529@ti.com>
+ <b2178e1d-2f5c-e8a3-72fb-70f2f8d6aa45@redhat.com>
+ <45a8a97c-2061-13ee-5da8-9877a4a3b8aa@ti.com>
+ <c8739d7f-e12e-f6a2-7018-9eeaf6feb054@redhat.com>
+ <20200828123409.4cd2a812.cohuck@redhat.com>
+ <ac8f7e4f-9f46-919a-f5c2-89b07794f0ab@ti.com>
+ <9cd58cd1-0041-3d98-baf7-6e5bc2e7e317@redhat.com>
+ <edf25301-93c0-4ba6-aa85-5f04137d0906@ti.com>
+ <5733dbfc-76c1-45dc-6dce-ef5449eacc73@redhat.com>
+ <181ae83d-edeb-9406-27cc-1195fe29ae95@ti.com>
+ <ee0aa81d-064b-d7a7-86bb-79a3f4d3dd11@redhat.com>
+From:   Kishon Vijay Abraham I <kishon@ti.com>
+Message-ID: <67924594-c70e-390e-ce2e-dda41a94ada1@ti.com>
+Date:   Wed, 16 Sep 2020 17:17:32 +0530
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <CALCETrXGSXzqdAOK7tnDDYMJ5Uj4=u=AEvgdroS3BxRoyO3r+g@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <ee0aa81d-064b-d7a7-86bb-79a3f4d3dd11@redhat.com>
+Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 9/16/2020 6:52 AM, Andy Lutomirski wrote:
-> On Mon, Sep 14, 2020 at 2:14 PM Dave Hansen <dave.hansen@intel.com> wrote:
->>
->> On 9/14/20 11:31 AM, Andy Lutomirski wrote:
->>> No matter what we do, the effects of calling vfork() are going to be a
->>> bit odd with SHSTK enabled.  I suppose we could disallow this, but
->>> that seems likely to cause its own issues.
->>
->> What's odd about it?  If you're a vfork()'d child, you can't touch the
->> stack at all, right?  If you do, you or your parent will probably die a
->> horrible death.
->>
-> 
-> An evil program could vfork(), have the child do a bunch of returns
-> and a bunch of calls, and exit.  The net effect would be to change the
-> parent's shadow stack contents.  In a sufficiently strict model, this
-> is potentially problematic.
 
-When a vfork child returns, its parent's shadow stack pointer is where 
-it was before the child starts.  To move the shadow stack pointer and 
-re-use the content left by the child, the parent needs to use CALL, RET, 
-INCSSP, or RSTORSSP.  This seems to be difficult.
-
-> 
-> The question is: how much do we want to protect userspace from itself?
- >
-
-If any issue comes up, people can always find ways to counter it.
-
-> --Andy
-> 
