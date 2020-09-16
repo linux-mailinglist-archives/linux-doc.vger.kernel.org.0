@@ -2,78 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 99A3F26CC28
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 22:40:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F39AD26CBFF
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 22:37:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728464AbgIPUjh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Sep 2020 16:39:37 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57174 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726807AbgIPRGR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 13:06:17 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 932F8C0611BC;
-        Wed, 16 Sep 2020 10:06:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
-        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
-        :Reply-To:Content-ID:Content-Description;
-        bh=PKWr6P6N/QvHgzN9Xr6p5YvfrLnhJZhCYTZt2ESdvQg=; b=FjA3jDsdaleXkbpXiv8ZZ4gEG8
-        42Luzslojh4iE42ezrc4nnWSBJY1cvbqdCn0be3m2PrY+/qV+xeM3FPIc5i/hS4bKQhb2FYlnn6lp
-        KIINRq35vdlKp2bbEulH4S14v7QzXM6Kq7rKcxamEObgWIoT+/B8pVff3CBkfTyazyGjoj6asPgfs
-        /1X0AQlg2Hr3rfCe1AaJ+amPlnH8cSbdVuFle+0vQvqWDxZgmgt8o3Vj1gnLLGgHOpwgxndrQFoeK
-        hdvrSrtX5RR4OTcunOK8GJEAH0tkrfLM7feW+tGeZ3IMaJ09mZT4Dtd8NozktXqdrn2X5v4fy0epv
-        kAxltcxw==;
-Received: from [2601:1c0:6280:3f0::19c2]
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kIasZ-0005LY-SK; Wed, 16 Sep 2020 17:06:00 +0000
-Subject: Re: [PATCH v4 17/17] Documentation: PCI: Add userguide for PCI
- endpoint NTB function
-To:     Kishon Vijay Abraham I <kishon@ti.com>,
-        Bjorn Helgaas <bhelgaas@google.com>,
+        id S1726843AbgIPUhm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Sep 2020 16:37:42 -0400
+Received: from mga04.intel.com ([192.55.52.120]:14999 "EHLO mga04.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726849AbgIPRJW (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 16 Sep 2020 13:09:22 -0400
+IronPort-SDR: NRRfqxIk2POsUCi6COTFpiYUT+IRTW9bCotYLwH8EbF229HbkzlW3YosPyxkdHpKCMSaZ7yX/u
+ gY13ALiH5vIQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9746"; a="156909016"
+X-IronPort-AV: E=Sophos;i="5.76,433,1592895600"; 
+   d="scan'208";a="156909016"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2020 10:08:41 -0700
+IronPort-SDR: VQ1WRuPQofTMsAY577bwERRjOaaJuPrpDemjjRSKVq28NMlARkxp2x3q5tOYrRVqo7DIhV1eAn
+ oCOKk015bv2A==
+X-IronPort-AV: E=Sophos;i="5.76,433,1592895600"; 
+   d="scan'208";a="451937469"
+Received: from sjchrist-ice.jf.intel.com (HELO sjchrist-ice) ([10.54.31.34])
+  by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Sep 2020 10:08:40 -0700
+Date:   Wed, 16 Sep 2020 10:08:39 -0700
+From:   Sean Christopherson <sean.j.christopherson@intel.com>
+To:     Alexander Graf <graf@amazon.com>
+Cc:     Aaron Lewis <aaronlewis@google.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Jon Mason <jdmason@kudzu.us>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Allen Hubbe <allenbh@gmail.com>, Rob Herring <robh@kernel.org>
-Cc:     Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Tom Joseph <tjoseph@cadence.com>, linux-pci@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-ntb@googlegroups.com
-References: <20200915042110.3015-1-kishon@ti.com>
- <20200915042110.3015-18-kishon@ti.com>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <17b7c073-d358-e274-c783-1a17590a83a3@infradead.org>
-Date:   Wed, 16 Sep 2020 10:05:55 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        KarimAllah Raslan <karahmed@amazon.de>,
+        Dan Carpenter <dan.carpenter@oracle.com>,
+        kvm list <kvm@vger.kernel.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 1/7] KVM: x86: Deflect unknown MSR accesses to user
+ space
+Message-ID: <20200916170839.GD10227@sjchrist-ice>
+References: <20200902125935.20646-1-graf@amazon.com>
+ <20200902125935.20646-2-graf@amazon.com>
+ <CAAAPnDFGD8+5KBCLKERrH0hajHEwU9UdEEGqp3RZu3Lws+5rmw@mail.gmail.com>
+ <186ccace-2fad-3db3-0848-cd272b1a64ba@amazon.com>
 MIME-Version: 1.0
-In-Reply-To: <20200915042110.3015-18-kishon@ti.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <186ccace-2fad-3db3-0848-cd272b1a64ba@amazon.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 9/14/20 9:21 PM, Kishon Vijay Abraham I wrote:
-> Add documentation to help users use pci-epf-ntb function driver and
-> existing host side NTB infrastructure for NTB functionality.
+On Wed, Sep 16, 2020 at 11:31:30AM +0200, Alexander Graf wrote:
+> On 03.09.20 21:27, Aaron Lewis wrote:
+> > > @@ -412,6 +414,15 @@ struct kvm_run {
+> > >                          __u64 esr_iss;
+> > >                          __u64 fault_ipa;
+> > >                  } arm_nisv;
+> > > +               /* KVM_EXIT_X86_RDMSR / KVM_EXIT_X86_WRMSR */
+> > > +               struct {
+> > > +                       __u8 error; /* user -> kernel */
+> > > +                       __u8 pad[3];
+> > 
+> > __u8 pad[7] to maintain 8 byte alignment?  unless we can get away with
+> > fewer bits for 'reason' and
+> > get them from 'pad'.
 > 
-> Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
-> ---
->  Documentation/PCI/endpoint/index.rst         |   1 +
->  Documentation/PCI/endpoint/pci-ntb-howto.rst | 160 +++++++++++++++++++
->  2 files changed, 161 insertions(+)
->  create mode 100644 Documentation/PCI/endpoint/pci-ntb-howto.rst
-> 
+> Why would we need an 8 byte alignment here? I always thought natural u64
+> alignment on x86_64 was on 4 bytes?
 
-LGTM. Thanks for the update.
-
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
-
-
--- 
-~Randy
+u64 will usually (always?) be 8 byte aligned by the compiler.  "Natural"
+alignment means an object is aligned to its size.  E.g. an 8-byte object
+can split a cache line if it's only aligned on a 4-byte boundary.
