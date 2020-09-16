@@ -2,42 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A590D26CA1B
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 21:47:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1B4A726CAC2
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 22:13:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727864AbgIPTpj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Sep 2020 15:45:39 -0400
-Received: from smtp-fw-9101.amazon.com ([207.171.184.25]:63532 "EHLO
-        smtp-fw-9101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727837AbgIPTpX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 15:45:23 -0400
+        id S1726890AbgIPUNh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Sep 2020 16:13:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58436 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727233AbgIPUN3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 16:13:29 -0400
+Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com [IPv6:2a00:1450:4864:20::641])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 71964C061353
+        for <linux-doc@vger.kernel.org>; Wed, 16 Sep 2020 13:13:13 -0700 (PDT)
+Received: by mail-ej1-x641.google.com with SMTP id nw23so12717520ejb.4
+        for <linux-doc@vger.kernel.org>; Wed, 16 Sep 2020 13:13:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1600285524; x=1631821524;
-  h=subject:to:cc:references:from:message-id:date:
-   mime-version:in-reply-to:content-transfer-encoding;
-  bh=bPL9ALhcpi5BrsWWkKTPd1toAEPb6RfwgA0Kgzn99Wk=;
-  b=L2Vwa+aOA0VgfMTtmzTTIeqRHpg4JPxNY4+dDNWmJpU2Kcj59xeVOz9/
-   v/7arpXVrs1B7aEy3pvwH2xcpIulo15A+AjLf6rhM2gEHoZ6FlVDV+47E
-   dZ9EWjCjdqe0WoOdM+LE0k2h0MxnVDwkGQuJJMvIrq5n5WMO+V0u7CYt6
-   k=;
-X-IronPort-AV: E=Sophos;i="5.76,434,1592870400"; 
-   d="scan'208";a="68651091"
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1a-af6a10df.us-east-1.amazon.com) ([10.47.23.38])
-  by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP; 16 Sep 2020 19:44:14 +0000
-Received: from EX13MTAUWC001.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan2.iad.amazon.com [10.40.163.34])
-        by email-inbound-relay-1a-af6a10df.us-east-1.amazon.com (Postfix) with ESMTPS id 5ACA0A1859;
-        Wed, 16 Sep 2020 19:44:10 +0000 (UTC)
-Received: from EX13D20UWC001.ant.amazon.com (10.43.162.244) by
- EX13MTAUWC001.ant.amazon.com (10.43.162.135) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Wed, 16 Sep 2020 19:44:09 +0000
-Received: from freeip.amazon.com (10.43.161.146) by
- EX13D20UWC001.ant.amazon.com (10.43.162.244) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Wed, 16 Sep 2020 19:44:06 +0000
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=WTCEXV2u4+i9HL2MMnq/glN2ilMyxl52NR06ee0GgqI=;
+        b=s7OvZ4k0X7Pw/YnFXPKn5Ssxyktso0XlkEWg8Ij8fpLQLTsn54sqNK2C19JaPgH3YT
+         Q6wO5+CpziRHkRIR30K7Fm8GwZ6iYHI+T6Acw4WahChKZ/t7rSDaFJc9Txc3wBm+WIsE
+         gf7L45v47+T6MmK+JdJPaVaykD7W/oAl3ornmLk4a2d+MUBp37OFzc+FuXyQ1T8rHxVB
+         uQUoLkdr1VYohRqnGs7BNUX0dhjNdjcRIA+07PzaKxA/LjFD2UUpcl2tkqCfwRaPKs2/
+         ETUN51b1wV9G2k/ROZlQN3xYXCTrdWJr1uZbFG3PmdICKdnMMdhiPphRVdY8OLGDp5M/
+         dMjQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=WTCEXV2u4+i9HL2MMnq/glN2ilMyxl52NR06ee0GgqI=;
+        b=OxkgiIRTZjYTkVj696xedEQc+UyrcAYECLETOTBy5JFZC0dtUCJRdU874LDmYN4KYH
+         WNr1iz1D2dWK5M4MX+AfaO7y3AZUYGyA8pFi8zD4p/aPF+uKW1Sch9GUFhUx9IiVZQ1r
+         ZCobTVIX1m6oSRATw3nvD2ABZtWY1FneWUW5TwsuLuPitAWrF0dL/TedxxcPzDDvcjQG
+         FdfNzJDVntpl1P34LC16Etpary66DaTvn4wYCN4ixuZ9oThLGIHR+/qzogfOXjl1rtjX
+         /MZmNTjC5cCw383hTPgiWa/Gm8XV5zGYsDYkfNPAShkOEOEO/cSomFUGpwNHo5i1wKdg
+         pmDg==
+X-Gm-Message-State: AOAM530FiMBb8cjkI+EAU2TbJST6wEJ8EXTSj6JRShGQS5oD0EDa3Mgy
+        RZXs1+4VOEWop8YPq6uddNDI0ycp+mH56AxVQqxzaQ==
+X-Google-Smtp-Source: ABdhPJzdmjE+SQI5hqYGTUQLcnf/xhorcpJlukLBjVePzZop6EZ+nDYP/c+zStkGc1zzXydi3cvMrPidltQPbtiLAtw=
+X-Received: by 2002:a17:906:4d97:: with SMTP id s23mr28200879eju.157.1600287191923;
+ Wed, 16 Sep 2020 13:13:11 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200902125935.20646-1-graf@amazon.com> <20200902125935.20646-6-graf@amazon.com>
+ <CAAAPnDH2D6fANhZzy3fAL2XKO4ROrvbOoqPme2Ww6q5XcVJfog@mail.gmail.com> <c90a705d-8768-efd1-e744-b56cd6ab3c0f@amazon.com>
+In-Reply-To: <c90a705d-8768-efd1-e744-b56cd6ab3c0f@amazon.com>
+From:   Aaron Lewis <aaronlewis@google.com>
+Date:   Wed, 16 Sep 2020 13:13:00 -0700
+Message-ID: <CAAAPnDEoQhtXuiqHwUtrsL7codcToAVwaR=+qVczZrz6RCWe0A@mail.gmail.com>
 Subject: Re: [PATCH v6 5/7] KVM: x86: VMX: Prevent MSR passthrough when MSR
  access is denied
-To:     Aaron Lewis <aaronlewis@google.com>
-CC:     Paolo Bonzini <pbonzini@redhat.com>,
+To:     Alexander Graf <graf@amazon.com>
+Cc:     Paolo Bonzini <pbonzini@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
         Sean Christopherson <sean.j.christopherson@intel.com>,
         Vitaly Kuznetsov <vkuznets@redhat.com>,
@@ -46,77 +62,41 @@ CC:     Paolo Bonzini <pbonzini@redhat.com>,
         Joerg Roedel <joro@8bytes.org>,
         KarimAllah Raslan <karahmed@amazon.de>,
         Dan Carpenter <dan.carpenter@oracle.com>,
-        kvm list <kvm@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>
-References: <20200902125935.20646-1-graf@amazon.com>
- <20200902125935.20646-6-graf@amazon.com>
- <CAAAPnDH2D6fANhZzy3fAL2XKO4ROrvbOoqPme2Ww6q5XcVJfog@mail.gmail.com>
-From:   Alexander Graf <graf@amazon.com>
-Message-ID: <c90a705d-8768-efd1-e744-b56cd6ab3c0f@amazon.com>
-Date:   Wed, 16 Sep 2020 21:44:03 +0200
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.2.2
-MIME-Version: 1.0
-In-Reply-To: <CAAAPnDH2D6fANhZzy3fAL2XKO4ROrvbOoqPme2Ww6q5XcVJfog@mail.gmail.com>
-Content-Language: en-US
-X-Originating-IP: [10.43.161.146]
-X-ClientProxiedBy: EX13D49UWC004.ant.amazon.com (10.43.162.106) To
- EX13D20UWC001.ant.amazon.com (10.43.162.244)
-Content-Type: text/plain; charset="utf-8"; format="flowed"
-Content-Transfer-Encoding: base64
+        kvm list <kvm@vger.kernel.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-CgpPbiAwNC4wOS4yMCAwNDoxOCwgQWFyb24gTGV3aXMgd3JvdGU6Cj4gCj4+ICsvKgo+PiArICog
-TGlzdCBvZiBNU1JzIHRoYXQgY2FuIGJlIGRpcmVjdGx5IHBhc3NlZCB0byB0aGUgZ3Vlc3QuCj4+
-ICsgKiBJbiBhZGRpdGlvbiB0byB0aGVzZSB4MmFwaWMgYW5kIFBUIE1TUnMgYXJlIGhhbmRsZWQg
-c3BlY2lhbGx5Lgo+PiArICovCj4+ICtzdGF0aWMgdTMyIHZteF9wb3NzaWJsZV9wYXNzdGhyb3Vn
-aF9tc3JzW01BWF9QT1NTSUJMRV9QQVNTR0hST1VHSF9NU1JTXSA9IHsKPiAKPiBNQVhfUE9TU0lC
-TEVfUEFTU0dIUk9VR0hfTVNSUyBzaG91bGQgYmUgTUFYX1BPU1NJQkxFX1BBU1NUSFJPVUdIX01T
-UlMKCk91Y2guIFRoYW5rcyA6KS4KCj4gCj4+ICsgICAgICAgTVNSX0lBMzJfU1BFQ19DVFJMLAo+
-PiArICAgICAgIE1TUl9JQTMyX1BSRURfQ01ELAo+PiArICAgICAgIE1TUl9JQTMyX1RTQywKPj4g
-KyAgICAgICBNU1JfRlNfQkFTRSwKPj4gKyAgICAgICBNU1JfR1NfQkFTRSwKPj4gKyAgICAgICBN
-U1JfS0VSTkVMX0dTX0JBU0UsCj4+ICsgICAgICAgTVNSX0lBMzJfU1lTRU5URVJfQ1MsCj4+ICsg
-ICAgICAgTVNSX0lBMzJfU1lTRU5URVJfRVNQLAo+PiArICAgICAgIE1TUl9JQTMyX1NZU0VOVEVS
-X0VJUCwKPj4gKyAgICAgICBNU1JfQ09SRV9DMV9SRVMsCj4+ICsgICAgICAgTVNSX0NPUkVfQzNf
-UkVTSURFTkNZLAo+PiArICAgICAgIE1TUl9DT1JFX0M2X1JFU0lERU5DWSwKPj4gKyAgICAgICBN
-U1JfQ09SRV9DN19SRVNJREVOQ1ksCj4+ICt9Owo+IAo+IElzIHRoZXJlIGFueSByZWFzb24gbm90
-IHRvIGNvbnN0cnVjdCB0aGlzIGxpc3Qgb24gdGhlIGZseT8gIFRoYXQgY291bGQKPiBoZWxwIHBy
-ZXZlbnQgdGhlIGxpc3QgZnJvbSBiZWNvbWluZyBzdGFsZSBvdmVyIHRpbWUgaWYgdGhpcyBpcyBt
-aXNzZWQKPiB3aGVuIGNhbGxzIHRvIHZteF9kaXNhYmxlX2ludGVyY2VwdF9mb3JfbXNyKCkgYXJl
-IGFkZGVkLgoKVGhlIHByb2JsZW0gaXMgdGhhdCB3ZSBoYXZlIGFuIHVwcGVyIGJvdW5kIG9mIGVs
-ZW1lbnRzIHRoYXQgd2UgY2FuIHN0b3JlIAppbiB0aGUgYml0bWFwLiBXZSBjYW4gZWl0aGVyIG1h
-a2UgdGhhdCBudW1iZXIgYXJiaXRyYXJ5IGFuZCB0aGVuIGhhdmUgCnJlYWxseSBhd2t3YXJkIGZh
-aWx1cmUgbW9kZXMgb3IgYmUgaW5jcmVkaWJseSBwaWNreSBpbnN0ZWFkLgoKSSB3ZW50IGZvciBp
-bmNyZWRpYmx5IHBpY2t5LiBJZiBhbnl0aGluZyBnb2VzIG91dCBvZiBzeW5jLCBsaWtlIHdoZW4g
-CnNvbWVvbmUgYWRkcyBhbiBNU1IgdG8gdGhlIGxpc3Qgd2l0aG91dCBjaGFuZ2luZyAKTUFYX1BP
-U1NJQkxFX1BBU1NUSFJPVUdIX01TUlMsIGEgY2FsbCB0byAKdm14X3tlbixkaXN9YWJsZV9pbnRl
-cmNlcHRfZm9yX21zcigpIGlzIGRvbmUgb24gYW4gTVNSIHRoYXQgaXMgbm90IHBhcnQgCm9mIHRo
-ZSBsaXN0LCB3ZSB3aWxsIGFib3J0IGVhcmx5IGFuZCBpbiB0aGUgZm9ybWVyIGNhc2UgYWxyZWFk
-eSB0aHJvdWdoIAp0aGUgY29tcGlsZXIuCgpJZiB5b3UgY2FuIHRoaW5rIG9mIGEgZ29vZCB3YXkg
-dG8gY29uc3RydWN0IHRoZSBsaXN0IGR5bmFtaWNhbGx5IGFuZCAKc3RpbGwgaGF2ZSBhIHdvcmtp
-bmcgYml0bWFwIG9mICJkZXNpcmVkIiBwYXNzdGhyb3VnaCBzdGF0ZXMsIEknbSBhbGwgCmVhcnMg
-OikuCgo+IAo+PiArCj4+ICAgLyoKPj4gICAgKiBUaGVzZSAyIHBhcmFtZXRlcnMgYXJlIHVzZWQg
-dG8gY29uZmlnIHRoZSBjb250cm9scyBmb3IgUGF1c2UtTG9vcCBFeGl0aW5nOgo+PiAgICAqIHBs
-ZV9nYXA6ICAgIHVwcGVyIGJvdW5kIG9uIHRoZSBhbW91bnQgb2YgdGltZSBiZXR3ZWVuIHR3byBz
-dWNjZXNzaXZlCj4+IEBAIC02MjIsNiArNjQyLDQxIEBAIHN0YXRpYyBpbmxpbmUgYm9vbCByZXBv
-cnRfZmxleHByaW9yaXR5KHZvaWQpCj4+ICAgICAgICAgIHJldHVybiBmbGV4cHJpb3JpdHlfZW5h
-YmxlZDsKPj4gICB9Cj4gCj4gT25lIHRoaW5nIHRoYXQgc2VlbXMgdG8gYmUgbWlzc2luZyBpcyBy
-ZW1vdmluZyBNU1JzIGZyb20gdGhlCj4gcGVybWlzc2lvbiBiaXRtYXAgb3IgcmVzZXR0aW5nIHRo
-ZSBwZXJtaXNzaW9uIGJpdG1hcCB0byBpdHMgb3JpZ2luYWwKPiBzdGF0ZSBiZWZvcmUgYWRkaW5n
-IGNoYW5nZXMgb24gdG9wIG9mIGl0LiAgVGhpcyB3b3VsZCBiZSBuZWVkZWQgb24KPiBzdWJzZXF1
-ZW50IGNhbGxzIHRvIGt2bV92bV9pb2N0bF9zZXRfbXNyX2ZpbHRlcigpLiAgV2hlbiB0aGF0IGhh
-cHBlbnMKPiB0aGUgb3JpZ2luYWwgY2hhbmdlcyBtYWRlIGJ5IEtWTV9SRVFfTVNSX0ZJTFRFUl9D
-SEFOR0VEIG5lZWQgdG8gYmUKPiBiYWNrZWQgb3V0IGJlZm9yZSBhcHBseWluZyB0aGUgbmV3IHNl
-dC4KCkknbSBub3Qgc3VyZSBJIGZvbGxvdy4gU3Vic2VxdWVudCBjYWxscyB0byBzZXRfbXNyX2Zp
-bHRlcigpIHdpbGwgaW52b2tlIAp0aGUgInBsZWFzZSByZXNldCB0aGUgd2hvbGUgTVNSIHBhc3N0
-aHJvdWdoIGJpdG1hcCB0byBhIGNvbnNpc3RlbnQgCnN0YXRlIiB3aGljaCB3aWxsIHRoZW4gcmVh
-cHBseSB0aGUgaW4ta3ZtIGRlc2lyZWQgc3RhdGUgdGhyb3VnaCB0aGUgCmJpdG1hcCBhbmQgZmls
-dGVyIHN0YXRlIG9uIHRvcCBvbiBlYWNoIG9mIHRob3NlLgoKCkFsZXgKCgoKCkFtYXpvbiBEZXZl
-bG9wbWVudCBDZW50ZXIgR2VybWFueSBHbWJICktyYXVzZW5zdHIuIDM4CjEwMTE3IEJlcmxpbgpH
-ZXNjaGFlZnRzZnVlaHJ1bmc6IENocmlzdGlhbiBTY2hsYWVnZXIsIEpvbmF0aGFuIFdlaXNzCkVp
-bmdldHJhZ2VuIGFtIEFtdHNnZXJpY2h0IENoYXJsb3R0ZW5idXJnIHVudGVyIEhSQiAxNDkxNzMg
-QgpTaXR6OiBCZXJsaW4KVXN0LUlEOiBERSAyODkgMjM3IDg3OQoKCg==
+> >
+> >> +
+> >>   /*
+> >>    * These 2 parameters are used to config the controls for Pause-Loop Exiting:
+> >>    * ple_gap:    upper bound on the amount of time between two successive
+> >> @@ -622,6 +642,41 @@ static inline bool report_flexpriority(void)
+> >>          return flexpriority_enabled;
+> >>   }
+> >
+> > One thing that seems to be missing is removing MSRs from the
+> > permission bitmap or resetting the permission bitmap to its original
+> > state before adding changes on top of it.  This would be needed on
+> > subsequent calls to kvm_vm_ioctl_set_msr_filter().  When that happens
+> > the original changes made by KVM_REQ_MSR_FILTER_CHANGED need to be
+> > backed out before applying the new set.
+>
+> I'm not sure I follow. Subsequent calls to set_msr_filter() will invoke
+> the "please reset the whole MSR passthrough bitmap to a consistent
+> state" which will then reapply the in-kvm desired state through the
+> bitmap and filter state on top on each of those.
+>
 
+Yes, you're correct.  I discovered this after the fact by adding a
+test to the selftest I wrote for the deny list system which I revamped
+to work for your filter system.  It proved the permission bitmaps are
+in fact set as expected on subsequent calls.  You can disregard this
+comment.
+
+As a side note, I'm happy to share the test if you'd like. I also used
+it to uncover an issue in the first commit of this series.
