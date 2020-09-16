@@ -2,64 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CCB9326CACC
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 22:15:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5EFE526CD6F
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Sep 2020 22:59:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727981AbgIPUOo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Sep 2020 16:14:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58374 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728326AbgIPUNL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 16:13:11 -0400
-Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com [IPv6:2607:f8b0:4864:20::e42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0E4D3C061756
-        for <linux-doc@vger.kernel.org>; Wed, 16 Sep 2020 13:13:10 -0700 (PDT)
-Received: by mail-vs1-xe42.google.com with SMTP id x19so437130vsf.8
-        for <linux-doc@vger.kernel.org>; Wed, 16 Sep 2020 13:13:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=GcbBDc3F14nB5fItkaCR8bNi/7szL/0DDXdKpHCyoVg=;
-        b=WdOkItQh65coZKHtbLtCry05LIlLS/47JKxIFd5oHs6A7Luo37AFBUWhJGKmiHg2Kc
-         3lhisA2LapqsXclKHkpUt/m0EhzXQla8tSj9wUtUlwkCTqzQmj6zCCqc2V02xvF1Atya
-         2xsQm+aC1YGiYs1zK3BscTTaL7swsr8Vikd1jpxJhT/VOlZqFcjqrENNApxWjziVkfWL
-         HWjDTUBHH4USrOcn4I/vZDaywNTIaBubN2QoaWlhinD4oCycqiP5P7dmIcJCbIlvmvGC
-         Iv+fHlUz+hyH0hE6v2xSvt9SPQnkOYDD4XiXZrrHCvaCPae51rT3DBBjlpFB8dNDM3Nb
-         Ij4w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=GcbBDc3F14nB5fItkaCR8bNi/7szL/0DDXdKpHCyoVg=;
-        b=Ei9ARW22z5gmVJtz39UdGt5arbeDI1/Qvsp8OPM6VoXGrZEpPxBz8jX5LBNIZd7lQP
-         aV/2rcwA+Xv6ZLdI/RMwWgn52pRT2T/SGNO1EluwvA31bXSt5+qeEFdveGXOYBHadB78
-         ormtZFTRToi8hn4WJKHzXLhauWX9VOHf0+J9CGYG0kOSyp/4cxXkCb/fMSm2UATDGPhK
-         8J6CW2e9+quHOLuP3UDR/iZEwtGUaLkIRxc4DCmZVDLjpednjy8PS9DKcwG/vY/Mgi9z
-         1ZpCVBXhfun512NcRtHvKWFm+tSm4g3opU5mtrA2q18QADol2Dsmw4OsJJJARWokz4N2
-         mQ+g==
-X-Gm-Message-State: AOAM5315biXl0bSfdELKG3JRQ60PkbGSwGWgy9M1iwQWwAP0pbNHR3vJ
-        sDrR4+cF7FcfHPI53Hp/JQBvNR2F+rfjMfHrTMY=
-X-Google-Smtp-Source: ABdhPJxy1gxkUt72kPzIznZooaLfdaI+EfieVI+ftdsKxLlXkLj8DSbhlQHXpspMiWRODAFl9uCV0L87nI/k2vn4anY=
-X-Received: by 2002:a05:6102:101a:: with SMTP id q26mr6140643vsp.57.1600287189878;
- Wed, 16 Sep 2020 13:13:09 -0700 (PDT)
+        id S1726576AbgIPU7i (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Sep 2020 16:59:38 -0400
+Received: from mail-m1272.qiye.163.com ([115.236.127.2]:8743 "EHLO
+        mail-m1272.qiye.163.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726454AbgIPQb1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 12:31:27 -0400
+Received: from ubuntu.localdomain (unknown [58.251.74.226])
+        by mail-m1272.qiye.163.com (Hmail) with ESMTPA id 79812B021CC;
+        Wed, 16 Sep 2020 21:07:57 +0800 (CST)
+From:   Bailu Lin <bailu.lin@vivo.com>
+To:     catalin.marinas@arm.com, will@kernel.org, corbet@lwn.net,
+        harryxiyou@gmail.com, alex.shi@linux.alibaba.com,
+        bailu.lin@vivo.com, linux-arm-kernel@lists.infradead.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Cc:     kernel@vivo.com, wangqing@vivo.com
+Subject: [PATCH v2] doc: zh_CN: index files in arm64 subdirectory
+Date:   Wed, 16 Sep 2020 06:07:14 -0700
+Message-Id: <20200916130714.42438-1-bailu.lin@vivo.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20200916045720.33636-1-bailu.lin@vivo.com>
+References: <20200916045720.33636-1-bailu.lin@vivo.com>
 MIME-Version: 1.0
-Received: by 2002:ab0:3412:0:0:0:0:0 with HTTP; Wed, 16 Sep 2020 13:13:09
- -0700 (PDT)
-Reply-To: aalihelp5@gmail.com
-From:   "Mr.Hui Ka Yan" <jacobmoore.moores41@gmail.com>
-Date:   Wed, 16 Sep 2020 13:13:09 -0700
-Message-ID: <CAEedSLdw9cQpdDgoAQWHTA9VDtMRsPUVn_VFAmSDuzGEiS==Sw@mail.gmail.com>
-Subject: 
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=y
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+        oVCBIfWUFZQkgfTh4YSU5DT00dVkpNS0tJTUpNTENLS0JVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWU
+        FZVUtZBg++
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6MiI6LBw4Hz8uDhUUQxoCTzAq
+        SThPFFFVSlVKTUtLSU1KTUxDT0pOVTMWGhIXVRkaEhcOVRcSFTsNEg0UVRgUFkVZV1kSC1lBWU5D
+        VUlOSlVMT1VJSU1ZV1kIAVlBSEtOQjcG
+X-HM-Tid: 0a749707634998b7kuuu79812b021cc
 Sender: linux-doc-owner@vger.kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Bin Herr Hui Ka Yan. Ich spende Ihnen einen Zuschuss von 10.500.000
-USD. Kontaktieren Sie mich (aalihelp5@gmail.com) f=C3=BCr weitere Details.
+Add arm64 subdirectory into the table of Contents for zh_CN,
+all translations residing on it would be indexed conveniently.
 
-Danke und Gott segne dich.
+Signed-off-by: Bailu Lin <bailu.lin@vivo.com>
+---
+v2:
+  -Fix patch description.
+---
+ Documentation/arm64/index.rst                    |  4 ++++
+ Documentation/translations/zh_CN/arm64/index.rst | 16 ++++++++++++++++
+ Documentation/translations/zh_CN/index.rst       |  1 +
+ 3 files changed, 21 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/arm64/index.rst
+
+diff --git a/Documentation/arm64/index.rst b/Documentation/arm64/index.rst
+index d9665d83c53a..907cda9c0f71 100644
+--- a/Documentation/arm64/index.rst
++++ b/Documentation/arm64/index.rst
+@@ -1,3 +1,7 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++.. _arm64_index:
++
+ ==================
+ ARM64 Architecture
+ ==================
+diff --git a/Documentation/translations/zh_CN/arm64/index.rst b/Documentation/translations/zh_CN/arm64/index.rsts
+index 000000000000..c236b648740d
+--- /dev/null
++++ b/Documentation/translations/zh_CN/arm64/index.rst
+@@ -0,0 +1,16 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: :ref:`Documentation/arm64/index.rst <arm64_index>`
++:Translator: Bailu Lin <bailu.lin@vivo.com>
++
++.. _cn_arm64_index:
++
++
++==========
++ARM64 架构
++==========
++
++.. toctree::
++    :maxdepth: 2
+diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
+index 85643e46e308..be6f11176200 100644
+--- a/Documentation/translations/zh_CN/index.rst
++++ b/Documentation/translations/zh_CN/index.rst
+@@ -19,6 +19,7 @@
+    admin-guide/index
+    process/index
+    filesystems/index
++   arm64/index
+ 
+ 目录和表格
+ ----------
+-- 
+2.20.1
+
