@@ -2,99 +2,111 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0D55726DDBD
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 16:13:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 56AF426DEE4
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 16:58:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727256AbgIQONQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Sep 2020 10:13:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53944 "EHLO
+        id S1727665AbgIQO6W (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Sep 2020 10:58:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35358 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727189AbgIQN6l (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Sep 2020 09:58:41 -0400
-Received: from mail-pj1-x1044.google.com (mail-pj1-x1044.google.com [IPv6:2607:f8b0:4864:20::1044])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CCCEBC061A32
-        for <linux-doc@vger.kernel.org>; Thu, 17 Sep 2020 06:47:44 -0700 (PDT)
-Received: by mail-pj1-x1044.google.com with SMTP id kk9so1263935pjb.2
-        for <linux-doc@vger.kernel.org>; Thu, 17 Sep 2020 06:47:44 -0700 (PDT)
+        with ESMTP id S1727674AbgIQO6M (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Sep 2020 10:58:12 -0400
+Received: from mail-lj1-x243.google.com (mail-lj1-x243.google.com [IPv6:2a00:1450:4864:20::243])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 975A2C06178B;
+        Thu, 17 Sep 2020 07:58:09 -0700 (PDT)
+Received: by mail-lj1-x243.google.com with SMTP id a22so2274423ljp.13;
+        Thu, 17 Sep 2020 07:58:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=+R0CfwNbMgOaTG4ScznT7OJX0b8ugIojVEfeSnnqNTc=;
-        b=zfzwax3PpdhSOHwd1Dziyh/EVuvLFMJgWgUyuNomMMIfOy+ltMgttpjv2PkG0QUrMg
-         VQ4tkC9yB0StxHOspic8lBEaytG89CvgXfNpG01BM65wRcafv1kgrlPLj2GCQY94wTgE
-         zMNTKBDl6YPTGmySD1a74bYQ5eCzuSljS+Xze4jq2M4G23zm2MM6oTyfwCwJdDnwWzFS
-         hSRNWA3rzc6ZJT5GuNLKkUue9ferEZlkW82DuXD+E8Su8oaJCTy5uj93w/vR2eM1e+LZ
-         OdZsqPF0JYLGzk0yeFhD0uDG4zhhs/QSWomdvTcDXSvQQtWEbM9IysNVgavJZt0qoVNB
-         SByQ==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=Ewdb/5Luu0M1Zlvd5mbxKVbE7mouw/5QSqBvh/Tsm34=;
+        b=stLXKjGAsmeHxLLHNtha9cMqFeZVf4hQkQzUwa8WbmDPPvPuWlFY0mn3aNGLg28Yyz
+         JCxQ32eETI53110Z0gkaQPJ2sXGxcAlD08ywBOuh4+nMSpe6oJSirP/ydLw3h0ID8sWH
+         QlnXXvqTSreZ62s4CrcAx4iT3BHiROSAyD6n+3I2YOybQ+uP9td1SGFezcRaSjb1eSxz
+         2LyTWtlQCHj12S7ENTKAooKtXHRwEkaLnhVRJa4Ja1ZLbJylmOQp+/Kly9wwYhq6WJ40
+         Aeym7wVJTfujkGTXsWAHTT8mCIxQi36mXcz52cs7ewwZgLLcQZqqYoN5HlosnaJjNKAU
+         0FRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=+R0CfwNbMgOaTG4ScznT7OJX0b8ugIojVEfeSnnqNTc=;
-        b=pnkuO3o4/MZUoQYzWsoT20PX26Cbe/3yTQOtd45r2yRm6q86Z6tEk0aWbTNW+ESZVb
-         mMH5vSwvKhcGS/s1ku5WnEOGSFlPNi7XEnNp92IQsChaxDphJUsz0KnSpLFm8jgfa8HP
-         Bm/teP5FWOIHos1oWULxARfC4lG5uzV142pxUYbukcAcdvMkj36Xp3tOCDVVoac2Aov0
-         6M9T6PGhHOD01CjakEy80Z8gt6nfxd+Uw5Kpv2df4eeVr9i9Ln4/s676eWbp/40Dx/zq
-         ryaqQRPs/XeU8AV6XAL3kIl74xAx/44WWIWqmx/phhQMxi773dkPr7hxUPrDccITHBgO
-         lCPA==
-X-Gm-Message-State: AOAM532/nt7t7tS+PuYGmAPW5jfu00fU7ocQgggb17STABQn3hJppZlM
-        JBpAlzHv/hoNxrc/PVemlo7sIQ==
-X-Google-Smtp-Source: ABdhPJyvy8jjWm23ZilkLS4jB5OQY9gVJSrgQpws0JzwxO3vK5veKrElGyPGUmVKb+AhTbMGL/UX9g==
-X-Received: by 2002:a17:902:8305:b029:d1:cbfc:79b7 with SMTP id bd5-20020a1709028305b02900d1cbfc79b7mr17679996plb.33.1600350464395;
-        Thu, 17 Sep 2020 06:47:44 -0700 (PDT)
-Received: from localhost.localdomain ([117.252.66.163])
-        by smtp.gmail.com with ESMTPSA id i73sm6821120pfe.67.2020.09.17.06.47.35
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 17 Sep 2020 06:47:43 -0700 (PDT)
-From:   Sumit Garg <sumit.garg@linaro.org>
-To:     jarkko.sakkinen@linux.intel.com, zohar@linux.ibm.com,
-        jejb@linux.ibm.com
-Cc:     dhowells@redhat.com, jens.wiklander@linaro.org, corbet@lwn.net,
-        jmorris@namei.org, serge@hallyn.com, casey@schaufler-ca.com,
-        janne.karhunen@gmail.com, daniel.thompson@linaro.org,
-        Markus.Wamser@mixed-mode.de, lhinds@redhat.com,
-        keyrings@vger.kernel.org, linux-integrity@vger.kernel.org,
-        linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
-        op-tee@lists.trustedfirmware.org,
-        Sumit Garg <sumit.garg@linaro.org>
-Subject: [PATCH v6 4/4] MAINTAINERS: Add entry for TEE based Trusted Keys
-Date:   Thu, 17 Sep 2020 19:16:38 +0530
-Message-Id: <1600350398-4813-5-git-send-email-sumit.garg@linaro.org>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1600350398-4813-1-git-send-email-sumit.garg@linaro.org>
-References: <1600350398-4813-1-git-send-email-sumit.garg@linaro.org>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=Ewdb/5Luu0M1Zlvd5mbxKVbE7mouw/5QSqBvh/Tsm34=;
+        b=E+5eNNwauiQj8JW+55U3xp4CPkxa/8X6RLtE4isohT0sqB3oKDse3DUkm2envrxbCS
+         sUqCQHCGF1tNdqb+R934Pol5C6fXfbsahdaHL66fwXoeN5bArdBkjg3xevzTqL835zPm
+         JRIWTBi6jIG47hVF7jpZAx7rfkHxHXUWYg9K3F0kMl5GPafmhiBAM+zpWeDjkgOSHGdP
+         2KcRbFBuTGIK6kBcRhmw0vQJlQCnYzWSSP9AxRLk0O5SCI9Ie2eEAQyNm6qKmzuS4J1f
+         1ICsSaxO5KowRzupq37g8xeg7/5Xj1HjTTiMQlgk1UYrmevdfL2mgD+RIxkkRMvaShli
+         4TSA==
+X-Gm-Message-State: AOAM530Hbn1ARUK/zHe7tOiNHHU/P2EGn13cQd88RSSEs3YHBAaxt2sK
+        YT/3S8OmE6b1d8W6v8LiIZBfJnhEZR23Ul0G7hQ=
+X-Google-Smtp-Source: ABdhPJwN5AmQBJJ2AO+EFJ66Tw4J2dPtIALeak4KqJXY5jpmOy7HWt6GfFR1+fP1XxI0NpLo5TsZeSAuHlEAZUXa0+E=
+X-Received: by 2002:a2e:808f:: with SMTP id i15mr9643911ljg.51.1600354687981;
+ Thu, 17 Sep 2020 07:58:07 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1600328701.git.mchehab+huawei@kernel.org> <442b27cc035ab7f9e5e000f2ac44ce88ea8b16a6.1600328701.git.mchehab+huawei@kernel.org>
+In-Reply-To: <442b27cc035ab7f9e5e000f2ac44ce88ea8b16a6.1600328701.git.mchehab+huawei@kernel.org>
+From:   Alexei Starovoitov <alexei.starovoitov@gmail.com>
+Date:   Thu, 17 Sep 2020 07:57:56 -0700
+Message-ID: <CAADnVQJr+FAnRCtKxpi97qw1aGZe6D9g-VHjjWLfyQbeEZFYAQ@mail.gmail.com>
+Subject: Re: [PATCH 3/3] docs: bpf: ringbuf.rst: fix a broken cross-reference
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andrii Nakryiko <andriin@fb.com>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@chromium.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        bpf <bpf@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+        Network Development <netdev@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add MAINTAINERS entry for TEE based Trusted Keys framework.
+On Thu, Sep 17, 2020 at 1:04 AM Mauro Carvalho Chehab
+<mchehab+huawei@kernel.org> wrote:
+>
+> Sphinx warns about a broken cross-reference:
+>
+>         Documentation/bpf/ringbuf.rst:194: WARNING: Unknown target name: "bench_ringbufs.c".
+>
+> It seems that the original idea were to add a reference for this file:
+>
+>         tools/testing/selftests/bpf/benchs/bench_ringbufs.c
+>
+> However, this won't work as such file is not part of the
+> documentation output dir. It could be possible to use
+> an extension like interSphinx in order to make external
+> references to be pointed to some website (like kernel.org),
+> where the file is stored, but currently we don't use it.
+>
+> It would also be possible to include this file as a
+> literal include, placing it inside Documentation/bpf.
+>
+> For now, let's take the simplest approach: just drop
+> the "_" markup at the end of the reference. This
+> should solve the warning, and it sounds quite obvious
+> that the file to see is at the Kernel tree.
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  Documentation/bpf/ringbuf.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/bpf/ringbuf.rst b/Documentation/bpf/ringbuf.rst
+> index 4d4f3bcb1477..6a615cd62bda 100644
+> --- a/Documentation/bpf/ringbuf.rst
+> +++ b/Documentation/bpf/ringbuf.rst
+> @@ -197,7 +197,7 @@ a self-pacing notifications of new data being availability.
+>  being available after commit only if consumer has already caught up right up to
+>  the record being committed. If not, consumer still has to catch up and thus
+>  will see new data anyways without needing an extra poll notification.
+> -Benchmarks (see tools/testing/selftests/bpf/benchs/bench_ringbufs.c_) show that
+> +Benchmarks (see tools/testing/selftests/bpf/benchs/bench_ringbufs.c) show that
 
-Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-Acked-by: Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
----
- MAINTAINERS | 8 ++++++++
- 1 file changed, 8 insertions(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 0d0862b..0a913ba 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -9668,6 +9668,14 @@ F:	include/keys/trusted-type.h
- F:	include/keys/trusted_tpm.h
- F:	security/keys/trusted-keys/
- 
-+KEYS-TRUSTED-TEE
-+M:	Sumit Garg <sumit.garg@linaro.org>
-+L:	linux-integrity@vger.kernel.org
-+L:	keyrings@vger.kernel.org
-+S:	Supported
-+F:	include/keys/trusted_tee.h
-+F:	security/keys/trusted-keys/trusted_tee.c
-+
- KEYS/KEYRINGS
- M:	David Howells <dhowells@redhat.com>
- M:	Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
--- 
-2.7.4
-
+This fix already landed in bpf and net trees.
+Did you miss it?
