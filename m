@@ -2,112 +2,156 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C46AC26D491
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 09:22:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B20DC26D45A
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 09:13:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726304AbgIQHWO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Sep 2020 03:22:14 -0400
-Received: from 7.mo2.mail-out.ovh.net ([188.165.48.182]:54804 "EHLO
-        7.mo2.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726142AbgIQHWH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Sep 2020 03:22:07 -0400
-X-Greylist: delayed 599 seconds by postgrey-1.27 at vger.kernel.org; Thu, 17 Sep 2020 03:22:06 EDT
-Received: from player788.ha.ovh.net (unknown [10.110.115.29])
-        by mo2.mail-out.ovh.net (Postfix) with ESMTP id 68CBD1E82AE
-        for <linux-doc@vger.kernel.org>; Thu, 17 Sep 2020 09:03:43 +0200 (CEST)
-Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
-        (Authenticated sender: steve@sk2.org)
-        by player788.ha.ovh.net (Postfix) with ESMTPSA id B8759163D3A20;
-        Thu, 17 Sep 2020 07:03:39 +0000 (UTC)
-Authentication-Results: garm.ovh; auth=pass (GARM-97G002ceaa2b6f-b6d7-4589-8d40-daab5e75c234,
-                    CDC8E273B2E96CDC0F82EF6907E74C03A725C516) smtp.auth=steve@sk2.org
-Date:   Thu, 17 Sep 2020 09:03:32 +0200
-From:   Stephen Kitt <steve@sk2.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: rewrite admin-guide/sysctl/abi.rst
-Message-ID: <20200917090332.27925ea1@heffalump.sk2.org>
-In-Reply-To: <20200916124310.1a06c89e@lwn.net>
-References: <20200911190152.29730-1-steve@sk2.org>
-        <20200916124310.1a06c89e@lwn.net>
-X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+        id S1726187AbgIQHNG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Sep 2020 03:13:06 -0400
+Received: from smtp-fw-4101.amazon.com ([72.21.198.25]:17809 "EHLO
+        smtp-fw-4101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726106AbgIQHNG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Sep 2020 03:13:06 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1600326785; x=1631862785;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   mime-version;
+  bh=bT02fndMmz9E4+y+xqKPl+BUNHOX1Ddkk2I4qA/LheA=;
+  b=iOqYzDKKbENVnSLY71h77Jgxr0XDNuRBnrSAjgkUPmg8LX98NYcJlgAw
+   8LHjG21k28HBwh1Bo2oOxTDiIluI8taAqLvTHMepmHAr0G/tiF4de1uxF
+   E+3v6yTsnjC4mpADQKl9tae5p9Rw/kOjsamZWueDK0i4Ru+R1yH/ZSkNr
+   c=;
+X-IronPort-AV: E=Sophos;i="5.76,436,1592870400"; 
+   d="scan'208";a="54591284"
+Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-2c-2225282c.us-west-2.amazon.com) ([10.43.8.6])
+  by smtp-border-fw-out-4101.iad4.amazon.com with ESMTP; 17 Sep 2020 07:13:01 +0000
+Received: from EX13D31EUA004.ant.amazon.com (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
+        by email-inbound-relay-2c-2225282c.us-west-2.amazon.com (Postfix) with ESMTPS id 7EAABA18C7;
+        Thu, 17 Sep 2020 07:12:57 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.161.71) by
+ EX13D31EUA004.ant.amazon.com (10.43.165.161) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 17 Sep 2020 07:12:39 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     Shakeel Butt <shakeelb@google.com>
+CC:     SeongJae Park <sjpark@amazon.com>,
+        SeongJae Park <sjpark@amazon.de>,
+        <Jonathan.Cameron@huawei.com>,
+        Andrea Arcangeli <aarcange@redhat.com>, <acme@kernel.org>,
+        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
+        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
+        Brendan Higgins <brendanhiggins@google.com>,
+        Qian Cai <cai@lca.pw>,
+        Colin Ian King <colin.king@canonical.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "David Hildenbrand" <david@redhat.com>, <dwmw@amazon.com>,
+        Marco Elver <elver@google.com>, "Du, Fan" <fan.du@intel.com>,
+        <foersleo@amazon.de>, "Greg Thelen" <gthelen@google.com>,
+        Ian Rogers <irogers@google.com>, <jolsa@redhat.com>,
+        "Kirill A. Shutemov" <kirill@shutemov.name>,
+        <mark.rutland@arm.com>, Mel Gorman <mgorman@suse.de>,
+        Minchan Kim <minchan@kernel.org>,
+        Ingo Molnar <mingo@redhat.com>, <namhyung@kernel.org>,
+        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Rik van Riel <riel@surriel.com>,
+        David Rientjes <rientjes@google.com>,
+        Steven Rostedt <rostedt@goodmis.org>, <rppt@kernel.org>,
+        <sblbir@amazon.com>, <shuah@kernel.org>, <sj38.park@gmail.com>,
+        <snu@amazon.de>, Vlastimil Babka <vbabka@suse.cz>,
+        Vladimir Davydov <vdavydov.dev@gmail.com>,
+        Yang Shi <yang.shi@linux.alibaba.com>,
+        Huang Ying <ying.huang@intel.com>, <zgf574564920@gmail.com>,
+        <linux-damon@amazon.com>, Linux MM <linux-mm@kvack.org>,
+        <linux-doc@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>
+Subject: Re: [RFC PATCH 2/2] mm/damon/debugfs: Support multiple contexts
+Date:   Thu, 17 Sep 2020 09:12:23 +0200
+Message-ID: <20200917071224.3939-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <CALvZod5fO4PzRKO84TZMZ_wqjPTXnEcecbKUaV_TVkmoF70gpA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha512;
- boundary="Sig_/Yw2udeXEVTr3EM5I+=L7CpF"; protocol="application/pgp-signature"
-X-Ovh-Tracer-Id: 742812465100246405
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedujedrtdefgdduudegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvffukfgjfhfogggtsehgtderreertdejnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucggtffrrghtthgvrhhnpefgtdehleegkeejfedulefhjeehtedvueettdejfefgffegveekfffgieeigfeiheenucffohhmrghinheplhhkmhhlrdhorhhgnecukfhppedtrddtrddtrddtpdekvddrieehrddvhedrvddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejkeekrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
+Content-Type: text/plain
+X-Originating-IP: [10.43.161.71]
+X-ClientProxiedBy: EX13D40UWC001.ant.amazon.com (10.43.162.149) To
+ EX13D31EUA004.ant.amazon.com (10.43.165.161)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---Sig_/Yw2udeXEVTr3EM5I+=L7CpF
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+On Wed, 16 Sep 2020 09:11:18 -0700 Shakeel Butt <shakeelb@google.com> wrote:
 
-On Wed, 16 Sep 2020 12:43:10 -0600, Jonathan Corbet <corbet@lwn.net> wrote:
-> On Fri, 11 Sep 2020 21:01:52 +0200
-> Stephen Kitt <steve@sk2.org> wrote:
-> > Following the structure used in sysctl/kernel.rst, this updates
-> > abi.rst to use ReStructured Text more fully and updates the entries to
-> > match current kernels:
-> >=20
-> >   * the list of files is now the table of contents;
-> >   * links are used to point to other documentation and other sections;
-> >   * all the existing entries are no longer present, so this removes
-> >     them;
-> >   * document vsyscall32.
-> >=20
-> > Mentions of the kernel version are dropped. Since the document is
-> > entirely rewritten, I've replaced the copyright statement.
-> >=20
-> > Signed-off-by: Stephen Kitt <steve@sk2.org> =20
->=20
-> Replacing a copyright makes me a little nervous, but I guess that is OK
-> here since everything else is replaced too.
+> On Tue, Sep 15, 2020 at 11:03 AM SeongJae Park <sjpark@amazon.com> wrote:
+> >
+> > From: SeongJae Park <sjpark@amazon.de>
+> >
+> > DAMON allows the programming interface users to run monitoring with
+> > multiple contexts.  This could be useful in some cases.  For example, if
+> > someone want to do highly accurate monitoring and lots of CPUs are
+> > available, splitting the monitoring target regions into multiple small
+> > regions and allocating context (monitoring thread) to each small region
+> > could be helpful.  Or, someone could need to monitor different types of
+> > address spaces simultaneously.
+> >
+> > However, it's impossible from the user space because the DAMON debugfs
+> > interface supports only single context.  This commit makes it available
+> > by implementing 'nr_contexts' debugfs file.
+> >
+> > Users can pass the number (N) of contexts they want to use to the file.
+> 
+> Why not just mkdir which will create a new context?
 
-I hesitated too, but after checking carefully that the original contents we=
-re
-all gone, decided it sort of made sense... I could just drop that line too,
-I=E2=80=99m not sure there=E2=80=99s much point in documentation that=E2=80=
-=99s supposed to be
-collectively maintained (and authorship is determined by the commits anyway=
-).
+Because I referenced the naming rule of zram and because I just wanted to make
+this as simple as possible.  I find no special functional difference between
+current way and you suggested way.
 
-> Could I trouble you, though, for a version that adds an SPDX line at the
-> top while you're at it?
+That said, I also think you suggested way is much more flexible.  I will try to
+make this in that way.
 
-No problem, v2 incoming.
+> 
+> > Then, N folders having name of 'ctx<1-(N-1)>' are created in the DAMON
+> > debugfs dir.  Each of the directory is associated with the contexts and
+> > contains the the files for context setting (attrs, init_regions, record,
+> > schemes, and target_ids).
+> 
+> Also instead of naming the kthread with context number why not give
+> the kthread pids through attrs (or new interface) and the admin can
+> move those kthreads to the cgroup they want to charge against?
 
-While I=E2=80=99m at it, might I ask if it would be possible to carry
-https://lkml.org/lkml/2020/8/12/181 (sort-of-re-submitted in
-https://lkml.org/lkml/2020/9/11/1079) in the docs tree? It fixes a docs
-commit...
+Again, I just wanted to make this as simple as possible, and I also referenced
+blkback thread naming.  And I find no special functional difference here,
+either.
 
-Regards,
+And yes, I think you suggested way is much more flexible and easy to be used.
+I will make this in that way.
 
-Stephen
+---
 
---Sig_/Yw2udeXEVTr3EM5I+=L7CpF
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
+Just a note (not for only Shakeel, but anyone who interested in DAMON).  The
+DAMON debugfs interface is not highly coupled with DAMON.  Rather than that, it
+is implemented as an application using DAMON as a framework via the DAMON's
+kernel space interface.  This means that anyone who want different user space
+interface can implement their own on top of the framework.  I will try to make
+the changes as soon as possible, but if you cannot wait until then, you could
+implement your own.
 
------BEGIN PGP SIGNATURE-----
+Similarly, DAMON lacks many functionality such as support of special address
+spaces.  I already have a TODO list.  And I will implement those one by one.
+So, please give me the requests.  However, I believe the kernel space interface
+is already almost complete.  Thus, almost every such future features could be
+implemented on top of current DAMON interface.  Therefore, if you cannot wait
+until I finish the work, you can implement your own on DAMON's kernel space
+interface.
 
-iQIzBAEBCgAdFiEEnPVX/hPLkMoq7x0ggNMC9Yhtg5wFAl9jCkQACgkQgNMC9Yht
-g5xQkA/+M/VWiQ4nrh2Jc6KSI3+GEpVO46PAd6ocBtaN0gKq7MbwVahpTUXzi9AG
-lQOsKpziwDldo5yLF+M2DR5Wd3AkvWoD/uSuciqY5SyVffNm43tYYOSRw8mARRwO
-aLwLzMZAqoZ4+ODhVuMLnwp+x1vWWjF1bY//eK8FqyaX6WkJaeZi4eTVmyuMpdPf
-ypwFScdL52WThJAMaZ7h6eIrGOZLGzAQsHLeVVTyiWYcHaKlMBO6o2Z4bJ7AVtGn
-QBRNlL1yAs2gHpEArPC4A+Jmo58lfXYY1YyKXlhV3nj5Af/jzEcIqcbmFOF3PApa
-KggdeVDowvqxkBXPatG9+6F83iziBcR/BVmFJiwEu8nXoa9w49L1Tl1vDY6gCsO/
-iCvEQ8TAAU85/b4VxxVqlkAtffe6184rAyuC0377hRMXI0idUHED3ZQaMATJLjmg
-zSP4xv5y8QIjDnUIqzhfzXcZWLtff0c6WcVNn9NvgabM+FLcjWUb05+a3S8spdzt
-taE1RVlg/01/FXxq+CsbWUAHPolVcjviGHah0WnZlbs54X1oGhf8eYLHRIY6SDEi
-fCyBaP8p1bx+hRDNhjpuYTqwOQQ+sj0RaCmXo5UWNkH+xB8tuYQ0CN7AgNmp3Qhb
-x2Ti3xyWwlNStOtf1NI76pC5wM9cFSh8DHWvaV63LdeK606nceE=
-=llSE
------END PGP SIGNATURE-----
+Of course, if you send the patches for your own implementations, that will make
+not only I, but the community happier.
 
---Sig_/Yw2udeXEVTr3EM5I+=L7CpF--
+And this is the reason why the patchset containing only the framework part and
+minimal applications / addons is titled as official 'PATCH', while the
+patchsets for the future features are titled 'RFC'.  So, I am asking you to
+consider giving more attention to the framework part (the first 4 patches of
+the patchset[1]), as all future features will depend on it.
+
+[1] https://lore.kernel.org/linux-mm/20200817105137.19296-1-sjpark@amazon.com/
+
+
+Thanks,
+SeongJae Park
