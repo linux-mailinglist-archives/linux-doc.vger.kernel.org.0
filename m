@@ -2,88 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8116B26D501
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 09:47:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 512C926D633
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 10:15:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726338AbgIQHrg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Sep 2020 03:47:36 -0400
-Received: from mail.kernel.org ([198.145.29.99]:40622 "EHLO mail.kernel.org"
+        id S1726202AbgIQIPd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Sep 2020 04:15:33 -0400
+Received: from mail.kernel.org ([198.145.29.99]:53472 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726354AbgIQHrf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 17 Sep 2020 03:47:35 -0400
-Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
+        id S1726106AbgIQIPa (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 17 Sep 2020 04:15:30 -0400
+Received: from mail.kernel.org (ip5f5ad5d2.dynamic.kabel-deutschland.de [95.90.213.210])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 2F76321D43;
-        Thu, 17 Sep 2020 07:47:14 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id BC07920707;
+        Thu, 17 Sep 2020 08:04:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1600328834;
-        bh=CALILkZxFAAAwnWnrpQMoX+SZOHKjQaj7OhbjiEzVps=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=ldPCAyvT8fhBDn6tx7RoNJE/AnFWnL6/6xwKfONdmxDxHatfCnV61IJWkXI8lQy5b
-         sRb2m/tTY7mI1LlLh20/u8iI55yGN2agl7XcT6+DU37rB0RAMcELyCeWy4/Af9VeSV
-         OPkhdNHetiEEj8JjXJZF0R1ZJ8vz3lbmoCWYKwAM=
-Date:   Thu, 17 Sep 2020 09:47:47 +0200
-From:   Greg KH <gregkh@linuxfoundation.org>
-To:     Bhaskar Chowdhury <unixbhaskar@gmail.com>
-Cc:     b.zolnierkie@samsung.com, linux-fbdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        corbet@lwn.net, rdunlap@infradead.org, daniel@ffwll.ch,
-        yuanmingbuaa@gmail.com, w@1wt.eu, nopitydays@gmail.com,
-        zhangyunhai@nsfocus.com, luto@amacapital.net,
-        torvalds@linux-foundation.org
-Subject: Re: [PATCH v3] docs: fb: Remove framebuffer scrollback boot option
-Message-ID: <20200917074747.GA3332340@kroah.com>
-References: <20200916230150.14516-1-unixbhaskar@gmail.com>
+        s=default; t=1600329870;
+        bh=2vRvBaqh9EKp9T9C1x2X/Aw5e2zrJra1E4+MhA18gXM=;
+        h=From:To:Cc:Subject:Date:From;
+        b=JwMinYkF0td1iRhPW6tYFYQK+S7ineNCASogVdgKBrsKxz4mmq+nyP57pilLOicSW
+         mW5kv6Dca7sMxfzTudNRr/uKLQuG5PWfYo/j4P+yvMvZ1mcWh0YwiaUHO0ufDxu8OU
+         dmMBEW7Mj0h6WR3KhpliVNeoCCyqQDWt7g8/f1ZI=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kIou4-0051LO-6j; Thu, 17 Sep 2020 10:04:28 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Alexander Potapenko <glider@google.com>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andreas Gruenbacher <agruenba@redhat.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Andrii Nakryiko <andriin@fb.com>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Guoqing Jiang <guoqing.jiang@cloud.ionos.com>,
+        Jens Axboe <axboe@kernel.dk>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        John Fastabend <john.fastabend@gmail.com>,
+        KP Singh <kpsingh@chromium.org>,
+        Martin KaFai Lau <kafai@fb.com>,
+        Song Liu <songliubraving@fb.com>,
+        Stephen Rothwell <sfr@canb.auug.org.au>,
+        William Kucharski <william.kucharski@oracle.com>,
+        Yang Shi <yang.shi@linux.alibaba.com>,
+        Yonghong Song <yhs@fb.com>, bpf@vger.kernel.org,
+        kasan-dev@googlegroups.com, netdev@vger.kernel.org
+Subject: [PATCH 0/3] Additional doc warning fixes for issues at next-20200915
+Date:   Thu, 17 Sep 2020 10:04:24 +0200
+Message-Id: <cover.1600328701.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20200916230150.14516-1-unixbhaskar@gmail.com>
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Sep 17, 2020 at 04:31:50AM +0530, Bhaskar Chowdhury wrote:
-> This patch remove reference to this option in this document and 
-> renumbered the sections. This is related to below commits.
-> 
-> Commit 973c096f6a85(vgacon: remove software scrollback support)
-> Commit 50145474f6ef(fbcon: remove soft scrollback code)
->  
-> 
-> Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
-> ---
-> This version try to correct the previous errors, proper changelog text, subject
-> Trying to incorporate Willy's & Greg's suggestions
+There are a couple of new warnings introduced at linux-next.
 
-Better, but...
+This small patch series address them.
 
-This should be a patch series, properly numbered and threaded, right?
+The complete series addressing (almost) all doc warnings is at:
 
-The text above still has the commit ids not properly referenced, and you
-have trailing whitespace in the text too.
+	https://git.linuxtv.org/mchehab/experimental.git/log/?h=doc-fixes
 
-Writing the changelog is often times the hardest part of a patch, as you
-are finding out.
+I'll keep rebasing such tree until we get rid of all doc warnings upstream,
+hopefully in time for Kernel 5.10.
 
-How about this example, for this specific patch, as a changelog text:
+Mauro Carvalho Chehab (3):
+  docs: kasan.rst: add two missing blank lines
+  mm: pagemap.h: fix two kernel-doc markups
+  docs: bpf: ringbuf.rst: fix a broken cross-reference
 
----------
-In commit 50145474f6ef ("fbcon: remove soft scrollback code"), the
-framebuffer scrollback mode was removed, but the documentation was not
-updated.  Properly update the documentation by removing the option that
-is no longer present, and update the section numbering because of the
-removal.
----------
+ Documentation/bpf/ringbuf.rst     | 2 +-
+ Documentation/dev-tools/kasan.rst | 2 ++
+ include/linux/pagemap.h           | 8 ++++----
+ 3 files changed, 7 insertions(+), 5 deletions(-)
 
-Doesn't that make more sense about what is happening here, and provide
-enough information that when someone 10+ years from now goes and tries
-to find out why a boot option went away, what exactly happened and why?
+-- 
+2.26.2
 
-Can you make this type of change to all 4 of these patches and resend
-them, with the proper change information below the --- line as a v4
-series?
 
-thanks,
-
-greg k-h
