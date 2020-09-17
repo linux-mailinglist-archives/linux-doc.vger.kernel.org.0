@@ -2,127 +2,112 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 08AC626D0F2
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 04:03:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C46AC26D491
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Sep 2020 09:22:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726106AbgIQCDC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Sep 2020 22:03:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56052 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725886AbgIQCDC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Sep 2020 22:03:02 -0400
-X-Greylist: delayed 554 seconds by postgrey-1.27 at vger.kernel.org; Wed, 16 Sep 2020 22:03:01 EDT
-Received: from mail-qt1-x843.google.com (mail-qt1-x843.google.com [IPv6:2607:f8b0:4864:20::843])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC09AC06174A;
-        Wed, 16 Sep 2020 18:53:44 -0700 (PDT)
-Received: by mail-qt1-x843.google.com with SMTP id r8so607969qtp.13;
-        Wed, 16 Sep 2020 18:53:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=UtmGdVHh9HT6IPtBW8yCBnrUkzJN7a2tNcA0ehwWLwU=;
-        b=tgq6SoVkArsejIzixZBMCCoh8Ya0roIEAYVt5HSPQaL7+ccY0qHP9iyLAGz/wEDXwn
-         VFT6TWee6L4HlqGBCwibDhaORFejfCpCGT0WaWqc8s9MAeVo4iXB6geQZsyJUMr6dfg3
-         gwJh2waJkcgVR1nvmYdLFsvdebVvEgoa0Sx7c0gPCEAvP3JxHACrquZ0eq5C7n/Q4gb5
-         CsPRkLm5eWYBiFY02l1Mokx+E2rKHDMpRMHKXe6flM1I+5Bv4smy5RjfUfNnghiV9870
-         tPyp35MPknkFL9BHpe1Zy1+Qy7Xr1szclzGWDy7mMCv3BvewN8MMzwbzKVRy24gn6fHR
-         p7kw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=UtmGdVHh9HT6IPtBW8yCBnrUkzJN7a2tNcA0ehwWLwU=;
-        b=duWOZ0ySn7nXaSUgkFLSxkIcnKz596oLc/T5TwL937bHPn1oPbtINmIPMW7v3uxbnG
-         /38RfO2oXZ4P9lEoMMoF8cKEvvsOgejtLin3grlDarqrgs3SnZYk5jhRvxWDkwWEdzXW
-         37TbqDW0qZ8OqkKCoMzv8KMZTxrXcYLv1RFqwWopEZc9RRyxmm8xSXqmLSka1p3gKPIe
-         KZJq6iHyx7+mZI9WMIZZ7GPSdn9WHmmtrFcjn5lERHv+DknCeqBsfPBNin9jEwBA2dGM
-         VtYMI75YHzpC42eGIAeJ2FeTYjxDDk2rbqAYXaxGBHDNxy4oftstbAyNZwQAtTXmFEE1
-         cGXA==
-X-Gm-Message-State: AOAM530c9xWoBThg7tpqfEechOgi/qSxLAYklApjtOxpXVFbQnVv0q8u
-        4W2TEZK3VS4WF6vNilVb0XGieSdk5no=
-X-Google-Smtp-Source: ABdhPJzzP8lWy8OkwpRxUV7hqKi88Iaub292BVV/Esx7P6uCT2gTOpHN19BMC7VJsmaz1QYIb4TQ8A==
-X-Received: by 2002:aed:278a:: with SMTP id a10mr13826998qtd.261.1600307624137;
-        Wed, 16 Sep 2020 18:53:44 -0700 (PDT)
-Received: from auth2-smtp.messagingengine.com (auth2-smtp.messagingengine.com. [66.111.4.228])
-        by smtp.gmail.com with ESMTPSA id k20sm28513qtm.44.2020.09.16.18.53.42
-        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 16 Sep 2020 18:53:42 -0700 (PDT)
-Received: from compute3.internal (compute3.nyi.internal [10.202.2.43])
-        by mailauth.nyi.internal (Postfix) with ESMTP id EF7B927C0054;
-        Wed, 16 Sep 2020 21:53:41 -0400 (EDT)
-Received: from mailfrontend1 ([10.202.2.162])
-  by compute3.internal (MEProxy); Wed, 16 Sep 2020 21:53:41 -0400
-X-ME-Sender: <xms:pcFiX85WGTpyN-_vNQcz2_sydNqBvfQPeMRen4xuqsiuqe93bZgoqg>
-    <xme:pcFiX94lpXLlyilk24MY9BQgLTLttwcPjsd8N2RjzIHyRJ_fdYBaAwek2RgwBQe1s
-    mE-tc46vlJjKTvAfg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedujedrtdefgdehudcutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpeffhffvuffkfhggtggujgesthdtredttddtvdenucfhrhhomhepuehoqhhunhcu
-    hfgvnhhguceosghoqhhunhdrfhgvnhhgsehgmhgrihhlrdgtohhmqeenucggtffrrghtth
-    gvrhhnpedvleeigedugfegveejhfejveeuveeiteejieekvdfgjeefudehfefhgfegvdeg
-    jeenucfkphephedvrdduheehrdduuddurdejudenucevlhhushhtvghrufhiiigvpedtne
-    curfgrrhgrmhepmhgrihhlfhhrohhmpegsohhquhhnodhmvghsmhhtphgruhhthhhpvghr
-    shhonhgrlhhithihqdeiledvgeehtdeigedqudejjeekheehhedvqdgsohhquhhnrdhfvg
-    hngheppehgmhgrihhlrdgtohhmsehfihigmhgvrdhnrghmvg
-X-ME-Proxy: <xmx:pcFiX7frXpRN5U18R_Efx7EzjBFoO3nArgi2NXSTGUaQvFC6PPuuqg>
-    <xmx:pcFiXxIzyLcBSDfxAbp5_ryniZ3cli8se7VRmzVHHYUFYlYYX7t14g>
-    <xmx:pcFiXwKv-wrrvF0e7gI5FV8r27PJyS9DojhSNgc2MVKJIzXjXzenXg>
-    <xmx:pcFiX48L4jOfrFHdOOGwLEUFz2a3W2Rsg9vVHNXEZVmxqPHCXORRmA>
-Received: from localhost (unknown [52.155.111.71])
-        by mail.messagingengine.com (Postfix) with ESMTPA id EAF7C3280059;
-        Wed, 16 Sep 2020 21:53:40 -0400 (EDT)
-Date:   Thu, 17 Sep 2020 09:53:39 +0800
-From:   Boqun Feng <boqun.feng@gmail.com>
-To:     Qian Cai <cai@redhat.com>
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Waiman Long <longman@redhat.com>
-Subject: Re: [RFC v7 11/19] lockdep: Fix recursive read lock related
- safe->unsafe detection
-Message-ID: <20200917015339.GE127490@debian-boqun.qqnc3lrjykvubdpftowmye0fmh.lx.internal.cloudapp.net>
-References: <20200807074238.1632519-1-boqun.feng@gmail.com>
- <20200807074238.1632519-12-boqun.feng@gmail.com>
- <17343f6f7f2438fc376125384133c5ba70c2a681.camel@redhat.com>
- <20200916081046.GC127490@debian-boqun.qqnc3lrjykvubdpftowmye0fmh.lx.internal.cloudapp.net>
- <20200916161404.GD127490@debian-boqun.qqnc3lrjykvubdpftowmye0fmh.lx.internal.cloudapp.net>
- <607c446bc8d3a0cc6e96aa9792e075913ad6b2c6.camel@redhat.com>
+        id S1726304AbgIQHWO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Sep 2020 03:22:14 -0400
+Received: from 7.mo2.mail-out.ovh.net ([188.165.48.182]:54804 "EHLO
+        7.mo2.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726142AbgIQHWH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Sep 2020 03:22:07 -0400
+X-Greylist: delayed 599 seconds by postgrey-1.27 at vger.kernel.org; Thu, 17 Sep 2020 03:22:06 EDT
+Received: from player788.ha.ovh.net (unknown [10.110.115.29])
+        by mo2.mail-out.ovh.net (Postfix) with ESMTP id 68CBD1E82AE
+        for <linux-doc@vger.kernel.org>; Thu, 17 Sep 2020 09:03:43 +0200 (CEST)
+Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
+        (Authenticated sender: steve@sk2.org)
+        by player788.ha.ovh.net (Postfix) with ESMTPSA id B8759163D3A20;
+        Thu, 17 Sep 2020 07:03:39 +0000 (UTC)
+Authentication-Results: garm.ovh; auth=pass (GARM-97G002ceaa2b6f-b6d7-4589-8d40-daab5e75c234,
+                    CDC8E273B2E96CDC0F82EF6907E74C03A725C516) smtp.auth=steve@sk2.org
+Date:   Thu, 17 Sep 2020 09:03:32 +0200
+From:   Stephen Kitt <steve@sk2.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] docs: rewrite admin-guide/sysctl/abi.rst
+Message-ID: <20200917090332.27925ea1@heffalump.sk2.org>
+In-Reply-To: <20200916124310.1a06c89e@lwn.net>
+References: <20200911190152.29730-1-steve@sk2.org>
+        <20200916124310.1a06c89e@lwn.net>
+X-Mailer: Claws Mail 3.17.3 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <607c446bc8d3a0cc6e96aa9792e075913ad6b2c6.camel@redhat.com>
+Content-Type: multipart/signed; micalg=pgp-sha512;
+ boundary="Sig_/Yw2udeXEVTr3EM5I+=L7CpF"; protocol="application/pgp-signature"
+X-Ovh-Tracer-Id: 742812465100246405
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedujedrtdefgdduudegucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmnecujfgurhepfffhvffukfgjfhfogggtsehgtderreertdejnecuhfhrohhmpefuthgvphhhvghnucfmihhtthcuoehsthgvvhgvsehskhdvrdhorhhgqeenucggtffrrghtthgvrhhnpefgtdehleegkeejfedulefhjeehtedvueettdejfefgffegveekfffgieeigfeiheenucffohhmrghinheplhhkmhhlrdhorhhgnecukfhppedtrddtrddtrddtpdekvddrieehrddvhedrvddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejkeekrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 16, 2020 at 05:11:59PM -0400, Qian Cai wrote:
-> On Thu, 2020-09-17 at 00:14 +0800, Boqun Feng wrote:
-> > Found a way to resolve this while still keeping the BFS. Every time when
-> > we want to enqueue a lock_list, we basically enqueue a whole dep list of
-> > entries from the previous lock_list, so we can use a trick here: instead
-> > enqueue all the entries, we only enqueue the first entry and we can
-> > fetch other silbing entries with list_next_or_null_rcu(). Patch as
-> > below, I also took the chance to clear the code up and add more
-> > comments. I could see this number (in /proc/lockdep_stats):
-> > 
-> > 	max bfs queue depth:                   201
-> > 
-> > down to (after apply this patch)
-> > 
-> > 	max bfs queue depth:                   61
-> > 
-> > with x86_64_defconfig along with lockdep and selftest configs.
-> > 
-> > Qian, could you give it a try?
-> 
-> It works fine as the number went down from around 3000 to 500 on our workloads.
-> 
+--Sig_/Yw2udeXEVTr3EM5I+=L7CpF
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Thanks, let me send a proper patch. I will add a Reported-by tag from
-you.
+On Wed, 16 Sep 2020 12:43:10 -0600, Jonathan Corbet <corbet@lwn.net> wrote:
+> On Fri, 11 Sep 2020 21:01:52 +0200
+> Stephen Kitt <steve@sk2.org> wrote:
+> > Following the structure used in sysctl/kernel.rst, this updates
+> > abi.rst to use ReStructured Text more fully and updates the entries to
+> > match current kernels:
+> >=20
+> >   * the list of files is now the table of contents;
+> >   * links are used to point to other documentation and other sections;
+> >   * all the existing entries are no longer present, so this removes
+> >     them;
+> >   * document vsyscall32.
+> >=20
+> > Mentions of the kernel version are dropped. Since the document is
+> > entirely rewritten, I've replaced the copyright statement.
+> >=20
+> > Signed-off-by: Stephen Kitt <steve@sk2.org> =20
+>=20
+> Replacing a copyright makes me a little nervous, but I guess that is OK
+> here since everything else is replaced too.
+
+I hesitated too, but after checking carefully that the original contents we=
+re
+all gone, decided it sort of made sense... I could just drop that line too,
+I=E2=80=99m not sure there=E2=80=99s much point in documentation that=E2=80=
+=99s supposed to be
+collectively maintained (and authorship is determined by the commits anyway=
+).
+
+> Could I trouble you, though, for a version that adds an SPDX line at the
+> top while you're at it?
+
+No problem, v2 incoming.
+
+While I=E2=80=99m at it, might I ask if it would be possible to carry
+https://lkml.org/lkml/2020/8/12/181 (sort-of-re-submitted in
+https://lkml.org/lkml/2020/9/11/1079) in the docs tree? It fixes a docs
+commit...
 
 Regards,
-Boqun
+
+Stephen
+
+--Sig_/Yw2udeXEVTr3EM5I+=L7CpF
+Content-Type: application/pgp-signature
+Content-Description: OpenPGP digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEnPVX/hPLkMoq7x0ggNMC9Yhtg5wFAl9jCkQACgkQgNMC9Yht
+g5xQkA/+M/VWiQ4nrh2Jc6KSI3+GEpVO46PAd6ocBtaN0gKq7MbwVahpTUXzi9AG
+lQOsKpziwDldo5yLF+M2DR5Wd3AkvWoD/uSuciqY5SyVffNm43tYYOSRw8mARRwO
+aLwLzMZAqoZ4+ODhVuMLnwp+x1vWWjF1bY//eK8FqyaX6WkJaeZi4eTVmyuMpdPf
+ypwFScdL52WThJAMaZ7h6eIrGOZLGzAQsHLeVVTyiWYcHaKlMBO6o2Z4bJ7AVtGn
+QBRNlL1yAs2gHpEArPC4A+Jmo58lfXYY1YyKXlhV3nj5Af/jzEcIqcbmFOF3PApa
+KggdeVDowvqxkBXPatG9+6F83iziBcR/BVmFJiwEu8nXoa9w49L1Tl1vDY6gCsO/
+iCvEQ8TAAU85/b4VxxVqlkAtffe6184rAyuC0377hRMXI0idUHED3ZQaMATJLjmg
+zSP4xv5y8QIjDnUIqzhfzXcZWLtff0c6WcVNn9NvgabM+FLcjWUb05+a3S8spdzt
+taE1RVlg/01/FXxq+CsbWUAHPolVcjviGHah0WnZlbs54X1oGhf8eYLHRIY6SDEi
+fCyBaP8p1bx+hRDNhjpuYTqwOQQ+sj0RaCmXo5UWNkH+xB8tuYQ0CN7AgNmp3Qhb
+x2Ti3xyWwlNStOtf1NI76pC5wM9cFSh8DHWvaV63LdeK606nceE=
+=llSE
+-----END PGP SIGNATURE-----
+
+--Sig_/Yw2udeXEVTr3EM5I+=L7CpF--
