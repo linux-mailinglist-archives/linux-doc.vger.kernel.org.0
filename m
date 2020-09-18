@@ -2,132 +2,170 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 98EFE26F8CC
-	for <lists+linux-doc@lfdr.de>; Fri, 18 Sep 2020 10:59:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5F12726F933
+	for <lists+linux-doc@lfdr.de>; Fri, 18 Sep 2020 11:25:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726327AbgIRI77 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 18 Sep 2020 04:59:59 -0400
-Received: from szxga05-in.huawei.com ([45.249.212.191]:13255 "EHLO huawei.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1726234AbgIRI77 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 18 Sep 2020 04:59:59 -0400
-Received: from DGGEMS402-HUB.china.huawei.com (unknown [172.30.72.58])
-        by Forcepoint Email with ESMTP id 92FA38072DD805E457D2;
-        Fri, 18 Sep 2020 16:59:57 +0800 (CST)
-Received: from [10.174.176.220] (10.174.176.220) by
- DGGEMS402-HUB.china.huawei.com (10.3.19.202) with Microsoft SMTP Server id
- 14.3.487.0; Fri, 18 Sep 2020 16:59:48 +0800
-Subject: Re: [PATCH v12 3/9] x86: kdump: use macro CRASH_ADDR_LOW_MAX in
- functions reserve_crashkernel[_low]()
-To:     Baoquan He <bhe@redhat.com>
-References: <20200907134745.25732-1-chenzhou10@huawei.com>
- <20200907134745.25732-4-chenzhou10@huawei.com>
- <20200918072526.GD25604@MiWiFi-R3L-srv>
-CC:     <catalin.marinas@arm.com>, <will@kernel.org>,
-        <james.morse@arm.com>, <tglx@linutronix.de>, <mingo@redhat.com>,
-        <dyoung@redhat.com>, <corbet@lwn.net>,
-        <John.P.donnelly@oracle.com>, <prabhakar.pkin@gmail.com>,
-        <bhsharma@redhat.com>, <horms@verge.net.au>, <robh+dt@kernel.org>,
-        <arnd@arndb.de>, <nsaenzjulienne@suse.de>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-kernel@vger.kernel.org>, <kexec@lists.infradead.org>,
-        <linux-doc@vger.kernel.org>, <guohanjun@huawei.com>,
-        <xiexiuqi@huawei.com>, <huawei.libin@huawei.com>,
-        <wangkefeng.wang@huawei.com>, <rppt@linux.ibm.com>
-From:   chenzhou <chenzhou10@huawei.com>
-Message-ID: <fa6634dd-4438-4e5d-f350-fc19d5fa7d97@huawei.com>
-Date:   Fri, 18 Sep 2020 16:59:47 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101
- Thunderbird/45.7.1
+        id S1726621AbgIRJZa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 18 Sep 2020 05:25:30 -0400
+Received: from lelv0142.ext.ti.com ([198.47.23.249]:41286 "EHLO
+        lelv0142.ext.ti.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726298AbgIRJZa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 18 Sep 2020 05:25:30 -0400
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+        by lelv0142.ext.ti.com (8.15.2/8.15.2) with ESMTP id 08I6gaXJ016099;
+        Fri, 18 Sep 2020 01:42:36 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+        s=ti-com-17Q1; t=1600411356;
+        bh=lFqkCh1cP+tj9UFVkaUqI+8hDhaypWD8s62IvqB0b5Q=;
+        h=From:To:CC:Subject:Date;
+        b=D2HNf770vWd17LV8fSLziVpQ9wvCyp531qpvtS2LbcMgsrsG372zz5GQHc1HTNap4
+         szz8iGIYca2pFPc51ptCKGWJyb9puOPpAvfN56AYb7cszQn6usg2btGWlKvNUcRU2B
+         MZ9GvWtG+C6q34klX7mfsefJHrGWo0hpY6BxH2jE=
+Received: from DLEE101.ent.ti.com (dlee101.ent.ti.com [157.170.170.31])
+        by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 08I6ga6j081896
+        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Fri, 18 Sep 2020 01:42:36 -0500
+Received: from DLEE107.ent.ti.com (157.170.170.37) by DLEE101.ent.ti.com
+ (157.170.170.31) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Fri, 18
+ Sep 2020 01:42:36 -0500
+Received: from fllv0039.itg.ti.com (10.64.41.19) by DLEE107.ent.ti.com
+ (157.170.170.37) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Fri, 18 Sep 2020 01:42:36 -0500
+Received: from a0393678-ssd.ent.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
+        by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 08I6gUCK094595;
+        Fri, 18 Sep 2020 01:42:31 -0500
+From:   Kishon Vijay Abraham I <kishon@ti.com>
+To:     Bjorn Helgaas <bhelgaas@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kishon Vijay Abraham I <kishon@ti.com>,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        Arnd Bergmann <arnd@arndb.de>, Jon Mason <jdmason@kudzu.us>,
+        Dave Jiang <dave.jiang@intel.com>,
+        Allen Hubbe <allenbh@gmail.com>,
+        Tom Joseph <tjoseph@cadence.com>, Rob Herring <robh@kernel.org>
+CC:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        <linux-pci@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-ntb@googlegroups.com>
+Subject: [PATCH v5 00/17] Implement NTB Controller using multiple PCI EP
+Date:   Fri, 18 Sep 2020 12:12:10 +0530
+Message-ID: <20200918064227.1463-1-kishon@ti.com>
+X-Mailer: git-send-email 2.17.1
 MIME-Version: 1.0
-In-Reply-To: <20200918072526.GD25604@MiWiFi-R3L-srv>
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.176.220]
-X-CFilter-Loop: Reflected
+Content-Type: text/plain
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Baoquan,
+This series is about implementing SW defined NTB using
+multiple endpoint instances. This series has been tested using
+2 endpoint instances in J7 connected to J7 board on one end and DRA7 board
+on the other end. However there is nothing platform specific for the NTB
+functionality.
 
-On 2020/9/18 15:25, Baoquan He wrote:
-> Hi,
->
-> On 09/07/20 at 09:47pm, Chen Zhou wrote:
->> To make the functions reserve_crashkernel[_low]() as generic,
->> replace some hard-coded numbers with macro CRASH_ADDR_LOW_MAX.
->>
->> Signed-off-by: Chen Zhou <chenzhou10@huawei.com>
->> ---
->>  arch/x86/kernel/setup.c | 11 ++++++-----
->>  1 file changed, 6 insertions(+), 5 deletions(-)
->>
->> diff --git a/arch/x86/kernel/setup.c b/arch/x86/kernel/setup.c
->> index d7fd90c52dae..71a6a6e7ca5b 100644
->> --- a/arch/x86/kernel/setup.c
->> +++ b/arch/x86/kernel/setup.c
->> @@ -430,7 +430,7 @@ static int __init reserve_crashkernel_low(void)
->>  	unsigned long total_low_mem;
->>  	int ret;
->>  
->> -	total_low_mem = memblock_mem_size(1UL << (32 - PAGE_SHIFT));
->> +	total_low_mem = memblock_mem_size(CRASH_ADDR_LOW_MAX >> PAGE_SHIFT);
-> Just note that the replacement has been done in another patch from Mike
-> Rapoport, partially. He seems to have done reserve_crashkernel_low()
-> part, there's one left in reserve_crashkernel(), you might want to check
-> that. 
->
-> Mike's patch which is from a patchset has been merged into Andrew's next
-> tree.
->
-> commit 6e50f7672ffa362e9bd4bc0c0d2524ed872828c5
-> Author: Mike Rapoport <rppt@linux.ibm.com>
-> Date:   Wed Aug 26 15:22:32 2020 +1000
->
->     x86/setup: simplify reserve_crashkernel()
-Yeah, the function reserve_crashkernel() has been changed in the next tree.
-Thanks for your review and reminder.
+This was presented in Linux Plumbers Conference. The presentation
+can be found @ [1]
 
-Thanks,
-Chen Zhou
->
->>  
->>  	/* crashkernel=Y,low */
->>  	ret = parse_crashkernel_low(boot_command_line, total_low_mem, &low_size, &base);
->> @@ -451,7 +451,7 @@ static int __init reserve_crashkernel_low(void)
->>  			return 0;
->>  	}
->>  
->> -	low_base = memblock_find_in_range(CRASH_ALIGN, 1ULL << 32, low_size, CRASH_ALIGN);
->> +	low_base = memblock_find_in_range(CRASH_ALIGN, CRASH_ADDR_LOW_MAX, low_size, CRASH_ALIGN);
->>  	if (!low_base) {
->>  		pr_err("Cannot reserve %ldMB crashkernel low memory, please try smaller size.\n",
->>  		       (unsigned long)(low_size >> 20));
->> @@ -504,8 +504,9 @@ static void __init reserve_crashkernel(void)
->>  	if (!crash_base) {
->>  		/*
->>  		 * Set CRASH_ADDR_LOW_MAX upper bound for crash memory,
->> -		 * crashkernel=x,high reserves memory over 4G, also allocates
->> -		 * 256M extra low memory for DMA buffers and swiotlb.
->> +		 * crashkernel=x,high reserves memory over CRASH_ADDR_LOW_MAX,
->> +		 * also allocates 256M extra low memory for DMA buffers
->> +		 * and swiotlb.
->>  		 * But the extra memory is not required for all machines.
->>  		 * So try low memory first and fall back to high memory
->>  		 * unless "crashkernel=size[KMG],high" is specified.
->> @@ -539,7 +540,7 @@ static void __init reserve_crashkernel(void)
->>  		return;
->>  	}
->>  
->> -	if (crash_base >= (1ULL << 32) && reserve_crashkernel_low()) {
->> +	if (crash_base >= CRASH_ADDR_LOW_MAX && reserve_crashkernel_low()) {
->>  		memblock_free(crash_base, crash_size);
->>  		return;
->>  	}
->> -- 
->> 2.20.1
->>
-> .
->
+RFC patch series can be found @ [2]
+v1 patch series can be found @ [3]
+v2 patch series can be found @ [4]
+v3 patch series can be found @ [5]
+v4 patch series can be found @ [6]
+
+Changes from v3:
+1) Fixed Documentation edits suggested by Randy Dunlap <rdunlap@infradead.org>
+
+Changes from v2:
+1) Add support for the user to create sub-directory of 'EPF Device'
+   directory (for endpoint function specific configuration using
+   configfs).
+2) Add documentation for NTB specific attributes in configfs
+3) Check for PCI_CLASS_MEMORY_RAM (PCIe class) before binding ntb_hw_epf
+   driver
+4) Other documentation fixes
+
+Changes from v1:
+1) As per Rob's comment, removed support for creating NTB function
+   device from DT
+2) Add support to create NTB EPF device using configfs (added support in
+   configfs to associate primary and secondary EPC with EPF.
+
+Changes from RFC:
+1) Converted the DT binding patches to YAML schema and merged the
+   DT binding patches together
+2) NTB documentation is converted to .rst
+3) One HOST can now interrupt the other HOST using MSI-X interrupts
+4) Added support for teardown of memory window and doorbell
+   configuration
+5) Add support to provide support 64-bit memory window size from
+   DT
+
+[1] -> https://www.linuxplumbersconf.org/event/4/contributions/395/attachments/284/481/Implementing_NTB_Controller_Using_PCIe_Endpoint_-_final.pdf
+[2] -> http://lore.kernel.org/r/20190926112933.8922-1-kishon@ti.com
+[3] -> http://lore.kernel.org/r/20200514145927.17555-1-kishon@ti.com
+[4] -> http://lore.kernel.org/r/20200611130525.22746-1-kishon@ti.com
+[5] -> http://lore.kernel.org/r/20200904075052.8911-1-kishon@ti.com
+[6] -> http://lore.kernel.org/r/20200915042110.3015-1-kishon@ti.com
+
+Kishon Vijay Abraham I (17):
+  Documentation: PCI: Add specification for the *PCI NTB* function
+    device
+  PCI: endpoint: Make *_get_first_free_bar() take into account 64 bit
+    BAR
+  PCI: endpoint: Add helper API to get the 'next' unreserved BAR
+  PCI: endpoint: Make *_free_bar() to return error codes on failure
+  PCI: endpoint: Remove unused pci_epf_match_device()
+  PCI: endpoint: Add support to associate secondary EPC with EPF
+  PCI: endpoint: Add support in configfs to associate two EPCs with EPF
+  PCI: endpoint: Add pci_epc_ops to map MSI irq
+  PCI: endpoint: Add pci_epf_ops for epf drivers to expose function
+    specific attrs
+  PCI: endpoint: Allow user to create sub-directory of 'EPF Device'
+    directory
+  PCI: cadence: Implement ->msi_map_irq() ops
+  PCI: endpoint: Add EP function driver to provide NTB functionality
+  PCI: Add TI J721E device to pci ids
+  NTB: Add support for EPF PCI-Express Non-Transparent Bridge
+  NTB: tool: Enable the NTB/PCIe link on the local or remote side of
+    bridge
+  Documentation: PCI: Add configfs binding documentation for pci-ntb
+    endpoint function
+  Documentation: PCI: Add userguide for PCI endpoint NTB function
+
+ .../PCI/endpoint/function/binding/pci-ntb.rst |   38 +
+ Documentation/PCI/endpoint/index.rst          |    3 +
+ .../PCI/endpoint/pci-endpoint-cfs.rst         |   10 +
+ .../PCI/endpoint/pci-ntb-function.rst         |  351 +++
+ Documentation/PCI/endpoint/pci-ntb-howto.rst  |  160 ++
+ drivers/misc/pci_endpoint_test.c              |    1 -
+ drivers/ntb/hw/Kconfig                        |    1 +
+ drivers/ntb/hw/Makefile                       |    1 +
+ drivers/ntb/hw/epf/Kconfig                    |    6 +
+ drivers/ntb/hw/epf/Makefile                   |    1 +
+ drivers/ntb/hw/epf/ntb_hw_epf.c               |  751 ++++++
+ drivers/ntb/test/ntb_tool.c                   |    1 +
+ .../pci/controller/cadence/pcie-cadence-ep.c  |   50 +
+ drivers/pci/endpoint/functions/Kconfig        |   12 +
+ drivers/pci/endpoint/functions/Makefile       |    1 +
+ drivers/pci/endpoint/functions/pci-epf-ntb.c  | 2106 +++++++++++++++++
+ drivers/pci/endpoint/functions/pci-epf-test.c |   13 +-
+ drivers/pci/endpoint/pci-ep-cfs.c             |  176 +-
+ drivers/pci/endpoint/pci-epc-core.c           |  131 +-
+ drivers/pci/endpoint/pci-epf-core.c           |  105 +-
+ include/linux/pci-epc.h                       |   38 +-
+ include/linux/pci-epf.h                       |   28 +-
+ include/linux/pci_ids.h                       |    1 +
+ 23 files changed, 3918 insertions(+), 67 deletions(-)
+ create mode 100644 Documentation/PCI/endpoint/function/binding/pci-ntb.rst
+ create mode 100644 Documentation/PCI/endpoint/pci-ntb-function.rst
+ create mode 100644 Documentation/PCI/endpoint/pci-ntb-howto.rst
+ create mode 100644 drivers/ntb/hw/epf/Kconfig
+ create mode 100644 drivers/ntb/hw/epf/Makefile
+ create mode 100644 drivers/ntb/hw/epf/ntb_hw_epf.c
+ create mode 100644 drivers/pci/endpoint/functions/pci-epf-ntb.c
+
+-- 
+2.17.1
 
