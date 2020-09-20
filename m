@@ -2,88 +2,92 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 74EBF2737E1
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Sep 2020 03:22:31 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D4F2F273838
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Sep 2020 03:56:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729511AbgIVBWa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Sep 2020 21:22:30 -0400
-Received: from mga12.intel.com ([192.55.52.136]:20247 "EHLO mga12.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729471AbgIVBWa (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 21 Sep 2020 21:22:30 -0400
-IronPort-SDR: uUGBau7/ZMSeTS7O3qxfa9JX6Ue2nZSk6pvgib4E3g8c92GffVd+xyZgHC0WFn5YiTUBHlSEKe
- M2fZ98pb8+MQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9751"; a="139993688"
-X-IronPort-AV: E=Sophos;i="5.77,288,1596524400"; 
-   d="scan'208";a="139993688"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Sep 2020 18:22:30 -0700
-IronPort-SDR: 3qZtqaB1FrWVP4m9mBYNne7FpZlhfQDqZGwQCRN8K+Sp95kSBXnh21PlPhlxmSWQzGFq6LG2No
- 1i+hY7J3yNTQ==
-X-IronPort-AV: E=Sophos;i="5.77,288,1596524400"; 
-   d="scan'208";a="485742456"
-Received: from sjchrist-coffee.jf.intel.com (HELO linux.intel.com) ([10.54.74.160])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 21 Sep 2020 18:22:29 -0700
-Date:   Mon, 21 Sep 2020 18:22:28 -0700
-From:   Sean Christopherson <sean.j.christopherson@intel.com>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     Vipin Sharma <vipinsh@google.com>, thomas.lendacky@amd.com,
-        pbonzini@redhat.com, tj@kernel.org, lizefan@huawei.com,
-        joro@8bytes.org, corbet@lwn.net, brijesh.singh@amd.com,
-        jon.grimm@amd.com, eric.vantassell@amd.com, gingell@google.com,
-        rientjes@google.com, kvm@vger.kernel.org, x86@kernel.org,
-        cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Dionna Glaze <dionnaglaze@google.com>,
-        Erdem Aktas <erdemaktas@google.com>
-Subject: Re: [RFC Patch 1/2] KVM: SVM: Create SEV cgroup controller.
-Message-ID: <20200922012227.GA26483@linux.intel.com>
-References: <20200922004024.3699923-1-vipinsh@google.com>
- <20200922004024.3699923-2-vipinsh@google.com>
- <94c3407d-07ca-8eaf-4073-4a5e2a3fb7b8@infradead.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <94c3407d-07ca-8eaf-4073-4a5e2a3fb7b8@infradead.org>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+        id S1728712AbgIVB4H (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Sep 2020 21:56:07 -0400
+Received: from 142-4-3-22.unifiedlayer.com ([142.4.3.22]:33472 "EHLO
+        142-4-3-22.ipage.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
+        with ESMTP id S1728501AbgIVB4G (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Sep 2020 21:56:06 -0400
+X-Greylist: delayed 108534 seconds by postgrey-1.27 at vger.kernel.org; Mon, 21 Sep 2020 21:56:06 EDT
+Received: from tejobros by 142-4-3-22.ipage.com with local (Exim 4.93)
+        (envelope-from <tejobros@142-4-3-22.ipage.com>)
+        id 1kK523-0006qP-0w; Sun, 20 Sep 2020 19:29:55 +0000
+To:     njas@netjournals.org
+Subject: NJAS-Manuscript Submission
+X-PHP-Script: netmailsinter.org/send.php for 105.112.97.112
+X-PHP-Originating-Script: 500:send.php
+From:   njas@netjournals.org
+Reply-To: njas@netjournals.org
+Message-Id: <E1kK523-0006qP-0w@142-4-3-22.ipage.com>
+Date:   Sun, 20 Sep 2020 19:29:55 +0000
+X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
+X-AntiAbuse: Primary Hostname - 142-4-3-22.ipage.com
+X-AntiAbuse: Original Domain - vger.kernel.org
+X-AntiAbuse: Originator/Caller UID/GID - [500 500] / [47 12]
+X-AntiAbuse: Sender Address Domain - 142-4-3-22.ipage.com
+X-Get-Message-Sender-Via: 142-4-3-22.ipage.com: authenticated_id: tejobros/only user confirmed/virtual account not confirmed
+X-Authenticated-Sender: 142-4-3-22.ipage.com: tejobros
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Sep 21, 2020 at 06:04:04PM -0700, Randy Dunlap wrote:
-> Hi,
-> 
-> On 9/21/20 5:40 PM, Vipin Sharma wrote:
-> > diff --git a/init/Kconfig b/init/Kconfig
-> > index d6a0b31b13dc..1a57c362b803 100644
-> > --- a/init/Kconfig
-> > +++ b/init/Kconfig
-> > @@ -1101,6 +1101,20 @@ config CGROUP_BPF
-> >  	  BPF_CGROUP_INET_INGRESS will be executed on the ingress path of
-> >  	  inet sockets.
-> >  
-> > +config CGROUP_SEV
-> > +	bool "SEV ASID controller"
-> > +	depends on KVM_AMD_SEV
-> > +	default n
-> > +	help
-> > +	  Provides a controller for AMD SEV ASIDs. This controller limits and
-> > +	  shows the total usage of SEV ASIDs used in encrypted VMs on AMD
-> > +	  processors. Whenever a new encrypted VM is created using SEV on an
-> > +	  AMD processor, this controller will check the current limit in the
-> > +	  cgroup to which the task belongs and will deny the SEV ASID if the
-> > +	  cgroup has already reached its limit.
-> > +
-> > +	  Say N if unsure.
-> 
-> Something here (either in the bool prompt string or the help text) should
-> let a reader know w.t.h. SEV means.
-> 
-> Without having to look in other places...
+Dear Colleague,
 
-ASIDs too.  I'd also love to see more info in the docs and/or cover letter
-to explain why ASID management on SEV requires a cgroup.  I know what an
-ASID is, and have a decent idea of how KVM manages ASIDs for legacy VMs, but
-I know nothing about why ASIDs are limited for SEV and not legacy VMs.
+Net Journal of Agricultural Science (NJAS) with impact factor 1.336, is currently accepting paper(s) for possible publication. NJAS is a peer-reviewed open access journal which publishes high-quality articles in areas of Agriculture.
+ 
+NJAS publishes research papers, reviews, short communications and case reports in the areas of agriculture including arid soil research and rehabilitation, agricultural genomics, stored products research, tree fruit production, pesticide science, post-harvest biology and technology, seed science research, irrigation, agricultural engineering, water resources management, agronomy, animal science, physiology and morphology, aquaculture, crop science, dairy science, entomology, fish and fisheries, forestry, freshwater science, horticulture, poultry science, soil science, systematic biology, veterinary, virology, viticulture, weed biology, agricultural economics and agribusiness.
+ 
+Indexing Body and Partners:
+ 
+EBSCO, CAB Abstracts, ISI (Impact Factor: 1.336), WorldCat, Index Copernicus (ICV: 74.92), Google Scholar (h-index: 8), CrossRef (DOI: 10.30918/NJAS), Scilit, Research Gate, Academic Journals Database, Journal Guide, EyeSource, Publons, Root Indexing, Universal Impact Factor, Scientific Journals Impact Factor, DRJI, SPARC, Cite Factor, Open Access Library.
+ 
+Send your manuscript(s) as MS word attachment to the editorial office via email to: njas@netjournals.org OR njs.njas@gmail.com
+ 
+For more information, do send us a mail.
+ 
+Best regards,
+ 
+ 
+Tracy
+NJAS Editorial office
+Net Journals.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This mail is intended for University Academics and Researchers who earnestly wish to share their knowledge for the benefit of the world in general. Your receiving this mail indicates that you are somehow an Academics, and may have being referred in one way or the other to us. However, we may not always be accurate. As a result, if you feel this mail is accidental and not intended for you or not in your interest, click hereto UNSUBSCRIBE.
+
+Thanks for your understanding.
+
+© Net Journals 2020.
