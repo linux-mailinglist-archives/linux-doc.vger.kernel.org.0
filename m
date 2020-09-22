@@ -2,73 +2,152 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 21F47273BAB
-	for <lists+linux-doc@lfdr.de>; Tue, 22 Sep 2020 09:23:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5A5C4273BD2
+	for <lists+linux-doc@lfdr.de>; Tue, 22 Sep 2020 09:27:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729776AbgIVHXh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 22 Sep 2020 03:23:37 -0400
-Received: from mga11.intel.com ([192.55.52.93]:51642 "EHLO mga11.intel.com"
+        id S1729972AbgIVH1q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 22 Sep 2020 03:27:46 -0400
+Received: from mx2.suse.de ([195.135.220.15]:56506 "EHLO mx2.suse.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729735AbgIVHXh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 22 Sep 2020 03:23:37 -0400
-IronPort-SDR: 6eaAt+BmfjLTQ7b3y2qX0yayWXPume5Yg58NcZbnl29bPROWL81QB/pKrsuXFgg5Xk8vtLRKX8
- ECOXbrfGJolg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9751"; a="157928292"
-X-IronPort-AV: E=Sophos;i="5.77,289,1596524400"; 
-   d="scan'208";a="157928292"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Sep 2020 00:23:37 -0700
-IronPort-SDR: SuZ/Kthom8dKaAHAyyryCUZWAbTo9l37PE6snPNG1ImXv88s0cuHtI28GH8KMuWXew4NYcjqt3
- rrRG1QZtiQ6Q==
-X-IronPort-AV: E=Sophos;i="5.77,289,1596524400"; 
-   d="scan'208";a="485844254"
-Received: from kgriffi1-mobl.ger.corp.intel.com (HELO localhost) ([10.251.84.202])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 22 Sep 2020 00:23:34 -0700
-From:   Jani Nikula <jani.nikula@linux.intel.com>
-To:     Matthew Wilcox <willy@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org,
-        Mauro Carvalho Chehab <mchehab@infradead.org>,
-        Markus Heiser <markus.heiser@darmarit.de>
-Subject: Re: [PATCH RFC] Make the docs build "work" with Sphinx 3.x
-In-Reply-To: <20200921222639.GY32101@casper.infradead.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
-References: <20200904102925.52fcd2a1@lwn.net> <20200921222639.GY32101@casper.infradead.org>
-Date:   Tue, 22 Sep 2020 10:23:46 +0300
-Message-ID: <87sgbaqnp9.fsf@intel.com>
+        id S1729748AbgIVH1p (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 22 Sep 2020 03:27:45 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1600759663;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=Erw2OosUhNlUjJ/92tw/QfOb1ODXL2vdqOviv1OTGQE=;
+        b=SJu6HGOM7mmekNJl2WAqQ2Z0OqgE18sdv4bZEjSiRqgybbfl14iLBvSa882Sg+JSj+TZhl
+        UMLU1ibKgV/UqhrqCSyTiFlZ8zGyr3CeNw9z6X6gESLPqu69C9fKTiSuSmG4ObY2kuJbYo
+        T6QzgAjoDLcehxHPNXIOeQcatmJPSdI=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id 50C8AAA35;
+        Tue, 22 Sep 2020 07:28:20 +0000 (UTC)
+Date:   Tue, 22 Sep 2020 09:27:33 +0200
+From:   Michal Hocko <mhocko@suse.com>
+To:     Yafang Shao <laoar.shao@gmail.com>
+Cc:     zangchunxin@bytedance.com, Johannes Weiner <hannes@cmpxchg.org>,
+        Vladimir Davydov <vdavydov.dev@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Tejun Heo <tj@kernel.org>, lizefan@huawei.com,
+        Jonathan Corbet <corbet@lwn.net>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>, kafai@fb.com,
+        Song Liu <songliubraving@fb.com>, Yonghong Song <yhs@fb.com>,
+        andriin@fb.com, john.fastabend@gmail.com, kpsingh@chromium.org,
+        Cgroups <cgroups@vger.kernel.org>, linux-doc@vger.kernel.org,
+        Linux MM <linux-mm@kvack.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        netdev <netdev@vger.kernel.org>, bpf@vger.kernel.org
+Subject: Re: [PATCH] mm/memcontrol: Add the drop_cache interface for cgroup v2
+Message-ID: <20200922072733.GT12990@dhcp22.suse.cz>
+References: <20200921080255.15505-1-zangchunxin@bytedance.com>
+ <20200921081200.GE12990@dhcp22.suse.cz>
+ <CALOAHbDKvT58UFjxy770VDxO0VWABRYb7GVwgw+NiJp62mB06w@mail.gmail.com>
+ <20200921110505.GH12990@dhcp22.suse.cz>
+ <CALOAHbCDXwjN+WDSGVv+G3ho-YRRPjAAqMJBtyxeGHH6utb5ew@mail.gmail.com>
+ <20200921113646.GJ12990@dhcp22.suse.cz>
+ <CALOAHbCker64WEW9w4oq8=avA6oKf3-Jrn-vOOgkpqkV3g+CYA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CALOAHbCker64WEW9w4oq8=avA6oKf3-Jrn-vOOgkpqkV3g+CYA@mail.gmail.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, 21 Sep 2020, Matthew Wilcox <willy@infradead.org> wrote:
-> On Fri, Sep 04, 2020 at 10:29:25AM -0600, Jonathan Corbet wrote:
->> +# cdomain is badly broken in Sphinx 3+.  Leaving it out generates *most*
->> +# of the docs correctly, but not all.  Scream bloody murder but allow
->> +# the process to proceed; hopefully somebody will fix this properly soon.
->> +#
->> +if major >= 3:
->> +    sys.stderr.write('''WARNING: The kernel documentation build process
->> +	does not work correctly with Sphinx v3.0 and above.  Expect errors
->> +	in the generated output.
+On Tue 22-09-20 12:20:52, Yafang Shao wrote:
+> On Mon, Sep 21, 2020 at 7:36 PM Michal Hocko <mhocko@suse.com> wrote:
+> >
+> > On Mon 21-09-20 19:23:01, Yafang Shao wrote:
+> > > On Mon, Sep 21, 2020 at 7:05 PM Michal Hocko <mhocko@suse.com> wrote:
+> > > >
+> > > > On Mon 21-09-20 18:55:40, Yafang Shao wrote:
+> > > > > On Mon, Sep 21, 2020 at 4:12 PM Michal Hocko <mhocko@suse.com> wrote:
+> > > > > >
+> > > > > > On Mon 21-09-20 16:02:55, zangchunxin@bytedance.com wrote:
+> > > > > > > From: Chunxin Zang <zangchunxin@bytedance.com>
+> > > > > > >
+> > > > > > > In the cgroup v1, we have 'force_mepty' interface. This is very
+> > > > > > > useful for userspace to actively release memory. But the cgroup
+> > > > > > > v2 does not.
+> > > > > > >
+> > > > > > > This patch reuse cgroup v1's function, but have a new name for
+> > > > > > > the interface. Because I think 'drop_cache' may be is easier to
+> > > > > > > understand :)
+> > > > > >
+> > > > > > This should really explain a usecase. Global drop_caches is a terrible
+> > > > > > interface and it has caused many problems in the past. People have
+> > > > > > learned to use it as a remedy to any problem they might see and cause
+> > > > > > other problems without realizing that. This is the reason why we even
+> > > > > > log each attempt to drop caches.
+> > > > > >
+> > > > > > I would rather not repeat the same mistake on the memcg level unless
+> > > > > > there is a very strong reason for it.
+> > > > > >
+> > > > >
+> > > > > I think we'd better add these comments above the function
+> > > > > mem_cgroup_force_empty() to explain why we don't want to expose this
+> > > > > interface in cgroup2, otherwise people will continue to send this
+> > > > > proposal without any strong reason.
+> > > >
+> > > > I do not mind people sending this proposal.  "V1 used to have an
+> > > > interface, we need it in v2 as well" is not really viable without
+> > > > providing more reasoning on the specific usecase.
+> > > >
+> > > > _Any_ patch should have a proper justification. This is nothing really
+> > > > new to the process and I am wondering why this is coming as a surprise.
+> > > >
+> > >
+> > > Container users always want to drop cache in a specific container,
+> > > because they used to use drop_caches to fix memory pressure issues.
+> >
+> > This is exactly the kind of problems we have seen in the past. There
+> > should be zero reason to addre potential reclaim problems by dropping
+> > page cache on the floor. There is a huge cargo cult about this
+> > procedure and I have seen numerous reports when people complained about
+> > performance afterwards just to learn that the dropped page cache was one
+> > of the resons for that.
+> >
+> > > Although drop_caches can cause some unexpected issues, it could also
+> > > fix some issues.
+> >
+> > "Some issues" is way too general. We really want to learn about those
+> > issues and address them properly.
+> >
+> 
+> One use case in our production environment is that some of our tasks
+> become very latency sensitive from 7am to 10am, so before these tasks
+> become active we will use drop_caches to drop page caches generated by
+> other tasks at night to avoid these tasks triggering direct reclaim.
 >
-> Should we be converting the kernel-doc script to output 3.0-style markup
-> for structs?
+> The best way to do it is to fix the latency in direct reclaim, but it
+> will take great effort.
 
-IIUC it's not backwards compatible with Sphinx pre-3.0, so you'd either
-have to require Sphinx 3.0 or have kernel-doc emit both, depending on
-the Sphinx version.
+What is the latency triggered by the memory reclaim? It should be mostly
+a clean page cache right as drop_caches only drops clean pages. Or is
+this more about [id]cache? Do you have any profiles where is the time
+spent?
 
+> while drop_caches give us an easier way to achieve the same goal.
 
-BR,
-Jani.
+It papers over real problems and that is my earlier comment about.
 
+> IOW, drop_caches give the users an option to achieve their goal before
+> they find a better solution.
 
->
-> https://www.sphinx-doc.org/en/master/usage/restructuredtext/domains.html#c-roles
+You can achieve the same by a different configuration already. You can
+isolate your page cache hungry overnight (likely a backup) workload into
+its own memcg. You can either use an aggressive high limit during the
+run or simply reduce the high/max limit after the work is done.
 
+If you cannot isolate that easily then you can lower high limit
+temporarily before your peak workload.
+
+Really throwing all the page cache away just to prepare for a peak
+workload sounds like a bad idea to me. You are potentially throwing
+data that you have to spend time to refault again.
 -- 
-Jani Nikula, Intel Open Source Graphics Center
+Michal Hocko
+SUSE Labs
