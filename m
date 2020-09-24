@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 29C73277012
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Sep 2020 13:38:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5BD83277030
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Sep 2020 13:39:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727433AbgIXLiu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Sep 2020 07:38:50 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59622 "EHLO
+        id S1727195AbgIXLj0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 24 Sep 2020 07:39:26 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59630 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726617AbgIXLiu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Sep 2020 07:38:50 -0400
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AF0C3C0613CE
-        for <linux-doc@vger.kernel.org>; Thu, 24 Sep 2020 04:38:49 -0700 (PDT)
-Received: by mail-wr1-x443.google.com with SMTP id j2so3428597wrx.7
-        for <linux-doc@vger.kernel.org>; Thu, 24 Sep 2020 04:38:49 -0700 (PDT)
+        with ESMTP id S1727484AbgIXLiv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Sep 2020 07:38:51 -0400
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com [IPv6:2a00:1450:4864:20::344])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 004C3C0613D3
+        for <linux-doc@vger.kernel.org>; Thu, 24 Sep 2020 04:38:50 -0700 (PDT)
+Received: by mail-wm1-x344.google.com with SMTP id e2so3255393wme.1
+        for <linux-doc@vger.kernel.org>; Thu, 24 Sep 2020 04:38:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FLL/Sx98lxd1x3lyr+uBKTSay9yyyLoslx53kZxkqUI=;
-        b=vAQ0FAWT0KVylcyqqJcCUfCFpNiDU+BswPp5oDUnxUalupXSWv08HnLTCWOY5Y/0vD
-         /NNSV+JbKgeNHJnI/ZGBQi9LEtPzWcpRd5FZeCGxEm3bStW4h98DVZO65JP9Doo+3RvS
-         vjefnFdYx0NPhxs9W/IVXx7nExH9+cIhTqtlmQleSxvZYs0wke7DIosXZ6KGrS0NeAT2
-         5KongtvQepTN4osy85pgyS+O294PcAwgIHsTIXc864Zan+OahUHMoRZ9OF2hxUbHfM52
-         hL/Ue0HOvAEN6/QKQY2af05vuXHmVoIYAeJksPst2UcktchbrOd7aQVrjFhzUCfZcqV8
-         kCAw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=bCsr6AFFHdHhAugFVMGJohC8JN0hd4nL8k90M/6i7xA=;
+        b=a7KuNLrwlM7cvptfMtEqtc5CpObOWJJFH9henQqs6idqfzL5qx7a9wLt2qGL4rT1Qz
+         HutCQ1XrFdOs4pQA/nDIfdY6FMVAIEQsMDZlU5mc/CuxvUbDh/zIlSkAGsP6NFHhhnNd
+         4p6qhRDO0u8+AeeHYDV1nzUhpue9ar8pyt3JB0SRwKUyE3yfGvNtDXvkGzKkIQnMjJmI
+         BXn0xVBLk0iwWyTAtoRm2eP+V4REcHuv7huXbBX3HW4qyd0PxDCNQAo6QX1K6rz6SS8y
+         TFsyKVS7ba824hLFuu3AlRdnQMNyxc8FI06nsImBXaOtWSfuZWrgZvoGNTJFCAk3LEzO
+         8tRg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=FLL/Sx98lxd1x3lyr+uBKTSay9yyyLoslx53kZxkqUI=;
-        b=s7bownp0f95sFxBzgJ6n2Bv9RJIOxpn6g/koxJqeMYQwAhOFXvjyQtDa322Td/Wmfl
-         OJBzow3DqDKZP8Nl//WhGTWEUHH0P51E5VV4+6yGjO48GoFVjuzNa6IppEUpCtQ+WokX
-         bHcHIdHQWaqaEpyn/F2R7nmHUK5/KoNGzDG46BVmDEu8aHUWWRWjsJmvYu3XVkFP1q7r
-         wzXIxoJ1v5yrbjFDKFBGakIyKQcLwv19T+c8/yWsuFmLGska9LI8L+bXoJWNztOiDuJ1
-         6vSiEvQr0EMsS+KJV0BX2CVDnf6D3nvG9s2ltkvae3If8dGRUSegJv9V4iUs4bDqnC5z
-         qhmw==
-X-Gm-Message-State: AOAM531g9Y1vCC2VBtTrviVjCl33B18oH2Omm0Qqt4AATtZcWchshs1F
-        +4tPO6xb6zdVOsqJ1A8DM7c1Bg2reAvLWA==
-X-Google-Smtp-Source: ABdhPJw1+9CUXXOeZMznTfNNY3yjhlC0wQSe/OvdJnBxNgTWl5CZGL9/IPzAlH/67qgH5fZEvKl46w==
-X-Received: by 2002:a5d:49d2:: with SMTP id t18mr4366937wrs.99.1600947528426;
-        Thu, 24 Sep 2020 04:38:48 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=bCsr6AFFHdHhAugFVMGJohC8JN0hd4nL8k90M/6i7xA=;
+        b=rKFheshYvVrcge10V/pIYT4/zBYtt9L+djVRPl8MTP+e12O7ZJVl89hW323F3jjWfx
+         HsfCbB8WtQgnEawVwoksIvdUW03DEaUX1y4YgthGl1fefeukrvPXpScnWjwdiFZkIdF+
+         YC0tnkZzAFw1N+RRZlWXYozWU2LDdZhcz6LQZhApFpqkqo1lfhiDUeL5u6JUXeAVQYCk
+         396RJ/K17w51JCOoZpnANjzdJ5zGtGD82WIXAqx43frMnUE27aVwimDN2+gt3o059l29
+         DCI3ZcrEpB6vr9nVKnUexYnKq/oIdiJYs6m/0vPulU9fTH8yXWgsxOxIDiNuoPuwV2/1
+         PGRg==
+X-Gm-Message-State: AOAM532Y8SLDjBHddyy2iUbUYQnpZLWeKEiiHHjTVKcfFvEXhhb/myJr
+        vIoMVBv022O5aL8okSGl1wGFyA==
+X-Google-Smtp-Source: ABdhPJyE32p6WO+xWXo7rVqwDl6I0AjipMB9OZdrBkbmGOJUcH79pPsUmdL65eiq3Ag6J9S6fIqm7g==
+X-Received: by 2002:a1c:b608:: with SMTP id g8mr4552385wmf.106.1600947529507;
+        Thu, 24 Sep 2020 04:38:49 -0700 (PDT)
 Received: from debian-brgl.home (lfbn-nic-1-68-20.w2-15.abo.wanadoo.fr. [2.15.159.20])
-        by smtp.gmail.com with ESMTPSA id y207sm3390133wmc.17.2020.09.24.04.38.47
+        by smtp.gmail.com with ESMTPSA id y207sm3390133wmc.17.2020.09.24.04.38.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2020 04:38:47 -0700 (PDT)
+        Thu, 24 Sep 2020 04:38:48 -0700 (PDT)
 From:   Bartosz Golaszewski <brgl@bgdev.pl>
 To:     Linus Walleij <linus.walleij@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
@@ -55,10 +55,12 @@ To:     Linus Walleij <linus.walleij@linaro.org>,
 Cc:     linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org,
         Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH 0/9] gpio: mockup: refactoring + documentation
-Date:   Thu, 24 Sep 2020 13:38:33 +0200
-Message-Id: <20200924113842.11670-1-brgl@bgdev.pl>
+Subject: [PATCH 1/9] lib: string_helpers: provide kfree_strarray()
+Date:   Thu, 24 Sep 2020 13:38:34 +0200
+Message-Id: <20200924113842.11670-2-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.26.1
+In-Reply-To: <20200924113842.11670-1-brgl@bgdev.pl>
+References: <20200924113842.11670-1-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
@@ -67,31 +69,57 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-These patches were part of the bigger overhaul of gpio-mockup but since
-the initial idea was dropped in favor of using configfs + sysfs in the
-future I thought I'd resent just the refactoring of the existing code
-+ documentation patches. I think it's good to apply them since we don't
-really know when the new interface will be ready (configfs needs a new
-functionality - commitable items - to support mockup chip instantiation).
+There's a common pattern of dynamically allocating an array of char
+pointers and then also dynamically allocating each string in this
+array. Provide a helper for freeing such a string array with one call.
 
-Bartosz Golaszewski (9):
-  lib: string_helpers: provide kfree_strarray()
-  Documentation: gpio: add documentation for gpio-mockup
-  gpio: mockup: drop unneeded includes
-  gpio: mockup: use KBUILD_MODNAME
-  gpio: mockup: use pr_fmt()
-  gpio: mockup: remove unneeded return statement
-  gpio: mockup: pass the chip label as device property
-  gpio: mockup: use the generic 'gpio-line-names' property
-  gpio: mockup: refactor the module init function
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+---
+ include/linux/string_helpers.h |  2 ++
+ lib/string_helpers.c           | 22 ++++++++++++++++++++++
+ 2 files changed, 24 insertions(+)
 
- .../admin-guide/gpio/gpio-mockup.rst          |  50 ++++++
- drivers/gpio/gpio-mockup.c                    | 154 +++++++++---------
- include/linux/string_helpers.h                |   2 +
- lib/string_helpers.c                          |  22 +++
- 4 files changed, 152 insertions(+), 76 deletions(-)
- create mode 100644 Documentation/admin-guide/gpio/gpio-mockup.rst
-
+diff --git a/include/linux/string_helpers.h b/include/linux/string_helpers.h
+index 86f150c2a6b6..55b25120a1c6 100644
+--- a/include/linux/string_helpers.h
++++ b/include/linux/string_helpers.h
+@@ -94,4 +94,6 @@ char *kstrdup_quotable(const char *src, gfp_t gfp);
+ char *kstrdup_quotable_cmdline(struct task_struct *task, gfp_t gfp);
+ char *kstrdup_quotable_file(struct file *file, gfp_t gfp);
+ 
++void kfree_strarray(char **str_array, size_t num_str);
++
+ #endif
+diff --git a/lib/string_helpers.c b/lib/string_helpers.c
+index 963050c0283e..56c01ec8a076 100644
+--- a/lib/string_helpers.c
++++ b/lib/string_helpers.c
+@@ -649,3 +649,25 @@ char *kstrdup_quotable_file(struct file *file, gfp_t gfp)
+ 	return pathname;
+ }
+ EXPORT_SYMBOL_GPL(kstrdup_quotable_file);
++
++/**
++ * kfree_strarray - free a number of dynamically allocated strings contained
++ *                  in an array and the array itself
++ *
++ * @str_array: Dynamically allocated array of strings to free. If NULL - the
++ *             function does nothing.
++ * @num_str: Number of strings (starting from the beginning of the array) to
++ *           free.
++ *
++ * Passing a non-null str_array and num_str == 0 as well as NULL str_array and
++ * num_str == 0 are valid use-cases.
++ */
++void kfree_strarray(char **str_array, size_t num_str)
++{
++	unsigned int i;
++
++	for (i = 0; i < num_str; i++)
++		kfree(str_array[i]);
++	kfree(str_array);
++}
++EXPORT_SYMBOL_GPL(kfree_strarray);
 -- 
 2.26.1
 
