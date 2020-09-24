@@ -2,207 +2,128 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B9B8E277027
-	for <lists+linux-doc@lfdr.de>; Thu, 24 Sep 2020 13:39:32 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 626A927716D
+	for <lists+linux-doc@lfdr.de>; Thu, 24 Sep 2020 14:47:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727494AbgIXLjH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 24 Sep 2020 07:39:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59714 "EHLO
+        id S1727919AbgIXMrL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 24 Sep 2020 08:47:11 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42072 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727620AbgIXLjE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Sep 2020 07:39:04 -0400
-Received: from mail-wr1-x444.google.com (mail-wr1-x444.google.com [IPv6:2a00:1450:4864:20::444])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7CC54C0613D3
-        for <linux-doc@vger.kernel.org>; Thu, 24 Sep 2020 04:39:04 -0700 (PDT)
-Received: by mail-wr1-x444.google.com with SMTP id x14so3391904wrl.12
-        for <linux-doc@vger.kernel.org>; Thu, 24 Sep 2020 04:39:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=JGub3DzXhL7AkkI6iK+SL+4zKCGwxV6kIyrPE4bsyiY=;
-        b=SLT/EHgSLvugpIfJOPkw+tO2fR6eaV03IDkcCh6puDqsCE52mI4xx0iLXRzlVE212Y
-         fXQKbrNW5b+CmVuRwvmZDpea6wVt1//t3OsdZLK8hyBNmtdfF5tdzQu18bxQ8484fG+g
-         q8z02hAuqdAFa3c0IqYMDagSBFatcLaQ4JH9+ervHXzTvKQ6tQMvnu3wB6r3bwcXOdtv
-         NdcDNeoCNHhEJNhULzeFSz1KUXGmtf4CanAp6tTlEdDE82lLUEr+ixR3oP3vj+i+ZgYU
-         EZbYqXG/scstrg6SqDGri3qay6PS+OLK+7lX5drQd3UgOv2DvQ9KtgIrsqe0UkOrStmD
-         7lVw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=JGub3DzXhL7AkkI6iK+SL+4zKCGwxV6kIyrPE4bsyiY=;
-        b=YsLrtM4kX9jPsm/NrH2S0CUIKxpQFo3M/A5cd1NuyzI7NbBOKOJDvORbAMgGykTQt7
-         v9z+wktzHhc1nmyVqcacLypoJt/t3OOFtb4ShO4imHQ7JEkiUW3dTy39r8L2nU9IALUp
-         5+LRDAM7f9uk6k2hIDwM5+rGq5aX+Ki1qotLa+l1D86k3KCygWPVZw1pcgna8ZUShhFi
-         qasZlAuqRC5oW0AdLu5vZzHkHXU4kgKBiNcYgbHMC7miDh/rTwh75Qfu/tmkfYTnQTcx
-         3Mwl5Xwg5nwCIPfwmwHokjfCorBwzq5AZnsoUJq16GYKeETOwgLx2uOFijGKIVMXsNEA
-         mKzw==
-X-Gm-Message-State: AOAM531p0MyakjH9w1OSwQQV8G6vlyxlC7A4hcKwMLVLahaoUOEPcrdi
-        3xXCTqXL71nPQ6nOEAC03JgQQfpVVurikQ==
-X-Google-Smtp-Source: ABdhPJwRRHKuPOnQPU5XvgVnwnnUf+lAuiTXOzt+of8grtjvRhvSYM0OgF6GJfQq0ans8+65ykY0pg==
-X-Received: by 2002:adf:84c3:: with SMTP id 61mr4568421wrg.131.1600947543143;
-        Thu, 24 Sep 2020 04:39:03 -0700 (PDT)
-Received: from debian-brgl.home (lfbn-nic-1-68-20.w2-15.abo.wanadoo.fr. [2.15.159.20])
-        by smtp.gmail.com with ESMTPSA id y207sm3390133wmc.17.2020.09.24.04.39.02
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 24 Sep 2020 04:39:02 -0700 (PDT)
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-To:     Linus Walleij <linus.walleij@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Kent Gibson <warthog618@gmail.com>
-Cc:     linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH 9/9] gpio: mockup: refactor the module init function
-Date:   Thu, 24 Sep 2020 13:38:42 +0200
-Message-Id: <20200924113842.11670-10-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.26.1
-In-Reply-To: <20200924113842.11670-1-brgl@bgdev.pl>
-References: <20200924113842.11670-1-brgl@bgdev.pl>
+        with ESMTP id S1727788AbgIXMrJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 24 Sep 2020 08:47:09 -0400
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 86431C0613CE
+        for <linux-doc@vger.kernel.org>; Thu, 24 Sep 2020 05:47:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=Content-Transfer-Encoding:Content-Type:
+        MIME-Version:References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-ID:Content-Description:In-Reply-To;
+        bh=oN/eolXZY9u+LKnpVrUX4gJQ+gqfCB4thtUFDwSk17s=; b=ZOLJzYtdbnHYdOx5Bdt6MzSKbl
+        NrGjeCpLtNFCtn2bzF7+yj7aXeVjC9boFq7LLXzGpt6ZIdkkHOutz7tLc0WuwU1VEKCJer2Y5lT6U
+        gTwaUEto01pwqlw3rMFxuRtxj94vX8UgKnD37rLKEU4CewkKRW+BKXYfJ4x1a8wpTQErL/4UcVC0L
+        oEEhe53B1ovBZcCC1soKQnaZSRGW+C3RuJ9dHn9328PpjEgx5sxQF2KAgyNZYo7J7g8LTHtudu+CP
+        +yzfQsfx/bZG5uU97dfWG4X1WS69HwHAQNE8AI5vR7lW/GMXnBlH/3IXf9FCy/q6TtsajaIh9a8+g
+        KZ0rLygw==;
+Received: from ip5f5ad5c4.dynamic.kabel-deutschland.de ([95.90.213.196] helo=coco.lan)
+        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1kLQeP-0007WT-HI; Thu, 24 Sep 2020 12:47:05 +0000
+Date:   Thu, 24 Sep 2020 14:47:03 +0200
+From:   Mauro Carvalho Chehab <mchehab@infradead.org>
+To:     Jani Nikula <jani.nikula@linux.intel.com>
+Cc:     Matthew Wilcox <willy@infradead.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Markus Heiser <markus.heiser@darmarit.de>
+Subject: Re: [PATCH RFC] Make the docs build "work" with Sphinx 3.x
+Message-ID: <20200924144703.33202e24@coco.lan>
+References: <20200904102925.52fcd2a1@lwn.net>
+        <20200921222639.GY32101@casper.infradead.org>
+        <87sgbaqnp9.fsf@intel.com>
+X-Mailer: Claws Mail 3.17.6 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-SRS-Rewrite: SMTP reverse-path rewritten from <mchehab@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Em Wed, 23 Sep 2020 14:31:55 +0200
+Mauro Carvalho Chehab <mchehab@infradead.org> escreveu:
 
-Let's move the code preparing the device properties into a separate
-routine. This has the advantage of simplifying the error handling and
-makes the indentation less deep.
+> Em Tue, 22 Sep 2020 10:23:46 +0300
+> Jani Nikula <jani.nikula@linux.intel.com> escreveu:
+> 
+> > On Mon, 21 Sep 2020, Matthew Wilcox <willy@infradead.org> wrote:  
+> > > On Fri, Sep 04, 2020 at 10:29:25AM -0600, Jonathan Corbet wrote:    
+> > >> +# cdomain is badly broken in Sphinx 3+.  Leaving it out generates *most*
+> > >> +# of the docs correctly, but not all.  Scream bloody murder but allow
+> > >> +# the process to proceed; hopefully somebody will fix this properly soon.
+> > >> +#
+> > >> +if major >= 3:
+> > >> +    sys.stderr.write('''WARNING: The kernel documentation build process
+> > >> +	does not work correctly with Sphinx v3.0 and above.  Expect errors
+> > >> +	in the generated output.    
+> > >
+> > > Should we be converting the kernel-doc script to output 3.0-style markup
+> > > for structs?    
+> > 
+> > IIUC it's not backwards compatible with Sphinx pre-3.0, so you'd either
+> > have to require Sphinx 3.0 or have kernel-doc emit both, depending on
+> > the Sphinx version.  
+> 
+> Well, making kernel-doc to emit both may be not too hard, as it
+> could be doing something like:
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
----
- drivers/gpio/gpio-mockup.c | 96 +++++++++++++++++++-------------------
- 1 file changed, 49 insertions(+), 47 deletions(-)
+Hi Jani,
 
-diff --git a/drivers/gpio/gpio-mockup.c b/drivers/gpio/gpio-mockup.c
-index c35fd05de395..e2285f4330dd 100644
---- a/drivers/gpio/gpio-mockup.c
-+++ b/drivers/gpio/gpio-mockup.c
-@@ -503,16 +503,59 @@ static __init char **gpio_mockup_make_line_names(const char *label,
- 	return names;
- }
- 
--static int __init gpio_mockup_init(void)
-+static int __init gpio_mockup_register_chip(int idx)
- {
- 	struct property_entry properties[GPIO_MOCKUP_MAX_PROP];
--	int i, prop, num_chips, err = 0, base;
- 	struct platform_device_info pdevinfo;
- 	struct platform_device *pdev;
-+	char **line_names = NULL;
- 	char chip_label[32];
--	char **line_names;
-+	int prop = 0, base;
- 	u16 ngpio;
- 
-+	memset(properties, 0, sizeof(properties));
-+	memset(&pdevinfo, 0, sizeof(pdevinfo));
-+
-+	snprintf(chip_label, sizeof(chip_label), "gpio-mockup-%c", idx + 'A');
-+	properties[prop++] = PROPERTY_ENTRY_STRING("chip-label", chip_label);
-+
-+	base = gpio_mockup_range_base(idx);
-+	if (base >= 0)
-+		properties[prop++] = PROPERTY_ENTRY_U32("gpio-base", base);
-+
-+	ngpio = base < 0 ? gpio_mockup_range_ngpio(idx)
-+			 : gpio_mockup_range_ngpio(idx) - base;
-+	properties[prop++] = PROPERTY_ENTRY_U16("nr-gpios", ngpio);
-+
-+	if (gpio_mockup_named_lines) {
-+		line_names = gpio_mockup_make_line_names(chip_label, ngpio);
-+		if (!line_names)
-+			return -ENOMEM;
-+
-+		properties[prop++] = PROPERTY_ENTRY_STRING_ARRAY_LEN(
-+					"gpio-line-names", line_names, ngpio);
-+	}
-+
-+	pdevinfo.name = "gpio-mockup";
-+	pdevinfo.id = idx;
-+	pdevinfo.properties = properties;
-+
-+	pdev = platform_device_register_full(&pdevinfo);
-+	kfree_strarray(line_names, line_names ? ngpio : 0);
-+	if (IS_ERR(pdev)) {
-+		pr_err("error registering device");
-+		return PTR_ERR(pdev);
-+	}
-+
-+	gpio_mockup_pdevs[idx] = pdev;
-+
-+	return 0;
-+}
-+
-+static int __init gpio_mockup_init(void)
-+{
-+	int i, num_chips, err;
-+
- 	if ((gpio_mockup_num_ranges < 2) ||
- 	    (gpio_mockup_num_ranges % 2) ||
- 	    (gpio_mockup_num_ranges > GPIO_MOCKUP_MAX_RANGES))
-@@ -540,54 +583,13 @@ static int __init gpio_mockup_init(void)
- 	}
- 
- 	for (i = 0; i < num_chips; i++) {
--		memset(properties, 0, sizeof(properties));
--		memset(&pdevinfo, 0, sizeof(pdevinfo));
--		prop = 0;
--		line_names = NULL;
--
--		snprintf(chip_label, sizeof(chip_label),
--			 "gpio-mockup-%c", i + 'A');
--		properties[prop++] = PROPERTY_ENTRY_STRING("chip-label",
--							   chip_label);
--
--		base = gpio_mockup_range_base(i);
--		if (base >= 0)
--			properties[prop++] = PROPERTY_ENTRY_U32("gpio-base",
--								base);
--
--		ngpio = base < 0 ? gpio_mockup_range_ngpio(i)
--				 : gpio_mockup_range_ngpio(i) - base;
--		properties[prop++] = PROPERTY_ENTRY_U16("nr-gpios", ngpio);
--
--		if (gpio_mockup_named_lines) {
--			line_names = gpio_mockup_make_line_names(chip_label,
--								 ngpio);
--			if (!line_names) {
--				platform_driver_unregister(&gpio_mockup_driver);
--				gpio_mockup_unregister_pdevs();
--				return -ENOMEM;
--			}
--
--			properties[prop++] = PROPERTY_ENTRY_STRING_ARRAY_LEN(
--						"gpio-line-names",
--						line_names, ngpio);
--		}
--
--		pdevinfo.name = "gpio-mockup";
--		pdevinfo.id = i;
--		pdevinfo.properties = properties;
--
--		pdev = platform_device_register_full(&pdevinfo);
--		kfree_strarray(line_names, line_names ? ngpio : 0);
--		if (IS_ERR(pdev)) {
--			pr_err("error registering device");
-+		err = gpio_mockup_register_chip(i);
-+		if (err) {
- 			platform_driver_unregister(&gpio_mockup_driver);
- 			gpio_mockup_unregister_pdevs();
- 			debugfs_remove_recursive(gpio_mockup_dbg_dir);
--			return PTR_ERR(pdev);
-+			return err;
- 		}
--
--		gpio_mockup_pdevs[i] = pdev;
- 	}
- 
- 	return 0;
--- 
-2.26.1
+> 
+> <snp
+> diff --git a/Documentation/conf.py b/Documentation/conf.py
+> index 0a102d57437d..0605949db383 100644
+> --- a/Documentation/conf.py
+> +++ b/Documentation/conf.py
+> @@ -50,6 +50,7 @@ if major >= 3:
+>  	does not work correctly with Sphinx v3.0 and above.  Expect errors
+>  	in the generated output.
+>  	''')
+> +    tags.add('sphinx3')
+>  else:
+>      extensions.append('cdomain')
+>  
+> diff --git a/Documentation/userspace-api/media/v4l/v4l2.rst b/Documentation/userspace-api/media/v4l/v4l2.rst
+> index ad7a2bf0cf26..5007f33a7920 100644
+> --- a/Documentation/userspace-api/media/v4l/v4l2.rst
+> +++ b/Documentation/userspace-api/media/v4l/v4l2.rst
+> @@ -3,6 +3,10 @@
+>  
+>  .. _v4l2spec:
+>  
+> +.. only: sphinx3
+> +
+> +   .. c:namespace:: v4l_uAPI
+> +
+>  ############################
+>  Part I - Video for Linux API
+>  ############################
+> @@ -416,3 +420,7 @@ Second draft, with corrections pointed out by Gerd Knorr.
+>  
+>  First draft, based on documentation by Bill Dirks and discussions on the
+>  V4L mailing list.
+> +
+> +.. only: sphinx3
+> +
+> +   .. c:namespace:: NULL
 
+I actually tried that, but this didn't work.
+
+Btw, it is not that simple. It needs to convert also several other tags,
+and some are in the middle of the tests.
+
+So, even if this would work, a change like that will introduce lots
+of "noise" at the docs.
+
+The approach of adding support for c:namespace: at cdomain
+(see the patchset I sent today) is a lot more cleaner.
+
+Thanks,
+Mauro
