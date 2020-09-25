@@ -2,85 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6CBD427819B
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 09:32:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6FA5D27829D
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 10:22:02 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727401AbgIYHcL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Sep 2020 03:32:11 -0400
-Received: from mail.kernel.org ([198.145.29.99]:46624 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727201AbgIYHcJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 25 Sep 2020 03:32:09 -0400
-Received: from coco.lan (ip5f5ad5bf.dynamic.kabel-deutschland.de [95.90.213.191])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 818572311B;
-        Fri, 25 Sep 2020 07:32:02 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1601019128;
-        bh=IoufJd/unL5ddJzTrngS83s9J3bqPwyXQ5EPjYOcYlw=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=mdW9CaZT6xUuqHDPKcn8zjB4tIwp3pIi1go993fXEbKmJyI3RMnK1vRIk/El1qFwk
-         bfWkOlF7Hfm/4zgEM3ZS6GGziR+oXePk9bQfL4ShgOLYRSa2ngEbW7YNKeiOn4BJp7
-         UYvvgC6gIoNvn507kPTjdpJ4wq/YFin1NJZXzd4Y=
-Date:   Fri, 25 Sep 2020 09:31:58 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Niklas =?UTF-8?B?U8O2ZGVybHVuZA==?= 
-        <niklas.soderlund+renesas@ragnatech.se>,
-        Alexandre Courbot <acourbot@chromium.org>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Boris Brezillon <boris.brezillon@collabora.com>,
-        Ezequiel Garcia <ezequiel@collabora.com>,
-        Hans Verkuil <hverkuil-cisco@xs4all.nl>,
-        Helen Koike <helen.koike@collabora.com>,
-        Jacopo Mondi <jacopo@jmondi.org>,
-        Jernej Skrabec <jernej.skrabec@siol.net>,
-        Jian-Jia Su <jjsu@chromium.org>,
-        Laurent Pinchart <laurent.pinchart@ideasonboard.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Michael Tretter <m.tretter@pengutronix.de>,
-        Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
-        Philipp Zabel <p.zabel@pengutronix.de>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Ricardo Ribalda <ribalda@kernel.org>,
-        Sakari Ailus <sakari.ailus@linux.intel.com>,
-        Sean Young <sean@mess.org>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Tomasz Figa <tfiga@chromium.org>, linux-media@vger.kernel.org
-Subject: Re: [PATCH v3 0/8] Improve support for building docs with Sphinx
- 3.1+
-Message-ID: <20200925093158.2b605cc4@coco.lan>
-In-Reply-To: <cover.1601014299.git.mchehab+huawei@kernel.org>
-References: <cover.1601014299.git.mchehab+huawei@kernel.org>
-X-Mailer: Claws Mail 3.17.6 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1727408AbgIYIV5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Sep 2020 04:21:57 -0400
+Received: from out30-131.freemail.mail.aliyun.com ([115.124.30.131]:60571 "EHLO
+        out30-131.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727248AbgIYIV5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Sep 2020 04:21:57 -0400
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R201e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04395;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=8;SR=0;TI=SMTPD_---0UA0wHS-_1601022113;
+Received: from IT-FVFX43SYHV2H.local(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0UA0wHS-_1601022113)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Fri, 25 Sep 2020 16:21:53 +0800
+Subject: Re: [PATCH V4] doc: zh_CN: add translatation for btrfs
+To:     Wang Qing <wangqing@vivo.com>, Harry Wei <harryxiyou@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Wang Wenhu <wenhu.wang@vivo.com>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Chucheng Luo <luochucheng@vivo.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <1601018642-31711-1-git-send-email-wangqing@vivo.com>
+From:   Alex Shi <alex.shi@linux.alibaba.com>
+Message-ID: <f0febb25-29a1-02d4-223a-65e2c6a9db5e@linux.alibaba.com>
+Date:   Fri, 25 Sep 2020 16:19:38 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
+ Gecko/20100101 Thunderbird/68.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+In-Reply-To: <1601018642-31711-1-git-send-email-wangqing@vivo.com>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Fri, 25 Sep 2020 08:30:38 +0200
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> escreveu:
+Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
 
-> Sphinx 3.x new c domain code broke the doc build on several ways:
+在 2020/9/25 下午3:22, Wang Qing 写道:
+> Translate Documentation/filesystems/btrfs.rst into Chinese.
 > 
-> - it broke the cdomains.py extension that were giving namespace
->   support for C references;
-> - it broke the automarkup script;
-> - it broke c:type references that kernel-doc and other parts of the
->   kernel were using to do cross-references with C declarations.
+> Signed-off-by: Wang Qing <wangqing@vivo.com>
+> ---
+>  .../translations/zh_CN/filesystems/btrfs.rst       | 37 ++++++++++++++++++++++
+>  .../translations/zh_CN/filesystems/index.rst       |  1 +
+>  2 files changed, 38 insertions(+)
+>  create mode 100644 Documentation/translations/zh_CN/filesystems/btrfs.rst
 > 
-> This series address only part of those issues. It halves the number
-> of warnings produced when Spinx 3.x is used.  Yet, we still
-> have 1.7 K warnings.
-
-At least some of the warnings seem to be due to some issues at
-Sphinx 3.x. I opened an issue to Sphinx upstream:
-
-	https://github.com/sphinx-doc/sphinx/issues/8241
-
-Thanks,
-Mauro
+> diff --git a/Documentation/translations/zh_CN/filesystems/btrfs.rst b/Documentation/translations/zh_CN/filesystems/btrfs.rst
+> new file mode 100644
+> index 0000000..8b8cca2
+> --- /dev/null
+> +++ b/Documentation/translations/zh_CN/filesystems/btrfs.rst
+> @@ -0,0 +1,37 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +.. include:: ../disclaimer-zh_CN.rst
+> +
+> +:Original: :ref:`Documentation/filesystems/ext3.rst <ext3_index>`
+> +
+> +translated by 王擎 Wang Qing<wangqing@vivo.com>
+> +
+> +=====
+> +BTRFS
+> +=====
+> +
+> +Btrfs是一个写时复制更新的文件系统，它注重容错、修复和易于管理。
+> +Btrfs由多家公司联合开发，并获得GPL许可，免费开放给所有人。
+> +
+> +Btrfs的主要功能包括：
+> +
+> +    *扩展大小的文件存储（文件最大支持2^64）
+> +    *填充方式使小文件更节省空间
+> +    *索引目录的方式更节省空间
+> +    *动态的索引节点分配方式
+> +    *可写快照的特性
+> +    *支持子卷（独立的内部根文件系统）
+> +    *对象级别的镜像克隆
+> +    *基于数据和元数据的校验和（支持多种算法）
+> +    *支持压缩
+> +    *內建多种磁盘阵列算法，支持多种设备
+> +    *支持离线的文件系统检查
+> +    *高效的增量备份和文件系统镜像
+> +    *在线文件系统碎片整理
+> +
+> +更多有关信息，请参阅Wiki
+> +
+> +  https://btrfs.wiki.kernel.org
+> +
+> +维护信息包含管理任务、常见问题、用例、挂载选项、变更日志、
+> +特性、手册、源码仓、联系人等。
+> diff --git a/Documentation/translations/zh_CN/filesystems/index.rst b/Documentation/translations/zh_CN/filesystems/index.rst
+> index 186501d..47e86397
+> --- a/Documentation/translations/zh_CN/filesystems/index.rst
+> +++ b/Documentation/translations/zh_CN/filesystems/index.rst
+> @@ -25,4 +25,5 @@ Linux Kernel中的文件系统
+>  
+>     virtiofs
+>     debugfs
+> +   btrfs
+>  
+> 
