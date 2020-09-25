@@ -2,56 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 052E42785AD
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 13:23:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1F67A27859A
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 13:15:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728042AbgIYLX1 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Fri, 25 Sep 2020 07:23:27 -0400
-Received: from mail.hlgd.gob.ec ([181.112.154.212]:52052 "EHLO
-        mail.hlgd.gob.ec" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726255AbgIYLX1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Sep 2020 07:23:27 -0400
-Received: from localhost (localhost [127.0.0.1])
-        by mail.hlgd.gob.ec (Postfix) with ESMTP id A492334C4E17;
-        Thu, 24 Sep 2020 21:45:37 -0500 (-05)
-Received: from mail.hlgd.gob.ec ([127.0.0.1])
-        by localhost (mail.hlgd.gob.ec [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id gdyYPHYFcWJY; Thu, 24 Sep 2020 21:45:37 -0500 (-05)
-Received: from localhost (localhost [127.0.0.1])
-        by mail.hlgd.gob.ec (Postfix) with ESMTP id 359C934C4E1E;
-        Thu, 24 Sep 2020 21:45:37 -0500 (-05)
-X-Virus-Scanned: amavisd-new at hlgd.gob.ec
-Received: from mail.hlgd.gob.ec ([127.0.0.1])
-        by localhost (mail.hlgd.gob.ec [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id amSROIffY6Gc; Thu, 24 Sep 2020 21:45:37 -0500 (-05)
-Received: from [10.123.39.92] (unknown [105.12.6.205])
-        by mail.hlgd.gob.ec (Postfix) with ESMTPSA id 0707F34C4E29;
-        Thu, 24 Sep 2020 21:45:26 -0500 (-05)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S1727997AbgIYLPn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Sep 2020 07:15:43 -0400
+Received: from foss.arm.com ([217.140.110.172]:42402 "EHLO foss.arm.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727132AbgIYLPn (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 25 Sep 2020 07:15:43 -0400
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 34B1D101E;
+        Fri, 25 Sep 2020 04:15:42 -0700 (PDT)
+Received: from [10.57.48.76] (unknown [10.57.48.76])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 986323F70D;
+        Fri, 25 Sep 2020 04:15:38 -0700 (PDT)
+Subject: Re: [PATCH 08/18] dma-mapping: add a new dma_alloc_noncoherent API
+To:     Christoph Hellwig <hch@lst.de>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+        Joonyoung Shim <jy0922.shim@samsung.com>,
+        Seung-Woo Kim <sw0312.kim@samsung.com>,
+        Ben Skeggs <bskeggs@redhat.com>,
+        Marek Szyprowski <m.szyprowski@samsung.com>,
+        Tomasz Figa <tfiga@chromium.org>,
+        Matt Porter <mporter@kernel.crashing.org>,
+        iommu@lists.linux-foundation.org
+Cc:     alsa-devel@alsa-project.org, linux-samsung-soc@vger.kernel.org,
+        linux-scsi@vger.kernel.org, linux-parisc@vger.kernel.org,
+        linux-doc@vger.kernel.org, nouveau@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org, linux-mips@vger.kernel.org,
+        linux-mm@kvack.org, Stefan Richter <stefanr@s5r6.in-berlin.de>,
+        netdev@vger.kernel.org, linux1394-devel@lists.sourceforge.net,
+        linux-arm-kernel@lists.infradead.org, linux-media@vger.kernel.org
+References: <20200915155122.1768241-1-hch@lst.de>
+ <20200915155122.1768241-9-hch@lst.de>
+From:   Robin Murphy <robin.murphy@arm.com>
+Message-ID: <c8ea4023-3e19-d63b-d936-46a04f502a61@arm.com>
+Date:   Fri, 25 Sep 2020 12:15:37 +0100
+User-Agent: Mozilla/5.0 (Windows NT 10.0; rv:78.0) Gecko/20100101
+ Thunderbird/78.2.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8BIT
-Content-Description: Mail message body
-Subject: spende von 2,000,000 euro
-To:     Recipients <vanessa.ramirez@hlgd.gob.ec>
-From:   ''Tayeb souami'' <vanessa.ramirez@hlgd.gob.ec>
-Date:   Fri, 25 Sep 2020 04:45:20 +0200
-Reply-To: Tayebsouam.spende@gmail.com
-Message-Id: <20200925024527.0707F34C4E29@mail.hlgd.gob.ec>
+In-Reply-To: <20200915155122.1768241-9-hch@lst.de>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On 2020-09-15 16:51, Christoph Hellwig wrote:
+[...]
+> +These APIs allow to allocate pages in the kernel direct mapping that are
+> +guaranteed to be DMA addressable.  This means that unlike dma_alloc_coherent,
+> +virt_to_page can be called on the resulting address, and the resulting
 
-Hallo mein lieber Freund
-Mein Name ist Tayeb Souami aus New Jersey in Amerika und ich habe den America Lottery Jackpot von 315 Millionen Euro gewonnen. Ich habe mich entschlossen, die Summe von 2.000.000 Euro an fünf glückliche Personen zu spenden, und Sie wurden als einer der Begünstigten ausgewählt. Bitte klicken Sie auf diesen Link, um mehr über meinen Gewinn zu erfahren.
+Nit: if we explicitly describe this as if it's a guarantee that can be 
+relied upon...
 
+> +struct page can be used for everything a struct page is suitable for.
 
-UHR MICH HIER: https://www.youtube.com/watch?v=Z6ui8ZDQ6Ks
+[...]
+> +This routine allocates a region of <size> bytes of consistent memory.  It
+> +returns a pointer to the allocated region (in the processor's virtual address
+> +space) or NULL if the allocation failed.  The returned memory may or may not
+> +be in the kernels direct mapping.  Drivers must not call virt_to_page on
+> +the returned memory region.
 
-Bitte kontaktieren Sie mich über diese E-Mail: Tayebsouam.spende@gmail.com
+...then forbid this document's target audience from relying on it, 
+something seems off. At the very least it's unhelpfully unclear :/
 
+Given patch #17, I suspect that the first paragraph is the one that's no 
+longer true.
 
-Ich hoffe, Sie und Ihre Familie glücklich zu machen.
-
-Grüße
-Herr Tayeb Souami
+Robin.
