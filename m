@@ -2,229 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AFDBC2785DB
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 13:32:02 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EF2482785EB
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 13:32:48 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727290AbgIYLcB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Sep 2020 07:32:01 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54568 "EHLO
+        id S1728159AbgIYLch (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Sep 2020 07:32:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54616 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727132AbgIYLcB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Sep 2020 07:32:01 -0400
-Received: from mail-ot1-x343.google.com (mail-ot1-x343.google.com [IPv6:2607:f8b0:4864:20::343])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1FE5CC0613D3
-        for <linux-doc@vger.kernel.org>; Fri, 25 Sep 2020 04:32:01 -0700 (PDT)
-Received: by mail-ot1-x343.google.com with SMTP id o8so1964149otl.4
-        for <linux-doc@vger.kernel.org>; Fri, 25 Sep 2020 04:32:01 -0700 (PDT)
+        with ESMTP id S1728158AbgIYLcP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Sep 2020 07:32:15 -0400
+Received: from mail-ej1-x643.google.com (mail-ej1-x643.google.com [IPv6:2a00:1450:4864:20::643])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1534CC0613D8
+        for <linux-doc@vger.kernel.org>; Fri, 25 Sep 2020 04:32:14 -0700 (PDT)
+Received: by mail-ej1-x643.google.com with SMTP id u21so3189465eja.2
+        for <linux-doc@vger.kernel.org>; Fri, 25 Sep 2020 04:32:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
+        d=baylibre-com.20150623.gappssmtp.com; s=20150623;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=6L8pDz+HxatuOD/RjMAAdgwqh+b4jciwbLlL8vlXkeA=;
-        b=qyHbJgNndjOJTaIgRnJQ6gdz3KVViOFrAgXDGuXJJIRD74pqZXl32ezx/nLKfU26eO
-         4Sswiyv+wYx+68aCOYEcsAZf3hLxli00w3yhK/RaeNtOxUrc10pokEGeU+s1NS9L342a
-         f/3qUcxxVICL9wVpKmpyDNMssvgh9Q51lddnuQkfdLh0ATuhFv3NzEnuvvXUTsOLsvgO
-         YJLBGwF8305u0itBfxkYCF5CDWafOUXiMyTZvcIvDk2rDy10zKMmhaH5F/2Ze2kOAEPI
-         at+QdWNp6iNyaX5chYaA3CG+ThU646hbW4DslUpQHdVbrXIUHwwyE7WKMgtzG5rLJb2I
-         29cw==
+        bh=z//erykWYqUAgc8g2m7BJrgknwO6GLezCOz32OeFgSU=;
+        b=Yf8hpAStoVbx0mRIg2vS79bkSzSxftSLxoGoEplviNGsiBvYHf8KBPdOzjK42CqVlQ
+         +hBydWVKA8Qu2bXBchGo+iHRUal8CKSeDZWNlXY7K2Yl0DNd03LWUWHRwNJe4xqedNfk
+         AhWmM2cSkZVGx3UadmgdltJTsUSvDf9YzcieRhmwFHLFi2rlaSPQUbKWRdPWZlvRR/3/
+         WlvhTQjThDN4ZBeh8yIfxbFQGQq+KoayEBQyhz2GRGtIXvDpnP17g9AMljhXH2QOnxSW
+         piKLlBlTo/lFYia1Z9DoYlx8rl6KpTXcOxB3jVD6O0oeCrdbWUzYkKR6haFxTzKYPtF2
+         UypA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=6L8pDz+HxatuOD/RjMAAdgwqh+b4jciwbLlL8vlXkeA=;
-        b=oXVFjs2uytS1lxDiS9JOxZwmcu51pf2+O2nNKwVABGUT6G/biNGVWbJQ8xpbXAPEym
-         iJT72QGqvJSv9tdGmLlj6Q/abUyl9T0oSvN9gTQLUySQXN4ww7KNmUUqUJdMFiXVKH0f
-         SXbMwdc0Q03LhJ1D0GYzbaMkWDLiTdi7/vsKuDZzvCokc3f0MVxm5b/cZTUZZc1VvQeD
-         EpAF1kvWg7baEPBPA1sc8B1x4T+oLFqgu3np3BO4Z7EuHdXglqnKI9s34SZHTHRDguld
-         0K4PHyPTPZwT+7V3IJrJlPrgmp59RH/MZLQeY27CF/wfp+vWDDjPx+mFKvjAPKUdqa9L
-         vbzw==
-X-Gm-Message-State: AOAM530evMD1BHZWNdNRLPtWeYK/HWBoKiYeGUXEwT71ruqTnEkMveA8
-        Su7MBWYmrTEYJmytnYxU6d02iWrAO6lhSRo05+RMNOIkJAWCfA==
-X-Google-Smtp-Source: ABdhPJyormovoExEyKquxcPkW3fXKMFM7xowV9E55jiL8kHHZvbTZiiejygZobwfWQwB8aFC0qqx0h8nfjkvgKtV6TA=
-X-Received: by 2002:a9d:66a:: with SMTP id 97mr2621626otn.233.1601033519970;
- Fri, 25 Sep 2020 04:31:59 -0700 (PDT)
+        bh=z//erykWYqUAgc8g2m7BJrgknwO6GLezCOz32OeFgSU=;
+        b=FcaQadbbGlBSI0SqauvHadQTGaw1VNFeqRGtiG7J/+/9kpjFVIZJ3Rc8uA0T3WrzRB
+         hsMZapvltacvjG3Obqf9nPcWPAjuckuKSqabMlEXI8Mpv8WtheeOBtVEIU8Fn9q+t/rG
+         2j/UigHBkdTN0Zprsun5Xc6Jlmc9GVIWXHHccoron4D+g2zrwMZDmr0eujhYgTLH4sy8
+         D3D9mp0XfQOyWrNu5F0Dot6NLrAGUJpyVo8NOuaUlLtYIDi/UH1xwVbNMzJylQh9spJM
+         ir4dO05Y6HK0UC33rNqRP+cUsdPk4Rtsp1m+d5hlIRzGcDtjEML9NKI1SabcyPkWq70E
+         IZHg==
+X-Gm-Message-State: AOAM532/IzVHdMLQmJLMY/KAEoc8ryjqbLyHQO4LNLirh86CXjtfJQ9Q
+        9dhi7bmvCuPaZQUt3N5cdcW1gAR8kpJCCu361wJ9ig==
+X-Google-Smtp-Source: ABdhPJw89kHdONoHSrw/GfYxZwMQK3hh6g8jQPrGUBFWzXdg50Bl4UPL+du4E2cNOwUE5/axozz3WvMwufj6FGLDgnM=
+X-Received: by 2002:a17:906:e4f:: with SMTP id q15mr2350988eji.155.1601033532589;
+ Fri, 25 Sep 2020 04:32:12 -0700 (PDT)
 MIME-Version: 1.0
-References: <20200921132611.1700350-2-elver@google.com> <20200925112328.10057-1-sjpark@amazon.com>
-In-Reply-To: <20200925112328.10057-1-sjpark@amazon.com>
-From:   Marco Elver <elver@google.com>
-Date:   Fri, 25 Sep 2020 13:31:48 +0200
-Message-ID: <CANpmjNMG+1Fiff+_PMFanRVc9SRoTKa-Z9SMM9eKTRL9MsoD0w@mail.gmail.com>
-Subject: Re: [PATCH v3 01/10] mm: add Kernel Electric-Fence infrastructure
-To:     SeongJae Park <sjpark@amazon.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Alexander Potapenko <glider@google.com>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Hillf Danton <hdanton@sina.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        Eric Dumazet <edumazet@google.com>,
-        "H. Peter Anvin" <hpa@zytor.com>, Christoph Lameter <cl@linux.com>,
-        Will Deacon <will@kernel.org>,
+References: <20200924113842.11670-1-brgl@bgdev.pl> <20200924113842.11670-2-brgl@bgdev.pl>
+ <20200925084804.GX3956970@smile.fi.intel.com>
+In-Reply-To: <20200925084804.GX3956970@smile.fi.intel.com>
+From:   Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Date:   Fri, 25 Sep 2020 13:32:01 +0200
+Message-ID: <CAMpxmJV27BO0A82TKWK59StYXnLfgqT5qS_chgn73GPoNn3wCA@mail.gmail.com>
+Subject: Re: [PATCH 1/9] lib: string_helpers: provide kfree_strarray()
+To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc:     Bartosz Golaszewski <brgl@bgdev.pl>,
+        Linus Walleij <linus.walleij@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        "the arch/x86 maintainers" <x86@kernel.org>,
-        kasan-dev <kasan-dev@googlegroups.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        David Rientjes <rientjes@google.com>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
-        Kees Cook <keescook@chromium.org>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Jann Horn <jannh@google.com>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Pekka Enberg <penberg@kernel.org>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>
+        Kent Gibson <warthog618@gmail.com>,
+        linux-gpio <linux-gpio@vger.kernel.org>,
+        linux-doc <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 25 Sep 2020 at 13:24, 'SeongJae Park' via kasan-dev
-<kasan-dev@googlegroups.com> wrote:
+On Fri, Sep 25, 2020 at 11:01 AM Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> wrote:
 >
-> On Mon, 21 Sep 2020 15:26:02 +0200 Marco Elver <elver@google.com> wrote:
+> On Thu, Sep 24, 2020 at 01:38:34PM +0200, Bartosz Golaszewski wrote:
+> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+> >
+> > There's a common pattern of dynamically allocating an array of char
+> > pointers and then also dynamically allocating each string in this
+> > array. Provide a helper for freeing such a string array with one call.
 >
-> > From: Alexander Potapenko <glider@google.com>
-> >
-> > This adds the Kernel Electric-Fence (KFENCE) infrastructure. KFENCE is a
-> > low-overhead sampling-based memory safety error detector of heap
-> > use-after-free, invalid-free, and out-of-bounds access errors.
-> >
-> > KFENCE is designed to be enabled in production kernels, and has near
-> > zero performance overhead. Compared to KASAN, KFENCE trades performance
-> > for precision. The main motivation behind KFENCE's design, is that with
-> > enough total uptime KFENCE will detect bugs in code paths not typically
-> > exercised by non-production test workloads. One way to quickly achieve a
-> > large enough total uptime is when the tool is deployed across a large
-> > fleet of machines.
-> >
-> > KFENCE objects each reside on a dedicated page, at either the left or
-> > right page boundaries. The pages to the left and right of the object
-> > page are "guard pages", whose attributes are changed to a protected
-> > state, and cause page faults on any attempted access to them. Such page
-> > faults are then intercepted by KFENCE, which handles the fault
-> > gracefully by reporting a memory access error. To detect out-of-bounds
-> > writes to memory within the object's page itself, KFENCE also uses
-> > pattern-based redzones. The following figure illustrates the page
-> > layout:
-> >
-> >   ---+-----------+-----------+-----------+-----------+-----------+---
-> >      | xxxxxxxxx | O :       | xxxxxxxxx |       : O | xxxxxxxxx |
-> >      | xxxxxxxxx | B :       | xxxxxxxxx |       : B | xxxxxxxxx |
-> >      | x GUARD x | J : RED-  | x GUARD x | RED-  : J | x GUARD x |
-> >      | xxxxxxxxx | E :  ZONE | xxxxxxxxx |  ZONE : E | xxxxxxxxx |
-> >      | xxxxxxxxx | C :       | xxxxxxxxx |       : C | xxxxxxxxx |
-> >      | xxxxxxxxx | T :       | xxxxxxxxx |       : T | xxxxxxxxx |
-> >   ---+-----------+-----------+-----------+-----------+-----------+---
-> >
-> > Guarded allocations are set up based on a sample interval (can be set
-> > via kfence.sample_interval). After expiration of the sample interval, a
-> > guarded allocation from the KFENCE object pool is returned to the main
-> > allocator (SLAB or SLUB). At this point, the timer is reset, and the
-> > next allocation is set up after the expiration of the interval.
-> >
-> > To enable/disable a KFENCE allocation through the main allocator's
-> > fast-path without overhead, KFENCE relies on static branches via the
-> > static keys infrastructure. The static branch is toggled to redirect the
-> > allocation to KFENCE. To date, we have verified by running synthetic
-> > benchmarks (sysbench I/O workloads) that a kernel compiled with KFENCE
-> > is performance-neutral compared to the non-KFENCE baseline.
-> >
-> > For more details, see Documentation/dev-tools/kfence.rst (added later in
-> > the series).
-> >
-> > Reviewed-by: Dmitry Vyukov <dvyukov@google.com>
-> > Co-developed-by: Marco Elver <elver@google.com>
-> > Signed-off-by: Marco Elver <elver@google.com>
-> > Signed-off-by: Alexander Potapenko <glider@google.com>
-> > ---
-> > v3:
-> > * Reports by SeongJae Park:
-> >   * Remove reference to Documentation/dev-tools/kfence.rst.
-> >   * Remove redundant braces.
-> >   * Use CONFIG_KFENCE_NUM_OBJECTS instead of ARRAY_SIZE(...).
-> >   * Align some comments.
-> > * Add figure from Documentation/dev-tools/kfence.rst added later in
-> >   series to patch description.
-> >
-> > v2:
-> > * Add missing __printf attribute to seq_con_printf, and fix new warning.
-> >   [reported by kernel test robot <lkp@intel.com>]
-> > * Fix up some comments [reported by Jonathan Cameron].
-> > * Remove 2 cases of redundant stack variable initialization
-> >   [reported by Jonathan Cameron].
-> > * Fix printf format [reported by kernel test robot <lkp@intel.com>].
-> > * Print (in kfence-#nn) after address, to more clearly establish link
-> >   between first and second stacktrace [reported by Andrey Konovalov].
-> > * Make choice between KASAN and KFENCE clearer in Kconfig help text
-> >   [suggested by Dave Hansen].
-> > * Document CONFIG_KFENCE_SAMPLE_INTERVAL=0.
-> > * Shorten memory corruption report line length.
-> > * Make /sys/module/kfence/parameters/sample_interval root-writable for
-> >   all builds (to enable debugging, automatic dynamic tweaking).
-> > * Reports by Dmitry Vyukov:
-> >   * Do not store negative size for right-located objects
-> >   * Only cache-align addresses of right-located objects.
-> >   * Run toggle_allocation_gate() after KFENCE is enabled.
-> >   * Add empty line between allocation and free stacks.
-> >   * Add comment about SLAB_TYPESAFE_BY_RCU.
-> >   * Also skip internals for allocation/free stacks.
-> >   * s/KFENCE_FAULT_INJECTION/KFENCE_STRESS_TEST_FAULTS/ as FAULT_INJECTION
-> >     is already overloaded in different contexts.
-> >   * Parenthesis for macro variable.
-> >   * Lower max of KFENCE_NUM_OBJECTS config variable.
-> > ---
-> >  MAINTAINERS            |  11 +
-> >  include/linux/kfence.h | 174 ++++++++++
-> >  init/main.c            |   2 +
-> >  lib/Kconfig.debug      |   1 +
-> >  lib/Kconfig.kfence     |  63 ++++
-> >  mm/Makefile            |   1 +
-> >  mm/kfence/Makefile     |   3 +
-> >  mm/kfence/core.c       | 733 +++++++++++++++++++++++++++++++++++++++++
-> >  mm/kfence/kfence.h     | 102 ++++++
-> >  mm/kfence/report.c     | 219 ++++++++++++
-> >  10 files changed, 1309 insertions(+)
-> >  create mode 100644 include/linux/kfence.h
-> >  create mode 100644 lib/Kconfig.kfence
-> >  create mode 100644 mm/kfence/Makefile
-> >  create mode 100644 mm/kfence/core.c
-> >  create mode 100644 mm/kfence/kfence.h
-> >  create mode 100644 mm/kfence/report.c
-> >
-> > diff --git a/MAINTAINERS b/MAINTAINERS
-> > index b5cfab015bd6..863899ed9a29 100644
-> > --- a/MAINTAINERS
-> > +++ b/MAINTAINERS
-> > @@ -9673,6 +9673,17 @@ F:     include/linux/keyctl.h
-> >  F:   include/uapi/linux/keyctl.h
-> >  F:   security/keys/
-> >
-> > +KFENCE
-> > +M:   Alexander Potapenko <glider@google.com>
-> > +M:   Marco Elver <elver@google.com>
-> > +R:   Dmitry Vyukov <dvyukov@google.com>
-> > +L:   kasan-dev@googlegroups.com
-> > +S:   Maintained
-> > +F:   Documentation/dev-tools/kfence.rst
+> For consistency I would like to provide kalloc_strarray(), but it seems a bit
+> ambiguous. So I'm fine with this going alone.
 >
-> This patch doesn't introduce this file yet, right?  How about using a separate
-> final patch for MAINTAINERS update?
 
-Sure.
+But how would it even work - you can allocate strings in so many ways?
+Also: let's not introduce functions without users.
 
-> Other than that,
->
-> Reviewed-by: SeongJae Park <sjpark@amazon.de>
+Bart
 
-Thanks!
+[snip]
