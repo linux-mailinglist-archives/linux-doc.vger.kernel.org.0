@@ -2,270 +2,216 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 46F4E278B6A
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 16:57:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2A19D278B9D
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 17:00:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728996AbgIYO5c (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Sep 2020 10:57:32 -0400
-Received: from mga04.intel.com ([192.55.52.120]:17319 "EHLO mga04.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728974AbgIYO5c (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 25 Sep 2020 10:57:32 -0400
-IronPort-SDR: e4qfbc6nnLP6n3SeQO3If/MfjA5Co/X74DS9erhyR4+ilZ3KRW+W3rD8yQ3NG9j338T1UTqHB4
- 2eu54+7V13xw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9755"; a="158942246"
-X-IronPort-AV: E=Sophos;i="5.77,302,1596524400"; 
-   d="scan'208";a="158942246"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2020 07:57:14 -0700
-IronPort-SDR: Er0JJcz2MKSigqT+baqkcjHmkETdh31Gm4Br8Y4f7TQT0ghLjTZJWwynNHKfguqa0AgEJBXoOA
- Y8IPA7NEUiqw==
-X-IronPort-AV: E=Sophos;i="5.77,302,1596524400"; 
-   d="scan'208";a="487499128"
-Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2020 07:57:13 -0700
-From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
-To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
-Subject: [PATCH v13 01/26] Documentation/x86: Add CET description
-Date:   Fri, 25 Sep 2020 07:56:24 -0700
-Message-Id: <20200925145649.5438-2-yu-cheng.yu@intel.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20200925145649.5438-1-yu-cheng.yu@intel.com>
-References: <20200925145649.5438-1-yu-cheng.yu@intel.com>
+        id S1728731AbgIYO71 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Sep 2020 10:59:27 -0400
+Received: from aserp2120.oracle.com ([141.146.126.78]:35538 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728148AbgIYO7R (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 25 Sep 2020 10:59:17 -0400
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 08PEtON7093194;
+        Fri, 25 Sep 2020 14:58:50 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=corp-2020-01-29;
+ bh=KBajAr//8CgaZncjmmtHx6pmz9MNjgdQXqLWcgD3Ze0=;
+ b=H30XNnlMx/xzx8IZE1wtRV4+gckn0lpbNz1IbsI2v8nNN8f286skb2qnNlg2nyUFOCvp
+ w2TwnjINm0zZU/IFe3WD95g0/xOdtd3UNg0NpUIurdM0+nB/Cx8Oo5Gjp0z2nfv8mkpt
+ Wa6UqopzfVowKR2n3eppuxHL1XDnYX5j8Z/oS79SBE2bshcbZuKia4osjF3L7ZUIAlxN
+ MXE+83u2mamMLNUg8N9rOym5mySnKbTeDyf2KfWU2ljoL2oOWzflWvzibyXPCH3mcU/J
+ HP0Wb2mpNP07GDVC++sjGMmd49MHQm5LAVgnYvu74+JsHNcbydjdLBjwdP6mAKErEu0L /w== 
+Received: from userp3020.oracle.com (userp3020.oracle.com [156.151.31.79])
+        by aserp2120.oracle.com with ESMTP id 33q5rgvgcr-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Fri, 25 Sep 2020 14:58:50 +0000
+Received: from pps.filterd (userp3020.oracle.com [127.0.0.1])
+        by userp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 08PEuYVx135834;
+        Fri, 25 Sep 2020 14:56:49 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+        by userp3020.oracle.com with ESMTP id 33nurxwgjg-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 25 Sep 2020 14:56:49 +0000
+Received: from abhmp0020.oracle.com (abhmp0020.oracle.com [141.146.116.26])
+        by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 08PEukPK009487;
+        Fri, 25 Sep 2020 14:56:47 GMT
+Received: from [10.39.243.24] (/10.39.243.24)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Fri, 25 Sep 2020 07:56:46 -0700
+Subject: Re: [PATCH 07/13] x86: Secure Launch kernel early boot stub
+To:     Arvind Sankar <nivedita@alum.mit.edu>
+Cc:     linux-kernel@vger.kernel.org, x86@kernel.org,
+        iommu@lists.linux-foundation.org, linux-integrity@vger.kernel.org,
+        linux-doc@vger.kernel.org, dpsmith@apertussolutions.com,
+        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
+        luto@amacapital.net, trenchboot-devel@googlegroups.com
+References: <1600959521-24158-1-git-send-email-ross.philipson@oracle.com>
+ <1600959521-24158-8-git-send-email-ross.philipson@oracle.com>
+ <20200924173801.GA103726@rani.riverdale.lan>
+From:   Ross Philipson <ross.philipson@oracle.com>
+Autocrypt: addr=ross.philipson@oracle.com; keydata=
+ mQENBFtHZ04BCADHhtvMImplKfIEOytU7ZH4haZ9eFAqZpGeIpG9D+pzTCuReM2/49bvgNoI
+ e1xuiQFO+UEJ8FjedFjDdqY7fSw3xVdX9gLwD1Rmw0Dadc1w6sGbcoOQLHcglesu+BmcKBtU
+ tWQZkzCpEShN4etgZThk8469YnAvO08vNZsrizgrpD90T7mEYiNXxIkX87sPGbnBrL1X7RvZ
+ TaRXfE8174W+XVwGEpSiO/GjRgLW8+DFZB5MgXpCR993+U1YT9Lz97/MRzr4hqcOYry6LBYi
+ s8dOly4oP7gK15oW8Xap9+ur0Jd8Vy8o99Axq+7yunF+2KE2SwP3/w8H3VDpx7EeDhWDABEB
+ AAG0KlJvc3MgUGhpbGlwc29uIDxyb3NzLnBoaWxpcHNvbkBvcmFjbGUuY29tPokBVAQTAQgA
+ PgIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBFsN7r6v0OZTCaJ1wdpHdTZHiMYcBQJb
+ R2eBBQkJZgGzAAoJENpHdTZHiMYcPYcH/Rlp3/F3P4/2i/W0F4yQDVD6rAkejCws4KlbgC5D
+ Slkdvk6j8jOW/HNeIY3n+a3mW0iyyhZlipgYAqkK1loDiDxJjc2eUaHxiYWNLQ4CwIj2EC27
+ AWCp6hgwHNWmZrdeNbM/Z6LTFQILx5xzgX+86KNqzFV7gOcAaS2qBVz1D83dgrFZaGaao918
+ nvfe+SnImo0GaEf8nVDKgsD2zfzMBkk4q/E0mrEADFXwBHSvNCnVyrCN6Ve0dHWgI7SszUDt
+ 7v01zbGPR5mRfGuyC9gykd2SDCw5/Q27RMWfaPFL/dtiZBljUzb2yW5jicZAz7zNdDcBSUGR
+ r//wxtG4k/dBrMW5AQ0EW0dnTwEIAPelEnLDnfJnHdFR+1Thrvv3Udt/1cjqQfHqH4F8zef/
+ MsIcPV1skL7qPUYD+CrbasvmqhlPxtJAtN68inPa70fA2g0PtNmLUH1NBb2e6EjOoVZg9ais
+ BWfdYUITZouOXs2zCTFsoNWjTJANnXxexbTf1ZEqfzlVtQK+xAnXl3kiL4Y47VMbgDkGedhw
+ 3ZMWQ2zMMZqYJkPYhtlTXtedhV91DL1347ULwHsvkUJDZ0gL+WU6tYhsCOOiD61x58PfUiFb
+ /WkZEPxb96dSSSWrTlLlBWSSD24RnhfbJjfsXeSu9s4XldmGTDkj7jclMVU1xV0BUfqEwhVn
+ xR8FlC+dZvkAEQEAAYkBPAQYAQgAJgIbDBYhBFsN7r6v0OZTCaJ1wdpHdTZHiMYcBQJbR2eB
+ BQkJZgGyAAoJENpHdTZHiMYcDIAIAIRJrKjIStRvLsOOCX92s9XJPUjrC/xmtVsqVviyFWIC
+ QRPQzDE+bDSvRazudBHmcPW+BOOB5B+p7zKZzOGoZV2peG8oA/Y8oCxOYBtpbBaZ5KJexm/g
+ BbnJUwb3uhmKtDShHGUCmtq8MZBJBr6Q6xHprOU8Qnzs9Jea8NVwaz9O226Rrg4XVv/sK1Lh
+ ++xZfhi7YqKWdx5vdfdnX1xWe8ma0eXLeCDh3V6Ys+Habw1jEbMuafrcVzAbp1rMt2Lju1ls
+ BNAoxeViK7QXWfwGTmGJP++jHmo99gMqEtiohf+37N0oS6uYu6kaE7PxsEcOjWKJxW/DdgwO
+ eFq+D6xuiKk=
+Message-ID: <c9ab2edf-1aaf-a1c9-92d5-2d37382a3163@oracle.com>
+Date:   Fri, 25 Sep 2020 10:56:43 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200924173801.GA103726@rani.riverdale.lan>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9755 signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 malwarescore=0
+ phishscore=0 mlxlogscore=999 bulkscore=0 mlxscore=0 suspectscore=0
+ spamscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2006250000 definitions=main-2009250107
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9755 signatures=668680
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 impostorscore=0
+ clxscore=1011 suspectscore=0 phishscore=0 malwarescore=0
+ priorityscore=1501 mlxlogscore=999 adultscore=0 bulkscore=0 mlxscore=0
+ lowpriorityscore=0 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2006250000 definitions=main-2009250107
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Explain no_user_shstk/no_user_ibt kernel parameters, and introduce a new
-document on Control-flow Enforcement Technology (CET).
+On 9/24/20 1:38 PM, Arvind Sankar wrote:
+> On Thu, Sep 24, 2020 at 10:58:35AM -0400, Ross Philipson wrote:
+>> The Secure Launch (SL) stub provides the entry point for Intel TXT (and
+>> later AMD SKINIT) to vector to during the late launch. The symbol
+>> sl_stub_entry is that entry point and its offset into the kernel is
+>> conveyed to the launching code using the MLE (Measured Launch
+>> Environment) header in the structure named mle_header. The offset of the
+>> MLE header is set in the kernel_info. The routine sl_stub contains the
+>> very early late launch setup code responsible for setting up the basic
+>> environment to allow the normal kernel startup_32 code to proceed. It is
+>> also responsible for properly waking and handling the APs on Intel
+>> platforms. The routine sl_main which runs after entering 64b mode is
+>> responsible for measuring configuration and module information before
+>> it is used like the boot params, the kernel command line, the TXT heap,
+>> an external initramfs, etc.
+>>
+>> Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
+> 
+> Which version of the kernel is this based on?
 
-Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
-Reviewed-by: Kees Cook <keescook@chromium.org>
----
-v13:
-- Change X86_INTEL_* to X86_*.
+git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 
-v12:
-- Remove ARCH_X86_CET_MMAP_SHSTK information.
+master branch
 
-v11:
-- Add back GLIBC tunables information.
-- Add ARCH_X86_CET_MMAP_SHSTK information.
+> 
+>> diff --git a/arch/x86/boot/compressed/head_64.S b/arch/x86/boot/compressed/head_64.S
+>> index 97d37f0..42043bf 100644
+>> --- a/arch/x86/boot/compressed/head_64.S
+>> +++ b/arch/x86/boot/compressed/head_64.S
+>> @@ -279,6 +279,21 @@ SYM_INNER_LABEL(efi32_pe_stub_entry, SYM_L_LOCAL)
+>>  SYM_FUNC_END(efi32_stub_entry)
+>>  #endif
+>>  
+>> +#ifdef CONFIG_SECURE_LAUNCH
+>> +SYM_FUNC_START(sl_stub_entry)
+>> +	/*
+>> +	 * On entry, %ebx has the entry abs offset to sl_stub_entry. To
+>> +	 * find the beginning of where we are loaded, sub off from the
+>> +	 * beginning.
+>> +	 */
+> 
+> This requirement should be added to the documentation. Is it necessary
+> or can this stub just figure out the address the same way as the other
+> 32-bit entry points, using the scratch space in bootparams as a little
+> stack?
 
-v10:
-- Change no_cet_shstk and no_cet_ibt to no_user_shstk and no_user_ibt.
-- Remove the opcode section, as it is already in the Intel SDM.
-- Remove sections related to GLIBC implementation.
-- Remove shadow stack memory management section, as it is already in the
-  code comments.
-- Remove legacy bitmap related information, as it is not supported now.
-- Fix arch_ioctl() related text.
-- Change SHSTK, IBT to plain English.
+It is based on the state of the BSP when TXT vectors to the measured
+launch environment. It is documented in the TXT spec and the SDMs.
 
- .../admin-guide/kernel-parameters.txt         |   6 +
- Documentation/x86/index.rst                   |   1 +
- Documentation/x86/intel_cet.rst               | 133 ++++++++++++++++++
- 3 files changed, 140 insertions(+)
- create mode 100644 Documentation/x86/intel_cet.rst
+> 
+>> +	leal	(startup_32 - sl_stub_entry)(%ebx), %ebx
+>> +
+>> +	/* More room to work in sl_stub in the text section */
+>> +	jmp	sl_stub
+>> +
+>> +SYM_FUNC_END(sl_stub_entry)
+>> +#endif
+>> +
+>>  	.code64
+>>  	.org 0x200
+>>  SYM_CODE_START(startup_64)
+>> @@ -537,6 +552,25 @@ SYM_FUNC_START_LOCAL_NOALIGN(.Lrelocated)
+>>  	shrq	$3, %rcx
+>>  	rep	stosq
+>>  
+>> +#ifdef CONFIG_SECURE_LAUNCH
+>> +	/*
+>> +	 * Have to do the final early sl stub work in 64b area.
+>> +	 *
+>> +	 * *********** NOTE ***********
+>> +	 *
+>> +	 * Several boot params get used before we get a chance to measure
+>> +	 * them in this call. This is a known issue and we currently don't
+>> +	 * have a solution. The scratch field doesn't matter and loadflags
+>> +	 * have KEEP_SEGMENTS set by the stub code. There is no obvious way
+>> +	 * to do anything about the use of kernel_alignment or init_size
+>> +	 * though these seem low risk.
+>> +	 */
+> 
+> There are various fields in bootparams that depend on where the
+> kernel/initrd and cmdline are loaded in memory. If the entire bootparams
+> page is getting measured, does that mean they all have to be at fixed
+> addresses on every boot?
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index a1068742a6df..7c7124a6a7ac 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -3164,6 +3164,12 @@
- 			noexec=on: enable non-executable mappings (default)
- 			noexec=off: disable non-executable mappings
- 
-+	no_user_shstk	[X86-64] Disable Shadow Stack for user-mode
-+			applications
-+
-+	no_user_ibt	[X86-64] Disable Indirect Branch Tracking for user-mode
-+			applications
-+
- 	nosmap		[X86,PPC]
- 			Disable SMAP (Supervisor Mode Access Prevention)
- 			even if it is supported by processor.
-diff --git a/Documentation/x86/index.rst b/Documentation/x86/index.rst
-index 265d9e9a093b..2aef972a868d 100644
---- a/Documentation/x86/index.rst
-+++ b/Documentation/x86/index.rst
-@@ -19,6 +19,7 @@ x86-specific Documentation
-    tlb
-    mtrr
-    pat
-+   intel_cet
-    intel-iommu
-    intel_txt
-    amd-memory-encryption
-diff --git a/Documentation/x86/intel_cet.rst b/Documentation/x86/intel_cet.rst
-new file mode 100644
-index 000000000000..c9ebb3d9dd00
---- /dev/null
-+++ b/Documentation/x86/intel_cet.rst
-@@ -0,0 +1,133 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+=========================================
-+Control-flow Enforcement Technology (CET)
-+=========================================
-+
-+[1] Overview
-+============
-+
-+Control-flow Enforcement Technology (CET) is an Intel processor feature
-+that provides protection against return/jump-oriented programming (ROP)
-+attacks.  It can be set up to protect both applications and the kernel.
-+Only user-mode protection is implemented in the 64-bit kernel, including
-+support for running legacy 32-bit applications.
-+
-+CET introduces Shadow Stack and Indirect Branch Tracking.  Shadow stack is
-+a secondary stack allocated from memory and cannot be directly modified by
-+applications.  When executing a CALL, the processor pushes the return
-+address to both the normal stack and the shadow stack.  Upon function
-+return, the processor pops the shadow stack copy and compares it to the
-+normal stack copy.  If the two differ, the processor raises a control-
-+protection fault.  Indirect branch tracking verifies indirect CALL/JMP
-+targets are intended as marked by the compiler with 'ENDBR' opcodes.
-+
-+There are two kernel configuration options:
-+
-+    X86_SHADOW_STACK_USER, and
-+    X86_BRANCH_TRACKING_USER.
-+
-+These need to be enabled to build a CET-enabled kernel, and Binutils v2.31
-+and GCC v8.1 or later are required to build a CET kernel.  To build a CET-
-+enabled application, GLIBC v2.28 or later is also required.
-+
-+There are two command-line options for disabling CET features::
-+
-+    no_user_shstk - disables user shadow stack, and
-+    no_user_ibt   - disables user indirect branch tracking.
-+
-+At run time, /proc/cpuinfo shows CET features if the processor supports
-+CET.
-+
-+[2] Application Enabling
-+========================
-+
-+An application's CET capability is marked in its ELF header and can be
-+verified from the following command output, in the NT_GNU_PROPERTY_TYPE_0
-+field:
-+
-+    readelf -n <application>
-+
-+If an application supports CET and is statically linked, it will run with
-+CET protection.  If the application needs any shared libraries, the loader
-+checks all dependencies and enables CET when all requirements are met.
-+
-+[3] Backward Compatibility
-+==========================
-+
-+GLIBC provides a few tunables for backward compatibility.
-+
-+GLIBC_TUNABLES=glibc.tune.hwcaps=-SHSTK,-IBT
-+    Turn off SHSTK/IBT for the current shell.
-+
-+GLIBC_TUNABLES=glibc.tune.x86_shstk=<on, permissive>
-+    This controls how dlopen() handles SHSTK legacy libraries::
-+
-+        on         - continue with SHSTK enabled;
-+        permissive - continue with SHSTK off.
-+
-+[4] CET arch_prctl()'s
-+======================
-+
-+Several arch_prctl()'s have been added for CET:
-+
-+arch_prctl(ARCH_X86_CET_STATUS, u64 *addr)
-+    Return CET feature status.
-+
-+    The parameter 'addr' is a pointer to a user buffer.
-+    On returning to the caller, the kernel fills the following
-+    information::
-+
-+        *addr       = shadow stack/indirect branch tracking status
-+        *(addr + 1) = shadow stack base address
-+        *(addr + 2) = shadow stack size
-+
-+arch_prctl(ARCH_X86_CET_DISABLE, unsigned int features)
-+    Disable shadow stack and/or indirect branch tracking as specified in
-+    'features'.  Return -EPERM if CET is locked.
-+
-+arch_prctl(ARCH_X86_CET_LOCK)
-+    Lock in all CET features.  They cannot be turned off afterwards.
-+
-+Note:
-+  There is no CET-enabling arch_prctl function.  By design, CET is enabled
-+  automatically if the binary and the system can support it.
-+
-+[5] The implementation of the Shadow Stack
-+==========================================
-+
-+Shadow Stack size
-+-----------------
-+
-+A task's shadow stack is allocated from memory to a fixed size of
-+MIN(RLIMIT_STACK, 4 GB).  In other words, the shadow stack is allocated to
-+the maximum size of the normal stack, but capped to 4 GB.  However,
-+a compat-mode application's address space is smaller, each of its thread's
-+shadow stack size is MIN(1/4 RLIMIT_STACK, 4 GB).
-+
-+Signal
-+------
-+
-+The main program and its signal handlers use the same shadow stack.
-+Because the shadow stack stores only return addresses, a large shadow
-+stack covers the condition that both the program stack and the signal
-+alternate stack run out.
-+
-+The kernel creates a restore token for the shadow stack restoring address
-+and verifies that token when restoring from the signal handler.
-+
-+Fork
-+----
-+
-+The shadow stack's vma has VM_SHSTK flag set; its PTEs are required to be
-+read-only and dirty.  When a shadow stack PTE is not RO and dirty, a
-+shadow access triggers a page fault with the shadow stack access bit set
-+in the page fault error code.
-+
-+When a task forks a child, its shadow stack PTEs are copied and both the
-+parent's and the child's shadow stack PTEs are cleared of the dirty bit.
-+Upon the next shadow stack access, the resulting shadow stack page fault
-+is handled by page copy/re-use.
-+
-+When a pthread child is created, the kernel allocates a new shadow stack
-+for the new thread.
--- 
-2.21.0
+Yes that is a very good point. In other places when measuring we make
+sure to skip things like addresses and sizes of things outside of the
+structure being measured. This needs to be done with boot params too.
+
+> 
+> Also KEEP_SEGMENTS support is gone from the kernel since v5.7, since it
+> was unused. startup_32 now always loads a GDT and then the segment
+> registers. I think this should be ok for you as the only thing the flag
+> used to do in the 64-bit kernel was to stop startup_32 from blindly
+> loading __BOOT_DS into the segment registers before it had setup its own
+> GDT.
+
+Yea this was there to prevent that blind loading of __BOOT_DS. I see it
+is gone so I will remove the comment and the place where the flag is set.
+
+> 
+> For the 32-bit assembler code that's being added, tip/master now has
+> changes that prevent the compressed kernel from having any runtime
+> relocations.  You'll need to revise some of the code and the data
+> structures initial values to avoid creating relocations.
+
+Could you elaborate on this some more? I am not sure I see places in the
+secure launch asm that would be creating relocations like this.
+
+Thank you,
+Ross
+
+> 
+> Thanks.
+> 
 
