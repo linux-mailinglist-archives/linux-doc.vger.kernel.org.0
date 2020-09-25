@@ -2,312 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 93195279028
-	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 20:16:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C2BC427912C
+	for <lists+linux-doc@lfdr.de>; Fri, 25 Sep 2020 20:54:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727201AbgIYSQk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 25 Sep 2020 14:16:40 -0400
-Received: from mga04.intel.com ([192.55.52.120]:34512 "EHLO mga04.intel.com"
+        id S1729722AbgIYSys (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 25 Sep 2020 14:54:48 -0400
+Received: from m12-15.163.com ([220.181.12.15]:51832 "EHLO m12-15.163.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729620AbgIYSQk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 25 Sep 2020 14:16:40 -0400
-IronPort-SDR: fMjbDozWj4T32QXRci/Fi4le/t8ZYn58MezVRTrqSgWl2dVLoNV5svAw+JxxCJg970Sw+JMEEf
- QJMUx0Io/waQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9755"; a="158942328"
-X-IronPort-AV: E=Sophos;i="5.77,302,1596524400"; 
-   d="scan'208";a="158942328"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2020 07:57:27 -0700
-IronPort-SDR: ZATIUGVPkvsDQ3H+ieDr8zSeF5Uj19WioKk/jVh4/FaYS5OcSqVFTs4V5vm+NYiBAP0BP63UHs
- iYvSNTOT3sOw==
-X-IronPort-AV: E=Sophos;i="5.77,302,1596524400"; 
-   d="scan'208";a="487499218"
-Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Sep 2020 07:57:26 -0700
-From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
-To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>,
-        Peter Collingbourne <pcc@google.com>,
-        Andrew Morton <akpm@linux-foundation.org>
-Subject: [PATCH v13 19/26] mm: Re-introduce do_mmap_pgoff()
-Date:   Fri, 25 Sep 2020 07:56:42 -0700
-Message-Id: <20200925145649.5438-20-yu-cheng.yu@intel.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20200925145649.5438-1-yu-cheng.yu@intel.com>
-References: <20200925145649.5438-1-yu-cheng.yu@intel.com>
+        id S1729644AbgIYSys (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 25 Sep 2020 14:54:48 -0400
+X-Greylist: delayed 946 seconds by postgrey-1.27 at vger.kernel.org; Fri, 25 Sep 2020 14:54:47 EDT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=163.com;
+        s=s110527; h=Date:From:Subject:Message-ID:MIME-Version; bh=QyxXF
+        vM0apX/hfN8xhdDiavcUL+dbBENIYuDPC48tb8=; b=T4YlAJrcUPhI9IESDot6X
+        ULpCWEquJOW5WVQ8Kg02ZF/3ajidZ2y6Zk6ITSVDrQRFi6Z+zywgGttqbpCuCevs
+        KAy2CNCVBm7XgSpw7eAGSQkWbPLTXhWF12igxe99L3+1zLZE//WIxtF2TAWU6xJl
+        nYnZNKglF6xHdF7Enh3MGk=
+Received: from localhost (unknown [101.86.214.224])
+        by smtp11 (Coremail) with SMTP id D8CowACH4aPpOG5f04wxDw--.53071S2;
+        Sat, 26 Sep 2020 02:37:29 +0800 (CST)
+Date:   Sat, 26 Sep 2020 02:37:29 +0800
+From:   Hui Su <sh_def@163.com>
+To:     catalin.marinas@arm.com, corbet@lwn.net, akpm@linux-foundation.org,
+        mchehab+huawei@kernel.org, davem@davemloft.net, robh@kernel.org,
+        yamada.masahiro@socionext.com, sam@ravnborg.org,
+        jpoimboe@redhat.com, rostedt@goodmis.org,
+        miguel.ojeda.sandonis@gmail.com, divya.indi@oracle.com,
+        sh_def@163.com, tomas.winkler@intel.com, dhowells@redhat.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org
+Subject: [PATCH] mm,kmemleak-test.c: move kmemleak-test.c to samples dir
+Message-ID: <20200925183729.GA172837@rlk>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+X-CM-TRANSID: D8CowACH4aPpOG5f04wxDw--.53071S2
+X-Coremail-Antispam: 1Uf129KBjvJXoWxWr45Kw1xAw43Cr1xWF4kWFg_yoWrJr13pr
+        4Fvr1ftrn7Ar1UW3y8tFyrGryUtwn7WFnruFWrZw4UXF9rXw18ZrsIk3y2yay3JayxWFWf
+        Gas7KFy7Cr1rJ3JanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDUYxBIdaVFxhVjvjDU0xZFpf9x07jwID7UUUUU=
+X-Originating-IP: [101.86.214.224]
+X-CM-SenderInfo: xvkbvvri6rljoofrz/1tbiJgmqX1v2eVoAzwAAsb
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-There was no more caller passing vm_flags to do_mmap(), and vm_flags was
-removed from the function's input by:
+kmemleak-test.c is just a kmemleak test module, which
+also can not be used as a built-in kernel module.
+Thus, i think it may should not be in mm dir, and move
+the kmemleak-test.c to samples/kmemleak/kmemleak-test.c.
+Fix the spelling of built-in by the way.
 
-    commit 45e55300f114 ("mm: remove unnecessary wrapper function do_mmap_pgoff()").
-
-There is a new user now.  Shadow stack allocation passes VM_SHSTK to
-do_mmap().  Re-introduce the vm_flags and do_mmap_pgoff().
-
-Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
-Cc: Peter Collingbourne <pcc@google.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Oleg Nesterov <oleg@redhat.com>
-Cc: linux-mm@kvack.org
+Signed-off-by: Hui Su <sh_def@163.com>
 ---
- fs/aio.c             |  6 +++---
- fs/hugetlbfs/inode.c |  2 +-
- include/linux/fs.h   |  2 +-
- include/linux/mm.h   | 12 +++++++++++-
- ipc/shm.c            |  2 +-
- mm/mmap.c            | 16 ++++++++--------
- mm/nommu.c           |  6 +++---
- mm/shmem.c           |  2 +-
- mm/util.c            |  4 ++--
- 9 files changed, 31 insertions(+), 21 deletions(-)
+ Documentation/dev-tools/kmemleak.rst     | 2 +-
+ MAINTAINERS                              | 2 +-
+ mm/Makefile                              | 1 -
+ samples/Makefile                         | 1 +
+ samples/kmemleak/Makefile                | 3 +++
+ {mm => samples/kmemleak}/kmemleak-test.c | 2 +-
+ 6 files changed, 7 insertions(+), 4 deletions(-)
+ create mode 100644 samples/kmemleak/Makefile
+ rename {mm => samples/kmemleak}/kmemleak-test.c (98%)
 
-diff --git a/fs/aio.c b/fs/aio.c
-index d5ec30385566..22d19a4ad586 100644
---- a/fs/aio.c
-+++ b/fs/aio.c
-@@ -525,9 +525,9 @@ static int aio_setup_ring(struct kioctx *ctx, unsigned int nr_events)
- 		return -EINTR;
- 	}
+diff --git a/Documentation/dev-tools/kmemleak.rst b/Documentation/dev-tools/kmemleak.rst
+index a41a2d238af2..1c935f41cd3a 100644
+--- a/Documentation/dev-tools/kmemleak.rst
++++ b/Documentation/dev-tools/kmemleak.rst
+@@ -229,7 +229,7 @@ Testing with kmemleak-test
  
--	ctx->mmap_base = do_mmap(ctx->aio_ring_file, 0, ctx->mmap_size,
--				 PROT_READ | PROT_WRITE,
--				 MAP_SHARED, 0, &unused, NULL);
-+	ctx->mmap_base = do_mmap_pgoff(ctx->aio_ring_file, 0, ctx->mmap_size,
-+				       PROT_READ | PROT_WRITE,
-+				       MAP_SHARED, 0, &unused, NULL);
- 	mmap_write_unlock(mm);
- 	if (IS_ERR((void *)ctx->mmap_base)) {
- 		ctx->mmap_size = 0;
-diff --git a/fs/hugetlbfs/inode.c b/fs/hugetlbfs/inode.c
-index b5c109703daa..f936bcf02cce 100644
---- a/fs/hugetlbfs/inode.c
-+++ b/fs/hugetlbfs/inode.c
-@@ -140,7 +140,7 @@ static int hugetlbfs_file_mmap(struct file *file, struct vm_area_struct *vma)
- 	 * already been checked by prepare_hugepage_range.  If you add
- 	 * any error returns here, do so after setting VM_HUGETLB, so
- 	 * is_vm_hugetlb_page tests below unmap_region go the right
--	 * way when do_mmap unwinds (may be important on powerpc
-+	 * way when do_mmap_pgoff unwinds (may be important on powerpc
- 	 * and ia64).
- 	 */
- 	vma->vm_flags |= VM_HUGETLB | VM_DONTEXPAND;
-diff --git a/include/linux/fs.h b/include/linux/fs.h
-index 7519ae003a08..f7df4558f72c 100644
---- a/include/linux/fs.h
-+++ b/include/linux/fs.h
-@@ -538,7 +538,7 @@ static inline int mapping_mapped(struct address_space *mapping)
+ To check if you have all set up to use kmemleak, you can use the kmemleak-test
+ module, a module that deliberately leaks memory. Set CONFIG_DEBUG_KMEMLEAK_TEST
+-as module (it can't be used as bult-in) and boot the kernel with kmemleak
++as module (it can't be used as built-in) and boot the kernel with kmemleak
+ enabled. Load the module and perform a scan with::
  
- /*
-  * Might pages of this file have been modified in userspace?
-- * Note that i_mmap_writable counts all VM_SHARED vmas: do_mmap
-+ * Note that i_mmap_writable counts all VM_SHARED vmas: do_mmap_pgoff
-  * marks vma as VM_SHARED if it is shared, and the file was opened for
-  * writing i.e. vma may be mprotected writable even if now readonly.
-  *
-diff --git a/include/linux/mm.h b/include/linux/mm.h
-index e09d13699bbe..9b6a0f22cd89 100644
---- a/include/linux/mm.h
-+++ b/include/linux/mm.h
-@@ -2560,13 +2560,23 @@ extern unsigned long mmap_region(struct file *file, unsigned long addr,
- 	struct list_head *uf);
- extern unsigned long do_mmap(struct file *file, unsigned long addr,
- 	unsigned long len, unsigned long prot, unsigned long flags,
--	unsigned long pgoff, unsigned long *populate, struct list_head *uf);
-+	vm_flags_t vm_flags, unsigned long pgoff, unsigned long *populate,
-+	struct list_head *uf);
- extern int __do_munmap(struct mm_struct *, unsigned long, size_t,
- 		       struct list_head *uf, bool downgrade);
- extern int do_munmap(struct mm_struct *, unsigned long, size_t,
- 		     struct list_head *uf);
- extern int do_madvise(unsigned long start, size_t len_in, int behavior);
+         # modprobe kmemleak-test
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 190c7fa2ea01..8172787535fc 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -9712,8 +9712,8 @@ M:	Catalin Marinas <catalin.marinas@arm.com>
+ S:	Maintained
+ F:	Documentation/dev-tools/kmemleak.rst
+ F:	include/linux/kmemleak.h
+-F:	mm/kmemleak-test.c
+ F:	mm/kmemleak.c
++F:	samples/kmemleak/kmemleak-test.c
  
-+static inline unsigned long
-+do_mmap_pgoff(struct file *file, unsigned long addr,
-+	unsigned long len, unsigned long prot, unsigned long flags,
-+	unsigned long pgoff, unsigned long *populate,
-+	struct list_head *uf)
-+{
-+	return do_mmap(file, addr, len, prot, flags, 0, pgoff, populate, uf);
-+}
+ KMOD KERNEL MODULE LOADER - USERMODE HELPER
+ M:	Luis Chamberlain <mcgrof@kernel.org>
+diff --git a/mm/Makefile b/mm/Makefile
+index d5649f1c12c0..d73aed0fc99c 100644
+--- a/mm/Makefile
++++ b/mm/Makefile
+@@ -94,7 +94,6 @@ obj-$(CONFIG_GUP_BENCHMARK) += gup_benchmark.o
+ obj-$(CONFIG_MEMORY_FAILURE) += memory-failure.o
+ obj-$(CONFIG_HWPOISON_INJECT) += hwpoison-inject.o
+ obj-$(CONFIG_DEBUG_KMEMLEAK) += kmemleak.o
+-obj-$(CONFIG_DEBUG_KMEMLEAK_TEST) += kmemleak-test.o
+ obj-$(CONFIG_DEBUG_RODATA_TEST) += rodata_test.o
+ obj-$(CONFIG_DEBUG_VM_PGTABLE) += debug_vm_pgtable.o
+ obj-$(CONFIG_PAGE_OWNER) += page_owner.o
+diff --git a/samples/Makefile b/samples/Makefile
+index 754553597581..c3392a595e4b 100644
+--- a/samples/Makefile
++++ b/samples/Makefile
+@@ -28,3 +28,4 @@ subdir-$(CONFIG_SAMPLE_VFS)		+= vfs
+ obj-$(CONFIG_SAMPLE_INTEL_MEI)		+= mei/
+ subdir-$(CONFIG_SAMPLE_WATCHDOG)	+= watchdog
+ subdir-$(CONFIG_SAMPLE_WATCH_QUEUE)	+= watch_queue
++obj-$(CONFIG_DEBUG_KMEMLEAK_TEST)	+= kmemleak/
+diff --git a/samples/kmemleak/Makefile b/samples/kmemleak/Makefile
+new file mode 100644
+index 000000000000..16b6132c540c
+--- /dev/null
++++ b/samples/kmemleak/Makefile
+@@ -0,0 +1,3 @@
++# SPDX-License-Identifier: GPL-2.0-only
 +
- #ifdef CONFIG_MMU
- extern int __mm_populate(unsigned long addr, unsigned long len,
- 			 int ignore_errors);
-diff --git a/ipc/shm.c b/ipc/shm.c
-index e25c7c6106bc..3131c1de6bba 100644
---- a/ipc/shm.c
-+++ b/ipc/shm.c
-@@ -1556,7 +1556,7 @@ long do_shmat(int shmid, char __user *shmaddr, int shmflg,
- 			goto invalid;
- 	}
- 
--	addr = do_mmap(file, addr, size, prot, flags, 0, &populate, NULL);
-+	addr = do_mmap_pgoff(file, addr, size, prot, flags, 0, &populate, NULL);
- 	*raddr = addr;
- 	err = 0;
- 	if (IS_ERR_VALUE(addr))
-diff --git a/mm/mmap.c b/mm/mmap.c
-index 574b3f273462..81d4a00092da 100644
---- a/mm/mmap.c
-+++ b/mm/mmap.c
-@@ -1030,7 +1030,7 @@ static inline int is_mergeable_anon_vma(struct anon_vma *anon_vma1,
-  * anon_vmas, nor if same anon_vma is assigned but offsets incompatible.
++obj-$(CONFIG_DEBUG_KMEMLEAK_TEST) += kmemleak-test.o
+diff --git a/mm/kmemleak-test.c b/samples/kmemleak/kmemleak-test.c
+similarity index 98%
+rename from mm/kmemleak-test.c
+rename to samples/kmemleak/kmemleak-test.c
+index e19279ff6aa3..7b476eb8285f 100644
+--- a/mm/kmemleak-test.c
++++ b/samples/kmemleak/kmemleak-test.c
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0-only
+ /*
+- * mm/kmemleak-test.c
++ * samples/kmemleak/kmemleak-test.c
   *
-  * We don't check here for the merged mmap wrapping around the end of pagecache
-- * indices (16TB on ia32) because do_mmap() does not permit mmap's which
-+ * indices (16TB on ia32) because do_mmap_pgoff() does not permit mmap's which
-  * wrap, nor mmaps which cover the final page at index -1UL.
-  */
- static int
-@@ -1365,11 +1365,11 @@ static inline bool file_mmap_ok(struct file *file, struct inode *inode,
-  */
- unsigned long do_mmap(struct file *file, unsigned long addr,
- 			unsigned long len, unsigned long prot,
--			unsigned long flags, unsigned long pgoff,
--			unsigned long *populate, struct list_head *uf)
-+			unsigned long flags, vm_flags_t vm_flags,
-+			unsigned long pgoff, unsigned long *populate,
-+			struct list_head *uf)
- {
- 	struct mm_struct *mm = current->mm;
--	vm_flags_t vm_flags;
- 	int pkey = 0;
- 
- 	*populate = 0;
-@@ -1431,7 +1431,7 @@ unsigned long do_mmap(struct file *file, unsigned long addr,
- 	 * to. we assume access permissions have been handled by the open
- 	 * of the memory object, so we don't do any here.
- 	 */
--	vm_flags = calc_vm_prot_bits(prot, pkey) | calc_vm_flag_bits(flags) |
-+	vm_flags |= calc_vm_prot_bits(prot, pkey) | calc_vm_flag_bits(flags) |
- 			mm->def_flags | VM_MAYREAD | VM_MAYWRITE | VM_MAYEXEC;
- 
- 	if (flags & MAP_LOCKED)
-@@ -2233,7 +2233,7 @@ get_unmapped_area(struct file *file, unsigned long addr, unsigned long len,
- 		/*
- 		 * mmap_region() will call shmem_zero_setup() to create a file,
- 		 * so use shmem's get_unmapped_area in case it can be huge.
--		 * do_mmap() will clear pgoff, so match alignment.
-+		 * do_mmap_pgoff() will clear pgoff, so match alignment.
- 		 */
- 		pgoff = 0;
- 		get_area = shmem_get_unmapped_area;
-@@ -3006,7 +3006,7 @@ SYSCALL_DEFINE5(remap_file_pages, unsigned long, start, unsigned long, size,
- 	}
- 
- 	file = get_file(vma->vm_file);
--	ret = do_mmap(vma->vm_file, start, size,
-+	ret = do_mmap_pgoff(vma->vm_file, start, size,
- 			prot, flags, pgoff, &populate, NULL);
- 	fput(file);
- out:
-@@ -3226,7 +3226,7 @@ int insert_vm_struct(struct mm_struct *mm, struct vm_area_struct *vma)
- 	 * By setting it to reflect the virtual start address of the
- 	 * vma, merges and splits can happen in a seamless way, just
- 	 * using the existing file pgoff checks and manipulations.
--	 * Similarly in do_mmap and in do_brk.
-+	 * Similarly in do_mmap_pgoff and in do_brk.
- 	 */
- 	if (vma_is_anonymous(vma)) {
- 		BUG_ON(vma->anon_vma);
-diff --git a/mm/nommu.c b/mm/nommu.c
-index 75a327149af1..71a4ea828f06 100644
---- a/mm/nommu.c
-+++ b/mm/nommu.c
-@@ -1078,6 +1078,7 @@ unsigned long do_mmap(struct file *file,
- 			unsigned long len,
- 			unsigned long prot,
- 			unsigned long flags,
-+			vm_flags_t vm_flags,
- 			unsigned long pgoff,
- 			unsigned long *populate,
- 			struct list_head *uf)
-@@ -1085,7 +1086,6 @@ unsigned long do_mmap(struct file *file,
- 	struct vm_area_struct *vma;
- 	struct vm_region *region;
- 	struct rb_node *rb;
--	vm_flags_t vm_flags;
- 	unsigned long capabilities, result;
- 	int ret;
- 
-@@ -1104,7 +1104,7 @@ unsigned long do_mmap(struct file *file,
- 
- 	/* we've determined that we can make the mapping, now translate what we
- 	 * now know into VMA flags */
--	vm_flags = determine_vm_flags(file, prot, flags, capabilities);
-+	vm_flags |= determine_vm_flags(file, prot, flags, capabilities);
- 
- 	/* we're going to need to record the mapping */
- 	region = kmem_cache_zalloc(vm_region_jar, GFP_KERNEL);
-@@ -1763,7 +1763,7 @@ EXPORT_SYMBOL_GPL(access_process_vm);
-  *
-  * Check the shared mappings on an inode on behalf of a shrinking truncate to
-  * make sure that any outstanding VMAs aren't broken and then shrink the
-- * vm_regions that extend beyond so that do_mmap() doesn't
-+ * vm_regions that extend beyond so that do_mmap_pgoff() doesn't
-  * automatically grant mappings that are too large.
-  */
- int nommu_shrink_inode_mappings(struct inode *inode, size_t size,
-diff --git a/mm/shmem.c b/mm/shmem.c
-index 8e2b35ba93ad..54464c1e7414 100644
---- a/mm/shmem.c
-+++ b/mm/shmem.c
-@@ -4248,7 +4248,7 @@ EXPORT_SYMBOL_GPL(shmem_file_setup_with_mnt);
- 
- /**
-  * shmem_zero_setup - setup a shared anonymous mapping
-- * @vma: the vma to be mmapped is prepared by do_mmap
-+ * @vma: the vma to be mmapped is prepared by do_mmap_pgoff
-  */
- int shmem_zero_setup(struct vm_area_struct *vma)
- {
-diff --git a/mm/util.c b/mm/util.c
-index 5ef378a2a038..8d6280c05238 100644
---- a/mm/util.c
-+++ b/mm/util.c
-@@ -503,8 +503,8 @@ unsigned long vm_mmap_pgoff(struct file *file, unsigned long addr,
- 	if (!ret) {
- 		if (mmap_write_lock_killable(mm))
- 			return -EINTR;
--		ret = do_mmap(file, addr, len, prot, flag, pgoff, &populate,
--			      &uf);
-+		ret = do_mmap_pgoff(file, addr, len, prot, flag, pgoff,
-+				    &populate, &uf);
- 		mmap_write_unlock(mm);
- 		userfaultfd_unmap_complete(mm, &uf);
- 		if (populate)
+  * Copyright (C) 2008 ARM Limited
+  * Written by Catalin Marinas <catalin.marinas@arm.com>
 -- 
-2.21.0
+2.25.1
+
 
