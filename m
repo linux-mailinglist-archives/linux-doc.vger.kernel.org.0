@@ -2,36 +2,36 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C80DA27A340
-	for <lists+linux-doc@lfdr.de>; Sun, 27 Sep 2020 22:00:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id B17D327A35B
+	for <lists+linux-doc@lfdr.de>; Sun, 27 Sep 2020 22:00:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727195AbgI0T6E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 27 Sep 2020 15:58:04 -0400
-Received: from Galois.linutronix.de ([193.142.43.55]:41894 "EHLO
+        id S1727151AbgI0T6w (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 27 Sep 2020 15:58:52 -0400
+Received: from Galois.linutronix.de ([193.142.43.55]:41602 "EHLO
         galois.linutronix.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726882AbgI0T5d (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 27 Sep 2020 15:57:33 -0400
-Message-Id: <20200927194921.839848434@linutronix.de>
+        with ESMTP id S1727133AbgI0T6D (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 27 Sep 2020 15:58:03 -0400
+Message-Id: <20200927194922.536621749@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1601236650;
+        s=2020; t=1601236659;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          content-transfer-encoding:content-transfer-encoding:  references:references;
-        bh=E8BWshtU8a/PkQjFPYy93BN17JLJsGh02VUnxk0upzE=;
-        b=N+JwA8r3ht2f/M3ne58BpHfK1GOt4GMqgR18UWPfudBaJBFVIMdq0c1il9j4d+HHmtwtzs
-        dmqcYnudPntJFjQw+NeBhPlRkwqSgONwm1d7AhSB6RMMtlKXUSrO/zsTuOPAOq0SzUhg72
-        ZYvkb2hSCYvJCyLpN5Nw1itasArreCiHk2i661yoGbLq2npjGEWG3aIJgA2yx7gcFqOoeX
-        s3wVL+sMCKLksBDWA0g69AYJhaNQL0jnR8gZXl3eqiXQxdYi914TlLexu6dI2Y6U7nqN5H
-        5n1t4HiKzEK+gZC8Kb5q4zYumbZWOdMm39zvPowPfdmw12wBDSIyP1vvzR1+2g==
+        bh=daDzhx3DvG51sTf56IB3yW6+rlEuvlygn45KtLExpjQ=;
+        b=VDYdrR3D7XjRpQdJxPO/TxGAWgfhd1RQ4YxZh3nEP39AiPjDDUfpg2sG9x07pOXHmWWrJ0
+        +aHCKBA2Zp00GLghYfZHTOEu2eKzaq76OX8KV8VWxYajhojrwnohq9Hg1WaHhQy+gAgZqN
+        HUhDdkUCchbKQKuhjj16d7aFoOkNs2eNyLz1PFjFoZEeip9z6AU06bV8vl2GrDROb2nzWW
+        UU+rM8Y5XR6G2CnQ/TXBuDnScIVZG8ysLD6H2wZ3k/OUoEZSirqZd3r+OvkkQATgf7CM4F
+        kF12yrb/thtllRj+oGQFnAYUkj+DTnB3Y2SPJ0DYrBQ7MhbkJDWMBd/CQExPig==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1601236650;
+        s=2020e; t=1601236659;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
          content-transfer-encoding:content-transfer-encoding:  references:references;
-        bh=E8BWshtU8a/PkQjFPYy93BN17JLJsGh02VUnxk0upzE=;
-        b=4RL85lLhlslR61dMUmztot7BjIosLb2ekytQx92VaR4TQzSfM5fCdFe3L+k6GNbwDMYffR
-        V1pCph8cyROkLAAQ==
-Date:   Sun, 27 Sep 2020 21:49:06 +0200
+        bh=daDzhx3DvG51sTf56IB3yW6+rlEuvlygn45KtLExpjQ=;
+        b=iLxGQIzE9QQNx58eXUsrAU0S724ow2imBqdAogU5f13GH9anLJFn4KOcXC0gX4kViOxyXb
+        GDpQ8t6ZtZPd4CCQ==
+Date:   Sun, 27 Sep 2020 21:49:13 +0200
 From:   Thomas Gleixner <tglx@linutronix.de>
 To:     LKML <linux-kernel@vger.kernel.org>
 Cc:     Peter Zijlstra <peterz@infradead.org>,
@@ -39,9 +39,17 @@ Cc:     Peter Zijlstra <peterz@infradead.org>,
         Paul McKenney <paulmck@kernel.org>,
         Matthew Wilcox <willy@infradead.org>,
         Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Stanislav Yakovlev <stas.yakovlev@gmail.com>,
+        Kalle Valo <kvalo@codeaurora.org>,
         "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>, linux-usb@vger.kernel.org,
-        netdev@vger.kernel.org, Christian Benvenuti <benve@cisco.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
+        Stanislaw Gruszka <stf_xl@wp.pl>,
+        Johannes Berg <johannes.berg@intel.com>,
+        Emmanuel Grumbach <emmanuel.grumbach@intel.com>,
+        Luca Coelho <luciano.coelho@intel.com>,
+        Intel Linux Wireless <linuxwifi@intel.com>,
+        Christian Benvenuti <benve@cisco.com>,
         Govindarajulu Varadarajan <_govind@gmx.com>,
         Dave Miller <davem@davemloft.net>,
         Jonathan Corbet <corbet@lwn.net>,
@@ -63,9 +71,7 @@ Cc:     Peter Zijlstra <peterz@infradead.org>,
         Edward Cree <ecree@solarflare.com>,
         Martin Habets <mhabets@solarflare.com>,
         Jon Mason <jdmason@kudzu.us>, Daniel Drake <dsd@gentoo.org>,
-        Ulrich Kunitz <kune@deine-taler.de>,
-        Kalle Valo <kvalo@codeaurora.org>,
-        linux-wireless@vger.kernel.org,
+        Ulrich Kunitz <kune@deine-taler.de>, linux-usb@vger.kernel.org,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Arend van Spriel <arend.vanspriel@broadcom.com>,
         Franky Lin <franky.lin@broadcom.com>,
@@ -73,22 +79,15 @@ Cc:     Peter Zijlstra <peterz@infradead.org>,
         Chi-Hsien Lin <chi-hsien.lin@cypress.com>,
         Wright Feng <wright.feng@cypress.com>,
         brcm80211-dev-list.pdl@broadcom.com,
-        brcm80211-dev-list@cypress.com,
-        Stanislav Yakovlev <stas.yakovlev@gmail.com>,
-        Stanislaw Gruszka <stf_xl@wp.pl>,
-        Johannes Berg <johannes.berg@intel.com>,
-        Emmanuel Grumbach <emmanuel.grumbach@intel.com>,
-        Luca Coelho <luciano.coelho@intel.com>,
-        Intel Linux Wireless <linuxwifi@intel.com>,
-        Jouni Malinen <j@w1.fi>,
+        brcm80211-dev-list@cypress.com, Jouni Malinen <j@w1.fi>,
         Amitkumar Karwar <amitkarwar@gmail.com>,
         Ganapathi Bhat <ganapathi.bhat@nxp.com>,
         Xinming Hu <huxinming820@gmail.com>,
         libertas-dev@lists.infradead.org,
         Pascal Terjan <pterjan@google.com>,
         Ping-Ke Shih <pkshih@realtek.com>
-Subject: [patch 20/35] net: usb: kaweth: Replace kaweth_control() with
- usb_control_msg()
+Subject: [patch 27/35] net: ipw2x00,iwlegacy,iwlwifi: Remove in_interrupt()
+ from debug macros
 References: <20200927194846.045411263@linutronix.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -99,175 +98,108 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
 
-kaweth_control() is almost the same as usb_control_msg() except for the
-memory allocation mode (GFP_ATOMIC vs GFP_NOIO) and the in_interrupt()
-check.
+The usage of in_interrupt() in non-core code is phased out.
 
-All the invocations of kaweth_control() are within the probe function in
-fully preemtible context so there is no reason to use atomic allocations,
-GFP_NOIO which is used by usb_control_msg() is perfectly fine.
+The debugging macros in these drivers use in_interrupt() to print 'I' or
+'U' depending on the return value of in_interrupt(). While 'U' is confusing
+at best and 'I' is not really describing the actual context (hard interupt,
+soft interrupt, bottom half disabled section) these debug macros originate
+from the pre ftrace kernel era and their value today is questionable. They
+probably should be removed completely.
 
-Replace kaweth_control() invocations from probe with usb_control_msg().
+The macros weere added initially for ipw2100 and then spreaded when the
+driver was forked.
+
+Remove the in_interrupt() usage at least..
 
 Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
 Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Stanislav Yakovlev <stas.yakovlev@gmail.com>
+Cc: Kalle Valo <kvalo@codeaurora.org>
 Cc: "David S. Miller" <davem@davemloft.net>
 Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: linux-usb@vger.kernel.org
+Cc: linux-wireless@vger.kernel.org
 Cc: netdev@vger.kernel.org
+Cc: Stanislaw Gruszka <stf_xl@wp.pl>
+Cc: Johannes Berg <johannes.berg@intel.com>
+Cc: Emmanuel Grumbach <emmanuel.grumbach@intel.com>
+Cc: Luca Coelho <luciano.coelho@intel.com>
+Cc: Intel Linux Wireless <linuxwifi@intel.com>
 
 ---
- drivers/net/usb/kaweth.c |   93 +++++++++++++++--------------------------------
- 1 file changed, 30 insertions(+), 63 deletions(-)
+ drivers/net/wireless/intel/ipw2x00/ipw2100.c   |    3 +--
+ drivers/net/wireless/intel/ipw2x00/ipw2200.h   |    6 ++----
+ drivers/net/wireless/intel/ipw2x00/libipw.h    |    3 +--
+ drivers/net/wireless/intel/iwlegacy/common.h   |    4 ++--
+ drivers/net/wireless/intel/iwlwifi/iwl-debug.c |    3 +--
+ 5 files changed, 7 insertions(+), 12 deletions(-)
 
---- a/drivers/net/usb/kaweth.c
-+++ b/drivers/net/usb/kaweth.c
-@@ -282,19 +282,13 @@ static int kaweth_control(struct kaweth_
-  ****************************************************************/
- static int kaweth_read_configuration(struct kaweth_device *kaweth)
- {
--	int retval;
--
--	retval = kaweth_control(kaweth,
--				usb_rcvctrlpipe(kaweth->dev, 0),
-+	return usb_control_msg(kaweth->dev, usb_rcvctrlpipe(kaweth->dev, 0),
- 				KAWETH_COMMAND_GET_ETHERNET_DESC,
- 				USB_TYPE_VENDOR | USB_DIR_IN | USB_RECIP_DEVICE,
--				0,
--				0,
--				(void *)&kaweth->configuration,
-+				0, 0,
-+				&kaweth->configuration,
- 				sizeof(kaweth->configuration),
- 				KAWETH_CONTROL_TIMEOUT);
--
--	return retval;
- }
+--- a/drivers/net/wireless/intel/ipw2x00/ipw2100.c
++++ b/drivers/net/wireless/intel/ipw2x00/ipw2100.c
+@@ -201,8 +201,7 @@ static u32 ipw2100_debug_level = IPW_DL_
+ #define IPW_DEBUG(level, message...) \
+ do { \
+ 	if (ipw2100_debug_level & (level)) { \
+-		printk(KERN_DEBUG "ipw2100: %c %s ", \
+-                       in_interrupt() ? 'I' : 'U',  __func__); \
++		printk(KERN_DEBUG "ipw2100: %s ", __func__); \
+ 		printk(message); \
+ 	} \
+ } while (0)
+--- a/drivers/net/wireless/intel/ipw2x00/ipw2200.h
++++ b/drivers/net/wireless/intel/ipw2x00/ipw2200.h
+@@ -1382,14 +1382,12 @@ BIT_ARG16(x)
  
- /****************************************************************
-@@ -302,21 +296,14 @@ static int kaweth_read_configuration(str
-  ****************************************************************/
- static int kaweth_set_urb_size(struct kaweth_device *kaweth, __u16 urb_size)
- {
--	int retval;
--
- 	netdev_dbg(kaweth->net, "Setting URB size to %d\n", (unsigned)urb_size);
+ #define IPW_DEBUG(level, fmt, args...) \
+ do { if (ipw_debug_level & (level)) \
+-  printk(KERN_DEBUG DRV_NAME": %c %s " fmt, \
+-         in_interrupt() ? 'I' : 'U', __func__ , ## args); } while (0)
++  printk(KERN_DEBUG DRV_NAME": %s " fmt, __func__ , ## args); } while (0)
  
--	retval = kaweth_control(kaweth,
--				usb_sndctrlpipe(kaweth->dev, 0),
--				KAWETH_COMMAND_SET_URB_SIZE,
--				USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
--				urb_size,
--				0,
--				(void *)&kaweth->scratch,
--				0,
--				KAWETH_CONTROL_TIMEOUT);
--
--	return retval;
-+	return usb_control_msg(kaweth->dev, usb_sndctrlpipe(kaweth->dev, 0),
-+			       KAWETH_COMMAND_SET_URB_SIZE,
-+			       USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
-+			       urb_size, 0,
-+			       &kaweth->scratch, 0,
-+			       KAWETH_CONTROL_TIMEOUT);
- }
+ #ifdef CONFIG_IPW2200_DEBUG
+ #define IPW_LL_DEBUG(level, fmt, args...) \
+ do { if (ipw_debug_level & (level)) \
+-  printk(KERN_DEBUG DRV_NAME": %c %s " fmt, \
+-         in_interrupt() ? 'I' : 'U', __func__ , ## args); } while (0)
++  printk(KERN_DEBUG DRV_NAME": %s " fmt, __func__ , ## args); } while (0)
+ #else
+ #define IPW_LL_DEBUG(level, fmt, args...) do {} while (0)
+ #endif				/* CONFIG_IPW2200_DEBUG */
+--- a/drivers/net/wireless/intel/ipw2x00/libipw.h
++++ b/drivers/net/wireless/intel/ipw2x00/libipw.h
+@@ -60,8 +60,7 @@
+ extern u32 libipw_debug_level;
+ #define LIBIPW_DEBUG(level, fmt, args...) \
+ do { if (libipw_debug_level & (level)) \
+-  printk(KERN_DEBUG "libipw: %c %s " fmt, \
+-         in_interrupt() ? 'I' : 'U', __func__ , ## args); } while (0)
++  printk(KERN_DEBUG "libipw: %s " fmt, __func__ , ## args); } while (0)
+ #else
+ #define LIBIPW_DEBUG(level, fmt, args...) do {} while (0)
+ #endif				/* CONFIG_LIBIPW_DEBUG */
+--- a/drivers/net/wireless/intel/iwlegacy/common.h
++++ b/drivers/net/wireless/intel/iwlegacy/common.h
+@@ -2925,8 +2925,8 @@ do {									\
+ #define IL_DBG(level, fmt, args...)					\
+ do {									\
+ 	if (il_get_debug_level(il) & level)				\
+-		dev_err(&il->hw->wiphy->dev, "%c %s " fmt,		\
+-			in_interrupt() ? 'I' : 'U', __func__ , ##args); \
++		dev_err(&il->hw->wiphy->dev, "%s " fmt, __func__,	\
++			 ##args);					\
+ } while (0)
  
- /****************************************************************
-@@ -324,21 +311,14 @@ static int kaweth_set_urb_size(struct ka
-  ****************************************************************/
- static int kaweth_set_sofs_wait(struct kaweth_device *kaweth, __u16 sofs_wait)
- {
--	int retval;
--
- 	netdev_dbg(kaweth->net, "Set SOFS wait to %d\n", (unsigned)sofs_wait);
- 
--	retval = kaweth_control(kaweth,
--				usb_sndctrlpipe(kaweth->dev, 0),
--				KAWETH_COMMAND_SET_SOFS_WAIT,
--				USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
--				sofs_wait,
--				0,
--				(void *)&kaweth->scratch,
--				0,
--				KAWETH_CONTROL_TIMEOUT);
--
--	return retval;
-+	return usb_control_msg(kaweth->dev, usb_sndctrlpipe(kaweth->dev, 0),
-+			       KAWETH_COMMAND_SET_SOFS_WAIT,
-+			       USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
-+			       sofs_wait, 0,
-+			       &kaweth->scratch, 0,
-+			       KAWETH_CONTROL_TIMEOUT);
- }
- 
- /****************************************************************
-@@ -347,22 +327,15 @@ static int kaweth_set_sofs_wait(struct k
- static int kaweth_set_receive_filter(struct kaweth_device *kaweth,
- 				     __u16 receive_filter)
- {
--	int retval;
--
- 	netdev_dbg(kaweth->net, "Set receive filter to %d\n",
- 		   (unsigned)receive_filter);
- 
--	retval = kaweth_control(kaweth,
--				usb_sndctrlpipe(kaweth->dev, 0),
--				KAWETH_COMMAND_SET_PACKET_FILTER,
--				USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
--				receive_filter,
--				0,
--				(void *)&kaweth->scratch,
--				0,
--				KAWETH_CONTROL_TIMEOUT);
--
--	return retval;
-+	return usb_control_msg(kaweth->dev, usb_sndctrlpipe(kaweth->dev, 0),
-+			       KAWETH_COMMAND_SET_PACKET_FILTER,
-+			       USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
-+			       receive_filter, 0,
-+			       &kaweth->scratch, 0,
-+			       KAWETH_CONTROL_TIMEOUT);
- }
- 
- /****************************************************************
-@@ -407,14 +380,11 @@ static int kaweth_download_firmware(stru
- 		   kaweth->firmware_buf, kaweth);
- 	netdev_dbg(kaweth->net, "Firmware length: %d\n", data_len);
- 
--	return kaweth_control(kaweth,
--		              usb_sndctrlpipe(kaweth->dev, 0),
-+	return usb_control_msg(kaweth->dev, usb_sndctrlpipe(kaweth->dev, 0),
- 			      KAWETH_COMMAND_SCAN,
- 			      USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
--			      0,
--			      0,
--			      (void *)kaweth->firmware_buf,
--			      data_len,
-+			      0, 0,
-+			      kaweth->firmware_buf, data_len,
- 			      KAWETH_CONTROL_TIMEOUT);
- }
- 
-@@ -433,15 +403,12 @@ static int kaweth_trigger_firmware(struc
- 	kaweth->firmware_buf[6] = 0x00;
- 	kaweth->firmware_buf[7] = 0x00;
- 
--	return kaweth_control(kaweth,
--			      usb_sndctrlpipe(kaweth->dev, 0),
--			      KAWETH_COMMAND_SCAN,
--			      USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
--			      0,
--			      0,
--			      (void *)kaweth->firmware_buf,
--			      8,
--			      KAWETH_CONTROL_TIMEOUT);
-+	return usb_control_msg(kaweth->dev, usb_sndctrlpipe(kaweth->dev, 0),
-+			       KAWETH_COMMAND_SCAN,
-+			       USB_TYPE_VENDOR | USB_DIR_OUT | USB_RECIP_DEVICE,
-+			       0, 0,
-+			       (void *)kaweth->firmware_buf, 8,
-+			       KAWETH_CONTROL_TIMEOUT);
- }
- 
- /****************************************************************
+ #define il_print_hex_dump(il, level, p, len)				\
+--- a/drivers/net/wireless/intel/iwlwifi/iwl-debug.c
++++ b/drivers/net/wireless/intel/iwlwifi/iwl-debug.c
+@@ -121,8 +121,7 @@ void __iwl_dbg(struct device *dev,
+ #ifdef CONFIG_IWLWIFI_DEBUG
+ 	if (iwl_have_debug_level(level) &&
+ 	    (!limit || net_ratelimit()))
+-		dev_printk(KERN_DEBUG, dev, "%c %s %pV",
+-			   in_interrupt() ? 'I' : 'U', function, &vaf);
++		dev_printk(KERN_DEBUG, dev, "%s %pV", function, &vaf);
+ #endif
+ 	trace_iwlwifi_dbg(level, in_interrupt(), function, &vaf);
+ 	va_end(args);
 
