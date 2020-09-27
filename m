@@ -2,54 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0C56427A362
-	for <lists+linux-doc@lfdr.de>; Sun, 27 Sep 2020 22:00:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5CCDB27A3D2
+	for <lists+linux-doc@lfdr.de>; Sun, 27 Sep 2020 22:03:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727175AbgI0T7H (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 27 Sep 2020 15:59:07 -0400
-Received: from Galois.linutronix.de ([193.142.43.55]:42356 "EHLO
+        id S1726867AbgI0UBw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 27 Sep 2020 16:01:52 -0400
+Received: from Galois.linutronix.de ([193.142.43.55]:40436 "EHLO
         galois.linutronix.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727179AbgI0T6E (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 27 Sep 2020 15:58:04 -0400
-Message-Id: <20200927194923.358900104@linutronix.de>
+        with ESMTP id S1726478AbgI0T5J (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 27 Sep 2020 15:57:09 -0400
+Message-Id: <20200927194846.045411263@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1601236669;
+        s=2020; t=1601236625;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:  references:references;
-        bh=ksaGPqhXSZGY4WnWtBR0byDM8dQ34v3PX/0X3fUvpQM=;
-        b=aHzJrPYU7FfUq814LOC20bsDMxiPF9kl5hv062qPTqnIj6StKd0bSDSLccSvRmXIASHhqf
-        aZR5++WuDmDCfI0fjwrlc0bANro81Ge/6/SkWNWmZ7CknohO75MPmk9RUBx5Zs8csm8eJT
-        +Vmk+qsZAPDw/MNaszn3bnwgnoPnRmygxJEr9cPQJPSgLgnjJpMVakzJ8DEfBCO7HU43Im
-        Ooc/O8v/j4db+A3q92vkqFI0aR/1S7RwPqw3jHr20cFbFMPPTVPePJFAwB/2G0nzplV+hz
-        gvCImYxktX+py8y+YnjKDpKSVo5Z89DdMSDLczbEle3un0h6LIMG4Nn2GX9S8g==
+         content-transfer-encoding:content-transfer-encoding;
+        bh=v/905bHXbZAUFHN4XYkf18yvHZ9SD3eSQ9Y2N6Cws9U=;
+        b=kywt+2P1PWh3JALwVEbtvQDEUxZYOsU9VBW+PvkYCaatdgH3w6L9VhcXF5dZ9mOT4GFnz+
+        jVydaPXw40Rl4X7GnIGUhA3c3KFHrnwh1WpnqkvdhlsPjuEZx5iNFUJ0BhtXWg+XfyYp2u
+        tkibxf+wwx51bAUZy+PgdJ9ZV+Sfp11TDmP5FfHMLmGCvu8YJgOLMaU2wWpctMRzCPDYE8
+        hBDQQXJ70hpNwCpxUoG/YxCvIs/eXtQj6hE3aOYtAxn/yVQUvcWe96aGaDrPiupTiMPsyh
+        ADOEsaJJ4fSwakD/QjEUlOHqgJQEQQ8rGZhTLPw6O5nTPPgHBXr/HEWsSRJZ7A==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1601236669;
+        s=2020e; t=1601236625;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:  references:references;
-        bh=ksaGPqhXSZGY4WnWtBR0byDM8dQ34v3PX/0X3fUvpQM=;
-        b=mU8Ag4UbwIj964lLMObE7JECFn2QEeMPOgKxS1KjDCTPv+aDXN3i+2v1K3ZjxYIiCh4FfZ
-        AJv7/jn/6+S5qpBQ==
-Date:   Sun, 27 Sep 2020 21:49:21 +0200
+         content-transfer-encoding:content-transfer-encoding;
+        bh=v/905bHXbZAUFHN4XYkf18yvHZ9SD3eSQ9Y2N6Cws9U=;
+        b=CrxMJDaRn76jSL5q41y6NFimygos/92J/EgE5e58Vr9yjn43o6RCx5mvsTqZPlkfwqbMVl
+        eeVFO+Z+9McbGMCA==
+Date:   Sun, 27 Sep 2020 21:48:46 +0200
 From:   Thomas Gleixner <tglx@linutronix.de>
 To:     LKML <linux-kernel@vger.kernel.org>
 Cc:     Peter Zijlstra <peterz@infradead.org>,
         Linus Torvalds <torvalds@linuxfoundation.org>,
         Paul McKenney <paulmck@kernel.org>,
         Matthew Wilcox <willy@infradead.org>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Ping-Ke Shih <pkshih@realtek.com>,
-        Kalle Valo <kvalo@codeaurora.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
         Christian Benvenuti <benve@cisco.com>,
         Govindarajulu Varadarajan <_govind@gmx.com>,
         Dave Miller <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>, netdev@vger.kernel.org,
+        "David S. Miller" <davem@davemloft.net>,
         Jonathan Corbet <corbet@lwn.net>,
         Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         linux-doc@vger.kernel.org,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
         Luc Van Oostenryck <luc.vanoostenryck@gmail.com>,
         Jay Cliburn <jcliburn@gmail.com>,
         Chris Snook <chris.snook@gmail.com>,
@@ -66,7 +63,9 @@ Cc:     Peter Zijlstra <peterz@infradead.org>,
         Edward Cree <ecree@solarflare.com>,
         Martin Habets <mhabets@solarflare.com>,
         Jon Mason <jdmason@kudzu.us>, Daniel Drake <dsd@gentoo.org>,
-        Ulrich Kunitz <kune@deine-taler.de>, linux-usb@vger.kernel.org,
+        Ulrich Kunitz <kune@deine-taler.de>,
+        Kalle Valo <kvalo@codeaurora.org>,
+        linux-wireless@vger.kernel.org, linux-usb@vger.kernel.org,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Arend van Spriel <arend.vanspriel@broadcom.com>,
         Franky Lin <franky.lin@broadcom.com>,
@@ -86,262 +85,183 @@ Cc:     Peter Zijlstra <peterz@infradead.org>,
         Ganapathi Bhat <ganapathi.bhat@nxp.com>,
         Xinming Hu <huxinming820@gmail.com>,
         libertas-dev@lists.infradead.org,
-        Pascal Terjan <pterjan@google.com>
-Subject: [patch 35/35] net: rtlwifi: Replace in_interrupt() for context detection
-References: <20200927194846.045411263@linutronix.de>
+        Pascal Terjan <pterjan@google.com>,
+        Ping-Ke Shih <pkshih@realtek.com>
+Subject: [patch 00/35] net: in_interrupt() cleanup and fixes
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-transfer-encoding: 8-bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-
-rtl_lps_enter() and rtl_lps_leave() are using in_interrupt() to detect
-whether it is safe to acquire a mutex or if it is required to defer to a
-workqueue.
-
-The usage of in_interrupt() in drivers is phased out and Linus clearly
-requested that code which changes behaviour depending on context should
-either be seperated or the context be conveyed in an argument passed by the
-caller, which usually knows the context.
-
-in_interrupt() also is only partially correct because it fails to chose the
-correct code path when just preemption or interrupts are disabled.
-
-Add an argument 'may_block' to both functions and adjust the callers to
-pass the context information.
-
-The following call chains were analyzed to be safe to block:
-
-    rtl_watchdog_wq_callback()
-      rlf_lps_leave/enter()
-
-    rtl_op_suspend()
-      rtl_lps_leave()
-
-    rtl_op_bss_info_changed()
-      rtl_lps_leave()
-
-    rtl_op_sw_scan_start()
-      rtl_lps_leave()
-
-The following call chains were analyzed to be unsafe to block:
-
-    _rtl_pci_interrupt()
-      _rtl_pci_rx_interrupt()
-	  rtl_lps_leave()
-
-    _rtl_pci_interrupt()
-      _rtl_pci_rx_interrupt()
-        rtl_is_special_data()
-	  rtl_lps_leave()
-
-    _rtl_pci_interrupt()
-      _rtl_pci_rx_interrupt()
-        rtl_is_special_data()
-	  setup_special_tx()
-	    rtl_lps_leave()
-
-    _rtl_pci_interrupt()
-      _rtl_pci_tx_isr
-        rtl_lps_leave()
-
-      halbtc_leave_lps()
-        rtl_lps_leave()
-
-This leaves four callers of rtl_lps_enter/leave() where the analyzis
-stopped dead in the maze of several nested pointer based callchains and
-lack of rtlwifi hardware to debug this via tracing:
-
-     halbtc_leave_lps(), halbtc_enter_lps(), halbtc_normal_lps(),
-     halbtc_pre_normal_lps()
-
-These four have been cautionally marked to be unable to block which is the
-safe option, but the rtwifi wizards should be able to clarify that.
-
-Signed-off-by: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
-Cc: Ping-Ke Shih <pkshih@realtek.com>
-Cc: Kalle Valo <kvalo@codeaurora.org>
-Cc: "David S. Miller" <davem@davemloft.net>
-Cc: Jakub Kicinski <kuba@kernel.org>
-Cc: linux-wireless@vger.kernel.org
-Cc: netdev@vger.kernel.org
-
----
- drivers/net/wireless/realtek/rtlwifi/base.c                   |    8 +++---
- drivers/net/wireless/realtek/rtlwifi/btcoexist/halbtcoutsrc.c |   12 ++++++----
- drivers/net/wireless/realtek/rtlwifi/core.c                   |    6 ++---
- drivers/net/wireless/realtek/rtlwifi/pci.c                    |    4 +--
- drivers/net/wireless/realtek/rtlwifi/ps.c                     |    8 +++---
- drivers/net/wireless/realtek/rtlwifi/ps.h                     |    4 +--
- 6 files changed, 23 insertions(+), 19 deletions(-)
-
---- a/drivers/net/wireless/realtek/rtlwifi/base.c
-+++ b/drivers/net/wireless/realtek/rtlwifi/base.c
-@@ -1456,7 +1456,7 @@ static void setup_special_tx(struct rtl_
- 	if (rtlpriv->cfg->ops->get_btc_status())
- 		rtlpriv->btcoexist.btc_ops->btc_special_packet_notify(
- 					rtlpriv, type);
--	rtl_lps_leave(hw);
-+	rtl_lps_leave(hw, false);
- 	ppsc->last_delaylps_stamp_jiffies = jiffies;
- }
- 
-@@ -1546,7 +1546,7 @@ u8 rtl_is_special_data(struct ieee80211_
- 
- 		if (is_tx) {
- 			rtlpriv->ra.is_special_data = true;
--			rtl_lps_leave(hw);
-+			rtl_lps_leave(hw, false);
- 			ppsc->last_delaylps_stamp_jiffies = jiffies;
- 
- 			setup_special_tx(rtlpriv, ppsc, PACKET_EAPOL);
-@@ -2147,9 +2147,9 @@ static void rtl_watchdog_wq_callback(str
- 		if (rtlpriv->link_info.num_rx_inperiod +
- 		      rtlpriv->link_info.num_tx_inperiod > 8 ||
- 		    rtlpriv->link_info.num_rx_inperiod > 2)
--			rtl_lps_leave(hw);
-+			rtl_lps_leave(hw, true);
- 		else
--			rtl_lps_enter(hw);
-+			rtl_lps_enter(hw, true);
- 
- label_lps_done:
- 		;
---- a/drivers/net/wireless/realtek/rtlwifi/btcoexist/halbtcoutsrc.c
-+++ b/drivers/net/wireless/realtek/rtlwifi/btcoexist/halbtcoutsrc.c
-@@ -285,7 +285,8 @@ static void halbtc_leave_lps(struct btc_
- 
- 	btcoexist->bt_info.bt_ctrl_lps = true;
- 	btcoexist->bt_info.bt_lps_on = false;
--	rtl_lps_leave(rtlpriv->mac80211.hw);
-+	/* FIXME: Context is unclear. Is it allowed to block? */
-+	rtl_lps_leave(rtlpriv->mac80211.hw, false);
- }
- 
- static void halbtc_enter_lps(struct btc_coexist *btcoexist)
-@@ -306,7 +307,8 @@ static void halbtc_enter_lps(struct btc_
- 
- 	btcoexist->bt_info.bt_ctrl_lps = true;
- 	btcoexist->bt_info.bt_lps_on = true;
--	rtl_lps_enter(rtlpriv->mac80211.hw);
-+	/* FIXME: Context is unclear. Is it allowed to block? */
-+	rtl_lps_enter(rtlpriv->mac80211.hw, false);
- }
- 
- static void halbtc_normal_lps(struct btc_coexist *btcoexist)
-@@ -317,7 +319,8 @@ static void halbtc_normal_lps(struct btc
- 
- 	if (btcoexist->bt_info.bt_ctrl_lps) {
- 		btcoexist->bt_info.bt_lps_on = false;
--		rtl_lps_leave(rtlpriv->mac80211.hw);
-+		/* FIXME: Context is unclear. Is it allowed to block? */
-+		rtl_lps_leave(rtlpriv->mac80211.hw, false);
- 		btcoexist->bt_info.bt_ctrl_lps = false;
- 	}
- }
-@@ -328,7 +331,8 @@ static void halbtc_pre_normal_lps(struct
- 
- 	if (btcoexist->bt_info.bt_ctrl_lps) {
- 		btcoexist->bt_info.bt_lps_on = false;
--		rtl_lps_leave(rtlpriv->mac80211.hw);
-+		/* FIXME: Context is unclear. Is it allowed to block? */
-+		rtl_lps_leave(rtlpriv->mac80211.hw, false);
- 	}
- }
- 
---- a/drivers/net/wireless/realtek/rtlwifi/core.c
-+++ b/drivers/net/wireless/realtek/rtlwifi/core.c
-@@ -544,7 +544,7 @@ static int rtl_op_suspend(struct ieee802
- 	rtlhal->driver_is_goingto_unload = true;
- 	rtlhal->enter_pnp_sleep = true;
- 
--	rtl_lps_leave(hw);
-+	rtl_lps_leave(hw, true);
- 	rtl_op_stop(hw);
- 	device_set_wakeup_enable(wiphy_dev(hw->wiphy), true);
- 	return 0;
-@@ -1151,7 +1151,7 @@ static void rtl_op_bss_info_changed(stru
- 			mstatus = RT_MEDIA_DISCONNECT;
- 
- 			if (mac->link_state == MAC80211_LINKED)
--				rtl_lps_leave(hw);
-+				rtl_lps_leave(hw, true);
- 			if (ppsc->p2p_ps_info.p2p_ps_mode > P2P_PS_NONE)
- 				rtl_p2p_ps_cmd(hw, P2P_PS_DISABLE);
- 			mac->link_state = MAC80211_NOLINK;
-@@ -1448,7 +1448,7 @@ static void rtl_op_sw_scan_start(struct
- 	}
- 
- 	if (mac->link_state == MAC80211_LINKED) {
--		rtl_lps_leave(hw);
-+		rtl_lps_leave(hw, true);
- 		mac->link_state = MAC80211_LINKED_SCANNING;
- 	} else {
- 		rtl_ips_nic_on(hw);
---- a/drivers/net/wireless/realtek/rtlwifi/pci.c
-+++ b/drivers/net/wireless/realtek/rtlwifi/pci.c
-@@ -622,7 +622,7 @@ static void _rtl_pci_tx_isr(struct ieee8
- 	if (((rtlpriv->link_info.num_rx_inperiod +
- 	      rtlpriv->link_info.num_tx_inperiod) > 8) ||
- 	      rtlpriv->link_info.num_rx_inperiod > 2)
--		rtl_lps_leave(hw);
-+		rtl_lps_leave(hw, false);
- }
- 
- static int _rtl_pci_init_one_rxdesc(struct ieee80211_hw *hw,
-@@ -875,7 +875,7 @@ static void _rtl_pci_rx_interrupt(struct
- 		if (((rtlpriv->link_info.num_rx_inperiod +
- 		      rtlpriv->link_info.num_tx_inperiod) > 8) ||
- 		      rtlpriv->link_info.num_rx_inperiod > 2)
--			rtl_lps_leave(hw);
-+			rtl_lps_leave(hw, false);
- 		skb = new_skb;
- no_new:
- 		if (rtlpriv->use_new_trx_flow) {
---- a/drivers/net/wireless/realtek/rtlwifi/ps.c
-+++ b/drivers/net/wireless/realtek/rtlwifi/ps.c
-@@ -653,22 +653,22 @@ void rtl_lps_change_work_callback(struct
- }
- EXPORT_SYMBOL_GPL(rtl_lps_change_work_callback);
- 
--void rtl_lps_enter(struct ieee80211_hw *hw)
-+void rtl_lps_enter(struct ieee80211_hw *hw, bool may_block)
- {
- 	struct rtl_priv *rtlpriv = rtl_priv(hw);
- 
--	if (!in_interrupt())
-+	if (may_block)
- 		return rtl_lps_enter_core(hw);
- 	rtlpriv->enter_ps = true;
- 	schedule_work(&rtlpriv->works.lps_change_work);
- }
- EXPORT_SYMBOL_GPL(rtl_lps_enter);
- 
--void rtl_lps_leave(struct ieee80211_hw *hw)
-+void rtl_lps_leave(struct ieee80211_hw *hw, bool may_block)
- {
- 	struct rtl_priv *rtlpriv = rtl_priv(hw);
- 
--	if (!in_interrupt())
-+	if (may_block)
- 		return rtl_lps_leave_core(hw);
- 	rtlpriv->enter_ps = false;
- 	schedule_work(&rtlpriv->works.lps_change_work);
---- a/drivers/net/wireless/realtek/rtlwifi/ps.h
-+++ b/drivers/net/wireless/realtek/rtlwifi/ps.h
-@@ -11,8 +11,8 @@ bool rtl_ps_disable_nic(struct ieee80211
- void rtl_ips_nic_off(struct ieee80211_hw *hw);
- void rtl_ips_nic_on(struct ieee80211_hw *hw);
- void rtl_ips_nic_off_wq_callback(struct work_struct *work);
--void rtl_lps_enter(struct ieee80211_hw *hw);
--void rtl_lps_leave(struct ieee80211_hw *hw);
-+void rtl_lps_enter(struct ieee80211_hw *hw, bool may_block);
-+void rtl_lps_leave(struct ieee80211_hw *hw, bool may_block);
- 
- void rtl_lps_set_psmode(struct ieee80211_hw *hw, u8 rt_psmode);
- 
-
+Rm9sa3MsCgppbiB0aGUgZGlzY3Vzc2lvbiBhYm91dCBwcmVlbXB0IGNvdW50IGNvbnNpc3RlbmN5
+IGFjY3Jvc3Mga2VybmVsIGNvbmZpZ3VyYXRpb25zOgoKICBodHRwczovL2xvcmUua2VybmVsLm9y
+Zy9yLzIwMjAwOTE0MjA0MjA5LjI1NjI2NjA5M0BsaW51dHJvbml4LmRlLwoKTGludXMgY2xlYXJs
+eSByZXF1ZXN0ZWQgdGhhdCBjb2RlIGluIGRyaXZlcnMgYW5kIGxpYnJhcmllcyB3aGljaCBjaGFu
+Z2VzCmJlaGF2aW91ciBiYXNlZCBvbiBleGVjdXRpb24gY29udGV4dCBzaG91bGQgZWl0aGVyIGJl
+IHNwbGl0IHVwIHNvIHRoYXQKZS5nLiB0YXNrIGNvbnRleHQgaW52b2NhdGlvbnMgYW5kIEJIIGlu
+dm9jYXRpb25zIGhhdmUgZGlmZmVyZW50IGludGVyZmFjZXMKb3IgaWYgdGhhdCdzIG5vdCBwb3Nz
+aWJsZSB0aGUgY29udGV4dCBpbmZvcm1hdGlvbiBoYXMgdG8gYmUgcHJvdmlkZWQgYnkgdGhlCmNh
+bGxlciB3aGljaCBrbm93cyBpbiB3aGljaCBjb250ZXh0IGl0IGlzIGV4ZWN1dGluZy4KClRoaXMg
+aW5jbHVkZXMgY29uZGl0aW9uYWwgbG9ja2luZywgYWxsb2NhdGlvbiBtb2RlIChHRlBfKikgZGVj
+aXNpb25zIGFuZAphdm9pZGFuY2Ugb2YgY29kZSBwYXRocyB3aGljaCBtaWdodCBzbGVlcC4KCklu
+IHRoZSBsb25nIHJ1biwgdXNhZ2Ugb2YgJ3ByZWVtcHRpYmxlLCBpbl8qaXJxIGV0Yy4nIHNob3Vs
+ZCBiZSBiYW5uZWQgZnJvbQpkcml2ZXIgY29kZSBjb21wbGV0ZWx5LgoKT3VyIHRlYW0gc3RhcnRl
+ZCB0byBkaWcgdGhyb3VnaCBkcml2ZXJzIGFuZCB0aGlzIGl0IHRoZSBmaXJzdCBiYXRjaCBvZgpj
+bGVhbnVwcyBpbiBkcml2ZXJzL25ldC8uIEl0J3Mgbm90IHlldCBjb21wbGV0ZSwgc28gZXhwZWN0
+IGZ1cnRoZXIgcGF0Y2hlcwppbiB0aGUgbmV4dCBkYXlzLgoKVGhlIHNlcmllcyBjb250YWluczoK
+CiAgICAtIEEgY291cGxlIG9mIGJ1ZyBmaXhlcwoKICAgIC0gUmVtb3ZhbCBvZiB0aGUgYml0cm90
+dGluZyBDQUlGIFNQSSBkcml2ZXIgd2hpY2ggaGFzIG5ldmVyIGhhZCBhCiAgICAgIG1hdGNoaW5n
+IGRyaXZlciBwcm92aWRpbmcgdGhlIG5lY2Vzc2FyeSBwbGF0Zm9ybSBkZXZpY2Ugc3VwcG9ydC4K
+CiAgICAtIFJlbW92YWwgb2YgV0FSTi9CVUcoaW5faW50ZXJydXB0KCkpIGVuIG1hc3NlIGFzIG1v
+c3Qgb2YgdGhlbSBhcmUKICAgICAgaW5jb21wbGV0ZSBiZWNhdXNlIHRoZXkgd29uJ3QgZGV0ZWN0
+IG90aGVyIG5vbi1wcmVlbXB0aWJsZQogICAgICBjb250ZXh0LiBBbGwgb2YgdGhlIGZ1bmN0aW9u
+cyB3aGljaCBoYXZlIHRoZXNlIFdBUk4vQlVHIGludm9rZSBjb3JlCiAgICAgIGNvZGUgZnVuY3Rp
+b25zIHdoaWNoIGNhbiBzbGVlcC4gVGhlc2UgaGF2ZSBwbGVudHkgb2YgY2hlY2tzIHRvIGNhdGNo
+CiAgICAgIF9hbGxfIGludmFsaWQgY29udGV4dHMuIFNvIGl0J3MgcG9pbnRsZXNzIHRvIGhhdmUg
+aW5jb21wbGV0ZSBXQVJOL0JVRwogICAgICBpbiB0aGUgZHJpdmVycy4KCiAgICAgIElmIGEgZHJp
+dmVyIHdhbnRzIHRvIGhhdmUgc3VjaCBhIGNoZWNrIGZvciBwYXJhbm9pYSByZWFzb25zLCB0aGVu
+CiAgICAgIGUuZy4gbG9ja2RlcF9hc3NlcnRfcHJlZW10aW9uX2VuYWJsZWQoKSBpcyB0aGUgcmln
+aHQgbWVjaGFuaXNtIHRvCiAgICAgIGNob3NlIGJlY2F1c2UgbG9ja2RlcCBndWFyYW50ZWVzIHRv
+IGNhdGNoIGFsbCBpbnZhbGlkIGNvbnRleHRzCiAgICAgIGluZGVwZW5kZW50IG9mIGtlcm5lbCBj
+b25maWd1cmF0aW9uIHdoaWxlIGUuZy4gcHJlZW1wdGlibGUoKSBkb2VzCiAgICAgIG5vdC4KCiAg
+ICAtIENvbnZlcnNpb24gb2YgaW5faW50ZXJydXB0KCkgY2hlY2tzIHRvIHVzZSBlaXRoZXIgZGlm
+ZmVyZW50IGZ1bmN0aW9ucwogICAgICBvciB0byBoYW5kIHRoZSBjb250ZXh0IGluZm9ybWF0aW9u
+IGluIGZyb20gdGhlIGNhbGxlci4KCiAgICAtIEZvciBzb21lIGRyaXZlcnMgaGFuZGluZyB0aGUg
+Y29udGV4dCBpbnRvIGZ1bmN0aW9ucyB3aGljaCBkZWNpZGVkCiAgICAgIGJldHdlZW4gbmV0aWZf
+cngoKSBhbmQgbmV0aWZfcnhfbmkoKSB0dXJuZWQgb3V0IHRvIGJlIGltcG9zc2libGUgZHVlCiAg
+ICAgIHRvIGxhY2sgb2YgZHJpdmVyIGtub3dsZWRnZSBhbmQgY29udm9sdXRlZCBjb2RlIHBhdGhl
+cyB3aXRoIG11bHRpcGxlCiAgICAgIGluZGlyZWN0aW9ucy4gRm9yIHRob3NlIGEgY29yZSBjb2Rl
+IGZ1bmN0aW9uIG5ldGlmX3J4X2FueV9jb250ZXh0KCkKICAgICAgaXMgcHJvdmlkZWQgd2hpY2gg
+Y29udGFpbnMgYW4gaW5faW50ZXJydXB0KCkgY2hlY2sgYXMgYSBzdG9wCiAgICAgIGdhcC4gVGhp
+cyBhbGxvd3MgdG8gbWFrZSBwcm9nZXNzIG9uIHRoZSBkcml2ZXIgc2lkZSBjbGVhbnVwIGFuZAog
+ICAgICB0aGUgZnVuY3Rpb24gc2hvdWxkIGdvIGF3YXkgb25jZSB0aGUgZHJpdmVyIHdpemFyZHMg
+aGF2ZSBmaXhlZCBpdAogICAgICB1cCBwcm9wZXIuCgogICAgLSBTaW1wbGlmY2F0aW9uIGFuZCBj
+bGVhbnVwcyBpbiB2YXJpb3VzIHBsYWNlcyB3aGVyZSBjb2RlIHBvaW50bGVzc2x5CiAgICAgIGNv
+bnRhaW5zIGluX2ludGVycnVwdCgpIGNvbmRpdGlvbmFscyB3aGljaCBhcmUgbW9zdGx5IGxlZnRv
+dmVycyBmcm9tCiAgICAgIGNhbGxpbmcgY29udmVudGlvbnMgaW4gb2xkZXIga2VybmVscyBhbmQg
+aGF2ZSBuZXZlciBiZWVuIGNsZWFuZWQgdXAuCgogICAgICBBbG9uZyB3aXRoIHJlbW92aW5nIGlm
+IGZyb20gdGhlIGhvcnJpYmxlIERCR19GT08oKSBtYWNybyBtZXNzIHdoaWNoCiAgICAgIHByb2Jh
+Ymx5IHNob3VsZCBiZSByZW1vdmVkIGNvbXBsZXRlbHkgYXMgdGhlIGtlcm5lbCB0b2RheSBwcm92
+aWRlcwogICAgICB3YXkgbW9yZSBzZW5zaWJsZSBtZWNoYW5pc21zIHRvIGRvIGZ1bmN0aW9uIHRy
+YWNpbmcgYW5kIHNpbWlsYXIuCgogICAgLSBBIGZldyBvdGhlciBjbGVhbnVwcyB3aGljaCB3ZXJl
+IG9idmlvdXMgd2hlbiBjaGFzaW5nIHRoZQogICAgICBpbl9pbnRlcnJ1cHQoKSB1c2FnZS4KClRo
+ZSBwaWxlIGlzIGFsc28gYXZhaWxhYmxlIGZyb206CgogICAgZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcv
+cHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L3RnbHgvZGV2ZWwuZ2l0IHNvZnRpcnEKClRoZSBkaWZm
+c3RhdCBzdW1tYXJ5IGlzOgoKIDg2IGZpbGVzIGNoYW5nZWQsIDMwMCBpbnNlcnRpb25zKCspLCAy
+MjMzIGRlbGV0aW9ucygtKQoKd2hpY2ggaXMgYmlhc2VkIGJ5IHRoZSBDQUlGIFNQSSByZW1vdmFs
+LiBXaXRob3V0IHRoYXQgaXQgaXM6CgogNzkgZmlsZXMgY2hhbmdlZCwgMzAwIGluc2VydGlvbnMo
+KyksIDY5NyBkZWxldGlvbnMoLSkKClRoYW5rcywKCgl0Z2x4Ci0tLQogRG9jdW1lbnRhdGlvbi9u
+ZXR3b3JraW5nL2NhaWYvc3BpX3BvcnRpbmcucnN0ICAgICAgICAgICAgICAgICAgIHwgIDIyOSAt
+LQogYi9Eb2N1bWVudGF0aW9uL25ldHdvcmtpbmcvY2FpZi9pbmRleC5yc3QgICAgICAgICAgICAg
+ICAgICAgICAgIHwgICAgMSAKIGIvZHJpdmVycy9uZXQvY2FpZi9LY29uZmlnICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMTkgCiBiL2RyaXZlcnMvbmV0L2NhaWYvTWFr
+ZWZpbGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICA0IAogYi9kcml2
+ZXJzL25ldC9jYWlmL2NhaWZfaHNpLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHwgICAxOSAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvYW1kL3N1bjNsYW5jZS5jICAgICAgICAg
+ICAgICAgICAgICAgICAgICB8ICAgMTEgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L2F0aGVyb3Mv
+YXRsMWMvYXRsMWNfbWFpbi5jICAgICAgICAgICAgICAgfCAgICAxIAogYi9kcml2ZXJzL25ldC9l
+dGhlcm5ldC9hdGhlcm9zL2F0bDFlL2F0bDFlX21haW4uYyAgICAgICAgICAgICAgIHwgICAgMiAK
+IGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvYXRoZXJvcy9hdGx4L2F0bDIuYyAgICAgICAgICAgICAg
+ICAgICAgICB8ICAgIDEgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L2NoZWxzaW8vY3hnYjMvYWRh
+cHRlci5oICAgICAgICAgICAgICAgICAgfCAgICAxIAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9j
+aGVsc2lvL2N4Z2IzL2N4Z2IzX21haW4uYyAgICAgICAgICAgICAgIHwgICAgMiAKIGIvZHJpdmVy
+cy9uZXQvZXRoZXJuZXQvY2hlbHNpby9jeGdiMy9zZ2UuYyAgICAgICAgICAgICAgICAgICAgICB8
+ICAgNDQgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L2NoZWxzaW8vY3hnYjQvc2dlLmMgICAgICAg
+ICAgICAgICAgICAgICAgfCAgICAzIAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9jaXNjby9lbmlj
+L2VuaWMuaCAgICAgICAgICAgICAgICAgICAgICAgIHwgICAgMSAKIGIvZHJpdmVycy9uZXQvZXRo
+ZXJuZXQvY2lzY28vZW5pYy9lbmljX2FwaS5jICAgICAgICAgICAgICAgICAgICB8ICAgIDYgCiBi
+L2RyaXZlcnMvbmV0L2V0aGVybmV0L2Npc2NvL2VuaWMvZW5pY19tYWluLmMgICAgICAgICAgICAg
+ICAgICAgfCAgIDI3IAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9mcmVlc2NhbGUvZmVjX21wYzUy
+eHguYyAgICAgICAgICAgICAgICAgIHwgICAxMCAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvaW50
+ZWwvZTEwMC5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDQgCiBiL2RyaXZlcnMv
+bmV0L2V0aGVybmV0L2ludGVsL2UxMDAwL2UxMDAwX21haW4uYyAgICAgICAgICAgICAgICAgfCAg
+ICAxIAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9pbnRlbC9mbTEway9mbTEwa19wY2kuYyAgICAg
+ICAgICAgICAgICAgIHwgICAgMiAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvaW50ZWwvaTQwZS9p
+NDBlX21haW4uYyAgICAgICAgICAgICAgICAgICB8ICAgIDQgCiBiL2RyaXZlcnMvbmV0L2V0aGVy
+bmV0L2ludGVsL2ljZS9pY2VfbWFpbi5jICAgICAgICAgICAgICAgICAgICAgfCAgICAxIAogYi9k
+cml2ZXJzL25ldC9ldGhlcm5ldC9pbnRlbC9pZ2IvaWdiX21haW4uYyAgICAgICAgICAgICAgICAg
+ICAgIHwgICAgMSAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvaW50ZWwvaWdjL2lnY19tYWluLmMg
+ICAgICAgICAgICAgICAgICAgICB8ICAgIDEgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L2ludGVs
+L2l4Z2JlL2l4Z2JlX21haW4uYyAgICAgICAgICAgICAgICAgfCAgICAxIAogYi9kcml2ZXJzL25l
+dC9ldGhlcm5ldC9pbnRlbC9peGdiZXZmL2l4Z2JldmZfbWFpbi5jICAgICAgICAgICAgIHwgICAg
+MiAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvbmF0c2VtaS9zb25pYy5jICAgICAgICAgICAgICAg
+ICAgICAgICAgICB8ICAgMjQgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L25hdHNlbWkvc29uaWMu
+aCAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAyIAogYi9kcml2ZXJzL25ldC9ldGhlcm5l
+dC9uZXRlcmlvbi92eGdlL3Z4Z2UtY29uZmlnLmMgICAgICAgICAgICAgIHwgICAgOSAKIGIvZHJp
+dmVycy9uZXQvZXRoZXJuZXQvbmV0ZXJpb24vdnhnZS92eGdlLWNvbmZpZy5oICAgICAgICAgICAg
+ICB8ICAgIDcgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L3BlbnNhbmRvL2lvbmljL2lvbmljX2Rl
+di5jICAgICAgICAgICAgICAgfCAgICAyIAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9wZW5zYW5k
+by9pb25pYy9pb25pY19saWYuYyAgICAgICAgICAgICAgIHwgICA0MyAKIGIvZHJpdmVycy9uZXQv
+ZXRoZXJuZXQvcGVuc2FuZG8vaW9uaWMvaW9uaWNfbGlmLmggICAgICAgICAgICAgICB8ICAgIDIg
+CiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L3BlbnNhbmRvL2lvbmljL2lvbmljX21haW4uYyAgICAg
+ICAgICAgICAgfCAgICA0IAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9zZmMvZWYxMC5jICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAxOCAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQv
+c2ZjL2VmMTAwX25pYy5jICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDMgCiBiL2RyaXZl
+cnMvbmV0L2V0aGVybmV0L3NmYy9lZnhfY29tbW9uLmMgICAgICAgICAgICAgICAgICAgICAgICAg
+fCAgICA2IAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9zZmMvZXRodG9vbF9jb21tb24uYyAgICAg
+ICAgICAgICAgICAgICAgIHwgICAgMiAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvc2ZjL25ldF9k
+cml2ZXIuaCAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDMgCiBiL2RyaXZlcnMvbmV0L2V0
+aGVybmV0L3NmYy9zaWVuYS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAzIAog
+Yi9kcml2ZXJzL25ldC9ldGhlcm5ldC9zdW4vc3VuYm1hYy5jICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgIHwgICAxOCAKIGIvZHJpdmVycy9uZXQvcGh5L21kaW9fYnVzLmMgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICB8ICAgMTUgCiBiL2RyaXZlcnMvbmV0L3VzYi9rYXdldGgu
+YyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjYxIC0tCiBiL2RyaXZl
+cnMvbmV0L3VzYi9uZXQxMDgwLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+fCAgICAxIAogYi9kcml2ZXJzL25ldC93YW4vbG1jL2xtY19kZWJ1Zy5jICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICAgIHwgICAxOCAKIGIvZHJpdmVycy9uZXQvd2FuL2xtYy9sbWNfZGVidWcu
+aCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDEgCiBiL2RyaXZlcnMvbmV0L3dh
+bi9sbWMvbG1jX21haW4uYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTA1IC0K
+IGIvZHJpdmVycy9uZXQvd2FuL2xtYy9sbWNfbWVkaWEuYyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICB8ICAgIDQgCiBiL2RyaXZlcnMvbmV0L3dhbi9sbWMvbG1jX3Byb3RvLmMgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDE2IAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9i
+cm9hZGNvbS9icmNtODAyMTEvYnJjbWZtYWMvYmNtc2RoLmMgICAgIHwgICAgNCAKIGIvZHJpdmVy
+cy9uZXQvd2lyZWxlc3MvYnJvYWRjb20vYnJjbTgwMjExL2JyY21mbWFjL2J1cy5oICAgICAgICB8
+ICAgIDUgCiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL2Jyb2FkY29tL2JyY204MDIxMS9icmNtZm1h
+Yy9jb3JlLmMgICAgICAgfCAgIDIwIAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9icm9hZGNvbS9i
+cmNtODAyMTEvYnJjbWZtYWMvZndlaC5jICAgICAgIHwgICAgOCAKIGIvZHJpdmVycy9uZXQvd2ly
+ZWxlc3MvYnJvYWRjb20vYnJjbTgwMjExL2JyY21mbWFjL2Z3ZWguaCAgICAgICB8ICAgIDcgCiBi
+L2RyaXZlcnMvbmV0L3dpcmVsZXNzL2Jyb2FkY29tL2JyY204MDIxMS9icmNtZm1hYy9tc2didWYu
+YyAgICAgfCAgICAyIAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9icm9hZGNvbS9icmNtODAyMTEv
+YnJjbWZtYWMvc2Rpby5jICAgICAgIHwgICAxMiAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvYnJv
+YWRjb20vYnJjbTgwMjExL2JyY21mbWFjL3NkaW8uaCAgICAgICB8ICAgIDIgCiBiL2RyaXZlcnMv
+bmV0L3dpcmVsZXNzL2Jyb2FkY29tL2JyY204MDIxMS9icmNtZm1hYy91c2IuYyAgICAgICAgfCAg
+ICAyIAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9pbnRlbC9pcHcyeDAwL2lwdzIxMDAuYyAgICAg
+ICAgICAgICAgICAgIHwgICAgMyAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvaW50ZWwvaXB3Mngw
+MC9pcHcyMjAwLmggICAgICAgICAgICAgICAgICB8ICAgIDYgCiBiL2RyaXZlcnMvbmV0L3dpcmVs
+ZXNzL2ludGVsL2lwdzJ4MDAvbGliaXB3LmggICAgICAgICAgICAgICAgICAgfCAgICAzIAogYi9k
+cml2ZXJzL25ldC93aXJlbGVzcy9pbnRlbC9pd2xlZ2FjeS9jb21tb24uaCAgICAgICAgICAgICAg
+ICAgIHwgICAgNCAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvaW50ZWwvaXdsd2lmaS9pd2wtZGVi
+dWcuYyAgICAgICAgICAgICAgICB8ICAgIDUgCiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL2ludGVs
+L2l3bHdpZmkvaXdsLWRldnRyYWNlLW1zZy5oICAgICAgICAgfCAgICA2IAogYi9kcml2ZXJzL25l
+dC93aXJlbGVzcy9pbnRlcnNpbC9ob3N0YXAvaG9zdGFwX2h3LmMgICAgICAgICAgICAgIHwgICAx
+MiAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvbWFydmVsbC9saWJlcnRhcy9kZWZzLmggICAgICAg
+ICAgICAgICAgICB8ICAgIDMgCiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL21hcnZlbGwvbGliZXJ0
+YXMvcnguYyAgICAgICAgICAgICAgICAgICAgfCAgIDExIAogYi9kcml2ZXJzL25ldC93aXJlbGVz
+cy9tYXJ2ZWxsL2xpYmVydGFzX3RmL2RlYl9kZWZzLmggICAgICAgICAgIHwgICAgMyAKIGIvZHJp
+dmVycy9uZXQvd2lyZWxlc3MvbWFydmVsbC9td2lmaWV4L3VhcF90eHJ4LmMgICAgICAgICAgICAg
+ICB8ICAgIDYgCiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL21hcnZlbGwvbXdpZmlleC91dGlsLmMg
+ICAgICAgICAgICAgICAgICAgfCAgICA2IAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9yZWFsdGVr
+L3J0bHdpZmkvYmFzZS5jICAgICAgICAgICAgICAgICAgIHwgICA0NyAKIGIvZHJpdmVycy9uZXQv
+d2lyZWxlc3MvcmVhbHRlay9ydGx3aWZpL2Jhc2UuaCAgICAgICAgICAgICAgICAgICB8ICAgIDMg
+CiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL3JlYWx0ZWsvcnRsd2lmaS9idGNvZXhpc3QvaGFsYnRj
+b3V0c3JjLmMgfCAgIDEyIAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9yZWFsdGVrL3J0bHdpZmkv
+Y29yZS5jICAgICAgICAgICAgICAgICAgIHwgICAgNiAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3Mv
+cmVhbHRlay9ydGx3aWZpL2RlYnVnLmMgICAgICAgICAgICAgICAgICB8ICAgMjAgCiBiL2RyaXZl
+cnMvbmV0L3dpcmVsZXNzL3JlYWx0ZWsvcnRsd2lmaS9kZWJ1Zy5oICAgICAgICAgICAgICAgICAg
+fCAgICA2IAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9yZWFsdGVrL3J0bHdpZmkvcGNpLmMgICAg
+ICAgICAgICAgICAgICAgIHwgICAgNCAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvcmVhbHRlay9y
+dGx3aWZpL3BzLmMgICAgICAgICAgICAgICAgICAgICB8ICAgMjcgCiBiL2RyaXZlcnMvbmV0L3dp
+cmVsZXNzL3JlYWx0ZWsvcnRsd2lmaS9wcy5oICAgICAgICAgICAgICAgICAgICAgfCAgIDEwIAog
+Yi9kcml2ZXJzL25ldC93aXJlbGVzcy9yZWFsdGVrL3J0bHdpZmkvd2lmaS5oICAgICAgICAgICAg
+ICAgICAgIHwgICAgMyAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvenlkYXMvemQxMjExcncvemRf
+dXNiLmMgICAgICAgICAgICAgICAgICB8ICAgIDEgCiBiL2luY2x1ZGUvbGludXgvbmV0ZGV2aWNl
+LmggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAxIAogYi9uZXQvY29y
+ZS9kZXYuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwg
+ICAxNSAKIGRyaXZlcnMvbmV0L2NhaWYvY2FpZl9zcGkuYyAgICAgICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgICB8ICA4NzQgLS0tLS0tLS0tLQogZHJpdmVycy9uZXQvY2FpZi9jYWlmX3Nw
+aV9zbGF2ZS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDI1NCAtLQogaW5jbHVk
+ZS9uZXQvY2FpZi9jYWlmX3NwaS5oICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+IHwgIDE1NSAtCiA4NiBmaWxlcyBjaGFuZ2VkLCAzMDAgaW5zZXJ0aW9ucygrKSwgMjIzMyBkZWxl
+dGlvbnMoLSkK
