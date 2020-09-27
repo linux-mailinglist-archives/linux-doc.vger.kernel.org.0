@@ -2,36 +2,39 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5CCDB27A3D2
-	for <lists+linux-doc@lfdr.de>; Sun, 27 Sep 2020 22:03:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BA69327A3AF
+	for <lists+linux-doc@lfdr.de>; Sun, 27 Sep 2020 22:03:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726867AbgI0UBw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 27 Sep 2020 16:01:52 -0400
-Received: from Galois.linutronix.de ([193.142.43.55]:40436 "EHLO
-        galois.linutronix.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726478AbgI0T5J (ORCPT
+        id S1726896AbgI0T5R (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 27 Sep 2020 15:57:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38528 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726865AbgI0T5J (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Sun, 27 Sep 2020 15:57:09 -0400
-Message-Id: <20200927194846.045411263@linutronix.de>
+Received: from galois.linutronix.de (Galois.linutronix.de [IPv6:2a0a:51c0:0:12e:550::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DF8F5C0613CE
+        for <linux-doc@vger.kernel.org>; Sun, 27 Sep 2020 12:57:08 -0700 (PDT)
+Message-Id: <20200927194919.806110712@linutronix.de>
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1601236625;
+        s=2020; t=1601236626;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding;
-        bh=v/905bHXbZAUFHN4XYkf18yvHZ9SD3eSQ9Y2N6Cws9U=;
-        b=kywt+2P1PWh3JALwVEbtvQDEUxZYOsU9VBW+PvkYCaatdgH3w6L9VhcXF5dZ9mOT4GFnz+
-        jVydaPXw40Rl4X7GnIGUhA3c3KFHrnwh1WpnqkvdhlsPjuEZx5iNFUJ0BhtXWg+XfyYp2u
-        tkibxf+wwx51bAUZy+PgdJ9ZV+Sfp11TDmP5FfHMLmGCvu8YJgOLMaU2wWpctMRzCPDYE8
-        hBDQQXJ70hpNwCpxUoG/YxCvIs/eXtQj6hE3aOYtAxn/yVQUvcWe96aGaDrPiupTiMPsyh
-        ADOEsaJJ4fSwakD/QjEUlOHqgJQEQQ8rGZhTLPw6O5nTPPgHBXr/HEWsSRJZ7A==
+         content-transfer-encoding:content-transfer-encoding:  references:references;
+        bh=JTTK/iwFBS/lwuXuEFjiZEf5zOcCMhuI2Qrc8qysdmE=;
+        b=dTurmhNkhlSDVW3y/bXCSbXhHjsX2Znsv8S2xOsxpKNZbIjums2OPbSjNFy+wp9wEMCK4s
+        /WH5BpNwRyonykNemmxlL2nRMiB/2svlByU2u7AHCjS2a2+qJ2UNuq5mueQQ4SJnLlTckV
+        wXCVpxlhAo83mcTjFfGklccsLaH44hYlSYtUdPoUYszPVR0nlJVjmXqa9+uO/9CB7diIjf
+        +mypTgdgZ7FEb9iPN7U99vluG0HbDCK2ZeKrpDz1esRYusXCAbr0JuyodrwactGjYDI6RN
+        BX0JX8PLu5togBKAznx7pdnauDK5ZEbqxOJRhJyJCYYEJwcIU7JMzEqA8SkOXw==
 DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1601236625;
+        s=2020e; t=1601236626;
         h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
          to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding;
-        bh=v/905bHXbZAUFHN4XYkf18yvHZ9SD3eSQ9Y2N6Cws9U=;
-        b=CrxMJDaRn76jSL5q41y6NFimygos/92J/EgE5e58Vr9yjn43o6RCx5mvsTqZPlkfwqbMVl
-        eeVFO+Z+9McbGMCA==
-Date:   Sun, 27 Sep 2020 21:48:46 +0200
+         content-transfer-encoding:content-transfer-encoding:  references:references;
+        bh=JTTK/iwFBS/lwuXuEFjiZEf5zOcCMhuI2Qrc8qysdmE=;
+        b=33r9PiCBgAGIgPr/Gjw7tySmuVUoiduugzeHovAIDOO2BuhcexNnPA2DJQe3tBNIy3Suvf
+        y+NWnP2mXGCzRUBQ==
+Date:   Sun, 27 Sep 2020 21:48:47 +0200
 From:   Thomas Gleixner <tglx@linutronix.de>
 To:     LKML <linux-kernel@vger.kernel.org>
 Cc:     Peter Zijlstra <peterz@infradead.org>,
@@ -87,181 +90,157 @@ Cc:     Peter Zijlstra <peterz@infradead.org>,
         libertas-dev@lists.infradead.org,
         Pascal Terjan <pterjan@google.com>,
         Ping-Ke Shih <pkshih@realtek.com>
-Subject: [patch 00/35] net: in_interrupt() cleanup and fixes
+Subject: [patch 01/35] net: enic: Cure the enic api locking trainwreck
+References: <20200927194846.045411263@linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset=UTF-8
+Content-transfer-encoding: 8-bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Rm9sa3MsCgppbiB0aGUgZGlzY3Vzc2lvbiBhYm91dCBwcmVlbXB0IGNvdW50IGNvbnNpc3RlbmN5
-IGFjY3Jvc3Mga2VybmVsIGNvbmZpZ3VyYXRpb25zOgoKICBodHRwczovL2xvcmUua2VybmVsLm9y
-Zy9yLzIwMjAwOTE0MjA0MjA5LjI1NjI2NjA5M0BsaW51dHJvbml4LmRlLwoKTGludXMgY2xlYXJs
-eSByZXF1ZXN0ZWQgdGhhdCBjb2RlIGluIGRyaXZlcnMgYW5kIGxpYnJhcmllcyB3aGljaCBjaGFu
-Z2VzCmJlaGF2aW91ciBiYXNlZCBvbiBleGVjdXRpb24gY29udGV4dCBzaG91bGQgZWl0aGVyIGJl
-IHNwbGl0IHVwIHNvIHRoYXQKZS5nLiB0YXNrIGNvbnRleHQgaW52b2NhdGlvbnMgYW5kIEJIIGlu
-dm9jYXRpb25zIGhhdmUgZGlmZmVyZW50IGludGVyZmFjZXMKb3IgaWYgdGhhdCdzIG5vdCBwb3Nz
-aWJsZSB0aGUgY29udGV4dCBpbmZvcm1hdGlvbiBoYXMgdG8gYmUgcHJvdmlkZWQgYnkgdGhlCmNh
-bGxlciB3aGljaCBrbm93cyBpbiB3aGljaCBjb250ZXh0IGl0IGlzIGV4ZWN1dGluZy4KClRoaXMg
-aW5jbHVkZXMgY29uZGl0aW9uYWwgbG9ja2luZywgYWxsb2NhdGlvbiBtb2RlIChHRlBfKikgZGVj
-aXNpb25zIGFuZAphdm9pZGFuY2Ugb2YgY29kZSBwYXRocyB3aGljaCBtaWdodCBzbGVlcC4KCklu
-IHRoZSBsb25nIHJ1biwgdXNhZ2Ugb2YgJ3ByZWVtcHRpYmxlLCBpbl8qaXJxIGV0Yy4nIHNob3Vs
-ZCBiZSBiYW5uZWQgZnJvbQpkcml2ZXIgY29kZSBjb21wbGV0ZWx5LgoKT3VyIHRlYW0gc3RhcnRl
-ZCB0byBkaWcgdGhyb3VnaCBkcml2ZXJzIGFuZCB0aGlzIGl0IHRoZSBmaXJzdCBiYXRjaCBvZgpj
-bGVhbnVwcyBpbiBkcml2ZXJzL25ldC8uIEl0J3Mgbm90IHlldCBjb21wbGV0ZSwgc28gZXhwZWN0
-IGZ1cnRoZXIgcGF0Y2hlcwppbiB0aGUgbmV4dCBkYXlzLgoKVGhlIHNlcmllcyBjb250YWluczoK
-CiAgICAtIEEgY291cGxlIG9mIGJ1ZyBmaXhlcwoKICAgIC0gUmVtb3ZhbCBvZiB0aGUgYml0cm90
-dGluZyBDQUlGIFNQSSBkcml2ZXIgd2hpY2ggaGFzIG5ldmVyIGhhZCBhCiAgICAgIG1hdGNoaW5n
-IGRyaXZlciBwcm92aWRpbmcgdGhlIG5lY2Vzc2FyeSBwbGF0Zm9ybSBkZXZpY2Ugc3VwcG9ydC4K
-CiAgICAtIFJlbW92YWwgb2YgV0FSTi9CVUcoaW5faW50ZXJydXB0KCkpIGVuIG1hc3NlIGFzIG1v
-c3Qgb2YgdGhlbSBhcmUKICAgICAgaW5jb21wbGV0ZSBiZWNhdXNlIHRoZXkgd29uJ3QgZGV0ZWN0
-IG90aGVyIG5vbi1wcmVlbXB0aWJsZQogICAgICBjb250ZXh0LiBBbGwgb2YgdGhlIGZ1bmN0aW9u
-cyB3aGljaCBoYXZlIHRoZXNlIFdBUk4vQlVHIGludm9rZSBjb3JlCiAgICAgIGNvZGUgZnVuY3Rp
-b25zIHdoaWNoIGNhbiBzbGVlcC4gVGhlc2UgaGF2ZSBwbGVudHkgb2YgY2hlY2tzIHRvIGNhdGNo
-CiAgICAgIF9hbGxfIGludmFsaWQgY29udGV4dHMuIFNvIGl0J3MgcG9pbnRsZXNzIHRvIGhhdmUg
-aW5jb21wbGV0ZSBXQVJOL0JVRwogICAgICBpbiB0aGUgZHJpdmVycy4KCiAgICAgIElmIGEgZHJp
-dmVyIHdhbnRzIHRvIGhhdmUgc3VjaCBhIGNoZWNrIGZvciBwYXJhbm9pYSByZWFzb25zLCB0aGVu
-CiAgICAgIGUuZy4gbG9ja2RlcF9hc3NlcnRfcHJlZW10aW9uX2VuYWJsZWQoKSBpcyB0aGUgcmln
-aHQgbWVjaGFuaXNtIHRvCiAgICAgIGNob3NlIGJlY2F1c2UgbG9ja2RlcCBndWFyYW50ZWVzIHRv
-IGNhdGNoIGFsbCBpbnZhbGlkIGNvbnRleHRzCiAgICAgIGluZGVwZW5kZW50IG9mIGtlcm5lbCBj
-b25maWd1cmF0aW9uIHdoaWxlIGUuZy4gcHJlZW1wdGlibGUoKSBkb2VzCiAgICAgIG5vdC4KCiAg
-ICAtIENvbnZlcnNpb24gb2YgaW5faW50ZXJydXB0KCkgY2hlY2tzIHRvIHVzZSBlaXRoZXIgZGlm
-ZmVyZW50IGZ1bmN0aW9ucwogICAgICBvciB0byBoYW5kIHRoZSBjb250ZXh0IGluZm9ybWF0aW9u
-IGluIGZyb20gdGhlIGNhbGxlci4KCiAgICAtIEZvciBzb21lIGRyaXZlcnMgaGFuZGluZyB0aGUg
-Y29udGV4dCBpbnRvIGZ1bmN0aW9ucyB3aGljaCBkZWNpZGVkCiAgICAgIGJldHdlZW4gbmV0aWZf
-cngoKSBhbmQgbmV0aWZfcnhfbmkoKSB0dXJuZWQgb3V0IHRvIGJlIGltcG9zc2libGUgZHVlCiAg
-ICAgIHRvIGxhY2sgb2YgZHJpdmVyIGtub3dsZWRnZSBhbmQgY29udm9sdXRlZCBjb2RlIHBhdGhl
-cyB3aXRoIG11bHRpcGxlCiAgICAgIGluZGlyZWN0aW9ucy4gRm9yIHRob3NlIGEgY29yZSBjb2Rl
-IGZ1bmN0aW9uIG5ldGlmX3J4X2FueV9jb250ZXh0KCkKICAgICAgaXMgcHJvdmlkZWQgd2hpY2gg
-Y29udGFpbnMgYW4gaW5faW50ZXJydXB0KCkgY2hlY2sgYXMgYSBzdG9wCiAgICAgIGdhcC4gVGhp
-cyBhbGxvd3MgdG8gbWFrZSBwcm9nZXNzIG9uIHRoZSBkcml2ZXIgc2lkZSBjbGVhbnVwIGFuZAog
-ICAgICB0aGUgZnVuY3Rpb24gc2hvdWxkIGdvIGF3YXkgb25jZSB0aGUgZHJpdmVyIHdpemFyZHMg
-aGF2ZSBmaXhlZCBpdAogICAgICB1cCBwcm9wZXIuCgogICAgLSBTaW1wbGlmY2F0aW9uIGFuZCBj
-bGVhbnVwcyBpbiB2YXJpb3VzIHBsYWNlcyB3aGVyZSBjb2RlIHBvaW50bGVzc2x5CiAgICAgIGNv
-bnRhaW5zIGluX2ludGVycnVwdCgpIGNvbmRpdGlvbmFscyB3aGljaCBhcmUgbW9zdGx5IGxlZnRv
-dmVycyBmcm9tCiAgICAgIGNhbGxpbmcgY29udmVudGlvbnMgaW4gb2xkZXIga2VybmVscyBhbmQg
-aGF2ZSBuZXZlciBiZWVuIGNsZWFuZWQgdXAuCgogICAgICBBbG9uZyB3aXRoIHJlbW92aW5nIGlm
-IGZyb20gdGhlIGhvcnJpYmxlIERCR19GT08oKSBtYWNybyBtZXNzIHdoaWNoCiAgICAgIHByb2Jh
-Ymx5IHNob3VsZCBiZSByZW1vdmVkIGNvbXBsZXRlbHkgYXMgdGhlIGtlcm5lbCB0b2RheSBwcm92
-aWRlcwogICAgICB3YXkgbW9yZSBzZW5zaWJsZSBtZWNoYW5pc21zIHRvIGRvIGZ1bmN0aW9uIHRy
-YWNpbmcgYW5kIHNpbWlsYXIuCgogICAgLSBBIGZldyBvdGhlciBjbGVhbnVwcyB3aGljaCB3ZXJl
-IG9idmlvdXMgd2hlbiBjaGFzaW5nIHRoZQogICAgICBpbl9pbnRlcnJ1cHQoKSB1c2FnZS4KClRo
-ZSBwaWxlIGlzIGFsc28gYXZhaWxhYmxlIGZyb206CgogICAgZ2l0Oi8vZ2l0Lmtlcm5lbC5vcmcv
-cHViL3NjbS9saW51eC9rZXJuZWwvZ2l0L3RnbHgvZGV2ZWwuZ2l0IHNvZnRpcnEKClRoZSBkaWZm
-c3RhdCBzdW1tYXJ5IGlzOgoKIDg2IGZpbGVzIGNoYW5nZWQsIDMwMCBpbnNlcnRpb25zKCspLCAy
-MjMzIGRlbGV0aW9ucygtKQoKd2hpY2ggaXMgYmlhc2VkIGJ5IHRoZSBDQUlGIFNQSSByZW1vdmFs
-LiBXaXRob3V0IHRoYXQgaXQgaXM6CgogNzkgZmlsZXMgY2hhbmdlZCwgMzAwIGluc2VydGlvbnMo
-KyksIDY5NyBkZWxldGlvbnMoLSkKClRoYW5rcywKCgl0Z2x4Ci0tLQogRG9jdW1lbnRhdGlvbi9u
-ZXR3b3JraW5nL2NhaWYvc3BpX3BvcnRpbmcucnN0ICAgICAgICAgICAgICAgICAgIHwgIDIyOSAt
-LQogYi9Eb2N1bWVudGF0aW9uL25ldHdvcmtpbmcvY2FpZi9pbmRleC5yc3QgICAgICAgICAgICAg
-ICAgICAgICAgIHwgICAgMSAKIGIvZHJpdmVycy9uZXQvY2FpZi9LY29uZmlnICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgMTkgCiBiL2RyaXZlcnMvbmV0L2NhaWYvTWFr
-ZWZpbGUgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICA0IAogYi9kcml2
-ZXJzL25ldC9jYWlmL2NhaWZfaHNpLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHwgICAxOSAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvYW1kL3N1bjNsYW5jZS5jICAgICAgICAg
-ICAgICAgICAgICAgICAgICB8ICAgMTEgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L2F0aGVyb3Mv
-YXRsMWMvYXRsMWNfbWFpbi5jICAgICAgICAgICAgICAgfCAgICAxIAogYi9kcml2ZXJzL25ldC9l
-dGhlcm5ldC9hdGhlcm9zL2F0bDFlL2F0bDFlX21haW4uYyAgICAgICAgICAgICAgIHwgICAgMiAK
-IGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvYXRoZXJvcy9hdGx4L2F0bDIuYyAgICAgICAgICAgICAg
-ICAgICAgICB8ICAgIDEgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L2NoZWxzaW8vY3hnYjMvYWRh
-cHRlci5oICAgICAgICAgICAgICAgICAgfCAgICAxIAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9j
-aGVsc2lvL2N4Z2IzL2N4Z2IzX21haW4uYyAgICAgICAgICAgICAgIHwgICAgMiAKIGIvZHJpdmVy
-cy9uZXQvZXRoZXJuZXQvY2hlbHNpby9jeGdiMy9zZ2UuYyAgICAgICAgICAgICAgICAgICAgICB8
-ICAgNDQgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L2NoZWxzaW8vY3hnYjQvc2dlLmMgICAgICAg
-ICAgICAgICAgICAgICAgfCAgICAzIAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9jaXNjby9lbmlj
-L2VuaWMuaCAgICAgICAgICAgICAgICAgICAgICAgIHwgICAgMSAKIGIvZHJpdmVycy9uZXQvZXRo
-ZXJuZXQvY2lzY28vZW5pYy9lbmljX2FwaS5jICAgICAgICAgICAgICAgICAgICB8ICAgIDYgCiBi
-L2RyaXZlcnMvbmV0L2V0aGVybmV0L2Npc2NvL2VuaWMvZW5pY19tYWluLmMgICAgICAgICAgICAg
-ICAgICAgfCAgIDI3IAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9mcmVlc2NhbGUvZmVjX21wYzUy
-eHguYyAgICAgICAgICAgICAgICAgIHwgICAxMCAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvaW50
-ZWwvZTEwMC5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDQgCiBiL2RyaXZlcnMv
-bmV0L2V0aGVybmV0L2ludGVsL2UxMDAwL2UxMDAwX21haW4uYyAgICAgICAgICAgICAgICAgfCAg
-ICAxIAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9pbnRlbC9mbTEway9mbTEwa19wY2kuYyAgICAg
-ICAgICAgICAgICAgIHwgICAgMiAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvaW50ZWwvaTQwZS9p
-NDBlX21haW4uYyAgICAgICAgICAgICAgICAgICB8ICAgIDQgCiBiL2RyaXZlcnMvbmV0L2V0aGVy
-bmV0L2ludGVsL2ljZS9pY2VfbWFpbi5jICAgICAgICAgICAgICAgICAgICAgfCAgICAxIAogYi9k
-cml2ZXJzL25ldC9ldGhlcm5ldC9pbnRlbC9pZ2IvaWdiX21haW4uYyAgICAgICAgICAgICAgICAg
-ICAgIHwgICAgMSAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvaW50ZWwvaWdjL2lnY19tYWluLmMg
-ICAgICAgICAgICAgICAgICAgICB8ICAgIDEgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L2ludGVs
-L2l4Z2JlL2l4Z2JlX21haW4uYyAgICAgICAgICAgICAgICAgfCAgICAxIAogYi9kcml2ZXJzL25l
-dC9ldGhlcm5ldC9pbnRlbC9peGdiZXZmL2l4Z2JldmZfbWFpbi5jICAgICAgICAgICAgIHwgICAg
-MiAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvbmF0c2VtaS9zb25pYy5jICAgICAgICAgICAgICAg
-ICAgICAgICAgICB8ICAgMjQgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L25hdHNlbWkvc29uaWMu
-aCAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAyIAogYi9kcml2ZXJzL25ldC9ldGhlcm5l
-dC9uZXRlcmlvbi92eGdlL3Z4Z2UtY29uZmlnLmMgICAgICAgICAgICAgIHwgICAgOSAKIGIvZHJp
-dmVycy9uZXQvZXRoZXJuZXQvbmV0ZXJpb24vdnhnZS92eGdlLWNvbmZpZy5oICAgICAgICAgICAg
-ICB8ICAgIDcgCiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L3BlbnNhbmRvL2lvbmljL2lvbmljX2Rl
-di5jICAgICAgICAgICAgICAgfCAgICAyIAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9wZW5zYW5k
-by9pb25pYy9pb25pY19saWYuYyAgICAgICAgICAgICAgIHwgICA0MyAKIGIvZHJpdmVycy9uZXQv
-ZXRoZXJuZXQvcGVuc2FuZG8vaW9uaWMvaW9uaWNfbGlmLmggICAgICAgICAgICAgICB8ICAgIDIg
-CiBiL2RyaXZlcnMvbmV0L2V0aGVybmV0L3BlbnNhbmRvL2lvbmljL2lvbmljX21haW4uYyAgICAg
-ICAgICAgICAgfCAgICA0IAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9zZmMvZWYxMC5jICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIHwgICAxOCAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQv
-c2ZjL2VmMTAwX25pYy5jICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDMgCiBiL2RyaXZl
-cnMvbmV0L2V0aGVybmV0L3NmYy9lZnhfY29tbW9uLmMgICAgICAgICAgICAgICAgICAgICAgICAg
-fCAgICA2IAogYi9kcml2ZXJzL25ldC9ldGhlcm5ldC9zZmMvZXRodG9vbF9jb21tb24uYyAgICAg
-ICAgICAgICAgICAgICAgIHwgICAgMiAKIGIvZHJpdmVycy9uZXQvZXRoZXJuZXQvc2ZjL25ldF9k
-cml2ZXIuaCAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDMgCiBiL2RyaXZlcnMvbmV0L2V0
-aGVybmV0L3NmYy9zaWVuYS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAzIAog
-Yi9kcml2ZXJzL25ldC9ldGhlcm5ldC9zdW4vc3VuYm1hYy5jICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgIHwgICAxOCAKIGIvZHJpdmVycy9uZXQvcGh5L21kaW9fYnVzLmMgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICB8ICAgMTUgCiBiL2RyaXZlcnMvbmV0L3VzYi9rYXdldGgu
-YyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMjYxIC0tCiBiL2RyaXZl
-cnMvbmV0L3VzYi9uZXQxMDgwLmMgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-fCAgICAxIAogYi9kcml2ZXJzL25ldC93YW4vbG1jL2xtY19kZWJ1Zy5jICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHwgICAxOCAKIGIvZHJpdmVycy9uZXQvd2FuL2xtYy9sbWNfZGVidWcu
-aCAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB8ICAgIDEgCiBiL2RyaXZlcnMvbmV0L3dh
-bi9sbWMvbG1jX21haW4uYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgMTA1IC0K
-IGIvZHJpdmVycy9uZXQvd2FuL2xtYy9sbWNfbWVkaWEuYyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICB8ICAgIDQgCiBiL2RyaXZlcnMvbmV0L3dhbi9sbWMvbG1jX3Byb3RvLmMgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgfCAgIDE2IAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9i
-cm9hZGNvbS9icmNtODAyMTEvYnJjbWZtYWMvYmNtc2RoLmMgICAgIHwgICAgNCAKIGIvZHJpdmVy
-cy9uZXQvd2lyZWxlc3MvYnJvYWRjb20vYnJjbTgwMjExL2JyY21mbWFjL2J1cy5oICAgICAgICB8
-ICAgIDUgCiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL2Jyb2FkY29tL2JyY204MDIxMS9icmNtZm1h
-Yy9jb3JlLmMgICAgICAgfCAgIDIwIAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9icm9hZGNvbS9i
-cmNtODAyMTEvYnJjbWZtYWMvZndlaC5jICAgICAgIHwgICAgOCAKIGIvZHJpdmVycy9uZXQvd2ly
-ZWxlc3MvYnJvYWRjb20vYnJjbTgwMjExL2JyY21mbWFjL2Z3ZWguaCAgICAgICB8ICAgIDcgCiBi
-L2RyaXZlcnMvbmV0L3dpcmVsZXNzL2Jyb2FkY29tL2JyY204MDIxMS9icmNtZm1hYy9tc2didWYu
-YyAgICAgfCAgICAyIAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9icm9hZGNvbS9icmNtODAyMTEv
-YnJjbWZtYWMvc2Rpby5jICAgICAgIHwgICAxMiAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvYnJv
-YWRjb20vYnJjbTgwMjExL2JyY21mbWFjL3NkaW8uaCAgICAgICB8ICAgIDIgCiBiL2RyaXZlcnMv
-bmV0L3dpcmVsZXNzL2Jyb2FkY29tL2JyY204MDIxMS9icmNtZm1hYy91c2IuYyAgICAgICAgfCAg
-ICAyIAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9pbnRlbC9pcHcyeDAwL2lwdzIxMDAuYyAgICAg
-ICAgICAgICAgICAgIHwgICAgMyAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvaW50ZWwvaXB3Mngw
-MC9pcHcyMjAwLmggICAgICAgICAgICAgICAgICB8ICAgIDYgCiBiL2RyaXZlcnMvbmV0L3dpcmVs
-ZXNzL2ludGVsL2lwdzJ4MDAvbGliaXB3LmggICAgICAgICAgICAgICAgICAgfCAgICAzIAogYi9k
-cml2ZXJzL25ldC93aXJlbGVzcy9pbnRlbC9pd2xlZ2FjeS9jb21tb24uaCAgICAgICAgICAgICAg
-ICAgIHwgICAgNCAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvaW50ZWwvaXdsd2lmaS9pd2wtZGVi
-dWcuYyAgICAgICAgICAgICAgICB8ICAgIDUgCiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL2ludGVs
-L2l3bHdpZmkvaXdsLWRldnRyYWNlLW1zZy5oICAgICAgICAgfCAgICA2IAogYi9kcml2ZXJzL25l
-dC93aXJlbGVzcy9pbnRlcnNpbC9ob3N0YXAvaG9zdGFwX2h3LmMgICAgICAgICAgICAgIHwgICAx
-MiAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvbWFydmVsbC9saWJlcnRhcy9kZWZzLmggICAgICAg
-ICAgICAgICAgICB8ICAgIDMgCiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL21hcnZlbGwvbGliZXJ0
-YXMvcnguYyAgICAgICAgICAgICAgICAgICAgfCAgIDExIAogYi9kcml2ZXJzL25ldC93aXJlbGVz
-cy9tYXJ2ZWxsL2xpYmVydGFzX3RmL2RlYl9kZWZzLmggICAgICAgICAgIHwgICAgMyAKIGIvZHJp
-dmVycy9uZXQvd2lyZWxlc3MvbWFydmVsbC9td2lmaWV4L3VhcF90eHJ4LmMgICAgICAgICAgICAg
-ICB8ICAgIDYgCiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL21hcnZlbGwvbXdpZmlleC91dGlsLmMg
-ICAgICAgICAgICAgICAgICAgfCAgICA2IAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9yZWFsdGVr
-L3J0bHdpZmkvYmFzZS5jICAgICAgICAgICAgICAgICAgIHwgICA0NyAKIGIvZHJpdmVycy9uZXQv
-d2lyZWxlc3MvcmVhbHRlay9ydGx3aWZpL2Jhc2UuaCAgICAgICAgICAgICAgICAgICB8ICAgIDMg
-CiBiL2RyaXZlcnMvbmV0L3dpcmVsZXNzL3JlYWx0ZWsvcnRsd2lmaS9idGNvZXhpc3QvaGFsYnRj
-b3V0c3JjLmMgfCAgIDEyIAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9yZWFsdGVrL3J0bHdpZmkv
-Y29yZS5jICAgICAgICAgICAgICAgICAgIHwgICAgNiAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3Mv
-cmVhbHRlay9ydGx3aWZpL2RlYnVnLmMgICAgICAgICAgICAgICAgICB8ICAgMjAgCiBiL2RyaXZl
-cnMvbmV0L3dpcmVsZXNzL3JlYWx0ZWsvcnRsd2lmaS9kZWJ1Zy5oICAgICAgICAgICAgICAgICAg
-fCAgICA2IAogYi9kcml2ZXJzL25ldC93aXJlbGVzcy9yZWFsdGVrL3J0bHdpZmkvcGNpLmMgICAg
-ICAgICAgICAgICAgICAgIHwgICAgNCAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvcmVhbHRlay9y
-dGx3aWZpL3BzLmMgICAgICAgICAgICAgICAgICAgICB8ICAgMjcgCiBiL2RyaXZlcnMvbmV0L3dp
-cmVsZXNzL3JlYWx0ZWsvcnRsd2lmaS9wcy5oICAgICAgICAgICAgICAgICAgICAgfCAgIDEwIAog
-Yi9kcml2ZXJzL25ldC93aXJlbGVzcy9yZWFsdGVrL3J0bHdpZmkvd2lmaS5oICAgICAgICAgICAg
-ICAgICAgIHwgICAgMyAKIGIvZHJpdmVycy9uZXQvd2lyZWxlc3MvenlkYXMvemQxMjExcncvemRf
-dXNiLmMgICAgICAgICAgICAgICAgICB8ICAgIDEgCiBiL2luY2x1ZGUvbGludXgvbmV0ZGV2aWNl
-LmggICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfCAgICAxIAogYi9uZXQvY29y
-ZS9kZXYuYyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwg
-ICAxNSAKIGRyaXZlcnMvbmV0L2NhaWYvY2FpZl9zcGkuYyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICB8ICA4NzQgLS0tLS0tLS0tLQogZHJpdmVycy9uZXQvY2FpZi9jYWlmX3Nw
-aV9zbGF2ZS5jICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHwgIDI1NCAtLQogaW5jbHVk
-ZS9uZXQvY2FpZi9jYWlmX3NwaS5oICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IHwgIDE1NSAtCiA4NiBmaWxlcyBjaGFuZ2VkLCAzMDAgaW5zZXJ0aW9ucygrKSwgMjIzMyBkZWxl
-dGlvbnMoLSkK
+From: Thomas Gleixner <tglx@linutronix.de>
+
+enic_dev_wait() has a BUG_ON(in_interrupt()).
+
+Chasing the callers of enic_dev_wait() revealed the gems of enic_reset()
+and enic_tx_hang_reset() which are both invoked through work queues in
+order to be able to call rtnl_lock(). So far so good.
+
+After locking rtnl both functions acquire enic::enic_api_lock which
+serializes against the (ab)use from infiniband. This is where the
+trainwreck starts.
+
+enic::enic_api_lock is a spin_lock() which implicitly disables preemption,
+but both functions invoke a ton of functions under that lock which can
+sleep. The BUG_ON(in_interrupt()) does not trigger in that case because it
+can't detect the preempt disabled condition.
+
+This clearly has never been tested with any of the mandatory debug options
+for 7+ years, which would have caught that for sure.
+
+Cure it by adding a enic_api_busy member to struct enic, which is modified
+and evaluated with enic::enic_api_lock held.
+
+If enic_api_devcmd_proxy_by_index() observes enic::enic_api_busy as true,
+it drops enic::enic_api_lock and busy waits for enic::enic_api_busy to
+become false.
+
+It would be smarter to wait for a completion of that busy period, but
+enic_api_devcmd_proxy_by_index() is called with other spin locks held which
+obviously can't sleep.
+
+Remove the BUG_ON(in_interrupt()) check as well because it's incomplete and
+with proper debugging enabled the problem would have been caught from the
+debug checks in schedule_timeout().
+
+Fixes: 0b038566c0ea ("drivers/net: enic: Add an interface for USNIC to interact with firmware")
+Signed-off-by: Thomas Gleixner <tglx@linutronix.de>
+Cc: Christian Benvenuti <benve@cisco.com>
+Cc: Govindarajulu Varadarajan <_govind@gmx.com>
+Cc: Dave Miller <davem@davemloft.net>
+Cc: Jakub Kicinski <kuba@kernel.org>
+Cc: netdev@vger.kernel.org
+---
+ drivers/net/ethernet/cisco/enic/enic.h      |    1 +
+ drivers/net/ethernet/cisco/enic/enic_api.c  |    6 ++++++
+ drivers/net/ethernet/cisco/enic/enic_main.c |   27 +++++++++++++++++++++------
+ 3 files changed, 28 insertions(+), 6 deletions(-)
+
+--- a/drivers/net/ethernet/cisco/enic/enic.h
++++ b/drivers/net/ethernet/cisco/enic/enic.h
+@@ -169,6 +169,7 @@ struct enic {
+ 	u16 num_vfs;
+ #endif
+ 	spinlock_t enic_api_lock;
++	bool enic_api_busy;
+ 	struct enic_port_profile *pp;
+ 
+ 	/* work queue cache line section */
+--- a/drivers/net/ethernet/cisco/enic/enic_api.c
++++ b/drivers/net/ethernet/cisco/enic/enic_api.c
+@@ -34,6 +34,12 @@ int enic_api_devcmd_proxy_by_index(struc
+ 	struct vnic_dev *vdev = enic->vdev;
+ 
+ 	spin_lock(&enic->enic_api_lock);
++	while (enic->enic_api_busy) {
++		spin_unlock(&enic->enic_api_lock);
++		cpu_relax();
++		spin_lock(&enic->enic_api_lock);
++	}
++
+ 	spin_lock_bh(&enic->devcmd_lock);
+ 
+ 	vnic_dev_cmd_proxy_by_index_start(vdev, vf);
+--- a/drivers/net/ethernet/cisco/enic/enic_main.c
++++ b/drivers/net/ethernet/cisco/enic/enic_main.c
+@@ -2106,8 +2106,6 @@ static int enic_dev_wait(struct vnic_dev
+ 	int done;
+ 	int err;
+ 
+-	BUG_ON(in_interrupt());
+-
+ 	err = start(vdev, arg);
+ 	if (err)
+ 		return err;
+@@ -2295,6 +2293,13 @@ static int enic_set_rss_nic_cfg(struct e
+ 		rss_hash_bits, rss_base_cpu, rss_enable);
+ }
+ 
++static void enic_set_api_busy(struct enic *enic, bool busy)
++{
++	spin_lock(&enic->enic_api_lock);
++	enic->enic_api_busy = busy;
++	spin_unlock(&enic->enic_api_lock);
++}
++
+ static void enic_reset(struct work_struct *work)
+ {
+ 	struct enic *enic = container_of(work, struct enic, reset);
+@@ -2304,7 +2309,9 @@ static void enic_reset(struct work_struc
+ 
+ 	rtnl_lock();
+ 
+-	spin_lock(&enic->enic_api_lock);
++	/* Stop any activity from infiniband */
++	enic_set_api_state(enic, true);
++
+ 	enic_stop(enic->netdev);
+ 	enic_dev_soft_reset(enic);
+ 	enic_reset_addr_lists(enic);
+@@ -2312,7 +2319,10 @@ static void enic_reset(struct work_struc
+ 	enic_set_rss_nic_cfg(enic);
+ 	enic_dev_set_ig_vlan_rewrite_mode(enic);
+ 	enic_open(enic->netdev);
+-	spin_unlock(&enic->enic_api_lock);
++
++	/* Allow infiniband to fiddle with the device again */
++	enic_set_api_state(enic, false);
++
+ 	call_netdevice_notifiers(NETDEV_REBOOT, enic->netdev);
+ 
+ 	rtnl_unlock();
+@@ -2324,7 +2334,9 @@ static void enic_tx_hang_reset(struct wo
+ 
+ 	rtnl_lock();
+ 
+-	spin_lock(&enic->enic_api_lock);
++	/* Stop any activity from infiniband */
++	enic_set_api_state(enic, true);
++
+ 	enic_dev_hang_notify(enic);
+ 	enic_stop(enic->netdev);
+ 	enic_dev_hang_reset(enic);
+@@ -2333,7 +2345,10 @@ static void enic_tx_hang_reset(struct wo
+ 	enic_set_rss_nic_cfg(enic);
+ 	enic_dev_set_ig_vlan_rewrite_mode(enic);
+ 	enic_open(enic->netdev);
+-	spin_unlock(&enic->enic_api_lock);
++
++	/* Allow infiniband to fiddle with the device again */
++	enic_set_api_state(enic, false);
++
+ 	call_netdevice_notifiers(NETDEV_REBOOT, enic->netdev);
+ 
+ 	rtnl_unlock();
+
