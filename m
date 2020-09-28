@@ -2,208 +2,206 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CE26727AC0E
-	for <lists+linux-doc@lfdr.de>; Mon, 28 Sep 2020 12:42:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D8D9427AC9B
+	for <lists+linux-doc@lfdr.de>; Mon, 28 Sep 2020 13:22:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726651AbgI1KmX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 28 Sep 2020 06:42:23 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33118 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726648AbgI1KmM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 28 Sep 2020 06:42:12 -0400
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7146FC061755
-        for <linux-doc@vger.kernel.org>; Mon, 28 Sep 2020 03:42:11 -0700 (PDT)
-Received: by mail-wr1-x443.google.com with SMTP id k10so747273wru.6
-        for <linux-doc@vger.kernel.org>; Mon, 28 Sep 2020 03:42:11 -0700 (PDT)
+        id S1726552AbgI1LW0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 28 Sep 2020 07:22:26 -0400
+Received: from mail-dm6nam12on2046.outbound.protection.outlook.com ([40.107.243.46]:54752
+        "EHLO NAM12-DM6-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1726477AbgI1LWZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 28 Sep 2020 07:22:25 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=FCjLUCAA8XVyDL2KBJHmEi1Zy/SgpeK1LtIXigePlKkqafb6qaZvlR2jMFaw8uElsDnOXJsGimsf8GbF+NfMjb0UYo4SPWGCGumYZ6GGkmBjjpdC2+ie4ANOXZkVCkPcFBnI0Q7/m0TMt4MvJ00o/88irizYYZF54nUx/2KJnPHfMYv38IsinC6ta6a/S49xKJldDOCjuBUMokVDi/4EogPr6XXgnFLFz7WJmIV74VjHYzKxpBYlwWHFBUwxjYRuwsG57xbPWRIGFZXbSDvC7RhFdE87YzkBZkLcFPcrINTCWAswea4m7B/3ngFSOQQCcfpEvEOyc/t2CRRXZqN4Ng==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hD8W5ThzNGSBL01HXMBRedFUTKVe6ilyPQyyYKe2xKk=;
+ b=fP6As9m0yb5e9Y30h+Zd9gR9v3SMlyoFx7Gk5RNTALfkb15TDlVMPWL6Yb+D4lkqs/tdEHBMPTMoKdWwvNTW+a6V9ppQo9P/TX0Mp5Vzo4cGY8EPShQNt0KtqT+WzbnCUifqzjcvN9JtQiqSAnab3hfTH0sj1wFbCCcyfkKpeWiszizRqIciCboig7c8ds6s2PkSqLqJ1epKPyYNJK442QAReyp4bzzDPED3uWN6MbmaFLm+I7SoN7V85CS6cdKxSRldknukFuGXlcAIobIL/a+uQbytoTYhHooFjKKgKHJZVm5FLK8YNkqcq2rQMmZbBFmBMXUPBPKZWipPxm1iOA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=WjvGzyO62y8+TE10NX89uaVC3jyOwciikUlJLtdxrSc=;
-        b=UP6FbU97hiLI3MWndLsukFiAqWATwepolyDq9C2sft9a4uW61HXqHHdlmryW5fOeGk
-         AvFbXjzWssoioAlwHVB3m5lWEYWDLceWZl0e58Vm5AQGKqTIvcUPq/VD42dMRUDleFXJ
-         rbWSwvwmEFUQ+1NWBfpmnNzrNh5aJfp9m8GjGfTqhtBJrigyA/oFNUJo9kM5zZXt3IVA
-         n84qcoYzzop6WqR2np2o1mJ0liJiPJFKTNFnmuykYCp+5qpnhRV4e7F87pD7fLqgzMYs
-         rxq4OxP+5BO29PuQHj1fKaMi41SisX7vk9ByFuBsfwPV6Ia/fSHrzTnfen6IWxajQS1+
-         v/sA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=WjvGzyO62y8+TE10NX89uaVC3jyOwciikUlJLtdxrSc=;
-        b=dvEW9WXKFYcqH6SB+/l5UzxXmncNNHWPahnAEwNXT/XUJyl36KJFOH1KMI1cw29WRK
-         6JxLl84UiS1QYmQbVkKMcGxp/VoQgO0qtAhvW4kY0ZsHliseIipFQAOAcRZueuwobKZc
-         Me/PCqupNxLHJa2UsI2onGI5u0FRGfQ/Miei1UbX0TSxeFpsU69g1HteSoyiJWAk3NKN
-         rISehN6vwjkspkmpR/puDbglpoo4+NPLjbnFwduyMxRHeLLeV+7Hb+E/IoWBLYPY5b7j
-         +APj9WHmNGkb0qGDF1I+vBIuA8QLvwFB4Hdlw4Ah0JIQdnFS/1uCyT4LHGDHY0hD8B/u
-         GSPg==
-X-Gm-Message-State: AOAM530RDDi5aIP8Vla9yHRngN85yOyUba3vEVeaCHeGu8ATdnNQWlZT
-        bjhvT0i3CzChCoNn3uw6TZBgrA==
-X-Google-Smtp-Source: ABdhPJxPHM6y/EAjEjcY3fXmak9oChruhF6beTZp/+Z1PorBJ+2DWmZynuhGzwunOEQGzof6DeRUsA==
-X-Received: by 2002:a5d:43cb:: with SMTP id v11mr1044613wrr.188.1601289730189;
-        Mon, 28 Sep 2020 03:42:10 -0700 (PDT)
-Received: from debian-brgl.home (lfbn-nic-1-68-20.w2-15.abo.wanadoo.fr. [2.15.159.20])
-        by smtp.gmail.com with ESMTPSA id f14sm939258wrt.53.2020.09.28.03.42.09
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 28 Sep 2020 03:42:09 -0700 (PDT)
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-To:     Linus Walleij <linus.walleij@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Kent Gibson <warthog618@gmail.com>
-Cc:     linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH v2 9/9] gpio: mockup: refactor the module init function
-Date:   Mon, 28 Sep 2020 12:41:55 +0200
-Message-Id: <20200928104155.7385-10-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.26.1
-In-Reply-To: <20200928104155.7385-1-brgl@bgdev.pl>
-References: <20200928104155.7385-1-brgl@bgdev.pl>
-MIME-Version: 1.0
+ d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=hD8W5ThzNGSBL01HXMBRedFUTKVe6ilyPQyyYKe2xKk=;
+ b=j7JdjJsgyMBQJ0WwPDQ81i5UNk45tcg+b9r1HedEwEOELVLowSBXy30CWi3gYiourig4qSCsCANM1D/n0cMTHA4ASZ5LhxuAMqp/Qkr7pLx1DhE66b3ZkmIPss3Nax5xMbkAfBlKKpQOO//TC2mnF5rA/Hvdzsc1DPZWyWKG4vo=
+Authentication-Results: arm.com; dkim=none (message not signed)
+ header.d=none;arm.com; dmarc=none action=none header.from=amd.com;
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
+ by MN2PR12MB4408.namprd12.prod.outlook.com (2603:10b6:208:26c::14) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3412.25; Mon, 28 Sep
+ 2020 11:22:22 +0000
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::f8f7:7403:1c92:3a60]) by MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::f8f7:7403:1c92:3a60%6]) with mapi id 15.20.3412.029; Mon, 28 Sep 2020
+ 11:22:22 +0000
+Subject: Re: [PATCH v3 0/4] dma-buf: Flag vmap'ed memory as system or I/O
+ memory
+To:     Thomas Zimmermann <tzimmermann@suse.de>,
+        Sam Ravnborg <sam@ravnborg.org>
+Cc:     linux-doc@vger.kernel.org, airlied@linux.ie,
+        dri-devel@lists.freedesktop.org, thierry.reding@gmail.com,
+        kraxel@redhat.com, afd@ti.com, m.szyprowski@samsung.com,
+        arnd@arndb.de, corbet@lwn.net, jonathanh@nvidia.com,
+        matthew.auld@intel.com, linux+etnaviv@armlinux.org.uk,
+        labbott@redhat.com, linux-media@vger.kernel.org, pawel@osciak.com,
+        intel-gfx@lists.freedesktop.org, etnaviv@lists.freedesktop.org,
+        linaro-mm-sig@lists.linaro.org, thomas.hellstrom@intel.com,
+        rodrigo.vivi@intel.com, linux-tegra@vger.kernel.org,
+        mchehab@kernel.org, gregkh@linuxfoundation.org,
+        lmark@codeaurora.org, tfiga@chromium.org,
+        kyungmin.park@samsung.com, robin.murphy@arm.com
+References: <20200925115601.23955-1-tzimmermann@suse.de>
+ <20200926071334.GA42915@ravnborg.org>
+ <8761e0dd-569e-0ea0-7bc5-25e4f7cb67cc@suse.de>
+ <20200927191605.GA237178@ravnborg.org>
+ <3f703297-7b4f-dcca-ea56-70b2413a1e3d@amd.com>
+ <ef4400a7-397b-e550-7114-1d4238dd36f3@suse.de>
+From:   =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <49c4dcec-cd69-510a-9781-e8fa5fb669f9@amd.com>
+Date:   Mon, 28 Sep 2020 13:22:13 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+In-Reply-To: <ef4400a7-397b-e550-7114-1d4238dd36f3@suse.de>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-Originating-IP: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
+X-ClientProxiedBy: FR2P281CA0028.DEUP281.PROD.OUTLOOK.COM
+ (2603:10a6:d10:14::15) To MN2PR12MB3775.namprd12.prod.outlook.com
+ (2603:10b6:208:159::19)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7] (2a02:908:1252:fb60:be8a:bd56:1f94:86e7) by FR2P281CA0028.DEUP281.PROD.OUTLOOK.COM (2603:10a6:d10:14::15) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3433.18 via Frontend Transport; Mon, 28 Sep 2020 11:22:18 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 344bcca5-18b3-4dda-ed79-08d863a0c45f
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4408:
+X-Microsoft-Antispam-PRVS: <MN2PR12MB440857BCFC2C769A76568D5183350@MN2PR12MB4408.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: IRUeFrkBXr0H/jOwBHqPHvishB50tqoIEUWeMVTO+hw02PbTm40K1M4nq7IWUIdSB5NWuAKDdulLk4b4Wm40EkIIpaQikrj99GeqTnCQAtumQPQ/pEGm7OEmdOo9vhMyqof7a2SRSr3nDRuX2xi+vdzI1OznvMKwLhjA925OTvJ0T5QfVDI/y+Ny0wQdOf+7zg3uvysQApS8zQ21Fl/0cjrcYJn/l43lUOuBzBi+W8HRpi8pFw+DaThqo08YgCKPJ+2Exnh+Bu2Fg4sOQEtFPZ8RXqepra2IK5fDdS07poduy/QUyHfaLV2xTA/axhcDbu52si9HTP8ra79pFRoxXPWhN352KsJI3LYeIit4w4p+gabNc1wgMGtc/HA+LhEtp6+nWrDQ/aM3uKBGKQobI+Mh5+ebBOOvoGxFaiCufSKeXAUacGx7783HFU0zhvZvXw4e6dqFWRD63pPObzgzCg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB3775.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(346002)(136003)(376002)(366004)(396003)(39860400002)(6486002)(36756003)(4326008)(86362001)(8936002)(52116002)(478600001)(6666004)(966005)(31696002)(8676002)(83380400001)(2616005)(316002)(66574015)(66946007)(31686004)(66476007)(66556008)(110136005)(16526019)(5660300002)(186003)(2906002)(7416002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: qGSPofKGJ256FYvsiC1t6pMhAyaJsKnwicKR9y7MycQ38js9z/WvHfjtSoem1bR+lbYjhGZ54CFlDmmF+FZ2j14c2vF9jZaZguOBdM2Z/SsFcU8jm7ej0mTMTFEDQRvWbMQa3QfMRvVe7teKChGXsv37QdrP5V9S8PPV2HJUh8qDzrGn0rXV6y91S0HBVRnZsunU3nPVv72h5G3icpPGPPaW/VpQR3gxMryIj2mCLomPSpK3uq0Wg2pbHichri5uZbueqhq9aKWvS/G0eEdACyRhJDPd/sqvvmIflMxPNQ2naC6AAlrm429TR2f7lAggFZzpXKp+uTL3/FlE44emuNCl/sfJOLGwcQvL6FYi6XG3V49y7yJ+QTNzU1jSlNRpaw+cttjHGbazjsDcW5lYPj4qGPE0srzzh0wFvFqMqHO9HK0NonbSSPUrZys+4NXYfF/Io35ztwRUq3MNlawNDRvf+xEazNqNdn4QUyMHtnHuyc45AopcfXJhiw7T71OP8jpR3d3dk8Ub3wUedrr6c3kkOKMBLZ+zBPE9fOTAalkJ8CH33zCuDLiaAKQ2yfTFl/9w6Q/nTKI3ozWwdBgNoniuLdjS+dYwowxgxT3Ji49zNg5AoEEaOhms6nGJbc9DB/sULA7BR3jCQQgrTWmuLtbxvYg1rH7cAimeZwTpzZspP9PrdyuGI3mbJ9cY6jOHprMu3hifcdy+hKwv3Stw9A==
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 344bcca5-18b3-4dda-ed79-08d863a0c45f
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2020 11:22:21.8860
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: OUI07lNO1T0FbvSXW9b82g9qM23oBRcHqu8hT0hOvTAzGUGVEsS+FFwqw2fhcD0B
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4408
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Am 28.09.20 um 09:37 schrieb Thomas Zimmermann:
+> Hi
+>
+> Am 28.09.20 um 08:50 schrieb Christian König:
+>> Am 27.09.20 um 21:16 schrieb Sam Ravnborg:
+>>> Hi Thomas.
+>>>
+>>>>> struct simap {
+>>>>>          union {
+>>>>>                  void __iomem *vaddr_iomem;
+>>>>>                  void *vaddr;
+>>>>>          };
+>>>>>          bool is_iomem;
+>>>>> };
+>>>>>
+>>>>> Where simap is a shorthand for system_iomem_map
+>>>>> And it could al be stuffed into a include/linux/simap.h file.
+>>>>>
+>>>>> Not totally sold on the simap name - but wanted to come up with
+>>>>> something.
+>>>> Yes. Others, myself included, have suggested to use a name that does not
+>>>> imply a connection to the dma-buf framework, but no one has come up with
+>>>>    a good name.
+>>>>
+>>>> I strongly dislike simap, as it's entirely non-obvious what it does.
+>>>> dma-buf-map is not actually wrong. The structures represents the mapping
+>>>> of a dma-able buffer in most cases.
+>>>>
+>>>>> With this approach users do not have to pull in dma-buf to use it and
+>>>>> users will not confuse that this is only for dma-buf usage.
+>>>> There's no need to enable dma-buf. It's all in the header file without
+>>>> dependencies on dma-buf. It's really just the name.
+>>>>
+>>>> But there's something else to take into account. The whole issue here is
+>>>> that the buffer is disconnected from its originating driver, so we don't
+>>>> know which kind of memory ops we have to use. Thinking about it, I
+>>>> realized that no one else seemed to have this problem until now.
+>>>> Otherwise there would be a solution already. So maybe the dma-buf
+>>>> framework *is* the native use case for this data structure.
+>>> We have at least:
+>>> linux/fb.h:
+>>>      union {
+>>>          char __iomem *screen_base;      /* Virtual address */
+>>>          char *screen_buffer;
+>>>      };
+>>>
+>>> Which solve more or less the same problem.
+> I thought this was for convenience. The important is_iomem bit is missing.
+>
+>> I also already noted that in TTM we have exactly the same problem and a
+>> whole bunch of helpers to allow operations on those pointers.
+> How do you call this within TTM?
 
-Let's move the code preparing the device properties into a separate
-routine. This has the advantage of simplifying the error handling and
-makes the indentation less deep.
+ttm_bus_placement, but I really don't like that name.
 
-Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
----
- drivers/gpio/gpio-mockup.c | 96 +++++++++++++++++++-------------------
- 1 file changed, 49 insertions(+), 47 deletions(-)
+>
+> The data structure represents a pointer to either system or I/O memory,
+> but not necessatrily device memory. It contains raw data. That would
+> give something like
+>
+>    struct databuf_map
+>    struct databuf_ptr
+>    struct dbuf_map
+>    struct dbuf_ptr
+>
+> My favorite would be dbuf_ptr. It's short and the API names would make
+> sense: dbuf_ptr_clear() for clearing, dbuf_ptr_set_vaddr() to set an
+> address, dbuf_ptr_incr() to increment, etc. Also, the _ptr indicates
+> that it's a single address; not an offset with length.
 
-diff --git a/drivers/gpio/gpio-mockup.c b/drivers/gpio/gpio-mockup.c
-index 47b7de6d5ab1..02eea05a09dd 100644
---- a/drivers/gpio/gpio-mockup.c
-+++ b/drivers/gpio/gpio-mockup.c
-@@ -503,16 +503,59 @@ static __init char **gpio_mockup_make_line_names(const char *label,
- 	return names;
- }
- 
--static int __init gpio_mockup_init(void)
-+static int __init gpio_mockup_register_chip(int idx)
- {
- 	struct property_entry properties[GPIO_MOCKUP_MAX_PROP];
--	int i, prop, num_chips, err = 0, base;
- 	struct platform_device_info pdevinfo;
- 	struct platform_device *pdev;
-+	char **line_names = NULL;
- 	char chip_label[32];
--	char **line_names;
-+	int prop = 0, base;
- 	u16 ngpio;
- 
-+	memset(properties, 0, sizeof(properties));
-+	memset(&pdevinfo, 0, sizeof(pdevinfo));
-+
-+	snprintf(chip_label, sizeof(chip_label), "gpio-mockup-%c", idx + 'A');
-+	properties[prop++] = PROPERTY_ENTRY_STRING("chip-label", chip_label);
-+
-+	base = gpio_mockup_range_base(idx);
-+	if (base >= 0)
-+		properties[prop++] = PROPERTY_ENTRY_U32("gpio-base", base);
-+
-+	ngpio = base < 0 ? gpio_mockup_range_ngpio(idx)
-+			 : gpio_mockup_range_ngpio(idx) - base;
-+	properties[prop++] = PROPERTY_ENTRY_U16("nr-gpios", ngpio);
-+
-+	if (gpio_mockup_named_lines) {
-+		line_names = gpio_mockup_make_line_names(chip_label, ngpio);
-+		if (!line_names)
-+			return -ENOMEM;
-+
-+		properties[prop++] = PROPERTY_ENTRY_STRING_ARRAY_LEN(
-+					"gpio-line-names", line_names, ngpio);
-+	}
-+
-+	pdevinfo.name = "gpio-mockup";
-+	pdevinfo.id = idx;
-+	pdevinfo.properties = properties;
-+
-+	pdev = platform_device_register_full(&pdevinfo);
-+	kfree_strarray(line_names, ngpio);
-+	if (IS_ERR(pdev)) {
-+		pr_err("error registering device");
-+		return PTR_ERR(pdev);
-+	}
-+
-+	gpio_mockup_pdevs[idx] = pdev;
-+
-+	return 0;
-+}
-+
-+static int __init gpio_mockup_init(void)
-+{
-+	int i, num_chips, err;
-+
- 	if ((gpio_mockup_num_ranges < 2) ||
- 	    (gpio_mockup_num_ranges % 2) ||
- 	    (gpio_mockup_num_ranges > GPIO_MOCKUP_MAX_RANGES))
-@@ -540,54 +583,13 @@ static int __init gpio_mockup_init(void)
- 	}
- 
- 	for (i = 0; i < num_chips; i++) {
--		memset(properties, 0, sizeof(properties));
--		memset(&pdevinfo, 0, sizeof(pdevinfo));
--		prop = 0;
--		line_names = NULL;
--
--		snprintf(chip_label, sizeof(chip_label),
--			 "gpio-mockup-%c", i + 'A');
--		properties[prop++] = PROPERTY_ENTRY_STRING("chip-label",
--							   chip_label);
--
--		base = gpio_mockup_range_base(i);
--		if (base >= 0)
--			properties[prop++] = PROPERTY_ENTRY_U32("gpio-base",
--								base);
--
--		ngpio = base < 0 ? gpio_mockup_range_ngpio(i)
--				 : gpio_mockup_range_ngpio(i) - base;
--		properties[prop++] = PROPERTY_ENTRY_U16("nr-gpios", ngpio);
--
--		if (gpio_mockup_named_lines) {
--			line_names = gpio_mockup_make_line_names(chip_label,
--								 ngpio);
--			if (!line_names) {
--				platform_driver_unregister(&gpio_mockup_driver);
--				gpio_mockup_unregister_pdevs();
--				return -ENOMEM;
--			}
--
--			properties[prop++] = PROPERTY_ENTRY_STRING_ARRAY_LEN(
--						"gpio-line-names",
--						line_names, ngpio);
--		}
--
--		pdevinfo.name = "gpio-mockup";
--		pdevinfo.id = i;
--		pdevinfo.properties = properties;
--
--		pdev = platform_device_register_full(&pdevinfo);
--		kfree_strarray(line_names, ngpio);
--		if (IS_ERR(pdev)) {
--			pr_err("error registering device");
-+		err = gpio_mockup_register_chip(i);
-+		if (err) {
- 			platform_driver_unregister(&gpio_mockup_driver);
- 			gpio_mockup_unregister_pdevs();
- 			debugfs_remove_recursive(gpio_mockup_dbg_dir);
--			return PTR_ERR(pdev);
-+			return err;
- 		}
--
--		gpio_mockup_pdevs[i] = pdev;
- 	}
- 
- 	return 0;
--- 
-2.26.1
+Puh, no idea. All of that doesn't sound like it 100% hits the underlying 
+meaning of the structure.
+
+Christian.
+
+>
+> Best regards
+> Thomas
+>
+>> Christian.
+>>
+>>>   
+>>>> Anyway, if a better name than dma-buf-map comes in, I'm willing to
+>>>> rename the thing. Otherwise I intend to merge the patchset by the end of
+>>>> the week.
+>>> Well, the main thing is that I think this shoud be moved away from
+>>> dma-buf. But if indeed dma-buf is the only relevant user in drm then
+>>> I am totally fine with the current naming.
+>>>
+>>> One alternative named that popped up in my head: struct sys_io_map {}
+>>> But again, if this is kept in dma-buf then I am fine with the current
+>>> naming.
+>>>
+>>> In other words, if you continue to think this is mostly a dma-buf
+>>> thing all three patches are:
+>>> Acked-by: Sam Ravnborg <sam@ravnborg.org>
+>>>
+>>>      Sam
+>> _______________________________________________
+>> dri-devel mailing list
+>> dri-devel@lists.freedesktop.org
+>> https://lists.freedesktop.org/mailman/listinfo/dri-devel
 
