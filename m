@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5BE9027C1E5
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Sep 2020 12:10:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0839227C20B
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Sep 2020 12:11:38 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725774AbgI2KKQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Sep 2020 06:10:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52692 "EHLO
+        id S1726431AbgI2KLM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Sep 2020 06:11:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52708 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725355AbgI2KKP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Sep 2020 06:10:15 -0400
-Received: from mail-wr1-x42e.google.com (mail-wr1-x42e.google.com [IPv6:2a00:1450:4864:20::42e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7F702C061755
-        for <linux-doc@vger.kernel.org>; Tue, 29 Sep 2020 03:10:15 -0700 (PDT)
-Received: by mail-wr1-x42e.google.com with SMTP id c18so4676210wrm.9
-        for <linux-doc@vger.kernel.org>; Tue, 29 Sep 2020 03:10:15 -0700 (PDT)
+        with ESMTP id S1727663AbgI2KKR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Sep 2020 06:10:17 -0400
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DAF51C0613D1
+        for <linux-doc@vger.kernel.org>; Tue, 29 Sep 2020 03:10:16 -0700 (PDT)
+Received: by mail-wr1-x443.google.com with SMTP id z1so4720880wrt.3
+        for <linux-doc@vger.kernel.org>; Tue, 29 Sep 2020 03:10:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=wX07pSeUuLqA9wjMOYNBhUqlyD5UBvsVzAhl80AZh20=;
-        b=SUUgbwPmv1HPLhX+VtkUbKJMt1hEhieePFb0t+WIuQX7veEzo16PF6UR+jveLb0dLU
-         eVdkuFnstU26B1WMYRHzo8ci+a7NrAIskZLJqs29X1pf2JvVysAHdqH3KFGaeWer+WzB
-         wBBEAZf6QkMgpRpw9d0A06fftXk6ZjTEqp6caDlatXmNIxVGDOylfGoDsf/2V83MmOun
-         bUnzOcmr925AzmdLg+Oad/3dPqM+9ORedFQG3ekJoUcHwXFoF+6+KP9L8QLzR1muYk/9
-         2Kk1Z0xkxyX6UYKVDqZjkaT+d1dE0TG8UhUz94q6MypiAH4ioOLOlp4dWDC7WjOtjQ4I
-         E9Mw==
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=6Ji8d51UZNthiwaFwQiiDA22tNDSUGquN8QOwnTBLMs=;
+        b=dYn7ozwsu9fg/NjCG2J03XJS8gkymmXk+ZLjMvvFMy5YAsZb7wz4hUSy3iEQiWZQNP
+         RPpxTHq0AyQ5etyPB+k11seysp+LrevA+87AsjBF3FqrCGsmj3s64V0FgPDhy1PKgCYT
+         PTg/9yqwPbDzNxGWjzyaaqR7bGsGdliYQiuT7d2nKEIF6b6LTlgSDShNDZZZtI9Y10OC
+         wrX6We+gzKz3zE5uBusmtL1fvrmkEoYQueI8AqPPHMo81IApcB7Wg2DprCiAJB/jt+eU
+         z3f4tbHfi24RzvVJIJQRJ402fGnxI49OIYXPnDOu7IypL3hhhNnQIwQpo3l23Spad2/T
+         XxAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=wX07pSeUuLqA9wjMOYNBhUqlyD5UBvsVzAhl80AZh20=;
-        b=Zj3vl629sHuJw3pJQCVURr0qoS7MB1nW4QLt6nPvHkT74jKZlsdzA4+t150a8f3Kw2
-         pQhwlEemLl2wdHSsAcb6t97nHfKSep4F1Gyrmdk3AkF/kS3LuwRCefRkwoLmBijRhsyF
-         735qMCzcoFFO8SJkIfUy0Ej+CW7yRoi4TL1LVTx3/gYtcyJPK1nW/U8OLCaFc0ePmeEG
-         l7QjDizNYX5wscUbbALdfivui938KkHcbQGETMz3jer7FsR/WraKw88CiUSepVsWmOkm
-         r5X39P3zjLihvCk649hd7Eqh9mjLU05DRbZsPy9/+aqUpvF4z7sDwsnHfMbt9C9x98eC
-         xyQA==
-X-Gm-Message-State: AOAM532FCn3+rAwHegFaDv8CQiEjc7S6m2IQLZsl5a2aipQwcrSA09gy
-        nc4d922UnhTCkum3YDi0lMKSPA==
-X-Google-Smtp-Source: ABdhPJyu5A7kb1zd9o0XKRkIireLWaGzK0J84c5nNxmjTMndi7inQttwI+MoT+xB9vvauWg1QPJw5g==
-X-Received: by 2002:a5d:44cc:: with SMTP id z12mr3468027wrr.189.1601374214037;
-        Tue, 29 Sep 2020 03:10:14 -0700 (PDT)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=6Ji8d51UZNthiwaFwQiiDA22tNDSUGquN8QOwnTBLMs=;
+        b=UvdgIxyK3d9UBdhees9KGp8lsl3iTo0G+Y1vLQP/hjblR1+NNvMTQWwYRPyKKvRuxu
+         zO0HnKCO0vj7tL7JjNllLY/XsdiOY6p4D+6/9iUecScoEycWA+bZVs8LGiSYsN8rrq4I
+         Pyxc9wPEdyFfKVCRx6LSY7qi4q3j4EnNmLpHpqEalPiBoAnzvBSC7RCOQEYxMKK7AC4T
+         WU1CIqc16C87jFJymPtPV3asB+N5D401hqEgd3wlkAuOimeneQaW+lUKVd0Uib7eEsLX
+         vaC1x9dBgUg8IrbKzKuzYlU8JMDpb5a1x8WlT5n0zMC2ZyRK7zafI17AeZw6XiyriV/2
+         ux9A==
+X-Gm-Message-State: AOAM5327uOVJxrJT/kEbI4QvQylom5sPNazaEEam2jKhvycmBtT/HSiG
+        rwWJZ90iQwyovWaREbMn2VQ++Q==
+X-Google-Smtp-Source: ABdhPJxMbY4zNLxYSqL/hs2GeeOd4gbGIk3Je7AqtBA5FUlPfloGghminqaN+JIdSsNscq6TH9/Wpw==
+X-Received: by 2002:adf:f34a:: with SMTP id e10mr3315435wrp.91.1601374215541;
+        Tue, 29 Sep 2020 03:10:15 -0700 (PDT)
 Received: from localhost.localdomain (amontpellier-652-1-68-189.w109-210.abo.wanadoo.fr. [109.210.51.189])
-        by smtp.gmail.com with ESMTPSA id x19sm3380680wmj.48.2020.09.29.03.10.12
+        by smtp.gmail.com with ESMTPSA id x19sm3380680wmj.48.2020.09.29.03.10.14
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 29 Sep 2020 03:10:13 -0700 (PDT)
+        Tue, 29 Sep 2020 03:10:14 -0700 (PDT)
 From:   Bartosz Golaszewski <brgl@bgdev.pl>
 To:     Linus Walleij <linus.walleij@linaro.org>,
         Jonathan Corbet <corbet@lwn.net>,
@@ -55,10 +55,12 @@ To:     Linus Walleij <linus.walleij@linaro.org>,
 Cc:     linux-gpio@vger.kernel.org, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org,
         Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: [PATCH v3 00/10] gpio: mockup: refactoring + documentation
-Date:   Tue, 29 Sep 2020 12:09:54 +0200
-Message-Id: <20200929101004.20288-1-brgl@bgdev.pl>
+Subject: [PATCH v3 01/10] lib: string_helpers: provide kfree_strarray()
+Date:   Tue, 29 Sep 2020 12:09:55 +0200
+Message-Id: <20200929101004.20288-2-brgl@bgdev.pl>
 X-Mailer: git-send-email 2.26.1
+In-Reply-To: <20200929101004.20288-1-brgl@bgdev.pl>
+References: <20200929101004.20288-1-brgl@bgdev.pl>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
@@ -67,41 +69,60 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 
-These patches were part of the bigger overhaul of gpio-mockup but since
-the initial idea was dropped in favor of using configfs + sysfs in the
-future I thought I'd resent just the refactoring of the existing code
-+ documentation patches. I think it's good to apply them since we don't
-really know when the new interface will be ready (configfs needs a new
-functionality - commitable items - to support mockup chip instantiation).
+There's a common pattern of dynamically allocating an array of char
+pointers and then also dynamically allocating each string in this
+array. Provide a helper for freeing such a string array with one call.
 
-v1 -> v2:
-- check for NULL pointer in kfree_strarray() to avoid having to always pass
-  a zeroed string count when the array pointer is NULL
-- collect review tags from Andy
+Signed-off-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+---
+ include/linux/string_helpers.h |  2 ++
+ lib/string_helpers.c           | 24 ++++++++++++++++++++++++
+ 2 files changed, 26 insertions(+)
 
-v2 -> v3:
-- add a patch increasing the number of supported device properties
-- rename the arguments in kfree_strarray()
-
-Bartosz Golaszewski (10):
-  lib: string_helpers: provide kfree_strarray()
-  Documentation: gpio: add documentation for gpio-mockup
-  gpio: mockup: drop unneeded includes
-  gpio: mockup: use KBUILD_MODNAME
-  gpio: mockup: use pr_fmt()
-  gpio: mockup: remove unneeded return statement
-  gpio: mockup: increase the number of supported device properties
-  gpio: mockup: pass the chip label as device property
-  gpio: mockup: use the generic 'gpio-line-names' property
-  gpio: mockup: refactor the module init function
-
- .../admin-guide/gpio/gpio-mockup.rst          |  50 ++++++
- drivers/gpio/gpio-mockup.c                    | 158 +++++++++---------
- include/linux/string_helpers.h                |   2 +
- lib/string_helpers.c                          |  24 +++
- 4 files changed, 156 insertions(+), 78 deletions(-)
- create mode 100644 Documentation/admin-guide/gpio/gpio-mockup.rst
-
+diff --git a/include/linux/string_helpers.h b/include/linux/string_helpers.h
+index 86f150c2a6b6..fa06dcdc481e 100644
+--- a/include/linux/string_helpers.h
++++ b/include/linux/string_helpers.h
+@@ -94,4 +94,6 @@ char *kstrdup_quotable(const char *src, gfp_t gfp);
+ char *kstrdup_quotable_cmdline(struct task_struct *task, gfp_t gfp);
+ char *kstrdup_quotable_file(struct file *file, gfp_t gfp);
+ 
++void kfree_strarray(char **array, size_t n);
++
+ #endif
+diff --git a/lib/string_helpers.c b/lib/string_helpers.c
+index 963050c0283e..efeee2353613 100644
+--- a/lib/string_helpers.c
++++ b/lib/string_helpers.c
+@@ -649,3 +649,27 @@ char *kstrdup_quotable_file(struct file *file, gfp_t gfp)
+ 	return pathname;
+ }
+ EXPORT_SYMBOL_GPL(kstrdup_quotable_file);
++
++/**
++ * kfree_strarray - free a number of dynamically allocated strings contained
++ *                  in an array and the array itself
++ *
++ * @array: Dynamically allocated array of strings to free. If NULL - the
++ *         function does nothing.
++ * @n: Number of strings (starting from the beginning of the array) to free.
++ *
++ * Passing a non-null @array and @n == 0 as well as NULL @array  are valid
++ * use-cases.
++ */
++void kfree_strarray(char **array, size_t n)
++{
++	unsigned int i;
++
++	if (!array)
++		return;
++
++	for (i = 0; i < n; i++)
++		kfree(array[i]);
++	kfree(array);
++}
++EXPORT_SYMBOL_GPL(kfree_strarray);
 -- 
 2.26.1
 
