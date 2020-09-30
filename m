@@ -2,75 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BB72727EAB3
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Sep 2020 16:12:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A5A4327EAD5
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Sep 2020 16:23:32 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728149AbgI3OMT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Sep 2020 10:12:19 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58584 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725776AbgI3OMT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Sep 2020 10:12:19 -0400
-Received: from mail-vs1-xe43.google.com (mail-vs1-xe43.google.com [IPv6:2607:f8b0:4864:20::e43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7D302C061755
-        for <linux-doc@vger.kernel.org>; Wed, 30 Sep 2020 07:12:19 -0700 (PDT)
-Received: by mail-vs1-xe43.google.com with SMTP id y190so1048066vsy.1
-        for <linux-doc@vger.kernel.org>; Wed, 30 Sep 2020 07:12:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:reply-to:from:date:message-id:subject:to
-         :content-transfer-encoding;
-        bh=99ip5umDvqCM2tLIiv2DcTtnVo0ZbZNaMiQiBwA7G0E=;
-        b=kGqBEX6MJfsLKmeE6S5FREFU4HGdbI3VGKDYaHCUAahtQFxDUKBuxuSO1jHDi9EsLm
-         1UlC85NvQtVys0FtZzrXj/PGFWGP4vCkEdjX+tM2hPLYvaJOPTZg7L/h5jacfWS7koEa
-         ToW/Wq8f0CLSPtDpAGcfpus/wQ5UPE84JKqYzUSBPQnoJLn0ADf9dHBmFIow7/hMIUXb
-         k+KKipdUN0wV01OruLZJPyw3gQQpHlyFvnAvtIEfvFNO8RW7MQA2a/rAhxa4yjhPIUXj
-         XK9j1H3Tkx1nfEF8l+/BRQ78/WmSwBchsScAaK3Hn2CC6yP7UZrf4/1a3NMGv/rvnJQY
-         ZPEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
-         :subject:to:content-transfer-encoding;
-        bh=99ip5umDvqCM2tLIiv2DcTtnVo0ZbZNaMiQiBwA7G0E=;
-        b=f097Pllnci0fanHEZY6jgn9mNoaaAPpr8bU3owphd5iq7/iY5qaq9g/a5JqmYdkxPR
-         oaxR4joyP2NgWJIiD1z8ZTqKv3eB2/MQ5R9hwfB+A8OnkgofVMdW8fYVm+/1xczqwJeW
-         LNTwJN7kKQcVOddeiJ1eOiMbrEDfIQRmZPrs0jb0QRFhQFNBnAa/IS9eP7P0qi+vPSwp
-         DEgWfZNPvFN1UE2V3HlHa5KE+1hSz2Ald0QESo0WF2D+shtyyl/6A5Z1bigrn7UdqHRa
-         +k4ULslFZR0rwhnro8tv9hU+vnosN8IVAgm+Ta0DAGzNCj7/dTKwlujEn27ECD+R0OHk
-         Bw1A==
-X-Gm-Message-State: AOAM530HAhOE8k/W4rFapOSrNekxNVUNIOFl9P5ZisUIX86OQfI/Xktg
-        mf2RnbCAOMpl4+6B/bueVmQe/3lRxBY8TKcwWFw=
-X-Google-Smtp-Source: ABdhPJwdQc8v67RpIcDq8+zwO1ZaVvhObkR0atw52PS4x/1AiCg5dIdK98U77Eb7bxW7ZCLpUZtwQVoPbsqCX9YBVlo=
-X-Received: by 2002:a05:6102:20e:: with SMTP id z14mr1440852vsp.17.1601475138758;
- Wed, 30 Sep 2020 07:12:18 -0700 (PDT)
+        id S1729903AbgI3OXb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Sep 2020 10:23:31 -0400
+Received: from mail.kernel.org ([198.145.29.99]:38400 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726680AbgI3OXb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 30 Sep 2020 10:23:31 -0400
+Received: from kernel.org (unknown [87.71.73.56])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id BACBF20709;
+        Wed, 30 Sep 2020 14:23:28 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1601475811;
+        bh=pINutTAllKNrOxvh9eBLUiQGJF57WCSpPIcKD+TgvwE=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=wOm9XY7G3LjDR5NbyAZSpMyQTH90xpvpkBDGnvJwQnf/RxvZYo0bMTUf/nW4Vwm27
+         LxBapNA1DwycI7LbvZq7qob63IVAXsD9KgiH1ypaCP06FGYlrhmAj4YRuEarwZ20PU
+         /8RNSeDgkcebLR1ofrZf4ACH3DVpPZ/Nd+lbPD1M=
+Date:   Wed, 30 Sep 2020 17:23:23 +0300
+From:   Mike Rapoport <rppt@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org
+Subject: Re: [PATCH v4 19/52] memblock: get rid of a :c:type leftover
+Message-ID: <20200930142323.GL2142832@kernel.org>
+References: <cover.1601467849.git.mchehab+huawei@kernel.org>
+ <0aab04f62bc3dfa82394e20d61c05c6efbfb4859.1601467849.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Received: by 2002:ab0:380d:0:0:0:0:0 with HTTP; Wed, 30 Sep 2020 07:12:18
- -0700 (PDT)
-Reply-To: mrsbirdggie@gmail.com
-From:   "Mrs. Birdggie William" <anniemariane11@gmail.com>
-Date:   Wed, 30 Sep 2020 14:12:18 +0000
-Message-ID: <CA+4DY8iBaU1HHKowL98gnFTAG+GCaoH-3HzgGhQ4Sh5Z7XA_-g@mail.gmail.com>
-Subject: My Beloved One.
-To:     undisclosed-recipients:;
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <0aab04f62bc3dfa82394e20d61c05c6efbfb4859.1601467849.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-My Beloved One,
-Greetings to you and your family. My name is Mrs. Birdggie William 58
-years childless and widow suffering from Esophageal Cancer, my husband
-died after testing positive for the corona virus and recently my
-doctor told me that I have a few months to live due to the critical
-condition of my cancer illness. Having known my condition I decided to
-donate my late husband funds worth US $7.5 Million to help the poor,
-widows and orphanages which in return will bring blessing for my soul
-when i die.
-I took this decision because my relatives and friends have failed me
-and plundered so much of my money since my illness. If you are
-interested to receive this money to help the poor and widows, kindly
-reply me back for more details.
-Thanks and remain blessed with your family.
+Hello Mauro,
+
+On Wed, Sep 30, 2020 at 03:24:42PM +0200, Mauro Carvalho Chehab wrote:
+> chanseset b3a7bb1851c8 ("docs: get rid of :c:type explicit declarations for structs")
+> removed several :c:type: markups, except by one.
+> 
+> Now, Sphinx 3.x complains about it:
+> 
+> 	.../Documentation/core-api/boot-time-mm:26: ../mm/memblock.c:51: WARNING: Unparseable C cross-reference: 'struct\nmemblock_type'
+> 	Invalid C declaration: Expected identifier in nested name, got keyword: struct [error at 6]
+> 	  struct
+> 	memblock_type
+> 	  ------^
+
+Maybe this warning is caused by '\n' between struct and memblock_type?
+There are two more occurences of :c:type: around and they do not seem to
+cause warnings.
+
+> As, on Sphinx 3.x, the right markup is c:struct:`foo`.
+> 
+> So, let's remove it, relying on automarkup.py to convert it.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  mm/memblock.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/mm/memblock.c b/mm/memblock.c
+> index 165f40a8a254..326c6b3fec1d 100644
+> --- a/mm/memblock.c
+> +++ b/mm/memblock.c
+> @@ -50,8 +50,8 @@
+>   *
+>   * Each region is represented by :c:type:`struct memblock_region` that
+
+Can you please also convert this one?
+
+>   * defines the region extents, its attributes and NUMA node id on NUMA
+> - * systems. Every memory type is described by the :c:type:`struct
+> - * memblock_type` which contains an array of memory regions along with
+> + * systems. Every memory type is described by the struct memblock_type
+> + * which contains an array of memory regions along with
+>   * the allocator metadata. The "memory" and "reserved" types are nicely
+>   * wrapped with :c:type:`struct memblock`. This structure is statically
+
+And this?
+
+>   * initialized at build time. The region arrays are initially sized to
+> -- 
+> 2.26.2
+> 
+
+-- 
 Sincerely yours,
-=C2=A0Mrs. Birdggie William
+Mike.
