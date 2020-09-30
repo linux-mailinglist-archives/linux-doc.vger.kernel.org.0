@@ -2,84 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6818927E341
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Sep 2020 10:05:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3FF3427E3A5
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Sep 2020 10:25:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728257AbgI3IFW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Sep 2020 04:05:22 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58472 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728177AbgI3IFW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Sep 2020 04:05:22 -0400
-Received: from mail-il1-x144.google.com (mail-il1-x144.google.com [IPv6:2607:f8b0:4864:20::144])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 38D8FC0613D1
-        for <linux-doc@vger.kernel.org>; Wed, 30 Sep 2020 01:05:22 -0700 (PDT)
-Received: by mail-il1-x144.google.com with SMTP id b17so708773ilr.12
-        for <linux-doc@vger.kernel.org>; Wed, 30 Sep 2020 01:05:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=pKGcxP9oDE/Scs40mmFV3vtZyRz7YJAiQHhXReHdUHg=;
-        b=elI45khHftDyZJGrZINOJjv8vC4PvcXsRkTbuJQ80zUZqpW9FDSlh2a5WwALyJtwxV
-         k6PeGuIs+lN6IFi25iNzcEmVneBDvSCj63nkftpARbIF9XFgbfn+5HAXBfjo0TZvbKRt
-         YmrsanSewXhaWmu3gfQre7ioS7uQre8n4RmJ/8azB60QGrISpAn8F/AxqWa9vXLYBV0P
-         7mVuJncouenSVLeHbY0swJEBmWew2c+nYKZhXDjmf+ANcTrSMO113kbV8TbqaZpCb2Qj
-         XCydaivL8QGeRvkGJdgUXNnNj7x3PJWV0EILFYAoDAxEs/6s3WbG4kai5HXG9+iplvaw
-         Za+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=pKGcxP9oDE/Scs40mmFV3vtZyRz7YJAiQHhXReHdUHg=;
-        b=GD5VyJy61phE/ys1IQH7e78rX7YB9VOmE3fn8CDxs7hF1da9VZqBsjsnH/uHCRc9/9
-         IZmnp8Ocmzb+ZjMcWgjOs/uRuK1qmOk1k2Q6EsxPk+PbdP+TIRCXupUOSRrRf7hhcT0B
-         gRld7hVn3gnWFRIJ6OOMuH+EgqpcE0Hqxdq9E4nV/xScvUMlMJaTMcUF1NbBMP+3Mb6G
-         Bj2HNQ2MwPFdDWHuaQ6i8YZOv0lkbunIYjBTcy13Y8fs4OKh4zLGOAdjq9jYSM5SizFb
-         nJUXtgoUqCuNLtG9x4gODZSigbiIEM8OiQTdDn9xAYyyJ3+Fp0HB7muFMhgZzgI1XFIH
-         PGnQ==
-X-Gm-Message-State: AOAM530L0YzMVmqlnCFQiHYaeDLsqNX37xSxRyu7HOtvffqKYTKIvSeH
-        LhiELfI9MkR4lKFY9GzlV6/CrCwNpx5o/tUszIo/aw==
-X-Google-Smtp-Source: ABdhPJw8sBg7rxDdwXEr7u+Gvud+qzGZmvxlsxJ1JqPSzaw7uvPqJFBpCbkdnEP2+rrm7oJxJ9372EZRAwG+Wa2Ut00=
-X-Received: by 2002:a92:d8c5:: with SMTP id l5mr1009401ilo.287.1601453121514;
- Wed, 30 Sep 2020 01:05:21 -0700 (PDT)
-MIME-Version: 1.0
-References: <20200929101004.20288-1-brgl@bgdev.pl> <20200929101004.20288-8-brgl@bgdev.pl>
- <20200929105320.GF3956970@smile.fi.intel.com>
-In-Reply-To: <20200929105320.GF3956970@smile.fi.intel.com>
-From:   Bartosz Golaszewski <brgl@bgdev.pl>
-Date:   Wed, 30 Sep 2020 10:05:10 +0200
-Message-ID: <CAMRc=MdfH7Nsq7L7sP0zPdfqcUxFfjn7FEb1_FNLRmng-qVjPA@mail.gmail.com>
-Subject: Re: [PATCH v3 07/10] gpio: mockup: increase the number of supported
- device properties
-To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc:     Linus Walleij <linus.walleij@linaro.org>,
+        id S1725776AbgI3IZ0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Sep 2020 04:25:26 -0400
+Received: from foss.arm.com ([217.140.110.172]:59372 "EHLO foss.arm.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728563AbgI3IZZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 30 Sep 2020 04:25:25 -0400
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 456A2D6E;
+        Wed, 30 Sep 2020 01:25:25 -0700 (PDT)
+Received: from [10.57.54.5] (unknown [10.57.54.5])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D99613F6CF;
+        Wed, 30 Sep 2020 01:25:22 -0700 (PDT)
+Subject: Re: [PATCH 1/2] docs: Clarify abstract scale usage for power values
+ in Energy Model
+To:     Doug Anderson <dianders@chromium.org>
+Cc:     LKML <linux-kernel@vger.kernel.org>,
+        Linux PM <linux-pm@vger.kernel.org>, linux-doc@vger.kernel.org,
         Jonathan Corbet <corbet@lwn.net>,
-        Kent Gibson <warthog618@gmail.com>,
-        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
-        linux-doc <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Content-Type: text/plain; charset="UTF-8"
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Dietmar.Eggemann@arm.com, Quentin Perret <qperret@google.com>,
+        Matthias Kaehlcke <mka@chromium.org>,
+        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+        Rajendra Nayak <rnayak@codeaurora.org>
+References: <20200929121610.16060-1-lukasz.luba@arm.com>
+ <CAD=FV=UnNkjMiOc0DZE7+OM3-Kr1ZRynxSerdA=ifbyGiRa2Zw@mail.gmail.com>
+From:   Lukasz Luba <lukasz.luba@arm.com>
+Message-ID: <a1d1fe2a-485f-a21e-2f91-9b609223aa5a@arm.com>
+Date:   Wed, 30 Sep 2020 09:25:21 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
+ Thunderbird/60.9.0
+MIME-Version: 1.0
+In-Reply-To: <CAD=FV=UnNkjMiOc0DZE7+OM3-Kr1ZRynxSerdA=ifbyGiRa2Zw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Sep 29, 2020 at 12:53 PM Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
->
-> On Tue, Sep 29, 2020 at 12:10:01PM +0200, Bartosz Golaszewski wrote:
-> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> >
-> > The driver actually supports 4 properties but we only ever set up up to
-> > three. This will change however in upcoming patches so increase the
-> > number of really (as in: the number the property array can hold)
-> > supported properties to 4.
->
-> Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
->
-> Reported-by ? (it does not imply the necessity of Fixes tag)
+Hi Douglas,
 
-I'll add it when applying.
+On 9/30/20 12:53 AM, Doug Anderson wrote:
+> Hi,
+> 
+> On Tue, Sep 29, 2020 at 5:16 AM Lukasz Luba <lukasz.luba@arm.com> wrote:
+>>
+>> The Energy Model (EM) can store power values in milli-Watts or in abstract
+>> scale. This might cause issues in the subsystems which use the EM for
+>> estimating the device power, such as:
+>> - mixing of different scales in a subsystem which uses multiple
+>>    (cooling) devices (e.g. thermal Intelligent Power Allocation (IPA))
+>> - assuming that energy [milli-Joules] can be derived from the EM power
+>>    values which might not be possible since the power scale doesn't have to
+>>    be in milli-Watts
+>>
+>> To avoid misconfiguration add the needed documentation to the EM and
+>> related subsystems: EAS and IPA.
+>>
+>> Signed-off-by: Lukasz Luba <lukasz.luba@arm.com>
+>> ---
+>>   .../driver-api/thermal/power_allocator.rst          |  8 ++++++++
+>>   Documentation/power/energy-model.rst                | 13 +++++++++++++
+>>   Documentation/scheduler/sched-energy.rst            |  5 +++++
+>>   3 files changed, 26 insertions(+)
+> 
+> I haven't read through these files in massive detail, but the quick
+> skim makes me believe that your additions seem sane.  In general, I'm
+> happy with documenting reality, thus:
+> 
+> Reviewed-by: Douglas Anderson <dianders@chromium.org>
 
-Bartosz
+Thank you for the review.
+
+> 
+> I will note: you haven't actually updated the device tree bindings.
+> Thus, presumably, anyone who is specifying these numbers in the device
+> tree is still supposed to specify them in a way that mW can be
+> recovered, right?  Said another way: nothing about your patches makes
+> it OK to specify numbers in device trees using an "abstract scale",
+> right?
+
+For completeness, we are talking here about the binding from:
+Documentation/devicetree/bindings/arm/cpus.yaml
+which is 'dynamic-power-coefficient'. Yes, it stays untouched, also the
+unit (uW/MHz/V^2) which then allows to have mW in the power
+values in the EM.
+
+Regards,
+Lukasz
