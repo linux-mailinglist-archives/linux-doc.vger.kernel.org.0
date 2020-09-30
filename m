@@ -2,21 +2,21 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CFDB727EB91
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Sep 2020 16:58:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1D1ED27EBA2
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Sep 2020 17:00:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728793AbgI3O6X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Sep 2020 10:58:23 -0400
-Received: from mx2.suse.de ([195.135.220.15]:53844 "EHLO mx2.suse.de"
+        id S1728149AbgI3PAB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Sep 2020 11:00:01 -0400
+Received: from mx2.suse.de ([195.135.220.15]:57232 "EHLO mx2.suse.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728729AbgI3O6X (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 30 Sep 2020 10:58:23 -0400
+        id S1725872AbgI3PAB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 30 Sep 2020 11:00:01 -0400
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id D5AA4B2DC;
-        Wed, 30 Sep 2020 14:58:20 +0000 (UTC)
-Date:   Wed, 30 Sep 2020 16:58:20 +0200
-Message-ID: <s5ha6x7gvlf.wl-tiwai@suse.de>
+        by mx2.suse.de (Postfix) with ESMTP id 7E873AFA0;
+        Wed, 30 Sep 2020 14:59:59 +0000 (UTC)
+Date:   Wed, 30 Sep 2020 16:59:59 +0200
+Message-ID: <s5h8scrgvio.wl-tiwai@suse.de>
 From:   Takashi Iwai <tiwai@suse.de>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
@@ -26,10 +26,10 @@ Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Julia Lawall <Julia.Lawall@inria.fr>,
         Takashi Iwai <tiwai@suse.com>, alsa-devel@alsa-project.org,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 39/52] docs: writing-an-alsa-driver.rst: fix some bad c:func: markups
-In-Reply-To: <9c68c182ae5aa978d68b64695b1e3292fcf58e76.1601467849.git.mchehab+huawei@kernel.org>
+Subject: Re: [PATCH v4 37/52] docs: sound: writing-an-alsa-driver.rst: get rid of :c:type
+In-Reply-To: <00f330aabda084ede41ceb1932d0d687c42266c3.1601467849.git.mchehab+huawei@kernel.org>
 References: <cover.1601467849.git.mchehab+huawei@kernel.org>
-        <9c68c182ae5aa978d68b64695b1e3292fcf58e76.1601467849.git.mchehab+huawei@kernel.org>
+        <00f330aabda084ede41ceb1932d0d687c42266c3.1601467849.git.mchehab+huawei@kernel.org>
 User-Agent: Wanderlust/2.15.9 (Almost Unreal) SEMI/1.14.6 (Maruoka)
  FLIM/1.14.9 (=?UTF-8?B?R29qxY0=?=) APEL/10.8 Emacs/25.3
  (x86_64-suse-linux-gnu) MULE/6.0 (HANACHIRUSATO)
@@ -39,24 +39,32 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, 30 Sep 2020 15:25:02 +0200,
+On Wed, 30 Sep 2020 15:25:00 +0200,
 Mauro Carvalho Chehab wrote:
 > 
-> Some such markups are invalid, as reported by Sphinx:
+> the :c:type shouldn't be used with structs with Sphinx 3,
+> as the C domain there uses .. c:struct for structs.
 > 
-> 	./Documentation/sound/kernel-api/writing-an-alsa-driver.rst:3317: WARNING: Unparseable C cross-reference: 'snd_rawmidi_transmit*'
+> As we have the automarkup extension, let's just get rid of
+> all :c:type as a hole, as those will be automagically
+                   whole?
+
+> marked as such.
+> 
+> This solves a bunch of warnings with Sphinx 3, like those:
+> 
+> 	.../Documentation/sound/kernel-api/writing-an-alsa-driver.rst:490: WARNING: Unparseable C cross-reference: 'calling snd_card_free'
+> 	Invalid C declaration: Expected end of definition. [error at 8]
+> 	  calling snd_card_free
+> 	  --------^
+> 	.../Documentation/sound/kernel-api/writing-an-alsa-driver.rst:3328: WARNING: Unparseable C cross-reference: 'snd_rawmidi_transmit*'
 > 	Invalid C declaration: Expected end of definition. [error at 20]
 > 	  snd_rawmidi_transmit*
 > 	  --------------------^
-> 	./Documentation/sound/kernel-api/writing-an-alsa-driver.rst:3917: WARNING: Unparseable C cross-reference: 'copy_from/to_user'
+> 	.../Documentation/sound/kernel-api/writing-an-alsa-driver.rst:3928: WARNING: Unparseable C cross-reference: 'copy_from/to_user'
 > 	Invalid C declaration: Expected end of definition. [error at 9]
 > 	  copy_from/to_user
 > 	  ---------^
-> 
-> The first case seems to be better replaced by a literal.
-> 
-> For the second one, let's generate cross-references, by
-> spliting it in two.
 > 
 > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
