@@ -2,76 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F10B627E996
-	for <lists+linux-doc@lfdr.de>; Wed, 30 Sep 2020 15:26:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D6D9D27EA24
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Sep 2020 15:43:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730273AbgI3N0e (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 30 Sep 2020 09:26:34 -0400
-Received: from mail.kernel.org ([198.145.29.99]:39354 "EHLO mail.kernel.org"
+        id S1729903AbgI3Nno (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Sep 2020 09:43:44 -0400
+Received: from foss.arm.com ([217.140.110.172]:36532 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730269AbgI3NZW (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 30 Sep 2020 09:25:22 -0400
-Received: from mail.kernel.org (unknown [95.90.213.196])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id CE6CD20936;
-        Wed, 30 Sep 2020 13:25:21 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1601472322;
-        bh=FAz68Gpz6mwGMLMcTnrOG5cmfJRovbY6MFVW9r+Stmw=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=rXDXuFXw2e8jXnlLKe0ZWDgyHUoGQdH4iHlVMSEDRUc7Ht4c4oSwsC17qwD+ylUDJ
-         smwLU/KmuZxZwehuAw3VP7GBVrhW6pFpRPB1UOX2CPULPoq8uUkhLVYG+9BkVcP/sg
-         PFx0kPg0u3166iYNZmackBN/awxK1c7SWDGyN5I4=
-Received: from mchehab by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1kNc6i-001XLO-0R; Wed, 30 Sep 2020 15:25:20 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        id S1728235AbgI3Nno (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 30 Sep 2020 09:43:44 -0400
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C4DE430E;
+        Wed, 30 Sep 2020 06:43:43 -0700 (PDT)
+Received: from [10.37.12.68] (unknown [10.37.12.68])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id E67053F6CF;
+        Wed, 30 Sep 2020 06:43:41 -0700 (PDT)
+Subject: Re: [PATCH v4 18/52] math64.h: kernel-docs: Convert some markups into
+ normal comments
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+Cc:     "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        Chunyan Zhang <chunyan.zhang@unisoc.com>,
+        Oleg Nesterov <oleg@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
         linux-kernel@vger.kernel.org
-Subject: [PATCH v4 52/52] docs: conf.py: change the Sphinx 3.x+ text
-Date:   Wed, 30 Sep 2020 15:25:15 +0200
-Message-Id: <5ac34fa5793a3b97ea0df50312d76d6ccade9efd.1601467849.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <cover.1601467849.git.mchehab+huawei@kernel.org>
 References: <cover.1601467849.git.mchehab+huawei@kernel.org>
+ <97e7afe71713d70c2399a7277a114c071e54a8e0.1601467849.git.mchehab+huawei@kernel.org>
+From:   Vincenzo Frascino <vincenzo.frascino@arm.com>
+Message-ID: <31fd707b-7122-21bc-2656-d4fc5f50a7ac@arm.com>
+Date:   Wed, 30 Sep 2020 14:46:16 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+In-Reply-To: <97e7afe71713d70c2399a7277a114c071e54a8e0.1601467849.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-After the build fix patches, it is believed that the output
-with Sphinx 3.x won't be a problem. Still, the C domain
-support was re-written, and this can have caused hidden
-issues.
 
-So, let's keep the warning, changing it to a lighter
-warning text.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/conf.py | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On 9/30/20 2:24 PM, Mauro Carvalho Chehab wrote:
+> There are several functions at math64.h that are also
+> defined at div64.c. As both are included at kernel-api.rst,
+> Sphinx 3.x complains about symbol duplication:
+> 
+> 	./lib/math/div64.c:73: WARNING: Duplicate C declaration, also defined in 'core-api/kernel-api'.
+> 	Declaration is 'div_s64_rem'.
+> 	./lib/math/div64.c:104: WARNING: Duplicate C declaration, also defined in 'core-api/kernel-api'.
+> 	Declaration is 'div64_u64_rem'.
+> 	./lib/math/div64.c:144: WARNING: Duplicate C declaration, also defined in 'core-api/kernel-api'.
+> 	Declaration is 'div64_u64'.
+> 	./lib/math/div64.c:172: WARNING: Duplicate C declaration, also defined in 'core-api/kernel-api'.
+> 	Declaration is 'div64_s64'.
+> 
+> In order to avoid Sphinx warnings about duplication, change the kernel-doc
+> markups to just comments at math64.h.
+>
 
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index b402bd8f6f71..4f5d15abd047 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -47,8 +47,8 @@ extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include',
- #
- if major >= 3:
-     sys.stderr.write('''WARNING: The kernel documentation build process
--        does not work correctly with Sphinx v3.0 and above.  Expect errors
--        in the generated output.
-+        support for Sphinx v3.0 and above is brand new. Be prepared for
-+        possible issues in the generated output.
-         ''')
-     if minor > 0 or patch >= 2:
-         # Sphinx c function parser is more pedantic with regards to type
+Reviewed-by: Vincenzo Frascino <vincenzo.frascino@arm.com>
+
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  include/linux/math64.h | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/include/linux/math64.h b/include/linux/math64.h
+> index 3381d9e33c4e..66deb1fdc2ef 100644
+> --- a/include/linux/math64.h
+> +++ b/include/linux/math64.h
+> @@ -28,7 +28,7 @@ static inline u64 div_u64_rem(u64 dividend, u32 divisor, u32 *remainder)
+>  	return dividend / divisor;
+>  }
+>  
+> -/**
+> +/*
+>   * div_s64_rem - signed 64bit divide with 32bit divisor with remainder
+>   * @dividend: signed 64bit dividend
+>   * @divisor: signed 32bit divisor
+> @@ -42,7 +42,7 @@ static inline s64 div_s64_rem(s64 dividend, s32 divisor, s32 *remainder)
+>  	return dividend / divisor;
+>  }
+>  
+> -/**
+> +/*
+>   * div64_u64_rem - unsigned 64bit divide with 64bit divisor and remainder
+>   * @dividend: unsigned 64bit dividend
+>   * @divisor: unsigned 64bit divisor
+> @@ -56,7 +56,7 @@ static inline u64 div64_u64_rem(u64 dividend, u64 divisor, u64 *remainder)
+>  	return dividend / divisor;
+>  }
+>  
+> -/**
+> +/*
+>   * div64_u64 - unsigned 64bit divide with 64bit divisor
+>   * @dividend: unsigned 64bit dividend
+>   * @divisor: unsigned 64bit divisor
+> @@ -68,7 +68,7 @@ static inline u64 div64_u64(u64 dividend, u64 divisor)
+>  	return dividend / divisor;
+>  }
+>  
+> -/**
+> +/*
+>   * div64_s64 - signed 64bit divide with 64bit divisor
+>   * @dividend: signed 64bit dividend
+>   * @divisor: signed 64bit divisor
+> 
+
 -- 
-2.26.2
-
+Regards,
+Vincenzo
