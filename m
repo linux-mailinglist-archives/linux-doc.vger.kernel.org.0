@@ -2,131 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 23F5727FE5F
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Oct 2020 13:29:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E151B27FECE
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Oct 2020 14:14:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731925AbgJAL3Q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Oct 2020 07:29:16 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58396 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731839AbgJAL3O (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Oct 2020 07:29:14 -0400
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com [IPv6:2a00:1450:4864:20::442])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 14906C0613E2
-        for <linux-doc@vger.kernel.org>; Thu,  1 Oct 2020 04:29:14 -0700 (PDT)
-Received: by mail-wr1-x442.google.com with SMTP id t10so5273607wrv.1
-        for <linux-doc@vger.kernel.org>; Thu, 01 Oct 2020 04:29:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=RBzhaq1QTDsCmP+j+XwlnjdZ6fXeqGUq7x/CRDlU94o=;
-        b=h4W+V31NRlENcALCJvo5DYM+iBJ3zPJAjFZomOeoZcDG6CxRUrImpCwGTUyUejVYHo
-         3McL0OHAXeZQGwPTrh9V8r9H0HftDsfN2nClT1r0iHuKjAds2iS7cgcZt37JSOzqIFUk
-         lMGjt4/yZ6uRy4H+jy4UCb9h644hne5/aJPw0PuA6NgYufjOHha1rvVU5g96svMjPxeS
-         wMaV3i2jqPdXBwarXC/9g5h4bFh0rbQmbI9SuKgmtOJ3dxcEra6ZhptG08/nwrqhCCpD
-         o7jDHdSctF6nw6ANP8WR5OYoQP9jfiyAcA2Avt2ii55pTgLEhKFYE/JUb3V8n3HHOhjB
-         86SA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=RBzhaq1QTDsCmP+j+XwlnjdZ6fXeqGUq7x/CRDlU94o=;
-        b=gdiLuQ4z+2AkfLdGnh5oR7B7GtC2DDD6eivok1k9IGgEoBnKK5VSytWUn+sHge8FOk
-         7WzeOGS4ZXkaM0KE4cR9k7bIfz+dVsevhE40FUx5zDtOENa0oSEUrxSb08/nxd7gswrs
-         LuCjX4wDKVMV3uxuTJJ4lb3U3KMtkt2AstOFHQf1XcIDAguAWTC5HFEZJYX9b28O4S5o
-         LPk6helVyP0NmWK5AXZcrS74fibSjMPMul8IvUHfdQgzI2kwm9RYZBg0t6duPNclf6OI
-         5Q0Fvhl/7DWKW9c5bJLDoyaordNSAzlAB1J5uZuwMWhwy92rY3FwjWpLehDCS45LLFAZ
-         dVTA==
-X-Gm-Message-State: AOAM533z7CarzyPY2L33jbouI1jJYQmfuUXc73WVrmekmluSlk9rGM+N
-        baKy3tP6+e3z/2cTNccIt9WfaA==
-X-Google-Smtp-Source: ABdhPJxDMutN0ciYw0+6lxB3h9W30Gun+e3sEeG/4ZjLvqfEtSdB3W+BHwAmMEgp6hYKDiWzHzf6gg==
-X-Received: by 2002:a5d:4247:: with SMTP id s7mr8344135wrr.167.1601551752631;
-        Thu, 01 Oct 2020 04:29:12 -0700 (PDT)
-Received: from holly.lan (cpc141216-aztw34-2-0-cust174.18-1.cable.virginm.net. [80.7.220.175])
-        by smtp.gmail.com with ESMTPSA id y14sm8249720wma.48.2020.10.01.04.29.11
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Oct 2020 04:29:12 -0700 (PDT)
-Date:   Thu, 1 Oct 2020 12:29:10 +0100
-From:   Daniel Thompson <daniel.thompson@linaro.org>
+        id S1731846AbgJAMOa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Oct 2020 08:14:30 -0400
+Received: from mx.kolabnow.com ([95.128.36.40]:54652 "EHLO mx.kolabnow.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1731767AbgJAMOa (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Oct 2020 08:14:30 -0400
+Received: from localhost (unknown [127.0.0.1])
+        by ext-mx-out001.mykolab.com (Postfix) with ESMTP id 9008E1173;
+        Thu,  1 Oct 2020 14:04:54 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
+        message-id:references:in-reply-to:subject:subject:from:from:date
+        :date:content-transfer-encoding:content-type:content-type
+        :mime-version:received:received:received; s=dkim20160331; t=
+        1601553893; x=1603368294; bh=WFOjaPFWFwLKOkzrLUcwcJl+MLRDfD7UTAK
+        zZgQfLro=; b=F4+ZJeHH9nHc8Zw7Hr5Ftfv6O2qzvm6N9hN/8UFN2of/jzbii35
+        ggWgB2BvS8zgplPWe2KOzuC1puOHP7MRalxvlYz5rq9ReP0CuFEMH1knXBeQki0A
+        Z85dRleDpYZN3CBrDtTYhrz+PtEcDbdKqs9KU9EtS4hYqo5Z/PMkTfher9IOxQC2
+        7uhVyWK3zJMT9k1DORtPwpFfyST7QkTmAvDZGEYOEGlmcFTXAuIVNFFX8KZ2veY2
+        lJAowxpV8vF9Kfgd7h3X4nB0v5nqge2hpRM4Crg9wSQ/cfkfmWsqLUi4tuQ8UVGu
+        2HM9jUVVFsSARmmRYcXXVFVBTlXE/E2AyOPnWQbbLxeeo3hzCpjDQfvd8/3WaiPL
+        ElL+iDBegM6LRzVrVN221MiapJDMy0zZoJGJpGOmVd5GxCsdFM5I83l7kEajx5JR
+        YCFsCL38R7howfS1oG5qM86Omq962HOq0O9LjNFhWfdPN4XNleVp+V8jNrU8TRhw
+        qYOmRT62LCn9fOBOLWy9pPzDoRNjQ3jHKjHbGxxKUCD0GbmYz9ULLzOp7eRfOdQN
+        aV9gSS9vfUleoZy2uvCjVbKa5Alf5A8MrBcg+J9crD7RG2cOU4IUeJuktADB6qW8
+        tboYJU/BsFqrzXrSfDRqz+NKsDz/kxnlW/V29VWt9DLsa9zPqxTqSZIY=
+X-Virus-Scanned: amavisd-new at mykolab.com
+X-Spam-Flag: NO
+X-Spam-Score: -1.9
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.9 tagged_above=-10 required=5
+        tests=[BAYES_00=-1.9] autolearn=ham autolearn_force=no
+Received: from mx.kolabnow.com ([127.0.0.1])
+        by localhost (ext-mx-out001.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id evJ1W7hYVqBA; Thu,  1 Oct 2020 14:04:53 +0200 (CEST)
+Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
+        by ext-mx-out001.mykolab.com (Postfix) with ESMTPS id 7B63D1093;
+        Thu,  1 Oct 2020 14:04:53 +0200 (CEST)
+Received: from int-subm002.mykolab.com (unknown [10.9.37.2])
+        by int-mx003.mykolab.com (Postfix) with ESMTPS id 0D0FF2005;
+        Thu,  1 Oct 2020 14:04:52 +0200 (CEST)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date:   Thu, 01 Oct 2020 14:04:51 +0200
+From:   Federico Vaga <federico.vaga@vaga.pv.it>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Douglas Anderson <dianders@chromium.org>,
-        Jason Wessel <jason.wessel@windriver.com>,
-        kgdb-bugreport@lists.sourceforge.net, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 41/52] docs: kgdb.rst: fix :c:type: usages
-Message-ID: <20201001112910.rknvq3gswwdvhmkx@holly.lan>
+        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 24/52] docs: it_IT: fix namespace collisions at
+ locking.rst
+In-Reply-To: <d5931981f4534075a044177811292fb182f7a468.1601467849.git.mchehab+huawei@kernel.org>
 References: <cover.1601467849.git.mchehab+huawei@kernel.org>
- <556f72684846c3cc30eb2f0a1e064183d4e1bdc9.1601467849.git.mchehab+huawei@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <556f72684846c3cc30eb2f0a1e064183d4e1bdc9.1601467849.git.mchehab+huawei@kernel.org>
+ <d5931981f4534075a044177811292fb182f7a468.1601467849.git.mchehab+huawei@kernel.org>
+Message-ID: <742872e5458dcad09471bae36464633f@vaga.pv.it>
+X-Sender: federico.vaga@vaga.pv.it
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 30, 2020 at 03:25:04PM +0200, Mauro Carvalho Chehab wrote:
-> Which Sphinx 3, :c:type:  can't be used anymore for structs,
-> as this should be used only for typedefs.
+On 2020-09-30 15:24, Mauro Carvalho Chehab wrote:
+> The C domain functions there collide with the English ones,
+> due to namespace collision, generating lots of warnings with
+> Sphinx 3.x:
 > 
-> Rely on automarkup.py for struct references.
+> 	./include/linux/mutex.h:121: WARNING: Duplicate C declaration, also
+> defined in 'translations/it_IT/kernel-hacking/locking'.
+> 	Declaration is 'mutex_init'.
+> 	./include/linux/mutex.h:152: WARNING: Duplicate C declaration, also
+> defined in 'translations/it_IT/kernel-hacking/locking'.
+> 	Declaration is 'mutex_is_locked'.
+> 	./include/linux/mutex.h:226: WARNING: Duplicate C declaration, also
+> defined in 'translations/it_IT/kernel-hacking/locking'.
+> 	Declaration is 'mutex_trylock_recursive'.
+> 	./kernel/locking/mutex.c:281: WARNING: Duplicate C declaration, also
+> defined in 'translations/it_IT/kernel-hacking/locking'.
+> 	Declaration is 'mutex_lock'.
+> 	...
 > 
-> This file has an special case, though: it uses the tag also
-> to point to an array. Let's use, instead, :c:expr: for such
-> purpose, as it should do the right thing.
-> 
-> This should fix this warning:
-> 
-> 	./Documentation/dev-tools/kgdb.rst:875: WARNING: Unparseable C cross-reference: 'kdb_poll_funcs[]'
-> 	Invalid C declaration: Expected end of definition. [error at 14]
-> 	  kdb_poll_funcs[]
-> 	  --------------^
+> Add a namespace tag there, in order to prevent that.
 > 
 > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Acked-by: Daniel Thompson <daniel.thompson@linaro.org>
-
-
-Daniel.
+Acked-by: Federico Vaga <federico.vaga@vaga.pv.it>
 
 
 > ---
->  Documentation/dev-tools/kgdb.rst | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
+>  Documentation/translations/it_IT/kernel-hacking/locking.rst | 2 ++
+>  1 file changed, 2 insertions(+)
 > 
-> diff --git a/Documentation/dev-tools/kgdb.rst b/Documentation/dev-tools/kgdb.rst
-> index c908ef4d3f04..77b688e6a254 100644
-> --- a/Documentation/dev-tools/kgdb.rst
-> +++ b/Documentation/dev-tools/kgdb.rst
-> @@ -726,7 +726,7 @@ The kernel debugger is organized into a number of components:
->     -  contains an arch-specific trap catcher which invokes
->        kgdb_handle_exception() to start kgdb about doing its work
->  
-> -   -  translation to and from gdb specific packet format to :c:type:`pt_regs`
-> +   -  translation to and from gdb specific packet format to struct pt_regs
->  
->     -  Registration and unregistration of architecture specific trap
->        hooks
-> @@ -846,7 +846,7 @@ invokes a callback in the serial core which in turn uses the callback in
->  the UART driver.
->  
->  When using kgdboc with a UART, the UART driver must implement two
-> -callbacks in the :c:type:`struct uart_ops <uart_ops>`.
-> +callbacks in the struct uart_ops.
->  Example from ``drivers/8250.c``::
->  
->  
-> @@ -875,7 +875,7 @@ kernel when ``CONFIG_KDB_KEYBOARD=y`` is set in the kernel configuration.
->  The core polled keyboard driver for PS/2 type keyboards is in
->  ``drivers/char/kdb_keyboard.c``. This driver is hooked into the debug core
->  when kgdboc populates the callback in the array called
-> -:c:type:`kdb_poll_funcs[]`. The kdb_get_kbd_char() is the top-level
-> +:c:expr:`kdb_poll_funcs[]`. The kdb_get_kbd_char() is the top-level
->  function which polls hardware for single character input.
->  
->  kgdboc and kms
-> -- 
-> 2.26.2
+> diff --git
+> a/Documentation/translations/it_IT/kernel-hacking/locking.rst
+> b/Documentation/translations/it_IT/kernel-hacking/locking.rst
+> index 4615df5723fb..bf1acd6204ef 100644
+> --- a/Documentation/translations/it_IT/kernel-hacking/locking.rst
+> +++ b/Documentation/translations/it_IT/kernel-hacking/locking.rst
+> @@ -1,5 +1,7 @@
+>  .. include:: ../disclaimer-ita.rst
 > 
+> +.. c:namespace:: it_IT
+> +
+>  :Original: :ref:`Documentation/kernel-hacking/locking.rst
+> <kernel_hacking_lock>`
+>  :Translator: Federico Vaga <federico.vaga@vaga.pv.it>
+
+-- 
+Federico Vaga
+http://www.federicovaga.it/
