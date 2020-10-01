@@ -2,136 +2,175 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D384327FB74
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Oct 2020 10:28:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6953027FB98
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Oct 2020 10:39:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725894AbgJAI2p (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Oct 2020 04:28:45 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:18880 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1725892AbgJAI2o (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Oct 2020 04:28:44 -0400
-Received: from pps.filterd (m0187473.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 0918QmQl142172;
-        Thu, 1 Oct 2020 04:28:03 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=subject : to : cc :
- references : from : message-id : date : mime-version : in-reply-to :
- content-type : content-transfer-encoding; s=pp1;
- bh=hJe5IYbnXxWaynPPDG0hkAOrhAUGmw0xJhVB7on6ViY=;
- b=KZfmVcITXJqfMoBUqprUDRuB/i+1RuEiFSUuYrV7Geb/QgSQ5E/ZtgUhmcPD9h+Sq6v4
- gJFrONQGdF19j+Z9Sq5kI4WFqZou1Fecg4pzdJO2lge6nDNS2lD/u38rK2svoAu0MdRS
- zaKFyUbqD/T0gGe0IDYnFjQG2BtqN0diQKyLmVwmJ8xJ5OZDtL5ekeZpanIVMHKTFVb3
- cgaowgLl5RsMfuys6XE/Pd1LNqwaAabp4o9qeowfLB7DKkE3l1RYnwTVJfsdMTVfqzsW
- Cm2TkvJMRzTAp2LrBkgY6ZxGJbiw6ttmS9DGAaagKzauV387Iiq99qf+YCDj6W73Hvtf 7g== 
-Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com [169.51.49.98])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 33wab6a0td-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 01 Oct 2020 04:28:02 -0400
-Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
-        by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 0918RN8b008924;
-        Thu, 1 Oct 2020 08:27:58 GMT
-Received: from b06cxnps4074.portsmouth.uk.ibm.com (d06relay11.portsmouth.uk.ibm.com [9.149.109.196])
-        by ppma03ams.nl.ibm.com with ESMTP id 33sw9859hw-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Thu, 01 Oct 2020 08:27:58 +0000
-Received: from d06av26.portsmouth.uk.ibm.com (d06av26.portsmouth.uk.ibm.com [9.149.105.62])
-        by b06cxnps4074.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 0918Ruun26214702
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Thu, 1 Oct 2020 08:27:56 GMT
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 44D1EAE04D;
-        Thu,  1 Oct 2020 08:27:56 +0000 (GMT)
-Received: from d06av26.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 9B868AE051;
-        Thu,  1 Oct 2020 08:27:54 +0000 (GMT)
-Received: from JAVRIS.in.ibm.com (unknown [9.85.92.124])
-        by d06av26.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
-        Thu,  1 Oct 2020 08:27:54 +0000 (GMT)
-Subject: Re: [PATCH v4 23/52] docs: trace-uses.rst: remove bogus c-domain tags
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "Steven Rostedt (VMware)" <rostedt@goodmis.org>,
-        Miroslav Benes <mbenes@suse.cz>,
-        Petr Mladek <pmladek@suse.com>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        linux-kernel@vger.kernel.org
-References: <cover.1601467849.git.mchehab+huawei@kernel.org>
- <f1d8fc4bb976f8c25c6fb444b0b675d9a849ba06.1601467849.git.mchehab+huawei@kernel.org>
- <5e19b1d5-8015-c41d-788d-00b121599c6b@linux.vnet.ibm.com>
- <20201001084143.7c6f7836@coco.lan>
-From:   Kamalesh Babulal <kamalesh@linux.vnet.ibm.com>
-Message-ID: <3c1bca2d-b954-1f48-3cf9-617e01137e99@linux.vnet.ibm.com>
-Date:   Thu, 1 Oct 2020 13:57:52 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.11.0
+        id S1731243AbgJAIjv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Oct 2020 04:39:51 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60440 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725975AbgJAIjv (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Oct 2020 04:39:51 -0400
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EEA61C0613E2
+        for <linux-doc@vger.kernel.org>; Thu,  1 Oct 2020 01:39:50 -0700 (PDT)
+Received: from ip4d14bc8c.dynamic.kabel-deutschland.de ([77.20.188.140] helo=truhe.fritz.box); authenticated
+        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        id 1kNu7v-0006b9-K1; Thu, 01 Oct 2020 10:39:47 +0200
+From:   Thorsten Leemhuis <linux@leemhuis.info>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [RFC PATCH v1 00/26] Make reporting-bugs easier to grasp and yet more detailed
+Date:   Thu,  1 Oct 2020 10:39:21 +0200
+Message-Id: <cover.1601541165.git.linux@leemhuis.info>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <20201001084143.7c6f7836@coco.lan>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
- definitions=2020-10-01_02:2020-10-01,2020-10-01 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 malwarescore=0 phishscore=0
- mlxscore=0 adultscore=0 impostorscore=0 lowpriorityscore=0 spamscore=0
- priorityscore=1501 clxscore=1015 bulkscore=0 mlxlogscore=999
- suspectscore=0 classifier=spam adjust=0 reason=mlx scancount=1
- engine=8.12.0-2006250000 definitions=main-2010010070
+Content-Transfer-Encoding: 8bit
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1601541591;15880b4a;
+X-HE-SMSGID: 1kNu7v-0006b9-K1
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 01/10/20 12:11 pm, Mauro Carvalho Chehab wrote:
-> Em Thu, 1 Oct 2020 11:36:53 +0530
-> Kamalesh Babulal <kamalesh@linux.vnet.ibm.com> escreveu:
-> 
->> On 30/09/20 6:54 pm, Mauro Carvalho Chehab wrote:
->>> There are some c-domain tags that are wrong. While this won't
->>> cause problems with Sphinx < 3.0, this cause troubles with
->>> newer versions, as the C parser won't recognize the contents
->>> of the tag, and will drop it from the output.
->>>
->>> Let's just place them at literal blocks.
->>>   
->>
->> tired with Sphinx v3.2.1, invalid C declaration warnings are not
->> seen with the patch.
-> 
-> Well, it would be possible to use :c:expr: with Sphinx 3.2.1,
-> in order for it to check for invalid C declarations.
-> 
-> Btw, this is one of the improvements over the last versions: the
-> rewritten C parser there is a lot more pedantic with regards to the
-> C syntax.
-> 
-> -
-> 
-> That's said, the backward-compatibility code I added at 
-> Documentation/sphinx/cdomain.py will convert this into a 
-> literal markup though, as there's no equivalent tag before 
-> Sphinx 3.x.
-> 
-> As there are still one upstream issue on Sphinx 3.x that requires a fix[1],
-> and we don't know yet the issues with :c:expr[2], at least for now, I would 
-> avoid adding :c:expr: markups.
-> 
-> [1] Right now, the C domain is not able to have two names
->     for different types. So, it is not possible to have
->     a struct "foo" and a function "foo".
-> 
->     Due to that, while I was able to fix all warnings with
->     Sphinx 2.x build, Sphinx 3.x will still have bogus
->     warnings.
-> 
-> [2] One of the limitations of :c:expr: is with regards to function
->     prototypes. You can't use it like: :c:expr:`int foo(void);`,
->     as it will complain with the function return type.
-> 
+This series rewrites the "how to report bugs to the Linux kernel maintainers"
+document to make it more straight forward and the essence easier to grasp. At
+the same time make the text provide a lot more details about the process in form
+of a reference section, so users that want or need to know them have them at
+hand.
 
-Thank you for explaining in detail on the :c:expr: tag. I intended to 
-say this patch fixes the warnings seen while using the c-domain tags
-and are fixed by converting them into literals. 
+The goal of this rewrite: improve the quality of the bug reports and reduce the
+number of reports that get ignored. This was motivated by many reports of poor
+quality the main author of the rewrite stumped upon when he was tracking
+regressions.
 
+For the curious, this is how the text looks in the end:
+https://gitlab.com/knurd42/linux/-/raw/reporting-bugs-rfc/Documentation/admin-guide/reporting-bugs.rst
+
+For comparison, here you can find the old text and the commits to it and its
+predecessor:
+https://www.kernel.org/doc/html/latest/admin-guide/reporting-bugs.html
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/plain/Documentation/admin-guide/reporting-bugs.rst
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/Documentation/admin-guide/reporting-bugs.rst
+https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/log/REPORTING-BUGS
+
+This is an early RFC and likely has some spelling and grammatical mistakes.
+Sorry for that, the main author is not a native English speaker and makes too
+many of those mistakes even in his mother tongue. He used hunspell and
+LanguageTool to find errors, but noticed those tools miss quite a few mistakes.
+Hopefully it's not too bad.
+
+The main author of the rewrite is also fully aware the text got quite long in
+the end. That happened as he tried to make users avoid many of the problem he
+noticed in bug report, which needed quite a bit of space to describe.
+Nevertheless, he tried to make sure the text uses a structure where only those
+that want to know all the details have to read it. That's mainly realized with
+the help of the TL;DR and the short guide at the top of the document. Those
+should be good enough for a lot of situations.
+
+There are a few points that will need to be discussed. The comment in the
+individual patches will point some of those out; that for example includes
+things like "dual licensing under CC-BY 4.0", "are we asking too much from users
+when telling them to test mainline?", and "CC LKML or something else on all
+reports?". But a few points are best raised here:
+
+ * The old and the new reporting-bugs text take a totally different approach to
+bugzilla.kernel.org. The old mentions it as the place to file your issue if
+you don't know where to go. The new one mentions it rarely and most of the
+time warn users that it's often the wrong place to go. This approach was
+chosen as the main author noticed quite a few users (or even a lot?) get no
+reply to the bugs they file in bugzilla. That's kind of expected, as quite a
+few (many? most?) of the maintainers don't even get notified when reports for
+their subsystem get filed there. Anyway: not getting a reply is something
+that is just annoying for users and might make them angry. Improving bugzilla
+would be an option, but on the kernel and maintainers summit 2017 (sorry it
+took so long) it was agreed on to first go this route, as it's easier to
+reach and less controversial, as many maintainers likely are unwilling to
+deal with bugzilla.
+
+ * The text states "see above" or "see below" in a few places. Should those be
+proper links? But then some anchors will need to be placed manually in a few
+places, which slightly hurt readability of the plain text. Could RST or
+autosectionlabel help here somewhat (without changing the line
+"autosectionlabel_maxdepth = 2" in Documentation/conf.py, which likely is
+unwanted)?
+
+ * The new text avoids the word "bug" and uses "issues" instead, as users face
+issues which might or might not be caused by bugs. Due to this approach it
+might make sense to rename the document to "reporting-issues". But for now
+everything is left as it is, as changing the name of a well known file has
+downsides; but maybe at least the documents headline should get the
+s/bugs/issues/ treatment.
+
+ * How to make sure everybody that cares get a chance to review this? As this is
+an early RFC, the author chose to sent it only to the docs maintainer,
+linux-docs and LKML, to see how well this approach is received in general.
+Once it is agreed that this is the route forward, a lot of other people need
+to be CCed to review it; the stable maintainers for example should check if
+the section on handling issues with stable and longterm kernels is acceptable
+for them. In the end it's something a lot of maintainers might want to take
+at least a quick look at, as they will be dealing with the reports. But there
+is no easy way to contact all of them (apart from CCing all of them), as most
+of them likely don't read LKML anymore. Should the author maybe abuse
+ksummit-discuss, as this likely will reach all the major stakeholders Side
+note: maybe it would be good to have a list for things like this on vger...
+
+The patch series is against docs-next and can also be found on gitlab:
+git://git@gitlab.com:knurd42/linux.git reporting-bugs-rfc
+
+Strictly speaking this series is not bisectable, as the old text it left in
+place and removed slowly by the patches in the series when they add new text
+that covers the same aspect. Thus, both old and new text are incomplete or
+inconsistent (and thus would not build, if we'd talked about code). But that is
+only relevant for those that read the text before the series is fully applied.
+That seemed like an acceptable downside in this case, as this makes it easier to
+compare the old and new approach.
+
+Note: The main autor is not a developer, so he will have gotten a few things in
+the procedure wrong. Let him know if you spot something where things are off.
+
+Thorsten Leemhuis (26):
+  docs: reporting-bugs: temporary markers for licensing and diff reasons
+  docs: reporting-bugs: Create a TLDR how to report issues
+  docs: reporting-bugs: step-by-step guide on how to report issues
+  docs: reporting-bugs: step-by-step guide for issues in stable &
+    longterm
+  docs: reporting-bugs: begin reference section providing details
+  docs: reporting-bugs: point out we only care about fresh vanilla
+    kernels
+  docs: reporting-bugs: let users classify their issue
+  docs: reporting-bugs: make readers check the taint flag
+  docs: reporting-bugs: help users find the proper place for their
+    report
+  docs: reporting-bugs: remind people to look for existing reports
+  docs: reporting-bugs: remind people to back up their data
+  docs: reporting-bugs: tell users to disable DKMS et al.
+  docs: reporting-bugs: point out the environment might be causing issue
+  docs: reporting-bugs: make users write notes, one for each issue
+  docs: reporting-bugs: make readers test mainline, but leave a loophole
+  docs: reporting-bugs: let users check taint status again
+  docs: reporting-bugs: explain options if reproducing on mainline fails
+  docs: reporting-bugs: let users optimize their notes
+  docs: reporting-bugs: decode failure messages [need help]
+  docs: reporting-bugs: instructions for handling regressions
+  docs: reporting-bugs: details on writing and sending the report
+  docs: reporting-bugs: explain what users should do once the report got
+    out
+  docs: reporting-bugs: details for issues specific to stable and
+    longterm
+  docs: reporting-bugs: explain why users might get neither reply nor
+    fix
+  docs: reporting-bugs: explain things could be easier
+  docs: reporting-bugs: add SPDX tag and license hint, remove markers
+
+ Documentation/admin-guide/bug-bisect.rst      |    2 +
+ Documentation/admin-guide/reporting-bugs.rst  | 1586 +++++++++++++++--
+ Documentation/admin-guide/tainted-kernels.rst |    2 +
+ scripts/ver_linux                             |   81 -
+ 4 files changed, 1441 insertions(+), 230 deletions(-)
+ delete mode 100755 scripts/ver_linux
+
+
+base-commit: e0bc9cf0a7d527ff140f851f6f1a815cc5c48fea
 -- 
-Kamalesh
+2.26.2
+
