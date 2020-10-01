@@ -2,89 +2,63 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7BB592808C3
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Oct 2020 22:50:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CC96A28098B
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Oct 2020 23:41:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727143AbgJAUu2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Oct 2020 16:50:28 -0400
-Received: from mail.kernel.org ([198.145.29.99]:41740 "EHLO mail.kernel.org"
+        id S1733122AbgJAVlE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Oct 2020 17:41:04 -0400
+Received: from ms.lwn.net ([45.79.88.28]:39388 "EHLO ms.lwn.net"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726581AbgJAUu2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 1 Oct 2020 16:50:28 -0400
-Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
+        id S1733113AbgJAVlE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Oct 2020 17:41:04 -0400
+Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id A47A120738;
-        Thu,  1 Oct 2020 20:50:27 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1601585428;
-        bh=tkftAJJw4eHQVipuxbLGrDEWsKQk8VPMXCHg34fOM/Y=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=sUQDBWR994orJZ2Ogvh5Bk7s23V9UNKAk1A+SY9j0ShN2y/O9UsXUCbkEvs1Xoch9
-         6Oswz/7CHuDRVysLAp2KmaWnsG3IUyg64nTdGNGhnitZDeluy0TQ7+AMZ0IVZeR2Po
-         k04krle85Z2vFyUmi9GduHDe1tlwNg7Z3/FJIv1s=
-Date:   Thu, 1 Oct 2020 22:50:29 +0200
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Kees Cook <keescook@chromium.org>
-Cc:     Joe Perches <joe@perches.com>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Denis Efremov <efremov@linux.com>,
-        Julia Lawall <julia.lawall@inria.fr>,
-        Alex Dewar <alex.dewar90@gmail.com>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH V3 1/8] sysfs: Add sysfs_emit and sysfs_emit_at to format
- sysfs output
-Message-ID: <20201001205029.GC915579@kroah.com>
-References: <cover.1600285923.git.joe@perches.com>
- <884235202216d464d61ee975f7465332c86f76b2.1600285923.git.joe@perches.com>
- <20200930115740.GA1611809@kroah.com>
- <202009302108.18B05CA38@keescook>
+        by ms.lwn.net (Postfix) with ESMTPSA id 53769537;
+        Thu,  1 Oct 2020 21:41:04 +0000 (UTC)
+Date:   Thu, 1 Oct 2020 15:41:00 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 04/52] scripts: kernel-doc: make it more compatible
+ with Sphinx 3.x
+Message-ID: <20201001154100.2f7e89b8@lwn.net>
+In-Reply-To: <c7b04d8f20f44d4d2eb797d8694bd7546f95ac05.1601467849.git.mchehab+huawei@kernel.org>
+References: <cover.1601467849.git.mchehab+huawei@kernel.org>
+        <c7b04d8f20f44d4d2eb797d8694bd7546f95ac05.1601467849.git.mchehab+huawei@kernel.org>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <202009302108.18B05CA38@keescook>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Sep 30, 2020 at 09:17:03PM -0700, Kees Cook wrote:
-> On Wed, Sep 30, 2020 at 01:57:40PM +0200, Greg Kroah-Hartman wrote:
-> > Kees, and Rafael, I don't know if you saw this proposal from Joe for
-> > sysfs files, questions below:
+On Wed, 30 Sep 2020 15:24:27 +0200
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+
+> With Sphinx 3.x, the ".. c:type:" tag was changed to accept either:
 > 
-> I'm a fan. I think the use of sprintf() in sysfs might have been one of
-> my earliest complaints about unsafe code patterns in the kernel. ;)
-
-Ok, great.
-
-> > > +/**
-> > > + *	sysfs_emit - scnprintf equivalent, aware of PAGE_SIZE buffer.
-> > > + *	@buf:	start of PAGE_SIZE buffer.
-> > > + *	@fmt:	format
-> > > + *	@...:	optional arguments to @format
-> > > + *
-> > > + *
-> > > + * Returns number of characters written to @buf.
-> > > + */
-> > > +int sysfs_emit(char *buf, const char *fmt, ...)
-> > > +{
-> > > +	va_list args;
-> > > +	int len;
-> > > +
-> > > +	if (WARN(!buf || offset_in_page(buf),
-> > > +		 "invalid sysfs_emit: buf:%p\n", buf))
+> 	.. c:type:: typedef-like declaration
+> 	.. c:type:: name
 > 
-> I don't want the %p here, but otherwise, sure. I'd also make it a _ONCE
-> variant:
+> Using it for other types (including functions) don't work anymore.
 > 
-> 	if (WARN_ONCE(!buf || offset_in_page(buf),
-> 		 "invalid sysfs_emit: offset_in_page(buf):%zd\n",
-> 		  buf ? offset_in_page(buf) : 0))
+> So, there are newer tags for macro, enum, struct, union, and others,
+> which doesn't exist on older versions.
+> 
+> Add a check for the Sphinx version and change the produced tags
+> accordingly.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  scripts/kernel-doc | 71 ++++++++++++++++++++++++++++++++++++++++++----
+>  1 file changed, 65 insertions(+), 6 deletions(-)
 
-As Joe points out, _ONCE doesn't work because this happens from all
-sysfs files, not just one.
+So this seems generally good, but I do wonder if we shouldn't just pass
+the sphinx version into kernel-doc as a parameter?  We're already doing a
+version check in the makefile, we should be able to capture the result and
+pass it in, maybe?  
 
-thanks,
-
-greg k-h
+jon
