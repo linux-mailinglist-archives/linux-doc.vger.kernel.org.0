@@ -2,55 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 43BB5281E20
-	for <lists+linux-doc@lfdr.de>; Sat,  3 Oct 2020 00:16:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AE611281E4C
+	for <lists+linux-doc@lfdr.de>; Sat,  3 Oct 2020 00:27:45 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725550AbgJBWQ3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Oct 2020 18:16:29 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42404 "EHLO
+        id S1725730AbgJBW1o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Oct 2020 18:27:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44184 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725283AbgJBWQ3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Oct 2020 18:16:29 -0400
-Received: from shards.monkeyblade.net (shards.monkeyblade.net [IPv6:2620:137:e000::1:9])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 39D75C0613D0;
-        Fri,  2 Oct 2020 15:16:29 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2601:601:9f00:477::3d5])
-        (using TLSv1 with cipher AES256-SHA (256/256 bits))
-        (Client did not present a certificate)
-        (Authenticated sender: davem-davemloft)
-        by shards.monkeyblade.net (Postfix) with ESMTPSA id B643011E4794D;
-        Fri,  2 Oct 2020 14:59:39 -0700 (PDT)
-Date:   Fri, 02 Oct 2020 15:16:22 -0700 (PDT)
-Message-Id: <20201002.151622.389422629289740345.davem@davemloft.net>
-To:     mchehab+huawei@kernel.org
-Cc:     linux-doc@vger.kernel.org, corbet@lwn.net, kuba@kernel.org,
-        ap420073@gmail.com, linux-kernel@vger.kernel.org,
-        netdev@vger.kernel.org
-Subject: Re: [PATCH 1/6] net: core: document two new elements of struct
- net_device
-From:   David Miller <davem@davemloft.net>
-In-Reply-To: <1c6293ffd174d0301c0acb85f0e60e9edf5e4a27.1601616399.git.mchehab+huawei@kernel.org>
-References: <cover.1601616399.git.mchehab+huawei@kernel.org>
-        <1c6293ffd174d0301c0acb85f0e60e9edf5e4a27.1601616399.git.mchehab+huawei@kernel.org>
-X-Mailer: Mew version 6.8 on Emacs 27.1
-Mime-Version: 1.0
-Content-Type: Text/Plain; charset=us-ascii
-Content-Transfer-Encoding: 7bit
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.12 (shards.monkeyblade.net [2620:137:e000::1:9]); Fri, 02 Oct 2020 14:59:40 -0700 (PDT)
+        with ESMTP id S1725710AbgJBW1o (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Oct 2020 18:27:44 -0400
+Received: from mail-ed1-x543.google.com (mail-ed1-x543.google.com [IPv6:2a00:1450:4864:20::543])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 13059C0613D0
+        for <linux-doc@vger.kernel.org>; Fri,  2 Oct 2020 15:27:44 -0700 (PDT)
+Received: by mail-ed1-x543.google.com with SMTP id l17so3308252edq.12
+        for <linux-doc@vger.kernel.org>; Fri, 02 Oct 2020 15:27:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=WenNmI5oUkGle0L0WRFJAM5U4b70dfVnKCotDQT26ic=;
+        b=qpOS6AVUOpuYRfzrRmEmY8nFGGqKUYhiSPRrmYu88Du2AlPVrjadxaORzyWIUB+fjv
+         xpaD/n3wkuOKLrC9HL/gQdNsnY351O+V0ZdYMLnIVW2BKM9QtUmYIvTjPSk/Zfcq3pBN
+         xsaKuY05LuXKpImIi1CiXpmFMSJ+WoX6JllYGomKn8gKTHCaHKeMWepJgmt5iX4SYnkM
+         hXpZng8JV1+NGujOYQZt5ix2ASa/uwXlpzl2sc7HOPP3UKX1TxAPv2X9zN37wP9VfVbR
+         RyR9KEP4ICSJJTRkowmJI7H/md2Pjy0JEq2U1hjvc1iMjpe41ESKQ/mHcBumKoqhLD0c
+         Uk9Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=WenNmI5oUkGle0L0WRFJAM5U4b70dfVnKCotDQT26ic=;
+        b=YEgm2cOBExu3s04WCSCVqtyCytDkUQ9ABxvEL2NQd0Lgh2g4LbKWzt37Co3+gMN1fO
+         y0t9XTi9aDeCxdDSwDjvlYKtPTV1rli2pdDPORMhwqWIB6FgU/ofqUfLwLIl7lbOaszQ
+         M0yz51O/c3XXozAUA7kbPyRuK8lUxbQgadycptIIhyCr9GgT86nVsgrwEk89b8kFcryZ
+         UG+g9zr2nZ97ZTmd60s+cZmLISCPC7FcTC+w8ybDlBNH0zuSkQKJFrWqOZUnGLQOq1XO
+         evLZkenTRw2WpWVH80GAf0H6v0kY89d/rvC0E3PlbrLAyTnZ01L9STlUI3nMnXnfqhS5
+         SKpA==
+X-Gm-Message-State: AOAM530nzMuTR2BaFa59mPQivuNJZpUqPbivZBufRJmPmUZllrFmuTG3
+        Z2Ohx7B3Y6yAx49gObeByZOhCa+MfHOyyYU6lKymSQ==
+X-Google-Smtp-Source: ABdhPJzj0f7XvxzsCDrfMmIeI3C8DfvP4DCgq9+cCHs7tz7tMvkK8DfUcfTEg3mEkcGuHbAuc2NOlXwWuav+aHlt06Q=
+X-Received: by 2002:a05:6402:b0e:: with SMTP id bm14mr5117814edb.259.1601677662551;
+ Fri, 02 Oct 2020 15:27:42 -0700 (PDT)
+MIME-Version: 1.0
+References: <20200929133814.2834621-1-elver@google.com> <20200929133814.2834621-2-elver@google.com>
+ <CAG48ez3+_K6YXoXgKBkB8AMeSQj++Mxi5u2OT--B+mJgE7Cyfg@mail.gmail.com>
+ <20201002171959.GA986344@elver.google.com> <CAG48ez0D1+hStZaDOigwbqNqFHJAJtXK+8Nadeuiu1Byv+xp5A@mail.gmail.com>
+ <CANpmjNN7s3o4DYbP64iLYo0MeDWciQnKd61njJKLsiZv+ZLQdA@mail.gmail.com>
+In-Reply-To: <CANpmjNN7s3o4DYbP64iLYo0MeDWciQnKd61njJKLsiZv+ZLQdA@mail.gmail.com>
+From:   Jann Horn <jannh@google.com>
+Date:   Sat, 3 Oct 2020 00:27:16 +0200
+Message-ID: <CAG48ez0az-Mv1f6EpnQwO6cYQANwx4qCDLa+yda_i15AzciS1Q@mail.gmail.com>
+Subject: Re: [PATCH v4 01/11] mm: add Kernel Electric-Fence infrastructure
+To:     Marco Elver <elver@google.com>
+Cc:     Andrew Morton <akpm@linux-foundation.org>,
+        Alexander Potapenko <glider@google.com>,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        "Paul E . McKenney" <paulmck@kernel.org>,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoph Lameter <cl@linux.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        David Rientjes <rientjes@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Hillf Danton <hdanton@sina.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Kees Cook <keescook@chromium.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        SeongJae Park <sjpark@amazon.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Will Deacon <will@kernel.org>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        kernel list <linux-kernel@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        Linux-MM <linux-mm@kvack.org>, SeongJae Park <sjpark@amazon.de>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Date: Fri,  2 Oct 2020 07:49:45 +0200
+On Fri, Oct 2, 2020 at 11:28 PM Marco Elver <elver@google.com> wrote:
+> On Fri, 2 Oct 2020 at 21:32, Jann Horn <jannh@google.com> wrote:
+> > > That's another check; we don't want to make this more expensive.
+> >
+> > Ah, right, I missed that this is the one piece of KFENCE that is
+> > actually really hot code until Dmitry pointed that out.
+> >
+> > But actually, can't you reduce how hot this is for SLUB by moving
+> > is_kfence_address() down into the freeing slowpath? At the moment you
+> > use it in slab_free_freelist_hook(), which is in the super-hot
+> > fastpath, but you should be able to at least move it down into
+> > __slab_free()...
+> >
+> > Actually, you already have hooked into __slab_free(), so can't you
+> > just get rid of the check in the slab_free_freelist_hook()?
+>
+> I missed this bit: the loop that follows wants the free pointer, so I
+> currently see how this might work. :-/
 
-> As warned by "make htmldocs", there are two new struct elements
-> that aren't documented:
-> 
-> 	../include/linux/netdevice.h:2159: warning: Function parameter or member 'unlink_list' not described in 'net_device'
-> 	../include/linux/netdevice.h:2159: warning: Function parameter or member 'nested_level' not described in 'net_device'
-> 
-> Fixes: 1fc70edb7d7b ("net: core: add nested_level variable in net_device")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+reverse call graph:
+__slab_free
+  do_slab_free
+    slab_free
+      kmem_cache_free (frees a single non-kmalloc allocation)
+      kmem_cache_free_bulk (frees multiple)
+      kfree (frees a single kmalloc allocation)
+    ___cache_free (frees a single allocation for KASAN)
 
-Applied, thank you.
+So the only path for which we can actually loop in __slab_free() is
+kmem_cache_free_bulk(); and you've already changed
+build_detached_freelist() (which is used by kmem_cache_free_bulk() to
+group objects from the same page) to consume KFENCE allocations before
+they can ever reach __slab_free(). So we know that if we've reached
+__slab_free(), then we are being called with either a single object
+(which may be a KFENCE object) or with a list of objects that all
+belong to the same page and don't contain any KFENCE allocations.
