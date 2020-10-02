@@ -2,133 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DA5D4281642
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Oct 2020 17:13:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 21C16281695
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Oct 2020 17:28:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388187AbgJBPNC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Oct 2020 11:13:02 -0400
-Received: from foss.arm.com ([217.140.110.172]:38760 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2388176AbgJBPNB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 2 Oct 2020 11:13:01 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id CD3B41396;
-        Fri,  2 Oct 2020 08:13:00 -0700 (PDT)
-Received: from [10.57.50.3] (unknown [10.57.50.3])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id A9ABC3F73B;
-        Fri,  2 Oct 2020 08:12:57 -0700 (PDT)
-Subject: Re: [PATCH v2 3/3] dt-bindings: thermal: update sustainable-power
- with abstract scale
-To:     Doug Anderson <dianders@chromium.org>
-Cc:     LKML <linux-kernel@vger.kernel.org>,
-        Linux PM <linux-pm@vger.kernel.org>, linux-doc@vger.kernel.org,
-        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
-        <devicetree@vger.kernel.org>, Rob Herring <robh+dt@kernel.org>,
-        amitk@kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        Dietmar.Eggemann@arm.com, Quentin Perret <qperret@google.com>,
-        Matthias Kaehlcke <mka@chromium.org>,
-        Rajendra Nayak <rnayak@codeaurora.org>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>
-References: <20201002114426.31277-1-lukasz.luba@arm.com>
- <20201002114426.31277-4-lukasz.luba@arm.com>
- <CAD=FV=UbNP5-G1z95F37Fmv8=n0JPSSwnPQO_K==WpAc4vAHWQ@mail.gmail.com>
-From:   Lukasz Luba <lukasz.luba@arm.com>
-Message-ID: <e9b6fc5a-45d3-168d-db38-6c068da26f6b@arm.com>
-Date:   Fri, 2 Oct 2020 16:12:55 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+        id S2387984AbgJBP2W (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Oct 2020 11:28:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35360 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726017AbgJBP2T (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Oct 2020 11:28:19 -0400
+Received: from mail-ej1-x642.google.com (mail-ej1-x642.google.com [IPv6:2a00:1450:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D564BC0613D0
+        for <linux-doc@vger.kernel.org>; Fri,  2 Oct 2020 08:28:17 -0700 (PDT)
+Received: by mail-ej1-x642.google.com with SMTP id nw23so2552532ejb.4
+        for <linux-doc@vger.kernel.org>; Fri, 02 Oct 2020 08:28:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=baylibre-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=qLBFqOLPIIeVNrecDqmKe5pDCo6M469dtuJMB6uozXY=;
+        b=1VfqE7IhuhjWt2NxSpY15JryJ4J2/wHwj6pro6Ab90rqqm8/jnAVHYuhYtDTCzQj27
+         qCVkiPCKG0thGXfpo43leTkloWXb4f+aSyC/GcOJlqBMlYqh+AGg849MK067CQU5ldCf
+         y7tpVFmABANjpGYnFo5WLqmYQ41qC+ME8ppKzuX3BRgQSNWxZ0GJ9CEMFB40/B1wXST9
+         n23jsNHX38mqMVu5SbLFKT0BduDAckW26cEGXunyhSdVex7tpB2jYLTevLOdJEkx6aFp
+         ZszJ9hK9yZsFo8UmiOMKW5ggGe40u1a3gIBFv2GPKBSZ3yIKQdfnYDCIHMrxaA9ZVlK3
+         xXNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=qLBFqOLPIIeVNrecDqmKe5pDCo6M469dtuJMB6uozXY=;
+        b=kuUTDLMZ35M33jC5+UJmJwrR1s0XVz3gGFB+V88TOk7LZ10ozODhYdReqUEyOe0XWI
+         h4LlIBFT5jkRm8F6CHPxKO45+Owo1BCWtQAKudaHeXQRXGw0gTreQcKkM+WETq0KwCQ7
+         0+i1ZVFFtH5usNlT0HRMvJzjMvPbZUkyHsWk7G+vmo4NfBdtn9PyqI3TQ1ItjH7t7KHg
+         i4inVecfoW05dosMtcLOugrGpKtPjBGreje9jMCpuJFT0ANZcBpa2BC2y9CtL5h18SPV
+         uUCuObjGaQ2uNJUqHa+HxOJrRcgBo80eesCIbfH3uE/2N9h0dVkjNIc4+dFeyNMRCAXn
+         uiyQ==
+X-Gm-Message-State: AOAM530fzfPGAPWDEeah2x5f/YBy5Y9eKzA6mYtHny0eEAy2R7Afeicz
+        aDiaGEmglsic3n732gAWrS/5kVNlpqQk+3/pB+8XGQ==
+X-Google-Smtp-Source: ABdhPJyvVLldlJNq+Qx04LRovUfTW9uBVrkIrXj2nd3NucyIIBNdVg8NpMeAvgfX8qFLTRRUYxH+2khsTnKfRz5NXLI=
+X-Received: by 2002:a17:906:d159:: with SMTP id br25mr2948371ejb.155.1601652496574;
+ Fri, 02 Oct 2020 08:28:16 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAD=FV=UbNP5-G1z95F37Fmv8=n0JPSSwnPQO_K==WpAc4vAHWQ@mail.gmail.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <cover.1601616399.git.mchehab+huawei@kernel.org> <bad4d85c218d59c1bf69157df8e1012577680d88.1601616399.git.mchehab+huawei@kernel.org>
+In-Reply-To: <bad4d85c218d59c1bf69157df8e1012577680d88.1601616399.git.mchehab+huawei@kernel.org>
+From:   Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Date:   Fri, 2 Oct 2020 17:28:05 +0200
+Message-ID: <CAMpxmJV8jkktBuHB=1r=twm2QhxT+DaB0DaCJ=0A3sBi2huQgg@mail.gmail.com>
+Subject: Re: [PATCH 6/6] docs: gpio: add a new document to its index.rst
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Eugeniu Rosca <erosca@de.adit-jv.com>,
+        Geert Uytterhoeven <geert+renesas@glider.be>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Ulrich Hecht <uli+renesas@fpond.eu>,
+        linux-gpio <linux-gpio@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Doug,
+On Fri, Oct 2, 2020 at 7:49 AM Mauro Carvalho Chehab
+<mchehab+huawei@kernel.org> wrote:
+>
+> There's now a new ReST file. Add it to the index.rst file.
+>
+> Fixes: ce7a2f77f976 ("docs: gpio: Add GPIO Aggregator documentation")
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  Documentation/admin-guide/gpio/index.rst | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/Documentation/admin-guide/gpio/index.rst b/Documentation/admin-guide/gpio/index.rst
+> index ef2838638e96..7db367572f30 100644
+> --- a/Documentation/admin-guide/gpio/index.rst
+> +++ b/Documentation/admin-guide/gpio/index.rst
+> @@ -9,6 +9,7 @@ gpio
+>
+>      gpio-aggregator
+>      sysfs
+> +    gpio-mockup
+>
+>  .. only::  subproject and html
+>
+> --
+> 2.26.2
+>
 
-On 10/2/20 3:31 PM, Doug Anderson wrote:
-> Hi,
-> 
-> On Fri, Oct 2, 2020 at 4:45 AM Lukasz Luba <lukasz.luba@arm.com> wrote:
->>
->> Update the documentation for the binding 'sustainable-power' and allow
->> to provide values in an abstract scale. It is required when the cooling
->> devices use an abstract scale for their power values.
->>
->> Signed-off-by: Lukasz Luba <lukasz.luba@arm.com>
->> ---
->>   .../devicetree/bindings/thermal/thermal-zones.yaml  | 13 +++++++++----
->>   1 file changed, 9 insertions(+), 4 deletions(-)
->>
->> diff --git a/Documentation/devicetree/bindings/thermal/thermal-zones.yaml b/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
->> index 3ec9cc87ec50..4d8f2e37d1e6 100644
->> --- a/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
->> +++ b/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
->> @@ -99,10 +99,15 @@ patternProperties:
->>         sustainable-power:
->>           $ref: /schemas/types.yaml#/definitions/uint32
->>           description:
->> -          An estimate of the sustainable power (in mW) that this thermal zone
->> -          can dissipate at the desired control temperature. For reference, the
->> -          sustainable power of a 4-inch phone is typically 2000mW, while on a
->> -          10-inch tablet is around 4500mW.
->> +          An estimate of the sustainable power (in mW or in an abstract scale)
->> +         that this thermal zone can dissipate at the desired control
->> +         temperature. For reference, the sustainable power of a 4-inch phone
->> +         is typically 2000mW, while on a 10-inch tablet is around 4500mW.
->> +
->> +         It is possible to express the sustainable power in an abstract
->> +         scale. This is the case when the related cooling devices use also
->> +         abstract scale to express their power usage. The scale must be
->> +         consistent.
-> 
-> Two thoughts:
-> 
-> 1. If we're going to allow "sustainable-power" to be in abstract
-> scale, why not allow "dynamic-power-coefficient" to be in abstract
-> scale too?  I assume that the whole reason against that originally was
-> the idea of device tree purity, but if we're allowing the abstract
-> scale here then there seems no reason not to allow it for
-> "dynamic-power-coefficient".
+Good catch, thanks!
 
-With this binding it's a bit more tricky.
-I also have to discuss a few things internally. This requirement of
-uW/MHz/V^2 makes the code easier also for potential drivers
-like GPU (which are going to register the devfreq cooling with EM).
-
-Let me think about it, but for now I would just update these bits.
-These are required to proper IPA operation, the dyn.-pow.-coef. is a
-nice to have and possible next step.
-
-> 
-> 2. Is it worth adding some type of indication of what type of units
-> "sustainable-power" is represented in?  Maybe even a made up unit so
-> that you could tell the difference between made up units in the same
-> system?  I'd envision something like:
-> 
-> sustainable-power-units = "qualcomm,sc7180-bogoWatts"
-> 
-> ...and on the dynamic-power-coefficient side, the same:
-> 
-> dynamic-power-coefficient-units = "qualcomm,sc7180-bogoWatts"
-> 
-> One could imagine someone even later (after devices are widely
-> distributed) figuring out translations between these bogoWatts numbers
-> and real Watts if someone could come up with a case where it matters.
-
-To figure this out we don't need a new binding.
-I think a simple comment in the DT would be enough for this, even e.g.:
-
-sustainable-power = <100> /* bogoWatts */
-
-
-Thank you for your comments.
-BTW, I haven't put your 'Reviewed-by' because I have added this
-sustainable-power new stuff in patch 1/3. I will grateful if you
-have a look on that.
-
-Regards,
-Lukasz
+Acked-by: Bartosz Golaszewski <bgolaszewski@baylibre.com>
