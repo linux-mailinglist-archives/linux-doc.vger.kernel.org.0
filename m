@@ -2,244 +2,243 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AD6E02819BD
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Oct 2020 19:39:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BB4AD281A40
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Oct 2020 19:55:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388517AbgJBRjl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Oct 2020 13:39:41 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55962 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2388268AbgJBRjc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Oct 2020 13:39:32 -0400
-Received: from mail-vk1-xa44.google.com (mail-vk1-xa44.google.com [IPv6:2607:f8b0:4864:20::a44])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A7224C0613E2
-        for <linux-doc@vger.kernel.org>; Fri,  2 Oct 2020 10:39:32 -0700 (PDT)
-Received: by mail-vk1-xa44.google.com with SMTP id c25so452965vkm.1
-        for <linux-doc@vger.kernel.org>; Fri, 02 Oct 2020 10:39:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=4yhMH5PEf+rCZZkZGdh40aYy4T1Wm9iOOW+zJXjnuHk=;
-        b=dfvoSI1Uq+qVVIYibol1p3/Reagu21mMHqIADjWFIOsoUGyn+8szMRTS8DnDgxQmLD
-         NSw61VJCHeyy6Jud7s8ZIWx22pLBVFjDABiv74XtNri+Kb1auGwlI0D1j/YYY6QPRiKP
-         cAkckBuqIFDhYMVi7qq9Fmnzs8h57IsYNEZyU=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=4yhMH5PEf+rCZZkZGdh40aYy4T1Wm9iOOW+zJXjnuHk=;
-        b=YxdKnaXUrJnZZjzSc/Wla1Euek+g7mkLRyiViLwp922lDnQZnuJzDjVTxkYLBD4VFw
-         UZrjc09Dxb98MU+Z/O6KfBkNOgTiHxJMx5u6lv6oHwj30R1rrG7ySfSKKI4Kkrp4Q0YL
-         dr3gJTlFes8U5rN1oQYZqlTJoC16YpxKN+nRg7Enw6dT9SbSWujSSp+Rlf4PBiLWs6/0
-         bGgtmRC+3ksnrWt5O2vFCEnBvkJW2Q+A/dm7y6Gq6OTZdf0vAaMm5HDZaYZr99VnOpPG
-         MtNYIQYDtg2M+gDIepjJ8AtCsWyjL4wMIMhlcqk0pOQMQCGstqIEK48YPBJmUB2e+Aps
-         cj9Q==
-X-Gm-Message-State: AOAM53343rviuuKvt9kdJKRsaeOKyj9K5DI3JkONChjAUIhGrA9T4xXI
-        W6Eoq3T4xyxEONgcL1jZpqdIl5cdkJTGng==
-X-Google-Smtp-Source: ABdhPJxjXhBhmZ7VNorrbk/7NVoulpcXQhvmQ/mNnt/prupNCW6ZVgo0Sv0LxGRlEixo3vKRx/DHNA==
-X-Received: by 2002:a1f:9a4f:: with SMTP id c76mr1991272vke.13.1601660371359;
-        Fri, 02 Oct 2020 10:39:31 -0700 (PDT)
-Received: from mail-ua1-f53.google.com (mail-ua1-f53.google.com. [209.85.222.53])
-        by smtp.gmail.com with ESMTPSA id d125sm348895vkd.36.2020.10.02.10.39.30
-        for <linux-doc@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Fri, 02 Oct 2020 10:39:30 -0700 (PDT)
-Received: by mail-ua1-f53.google.com with SMTP id h15so606414uab.3
-        for <linux-doc@vger.kernel.org>; Fri, 02 Oct 2020 10:39:30 -0700 (PDT)
-X-Received: by 2002:ab0:4542:: with SMTP id r60mr1965910uar.90.1601660369709;
- Fri, 02 Oct 2020 10:39:29 -0700 (PDT)
+        id S2388336AbgJBRzu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Oct 2020 13:55:50 -0400
+Received: from mout.gmx.net ([212.227.17.21]:56939 "EHLO mout.gmx.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726096AbgJBRzu (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 2 Oct 2020 13:55:50 -0400
+X-Greylist: delayed 305 seconds by postgrey-1.27 at vger.kernel.org; Fri, 02 Oct 2020 13:55:48 EDT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1601661347;
+        bh=eL7JBhoz2JAsNQSLXLYFbl1LIBlnoiLRV7VFXGdcSh8=;
+        h=X-UI-Sender-Class:Subject:To:Cc:References:From:Date:In-Reply-To;
+        b=V41u6yxajc7EQVyp3OOC23a8iT6HOGkTlqv0uIIc/0KpTuwpcdO+H/QaGsmXSZVHW
+         DjeZCJ3RLjSLNVIq+Mnk2tp9tYoDKyzarOT8ybdG1Qb4jGYtJ6/kmhi7ubuOocDhzJ
+         YIQPGpuMkp/UFlb6dnqCp5MB6Ta3yM3L554Qztbc=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.123.70] ([178.202.41.107]) by mail.gmx.com (mrgmx105
+ [212.227.17.168]) with ESMTPSA (Nemesis) id 1MxDou-1kdskl2AJc-00xcR4; Fri, 02
+ Oct 2020 19:50:35 +0200
+Subject: Re: [PATCH 1/1] docs: admin-guide: fdt and initrd load in EFI stub
+To:     Ard Biesheuvel <ardb@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        linux-efi <linux-efi@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        =?UTF-8?Q?Fran=c3=a7ois_Ozog?= <francois.ozog@linaro.org>,
+        Ilias Apalodimas <ilias.apalodimas@linaro.org>
+References: <20201002171112.22738-1-xypron.glpk@gmx.de>
+ <CAMj1kXHsGcAX-DqfcpgxzZY3M+JzY-Ef9OdJ+JdysNnx1fK6zg@mail.gmail.com>
+From:   Heinrich Schuchardt <xypron.glpk@gmx.de>
+Autocrypt: addr=xypron.glpk@gmx.de; prefer-encrypt=mutual; keydata=
+ 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 Eg==
+Message-ID: <e272840e-d097-0476-1827-ea948cdfad63@gmx.de>
+Date:   Fri, 2 Oct 2020 19:50:33 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-References: <20201002114426.31277-1-lukasz.luba@arm.com> <20201002114426.31277-4-lukasz.luba@arm.com>
- <CAD=FV=UbNP5-G1z95F37Fmv8=n0JPSSwnPQO_K==WpAc4vAHWQ@mail.gmail.com>
- <e9b6fc5a-45d3-168d-db38-6c068da26f6b@arm.com> <CAD=FV=Xkg1zpsMW5rERbibnjrgY6opZi8Z9DUFkWebb7NHtU5w@mail.gmail.com>
- <bc5d21c1-ea84-9132-2e52-ae84fbb0515a@arm.com>
-In-Reply-To: <bc5d21c1-ea84-9132-2e52-ae84fbb0515a@arm.com>
-From:   Doug Anderson <dianders@chromium.org>
-Date:   Fri, 2 Oct 2020 10:39:17 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=VfA8AB3BZk8Ykkhigv9eGijzu4zuA6KdXk0K5UG0yCCQ@mail.gmail.com>
-Message-ID: <CAD=FV=VfA8AB3BZk8Ykkhigv9eGijzu4zuA6KdXk0K5UG0yCCQ@mail.gmail.com>
-Subject: Re: [PATCH v2 3/3] dt-bindings: thermal: update sustainable-power
- with abstract scale
-To:     Lukasz Luba <lukasz.luba@arm.com>
-Cc:     LKML <linux-kernel@vger.kernel.org>,
-        Linux PM <linux-pm@vger.kernel.org>, linux-doc@vger.kernel.org,
-        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
-        <devicetree@vger.kernel.org>, Rob Herring <robh+dt@kernel.org>,
-        amitk@kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        Dietmar.Eggemann@arm.com, Quentin Perret <qperret@google.com>,
-        Matthias Kaehlcke <mka@chromium.org>,
-        Rajendra Nayak <rnayak@codeaurora.org>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <CAMj1kXHsGcAX-DqfcpgxzZY3M+JzY-Ef9OdJ+JdysNnx1fK6zg@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:rMYBeFJ6gKllVZl69fPnc4RDZH7lOvdbzwihXS6AWamAWUvSMEh
+ A5o0rltp/6TNN0K3RdOA/C8iMzJImCxlMmyABNlcuL5gGfMhYQTaOtW6VyLrbaJj1L0k8lg
+ 8qcEToKi8fBROiRk6+3N3CgzwEjrx/LCORVVDel/ZEaKlmmKX9vaIu9wy15Intbpvco7NzJ
+ Cti/79uBsIzn8OrqvucvA==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:APT0gqF5AtA=:94YK69IYJi901UJOjz1721
+ Dn6BDFNUr8okpeojJOBL4ymdoDNLOkfFJiEFCC2MPWHrMta28iTMOnBxpC8q8rKsj1TAAJ6F+
+ 8ZVi6yIZYAMgBDfDFst8rqRjL0OpuSu4BG3XQ9+rC21mQ5nbRwsJvk7oSuF6G+V1tgwaiKIgj
+ 6pps7qp88T/IbOSyNhs+W7YDV/M2UCdEl8l5ND5eut/WnXBWMXM9cSn9K9ZlGm3ZNqQ9W2zSf
+ N7Vx10nmk7GygEn3XUpfDrulJ/XQuodNTZvxlBiL4sIo/J854GeUwqeBWHxEUBKSWIW76x8ZW
+ H5z6djIDVJ0/dKvQmX4MKXNA/EqB/KEDPgW+wiXHnEZQMy2ht+ECR3DXjNjpfLrI4M/m8WXN0
+ ywyKm+GoaqQjJm7FhRLUNo0/Rgy6jK82kgc+vO3QYmlbGKPb5Lb6XY1uiDWjDVvzGRRlsMslF
+ Erj45UQT5C/i3Kb6t+RHrJKGzuA1bNUBy+umnJ6N7S71/502gxrG1V6RqW0ikFmwPDG71r/JM
+ XcGMgpHD3dijxEc+yDXLyP44GKe4EoeBmKpAhnlKQ+gt/MHTuCUUu4TqBhXurMQpHnrr+jpB4
+ Ntf6BQXKRJaLU3cGlFaOP+FHKxsSKkjHbYdnnQNsjggjlZsbTPr6jlm3BXTYNTiWkui6EBmR5
+ o/79x2TLZETLvSbhQBWl+LV26Yz4MOkA+fuEM1/AD3Ma0HmAGxd8/roonmCtRfWZq/MBh4D4D
+ zMsLCwhFLILOfGcIRDC0yaSHxAhuI42wTqMWbRFKaUCJgYfzyNrQGtqW504J+io0/k03SfvpT
+ EgU5thtp6lVJJk/hYHx2XYaWy5O5ux/dMJ0OuA9xMqu4gwFZwZcOxbU4syZzzP9KPubRWiEV4
+ jnQqTsCjDOv5jzngNEE2VXWGW4EawR2M+3DmzDptxr3D3SaqzIUE4RQE2ZsM8XhUrmxiv3/Xn
+ HuWW3LjXaDyDYAihYhBLf5Od4TGxzMEIB0HXkE36LCndunTDUi4k1a7OCRIXOS+W//L4jEKVz
+ i4qEA6a96YY/UftjlBMkE5jQOUToV/8xsWnH2CWbGjIs7rDEpP0r244yb1b5+r97f8jrDj3H6
+ Asqc29nrpZOLRwC/KifWUxOy2CSkmtYpriBeyGBjgXjVXrwiNo5kElcZ1WLXmILLcUNz1Zzpa
+ Ttd0rAawRWqteEqAACK5aD/DX5i8fxw8h8jZwKYp8MxETgDJBE3gfsv29Y90/JoLKgs8xO1h5
+ kp9qkxzTA6cmXbwzT8PGxfB+8teDW7TYdMezAag==
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
-
-On Fri, Oct 2, 2020 at 9:40 AM Lukasz Luba <lukasz.luba@arm.com> wrote:
+On 02.10.20 19:21, Ard Biesheuvel wrote:
+> Hi Heinrich,
 >
-> On 10/2/20 4:47 PM, Doug Anderson wrote:
-> > Hi,
-> >
-> > On Fri, Oct 2, 2020 at 8:13 AM Lukasz Luba <lukasz.luba@arm.com> wrote:
-> >>
-> >> Hi Doug,
-> >>
-> >> On 10/2/20 3:31 PM, Doug Anderson wrote:
-> >>> Hi,
-> >>>
-> >>> On Fri, Oct 2, 2020 at 4:45 AM Lukasz Luba <lukasz.luba@arm.com> wrote:
-> >>>>
-> >>>> Update the documentation for the binding 'sustainable-power' and allow
-> >>>> to provide values in an abstract scale. It is required when the cooling
-> >>>> devices use an abstract scale for their power values.
-> >>>>
-> >>>> Signed-off-by: Lukasz Luba <lukasz.luba@arm.com>
-> >>>> ---
-> >>>>    .../devicetree/bindings/thermal/thermal-zones.yaml  | 13 +++++++++----
-> >>>>    1 file changed, 9 insertions(+), 4 deletions(-)
-> >>>>
-> >>>> diff --git a/Documentation/devicetree/bindings/thermal/thermal-zones.yaml b/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
-> >>>> index 3ec9cc87ec50..4d8f2e37d1e6 100644
-> >>>> --- a/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
-> >>>> +++ b/Documentation/devicetree/bindings/thermal/thermal-zones.yaml
-> >>>> @@ -99,10 +99,15 @@ patternProperties:
-> >>>>          sustainable-power:
-> >>>>            $ref: /schemas/types.yaml#/definitions/uint32
-> >>>>            description:
-> >>>> -          An estimate of the sustainable power (in mW) that this thermal zone
-> >>>> -          can dissipate at the desired control temperature. For reference, the
-> >>>> -          sustainable power of a 4-inch phone is typically 2000mW, while on a
-> >>>> -          10-inch tablet is around 4500mW.
-> >>>> +          An estimate of the sustainable power (in mW or in an abstract scale)
-> >>>> +         that this thermal zone can dissipate at the desired control
-> >>>> +         temperature. For reference, the sustainable power of a 4-inch phone
-> >>>> +         is typically 2000mW, while on a 10-inch tablet is around 4500mW.
-> >>>> +
-> >>>> +         It is possible to express the sustainable power in an abstract
-> >>>> +         scale. This is the case when the related cooling devices use also
-> >>>> +         abstract scale to express their power usage. The scale must be
-> >>>> +         consistent.
-> >>>
-> >>> Two thoughts:
-> >>>
-> >>> 1. If we're going to allow "sustainable-power" to be in abstract
-> >>> scale, why not allow "dynamic-power-coefficient" to be in abstract
-> >>> scale too?  I assume that the whole reason against that originally was
-> >>> the idea of device tree purity, but if we're allowing the abstract
-> >>> scale here then there seems no reason not to allow it for
-> >>> "dynamic-power-coefficient".
-> >>
-> >> With this binding it's a bit more tricky.
-> >> I also have to discuss a few things internally. This requirement of
-> >> uW/MHz/V^2 makes the code easier also for potential drivers
-> >> like GPU (which are going to register the devfreq cooling with EM).
-> >>
-> >> Let me think about it, but for now I would just update these bits.
-> >> These are required to proper IPA operation, the dyn.-pow.-coef. is a
-> >> nice to have and possible next step.
-> >
-> > I guess the problem is that Rajendra is currently planning to remove
-> > all the "dynamic-power-coefficient" values from device tree right now
-> > and move them to the source code because the numbers we currently have
-> > in the device tree _are_ in abstract scale and thus violate the
-> > bindings.  Moving this to source code won't help us get to more real
-> > power numbers (since it'll still be abstract scale), it'll just be
-> > pure churn.  If we're OK with the abstract scale in general then we
-> > should allow it everywhere and not add churn for no reason.
+> Thanks for documenting this.
 >
-> IIUC he is still going to use the Energy Model, but with different
-> registration function. We have such a driver: scmi-cpufreq.c, which
-> uses em_dev_register_perf_domain(). He can still use EM, EAS, IPA
-> not violating anything.
-
-Right.  He's going to take the exact same "abstract scale" numbers
-that he has today and take them out of device tree and put them in the
-cpufreq driver.  Doing so magically makes it so that he's not
-violating anything since "abstract scale" is not currently allowed in
-device tree but is allowed in the cpufreq driver.  I'm not saying that
-he's doing anything wrong, I'm just saying that it's pointless churn.
-If we're OK with "abstract scale" in one place in the device tree we
-should be OK with it everywhere in the device tree.  Then Rajendra
-wouldn't need his patch at all and he could leave his numbers in the
-device tree.
-
-
-> The real problem that we want to address is with sustainable-power in
-> IPA. It is used in power budget calculation and if the devices operate
-> in abstract scale, then there is an issue.
-> There are two options to get that value:
-> 1. from DT, which can have optimized value, stored by OEM engineer
-> 2. from IPA estimation code, which just calculates it as a sum of
-> minimum OPP power for each cooling device.
 >
-> The 2nd option might not be the best for a platform, so vendor/OEM
-> engineer might want to provide a better value in DT -> 1st option.
-> This is currently against the binding description and I have to fix it.
-
-Right, things are already broken today because a SoC vendor could
-(without violating any rules) provide their SoC core
-"dynamic-power-coefficient" in "abstract scale" in code and there
-would be no way to for a board to (without violating DT bindings)
-specify a "sustainable-power".  ...so, in that sense, your patch does
-provide a benefit even if we don't make any changes to the rules for
-"sustainable-power".  All I'm saying is that if these new rules for
-allowing an abstract scale for "sustainable-power" in the device tree
-are OK that it should _also_ be OK to add new rules to allow an
-abstract scale for "dynamic-power-coefficient".
-
-
-> >>> 2. Is it worth adding some type of indication of what type of units
-> >>> "sustainable-power" is represented in?  Maybe even a made up unit so
-> >>> that you could tell the difference between made up units in the same
-> >>> system?  I'd envision something like:
-> >>>
-> >>> sustainable-power-units = "qualcomm,sc7180-bogoWatts"
-> >>>
-> >>> ...and on the dynamic-power-coefficient side, the same:
-> >>>
-> >>> dynamic-power-coefficient-units = "qualcomm,sc7180-bogoWatts"
-> >>>
-> >>> One could imagine someone even later (after devices are widely
-> >>> distributed) figuring out translations between these bogoWatts numbers
-> >>> and real Watts if someone could come up with a case where it matters.
-> >>
-> >> To figure this out we don't need a new binding.
-> >> I think a simple comment in the DT would be enough for this, even e.g.:
-> >>
-> >> sustainable-power = <100> /* bogoWatts */
-> >
-> > There are some important differences:
-> >
-> > a) Your comment is gone when the device tree is compiled.  If we
-> > actually add a string to the device tree then, in theory, we can add
-> > conversions in code (without touching the device tree) down the road.
+> On Fri, 2 Oct 2020 at 19:11, Heinrich Schuchardt <xypron.glpk@gmx.de> wr=
+ote:
+>>
+>> Describe how a device tree and an initial RAM disk can be passed to the=
+ EFI
+>> Boot Stub.
+>>
+>> Signed-off-by: Heinrich Schuchardt <xypron.glpk@gmx.de>
+>> ---
+>>  Documentation/admin-guide/efi-stub.rst | 35 ++++++++++++++++++++++++++
+>>  1 file changed, 35 insertions(+)
+>>
+>> diff --git a/Documentation/admin-guide/efi-stub.rst b/Documentation/adm=
+in-guide/efi-stub.rst
+>> index 833edb0d0bc4..86f50a33884c 100644
+>> --- a/Documentation/admin-guide/efi-stub.rst
+>> +++ b/Documentation/admin-guide/efi-stub.rst
+>> @@ -38,6 +38,34 @@ arch/arm/boot/zImage should be copied to the system =
+partition, and it
+>>  may not need to be renamed. Similarly for arm64, arch/arm64/boot/Image
+>>  should be copied but not necessarily renamed.
+>>
+>> +Passing an initial RAM disk to the EFI Boot Stub
+>> +------------------------------------------------
+>> +
+>> +The following means sorted by decreasing priority can be used to provi=
+de an
+>> +initial RAM disk to the EFI Boot Stub:
+>> +
+>> +* The firmware may provide a UEFI Load File 2 Protocol. The stub will =
+try to
+>> +  load the RAM disk by calling the LoadFile() service of the protocol =
+using
+>> +  a vendor device path with the vendor GUID
+>> +  5568e427-0x68fc-4f3d-ac74-ca555231cc68.
+>> +* Next the EFI stub will try to load the file indicated by the "initrd=
+=3D" command
+>> +  line parameter.
+>> +* The prior boot stage may pass the location of the initial RAM disk v=
+ia the
+>> +  "linux,initrd-start" and "linux,initrd-end" properties of the "/chos=
+en" node
+>> +  of the device-tree.
+>> +
 >
-> We don't need code and binding with a bogoscale. It is up to the
-> platform integrator to make sure the scale in consistent in all devices.
-> Comment in DT is good enough.
+> On x86, the boot_params struct is used to pass the address and size of
+> the initrd in memory. Maybe include that for completeness?
 
-One other nice thing about having the units is that the device tree is
-supposed to be more of a "pure" thing, less sullied about what's
-convenient and more about a real description of a thing.  Presumably
-that's why "abstract scale" wasn't allowed originally?  In any case,
-giving quantifiable units to the number somehow makes it feel less
-made up because it's possible to come up with a way to convert it back
-to real units.
+Sure we should add it. But I will just wait for more review comments.
 
-
-> > b) I believe there can be more than one abstract scale present in a
-> > single device tree, at least in theory.  Adding a string allows you to
-> > know if you're comparing apples to apples or apples to organges.
 >
-> IMHO DT is not the place for such abstractions, but Rob might correct me
-> here.
+>> +The first two items are inhibited by the "noinitrd" command line param=
+eter.
+>> +
+>
+> Interesting. Are you saying noinitrd is ignored by the kernel itself?
+>
+> Looking at the code, it might only work for preventing the load of old
+> style initrd ramdisks, whereas initramfs images are handled
+> separately.
+>
+> This is something that we should probably fix one way or the other.
+>
 
-Yup, seems like we're blocked waiting for Rob to chime in unless
-someone else has the authority to make the call about how to deal with
-"abstract scale" numbers in the device tree.
+initrd_load() seems to depend on the value and will not create /dev/ram
+if "noinitrd" is set.
+init/do_mounts_initrd.o is compiled for ARMv8.
 
--Doug
+But my ARMv8 Odroid C2 boots fine via U-Boot->GRUB->EFI stub->Linux with:
+
+[  +0.000000] Kernel command line: BOOT_IMAGE=3D/vmlinuz-5.9.0-rc6-arm64+
+root=3DUUID=3D.. ro earlycon=3Dmeson,0xc81004c0,115200n8 noinitrd
+
+So I assume initrd_load() is either not called or at least not needed
+for the FDT case.
+
+Best regards
+
+Heinrich
+
+>
+>> +Passing a device-tree to the EFI Boot Stub
+>> +------------------------------------------
+>> +
+>> +A device-tree can be passed to the EFI Boot Stub in decreasing priorit=
+y using
+>> +
+>> +* command line option dtb=3D
+>> +* a UEFI configuration table with GUID b1b621d5-f19c-41a5-830b-d9152c6=
+9aae0.
+>> +
+>> +The command line option is only available if CONFIG_EFI_ARMSTUB_DTB_LO=
+ADER=3Dy
+>> +and secure boot is disabled.
+>>
+>>  Passing kernel parameters from the EFI shell
+>>  --------------------------------------------
+>> @@ -46,6 +74,10 @@ Arguments to the kernel can be passed after bzImage.=
+efi, e.g.::
+>>
+>>         fs0:> bzImage.efi console=3DttyS0 root=3D/dev/sda4
+>>
+>> +The "noinitrd" option
+>> +---------------------
+>> +
+>> +The "noinitrd" option stops the EFI stub from loading an initial RAM d=
+isk.
+>>
+>>  The "initrd=3D" option
+>>  --------------------
+>> @@ -98,3 +130,6 @@ CONFIGURATION TABLE.
+>>
+>>  "dtb=3D" is processed in the same manner as the "initrd=3D" option tha=
+t is
+>>  described above.
+>> +
+>> +This option is only available if CONFIG_EFI_ARMSTUB_DTB_LOADER=3Dy and=
+ secure
+>> +boot is disabled.
+>> --
+>> 2.28.0
+>>
+
