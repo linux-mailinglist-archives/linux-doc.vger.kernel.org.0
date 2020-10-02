@@ -2,213 +2,313 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 73606281A1E
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Oct 2020 19:51:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9AFAF281ADD
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Oct 2020 20:28:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388184AbgJBRvN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Oct 2020 13:51:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57814 "EHLO
+        id S2388347AbgJBS2d (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Oct 2020 14:28:33 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35336 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387789AbgJBRvN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Oct 2020 13:51:13 -0400
-Received: from merlin.infradead.org (merlin.infradead.org [IPv6:2001:8b0:10b:1231::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 55C4BC0613D0;
-        Fri,  2 Oct 2020 10:51:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:Content-Type:
-        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
-        :Reply-To:Content-ID:Content-Description;
-        bh=EEZmQARKM0eSEl3lpWdQ92Pu0V+oAW6k2XrCDHUZXrw=; b=KwhW8VX5PFWlEurekbN1+z9kWU
-        K9lxEvKq1RI6kq9w8QzAU1bKqPki6v1DWBNzsruCrx+0Aau2F9P37es9WXdOIKv9QVG+9hqYdeuu3
-        ZR5UyyBge+6Ha/A3P2oqKB6fTKakMqZ3AWiRalJhImacBJbJXJq9hN1AordNmN8ESwgy6m3/pd5I+
-        /Q+KElXKWAoXk0q3LdWQi3r5Li7FF9lj8IvjN5NJjYrtDT7zzrJptiSuzKs1odaoXzZnk/oN+L2/a
-        iU0kL3is2eMjTjHc7N01e9uMdd49gGAlHtz3Y5KPiCzVHlrH4FX/OAp/L5UUU7mETr/CfjQ6ZCSJV
-        lKxRY/Uw==;
-Received: from [2601:1c0:6280:3f0::2c9a]
-        by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kOPD4-0006wo-9a; Fri, 02 Oct 2020 17:51:10 +0000
-Subject: Re: [RFC PATCH v1 15/26] docs: reporting-bugs: make readers test
- mainline, but leave a loophole
-To:     Thorsten Leemhuis <linux@leemhuis.info>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-References: <cover.1601541165.git.linux@leemhuis.info>
- <e9166fcbb777e9b7685745e572ab7c7322596ec2.1601541165.git.linux@leemhuis.info>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <275187e0-92b5-d0a6-0bf7-76c827e2c808@infradead.org>
-Date:   Fri, 2 Oct 2020 10:51:07 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+        with ESMTP id S1726017AbgJBS23 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Oct 2020 14:28:29 -0400
+Received: from mail-ej1-x641.google.com (mail-ej1-x641.google.com [IPv6:2a00:1450:4864:20::641])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4BA92C0613E2
+        for <linux-doc@vger.kernel.org>; Fri,  2 Oct 2020 11:28:27 -0700 (PDT)
+Received: by mail-ej1-x641.google.com with SMTP id q13so3246156ejo.9
+        for <linux-doc@vger.kernel.org>; Fri, 02 Oct 2020 11:28:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=BsYux+2mDidOv01anJDY4ry73gJii56cZfxQL8DhjP4=;
+        b=iyd0xHn4pqAUWDMGwczEUFCBJENEtyZtyKCMJHta/ydXRMM9/B99IrtUiiRN+s5bOF
+         TTtr781sbHxsOWsEU5+byp+ROmF9ODhkPJHBOslK1Y9ry1Ji08z/rLjC3CK+391Yba5B
+         VFeGBNOweTd+OzOFQHgzSldQFVLX+tbjgtZyz1hMEmIUFFs7GecCx0rxlPaNYodd7ER4
+         zyIOJci5vzTKf6Z224hXvN2ABvNft70rqsw9MsbdNEXQWu3Dl5OdAYJOfQLpwgDtgvkt
+         rQqnq41eu2st0HnmbRX+mvmKbKEJRkEkmjMvSVq0dHXpdwNET9/wZZzdNahlc1LYPg6F
+         WAew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=BsYux+2mDidOv01anJDY4ry73gJii56cZfxQL8DhjP4=;
+        b=XpDkhjoEckHJQf8sPDCrsvnG5gIj4/90fgLkFJ6XCr+x0rUnQN4Vrd75+RaIvu7QIh
+         S8iJ+FNXvibypkhC9prfBokGqirvAIJu3pR5+B5nMCIf0+gEsKSxd1I4C7rhM6IPfauP
+         m45d/JTsuseA4vOMnykyy2GNFZ//6tKNP0BD0vMcB3xz8pcfuWr0Py5EC1PnmfiEAgZp
+         FnbJkSSF7mRimEkD4OUUNlDhaNgP+VZQ66ooF9xmFGXt9ZVfCJcD06lYqC/PjiDayZwS
+         B8PK3Q2nYwxdGM/yG0oZBtkods6rNjxRrT/LamlX+2s5vd3x78+koNhMNXSWDzaEngXF
+         KIxA==
+X-Gm-Message-State: AOAM531CTJ5sFGfbZZO96Wz0eYJMSpQXFSaQjcTJ6VC8MvmdS8e+spQG
+        EKg3Ymu60XHBug7hmywJ2+rqLq3nq8S0+x6pbMzbkw==
+X-Google-Smtp-Source: ABdhPJzgKrliXRN5QPqAAT9OPrizyhjQuMQ0C89osYzNNCBB+hq/RPtF3G0uUVP4RgyWMHeWl01Rv7KBt75igmVc/08=
+X-Received: by 2002:a17:906:394:: with SMTP id b20mr3465227eja.513.1601663305597;
+ Fri, 02 Oct 2020 11:28:25 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <e9166fcbb777e9b7685745e572ab7c7322596ec2.1601541165.git.linux@leemhuis.info>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+References: <20200929133814.2834621-1-elver@google.com> <20200929133814.2834621-2-elver@google.com>
+ <CAG48ez3+_K6YXoXgKBkB8AMeSQj++Mxi5u2OT--B+mJgE7Cyfg@mail.gmail.com>
+ <CAG48ez1MQks2na23g_q4=ADrjMYjRjiw+9k_Wp9hwGovFzZ01A@mail.gmail.com> <CACT4Y+a3hLF1ph1fw7xVz1bQDNKL8W0s6pXe7aKm9wTNrJH3=w@mail.gmail.com>
+In-Reply-To: <CACT4Y+a3hLF1ph1fw7xVz1bQDNKL8W0s6pXe7aKm9wTNrJH3=w@mail.gmail.com>
+From:   Jann Horn <jannh@google.com>
+Date:   Fri, 2 Oct 2020 20:27:59 +0200
+Message-ID: <CAG48ez1RYbpMFbGFB6=9Y3vVCGrMgLS3LbDdxzBfmxH6Kxddmw@mail.gmail.com>
+Subject: Re: [PATCH v4 01/11] mm: add Kernel Electric-Fence infrastructure
+To:     Dmitry Vyukov <dvyukov@google.com>
+Cc:     Marco Elver <elver@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Alexander Potapenko <glider@google.com>,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        "Paul E . McKenney" <paulmck@kernel.org>,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoph Lameter <cl@linux.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        David Rientjes <rientjes@google.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Hillf Danton <hdanton@sina.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Kees Cook <keescook@chromium.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        SeongJae Park <sjpark@amazon.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Will Deacon <will@kernel.org>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        kernel list <linux-kernel@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        Linux-MM <linux-mm@kvack.org>, SeongJae Park <sjpark@amazon.de>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/1/20 1:39 AM, Thorsten Leemhuis wrote:
-> Now that the document described all preparatory steps tell users to
-> install the latest kernel. Try pretty hard to motivate them installing a
-> mainline kernel, as that is best for reporting issues. Mention the
-> latest stable kernel as an acceptable alternative, but discourage this
-> option. Point out that longterm kernels are unsuitable.
-> 
-> While at it, provide a few hints how to obtain a fresh kernel. Also
-> explain how to find out what the latest version actually is. And mention
-> why it might be a good idea to wait till the end of the merge window
-> when reporting issues.
-> 
-> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
-> ---
-> 
-> = RFC =
-> 
-> Am I asking for too much from users by telling them to test mainline? But most
-> will likely have an outdated and heavily patched vendor kernel anyway, so they
-> have to install a vanilla kernel if they want to report something upstream;
-> that's why I thought "well, then let's go all in and make them test mainline.
+On Fri, Oct 2, 2020 at 4:23 PM Dmitry Vyukov <dvyukov@google.com> wrote:
+> On Fri, Oct 2, 2020 at 9:54 AM Jann Horn <jannh@google.com> wrote:
+> > On Fri, Oct 2, 2020 at 8:33 AM Jann Horn <jannh@google.com> wrote:
+> > > On Tue, Sep 29, 2020 at 3:38 PM Marco Elver <elver@google.com> wrote:
+> > > > This adds the Kernel Electric-Fence (KFENCE) infrastructure. KFENCE is a
+> > > > low-overhead sampling-based memory safety error detector of heap
+> > > > use-after-free, invalid-free, and out-of-bounds access errors.
+> > > >
+> > > > KFENCE is designed to be enabled in production kernels, and has near
+> > > > zero performance overhead. Compared to KASAN, KFENCE trades performance
+> > > > for precision. The main motivation behind KFENCE's design, is that with
+> > > > enough total uptime KFENCE will detect bugs in code paths not typically
+> > > > exercised by non-production test workloads. One way to quickly achieve a
+> > > > large enough total uptime is when the tool is deployed across a large
+> > > > fleet of machines.
+> > [...]
+> > > > +/*
+> > > > + * The pool of pages used for guard pages and objects. If supported, allocated
+> > > > + * statically, so that is_kfence_address() avoids a pointer load, and simply
+> > > > + * compares against a constant address. Assume that if KFENCE is compiled into
+> > > > + * the kernel, it is usually enabled, and the space is to be allocated one way
+> > > > + * or another.
+> > > > + */
+> > >
+> > > If this actually brings a performance win, the proper way to do this
+> > > would probably be to implement this as generic kernel infrastructure
+> > > that makes the compiler emit large-offset relocations (either through
+> > > compiler support or using inline asm statements that move an immediate
+> > > into a register output and register the location in a special section,
+> > > kinda like how e.g. static keys work) and patches them at boot time,
+> > > or something like that - there are other places in the kernel where
+> > > very hot code uses global pointers that are only ever written once
+> > > during boot, e.g. the dentry cache of the VFS and the futex hash
+> > > table. Those are probably far hotter than the kfence code.
+> > >
+> > > While I understand that that goes beyond the scope of this project, it
+> > > might be something to work on going forward - this kind of
+> > > special-case logic that turns the kernel data section into heap memory
+> > > would not be needed if we had that kind of infrastructure.
+> >
+> > After thinking about it a bit more, I'm not even convinced that this
+> > is a net positive in terms of overall performance - while it allows
+> > you to avoid one level of indirection in some parts of kfence, that
+> > kfence code by design only runs pretty infrequently. And to enable
+> > this indirection avoidance, your x86 arch_kfence_initialize_pool() is
+> > shattering potentially unrelated hugepages in the kernel data section,
+> > which might increase the TLB pressure (and therefore the number of
+> > memory loads that have to fall back to slow page walks) in code that
+> > is much hotter than yours.
+> >
+> > And if this indirection is a real performance problem, that problem
+> > would be many times worse in the VFS and the futex subsystem, so
+> > developing a more generic framework for doing this cleanly would be
+> > far more important than designing special-case code to allow kfence to
+> > do this.
+> >
+> > And from what I've seen, a non-trivial chunk of the code in this
+> > series, especially the arch/ parts, is only necessary to enable this
+> > microoptimization.
+> >
+> > Do you have performance numbers or a description of why you believe
+> > that this part of kfence is exceptionally performance-sensitive? If
+> > not, it might be a good idea to remove this optimization, at least for
+> > the initial version of this code. (And even if the optimization is
+> > worthwhile, it might be a better idea to go for the generic version
+> > immediately.)
+>
+> This check is very hot, it happens on every free. For every freed
+> object we need to understand if it belongs to KFENCE or not.
 
-That is appropriate IMO.
-
-> ---
->  Documentation/admin-guide/reporting-bugs.rst | 88 ++++++++++++++++++++
->  1 file changed, 88 insertions(+)
-> 
-> diff --git a/Documentation/admin-guide/reporting-bugs.rst b/Documentation/admin-guide/reporting-bugs.rst
-> index f99d92a05bca..dee6d65aa95c 100644
-> --- a/Documentation/admin-guide/reporting-bugs.rst
-> +++ b/Documentation/admin-guide/reporting-bugs.rst
-> @@ -643,6 +643,94 @@ hardware apart from a kernel issue that rarely happens and thus is hard to
->  reproduce.
->  
->  
-> +Install the latest mainline kernel
-> +----------------------------------
-> +
-> +    *Install the latest Linux mainline kernel: that's where all issue get fixed
-
-                                                                   issues
-
-> +    first, because it's the version line the kernel developers mainly care
-> +    about. Testing and reporting with the latest Linux stable kernel can be
-> +    acceptable alternative in some situations, but is best avoided.*
-
-       an acceptable
-
-> +
-> +Reporting an issue to the Linux kernel developers they fixed a while ago is
-> +annoying for them and wasting their and your time. That's why it's in
-> +everybody's interest to check if the issue occurs with the latest version before
-> +reporting it.
-> +
-> +In the scope of the Linux kernel the term 'latest' means: a kernel version
-> +recently created from the main line of development, as this 'mainline' tree is
-> +where every fix gets applied to first; only later they are allowed to get
-> +backported to older, still support version lines called 'stable' and 'longterm'
-
-                              supported
-
-> +kernels. That's why it's a prerequisite to check mainline even if just want to
-
-                                                             even if you just want to
-
-> +see the issue fixed in one of those. Another reasons: sometimes fixes for an
-
-                       in one of those other version lines. Another reason:
-
-
-> +issue are only applied to mainline, as they are too risky to get backported
-> +into older version lines where they thus remain unfixed.
-> +
-> +It's thus in your and everybody's else interest to reproduce the issue with a
-
-                         everybody else's
-
-> +fresh mainline kernel before reporting it. Reproducing it with the latest Linux
-> +'stable' kernel can be acceptable alternative, if you can't test mainline for
-> +some reason; this is not ideal, but better than not reporting the issue at all.
-> +
-> +Avoid testing with one of the longterm kernels (sometimes called "LTS kernels"),
-> +they are too distant from current development; the same is also true for
-
-   as they are too distant
-
-> +mainline or stable kernels that are not very recent, as there is a new release
-> +of those nearly every week.
-> +
-> +Ways to obtains a fresh vanilla kernel
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +One way to get the latest mainline or stable kernel in a vanilla fashion is to
-> +download the Linux sources from `kernel.org <https://kernel.org/>`_ and build a
-> +kernel image and modules from them yourself. How to do that is not described
-> +here, as many texts on the internet explain the necessary steps already. If you
-> +are new to it, consider following one of those how-to's that suggest to use
-> +``make localmodconfig``, as that tries to pick up the configuration of your
-> +current kernel and then tries to adjust it somewhat for your system. That does
-> +not make the resulting kernel any better, but makes it compile a lot faster.
-> +
-> +There might be a way around building your own kernel, if you are in a luck: for
-
-                                                                    in luck: for
-
-> +popular Linux distribution you'll find repositories on the net that offer
-> +packages with of the latest mainline or stable Linux vanilla kernels for easy
-> +installation. It's totally okay to use packages with these pre-compiled kernels,
-> +just make sure from the repository's documentation they are supposed to be
-> +'vanilla', for reasons outlined in the first step of this process. And be aware
-> +that you might need to build your own kernel later anyway when it comes to
-> +testing fixes, as described later in this document.
-> +
-> +Finding the latest Linux version
-> +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> +
-> +To check what the latest mainline release actually is, go to `kernel.org
-> +<https://kernel.org/>`_. Ignore the big yellow button that says 'Latest
-> +release': that points to the latest stable release, which you normally don't
-> +want to use.
-> +
-> +Instead, look a little lower for a table for a line with the description
-
-                                            with a line with the description
-
-> +'mainline', which you'll find at the top of that table. Most of the time
-> +'mainline' will point to a pre-release with a version number like '5.8-rc2'. In
-> +that case that's the version you want to test. Do not let that 'rc' scare you,
-> +these 'development kernels' are pretty reliable — and you have a backup, like we
-> +told you above, don't you?
-> +
-> +In about two out of every nine to ten weeks, 'mainline' might point you to a
-> +proper release with a version number like '5.7'. If that happens consider
-> +suspending the reporting process for a while, as the Linux development cycle is
-> +currently in its two-week long 'merge window'. That's where the bulk of the
-> +changes (and all intrusive ones) get merged for the next release, before its
-> +first pre-release is published (5.8-rc1). Kernel developers are often quite
-> +busy during this time period and might have no spare time to deal with issue
-> +reports. It's also quite possible that one of the many changes applied during
-> +the merge window fixes the issue you face; that's why you soon would have to
-> +retest with a newer kernel version anyway, as outlined below in the section
-> +'Duties after the report when out'. Therefor it's often wise to wait for the
-
-                                       Therefore
-
-> +first pre-release before proceeding with this step, unless you're dealing with
-> +one of those 'issues of high priority' or one that can't wait for a good reason.
-> +
-> +Feel free to ignore the past three paragraphs if you are a developer, Linux
-> +kernel expert, or brave; instead simply get the latest Linux kernel sources
-> +using ``git`` straight from the `official development repository on kernel.org
-> +<https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/>`_.
-> +
-> +
->  .. ############################################################################
->  .. Temporary marker added while this document is rewritten. Sections above
->  .. are new and dual-licensed under GPLv2+ and CC-BY 4.0, those below are old.
-> 
+Ah, so the path you care about does not dereference __kfence_pool, it
+just compares it to the supplied pointer?
 
 
--- 
-~Randy
+First off: The way you've written is_kfence_address(), GCC 10.2 at -O3
+seems to generate *utterly* *terrible* code (and the newest clang
+release isn't any better); something like this:
 
+kfree_inefficient:
+  mov rax, QWORD PTR __kfence_pool[rip]
+  cmp rax, rdi
+  jbe .L4
+.L2:
+  jmp kfree_not_kfence
+.L4:
+  add rax, 0x200000
+  cmp rax, rdi
+  jbe .L2
+  jmp kfree_kfence
+
+So pointers to the left of the region and pointers to the right of the
+region will take different branches, and so if you have a mix of
+objects on both sides of the kfence region, you'll get tons of branch
+mispredictions for no good reason. You'll want to rewrite that check
+as "unlikely(ptr - base <= SIZE)" instead of "unlikely(ptr >= base &&
+ptr < base + SIZE" unless you know that all the objects will be on one
+side. This would also reduce the performance impact of loading
+__kfence_pool from the data section, because the branch prediction can
+then speculate the branch that depends on the load properly and
+doesn't have to go roll back everything that happened when the object
+turns out to be on the opposite side of the kfence memory region - the
+latency of the load will hopefully become almost irrelevant.
+
+
+
+So in x86 intel assembly (assuming that we want to ensure that we only
+do a single branch on the object type), the straightforward and
+non-terrible version would be:
+
+
+kfree_unoptimized:
+  mov rax, rdi
+  sub rax, QWORD PTR __kfence_pool[rip]
+  cmp rax, 0x200000
+  jbe 1f
+  /* non-kfence case goes here */
+1:
+  /* kfence case goes here */
+
+
+while the version you want is:
+
+
+kfree_static:
+  mov rax, rdi
+  sub rax, OFFSET FLAT:__kfence_pool
+  cmp rax, 0x200000
+  jbe 1f
+  jmp kfree_not_kfence
+1:
+  jmp kfree_kfence
+
+
+If we instead use something like
+
+#define STATIC_VARIABLE_LOAD(variable) \
+({ \
+  typeof(variable) value; \
+  BUILD_BUG_ON(sizeof(variable) != sizeof(unsigned long)); \
+  asm( \
+    ".pushsection .static_variable_users\n\t" \
+    ".long "  #variable " - .\n\t" \
+    ".long 123f - .\n\t" /* offset to end of constant */ \
+    ".popsection\n\t" \
+    "movabs $0x0123456789abcdef, %0" \
+    "123:\n\t" \
+    :"=r"(value) \
+  ); \
+  value; \
+})
+static __always_inline bool is_kfence_address(const void *addr)
+{
+  return unlikely((char*)addr - STATIC_VARIABLE_LOAD(__kfence_pool) <
+KFENCE_POOL_SIZE);
+}
+
+to locate the pool (which could again be normally allocated with
+alloc_pages()), we'd get code like this, which is like the previous
+except that we need an extra "movabs" because x86's "sub" can only use
+immediates up to 32 bits:
+
+kfree_hotpatchable_bigreloc:
+  mov rax, rdi
+  movabs rdx, 0x0123456789abcdef
+  sub rax, rdx
+  cmp rax, 0x200000
+  jbe .1f
+  jmp kfree_not_kfence
+1:
+  jmp kfree_kfence
+
+The arch-specific part of this could probably be packaged up pretty
+nicely into a generic interface. If it actually turns out to have a
+performance benefit, that is.
+
+If that one extra "movabs" is actually a problem, it would
+*theoretically* be possible to get rid of that by using module_alloc()
+to allocate virtual memory to which offsets from kernel text are 32
+bits, and using special-cased inline asm, but we probably shouldn't do
+that, because as Mark pointed out, we'd then risk getting extremely
+infrequent extra bugs when drivers use phys_to_virt() on allocations
+that were done through kfence. Adding new, extremely infrequent and
+sporadically occurring bugs to the kernel seems like the exact
+opposite of the goal of KFENCE. :P
+
+Overall my expectation would be that the MOVABS version should
+probably at worst be something like one cycle slower - it adds 5
+instruction bytes (and we pay 1 cycle in the frontend per 16 bytes of
+instructions, I think?) and 1 backend cycle (for the MOVABS - Agner
+Fog's tables seem to say that at least on Skylake, MOVABS is 1 cycle).
+But that backend cycle shouldn't even be on the critical path (and it
+has a wider choice of ports than e.g. a load, and I think typical
+kernel code isn't exactly highly parallelizable, so we can probably
+schedule on a port that would've been free otherwise?), and I think
+typical kernel code should be fairly light on the backend, so with the
+MOVABS version, compared to the version with __kfence_pool in the data
+section, we probably overall just pay a fraction of a cycle in
+execution cost? I'm not a professional performance engineer, but this
+sounds to me like the MOVABS version should probably perform roughly
+as well as your version.
+
+Anyway, I guess this is all pretty vague without actually having
+concrete benchmark results. :P
+
+See <https://godbolt.org/z/Kev9dc> for examples of actual code
+generation for different options of writing this check.
+
+> The generic framework for this already exists -- you simply create a
+> global variable ;)
+
+Yeah, except for all the arch-specific bits you then need to twiddle
+with because nobody expects heap memory inside the data section...
+
+> KFENCE needs the range to be covered by struct page's and that's what
+> creates problems for arm64. But I would assume most other users don't
+> need that.
+
+Things like the big VFS dentry cache and the futex hashtable have
+their size chosen at boot time, so they also can't be placed in the
+data/bss section.
