@@ -2,29 +2,29 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EB26B28236A
-	for <lists+linux-doc@lfdr.de>; Sat,  3 Oct 2020 12:00:44 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D9E1028236D
+	for <lists+linux-doc@lfdr.de>; Sat,  3 Oct 2020 12:01:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725772AbgJCKAo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 3 Oct 2020 06:00:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37282 "EHLO
+        id S1725791AbgJCKBs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 3 Oct 2020 06:01:48 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37446 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725601AbgJCKAo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 3 Oct 2020 06:00:44 -0400
+        with ESMTP id S1725601AbgJCKBs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 3 Oct 2020 06:01:48 -0400
 Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 44CD8C0613D0;
-        Sat,  3 Oct 2020 03:00:44 -0700 (PDT)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 56B68C0613D0;
+        Sat,  3 Oct 2020 03:01:48 -0700 (PDT)
 Received: from ip4d14bc8c.dynamic.kabel-deutschland.de ([77.20.188.140] helo=[192.168.66.101]); authenticated
         by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
-        id 1kOeLK-0005H8-NG; Sat, 03 Oct 2020 12:00:42 +0200
-Subject: Re: [RFC PATCH v1 13/26] docs: reporting-bugs: point out the
- environment might be causing issue
+        id 1kOeMM-0007zv-MJ; Sat, 03 Oct 2020 12:01:46 +0200
+Subject: Re: [RFC PATCH v1 14/26] docs: reporting-bugs: make users write
+ notes, one for each issue
 To:     Randy Dunlap <rdunlap@infradead.org>,
         Jonathan Corbet <corbet@lwn.net>
 Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
 References: <cover.1601541165.git.linux@leemhuis.info>
- <6dab906efb915c6cd6733df525b1f3da3753c4b4.1601541165.git.linux@leemhuis.info>
- <a226274e-7bda-bd27-a0a5-1f1bb165fcd1@infradead.org>
+ <bf99a4e5af05e7076795e33beb6d48f95571328e.1601541165.git.linux@leemhuis.info>
+ <3b035746-909c-a65f-470c-ce34a9b71306@infradead.org>
 From:   Thorsten Leemhuis <linux@leemhuis.info>
 Autocrypt: addr=linux@leemhuis.info; prefer-encrypt=mutual; keydata=
  mQINBFJ4AQ0BEADCz16x4kl/YGBegAsYXJMjFRi3QOr2YMmcNuu1fdsi3XnM+xMRaukWby47
@@ -69,22 +69,22 @@ Autocrypt: addr=linux@leemhuis.info; prefer-encrypt=mutual; keydata=
  yc+mP1ya8uxIFEwcp6C1h4TTisVFC2DXxDi7pqUd9oTuI4Hg19/i07cdYUHDiraDXSXW5zH9
  5ZDV+rSqDU3ercoRd2qjGUOIXWOytHTeJhVOWqM0vOmXDUwwYHuEb0HFn3d/tz+idSrXUSXZ
  5iv6NKaV29GWHbY=
-Message-ID: <b90957bf-d032-abef-3d60-da46e4f82be3@leemhuis.info>
-Date:   Sat, 3 Oct 2020 12:00:42 +0200
+Message-ID: <158aeaf8-9ffc-d174-6c0a-16fe3032c787@leemhuis.info>
+Date:   Sat, 3 Oct 2020 12:01:46 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <a226274e-7bda-bd27-a0a5-1f1bb165fcd1@infradead.org>
+In-Reply-To: <3b035746-909c-a65f-470c-ce34a9b71306@infradead.org>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1601719244;ecc2ca38;
-X-HE-SMSGID: 1kOeLK-0005H8-NG
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1601719308;319172ea;
+X-HE-SMSGID: 1kOeMM-0007zv-MJ
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Am 02.10.20 um 19:32 schrieb Randy Dunlap:
+Am 02.10.20 um 19:35 schrieb Randy Dunlap:
 > On 10/1/20 1:39 AM, Thorsten Leemhuis wrote:
 
 Many thx for you comments, all suggestions implemented.
@@ -92,4 +92,3 @@ Many thx for you comments, all suggestions implemented.
 
 
 Ciao, Thorsten
-
