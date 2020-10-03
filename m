@@ -2,103 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 78690281F82
-	for <lists+linux-doc@lfdr.de>; Sat,  3 Oct 2020 02:03:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A3C3C282063
+	for <lists+linux-doc@lfdr.de>; Sat,  3 Oct 2020 04:07:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725550AbgJCADH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Oct 2020 20:03:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59020 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725283AbgJCADH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 2 Oct 2020 20:03:07 -0400
-Received: from mail-pj1-x1041.google.com (mail-pj1-x1041.google.com [IPv6:2607:f8b0:4864:20::1041])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F3A30C0613D0;
-        Fri,  2 Oct 2020 17:03:06 -0700 (PDT)
-Received: by mail-pj1-x1041.google.com with SMTP id b17so1883659pji.1;
-        Fri, 02 Oct 2020 17:03:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=4wadPL5eRQ8Hbv2G79TEpM4KGWCbAz6BIZrfCkhvXS4=;
-        b=CX4FzF5HQo4aWMpOFQeBvEIGgwmdmfw6z4UFMbpOr4+Yli8BuDlsgSCyJF6bbIhK8N
-         VHRf4mfrwHm37t9Pj7SljZf5XiZdimtHl/6qWWt0YfzA/Xg/inK2dV2+qm5fbvnnzJsf
-         kJc6Oj6fBl3ABeZ+torudGhywLeQa8emLGVNVVcTVGKGpTQCvN7EUreJVjHlqvjaRe2h
-         ACeNJVPKyP0Y4WRvYjZiYClbZHVkad0yp2VhClN/dqhqoXKmmD2gvOZVUOMZ215QzQrw
-         43L1zT4DIr0mHCAv8T6k1ZFggbaHkJQoSe9jLWJVAZCCHQO3BD2FnKeNqmMN0zMFhKTm
-         Gwng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=4wadPL5eRQ8Hbv2G79TEpM4KGWCbAz6BIZrfCkhvXS4=;
-        b=p9A/djUV2RD175V/g8wl5+QkOJ+NkfZistTS557gfI6tsP6MWrzzT8n5kqDGD/Ivax
-         S3QExtdhOkjWzl/dPZvZ5loBIM51aA28bdEzpITJ5S+T34yDJkGLpQmZpw8i7LIoiA/s
-         RW1KQphmAjK1CZ9cOChcAjYB3U1tpInex2KfGIx46KXjmX4ZsCj26waY02V/2NsscxSq
-         444MGH62pmaocdq6iw8CDTPmFouVaqlkpG0YB7dsGInMIo95ZpyH+XtD5GG9pwyc4BAg
-         e4Y1UWBHxRl5JcdHVh2poZPZb1+oqnUT49PDF+chMCZXOBjmC2lXlnX9LLcoDhxrfs5R
-         8l3g==
-X-Gm-Message-State: AOAM531PPMHeSN3flmR9vOUbPcnek5VsOIHsUUd3Wgul7pRG7rHxyQjC
-        /FZMkSBoNBU/cSTwP+J5cJw=
-X-Google-Smtp-Source: ABdhPJy6aDucl8FLM8J70ZSmYRA259SOdEdYonn852vYH80Q/GKrkairB+m/ReHBi3u1R0VQ+/Qamg==
-X-Received: by 2002:a17:90a:b293:: with SMTP id c19mr3434480pjr.122.1601683386425;
-        Fri, 02 Oct 2020 17:03:06 -0700 (PDT)
-Received: from sol (106-69-171-132.dyn.iinet.net.au. [106.69.171.132])
-        by smtp.gmail.com with ESMTPSA id r14sm2877142pgm.7.2020.10.02.17.03.01
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 02 Oct 2020 17:03:05 -0700 (PDT)
-Date:   Sat, 3 Oct 2020 08:02:59 +0800
-From:   Kent Gibson <warthog618@gmail.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        Eugeniu Rosca <erosca@de.adit-jv.com>,
-        Geert Uytterhoeven <geert+renesas@glider.be>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Ulrich Hecht <uli+renesas@fpond.eu>,
-        linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 6/6] docs: gpio: add a new document to its index.rst
-Message-ID: <20201003000259.GA6321@sol>
-References: <cover.1601616399.git.mchehab+huawei@kernel.org>
- <bad4d85c218d59c1bf69157df8e1012577680d88.1601616399.git.mchehab+huawei@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <bad4d85c218d59c1bf69157df8e1012577680d88.1601616399.git.mchehab+huawei@kernel.org>
+        id S1725904AbgJCCHO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Oct 2020 22:07:14 -0400
+Received: from m42-4.mailgun.net ([69.72.42.4]:50735 "EHLO m42-4.mailgun.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725905AbgJCCHO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 2 Oct 2020 22:07:14 -0400
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
+ s=smtp; t=1601690834; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=K63rHzYks6lSC10q7DrVY5t8JDsCFdNGvwegnC6J6i4=; b=ff+UYeka6ecdHbE0/mYoAZVOzt2QSH9p47vjVBPdyhVQwDuqC/A7hSAlKqSDHaDbQEu/lyWj
+ LOOSLa1vKWvA+oN7dDdindFvG1xK5G43Blc6bVwjsUu8DYKrwUyUr7TSNThbZYo2j5Ao7M7Q
+ tZz0uYDHBp33hTrd3EPphPnP0Jc=
+X-Mailgun-Sending-Ip: 69.72.42.4
+X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n05.prod.us-east-1.postgun.com with SMTP id
+ 5f77dc98bfed2afaa619cc8f (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Sat, 03 Oct 2020 02:06:16
+ GMT
+Sender: sidgup=codeaurora.org@mg.codeaurora.org
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+        id 2E0A2C433FF; Sat,  3 Oct 2020 02:06:16 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+        aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00,SPF_FAIL
+        autolearn=no autolearn_force=no version=3.4.0
+Received: from sidgup-linux.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+        (No client certificate requested)
+        (Authenticated sender: sidgup)
+        by smtp.codeaurora.org (Postfix) with ESMTPSA id 063B4C433CA;
+        Sat,  3 Oct 2020 02:06:14 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 063B4C433CA
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=fail smtp.mailfrom=sidgup@codeaurora.org
+From:   Siddharth Gupta <sidgup@codeaurora.org>
+To:     agross@kernel.org, bjorn.andersson@linaro.org, ohad@wizery.com,
+        linux-remoteproc@vger.kernel.org
+Cc:     Siddharth Gupta <sidgup@codeaurora.org>,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, tsoni@codeaurora.org,
+        psodagud@codeaurora.org, rishabhb@codeaurora.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v6 0/4] Introduce mini-dump support for remoteproc
+Date:   Fri,  2 Oct 2020 19:05:53 -0700
+Message-Id: <1601690757-25726-1-git-send-email-sidgup@codeaurora.org>
+X-Mailer: git-send-email 2.7.4
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 02, 2020 at 07:49:50AM +0200, Mauro Carvalho Chehab wrote:
-> There's now a new ReST file. Add it to the index.rst file.
-> 
-> Fixes: ce7a2f77f976 ("docs: gpio: Add GPIO Aggregator documentation")
+Sometimes firmware sizes can be in tens of MB's and reading all the memory
+during coredump can consume lot of time and memory.
 
-Shouldn't that be:
+Introducing support for mini-dumps. Mini-dump contains smallest amount of
+useful information, that could help to debug subsystem crashes.
 
-Fixes: fd1abe99e5fb ("Documentation: gpio: add documentation for gpio-mockup")
+During bootup memory is allocated in SMEM (Shared memory) in the form of a
+table that contains the physical addresses and sizes of the regions that
+are supposed to be collected during coredump. This memory is shared amongst
+all processors in a Qualcomm platform, so all remoteprocs fill in their
+entry in the global table once they are out of reset.
 
-Cheers,
-Kent.
+This patch series adds support for parsing the global minidump table and
+uses the current coredump frameork to expose this memory to userspace
+during remoteproc's recovery.
 
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->  Documentation/admin-guide/gpio/index.rst | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/Documentation/admin-guide/gpio/index.rst b/Documentation/admin-guide/gpio/index.rst
-> index ef2838638e96..7db367572f30 100644
-> --- a/Documentation/admin-guide/gpio/index.rst
-> +++ b/Documentation/admin-guide/gpio/index.rst
-> @@ -9,6 +9,7 @@ gpio
->  
->      gpio-aggregator
->      sysfs
-> +    gpio-mockup
->  
->  .. only::  subproject and html
->  
-> -- 
-> 2.26.2
-> 
+This patch series also integrates the patch:
+https://patchwork.kernel.org/patch/11695541/ sent by Siddharth.
+
+Changelog:
+v5 -> v6:
+- Removed priv_cleanup operation from rproc_ops. The dump_segments list is
+  updated and cleaned up each time minidump is invoked.
+- Split patch #2 into 2 parts - one that adds the rproc_minidump function, and
+  the other that uses the new function in the qcom_q6v5_pas driver.
+- Updated structs in qcom_minidump to explicitly indicate the endianness of the
+  data stored in SMEM, also updated member names.
+- Read the global table of contents in SMEM each time adsp_minidump is invoked.
+
+v4 -> v5:
+- Fixed adsp_add_minidump_segments to read IO memory using appropriate functions.
+
+v3 -> v4:
+- Made adsp_priv_cleanup a static function.
+
+v2 -> v3:
+- Refactored code to remove dependency on Qualcomm configs.
+- Renamed do_rproc_minidump to rproc_minidump and marked as exported
+  symbol.
+
+v1 -> v2:
+- 3 kernel test robot warnings have been resolved.
+- Introduced priv_cleanup op in order to making the cleaning of
+  private elements used by the remoteproc more readable.
+- Removed rproc_cleanup_priv as it is no longer needed.
+- Switched to if/else format for rproc_alloc in order to keep 
+  the static const decalaration of adsp_minidump_ops.
+
+Siddharth Gupta (4):
+  remoteproc: core: Add ops to enable custom coredump functionality
+  remoteproc: coredump: Add minidump functionality
+  remoteproc: qcom: Add capability to collect minidumps
+  remoteproc: qcom: Add minidump id for sm8150 modem
+
+ drivers/remoteproc/qcom_minidump.h          |  64 ++++++++++++++
+ drivers/remoteproc/qcom_q6v5_pas.c          | 105 +++++++++++++++++++++-
+ drivers/remoteproc/remoteproc_core.c        |   6 +-
+ drivers/remoteproc/remoteproc_coredump.c    | 132 ++++++++++++++++++++++++++++
+ drivers/remoteproc/remoteproc_elf_helpers.h |  27 ++++++
+ include/linux/remoteproc.h                  |   3 +
+ 6 files changed, 334 insertions(+), 3 deletions(-)
+ create mode 100644 drivers/remoteproc/qcom_minidump.h
+
+-- 
+Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
+a Linux Foundation Collaborative Project
+
