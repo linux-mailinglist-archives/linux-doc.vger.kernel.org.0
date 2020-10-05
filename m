@@ -2,127 +2,258 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C8313283FCA
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 21:41:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5F9D2283F34
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 21:00:08 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729476AbgJETlN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 5 Oct 2020 15:41:13 -0400
-Received: from mga17.intel.com ([192.55.52.151]:19752 "EHLO mga17.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729302AbgJETlN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 5 Oct 2020 15:41:13 -0400
-IronPort-SDR: Bdw+cKsjTJ//04f6oh3Zxhgc3NQT9tb006m0ZwF7n152IAfu36hBoiNhk5O9q3DJ5F160QPfg0
- ZQ3O4ZJiEfrQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9765"; a="143832465"
-X-IronPort-AV: E=Sophos;i="5.77,340,1596524400"; 
-   d="scan'208";a="143832465"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by fmsmga107.fm.intel.com with ESMTP; 05 Oct 2020 12:26:06 -0700
-IronPort-SDR: lxF6D25Y207qlLNXScXhxkLPsDRbK1kc/MVlkM2tgjHEmEqB9WNJ8MI7ZEXXSbfyiX3amIf/dz
- tc0QX9Ic3oBg==
-X-IronPort-AV: E=Sophos;i="5.77,340,1596524400"; 
-   d="scan'208";a="517163416"
-Received: from sjchrist-coffee.jf.intel.com (HELO linux.intel.com) ([10.54.74.160])
-  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Oct 2020 11:43:35 -0700
-Date:   Mon, 5 Oct 2020 11:43:20 -0700
-From:   Sean Christopherson <sean.j.christopherson@intel.com>
-To:     Peter Xu <peterx@redhat.com>
-Cc:     Alexander Graf <graf@amazon.com>, kvm list <kvm@vger.kernel.org>,
-        Aaron Lewis <aaronlewis@google.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Jim Mattson <jmattson@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        KarimAllah Raslan <karahmed@amazon.de>,
-        Dan Carpenter <dan.carpenter@oracle.com>,
-        Maxim Levitsky <mlevitsk@redhat.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v8 6/8] KVM: x86: VMX: Prevent MSR passthrough when MSR
- access is denied
-Message-ID: <20201005184320.GA15803@linux.intel.com>
-References: <20200925143422.21718-1-graf@amazon.com>
- <20200925143422.21718-7-graf@amazon.com>
- <20201002011139.GA5473@xz-x1>
+        id S1728357AbgJETAC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 5 Oct 2020 15:00:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53268 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727714AbgJETAB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Oct 2020 15:00:01 -0400
+Received: from mail-oi1-x241.google.com (mail-oi1-x241.google.com [IPv6:2607:f8b0:4864:20::241])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B2117C0613A7
+        for <linux-doc@vger.kernel.org>; Mon,  5 Oct 2020 12:00:01 -0700 (PDT)
+Received: by mail-oi1-x241.google.com with SMTP id 26so9776676ois.5
+        for <linux-doc@vger.kernel.org>; Mon, 05 Oct 2020 12:00:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=bgyVeWM2KFwaEKtxvi0k5vnLHgxboX9dQWrAwhLZ6sM=;
+        b=Ky1b95z9ctxi5Up6vlAjc2Sxv+MR7UCALpWjrjeUBeeemtaEGwZe9ejzUJSjnqtClo
+         ReUuS+LFV7Pk5Bhi9vXooH6kJAtdsj5SAxpT4b1SzN5FmVmWgnVZZ+gmZiGkbBF/xvdc
+         LbxZkShlVJragtp+g5FcfCbiM65I7so+1l5boJRu6oBARjnlFR2MwpIQaLXEsO8SsQfv
+         j39YatgwTx9rnBMhn+MZSrM82o5/g1sAniUNwPFHZ/5upL26RXXMGgSklQnyM9vGF9tc
+         fDxyE2Oc/XlaPyAd4iSslCujS84buEYweStGARsnJMW56Mcgdn721RtOuSFuvo/A0maq
+         Inmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=bgyVeWM2KFwaEKtxvi0k5vnLHgxboX9dQWrAwhLZ6sM=;
+        b=Ve1JHa2bWLQFbqJmhmtOxX2cNHgunMQPBRnt/beBDlPdY+KqYzOi0VbdcoNHHBPoy0
+         IF3xe5fxfkdeLfxb58fAqDnV6uJs0bSJrmxqHH1DsmkeSeEzMAAGEPz2jFvI+De3w8n+
+         VLlF3+93lulLOp6upWlNIWEL4iIoduNV7lFx2rkb518AqL+yxVZYIZFHLQWl5zsp40Cm
+         9Jgp9lBp7ng0abL9TYjWA5YN/JpGcQ3I8OiagIOl/UnzphoGNue8XTcqWpShSSGDohHq
+         eCNvM8CQoBGDARIM2pLXwS2Q0z39Fb/4vNJL8EOQ+jxxQUCE9BzQ0ibNPr4uPg6IQAxT
+         rzEQ==
+X-Gm-Message-State: AOAM531QpKPnDNOEOY+fBUE63FeEVOu9n0dEI+lDIrym9NjeMKFIfUBJ
+        XmrzqWvQislChbLUBKE73MpWz45A17ZCoypiZmYgZQ==
+X-Google-Smtp-Source: ABdhPJyzVuth4CKP/Ne+wOuwyABlhcWUIOPRj8t4qy87nTBlOmB6Th6J+bzOAcqymPkEx9q7xzjLSwJPeD+YCnkxBi4=
+X-Received: by 2002:a54:468f:: with SMTP id k15mr488388oic.121.1601924400739;
+ Mon, 05 Oct 2020 12:00:00 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201002011139.GA5473@xz-x1>
-User-Agent: Mutt/1.5.24 (2015-08-30)
+References: <20200929133814.2834621-1-elver@google.com> <20200929133814.2834621-2-elver@google.com>
+ <CAG48ez3+_K6YXoXgKBkB8AMeSQj++Mxi5u2OT--B+mJgE7Cyfg@mail.gmail.com>
+ <CAG48ez1MQks2na23g_q4=ADrjMYjRjiw+9k_Wp9hwGovFzZ01A@mail.gmail.com>
+ <CACT4Y+a3hLF1ph1fw7xVz1bQDNKL8W0s6pXe7aKm9wTNrJH3=w@mail.gmail.com> <CAG48ez1RYbpMFbGFB6=9Y3vVCGrMgLS3LbDdxzBfmxH6Kxddmw@mail.gmail.com>
+In-Reply-To: <CAG48ez1RYbpMFbGFB6=9Y3vVCGrMgLS3LbDdxzBfmxH6Kxddmw@mail.gmail.com>
+From:   Marco Elver <elver@google.com>
+Date:   Mon, 5 Oct 2020 20:59:49 +0200
+Message-ID: <CANpmjNPZxvWXTnJvkuwUifM5EjPetKxTJ7ectbw_7JFoBLB4EA@mail.gmail.com>
+Subject: Re: [PATCH v4 01/11] mm: add Kernel Electric-Fence infrastructure
+To:     Jann Horn <jannh@google.com>
+Cc:     Dmitry Vyukov <dvyukov@google.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Alexander Potapenko <glider@google.com>,
+        "H . Peter Anvin" <hpa@zytor.com>,
+        "Paul E . McKenney" <paulmck@kernel.org>,
+        Andrey Konovalov <andreyknvl@google.com>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Andy Lutomirski <luto@kernel.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoph Lameter <cl@linux.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        David Rientjes <rientjes@google.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Hillf Danton <hdanton@sina.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Kees Cook <keescook@chromium.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        SeongJae Park <sjpark@amazon.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Will Deacon <will@kernel.org>,
+        "the arch/x86 maintainers" <x86@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        kernel list <linux-kernel@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        Linux-MM <linux-mm@kvack.org>, SeongJae Park <sjpark@amazon.de>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Oct 01, 2020 at 09:11:39PM -0400, Peter Xu wrote:
-> Hi,
-> 
-> I reported in the v13 cover letter of kvm dirty ring series that this patch
-> seems to have been broken.  Today I tried to reproduce with a simplest vm, and
-> after a closer look...
-> 
-> On Fri, Sep 25, 2020 at 04:34:20PM +0200, Alexander Graf wrote:
-> > @@ -3764,15 +3859,14 @@ static u8 vmx_msr_bitmap_mode(struct kvm_vcpu *vcpu)
-> >  	return mode;
-> >  }
-> >  
-> > -static void vmx_update_msr_bitmap_x2apic(struct kvm_vcpu *vcpu,
-> > -					 unsigned long *msr_bitmap, u8 mode)
-> > +static void vmx_update_msr_bitmap_x2apic(struct kvm_vcpu *vcpu, u8 mode)
-> >  {
-> >  	int msr;
-> >  
-> > -	for (msr = 0x800; msr <= 0x8ff; msr += BITS_PER_LONG) {
-> > -		unsigned word = msr / BITS_PER_LONG;
-> > -		msr_bitmap[word] = (mode & MSR_BITMAP_MODE_X2APIC_APICV) ? 0 : ~0;
-> > -		msr_bitmap[word + (0x800 / sizeof(long))] = ~0;
-> > +	for (msr = 0x800; msr <= 0x8ff; msr++) {
-> > +		bool intercepted = !!(mode & MSR_BITMAP_MODE_X2APIC_APICV);
-> > +
-> > +		vmx_set_intercept_for_msr(vcpu, msr, MSR_TYPE_RW, intercepted);
+On Fri, 2 Oct 2020 at 20:28, Jann Horn <jannh@google.com> wrote:
+[...]
+> > >
+> > > Do you have performance numbers or a description of why you believe
+> > > that this part of kfence is exceptionally performance-sensitive? If
+> > > not, it might be a good idea to remove this optimization, at least for
+> > > the initial version of this code. (And even if the optimization is
+> > > worthwhile, it might be a better idea to go for the generic version
+> > > immediately.)
+> >
+> > This check is very hot, it happens on every free. For every freed
+> > object we need to understand if it belongs to KFENCE or not.
+>
+> Ah, so the path you care about does not dereference __kfence_pool, it
+> just compares it to the supplied pointer?
+>
+>
+> First off: The way you've written is_kfence_address(), GCC 10.2 at -O3
+> seems to generate *utterly* *terrible* code (and the newest clang
+> release isn't any better); something like this:
+>
+> kfree_inefficient:
+>   mov rax, QWORD PTR __kfence_pool[rip]
+>   cmp rax, rdi
+>   jbe .L4
+> .L2:
+>   jmp kfree_not_kfence
+> .L4:
+>   add rax, 0x200000
+>   cmp rax, rdi
+>   jbe .L2
+>   jmp kfree_kfence
+>
+> So pointers to the left of the region and pointers to the right of the
+> region will take different branches, and so if you have a mix of
+> objects on both sides of the kfence region, you'll get tons of branch
+> mispredictions for no good reason. You'll want to rewrite that check
+> as "unlikely(ptr - base <= SIZE)" instead of "unlikely(ptr >= base &&
+> ptr < base + SIZE" unless you know that all the objects will be on one
+> side. This would also reduce the performance impact of loading
+> __kfence_pool from the data section, because the branch prediction can
+> then speculate the branch that depends on the load properly and
+> doesn't have to go roll back everything that happened when the object
+> turns out to be on the opposite side of the kfence memory region - the
+> latency of the load will hopefully become almost irrelevant.
 
-Yeah, this is busted.
+Good point, implemented that. (It's "ptr - base < SIZE" I take it.)
 
-> >  	}
-> >  
-> >  	if (mode & MSR_BITMAP_MODE_X2APIC) {
-> 
-> ... I think we may want below change to be squashed:
-> 
-> diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
-> index d160aad59697..7d3f2815b04d 100644
-> --- a/arch/x86/kvm/vmx/vmx.c
-> +++ b/arch/x86/kvm/vmx/vmx.c
-> @@ -3781,9 +3781,10 @@ static void vmx_update_msr_bitmap_x2apic(struct kvm_vcpu *vcpu, u8 mode)
->         int msr;
->  
->         for (msr = 0x800; msr <= 0x8ff; msr++) {
-> -               bool intercepted = !!(mode & MSR_BITMAP_MODE_X2APIC_APICV);
-> +               bool apicv = mode & MSR_BITMAP_MODE_X2APIC_APICV;
->  
-> -               vmx_set_intercept_for_msr(vcpu, msr, MSR_TYPE_RW, intercepted);
-> +               vmx_set_intercept_for_msr(vcpu, msr, MSR_TYPE_R, !apicv);
-> +               vmx_set_intercept_for_msr(vcpu, msr, MSR_TYPE_W, true);
+> So in x86 intel assembly (assuming that we want to ensure that we only
+> do a single branch on the object type), the straightforward and
+> non-terrible version would be:
+>
+>
+> kfree_unoptimized:
+>   mov rax, rdi
+>   sub rax, QWORD PTR __kfence_pool[rip]
+>   cmp rax, 0x200000
+>   jbe 1f
+>   /* non-kfence case goes here */
+> 1:
+>   /* kfence case goes here */
+>
+>
+> while the version you want is:
+>
+>
+> kfree_static:
+>   mov rax, rdi
+>   sub rax, OFFSET FLAT:__kfence_pool
+>   cmp rax, 0x200000
+>   jbe 1f
+>   jmp kfree_not_kfence
+> 1:
+>   jmp kfree_kfence
+>
+>
+> If we instead use something like
+>
+> #define STATIC_VARIABLE_LOAD(variable) \
+> ({ \
+>   typeof(variable) value; \
+>   BUILD_BUG_ON(sizeof(variable) != sizeof(unsigned long)); \
+>   asm( \
+>     ".pushsection .static_variable_users\n\t" \
+>     ".long "  #variable " - .\n\t" \
+>     ".long 123f - .\n\t" /* offset to end of constant */ \
+>     ".popsection\n\t" \
+>     "movabs $0x0123456789abcdef, %0" \
+>     "123:\n\t" \
+>     :"=r"(value) \
+>   ); \
+>   value; \
+> })
+> static __always_inline bool is_kfence_address(const void *addr)
+> {
+>   return unlikely((char*)addr - STATIC_VARIABLE_LOAD(__kfence_pool) <
+> KFENCE_POOL_SIZE);
+> }
+>
+> to locate the pool (which could again be normally allocated with
+> alloc_pages()), we'd get code like this, which is like the previous
+> except that we need an extra "movabs" because x86's "sub" can only use
+> immediates up to 32 bits:
+>
+> kfree_hotpatchable_bigreloc:
+>   mov rax, rdi
+>   movabs rdx, 0x0123456789abcdef
+>   sub rax, rdx
+>   cmp rax, 0x200000
+>   jbe .1f
+>   jmp kfree_not_kfence
+> 1:
+>   jmp kfree_kfence
+>
+> The arch-specific part of this could probably be packaged up pretty
+> nicely into a generic interface. If it actually turns out to have a
+> performance benefit, that is.
 
-I would prefer a full revert of sorts.  Allowing userspace to intercept reads
-to x2APIC MSRs when APICV is fully enabled for the guest simply can't work.
-The LAPIC and thus virtual APIC is in-kernel and cannot be directly accessed
-by userspace.  I doubt it actually affects real world performance, but
-resetting each MSR one-by-one bugs me.
+Something like this would certainly be nice, but we'll do the due
+diligence and see if it's even worth it.
 
-Intercepting writes to TPR, EOI and SELF_IPI are somewhat plausible, but I
-just don't see how intercepting reads when APICV is active is a sane setup.
+> If that one extra "movabs" is actually a problem, it would
+> *theoretically* be possible to get rid of that by using module_alloc()
+> to allocate virtual memory to which offsets from kernel text are 32
+> bits, and using special-cased inline asm, but we probably shouldn't do
+> that, because as Mark pointed out, we'd then risk getting extremely
+> infrequent extra bugs when drivers use phys_to_virt() on allocations
+> that were done through kfence. Adding new, extremely infrequent and
+> sporadically occurring bugs to the kernel seems like the exact
+> opposite of the goal of KFENCE. :P
+>
+> Overall my expectation would be that the MOVABS version should
+> probably at worst be something like one cycle slower - it adds 5
+> instruction bytes (and we pay 1 cycle in the frontend per 16 bytes of
+> instructions, I think?) and 1 backend cycle (for the MOVABS - Agner
+> Fog's tables seem to say that at least on Skylake, MOVABS is 1 cycle).
+> But that backend cycle shouldn't even be on the critical path (and it
+> has a wider choice of ports than e.g. a load, and I think typical
+> kernel code isn't exactly highly parallelizable, so we can probably
+> schedule on a port that would've been free otherwise?), and I think
+> typical kernel code should be fairly light on the backend, so with the
+> MOVABS version, compared to the version with __kfence_pool in the data
+> section, we probably overall just pay a fraction of a cycle in
+> execution cost? I'm not a professional performance engineer, but this
+> sounds to me like the MOVABS version should probably perform roughly
+> as well as your version.
+>
+> Anyway, I guess this is all pretty vague without actually having
+> concrete benchmark results. :P
+>
+> See <https://godbolt.org/z/Kev9dc> for examples of actual code
+> generation for different options of writing this check.
 
-I'll send a patch and we can go from there.
+Thanks for the analysis!  There is also some (11 year old) prior art,
+that seems to never have made it into the kernel:
+https://lore.kernel.org/lkml/20090924132626.485545323@polymtl.ca/
 
->         }
->  
->         if (mode & MSR_BITMAP_MODE_X2APIC) {
-> 
-> This fixes my problem the same as having this patch reverted.
-> 
-> -- 
-> Peter Xu
-> 
+Maybe we need to understand why that never made it.
+
+But I think, even if we drop the static pool, a first version of
+KFENCE should not depend on it.
+
+Thanks,
+-- Marco
