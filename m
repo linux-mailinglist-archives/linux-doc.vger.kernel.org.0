@@ -2,159 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5E51E283559
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 14:06:30 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5B82228361C
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 15:03:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725934AbgJEMG3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 5 Oct 2020 08:06:29 -0400
-Received: from mail.kernel.org ([198.145.29.99]:57450 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725930AbgJEMG2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 5 Oct 2020 08:06:28 -0400
-Received: from coco.lan (ip5f5ad5d6.dynamic.kabel-deutschland.de [95.90.213.214])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 3E7882075A;
-        Mon,  5 Oct 2020 12:06:26 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1601899587;
-        bh=calSC86nxnRZayzM+fSWlEyXNmfxDUtQSyrvMVMYC0s=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=aUn6iRTgb/p6UI+FI1CHDbAIH+GO8Q6/p7Ud9d43JOk3wFlM3AbPpopAFjI3jICyk
-         UBm1Ms6O4vK3FzHKJlZv5Sp/mowa7y3J3dFW3w/OPY+xOhABJhnuJ7LoM6f9l3Fu6G
-         9yIm//0Xy3ZCB6wKgxmJrspYBQF3zYITOw4TCtYc=
-Date:   Mon, 5 Oct 2020 14:06:22 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Eric Biggers <ebiggers@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "Theodore Y. Ts'o" <tytso@mit.edu>,
-        Jaegeuk Kim <jaegeuk@kernel.org>,
-        linux-fscrypt@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 35/52] docs: fs: fscrypt.rst: get rid of :c:type:
- tags
-Message-ID: <20201005140622.50693933@coco.lan>
-In-Reply-To: <20200930170637.GB9698@sol.localdomain>
-References: <cover.1601467849.git.mchehab+huawei@kernel.org>
-        <689d790237b64fc7d81fcf97ac303cc1dbdd33d4.1601467849.git.mchehab+huawei@kernel.org>
-        <20200930162144.GA9698@sol.localdomain>
-        <20200930185333.66dacbc6@coco.lan>
-        <20200930170637.GB9698@sol.localdomain>
-X-Mailer: Claws Mail 3.17.6 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1726078AbgJENC6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 5 Oct 2020 09:02:58 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54232 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726147AbgJENCt (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Oct 2020 09:02:49 -0400
+Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com [IPv6:2a00:1450:4864:20::541])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9DA41C0613B9
+        for <linux-doc@vger.kernel.org>; Mon,  5 Oct 2020 06:02:48 -0700 (PDT)
+Received: by mail-ed1-x541.google.com with SMTP id l17so9193345edq.12
+        for <linux-doc@vger.kernel.org>; Mon, 05 Oct 2020 06:02:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ufk8Pbp+j3zURPBdVWH2l/CCq1R36iVRdU45mNegaRY=;
+        b=jc95MkjAZ30kHhClE+TJJIMhUz0IlKGpovAWPs3bO3tN7bO8YB+OKUK+B2umH8ygDC
+         WARHozjr8NJyjdcx/gknoliHFrq2QzjcmxUOB+a7hqE7SGVxI53L0e/i5KVt03XDNHUn
+         KTSo+QCkqKulcr7KUJ9GngsGEYxjiZW5X+YKOedmB+Ie4cnE83M3JMhYy+4++s4XzTWS
+         ItoeZkc/DgR82KFKRg/2jGgiKyJcHRb2ZTn6BHHOfvyppBDUz5WZmgXz7NV24UtSPhxi
+         S2CXKzPIlZ1d1GIq/JBP+HPfovfXyB6lBdFPUOVK+P8tTjjb8dfGmWiYUSoMTqLp4GUD
+         pIUg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ufk8Pbp+j3zURPBdVWH2l/CCq1R36iVRdU45mNegaRY=;
+        b=skrfdPV1FFxwlVh6AOkDjttnxFIf3a9IivB2lJbWxPWqkjBXdupfGWfuiId7mZDdGh
+         nVcWScD2EP65LwLg6LmvEFefhw+KDABETq9xo+L0nd5ipqsGG44YYw3vRWuDqWz2PIGP
+         sR9FYzj7sja4padEGmVPesTnrZnPMkNH8maqIwwIi6GsySGrsYdpNPLScmQ2MIHBmzDR
+         RgDSx+XaLBY8cPCPZWoJEZi2hAu27xRUo5b88AbfagruGejVxRsLMfFHuTffIlYMJiDV
+         6L1TCh/4ug0M/833b5BHjKx8Z2ox+r/FMa6WEAXc7DjvyICbo+NhPun3S8DbIeM9O5ke
+         pPdA==
+X-Gm-Message-State: AOAM533V8gsL5sqafvfDXJsYemja3TRexns/y8T4akXwWmeRUMnlYjij
+        pyfjDqVsXeDOP6KDT/Na6ZSZvGjcZC0=
+X-Google-Smtp-Source: ABdhPJyY7lXGvuNf4h9sbs+tqjGweAYckgaklLn3t+FtuQBFOFAFYF+q0gGAdwAXCsxr7xbwQmRF/g==
+X-Received: by 2002:aa7:d4d4:: with SMTP id t20mr17178971edr.229.1601902966970;
+        Mon, 05 Oct 2020 06:02:46 -0700 (PDT)
+Received: from hal.fritz.box (200116b846cf6a005ec5d4fffe9b0465.dip.versatel-1u1.de. [2001:16b8:46cf:6a00:5ec5:d4ff:fe9b:465])
+        by smtp.googlemail.com with ESMTPSA id k23sm8131276ejk.0.2020.10.05.06.02.45
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 Oct 2020 06:02:46 -0700 (PDT)
+From:   =?UTF-8?q?Ga=C3=ABtan=20Harter?= <hartergaetan@gmail.com>
+To:     linux-doc@vger.kernel.org, corbet@lwn.net,
+        federico.vaga@vaga.pv.it, harryxiyou@gmail.com
+Cc:     =?UTF-8?q?Ga=C3=ABtan=20Harter?= <hartergaetan@gmail.com>
+Subject: [PATCH 0/1] docs: fix kernel-driver-statement rendering
+Date:   Mon,  5 Oct 2020 15:02:12 +0200
+Message-Id: <20201005130213.74624-1-hartergaetan@gmail.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Eric,
+Dear Documentation maintainers,
 
-Em Wed, 30 Sep 2020 10:06:37 -0700
-Eric Biggers <ebiggers@kernel.org> escreveu:
+while browsing the "Kernel driver statement" page on kernel.org [1],
+I noticed the name list was split after "J. Bruce Fields" with some extra line
+spacing.
 
-> > I double checked: it is against next-20200922. The reason of
-> > not being today's next is that I didn't want any new warnings
-> > to be introduced before I finish this patch series.
-> > 
-> > Anyway, I'm planning to do a rebase tomorrow on the top of the 
-> > latest -next.
-> >   
-> 
-> Doesn't work.  Here's what I did:
+The rendered html source shows that the `J.` is interpreted as list item in
+`ReST` syntax.
 
-...
+I propose a patch to remove this rendering issue with an escape string
+before to still allow doing `git grep` for the name.
+I still adds rst only clutters the text though.
 
-> Cover: ./v4_20200930_mchehab_huawei_fix_html_build_with_sphinx_3_1_and_above.cover
->  Link: https://lore.kernel.org/r/cover.1601467849.git.mchehab+huawei@kernel.org
->  Base: not found
->        git am ./v4_20200930_mchehab_huawei_fix_html_build_with_sphinx_3_1_and_above.mbx
-> 
-> e@sol ~/linux $ git am ./v4_20200930_mchehab_huawei_fix_html_build_with_sphinx_3_1_and_above.mbx
-> Applying: docs: cdomain.py: add support for a new Sphinx 3.1+ tag
-> Applying: docs: cdomain.py: extend it to handle new Sphinx 3.x tags
-> Applying: docs: conf.py: disable automarkup for Sphinx 3.x
-> Applying: scripts: kernel-doc: make it more compatible with Sphinx 3.x
-> Applying: scripts: kernel-doc: use a less pedantic markup for funcs on Sphinx 3.x
-> Applying: scripts: kernel-doc: fix troubles with line counts
-> Applying: scripts: kernel-doc: reimplement -nofunction argument
-> Applying: scripts: kernel-doc: fix typedef identification
-> Applying: scripts: kernel-doc: don't mangle with parameter list
-> Applying: docs: kerneldoc.py: append the name of the parsed doc file
-> Applying: docs: kerneldoc.py: add support for kerneldoc -nosymbol
-> Applying: media: docs: make CEC documents compatible with Sphinx 3.1+
-> Applying: media: docs: make V4L documents more compatible with Sphinx 3.1+
-> error: patch failed: Documentation/userspace-api/media/v4l/hist-v4l2.rst:202
-> error: Documentation/userspace-api/media/v4l/hist-v4l2.rst: patch does not apply
-> error: patch failed: Documentation/userspace-api/media/v4l/vidioc-enum-fmt.rst:227
-> error: Documentation/userspace-api/media/v4l/vidioc-enum-fmt.rst: patch does not apply
-> Patch failed at 0013 media: docs: make V4L documents more compatible with Sphinx 3.1+
-> hint: Use 'git am --show-current-patch=diff' to see the failed patch
-> When you have resolved this problem, run "git am --continue".
-> If you prefer to skip this patch, run "git am --skip" instead.
-> To restore the original branch and stop patching, run "git am --abort".
+I checked the rendered HTML and PDF for both the English and translated
+versions to verify it was fixed.
+On my local runs the HTML had extra `<p>` tags compared to the webpage so
+not sure what was different in the environment.
 
-Well, the media patches were indeed based at the media upstream tree.
-As I maintain the media tree, and the changes for it are huge, I opted
-to merge from media before applying this series. Btw, the series
-is also after the other fix patches for the warnings with Sphinx 2.x 
-that I sent previously. It might eventually conflict with the Sphinx 3.x
-patch series.
 
-At the current version, there are 101 patches against next-20201002, being
-about half of them fixing all doc warnings on Sphinx 2.x, and the other 
-ones fixing almost all Sphinx 3.x warnings.
+I found other pages having the same type of issues by grepping the output
+for "upperalpha" and checking the inappropriate occurrences.
+If it is a class of fixes that is wanted, I could propose other patchsets with
+a batch of them.
+It may be a good thing to then add the information to a general how to write
+documentation document to try preventing it from reappearing.
+I would wait for feedback before doing these.
 
-The latest version at:
 
-	https://git.linuxtv.org/mchehab/experimental.git/log/?h=sphinx3-fixes-v4
+Please keep me in CC as I am not registered on the list.
 
-In the specific case of fscript.rst, there are only two patches on my
-series affecting it, both as part of this /52 series:
 
-	$ git log next-20200922..devel/sphinx3-fixes-v4 Documentation/filesystems/fscrypt.rst
-	commit ee4af6dd20dd6d2ac7f5d970abac960a36679e13
-	Author: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-	Date:   Tue Sep 29 09:13:18 2020 +0200
+1: https://www.kernel.org/doc/html/v5.8/process/kernel-driver-statement.html
 
-	    docs: fs: fscrypt.rst: get rid of :c:type: tags
-    
-	    The :c:type: tag has problems with Sphinx 3.x, as structs
-	    there should be declared with c:struct.
-    
-	    So, remove them, relying at automarkup.py extension to
-	    convert them into cross-references.
-    
-	    Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Best Regards,
+Gaëtan Harter
 
-	commit 0945e3961d006e210e374b6d3224d9108c1dfa25
-	Author: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-	Date:   Fri Sep 25 12:01:25 2020 +0200
 
-	    docs: get rid of :c:type explicit declarations for structs
-    
-	    The :c:type:`foo` only works properly with structs before
-	    Sphinx 3.x.
-    
-	    On Sphinx 3.x, structs should now be declared using the
-	    .. c:struct, and referenced via :c:struct tag.
-    
-	    As we now have the automarkup.py macro, that automatically
-	    convert:
-        	    struct foo
-    
-	    into cross-references, let's get rid of that, solving
-	    several warnings when building docs with Sphinx 3.x.
-    
-	    Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Gaëtan Harter (1):
+  docs: fix kernel-driver-statement rendering
 
-Anyway, I'm waiting for the today's next, in order to do another
-rebase, fixing any new warning that might be added, and to post the
-patches that weren't merged yet via other trees.
+ Documentation/process/kernel-driver-statement.rst               | 2 +-
+ .../translations/it_IT/process/kernel-driver-statement.rst      | 2 +-
+ .../translations/zh_CN/process/kernel-driver-statement.rst      | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-The end goal is to have zero warnings with Sphinx 2.x, and the minimal
-number of warnings with 3.x (right now, there's just 6 warnings
-with 3.x - fixing those require fixes at Sphinx C domain parser).
 
-Thanks,
-Mauro
+base-commit: 9f35cf8bd7e3347b0679c3f9b5e0bc5493925a1f
+-- 
+2.28.0
+
