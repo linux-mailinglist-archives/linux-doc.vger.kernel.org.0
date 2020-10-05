@@ -2,102 +2,127 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A4A93283DAA
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 19:44:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C8313283FCA
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 21:41:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728142AbgJERoN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 5 Oct 2020 13:44:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41534 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728027AbgJERoM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Oct 2020 13:44:12 -0400
-Received: from mail-vk1-xa41.google.com (mail-vk1-xa41.google.com [IPv6:2607:f8b0:4864:20::a41])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D9FFCC0613A7
-        for <linux-doc@vger.kernel.org>; Mon,  5 Oct 2020 10:44:12 -0700 (PDT)
-Received: by mail-vk1-xa41.google.com with SMTP id r78so1938402vke.11
-        for <linux-doc@vger.kernel.org>; Mon, 05 Oct 2020 10:44:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=T0SUN6EKstVpoqlENVYkDpfxgRN2mhcM+hd8aVgx82Y=;
-        b=Bjhy7mLEf3dMbcB301h2+hrEGKwW0Lztpw8VQTUMYjrf5E1N0OvXzBbiN7Nm22aCGw
-         9lKqHBSMuJczFFO2SHFwXrme+RSj2XbTPmbMh7WBl7D7F4LgcymOwFioF5/PDyoF94sI
-         03dR3zYUPifD8/ZTSvWCz2HfMihd2oVmvihvE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=T0SUN6EKstVpoqlENVYkDpfxgRN2mhcM+hd8aVgx82Y=;
-        b=W40j5uBmSlTllES7/sjt0rHLgklgpDAUoA/TEcDbwnNkBbiQEwGdR/r+u5mveEwwWe
-         QV4ArizrkQULcDkdBxYcCwAa+At8Zn12n5HE/Mcc26pGIKRg1N2iy9B90sUmPeURgwwm
-         tgs9XgIwVON63/TpK7ghYGMcDX3tO7ziT6/knLrOQxi87iiIV6OECsaDr40wIxTRtxp+
-         bJRihkqPZPvDQV/vzdplf7O0z9CIo1vSBR/IiwQwuP/PyOWDAqzp2jklrpKYq6hoCWok
-         dGImxqiB3AXMzWgRLHdC9qYke4DQu82fW5H67UUYeY65JAWdowRJ+V5SnrKJOBxdJUCC
-         envg==
-X-Gm-Message-State: AOAM5302VuZbCaxujzatEJzhRIiGxTjydCDUZuGMocoPKQ0CpKdO2u1c
-        Tl2+/ugG/JAarz/ORT9yd0P+e/z2lK8TRg==
-X-Google-Smtp-Source: ABdhPJzBiBSMfbxIC3efu+kauVj/hEtOqKRXCSeQxhXdNDJV7dVdpjS9OMIroFvKf9BrvVt9GkPCZQ==
-X-Received: by 2002:a1f:a905:: with SMTP id s5mr584699vke.9.1601919851996;
-        Mon, 05 Oct 2020 10:44:11 -0700 (PDT)
-Received: from mail-vs1-f50.google.com (mail-vs1-f50.google.com. [209.85.217.50])
-        by smtp.gmail.com with ESMTPSA id d1sm101073vsk.4.2020.10.05.10.44.10
-        for <linux-doc@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 05 Oct 2020 10:44:11 -0700 (PDT)
-Received: by mail-vs1-f50.google.com with SMTP id f8so2375209vsl.3
-        for <linux-doc@vger.kernel.org>; Mon, 05 Oct 2020 10:44:10 -0700 (PDT)
-X-Received: by 2002:a67:f4c2:: with SMTP id s2mr992567vsn.4.1601919849846;
- Mon, 05 Oct 2020 10:44:09 -0700 (PDT)
+        id S1729476AbgJETlN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 5 Oct 2020 15:41:13 -0400
+Received: from mga17.intel.com ([192.55.52.151]:19752 "EHLO mga17.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729302AbgJETlN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 5 Oct 2020 15:41:13 -0400
+IronPort-SDR: Bdw+cKsjTJ//04f6oh3Zxhgc3NQT9tb006m0ZwF7n152IAfu36hBoiNhk5O9q3DJ5F160QPfg0
+ ZQ3O4ZJiEfrQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9765"; a="143832465"
+X-IronPort-AV: E=Sophos;i="5.77,340,1596524400"; 
+   d="scan'208";a="143832465"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+  by fmsmga107.fm.intel.com with ESMTP; 05 Oct 2020 12:26:06 -0700
+IronPort-SDR: lxF6D25Y207qlLNXScXhxkLPsDRbK1kc/MVlkM2tgjHEmEqB9WNJ8MI7ZEXXSbfyiX3amIf/dz
+ tc0QX9Ic3oBg==
+X-IronPort-AV: E=Sophos;i="5.77,340,1596524400"; 
+   d="scan'208";a="517163416"
+Received: from sjchrist-coffee.jf.intel.com (HELO linux.intel.com) ([10.54.74.160])
+  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 05 Oct 2020 11:43:35 -0700
+Date:   Mon, 5 Oct 2020 11:43:20 -0700
+From:   Sean Christopherson <sean.j.christopherson@intel.com>
+To:     Peter Xu <peterx@redhat.com>
+Cc:     Alexander Graf <graf@amazon.com>, kvm list <kvm@vger.kernel.org>,
+        Aaron Lewis <aaronlewis@google.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Jim Mattson <jmattson@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        KarimAllah Raslan <karahmed@amazon.de>,
+        Dan Carpenter <dan.carpenter@oracle.com>,
+        Maxim Levitsky <mlevitsk@redhat.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v8 6/8] KVM: x86: VMX: Prevent MSR passthrough when MSR
+ access is denied
+Message-ID: <20201005184320.GA15803@linux.intel.com>
+References: <20200925143422.21718-1-graf@amazon.com>
+ <20200925143422.21718-7-graf@amazon.com>
+ <20201002011139.GA5473@xz-x1>
 MIME-Version: 1.0
-References: <20201005163016.13650-1-lukasz.luba@arm.com>
-In-Reply-To: <20201005163016.13650-1-lukasz.luba@arm.com>
-From:   Doug Anderson <dianders@chromium.org>
-Date:   Mon, 5 Oct 2020 10:43:58 -0700
-X-Gmail-Original-Message-ID: <CAD=FV=W70OPB=ufEfqAJEeZBNwr5yPOCmkM7R2uLKnEj6tZ1qA@mail.gmail.com>
-Message-ID: <CAD=FV=W70OPB=ufEfqAJEeZBNwr5yPOCmkM7R2uLKnEj6tZ1qA@mail.gmail.com>
-Subject: Re: [RESEND][PATCH v2 3/3] dt-bindings: thermal: update
- sustainable-power with abstract scale
-To:     Lukasz Luba <lukasz.luba@arm.com>
-Cc:     LKML <linux-kernel@vger.kernel.org>,
-        Linux PM <linux-pm@vger.kernel.org>, linux-doc@vger.kernel.org,
-        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
-        <devicetree@vger.kernel.org>, Rob Herring <robh+dt@kernel.org>,
-        amitk@kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        Dietmar.Eggemann@arm.com, Quentin Perret <qperret@google.com>,
-        Matthias Kaehlcke <mka@chromium.org>,
-        Rajendra Nayak <rnayak@codeaurora.org>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201002011139.GA5473@xz-x1>
+User-Agent: Mutt/1.5.24 (2015-08-30)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+On Thu, Oct 01, 2020 at 09:11:39PM -0400, Peter Xu wrote:
+> Hi,
+> 
+> I reported in the v13 cover letter of kvm dirty ring series that this patch
+> seems to have been broken.  Today I tried to reproduce with a simplest vm, and
+> after a closer look...
+> 
+> On Fri, Sep 25, 2020 at 04:34:20PM +0200, Alexander Graf wrote:
+> > @@ -3764,15 +3859,14 @@ static u8 vmx_msr_bitmap_mode(struct kvm_vcpu *vcpu)
+> >  	return mode;
+> >  }
+> >  
+> > -static void vmx_update_msr_bitmap_x2apic(struct kvm_vcpu *vcpu,
+> > -					 unsigned long *msr_bitmap, u8 mode)
+> > +static void vmx_update_msr_bitmap_x2apic(struct kvm_vcpu *vcpu, u8 mode)
+> >  {
+> >  	int msr;
+> >  
+> > -	for (msr = 0x800; msr <= 0x8ff; msr += BITS_PER_LONG) {
+> > -		unsigned word = msr / BITS_PER_LONG;
+> > -		msr_bitmap[word] = (mode & MSR_BITMAP_MODE_X2APIC_APICV) ? 0 : ~0;
+> > -		msr_bitmap[word + (0x800 / sizeof(long))] = ~0;
+> > +	for (msr = 0x800; msr <= 0x8ff; msr++) {
+> > +		bool intercepted = !!(mode & MSR_BITMAP_MODE_X2APIC_APICV);
+> > +
+> > +		vmx_set_intercept_for_msr(vcpu, msr, MSR_TYPE_RW, intercepted);
 
-On Mon, Oct 5, 2020 at 9:30 AM Lukasz Luba <lukasz.luba@arm.com> wrote:
->
-> Update the documentation for the binding 'sustainable-power' and allow
-> to provide values in an abstract scale. It is required when the cooling
-> devices use an abstract scale for their power values.
->
-> Signed-off-by: Lukasz Luba <lukasz.luba@arm.com>
-> ---
->
-> Hi Rob,
->
-> This is a fixed patch for DT binding, which now passes the
-> make dt_binding_check (I have changed tabs into spaces).
-> The former patch error that I have received is here [1].
->
-> Regards,
-> Lukasz
->
-> [1] https://lore.kernel.org/linux-pm/20201002114426.31277-1-lukasz.luba@arm.com/T/#md4b02a3ada592df67446566180643ba56788c159
+Yeah, this is busted.
 
-...and because I suspect you might not look at any patches that fail
-your auto-checker, I'd appreciate it if you could comment on the
-discussion on the previous version of the patch.  Thanks!  :-)
+> >  	}
+> >  
+> >  	if (mode & MSR_BITMAP_MODE_X2APIC) {
+> 
+> ... I think we may want below change to be squashed:
+> 
+> diff --git a/arch/x86/kvm/vmx/vmx.c b/arch/x86/kvm/vmx/vmx.c
+> index d160aad59697..7d3f2815b04d 100644
+> --- a/arch/x86/kvm/vmx/vmx.c
+> +++ b/arch/x86/kvm/vmx/vmx.c
+> @@ -3781,9 +3781,10 @@ static void vmx_update_msr_bitmap_x2apic(struct kvm_vcpu *vcpu, u8 mode)
+>         int msr;
+>  
+>         for (msr = 0x800; msr <= 0x8ff; msr++) {
+> -               bool intercepted = !!(mode & MSR_BITMAP_MODE_X2APIC_APICV);
+> +               bool apicv = mode & MSR_BITMAP_MODE_X2APIC_APICV;
+>  
+> -               vmx_set_intercept_for_msr(vcpu, msr, MSR_TYPE_RW, intercepted);
+> +               vmx_set_intercept_for_msr(vcpu, msr, MSR_TYPE_R, !apicv);
+> +               vmx_set_intercept_for_msr(vcpu, msr, MSR_TYPE_W, true);
 
--Doug
+I would prefer a full revert of sorts.  Allowing userspace to intercept reads
+to x2APIC MSRs when APICV is fully enabled for the guest simply can't work.
+The LAPIC and thus virtual APIC is in-kernel and cannot be directly accessed
+by userspace.  I doubt it actually affects real world performance, but
+resetting each MSR one-by-one bugs me.
+
+Intercepting writes to TPR, EOI and SELF_IPI are somewhat plausible, but I
+just don't see how intercepting reads when APICV is active is a sane setup.
+
+I'll send a patch and we can go from there.
+
+>         }
+>  
+>         if (mode & MSR_BITMAP_MODE_X2APIC) {
+> 
+> This fixes my problem the same as having this patch reverted.
+> 
+> -- 
+> Peter Xu
+> 
