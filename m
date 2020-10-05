@@ -2,129 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D237828361B
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 15:02:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 828F628364F
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 15:12:53 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726697AbgJENC5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 5 Oct 2020 09:02:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54254 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726320AbgJENCz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Oct 2020 09:02:55 -0400
-Received: from mail-ej1-x630.google.com (mail-ej1-x630.google.com [IPv6:2a00:1450:4864:20::630])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5B55CC0613B8
-        for <linux-doc@vger.kernel.org>; Mon,  5 Oct 2020 06:02:55 -0700 (PDT)
-Received: by mail-ej1-x630.google.com with SMTP id lw21so7805160ejb.6
-        for <linux-doc@vger.kernel.org>; Mon, 05 Oct 2020 06:02:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=k47cGKkf4qf9SPHSejDxpYHXYSythF1m72YxsTEJ3U4=;
-        b=UDGJepbfHFjDM9wwhA+3gPy6Y+fsl1TQENDQkQtM/Ep8aH1NiPpUWqWz6Cevjrm+ra
-         z+rveTtoERU/REvUXG5uCYFw/RhvPCq/swLhwSYD8Tg5unRjYw/VRh1huXelTWyxJ5+R
-         Q3uBLpIViDJTV55Y5p5bdz3dwoQZK5SRRFpsigkY2uGN8p5O4jqWl3BkoEqKi0a6SGkI
-         4DkIMbu743IH41Lu+lpKw6eplflNR5ZZG8Iu5cJiypqlPi0uNzkpVXatuWO+UVqFabHu
-         fvvlOK7AinwtsMj9oQjF0Goz6l0+t48GF4YaBYK3SFD/4TmP/Bpt0UfTx/iiGSPOMyVc
-         OdTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=k47cGKkf4qf9SPHSejDxpYHXYSythF1m72YxsTEJ3U4=;
-        b=HWJeBpWD4j4gW8MfbWNqQPA9fGANEmMo0xq8BXYdjhjw3zLgvocAcrTTlW8T6GpLn3
-         SHH08RVlff1SNZZc9VYtKTSLTR3+hhBdD7zC6zvS2xNS3lp0cEAWMbdKootNiN7HLbKt
-         gbjhfa1tUYPTEdRtqoc1IwgKIxtQWKeEN/dlBMmyYuo4BpFJhXkFagsE+Dy0CHl5qeZi
-         LjLTxrYkZjN+RQXhqP7HSo5bV5V42xidkEMSOUZCDtEFOHM72RK99B56hrJHIeLxBlyg
-         35CQw/TrdMUMt/iHZgU1ZykluXjy8NxDhWKTTfjkJBgTXIdZPOZVntejnxbuCBn7l4IL
-         jM8Q==
-X-Gm-Message-State: AOAM530y7MhOn/To4+YaUMlB3mTpjK8l/VAkIreK8RL8jhtDo1tbEvJQ
-        8KVk15rmn7orZ9uDzpabCvY7qQTlbdk=
-X-Google-Smtp-Source: ABdhPJz1Js/KalLIi5DMuws5RyKnxzTm+JQM6h0M8LFw6iwbX4PJNsMd9PQLkF2jJ3VvIcALHy+3Sg==
-X-Received: by 2002:a17:906:3f88:: with SMTP id b8mr16073076ejj.14.1601902973283;
-        Mon, 05 Oct 2020 06:02:53 -0700 (PDT)
-Received: from hal.fritz.box (200116b846cf6a005ec5d4fffe9b0465.dip.versatel-1u1.de. [2001:16b8:46cf:6a00:5ec5:d4ff:fe9b:465])
-        by smtp.googlemail.com with ESMTPSA id k23sm8131276ejk.0.2020.10.05.06.02.52
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 05 Oct 2020 06:02:52 -0700 (PDT)
-From:   =?UTF-8?q?Ga=C3=ABtan=20Harter?= <hartergaetan@gmail.com>
-To:     linux-doc@vger.kernel.org, corbet@lwn.net,
-        federico.vaga@vaga.pv.it, harryxiyou@gmail.com
-Cc:     =?UTF-8?q?Ga=C3=ABtan=20Harter?= <hartergaetan@gmail.com>
-Subject: [PATCH 1/1] docs: fix kernel-driver-statement rendering
-Date:   Mon,  5 Oct 2020 15:02:13 +0200
-Message-Id: <20201005130213.74624-2-hartergaetan@gmail.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201005130213.74624-1-hartergaetan@gmail.com>
-References: <20201005130213.74624-1-hartergaetan@gmail.com>
+        id S1725954AbgJENMx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 5 Oct 2020 09:12:53 -0400
+Received: from mx0a-00128a01.pphosted.com ([148.163.135.77]:39656 "EHLO
+        mx0a-00128a01.pphosted.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1725891AbgJENMx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Oct 2020 09:12:53 -0400
+Received: from pps.filterd (m0167089.ppops.net [127.0.0.1])
+        by mx0a-00128a01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 095DCRvw029620;
+        Mon, 5 Oct 2020 09:12:37 -0400
+Received: from nwd2mta3.analog.com ([137.71.173.56])
+        by mx0a-00128a01.pphosted.com with ESMTP id 33xp74m3jc-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Mon, 05 Oct 2020 09:12:36 -0400
+Received: from SCSQMBX10.ad.analog.com (scsqmbx10.ad.analog.com [10.77.17.5])
+        by nwd2mta3.analog.com (8.14.7/8.14.7) with ESMTP id 095DCZ2t019542
+        (version=TLSv1/SSLv3 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128 verify=FAIL);
+        Mon, 5 Oct 2020 09:12:35 -0400
+Received: from SCSQMBX11.ad.analog.com (10.77.17.10) by
+ SCSQMBX10.ad.analog.com (10.77.17.5) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1779.2; Mon, 5 Oct 2020 06:12:21 -0700
+Received: from zeus.spd.analog.com (10.66.68.11) by SCSQMBX11.ad.analog.com
+ (10.77.17.10) with Microsoft SMTP Server id 15.1.1779.2 via Frontend
+ Transport; Mon, 5 Oct 2020 06:12:20 -0700
+Received: from saturn.ad.analog.com ([10.48.65.110])
+        by zeus.spd.analog.com (8.15.1/8.15.1) with ESMTP id 095DCT0b004599;
+        Mon, 5 Oct 2020 09:12:30 -0400
+From:   Alexandru Ardelean <alexandru.ardelean@analog.com>
+To:     <linux-hwmon@vger.kernel.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+CC:     <jdelvare@suse.com>, <linux@roeck-us.net>, <corbet@lwn.net>,
+        Alexandru Ardelean <alexandru.ardelean@analog.com>
+Subject: [PATCH] docs: hwmon: (ltc2945): update datasheet link
+Date:   Mon, 5 Oct 2020 16:12:26 +0300
+Message-ID: <20201005131226.1774081-1-alexandru.ardelean@analog.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7BIT
+Content-Type:   text/plain; charset=US-ASCII
+X-ADIRoutedOnPrem: True
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.687
+ definitions=2020-10-05_07:2020-10-05,2020-10-05 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 suspectscore=0 phishscore=0
+ priorityscore=1501 mlxlogscore=999 clxscore=1011 spamscore=0 bulkscore=0
+ adultscore=0 lowpriorityscore=0 malwarescore=0 mlxscore=0 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2006250000
+ definitions=main-2010050099
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Remove the extra newline and indentation after `J. Bruce Fields` in the
-rendered html, and extra indentation in the rendered pdf.
+Old one isn't working anymore. Update to the latest datasheet link.
 
-The `J.` sequence was interpreted by sphinx as a letter ordered list
-starting at letter `J`.  It produced a sub ordered list as item of the
-main item list.
-
-    <li><ol class="first upperalpha" start="10">
-    <li>Bruce Fields</li>
-    </ol>
-    </li>
-
-The escaping is done before the name and not between the `J` and `.` to
-keep the name writing intact.
-
-Signed-off-by: Gaëtan Harter <hartergaetan@gmail.com>
+Signed-off-by: Alexandru Ardelean <alexandru.ardelean@analog.com>
 ---
- Documentation/process/kernel-driver-statement.rst               | 2 +-
- .../translations/it_IT/process/kernel-driver-statement.rst      | 2 +-
- .../translations/zh_CN/process/kernel-driver-statement.rst      | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ Documentation/hwmon/ltc2945.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/process/kernel-driver-statement.rst b/Documentation/process/kernel-driver-statement.rst
-index a849790a68bc..3a89fec1882e 100644
---- a/Documentation/process/kernel-driver-statement.rst
-+++ b/Documentation/process/kernel-driver-statement.rst
-@@ -67,7 +67,7 @@ today, have in the past, or will in the future.
-  - Pekka Enberg
-  - Jan Engelhardt
-  - Mark Fasheh
-- - J. Bruce Fields
-+ - \ J. Bruce Fields
-  - Larry Finger
-  - Jeremy Fitzhardinge
-  - Mike Frysinger
-diff --git a/Documentation/translations/it_IT/process/kernel-driver-statement.rst b/Documentation/translations/it_IT/process/kernel-driver-statement.rst
-index f016a75a9d6e..2b4acc95c347 100644
---- a/Documentation/translations/it_IT/process/kernel-driver-statement.rst
-+++ b/Documentation/translations/it_IT/process/kernel-driver-statement.rst
-@@ -75,7 +75,7 @@ futuro.
-  - Pekka Enberg
-  - Jan Engelhardt
-  - Mark Fasheh
-- - J. Bruce Fields
-+ - \ J. Bruce Fields
-  - Larry Finger
-  - Jeremy Fitzhardinge
-  - Mike Frysinger
-diff --git a/Documentation/translations/zh_CN/process/kernel-driver-statement.rst b/Documentation/translations/zh_CN/process/kernel-driver-statement.rst
-index 2b3375bcccfd..a7fac3f04bb1 100644
---- a/Documentation/translations/zh_CN/process/kernel-driver-statement.rst
-+++ b/Documentation/translations/zh_CN/process/kernel-driver-statement.rst
-@@ -64,7 +64,7 @@
-  - Pekka Enberg
-  - Jan Engelhardt
-  - Mark Fasheh
-- - J. Bruce Fields
-+ - \ J. Bruce Fields
-  - Larry Finger
-  - Jeremy Fitzhardinge
-  - Mike Frysinger
+diff --git a/Documentation/hwmon/ltc2945.rst b/Documentation/hwmon/ltc2945.rst
+index 20c884985367..8d65c141ce2b 100644
+--- a/Documentation/hwmon/ltc2945.rst
++++ b/Documentation/hwmon/ltc2945.rst
+@@ -11,7 +11,7 @@ Supported chips:
+ 
+     Datasheet:
+ 
+-	http://cds.linear.com/docs/en/datasheet/2945fa.pdf
++	https://www.analog.com/media/en/technical-documentation/data-sheets/2945fb.pdf
+ 
+ Author: Guenter Roeck <linux@roeck-us.net>
+ 
 -- 
-2.28.0
+2.25.1
 
