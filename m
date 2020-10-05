@@ -2,157 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 49982283466
-	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 12:59:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A214F2834E3
+	for <lists+linux-doc@lfdr.de>; Mon,  5 Oct 2020 13:26:19 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726364AbgJEK7d (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 5 Oct 2020 06:59:33 -0400
-Received: from mail.kernel.org ([198.145.29.99]:48082 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726003AbgJEK71 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 5 Oct 2020 06:59:27 -0400
-Received: from coco.lan (ip5f5ad5d6.dynamic.kabel-deutschland.de [95.90.213.214])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 2DE5B20774;
-        Mon,  5 Oct 2020 10:59:23 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1601895566;
-        bh=zkJ+DHXy7q7U/z6Ji5VotkaUPd9ylktWsmGKNxhDIYc=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=hkgD5qroZ/qT4o892izj25+aOklBhSxTv96+V097oVdGNAb1IeZb0ZD/KDmw72FdS
-         W7QMuiNvsRjZYD6ms3j9uM8am5W5K8VeJd8TaRF34qRTv/P2CpmYBrBxCTsiqNtjil
-         Fkky8YQXoAcRBvoWD0aTk+etv0PS+6Ps8nZ03rNk=
-Date:   Mon, 5 Oct 2020 12:59:20 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Matthew Wilcox <willy@infradead.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        "David S. Miller" <davem@davemloft.net>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        David Airlie <airlied@linux.ie>,
-        Dmitry Torokhov <dmitry.torokhov@gmail.com>,
-        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-        Jakub Kicinski <kuba@kernel.org>, Jens Axboe <axboe@kernel.dk>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        Jonathan Cameron <jic23@kernel.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>
-Subject: Re: [PATCH 00/14] get rid of the remaining kernel-doc warnings when
- building the docs
-Message-ID: <20201005125920.27a7768d@coco.lan>
-In-Reply-To: <20201005125111.326ff7e2@coco.lan>
-References: <cover.1599732764.git.mchehab+huawei@kernel.org>
-        <20200910181208.GW6583@casper.infradead.org>
-        <20201005125111.326ff7e2@coco.lan>
-X-Mailer: Claws Mail 3.17.6 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1726018AbgJEL0P (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 5 Oct 2020 07:26:15 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39252 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726002AbgJEL0D (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 5 Oct 2020 07:26:03 -0400
+Received: from mail-ed1-x542.google.com (mail-ed1-x542.google.com [IPv6:2a00:1450:4864:20::542])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B09D1C0613AB
+        for <linux-doc@vger.kernel.org>; Mon,  5 Oct 2020 04:25:57 -0700 (PDT)
+Received: by mail-ed1-x542.google.com with SMTP id b12so8855347edz.11
+        for <linux-doc@vger.kernel.org>; Mon, 05 Oct 2020 04:25:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chrisdown.name; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=dPmPVQgoIn6sm4yJEL6Gt5bZe3D8XUPMyhu5lemsH1w=;
+        b=JosLptL0NIYq+WTt2D0GcnMU8aGMTGaKjauLfSJh/SVg8Fre3RjwOL+f/2Qg5zcYBt
+         yycq3AmSW1jW+/cKoAFeJBtiQ2pPJYKD7TsXrW+AvAeW/VThIIijdDj3eD7cuBZOKPpE
+         FEeXT4yrqri3+HgiZxDuKbeQZwMpctrogyfI4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=dPmPVQgoIn6sm4yJEL6Gt5bZe3D8XUPMyhu5lemsH1w=;
+        b=gYDDboPEHUSUmpLoXr5tDInUCT3eogn8BDvdXd17hWLWOfjYMR0rFM4O2cYU4LQHPJ
+         w/JsnYjN1+zP5/h8j0xRu+l1NGjCYhbtKkqtGK5wl5b4sRACVZxnX6CkqgO0IwOjyX2/
+         0QQ3BQ13+RuwKlmFu+1FNrOWzo6oIRYYS0ysI8Jn5Bwsm/bhZvgM4KEkoOkLSjxpE3GA
+         ey46uKB4vf+20JpMSyrlQS5IV2KGCvqgID7uAw8MxAvpx0BxLJ3DSvbhE+oVrERaTK3I
+         HTJ9o5/vI2R1MUh6rB9rcg7h7Et4mCniNDodgNWtOKhxkNtBjW/J7onjsFsd6mrbuP2U
+         WCdw==
+X-Gm-Message-State: AOAM530KqRY4rPLu+azsNmTEaPXWNFM5tQWxl3LgpgR1oJF0diGailGg
+        j1oFQqbCwE2AiNkJVVbypaqpcw==
+X-Google-Smtp-Source: ABdhPJwEUfB3faVj/+aqL4T2iZayUJerxEobuZPlfEhjF4pUatcxjdChp6vol2nisp1EgAYCOwThVw==
+X-Received: by 2002:a50:9a86:: with SMTP id p6mr16361020edb.96.1601897156284;
+        Mon, 05 Oct 2020 04:25:56 -0700 (PDT)
+Received: from localhost ([2620:10d:c093:400::5:b1f1])
+        by smtp.gmail.com with ESMTPSA id p17sm8712908edw.10.2020.10.05.04.25.55
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 05 Oct 2020 04:25:55 -0700 (PDT)
+Date:   Mon, 5 Oct 2020 12:25:55 +0100
+From:   Chris Down <chris@chrisdown.name>
+To:     Andrea Righi <andrea.righi@canonical.com>
+Cc:     Michal Hocko <mhocko@kernel.org>,
+        Vladimir Davydov <vdavydov.dev@gmail.com>,
+        Li Zefan <lizefan@huawei.com>, Tejun Heo <tj@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Luigi Semenzato <semenzato@google.com>,
+        "Rafael J . Wysocki" <rafael@kernel.org>, cgroups@vger.kernel.org,
+        linux-mm@kvack.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH RFC v2] Opportunistic memory reclaim
+Message-ID: <20201005112555.GA108347@chrisdown.name>
+References: <20201005081313.732745-1-andrea.righi@canonical.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii; format=flowed
+Content-Disposition: inline
+In-Reply-To: <20201005081313.732745-1-andrea.righi@canonical.com>
+User-Agent: Mutt/1.14.7 (2020-08-29)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Mon, 5 Oct 2020 12:51:11 +0200
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> escreveu:
+Andrea Righi writes:
+>This feature has been successfully used to improve hibernation time of
+>cloud computing instances.
+>
+>Certain cloud providers allow to run "spot instances": low-priority
+>instances that run when there are spare resources available and can be
+>stopped at any time to prioritize other more privileged instances [2].
+>
+>Hibernation can be used to stop these low-priority instances nicely,
+>rather than losing state when the instance is shut down. Being able to
+>quickly stop low-priority instances can be critical to provide a better
+>quality of service in the overall cloud infrastructure [1].
+>
+>The main bottleneck of hibernation is represented by the I/O generated
+>to write all the main memory (hibernation image) to a persistent
+>storage.
+>
+>Opportunistic memory reclaimed can be used to reduce the size of the
+>hibernation image in advance, for example if the system is idle for a
+>certain amount of time, so if an hibernation request happens, the kernel
+>has already saved most of the memory to the swap device (caches have
+>been dropped, etc.) and hibernation can complete quickly.
 
-> Em Thu, 10 Sep 2020 19:12:08 +0100
-> Matthew Wilcox <willy@infradead.org> escreveu:
-> 
-> > On Thu, Sep 10, 2020 at 12:23:53PM +0200, Mauro Carvalho Chehab wrote:  
-> > > As described on its subject, this series finally get rid of all kernel-doc warnings.
-> > > 
-> > > With this series applied (plus my last series fixing other warnings), building
-> > > the docs is now clean[1] against next-20200909:    
-> > 
-> > Thanks, this has been a truly heroic effort.
-> > 
-> > I'd suggest that we change the kernel build to always run the CHKDOC
-> > instead of at W=1 (or rather, as the patch I just sent out demonstrates,
-> > not at all (oops)).  Otherwise you're just going to have to continue
-> > doing this.  
-> 
-> It sounds a good idea for me to run kernel-doc with W=1 - or even
-> better - with allyesconfig/allmodconfig (no matter if W=0/W=1/W=2).
-> 
-> > At some point, perhaps we can add some other warnings at W=1, like
-> > an EXPORT_SYMBOL of a function which doesn't have kernel-doc.  
-> 
-> Makes sense, but I suspect that supporting it is not too trivial.
-> 
-> I mean, a script checking for EXPORT_SYMBOL* should check not
-> only the C file, but also the included header files, as the
-> kernel-doc markup can be on one of its includes. 
-> 
-> An enhanced version of something like this:
-> 
-> </script>
-> #!/usr/bin/perl
-> 
-> my $file = shift or die "Need a file name";
-> 
-> my @files;
-> my @exports;
-> 
-> my $dir = $file;
-> $dir =~ s,[^\/]+$,,;
-> 
-> push @files, $file;
-> open IN, "<$file";
-> while (<IN>) {
-> 	push @exports, $1 if (m/^EXPORT_SYMBOL.*\(\s*(\S+)\s*\)/);
-> 	push @files, "include/$1" if (m/^\s*#\s*include\s+[\<](\S+)[\>]/);
-> 	push @files, "$dir/$1" if (m/^\s*#\s*include\s+[\"](\S+)[\"]/);
-> }
-> close IN;
-> 
-> my $doc;
-> 
-> foreach my $i (@files) {
-> 	$doc .= qx(./scripts/kernel-doc $i 2>/dev/null);
-> }
-> 
-> foreach my $e (@exports) {
-> 	print "$e doesn't have kernel-doc markups\n" if (!($doc =~ m/\b$e\b/));
-> }
-> </script>
-> 
-> On simple cases, the above script helps to check what's missing:
-> 
-> 	$ ./check_exports drivers/acpi/acpi_lpat.c
-> 	<nothing returned>
-> 	$ ./test drivers/media/v4l2-core/v4l2-common.c 
-> 	__v4l2_find_nearest_size doesn't have kernel-doc markups
-> 	v4l2_apply_frmsize_constraints doesn't have kernel-doc markups
-> 	v4l2_fill_pixfmt_mp doesn't have kernel-doc markups
-> 	v4l2_fill_pixfmt doesn't have kernel-doc markups
-> 
-> Yet, it the actual script will also need to handle some special
-> cases:
-> 
-> - it should check if the Makefile used by the file has a "-I" directive.
->   This could be tricky, due to Makefile recursion.
-
-Hmm... actually this could be obtained via command line parameters, if 
-the script is called with the same parameter set as the one passed to the
-C compiler.
-
-> - it should also check if there is a kernel-doc entry for such header.
->   a "git grep" could be used in this case.
-> - It should also handle the optional arguments of kernel-doc, like
->   :internal", :external", ":no-identifiers", "identifiers", as it is
->   possible that there is a kernel-doc entry, but this is excluded
->   by a kernel-doc modifier.
-> - It should also check if the exported symbol is a function,
->   in order to exclude static vars that are exported.
-> 
-> I suspect that there are several other border cases.
-> 
-> Thanks,
-> Mauro
-
-
-
-Thanks,
-Mauro
+Hmm, why does this need to be implemented in kernelspace? We already have 
+userspace shrinkers using memory pressure information as part of PID control 
+already (eg. senpai). Using memory.high and pressure information looks a lot 
+easier to reason about than having to choose an absolute number ahead of time 
+and hoping it works.
