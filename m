@@ -2,76 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BFA7D284C67
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Oct 2020 15:19:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EAE8C284C75
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Oct 2020 15:22:06 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725973AbgJFNTW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Oct 2020 09:19:22 -0400
-Received: from mail.kernel.org ([198.145.29.99]:55150 "EHLO mail.kernel.org"
+        id S1726319AbgJFNWG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Oct 2020 09:22:06 -0400
+Received: from mail.kernel.org ([198.145.29.99]:57894 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725891AbgJFNTW (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 6 Oct 2020 09:19:22 -0400
-Received: from coco.lan (ip5f5ad5bd.dynamic.kabel-deutschland.de [95.90.213.189])
+        id S1726078AbgJFNWF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 6 Oct 2020 09:22:05 -0400
+Received: from mail.kernel.org (ip5f5ad5bd.dynamic.kabel-deutschland.de [95.90.213.189])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 1AEEE2078E;
-        Tue,  6 Oct 2020 13:19:18 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id B25142078E;
+        Tue,  6 Oct 2020 13:22:04 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1601990361;
-        bh=rhzEg93RmiL/9w7FXsjEbHmJfiXwGx7Q4TpUevh6Ol4=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=j12QtR/d3cElZV0sIOkrI6AEhL4P73NtQY4j8J1Cyxv62Sk4Wkjp60MdI620gNiUU
-         5YHtzFvmnqRxhIz1iwvj2qxk1HtvTqZclFmcfIvpTCS9CKcrinv+FJmYHONs1T05G4
-         Os4IZ2/yw9vHl4SMa/CXVylTfDBRBVL0OidcPijA=
-Date:   Tue, 6 Oct 2020 15:19:15 +0200
+        s=default; t=1601990525;
+        bh=LHGrdkmby5BA4t4N23HL7SkHHxZy7yqooZ3dMT3aY2s=;
+        h=From:To:Cc:Subject:Date:From;
+        b=UfPGt9w4ExaWlstmmTjNUtHH93y5mElanmrggfILcMKUt4abJ+zea61rxv3QlNqS8
+         i/x4J8NZcOijylogzbLZIa9aYcy1hSw0kZxVfDwfQjAktPxCxt7f0jZjH3ypf2jdQy
+         1vwZVDXuv8tOjyEFsAEFi204UxM1TCTTA6JRNdZQ=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kPmuM-0018Kh-4g; Tue, 06 Oct 2020 15:21:34 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Ivan Zaentsev <ivan.zaentsev@wirenboard.ru>
-Cc:     Evgeniy Polyakov <zbr@ioremap.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Akira Shimahara <akira215corp@gmail.com>,
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Bailu Lin <bailu.lin@vivo.com>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Dan Carpenter <dan.carpenter@oracle.com>,
-        Colin Ian King <colin.king@canonical.com>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Evgeny Boger <boger@wirenboard.com>
-Subject: Re: [PATCH 2/2] w1: w1_therm: Add support for GXCAS GX20MH01
- device.
-Message-ID: <20201006151915.77d044a4@coco.lan>
-In-Reply-To: <20200904160004.87710-2-ivan.zaentsev@wirenboard.ru>
-References: <20200904160004.87710-1-ivan.zaentsev@wirenboard.ru>
-        <20200904160004.87710-2-ivan.zaentsev@wirenboard.ru>
-X-Mailer: Claws Mail 3.17.6 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        Harry Wei <harryxiyou@gmail.com>,
+        Joel Fernandes <joel@joelfernandes.org>,
+        Josh Triplett <josh@joshtriplett.org>,
+        Kees Cook <keescook@chromium.org>,
+        Lai Jiangshan <jiangshanlai@gmail.com>,
+        Luis Chamberlain <mcgrof@kernel.org>,
+        Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Scott Branden <scott.branden@broadcom.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Will Deacon <will@kernel.org>, rcu@vger.kernel.org
+Subject: [PATCH 0/4] linu-next next-20201006 document build fixes
+Date:   Tue,  6 Oct 2020 15:21:29 +0200
+Message-Id: <cover.1601990386.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Fri,  4 Sep 2020 19:00:04 +0300
-Ivan Zaentsev <ivan.zaentsev@wirenboard.ru> escreveu:
+This small series fix new warnings introduced on today's linux-next.
 
-> diff --git a/Documentation/w1/slaves/w1_therm.rst b/Documentation/w1/slaves/w1_therm.rst
-> index f1148181f53e..00376501a5ef 100644
-> --- a/Documentation/w1/slaves/w1_therm.rst
-> +++ b/Documentation/w1/slaves/w1_therm.rst
+Feel free to add the patches on this series at the same tree
+as the warning was introduced at the first place.
 
->  
-> @@ -130,4 +131,12 @@ conversion and temperature reads 85.00 (powerup value) or 127.94 (insufficient
->  power), the driver returns a conversion error. Bit mask ``2`` enables poll for
->  conversion completion (normal power only) by generating read cycles on the bus
->  after conversion starts. In parasite power mode this feature is not available.
-> -Feature bit masks may be combined (OR).
-> +Feature bit masks may be combined (OR). See accompanying sysfs documentation:
-> +:ref:`Documentation/w1/slaves/w1_therm.rst <w1_therm>`
-> +
-
-As warned by Sphinx, this cross-reference is broken:
-
-	.../Documentation/w1/slaves/w1_therm.rst:125: WARNING: undefined label: w1_therm (if the link has no caption the label must precede a section header)
-
-Not sure what you wanted to point here.
-
-
-Thanks,
+Thanks!
 Mauro
+
+
+Mauro Carvalho Chehab (4):
+  docs: infrastructure.rst: exclude device_link_state from device.h
+  docs: zh_CN: amu.rst: fix document title markup
+  docs: RCU: Requirements.rst: fix a list block
+  firmware_loader: fix a kernel-doc markup
+
+ Documentation/RCU/Design/Requirements/Requirements.rst | 1 +
+ Documentation/driver-api/infrastructure.rst            | 1 +
+ Documentation/translations/zh_CN/arm64/amu.rst         | 4 ++--
+ drivers/base/firmware_loader/fallback.c                | 2 ++
+ 4 files changed, 6 insertions(+), 2 deletions(-)
+
+-- 
+2.26.2
+
+
