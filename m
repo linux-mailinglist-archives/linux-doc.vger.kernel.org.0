@@ -2,74 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3DA8328503D
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Oct 2020 18:56:38 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3BD6928514F
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Oct 2020 20:00:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726396AbgJFQ4h (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Oct 2020 12:56:37 -0400
-Received: from smtprelay0192.hostedemail.com ([216.40.44.192]:36932 "EHLO
-        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S1725902AbgJFQ4h (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Oct 2020 12:56:37 -0400
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
-        by smtprelay02.hostedemail.com (Postfix) with ESMTP id BDBD763D;
-        Tue,  6 Oct 2020 16:56:36 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1537:1561:1593:1594:1711:1714:1730:1747:1777:1792:1963:2393:2559:2562:2828:3138:3139:3140:3141:3142:3622:3865:3866:3867:3868:4321:4362:5007:6117:6742:6743:7901:7903:10004:10400:10848:11232:11658:11914:12297:12740:12760:12895:13069:13311:13357:13439:14659:21080:21611:21627:30054:30060:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:1,LUA_SUMMARY:none
-X-HE-Tag: juice93_3f08596271c8
-X-Filterd-Recvd-Size: 2140
-Received: from XPS-9350.home (unknown [47.151.133.149])
-        (Authenticated sender: joe@perches.com)
-        by omf09.hostedemail.com (Postfix) with ESMTPA;
-        Tue,  6 Oct 2020 16:56:32 +0000 (UTC)
-Message-ID: <1c2595d8df301b1e7f42a6f0093321a41bfea825.camel@perches.com>
-Subject: Re: [PATCH v5 00/52] Fix html build with Sphinx  3.1 and above
-From:   Joe Perches <joe@perches.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        id S1726624AbgJFSAY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Oct 2020 14:00:24 -0400
+Received: from mail.kernel.org ([198.145.29.99]:34946 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725925AbgJFSAY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 6 Oct 2020 14:00:24 -0400
+Received: from C02TF0J2HF1T.local (unknown [95.149.105.49])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 6194B206D4;
+        Tue,  6 Oct 2020 18:00:16 +0000 (UTC)
+Date:   Tue, 6 Oct 2020 19:00:12 +0100
+From:   Catalin Marinas <catalin.marinas@arm.com>
+To:     Bhupesh Sharma <bhsharma@redhat.com>
+Cc:     John Donnelly <john.p.donnelly@oracle.com>,
+        Chen Zhou <chenzhou10@huawei.com>,
+        Will Deacon <will@kernel.org>,
+        James Morse <james.morse@arm.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        RuiRui Yang <dyoung@redhat.com>, Baoquan He <bhe@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Prabhakar Kushwaha <prabhakar.pkin@gmail.com>,
+        Simon Horman <horms@verge.net.au>,
+        Rob Herring <robh+dt@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>, nsaenzjulienne@suse.de,
+        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        kexec mailing list <kexec@lists.infradead.org>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-kernel@vger.kernel.org,
-        "David S. Miller" <davem@davemloft.net>,
-        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
-        Alexander Aring <alex.aring@gmail.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Anton Vorontsov <anton@enomsg.org>,
-        Colin Cross <ccross@android.com>,
-        Daniel Lezcano <daniel.lezcano@linaro.org>,
-        Daniel Thompson <daniel.thompson@linaro.org>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        David Airlie <airlied@linux.ie>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Jaroslav Kysela <perex@perex.cz>,
-        Jason Wessel <jason.wessel@windriver.com>,
-        Kees Cook <keescook@chromium.org>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Maxime Ripard <mripard@kernel.org>,
-        Mike Rapoport <rppt@kernel.org>,
-        Moritz Fischer <mdf@kernel.org>, Sean Young <sean@mess.org>,
-        Stefan Schmidt <stefan@datenfreihafen.org>,
-        Tejun Heo <tj@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Tony Luck <tony.luck@intel.com>,
-        Viresh Kumar <viresh.kumar@linaro.org>
-Date:   Tue, 06 Oct 2020 09:56:31 -0700
-In-Reply-To: <cover.1601992016.git.mchehab+huawei@kernel.org>
-References: <cover.1601992016.git.mchehab+huawei@kernel.org>
-Content-Type: text/plain; charset="ISO-8859-1"
-User-Agent: Evolution 3.36.4-0ubuntu1 
+        guohanjun@huawei.com, xiexiuqi@huawei.com, huawei.libin@huawei.com,
+        wangkefeng.wang@huawei.com
+Subject: Re: [PATCH v12 0/9] support reserving crashkernel above 4G on arm64
+ kdump
+Message-ID: <20201006180012.GB31946@C02TF0J2HF1T.local>
+References: <20200907134745.25732-1-chenzhou10@huawei.com>
+ <e9b1b5db-a848-468e-6baf-2f7b4d658805@oracle.com>
+ <20201005170937.GA14576@gaia>
+ <CACi5LpMWUmP1df8fB8psJY_cNGHF9MNn+TNK4B4edaRHvOXxGQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CACi5LpMWUmP1df8fB8psJY_cNGHF9MNn+TNK4B4edaRHvOXxGQ@mail.gmail.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 2020-10-06 at 16:02 +0200, Mauro Carvalho Chehab wrote:
-> This series add proper support for Sphinx 3.1 and above for building the html docs.
+On Mon, Oct 05, 2020 at 11:12:10PM +0530, Bhupesh Sharma wrote:
+> I think my earlier email with the test results on this series bounced
+> off the mailing list server (for some weird reason), but I still see
+> several issues with this patchset. I will add specific issues in the
+> review comments for each patch again, but overall, with a crashkernel
+> size of say 786M, I see the following issue:
+> 
+> # cat /proc/cmdline
+> BOOT_IMAGE=(hd7,gpt2)/vmlinuz-5.9.0-rc7+ root=<..snip..> rd.lvm.lv=<..snip..> crashkernel=786M
+> 
+> I see two regions of size 786M and 256M reserved in low and high
+> regions respectively, So we reserve a total of 1042M of memory, which
+> is an incorrect behaviour:
+> 
+> # dmesg | grep -i crash
+> [    0.000000] Reserving 256MB of low memory at 2816MB for crashkernel (System low RAM: 768MB)
+> [    0.000000] Reserving 786MB of memory at 654158MB for crashkernel (System RAM: 130816MB)
+> [    0.000000] Kernel command line: BOOT_IMAGE=(hd2,gpt2)/vmlinuz-5.9.0-rc7+ root=/dev/mapper/rhel_ampere--hr330a--03-root ro rd.lvm.lv=rhel_ampere-hr330a-03/root rd.lvm.lv=rhel_ampere-hr330a-03/swap crashkernel=786M cma=1024M
+> 
+> # cat /proc/iomem | grep -i crash
+>   b0000000-bfffffff : Crash kernel (low)
+>   bfcbe00000-bffcffffff : Crash kernel
 
-Thanks Mauro.
+As Chen said, that's the intended behaviour and how x86 works. The
+requested 768M goes in the high range if there's not enough low memory
+and an additional buffer for swiotlb is allocated, hence the low 256M.
 
-I do like how the source docs are simplified for human reading
-instead of having to mentally skip useless markup notations.
+We could (as an additional patch), subtract the 256M from the high
+allocation so that you'd get a low 256M and a high 512M, not sure it's
+worth it. Note that with a "crashkernel=768M,high" option, you still get
+the additional low 256M, otherwise the crashkernel won't be able to
+boot as there's no memory in ZONE_DMA. In the explicit ",high" request
+case, I'm not sure subtracted the 256M is more intuitive.
 
+In 5.11, we also hope to fix the ZONE_DMA layout for non-RPi4 platforms
+to cover the entire 32-bit address space (i.e. identical to the current
+ZONE_DMA32).
 
+> IMO, we should test this feature more before including this in 5.11
+
+Definitely. That's one of the reasons we haven't queued it yet. So any
+help with testing here is appreciated.
+
+Thanks.
+
+-- 
+Catalin
