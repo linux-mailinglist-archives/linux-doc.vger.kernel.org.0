@@ -2,67 +2,127 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5F4CE285D61
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 12:51:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CD45D285DCA
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 13:05:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726181AbgJGKvv convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Wed, 7 Oct 2020 06:51:51 -0400
-Received: from mx.metalurgs.lv ([81.198.125.103]:61125 "EHLO mx.metalurgs.lv"
+        id S1727732AbgJGLF4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Oct 2020 07:05:56 -0400
+Received: from mail.kernel.org ([198.145.29.99]:43982 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726388AbgJGKvv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 7 Oct 2020 06:51:51 -0400
-Received: from mx.metalurgs.lv (localhost [127.0.0.1])
-        by mx.metalurgs.lv (Postfix) with ESMTP id 3AE7862055
-        for <linux-doc@vger.kernel.org>; Wed,  7 Oct 2020 13:50:29 +0300 (EEST)
-Received: from kas30pipe.localhost (localhost [127.0.0.1])
-        by mx.metalurgs.lv (Postfix) with ESMTP id 7AE455D916
-        for <linux-doc@vger.kernel.org>; Wed,  7 Oct 2020 13:50:23 +0300 (EEST)
-Received: by mx.metalurgs.lv (Postfix, from userid 1005)
-        id 48C1F66A27; Wed,  7 Oct 2020 13:50:22 +0300 (EEST)
-Received: from [100.64.1.74] (unknown [190.15.125.55])
-        (Authenticated sender: admin)
-        by mx.metalurgs.lv (Postfix) with ESMTPA id C4E3065681;
-        Wed,  7 Oct 2020 13:50:15 +0300 (EEST)
+        id S1727278AbgJGLF4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 7 Oct 2020 07:05:56 -0400
+Received: from coco.lan (ip5f5ad5a2.dynamic.kabel-deutschland.de [95.90.213.162])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id C244520870;
+        Wed,  7 Oct 2020 11:05:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1602068755;
+        bh=8fjmSp49cKh0wfDCoSeaYG9gAubXCSGeNCp550twzME=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=sgod0wBKkbcZXEbenUHnXhSX5tyaGZ+fKjXAXo13RX3GLdVkK0kua0nKzLlMxRx6V
+         aewwVG9unLpFWAOg1W9yOXAy2Vu5VGr1VbSP1RP+vnZvcBRhdiTIIGFq45Lyqc5dqF
+         hxm0AuGJg9GwPAmD9s7JtbQBd4UYlLLT3zptHyzE=
+Date:   Wed, 7 Oct 2020 13:05:49 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Ivan Zaentsev <ivan.zaentsev@wirenboard.ru>,
+        Evgeniy Polyakov <zbr@ioremap.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Akira Shimahara <akira215corp@gmail.com>,
+        Dan Carpenter <dan.carpenter@oracle.com>,
+        Colin Ian King <colin.king@canonical.com>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Evgeny Boger <boger@wirenboard.com>
+Subject: Re: [PATCH 2/2] w1: w1_therm: Add support for GXCAS GX20MH01
+ device.
+Message-ID: <20201007130549.6ca57af0@coco.lan>
+In-Reply-To: <20201007090619.GA613204@kroah.com>
+References: <20200904160004.87710-1-ivan.zaentsev@wirenboard.ru>
+        <20200904160004.87710-2-ivan.zaentsev@wirenboard.ru>
+        <20201006151915.77d044a4@coco.lan>
+        <1561045277.20201007103227@wirenboard.ru>
+        <20201007105702.67988846@coco.lan>
+        <20201007090619.GA613204@kroah.com>
+X-Mailer: Claws Mail 3.17.6 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Description: Mail message body
-To:     Recipients <financialcapability6@gmail.com>
-From:   "Mr. Hashim Bin" <financialcapability6@gmail.com>
-Date:   Wed, 07 Oct 2020 07:50:09 -0300
-Reply-To: hmurrah39@gmail.com
-X-SpamTest-Envelope-From: financialcapability6@gmail.com
-X-SpamTest-Group-ID: 00000000
-X-SpamTest-Info: Profiles 71303 [Jan 01 2015]
-X-SpamTest-Info: {TO: forged address, i.e. recipient, investors, public, etc.}
-X-SpamTest-Info: {DATE: unreal year}
-X-SpamTest-Method: none
-X-SpamTest-Rate: 55
-X-SpamTest-Status: Not detected
-X-SpamTest-Status-Extended: not_detected
-X-SpamTest-Version: SMTP-Filter Version 3.0.0 [0284], KAS30/Release
-Message-ID: <20201007105022.48C1F66A27@mx.metalurgs.lv>
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: 8BIT
-Subject: Low Rate Loan./mmm,
-X-Anti-Virus: Kaspersky Anti-Virus for Linux Mail Server 5.6.39/RELEASE,
-         bases: 20140401 #7726142, check: 20201007 notchecked
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello Dear,
+Em Wed, 7 Oct 2020 11:06:19 +0200
+Greg Kroah-Hartman <gregkh@linuxfoundation.org> escreveu:
 
+> On Wed, Oct 07, 2020 at 10:57:02AM +0200, Mauro Carvalho Chehab wrote:
+> > Em Wed, 7 Oct 2020 10:32:27 +0300
+> > Ivan Zaentsev <ivan.zaentsev@wirenboard.ru> escreveu:
+> >   
+> > > Tuesday, October 6, 2020, 4:19:15 PM, Mauro Carvalho Chehab wrote:
+> > >   
+> > > >> diff --git a/Documentation/w1/slaves/w1_therm.rst b/Documentation/w1/slaves/w1_therm.rst
+> > > >> index f1148181f53e..00376501a5ef 100644
+> > > >> --- a/Documentation/w1/slaves/w1_therm.rst
+> > > >> +++ b/Documentation/w1/slaves/w1_therm.rst    
+> > >   
+> > > >>  
+> > > >> @@ -130,4 +131,12 @@ conversion and temperature reads 85.00 (powerup value) or 127.94 (insufficient
+> > > >>  power), the driver returns a conversion error. Bit mask ``2`` enables poll for
+> > > >>  conversion completion (normal power only) by generating read cycles on the bus
+> > > >>  after conversion starts. In parasite power mode this feature is not available.
+> > > >> -Feature bit masks may be combined (OR).
+> > > >> +Feature bit masks may be combined (OR). See accompanying sysfs documentation:
+> > > >> +:ref:`Documentation/w1/slaves/w1_therm.rst <w1_therm>`
+> > > >> +    
+> > >   
+> > > > As warned by Sphinx, this cross-reference is broken:    
+> > >   
+> > > >         .../Documentation/w1/slaves/w1_therm.rst:125: WARNING:
+> > > > undefined label: w1_therm (if the link has no caption the label must precede a section header)    
+> > > 
+> > > Would this be ok?  
+> > 
+> > Yeah, sure!
+> >   
+> > > 
+> > > "More details in Documentation/ABI/testing/sysfs-driver-w1_therm"
+> > >   
+> > > > Not sure what you wanted to point here.    
+> > > 
+> > > A link to a driver's sysfs interface, but sysfs docs are text
+> > > files and seem to not be included in Sphynx Docs.  
+> > 
+> > I sent upstream sometime ago a patch series adding ABI to Sphinx, but I 
+> > was not merged, not sure why:
+> > 
+> > 	https://git.linuxtv.org/mchehab/experimental.git/log/?h=abi_patches_v5.6  
+> 
+> I think the raft of different patches floating around at the time made
+> me totally confused as to what was, and was not, the latest versions.
 
-We are Base Investment Company offering Corporate and Personal Loan at 3% Interest Rate for a duration of 10Years.
+Yeah, there were lots of patches floating around that time.
 
+I also recall that someone (Jeni?) asked if the best wouldn't be to
+just convert the ABI files to ReST directly.
 
-We also pay 1% commission to brokers, who introduce project owners for finance or other opportunities.
+> I'll be glad to look at them again, if you want to rebase after 5.10-rc1
+> is out and resend them, as I think this should be showing up in the
+> documentation.
 
+Surely. I'll rebase them after 5.10-rc1 and re-submit. 
 
-Please get back to me if you are interested for more
+What strategy do you prefer? Keep the files with the same format as
+today (allowing them to optionally have ReST markups) or to convert
+them to .rst directly?
 
-details.
+In the latter case, the best would be to apply it as early as possible
+after 5.10-rc1, as it may cause conflicts with other patches being
+submitted for 5.11.
 
+In the former case, as there are a few other places like w1_therm that want
+cross-references to ABI, I'll try to automate a way to generate identifiers
+for processed ABI files.
 
-Yours faithfully,
-
-Hashim Murrah
+Thanks,
+Mauro
