@@ -2,16 +2,16 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 24EC4286400
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 18:30:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 643AD28640A
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 18:30:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727888AbgJGQaT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 7 Oct 2020 12:30:19 -0400
-Received: from sonic314-13.consmr.mail.bf2.yahoo.com ([74.6.132.123]:43938
+        id S1727933AbgJGQaf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Oct 2020 12:30:35 -0400
+Received: from sonic314-13.consmr.mail.bf2.yahoo.com ([74.6.132.123]:42076
         "EHLO sonic314-13.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727307AbgJGQaT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Oct 2020 12:30:19 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602088218; bh=PxMwWzXvs+dqOoH0/FHvFmQpYH2JguaCUHYAVLLmaiw=; h=Date:From:Reply-To:Subject:References:From:Subject; b=TS3wtSq6HSxdSulDHhA6Ls5TsTAB2VsBzRBwR5PE0H9VuQHOjs8qcUeIIVn7h59PUvpsGjtlIuav0XthtvLsFh30W/J/1AhLQBoOus3uizwyEAa29+OFCxMF5po1fvBrf+Wo6iU7No1OiesjFpLugUoRfnOtt3Xf9wIUXLa8pKBOCWjW7+CWJKhbSrt69YgMfp5ByjmX7gbUvP4IiP/ylRNV3d7eI9fUGjW1pr9fkXWt1fssGeRHN/HA0ro3M7JxEg/TJCYgtfP47o7dZvKq8kGZIZ+ilBHtOZxt4v80919AyDGoGrcB8BMJ5SO1Ke9uI0JbfPYJZOZ/hfZKvy5D+A==
+        by vger.kernel.org with ESMTP id S1727918AbgJGQaf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Oct 2020 12:30:35 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602088233; bh=PxMwWzXvs+dqOoH0/FHvFmQpYH2JguaCUHYAVLLmaiw=; h=Date:From:Reply-To:Subject:References:From:Subject; b=AZe7BmCOV1b0gsE1HfmrAhi0U4HhaMQVn8wi9/7AWKTSuYrVTKRQYYkPy1P+aa4KhsnWmpO6TosOzzYglPXf0vOPthXKma9S/CkoxjQQ9HUntg77v6bThI7W3xb+20I+OF9ruCmNuhQ4ThTmFNjjPjy98E/jfHvHZ31RaAJVNGnv0H/dtZ7Hz1rM3xT97xDgM9cpZIwhHO1Up5/Ks/F0qlMj4xlPr8jtEvJm/96FtXJihrcJ7u8R954wiHhsib7f5xCSX5Epswh1vwh0vl+LvS7gXwzg0Q19HmQT7NUJy9a3beNaaxbUrRZcqHcN1UwI7rQILMvtrSrwdE/xTzvqjQ==
 X-YMail-OSG: 4NXD54oVM1mMBahd2RCdjSZ_WRkegtjYp4j38VQWuBwLkny2zQTW3n6RI0rtEr.
  wtsFNTLbgWz00tyWvQsL9oE174YxGA48K6441VZCRISgLC0kvhdccSmt0HrTMDjNC4j9_EJF6kym
  2qmnCF6C3Te4_TKVD2xuvMKlabKZRV5HQy9H_pD3AXSTRGIIq_i.EklOYYfHMhfO8Ttp30mxquve
@@ -32,7 +32,7 @@ X-YMail-OSG: 4NXD54oVM1mMBahd2RCdjSZ_WRkegtjYp4j38VQWuBwLkny2zQTW3n6RI0rtEr.
  rrBUnZbtZcD8VCFAlmbXSJrTUbz55D7uqqVLlSrEoPjDtZhr86q13liuUTH0ksQ5_XMdkMfMhzvF
  CNUV6QnO8v.fd1WB7AwOMEqBN8slIuFzjmQviVgI1Qe.sIpHcdpPvh9gUTuT3oQKME7HV3hND7II
  pIe1b4lHcfVNo5a8uMol4AvT2bQd2J74bJH5788XdyJHESQ--
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic314.consmr.mail.bf2.yahoo.com with HTTP; Wed, 7 Oct 2020 16:30:18 +0000
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic314.consmr.mail.bf2.yahoo.com with HTTP; Wed, 7 Oct 2020 16:30:33 +0000
 Date:   Wed, 7 Oct 2020 16:30:15 +0000 (UTC)
 From:   Marilyn Robert <fredodinga22@gmail.com>
 Reply-To: marilyobert@gmail.com
