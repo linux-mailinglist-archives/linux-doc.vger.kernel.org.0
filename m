@@ -2,82 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EC8052863D7
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 18:25:01 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 24EC4286400
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 18:30:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727665AbgJGQZB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 7 Oct 2020 12:25:01 -0400
-Received: from mail.kernel.org ([198.145.29.99]:59260 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726504AbgJGQZB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 7 Oct 2020 12:25:01 -0400
-Received: from gaia (unknown [95.149.105.49])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 3B21E216C4;
-        Wed,  7 Oct 2020 16:24:56 +0000 (UTC)
-Date:   Wed, 7 Oct 2020 17:24:53 +0100
-From:   Catalin Marinas <catalin.marinas@arm.com>
-To:     chenzhou <chenzhou10@huawei.com>
-Cc:     will@kernel.org, james.morse@arm.com, tglx@linutronix.de,
-        mingo@redhat.com, dyoung@redhat.com, bhe@redhat.com,
-        corbet@lwn.net, John.P.donnelly@oracle.com,
-        prabhakar.pkin@gmail.com, bhsharma@redhat.com, horms@verge.net.au,
-        robh+dt@kernel.org, arnd@arndb.de, nsaenzjulienne@suse.de,
-        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
-        kexec@lists.infradead.org, linux-doc@vger.kernel.org,
-        guohanjun@huawei.com, xiexiuqi@huawei.com, huawei.libin@huawei.com,
-        wangkefeng.wang@huawei.com
-Subject: Re: [PATCH v12 9/9] kdump: update Documentation about crashkernel
-Message-ID: <20201007162453.GR3462@gaia>
-References: <20200907134745.25732-1-chenzhou10@huawei.com>
- <20200907134745.25732-10-chenzhou10@huawei.com>
- <20201005171936.GD14576@gaia>
- <8644712d-1331-1efc-1cd2-6da8640145b7@huawei.com>
+        id S1727888AbgJGQaT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Oct 2020 12:30:19 -0400
+Received: from sonic314-13.consmr.mail.bf2.yahoo.com ([74.6.132.123]:43938
+        "EHLO sonic314-13.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727307AbgJGQaT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Oct 2020 12:30:19 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602088218; bh=PxMwWzXvs+dqOoH0/FHvFmQpYH2JguaCUHYAVLLmaiw=; h=Date:From:Reply-To:Subject:References:From:Subject; b=TS3wtSq6HSxdSulDHhA6Ls5TsTAB2VsBzRBwR5PE0H9VuQHOjs8qcUeIIVn7h59PUvpsGjtlIuav0XthtvLsFh30W/J/1AhLQBoOus3uizwyEAa29+OFCxMF5po1fvBrf+Wo6iU7No1OiesjFpLugUoRfnOtt3Xf9wIUXLa8pKBOCWjW7+CWJKhbSrt69YgMfp5ByjmX7gbUvP4IiP/ylRNV3d7eI9fUGjW1pr9fkXWt1fssGeRHN/HA0ro3M7JxEg/TJCYgtfP47o7dZvKq8kGZIZ+ilBHtOZxt4v80919AyDGoGrcB8BMJ5SO1Ke9uI0JbfPYJZOZ/hfZKvy5D+A==
+X-YMail-OSG: 4NXD54oVM1mMBahd2RCdjSZ_WRkegtjYp4j38VQWuBwLkny2zQTW3n6RI0rtEr.
+ wtsFNTLbgWz00tyWvQsL9oE174YxGA48K6441VZCRISgLC0kvhdccSmt0HrTMDjNC4j9_EJF6kym
+ 2qmnCF6C3Te4_TKVD2xuvMKlabKZRV5HQy9H_pD3AXSTRGIIq_i.EklOYYfHMhfO8Ttp30mxquve
+ XybOVjedyiueUZFJw.cWBLT4jGNNyqwgE7ytBRjVfibdqBBHli_SPSpWq680zWS8n316tVZjqrwy
+ maGPkL.6pkIS9BCon4aUTmAv8hyx8uCpuJC9sYUKfATIo5nGMGPm9vyQK6ZVkODu7VupuH6vnndM
+ pOaAqMRT7ISE.oehW8D8dqw9EgToaybdpAqf9mW.XlAJvMDWlJLSUfMZpo4QqH3kmvmprTcmHJ3.
+ .j01pEyt_0WCdEE_v5QrstY0UOw7TBjmDBT4P7A_bhmXa4LCgnXNcVo6Ck6CSIvFkj90yxe.FBqf
+ okYF3zUr4n9LkQ3fm4le.t2DAC_Z_XBezdtdBMKlm.loV7418F9LUAxFIKXxbnegEfCasroPUwI8
+ WROBeVOEX7hwGdo2bWb7wmyVILE0ETrfeD3Gem1xx4Zyz8F77qP_j4hQtZfSYs_uOa2GznBHo0rO
+ gDQ.UguWihTOhrlR_WzB65nBI0nQGxpb3_zDItpl_uv2hMvi8JVrs7x0pQG31XoQQ3HkRocXDGzS
+ oLTac0OPCNCXmMxM.TDWMD64G0.lwcAVxIH__VftSIQlPw.ky7BQ_s.GZMKDlwZBbLMfFv_8zqEV
+ OQN929lmMMXlXS6nONfID9yNEOShos54s2LzzXN_kL.46VTqdkqPkYQPPvHgkO3u7sjmKhfZ4HDg
+ N5vzQMCbuPrWjT_Vw62akopmJCz9vvJTaI1CGlMLfWP.CmWb.tplV23lyyftH4qwmxai_GE0Pdwl
+ pt9oU8RLfRq872i1h4Mli0tGwhYjZwhyLf_O9_Zj2_IG9AY8dpoP7mrhqjfnXzzgyhy1zqnRsEDO
+ 1yW8.znUo5di.KGV5NAHhFqvMfAd8A5GxwlyNM4Nmb2qsRlyWaygjHoDbtfvMV3nrlSdj_bw6BgG
+ _aOczZN5WZMkff_EJQEuMBWI.4JJZ.aTw.J1rNbvtzCDCy6_lN84sxblfRYvm_HMO0E2tMNwu6Dv
+ DZj039Nhy3IRFCMhDqPwtxGHwsEaE7U_EXEwWtpJwwa4zvx.jZN1vCtsMFBCzYg7bApo0SP4f518
+ rrBUnZbtZcD8VCFAlmbXSJrTUbz55D7uqqVLlSrEoPjDtZhr86q13liuUTH0ksQ5_XMdkMfMhzvF
+ CNUV6QnO8v.fd1WB7AwOMEqBN8slIuFzjmQviVgI1Qe.sIpHcdpPvh9gUTuT3oQKME7HV3hND7II
+ pIe1b4lHcfVNo5a8uMol4AvT2bQd2J74bJH5788XdyJHESQ--
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic314.consmr.mail.bf2.yahoo.com with HTTP; Wed, 7 Oct 2020 16:30:18 +0000
+Date:   Wed, 7 Oct 2020 16:30:15 +0000 (UTC)
+From:   Marilyn Robert <fredodinga22@gmail.com>
+Reply-To: marilyobert@gmail.com
+Message-ID: <1713410854.154575.1602088215373@mail.yahoo.com>
+Subject: =?UTF-8?B?0J3QsNGY0LzQuNC70LAg0LrQsNGYINCz0L7RgdC/0L7QtNCw0YDQvtGC?=
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <8644712d-1331-1efc-1cd2-6da8640145b7@huawei.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: base64
+References: <1713410854.154575.1602088215373.ref@mail.yahoo.com>
+X-Mailer: WebService/1.1.16795 YMailNodin Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 06, 2020 at 10:10:54AM +0800, chenzhou wrote:
-> On 2020/10/6 1:19, Catalin Marinas wrote:
-> > On Mon, Sep 07, 2020 at 09:47:45PM +0800, Chen Zhou wrote:
-> >> diff --git a/Documentation/admin-guide/kdump/kdump.rst b/Documentation/admin-guide/kdump/kdump.rst
-> >> index 2da65fef2a1c..549611abc581 100644
-> >> --- a/Documentation/admin-guide/kdump/kdump.rst
-> >> +++ b/Documentation/admin-guide/kdump/kdump.rst
-> > [...]
-> >> @@ -316,8 +325,18 @@ Boot into System Kernel
-> >>     kernel will automatically locate the crash kernel image within the
-> >>     first 512MB of RAM if X is not given.
-> >>  
-> >> -   On arm64, use "crashkernel=Y[@X]".  Note that the start address of
-> >> -   the kernel, X if explicitly specified, must be aligned to 2MiB (0x200000).
-> >> +   On arm64, use "crashkernel=X" to try low allocation in DMA zone, and
-> >> +   fall back to high allocation if it fails. And go for high allocation
-> >> +   directly if the required size is too large.
-> >> +   We can also use "crashkernel=X,high" to select a high region above
-> >> +   DMA zone, which also tries to allocate at least 256M low memory in
-> >> +   DMA zone automatically.
-> >> +   "crashkernel=Y,low" can be used to allocate specified size low memory
-> >> +   in DMA zone.
-> >> +   For non-RPi4 platforms, change DMA zone memtioned above to DMA32 zone.
-> > I don't think we should mention non-RPi4 explicitly here. I don't even
-> > understand what the suggestion is since the only way is to disable
-> > ZONE_DMA in the kernel config. I'd just stick to ZONE_DMA description
-> > here.
-> How about like this:
-> If the kernel config ZONE_DMA is disabled, just try low allocation in DMA32 zone
-> and high allocation above DMA32 zone.
-
-Something like: "allocate 256M low memory in the DMA zone automatically
-(or the DMA32 zone if CONFIG_ZONE_DMA is disabled)".
-
-I'd keep it short.
-
--- 
-Catalin
+DQoNCtCd0LDRmNC80LjQu9CwINC60LDRmCDQs9C+0YHQv9C+0LTQsNGA0L7Rgg0KDQrQiNCw0YEg
+0YHRg9C8IDY4LdCz0L7QtNC40YjQvdCwINC20LXQvdCwLCDQutC+0ZjQsCDRgdGC0YDQsNC00LAg
+0L7QtCDQv9GA0L7QtNC+0LvQttC10L0g0LrQsNGA0YbQuNC90L7QvCDQvdCwINC00L7RmNC60LAs
+INC+0LQg0YHQuNGC0LUg0LzQtdC00LjRhtC40L3RgdC60Lgg0LjQvdC00LjQutCw0YbQuNC4LCDQ
+vNC+0ZjQsNGC0LAg0YHQvtGB0YLQvtGY0LHQsCDQvdCw0LLQuNGB0YLQuNC90LAg0YHQtSDQstC7
+0L7RiNC4INC4INC+0YfQuNCz0LvQtdC00L3QviDQtSDQtNC10LrQsCDQvNC+0LbQtdCx0Lgg0L3Q
+tdC80LAg0LTQsCDQttC40LLQtdCw0Lwg0L/QvtCy0LXRnNC1INC+0LQg0YjQtdGB0YIg0LzQtdGB
+0LXRhtC4INC60LDQutC+INGA0LXQt9GD0LvRgtCw0YIg0L3QsCDQsdGA0LfQuNC+0YIg0YDQsNGB
+0YIg0Lgg0LHQvtC70LrQsNGC0LAg0YjRgtC+INGB0LUg0ZjQsNCy0YPQstCwINC60LDRmCDQvdC1
+0LAuINCc0L7RmNC+0YIg0YHQvtC/0YDRg9CzINC/0L7Rh9C40L3QsCDQvdC10LrQvtC70LrRgyDQ
+s9C+0LTQuNC90Lgg0L3QsNC90LDQt9Cw0LQg0Lgg0L3QsNGI0LjRgtC1INC00L7Qu9Cz0Lgg0LPQ
+vtC00LjQvdC4INCx0YDQsNC6INC90LUg0LHQtdCwINCx0LvQsNCz0L7RgdC70L7QstC10L3QuCDR
+gdC+INC90LjRgtGDINC10LTQvdC+INC00LXRgtC1LCDQv9C+INC90LXQs9C+0LLQsNGC0LAg0YHQ
+vNGA0YIg0LPQviDQvdCw0YHQu9C10LTQuNCyINGG0LXQu9C+0YLQviDQvdC10LPQvtCy0L4g0LHQ
+vtCz0LDRgtGB0YLQstC+Lg0KDQrQlNC+0LDRk9Cw0Lwg0LrQsNGYINCy0LDRgSDQvtGC0LrQsNC6
+0L4g0YHQtSDQv9C+0LzQvtC70LjQsiDQt9CwINGC0L7QsCwg0L/QvtC00LPQvtGC0LLQtdC9INGB
+0YPQvCDQtNCwINC00L7QvdC40YDQsNC8INGB0YPQvNCwINC+0LQgMiwgMzAwLCAwMDAg0LXQstGA
+0LAg0LfQsCDQv9C+0LzQvtGIINC90LAg0YHQuNGA0L7QvNCw0YjQvdC40YLQtSwg0YHQuNGA0L7Q
+vNCw0YjQvdC40YLQtSDQuCDQv9C+0LzQsNC70LrRgyDQv9GA0LjQstC40LvQtdCz0LjRgNCw0L3Q
+uNGC0LUg0LzQtdGT0YMg0LLQsNGI0LjRgtC1INGB0L7QsdGA0LDQvdC40ZjQsCAvINC+0L/RiNGC
+0LXRgdGC0LLQvi4g0JfQsNCx0LXQu9C10LbQtdGC0LUg0LTQtdC60LAg0L7QstC+0Zgg0YTQvtC9
+0LQg0LUg0LTQtdC/0L7QvdC40YDQsNC9INCy0L4g0LHQsNC90LrQsCDQutCw0LTQtSDRiNGC0L4g
+0YDQsNCx0L7RgtC10YjQtSDQvNC+0ZjQvtGCINGB0L7Qv9GA0YPQsy4gQXBwcmVjaWF0ZdC1INGG
+0LXQvdCw0Lwg0LDQutC+INC+0LHRgNC90LXRgtC1INCy0L3QuNC80LDQvdC40LUg0L3QsCDQvNC+
+0LXRgtC+INCx0LDRgNCw0ZrQtSDQt9CwINC/0YDQvtC/0LDQs9C40YDQsNGa0LUg0L3QsCDQvNCw
+0YHQsNC20LDRgtCwINC90LAg0LrRgNCw0LvRgdGC0LLQvtGC0L4sINGc0LUg0LLQuCDQtNCw0LTQ
+sNC8INC/0L7QstC10ZzQtSDQtNC10YLQsNC70Lgg0LfQsCDRgtC+0LAg0LrQsNC60L4g0LTQsCDQ
+v9C+0YHRgtCw0L/QuNGC0LUuDQoNCtCR0LvQsNCz0L7QtNCw0YDQsNC8DQrQky3Rk9CwINCc0LXR
+gNC40LvQuNC9INCg0L7QsdC10YDRgg==
