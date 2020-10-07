@@ -2,78 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 643AD28640A
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 18:30:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 07F83286476
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 18:33:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727933AbgJGQaf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 7 Oct 2020 12:30:35 -0400
-Received: from sonic314-13.consmr.mail.bf2.yahoo.com ([74.6.132.123]:42076
-        "EHLO sonic314-13.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727918AbgJGQaf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Oct 2020 12:30:35 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602088233; bh=PxMwWzXvs+dqOoH0/FHvFmQpYH2JguaCUHYAVLLmaiw=; h=Date:From:Reply-To:Subject:References:From:Subject; b=AZe7BmCOV1b0gsE1HfmrAhi0U4HhaMQVn8wi9/7AWKTSuYrVTKRQYYkPy1P+aa4KhsnWmpO6TosOzzYglPXf0vOPthXKma9S/CkoxjQQ9HUntg77v6bThI7W3xb+20I+OF9ruCmNuhQ4ThTmFNjjPjy98E/jfHvHZ31RaAJVNGnv0H/dtZ7Hz1rM3xT97xDgM9cpZIwhHO1Up5/Ks/F0qlMj4xlPr8jtEvJm/96FtXJihrcJ7u8R954wiHhsib7f5xCSX5Epswh1vwh0vl+LvS7gXwzg0Q19HmQT7NUJy9a3beNaaxbUrRZcqHcN1UwI7rQILMvtrSrwdE/xTzvqjQ==
-X-YMail-OSG: 4NXD54oVM1mMBahd2RCdjSZ_WRkegtjYp4j38VQWuBwLkny2zQTW3n6RI0rtEr.
- wtsFNTLbgWz00tyWvQsL9oE174YxGA48K6441VZCRISgLC0kvhdccSmt0HrTMDjNC4j9_EJF6kym
- 2qmnCF6C3Te4_TKVD2xuvMKlabKZRV5HQy9H_pD3AXSTRGIIq_i.EklOYYfHMhfO8Ttp30mxquve
- XybOVjedyiueUZFJw.cWBLT4jGNNyqwgE7ytBRjVfibdqBBHli_SPSpWq680zWS8n316tVZjqrwy
- maGPkL.6pkIS9BCon4aUTmAv8hyx8uCpuJC9sYUKfATIo5nGMGPm9vyQK6ZVkODu7VupuH6vnndM
- pOaAqMRT7ISE.oehW8D8dqw9EgToaybdpAqf9mW.XlAJvMDWlJLSUfMZpo4QqH3kmvmprTcmHJ3.
- .j01pEyt_0WCdEE_v5QrstY0UOw7TBjmDBT4P7A_bhmXa4LCgnXNcVo6Ck6CSIvFkj90yxe.FBqf
- okYF3zUr4n9LkQ3fm4le.t2DAC_Z_XBezdtdBMKlm.loV7418F9LUAxFIKXxbnegEfCasroPUwI8
- WROBeVOEX7hwGdo2bWb7wmyVILE0ETrfeD3Gem1xx4Zyz8F77qP_j4hQtZfSYs_uOa2GznBHo0rO
- gDQ.UguWihTOhrlR_WzB65nBI0nQGxpb3_zDItpl_uv2hMvi8JVrs7x0pQG31XoQQ3HkRocXDGzS
- oLTac0OPCNCXmMxM.TDWMD64G0.lwcAVxIH__VftSIQlPw.ky7BQ_s.GZMKDlwZBbLMfFv_8zqEV
- OQN929lmMMXlXS6nONfID9yNEOShos54s2LzzXN_kL.46VTqdkqPkYQPPvHgkO3u7sjmKhfZ4HDg
- N5vzQMCbuPrWjT_Vw62akopmJCz9vvJTaI1CGlMLfWP.CmWb.tplV23lyyftH4qwmxai_GE0Pdwl
- pt9oU8RLfRq872i1h4Mli0tGwhYjZwhyLf_O9_Zj2_IG9AY8dpoP7mrhqjfnXzzgyhy1zqnRsEDO
- 1yW8.znUo5di.KGV5NAHhFqvMfAd8A5GxwlyNM4Nmb2qsRlyWaygjHoDbtfvMV3nrlSdj_bw6BgG
- _aOczZN5WZMkff_EJQEuMBWI.4JJZ.aTw.J1rNbvtzCDCy6_lN84sxblfRYvm_HMO0E2tMNwu6Dv
- DZj039Nhy3IRFCMhDqPwtxGHwsEaE7U_EXEwWtpJwwa4zvx.jZN1vCtsMFBCzYg7bApo0SP4f518
- rrBUnZbtZcD8VCFAlmbXSJrTUbz55D7uqqVLlSrEoPjDtZhr86q13liuUTH0ksQ5_XMdkMfMhzvF
- CNUV6QnO8v.fd1WB7AwOMEqBN8slIuFzjmQviVgI1Qe.sIpHcdpPvh9gUTuT3oQKME7HV3hND7II
- pIe1b4lHcfVNo5a8uMol4AvT2bQd2J74bJH5788XdyJHESQ--
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic314.consmr.mail.bf2.yahoo.com with HTTP; Wed, 7 Oct 2020 16:30:33 +0000
-Date:   Wed, 7 Oct 2020 16:30:15 +0000 (UTC)
-From:   Marilyn Robert <fredodinga22@gmail.com>
-Reply-To: marilyobert@gmail.com
-Message-ID: <1713410854.154575.1602088215373@mail.yahoo.com>
-Subject: =?UTF-8?B?0J3QsNGY0LzQuNC70LAg0LrQsNGYINCz0L7RgdC/0L7QtNCw0YDQvtGC?=
+        id S1726948AbgJGQd1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Oct 2020 12:33:27 -0400
+Received: from mail.kernel.org ([198.145.29.99]:36578 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726138AbgJGQd1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 7 Oct 2020 12:33:27 -0400
+Received: from gaia (unknown [95.149.105.49])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 092952064E;
+        Wed,  7 Oct 2020 16:33:21 +0000 (UTC)
+Date:   Wed, 7 Oct 2020 17:33:19 +0100
+From:   Catalin Marinas <catalin.marinas@arm.com>
+To:     Bhupesh Sharma <bhsharma@redhat.com>
+Cc:     John Donnelly <john.p.donnelly@oracle.com>,
+        Chen Zhou <chenzhou10@huawei.com>,
+        Will Deacon <will@kernel.org>,
+        James Morse <james.morse@arm.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        RuiRui Yang <dyoung@redhat.com>, Baoquan He <bhe@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Prabhakar Kushwaha <prabhakar.pkin@gmail.com>,
+        Simon Horman <horms@verge.net.au>,
+        Rob Herring <robh+dt@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>, nsaenzjulienne@suse.de,
+        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        kexec mailing list <kexec@lists.infradead.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        guohanjun@huawei.com, xiexiuqi@huawei.com, huawei.libin@huawei.com,
+        wangkefeng.wang@huawei.com
+Subject: Re: [PATCH v12 0/9] support reserving crashkernel above 4G on arm64
+ kdump
+Message-ID: <20201007163319.GS3462@gaia>
+References: <20200907134745.25732-1-chenzhou10@huawei.com>
+ <e9b1b5db-a848-468e-6baf-2f7b4d658805@oracle.com>
+ <20201005170937.GA14576@gaia>
+ <CACi5LpMWUmP1df8fB8psJY_cNGHF9MNn+TNK4B4edaRHvOXxGQ@mail.gmail.com>
+ <20201006180012.GB31946@C02TF0J2HF1T.local>
+ <CACi5LpMmccLX9p0ZXnEbWHgn2LRrVSDQZF9zBGzfZySe3TvXEQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: base64
-References: <1713410854.154575.1602088215373.ref@mail.yahoo.com>
-X-Mailer: WebService/1.1.16795 YMailNodin Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Safari/537.36
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CACi5LpMmccLX9p0ZXnEbWHgn2LRrVSDQZF9zBGzfZySe3TvXEQ@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-DQoNCtCd0LDRmNC80LjQu9CwINC60LDRmCDQs9C+0YHQv9C+0LTQsNGA0L7Rgg0KDQrQiNCw0YEg
-0YHRg9C8IDY4LdCz0L7QtNC40YjQvdCwINC20LXQvdCwLCDQutC+0ZjQsCDRgdGC0YDQsNC00LAg
-0L7QtCDQv9GA0L7QtNC+0LvQttC10L0g0LrQsNGA0YbQuNC90L7QvCDQvdCwINC00L7RmNC60LAs
-INC+0LQg0YHQuNGC0LUg0LzQtdC00LjRhtC40L3RgdC60Lgg0LjQvdC00LjQutCw0YbQuNC4LCDQ
-vNC+0ZjQsNGC0LAg0YHQvtGB0YLQvtGY0LHQsCDQvdCw0LLQuNGB0YLQuNC90LAg0YHQtSDQstC7
-0L7RiNC4INC4INC+0YfQuNCz0LvQtdC00L3QviDQtSDQtNC10LrQsCDQvNC+0LbQtdCx0Lgg0L3Q
-tdC80LAg0LTQsCDQttC40LLQtdCw0Lwg0L/QvtCy0LXRnNC1INC+0LQg0YjQtdGB0YIg0LzQtdGB
-0LXRhtC4INC60LDQutC+INGA0LXQt9GD0LvRgtCw0YIg0L3QsCDQsdGA0LfQuNC+0YIg0YDQsNGB
-0YIg0Lgg0LHQvtC70LrQsNGC0LAg0YjRgtC+INGB0LUg0ZjQsNCy0YPQstCwINC60LDRmCDQvdC1
-0LAuINCc0L7RmNC+0YIg0YHQvtC/0YDRg9CzINC/0L7Rh9C40L3QsCDQvdC10LrQvtC70LrRgyDQ
-s9C+0LTQuNC90Lgg0L3QsNC90LDQt9Cw0LQg0Lgg0L3QsNGI0LjRgtC1INC00L7Qu9Cz0Lgg0LPQ
-vtC00LjQvdC4INCx0YDQsNC6INC90LUg0LHQtdCwINCx0LvQsNCz0L7RgdC70L7QstC10L3QuCDR
-gdC+INC90LjRgtGDINC10LTQvdC+INC00LXRgtC1LCDQv9C+INC90LXQs9C+0LLQsNGC0LAg0YHQ
-vNGA0YIg0LPQviDQvdCw0YHQu9C10LTQuNCyINGG0LXQu9C+0YLQviDQvdC10LPQvtCy0L4g0LHQ
-vtCz0LDRgtGB0YLQstC+Lg0KDQrQlNC+0LDRk9Cw0Lwg0LrQsNGYINCy0LDRgSDQvtGC0LrQsNC6
-0L4g0YHQtSDQv9C+0LzQvtC70LjQsiDQt9CwINGC0L7QsCwg0L/QvtC00LPQvtGC0LLQtdC9INGB
-0YPQvCDQtNCwINC00L7QvdC40YDQsNC8INGB0YPQvNCwINC+0LQgMiwgMzAwLCAwMDAg0LXQstGA
-0LAg0LfQsCDQv9C+0LzQvtGIINC90LAg0YHQuNGA0L7QvNCw0YjQvdC40YLQtSwg0YHQuNGA0L7Q
-vNCw0YjQvdC40YLQtSDQuCDQv9C+0LzQsNC70LrRgyDQv9GA0LjQstC40LvQtdCz0LjRgNCw0L3Q
-uNGC0LUg0LzQtdGT0YMg0LLQsNGI0LjRgtC1INGB0L7QsdGA0LDQvdC40ZjQsCAvINC+0L/RiNGC
-0LXRgdGC0LLQvi4g0JfQsNCx0LXQu9C10LbQtdGC0LUg0LTQtdC60LAg0L7QstC+0Zgg0YTQvtC9
-0LQg0LUg0LTQtdC/0L7QvdC40YDQsNC9INCy0L4g0LHQsNC90LrQsCDQutCw0LTQtSDRiNGC0L4g
-0YDQsNCx0L7RgtC10YjQtSDQvNC+0ZjQvtGCINGB0L7Qv9GA0YPQsy4gQXBwcmVjaWF0ZdC1INGG
-0LXQvdCw0Lwg0LDQutC+INC+0LHRgNC90LXRgtC1INCy0L3QuNC80LDQvdC40LUg0L3QsCDQvNC+
-0LXRgtC+INCx0LDRgNCw0ZrQtSDQt9CwINC/0YDQvtC/0LDQs9C40YDQsNGa0LUg0L3QsCDQvNCw
-0YHQsNC20LDRgtCwINC90LAg0LrRgNCw0LvRgdGC0LLQvtGC0L4sINGc0LUg0LLQuCDQtNCw0LTQ
-sNC8INC/0L7QstC10ZzQtSDQtNC10YLQsNC70Lgg0LfQsCDRgtC+0LAg0LrQsNC60L4g0LTQsCDQ
-v9C+0YHRgtCw0L/QuNGC0LUuDQoNCtCR0LvQsNCz0L7QtNCw0YDQsNC8DQrQky3Rk9CwINCc0LXR
-gNC40LvQuNC9INCg0L7QsdC10YDRgg==
+On Wed, Oct 07, 2020 at 12:37:49PM +0530, Bhupesh Sharma wrote:
+> On Tue, Oct 6, 2020 at 11:30 PM Catalin Marinas <catalin.marinas@arm.com> wrote:
+> > On Mon, Oct 05, 2020 at 11:12:10PM +0530, Bhupesh Sharma wrote:
+> > > I think my earlier email with the test results on this series bounced
+> > > off the mailing list server (for some weird reason), but I still see
+> > > several issues with this patchset. I will add specific issues in the
+> > > review comments for each patch again, but overall, with a crashkernel
+> > > size of say 786M, I see the following issue:
+> > >
+> > > # cat /proc/cmdline
+> > > BOOT_IMAGE=(hd7,gpt2)/vmlinuz-5.9.0-rc7+ root=<..snip..> rd.lvm.lv=<..snip..> crashkernel=786M
+> > >
+> > > I see two regions of size 786M and 256M reserved in low and high
+> > > regions respectively, So we reserve a total of 1042M of memory, which
+> > > is an incorrect behaviour:
+> > >
+> > > # dmesg | grep -i crash
+> > > [    0.000000] Reserving 256MB of low memory at 2816MB for crashkernel (System low RAM: 768MB)
+> > > [    0.000000] Reserving 786MB of memory at 654158MB for crashkernel (System RAM: 130816MB)
+> > > [    0.000000] Kernel command line: BOOT_IMAGE=(hd2,gpt2)/vmlinuz-5.9.0-rc7+ root=/dev/mapper/rhel_ampere--hr330a--03-root ro rd.lvm.lv=rhel_ampere-hr330a-03/root rd.lvm.lv=rhel_ampere-hr330a-03/swap crashkernel=786M cma=1024M
+> > >
+> > > # cat /proc/iomem | grep -i crash
+> > >   b0000000-bfffffff : Crash kernel (low)
+> > >   bfcbe00000-bffcffffff : Crash kernel
+> >
+> > As Chen said, that's the intended behaviour and how x86 works. The
+> > requested 768M goes in the high range if there's not enough low memory
+> > and an additional buffer for swiotlb is allocated, hence the low 256M.
+> 
+> I understand, but why 256M (as low) for arm64? x86_64 setups usually
+> have more system memory available as compared to several commercially
+> available arm64 setups. So is the intent, just to keep the behavior
+> similar between arm64 and x86_64?
+
+Similar in the sense of the fallback to high memory and some low memory
+allocation but the amounts can vary per architecture.
+
+> Should we have a CONFIG option / bootarg to help one select the max
+> 'low_size'? Currently the ' low_size' value is calculated as:
+> 
+>     /*
+>          * two parts from kernel/dma/swiotlb.c:
+>          * -swiotlb size: user-specified with swiotlb= or default.
+>          *
+>          * -swiotlb overflow buffer: now hardcoded to 32k. We round it
+>          * to 8M for other buffers that may need to stay low too. Also
+>          * make sure we allocate enough extra low memory so that we
+>          * don't run out of DMA buffers for 32-bit devices.
+>          */
+>         low_size = max(swiotlb_size_or_default() + (8UL << 20), 256UL << 20);
+> 
+> Since many arm64 boards ship with swiotlb=0 (turned off) via kernel
+> bootargs, the low_size, still ends up being 256M in such cases,
+> whereas this 256M can be used for some other purposes - so should we
+> be limiting this to 64M and failing the crash kernel allocation
+> request (gracefully) otherwise?
+
+I think it makes sense to set a low_size = 0 if
+swiotlb_size_or_default() is 0. The assumption would be that if the main
+kernel doesn't need an swiotlb, the crashdump one wouldn't need it
+either. But this probably needs the ZONE_DMA for non-RPi4 platforms
+addressed as well (expanded to the whole ZONE_DMA32).
+
+-- 
+Catalin
