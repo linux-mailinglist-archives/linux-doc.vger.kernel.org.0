@@ -2,60 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5E601285A4F
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 10:21:12 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A4CCD285A5E
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Oct 2020 10:23:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727790AbgJGIVL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 7 Oct 2020 04:21:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59368 "EHLO
+        id S1727896AbgJGIXA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Oct 2020 04:23:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59652 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725976AbgJGIVL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Oct 2020 04:21:11 -0400
-Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com [IPv6:2607:f8b0:4864:20::443])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 04DDBC061755;
-        Wed,  7 Oct 2020 01:21:11 -0700 (PDT)
-Received: by mail-pf1-x443.google.com with SMTP id a200so901186pfa.10;
-        Wed, 07 Oct 2020 01:21:10 -0700 (PDT)
+        with ESMTP id S1727885AbgJGIW7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Oct 2020 04:22:59 -0400
+Received: from mail-pg1-x541.google.com (mail-pg1-x541.google.com [IPv6:2607:f8b0:4864:20::541])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BF0CEC061755;
+        Wed,  7 Oct 2020 01:22:59 -0700 (PDT)
+Received: by mail-pg1-x541.google.com with SMTP id j33so917113pgj.5;
+        Wed, 07 Oct 2020 01:22:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=date:from:to:cc:subject:message-id:references:mime-version
          :content-disposition:in-reply-to;
-        bh=aXnHj21ZmRdqQHlnOGk32CfFVQqD9hJbuHRNZwNWv5Q=;
-        b=IcVquq9tiNM3mLjKsREiRFhZvIisIITSrOCJtY8jrZ2man5vXVeSyxu8YB/T9/Pvd5
-         TwM6tuIUIZ7o8EdX39mRQQDbJY0qrWby4GxuIJDmbKwp5FuJSev9y3VmojyMMkv5cGVL
-         LuHtXVLYRt+SIXS155qW6bmPBrSIKQH8rhTeF/jlSSET18x7HO4c3eTTtWEq28eWtfBn
-         IK7a2kAAHnDrW4b7PDv+bNqdGL2U+iiYynHHbRR+HbtBqwATPZiguVCpAlfz2jQ1CZl9
-         SNN35G4Q3hwl85DJiEI9cJ19x+nRunZTWWZyM6TNVtqOuiVHBgzd/LlHFJZ/rWUpEZ7f
-         0FNQ==
+        bh=DTMIeAb4199BQec+LNtvo77g56g0FGiP7OwneWm/qvY=;
+        b=r5BnuTJLumHmMsoWOjoCTn0gMd3jUUw8iI1MJypztqgE5nG9CU48UfVtN/rMXQM1VV
+         9T9wzdYfyxDvwqIKaC0Uogef32LbP8aY80dXceZCT9SmtMe947Ezwe8v/TGV3kT5cBG8
+         AvzvzQRrY5FfVf9RXlA/0HWbScgyo+BejsLtuefOVV0oD9IgY9DZWmZlM8jBHwXq8Rcq
+         z2awCSt0XRi26cQC4dhwsEtoJLVapdo2WzkklbaRzMiosk9p6zCRYbWZJ9DzXdUafiyr
+         4IjmhXbwG1+APq65/HQKdO33dC8UgGaA52aZV89jTuvhqCVNzSoWFyRAjEl832NMqUnv
+         sZPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:in-reply-to;
-        bh=aXnHj21ZmRdqQHlnOGk32CfFVQqD9hJbuHRNZwNWv5Q=;
-        b=Mt8l8ZJeK3KQ15bbhRDgFiOX1IqNwwKIEa+qMkoWuZg+5/EZ1OPjJ9Kjw1Hbset3lB
-         kgF4bbE9DYKl1X5bM9XOr/jsDzsTVepRV8aLCqd0ddU8oZPazXHphDoNVybx5d0cEDR7
-         0nPlEBkN3nvNU2N0AQGkqOv2PKmBHhyqk6jd3nfPrwkuWcBDIv957lvwPi7CEKHWpoc8
-         vdMmRy6JyPL4tgCF6wqDqMy2K+G/RJ2aYfmAqxlr6eU4dlrRI+86y+0lL1/9W4P/kZ3k
-         brvAirXCxLV759jiXFu151s5tKKCM6A/bFLgPjhbVr0eiFQqWBW//Wr+FDf3G3wh0wc6
-         +jbw==
-X-Gm-Message-State: AOAM531wrSgfRtBTdR/J1aMmAmRL7/UersL3cQs9Ue1Y0dMzC8vjUzXd
-        AhsXPD4HLPD7eQiAQqVqJN0KQHqrpnNNOfdZ
-X-Google-Smtp-Source: ABdhPJyOkeJ3jHOKbW9nrka/ScKbv790DtBRHOuaOCYkW/97v7VP3QvoMXNO6wEFWBSJwnBLP8yu3w==
-X-Received: by 2002:a62:84c7:0:b029:152:2f5b:aa8 with SMTP id k190-20020a6284c70000b02901522f5b0aa8mr1939411pfd.3.1602058870547;
-        Wed, 07 Oct 2020 01:21:10 -0700 (PDT)
+        bh=DTMIeAb4199BQec+LNtvo77g56g0FGiP7OwneWm/qvY=;
+        b=ALJbApXnff3Fugx0QPQVZWQQAWESsVdP4PEFNdKIVjcPvkXFjaSs4bojo+4LeCiwuF
+         hxlApqvP0A4GoyzqwlosKTOhx7TBoL+gtcuv9NTlCDYWTSUVlHDatPpqcjEY6fVQTZnZ
+         yTpZ4p0HCqkathhsuQcckUlEtUgReYgq8++qb1s6p54ZYrGonQFz070YuSBIUDT5Htfk
+         u5YFOQQlFCP/P9mRGLo1y8UkT4c1qsH0TbLfO9XvPgJjicz77/E2RhJLd46gMSsp38dH
+         l05VZKIWbua4giam4HVn6CcgQH02mJpaiQ06/IX8lp/PZVfWgdAdg7geP7lu2SNDwUc0
+         CQbQ==
+X-Gm-Message-State: AOAM530MD56Gp4OSC4PXksquAdHTCEWxrxUmQf9bPMi8y5ookbUh/tRl
+        ou4VjLTCiSAE2syO7q6T8/Q=
+X-Google-Smtp-Source: ABdhPJw7aCjvWh+9f5ZHF7Si16K7xRCRQhAenNZXmtVZEZmwMh2/En9ERkjHqxmnFwxsTNeJFHnCUQ==
+X-Received: by 2002:a63:4e4a:: with SMTP id o10mr391023pgl.384.1602058979301;
+        Wed, 07 Oct 2020 01:22:59 -0700 (PDT)
 Received: from adolin ([49.207.194.78])
-        by smtp.gmail.com with ESMTPSA id o134sm1874244pfg.134.2020.10.07.01.21.06
+        by smtp.gmail.com with ESMTPSA id g4sm2042335pgh.65.2020.10.07.01.22.55
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 07 Oct 2020 01:21:09 -0700 (PDT)
-Date:   Wed, 7 Oct 2020 13:51:04 +0530
+        Wed, 07 Oct 2020 01:22:58 -0700 (PDT)
+Date:   Wed, 7 Oct 2020 13:52:53 +0530
 From:   Sumera Priyadarsini <sylphrenadin@gmail.com>
 To:     Julia.Lawall@lip6.fr
 Cc:     corbet@lwn.net, Gilles.Muller@lip6.fr, nicolas.palix@imag.fr,
         michal.lkml@markovi.net, cocci@systeme.lip6.fr,
         linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-Subject: [PATCH 1/2 V3] scripts: coccicheck: Change default value for
- parallelism
-Message-ID: <c5642af8c966e1e4bbe4158ea02009f6db0af932.1602054065.git.sylphrenadin@gmail.com>
+Subject: [PATCH 2/2 V3] Documentation: Coccinelle: Modify parallelisation
+ information in docs
+Message-ID: <25adae324909605cdbe5ae88a9d60c34aeb515d7.1602054065.git.sylphrenadin@gmail.com>
 References: <cover.1602054065.git.sylphrenadin@gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
@@ -65,57 +65,35 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-By default, coccicheck utilizes all available threads to implement
-parallelisation. However, when all available threads are used,
-a decrease in performance is noted. The elapsed time is  minimum
-when at most one thread per core is used.
-
-For example, on benchmarking the semantic patch kfree.cocci for
-usb/serial using hyperfine, the outputs obtained for J=5 and J=2
-are 1.32 and 1.90 times faster than those for J=10 and J=9
-respectively for two separate runs. For the larger drivers/staging
-directory, minimium elapsed time is obtained for J=3 which is 1.86
-times faster than that for J=12. The optimal J value does not
-exceed 6 in any of the test runs. The benchmarks are run on a machine
-with 6 cores, with 2 threads per core, i.e, 12 hyperthreads in all.
-
-To improve performance, modify coccicheck to use at most only
-one thread per core by default in machines with more than 4
-hyperthreads.
+This patchset modifies coccicheck to use at most one thread per core by
+default in machines with more than 4 hyperthreads for optimal performance.
+Modify documentation in coccinelle.rst to reflect the same.
 
 Signed-off-by: Sumera Priyadarsini <sylphrenadin@gmail.com>
-
 ---
 Changes in V2:
-	- Change commit message as suggested by Julia Lawall
-Changes in V3:
-	- Use J/2 as optimal value for machines with more
-	than 8 hyperthreads as well.
-Changes in V4:
-	- Use J as optimal value for machines with less than or
-	equal to 4 hyperthreads.
+	Update scripts/coccicheck to use all available threads
+	in machines with upto 4 hyperthreads.
 ---
- scripts/coccicheck | 5 +++++
- 1 file changed, 5 insertions(+)
+ Documentation/dev-tools/coccinelle.rst | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/scripts/coccicheck b/scripts/coccicheck
-index e04d328210ac..bafc55141a73 100755
---- a/scripts/coccicheck
-+++ b/scripts/coccicheck
-@@ -75,8 +75,13 @@ else
-         OPTIONS="--dir $KBUILD_EXTMOD $COCCIINCLUDE"
-     fi
+diff --git a/Documentation/dev-tools/coccinelle.rst b/Documentation/dev-tools/coccinelle.rst
+index 74c5e6aeeff5..6fdc462689d5 100644
+--- a/Documentation/dev-tools/coccinelle.rst
++++ b/Documentation/dev-tools/coccinelle.rst
+@@ -130,8 +130,9 @@ To enable verbose messages set the V= variable, for example::
+ Coccinelle parallelization
+ --------------------------
  
-+    # Use only one thread per core by default if hyperthreading is enabled
-+    THREADS_PER_CORE=$(lscpu | grep "Thread(s) per core: " | tr -cd "[:digit:]")
-     if [ -z "$J" ]; then
-         NPROC=$(getconf _NPROCESSORS_ONLN)
-+	if [ $THREADS_PER_CORE -gt 1 -a $NPROC -gt 4 ] ; then
-+		NPROC=$((NPROC/2))
-+	fi
-     else
-         NPROC="$J"
-     fi
+-By default, coccicheck tries to run as parallel as possible. To change
+-the parallelism, set the J= variable. For example, to run across 4 CPUs::
++By default, coccicheck uses at most 1 thread per core in a machine with more
++than 4 hyperthreads. In a machine with upto 4 threads, all threads are used.
++To change the parallelism, set the J= variable. For example, to run across 4 CPUs::
+ 
+    make coccicheck MODE=report J=4
+ 
 -- 
 2.25.1
 
