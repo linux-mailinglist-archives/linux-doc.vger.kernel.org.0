@@ -2,84 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C4576287C80
-	for <lists+linux-doc@lfdr.de>; Thu,  8 Oct 2020 21:32:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E2402287DC4
+	for <lists+linux-doc@lfdr.de>; Thu,  8 Oct 2020 23:18:29 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725857AbgJHTce (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 8 Oct 2020 15:32:34 -0400
-Received: from hqnvemgate25.nvidia.com ([216.228.121.64]:13437 "EHLO
-        hqnvemgate25.nvidia.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725616AbgJHTce (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 8 Oct 2020 15:32:34 -0400
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
-        id <B5f7f68440000>; Thu, 08 Oct 2020 12:28:04 -0700
-Received: from [10.2.85.86] (172.20.13.39) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 8 Oct
- 2020 19:28:22 +0000
-Subject: Re: [PATCH] Documentation: filesystems: better locations for
- sysfs-pci, sysfs-tagging
-To:     Jonathan Corbet <corbet@lwn.net>
-CC:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Jan Kara <jack@suse.cz>, David Sterba <dsterba@suse.com>,
-        <linux-doc@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>
-References: <20201007233151.490953-1-jhubbard@nvidia.com>
- <20201008100427.39ca3c1f@lwn.net>
-From:   John Hubbard <jhubbard@nvidia.com>
-Message-ID: <d91a1088-641c-07e1-4065-bbd8ad79332c@nvidia.com>
-Date:   Thu, 8 Oct 2020 12:28:21 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+        id S1729829AbgJHVS2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 8 Oct 2020 17:18:28 -0400
+Received: from [58.87.100.240] ([58.87.100.240]:45364 "EHLO
+        mail.hebei-kuixing.com" rhost-flags-FAIL-FAIL-OK-OK)
+        by vger.kernel.org with ESMTP id S1726766AbgJHVS1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 8 Oct 2020 17:18:27 -0400
+X-Greylist: delayed 668 seconds by postgrey-1.27 at vger.kernel.org; Thu, 08 Oct 2020 17:18:22 EDT
+Received: from localhost (unknown [127.0.0.1])
+        by mail.hebei-kuixing.com (Postfix) with ESMTP id AC1A460E64;
+        Thu,  8 Oct 2020 21:07:07 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at hebei-kuixing.com
+Received: from mail.hebei-kuixing.com ([127.0.0.1])
+        by localhost (mail.hebei-kuixing.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id 2baZvT9QzwCy; Fri,  9 Oct 2020 05:07:06 +0800 (CST)
+Received: from User (unknown [185.248.12.71])
+        by mail.hebei-kuixing.com (Postfix) with ESMTPA id 0E9CB60E6A;
+        Fri,  9 Oct 2020 05:06:50 +0800 (CST)
+Reply-To: <kim.leang2011@yahoo.com>
+From:   " Kim Leang" <sales@hebei-kuixing.com>
+Subject: Greeting!
+Date:   Fri, 9 Oct 2020 00:07:05 +0300
 MIME-Version: 1.0
-In-Reply-To: <20201008100427.39ca3c1f@lwn.net>
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Language: en-US
+Content-Type: text/plain;
+        charset="Windows-1251"
 Content-Transfer-Encoding: 7bit
-X-Originating-IP: [172.20.13.39]
-X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
- HQMAIL107.nvidia.com (172.20.187.13)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
-        t=1602185284; bh=SDS6BGkPbeIhE1YR1pvqQexHVFA/bCFdW7c+ZbpQHZc=;
-        h=Subject:To:CC:References:From:Message-ID:Date:User-Agent:
-         MIME-Version:In-Reply-To:Content-Type:Content-Language:
-         Content-Transfer-Encoding:X-Originating-IP:X-ClientProxiedBy;
-        b=VhSeSrRrNiRttdO08KwCiAM8uK6vaaI2YouT1s+XQOJGBL2Yp5cx2noXhZe8QHRpM
-         RwY9KvPRSwwrxcEaNTokxVj7unRI3foMuYEKljGo2v1CnRMYeZmF2EEoMQQ4ifNqGl
-         oCGdHzoKe7kGbpPkgTxcjs2KOLmgzvkNoXta8Taig2jCQndhExqc5WM+7vM++rcbJa
-         Gj4nKgBebdxSF13ClIHFyV4JLzh83uYBLPcS+8Nm6mupmSvwseb/EvnwruzcVtZV/S
-         AvkfsDX9YYfENIUsxS5K7rJkqo3mPYuDKAt7G9CjsyZ7z7QXBvwEtCoswS6qnlz57p
-         5CVmUbc31bi3g==
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2600.0000
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+Message-Id: <20201008210707.AC1A460E64@mail.hebei-kuixing.com>
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/8/20 9:04 AM, Jonathan Corbet wrote:
-> On Wed, 7 Oct 2020 16:31:51 -0700
-> John Hubbard <jhubbard@nvidia.com> wrote:
-> 
->> sysfs-pci and sysfs-tagging were mis-filed: their locations with
->> Documentation/ implied that they were related to file systems. Actually,
->> each topic is about a very specific *use* of sysfs, and sysfs *happens*
->> to be a (virtual) filesystem, so this is not really the right place.
->>
->> It's jarring to be reading about filesystems in general and then come
->> across these specific details about PCI, and tagging...and then back to
->> general filesystems again.
->>
->> Move sysfs-pci and sysfs-tagging to a location under the sysfs topic.
->>
->> Signed-off-by: John Hubbard <jhubbard@nvidia.com>
-> 
-> I see why you want to do this, but I have to wonder if moving them out of
-> Documentation/filesystems entirely might not be a better approach.
-> sysfs-pci.rst might better belong in the admin guide or under PCI/, while
-> sysfs-tagging.rst could go under networking/.
-> 
-> Make sense?
-> 
+Greeting!
 
-Absolutely, I'll post a v2 that does it that way.
+I am contacting you to receive and share with me an abandoned fund ( $21,537.000.00 ) left in our bank by a deceased customer. I was going through the Internet search when I found your email address. My name is Mr. Kim Leang.
 
-thanks,
--- 
-John Hubbard
-NVIDIA
+I want to utilize this opportunity and make use of this fund if I should present your name to the bank to stand as his business associate/ trustee for the fund to be released to you via Visa card for easy withdrawals in any VISA ATM machine anywhere in the World.
+
+The bank will also give you international online transfer options. With these you can transfer the funds without any risk.
+
+Should you be interested in working with me in this project? Please reply back and let's benefit from this golden opportunity.You are my first contact. I shall wait a few days and if I do not hear from you, I shall look for another person.
+
+Thanks and have a nice day,
+Mr. Kim Leang.
