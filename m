@@ -2,153 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 75F3D2894A3
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Oct 2020 21:54:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F3C91289985
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Oct 2020 22:14:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389651AbgJITye (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Oct 2020 15:54:34 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47436 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2391315AbgJITyV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Oct 2020 15:54:21 -0400
-Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com [IPv6:2607:f8b0:4864:20::544])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2AAEAC0613D9
-        for <linux-doc@vger.kernel.org>; Fri,  9 Oct 2020 12:54:19 -0700 (PDT)
-Received: by mail-pg1-x544.google.com with SMTP id 34so8021379pgo.13
-        for <linux-doc@vger.kernel.org>; Fri, 09 Oct 2020 12:54:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=JMYL2FCSaXkjGdwauYSRLvBY1B8xfDKXMqCzfo1TOs8=;
-        b=ZCPdEfEStPdr8MBrgInFcmzphM88HeVkiLW5HeK18RfWZaUwWiD8BL6dyzwKs/1dnc
-         OvyIRwqQEbyYL8lhOTaDweFLQpNL6qYjO+KCfCOzwMLQR7sRdWc8JlusCWKLJbLLqBrG
-         AzMwws/+ykogo4TXKjb/cxA2ap5hUNDuUtxA4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=JMYL2FCSaXkjGdwauYSRLvBY1B8xfDKXMqCzfo1TOs8=;
-        b=CK9Bds6xLtFbKLROP6pWCmZCCcrVGK+GRSJa5CHHusnV0zLkvkuJ8lxkqdtsPPTHMy
-         CkR6fk/bcrszJ9Q9865CRozPkgsSL0HmlcBJmw7/rHO+XJKy3++N4hO5vkewJptpP47U
-         l3b65LJcWvaAwi4VyhXZpLuAGNWUKIYcEG2sGz/knbWWlZyZF15dqno/HOVe0hzAD2z9
-         Dg9DTdd5Dq/W3GLYUe9w2UCgRyh+IKi0Y9rF9hsmSJE28ql9KMU68TN+sqeZFL1foJvd
-         b8HKjxD1WHSi3XQAC4dI3mNVF8ZFqSnldgDDknpSVwL+GSqmEoYVAm3O51nlhUmRCIxa
-         YTYw==
-X-Gm-Message-State: AOAM532bU2L9pwQy+d8Hr7mp+2nbts1VuF7s3jj1+at7vwnfyDPAK/Qu
-        ME8ADikiwi8T7sEVkBkaNYT8OA==
-X-Google-Smtp-Source: ABdhPJy1JWcE3giDZXo2NocSb/TmztEuw95HJz8DBEL5swgLDRHJMERTIzgeXrC7UsA6aCc8bZxDOQ==
-X-Received: by 2002:a17:90a:1596:: with SMTP id m22mr6456795pja.189.1602273258702;
-        Fri, 09 Oct 2020 12:54:18 -0700 (PDT)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id 8sm11767961pfn.54.2020.10.09.12.54.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 09 Oct 2020 12:54:16 -0700 (PDT)
-From:   Kees Cook <keescook@chromium.org>
-To:     Andrew Morton <akpm@linux-foundation.org>
-Cc:     Kees Cook <keescook@chromium.org>, Marco Elver <elver@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Christoph Lameter <cl@linux.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        David Rientjes <rientjes@google.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        Vlastimil Babka <vbabka@suse.cz>, Roman Gushchin <guro@fb.com>,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-mm@kvack.org
-Subject: [PATCH v2 3/3] mm/slub: Actually fix freelist pointer vs redzoning
-Date:   Fri,  9 Oct 2020 12:54:11 -0700
-Message-Id: <20201009195411.4018141-4-keescook@chromium.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201009195411.4018141-1-keescook@chromium.org>
-References: <20201009195411.4018141-1-keescook@chromium.org>
+        id S2387720AbgJIUO0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Oct 2020 16:14:26 -0400
+Received: from mga05.intel.com ([192.55.52.43]:58066 "EHLO mga05.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726427AbgJIUO0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 9 Oct 2020 16:14:26 -0400
+IronPort-SDR: bsY2K8rwrGA3OXjmhN7svQU4qo1suUhOGPQza7mhMWH7Or4xQoaZHdovQMgWSK2vxAjFTZOJvJ
+ seA6hp1/VDAQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="250228369"
+X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
+   d="scan'208";a="250228369"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 13:14:24 -0700
+IronPort-SDR: IXEGMVyDlvLok8NfI+TgUT2zaqZMMuibHZuc/fyZxHw/Tz+YeeNyn/uSHL8eXxwdNMNFzoQQ7K
+ WzMGn3a/SXLg==
+X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
+   d="scan'208";a="529062329"
+Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
+  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 13:14:24 -0700
+From:   ira.weiny@intel.com
+To:     Jonathan Corbet <corbet@lwn.net>,
+        David Howells <dhowells@redhat.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        James Bottomley <jejb@linux.ibm.com>,
+        Mike Rapoport <rppt@kernel.org>
+Cc:     Ira Weiny <ira.weiny@intel.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Fenghua Yu <fenghua.yu@intel.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-integrity@vger.kernel.org (open list:KEYS-TRUSTED),
+        keyrings@vger.kernel.org (open list:KEYS-TRUSTED),
+        linux-security-module@vger.kernel.org (open list:SECURITY SUBSYSTEM)
+Subject: [PATCH RFC PKS/Trusted keys 0/2] trusted keys: Add PKS protection to trusted keys
+Date:   Fri,  9 Oct 2020 13:14:08 -0700
+Message-Id: <20201009201410.3209180-1-ira.weiny@intel.com>
+X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-It turns out that SLUB redzoning ("slub_debug=Z") checks from
-s->object_size rather than from s->inuse (which is normally bumped to
-make room for the freelist pointer), so a cache created with an object
-size less than 24 would have their freelist pointer written beyond
-s->object_size, causing the redzone to corrupt the freelist pointer.
-This was very visible with "slub_debug=ZF":
+From: Ira Weiny <ira.weiny@intel.com>
 
-BUG test (Tainted: G    B            ): Right Redzone overwritten
------------------------------------------------------------------------------
+Leaking a trusted key would be a critical security issue.  PKS provides an
+additional mechanism to restrict access to the memory holding trusted keys.
 
-INFO: 0xffff957ead1c05de-0xffff957ead1c05df @offset=1502. First byte 0x1a instead of 0xbb
-INFO: Slab 0xffffef3950b47000 objects=170 used=170 fp=0x0000000000000000 flags=0x8000000000000200
-INFO: Object 0xffff957ead1c05d8 @offset=1496 fp=0xffff957ead1c0620
+This series depends on the core patches and PMEM PKS API change submitted
+separately.
 
-Redzone  (____ptrval____): bb bb bb bb bb bb bb bb               ........
-Object   (____ptrval____): 00 00 00 00 00 f6 f4 a5               ........
-Redzone  (____ptrval____): 40 1d e8 1a aa                        @....
-Padding  (____ptrval____): 00 00 00 00 00 00 00 00               ........
+	Core PKS support:
+	https://lore.kernel.org/lkml/20201009194258.3207172-1-ira.weiny@intel.com/
 
-Adjust the offset to stay within s->object_size.
+	PKS/PMEM support (includes global API change):
+	https://lore.kernel.org/lkml/20201009195033.3208459-1-ira.weiny@intel.com/
 
-Reported-by: Marco Elver <elver@google.com>
-Link: https://lore.kernel.org/linux-mm/20200807160627.GA1420741@elver.google.com/
-Fixes: 89b83f282d8b (slub: avoid redzone when choosing freepointer location)
-Tested-by: Marco Elver <elver@google.com>
-Link: https://lore.kernel.org/lkml/CANpmjNOwZ5VpKQn+SYWovTkFB4VsT-RPwyENBmaK0dLcpqStkA@mail.gmail.com
-Signed-off-by: Kees Cook <keescook@chromium.org>
----
- mm/slub.c | 14 +++-----------
- 1 file changed, 3 insertions(+), 11 deletions(-)
+And contained in the git tree here:
 
-diff --git a/mm/slub.c b/mm/slub.c
-index 752fad36522c..6f115e56c5d0 100644
---- a/mm/slub.c
-+++ b/mm/slub.c
-@@ -3637,7 +3637,6 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- {
- 	slab_flags_t flags = s->flags;
- 	unsigned int size = s->object_size;
--	unsigned int freepointer_area;
- 	unsigned int order;
- 
- 	/*
-@@ -3646,13 +3645,6 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- 	 * the possible location of the free pointer.
- 	 */
- 	size = ALIGN(size, sizeof(void *));
--	/*
--	 * This is the area of the object where a freepointer can be
--	 * safely written. If redzoning adds more to the inuse size, we
--	 * can't use that portion for writing the freepointer, so
--	 * s->offset must be limited within this for the general case.
--	 */
--	freepointer_area = size;
- 
- #ifdef CONFIG_SLUB_DEBUG
- 	/*
-@@ -3678,7 +3670,7 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- 
- 	/*
- 	 * With that we have determined the number of bytes in actual use
--	 * by the object. This is the potential offset to the free pointer.
-+	 * by the object and redzoning.
- 	 */
- 	s->inuse = size;
- 
-@@ -3701,13 +3693,13 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- 		 */
- 		s->offset = size;
- 		size += sizeof(void *);
--	} else if (freepointer_area > sizeof(void *)) {
-+	} else {
- 		/*
- 		 * Store freelist pointer near middle of object to keep
- 		 * it away from the edges of the object to avoid small
- 		 * sized over/underflows from neighboring allocations.
- 		 */
--		s->offset = ALIGN(freepointer_area / 2, sizeof(void *));
-+		s->offset = ALIGN_DOWN(s->object_size / 2, sizeof(void *));
- 	}
- 
- #ifdef CONFIG_SLUB_DEBUG
+	https://github.com/weiny2/linux-kernel/tree/pks-rfc-v3
+
+
+Provide a skeleton of a new allocation call which provides a PKS restricted
+mapping of the trusted key memory.  Allocate a PKS domain (pkey), create a
+mapping with that key, and enable/disable access as needed to that mapping.
+
+The issue with this approach is that it fails to protect the direct mapping.
+The current ideas to protect the direct mapping are:
+
+	1) Do nothing.
+	2) Allow the direct map to be fragmented through a set_memory_pks() like call.
+	3) Piggy back on secretmem's solution to map out some direct map memory
+	   then overlay that with PKS.
+	4) Integrate PKS into secretmem and use this enhanced secretmem for
+	   trusted keys.
+
+Doing nothing is not really providing the level of security we need for this
+use case.
+
+Allowing the direct map to fragment may be ok as trusted keys don't use a lot
+of pages and are usually allocated early in the system boot but that is not
+always the case.  In addition the current code could be made
+to not allocating an entire page for each key to limit the number of pages, and
+therfore the fragmentation, needed.
+
+The use of secretmem is complicated by its newness but whatever solution is
+used there should be used here.  And probalby through some nice interface.
+
+The final thought is to determine if a 'general allocator' for PKS protected
+memory should be developed at all.  The current implementation is limited in
+key space and so a higher bar to entry may be a good thing.  On the other hand,
+dealing with mappings for the average driver writer is complicated and doing
+this wrong could result in a false sense of 'security'.
+
+
+Elena Reshetova (1):
+  keys/trusted: protect trusted keys using PKS
+
+Ira Weiny (1):
+  vmalloc: Add vmalloc_pks() call
+
+ Documentation/core-api/protection-keys.rst |  4 +
+ include/keys/trusted-type.h                |  2 +-
+ include/keys/trusted_tpm.h                 | 15 ++++
+ include/linux/vmalloc.h                    |  1 +
+ mm/vmalloc.c                               | 28 +++++++
+ security/keys/encrypted-keys/encrypted.c   | 38 ++++++---
+ security/keys/trusted-keys/trusted_tpm1.c  | 90 +++++++++++++++++++---
+ security/keys/trusted-keys/trusted_tpm2.c  |  9 +++
+ 8 files changed, 164 insertions(+), 23 deletions(-)
+
 -- 
-2.25.1
+2.28.0.rc0.12.gb6a658bd00c9
 
