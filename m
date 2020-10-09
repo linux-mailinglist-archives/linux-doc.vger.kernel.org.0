@@ -2,121 +2,134 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CFB3A288247
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Oct 2020 08:36:18 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 89A34288328
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Oct 2020 09:01:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732147AbgJIGf6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Oct 2020 02:35:58 -0400
-Received: from Galois.linutronix.de ([193.142.43.55]:55748 "EHLO
-        galois.linutronix.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1732105AbgJIGfu (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Oct 2020 02:35:50 -0400
-Date:   Fri, 09 Oct 2020 06:35:47 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1602225347;
-        h=from:from:sender:sender:reply-to:reply-to:subject:subject:date:date:
-         message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-         content-type:content-type:  content-transfer-encoding:content-transfer-encoding;
-        bh=DimqHnIvb5MmJ0JVNjOGvT+nPykSXf2+BDOZarmElyE=;
-        b=rrboBbczeiazReluupF0Rk9QrFTQm3lG20xdmi1GTN/LCKRGZ0cYbuifWppINmZxGABjdW
-        ODR4F7G2+elzqgm4KdWKeBpg0WGTEL99UPujQbjpqxPRfVM4yxa46cBImjc/28TvKpdfpP
-        wW7KtVdhIC7nTCqM4i1nPV/HXS7tlCpYn6TwTOzsY4r1shkIebFHy/2FFffUurRRL4xOla
-        ZRw11l7mzSdb8oLDU32fyWuJnIYFr1C5TFA7TY4f966bS1m2aGv/8Czs31isUZ/mfTaW7m
-        ijEsqwU+ZCSrkjTQQrnKoOvcVuW7AUpxLxQM8+9xbuJPX9Xou7FgcYw2W3IOWg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1602225347;
-        h=from:from:sender:sender:reply-to:reply-to:subject:subject:date:date:
-         message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-         content-type:content-type:  content-transfer-encoding:content-transfer-encoding;
-        bh=DimqHnIvb5MmJ0JVNjOGvT+nPykSXf2+BDOZarmElyE=;
-        b=QOYmADnCsoSsUmGHyJtcV9HxqoNG4JarETVD+hz8QPEgPpwjnkg83PH+xBZlEdxEdJqCkv
-        dCdXPq6CaoIgYpDg==
-From:   "tip-bot2 for Paul E. McKenney" <tip-bot2@linutronix.de>
-Sender: tip-bot2@linutronix.de
-Reply-to: linux-kernel@vger.kernel.org
-To:     linux-tip-commits@vger.kernel.org
-Subject: [tip: core/rcu] lib: Add backtrace_idle parameter to force backtrace
- of idle CPUs
-Cc:     "Paul E. McKenney" <paulmck@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>,
-        <linux-doc@vger.kernel.org>, x86 <x86@kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>
+        id S1729045AbgJIHBa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Oct 2020 03:01:30 -0400
+Received: from hqnvemgate25.nvidia.com ([216.228.121.64]:19996 "EHLO
+        hqnvemgate25.nvidia.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725908AbgJIHBa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Oct 2020 03:01:30 -0400
+Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+        id <B5f800a910008>; Fri, 09 Oct 2020 00:00:33 -0700
+Received: from HQMAIL109.nvidia.com (172.20.187.15) by HQMAIL109.nvidia.com
+ (172.20.187.15) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Fri, 9 Oct
+ 2020 07:01:30 +0000
+Received: from sandstorm.nvidia.com (172.20.13.39) by mail.nvidia.com
+ (172.20.187.15) with Microsoft SMTP Server id 15.0.1473.3 via Frontend
+ Transport; Fri, 9 Oct 2020 07:01:30 +0000
+From:   John Hubbard <jhubbard@nvidia.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+CC:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Jan Kara <jack@suse.cz>, David Sterba <dsterba@suse.com>,
+        <linux-doc@vger.kernel.org>, LKML <linux-kernel@vger.kernel.org>,
+        John Hubbard <jhubbard@nvidia.com>
+Subject: [PATCH v2] Documentation: better locations for sysfs-pci, sysfs-tagging
+Date:   Fri, 9 Oct 2020 00:01:28 -0700
+Message-ID: <20201009070128.118639-1-jhubbard@nvidia.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Message-ID: <160222534715.7002.9036613961207183639.tip-bot2@tip-bot2>
-Robot-ID: <tip-bot2.linutronix.de>
-Robot-Unsubscribe: Contact <mailto:tglx@linutronix.de> to get blacklisted from these emails
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
+X-NVConfidentiality: public
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+        t=1602226833; bh=IKsshG2P8w9TQtkug7AHOInsxKiFv+rqEkEZux0T+u0=;
+        h=From:To:CC:Subject:Date:Message-ID:X-Mailer:MIME-Version:
+         X-NVConfidentiality:Content-Transfer-Encoding:Content-Type;
+        b=c7da8hc+S4k3uArBydiGgk0PrAt12ww3gbw8ireAydgXBrDcw2NTLZ7U4ypTH4ERF
+         YePSgwGCs2xa9ifDRPQjhOY3XoYPIlA2tfuQzaHgZqgBOwCSq3ud4MfdL3WpreHCZY
+         djw9QR1sCahqRWbTIXf1IyWg2um4LRY4Y2mVqCY3RxcfELuyY3vkV3WWyEK8dYleGA
+         bv6Z5hAWDKIwslXXnYqR0TJ/5blvTRfw2100FcNamp1/9eGQudEEc7nkZX4yxKj9F5
+         ZWTWqWFI/RtS8uz5VDGZO9KJsg9qpbU+9bHxfN8B3kYfYsus3ekrjYinPRNbx+DgNF
+         eF1ECoMbiiOpA==
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The following commit has been merged into the core/rcu branch of tip:
+sysfs-pci and sysfs-tagging were mis-filed: their locations within
+Documentation/ implied that they were related to file systems. Actually,
+each topic is about a very specific *use* of sysfs, and sysfs *happens*
+to be a (virtual) filesystem, so this is not really the right place.
 
-Commit-ID:     160c7ba34605d9b59ee406a1b4a61b0f942b1ae9
-Gitweb:        https://git.kernel.org/tip/160c7ba34605d9b59ee406a1b4a61b0f942b1ae9
-Author:        Paul E. McKenney <paulmck@kernel.org>
-AuthorDate:    Wed, 08 Jul 2020 16:25:43 -07:00
-Committer:     Paul E. McKenney <paulmck@kernel.org>
-CommitterDate: Mon, 24 Aug 2020 14:24:25 -07:00
+It's jarring to be reading about filesystems in general and then come
+across these specific details about PCI, and tagging...and then back to
+general filesystems again.
 
-lib: Add backtrace_idle parameter to force backtrace of idle CPUs
+Move sysfs-pci to PCI, and move sysfs-tagging to networking. (Thanks to
+Jonathan Corbet for coming up with the final locations.)
 
-Currently, the nmi_cpu_backtrace() declines to produce backtraces for
-idle CPUs.  This is a good choice in the common case in which problems are
-caused only by non-idle CPUs.  However, there are occasionally situations
-in which idle CPUs are helping to cause problems.  This commit therefore
-adds an nmi_backtrace.backtrace_idle kernel boot parameter that causes
-nmi_cpu_backtrace() to dump stacks even of idle CPUs.
-
-Signed-off-by: Paul E. McKenney <paulmck@kernel.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Thomas Gleixner <tglx@linutronix.de>
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: <linux-doc@vger.kernel.org>
+Signed-off-by: John Hubbard <jhubbard@nvidia.com>
 ---
- Documentation/admin-guide/kernel-parameters.txt | 4 ++++
- lib/nmi_backtrace.c                             | 6 +++++-
- 2 files changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index bdc1f33..5e6d191 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -3073,6 +3073,10 @@
- 			and gids from such clients.  This is intended to ease
- 			migration from NFSv2/v3.
- 
-+	nmi_backtrace.backtrace_idle [KNL]
-+			Dump stacks even of idle CPUs in response to an
-+			NMI stack-backtrace request.
-+
- 	nmi_debug=	[KNL,SH] Specify one or more actions to take
- 			when a NMI is triggered.
- 			Format: [state][,regs][,debounce][,die]
-diff --git a/lib/nmi_backtrace.c b/lib/nmi_backtrace.c
-index 15ca78e..8abe187 100644
---- a/lib/nmi_backtrace.c
-+++ b/lib/nmi_backtrace.c
-@@ -85,12 +85,16 @@ void nmi_trigger_cpumask_backtrace(const cpumask_t *mask,
- 	put_cpu();
- }
- 
-+// Dump stacks even for idle CPUs.
-+static bool backtrace_idle;
-+module_param(backtrace_idle, bool, 0644);
-+
- bool nmi_cpu_backtrace(struct pt_regs *regs)
- {
- 	int cpu = smp_processor_id();
- 
- 	if (cpumask_test_cpu(cpu, to_cpumask(backtrace_mask))) {
--		if (regs && cpu_in_idle(instruction_pointer(regs))) {
-+		if (!READ_ONCE(backtrace_idle) && regs && cpu_in_idle(instruction_pointer(regs))) {
- 			pr_warn("NMI backtrace for cpu %d skipped: idling at %pS\n",
- 				cpu, (void *)instruction_pointer(regs));
- 		} else {
+Changes since v1: moved sysfs-pci to PCI, and sysfs-tagging to
+networking, and poked around in the generated HTML via Firefox.
+It looks like the right place now.
+
+thanks,
+John Hubbard
+NVIDIA
+
+
+ Documentation/PCI/index.rst                                 | 1 +
+ Documentation/{filesystems =3D> PCI}/sysfs-pci.rst            | 0
+ Documentation/filesystems/index.rst                         | 2 --
+ Documentation/networking/index.rst                          | 1 +
+ Documentation/{filesystems =3D> networking}/sysfs-tagging.rst | 0
+ 5 files changed, 2 insertions(+), 2 deletions(-)
+ rename Documentation/{filesystems =3D> PCI}/sysfs-pci.rst (100%)
+ rename Documentation/{filesystems =3D> networking}/sysfs-tagging.rst (100%=
+)
+
+diff --git a/Documentation/PCI/index.rst b/Documentation/PCI/index.rst
+index 8f66feaafd4f..c17c87af1968 100644
+--- a/Documentation/PCI/index.rst
++++ b/Documentation/PCI/index.rst
+@@ -12,6 +12,7 @@ Linux PCI Bus Subsystem
+    pciebus-howto
+    pci-iov-howto
+    msi-howto
++   sysfs-pci
+    acpi-info
+    pci-error-recovery
+    pcieaer-howto
+diff --git a/Documentation/filesystems/sysfs-pci.rst b/Documentation/PCI/sy=
+sfs-pci.rst
+similarity index 100%
+rename from Documentation/filesystems/sysfs-pci.rst
+rename to Documentation/PCI/sysfs-pci.rst
+diff --git a/Documentation/filesystems/index.rst b/Documentation/filesystem=
+s/index.rst
+index 4c536e66dc4c..98f59a864242 100644
+--- a/Documentation/filesystems/index.rst
++++ b/Documentation/filesystems/index.rst
+@@ -34,8 +34,6 @@ algorithms work.
+    quota
+    seq_file
+    sharedsubtree
+-   sysfs-pci
+-   sysfs-tagging
+=20
+    automount-support
+=20
+diff --git a/Documentation/networking/index.rst b/Documentation/networking/=
+index.rst
+index c29496fff81c..611e4b130c1e 100644
+--- a/Documentation/networking/index.rst
++++ b/Documentation/networking/index.rst
+@@ -95,6 +95,7 @@ Contents:
+    seg6-sysctl
+    strparser
+    switchdev
++   sysfs-tagging
+    tc-actions-env-rules
+    tcp-thin
+    team
+diff --git a/Documentation/filesystems/sysfs-tagging.rst b/Documentation/ne=
+tworking/sysfs-tagging.rst
+similarity index 100%
+rename from Documentation/filesystems/sysfs-tagging.rst
+rename to Documentation/networking/sysfs-tagging.rst
+--=20
+2.28.0
+
