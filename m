@@ -2,122 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B40002894C6
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Oct 2020 21:55:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id E4EC32894A4
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Oct 2020 21:54:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2391343AbgJITys (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Oct 2020 15:54:48 -0400
-Received: from mga12.intel.com ([192.55.52.136]:29419 "EHLO mga12.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2391275AbgJITyL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 9 Oct 2020 15:54:11 -0400
-IronPort-SDR: q1PZMJUmKFKlQ0BClGvwyzOjNwzGSo5B944T29UwXjVfp2YopDniYa7pTU6UFtwNvsti9h6T08
- dfV2TT7Nz02w==
-X-IronPort-AV: E=McAfee;i="6000,8403,9769"; a="144851137"
-X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="144851137"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:54:10 -0700
-IronPort-SDR: LoljxrxdEbdUiebRGt6guGtjo6SPfpWGHMJuLgTgYB7BeDU8CJtiGau7DzbQyZ+Y5gpHVnCtT5
- urTwCEpflSRg==
-X-IronPort-AV: E=Sophos;i="5.77,355,1596524400"; 
-   d="scan'208";a="343972696"
-Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by fmsmga004-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Oct 2020 12:54:09 -0700
-From:   ira.weiny@intel.com
-To:     Andrew Morton <akpm@linux-foundation.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>
-Cc:     Ira Weiny <ira.weiny@intel.com>, x86@kernel.org,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Fenghua Yu <fenghua.yu@intel.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-nvdimm@lists.01.org,
-        linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
-        linux-kselftest@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-        kvm@vger.kernel.org, netdev@vger.kernel.org, bpf@vger.kernel.org,
-        kexec@lists.infradead.org, linux-bcache@vger.kernel.org,
-        linux-mtd@lists.infradead.org, devel@driverdev.osuosl.org,
-        linux-efi@vger.kernel.org, linux-mmc@vger.kernel.org,
-        linux-scsi@vger.kernel.org, target-devel@vger.kernel.org,
-        linux-nfs@vger.kernel.org, ceph-devel@vger.kernel.org,
-        linux-ext4@vger.kernel.org, linux-aio@kvack.org,
-        io-uring@vger.kernel.org, linux-erofs@lists.ozlabs.org,
-        linux-um@lists.infradead.org, linux-ntfs-dev@lists.sourceforge.net,
-        reiserfs-devel@vger.kernel.org,
-        linux-f2fs-devel@lists.sourceforge.net,
-        linux-nilfs@vger.kernel.org, cluster-devel@redhat.com,
-        ecryptfs@vger.kernel.org, linux-cifs@vger.kernel.org,
-        linux-btrfs@vger.kernel.org, linux-afs@lists.infradead.org,
-        linux-rdma@vger.kernel.org, amd-gfx@lists.freedesktop.org,
-        dri-devel@lists.freedesktop.org, intel-gfx@lists.freedesktop.org,
-        drbd-dev@lists.linbit.com, linux-block@vger.kernel.org,
-        xen-devel@lists.xenproject.org, linux-cachefs@redhat.com,
-        samba-technical@lists.samba.org, intel-wired-lan@lists.osuosl.org
-Subject: [PATCH RFC PKS/PMEM 58/58] [dax|pmem]: Enable stray access protection
-Date:   Fri,  9 Oct 2020 12:50:33 -0700
-Message-Id: <20201009195033.3208459-59-ira.weiny@intel.com>
-X-Mailer: git-send-email 2.28.0.rc0.12.gb6a658bd00c9
-In-Reply-To: <20201009195033.3208459-1-ira.weiny@intel.com>
-References: <20201009195033.3208459-1-ira.weiny@intel.com>
+        id S2391035AbgJITyf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Oct 2020 15:54:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47408 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2391312AbgJITyS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 9 Oct 2020 15:54:18 -0400
+Received: from mail-pl1-x642.google.com (mail-pl1-x642.google.com [IPv6:2607:f8b0:4864:20::642])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E40F9C0613D2
+        for <linux-doc@vger.kernel.org>; Fri,  9 Oct 2020 12:54:17 -0700 (PDT)
+Received: by mail-pl1-x642.google.com with SMTP id w21so2197193plq.3
+        for <linux-doc@vger.kernel.org>; Fri, 09 Oct 2020 12:54:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=t2TuK5ejrS4eO7yBYGxlh4AfvTTT9eubX9M0NFaNHUw=;
+        b=WmBTqbBHc/fLbnYNSF9b2ZcYqm01OyvGBVCdOMlOlplf+K84OlLZT78WwFWOagQuLL
+         tDy2L8MOtypox20wQcgMiCc7YNVSLgaLbl/v5wT3DFsEBCQ5+QAukKZ+evprA3Lh/MCc
+         glirkHKlR1Dy+Nksiwkc5zH0AJjLGUHWF+KuQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=t2TuK5ejrS4eO7yBYGxlh4AfvTTT9eubX9M0NFaNHUw=;
+        b=nNZFwD6I7YnrgaiBEHmXD4lXv4DDf9e0vVnVL5hXld72JplaomX+KHsUuMoWfOE41r
+         ObfBPV4pXtWl+9wx+ZpzCFYdl1Hw9x+irXTyeUG/NHFqD+GswY1uGjdSPnsz//NEuktv
+         KdK0cfWHFxehmQRFu0CRNiETmOPDGbgIlBbXNc5IfJBP3yhXC1lZKspPYwO5bwBCtpz3
+         EkgQopXjPoxC4eXOEmwc6SsnGRfqctLef5IaEoqH4hEzfSqMwIOYRiMZtULq0dpbHpmM
+         llv9+7HUNUZNk2nGV6gm6JSen8c5AAoAXz2B5X5X8OwYdwUMkMR8Fpb1p9+m7daDW0q5
+         X5mA==
+X-Gm-Message-State: AOAM533J5JC70XkQdO6Ippbm4P2VYF+20jPybvzdieehYcrFh+WFljm2
+        F71bzwRtgaDO06YmVLHDQoQ4zA==
+X-Google-Smtp-Source: ABdhPJylPL8PSKzfsb/31DQv1ffR9H5CiGwEbjOyZ1DOxnKQzkhmw2oI6Kjc3x/3NEhDPJExrT73pQ==
+X-Received: by 2002:a17:902:6545:b029:d3:d1fc:ff28 with SMTP id d5-20020a1709026545b02900d3d1fcff28mr13609528pln.34.1602273257514;
+        Fri, 09 Oct 2020 12:54:17 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id b185sm11752903pgc.68.2020.10.09.12.54.16
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 09 Oct 2020 12:54:16 -0700 (PDT)
+From:   Kees Cook <keescook@chromium.org>
+To:     Andrew Morton <akpm@linux-foundation.org>
+Cc:     Kees Cook <keescook@chromium.org>, Marco Elver <elver@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Christoph Lameter <cl@linux.com>,
+        Pekka Enberg <penberg@kernel.org>,
+        David Rientjes <rientjes@google.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
+        Vlastimil Babka <vbabka@suse.cz>, Roman Gushchin <guro@fb.com>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-mm@kvack.org
+Subject: [PATCH v2 0/3] Actually fix freelist pointer vs redzoning
+Date:   Fri,  9 Oct 2020 12:54:08 -0700
+Message-Id: <20201009195411.4018141-1-keescook@chromium.org>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Ira Weiny <ira.weiny@intel.com>
+v2:
+- add additional clean-up patches
+- add Tested-by
+v1: https://lore.kernel.org/lkml/20201008233443.3335464-1-keescook@chromium.org
 
-Protecting against stray writes is particularly important for PMEM
-because, unlike writes to anonymous memory, writes to PMEM persists
-across a reboot.  Thus data corruption could result in permanent loss of
-data.
+This fixes redzoning vs the freelist pointer (both for middle-position
+and very small caches). Both are "theoretical" fixes, in that I see no
+evidence of such small-sized caches actually be used in the kernel, but
+that's no reason to let the bugs continue to exist. :)
 
-While stray writes are more serious than reads, protection is also
-enabled for reads.  This helps to detect bugs in code which would
-incorrectly access device memory and prevents a more serious machine
-checks should those bug reads from a poison page.
+Thanks!
 
-Enable stray access protection by setting the flag in pgmap which
-requests it.  There is no option presented to the user.  If Zone Device
-Access Protection not be supported this flag will have no affect.
+-Kees
 
-Signed-off-by: Ira Weiny <ira.weiny@intel.com>
----
- drivers/dax/device.c  | 2 ++
- drivers/nvdimm/pmem.c | 2 ++
- 2 files changed, 4 insertions(+)
 
-diff --git a/drivers/dax/device.c b/drivers/dax/device.c
-index 1e89513f3c59..e6fb35b4f0fb 100644
---- a/drivers/dax/device.c
-+++ b/drivers/dax/device.c
-@@ -430,6 +430,8 @@ int dev_dax_probe(struct device *dev)
- 	}
- 
- 	dev_dax->pgmap.type = MEMORY_DEVICE_GENERIC;
-+	dev_dax->pgmap.flags |= PGMAP_PROT_ENABLED;
-+
- 	addr = devm_memremap_pages(dev, &dev_dax->pgmap);
- 	if (IS_ERR(addr))
- 		return PTR_ERR(addr);
-diff --git a/drivers/nvdimm/pmem.c b/drivers/nvdimm/pmem.c
-index e4dc1ae990fc..9fcd8338e23f 100644
---- a/drivers/nvdimm/pmem.c
-+++ b/drivers/nvdimm/pmem.c
-@@ -426,6 +426,8 @@ static int pmem_attach_disk(struct device *dev,
- 		return -EBUSY;
- 	}
- 
-+	pmem->pgmap.flags |= PGMAP_PROT_ENABLED;
-+
- 	q = blk_alloc_queue(dev_to_node(dev));
- 	if (!q)
- 		return -ENOMEM;
+Kees Cook (3):
+  mm/slub: Clarify verification reporting
+  mm/slub: Fix redzoning for small allocations
+  mm/slub: Actually fix freelist pointer vs redzoning
+
+ Documentation/vm/slub.rst | 10 +++++-----
+ mm/slub.c                 | 36 +++++++++++++++---------------------
+ 2 files changed, 20 insertions(+), 26 deletions(-)
+
 -- 
-2.28.0.rc0.12.gb6a658bd00c9
+2.25.1
 
