@@ -2,98 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BA0562885D7
-	for <lists+linux-doc@lfdr.de>; Fri,  9 Oct 2020 11:16:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3FB1E288873
+	for <lists+linux-doc@lfdr.de>; Fri,  9 Oct 2020 14:15:59 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1733052AbgJIJQX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 9 Oct 2020 05:16:23 -0400
-Received: from foss.arm.com ([217.140.110.172]:45660 "EHLO foss.arm.com"
+        id S2388462AbgJIMPg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 9 Oct 2020 08:15:36 -0400
+Received: from mail.kernel.org ([198.145.29.99]:40710 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731262AbgJIJQW (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 9 Oct 2020 05:16:22 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id D5C1ED6E;
-        Fri,  9 Oct 2020 02:16:21 -0700 (PDT)
-Received: from [10.57.51.133] (unknown [10.57.51.133])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id BD9AF3F66B;
-        Fri,  9 Oct 2020 02:16:18 -0700 (PDT)
-Subject: Re: [PATCH v2 0/3] Clarify abstract scale usage for power values in
- Energy Model, EAS and IPA
-To:     rjw@rjwysocki.net
-Cc:     linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
-        linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
-        robh+dt@kernel.org, amitk@kernel.org, corbet@lwn.net,
-        daniel.lezcano@linaro.org, Dietmar.Eggemann@arm.com,
-        qperret@google.com, dianders@chromium.org, mka@chromium.org,
-        rnayak@codeaurora.org
-References: <20201002114426.31277-1-lukasz.luba@arm.com>
-From:   Lukasz Luba <lukasz.luba@arm.com>
-Message-ID: <d2960f6a-1805-1fb4-98ae-4a756d20370b@arm.com>
-Date:   Fri, 9 Oct 2020 10:16:17 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.9.0
+        id S2388459AbgJIMPg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 9 Oct 2020 08:15:36 -0400
+Received: from mail.kernel.org (ip5f5ad5d0.dynamic.kabel-deutschland.de [95.90.213.208])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 2894820709;
+        Fri,  9 Oct 2020 12:15:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1602245735;
+        bh=rTq2L7ADDGmC2aCG76C+N7crz/74z4eDGRcypwoL840=;
+        h=From:To:Cc:Subject:Date:From;
+        b=C5sH7wq7QFxHzbOtQD/FfMEkillGm3JuYzND+5IAX/Q1lBbqzqcyznKkoKzUVZv58
+         dAmSLBnMDSMdP5FHOHDVG2e6fHy5ZtXV/cIZMchTxnMZJwSewyY55WEqNrtDqwjp1D
+         4oZsmDmtIFN5JQqlkiTuoJi3nDN/POOyCsDLOQMA=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kQrJ6-003ksz-HO; Fri, 09 Oct 2020 14:15:32 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org,
+        "David S. Miller" <davem@davemloft.net>,
+        =?UTF-8?q?J=C3=A9r=C3=B4me=20Pouiller?= 
+        <jerome.pouiller@silabs.com>, Chen-Yu Tsai <wens@csie.org>,
+        Corentin Labbe <clabbe.montjoie@gmail.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Herbert Xu <herbert@gondor.apana.org.au>,
+        Maxime Ripard <mripard@kernel.org>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Stephen Boyd <sboyd@kernel.org>, devel@driverdev.osuosl.org,
+        devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-clk@vger.kernel.org, linux-crypto@vger.kernel.org
+Subject: [PATCH 0/2] Fix new warnings at linux-next
+Date:   Fri,  9 Oct 2020 14:15:29 +0200
+Message-Id: <cover.1602245659.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <20201002114426.31277-1-lukasz.luba@arm.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Rafael,
+There are some file renames at linux-next that are causing some
+new documentation warnings. Address them.
 
-On 10/2/20 12:44 PM, Lukasz Luba wrote:
-> Hi all,
-> 
-> The Energy Model supports power values expressed in an abstract scale.
-> This has an impact on Intelligent Power Allocation (IPA) and should be
-> documented properly. There is also a need to update the DT binding for the
-> 'sustainable-power' and allow it to have abstract scale as well.
-> 
-> Changes:
-> v2:
-> - updated sustainable power section in IPA documentation
-> - updated DT binding for the 'sustainable-power'
-> 
-> The v1 of the patch set and related discussion can be found in [1].
-> 
-> Regards,
-> Lukasz Luba
-> 
-> [1] https://lore.kernel.org/linux-doc/20200929121610.16060-1-lukasz.luba@arm.com/
-> 
-> Lukasz Luba (3):
->    docs: Clarify abstract scale usage for power values in Energy Model
->    PM / EM: update the comments related to power scale
->    dt-bindings: thermal: update sustainable-power with abstract scale
-> 
->   .../devicetree/bindings/thermal/thermal-zones.yaml  | 13 +++++++++----
->   .../driver-api/thermal/power_allocator.rst          | 13 ++++++++++++-
->   Documentation/power/energy-model.rst                | 13 +++++++++++++
->   Documentation/scheduler/sched-energy.rst            |  5 +++++
->   include/linux/energy_model.h                        | 11 +++++------
->   kernel/power/energy_model.c                         |  2 +-
->   6 files changed, 45 insertions(+), 12 deletions(-)
-> 
+Mauro Carvalho Chehab (2):
+  MAINTAINERS: fix broken doc refs due to yaml conversion
+  crypto: sun8x-ce*: update entries to its documentation
 
-Could you take patch 1/3 and patch 2/3 via your PM tree,
-please? I will be very grateful.
+ Documentation/devicetree/bindings/clock/hi6220-clock.txt | 2 +-
+ MAINTAINERS                                              | 9 ++++-----
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-hash.c        | 2 +-
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-prng.c        | 2 +-
+ drivers/crypto/allwinner/sun8i-ce/sun8i-ce-trng.c        | 2 +-
+ .../devicetree/bindings/net/wireless/silabs,wfx.yaml     | 2 +-
+ 6 files changed, 9 insertions(+), 10 deletions(-)
 
-These patches just update the documentation and comments regarding
-an issue that we can have: bogoWatts in the Energy Model (and we
-already have). One of the drawbacks is that we cannot derive real energy
-from these numbers. Will see how this would evolve.
+-- 
+2.26.2
 
-The patch 3/3 with dt-binding is not going to fly upstream [1].
-I hope developers will put a real number in DT so we could
-have real milliWatts from that source (wishful thinking).
-Doug even made a script, which might be helpful for that [2].
 
-Regards,
-Lukasz
-
-[1] 
-https://lore.kernel.org/linux-pm/45fae8cd-0635-41dc-c744-3c9833bf6492@arm.com/
-[2] 
-https://lore.kernel.org/linux-pm/CAD=FV=U1FP0e3_AVHpauUUZtD-5X3XCwh5aT9fH_8S_FFML2Uw@mail.gmail.com/
