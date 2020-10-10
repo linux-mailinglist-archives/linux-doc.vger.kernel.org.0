@@ -2,56 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2AA0728A171
-	for <lists+linux-doc@lfdr.de>; Sat, 10 Oct 2020 23:12:51 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 40EBD28A187
+	for <lists+linux-doc@lfdr.de>; Sat, 10 Oct 2020 23:42:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732597AbgJJTtA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 10 Oct 2020 15:49:00 -0400
-Received: from xvfrpxff.outbound-mail.sendgrid.net ([168.245.58.255]:10454
-        "EHLO xvfrpxff.outbound-mail.sendgrid.net" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1725848AbgJJKQM (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 10 Oct 2020 06:16:12 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.net; 
-        h=reply-to:from:to:subject:mime-version:content-type:content-transfer-encoding; 
-        s=smtpapi; bh=2o30k5l2esopQjVGjt7Hbsk2s7XsGEn+b+OBVFwN8T4=; b=hk
-        Z9gZxQ8I3Cvg3W54hSse/7EZB82x7IgjjrO4SDmmIx1gZf8A3NfFzmPIpDrBGXtw
-        rewKldzg/h5hV02Hmr5kJ4J8GYMLNXrtDMTz0OHI1XwL7LLHP/mxvw7NUlx7acds
-        sjGuGTwK/pgimDLPinKocBN65sY8XZQM1K/nli70s=
-Received: by filter0947p1iad2.sendgrid.net with SMTP id filter0947p1iad2-4661-5F817952-18
-        2020-10-10 09:05:22.814980642 +0000 UTC m=+47489.658723922
-Received: from 45.77.108.131.vultr.com (unknown)
-        by ismtpd0008p1iad2.sendgrid.net (SG) with ESMTP id VB3b_ouyR4aFyEcI1CpO1g
-        for <linux-doc@vger.kernel.org>; Sat, 10 Oct 2020 09:05:22.719 +0000 (UTC)
-Reply-To: hilfeworld@yahoo.com
-From:   World Outreach <contact@wherehab.com>
-To:     linux-doc@vger.kernel.org
-Subject: Final Reminder 
-Date:   Sat, 10 Oct 2020 09:05:22 +0000 (UTC)
-Message-ID: <20201010090521.4C6018A6E3A17CB6@wherehab.com>
+        id S1726627AbgJJVND (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 10 Oct 2020 17:13:03 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41770 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1731183AbgJJTxO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 10 Oct 2020 15:53:14 -0400
+Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7E139C0613DD
+        for <linux-doc@vger.kernel.org>; Sat, 10 Oct 2020 02:37:38 -0700 (PDT)
+Received: by mail-pf1-x442.google.com with SMTP id k8so9035282pfk.2
+        for <linux-doc@vger.kernel.org>; Sat, 10 Oct 2020 02:37:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=uY6vICbjDw3/Nue8pip9A8mVoEd17wpGPbuSUfwpgAU=;
+        b=ZExhGn5E7TXEAkrOuICsp54Kn74Ct9cwsfd90HFmv+XN2tQ942iV3ILHBfOgo08WlT
+         ZoWJnvomag6+gHkPcheBZq5Y9Ejh62rC8TuDG5Dj/iD0wEvxoNuVNyNlnAyEb6JK23z6
+         CKXSW6YBgYNkxycXtKeQPWhTn7zYA1XMV7Hi+yme7WdIY+mEFE5G4CorQZcGVsNpWNEg
+         UJr7cgxW7hHfgrH87WpxmuWPhJs45PfR4AJsLlWLG8bHsrpEIwb6VtJr+xUTeZg3n2LA
+         7MScPliDIpMr8goqp62304++kV062l+BRt469hSNLwqb4Q1mXDZxOVJJ2hz76ebmsgU4
+         akqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=uY6vICbjDw3/Nue8pip9A8mVoEd17wpGPbuSUfwpgAU=;
+        b=LDgP/PgiRbdLGj/SQjq51gFO9jKpHuzf8sP4OR4ELCCklf1Gc6MpUnPr/v9dtwT3m0
+         c2Fqs3UejN2VY8vZzvNq71bigTxR5CQeNqxUPtruet7hvc15cM0NF+SK4oVxJCa9uzF5
+         nz3j3sdchLIm6zCjfhrBMp8vt5bvIJ6srLQXOLYiXbja8+bnlERvoS0ppsd01aUv77A/
+         EHmfPMK4c01OBoogtRpjpTFecXen2tlYjGlGhf4rpCoNZZxDMOdodOuvEsR+YGGfLejI
+         zHZ+sYz+xQ/q5ud7Rx3al/3CrAZ8OHE+3e2Rmtqx9oZWGkHDJA5uENH/fngrgXVLU2K3
+         QUtw==
+X-Gm-Message-State: AOAM532fIVfiI11PASJ9WRWairXiW1OpPUFEXFlXok+2wBrZZjVw+ym5
+        PAQRT1rfRvPxUS2a+lRBn5mifA==
+X-Google-Smtp-Source: ABdhPJyytESe/AHRO3S9jwTuCwjstQ6JjoCgGo3kxsZX9PXWwayWGDrEuzzbG6UuArzf20PBChrRiA==
+X-Received: by 2002:a62:1851:0:b029:154:8ed7:bf5d with SMTP id 78-20020a6218510000b02901548ed7bf5dmr15732802pfy.66.1602322657935;
+        Sat, 10 Oct 2020 02:37:37 -0700 (PDT)
+Received: from Zs-MacBook-Pro.local.net ([103.136.220.68])
+        by smtp.gmail.com with ESMTPSA id d128sm13793124pfd.94.2020.10.10.02.37.35
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Sat, 10 Oct 2020 02:37:37 -0700 (PDT)
+From:   zangchunxin@bytedance.com
+To:     corbet@lwn.net
+Cc:     andre.azevedo@gmail.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Chunxin Zang <zangchunxin@bytedance.com>
+Subject: [PATCH] Documentation/scheduler: Modify the description of sched-stats column 9
+Date:   Sat, 10 Oct 2020 17:37:30 +0800
+Message-Id: <20201010093730.28567-1-zangchunxin@bytedance.com>
+X-Mailer: git-send-email 2.24.3 (Apple Git-128)
 MIME-Version: 1.0
-Content-Type: text/plain;
-        charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
-X-SG-EID: Q/3ye185KQK3CEqpCAH/lUDzdFwpMG+nHULBhdQ/+99rkLj2R+0NxadZ+3OqDE4MLR8pqcnt5qWq64
- jKyGGrm1Cdc5sJpBFtP1c/b+AZbhsAQ8VzYKnXDMhNPgkDidhubI+OjBNnmmDbDKL+sybqGr7okY3u
- wOAK1vJPcbg67EUQx5WU63R0XAvY5JLegU2a4EIfNNXcflyJtuSCF2OcGWOdJxp33HLyYGrLN1jQNu
- Q=
-X-Entity-ID: GMYP3g4+XIsC1jhFa52Rpg==
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Gut Tag,
+From: Chunxin Zang <zangchunxin@bytedance.com>
 
- E-Mail: linux-doc@vger.kernel.org
- Name: linux-doc
+The column 9 get datas from sched_info->pcount. It's update
+when context_switch only. So it meaning 'times' not 'timeslices'.
 
-Diese E-Mail soll Sie dar=C3=BCber informieren, dass Sie als einer der=20
-gl=C3=BCcklichen Nutznie=C3=9Fer der letzten zuf=C3=A4lligen Auswahl ausgew=
-=C3=A4hlt=20
-wurden, die am 28. September 2020 stattgefunden hat.
-Contact:
-hilfeworld@yahoo.com
+Signed-off-by: Chunxin Zang <zangchunxin@bytedance.com>
+---
+ Documentation/scheduler/sched-stats.rst | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Unterzeichnet
-Charles World Outr=C3=ABach
+diff --git a/Documentation/scheduler/sched-stats.rst b/Documentation/scheduler/sched-stats.rst
+index dd9b99a025f7..5fd17a85e7fd 100644
+--- a/Documentation/scheduler/sched-stats.rst
++++ b/Documentation/scheduler/sched-stats.rst
+@@ -59,7 +59,7 @@ Next three are statistics describing scheduling latency:
+      7) sum of all time spent running by tasks on this processor (in jiffies)
+      8) sum of all time spent waiting to run by tasks on this processor (in
+         jiffies)
+-     9) # of timeslices run on this cpu
++     9) # of times task hits this cpu
+ 
+ 
+ Domain statistics
+-- 
+2.11.0
+
