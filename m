@@ -2,105 +2,81 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1249F28A5F5
-	for <lists+linux-doc@lfdr.de>; Sun, 11 Oct 2020 08:29:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 186F628A6F7
+	for <lists+linux-doc@lfdr.de>; Sun, 11 Oct 2020 12:27:05 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727909AbgJKG3z (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 11 Oct 2020 02:29:55 -0400
-Received: from sonic315-18.consmr.mail.bf2.yahoo.com ([74.6.134.240]:46626
-        "EHLO sonic315-18.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727067AbgJKG3z (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 11 Oct 2020 02:29:55 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602397794; bh=ErQnYVlC2pefuSTpOMCm9/XUNMjj9rhfSqCUwkKhF70=; h=Date:From:Reply-To:Subject:References:From:Subject; b=s6oerP5ldQUDUggx7rZD+Eer0MUx2SzvDB29cisL98NWmsC7Q3Ep6iGWiUEz081nKZrbf8CclZtSuGik4aCcUHxxyIwaXUEhiungrRfQTPDzbwP6/l9hJX38ZPUz882YVRkrAkg1f0y9BkyNbwUaXQpf9AARp7i/BER9n3XOQaVXn59Jg30vAE4G1T41WaFfNr7n87hPGFBRrIL8gJzUPX1xyEsk4IfEq6cslUTG9zU3eRhEvj6jcbHqMb9nRFEpLCTPP0LPLKZ+1XveSJIIVX9fRSocQ2B8vm/RAkm48EzjGlDidAabOtKh0FFXi9ExJQE4ziw8az8xoAsoASi/Kw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602397794; bh=qEGKYkqeVABs6Ve8RhhitEN49HwhG1bJI03Vm3Qlluc=; h=Date:From:Subject; b=l2V7oQ2TXKTMXVsAnwzs8xahrp0Esk9vf1fKGOFj3Jp6ktUjC2NyTdc8AmZZH6q6/vDFYtTg+zOkhTweoYNEFVZ8cRe2TogFWXbSXIMU45Jiu47xakCWdzg5dTyDZqIxnEwLHb9tE6rs/yBqkQE/rxTdOkFBaFco9QdY4CqOmwWsbmAXT5HfpR2yWRTcMbBp7S/AcSgiwiFjnPGr6r9y51TIKPF4GWA2lAMGtpBCfbYCFDEPr0HZWJ6vRTx3qoJ+Yn3PonQ7ulnPatbORTvEWTL2X2NzDwT4GhmwaoooHt+b4DI26iPLUXqzhNfCdFjROy6UslnsvMYyWIsUiz4HMg==
-X-YMail-OSG: aNyyEXcVM1nG2l3OPsgBq_SmJtwDnIjTC7xWNhZBgAWJDpPOsnAP5TFw.bUKTaR
- aUqfjPdR3wXejRukItWtgUyFabb6w7gJ2iOA5ah1jt44iRadC9qOElYPqT6f5Uu6XjT7vcmFbZvC
- 8csgPEQs1fCXfzhaUARQI7j1VzjWdcuY7IA35S7gWgIgIZ03y89aJIRLIFf73cFPhze5NTvQchrO
- ZGA1zOK6HKUMfmWO3dbmhpkONzDSFmvRAhOoMQq7OXxSiHq5JFmhQW.g9dR8bW7a5QoMx6vktftU
- njGa8wLxCYZmyUbG3__sLW2v5gVsdVWs3EPAKOHNsHFcH6zDHtCetXVbWu_bmoS1oHAe2wIhfGUq
- 8kbCrKkUC161tCvBXaYSfvRQcWjf9pt.etItu3yvDpy1xsK9YxVGsxoJMK7Gw0a.6MYkcszABdFy
- lCLbtWBxDWSi9r4GkgRQFl.VFjxt4Hw7dARqAp4UTvKEJ33_80dOP2iJWyk4MZbRBSsH7FpjK9oD
- UzGjei9iZoxxbVUkH.QEw68yv2iAF6gdmqOAXFn2QfMiuVWZhw1rIvkdXGq.A2XyMZ9TYMoC.XLy
- ggHNHrsRMPtcZ02RfbfF1yERJ0ui0iFs2H88yWD5JfhENicNmvuom.6_aQRKKvtrRFdi97NjgY0Y
- UX7n0pu8zzDSWKyqcv0_bumSnLaK6AMJPM0WwGL_fLH79xC6PVANN0Lsl2HaijPwe74zFLEsotH7
- aAe3B3tnSi79N4j0Ds9ozFNozKuwA9wFXTUdd8um_ks4bW5ZD52RW.Td5kPbP8LfM5hAu.rlNpIh
- xoB1YGCTYKrxT5U9vBxCBdo8XLyJZvYWrIQIXDJFQnu9meJIabxKwPkNLR52mSwlH3O.hhBlHuxE
- u4g.XfbVVdmRQg4V4ypx2SWNRTEvIrud80pSkJ_LnWFHkB9w_Qi93PAhajx52vS766nZ3k62Ol8u
- 9u9QRe04rZtZd1_OlEMJllF7p5TToJbEqerQmjHGlXuCKoZGAd_Qq5BM3rrX9aH37gCVXdyWONVx
- 8BQUqhXFRG.NAAsJB1VDlRO06t098m7SUHFmh7wc8gpsZU5p6z_z7Xtl0Wf4U7ZZIZ1vjUMkEDQr
- vThoimau8HEng.Txbb074Vl9G4p8GyxqmJRXN4klFFvTsFAo7PFOTjgF3AbG3fAgDonqJwCNkiDs
- i8hodl8qcg82ib1nmjgNwuUZXulDyTVw5qIRHSmIGoQTp.G3FXrEuTM19f5kmqJ2RVaNDCYlVnrT
- O.qTd.dih.978GHYczAMLS.Dtx9wGKS_Q6Veu1nrlVN1xuJvFnIgK4tkv5YqfSA3TWuWWxdoj78g
- 6lBpXfpzL25Lm8ObkwTqyBBy28UeCNc_NnjOMlvPcDcI47SCZ5ywxAGjGnJ2wjUW3ZLsgRTrHWe5
- f9jRd63vqy9DW3jbDqRAuSy5GayHkgJT1mVbQ7pMlut_pGW2ZSPSwBPgVQZshpu3gdBNtHyljHTv
- HfGh33lw_
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic315.consmr.mail.bf2.yahoo.com with HTTP; Sun, 11 Oct 2020 06:29:54 +0000
-Date:   Sun, 11 Oct 2020 06:27:53 +0000 (UTC)
-From:   MRS ALI FATIMA <webbox23@yckot.in>
-Reply-To: samanta123@bsnl.in
-Message-ID: <1101613109.170267.1602397673202@mail.yahoo.com>
-Subject: PLEASE DEAR CAN I TRUST YOU?
+        id S1726576AbgJKK1E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 11 Oct 2020 06:27:04 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34472 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726222AbgJKK1D (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 11 Oct 2020 06:27:03 -0400
+Received: from mail-pg1-x52b.google.com (mail-pg1-x52b.google.com [IPv6:2607:f8b0:4864:20::52b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8795CC0613CE;
+        Sun, 11 Oct 2020 03:27:03 -0700 (PDT)
+Received: by mail-pg1-x52b.google.com with SMTP id x16so11254028pgj.3;
+        Sun, 11 Oct 2020 03:27:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:mime-version:content-disposition;
+        bh=sZ4u0IYX+prhPTXd0MVIePeS5ONiOotzisA3LcVKmGs=;
+        b=NVS7Zyk+rjxHS3Fim/isNHWuIprg+c2HM+wV+yaIh9E7EihNDRfTuLYfDV41xq9uwi
+         uOy69v3QR0MakTzpXeOHvayM4QZM8Yo53iwXh6iUN0gxncfE5J6OfSrEU+NP09tRfsWy
+         azWSanp94VlkodpfsZAnL9oSYSL4iL8BYLySvy9LD/FO9r1yLEeOgr3fC8nztbDP92LQ
+         G9S08ezRghlNaq9pE2mf0ctDyLhd7f2fihyM5OedkNQJ752yk40uE/lSP9QBk7aUs0gX
+         K6vACT9vq9wS/+UZL+nxX8nEPzVWqh1jqZZbpMgWLfScV0dWp03Lp2DZ7IN6lHis/pB/
+         YY7A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:mime-version
+         :content-disposition;
+        bh=sZ4u0IYX+prhPTXd0MVIePeS5ONiOotzisA3LcVKmGs=;
+        b=WV3qU6torSkNfRD4JLqvYaAzec/KidRzk7X4KAaPOxuf+J+l4sOh8IVfCqgbkAqx02
+         RBgOZJVTBxrHVUPIhEhIEoNfZs6qddDOU+fxModQPsSthuQ2zPhtL0dd//BoooNFFfJp
+         8n0HF/02Yd22bVERP32B7GlK8ajFs9Ez8Kuo0YS6pdVMxz50KsbY0u4Omc+n+LKtOmv3
+         K1ZG5UuDE4LBwEHKz0OEOTRAOc8dhJ/RzswLyE7MOkqaQBysn0TXVuV0hyL3yOZdiump
+         8OURpDPmPktUxWD0cO8ejLPPiqeXWOM5LYZk5D/ehTCampGgm/s4W2Ak8dARKPsOgF6N
+         86sA==
+X-Gm-Message-State: AOAM533RS0r4jWmfDSG4nAp53DsNIPdr9DO19tcjmy2Qpqt8S8QBc5t6
+        4wkI2OqrqThWpT9E33OqMSQ=
+X-Google-Smtp-Source: ABdhPJxSlKHZz4nogWT9Nt3kZILi1+8lgygZc0KhYqgDj9p1Hb85VG4EdeKLcxVdM5B7uicpX/BFwA==
+X-Received: by 2002:a17:90a:6301:: with SMTP id e1mr14656301pjj.131.1602412022680;
+        Sun, 11 Oct 2020 03:27:02 -0700 (PDT)
+Received: from adolin ([49.207.215.73])
+        by smtp.gmail.com with ESMTPSA id y4sm741762pgs.0.2020.10.11.03.26.59
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sun, 11 Oct 2020 03:27:02 -0700 (PDT)
+Date:   Sun, 11 Oct 2020 15:56:57 +0530
+From:   Sumera Priyadarsini <sylphrenadin@gmail.com>
+To:     Julia.Lawall@lip6.fr
+Cc:     corbet@lwn.net, Gilles.Muller@lip6.fr, nicolas.palix@imag.fr,
+        michal.lkml@markovi.net, cocci@systeme.lip6.fr,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [PATCH v4 0/3] Improve Coccinelle Parallelisation
+Message-ID: <cover.1602410019.git.sylphrenadin@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-References: <1101613109.170267.1602397673202.ref@mail.yahoo.com>
-X-Mailer: WebService/1.1.16795 YMailNodin Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:81.0) Gecko/20100101 Firefox/81.0
-To:     unlisted-recipients:; (no To-header on input)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Presently, Coccinelle uses at most one thread per core to improve
+performance in machines with more than 2 hyperthreads. Modify
+coccicheck to use all available threads in machines upto 4 hyperthreads.
+Further, modify the coccicheck script to improve portability.
 
+Modify documentation to reflect the same. 
 
-From Mrs. Ali Melissa Fatima
-Membership in Turkish Parliament Association
-Tele: +905356520176
-My Dearest One,
+Sumera Priyadarsini (3):
+  scripts: coccicheck: Add quotes to improve portability
+  scripts: coccicheck: Change default condition for parallelism
+  Documentation: Coccinelle: Modify Parallelisation information in docs
 
+ Documentation/dev-tools/coccinelle.rst | 6 ++++--
+ scripts/coccicheck                     | 4 ++--
+ 2 files changed, 6 insertions(+), 4 deletions(-)
 
-Greetings to you,
+-- 
+2.25.1
 
-Let me start by introducing myself, My name is Mrs. Ali Fatima. I have been=
- suffering from Breast cancer disease and the doctor says that I have just =
-a short time to live. For the past Twelve years, I have being dealing on Co=
-al exportation, before falling ill due to the Cancer of the breast.
-
-My late husband, Dr. Ali Bernard, a Retired diplomat and one time minister =
-of mines and Power in the republic of Turkey made a lot of money from the s=
-ales of Gold and cotton while he was a minister, but we had only one Adopte=
-d Son Name Ali Mustafa, he is only 12-years.
-
-later, my Husband realized through a powerful Man, that it was evil course =
-instituted by his brother in other to inherit his wealth, but before then i=
-t was too late, I and my husband agreed that he should Remarry another wife=
- but our Religion did not permit it, Before, my Husband died as a Result of=
- COVID 19 at the age of 89, he died in the month of April 2020.
-
-Please I know this may come to you by surprise, because you did not know me=
-, I needed your assistance that was why I write you through divine directio=
-n, it is my desire of going into relationship with you. Before his death we=
- were both Muslim. Now that I am very sick and according to the doctor, wil=
-l not survive the sickness.The worst of it all is that I do not have any fa=
-mily members, expect my little Boy but he is too small to handle This.I am =
-writing this letter now through the help of the computer beside My sick bed=
-. . When my late husband was alive we deposited the sum of USD$30.5M (Thirt=
-y Million Five Hundred Thousand U.S.Dollars) with Finance/Bank Presently, I=
-am willing to instruct my Bank to transfer the said fund to you as my forei=
-gn Trustee. Having known my condition I decided to donate this fund to chur=
-ch or better still a Christian individual Or a Muslim that will utilize thi=
-s money the way I am going to instruct here in. I want a person or church t=
-hat will use this fund to churches, orphanages, research centers and widows=
- propagating the work of Charity and to ensure that the house of Orphanage =
-is maintained.
-
-As soon as I receive your reply I shall give you the contact of the Finance=
-/Bank. I am offering you 20% of the principal sum which amounts to US$6,100=
-.000.00 (Six million One Hundred Thousand United States Dollars Only) and 5=
-% will be for any expenses that both of us may Insure in this transaction. =
-And another 5% will go for Motherless babes home. However, you have to assu=
-re me and also be ready to go into agreement with me that you will not elop=
-e with my fund. If you agree to my terms, reply (mrsalifatima67@gmail.com}
-
-My Regards to your Family,
-Yours Faithfully,
-Mrs Ali Fatima
