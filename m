@@ -2,75 +2,146 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 04FC628A492
-	for <lists+linux-doc@lfdr.de>; Sun, 11 Oct 2020 01:48:24 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2BA9928A5E7
+	for <lists+linux-doc@lfdr.de>; Sun, 11 Oct 2020 08:25:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729430AbgJJXsJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 10 Oct 2020 19:48:09 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:36530 "EHLO loongson.cn"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1727043AbgJJXsD (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 10 Oct 2020 19:48:03 -0400
-Received: from linux.localdomain (unknown [113.200.148.30])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxGMQrSIJfLfobAA--.13680S6;
-        Sun, 11 Oct 2020 07:47:57 +0800 (CST)
-From:   Tiezhu Yang <yangtiezhu@loongson.cn>
-To:     Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Huacai Chen <chenhc@lemote.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc:     linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, Xuefeng Li <lixuefeng@loongson.cn>
-Subject: [PATCH v2 4/4 RESEND] docs: fs: proc.rst: Add boardinfo description for Loongson64
-Date:   Sun, 11 Oct 2020 07:47:54 +0800
-Message-Id: <1602373674-4579-5-git-send-email-yangtiezhu@loongson.cn>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1602373674-4579-1-git-send-email-yangtiezhu@loongson.cn>
-References: <1602373674-4579-1-git-send-email-yangtiezhu@loongson.cn>
-X-CM-TRANSID: AQAAf9DxGMQrSIJfLfobAA--.13680S6
-X-Coremail-Antispam: 1UD129KBjvdXoWrKF47WF4xAFWrtF4rWF4DJwb_yoWfJwc_Za
-        47XF48Zr4xZr1rJ3WUtF45WF17ArZ3Kw1UAa13JryUJw15J398JFWDAr17Ar48JrW2kryr
-        CFWkXrnxZF13WjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-        9fnUUIcSsGvfJTRUUUbh8FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
-        IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
-        F7xvwVC0I7IYx2IY67AKxVWUCVW8JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8JVWxJw
-        A2z4x0Y4vEx4A2jsIE14v26r4j6F4UM28EF7xvwVC2z280aVCY1x0267AKxVW8JVW8Jr1l
-        e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
-        8IcVAFwI0_JrI_JrylYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
-        jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK67AK6FWl42xK82
-        IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC2
-        0s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMI
-        IF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF
-        0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87
-        Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU0xhLUUUUU
-X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+        id S1726748AbgJKGZB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 11 Oct 2020 02:25:01 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54014 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726694AbgJKGZB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 11 Oct 2020 02:25:01 -0400
+Received: from mail-qv1-xf4a.google.com (mail-qv1-xf4a.google.com [IPv6:2607:f8b0:4864:20::f4a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DCF36C0613D0
+        for <linux-doc@vger.kernel.org>; Sat, 10 Oct 2020 23:25:00 -0700 (PDT)
+Received: by mail-qv1-xf4a.google.com with SMTP id eh4so4870431qvb.12
+        for <linux-doc@vger.kernel.org>; Sat, 10 Oct 2020 23:25:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=sender:date:message-id:mime-version:subject:from:to:cc;
+        bh=UJx97gIPGIXFXkRks4Wo0vV6Q6PxKBpX120vcE6WJsg=;
+        b=sWYTJbGOpsmE70syYCNzGsAplxbAsaDGvmNcakNaECKP+Ez8bD3Rdi6wI3rU59lXC9
+         6gfqTcuW9qjebxjGoE/SlnfNpby5Lx9LohoeIR0wNuoONARjym5sepDDSAAzRvXJTOvh
+         jWgsUd7YnS0HYTD/FqQ5fTCIc4Egy70KtDZFi4GTlSgAJR+du+MoKKkmnVxmYz+VjXsm
+         /LRCyixeYm3wQkxoj7oL5e4ruFzoYKC/W4hO6hQ+Fby9VjHr2ghxh2G+ODkOMtdkOl2L
+         n/3z5bO46TzAHYpXmxMlyLX3xSV5i+mcGQEM8lPmKs5wXtRt8EL6d6bXbmBDWTELZFnI
+         Xcjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:message-id:mime-version:subject:from
+         :to:cc;
+        bh=UJx97gIPGIXFXkRks4Wo0vV6Q6PxKBpX120vcE6WJsg=;
+        b=EfPoy5y+/ioWY8Pak9AirfnRoWhejmuVztPjZXGhnjPpFkgVmG1JE7uy2+XMoNxJ0L
+         8HNfdkBW0AiEpZvNfpzhMuQViodvkRYipHl779P0Pie11WvZHHOFe0W3VtT/BKB/1tUq
+         rEOIFm21Pr4K70SRMyWlBpwYa6xG8lmBIwEaVSBJJuBDp8XDTrq3ekVFk2jmksNbnMg5
+         8PG/IxiID4krDL4MBP3JTOOw0IZo2J5G46sXU6f3ItNv35lzek5mcDBn25X/Peg7wmvS
+         IcsZfdSGUNCILL6i3rR9VRmPbF7xY7+ev5etaav3MmAeCZp7O/AnEmlO3mp5PiMb48lK
+         MGnQ==
+X-Gm-Message-State: AOAM533i+sa9vQ6gOumds6HhVYeGJskwa721lQ2JDppQQAv/bSJIVosZ
+        efEEO9FfDTK3304qPxWUD2RCOVssG2TaW3YT4A==
+X-Google-Smtp-Source: ABdhPJwwuHEwTJas51CDs0CXwMgtZ6GF8BpLVVQwMWpZxEVKux8CKK116qNPOrQYZazm9+cW7Nre45/LrKMgXOFtEA==
+Sender: "lokeshgidra via sendgmr" <lokeshgidra@lg.mtv.corp.google.com>
+X-Received: from lg.mtv.corp.google.com ([2620:15c:211:202:f693:9fff:fef4:29dd])
+ (user=lokeshgidra job=sendgmr) by 2002:a0c:a203:: with SMTP id
+ f3mr20270612qva.33.1602397499810; Sat, 10 Oct 2020 23:24:59 -0700 (PDT)
+Date:   Sat, 10 Oct 2020 23:24:54 -0700
+Message-Id: <20201011062456.4065576-1-lokeshgidra@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.28.0.1011.ga647a8990f-goog
+Subject: [PATCH v5 0/2] Control over userfaultfd kernel-fault handling
+From:   Lokesh Gidra <lokeshgidra@google.com>
+To:     Kees Cook <keescook@chromium.org>,
+        Jonathan Corbet <corbet@lwn.net>, Peter Xu <peterx@redhat.com>,
+        Andrea Arcangeli <aarcange@redhat.com>,
+        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
+        Andrew Morton <akpm@linux-foundation.org>
+Cc:     Alexander Viro <viro@zeniv.linux.org.uk>,
+        Stephen Smalley <stephen.smalley.work@gmail.com>,
+        Eric Biggers <ebiggers@kernel.org>,
+        Lokesh Gidra <lokeshgidra@google.com>,
+        Daniel Colascione <dancol@dancol.org>,
+        "Joel Fernandes (Google)" <joel@joelfernandes.org>,
+        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, kaleshsingh@google.com,
+        calin@google.com, surenb@google.com, nnk@google.com,
+        jeffv@google.com, kernel-team@android.com,
+        Mike Rapoport <rppt@linux.vnet.ibm.com>,
+        Shaohua Li <shli@fb.com>, Jerome Glisse <jglisse@redhat.com>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Mel Gorman <mgorman@techsingularity.net>,
+        Nitin Gupta <nigupta@nvidia.com>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Iurii Zaikin <yzaikin@google.com>,
+        Luis Chamberlain <mcgrof@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a description for /proc/boardinfo on the Loongson platform.
+This patch series is split from [1]. The other series enables SELinux
+support for userfaultfd file descriptors so that its creation and
+movement can be controlled.
 
-Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
----
+It has been demonstrated on various occasions that suspending kernel
+code execution for an arbitrary amount of time at any access to
+userspace memory (copy_from_user()/copy_to_user()/...) can be exploited
+to change the intended behavior of the kernel. For instance, handling
+page faults in kernel-mode using userfaultfd has been exploited in [2, 3].
+Likewise, FUSE, which is similar to userfaultfd in this respect, has been
+exploited in [4, 5] for similar outcome.
 
-v2: new added patch
+This small patch series adds a new flag to userfaultfd(2) that allows
+callers to give up the ability to handle kernel-mode faults with the
+resulting UFFD file object. It then adds a 'user-mode only' option to
+the unprivileged_userfaultfd sysctl knob to require unprivileged
+callers to use this new flag.
 
- Documentation/filesystems/proc.rst | 1 +
- 1 file changed, 1 insertion(+)
+The purpose of this new interface is to decrease the chance of an
+unprivileged userfaultfd user taking advantage of userfaultfd to
+enhance security vulnerabilities by lengthening the race window in
+kernel code.
 
-diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
-index 533c79e..3c4cb65 100644
---- a/Documentation/filesystems/proc.rst
-+++ b/Documentation/filesystems/proc.rst
-@@ -664,6 +664,7 @@ files are there, and which are missing.
-  File         Content
-  ============ ===============================================================
-  apm          Advanced power management info
-+ boardinfo    Mainboard and BIOS info for Loongson64
-  buddyinfo    Kernel memory allocator information (see text)	(2.5)
-  bus          Directory containing bus specific information
-  cmdline      Kernel command line
+[1] https://lore.kernel.org/lkml/20200211225547.235083-1-dancol@google.com/
+[2] https://duasynt.com/blog/linux-kernel-heap-spray
+[3] https://duasynt.com/blog/cve-2016-6187-heap-off-by-one-exploit
+[4] https://googleprojectzero.blogspot.com/2016/06/exploiting-recursion-in-linux-kernel_20.html
+[5] https://bugs.chromium.org/p/project-zero/issues/detail?id=808
+
+Changes since v4:
+
+  - Added warning when bailing out from handling kernel fault.
+
+Changes since v3:
+
+  - Modified the meaning of value '0' of unprivileged_userfaultfd
+    sysctl knob. Setting this knob to '0' now allows unprivileged users
+    to use userfaultfd, but can handle page faults in user-mode only.
+  - The default value of unprivileged_userfaultfd sysctl knob is changed
+    to '0'.
+
+Changes since v2:
+
+  - Removed 'uffd_flags' and directly used 'UFFD_USER_MODE_ONLY' in
+    userfaultfd().
+
+Changes since v1:
+
+  - Added external references to the threats from allowing unprivileged
+    users to handle page faults from kernel-mode.
+  - Removed the new sysctl knob restricting handling of page
+    faults from kernel-mode, and added an option for the same
+    in the existing 'unprivileged_userfaultfd' knob.
+
+Lokesh Gidra (2):
+  Add UFFD_USER_MODE_ONLY
+  Add user-mode only option to unprivileged_userfaultfd sysctl knob
+
+ Documentation/admin-guide/sysctl/vm.rst | 15 ++++++++++-----
+ fs/userfaultfd.c                        | 16 +++++++++++++---
+ include/uapi/linux/userfaultfd.h        |  9 +++++++++
+ 3 files changed, 32 insertions(+), 8 deletions(-)
+
 -- 
-2.1.0
+2.28.0.1011.ga647a8990f-goog
 
