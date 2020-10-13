@@ -2,103 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6C9F728C860
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 07:55:14 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4CC9628C8B1
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 08:38:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388521AbgJMFzN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Oct 2020 01:55:13 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:41152 "EHLO loongson.cn"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S2388506AbgJMFzN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 13 Oct 2020 01:55:13 -0400
-Received: from linux.localdomain (unknown [113.200.148.30])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxX8c3QYVfhPscAA--.14939S4;
-        Tue, 13 Oct 2020 13:55:06 +0800 (CST)
-From:   Tiezhu Yang <yangtiezhu@loongson.cn>
-To:     Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Huacai Chen <chenhc@lemote.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>
-Cc:     linux-mips@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, Xuefeng Li <lixuefeng@loongson.cn>
-Subject: [PATCH 2/2] Documentation: ABI: Add /sys/firmware/lefi/boardinfo description for Loongson64
-Date:   Tue, 13 Oct 2020 13:55:02 +0800
-Message-Id: <1602568502-18044-3-git-send-email-yangtiezhu@loongson.cn>
-X-Mailer: git-send-email 2.1.0
-In-Reply-To: <1602568502-18044-1-git-send-email-yangtiezhu@loongson.cn>
-References: <1602568502-18044-1-git-send-email-yangtiezhu@loongson.cn>
-X-CM-TRANSID: AQAAf9DxX8c3QYVfhPscAA--.14939S4
-X-Coremail-Antispam: 1UD129KBjvJXoW7KryDXFWfuryUXFW3Ar43Jrb_yoW8Cryfpa
-        15Jan8GrZxG3WxXF93WFy8ZFyfZFs5JrWDGanxAr18JryDGFykZr4Uta1rZFW8Cr4rJayF
-        9F4xKr1rCF1UC3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUBq14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jryl82xGYIkIc2
-        x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
-        Y4vE2Ix0cI8IcVAFwI0_JFI_Gr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
-        8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
-        e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
-        8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
-        jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK67AK6r4rMxAIw2
-        8IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4l
-        x2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrw
-        CI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI
-        42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z2
-        80aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUUuWlPUUUUU==
-X-CM-SenderInfo: p1dqw3xlh2x3gn0dqz5rrqw2lrqou0/
+        id S2389434AbgJMGiP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Oct 2020 02:38:15 -0400
+Received: from smtp-fw-9102.amazon.com ([207.171.184.29]:23530 "EHLO
+        smtp-fw-9102.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2389433AbgJMGiO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Oct 2020 02:38:14 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1602571094; x=1634107094;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=aHrNIi6Spaa8PTVDo9sFuO7JRmGUmYOw/fAbYNNAQdY=;
+  b=RQfbt1qjlcVA+yuLRiiMBYMLENj2h/NK+eCtbXquvUBEsly8wpKyod1O
+   qh/B6Pao7Y/HP1ToBels6fD5DQFhWi9yahTRVVCL8rcpLAtSqwGnl4nfi
+   gJTmOxzxTHSbx1QYIB1KMMUw9gCBBWgq8g2ESer5uiM6O+97bX0XczAUp
+   E=;
+X-IronPort-AV: E=Sophos;i="5.77,369,1596499200"; 
+   d="scan'208";a="83990110"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1d-474bcd9f.us-east-1.amazon.com) ([10.47.23.38])
+  by smtp-border-fw-out-9102.sea19.amazon.com with ESMTP; 13 Oct 2020 06:38:08 +0000
+Received: from EX13D31EUB001.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
+        by email-inbound-relay-1d-474bcd9f.us-east-1.amazon.com (Postfix) with ESMTPS id 212CCA1ECF;
+        Tue, 13 Oct 2020 06:38:04 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.160.27) by
+ EX13D31EUB001.ant.amazon.com (10.43.166.210) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Tue, 13 Oct 2020 06:38:00 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     <brendanhiggins@google.com>
+CC:     SeongJae Park <sjpark@amazon.de>, <corbet@lwn.net>,
+        <skhan@linuxfoundation.org>, <linux-kselftest@vger.kernel.org>,
+        <kunit-dev@googlegroups.com>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: [PATCH v2] Documentation: kunit: Update Kconfig parts for KUNIT's module support
+Date:   Tue, 13 Oct 2020 08:37:43 +0200
+Message-ID: <20201013063743.32179-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+MIME-Version: 1.0
+Content-Type: text/plain
+X-Originating-IP: [10.43.160.27]
+X-ClientProxiedBy: EX13D50UWA004.ant.amazon.com (10.43.163.5) To
+ EX13D31EUB001.ant.amazon.com (10.43.166.210)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a description for /sys/firmware/lefi/boardinfo on the Loongson
-platform.
+From: SeongJae Park <sjpark@amazon.de>
 
-Signed-off-by: Tiezhu Yang <yangtiezhu@loongson.cn>
+If 'CONFIG_KUNIT=m', letting kunit tests that do not support loadable
+module build depends on 'KUNIT' instead of 'KUNIT=y' result in compile
+errors.  This commit updates the document for this.
+
+Fixes: 9fe124bf1b77 ("kunit: allow kunit to be loaded as a module")
+Signed-off-by: SeongJae Park <sjpark@amazon.de>
 ---
- .../ABI/testing/sysfs-firmware-lefi-boardinfo      | 35 ++++++++++++++++++++++
- 1 file changed, 35 insertions(+)
- create mode 100644 Documentation/ABI/testing/sysfs-firmware-lefi-boardinfo
 
-diff --git a/Documentation/ABI/testing/sysfs-firmware-lefi-boardinfo b/Documentation/ABI/testing/sysfs-firmware-lefi-boardinfo
-new file mode 100644
-index 0000000..5e3f614
---- /dev/null
-+++ b/Documentation/ABI/testing/sysfs-firmware-lefi-boardinfo
-@@ -0,0 +1,35 @@
-+What:		/sys/firmware/lefi/boardinfo
-+Date:		October 2020
-+Contact:	Tiezhu Yang <yangtiezhu@loongson.cn>
-+Description:
-+		Get mainboard and BIOS info easily on the Loongson platform,
-+		this is useful to point out the current used mainboard type
-+		and BIOS version when there exists problems related with
-+		hardware or firmware.
+Changes from v1
+(https://lore.kernel.org/linux-kselftest/20201012105420.5945-1-sjpark@amazon.com/):
+- Fix a typo (Marco Elver)
+
+---
+ Documentation/dev-tools/kunit/start.rst | 2 +-
+ Documentation/dev-tools/kunit/usage.rst | 5 +++++
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/dev-tools/kunit/start.rst b/Documentation/dev-tools/kunit/start.rst
+index d23385e3e159..454f307813ea 100644
+--- a/Documentation/dev-tools/kunit/start.rst
++++ b/Documentation/dev-tools/kunit/start.rst
+@@ -197,7 +197,7 @@ Now add the following to ``drivers/misc/Kconfig``:
+ 
+ 	config MISC_EXAMPLE_TEST
+ 		bool "Test for my example"
+-		depends on MISC_EXAMPLE && KUNIT
++		depends on MISC_EXAMPLE && KUNIT=y
+ 
+ and the following to ``drivers/misc/Makefile``:
+ 
+diff --git a/Documentation/dev-tools/kunit/usage.rst b/Documentation/dev-tools/kunit/usage.rst
+index 3c3fe8b5fecc..b331f5a5b0b9 100644
+--- a/Documentation/dev-tools/kunit/usage.rst
++++ b/Documentation/dev-tools/kunit/usage.rst
+@@ -556,6 +556,11 @@ Once the kernel is built and installed, a simple
+ 
+ ...will run the tests.
+ 
++.. note::
++   Note that you should make your test depends on ``KUNIT=y`` in Kconfig if the
++   test does not support module build.  Otherwise, it will trigger compile
++   errors if ``CONFIG_KUNIT`` is ``m``.
 +
-+		The related structures are already defined in the interface
-+		specification about firmware and kernel which are common
-+		requirement and specific for Loongson64, so only add a new
-+		boardinfo.c file in arch/mips/loongson64.
-+
-+		For example:
-+
-+		[loongson@linux ~]$ cat /sys/firmware/lefi/boardinfo
-+		Board Info
-+		Manufacturer            : LEMOTE
-+		Board Name              : LEMOTE-LS3A4000-7A1000-1w-V01-pc
-+		Family                  : LOONGSON3
-+
-+		BIOS Info
-+		Vendor                  : Kunlun
-+		Version                 : Kunlun-A1901-V4.1.3-20200414093938
-+		ROM Size                : 4 KB
-+		Release Date            : 2020-04-14
-+
-+		By the way, using dmidecode command can get the similar info if there
-+		exists SMBIOS in firmware, but the fact is that there is no SMBIOS on
-+		some machines, we can see nothing when execute dmidecode, like this:
-+
-+		[root@linux loongson]# dmidecode
-+		# dmidecode 2.12
-+		# No SMBIOS nor DMI entry point found, sorry.
+ Writing new tests for other architectures
+ -----------------------------------------
+ 
 -- 
-2.1.0
+2.17.1
 
