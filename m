@@ -2,37 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5E18B28CDDF
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 14:14:56 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9E88728CE1D
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 14:16:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726846AbgJMMO4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Oct 2020 08:14:56 -0400
-Received: from mail.kernel.org ([198.145.29.99]:40960 "EHLO mail.kernel.org"
+        id S1726885AbgJMMQf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Oct 2020 08:16:35 -0400
+Received: from mail.kernel.org ([198.145.29.99]:41122 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726707AbgJMMOz (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 13 Oct 2020 08:14:55 -0400
+        id S1726881AbgJMMO4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 13 Oct 2020 08:14:56 -0400
 Received: from mail.kernel.org (ip5f5ad5b2.dynamic.kabel-deutschland.de [95.90.213.178])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id E60CB2222C;
-        Tue, 13 Oct 2020 12:14:54 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 06EAB22259;
+        Tue, 13 Oct 2020 12:14:55 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1602591295;
-        bh=SmAgTq3qlJUPZtrrcPlH7p0JPW+Do0b4aKXp0589oHY=;
+        bh=ReWeQAdsRgO/jyvpQynk0BfIa0k5iD1zUW77cmoS650=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=UHWDy6x9LyZBs2RM8reUONi7qqPamxctAKrwLfsf9V10aSgSMsXZRRei0DlXADgcw
-         cHT64Igf3Q3maW8H/xrrlaUFV6v8Tl7205eOC/stw2M1ybK65OPDotSQmKi/OKMBYX
-         YNnXcYz4ChQ6LWhHr3euOvgeQ+rJG9wpbCG/6mss=
+        b=mSBfPkA08R1XVmVSSTOhDI1cky7v8/jEmZ3JPPIrdtsqXlGagJZFPZn3faDl0OWsb
+         gL34LAY8f/wt8cDc3Hz5mRo9F3Ufb44/T4FMQZs1KsaZg5LMugPUA9c6iG0AL4Ej7L
+         dA39u+7SqXOzoOohgo0DJMkFA/VAmIjJvdA6sH1w=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kSJCf-006CoL-2E; Tue, 13 Oct 2020 14:14:53 +0200
+        id 1kSJCf-006CoO-32; Tue, 13 Oct 2020 14:14:53 +0200
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 14/24] docs: conf.py: disable automarkup for Sphinx 3.x
-Date:   Tue, 13 Oct 2020 14:14:41 +0200
-Message-Id: <8394c44d193d78cd5378fe23fa9f0a2d8a9f6b33.1602590106.git.mchehab+huawei@kernel.org>
+        "David S. Miller" <davem@davemloft.net>,
+        "Jonathan Corbet" <corbet@lwn.net>,
+        Jakub Kicinski <kuba@kernel.org>, linux-kernel@vger.kernel.org,
+        netdev@vger.kernel.org
+Subject: [PATCH v2 15/24] docs: net: statistics.rst: remove a duplicated kernel-doc
+Date:   Tue, 13 Oct 2020 14:14:42 +0200
+Message-Id: <91767bf1dc65a8989d25e08e6af8feb1529b4136.1602590106.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1602590106.git.mchehab+huawei@kernel.org>
 References: <cover.1602590106.git.mchehab+huawei@kernel.org>
@@ -43,37 +46,36 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The class types changed after the C domain rewrite on
-Sphinx 3.x. Due to that, the automarkup extension is just
-generating additional noise when trying to convert structs
-and other markups into cross references.
+include/linux/ethtool.h is included twice with kernel-doc,
+both to document ethtool_pause_stats(). The first one is
+at statistics.rst, and the second one at ethtool-netlink.rst.
 
+Replace one of the references to use the name of the
+function. The automarkup.py extension should create the
+cross-references.
+
+Solves this warning:
+
+	../Documentation/networking/ethtool-netlink.rst: WARNING: Duplicate C declaration, also defined in 'networking/statistics'.
+	Declaration is 'ethtool_pause_stats'.
+
+Acked-by: David S. Miller <davem@davemloft.net>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/conf.py | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ Documentation/networking/statistics.rst | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 376dd0ddf39c..4f5d15abd047 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -37,7 +37,7 @@ needs_sphinx = '1.3'
- # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
- # ones.
- extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include',
--              'kfigure', 'sphinx.ext.ifconfig', 'automarkup',
-+              'kfigure', 'sphinx.ext.ifconfig',
-               'maintainers_include', 'sphinx.ext.autosectionlabel' ]
+diff --git a/Documentation/networking/statistics.rst b/Documentation/networking/statistics.rst
+index 8e15bc98830b..234abedc29b2 100644
+--- a/Documentation/networking/statistics.rst
++++ b/Documentation/networking/statistics.rst
+@@ -175,5 +175,4 @@ The following structures are internal to the kernel, their members are
+ translated to netlink attributes when dumped. Drivers must not overwrite
+ the statistics they don't report with 0.
  
- #
-@@ -111,6 +111,7 @@ if major >= 3:
- 
- else:
-     extensions.append('cdomain')
-+    extensions.append('automarkup')
- 
- # Ensure that autosectionlabel will produce unique names
- autosectionlabel_prefix_document = True
+-.. kernel-doc:: include/linux/ethtool.h
+-    :identifiers: ethtool_pause_stats
++- ethtool_pause_stats()
 -- 
 2.26.2
 
