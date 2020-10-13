@@ -2,147 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3D4E128D044
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 16:32:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C78A728D0EC
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 17:03:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388709AbgJMOcE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Oct 2020 10:32:04 -0400
-Received: from conssluserg-06.nifty.com ([210.131.2.91]:60543 "EHLO
-        conssluserg-06.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2388691AbgJMOcE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Oct 2020 10:32:04 -0400
-Received: from mail-pg1-f169.google.com (mail-pg1-f169.google.com [209.85.215.169]) (authenticated)
-        by conssluserg-06.nifty.com with ESMTP id 09DEVlSu012298;
-        Tue, 13 Oct 2020 23:31:48 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conssluserg-06.nifty.com 09DEVlSu012298
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1602599508;
-        bh=YB1WCHK+o0PqjhCmZaRPYUlHHjnzTpeZ72Cc5ws6nnQ=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=0J/PcS7RB6cSMWzhxjAkmcMYmQ0jpQkyiqE3Gl20SI+j1Sgjx6rCh5HPw5T/yV9Mo
-         HTiB3Ji4HtV1N1yU9LTSSpJomh16lcl1Yp/aKwZwirASTVyIJJQTysUb8CHpo2+8Oe
-         3hu4SeJc9ITlz4pdImlv+j6rXSO3LNl0xGtD9r51rpdHyspqdvNxiJbwHhb+z5lHHn
-         s0HZXUooYhijAoCvYrsxsjYqh44DlXpYCGWcF4On9xO2fK23iqA5OXnkv9lWgrqB5/
-         IdqPB346sMuYSyzNtqXDHJ17B0K84jt5TSRhkB/DeQisLudnFo1Og6zEuKtwbizN8X
-         qkq+sXDhH8xkA==
-X-Nifty-SrcIP: [209.85.215.169]
-Received: by mail-pg1-f169.google.com with SMTP id x16so17679933pgj.3;
-        Tue, 13 Oct 2020 07:31:48 -0700 (PDT)
-X-Gm-Message-State: AOAM533L/j5NP0SGTwvQVzgeWXrppA03MOlRbVfHq6LOxl5Ojt2j8Dzo
-        3sXWArWMHhmYG4trznMsUl+nbBHG+Ze1G8DLEOo=
-X-Google-Smtp-Source: ABdhPJxQEpKrJv97JNnMtyZL/6zzLxfMcFXOLKK2hXBRKcuKHRyo30zIrJHi3byG9tmQNm6tYre1p+bv2hRJsgHxsv0=
-X-Received: by 2002:a63:1b44:: with SMTP id b4mr17246132pgm.175.1602599507368;
- Tue, 13 Oct 2020 07:31:47 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201001075723.24246-1-lukas.bulwahn@gmail.com>
-In-Reply-To: <20201001075723.24246-1-lukas.bulwahn@gmail.com>
-From:   Masahiro Yamada <masahiroy@kernel.org>
-Date:   Tue, 13 Oct 2020 23:31:10 +0900
-X-Gmail-Original-Message-ID: <CAK7LNARXirw-DZg1-Dwq0NhWtqyS9PCpFhzjL7bfZjQt5-dL6A@mail.gmail.com>
-Message-ID: <CAK7LNARXirw-DZg1-Dwq0NhWtqyS9PCpFhzjL7bfZjQt5-dL6A@mail.gmail.com>
-Subject: Re: [PATCH] kbuild: doc: describe proper script invocation
-To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Kees Cook <keescook@chromium.org>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        id S1727153AbgJMPCy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Oct 2020 11:02:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41290 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726157AbgJMPCy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Oct 2020 11:02:54 -0400
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F29C3C0613D0;
+        Tue, 13 Oct 2020 08:02:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=+GiKfWtAn/Mfo8qZVIIc64QAMOtmuubpCnTuDECij28=; b=Yfr09mI1ZEDPaPoTWudNu967GC
+        CssHCB69kfBaadvuNMM7MKvkl903XlgOcxWUnR+f0WsRzaj8Tl/2cWrgSJrveu6Yp5g6Nrf5jBGs7
+        /EOHT/Yqalf3EpFg1MmIoZ3scArTCoFgL37LFdUqyYkTSCO6ZCAX+A39kSldKWHAD784FRLNF+FbD
+        BmFES4JfB5pJz9WqEzlJGnW5yrs1c3otO+PRylZHmu0BNWnY8Sfuc7hmd6QEHDifhthgSaPjNNcuw
+        6fxCcTCG6s/pktboWgipBLos2BnLk9JFhBCEWVwu+f2kROVQFgLw4anMBVE0EpQRWFCfPN9ZTl1ZX
+        2b8Fm3TA==;
+Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1kSLpC-000727-93; Tue, 13 Oct 2020 15:02:50 +0000
+Date:   Tue, 13 Oct 2020 16:02:50 +0100
+From:   Matthew Wilcox <willy@infradead.org>
+To:     Peter Zijlstra <peterz@infradead.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Ujjwal Kumar <ujjwalkumar0501@gmail.com>,
-        linux-kernel-mentees@lists.linuxfoundation.org
-Content-Type: text/plain; charset="UTF-8"
+        Boqun Feng <boqun.feng@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 04/24] docs: lockdep-design: fix some warning issues
+Message-ID: <20201013150250.GJ20115@casper.infradead.org>
+References: <cover.1602590106.git.mchehab+huawei@kernel.org>
+ <c76318f859a78adb80a6eef63c5c777d05501198.1602590106.git.mchehab+huawei@kernel.org>
+ <20201013125206.GU2611@hirez.programming.kicks-ass.net>
+ <20201013131116.GG20115@casper.infradead.org>
+ <20201013140941.GC2594@hirez.programming.kicks-ass.net>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201013140941.GC2594@hirez.programming.kicks-ass.net>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Oct 1, 2020 at 4:57 PM Lukas Bulwahn <lukas.bulwahn@gmail.com> wrote:
->
-> During an investigation to fix up the execute bits of scripts in the kernel
-> repository, Andrew Morton and Kees Cook pointed out that the execute bit
-> should not matter, and that build scripts cannot rely on that. Kees could
-> not point to any documentation, though.
->
-> Masahiro Yamada explained the convention of setting execute bits to make it
-> easier for manual script invocation.
->
-> Provide some basic documentation how the build shall invoke scripts, such
-> that the execute bits do not matter, and acknowledge that execute bits
-> are useful nonetheless.
->
-> This serves as reference for further clean-up patches in the future.
->
-> Link: https://lore.kernel.org/lkml/20200830174409.c24c3f67addcce0cea9a9d4c@linux-foundation.org/
-> Link: https://lore.kernel.org/lkml/202008271102.FEB906C88@keescook/
-> Link: https://lore.kernel.org/linux-kbuild/CAK7LNAQdrvMkDA6ApDJCGr+5db8SiPo=G+p8EiOvnnGvEN80gA@mail.gmail.com/
->
-> Suggested-by: Andrew Morton <akpm@linux-foundation.org>
-> Suggested-by: Kees Cook <keescook@chromium.org>
-> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+On Tue, Oct 13, 2020 at 04:09:41PM +0200, Peter Zijlstra wrote:
+> On Tue, Oct 13, 2020 at 02:11:16PM +0100, Matthew Wilcox wrote:
+> > On Tue, Oct 13, 2020 at 02:52:06PM +0200, Peter Zijlstra wrote:
+> > > On Tue, Oct 13, 2020 at 02:14:31PM +0200, Mauro Carvalho Chehab wrote:
+> > > > +   =====  ===================================================
+> > > > +   ``.``  acquired while irqs disabled and not in irq context
+> > > > +   ``-``  acquired in irq context
+> > > > +   ``+``  acquired with irqs enabled
+> > > > +   ``?``  acquired in irq context with irqs enabled.
+> > > > +   =====  ===================================================
+> > >
+> > > NAK!
+> > 
+> > You're seriously suggesting that:
+> > 
+> > -   ===  ===================================================
+> > -   '.'  acquired while irqs disabled and not in irq context
+> > -   '-'  acquired in irq context
+> > -   '+'  acquired with irqs enabled
+> > -   '?'  acquired in irq context with irqs enabled.
+> > -   ===  ===================================================
+> > +   =====  ===================================================
+> > +   ``.``  acquired while irqs disabled and not in irq context
+> > +   ``-``  acquired in irq context
+> > +   ``+``  acquired with irqs enabled
+> > +   ``?``  acquired in irq context with irqs enabled.
+> > +   =====  ===================================================
+> > 
+> > this change makes the lockdep docs less readable?
+> 
+> Definitely makes it harder to read for me. My C trained eyes go WTF at
+> seeing it, which breaks the flow. ',' is a regular single character
+> constant, '','' a syntax error.
 
+OK, that's fair.  'a' is definitely a character constant.  Perhaps
+the automarkup script can take care of this for us?  We'd have to
+be careful not to catch anything we shouldn't've [1], but I'm sure
+there's a regex for it.  Something like "\<'.'\>", perhaps?
 
-Applied to linux-kbuild.
-Thanks.
+[1] I'm quite proud of that one.
 
+> > It's not the markup that makes the lockdep documentation hard to
+> > understand.
+> 
+> I'm not sure what you're alluding to, the subject just isn't easy to
+> begin with.
 
-> ---
-> RFC v1 -> RFC v2:
-> explain why execute bits are still convenient.
->
-> Kees, Andrew, please ack.
->
-> Masahiro-san, I have taken your feedback into account. Please pick this small
-> documentation update into your kbuild tree.
->
-> Ujjwal Kumar, a potential future mentee, will follow up with further fixes to
-> the build scripts.
->
->  Documentation/kbuild/makefiles.rst | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
->
-> diff --git a/Documentation/kbuild/makefiles.rst b/Documentation/kbuild/makefiles.rst
-> index 58d513a0fa95..bd3e1baf58be 100644
-> --- a/Documentation/kbuild/makefiles.rst
-> +++ b/Documentation/kbuild/makefiles.rst
-> @@ -21,6 +21,7 @@ This document describes the Linux kernel Makefiles.
->            --- 3.10 Special Rules
->            --- 3.11 $(CC) support functions
->            --- 3.12 $(LD) support functions
-> +          --- 3.13 Script Invocation
->
->         === 4 Host Program support
->            --- 4.1 Simple Host Program
-> @@ -605,6 +606,25 @@ more details, with real examples.
->                 #Makefile
->                 LDFLAGS_vmlinux += $(call ld-option, -X)
->
-> +3.13 Script invocation
-> +----------------------
-> +
-> +       Make rules may invoke scripts to build the kernel. The rules shall
-> +       always provide the appropriate interpreter to execute the script. They
-> +       shall not rely on the execute bits being set, and shall not invoke the
-> +       script directly. For the convenience of manual script invocation, such
-> +       as invoking ./scripts/checkpatch.pl, it is recommended to set execute
-> +       bits on the scripts nonetheless.
-> +
-> +       Kbuild provides variables $(CONFIG_SHELL), $(AWK), $(PERL),
-> +       $(PYTHON) and $(PYTHON3) to refer to interpreters for the respective
-> +       scripts.
-> +
-> +       Example::
-> +
-> +               #Makefile
-> +               cmd_depmod = $(CONFIG_SHELL) $(srctree)/scripts/depmod.sh $(DEPMOD) \
-> +                            $(KERNELRELEASE)
->
->  4 Host Program support
->  ======================
-> --
-> 2.17.1
->
-
-
--- 
-Best Regards
-Masahiro Yamada
+Absolutely.  The problem is (similar to most Linux documentation)
+the document doesn't know who its audience is.  It mixes internal
+implementation details of lockdep with what people need to know who
+are just trying to understand what a lockdep splat means.  I don't
+have time to restructure it right now though.
