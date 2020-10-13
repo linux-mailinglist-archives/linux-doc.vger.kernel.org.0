@@ -2,145 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E21E728CD7E
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 14:00:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A469128CDC4
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 14:03:52 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728651AbgJMMAP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Oct 2020 08:00:15 -0400
-Received: from mga02.intel.com ([134.134.136.20]:14109 "EHLO mga02.intel.com"
+        id S1727384AbgJMMCr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Oct 2020 08:02:47 -0400
+Received: from mail.kernel.org ([198.145.29.99]:37858 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728481AbgJML72 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 13 Oct 2020 07:59:28 -0400
-IronPort-SDR: PpIHyXp+/qzvkeT84o78c5M1SCrAluqNEqAKGYMU16OHAMPDZR2RrZ0Foa9+rfq/xmFiWZbcgk
- hp7TeW7m+BVw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9772"; a="152827280"
-X-IronPort-AV: E=Sophos;i="5.77,370,1596524400"; 
-   d="scan'208";a="152827280"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2020 04:59:26 -0700
-IronPort-SDR: +CYsTsmY3BO6jXl4YwQVqxzg7Mj0arD3Ox/RU3pLCDxWtYp6149sOP9VzZdMh63RZ3hO4rpB44
- 8ZJkg+6UaVKg==
-X-IronPort-AV: E=Sophos;i="5.77,370,1596524400"; 
-   d="scan'208";a="530368699"
-Received: from sobrien1-mobl1.ger.corp.intel.com (HELO localhost) ([10.249.35.215])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 13 Oct 2020 04:59:21 -0700
-Date:   Tue, 13 Oct 2020 14:59:18 +0300
-From:   Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
-To:     Sumit Garg <sumit.garg@linaro.org>
-Cc:     Mimi Zohar <zohar@linux.ibm.com>,
-        James Bottomley <jejb@linux.ibm.com>,
-        David Howells <dhowells@redhat.com>,
-        Jens Wiklander <jens.wiklander@linaro.org>,
+        id S1726597AbgJMMCq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 13 Oct 2020 08:02:46 -0400
+Received: from kernel.org (unknown [87.71.73.56])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 132CE206D9;
+        Tue, 13 Oct 2020 12:02:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1602590566;
+        bh=TDZn7whmFHZ7mrQRSKL+Shf6LpSB+qKaiSmTZfuhXGM=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=1lTKRo9Fkbx5SS+0a7Ss0Z9OpBU9P5lfkmHgFBdwWd5HZbvbbRcfTtYYqO3NT98MG
+         kQNIss+PV0qOGJsL4V/igBwzEJNjnuDRxSEe2+rhC0Yp9kADgwU70grmtdaYaFHV1s
+         40BaXgmJgEF+UQyaudOBACm7e/ioGiGLeYRu6mQs=
+Date:   Tue, 13 Oct 2020 15:02:38 +0300
+From:   Mike Rapoport <rppt@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        Janne Karhunen <janne.karhunen@gmail.com>,
-        Daniel Thompson <daniel.thompson@linaro.org>,
-        Markus Wamser <Markus.Wamser@mixed-mode.de>,
-        Luke Hinds <lhinds@redhat.com>,
-        "open list:ASYMMETRIC KEYS" <keyrings@vger.kernel.org>,
-        linux-integrity@vger.kernel.org,
-        linux-security-module@vger.kernel.org,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-        op-tee@lists.trustedfirmware.org,
-        Josh Poimboeuf <jpoimboe@redhat.com>
-Subject: Re: [PATCH v7 1/4] KEYS: trusted: Add generic trusted keys framework
-Message-ID: <20201013115918.GB141833@linux.intel.com>
-References: <1602065268-26017-1-git-send-email-sumit.garg@linaro.org>
- <1602065268-26017-2-git-send-email-sumit.garg@linaro.org>
- <20201013014304.GC41176@linux.intel.com>
- <CAFA6WYN1n_x1wUefXEf-4Y+bUZybNAMeD9cirvz4WQnK2E7djw@mail.gmail.com>
+        Andrew Morton <akpm@linux-foundation.org>,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org
+Subject: Re: [PATCH v6 55/80] memblock: get rid of a :c:type leftover
+Message-ID: <20201013120238.GE4251@kernel.org>
+References: <cover.1602589096.git.mchehab+huawei@kernel.org>
+ <4d161da11361ce386e7885873f6f4e014f0f2c99.1602589096.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <CAFA6WYN1n_x1wUefXEf-4Y+bUZybNAMeD9cirvz4WQnK2E7djw@mail.gmail.com>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+In-Reply-To: <4d161da11361ce386e7885873f6f4e014f0f2c99.1602589096.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 13, 2020 at 04:23:36PM +0530, Sumit Garg wrote:
-> On Tue, 13 Oct 2020 at 07:13, Jarkko Sakkinen
-> <jarkko.sakkinen@linux.intel.com> wrote:
-> >
-> > On Wed, Oct 07, 2020 at 03:37:45PM +0530, Sumit Garg wrote:
-> > > Current trusted keys framework is tightly coupled to use TPM device as
-> > > an underlying implementation which makes it difficult for implementations
-> > > like Trusted Execution Environment (TEE) etc. to provide trusted keys
-> > > support in case platform doesn't posses a TPM device.
-> > >
-> > > Add a generic trusted keys framework where underlying implementations
-> > > can be easily plugged in. Create struct trusted_key_ops to achieve this,
-> > > which contains necessary functions of a backend.
-> > >
-> > > Also, add a module parameter in order to select a particular trust source
-> > > in case a platform support multiple trust sources.
-> > >
-> > > Suggested-by: Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>
-> > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> >
-> > This is exactly kind of place where I think static_call() should be
-> > taken into use, which is a v5.10 feature [1]. For background and
-> > context, I'd read [2].
+On Tue, Oct 13, 2020 at 01:54:10PM +0200, Mauro Carvalho Chehab wrote:
+> chanseset b3a7bb1851c8 ("docs: get rid of :c:type explicit declarations for structs")
+> removed several :c:type: markups, except by one.
 > 
-> This looks like an interesting feature. But I am not sure about the
-> real benefits that it will provide in case of trusted keys. If we are
-> looking at it performance wise then I think the gain will be
-> negligible when compared with slow TPM communication interface (eg.
-> SPI, I2C) or when compared with context switching involved in TEE.
+> Now, Sphinx 3.x complains about it:
 > 
-> Also, it requires arch specific support too which currently seems to
-> be limited to x86 only.
-
-Please, do not purposely add indirect calls, unless you  must. Here it's
-not a must.
-
-static_call() is the correct kernel idiom to define what you are doing
-in this patch. arch's will catch up.
-
-> > The other thing that I see that does not make much else than additional
-> > complexity, is trusted_tpm.ko. We can do with one trusted.ko.
-> >
+> 	.../Documentation/core-api/boot-time-mm:26: ../mm/memblock.c:51: WARNING: Unparseable C cross-reference: 'struct\nmemblock_type'
+> 	Invalid C declaration: Expected identifier in nested name, got keyword: struct [error at 6]
+> 	  struct
+> 	memblock_type
+> 	  ------^
 > 
-> Current implementation only builds a single trusted.ko module. There
-> isn't any trusted_tpm.ko.
-> -Sumit
+> As, on Sphinx 3.x, the right markup is c:struct:`foo`.
+> 
+> So, let's remove it, relying on automarkup.py to convert it.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-You're right, I'm sorry. I misread this:
+Reviewed-by: Mike Rapoport <rppt@linux.ibm.com>
 
--static void __exit cleanup_trusted(void)
-+static void __exit exit_tpm_trusted(void)
- {
- 	if (chip) {
- 		put_device(&chip->dev);
-@@ -1257,7 +1029,11 @@  static void __exit cleanup_trusted(void)
- 	}
- }
- 
--late_initcall(init_trusted);
--module_exit(cleanup_trusted);
--
--MODULE_LICENSE("GPL");
-+struct trusted_key_ops tpm_trusted_key_ops = {
-+	.migratable = 1, /* migratable by default */
-+	.init = init_tpm_trusted,
-+	.seal = tpm_trusted_seal,
-+	.unseal = tpm_trusted_unseal,
-+	.get_random = tpm_trusted_get_random,
-+	.exit = exit_tpm_trusted,
-+};
+> ---
+>  mm/memblock.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+> 
+> diff --git a/mm/memblock.c b/mm/memblock.c
+> index 670216826940..a06e68b1e5a0 100644
+> --- a/mm/memblock.c
+> +++ b/mm/memblock.c
+> @@ -50,8 +50,8 @@
+>   *
+>   * Each region is represented by struct memblock_region that
+>   * defines the region extents, its attributes and NUMA node id on NUMA
+> - * systems. Every memory type is described by the :c:type:`struct
+> - * memblock_type` which contains an array of memory regions along with
+> + * systems. Every memory type is described by the struct memblock_type
+> + * which contains an array of memory regions along with
+>   * the allocator metadata. The "memory" and "reserved" types are nicely
+>   * wrapped with struct memblock. This structure is statically
+>   * initialized at build time. The region arrays are initially sized to
+> -- 
+> 2.26.2
+> 
 
-Please remove "__init" and  "__exit" for the functions as they are used
-as fields as members of a struct that has neither life span. That messed
-up my head.
-
-Please use a single convention for the function names. It would
-be optimal to prefix with the subsystem name because that makes easier
-to use tracing tools:  trusted_tpm_<callback name> would work.
-
-/Jarkko
+-- 
+Sincerely yours,
+Mike.
