@@ -2,69 +2,97 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 99C2428D2A3
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 18:52:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B37E28D28E
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 18:48:13 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728508AbgJMQw6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Oct 2020 12:52:58 -0400
-Received: from mail.adapt-ip.com ([173.164.178.19]:60192 "EHLO
-        web.adapt-ip.com" rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1727696AbgJMQw6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Oct 2020 12:52:58 -0400
-X-Greylist: delayed 423 seconds by postgrey-1.27 at vger.kernel.org; Tue, 13 Oct 2020 12:52:58 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by web.adapt-ip.com (Postfix) with ESMTP id 46B8A4FA377;
-        Tue, 13 Oct 2020 16:45:54 +0000 (UTC)
-X-Virus-Scanned: Debian amavisd-new at web.adapt-ip.com
-Received: from web.adapt-ip.com ([127.0.0.1])
-        by localhost (web.adapt-ip.com [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id RRucx4ImxBfd; Tue, 13 Oct 2020 16:45:51 +0000 (UTC)
-Received: from mail.ibsgaard.io (c-73-223-60-234.hsd1.ca.comcast.net [73.223.60.234])
-        (Authenticated sender: thomas@adapt-ip.com)
-        by web.adapt-ip.com (Postfix) with ESMTPSA id 5EC344FA372;
-        Tue, 13 Oct 2020 16:45:50 +0000 (UTC)
-MIME-Version: 1.0
-Date:   Tue, 13 Oct 2020 09:45:49 -0700
-From:   Thomas Pedersen <thomas@adapt-ip.com>
+        id S1728335AbgJMQsM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Oct 2020 12:48:12 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57570 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728328AbgJMQsM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Oct 2020 12:48:12 -0400
+Received: from mail-ot1-x342.google.com (mail-ot1-x342.google.com [IPv6:2607:f8b0:4864:20::342])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 48B3BC0613D0;
+        Tue, 13 Oct 2020 09:48:12 -0700 (PDT)
+Received: by mail-ot1-x342.google.com with SMTP id e20so605152otj.11;
+        Tue, 13 Oct 2020 09:48:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=zwnERbtjK98BZDP38JfMSXq7lY/lqD1s9bTHt/VKNxQ=;
+        b=fnalsexwDtPHpXytFFMOxK18SuNkOWOo02GQmlvY01PwtDLnTbA3h9ze1J7gEWwB3s
+         nw2/A0BN+SXD4CYfqPFASW4qQ4keOuWRd630K+1CRSqH2NvPp23epNXnBOPLbyDwdFMK
+         0cFt9yNU6D6shDJS4odwIy2FThFKTFmCQh9hW6CoGIufme+rr7bZe0qwi+RipUDwX4TV
+         jokEF9o79sLfmtlEiUS3jMe9vRi+yJvy8hNpczEx4t3G2SqJ16SMo8vOVc7OhmKNfHFF
+         nIqAzqbJ/ieJGe+PateKL3v5kNCPAR2dIVuPcVlmZrQWJFurjuahvUu5xgvw/XWlc0LH
+         e1qA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to:user-agent;
+        bh=zwnERbtjK98BZDP38JfMSXq7lY/lqD1s9bTHt/VKNxQ=;
+        b=FZNLCtIyuXbjuyXQWMg3hPitLU26hU5IuRfe2e4e7C/x5qSCy4vRxk0q/0PNW7mtES
+         wfD+bd7Ya3WkD2v1wUIGjuTI3j2N3j7tZrtSBosWIVcZEvt6XOLlKcmQg82UHZclxGU/
+         GDPdK/g/UL6P4KCwzd2ex6dgQdXgSh+6bObc1M0X/ePm265AwfQAAsQx71I8zTzzGCCX
+         yEgF3tMQQzXIOTSvxXLAcnzKFRzwNdeBlUZUIFIKU+helxE+TsctoXECil23JXPZabWX
+         Jy6zFv86VFrU4lzGl8Azx+usYYGgJ75qlhTZyDzRh1lUVOWC+KtbKgbU8KPXgF51DLLf
+         +m2w==
+X-Gm-Message-State: AOAM5302MJKTgjeUZVDHTWtDCu6/8FPWkakEMfRVNnYRgh/SsTbKfEez
+        sLr0bvDEo9Tiin/5B2iHoa0jqGocCxI=
+X-Google-Smtp-Source: ABdhPJwVNPqv0PLgz8GYgWA3Yh2rTf52Fn1fi8rKTfwQzDltDeMJYbF2sP3DH4wXdgSErY/UEIPutg==
+X-Received: by 2002:a05:6830:199:: with SMTP id q25mr356425ota.263.1602607691597;
+        Tue, 13 Oct 2020 09:48:11 -0700 (PDT)
+Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id o2sm96645oia.42.2020.10.13.09.48.10
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Tue, 13 Oct 2020 09:48:11 -0700 (PDT)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date:   Tue, 13 Oct 2020 09:48:09 -0700
+From:   Guenter Roeck <linux@roeck-us.net>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
         Jonathan Corbet <corbet@lwn.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        linux-kernel@vger.kernel.org, linux-wireless@vger.kernel.org,
-        netdev@vger.kernel.org
-Subject: Re: [PATCH v6 68/80] nl80211: docs: add a description for s1g_cap
- parameter
-In-Reply-To: <9633ea7d9b0cb2f997d784df86ba92e67659f29b.1602589096.git.mchehab+huawei@kernel.org>
-References: <cover.1602589096.git.mchehab+huawei@kernel.org>
- <9633ea7d9b0cb2f997d784df86ba92e67659f29b.1602589096.git.mchehab+huawei@kernel.org>
-User-Agent: Roundcube Webmail/1.4.9
-Message-ID: <53bc6de4ee69b43236866a4355859e2a@adapt-ip.com>
-X-Sender: thomas@adapt-ip.com
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+        Jean Delvare <jdelvare@suse.com>, linux-hwmon@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 01/24] docs: hwmon: adm1266.rst: fix a broken reference
+Message-ID: <20201013164809.GH251780@roeck-us.net>
+References: <cover.1602590106.git.mchehab+huawei@kernel.org>
+ <240216628f613d85fd1191b56debda611e8f659e.1602590106.git.mchehab+huawei@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <240216628f613d85fd1191b56debda611e8f659e.1602590106.git.mchehab+huawei@kernel.org>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2020-10-13 04:54, Mauro Carvalho Chehab wrote:
-> Changeset df78a0c0b67d ("nl80211: S1G band and channel definitions")
-> added a new parameter, but didn't add the corresponding kernel-doc
-> markup, as repoted when doing "make htmldocs":
+On Tue, Oct 13, 2020 at 02:14:28PM +0200, Mauro Carvalho Chehab wrote:
+> The reference was missing the extension, causing the
+> check script to complain.
 > 
-> 	./include/net/cfg80211.h:471: warning: Function parameter or member
-> 's1g_cap' not described in 'ieee80211_supported_band'
-> 
-> Add a documentation for it.
-
-Sorry about that. Patch looks good.
-
-> Fixes: df78a0c0b67d ("nl80211: S1G band and channel definitions")
 > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Signed-off-by: Thomas Pedersen <thomas@adapt-ip.com>
+Acked-by: Guenter Roeck <linux@roeck-us.net>
 
--- 
-thomas
+> ---
+>  Documentation/hwmon/adm1266.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/hwmon/adm1266.rst b/Documentation/hwmon/adm1266.rst
+> index 9257f8a48650..2b877011cfdf 100644
+> --- a/Documentation/hwmon/adm1266.rst
+> +++ b/Documentation/hwmon/adm1266.rst
+> @@ -20,7 +20,7 @@ ADM1266 is a sequencer that features voltage readback from 17 channels via an
+>  integrated 12 bit SAR ADC, accessed using a PMBus interface.
+>  
+>  The driver is a client driver to the core PMBus driver. Please see
+> -Documentation/hwmon/pmbus for details on PMBus client drivers.
+> +Documentation/hwmon/pmbus.rst for details on PMBus client drivers.
+>  
+>  
+>  Sysfs entries
+> -- 
+> 2.26.2
+> 
