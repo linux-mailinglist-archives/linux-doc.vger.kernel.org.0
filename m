@@ -2,103 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C78A728D0EC
-	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 17:03:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5167328D18C
+	for <lists+linux-doc@lfdr.de>; Tue, 13 Oct 2020 17:54:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727153AbgJMPCy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Oct 2020 11:02:54 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41290 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726157AbgJMPCy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Oct 2020 11:02:54 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F29C3C0613D0;
-        Tue, 13 Oct 2020 08:02:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=+GiKfWtAn/Mfo8qZVIIc64QAMOtmuubpCnTuDECij28=; b=Yfr09mI1ZEDPaPoTWudNu967GC
-        CssHCB69kfBaadvuNMM7MKvkl903XlgOcxWUnR+f0WsRzaj8Tl/2cWrgSJrveu6Yp5g6Nrf5jBGs7
-        /EOHT/Yqalf3EpFg1MmIoZ3scArTCoFgL37LFdUqyYkTSCO6ZCAX+A39kSldKWHAD784FRLNF+FbD
-        BmFES4JfB5pJz9WqEzlJGnW5yrs1c3otO+PRylZHmu0BNWnY8Sfuc7hmd6QEHDifhthgSaPjNNcuw
-        6fxCcTCG6s/pktboWgipBLos2BnLk9JFhBCEWVwu+f2kROVQFgLw4anMBVE0EpQRWFCfPN9ZTl1ZX
-        2b8Fm3TA==;
-Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kSLpC-000727-93; Tue, 13 Oct 2020 15:02:50 +0000
-Date:   Tue, 13 Oct 2020 16:02:50 +0100
-From:   Matthew Wilcox <willy@infradead.org>
-To:     Peter Zijlstra <peterz@infradead.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        id S1731285AbgJMPyJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 13 Oct 2020 11:54:09 -0400
+Received: from mail.kernel.org ([198.145.29.99]:41908 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727016AbgJMPyJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 13 Oct 2020 11:54:09 -0400
+Received: from localhost (dyndsl-091-249-035-207.ewe-ip-backbone.de [91.249.35.207])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 6CA1E25215;
+        Tue, 13 Oct 2020 15:54:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1602604448;
+        bh=trQOVCfY7quismV6EFJLZYCRoqbFMFBZuwroBsLlQXk=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=0kx25ZycPbfKI57m16/MizCeX6undrJikhtC1/6PMcHbuvDoojeIJt33jcVj7dyqY
+         8Tds4rJ9V8md2TQ6uyj2LwgSqtm+ub8CrArNHHGEQhfG0RDMMnYv82rPhVu46gxqJV
+         AbY0Ni7oe6OYo3jTrGI3Mz18cc03qwzcAtL+W4Ag=
+Date:   Tue, 13 Oct 2020 17:53:58 +0200
+From:   Wolfram Sang <wsa@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Boqun Feng <boqun.feng@gmail.com>,
-        Ingo Molnar <mingo@redhat.com>, Will Deacon <will@kernel.org>,
+        Balbir Singh <sblbir@amazon.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        linux-i2c@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 13/24] docs: i2c: index.rst: add
+ slave-testunit-backend.rst
+Message-ID: <20201013155358.GA1465@kunai>
+Mail-Followup-To: Wolfram Sang <wsa@kernel.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>, Balbir Singh <sblbir@amazon.com>,
+        Thomas Gleixner <tglx@linutronix.de>, linux-i2c@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2 04/24] docs: lockdep-design: fix some warning issues
-Message-ID: <20201013150250.GJ20115@casper.infradead.org>
 References: <cover.1602590106.git.mchehab+huawei@kernel.org>
- <c76318f859a78adb80a6eef63c5c777d05501198.1602590106.git.mchehab+huawei@kernel.org>
- <20201013125206.GU2611@hirez.programming.kicks-ass.net>
- <20201013131116.GG20115@casper.infradead.org>
- <20201013140941.GC2594@hirez.programming.kicks-ass.net>
+ <8b46f6d001962e7b562c3542eb4449bd905f448a.1602590106.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="jRHKVT23PllUwdXP"
 Content-Disposition: inline
-In-Reply-To: <20201013140941.GC2594@hirez.programming.kicks-ass.net>
+In-Reply-To: <8b46f6d001962e7b562c3542eb4449bd905f448a.1602590106.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 13, 2020 at 04:09:41PM +0200, Peter Zijlstra wrote:
-> On Tue, Oct 13, 2020 at 02:11:16PM +0100, Matthew Wilcox wrote:
-> > On Tue, Oct 13, 2020 at 02:52:06PM +0200, Peter Zijlstra wrote:
-> > > On Tue, Oct 13, 2020 at 02:14:31PM +0200, Mauro Carvalho Chehab wrote:
-> > > > +   =====  ===================================================
-> > > > +   ``.``  acquired while irqs disabled and not in irq context
-> > > > +   ``-``  acquired in irq context
-> > > > +   ``+``  acquired with irqs enabled
-> > > > +   ``?``  acquired in irq context with irqs enabled.
-> > > > +   =====  ===================================================
-> > >
-> > > NAK!
-> > 
-> > You're seriously suggesting that:
-> > 
-> > -   ===  ===================================================
-> > -   '.'  acquired while irqs disabled and not in irq context
-> > -   '-'  acquired in irq context
-> > -   '+'  acquired with irqs enabled
-> > -   '?'  acquired in irq context with irqs enabled.
-> > -   ===  ===================================================
-> > +   =====  ===================================================
-> > +   ``.``  acquired while irqs disabled and not in irq context
-> > +   ``-``  acquired in irq context
-> > +   ``+``  acquired with irqs enabled
-> > +   ``?``  acquired in irq context with irqs enabled.
-> > +   =====  ===================================================
-> > 
-> > this change makes the lockdep docs less readable?
-> 
-> Definitely makes it harder to read for me. My C trained eyes go WTF at
-> seeing it, which breaks the flow. ',' is a regular single character
-> constant, '','' a syntax error.
 
-OK, that's fair.  'a' is definitely a character constant.  Perhaps
-the automarkup script can take care of this for us?  We'd have to
-be careful not to catch anything we shouldn't've [1], but I'm sure
-there's a regex for it.  Something like "\<'.'\>", perhaps?
+--jRHKVT23PllUwdXP
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-[1] I'm quite proud of that one.
 
-> > It's not the markup that makes the lockdep documentation hard to
-> > understand.
-> 
-> I'm not sure what you're alluding to, the subject just isn't easy to
-> begin with.
+> Fixes: a8335c64c5f0 ("i2c: add slave testunit driver")
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Absolutely.  The problem is (similar to most Linux documentation)
-the document doesn't know who its audience is.  It mixes internal
-implementation details of lockdep with what people need to know who
-are just trying to understand what a lockdep splat means.  I don't
-have time to restructure it right now though.
+As discussed with v1, I already fixed it (correctly). Patch is in
+linux-next:
+
+https://git.kernel.org/pub/scm/linux/kernel/git/wsa/linux.git/commit/?h=i2c/for-next&id=40daf09a30a0c86a038bcce606604333f32e03f8
+
+Thanks!
+
+
+--jRHKVT23PllUwdXP
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAABCgAdFiEEOZGx6rniZ1Gk92RdFA3kzBSgKbYFAl+FzY0ACgkQFA3kzBSg
+KbaaXw/9GVxvuUSDOgJD2XFZbvdWzUHyr58OcfG6bnfRZrlD8RJPLSmGUTA8xsLr
+5AbQG5y18J84KIiUqQpfFXR8Tie0NmTb7cCzCz5S/uTTzuCNNt/WU04OCDdTrbFV
+ZkfxZV3chY+oo7yDRCsGzSNDj3Wn0MQlp5MKnSXjRoQAihxId0ePRSQ9F+r/vWlt
+wqpCN6kDFZrjKZESDlY6CReVpvt4VHzQfW8O2NzlSUgkP3c08xBa0ILRNZGC2wUs
+Cw4mngubxrXvFCt5i/p+a797GbB5rsamwu0inmnoDYD92+BDJpJicf5GsxeO1Z/B
+RpETW9U6lQZZ1AqolS0hLwt4BULgU5QQSUx9to7O6mcvI/0jLApRi60X5baf5rny
+w3W/spX6FzPBzrrwucQxg5/RpJIirTa8RANtXChGwcVFxucvX0nXEWS/URiejy8t
+nVL9wnCinWtBAR3/sYeOSy0jpUuNJ0EusOKdwiPZbZxz50zs4Da5l+ER3ZuTjtlB
+AXU1fzYl4OH041qioAyJOuXf6GV5YZJm+P3xPbc55gnTqLTC3tqmm5Uk8lq0X1aT
+VPvR1Xq3c55uUG8rBfR2HMh07jETerLuTd71plQz6yV0IpiwzSSd6fBVrI1K6fRX
+c2a4HsBmTaZ9fkQMxQ9Lby+ktflUXf0GX/E7k0TErp2gC08yg4Q=
+=0/8Q
+-----END PGP SIGNATURE-----
+
+--jRHKVT23PllUwdXP--
