@@ -2,129 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A3E8728D880
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Oct 2020 04:33:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A18B828DB09
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Oct 2020 10:20:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726120AbgJNCda (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 13 Oct 2020 22:33:30 -0400
-Received: from out30-132.freemail.mail.aliyun.com ([115.124.30.132]:58528 "EHLO
-        out30-132.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1727198AbgJNCda (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 13 Oct 2020 22:33:30 -0400
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R181e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04420;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=9;SR=0;TI=SMTPD_---0UByuk40_1602642805;
-Received: from IT-FVFX43SYHV2H.local(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0UByuk40_1602642805)
-          by smtp.aliyun-inc.com(127.0.0.1);
-          Wed, 14 Oct 2020 10:33:26 +0800
-Subject: Re: [PATCH v3] Documentation: Chinese translation of
- Documentation/arm64/hugetlbpage.rst
-To:     Bailu Lin <bailu.lin@vivo.com>
-Cc:     catalin.marinas@arm.com, corbet@lwn.net, harryxiyou@gmail.com,
-        kernel@vivo.com, linux-arm-kernel@lists.infradead.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        will@kernel.org
-References: <ab3df28a-cde4-67d1-d0a3-abaa5ada58a1@linux.alibaba.com>
- <20201014022003.43862-1-bailu.lin@vivo.com>
-From:   Alex Shi <alex.shi@linux.alibaba.com>
-Message-ID: <0fd33cc8-937d-692c-48f6-ae9105b649cb@linux.alibaba.com>
-Date:   Wed, 14 Oct 2020 10:33:11 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
+        id S1729110AbgJNITk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 14 Oct 2020 04:19:40 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58654 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728922AbgJNITd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 14 Oct 2020 04:19:33 -0400
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com [IPv6:2a00:1450:4864:20::344])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 85C90C041E73;
+        Tue, 13 Oct 2020 21:43:15 -0700 (PDT)
+Received: by mail-wm1-x344.google.com with SMTP id j136so1162742wmj.2;
+        Tue, 13 Oct 2020 21:43:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:date:to:cc:subject:in-reply-to:message-id:references
+         :user-agent:mime-version;
+        bh=yAoSXHRwpGz7nBgURGl4h1iZHKvaWjYO9+dk8dtTzEM=;
+        b=Y91XoDmgSV0T8y7s38jad1TN0OqdQ/W7/i8P2ncbuMKEZD2rOkSZiUQTJlsuYKHtPU
+         EAZV7qv1rUsvdBWUoA886/Y95M9vZa/oxqlJFhM8q/1rrvT6J84jeJlhZi8NQCojqDrj
+         Tes5NzvdJSB+DVYiNzB7Z+JvVuOHpaiNru8rAGagKUdC0j9MPOurw7mLoHNDCbFsPoZS
+         n583hEDRzu2p7Kqe01AlohE9ec6ZDpWlycrOa7cs+BNDFjntEoiVKIrhkwJA/95FI/mV
+         FSdQmGYWryAjzzPk7+g9a6lDfDynMecp9R4n0hxGRZiNmkM4V9grSiY5O0gZsORtJ/5Y
+         3abg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:date:to:cc:subject:in-reply-to:message-id
+         :references:user-agent:mime-version;
+        bh=yAoSXHRwpGz7nBgURGl4h1iZHKvaWjYO9+dk8dtTzEM=;
+        b=JOHhwdfZKe4yD68bJyQjxY1BrYQE1wRftfXe8xqtgIenqTaOY8P4GQhtxNJ2213hOx
+         fD+oN3qVtAq71HlsTo/SSr3bVLtG6EKsROmhtrRgm10x9+rHzWBwCEtARl/T2SJKzjTb
+         TVDO6uIxoT9bHFvUOjeYa2623nfyFopsNSrlV4OFe2FTmlQnB1GpDzM8mcYZSEDMOFsG
+         FJMdqGXeClm45nrcn8OcDxzyEX37aohLgT35SsGCdXRpHcPbsm8Ht9sAYGWcIax2jW5v
+         P/NFtkz7TrMExm8Gq7gQMHL2t4CPkr2S/Agaku02sj/eBOxi15KmsGN/DhBtqSE74ZKZ
+         +EFw==
+X-Gm-Message-State: AOAM532UQZiR34uXFHvqv+IdJYqNTrWuPGrD9kwZqhm8vBZwb0i5xfaJ
+        UbiOnJKPRe5pVwy73pOOnz0=
+X-Google-Smtp-Source: ABdhPJxLj7cfYT+/1rNY1VWyuk/FeNLUT9YgTom+iIidb6iYPJvpU8+DuMBSQu3AZwhlP+GOUgdJYw==
+X-Received: by 2002:a7b:c081:: with SMTP id r1mr1410127wmh.158.1602650594160;
+        Tue, 13 Oct 2020 21:43:14 -0700 (PDT)
+Received: from felia ([2001:16b8:2da8:8200:4c70:9c82:f3bf:bebb])
+        by smtp.gmail.com with ESMTPSA id h206sm1713989wmf.47.2020.10.13.21.43.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 13 Oct 2020 21:43:13 -0700 (PDT)
+From:   Lukas Bulwahn <lukas.bulwahn@gmail.com>
+X-Google-Original-From: Lukas Bulwahn <lukas@gmail.com>
+Date:   Wed, 14 Oct 2020 06:43:06 +0200 (CEST)
+X-X-Sender: lukas@felia
+To:     Masahiro Yamada <masahiroy@kernel.org>
+cc:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Kees Cook <keescook@chromium.org>,
+        Michal Marek <michal.lkml@markovi.net>,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Ujjwal Kumar <ujjwalkumar0501@gmail.com>,
+        linux-kernel-mentees@lists.linuxfoundation.org
+Subject: Re: [PATCH] kbuild: doc: describe proper script invocation
+In-Reply-To: <CAK7LNAR+W9h95sUZFwRHiyiDbUxn9b7KN5P1zKOAdR2emxp7=g@mail.gmail.com>
+Message-ID: <alpine.DEB.2.21.2010140636020.6186@felia>
+References: <20201001075723.24246-1-lukas.bulwahn@gmail.com> <CAK7LNARXirw-DZg1-Dwq0NhWtqyS9PCpFhzjL7bfZjQt5-dL6A@mail.gmail.com> <CAK7LNAR+W9h95sUZFwRHiyiDbUxn9b7KN5P1zKOAdR2emxp7=g@mail.gmail.com>
+User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
 MIME-Version: 1.0
-In-Reply-To: <20201014022003.43862-1-bailu.lin@vivo.com>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
 
 
-在 2020/10/14 上午10:20, Bailu Lin 写道:
-> This is a Chinese translated version of
->  Documentation/arm64/hugetlbpage.rst
+On Wed, 14 Oct 2020, Masahiro Yamada wrote:
+
+> On Tue, Oct 13, 2020 at 11:31 PM Masahiro Yamada <masahiroy@kernel.org> wrote:
+> >
+> > On Thu, Oct 1, 2020 at 4:57 PM Lukas Bulwahn <lukas.bulwahn@gmail.com> wrote:
+> > >
+> > > During an investigation to fix up the execute bits of scripts in the kernel
+> > > repository, Andrew Morton and Kees Cook pointed out that the execute bit
+> > > should not matter, and that build scripts cannot rely on that. Kees could
+> > > not point to any documentation, though.
+> > >
+> > > Masahiro Yamada explained the convention of setting execute bits to make it
+> > > easier for manual script invocation.
+> > >
+> > > Provide some basic documentation how the build shall invoke scripts, such
+> > > that the execute bits do not matter, and acknowledge that execute bits
+> > > are useful nonetheless.
+> > >
+> > > This serves as reference for further clean-up patches in the future.
+> > >
+> > > Link: https://lore.kernel.org/lkml/20200830174409.c24c3f67addcce0cea9a9d4c@linux-foundation.org/
+> > > Link: https://lore.kernel.org/lkml/202008271102.FEB906C88@keescook/
+> > > Link: https://lore.kernel.org/linux-kbuild/CAK7LNAQdrvMkDA6ApDJCGr+5db8SiPo=G+p8EiOvnnGvEN80gA@mail.gmail.com/
+> > >
+> > > Suggested-by: Andrew Morton <akpm@linux-foundation.org>
+> > > Suggested-by: Kees Cook <keescook@chromium.org>
+> > > Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+> >
+> >
+> > Applied to linux-kbuild.
+> > Thanks.
+> >
 > 
-> Signed-off-by: Bailu Lin <bailu.lin@vivo.com>
-> ---
-> Changes in v3:
->  - Modify a translation as Alex sugguested.
-> Changes in v2:
->  - Fix Sphinx 2.4.4's waring by increasing underline' size.
-> ---
->  Documentation/arm64/hugetlbpage.rst           |  2 +
->  .../translations/zh_CN/arm64/hugetlbpage.rst  | 45 +++++++++++++++++++
->  .../translations/zh_CN/arm64/index.rst        |  1 +
->  3 files changed, 48 insertions(+)
->  create mode 100644 Documentation/translations/zh_CN/arm64/hugetlbpage.rst
+> No, not really.
 > 
-> diff --git a/Documentation/arm64/hugetlbpage.rst b/Documentation/arm64/hugetlbpage.rst
-> index b44f939e5210..a110124c11e3 100644
-> --- a/Documentation/arm64/hugetlbpage.rst
-> +++ b/Documentation/arm64/hugetlbpage.rst
-> @@ -1,3 +1,5 @@
-> +.. _hugetlbpage_index:
-> +
->  ====================
->  HugeTLBpage on ARM64
->  ====================
-> diff --git a/Documentation/translations/zh_CN/arm64/hugetlbpage.rst b/Documentation/translations/zh_CN/arm64/hugetlbpage.rst
-> new file mode 100644
-> index 000000000000..13304d269d0b
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/arm64/hugetlbpage.rst
-> @@ -0,0 +1,45 @@
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: :ref:`Documentation/arm64/hugetlbpage.rst <hugetlbpage_index>`
-> +
-> +Translator: Bailu Lin <bailu.lin@vivo.com>
-> +
-> +=====================
-> +ARM64中的 HugeTLBpage
-> +=====================
-> +
-> +大页依靠有效利用 TLBs 来提高地址翻译的性能。这取决于以下
-> +两点 -
-> +
-> +  - 大页的大小
-> +  - TLBs 支持的条目大小
-> +
-> +ARM64 接口支持2种大页方式。
-> +
-> +1) pud/pmd 级别的块映射
-> +-----------------------
-> +
-> +这是常规大页，他们的 pmd 或 pud 页面表条目指向一个内存块。
-> +不管 TLB 中支持的条目大小如何，块映射可以减少翻译大页地址
-> +所需遍历的页表深度。
-> +
-> +2) 使用连续位
-> +-------------
-> +
-> +架构中转换页表条目(D4.5.3, ARM DDI 0487C.a)中提供一个连续
-> +位告诉 MMU 这个条目是一个连续条目集的一员，它可以被缓存在单
-> +个 TLB 条目中。
-> +
-> +在 Linux 中连续位用来增加 pmd 和 pte(最后一级)级别映射的大
-> +小。受支持的连续页表条目数量因页面大小和页表级别而异。
-> +
-> +
-> +支持以下大页尺寸配置 -
-> +
-> +  ====== ========   ====    ========    ===
-> +  -      CONT PTE    PMD    CONT PMD    PUD
-> +  ====== ========   ====    ========    ===
-> +  4K:         64K     2M         32M     1G
-> +  16K:         2M    32M          1G
-> +  64K:         2M   512M         16G
-> +  ====== ========   ====    ========    ===
-> diff --git a/Documentation/translations/zh_CN/arm64/index.rst b/Documentation/translations/zh_CN/arm64/index.rst
-> index 646ed1f7aea3..e31a6090384d 100644
-> --- a/Documentation/translations/zh_CN/arm64/index.rst
-> +++ b/Documentation/translations/zh_CN/arm64/index.rst
-> @@ -14,3 +14,4 @@ ARM64 架构
->      :maxdepth: 2
->  
->      amu
-> +    hugetlbpage
+> I will re-think if this is the right thing to do.
 > 
+>
+
+Masahiro-san, Andrew Morton has already picked this patch in his branch; 
+so, if we do not shout loudly, it will be merged. And we can follow up 
+with a solid improvement for rc2.
+
+I am happy to rework the documentation and help guide and review the 
+follow-up patches that have been sent by Ujjwal.
+
+Please provide some specific feedback what is wrong and why; I think the 
+basic request not to rely on the execute bit from Andrew and Kees is still 
+valid. Maybe we just need to be more specific on the rules to follow in 
+Makefiles and have multiple examples for the different cases to consider.
+
+Thanks,
+
+Lukas
