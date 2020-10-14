@@ -2,67 +2,265 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 599B028DEF0
-	for <lists+linux-doc@lfdr.de>; Wed, 14 Oct 2020 12:33:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7F45F28DF40
+	for <lists+linux-doc@lfdr.de>; Wed, 14 Oct 2020 12:44:15 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728233AbgJNKc7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 14 Oct 2020 06:32:59 -0400
-Received: from sonic306-35.consmr.mail.bf2.yahoo.com ([74.6.132.234]:45170
-        "EHLO sonic306-35.consmr.mail.bf2.yahoo.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726307AbgJNKc7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 14 Oct 2020 06:32:59 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602671578; bh=XwhqfvsLaPoE+EISCzullSfaZ4QzYpIGnpCOBzGFQBc=; h=Date:From:Reply-To:Subject:References:From:Subject; b=tH+7gItEZkf6E0/tcpRy6dIbsNjIC/j7GoQ4mdfxmqlTRTwYdKnmAasqwyf8ZDCgHmgyX4quHwn647HEwgUDl0bxaeCzWd4mXUF4ipwk6qrMnl0LL8lLVQauHleatNtS7lJqlGcKhR9xOrlENk05ZR9q60qeS/dJ3qu7nYNFTM8VpKrQp0U1Z6ToHKDjFsKW/JZoMyXAvSorwlqplpd6JzblivlS/nPMY3OMthb+ApQUz6ndK0xusY4gkMqH4+XcCMsXZZUIOEBNpDBA/6AjdYEE1zOZFswOC5KiATESWVyXU0o5GC1ffWI8FYAlao3SyQg/mXsKjr+iAjSPD6ovpw==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1602671578; bh=PMmMdjHKhN+6KGtbCTqRpg9Xjj81hO/8Z/W6n+3v48s=; h=Date:From:Subject; b=fbQVHEeMqYAUSlealDoAPnWai2HB32W1cjwW9yq1LvKBH1JVSF8ug+brX+ON+zoh+0IdSzH+mX6c6MAUlDO+jmtnqZ5FPQZtht4SRBxiVoN7TMKyaqSH8P9izgoDlumHHZ65iqU/V+XkjC7BNJKfdY5Y6xwSR3tFO1ZqB53iBkwncWcxKQnYgXXOZ0YA2YkIpbix519IFa2Q7xMFJtXCZLMcV9+TMBV/sUWPrGeyt2FHJhCxVbn2ymOhW2XATenBonqJwsVrmpfrzjk52IpAKVSUKxhsOZwOYR31xnX6O69WcjJJHB3ZF1kFC/vfJ25q2D17r44Ehuq3q/j1AM74Dg==
-X-YMail-OSG: YgMgLbMVM1mQNLsJtn_mP9r4sGwaP6aAQ3ztx4bZhuJ9YTU.rqXtIS.Ib6IgsPR
- qm1KlCU6Vd7jkUSe4BcoAERVc7qNsW.CLA7vYaZsP7vFpRpXtwzBDfa_RcFC0QDu9taqg4g1ObUI
- CdSOEUoVPtebZyFUKIzisRkZjcE79113FrqdSYNuCMR6C4wMoHcNdtJy8p_av3nqWEwYO7MSAfHS
- gVSMMp6SpGF91mlnLXfWmxdsPvWJqmL7BMVxeqJy12DDUIWozzwyplu9VXUxRCFez2unGnUX9GCl
- GB7lLY.8eT5_u3eMbMNMbNVEn4My1O3bpu5vGIwT75ROwzRluHwwuzqH.lWNBjiIy5EykDDutaW1
- jBFYFypri59DceSDFrC4zBQj6N.ccbA2mYGEIBnsna9k7.oWe2PKuykuLf5NciCZ2ro58gcwvOlm
- vlFkiSNwpWzkKYITJYqboW7gq_Z_0raee7aCJ_LPJOcUGeRuG9pjAEYR.jbRimIHMJ46BJF_VVEG
- NJOm4IrlFisJ.wA3pIkcqV_RbC89FzbVqS26ihz6S8TqgDYv8v5luHCUvBCffrgNce0axf4R8nnk
- doBgdflvTwocgVu5v.GSeBJPoPclXt0IXuvVjlRTuxHuK4owaV_0ogKY06Wxfap.23iB1MN5n7bp
- bHgan8V1LptNT3e7kz9DpBlhXMqsvtAw5dixSeGyMa_G2kqpA5JukAok1bKUFEk.lXwEnSAoT420
- MhMjtiXWsTuzr9H.m.XjkKpZLhVmEliOUKKuCgjGotj_nsr3m3UEVEyDnHftlsm20emgAyncWUtB
- bEfWFWSmhaNY0etIRVGo.lEE9V5n8KOZ5LZHSR2j2upQH_FTviRwfy8W9aoDi1h2Y26pGYSGKulQ
- mpFsqlW1dpwSqs9dpRYG3gMYvajLz09S9B6R9X_K6MYRKljh.tXwVTixQhAWd2m3TbO.oDTI4raw
- 6kpd_l3lX5batnuPVqG_1Rl4N.wOzgdVrvVUo4M1QNGCKuhjzrkLBIDuSwng8Wl_t62UhVcPmTDm
- S3aqCdprU8XCfDyt8wmehHp7GCmEUI.1W9OJzxiNNC8e.WODoZDTB7MM2r12XTdypMLOkmzozNI0
- .3.lVg7Uiy2f6jg6g737b3OFWsI6oEm6sYKsv0UMyDWNoxxX2eA5tDkkWfM8YnogZNihHMLLZA3I
- sRaeVz3QZo5LKiaPAI1BwEHw5mNJZ89N9uHTCgLGhGwEZebMTrCoJWNrrZ2IbT6eNt8FquHIyjcm
- xN7vLKtoXiuWhhb_As4HwPGNAWQXT3m7itS6W1xvRUsVzio9_ldrmkrjS7jbIvs8RuouiAC3TIng
- wSGcfqNgYbmCO4Cnb.yL4Gn9gmNyQ6hAnVWwZBMlzevKeQEl0qYWnuOVHg4z.jR0B0.HxPgITM2P
- mmfTgsasEMJD4vGaFT1IR8glIppCINBR8wXGyoAFcQ01MKkKsXwsKu1tCvv.K51aFaRRMAqiu2w-
- -
-Received: from sonic.gate.mail.ne1.yahoo.com by sonic306.consmr.mail.bf2.yahoo.com with HTTP; Wed, 14 Oct 2020 10:32:58 +0000
-Date:   Wed, 14 Oct 2020 10:30:57 +0000 (UTC)
-From:   Lisa Robinson <lis10@gdxcm.in>
-Reply-To: roblisa084@gmail.com
-Message-ID: <1200057936.359394.1602671457819@mail.yahoo.com>
-Subject: 
+        id S2388378AbgJNKn5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 14 Oct 2020 06:43:57 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53046 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730147AbgJNKnx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 14 Oct 2020 06:43:53 -0400
+Received: from mail-pj1-x1041.google.com (mail-pj1-x1041.google.com [IPv6:2607:f8b0:4864:20::1041])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A2160C0613D5;
+        Wed, 14 Oct 2020 03:43:53 -0700 (PDT)
+Received: by mail-pj1-x1041.google.com with SMTP id gm14so1308485pjb.2;
+        Wed, 14 Oct 2020 03:43:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=W3D78JnB3JWvtlnY5Ql/e6WWsfNU7jwi9/AJtLMFZTY=;
+        b=KapgrmEA/WHaS+v61nXXg+l4GfVSXCqX2Ug4wCHwGwPhucq6YR0P/xSpRHiqE1PCyu
+         +PUTqZZwZZa1BXHCtcfw8trIw2476f8furqXqjE5liY/cKGJ7kl9q6l1+oV/One3NXUS
+         uDapod6D+kFWsOGSSxPI9jPazns3y13nJCQb5XY1cGZqpqRrGvrgYK3dUtFVfeb2ShxV
+         ftPdiXm+/cIuUL0mUDGS77D7XbIWSynYSg7KLfuw1QaslfKEmSYwoQUjM4kTGMKXAZGK
+         xepG2P1DqNKNjbUlFBPq5gtGhORIEIt0LbrnCLCLfCVB+eT/GL6tCewXXGIDMfz7f/2O
+         l6zg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=W3D78JnB3JWvtlnY5Ql/e6WWsfNU7jwi9/AJtLMFZTY=;
+        b=fkofk19NrPYx8nXHzQdgb55HqGZJDBokdSZKbqjylWn4OSdk5+txkXP1FDh3/Di8hZ
+         fir60NtIb1sX6ZP6ifkTMgeWuFOzoT+NWKTES909Aw5xwvFIiS6CvkwQZ7eopa6sCRa4
+         l80zwso8lTM3JyJ/Cw12nZ+iJ/+1HHeiXirFx8c75lpN8a3NIc63E3prEqIdVxKTxzLa
+         z6IxCkBExOte2npWHrVGn/OWgTN6AyHWz1XXVXm5bVHsU/iobAdZrbvro2FMrZqOp/ic
+         5eDNVSA9kg1rhqEyFpTLPkYQvWLk3pE3t5Bqffwa2mEVDkoUw2R3ur6oFibOU8bj2WwT
+         1kEQ==
+X-Gm-Message-State: AOAM533DqIOSvlnrOGzcMv9h6nT8PGOZyhTWzEYBavHH+0c5ThPA1yPU
+        H0mVMxGh8a0jImJ6xV/zorg=
+X-Google-Smtp-Source: ABdhPJw7jmQdaX7le3EDyRuKq9wreKdZDW3zZ7R69YsvFSt7oSLtjF+GN5ZoZvGZXMdOgFowRJ5D6w==
+X-Received: by 2002:a17:902:b60f:b029:d3:df34:31e6 with SMTP id b15-20020a170902b60fb02900d3df3431e6mr3568673pls.59.1602672233172;
+        Wed, 14 Oct 2020 03:43:53 -0700 (PDT)
+Received: from localhost ([2001:e42:102:1532:160:16:113:140])
+        by smtp.gmail.com with ESMTPSA id i126sm2932209pfc.48.2020.10.14.03.43.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Oct 2020 03:43:52 -0700 (PDT)
+From:   Coiby Xu <coiby.xu@gmail.com>
+To:     devel@driverdev.osuosl.org
+Cc:     Benjamin Poirier <benjamin.poirier@gmail.com>,
+        Shung-Hsi Yu <shung-hsi.yu@suse.com>,
+        Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+        Dan Carpenter <dan.carpenter@oracle.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        netdev@vger.kernel.org (open list:NETWORKING [GENERAL]),
+        linux-doc@vger.kernel.org (open list:DOCUMENTATION),
+        linux-kernel@vger.kernel.org (open list)
+Subject: [PATCH v2 7/7] staging: qlge: add documentation for debugging qlge
+Date:   Wed, 14 Oct 2020 18:43:06 +0800
+Message-Id: <20201014104306.63756-8-coiby.xu@gmail.com>
+X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20201014104306.63756-1-coiby.xu@gmail.com>
+References: <20201014104306.63756-1-coiby.xu@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-References: <1200057936.359394.1602671457819.ref@mail.yahoo.com>
-X-Mailer: WebService/1.1.16845 YMailNodin Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36
-To:     unlisted-recipients:; (no To-header on input)
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Instructions and examples on kernel data structures dumping and
+coredump.
 
+Signed-off-by: Coiby Xu <coiby.xu@gmail.com>
+---
+ .../networking/device_drivers/index.rst       |   1 +
+ .../device_drivers/qlogic/index.rst           |  18 +++
+ .../networking/device_drivers/qlogic/qlge.rst | 118 ++++++++++++++++++
+ MAINTAINERS                                   |   6 +
+ 4 files changed, 143 insertions(+)
+ create mode 100644 Documentation/networking/device_drivers/qlogic/index.rst
+ create mode 100644 Documentation/networking/device_drivers/qlogic/qlge.rst
 
-Wen es betrifft,
+diff --git a/Documentation/networking/device_drivers/index.rst b/Documentation/networking/device_drivers/index.rst
+index a3113ffd7a16..d8279de7bf25 100644
+--- a/Documentation/networking/device_drivers/index.rst
++++ b/Documentation/networking/device_drivers/index.rst
+@@ -15,6 +15,7 @@ Contents:
+    ethernet/index
+    fddi/index
+    hamradio/index
++   qlogic/index
+    wan/index
+    wifi/index
+ 
+diff --git a/Documentation/networking/device_drivers/qlogic/index.rst b/Documentation/networking/device_drivers/qlogic/index.rst
+new file mode 100644
+index 000000000000..ad05b04286e4
+--- /dev/null
++++ b/Documentation/networking/device_drivers/qlogic/index.rst
+@@ -0,0 +1,18 @@
++.. SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
++
++QLogic QLGE Device Drivers
++===============================================
++
++Contents:
++
++.. toctree::
++   :maxdepth: 2
++
++   qlge
++
++.. only::  subproject and html
++
++   Indices
++   =======
++
++   * :ref:`genindex`
+diff --git a/Documentation/networking/device_drivers/qlogic/qlge.rst b/Documentation/networking/device_drivers/qlogic/qlge.rst
+new file mode 100644
+index 000000000000..0b888253d152
+--- /dev/null
++++ b/Documentation/networking/device_drivers/qlogic/qlge.rst
+@@ -0,0 +1,118 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++=======================================
++QLogic QLGE 10Gb Ethernet device driver
++=======================================
++
++This driver use drgn and devlink for debugging.
++
++Dump kernel data structures in drgn
++-----------------------------------
++
++To dump kernel data structures, the following Python script can be used
++in drgn:
++
++.. code-block:: python
++
++	def align(x, a):
++	    """the alignment a should be a power of 2
++	    """
++	    mask = a - 1
++	    return (x+ mask) & ~mask
++
++	def struct_size(struct_type):
++	    struct_str = "struct {}".format(struct_type)
++	    return sizeof(Object(prog, struct_str, address=0x0))
++
++	def netdev_priv(netdevice):
++	    NETDEV_ALIGN = 32
++	    return netdevice.value_() + align(struct_size("net_device"), NETDEV_ALIGN)
++
++	name = 'xxx'
++	qlge_device = None
++	netdevices = prog['init_net'].dev_base_head.address_of_()
++	for netdevice in list_for_each_entry("struct net_device", netdevices, "dev_list"):
++	    if netdevice.name.string_().decode('ascii') == name:
++	        print(netdevice.name)
++
++	ql_adapter = Object(prog, "struct ql_adapter", address=netdev_priv(qlge_device))
++
++The struct ql_adapter will be printed in drgn as follows,
++
++    >>> ql_adapter
++    (struct ql_adapter){
++            .ricb = (struct ricb){
++                    .base_cq = (u8)0,
++                    .flags = (u8)120,
++                    .mask = (__le16)26637,
++                    .hash_cq_id = (u8 [1024]){ 172, 142, 255, 255 },
++                    .ipv6_hash_key = (__le32 [10]){},
++                    .ipv4_hash_key = (__le32 [4]){},
++            },
++            .flags = (unsigned long)0,
++            .wol = (u32)0,
++            .nic_stats = (struct nic_stats){
++                    .tx_pkts = (u64)0,
++                    .tx_bytes = (u64)0,
++                    .tx_mcast_pkts = (u64)0,
++                    .tx_bcast_pkts = (u64)0,
++                    .tx_ucast_pkts = (u64)0,
++                    .tx_ctl_pkts = (u64)0,
++                    .tx_pause_pkts = (u64)0,
++                    ...
++            },
++            .active_vlans = (unsigned long [64]){
++                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 52780853100545, 18446744073709551615,
++                    18446619461681283072, 0, 42949673024, 2147483647,
++            },
++            .rx_ring = (struct rx_ring [17]){
++                    {
++                            .cqicb = (struct cqicb){
++                                    .msix_vect = (u8)0,
++                                    .reserved1 = (u8)0,
++                                    .reserved2 = (u8)0,
++                                    .flags = (u8)0,
++                                    .len = (__le16)0,
++                                    .rid = (__le16)0,
++                                    ...
++                            },
++                            .cq_base = (void *)0x0,
++                            .cq_base_dma = (dma_addr_t)0,
++                    }
++                    ...
++            }
++    }
++
++coredump via devlink
++--------------------
++
++
++And the coredump obtained via devlink in json format looks like,
++
++.. code:: shell
++
++	$ devlink health dump show DEVICE reporter coredump -p -j
++	{
++	    "Core Registers": {
++	        "segment": 1,
++	        "values": [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ]
++	    },
++	    "Test Logic Regs": {
++	        "segment": 2,
++	        "values": [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ]
++	    },
++	    "RMII Registers": {
++	        "segment": 3,
++	        "values": [ 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0 ]
++	    },
++	    ...
++	    "Sem Registers": {
++	        "segment": 50,
++	        "values": [ 0,0,0,0 ]
++	    }
++	}
++
++When the module parameter qlge_force_coredump is set to be true, the MPI
++RISC reset before coredumping. So coredumping will much longer since
++devlink tool has to wait for 5 secs for the resetting to be
++finished.
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 05d9b8c00eed..1def89b15913 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -14413,6 +14413,12 @@ L:	netdev@vger.kernel.org
+ S:	Supported
+ F:	drivers/staging/qlge/
+ 
++QLOGIC QLGE 10Gb ETHERNET DRIVER
++M:	Coiby Xu <coiby.xu@gmail.com>
++L:	netdev@vger.kernel.org
++S:	Maintained
++F:	Documentation/networking/device_drivers/qlogic/qlge.rst
++
+ QM1D1B0004 MEDIA DRIVER
+ M:	Akihiro Tsukada <tskd08@gmail.com>
+ L:	linux-media@vger.kernel.org
+-- 
+2.28.0
 
-Ich habe mehrmals versucht, dieses Konto per E-Mail zu versenden, da Sie f=
-=C3=BCr die Teilnahme an meinem Wohlt=C3=A4tigkeitsprojekt ausgew=C3=A4hlt =
-wurden, um pers=C3=B6nlich Geldspenden zu erhalten. Nachdem Sie diese E-Mai=
-l erhalten haben, kontaktieren Sie mich bitte so schnell wie m=C3=B6glich, =
-um detailliertere Informationen und Anspr=C3=BCche zu erhalten.
-
-Ihre Antwort wird eine Seele in Ihrer N=C3=A4he retten, und bitte lassen Si=
-e uns diese Welt zu einem besseren Ort machen.
-
-Sch=C3=B6ne Gr=C3=BC=C3=9Fe,
-Frau Lisa Robinson
-Copyright =C2=A9 2020 Lisa Robinson-Stiftung. Alle Rechte vorbehalten.
