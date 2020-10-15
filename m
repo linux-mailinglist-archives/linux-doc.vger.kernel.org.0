@@ -2,159 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 934D528EBA2
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Oct 2020 05:37:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id F281128EBB8
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Oct 2020 05:46:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387634AbgJODhY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 14 Oct 2020 23:37:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40930 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729604AbgJODhR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 14 Oct 2020 23:37:17 -0400
-Received: from mail-pf1-x442.google.com (mail-pf1-x442.google.com [IPv6:2607:f8b0:4864:20::442])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 86083C0613D2
-        for <linux-doc@vger.kernel.org>; Wed, 14 Oct 2020 20:37:17 -0700 (PDT)
-Received: by mail-pf1-x442.google.com with SMTP id w21so1124518pfc.7
-        for <linux-doc@vger.kernel.org>; Wed, 14 Oct 2020 20:37:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=SurWNoEuD6TTtB4XFp88vfsS4MGv6DgcHJa9LNU4sRM=;
-        b=cSRzfwSvHvjyHkoYE/K38T5Ur3yGQeAFQ/A0BVo05yNGOGjLBV7RmE2tnUgaWIJZcm
-         gJCezP1zrirgCcF787B66uPhC8K1r2moXDD1eVOS3GEn7XGMiaIh5afWbiuFJbQx7EDS
-         fTDqiysEC79UP8Y/HxFBu2Q2r7ifekHzFspcE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=SurWNoEuD6TTtB4XFp88vfsS4MGv6DgcHJa9LNU4sRM=;
-        b=NAexvHyPnxeA91f9BoAlwH3+xZIXNS5T4ERdCsAUO0uKwzRMV504KeNlHMJoUK8XuS
-         rr2MfJkX2fC5vClRiUm1elU74glKe77l2qe1GBlJofCVtlbuoqzk9fUZWYL6rIWZmNH+
-         ynNrkBT/Ch+tnwjvL3B9gJ3JcRaLenqvZcVjvddcd9xtGSV8AY4c2aHIU6YXUNzyv7He
-         AXsZCbsHTdhWEbwO5elCFoieTXoVotSsbqfylauuBEDxPrLGvd3cAWVvliKUIK6hT3CT
-         59ETXs2Hwzzd3zEBpoNOyvWg6cvQqgAQOvkSD+xYrgWXxd9fOxSKTwHLtEG0nx/tnyT6
-         f48g==
-X-Gm-Message-State: AOAM532pdPpTL+jlC4RwLQC0+P2tUIarxnoCFm80SUr7kCey9NfxNBAb
-        vqO07BraQsK2KhUmCKm8ACNAwA==
-X-Google-Smtp-Source: ABdhPJxtMQurAs24PVDe3ClRON3VZXKCxnFyNNGqQxzQkVllW9GeD0AsKT82EWzmD3Jg8GfZs9INug==
-X-Received: by 2002:a63:5c5e:: with SMTP id n30mr1749232pgm.54.1602733036990;
-        Wed, 14 Oct 2020 20:37:16 -0700 (PDT)
-Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
-        by smtp.gmail.com with ESMTPSA id t6sm1204756pfl.50.2020.10.14.20.37.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 14 Oct 2020 20:37:14 -0700 (PDT)
-From:   Kees Cook <keescook@chromium.org>
-To:     Andrew Morton <akpm@linux-foundation.org>
-Cc:     Kees Cook <keescook@chromium.org>, Marco Elver <elver@google.com>,
-        stable@vger.kernel.org, Vlastimil Babka <vbabka@suse.cz>,
-        Christoph Lameter <cl@linux.com>,
-        Waiman Long <longman@redhat.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        David Rientjes <rientjes@google.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        Roman Gushchin <guro@fb.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org
-Subject: [PATCH v3 3/3] mm/slub: Actually fix freelist pointer vs redzoning
-Date:   Wed, 14 Oct 2020 20:37:12 -0700
-Message-Id: <20201015033712.1491731-4-keescook@chromium.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201015033712.1491731-1-keescook@chromium.org>
-References: <20201015033712.1491731-1-keescook@chromium.org>
+        id S1729247AbgJODqq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 14 Oct 2020 23:46:46 -0400
+Received: from mga03.intel.com ([134.134.136.65]:19759 "EHLO mga03.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727281AbgJODqq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 14 Oct 2020 23:46:46 -0400
+IronPort-SDR: oqXXNKu6P/DWlqnbFJQN/3W5BEe+cUTAQc62mFUJ4eOu11uxTB1rGIl7Nz3Skg62oOoQYh9E4R
+ hSPkgNwu9Mhg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9774"; a="166313689"
+X-IronPort-AV: E=Sophos;i="5.77,377,1596524400"; 
+   d="scan'208";a="166313689"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by orsmga103.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2020 20:46:45 -0700
+IronPort-SDR: frVKPMJAzb1m9jivZ/XfXNx7VCqDkNNADy0hOKKQpIfrYnJ8mOjxbWGy/FPBq9IrrLYbuNMuZF
+ XeLLSEBZdFVw==
+X-IronPort-AV: E=Sophos;i="5.77,377,1596524400"; 
+   d="scan'208";a="531094057"
+Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
+  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2020 20:46:45 -0700
+Date:   Wed, 14 Oct 2020 20:46:45 -0700
+From:   Ira Weiny <ira.weiny@intel.com>
+To:     Dave Hansen <dave.hansen@intel.com>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Dan Williams <dan.j.williams@intel.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Fenghua Yu <fenghua.yu@intel.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-nvdimm@lists.01.org,
+        linux-fsdevel@vger.kernel.org, linux-mm@kvack.org,
+        linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH RFC V3 7/9] x86/entry: Preserve PKRS MSR across exceptions
+Message-ID: <20201015034645.GQ2046448@iweiny-DESK2.sc.intel.com>
+References: <20201009194258.3207172-1-ira.weiny@intel.com>
+ <20201009194258.3207172-8-ira.weiny@intel.com>
+ <6006a4c8-32bd-04ca-95cc-b2736a5cef72@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <6006a4c8-32bd-04ca-95cc-b2736a5cef72@intel.com>
+User-Agent: Mutt/1.11.1 (2018-12-01)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-It turns out that SLUB redzoning ("slub_debug=Z") checks from
-s->object_size rather than from s->inuse (which is normally bumped
-to make room for the freelist pointer), so a cache created with an
-object size less than 24 would have the freelist pointer written beyond
-s->object_size, causing the redzone to be corrupted by the freelist
-pointer. This was very visible with "slub_debug=ZF":
+On Tue, Oct 13, 2020 at 11:52:32AM -0700, Dave Hansen wrote:
+> On 10/9/20 12:42 PM, ira.weiny@intel.com wrote:
+> > @@ -341,6 +341,9 @@ noinstr void irqentry_enter(struct pt_regs *regs, irqentry_state_t *state)
+> >  	/* Use the combo lockdep/tracing function */
+> >  	trace_hardirqs_off();
+> >  	instrumentation_end();
+> > +
+> > +done:
+> > +	irq_save_pkrs(state);
+> >  }
+> 
+> One nit: This saves *and* sets PKRS.  It's not obvious from the call
+> here that PKRS is altered at this site.  Seems like there could be a
+> better name.
+> 
+> Even if we did:
+> 
+> 	irq_save_set_pkrs(state, INIT_VAL);
+> 
+> It would probably compile down to the same thing, but be *really*
+> obvious what's going on.
 
-BUG test (Tainted: G    B            ): Right Redzone overwritten
------------------------------------------------------------------------------
+I suppose that is true.  But I think it is odd having a parameter which is the
+same for every call site.
 
-INFO: 0xffff957ead1c05de-0xffff957ead1c05df @offset=1502. First byte 0x1a instead of 0xbb
-INFO: Slab 0xffffef3950b47000 objects=170 used=170 fp=0x0000000000000000 flags=0x8000000000000200
-INFO: Object 0xffff957ead1c05d8 @offset=1496 fp=0xffff957ead1c0620
+But I'm not going to quibble over something like this.
 
-Redzone  (____ptrval____): bb bb bb bb bb bb bb bb               ........
-Object   (____ptrval____): 00 00 00 00 00 f6 f4 a5               ........
-Redzone  (____ptrval____): 40 1d e8 1a aa                        @....
-Padding  (____ptrval____): 00 00 00 00 00 00 00 00               ........
+Changed,
+Ira
 
-Adjust the offset to stay within s->object_size.
-
-(Note that no caches in this size range are known to exist in the kernel
-currently.)
-
-Reported-by: Marco Elver <elver@google.com>
-Link: https://lore.kernel.org/linux-mm/20200807160627.GA1420741@elver.google.com/
-Fixes: 89b83f282d8b (slub: avoid redzone when choosing freepointer location)
-Cc: stable@vger.kernel.org
-Tested-by: Marco Elver <elver@google.com>
-Link: https://lore.kernel.org/lkml/CANpmjNOwZ5VpKQn+SYWovTkFB4VsT-RPwyENBmaK0dLcpqStkA@mail.gmail.com
-Signed-off-by: Kees Cook <keescook@chromium.org>
-Acked-by: Vlastimil Babka <vbabka@suse.cz>
-Link: https://lore.kernel.org/lkml/0f7dd7b2-7496-5e2d-9488-2ec9f8e90441@suse.cz/
----
- mm/slub.c | 14 +++-----------
- 1 file changed, 3 insertions(+), 11 deletions(-)
-
-diff --git a/mm/slub.c b/mm/slub.c
-index 752fad36522c..6f115e56c5d0 100644
---- a/mm/slub.c
-+++ b/mm/slub.c
-@@ -3637,7 +3637,6 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- {
- 	slab_flags_t flags = s->flags;
- 	unsigned int size = s->object_size;
--	unsigned int freepointer_area;
- 	unsigned int order;
- 
- 	/*
-@@ -3646,13 +3645,6 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- 	 * the possible location of the free pointer.
- 	 */
- 	size = ALIGN(size, sizeof(void *));
--	/*
--	 * This is the area of the object where a freepointer can be
--	 * safely written. If redzoning adds more to the inuse size, we
--	 * can't use that portion for writing the freepointer, so
--	 * s->offset must be limited within this for the general case.
--	 */
--	freepointer_area = size;
- 
- #ifdef CONFIG_SLUB_DEBUG
- 	/*
-@@ -3678,7 +3670,7 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- 
- 	/*
- 	 * With that we have determined the number of bytes in actual use
--	 * by the object. This is the potential offset to the free pointer.
-+	 * by the object and redzoning.
- 	 */
- 	s->inuse = size;
- 
-@@ -3701,13 +3693,13 @@ static int calculate_sizes(struct kmem_cache *s, int forced_order)
- 		 */
- 		s->offset = size;
- 		size += sizeof(void *);
--	} else if (freepointer_area > sizeof(void *)) {
-+	} else {
- 		/*
- 		 * Store freelist pointer near middle of object to keep
- 		 * it away from the edges of the object to avoid small
- 		 * sized over/underflows from neighboring allocations.
- 		 */
--		s->offset = ALIGN(freepointer_area / 2, sizeof(void *));
-+		s->offset = ALIGN_DOWN(s->object_size / 2, sizeof(void *));
- 	}
- 
- #ifdef CONFIG_SLUB_DEBUG
--- 
-2.25.1
-
+> 
+> >  void irqentry_exit_cond_resched(void)
+> > @@ -362,7 +365,12 @@ noinstr void irqentry_exit(struct pt_regs *regs, irqentry_state_t *state)
+> >  	/* Check whether this returns to user mode */
+> >  	if (user_mode(regs)) {
+> >  		irqentry_exit_to_user_mode(regs);
+> > -	} else if (!regs_irqs_disabled(regs)) {
+> > +		return;
+> > +	}
+> > +
+> > +	irq_restore_pkrs(state);
+> > +
+> > +	if (!regs_irqs_disabled(regs)) {
+> >  		/*
+> >  		 * If RCU was not watching on entry this needs to be done
+> >  		 * carefully and needs the same ordering of lockdep/tracing
+> > 
+> 
