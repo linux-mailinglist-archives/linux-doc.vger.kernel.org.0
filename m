@@ -2,127 +2,213 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1C72328E9F4
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Oct 2020 03:25:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id A49FA28E9A3
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Oct 2020 03:10:39 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388578AbgJOBY6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 14 Oct 2020 21:24:58 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48188 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1732044AbgJOBYi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 14 Oct 2020 21:24:38 -0400
-Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com [IPv6:2607:f8b0:4864:20::d42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C64B5C0F26F7
-        for <linux-doc@vger.kernel.org>; Wed, 14 Oct 2020 18:06:54 -0700 (PDT)
-Received: by mail-io1-xd42.google.com with SMTP id y20so2218202iod.5
-        for <linux-doc@vger.kernel.org>; Wed, 14 Oct 2020 18:06:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=nuoA4nhqaT2r5Q46oH6MDqZrYkcrLiu5o7waToPeU4U=;
-        b=ZfM2dR1TVM9711DQqLS1u7B81AJpL280LQQTwlJw+3/gMKiDTmwBAI85Q+aCbOog6r
-         xyaCpCPr5oP/gIjJF4y8l7sZYHvPdjj6tGZuEZud6PFI7d6Gw154k4gtiTvQvaQho3TP
-         8LSCyi4Xajhw1knanNXpifLBMBtJd4S2L1MdM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=nuoA4nhqaT2r5Q46oH6MDqZrYkcrLiu5o7waToPeU4U=;
-        b=k2ke49a0O3ufqyMJSMDqOf9adhQdZ6M7TgJ0y6I/oEwu/Lu85QGjnMU6PBUPxyzfGs
-         6C4Z4YsWE8hge7egUHtCWDD80C71e5TYqCXiEOOEvKix3IrmQ3eACjabau5JxtJ6PEo0
-         vzyddVo7uK01HVz6Zzt1b4DDo+WEWlaOO68YpuLSYEhHpH0tYj5vy6zu6gU2JJFTdjmd
-         v0UlO/cVG873Dl6Fl3GjSmllwVuil/arN6Y7ZTfev0CQ9xKtg9S3Y+o4AAUDIM/yMqmf
-         Gi30edcXs/Yq6mEN8O12vpAWTdsCoNSAiHIkIYx9mmQi5gd2EH5yLuhoJu+f9qoOfaNW
-         YfGw==
-X-Gm-Message-State: AOAM530fhaXnRSDXiN2XASBCgqg9mSJL464qFPGxPBDncRLA7vB2FaxZ
-        x6KF3Fy4eKY6oL5tNrTr7w5n7g==
-X-Google-Smtp-Source: ABdhPJwZ8n+nuyRdHP5Sff3yx8mk/bObtC07yQCShDgVe4UfTBPTIBPbPI99IitZ3cn80JwKdFFEQg==
-X-Received: by 2002:a02:380c:: with SMTP id b12mr1734863jaa.9.1602724014000;
-        Wed, 14 Oct 2020 18:06:54 -0700 (PDT)
-Received: from [192.168.1.112] (c-24-9-64-241.hsd1.co.comcast.net. [24.9.64.241])
-        by smtp.gmail.com with ESMTPSA id b2sm1042048ila.62.2020.10.14.18.06.52
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 14 Oct 2020 18:06:53 -0700 (PDT)
-Subject: Re: [PATCH v2 24/24] counters: docs: add a missing include
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        =?UTF-8?Q?Ricardo_Ca=c3=b1uelo?= <ricardo.canuelo@collabora.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Daniel Jordan <daniel.m.jordan@oracle.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Herbert Xu <herbert@gondor.apana.org.au>,
-        Kees Cook <keescook@chromium.org>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        linux-kernel@vger.kernel.org,
-        Shuah Khan <skhan@linuxfoundation.org>
-References: <cover.1602590106.git.mchehab+huawei@kernel.org>
- <74814cc3d2b2ac3fe7c10ff2045c77691bacf64b.1602590106.git.mchehab+huawei@kernel.org>
-From:   Shuah Khan <skhan@linuxfoundation.org>
-Message-ID: <982ecabd-330d-7ef9-9287-0eda5ba399b3@linuxfoundation.org>
-Date:   Wed, 14 Oct 2020 19:06:52 -0600
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        id S1727816AbgJOBKc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 14 Oct 2020 21:10:32 -0400
+Received: from mga11.intel.com ([192.55.52.93]:3036 "EHLO mga11.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728458AbgJOBKY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 14 Oct 2020 21:10:24 -0400
+IronPort-SDR: y2r1/mlHQY6aXergE9Wxgzu4B9dfeOKzOeubXoMO3rBYYBZO0+Ne8uJ4smKSodmBLkECHN9cd4
+ OI2FT2wdF0aw==
+X-IronPort-AV: E=McAfee;i="6000,8403,9774"; a="162765397"
+X-IronPort-AV: E=Sophos;i="5.77,376,1596524400"; 
+   d="scan'208";a="162765397"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2020 18:08:25 -0700
+IronPort-SDR: xRNfDck7YaZS4U7CeLu3eG8Aj2EL0jqp+Xk42HFT8CPHLPEv5vC1UNPxevHekTA57BtGk8Z5E5
+ PHhaSdswy4bw==
+X-IronPort-AV: E=Sophos;i="5.77,376,1596524400"; 
+   d="scan'208";a="531055780"
+Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
+  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 14 Oct 2020 18:08:25 -0700
+Date:   Wed, 14 Oct 2020 18:08:24 -0700
+From:   Ira Weiny <ira.weiny@intel.com>
+To:     Dave Hansen <dave.hansen@intel.com>
+Cc:     Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Fenghua Yu <fenghua.yu@intel.com>, x86@kernel.org,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-nvdimm@lists.01.org, linux-fsdevel@vger.kernel.org,
+        linux-mm@kvack.org, linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH RFC V3 5/9] x86/pks: Add PKS kernel API
+Message-ID: <20201015010824.GP2046448@iweiny-DESK2.sc.intel.com>
+References: <20201009194258.3207172-1-ira.weiny@intel.com>
+ <20201009194258.3207172-6-ira.weiny@intel.com>
+ <29e9b8f1-35d6-d1d4-661d-a36fd296b593@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <74814cc3d2b2ac3fe7c10ff2045c77691bacf64b.1602590106.git.mchehab+huawei@kernel.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <29e9b8f1-35d6-d1d4-661d-a36fd296b593@intel.com>
+User-Agent: Mutt/1.11.1 (2018-12-01)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/13/20 6:14 AM, Mauro Carvalho Chehab wrote:
-> Changeset 37a0dbf631f6 ("counters: Introduce counter_atomic* counters")
+On Tue, Oct 13, 2020 at 11:43:57AM -0700, Dave Hansen wrote:
+> > +static inline void pks_update_protection(int pkey, unsigned long protection)
+> > +{
+> > +	current->thread.saved_pkrs = update_pkey_val(current->thread.saved_pkrs,
+> > +						     pkey, protection);
+> > +	preempt_disable();
+> > +	write_pkrs(current->thread.saved_pkrs);
+> > +	preempt_enable();
+> > +}
 > 
-> Is causing two new warnings:
-> 
-> 	.../Documentation/core-api/counters.rst:8: WARNING: Undefined substitution referenced: "copy".
-> 	.../Documentation/core-api/counters.rst:9: WARNING: Undefined substitution referenced: "copy".
-> 
-> Because it forgot to include isonum.txt, which defines |copy|
-> macro.
-> 
-> While here, also add it to core-api index file, in order to
-> solve this warning:
-> 
-> 	.../Documentation/core-api/counters.rst: WARNING: document isn't included in any toctree
-> 
-> Fixes: 37a0dbf631f6 ("counters: Introduce counter_atomic* counters")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->   Documentation/core-api/counters.rst | 1 +
->   Documentation/core-api/index.rst    | 1 +
->   2 files changed, 2 insertions(+)
-> 
-> diff --git a/Documentation/core-api/counters.rst b/Documentation/core-api/counters.rst
-> index 642d907f4d3a..2821aebf3f45 100644
-> --- a/Documentation/core-api/counters.rst
-> +++ b/Documentation/core-api/counters.rst
-> @@ -1,4 +1,5 @@
->   .. SPDX-License-Identifier: GPL-2.0
-> +.. include:: <isonum.txt>
->   
->   ======================
->   Simple atomic counters
-> diff --git a/Documentation/core-api/index.rst b/Documentation/core-api/index.rst
-> index 69171b1799f2..cf9cd44c1191 100644
-> --- a/Documentation/core-api/index.rst
-> +++ b/Documentation/core-api/index.rst
-> @@ -43,6 +43,7 @@ Library functionality that is used throughout the kernel.
->      this_cpu_ops
->      timekeeping
->      errseq
-> +   counters
->   
->   Concurrency primitives
->   ======================
-> 
+> Why does this need preempt count manipulation in addition to the
+> get/put_cpu_var() inside of write_pkrs()?
 
-Thank you for the patch. I will add this to my patch series.
+This is a bug.  The disable should be around the update_pkey_val().
 
-thanks,
--- Shuah
+> 
+> > +/**
+> > + * PKS access control functions
+> > + *
+> > + * Change the access of the domain specified by the pkey.  These are global
+> > + * updates.  They only affects the current running thread.  It is undefined and
+> > + * a bug for users to call this without having allocated a pkey and using it as
+> > + * pkey here.
+> > + *
+> > + * pks_mknoaccess()
+> > + *     Disable all access to the domain
+> > + * pks_mkread()
+> > + *     Make the domain Read only
+> > + * pks_mkrdwr()
+> > + *     Make the domain Read/Write
+> > + *
+> > + * @pkey the pkey for which the access should change.
+> > + *
+> > + */
+> > +void pks_mknoaccess(int pkey)
+> > +{
+> > +	pks_update_protection(pkey, PKEY_DISABLE_ACCESS);
+> > +}
+> > +EXPORT_SYMBOL_GPL(pks_mknoaccess);
+> 
+> These are named like PTE manipulation functions, which is kinda weird.
+> 
+> What's wrong with: pks_disable_access(pkey) ?
+
+Internal review suggested these names.  I'm not dead set on them.
+
+FWIW I would rather they not get to wordy.
+
+I was trying to get some consistency with pks_mk*() as meaning PKS 'make' X.
+
+Do me 'disable' implies a state transition where 'make' implies we are
+'setting' an absolute value.  I think the later is a better name.  And 'make'
+made more sense because 'set' is so overloaded IHO.
+
+> 
+> > +void pks_mkread(int pkey)
+> > +{
+> > +	pks_update_protection(pkey, PKEY_DISABLE_WRITE);
+> > +}
+> > +EXPORT_SYMBOL_GPL(pks_mkread);
+> 
+> I really don't like this name.  It doesn't make readable, or even
+> read-only, *especially* if it was already access-disabled.
+
+Ok.
+
+But it does sense if going from access-disable to read, correct?.  I could see
+this being better named pks_mkreadonly() so that going from RW to this would
+make more sense.  Especially after thinking about it above 'read only' needs to
+be in the name.
+
+Before I change anything I'd like to get consensus on naming.
+
+How about the following?
+
+pks_mk_noaccess()
+pks_mk_readonly()
+pks_mk_readwrite()
+
+?
+
+> 
+> > +static const char pks_key_user0[] = "kernel";
+> > +
+> > +/* Store names of allocated keys for debug.  Key 0 is reserved for the kernel.  */
+> > +static const char *pks_key_users[PKS_NUM_KEYS] = {
+> > +	pks_key_user0
+> > +};
+> > +
+> > +/*
+> > + * Each key is represented by a bit.  Bit 0 is set for key 0 and reserved for
+> > + * its use.  We use ulong for the bit operations but only 16 bits are used.
+> > + */
+> > +static unsigned long pks_key_allocation_map = 1 << PKS_KERN_DEFAULT_KEY;
+> > +
+> > +/*
+> > + * pks_key_alloc - Allocate a PKS key
+> > + *
+> > + * @pkey_user: String stored for debugging of key exhaustion.  The caller is
+> > + * responsible to maintain this memory until pks_key_free().
+> > + */
+> > +int pks_key_alloc(const char * const pkey_user)
+> > +{
+> > +	int nr;
+> > +
+> > +	if (!cpu_feature_enabled(X86_FEATURE_PKS))
+> > +		return -EINVAL;
+> 
+> I'm not sure I like -EINVAL for this.  I thought we returned -ENOSPC for
+> this case for user pkeys.
+
+-ENOTSUP?
+
+I'm not really sure anyone will need to know the difference between the
+platform not supporting the key vs running out of them.  But they are 2
+different error conditions.
+
+> 
+> > +	while (1) {
+> > +		nr = find_first_zero_bit(&pks_key_allocation_map, PKS_NUM_KEYS);
+> > +		if (nr >= PKS_NUM_KEYS) {
+> > +			pr_info("Cannot allocate supervisor key for %s.\n",
+> > +				pkey_user);
+> > +			return -ENOSPC;
+
+We return -ENOSPC here when running out of keys.
+
+> > +		}
+> > +		if (!test_and_set_bit_lock(nr, &pks_key_allocation_map))
+> > +			break;
+> > +	}
+> > +
+> > +	/* for debugging key exhaustion */
+> > +	pks_key_users[nr] = pkey_user;
+> > +
+> > +	return nr;
+> > +}
+> > +EXPORT_SYMBOL_GPL(pks_key_alloc);
+> > +
+> > +/*
+> > + * pks_key_free - Free a previously allocate PKS key
+> > + *
+> > + * @pkey: Key to be free'ed
+> > + */
+> > +void pks_key_free(int pkey)
+> > +{
+> > +	if (!cpu_feature_enabled(X86_FEATURE_PKS))
+> > +		return;
+> > +
+> > +	if (pkey >= PKS_NUM_KEYS || pkey <= PKS_KERN_DEFAULT_KEY)
+> > +		return;
+> 
+> This seems worthy of a WARN_ON_ONCE() at least.  It's essentially
+> corrupt data coming into a kernel API.
+
+Ok, Done,
+Ira
+
