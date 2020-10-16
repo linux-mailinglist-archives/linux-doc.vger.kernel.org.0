@@ -2,162 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E8B7B2904A7
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Oct 2020 14:03:41 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0FFA62904E9
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Oct 2020 14:18:55 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2407154AbgJPMDg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 16 Oct 2020 08:03:36 -0400
-Received: from mga02.intel.com ([134.134.136.20]:39893 "EHLO mga02.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2407153AbgJPMDg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 16 Oct 2020 08:03:36 -0400
-IronPort-SDR: PRnMcW93RnqSM3smdEImfNQUGk56W0TgARW31gleqI7TtNOeVnM+KbLWpfcBmoEVtOVNJ/+1yF
- ExZ2VUMCYrow==
-X-IronPort-AV: E=McAfee;i="6000,8403,9775"; a="153506737"
-X-IronPort-AV: E=Sophos;i="5.77,382,1596524400"; 
-   d="scan'208";a="153506737"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2020 05:03:34 -0700
-IronPort-SDR: 5uNTqe4bYG6J69Pp1sWQmsPiQ5xfcoaWX+DglW63tlCAL5HqR1tfJFPMIUJftNDKS1cStgThvs
- 1Uq2EQW1ArjQ==
-X-IronPort-AV: E=Sophos;i="5.77,382,1596524400"; 
-   d="scan'208";a="531691673"
-Received: from wpross-mobl1.ger.corp.intel.com (HELO [10.249.36.186]) ([10.249.36.186])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2020 05:03:32 -0700
-Subject: Re: [PATCH v6 44/80] docs: gpu: i915.rst: Fix several C duplication
- warnings
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Thomas Zimmermann <tzimmermann@suse.de>,
+        id S2407407AbgJPMSu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 16 Oct 2020 08:18:50 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33976 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2407408AbgJPMSu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Oct 2020 08:18:50 -0400
+Received: from mail-wr1-x436.google.com (mail-wr1-x436.google.com [IPv6:2a00:1450:4864:20::436])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CCAD2C0613D5
+        for <linux-doc@vger.kernel.org>; Fri, 16 Oct 2020 05:18:49 -0700 (PDT)
+Received: by mail-wr1-x436.google.com with SMTP id t9so2601130wrq.11
+        for <linux-doc@vger.kernel.org>; Fri, 16 Oct 2020 05:18:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=0pdmY6ok4ux/pRIx0LbllshB3HAtBqzH8ww+t6IFCvg=;
+        b=BRCGCazZgsunLR6jJ78OyJPB+VKA4STGJjhLL24E+nm0fiJ6C/tvZ3LCjySWqlTlCt
+         FUHsNt9eHJHmF2gky45/dqPZGAujEldnyGBehFiP6wzx+HHPBnNvmkGo0Nva+JZ1lx+N
+         jKwgEwvqg+M8unp+nDGAVNz0NGNRvAt7yQp9qnjJYEKOUfZ5L1WWgjTSZ4yL7ywY181w
+         vxN+H2/4XXo5DbRolcOHaJPsqOB+4SYlIYSBhLHzpcwBI8tSBD8oK2sP9s7bovofZHsa
+         voBX29Z23s32AgJqa77Y/uIl/lVcwzwdXFH0p+lqZvROc5zvEH40JJj5saTH1GSrfsCm
+         NkVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=0pdmY6ok4ux/pRIx0LbllshB3HAtBqzH8ww+t6IFCvg=;
+        b=JrzBYLC/cOKrxaEBdjT4Ryeklpvf3rq4iSliyyWTvzefRuytn/l3wiMTgCN9CrU24p
+         yInj17FppLaQM2nv0/a97DSU+YG6Ksqr25pJ7DSMalHeQYPO47voU1Dz3/o9ETXeFLxy
+         ZnasvdFrfZjTkdGU3uhhBz7CupEkjpG+cLNjX97dH7ZlzAyQ2FQUbkZCl6UEOSuYC0aS
+         LXnTc0QPEpyZ+KqapOAGXrDV47+b85Ht5fRudfHc5FvXThL20UscotD/6eMa14lXEwTW
+         qO+9i1jPFdfiOk4pLaIn5rV3hsHM31nGYrRqaSdKyN8P79H04tIG1wF/hZ4P0AOjl8Lm
+         DsyQ==
+X-Gm-Message-State: AOAM533o0bThIPXmmx2uKqCGXB1ipU0nsZ6schyIDf9eVgtbfsXtnvZ2
+        8Zbv6Vx1IbpBhyANb1jWxRDxSg==
+X-Google-Smtp-Source: ABdhPJynsLog2SBXEjNnrjD188QPZKXARHTTCwJpoH5mJt1b6bt+GnFTOCBbSDzlQUbUzWRgybvrog==
+X-Received: by 2002:a5d:4144:: with SMTP id c4mr3565269wrq.311.1602850728236;
+        Fri, 16 Oct 2020 05:18:48 -0700 (PDT)
+Received: from google.com ([2a00:79e0:d:110:f693:9fff:fef4:a7ef])
+        by smtp.gmail.com with ESMTPSA id c68sm2636719wmd.34.2020.10.16.05.18.47
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 16 Oct 2020 05:18:47 -0700 (PDT)
+Date:   Fri, 16 Oct 2020 13:18:44 +0100
+From:   Quentin Perret <qperret@google.com>
+To:     Daniel Lezcano <daniel.lezcano@linaro.org>
+Cc:     "Rafael J. Wysocki" <rafael@kernel.org>,
+        Lukasz Luba <lukasz.luba@arm.com>,
+        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux PM <linux-pm@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        "devicetree@vger.kernel.org" <devicetree@vger.kernel.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Amit Kucheria <amitk@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
-        David Airlie <airlied@linux.ie>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        intel-gfx@lists.freedesktop.org
-References: <cover.1602589096.git.mchehab+huawei@kernel.org>
- <52a0dd42d3730d35b3ecd00d20a0601793e443e6.1602589096.git.mchehab+huawei@kernel.org>
-From:   Lionel Landwerlin <lionel.g.landwerlin@intel.com>
-Organization: Intel Corporation (UK) Ltd. - Co. Reg. #1134945 - Pipers Way,
- Swindon SN3 1RJ
-Message-ID: <da5ef3ca-e546-9d39-e033-27c3ed1b762e@intel.com>
-Date:   Fri, 16 Oct 2020 15:03:31 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.2
+        Dietmar Eggemann <Dietmar.Eggemann@arm.com>,
+        Doug Anderson <dianders@chromium.org>,
+        Matthias Kaehlcke <mka@chromium.org>,
+        "Nayak, Rajendra" <rnayak@codeaurora.org>
+Subject: Re: [PATCH v2 0/3] Clarify abstract scale usage for power values in
+ Energy Model, EAS and IPA
+Message-ID: <20201016121844.GA2420691@google.com>
+References: <d2960f6a-1805-1fb4-98ae-4a756d20370b@arm.com>
+ <765e6603-b614-fb72-64ff-248b42474803@linaro.org>
+ <b19c1f12-b7cf-fcae-4ebb-617019effe2e@arm.com>
+ <55d3fb0f-f7d8-63c5-2bdb-53eaa62380e0@linaro.org>
+ <f660731e-132b-2514-f526-d7123ed3522c@arm.com>
+ <d04019bd-9e85-5f3e-2a1b-66780b8df3dc@linaro.org>
+ <3e3dd42c-48ac-7267-45c5-ca88205611bd@arm.com>
+ <00ceec64-3273-bb4a-6f38-22de8d877ab5@linaro.org>
+ <CAJZ5v0hV8fwRnADdjiiF=zapO3AE6=_W_PeOQ_WhUirCcFkgdA@mail.gmail.com>
+ <e321191c-61d2-a15d-47c2-653b277984ca@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <52a0dd42d3730d35b3ecd00d20a0601793e443e6.1602589096.git.mchehab+huawei@kernel.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <e321191c-61d2-a15d-47c2-653b277984ca@linaro.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 13/10/2020 14:53, Mauro Carvalho Chehab wrote:
-> As reported by Sphinx:
->
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:1147: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_oa_wait_unlocked'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:1169: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_oa_poll_wait'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:1189: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_oa_read'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:2669: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_oa_stream_enable'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:2734: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_oa_stream_disable'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:2820: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_oa_stream_init'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3010: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_read'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3098: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_poll_locked'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3129: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_poll'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3152: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_enable_locked'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3181: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_disable_locked'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3273: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_ioctl'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3296: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_destroy_locked'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3321: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_release'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3379: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_open_ioctl_locked'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3534: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'read_properties_unlocked'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3717: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_open_ioctl'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3760: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_register'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:3789: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_unregister'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:4009: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_add_config_ioctl'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:4162: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_remove_config_ioctl'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:4260: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_init'.
-> 	./Documentation/gpu/i915:646: ./drivers/gpu/drm/i915/i915_perf.c:4423: WARNING: Duplicate C declaration, also defined in 'gpu/i915'.
-> 	Declaration is 'i915_perf_fini'.
->
-> With Sphinx 3, C declarations can't be duplicated anymore,
-> so let's exclude those from the other internals found on
-> i915_perf.c file.
->
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Reviewed-by: Lionel Landwerlin <lionel.g.landwerlin@intel.com>
-> ---
->   Documentation/gpu/i915.rst | 29 +++++++++++++++++++++++++----
->   1 file changed, 25 insertions(+), 4 deletions(-)
->
-> diff --git a/Documentation/gpu/i915.rst b/Documentation/gpu/i915.rst
-> index 33cc6ddf8f64..cff1f154b473 100644
-> --- a/Documentation/gpu/i915.rst
-> +++ b/Documentation/gpu/i915.rst
-> @@ -636,15 +636,36 @@ i915 Perf Observation Architecture Stream
->   .. kernel-doc:: drivers/gpu/drm/i915/i915_perf.c
->      :functions: i915_oa_poll_wait
->   
-> -All i915 Perf Internals
-> ------------------------
-> +Other i915 Perf Internals
-> +-------------------------
->   
-> -This section simply includes all currently documented i915 perf internals, in
-> -no particular order, but may include some more minor utilities or platform
-> +This section simply includes all other currently documented i915 perf internals,
-> +in no particular order, but may include some more minor utilities or platform
->   specific details than found in the more high-level sections.
->   
->   .. kernel-doc:: drivers/gpu/drm/i915/i915_perf.c
->      :internal:
-> +   :no-identifiers:
-> +       i915_perf_init
-> +       i915_perf_fini
-> +       i915_perf_register
-> +       i915_perf_unregister
-> +       i915_perf_open_ioctl
-> +       i915_perf_release
-> +       i915_perf_add_config_ioctl
-> +       i915_perf_remove_config_ioctl
-> +       read_properties_unlocked
-> +       i915_perf_open_ioctl_locked
-> +       i915_perf_destroy_locked
-> +       i915_perf_read i915_perf_ioctl
-> +       i915_perf_enable_locked
-> +       i915_perf_disable_locked
-> +       i915_perf_poll i915_perf_poll_locked
-> +       i915_oa_stream_init i915_oa_read
-> +       i915_oa_stream_enable
-> +       i915_oa_stream_disable
-> +       i915_oa_wait_unlocked
-> +       i915_oa_poll_wait
->   
->   Style
->   =====
+On Friday 16 Oct 2020 at 13:48:33 (+0200), Daniel Lezcano wrote:
+> If the SCMI is returning abstract numbers, the thermal IPA governor will
+> use these numbers as a reference to mitigate the temperature at the
+> specified sustainable power which is expressed in mW in the DT. So it
+> does not work and we can not detect such conflict.
+> 
+> That is why I'm advocating to keep mW for the energy model and make the
+> SCMI and DT power numbers incompatible.
 
+I think it's fair to say SCMI-provided number should only be compared to
+other SCMI-provided numbers, so +1 on that. But what I don't understand
+is why specifying the EM in mW helps with that? Can we not let the
+providers specify the unit? And then it's up to the clients to decide
+what they want to do. The scheduler wouldn't care, and IPA would have to
+check things are comparable, but all in all that should work out fine
+without a strong requirement on the actual unit.
 
+Also, I thought SCMI had a notion of sustained performance too, why
+can't we use that for IPA? Lukasz?
+
+Thanks.
+Quentin
