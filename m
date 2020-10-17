@@ -2,122 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B462B290F61
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Oct 2020 07:36:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 14F3C290F21
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Oct 2020 07:29:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2410822AbgJQFgU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 17 Oct 2020 01:36:20 -0400
-Received: from mga07.intel.com ([134.134.136.100]:18143 "EHLO mga07.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2407407AbgJQFgU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 17 Oct 2020 01:36:20 -0400
-IronPort-SDR: z1ObCSkUQYoqiGlpwNCq8A/MaXnj1FTiuLFrq1/JDZcxGV6EnNmzfF4SJGXF6hAbTVQogtmXAD
- WpWT+dBKkNRg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9776"; a="230939350"
-X-IronPort-AV: E=Sophos;i="5.77,385,1596524400"; 
-   d="scan'208";a="230939350"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2020 22:14:11 -0700
-IronPort-SDR: 3XRfBEMKtTlYf8Z8qW4rktOEmrz3tfwYHJY64FpmSJj9Yo7F5sdqW0j6CxcMd1S6SrD+tuozbQ
- 2OvTFTNMfadw==
-X-IronPort-AV: E=Sophos;i="5.77,385,1596524400"; 
-   d="scan'208";a="522523589"
-Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2020 22:14:11 -0700
-Date:   Fri, 16 Oct 2020 22:14:10 -0700
-From:   Ira Weiny <ira.weiny@intel.com>
-To:     Peter Zijlstra <peterz@infradead.org>
-Cc:     Dave Hansen <dave.hansen@intel.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        id S2409915AbgJQF3Y (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 17 Oct 2020 01:29:24 -0400
+Received: from smtp-fw-9101.amazon.com ([207.171.184.25]:12821 "EHLO
+        smtp-fw-9101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2391975AbgJQF3Y (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 17 Oct 2020 01:29:24 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1602912563; x=1634448563;
+  h=from:to:cc:date:message-id:in-reply-to:references:
+   mime-version:content-transfer-encoding:subject;
+  bh=4D+RWh/5beB78lRbdCD/b83sagLyNZAat88yYlEo6kY=;
+  b=Jf9H2Zd2Supmg22O3tLEBtoMqtAm0m/UzVnOGJeKZ3S674jKZRcmOVDs
+   +NyN8sJ69rNWfWC9bjdQn1J7oX7k8vzT0gXS/ArXKyEkP8k1P1OeIQDaz
+   Q3VSNC7k12vs5eh6f5Joq0HltI5+zKsG5Jlw7RXSpu5yTReEBKip3Ext3
+   s=;
+X-IronPort-AV: E=Sophos;i="5.77,385,1596499200"; 
+   d="scan'208";a="77295793"
+Subject: Re: [PATCH] drivers/virt: vmgenid: add vm generation id driver
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-2b-4ff6265a.us-west-2.amazon.com) ([10.47.23.38])
+  by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP; 17 Oct 2020 05:29:17 +0000
+Received: from EX13MTAUWA001.ant.amazon.com (pdx4-ws-svc-p6-lb7-vlan3.pdx.amazon.com [10.170.41.166])
+        by email-inbound-relay-2b-4ff6265a.us-west-2.amazon.com (Postfix) with ESMTPS id 5414EA26D1;
+        Sat, 17 Oct 2020 05:29:16 +0000 (UTC)
+Received: from EX13D01UWA003.ant.amazon.com (10.43.160.107) by
+ EX13MTAUWA001.ant.amazon.com (10.43.160.58) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Sat, 17 Oct 2020 05:29:15 +0000
+Received: from [10.50.40.37] (10.43.161.237) by EX13d01UWA003.ant.amazon.com
+ (10.43.160.107) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Sat, 17 Oct
+ 2020 05:29:14 +0000
+From:   Colm MacCarthaigh <colmmacc@amazon.com>
+To:     Jann Horn <jannh@google.com>
+CC:     Willy Tarreau <w@1wt.eu>,
+        "Catangiu, Adrian Costin" <acatan@amazon.com>,
         Andy Lutomirski <luto@kernel.org>,
-        Fenghua Yu <fenghua.yu@intel.com>, x86@kernel.org,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-nvdimm@lists.01.org, linux-fsdevel@vger.kernel.org,
-        linux-mm@kvack.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH RFC V3 4/9] x86/pks: Preserve the PKRS MSR on context
- switch
-Message-ID: <20201017051410.GW2046448@iweiny-DESK2.sc.intel.com>
-References: <20201009194258.3207172-1-ira.weiny@intel.com>
- <20201009194258.3207172-5-ira.weiny@intel.com>
- <429789d3-ab5b-49c3-65c3-f0fc30a12516@intel.com>
- <20201016111226.GN2611@hirez.programming.kicks-ass.net>
+        Jason Donenfeld <Jason@zx2c4.com>,
+        "Theodore Y. Ts'o" <tytso@mit.edu>,
+        Eric Biggers <ebiggers@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        kernel list <linux-kernel@vger.kernel.org>,
+        "open list:VIRTIO GPU DRIVER" 
+        <virtualization@lists.linux-foundation.org>,
+        "Graf (AWS), Alexander" <graf@amazon.de>,
+        "Woodhouse, David" <dwmw@amazon.co.uk>, <bonzini@gnu.org>,
+        "Singh, Balbir" <sblbir@amazon.com>,
+        "Weiss, Radu" <raduweis@amazon.com>, <oridgar@gmail.com>,
+        <ghammer@redhat.com>, Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Qemu Developers <qemu-devel@nongnu.org>,
+        KVM list <kvm@vger.kernel.org>,
+        Michal Hocko <mhocko@kernel.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Pavel Machek <pavel@ucw.cz>,
+        Linux API <linux-api@vger.kernel.org>
+Date:   Fri, 16 Oct 2020 22:29:14 -0700
+X-Mailer: MailMate Trial (1.13.2r5673)
+Message-ID: <FF2CCC35-87DD-4311-A3CF-4943B29DBEE3@amazon.com>
+In-Reply-To: <CAG48ez1ZtvjOs2CEq8-EMosPCd_o7WQ3Mz_+1mDe7OrH2arxFA@mail.gmail.com>
+References: <788878CE-2578-4991-A5A6-669DCABAC2F2@amazon.com>
+ <CAG48ez0EanBvDyfthe+hAP0OC8iGLNSq2e5wJVz-=ENNGF97_w@mail.gmail.com>
+ <20201017033606.GA14014@1wt.eu>
+ <CAG48ez0x2S9XuCrANAQbXNi8Jjwm822-fnQSmr-Zr07JgrEs1g@mail.gmail.com>
+ <6CC3DB03-27BA-4F5E-8ADA-BE605D83A85C@amazon.com>
+ <CAG48ez1ZtvjOs2CEq8-EMosPCd_o7WQ3Mz_+1mDe7OrH2arxFA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201016111226.GN2611@hirez.programming.kicks-ass.net>
-User-Agent: Mutt/1.11.1 (2018-12-01)
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+X-Originating-IP: [10.43.161.237]
+X-ClientProxiedBy: EX13d09UWC002.ant.amazon.com (10.43.162.102) To
+ EX13d01UWA003.ant.amazon.com (10.43.160.107)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 16, 2020 at 01:12:26PM +0200, Peter Zijlstra wrote:
-> On Tue, Oct 13, 2020 at 11:31:45AM -0700, Dave Hansen wrote:
-> > > +/**
-> > > + * It should also be noted that the underlying WRMSR(MSR_IA32_PKRS) is not
-> > > + * serializing but still maintains ordering properties similar to WRPKRU.
-> > > + * The current SDM section on PKRS needs updating but should be the same as
-> > > + * that of WRPKRU.  So to quote from the WRPKRU text:
-> > > + *
-> > > + * 	WRPKRU will never execute transiently. Memory accesses
-> > > + * 	affected by PKRU register will not execute (even transiently)
-> > > + * 	until all prior executions of WRPKRU have completed execution
-> > > + * 	and updated the PKRU register.
-> > > + */
-> > > +void write_pkrs(u32 new_pkrs)
-> > > +{
-> > > +	u32 *pkrs;
-> > > +
-> > > +	if (!static_cpu_has(X86_FEATURE_PKS))
-> > > +		return;
-> > > +
-> > > +	pkrs = get_cpu_ptr(&pkrs_cache);
-> > > +	if (*pkrs != new_pkrs) {
-> > > +		*pkrs = new_pkrs;
-> > > +		wrmsrl(MSR_IA32_PKRS, new_pkrs);
-> > > +	}
-> > > +	put_cpu_ptr(pkrs);
-> > > +}
-> > > 
-> > 
-> > It bugs me a *bit* that this is being called in a preempt-disabled
-> > region, but we still bother with the get/put_cpu jazz.  Are there other
-> > future call-sites for this that aren't in preempt-disabled regions?
-> 
-> So the previous version had a useful comment that got lost.
 
-Ok Looking back I see what happened...  This comment...
 
- /*
-  * PKRS is only temporarily changed during specific code paths.
-  * Only a preemption during these windows away from the default
-  * value would require updating the MSR.
-  */
+On 16 Oct 2020, at 22:01, Jann Horn wrote:
+>
+> On Sat, Oct 17, 2020 at 6:34 AM Colm MacCarthaigh 
+> <colmmacc@amazon.com> wrote:
+>> For user-space, even a single bit would do. We added 
+>> MADVISE_WIPEONFORK
+>> so that userspace libraries can detect fork()/clone() robustly, for 
+>> the
+>> same reasons. It just wipes a page as the indicator, which is
+>> effectively a single-bit signal, and it works well. On the user-space
+>> side of this, I’m keen to find a solution like that that we can use
+>> fairly easily inside of portable libraries and applications. The 
+>> “have
+>> I forked” checks do end up in hot paths, so it’s nice if they can 
+>> be
+>> CPU cache friendly. Comparing a whole 128-bit value wouldn’t be my
+>> favorite.
+>
+> I'm pretty sure a single bit is not enough if you want to have a
+> single page, shared across the entire system, that stores the VM
+> forking state; you need a counter for that.
 
-... was added to pks_sched_in() but that got simplified down because cleaning
-up write_pkrs() made the code there obsolete.
+You’re right. WIPEONFORK is more like a single-bit per use. If it’s 
+something system wide then a counter is better.
 
-> This stuff
-> needs to fundamentally be preempt disabled,
+> So the RNG state after mixing in the new VM Generation ID would
+> contain 128 bits of secret entropy not known to anyone else, including
+> people with access to the VM image.
+>
+> Now, 128 bits of cryptographically random data aren't _optimal_; I
+> think something on the order of 256 bits would be nicer from a
+> theoretical standpoint. But in practice I think we'll be good with the
+> 128 bits we're getting (since the number of users who fork a VM image
+> is probably not going to be so large that worst-case collision
+> probabilities matter).
 
-I agree, the update to the percpu cache value and MSR can not be torn.
+This reminds me on key/IV usage limits for AES encryption, where the 
+same birthday bounds apply, and even though 256-bits would be better, we 
+routinely make 128-bit birthday bounds work for massively scalable 
+systems.
 
-> so it either needs to
-> explicitly do so, or have an assertion that preemption is indeed
-> disabled.
+>> The kernel would need to use the change as a trigger to
+>> measure some entropy (e.g. interrupts and RDRAND, or whatever). Our 
+>> just
+>> define the machine contract as “this has to be unique random data 
+>> and
+>> if it’s not unique, or if it’s pubic, you’re toast”.
+>
+> As far as I can tell from Microsoft's spec, that is a guarantee we're
+> already getting.
 
-However, I don't think I understand clearly.  Doesn't [get|put]_cpu_ptr()
-handle the preempt_disable() for us?  Is it not sufficient to rely on that?
+Neat.
 
-Dave's comment seems to be the opposite where we need to eliminate preempt
-disable before calling write_pkrs().
-
-FWIW I think I'm mistaken in my response to Dave regarding the
-preempt_disable() in pks_update_protection().
-
-Ira
+-
+Colm
