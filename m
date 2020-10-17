@@ -2,123 +2,126 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D9C8D290F5E
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Oct 2020 07:35:27 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0A050290F0F
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Oct 2020 07:25:58 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2436477AbgJQFfS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 17 Oct 2020 01:35:18 -0400
-Received: from mga05.intel.com ([192.55.52.43]:43562 "EHLO mga05.intel.com"
+        id S2411547AbgJQFZw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 17 Oct 2020 01:25:52 -0400
+Received: from wtarreau.pck.nerim.net ([62.212.114.60]:43826 "EHLO 1wt.eu"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2409430AbgJQFfS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 17 Oct 2020 01:35:18 -0400
-IronPort-SDR: RXH8Q+dOWLdkHKyiD1mnGpbys3Efva8uFXdh1cQEs5Gn+pMZMMsNDAQBRD4RcawbjgLSC08fi2
- jj3u1XCjZPiw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9776"; a="251422269"
-X-IronPort-AV: E=Sophos;i="5.77,385,1596524400"; 
-   d="scan'208";a="251422269"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-  by fmsmga105.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2020 20:32:03 -0700
-IronPort-SDR: kvyfzP2MmHEewAuij6J97fqoPkF27+6ntcl4pUo67Y0ey7WhiD8GVW1pnB6mjR8DSQp0w+kBVn
- R3ZScB5JlEAA==
-X-IronPort-AV: E=Sophos;i="5.77,385,1596524400"; 
-   d="scan'208";a="521393708"
-Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
-  by fmsmga006-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 16 Oct 2020 20:32:03 -0700
-Date:   Fri, 16 Oct 2020 20:32:03 -0700
-From:   Ira Weiny <ira.weiny@intel.com>
-To:     Peter Zijlstra <peterz@infradead.org>
-Cc:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        id S2411543AbgJQFZv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 17 Oct 2020 01:25:51 -0400
+Received: (from willy@localhost)
+        by pcw.home.local (8.15.2/8.15.2/Submit) id 09H3a6p1014024;
+        Sat, 17 Oct 2020 05:36:06 +0200
+Date:   Sat, 17 Oct 2020 05:36:06 +0200
+From:   Willy Tarreau <w@1wt.eu>
+To:     Jann Horn <jannh@google.com>
+Cc:     "Catangiu, Adrian Costin" <acatan@amazon.com>,
         Andy Lutomirski <luto@kernel.org>,
-        Fenghua Yu <fenghua.yu@intel.com>, x86@kernel.org,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-nvdimm@lists.01.org, linux-fsdevel@vger.kernel.org,
-        linux-mm@kvack.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH RFC V3 2/9] x86/fpu: Refactor arch_set_user_pkey_access()
- for PKS support
-Message-ID: <20201017033202.GV2046448@iweiny-DESK2.sc.intel.com>
-References: <20201009194258.3207172-1-ira.weiny@intel.com>
- <20201009194258.3207172-3-ira.weiny@intel.com>
- <20201016105743.GK2611@hirez.programming.kicks-ass.net>
+        Jason Donenfeld <Jason@zx2c4.com>,
+        "Theodore Y. Ts'o" <tytso@mit.edu>,
+        Eric Biggers <ebiggers@kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "virtualization@lists.linux-foundation.org" 
+        <virtualization@lists.linux-foundation.org>,
+        "Graf (AWS), Alexander" <graf@amazon.de>,
+        "MacCarthaigh, Colm" <colmmacc@amazon.com>,
+        "Woodhouse, David" <dwmw@amazon.co.uk>,
+        "bonzini@gnu.org" <bonzini@gnu.org>,
+        "Singh, Balbir" <sblbir@amazon.com>,
+        "Weiss, Radu" <raduweis@amazon.com>,
+        "oridgar@gmail.com" <oridgar@gmail.com>,
+        "ghammer@redhat.com" <ghammer@redhat.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>,
+        "mst@redhat.com" <mst@redhat.com>,
+        "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+        KVM list <kvm@vger.kernel.org>,
+        Michal Hocko <mhocko@kernel.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Pavel Machek <pavel@ucw.cz>,
+        Linux API <linux-api@vger.kernel.org>
+Subject: Re: [PATCH] drivers/virt: vmgenid: add vm generation id driver
+Message-ID: <20201017033606.GA14014@1wt.eu>
+References: <AQHWo8lIfZnFKGe8nkGmhTCXwq5R3w==>
+ <788878CE-2578-4991-A5A6-669DCABAC2F2@amazon.com>
+ <CAG48ez0EanBvDyfthe+hAP0OC8iGLNSq2e5wJVz-=ENNGF97_w@mail.gmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20201016105743.GK2611@hirez.programming.kicks-ass.net>
-User-Agent: Mutt/1.11.1 (2018-12-01)
+In-Reply-To: <CAG48ez0EanBvDyfthe+hAP0OC8iGLNSq2e5wJVz-=ENNGF97_w@mail.gmail.com>
+User-Agent: Mutt/1.6.1 (2016-04-27)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 16, 2020 at 12:57:43PM +0200, Peter Zijlstra wrote:
-> On Fri, Oct 09, 2020 at 12:42:51PM -0700, ira.weiny@intel.com wrote:
-> > From: Fenghua Yu <fenghua.yu@intel.com>
-> > 
-> > Define a helper, update_pkey_val(), which will be used to support both
-> > Protection Key User (PKU) and the new Protection Key for Supervisor
-> > (PKS) in subsequent patches.
-> > 
-> > Co-developed-by: Ira Weiny <ira.weiny@intel.com>
-> > Signed-off-by: Ira Weiny <ira.weiny@intel.com>
-> > Signed-off-by: Fenghua Yu <fenghua.yu@intel.com>
-> > ---
-> >  arch/x86/include/asm/pkeys.h |  2 ++
-> >  arch/x86/kernel/fpu/xstate.c | 22 ++++------------------
-> >  arch/x86/mm/pkeys.c          | 21 +++++++++++++++++++++
-> >  3 files changed, 27 insertions(+), 18 deletions(-)
+On Sat, Oct 17, 2020 at 03:40:08AM +0200, Jann Horn wrote:
+> [adding some more people who are interested in RNG stuff: Andy, Jason,
+> Theodore, Willy Tarreau, Eric Biggers. also linux-api@, because this
+> concerns some pretty fundamental API stuff related to RNG usage]
 > 
-> This is not from Fenghua.
+> On Fri, Oct 16, 2020 at 4:33 PM Catangiu, Adrian Costin
+> <acatan@amazon.com> wrote:
+> > This patch is a driver which exposes the Virtual Machine Generation ID
+> > via a char-dev FS interface that provides ID update sync and async
+> > notification, retrieval and confirmation mechanisms:
+> >
+> > When the device is 'open()'ed a copy of the current vm UUID is
+> > associated with the file handle. 'read()' operations block until the
+> > associated UUID is no longer up to date - until HW vm gen id changes -
+> > at which point the new UUID is provided/returned. Nonblocking 'read()'
+> > uses EWOULDBLOCK to signal that there is no _new_ UUID available.
+> >
+> > 'poll()' is implemented to allow polling for UUID updates. Such
+> > updates result in 'EPOLLIN' events.
+> >
+> > Subsequent read()s following a UUID update no longer block, but return
+> > the updated UUID. The application needs to acknowledge the UUID update
+> > by confirming it through a 'write()'.
+> > Only on writing back to the driver the right/latest UUID, will the
+> > driver mark this "watcher" as up to date and remove EPOLLIN status.
+> >
+> > 'mmap()' support allows mapping a single read-only shared page which
+> > will always contain the latest UUID value at offset 0.
 > 
->   https://lkml.kernel.org/r/20200717085442.GX10769@hirez.programming.kicks-ass.net
+> It would be nicer if that page just contained an incrementing counter,
+> instead of a UUID. It's not like the application cares *what* the UUID
+> changed to, just that it *did* change and all RNGs state now needs to
+> be reseeded from the kernel, right? And an application can't reliably
+> read the entire UUID from the memory mapping anyway, because the VM
+> might be forked in the middle.
 > 
-> This is your patch based on the code I wrote.
+> So I think your kernel driver should detect UUID changes and then turn
+> those into a monotonically incrementing counter. (Probably 64 bits
+> wide?) (That's probably also a little bit faster than comparing an
+> entire UUID.)
 
-Ok, I apologize.  Yes the code below was all yours.
+I agree with this. Further, I'm observing there is a very common
+confusion between "universally unique" and "random". Randoms are
+needed when seeking unpredictability. A random number generator
+*must* be able to return the same value multiple times in a row
+(though this is rare), otherwise it's not random.
 
-Is it ok to add?
+To illustrate this, a die has less than 3 bits of randomness and
+is sufficient to play games with friends where a counter would allow
+everyone to cheat. Conversely if you want to assign IDs to members
+of your family you'd rather use a counter than a die for this or
+you risk collisions and/or long series of retries to pick unique
+IDs.
 
-Co-developed-by: Peter Zijlstra <peterz@infradead.org>
-Signed-off-by: Peter Zijlstra <peterz@infradead.org>
+RFC4122 explains in great length how to produce guaranteed unique
+IDs, and this only involves space, time and counters. There's
+indeed a lazy variant that probably everyone uses nowadays,
+consisting in picking random numbers, but this is not guaranteed
+unique anymore.
 
-?
+If the UUIDs used there are real UUIDs, it could be as simple as
+updating them according to their format, i.e. updating the timestamp,
+and if the timestamp is already the same, just increase the seq counter.
+Doing this doesn't require entropy, doesn't need to block and doesn't
+needlessly leak randoms that sometimes make people feel nervous.
 
-Thanks,
-Ira
-
-> 
-> > diff --git a/arch/x86/mm/pkeys.c b/arch/x86/mm/pkeys.c
-> > index f5efb4007e74..3cf8f775f36d 100644
-> > --- a/arch/x86/mm/pkeys.c
-> > +++ b/arch/x86/mm/pkeys.c
-> > @@ -208,3 +208,24 @@ static __init int setup_init_pkru(char *opt)
-> >  	return 1;
-> >  }
-> >  __setup("init_pkru=", setup_init_pkru);
-> > +
-> > +/*
-> > + * Update the pk_reg value and return it.
-> > + *
-> > + * Kernel users use the same flags as user space:
-> > + *     PKEY_DISABLE_ACCESS
-> > + *     PKEY_DISABLE_WRITE
-> > + */
-> > +u32 update_pkey_val(u32 pk_reg, int pkey, unsigned int flags)
-> > +{
-> > +	int pkey_shift = pkey * PKR_BITS_PER_PKEY;
-> > +
-> > +	pk_reg &= ~(((1 << PKR_BITS_PER_PKEY) - 1) << pkey_shift);
-> > +
-> > +	if (flags & PKEY_DISABLE_ACCESS)
-> > +		pk_reg |= PKR_AD_BIT << pkey_shift;
-> > +	if (flags & PKEY_DISABLE_WRITE)
-> > +		pk_reg |= PKR_WD_BIT << pkey_shift;
-> > +
-> > +	return pk_reg;
-> > +}
-> > -- 
-> > 2.28.0.rc0.12.gb6a658bd00c9
-> > 
+Just my two cents,
+Willy
