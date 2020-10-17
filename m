@@ -2,59 +2,21 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 09878290FA2
-	for <lists+linux-doc@lfdr.de>; Sat, 17 Oct 2020 07:53:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C1C09291037
+	for <lists+linux-doc@lfdr.de>; Sat, 17 Oct 2020 08:45:22 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2436669AbgJQFxS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 17 Oct 2020 01:53:18 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55964 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2436671AbgJQFxR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 17 Oct 2020 01:53:17 -0400
-Received: from mail-lj1-x242.google.com (mail-lj1-x242.google.com [IPv6:2a00:1450:4864:20::242])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B71C4C0613E5
-        for <linux-doc@vger.kernel.org>; Fri, 16 Oct 2020 22:53:16 -0700 (PDT)
-Received: by mail-lj1-x242.google.com with SMTP id 23so732665ljv.7
-        for <linux-doc@vger.kernel.org>; Fri, 16 Oct 2020 22:53:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=M3YB82PP3WUpBHFEbh3oPhQQSux8Pw6AFe+SN7DiJGw=;
-        b=amsP3PlI3ZycdlVxgLx5tS3RcZ/aE2JugXN/de8WjJzEbbWQfg5yay9mu9yMNOTQEG
-         zDGufeyQG0D8nAwfy0A+eh+5b93z85bXUL2cX8T/4mhVh2wiIWZNqlk28ZRb4QzNB/dh
-         AIBnGWL+ksEigCgQdVu62IDy26gLVIDUnczpRvNend8MTTwuaCQtont43SmFPbW4CRcT
-         cmRIzAt2jsd2hPhc8PRzFfChw9wh+qGJaBiAl8a3e2bI5TkwKjB9tCNO3N3jC/SV0wIn
-         USEp5Yt0/QCw/q0JJrWcSGJN2B9ryqMiiGMVPf4OXy69UAR96sfkVVyhw3En3TdcYtr6
-         S+7g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=M3YB82PP3WUpBHFEbh3oPhQQSux8Pw6AFe+SN7DiJGw=;
-        b=FcMaYXhcif4LK1lxXqYaG8UHhOTu1leqa5Pd64s236SKsh22FvDrFBvQ2qQeud7xSo
-         Age4xHlN2Bs7J2deyBie3Z1Te1Mw5LpAtWjd+v2YXevnLR+g2d73AnvEK3AuMEHqX74c
-         4ic9lIqp1VNm5lxrXVzHfhA2mMuX+KPOJ5ghyIs2gk+W+9TcaGGkAi5K0o95txKdODPg
-         c9/j4tc+jJ579HLx6pJHSQGicnT74hWGTBk3xrJNJDlIlDP3uOsUzDjielDZODGeVPbr
-         ge7yOW+YPY5UvP//s8KEVPnpAm8XBLUZQi6ZThSHuc9j4ARB7J0VNPzTAmMCVu022BUl
-         zosw==
-X-Gm-Message-State: AOAM532ED36c2xblNhYtRINFdwQbx7hoc2vhDR7hmK/02x2ZWICE4/TI
-        4ycos0Q0uG8H60JMNaDjCmHRdP+b05cko5AMuaQ6Wg==
-X-Google-Smtp-Source: ABdhPJyqRwgfzaNO4k6jC4+ngiz4xp94h1rvkVA6jI+YkhoWwbWi6nRJWMl5uQZtM/9C6Yz+umn28GEOA1tFiD8OGAE=
-X-Received: by 2002:a2e:504b:: with SMTP id v11mr2673538ljd.138.1602913994976;
- Fri, 16 Oct 2020 22:53:14 -0700 (PDT)
-MIME-Version: 1.0
-References: <788878CE-2578-4991-A5A6-669DCABAC2F2@amazon.com>
- <CAG48ez0EanBvDyfthe+hAP0OC8iGLNSq2e5wJVz-=ENNGF97_w@mail.gmail.com>
- <20201017033606.GA14014@1wt.eu> <CAG48ez0x2S9XuCrANAQbXNi8Jjwm822-fnQSmr-Zr07JgrEs1g@mail.gmail.com>
- <6CC3DB03-27BA-4F5E-8ADA-BE605D83A85C@amazon.com> <CAG48ez1ZtvjOs2CEq8-EMosPCd_o7WQ3Mz_+1mDe7OrH2arxFA@mail.gmail.com>
- <20201017053712.GA14105@1wt.eu>
-In-Reply-To: <20201017053712.GA14105@1wt.eu>
-From:   Jann Horn <jannh@google.com>
-Date:   Sat, 17 Oct 2020 07:52:48 +0200
-Message-ID: <CAG48ez1h0ynXfGap_KiHiPVTfcB8NBQJ-2dnj08ZNfuhrW0jWA@mail.gmail.com>
-Subject: Re: [PATCH] drivers/virt: vmgenid: add vm generation id driver
-To:     Willy Tarreau <w@1wt.eu>
+        id S2437184AbgJQGpV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 17 Oct 2020 02:45:21 -0400
+Received: from wtarreau.pck.nerim.net ([62.212.114.60]:43853 "EHLO 1wt.eu"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2437182AbgJQGpV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 17 Oct 2020 02:45:21 -0400
+Received: (from willy@localhost)
+        by pcw.home.local (8.15.2/8.15.2/Submit) id 09H6ignu014122;
+        Sat, 17 Oct 2020 08:44:42 +0200
+Date:   Sat, 17 Oct 2020 08:44:42 +0200
+From:   Willy Tarreau <w@1wt.eu>
+To:     Jann Horn <jannh@google.com>
 Cc:     Colm MacCarthaigh <colmmacc@amazon.com>,
         "Catangiu, Adrian Costin" <acatan@amazon.com>,
         Andy Lutomirski <luto@kernel.org>,
@@ -78,51 +40,85 @@ Cc:     Colm MacCarthaigh <colmmacc@amazon.com>,
         "Rafael J. Wysocki" <rafael@kernel.org>,
         Pavel Machek <pavel@ucw.cz>,
         Linux API <linux-api@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Subject: Re: [PATCH] drivers/virt: vmgenid: add vm generation id driver
+Message-ID: <20201017064442.GA14117@1wt.eu>
+References: <788878CE-2578-4991-A5A6-669DCABAC2F2@amazon.com>
+ <CAG48ez0EanBvDyfthe+hAP0OC8iGLNSq2e5wJVz-=ENNGF97_w@mail.gmail.com>
+ <20201017033606.GA14014@1wt.eu>
+ <CAG48ez0x2S9XuCrANAQbXNi8Jjwm822-fnQSmr-Zr07JgrEs1g@mail.gmail.com>
+ <6CC3DB03-27BA-4F5E-8ADA-BE605D83A85C@amazon.com>
+ <CAG48ez1ZtvjOs2CEq8-EMosPCd_o7WQ3Mz_+1mDe7OrH2arxFA@mail.gmail.com>
+ <20201017053712.GA14105@1wt.eu>
+ <CAG48ez1h0ynXfGap_KiHiPVTfcB8NBQJ-2dnj08ZNfuhrW0jWA@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAG48ez1h0ynXfGap_KiHiPVTfcB8NBQJ-2dnj08ZNfuhrW0jWA@mail.gmail.com>
+User-Agent: Mutt/1.6.1 (2016-04-27)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, Oct 17, 2020 at 7:37 AM Willy Tarreau <w@1wt.eu> wrote:
-> On Sat, Oct 17, 2020 at 07:01:31AM +0200, Jann Horn wrote:
-> > Microsoft's documentation
-> > (http://go.microsoft.com/fwlink/?LinkId=260709) says that the VM
-> > Generation ID that we get after a fork "is a 128-bit,
-> > cryptographically random integer value". If multiple people use the
-> > same image, it guarantees that each use of the image gets its own,
-> > fresh ID:
->
-> No. It cannot be more unique than the source that feeds that cryptographic
-> transformation. All it guarantees is that the entropy source is protected
-> from being guessed based on the output. Applying cryptography on a simple
-> counter provides apparently random numbers that will be unique for a long
-> period for the same source, but as soon as you duplicate that code between
-> users and they start from the same counter they'll get the same IDs.
->
-> This is why I think that using a counter is better if you really need something
-> unique. Randoms only reduce predictability which helps avoiding collisions.
+On Sat, Oct 17, 2020 at 07:52:48AM +0200, Jann Horn wrote:
+> On Sat, Oct 17, 2020 at 7:37 AM Willy Tarreau <w@1wt.eu> wrote:
+> > On Sat, Oct 17, 2020 at 07:01:31AM +0200, Jann Horn wrote:
+> > > Microsoft's documentation
+> > > (http://go.microsoft.com/fwlink/?LinkId=260709) says that the VM
+> > > Generation ID that we get after a fork "is a 128-bit,
+> > > cryptographically random integer value". If multiple people use the
+> > > same image, it guarantees that each use of the image gets its own,
+> > > fresh ID:
+> >
+> > No. It cannot be more unique than the source that feeds that cryptographic
+> > transformation. All it guarantees is that the entropy source is protected
+> > from being guessed based on the output. Applying cryptography on a simple
+> > counter provides apparently random numbers that will be unique for a long
+> > period for the same source, but as soon as you duplicate that code between
+> > users and they start from the same counter they'll get the same IDs.
+> >
+> > This is why I think that using a counter is better if you really need something
+> > unique. Randoms only reduce predictability which helps avoiding collisions.
+> 
+> Microsoft's spec tells us that they're giving us cryptographically
+> random numbers. Where they're getting those from is not our problem.
+> (And if even the hypervisor is not able to collect enough entropy to
+> securely generate random numbers, worrying about RNG reseeding in the
+> guest would be kinda pointless, we'd be fairly screwed anyway.)
 
-Microsoft's spec tells us that they're giving us cryptographically
-random numbers. Where they're getting those from is not our problem.
-(And if even the hypervisor is not able to collect enough entropy to
-securely generate random numbers, worrying about RNG reseeding in the
-guest would be kinda pointless, we'd be fairly screwed anyway.)
+Sorry if I sound annoying, but it's a matter of terminology and needs.
 
-Also note that we don't actually need to *always* reinitialize RNG
-state on forks for functional correctness; it is fine if that fails
-with a probability of 2^-128, because functionally everything will be
-fine, and an attacker who is that lucky could also just guess an AES
-key (which has the same probability of being successful). (And also
-2^-128 is such a tiny number that it doesn't matter anyway.)
+Cryptograhically random means safe for use with cryptography in that it
+is unguessable enough so that you can use it for encryption keys that
+nobody will be able to guess. It in no ways guarantees uniqueness, just
+like you don't really care if the symmetric crypto key of you VPN has
+already been used once somewhere else as long as there's no way to know.
+However with the good enough distribution that a CSPRNG provides,
+collisions within a *same* generator are bound to a very low, predictable
+rate which is by generally considered as acceptable for all use cases.
 
-> And I'm saying this as someone who had on his external gateway the same SSH
-> host key as 89 other hosts on the net, each of them using randoms to provide
-> a universally unique one...
+Something random (cryptographically or not) *cannot* be unique by
+definition, otherwise it's not random anymore, since each draw has an
+influence on the remaining list of possible draws, which is contrary to
+randomness. And conversely something unique cannot be completely random
+because if you know it's unique, you can already rule out all other known
+values from the candidates, thus it's more predictable than random.
 
-If your SSH host key was shared with 89 other hosts, it evidently
-wasn't generated from cryptographically random numbers. :P Either
-because the key generator was not properly hooked up to the system's
-entropy pool (if you're talking about the Debian fiasco), or because
-the system simply did not have enough entropy available. (Or because
-the key generator is broken, but I don't think that ever happened with
-OpenSSH?)
+With this in mind, picking randoms from a same RNG is often highly
+sufficient to consider they're highly likely unique within a long
+period. But it's not a guarantee. And it's even less one between two
+RNGs (e.g. if uniqueness is required between multiple hypervisors in
+case VMs are migrated or centrally managed, which I don't know).
+
+If what is sought here is a strong guarantee of uniqueness, using a
+counter as you first suggested is better. If what is sought is pure
+randomness (in the sense that it's unpredictable, which I don't think
+is needed here), then randoms are better. If both are required, just
+concatenate a counter and a random. And if you need them to be spatially
+unique, just include a node identifier.
+
+Now the initial needs in the forwarded message are not entirely clear
+to me but I wanted to rule out the apparent mismatch between the expressed
+needs for uniqueness and the proposed solutions solely based on randomness.
+
+Cheers,
+Willy
