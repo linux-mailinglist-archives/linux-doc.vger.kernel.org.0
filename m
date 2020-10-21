@@ -2,203 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 32FE7294C48
-	for <lists+linux-doc@lfdr.de>; Wed, 21 Oct 2020 14:12:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 006F2294C61
+	for <lists+linux-doc@lfdr.de>; Wed, 21 Oct 2020 14:17:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2442213AbgJUMMF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 21 Oct 2020 08:12:05 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43888 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2442210AbgJUMME (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 21 Oct 2020 08:12:04 -0400
-Received: from mail-pl1-x643.google.com (mail-pl1-x643.google.com [IPv6:2607:f8b0:4864:20::643])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 222FEC0613CF
-        for <linux-doc@vger.kernel.org>; Wed, 21 Oct 2020 05:12:04 -0700 (PDT)
-Received: by mail-pl1-x643.google.com with SMTP id b19so1135836pld.0
-        for <linux-doc@vger.kernel.org>; Wed, 21 Oct 2020 05:12:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=android.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=v3SI87Cjm2G5EpAaLb2jmxm1cSl4yPQOy4ANEWsTrbY=;
-        b=M4V61LUvbhMf9TxB7ZsMhAojSWcURHYOodt0VpLbFBCduE60mpTmsMn/HlJ4WbpTl8
-         eSzlEF+AUO14IRzNqIDrBsFRw97RKYf4cT8kP9CvImJHTX1WRY6IbCrNs5eEnUyK1QVu
-         nUxog3s9hiYCn/G1Z98v5NFH+WmDYCKIzlPp/vxaw9IR2U6MH3ydoThdBHZaOezABRMp
-         zxdIiNT8orSHd08/WdKbq3w2SUKuuayx9pGAV0ZrUCS62yGPc0qQYe8S9TdH5tWotrhn
-         intkCn1WB+g5+J9DOiQgCFvKjvegxlWpZxZ/TUb5hdRzC76NBXEPR25vUZHBeNF1aspc
-         AB0Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=v3SI87Cjm2G5EpAaLb2jmxm1cSl4yPQOy4ANEWsTrbY=;
-        b=GeRFsGmcA6r37xbriS30A9lpp9yo+kwXN6D/urmZFYYnF9V1/gIo4vnonVwM+AX4te
-         SRpVf+jjonQErdtkUPZ7+bE8dO56g0YZEcq9jvyAMCipyvByeGTAWWV5Wnlujg42xALs
-         qpn4LX7u47J17vG8NdaIz9bdlwbLvGKBbEsi4bsYtxfX0sNQS5CIJqP+2x4A95hexzC4
-         OcqXMaQSoFapjVJF+Ja1UovjV4avsXT4Xe0d34WcSRrxIBBKajT9SKvm2112bgfPloYz
-         OFukAN2bWnndJ5dn1GY0h05QC5JdC5pfpuzIrqECczZ+6/GrQayurLabP0dZg1rfMycs
-         5HNQ==
-X-Gm-Message-State: AOAM532HQdR6xk3WAhlsWUt8RAOwivD3Z1y62kWUjTdZWM1kOqnFtl/U
-        Vi92xSmIzCOTKQW0yOzkErd3LQ==
-X-Google-Smtp-Source: ABdhPJy89qDGbo2SbnJkqRTkpw+pYVVTnm/219KVxZgvjBtHEiGcERLGsE/GVeX3gTFCnhUwnOaJYg==
-X-Received: by 2002:a17:90a:c28a:: with SMTP id f10mr3138379pjt.30.1603282323585;
-        Wed, 21 Oct 2020 05:12:03 -0700 (PDT)
-Received: from nebulus.mtv.corp.google.com ([2620:15c:211:200:4a0f:cfff:fe35:d61b])
-        by smtp.googlemail.com with ESMTPSA id o134sm2213198pfg.134.2020.10.21.05.12.02
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 21 Oct 2020 05:12:02 -0700 (PDT)
-Subject: Re: [PATCH v17 2/4] overlayfs: handle XATTR_NOSECURITY flag for get
- xattr method
-To:     linux-kernel@vger.kernel.org
-Cc:     kernel-team@android.com, Stephen Smalley <sds@tycho.nsa.gov>,
-        linux-security-module@vger.kernel.org,
-        Miklos Szeredi <miklos@szeredi.hu>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Vivek Goyal <vgoyal@redhat.com>,
-        "Eric W . Biederman" <ebiederm@xmission.com>,
-        Amir Goldstein <amir73il@gmail.com>, linux-doc@vger.kernel.org,
-        linux-security-module@vger.kernel.org
-References: <20201020191732.4049987-1-salyzyn@android.com>
- <20201020191732.4049987-3-salyzyn@android.com>
-From:   Mark Salyzyn <salyzyn@android.com>
-Message-ID: <b4372a9a-a0df-fd9c-a2b8-a004e73cce01@android.com>
-Date:   Wed, 21 Oct 2020 05:12:01 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.0
+        id S2442270AbgJUMRd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 21 Oct 2020 08:17:33 -0400
+Received: from mail.kernel.org ([198.145.29.99]:59180 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2411517AbgJUMRc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 21 Oct 2020 08:17:32 -0400
+Received: from mail.kernel.org (ip5f5ad5a8.dynamic.kabel-deutschland.de [95.90.213.168])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 1F6A422453;
+        Wed, 21 Oct 2020 12:17:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1603282651;
+        bh=ZThY5uPrN8m7PVeYj6yV3k4YTH50nRqHVbTBxoDTc5M=;
+        h=From:To:Cc:Subject:Date:From;
+        b=eLjiVAUbctSCqXFNEqOjYCcD0lD36EsozUQwQLXQib17OkD1maRKTKIGr2Sfggau3
+         MkRA3zzFiQNh47QZlV8cJjzX/nrnNCZAV/sHmguIAyCCH4oLr9VIY1qSgtkUKuBp7s
+         7Q/wiluVMS9Ay8unKODOQ7hNqNbe2LcMEjwM37mg=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kVD3Y-001U2X-88; Wed, 21 Oct 2020 14:17:28 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        =?UTF-8?q?Christian=20K=C3=B6nig?= <christian.koenig@amd.com>,
+        Alan Maguire <alan.maguire@oracle.com>,
+        Alex Deucher <alexander.deucher@amd.com>,
+        Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Bart Van Assche <bvanassche@acm.org>,
+        Ben Skeggs <bskeggs@redhat.com>,
+        Bernard Zhao <bernard@vivo.com>,
+        Boqun Feng <boqun.feng@gmail.com>,
+        Brendan Higgins <brendanhiggins@google.com>,
+        Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
+        Colton Lewis <colton.w.lewis@protonmail.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Dave Airlie <airlied@redhat.com>,
+        David Airlie <airlied@linux.ie>,
+        David Sterba <dsterba@suse.com>, Dennis Li <Dennis.Li@amd.com>,
+        Doug Ledford <dledford@redhat.com>,
+        Evan Quan <evan.quan@amd.com>,
+        Goldwyn Rodrigues <rgoldwyn@suse.com>,
+        Hawking Zhang <Hawking.Zhang@amd.com>,
+        Ingo Molnar <mingo@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Iurii Zaikin <yzaikin@google.com>,
+        Jann Horn <jannh@google.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Johannes Thumshirn <jthumshirn@suse.de>,
+        Josef Bacik <josef@toxicpanda.com>,
+        Kees Cook <keescook@chromium.org>,
+        Luben Tuikov <luben.tuikov@amd.com>,
+        Max Gurtovoy <maxg@mellanox.com>,
+        Nikolay Borisov <nborisov@suse.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Sagi Grimberg <sagi@grimberg.me>,
+        Shuah Khan <skhan@linuxfoundation.org>,
+        Stephen Boyd <sboyd@kernel.org>, Will Deacon <will@kernel.org>,
+        Yamin Friedman <yaminf@mellanox.com>,
+        amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        kunit-dev@googlegroups.com, linux-kselftest@vger.kernel.org,
+        linux-rdma@vger.kernel.org, target-devel@vger.kernel.org
+Subject: [PATCH v3 0/6] Documentation build fixes against upstream
+Date:   Wed, 21 Oct 2020 14:17:21 +0200
+Message-Id: <cover.1603282193.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <20201020191732.4049987-3-salyzyn@android.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Language: en-GB
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 10/20/20 12:17 PM, Mark Salyzyn wrote:
-> Because of the overlayfs getxattr recursion, the incoming inode fails
-> to update the selinux sid resulting in avc denials being reported
-> against a target context of u:object_r:unlabeled:s0.
->
-> Solution is to respond to the XATTR_NOSECURITY flag in get xattr
-> method that calls the __vfs_getxattr handler instead so that the
-> context can be read in, rather than being denied with an -EACCES
-> when vfs_getxattr handler is called.
->
-> For the use case where access is to be blocked by the security layer.
->
-> The path then would be security(dentry) ->
-> __vfs_getxattr({dentry...XATTR_NOSECURITY}) ->
-> handler->get({dentry...XATTR_NOSECURITY}) ->
-> __vfs_getxattr({realdentry...XATTR_NOSECURITY}) ->
-> lower_handler->get({realdentry...XATTR_NOSECURITY}) which
-> would report back through the chain data and success as expected,
-> the logging security layer at the top would have the data to
-> determine the access permissions and report back to the logs and
-> the caller that the target context was blocked.
->
-> For selinux this would solve the cosmetic issue of the selinux log
-> and allow audit2allow to correctly report the rule needed to address
-> the access problem.
->
-> Check impure, opaque, origin & meta xattr with no sepolicy audit
-> (using __vfs_getxattr) since these operations are internal to
-> overlayfs operations and do not disclose any data.  This became
-> an issue for credential override off since sys_admin would have
-> been required by the caller; whereas would have been inherently
-> present for the creator since it performed the mount.
->
-> This is a change in operations since we do not check in the new
-> ovl_do_getxattr function if the credential override is off or not.
-> Reasoning is that the sepolicy check is unnecessary overhead,
-> especially since the check can be expensive.
->
-> Because for override credentials off, this affects _everyone_ that
-> underneath performs private xattr calls without the appropriate
-> sepolicy permissions and sys_admin capability.  Providing blanket
-> support for sys_admin would be bad for all possible callers.
->
-> For the override credentials on, this will affect only the mounter,
-> should it lack sepolicy permissions. Not considered a security
-> problem since mounting by definition has sys_admin capabilities,
-> but sepolicy contexts would still need to be crafted.
->
-> It should be noted that there is precedence, __vfs_getxattr is used
-> in other filesystems for their own internal trusted xattr management.
->
-> Signed-off-by: Mark Salyzyn <salyzyn@android.com>
-> To: linux-fsdevel@vger.kernel.org
-> To: linux-unionfs@vger.kernel.org
-> Cc: Stephen Smalley <sds@tycho.nsa.gov>
-> Cc: linux-kernel@vger.kernel.org
-> Cc: linux-security-module@vger.kernel.org
-> Cc: kernel-team@android.com
-> Cc: Miklos Szeredi <miklos@szeredi.hu>
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: Vivek Goyal <vgoyal@redhat.com>
-> Cc: Eric W. Biederman <ebiederm@xmission.com>
-> Cc: Amir Goldstein <amir73il@gmail.com>
-> Cc: Stephen Smalley <sds@tycho.nsa.gov>
-> Cc: linux-doc@vger.kernel.org
->
-> v17 - rebase and add inode argument to __Vfs_getxattr
->
-> v16 - rebase and merge internal getxattr operations patch
->
-> v15 - revert to v13 because xattr_gs_args rejected.
->
-> v14 - rebase to use xattr_gs_args.
->
-> v13 - rebase to use __vfs_getxattr flags option.
->
-> v12 - Added back to patch series as get xattr with flag option.
->
-> v11 - Squashed out of patch series and replaced with per-thread flag
->        solution.
->
-> v10 - Added to patch series as __get xattr method.
-> ---
->   fs/overlayfs/inode.c     | 5 +++--
->   fs/overlayfs/overlayfs.h | 6 ++++--
->   fs/overlayfs/super.c     | 4 ++--
->   3 files changed, 9 insertions(+), 6 deletions(-)
->
-> diff --git a/fs/overlayfs/inode.c b/fs/overlayfs/inode.c
-> index b584dca845ba..2b14291beb86 100644
-> --- a/fs/overlayfs/inode.c
-> +++ b/fs/overlayfs/inode.c
-> @@ -378,7 +378,7 @@ int ovl_xattr_set(struct dentry *dentry, struct inode *inode, const char *name,
->   }
->   
->   int ovl_xattr_get(struct dentry *dentry, struct inode *inode, const char *name,
-> -		  void *value, size_t size)
-> +		  void *value, size_t size, int flags)
->   {
->   	ssize_t res;
->   	const struct cred *old_cred;
-> @@ -386,7 +386,8 @@ int ovl_xattr_get(struct dentry *dentry, struct inode *inode, const char *name,
->   		ovl_i_dentry_upper(inode) ?: ovl_dentry_lower(dentry);
->   
->   	old_cred = ovl_override_creds(dentry->d_sb);
-> -	res = vfs_getxattr(realdentry, name, value, size);
-> +	res = __vfs_getxattr(realdentry, d_inode(realdentry), name,
-> +			     value, size, flags);
->   	revert_creds(old_cred);
->   	return res;
->   }
-> diff --git a/fs/overlayfs/overlayfs.h b/fs/overlayfs/overlayfs.h
-> index f8880aa2ba0e..d3bf21bd60ab 100644
-> --- a/fs/overlayfs/overlayfs.h
-> +++ b/fs/overlayfs/overlayfs.h
-> @@ -184,7 +184,9 @@ static inline ssize_t ovl_do_getxattr(struct ovl_fs *ofs, struct dentry *dentry,
->   				      size_t size)
->   {
->   	const char *name = ovl_xattr(ofs, ox);
-> -	return vfs_getxattr(dentry, name, value, size);
-> +	struct ovl_inode *ip = d_inode(dentry);
+As we're close to the end of the merge window for Kernel 5.10,
+this series contain the patches from the past two documentation
+fix series I sent during the merge window and that required more
+work.
 
-      struct inode *ip = d_inode(dentry);
+It is based on the top of upstream. The full series with the patches
+that either didn't generate any reply or have been acked is on
+this branch:
 
-<oops> copy and paste error from testing kernel to main
+	https://git.linuxtv.org/mchehab/experimental.git/log/?h=docs_for_v5.10
+
+There are a couple of warnings that aren't addressed here, because
+they don't show at linux-next. I'm keeping a second patch series 
+against next-20201021 fixing additional warnings caused by patches
+pending merges.
+
+I'll be posting those in separate.
+
+Regards,
+Mauro
+
+Mauro Carvalho Chehab (6):
+  drm: amdgpu: kernel-doc: update some adev parameters
+  docs: lockdep-design: fix some warning issues
+  locking/refcount: move kernel-doc markups to the proper place
+  IB/srpt: docs: add a description for cq_size  member
+  kunit: test: fix remaining kernel-doc warnings
+  docs: fs: api-summary.rst: get rid of kernel-doc include
+
+ Documentation/filesystems/api-summary.rst    |   3 -
+ Documentation/locking/lockdep-design.rst     |  51 +++---
+ drivers/gpu/drm/amd/amdgpu/amdgpu_device.c   |  28 ++--
+ drivers/gpu/drm/amd/amdgpu/amdgpu_gtt_mgr.c  |   6 +-
+ drivers/gpu/drm/amd/amdgpu/amdgpu_vram_mgr.c |   7 +-
+ drivers/infiniband/ulp/srpt/ib_srpt.h        |   1 +
+ include/kunit/test.h                         |  16 +-
+ include/linux/refcount.h                     | 158 +++++++++----------
+ 8 files changed, 139 insertions(+), 131 deletions(-)
+
+-- 
+2.26.2
 
 
