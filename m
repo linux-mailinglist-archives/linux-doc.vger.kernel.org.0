@@ -2,28 +2,28 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B971F29727A
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Oct 2020 17:38:06 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0FB81297257
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Oct 2020 17:32:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S465956AbgJWPiF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 23 Oct 2020 11:38:05 -0400
-Received: from host.saywowhosting.com ([208.75.148.9]:50559 "EHLO
+        id S462602AbgJWPcJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 23 Oct 2020 11:32:09 -0400
+Received: from host.saywowhosting.com ([208.75.148.9]:42630 "EHLO
         host.saywowhosting.com" rhost-flags-OK-FAIL-OK-FAIL)
-        by vger.kernel.org with ESMTP id S465955AbgJWPiF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Oct 2020 11:38:05 -0400
-X-Greylist: delayed 2418 seconds by postgrey-1.27 at vger.kernel.org; Fri, 23 Oct 2020 11:38:05 EDT
-Received: from [127.0.0.1] (port=38108 helo=host.saywowhosting.com)
+        by vger.kernel.org with ESMTP id S462614AbgJWPcJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Oct 2020 11:32:09 -0400
+X-Greylist: delayed 2061 seconds by postgrey-1.27 at vger.kernel.org; Fri, 23 Oct 2020 11:32:08 EDT
+Received: from [127.0.0.1] (port=39524 helo=host.saywowhosting.com)
         by host.saywowhosting.com with esmtpa (Exim 4.93)
         (envelope-from <mfrancofoundation20@gmail.com>)
-        id 1kVyVQ-0000UN-4K; Fri, 23 Oct 2020 09:57:24 -0500
+        id 1kVz2a-0004Tn-S5; Fri, 23 Oct 2020 10:31:40 -0500
 MIME-Version: 1.0
-Date:   Fri, 23 Oct 2020 09:57:23 -0500
+Date:   Fri, 23 Oct 2020 10:31:40 -0500
 From:   Manuel Franco <mfrancofoundation20@gmail.com>
 To:     undisclosed-recipients:;
 Subject: 2 MILLIONEN EURO GEWINNEN
 Reply-To: mfrancofoundation20@gmail.com
 Mail-Reply-To: mfrancofoundation20@gmail.com
-Message-ID: <90bcb519c9a6c9a907657d851ccc5d1b@gmail.com>
+Message-ID: <887e080ff4a4a2253910308b80681163@gmail.com>
 X-Sender: mfrancofoundation20@gmail.com
 User-Agent: Roundcube Webmail/1.3.15
 Content-Type: text/plain; charset=UTF-8;
