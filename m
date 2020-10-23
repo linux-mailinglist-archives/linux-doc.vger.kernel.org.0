@@ -2,141 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 983CE296E08
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Oct 2020 13:57:47 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 71A85296F32
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Oct 2020 14:29:31 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S463244AbgJWL5p (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 23 Oct 2020 07:57:45 -0400
-Received: from mx0a-001b2d01.pphosted.com ([148.163.156.1]:18790 "EHLO
-        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S2409403AbgJWL5p (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Oct 2020 07:57:45 -0400
-Received: from pps.filterd (m0098409.ppops.net [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 09NBhvHR050587;
-        Fri, 23 Oct 2020 07:57:39 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=date : from : to : cc :
- subject : message-id : mime-version : content-type; s=pp1;
- bh=G638WJePebchukAGz5Hbd4aBlR6kAFex/G6+r6vFTNs=;
- b=KMKukBccSh0jHgwxqQFg3Fyeo/PQofipW+lk1TbRzszn79OdrVo1SmLvQP7uuQnoyGhC
- tFEqjwixyy/FI7YZm2sbehHQtpk//9OutAhvpIVIoR3Q/gwaQhdPO4Kt3JJy6xHB3SxQ
- jEw8uLF5GpzwqSGKwM90D7XQbR8Sy99t/4UTP2sfQmSHndeuO14AmjA3ob2my1M3XihM
- MIY1/MfytHOncypjaZH+QbGnRLykOHqxhde+TVmdxk64pZ3BMYQrGuLTDC0VfD8eeZS1
- 7y7EXI/pewXvsgWKF4tHxLdLfw5auGBJ0EJq8U7ao4I4Jv3/iHH7ZPtMCSCKaQFvbSdt Pg== 
-Received: from pps.reinject (localhost [127.0.0.1])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 34bxjbrak7-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 23 Oct 2020 07:57:39 -0400
-Received: from m0098409.ppops.net (m0098409.ppops.net [127.0.0.1])
-        by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 09NBid7A052526;
-        Fri, 23 Oct 2020 07:57:39 -0400
-Received: from ppma03ams.nl.ibm.com (62.31.33a9.ip4.static.sl-reverse.com [169.51.49.98])
-        by mx0a-001b2d01.pphosted.com with ESMTP id 34bxjbrajb-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 23 Oct 2020 07:57:38 -0400
-Received: from pps.filterd (ppma03ams.nl.ibm.com [127.0.0.1])
-        by ppma03ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 09NBva9p006167;
-        Fri, 23 Oct 2020 11:57:36 GMT
-Received: from b06avi18626390.portsmouth.uk.ibm.com (b06avi18626390.portsmouth.uk.ibm.com [9.149.26.192])
-        by ppma03ams.nl.ibm.com with ESMTP id 348d5qwppx-1
-        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
-        Fri, 23 Oct 2020 11:57:36 +0000
-Received: from d06av24.portsmouth.uk.ibm.com (mk.ibm.com [9.149.105.60])
-        by b06avi18626390.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 09NBvYhl35979592
-        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
-        Fri, 23 Oct 2020 11:57:34 GMT
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id 7699842041;
-        Fri, 23 Oct 2020 11:57:34 +0000 (GMT)
-Received: from d06av24.portsmouth.uk.ibm.com (unknown [127.0.0.1])
-        by IMSVA (Postfix) with ESMTP id CF5AE42049;
-        Fri, 23 Oct 2020 11:57:33 +0000 (GMT)
-Received: from localhost (unknown [9.145.183.202])
-        by d06av24.portsmouth.uk.ibm.com (Postfix) with ESMTPS;
-        Fri, 23 Oct 2020 11:57:33 +0000 (GMT)
-Date:   Fri, 23 Oct 2020 13:57:32 +0200
-From:   Vasily Gorbik <gor@linux.ibm.com>
-To:     Masahiro Yamada <masahiroy@kernel.org>
-Cc:     Nathan Chancellor <natechancellor@gmail.com>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kbuild@vger.kernel.org,
-        clang-built-linux@googlegroups.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH] kbuild: remove unused OBJSIZE
-Message-ID: <patch.git-ef02981ce9bc.your-ad-here.call-01603453662-ext-3714@work.hours>
+        id S463807AbgJWM3a (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 23 Oct 2020 08:29:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39070 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S372597AbgJWM3a (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Oct 2020 08:29:30 -0400
+Received: from mail-oi1-x242.google.com (mail-oi1-x242.google.com [IPv6:2607:f8b0:4864:20::242])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D3269C0613CE
+        for <linux-doc@vger.kernel.org>; Fri, 23 Oct 2020 05:29:29 -0700 (PDT)
+Received: by mail-oi1-x242.google.com with SMTP id 16so1647327oix.9
+        for <linux-doc@vger.kernel.org>; Fri, 23 Oct 2020 05:29:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:sender:from:date:message-id:subject:to;
+        bh=S0N4PhU+7Il+Kp7SBzFdY4dz+9L4QauPjbkOt2PF9Q4=;
+        b=MM4ckwb5rMIFqLfk/Gy0Sc/Ck8AYLDRxIt3OLpnjNDN6Euy/Z0VYx+vJZxwLPGQm26
+         8i0BM0d9RJi9PLMOFzT7qpbgsFODiEDWHlmY1b6KhTgnuN+ru1an+n/5frXa2OJh1641
+         9hCgQC36Uu0WQ51YrxrE51t9EUqLxBv1Qb1/kynia92NcQVa2zvZ/PXrK43Zu0Ug1IyK
+         0QtGezsZsIZTkgNHjxtnoKLJltw4MEhwbEmPG4HiLd5ectB7897y0T5p6wt4N5AxBBqm
+         saWlwc6SgF/sWBs25R9Y33h93zpZY3gJFKTfhmZIBsj6Ga1nA0VM7quJR0BECFHDLKR0
+         1bvw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:sender:from:date:message-id:subject
+         :to;
+        bh=S0N4PhU+7Il+Kp7SBzFdY4dz+9L4QauPjbkOt2PF9Q4=;
+        b=bltShXmr0s6zj5+oEBXymlnQxshezbKKC/EwEoJQBnVNq+8qJ3FXFyQXNhlyx9WGdA
+         zBTSQ7Oik9HmGslgkxQmb0qHzXy5+NBe6s9R6iSgXXekwkovS3EthczifkfcT7q8x+5U
+         RpsG6tYI1gHVnt0AWH+70XRi8fGu58IQiCuD8g/wbFDhONN6fpRVZVKTl0ga1J6i4J2I
+         t1SQB5qoXFs4g1GPzhcEMDMskRxQWpyY5K3Zvrww00ATby0Cz4qsh7qNQEEagBKQ1kfJ
+         ujLl1dJIAHrUZlHPW7gSOuLxH4e2hzLapxiLRvNq9IJM/u2NdhzUtIkuBgyv0XYPtwkd
+         3ZSA==
+X-Gm-Message-State: AOAM530tN3SWYLyrLcHbrP7wIieJPFDO8xCfmUN5LObsixUg5HW5fQJo
+        aFg6TXylWQsls4rrrpXEo78UJy41VuoxsAokszY=
+X-Google-Smtp-Source: ABdhPJzEk6TDfnnYzIoGQlddtZpA45o8USGF6g250tmBNvk0RBjLJJsu3NSa2xzFazcEa5sXpHteh70IiPoDNK+3bO0=
+X-Received: by 2002:aca:b156:: with SMTP id a83mr1362096oif.150.1603456169253;
+ Fri, 23 Oct 2020 05:29:29 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-X-Patchwork-Bot: notify
-X-TM-AS-GCONF: 00
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.235,18.0.737
- definitions=2020-10-23_04:2020-10-23,2020-10-23 signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 spamscore=0 bulkscore=0
- lowpriorityscore=0 malwarescore=0 phishscore=0 adultscore=0
- impostorscore=0 suspectscore=1 mlxlogscore=999 mlxscore=0
- priorityscore=1501 clxscore=1011 classifier=spam adjust=0 reason=mlx
- scancount=1 engine=8.12.0-2009150000 definitions=main-2010230078
+Sender: kamuldulzim@gmail.com
+Received: by 2002:a4a:40c1:0:0:0:0:0 with HTTP; Fri, 23 Oct 2020 05:29:28
+ -0700 (PDT)
+From:   abibatu ali <abibatu22ali@gmail.com>
+Date:   Fri, 23 Oct 2020 05:29:28 -0700
+X-Google-Sender-Auth: G_fIpeBd3EOrE-EqCcODLGWR-Io
+Message-ID: <CAPhCE2dsRB1G3M0y3ATsNOwOtX-ojpM+s__noKFe_0-EFWshOw@mail.gmail.com>
+Subject: Hello
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The "size" tool has been solely used by s390 to enforce .bss section usage
-restrictions in early startup code. Since commit 980d5f9ab36b ("s390/boot:
-enable .bss section for compressed kernel") and commit 2e83e0eb85ca
-("s390: clean .bss before running uncompressed kernel") these restrictions
-have been lifted for the decompressor and uncompressed kernel and the
-size tool is now unused.
-
-Signed-off-by: Vasily Gorbik <gor@linux.ibm.com>
----
- Documentation/kbuild/llvm.rst | 5 ++---
- Makefile                      | 4 +---
- 2 files changed, 3 insertions(+), 6 deletions(-)
-
-diff --git a/Documentation/kbuild/llvm.rst b/Documentation/kbuild/llvm.rst
-index cf3ca236d2cc..21c847890d03 100644
---- a/Documentation/kbuild/llvm.rst
-+++ b/Documentation/kbuild/llvm.rst
-@@ -57,9 +57,8 @@ to enable them. ::
- They can be enabled individually. The full list of the parameters: ::
- 
- 	make CC=clang LD=ld.lld AR=llvm-ar NM=llvm-nm STRIP=llvm-strip \
--	  OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump OBJSIZE=llvm-size \
--	  READELF=llvm-readelf HOSTCC=clang HOSTCXX=clang++ HOSTAR=llvm-ar \
--	  HOSTLD=ld.lld
-+	  OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump READELF=llvm-readelf \
-+	  HOSTCC=clang HOSTCXX=clang++ HOSTAR=llvm-ar HOSTLD=ld.lld
- 
- Currently, the integrated assembler is disabled by default. You can pass
- ``LLVM_IAS=1`` to enable it.
-diff --git a/Makefile b/Makefile
-index d35a59f98e83..d2123c2c829a 100644
---- a/Makefile
-+++ b/Makefile
-@@ -433,7 +433,6 @@ NM		= llvm-nm
- OBJCOPY		= llvm-objcopy
- OBJDUMP		= llvm-objdump
- READELF		= llvm-readelf
--OBJSIZE		= llvm-size
- STRIP		= llvm-strip
- else
- CC		= $(CROSS_COMPILE)gcc
-@@ -443,7 +442,6 @@ NM		= $(CROSS_COMPILE)nm
- OBJCOPY		= $(CROSS_COMPILE)objcopy
- OBJDUMP		= $(CROSS_COMPILE)objdump
- READELF		= $(CROSS_COMPILE)readelf
--OBJSIZE		= $(CROSS_COMPILE)size
- STRIP		= $(CROSS_COMPILE)strip
- endif
- PAHOLE		= pahole
-@@ -509,7 +507,7 @@ KBUILD_LDFLAGS :=
- CLANG_FLAGS :=
- 
- export ARCH SRCARCH CONFIG_SHELL BASH HOSTCC KBUILD_HOSTCFLAGS CROSS_COMPILE LD CC
--export CPP AR NM STRIP OBJCOPY OBJDUMP OBJSIZE READELF PAHOLE RESOLVE_BTFIDS LEX YACC AWK INSTALLKERNEL
-+export CPP AR NM STRIP OBJCOPY OBJDUMP READELF PAHOLE RESOLVE_BTFIDS LEX YACC AWK INSTALLKERNEL
- export PERL PYTHON PYTHON3 CHECK CHECKFLAGS MAKE UTS_MACHINE HOSTCXX
- export KGZIP KBZIP2 KLZOP LZMA LZ4 XZ ZSTD
- export KBUILD_HOSTCXXFLAGS KBUILD_HOSTLDFLAGS KBUILD_HOSTLDLIBS LDFLAGS_MODULE
--- 
-2.25.4
+I am Mrs. Abibatu. I am sending this brief letter to solicit
+your partnership to transfer a sum of 11.9 Million Dollars into your
+reliable account as my business partner. However, it's my urgent need
+for foreign partner that made me to contact you for this transaction.
+Further details of the transfer will be forwarded to you if you are
+ready to assist me.
+Best Regards.
+Mrs.Abibatu Ali
