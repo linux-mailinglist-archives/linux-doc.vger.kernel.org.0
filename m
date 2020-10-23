@@ -2,241 +2,139 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BCFE7297438
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Oct 2020 18:35:33 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id EAFDB2974B3
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Oct 2020 18:39:30 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1750931AbgJWQfO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 23 Oct 2020 12:35:14 -0400
-Received: from mail.kernel.org ([198.145.29.99]:33228 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1751871AbgJWQdv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 23 Oct 2020 12:33:51 -0400
-Received: from mail.kernel.org (ip5f5ad5a3.dynamic.kabel-deutschland.de [95.90.213.163])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id E5AA524640;
-        Fri, 23 Oct 2020 16:33:48 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1603470829;
-        bh=kKdcFIDbvdIdbsg1p/Q0zZPYj9lZBHWVYn7UPRPdRmc=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=MNfRxv0N9bT8FY1LJcnC3/1Mk38o6gShcU3ocS0Qh0WQ7dNgJFHZrMjOEMdEeDg0z
-         ZR+yeCxJVVpbSzGHkSe0f7oM3CGKYGIYBw5oCf0QopHixbOq8bd0L4Cm/HIzl+53RG
-         4tQQek6j+l7RulUlkXnLYJ/b6PU8QcyshTZjRCLg=
-Received: from mchehab by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1kW00g-002Axx-TT; Fri, 23 Oct 2020 18:33:46 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>, linux-kernel@vger.kernel.org
-Subject: [PATCH v3 56/56] scrpits: kernel-doc: validate kernel-doc markup with the actual names
-Date:   Fri, 23 Oct 2020 18:33:43 +0200
-Message-Id: <a21343a7012c87391c4850bf3151ebd82add8d1c.1603469755.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <cover.1603469755.git.mchehab+huawei@kernel.org>
+        id S1750253AbgJWQiu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 23 Oct 2020 12:38:50 -0400
+Received: from mail-dm6nam12on2055.outbound.protection.outlook.com ([40.107.243.55]:46688
+        "EHLO NAM12-DM6-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S464531AbgJWQit (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 23 Oct 2020 12:38:49 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=idTJ0BjCrHUOHAYjUTsC54cRzZJIz0gJcX5EG1+7BAvpdlHgvUGRn6k15f1/2hZfLIHYARMwQkx36ILIVUkJkUfWuSzrWqZ9oioKjpzI9/GTymZyRI7EJzs0Awpwwl3I89XsKN1ZG3hcsfJrggO/c5KlqNgCOSwEG2t5P29Z0TLtCM8VUe25WgS4ve7u4hb4wL7q5il/HJJfkiXXNC2Gbf9EA19KXV8QI8AwXzNbOrA3GYElR5rmb4bPPphARuNSFwwlF71iDHqgC7rH6BCgPrle5BZc/Zj8BufLTSqeNpaw+3J4ZWnUSvuMdSY8yW2EPTpqhaLCq4MqK/5hxZgowQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=X4DrqDtPSnNUPbW1Da7SwRFtEuUOsRLtXyyuKxC4jF0=;
+ b=BBVf84BCOyaxka5hajjhowSZQ8H/cH2P2Vf8cTuIxv79HdlgrNIt39PMJfHjSWQrw7q1o+GgFuISDIAvpCVPUqWi5tP8G06xiYHlZj1A+ZW98CDa+3mf9Yy+XJIUMhdXUa0DXus7KBZMbjs57aZgpOUKH4SWix0yrKF0/PhAeYt1qHNsHuE9QWnOFKlRr6b0/QSUydy/i5jmXYTsJ8i9G2gT/33NH+7cB0wFMGDOWCjffcRH8zE+Kpnq3S3//1G4Ul7j/FChzV0RoYe0ManIUmDY+irqSIXIUGkDxWTQDE52s7HgwD4DllvkJwGA6krx7dqjnk0Xs8K5azeW7kJ0zA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=amdcloud.onmicrosoft.com; s=selector2-amdcloud-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=X4DrqDtPSnNUPbW1Da7SwRFtEuUOsRLtXyyuKxC4jF0=;
+ b=An+TFKGzN8SbrQLi4xiKe49EFHFXd6hDBzuiGZh3AcGYxRZwNofwguPu9bdvk/7+2hzzUzhBXO4J3vNDzDq6SVVmeaE3RN4r43xFjnmBiJb0pGW+nARmWTRkRrAQh2ksf7oow+xgY4lH/qqealvnkHGCeGJPK/oJCiYuS1+o88I=
+Authentication-Results: vger.kernel.org; dkim=none (message not signed)
+ header.d=none;vger.kernel.org; dmarc=none action=none header.from=amd.com;
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com (2603:10b6:208:159::19)
+ by MN2PR12MB4318.namprd12.prod.outlook.com (2603:10b6:208:1d8::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.18; Fri, 23 Oct
+ 2020 16:38:46 +0000
+Received: from MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::f8f7:7403:1c92:3a60]) by MN2PR12MB3775.namprd12.prod.outlook.com
+ ([fe80::f8f7:7403:1c92:3a60%6]) with mapi id 15.20.3477.028; Fri, 23 Oct 2020
+ 16:38:46 +0000
+Subject: Re: [PATCH v3 03/56] amdgpu: fix a few kernel-doc markup issues
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Alex Deucher <alexander.deucher@amd.com>,
+        Andrey Grodzovsky <andrey.grodzovsky@amd.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>, Dennis Li <Dennis.Li@amd.com>,
+        Evan Quan <evan.quan@amd.com>,
+        Hawking Zhang <Hawking.Zhang@amd.com>,
+        amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org
 References: <cover.1603469755.git.mchehab+huawei@kernel.org>
-MIME-Version: 1.0
+ <632b3b11118969ff6fccb8a2f606c87fde41c138.1603469755.git.mchehab+huawei@kernel.org>
+From:   =?UTF-8?Q?Christian_K=c3=b6nig?= <christian.koenig@amd.com>
+Message-ID: <ecb99629-f593-b389-60b3-dc6f1b306c8b@amd.com>
+Date:   Fri, 23 Oct 2020 18:38:40 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
+In-Reply-To: <632b3b11118969ff6fccb8a2f606c87fde41c138.1603469755.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+Content-Language: en-US
+X-Originating-IP: [2a02:908:1252:fb60:be8a:bd56:1f94:86e7]
+X-ClientProxiedBy: AM0PR04CA0132.eurprd04.prod.outlook.com
+ (2603:10a6:208:55::37) To MN2PR12MB3775.namprd12.prod.outlook.com
+ (2603:10b6:208:159::19)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from [IPv6:2a02:908:1252:fb60:be8a:bd56:1f94:86e7] (2a02:908:1252:fb60:be8a:bd56:1f94:86e7) by AM0PR04CA0132.eurprd04.prod.outlook.com (2603:10a6:208:55::37) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3499.18 via Frontend Transport; Fri, 23 Oct 2020 16:38:44 +0000
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-HT: Tenant
+X-MS-Office365-Filtering-Correlation-Id: 51ec5735-a37b-435b-5f6b-08d877721c74
+X-MS-TrafficTypeDiagnostic: MN2PR12MB4318:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <MN2PR12MB431803764B84C9A7D7A80150831A0@MN2PR12MB4318.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:1060;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: DlqryhEoO1L7KJ0DvWsnV0M4KcXExuf2+UXXkW3B2XfPyrldcYn1Mvsl0wOvV/ccZpJ72ysExWWaBx0fnGWZpfJqJPBLU25yel1Irc3hcyQcOeIhgS2KnM8YtgAnRYdaWr6SRlopLjr1cyTf7Erkw1sAL70iZwZAP0stccinlkPVuY0SWRemk/SoUmBUJiKLLJYLPZO9ITiuBFhuHYpV7EzfkYZxJSUvoN51IkjTbNKQ0/dxR8RKPQm5+r/MiKfQwrIsbAaqD8+GVjGGzLkntJwa5Niduaky5Xhxk6IZ/fDo29ZTxD7hVecMO/V6j7u3vljgX9RzFTv/wDMw1qE28eZPEAoT8QDvvT5w7C0ujg19O/z187xxZiOFINzENHxA
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR12MB3775.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(376002)(396003)(346002)(136003)(39860400002)(366004)(316002)(66946007)(6486002)(110136005)(478600001)(86362001)(31686004)(54906003)(36756003)(16526019)(8936002)(31696002)(8676002)(2616005)(4326008)(186003)(2906002)(66556008)(52116002)(66476007)(66574015)(6666004)(83380400001)(5660300002)(43740500002);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: sw/qPRCwAvvMW+cjsvCoYitUPXvHGQxo0wJEc5TjscHFtQ2CXsXrZuELrx05Ye0hnJiElZvQkUwg5miXe9LYG2ex7T5mKO90qPY5IaixC7OKwgUPeLMvgAlGgktmZjmOwr+H/VlyElHxSwVFynK0tpc6XdaiAcO3VFpbJber854U6cR4R3Lm6xi2XHm0SPOfn2J6bD6WB1XmY6tvTZQTqZ3hEqv927DlefVfBnuJtdsSTBLWmfpPAwNceGKXnksVhnuuhhZ+E8z4ofBj8qkJ6yrcWnGbFnDrGSk2jvazFRWOocgVErRr31Ij5Ptp0FHG05gsHh7gZocqQVofN9JjrBWnRZkSF5d3Vbf7yYbFRVRN7sft5ZBrZ1W9RLkLIAI7VNMhPWCsgpREAaiWul7NwPJwhJBfbZVkU4515fI8A0PI2uN45y6fIwzkD/nUiUOsf03fCs+rin05NCRIurZuz1V4QCSCAclfRegq5hS6ANm1RjLr+mOh10HCqJiJNuYebFEb8gv76oL7H4k0qBPWh0buqwFoYGepLEW1HuknSUo9XJupCAt7gEi9wPTQ+Vwp+fYA6ZC4ZnHBDqSNQoaubn/mmg1gcuo5HfUFtz6iNct0zyWUr628bUjCFopAgd2cpp6A+b3CySTPPYUfpuSrjtkWPEU7RVuLcySs17iehRGleMbtTgiaripa1ry72wINi0KbcA29+ZJ0MQaKIrGRAQ==
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 51ec5735-a37b-435b-5f6b-08d877721c74
+X-MS-Exchange-CrossTenant-AuthSource: MN2PR12MB3775.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2020 16:38:46.2809
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: PG7yzvjAGPI8dfhortPP6Tzxd6BMl1SG7LKyMA4lLWsgA+E3tiWGCqSLk7vtyBJ4
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR12MB4318
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Kernel-doc currently expects that the kernel-doc markup to come
-just before the function/enum/struct/union/typedef prototype.
+Am 23.10.20 um 18:32 schrieb Mauro Carvalho Chehab:
+> A kernel-doc markup can't be mixed with a random comment,
+> as it causes parsing problems.
+>
+> While here, change an invalid kernel-doc markup into
+> a common comment.
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Yet, if it find things like:
+Acked-by: Christian König <christian.koenig@amd.com>
 
-	/**
-	 * refcount_add - add a value to a refcount
-	 * @i: the value to add to the refcount
-	 * @r: the refcount
-	 */
-	static inline void __refcount_add(int i, refcount_t *r, int *oldp);
-	static inline void refcount_add(int i, refcount_t *r);
-
-Kernel-doc will do the wrong thing:
-
-	foobar.h:6: warning: Function parameter or member 'oldp' not described in '__refcount_add'
-	.. c:function:: void __refcount_add (int i, refcount_t *r, int *oldp)
-
-	   add a value to a refcount
-
-	**Parameters**
-
-	``int i``
-	  the value to add to the refcount
-
-	``refcount_t *r``
-	  the refcount
-
-	``int *oldp``
-	  *undescribed*
-
-Basically, it will document "__refcount_add" with the kernel-doc
-markup for refcount_add.
-
-If both functions have the same arguments, this won't even
-produce any warning!
-
-Add a logic to check if the kernel-doc identifier matches the actual
-name of the C function or data structure that will be documented.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- scripts/kernel-doc | 62 ++++++++++++++++++++++++++++++++++------------
- 1 file changed, 46 insertions(+), 16 deletions(-)
-
-diff --git a/scripts/kernel-doc b/scripts/kernel-doc
-index 311d213ee74d..1371cd45f78b 100755
---- a/scripts/kernel-doc
-+++ b/scripts/kernel-doc
-@@ -382,6 +382,9 @@ my $inline_doc_state;
- # 'function', 'struct', 'union', 'enum', 'typedef'
- my $decl_type;
- 
-+# Name of the kernel-doc identifier for non-DOC markups
-+my $identifier;
-+
- my $doc_start = '^/\*\*\s*$'; # Allow whitespace at end of comment start.
- my $doc_end = '\*/';
- my $doc_com = '\s*\*\s*';
-@@ -1203,6 +1206,11 @@ sub dump_struct($$) {
- 	$declaration_name = $2;
- 	my $members = $3;
- 
-+	if ($identifier ne $declaration_name) {
-+	    print STDERR "${file}:$.: warning: expecting prototype for $decl_type $identifier. Prototype was for $decl_type $declaration_name instead\n";
-+	    return;
-+	}
-+
- 	# ignore members marked private:
- 	$members =~ s/\/\*\s*private:.*?\/\*\s*public:.*?\*\///gosi;
- 	$members =~ s/\/\*\s*private:.*//gosi;
-@@ -1391,6 +1399,11 @@ sub dump_enum($$) {
-     }
- 
-     if ($declaration_name) {
-+	if ($identifier ne $declaration_name) {
-+	    print STDERR "${file}:$.: warning: expecting prototype for enum $identifier. Prototype was for enum $declaration_name instead\n";
-+	    return;
-+	}
-+
- 	my %_members;
- 
- 	$members =~ s/\s+$//;
-@@ -1446,6 +1459,11 @@ sub dump_typedef($$) {
- 	$declaration_name = $2;
- 	my $args = $3;
- 
-+	if ($identifier ne $declaration_name) {
-+	    print STDERR "${file}:$.: warning: expecting prototype for typedef $identifier. Prototype was for typedef $declaration_name instead\n";
-+	    return;
-+	}
-+
- 	create_parameterlist($args, ',', $file, $declaration_name);
- 
- 	output_declaration($declaration_name,
-@@ -1472,6 +1490,11 @@ sub dump_typedef($$) {
-     if ($x =~ /typedef.*\s+(\w+)\s*;/) {
- 	$declaration_name = $1;
- 
-+	if ($identifier ne $declaration_name) {
-+	    print STDERR "${file}:$.: warning: expecting prototype for typedef $identifier. Prototype was for typedef $declaration_name instead\n";
-+	    return;
-+	}
-+
- 	output_declaration($declaration_name,
- 			   'typedef',
- 			   {'typedef' => $declaration_name,
-@@ -1791,6 +1814,11 @@ sub dump_function($$) {
- 	return;
-     }
- 
-+    if ($identifier ne $declaration_name) {
-+	print STDERR "${file}:$.: warning: expecting prototype for $identifier(). Prototype was for $declaration_name() instead\n";
-+	return;
-+    }
-+
-     my $prms = join " ", @parameterlist;
-     check_sections($file, $declaration_name, "function", $sectcheck, $prms);
- 
-@@ -1873,6 +1901,7 @@ sub tracepoint_munge($) {
- 			     "$prototype\n";
- 	} else {
- 		$prototype = "static inline void trace_$tracepointname($tracepointargs)";
-+		$identifier = "trace_$identifier";
- 	}
- }
- 
-@@ -2036,7 +2065,6 @@ sub process_normal() {
- #
- sub process_name($$) {
-     my $file = shift;
--    my $identifier;
-     my $descr;
- 
-     if (/$doc_block/o) {
-@@ -2049,12 +2077,19 @@ sub process_name($$) {
- 	} else {
- 	    $section = $1;
- 	}
--    }
--    elsif (/$doc_decl/o) {
-+    } elsif (/$doc_decl/o) {
- 	$identifier = $1;
--	if (/\s*([\w\s]+?)(\(\))?\s*-/) {
-+	if (/\s*([\w\s]+?)(\(\))?\s*([-:].*)?$/) {
- 	    $identifier = $1;
- 	}
-+	if ($identifier =~ m/^(struct|union|enum|typedef)\b\s*(\S*)/) {
-+	    $decl_type = $1;
-+	    $identifier = $2;
-+	} else {
-+	    $decl_type = 'function';
-+	    $identifier =~ s/^define\s+//;
-+	}
-+	$identifier =~ s/\s+$//;
- 
- 	$state = STATE_BODY;
- 	# if there's no @param blocks need to set up default section
-@@ -2062,7 +2097,7 @@ sub process_name($$) {
- 	$contents = "";
- 	$section = $section_default;
- 	$new_start_line = $. + 1;
--	if (/-(.*)/) {
-+	if (/[-:](.*)/) {
- 	    # strip leading/trailing/multiple spaces
- 	    $descr= $1;
- 	    $descr =~ s/^\s*//;
-@@ -2080,20 +2115,15 @@ sub process_name($$) {
- 	    ++$warnings;
- 	}
- 
--	if ($identifier =~ m/^struct\b/) {
--	    $decl_type = 'struct';
--	} elsif ($identifier =~ m/^union\b/) {
--	    $decl_type = 'union';
--	} elsif ($identifier =~ m/^enum\b/) {
--	    $decl_type = 'enum';
--	} elsif ($identifier =~ m/^typedef\b/) {
--	    $decl_type = 'typedef';
--	} else {
--	    $decl_type = 'function';
-+	if ($identifier eq "") {
-+	    print STDERR "${file}:$.: warning: wrong kernel-doc identifier on line:\n";
-+	    print STDERR $_;
-+	    ++$warnings;
-+	    $state = STATE_NORMAL;
- 	}
- 
- 	if ($verbose) {
--	    print STDERR "${file}:$.: info: Scanning doc for $identifier\n";
-+	    print STDERR "${file}:$.: info: Scanning doc for $decl_type $identifier\n";
- 	}
-     } else {
- 	print STDERR "${file}:$.: warning: Cannot understand $_ on line $.",
--- 
-2.26.2
+> ---
+>   drivers/gpu/drm/amd/amdgpu/amdgpu_device.c | 8 +++++---
+>   1 file changed, 5 insertions(+), 3 deletions(-)
+>
+> diff --git a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+> index f8785bdec79c..1d4b54950528 100644
+> --- a/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+> +++ b/drivers/gpu/drm/amd/amdgpu/amdgpu_device.c
+> @@ -239,9 +239,11 @@ bool amdgpu_device_supports_baco(struct drm_device *dev)
+>   	return amdgpu_asic_supports_baco(adev);
+>   }
+>   
+> +/*
+> + * VRAM access helper functions
+> + */
+> +
+>   /**
+> - * VRAM access helper functions.
+> - *
+>    * amdgpu_device_vram_access - read/write a buffer in vram
+>    *
+>    * @adev: amdgpu_device pointer
+> @@ -4497,7 +4499,7 @@ int amdgpu_device_gpu_recover(struct amdgpu_device *adev,
+>   	bool need_emergency_restart = false;
+>   	bool audio_suspended = false;
+>   
+> -	/**
+> +	/*
+>   	 * Special case: RAS triggered and full reset isn't supported
+>   	 */
+>   	need_emergency_restart = amdgpu_ras_need_emergency_restart(adev);
 
