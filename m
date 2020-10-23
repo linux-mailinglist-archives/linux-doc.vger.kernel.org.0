@@ -2,86 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A351729763A
-	for <lists+linux-doc@lfdr.de>; Fri, 23 Oct 2020 19:55:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 63058297658
+	for <lists+linux-doc@lfdr.de>; Fri, 23 Oct 2020 20:02:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1754005AbgJWRzB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 23 Oct 2020 13:55:01 -0400
-Received: from mga11.intel.com ([192.55.52.93]:55275 "EHLO mga11.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1753922AbgJWRzA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 23 Oct 2020 13:55:00 -0400
-IronPort-SDR: UpTNeiOKZFv9q4BNOfnPDXlGcLuIbgv9xvDBgmge061lRr0jHsmPtkprbcYomCF+RCA7syicy7
- 76SDRZu3kKvQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9783"; a="164216992"
-X-IronPort-AV: E=Sophos;i="5.77,409,1596524400"; 
-   d="scan'208";a="164216992"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Oct 2020 10:54:57 -0700
-IronPort-SDR: rLW6t0Bc42cjZ7lHitvsI1tmc02RzdLUHxVmNRlpynZTNAnVCJiOtAuybyz0O+hcA44VBg3Rue
- FWcnNNOoHqzw==
-X-IronPort-AV: E=Sophos;i="5.77,409,1596524400"; 
-   d="scan'208";a="317161403"
-Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
-  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 23 Oct 2020 10:54:45 -0700
-Received: from andy by smile with local (Exim 4.94)
-        (envelope-from <andriy.shevchenko@linux.intel.com>)
-        id 1kW1Hy-00EGUN-HM; Fri, 23 Oct 2020 20:55:42 +0300
-Date:   Fri, 23 Oct 2020 20:55:42 +0300
-From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+        id S1754123AbgJWSBj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 23 Oct 2020 14:01:39 -0400
+Received: from smtprelay0116.hostedemail.com ([216.40.44.116]:46618 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S1754121AbgJWSBj (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 23 Oct 2020 14:01:39 -0400
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay04.hostedemail.com (Postfix) with ESMTP id E2C42180A90FD;
+        Fri, 23 Oct 2020 18:01:37 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 90,9,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:800:960:973:982:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1541:1593:1594:1711:1730:1747:1777:1792:2393:2553:2559:2562:2828:3138:3139:3140:3141:3142:3352:3622:3653:3865:3866:3867:3868:3871:3874:4321:5007:8603:10004:10400:10848:10967:11026:11232:11658:11783:11914:12043:12296:12297:12740:12895:13069:13161:13229:13311:13357:13439:13894:14181:14659:14721:21080:21324:21451:21627:21740:21741:30054:30060:30070:30080:30090:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:2,LUA_SUMMARY:none
+X-HE-Tag: nail06_130978d2725b
+X-Filterd-Recvd-Size: 2266
+Received: from XPS-9350.home (unknown [47.151.133.149])
+        (Authenticated sender: joe@perches.com)
+        by omf10.hostedemail.com (Postfix) with ESMTPA;
+        Fri, 23 Oct 2020 18:01:36 +0000 (UTC)
+Message-ID: <c0210eade81060382884e1f38ca7f71742d02b61.camel@perches.com>
+Subject: Re: [PATCH v3 01/56] scripts: kernel-doc: fix typedef parsing
+From:   Joe Perches <joe@perches.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Cezary Rojewski <cezary.rojewski@intel.com>,
-        Eric Dumazet <edumazet@google.com>, NeilBrown <neilb@suse.com>,
-        Pavel Begunkov <asml.silence@gmail.com>,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 46/56] list: fix a typo at the kernel-doc markup
-Message-ID: <20201023175542.GY4077@smile.fi.intel.com>
+Date:   Fri, 23 Oct 2020 11:01:35 -0700
+In-Reply-To: <20201023112226.4035e3f7@lwn.net>
 References: <cover.1603469755.git.mchehab+huawei@kernel.org>
- <5c710f3b33c4572b5065a4f1e085c5d09dc04c7d.1603469755.git.mchehab+huawei@kernel.org>
+         <d0b2146c4ced3121342583bb3d962628fc96759b.1603469755.git.mchehab+huawei@kernel.org>
+         <20201023112226.4035e3f7@lwn.net>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.38.1-1 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <5c710f3b33c4572b5065a4f1e085c5d09dc04c7d.1603469755.git.mchehab+huawei@kernel.org>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 23, 2020 at 06:33:33PM +0200, Mauro Carvalho Chehab wrote:
-> hlist_add_behing -> hlist_add_behind
-
-Reviewed-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->  include/linux/list.h | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+On Fri, 2020-10-23 at 11:22 -0600, Jonathan Corbet wrote:
+> On Fri, 23 Oct 2020 18:32:48 +0200
+> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 > 
-> diff --git a/include/linux/list.h b/include/linux/list.h
-> index a18c87b63376..f72a7a778722 100644
-> --- a/include/linux/list.h
-> +++ b/include/linux/list.h
-> @@ -901,7 +901,7 @@ static inline void hlist_add_before(struct hlist_node *n,
->  }
->  
->  /**
-> - * hlist_add_behing - add a new entry after the one specified
-> + * hlist_add_behind - add a new entry after the one specified
->   * @n: new entry to be added
->   * @prev: hlist node to add it after, which must be non-NULL
->   */
-> -- 
-> 2.26.2
+> > The include/linux/genalloc.h file defined this typedef:
+> > 
+> > 	typedef unsigned long (*genpool_algo_t)(unsigned long *map,unsigned long size,unsigned long start,unsigned int nr,void *data, struct gen_pool *pool, unsigned long start_addr);
+[]
+> > diff --git a/scripts/kernel-doc b/scripts/kernel-doc
+[]
+> >      # Parse function prototypes
+> > -    if ($x =~ /typedef\s+(\w+)\s*\(\*\s*(\w\S+)\s*\)\s*\((.*)\);/ ||
+> > +    if ($x =~ /typedef\s+(\w+\s*){1,}\(\*\s*(\w\S+)\s*\)\s*\((.*)\);/ ||
 > 
+> I sure wish we could find a way to make all these regexes more
+> understandable and maintainable.  Reviewing a change like this is ... fun.
 
--- 
-With Best Regards,
-Andy Shevchenko
+Perhaps using some of the checkpatch regex definitions like:
+
+$Type
+$Ident
+$balanced_parens
+
+would help improve readability.
+
+And the regex above doesn't quite work for spacing after typedef.
+The regex should allow space between the open parenthesis and the *
+
+	typedef <Type> ( * <Ident> ) (args...);
+
+And this regex does not find typedefs that use another typedef as <Ident> like:
+
+arch/s390/include/asm/debug.h:typedef int (debug_header_proc_t) (debug_info_t *id,
 
 
