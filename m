@@ -2,168 +2,110 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 37291298952
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Oct 2020 10:16:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D677298A2A
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Oct 2020 11:15:12 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389382AbgJZJQ1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 26 Oct 2020 05:16:27 -0400
-Received: from mail.kernel.org ([198.145.29.99]:33864 "EHLO mail.kernel.org"
+        id S1769216AbgJZKOh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 26 Oct 2020 06:14:37 -0400
+Received: from mail.kernel.org ([198.145.29.99]:42510 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725849AbgJZJQ1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 26 Oct 2020 05:16:27 -0400
-Received: from coco.lan (ip5f5ad5a1.dynamic.kabel-deutschland.de [95.90.213.161])
+        id S1768386AbgJZJrn (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 26 Oct 2020 05:47:43 -0400
+Received: from mail.kernel.org (ip5f5ad5a1.dynamic.kabel-deutschland.de [95.90.213.161])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 953FD207C4;
-        Mon, 26 Oct 2020 09:16:23 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id EED8420704;
+        Mon, 26 Oct 2020 09:47:42 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1603703786;
-        bh=pQKLqfcjbVUih5iUhFZ84v4gYr3t3Bambb8ZkFTJ3Zw=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=elxWFOMcqfnVmAhlV5sWGJKCdgouHiwhbeVhEKknu4LkmH19Xdhpziqc+xqxyEhMn
-         DybyKhwMR9cFPCmXPWmmFGhwskg6mJib7Vdfb7LmYwl+8+6MK8gLiMEEYJKh+cau1h
-         7r62rzHVjjWOLjplCuOMlvilqEwk7UMjUwn0JDnI=
-Date:   Mon, 26 Oct 2020 10:16:20 +0100
+        s=default; t=1603705663;
+        bh=cm0DgYGOWrzWhAQoSMBRcvt64IJtdw58FGbr6XTCKpw=;
+        h=From:To:Cc:Subject:Date:From;
+        b=eVW0Kh9mJcqAGqXz7Tc5qsUNbIaIgFX/WeC+zatS7ooQ/8UicBHJZrmUAlCfzOi8Z
+         Z3G9pE4WncM6z5lBJRPa0MaxWCbcMvUk/odUc8x8beaV9WUD43rG5a1Gz65xeeQio6
+         y/a4IWfbub0GY/Z9+LwShaWH6G7ez+RfSXK9oIXs=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kWz6J-0030sz-Ke; Mon, 26 Oct 2020 10:47:39 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Peter Zijlstra <peterz@infradead.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Ard Biesheuvel <ardb@kernel.org>,
-        Ingo Molnar <mingo@kernel.org>, Jann Horn <jannh@google.com>,
-        Will Deacon <will@kernel.org>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 49/56] refcount.h: fix a kernel-doc markup
-Message-ID: <20201026101620.1a11ef3e@coco.lan>
-In-Reply-To: <20201026081059.GB2628@hirez.programming.kicks-ass.net>
-References: <cover.1603469755.git.mchehab+huawei@kernel.org>
-        <fd94a95cfe01b97190b6ffb9e942cb4bbeeaa6bf.1603469755.git.mchehab+huawei@kernel.org>
-        <202010231039.DE05B63@keescook>
-        <20201023193907.GI2974@worktop.programming.kicks-ass.net>
-        <20201023134757.628f91b7@lwn.net>
-        <20201024082827.08ad3010@coco.lan>
-        <20201026081059.GB2628@hirez.programming.kicks-ass.net>
-X-Mailer: Claws Mail 3.17.7 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Mark Brown <broonie@kernel.org>,
+        Jakub Kicinski <kuba@kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        "David S. Miller" <davem@davemloft.net>,
+        "J. Bruce Fields" <bfields@fieldses.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andrew Lunn <andrew@lunn.ch>, Andrii Nakryiko <andriin@fb.com>,
+        Anna Schumaker <anna.schumaker@netapp.com>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+        Chuck Lever <chuck.lever@oracle.com>,
+        Cong Wang <xiyou.wangcong@gmail.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Florian Westphal <fw@strlen.de>,
+        Guillaume Nault <gnault@redhat.com>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        Jiri Pirko <jiri@mellanox.com>,
+        Martin Varghese <martin.varghese@nokia.com>,
+        Maxim Mikityanskiy <maximmi@mellanox.com>,
+        Miaohe Lin <linmiaohe@huawei.com>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Pravin B Shelar <pshelar@ovn.org>,
+        Russell King <linux@armlinux.org.uk>,
+        Sabrina Dubroca <sd@queasysnail.net>,
+        Steffen Klassert <steffen.klassert@secunet.com>,
+        Taehee Yoo <ap420073@gmail.com>,
+        Trond Myklebust <trond.myklebust@hammerspace.com>,
+        Vladimir Oltean <olteanv@gmail.com>,
+        Willem de Bruijn <willemb@google.com>,
+        Yadu Kishore <kyk.segfault@gmail.com>,
+        linux-nfs@vger.kernel.org, netdev@vger.kernel.org
+Subject: [PATCH RESEND 0/3] Fix wrong identifiers on kernel-doc markups
+Date:   Mon, 26 Oct 2020 10:47:35 +0100
+Message-Id: <cover.1603705472.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Mon, 26 Oct 2020 09:10:59 +0100
-Peter Zijlstra <peterz@infradead.org> escreveu:
+Hi Mark/Jakub,
 
-> On Sat, Oct 24, 2020 at 08:28:27AM +0200, Mauro Carvalho Chehab wrote:
-> > If the intent is to document the struct and its internal fields,
-> > this kernel-doc should work:
-> > 
-> > 	/**
-> > 	 * struct refcount_struct - variant of atomic_t specialized for reference counts
-> > 	 * @refs: atomic_t counter field
-> > 	 *
-> > 	 * The counter saturates at REFCOUNT_SATURATED and will not move once
-> > 	 * there. This avoids wrapping the counter and causing 'spurious'
-> > 	 * use-after-free bugs.
-> > 	 */
-> > 
-> > Which produces this result:  
-> 
-> Who cares... :-(
+As you requested, I'm resending the three -net patches
+from the /56 patch series I sent last Friday:
 
-Anyone that would need to use refcount_t, instead of atomic_t.
+	[PATCH v3 00/56] Fix several bad kernel-doc markups
 
-> 
-> > If you want both, then you would either split struct and typedef, e. g.
-> > with something like:
-> > 
-> > 	/**
-> > 	 * struct refcount_struct - variant of atomic_t specialized for reference counts
-> > 	 * @refs: atomic_t counter field
-> > 	 *
-> > 	 * The counter saturates at REFCOUNT_SATURATED and will not move once
-> > 	 * there. This avoids wrapping the counter and causing 'spurious'
-> > 	 * use-after-free bugs.
-> > 	 */
-> > 	struct refcount_struct {
-> > 	        atomic_t refs;
-> > 	};
-> > 
-> > 	/**
-> > 	 * typedef refcount_t - variant of atomic_t specialized for reference counts
-> > 	 * @refs: atomic_t counter field
-> > 	 *
-> > 	 * The counter saturates at REFCOUNT_SATURATED and will not move once
-> > 	 * there. This avoids wrapping the counter and causing 'spurious'
-> > 	 * use-after-free bugs.
-> > 	 */
-> > 	typedef struct refcount_struct refcount_t;
-> > 
-> > Or, you could add the member at the description field. E. g. something
-> > like this:
-> > 
-> > 	/**
-> > 	 * typedef refcount_t - variant of atomic_t specialized for reference counts
-> > 	 *
-> > 	 * The counter saturates at REFCOUNT_SATURATED and will not move once
-> > 	 * there. This avoids wrapping the counter and causing 'spurious'
-> > 	 * use-after-free bugs.
-> > 	 *
-> > 	 * Members:
-> > 	 *   ``refs``
-> > 	 *        atomic_t counter field
-> > 	 */
-> > 	typedef struct refcount_struct {
-> > 	        atomic_t refs;
-> > 	} refcount_t;
-> > 
-> > If you want to test it, you can run kernel-doc directly, to see how
-> > it will parse it. For ReST output, that's the syntax:
-> > 
-> > 	./scripts/kernel-doc --sphinx-version 3 include/linux/refcount.h  
-> 
-> I'll just go ahead and remove the superfluous * from the comment... It's
-> trivially clear what is meant. If the stupid tool can't deal with that,
-> I don't care.
+They fix a few kernel-doc markups that are using different
+identifiers than the function/struct that they are actually
+documenting.
 
-The tool is not that stupid. What's wrong here is that the markup is
-asking kernel-doc to document the struct, instead documenting the typedef:
+This should help checking them via CI automation.
 
- 	/**
- 	 * struct refcount_t - variant of atomic_t specialized for reference counts
-...
-
-There is no such struct!
-
-Just doing:
-
-	s/struct/typedef/
-
-will do what you intend to document.
-
-Thanks,
+Regards,
 Mauro
 
-[PATCH] refcount.h: fix a kernel-doc markup
+Mauro Carvalho Chehab (3):
+  net: phy: fix kernel-doc markups
+  net: datagram: fix some kernel-doc markups
+  net: core: fix some kernel-doc markups
 
-The kernel-doc markup is wrong: it is asking the tool to document
-struct refcount_struct, instead of documenting typedef refcount_t.
+ drivers/net/phy/mdio_bus.c   |  2 +-
+ drivers/net/phy/phy-c45.c    |  2 +-
+ drivers/net/phy/phy.c        |  2 +-
+ drivers/net/phy/phy_device.c |  2 +-
+ drivers/net/phy/phylink.c    |  2 +-
+ include/linux/netdevice.h    | 11 +++++++++--
+ net/core/datagram.c          |  2 +-
+ net/core/dev.c               |  4 ++--
+ net/core/skbuff.c            |  2 +-
+ net/ethernet/eth.c           |  6 +++---
+ net/sunrpc/rpc_pipe.c        |  3 ++-
+ 11 files changed, 23 insertions(+), 15 deletions(-)
 
-Fix it.
-    
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
-diff --git a/include/linux/refcount.h b/include/linux/refcount.h
-index 0e3ee25eb156..f572c62261a8 100644
---- a/include/linux/refcount.h
-+++ b/include/linux/refcount.h
-@@ -101,7 +101,7 @@
- struct mutex;
- 
- /**
-- * struct refcount_t - variant of atomic_t specialized for reference counts
-+ * typedef refcount_t - variant of atomic_t specialized for reference counts
-  * @refs: atomic_t counter field
-  *
-  * The counter saturates at REFCOUNT_SATURATED and will not move once
+-- 
+2.26.2
 
 
