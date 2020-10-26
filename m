@@ -2,111 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C3E972989FD
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Oct 2020 11:07:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 64148298AA6
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Oct 2020 11:46:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1769070AbgJZKHa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 26 Oct 2020 06:07:30 -0400
-Received: from mail.kernel.org ([198.145.29.99]:51198 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1768496AbgJZKHT (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 26 Oct 2020 06:07:19 -0400
-Received: from coco.lan (ip5f5ad5a1.dynamic.kabel-deutschland.de [95.90.213.161])
+        id S1770261AbgJZKqa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 26 Oct 2020 06:46:30 -0400
+Received: from merlin.infradead.org ([205.233.59.134]:50334 "EHLO
+        merlin.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1770920AbgJZKq3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Oct 2020 06:46:29 -0400
+X-Greylist: delayed 4081 seconds by postgrey-1.27 at vger.kernel.org; Mon, 26 Oct 2020 06:46:29 EDT
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=JyXZi/ERFgCbfx8pduwl1A0Zv/jNhz7fITwwiik2EAE=; b=z5MeP68s5Hpby0cnErRe3vB+nX
+        6uoKnjd5XfNZAB+yQSWF2NvVdlUE9oELbv3oy3DJf5tA2HjasYsJkpun3eH9EzHLR/2ng1fOwP6Rh
+        YnJQIZYLqWQBkCmZ9aWCWcsu15ute6d2QpEMjuSSRmwhj4VlYGuoJjNaBRAkp8kDfpeDbOPfuaJ9v
+        kVkSxjk4/ZN15Br9XwdmFQEkx37oSqNiHQQoQH8Sge2jgpMDfPxRrU3HgevSV6Gb2VxIeA6B0iyuc
+        HJVBw635zaje1ZEUcwghbGFg8QYviyfHusbtBEKyZODZ92MkRF9bRL/vVtiWQ/CaAErV+T2L83GWz
+        IW6kD3vw==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=noisy.programming.kicks-ass.net)
+        by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1kWyxL-0001px-I0; Mon, 26 Oct 2020 09:38:24 +0000
+Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 8ACE320723;
-        Mon, 26 Oct 2020 10:07:15 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1603706838;
-        bh=oRd2QZwcb5kvNpN6vkk7OPKwRr2fGcwBASgsEzTaYvA=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=TPv71Y5NKNxjMYIif68gFIjqobO5fdY6L9BaEwJBedVyaDLWrQoaDngZoQCtEwg3o
-         B2+YfCA9bI17y/jzdCHJvb5ShDz81KP3GbFKIaPWAJGz5rVw06hSbNVlAby53bOqwi
-         armEP65itz4B6iICAzPXmWu/pEfe3lW+vY28HAv8=
-Date:   Mon, 26 Oct 2020 11:07:12 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        Ben Segall <bsegall@google.com>,
-        Daniel Bristot de Oliveira <bristot@redhat.com>,
-        Dietmar Eggemann <dietmar.eggemann@arm.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Juri Lelli <juri.lelli@redhat.com>,
-        Mel Gorman <mgorman@suse.de>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Vincent Guittot <vincent.guittot@linaro.org>,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 53/56] shed: fix kernel-doc markup
-Message-ID: <20201026110712.2f9cec69@coco.lan>
-In-Reply-To: <20201023135341.450727fc@gandalf.local.home>
+        (Client did not present a certificate)
+        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 15DFE301179;
+        Mon, 26 Oct 2020 10:38:22 +0100 (CET)
+Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
+        id 0098320325EC8; Mon, 26 Oct 2020 10:38:21 +0100 (CET)
+Date:   Mon, 26 Oct 2020 10:38:21 +0100
+From:   Peter Zijlstra <peterz@infradead.org>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Ard Biesheuvel <ardb@kernel.org>,
+        Ingo Molnar <mingo@kernel.org>, Jann Horn <jannh@google.com>,
+        Will Deacon <will@kernel.org>, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v3 49/56] refcount.h: fix a kernel-doc markup
+Message-ID: <20201026093821.GG2628@hirez.programming.kicks-ass.net>
 References: <cover.1603469755.git.mchehab+huawei@kernel.org>
-        <21eac4426e02193aab877564f7d7d99114627a46.1603469755.git.mchehab+huawei@kernel.org>
-        <20201023135341.450727fc@gandalf.local.home>
-X-Mailer: Claws Mail 3.17.7 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+ <fd94a95cfe01b97190b6ffb9e942cb4bbeeaa6bf.1603469755.git.mchehab+huawei@kernel.org>
+ <202010231039.DE05B63@keescook>
+ <20201023193907.GI2974@worktop.programming.kicks-ass.net>
+ <20201023134757.628f91b7@lwn.net>
+ <20201024082827.08ad3010@coco.lan>
+ <20201026081059.GB2628@hirez.programming.kicks-ass.net>
+ <20201026101620.1a11ef3e@coco.lan>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201026101620.1a11ef3e@coco.lan>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Fri, 23 Oct 2020 13:53:41 -0400
-Steven Rostedt <rostedt@goodmis.org> escreveu:
-
-> On Fri, 23 Oct 2020 18:33:40 +0200
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+On Mon, Oct 26, 2020 at 10:16:20AM +0100, Mauro Carvalho Chehab wrote:
+> Em Mon, 26 Oct 2020 09:10:59 +0100
+> Peter Zijlstra <peterz@infradead.org> escreveu:
 > 
-> > Kernel-doc requires that a kernel-doc markup to be immediatly
-> > below the function prototype, as otherwise it will rename it.
-> > So, move sys_sched_yield() markup to the right place.
+> > On Sat, Oct 24, 2020 at 08:28:27AM +0200, Mauro Carvalho Chehab wrote:
+> > > If the intent is to document the struct and its internal fields,
+> > > this kernel-doc should work:
+> > > 
+> > > 	/**
+> > > 	 * struct refcount_struct - variant of atomic_t specialized for reference counts
+> > > 	 * @refs: atomic_t counter field
+> > > 	 *
+> > > 	 * The counter saturates at REFCOUNT_SATURATED and will not move once
+> > > 	 * there. This avoids wrapping the counter and causing 'spurious'
+> > > 	 * use-after-free bugs.
+> > > 	 */
+> > > 
+> > > Which produces this result:  
 > > 
-> > Also fix the cpu_util() markup: Kernel-doc markups
-> > should use this format:
-> >         identifier - description  
+> > Who cares... :-(
 > 
-> The first change looks fine to me, but as I'm getting a new shed delivered
-> soon, I originally thought this email was about that delivery!
+> Anyone that would need to use refcount_t, instead of atomic_t.
 
-:-)
-
-> I do have a nit about the second change.
-> 
-> > diff --git a/kernel/sched/fair.c b/kernel/sched/fair.c
-> > index aa4c6227cd6d..94386fcfafcf 100644
-> > --- a/kernel/sched/fair.c
-> > +++ b/kernel/sched/fair.c
-> > @@ -6287,7 +6287,8 @@ static int select_idle_sibling(struct task_struct *p, int prev, int target)
-> >  }
-> >  
-> >  /**
-> > - * Amount of capacity of a CPU that is (estimated to be) used by CFS tasks
-> > + * cpu_util - Amount of capacity of a CPU that is (estimated to be)
-> > + *	used by CFS tasks  
-> 
-> The description is to be a single line. The line break is ugly, and the 80
-> col rule, is more of a guideline, and not something that *has* to be done.
-> 
-> Either shorten it, or just let it go a little longer.
-
-Agreed, but there are already some other descriptions over there that have
-multiple lines[1]:
-
-Anyway, on this specific case, I guess it can be easily shorten to
-80 columns without losing anything. Would that work for you?
-
-	/**
-	 * cpu_util - Estimates the amount of capacity of a CPU used by CFS tasks.
-
-Regards,
-Mauro
-
-[1] like this one:
-
-	/**
-	 * calculate_imbalance - Calculate the amount of imbalance present within the
-	 *			 groups of a given sched_domain during load balance.
-	 * @env: load balance environment
-	 * @sds: statistics of the sched_domain whose imbalance is to be calculated.
-	 */
-
+They can read the .h file just fine today.
