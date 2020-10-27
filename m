@@ -2,49 +2,41 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C0B8129C996
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 21:07:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6FE1929CB38
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 22:25:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1830715AbgJ0UEv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Oct 2020 16:04:51 -0400
-Received: from smtp-190a.mail.infomaniak.ch ([185.125.25.10]:52175 "EHLO
-        smtp-190a.mail.infomaniak.ch" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1830710AbgJ0UEk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Oct 2020 16:04:40 -0400
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
-        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4CLN2X0r1hzlhb67;
-        Tue, 27 Oct 2020 21:04:20 +0100 (CET)
-Received: from localhost (unknown [94.23.54.103])
-        by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4CLN2W5QZTzlh8T9;
-        Tue, 27 Oct 2020 21:04:19 +0100 (CET)
-From:   =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
-To:     James Morris <jmorris@namei.org>,
-        "Serge E . Hallyn" <serge@hallyn.com>
-Cc:     =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        Jann Horn <jannh@google.com>, Jeff Dike <jdike@addtoit.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Michael Kerrisk <mtk.manpages@gmail.com>,
-        Richard Weinberger <richard@nod.at>,
-        Shuah Khan <shuah@kernel.org>,
-        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
-        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        linux-security-module@vger.kernel.org, x86@kernel.org,
-        =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@linux.microsoft.com>
-Subject: [PATCH v22 12/12] landlock: Add user and kernel documentation
-Date:   Tue, 27 Oct 2020 21:03:58 +0100
-Message-Id: <20201027200358.557003-13-mic@digikod.net>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201027200358.557003-1-mic@digikod.net>
-References: <20201027200358.557003-1-mic@digikod.net>
+        id S2901398AbgJ0VZQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Oct 2020 17:25:16 -0400
+Received: from mail.kernel.org ([198.145.29.99]:33200 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S374001AbgJ0VZM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 27 Oct 2020 17:25:12 -0400
+Received: from localhost.localdomain (unknown [192.30.34.233])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 75D62207E8;
+        Tue, 27 Oct 2020 21:25:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1603833909;
+        bh=b5OJshUb17aEJqwFYDInQ6m6BL8T6NdaxOAecGwqYoY=;
+        h=From:To:Cc:Subject:Date:From;
+        b=NYExpd4qj+lzyyRmhjQb7vqJI5yp3xN6LZuy6dcxlNhY7Uj7kj+xVy19Zc9FiCJVY
+         SWIY8gFZnquXZhYLbQR0ID7ON77Em9NfwjvdZIDHLGFivN5CTGVyWUrhM6a/VcL9ps
+         ilgARd/8WxD8Gt20vgH3HBsO32EujKh15oQoidLg=
+From:   Arnd Bergmann <arnd@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Arnd Bergmann <arnd@arndb.de>,
+        Inaky Perez-Gonzalez <inaky.perez-gonzalez@intel.com>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        netdev@vger.kernel.org, devel@driverdev.osuosl.org
+Subject: [RFC] wimax: move out to staging
+Date:   Tue, 27 Oct 2020 22:20:13 +0100
+Message-Id: <20201027212448.454129-1-arnd@kernel.org>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
@@ -52,444 +44,750 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mickaël Salaün <mic@linux.microsoft.com>
+From: Arnd Bergmann <arnd@arndb.de>
 
-This documentation can be built with the Sphinx framework.
+There are no known users of this driver as of October 2020, and it will
+be removed unless someone turns out to still need it in future releases.
 
-Cc: James Morris <jmorris@namei.org>
-Cc: Jann Horn <jannh@google.com>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Serge E. Hallyn <serge@hallyn.com>
-Signed-off-by: Mickaël Salaün <mic@linux.microsoft.com>
-Reviewed-by: Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>
+According to https://en.wikipedia.org/wiki/List_of_WiMAX_networks, there
+have been many public wimax networks, but it appears that these entries
+are all stale, after everyone has migrated to LTE or discontinued their
+service altogether.
+
+NetworkManager appears to have dropped userspace support in 2015
+https://bugzilla.gnome.org/show_bug.cgi?id=747846, the
+www.linuxwimax.org
+site had already shut down earlier.
+
+WiMax is apparently still being deployed on airport campus networks
+("AeroMACS"), but in a frequency band that was not supported by the old
+Intel 2400m (used in Sandy Bridge laptops and earlier), which is the
+only driver using the kernel's wimax stack.
+
+Move all files into drivers/staging/wimax, including the uapi header
+files and documentation, to make it easier to remove it when it gets
+to that. Only minimal changes are made to the source files, in order
+to make it possible to port patches across the move.
+
+Also remove the MAINTAINERS entry that refers to a broken mailing
+list and website.
+
+Suggested-by: Inaky Perez-Gonzalez <inaky.perez-gonzalez@intel.com>
+Signed-off-by: Arnd Bergmann <arnd@arndb.de>
 ---
+ Documentation/admin-guide/index.rst           |  1 -
+ Documentation/networking/kapi.rst             | 21 ------------------
+ .../translations/zh_CN/admin-guide/index.rst  |  1 -
+ MAINTAINERS                                   | 22 -------------------
+ drivers/net/Kconfig                           |  2 --
+ drivers/net/wimax/Kconfig                     | 18 ---------------
+ drivers/net/wimax/Makefile                    |  2 --
+ drivers/staging/Kconfig                       |  2 ++
+ drivers/staging/Makefile                      |  1 +
+ .../staging/wimax/Documentation}/i2400m.rst   |  0
+ .../staging/wimax/Documentation}/index.rst    |  0
+ .../staging/wimax/Documentation}/wimax.rst    |  0
+ {net => drivers/staging}/wimax/Kconfig        |  6 +++++
+ {net => drivers/staging}/wimax/Makefile       |  2 ++
+ drivers/staging/wimax/TODO                    | 16 ++++++++++++++
+ {net => drivers/staging}/wimax/debug-levels.h |  2 +-
+ {net => drivers/staging}/wimax/debugfs.c      |  2 +-
+ drivers/{net => staging}/wimax/i2400m/Kconfig |  0
+ .../{net => staging}/wimax/i2400m/Makefile    |  0
+ .../{net => staging}/wimax/i2400m/control.c   |  2 +-
+ .../wimax/i2400m/debug-levels.h               |  2 +-
+ .../{net => staging}/wimax/i2400m/debugfs.c   |  0
+ .../{net => staging}/wimax/i2400m/driver.c    |  2 +-
+ drivers/{net => staging}/wimax/i2400m/fw.c    |  0
+ .../wimax/i2400m/i2400m-usb.h                 |  0
+ .../{net => staging}/wimax/i2400m/i2400m.h    |  4 ++--
+ .../staging/wimax/i2400m/linux-wimax-i2400m.h |  0
+ .../{net => staging}/wimax/i2400m/netdev.c    |  0
+ .../{net => staging}/wimax/i2400m/op-rfkill.c |  2 +-
+ drivers/{net => staging}/wimax/i2400m/rx.c    |  0
+ drivers/{net => staging}/wimax/i2400m/sysfs.c |  0
+ drivers/{net => staging}/wimax/i2400m/tx.c    |  0
+ .../wimax/i2400m/usb-debug-levels.h           |  2 +-
+ .../{net => staging}/wimax/i2400m/usb-fw.c    |  0
+ .../{net => staging}/wimax/i2400m/usb-notif.c |  0
+ .../{net => staging}/wimax/i2400m/usb-rx.c    |  0
+ .../{net => staging}/wimax/i2400m/usb-tx.c    |  0
+ drivers/{net => staging}/wimax/i2400m/usb.c   |  2 +-
+ {net => drivers/staging}/wimax/id-table.c     |  2 +-
+ .../staging/wimax/linux-wimax-debug.h         |  2 +-
+ .../staging/wimax/linux-wimax.h               |  0
+ .../staging/wimax/net-wimax.h                 |  2 +-
+ {net => drivers/staging}/wimax/op-msg.c       |  2 +-
+ {net => drivers/staging}/wimax/op-reset.c     |  4 ++--
+ {net => drivers/staging}/wimax/op-rfkill.c    |  4 ++--
+ {net => drivers/staging}/wimax/op-state-get.c |  4 ++--
+ {net => drivers/staging}/wimax/stack.c        |  2 +-
+ .../staging}/wimax/wimax-internal.h           |  2 +-
+ net/Kconfig                                   |  2 --
+ net/Makefile                                  |  1 -
+ 50 files changed, 49 insertions(+), 92 deletions(-)
+ delete mode 100644 drivers/net/wimax/Kconfig
+ delete mode 100644 drivers/net/wimax/Makefile
+ rename {Documentation/admin-guide/wimax => drivers/staging/wimax/Documentation}/i2400m.rst (100%)
+ rename {Documentation/admin-guide/wimax => drivers/staging/wimax/Documentation}/index.rst (100%)
+ rename {Documentation/admin-guide/wimax => drivers/staging/wimax/Documentation}/wimax.rst (100%)
+ rename {net => drivers/staging}/wimax/Kconfig (94%)
+ rename {net => drivers/staging}/wimax/Makefile (83%)
+ create mode 100644 drivers/staging/wimax/TODO
+ rename {net => drivers/staging}/wimax/debug-levels.h (96%)
+ rename {net => drivers/staging}/wimax/debugfs.c (97%)
+ rename drivers/{net => staging}/wimax/i2400m/Kconfig (100%)
+ rename drivers/{net => staging}/wimax/i2400m/Makefile (100%)
+ rename drivers/{net => staging}/wimax/i2400m/control.c (99%)
+ rename drivers/{net => staging}/wimax/i2400m/debug-levels.h (96%)
+ rename drivers/{net => staging}/wimax/i2400m/debugfs.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/driver.c (99%)
+ rename drivers/{net => staging}/wimax/i2400m/fw.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/i2400m-usb.h (100%)
+ rename drivers/{net => staging}/wimax/i2400m/i2400m.h (99%)
+ rename include/uapi/linux/wimax/i2400m.h => drivers/staging/wimax/i2400m/linux-wimax-i2400m.h (100%)
+ rename drivers/{net => staging}/wimax/i2400m/netdev.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/op-rfkill.c (99%)
+ rename drivers/{net => staging}/wimax/i2400m/rx.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/sysfs.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/tx.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/usb-debug-levels.h (95%)
+ rename drivers/{net => staging}/wimax/i2400m/usb-fw.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/usb-notif.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/usb-rx.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/usb-tx.c (100%)
+ rename drivers/{net => staging}/wimax/i2400m/usb.c (99%)
+ rename {net => drivers/staging}/wimax/id-table.c (99%)
+ rename include/linux/wimax/debug.h => drivers/staging/wimax/linux-wimax-debug.h (99%)
+ rename include/uapi/linux/wimax.h => drivers/staging/wimax/linux-wimax.h (100%)
+ rename include/net/wimax.h => drivers/staging/wimax/net-wimax.h (99%)
+ rename {net => drivers/staging}/wimax/op-msg.c (99%)
+ rename {net => drivers/staging}/wimax/op-reset.c (98%)
+ rename {net => drivers/staging}/wimax/op-rfkill.c (99%)
+ rename {net => drivers/staging}/wimax/op-state-get.c (96%)
+ rename {net => drivers/staging}/wimax/stack.c (99%)
+ rename {net => drivers/staging}/wimax/wimax-internal.h (99%)
 
-Changes since v21:
-* Move the user space documentation to userspace-api/landlock.rst and
-  the kernel documentation to security/landlock.rst .
-* Add license headers.
-* Add last update dates.
-* Update MAINTAINERS file.
-* Add (back) links to git.kernel.org .
-* Fix spelling.
-
-Changes since v20:
-* Update examples and documentation with the new syscalls.
-
-Changes since v19:
-* Update examples and documentation with the new syscalls.
-
-Changes since v15:
-* Add current limitations.
-
-Changes since v14:
-* Fix spelling (contributed by Randy Dunlap).
-* Extend documentation about inheritance and explain layer levels.
-* Remove the use of now-removed access rights.
-* Use GitHub links.
-* Improve kernel documentation.
-* Add section for tests.
-* Update example.
-
-Changes since v13:
-* Rewrote the documentation according to the major revamp.
-
-Previous changes:
-https://lore.kernel.org/lkml/20191104172146.30797-8-mic@digikod.net/
----
- Documentation/security/index.rst         |   1 +
- Documentation/security/landlock.rst      |  79 +++++++
- Documentation/userspace-api/index.rst    |   1 +
- Documentation/userspace-api/landlock.rst | 259 +++++++++++++++++++++++
- MAINTAINERS                              |   2 +
- 5 files changed, 342 insertions(+)
- create mode 100644 Documentation/security/landlock.rst
- create mode 100644 Documentation/userspace-api/landlock.rst
-
-diff --git a/Documentation/security/index.rst b/Documentation/security/index.rst
-index 8129405eb2cc..16335de04e8c 100644
---- a/Documentation/security/index.rst
-+++ b/Documentation/security/index.rst
-@@ -16,3 +16,4 @@ Security Documentation
-    siphash
-    tpm/index
-    digsig
-+   landlock
-diff --git a/Documentation/security/landlock.rst b/Documentation/security/landlock.rst
-new file mode 100644
-index 000000000000..9b619eb4fe55
---- /dev/null
-+++ b/Documentation/security/landlock.rst
-@@ -0,0 +1,79 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. Copyright © 2017-2020 Mickaël Salaün <mic@digikod.net>
-+.. Copyright © 2019-2020 ANSSI
-+
-+==================================
-+Landlock LSM: kernel documentation
-+==================================
-+
-+:Author: Mickaël Salaün
-+:Date: October 2020
-+
-+Landlock's goal is to create scoped access-control (i.e. sandboxing).  To
-+harden a whole system, this feature should be available to any process,
-+including unprivileged ones.  Because such process may be compromised or
-+backdoored (i.e. untrusted), Landlock's features must be safe to use from the
-+kernel and other processes point of view.  Landlock's interface must therefore
-+expose a minimal attack surface.
-+
-+Landlock is designed to be usable by unprivileged processes while following the
-+system security policy enforced by other access control mechanisms (e.g. DAC,
-+LSM).  Indeed, a Landlock rule shall not interfere with other access-controls
-+enforced on the system, only add more restrictions.
-+
-+Any user can enforce Landlock rulesets on their processes.  They are merged and
-+evaluated according to the inherited ones in a way that ensures that only more
-+constraints can be added.
-+
-+User space documentation can be found here: :doc:`/userspace-api/landlock`.
-+
-+Guiding principles for safe access controls
-+===========================================
-+
-+* A Landlock rule shall be focused on access control on kernel objects instead
-+  of syscall filtering (i.e. syscall arguments), which is the purpose of
-+  seccomp-bpf.
-+* To avoid multiple kinds of side-channel attacks (e.g. leak of security
-+  policies, CPU-based attacks), Landlock rules shall not be able to
-+  programmatically communicate with user space.
-+* Kernel access check shall not slow down access request from unsandboxed
-+  processes.
-+* Computation related to Landlock operations (e.g. enforcing a ruleset) shall
-+  only impact the processes requesting them.
-+
-+Tests
-+=====
-+
-+Userspace tests for backward compatibility, ptrace restrictions and filesystem
-+support can be found here: `tools/testing/selftests/landlock/`_.
-+
-+Kernel structures
-+=================
-+
-+Object
-+------
-+
-+.. kernel-doc:: security/landlock/object.h
-+    :identifiers:
-+
-+Ruleset and domain
-+------------------
-+
-+A domain is a read-only ruleset tied to a set of subjects (i.e. tasks'
-+credentials).  Each time a ruleset is enforced on a task, the current domain is
-+duplicated and the ruleset is imported as a new layer of rules in the new
-+domain.  Indeed, once in a domain, each rule is tied to a layer level.  To
-+grant access to an object, at least one rule of each layer must allow the
-+requested action on the object.  A task can then only transit to a new domain
-+which is the intersection of the constraints from the current domain and those
-+of a ruleset provided by the task.
-+
-+The definition of a subject is implicit for a task sandboxing itself, which
-+makes the reasoning much easier and helps avoid pitfalls.
-+
-+.. kernel-doc:: security/landlock/ruleset.h
-+    :identifiers:
-+
-+.. Links
-+.. _tools/testing/selftests/landlock/:
-+   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/tools/testing/selftests/landlock/
-diff --git a/Documentation/userspace-api/index.rst b/Documentation/userspace-api/index.rst
-index 69fc5167e648..4918fbed5be0 100644
---- a/Documentation/userspace-api/index.rst
-+++ b/Documentation/userspace-api/index.rst
-@@ -18,6 +18,7 @@ place where this information is gathered.
+diff --git a/Documentation/admin-guide/index.rst b/Documentation/admin-guide/index.rst
+index ed1cf94ea50c..d53986a424c4 100644
+--- a/Documentation/admin-guide/index.rst
++++ b/Documentation/admin-guide/index.rst
+@@ -115,7 +115,6 @@ configure specific aspects of kernel behavior to your liking.
+    unicode
+    vga-softcursor
+    video-output
+-   wimax/index
+    xfs
  
-    no_new_privs
-    seccomp_filter
-+   landlock
-    unshare
-    spec_ctrl
-    accelerators/ocxl
-diff --git a/Documentation/userspace-api/landlock.rst b/Documentation/userspace-api/landlock.rst
-new file mode 100644
-index 000000000000..793d5ed11a05
---- /dev/null
-+++ b/Documentation/userspace-api/landlock.rst
-@@ -0,0 +1,259 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. Copyright © 2017-2020 Mickaël Salaün <mic@digikod.net>
-+.. Copyright © 2019-2020 ANSSI
-+
-+=====================================
-+Landlock: unprivileged access control
-+=====================================
-+
-+:Author: Mickaël Salaün
-+:Date: October 2020
-+
-+The goal of Landlock is to enable to restrict ambient rights (e.g. global
-+filesystem access) for a set of processes.  Because Landlock is a stackable
-+LSM, it makes possible to create safe security sandboxes as new security layers
-+in addition to the existing system-wide access-controls. This kind of sandbox
-+is expected to help mitigate the security impact of bugs or
-+unexpected/malicious behaviors in user space applications.  Landlock empowers
-+any process, including unprivileged ones, to securely restrict themselves.
-+
-+Landlock rules
-+==============
-+
-+A Landlock rule enables to describe an action on an object.  An object is
-+currently a file hierarchy, and the related filesystem actions are defined in
-+`Access rights`_.  A set of rules is aggregated in a ruleset, which can then
-+restrict the thread enforcing it, and its future children.
-+
-+Defining and enforcing a security policy
-+----------------------------------------
-+
-+We first need to create the ruleset that will contain our rules.  For this
-+example, the ruleset will contain rules which only allow read actions, but
-+write actions will be denied.  The ruleset then needs to handle both of these
-+kind of actions.  To have a backward compatibility, these actions should be
-+ANDed with the supported ones.
-+
-+.. code-block:: c
-+
-+    int ruleset_fd;
-+    struct landlock_ruleset_attr ruleset_attr = {
-+        .handled_access_fs =
-+            LANDLOCK_ACCESS_FS_EXECUTE |
-+            LANDLOCK_ACCESS_FS_WRITE_FILE |
-+            LANDLOCK_ACCESS_FS_READ_FILE |
-+            LANDLOCK_ACCESS_FS_READ_DIR |
-+            LANDLOCK_ACCESS_FS_REMOVE_DIR |
-+            LANDLOCK_ACCESS_FS_REMOVE_FILE |
-+            LANDLOCK_ACCESS_FS_MAKE_CHAR |
-+            LANDLOCK_ACCESS_FS_MAKE_DIR |
-+            LANDLOCK_ACCESS_FS_MAKE_REG |
-+            LANDLOCK_ACCESS_FS_MAKE_SOCK |
-+            LANDLOCK_ACCESS_FS_MAKE_FIFO |
-+            LANDLOCK_ACCESS_FS_MAKE_BLOCK |
-+            LANDLOCK_ACCESS_FS_MAKE_SYM,
-+    };
-+
-+    ruleset_fd = landlock_create_ruleset(&ruleset_attr, sizeof(ruleset_attr), 0);
-+    if (ruleset_fd < 0) {
-+        perror("Failed to create a ruleset");
-+        return 1;
-+    }
-+
-+We can now add a new rule to this ruleset thanks to the returned file
-+descriptor referring to this ruleset.  The rule will only enable to read the
-+file hierarchy ``/usr``.  Without another rule, write actions would then be
-+denied by the ruleset.  To add ``/usr`` to the ruleset, we open it with the
-+``O_PATH`` flag and fill the &struct landlock_path_beneath_attr with this file
-+descriptor.
-+
-+.. code-block:: c
-+
-+    int err;
-+    struct landlock_path_beneath_attr path_beneath = {
-+        .allowed_access =
-+            LANDLOCK_ACCESS_FS_EXECUTE |
-+            LANDLOCK_ACCESS_FS_READ_FILE |
-+            LANDLOCK_ACCESS_FS_READ_DIR,
-+    };
-+
-+    path_beneath.parent_fd = open("/usr", O_PATH | O_CLOEXEC);
-+    if (path_beneath.parent_fd < 0) {
-+        perror("Failed to open file");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+    err = landlock_add_rule(ruleset_fd, LANDLOCK_RULE_PATH_BENEATH,
-+                            &path_beneath, 0);
-+    close(path_beneath.parent_fd);
-+    if (err) {
-+        perror("Failed to update ruleset");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+
-+We now have a ruleset with one rule allowing read access to ``/usr`` while
-+denying all other handled accesses for the filesystem.  The next step is to
-+restrict the current thread from gaining more privileges (e.g. thanks to a SUID
-+binary).
-+
-+.. code-block:: c
-+
-+    if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0)) {
-+        perror("Failed to restrict privileges");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+
-+The current thread is now ready to sandbox itself with the ruleset.
-+
-+.. code-block:: c
-+
-+    if (landlock_enforce_ruleset_current(ruleset_fd, 0)) {
-+        perror("Failed to enforce ruleset");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+    close(ruleset_fd);
-+
-+If the `landlock_enforce_ruleset_current` system call succeeds, the current
-+thread is now restricted and this policy will be enforced on all its
-+subsequently created children as well.  Once a thread is landlocked, there is
-+no way to remove its security policy; only adding more restrictions is allowed.
-+These threads are now in a new Landlock domain, merge of their parent one (if
-+any) with the new ruleset.
-+
-+Full working code can be found in `samples/landlock/sandboxer.c`_.
-+
-+Inheritance
-+-----------
-+
-+Every new thread resulting from a :manpage:`clone(2)` inherits Landlock domain
-+restrictions from its parent.  This is similar to the seccomp inheritance (cf.
-+:doc:`/userspace-api/seccomp_filter`) or any other LSM dealing with task's
-+:manpage:`credentials(7)`.  For instance, one process's thread may apply
-+Landlock rules to itself, but they will not be automatically applied to other
-+sibling threads (unlike POSIX thread credential changes, cf.
-+:manpage:`nptl(7)`).
-+
-+When a thread sandbox itself, we have the grantee that the related security
-+policy will stay enforced on all this thread's descendants.  This enables to
-+create standalone and modular security policies per application, which will
-+automatically be composed between themselves according to their runtime parent
-+policies.
-+
-+Ptrace restrictions
-+-------------------
-+
-+A sandboxed process has less privileges than a non-sandboxed process and must
-+then be subject to additional restrictions when manipulating another process.
-+To be allowed to use :manpage:`ptrace(2)` and related syscalls on a target
-+process, a sandboxed process should have a subset of the target process rules,
-+which means the tracee must be in a sub-domain of the tracer.
-+
-+Kernel interface
-+================
-+
-+Access rights
-+-------------
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: fs_access
-+
-+Creating a new ruleset
-+----------------------
-+
-+.. kernel-doc:: security/landlock/syscall.c
-+    :identifiers: sys_landlock_create_ruleset
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: landlock_ruleset_attr
-+
-+Extending a ruleset
-+-------------------
-+
-+.. kernel-doc:: security/landlock/syscall.c
-+    :identifiers: sys_landlock_add_rule
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: landlock_rule_type landlock_path_beneath_attr
-+
-+Enforcing a ruleset
-+-------------------
-+
-+.. kernel-doc:: security/landlock/syscall.c
-+    :identifiers: sys_landlock_enforce_ruleset_current
-+
-+Current limitations
-+===================
-+
-+File renaming and linking
-+-------------------------
-+
-+Because Landlock targets unprivileged access controls, it is needed to properly
-+handle composition of rules.  Such property also implies rules nesting.
-+Properly handling multiple layers of ruleset, each one of them able to restrict
-+access to files, also implies to inherit the ruleset restrictions from a parent
-+to its hierarchy.  Because files are identified and restricted by their
-+hierarchy, moving or linking a file from one directory to another imply to
-+propagate the hierarchy constraints.  To protect against privilege escalations
-+through renaming or linking, and for the sack of simplicity, Landlock currently
-+limits linking and renaming to the same directory.  Future Landlock evolutions
-+will enable more flexibility for renaming and linking, with dedicated ruleset
-+flags.
-+
-+OverlayFS
-+---------
-+
-+An OverlayFS mount point consists of upper and lower layers.  It is currently
-+not possible to reliably infer which underlying file hierarchy matches an
-+OverlayFS path composed of such layers.  It is then not currently possible to
-+track the source of an indirect access request, and then not possible to
-+properly identify and allow an unified OverlayFS hierarchy.  Restricting files
-+in an OverlayFS mount point works, but files allowed in one layer may not be
-+allowed in a related OverlayFS mount point.  A future Landlock evolution will
-+make possible to properly work with OverlayFS, according to a dedicated ruleset
-+flag.
-+
-+
-+Special filesystems
-+-------------------
-+
-+Access to regular files and directories can be restricted by Landlock,
-+according to the handled accesses of a ruleset.  However, files which do not
-+come from a user-visible filesystem (e.g. pipe, socket), but can still be
-+accessed through /proc/self/fd/, cannot currently be restricted.  Likewise,
-+some special kernel filesystems such as nsfs which can be accessed through
-+/proc/self/ns/, cannot currently be restricted.  For now, these kind of special
-+paths are then always allowed.  Future Landlock evolutions will enable to
-+restrict such paths, with dedicated ruleset flags.
-+
-+Questions and answers
-+=====================
-+
-+What about user space sandbox managers?
-+---------------------------------------
-+
-+Using user space process to enforce restrictions on kernel resources can lead
-+to race conditions or inconsistent evaluations (i.e. `Incorrect mirroring of
-+the OS code and state
-+<https://www.ndss-symposium.org/ndss2003/traps-and-pitfalls-practical-problems-system-call-interposition-based-security-tools/>`_).
-+
-+What about namespaces and containers?
-+-------------------------------------
-+
-+Namespaces can help create sandboxes but they are not designed for
-+access-control and then miss useful features for such use case (e.g. no
-+fine-grained restrictions).  Moreover, their complexity can lead to security
-+issues, especially when untrusted processes can manipulate them (cf.
-+`Controlling access to user namespaces <https://lwn.net/Articles/673597/>`_).
-+
-+Additional documentation
-+========================
-+
-+* :doc:`/security/landlock`
-+* https://landlock.io
-+
-+.. Links
-+.. _samples/landlock/sandboxer.c:
-+   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/samples/landlock/sandboxer.c
+ .. only::  subproject and html
+diff --git a/Documentation/networking/kapi.rst b/Documentation/networking/kapi.rst
+index d198fa5eaacd..ea55f462cefa 100644
+--- a/Documentation/networking/kapi.rst
++++ b/Documentation/networking/kapi.rst
+@@ -83,27 +83,6 @@ SUN RPC subsystem
+ .. kernel-doc:: net/sunrpc/clnt.c
+    :export:
+ 
+-WiMAX
+------
+-
+-.. kernel-doc:: net/wimax/op-msg.c
+-   :export:
+-
+-.. kernel-doc:: net/wimax/op-reset.c
+-   :export:
+-
+-.. kernel-doc:: net/wimax/op-rfkill.c
+-   :export:
+-
+-.. kernel-doc:: net/wimax/stack.c
+-   :export:
+-
+-.. kernel-doc:: include/net/wimax.h
+-   :internal:
+-
+-.. kernel-doc:: include/uapi/linux/wimax.h
+-   :internal:
+-
+ Network device support
+ ======================
+ 
+diff --git a/Documentation/translations/zh_CN/admin-guide/index.rst b/Documentation/translations/zh_CN/admin-guide/index.rst
+index ed5ab7e37f38..48bbd3ebad48 100644
+--- a/Documentation/translations/zh_CN/admin-guide/index.rst
++++ b/Documentation/translations/zh_CN/admin-guide/index.rst
+@@ -114,7 +114,6 @@ Todolist:
+    unicode
+    vga-softcursor
+    video-output
+-   wimax/index
+    xfs
+ 
+ .. only::  subproject and html
 diff --git a/MAINTAINERS b/MAINTAINERS
-index 43021f8c95bb..ac31dfd7663c 100644
+index 49d31fc6763b..da59512616c7 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -9852,6 +9852,8 @@ L:	linux-security-module@vger.kernel.org
- S:	Supported
- W:	https://landlock.io
- T:	git https://github.com/landlock-lsm/linux.git
-+F:	Documentation/security/landlock.rst
-+F:	Documentation/userspace-api/landlock.rst
- F:	include/uapi/linux/landlock.h
- F:	security/landlock/
- K:	landlock
+@@ -9114,16 +9114,6 @@ W:	https://wireless.wiki.kernel.org/en/users/drivers/iwlwifi
+ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/iwlwifi/iwlwifi.git
+ F:	drivers/net/wireless/intel/iwlwifi/
+ 
+-INTEL WIRELESS WIMAX CONNECTION 2400
+-M:	Inaky Perez-Gonzalez <inaky.perez-gonzalez@intel.com>
+-M:	linux-wimax@intel.com
+-L:	wimax@linuxwimax.org (subscribers-only)
+-S:	Supported
+-W:	http://linuxwimax.org
+-F:	Documentation/admin-guide/wimax/i2400m.rst
+-F:	drivers/net/wimax/i2400m/
+-F:	include/uapi/linux/wimax/i2400m.h
+-
+ INTEL WMI SLIM BOOTLOADER (SBL) FIRMWARE UPDATE DRIVER
+ M:	Jithu Joseph <jithu.joseph@intel.com>
+ R:	Maurice Ma <maurice.ma@intel.com>
+@@ -18941,18 +18931,6 @@ S:	Supported
+ W:	https://wireless.wiki.kernel.org/en/users/Drivers/wil6210
+ F:	drivers/net/wireless/ath/wil6210/
+ 
+-WIMAX STACK
+-M:	Inaky Perez-Gonzalez <inaky.perez-gonzalez@intel.com>
+-M:	linux-wimax@intel.com
+-L:	wimax@linuxwimax.org (subscribers-only)
+-S:	Supported
+-W:	http://linuxwimax.org
+-F:	Documentation/admin-guide/wimax/wimax.rst
+-F:	include/linux/wimax/debug.h
+-F:	include/net/wimax.h
+-F:	include/uapi/linux/wimax.h
+-F:	net/wimax/
+-
+ WINBOND CIR DRIVER
+ M:	David Härdeman <david@hardeman.nu>
+ S:	Maintained
+diff --git a/drivers/net/Kconfig b/drivers/net/Kconfig
+index c3dbe64e628e..c0af2dc8b938 100644
+--- a/drivers/net/Kconfig
++++ b/drivers/net/Kconfig
+@@ -489,8 +489,6 @@ source "drivers/net/usb/Kconfig"
+ 
+ source "drivers/net/wireless/Kconfig"
+ 
+-source "drivers/net/wimax/Kconfig"
+-
+ source "drivers/net/wan/Kconfig"
+ 
+ source "drivers/net/ieee802154/Kconfig"
+diff --git a/drivers/net/wimax/Kconfig b/drivers/net/wimax/Kconfig
+deleted file mode 100644
+index 2249e3d77a76..000000000000
+--- a/drivers/net/wimax/Kconfig
++++ /dev/null
+@@ -1,18 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0-only
+-#
+-# WiMAX LAN device drivers configuration
+-#
+-
+-
+-comment "Enable WiMAX (Networking options) to see the WiMAX drivers"
+-	depends on WIMAX = n
+-
+-if WIMAX
+-
+-menu "WiMAX Wireless Broadband devices"
+-
+-source "drivers/net/wimax/i2400m/Kconfig"
+-
+-endmenu
+-
+-endif
+diff --git a/drivers/net/wimax/Makefile b/drivers/net/wimax/Makefile
+deleted file mode 100644
+index b4575bacf994..000000000000
+--- a/drivers/net/wimax/Makefile
++++ /dev/null
+@@ -1,2 +0,0 @@
+-# SPDX-License-Identifier: GPL-2.0-only
+-obj-$(CONFIG_WIMAX_I2400M)	+= i2400m/
+diff --git a/drivers/staging/Kconfig b/drivers/staging/Kconfig
+index 2d0310448eba..443ca3f3cdf0 100644
+--- a/drivers/staging/Kconfig
++++ b/drivers/staging/Kconfig
+@@ -114,6 +114,8 @@ source "drivers/staging/kpc2000/Kconfig"
+ 
+ source "drivers/staging/qlge/Kconfig"
+ 
++source "drivers/staging/wimax/Kconfig"
++
+ source "drivers/staging/wfx/Kconfig"
+ 
+ source "drivers/staging/hikey9xx/Kconfig"
+diff --git a/drivers/staging/Makefile b/drivers/staging/Makefile
+index 757a892ab5b9..dc45128ef525 100644
+--- a/drivers/staging/Makefile
++++ b/drivers/staging/Makefile
+@@ -47,5 +47,6 @@ obj-$(CONFIG_XIL_AXIS_FIFO)	+= axis-fifo/
+ obj-$(CONFIG_FIELDBUS_DEV)     += fieldbus/
+ obj-$(CONFIG_KPC2000)		+= kpc2000/
+ obj-$(CONFIG_QLGE)		+= qlge/
++obj-$(CONFIG_WIMAX)		+= wimax/
+ obj-$(CONFIG_WFX)		+= wfx/
+ obj-y				+= hikey9xx/
+diff --git a/Documentation/admin-guide/wimax/i2400m.rst b/drivers/staging/wimax/Documentation/i2400m.rst
+similarity index 100%
+rename from Documentation/admin-guide/wimax/i2400m.rst
+rename to drivers/staging/wimax/Documentation/i2400m.rst
+diff --git a/Documentation/admin-guide/wimax/index.rst b/drivers/staging/wimax/Documentation/index.rst
+similarity index 100%
+rename from Documentation/admin-guide/wimax/index.rst
+rename to drivers/staging/wimax/Documentation/index.rst
+diff --git a/Documentation/admin-guide/wimax/wimax.rst b/drivers/staging/wimax/Documentation/wimax.rst
+similarity index 100%
+rename from Documentation/admin-guide/wimax/wimax.rst
+rename to drivers/staging/wimax/Documentation/wimax.rst
+diff --git a/net/wimax/Kconfig b/drivers/staging/wimax/Kconfig
+similarity index 94%
+rename from net/wimax/Kconfig
+rename to drivers/staging/wimax/Kconfig
+index d13762bc4abc..ded8b70b25ee 100644
+--- a/net/wimax/Kconfig
++++ b/drivers/staging/wimax/Kconfig
+@@ -22,6 +22,8 @@ menuconfig WIMAX
+ 
+ 	  If unsure, it is safe to select M (module).
+ 
++if WIMAX
++
+ config WIMAX_DEBUG_LEVEL
+ 	int "WiMAX debug level"
+ 	depends on WIMAX
+@@ -38,3 +40,7 @@ config WIMAX_DEBUG_LEVEL
+ 	  If set at zero, this will compile out all the debug code.
+ 
+ 	  It is recommended that it is left at 8.
++
++source "drivers/staging/wimax/i2400m/Kconfig"
++
++endif
+diff --git a/net/wimax/Makefile b/drivers/staging/wimax/Makefile
+similarity index 83%
+rename from net/wimax/Makefile
+rename to drivers/staging/wimax/Makefile
+index c2a71ae487ac..0e3f988656aa 100644
+--- a/net/wimax/Makefile
++++ b/drivers/staging/wimax/Makefile
+@@ -11,3 +11,5 @@ wimax-y :=		\
+ 	stack.o
+ 
+ wimax-$(CONFIG_DEBUG_FS) += debugfs.o
++
++obj-$(CONFIG_WIMAX_I2400M)	+= i2400m/
+diff --git a/drivers/staging/wimax/TODO b/drivers/staging/wimax/TODO
+new file mode 100644
+index 000000000000..704186c6a5db
+--- /dev/null
++++ b/drivers/staging/wimax/TODO
+@@ -0,0 +1,16 @@
++There are no known users of this driver as of October 2020, and it will
++be removed unless someone turns out to still need it in future releases.
++
++According to https://en.wikipedia.org/wiki/List_of_WiMAX_networks, there
++have been many public wimax networks, but it appears that these entries
++are all stale, after everyone has migrated to LTE or discontinued their
++service altogether.
++
++NetworkManager appears to have dropped userspace support in 2015
++https://bugzilla.gnome.org/show_bug.cgi?id=747846, the www.linuxwimax.org
++site had already shut down earlier.
++
++WiMax is apparently still being deployed on airport campus networks
++("AeroMACS"), but in a frequency band that was not supported by the old
++Intel 2400m (used in Sandy Bridge laptops and earlier), which is the
++only driver using the kernel's wimax stack.
+diff --git a/net/wimax/debug-levels.h b/drivers/staging/wimax/debug-levels.h
+similarity index 96%
+rename from net/wimax/debug-levels.h
+rename to drivers/staging/wimax/debug-levels.h
+index ebc287cde336..b854802d1d00 100644
+--- a/net/wimax/debug-levels.h
++++ b/drivers/staging/wimax/debug-levels.h
+@@ -13,7 +13,7 @@
+ #define D_MODULENAME wimax
+ #define D_MASTER CONFIG_WIMAX_DEBUG_LEVEL
+ 
+-#include <linux/wimax/debug.h>
++#include "linux-wimax-debug.h"
+ 
+ /* List of all the enabled modules */
+ enum d_module {
+diff --git a/net/wimax/debugfs.c b/drivers/staging/wimax/debugfs.c
+similarity index 97%
+rename from net/wimax/debugfs.c
+rename to drivers/staging/wimax/debugfs.c
+index 3c54bb6b925a..e11bff61ffcf 100644
+--- a/net/wimax/debugfs.c
++++ b/drivers/staging/wimax/debugfs.c
+@@ -7,7 +7,7 @@
+  * Inaky Perez-Gonzalez <inaky.perez-gonzalez@intel.com>
+  */
+ #include <linux/debugfs.h>
+-#include <linux/wimax.h>
++#include "linux-wimax.h"
+ #include "wimax-internal.h"
+ 
+ #define D_SUBMODULE debugfs
+diff --git a/drivers/net/wimax/i2400m/Kconfig b/drivers/staging/wimax/i2400m/Kconfig
+similarity index 100%
+rename from drivers/net/wimax/i2400m/Kconfig
+rename to drivers/staging/wimax/i2400m/Kconfig
+diff --git a/drivers/net/wimax/i2400m/Makefile b/drivers/staging/wimax/i2400m/Makefile
+similarity index 100%
+rename from drivers/net/wimax/i2400m/Makefile
+rename to drivers/staging/wimax/i2400m/Makefile
+diff --git a/drivers/net/wimax/i2400m/control.c b/drivers/staging/wimax/i2400m/control.c
+similarity index 99%
+rename from drivers/net/wimax/i2400m/control.c
+rename to drivers/staging/wimax/i2400m/control.c
+index 180d5f417bdc..8b533b1a3da4 100644
+--- a/drivers/net/wimax/i2400m/control.c
++++ b/drivers/staging/wimax/i2400m/control.c
+@@ -77,7 +77,7 @@
+ #include "i2400m.h"
+ #include <linux/kernel.h>
+ #include <linux/slab.h>
+-#include <linux/wimax/i2400m.h>
++#include "linux-wimax-i2400m.h"
+ #include <linux/export.h>
+ #include <linux/moduleparam.h>
+ 
+diff --git a/drivers/net/wimax/i2400m/debug-levels.h b/drivers/staging/wimax/i2400m/debug-levels.h
+similarity index 96%
+rename from drivers/net/wimax/i2400m/debug-levels.h
+rename to drivers/staging/wimax/i2400m/debug-levels.h
+index 00942bb1489b..a317e9fbb734 100644
+--- a/drivers/net/wimax/i2400m/debug-levels.h
++++ b/drivers/staging/wimax/i2400m/debug-levels.h
+@@ -13,7 +13,7 @@
+ #define D_MODULENAME i2400m
+ #define D_MASTER CONFIG_WIMAX_I2400M_DEBUG_LEVEL
+ 
+-#include <linux/wimax/debug.h>
++#include "../linux-wimax-debug.h"
+ 
+ /* List of all the enabled modules */
+ enum d_module {
+diff --git a/drivers/net/wimax/i2400m/debugfs.c b/drivers/staging/wimax/i2400m/debugfs.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/debugfs.c
+rename to drivers/staging/wimax/i2400m/debugfs.c
+diff --git a/drivers/net/wimax/i2400m/driver.c b/drivers/staging/wimax/i2400m/driver.c
+similarity index 99%
+rename from drivers/net/wimax/i2400m/driver.c
+rename to drivers/staging/wimax/i2400m/driver.c
+index ecb3fccca603..dc8939ff78c0 100644
+--- a/drivers/net/wimax/i2400m/driver.c
++++ b/drivers/staging/wimax/i2400m/driver.c
+@@ -50,7 +50,7 @@
+  */
+ #include "i2400m.h"
+ #include <linux/etherdevice.h>
+-#include <linux/wimax/i2400m.h>
++#include "linux-wimax-i2400m.h"
+ #include <linux/module.h>
+ #include <linux/moduleparam.h>
+ #include <linux/suspend.h>
+diff --git a/drivers/net/wimax/i2400m/fw.c b/drivers/staging/wimax/i2400m/fw.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/fw.c
+rename to drivers/staging/wimax/i2400m/fw.c
+diff --git a/drivers/net/wimax/i2400m/i2400m-usb.h b/drivers/staging/wimax/i2400m/i2400m-usb.h
+similarity index 100%
+rename from drivers/net/wimax/i2400m/i2400m-usb.h
+rename to drivers/staging/wimax/i2400m/i2400m-usb.h
+diff --git a/drivers/net/wimax/i2400m/i2400m.h b/drivers/staging/wimax/i2400m/i2400m.h
+similarity index 99%
+rename from drivers/net/wimax/i2400m/i2400m.h
+rename to drivers/staging/wimax/i2400m/i2400m.h
+index a3733a6d14f5..de22cc6f2c5c 100644
+--- a/drivers/net/wimax/i2400m/i2400m.h
++++ b/drivers/staging/wimax/i2400m/i2400m.h
+@@ -156,8 +156,8 @@
+ #include <linux/completion.h>
+ #include <linux/rwsem.h>
+ #include <linux/atomic.h>
+-#include <net/wimax.h>
+-#include <linux/wimax/i2400m.h>
++#include "../net-wimax.h"
++#include "linux-wimax-i2400m.h"
+ #include <asm/byteorder.h>
+ 
+ enum {
+diff --git a/include/uapi/linux/wimax/i2400m.h b/drivers/staging/wimax/i2400m/linux-wimax-i2400m.h
+similarity index 100%
+rename from include/uapi/linux/wimax/i2400m.h
+rename to drivers/staging/wimax/i2400m/linux-wimax-i2400m.h
+diff --git a/drivers/net/wimax/i2400m/netdev.c b/drivers/staging/wimax/i2400m/netdev.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/netdev.c
+rename to drivers/staging/wimax/i2400m/netdev.c
+diff --git a/drivers/net/wimax/i2400m/op-rfkill.c b/drivers/staging/wimax/i2400m/op-rfkill.c
+similarity index 99%
+rename from drivers/net/wimax/i2400m/op-rfkill.c
+rename to drivers/staging/wimax/i2400m/op-rfkill.c
+index 5c79f052cad2..fbddf2e18c14 100644
+--- a/drivers/net/wimax/i2400m/op-rfkill.c
++++ b/drivers/staging/wimax/i2400m/op-rfkill.c
+@@ -18,7 +18,7 @@
+  *   switch (coming from sysfs, the wimax stack or user space).
+  */
+ #include "i2400m.h"
+-#include <linux/wimax/i2400m.h>
++#include "linux-wimax-i2400m.h"
+ #include <linux/slab.h>
+ 
+ 
+diff --git a/drivers/net/wimax/i2400m/rx.c b/drivers/staging/wimax/i2400m/rx.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/rx.c
+rename to drivers/staging/wimax/i2400m/rx.c
+diff --git a/drivers/net/wimax/i2400m/sysfs.c b/drivers/staging/wimax/i2400m/sysfs.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/sysfs.c
+rename to drivers/staging/wimax/i2400m/sysfs.c
+diff --git a/drivers/net/wimax/i2400m/tx.c b/drivers/staging/wimax/i2400m/tx.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/tx.c
+rename to drivers/staging/wimax/i2400m/tx.c
+diff --git a/drivers/net/wimax/i2400m/usb-debug-levels.h b/drivers/staging/wimax/i2400m/usb-debug-levels.h
+similarity index 95%
+rename from drivers/net/wimax/i2400m/usb-debug-levels.h
+rename to drivers/staging/wimax/i2400m/usb-debug-levels.h
+index b6f7335de765..8fd0111560f6 100644
+--- a/drivers/net/wimax/i2400m/usb-debug-levels.h
++++ b/drivers/staging/wimax/i2400m/usb-debug-levels.h
+@@ -13,7 +13,7 @@
+ #define D_MODULENAME i2400m_usb
+ #define D_MASTER CONFIG_WIMAX_I2400M_DEBUG_LEVEL
+ 
+-#include <linux/wimax/debug.h>
++#include "../linux-wimax-debug.h"
+ 
+ /* List of all the enabled modules */
+ enum d_module {
+diff --git a/drivers/net/wimax/i2400m/usb-fw.c b/drivers/staging/wimax/i2400m/usb-fw.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/usb-fw.c
+rename to drivers/staging/wimax/i2400m/usb-fw.c
+diff --git a/drivers/net/wimax/i2400m/usb-notif.c b/drivers/staging/wimax/i2400m/usb-notif.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/usb-notif.c
+rename to drivers/staging/wimax/i2400m/usb-notif.c
+diff --git a/drivers/net/wimax/i2400m/usb-rx.c b/drivers/staging/wimax/i2400m/usb-rx.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/usb-rx.c
+rename to drivers/staging/wimax/i2400m/usb-rx.c
+diff --git a/drivers/net/wimax/i2400m/usb-tx.c b/drivers/staging/wimax/i2400m/usb-tx.c
+similarity index 100%
+rename from drivers/net/wimax/i2400m/usb-tx.c
+rename to drivers/staging/wimax/i2400m/usb-tx.c
+diff --git a/drivers/net/wimax/i2400m/usb.c b/drivers/staging/wimax/i2400m/usb.c
+similarity index 99%
+rename from drivers/net/wimax/i2400m/usb.c
+rename to drivers/staging/wimax/i2400m/usb.c
+index b684e97ac976..3b84dd7b5567 100644
+--- a/drivers/net/wimax/i2400m/usb.c
++++ b/drivers/staging/wimax/i2400m/usb.c
+@@ -49,7 +49,7 @@
+  *   usb_reset_device()
+  */
+ #include "i2400m-usb.h"
+-#include <linux/wimax/i2400m.h>
++#include "linux-wimax-i2400m.h"
+ #include <linux/debugfs.h>
+ #include <linux/slab.h>
+ #include <linux/module.h>
+diff --git a/net/wimax/id-table.c b/drivers/staging/wimax/id-table.c
+similarity index 99%
+rename from net/wimax/id-table.c
+rename to drivers/staging/wimax/id-table.c
+index 02eee37b7e31..0e6f4aa87bc9 100644
+--- a/net/wimax/id-table.c
++++ b/drivers/staging/wimax/id-table.c
+@@ -28,7 +28,7 @@
+ #include <net/genetlink.h>
+ #include <linux/netdevice.h>
+ #include <linux/list.h>
+-#include <linux/wimax.h>
++#include "linux-wimax.h"
+ #include "wimax-internal.h"
+ 
+ 
+diff --git a/include/linux/wimax/debug.h b/drivers/staging/wimax/linux-wimax-debug.h
+similarity index 99%
+rename from include/linux/wimax/debug.h
+rename to drivers/staging/wimax/linux-wimax-debug.h
+index cdae052bcdcd..5b5ec405143b 100644
+--- a/include/linux/wimax/debug.h
++++ b/drivers/staging/wimax/linux-wimax-debug.h
+@@ -60,7 +60,7 @@
+  *     #define D_MODULENAME modulename
+  *     #define D_MASTER 10
+  *
+- *     #include <linux/wimax/debug.h>
++ *     #include "linux-wimax-debug.h"
+  *
+  *     enum d_module {
+  *             D_SUBMODULE_DECLARE(submodule_1),
+diff --git a/include/uapi/linux/wimax.h b/drivers/staging/wimax/linux-wimax.h
+similarity index 100%
+rename from include/uapi/linux/wimax.h
+rename to drivers/staging/wimax/linux-wimax.h
+diff --git a/include/net/wimax.h b/drivers/staging/wimax/net-wimax.h
+similarity index 99%
+rename from include/net/wimax.h
+rename to drivers/staging/wimax/net-wimax.h
+index f6e31d2f47aa..f578e345e2bd 100644
+--- a/include/net/wimax.h
++++ b/drivers/staging/wimax/net-wimax.h
+@@ -236,7 +236,7 @@
+ #ifndef __NET__WIMAX_H__
+ #define __NET__WIMAX_H__
+ 
+-#include <linux/wimax.h>
++#include "linux-wimax.h"
+ #include <net/genetlink.h>
+ #include <linux/netdevice.h>
+ 
+diff --git a/net/wimax/op-msg.c b/drivers/staging/wimax/op-msg.c
+similarity index 99%
+rename from net/wimax/op-msg.c
+rename to drivers/staging/wimax/op-msg.c
+index 6460b5785758..e20ac7d84e82 100644
+--- a/net/wimax/op-msg.c
++++ b/drivers/staging/wimax/op-msg.c
+@@ -60,7 +60,7 @@
+ #include <linux/slab.h>
+ #include <net/genetlink.h>
+ #include <linux/netdevice.h>
+-#include <linux/wimax.h>
++#include "linux-wimax.h"
+ #include <linux/security.h>
+ #include <linux/export.h>
+ #include "wimax-internal.h"
+diff --git a/net/wimax/op-reset.c b/drivers/staging/wimax/op-reset.c
+similarity index 98%
+rename from net/wimax/op-reset.c
+rename to drivers/staging/wimax/op-reset.c
+index 9899b2e56721..b3f000cbe112 100644
+--- a/net/wimax/op-reset.c
++++ b/drivers/staging/wimax/op-reset.c
+@@ -13,9 +13,9 @@
+  * disconnect and reconnect the device).
+  */
+ 
+-#include <net/wimax.h>
++#include "net-wimax.h"
+ #include <net/genetlink.h>
+-#include <linux/wimax.h>
++#include "linux-wimax.h"
+ #include <linux/security.h>
+ #include <linux/export.h>
+ #include "wimax-internal.h"
+diff --git a/net/wimax/op-rfkill.c b/drivers/staging/wimax/op-rfkill.c
+similarity index 99%
+rename from net/wimax/op-rfkill.c
+rename to drivers/staging/wimax/op-rfkill.c
+index 248d10b60b05..78b294481a59 100644
+--- a/net/wimax/op-rfkill.c
++++ b/drivers/staging/wimax/op-rfkill.c
+@@ -45,9 +45,9 @@
+  * wimax_rfkill_rm()            [called by wimax_dev_add/rm()]
+  */
+ 
+-#include <net/wimax.h>
++#include "net-wimax.h"
+ #include <net/genetlink.h>
+-#include <linux/wimax.h>
++#include "linux-wimax.h"
+ #include <linux/security.h>
+ #include <linux/rfkill.h>
+ #include <linux/export.h>
+diff --git a/net/wimax/op-state-get.c b/drivers/staging/wimax/op-state-get.c
+similarity index 96%
+rename from net/wimax/op-state-get.c
+rename to drivers/staging/wimax/op-state-get.c
+index 5bc712de1563..c5bfbed505f5 100644
+--- a/net/wimax/op-state-get.c
++++ b/drivers/staging/wimax/op-state-get.c
+@@ -10,9 +10,9 @@
+  *  Inaky Perez-Gonzalez <inaky.perez-gonzalez@intel.com>
+  */
+ 
+-#include <net/wimax.h>
++#include "net-wimax.h"
+ #include <net/genetlink.h>
+-#include <linux/wimax.h>
++#include "linux-wimax.h"
+ #include <linux/security.h>
+ #include "wimax-internal.h"
+ 
+diff --git a/net/wimax/stack.c b/drivers/staging/wimax/stack.c
+similarity index 99%
+rename from net/wimax/stack.c
+rename to drivers/staging/wimax/stack.c
+index 3a62af3f80bf..ace24a6dfd2d 100644
+--- a/net/wimax/stack.c
++++ b/drivers/staging/wimax/stack.c
+@@ -39,7 +39,7 @@
+ #include <linux/gfp.h>
+ #include <net/genetlink.h>
+ #include <linux/netdevice.h>
+-#include <linux/wimax.h>
++#include "linux-wimax.h"
+ #include <linux/module.h>
+ #include "wimax-internal.h"
+ 
+diff --git a/net/wimax/wimax-internal.h b/drivers/staging/wimax/wimax-internal.h
+similarity index 99%
+rename from net/wimax/wimax-internal.h
+rename to drivers/staging/wimax/wimax-internal.h
+index 40751207296c..a6b6990642a1 100644
+--- a/net/wimax/wimax-internal.h
++++ b/drivers/staging/wimax/wimax-internal.h
+@@ -22,7 +22,7 @@
+ #define pr_fmt(fmt) KBUILD_MODNAME ": " fmt
+ 
+ #include <linux/device.h>
+-#include <net/wimax.h>
++#include "net-wimax.h"
+ 
+ 
+ /*
+diff --git a/net/Kconfig b/net/Kconfig
+index d6567162c1cf..f4c32d982af6 100644
+--- a/net/Kconfig
++++ b/net/Kconfig
+@@ -386,8 +386,6 @@ source "net/mac80211/Kconfig"
+ 
+ endif # WIRELESS
+ 
+-source "net/wimax/Kconfig"
+-
+ source "net/rfkill/Kconfig"
+ source "net/9p/Kconfig"
+ source "net/caif/Kconfig"
+diff --git a/net/Makefile b/net/Makefile
+index 5744bf1997fd..d96b0aa8f39f 100644
+--- a/net/Makefile
++++ b/net/Makefile
+@@ -66,7 +66,6 @@ obj-$(CONFIG_MAC802154)		+= mac802154/
+ ifeq ($(CONFIG_NET),y)
+ obj-$(CONFIG_SYSCTL)		+= sysctl_net.o
+ endif
+-obj-$(CONFIG_WIMAX)		+= wimax/
+ obj-$(CONFIG_DNS_RESOLVER)	+= dns_resolver/
+ obj-$(CONFIG_CEPH_LIB)		+= ceph/
+ obj-$(CONFIG_BATMAN_ADV)	+= batman-adv/
 -- 
-2.28.0
+2.27.0
 
