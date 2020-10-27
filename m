@@ -2,44 +2,47 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 56E4529A8B4
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 11:07:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3041229A8CA
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 11:07:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2896064AbgJ0Jvn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Oct 2020 05:51:43 -0400
-Received: from mail.kernel.org ([198.145.29.99]:42608 "EHLO mail.kernel.org"
+        id S2896794AbgJ0KBj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Oct 2020 06:01:39 -0400
+Received: from mail.kernel.org ([198.145.29.99]:42616 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2896035AbgJ0Jvn (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S2896038AbgJ0Jvn (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Tue, 27 Oct 2020 05:51:43 -0400
 Received: from mail.kernel.org (ip5f5ad5af.dynamic.kabel-deutschland.de [95.90.213.175])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 5B7BD2242B;
+        by mail.kernel.org (Postfix) with ESMTPSA id 63D972242F;
         Tue, 27 Oct 2020 09:51:41 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1603792301;
-        bh=64A7EVfDlXLbjve/Xc7YXb+7i96EZIpaeNvqEPZFM6Q=;
+        bh=3vvnE1em6mmP7ZQ1BF47N0SjjEqymcV2EcpEutuqSu8=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=ugc5YPlRgxzutZ+xamDxawGWBYXMPKcu8mZd4C4ze7MyhqprJVYGGQnj2IMTE1S9z
-         M6kVNrRlAhLQUVZupcEbMiAH9WY3uYZJdLxs1/LgaWQoi61y8nWiqGxaYJ6yZuOwyO
-         JzfsF2zF5l3zo5bT+R0uD5mJsxeWKFrXImGgyumw=
+        b=1IM9lZPpp3e2P+lBjpHqQerSqi11wFhmvVoXUnbtSrCdE7Bz2bWEKJSP0CXu2KDgA
+         sILV6F3ZkRGl9aG2ZGJbgtinsQDloIISIYNkn5rln/LqoLqfGz/Jnm/WZNrj7BdkjN
+         mFn5oYpe6WQiELcxsixTnXe4Iy5Bao2+pnHvz7E8=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kXLdj-003FEv-A6; Tue, 27 Oct 2020 10:51:39 +0100
+        id 1kXLdj-003FEz-Aw; Tue, 27 Oct 2020 10:51:39 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        =?UTF-8?q?Ville=20Syrj=C3=A4l=C3=A4?= 
-        <ville.syrjala@linux.intel.com>, Daniel Vetter <daniel@ffwll.ch>,
-        David Airlie <airlied@linux.ie>, Lyude Paul <lyude@redhat.com>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v3 12/32] drm/dp: fix a kernel-doc issue at drm_edid.c
-Date:   Tue, 27 Oct 2020 10:51:16 +0100
-Message-Id: <7f4d6c3ff6df63ebd006eb90a5108006c23e2168.1603791716.git.mchehab+huawei@kernel.org>
+        "Darrick J. Wong" <darrick.wong@oracle.com>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Andreas Gruenbacher <agruenba@redhat.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Guoqing Jiang <guoqing.jiang@cloud.ionos.com>,
+        Jens Axboe <axboe@kernel.dk>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        William Kucharski <william.kucharski@oracle.com>,
+        Yang Shi <yang.shi@linux.alibaba.com>,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v3 13/32] mm: pagemap.h: fix two kernel-doc markups
+Date:   Tue, 27 Oct 2020 10:51:17 +0100
+Message-Id: <dce89b296a4f5f9f8f798d5e76b6736c14a916ac.1603791716.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1603791716.git.mchehab+huawei@kernel.org>
 References: <cover.1603791716.git.mchehab+huawei@kernel.org>
@@ -50,30 +53,44 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The name of the argument is different, causing those warnings:
+Changeset a8cf7f272b5a ("mm: add find_lock_head") renamed the
+index parameter, but forgot to update the kernel-doc markups
+accordingly.
 
-	./drivers/gpu/drm/drm_edid.c:3754: warning: Function parameter or member 'video_code' not described in 'drm_display_mode_from_cea_vic'
-	./drivers/gpu/drm/drm_edid.c:3754: warning: Excess function parameter 'vic' description in 'drm_display_mode_from_cea_vic'
-
-Fixes: 7af655bce275 ("drm/dp: Add drm_dp_downstream_mode()")
-Reviewed-by: Lyude Paul <lyude@redhat.com>
+Fixes: a8cf7f272b5a ("mm: add find_lock_head")
+Reviewed-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- drivers/gpu/drm/drm_edid.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ include/linux/pagemap.h | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/drivers/gpu/drm/drm_edid.c b/drivers/gpu/drm/drm_edid.c
-index a82f37d44258..631125b46e04 100644
---- a/drivers/gpu/drm/drm_edid.c
-+++ b/drivers/gpu/drm/drm_edid.c
-@@ -3741,7 +3741,7 @@ drm_add_cmdb_modes(struct drm_connector *connector, u8 svd)
+diff --git a/include/linux/pagemap.h b/include/linux/pagemap.h
+index c77b7c31b2e4..e1e19c1f9ec9 100644
+--- a/include/linux/pagemap.h
++++ b/include/linux/pagemap.h
+@@ -344,9 +344,9 @@ static inline struct page *find_get_page_flags(struct address_space *mapping,
  /**
-  * drm_display_mode_from_cea_vic() - return a mode for CEA VIC
-  * @dev: DRM device
-- * @vic: CEA VIC of the mode
-+ * @video_code: CEA VIC of the mode
+  * find_lock_page - locate, pin and lock a pagecache page
+  * @mapping: the address_space to search
+- * @offset: the page index
++ * @index: the page index
   *
-  * Creates a new mode matching the specified CEA VIC.
+- * Looks up the page cache entry at @mapping & @offset.  If there is a
++ * Looks up the page cache entry at @mapping & @index.  If there is a
+  * page cache page, it is returned locked and with an increased
+  * refcount.
+  *
+@@ -363,9 +363,9 @@ static inline struct page *find_lock_page(struct address_space *mapping,
+ /**
+  * find_lock_head - Locate, pin and lock a pagecache page.
+  * @mapping: The address_space to search.
+- * @offset: The page index.
++ * @index: The page index.
+  *
+- * Looks up the page cache entry at @mapping & @offset.  If there is a
++ * Looks up the page cache entry at @mapping & @index.  If there is a
+  * page cache page, its head page is returned locked and with an increased
+  * refcount.
   *
 -- 
 2.26.2
