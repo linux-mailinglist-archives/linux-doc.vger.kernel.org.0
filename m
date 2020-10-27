@@ -2,171 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0A92F29C518
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 19:08:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 654A929C6DF
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 19:28:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1824172AbgJ0SDw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Oct 2020 14:03:52 -0400
-Received: from Galois.linutronix.de ([193.142.43.55]:47242 "EHLO
-        galois.linutronix.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1757354AbgJ0OSx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Oct 2020 10:18:53 -0400
-From:   Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1603808330;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=bp5AhnmI6jiWnr53CzwF3Og28djxSNnmYmmHL2UuOt8=;
-        b=4caFk+lCP6PVdjBxaNFbTnShKMIwXnD+J+z7qE1HQdjW6s3bBKNN3Bs6728AGd9MPL0sTq
-        cYISE15GvnXPm9FGyuLiMR+CXo90PPIGeKy4DIMtc3s1N8yEU+cp0JemmMnvP0tmsvjdLD
-        Dgt9qUFlO4cIdf888uV1s5K3Wq1JXAGPw04msakKd7SPj/5U5SEsoekRKEZfOjEP+ikZ0v
-        roYhgpyqP6twzv+qYS4VFH5HHtA9R8ZukptrIJi9OkB7HMo5cY7HJ0fR8aK5O+PQSYaZkP
-        N7NhwIvmvA2WYXJ0FhoK7NEbPHOL9li9UV0eZaQcxedHi6C0wLyEmpV5NFsQmg==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1603808330;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=bp5AhnmI6jiWnr53CzwF3Og28djxSNnmYmmHL2UuOt8=;
-        b=lTRRlHFYQ0djlr+fFdTRbzmeeMFyKa1T2J8cQAjJqIC+Llz0DlhTmFB4EFQ6PWRoIWCjfH
-        dmJid13IGhNMJAAA==
-To:     Ira Weiny <ira.weiny@intel.com>,
-        "Paul E. McKenney" <paulmck@kernel.org>
-Cc:     Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>, x86@kernel.org,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Fenghua Yu <fenghua.yu@intel.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-nvdimm@lists.01.org,
-        linux-mm@kvack.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH 06/10] x86/entry: Move nmi entry/exit into common code
-In-Reply-To: <20201027070750.GM534324@iweiny-DESK2.sc.intel.com>
-References: <20201022222701.887660-1-ira.weiny@intel.com> <20201022222701.887660-7-ira.weiny@intel.com> <874kmk6298.fsf@nanos.tec.linutronix.de> <20201027070750.GM534324@iweiny-DESK2.sc.intel.com>
-Date:   Tue, 27 Oct 2020 15:18:50 +0100
-Message-ID: <87pn5321md.fsf@nanos.tec.linutronix.de>
+        id S1827456AbgJ0SYd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Oct 2020 14:24:33 -0400
+Received: from mail-oo1-f65.google.com ([209.85.161.65]:45621 "EHLO
+        mail-oo1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1827330AbgJ0SYc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Oct 2020 14:24:32 -0400
+Received: by mail-oo1-f65.google.com with SMTP id j41so463141oof.12;
+        Tue, 27 Oct 2020 11:24:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=JK/7DVUQkZfUgaeA5ixT5hPkE29Eu8FLcSkV/JAkh7A=;
+        b=gE9EPrdKHu3GonDGsmfVfCi8Y5gRB4Qsn09KA7PVwLUuwQIGi17BBNpWEZAlrFymnr
+         zsz//YwI8PE5R+i4K8r3JmxR83dRMW9eL31/ej19aajYhuu9TBt0bNJn4nM+7fVX7PJX
+         84XBCxRAn1oUBgU+i4EPsMapu5eMxbcfSSZJHDfXL9I7fYm2ioG+bvr0LodNJWgcuJAe
+         QhGCovJbtN2wfNVYmXwwx7OP+6jDo6Ap8HieDUaTaYw+N0cWcCMurq5qFvGWWK5jkF4U
+         HsjW/O9kwci0XpkZ6wrQ7pmRvyS9RKqhL5uc9eFzFXtMhR6rSR+dnY9zyT+LmWpY+8CQ
+         EOmg==
+X-Gm-Message-State: AOAM531EQK3d8ZxdQTW3FT/Tm7AmoOf10t+MfuTHXv0cxAV9UTYlxUsD
+        CjBJsM4qdZ3Bnwa5+0empXwftHoH8sivGSLsz5Q=
+X-Google-Smtp-Source: ABdhPJztV7IBCmVLmFevDpdsKnKPMUOF8vFqYsOXZ2vQQC8OeuUIRS2fgbc8VMXrKYJP1sSr5PRI+JF7z7eQrp0KPX4=
+X-Received: by 2002:a4a:dc0d:: with SMTP id p13mr2747758oov.2.1603823071429;
+ Tue, 27 Oct 2020 11:24:31 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain
+References: <cover.1603469755.git.mchehab+huawei@kernel.org> <1e3d69e0890a36303f4c804ae9c523df9f098d6a.1603469755.git.mchehab+huawei@kernel.org>
+In-Reply-To: <1e3d69e0890a36303f4c804ae9c523df9f098d6a.1603469755.git.mchehab+huawei@kernel.org>
+From:   "Rafael J. Wysocki" <rafael@kernel.org>
+Date:   Tue, 27 Oct 2020 19:24:20 +0100
+Message-ID: <CAJZ5v0jDbSMVJHeCn1tkTp8jjUP8PS1F7HCGPtTbaZKG+PFpTg@mail.gmail.com>
+Subject: Re: [PATCH v3 24/56] PNP: fix kernel-doc markups
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
+        ACPI Devel Maling List <linux-acpi@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 27 2020 at 00:07, Ira Weiny wrote:
-> On Fri, Oct 23, 2020 at 11:50:11PM +0200, Thomas Gleixner wrote:
->> >  #ifndef irqentry_state
->> >  typedef struct irqentry_state {
->> > -	bool	exit_rcu;
->> > +	union {
->> > +		bool	exit_rcu;
->> > +		bool	lockdep;
->> > +	};
->> >  } irqentry_state_t;
->> >  #endif
->> 
->>   -E_NO_KERNELDOC
+On Fri, Oct 23, 2020 at 6:38 PM Mauro Carvalho Chehab
+<mchehab+huawei@kernel.org> wrote:
 >
-> Adding: Paul McKenney
+> It sounds that there were function renames. Update the kernel-doc
+> markups accordingly.
 >
-> I'm happy to write something but I'm very unfamiliar with this code.  So I'm
-> getting confused what exactly exit_rcu is flagging.
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>  drivers/pnp/core.c | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
 >
-> I can see that exit_rcu is a bad name for the state used in
-> irqentry_nmi_[enter|exit]().  Furthermore, I see why 'lockdep' is a better
-> name.  But similar lockdep handling is used in irqentry_exit() if exit_rcu is
-> true...
-
-No, it's not similar at all. Lockdep state vs. interrupts and regular
-exceptions is always consistent.
-
-In the NMI case, that's not guaranteed because of
-
-       local_irq_disable()
-         arch_local_irq_disable()
-                                        <- NMI race window
-         trace_hardirqs_off()
-
-same the other way round
-
-       local_irq_enable()
-         trace_hardirqs_on()
-                                        <- NMI race window
-         arch_local_irq_enable()
-
-IOW, the hardware state and the lockdep state are not consistent.
-
-> /**
->  * struct irqentry_state - Opaque object for exception state storage
->  * @exit_rcu: Used exclusively in the irqentry_*() calls; tracks if the
->  *            exception hit the idle task which requires special handling,
->  *            including calling rcu_irq_exit(), when the exception
->  exits.
-
-calls; signals whether the exit path has to invoke rcu_irq_exit().
-
->  * @lockdep: Used exclusively in the irqentry_nmi_*() calls; ensures lockdep
->  *           tracking is maintained if hardirqs were already enabled
-
-   ensures that lockdep state is restored correctly on exit from nmi.
-
->  *
->  * This opaque object is filled in by the irqentry_*_enter() functions and
->  * should be passed back into the corresponding irqentry_*_exit()
->  functions
-
-s/should/must/
-
->  * when the exception is complete.
->  *
->  * Callers of irqentry_*_[enter|exit]() should consider this structure
->  opaque
-
-s/should/must/
-
->  * and all members private.  Descriptions of the members are provided to aid in
->  * the maintenance of the irqentry_*() functions.
->  */
+> diff --git a/drivers/pnp/core.c b/drivers/pnp/core.c
+> index 3bf18d718975..a50ab002e9e4 100644
+> --- a/drivers/pnp/core.c
+> +++ b/drivers/pnp/core.c
+> @@ -51,7 +51,7 @@ static void pnp_remove_protocol(struct pnp_protocol *protocol)
+>  }
 >
-> Perhaps Paul can enlighten me on how exit_rcu is used beyond just flagging a
-> call to rcu_irq_exit()?
+>  /**
+> - * pnp_protocol_register - adds a pnp protocol to the pnp layer
+> + * pnp_register_protocol - adds a pnp protocol to the pnp layer
+>   * @protocol: pointer to the corresponding pnp_protocol structure
+>   *
+>   *  Ex protocols: ISAPNP, PNPBIOS, etc
+> @@ -91,7 +91,7 @@ int pnp_register_protocol(struct pnp_protocol *protocol)
+>  }
+>
+>  /**
+> - * pnp_protocol_unregister - removes a pnp protocol from the pnp layer
+> + * pnp_unregister_protocol - removes a pnp protocol from the pnp layer
+>   * @protocol: pointer to the corresponding pnp_protocol structure
+>   */
+>  void pnp_unregister_protocol(struct pnp_protocol *protocol)
+> --
 
-I can do that as well :) The only purpose is to invoke rcu_irq_exit()
-conditionally.
-
-> Why do we call lockdep_hardirqs_off() only when in the idle task?  That implies
-> that regs_irqs_disabled() can only be false if we were in the idle task to
-> match up the lockdep on/off calls.
-
-You're reading the code slightly wrong.
-
-> This does not make sense to me because why do we need the extra check
-> for exit_rcu?  I'm still trying to understand when regs_irqs_disabled() is false.
-
-It's false when the interrupted context had interrupts enabled.
-
-So we have the following scenarios:
-
- Usermode   Idletask   irqs enabled  RCU entry  RCU exit
-   Y           N           Y		Y          Y
-
-   N           N           Y            N          N 
-   N           N           N            N          N
-   N           Y           Y            Y          Y
-   N           Y           N            Y          Y                       
-
-Now you might wonder about irqs enabled/disabled. This code is not only
-used for interrupts (device, ipi, local timer...) where interrupts are
-obviously enabled, it's also used for exception entry/exit. You can have
-e.g. pagefaults in interrupt disabled regions.
-
-> Also, the comment in irqentry_enter() refers to irq_enter_from_user_mode() which
-> does not seem to exist anymore.  So I'm not sure what careful sequence it is
-> referring to.
-
-That was renamed to irqentry_enter_from_user_mode() and the comment was
-not updated. Sorry for leaving this hard to solve puzzle around.
-
-Thanks,
-
-        tglx
+Applied as 5.10-rc material, thanks!
