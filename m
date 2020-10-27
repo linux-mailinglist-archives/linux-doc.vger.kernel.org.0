@@ -2,140 +2,272 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3FCE529AAD7
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 12:31:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F315F29AB72
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 13:06:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2438032AbgJ0Lbg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Oct 2020 07:31:36 -0400
-Received: from mail.kernel.org ([198.145.29.99]:46842 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2899178AbgJ0Lbf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 27 Oct 2020 07:31:35 -0400
-Received: from aquarius.haifa.ibm.com (nesher1.haifa.il.ibm.com [195.110.40.7])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 78A2622283;
-        Tue, 27 Oct 2020 11:31:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1603798294;
-        bh=Chq+OW8jPYeS0x1/w/NuhbNqJg7T410wGKW7Vwcmmh0=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=AC/jQYaY123wRTdPEyISNQSkrk6fK6qDgIgZMnbaYj/xrL1krmjOm1LUo+gXLR4O/
-         tvpoLxCRFDQgp+0/HxwTDihCaFuJJPQpjNci9DHja12IL0KC4fU5Ba+WHbgEJL1Jgn
-         IrewywqVQYbPHxnQr4exw1rwLPXvUWiSB9GpQpzY=
-From:   Mike Rapoport <rppt@kernel.org>
-To:     Andrew Morton <akpm@linux-foundation.org>
-Cc:     Alexey Dobriyan <adobriyan@gmail.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Greg Ungerer <gerg@linux-m68k.org>,
-        John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Matt Turner <mattst88@gmail.com>, Meelis Roos <mroos@linux.ee>,
-        Michael Schmitz <schmitzmic@gmail.com>,
-        Mike Rapoport <rppt@kernel.org>,
-        Mike Rapoport <rppt@linux.ibm.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Tony Luck <tony.luck@intel.com>,
-        Vineet Gupta <vgupta@synopsys.com>,
-        Will Deacon <will@kernel.org>, linux-alpha@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-ia64@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
-        linux-mm@kvack.org, linux-snps-arc@lists.infradead.org
-Subject: [PATCH 13/13] m68k: deprecate DISCONTIGMEM
-Date:   Tue, 27 Oct 2020 13:29:55 +0200
-Message-Id: <20201027112955.14157-14-rppt@kernel.org>
+        id S1750657AbgJ0MGo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Oct 2020 08:06:44 -0400
+Received: from mail-lf1-f65.google.com ([209.85.167.65]:38276 "EHLO
+        mail-lf1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1750655AbgJ0MGm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Oct 2020 08:06:42 -0400
+Received: by mail-lf1-f65.google.com with SMTP id c141so1993168lfg.5;
+        Tue, 27 Oct 2020 05:06:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=eohJaWMwHM3aQ7gsRG83gYLtltQvygf7sinDrI0ygig=;
+        b=jJruPJIcgydNql7JnixycKQ+5bDsxtg8ayvLQ/D4BQgiTgW8cqyUPP6AUkJpBSI/XT
+         iWsbFkxxU4mc5FvEMcL4Ur9QGDQERCf9J1pcie5q4ouSWgvaBH94ljuE7BFRR8oTa5CV
+         NFj54t2BK8gK6lN3I59crXIZer9g3OLxCZ+Z4pgI5jFWGRa4nfFbPW4vY3cWZyC+0QT2
+         BvkOJ6WzbLgj2Vr+rDMkXCjKrALqltn3hqYUol6iIDcQ+RM5CDLFePPPxfNT9dXI1jxv
+         8k6MMvtm+0eVGRWj3VqCAQPJMS4/oyYdHtihCeXCCPthmNgMkIvhDwMHU+HcxqlSE055
+         pRlQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=eohJaWMwHM3aQ7gsRG83gYLtltQvygf7sinDrI0ygig=;
+        b=eywCjvdz3RDsIuz8doPm8qI97bVJdbfaJ50G/XnQuebE/0Y/jXebnRcPwuEoOjHroG
+         kXpFaYlGBb+SgZklyBjpufn2SyVXM6GB3QN3Yd2cud1OTvhdLcAWrRAWNUGp1okV1w1o
+         I7s99blTG0CEcyIM+h6NwFqJr0D7i+5gmU5IpJDLnqyvOYfVo5qm7pJHn4Ba8J2PDdCr
+         RmHMbOY0HOdg+WLg8wiIHKLLFidlFXPEh5sHcwIsK2qFk1BB8FnYZ5waQnOnyQMW7DyC
+         NWVhI9/Gmk1XxMk3mRKVw55V+DEYUXf1/uv57ehQgYs7JZAGFyjWDVbIxT4ANyoBMk5e
+         FoHQ==
+X-Gm-Message-State: AOAM532bnP3XZf5ErgTKTNvJTw42rckDMbD2oX+J910QHTEZa5qTWYUz
+        VYu7ySDbHs4zNiB4VAQBh1QJIfYXiSdgcQ==
+X-Google-Smtp-Source: ABdhPJzUvZkRTixl6eUZ3sGkwZNGRgkZCOElBS24+pUMC7xIHwFUE/IXk4+4s5nLIfZjS4QOAN71UA==
+X-Received: by 2002:a05:6512:3254:: with SMTP id c20mr795322lfr.161.1603800398815;
+        Tue, 27 Oct 2020 05:06:38 -0700 (PDT)
+Received: from mtpad.corp.uber.com (88-119-96-125.static.zebra.lt. [88.119.96.125])
+        by smtp.gmail.com with ESMTPSA id 9sm154532lft.116.2020.10.27.05.06.37
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 27 Oct 2020 05:06:37 -0700 (PDT)
+From:   =?UTF-8?q?Motiejus=20Jak=C5=A1tys?= <desired.mta@gmail.com>
+To:     netdev@vger.kernel.org, davem@davemloft.net, kuba@kernel.org,
+        linux-doc@vger.kernel.org
+Cc:     trivial@kernel.org,
+        =?UTF-8?q?Motiejus=20Jak=C5=A1tys?= <desired.mta@gmail.com>
+Subject: [PATCH] Documentation: tproxy: more gentle intro
+Date:   Tue, 27 Oct 2020 14:06:20 +0200
+Message-Id: <20201027120620.476066-1-desired.mta@gmail.com>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201027112955.14157-1-rppt@kernel.org>
-References: <20201027112955.14157-1-rppt@kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mike Rapoport <rppt@linux.ibm.com>
+Clarify tproxy odcumentation, so it's easier to read/understand without
+a-priori in-kernel transparent proxying knowledge:
 
-DISCONTIGMEM was intended to provide more efficient support for systems
-with holes in their physical address space that FLATMEM did.
+- re-shuffle the sections, as the "router" section is easier to
+  understand when getting started.
+- add a link to HAProxy page. This is where I learned most about what
+  tproxy is, so I believe it is reasonable to include.
+- removed a reference to linux 2.2.
 
-Yet, it's overhead in terms of the memory consumption seems to overweight
-the savings on the unused memory map.
+Plus Sphinx formatting/cosmetic changes.
 
-For a ARAnyM system with 16 MBytes of FastRAM configured, the memory usage
-reported after page allocator initialization is
-
-Memory: 23828K/30720K available (3206K kernel code, 535K rwdata, 936K rodata, 768K init, 193K bss, 6892K reserved, 0K cma-reserved)
-
-and with DISCONTIGMEM disabled and with relatively large hole in the memory
-map it is:
-
-Memory: 23864K/30720K available (3197K kernel code, 516K rwdata, 936K rodata, 764K init, 179K bss, 6856K reserved, 0K cma-reserved)
-
-Moreover, since m68k already has custom pfn_valid() it is possible to
-define HAVE_ARCH_PFN_VALID to enable freeing of unused memory map. The
-minimal size of a hole that can be freed should not be less than
-MAX_ORDER_NR_PAGES so to achieve more substantial memory savings let m68k
-also define custom FORCE_MAX_ZONEORDER.
-
-With FORCE_MAX_ZONEORDER set to 9 memory usage becomes:
-
-Memory: 23880K/30720K available (3197K kernel code, 516K rwdata, 936K rodata, 764K init, 179K bss, 6840K reserved, 0K cma-reserved)
-
-Signed-off-by: Mike Rapoport <rppt@linux.ibm.com>
+Signed-off-by: Motiejus Jakštys <desired.mta@gmail.com>
 ---
- arch/m68k/Kconfig.cpu | 26 +++++++++++++++++++++++++-
- 1 file changed, 25 insertions(+), 1 deletion(-)
+ Documentation/networking/tproxy.rst | 155 +++++++++++++++-------------
+ 1 file changed, 83 insertions(+), 72 deletions(-)
 
-diff --git a/arch/m68k/Kconfig.cpu b/arch/m68k/Kconfig.cpu
-index 3af0fca03803..763bc80a27aa 100644
---- a/arch/m68k/Kconfig.cpu
-+++ b/arch/m68k/Kconfig.cpu
-@@ -21,6 +21,7 @@ choice
- config M68KCLASSIC
- 	bool "Classic M68K CPU family support"
- 	select NEED_MULTIPLE_NODES if DISCONTIGMEM
-+	select HAVE_ARCH_PFN_VALID if FLATMEM && !SINGLE_MEMORY_CHUNK
+diff --git a/Documentation/networking/tproxy.rst b/Documentation/networking/tproxy.rst
+index 00dc3a1a66b4..0f43159046fb 100644
+--- a/Documentation/networking/tproxy.rst
++++ b/Documentation/networking/tproxy.rst
+@@ -1,42 +1,77 @@
+ .. SPDX-License-Identifier: GPL-2.0
  
- config COLDFIRE
- 	bool "Coldfire CPU family support"
-@@ -378,11 +379,34 @@ config SINGLE_MEMORY_CHUNK
- 	help
- 	  Ignore all but the first contiguous chunk of physical memory for VM
- 	  purposes.  This will save a few bytes kernel size and may speed up
--	  some operations.  Say N if not sure.
-+	  some operations.
-+	  When this option os set to N, you may want to lower "Maximum zone
-+	  order" to save memory that could be wasted for unused memory map.
-+	  Say N if not sure.
+-=========================
+-Transparent proxy support
+-=========================
++==========================
++Transparent proxy (TPROXY)
++==========================
  
- config ARCH_DISCONTIGMEM_ENABLE
-+	depends on BROKEN
- 	def_bool MMU && !SINGLE_MEMORY_CHUNK
+-This feature adds Linux 2.2-like transparent proxy support to current kernels.
+-To use it, enable the socket match and the TPROXY target in your kernel config.
+-You will need policy routing too, so be sure to enable that as well.
++TPROXY enables forwarding and intercepting packets that were destined
++for other destination IPs, without using NAT chain or REDIRECT targets.
  
-+config FORCE_MAX_ZONEORDER
-+	int "Maximum zone order" if ADVANCED
-+	depends on !SINGLE_MEMORY_CHUNK
-+	default "11"
-+	help
-+	  The kernel memory allocator divides physically contiguous memory
-+	  blocks into "zones", where each zone is a power of two number of
-+	  pages.  This option selects the largest power of two that the kernel
-+	  keeps in the memory allocator.  If you need to allocate very large
-+	  blocks of physically contiguous memory, then you may need to
-+	  increase this value.
+-From Linux 4.18 transparent proxy support is also available in nf_tables.
++Redirecting traffic
++===================
+ 
+-1. Making non-local sockets work
+-================================
++TPROXY is often used to "intercept" traffic on a router. This is usually done
++with the iptables ``REDIRECT`` target, however, there are serious limitations:
++it modifies the packets to change the destination address -- which might not be
++acceptable in certain situations, e.g.:
++- UDP: you won't be able to find out the original destination address.
++- TCP: getting the original destination address is racy.
+ 
+-The idea is that you identify packets with destination address matching a local
+-socket on your box, set the packet mark to a certain value::
++The ``TPROXY`` target provides similar functionality without relying on NAT.
++Simply add rules like this to the iptables ruleset above:
+ 
+-    # iptables -t mangle -N DIVERT
+-    # iptables -t mangle -A PREROUTING -p tcp -m socket -j DIVERT
+-    # iptables -t mangle -A DIVERT -j MARK --set-mark 1
+-    # iptables -t mangle -A DIVERT -j ACCEPT
++.. code-block:: sh
+ 
+-Alternatively you can do this in nft with the following commands::
++    iptables -t mangle -A PREROUTING -p tcp --dport 80 -j TPROXY \
++      --tproxy-mark 0x1/0x1 --on-port 50080
 +
-+	  For systems that have holes in their physical address space this
-+	  value also defines the minimal size of the hole that allows
-+	  freeing unused memory map.
++Or the following rule to nft:
 +
-+	  This config option is actually maximum order plus one. For example,
-+	  a value of 11 means that the largest free memory block is 2^10 pages.
++.. code-block:: sh
 +
- config 060_WRITETHROUGH
- 	bool "Use write-through caching for 68060 supervisor accesses"
- 	depends on ADVANCED && M68060
++    nft add rule filter divert tcp dport 80 tproxy to :50080 meta mark set 1 accept
++
++Note that for this to work you'll have to modify the proxy to enable
++(``SOL_IP``, ``IP_TRANSPARENT``) for the listening socket.
++
++As an example implementation, tcprdr is available here:
++https://git.breakpoint.cc/cgit/fw/tcprdr.git/
++This tool is written by Florian Westphal and it was used for testing during the
++nf_tables implementation.
++
++Intercepting non-local packets
++==============================
++
++To identify packets with destination address matching a local socket on your
++box, set the packet mark to a certain value:
++
++.. code-block:: sh
++
++    iptables -t mangle -N DIVERT
++    iptables -t mangle -A PREROUTING -p tcp -m socket -j DIVERT
++    iptables -t mangle -A DIVERT -j MARK --set-mark 1
++    iptables -t mangle -A DIVERT -j ACCEPT
++
++Alternatively in nft:
++
++.. code-block:: sh
++
++    nft add table filter
++    nft add chain filter divert "{ type filter hook prerouting priority -150; }"
++    nft add rule filter divert meta l4proto tcp socket transparent 1 meta mark set 1 accept
+ 
+-    # nft add table filter
+-    # nft add chain filter divert "{ type filter hook prerouting priority -150; }"
+-    # nft add rule filter divert meta l4proto tcp socket transparent 1 meta mark set 1 accept
++Then match on that value using policy routing to deliver those packets locally:
+ 
+-And then match on that value using policy routing to have those packets
+-delivered locally::
++.. code-block:: sh
+ 
+-    # ip rule add fwmark 1 lookup 100
+-    # ip route add local 0.0.0.0/0 dev lo table 100
++    ip rule add fwmark 1 lookup 100
++    ip route add local 0.0.0.0/0 dev lo table 100
+ 
+-Because of certain restrictions in the IPv4 routing output code you'll have to
+-modify your application to allow it to send datagrams _from_ non-local IP
+-addresses. All you have to do is enable the (SOL_IP, IP_TRANSPARENT) socket
+-option before calling bind::
++Because of certain restrictions in the IPv4 routing application will need to be
++modified to allow it to send datagrams *from* non-local IP addresses. Enable
++the ``SOL_IP``, ``IP_TRANSPARENT`` socket options before calling ``bind``:
++
++.. code-block:: c
+ 
+     fd = socket(AF_INET, SOCK_STREAM, 0);
+     /* - 8< -*/
+@@ -51,59 +86,35 @@ option before calling bind::
+ A trivial patch for netcat is available here:
+ http://people.netfilter.org/hidden/tproxy/netcat-ip_transparent-support.patch
+ 
++Kernel configuration
++====================
+ 
+-2. Redirecting traffic
+-======================
+-
+-Transparent proxying often involves "intercepting" traffic on a router. This is
+-usually done with the iptables REDIRECT target; however, there are serious
+-limitations of that method. One of the major issues is that it actually
+-modifies the packets to change the destination address -- which might not be
+-acceptable in certain situations. (Think of proxying UDP for example: you won't
+-be able to find out the original destination address. Even in case of TCP
+-getting the original destination address is racy.)
+-
+-The 'TPROXY' target provides similar functionality without relying on NAT. Simply
+-add rules like this to the iptables ruleset above::
+-
+-    # iptables -t mangle -A PREROUTING -p tcp --dport 80 -j TPROXY \
+-      --tproxy-mark 0x1/0x1 --on-port 50080
+-
+-Or the following rule to nft:
+-
+-# nft add rule filter divert tcp dport 80 tproxy to :50080 meta mark set 1 accept
+-
+-Note that for this to work you'll have to modify the proxy to enable (SOL_IP,
+-IP_TRANSPARENT) for the listening socket.
++To use tproxy you'll need to have the following modules compiled for iptables:
+ 
+-As an example implementation, tcprdr is available here:
+-https://git.breakpoint.cc/cgit/fw/tcprdr.git/
+-This tool is written by Florian Westphal and it was used for testing during the
+-nf_tables implementation.
++ - ``NETFILTER_XT_MATCH_SOCKET``
++ - ``NETFILTER_XT_TARGET_TPROXY``
+ 
+-3. Iptables and nf_tables extensions
+-====================================
++For nf_tables:
+ 
+-To use tproxy you'll need to have the following modules compiled for iptables:
++ - ``NFT_TPROXY``
++ - ``NFT_SOCKET``
+ 
+- - NETFILTER_XT_MATCH_SOCKET
+- - NETFILTER_XT_TARGET_TPROXY
++Application support
++======================
+ 
+-Or the floowing modules for nf_tables:
++Squid
++-----
+ 
+- - NFT_SOCKET
+- - NFT_TPROXY
++Squid 3.1+ has built-in support for TPROXY. To use it, pass
++``--enable-linux-netfilter`` to configure and set the 'tproxy' option on the
++HTTP listener you redirect traffic to with the TPROXY iptables target.
+ 
+-4. Application support
+-======================
++For more information please consult the `Squid wiki`_.
+ 
+-4.1. Squid
+-----------
++HAproxy
++-------
+ 
+-Squid 3.HEAD has support built-in. To use it, pass
+-'--enable-linux-netfilter' to configure and set the 'tproxy' option on
+-the HTTP listener you redirect traffic to with the TPROXY iptables
+-target.
++Documented in `Haproxy blog`_.
+ 
+-For more information please consult the following page on the Squid
+-wiki: http://wiki.squid-cache.org/Features/Tproxy4
++.. _`Squid wiki`: http://wiki.squid-cache.org/Features/Tproxy4
++.. _`HAproxy blog`: https://www.haproxy.com/blog/howto-transparent-proxying-and-binding-with-haproxy-and-aloha-load-balancer/
+
+base-commit: 4525c8781ec0701ce824e8bd379ae1b129e26568
 -- 
 2.28.0
 
