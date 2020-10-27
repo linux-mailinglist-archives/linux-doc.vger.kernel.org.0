@@ -2,84 +2,227 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 654A929C6DF
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 19:28:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7E2E529C9F2
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 21:14:07 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1827456AbgJ0SYd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Oct 2020 14:24:33 -0400
-Received: from mail-oo1-f65.google.com ([209.85.161.65]:45621 "EHLO
-        mail-oo1-f65.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1827330AbgJ0SYc (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Oct 2020 14:24:32 -0400
-Received: by mail-oo1-f65.google.com with SMTP id j41so463141oof.12;
-        Tue, 27 Oct 2020 11:24:31 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=JK/7DVUQkZfUgaeA5ixT5hPkE29Eu8FLcSkV/JAkh7A=;
-        b=gE9EPrdKHu3GonDGsmfVfCi8Y5gRB4Qsn09KA7PVwLUuwQIGi17BBNpWEZAlrFymnr
-         zsz//YwI8PE5R+i4K8r3JmxR83dRMW9eL31/ej19aajYhuu9TBt0bNJn4nM+7fVX7PJX
-         84XBCxRAn1oUBgU+i4EPsMapu5eMxbcfSSZJHDfXL9I7fYm2ioG+bvr0LodNJWgcuJAe
-         QhGCovJbtN2wfNVYmXwwx7OP+6jDo6Ap8HieDUaTaYw+N0cWcCMurq5qFvGWWK5jkF4U
-         HsjW/O9kwci0XpkZ6wrQ7pmRvyS9RKqhL5uc9eFzFXtMhR6rSR+dnY9zyT+LmWpY+8CQ
-         EOmg==
-X-Gm-Message-State: AOAM531EQK3d8ZxdQTW3FT/Tm7AmoOf10t+MfuTHXv0cxAV9UTYlxUsD
-        CjBJsM4qdZ3Bnwa5+0empXwftHoH8sivGSLsz5Q=
-X-Google-Smtp-Source: ABdhPJztV7IBCmVLmFevDpdsKnKPMUOF8vFqYsOXZ2vQQC8OeuUIRS2fgbc8VMXrKYJP1sSr5PRI+JF7z7eQrp0KPX4=
-X-Received: by 2002:a4a:dc0d:: with SMTP id p13mr2747758oov.2.1603823071429;
- Tue, 27 Oct 2020 11:24:31 -0700 (PDT)
-MIME-Version: 1.0
-References: <cover.1603469755.git.mchehab+huawei@kernel.org> <1e3d69e0890a36303f4c804ae9c523df9f098d6a.1603469755.git.mchehab+huawei@kernel.org>
-In-Reply-To: <1e3d69e0890a36303f4c804ae9c523df9f098d6a.1603469755.git.mchehab+huawei@kernel.org>
-From:   "Rafael J. Wysocki" <rafael@kernel.org>
-Date:   Tue, 27 Oct 2020 19:24:20 +0100
-Message-ID: <CAJZ5v0jDbSMVJHeCn1tkTp8jjUP8PS1F7HCGPtTbaZKG+PFpTg@mail.gmail.com>
-Subject: Re: [PATCH v3 24/56] PNP: fix kernel-doc markups
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        id S1831035AbgJ0UOG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Oct 2020 16:14:06 -0400
+Received: from smtp-8fac.mail.infomaniak.ch ([83.166.143.172]:33159 "EHLO
+        smtp-8fac.mail.infomaniak.ch" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1830999AbgJ0UN4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Oct 2020 16:13:56 -0400
+Received: from smtp-2-0001.mail.infomaniak.ch (unknown [10.5.36.108])
+        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4CLN2D3JyWzlhDBh;
+        Tue, 27 Oct 2020 21:04:04 +0100 (CET)
+Received: from localhost (unknown [94.23.54.103])
+        by smtp-2-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4CLN2C0G0vzlh8TF;
+        Tue, 27 Oct 2020 21:04:02 +0100 (CET)
+From:   =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
+To:     James Morris <jmorris@namei.org>,
+        "Serge E . Hallyn" <serge@hallyn.com>
+Cc:     =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Casey Schaufler <casey@schaufler-ca.com>,
+        Jann Horn <jannh@google.com>, Jeff Dike <jdike@addtoit.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
-        ACPI Devel Maling List <linux-acpi@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+        Kees Cook <keescook@chromium.org>,
+        Michael Kerrisk <mtk.manpages@gmail.com>,
+        Richard Weinberger <richard@nod.at>,
+        Shuah Khan <shuah@kernel.org>,
+        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
+        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        linux-security-module@vger.kernel.org, x86@kernel.org
+Subject: [PATCH v22 00/12] Landlock LSM
+Date:   Tue, 27 Oct 2020 21:03:46 +0100
+Message-Id: <20201027200358.557003-1-mic@digikod.net>
+X-Mailer: git-send-email 2.28.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 23, 2020 at 6:38 PM Mauro Carvalho Chehab
-<mchehab+huawei@kernel.org> wrote:
->
-> It sounds that there were function renames. Update the kernel-doc
-> markups accordingly.
->
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->  drivers/pnp/core.c | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/drivers/pnp/core.c b/drivers/pnp/core.c
-> index 3bf18d718975..a50ab002e9e4 100644
-> --- a/drivers/pnp/core.c
-> +++ b/drivers/pnp/core.c
-> @@ -51,7 +51,7 @@ static void pnp_remove_protocol(struct pnp_protocol *protocol)
->  }
->
->  /**
-> - * pnp_protocol_register - adds a pnp protocol to the pnp layer
-> + * pnp_register_protocol - adds a pnp protocol to the pnp layer
->   * @protocol: pointer to the corresponding pnp_protocol structure
->   *
->   *  Ex protocols: ISAPNP, PNPBIOS, etc
-> @@ -91,7 +91,7 @@ int pnp_register_protocol(struct pnp_protocol *protocol)
->  }
->
->  /**
-> - * pnp_protocol_unregister - removes a pnp protocol from the pnp layer
-> + * pnp_unregister_protocol - removes a pnp protocol from the pnp layer
->   * @protocol: pointer to the corresponding pnp_protocol structure
->   */
->  void pnp_unregister_protocol(struct pnp_protocol *protocol)
-> --
+Hi,
 
-Applied as 5.10-rc material, thanks!
+Can you please consider to merge this into the tree?
+
+This new patch series improves documentation, cleans up comments,
+renames ARCH_EPHEMERAL_STATES to ARCH_EPHEMERAL_INODES and removes
+LANDLOCK_ACCESS_FS_CHROOT.
+
+The SLOC count is 1183 for security/landlock/ and 1657 for
+tools/testing/selftest/landlock/ .  Test coverage for security/landlock/
+is 95.2% of lines.  The code not covered only deals with internal kernel
+errors (e.g. memory allocation) and race conditions.
+
+The compiled documentation is available here:
+https://landlock.io/linux-doc/landlock-v22/userspace-api/landlock.html
+
+This series can be applied on top of v5.10-rc1 .  This can be tested with
+CONFIG_SECURITY_LANDLOCK and CONFIG_SAMPLE_LANDLOCK.  This patch series
+can be found in a Git repository here:
+https://github.com/landlock-lsm/linux/commits/landlock-v22
+I would really appreciate constructive comments on this patch series.
+
+
+# Landlock LSM
+
+The goal of Landlock is to enable to restrict ambient rights (e.g.
+global filesystem access) for a set of processes.  Because Landlock is a
+stackable LSM [1], it makes possible to create safe security sandboxes
+as new security layers in addition to the existing system-wide
+access-controls. This kind of sandbox is expected to help mitigate the
+security impact of bugs or unexpected/malicious behaviors in user-space
+applications. Landlock empowers any process, including unprivileged
+ones, to securely restrict themselves.
+
+Landlock is inspired by seccomp-bpf but instead of filtering syscalls
+and their raw arguments, a Landlock rule can restrict the use of kernel
+objects like file hierarchies, according to the kernel semantic.
+Landlock also takes inspiration from other OS sandbox mechanisms: XNU
+Sandbox, FreeBSD Capsicum or OpenBSD Pledge/Unveil.
+
+In this current form, Landlock misses some access-control features.
+This enables to minimize this patch series and ease review.  This series
+still addresses multiple use cases, especially with the combined use of
+seccomp-bpf: applications with built-in sandboxing, init systems,
+security sandbox tools and security-oriented APIs [2].
+
+Previous version:
+https://lore.kernel.org/lkml/20201008153103.1155388-1-mic@digikod.net/
+
+[1] https://lore.kernel.org/lkml/50db058a-7dde-441b-a7f9-f6837fe8b69f@schaufler-ca.com/
+[2] https://lore.kernel.org/lkml/f646e1c7-33cf-333f-070c-0a40ad0468cd@digikod.net/
+
+
+Casey Schaufler (1):
+  LSM: Infrastructure management of the superblock
+
+Mickaël Salaün (11):
+  landlock: Add object management
+  landlock: Add ruleset and domain management
+  landlock: Set up the security framework and manage credentials
+  landlock: Add ptrace restrictions
+  fs,security: Add sb_delete hook
+  landlock: Support filesystem access-control
+  landlock: Add syscall implementations
+  arch: Wire up Landlock syscalls
+  selftests/landlock: Add user space tests
+  samples/landlock: Add a sandbox manager example
+  landlock: Add user and kernel documentation
+
+ Documentation/security/index.rst              |    1 +
+ Documentation/security/landlock.rst           |   79 +
+ Documentation/userspace-api/index.rst         |    1 +
+ Documentation/userspace-api/landlock.rst      |  259 +++
+ MAINTAINERS                                   |   13 +
+ arch/Kconfig                                  |    7 +
+ arch/alpha/kernel/syscalls/syscall.tbl        |    3 +
+ arch/arm/tools/syscall.tbl                    |    3 +
+ arch/arm64/include/asm/unistd.h               |    2 +-
+ arch/arm64/include/asm/unistd32.h             |    6 +
+ arch/ia64/kernel/syscalls/syscall.tbl         |    3 +
+ arch/m68k/kernel/syscalls/syscall.tbl         |    3 +
+ arch/microblaze/kernel/syscalls/syscall.tbl   |    3 +
+ arch/mips/kernel/syscalls/syscall_n32.tbl     |    3 +
+ arch/mips/kernel/syscalls/syscall_n64.tbl     |    3 +
+ arch/mips/kernel/syscalls/syscall_o32.tbl     |    3 +
+ arch/parisc/kernel/syscalls/syscall.tbl       |    3 +
+ arch/powerpc/kernel/syscalls/syscall.tbl      |    3 +
+ arch/s390/kernel/syscalls/syscall.tbl         |    3 +
+ arch/sh/kernel/syscalls/syscall.tbl           |    3 +
+ arch/sparc/kernel/syscalls/syscall.tbl        |    3 +
+ arch/um/Kconfig                               |    1 +
+ arch/x86/entry/syscalls/syscall_32.tbl        |    3 +
+ arch/x86/entry/syscalls/syscall_64.tbl        |    3 +
+ arch/xtensa/kernel/syscalls/syscall.tbl       |    3 +
+ fs/super.c                                    |    1 +
+ include/linux/lsm_hook_defs.h                 |    1 +
+ include/linux/lsm_hooks.h                     |    3 +
+ include/linux/security.h                      |    4 +
+ include/linux/syscalls.h                      |    7 +
+ include/uapi/asm-generic/unistd.h             |    8 +-
+ include/uapi/linux/landlock.h                 |  128 ++
+ kernel/sys_ni.c                               |    5 +
+ samples/Kconfig                               |    7 +
+ samples/Makefile                              |    1 +
+ samples/landlock/.gitignore                   |    1 +
+ samples/landlock/Makefile                     |   15 +
+ samples/landlock/sandboxer.c                  |  219 +++
+ security/Kconfig                              |   11 +-
+ security/Makefile                             |    2 +
+ security/landlock/Kconfig                     |   19 +
+ security/landlock/Makefile                    |    4 +
+ security/landlock/common.h                    |   20 +
+ security/landlock/cred.c                      |   46 +
+ security/landlock/cred.h                      |   58 +
+ security/landlock/fs.c                        |  604 ++++++
+ security/landlock/fs.h                        |   60 +
+ security/landlock/object.c                    |   66 +
+ security/landlock/object.h                    |   91 +
+ security/landlock/ptrace.c                    |  120 ++
+ security/landlock/ptrace.h                    |   14 +
+ security/landlock/ruleset.c                   |  350 ++++
+ security/landlock/ruleset.h                   |  157 ++
+ security/landlock/setup.c                     |   40 +
+ security/landlock/setup.h                     |   18 +
+ security/landlock/syscall.c                   |  427 +++++
+ security/security.c                           |   51 +-
+ security/selinux/hooks.c                      |   58 +-
+ security/selinux/include/objsec.h             |    6 +
+ security/selinux/ss/services.c                |    3 +-
+ security/smack/smack.h                        |    6 +
+ security/smack/smack_lsm.c                    |   35 +-
+ tools/testing/selftests/Makefile              |    1 +
+ tools/testing/selftests/landlock/.gitignore   |    2 +
+ tools/testing/selftests/landlock/Makefile     |   24 +
+ tools/testing/selftests/landlock/base_test.c  |  117 ++
+ tools/testing/selftests/landlock/common.h     |  113 ++
+ tools/testing/selftests/landlock/config       |    5 +
+ tools/testing/selftests/landlock/fs_test.c    | 1675 +++++++++++++++++
+ .../testing/selftests/landlock/ptrace_test.c  |  307 +++
+ tools/testing/selftests/landlock/true.c       |    5 +
+ 71 files changed, 5255 insertions(+), 77 deletions(-)
+ create mode 100644 Documentation/security/landlock.rst
+ create mode 100644 Documentation/userspace-api/landlock.rst
+ create mode 100644 include/uapi/linux/landlock.h
+ create mode 100644 samples/landlock/.gitignore
+ create mode 100644 samples/landlock/Makefile
+ create mode 100644 samples/landlock/sandboxer.c
+ create mode 100644 security/landlock/Kconfig
+ create mode 100644 security/landlock/Makefile
+ create mode 100644 security/landlock/common.h
+ create mode 100644 security/landlock/cred.c
+ create mode 100644 security/landlock/cred.h
+ create mode 100644 security/landlock/fs.c
+ create mode 100644 security/landlock/fs.h
+ create mode 100644 security/landlock/object.c
+ create mode 100644 security/landlock/object.h
+ create mode 100644 security/landlock/ptrace.c
+ create mode 100644 security/landlock/ptrace.h
+ create mode 100644 security/landlock/ruleset.c
+ create mode 100644 security/landlock/ruleset.h
+ create mode 100644 security/landlock/setup.c
+ create mode 100644 security/landlock/setup.h
+ create mode 100644 security/landlock/syscall.c
+ create mode 100644 tools/testing/selftests/landlock/.gitignore
+ create mode 100644 tools/testing/selftests/landlock/Makefile
+ create mode 100644 tools/testing/selftests/landlock/base_test.c
+ create mode 100644 tools/testing/selftests/landlock/common.h
+ create mode 100644 tools/testing/selftests/landlock/config
+ create mode 100644 tools/testing/selftests/landlock/fs_test.c
+ create mode 100644 tools/testing/selftests/landlock/ptrace_test.c
+ create mode 100644 tools/testing/selftests/landlock/true.c
+
+
+base-commit: 3650b228f83adda7e5ee532e2b90429c03f7b9ec
+-- 
+2.28.0
+
