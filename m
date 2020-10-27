@@ -2,112 +2,211 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8BF0E29C02C
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 18:12:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 719BB29C480
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 19:07:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1817018AbgJ0RMQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Oct 2020 13:12:16 -0400
-Received: from mga07.intel.com ([134.134.136.100]:40472 "EHLO mga07.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1786275AbgJ0RMN (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 27 Oct 2020 13:12:13 -0400
-IronPort-SDR: TkVPNnlHh87Qmna1IG0JUXndEZBmXEqMKIKmwG11ESwyskO78nt8bIkvsd1qQqB+YjwM//nYaq
- 29qBgTDmcDzg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9787"; a="232310100"
-X-IronPort-AV: E=Sophos;i="5.77,424,1596524400"; 
-   d="scan'208";a="232310100"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2020 10:12:11 -0700
-IronPort-SDR: HXsMrvAkjPUr8QiYpDno6fpZ8tfqF1mxLHLXQH6Xn3teK+iOteaHRF5Fr8kcllVbacPe5rOquO
- BlWKPwfFKDNw==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.77,424,1596524400"; 
-   d="scan'208";a="350662076"
-Received: from marshy.an.intel.com (HELO [10.122.105.159]) ([10.122.105.159])
-  by fmsmga004.fm.intel.com with ESMTP; 27 Oct 2020 10:12:11 -0700
-Subject: Re: [PATCH v3 40/56] firmware: stratix10-svc: fix kernel-doc markups
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org
-References: <cover.1603469755.git.mchehab+huawei@kernel.org>
- <f417f0605346b2d72b1a7f5b3989c9aca29729df.1603469755.git.mchehab+huawei@kernel.org>
-From:   Richard Gong <richard.gong@linux.intel.com>
-Message-ID: <42c3c7bf-bbdb-cba8-af58-37fb3637f443@linux.intel.com>
-Date:   Tue, 27 Oct 2020 12:31:12 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
-MIME-Version: 1.0
-In-Reply-To: <f417f0605346b2d72b1a7f5b3989c9aca29729df.1603469755.git.mchehab+huawei@kernel.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+        id S1757189AbgJ0OQj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Oct 2020 10:16:39 -0400
+Received: from mail-qt1-f201.google.com ([209.85.160.201]:34681 "EHLO
+        mail-qt1-f201.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1757179AbgJ0OQi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Oct 2020 10:16:38 -0400
+Received: by mail-qt1-f201.google.com with SMTP id i39so833742qtb.1
+        for <linux-doc@vger.kernel.org>; Tue, 27 Oct 2020 07:16:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=sender:date:message-id:mime-version:subject:from:to:cc;
+        bh=OIhtJmQn8cPhTYAMUsg4K5Bpc/At3M+CZmjJH0wJYj0=;
+        b=swqC9CC50SvTwnu1p+NAEDUkfC9DTlBcJNPL6hdrqHkHXUlyAUE5Vht1e0smkxqH4D
+         /0HZD6e4s1ZRQYVNH7Tx08omITR3CywUlxhYtKryxWjlHTxZ3N11mcSfiuLpn+co7mMh
+         PKADunsWulz/DMZ685eoabCdusjZjOsaUkV1te8xrH5clsKVDy2M1SJqM/JUT5YQPnjy
+         GB3G/Gfh3jgc0zezL0jZZ68W2hjiFmAU0jvZwM4VdvD60Yr8LMU9XnyjtCAIduXJysWD
+         RHkhzeAPh4CR76dqhU5m502SyrspBlNwaLXH6EqCV1RJTAyAcqXJYhwQG5A05DLFfpWj
+         wciw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:message-id:mime-version:subject:from
+         :to:cc;
+        bh=OIhtJmQn8cPhTYAMUsg4K5Bpc/At3M+CZmjJH0wJYj0=;
+        b=uPM4YZKFDVlWi1scTvyqyHywn5PGI3rfY523nPz73ul/9YbkVANstiX/E4y6A02Q9q
+         EsU+E/pj3bBGIOXtIeM2ZdFSQ1E0YonqZR39uosaMqh/VRCw/dZYi/pz17FBduFNhm9U
+         3LqI37/0rTDgjbTQceKKiHLbXXSrqLLFGlxx6w02xLftRGsGb85951KizS5lfqmTGZK+
+         sZk2Vz3Mf4ffdIVN/iAQ0Wvty55conoKpd+s75sHG3UcMgJlCLNDbjOr+e3PK6cXk34W
+         bax1xOC7DExykjuHmFVge0QIozQnOKCt6e0rKN2z6EH4JfsW8WX+9tFLiiw7GakHT9z3
+         jWvA==
+X-Gm-Message-State: AOAM5321ScvsK+Kw4yEbDkPYnW8deyC4+cpwirjbCxhwZPmCz/jyiFpy
+        wPI9Q/8cSC7LSeTsrJpPC/scevQXaA==
+X-Google-Smtp-Source: ABdhPJxPqYmqxq3HpEgVPCM1Ayd8D9b+wgHFlJYApQIK5Kr+4fRK+eo3YA4xPHQzdYQGSVlyWYBlOyoJTA==
+Sender: "elver via sendgmr" <elver@elver.muc.corp.google.com>
+X-Received: from elver.muc.corp.google.com ([2a00:79e0:15:13:f693:9fff:fef4:2449])
+ (user=elver job=sendgmr) by 2002:a0c:fa91:: with SMTP id o17mr2582669qvn.49.1603808196014;
+ Tue, 27 Oct 2020 07:16:36 -0700 (PDT)
+Date:   Tue, 27 Oct 2020 15:15:57 +0100
+Message-Id: <20201027141606.426816-1-elver@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.29.0.rc2.309.g374f81d7ae-goog
+Subject: [PATCH v5 0/9] KFENCE: A low-overhead sampling-based memory safety
+ error detector
+From:   Marco Elver <elver@google.com>
+To:     elver@google.com, akpm@linux-foundation.org, glider@google.com
+Cc:     hpa@zytor.com, paulmck@kernel.org, andreyknvl@google.com,
+        aryabinin@virtuozzo.com, luto@kernel.org, bp@alien8.de,
+        catalin.marinas@arm.com, cl@linux.com, dave.hansen@linux.intel.com,
+        rientjes@google.com, dvyukov@google.com, edumazet@google.com,
+        gregkh@linuxfoundation.org, hdanton@sina.com, mingo@redhat.com,
+        jannh@google.com, Jonathan.Cameron@huawei.com, corbet@lwn.net,
+        iamjoonsoo.kim@lge.com, joern@purestorage.com,
+        keescook@chromium.org, mark.rutland@arm.com, penberg@kernel.org,
+        peterz@infradead.org, sjpark@amazon.com, tglx@linutronix.de,
+        vbabka@suse.cz, will@kernel.org, x86@kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        kasan-dev@googlegroups.com, linux-arm-kernel@lists.infradead.org,
+        linux-mm@kvack.org
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Acked-by: Richard Gong <richard.gong@linux.intel.com>
+This adds the Kernel Electric-Fence (KFENCE) infrastructure. KFENCE is a
+low-overhead sampling-based memory safety error detector of heap
+use-after-free, invalid-free, and out-of-bounds access errors.  This
+series enables KFENCE for the x86 and arm64 architectures, and adds
+KFENCE hooks to the SLAB and SLUB allocators.
 
-On 10/23/20 11:33 AM, Mauro Carvalho Chehab wrote:
-> There are some common comments marked, instead, with kernel-doc
-> notation, which won't work.
-> 
-> While here, rename an identifier, in order to match the
-> function prototype below kernel-doc markup.
-> 
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->   include/linux/firmware/intel/stratix10-svc-client.h | 10 +++++-----
->   1 file changed, 5 insertions(+), 5 deletions(-)
-> 
-> diff --git a/include/linux/firmware/intel/stratix10-svc-client.h b/include/linux/firmware/intel/stratix10-svc-client.h
-> index a93d85932eb9..ebc295647581 100644
-> --- a/include/linux/firmware/intel/stratix10-svc-client.h
-> +++ b/include/linux/firmware/intel/stratix10-svc-client.h
-> @@ -6,7 +6,7 @@
->   #ifndef __STRATIX10_SVC_CLIENT_H
->   #define __STRATIX10_SVC_CLIENT_H
->   
-> -/**
-> +/*
->    * Service layer driver supports client names
->    *
->    * fpga: for FPGA configuration
-> @@ -15,7 +15,7 @@
->   #define SVC_CLIENT_FPGA			"fpga"
->   #define SVC_CLIENT_RSU			"rsu"
->   
-> -/**
-> +/*
->    * Status of the sent command, in bit number
->    *
->    * SVC_STATUS_OK:
-> @@ -50,7 +50,7 @@
->   #define SVC_STATUS_ERROR		5
->   #define SVC_STATUS_NO_SUPPORT		6
->   
-> -/**
-> +/*
->    * Flag bit for COMMAND_RECONFIG
->    *
->    * COMMAND_RECONFIG_FLAG_PARTIAL:
-> @@ -58,7 +58,7 @@
->    */
->   #define COMMAND_RECONFIG_FLAG_PARTIAL	1
->   
-> -/**
-> +/*
->    * Timeout settings for service clients:
->    * timeout value used in Stratix10 FPGA manager driver.
->    * timeout value used in RSU driver
-> @@ -218,7 +218,7 @@ void stratix10_svc_free_memory(struct stratix10_svc_chan *chan, void *kaddr);
->   int stratix10_svc_send(struct stratix10_svc_chan *chan, void *msg);
->   
->   /**
-> - * intel_svc_done() - complete service request
-> + * stratix10_svc_done() - complete service request
->    * @chan: service channel assigned to the client
->    *
->    * This function is used by service client to inform service layer that
-> 
+KFENCE is designed to be enabled in production kernels, and has near
+zero performance overhead. Compared to KASAN, KFENCE trades performance
+for precision. The main motivation behind KFENCE's design, is that with
+enough total uptime KFENCE will detect bugs in code paths not typically
+exercised by non-production test workloads. One way to quickly achieve a
+large enough total uptime is when the tool is deployed across a large
+fleet of machines.
+
+KFENCE objects each reside on a dedicated page, at either the left or
+right page boundaries. The pages to the left and right of the object
+page are "guard pages", whose attributes are changed to a protected
+state, and cause page faults on any attempted access to them. Such page
+faults are then intercepted by KFENCE, which handles the fault
+gracefully by reporting a memory access error.
+
+Guarded allocations are set up based on a sample interval (can be set
+via kfence.sample_interval). After expiration of the sample interval,
+the next allocation through the main allocator (SLAB or SLUB) returns a
+guarded allocation from the KFENCE object pool. At this point, the timer
+is reset, and the next allocation is set up after the expiration of the
+interval.
+
+To enable/disable a KFENCE allocation through the main allocator's
+fast-path without overhead, KFENCE relies on static branches via the
+static keys infrastructure. The static branch is toggled to redirect the
+allocation to KFENCE.
+
+The KFENCE memory pool is of fixed size, and if the pool is exhausted no
+further KFENCE allocations occur. The default config is conservative
+with only 255 objects, resulting in a pool size of 2 MiB (with 4 KiB
+pages).
+
+We have verified by running synthetic benchmarks (sysbench I/O,
+hackbench) that a kernel with KFENCE is performance-neutral compared to
+a non-KFENCE baseline kernel.
+
+KFENCE is inspired by GWP-ASan [1], a userspace tool with similar
+properties. The name "KFENCE" is a homage to the Electric Fence Malloc
+Debugger [2].
+
+For more details, see Documentation/dev-tools/kfence.rst added in the
+series -- also viewable here:
+
+	https://raw.githubusercontent.com/google/kasan/kfence/Documentation/dev-tools/kfence.rst
+
+[1] http://llvm.org/docs/GwpAsan.html
+[2] https://linux.die.net/man/3/efence
+
+v5:
+* Lots of smaller fixes (see details in patches).
+* Optimize is_kfence_address() by using better in-range check.
+* Removal of HAVE_ARCH_KFENCE_STATIC_POOL and static pool
+  support in favor of memblock_alloc'd pool only, as it avoids all
+  issues with virt_to translations. With the new optimizations to
+  is_kfence_address(), we measure no noticeable performance impact.
+* Taint with TAINT_BAD_PAGE, to distinguish memory errors from regular
+  warnings (also used by SL*B/KASAN/etc. for memory errors).
+* Rework sample_interval parameter dynamic setting semantics.
+* Rework kfence_shutdown_cache().
+* Fix obj_to_index+objs_per_slab_page, which among other things is
+  required when using memcg accounted allocations.
+* Rebase to 5.10-rc1.
+
+v4: https://lkml.kernel.org/r/20200929133814.2834621-1-elver@google.com
+* MAINTAINERS: Split out from first patch.
+* Make static memory pool's attrs entirely arch-dependent.
+* Fix report generation if __slab_free tail-called.
+* Clarify RCU test comment [reported by Paul E. McKenney].
+
+v3: https://lkml.kernel.org/r/20200921132611.1700350-1-elver@google.com
+* Rewrite SLAB/SLUB patch descriptions to clarify need for 'orig_size'.
+* Various smaller fixes (see details in patches).
+
+v2: https://lkml.kernel.org/r/20200915132046.3332537-1-elver@google.com
+* Various comment/documentation changes (see details in patches).
+* Various smaller fixes (see details in patches).
+* Change all reports to reference the kfence object, "kfence-#nn".
+* Skip allocation/free internals stack trace.
+* Rework KMEMLEAK compatibility patch.
+
+RFC/v1: https://lkml.kernel.org/r/20200907134055.2878499-1-elver@google.com
+
+Alexander Potapenko (5):
+  mm: add Kernel Electric-Fence infrastructure
+  x86, kfence: enable KFENCE for x86
+  mm, kfence: insert KFENCE hooks for SLAB
+  mm, kfence: insert KFENCE hooks for SLUB
+  kfence, kasan: make KFENCE compatible with KASAN
+
+Marco Elver (4):
+  arm64, kfence: enable KFENCE for ARM64
+  kfence, Documentation: add KFENCE documentation
+  kfence: add test suite
+  MAINTAINERS: Add entry for KFENCE
+
+ Documentation/dev-tools/index.rst  |   1 +
+ Documentation/dev-tools/kfence.rst | 291 ++++++++++
+ MAINTAINERS                        |  11 +
+ arch/arm64/Kconfig                 |   1 +
+ arch/arm64/include/asm/kfence.h    |  19 +
+ arch/arm64/mm/fault.c              |   4 +
+ arch/arm64/mm/mmu.c                |   7 +-
+ arch/x86/Kconfig                   |   1 +
+ arch/x86/include/asm/kfence.h      |  65 +++
+ arch/x86/mm/fault.c                |   4 +
+ include/linux/kfence.h             | 191 +++++++
+ include/linux/slab_def.h           |   3 +
+ include/linux/slub_def.h           |   3 +
+ init/main.c                        |   3 +
+ lib/Kconfig.debug                  |   1 +
+ lib/Kconfig.kfence                 |  73 +++
+ mm/Makefile                        |   1 +
+ mm/kasan/common.c                  |  15 +
+ mm/kasan/generic.c                 |   3 +-
+ mm/kfence/Makefile                 |   6 +
+ mm/kfence/core.c                   | 823 +++++++++++++++++++++++++++++
+ mm/kfence/kfence.h                 | 102 ++++
+ mm/kfence/kfence_test.c            | 822 ++++++++++++++++++++++++++++
+ mm/kfence/report.c                 | 236 +++++++++
+ mm/slab.c                          |  37 +-
+ mm/slab_common.c                   |   5 +-
+ mm/slub.c                          |  72 ++-
+ 27 files changed, 2769 insertions(+), 31 deletions(-)
+ create mode 100644 Documentation/dev-tools/kfence.rst
+ create mode 100644 arch/arm64/include/asm/kfence.h
+ create mode 100644 arch/x86/include/asm/kfence.h
+ create mode 100644 include/linux/kfence.h
+ create mode 100644 lib/Kconfig.kfence
+ create mode 100644 mm/kfence/Makefile
+ create mode 100644 mm/kfence/core.c
+ create mode 100644 mm/kfence/kfence.h
+ create mode 100644 mm/kfence/kfence_test.c
+ create mode 100644 mm/kfence/report.c
+
+-- 
+2.29.0.rc2.309.g374f81d7ae-goog
+
