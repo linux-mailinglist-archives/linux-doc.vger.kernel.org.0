@@ -2,27 +2,27 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6C82129AAED
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 12:31:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C2B9429AAB9
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Oct 2020 12:31:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1749959AbgJ0LaH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Oct 2020 07:30:07 -0400
-Received: from mail.kernel.org ([198.145.29.99]:45136 "EHLO mail.kernel.org"
+        id S1750005AbgJ0Lag (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Oct 2020 07:30:36 -0400
+Received: from mail.kernel.org ([198.145.29.99]:45620 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2438783AbgJ0LaH (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 27 Oct 2020 07:30:07 -0400
+        id S1749993AbgJ0Lae (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 27 Oct 2020 07:30:34 -0400
 Received: from aquarius.haifa.ibm.com (nesher1.haifa.il.ibm.com [195.110.40.7])
         (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id BFD8B2072D;
-        Tue, 27 Oct 2020 11:29:59 +0000 (UTC)
+        by mail.kernel.org (Postfix) with ESMTPSA id 03F2122283;
+        Tue, 27 Oct 2020 11:30:26 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1603798206;
-        bh=D+57eBxZmqbGtpUmyagmHDBw1nHF2DKjanAqVX/AUkU=;
-        h=From:To:Cc:Subject:Date:From;
-        b=Q9RaU3X/IJD/4dR3n3h9Ry46q2+Cd8ehNOxEB9JeoN0lGPicebs+j0qlAtlVAlW8F
-         F0vBvYTqv4GdHlkIa6G/HY/NJCiv0uBzWYkm4yxUz82hTQedsGnDaIAnFDeQrWUA7f
-         J4FEjdA0fGYuRF4Pc52GN10CIYKMe57/A5m9zfC0=
+        s=default; t=1603798233;
+        bh=UfaD/WmylipAS87Fv242yQHFr5+l5RhyHEWJxMmp2r8=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=AZ3uGKlwmDzw01MtfzRYyVNFCrBHcj9hNEcpMvUBfVE6GXyYWgRs8+pNMO0tSpZ5n
+         oKhgEP2eGtZrAXR4Jr+NuG5k7tt55ZwBXPkLdsRajrq8dYk0EnHYeNA20jabsK6JID
+         37xeaYZ4dJneHg8tW/gL3ZpBIbtl8c+S6BeyS9O0=
 From:   Mike Rapoport <rppt@kernel.org>
 To:     Andrew Morton <akpm@linux-foundation.org>
 Cc:     Alexey Dobriyan <adobriyan@gmail.com>,
@@ -43,10 +43,12 @@ Cc:     Alexey Dobriyan <adobriyan@gmail.com>,
         linux-fsdevel@vger.kernel.org, linux-ia64@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-m68k@lists.linux-m68k.org,
         linux-mm@kvack.org, linux-snps-arc@lists.infradead.org
-Subject: [PATCH 00/13] arch, mm: deprecate DISCONTIGMEM
-Date:   Tue, 27 Oct 2020 13:29:42 +0200
-Message-Id: <20201027112955.14157-1-rppt@kernel.org>
+Subject: [PATCH 04/13] ia64: discontig: paging_init(): remove local max_pfn calculation
+Date:   Tue, 27 Oct 2020 13:29:46 +0200
+Message-Id: <20201027112955.14157-5-rppt@kernel.org>
 X-Mailer: git-send-email 2.28.0
+In-Reply-To: <20201027112955.14157-1-rppt@kernel.org>
+References: <20201027112955.14157-1-rppt@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
@@ -55,89 +57,44 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Mike Rapoport <rppt@linux.ibm.com>
 
-Hi,
+The maximal PFN in the system is calculated during find_memory() time and
+it is stored at max_low_pfn then.
 
-It's been a while since DISCONTIGMEM is generally considered deprecated,
-but it is still used by four architectures. This set replaces DISCONTIGMEM
-with a different way to handle holes in the memory map and marks
-DISCONTIGMEM configuration as BROKEN in Kconfigs of these architectures with
-the intention to completely remove it in several releases.
+Use this value in paging_init() and remove the redundant detection of
+max_pfn in that function.
 
-While for 64-bit alpha and ia64 the switch to SPARSEMEM is quite obvious
-and was a matter of moving some bits around, for smaller 32-bit arc and
-m68k SPARSEMEM is not necessarily the best thing to do.
+Signed-off-by: Mike Rapoport <rppt@linux.ibm.com>
+---
+ arch/ia64/mm/discontig.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
 
-On 32-bit machines SPARSEMEM would require large sections to make section
-index fit in the page flags, but larger sections mean that more memory is
-wasted for unused memory map.
-
-Besides, pfn_to_page() and page_to_pfn() become less efficient, at least on
-arc.
-
-So I've decided to generalize arm's approach for freeing of unused parts of
-the memory map with FLATMEM and enable it for both arc and m68k. The
-details are in the description of patches 10 (arc) and 13 (m68k).
-
-Mike Rapoport (13):
-  alpha: switch from DISCONTIGMEM to SPARSEMEM
-  ia64: remove custom __early_pfn_to_nid()
-  ia64: remove 'ifdef CONFIG_ZONE_DMA32' statements
-  ia64: discontig: paging_init(): remove local max_pfn calculation
-  ia64: split virtual map initialization out of paging_init()
-  ia64: forbid using VIRTUAL_MEM_MAP with FLATMEM
-  ia64: make SPARSEMEM default and disable DISCONTIGMEM
-  arm: remove CONFIG_ARCH_HAS_HOLES_MEMORYMODEL
-  arm, arm64: move free_unused_memmap() to generic mm
-  arc: use FLATMEM with freeing of unused memory map instead of DISCONTIGMEM
-  m68k/mm: make node data and node setup depend on CONFIG_DISCONTIGMEM
-  m68k/mm: enable use of generic memory_model.h for !DISCONTIGMEM
-  m68k: deprecate DISCONTIGMEM
-
- Documentation/vm/memory-model.rst   |  3 +-
- arch/Kconfig                        |  3 ++
- arch/alpha/Kconfig                  |  8 +++
- arch/alpha/include/asm/mmzone.h     | 14 +----
- arch/alpha/include/asm/page.h       |  7 +--
- arch/alpha/include/asm/pgtable.h    | 12 ++---
- arch/alpha/include/asm/sparsemem.h  | 18 +++++++
- arch/alpha/kernel/setup.c           |  1 +
- arch/arc/Kconfig                    |  3 +-
- arch/arc/include/asm/page.h         | 20 ++++++--
- arch/arc/mm/init.c                  | 29 ++++++++---
- arch/arm/Kconfig                    | 10 +---
- arch/arm/mach-bcm/Kconfig           |  1 -
- arch/arm/mach-davinci/Kconfig       |  1 -
- arch/arm/mach-exynos/Kconfig        |  1 -
- arch/arm/mach-highbank/Kconfig      |  1 -
- arch/arm/mach-omap2/Kconfig         |  1 -
- arch/arm/mach-s5pv210/Kconfig       |  1 -
- arch/arm/mach-tango/Kconfig         |  1 -
- arch/arm/mm/init.c                  | 78 ----------------------------
- arch/arm64/Kconfig                  |  4 +-
- arch/arm64/mm/init.c                | 68 ------------------------
- arch/ia64/Kconfig                   | 11 ++--
- arch/ia64/include/asm/meminit.h     |  2 -
- arch/ia64/mm/contig.c               | 58 ++++++++++-----------
- arch/ia64/mm/discontig.c            | 44 ++++++++--------
- arch/ia64/mm/init.c                 | 14 -----
- arch/ia64/mm/numa.c                 | 30 -----------
- arch/m68k/Kconfig.cpu               | 32 ++++++++++--
- arch/m68k/include/asm/page.h        |  2 +
- arch/m68k/include/asm/page_mm.h     |  7 ++-
- arch/m68k/include/asm/virtconvert.h |  2 +-
- arch/m68k/mm/init.c                 |  8 +--
- fs/proc/kcore.c                     |  2 -
- include/linux/mm.h                  |  3 --
- include/linux/mmzone.h              | 42 ---------------
- mm/memblock.c                       | 80 +++++++++++++++++++++++++++++
- mm/mmzone.c                         | 14 -----
- mm/page_alloc.c                     | 16 ++++--
- mm/vmstat.c                         |  4 --
- 40 files changed, 272 insertions(+), 384 deletions(-)
- create mode 100644 arch/alpha/include/asm/sparsemem.h
-
-
-base-commit: 3650b228f83adda7e5ee532e2b90429c03f7b9ec
+diff --git a/arch/ia64/mm/discontig.c b/arch/ia64/mm/discontig.c
+index d255596f52c6..f41dcf75887b 100644
+--- a/arch/ia64/mm/discontig.c
++++ b/arch/ia64/mm/discontig.c
+@@ -594,7 +594,6 @@ void __init paging_init(void)
+ {
+ 	unsigned long max_dma;
+ 	unsigned long pfn_offset = 0;
+-	unsigned long max_pfn = 0;
+ 	int node;
+ 	unsigned long max_zone_pfns[MAX_NR_ZONES];
+ 
+@@ -616,13 +615,11 @@ void __init paging_init(void)
+ #ifdef CONFIG_VIRTUAL_MEM_MAP
+ 		NODE_DATA(node)->node_mem_map = vmem_map + pfn_offset;
+ #endif
+-		if (mem_data[node].max_pfn > max_pfn)
+-			max_pfn = mem_data[node].max_pfn;
+ 	}
+ 
+ 	memset(max_zone_pfns, 0, sizeof(max_zone_pfns));
+ 	max_zone_pfns[ZONE_DMA32] = max_dma;
+-	max_zone_pfns[ZONE_NORMAL] = max_pfn;
++	max_zone_pfns[ZONE_NORMAL] = max_low_pfn;
+ 	free_area_init(max_zone_pfns);
+ 
+ 	zero_page_memmap_ptr = virt_to_page(ia64_imva(empty_zero_page));
 -- 
 2.28.0
 
