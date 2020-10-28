@@ -2,109 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 09AA329DD51
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:37:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C905729DEFB
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:58:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388652AbgJ2Aha (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 20:37:30 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48130 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730542AbgJ2Agm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 20:36:42 -0400
-Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com [IPv6:2607:f8b0:4864:20::d43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F2632C0613CF;
-        Wed, 28 Oct 2020 17:36:41 -0700 (PDT)
-Received: by mail-io1-xd43.google.com with SMTP id h21so1520475iob.10;
-        Wed, 28 Oct 2020 17:36:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=hj+EqoJ8khAy+Vvj816RirpNw6YjRUZJZt51nQOVs9A=;
-        b=WDaDEm/HR31rW3seXD21SpWBhLX18ll6nk59wfAMrgPjv7+fXCXdYMu+bbxwtZD3IH
-         reCyayIdO360QckMZOp7SrTSpAiFNwtYzuQuO6tJEr94/pjWHoT64GCDfGsr7//1c/y5
-         2452BZ1SMBbtpQXB/eaFAJ9zoEHxtjICIO/Fy4xLIjZaKQBwvkCgDq5B6TQnzPQRsPIr
-         fUHOx8m7k1oq5ilbErRMNM9z3vEvy66uVJ8W5hIBpMu9u1ixhrxmKD9EEpMO6P8Vus4v
-         eg3362JIW1W46MGWxiMJKSIFCEBHxdduO7FgVcPTvgRLmZ+gkfam/T2LquNGM7aZIJWb
-         52Ew==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=hj+EqoJ8khAy+Vvj816RirpNw6YjRUZJZt51nQOVs9A=;
-        b=uMEAJN2s7xhNKUfZxkcavkU6+vyc4b1iTvpzMxIIFUvdprIvyRb6REsy56gCAXrnH4
-         zIaT2OvtMU7InExs3JO1cERHeYJTPi/2EVGw21q/ld0PAbzfPl5l7fe89THQrZbhvXhm
-         P6dYLp4Y8ZeRbTiU+meOVa1xVG8hUE+nbOVv9agEibZHfZLPZ7JoehqAkg4bi7DhgJCY
-         RjnrLpzOzQS7TVfJN2hUdLW7NnOkVnMZgJZfGoOEtut2gBN3Ue0Exr72TxjmzgLM7Hx8
-         XQuSmYbpL9h63O1g0pTzUofybdd5agObdDKQwigox/J402E3+71xCxkrEuEb8LpHsJ3j
-         2j0w==
-X-Gm-Message-State: AOAM533D0ZlSGvZjR5us7Gq4WGrJ/+FfaI73txx3FzSGMk+ehXdGIEwz
-        RNkgoDJXRU1KmFD1fFMy/Ro1Df2ZBplMukcUgxQRfedhMg==
-X-Google-Smtp-Source: ABdhPJxyjvfm11vXjLtnOL7Ew8CVvRI3+5J1kk7AZqwoTBfvzm1Rvt4nRnK4vBW5cI+uszft4zpdV628LBBb1osqpZE=
-X-Received: by 2002:a92:85d5:: with SMTP id f204mr4716737ilh.45.1603864978212;
- Tue, 27 Oct 2020 23:02:58 -0700 (PDT)
-MIME-Version: 1.0
-References: <1603346163-21645-1-git-send-email-kernelfans@gmail.com>
- <871rhq7j1h.fsf@nanos.tec.linutronix.de> <CAFgQCTvFwvvtPE0Eow4cebCEe5OD5OhgAQarckpbFc38Bphaag@mail.gmail.com>
- <CAHD1Q_x99XW1zDr5HpVR27F_ksHLkaxc2W83e-N6F_xLYKyGbQ@mail.gmail.com> <87y2js3ghv.fsf@nanos.tec.linutronix.de>
-In-Reply-To: <87y2js3ghv.fsf@nanos.tec.linutronix.de>
-From:   Pingfan Liu <kernelfans@gmail.com>
-Date:   Wed, 28 Oct 2020 14:02:45 +0800
-Message-ID: <CAFgQCTtnKB+p5uhRu3JpmBvHbQ8Vhv0TrKek9_3CWbtbcyM1Kw@mail.gmail.com>
-Subject: Re: [PATCH 0/3] warn and suppress irqflood
-To:     Thomas Gleixner <tglx@linutronix.de>
-Cc:     Guilherme Piccoli <gpiccoli@canonical.com>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Jisheng Zhang <Jisheng.Zhang@synaptics.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Petr Mladek <pmladek@suse.com>, Marc Zyngier <maz@kernel.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        afzal mohammed <afzal.mohd.ma@gmail.com>,
-        Lina Iyer <ilina@codeaurora.org>,
-        "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
-        Maulik Shah <mkshah@codeaurora.org>,
-        Al Viro <viro@zeniv.linux.org.uk>,
+        id S1728058AbgJ2A60 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 20:58:26 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60528 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1731575AbgJ1WRc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Oct 2020 18:17:32 -0400
+Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 659D22468D;
+        Wed, 28 Oct 2020 09:07:20 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1603876040;
+        bh=kieIkoX3/mUlRkKVpmRvqv/D5gjE+vzEP0MP4l0YFWU=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=KBcSruPj8y0wcCeNx8d/CP5d4+ly42T3Ed8nHMPzn7ofyHiwd11xdMlMjHS6MSRCL
+         xXPyn7l/fCRm3PUXhRRGSvYWgvksBSB90eYTpgGxM9AIXyI8YPD6hMVXKjaxeDkC7K
+         46uMY8tGLdH84GxEJiYMQJ5RMoA9qwjAnImo8Q4c=
+Date:   Wed, 28 Oct 2020 10:08:13 +0100
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Felipe Balbi <balbi@kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Oliver Neukum <oneukum@suse.com>, linux-doc@vger.kernel.org,
-        Kexec Mailing List <kexec@lists.infradead.org>,
-        Bjorn Helgaas <helgaas@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
+        linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org
+Subject: Re: [PATCH v3 31/56] usb: dwc3: fix kernel-doc markups
+Message-ID: <20201028090813.GB1947336@kroah.com>
+References: <cover.1603469755.git.mchehab+huawei@kernel.org>
+ <0b964be3884def04fcd20ea5c12cb90d0014871c.1603469755.git.mchehab+huawei@kernel.org>
+ <87ft60dujc.fsf@kernel.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87ft60dujc.fsf@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 27, 2020 at 3:59 AM Thomas Gleixner <tglx@linutronix.de> wrote:
->
-[...]
->
-> And contrary to Liu's patches which try to disable a requested interrupt
-> if too many of them arrive, the kernel cannot do anything because there
-> is nothing to disable in your case. That's why you needed to do the MSI
-> disable magic in the early PCI quirks which run before interrupts get
-> enabled.
->
-> Also Liu's patch only works if:
->
->   1) CONFIG_IRQ_TIME_ACCOUNTING is enabled
+On Tue, Oct 27, 2020 at 08:58:47AM +0200, Felipe Balbi wrote:
+> 
+> Hi Mauro,
+> 
+> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+> > There is a common comment marked, instead, with kernel-doc
+> > notation.
+> >
+> > Also, some identifiers have different names between their
+> > prototypes and the kernel-doc markup.
+> >
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> > ---
+> >  drivers/usb/dwc3/core.c        | 2 +-
+> >  drivers/usb/dwc3/core.h        | 2 +-
+> >  drivers/usb/gadget/composite.c | 2 +-
+> >  drivers/usb/typec/mux.c        | 2 +-
+> >  include/linux/usb/composite.h  | 2 +-
+> 
+> mind breaking this into 4 commits? One for dwc3, one for
+> gadget/composite, one for type/mux, and a final for composite.h.
 
-I wonder whether it can not be a default option or not by the following method:
-  DEFINE_STATIC_KEY_FALSE(irqtime_account), and enable it according to
-a boot param.
+I'll just take these all at once, it's easy enough :)
 
-This will have no impact on performance with the disabled branch.
-Meanwhile users can easily turn on the option to detect an irq flood
-without  recompiling the kernel.
+thanks,
 
-If it is doable, I will rework only on [1/2].
->
->   2) the runaway interrupt has been requested by the relevant driver in
->      the dump kernel.
-
-Yes, it raises a big challenge to my method. Kdump kernel miss the
-whole picture of the first kernel's irq routing.
-
-Thanks,
-Pingfan
+greg k-h
