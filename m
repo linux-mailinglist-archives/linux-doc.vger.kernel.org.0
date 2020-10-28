@@ -2,64 +2,81 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CC0C029E136
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 02:54:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0985229E1C0
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 03:03:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729102AbgJ2BnZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 21:43:25 -0400
-Received: from ms.lwn.net ([45.79.88.28]:45136 "EHLO ms.lwn.net"
+        id S2391225AbgJ2CDD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 22:03:03 -0400
+Received: from namei.org ([65.99.196.166]:38520 "EHLO namei.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729098AbgJ1V55 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 17:57:57 -0400
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id CEA8A99C;
-        Wed, 28 Oct 2020 17:11:43 +0000 (UTC)
-Date:   Wed, 28 Oct 2020 11:11:42 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org,
-        Stephen Rothwell <sfr@canb.auug.org.au>
-Subject: Re: [PATCH] docs: Makefile: honor V=0 for docs building
-Message-ID: <20201028111142.7cc8833a@lwn.net>
-In-Reply-To: <478c114a2399b68a18de94ee5f98649304f3903b.1603796153.git.mchehab+huawei@kernel.org>
-References: <20201016165504.3cc33889@canb.auug.org.au>
-        <478c114a2399b68a18de94ee5f98649304f3903b.1603796153.git.mchehab+huawei@kernel.org>
-Organization: LWN.net
+        id S1727928AbgJ1Vsr (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Oct 2020 17:48:47 -0400
+Received: from localhost (localhost [127.0.0.1])
+        by namei.org (8.14.4/8.14.4) with ESMTP id 09S5TZBd026933;
+        Wed, 28 Oct 2020 05:29:35 GMT
+Date:   Wed, 28 Oct 2020 16:29:35 +1100 (AEDT)
+From:   James Morris <jmorris@namei.org>
+To:     =?ISO-8859-15?Q?Micka=EBl_Sala=FCn?= <mic@digikod.net>
+cc:     "Serge E . Hallyn" <serge@hallyn.com>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Casey Schaufler <casey@schaufler-ca.com>,
+        Jann Horn <jannh@google.com>, Jeff Dike <jdike@addtoit.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Michael Kerrisk <mtk.manpages@gmail.com>,
+        Richard Weinberger <richard@nod.at>,
+        Shuah Khan <shuah@kernel.org>,
+        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
+        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        linux-security-module@vger.kernel.org, x86@kernel.org,
+        John Johansen <john.johansen@canonical.com>,
+        =?ISO-8859-15?Q?Micka=EBl_Sala=FCn?= <mic@linux.microsoft.com>,
+        Stephen Smalley <stephen.smalley.work@gmail.com>
+Subject: Re: [PATCH v22 05/12] LSM: Infrastructure management of the
+ superblock
+In-Reply-To: <20201027200358.557003-6-mic@digikod.net>
+Message-ID: <alpine.LRH.2.21.2010281628570.25689@namei.org>
+References: <20201027200358.557003-1-mic@digikod.net> <20201027200358.557003-6-mic@digikod.net>
+User-Agent: Alpine 2.21 (LRH 202 2017-01-01)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+Content-Type: multipart/mixed; boundary="1665246916-514386363-1603862978=:25689"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 27 Oct 2020 11:56:15 +0100
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-> Reduce the number of displayed mesages when building the
-> docs with V=0.
+--1665246916-514386363-1603862978=:25689
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
+
+On Tue, 27 Oct 2020, Mickaël Salaün wrote:
+
+> From: Casey Schaufler <casey@schaufler-ca.com>
 > 
-> Suggested-by: Stephen Rothwell <sfr@canb.auug.org.au>
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->  Documentation/Makefile | 4 ++++
->  1 file changed, 4 insertions(+)
+> Move management of the superblock->sb_security blob out of the
+> individual security modules and into the security infrastructure.
+> Instead of allocating the blobs from within the modules, the modules
+> tell the infrastructure how much space is required, and the space is
+> allocated there.
 > 
-> diff --git a/Documentation/Makefile b/Documentation/Makefile
-> index 6a59a13d3c53..61a7310b49e0 100644
-> --- a/Documentation/Makefile
-> +++ b/Documentation/Makefile
-> @@ -26,6 +26,10 @@ BUILDDIR      = $(obj)/output
->  PDFLATEX      = xelatex
->  LATEXOPTS     = -interaction=batchmode
->  
-> +ifeq ($(KBUILD_VERBOSE),0)
-> +SPHINXOPTS    += "-q"
-> +endif
-> +
+> Cc: Kees Cook <keescook@chromium.org>
+> Cc: John Johansen <john.johansen@canonical.com>
+> Signed-off-by: Casey Schaufler <casey@schaufler-ca.com>
+> Signed-off-by: Mickaël Salaün <mic@linux.microsoft.com>
+> Reviewed-by: Stephen Smalley <stephen.smalley.work@gmail.com>
 
-Applied, thanks.  ...ahhh the silence....:)
+It would be good to see review from JJ here.
 
-jon
+-- 
+James Morris
+<jmorris@namei.org>
+
+--1665246916-514386363-1603862978=:25689--
