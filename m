@@ -2,90 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E8EF729D2A9
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 22:34:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E80A129D7B8
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 23:28:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726405AbgJ1Vd4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 17:33:56 -0400
-Received: from bilbo.ozlabs.org ([203.11.71.1]:53549 "EHLO ozlabs.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726309AbgJ1Vdu (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 17:33:50 -0400
-Received: from authenticated.ozlabs.org (localhost [127.0.0.1])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
-         key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest SHA256)
-        (No client certificate requested)
-        by mail.ozlabs.org (Postfix) with ESMTPSA id 4CM1ZX30Xwz9sWH;
-        Thu, 29 Oct 2020 08:15:47 +1100 (AEDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=canb.auug.org.au;
-        s=201702; t=1603919748;
-        bh=Odl+EFcAVABTumfQ8BQaRzjpGoHN+rUsQKG+dis+0Bs=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=HcuodH5cWtZtR1RWWV5U1uoljh7tQsT7VzoVhKGT9PQQHaoeqFKa/+bnbRnXu73Ws
-         YRpiwbHsDmgnpzkwFjy+sEQVy7HL6Ye3d6Z9I5nO6h9WRJJh4sJukK5ZUUV/fvgq2Q
-         teaLEK29z/xXVMZd9/5bTTRVZqMAR9wXss81u9N/BCSYdulPmFKNUgh5Wf3ZDWHUex
-         bFZjYlr2gaHk1kUs9hyxSxXj0hbhqzlqte4i9060ur8MV8cMZWsfgJISmKu+GiM32+
-         O3izm8vdCHZ34EUhpMivc30bRFj2gqz7dYacCC12DeDJ3Jx5fIb8LgUsMjb8rzrjQ9
-         Z+BUbmjnA8RnA==
-Date:   Thu, 29 Oct 2020 08:15:46 +1100
-From:   Stephen Rothwell <sfr@canb.auug.org.au>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] docs: Makefile: honor V=0 for docs building
-Message-ID: <20201029081546.508a6922@canb.auug.org.au>
-In-Reply-To: <20201028111142.7cc8833a@lwn.net>
-References: <20201016165504.3cc33889@canb.auug.org.au>
-        <478c114a2399b68a18de94ee5f98649304f3903b.1603796153.git.mchehab+huawei@kernel.org>
-        <20201028111142.7cc8833a@lwn.net>
+        id S1733073AbgJ1W0O (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 18:26:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55030 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1733054AbgJ1W0O (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 18:26:14 -0400
+Received: from mail-oo1-xc41.google.com (mail-oo1-xc41.google.com [IPv6:2607:f8b0:4864:20::c41])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E9546C0613CF;
+        Wed, 28 Oct 2020 15:26:13 -0700 (PDT)
+Received: by mail-oo1-xc41.google.com with SMTP id c25so254751ooe.13;
+        Wed, 28 Oct 2020 15:26:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=FK45UsEFUJMqjnQFfEw2JOOplxSwJOaVgJWuuCrbxGQ=;
+        b=E91sXcD3l4E8upi2Jm/K8WbyFI3KhHE0/7BKcniyKEi8wGansk/FBJQXKyeuliJWJ9
+         79j4Yb2qaVaSSg4ylBSTEATL8LBRnAe8mpyKw62A3aYfuz9PHYeqFGG5hMxzuLF3VFmg
+         PacdQ8OzYXhFS5kXmSXCFwpFHteXnuCLXKad50LzlZRf+JhaZFs+amM6xZxb/dRFAWDq
+         9F2dh/o8LoqJaWAV/jFO/yPlZGwU6aFiUmE1bdzMLWC5MA5i8t0roAOdJfg3eeaya5y2
+         QHOCpB6K2J1MVmvDhivLgPod3NEk2BgYke05yKIHLEdw9/1CUGj5g0lJ3z+d6kYUBgRF
+         lc1Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=FK45UsEFUJMqjnQFfEw2JOOplxSwJOaVgJWuuCrbxGQ=;
+        b=iEfhjs47mnYBwG9QuxsnrNdEGpdp104L0J0FNt5b/OJSOMZxBbcXuBsNmEDcUHEi0B
+         9AlVXulnFnBMAeqqxgq+FjjM7gPeYVw+TOf0MNzrgsxPwtZ/9PPmuThceW2kXAOrsMSV
+         sp+dvVGQ+wF0sKQM9GbmTYhSCu3nWqOdYI7/ruU99GgrYuE7+2Oj2x1m1Q7EHQougtB5
+         PJCjGMH1D92Ji/rO+YOrGDrkh7r9LigJuaztSAZCXxqFL3NDAV+hWQOdYMnKf0Gv3kKn
+         z3cWFr3YlqoTK9Wjouug4bOYl5B0Q9LT1MZaqXMXekXdAogeCh6hdUgf99dO6IPOzVh4
+         5BdA==
+X-Gm-Message-State: AOAM531odZKYmLitr0y2bToIT0LMwNPdFmrWGHZN4vmVbYzOrXKmauTB
+        gqI1ZOBKXr6XKtg4wsBriKMWRiPwGb9PBefWU7vTNGui7tM=
+X-Google-Smtp-Source: ABdhPJzAWDKe7Om5QMAw8dmU/sek2nFcNeyNm7ZIqqXouZ54rMExbLH9ZQklwYJv4CtxUIyds2QUuSAPYJRVigCVm8w=
+X-Received: by 2002:a4a:a2ca:: with SMTP id r10mr4041487ool.90.1603851893453;
+ Tue, 27 Oct 2020 19:24:53 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="Sig_/xlMsaUz+iRSh5XzFR3ydpDN";
- protocol="application/pgp-signature"; micalg=pgp-sha256
+References: <1597873980-204052-1-git-send-email-raphael.norwitz@nutanix.com> <d81c567970db5aefcc59d6f967c82f17@kernel.org>
+In-Reply-To: <d81c567970db5aefcc59d6f967c82f17@kernel.org>
+From:   Raphael Norwitz <raphael.s.norwitz@gmail.com>
+Date:   Tue, 27 Oct 2020 22:24:42 -0400
+Message-ID: <CAFubqFtywPbUtQ+T8widqoeaZyzRU6sJMiksKUQ0umQ7PTL5Kg@mail.gmail.com>
+Subject: Re: [PATCH] Fix typo in irq_domain documentation
+To:     Marc Zyngier <maz@kernel.org>
+Cc:     Raphael Norwitz <raphael.norwitz@nutanix.com>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---Sig_/xlMsaUz+iRSh5XzFR3ydpDN
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: quoted-printable
+Ping - looks like this was never applied?
 
-Hi Jon,
-
-On Wed, 28 Oct 2020 11:11:42 -0600 Jonathan Corbet <corbet@lwn.net> wrote:
+On Tue, Aug 25, 2020 at 6:23 AM Marc Zyngier <maz@kernel.org> wrote:
 >
-> Applied, thanks.  ...ahhh the silence....:)
-
-Thanks, indeed.
-
-For Aussies, though, the quote is "how's the serenity?"
-
-https://www.screenaustralia.gov.au/sa/screen-news/2015/10-11-the-castle-top=
--10-quotes
-(quote number 3)
-
-https://www.youtube.com/watch?v=3DC8WLuQOLq5Q
-
-:-)
-
---=20
-Cheers,
-Stephen Rothwell
-
---Sig_/xlMsaUz+iRSh5XzFR3ydpDN
-Content-Type: application/pgp-signature
-Content-Description: OpenPGP digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEENIC96giZ81tWdLgKAVBC80lX0GwFAl+Z34IACgkQAVBC80lX
-0GxwoAgAlKVLI+xHdxpl7PuAL4AgOWlmvr9E/hQ48Uk3AhdtOJlb3KEMKbZ0yNti
-8mqmIWNLmZGWqJvFWpjLeYb36foLf09fzgMQkIxN4B0FhDpIil+ekY6UZ7dRBlWQ
-f+0m78jTuoYObEUynDsBRT/YghlOQ75pswGuqGa3M/2RyBwsCsq7BBRNZ+xOcMW4
-7Y00kxGMBO0zC4JuUOLdUu7uYmoO0i5Kv9hNOYY02oKjcImmv05dq9OO+BLa1mVq
-xmRKXZ8yijvxhpx1CmcKXYcMbjKOCnnrWt4YLuyTVzbsIzPEpXfvSinNSdVlg5yF
-mepuR+gNzoJ9CrK0sx2vVn3+jNLKcA==
-=B00H
------END PGP SIGNATURE-----
-
---Sig_/xlMsaUz+iRSh5XzFR3ydpDN--
+> On 2020-08-19 22:53, Raphael Norwitz wrote:
+> > The irq_domain documentation states that "Here the interrupt number
+> > loose all kind of correspondence to hardware interrupt numbers:...".
+> > It's clear from the context that the author means to use "loses"
+> > instead
+> > of "loose". To avoid future confusion, this change fixes the
+> > aforementioned wording.
+> >
+> > Signed-off-by: Raphael Norwitz <raphael.norwitz@nutanix.com>
+> > ---
+> >  Documentation/core-api/irq/irq-domain.rst | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/Documentation/core-api/irq/irq-domain.rst
+> > b/Documentation/core-api/irq/irq-domain.rst
+> > index 096db12..eba5e41 100644
+> > --- a/Documentation/core-api/irq/irq-domain.rst
+> > +++ b/Documentation/core-api/irq/irq-domain.rst
+> > @@ -15,7 +15,7 @@ such as GPIO controllers avoid reimplementing
+> > identical callback
+> >  mechanisms as the IRQ core system by modelling their interrupt
+> >  handlers as irqchips, i.e. in effect cascading interrupt controllers.
+> >
+> > -Here the interrupt number loose all kind of correspondence to
+> > +Here the interrupt number loses all kind of correspondence to
+> >  hardware interrupt numbers: whereas in the past, IRQ numbers could
+> >  be chosen so they matched the hardware IRQ line into the root
+> >  interrupt controller (i.e. the component actually fireing the
+>
+> Acked-by: Marc Zyngier <maz@kernel.org>
+>
+>          M.
+> --
+> Jazz is not dead. It just smells funny...
