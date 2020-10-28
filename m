@@ -2,188 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3CBD429DEF6
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:58:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 49C8A29DD15
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:35:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2403839AbgJ2A6G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 20:58:06 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60526 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731579AbgJ1WRc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 18:17:32 -0400
-Received: from coco.lan (ip5f5ad5b2.dynamic.kabel-deutschland.de [95.90.213.178])
+        id S1731973AbgJ1WTb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 18:19:31 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53592 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1732158AbgJ1WR5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 18:17:57 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 46B69C0613CF;
+        Wed, 28 Oct 2020 15:17:57 -0700 (PDT)
+Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id D94CC247B1;
-        Wed, 28 Oct 2020 15:10:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1603897842;
-        bh=frQPh95E8HRn9ZnqjsC3ZJ+933VuymG+SYH3O260e+o=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=weN6FXtBng9K18ddo1TKfapkVnWm0vxYEwEBfwOCQApwdpzsfIDnzXV9vSmiu7+eP
-         B96JFlb81bjwmSe9bFURwP5sgpUwhpeiWIU/5wjJzPxHypUwAvcsGTalnS7d+up+9Q
-         jg81B/KNSMj7pbCUxEWpjU2CLsur2W6HVKaBXB5M=
-Date:   Wed, 28 Oct 2020 16:10:30 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+        by ms.lwn.net (Postfix) with ESMTPSA id 2F34E49B;
+        Wed, 28 Oct 2020 16:21:04 +0000 (UTC)
+Date:   Wed, 28 Oct 2020 10:21:03 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        Alexandre Torgue <alexandre.torgue@st.com>,
-        Andreas Klinger <ak@it-klinger.de>,
-        Anton Vorontsov <anton@enomsg.org>,
-        Baolin Wang <baolin.wang7@gmail.com>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        Benson Leung <bleung@chromium.org>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>,
-        Boris Brezillon <bbrezillon@kernel.org>,
-        Chao Yu <chao@kernel.org>,
-        Chunyan Zhang <zhang.lyra@gmail.com>,
-        Colin Cross <ccross@android.com>,
-        Daniel Thompson <daniel.thompson@linaro.org>,
-        Enric Balletbo i Serra <enric.balletbo@collabora.com>,
-        Fabrice Gasnier <fabrice.gasnier@st.com>,
-        Heikki Krogerus <heikki.krogerus@linux.intel.com>,
-        Jaegeuk Kim <jaegeuk@kernel.org>,
-        Jingoo Han <jingoohan1@gmail.com>,
-        Johan Hovold <johan@kernel.org>,
-        Johannes Berg <johannes@sipsolutions.net>,
-        Jonathan Cameron <jic23@kernel.org>,
-        Kees Cook <keescook@chromium.org>,
-        Lee Jones <lee.jones@linaro.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Maxime Coquelin <mcoquelin.stm32@gmail.com>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Ohad Ben-Cohen <ohad@wizery.com>,
-        Orson Zhai <orsonzhai@gmail.com>,
-        Peter Rosin <peda@axentia.se>,
-        Richard Cochran <richardcochran@gmail.com>,
-        Richard Gong <richard.gong@linux.intel.com>,
-        Sebastian Reichel <sre@kernel.org>,
-        Srinivas Kandagatla <srinivas.kandagatla@linaro.org>,
-        Stefan Achatz <erazor_de@users.sourceforge.net>,
-        Tony Luck <tony.luck@intel.com>, Wu Hao <hao.wu@intel.com>
-Subject: Re: [PATCH 00/33] ABI: add it to the documentation build system
-Message-ID: <20201028161030.4e88b297@coco.lan>
-In-Reply-To: <20201028143937.GA2302095@kroah.com>
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 12/33] docs: kernel_abi.py: add a script to parse ABI
+ documentation
+Message-ID: <20201028102103.35884c91@lwn.net>
+In-Reply-To: <fbc723a2c49bd928f7845cba08e4996b9eb73142.1603893146.git.mchehab+huawei@kernel.org>
 References: <cover.1603893146.git.mchehab+huawei@kernel.org>
-        <20201028143937.GA2302095@kroah.com>
-X-Mailer: Claws Mail 3.17.7 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        <fbc723a2c49bd928f7845cba08e4996b9eb73142.1603893146.git.mchehab+huawei@kernel.org>
+Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Wed, 28 Oct 2020 15:39:37 +0100
-Greg Kroah-Hartman <gregkh@linuxfoundation.org> escreveu:
+So this is separate from the patch series itself in a way, but it brings a
+question to mind:
 
-> On Wed, Oct 28, 2020 at 03:22:58PM +0100, Mauro Carvalho Chehab wrote:
-> > Hi Greg,
-> > 
-> > As requested, this is a rebased version on the top of v5.10-rc1
-> > adding support for having the Linux ABI documentted inside
-> > the Linux admin manual.
-> > 
-> > When compared with the version I sent years ago, this
-> > version has:
-> > 
-> > - a logic to detect duplicated ABI symbols;
-> > - it auto-generate cross-reference markups for ABI symbols,
-> >   ABI files and .rst files;
-> > - Other files from 5.10-rc1 required adjustments in order
-> >   to be accepted by the script in rst-source mode;
-> > - Some bug fixes.
-> > 
-> > PS.: I didn't try to merge it against linux-next yet. So,
-> > I won't doubt that applying it could cause some conflicts.
-> > 
-> > Feel free to review it.  
-> 
-> After applying the first 10 patches, and running it, I see a bunch of
-> these types of warnings:
-> 
-> Use of uninitialized value $kernelversion in substitution (s///) at ./scripts/get_abi.pl line 444.
-> Use of uninitialized value $users in substitution (s///) at ./scripts/get_abi.pl line 446.
-> Use of uninitialized value $users in substitution (s///) at ./scripts/get_abi.pl line 447.
+On Wed, 28 Oct 2020 15:23:10 +0100
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 
-Hmm.. I didn't test search after adding "use warnings".
+> +# We can't assume that six is installed
+> +PY3 = sys.version_info[0] == 3
+> +PY2 = sys.version_info[0] == 2
+> +if PY3:
+> +    # pylint: disable=C0103, W0622
+> +    unicode     = str
+> +    basestring  = str
 
-The thing is that "use warnings" was added on one of get_abi.pl
-patches, just to be sure that some ABI parsers were 100%.
+I wonder how much longer we really need to support any of:
 
-That makes perl very pedantic, as it won't accept things like:
+ - Python < 3.n (where n=5 or 6 maybe)
+ - Sphinx < 1.7 or even some 2.x
 
-	my $foo;
-	...
-	my $bar = $foo;
+We're carrying a certain and growing amount of cruft to handle these
+cases.  I might start putting together a series to clean this up for 5.11
+or so.
 
-Without "warnings", $bar will be undefined, and everything
-works properly, but, when this used, the above will still
-work properly, but will start producing warnings like the
-one you're seeing.
-
-I'm enclosing a diff addressing it for "search" mode.
-
-It should be fold on this patch:
-
-	scripts: get_abi.pl: cleanup ABI cross-reference logic
-
-Which is the one that added "use warnings".
-
-Feel free to fold it there. Otherwise, I'll fold it and
-send you on a v2 of this series.
-
-> 
-> When doing something like:
-> $ ./scripts/get_abi.pl search usb --dir Documentation/ABI/stable/
-> 
-> Is that expected?
-> 
-> thanks,
-> 
-> greg k-h
-
-
-Thanks,
-Mauro
-
-diff --git a/scripts/get_abi.pl b/scripts/get_abi.pl
-index bdef3e5c35c7..00b6ddec0ebb 100755
---- a/scripts/get_abi.pl
-+++ b/scripts/get_abi.pl
-@@ -442,17 +442,20 @@ sub search_symbols {
- 
- 		print "\n$what\n$bar\n\n";
- 
--		my $kernelversion = $data{$what}->{kernelversion};
--		my $contact = $data{$what}->{contact};
--		my $users = $data{$what}->{users};
--		my $date = $data{$what}->{date};
--		my $desc = $data{$what}->{description};
--		$kernelversion =~ s/^\s+//;
--		$contact =~ s/^\s+//;
--		$users =~ s/^\s+//;
--		$users =~ s/\n//g;
--		$date =~ s/^\s+//;
--		$desc =~ s/^\s+//;
-+		my $kernelversion = $data{$what}->{kernelversion} if (defined($data{$what}->{kernelversion}));
-+		my $contact = $data{$what}->{contact} if (defined($data{$what}->{contact}));
-+		my $users = $data{$what}->{users} if (defined($data{$what}->{users}));
-+		my $date = $data{$what}->{date} if (defined($data{$what}->{date}));
-+		my $desc = $data{$what}->{description} if (defined($data{$what}->{description}));
-+
-+		$kernelversion =~ s/^\s+// if ($kernelversion);
-+		$contact =~ s/^\s+// if ($contact);
-+		if ($users) {
-+			$users =~ s/^\s+//;
-+			$users =~ s/\n//g;
-+		}
-+		$date =~ s/^\s+// if ($date);
-+		$desc =~ s/^\s+// if ($desc);
- 
- 		printf "Kernel version:\t\t%s\n", $kernelversion if ($kernelversion);
- 		printf "Date:\t\t\t%s\n", $date if ($date);
-
-
+jon
