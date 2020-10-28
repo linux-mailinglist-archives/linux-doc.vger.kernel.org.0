@@ -2,44 +2,40 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 82B4929DE8B
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:55:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id ACC9729DEF7
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:58:29 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731054AbgJ1WSA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 18:18:00 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60518 "EHLO mail.kernel.org"
+        id S2403834AbgJ2A6G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 20:58:06 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60510 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731767AbgJ1WRo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 18:17:44 -0400
+        id S1731580AbgJ1WRc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Oct 2020 18:17:32 -0400
 Received: from mail.kernel.org (ip5f5ad5b2.dynamic.kabel-deutschland.de [95.90.213.178])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id E1AB62478E;
+        by mail.kernel.org (Postfix) with ESMTPSA id DBD652478B;
         Wed, 28 Oct 2020 14:23:34 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1603895015;
-        bh=09tVPJRn0+l7Ow6+koYv0hv5ToJKSwF0zuzW+5gO3DA=;
+        bh=utf67EdxIsrYU5HAUJdkhYRVW67PKxkveGsT+//j2js=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=jQWg5xGwZWZX0SWuS7VmHJYM78yTxq3A5PyzzS7ZlJ0U1O/j5OyIOZrCgsLfLB82j
-         cS7o8u6RJ5kg25a4ys2mSu6Mi7gVvWc7vBL+FZEfzWFNGlJ5+0aGbDlQ+L2yEKHnZ2
-         fi2vRswcMs0j32e58mlee+yV4wXJvnHUmiC9Ywd8=
+        b=hHc8VebZJkGO9OBFNDnFHRp6wL+5K+njBomOa2uYTFTU232qLZg+B4xQ0rv9vLo87
+         Mqs7u0roypnstIRZ9ZS8pK9dvXvOHYKfuulT+6siZelYPYoVq/zqWoKFC+kau7+hXn
+         KYgvEHirM3B1j0PwXia9kkoTBnJoRPOnMVMYWNrA=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kXmMO-003hlV-RX; Wed, 28 Oct 2020 15:23:32 +0100
+        id 1kXmMO-003hlX-TC; Wed, 28 Oct 2020 15:23:32 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        "Daniel W. S. Almeida" <dwlsalmeida@gmail.com>,
         "Jonathan Corbet" <corbet@lwn.net>,
-        =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
         "Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-        "Steven Rostedt (VMware)" <rostedt@goodmis.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
         linux-kernel@vger.kernel.org
-Subject: [PATCH 17/33] docs: add ABI documentation to the admin-guide book
-Date:   Wed, 28 Oct 2020 15:23:15 +0100
-Message-Id: <f5898aac8cd8ba74092e557eef4fba5c04173f6e.1603893146.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 18/33] docs: ABI: README: specify that files should be ReST compatible
+Date:   Wed, 28 Oct 2020 15:23:16 +0100
+Message-Id: <5e3c2f89e22849f2dbbbac35088e285f5d051278.1603893146.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1603893146.git.mchehab+huawei@kernel.org>
 References: <cover.1603893146.git.mchehab+huawei@kernel.org>
@@ -52,144 +48,44 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 
-As we don't want a generic Sphinx extension to execute commands,
-change the one proposed to Markus to call the abi_book.pl
-script.
-
-Use a script to parse the Documentation/ABI directory and output
-it at the admin-guide.
+As we plan to remove the escaping code from the scripts/get_abi.pl,
+specify at the ABI README file that the content of the file should
+be ReST compatible.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/admin-guide/abi-obsolete.rst | 10 ++++++++++
- Documentation/admin-guide/abi-removed.rst  |  4 ++++
- Documentation/admin-guide/abi-stable.rst   | 13 +++++++++++++
- Documentation/admin-guide/abi-testing.rst  | 19 +++++++++++++++++++
- Documentation/admin-guide/abi.rst          | 11 +++++++++++
- Documentation/admin-guide/index.rst        |  2 ++
- Documentation/conf.py                      |  3 ++-
- 7 files changed, 61 insertions(+), 1 deletion(-)
- create mode 100644 Documentation/admin-guide/abi-obsolete.rst
- create mode 100644 Documentation/admin-guide/abi-removed.rst
- create mode 100644 Documentation/admin-guide/abi-stable.rst
- create mode 100644 Documentation/admin-guide/abi-testing.rst
- create mode 100644 Documentation/admin-guide/abi.rst
+ Documentation/ABI/README | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/Documentation/admin-guide/abi-obsolete.rst b/Documentation/admin-guide/abi-obsolete.rst
-new file mode 100644
-index 000000000000..cda9168445a5
---- /dev/null
-+++ b/Documentation/admin-guide/abi-obsolete.rst
-@@ -0,0 +1,10 @@
-+ABI obsolete symbols
-+====================
-+
-+Documents interfaces that are still remaining in the kernel, but are
-+marked to be removed at some later point in time.
-+
-+The description of the interface will document the reason why it is
-+obsolete and when it can be expected to be removed.
-+
-+.. kernel-abi:: $srctree/Documentation/ABI/obsolete
-diff --git a/Documentation/admin-guide/abi-removed.rst b/Documentation/admin-guide/abi-removed.rst
-new file mode 100644
-index 000000000000..497978fc9632
---- /dev/null
-+++ b/Documentation/admin-guide/abi-removed.rst
-@@ -0,0 +1,4 @@
-+ABI removed symbols
-+===================
-+
-+.. kernel-abi:: $srctree/Documentation/ABI/removed
-diff --git a/Documentation/admin-guide/abi-stable.rst b/Documentation/admin-guide/abi-stable.rst
-new file mode 100644
-index 000000000000..7495d7a35048
---- /dev/null
-+++ b/Documentation/admin-guide/abi-stable.rst
-@@ -0,0 +1,13 @@
-+ABI stable symbols
-+==================
-+
-+Documents the interfaces that the developer has defined to be stable.
-+
-+Userspace programs are free to use these interfaces with no
-+restrictions, and backward compatibility for them will be guaranteed
-+for at least 2 years.
-+
-+Most interfaces (like syscalls) are expected to never change and always
-+be available.
-+
-+.. kernel-abi:: $srctree/Documentation/ABI/stable
-diff --git a/Documentation/admin-guide/abi-testing.rst b/Documentation/admin-guide/abi-testing.rst
-new file mode 100644
-index 000000000000..5c886fc50b9e
---- /dev/null
-+++ b/Documentation/admin-guide/abi-testing.rst
-@@ -0,0 +1,19 @@
-+ABI testing symbols
-+===================
-+
-+Documents interfaces that are felt to be stable,
-+as the main development of this interface has been completed.
-+
-+The interface can be changed to add new features, but the
-+current interface will not break by doing this, unless grave
-+errors or security problems are found in them.
-+
-+Userspace programs can start to rely on these interfaces, but they must
-+be aware of changes that can occur before these interfaces move to
-+be marked stable.
-+
-+Programs that use these interfaces are strongly encouraged to add their
-+name to the description of these interfaces, so that the kernel
-+developers can easily notify them if any changes occur.
-+
-+.. kernel-abi:: $srctree/Documentation/ABI/testing
-diff --git a/Documentation/admin-guide/abi.rst b/Documentation/admin-guide/abi.rst
-new file mode 100644
-index 000000000000..3b9645c77469
---- /dev/null
-+++ b/Documentation/admin-guide/abi.rst
-@@ -0,0 +1,11 @@
-+=====================
-+Linux ABI description
-+=====================
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   abi-stable
-+   abi-testing
-+   abi-obsolete
-+   abi-removed
-diff --git a/Documentation/admin-guide/index.rst b/Documentation/admin-guide/index.rst
-index ed1cf94ea50c..4e0c4ae44acd 100644
---- a/Documentation/admin-guide/index.rst
-+++ b/Documentation/admin-guide/index.rst
-@@ -18,6 +18,8 @@ etc.
-    devices
-    sysctl/index
+diff --git a/Documentation/ABI/README b/Documentation/ABI/README
+index 3121029dce21..8bac9cb09a6d 100644
+--- a/Documentation/ABI/README
++++ b/Documentation/ABI/README
+@@ -32,7 +32,7 @@ The different levels of stability are:
+ 	layout of the files below for details on how to do this.)
  
-+   abi
+   obsolete/
+-  	This directory documents interfaces that are still remaining in
++	This directory documents interfaces that are still remaining in
+ 	the kernel, but are marked to be removed at some later point in
+ 	time.  The description of the interface will document the reason
+ 	why it is obsolete and when it can be expected to be removed.
+@@ -58,6 +58,14 @@ Users:		All users of this interface who wish to be notified when
+ 		be changed further.
+ 
+ 
++Note:
++   The fields should be use a simple notation, compatible with ReST markup.
++   Also, the file **should not** have a top-level index, like::
 +
- This section describes CPU vulnerabilities and their mitigations.
++	===
++	foo
++	===
++
+ How things move between levels:
  
- .. toctree::
-diff --git a/Documentation/conf.py b/Documentation/conf.py
-index 7ee05fd4cb17..ed2b43ec7754 100644
---- a/Documentation/conf.py
-+++ b/Documentation/conf.py
-@@ -38,7 +38,8 @@ needs_sphinx = '1.3'
- # ones.
- extensions = ['kerneldoc', 'rstFlatTable', 'kernel_include',
-               'kfigure', 'sphinx.ext.ifconfig', 'automarkup',
--              'maintainers_include', 'sphinx.ext.autosectionlabel' ]
-+              'maintainers_include', 'sphinx.ext.autosectionlabel',
-+              'kernel_abi']
- 
- #
- # cdomain is badly broken in Sphinx 3+.  Leaving it out generates *most*
+ Interfaces in stable may move to obsolete, as long as the proper
 -- 
 2.26.2
 
