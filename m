@@ -2,83 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B817B29DEDA
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:57:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 09AA329DD51
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:37:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726849AbgJ2A5I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 20:57:08 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60528 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731625AbgJ1WRg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 18:17:36 -0400
-Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id F1488222C8;
-        Wed, 28 Oct 2020 05:56:33 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1603864594;
-        bh=gRejF2ll8OEp5JTX3hs4nwNi7qpEZn/Ri8YOjZpq59M=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=HSv007bm95x5QYWP2rdBK3O70AiNEpllgLGxddLb29tAlYw/MwPmZMaP8gQT09sIW
-         4Od2e/41WSGCU56q5846xm5tFjxJlYx0iX8CivFB0oYNXbeVVYLgJXg3ua7lbj3p/F
-         GnSxbDckG+k8EaOMN3SpouOl41IyXx8tOKxQF0wY=
-Date:   Wed, 28 Oct 2020 06:56:28 +0100
-From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To:     Arnd Bergmann <arnd@kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>, devel@driverdev.osuosl.org,
-        Arnd Bergmann <arnd@arndb.de>, linux-doc@vger.kernel.org,
-        netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Inaky Perez-Gonzalez <inaky.perez-gonzalez@intel.com>,
-        Johannes Berg <johannes@sipsolutions.net>
-Subject: Re: [RFC] wimax: move out to staging
-Message-ID: <20201028055628.GB244117@kroah.com>
-References: <20201027212448.454129-1-arnd@kernel.org>
+        id S2388652AbgJ2Aha (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 20:37:30 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48130 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730542AbgJ2Agm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 20:36:42 -0400
+Received: from mail-io1-xd43.google.com (mail-io1-xd43.google.com [IPv6:2607:f8b0:4864:20::d43])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F2632C0613CF;
+        Wed, 28 Oct 2020 17:36:41 -0700 (PDT)
+Received: by mail-io1-xd43.google.com with SMTP id h21so1520475iob.10;
+        Wed, 28 Oct 2020 17:36:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=hj+EqoJ8khAy+Vvj816RirpNw6YjRUZJZt51nQOVs9A=;
+        b=WDaDEm/HR31rW3seXD21SpWBhLX18ll6nk59wfAMrgPjv7+fXCXdYMu+bbxwtZD3IH
+         reCyayIdO360QckMZOp7SrTSpAiFNwtYzuQuO6tJEr94/pjWHoT64GCDfGsr7//1c/y5
+         2452BZ1SMBbtpQXB/eaFAJ9zoEHxtjICIO/Fy4xLIjZaKQBwvkCgDq5B6TQnzPQRsPIr
+         fUHOx8m7k1oq5ilbErRMNM9z3vEvy66uVJ8W5hIBpMu9u1ixhrxmKD9EEpMO6P8Vus4v
+         eg3362JIW1W46MGWxiMJKSIFCEBHxdduO7FgVcPTvgRLmZ+gkfam/T2LquNGM7aZIJWb
+         52Ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=hj+EqoJ8khAy+Vvj816RirpNw6YjRUZJZt51nQOVs9A=;
+        b=uMEAJN2s7xhNKUfZxkcavkU6+vyc4b1iTvpzMxIIFUvdprIvyRb6REsy56gCAXrnH4
+         zIaT2OvtMU7InExs3JO1cERHeYJTPi/2EVGw21q/ld0PAbzfPl5l7fe89THQrZbhvXhm
+         P6dYLp4Y8ZeRbTiU+meOVa1xVG8hUE+nbOVv9agEibZHfZLPZ7JoehqAkg4bi7DhgJCY
+         RjnrLpzOzQS7TVfJN2hUdLW7NnOkVnMZgJZfGoOEtut2gBN3Ue0Exr72TxjmzgLM7Hx8
+         XQuSmYbpL9h63O1g0pTzUofybdd5agObdDKQwigox/J402E3+71xCxkrEuEb8LpHsJ3j
+         2j0w==
+X-Gm-Message-State: AOAM533D0ZlSGvZjR5us7Gq4WGrJ/+FfaI73txx3FzSGMk+ehXdGIEwz
+        RNkgoDJXRU1KmFD1fFMy/Ro1Df2ZBplMukcUgxQRfedhMg==
+X-Google-Smtp-Source: ABdhPJxyjvfm11vXjLtnOL7Ew8CVvRI3+5J1kk7AZqwoTBfvzm1Rvt4nRnK4vBW5cI+uszft4zpdV628LBBb1osqpZE=
+X-Received: by 2002:a92:85d5:: with SMTP id f204mr4716737ilh.45.1603864978212;
+ Tue, 27 Oct 2020 23:02:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201027212448.454129-1-arnd@kernel.org>
+References: <1603346163-21645-1-git-send-email-kernelfans@gmail.com>
+ <871rhq7j1h.fsf@nanos.tec.linutronix.de> <CAFgQCTvFwvvtPE0Eow4cebCEe5OD5OhgAQarckpbFc38Bphaag@mail.gmail.com>
+ <CAHD1Q_x99XW1zDr5HpVR27F_ksHLkaxc2W83e-N6F_xLYKyGbQ@mail.gmail.com> <87y2js3ghv.fsf@nanos.tec.linutronix.de>
+In-Reply-To: <87y2js3ghv.fsf@nanos.tec.linutronix.de>
+From:   Pingfan Liu <kernelfans@gmail.com>
+Date:   Wed, 28 Oct 2020 14:02:45 +0800
+Message-ID: <CAFgQCTtnKB+p5uhRu3JpmBvHbQ8Vhv0TrKek9_3CWbtbcyM1Kw@mail.gmail.com>
+Subject: Re: [PATCH 0/3] warn and suppress irqflood
+To:     Thomas Gleixner <tglx@linutronix.de>
+Cc:     Guilherme Piccoli <gpiccoli@canonical.com>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Jisheng Zhang <Jisheng.Zhang@synaptics.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Petr Mladek <pmladek@suse.com>, Marc Zyngier <maz@kernel.org>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        afzal mohammed <afzal.mohd.ma@gmail.com>,
+        Lina Iyer <ilina@codeaurora.org>,
+        "Gustavo A. R. Silva" <gustavo@embeddedor.com>,
+        Maulik Shah <mkshah@codeaurora.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Oliver Neukum <oneukum@suse.com>, linux-doc@vger.kernel.org,
+        Kexec Mailing List <kexec@lists.infradead.org>,
+        Bjorn Helgaas <helgaas@kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Oct 27, 2020 at 10:20:13PM +0100, Arnd Bergmann wrote:
-> From: Arnd Bergmann <arnd@arndb.de>
-> 
-> There are no known users of this driver as of October 2020, and it will
-> be removed unless someone turns out to still need it in future releases.
-> 
-> According to https://en.wikipedia.org/wiki/List_of_WiMAX_networks, there
-> have been many public wimax networks, but it appears that these entries
-> are all stale, after everyone has migrated to LTE or discontinued their
-> service altogether.
-> 
-> NetworkManager appears to have dropped userspace support in 2015
-> https://bugzilla.gnome.org/show_bug.cgi?id=747846, the
-> www.linuxwimax.org
-> site had already shut down earlier.
-> 
-> WiMax is apparently still being deployed on airport campus networks
-> ("AeroMACS"), but in a frequency band that was not supported by the old
-> Intel 2400m (used in Sandy Bridge laptops and earlier), which is the
-> only driver using the kernel's wimax stack.
-> 
-> Move all files into drivers/staging/wimax, including the uapi header
-> files and documentation, to make it easier to remove it when it gets
-> to that. Only minimal changes are made to the source files, in order
-> to make it possible to port patches across the move.
-> 
-> Also remove the MAINTAINERS entry that refers to a broken mailing
-> list and website.
-> 
-> Suggested-by: Inaky Perez-Gonzalez <inaky.perez-gonzalez@intel.com>
-> Signed-off-by: Arnd Bergmann <arnd@arndb.de>
+On Tue, Oct 27, 2020 at 3:59 AM Thomas Gleixner <tglx@linutronix.de> wrote:
+>
+[...]
+>
+> And contrary to Liu's patches which try to disable a requested interrupt
+> if too many of them arrive, the kernel cannot do anything because there
+> is nothing to disable in your case. That's why you needed to do the MSI
+> disable magic in the early PCI quirks which run before interrupts get
+> enabled.
+>
+> Also Liu's patch only works if:
+>
+>   1) CONFIG_IRQ_TIME_ACCOUNTING is enabled
 
-Is this ok for me to take through the staging tree?  If so, I need an
-ack from the networking maintainers.
+I wonder whether it can not be a default option or not by the following method:
+  DEFINE_STATIC_KEY_FALSE(irqtime_account), and enable it according to
+a boot param.
 
-If not, feel free to send it through the networking tree and add:
+This will have no impact on performance with the disabled branch.
+Meanwhile users can easily turn on the option to detect an irq flood
+without  recompiling the kernel.
 
-Acked-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+If it is doable, I will rework only on [1/2].
+>
+>   2) the runaway interrupt has been requested by the relevant driver in
+>      the dump kernel.
+
+Yes, it raises a big challenge to my method. Kdump kernel miss the
+whole picture of the first kernel's irq routing.
+
+Thanks,
+Pingfan
