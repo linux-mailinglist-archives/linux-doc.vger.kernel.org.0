@@ -2,164 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 89FDD29D7B5
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 23:28:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 687B829D576
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 23:03:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1733062AbgJ1W0L (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 18:26:11 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55020 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1732948AbgJ1W0L (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 18:26:11 -0400
-Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com [IPv6:2607:f8b0:4864:20::244])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E4AB0C0613CF;
-        Wed, 28 Oct 2020 15:26:10 -0700 (PDT)
-Received: by mail-oi1-x244.google.com with SMTP id y186so1247048oia.3;
-        Wed, 28 Oct 2020 15:26:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-transfer-encoding:content-language;
-        bh=s9cgYbyfQqq5UrYB+51r7q1mjBjejxSSOe4Pf+0dXSc=;
-        b=rXNAYzp0HeMoYo9Rs2j7a7wVExN8Iyb5gKJa3ilnzOfGHJwcd+RFugTbbv4YUD3Mnj
-         2VUO9dlRzbWeNmhZQWRmIldeVTDDuir4KELQdTV8pKPdUaKgxaJ0IfJxBnM0G7vRBCYg
-         wiT8wBbr85sNx5oNi5w1j5zdrDvcm3y/EvCc8kg4eRMh6e4OhiTUEBlFVB0b+ClJRPsJ
-         TUQPC9Lpnd7T4yc2WOtO43nneYC6WKlAT53mGvvaNge6Yx9M/aeXZ+pqCJrHxuwPUVlT
-         Z3sxPuGh8uWER8Un/fum42c093n9HO5gFE6T+nYBivL+DRtjuefzSY2LaKQepJTmgDcw
-         UYFA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-transfer-encoding
-         :content-language;
-        bh=s9cgYbyfQqq5UrYB+51r7q1mjBjejxSSOe4Pf+0dXSc=;
-        b=uN/mP0tUlWurG3Gdw3cZBQcgxc7YWvs/03LTDg72jKxT8k/J8lpYBgfjHSKMnkWjXT
-         a4T18xEnehlAK+qWWdXj0aUS1JkX5OMeT440pzo0trxU5FWp9KVRJemW063Ow+MVFtOU
-         vcKzYIzv8x9RRNl/JdDkPyy5vTKgvQA8TDHovaj+FnmwK6e9msAOQaBVwVwM4ihNxJqb
-         po3xrCLmCc1m5zAbJz0v8nFTIkb4ajsA+Pd6rfZH+ga9H25cv3yxGOqqpTdPJr9Efys1
-         lPbOquO330J2BhN3V5EtdIuwnOsSSLdqqvAy6ANNgkZJHnV9jM5z/xVldqnmdT/PlB4O
-         KPFw==
-X-Gm-Message-State: AOAM531sgsd7dD0lVgqQfpGEoAnzlmkHgAAkX6eiSl3x95UbwolhUzBS
-        kg4IzazG4GX9xIPTKdkUBK3XtyklJZvNRg==
-X-Google-Smtp-Source: ABdhPJxTVCFgGb7WglQERoAc+UBIhCpYSdy5fzH3i6p6S1gDc3JwHMqoX8TTAJWZ5WiJDakcD5Jdcg==
-X-Received: by 2002:a17:90b:4a83:: with SMTP id lp3mr209008pjb.138.1603908889414;
-        Wed, 28 Oct 2020 11:14:49 -0700 (PDT)
-Received: from ?IPv6:2001:df0:0:200c:70b5:cf21:2a3a:f170? ([2001:df0:0:200c:70b5:cf21:2a3a:f170])
-        by smtp.gmail.com with ESMTPSA id i21sm60510pgh.2.2020.10.28.11.14.41
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 28 Oct 2020 11:14:48 -0700 (PDT)
-Subject: Re: [PATCH 11/13] m68k/mm: make node data and node setup depend on
- CONFIG_DISCONTIGMEM
-To:     Mike Rapoport <rppt@kernel.org>,
-        Geert Uytterhoeven <geert@linux-m68k.org>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Greg Ungerer <gerg@linux-m68k.org>,
-        John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
+        id S1729519AbgJ1WC3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 18:02:29 -0400
+Received: from mail.kernel.org ([198.145.29.99]:50732 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1729513AbgJ1WCY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Oct 2020 18:02:24 -0400
+Received: from localhost (fw-tnat.cambridge.arm.com [217.140.96.140])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id E1AA824806;
+        Wed, 28 Oct 2020 18:24:59 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1603909500;
+        bh=3FnfY0fopTr59guGzwZGYaUN3BeAH2JnTh3KcqqaSWc=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=pB0UJvsTww9Cb4vodrmJCAzxjzi2PoTLOXTLTfQJYGLwxvuWCEzVoOUaK8yLQ0Gta
+         qwHGdjLx0+1jeYb5jaTQhIgO808j+07gw0LBEOVFqyL1z9xBMRC6kzsqP/73fOiJhQ
+         TN5Z4OEMNYJKBIk+RHT6NVXZyADftH5vwx0kaG0A=
+Date:   Wed, 28 Oct 2020 18:24:54 +0000
+From:   Mark Brown <broonie@kernel.org>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jakub Kicinski <kuba@kernel.org>, linux-kernel@vger.kernel.org,
         Jonathan Corbet <corbet@lwn.net>,
-        Matt Turner <mattst88@gmail.com>, Meelis Roos <mroos@linux.ee>,
-        Mike Rapoport <rppt@linux.ibm.com>,
+        "David S. Miller" <davem@davemloft.net>,
+        "J. Bruce Fields" <bfields@fieldses.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andrew Lunn <andrew@lunn.ch>, Andrii Nakryiko <andriin@fb.com>,
+        Anna Schumaker <anna.schumaker@netapp.com>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+        Chuck Lever <chuck.lever@oracle.com>,
+        Cong Wang <xiyou.wangcong@gmail.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Florian Westphal <fw@strlen.de>,
+        Guillaume Nault <gnault@redhat.com>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        Jiri Pirko <jiri@mellanox.com>,
+        Martin Varghese <martin.varghese@nokia.com>,
+        Maxim Mikityanskiy <maximmi@mellanox.com>,
+        Miaohe Lin <linmiaohe@huawei.com>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Pravin B Shelar <pshelar@ovn.org>,
         Russell King <linux@armlinux.org.uk>,
-        Tony Luck <tony.luck@intel.com>,
-        Vineet Gupta <vgupta@synopsys.com>,
-        Will Deacon <will@kernel.org>,
-        alpha <linux-alpha@vger.kernel.org>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux FS Devel <linux-fsdevel@vger.kernel.org>,
-        "linux-ia64@vger.kernel.org" <linux-ia64@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-m68k <linux-m68k@lists.linux-m68k.org>,
-        Linux MM <linux-mm@kvack.org>,
-        arcml <linux-snps-arc@lists.infradead.org>
-References: <20201027112955.14157-1-rppt@kernel.org>
- <20201027112955.14157-12-rppt@kernel.org>
- <CAMuHMdU4r4CJ1kBu7gx1jkputjDn2S8Lqkj7RPfa3XUnM1QOFg@mail.gmail.com>
- <20201028111631.GF1428094@kernel.org>
-From:   Michael Schmitz <schmitzmic@gmail.com>
-Message-ID: <fd55643a-a17b-5a23-4c77-9e832c1e5128@gmail.com>
-Date:   Thu, 29 Oct 2020 07:14:38 +1300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
- Thunderbird/60.6.1
+        Sabrina Dubroca <sd@queasysnail.net>,
+        Steffen Klassert <steffen.klassert@secunet.com>,
+        Taehee Yoo <ap420073@gmail.com>,
+        Trond Myklebust <trond.myklebust@hammerspace.com>,
+        Vladimir Oltean <olteanv@gmail.com>,
+        Willem de Bruijn <willemb@google.com>,
+        Yadu Kishore <kyk.segfault@gmail.com>,
+        linux-nfs@vger.kernel.org, netdev@vger.kernel.org
+Subject: Re: [PATCH RESEND 0/3] Fix wrong identifiers on kernel-doc markups
+Message-ID: <20201028182454.GA16143@sirena.org.uk>
+References: <cover.1603705472.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20201028111631.GF1428094@kernel.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+Content-Type: multipart/signed; micalg=pgp-sha512;
+        protocol="application/pgp-signature"; boundary="ikeVEW9yuYc//A+q"
+Content-Disposition: inline
+In-Reply-To: <cover.1603705472.git.mchehab+huawei@kernel.org>
+X-Cookie: They just buzzed and buzzed...buzzed.
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Mike,
 
-On 29/10/20 12:16 AM, Mike Rapoport wrote:
-> Hi Geert,
->
-> On Wed, Oct 28, 2020 at 10:25:49AM +0100, Geert Uytterhoeven wrote:
->> Hi Mike,
->>
->> On Tue, Oct 27, 2020 at 12:31 PM Mike Rapoport <rppt@kernel.org> wrote:
->>> From: Mike Rapoport <rppt@linux.ibm.com>
->>>
->>> The pg_data_t node structures and their initialization currently depends on
->>> !CONFIG_SINGLE_MEMORY_CHUNK. Since they are required only for DISCONTIGMEM
->>> make this dependency explicit and replace usage of
->>> CONFIG_SINGLE_MEMORY_CHUNK with CONFIG_DISCONTIGMEM where appropriate.
->>>
->>> The CONFIG_SINGLE_MEMORY_CHUNK was implicitly disabled on the ColdFire MMU
->>> variant, although it always presumed a single memory bank. As there is no
->>> actual need for DISCONTIGMEM in this case, make sure that ColdFire MMU
->>> systems set CONFIG_SINGLE_MEMORY_CHUNK to 'y'.
->>>
->>> Signed-off-by: Mike Rapoport <rppt@linux.ibm.com>
->> Thanks for your patch!
->>
->>> ---
->>>   arch/m68k/Kconfig.cpu           | 6 +++---
->>>   arch/m68k/include/asm/page_mm.h | 2 +-
->>>   arch/m68k/mm/init.c             | 4 ++--
->>>   3 files changed, 6 insertions(+), 6 deletions(-)
->> Is there any specific reason you didn't convert the checks for
->> CONFIG_SINGLE_MEMORY_CHUNK in arch/m68k/kernel/setup_mm.c
-> In arch/m68k/kernel/setup_mm.c the CONFIG_SINGLE_MEMORY_CHUNK is needed
-> for the case when a system has two banks, the kernel is loaded into the
-> second bank and so the first bank cannot be used as normal memory. It
-> does not matter what memory model will be used in this case.
+--ikeVEW9yuYc//A+q
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
+On Mon, Oct 26, 2020 at 10:47:35AM +0100, Mauro Carvalho Chehab wrote:
+> Hi Mark/Jakub,
+>=20
+> As you requested, I'm resending the three -net patches
+> from the /56 patch series I sent last Friday:
 
-That case used to be detected just fine at run time (by dint of the 
-second memory chunk having an address below the first; the chunk the 
-kernel resides in is always listed first), even without using 
-CONFIG_SINGLE_MEMORY_CHUNK.
+I was asking for you to do the same for the patches for my subsystems
+rather than resend the net patches to me - in general it's better to
+not to bundle things for multiple subsystems (or tangentially related
+changes in general) together like this.  Splitting things up makes it
+easier to find the relevant changes and means that automations that work
+with patch serieses don't have to deal with things that span multiple
+different trees when it's not required.
 
-Unless you changed that behaviour (and I see nothing in your patch that 
-would indicate that), this is still true.
+--ikeVEW9yuYc//A+q
+Content-Type: application/pgp-signature; name="signature.asc"
 
-Converting the check as Geert suggested, without also adding a test for 
-out-of-order memory bank addresses, would implicitly treat DISCONTIGMEM 
-as  SINGLE_MEMORY_CHUNK, regardless of bank ordering. I don't think that 
-is what we really want?
+-----BEGIN PGP SIGNATURE-----
 
-Cheers,
+iQEzBAABCgAdFiEEreZoqmdXGLWf4p/qJNaLcl1Uh9AFAl+Zt3UACgkQJNaLcl1U
+h9DjbAf/agKKFquaatNyS+9PsKXVvTKCZRLor3HaSfL2YuKiSVcuy9YH2azZEL+7
+CCbmpjmpsEKeKsGJqSgklV0iTDhpmjSRHcG7hvBdFyC2oHAoQOgQvl1sQ7+itktr
+Cjj6xWYMl9lBTxbdWXeI5m0cl3I+0LcJ5yB808GbpkpW6MoEUAyLvIOHBQjkfSMy
+FQC5359kfk65bfQjyIcHE+sgVc0+8j4zks5blibAQarOmpv5vF+z7TYd3OUrsnxJ
+KKZjxtwtTwzOQ7SRpz5NuX9gomuRDUNA0OTrsOQSMuxdYGlkPdeBlJoYnVNZZkD7
+ZIkRA2RvEZIZQTo7Z5BUtHYi7AEikQ==
+=a1MC
+-----END PGP SIGNATURE-----
 
-     Michael
-
-
->
->> and arch/m68k/include/asm/virtconvert.h?
->   
-> I remember I had build errors and troubles with include file
-> dependencies if I changed it there, but I might be mistaken. I'll
-> recheck again.
->
->> Gr{oetje,eeting}s,
->>
->>                          Geert
->>
->> -- 
->> Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
->>
->> In personal conversations with technical people, I call myself a hacker. But
->> when I'm talking to journalists I just say "programmer" or something like that.
->>                                  -- Linus Torvalds
+--ikeVEW9yuYc//A+q--
