@@ -2,136 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A45CD29D736
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 23:22:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B9B3C29D5B0
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 23:08:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732629AbgJ1WWP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 18:22:15 -0400
-Received: from foss.arm.com ([217.140.110.172]:39806 "EHLO foss.arm.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1732627AbgJ1WWO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 18:22:14 -0400
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8EDE81A2D;
-        Wed, 28 Oct 2020 08:16:10 -0700 (PDT)
-Received: from bogus (unknown [10.57.20.213])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4D5F83F66E;
-        Wed, 28 Oct 2020 08:16:08 -0700 (PDT)
-Date:   Wed, 28 Oct 2020 15:15:58 +0000
-From:   Sudeep Holla <sudeep.holla@arm.com>
-To:     Qais Yousef <qais.yousef@arm.com>
-Cc:     Elliot Berman <eberman@codeaurora.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        "Paul E. McKenney" <paulmck@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Sudeep Holla <sudeep.holla@arm.com>,
-        Trilok Soni <tsoni@codeaurora.org>,
-        linux-kernel@vger.kernel.org, psodagud@codeaurora.org,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH] smp: Add bootcpus parameter to boot subset of CPUs
-Message-ID: <20201028151558.odxwolnwbes2gihi@bogus>
-References: <1603404243-5536-1-git-send-email-eberman@codeaurora.org>
- <87v9f04n8r.fsf@nanos.tec.linutronix.de>
- <a6d7f84679240fcf580520230a88c058@codeaurora.org>
- <20201026171224.GV2611@hirez.programming.kicks-ass.net>
- <a9fa1f8d-52c7-adca-9087-160b1ecda6b8@codeaurora.org>
- <20201028145516.23lm66mora5b3wqr@e107158-lin>
+        id S1730169AbgJ1WIA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 18:08:00 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51812 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730156AbgJ1WH6 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 18:07:58 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 56F3BC0613CF;
+        Wed, 28 Oct 2020 15:07:57 -0700 (PDT)
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 666BF7F9;
+        Wed, 28 Oct 2020 17:18:47 +0000 (UTC)
+Date:   Wed, 28 Oct 2020 11:18:46 -0600
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 0/2] kernel-doc: fix typedef function parser
+Message-ID: <20201028111846.582c5b20@lwn.net>
+In-Reply-To: <cover.1603792384.git.mchehab+huawei@kernel.org>
+References: <cover.1603792384.git.mchehab+huawei@kernel.org>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201028145516.23lm66mora5b3wqr@e107158-lin>
-User-Agent: NeoMutt/20171215
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Oct 28, 2020 at 02:55:16PM +0000, Qais Yousef wrote:
-> Hi Elliot
+On Tue, 27 Oct 2020 11:20:35 +0100
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+
+> This small series contain the latest version of the typedef parsing
+> fixes that we've been discussing as:
 > 
-> + Sudeep
+> 	[PATCH v3 01/56] scripts: kernel-doc: fix typedef parsing
 > 
-> On 10/27/20 10:06, Elliot Berman wrote:
-> > 
-> > On 10/26/2020 10:12 AM, Peter Zijlstra wrote:
-> > > On Mon, Oct 26, 2020 at 10:08:47AM -0700, psodagud@codeaurora.org wrote:
-> > > > On 2020-10-23 14:59, Thomas Gleixner wrote:
-> > > > > On Thu, Oct 22 2020 at 15:04, Elliot Berman wrote:
-> > > > > > In a heterogeneous multiprocessor system, specifying the 'maxcpus'
-> > > > > > parameter on kernel command line does not provide sufficient control
-> > > > > > over which CPUs are brought online at kernel boot time, since CPUs may
-> > > > > > have nonuniform performance characteristics. Thus, add bootcpus kernel
-> > > > > > parameter to control which CPUs should be brought online during kernel
-> > > > > > boot. When both maxcpus and bootcpus is set, the more restrictive of
-> > > > > > the
-> > > > > > two are booted.
-> > > > > 
-> > > > > What for? 'maxcpus' is a debug hack at best and outright dangerous on
-> > > > > certain architectures. Why do we need more of that? Just let the machine
-> > > > > boot and offline the CPUs from user space.
+> As I said there, at least while discussing it, I opted to split the
+> patch in two.
+> 
+> The first one changes the regex;
+> The second one is just a cleanup that splits the 3 arguments into 3
+> vars.
+> 
+> From my side, I'm not 100% confident if the second patch is
+> worth or not. 
+> 
+> The advantage of it is that it makes easier to read the regex. 
+> It also also makes clearer about the differences between
+> the two typedef regex'es that are used there. 
+> 
+> On the other hand, using a site like regex101.com to
+> test it is harder, as one needs to copy-and-paste 3 expressions
+> instead of just one.
+> 
+> So, when appliying, feel free to decide to either:
+> 
+> 	-  merge both as-is (two separate patches);
+> 	-  fold them into a single patch;
+> 	- drop the second patch.
 
-Completely agreed, this is what I have suggested people in the past.
+I've gone ahead and applied them both.  Anything that makes the kernel-doc
+script more understandable and maintainable is a step in the right
+direction, I think.
 
-> > > >
-> > > > Hi Thomas and Peter,
-> > > >
-> > > > Based on my understanding with maxcpus option provides, maximum no of CPUs
-> > > > are brough up during the device boot up. There is a different case, in which
-> > > > we want to restrict which CPUs to be brough up.
-> > > > On a system with 8 cpus, if we set maxcpus as 3, cpu0, cpu1, and cpu2 are
-> > > > brough up during the bootup.  For example, if we want to bring core0, core3
-> > > > and core4 current maxcpu(as 3) setting would not help us.
-> > > > On some platform we want the flexibility on which CPUs to bring up during
-> > > > the device bootup. bootcpus command line is helping to bring specific CPUs
-> > > > and these patches are working downstream.
-> > >
+Thanks,
 
-Either offline "unwanted" CPUs from user space. If that is not possible
-for whatever thermal reasons, we need to check if we can disable them in
-the DT like ACPI does. IIUC, it is not supported for some reasons I need
-to recall/check, can't remember that now. If that is not possible, make
-those nodes disappear in the bootloader ?
-
-> > > That's a lot of words, but exactly 0 on _WHY_ you would want to do that.
-> > >
-> >
-> > We find the ability to limit the number of cpus brought online at bootup
-> > useful, and to possibly later enable those cores. One use case is when
-> > device is undergoing initial testing is to use bootcpus to limit bootup to
-> > only a couple cores and later bring up the other cores for a controlled
-> > stress test. A core brought up during boot is also running device
-> > initialization. Besides being useful for SoC vendor bringup which typically
-> > occurs downstream, this particular use case could be exercised by developer
-> > of upstream support for a SoC when initial CPU settings are being
-> > determined.
-> >
-
-Why not try single core instead of couple of core and add the needed ones
-for the user-space ?
-
-> > Another use case is if user wishes to limit bootup only to the smaller or
-> > bigger cores. maxcpus= is not sufficient here to ensure that only those
-> > cores are booted since it limits only to the first N cores, which may not be
-> > the desired small or big cores. User may want to bring up only the smaller
-> > cores during bootup for thermal reasons. For instance, device may be later
-> > sufficiently charged such that boot up of the bigger cores is now
-> > permissible. Relying on thermal drivers to later take care of putting core
-> > into lower power idle may not occur until much later in boot (for instance,
-> > if the governor is a module).
->
-> I would have thought that FW/SCP would have the power to block booting up the
-> CPUs if it deemed that to be unsafe.
->
-
-I think it is more like *desire* to run with whatever battery life is left
-rather than *unsafe* to bring up the core.
-
-Also not sure if we can put such battery life related policies in the
-firmware. If there is a thermal constraint, I am sure f/w will and must
-refuse to boot the core. I doubt if we are talking about that here. It is
-more a policy to extract max out of the battery life left, at-least the way
-I see this issue. I may not have full context here, sorry.
-
--- 
-Regards,
-Sudeep
+jon
