@@ -2,40 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1D4C129DF4C
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 02:01:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 87B4C29DE53
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:53:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731552AbgJ2BAc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 21:00:32 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60518 "EHLO mail.kernel.org"
+        id S1731878AbgJ1WTW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 18:19:22 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60522 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731543AbgJ1WR2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 18:17:28 -0400
+        id S1731663AbgJ1WRk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Oct 2020 18:17:40 -0400
 Received: from mail.kernel.org (ip5f5ad5b2.dynamic.kabel-deutschland.de [95.90.213.178])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 2D5732479F;
+        by mail.kernel.org (Postfix) with ESMTPSA id 59B16247A7;
         Wed, 28 Oct 2020 14:23:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1603895015;
-        bh=bhTM3oQEf2DyoKX7p90cruJ74AOlutupXUzBp7NKm0Q=;
+        bh=JAx1qWa20um1wQnui7p3l/DIW1YJ8YcH6WDCgd1IdSU=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=lqWzQ12Taf7trcJ2RB8j7pse058el+vyE9LvSXQYyvZ6OK3aVRCp9s5VlnD54o8yH
-         QWGphusLXUMk0xm2iKwaz/SjsdV20hRV+3eKrjtMyIFrSRSagmtY8YhxOE9FJNDvwV
-         Rj7AUo3dDCDsm3ltktNKiAqqb6CSCyvsJWTQ7EGE=
+        b=l751ojO5xWe+dORLoDgW1EzlSHs0QR+n1JmTHLoUWMW/Bx55nmbRxJb5Pb+/O9jxP
+         i8tJmF8TFQig657YLLejnAqH6bPS+rpaIlB7+BS9/udWOOgKAeo5a5uxGfeCHblYyc
+         3I6qm5ftuvDbCRoG9Y6B/dtFtB2dvF85lsdJ9te8=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kXmMP-003hlj-7t; Wed, 28 Oct 2020 15:23:33 +0100
+        id 1kXmMP-003hln-A4; Wed, 28 Oct 2020 15:23:33 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>
 Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
         "Jonathan Corbet" <corbet@lwn.net>,
         "Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 21/33] docs: ABI: make it parse ABI/stable as ReST-compatible files
-Date:   Wed, 28 Oct 2020 15:23:19 +0100
-Message-Id: <d2a7da2a62d90bd8ea0f779a949f06ee795f3244.1603893146.git.mchehab+huawei@kernel.org>
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH 23/33] docs: ABI: don't escape ReST-incompatible chars from obsolete and removed
+Date:   Wed, 28 Oct 2020 15:23:21 +0100
+Message-Id: <53f82f9b3c063bb1b928bdea4986f1471ad3ace7.1603893146.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1603893146.git.mchehab+huawei@kernel.org>
 References: <cover.1603893146.git.mchehab+huawei@kernel.org>
@@ -48,59 +50,48 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 
-Now that the stable ABI files are compatible with ReST,
-parse them without converting complex descriptions as literal
-blocks nor escaping special characters.
-
-Please notice that escaping special characters will probably
-be needed at descriptions, at least for the asterisk character.
+With just a single fix, the contents there can be parsed properly
+without the need to escape any ReST incompatible stuff.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/admin-guide/abi-stable.rst | 1 +
- Documentation/sphinx/kernel_abi.py       | 8 ++++++--
- 2 files changed, 7 insertions(+), 2 deletions(-)
+ Documentation/ABI/obsolete/sysfs-gpio      | 2 ++
+ Documentation/admin-guide/abi-obsolete.rst | 1 +
+ Documentation/admin-guide/abi-removed.rst  | 1 +
+ 3 files changed, 4 insertions(+)
 
-diff --git a/Documentation/admin-guide/abi-stable.rst b/Documentation/admin-guide/abi-stable.rst
-index 7495d7a35048..70490736e0d3 100644
---- a/Documentation/admin-guide/abi-stable.rst
-+++ b/Documentation/admin-guide/abi-stable.rst
-@@ -11,3 +11,4 @@ Most interfaces (like syscalls) are expected to never change and always
- be available.
+diff --git a/Documentation/ABI/obsolete/sysfs-gpio b/Documentation/ABI/obsolete/sysfs-gpio
+index e0d4e5e2dd90..b8b0fd341c17 100644
+--- a/Documentation/ABI/obsolete/sysfs-gpio
++++ b/Documentation/ABI/obsolete/sysfs-gpio
+@@ -13,6 +13,8 @@ Description:
+   GPIOs are identified as they are inside the kernel, using integers in
+   the range 0..INT_MAX.  See Documentation/admin-guide/gpio for more information.
  
- .. kernel-abi:: $srctree/Documentation/ABI/stable
-+   :rst:
-diff --git a/Documentation/sphinx/kernel_abi.py b/Documentation/sphinx/kernel_abi.py
-index ce5f3b0ae811..f3da859c9878 100644
---- a/Documentation/sphinx/kernel_abi.py
-+++ b/Documentation/sphinx/kernel_abi.py
-@@ -73,12 +73,13 @@ class KernelCmd(Directive):
-     u"""KernelABI (``kernel-abi``) directive"""
- 
-     required_arguments = 1
--    optional_arguments = 0
-+    optional_arguments = 2
-     has_content = False
-     final_argument_whitespace = True
- 
-     option_spec = {
--        "debug"     : directives.flag
-+        "debug"     : directives.flag,
-+        "rst"       : directives.unchanged
-     }
- 
-     def run(self):
-@@ -92,6 +93,9 @@ class KernelCmd(Directive):
-         cmd = "get_abi.pl rest --enable-lineno --dir "
-         cmd += self.arguments[0]
- 
-+        if 'rst' in self.options:
-+            cmd += " --rst-source"
++  ::
 +
-         srctree = path.abspath(os.environ["srctree"])
+     /sys/class/gpio
+ 	/export ... asks the kernel to export a GPIO to userspace
+ 	/unexport ... to return a GPIO to the kernel
+diff --git a/Documentation/admin-guide/abi-obsolete.rst b/Documentation/admin-guide/abi-obsolete.rst
+index cda9168445a5..d095867899c5 100644
+--- a/Documentation/admin-guide/abi-obsolete.rst
++++ b/Documentation/admin-guide/abi-obsolete.rst
+@@ -8,3 +8,4 @@ The description of the interface will document the reason why it is
+ obsolete and when it can be expected to be removed.
  
-         fname = cmd
+ .. kernel-abi:: $srctree/Documentation/ABI/obsolete
++   :rst:
+diff --git a/Documentation/admin-guide/abi-removed.rst b/Documentation/admin-guide/abi-removed.rst
+index 497978fc9632..f7e9e43023c1 100644
+--- a/Documentation/admin-guide/abi-removed.rst
++++ b/Documentation/admin-guide/abi-removed.rst
+@@ -2,3 +2,4 @@ ABI removed symbols
+ ===================
+ 
+ .. kernel-abi:: $srctree/Documentation/ABI/removed
++   :rst:
 -- 
 2.26.2
 
