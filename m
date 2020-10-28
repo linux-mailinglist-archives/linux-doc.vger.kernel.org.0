@@ -2,65 +2,65 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 49C8A29DD15
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:35:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1BF8629DF7D
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 02:02:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731973AbgJ1WTb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 18:19:31 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53592 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1732158AbgJ1WR5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 18:17:57 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 46B69C0613CF;
-        Wed, 28 Oct 2020 15:17:57 -0700 (PDT)
-Received: from lwn.net (localhost [127.0.0.1])
+        id S2403967AbgJ2BBk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 21:01:40 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60466 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1731505AbgJ1WRX (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Oct 2020 18:17:23 -0400
+Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 2F34E49B;
-        Wed, 28 Oct 2020 16:21:04 +0000 (UTC)
-Date:   Wed, 28 Oct 2020 10:21:03 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 12/33] docs: kernel_abi.py: add a script to parse ABI
- documentation
-Message-ID: <20201028102103.35884c91@lwn.net>
-In-Reply-To: <fbc723a2c49bd928f7845cba08e4996b9eb73142.1603893146.git.mchehab+huawei@kernel.org>
-References: <cover.1603893146.git.mchehab+huawei@kernel.org>
-        <fbc723a2c49bd928f7845cba08e4996b9eb73142.1603893146.git.mchehab+huawei@kernel.org>
-Organization: LWN.net
+        by mail.kernel.org (Postfix) with ESMTPSA id 9C0A522281;
+        Wed, 28 Oct 2020 05:54:32 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1603864473;
+        bh=72tdqQGYgx97kC78MmocZGiIQ8/htsbdM1NBjk0K1I8=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=WB/vvFCA/kWkNiO7Kr/jDWIp+xd3mah2esh2L9agVA3HcXraFS0jk60/OdL7mKvYI
+         7HZzatctjYLdJLGQEqyk1kQDaMFzHGHd+0ZPF9rOdj9967mgDQLz6XLdZS4DK1Sahl
+         Zlhr3mnDs6fAH9JHrPs70N3c4lVQO0EYFh3Fh0o0=
+Date:   Wed, 28 Oct 2020 06:54:29 +0100
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Sudeep Dutt <sudeep.dutt@intel.com>
+Cc:     Arnd Bergmann <arnd@arndb.de>, linux-kernel@vger.kernel.org,
+        dmaengine@vger.kernel.org, linux-doc@vger.kernel.org,
+        Jonathan Corbet <corbet@lwn.net>,
+        Vinod Koul <vkoul@kernel.org>, Sherry Sun <sherry.sun@nxp.com>,
+        Ashutosh Dixit <ashutosh.dixit@intel.com>,
+        Nikhil Rao <nikhil.rao@intel.com>
+Subject: Re: [PATCH char-misc-next 1/1] misc: mic: remove the MIC drivers
+Message-ID: <20201028055429.GA244117@kroah.com>
+References: <8c1443136563de34699d2c084df478181c205db4.1603854416.git.sudeep.dutt@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <8c1443136563de34699d2c084df478181c205db4.1603854416.git.sudeep.dutt@intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-So this is separate from the patch series itself in a way, but it brings a
-question to mind:
+On Tue, Oct 27, 2020 at 08:14:15PM -0700, Sudeep Dutt wrote:
+> This patch removes the MIC drivers from the kernel tree
+> since the corresponding devices have been discontinued.
 
-On Wed, 28 Oct 2020 15:23:10 +0100
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+Does "discontinued" mean "never shipped a device so no one has access to
+this hardware anymore", or does it mean "we stopped shipping devices and
+there are customers with this?"
 
-> +# We can't assume that six is installed
-> +PY3 = sys.version_info[0] == 3
-> +PY2 = sys.version_info[0] == 2
-> +if PY3:
-> +    # pylint: disable=C0103, W0622
-> +    unicode     = str
-> +    basestring  = str
+> Removing the dma and char-misc changes in one patch and
+> merging via the char-misc tree is best to avoid any
+> potential build breakage.
+> 
+> Cc: Nikhil Rao <nikhil.rao@intel.com>
+> Reviewed-by: Ashutosh Dixit <ashutosh.dixit@intel.com>
+> Signed-off-by: Sudeep Dutt <sudeep.dutt@intel.com>
 
-I wonder how much longer we really need to support any of:
+I like deleting code, can this go into 5.10-final?
 
- - Python < 3.n (where n=5 or 6 maybe)
- - Sphinx < 1.7 or even some 2.x
+thanks,
 
-We're carrying a certain and growing amount of cruft to handle these
-cases.  I might start putting together a series to clean this up for 5.11
-or so.
-
-jon
+greg k-h
