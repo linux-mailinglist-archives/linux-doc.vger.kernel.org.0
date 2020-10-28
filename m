@@ -2,40 +2,41 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C297B29D6F7
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 23:20:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B0AA729D6F9
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 23:20:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731884AbgJ1WTX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 18:19:23 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60514 "EHLO mail.kernel.org"
+        id S1731912AbgJ1WTZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 18:19:25 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60530 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731680AbgJ1WRl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 18:17:41 -0400
+        id S1731708AbgJ1WRm (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Oct 2020 18:17:42 -0400
 Received: from mail.kernel.org (ip5f5ad5b2.dynamic.kabel-deutschland.de [95.90.213.178])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 3D875247A0;
+        by mail.kernel.org (Postfix) with ESMTPSA id 80D77247BE;
         Wed, 28 Oct 2020 14:23:35 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1603895015;
-        bh=9CndlUwYK0Pkv0BAJhbUAbfsUVYqfxdjd9QC1RfMLEA=;
+        bh=FP3F4ZgL5XCH4fGqHCJkgaGUhs4N/I/277tGvHvCmsY=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=gGddvqoioYDmq06GNWPFY7BXiyO7rqK+RY+LxH9ijTdCYWwW98o02LfJR3SQcw5mh
-         kwlQ8KqMvscSj+CWGoYunTLuy7pPUCD05jWSf3Yi3sdjiLUKAftqSUllrXm/uLTKSk
-         GzQtOw5hZf2n1FTly0c0b29SYHkvPMXyGPZcOtS4=
+        b=sMTh9xqjokxXlLHuHLEOZelkwQfZVpK4I7PevDGM+SnhbUOUqzF/YvjBAdVDwrhgU
+         nwrAkBG8Ohqf77iyd0FCME73PVb1VKcPVyYdgid/UFcSJAakIZKzzP66vR1jhI7Sq4
+         lRuPBHYAPdzHomZ2mXZMyzpfy/iBuqpyRM+2YYck=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kXmMP-003hll-8o; Wed, 28 Oct 2020 15:23:33 +0100
+        id 1kXmMP-003hlv-FW; Wed, 28 Oct 2020 15:23:33 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         "Jonathan Corbet" <corbet@lwn.net>,
-        "Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
+        "Rafael J. Wysocki" <rjw@rjwysocki.net>,
+        Len Brown <lenb@kernel.org>, linux-acpi@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [PATCH 22/33] docs: ABI: create a 2-depth index for ABI
-Date:   Wed, 28 Oct 2020 15:23:20 +0100
-Message-Id: <d29ff27cb527af03ee6ac35f40e354ebe1c2cafe.1603893146.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 26/33] docs: ABI: convert testing/configfs-acpi to ReST
+Date:   Wed, 28 Oct 2020 15:23:24 +0100
+Message-Id: <7a278b19168593d905a0eabbd10ee5f8bbbcb935.1603893146.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.26.2
 In-Reply-To: <cover.1603893146.git.mchehab+huawei@kernel.org>
 References: <cover.1603893146.git.mchehab+huawei@kernel.org>
@@ -46,29 +47,63 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+There are some problems with this file when a ReST content
+is produced. Fix it.
 
-That helps to identify what ABI files are adding titles.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/admin-guide/abi.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ Documentation/ABI/testing/configfs-acpi | 34 ++++++++++++++++++-------
+ 1 file changed, 25 insertions(+), 9 deletions(-)
 
-diff --git a/Documentation/admin-guide/abi.rst b/Documentation/admin-guide/abi.rst
-index 3b9645c77469..bcab3ef2597c 100644
---- a/Documentation/admin-guide/abi.rst
-+++ b/Documentation/admin-guide/abi.rst
-@@ -3,7 +3,7 @@ Linux ABI description
- =====================
+diff --git a/Documentation/ABI/testing/configfs-acpi b/Documentation/ABI/testing/configfs-acpi
+index 4ab4e99aa863..c09b640c3cb1 100644
+--- a/Documentation/ABI/testing/configfs-acpi
++++ b/Documentation/ABI/testing/configfs-acpi
+@@ -14,7 +14,8 @@ Description:
+ 		This group contains the configuration for user defined ACPI
+ 		tables. The attributes of a user define table are:
  
- .. toctree::
--   :maxdepth: 1
-+   :maxdepth: 2
+-		aml 		- a binary attribute that the user can use to
++		aml
++			      - a binary attribute that the user can use to
+ 				fill in the ACPI aml definitions. Once the aml
+ 				data is written to this file and the file is
+ 				closed the table will be loaded and ACPI devices
+@@ -26,11 +27,26 @@ Description:
+ 		The rest of the attributes are read-only and are valid only
+ 		after the table has been loaded by filling the aml entry:
  
-    abi-stable
-    abi-testing
+-		signature 	- ASCII table signature
+-		length 		- length of table in bytes, including the header
+-		revision 	- ACPI Specification minor version number
+-		oem_id 		- ASCII OEM identification
+-		oem_table_id 	- ASCII OEM table identification
+-		oem_revision 	- OEM revision number
+-		asl_compiler_id - ASCII ASL compiler vendor ID
+-		asl_compiler_revision - ASL compiler version
++		signature
++				- ASCII table signature
++
++		length
++				- length of table in bytes, including the header
++
++		revision
++				- ACPI Specification minor version number
++
++		oem_id
++				- ASCII OEM identification
++
++		oem_table_id
++				- ASCII OEM table identification
++
++		oem_revision
++				- OEM revision number
++
++		asl_compiler_id
++				- ASCII ASL compiler vendor ID
++
++		asl_compiler_revision
++				- ASL compiler version
 -- 
 2.26.2
 
