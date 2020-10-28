@@ -2,378 +2,197 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1265729DEB7
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:56:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 676D029DEE4
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 01:57:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390967AbgJ2A4E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 20:56:04 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60548 "EHLO mail.kernel.org"
+        id S1728030AbgJ2A5O (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 20:57:14 -0400
+Received: from mail.kernel.org ([198.145.29.99]:60516 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1731638AbgJ1WRh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 18:17:37 -0400
-Received: from gandalf.local.home (cpe-66-24-58-225.stny.res.rr.com [66.24.58.225])
+        id S1731608AbgJ1WRf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 28 Oct 2020 18:17:35 -0400
+Received: from mail.kernel.org (ip5f5ad5b2.dynamic.kabel-deutschland.de [95.90.213.178])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 553C2246DB;
-        Wed, 28 Oct 2020 11:56:15 +0000 (UTC)
-Received: from rostedt by gandalf.local.home with local (Exim 4.94)
-        (envelope-from <rostedt@goodmis.org>)
-        id 1kXk3p-005ZKT-Ts; Wed, 28 Oct 2020 07:56:13 -0400
-Message-ID: <20201028115613.742454631@goodmis.org>
-User-Agent: quilt/0.66
-Date:   Wed, 28 Oct 2020 07:52:53 -0400
-From:   Steven Rostedt <rostedt@goodmis.org>
-To:     linux-kernel@vger.kernel.org
-Cc:     Masami Hiramatsu <mhiramat@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        Miroslav Benes <mbenes@suse.cz>,
-        Kamalesh Babulal <kamalesh@linux.vnet.ibm.com>,
-        Petr Mladek <pmladek@suse.com>, linux-doc@vger.kernel.org
-Subject: [PATCH 9/9] ftrace: Reverse what the RECURSION flag means in the ftrace_ops
-References: <20201028115244.995788961@goodmis.org>
+        by mail.kernel.org (Postfix) with ESMTPSA id 7071F247B9;
+        Wed, 28 Oct 2020 14:23:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1603895015;
+        bh=o5fpMFDz7DGix7Klrhn+855AGlng0F/UM59klpo7meE=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=glqK3lNEhlpqNfzjo6sGVhMCfhp2VX561tLmn1u8nBGnl52o9rqtoqyGU02jVZ9NG
+         cud0eedCdX3QDYHWtRP23c/2zIneuC1ce03hZwRDTSScSOwaoW3plJJgNIkESrd8kJ
+         xgp9IttxqvIYNAl4lmQDAAdRG2+0pjxze/QJnqwA=
+Received: from mchehab by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kXmMO-003hkn-2A; Wed, 28 Oct 2020 15:23:32 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc:     Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
+        "Jonathan Corbet" <corbet@lwn.net>,
+        "Mauro Carvalho Chehab" <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 01/33] scripts: get_abi.pl: change script to allow parsing in ReST mode
+Date:   Wed, 28 Oct 2020 15:22:59 +0100
+Message-Id: <6bed15a4dc1587faf5312d4f63e57775b27f1ff6.1603893146.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.26.2
+In-Reply-To: <cover.1603893146.git.mchehab+huawei@kernel.org>
+References: <cover.1603893146.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: "Steven Rostedt (VMware)" <rostedt@goodmis.org>
+From: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
 
-Now that all callbacks are recursion safe, reverse the meaning of the
-RECURSION flag and rename it from RECURSION_SAFE to simply RECURSION.
-Now only callbacks that request to have recursion protecting it will
-have the added trampoline to do so.
+Right now, several ABI files won't parse as ReST, as they
+contain severe violations to the spec, with makes the script
+to crash.
 
-Also remove the outdated comment about "PER_CPU" when determining to
-use the ftrace_ops_assist_func.
+So, the code has a sanity logic with escapes bad code and
+cleans tags that can cause Sphinx to crash.
 
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Sebastian Andrzej Siewior <bigeasy@linutronix.de>
-Cc: Miroslav Benes <mbenes@suse.cz>
-Cc: Kamalesh Babulal <kamalesh@linux.vnet.ibm.com>
-Cc: Petr Mladek <pmladek@suse.com>
-Cc: linux-doc@vger.kernel.org
-Signed-off-by: Steven Rostedt (VMware) <rostedt@goodmis.org>
+Add support for disabling this mode.
+
+Right now, as enabling rst-mode causes crash, it is disabled
+by default.
+
+Signed-off-by: Mauro Carvalho Chehab <mchehab+samsung@kernel.org>
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/trace/ftrace-uses.rst | 82 +++++++++++++++++++++--------
- include/linux/ftrace.h              | 12 ++---
- kernel/trace/fgraph.c               |  3 +-
- kernel/trace/ftrace.c               | 20 ++++---
- kernel/trace/trace_events.c         |  1 -
- kernel/trace/trace_functions.c      |  2 +-
- kernel/trace/trace_selftest.c       |  7 +--
- kernel/trace/trace_stack.c          |  1 -
- 8 files changed, 79 insertions(+), 49 deletions(-)
+ scripts/get_abi.pl | 74 ++++++++++++++++++++++++++++++----------------
+ 1 file changed, 48 insertions(+), 26 deletions(-)
 
-diff --git a/Documentation/trace/ftrace-uses.rst b/Documentation/trace/ftrace-uses.rst
-index 2a05e770618a..cce218d65f40 100644
---- a/Documentation/trace/ftrace-uses.rst
-+++ b/Documentation/trace/ftrace-uses.rst
-@@ -30,8 +30,8 @@ The ftrace context
-   This requires extra care to what can be done inside a callback. A callback
-   can be called outside the protective scope of RCU.
+diff --git a/scripts/get_abi.pl b/scripts/get_abi.pl
+index c738cb795514..107672cdacb3 100755
+--- a/scripts/get_abi.pl
++++ b/scripts/get_abi.pl
+@@ -12,8 +12,14 @@ my $man;
+ my $debug;
+ my $prefix="Documentation/ABI";
  
--The ftrace infrastructure has some protections against recursions and RCU
--but one must still be very careful how they use the callbacks.
-+There are helper functions to help against recursion, and making sure
-+RCU is watching. These are explained below.
++#
++# If true, assumes that the description is formatted with ReST
++#
++my $description_is_rst = 0;
++
+ GetOptions(
+ 	"debug|d+" => \$debug,
++	"rst-source!" => \$description_is_rst,
+ 	"dir=s" => \$prefix,
+ 	'help|?' => \$help,
+ 	man => \$man
+@@ -137,14 +143,15 @@ sub parse_abi {
+ 					next;
+ 				}
+ 				if ($tag eq "description") {
+-					next if ($content =~ m/^\s*$/);
+-					if ($content =~ m/^(\s*)(.*)/) {
+-						my $new_content = $2;
+-						$space = $new_tag . $sep . $1;
+-						while ($space =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e) {}
+-						$space =~ s/./ /g;
+-						$data{$what}->{$tag} .= "$new_content\n";
++					# Preserve initial spaces for the first line
++					$content = ' ' x length($new_tag) . $sep . $content;
++					$content =~ s,^(\s*):,$1 ,;
++					if ($content =~ m/^(\s*)(.*)$/) {
++						$space = $1;
++						$content = $2;
+ 					}
++					while ($space =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e) {}
++					$data{$what}->{$tag} .= $content;
+ 				} else {
+ 					$data{$what}->{$tag} = $content;
+ 				}
+@@ -160,11 +167,15 @@ sub parse_abi {
  
+ 		if ($tag eq "description") {
+ 			if (!$data{$what}->{description}) {
+-				next if (m/^\s*\n/);
++				s/^($space)//;
+ 				if (m/^(\s*)(.*)/) {
+-					$space = $1;
+-					while ($space =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e) {}
+-					$data{$what}->{$tag} .= "$2\n";
++					my $sp = $1;
++					while ($sp =~ s/\t+/' ' x (length($&) * 8 - length($`) % 8)/e) {}
++					my $content = "$sp$2";
++
++					$content =~ s/^($space)//;
++
++					$data{$what}->{$tag} .= "$content";
+ 				}
+ 			} else {
+ 				my $content = $_;
+@@ -274,23 +285,27 @@ sub output_rest {
+ 		print "Defined on file :ref:`$file <$fileref>`\n\n" if ($type ne "File");
  
- The ftrace_ops structure
-@@ -108,6 +108,50 @@ The prototype of the callback function is as follows (as of v4.14):
- 	at the start of the function where ftrace was tracing. Otherwise it
- 	either contains garbage, or NULL.
- 
-+Protect your callback
-+=====================
-+
-+As functions can be called from anywhere, and it is possible that a function
-+called by a callback may also be traced, and call that same callback,
-+recursion protection must be used. There are two helper functions that
-+can help in this regard. If you start your code with:
-+
-+	int bit;
-+
-+	bit = ftrace_test_recursion_trylock();
-+	if (bit < 0)
-+		return;
-+
-+and end it with:
-+
-+	ftrace_test_recursion_unlock(bit);
-+
-+The code in between will be safe to use, even if it ends up calling a
-+function that the callback is tracing. Note, on success, 
-+ftrace_test_recursion_trylock() will disable preemption, and the
-+ftrace_test_recursion_unlock() will enable it again (if it was previously
-+enabled).
-+
-+Alternatively, if the FTRACE_OPS_FL_RECURSION flag is set on the ftrace_ops
-+(as explained below), then a helper trampoline will be used to test
-+for recursion for the callback and no recursion test needs to be done.
-+But this is at the expense of a slightly more overhead from an extra
-+function call.
-+
-+If your callback accesses any data or critical section that requires RCU
-+protection, it is best to make sure that RCU is "watching", otherwise
-+that data or critical section will not be protected as expected. In this
-+case add:
-+
-+	if (!rcu_is_watching())
-+		return;
-+
-+Alternatively, if the FTRACE_OPS_FL_RCU flag is set on the ftrace_ops
-+(as explained below), then a helper trampoline will be used to test
-+for rcu_is_watching for the callback and no other test needs to be done.
-+But this is at the expense of a slightly more overhead from an extra
-+function call.
-+
- 
- The ftrace FLAGS
- ================
-@@ -128,26 +172,20 @@ FTRACE_OPS_FL_SAVE_REGS_IF_SUPPORTED
- 	will not fail with this flag set. But the callback must check if
- 	regs is NULL or not to determine if the architecture supports it.
- 
--FTRACE_OPS_FL_RECURSION_SAFE
--	By default, a wrapper is added around the callback to
--	make sure that recursion of the function does not occur. That is,
--	if a function that is called as a result of the callback's execution
--	is also traced, ftrace will prevent the callback from being called
--	again. But this wrapper adds some overhead, and if the callback is
--	safe from recursion, it can set this flag to disable the ftrace
--	protection.
+ 		my $desc = $data{$what}->{description};
+-		$desc =~ s/^\s+//;
 -
--	Note, if this flag is set, and recursion does occur, it could cause
--	the system to crash, and possibly reboot via a triple fault.
+-		# Remove title markups from the description, as they won't work
+-		$desc =~ s/\n[\-\*\=\^\~]+\n/\n/g;
+ 
+ 		if (!($desc =~ /^\s*$/)) {
+-			if ($desc =~ m/\:\n/ || $desc =~ m/\n[\t ]+/  || $desc =~ m/[\x00-\x08\x0b-\x1f\x7b-\xff]/) {
+-				# put everything inside a code block
+-				$desc =~ s/\n/\n /g;
 -
--	It is OK if another callback traces a function that is called by a
--	callback that is marked recursion safe. Recursion safe callbacks
--	must never trace any function that are called by the callback
--	itself or any nested functions that those functions call.
+-				print "::\n\n";
+-				print " $desc\n\n";
+-			} else {
+-				# Escape any special chars from description
+-				$desc =~s/([\x00-\x08\x0b-\x1f\x21-\x2a\x2d\x2f\x3c-\x40\x5c\x5e-\x60\x7b-\xff])/\\$1/g;
 -
--	If this flag is set, it is possible that the callback will also
--	be called with preemption enabled (when CONFIG_PREEMPTION is set),
--	but this is not guaranteed.
-+FTRACE_OPS_FL_RECURSION
-+	By default, it is expected that the callback can handle recursion.
-+	But if the callback is not that worried about overehead, then
-+	setting this bit will add the recursion protection around the
-+	callback by calling a helper function that will do the recursion
-+	protection and only call the callback if it did not recurse.
++			if ($description_is_rst) {
+ 				print "$desc\n\n";
++			} else {
++				$desc =~ s/^\s+//;
 +
-+	Note, if this flag is not set, and recursion does occur, it could
-+	cause the system to crash, and possibly reboot via a triple fault.
++				# Remove title markups from the description, as they won't work
++				$desc =~ s/\n[\-\*\=\^\~]+\n/\n\n/g;
 +
-+	Not, if this flag is set, then the callback will always be called
-+	with preemption disabled. If it is not set, then it is possible
-+	(but not guaranteed) that the callback will be called in
-+	preemptable context.
++				if ($desc =~ m/\:\n/ || $desc =~ m/\n[\t ]+/  || $desc =~ m/[\x00-\x08\x0b-\x1f\x7b-\xff]/) {
++					# put everything inside a code block
++					$desc =~ s/\n/\n /g;
++
++					print "::\n\n";
++					print " $desc\n\n";
++				} else {
++					# Escape any special chars from description
++					$desc =~s/([\x00-\x08\x0b-\x1f\x21-\x2a\x2d\x2f\x3c-\x40\x5c\x5e-\x60\x7b-\xff])/\\$1/g;
++					print "$desc\n\n";
++				}
+ 			}
+ 		} else {
+ 			print "DESCRIPTION MISSING for $what\n\n" if (!$data{$what}->{is_file});
+@@ -382,7 +397,7 @@ abi_book.pl - parse the Linux ABI files and produce a ReST book.
  
- FTRACE_OPS_FL_IPMODIFY
- 	Requires FTRACE_OPS_FL_SAVE_REGS set. If the callback is to "hijack"
-diff --git a/include/linux/ftrace.h b/include/linux/ftrace.h
-index 0e4164a7f56d..806196345c3f 100644
---- a/include/linux/ftrace.h
-+++ b/include/linux/ftrace.h
-@@ -98,7 +98,7 @@ ftrace_func_t ftrace_ops_get_func(struct ftrace_ops *ops);
- /*
-  * FTRACE_OPS_FL_* bits denote the state of ftrace_ops struct and are
-  * set in the flags member.
-- * CONTROL, SAVE_REGS, SAVE_REGS_IF_SUPPORTED, RECURSION_SAFE, STUB and
-+ * CONTROL, SAVE_REGS, SAVE_REGS_IF_SUPPORTED, RECURSION, STUB and
-  * IPMODIFY are a kind of attribute flags which can be set only before
-  * registering the ftrace_ops, and can not be modified while registered.
-  * Changing those attribute flags after registering ftrace_ops will
-@@ -121,10 +121,10 @@ ftrace_func_t ftrace_ops_get_func(struct ftrace_ops *ops);
-  *            passing regs to the handler.
-  *            Note, if this flag is set, the SAVE_REGS flag will automatically
-  *            get set upon registering the ftrace_ops, if the arch supports it.
-- * RECURSION_SAFE - The ftrace_ops can set this to tell the ftrace infrastructure
-- *            that the call back has its own recursion protection. If it does
-- *            not set this, then the ftrace infrastructure will add recursion
-- *            protection for the caller.
-+ * RECURSION - The ftrace_ops can set this to tell the ftrace infrastructure
-+ *            that the call back needs recursion protection. If it does
-+ *            not set this, then the ftrace infrastructure will assume
-+ *            that the callback can handle recursion on its own.
-  * STUB   - The ftrace_ops is just a place holder.
-  * INITIALIZED - The ftrace_ops has already been initialized (first use time
-  *            register_ftrace_function() is called, it will initialized the ops)
-@@ -156,7 +156,7 @@ enum {
- 	FTRACE_OPS_FL_DYNAMIC			= BIT(1),
- 	FTRACE_OPS_FL_SAVE_REGS			= BIT(2),
- 	FTRACE_OPS_FL_SAVE_REGS_IF_SUPPORTED	= BIT(3),
--	FTRACE_OPS_FL_RECURSION_SAFE		= BIT(4),
-+	FTRACE_OPS_FL_RECURSION			= BIT(4),
- 	FTRACE_OPS_FL_STUB			= BIT(5),
- 	FTRACE_OPS_FL_INITIALIZED		= BIT(6),
- 	FTRACE_OPS_FL_DELETED			= BIT(7),
-diff --git a/kernel/trace/fgraph.c b/kernel/trace/fgraph.c
-index 5658f13037b3..73edb9e4f354 100644
---- a/kernel/trace/fgraph.c
-+++ b/kernel/trace/fgraph.c
-@@ -334,8 +334,7 @@ unsigned long ftrace_graph_ret_addr(struct task_struct *task, int *idx,
+ =head1 SYNOPSIS
  
- static struct ftrace_ops graph_ops = {
- 	.func			= ftrace_stub,
--	.flags			= FTRACE_OPS_FL_RECURSION_SAFE |
--				   FTRACE_OPS_FL_INITIALIZED |
-+	.flags			= FTRACE_OPS_FL_INITIALIZED |
- 				   FTRACE_OPS_FL_PID |
- 				   FTRACE_OPS_FL_STUB,
- #ifdef FTRACE_GRAPH_TRAMP_ADDR
-diff --git a/kernel/trace/ftrace.c b/kernel/trace/ftrace.c
-index 4833b6a82ce7..2dcae8251104 100644
---- a/kernel/trace/ftrace.c
-+++ b/kernel/trace/ftrace.c
-@@ -80,7 +80,7 @@ enum {
+-B<abi_book.pl> [--debug] [--man] [--help] [--dir=<dir>] <COMAND> [<ARGUMENT>]
++B<abi_book.pl> [--debug] [--man] [--help] --[(no-)rst-source] [--dir=<dir>] <COMAND> [<ARGUMENT>]
  
- struct ftrace_ops ftrace_list_end __read_mostly = {
- 	.func		= ftrace_stub,
--	.flags		= FTRACE_OPS_FL_RECURSION_SAFE | FTRACE_OPS_FL_STUB,
-+	.flags		= FTRACE_OPS_FL_STUB,
- 	INIT_OPS_HASH(ftrace_list_end)
- };
+ Where <COMMAND> can be:
  
-@@ -866,7 +866,7 @@ static void unregister_ftrace_profiler(void)
- #else
- static struct ftrace_ops ftrace_profile_ops __read_mostly = {
- 	.func		= function_profile_call,
--	.flags		= FTRACE_OPS_FL_RECURSION_SAFE | FTRACE_OPS_FL_INITIALIZED,
-+	.flags		= FTRACE_OPS_FL_INITIALIZED,
- 	INIT_OPS_HASH(ftrace_profile_ops)
- };
+@@ -405,6 +420,13 @@ B<validate>              - validate the ABI contents
+ Changes the location of the ABI search. By default, it uses
+ the Documentation/ABI directory.
  
-@@ -1040,8 +1040,7 @@ struct ftrace_ops global_ops = {
- 	.local_hash.notrace_hash	= EMPTY_HASH,
- 	.local_hash.filter_hash		= EMPTY_HASH,
- 	INIT_OPS_HASH(global_ops)
--	.flags				= FTRACE_OPS_FL_RECURSION_SAFE |
--					  FTRACE_OPS_FL_INITIALIZED |
-+	.flags				= FTRACE_OPS_FL_INITIALIZED |
- 					  FTRACE_OPS_FL_PID,
- };
++=item B<--rst-source> and B<--no-rst-source>
++
++The input file may be using ReST syntax or not. Those two options allow
++selecting between a rst-compliant source ABI (--rst-source), or a
++plain text that may be violating ReST spec, so it requres some escaping
++logic (--no-rst-source).
++
+ =item B<--debug>
  
-@@ -2382,7 +2381,7 @@ static void call_direct_funcs(unsigned long ip, unsigned long pip,
- 
- struct ftrace_ops direct_ops = {
- 	.func		= call_direct_funcs,
--	.flags		= FTRACE_OPS_FL_IPMODIFY | FTRACE_OPS_FL_RECURSION_SAFE
-+	.flags		= FTRACE_OPS_FL_IPMODIFY
- 			  | FTRACE_OPS_FL_DIRECT | FTRACE_OPS_FL_SAVE_REGS
- 			  | FTRACE_OPS_FL_PERMANENT,
- 	/*
-@@ -6864,8 +6863,7 @@ void ftrace_init_trace_array(struct trace_array *tr)
- 
- struct ftrace_ops global_ops = {
- 	.func			= ftrace_stub,
--	.flags			= FTRACE_OPS_FL_RECURSION_SAFE |
--				  FTRACE_OPS_FL_INITIALIZED |
-+	.flags			= FTRACE_OPS_FL_INITIALIZED |
- 				  FTRACE_OPS_FL_PID,
- };
- 
-@@ -7025,11 +7023,11 @@ NOKPROBE_SYMBOL(ftrace_ops_assist_func);
- ftrace_func_t ftrace_ops_get_func(struct ftrace_ops *ops)
- {
- 	/*
--	 * If the function does not handle recursion, needs to be RCU safe,
--	 * or does per cpu logic, then we need to call the assist handler.
-+	 * If the function does not handle recursion or needs to be RCU safe,
-+	 * then we need to call the assist handler.
- 	 */
--	if (!(ops->flags & FTRACE_OPS_FL_RECURSION_SAFE) ||
--	    ops->flags & FTRACE_OPS_FL_RCU)
-+	if (ops->flags & (FTRACE_OPS_FL_RECURSION |
-+			  FTRACE_OPS_FL_RCU))
- 		return ftrace_ops_assist_func;
- 
- 	return ops->func;
-diff --git a/kernel/trace/trace_events.c b/kernel/trace/trace_events.c
-index e705f06c68c6..4a9a2a9853bc 100644
---- a/kernel/trace/trace_events.c
-+++ b/kernel/trace/trace_events.c
-@@ -3712,7 +3712,6 @@ function_test_events_call(unsigned long ip, unsigned long parent_ip,
- static struct ftrace_ops trace_ops __initdata  =
- {
- 	.func = function_test_events_call,
--	.flags = FTRACE_OPS_FL_RECURSION_SAFE,
- };
- 
- static __init void event_trace_self_test_with_function(void)
-diff --git a/kernel/trace/trace_functions.c b/kernel/trace/trace_functions.c
-index 943756c01190..89c414ce1388 100644
---- a/kernel/trace/trace_functions.c
-+++ b/kernel/trace/trace_functions.c
-@@ -48,7 +48,7 @@ int ftrace_allocate_ftrace_ops(struct trace_array *tr)
- 
- 	/* Currently only the non stack version is supported */
- 	ops->func = function_trace_call;
--	ops->flags = FTRACE_OPS_FL_RECURSION_SAFE | FTRACE_OPS_FL_PID;
-+	ops->flags = FTRACE_OPS_FL_PID;
- 
- 	tr->ops = ops;
- 	ops->private = tr;
-diff --git a/kernel/trace/trace_selftest.c b/kernel/trace/trace_selftest.c
-index b5e3496cf803..50dd913d23e7 100644
---- a/kernel/trace/trace_selftest.c
-+++ b/kernel/trace/trace_selftest.c
-@@ -150,17 +150,14 @@ static void trace_selftest_test_dyn_func(unsigned long ip,
- 
- static struct ftrace_ops test_probe1 = {
- 	.func			= trace_selftest_test_probe1_func,
--	.flags			= FTRACE_OPS_FL_RECURSION_SAFE,
- };
- 
- static struct ftrace_ops test_probe2 = {
- 	.func			= trace_selftest_test_probe2_func,
--	.flags			= FTRACE_OPS_FL_RECURSION_SAFE,
- };
- 
- static struct ftrace_ops test_probe3 = {
- 	.func			= trace_selftest_test_probe3_func,
--	.flags			= FTRACE_OPS_FL_RECURSION_SAFE,
- };
- 
- static void print_counts(void)
-@@ -448,11 +445,11 @@ static void trace_selftest_test_recursion_safe_func(unsigned long ip,
- 
- static struct ftrace_ops test_rec_probe = {
- 	.func			= trace_selftest_test_recursion_func,
-+	.flags			= FTRACE_OPS_FL_RECURSION,
- };
- 
- static struct ftrace_ops test_recsafe_probe = {
- 	.func			= trace_selftest_test_recursion_safe_func,
--	.flags			= FTRACE_OPS_FL_RECURSION_SAFE,
- };
- 
- static int
-@@ -556,7 +553,7 @@ static void trace_selftest_test_regs_func(unsigned long ip,
- 
- static struct ftrace_ops test_regs_probe = {
- 	.func		= trace_selftest_test_regs_func,
--	.flags		= FTRACE_OPS_FL_RECURSION_SAFE | FTRACE_OPS_FL_SAVE_REGS,
-+	.flags		= FTRACE_OPS_FL_SAVE_REGS,
- };
- 
- static int
-diff --git a/kernel/trace/trace_stack.c b/kernel/trace/trace_stack.c
-index c408423e5d65..969db526a563 100644
---- a/kernel/trace/trace_stack.c
-+++ b/kernel/trace/trace_stack.c
-@@ -318,7 +318,6 @@ stack_trace_call(unsigned long ip, unsigned long parent_ip,
- static struct ftrace_ops trace_ops __read_mostly =
- {
- 	.func = stack_trace_call,
--	.flags = FTRACE_OPS_FL_RECURSION_SAFE,
- };
- 
- static ssize_t
+ Put the script in verbose mode, useful for debugging. Can be called multiple
 -- 
-2.28.0
-
+2.26.2
 
