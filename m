@@ -2,87 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5369229D89D
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Oct 2020 23:35:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5A4A229DA18
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 00:14:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387961AbgJ1Wep (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 18:34:45 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56224 "EHLO
+        id S2390212AbgJ1XOh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 19:14:37 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34936 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2388428AbgJ1Wc5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 18:32:57 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 24860C0613CF;
-        Wed, 28 Oct 2020 15:32:57 -0700 (PDT)
-Received: from lwn.net (localhost [127.0.0.1])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 96A0CEC2;
-        Wed, 28 Oct 2020 17:46:25 +0000 (UTC)
-Date:   Wed, 28 Oct 2020 11:46:24 -0600
-From:   Jonathan Corbet <corbet@lwn.net>
+        with ESMTP id S1730263AbgJ1XOg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 19:14:36 -0400
+Received: from mail-lj1-x241.google.com (mail-lj1-x241.google.com [IPv6:2a00:1450:4864:20::241])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C1295C0613CF
+        for <linux-doc@vger.kernel.org>; Wed, 28 Oct 2020 16:14:35 -0700 (PDT)
+Received: by mail-lj1-x241.google.com with SMTP id 23so1050336ljv.7
+        for <linux-doc@vger.kernel.org>; Wed, 28 Oct 2020 16:14:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=paul-moore-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=uP/JEghnSGmj7e6AesSlvrZCV6WUBdPW7UyUOd9YPjI=;
+        b=xGxWf1sYuQimA8Pb3JOW0Wj0BHMIJCwn1gMWtOQy75nP6RaEoOq5C/GkmXVi7pHKQj
+         JQ7bvUzAW0JZrXHMEn6KLifhrkFXf/U+agkeQOIAgrfBy0MRN1A7wsUEVG/59kaV8fJG
+         BuzwSFP8yoA5JQmdAV/2ctelQ4BILa1EQC4ju8/13mBjAWU+WvL2gkKqqiBJHgwYWfLt
+         JdZRj5Gs/OERhjmHPr+eDxQN87UPieTnau6amvhohFijsraX4+FiMqA24NPddFbiG83O
+         DEN322EhEyA2xNoTK71H29NH8ZgHWk8I0D6k3VymVMJP3jgQ2rL9e825nsEH+EaHXORU
+         oI3Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=uP/JEghnSGmj7e6AesSlvrZCV6WUBdPW7UyUOd9YPjI=;
+        b=g2FQLlKgtmXyFAfkBQOoZbUxwmBPhRY0vFNGKeEvG6PZ83jUk+S8AT6G9RklYKw2wV
+         M5Dg3bFFZViD5iXHt2ACDr2JjtybQBT5QF9f8LWuHqiFLL7zFQyf3aVokpKODj3XAdND
+         qTclihV1WU5s3ReyF1aVJfJc1BvOYiMa7aMYBsgF4B6A0YZCzyRux3q+W8dgLwiNKJvO
+         f9xZeqsFxu4Fa9At9V9D3ET6mhxyAwBteHKNDcX0DSZZ/z8A5gRWLu1nELRbqkTx3T1K
+         01mBXQP48CIdGQkNr598kCyUjLY2M3kqILJ3QD7DfsnJTRbKV/OokPuBRLcRtlzhjQkV
+         uCgQ==
+X-Gm-Message-State: AOAM531yDtW3PXqaI+boli+T4bqjfNfZ5MmcBPrIPkw0XkWq/TzLA5E8
+        lHmbZ9v2PhjpPW2W3HrNM+kpTpM0GIooJzLz6u8jhGtJjg==
+X-Google-Smtp-Source: ABdhPJxy3tTKM5QLQXt5ygim35ZXlLtmSNyEsb2Vs87VSTGD8dpJf1fiQCjE/MH+lUa0LAsHp33dW1sarczD6VGn2D8=
+X-Received: by 2002:a17:906:25cc:: with SMTP id n12mr4949548ejb.488.1603846795601;
+ Tue, 27 Oct 2020 17:59:55 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1603469755.git.mchehab+huawei@kernel.org>
+ <8c04d5c5d0144019c2c38d7c3f31061d6b35d360.1603469755.git.mchehab+huawei@kernel.org>
+ <CAHC9VhQ88cuU-0QdpYJyJZE3FU-3graP=N9n9eiG4Kj2tDbiBQ@mail.gmail.com> <20201025233820.7f946e1c@coco.lan>
+In-Reply-To: <20201025233820.7f946e1c@coco.lan>
+From:   Paul Moore <paul@paul-moore.com>
+Date:   Tue, 27 Oct 2020 20:59:44 -0400
+Message-ID: <CAHC9VhTZtTXO8Woo_cCdBbg9Nq5A-vBdoOJo7gNUk+RRNBbeaw@mail.gmail.com>
+Subject: Re: [PATCH v3 51/56] audit: fix a kernel-doc markup
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Shuah Khan <shuah@kernel.org>, linux-kernel@vger.kernel.org,
-        "David S. Miller" <davem@davemloft.net>,
-        "Theodore Ts'o" <tytso@mit.edu>, Andrew Lunn <andrew@lunn.ch>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
-        Chen-Yu Tsai <wens@csie.org>, Daniel Vetter <daniel@ffwll.ch>,
-        David Airlie <airlied@linux.ie>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Heiner Kallweit <hkallweit1@gmail.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Jakub Kicinski <kuba@kernel.org>, Jan Kara <jack@suse.com>,
-        Jean Delvare <jdelvare@suse.com>, Jens Axboe <axboe@kernel.dk>,
-        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
-        Maxime Ripard <mripard@kernel.org>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Will Deacon <will@kernel.org>
-Subject: Re: [PATCH v3 00/32] Documentation build fixes against v5.10-rc1
-Message-ID: <20201028114624.4a65f35e@lwn.net>
-In-Reply-To: <cover.1603791716.git.mchehab+huawei@kernel.org>
-References: <cover.1603791716.git.mchehab+huawei@kernel.org>
-Organization: LWN.net
-MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+        Jonathan Corbet <corbet@lwn.net>,
+        Eric Paris <eparis@redhat.com>, linux-audit@redhat.com,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 27 Oct 2020 10:51:04 +0100
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+On Sun, Oct 25, 2020 at 6:38 PM Mauro Carvalho Chehab
+<mchehab+huawei@kernel.org> wrote:
+> Em Sun, 25 Oct 2020 18:10:44 -0400
+> Paul Moore <paul@paul-moore.com> escreveu:
+>
+> > On Fri, Oct 23, 2020 at 12:33 PM Mauro Carvalho Chehab
+> > <mchehab+huawei@kernel.org> wrote:
+> > >
+> > > typo:
+> > >         kauditd_print_skb -> kauditd_printk_skb
+> > >
+> > > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> > > ---
+> > >  kernel/audit.c | 2 +-
+> > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > Looks good to me, nice catch.  Would you like me to pull this into the
+> > audit tree or are you intending this to get pulled in as part of the
+> > larger patchset somewhere else?
+>
+> Feel free to apply it directly via audit tree.
 
-> This series contain the patches from a previous series I sent:
-> 
-> 	[PATCH v2 00/24] Documentation build fixes against next-20201013
-> 
-> Plus other patches I sent later, against other versions of linux-next between
-> 20201013 and v5.10-rc1.
-> 
-> It fixes most of the remaining documentation build warnings.
-> 
-> There were some changes from v2, as I changed some patches due to the
-> feedback received, and added reviewed-by/acked-by to several of them.
-> 
-> After this series, there will be just 3 warnings at include/kunit/test.h, whose
-> fixes were already applied by Shuah via her tree at linux-next. Hopefully, she
-> will be sending it upstream anytime toon. So, I dropped the fix from my trees.
-> 
-> The vast majority of patches here are also on my linux-next tree, as my
-> original plan were to send them upstream by the end of the merge window.
-> I'll drop from it once they get merged.
-> 
-> As those patches are fixes, I guess it should be ok to get them merged for 
-> -rc2 or -rc3.
+I just merged it into audit/next, you should see it shortly.  Thanks!
 
-I have tentatively applied these, minus the DRM/JBD patches that have been
-picked up elsewhere.  If all looks good, I'll push them up in the
-not-too-distant future.
-
-Thanks,
-
-jon
+-- 
+paul moore
+www.paul-moore.com
