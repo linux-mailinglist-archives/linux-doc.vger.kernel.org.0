@@ -2,89 +2,169 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 69BA129E1A6
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 03:03:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 69EA829E2FC
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 03:45:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726694AbgJ1Vsv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Oct 2020 17:48:51 -0400
-Received: from mail.kernel.org ([198.145.29.99]:41568 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727683AbgJ1VrX (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 28 Oct 2020 17:47:23 -0400
-Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 9637C247FD;
-        Wed, 28 Oct 2020 18:08:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1603908538;
-        bh=yVEfc4+gOF4s/3xGZTQCBpdsAOxojMx9ZF/7nK6oM/I=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=E0YnPcnjOExKX6+eztVKyGMzzPpsfM8/XUjQvIDmiU3H8ekOh3AEAu/6VYxa7Yvxf
-         Wmw2Jkck3TiDXj+B8Xr2j/07yhl0fmpFIIzW00vaKKUnjA0Npv7L47E9eFwmEOhxWV
-         T6Bf/EknL7w8iqvyrUePpzRg3nJ/7Z0rM9BG4rf8=
-Date:   Wed, 28 Oct 2020 19:09:49 +0100
-From:   "gregkh@linuxfoundation.org" <gregkh@linuxfoundation.org>
-To:     "Dutt, Sudeep" <sudeep.dutt@intel.com>
-Cc:     "corbet@lwn.net" <corbet@lwn.net>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "sherry.sun@nxp.com" <sherry.sun@nxp.com>,
-        "dmaengine@vger.kernel.org" <dmaengine@vger.kernel.org>,
-        "Rao, Nikhil" <nikhil.rao@intel.com>,
-        "Dixit, Ashutosh" <ashutosh.dixit@intel.com>,
-        "vkoul@kernel.org" <vkoul@kernel.org>,
-        "arnd@arndb.de" <arnd@arndb.de>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH char-misc-next 1/1] misc: mic: remove the MIC drivers
-Message-ID: <20201028180949.GB2831268@kroah.com>
-References: <8c1443136563de34699d2c084df478181c205db4.1603854416.git.sudeep.dutt@intel.com>
- <20201028055429.GA244117@kroah.com>
- <f64a1f67781441c8ed48b991afbf8dd2f9030289.camel@intel.com>
+        id S1726325AbgJ1VeI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Oct 2020 17:34:08 -0400
+Received: from mail-m1272.qiye.163.com ([115.236.127.2]:7159 "EHLO
+        mail-m1272.qiye.163.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726460AbgJ1VeH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Oct 2020 17:34:07 -0400
+Received: from ubuntu.localdomain (unknown [58.250.176.229])
+        by mail-m1272.qiye.163.com (Hmail) with ESMTPA id EB3D0B02446;
+        Wed, 28 Oct 2020 21:48:49 +0800 (CST)
+From:   Bailu Lin <bailu.lin@vivo.com>
+To:     Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Bailu Lin <bailu.lin@vivo.com>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Cc:     kernel@vivo.com
+Subject: [PATCH] Documentation: Chinese translation of  Documentation/arm64/perf.rst
+Date:   Wed, 28 Oct 2020 06:48:24 -0700
+Message-Id: <20201028134831.79592-1-bailu.lin@vivo.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f64a1f67781441c8ed48b991afbf8dd2f9030289.camel@intel.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+        oVCBIfWUFZHh9PSx9MH0oaTU8fVkpNS0hDQklCSEtPTkJVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWU
+        FZT0tIVUpKS0hKTFVLWQY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6ODI6Dyo6ET8eDS4CGE1RTzQW
+        GkhPCjlVSlVKTUtIQ0JJQkhLQ0JLVTMWGhIXVRkaEhcOVRcSFTsNEg0UVRgUFkVZV1kSC1lBWU5D
+        VUlOS1VKTE1VSUlCWVdZCAFZQU5OTkI3Bg++
+X-HM-Tid: 0a756f77e6ed98b7kuuueb3d0b02446
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Oct 28, 2020 at 05:22:01PM +0000, Dutt, Sudeep wrote:
-> On Wed, 2020-10-28 at 06:54 +0100, Greg Kroah-Hartman wrote:
-> > On Tue, Oct 27, 2020 at 08:14:15PM -0700, Sudeep Dutt wrote:
-> > > This patch removes the MIC drivers from the kernel tree
-> > > since the corresponding devices have been discontinued.
-> > 
-> > Does "discontinued" mean "never shipped a device so no one has access
-> > to
-> > this hardware anymore", or does it mean "we stopped shipping devices
-> > and
-> > there are customers with this?"
-> 
-> Hi Greg,
-> 
-> We are not aware of any customers of the upstreamed MIC drivers. The 
-> drivers were upstreamed primarily to lay a foundation for enabling the
-> next generation MIC devices which did not ship.
+This is a Chinese translated version of
+ Documentation/arm64/perf.rst
 
-Ok, thanks for the explanation.
+Signed-off-by: Bailu Lin <bailu.lin@vivo.com>
+---
+ Documentation/arm64/perf.rst                  |  2 +
+ .../translations/zh_CN/arm64/index.rst        |  1 +
+ .../translations/zh_CN/arm64/perf.rst         | 85 +++++++++++++++++++
+ 3 files changed, 88 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/arm64/perf.rst
 
-> 
-> > > Removing the dma and char-misc changes in one patch and
-> > > merging via the char-misc tree is best to avoid any
-> > > potential build breakage.
-> > > 
-> > > Cc: Nikhil Rao <nikhil.rao@intel.com>
-> > > Reviewed-by: Ashutosh Dixit <ashutosh.dixit@intel.com>
-> > > Signed-off-by: Sudeep Dutt <sudeep.dutt@intel.com>
-> > 
-> > I like deleting code, can this go into 5.10-final?
-> 
-> Yes, we would prefer this goes into v5.10. I am hoping you can carry
-> the Ack from Vinod and the Reviewed-by from Sherry but I can resend the
-> patch with those updates in the commit message if required. I did
-> verify that this patch passes allmodconfig and allyesconfig builds with
-> your latest char-misc-next tree.
+diff --git a/Documentation/arm64/perf.rst b/Documentation/arm64/perf.rst
+index 9c76a97baf28..b567f177d385 100644
+--- a/Documentation/arm64/perf.rst
++++ b/Documentation/arm64/perf.rst
+@@ -1,5 +1,7 @@
+ .. SPDX-License-Identifier: GPL-2.0
+ 
++.. _perf_index:
++
+ =====================
+ Perf Event Attributes
+ =====================
+diff --git a/Documentation/translations/zh_CN/arm64/index.rst b/Documentation/translations/zh_CN/arm64/index.rst
+index e31a6090384d..f51fed166326 100644
+--- a/Documentation/translations/zh_CN/arm64/index.rst
++++ b/Documentation/translations/zh_CN/arm64/index.rst
+@@ -15,3 +15,4 @@ ARM64 架构
+ 
+     amu
+     hugetlbpage
++    perf
+diff --git a/Documentation/translations/zh_CN/arm64/perf.rst b/Documentation/translations/zh_CN/arm64/perf.rst
+new file mode 100644
+index 000000000000..be8269dd5d9a
+--- /dev/null
++++ b/Documentation/translations/zh_CN/arm64/perf.rst
+@@ -0,0 +1,85 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: :ref:`Documentation/arm64/perf.rst <perf_index>`
++
++Translator: Bailu Lin <bailu.lin@vivo.com>
++
++=============
++Perf 事件属性
++=============
++
++:作者: Andrew Murray <andrew.murray@arm.com>
++:日期: 2019-03-06
++
++exclude_user
++------------
++
++该属性排除用户空间。
++
++用户空间始终运行在 EL0，因此该属性将排除 EL0。
++
++
++exclude_kernel
++--------------
++
++该属性排除内核空间。
++
++打开 VHE 时内核运行在 EL2，不打开 VHE 时内核运行在 EL1。客户端
++内核总是运行在 EL1。
++
++对于主机端，该属性排除 EL1 和 VHE 上的 EL2。
++
++对于客户端，该属性排除 EL1。请注意客户端从来不会运行在 EL2。
++
++
++exclude_hv
++----------
++
++该属性排除虚拟机监控器。
++
++对于 VHE 主机端该属性将被忽略，因为此时主机端内核是虚拟机监控器。
++
++对于 non-VHE 主机端该属性将排除 EL2，因为虚拟机监控器运行在 EL2
++的任何代码主要用于客户端和主机端的切换。
++
++对于客户端该属性无效。请注意客户端从来不会运行在 EL2。
++
++
++exclude_host / exclude_guest
++----------------------------
++
++这些属性分别排除了 KVM 主机端和客户端。
++
++KVM 主机端可能运行在 EL0（用户空间），EL1（non-VHE 内核）和
++EL2（VHE 内核 或 non-VHE 虚拟机监控器）。
++
++KVM 客户端可能运行在 EL0（用户空间）和 EL1（内核）。
++
++由于主机端和客户端之间重叠的异常级别，我们不能仅仅依靠 PMU 的硬件异
++常过滤机制-因此我们必须启用/禁用对于客户端进入和退出的计数。而这在
++VHE 和 non-VHE 系统上表现不同。
++
++对于 non-VHE 系统的 exclude_host 属性排除 EL2 -  在进入和退出客户
++端时，我们会根据 exclude_host 和 exclude_guest 属性在适当的情况下
++禁用/启用该事件。
++
++对于 VHE 系统的 exclude_guest 属性排除 EL1，而对其中的 exclude_host
++属性同时排除 EL0，EL2。在进入和退出客户端时，我们会适当地根据
++exclude_host 和 exclude_guest 属性包括/排除 EL0。
++
++以上声明也适用于在 not-VHE 客户端使用这些属性时，但是请注意客户端从
++来不会运行在 EL2。
++
++
++准确性
++------
++
++在 non-VHE 主机端上，我们在 EL2 进入/退出主机端/客户端的切换时启用/
++关闭计数器 -但是在启用/禁用计数器和进入/退出客户端之间存在一段延时。
++对于 exclude_host， 我们可以通过过滤 EL2 消除在客户端进入/退出边界
++上用于计数客户端事件的主机端事件计数器。但是当使用 !exclude_hv 时，
++在客户端进入/退出有一个小的暗窗口无法捕获到主机端的事件。
++
++在VHE系统尚没有暗窗口。
+-- 
+2.20.1
 
-I can pick them up automatically, no worries, thanks!
-
-greg k-h
