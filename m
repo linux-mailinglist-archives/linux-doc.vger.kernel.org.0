@@ -2,112 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1D41F29ECB0
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 14:17:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 080CB29ECD7
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 14:26:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726943AbgJ2NRZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 29 Oct 2020 09:17:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53974 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727081AbgJ2NRW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Oct 2020 09:17:22 -0400
-Received: from mail-qv1-xf4a.google.com (mail-qv1-xf4a.google.com [IPv6:2607:f8b0:4864:20::f4a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 60DA1C0613CF
-        for <linux-doc@vger.kernel.org>; Thu, 29 Oct 2020 06:17:22 -0700 (PDT)
-Received: by mail-qv1-xf4a.google.com with SMTP id x34so1759857qvx.7
-        for <linux-doc@vger.kernel.org>; Thu, 29 Oct 2020 06:17:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=sender:date:in-reply-to:message-id:mime-version:references:subject
-         :from:to:cc;
-        bh=hmbKrgrrAV+ZwrZ7GWFGPrZaCp36du3w8RCEfMZ8hak=;
-        b=rRA+MGMdUVhxdLn0fiVLTsKyw2gzfgaTTZNdAD8mv7qJa7bRjJvyyRZ8Zlnfig57uA
-         3moKitlSUs2lFIZMRVO6D5rHkyNuu2BF7TdlEUiBAh+BISK0kWnxlDQS5AKRJfknorWZ
-         ZS4kUR0Qn0LWnANIxO5RCa2DPSVaU8Ahn/juURFEQqXBVc8RTIiEOqOJWy6MRqS8JTs+
-         I25VGhq+V7xPkxFFSnwv0nGVjdNTPCuB5osjwNRSXfv6E7lImhDJ56FTQieNXeMsBny0
-         XuJ+c3jW1qI2TYoMJqvJ0v67uHoOGLTtuBvRFdAuu9m0JlRcY6z/0/G2avUn1ALzMFbF
-         BNuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=hmbKrgrrAV+ZwrZ7GWFGPrZaCp36du3w8RCEfMZ8hak=;
-        b=W8yzWvdwPVJyoQHNnfNWQW4rUPUKBMeTLFPMr4nrc96Hg7sLoediCKccuICOtz/uNj
-         5fibeEL5Ojq1nHi5tln54Cqk6u4/ZU0InEhZO54lh/ZMe8JddTxOlJqFuRJzf0L7e/C9
-         +fOz7xydn+OQyNlrbxr0OnZ7+fasVvDov7URVQZpz/hW6JJ0q4H8Q9FVwgGGt1OllC9Z
-         0jQRsKGvBupWzwEEGKaF8xGt8BxEZUACOIZVnbxX0Gdz+5x0WUdZ9bE5u2/vfYgIsG58
-         dFBWg6TriSD4HGbBMR80qaudS7y6YeMbLA9fcNuAnnXrnr1BQlqTS7WRmaDbDmiXpI7j
-         7g6w==
-X-Gm-Message-State: AOAM530G+nURakOubClZdUtFvwaLZxbYBZTKoXovDyONeJO1Eeh2lvjf
-        6NdwA9H/D/xPZtZxUhbQP3KiuQBPeg==
-X-Google-Smtp-Source: ABdhPJx6Df8kwq1WIJy7wveWRyDoLsov7nxJzypRJUlzUEaRsLhUHrDBGcSs6ssHj4PbKi/Vfn+qIpsyTQ==
-Sender: "elver via sendgmr" <elver@elver.muc.corp.google.com>
-X-Received: from elver.muc.corp.google.com ([2a00:79e0:15:13:f693:9fff:fef4:2449])
- (user=elver job=sendgmr) by 2002:a05:6214:943:: with SMTP id
- dn3mr4211962qvb.45.1603977441430; Thu, 29 Oct 2020 06:17:21 -0700 (PDT)
-Date:   Thu, 29 Oct 2020 14:16:49 +0100
-In-Reply-To: <20201029131649.182037-1-elver@google.com>
-Message-Id: <20201029131649.182037-10-elver@google.com>
-Mime-Version: 1.0
-References: <20201029131649.182037-1-elver@google.com>
-X-Mailer: git-send-email 2.29.1.341.ge80a0c044ae-goog
-Subject: [PATCH v6 9/9] MAINTAINERS: Add entry for KFENCE
-From:   Marco Elver <elver@google.com>
-To:     elver@google.com, akpm@linux-foundation.org, glider@google.com
-Cc:     hpa@zytor.com, paulmck@kernel.org, andreyknvl@google.com,
-        aryabinin@virtuozzo.com, luto@kernel.org, bp@alien8.de,
-        catalin.marinas@arm.com, cl@linux.com, dave.hansen@linux.intel.com,
-        rientjes@google.com, dvyukov@google.com, edumazet@google.com,
-        gregkh@linuxfoundation.org, hdanton@sina.com, mingo@redhat.com,
-        jannh@google.com, Jonathan.Cameron@huawei.com, corbet@lwn.net,
-        iamjoonsoo.kim@lge.com, joern@purestorage.com,
-        keescook@chromium.org, mark.rutland@arm.com, penberg@kernel.org,
-        peterz@infradead.org, sjpark@amazon.com, tglx@linutronix.de,
-        vbabka@suse.cz, will@kernel.org, x86@kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        kasan-dev@googlegroups.com, linux-arm-kernel@lists.infradead.org,
-        linux-mm@kvack.org, SeongJae Park <sjpark@amazon.de>
-Content-Type: text/plain; charset="UTF-8"
+        id S1725710AbgJ2N0c (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 29 Oct 2020 09:26:32 -0400
+Received: from mx2.suse.de ([195.135.220.15]:49534 "EHLO mx2.suse.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725300AbgJ2N0c (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 29 Oct 2020 09:26:32 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id B47C4AC77;
+        Thu, 29 Oct 2020 13:26:30 +0000 (UTC)
+Date:   Thu, 29 Oct 2020 14:26:27 +0100
+From:   Oscar Salvador <osalvador@suse.de>
+To:     Muchun Song <songmuchun@bytedance.com>
+Cc:     corbet@lwn.net, mike.kravetz@oracle.com, tglx@linutronix.de,
+        mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
+        dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
+        viro@zeniv.linux.org.uk, akpm@linux-foundation.org,
+        paulmck@kernel.org, mchehab+huawei@kernel.org,
+        pawan.kumar.gupta@linux.intel.com, rdunlap@infradead.org,
+        oneukum@suse.com, anshuman.khandual@arm.com, jroedel@suse.de,
+        almasrymina@google.com, rientjes@google.com, willy@infradead.org,
+        duanxiongchun@bytedance.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-fsdevel@vger.kernel.org
+Subject: Re: [PATCH v2 04/19] mm/hugetlb: Introduce nr_free_vmemmap_pages in
+ the struct hstate
+Message-ID: <20201029132621.GA2842@linux>
+References: <20201026145114.59424-1-songmuchun@bytedance.com>
+ <20201026145114.59424-5-songmuchun@bytedance.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201026145114.59424-5-songmuchun@bytedance.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add entry for KFENCE maintainers.
+On Mon, Oct 26, 2020 at 10:50:59PM +0800, Muchun Song wrote:
+> If the size of hugetlb page is 2MB, we need 512 struct page structures
+> (8 pages) to be associated with it. As far as I know, we only use the
+> first 4 struct page structures.
 
-Reviewed-by: Dmitry Vyukov <dvyukov@google.com>
-Reviewed-by: SeongJae Park <sjpark@amazon.de>
-Co-developed-by: Alexander Potapenko <glider@google.com>
-Signed-off-by: Alexander Potapenko <glider@google.com>
-Signed-off-by: Marco Elver <elver@google.com>
----
-v4:
-* Split out from first patch.
----
- MAINTAINERS | 11 +++++++++++
- 1 file changed, 11 insertions(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index e73636b75f29..2a257c865795 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -9753,6 +9753,17 @@ F:	include/linux/keyctl.h
- F:	include/uapi/linux/keyctl.h
- F:	security/keys/
+As Mike pointed out, better describe what those "4" mean.
  
-+KFENCE
-+M:	Alexander Potapenko <glider@google.com>
-+M:	Marco Elver <elver@google.com>
-+R:	Dmitry Vyukov <dvyukov@google.com>
-+L:	kasan-dev@googlegroups.com
-+S:	Maintained
-+F:	Documentation/dev-tools/kfence.rst
-+F:	include/linux/kfence.h
-+F:	lib/Kconfig.kfence
-+F:	mm/kfence/
-+
- KFIFO
- M:	Stefani Seibold <stefani@seibold.net>
- S:	Maintained
--- 
-2.29.1.341.ge80a0c044ae-goog
+> For tail pages, the value of compound_dtor is the same. So we can reuse
 
+I might be missing something, but HUGETLB_PAGE_DTOR is only set on the
+first tail, right?
+
+> +#ifdef CONFIG_HUGETLB_PAGE_FREE_VMEMMAP
+> +#define RESERVE_VMEMMAP_NR	2U
+
+Although you can get that from the changelog, maybe a brief comment explaining
+why RESERVE_VMEMMAP_NR == 2.
+> +
+> +static inline unsigned int nr_free_vmemmap(struct hstate *h)
+> +{
+> +	return h->nr_free_vmemmap_pages;
+> +}
+
+Better add this in the patch that is used?
+
+> +	if (vmemmap_pages > RESERVE_VMEMMAP_NR)
+> +		h->nr_free_vmemmap_pages = vmemmap_pages - RESERVE_VMEMMAP_NR;
+> +	else
+> +		h->nr_free_vmemmap_pages = 0;
+
+Can we really have an scenario where we end up with vmemmap_pages < RESERVE_VMEMMAP_NR?
+
+> +
+> +	pr_info("HugeTLB: can free %d vmemmap pages for %s\n",
+> +		h->nr_free_vmemmap_pages, h->name);
+
+I do not think this is useful unless debugging situations, so I would either
+scratch that or make it pr_debug.
+
+
+-- 
+Oscar Salvador
+SUSE L3
