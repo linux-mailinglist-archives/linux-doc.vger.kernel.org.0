@@ -2,99 +2,153 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 174FB29F4A2
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 20:14:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B53A929F700
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 22:37:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725996AbgJ2TOE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 29 Oct 2020 15:14:04 -0400
-Received: from smtprelay-out1.synopsys.com ([149.117.87.133]:45726 "EHLO
-        smtprelay-out1.synopsys.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1725966AbgJ2TOB (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Oct 2020 15:14:01 -0400
-Received: from mailhost.synopsys.com (mdc-mailhost2.synopsys.com [10.225.0.210])
-        (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
+        id S1725783AbgJ2Vhv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 29 Oct 2020 17:37:51 -0400
+Received: from z5.mailgun.us ([104.130.96.5]:53086 "EHLO z5.mailgun.us"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725768AbgJ2Vhv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 29 Oct 2020 17:37:51 -0400
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
+ s=smtp; t=1604007470; h=Content-Transfer-Encoding: Content-Type:
+ In-Reply-To: MIME-Version: Date: Message-ID: References: Cc: To:
+ Subject: From: Sender; bh=ixygKE6CUnjtQu995wq6xR81ScB+Tid8obYEPLMkRJQ=;
+ b=veBVKQMOkU02eDYSlUr7DrshHD1P65gz2BKJZECa9mkcH2MAjpTRmaNk1fWuZx2dAcnMT3sz
+ rvLat3J9ShA1HFeLSCGSTQZRCAe0cLJZJNT37x7JIKgYVU95j/6eMlB2SJDBqWoU0qKG5w1Z
+ ieLqovd35UJCakU6VB18pWuoBmk=
+X-Mailgun-Sending-Ip: 104.130.96.5
+X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n05.prod.us-west-2.postgun.com with SMTP id
+ 5f9b361c8335df16572093ad (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Thu, 29 Oct 2020 21:37:32
+ GMT
+Sender: eberman=codeaurora.org@mg.codeaurora.org
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+        id AC37CC433FF; Thu, 29 Oct 2020 21:37:32 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+        aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-3.2 required=2.0 tests=ALL_TRUSTED,BAYES_00,
+        NICE_REPLY_A,SPF_FAIL autolearn=no autolearn_force=no version=3.4.0
+Received: from [192.168.1.70] (cpe-76-167-231-33.san.res.rr.com [76.167.231.33])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
         (No client certificate requested)
-        by smtprelay-out1.synopsys.com (Postfix) with ESMTPS id E4BFEC00A7;
-        Thu, 29 Oct 2020 19:14:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=synopsys.com; s=mail;
-        t=1603998841; bh=RO/8M1ouuGZ/BKWm6mH9mNZrmilurSWh3/7c5LQp898=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:In-Reply-To:
-         References:From;
-        b=YE3YxNgWpjbsd6DPPOk8lpRdb+O7t1s4k0Nc+/dowIgvIPez0clOaqyt26bjAaTxJ
-         humUSu6qp/9p2sThN4mZj1rivZwDtQ0CszH7vvVyfCBgRX3OfUEVspfFchFYoFECIM
-         6QN5JgShgPLpR00hTJemUxSi3bnNNe0ACXX0JZmg93FCUFBdv2+xoI+1fdET2+hl1T
-         LkSNSuJuCKZKX/GcC/aMHwy3krp3M+X/7w3Xh2JdleiGD93zP1Yfrrf0/aOVLRuLUU
-         FKz+fIl8fcUiAvpeuXbhQMEdFXxhnOIJpTgsQa+dlXn7SdWhNxnojkY6KRBEFe1HKO
-         774zVaerCQBgw==
-Received: from de02dwia024.internal.synopsys.com (de02dwia024.internal.synopsys.com [10.225.19.81])
-        by mailhost.synopsys.com (Postfix) with ESMTP id 8C85DA01F0;
-        Thu, 29 Oct 2020 19:13:59 +0000 (UTC)
-X-SNPS-Relay: synopsys.com
-From:   Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>
-To:     Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Joao Pinto <Joao.Pinto@synopsys.com>, linux-pci@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 5/5] MAINTAINERS: Add Synopsys xData IP driver maintainer
-Date:   Thu, 29 Oct 2020 20:13:40 +0100
-Message-Id: <f8e5bba9f878e176668fe7e4fb2e790d9df8bc71.1603998630.git.gustavo.pimentel@synopsys.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
-References: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
-In-Reply-To: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
-References: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
+        (Authenticated sender: eberman)
+        by smtp.codeaurora.org (Postfix) with ESMTPSA id CAB4DC433C8;
+        Thu, 29 Oct 2020 21:37:18 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org CAB4DC433C8
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=fail smtp.mailfrom=eberman@codeaurora.org
+From:   Elliot Berman <eberman@codeaurora.org>
+Subject: Re: [PATCH] smp: Add bootcpus parameter to boot subset of CPUs
+To:     Sudeep Holla <sudeep.holla@arm.com>,
+        Qais Yousef <qais.yousef@arm.com>
+Cc:     Peter Zijlstra <peterz@infradead.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        "Paul E. McKenney" <paulmck@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Trilok Soni <tsoni@codeaurora.org>,
+        linux-kernel@vger.kernel.org, psodagud@codeaurora.org,
+        linux-doc@vger.kernel.org
+References: <1603404243-5536-1-git-send-email-eberman@codeaurora.org>
+ <87v9f04n8r.fsf@nanos.tec.linutronix.de>
+ <a6d7f84679240fcf580520230a88c058@codeaurora.org>
+ <20201026171224.GV2611@hirez.programming.kicks-ass.net>
+ <a9fa1f8d-52c7-adca-9087-160b1ecda6b8@codeaurora.org>
+ <20201028145516.23lm66mora5b3wqr@e107158-lin>
+ <20201028151558.odxwolnwbes2gihi@bogus>
+Message-ID: <cb175d84-7a89-344d-0dd8-76bf4ece9e3b@codeaurora.org>
+Date:   Thu, 29 Oct 2020 14:37:06 -0700
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
+MIME-Version: 1.0
+In-Reply-To: <20201028151558.odxwolnwbes2gihi@bogus>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add Synopsys xData IP driver maintainer.
+On 10/28/2020 8:15 AM, Sudeep Holla wrote:
+>>>>> Hi Thomas and Peter,
+>>>>>
+>>>>> Based on my understanding with maxcpus option provides, maximum no of CPUs
+>>>>> are brough up during the device boot up. There is a different case, in which
+>>>>> we want to restrict which CPUs to be brough up.
+>>>>> On a system with 8 cpus, if we set maxcpus as 3, cpu0, cpu1, and cpu2 are
+>>>>> brough up during the bootup.  For example, if we want to bring core0, core3
+>>>>> and core4 current maxcpu(as 3) setting would not help us.
+>>>>> On some platform we want the flexibility on which CPUs to bring up during
+>>>>> the device bootup. bootcpus command line is helping to bring specific CPUs
+>>>>> and these patches are working downstream.
+>>>>
+> 
+> Either offline "unwanted" CPUs from user space. If that is not possible
+> for whatever thermal reasons, we need to check if we can disable them in
+> the DT like ACPI does. IIUC, it is not supported for some reasons I need
+> to recall/check, can't remember that now. If that is not possible, make
+> those nodes disappear in the bootloader ?
+> 
 
-This driver aims to support Synopsys xData IP and is normally distributed
-along with Synopsys PCIe EndPoint IP as a PCIe traffic generator (depends
-of the use and licensing agreement).
+If I disappear the cpu nodes in bootloader, then I can't later online 
+these cpus back up when policy permits. In our experience, there is a 
+performance hit of ~100ms to modify any devicetree node in bootloader, 
+which is significant on a commercial device wanting to disable bootup of 
+certain cores for thermal.
 
-Signed-off-by: Gustavo Pimentel <gustavo.pimentel@synopsys.com>
----
- Documentation/misc-devices/dw-xdata-pcie.rst | 4 ++--
- MAINTAINERS                                  | 7 +++++++
- 2 files changed, 9 insertions(+), 2 deletions(-)
+>>>> That's a lot of words, but exactly 0 on _WHY_ you would want to do that.
+>>>>
+>>>
+>>> We find the ability to limit the number of cpus brought online at bootup
+>>> useful, and to possibly later enable those cores. One use case is when
+>>> device is undergoing initial testing is to use bootcpus to limit bootup to
+>>> only a couple cores and later bring up the other cores for a controlled
+>>> stress test. A core brought up during boot is also running device
+>>> initialization. Besides being useful for SoC vendor bringup which typically
+>>> occurs downstream, this particular use case could be exercised by developer
+>>> of upstream support for a SoC when initial CPU settings are being
+>>> determined.
+>>>
+> 
+> Why not try single core instead of couple of core and add the needed ones
+> for the user-space ?
 
-diff --git a/Documentation/misc-devices/dw-xdata-pcie.rst b/Documentation/misc-devices/dw-xdata-pcie.rst
-index 4d4616e..3d2981d 100644
---- a/Documentation/misc-devices/dw-xdata-pcie.rst
-+++ b/Documentation/misc-devices/dw-xdata-pcie.rst
-@@ -1,6 +1,6 @@
- .. SPDX-License-Identifier: GPL-2.0
- 
--===========================================================================w
-+===========================================================================
- Driver for Synopsys DesignWare PCIe traffic generator (also known as xData)
- ===========================================================================
- 
-@@ -40,4 +40,4 @@ Request PCIe link performance analysis:
- 	echo p > /sys/module/dw_xdata_pcie/parameters/command
-    - Output example:
- 	dw-xdata-pcie 0000:01.0: xData: requested performance analysis
--	dw-xdata-pcie 0000:01.0: xData: time=112000000us, read=0 MB/s, write=0 MB/s
-+	dw-xdata-pcie 0000:01.0: xData: time=100000000 us, write=0 MB/s, read=0 MB/s
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 8671573..8856f6b 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -4983,6 +4983,13 @@ S:	Maintained
- F:	drivers/dma/dw-edma/
- F:	include/linux/dma/edma.h
- 
-+DESIGNWARE XDATA IP DRIVER
-+M:	Gustavo Pimentel <gustavo.pimentel@synopsys.com>
-+L:	linux-pci@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/misc-devices/dw-xdata-pcie.rst
-+F:	drivers/misc/dw-xdata-pcie.c
-+
- DESIGNWARE USB2 DRD IP DRIVER
- M:	Minas Harutyunyan <hminas@synopsys.com>
- L:	linux-usb@vger.kernel.org
--- 
-2.7.4
+In some instances, we have seen that further debugging is needed from 
+firmware or hardware teams. In these instances, we wanted device to 
+still be able to do SMP boot, but with a few cores disabled.
 
+In the case where commercial device is using feature for thermal, device 
+should boot multiple small cores. Booting only one core means we would 
+not be able to use all possible cores to maximum extent possible in this 
+thermal case.
+
+>>> Another use case is if user wishes to limit bootup only to the smaller or
+>>> bigger cores. maxcpus= is not sufficient here to ensure that only those
+>>> cores are booted since it limits only to the first N cores, which may not be
+>>> the desired small or big cores. User may want to bring up only the smaller
+>>> cores during bootup for thermal reasons. For instance, device may be later
+>>> sufficiently charged such that boot up of the bigger cores is now
+>>> permissible. Relying on thermal drivers to later take care of putting core
+>>> into lower power idle may not occur until much later in boot (for instance,
+>>> if the governor is a module).
+>>
+>> I would have thought that FW/SCP would have the power to block booting up the
+>> CPUs if it deemed that to be unsafe.
+>>
+> 
+> I think it is more like *desire* to run with whatever battery life is left
+> rather than *unsafe* to bring up the core.
+> 
+> Also not sure if we can put such battery life related policies in the
+> firmware. If there is a thermal constraint, I am sure f/w will and must
+> refuse to boot the core. I doubt if we are talking about that here. It is
+> more a policy to extract max out of the battery life left, at-least the way
+> I see this issue. I may not have full context here, sorry.
+
+This is correct, FW here does not actually prevent core from starting 
+since it is not a significant enough thermal issue.
