@@ -2,86 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 180C229F49B
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 20:13:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6044C29F4A6
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Oct 2020 20:14:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725824AbgJ2TNy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 29 Oct 2020 15:13:54 -0400
-Received: from smtprelay-out1.synopsys.com ([149.117.73.133]:53226 "EHLO
+        id S1725940AbgJ2TN7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 29 Oct 2020 15:13:59 -0400
+Received: from smtprelay-out1.synopsys.com ([149.117.73.133]:53256 "EHLO
         smtprelay-out1.synopsys.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1725768AbgJ2TNx (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Oct 2020 15:13:53 -0400
+        by vger.kernel.org with ESMTP id S1725931AbgJ2TN7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Oct 2020 15:13:59 -0400
 Received: from mailhost.synopsys.com (mdc-mailhost2.synopsys.com [10.225.0.210])
         (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits))
         (No client certificate requested)
-        by smtprelay-out1.synopsys.com (Postfix) with ESMTPS id 9AD204016B;
-        Thu, 29 Oct 2020 19:13:52 +0000 (UTC)
+        by smtprelay-out1.synopsys.com (Postfix) with ESMTPS id EEDEA401BB;
+        Thu, 29 Oct 2020 19:13:58 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=synopsys.com; s=mail;
-        t=1603998833; bh=adaWdd4918dH5QofOud6/FpszAlAtDiMVKXnRU9LOhw=;
-        h=From:To:Cc:Subject:Date:From;
-        b=ixjPq/dpAmc1IpSWCjBNWMBk9MoDtLGf+3UQUH+DP66mfmMrPY/TVwtA4KJPnWfyg
-         S9fL8wD09toS/ZxfCFXO7hGhNVYeS5zdHDALVQtueVg/33WDC5TVNtzQbG6CMD5f/T
-         /xaBd1+isr3xl40aS1T7QwvmFbaIYsnL4bmELs5zrVxNoE8AAu9ww2M4ZAogxiskml
-         CEL+nNogfp5pHcYmf/37Jkr19Btq8BvWWmHy2wK+yz6AkxrZZGNuaNkdaHiXOSyLBS
-         Sp4Wp/EO1rcwoII89TrcL8Z7bG5G4xrDMlffIdJYk27kAyDufAgVHuFbzzPUgEiWFc
-         hGyXrQh6jn7OQ==
+        t=1603998839; bh=uxf9UiUbLpuCUBeziXn/RZtZDm4d8+F3FDqNugDYPU4=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:In-Reply-To:
+         References:From;
+        b=XI/BHT827xJGX6Hsg6j5zYgBuE6/eLVdMSBBUbmsWofisk1TVlzZov5dLhcrtFl6/
+         nIzw1Ud/WxhhoKHoGxbuOLfM+ihLMb5Yx+jOeqPuqpzVbBCJr3fILPu5w3MjovlKPt
+         vuy4osOVn3BljvsCAi25ww9gp5i8UVdBt38efiH0XXWvvTD85gMcairNHi15Bz6okJ
+         z/qzsEICaTD9odxxEY2c3ileXM1ebF+n+CzNoqpUuI2HfHsTTuYMwAfdGC8FMlM9xe
+         TcvP9h8Ud5jKV5V4zuCjbtWPdHFytakzapXvCMId9bB+WP5pVLRaf6NhxTvJ4srn5+
+         B1dsuXWGITjtQ==
 Received: from de02dwia024.internal.synopsys.com (de02dwia024.internal.synopsys.com [10.225.19.81])
-        by mailhost.synopsys.com (Postfix) with ESMTP id 0D767A01F0;
-        Thu, 29 Oct 2020 19:13:50 +0000 (UTC)
+        by mailhost.synopsys.com (Postfix) with ESMTP id C01AFA01F0;
+        Thu, 29 Oct 2020 19:13:57 +0000 (UTC)
 X-SNPS-Relay: synopsys.com
 From:   Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>
-Cc:     Joao Pinto <Joao.Pinto@synopsys.com>,
-        Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>,
-        Derek Kiernan <derek.kiernan@xilinx.com>,
-        Dragan Cvetic <dragan.cvetic@xilinx.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-pci@vger.kernel.org,
+To:     Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Joao Pinto <Joao.Pinto@synopsys.com>, linux-pci@vger.kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH 0/5] misc: Add Add Synopsys DesignWare xData IP driver 
-Date:   Thu, 29 Oct 2020 20:13:35 +0100
-Message-Id: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
+Subject: [PATCH 4/5] Documentation: misc-devices: Add Documentation for dw-xdata-pcie driver
+Date:   Thu, 29 Oct 2020 20:13:39 +0100
+Message-Id: <cfd650d825cb669245e2a63f03db8fd952f28f2a.1603998630.git.gustavo.pimentel@synopsys.com>
 X-Mailer: git-send-email 2.7.4
-To:     unlisted-recipients:; (no To-header on input)
+In-Reply-To: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
+References: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
+In-Reply-To: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
+References: <cover.1603998630.git.gustavo.pimentel@synopsys.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch series adds a new driver called xData-pcie for the Synopsys
-DesignWare PCIe prototype.
+Add Documentation for dw-xdata-pcie driver.
 
-The driver configures and enables the Synopsys DesignWare PCIe traffic
-generator IP inside of prototype Endpoint which will generate upstream
-and downstream PCIe traffic. This allows to quickly test the PCIe link
-throughput speed and check is the prototype solution has some limitation
-or not.
-
-Cc: Derek Kiernan <derek.kiernan@xilinx.com>
-Cc: Dragan Cvetic <dragan.cvetic@xilinx.com>
-Cc: Arnd Bergmann <arnd@arndb.de>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-pci@vger.kernel.org
-Cc: linux-doc@vger.kernel.org
-Cc: linux-kernel@vger.kernel.org
-
-Gustavo Pimentel (5):
-  misc: Add Synopsys DesignWare xData IP driver
-  misc: Add Synopsys DesignWare xData IP driver to Makefile
-  misc: Add Synopsys DesignWare xData IP driver to Kconfig
-  Documentation: misc-devices: Add Documentation for dw-xdata-pcie
-    driver
-  MAINTAINERS: Add Synopsys xData IP driver maintainer
-
- Documentation/misc-devices/dw-xdata-pcie.rst |  43 +++
- MAINTAINERS                                  |   7 +
- drivers/misc/Kconfig                         |  10 +
- drivers/misc/Makefile                        |   1 +
- drivers/misc/dw-xdata-pcie.c                 | 395 +++++++++++++++++++++++++++
- 5 files changed, 456 insertions(+)
+Signed-off-by: Gustavo Pimentel <gustavo.pimentel@synopsys.com>
+---
+ Documentation/misc-devices/dw-xdata-pcie.rst | 43 ++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
  create mode 100644 Documentation/misc-devices/dw-xdata-pcie.rst
- create mode 100644 drivers/misc/dw-xdata-pcie.c
 
+diff --git a/Documentation/misc-devices/dw-xdata-pcie.rst b/Documentation/misc-devices/dw-xdata-pcie.rst
+new file mode 100644
+index 00000000..4d4616e
+--- /dev/null
++++ b/Documentation/misc-devices/dw-xdata-pcie.rst
+@@ -0,0 +1,43 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++===========================================================================w
++Driver for Synopsys DesignWare PCIe traffic generator (also known as xData)
++===========================================================================
++
++This driver should be used as a host-side (Root Complex) driver and Synopsys
++DesignWare prototype that includes this IP.
++
++The "dw-xdata-pcie" driver can be used to enable/disable PCIe traffic
++generator in either direction (mutual exclusion) besides allowing the
++PCIe link performance analysis.
++
++The interaction with this driver is done through the module parameter and
++can be changed in runtime. The driver outputs the requested command state
++information to /var/log/kern.log or dmesg.
++
++Request write TLPs traffic generation - Root Complex to Endpoint direction
++- Command:
++	echo w > /sys/module/dw_xdata_pcie/parameters/command
++- Output example:
++	dw-xdata-pcie 0000:01.0: xData: requested write transfer
++	dw-xdata-pcie 0000:01.0: xData: started write direction
++
++Request read TLPs traffic generation - Endpoint to Root Complex direction:
++- Command:
++	echo r > /sys/module/dw_xdata_pcie/parameters/command
++- Output example:
++	dw-xdata-pcie 0000:01.0: xData: requested read transfer
++	dw-xdata-pcie 0000:01.0: xData: started read direction
++
++Request to stop any current TLP transfer:
++- Command:
++	echo s > /sys/module/dw_xdata_pcie/parameters/command
++- Output example:
++	dw-xdata-pcie 0000:01.0: xData: requested stop any transfer
++
++Request PCIe link performance analysis:
++- Command:
++	echo p > /sys/module/dw_xdata_pcie/parameters/command
++   - Output example:
++	dw-xdata-pcie 0000:01.0: xData: requested performance analysis
++	dw-xdata-pcie 0000:01.0: xData: time=112000000us, read=0 MB/s, write=0 MB/s
 -- 
 2.7.4
 
