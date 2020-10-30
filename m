@@ -2,155 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 210552A0949
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Oct 2020 16:09:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 62E912A0982
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Oct 2020 16:20:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726785AbgJ3PJZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Oct 2020 11:09:25 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40906 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726674AbgJ3PJZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Oct 2020 11:09:25 -0400
-Received: from mail-lf1-x141.google.com (mail-lf1-x141.google.com [IPv6:2a00:1450:4864:20::141])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 05161C0613CF
-        for <linux-doc@vger.kernel.org>; Fri, 30 Oct 2020 08:09:25 -0700 (PDT)
-Received: by mail-lf1-x141.google.com with SMTP id l28so8269826lfp.10
-        for <linux-doc@vger.kernel.org>; Fri, 30 Oct 2020 08:09:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=Mk8TOBtLAUSh5UUmmftefVTpJAKNzTPUbZbR4xmTmm4=;
-        b=GJxiwN9xabxRUEX1wI54H5lalSd1TYmvurtYqc/M2fA6V8U33bHNZ9KUnm+NrEFIZC
-         Qrvcf8Oz1kmgZNU8G9hQ+3LL+ggO/PwDnFadE0BF68AW4sCZ0neyXtjFVi1hvLP2jw7o
-         +tMXm8/POQ6ky6KAGphB5Uqn9dvqIRhiRBJegWSiGd9F0gAwKolszqsF6awnzU/IOT89
-         CBp89samOLM2uSJ4eB+cN7lZ/Hqu00LAQlRIY8YNBjayjS3ZLFFpVYVGo12j6uLwDEpR
-         lWIWKskV5OFyjvLzv+TFVnFJOmKD/NODIpy3k5jGGi34kLl4uTFGiR9+v0q/Kqcx+q0W
-         QaHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=Mk8TOBtLAUSh5UUmmftefVTpJAKNzTPUbZbR4xmTmm4=;
-        b=Lb11O30BlsOSgyfm+CzNc6drBoeinoKDYlWoZ7YOQiLo6hPMhNlbYlS5XZGlQa5YwR
-         OpUaZUwJYJojCtn4X1WXZszTD+lED+cFe8ipMexYT+xPOnbivLYca3r3jzF+6zoudIiU
-         vzQ0y14GCux52R7AZULJ7MKAgCcIcZL5q517EXRajgEvI7d0qKcBLacjoLthOEBpFuZa
-         eAgQQ2FY+LIFbK2rU3w0k4sorhDGX725x9q+RKrH/4YppXt0S38RZEGA7DWYlF3M4TlJ
-         rp1xvwrQRDCgufSCNcVxOc1X0bIL7vW2sqJwEeqDH9FL5o/83iTTxSwHnM5SPQi8SmWi
-         yiTw==
-X-Gm-Message-State: AOAM530MQdyW727B626TrH+eNTq/WyHN3FnkhEl6NQJT3T3OroeFmhCX
-        gzw1Ply0qJ3OR/kAbqXWsMaSroQL0hvhJsZNRU0JmA==
-X-Google-Smtp-Source: ABdhPJwFpY6gAtBTRZBpckeKfkvLswlZHFXWkaX0WYhbn78B0G6kn/sPe6PzVY5TSbxBhNY24ss2alpqvzB69CmY910=
-X-Received: by 2002:a05:6512:1182:: with SMTP id g2mr1077748lfr.198.1604070563207;
- Fri, 30 Oct 2020 08:09:23 -0700 (PDT)
-MIME-Version: 1.0
-References: <20201029131649.182037-1-elver@google.com> <20201029131649.182037-7-elver@google.com>
- <CAG48ez0N5iKCmg-JEwZ2oKw3zUA=5EdsL0CMi6biwLbtqFXqCA@mail.gmail.com> <CANpmjNONPovgW6d4srQNQ-S-tiYCSxot7fmh=HDOdcRwO32z6A@mail.gmail.com>
-In-Reply-To: <CANpmjNONPovgW6d4srQNQ-S-tiYCSxot7fmh=HDOdcRwO32z6A@mail.gmail.com>
-From:   Jann Horn <jannh@google.com>
-Date:   Fri, 30 Oct 2020 16:08:56 +0100
-Message-ID: <CAG48ez30tzadrtJm_ShY8oGjnYpf3GDfcajm7S0xX6UxfTCQZw@mail.gmail.com>
-Subject: Re: [PATCH v6 6/9] kfence, kasan: make KFENCE compatible with KASAN
-To:     Marco Elver <elver@google.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        Alexander Potapenko <glider@google.com>,
-        "H . Peter Anvin" <hpa@zytor.com>,
-        "Paul E . McKenney" <paulmck@kernel.org>,
-        Andrey Konovalov <andreyknvl@google.com>,
-        Andrey Ryabinin <aryabinin@virtuozzo.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Borislav Petkov <bp@alien8.de>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Christoph Lameter <cl@linux.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
+        id S1727096AbgJ3PU2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Oct 2020 11:20:28 -0400
+Received: from mx2.suse.de ([195.135.220.15]:34002 "EHLO mx2.suse.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726939AbgJ3PUB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 30 Oct 2020 11:20:01 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1604071168;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=zv/iNs6u+OAVTN6Z3tpw+QZN/vz+QgMEfXWWRVkKQ6E=;
+        b=R+UUfoG/3XkhueB/gzlPBD52A8W9HKac1+wTtnDPhRinOG85/Dxhy8JHQSqRIPITisYifO
+        CMreeeSXvfAyLRjbnpYQWZoD/bW6C5a4R0M9OcV6arcpIyHMTHodeECwMjyZQRoqHy/ttf
+        +650j7jJ5z99FuNB3awlOy6N38PfsgU=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id 53630AE2C;
+        Fri, 30 Oct 2020 15:19:28 +0000 (UTC)
+Date:   Fri, 30 Oct 2020 16:19:26 +0100
+From:   Michal Hocko <mhocko@suse.com>
+To:     Muchun Song <songmuchun@bytedance.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
+        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
+        dave.hansen@linux.intel.com, luto@kernel.org,
+        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
+        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
+        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
+        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
+        anshuman.khandual@arm.com, jroedel@suse.de,
+        Mina Almasry <almasrymina@google.com>,
         David Rientjes <rientjes@google.com>,
-        Dmitry Vyukov <dvyukov@google.com>,
-        Eric Dumazet <edumazet@google.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Hillf Danton <hdanton@sina.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>,
-        =?UTF-8?Q?J=C3=B6rn_Engel?= <joern@purestorage.com>,
-        Kees Cook <keescook@chromium.org>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Pekka Enberg <penberg@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        SeongJae Park <sjpark@amazon.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Will Deacon <will@kernel.org>,
-        "the arch/x86 maintainers" <x86@kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        kernel list <linux-kernel@vger.kernel.org>,
-        kasan-dev <kasan-dev@googlegroups.com>,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Linux-MM <linux-mm@kvack.org>
-Content-Type: text/plain; charset="UTF-8"
+        Matthew Wilcox <willy@infradead.org>,
+        Xiongchun duan <duanxiongchun@bytedance.com>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>
+Subject: Re: [External] Re: [PATCH v2 00/19] Free some vmemmap pages of
+ hugetlb page
+Message-ID: <20201030151926.GL1478@dhcp22.suse.cz>
+References: <20201026145114.59424-1-songmuchun@bytedance.com>
+ <20201030091445.GF1478@dhcp22.suse.cz>
+ <CAMZfGtUoEeJTBYwxYjWJEreHefcO81WhhnvRO7vTb_k+zPCHrg@mail.gmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAMZfGtUoEeJTBYwxYjWJEreHefcO81WhhnvRO7vTb_k+zPCHrg@mail.gmail.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 30, 2020 at 2:46 PM Marco Elver <elver@google.com> wrote:
-> On Fri, 30 Oct 2020 at 03:50, Jann Horn <jannh@google.com> wrote:
-> > On Thu, Oct 29, 2020 at 2:17 PM Marco Elver <elver@google.com> wrote:
-> > > We make KFENCE compatible with KASAN for testing KFENCE itself. In
-> > > particular, KASAN helps to catch any potential corruptions to KFENCE
-> > > state, or other corruptions that may be a result of freepointer
-> > > corruptions in the main allocators.
-> > >
-> > > To indicate that the combination of the two is generally discouraged,
-> > > CONFIG_EXPERT=y should be set. It also gives us the nice property that
-> > > KFENCE will be build-tested by allyesconfig builds.
-> > >
-> > > Reviewed-by: Dmitry Vyukov <dvyukov@google.com>
-> > > Co-developed-by: Marco Elver <elver@google.com>
-> > > Signed-off-by: Marco Elver <elver@google.com>
-> > > Signed-off-by: Alexander Potapenko <glider@google.com>
+On Fri 30-10-20 18:24:25, Muchun Song wrote:
+> On Fri, Oct 30, 2020 at 5:14 PM Michal Hocko <mhocko@suse.com> wrote:
 > >
-> > Reviewed-by: Jann Horn <jannh@google.com>
->
-> Thanks!
->
-> > with one nit:
-> >
+> > On Mon 26-10-20 22:50:55, Muchun Song wrote:
+> > > If we uses the 1G hugetlbpage, we can save 4095 pages. This is a very
+> > > substantial gain. On our server, run some SPDK/QEMU applications which
+> > > will use 1000GB hugetlbpage. With this feature enabled, we can save
+> > > ~16GB(1G hugepage)/~11GB(2MB hugepage) memory.
 > > [...]
-> > > diff --git a/mm/kasan/common.c b/mm/kasan/common.c
-> > [...]
-> > > @@ -141,6 +142,14 @@ void kasan_unpoison_shadow(const void *address, size_t size)
-> > >          */
-> > >         address = reset_tag(address);
-> > >
-> > > +       /*
-> > > +        * We may be called from SL*B internals, such as ksize(): with a size
-> > > +        * not a multiple of machine-word size, avoid poisoning the invalid
-> > > +        * portion of the word for KFENCE memory.
-> > > +        */
-> > > +       if (is_kfence_address(address))
-> > > +               return;
+> > >  15 files changed, 1091 insertions(+), 165 deletions(-)
+> > >  create mode 100644 include/linux/bootmem_info.h
+> > >  create mode 100644 mm/bootmem_info.c
 > >
-> > It might be helpful if you could add a comment that explains that
-> > kasan_poison_object_data() does not need a similar guard because
-> > kasan_poison_object_data() is always paired with
-> > kasan_unpoison_object_data() - that threw me off a bit at first.
->
-> Well, KFENCE objects should never be poisoned/unpoisoned because the
-> kasan_alloc and free hooks have a kfence guard, and none of the code
-> in sl*b.c that does kasan_{poison,unpoison}_object_data() should be
-> executed for KFENCE objects.
->
-> But I just noticed that kernel/scs.c seems to kasan_poison and
-> unpoison objects, and keeps them poisoned for most of the object
-> lifetime.
+> > This is a neat idea but the code footprint is really non trivial. To a
+> > very tricky code which hugetlb is unfortunately.
+> >
+> > Saving 1,6% of memory is definitely interesting especially for 1GB pages
+> > which tend to be more static and where the savings are more visible.
+> >
+> > Anyway, I haven't seen any runtime overhead analysis here. What is the
+> > price to modify the vmemmap page tables and make them pte rather than
+> > pmd based (especially for 2MB hugetlb). Also, how expensive is the
+> > vmemmap page tables reconstruction on the freeing path?
+> 
+> Yeah, I haven't tested the remapping overhead of reserving a hugetlb
+> page. I can do that. But the overhead is not on the allocation/freeing of
+> each hugetlb page, it is only once when we reserve some hugetlb pages
+> through /proc/sys/vm/nr_hugepages. Once the reservation is successful,
+> the subsequent allocation, freeing and using are the same as before
+> (not patched).
 
-FWIW, I wouldn't be surprised if other parts of the kernel also ended
-up wanting to have in-object redzones eventually - e.g. inside skb
-buffers, which have a struct skb_shared_info at the end. AFAIU at the
-moment, KASAN can't catch small OOB accesses from these buffers
-because of the following structure.
+Yes, that is quite clear. Except for the hugetlb overcommit and
+migration if the pool is depeleted. Maybe few other cases.
 
-> I think we better add a kfence guard to
-> kasan_poison_shadow() as well.
+> So I think that the overhead is acceptable.
 
-Sounds good.
+Having some numbers for a such a large feature is really needed.
+-- 
+Michal Hocko
+SUSE Labs
