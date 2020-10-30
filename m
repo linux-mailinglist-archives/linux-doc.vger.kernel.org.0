@@ -2,87 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 685F52A0822
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Oct 2020 15:39:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CDBAF2A084C
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Oct 2020 15:48:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726854AbgJ3Ojo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Oct 2020 10:39:44 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36150 "EHLO
+        id S1726917AbgJ3OrT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Oct 2020 10:47:19 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37362 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726613AbgJ3Ojn (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Oct 2020 10:39:43 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B2BAAC0613CF;
-        Fri, 30 Oct 2020 07:39:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=/nuHOYGzfdSAxG5g3XnaFq7PaodpHm2ctY0x0q4Q3jE=; b=LWE3y7rRfF9Ta8lyu4v8Uz1Mj4
-        4Zr3VB2IFdAlpLSmIkkuCpNhrTt4ew2Irzas0nMtK3qQgCIIFJQZP/Np9qt0MFFGqUE2VHV9wMCJI
-        44IbPDGbsAadlu0w421qlDB/5dEaja94mzcpRfeKjazUq7kMDQstW5y9isdYG9GfqEVk18YJAxEcZ
-        9uU9L1LBS45FH35mzVCis8Zr2scX9zvWEzEuiC1j1fsTu53/cm9lRKDSiZiv7Kmzt2kUbkioH8Yp9
-        SL31I+fVVXXyGlVrrJLnl2PY0Y0odAcEhBweZQckD62XuIcDrd9liaC7UHi+hIMFc4K4kJ2jrMJDF
-        KuIBvFUQ==;
-Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kYVZ3-0008Ba-Je; Fri, 30 Oct 2020 14:39:37 +0000
-Date:   Fri, 30 Oct 2020 14:39:37 +0000
-From:   Matthew Wilcox <willy@infradead.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Dafna Hirschfeld <dafna.hirschfeld@collabora.com>,
-        =?iso-8859-1?Q?N=EDcolas_F=2E_R=2E_A=2E?= Prado 
-        <nfraprado@protonmail.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, lkcamp@lists.libreplanetbr.org,
-        andrealmeid@collabora.com
-Subject: Re: Python 2.7 support and automarkup.py - Was: Re: [PATCH v2 1/5]
- docs: automarkup.py: Use new C roles in Sphinx 3
-Message-ID: <20201030143937.GK27442@casper.infradead.org>
-References: <20201013231218.2750109-1-nfraprado@protonmail.com>
- <20201013231218.2750109-2-nfraprado@protonmail.com>
- <5053e824-625b-5a76-d862-2c855c79c427@collabora.com>
- <20201030151026.3afd7997@coco.lan>
- <20201030081440.47a74dad@lwn.net>
+        with ESMTP id S1726820AbgJ3OrR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Oct 2020 10:47:17 -0400
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com [IPv6:2a00:1450:4864:20::344])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id ADE4FC0613D2;
+        Fri, 30 Oct 2020 07:47:16 -0700 (PDT)
+Received: by mail-wm1-x344.google.com with SMTP id l8so3192649wmg.3;
+        Fri, 30 Oct 2020 07:47:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=ScZ+VzP1QYcZfstHOxjjBbZNAzcQQLSuH0DC5A967ic=;
+        b=HDeKD/cMtLiNV5ZI3CH312ywH4G7LVfd+AlUSoSURojP+LK8mOCwVR+uATUr+vVUcV
+         xPuxgxsEtD4DKydBTdBliDNbh3ffeb9mgXSY4Q4TMeswQg9hEgT0Uh8hy5qkTxlOP+uo
+         K7kWGlcA3q0TA+3UReaTq3Vi5MBMRkohTDiCEdVbgCe61iwZmB7gV1dPvJNElhGQpJrr
+         4HULxXM/ZpyyFIw6mkz/CPLJnRCtBfoigpvgMHFlwrLsUPIWjSM20bLAp6aZLpDhu4B/
+         Vwhi1hpGddWys00jpzkggjYHa8CkLrGs+kdKSV3U3FUn3FTovVh9UiidvgS7mvKHZASN
+         efow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+         :mime-version:content-transfer-encoding;
+        bh=ScZ+VzP1QYcZfstHOxjjBbZNAzcQQLSuH0DC5A967ic=;
+        b=ifLMpde1ahXyV2uA86o7TNMI1656E5ZBPUm1+sL6yRlqU4nzG9HaSWCpEOIPC2jGEM
+         K9rNyNI+WVrbhapv5wNhPfLGVJiwV3YF5F4q06doQRK8jL4UtNkMPUHCxfyJIRZ/AJUK
+         6CICghUS4vXYRop35cYpeakPJSU2VcG7MTrf/K3GSg+OagrP3l8zPukXUPXb3zTA/j9s
+         f7SMbEtoGmsW29IJuzZ2HCm8Maldz/Pox9QaMreyiRMPGKYx5IaoYBqGApwjV0XSsSJy
+         cwrgAqGgjvJVufl1039erE7fKGS9e6JhvPuYpSxLHkZj6xeB9C22U2Hp+E0YWEyqGmD/
+         ihpQ==
+X-Gm-Message-State: AOAM533joeW5XMH31zRvAKERfs2USA2spAOTgXV9D8WTkaM7+wwiFCib
+        YcXY1hm4s0ETReg/kqTjo5iN0lA7vI4=
+X-Google-Smtp-Source: ABdhPJxASGYs7QMUz4F5m/JlOUcIg5llz68iga1rHeYUKCzCIjk8CZAUY04aXGOtXP4RVskZhmNVzw==
+X-Received: by 2002:a7b:c858:: with SMTP id c24mr3108010wml.176.1604069234977;
+        Fri, 30 Oct 2020 07:47:14 -0700 (PDT)
+Received: from avogadro.redhat.com ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+        by smtp.gmail.com with ESMTPSA id p21sm5058785wmc.28.2020.10.30.07.47.13
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 30 Oct 2020 07:47:14 -0700 (PDT)
+Sender: Paolo Bonzini <paolo.bonzini@gmail.com>
+From:   Paolo Bonzini <pbonzini@redhat.com>
+To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        corbet@lwn.net
+Cc:     Eduardo Habkost <ehabkost@redhat.com>
+Subject: [PATCH 0/2] kernel-doc: Handle function typedefs
+Date:   Fri, 30 Oct 2020 15:47:11 +0100
+Message-Id: <20201030144713.201372-1-pbonzini@redhat.com>
+X-Mailer: git-send-email 2.28.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201030081440.47a74dad@lwn.net>
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 30, 2020 at 08:14:40AM -0600, Jonathan Corbet wrote:
-> On Fri, 30 Oct 2020 15:10:26 +0100
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
-> 
-> > I see a few alternatives:
-> > 
-> > 1) fix automarkup.py for it to work again with python 2.7;
-> > 
-> > 2) conf.py could gain some logic to disable automarkup with
-> >    Python < 3;
-> > 
-> > 3) scripts/sphinx-pre-install already detects Python version. 
-> >    It should likely be easy to ask the user to use python 3.x,
-> >    if an older version is detected.
-> > 
-> > Doing (1) or (2) will require an additional step when we raise
-> > the bar for Python version.
-> 
-> We haven't dropped support for Python 2 yet, so this constitutes a
-> regression.  My own approach would be something like this at the top of
-> automarkup.py:
-> 
-> 	if python2:
-> 	    ascii = 0
-> 	else:
-> 	    ascii = re.ASCII
-> 
-> ...then s/re.ASCII/ascii/ throughout.  I can probably put together
-> something later this morning.
+Hi all,
 
-Could we have a warning somewhere that python 2.7 is going to produce
-inferior docs?
+QEMU has been using kernel-doc for a while and we're very happy with it. :)
+These two patches are relatively simple regex changes that were done to
+support QEMU header files; they handle function typedefs (i.e. not
+function _pointer_ typedefs).
 
-Alternatively, https://docs.python.org/2/library/re.html suggests
-using "The third-party regex module".
+These are basically the only difference between Linux and QEMU kernel-doc,
+so I thought I'd just send them out and see what you people think.
+
+Paolo
+
+Eduardo Habkost (2):
+  kernel-doc: Handle function typedefs that return pointers
+  kernel-doc: Handle function typedefs without asterisks
+
+ scripts/kernel-doc | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+-- 
+2.28.0
+
