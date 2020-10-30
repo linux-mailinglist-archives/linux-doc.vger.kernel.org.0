@@ -2,57 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6CD102A0970
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Oct 2020 16:20:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 087D72A09A9
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Oct 2020 16:23:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727014AbgJ3PUA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Oct 2020 11:20:00 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42534 "EHLO
+        id S1727033AbgJ3PWy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Oct 2020 11:22:54 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43026 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727001AbgJ3PUA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Oct 2020 11:20:00 -0400
-Received: from mail-oi1-x244.google.com (mail-oi1-x244.google.com [IPv6:2607:f8b0:4864:20::244])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BF498C0613D5
-        for <linux-doc@vger.kernel.org>; Fri, 30 Oct 2020 08:19:46 -0700 (PDT)
-Received: by mail-oi1-x244.google.com with SMTP id 9so6991027oir.5
-        for <linux-doc@vger.kernel.org>; Fri, 30 Oct 2020 08:19:46 -0700 (PDT)
+        with ESMTP id S1727021AbgJ3PWx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Oct 2020 11:22:53 -0400
+Received: from mail-lf1-x143.google.com (mail-lf1-x143.google.com [IPv6:2a00:1450:4864:20::143])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EF0D1C0613CF
+        for <linux-doc@vger.kernel.org>; Fri, 30 Oct 2020 08:22:52 -0700 (PDT)
+Received: by mail-lf1-x143.google.com with SMTP id i6so8396060lfd.1
+        for <linux-doc@vger.kernel.org>; Fri, 30 Oct 2020 08:22:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=Od+UUSBMiEqFH2KlwfDgZow7v7NLfac8lHnjw8U4wHg=;
-        b=Msw/AdRyc5nqCZQjTL62/j3DAPrGVm/qwHs2dRbaIBJuK+/frX27C5rJQ5k8W7I6Qs
-         9j3/TqOiiYCnARGKa24Ac1lPztggkK0h9SNklfhqqPpwK8pONUpeHNAkYCM/hc/EOYpB
-         bARGijsJ2eUveDGExQ3R7cb2KJ8RziSFXX6qMQdIkXAzsgEC/f6PCmc/SvBqaey74nnX
-         ZoBLFHoiotr3hOSMqn2LTxiAYctu58P9xSQBTsHQ3DJhc9XIEwO7m7myKRHD29rrE8K9
-         UyqdV7np7wugfiefBYXEG4dXmZcekmzP69/zLUhSANWfnmABr8xzI3guqJw9TvQJcurB
-         r14A==
+        bh=5sSkbnbDNPQyj7tIyOHf0OZ0EnyY+U+Tr7Q/pQTsliQ=;
+        b=wU+xx2bxR8RyIDjURsVJrhnOKOfcFiQYDMWEvIaeuyW5aGNhZqWf1dtpN2n4F3NsJU
+         HppUrs7H0lk2qIrSgTeFcNiE1h+/1/elHdKv2wBA/d3Cb+Yn/qVc5aHqDX2kTRM0FlS3
+         nIVVV0Oy4OkmdCIJ8AKJt8+jrvs0gfNjrKK5kQeR4X3twWg+3zGMFU4Hyzs987aPU5DC
+         1OTUdauKuFPZWjob1v3N8JTmx5MTcCoWOPGmX0D5W73tJhSWN3+F5ksSdNjv+Chq4veK
+         oyNBDfrWv3q2nrzVucDlW9OJlVKLQCeMpMTrtiyse23US5OjWuYJC8Eg07Fh6gR6Kzqd
+         NT1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=Od+UUSBMiEqFH2KlwfDgZow7v7NLfac8lHnjw8U4wHg=;
-        b=hkuz2vQKkkaDjnyBd3DOpJy4A4JIuUT+Gm06/UHSwYkXW2TL4ftENBo90caiRlmhTQ
-         ziuqRhGoDDAkE3o/USdMXjEaibOYWCocqJRum9rNKSF6lLhOqYm5r8/2TCyFr5qYJEv3
-         UARU/rGcm/6hjuEHTDOqAFhtU5A0lWuJ+A8Aatfx56DZi6IT/VxWTQj9WWYbJHdcn5L+
-         M7i7aqISoNt5HWVJIvUrEj2f6u5U5hYJn+Hf5XZTT5tezWl8KIVXG58ZM+00QNnv0Itm
-         vmuctIi0aDTiFUKJWADoy3IfNam3yJ7joUHC5BnYVz6Zo77Ny1MnAk/uflmzJlWxmu++
-         tGfg==
-X-Gm-Message-State: AOAM533SJltnEupdpX/Tjq7jjgjVgCAkAaynIgSTdIG0OSEEMwH0kdcb
-        wBHYTkw3wQvpEnq5HcqckyaUufHKl++P9mocrkMNaQ==
-X-Google-Smtp-Source: ABdhPJwaDMBPSAvV/BhwOTbOOrTIc57OvUTldHxUnQO/NP/hqPklvwPxyUHr9DEfl0srWqfr3ZmYyytpffNXWuRPHTA=
-X-Received: by 2002:aca:4f55:: with SMTP id d82mr1984254oib.172.1604071185897;
- Fri, 30 Oct 2020 08:19:45 -0700 (PDT)
+        bh=5sSkbnbDNPQyj7tIyOHf0OZ0EnyY+U+Tr7Q/pQTsliQ=;
+        b=Tfp05ZXodBzLKaiD/RBOb80ETcIAV/pQ37L4vP3ho3xF1Ux0cG6fbX2RJbVSNzRgT4
+         qlx7nA4FPUiY7b7sQNAYlA4TIahvlxiFNpwcbxHlsyRQJ+aeLQpwlfmLlvJzh6C26Tq/
+         WH0/PqwyQalOWDPEOELIHVFPF79g/mzoRUkCxwVVVYwWUZQEIhY6EctzmlgAZsuJ0cyw
+         ZkJEk8Vyb1OHpN5Hd04SeRrqU7lVRBGRbuOwchv2gdzZdkbi13+JPaT1Bceti9aqiiRm
+         fUfTekDGXxutyGNtOIj1YJDuoAVCXBYW+le1IW41+HbOX+RYSuEa8At/gGZ8JdlO/EWG
+         Yc0g==
+X-Gm-Message-State: AOAM533nBowbSLDaWTBjzs/h85dR55ntEF5GnawFXihtUFc/uGPtwo2U
+        /JCwy2MMOorrQQK7dPtRHP+AsvsOS70/zk9h0ZEN8Q==
+X-Google-Smtp-Source: ABdhPJwLZMfK+/wKcVf/f3wxYqaH0PlYsimcp5h9RqJlxCzfH0SY3Zlp7ANGGJQDqEL2L9l6kszh99qZ39iPqxje9Z8=
+X-Received: by 2002:a05:6512:51a:: with SMTP id o26mr1098326lfb.381.1604071371166;
+ Fri, 30 Oct 2020 08:22:51 -0700 (PDT)
 MIME-Version: 1.0
-References: <20201029131649.182037-1-elver@google.com> <20201029131649.182037-7-elver@google.com>
- <CAG48ez0N5iKCmg-JEwZ2oKw3zUA=5EdsL0CMi6biwLbtqFXqCA@mail.gmail.com>
- <CANpmjNONPovgW6d4srQNQ-S-tiYCSxot7fmh=HDOdcRwO32z6A@mail.gmail.com> <CAG48ez30tzadrtJm_ShY8oGjnYpf3GDfcajm7S0xX6UxfTCQZw@mail.gmail.com>
-In-Reply-To: <CAG48ez30tzadrtJm_ShY8oGjnYpf3GDfcajm7S0xX6UxfTCQZw@mail.gmail.com>
-From:   Marco Elver <elver@google.com>
-Date:   Fri, 30 Oct 2020 16:19:34 +0100
-Message-ID: <CANpmjNPoQkWuV0q3atamrAzyOxR9ZTpY43Ndg5+ko0KJhYt9sA@mail.gmail.com>
-Subject: Re: [PATCH v6 6/9] kfence, kasan: make KFENCE compatible with KASAN
-To:     Jann Horn <jannh@google.com>
+References: <20201029131649.182037-1-elver@google.com> <20201029131649.182037-3-elver@google.com>
+ <CAG48ez1n7FrRA8Djq5685KcUJp1YgW0qijtBYNm2c9ZqQ1M4rw@mail.gmail.com> <CANpmjNNBoiL2=JDD=vC5dB_TPW1Ybe5k7SqqhvUE2B7GmzRLyg@mail.gmail.com>
+In-Reply-To: <CANpmjNNBoiL2=JDD=vC5dB_TPW1Ybe5k7SqqhvUE2B7GmzRLyg@mail.gmail.com>
+From:   Jann Horn <jannh@google.com>
+Date:   Fri, 30 Oct 2020 16:22:24 +0100
+Message-ID: <CAG48ez1=uad2yMeffArw7Nem3Hea3pnL9rqAFsB7fFzBd+4Hcw@mail.gmail.com>
+Subject: Re: [PATCH v6 2/9] x86, kfence: enable KFENCE for x86
+To:     Marco Elver <elver@google.com>
 Cc:     Andrew Morton <akpm@linux-foundation.org>,
         Alexander Potapenko <glider@google.com>,
         "H . Peter Anvin" <hpa@zytor.com>,
@@ -93,82 +92,54 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 30 Oct 2020 at 16:09, Jann Horn <jannh@google.com> wrote:
->
-> On Fri, Oct 30, 2020 at 2:46 PM Marco Elver <elver@google.com> wrote:
-> > On Fri, 30 Oct 2020 at 03:50, Jann Horn <jannh@google.com> wrote:
-> > > On Thu, Oct 29, 2020 at 2:17 PM Marco Elver <elver@google.com> wrote:
-> > > > We make KFENCE compatible with KASAN for testing KFENCE itself. In
-> > > > particular, KASAN helps to catch any potential corruptions to KFENCE
-> > > > state, or other corruptions that may be a result of freepointer
-> > > > corruptions in the main allocators.
-> > > >
-> > > > To indicate that the combination of the two is generally discouraged,
-> > > > CONFIG_EXPERT=y should be set. It also gives us the nice property that
-> > > > KFENCE will be build-tested by allyesconfig builds.
-> > > >
-> > > > Reviewed-by: Dmitry Vyukov <dvyukov@google.com>
-> > > > Co-developed-by: Marco Elver <elver@google.com>
-> > > > Signed-off-by: Marco Elver <elver@google.com>
-> > > > Signed-off-by: Alexander Potapenko <glider@google.com>
+On Fri, Oct 30, 2020 at 2:00 PM Marco Elver <elver@google.com> wrote:
+> On Fri, 30 Oct 2020 at 03:49, Jann Horn <jannh@google.com> wrote:
+> > On Thu, Oct 29, 2020 at 2:17 PM Marco Elver <elver@google.com> wrote:
+> > > Add architecture specific implementation details for KFENCE and enable
+> > > KFENCE for the x86 architecture. In particular, this implements the
+> > > required interface in <asm/kfence.h> for setting up the pool and
+> > > providing helper functions for protecting and unprotecting pages.
 > > >
-> > > Reviewed-by: Jann Horn <jannh@google.com>
-> >
-> > Thanks!
-> >
-> > > with one nit:
+> > > For x86, we need to ensure that the pool uses 4K pages, which is done
+> > > using the set_memory_4k() helper function.
 > > >
-> > > [...]
-> > > > diff --git a/mm/kasan/common.c b/mm/kasan/common.c
-> > > [...]
-> > > > @@ -141,6 +142,14 @@ void kasan_unpoison_shadow(const void *address, size_t size)
-> > > >          */
-> > > >         address = reset_tag(address);
-> > > >
-> > > > +       /*
-> > > > +        * We may be called from SL*B internals, such as ksize(): with a size
-> > > > +        * not a multiple of machine-word size, avoid poisoning the invalid
-> > > > +        * portion of the word for KFENCE memory.
-> > > > +        */
-> > > > +       if (is_kfence_address(address))
-> > > > +               return;
+> > > Reviewed-by: Dmitry Vyukov <dvyukov@google.com>
+> > > Co-developed-by: Marco Elver <elver@google.com>
+> > > Signed-off-by: Marco Elver <elver@google.com>
+> > > Signed-off-by: Alexander Potapenko <glider@google.com>
+> > [...]
+> > > diff --git a/arch/x86/mm/fault.c b/arch/x86/mm/fault.c
+> > [...]
+> > > @@ -725,6 +726,9 @@ no_context(struct pt_regs *regs, unsigned long error_code,
+> > >         if (IS_ENABLED(CONFIG_EFI))
+> > >                 efi_recover_from_page_fault(address);
 > > >
-> > > It might be helpful if you could add a comment that explains that
-> > > kasan_poison_object_data() does not need a similar guard because
-> > > kasan_poison_object_data() is always paired with
-> > > kasan_unpoison_object_data() - that threw me off a bit at first.
-> >
-> > Well, KFENCE objects should never be poisoned/unpoisoned because the
-> > kasan_alloc and free hooks have a kfence guard, and none of the code
-> > in sl*b.c that does kasan_{poison,unpoison}_object_data() should be
-> > executed for KFENCE objects.
-> >
-> > But I just noticed that kernel/scs.c seems to kasan_poison and
-> > unpoison objects, and keeps them poisoned for most of the object
-> > lifetime.
+> > > +       if (kfence_handle_page_fault(address))
+> > > +               return;
+[...]
+> > Unrelated sidenote: Since we're hooking after exception fixup
+> > handling, the debug-only KFENCE_STRESS_TEST_FAULTS can probably still
+> > cause some behavioral differences through spurious faults in places
+> > like copy_user_enhanced_fast_string (where the exception table entries
+> > are used even if the *kernel* pointer, not the user pointer, causes a
+> > fault). But since KFENCE_STRESS_TEST_FAULTS is exclusively for KFENCE
+> > development, the difference might not matter. And ordering them the
+> > other way around definitely isn't possible, because the kernel relies
+> > on being able to fixup OOB reads. So there probably isn't really
+> > anything we can do better here; it's just something to keep in mind.
+> > Maybe you can add a little warning to the help text for that Kconfig
+> > entry that warns people about this?
 >
-> FWIW, I wouldn't be surprised if other parts of the kernel also ended
-> up wanting to have in-object redzones eventually - e.g. inside skb
-> buffers, which have a struct skb_shared_info at the end. AFAIU at the
-> moment, KASAN can't catch small OOB accesses from these buffers
-> because of the following structure.
+> Thanks for pointing it out, but that option really is *only* to stress
+> kfence with concurrent allocations/frees/page faults. If anybody
+> enables this option for anything other than testing kfence, it's their
+> own fault. ;-)
 
-Sure, and it might also become more interesting with MTE-based KASAN.
+Sounds fair. :P
 
-But, currently we recommend not to enable generic KASAN+KFENCE,
-because it'd be redundant if the instrumentation price for generic (or
-SW-tag) KASAN is already paid. The changes here are also mostly for
-testing KFENCE itself.
+> I'll try to add a generic note to the Kconfig entry, but what you
+> mention here seems quite x86-specific.
 
-That may change with MTE-based KASAN, however, which may have modes
-where stack traces aren't collected and having KFENCE to get
-actionable debug-info across a fleet of machines may still be wanted.
-But that story is still evolving. The code here is only for the
-generic and SW-tag based KASAN modes, and MTE will have its own
-kasan_{un,}poison_shadow (afaik it's being renamed to
-kasan_{un,}poison_memory) which works just fine with KFENCE AFAIK.
-
-> > I think we better add a kfence guard to
-> > kasan_poison_shadow() as well.
->
-> Sounds good.
+(FWIW, I think it could currently also happen on arm64 in the rare
+cases where KERNEL_DS is used. But luckily Christoph Hellwig has
+already gotten rid of most places that did that.)
