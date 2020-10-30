@@ -2,93 +2,82 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B82DF2A084E
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Oct 2020 15:48:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A93E52A08A0
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Oct 2020 15:58:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726931AbgJ3OsE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Oct 2020 10:48:04 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37376 "EHLO
+        id S1726773AbgJ3O6c (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Oct 2020 10:58:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39122 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726929AbgJ3OrV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Oct 2020 10:47:21 -0400
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com [IPv6:2a00:1450:4864:20::329])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B6704C0613D6;
-        Fri, 30 Oct 2020 07:47:19 -0700 (PDT)
-Received: by mail-wm1-x329.google.com with SMTP id k125so2721568wmf.0;
-        Fri, 30 Oct 2020 07:47:19 -0700 (PDT)
+        with ESMTP id S1726259AbgJ3O6c (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Oct 2020 10:58:32 -0400
+Received: from mail-ed1-x541.google.com (mail-ed1-x541.google.com [IPv6:2a00:1450:4864:20::541])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C623EC0613D2
+        for <linux-doc@vger.kernel.org>; Fri, 30 Oct 2020 07:58:31 -0700 (PDT)
+Received: by mail-ed1-x541.google.com with SMTP id k9so6985404edo.5
+        for <linux-doc@vger.kernel.org>; Fri, 30 Oct 2020 07:58:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=sender:from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=zUO5L8kmRzG695X/RNL/pM4ak1YR1L4D/l4ZGPiKS4s=;
-        b=MwEdcgHri63X6/zT4qETBnCFUxXPSOp0QZQDn7N6gV2mUSRWqaX2Sl86N7s73XyyX/
-         hVmmLdPeRjWMq0ECnGE9KITW3ub00SdtWXfTXXdrB5RQK12j2C6D5tSXM/uK874jB3g/
-         frrogVDPPf+Xd+5V1pU5vnZlLA/NqTc/64xwFY8XT7aOlEQbS4P8ONrT8UwzzM+vpGbO
-         0QmlFr8qAuQ18WVIGORA1ydY2RjPJxK5wrIT7a3pJXu/UEg8rJz1gujho/NxvUjq4NCa
-         GllFFVgFOae3txoe4peuW6LKIxNVy+YDh3xC2LyOE868W9DKSq6udM6KeaUH3CoRRYc0
-         v64w==
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=9fkQXWnoPSypfyxvIrXWSyd1r4Ua0eeDJczOBpIf/BU=;
+        b=cba/prsbSBmYoHoIyJJ/4nz72WNuXyuE8Im8hHokykrknu6T+ZGQ3oNaEZCnDQMKfK
+         7InrWK9/LAehftIUxFF07tvuUQ/41xDXt8c8cRINmlHgR1biRfbdW9zZPxVC6xa8zOlP
+         K6M6oRsBtl8MN1IVNiGcNelh1LOXBPRCedQHjpXjHdhTZUoXOfQ5ssal2G05i4dOSCvv
+         FIx5VhgkFc0MSmWonLWORS6bGxkDSNKyYqWmGabj1TsHCGlpIexLxPpAsXs6aOmBy4OY
+         u1xNW9W0JHHwE2pLQBvrBX9wQMtbUIk6CF2f6hu1cvsgwIaE0/cl0h377THHVavVg8oE
+         Ypbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-         :in-reply-to:references:mime-version:content-transfer-encoding;
-        bh=zUO5L8kmRzG695X/RNL/pM4ak1YR1L4D/l4ZGPiKS4s=;
-        b=D7rc1mzUpkXsQk62zjwRn2idCy4KUpXR/KdjPJy+7AKFJ6cpe/ondZ0Dcjlx48XVre
-         ILFC/IKautH9zT+dbFbACeLOrV6Zu1FqVD4uS8SRflB1KK5CxrDE0d2VEQ9wCZPtFyxE
-         3NmST4loSV/CdaVUayFsAUbs1mQYrnhrMVF+huEkDhzJJui+ALceP/WydPiFewlCSFEA
-         2U7ZDP2fiGnUbp4qrpwAQVrE+Oi+6O2agQSh5nivW5/bHof4+ZQPaUQW4pVEtybtCfKc
-         WkDO6a/Sx2zeitmY1vQqCo3iwWFfeM2jwdSvhsbqIYQUod0CWUo2lXwMJHqfABWEAx6o
-         vnrg==
-X-Gm-Message-State: AOAM532LQjiwRN/kQ0jZpLphZW8U5/w34xKtsDleHD7vymUlkbWjHCey
-        ZJLCiZGIOOzZw9XvheQyY0CXYfDge0k=
-X-Google-Smtp-Source: ABdhPJyzxDkBZiBsJYDrfCsgqEI1far515sbaNTQRxLUQe6vYaik0FWVX68HwfGKp4i6KXSJvOJO9Q==
-X-Received: by 2002:a1c:9e12:: with SMTP id h18mr3080430wme.11.1604069238122;
-        Fri, 30 Oct 2020 07:47:18 -0700 (PDT)
-Received: from avogadro.redhat.com ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
-        by smtp.gmail.com with ESMTPSA id p21sm5058785wmc.28.2020.10.30.07.47.16
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Fri, 30 Oct 2020 07:47:17 -0700 (PDT)
-Sender: Paolo Bonzini <paolo.bonzini@gmail.com>
-From:   Paolo Bonzini <pbonzini@redhat.com>
-To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        corbet@lwn.net
-Cc:     Eduardo Habkost <ehabkost@redhat.com>
-Subject: [PATCH 2/2] kernel-doc: Handle function typedefs without asterisks
-Date:   Fri, 30 Oct 2020 15:47:13 +0100
-Message-Id: <20201030144713.201372-3-pbonzini@redhat.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201030144713.201372-1-pbonzini@redhat.com>
-References: <20201030144713.201372-1-pbonzini@redhat.com>
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=9fkQXWnoPSypfyxvIrXWSyd1r4Ua0eeDJczOBpIf/BU=;
+        b=s+4Zgt6Lo9sfczusrKuRy8mnabL8q4GX+XcqWhbGz+/cFkJJD7qw+L4950Ik+4vzMe
+         5kPThZQ4EM14EaBgBsz2y3cONtY4l7ZSz80/0+fts/+1iyjSGnYkVxL0vPRu0VSaMlbj
+         E3QG9TkekzzHMMjKnUA7fFXQ2R7+qWeyYI0NBHUxd5yrtJ9wNLPOgv22/j9GUSUUMmUR
+         w6Odfzr09le0PRx8V5eYbuLMKEX1jQhW+qIBZXvBUut78g58G7+QnXoi8zaSCwWLToSH
+         xJRpGMVShwtzfceMPENmE0LUaaEVreTU3d5tC9YopSWhpQWYuM7FapBJs4WAJdOBFJh2
+         o8dQ==
+X-Gm-Message-State: AOAM530yzCGE6Yriw+XZbi0sqpj9IS9KpAJk7JSAz01tjH8GlueMI7kX
+        K8WvwxTJfcVB9O01pv5FrYCa1pjkVYEo2oXsYA==
+X-Google-Smtp-Source: ABdhPJz2xsjxOvoK0J4Ck702AA6tUztWDi8Hr+jNkMDLFNqNVV9sSKYCidfmYBReGemdlea1AJeouFi1w4gUiDPqlYM=
+X-Received: by 2002:a50:9e82:: with SMTP id a2mr2760020edf.117.1604069910083;
+ Fri, 30 Oct 2020 07:58:30 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Received: by 2002:a50:f14c:0:0:0:0:0 with HTTP; Fri, 30 Oct 2020 07:58:29
+ -0700 (PDT)
+Reply-To: li.anable85@gmail.com
+From:   Liliane Abel <k.griest04@gmail.com>
+Date:   Fri, 30 Oct 2020 15:58:29 +0100
+Message-ID: <CABAZL7kO5JQZMDhdiGK6i8XTXe8pbB5xWmsnDKzGXmDahQmacQ@mail.gmail.com>
+Subject: 
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Eduardo Habkost <ehabkost@redhat.com>
+Dearest
 
-Example of typedef that was not parsed by kernel-doc:
+Greeting my dear, I am Liliane Abel by name, The only daughter of late
+Mr.Benson Abel. My father is one of the top Politician in our country
+and my mother is a farmers and cocoa merchant when they were both
+alive. After the death of my mother, long ago, my father was
+controlling their business until he was poisoned by his business
+associates which he suffered and died.
 
-  typedef void (ObjectUnparent)(Object *obj);
-
-Signed-off-by: Eduardo Habkost <ehabkost@redhat.com>
-Signed-off-by: Paolo Bonzini <pbonzini@redhat.com>
----
- scripts/kernel-doc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/scripts/kernel-doc b/scripts/kernel-doc
-index 5b5caa7642f7..1a9c918aa653 100755
---- a/scripts/kernel-doc
-+++ b/scripts/kernel-doc
-@@ -1302,7 +1302,7 @@ sub dump_typedef($$) {
-     $x =~ s@/\*.*?\*/@@gos;	# strip comments.
- 
-     # Parse function prototypes
--    if ($x =~ /typedef\s+(\w+\s*\**)\s*\(\*\s*(\w\S+)\s*\)\s*\((.*)\);/ ||
-+    if ($x =~ /typedef\s+(\w+\s*\**)\s*\(\*?\s*(\w\S+)\s*\)\s*\((.*)\);/ ||
- 	$x =~ /typedef\s+(\w+\s*\**)\s*(\w\S+)\s*\s*\((.*)\);/) {
- 
- 	# Function typedefs
--- 
-2.28.0
-
+Before the death of my father, He told me about (two million five
+hundred thousand united states dollars) which he deposited in the bank
+in Lome-Togo, It was the money he intended to transfer overseas for
+investment before he was poisoned. He also instructed me that I should
+seek for foreign partners in any country of my choice who will assist
+me transfer this money in overseas account where the money will be
+wisely invested.
+I am seeking for your kind assistance in the following ways:  (1) to
+provide a safe bank account into where the money will be transferred
+for investment. (2) To serve as a guardian of this fund since I am a
+girl of 19 years old. (3) To make arrangement for me to come over to
+your country to further my education. This is my reason for writing to
+you. Please if you are willing to assist me I will offer you 25% of
+the total money. Reply if  you are interested
+Best regards.
+Liliane Abel.
