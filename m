@@ -2,86 +2,121 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5FD632A1305
-	for <lists+linux-doc@lfdr.de>; Sat, 31 Oct 2020 03:39:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 79BA42A136B
+	for <lists+linux-doc@lfdr.de>; Sat, 31 Oct 2020 05:47:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726158AbgJaCjK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Oct 2020 22:39:10 -0400
-Received: from server.msgroupspa.com ([185.149.113.111]:35286 "EHLO
-        server.msgroupspa.com" rhost-flags-OK-FAIL-OK-FAIL) by vger.kernel.org
-        with ESMTP id S1725536AbgJaCjI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Oct 2020 22:39:08 -0400
-X-Greylist: delayed 66465 seconds by postgrey-1.27 at vger.kernel.org; Fri, 30 Oct 2020 22:38:58 EDT
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=msgroupspa.com; s=default; h=Content-Transfer-Encoding:Content-Type:
-        Message-ID:Reply-To:Subject:To:From:Date:MIME-Version:Sender:Cc:Content-ID:
-        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
-        :Resent-Message-ID:In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:
-        List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=gOeEglh1DIJatPKqyvOsPs4e0Zw8Lzg9wwjnNfQdiM8=; b=nK3IDYT+DT+afspoRk1vnh030x
-        JBANriWCpwGFqkJTHXsxgXz4zPu7XOm+ROYW+1LhSp6Xws1Wm9Gxv0Soi++3fpbt9358vEM1Vilpv
-        5xlCNIs/Y8Yak5vs3SvhE9OTE/TC6Vf04ze0iphAaRgUliWRhAsWS8s68bwFyUv4tdChHxOH/JwR2
-        Vv+jWIv637j1UH3aZ6QLvXZrjdEmRucUTVxZtH4VnCDjrc4XZi9EwE5rzVsYDmyiNG+eYB+1QY+/8
-        bPWWeacOm9DyYRD9g3bLyiVv0uincEH4/sdJ6fuUSabQfGsi095GX6rsmNCONVo4/rhE4INecsjOZ
-        9QdrBN4A==;
-Received: from [::1] (port=55352 helo=server.msgroupspa.com)
-        by server.msgroupspa.com with esmtpa (Exim 4.93)
-        (envelope-from <no-reply@msgroupspa.com>)
-        id 1kYPRU-0006Ky-OT; Fri, 30 Oct 2020 16:07:24 +0800
+        id S1725822AbgJaErZ convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Sat, 31 Oct 2020 00:47:25 -0400
+Received: from mx2.icsaautomation.com ([179.0.11.26]:65067 "EHLO
+        mail.impsa.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725794AbgJaErZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 31 Oct 2020 00:47:25 -0400
+X-Greylist: delayed 1003 seconds by postgrey-1.27 at vger.kernel.org; Sat, 31 Oct 2020 00:47:23 EDT
+Received: from mail.impsa.com (argmzasrv51.impsa.com.ar [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 498F01C648;
+        Sat, 31 Oct 2020 01:30:37 -0300 (-03)
+Received: from mail.impsa.com (argmzasrv51.impsa.com.ar [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 339561C640;
+        Sat, 31 Oct 2020 01:30:37 -0300 (-03)
+Received: from ARGMZAEXC02.impsa.com.ar (argmzaexc02.impsa.com.ar [172.16.50.59])
+        by mail.impsa.com (Postfix) with ESMTPS;
+        Sat, 31 Oct 2020 01:30:37 -0300 (-03)
+Received: from ARGMZAEXC01.impsa.com.ar ([fe80::bdba:f57f:d39f:c4e9]) by
+ ARGMZAEXC02.impsa.com.ar ([fe80::c4f5:f3b9:697b:9443%16]) with mapi id
+ 14.01.0438.000; Sat, 31 Oct 2020 01:30:35 -0300
+From:   "Fiocchetta, Pablo Aquiles (IMPSA FAB, MZA)" 
+        <pabloaquiles.fiocchetta@impsa.com>
+Subject: 
+Thread-Index: AdavPf1xu5tA4/MkTnaG+1YveXQvFw==
+Date:   Sat, 31 Oct 2020 04:30:34 +0000
+Message-ID: <842300F9230EC5479C84F3D3AE7341800466B3BF75@ARGMZAEXC01.impsa.com.ar>
+Accept-Language: es-AR, en-US
+Content-Language: es-AR
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [41.85.161.176]
+Content-Type: text/plain;
+        charset="iso-8859-1"
+Content-Transfer-Encoding: 8BIT
 MIME-Version: 1.0
-Date:   Fri, 30 Oct 2020 16:07:24 +0800
-From:   "Mr. John Galvan" <no-reply@msgroupspa.com>
 To:     undisclosed-recipients:;
-Subject: Hello/Hallo
-Reply-To: galvan.johnny@outlook.com
-User-Agent: Roundcube Webmail/1.4.8
-Message-ID: <8970d4ac30f8022b0ae628d9b69a2d43@msgroupspa.com>
-X-Sender: no-reply@msgroupspa.com
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - server.msgroupspa.com
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - msgroupspa.com
-X-Get-Message-Sender-Via: server.msgroupspa.com: authenticated_id: no-reply@msgroupspa.com
-X-Authenticated-Sender: server.msgroupspa.com: no-reply@msgroupspa.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+X-TM-AS-GCONF: 00
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Good news to all loan seekers
+
+The current COVID-19 pandemic has impacted economies and the way we do
+business. We have taken certain steps to ensure that we can be able to
+provide financial assistance to those in need despite the growing
+cases of the COVID-19 pandemic worldwide) with a personal / commercial
+loan and while we all hope that the pandemic will change.
+
+Perhaps, are you planning to buy the house of your dreams? If you
+already own one, then you may be in the mood to renovate it. Whether
+it's a new house, car, or personal theater, you probably need to
+borrow to get the items you want. Email us today at this email: [ wwinfo.fastloanservice@gmail.com ] for
+further more information.
+
+Fast Loan Service Company.
 
 
--- 
-Sir/Madam,
 
-I have access to very vital information that can be used to move a huge 
-amount of money. I have done my homework very well and I have the 
-machineries in place to get it done since I am still in active service. 
-If it was possible for me to do it alone I would not have bothered 
-contacting you. Ultimately I need an honest foreigner to play an 
-important role in the completion of this business transaction. Send 
-responds to this email:Â galvan.johnny@outlook.com
 
-Regards,
-John Galvan
 
----------------------------------------------------------------
 
-Sir / Madam,
 
-Ich habe Zugang zu sehr wichtigen Informationen, mit denen ich eine 
-groÃŸe Menge Geld bewegen kann. Ich habe meine Hausaufgaben sehr gut 
-gemacht und ich habe die Maschinen, um sie zu erledigen, da ich immer 
-noch im aktiven Dienst bin. Wenn es mir mÃ¶glich gewesen wÃ¤re, es alleine 
-zu tun, hÃ¤tte ich mich nicht darum gekÃ¼mmert, Sie zu kontaktieren. 
-Letztendlich brauche ich einen ehrlichen AuslÃ¤nder, der eine wichtige 
-Rolle beim Abschluss dieses GeschÃ¤ftsvorgangs spielt. Senden Sie 
-Antworten auf diese E-Mail: galvan.johnny@outlook.com
 
-GrÃ¼ÃŸe,
-John Galvan
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NOTA: IMPSA, cumpliendo con la Ley 27.401 de la República Argentina y con la normativa internacionalmente aceptada sobre la lucha contra la corrupción y el lavado de dinero, cuenta con un canal de comunicación independiente para realizar denuncias, en forma anónima y confidencial, por cualquier eventual violación a nuestro Código de Ética y Conducta, al que Ud. podrá acceder llamando a los números 0-800-999-4636/0-800-122-7374, por email a etica.impsa@resguarda.com o por medio del sitio web www.resguarda.com/impsa. 
+
+Este mensaje es confidencial y puede contener información amparada por el secreto profesional. Si usted ha recibido este e-mail por error, por favor comuníquelo inmediatamente vía e-mail y tenga la amabilidad de destruirlo; asimismo no deberá copiar el mensaje ni divulgar su contenido a ninguna persona. En adición, por favor tener en cuenta que el presente correo y su contenido es al mero efecto informativo y no importa oferta, compromiso o manifestación de voluntad de acuerdo alguna, ni genera a IMPSA, cualquiera de sus afiliadas o el remitente obligación legal alguna. Muchas gracias. 
+
+NOTE: IMPSA , complying with Law 27.401 of the Republic of Argentina and with the internationally accepted regulations on the fight against corruption and money laundering, has an independent communication channel to make complaints, anonymously and confidentially, for any possible violation of our Code of Ethics and Conduct, which you can access by calling the numbers 0-800-999-4636/0-800-122-7374, by email to etica.impsa@resguarda.com or through the website www.resguarda.com/impsa. 
+
+This message is confidential. It may also contain information that is privileged or otherwise legally exempt from disclosure. If you have received it by mistake please let IMPSA know by e-mail immediately and delete it from your system; you should also not copy the message nor disclose its contents to anyone. In addition, please note that the content of this e-mail is for informational purposes only, and neither implies an offer, promise, commitment or agreement of any kind, nor does bind IMPSA, any of its affiliates or the sender to any legal obligation with respect thereto. Thank you.
+
