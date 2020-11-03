@@ -2,235 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 015142A3740
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Nov 2020 00:39:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A94952A37F4
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Nov 2020 01:42:25 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725841AbgKBXj0 convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Mon, 2 Nov 2020 18:39:26 -0500
-Received: from mga17.intel.com ([192.55.52.151]:28793 "EHLO mga17.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725831AbgKBXj0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 2 Nov 2020 18:39:26 -0500
-IronPort-SDR: VleSwzEdQUP6Czkv4V8Q6y5moXg7lrD3gH5mvfeGa5N5gNJg8UoQmxdvKFTfYsQagKmHwNbSHR
- f4vtNNw1fblQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9793"; a="148825748"
-X-IronPort-AV: E=Sophos;i="5.77,446,1596524400"; 
-   d="scan'208";a="148825748"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Nov 2020 15:39:25 -0800
-IronPort-SDR: V6dSkkgktjKnDH00TCGYsOm+CRknORWWDzuIhJKnyld/or8rgSHThWBHGoGL3B6IZohXN25J+4
- d8zpFfGvYOhA==
-X-IronPort-AV: E=Sophos;i="5.77,446,1596524400"; 
-   d="scan'208";a="336324618"
-Received: from jacob-builder.jf.intel.com (HELO jacob-builder) ([10.7.199.155])
-  by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 02 Nov 2020 15:39:25 -0800
-Date:   Mon, 2 Nov 2020 15:41:52 -0800
-From:   Jacob Pan <jacob.jun.pan@linux.intel.com>
-To:     Jean-Philippe Brucker <jean-philippe@linaro.org>
-Cc:     Jacob Pan <jacob.pan.linux@gmail.com>,
-        iommu@lists.linux-foundation.org,
-        LKML <linux-kernel@vger.kernel.org>,
-        Joerg Roedel <joro@8bytes.org>,
-        Alex Williamson <alex.williamson@redhat.com>,
-        Lu Baolu <baolu.lu@linux.intel.com>,
-        David Woodhouse <dwmw2@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-api@vger.kernel.org,
-        Jean-Philippe Brucker <jean-philippe@linaro.com>,
-        Eric Auger <eric.auger@redhat.com>,
-        Yi Liu <yi.l.liu@intel.com>,
-        "Tian, Kevin" <kevin.tian@intel.com>,
-        Raj Ashok <ashok.raj@intel.com>, Wu Hao <hao.wu@intel.com>,
-        Yi Sun <yi.y.sun@intel.com>, Dave Jiang <dave.jiang@intel.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        linux-doc@vger.kernel.org, jacob.jun.pan@linux.intel.com
-Subject: Re: [PATCH v3 01/14] docs: Document IO Address Space ID (IOASID)
- APIs
-Message-ID: <20201102154152.0e95ab98@jacob-builder>
-In-Reply-To: <20201030101827.GB122147@myrica>
-References: <1601329121-36979-1-git-send-email-jacob.jun.pan@linux.intel.com>
-        <1601329121-36979-2-git-send-email-jacob.jun.pan@linux.intel.com>
-        <20201020135809.GA1515830@myrica>
-        <20201026140506.1349dbb5@jacob-builder>
-        <20201030101827.GB122147@myrica>
-Organization: OTC
-X-Mailer: Claws Mail 3.13.2 (GTK+ 2.24.30; x86_64-pc-linux-gnu)
+        id S1725883AbgKCAmY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 2 Nov 2020 19:42:24 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60192 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726563AbgKCAmW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 2 Nov 2020 19:42:22 -0500
+Received: from mail-ua1-x944.google.com (mail-ua1-x944.google.com [IPv6:2607:f8b0:4864:20::944])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AC334C061A49
+        for <linux-doc@vger.kernel.org>; Mon,  2 Nov 2020 16:42:20 -0800 (PST)
+Received: by mail-ua1-x944.google.com with SMTP id w3so1423871uau.2
+        for <linux-doc@vger.kernel.org>; Mon, 02 Nov 2020 16:42:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=inHX6bFfbXo/rqCNZibX/SoGds+Oh6m2ZoC9dpKySuk=;
+        b=cIBtkV3rfYlpJdRmlM5S5gzfFC3gEqaAv+xn3S/pWzIBl/UZeMNKdLEc9zbYw3XzmT
+         SnfKp5pu0dJOr+/aK2AYfwcPdDbM6Vni0GB33DXOVAWpzF3nwTuZHzHfxG4O7ANp9J90
+         w9HGKNSxw1+Zd1sfs4sY/NnfNlJjtzPwDIxmQ=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=inHX6bFfbXo/rqCNZibX/SoGds+Oh6m2ZoC9dpKySuk=;
+        b=hNptrjXYaD2foTcLqKzf+QwNzEQ9el4om6n+hlNgOs3dLQpeLGeiJFAv2hkTNf37CY
+         FwNWs4oI4fjDlXhxVz7ESKhiU2tk/EUmbVIUmD7KijdE+TP2Ef6OjZcmT6RGKclAEcsy
+         HgDfUBu91vNWVByacm4p3crLre4RCvz9n3zAw1TqSfePrMTGAnfPbDu2l78MB0UqmJ6z
+         L5JEnyNDd+PXmNlvPJyuOYoPCGVBGqXXt7P9+6QvEl/zM6MmSVV59pUeuxYLeyjXqucB
+         t7mLJWdHtBiEFOPeSqPcJm6FG+BPctHHHaLJ/5tcbL0byAYTJY/NaEE9GNs/QhtI+YZd
+         WjTQ==
+X-Gm-Message-State: AOAM532lqFuev2JG41fMmrWQ8+2Vi/aGjmSXcA1TeJSQZpje+ylJRkSa
+        jlboVPsRwf2WgmfHI1nsIQSpNPLeZnXQeQ==
+X-Google-Smtp-Source: ABdhPJxhG/VEM1hgdsWFAPEM7/KCpsaXBIxQ4Oj0woS/NE8r9Sb3WI25lQeN0hHbS1vEzAFnV5BE4w==
+X-Received: by 2002:ab0:768:: with SMTP id h95mr9046481uah.23.1604364139718;
+        Mon, 02 Nov 2020 16:42:19 -0800 (PST)
+Received: from mail-vs1-f48.google.com (mail-vs1-f48.google.com. [209.85.217.48])
+        by smtp.gmail.com with ESMTPSA id l6sm2063151vkk.56.2020.11.02.16.42.17
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 02 Nov 2020 16:42:18 -0800 (PST)
+Received: by mail-vs1-f48.google.com with SMTP id f7so2764885vsh.10
+        for <linux-doc@vger.kernel.org>; Mon, 02 Nov 2020 16:42:17 -0800 (PST)
+X-Received: by 2002:a67:ef98:: with SMTP id r24mr2239428vsp.37.1604364137278;
+ Mon, 02 Nov 2020 16:42:17 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+References: <20201019140601.3047-1-lukasz.luba@arm.com> <d3c64655-dc31-73dc-8483-bf5805a9d389@arm.com>
+ <20201102135449.GE2221764@google.com>
+In-Reply-To: <20201102135449.GE2221764@google.com>
+From:   Doug Anderson <dianders@chromium.org>
+Date:   Mon, 2 Nov 2020 16:41:57 -0800
+X-Gmail-Original-Message-ID: <CAD=FV=VDCbWU4ukYwJUsTKMfEz9+55rmdLL1a39JWcPzjUmZCQ@mail.gmail.com>
+Message-ID: <CAD=FV=VDCbWU4ukYwJUsTKMfEz9+55rmdLL1a39JWcPzjUmZCQ@mail.gmail.com>
+Subject: Re: [PATCH v3 0/4] Clarify abstract scale usage for power values in
+ Energy Model, EAS and IPA
+To:     Quentin Perret <qperret@google.com>
+Cc:     Lukasz Luba <lukasz.luba@arm.com>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Linux PM <linux-pm@vger.kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
+        <devicetree@vger.kernel.org>,
+        Linux ARM <linux-arm-kernel@lists.infradead.org>,
+        Daniel Lezcano <daniel.lezcano@linaro.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Amit Kucheria <amitk@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Dietmar Eggemann <Dietmar.Eggemann@arm.com>,
+        morten.rasmussen@arm.com, Matthias Kaehlcke <mka@chromium.org>,
+        Rajendra Nayak <rnayak@codeaurora.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Sudeep Holla <sudeep.holla@arm.com>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        Stephen Boyd <sboyd@kernel.org>, Nishanth Menon <nm@ti.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Jean-Philippe,
+Hi,
 
-On Fri, 30 Oct 2020 11:18:27 +0100, Jean-Philippe Brucker
-<jean-philippe@linaro.org> wrote:
+On Mon, Nov 2, 2020 at 5:54 AM Quentin Perret <qperret@google.com> wrote:
+>
+> On Monday 02 Nov 2020 at 08:54:38 (+0000), Lukasz Luba wrote:
+> > Gentle ping to Quentin and Daniel for sharing opinion on this patch set.
+> > If you are OK, then I could use this as a base for next work.
+>
+> One or two small nits, but overall this LGTM. Thanks Lukasz.
+>
+> > As you probably know I am working also on 'sustainable power' estimation
+> > which could be used when there is no DT value but it comes from FW.
+> > That would meet requirement from Doug, when the DT cannot be used,
+> > but we have sustainable levels from FW [1].
+>
+> Cool, and also, I'd be happy to hear from Doug if passing the sustained
+> power via sysfs is good enough for his use-case in the meantime?
 
-> On Mon, Oct 26, 2020 at 02:05:06PM -0700, Jacob Pan wrote:
-> > > This looks good to me, with small comments below.
-> > >   
-> > Can I add your Reviewed-by tag after addressing the comments?  
-> 
-> Yes sure, this took forever to review so I'm happy not to do another
-> pass :)
-> 
-I am afraid I have to ask for another round of reviews since it was
-suggested to keep IOASID allocation interface independent, instead of being
-part of VFIO UAPI. Yi and I are working out the details to come up with a
-PoC. As you might be aware, the need for this independent interface is that
-we may have multiple users of PASID, e.g VDPA, user space drivers, etc.
-The IOASID user interface also has slight impact on the IOASID core code,
-which is why I am slow in response to your code review. Will incorporate
-your review in the next round with support of independent user API.
-Much appreciated!
+It does sound like sysfs could be made to work for us, but it's
+definitely a workaround.  If the normal way to set these values was
+through sysfs then it would be fine, but I think most people expect
+that these values are just setup properly by the kernel.  That means
+anyone using our board with a different userspace (someone running
+upstream on it) would need to figure out what mechanism they were
+going to use to program them.  There's very little advantage here
+compared to a downstream patch that just violates official upstream
+policy by putting something bogoWatts based in the device tree.
 
-> 
-> > > > +Each IOASID set is created with a token, which can be one of the
-> > > > +following token types:
-> > > > +
-> > > > + - IOASID_SET_TYPE_NULL (Arbitrary u64 value)    
-> > > 
-> > > Maybe NULL isn't the best name then. NONE?
-> > >   
-> > Agreed, 'NONE' makes more sense.  
-> 
-> Although patch 5 only allows a NULL token for this type. So the name seems
-> fine, you could just fix this description.
-> 
-OK.
+My current plan of record (which I don't love) is basically:
 
-> 
-> > > > +IOASID core has the notion of "custom allocator" such that guest
-> > > > can +register virtual command allocator that precedes the default
-> > > > one.    
-> > > 
-> > > "Supersedes", rather than "precedes"?
-> > >   
-> > My understanding is that 'supersede' means replace something but
-> > 'precede' means get in front of something. I do want to emphasis that
-> > the custom allocator takes precedence over the default allocator.  
-> 
-> Right it's ambiguous. The custom allocator does entirely replace the
-> allocation action, but the default one is still used for storage. Anyway,
-> you can leave this.
-> 
-OK
+1. Before devices are in consumer's hands, accept bogoWatts numbers in
+our downstream kernel.
 
-> 
-> > > > +Let's examine the IOASID life cycle again when free happens
-> > > > *before* +unbind. This could be a result of misbehaving guests or
-> > > > crash. Assuming +VFIO cannot enforce unbind->free order. Notice
-> > > > that the setup part up +until step #12 is identical to the normal
-> > > > case, the flow below starts +with step 13.
-> > > > +
-> > > > +::
-> > > > +
-> > > > +     VFIO        IOMMU        KVM        VDCM        IOASID
-> > > > Ref
-> > > > +   ..................................................................
-> > > > +   13 -------- GUEST STARTS DMA --------------------------
-> > > > +   14 -------- *GUEST MISBEHAVES!!!* ----------------
-> > > > +   15 ioasid_free()
-> > > > +   16
-> > > > ioasid_notify(FREE)
-> > > > +   17                                             mark_free_pending
-> > > > (1)    
-> > > 
-> > > Could we use superscript ¹²³⁴ for footnotes? These look like function
-> > > parameters
-> > >   
-> > yes, much better
-> >   
-> > > > +   18                          kvm_nb_handler(FREE)
-> > > > +   19                          vmcs_update_atomic()
-> > > > +   20                          ioasid_put_locked()   ->           3
-> > > > +   21                                   vdcm_nb_handler(FREE)
-> > > > +   22            iomm_nb_handler(FREE)    
-> > > 
-> > > iommu_nb_handler
-> > >   
-> > got it
-> >   
-> > > > +   23 ioasid_free() returns(2)          schedule_work()
-> > > > 2    
-> > > 
-> > > I completely lost track here, couldn't figure out in which direction
-> > > to read the diagram. What work is scheduled?  
-> > The time line goes downward but we only control the notification order
-> > in terms of when the events are received. Some completions are async
-> > thus out of order done by work items. The only in-order completion is
-> > the KVM update of its PASID translation table.
-> > 
-> > After #23, the async works are scheduled to complete clean up work
-> > outside the spinlock(held by the caller of the atomic notifier).
-> > 
-> > Any suggestions to improve the readability of the time line?  
-> 
-> Maybe explain what happens from line 23: ioasid_free() schedules... a FREE
-> notification? Which happens on line 24 (corresponding to the second
-> schedule_work()?) and is handled by (a) VDCM to clear the device context
-> and (b) IOMMU to clear the PASID context, both ending up dropping their
-> ref.
-> 
-Got it, I will add that.
+2. Once devices are in consumers hands, run the script I sent out to
+generate some numbers and post them upstream.
 
-> >   
-> > > Why does the IOMMU driver drop
-> > > its reference to the IOASID before unbdind_gpasid()?
-> > >   
-> > This is the exception case where userspace issues IOASID free before
-> > unbind_gpasid(). The equivalent of unbind is performed in the
-> > IOASID_FREE notification handler. In IOASID_FREE handler, reference is
-> > dropped and private data deleted. After that, if unbind comes to IOMMU
-> > driver, it will not find IOASID private data therefore just return.  
-> 
-> Right ok. As you noted below the damage is caused by and limited to the
-> guest, so I think it's fine.
-> 
-OK.
-
-> >   
-> > > > +   24            schedule_work()        vdev_clear_wk(hpasid)
-> > > > +   25            teardown_pasid_wk()
-> > > > +   26                                   ioasid_put() ->           1
-> > > > +   27            ioasid_put()                                     0
-> > > > +   28                                                 Reclaimed
-> > > > +   29 unbind_gpasid()
-> > > > +   30            iommu_unbind()->ioasid_find() Fails(3)
-> > > > +   -------------- New Life Cycle Begin ----------------------------
-> > > > +
-> > > > +Note:
-> > > > +
-> > > > +1. By marking IOASID FREE_PENDING at step #17, no new references
-> > > > can be
-> > > > +   held. ioasid_get/find() will return -ENOENT;    
-> > > 
-> > > s/held/taken
-> > >   
-> > Got it.
-> >   
-> > > Thanks,
-> > > Jean
-> > >   
-> > > > +2. After step #23, all events can go out of order. Shall not affect
-> > > > +   the outcome.
-> > > > +3. IOMMU driver fails to find private data for unbinding. If
-> > > > unbind is
-> > > > +   called after the same IOASID is allocated for the same guest
-> > > > again,
-> > > > +   this is a programming error. The damage is limited to the guest
-> > > > +   itself since unbind performs permission checking based on the
-> > > > +   IOASID set associated with the guest process.  
-> 
-> "guest process" can be confusing (process run by the guest?), just "guest"
-> might be better.
-> 
-> Thanks,
-> Jean
+If, at some point, there's a better solution then I'll switch to it,
+but until then that seems workable even if it makes me grumpy.
 
 
-Thanks,
-
-Jacob
+-Doug
