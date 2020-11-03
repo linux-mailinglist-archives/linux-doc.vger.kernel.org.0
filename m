@@ -2,42 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0A87E2A3EE5
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Nov 2020 09:29:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5E4AB2A3EF0
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Nov 2020 09:30:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726659AbgKCI2o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Nov 2020 03:28:44 -0500
-Received: from foss.arm.com ([217.140.110.172]:44118 "EHLO foss.arm.com"
+        id S1726659AbgKCIaE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Nov 2020 03:30:04 -0500
+Received: from foss.arm.com ([217.140.110.172]:44152 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725968AbgKCI2o (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Nov 2020 03:28:44 -0500
+        id S1725982AbgKCIaE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Nov 2020 03:30:04 -0500
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
-        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 1454E139F;
-        Tue,  3 Nov 2020 00:28:44 -0800 (PST)
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 8A393139F;
+        Tue,  3 Nov 2020 00:30:03 -0800 (PST)
 Received: from [10.57.19.30] (unknown [10.57.19.30])
-        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B6B1A3F718;
-        Tue,  3 Nov 2020 00:28:38 -0800 (PST)
-Subject: Re: [PATCH v3 2/4] docs: Clarify abstract scale usage for power
- values in Energy Model
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CF6343F718;
+        Tue,  3 Nov 2020 00:29:59 -0800 (PST)
+Subject: Re: [PATCH v3 0/4] Clarify abstract scale usage for power values in
+ Energy Model, EAS and IPA
 To:     Quentin Perret <qperret@google.com>
 Cc:     linux-kernel@vger.kernel.org, linux-pm@vger.kernel.org,
         linux-doc@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org, robh+dt@kernel.org,
-        amitk@kernel.org, corbet@lwn.net, daniel.lezcano@linaro.org,
+        linux-arm-kernel@lists.infradead.org, daniel.lezcano@linaro.org,
+        robh+dt@kernel.org, amitk@kernel.org, corbet@lwn.net,
         Dietmar.Eggemann@arm.com, morten.rasmussen@arm.com,
         dianders@chromium.org, mka@chromium.org, rnayak@codeaurora.org,
         rafael@kernel.org, sudeep.holla@arm.com, viresh.kumar@linaro.org,
         sboyd@kernel.org, nm@ti.com
 References: <20201019140601.3047-1-lukasz.luba@arm.com>
- <20201019140601.3047-3-lukasz.luba@arm.com>
- <20201102134536.GB2221764@google.com>
+ <d3c64655-dc31-73dc-8483-bf5805a9d389@arm.com>
+ <20201102135449.GE2221764@google.com>
 From:   Lukasz Luba <lukasz.luba@arm.com>
-Message-ID: <a4985699-18ff-d35d-734e-ce4af1f2d653@arm.com>
-Date:   Tue, 3 Nov 2020 08:28:36 +0000
+Message-ID: <af50b82f-015a-ad32-4e57-da3de9ac0a77@arm.com>
+Date:   Tue, 3 Nov 2020 08:29:57 +0000
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101
  Thunderbird/60.9.0
 MIME-Version: 1.0
-In-Reply-To: <20201102134536.GB2221764@google.com>
+In-Reply-To: <20201102135449.GE2221764@google.com>
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
@@ -47,25 +47,27 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 
 
-On 11/2/20 1:45 PM, Quentin Perret wrote:
-> On Monday 19 Oct 2020 at 15:05:59 (+0100), Lukasz Luba wrote:
->> diff --git a/Documentation/driver-api/thermal/power_allocator.rst b/Documentation/driver-api/thermal/power_allocator.rst
->> index 67b6a3297238..b7992ae84fef 100644
->> --- a/Documentation/driver-api/thermal/power_allocator.rst
->> +++ b/Documentation/driver-api/thermal/power_allocator.rst
->> @@ -71,7 +71,10 @@ to the speed-grade of the silicon.  `sustainable_power` is therefore
->>   simply an estimate, and may be tuned to affect the aggressiveness of
->>   the thermal ramp. For reference, the sustainable power of a 4" phone
->>   is typically 2000mW, while on a 10" tablet is around 4500mW (may vary
->> -depending on screen size).
->> +depending on screen size). It is possible to have the power value
->> +expressed in an abstract scale. This is the case when the Energy Model
->> +provides the power values in an abstract scale.
+On 11/2/20 1:54 PM, Quentin Perret wrote:
+> On Monday 02 Nov 2020 at 08:54:38 (+0000), Lukasz Luba wrote:
+>> Gentle ping to Quentin and Daniel for sharing opinion on this patch set.
+>> If you are OK, then I could use this as a base for next work.
 > 
-> Maybe remove one of the 2 sentences?
+> One or two small nits, but overall this LGTM. Thanks Lukasz.
 
-I will remove the 2nd sentence.
+Thank you Quentin for the review. I am going to send v4 with these small
+changes.
 
+Regards,
+Lukasz
+
+> 
+>> As you probably know I am working also on 'sustainable power' estimation
+>> which could be used when there is no DT value but it comes from FW.
+>> That would meet requirement from Doug, when the DT cannot be used,
+>> but we have sustainable levels from FW [1].
+> 
+> Cool, and also, I'd be happy to hear from Doug if passing the sustained
+> power via sysfs is good enough for his use-case in the meantime?
 > 
 > Thanks,
 > Quentin
