@@ -2,156 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 909852A4350
-	for <lists+linux-doc@lfdr.de>; Tue,  3 Nov 2020 11:44:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3EDBE2A45C3
+	for <lists+linux-doc@lfdr.de>; Tue,  3 Nov 2020 13:58:53 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727328AbgKCKky (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 3 Nov 2020 05:40:54 -0500
-Received: from mx2.suse.de ([195.135.220.15]:50220 "EHLO mx2.suse.de"
+        id S1729103AbgKCM63 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 3 Nov 2020 07:58:29 -0500
+Received: from z5.mailgun.us ([104.130.96.5]:33589 "EHLO z5.mailgun.us"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726388AbgKCKkx (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 3 Nov 2020 05:40:53 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-        t=1604400051;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=OpLXhG7xm+V2xdBg1+KjOIVd448NLhIB6otcbwQQTDI=;
-        b=XSdNy7mxSwPPbuLKLXZRfCFfjOJHautUQu++n50tMCvpfkaBXlr+bOunNRM8+xoxvQYvi5
-        mY40GKHAydPd5jnotGgN8FQylfnmTxCAY7Xg9pOTx1xVd1OxQtnbCqyriarK0Ndrtzt94h
-        IzlzFUKI+hnTAEK+ASYY8dP7/EOox/U=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id CFA08ACD8;
-        Tue,  3 Nov 2020 10:40:50 +0000 (UTC)
-Date:   Tue, 3 Nov 2020 11:40:49 +0100
-From:   Petr Mladek <pmladek@suse.com>
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     linux-kernel@vger.kernel.org,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Ingo Molnar <mingo@kernel.org>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        Jiri Kosina <jikos@kernel.org>,
-        Miroslav Benes <mbenes@suse.cz>,
-        Jonathan Corbet <corbet@lwn.net>, Guo Ren <guoren@kernel.org>,
-        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-        Helge Deller <deller@gmx.de>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
-        Paul Mackerras <paulus@samba.org>,
-        Heiko Carstens <hca@linux.ibm.com>,
-        Vasily Gorbik <gor@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@de.ibm.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Borislav Petkov <bp@alien8.de>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Kees Cook <keescook@chromium.org>,
-        Anton Vorontsov <anton@enomsg.org>,
-        Colin Cross <ccross@android.com>,
-        Tony Luck <tony.luck@intel.com>,
-        Joe Lawrence <joe.lawrence@redhat.com>,
-        Kamalesh Babulal <kamalesh@linux.vnet.ibm.com>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Sebastian Andrzej Siewior <bigeasy@linutronix.de>,
-        linux-doc@vger.kernel.org, linux-csky@vger.kernel.org,
-        linux-parisc@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
-        linux-s390@vger.kernel.org, live-patching@vger.kernel.org
-Subject: Re: [PATCH 11/11 v2] ftrace: Add recording of functions that caused
- recursion
-Message-ID: <20201103104049.GN20201@alley>
-References: <20201030213142.096102821@goodmis.org>
- <20201030214014.801706340@goodmis.org>
- <20201102164147.GJ20201@alley>
- <20201102120907.457ad2f7@gandalf.local.home>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201102120907.457ad2f7@gandalf.local.home>
+        id S1729079AbgKCM62 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 3 Nov 2020 07:58:28 -0500
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
+ s=smtp; t=1604408308; h=Message-Id: Date: Subject: Cc: To: From:
+ Sender; bh=Vl1gSkuYNKu59mDRMCZ/CekkC7CyDy0hSBNDzA19YYI=; b=vifi6kFD0RI0DwYATPWpcZzMbPVay5IlUkg2YzJZNV7NnIhoNgohCYOm3/43upqtnR+Phj0m
+ DRV3ve8gVqea+P6zYzTXoABkZc6mO35ipl77u94gY4qfYXQnMKiT0n3QIqHAvn0ddEw0DF3T
+ VlS3UUjEbXvVLlv6VqwW6s3k/x8=
+X-Mailgun-Sending-Ip: 104.130.96.5
+X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n05.prod.us-east-1.postgun.com with SMTP id
+ 5fa153ecb64b1c5b78f96c52 (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Tue, 03 Nov 2020 12:58:20
+ GMT
+Sender: sidgup=codeaurora.org@mg.codeaurora.org
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+        id 46297C3853C; Tue,  3 Nov 2020 09:19:30 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+        aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00,SPF_FAIL,
+        URIBL_BLOCKED autolearn=no autolearn_force=no version=3.4.0
+Received: from sidgup-linux.qualcomm.com (i-global254.qualcomm.com [199.106.103.254])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+        (No client certificate requested)
+        (Authenticated sender: sidgup)
+        by smtp.codeaurora.org (Postfix) with ESMTPSA id 2C27CC38537;
+        Tue,  3 Nov 2020 09:19:29 +0000 (UTC)
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org 2C27CC38537
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: aws-us-west-2-caf-mail-1.web.codeaurora.org; spf=fail smtp.mailfrom=sidgup@codeaurora.org
+From:   Siddharth Gupta <sidgup@codeaurora.org>
+To:     agross@kernel.org, bjorn.andersson@linaro.org, ohad@wizery.com,
+        linux-remoteproc@vger.kernel.org
+Cc:     Siddharth Gupta <sidgup@codeaurora.org>,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, tsoni@codeaurora.org,
+        psodagud@codeaurora.org, rishabhb@codeaurora.org,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v7 0/4] Introduce mini-dump support for remoteproc
+Date:   Tue,  3 Nov 2020 01:19:16 -0800
+Message-Id: <1604395160-12443-1-git-send-email-sidgup@codeaurora.org>
+X-Mailer: git-send-email 2.7.4
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon 2020-11-02 12:09:07, Steven Rostedt wrote:
-> On Mon, 2 Nov 2020 17:41:47 +0100
-> Petr Mladek <pmladek@suse.com> wrote:
-> 
-> > On Fri 2020-10-30 17:31:53, Steven Rostedt wrote:
-> > > From: "Steven Rostedt (VMware)" <rostedt@goodmis.org>
-> > > 
-> > > This adds CONFIG_FTRACE_RECORD_RECURSION that will record to a file
-> > > "recursed_functions" all the functions that caused recursion while a
-> > > callback to the function tracer was running.
-> > >   
-> > 
-> > > --- /dev/null
-> > > +++ b/kernel/trace/trace_recursion_record.c
-> > > +	if (index >= CONFIG_FTRACE_RECORD_RECURSION_SIZE)
-> > > +		return;
-> > > +
-> > > +	for (i = index - 1; i >= 0; i--) {
-> > > +		if (recursed_functions[i].ip == ip) {
-> > > +			cached_function = ip;
-> > > +			return;
-> > > +		}
-> > > +	}
-> > > +
-> > > +	cached_function = ip;
-> > > +
-> > > +	/*
-> > > +	 * We only want to add a function if it hasn't been added before.
-> > > +	 * Add to the current location before incrementing the count.
-> > > +	 * If it fails to add, then increment the index (save in i)
-> > > +	 * and try again.
-> > > +	 */
-> > > +	old = cmpxchg(&recursed_functions[index].ip, 0, ip);
-> > > +	if (old != 0) {
-> > > +		/* Did something else already added this for us? */
-> > > +		if (old == ip)
-> > > +			return;
-> > > +		/* Try the next location (use i for the next index) */
-> > > +		i = index + 1;  
-> > 
-> > What about
-> > 
-> > 		index++;
-> > 
-> > We basically want to run the code again with index + 1 limit.
-> 
-> But something else could update nr_records, and we want to use that if
-> nr_records is greater than i.
-> 
-> Now, we could swap the use case, and have
-> 
-> 	int index = 0;
-> 
-> 	[..]
-> 	i = atomic_read(&nr_records);
-> 	if (i > index)
-> 		index = i;
-> 
-> 	[..]
-> 
-> 		index++;
-> 		goto again;
-> 
-> 
-> > 
-> > Maybe, it even does not make sense to check the array again
-> > and we should just try to store the value into the next slot.
-> 
-> We do this dance to prevent duplicates.
+Sometimes firmware sizes can be in tens of MB's and reading all the memory
+during coredump can consume lot of time and memory.
 
-I see.
+Introducing support for mini-dumps. Mini-dump contains smallest amount of
+useful information, that could help to debug subsystem crashes.
 
-My code was wrong. It reserved slot for the new "ip" by cmpxchg
-on nr_records. The "ip" was stored later so that any parallel
-call need not see that it is a dumplicate.
+During bootup memory is allocated in SMEM (Shared memory) in the form of a
+table that contains the physical addresses and sizes of the regions that
+are supposed to be collected during coredump. This memory is shared amongst
+all processors in a Qualcomm platform, so all remoteprocs fill in their
+entry in the global table once they are out of reset.
 
-Your code reserves the slot by cmpxchg of "ip".
-Any parallel call would fail to take the slot and see
-the "ip" in the next iteration.
+This patch series adds support for parsing the global minidump table and
+uses the current coredump frameork to expose this memory to userspace
+during remoteproc's recovery.
 
-Best Regards,
-Petr
+This patch series also integrates the patch:
+https://patchwork.kernel.org/patch/11695541/ sent by Siddharth.
+
+Changelog:
+v6 -> v7:
+- The STR_TAB size is calculated dynamically now instead of a predefined size.
+- Added comments to indicate details about the reserved null section header. More
+  details can be found at https://refspecs.linuxfoundation.org/elf/elf.pdf.
+
+v5 -> v6:
+- Removed priv_cleanup operation from rproc_ops. The dump_segments list is
+  updated and cleaned up each time minidump is invoked.
+- Split patch #2 into 2 parts - one that adds the rproc_minidump function, and
+  the other that uses the new function in the qcom_q6v5_pas driver.
+- Updated structs in qcom_minidump to explicitly indicate the endianness of the
+  data stored in SMEM, also updated member names.
+- Read the global table of contents in SMEM each time adsp_minidump is invoked.
+
+v4 -> v5:
+- Fixed adsp_add_minidump_segments to read IO memory using appropriate functions.
+
+v3 -> v4:
+- Made adsp_priv_cleanup a static function.
+
+v2 -> v3:
+- Refactored code to remove dependency on Qualcomm configs.
+- Renamed do_rproc_minidump to rproc_minidump and marked as exported
+  symbol.
+
+v1 -> v2:
+- 3 kernel test robot warnings have been resolved.
+- Introduced priv_cleanup op in order to making the cleaning of
+  private elements used by the remoteproc more readable.
+- Removed rproc_cleanup_priv as it is no longer needed.
+- Switched to if/else format for rproc_alloc in order to keep 
+  the static const decalaration of adsp_minidump_ops.
+
+Siddharth Gupta (4):
+  remoteproc: core: Add ops to enable custom coredump functionality
+  remoteproc: coredump: Add minidump functionality
+  remoteproc: qcom: Add capability to collect minidumps
+  remoteproc: qcom: Add minidump id for sm8150 modem
+
+ drivers/remoteproc/qcom_minidump.h          |  64 +++++++++++++
+ drivers/remoteproc/qcom_q6v5_pas.c          | 105 ++++++++++++++++++++-
+ drivers/remoteproc/remoteproc_core.c        |   6 +-
+ drivers/remoteproc/remoteproc_coredump.c    | 140 ++++++++++++++++++++++++++++
+ drivers/remoteproc/remoteproc_elf_helpers.h |  26 ++++++
+ include/linux/remoteproc.h                  |   3 +
+ 6 files changed, 341 insertions(+), 3 deletions(-)
+ create mode 100644 drivers/remoteproc/qcom_minidump.h
+
+-- 
+Qualcomm Innovation Center, Inc. is a member of the Code Aurora Forum,
+a Linux Foundation Collaborative Project
+
