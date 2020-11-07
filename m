@@ -2,174 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5D0FB2AE3C8
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Nov 2020 23:58:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8E70A2AE458
+	for <lists+linux-doc@lfdr.de>; Wed, 11 Nov 2020 00:47:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731996AbgKJW6u (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 10 Nov 2020 17:58:50 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55856 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727018AbgKJW6t (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Nov 2020 17:58:49 -0500
-Received: from mail-il1-x144.google.com (mail-il1-x144.google.com [IPv6:2607:f8b0:4864:20::144])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C5C0EC0613D1
-        for <linux-doc@vger.kernel.org>; Tue, 10 Nov 2020 14:58:49 -0800 (PST)
-Received: by mail-il1-x144.google.com with SMTP id g15so156430ilc.9
-        for <linux-doc@vger.kernel.org>; Tue, 10 Nov 2020 14:58:49 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=Jmb/o79cv2bZ/x6XX14phanTrgenPgbAo9xKj20lQ+M=;
-        b=WJi5tW8uGgd7ZtOqMWIb+RZ9EfkEd1Zbdp7Z3xhmkUmUTVidlzjWOOXiUqTOSHSb9N
-         AX21ua0H4EF2nyiyLh7k3V2K3zyvM2dN/6ef5oNLLddJ6lE9E6YWC1KV0AzLMC3a+Ykp
-         LiOmdYO0nsWMhWvc8oPpY8K1H08d3g93XoZwM=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=Jmb/o79cv2bZ/x6XX14phanTrgenPgbAo9xKj20lQ+M=;
-        b=GoixNNHxquKgidgQNkGbvahhUuQkjsNjQjvYTD1d5pLSmiiHdgqH90KIVmeeKfzoVn
-         rjbAdaVZ5v+FKoZnecFH2w/6uUgqR/fcbZz8BgIdJ2AT5UXNfstXK0xSgF01Lv8rNNb5
-         hAarPzXildrfLjGJ4t1QQ/pKKLJ6pU65IA10p6JU3/c5hzPsPiGKCbZnZNtgCc56GZZT
-         ridDS3tt+YHifEOb+oGVH8JcmiAcwswrn0f1CNSEfkOsb+SWF1jGWQkt3c8aYJqlPykJ
-         KWwIgZCxscZGONRqwrE56z+BmhlbEw49EiiqmDKVHQmQTlE31jB0q2n4TKuplXJOYtJa
-         YZbA==
-X-Gm-Message-State: AOAM530eC+TTfE+rQ5DLdZ3Foq3+p55Symx1G2dgENJ0XN3EWOLnlD9R
-        5ikuOFQYj3KTVtkdihuk8vk11A==
-X-Google-Smtp-Source: ABdhPJz3wyTzSRzlVMZdQL8h4QSqHft28+nWbmp40Gv09GnNJNX+OL/bryYFrDSADelWkwq/sWDCjQ==
-X-Received: by 2002:a05:6e02:ce:: with SMTP id r14mr16715967ilq.240.1605049129210;
-        Tue, 10 Nov 2020 14:58:49 -0800 (PST)
-Received: from [192.168.1.112] (c-24-9-64-241.hsd1.co.comcast.net. [24.9.64.241])
-        by smtp.gmail.com with ESMTPSA id g1sm52338ilk.84.2020.11.10.14.58.48
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 10 Nov 2020 14:58:48 -0800 (PST)
-Subject: Re: [PATCH 01/13] seqnum_ops: Introduce Sequence Number Ops
-To:     Matthew Wilcox <willy@infradead.org>
-Cc:     corbet@lwn.net, keescook@chromium.org, gregkh@linuxfoundation.org,
-        peterz@infradead.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org,
-        Shuah Khan <skhan@linuxfoundation.org>
-References: <cover.1605027593.git.skhan@linuxfoundation.org>
- <d265685c901ea81c83c18e218a29710317ab7670.1605027593.git.skhan@linuxfoundation.org>
- <20201110210316.GO17076@casper.infradead.org>
-From:   Shuah Khan <skhan@linuxfoundation.org>
-Message-ID: <11b5153f-e092-d1c9-deb1-e81a171bb866@linuxfoundation.org>
-Date:   Tue, 10 Nov 2020 15:58:48 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.3.2
+        id S1730254AbgKJXrC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 10 Nov 2020 18:47:02 -0500
+Received: from server.hostvarna.com ([185.219.69.50]:40021 "EHLO
+        mail.hostvarna.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726706AbgKJXrC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Nov 2020 18:47:02 -0500
+Received: from localhost (localhost [127.0.0.1])
+        by mail.hostvarna.com (Postfix) with ESMTP id 8AD62D6A40D;
+        Sat,  7 Nov 2020 14:58:30 +0200 (EET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=hostvarna.com; h=
+        x-mailer:content-transfer-encoding:content-type:content-type
+        :mime-version:date:date:subject:subject:from:from:reply-to; s=
+        dkim; t=1604753907; x=1606568308; bh=m3pASy53GgfFwHppvIPHJghbzAH
+        QviKN6bgk+M/PrtE=; b=Z1hLZwM57N/xpf2b660tSG4jRwt9qrF03v81BXDUI1z
+        lSg90I2oKu6oniO6u40ZRGqO5S5Sh+ZfyUrTLypvXszJxlGTI4L50dt/4zDduSRX
+        F8Rc34N9/kB+PxvKq3gQ0xEVT3UxIrVnmQm7BK8nGOqlSjiuKydbH17v6kUBNPE8
+        =
+X-Virus-Scanned: Debian amavisd-new at server.hostvarna.com
+Received: from mail.hostvarna.com ([127.0.0.1])
+        by localhost (mail.hostvarna.com [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id VjKTq61iS5oh; Sat,  7 Nov 2020 14:58:27 +0200 (EET)
+Received: from User (unknown [176.32.23.85])
+        (Authenticated sender: simona@hostvarna.com)
+        by mail.hostvarna.com (Postfix) with ESMTPA id 6AF0DD6A410;
+        Sat,  7 Nov 2020 09:52:42 +0200 (EET)
+Reply-To: <maviswanczyko@aol.com>
+From:   "L.  Wanczyk." <simona@hostvarna.com>
+Subject:  DONATION                                                                 .50
+Date:   Sat, 7 Nov 2020 08:51:36 -0800
 MIME-Version: 1.0
-In-Reply-To: <20201110210316.GO17076@casper.infradead.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+Content-Type: text/plain;
+        charset="Windows-1251"
 Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2800.1081
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2800.1081
+Message-Id: <20201107125830.8AD62D6A40D@mail.hostvarna.com>
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11/10/20 2:03 PM, Matthew Wilcox wrote:
-> On Tue, Nov 10, 2020 at 12:53:27PM -0700, Shuah Khan wrote:
->> Sequence Numbers wrap around to INT_MIN when it overflows and should not
-> 
-> Why would sequence numbers be signed?  I know they're built on top of
-> atomic_t, which is signed, but conceptually a sequence number is unsigned.
+Hello,
 
-Yes we have some instances where unsigned is being used. I considered
-going to unsigned. Changing the API to unsigned has other ramifications
-and cascading changes to current atomic_t usages that are up counters.
+I'm Mrs. Mavis Wanczyk, the mega winner of $758 Million in Mega Millions
+Jackpot, I am donating to 5 random individuals if you get this email then
+your email was selected after a spin ball. I have spread most of my wealth
+over a number of charities and organizations. I have voluntarily decided to
+donate the sum of $ 10 Million USD to you as one of the selected , to verify
+my
+winnings via YouTube page below.
 
-git grep -E '\((unsigned|unsigned int|u32)\).*\batomic.*(read)' | wc -l
-53
+WATCH ME HERE: https://www.youtube.com/watch?v=7kWnqvJM1mM
 
-A total of 53 out of 6080 atomic_read() usages force return type to
-unsigned.
+THIS IS YOUR DONATION CODE: F207162
+Kindly send your direct telephone and fax number to enable me to reach you
 
-git grep -E '\((unsigned|unsigned int|u32)\).*\batomic.*(inc_return)' | 
-wc -l
-11
+Reply with the DONATION CODE to this email: maviswanczykoo@aol.com
 
-A total of 11 out of 620 atomic_inc_return() usages force return type
-to unsigned.
+Hope to make you and your family happy.
 
-Changing the API to unsigned has other ramifications and cascading
-changes to current atomic_t usages that are up counters.
-
-We could add unsigned to seqnum_ops though.
-
-> 
->> +++ b/Documentation/core-api/seqnum_ops.rst
->> @@ -0,0 +1,117 @@
->> +.. SPDX-License-Identifier: GPL-2.0
->> +
->> +.. include:: <isonum.txt>
->> +
->> +.. _seqnum_ops:
->> +
->> +==========================
->> +Sequence Number Operations
->> +==========================
->> +
->> +:Author: Shuah Khan
->> +:Copyright: |copy| 2020, The Linux Foundation
->> +:Copyright: |copy| 2020, Shuah Khan <skhan@linuxfoundation.org>
->> +
->> +There are a number of atomic_t usages in the kernel where atomic_t api
->> +is used strictly for counting sequence numbers and other statistical
->> +counters and not for managing object lifetime.
-> 
-> You start by describing why this was introduced.  I think rather, you
-> should start by describing what this is.  You can compare and contrast
-> it with atomic_t later.  Also, I don't think it's necessary to describe
-> its implementation in this document.  This document should explain to
-> someone why they want to use this.
-> 
->> +Read interface
->> +--------------
->> +
->> +Reads and returns the current value. ::
->> +
->> +        seqnum32_read() --> atomic_read()
->> +        seqnum64_read() --> atomic64_read()
->> +
->> +Increment interface
->> +-------------------
->> +
->> +Increments sequence number and doesn't return the new value. ::
->> +
->> +        seqnum32_inc() --> atomic_inc()
->> +        seqnum64_inc() --> atomic64_inc()
-> 
-> That seems odd to me.  For many things, I want to know what the
-> sequence number was incremented to.  Obviously seqnum_inc(); followed
-> by seqnum_read(); is racy.
-> 
-> Do we really want to be explicit about seqnum32 being 32-bit?
-> I'd be inclined to have seqnum/seqnum64 instead of seqnum32/seqnum64.
-> 
->> +static inline int seqnum32_read(const struct seqnum32 *seq)
->> +{
->> +	return atomic_read(&seq->seqnum);
->> +}
->> +
->> +/*
->> + * seqnum32_set() - set seqnum value
->> + * @seq: struct seqnum32 pointer
->> + * @val: new value to set
->> + *
->> + */
->> +static inline void
->> +seqnum32_set(struct seqnum32 *seq, int val)
->  > You have some odd formatting like the above line split.
-> 
->> +static inline void seqnum64_dec(
->> +				struct seqnum64 *seq)
-> 
-> That one is particularly weird.
-> 
-
-Thanks for catching these. This code needed cleanup after the
-rename from a looong names from previous version.
-
-thanks,
--- Shuah
+Regards,
+Mrs. Mavis L. Wanczyk.
