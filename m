@@ -2,196 +2,115 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 925BA2AE03B
-	for <lists+linux-doc@lfdr.de>; Tue, 10 Nov 2020 20:54:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 75C552AE0BE
+	for <lists+linux-doc@lfdr.de>; Tue, 10 Nov 2020 21:33:42 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731710AbgKJTyf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 10 Nov 2020 14:54:35 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:55146 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731608AbgKJTye (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Nov 2020 14:54:34 -0500
-Received: from mail-il1-x141.google.com (mail-il1-x141.google.com [IPv6:2607:f8b0:4864:20::141])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0CF9AC0613D3
-        for <linux-doc@vger.kernel.org>; Tue, 10 Nov 2020 11:54:34 -0800 (PST)
-Received: by mail-il1-x141.google.com with SMTP id q1so13370329ilt.6
-        for <linux-doc@vger.kernel.org>; Tue, 10 Nov 2020 11:54:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linuxfoundation.org; s=google;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=oNTmliIHaPLQZebq8is9WVHRvSAsyFCf7oine4LHGdQ=;
-        b=Dra4b9f8OTQAbW/JrFJp1zGPEVaVaMjdVuAO+zZnM31ynFQ1pcUQG/MykpsdVBTxVI
-         Vc1cnZuJaSZdSJaO1Rj6ij001WeAHh7v8IHibrcPUiej+9QN/Q/Ent5I4ppTsq0Exydb
-         1hW9yuzFYX/JERJaQp2SVW/mtiR0Evm6TI0B4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=oNTmliIHaPLQZebq8is9WVHRvSAsyFCf7oine4LHGdQ=;
-        b=jZ1DkQmDIEkj2DqYAEvVuiSNG/tlv8nRMqWZwK3kzE1HGgdN2LAJw3Qk6U4Rrj1iQh
-         +9BStsVrzYSNdlj9Fu+VhB2XJS5/b2gCbY5sqsosh2K3eEWT5cIzGlJuCTkUAD/PfVU6
-         PXSK4tLFm0iRa4wmR2d7DMgBFZWKUOHtNk20uEL2ivs3TqGw+ubS5KK0uh6Og8ZITv9Q
-         MDIljlTzX4QiKVsYokgaHbIR/H/i111/05bHUkS6LufGqUfRw+7zGpZqqEloHDOUXBQY
-         n0slp4yf4nH0TwxU0QLaWhCfmK9uYE0Lv5d/nyFH/waL/tICGpo+AR7KtxQdA1K5MdCC
-         GbEQ==
-X-Gm-Message-State: AOAM5314r0hUlZyBr/pmb17z5ZnTo9hx6ljmhDyofSzJPAOftKhMlMIT
-        tr3TvKUQ7U9q6ww/fywR+as9EQ==
-X-Google-Smtp-Source: ABdhPJxzA358t+ZLJ7cPi/ahlO0VWxzydi1uFZzn9mE+PIU3atrO2j9vDN2cI/cgRZQ1e7wHVri0yw==
-X-Received: by 2002:a05:6e02:1305:: with SMTP id g5mr16156375ilr.237.1605038073364;
-        Tue, 10 Nov 2020 11:54:33 -0800 (PST)
-Received: from shuah-t480s.internal (c-24-9-64-241.hsd1.co.comcast.net. [24.9.64.241])
-        by smtp.gmail.com with ESMTPSA id o14sm123971ilg.71.2020.11.10.11.54.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 10 Nov 2020 11:54:32 -0800 (PST)
-From:   Shuah Khan <skhan@linuxfoundation.org>
-To:     corbet@lwn.net, keescook@chromium.org, gregkh@linuxfoundation.org,
-        peterz@infradead.org
-Cc:     Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org
-Subject: [PATCH 02/13] selftests:lib:test_seqnum_ops: add new test for seqnum_ops
-Date:   Tue, 10 Nov 2020 12:53:28 -0700
-Message-Id: <754c8befc6ec6deea20c01b9a663a818c5726b88.1605027593.git.skhan@linuxfoundation.org>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1605027593.git.skhan@linuxfoundation.org>
-References: <cover.1605027593.git.skhan@linuxfoundation.org>
+        id S1731149AbgKJUdi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 10 Nov 2020 15:33:38 -0500
+Received: from aserp2120.oracle.com ([141.146.126.78]:53548 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725862AbgKJUdh (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 10 Nov 2020 15:33:37 -0500
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0AAKJm5L005825;
+        Tue, 10 Nov 2020 20:32:57 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=corp-2020-01-29;
+ bh=RT7z64OT2cF0627d3gcxVXgoifV1/qIO4IvouGljyV8=;
+ b=ODHXo3gAY+hpzv3UOFyKd3WyR5o8AFJ8VSx2gWvhAvNL2+luZ6TLfSVQG9jLxjKOp8CF
+ clpSSBNjYh0lms8yufqfoWlkCyhokg2iYz53m3/n7+7pDUaMyopS24GLg1aruuQD4QtR
+ 6Fg9gAr5rCXBFQo+c702nDjGwPS55IP5H8Lb2FJp3khPCcacNpDEcRsmWRJaJIAiK2C0
+ nFESfPJ721kbXF2gWrxr5RWv4XAwma1lZwM3JDX0S/Ci22r4sXcGEFsPPDBriaLlfOqD
+ OakRBX6TgA25Zx/eR2PiIzkALF0eHMv/QwXJynB7mtSCO5GN1QYRWJi+s1+tdMmtrNHV WA== 
+Received: from userp3030.oracle.com (userp3030.oracle.com [156.151.31.80])
+        by aserp2120.oracle.com with ESMTP id 34nkhkwqhd-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Tue, 10 Nov 2020 20:32:57 +0000
+Received: from pps.filterd (userp3030.oracle.com [127.0.0.1])
+        by userp3030.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0AAKKBBa104831;
+        Tue, 10 Nov 2020 20:30:56 GMT
+Received: from userv0122.oracle.com (userv0122.oracle.com [156.151.31.75])
+        by userp3030.oracle.com with ESMTP id 34p5gxfsjx-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 10 Nov 2020 20:30:56 +0000
+Received: from abhmp0008.oracle.com (abhmp0008.oracle.com [141.146.116.14])
+        by userv0122.oracle.com (8.14.4/8.14.4) with ESMTP id 0AAKUpEX003358;
+        Tue, 10 Nov 2020 20:30:51 GMT
+Received: from [192.168.2.112] (/50.38.35.18)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Tue, 10 Nov 2020 12:30:51 -0800
+Subject: Re: [PATCH v3 03/21] mm/hugetlb: Introduce a new config
+ HUGETLB_PAGE_FREE_VMEMMAP
+To:     Matthew Wilcox <willy@infradead.org>
+Cc:     Oscar Salvador <osalvador@suse.de>,
+        Muchun Song <songmuchun@bytedance.com>, corbet@lwn.net,
+        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, x86@kernel.org,
+        hpa@zytor.com, dave.hansen@linux.intel.com, luto@kernel.org,
+        peterz@infradead.org, viro@zeniv.linux.org.uk,
+        akpm@linux-foundation.org, paulmck@kernel.org,
+        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
+        rdunlap@infradead.org, oneukum@suse.com, anshuman.khandual@arm.com,
+        jroedel@suse.de, almasrymina@google.com, rientjes@google.com,
+        mhocko@suse.com, duanxiongchun@bytedance.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org
+References: <20201108141113.65450-1-songmuchun@bytedance.com>
+ <20201108141113.65450-4-songmuchun@bytedance.com>
+ <20201109135215.GA4778@localhost.localdomain>
+ <ef564084-ea73-d579-9251-ec0440df2b48@oracle.com>
+ <20201110195025.GN17076@casper.infradead.org>
+From:   Mike Kravetz <mike.kravetz@oracle.com>
+Message-ID: <2aec4539-a55d-4df3-7753-75a33250b6b8@oracle.com>
+Date:   Tue, 10 Nov 2020 12:30:48 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201110195025.GN17076@casper.infradead.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9801 signatures=668682
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0 mlxlogscore=999 mlxscore=0
+ spamscore=0 phishscore=0 adultscore=0 malwarescore=0 suspectscore=2
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2011100138
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9801 signatures=668682
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 phishscore=0 priorityscore=1501
+ mlxscore=0 suspectscore=2 mlxlogscore=999 lowpriorityscore=0 spamscore=0
+ malwarescore=0 adultscore=0 clxscore=1015 bulkscore=0 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2011100138
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a new selftest for testing seqnum_ops. This test loads test_seqnum_ops
-test module and unloads it. The test module runs tests and prints results
-to dmesg.
+On 11/10/20 11:50 AM, Matthew Wilcox wrote:
+> On Tue, Nov 10, 2020 at 11:31:31AM -0800, Mike Kravetz wrote:
+>> On 11/9/20 5:52 AM, Oscar Salvador wrote:
+>>> On Sun, Nov 08, 2020 at 10:10:55PM +0800, Muchun Song wrote:
+> 
+> I don't like config options.  I like boot options even less.  I don't
+> know how to describe to an end-user whether they should select this
+> or not.  Is there a way to make this not a tradeoff?  Or make the
+> tradeoff so minimal as to be not worth describing?  (do we have numbers
+> for the worst possible situation when enabling this option?)
 
-There are a number of atomic_t usages in the kernel where atomic_t api
-is used strictly for counting sequence numbers and other statistical
-counters and not for managing object lifetime.
+It is not exactly worst case, but Muchun provided some simple benchmarking
+results in the cover letter.  Quick summary is that hugetlb page creation
+and free time is "~2x slower".  At first glance, one would say that is
+terrible.  However, remember that the majority of use cases create hugetlb
+pages at or shortly after boot time and add them to the pool.  So, additional
+overhead is at pool creation time.  There is no change to 'normal run time'
+operations of getting a page from or returning a page to the pool (think
+page fault/unmap).
 
-The purpose of these Sequence Number Ops is to clearly differentiate
-atomic_t counter usages from atomic_t usages that guard object lifetimes,
-hence prone to overflow and underflow errors.
+> I haven't read through these patches in detail, so maybe we do this
+> already, but when we free the pages to the buddy allocator, do we retain
+> the third page to use for the PTEs (and free pages 3-7), or do we allocate
+> a separate page for the PTES and free pages 2-7?
 
-The atomic_t api provides a wide range of atomic operations as a base
-api to implement atomic counters, bitops, spinlock interfaces. The usages
-also evolved into being used for resource lifetimes and state management.
-The refcount_t api was introduced to address resource lifetime problems
-related to atomic_t wrapping. There is a large overlap between the
-atomic_t api used for resource lifetimes and just counters, stats, and
-sequence numbers. It has become difficult to differentiate between the
-atomic_t usages that should be converted to refcount_t and the ones that
-can be left alone. Introducing seqnum_ops to wrap the usages that are
-stats, counters, sequence numbers makes it easier for tools that scan
-for underflow and overflow on atomic_t usages to detect overflow and
-underflows to scan just the cases that are prone to errors.
-
-Sequence Number api provides interfaces for simple atomic_t counter usages
-that just count, and don't guard resource lifetimes. The seqnum_ops are
-built on top of atomic_t api, providing a smaller subset of atomic_t
-interfaces necessary to support atomic_t usages as simple counters.
-This api has init/set/inc/dec/read and doesn't support other atomic_t
-ops with the intent to restrict the use of these interfaces as simple
-counting usages.
-
-Sequence Numbers wrap around to INT_MIN when it overflows and should not
-be used to guard resource lifetimes, device usage and open counts that
-control state changes, and pm states. Overflowing to INT_MIN is consistent
-with the atomic_t api, which it is built on top of.
-
-Using seqnum to guard lifetimes could lead to use-after free when it
-overflows and undefined behavior when used to manage state changes and
-device usage/open states.
-
-Signed-off-by: Shuah Khan <skhan@linuxfoundation.org>
----
- Documentation/core-api/seqnum_ops.rst          |  9 +++++++++
- MAINTAINERS                                    |  1 +
- include/linux/seqnum_ops.h                     |  2 ++
- tools/testing/selftests/lib/Makefile           |  1 +
- tools/testing/selftests/lib/config             |  1 +
- tools/testing/selftests/lib/test_seqnum_ops.sh | 10 ++++++++++
- 6 files changed, 24 insertions(+)
- create mode 100755 tools/testing/selftests/lib/test_seqnum_ops.sh
-
-diff --git a/Documentation/core-api/seqnum_ops.rst b/Documentation/core-api/seqnum_ops.rst
-index 7a396c2cda19..3a9ddba985f2 100644
---- a/Documentation/core-api/seqnum_ops.rst
-+++ b/Documentation/core-api/seqnum_ops.rst
-@@ -115,3 +115,12 @@ Decrements sequence number and doesn't return the new value. ::
- 
-         seqnum32_dec() --> atomic_dec()
-         seqnum64_dec() --> atomic64_dec()
-+
-+Where are the seqnum_ops and how to use and test them?
-+------------------------------------------------------
-+
-+.. kernel-doc:: include/linux/seqnum_ops.h
-+
-+Please see lib/test_seqnum_ops.c for examples usages.
-+Please find selftest: testing/selftests/lib/test_seqnum_ops.sh
-+Please check dmesg for results after running test_seqnum_ops.sh.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index c83a6f05610b..e6ae131836a5 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -15983,6 +15983,7 @@ L:	linux-kernel@vger.kernel.org
- S:	Maintained
- F:	include/linux/seqnum_ops.h
- F:	lib/test_seqnum_ops.c
-+F:	tools/testing/selftests/lib/test_seqnum_ops.sh
- 
- SIMPLE FIRMWARE INTERFACE (SFI)
- S:	Obsolete
-diff --git a/include/linux/seqnum_ops.h b/include/linux/seqnum_ops.h
-index b97c7f310beb..a1def2ad5bc2 100644
---- a/include/linux/seqnum_ops.h
-+++ b/include/linux/seqnum_ops.h
-@@ -28,6 +28,8 @@
-  *
-  * Reference and API guide:
-  *	Documentation/core-api/seqnum_ops.rst for more information.
-+ *	lib/test_seqnum_ops.c - example usages
-+ *	tools/testing/selftests/lib/test_seqnum_ops.sh
-  *
-  */
- 
-diff --git a/tools/testing/selftests/lib/Makefile b/tools/testing/selftests/lib/Makefile
-index a105f094676e..1818444f0e97 100644
---- a/tools/testing/selftests/lib/Makefile
-+++ b/tools/testing/selftests/lib/Makefile
-@@ -5,5 +5,6 @@
- all:
- 
- TEST_PROGS := printf.sh bitmap.sh prime_numbers.sh strscpy.sh
-+TEST_PROGS += test_seqnum_ops.sh
- 
- include ../lib.mk
-diff --git a/tools/testing/selftests/lib/config b/tools/testing/selftests/lib/config
-index b80ee3f6e265..674ed2a2ac82 100644
---- a/tools/testing/selftests/lib/config
-+++ b/tools/testing/selftests/lib/config
-@@ -3,3 +3,4 @@ CONFIG_TEST_BITMAP=m
- CONFIG_PRIME_NUMBERS=m
- CONFIG_TEST_STRSCPY=m
- CONFIG_TEST_BITOPS=m
-+CONFIG_TEST_SEQNUM_OPS=m
-diff --git a/tools/testing/selftests/lib/test_seqnum_ops.sh b/tools/testing/selftests/lib/test_seqnum_ops.sh
-new file mode 100755
-index 000000000000..fdce16b220ba
---- /dev/null
-+++ b/tools/testing/selftests/lib/test_seqnum_ops.sh
-@@ -0,0 +1,10 @@
-+#!/bin/sh
-+# SPDX-License-Identifier: GPL-2.0
-+#
-+# Copyright (c) 2020 Shuah Khan <skhan@linuxfoundation.org>
-+# Copyright (c) 2020 The Linux Foundation
-+#
-+# Tests the Sequence Number Ops interfaces using test_seqnum_ops
-+# kernel module
-+#
-+$(dirname $0)/../kselftest/module.sh "test_seqnum_ops" test_seqnum_ops
+I haven't got there in this latest series.  But, in previous revisions the
+code did allocate a separate page.
 -- 
-2.27.0
-
+Mike Kravetz
