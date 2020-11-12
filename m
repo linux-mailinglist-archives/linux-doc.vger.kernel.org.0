@@ -2,172 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8D5AA2B0BD8
+	by mail.lfdr.de (Postfix) with ESMTP id 0FAD32B0BD5
 	for <lists+linux-doc@lfdr.de>; Thu, 12 Nov 2020 18:59:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726465AbgKLR7M (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S1726478AbgKLR7M (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Thu, 12 Nov 2020 12:59:12 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35110 "EHLO
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35118 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726411AbgKLR7K (ORCPT
+        with ESMTP id S1726440AbgKLR7K (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Thu, 12 Nov 2020 12:59:10 -0500
 Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BFD70C061A04;
-        Thu, 12 Nov 2020 09:59:07 -0800 (PST)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DE0A5C0613D1;
+        Thu, 12 Nov 2020 09:59:10 -0800 (PST)
 Received: from ip4d145e30.dynamic.kabel-deutschland.de ([77.20.94.48] helo=truhe.fritz.box); authenticated
         by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        id 1kdGsC-0006ue-Di; Thu, 12 Nov 2020 18:59:04 +0100
+        id 1kdGsC-0006ue-Jl; Thu, 12 Nov 2020 18:59:04 +0100
 From:   Thorsten Leemhuis <linux@leemhuis.info>
 To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [RFC PATCH v2 03/26] docs: reporting-bugs: step-by-step guide on how to report issues
-Date:   Thu, 12 Nov 2020 18:58:40 +0100
-Message-Id: <b439c3d74c541d4d7631203a52f9d697ea8c283d.1605203187.git.linux@leemhuis.info>
+Subject: [RFC PATCH v2 04/26] docs: reporting-bugs: step-by-step guide for issues in stable & longterm
+Date:   Thu, 12 Nov 2020 18:58:41 +0100
+Message-Id: <2d840fb91b7c5d481284275dea1d4f75fd755af6.1605203187.git.linux@leemhuis.info>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <cover.1605203187.git.linux@leemhuis.info>
 References: <cover.1605203187.git.linux@leemhuis.info>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1605203947;764f585d;
-X-HE-SMSGID: 1kdGsC-0006ue-Di
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1605203950;e91369b8;
+X-HE-SMSGID: 1kdGsC-0006ue-Jl
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a more detailed section on how to report issues to the Linux kernel
-developers that nevertheless still is shorter, more straight-forward and
-thus easier to gasp than the old text. It should provide enough details
-for most users, even if it still leaves a lot of things unexplained.
-Some of them can be important, that's why later patches will add a
-reference section describing each of the steps and the motivation for it
-in more detail. The text of the particular step will be repeated there
-as introduction.
+Handle stable and longterm kernels in a subsection, as dealing with them
+directly in the main part of the step-by-step guide turned out to make
+it messy and hard to follow: it looked a bit like code with a large
+amount of if-then-else section to handle special cases, which made the
+typical flow hard to understand.
 
-The order of the steps was chosen in the interest of the users: make
-sure they get the basics right before they do more complicated,
-time-consuming, and dangerous tasks. Some steps explain a few basics
-that might seem natural to kernel developers, but are things that people
-sometimes get wrong.
+Yet again a reference section will later describe each step in more
+detail and repeat each step as introduction.
 
 Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
 ---
- Documentation/admin-guide/reporting-bugs.rst | 107 +++++++++++++++++++
- 1 file changed, 107 insertions(+)
+ Documentation/admin-guide/reporting-bugs.rst | 48 ++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
 
 diff --git a/Documentation/admin-guide/reporting-bugs.rst b/Documentation/admin-guide/reporting-bugs.rst
-index 97815a35c546..a654c54d7dc6 100644
+index a654c54d7dc6..2b48c824d070 100644
 --- a/Documentation/admin-guide/reporting-bugs.rst
 +++ b/Documentation/admin-guide/reporting-bugs.rst
-@@ -55,6 +55,113 @@ If you reached this point without a solution, ask for advice one the
- subsystem's mailing list.
+@@ -162,6 +162,54 @@ After these preparations you'll now enter the main part:
+    help yourself, if you don't get any help or if it's unsatisfying.
  
  
-+Step-by-step guide how to report issues to the kernel maintainers
-+=================================================================
++Reporting issues only occurring in older kernel version lines
++-------------------------------------------------------------
 +
-+The above TL;DR outlines roughly how to report issues to the Linux kernel
-+developers. It might be all that's needed for people already familiar with
-+reporting issues to Free/Libre & Open Source Software (FLOSS) projects. For
-+everyone else there is this section. It is more detailed and uses a
-+step-by-step approach. It still tries to be brief for readability and leaves
-+out a lot of details; those are described below the step-by-step guide in a
-+reference section, which explains each of the steps in more detail.
++This section is for you, if you tried the latest mainline kernel as outlined
++above, but failed to reproduce your issue there; at the same time you want to
++see the issue fixed in older version lines or a vendor kernel that's regularly
++rebased on new stable or longterm releases. If that case follow these steps:
 +
-+Note: this section covers a few more aspects than the TL;DR and does things in
-+a slightly different order. That's in your interest, to make sure you notice
-+early if an issue that looks like a Linux kernel problem is actually caused by
-+something else. These steps thus help to ensure the time you invest in this
-+process won't feel wasted in the end:
++ * Prepare yourself for the possibility that going through the next few steps
++   might not get the issue solved in older releases: the fix might be too big
++   or risky to get backported there.
 +
-+ * Stop reading this document and report the problem to your vendor instead,
-+   unless you are running the latest mainline kernel already or are willing to
-+   install it. This kernel must not be modified or enhanced in any way, and
-+   thus be considered 'vanilla'.
++ * Check if the kernel developers still maintain the Linux kernel version
++   line you care about: go to the front page of kernel.org and make sure it
++   mentions the latest release of the particular version line without an
++   '[EOL]' tag.
 +
-+ * See if the issue you are dealing with qualifies as regression, security
-+   issue, or a really severe problem: those are 'issues of high priority' that
-+   need special handling in some steps that are about to follow.
++ * Check the archives of the Linux stable mailing list for existing reports.
 +
-+ * Check if your kernel was 'tainted' when the issue occurred, as the event
-+   that made the kernel set this flag might be causing the issue you face.
++ * Install the latest release from the particular version line as a vanilla
++   kernel. Ensure this kernel is not tainted and still shows the problem, as
++   the issue might have already been fixed there.
 +
-+ * Locate the driver or kernel subsystem that seems to be causing the issue.
-+   Find out how and where its developers expect reports. Note: most of the
-+   time this won't be bugzilla.kernel.org, as issues typically need to be sent
-+   by mail to a maintainer and a public mailing list.
++ * Search the Linux kernel version control system for the change that fixed
++   the issue in mainline, as its commit message might tell you if the fix is
++   scheduled for backporting already. If you don't find anything that way,
++   search the appropriate mailing lists for posts that discuss such an issue
++   or peer-review possible fixes; then check the discussions if the fix was
++   deemed unsuitable for backporting. If backporting was not considered at
++   all, join the newest discussion, asking if it's in the cards.
 +
-+ * Search the archives of the bug tracker or mailing list in question
-+   thoroughly for reports that might match your issue. Also check if you find
-+   something with your favorite internet search engine or in the Linux Kernel
-+   Mailing List (LKML) archives. If you find anything, join the discussion
-+   instead of sending a new report.
++ * Check if you're dealing with a regression that was never present in
++   mainline by installing the first release of the version line you care
++   about. If the issue doesn't show up with it, you basically need to report
++   the issue with this version like you would report a problem with mainline
++   (see above). This ideally includes a bisection followed by a search for
++   existing reports on the net; with the help of the subject and the two
++   relevant commit-ids. If that doesn't turn up anything, write the report; CC
++   or forward the report to the stable maintainers, the stable mailing list,
++   and those who authored the change. Include the shortened commit-id if you
++   found the change that causes it.
 +
-+ * Create a fresh backup and put system repair and restore tools at hand.
-+
-+ * Ensure your system does not enhance its kernels by building additional
-+   kernel modules on-the-fly, which solutions like DKMS might be doing locally
-+   without your knowledge.
-+
-+ * Make sure it's not the kernel's surroundings that are causing the issue
-+   you face.
-+
-+ * Write down coarsely how to reproduce the issue. If you deal with multiple
-+   issues at once, create separate notes for each of them and make sure they
-+   work independently on a freshly booted system. That's needed, as each issue
-+   needs to get reported to the kernel developers separately, unless they are
-+   strongly entangled.
-+
-+After these preparations you'll now enter the main part:
-+
-+ * Install the latest Linux mainline kernel: that's where all issues get
-+   fixed first, because it's the version line the kernel developers mainly
-+   care about. Testing and reporting with the latest Linux stable kernel can
-+   be an acceptable alternative in some situations, for example during the
-+   merge window; but during that period you might want to suspend your efforts
-+   till its end anyway.
-+
-+ * Ensure the kernel you just installed does not 'taint' itself when
-+   running.
-+
-+ * Reproduce the issue with the kernel you just installed. If it doesn't show
-+   up there, head over to the instructions for issues only happening with
-+   stable and longterm kernels.
-+
-+ * Optimize your notes: try to find and write the most straightforward way to
-+   reproduce your issue. Make sure the end result has all the important
-+   details, and at the same time is easy to read and understand for others
-+   that hear about it for the first time. And if you learned something in this
-+   process, consider searching again for existing reports about the issue.
-+
-+ * If the failure includes a stack dump, like an Oops does, consider decoding
-+   it to find the offending line of code.
-+
-+ * If your problem is a regression, try to narrow down when the issue was
-+   introduced as much as possible.
-+
-+ * Start to compile the report by writing a detailed description about the
-+   issue. Always mention a few things: the latest kernel version you installed
-+   for reproducing, the Linux Distribution used, and your notes on how to
-+   reproduce the issue. Ideally, make the kernel's build configuration
-+   (.config) and the output from ``dmesg`` available somewhere on the net and
-+   link to it. Include or upload all other information that might be relevant,
-+   like the output/screenshot of an Oops or the output from ``lspci``. Once
-+   you wrote this main part, insert a normal length paragraph on top of it
-+   outlining the issue and the impact quickly. On top of this add one sentence
-+   that briefly describes the problem and gets people to read on. Now give the
-+   thing a descriptive title or subject that yet again is shorter. Then you're
-+   ready to send or file the report like the MAINTAINERS file told you, unless
-+   you are dealing with one of those 'issues of high priority': they need
-+   special care which is explained in 'Special handling for high priority
-+   issues' below.
-+
-+ * Wait for reactions and keep the thing rolling until you can accept the
-+   outcome in one way or the other. Thus react publicly and in a timely manner
-+   to any inquiries. Test proposed fixes. Do proactive testing: retest with at
-+   least every first release candidate (RC) of a new mainline version and
-+   report your results. Send friendly reminders if things stall. And try to
-+   help yourself, if you don't get any help or if it's unsatisfying.
++ * One of the former steps should lead to a solution. If that doesn't work
++   out, ask the maintainers for the subsystem that seems to be causing the
++   issue for advice; CC the mailing list for the particular subsystem as well
++   as the stable mailing list.
 +
 +
  .. ############################################################################
