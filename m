@@ -2,147 +2,181 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5347B2B2062
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Nov 2020 17:26:10 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E7DAB2B22F9
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Nov 2020 18:47:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726352AbgKMQ0J (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 13 Nov 2020 11:26:09 -0500
-Received: from mail.kernel.org ([198.145.29.99]:40460 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726276AbgKMQ0J (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 13 Nov 2020 11:26:09 -0500
-Received: from mail-oi1-f174.google.com (mail-oi1-f174.google.com [209.85.167.174])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id A761322259;
-        Fri, 13 Nov 2020 16:26:08 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1605284768;
-        bh=e9Kg0N0+V79NPEkmRr1VHtoLxO9xMFawGTVp2WwFZG8=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=xRLu99hs0bA+0rqChjOd/SfrFFc7qXSzNMNuGol5lHqKOGxTE80q1jnSNKspJd1Cb
-         iu3H46WJZajXKDmjEVAnUk898xDuUAGug/ZbWkFDt+p75B6J1khVzYXqV4MfDZQmKD
-         uzGxOG0Na6F+nk4WP7TA9qlQoGJcHKPC6z6jgE1s=
-Received: by mail-oi1-f174.google.com with SMTP id w145so10963839oie.9;
-        Fri, 13 Nov 2020 08:26:08 -0800 (PST)
-X-Gm-Message-State: AOAM532A/YcbDwWyRxZ1pCNjZXrY8u62eG3DLAa9A1iVTgKkCoFXYXMk
-        tO0YEEVYRLePhlvWZqIjVTL/SqOXt84GuQzVyew=
-X-Google-Smtp-Source: ABdhPJziioiUwaob4p6eAy4sbQwvJw8r8v+6Za+XFm/VZAPRsPtvntdsb/r8ob9JlSgjIIeTYZPvogHL6QdJfqKAqbk=
-X-Received: by 2002:aca:d583:: with SMTP id m125mr1824494oig.47.1605284762514;
- Fri, 13 Nov 2020 08:26:02 -0800 (PST)
+        id S1726233AbgKMRq0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 13 Nov 2020 12:46:26 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33786 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726172AbgKMRqY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 13 Nov 2020 12:46:24 -0500
+Received: from mail-il1-x143.google.com (mail-il1-x143.google.com [IPv6:2607:f8b0:4864:20::143])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6296C061A04
+        for <linux-doc@vger.kernel.org>; Fri, 13 Nov 2020 09:46:23 -0800 (PST)
+Received: by mail-il1-x143.google.com with SMTP id e17so9203605ili.5
+        for <linux-doc@vger.kernel.org>; Fri, 13 Nov 2020 09:46:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linuxfoundation.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=wlkCnCceQqz7r02K1vtWGsLoDGFR8kTVMD9I+999BVU=;
+        b=f97H1ARf2FMEwRo6bCGKK0SmxlmBhNSJtwWc3H6Tp4QKaxU08w23m3Se3VH2Y6LKi1
+         gseBKxaY3ws5p5mowtY+hqCqm8ItrgLkWZnDGKw5mEp6i0F2TmRT/ux7nL/fZREJMVer
+         c6f8DNGj7zG6O5hQfyRFzevjFKbqYn7LHQRmo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=wlkCnCceQqz7r02K1vtWGsLoDGFR8kTVMD9I+999BVU=;
+        b=KByQ21y+CkPrKx4YyEdm08r5fB/yMAiFlQYm3BPj0eMG14YU1aiQyyDvuh/uqrUNNd
+         XtCmvfpDXk7tTpSHAOV3gxXPxQi984gOl+ecrYPN4buYn2uq71KHBeGcOGs7Z8hcINeI
+         Jd08khvd2Qyo+2rm16YHCi4c0OJgDbJxyBd4O5J+cNGQzqhjEWLTpVOljP29ISVHZuyO
+         ueTSj1PaC79fuu//Dpw5aCtvWIF/WIhRXv8bQYU30jnNEX9/Rx1x96ULK+upzj+/ZGZ4
+         r9RRDnJvzhmVYI6wSLWeDoZrCdvdJpfZWszUvq0MRHJMzTUeROlVLl390b7sQ83uq8A1
+         E8/g==
+X-Gm-Message-State: AOAM533PnZ45AsTTx+13Lh3roKEE5lU/FjHPa2uWgKFP87DpS4EXyaG2
+        GnAkYs/mzdxLO+nI9INwE3QFkQ==
+X-Google-Smtp-Source: ABdhPJzWnweOgT/x9lrJyFWdNrmH6LCnt9T1bjCno9YJu8lBPBBn+UixdhXRz6BHbKAiFEys/ytZcw==
+X-Received: by 2002:a92:9acd:: with SMTP id c74mr690025ill.299.1605289580958;
+        Fri, 13 Nov 2020 09:46:20 -0800 (PST)
+Received: from shuah-t480s.internal (c-24-9-64-241.hsd1.co.comcast.net. [24.9.64.241])
+        by smtp.gmail.com with ESMTPSA id y14sm4772585ilb.66.2020.11.13.09.46.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 13 Nov 2020 09:46:20 -0800 (PST)
+From:   Shuah Khan <skhan@linuxfoundation.org>
+To:     corbet@lwn.net, keescook@chromium.org, gregkh@linuxfoundation.org,
+        peterz@infradead.org, rafael@kernel.org, lenb@kernel.org,
+        james.morse@arm.com, tony.luck@intel.com, bp@alien8.de,
+        minyard@acm.org, arnd@arndb.de, mchehab@kernel.org,
+        rric@kernel.org, valentina.manea.m@gmail.com, shuah@kernel.org,
+        zohar@linux.ibm.com, dmitry.kasatkin@gmail.com, jmorris@namei.org,
+        serge@hallyn.com
+Cc:     Shuah Khan <skhan@linuxfoundation.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org,
+        linux-acpi@vger.kernel.org,
+        openipmi-developer@lists.sourceforge.net,
+        linux-edac@vger.kernel.org, linux-usb@vger.kernel.org,
+        linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org
+Subject: [PATCH v2 00/13] Introduce seqnum_ops
+Date:   Fri, 13 Nov 2020 10:46:02 -0700
+Message-Id: <cover.1605287778.git.skhan@linuxfoundation.org>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-References: <5fadef1f.1c69fb81.9166e.093c@mx.google.com> <e16e2ce5-dc21-d159-ecf2-e0a430d772e1@collabora.com>
- <CAMj1kXFrxYqTARLprws6ja2=C1xZNC+TNr0Vvayr6sReqsUhyg@mail.gmail.com>
- <ce91a878-5ce3-614d-d10c-569b891b12d0@collabora.com> <20201113155825.GD1551@shell.armlinux.org.uk>
- <CAMj1kXHMBNK4ke3j0=h-xkxR9sWe3x_D2TLsPtDZv-sWCW4eWQ@mail.gmail.com>
-In-Reply-To: <CAMj1kXHMBNK4ke3j0=h-xkxR9sWe3x_D2TLsPtDZv-sWCW4eWQ@mail.gmail.com>
-From:   Ard Biesheuvel <ardb@kernel.org>
-Date:   Fri, 13 Nov 2020 17:25:49 +0100
-X-Gmail-Original-Message-ID: <CAMj1kXH6_-tNuhOVDJA4mhEUQBDTDLjJA8CUkb4mRFsAZSy9ig@mail.gmail.com>
-Message-ID: <CAMj1kXH6_-tNuhOVDJA4mhEUQBDTDLjJA8CUkb4mRFsAZSy9ig@mail.gmail.com>
-Subject: Re: rmk/for-next bisection: baseline.login on bcm2836-rpi-2-b
-To:     Russell King - ARM Linux admin <linux@armlinux.org.uk>
-Cc:     Guillaume Tucker <guillaume.tucker@collabora.com>,
-        Nicolas Pitre <nico@fluxnic.net>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        kernelci-results@groups.io,
-        Linux ARM <linux-arm-kernel@lists.infradead.org>,
-        Olof Johansson <olof@lixom.net>,
-        Mike Rapoport <rppt@kernel.org>, Marc Zyngier <maz@kernel.org>,
-        Anshuman Khandual <anshuman.khandual@arm.com>,
-        Arvind Sankar <nivedita@alum.mit.edu>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Collabora Kernel ML <kernel@collabora.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 13 Nov 2020 at 17:15, Ard Biesheuvel <ardb@kernel.org> wrote:
->
-> On Fri, 13 Nov 2020 at 16:58, Russell King - ARM Linux admin
-> <linux@armlinux.org.uk> wrote:
-> >
-> > On Fri, Nov 13, 2020 at 03:43:27PM +0000, Guillaume Tucker wrote:
-> > > On 13/11/2020 10:35, Ard Biesheuvel wrote:
-> > > > On Fri, 13 Nov 2020 at 11:31, Guillaume Tucker
-> > > > <guillaume.tucker@collabora.com> wrote:
-> > > >>
-> > > >> Hi Ard,
-> > > >>
-> > > >> Please see the bisection report below about a boot failure on
-> > > >> RPi-2b.
-> > > >>
-> > > >> Reports aren't automatically sent to the public while we're
-> > > >> trialing new bisection features on kernelci.org but this one
-> > > >> looks valid.
-> > > >>
-> > > >> There's nothing in the serial console log, probably because it's
-> > > >> crashing too early during boot.  I'm not sure if other platforms
-> > > >> on kernelci.org were hit by this in the same way, but there
-> > > >> doesn't seem to be any.
-> > > >>
-> > > >> The same regression can be see on rmk's for-next branch as well
-> > > >> as in linux-next.  It happens with both bcm2835_defconfig and
-> > > >> multi_v7_defconfig.
-> > > >>
-> > > >> Some more details can be found here:
-> > > >>
-> > > >>   https://kernelci.org/test/case/id/5fae44823818ee918adb8864/
-> > > >>
-> > > >> If this looks like a real issue but you don't have a platform at
-> > > >> hand to reproduce it, please let us know if you would like the
-> > > >> KernelCI test to be re-run with earlyprintk or some debug config
-> > > >> turned on, or if you have a fix to try.
-> > > >>
-> > > >> Best wishes,
-> > > >> Guillaume
-> > > >>
-> > > >
-> > > > Hello Guillaume,
-> > > >
-> > > > That patch did have an issue, but it was already fixed by
-> > > >
-> > > > https://www.armlinux.org.uk/developer/patches/viewpatch.php?id=9020/1
-> > > > https://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git/commit/?id=fc2933c133744305236793025b00c2f7d258b687
-> > > >
-> > > > Could you please double check whether cherry-picking that on top of
-> > > > the first bad commit fixes the problem?
-> > >
-> > > Sadly this doesn't appear to be fixing the issue.  I've
-> > > cherry-picked your patch on top of the commit found by the
-> > > bisection but it still didn't boot, here's the git log
-> > >
-> > > cbb9656e83ca ARM: 9020/1: mm: use correct section size macro to describe the FDT virtual address
-> > > 7a1be318f579 ARM: 9012/1: move device tree mapping out of linear region
-> > > e9a2f8b599d0 ARM: 9011/1: centralize phys-to-virt conversion of DT/ATAGS address
-> > > 3650b228f83a Linux 5.10-rc1
-> > >
-> > > Test log: https://people.collabora.com/~gtucker/lava/boot/rpi-2-b/v5.10-rc1-3-gcbb9656e83ca/
-> > >
-> > > There's no output so it's hard to tell what is going on, but
-> > > reverting the bad commmit does make the board to boot (that's
-> > > what "revert: PASS" means in the bisect report).  So it's
-> > > unlikely that there is another issue causing the boot failure.
-> >
-> > These silent boot failures are precisely what the DEBUG_LL stuff (and
-> > early_printk) is supposed to help with - getting the kernel messages
-> > out when there is an oops before the serial console is initialised.
-> >
->
-> If this is indeed related to the FDT mapping, I would assume
-> earlycon=... to be usable here.
->
-> I will try to reproduce this on a RPi3 but I don't have a RPi2 at
-> hand, unfortunately.
->
-> Would you mind having a quick try whether you can reproduce this on
-> QEMU, using the raspi2 machine model? If so, that would be a *lot*
-> easier to diagnose.
+Sequence Number api provides interfaces for unsigned atomic up counters
+leveraging atomic_t and atomic64_t ops underneath.
 
-Also, please have a go with 'earlycon=pl011,0x3f201000' added to the
-kernel command line.
+There are a number of atomic_t usages in the kernel where atomic_t api
+is used for counting sequence numbers and other statistical counters.
+Several of these usages, convert atomic_read() and atomic_inc_return()
+return values to unsigned. Introducing sequence number ops supports
+these use-cases with a standard core-api.
+
+The atomic_t api provides a wide range of atomic operations as a base
+api to implement atomic counters, bitops, spinlock interfaces. The usages
+also evolved into being used for resource lifetimes and state management.
+The refcount_t api was introduced to address resource lifetime problems
+related to atomic_t wrapping. There is a large overlap between the
+atomic_t api used for resource lifetimes and just counters, stats, and
+sequence numbers. It has become difficult to differentiate between the
+atomic_t usages that should be converted to refcount_t and the ones that
+can be left alone. Introducing seqnum_ops to wrap the usages that are
+stats, counters, sequence numbers makes it easier for tools that scan
+for underflow and overflow on atomic_t usages to detect overflow and
+underflows to scan just the cases that are prone to errors.
+
+In addition, to supporting sequence number use-cases, Sequence Number Ops
+helps differentiate atomic_t counter usages from atomic_t usages that guard
+object lifetimes, hence prone to overflow and underflow errors from up
+counting use-cases. It becomes easier for tools that scan for underflow and
+overflow on atomic_t usages to detect overflow and underflows to scan just
+the cases that are prone to errors.
+
+Changes since v1:
+- Removed dec based on Greg KH's comments
+- Removed read/set/inc based on the discussion with Peter Zijlstra
+- Interfaces are restricted to init, increment and return new value,
+  and fetch current value.
+- Interfaces return u32 and u64 - a few reviewers suggested unsigned.
+  After reviewing a few use-cases, I determined this is a good path
+  forward. It adds unsigned atomic support that doesn't exist now,
+  and simplifies code in drivers that currently convert atomic_t return
+  values to unsigned. All the drivers changes included in this series
+  used to convert atomic_t returns to unsigned.
+
+Patch v1 thread:
+https://lore.kernel.org/lkml/cover.1605027593.git.skhan@linuxfoundation.org/
+
+Counters thread:
+lore.kernel.org/lkml/cover.1602209970.git.skhan@linuxfoundation.org
+
+Shuah Khan (13):
+  seqnum_ops: Introduce Sequence Number Ops
+  selftests: lib:test_seqnum_ops: add new test for seqnum_ops
+  drivers/acpi: convert seqno seqnum_ops
+  drivers/acpi/apei: convert seqno to seqnum_ops
+  drivers/base/test/test_async_driver_probe: convert to use seqnum_ops
+  drivers/char/ipmi: convert stats to use seqnum_ops
+  drivers/edac: convert pci counters to seqnum_ops
+  drivers/oprofile: convert stats to use seqnum_ops
+  drivers/staging/rtl8723bs: convert stats to use seqnum_ops
+  usb: usbip/vhci: convert seqno to seqnum_ops
+  drivers/staging/rtl8188eu: convert stats to use seqnum_ops
+  drivers/staging/unisys/visorhba: convert stats to use seqnum_ops
+  security/integrity/ima: converts stats to seqnum_ops
+
+ Documentation/core-api/atomic_ops.rst         |   4 +
+ Documentation/core-api/index.rst              |   1 +
+ Documentation/core-api/seqnum_ops.rst         |  89 +++++++++++++
+ MAINTAINERS                                   |   8 ++
+ drivers/acpi/acpi_extlog.c                    |   8 +-
+ drivers/acpi/apei/ghes.c                      |   8 +-
+ drivers/base/test/test_async_driver_probe.c   |  28 +++--
+ drivers/char/ipmi/ipmi_msghandler.c           |   9 +-
+ drivers/char/ipmi/ipmi_si_intf.c              |   9 +-
+ drivers/char/ipmi/ipmi_ssif.c                 |   9 +-
+ drivers/edac/edac_pci.h                       |   5 +-
+ drivers/edac/edac_pci_sysfs.c                 |  30 ++---
+ drivers/oprofile/buffer_sync.c                |   9 +-
+ drivers/oprofile/event_buffer.c               |   3 +-
+ drivers/oprofile/oprof.c                      |   3 +-
+ drivers/oprofile/oprofile_stats.c             |  11 +-
+ drivers/oprofile/oprofile_stats.h             |  11 +-
+ drivers/oprofile/oprofilefs.c                 |   3 +-
+ drivers/staging/rtl8188eu/core/rtw_mlme_ext.c |  23 +++-
+ .../staging/rtl8188eu/include/rtw_mlme_ext.h  |   3 +-
+ drivers/staging/rtl8723bs/core/rtw_cmd.c      |   3 +-
+ drivers/staging/rtl8723bs/core/rtw_mlme_ext.c |  33 +++--
+ drivers/staging/rtl8723bs/include/rtw_cmd.h   |   3 +-
+ .../staging/rtl8723bs/include/rtw_mlme_ext.h  |   3 +-
+ .../staging/unisys/visorhba/visorhba_main.c   |  21 ++--
+ drivers/usb/usbip/vhci.h                      |   3 +-
+ drivers/usb/usbip/vhci_hcd.c                  |   7 +-
+ drivers/usb/usbip/vhci_rx.c                   |   5 +-
+ include/linux/oprofile.h                      |   3 +-
+ include/linux/seqnum_ops.h                    | 118 +++++++++++++++++
+ lib/Kconfig                                   |   9 ++
+ lib/Makefile                                  |   1 +
+ lib/test_seqnum_ops.c                         | 119 ++++++++++++++++++
+ security/integrity/ima/ima.h                  |   5 +-
+ security/integrity/ima/ima_api.c              |   3 +-
+ security/integrity/ima/ima_fs.c               |   5 +-
+ security/integrity/ima/ima_queue.c            |   7 +-
+ tools/testing/selftests/lib/Makefile          |   1 +
+ tools/testing/selftests/lib/config            |   1 +
+ .../testing/selftests/lib/test_seqnum_ops.sh  |  10 ++
+ 40 files changed, 524 insertions(+), 110 deletions(-)
+ create mode 100644 Documentation/core-api/seqnum_ops.rst
+ create mode 100644 include/linux/seqnum_ops.h
+ create mode 100644 lib/test_seqnum_ops.c
+ create mode 100755 tools/testing/selftests/lib/test_seqnum_ops.sh
+
+-- 
+2.27.0
+
