@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DC6C12B1987
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Nov 2020 12:03:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 59C382B19DB
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Nov 2020 12:16:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726532AbgKMLDn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 13 Nov 2020 06:03:43 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54150 "EHLO
+        id S1726691AbgKMLQz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 13 Nov 2020 06:16:55 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54042 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726324AbgKMLCp (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 13 Nov 2020 06:02:45 -0500
-Received: from mail-pf1-x441.google.com (mail-pf1-x441.google.com [IPv6:2607:f8b0:4864:20::441])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D0610C0613D1
-        for <linux-doc@vger.kernel.org>; Fri, 13 Nov 2020 03:02:04 -0800 (PST)
-Received: by mail-pf1-x441.google.com with SMTP id q10so7360586pfn.0
-        for <linux-doc@vger.kernel.org>; Fri, 13 Nov 2020 03:02:04 -0800 (PST)
+        with ESMTP id S1726497AbgKMLDJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 13 Nov 2020 06:03:09 -0500
+Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com [IPv6:2607:f8b0:4864:20::544])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06B81C061A47
+        for <linux-doc@vger.kernel.org>; Fri, 13 Nov 2020 03:02:16 -0800 (PST)
+Received: by mail-pg1-x544.google.com with SMTP id 34so3540084pgp.10
+        for <linux-doc@vger.kernel.org>; Fri, 13 Nov 2020 03:02:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bytedance-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=9VN22FTK/cp8gibu50+JlwycxClP9nhjODvnGGV4tug=;
-        b=VXie40CJ/fHrNIqDxNTz1GZQ9IUwdONiHU7BNAkIY8B2uU8hpqGGZFFGMkRMjvUHxM
-         bnwwM0lkwcuOxrSnvs0tEfBJS8l0MqOb+zmKW2JGLjAgfvn54whcocRtiQNLzGFVF+4D
-         Hov8wnJwOFJa0AXkTfmtTsgXBJ1QGaQyNs1QqmydTXHXH/kY4VPmnLIM66LxcvsPPuRb
-         auD5GVm6SIHHjS3IdC4oC/JNZznkRbWzWnUqDZfIWxBSYVSNZpsA2HQH7sCsuDtnprw6
-         L+21F7cWT+Doj8Kxmr9kKjJ9dPaP6PE7rxydgtjMrWsz6e/cZglYP4WQKQm3JXnOOwbX
-         6Jjw==
+        bh=y8+6kFiX35+SYRYCMY/5tIq0PVNkZdMDuwu0+2DoVOg=;
+        b=rf1io2iYRtz0L6+JHseYf3dNS5Mb/AXZcKwA/Xb/zSYFjMXMVAMQKlgCaQWr9kzns9
+         n2H6cxCQQAw2K805Tb6B1f+nayVdlCQxYmE38oSQo3sdMt9dUaEOe4B4W2yW5awu+IZO
+         t2HpmWp49mlrv5X/DxeSo4d2nWsH6NZe7dRo9HIkpVlEosJgOdWcVp/vIyWDA+aPW5hx
+         VIIpf4RiBQp2Q5zaO0raOuFgcW6EmUlh/5MVBlKzug41UUnLf7O66tbD/bCKvXVSZcp0
+         0UKvWGF3MM5MmYzrF++wlOOSwoVqq4o3IjJI7BUGkuNg+kFYYI8uGiX+WNQFI4K5Y65i
+         eFRQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=9VN22FTK/cp8gibu50+JlwycxClP9nhjODvnGGV4tug=;
-        b=cDBJQuHzEVdbUQ+caXqGVkFGAVgt0oAIUTKFyHYgKqvlxpDRY6QHEJodIm7t68omV7
-         SrcwrLJD0luYMdW/zS5l5EMnD5YzxxLYtc2JDcVzDMrubdRKXeP4/MU/fg/4DM5aEo9v
-         gpEPR5ZAo6dimqvb5otxfX/CsRE3N+UtifbyLdG+mfbB4xmf0Q7kmtBGWgZlNdlumjW7
-         cugqA/Kiab0Lmb4kuxdv9QMH7jFmFxOLfqwoEZ8Ufjn5shXgxDNQPBOLJoL8ucXRS1jf
-         4JZvcrIOa13UYsHmMBsZT+2CS4lJ3w+d0yTmXTQ8iF9ciWTxVkf/BmxIJ5CTFS+GqyI6
-         WrCQ==
-X-Gm-Message-State: AOAM532rJX9rDK4hhk6GYO1KXP8S1uSiv4NCCSK9bIPqcEMhj5uTuHDQ
-        hL57/hv/YpGzrinUeAQt+y2ssw==
-X-Google-Smtp-Source: ABdhPJxbg1v/KZquALQzR8zC1f8a2UHGf7V/31l5O4xTMJCYuYdRHE2ig6g4Zrdc9lqZDjdhP6lnLg==
-X-Received: by 2002:aa7:970a:0:b029:18b:5773:13e6 with SMTP id a10-20020aa7970a0000b029018b577313e6mr1665133pfg.34.1605265324421;
-        Fri, 13 Nov 2020 03:02:04 -0800 (PST)
+        bh=y8+6kFiX35+SYRYCMY/5tIq0PVNkZdMDuwu0+2DoVOg=;
+        b=HLV+wbtW/gXn4/3ceyyGwSgLZtcnYfP6dE0clE09xSP0I2vJKtbPkOmhfXsjH4arAf
+         p1hpOyvTo6CCr18BPP5X+zycikqeTgPUv+FM2PkxSRChi5oBWpJOR2SdYCSafHN42b9u
+         mNuQs8eUZdVJHiFgI1tXFN2Q0Fj1FnL3dmHgo7DFBJVmbNp2bg94D9GF/s08RzT3dWS0
+         eHzfz3NwjMwFeI0WfzAQvufGJfeErH37Sxq1ROASXK4UiE/tg00EL4ftQHDRWGwGh+MA
+         s1Fm5jVIB+M2n1KrpnomBh4dbzaB5VH7zHLrknIS7jfuXeWTk93iQfltw/PqS0INB2IW
+         lzpA==
+X-Gm-Message-State: AOAM533qs+VeE92RM5YYZsgaQo7qyUzd7/umwLg1OIis2uoeE+ERB6yI
+        yWizOx1pHOxn8Bir6PA0PRkhxA==
+X-Google-Smtp-Source: ABdhPJz7GS0CVqm/4oAdI7rZkckINR7GOC8+rUKzbAR0127hPf1uyWJEPox2fCoHDgwBDHSrLeK5oA==
+X-Received: by 2002:a63:5d04:: with SMTP id r4mr1575017pgb.165.1605265335521;
+        Fri, 13 Nov 2020 03:02:15 -0800 (PST)
 Received: from localhost.localdomain ([61.120.150.78])
-        by smtp.gmail.com with ESMTPSA id f1sm8909959pfc.56.2020.11.13.03.01.52
+        by smtp.gmail.com with ESMTPSA id f1sm8909959pfc.56.2020.11.13.03.02.04
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Fri, 13 Nov 2020 03:02:03 -0800 (PST)
+        Fri, 13 Nov 2020 03:02:14 -0800 (PST)
 From:   Muchun Song <songmuchun@bytedance.com>
 To:     corbet@lwn.net, mike.kravetz@oracle.com, tglx@linutronix.de,
         mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
@@ -61,9 +61,9 @@ Cc:     duanxiongchun@bytedance.com, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-mm@kvack.org,
         linux-fsdevel@vger.kernel.org,
         Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v4 06/21] mm/bootmem_info: Introduce {free,prepare}_vmemmap_page()
-Date:   Fri, 13 Nov 2020 18:59:37 +0800
-Message-Id: <20201113105952.11638-7-songmuchun@bytedance.com>
+Subject: [PATCH v4 07/21] mm/bootmem_info: Combine bootmem info and type into page->freelist
+Date:   Fri, 13 Nov 2020 18:59:38 +0800
+Message-Id: <20201113105952.11638-8-songmuchun@bytedance.com>
 X-Mailer: git-send-email 2.21.0 (Apple Git-122)
 In-Reply-To: <20201113105952.11638-1-songmuchun@bytedance.com>
 References: <20201113105952.11638-1-songmuchun@bytedance.com>
@@ -73,57 +73,135 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In the later patch, we can use the free_vmemmap_page() to free the
-unused vmemmap pages and initialize a page for vmemmap page using
-via prepare_vmemmap_page().
+The page->private shares storage with page->ptl. In the later patch,
+we will use the page->ptl. So here we combine bootmem info and type
+into page->freelist so that we can do not use page->private.
 
 Signed-off-by: Muchun Song <songmuchun@bytedance.com>
 ---
- include/linux/bootmem_info.h | 24 ++++++++++++++++++++++++
- 1 file changed, 24 insertions(+)
+ arch/x86/mm/init_64.c        |  2 +-
+ include/linux/bootmem_info.h | 18 ++++++++++++++++--
+ mm/bootmem_info.c            | 12 ++++++------
+ mm/sparse.c                  |  4 ++--
+ 4 files changed, 25 insertions(+), 11 deletions(-)
 
+diff --git a/arch/x86/mm/init_64.c b/arch/x86/mm/init_64.c
+index 0435bee2e172..9b738c6cb659 100644
+--- a/arch/x86/mm/init_64.c
++++ b/arch/x86/mm/init_64.c
+@@ -883,7 +883,7 @@ static void __meminit free_pagetable(struct page *page, int order)
+ 	if (PageReserved(page)) {
+ 		__ClearPageReserved(page);
+ 
+-		magic = (unsigned long)page->freelist;
++		magic = page_bootmem_type(page);
+ 		if (magic == SECTION_INFO || magic == MIX_SECTION_INFO) {
+ 			while (nr_pages--)
+ 				put_page_bootmem(page++);
 diff --git a/include/linux/bootmem_info.h b/include/linux/bootmem_info.h
-index 4ed6dee1adc9..239e3cc8f86c 100644
+index 239e3cc8f86c..95ae80838680 100644
 --- a/include/linux/bootmem_info.h
 +++ b/include/linux/bootmem_info.h
-@@ -3,6 +3,7 @@
- #define __LINUX_BOOTMEM_INFO_H
- 
- #include <linux/mmzone.h>
-+#include <linux/mm.h>
+@@ -6,7 +6,7 @@
+ #include <linux/mm.h>
  
  /*
-  * Types for free bootmem stored in page->lru.next. These have to be in
-@@ -22,6 +23,29 @@ void __init register_page_bootmem_info_node(struct pglist_data *pgdat);
- void get_page_bootmem(unsigned long info, struct page *page,
- 		      unsigned long type);
- void put_page_bootmem(struct page *page);
+- * Types for free bootmem stored in page->lru.next. These have to be in
++ * Types for free bootmem stored in page->freelist. These have to be in
+  * some random range in unsigned long space for debugging purposes.
+  */
+ enum {
+@@ -17,6 +17,20 @@ enum {
+ 	MEMORY_HOTPLUG_MAX_BOOTMEM_TYPE = NODE_INFO,
+ };
+ 
++#define BOOTMEM_TYPE_BITS	(ilog2(MEMORY_HOTPLUG_MAX_BOOTMEM_TYPE) + 1)
++#define BOOTMEM_TYPE_MAX	((1UL << BOOTMEM_TYPE_BITS) - 1)
++#define BOOTMEM_INFO_MAX	(ULONG_MAX >> BOOTMEM_TYPE_BITS)
 +
-+static inline void free_vmemmap_page(struct page *page)
++static inline unsigned long page_bootmem_type(struct page *page)
 +{
-+	VM_WARN_ON(!PageReserved(page) || page_ref_count(page) != 2);
-+
-+	/* bootmem page has reserved flag in the reserve_bootmem_region */
-+	if (PageReserved(page)) {
-+		unsigned long magic = (unsigned long)page->freelist;
-+
-+		if (magic == SECTION_INFO || magic == MIX_SECTION_INFO)
-+			put_page_bootmem(page);
-+		else
-+			WARN_ON(1);
-+	}
++	return (unsigned long)page->freelist & BOOTMEM_TYPE_MAX;
 +}
 +
-+static inline void prepare_vmemmap_page(struct page *page)
++static inline unsigned long page_bootmem_info(struct page *page)
 +{
-+	unsigned long section_nr = pfn_to_section_nr(page_to_pfn(page));
-+
-+	get_page_bootmem(section_nr, page, SECTION_INFO);
-+	mark_page_reserved(page);
++	return (unsigned long)page->freelist >> BOOTMEM_TYPE_BITS;
 +}
- #else
- static inline void register_page_bootmem_info_node(struct pglist_data *pgdat)
++
+ #ifdef CONFIG_HAVE_BOOTMEM_INFO_NODE
+ void __init register_page_bootmem_info_node(struct pglist_data *pgdat);
+ 
+@@ -30,7 +44,7 @@ static inline void free_vmemmap_page(struct page *page)
+ 
+ 	/* bootmem page has reserved flag in the reserve_bootmem_region */
+ 	if (PageReserved(page)) {
+-		unsigned long magic = (unsigned long)page->freelist;
++		unsigned long magic = page_bootmem_type(page);
+ 
+ 		if (magic == SECTION_INFO || magic == MIX_SECTION_INFO)
+ 			put_page_bootmem(page);
+diff --git a/mm/bootmem_info.c b/mm/bootmem_info.c
+index fcab5a3f8cc0..9baf163965fd 100644
+--- a/mm/bootmem_info.c
++++ b/mm/bootmem_info.c
+@@ -12,9 +12,9 @@
+ 
+ void get_page_bootmem(unsigned long info, struct page *page, unsigned long type)
  {
+-	page->freelist = (void *)type;
+-	SetPagePrivate(page);
+-	set_page_private(page, info);
++	BUG_ON(info > BOOTMEM_INFO_MAX);
++	BUG_ON(type > BOOTMEM_TYPE_MAX);
++	page->freelist = (void *)((info << BOOTMEM_TYPE_BITS) | type);
+ 	page_ref_inc(page);
+ }
+ 
+@@ -22,14 +22,12 @@ void put_page_bootmem(struct page *page)
+ {
+ 	unsigned long type;
+ 
+-	type = (unsigned long) page->freelist;
++	type = page_bootmem_type(page);
+ 	BUG_ON(type < MEMORY_HOTPLUG_MIN_BOOTMEM_TYPE ||
+ 	       type > MEMORY_HOTPLUG_MAX_BOOTMEM_TYPE);
+ 
+ 	if (page_ref_dec_return(page) == 1) {
+ 		page->freelist = NULL;
+-		ClearPagePrivate(page);
+-		set_page_private(page, 0);
+ 		INIT_LIST_HEAD(&page->lru);
+ 		free_reserved_page(page);
+ 	}
+@@ -101,6 +99,8 @@ void __init register_page_bootmem_info_node(struct pglist_data *pgdat)
+ 	int node = pgdat->node_id;
+ 	struct page *page;
+ 
++	BUILD_BUG_ON(MEMORY_HOTPLUG_MAX_BOOTMEM_TYPE > BOOTMEM_TYPE_MAX);
++
+ 	nr_pages = PAGE_ALIGN(sizeof(struct pglist_data)) >> PAGE_SHIFT;
+ 	page = virt_to_page(pgdat);
+ 
+diff --git a/mm/sparse.c b/mm/sparse.c
+index a4138410d890..fca5fa38c2bc 100644
+--- a/mm/sparse.c
++++ b/mm/sparse.c
+@@ -740,12 +740,12 @@ static void free_map_bootmem(struct page *memmap)
+ 		>> PAGE_SHIFT;
+ 
+ 	for (i = 0; i < nr_pages; i++, page++) {
+-		magic = (unsigned long) page->freelist;
++		magic = page_bootmem_type(page);
+ 
+ 		BUG_ON(magic == NODE_INFO);
+ 
+ 		maps_section_nr = pfn_to_section_nr(page_to_pfn(page));
+-		removing_section_nr = page_private(page);
++		removing_section_nr = page_bootmem_info(page);
+ 
+ 		/*
+ 		 * When this function is called, the removing section is
 -- 
 2.11.0
 
