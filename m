@@ -2,28 +2,34 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 594692B278E
-	for <lists+linux-doc@lfdr.de>; Fri, 13 Nov 2020 22:53:50 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 413C02B27AC
+	for <lists+linux-doc@lfdr.de>; Fri, 13 Nov 2020 23:03:55 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726107AbgKMVxs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 13 Nov 2020 16:53:48 -0500
-Received: from ms.lwn.net ([45.79.88.28]:50848 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725885AbgKMVxs (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 13 Nov 2020 16:53:48 -0500
+        id S1726306AbgKMWAW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 13 Nov 2020 17:00:22 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45784 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726287AbgKMWAO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 13 Nov 2020 17:00:14 -0500
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 976A0C061A47;
+        Fri, 13 Nov 2020 14:00:07 -0800 (PST)
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 285EC4FA;
-        Fri, 13 Nov 2020 21:53:48 +0000 (UTC)
-Date:   Fri, 13 Nov 2020 14:53:47 -0700
+        by ms.lwn.net (Postfix) with ESMTPSA id 80C2F4FA;
+        Fri, 13 Nov 2020 22:00:06 +0000 (UTC)
+Date:   Fri, 13 Nov 2020 15:00:05 -0700
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Federico Vaga <federico.vaga@vaga.pv.it>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v2] doc:it_IT: align Italian documentation
-Message-ID: <20201113145347.01fea824@lwn.net>
-In-Reply-To: <20201113133638.7989-1-federico.vaga@vaga.pv.it>
-References: <20201113133638.7989-1-federico.vaga@vaga.pv.it>
+To:     Siddhant Gupta <siddhantgupta416@gmail.com>
+Cc:     mortonm@chromium.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, mamtashukla555@gmail.com,
+        himadrispandya@gmail.com
+Subject: Re: [PATCH] Documentation: admin-guide: LSM: improve the title
+ underline
+Message-ID: <20201113150005.6265d600@lwn.net>
+In-Reply-To: <20201112091353.GA19262@Sleakybeast>
+References: <20201112091353.GA19262@Sleakybeast>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -32,38 +38,28 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 13 Nov 2020 14:36:38 +0100
-Federico Vaga <federico.vaga@vaga.pv.it> wrote:
+On Thu, 12 Nov 2020 14:43:53 +0530
+Siddhant Gupta <siddhantgupta416@gmail.com> wrote:
 
-> Translation for the following patches
+> Fix warning of title underline too short
 > 
-> commit 905705a8fd43 ("docs: programming-languages: refresh blurb on clang support")
-> commit 5ff4aa70bf34 ("docs: submitting-patches: use :doc: for references")
-> commit 030f066f677f ("docs: submitting-patches: describe preserving review/test tags")
-> commit 68e4cd17e218 ("docs: deprecated.rst: Add zero-length and one-element arrays")
-> commit 5429ef62bcf3 ("compiler/gcc: Raise minimum GCC version for kernel builds to 4.8")
-> commit 5b5bbb8cc51b ("docs: process: Add an example for creating a fixes tag")
-> commit 858e6845654d ("docs: dt: convert submitting-patches.txt to ReST format")
-> commit cca73e4946c4 ("docs: Correct the release date of 5.2 stable")
-> commit c170f2eb9648 ("docs: Document cross-referencing between documentation pages")
-> commit 7c8b9e3000f8 ("kernel-doc: Update "cross-referencing from rST" section to use automarkup")
-> commit 27def953b63b ("docs: deprecated.rst: Expand str*cpy() replacement notes")
-> commit 17dca0502314 ("docs: deprecated.rst: Update zero-length/one-element arrays section")
-> commit 3519c4d6e08e ("Documentation: add minimum clang/llvm version")
-> commit 0bddd227f3dc ("Documentation: update for gcc 4.9 requirement")
-> commit 9f364b605f34 ("submitting-patches.rst: presume git will be used")
-> commit 4ebdf7be21d6 ("Documentation/maintainer: rehome sign-off process")
-> commit 7433ff33e8ba ("Documentation/process: expand plain-text advice")
-> commit eb45fb2fb16d ("docs: process: Add cross-link to security-bugs")
-> commit bdc48fa11e46 ("checkpatch/coding-style: deprecate 80-column warning")
-> commit f67281a72b30 ("Documentation: process: step 2: Link to email list fixed")
+> Signed-off-by: Siddhant Gupta <siddhantgupta416@gmail.com>
+> ---
+>  Documentation/admin-guide/LSM/SafeSetID.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> Signed-off-by: Federico Vaga <federico.vaga@vaga.pv.it>
+> diff --git a/Documentation/admin-guide/LSM/SafeSetID.rst b/Documentation/admin-guide/LSM/SafeSetID.rst
+> index 17996c9070e2..0ec34863c674 100644
+> --- a/Documentation/admin-guide/LSM/SafeSetID.rst
+> +++ b/Documentation/admin-guide/LSM/SafeSetID.rst
+> @@ -107,7 +107,7 @@ for a UID/GID will prevent that UID/GID from obtaining auxiliary setid
+>  privileges, such as allowing a user to set up user namespace UID/GID mappings.
+>  
+>  Note on GID policies and setgroups()
+> -==================
+> +====================================
 
-This doesn't apply to docs-next, not quite sure why.
-
-Also...what changed with v2?  Please always include that information under
-the "---" line.
+This was already fixed by Mauro last month.
 
 Thanks,
 
