@@ -2,43 +2,39 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 759D92B40E2
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Nov 2020 11:19:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2FD472B40F9
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Nov 2020 11:25:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729067AbgKPKTo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 16 Nov 2020 05:19:44 -0500
-Received: from mail.kernel.org ([198.145.29.99]:53204 "EHLO mail.kernel.org"
+        id S1729110AbgKPKUL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 16 Nov 2020 05:20:11 -0500
+Received: from mail.kernel.org ([198.145.29.99]:52864 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728841AbgKPKSb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 16 Nov 2020 05:18:31 -0500
+        id S1728821AbgKPKS3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 16 Nov 2020 05:18:29 -0500
 Received: from mail.kernel.org (ip5f5ad5de.dynamic.kabel-deutschland.de [95.90.213.222])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 59B0E223C7;
+        by mail.kernel.org (Postfix) with ESMTPSA id 470D0222B9;
         Mon, 16 Nov 2020 10:18:28 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=default; t=1605521908;
-        bh=SMXsLw5ItRIhzT5qa3JH6IwsLuJlRNBRah+HctbIB7M=;
+        bh=HYigB78Dz9UmYMozGB/cYAt563R4Ds7rlyHCMYGFF0w=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=xW8i1VWvuRoQlQIZkS8vEUYXNu1xm0PHNreFhIth6ZCGwHLUnAtm+6VnZHU+Byojp
-         FneVO/V6+fpBUIYvxVPbnN8OVttfkGFDk3VXKtktdmBPicsAsqsacIpP8PcuTPwLOq
-         5lrHOqTdmK9ETvHxkGRjtTpGxUl/3vmszF2r/jjc=
+        b=SCKd9hiuVCuhFVWEmS0M2Ce24+wDLeetSZMMoW8FKhSNi+hsZhprsmPvUCdrd6GP3
+         ZqkJ9VMKqsTj4+wQABfV7MOaGXyinfCpSFWwI1TupSWwduxfM56jhttzAUNsp58SeI
+         cXHseM4JMWiFvVHoZls4MOK3oxFRQITQEJDmrxlc=
 Received: from mchehab by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kebac-00FwEM-BX; Mon, 16 Nov 2020 11:18:26 +0100
+        id 1kebac-00FwEP-Cf; Mon, 16 Nov 2020 11:18:26 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+To:     Richard Gong <richard.gong@linux.intel.com>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Joel Fernandes (Google)" <joel@joelfernandes.org>,
         "Jonathan Corbet" <corbet@lwn.net>,
-        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
-        Davidlohr Bueso <dbueso@suse.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
+        "Linux Doc Mailing List" <linux-doc@vger.kernel.org>,
         linux-kernel@vger.kernel.org
-Subject: [PATCH v4 14/27] completion: fix kernel-doc markups
-Date:   Mon, 16 Nov 2020 11:18:10 +0100
-Message-Id: <3540741143ee102db25283454e962768a8d6b9dd.1605521731.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v4 15/27] firmware: stratix10-svc: fix kernel-doc markups
+Date:   Mon, 16 Nov 2020 11:18:11 +0100
+Message-Id: <6d6d21e3343525d64c615d922a54d5b4108c0d5a.1605521731.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.28.0
 In-Reply-To: <cover.1605521731.git.mchehab+huawei@kernel.org>
 References: <cover.1605521731.git.mchehab+huawei@kernel.org>
@@ -49,123 +45,140 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Kernel-doc only supports having the comment just before
-the identifier.
+There are some common comments marked, instead, with kernel-doc
+notation, which won't work.
 
-The markup for init_completion is actually for
-__init_completion.
+While here, rename an identifier, in order to match the
+function prototype below kernel-doc markup.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
----
-
-Thats said, IMHO, it would make sense to simply
-rename __init_completion() to init_completion() and drop
-this define:
-
-	 #define init_completion(x) __init_completion(x)
-
+Acked-by: Richard Gong <richard.gong@linux.intel.com>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- include/linux/completion.h | 10 +++++++++-
- 1 file changed, 9 insertions(+), 1 deletion(-)
+ include/linux/firmware/intel/stratix10-svc-client.h | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/include/linux/completion.h b/include/linux/completion.h
-index bf8e77001f18..ff354918dbf4 100644
---- a/include/linux/completion.h
-+++ b/include/linux/completion.h
-@@ -12,40 +12,48 @@
- #include <linux/swait.h>
- 
+diff --git a/include/linux/firmware/intel/stratix10-svc-client.h b/include/linux/firmware/intel/stratix10-svc-client.h
+index a93d85932eb9..ebc295647581 100644
+--- a/include/linux/firmware/intel/stratix10-svc-client.h
++++ b/include/linux/firmware/intel/stratix10-svc-client.h
+@@ -1,81 +1,81 @@
+ /* SPDX-License-Identifier: GPL-2.0 */
  /*
-  * struct completion - structure used to maintain state for a "completion"
-  *
-  * This is the opaque structure used to maintain the state for a "completion".
-  * Completions currently use a FIFO to queue threads that have to wait for
-  * the "completion" event.
-  *
-  * See also:  complete(), wait_for_completion() (and friends _timeout,
-  * _interruptible, _interruptible_timeout, and _killable), init_completion(),
-  * reinit_completion(), and macros DECLARE_COMPLETION(),
-  * DECLARE_COMPLETION_ONSTACK().
+  * Copyright (C) 2017-2018, Intel Corporation
   */
- struct completion {
- 	unsigned int done;
- 	struct swait_queue_head wait;
- };
  
- #define init_completion_map(x, m) __init_completion(x)
-+
-+/**
-+ * init_completion - Initialize a dynamically allocated completion
-+ * @x:  pointer to completion structure that is to be initialized
-+ *
-+ * This macro will initialize a dynamically created completion
-+ * structure.
-+ */
- #define init_completion(x) __init_completion(x)
- static inline void complete_acquire(struct completion *x) {}
- static inline void complete_release(struct completion *x) {}
+ #ifndef __STRATIX10_SVC_CLIENT_H
+ #define __STRATIX10_SVC_CLIENT_H
  
- #define COMPLETION_INITIALIZER(work) \
- 	{ 0, __SWAIT_QUEUE_HEAD_INITIALIZER((work).wait) }
+-/**
++/*
+  * Service layer driver supports client names
+  *
+  * fpga: for FPGA configuration
+  * rsu: for remote status update
+  */
+ #define SVC_CLIENT_FPGA			"fpga"
+ #define SVC_CLIENT_RSU			"rsu"
  
- #define COMPLETION_INITIALIZER_ONSTACK_MAP(work, map) \
- 	(*({ init_completion_map(&(work), &(map)); &(work); }))
+-/**
++/*
+  * Status of the sent command, in bit number
+  *
+  * SVC_STATUS_OK:
+  * Secure firmware accepts the request issued by one of service clients.
+  *
+  * SVC_STATUS_BUFFER_SUBMITTED:
+  * Service client successfully submits data buffer to secure firmware.
+  *
+  * SVC_STATUS_BUFFER_DONE:
+  * Secure firmware completes data process, ready to accept the
+  * next WRITE transaction.
+  *
+  * SVC_STATUS_COMPLETED:
+  * Secure firmware completes service request successfully. In case of
+  * FPGA configuration, FPGA should be in user mode.
+  *
+  * SVC_COMMAND_STATUS_BUSY:
+  * Service request is still in process.
+  *
+  * SVC_COMMAND_STATUS_ERROR:
+  * Error encountered during the process of the service request.
+  *
+  * SVC_STATUS_NO_SUPPORT:
+  * Secure firmware doesn't support requested features such as RSU retry
+  * or RSU notify.
+  */
+ #define SVC_STATUS_OK			0
+ #define SVC_STATUS_BUFFER_SUBMITTED	1
+ #define SVC_STATUS_BUFFER_DONE		2
+ #define SVC_STATUS_COMPLETED		3
+ #define SVC_STATUS_BUSY			4
+ #define SVC_STATUS_ERROR		5
+ #define SVC_STATUS_NO_SUPPORT		6
  
- #define COMPLETION_INITIALIZER_ONSTACK(work) \
- 	(*({ init_completion(&work); &work; }))
+-/**
++/*
+  * Flag bit for COMMAND_RECONFIG
+  *
+  * COMMAND_RECONFIG_FLAG_PARTIAL:
+  * Set to FPGA configuration type (full or partial).
+  */
+ #define COMMAND_RECONFIG_FLAG_PARTIAL	1
+ 
+-/**
++/*
+  * Timeout settings for service clients:
+  * timeout value used in Stratix10 FPGA manager driver.
+  * timeout value used in RSU driver
+  */
+ #define SVC_RECONFIG_REQUEST_TIMEOUT_MS         300
+ #define SVC_RECONFIG_BUFFER_TIMEOUT_MS          720
+ #define SVC_RSU_REQUEST_TIMEOUT_MS              300
+ 
+ struct stratix10_svc_chan;
  
  /**
-  * DECLARE_COMPLETION - declare and initialize a completion structure
-  * @work:  identifier for the completion structure
+  * enum stratix10_svc_command_code - supported service commands
   *
-  * This macro declares and initializes a completion structure. Generally used
-  * for static declarations. You should use the _ONSTACK variant for automatic
-  * variables.
-@@ -59,41 +67,41 @@ static inline void complete_release(struct completion *x) {}
-  * are on the kernel stack:
-  */
+  * @COMMAND_NOOP: do 'dummy' request for integration/debug/trouble-shooting
+  *
+  * @COMMAND_RECONFIG: ask for FPGA configuration preparation, return status
+  * is SVC_STATUS_OK
+  *
+  * @COMMAND_RECONFIG_DATA_SUBMIT: submit buffer(s) of bit-stream data for the
+  * FPGA configuration, return status is SVC_STATUS_SUBMITTED or SVC_STATUS_ERROR
+@@ -201,30 +201,30 @@ void *stratix10_svc_allocate_memory(struct stratix10_svc_chan *chan,
+ 				    size_t size);
+ 
  /**
-  * DECLARE_COMPLETION_ONSTACK - declare and initialize a completion structure
-  * @work:  identifier for the completion structure
-  *
-  * This macro declares and initializes a completion structure on the kernel
-  * stack.
+  * stratix10_svc_free_memory() - free allocated memory
+  * @chan: service channel assigned to the client
+  * @kaddr: starting address of memory to be free back to pool
   */
- #ifdef CONFIG_LOCKDEP
- # define DECLARE_COMPLETION_ONSTACK(work) \
- 	struct completion work = COMPLETION_INITIALIZER_ONSTACK(work)
- # define DECLARE_COMPLETION_ONSTACK_MAP(work, map) \
- 	struct completion work = COMPLETION_INITIALIZER_ONSTACK_MAP(work, map)
- #else
- # define DECLARE_COMPLETION_ONSTACK(work) DECLARE_COMPLETION(work)
- # define DECLARE_COMPLETION_ONSTACK_MAP(work, map) DECLARE_COMPLETION(work)
+ void stratix10_svc_free_memory(struct stratix10_svc_chan *chan, void *kaddr);
+ 
+ /**
+  * stratix10_svc_send() - send a message to the remote
+  * @chan: service channel assigned to the client
+  * @msg: message data to be sent, in the format of
+  * struct stratix10_svc_client_msg
+  *
+  * Return: 0 for success, -ENOMEM or -ENOBUFS on error.
+  */
+ int stratix10_svc_send(struct stratix10_svc_chan *chan, void *msg);
+ 
+ /**
+- * intel_svc_done() - complete service request
++ * stratix10_svc_done() - complete service request
+  * @chan: service channel assigned to the client
+  *
+  * This function is used by service client to inform service layer that
+  * client's service requests are completed, or there is an error in the
+  * request process.
+  */
+ void stratix10_svc_done(struct stratix10_svc_chan *chan);
  #endif
  
- /**
-- * init_completion - Initialize a dynamically allocated completion
-+ * __init_completion - Initialize a dynamically allocated completion
-  * @x:  pointer to completion structure that is to be initialized
-  *
-  * This inline function will initialize a dynamically created completion
-  * structure.
-  */
- static inline void __init_completion(struct completion *x)
- {
- 	x->done = 0;
- 	init_swait_queue_head(&x->wait);
- }
- 
- /**
-  * reinit_completion - reinitialize a completion structure
-  * @x:  pointer to completion structure that is to be reinitialized
-  *
-  * This inline function should be used to reinitialize a completion structure so it can
-  * be reused. This is especially important after complete_all() is used.
-  */
- static inline void reinit_completion(struct completion *x)
- {
 -- 
 2.28.0
 
