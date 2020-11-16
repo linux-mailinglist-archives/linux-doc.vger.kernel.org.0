@@ -2,514 +2,407 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E5F3C2B40B8
-	for <lists+linux-doc@lfdr.de>; Mon, 16 Nov 2020 11:19:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 19E062B4104
+	for <lists+linux-doc@lfdr.de>; Mon, 16 Nov 2020 11:25:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728944AbgKPKSx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 16 Nov 2020 05:18:53 -0500
-Received: from mail.kernel.org ([198.145.29.99]:53314 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728863AbgKPKSd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 16 Nov 2020 05:18:33 -0500
-Received: from mail.kernel.org (ip5f5ad5de.dynamic.kabel-deutschland.de [95.90.213.222])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id B02622463F;
-        Mon, 16 Nov 2020 10:18:28 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=default; t=1605521909;
-        bh=yPX47r/jPA2fxjFBy+bfuVnTESGzy5O/kOXd7GWMGRc=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=VCBvzbpIH2oG4FvJUHardXAFuyq1MFYDlMLxCjLJqJW45uIZ2m7++dXDOp919rttA
-         vGztIoNk0jpVLI9YeXyM39RbNZBdcqWghHfkdzs6g1o81G74XFN92L3r7dEZnX+Dam
-         xF0fEMb9qIuqIGRXcGk0rNmO21u8rYJxLZI+C/vM=
-Received: from mchehab by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1kebac-00FwEy-PE; Mon, 16 Nov 2020 11:18:26 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Linux Doc Mailing List" <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v4 27/27] scripts: kernel-doc: validate kernel-doc markup with the actual names
-Date:   Mon, 16 Nov 2020 11:18:23 +0100
-Message-Id: <7b013fef4b0a45bddc5f1a5593a282baceb13b0c.1605521731.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <cover.1605521731.git.mchehab+huawei@kernel.org>
+        id S1728477AbgKPKVy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 16 Nov 2020 05:21:54 -0500
+Received: from relay.sw.ru ([185.231.240.75]:55166 "EHLO relay3.sw.ru"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S1728283AbgKPKVy (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 16 Nov 2020 05:21:54 -0500
+Received: from [192.168.15.170]
+        by relay3.sw.ru with esmtp (Exim 4.94)
+        (envelope-from <ktkhai@virtuozzo.com>)
+        id 1kebcy-008k4G-Qr; Mon, 16 Nov 2020 13:20:52 +0300
+Subject: Re: [PATCH v4 02/27] net: datagram: fix some kernel-doc markups
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Anna Schumaker <anna.schumaker@netapp.com>,
+        Trond Myklebust <trond.myklebust@hammerspace.com>
+Cc:     "David S. Miller" <davem@davemloft.net>,
+        "J. Bruce Fields" <bfields@fieldses.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andrii Nakryiko <andriin@fb.com>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+        Chuck Lever <chuck.lever@oracle.com>,
+        Cong Wang <xiyou.wangcong@gmail.com>,
+        Eric Dumazet <edumazet@google.com>,
+        Florian Westphal <fw@strlen.de>,
+        Guillaume Nault <gnault@redhat.com>,
+        Heiner Kallweit <hkallweit1@gmail.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Jiri Pirko <jiri@mellanox.com>,
+        Martin Varghese <martin.varghese@nokia.com>,
+        Maxim Mikityanskiy <maximmi@mellanox.com>,
+        Miaohe Lin <linmiaohe@huawei.com>,
+        Paolo Abeni <pabeni@redhat.com>,
+        Pravin B Shelar <pshelar@ovn.org>,
+        Sabrina Dubroca <sd@queasysnail.net>,
+        Steffen Klassert <steffen.klassert@secunet.com>,
+        Taehee Yoo <ap420073@gmail.com>,
+        Vladimir Oltean <olteanv@gmail.com>,
+        Willem de Bruijn <willemb@google.com>,
+        Yadu Kishore <kyk.segfault@gmail.com>,
+        linux-kernel@vger.kernel.org, linux-nfs@vger.kernel.org,
+        netdev@vger.kernel.org
 References: <cover.1605521731.git.mchehab+huawei@kernel.org>
+ <7a16cca43a8fc1b2491c9848c1cb72804692afda.1605521731.git.mchehab+huawei@kernel.org>
+From:   Kirill Tkhai <ktkhai@virtuozzo.com>
+Message-ID: <8566eebd-c6a9-fa9d-dd47-94885b93b416@virtuozzo.com>
+Date:   Mon, 16 Nov 2020 13:20:59 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+In-Reply-To: <7a16cca43a8fc1b2491c9848c1cb72804692afda.1605521731.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Kernel-doc currently expects that the kernel-doc markup to come
-just before the function/enum/struct/union/typedef prototype.
+On 16.11.2020 13:17, Mauro Carvalho Chehab wrote:
+> Some identifiers have different names between their prototypes
+> and the kernel-doc markup.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Yet, if it find things like:
+Reviewed-by: Kirill Tkhai <ktkhai@virtuozzo.com>
 
-	/**
-	 * refcount_add - add a value to a refcount
-	 * @i: the value to add to the refcount
-	 * @r: the refcount
-	 */
-	static inline void __refcount_add(int i, refcount_t *r, int *oldp);
-	static inline void refcount_add(int i, refcount_t *r);
-
-Kernel-doc will do the wrong thing:
-
-	foobar.h:6: warning: Function parameter or member 'oldp' not described in '__refcount_add'
-	.. c:function:: void __refcount_add (int i, refcount_t *r, int *oldp)
-
-	   add a value to a refcount
-
-	**Parameters**
-
-	``int i``
-	  the value to add to the refcount
-
-	``refcount_t *r``
-	  the refcount
-
-	``int *oldp``
-	  *undescribed*
-
-Basically, it will document "__refcount_add" with the kernel-doc
-markup for refcount_add.
-
-If both functions have the same arguments, this won't even
-produce any warning!
-
-Add a logic to check if the kernel-doc identifier matches the actual
-name of the C function or data structure that will be documented.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- scripts/kernel-doc | 62 ++++++++++++++++++++++++++++++++++------------
- 1 file changed, 46 insertions(+), 16 deletions(-)
-
-diff --git a/scripts/kernel-doc b/scripts/kernel-doc
-index 9b6ddeb097e9..919acae23fad 100755
---- a/scripts/kernel-doc
-+++ b/scripts/kernel-doc
-@@ -365,40 +365,43 @@ use constant {
- my $state;
- my $in_doc_sect;
- my $leading_space;
- 
- # Inline documentation state
- use constant {
-     STATE_INLINE_NA     => 0, # not applicable ($state != STATE_INLINE)
-     STATE_INLINE_NAME   => 1, # looking for member name (@foo:)
-     STATE_INLINE_TEXT   => 2, # looking for member documentation
-     STATE_INLINE_END    => 3, # done
-     STATE_INLINE_ERROR  => 4, # error - Comment without header was found.
-                               # Spit a warning as it's not
-                               # proper kernel-doc and ignore the rest.
- };
- my $inline_doc_state;
- 
- #declaration types: can be
- # 'function', 'struct', 'union', 'enum', 'typedef'
- my $decl_type;
- 
-+# Name of the kernel-doc identifier for non-DOC markups
-+my $identifier;
-+
- my $doc_start = '^/\*\*\s*$'; # Allow whitespace at end of comment start.
- my $doc_end = '\*/';
- my $doc_com = '\s*\*\s*';
- my $doc_com_body = '\s*\* ?';
- my $doc_decl = $doc_com . '(\w+)';
- # @params and a strictly limited set of supported section names
- my $doc_sect = $doc_com .
-     '\s*(\@[.\w]+|\@\.\.\.|description|context|returns?|notes?|examples?)\s*:(.*)';
- my $doc_content = $doc_com_body . '(.*)';
- my $doc_block = $doc_com . 'DOC:\s*(.*)?';
- my $doc_inline_start = '^\s*/\*\*\s*$';
- my $doc_inline_sect = '\s*\*\s*(@\s*[\w][\w\.]*\s*):(.*)';
- my $doc_inline_end = '^\s*\*/\s*$';
- my $doc_inline_oneline = '^\s*/\*\*\s*(@[\w\s]+):\s*(.*)\s*\*/\s*$';
- my $export_symbol = '^\s*EXPORT_SYMBOL(_GPL)?\s*\(\s*(\w+)\s*\)\s*;';
- 
- my %parameterdescs;
- my %parameterdesc_start_lines;
- my @parameterlist;
- my %sections;
-@@ -1186,40 +1189,45 @@ sub output_blockhead {
- sub dump_declaration($$) {
-     no strict 'refs';
-     my ($prototype, $file) = @_;
-     my $func = "dump_" . $decl_type;
-     &$func(@_);
- }
- 
- sub dump_union($$) {
-     dump_struct(@_);
- }
- 
- sub dump_struct($$) {
-     my $x = shift;
-     my $file = shift;
- 
-     if ($x =~ /(struct|union)\s+(\w+)\s*\{(.*)\}(\s*(__packed|__aligned|____cacheline_aligned_in_smp|____cacheline_aligned|__attribute__\s*\(\([a-z0-9,_\s\(\)]*\)\)))*/) {
- 	my $decl_type = $1;
- 	$declaration_name = $2;
- 	my $members = $3;
- 
-+	if ($identifier ne $declaration_name) {
-+	    print STDERR "${file}:$.: warning: expecting prototype for $decl_type $identifier. Prototype was for $decl_type $declaration_name instead\n";
-+	    return;
-+	}
-+
- 	# ignore members marked private:
- 	$members =~ s/\/\*\s*private:.*?\/\*\s*public:.*?\*\///gosi;
- 	$members =~ s/\/\*\s*private:.*//gosi;
- 	# strip comments:
- 	$members =~ s/\/\*.*?\*\///gos;
- 	# strip attributes
- 	$members =~ s/\s*__attribute__\s*\(\([a-z0-9,_\*\s\(\)]*\)\)/ /gi;
- 	$members =~ s/\s*__aligned\s*\([^;]*\)/ /gos;
- 	$members =~ s/\s*__packed\s*/ /gos;
- 	$members =~ s/\s*CRYPTO_MINALIGN_ATTR/ /gos;
- 	$members =~ s/\s*____cacheline_aligned_in_smp/ /gos;
- 	$members =~ s/\s*____cacheline_aligned/ /gos;
- 
- 	# replace DECLARE_BITMAP
- 	$members =~ s/__ETHTOOL_DECLARE_LINK_MODE_MASK\s*\(([^\)]+)\)/DECLARE_BITMAP($1, __ETHTOOL_LINK_MODE_MASK_NBITS)/gos;
- 	$members =~ s/DECLARE_BITMAP\s*\(([^,)]+),\s*([^,)]+)\)/unsigned long $1\[BITS_TO_LONGS($2)\]/gos;
- 	# replace DECLARE_HASHTABLE
- 	$members =~ s/DECLARE_HASHTABLE\s*\(([^,)]+),\s*([^,)]+)\)/unsigned long $1\[1 << (($2) - 1)\]/gos;
- 	# replace DECLARE_KFIFO
- 	$members =~ s/DECLARE_KFIFO\s*\(([^,)]+),\s*([^,)]+),\s*([^,)]+)\)/$2 \*$1/gos;
-@@ -1374,40 +1382,45 @@ sub show_warnings($$) {
- 
- sub dump_enum($$) {
-     my $x = shift;
-     my $file = shift;
-     my $members;
- 
- 
-     $x =~ s@/\*.*?\*/@@gos;	# strip comments.
-     # strip #define macros inside enums
-     $x =~ s@#\s*((define|ifdef)\s+|endif)[^;]*;@@gos;
- 
-     if ($x =~ /typedef\s+enum\s*\{(.*)\}\s*(\w*)\s*;/) {
- 	$declaration_name = $2;
- 	$members = $1;
-     } elsif ($x =~ /enum\s+(\w*)\s*\{(.*)\}/) {
- 	$declaration_name = $1;
- 	$members = $2;
-     }
- 
-     if ($members) {
-+	if ($identifier ne $declaration_name) {
-+	    print STDERR "${file}:$.: warning: expecting prototype for enum $identifier. Prototype was for enum $declaration_name instead\n";
-+	    return;
-+	}
-+
- 	my %_members;
- 
- 	$members =~ s/\s+$//;
- 
- 	foreach my $arg (split ',', $members) {
- 	    $arg =~ s/^\s*(\w+).*/$1/;
- 	    push @parameterlist, $arg;
- 	    if (!$parameterdescs{$arg}) {
- 		$parameterdescs{$arg} = $undescribed;
- 	        if (show_warnings("enum", $declaration_name)) {
- 			print STDERR "${file}:$.: warning: Enum value '$arg' not described in enum '$declaration_name'\n";
- 		}
- 	    }
- 	    $_members{$arg} = 1;
- 	}
- 
- 	while (my ($k, $v) = each %parameterdescs) {
- 	    if (!exists($_members{$k})) {
- 	        if (show_warnings("enum", $declaration_name)) {
- 		     print STDERR "${file}:$.: warning: Excess enum value '$k' description in '$declaration_name'\n";
-@@ -1434,66 +1447,76 @@ sub dump_enum($$) {
- my $typedef_type = qr { ((?:\s+[\w\*]+){1,8})\s* }x;
- my $typedef_ident = qr { \*?\s*(\w\S+)\s* }x;
- my $typedef_args = qr { \s*\((.*)\); }x;
- 
- my $typedef1 = qr { typedef$typedef_type\($typedef_ident\)$typedef_args }x;
- my $typedef2 = qr { typedef$typedef_type$typedef_ident$typedef_args }x;
- 
- sub dump_typedef($$) {
-     my $x = shift;
-     my $file = shift;
- 
-     $x =~ s@/\*.*?\*/@@gos;	# strip comments.
- 
-     # Parse function typedef prototypes
-     if ($x =~ $typedef1 || $x =~ $typedef2) {
- 	$return_type = $1;
- 	$declaration_name = $2;
- 	my $args = $3;
- 	$return_type =~ s/^\s+//;
- 
-+	if ($identifier ne $declaration_name) {
-+	    print STDERR "${file}:$.: warning: expecting prototype for typedef $identifier. Prototype was for typedef $declaration_name instead\n";
-+	    return;
-+	}
-+
- 	create_parameterlist($args, ',', $file, $declaration_name);
- 
- 	output_declaration($declaration_name,
- 			   'function',
- 			   {'function' => $declaration_name,
- 			    'typedef' => 1,
- 			    'module' => $modulename,
- 			    'functiontype' => $return_type,
- 			    'parameterlist' => \@parameterlist,
- 			    'parameterdescs' => \%parameterdescs,
- 			    'parametertypes' => \%parametertypes,
- 			    'sectionlist' => \@sectionlist,
- 			    'sections' => \%sections,
- 			    'purpose' => $declaration_purpose
- 			   });
- 	return;
-     }
- 
-     while (($x =~ /\(*.\)\s*;$/) || ($x =~ /\[*.\]\s*;$/)) {
- 	$x =~ s/\(*.\)\s*;$/;/;
- 	$x =~ s/\[*.\]\s*;$/;/;
-     }
- 
-     if ($x =~ /typedef.*\s+(\w+)\s*;/) {
- 	$declaration_name = $1;
- 
-+	if ($identifier ne $declaration_name) {
-+	    print STDERR "${file}:$.: warning: expecting prototype for typedef $identifier. Prototype was for typedef $declaration_name instead\n";
-+	    return;
-+	}
-+
- 	output_declaration($declaration_name,
- 			   'typedef',
- 			   {'typedef' => $declaration_name,
- 			    'module' => $modulename,
- 			    'sectionlist' => \@sectionlist,
- 			    'sections' => \%sections,
- 			    'purpose' => $declaration_purpose
- 			   });
-     }
-     else {
- 	print STDERR "${file}:$.: error: Cannot parse typedef!\n";
- 	++$errors;
-     }
- }
- 
- sub save_struct_actual($) {
-     my $actual = shift;
- 
-     # strip all spaces from the actual param so that it looks like one string item
-     $actual =~ s/\s*//g;
-@@ -1779,40 +1802,45 @@ sub dump_function($$) {
- 	$prototype =~ m/^()([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+\s+\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+\s+\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+\s+\w+\s+\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+\s+\w+\s+\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
- 	$prototype =~ m/^(\w+\s+\w+\s*\*+\s*\w+\s*\*+\s*)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/)  {
- 	$return_type = $1;
- 	$declaration_name = $2;
- 	my $args = $3;
- 
- 	create_parameterlist($args, ',', $file, $declaration_name);
-     } else {
- 	print STDERR "${file}:$.: warning: cannot understand function prototype: '$prototype'\n";
- 	return;
-     }
- 
-+    if ($identifier ne $declaration_name) {
-+	print STDERR "${file}:$.: warning: expecting prototype for $identifier(). Prototype was for $declaration_name() instead\n";
-+	return;
-+    }
-+
-     my $prms = join " ", @parameterlist;
-     check_sections($file, $declaration_name, "function", $sectcheck, $prms);
- 
-     # This check emits a lot of warnings at the moment, because many
-     # functions don't have a 'Return' doc section. So until the number
-     # of warnings goes sufficiently down, the check is only performed in
-     # verbose mode.
-     # TODO: always perform the check.
-     if ($verbose && !$noret) {
- 	    check_return_section($file, $declaration_name, $return_type);
-     }
- 
-     # The function parser can be called with a typedef parameter.
-     # Handle it.
-     if ($return_type =~ /typedef/) {
- 	output_declaration($declaration_name,
- 			   'function',
- 			   {'function' => $declaration_name,
- 			    'typedef' => 1,
- 			    'module' => $modulename,
-@@ -1861,40 +1889,41 @@ sub tracepoint_munge($) {
- 	my $tracepointargs = 0;
- 
- 	if ($prototype =~ m/TRACE_EVENT\((.*?),/) {
- 		$tracepointname = $1;
- 	}
- 	if ($prototype =~ m/DEFINE_SINGLE_EVENT\((.*?),/) {
- 		$tracepointname = $1;
- 	}
- 	if ($prototype =~ m/DEFINE_EVENT\((.*?),(.*?),/) {
- 		$tracepointname = $2;
- 	}
- 	$tracepointname =~ s/^\s+//; #strip leading whitespace
- 	if ($prototype =~ m/TP_PROTO\((.*?)\)/) {
- 		$tracepointargs = $1;
- 	}
- 	if (($tracepointname eq 0) || ($tracepointargs eq 0)) {
- 		print STDERR "${file}:$.: warning: Unrecognized tracepoint format: \n".
- 			     "$prototype\n";
- 	} else {
- 		$prototype = "static inline void trace_$tracepointname($tracepointargs)";
-+		$identifier = "trace_$identifier";
- 	}
- }
- 
- sub syscall_munge() {
- 	my $void = 0;
- 
- 	$prototype =~ s@[\r\n]+@ @gos; # strip newlines/CR's
- ##	if ($prototype =~ m/SYSCALL_DEFINE0\s*\(\s*(a-zA-Z0-9_)*\s*\)/) {
- 	if ($prototype =~ m/SYSCALL_DEFINE0/) {
- 		$void = 1;
- ##		$prototype = "long sys_$1(void)";
- 	}
- 
- 	$prototype =~ s/SYSCALL_DEFINE.*\(/long sys_/; # fix return type & func name
- 	if ($prototype =~ m/long (sys_.*?),/) {
- 		$prototype =~ s/,/\(/;
- 	} elsif ($void) {
- 		$prototype =~ s/\)/\(void\)/;
- 	}
- 
-@@ -2024,98 +2053,99 @@ sub process_export_file($) {
- }
- 
- #
- # Parsers for the various processing states.
- #
- # STATE_NORMAL: looking for the /** to begin everything.
- #
- sub process_normal() {
-     if (/$doc_start/o) {
- 	$state = STATE_NAME;	# next line is always the function name
- 	$in_doc_sect = 0;
- 	$declaration_start_line = $. + 1;
-     }
- }
- 
- #
- # STATE_NAME: Looking for the "name - description" line
- #
- sub process_name($$) {
-     my $file = shift;
--    my $identifier;
-     my $descr;
- 
-     if (/$doc_block/o) {
- 	$state = STATE_DOCBLOCK;
- 	$contents = "";
- 	$new_start_line = $.;
- 
- 	if ( $1 eq "" ) {
- 	    $section = $section_intro;
- 	} else {
- 	    $section = $1;
- 	}
--    }
--    elsif (/$doc_decl/o) {
-+    } elsif (/$doc_decl/o) {
- 	$identifier = $1;
--	if (/\s*([\w\s]+?)(\(\))?\s*-/) {
-+	if (/\s*([\w\s]+?)(\(\))?\s*([-:].*)?$/) {
- 	    $identifier = $1;
- 	}
-+	if ($identifier =~ m/^(struct|union|enum|typedef)\b\s*(\S*)/) {
-+	    $decl_type = $1;
-+	    $identifier = $2;
-+	} else {
-+	    $decl_type = 'function';
-+	    $identifier =~ s/^define\s+//;
-+	}
-+	$identifier =~ s/\s+$//;
- 
- 	$state = STATE_BODY;
- 	# if there's no @param blocks need to set up default section
- 	# here
- 	$contents = "";
- 	$section = $section_default;
- 	$new_start_line = $. + 1;
--	if (/-(.*)/) {
-+	if (/[-:](.*)/) {
- 	    # strip leading/trailing/multiple spaces
- 	    $descr= $1;
- 	    $descr =~ s/^\s*//;
- 	    $descr =~ s/\s*$//;
- 	    $descr =~ s/\s+/ /g;
- 	    $declaration_purpose = $descr;
- 	    $state = STATE_BODY_MAYBE;
- 	} else {
- 	    $declaration_purpose = "";
- 	}
- 
- 	if (($declaration_purpose eq "") && $verbose) {
- 	    print STDERR "${file}:$.: warning: missing initial short description on line:\n";
- 	    print STDERR $_;
- 	    ++$warnings;
- 	}
- 
--	if ($identifier =~ m/^struct\b/) {
--	    $decl_type = 'struct';
--	} elsif ($identifier =~ m/^union\b/) {
--	    $decl_type = 'union';
--	} elsif ($identifier =~ m/^enum\b/) {
--	    $decl_type = 'enum';
--	} elsif ($identifier =~ m/^typedef\b/) {
--	    $decl_type = 'typedef';
--	} else {
--	    $decl_type = 'function';
-+	if ($identifier eq "") {
-+	    print STDERR "${file}:$.: warning: wrong kernel-doc identifier on line:\n";
-+	    print STDERR $_;
-+	    ++$warnings;
-+	    $state = STATE_NORMAL;
- 	}
- 
- 	if ($verbose) {
--	    print STDERR "${file}:$.: info: Scanning doc for $identifier\n";
-+	    print STDERR "${file}:$.: info: Scanning doc for $decl_type $identifier\n";
- 	}
-     } else {
- 	print STDERR "${file}:$.: warning: Cannot understand $_ on line $.",
- 	    " - I thought it was a doc line\n";
- 	++$warnings;
- 	$state = STATE_NORMAL;
-     }
- }
- 
- 
- #
- # STATE_BODY and STATE_BODY_MAYBE: the bulk of a kerneldoc comment.
- #
- sub process_body($$) {
-     my $file = shift;
- 
-     # Until all named variable macro parameters are
-     # documented using the bare name (`x`) rather than with
-     # dots (`x...`), strip the dots:
-     if ($section =~ /\w\.\.\.$/) {
--- 
-2.28.0
+> ---
+>  net/core/datagram.c   | 2 +-
+>  net/core/dev.c        | 4 ++--
+>  net/core/skbuff.c     | 2 +-
+>  net/ethernet/eth.c    | 6 +++---
+>  net/sunrpc/rpc_pipe.c | 3 ++-
+>  5 files changed, 9 insertions(+), 8 deletions(-)
+> 
+> diff --git a/net/core/datagram.c b/net/core/datagram.c
+> index 9fcaa544f11a..81809fa735a7 100644
+> --- a/net/core/datagram.c
+> +++ b/net/core/datagram.c
+> @@ -692,41 +692,41 @@ EXPORT_SYMBOL(__zerocopy_sg_from_iter);
+>   *	@from: the source to copy from
+>   *
+>   *	The function will first copy up to headlen, and then pin the userspace
+>   *	pages and build frags through them.
+>   *
+>   *	Returns 0, -EFAULT or -EMSGSIZE.
+>   */
+>  int zerocopy_sg_from_iter(struct sk_buff *skb, struct iov_iter *from)
+>  {
+>  	int copy = min_t(int, skb_headlen(skb), iov_iter_count(from));
+>  
+>  	/* copy up to skb headlen */
+>  	if (skb_copy_datagram_from_iter(skb, 0, from, copy))
+>  		return -EFAULT;
+>  
+>  	return __zerocopy_sg_from_iter(NULL, skb, from, ~0U);
+>  }
+>  EXPORT_SYMBOL(zerocopy_sg_from_iter);
+>  
+>  /**
+> - *	skb_copy_and_csum_datagram_iter - Copy datagram to an iovec iterator
+> + *	skb_copy_and_csum_datagram - Copy datagram to an iovec iterator
+>   *          and update a checksum.
+>   *	@skb: buffer to copy
+>   *	@offset: offset in the buffer to start copying from
+>   *	@to: iovec iterator to copy to
+>   *	@len: amount of data to copy from buffer to iovec
+>   *      @csump: checksum pointer
+>   */
+>  static int skb_copy_and_csum_datagram(const struct sk_buff *skb, int offset,
+>  				      struct iov_iter *to, int len,
+>  				      __wsum *csump)
+>  {
+>  	return __skb_datagram_iter(skb, offset, to, len, true,
+>  			csum_and_copy_to_iter, csump);
+>  }
+>  
+>  /**
+>   *	skb_copy_and_csum_datagram_msg - Copy and checksum skb to user iovec.
+>   *	@skb: skbuff
+>   *	@hlen: hardware length
+>   *	@msg: destination
+> diff --git a/net/core/dev.c b/net/core/dev.c
+> index 60d325bda0d7..4bfdcd6b20e8 100644
+> --- a/net/core/dev.c
+> +++ b/net/core/dev.c
+> @@ -6902,41 +6902,41 @@ static int ____netdev_has_upper_dev(struct net_device *upper_dev,
+>   *
+>   * Find out if a device is linked to specified upper device and return true
+>   * in case it is. Note that this checks only immediate upper device,
+>   * not through a complete stack of devices. The caller must hold the RTNL lock.
+>   */
+>  bool netdev_has_upper_dev(struct net_device *dev,
+>  			  struct net_device *upper_dev)
+>  {
+>  	struct netdev_nested_priv priv = {
+>  		.data = (void *)upper_dev,
+>  	};
+>  
+>  	ASSERT_RTNL();
+>  
+>  	return netdev_walk_all_upper_dev_rcu(dev, ____netdev_has_upper_dev,
+>  					     &priv);
+>  }
+>  EXPORT_SYMBOL(netdev_has_upper_dev);
+>  
+>  /**
+> - * netdev_has_upper_dev_all - Check if device is linked to an upper device
+> + * netdev_has_upper_dev_all_rcu - Check if device is linked to an upper device
+>   * @dev: device
+>   * @upper_dev: upper device to check
+>   *
+>   * Find out if a device is linked to specified upper device and return true
+>   * in case it is. Note that this checks the entire upper device chain.
+>   * The caller must hold rcu lock.
+>   */
+>  
+>  bool netdev_has_upper_dev_all_rcu(struct net_device *dev,
+>  				  struct net_device *upper_dev)
+>  {
+>  	struct netdev_nested_priv priv = {
+>  		.data = (void *)upper_dev,
+>  	};
+>  
+>  	return !!netdev_walk_all_upper_dev_rcu(dev, ____netdev_has_upper_dev,
+>  					       &priv);
+>  }
+>  EXPORT_SYMBOL(netdev_has_upper_dev_all_rcu);
+>  
+> @@ -8140,41 +8140,41 @@ void netdev_adjacent_rename_links(struct net_device *dev, char *oldname)
+>  	}
+>  }
+>  
+>  void *netdev_lower_dev_get_private(struct net_device *dev,
+>  				   struct net_device *lower_dev)
+>  {
+>  	struct netdev_adjacent *lower;
+>  
+>  	if (!lower_dev)
+>  		return NULL;
+>  	lower = __netdev_find_adj(lower_dev, &dev->adj_list.lower);
+>  	if (!lower)
+>  		return NULL;
+>  
+>  	return lower->private;
+>  }
+>  EXPORT_SYMBOL(netdev_lower_dev_get_private);
+>  
+>  
+>  /**
+> - * netdev_lower_change - Dispatch event about lower device state change
+> + * netdev_lower_state_changed - Dispatch event about lower device state change
+>   * @lower_dev: device
+>   * @lower_state_info: state to dispatch
+>   *
+>   * Send NETDEV_CHANGELOWERSTATE to netdev notifiers with info.
+>   * The caller must hold the RTNL lock.
+>   */
+>  void netdev_lower_state_changed(struct net_device *lower_dev,
+>  				void *lower_state_info)
+>  {
+>  	struct netdev_notifier_changelowerstate_info changelowerstate_info = {
+>  		.info.dev = lower_dev,
+>  	};
+>  
+>  	ASSERT_RTNL();
+>  	changelowerstate_info.lower_state_info = lower_state_info;
+>  	call_netdevice_notifiers_info(NETDEV_CHANGELOWERSTATE,
+>  				      &changelowerstate_info.info);
+>  }
+>  EXPORT_SYMBOL(netdev_lower_state_changed);
+>  
+> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> index c9a5a3c262c8..ffe3dcc0ebea 100644
+> --- a/net/core/skbuff.c
+> +++ b/net/core/skbuff.c
+> @@ -825,41 +825,41 @@ EXPORT_SYMBOL(skb_tx_error);
+>  /**
+>   *	consume_skb - free an skbuff
+>   *	@skb: buffer to free
+>   *
+>   *	Drop a ref to the buffer and free it if the usage count has hit zero
+>   *	Functions identically to kfree_skb, but kfree_skb assumes that the frame
+>   *	is being dropped after a failure and notes that
+>   */
+>  void consume_skb(struct sk_buff *skb)
+>  {
+>  	if (!skb_unref(skb))
+>  		return;
+>  
+>  	trace_consume_skb(skb);
+>  	__kfree_skb(skb);
+>  }
+>  EXPORT_SYMBOL(consume_skb);
+>  #endif
+>  
+>  /**
+> - *	consume_stateless_skb - free an skbuff, assuming it is stateless
+> + *	__consume_stateless_skb - free an skbuff, assuming it is stateless
+>   *	@skb: buffer to free
+>   *
+>   *	Alike consume_skb(), but this variant assumes that this is the last
+>   *	skb reference and all the head states have been already dropped
+>   */
+>  void __consume_stateless_skb(struct sk_buff *skb)
+>  {
+>  	trace_consume_skb(skb);
+>  	skb_release_data(skb);
+>  	kfree_skbmem(skb);
+>  }
+>  
+>  void __kfree_skb_flush(void)
+>  {
+>  	struct napi_alloc_cache *nc = this_cpu_ptr(&napi_alloc_cache);
+>  
+>  	/* flush skb_cache if containing objects */
+>  	if (nc->skb_count) {
+>  		kmem_cache_free_bulk(skbuff_head_cache, nc->skb_count,
+>  				     nc->skb_cache);
+> diff --git a/net/ethernet/eth.c b/net/ethernet/eth.c
+> index dac65180c4ef..4106373180c6 100644
+> --- a/net/ethernet/eth.c
+> +++ b/net/ethernet/eth.c
+> @@ -255,41 +255,41 @@ int eth_header_cache(const struct neighbour *neigh, struct hh_cache *hh, __be16
+>  EXPORT_SYMBOL(eth_header_cache);
+>  
+>  /**
+>   * eth_header_cache_update - update cache entry
+>   * @hh: destination cache entry
+>   * @dev: network device
+>   * @haddr: new hardware address
+>   *
+>   * Called by Address Resolution module to notify changes in address.
+>   */
+>  void eth_header_cache_update(struct hh_cache *hh,
+>  			     const struct net_device *dev,
+>  			     const unsigned char *haddr)
+>  {
+>  	memcpy(((u8 *) hh->hh_data) + HH_DATA_OFF(sizeof(struct ethhdr)),
+>  	       haddr, ETH_ALEN);
+>  }
+>  EXPORT_SYMBOL(eth_header_cache_update);
+>  
+>  /**
+> - * eth_header_parser_protocol - extract protocol from L2 header
+> + * eth_header_parse_protocol - extract protocol from L2 header
+>   * @skb: packet to extract protocol from
+>   */
+>  __be16 eth_header_parse_protocol(const struct sk_buff *skb)
+>  {
+>  	const struct ethhdr *eth = eth_hdr(skb);
+>  
+>  	return eth->h_proto;
+>  }
+>  EXPORT_SYMBOL(eth_header_parse_protocol);
+>  
+>  /**
+>   * eth_prepare_mac_addr_change - prepare for mac change
+>   * @dev: network device
+>   * @p: socket address
+>   */
+>  int eth_prepare_mac_addr_change(struct net_device *dev, void *p)
+>  {
+>  	struct sockaddr *addr = p;
+>  
+>  	if (!(dev->priv_flags & IFF_LIVE_ADDR_CHANGE) && netif_running(dev))
+> @@ -506,42 +506,42 @@ unsigned char * __weak arch_get_platform_mac_address(void)
+>  
+>  int eth_platform_get_mac_address(struct device *dev, u8 *mac_addr)
+>  {
+>  	const unsigned char *addr = NULL;
+>  
+>  	if (dev->of_node)
+>  		addr = of_get_mac_address(dev->of_node);
+>  	if (IS_ERR_OR_NULL(addr))
+>  		addr = arch_get_platform_mac_address();
+>  
+>  	if (!addr)
+>  		return -ENODEV;
+>  
+>  	ether_addr_copy(mac_addr, addr);
+>  
+>  	return 0;
+>  }
+>  EXPORT_SYMBOL(eth_platform_get_mac_address);
+>  
+>  /**
+> - * Obtain the MAC address from an nvmem cell named 'mac-address' associated
+> - * with given device.
+> + * nvmem_get_mac_address - Obtain the MAC address from an nvmem cell named
+> + * 'mac-address' associated with given device.
+>   *
+>   * @dev:	Device with which the mac-address cell is associated.
+>   * @addrbuf:	Buffer to which the MAC address will be copied on success.
+>   *
+>   * Returns 0 on success or a negative error number on failure.
+>   */
+>  int nvmem_get_mac_address(struct device *dev, void *addrbuf)
+>  {
+>  	struct nvmem_cell *cell;
+>  	const void *mac;
+>  	size_t len;
+>  
+>  	cell = nvmem_cell_get(dev, "mac-address");
+>  	if (IS_ERR(cell))
+>  		return PTR_ERR(cell);
+>  
+>  	mac = nvmem_cell_read(cell, &len);
+>  	nvmem_cell_put(cell);
+>  
+>  	if (IS_ERR(mac))
+> diff --git a/net/sunrpc/rpc_pipe.c b/net/sunrpc/rpc_pipe.c
+> index eadc0ede928c..8241f5a4a01c 100644
+> --- a/net/sunrpc/rpc_pipe.c
+> +++ b/net/sunrpc/rpc_pipe.c
+> @@ -764,41 +764,42 @@ static struct dentry *rpc_mkdir_populate(struct dentry *parent,
+>  
+>  static int rpc_rmdir_depopulate(struct dentry *dentry,
+>  		void (*depopulate)(struct dentry *))
+>  {
+>  	struct dentry *parent;
+>  	struct inode *dir;
+>  	int error;
+>  
+>  	parent = dget_parent(dentry);
+>  	dir = d_inode(parent);
+>  	inode_lock_nested(dir, I_MUTEX_PARENT);
+>  	if (depopulate != NULL)
+>  		depopulate(dentry);
+>  	error = __rpc_rmdir(dir, dentry);
+>  	inode_unlock(dir);
+>  	dput(parent);
+>  	return error;
+>  }
+>  
+>  /**
+> - * rpc_mkpipe - make an rpc_pipefs file for kernel<->userspace communication
+> + * rpc_mkpipe_dentry - make an rpc_pipefs file for kernel<->userspace
+> + *		       communication
+>   * @parent: dentry of directory to create new "pipe" in
+>   * @name: name of pipe
+>   * @private: private data to associate with the pipe, for the caller's use
+>   * @pipe: &rpc_pipe containing input parameters
+>   *
+>   * Data is made available for userspace to read by calls to
+>   * rpc_queue_upcall().  The actual reads will result in calls to
+>   * @ops->upcall, which will be called with the file pointer,
+>   * message, and userspace buffer to copy to.
+>   *
+>   * Writes can come at any time, and do not necessarily have to be
+>   * responses to upcalls.  They will result in calls to @msg->downcall.
+>   *
+>   * The @private argument passed here will be available to all these methods
+>   * from the file pointer, via RPC_I(file_inode(file))->private.
+>   */
+>  struct dentry *rpc_mkpipe_dentry(struct dentry *parent, const char *name,
+>  				 void *private, struct rpc_pipe *pipe)
+>  {
+>  	struct dentry *dentry;
+> 
 
