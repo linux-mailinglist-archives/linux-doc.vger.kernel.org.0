@@ -2,207 +2,69 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 88C072B844A
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Nov 2020 20:02:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D88202B8557
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Nov 2020 21:10:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726098AbgKRTAh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Nov 2020 14:00:37 -0500
-Received: from mga11.intel.com ([192.55.52.93]:61024 "EHLO mga11.intel.com"
+        id S1726468AbgKRUJs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Nov 2020 15:09:48 -0500
+Received: from mail.kernel.org ([198.145.29.99]:45916 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727068AbgKRTAh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 18 Nov 2020 14:00:37 -0500
-IronPort-SDR: gocfy7zmU2SSJaI0i2qRHY5tGsCwV0+AM0jkeNc5pCU9Qw2g28OwTHgLKo5XrLDtiQ//id4bQG
- T40HZD+JlpkQ==
-X-IronPort-AV: E=McAfee;i="6000,8403,9809"; a="167658900"
-X-IronPort-AV: E=Sophos;i="5.77,488,1596524400"; 
-   d="scan'208";a="167658900"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2020 11:00:35 -0800
-IronPort-SDR: 6l2o5cyRNAbcz3TV1vIdaX2GrjdafBBOVdLUbGLgyurHVzF1ThVjgkUsa9YQFdUHL8HKzH4ERs
- Nl3Os1hRYzqw==
-X-IronPort-AV: E=Sophos;i="5.77,488,1596524400"; 
-   d="scan'208";a="544665317"
-Received: from rhweight-wrk1.ra.intel.com ([137.102.106.140])
-  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2020 11:00:35 -0800
-From:   matthew.gerlach@linux.intel.com
-To:     linux-fpga@vger.kernel.org, linux-kernel@vger.kernel.org,
-        mdf@kernel.org, hao.wu@intel.com, trix@redhat.com,
-        linux-doc@vger.kernel.org, corbet@lwn.net
-Cc:     Matthew Gerlach <matthew.gerlach@linux.intel.com>
-Subject: [PATCH v2 2/2] fpga: dfl: look for vendor specific capability
-Date:   Wed, 18 Nov 2020 11:01:51 -0800
-Message-Id: <20201118190151.365564-3-matthew.gerlach@linux.intel.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201118190151.365564-1-matthew.gerlach@linux.intel.com>
-References: <20201118190151.365564-1-matthew.gerlach@linux.intel.com>
+        id S1726299AbgKRUJr (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 18 Nov 2020 15:09:47 -0500
+Received: from kicinski-fedora-PC1C0HJN.hsd1.ca.comcast.net (unknown [163.114.132.5])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id C3DB62100A;
+        Wed, 18 Nov 2020 20:09:46 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=default; t=1605730187;
+        bh=/3r0ST05xJSzGUnRqs6k7/gzVgXvpCVKmESDDqVZ7oY=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=CntlHIoipoc39ssSbL8KbTkJjbu43zhTFzl7olRgQz6LFwz9vTfVlTqmRbZ7AZLMJ
+         uUNbJz2PXyZoiFp9j72jGWpLzo8nN6Cvub3DawFuYR75tEklQFz3zKCdrQENVdB+NC
+         zcXIiI2QjaUfWMwLbQrzzHpwTLRSyNyILGfC3m2c=
+Date:   Wed, 18 Nov 2020 12:09:45 -0800
+From:   Jakub Kicinski <kuba@kernel.org>
+To:     siddhant gupta <siddhantgupta416@gmail.com>
+Cc:     Tom Parkin <tparkin@katalix.com>, davem@davemloft.net,
+        corbet@lwn.net, netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Mamta Shukla <mamtashukla555@gmail.com>,
+        Himadri Pandya <himadrispandya@gmail.com>
+Subject: Re: [PATCH] Documentation: networking: Fix Column span alignment
+ warnings in l2tp.rst
+Message-ID: <20201118120945.468701ab@kicinski-fedora-PC1C0HJN.hsd1.ca.comcast.net>
+In-Reply-To: <CA+imup-3pT47CVL7GZn_vJtHGngNexBR060y2gRfw2v5Gr8P0Q@mail.gmail.com>
+References: <20201117095207.GA16407@Sleakybeast>
+        <20201118102307.GA4903@katalix.com>
+        <CA+imup-3pT47CVL7GZn_vJtHGngNexBR060y2gRfw2v5Gr8P0Q@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Matthew Gerlach <matthew.gerlach@linux.intel.com>
+On Wed, 18 Nov 2020 16:44:11 +0530 siddhant gupta wrote:
+> On Wed, 18 Nov 2020 at 15:53, Tom Parkin <tparkin@katalix.com> wrote:
+> >
+> > On  Tue, Nov 17, 2020 at 15:22:07 +0530, Siddhant Gupta wrote:  
+> > > Fix Column span alignment problem warnings in the file
+> > >  
+> >
+> > Thanks for the patch, Siddhant.
+> >
+> > Could you provide some information on how these warnings were
+> > triggered?  Using Sphinx 2.4.4 I can't reproduce any warnings for
+> > l2tp.rst using the "make htmldocs" target.
+> >  
+> 
+> I am currently using Sphinx v1.8.5 and I made use of command "make
+> htmldocs >> doc_xxx.log 2>&1" for directing the errors into a file and
+> the statements in the file showed me these warning, also to confirm
+> those I tried using "rst2html" on l2tp.rst file and got same set of
+> warnings.
 
-A DFL may not begin at offset 0 of BAR 0.  A PCIe vendor
-specific capability can be used to specify the start of a
-number of DFLs.
-
-Signed-off-by: Matthew Gerlach <matthew.gerlach@linux.intel.com>
----
-v2: Update documentation for clarity.
-    Clean up  macro names.
-    Use GENMASK.
-    Removed spurious blank lines.
-    Changed some calls from dev_info to dev_dbg.
-    Specifically check for VSEC not found, -ENODEV.
-    Ensure correct pci vendor id.
-    Remove check for page alignment.
-    Rename find_dfl_in_cfg to find_dfls_by_vsec.
-    Initialize target memory of pci_read_config_dword to invalid values before use.
----
- Documentation/fpga/dfl.rst | 13 ++++++
- drivers/fpga/dfl-pci.c     | 87 +++++++++++++++++++++++++++++++++++++-
- 2 files changed, 98 insertions(+), 2 deletions(-)
-
-diff --git a/Documentation/fpga/dfl.rst b/Documentation/fpga/dfl.rst
-index 0404fe6ffc74..37016ff35a90 100644
---- a/Documentation/fpga/dfl.rst
-+++ b/Documentation/fpga/dfl.rst
-@@ -501,6 +501,19 @@ Developer only needs to provide a sub feature driver with matched feature id.
- FME Partial Reconfiguration Sub Feature driver (see drivers/fpga/dfl-fme-pr.c)
- could be a reference.
- 
-+Location of DFLs on PCI Device
-+===========================
-+The start of the first DFL is assumed to be offset 0 of bar 0.
-+If the first node of the DFL is an FME, then further DFLs
-+in the port(s) are specified in FME header registers.
-+Alternatively, a vendor specific capability structure can be used to
-+specify the location of all the DFLs on the device, providing flexibility
-+for the type of starting node in the DFL.  Intel has reserved the
-+VSEC ID of 0x43 for this purpose.  The vendor specific
-+data begins with a 4 byte vendor specific register for the number of DFLs followed 4 byte
-+Offset/BIR vendor specific registers for each DFL. Bits 2:0 of Offset/BIR register
-+indicates the BAR, and bits 31:3 form the 8 byte aligned offset where bits 2:0 are
-+zero.
- 
- Open discussion
- ===============
-diff --git a/drivers/fpga/dfl-pci.c b/drivers/fpga/dfl-pci.c
-index b27fae045536..3a6807e3e10c 100644
---- a/drivers/fpga/dfl-pci.c
-+++ b/drivers/fpga/dfl-pci.c
-@@ -27,6 +27,14 @@
- #define DRV_VERSION	"0.8"
- #define DRV_NAME	"dfl-pci"
- 
-+#define PCI_VSEC_ID_INTEL_DFLS 0x43
-+
-+#define PCI_VNDR_DFLS_CNT 8
-+#define PCI_VNDR_DFLS_RES 0x0c
-+
-+#define PCI_VNDR_DFLS_RES_BAR_MASK GENMASK(2, 0)
-+#define PCI_VNDR_DFLS_RES_OFF_MASK GENMASK(31, 3)
-+
- struct cci_drvdata {
- 	struct dfl_fpga_cdev *cdev;	/* container device */
- };
-@@ -119,8 +127,80 @@ static int *cci_pci_create_irq_table(struct pci_dev *pcidev, unsigned int nvec)
- 	return table;
- }
- 
-+static int find_dfls_by_vsec(struct pci_dev *pcidev, struct dfl_fpga_enum_info *info)
-+{
-+	u32 bar, offset, vndr_hdr, dfl_cnt, dfl_res;
-+	int dfl_res_off, i, voff = 0;
-+	resource_size_t start, len;
-+
-+	if (pcidev->vendor != PCI_VENDOR_ID_INTEL)
-+		return -ENODEV;
-+
-+	while ((voff = pci_find_next_ext_capability(pcidev, voff, PCI_EXT_CAP_ID_VNDR))) {
-+		vndr_hdr = 0;
-+		pci_read_config_dword(pcidev, voff + PCI_VNDR_HEADER, &vndr_hdr);
-+
-+		dev_dbg(&pcidev->dev,
-+			"vendor-specific capability id 0x%x, rev 0x%x len 0x%x\n",
-+			PCI_VNDR_HEADER_ID(vndr_hdr),
-+			PCI_VNDR_HEADER_REV(vndr_hdr),
-+			PCI_VNDR_HEADER_LEN(vndr_hdr));
-+
-+		if (PCI_VNDR_HEADER_ID(vndr_hdr) == PCI_VSEC_ID_INTEL_DFLS)
-+			break;
-+	}
-+
-+	if (!voff) {
-+		dev_dbg(&pcidev->dev, "%s no VSEC found\n", __func__);
-+		return -ENODEV;
-+	}
-+
-+	dfl_cnt = 0;
-+	pci_read_config_dword(pcidev, voff + PCI_VNDR_DFLS_CNT, &dfl_cnt);
-+	dev_dbg(&pcidev->dev, "dfl_cnt %d\n", dfl_cnt);
-+	for (i = 0; i < dfl_cnt; i++) {
-+		dfl_res_off = voff + PCI_VNDR_DFLS_RES +
-+				      (i * sizeof(dfl_res));
-+		dfl_res = GENMASK(31, 0);
-+		pci_read_config_dword(pcidev, dfl_res_off, &dfl_res);
-+
-+		dev_dbg(&pcidev->dev, "dfl_res 0x%x\n", dfl_res);
-+
-+		bar = dfl_res & PCI_VNDR_DFLS_RES_BAR_MASK;
-+		if (bar >= PCI_STD_NUM_BARS) {
-+			dev_err(&pcidev->dev, "%s bad bar number %d\n",
-+				__func__, bar);
-+			return -EINVAL;
-+		}
-+
-+		len = pci_resource_len(pcidev, bar);
-+		if (len == 0) {
-+			dev_err(&pcidev->dev, "%s unmapped bar number %d\n",
-+				__func__, bar);
-+			return -EINVAL;
-+		}
-+
-+		offset = dfl_res & PCI_VNDR_DFLS_RES_OFF_MASK;
-+		if (offset >= len) {
-+			dev_err(&pcidev->dev, "%s bad offset %u >= %pa\n",
-+				__func__, offset, &len);
-+			return -EINVAL;
-+		}
-+
-+		dev_dbg(&pcidev->dev, "%s BAR %d offset 0x%x\n", __func__, bar, offset);
-+
-+		len -= offset;
-+
-+		start = pci_resource_start(pcidev, bar) + offset;
-+
-+		dfl_fpga_enum_info_add_dfl(info, start, len);
-+	}
-+
-+	return 0;
-+}
-+
- static int find_dfls_by_default(struct pci_dev *pcidev,
--				struct dfl_fpga_enum_info *info)
-+			       struct dfl_fpga_enum_info *info)
- {
- 	resource_size_t start, len;
- 	int port_num, bar, i;
-@@ -220,7 +300,10 @@ static int cci_enumerate_feature_devs(struct pci_dev *pcidev)
- 			goto irq_free_exit;
- 	}
- 
--	ret = find_dfls_by_default(pcidev, info);
-+	ret = find_dfls_by_vsec(pcidev, info);
-+	if (ret == -ENODEV)
-+		ret = find_dfls_by_default(pcidev, info);
-+
- 	if (ret)
- 		goto irq_free_exit;
- 
--- 
-2.25.2
-
+No errors here either, Sphinx 2.2.2, unless Documentation/ has some
+explicit rule about this let's not reshuffle text for an old version 
+of the compiler.
