@@ -2,153 +2,286 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3E34F2B8833
-	for <lists+linux-doc@lfdr.de>; Thu, 19 Nov 2020 00:10:47 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5CF162B8863
+	for <lists+linux-doc@lfdr.de>; Thu, 19 Nov 2020 00:28:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726781AbgKRXJj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Nov 2020 18:09:39 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35188 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726457AbgKRXJi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Nov 2020 18:09:38 -0500
-Received: from mail-pg1-x542.google.com (mail-pg1-x542.google.com [IPv6:2607:f8b0:4864:20::542])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 80508C0613D4;
-        Wed, 18 Nov 2020 15:09:55 -0800 (PST)
-Received: by mail-pg1-x542.google.com with SMTP id r18so2411539pgu.6;
-        Wed, 18 Nov 2020 15:09:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=S4SV7UWqaAO4+KNigQEQ+xlXa5i4hvXUtpTZN2jrHlA=;
-        b=uMnzVzhmPlLPZ0/M2t6pQ+/a395zQleD37ySHopmwQHi4ghvFtsIYAuEEUi6scn2oE
-         WjTuRb77VxCgNSlatY0O5bWDL2EiY+PXnJbPwJaluV4vC2qtJKuzyyJMxCW/ucs4NyKe
-         D6UQC1mlWQe/JZJGxrieQSi4pgLDj+AeWS5cTJzd96Usyo+5jw+yzp2wMIDEU2Q9ZqsZ
-         ICJCcPd5L9Du5QfGItxLs1Jhao0h5CbGZLyD+J5V3qIdveZ3hSKzNiEmBUhjBP8agbM6
-         YzZytOLol+oTy2zCVuyaCvIhJkmTPA3GMplkkuDpFGzSVcWrWuWLHLy2h6EiPXUMw4ib
-         rC0g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=S4SV7UWqaAO4+KNigQEQ+xlXa5i4hvXUtpTZN2jrHlA=;
-        b=OxUuXGgP3oKdli648U7oXIwkzQ+WirCZUT9SBwEhqZTR40uII0QSTJsadsVP+kI8Gm
-         u/dskVQjGSFebyeQOZTFDoW6qff20mWZuhkc9ys+R0tb1K2L84g+zyIiWuL+IzWIi9Am
-         DMEaDpCzvzxBEolr4JnUTF2E+0dSdnmlPMxtl16L605ai4lRecubK41vInvf1aN1OlZl
-         NVY1z76rXzTYfI13OAdNPZ+h942QTrjXhz4Tj1hn6dAEjaOWRfN82fPlsRby4eT365lS
-         FqGoQ1wU81FdBd9539PnLHgYQ+DjGAZoeQmdmpPvGxHydaU/CKrNshZMu92b8rBzHFaa
-         PMKg==
-X-Gm-Message-State: AOAM533X7DpfEF59+ntSPHg5CD/RKi/UZj6ZUA/DtO0Ub5lSZ2de7Fzu
-        2RFepkL8MEk9xi8KKNirwoY=
-X-Google-Smtp-Source: ABdhPJzu9wrEysVlRm1/cjj7lif5xoT+FkSGrGUKs2fsSy8kVxEFM/1XL01MQtqHSGgEVT7zhSxWRg==
-X-Received: by 2002:a63:154e:: with SMTP id 14mr10380799pgv.49.1605740995078;
-        Wed, 18 Nov 2020 15:09:55 -0800 (PST)
-Received: from taoren-ubuntu-R90MNF91.thefacebook.com (c-73-252-146-110.hsd1.ca.comcast.net. [73.252.146.110])
-        by smtp.gmail.com with ESMTPSA id b21sm2565304pji.24.2020.11.18.15.09.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 18 Nov 2020 15:09:54 -0800 (PST)
-From:   rentao.bupt@gmail.com
-To:     Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
+        id S1726624AbgKRX2M (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Nov 2020 18:28:12 -0500
+Received: from aserp2120.oracle.com ([141.146.126.78]:40952 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726110AbgKRX2M (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Nov 2020 18:28:12 -0500
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0AINOa5V096512;
+        Wed, 18 Nov 2020 23:27:20 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=from : to : cc :
+ subject : date : message-id : mime-version : content-transfer-encoding;
+ s=corp-2020-01-29; bh=SmWEE3ByHnlVFAqMSaN/A+TYWtwBVPWNt6Vsf6QDDWA=;
+ b=njMb7faSaf5+Q3kx02K6+ZeQjI37rQh6VigUtqqBC5Yq6yDlT4I2+d4wTYSSoK99c1WY
+ Atx9bbUnzScWu5eYZaMiFeTufrkwjBEnMyeblPdRfx8EPSMdxPA7ifnqbTTjxUbAADmS
+ ne9qhaJk+IsTc6s166WBmo8X7sg2wmSnKSn7gheZml8WQHHsyTZ7uIxJgF6jNCHck5oB
+ 8SYnCJeiEQtQZghPan1xk8LBAp5f7n6eIkRcNmbBjK7Fekg0AETwQa0FHd2jOnrLVb74
+ Dyu5UYdq6vaM2VjgnOvYolSwkt9i5iXnRlLmwCn4xNOwsqrJipL1bJlBmBIPu25vXSGs vQ== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+        by aserp2120.oracle.com with ESMTP id 34t76m2rsy-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Wed, 18 Nov 2020 23:27:20 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+        by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 0AINLLaN136260;
+        Wed, 18 Nov 2020 23:25:20 GMT
+Received: from pps.reinject (localhost [127.0.0.1])
+        by aserp3020.oracle.com with ESMTP id 34umd17ffe-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Wed, 18 Nov 2020 23:25:20 +0000
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [127.0.0.1])
+        by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 0AINPJQJ150558;
+        Wed, 18 Nov 2020 23:25:19 GMT
+Received: from ca-dev112.us.oracle.com (ca-dev112.us.oracle.com [10.147.25.63])
+        by aserp3020.oracle.com with ESMTP id 34umd17feh-1;
+        Wed, 18 Nov 2020 23:25:19 +0000
+From:   Saeed Mirzamohammadi <saeed.mirzamohammadi@oracle.com>
+Cc:     saeed.mirzamohammadi@oracle.com, john.p.donnelly@oracle.com,
+        stable@vger.kernel.org, Dave Young <dyoung@redhat.com>,
+        Baoquan He <bhe@redhat.com>, Vivek Goyal <vgoyal@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        "David S . Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Jesper Dangaard Brouer <hawk@kernel.org>,
-        John Fastabend <john.fastabend@gmail.com>,
-        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, netdev@vger.kernel.org,
-        bpf@vger.kernel.org, openbmc@lists.ozlabs.org, taoren@fb.com,
-        mikechoi@fb.com
-Cc:     Tao Ren <rentao.bupt@gmail.com>
-Subject: [PATCH v2 2/2] docs: hwmon: Document max127 driver
-Date:   Wed, 18 Nov 2020 15:09:29 -0800
-Message-Id: <20201118230929.18147-3-rentao.bupt@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201118230929.18147-1-rentao.bupt@gmail.com>
-References: <20201118230929.18147-1-rentao.bupt@gmail.com>
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Bjorn Andersson <bjorn.andersson@linaro.org>,
+        Shawn Guo <shawnguo@kernel.org>, Li Yang <leoyang.li@nxp.com>,
+        Vinod Koul <vkoul@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
+        Anson Huang <Anson.Huang@nxp.com>,
+        Geert Uytterhoeven <geert+renesas@glider.be>,
+        Michael Walle <michael@walle.cc>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Olof Johansson <olof@lixom.net>,
+        "Martin K. Petersen" <martin.petersen@oracle.com>,
+        =?UTF-8?q?Diego=20Elio=20Petten=C3=B2?= <flameeyes@flameeyes.com>,
+        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        kexec@lists.infradead.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org
+Subject: [PATCH 1/1] kernel/crash_core.c - Add crashkernel=auto for x86 and ARM
+Date:   Wed, 18 Nov 2020 15:24:28 -0800
+Message-Id: <20201118232431.21832-1-saeed.mirzamohammadi@oracle.com>
+X-Mailer: git-send-email 2.27.0
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9809 signatures=668682
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 suspectscore=0 phishscore=0
+ adultscore=0 priorityscore=1501 bulkscore=0 clxscore=1011 mlxlogscore=999
+ malwarescore=0 mlxscore=0 spamscore=0 lowpriorityscore=0 impostorscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2011180161
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Tao Ren <rentao.bupt@gmail.com>
+This adds crashkernel=auto feature to configure reserved memory for
+vmcore creation to both x86 and ARM platforms based on the total memory
+size.
 
-Add documentation for the max127 hardware monitoring driver.
-
-Signed-off-by: Tao Ren <rentao.bupt@gmail.com>
+Cc: stable@vger.kernel.org
+Signed-off-by: John Donnelly <john.p.donnelly@oracle.com>
+Signed-off-by: Saeed Mirzamohammadi <saeed.mirzamohammadi@oracle.com>
 ---
- Changes in v2:
-   - add more description for min/max sysfs nodes.
-   - convert values from volt to millivolt in the document.
+ Documentation/admin-guide/kdump/kdump.rst |  5 +++++
+ arch/arm64/Kconfig                        | 26 ++++++++++++++++++++++-
+ arch/arm64/configs/defconfig              |  1 +
+ arch/x86/Kconfig                          | 26 ++++++++++++++++++++++-
+ arch/x86/configs/x86_64_defconfig         |  1 +
+ kernel/crash_core.c                       | 20 +++++++++++++++--
+ 6 files changed, 75 insertions(+), 4 deletions(-)
 
- Documentation/hwmon/index.rst  |  1 +
- Documentation/hwmon/max127.rst | 45 ++++++++++++++++++++++++++++++++++
- 2 files changed, 46 insertions(+)
- create mode 100644 Documentation/hwmon/max127.rst
-
-diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
-index 408760d13813..0a07b6000c20 100644
---- a/Documentation/hwmon/index.rst
-+++ b/Documentation/hwmon/index.rst
-@@ -111,6 +111,7 @@ Hardware Monitoring Kernel Drivers
-    ltc4245
-    ltc4260
-    ltc4261
-+   max127
-    max16064
-    max16065
-    max1619
-diff --git a/Documentation/hwmon/max127.rst b/Documentation/hwmon/max127.rst
-new file mode 100644
-index 000000000000..dc192dd9c37c
---- /dev/null
-+++ b/Documentation/hwmon/max127.rst
-@@ -0,0 +1,45 @@
-+.. SPDX-License-Identifier: GPL-2.0-or-later
+diff --git a/Documentation/admin-guide/kdump/kdump.rst b/Documentation/admin-guide/kdump/kdump.rst
+index 75a9dd98e76e..f95a2af64f59 100644
+--- a/Documentation/admin-guide/kdump/kdump.rst
++++ b/Documentation/admin-guide/kdump/kdump.rst
+@@ -285,7 +285,12 @@ This would mean:
+     2) if the RAM size is between 512M and 2G (exclusive), then reserve 64M
+     3) if the RAM size is larger than 2G, then reserve 128M
+ 
++Or you can use crashkernel=auto if you have enough memory. The threshold
++is 1G on x86_64 and arm64. If your system memory is less than the threshold,
++crashkernel=auto will not reserve memory. The size changes according to
++the system memory size like below:
+ 
++    x86_64/arm64: 1G-64G:128M,64G-1T:256M,1T-:512M
+ 
+ Boot into System Kernel
+ =======================
+diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
+index 1515f6f153a0..d359dcffa80e 100644
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -1124,7 +1124,7 @@ comment "Support for PE file signature verification disabled"
+ 	depends on KEXEC_SIG
+ 	depends on !EFI || !SIGNED_PE_FILE_VERIFICATION
+ 
+-config CRASH_DUMP
++menuconfig CRASH_DUMP
+ 	bool "Build kdump crash kernel"
+ 	help
+ 	  Generate crash dump after being started by kexec. This should
+@@ -1135,6 +1135,30 @@ config CRASH_DUMP
+ 
+ 	  For more details see Documentation/admin-guide/kdump/kdump.rst
+ 
++if CRASH_DUMP
 +
-+Kernel driver max127
-+====================
++config CRASH_AUTO_STR
++        string "Memory reserved for crash kernel"
++	depends on CRASH_DUMP
++        default "1G-64G:128M,64G-1T:256M,1T-:512M"
++	help
++	  This configures the reserved memory dependent
++	  on the value of System RAM. The syntax is:
++	  crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
++	              range=start-[end]
 +
-+Author:
++	  For example:
++	      crashkernel=512M-2G:64M,2G-:128M
 +
-+  * Tao Ren <rentao.bupt@gmail.com>
++	  This would mean:
 +
-+Supported chips:
++	      1) if the RAM is smaller than 512M, then don't reserve anything
++	         (this is the "rescue" case)
++	      2) if the RAM size is between 512M and 2G (exclusive), then reserve 64M
++	      3) if the RAM size is larger than 2G, then reserve 128M
 +
-+  * Maxim MAX127
++endif # CRASH_DUMP
 +
-+    Prefix: 'max127'
+ config XEN_DOM0
+ 	def_bool y
+ 	depends on XEN
+diff --git a/arch/arm64/configs/defconfig b/arch/arm64/configs/defconfig
+index 5cfe3cf6f2ac..899ef3b6a78f 100644
+--- a/arch/arm64/configs/defconfig
++++ b/arch/arm64/configs/defconfig
+@@ -69,6 +69,7 @@ CONFIG_SECCOMP=y
+ CONFIG_KEXEC=y
+ CONFIG_KEXEC_FILE=y
+ CONFIG_CRASH_DUMP=y
++# CONFIG_CRASH_AUTO_STR is not set
+ CONFIG_XEN=y
+ CONFIG_COMPAT=y
+ CONFIG_RANDOMIZE_BASE=y
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index f6946b81f74a..bacd17312bb1 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -2035,7 +2035,7 @@ config KEXEC_BZIMAGE_VERIFY_SIG
+ 	help
+ 	  Enable bzImage signature verification support.
+ 
+-config CRASH_DUMP
++menuconfig CRASH_DUMP
+ 	bool "kernel crash dumps"
+ 	depends on X86_64 || (X86_32 && HIGHMEM)
+ 	help
+@@ -2049,6 +2049,30 @@ config CRASH_DUMP
+ 	  (CONFIG_RELOCATABLE=y).
+ 	  For more details see Documentation/admin-guide/kdump/kdump.rst
+ 
++if CRASH_DUMP
 +
-+    Datasheet: https://datasheets.maximintegrated.com/en/ds/MAX127-MAX128.pdf
++config CRASH_AUTO_STR
++        string "Memory reserved for crash kernel" if X86_64
++	depends on CRASH_DUMP
++        default "1G-64G:128M,64G-1T:256M,1T-:512M"
++	help
++	  This configures the reserved memory dependent
++	  on the value of System RAM. The syntax is:
++	  crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
++	              range=start-[end]
 +
-+Description
-+-----------
++	  For example:
++	      crashkernel=512M-2G:64M,2G-:128M
 +
-+The MAX127 is a multirange, 12-bit data acquisition system (DAS) providing
-+8 analog input channels that are independently software programmable for
-+a variety of ranges. The available ranges are {0,5V}, {0,10V}, {-5,5V}
-+and {-10,10V}.
++	  This would mean:
 +
-+The MAX127 features a 2-wire, I2C-compatible serial interface that allows
-+communication among multiple devices using SDA and SCL lines.
++	      1) if the RAM is smaller than 512M, then don't reserve anything
++	         (this is the "rescue" case)
++	      2) if the RAM size is between 512M and 2G (exclusive), then reserve 64M
++	      3) if the RAM size is larger than 2G, then reserve 128M
 +
-+Sysfs interface
-+---------------
++endif # CRASH_DUMP
 +
-+  ============== ==============================================================
-+  in[0-7]_input  The input voltage (in mV) of the corresponding channel.
-+		 RO
+ config KEXEC_JUMP
+ 	bool "kexec jump"
+ 	depends on KEXEC && HIBERNATION
+diff --git a/arch/x86/configs/x86_64_defconfig b/arch/x86/configs/x86_64_defconfig
+index 9936528e1939..7a87fbecf40b 100644
+--- a/arch/x86/configs/x86_64_defconfig
++++ b/arch/x86/configs/x86_64_defconfig
+@@ -33,6 +33,7 @@ CONFIG_EFI_MIXED=y
+ CONFIG_HZ_1000=y
+ CONFIG_KEXEC=y
+ CONFIG_CRASH_DUMP=y
++# CONFIG_CRASH_AUTO_STR is not set
+ CONFIG_HIBERNATION=y
+ CONFIG_PM_DEBUG=y
+ CONFIG_PM_TRACE_RTC=y
+diff --git a/kernel/crash_core.c b/kernel/crash_core.c
+index 106e4500fd53..a44cd9cc12c4 100644
+--- a/kernel/crash_core.c
++++ b/kernel/crash_core.c
+@@ -7,6 +7,7 @@
+ #include <linux/crash_core.h>
+ #include <linux/utsname.h>
+ #include <linux/vmalloc.h>
++#include <linux/kexec.h>
+ 
+ #include <asm/page.h>
+ #include <asm/sections.h>
+@@ -41,6 +42,15 @@ static int __init parse_crashkernel_mem(char *cmdline,
+ 					unsigned long long *crash_base)
+ {
+ 	char *cur = cmdline, *tmp;
++	unsigned long long total_mem = system_ram;
 +
-+  in[0-7]_min    The lower input limit (in mV) for the corresponding channel.
-+		 ADC range and LSB will be updated when the limit is changed.
-+		 For the MAX127, it will be adjusted to -10000, -5000, or 0.
-+		 RW
-+
-+  in[0-7]_max    The higher input limit (in mV) for the corresponding channel.
-+		 ADC range and LSB will be updated when the limit is changed.
-+		 For the MAX127, it will be adjusted to 0, 5000, or 10000.
-+		 RW
-+  ============== ==============================================================
++	/*
++	 * Firmware sometimes reserves some memory regions for it's own use.
++	 * so we get less than actual system memory size.
++	 * Workaround this by round up the total size to 128M which is
++	 * enough for most test cases.
++	 */
++	total_mem = roundup(total_mem, SZ_128M);
+ 
+ 	/* for each entry of the comma-separated list */
+ 	do {
+@@ -85,13 +95,13 @@ static int __init parse_crashkernel_mem(char *cmdline,
+ 			return -EINVAL;
+ 		}
+ 		cur = tmp;
+-		if (size >= system_ram) {
++		if (size >= total_mem) {
+ 			pr_warn("crashkernel: invalid size\n");
+ 			return -EINVAL;
+ 		}
+ 
+ 		/* match ? */
+-		if (system_ram >= start && system_ram < end) {
++		if (total_mem >= start && total_mem < end) {
+ 			*crash_size = size;
+ 			break;
+ 		}
+@@ -250,6 +260,12 @@ static int __init __parse_crashkernel(char *cmdline,
+ 	if (suffix)
+ 		return parse_crashkernel_suffix(ck_cmdline, crash_size,
+ 				suffix);
++#ifdef CONFIG_CRASH_AUTO_STR
++	if (strncmp(ck_cmdline, "auto", 4) == 0) {
++		ck_cmdline = CONFIG_CRASH_AUTO_STR;
++		pr_info("Using crashkernel=auto, the size chosen is a best effort estimation.\n");
++	}
++#endif
+ 	/*
+ 	 * if the commandline contains a ':', then that's the extended
+ 	 * syntax -- if not, it must be the classic syntax
 -- 
-2.17.1
+2.18.4
 
