@@ -2,21 +2,24 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6F6B62B85B6
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Nov 2020 21:38:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EDDF62B85C6
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Nov 2020 21:39:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726775AbgKRUhG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Nov 2020 15:37:06 -0500
-Received: from ms.lwn.net ([45.79.88.28]:46502 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725710AbgKRUhG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 18 Nov 2020 15:37:06 -0500
+        id S1727290AbgKRUiq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Nov 2020 15:38:46 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39936 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725794AbgKRUip (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Nov 2020 15:38:45 -0500
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DAAE1C0613D4;
+        Wed, 18 Nov 2020 12:38:45 -0800 (PST)
 Received: from lwn.net (localhost [127.0.0.1])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id D816B1F5B;
-        Wed, 18 Nov 2020 20:37:05 +0000 (UTC)
-Date:   Wed, 18 Nov 2020 13:37:04 -0700
+        by ms.lwn.net (Postfix) with ESMTPSA id 819002EF;
+        Wed, 18 Nov 2020 20:38:45 +0000 (UTC)
+Date:   Wed, 18 Nov 2020 13:38:44 -0700
 From:   Jonathan Corbet <corbet@lwn.net>
 To:     "=?UTF-8?B?TsOtY29sYXM=?= F. R. A. Prado" <nfraprado@protonmail.com>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
@@ -24,9 +27,11 @@ Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         lkcamp@lists.libreplanetbr.org, andrealmeid@collabora.com
 Subject: Re: [PATCH v2] docs: automarkup.py: Allow automatic cross-reference
  inside C namespace
-Message-ID: <20201118133704.43977072@lwn.net>
-In-Reply-To: <20201117021107.214704-1-nfraprado@protonmail.com>
+Message-ID: <20201118133844.388d2c2f@lwn.net>
+In-Reply-To: <C75JFDOJJFBC.1FPM3DRBNPIKC@ArchWay>
 References: <20201117021107.214704-1-nfraprado@protonmail.com>
+        <20201117064759.0c03e7cf@coco.lan>
+        <C75JFDOJJFBC.1FPM3DRBNPIKC@ArchWay>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
@@ -35,37 +40,28 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 17 Nov 2020 02:12:01 +0000
+On Tue, 17 Nov 2020 12:30:13 +0000
 Nícolas F. R. A. Prado <nfraprado@protonmail.com> wrote:
 
-> Sphinx 3.1 introduced namespaces for C cross-references. With this,
-> each C domain type/function declaration is put inside the namespace that
-> was active at the time of its declaration.
+> > Hmm... do we still need to skip syscalls?  
 > 
-> Add support for automatic cross-referencing inside C namespaces by
-> checking whether the corresponding source file had a C namespace Sphinx
-> directive, and if so, try cross-referencing inside of it before going to
-> the global scope.
+> Yeah, I see what you mean. Since you moved the syscalls in the docs inside
+> namespaces, there shouldn't be any syscall definitions in the global scope
+> anymore and therefore we don't need to skip them any longer.
 > 
-> This assumes there's only one namespace (if any) per rst file.
+> I tried it out here and indeed it works fine without skipping them.
 > 
-> Signed-off-by: Nícolas F. R. A. Prado <nfraprado@protonmail.com>
-> ---
+> But I wonder if it would be a good safety measure to leave it there anyway. We
+> never want to cross-reference to syscalls in the global scope, so if we continue
+> doing that skip, even if someone accidentally adds a syscall definition outside
+> a c:namespace, this will prevent cross-references to it anyway.
 > 
-> To those following from v1:
-> 
-> I ended up doing the simplest solution possible, which is to just directly read
-> the rst source corresponding to the doc page right before doing the automarkup.
-> It's not very efficient in the sense that the source is being read
-> twice (first by Sphinx, then by this), but it sidesteps the "data sharing
-> between processes" issue, so parallel_read_safe can be reenabled, and I didn't
-> notice any performance hit from this patch (as opposed to the big hit from v1).
-> Works with both Sphinx 2 and 3.
+> What do you think?
 
-The solution does lack elegance, but it is a solution, which is more than
-we had before :)  That said, rather than re-opening and re-reading the
-file, why not just connect to the source-read event, which will happily
-hand you the document source that it has already read?
+I put the original skip logic in there to keep it from even trying to
+cross-reference common syscall names; I wasn't really even worried about
+false references at that point.  I'd leave the check in unless it's
+actively causing trouble somewhere...
 
 Thanks,
 
