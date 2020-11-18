@@ -2,121 +2,62 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6D8C52B83B3
-	for <lists+linux-doc@lfdr.de>; Wed, 18 Nov 2020 19:20:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A05BB2B8448
+	for <lists+linux-doc@lfdr.de>; Wed, 18 Nov 2020 20:02:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725823AbgKRSTe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 18 Nov 2020 13:19:34 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46454 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725794AbgKRSTd (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 18 Nov 2020 13:19:33 -0500
-Received: from mail-vk1-xa43.google.com (mail-vk1-xa43.google.com [IPv6:2607:f8b0:4864:20::a43])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 94DCAC0613D4
-        for <linux-doc@vger.kernel.org>; Wed, 18 Nov 2020 10:19:33 -0800 (PST)
-Received: by mail-vk1-xa43.google.com with SMTP id o73so701148vka.5
-        for <linux-doc@vger.kernel.org>; Wed, 18 Nov 2020 10:19:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=D55mGSGXRfvyjgWecq0UWIiQZUYLLo9SfJxfFnsVwX0=;
-        b=ErPSVbRWN4hCYHPta43SG0tQfc8GbD9XwNGCZ84wZ89hCbRcr+4cpS35TTs7wnqt29
-         iRWrq3VHnGGoCXDNE77n1xMtQ9sDoH9WZ9xlaqm39OSnAzrhBvfY00M+hXzIKCoiRheV
-         sp1yNsh4KKATGxXHsI/0tSOc/CHDQ3BFFBIHyL9690S9qIoeKqcWnRlVCR+A69w+uZtI
-         H0LLcTqqB/iC6e8RbBuFeO2VwmmO39IVBSem+Jqz4+hmjIJExzbtN5BWweQYO7lXtLFH
-         fMhVEsAimzDkOJIaxEASyEMELVArMmkVh1H6wPvN9C7cG9FedZ5yOWFwN03mX0m/quim
-         v7xw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=D55mGSGXRfvyjgWecq0UWIiQZUYLLo9SfJxfFnsVwX0=;
-        b=O4SLgnh86uni8W89jyv9/udwV1krNLW9PCFWmvmM0h/8fOrghMThqUC3ULHh/GrUPY
-         WDMeNEMf52tbXgnR4J7B8EjzWQHhgLpfeDzyAkcrh0WzciXGTj8O4zoBJggW96oqXCXP
-         t/AOQmf2uEhKAA9yGh08HGK4x/5bZCSe0OUyJboiu0FfLGG9t6cGOMz8k6TgEOAnR0ZU
-         p9TjVzH2AhZtTAkAEo8SOb06li6+vkEnu/NmNz26AFosarY7RXW2O7bz0CW6F5XqlaiT
-         Ny3NfCh6qQiTnlsqmzwtjPtD2NC/fnc9vVaL+TZOHAHpWIfvHmZ/lban7FlbANikV/qF
-         br9g==
-X-Gm-Message-State: AOAM531/yB+7xcAmwOE+Z+twsbyXc96DhBFuR5qhF8HSQS+XYoPm7k3t
-        cvmz96m9/Co9DgaFE7vEOm6JgIyvkX213n8YrKFR54m/w00=
-X-Google-Smtp-Source: ABdhPJwXnw351dXb8DF5uqF6PLTQhcxKdHbxqKBCJKl6npj2UFQjIlIx3X8Xi5T9hMImrCGUwMQaSJmw49ngSmPf06w=
-X-Received: by 2002:a1f:cd07:: with SMTP id d7mr4787029vkg.10.1605723571675;
- Wed, 18 Nov 2020 10:19:31 -0800 (PST)
+        id S1727030AbgKRTAg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 18 Nov 2020 14:00:36 -0500
+Received: from mga11.intel.com ([192.55.52.93]:61024 "EHLO mga11.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726098AbgKRTAg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 18 Nov 2020 14:00:36 -0500
+IronPort-SDR: AXDOC3bcNVh8Ma4X1prYkxWrS1Pu6ht2+1KI+E6mEjn1Bp2RCdc3qEQlcGBjLcGmHLxKzmGE5W
+ AfAvdYI0qvhA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9809"; a="167658894"
+X-IronPort-AV: E=Sophos;i="5.77,488,1596524400"; 
+   d="scan'208";a="167658894"
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+  by fmsmga102.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2020 11:00:35 -0800
+IronPort-SDR: FEv+/kqHqNMAyftMD2r+WyrZLv0c6fyI7TslEsMU+4BhYnDCMHJtkI8bxBsSOELJD72/XinFBs
+ Xws55Cb1hjlw==
+X-IronPort-AV: E=Sophos;i="5.77,488,1596524400"; 
+   d="scan'208";a="544665312"
+Received: from rhweight-wrk1.ra.intel.com ([137.102.106.140])
+  by orsmga005-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Nov 2020 11:00:34 -0800
+From:   matthew.gerlach@linux.intel.com
+To:     linux-fpga@vger.kernel.org, linux-kernel@vger.kernel.org,
+        mdf@kernel.org, hao.wu@intel.com, trix@redhat.com,
+        linux-doc@vger.kernel.org, corbet@lwn.net
+Cc:     Matthew Gerlach <matthew.gerlach@linux.intel.com>
+Subject: [PATCH v2 0/2] fpga: dfl: optional VSEC for start of dfl
+Date:   Wed, 18 Nov 2020 11:01:49 -0800
+Message-Id: <20201118190151.365564-1-matthew.gerlach@linux.intel.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-References: <CAHoi7Su9sWetsH4BCYnzx6+9kskFAd9gwvMgUG_e0Mmy9UQOZA@mail.gmail.com>
-In-Reply-To: <CAHoi7Su9sWetsH4BCYnzx6+9kskFAd9gwvMgUG_e0Mmy9UQOZA@mail.gmail.com>
-From:   =?UTF-8?B?0JXQvdGM0YjQuNC9INCQ0L3QtNGA0LXQuQ==?= 
-        <and.enshin@gmail.com>
-Date:   Thu, 19 Nov 2020 03:19:20 +0900
-Message-ID: <CAHoi7StxrQ3E07_Y7M5yj+XdzfmBbsg_h0kzpmO23odj+naJXg@mail.gmail.com>
-Subject: Re: [PATCH] Fix cgroup-v1 doc: /proc/<pid>/cgroup instead of /proc/<pid>/cgroups
-To:     linux-doc@vger.kernel.org
-Cc:     trivial@kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Signed-off-by: Enshin Andrei <b1os@bk.ru>
+From: Matthew Gerlach <matthew.gerlach@linux.intel.com>
 
----
- Documentation/admin-guide/cgroup-v1/cgroups.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+The start of a Device Feature List (DFL) is currently assumed to be at
+Bar0/Offset 0 on the PCIe bus by drivers/fpga/dfl-pci.c.  This patchset
+adds support for the start one or more DFLs to be specified in a
+Vendor-Specific Capability (VSEC) structure in PCIe config space.  If no
+such VSEC structure exists, then the start is assumed to be
+Bar0/Offset 0 for backward compatibility.
 
-diff --git a/Documentation/admin-guide/cgroup-v1/cgroups.rst
-b/Documentation/admin-guide/cgroup-v1/cgroups.rst
-index b068801..9544370 100644
---- a/Documentation/admin-guide/cgroup-v1/cgroups.rst
-+++ b/Documentation/admin-guide/cgroup-v1/cgroups.rst
-@@ -485,7 +485,7 @@ subsystems when none are explicitly specified is
-not supported when
- you give a subsystem a name.
+Matthew Gerlach (2):
+  fpga: dfl: refactor cci_enumerate_feature_devs()
+  fpga: dfl: look for vendor specific capability
 
- The name of the subsystem appears as part of the hierarchy description
--in /proc/mounts and /proc/<pid>/cgroups.
-+in /proc/mounts and /proc/<pid>/cgroup.
+ Documentation/fpga/dfl.rst |  13 +++
+ drivers/fpga/dfl-pci.c     | 163 +++++++++++++++++++++++++++++--------
+ 2 files changed, 141 insertions(+), 35 deletions(-)
 
+-- 
+2.25.2
 
- 3. Kernel API
---=20
-2.7.4
-
-=D0=B2=D1=82, 17 =D0=BD=D0=BE=D1=8F=D0=B1. 2020 =D0=B3. =D0=B2 01:30, =D0=
-=95=D0=BD=D1=8C=D1=88=D0=B8=D0=BD =D0=90=D0=BD=D0=B4=D1=80=D0=B5=D0=B9 <and=
-.enshin@gmail.com>:
->
-> ---
->  Documentation/admin-guide/cgroup-v1/cgroups.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/Documentation/admin-guide/cgroup-v1/cgroups.rst
-> b/Documentation/admin-guide/cgroup-v1/cgroups.rst
-> index b068801..9544370 100644
-> --- a/Documentation/admin-guide/cgroup-v1/cgroups.rst
-> +++ b/Documentation/admin-guide/cgroup-v1/cgroups.rst
-> @@ -485,7 +485,7 @@ subsystems when none are explicitly specified is
-> not supported when
->  you give a subsystem a name.
->
->  The name of the subsystem appears as part of the hierarchy description
-> -in /proc/mounts and /proc/<pid>/cgroups.
-> +in /proc/mounts and /proc/<pid>/cgroup.
->
->
->  3. Kernel API
-> --
-> 2.7.4
->
->
-> --
-> Best Regards,
-> Andrei Enshin
-
-
-
---=20
-
-Best Regards,
-Andrei Enshin
