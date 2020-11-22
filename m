@@ -2,68 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BAB5B2BC858
-	for <lists+linux-doc@lfdr.de>; Sun, 22 Nov 2020 20:01:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 13ADF2BC9B0
+	for <lists+linux-doc@lfdr.de>; Sun, 22 Nov 2020 22:50:04 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727972AbgKVTBI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 22 Nov 2020 14:01:08 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36182 "EHLO
+        id S1726455AbgKVVsi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 22 Nov 2020 16:48:38 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33522 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727888AbgKVTBI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 22 Nov 2020 14:01:08 -0500
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 34539C0613CF;
-        Sun, 22 Nov 2020 11:01:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=fGB9UccTdY0+D9VrR+d9ZW2mq8OJlKvYmZDecnPFxFs=; b=AbOOghMsKGuO/MimYt9TzwXc4y
-        D23Vjq5RKRH7z0hC2d0YiVo4+BtOyeafryfipLTaUSInSm0xQpwA+pupmeVKDRHWf2qAnx91ujj5B
-        V7QZBceXHD6YFltefPvOlHokjWTpFNz/n3LHoCAprVzHCcL7m6ZoNEddAfsSYodQ6D+B3PUAnBO2e
-        WAhzAxVjN8yWBek4xAdssdfNAhpIswRu7waHRguasAtXt8sp0DlYZmbpfCv67aOrd51KtCrCja35v
-        RIdncxCIelYPqPGJ450JC3Zpnm3AO6Xoh7FCo5ikHh9guWBFbGvz7t79sGBVgSLe95XxBPlQlYOpG
-        OL4wnXLg==;
-Received: from willy by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kguag-0005a7-KD; Sun, 22 Nov 2020 19:00:02 +0000
-Date:   Sun, 22 Nov 2020 19:00:02 +0000
-From:   Matthew Wilcox <willy@infradead.org>
-To:     Michal Hocko <mhocko@suse.com>
-Cc:     Muchun Song <songmuchun@bytedance.com>, corbet@lwn.net,
-        mike.kravetz@oracle.com, tglx@linutronix.de, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
-        viro@zeniv.linux.org.uk, akpm@linux-foundation.org,
-        paulmck@kernel.org, mchehab+huawei@kernel.org,
-        pawan.kumar.gupta@linux.intel.com, rdunlap@infradead.org,
-        oneukum@suse.com, anshuman.khandual@arm.com, jroedel@suse.de,
-        almasrymina@google.com, rientjes@google.com, osalvador@suse.de,
-        song.bao.hua@hisilicon.com, duanxiongchun@bytedance.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v5 21/21] mm/hugetlb: Disable freeing vmemmap if struct
- page size is not power of two
-Message-ID: <20201122190002.GH4327@casper.infradead.org>
-References: <20201120064325.34492-1-songmuchun@bytedance.com>
- <20201120064325.34492-22-songmuchun@bytedance.com>
- <20201120082552.GI3200@dhcp22.suse.cz>
+        with ESMTP id S1726339AbgKVVsi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 22 Nov 2020 16:48:38 -0500
+Received: from mail-ej1-x644.google.com (mail-ej1-x644.google.com [IPv6:2a00:1450:4864:20::644])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id AC0A3C0613CF;
+        Sun, 22 Nov 2020 13:48:36 -0800 (PST)
+Received: by mail-ej1-x644.google.com with SMTP id bo9so14839773ejb.13;
+        Sun, 22 Nov 2020 13:48:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=message-id:sender:from:mime-version:content-transfer-encoding
+         :content-description:subject:to:date:reply-to;
+        bh=holMzMixu6L4mPkY4KLX0AXrH3B7KLU6Q1+gVZ1hbDo=;
+        b=t0S/vT9L9FF4d1YFtCsWYjxSw0xf47naPDdNX14xCW/qYskBJMN/iB74gamSxvzTPH
+         qAGhijtuxckW+2ufGGBlPid+Hko8QqObMio3wQhUzE5+ns4fLer0VOckq0lLxVZazDs1
+         Dx1S2+KJN7bAv9+wL/IKlp4r5+wyw45MB4Lz4dbd78VT3YuZwmhLJ/F7+IxCz+VvoxEG
+         Sd1ZDvfra4ktFlXZ3J9iQ0qkqYmloWG2qdF06YvBhHg6T1eGiP7ywu6PnktGwTxNAi/k
+         u4evHeu9oNeC8FUkTxoI4JIsbNFFuz+ZgegcC4D7yZoueATEL4eVtCPOWImyNAo46+kX
+         3Xxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:message-id:sender:from:mime-version
+         :content-transfer-encoding:content-description:subject:to:date
+         :reply-to;
+        bh=holMzMixu6L4mPkY4KLX0AXrH3B7KLU6Q1+gVZ1hbDo=;
+        b=ed3lMU6B1hIycO/KgO9a6YEopsawXS+qDYKl+QJwBWi28x7Fux+z+ncnTCuOIB8FFU
+         SaLEbkXyHhIW+aZUjfHY6u7pH6FK42hjDaDHZAl+rL7P16jl2KefnlWyjx7AnFy46sak
+         nTBZfb++OYHC3Pfh5bwhCuc+OQgS+rXz5DNJUod9X48oQqPFRWhlzgIehlrr2r+vy3VN
+         TOfm3FNLfoh8vty2V1IH8iJeOeJDlJaYrxm0smfoajCPfMOBGZc2AR9AVKU6Iqyz+UwY
+         cSF7q4OyU5XXI5BghyC+FEwCnOuzbWgmu4O1nSoQb7ows4wnpeYLmzF8xwsaTWAQ5NC1
+         qaLw==
+X-Gm-Message-State: AOAM53185yS9mxe0wR667YNhmy68NEplRNDYXJpbM0TgdcRvDY2hHEN5
+        0eOMCJN3MVARQOPoWffGouiYNyahtzA=
+X-Google-Smtp-Source: ABdhPJw4ZAYt6qax8ib9kZgsGDFKmN6rtlg4PntCWcD3Nne5uHX3KVSIlRBk3UO6MiyzqZuIeFBBsw==
+X-Received: by 2002:a17:906:b0f:: with SMTP id u15mr41698052ejg.109.1606081715461;
+        Sun, 22 Nov 2020 13:48:35 -0800 (PST)
+Received: from [192.168.43.48] ([197.210.35.67])
+        by smtp.gmail.com with ESMTPSA id e17sm4016232edc.45.2020.11.22.13.48.29
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Sun, 22 Nov 2020 13:48:34 -0800 (PST)
+Message-ID: <5fbadcb2.1c69fb81.8dfc7.11ab@mx.google.com>
+Sender: Baniko Diallo <banidiallo23@gmail.com>
+From:   Adelina Zeuki <adelinazeuki@gmail.com>
+X-Google-Original-From: "Adelina Zeuki" <  adelinazeuki@gmail.comm >
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20201120082552.GI3200@dhcp22.suse.cz>
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Hello !!
+To:     Recipients <adelinazeuki@gmail.comm>
+Date:   Sun, 22 Nov 2020 21:48:22 +0000
+Reply-To: adelinazeuki@gmail.com
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Nov 20, 2020 at 09:25:52AM +0100, Michal Hocko wrote:
-> On Fri 20-11-20 14:43:25, Muchun Song wrote:
-> > We only can free the unused vmemmap to the buddy system when the
-> > size of struct page is a power of two.
-> 
-> Can we actually have !power_of_2 struct pages?
+Hi dear,
 
-Yes.  On x86-64, if you don't enable MEMCG, it's 56 bytes.  On SPARC64,
-if you do enable MEMCG, it's 72 bytes.  On 32-bit systems, it's
-anything from 32-44 bytes, depending on MEMCG, WANT_PAGE_VIRTUAL and
-LAST_CPUPID_NOT_IN_PAGE_FLAGS.
-
+Can i talk with you ?
