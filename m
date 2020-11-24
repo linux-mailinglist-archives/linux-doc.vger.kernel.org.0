@@ -2,46 +2,46 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C0F222C2B84
-	for <lists+linux-doc@lfdr.de>; Tue, 24 Nov 2020 16:39:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0ED8E2C2B92
+	for <lists+linux-doc@lfdr.de>; Tue, 24 Nov 2020 16:39:16 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389818AbgKXPiv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 24 Nov 2020 10:38:51 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53988 "EHLO
+        id S2389601AbgKXPjF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 24 Nov 2020 10:39:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53992 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2389810AbgKXPiv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 24 Nov 2020 10:38:51 -0500
-Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C1F1AC061A4F
-        for <linux-doc@vger.kernel.org>; Tue, 24 Nov 2020 07:38:49 -0800 (PST)
-Received: by mail-wr1-x443.google.com with SMTP id 23so22738011wrc.8
-        for <linux-doc@vger.kernel.org>; Tue, 24 Nov 2020 07:38:49 -0800 (PST)
+        with ESMTP id S2389805AbgKXPiu (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 24 Nov 2020 10:38:50 -0500
+Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com [IPv6:2a00:1450:4864:20::442])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 735E0C0617A6
+        for <linux-doc@vger.kernel.org>; Tue, 24 Nov 2020 07:38:50 -0800 (PST)
+Received: by mail-wr1-x442.google.com with SMTP id 23so22738066wrc.8
+        for <linux-doc@vger.kernel.org>; Tue, 24 Nov 2020 07:38:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=nhjzpN/I0YbMNWZ/cuMZ/ssTNlecoXIrDpTSY4gcP5k=;
-        b=R4iABjEvQuBHvnc+z9r2hhUutog05+6ThoWbUMykt7He8q7/Lm2MAV0kmbeONcOsxN
-         U2G4j4uIxzcbx66W51sw80c9eTxt/OKrFsuZ2UvdrOfTO25Ud9jfdkZp/nNgFi5xd4uI
-         Q/97qiFwUbs+YE8Pkx8HCm4VLRpdrdwGyTIe8=
+        bh=mn1wB4UIIJYCPFpu55sy3LOHzNh5rEWUlXSp9HWhrTs=;
+        b=n2RkEUROrYeufAtCSKDWr3fmq/B5Dj/1/iujvWXNBpKVXM46G14POxuNtrvFGvG4xS
+         65IlJ8mFMtlZ+DEw0CCukK4ngUegaZeo8SVlB1Gy+ncs+XC07IzM0JfpHRFMuhx4DL+q
+         Rc6TA7y3GVyTSBWrC+0pOexy8rwtT88yGy6aM=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=nhjzpN/I0YbMNWZ/cuMZ/ssTNlecoXIrDpTSY4gcP5k=;
-        b=X9b4HE0jXOpOg5j9qOnqObynFDu2NUpJtKGcEUWYjKZu5ZGtTS7vJloP6VVkAcphhv
-         bwvXiX3BNGoKoBBQuSVnOjppN/XDqIrdjzu7bgXnRp8J4jWQOwDKdjWprzjQGRHxuW5F
-         s0MbRK2/oTtDuMSz/KOKTEtFiZw2eZGSzWt+Z5KfKHOaQnr+cSaMrKMXWopm92vrJEQd
-         BZU7uHeQRA09iA5W5VwQoj+5LqSEwLdNhWvixpOD2hlKchj5/RD/v5P3wiTA+r4zV0eq
-         mmMrf/gdl89sgpw0Lf6SYh4WxCoO67BOEcdZ0USCvvKnUrZRQyzevwzuHF6D+emovidb
-         6iDg==
-X-Gm-Message-State: AOAM532aFnd0xe1Nsu+w+ShgRf9M1ovjEh3zAtFV13t6wbUpd6a2h1yB
-        koL5QvdfWGejp4Rg7YaGQ3Z2Ng==
-X-Google-Smtp-Source: ABdhPJyV94IkqLC3tQEI4e07+BimW/uaxT27Q28R/rp8nTUS06m6LEQw8+T51Xjpu9YZ6o8rFd6DgQ==
-X-Received: by 2002:adf:f944:: with SMTP id q4mr5883724wrr.120.1606232328515;
-        Tue, 24 Nov 2020 07:38:48 -0800 (PST)
+        bh=mn1wB4UIIJYCPFpu55sy3LOHzNh5rEWUlXSp9HWhrTs=;
+        b=sAkARjvf5MWsDhjufHiij70HQ0cGMjzFjidBeITA/6yP1qw2cYQuV5If3w/yk7cPW0
+         hgcP2r7G8EWzk7kxkjzXhY8zKX3AiObmafHgz7NpyWvdO2vqeyXRwuAG9T+oGLhe+aGn
+         AZdhoH3N77dSCeEnlzjwr9l/xN/nNAyTMHqmdn8zweOlBsg/htMGjf6FHGzjJIvAoJjZ
+         TaiBcyIkNjP825NyvwZ4mQjyTizSMnOcNEAsRh5e0uo8lY9ULHd1jYmDV/xw2ET+5yVx
+         d0UJcYNF+kiFAioLRbwGw0cawCt2lSpHH7kRzmmPqN1L0rU0Ug/yxE4Nvkr6XE7Ay4lY
+         h0aQ==
+X-Gm-Message-State: AOAM53203/GWWaIWohIsGyHtz5CE27qIRVkPNs88Cf308ZJRJ+9oDAs6
+        LtOKw9v1hdEMlctLjBq9gtp/7LOCKB/02OadN3w=
+X-Google-Smtp-Source: ABdhPJzJQS12dAtHSIto+AkUackkC3dZ1AW4aqhTl1qwf4siZheZKe0WXY06YOIImYJlDwLUTKFQtw==
+X-Received: by 2002:adf:e80b:: with SMTP id o11mr5939427wrm.409.1606232329253;
+        Tue, 24 Nov 2020 07:38:49 -0800 (PST)
 Received: from alco.lan ([80.71.134.83])
-        by smtp.gmail.com with ESMTPSA id 25sm5814752wmk.19.2020.11.24.07.38.47
+        by smtp.gmail.com with ESMTPSA id 25sm5814752wmk.19.2020.11.24.07.38.48
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
         Tue, 24 Nov 2020 07:38:48 -0800 (PST)
 From:   Ricardo Ribalda <ribalda@chromium.org>
@@ -56,9 +56,9 @@ To:     Christoph Hellwig <hch@lst.de>,
         Linux Media Mailing List <linux-media@vger.kernel.org>,
         Tomasz Figa <tfiga@chromium.org>,
         Sergey Senozhatsky <senozhatsky@google.com>
-Subject: [PATCH 2/6] dma-direct: use __GFP_ZERO in dma_direct_alloc_pages
-Date:   Tue, 24 Nov 2020 16:38:41 +0100
-Message-Id: <20201124153845.132207-2-ribalda@chromium.org>
+Subject: [PATCH 3/6] dma-iommu: remove __iommu_dma_mmap
+Date:   Tue, 24 Nov 2020 16:38:42 +0100
+Message-Id: <20201124153845.132207-3-ribalda@chromium.org>
 X-Mailer: git-send-email 2.29.2.454.gaff20da3a2-goog
 In-Reply-To: <20201124153845.132207-1-ribalda@chromium.org>
 References: <20201124153845.132207-1-ribalda@chromium.org>
@@ -70,48 +70,49 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: Christoph Hellwig <hch@lst.de>
 
-Prepare for supporting the DMA_ATTR_NO_KERNEL_MAPPING flag in
-dma_alloc_pages.
+The function has a single caller, so open code it there and take
+advantage of the precalculated page count variable.
 
 Signed-off-by: Christoph Hellwig <hch@lst.de>
 ---
- kernel/dma/direct.c | 7 ++-----
- 1 file changed, 2 insertions(+), 5 deletions(-)
+ drivers/iommu/dma-iommu.c | 17 +----------------
+ 1 file changed, 1 insertion(+), 16 deletions(-)
 
-diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
-index 06c111544f61..76c741e610fc 100644
---- a/kernel/dma/direct.c
-+++ b/kernel/dma/direct.c
-@@ -280,13 +280,12 @@ struct page *dma_direct_alloc_pages(struct device *dev, size_t size,
- 		dma_addr_t *dma_handle, enum dma_data_direction dir, gfp_t gfp)
+diff --git a/drivers/iommu/dma-iommu.c b/drivers/iommu/dma-iommu.c
+index 73249732afd3..a2fb92de7e3d 100644
+--- a/drivers/iommu/dma-iommu.c
++++ b/drivers/iommu/dma-iommu.c
+@@ -655,21 +655,6 @@ static void *iommu_dma_alloc_remap(struct device *dev, size_t size,
+ 	return NULL;
+ }
+ 
+-/**
+- * __iommu_dma_mmap - Map a buffer into provided user VMA
+- * @pages: Array representing buffer from __iommu_dma_alloc()
+- * @size: Size of buffer in bytes
+- * @vma: VMA describing requested userspace mapping
+- *
+- * Maps the pages of the buffer in @pages into @vma. The caller is responsible
+- * for verifying the correct size and protection of @vma beforehand.
+- */
+-static int __iommu_dma_mmap(struct page **pages, size_t size,
+-		struct vm_area_struct *vma)
+-{
+-	return vm_map_pages(vma, pages, PAGE_ALIGN(size) >> PAGE_SHIFT);
+-}
+-
+ static void iommu_dma_sync_single_for_cpu(struct device *dev,
+ 		dma_addr_t dma_handle, size_t size, enum dma_data_direction dir)
  {
- 	struct page *page;
--	void *ret;
+@@ -1074,7 +1059,7 @@ static int iommu_dma_mmap(struct device *dev, struct vm_area_struct *vma,
+ 		struct page **pages = dma_common_find_pages(cpu_addr);
  
- 	if (IS_ENABLED(CONFIG_DMA_COHERENT_POOL) &&
- 	    force_dma_unencrypted(dev) && !gfpflags_allow_blocking(gfp))
- 		return dma_direct_alloc_from_pool(dev, size, dma_handle, gfp);
- 
--	page = __dma_direct_alloc_pages(dev, size, gfp);
-+	page = __dma_direct_alloc_pages(dev, size, gfp | __GFP_ZERO);
- 	if (!page)
- 		return NULL;
- 	if (PageHighMem(page)) {
-@@ -300,13 +299,11 @@ struct page *dma_direct_alloc_pages(struct device *dev, size_t size,
- 		goto out_free_pages;
- 	}
- 
--	ret = page_address(page);
- 	if (force_dma_unencrypted(dev)) {
--		if (set_memory_decrypted((unsigned long)ret,
-+		if (set_memory_decrypted((unsigned long) page_address(page),
- 				1 << get_order(size)))
- 			goto out_free_pages;
- 	}
--	memset(ret, 0, size);
- 	*dma_handle = phys_to_dma_direct(dev, page_to_phys(page));
- 	return page;
- out_free_pages:
+ 		if (pages)
+-			return __iommu_dma_mmap(pages, size, vma);
++			return vm_map_pages(vma, pages, nr_pages);
+ 		pfn = vmalloc_to_pfn(cpu_addr);
+ 	} else {
+ 		pfn = page_to_pfn(virt_to_page(cpu_addr));
 -- 
 2.29.2.454.gaff20da3a2-goog
 
