@@ -2,165 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 99B9B2C4758
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Nov 2020 19:16:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8746F2C4793
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Nov 2020 19:27:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730646AbgKYSOy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 25 Nov 2020 13:14:54 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46872 "EHLO
+        id S1732785AbgKYS01 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 25 Nov 2020 13:26:27 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48672 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730643AbgKYSOy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Nov 2020 13:14:54 -0500
-Received: from mail-io1-xd42.google.com (mail-io1-xd42.google.com [IPv6:2607:f8b0:4864:20::d42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CE93AC0613D4;
-        Wed, 25 Nov 2020 10:14:53 -0800 (PST)
-Received: by mail-io1-xd42.google.com with SMTP id m13so3040895ioq.9;
-        Wed, 25 Nov 2020 10:14:53 -0800 (PST)
+        with ESMTP id S1726039AbgKYS01 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Nov 2020 13:26:27 -0500
+Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com [IPv6:2a00:1450:4864:20::330])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07409C0613D4;
+        Wed, 25 Nov 2020 10:26:27 -0800 (PST)
+Received: by mail-wm1-x330.google.com with SMTP id h21so3046534wmb.2;
+        Wed, 25 Nov 2020 10:26:26 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=NIpG45UWwddpGV+62KwVJM4R9vkmQaVM+kUHYytsuOk=;
-        b=kWV6G2yZXMm4VSHbnojYmPa+C5P3JnpUTHqE23CMhNkQBQWRzmmhqOLBUtQv2atXCT
-         gfx8m7eCmFJ7pVlsuccPiH6QWEPUd8AOsN93MuFELIyPMSRf5jsCMU0WOq//RI0OE3v8
-         Xcdy8XkXYHOwwkywVeuV38sTpPsttpVy3JvqUPqjjnzwH11K8V/hcwvS5Z9IHaMrKIUK
-         5aPycy8OBpj2x7nvopzyosAyOu5TyhaWlUYzEp+8JqfTnIOXSNZZFCbA0rFGLuslWfdY
-         0h9j9VHpYmDhGDt0sVob662k93U0Re/54lGaFjmxi8C+L9fpuTq3YUdx9b9EMjfmYlAP
-         xBkg==
+        h=message-id:from:mime-version:content-transfer-encoding
+         :content-description:subject:to:date:reply-to;
+        bh=MT4M9SX2NqdNuOObXhIV8Gtkw+yoDX+gRyJnh+feBwM=;
+        b=j4Fgz3vVA8YcL6dMTe34P8L3Tl8ejKqebPpLyFA+aVdWxAT7IVubsHPYHdOXh8+tIc
+         3nJUNpFv5mEGig8PvtxZ5hJlG6bZY26IMhv6Hp2KPMew6cqhMYcPohaosshoBPR3djC1
+         yK4xgf8SvehQt+CRFqnL+gDB1thXJhdKDhG4vkDwCcXYhmps/Y/OPieETKAvblizCJ9e
+         Lt/q5hg2ZwwS/+7N4GuXBSirzs5RaAJe8GWOe4gvyZqgCBLuVFcpNALdO7Y3dM06+U+y
+         ofAxbLik0ZTBstArGV2BEnPsG0/ltPlmBCdira5Hg1LoZy+HRDFriAa2J2TPJqzO5QOc
+         xTUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=NIpG45UWwddpGV+62KwVJM4R9vkmQaVM+kUHYytsuOk=;
-        b=eGNs1ZBLBayuVA4HFTYdwRRp2B6JX5sBFZu9gdbQXp7ZkUya3FzV3rNyLsIaXdh2fl
-         1hQVdNaU/cI4mn4GB6XdOTFgRjLyBuUNfVBU2Z3gWB7RYJm69S8+NnaWho44nF792gC0
-         m9/tuZkaVbKSINvAVLeZLKT1105l/4jdMX2EaRAHu2NQUWMkZiJUZ2p7NZJW7RN0SWjd
-         5g/5eUxANUESc3xvKVXaQDvpAGH66XBCSRsdWnA2DeB/mEBI//RsTVYavGsCHo9s6O58
-         TtbjsxqiahEdB+eL3UWU6sF1XuHw5r6SL2FNZgNfVIHPIzvePpZQ1RHKLz8pDGjqmEfC
-         N8uA==
-X-Gm-Message-State: AOAM531jHlFCHk4UC5pcbvGttDLYkCbgoo6zlgxUMds69xaYUmoWI5hh
-        vvs65c/j52dhKSxTH0IKtPfC/znq5UeUzz7EIkQ=
-X-Google-Smtp-Source: ABdhPJy4bdnOlLLsyDMAPulYW5mY6232Uy6n2lvrULm8bBlPIp8KqHJcFEF94nx0UycVv+ODFkxSMwE58yByCsD5otA=
-X-Received: by 2002:a5e:a815:: with SMTP id c21mr2793016ioa.141.1606328093153;
- Wed, 25 Nov 2020 10:14:53 -0800 (PST)
+        h=x-gm-message-state:message-id:from:mime-version
+         :content-transfer-encoding:content-description:subject:to:date
+         :reply-to;
+        bh=MT4M9SX2NqdNuOObXhIV8Gtkw+yoDX+gRyJnh+feBwM=;
+        b=bWwb3WazELnpTs1UJGBERpTtZl4QiVywtrCyhyOQIhOCDZ/Sb1rRErW125lkOkFv4U
+         ROawzzGKcCYLqKYG9UaQrRWZxsRWwLvmbXkDaxZLz8vuR+xRK1scFdmcHu767oNir53T
+         nLg2gjUSasEjVhT7vvEczvPV4B5HzrodRn+bSASU1QP1cdinWeX89FrsIIEZHeBq8Hzu
+         azP+0/UZNxrZz32ozIyFWwJ7NLh2F4zTUI/k7mqjc59+WknGfEcmiLCuQd9sEvF3GLIX
+         cT2AAYJn47h87ULAry9I4vmrcYDN5H0AdgANv0J9rCmppNjH/yLqS6fnwOTja/6w2KgO
+         Bt/A==
+X-Gm-Message-State: AOAM5336HTrX93Tl8sFRTAbMYaX37c3XHxq2HvSrPMrOFpv8TISt9VfH
+        I6b54jp94pziExeT/XyxJl0=
+X-Google-Smtp-Source: ABdhPJxJy4GLgyg00QZCRZaqDqZhTgoRrCi1zvJnwWzLbD+E9AO8p9xLW2m37Yat6y9Bu2UvdY5KbQ==
+X-Received: by 2002:a05:600c:ce:: with SMTP id u14mr5485544wmm.150.1606328785796;
+        Wed, 25 Nov 2020 10:26:25 -0800 (PST)
+Received: from [192.168.1.152] ([102.64.149.89])
+        by smtp.gmail.com with ESMTPSA id x13sm5329634wmj.48.2020.11.25.10.26.19
+        (version=TLS1 cipher=AES128-SHA bits=128/128);
+        Wed, 25 Nov 2020 10:26:25 -0800 (PST)
+Message-ID: <5fbea1d1.1c69fb81.8c60.ba3c@mx.google.com>
+From:   "Dailborh R." <risonnah.001@gmail.com>
+X-Google-Original-From: Dailborh R.
+Content-Type: text/plain; charset="iso-8859-1"
 MIME-Version: 1.0
-References: <30b491ad-a7e1-f7b5-26b8-2cfffc81a080@huawei.com> <CAAH8bW_p3LJPgOoJgUHt6O0run+LB2RbjnAVpeLn_KCAZKNR+A@mail.gmail.com>
-In-Reply-To: <CAAH8bW_p3LJPgOoJgUHt6O0run+LB2RbjnAVpeLn_KCAZKNR+A@mail.gmail.com>
-From:   Yury Norov <yury.norov@gmail.com>
-Date:   Wed, 25 Nov 2020 10:14:42 -0800
-Message-ID: <CAAH8bW8Zo1U3oMu5Gggp-MyNNZ8_WieQn+GKYiML93O9sJB=Dg@mail.gmail.com>
-Subject: Re: [Question] About SECCOMP issue for ILP32
-To:     Xiongfeng Wang <wangxiongfeng2@huawei.com>
-Cc:     bobo.shaobowang@huawei.com,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        "linux-arm-kernel@lists.infradead.org" 
-        <linux-arm-kernel@lists.infradead.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-arch@vger.kernel.org" <linux-arch@vger.kernel.org>,
-        "linux-api@vger.kernel.org" <linux-api@vger.kernel.org>,
-        Adam Borowski <kilobyte@angband.pl>,
-        Alexander Graf <agraf@suse.de>,
-        Alexey Klimov <klimov.linux@gmail.com>,
-        Andreas Schwab <schwab@suse.de>,
-        Andrew Pinski <pinskia@gmail.com>,
-        Bamvor Zhangjian <bamv2005@gmail.com>,
-        Chris Metcalf <cmetcalf@mellanox.com>,
-        Christoph Muellner <christoph.muellner@theobroma-systems.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        "David S . Miller" <davem@davemloft.net>,
-        Florian Weimer <fweimer@redhat.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Heiko Carstens <heiko.carstens@de.ibm.com>,
-        James Hogan <james.hogan@imgtec.com>,
-        James Morse <james.morse@arm.com>,
-        Joseph Myers <joseph@codesourcery.com>,
-        Lin Yongting <linyongting@huawei.com>,
-        Manuel Montezelo <manuel.montezelo@gmail.com>,
-        Mark Brown <broonie@kernel.org>,
-        Martin Schwidefsky <schwidefsky@de.ibm.com>,
-        Maxim Kuvyrkov <maxim.kuvyrkov@linaro.org>,
-        Nathan_Lynch <Nathan_Lynch@mentor.com>,
-        Philipp Tomsich <philipp.tomsich@theobroma-systems.com>,
-        Prasun Kapoor <Prasun.Kapoor@caviumnetworks.com>,
-        Ramana Radhakrishnan <ramana.gcc@googlemail.com>,
-        Steve Ellcey <sellcey@caviumnetworks.com>,
-        Szabolcs Nagy <szabolcs.nagy@arm.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: Please reply to me
+To:     Recipients <Dailborh@vger.kernel.org>
+Date:   Wed, 25 Nov 2020 18:26:10 +0000
+Reply-To: dailrrob.83@gmail.com
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Aug 31, 2020 at 11:15 AM Yury Norov <yury.norov@gmail.com> wrote:
->
-> On Mon, Aug 31, 2020 at 5:48 AM Xiongfeng Wang
-> <wangxiongfeng2@huawei.com> wrote:
-> >
-> > Hi Yury,
-> >
->
-> Hi Xiongfeng,
->
-> [restore CC list]
->
-> Haven't seen this before. What kernel / glibc / ltp do you use?
->
-> > We were testing the ILP32 feature and came accross a problem. Very apperaciate
-> > it if you could give us some help !
-> >
-> > We compile the LTP testsuite with '-mabi=ilp32' and run it on a machine with
-> > kernel and glibc applied with ILP32 patches. But we failed on one testcase,
-> > prctl04. It print the following error info.
-> > 'prctl04.c:199: FAIL: SECCOMP_MODE_STRICT doesn't permit read(2) write(2) and
-> > _exit(2)'
-> >
-> > The testcase is like below, syscall 'prctl' followed by a syscall 'write'.
-> > prctl(PR_SET_SECCOMP, SECCOMP_MODE_STRICT);
-> > SAFE_WRITE(1, fd, "a", 1);
-> >
-> > When we execute syscall 'write', we receive a SIGKILL. It's not as expected.
-> > We track the kernel and found out it is because we failed the syscall_whitelist
-> > check in '__secure_computing_strict'. Because flag 'TIF_32BIT_AARCH64' is set,
-> > we falls into the 'in_compat_syscall()' branch. We compare the parameter
-> > 'this_syscall' with return value of 'get_compat_model_syscalls()'
-> > The syscall number of '__NR_write' for ilp32 application is 64, but it is 4 for
-> > 'model_syscalls_32' returned from 'get_compat_model_syscalls()'
-> > So '__secure_computing_strict' retuned with 'do_exit(SIGKILL)'. We have a
-> > modification like below, but I am not sure if it correct or not.
-> >
-> > --- a/kernel/seccomp.c
-> > +++ b/kernel/seccomp.c
-> > @@ -618,7 +618,7 @@ static void __secure_computing_strict(int this_syscall)
-> >  {
-> >         const int *syscall_whitelist = mode1_syscalls;
-> >  #ifdef CONFIG_COMPAT
-> > -       if (in_compat_syscall())
-> > +       if (is_a32_compat_task())
-> >                 syscall_whitelist = get_compat_mode1_syscalls();
->
-> It calls the arch function from generic code. It may break build for
-> other arches.
-> This also looks dangerous because it treats ILP32 execution as non-compat.
->
-> The right approach would be implementing arch-specific
-> get_compat_mode1_syscalls()
-> in arch/arm64/include/asm/seccomp.h that returns an appropriate table.
-> Refer MIPS
-> code for this: arch/mips/include/asm/seccomp.h
->
-> Thanks,
-> Yury
->
-> >  #endif
-> >         do {
-> >
-> >
-> > Thanks,
-> > Xiongfeng
-> >
+I'm Dailborh R. from US. I picked interest in you and I would like to know
+more about you and establish relationship with you. i will wait for
+your response. thank you.
 
-The fix is on my repo; versions 5.2 and 4.19 are updated:
-
-https://github.com/norov/linux/commits/ilp32-4.19
-https://github.com/norov/linux/commits/ilp32-5.2
