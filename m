@@ -2,68 +2,228 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8746F2C4793
-	for <lists+linux-doc@lfdr.de>; Wed, 25 Nov 2020 19:27:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 693402C491B
+	for <lists+linux-doc@lfdr.de>; Wed, 25 Nov 2020 21:31:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732785AbgKYS01 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 25 Nov 2020 13:26:27 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48672 "EHLO
+        id S1729957AbgKYUbY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 25 Nov 2020 15:31:24 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40146 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726039AbgKYS01 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Nov 2020 13:26:27 -0500
-Received: from mail-wm1-x330.google.com (mail-wm1-x330.google.com [IPv6:2a00:1450:4864:20::330])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 07409C0613D4;
-        Wed, 25 Nov 2020 10:26:27 -0800 (PST)
-Received: by mail-wm1-x330.google.com with SMTP id h21so3046534wmb.2;
-        Wed, 25 Nov 2020 10:26:26 -0800 (PST)
+        with ESMTP id S1730016AbgKYUbV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 25 Nov 2020 15:31:21 -0500
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3B5C8C061A4F
+        for <linux-doc@vger.kernel.org>; Wed, 25 Nov 2020 12:31:21 -0800 (PST)
+Received: by mail-wr1-x443.google.com with SMTP id s8so3185097wrw.10
+        for <linux-doc@vger.kernel.org>; Wed, 25 Nov 2020 12:31:21 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=message-id:from:mime-version:content-transfer-encoding
-         :content-description:subject:to:date:reply-to;
-        bh=MT4M9SX2NqdNuOObXhIV8Gtkw+yoDX+gRyJnh+feBwM=;
-        b=j4Fgz3vVA8YcL6dMTe34P8L3Tl8ejKqebPpLyFA+aVdWxAT7IVubsHPYHdOXh8+tIc
-         3nJUNpFv5mEGig8PvtxZ5hJlG6bZY26IMhv6Hp2KPMew6cqhMYcPohaosshoBPR3djC1
-         yK4xgf8SvehQt+CRFqnL+gDB1thXJhdKDhG4vkDwCcXYhmps/Y/OPieETKAvblizCJ9e
-         Lt/q5hg2ZwwS/+7N4GuXBSirzs5RaAJe8GWOe4gvyZqgCBLuVFcpNALdO7Y3dM06+U+y
-         ofAxbLik0ZTBstArGV2BEnPsG0/ltPlmBCdira5Hg1LoZy+HRDFriAa2J2TPJqzO5QOc
-         xTUQ==
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=q710+yuAXMJxe0nd7TtiMj+ZjNL+TkbdcSV2kJANPFc=;
+        b=BIbP6CPisTVorSg5qoPf0+dLgPrcTLlTwlVp8ftZSvaFgDocUfy9W0QG0G5Ods6KYD
+         yNuT+KUHJ3LuzVLi2aruhMW4cOqXa3HmxH07ArrA7Ka9z6jrGkuyP/FM26RjBdMrBi+s
+         P4RXP9NBi6sM7Lf6VlkFS3ouGBO+VOYD2B60o=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:message-id:from:mime-version
-         :content-transfer-encoding:content-description:subject:to:date
-         :reply-to;
-        bh=MT4M9SX2NqdNuOObXhIV8Gtkw+yoDX+gRyJnh+feBwM=;
-        b=bWwb3WazELnpTs1UJGBERpTtZl4QiVywtrCyhyOQIhOCDZ/Sb1rRErW125lkOkFv4U
-         ROawzzGKcCYLqKYG9UaQrRWZxsRWwLvmbXkDaxZLz8vuR+xRK1scFdmcHu767oNir53T
-         nLg2gjUSasEjVhT7vvEczvPV4B5HzrodRn+bSASU1QP1cdinWeX89FrsIIEZHeBq8Hzu
-         azP+0/UZNxrZz32ozIyFWwJ7NLh2F4zTUI/k7mqjc59+WknGfEcmiLCuQd9sEvF3GLIX
-         cT2AAYJn47h87ULAry9I4vmrcYDN5H0AdgANv0J9rCmppNjH/yLqS6fnwOTja/6w2KgO
-         Bt/A==
-X-Gm-Message-State: AOAM5336HTrX93Tl8sFRTAbMYaX37c3XHxq2HvSrPMrOFpv8TISt9VfH
-        I6b54jp94pziExeT/XyxJl0=
-X-Google-Smtp-Source: ABdhPJxJy4GLgyg00QZCRZaqDqZhTgoRrCi1zvJnwWzLbD+E9AO8p9xLW2m37Yat6y9Bu2UvdY5KbQ==
-X-Received: by 2002:a05:600c:ce:: with SMTP id u14mr5485544wmm.150.1606328785796;
-        Wed, 25 Nov 2020 10:26:25 -0800 (PST)
-Received: from [192.168.1.152] ([102.64.149.89])
-        by smtp.gmail.com with ESMTPSA id x13sm5329634wmj.48.2020.11.25.10.26.19
-        (version=TLS1 cipher=AES128-SHA bits=128/128);
-        Wed, 25 Nov 2020 10:26:25 -0800 (PST)
-Message-ID: <5fbea1d1.1c69fb81.8c60.ba3c@mx.google.com>
-From:   "Dailborh R." <risonnah.001@gmail.com>
-X-Google-Original-From: Dailborh R.
-Content-Type: text/plain; charset="iso-8859-1"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=q710+yuAXMJxe0nd7TtiMj+ZjNL+TkbdcSV2kJANPFc=;
+        b=ZxZtRmKVBUGpr7KWfMUPYA/YLFDrYjUVIfPa1BkhLUJSokbaDMy7Ljr4AOPz8g8cys
+         KYnLK9RBTD9TxIZvvxoC9M2Q4EJ863ow57U8c9ij7daQG2EzMXetftQ9mJyJ6lqlSWYI
+         jBPDasLnHX+oeqxhw74fCw+nCNMb3dwHMx5q1Jibb22JyTt0u7ugVK42MHsigKMyOhI8
+         +YVXPwkloNkettuTY+VqmSWNKLvdD5Y3Wy6bgWUqaFGaJOfOFWxIsMEUeDdcXTWb1ZKQ
+         f57SEUGpUUc154WELMakjEleFEx2E22qIVQGggy1agcVElH2JprZpIVjZNipVapteRKc
+         xGYA==
+X-Gm-Message-State: AOAM5328C0f4xZuLlB87CeU0CnQRtSTolyHezVzn+exgwz+y6qfaaobG
+        r5vOu0WonZBsw7QSls0UElCIfw==
+X-Google-Smtp-Source: ABdhPJyaT4T+JFlra8+I0dMKQzQ88jRUsULWXg1Du+OwyPFSmH7nHfduCIkjo/9lH+6AkK7sbuYwqA==
+X-Received: by 2002:adf:fd52:: with SMTP id h18mr6084459wrs.90.1606336279903;
+        Wed, 25 Nov 2020 12:31:19 -0800 (PST)
+Received: from alco.lan ([80.71.134.83])
+        by smtp.gmail.com with ESMTPSA id h83sm4827088wmf.9.2020.11.25.12.31.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 25 Nov 2020 12:31:19 -0800 (PST)
+From:   Ricardo Ribalda <ribalda@chromium.org>
+To:     Robin Murphy <robin.murphy@arm.com>,
+        Christoph Hellwig <hch@lst.de>,
+        auro Carvalho Chehab <mchehab@kernel.org>,
+        Marek Szyprowski <m.szyprowski@samsung.com>,
+        IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
+        Joerg Roedel <joro@8bytes.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Media Mailing List <linux-media@vger.kernel.org>,
+        Tomasz Figa <tfiga@chromium.org>,
+        Sergey Senozhatsky <senozhatsky@google.com>
+Cc:     Ricardo Ribalda <ribalda@chromium.org>
+Subject: [PATCH v2 5/6] media: uvcvideo: Use dma_alloc_noncontiguos API
+Date:   Wed, 25 Nov 2020 21:31:14 +0100
+Message-Id: <20201125203114.130967-1-ribalda@chromium.org>
+X-Mailer: git-send-email 2.29.2.454.gaff20da3a2-goog
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: Please reply to me
-To:     Recipients <Dailborh@vger.kernel.org>
-Date:   Wed, 25 Nov 2020 18:26:10 +0000
-Reply-To: dailrrob.83@gmail.com
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-I'm Dailborh R. from US. I picked interest in you and I would like to know
-more about you and establish relationship with you. i will wait for
-your response. thank you.
+On architectures where the is no coherent caching such as ARM use the
+dma_alloc_noncontiguos API and handle manually the cache flushing using
+dma_sync_sg().
+
+With this patch on the affected architectures we can measure up to 20x
+performance improvement in uvc_video_copy_data_work().
+
+Signed-off-by: Ricardo Ribalda <ribalda@chromium.org>
+---
+
+v2: Thanks to Robin!
+
+Use dma_sync_sg instead of dma_sync_single
+
+
+ drivers/media/usb/uvc/uvc_video.c | 83 ++++++++++++++++++++++++++-----
+ drivers/media/usb/uvc/uvcvideo.h  |  2 +
+ 2 files changed, 73 insertions(+), 12 deletions(-)
+
+diff --git a/drivers/media/usb/uvc/uvc_video.c b/drivers/media/usb/uvc/uvc_video.c
+index a6a441d92b94..b2e6a9522999 100644
+--- a/drivers/media/usb/uvc/uvc_video.c
++++ b/drivers/media/usb/uvc/uvc_video.c
+@@ -1490,6 +1490,11 @@ static void uvc_video_encode_bulk(struct uvc_urb *uvc_urb,
+ 	urb->transfer_buffer_length = stream->urb_size - len;
+ }
+ 
++static inline struct device *stream_to_dmadev(struct uvc_streaming *stream)
++{
++	return stream->dev->udev->bus->controller->parent;
++}
++
+ static void uvc_video_complete(struct urb *urb)
+ {
+ 	struct uvc_urb *uvc_urb = urb->context;
+@@ -1539,6 +1544,10 @@ static void uvc_video_complete(struct urb *urb)
+ 	 * Process the URB headers, and optionally queue expensive memcpy tasks
+ 	 * to be deferred to a work queue.
+ 	 */
++	if (uvc_urb->pages) {
++		dma_sync_sg_for_cpu(stream_to_dmadev(stream), uvc_urb->sgt.sgl,
++				    uvc_urb->sgt.nents,	DMA_FROM_DEVICE);
++	}
+ 	stream->decode(uvc_urb, buf, buf_meta);
+ 
+ 	/* If no async work is needed, resubmit the URB immediately. */
+@@ -1566,8 +1575,16 @@ static void uvc_free_urb_buffers(struct uvc_streaming *stream)
+ 			continue;
+ 
+ #ifndef CONFIG_DMA_NONCOHERENT
+-		usb_free_coherent(stream->dev->udev, stream->urb_size,
+-				  uvc_urb->buffer, uvc_urb->dma);
++		if (uvc_urb->pages) {
++			sg_free_table(&uvc_urb->sgt);
++			vunmap(uvc_urb->buffer);
++			dma_free_noncontiguous(stream_to_dmadev(stream),
++					       stream->urb_size,
++					       uvc_urb->pages, uvc_urb->dma);
++		} else {
++			usb_free_coherent(stream->dev->udev, stream->urb_size,
++					  uvc_urb->buffer, uvc_urb->dma);
++		}
+ #else
+ 		kfree(uvc_urb->buffer);
+ #endif
+@@ -1577,6 +1594,56 @@ static void uvc_free_urb_buffers(struct uvc_streaming *stream)
+ 	stream->urb_size = 0;
+ }
+ 
++#ifndef CONFIG_DMA_NONCOHERENT
++static bool uvc_alloc_urb_buffer(struct uvc_streaming *stream,
++				 struct uvc_urb *uvc_urb, gfp_t gfp_flags)
++{
++	struct device *dma_dev = dma_dev = stream_to_dmadev(stream);
++
++	if (!dma_can_alloc_noncontiguous(dma_dev)) {
++		uvc_urb->buffer = usb_alloc_coherent(stream->dev->udev,
++						     stream->urb_size,
++						     gfp_flags | __GFP_NOWARN,
++						     &uvc_urb->dma);
++		return uvc_urb->buffer != NULL;
++	}
++
++	uvc_urb->pages = dma_alloc_noncontiguous(dma_dev, stream->urb_size,
++						 &uvc_urb->dma,
++						 gfp_flags | __GFP_NOWARN, 0);
++	if (!uvc_urb->pages)
++		return false;
++
++	uvc_urb->buffer = vmap(uvc_urb->pages,
++			       PAGE_ALIGN(stream->urb_size) >> PAGE_SHIFT,
++			       VM_DMA_COHERENT, PAGE_KERNEL);
++	if (!uvc_urb->buffer) {
++		dma_free_noncontiguous(dma_dev, stream->urb_size,
++				       uvc_urb->pages, uvc_urb->dma);
++		return false;
++	}
++
++	if (sg_alloc_table_from_pages(&uvc_urb->sgt, uvc_urb->pages,
++				PAGE_ALIGN(stream->urb_size) >> PAGE_SHIFT, 0,
++				stream->urb_size, GFP_KERNEL)) {
++		vunmap(uvc_urb->buffer);
++		dma_free_noncontiguous(dma_dev, stream->urb_size,
++				       uvc_urb->pages, uvc_urb->dma);
++		return false;
++	}
++
++	return true;
++}
++#else
++static bool uvc_alloc_urb_buffer(struct uvc_streaming *stream,
++				 struct uvc_urb *uvc_urb, gfp_t gfp_flags)
++{
++	uvc_urb->buffer = kmalloc(stream->urb_size, gfp_flags | __GFP_NOWARN);
++
++	return uvc_urb->buffer != NULL;
++}
++#endif
++
+ /*
+  * Allocate transfer buffers. This function can be called with buffers
+  * already allocated when resuming from suspend, in which case it will
+@@ -1607,19 +1674,11 @@ static int uvc_alloc_urb_buffers(struct uvc_streaming *stream,
+ 
+ 	/* Retry allocations until one succeed. */
+ 	for (; npackets > 1; npackets /= 2) {
++		stream->urb_size = psize * npackets;
+ 		for (i = 0; i < UVC_URBS; ++i) {
+ 			struct uvc_urb *uvc_urb = &stream->uvc_urb[i];
+ 
+-			stream->urb_size = psize * npackets;
+-#ifndef CONFIG_DMA_NONCOHERENT
+-			uvc_urb->buffer = usb_alloc_coherent(
+-				stream->dev->udev, stream->urb_size,
+-				gfp_flags | __GFP_NOWARN, &uvc_urb->dma);
+-#else
+-			uvc_urb->buffer =
+-			    kmalloc(stream->urb_size, gfp_flags | __GFP_NOWARN);
+-#endif
+-			if (!uvc_urb->buffer) {
++			if (!uvc_alloc_urb_buffer(stream, uvc_urb, gfp_flags)) {
+ 				uvc_free_urb_buffers(stream);
+ 				break;
+ 			}
+diff --git a/drivers/media/usb/uvc/uvcvideo.h b/drivers/media/usb/uvc/uvcvideo.h
+index a3dfacf069c4..3e6618a2ac82 100644
+--- a/drivers/media/usb/uvc/uvcvideo.h
++++ b/drivers/media/usb/uvc/uvcvideo.h
+@@ -532,6 +532,8 @@ struct uvc_urb {
+ 
+ 	char *buffer;
+ 	dma_addr_t dma;
++	struct page **pages;
++	struct sg_table sgt;
+ 
+ 	unsigned int async_operations;
+ 	struct uvc_copy_op copy_operations[UVC_MAX_PACKETS];
+-- 
+2.29.2.454.gaff20da3a2-goog
 
