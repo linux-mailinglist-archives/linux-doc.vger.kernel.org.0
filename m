@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3BBCC2C58D4
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Nov 2020 16:55:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C260B2C58D3
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Nov 2020 16:55:51 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2403798AbgKZPzD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 26 Nov 2020 10:55:03 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51220 "EHLO
+        id S2403811AbgKZPzF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Nov 2020 10:55:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51228 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2403796AbgKZPzC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Nov 2020 10:55:02 -0500
-Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com [IPv6:2a00:1450:4864:20::442])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6835BC0617A7
-        for <linux-doc@vger.kernel.org>; Thu, 26 Nov 2020 07:55:02 -0800 (PST)
-Received: by mail-wr1-x442.google.com with SMTP id p8so2640585wrx.5
-        for <linux-doc@vger.kernel.org>; Thu, 26 Nov 2020 07:55:02 -0800 (PST)
+        with ESMTP id S2403809AbgKZPzF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Nov 2020 10:55:05 -0500
+Received: from mail-wr1-x443.google.com (mail-wr1-x443.google.com [IPv6:2a00:1450:4864:20::443])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CDB63C0617A7
+        for <linux-doc@vger.kernel.org>; Thu, 26 Nov 2020 07:55:04 -0800 (PST)
+Received: by mail-wr1-x443.google.com with SMTP id t4so2615235wrr.12
+        for <linux-doc@vger.kernel.org>; Thu, 26 Nov 2020 07:55:04 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=SfJedK8TmdKV/cyl1d120ny+FNMOujRjMwXhHWy7kEg=;
-        b=bpKTMIQ45FtDnN1sJCDvWAIZ7n/djBhSnLXzmY+GV3rFxtQaEk/jg/HB36CWMm495r
-         9dyFHXoPlu/6QutYqpZJmOg6wUa99TMcYimuqBqgMfHfcuSGIsViQw1MXVzV82LPd82i
-         Pj43fk2YHVp4/nrQzaAV15yi8dEl9y91D9o67oVTUxotstSuybJnE7DzvY+syCsPyZ0r
-         i7K6L+NiAdodloJMqgZapUI8KuVSrpzLBeQTSEwO+ivclJL7Bslw5QTQUjmKfRssPExa
-         yYzn1XdS7tNvkiZzCkmHrTStfaA2Bdj1iMTHoEVd8DzcAOU0FEV8TW3U03uWNpqgVrWJ
-         v3xw==
+        bh=Pb+ABw8dDs4PbD0OqVCMWkPKj8CiLKPB9XpZniqrrrk=;
+        b=pbb/yCmE0LnjVE/ExQ/pJl7w83OT3LzqwQppQ3HqidXv2SfAJ9Nb1cPbq9a8ZZI4YA
+         X5M/PUSmd0+3fpTDL/InmQ2mCDNpr9piPAuo7p6crV0IeKBHx/ZTIZOgH/esG4VTPy2J
+         vlfVzxrBEn8n6D2S5rPjeXvv6YodXNpHneVC8Nwje61zvBtJxL9jKl+VgVh2Lahc+ksZ
+         iHqtiBbtPHB1T5RFyjVg6EG7jdM6DUm23grUSANYdwjKev67RJFOYVUfOzyGvHvg8snO
+         dasZpwdSKPiXhpsLurhfNgNIsnFGj3Bo6vrCCFJGRdAo6Tb+BYMNEOrvmCeSdXjXLlsU
+         jk1Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=SfJedK8TmdKV/cyl1d120ny+FNMOujRjMwXhHWy7kEg=;
-        b=LB+FNSHuaDztYePPWBoZ7xxISCPqZIok6K/f/2dLzChLH4Y5K+vnS0TEB+sUFc66Zb
-         wMkAiqrlGtb4PpISVztyKVsVgyYgbDlH9HJNtvxJDAAPszOV+ZYVka4uPupa/GMvDgKM
-         pJjKWKWShWcF+T6NxhVc7eLx89bEb7GC87gwJtXTYnVhLCbljwkwfdQ82uIQrUHfs6v3
-         RSA3FQ4e7Efr2Vne2elj2RIiItzK4cS1RAeELfVAjrxLgzrWVD4+yLCef5QXSlXmJfRl
-         dtSIS+r7jBBKWvNWe7ePFNctiCOVawtCGYEjTAMW/7GR88hHikoirTaxjO6+gWDnLK9c
-         F40A==
-X-Gm-Message-State: AOAM531exQd/cCai0akzi4aLMSd4Dys+Tt1AIKmeGQM8oTzev1YEZBbu
-        asHAn5gGQGHsBMDlgCvOiSpFzw==
-X-Google-Smtp-Source: ABdhPJwSotBfUlMwZQV3OnNmxAKyRRNxCKHByeBTjYDtUfE+GwiqHn2r4E/m/aWfQJpo+cKwRswf6w==
-X-Received: by 2002:a5d:6743:: with SMTP id l3mr4652330wrw.82.1606406100935;
-        Thu, 26 Nov 2020 07:55:00 -0800 (PST)
+        bh=Pb+ABw8dDs4PbD0OqVCMWkPKj8CiLKPB9XpZniqrrrk=;
+        b=gZyS7MQHf/wkRg2OaTlsiDLJqihDhWiMVc3YYFvDkPB7mV7rRYm4JDTP7TVWdukV5c
+         6jqUSBWqkpICz7zooK+nIStcES73fMZwhWhvk7sz70/axiPIAMLVGWwkVioZN8LmhwmE
+         Z5UJMyaWJLYWsYrek5moSvIjZfwKIG+8B2hZgjozXAZFCZKESlK5NShVdtSWmf/J31/l
+         b/aw7sauOf3WN7AQEouIBZPt8JADqCfWou6rHrZxs378SNEM8xXgTPAZUaZBPc/5mRJK
+         TVSRCyjh/mXwXB304Z257Z5Z3CsrnWouzspTU4oYe90ehD+2SQ8K+8pbxmGqKSQoQeb0
+         NAWw==
+X-Gm-Message-State: AOAM531gnyMqLpPZGcdYOBdY4COD6EuQkDlPUkhbjKDBzDp1t8tquJ7I
+        ssGqGAdSh5DTXUMBRVZOh2AOHA==
+X-Google-Smtp-Source: ABdhPJwxY6DWeyXDaTKzR9vlEHnJK1db+CbK/rNz4u0C73SsrWbM3UVGNV4lTxhZ1MSN5bqYaJbUug==
+X-Received: by 2002:adf:eb4d:: with SMTP id u13mr4757138wrn.146.1606406103382;
+        Thu, 26 Nov 2020 07:55:03 -0800 (PST)
 Received: from localhost ([2a01:4b00:8523:2d03:f008:704d:8d4b:9951])
-        by smtp.gmail.com with ESMTPSA id z11sm10645961wmc.39.2020.11.26.07.54.59
+        by smtp.gmail.com with ESMTPSA id g25sm8706624wmk.5.2020.11.26.07.55.01
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Nov 2020 07:54:59 -0800 (PST)
+        Thu, 26 Nov 2020 07:55:02 -0800 (PST)
 From:   David Brazdil <dbrazdil@google.com>
 To:     kvmarm@lists.cs.columbia.edu
 Cc:     Jonathan Corbet <corbet@lwn.net>,
@@ -62,9 +62,9 @@ Cc:     Jonathan Corbet <corbet@lwn.net>,
         Sudeep Holla <sudeep.holla@arm.com>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
         kernel-team@android.com, David Brazdil <dbrazdil@google.com>
-Subject: [PATCH v3 16/23] kvm: arm64: Forward safe PSCI SMCs coming from host
-Date:   Thu, 26 Nov 2020 15:54:14 +0000
-Message-Id: <20201126155421.14901-17-dbrazdil@google.com>
+Subject: [PATCH v3 17/23] kvm: arm64: Extract __do_hyp_init into a helper function
+Date:   Thu, 26 Nov 2020 15:54:15 +0000
+Message-Id: <20201126155421.14901-18-dbrazdil@google.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201126155421.14901-1-dbrazdil@google.com>
 References: <20201126155421.14901-1-dbrazdil@google.com>
@@ -74,102 +74,71 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Forward the following PSCI SMCs issued by host to EL3 as they do not
-require the hypervisor's intervention. This assumes that EL3 correctly
-implements the PSCI specification.
-
-Only function IDs implemented in Linux are included.
-
-Where both 32-bit and 64-bit variants exist, it is assumed that the host
-will always use the 64-bit variant.
-
- * SMCs that only return information about the system
-   * PSCI_VERSION        - PSCI version implemented by EL3
-   * PSCI_FEATURES       - optional features supported by EL3
-   * AFFINITY_INFO       - power state of core/cluster
-   * MIGRATE_INFO_TYPE   - whether Trusted OS can be migrated
-   * MIGRATE_INFO_UP_CPU - resident core of Trusted OS
- * operations which do not affect the hypervisor
-   * MIGRATE             - migrate Trusted OS to a different core
-   * SET_SUSPEND_MODE    - toggle OS-initiated mode
- * system shutdown/reset
-   * SYSTEM_OFF
-   * SYSTEM_RESET
-   * SYSTEM_RESET2
+In preparation for adding a CPU entry point in nVHE hyp code, extract
+most of __do_hyp_init hypervisor initialization code into a common
+helper function. This will be invoked by the entry point to install KVM
+on the newly booted CPU.
 
 Signed-off-by: David Brazdil <dbrazdil@google.com>
 ---
- arch/arm64/kvm/hyp/nvhe/psci-relay.c | 43 +++++++++++++++++++++++++++-
- 1 file changed, 42 insertions(+), 1 deletion(-)
+ arch/arm64/kvm/hyp/nvhe/hyp-init.S | 35 ++++++++++++++++++++++--------
+ 1 file changed, 26 insertions(+), 9 deletions(-)
 
-diff --git a/arch/arm64/kvm/hyp/nvhe/psci-relay.c b/arch/arm64/kvm/hyp/nvhe/psci-relay.c
-index e7091d89f0fc..7aa87ab7f5ce 100644
---- a/arch/arm64/kvm/hyp/nvhe/psci-relay.c
-+++ b/arch/arm64/kvm/hyp/nvhe/psci-relay.c
-@@ -57,14 +57,51 @@ static bool is_psci_call(u64 func_id)
- 	}
- }
+diff --git a/arch/arm64/kvm/hyp/nvhe/hyp-init.S b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
+index 77c983aa90fa..98ce40e17b42 100644
+--- a/arch/arm64/kvm/hyp/nvhe/hyp-init.S
++++ b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
+@@ -68,13 +68,32 @@ __do_hyp_init:
+ 	mov	x0, #SMCCC_RET_NOT_SUPPORTED
+ 	eret
  
-+static unsigned long psci_call(unsigned long fn, unsigned long arg0,
-+			       unsigned long arg1, unsigned long arg2)
-+{
-+	struct arm_smccc_res res;
-+
-+	arm_smccc_1_1_smc(fn, arg0, arg1, arg2, &res);
-+	return res.a0;
-+}
-+
-+static unsigned long psci_forward(struct kvm_cpu_context *host_ctxt)
-+{
-+	return psci_call(cpu_reg(host_ctxt, 0), cpu_reg(host_ctxt, 1),
-+			 cpu_reg(host_ctxt, 2), cpu_reg(host_ctxt, 3));
-+}
-+
-+static __noreturn unsigned long psci_forward_noreturn(struct kvm_cpu_context *host_ctxt)
-+{
-+	psci_forward(host_ctxt);
-+	hyp_panic(); /* unreachable */
-+}
-+
- static unsigned long psci_0_1_handler(u64 func_id, struct kvm_cpu_context *host_ctxt)
- {
--	return PSCI_RET_NOT_SUPPORTED;
-+	if (func_id == kvm_host_psci_function_id[PSCI_FN_CPU_OFF])
-+		return psci_forward(host_ctxt);
-+	else if (func_id == kvm_host_psci_function_id[PSCI_FN_MIGRATE])
-+		return psci_forward(host_ctxt);
-+	else
-+		return PSCI_RET_NOT_SUPPORTED;
- }
+-1:	ldr	x0, [x1, #NVHE_INIT_TPIDR_EL2]
+-	msr	tpidr_el2, x0
++1:	mov	x0, x1
++	mov	x4, lr
++	bl	___kvm_hyp_init
++	mov	lr, x4
  
- static unsigned long psci_0_2_handler(u64 func_id, struct kvm_cpu_context *host_ctxt)
- {
- 	switch (func_id) {
-+	case PSCI_0_2_FN_PSCI_VERSION:
-+	case PSCI_0_2_FN_CPU_OFF:
-+	case PSCI_0_2_FN64_AFFINITY_INFO:
-+	case PSCI_0_2_FN64_MIGRATE:
-+	case PSCI_0_2_FN_MIGRATE_INFO_TYPE:
-+	case PSCI_0_2_FN64_MIGRATE_INFO_UP_CPU:
-+		return psci_forward(host_ctxt);
-+	case PSCI_0_2_FN_SYSTEM_OFF:
-+	case PSCI_0_2_FN_SYSTEM_RESET:
-+		psci_forward_noreturn(host_ctxt);
-+		unreachable();
- 	default:
- 		return PSCI_RET_NOT_SUPPORTED;
- 	}
-@@ -73,6 +110,10 @@ static unsigned long psci_0_2_handler(u64 func_id, struct kvm_cpu_context *host_
- static unsigned long psci_1_0_handler(u64 func_id, struct kvm_cpu_context *host_ctxt)
- {
- 	switch (func_id) {
-+	case PSCI_1_0_FN_PSCI_FEATURES:
-+	case PSCI_1_0_FN_SET_SUSPEND_MODE:
-+	case PSCI_1_1_FN64_SYSTEM_RESET2:
-+		return psci_forward(host_ctxt);
- 	default:
- 		return psci_0_2_handler(func_id, host_ctxt);
- 	}
+-	ldr	x0, [x1, #NVHE_INIT_STACK_HYP_VA]
+-	mov	sp, x0
++	/* Hello, World! */
++	mov	x0, #SMCCC_RET_SUCCESS
++	eret
++SYM_CODE_END(__kvm_hyp_init)
++
++/*
++ * Initialize the hypervisor in EL2.
++ *
++ * Only uses x0..x3 so as to not clobber callee-saved SMCCC registers
++ * and leave x4 for the caller.
++ *
++ * x0: struct kvm_nvhe_init_params PA
++ */
++SYM_CODE_START(___kvm_hyp_init)
++	ldr	x1, [x0, #NVHE_INIT_TPIDR_EL2]
++	msr	tpidr_el2, x1
++
++	ldr	x1, [x0, #NVHE_INIT_STACK_HYP_VA]
++	mov	sp, x1
+ 
+-	ldr	x1, [x1, #NVHE_INIT_PGD_PA]
++	ldr	x1, [x0, #NVHE_INIT_PGD_PA]
+ 	phys_to_ttbr x0, x1
+ alternative_if ARM64_HAS_CNP
+ 	orr	x0, x0, #TTBR_CNP_BIT
+@@ -139,10 +158,8 @@ alternative_else_nop_endif
+ 	kimg_hyp_va x0, x1
+ 	msr	vbar_el2, x0
+ 
+-	/* Hello, World! */
+-	mov	x0, #SMCCC_RET_SUCCESS
+-	eret
+-SYM_CODE_END(__kvm_hyp_init)
++	ret
++SYM_CODE_END(___kvm_hyp_init)
+ 
+ SYM_CODE_START(__kvm_handle_stub_hvc)
+ 	cmp	x0, #HVC_SOFT_RESTART
 -- 
 2.29.2.454.gaff20da3a2-goog
 
