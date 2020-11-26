@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 09AA82C58C4
-	for <lists+linux-doc@lfdr.de>; Thu, 26 Nov 2020 16:55:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3BBCC2C58D4
+	for <lists+linux-doc@lfdr.de>; Thu, 26 Nov 2020 16:55:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2403787AbgKZPzB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 26 Nov 2020 10:55:01 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51208 "EHLO
+        id S2403798AbgKZPzD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 26 Nov 2020 10:55:03 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51220 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2403781AbgKZPzA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Nov 2020 10:55:00 -0500
+        with ESMTP id S2403796AbgKZPzC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 26 Nov 2020 10:55:02 -0500
 Received: from mail-wr1-x442.google.com (mail-wr1-x442.google.com [IPv6:2a00:1450:4864:20::442])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 216A2C0613D4
-        for <linux-doc@vger.kernel.org>; Thu, 26 Nov 2020 07:55:00 -0800 (PST)
-Received: by mail-wr1-x442.google.com with SMTP id r3so2657990wrt.2
-        for <linux-doc@vger.kernel.org>; Thu, 26 Nov 2020 07:55:00 -0800 (PST)
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6835BC0617A7
+        for <linux-doc@vger.kernel.org>; Thu, 26 Nov 2020 07:55:02 -0800 (PST)
+Received: by mail-wr1-x442.google.com with SMTP id p8so2640585wrx.5
+        for <linux-doc@vger.kernel.org>; Thu, 26 Nov 2020 07:55:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=irDOCaoxBC7rYFpDng3539rKfl5EDMRei9R6iacpt5Q=;
-        b=G+ViC3wP1aisQEqSrtFyh4agtf+XRj/S5yCOQSPP+B9cEpF3CEG6DUz/bfIazuPr44
-         ziINsQardil0WvZ7VvAzP+ViHc8X/aDnyhZgkBWKaSicVgTkjL4koXMMvnWUKwj6Tubf
-         yy+Yx/hK3LwwE2ezmO7wOtcTtG/OXrSJrdAmCkUrUTDGlG25Xz7C8mTrmfItIjst/2Po
-         ItFdY9jyph4RS42NCu18FEzXe2QYDp7fg8a3lGHm5/Bq0J2aPx0WhjJGBCWrdIlkvbXW
-         PRBJQEM/Aw0vr3SF+JCrYwHFypXblFfnJAf0xiWqOkWB+uG+6muEhHq41S+AwQVN50o4
-         /3AQ==
+        bh=SfJedK8TmdKV/cyl1d120ny+FNMOujRjMwXhHWy7kEg=;
+        b=bpKTMIQ45FtDnN1sJCDvWAIZ7n/djBhSnLXzmY+GV3rFxtQaEk/jg/HB36CWMm495r
+         9dyFHXoPlu/6QutYqpZJmOg6wUa99TMcYimuqBqgMfHfcuSGIsViQw1MXVzV82LPd82i
+         Pj43fk2YHVp4/nrQzaAV15yi8dEl9y91D9o67oVTUxotstSuybJnE7DzvY+syCsPyZ0r
+         i7K6L+NiAdodloJMqgZapUI8KuVSrpzLBeQTSEwO+ivclJL7Bslw5QTQUjmKfRssPExa
+         yYzn1XdS7tNvkiZzCkmHrTStfaA2Bdj1iMTHoEVd8DzcAOU0FEV8TW3U03uWNpqgVrWJ
+         v3xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=irDOCaoxBC7rYFpDng3539rKfl5EDMRei9R6iacpt5Q=;
-        b=QzgpsRR3yK2F9PQO9pQRyH1ei1ouCJd7jh/o+Q5Y+eF0/IUw6z2/8aRpO3wqUznm+H
-         u7KGI7fCjKupkBqgJL068Yxlb0ltxh1TTktGO1tcgo9VVPl0F2Y30UBGcYejatzpaO/M
-         CntlJtbjVkNhP0W0v4f5Op+SnX3R8QPF0/P6AKEI+tVa5EPSbhvJyOAX667Ku4/9RFd0
-         tGEQzcl93t5Wul6PI1Vab4pJ2zozujjnjBTikJAg0qm7g8wXkfZxxjbTzUJarUfFEpf3
-         TSTFyZL8t67je6GBghhQYwmBeEB2gfgS6TyfLHSDjv/Im7UKKw/nfaOihKG3G/0C4jo7
-         0cvg==
-X-Gm-Message-State: AOAM531TTXCnbgy3oCv1xFMLoS6sQoJoM47oP7a5FpEgRSCA6frc75Z5
-        jMlNbTMx7bQkmUdw2VIEoQobrA==
-X-Google-Smtp-Source: ABdhPJy4MBFMpR4y7kRf/sEF0i4eAr3+bsyd1csD1SmT3e7E9ub9c+2WpUvSX9zSC44QRHTnVEfgpQ==
-X-Received: by 2002:adf:f102:: with SMTP id r2mr4652297wro.315.1606406098667;
-        Thu, 26 Nov 2020 07:54:58 -0800 (PST)
+        bh=SfJedK8TmdKV/cyl1d120ny+FNMOujRjMwXhHWy7kEg=;
+        b=LB+FNSHuaDztYePPWBoZ7xxISCPqZIok6K/f/2dLzChLH4Y5K+vnS0TEB+sUFc66Zb
+         wMkAiqrlGtb4PpISVztyKVsVgyYgbDlH9HJNtvxJDAAPszOV+ZYVka4uPupa/GMvDgKM
+         pJjKWKWShWcF+T6NxhVc7eLx89bEb7GC87gwJtXTYnVhLCbljwkwfdQ82uIQrUHfs6v3
+         RSA3FQ4e7Efr2Vne2elj2RIiItzK4cS1RAeELfVAjrxLgzrWVD4+yLCef5QXSlXmJfRl
+         dtSIS+r7jBBKWvNWe7ePFNctiCOVawtCGYEjTAMW/7GR88hHikoirTaxjO6+gWDnLK9c
+         F40A==
+X-Gm-Message-State: AOAM531exQd/cCai0akzi4aLMSd4Dys+Tt1AIKmeGQM8oTzev1YEZBbu
+        asHAn5gGQGHsBMDlgCvOiSpFzw==
+X-Google-Smtp-Source: ABdhPJwSotBfUlMwZQV3OnNmxAKyRRNxCKHByeBTjYDtUfE+GwiqHn2r4E/m/aWfQJpo+cKwRswf6w==
+X-Received: by 2002:a5d:6743:: with SMTP id l3mr4652330wrw.82.1606406100935;
+        Thu, 26 Nov 2020 07:55:00 -0800 (PST)
 Received: from localhost ([2a01:4b00:8523:2d03:f008:704d:8d4b:9951])
-        by smtp.gmail.com with ESMTPSA id 35sm9328533wro.71.2020.11.26.07.54.57
+        by smtp.gmail.com with ESMTPSA id z11sm10645961wmc.39.2020.11.26.07.54.59
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 26 Nov 2020 07:54:57 -0800 (PST)
+        Thu, 26 Nov 2020 07:54:59 -0800 (PST)
 From:   David Brazdil <dbrazdil@google.com>
 To:     kvmarm@lists.cs.columbia.edu
 Cc:     Jonathan Corbet <corbet@lwn.net>,
@@ -62,9 +62,9 @@ Cc:     Jonathan Corbet <corbet@lwn.net>,
         Sudeep Holla <sudeep.holla@arm.com>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
         kernel-team@android.com, David Brazdil <dbrazdil@google.com>
-Subject: [PATCH v3 15/23] kvm: arm64: Add offset for hyp VA <-> PA conversion
-Date:   Thu, 26 Nov 2020 15:54:13 +0000
-Message-Id: <20201126155421.14901-16-dbrazdil@google.com>
+Subject: [PATCH v3 16/23] kvm: arm64: Forward safe PSCI SMCs coming from host
+Date:   Thu, 26 Nov 2020 15:54:14 +0000
+Message-Id: <20201126155421.14901-17-dbrazdil@google.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201126155421.14901-1-dbrazdil@google.com>
 References: <20201126155421.14901-1-dbrazdil@google.com>
@@ -74,85 +74,102 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a host-initialized constant to KVM nVHE hyp code for converting
-between EL2 linear map virtual addresses and physical addresses.
-Also add `__hyp_pa` macro that performs the conversion.
+Forward the following PSCI SMCs issued by host to EL3 as they do not
+require the hypervisor's intervention. This assumes that EL3 correctly
+implements the PSCI specification.
+
+Only function IDs implemented in Linux are included.
+
+Where both 32-bit and 64-bit variants exist, it is assumed that the host
+will always use the 64-bit variant.
+
+ * SMCs that only return information about the system
+   * PSCI_VERSION        - PSCI version implemented by EL3
+   * PSCI_FEATURES       - optional features supported by EL3
+   * AFFINITY_INFO       - power state of core/cluster
+   * MIGRATE_INFO_TYPE   - whether Trusted OS can be migrated
+   * MIGRATE_INFO_UP_CPU - resident core of Trusted OS
+ * operations which do not affect the hypervisor
+   * MIGRATE             - migrate Trusted OS to a different core
+   * SET_SUSPEND_MODE    - toggle OS-initiated mode
+ * system shutdown/reset
+   * SYSTEM_OFF
+   * SYSTEM_RESET
+   * SYSTEM_RESET2
 
 Signed-off-by: David Brazdil <dbrazdil@google.com>
 ---
- arch/arm64/kvm/hyp/nvhe/psci-relay.c |  3 +++
- arch/arm64/kvm/va_layout.c           | 30 +++++++++++++++++++++++++---
- 2 files changed, 30 insertions(+), 3 deletions(-)
+ arch/arm64/kvm/hyp/nvhe/psci-relay.c | 43 +++++++++++++++++++++++++++-
+ 1 file changed, 42 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm64/kvm/hyp/nvhe/psci-relay.c b/arch/arm64/kvm/hyp/nvhe/psci-relay.c
-index 44a9fb462d24..e7091d89f0fc 100644
+index e7091d89f0fc..7aa87ab7f5ce 100644
 --- a/arch/arm64/kvm/hyp/nvhe/psci-relay.c
 +++ b/arch/arm64/kvm/hyp/nvhe/psci-relay.c
-@@ -18,6 +18,9 @@
- /* Config options set by the host. */
- u32 __ro_after_init kvm_host_psci_version;
- u32 __ro_after_init kvm_host_psci_function_id[PSCI_FN_MAX];
-+s64 __ro_after_init hyp_physvirt_offset;
-+
-+#define __hyp_pa(x) ((phys_addr_t)((x)) + hyp_physvirt_offset)
- 
- static u64 get_psci_func_id(struct kvm_cpu_context *host_ctxt)
- {
-diff --git a/arch/arm64/kvm/va_layout.c b/arch/arm64/kvm/va_layout.c
-index 4130b72e6891..d8cc51bd60bf 100644
---- a/arch/arm64/kvm/va_layout.c
-+++ b/arch/arm64/kvm/va_layout.c
-@@ -23,6 +23,30 @@ static u8 tag_lsb;
- static u64 tag_val;
- static u64 va_mask;
- 
-+/*
-+ * Compute HYP VA by using the same computation as kern_hyp_va().
-+ */
-+static u64 __early_kern_hyp_va(u64 addr)
-+{
-+	addr &= va_mask;
-+	addr |= tag_val << tag_lsb;
-+	return addr;
-+}
-+
-+/*
-+ * Store a hyp VA <-> PA offset into a hyp-owned variable.
-+ */
-+static void init_hyp_physvirt_offset(void)
-+{
-+	extern s64 kvm_nvhe_sym(hyp_physvirt_offset);
-+	u64 kern_va, hyp_va;
-+
-+	/* Compute the offset from the hyp VA and PA of a random symbol. */
-+	kern_va = (u64)kvm_ksym_ref(__hyp_text_start);
-+	hyp_va = __early_kern_hyp_va(kern_va);
-+	CHOOSE_NVHE_SYM(hyp_physvirt_offset) = (s64)__pa(kern_va) - (s64)hyp_va;
-+}
-+
- /*
-  * We want to generate a hyp VA with the following format (with V ==
-  * vabits_actual):
-@@ -54,6 +78,8 @@ __init void kvm_compute_layout(void)
- 		tag_val |= get_random_long() & GENMASK_ULL(vabits_actual - 2, tag_lsb);
+@@ -57,14 +57,51 @@ static bool is_psci_call(u64 func_id)
  	}
- 	tag_val >>= tag_lsb;
-+
-+	init_hyp_physvirt_offset();
  }
  
- static u32 compute_instruction(int n, u32 rd, u32 rn)
-@@ -146,9 +172,7 @@ void kvm_patch_vector_branch(struct alt_instr *alt,
- 	/*
- 	 * Compute HYP VA by using the same computation as kern_hyp_va()
- 	 */
--	addr = (uintptr_t)kvm_ksym_ref(__kvm_hyp_vector);
--	addr &= va_mask;
--	addr |= tag_val << tag_lsb;
-+	addr = __early_kern_hyp_va((u64)kvm_ksym_ref(__kvm_hyp_vector));
++static unsigned long psci_call(unsigned long fn, unsigned long arg0,
++			       unsigned long arg1, unsigned long arg2)
++{
++	struct arm_smccc_res res;
++
++	arm_smccc_1_1_smc(fn, arg0, arg1, arg2, &res);
++	return res.a0;
++}
++
++static unsigned long psci_forward(struct kvm_cpu_context *host_ctxt)
++{
++	return psci_call(cpu_reg(host_ctxt, 0), cpu_reg(host_ctxt, 1),
++			 cpu_reg(host_ctxt, 2), cpu_reg(host_ctxt, 3));
++}
++
++static __noreturn unsigned long psci_forward_noreturn(struct kvm_cpu_context *host_ctxt)
++{
++	psci_forward(host_ctxt);
++	hyp_panic(); /* unreachable */
++}
++
+ static unsigned long psci_0_1_handler(u64 func_id, struct kvm_cpu_context *host_ctxt)
+ {
+-	return PSCI_RET_NOT_SUPPORTED;
++	if (func_id == kvm_host_psci_function_id[PSCI_FN_CPU_OFF])
++		return psci_forward(host_ctxt);
++	else if (func_id == kvm_host_psci_function_id[PSCI_FN_MIGRATE])
++		return psci_forward(host_ctxt);
++	else
++		return PSCI_RET_NOT_SUPPORTED;
+ }
  
- 	/* Use PC[10:7] to branch to the same vector in KVM */
- 	addr |= ((u64)origptr & GENMASK_ULL(10, 7));
+ static unsigned long psci_0_2_handler(u64 func_id, struct kvm_cpu_context *host_ctxt)
+ {
+ 	switch (func_id) {
++	case PSCI_0_2_FN_PSCI_VERSION:
++	case PSCI_0_2_FN_CPU_OFF:
++	case PSCI_0_2_FN64_AFFINITY_INFO:
++	case PSCI_0_2_FN64_MIGRATE:
++	case PSCI_0_2_FN_MIGRATE_INFO_TYPE:
++	case PSCI_0_2_FN64_MIGRATE_INFO_UP_CPU:
++		return psci_forward(host_ctxt);
++	case PSCI_0_2_FN_SYSTEM_OFF:
++	case PSCI_0_2_FN_SYSTEM_RESET:
++		psci_forward_noreturn(host_ctxt);
++		unreachable();
+ 	default:
+ 		return PSCI_RET_NOT_SUPPORTED;
+ 	}
+@@ -73,6 +110,10 @@ static unsigned long psci_0_2_handler(u64 func_id, struct kvm_cpu_context *host_
+ static unsigned long psci_1_0_handler(u64 func_id, struct kvm_cpu_context *host_ctxt)
+ {
+ 	switch (func_id) {
++	case PSCI_1_0_FN_PSCI_FEATURES:
++	case PSCI_1_0_FN_SET_SUSPEND_MODE:
++	case PSCI_1_1_FN64_SYSTEM_RESET2:
++		return psci_forward(host_ctxt);
+ 	default:
+ 		return psci_0_2_handler(func_id, host_ctxt);
+ 	}
 -- 
 2.29.2.454.gaff20da3a2-goog
 
