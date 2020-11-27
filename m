@@ -2,78 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D0A8A2C662F
-	for <lists+linux-doc@lfdr.de>; Fri, 27 Nov 2020 14:02:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3BFCF2C6975
+	for <lists+linux-doc@lfdr.de>; Fri, 27 Nov 2020 17:34:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729169AbgK0NBh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 27 Nov 2020 08:01:37 -0500
-Received: from www.linuxtv.org ([130.149.80.248]:36480 "EHLO www.linuxtv.org"
+        id S1731293AbgK0QdF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 27 Nov 2020 11:33:05 -0500
+Received: from foss.arm.com ([217.140.110.172]:45924 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728963AbgK0NBh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 27 Nov 2020 08:01:37 -0500
-Received: from mchehab by www.linuxtv.org with local (Exim 4.92)
-        (envelope-from <mchehab@linuxtv.org>)
-        id 1kid6Y-00CcIs-BT; Fri, 27 Nov 2020 12:44:02 +0000
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Date:   Fri, 27 Nov 2020 12:03:46 +0000
-Subject: [git:media_tree/master] media: Documentation/driver-api: media/dtv-frontend: drop doubled word
-To:     linuxtv-commits@linuxtv.org
-Cc:     linux-doc@vger.kernel.org, Randy Dunlap <rdunlap@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Mail-followup-to: linux-media@vger.kernel.org
-Forward-to: linux-media@vger.kernel.org
-Reply-to: linux-media@vger.kernel.org
-Message-Id: <E1kid6Y-00CcIs-BT@www.linuxtv.org>
+        id S1730603AbgK0QdE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 27 Nov 2020 11:33:04 -0500
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DB72C1516;
+        Fri, 27 Nov 2020 08:33:03 -0800 (PST)
+Received: from bogus (unknown [10.57.59.53])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 373573F71F;
+        Fri, 27 Nov 2020 08:33:00 -0800 (PST)
+Date:   Fri, 27 Nov 2020 16:32:54 +0000
+From:   Sudeep Holla <sudeep.holla@arm.com>
+To:     David Brazdil <dbrazdil@google.com>
+Cc:     kvmarm@lists.cs.columbia.edu, Jonathan Corbet <corbet@lwn.net>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Will Deacon <will@kernel.org>, Marc Zyngier <maz@kernel.org>,
+        James Morse <james.morse@arm.com>,
+        Julien Thierry <julien.thierry.kdev@gmail.com>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
+        Christoph Lameter <cl@linux.com>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, kernel-team@android.com
+Subject: Re: [PATCH v3 06/23] kvm: arm64: Add kvm-arm.protected early kernel
+ parameter
+Message-ID: <20201127163254.zxdrszlveaxhluwn@bogus>
+References: <20201126155421.14901-1-dbrazdil@google.com>
+ <20201126155421.14901-7-dbrazdil@google.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201126155421.14901-7-dbrazdil@google.com>
+User-Agent: NeoMutt/20171215
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This is an automatic generated email to let you know that the following patch were queued:
+On Thu, Nov 26, 2020 at 03:54:04PM +0000, David Brazdil wrote:
+> Add an early parameter that allows users to opt into protected KVM mode
+> when using the nVHE hypervisor. In this mode, guest state will be kept
+> private from the host. This will primarily involve enabling stage-2
+> address translation for the host, restricting DMA to host memory, and
+> filtering host SMCs.
+> 
+> Capability ARM64_PROTECTED_KVM is set if the param is passed, CONFIG_KVM
+> is enabled and the kernel was not booted with VHE.
+> 
+> Signed-off-by: David Brazdil <dbrazdil@google.com>
+> ---
+>  .../admin-guide/kernel-parameters.txt         |  5 ++++
+>  arch/arm64/include/asm/cpucaps.h              |  3 +-
+>  arch/arm64/include/asm/virt.h                 |  8 +++++
+>  arch/arm64/kernel/cpufeature.c                | 29 +++++++++++++++++++
+>  arch/arm64/kvm/arm.c                          |  4 ++-
+>  5 files changed, 47 insertions(+), 2 deletions(-)
+> 
+> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> index 526d65d8573a..06c89975c29c 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -2259,6 +2259,11 @@
+>  			for all guests.
+>  			Default is 1 (enabled) if in 64-bit or 32-bit PAE mode.
+>  
+> +	kvm-arm.protected=
+> +			[KVM,ARM] Allow spawning protected guests whose state
+> +			is kept private from the host. Only valid for non-VHE.
+> +			Default is 0 (disabled).
+> +
 
-Subject: media: Documentation/driver-api: media/dtv-frontend: drop doubled word
-Author:  Randy Dunlap <rdunlap@infradead.org>
-Date:    Sat Jul 4 05:44:54 2020 +0200
+Sorry for being pedantic. Can we reword this to say valid for
+!CONFIG_ARM64_VHE ? I read this as valid only for non-VHE hardware, it may
+be just me, but if you agree please update so that it doesn't give remote
+idea that it is not valid on VHE enabled hardware.
 
-Drop the doubled word "errors".
+I was trying to run this on the hardware and was trying to understand the
+details on how to do that.
 
-Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: linux-doc@vger.kernel.org
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
- Documentation/driver-api/media/dtv-frontend.rst | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
----
-
-diff --git a/Documentation/driver-api/media/dtv-frontend.rst b/Documentation/driver-api/media/dtv-frontend.rst
-index 91f77fe58e83..ea43cdb5b0e4 100644
---- a/Documentation/driver-api/media/dtv-frontend.rst
-+++ b/Documentation/driver-api/media/dtv-frontend.rst
-@@ -244,7 +244,7 @@ Carrier Signal to Noise ratio (:ref:`DTV-STAT-CNR`)
-     Having it available after inner FEC is more common.
- 
- Bit counts post-FEC (:ref:`DTV-STAT-POST-ERROR-BIT-COUNT` and :ref:`DTV-STAT-POST-TOTAL-BIT-COUNT`)
--  - Those counters measure the number of bits and bit errors errors after
-+  - Those counters measure the number of bits and bit errors after
-     the forward error correction (FEC) on the inner coding block
-     (after Viterbi, LDPC or other inner code).
- 
-@@ -253,7 +253,7 @@ Bit counts post-FEC (:ref:`DTV-STAT-POST-ERROR-BIT-COUNT` and :ref:`DTV-STAT-POS
-     see :c:type:`fe_status`).
- 
- Bit counts pre-FEC (:ref:`DTV-STAT-PRE-ERROR-BIT-COUNT` and :ref:`DTV-STAT-PRE-TOTAL-BIT-COUNT`)
--  - Those counters measure the number of bits and bit errors errors before
-+  - Those counters measure the number of bits and bit errors before
-     the forward error correction (FEC) on the inner coding block
-     (before Viterbi, LDPC or other inner code).
- 
-@@ -263,7 +263,7 @@ Bit counts pre-FEC (:ref:`DTV-STAT-PRE-ERROR-BIT-COUNT` and :ref:`DTV-STAT-PRE-T
-     after ``FE_HAS_VITERBI``, see :c:type:`fe_status`).
- 
- Block counts (:ref:`DTV-STAT-ERROR-BLOCK-COUNT` and :ref:`DTV-STAT-TOTAL-BLOCK-COUNT`)
--  - Those counters measure the number of blocks and block errors errors after
-+  - Those counters measure the number of blocks and block errors after
-     the forward error correction (FEC) on the inner coding block
-     (before Viterbi, LDPC or other inner code).
- 
+-- 
+Regards,
+Sudeep
