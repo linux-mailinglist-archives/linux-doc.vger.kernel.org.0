@@ -2,105 +2,144 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 488F42C74AF
-	for <lists+linux-doc@lfdr.de>; Sat, 28 Nov 2020 23:22:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D4AE82C7490
+	for <lists+linux-doc@lfdr.de>; Sat, 28 Nov 2020 23:22:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388317AbgK1Vte (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 28 Nov 2020 16:49:34 -0500
-Received: from mga02.intel.com ([134.134.136.20]:19858 "EHLO mga02.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1730015AbgK1Se6 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 28 Nov 2020 13:34:58 -0500
-IronPort-SDR: yZ5ypykwZaqAGwmfTPK4ggSzuCyzMIvoDmRZL7zSoZIZEOa9o+RVKR26mUKKrIeDxDvC6HhEuX
- GqfPTFIoLfBg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9819"; a="159537387"
-X-IronPort-AV: E=Sophos;i="5.78,377,1599548400"; 
-   d="scan'208";a="159537387"
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-  by orsmga101.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Nov 2020 08:31:04 -0800
-IronPort-SDR: +n7zX3+y7NU8HyCqky6ikXcGlW5FSpcq0oLNmMMVjen8KqccfxO8hC+osTPgLafcCAfE1F3j1x
- QRE+JF0pkCEw==
-X-IronPort-AV: E=Sophos;i="5.78,377,1599548400"; 
-   d="scan'208";a="480007886"
-Received: from jckaplan-mobl1.amr.corp.intel.com (HELO [10.212.23.254]) ([10.212.23.254])
-  by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 28 Nov 2020 08:31:02 -0800
-Subject: Re: [PATCH v15 00/26] Control-flow Enforcement: Shadow Stack
-To:     Balbir Singh <bsingharora@gmail.com>
-Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        id S1729428AbgK1Vtb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 28 Nov 2020 16:49:31 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36558 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1732358AbgK1SPi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 28 Nov 2020 13:15:38 -0500
+Received: from merlin.infradead.org (merlin.infradead.org [IPv6:2001:8b0:10b:1231::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 16E07C0254A6;
+        Sat, 28 Nov 2020 08:57:00 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:Content-Type:
+        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+        :Reply-To:Content-ID:Content-Description;
+        bh=ubev1giHn2jmSzhtp/f94pjbxFaoCeWhmi4D5S6DRMQ=; b=kCmw1AxLSz9zAUV1hx0lxMwV1K
+        iHNuj/MU6Bqv/Rdf7HMk9MrKt3TjRtiRFu4DLkMgrYriTq0mvSfQBCT0dHzN3bple/c8tlOdVLjHc
+        UsVmctYTXxoPhP2N4b2ENuThOCVoN6iA0n4PJvijUiSwN98mADc/8pHk9g795HJTfE+XiXzEzWCyU
+        GELAuFvNBcyDSnCPsrzAVXb5iZeDMbTeyee5P2DD1312mI/qq0cZNXTXgBUZBaW8xf+yeAMYSY+w3
+        hcRx08LtEqG1kTGw9DIt+yDDfeDiY/plD9d6BlIrkTucYEnLAfGepv2jbVpLiRfTKE2mUzS0tj2qT
+        Y0QUyrag==;
+Received: from [2601:1c0:6280:3f0::cc1f]
+        by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1kj3Wq-0005cP-OY; Sat, 28 Nov 2020 16:56:57 +0000
+Subject: Re: [PATCH 7/7] kbuild: doc: document subdir-y syntax
+To:     Masahiro Yamada <masahiroy@kernel.org>
+Cc:     Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>
-References: <20201110162211.9207-1-yu-cheng.yu@intel.com>
- <20201127092905.GB473773@balbir-desktop>
-From:   "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Message-ID: <60d3c72c-b85f-88ac-c79b-1340445bb228@intel.com>
-Date:   Sat, 28 Nov 2020 08:31:02 -0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101
- Thunderbird/68.12.1
+        Michal Marek <michal.lkml@markovi.net>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+References: <20201123045403.63402-1-masahiroy@kernel.org>
+ <20201123045403.63402-7-masahiroy@kernel.org>
+ <5c40293a-a24a-2c85-e7ef-a08a8c732d19@infradead.org>
+ <CAK7LNASZKsfyj9K_QxLoHZkSpfHvUHwgm5pwq=DJUnMCdczjPw@mail.gmail.com>
+From:   Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <f69d022b-a3a6-03e6-5ece-d5e6bd6d7035@infradead.org>
+Date:   Sat, 28 Nov 2020 08:56:51 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20201127092905.GB473773@balbir-desktop>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <CAK7LNASZKsfyj9K_QxLoHZkSpfHvUHwgm5pwq=DJUnMCdczjPw@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 11/27/2020 1:29 AM, Balbir Singh wrote:
-> On Tue, Nov 10, 2020 at 08:21:45AM -0800, Yu-cheng Yu wrote:
->> Control-flow Enforcement (CET) is a new Intel processor feature that blocks
->> return/jump-oriented programming attacks.  Details are in "Intel 64 and
->> IA-32 Architectures Software Developer's Manual" [1].
+On 11/28/20 12:58 AM, Masahiro Yamada wrote:
+> On Tue, Nov 24, 2020 at 3:03 AM Randy Dunlap <rdunlap@infradead.org> wrote:
 >>
->> CET can protect applications and the kernel.  This series enables only
->> application-level protection, and has three parts:
+>> On 11/22/20 8:54 PM, Masahiro Yamada wrote:
+>>> There is no explanation about subdir-y.
+>>>
+>>> Let's document it.
+>>>
+>>> Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
+>>> ---
+>>>
+>>>  Documentation/kbuild/makefiles.rst | 14 ++++++++++++++
+>>>  1 file changed, 14 insertions(+)
+>>>
+>>> +
+>>> +     Unlike obj-y/m, subdir-y/m does not need the trailing slash since this
+>>> +     syntax is always used for directories.
+>>> +
 >>
->>    - Shadow stack [2],
->>    - Indirect branch tracking [3], and
->>    - Selftests [4].
->>
->> I have run tests on these patches for quite some time, and they have been
->> very stable.  Linux distributions with CET are available now, and Intel
->> processors with CET are becoming available.  It would be nice if CET
->> support can be accepted into the kernel.  I will be working to address any
->> issues should they come up.
->>
+>> Just curious:  Is a trailing slash allowed here?  say for consistency?
 > 
-> Is there a way to run these patches for testing? Bochs emulation or anything
-> else? I presume you've been testing against violations of CET in user space?
-> Can you share your testing?
->   
-> Balbir Singh.
+> 
+> If you use a trailing slash for the subdir-y syntax,
+> it will still work.
+> 
+> 
+> Only the problem I see is that the build log will look clumsy
+> due to the double slashes "//".
 > 
 
-Machines with CET are already available on the market.  I tested these 
-on real machines with Fedora.  There is a quick test in my earlier 
-selftest patches:
+Yes, that does look odd.
 
-https://lore.kernel.org/linux-api/20200521211720.20236-6-yu-cheng.yu@intel.com/
+> For example, if you change scripts/Makefile as follows:
+> 
 
-Thanks,
-Yu-cheng
+...
+
+> The build log will look like follows:
+> 
+> 
+> masahiro@grover:~/workspace/linux$ make allmodconfig; make scripts
+> #
+> # configuration written to .config
+> #
+>   SYNC    include/config/auto.conf
+>   HOSTCC  scripts/dtc/dtc.o
+>   HOSTCC  scripts/dtc/flattree.o
+>   HOSTCC  scripts/dtc/fstree.o
+>   HOSTCC  scripts/dtc/data.o
+>   HOSTCC  scripts/dtc/livetree.o
+>   HOSTCC  scripts/dtc/treesource.o
+>   HOSTCC  scripts/dtc/srcpos.o
+>   HOSTCC  scripts/dtc/checks.o
+>   HOSTCC  scripts/dtc/util.o
+>   LEX     scripts/dtc/dtc-lexer.lex.c
+>   YACC    scripts/dtc/dtc-parser.tab.[ch]
+>   HOSTCC  scripts/dtc/dtc-lexer.lex.o
+>   HOSTCC  scripts/dtc/dtc-parser.tab.o
+>   HOSTLD  scripts/dtc/dtc
+>   HOSTCXX scripts/gcc-plugins//latent_entropy_plugin.so
+>   GENSEED scripts/gcc-plugins//randomize_layout_seed.h
+>   HOSTCXX scripts/gcc-plugins//randomize_layout_plugin.so
+>   HOSTCXX scripts/gcc-plugins//stackleak_plugin.so
+>   HOSTCC  scripts/genksyms//genksyms.o
+>   YACC    scripts/genksyms//parse.tab.[ch]
+>   HOSTCC  scripts/genksyms//parse.tab.o
+>   LEX     scripts/genksyms//lex.lex.c
+>   HOSTCC  scripts/genksyms//lex.lex.o
+>   HOSTLD  scripts/genksyms//genksyms
+>   HOSTCC  scripts/selinux//genheaders/genheaders
+>   HOSTCC  scripts/selinux//mdp/mdp
+>   HOSTCC  scripts/kallsyms
+>   HOSTCC  scripts/sorttable
+>   HOSTCC  scripts/asn1_compiler
+>   HOSTCC  scripts/extract-cert
+>   HOSTCC  scripts/bin2c
+>   HOSTCC  scripts/recordmcount
+>   HOSTCC  scripts/sign-file
+>   HOSTCC  scripts/insert-sys-cert
+> 
+> 
+> 
+> 
+> I can fix Kbuild to avoid "//", but I do not want to support two ways.
+> 
+> So, I'd recommend not to add the trailing slash to subdir-y.
+OK, I agree. Thanks.
+
+-- 
+~Randy
+
