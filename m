@@ -2,91 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E3ACE2CAC53
-	for <lists+linux-doc@lfdr.de>; Tue,  1 Dec 2020 20:31:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D95E42CAB60
+	for <lists+linux-doc@lfdr.de>; Tue,  1 Dec 2020 20:06:03 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731331AbgLAT3O (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 1 Dec 2020 14:29:14 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:50374 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1731304AbgLAT3O (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 1 Dec 2020 14:29:14 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1606850868;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=hI2FKlF+kmqq5U4eXXUNmC/tjs6qqn+NATtqfedJVV4=;
-        b=Cbp/w0Ec80hemqo+ZUP2qcrnr9CWHKSWtbTeuANwofhsHWUf/YMEREQSwe4meYHvbt/u2Y
-        10eGO6dksitfiM2i4FYLfmXkqGPZK79WlqwRLdpHRu3oU6NqR2+T1rT8fFuEiBzeQmYJ41
-        SQ7T2emuUlAWqleEenV0nxvXixPVBQM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-238-a1fetJ5wMZaJDqwTxXf4jg-1; Tue, 01 Dec 2020 14:27:43 -0500
-X-MC-Unique: a1fetJ5wMZaJDqwTxXf4jg-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        id S1729859AbgLATEv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 1 Dec 2020 14:04:51 -0500
+Received: from mail.kernel.org ([198.145.29.99]:45466 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725962AbgLATEv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 1 Dec 2020 14:04:51 -0500
+Received: from gaia (unknown [95.146.230.165])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 1EEC1100E421;
-        Tue,  1 Dec 2020 19:27:40 +0000 (UTC)
-Received: from fuller.cnet (ovpn-112-6.gru2.redhat.com [10.97.112.6])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 0E45E9CA0;
-        Tue,  1 Dec 2020 19:27:39 +0000 (UTC)
-Received: by fuller.cnet (Postfix, from userid 1000)
-        id B9D804172EDC; Tue,  1 Dec 2020 12:02:05 -0300 (-03)
-Date:   Tue, 1 Dec 2020 12:02:05 -0300
-From:   Marcelo Tosatti <mtosatti@redhat.com>
-To:     Thomas Gleixner <tglx@linutronix.de>
-Cc:     Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Oliver Upton <oupton@google.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Sean Christopherson <sean.j.christopherson@intel.com>,
-        open list <linux-kernel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Jim Mattson <jmattson@google.com>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Joerg Roedel <joro@8bytes.org>,
-        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>
-Subject: Re: [PATCH 0/2] RFC: Precise TSC migration
-Message-ID: <20201201150205.GA42117@fuller.cnet>
-References: <20201130133559.233242-1-mlevitsk@redhat.com>
- <20201130191643.GA18861@fuller.cnet>
- <877dq1hc2s.fsf@nanos.tec.linutronix.de>
+        by mail.kernel.org (Postfix) with ESMTPSA id 131DE20643;
+        Tue,  1 Dec 2020 19:04:08 +0000 (UTC)
+Date:   Tue, 1 Dec 2020 19:04:06 +0000
+From:   Catalin Marinas <catalin.marinas@arm.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Szabolcs Nagy <szabolcs.nagy@arm.com>, adobriyan@gmail.com,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] Documentation: document /proc api for arm64 MTE vm flags
+Message-ID: <20201201190406.GC2502@gaia>
+References: <20201106101940.5777-1-szabolcs.nagy@arm.com>
+ <20201120144408.GE24344@gaia>
+ <20201120110003.5bba61d5@lwn.net>
+ <20201120222413.GA28722@gaia>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <877dq1hc2s.fsf@nanos.tec.linutronix.de>
+In-Reply-To: <20201120222413.GA28722@gaia>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Dec 01, 2020 at 02:48:11PM +0100, Thomas Gleixner wrote:
-> On Mon, Nov 30 2020 at 16:16, Marcelo Tosatti wrote:
-> >> Besides, Linux guests don't sync the TSC via IA32_TSC write,
-> >> but rather use IA32_TSC_ADJUST which currently doesn't participate
-> >> in the tsc sync heruistics.
-> >
-> > Linux should not try to sync the TSC with IA32_TSC_ADJUST. It expects
-> > the BIOS to boot with synced TSCs.
-> 
-> That's wishful thinking.
-> 
-> Reality is that BIOS tinkerers fail to get it right. TSC_ADJUST allows
-> us to undo the wreckage they create.
-> 
-> Thanks,
-> 
->         tglx
+Hi Jon,
 
-Have not seen any multicore Dell/HP systems require that.
+On Fri, Nov 20, 2020 at 10:24:13PM +0000, Catalin Marinas wrote:
+> On Fri, Nov 20, 2020 at 11:00:03AM -0700, Jonathan Corbet wrote:
+> > On Fri, 20 Nov 2020 14:44:09 +0000
+> > Catalin Marinas <catalin.marinas@arm.com> wrote:
+> > 
+> > > On Fri, Nov 06, 2020 at 10:19:40AM +0000, Szabolcs Nagy wrote:
+> > > > Document that /proc/PID/smaps shows PROT_MTE settings in VmFlags.
+> > > > Support for this was introduced in
+> > > > 
+> > > >   commit 9f3419315f3cdc41a7318e4d50ba18a592b30c8c
+> > > >   arm64: mte: Add PROT_MTE support to mmap() and mprotect()
+> > > > 
+> > > > Signed-off-by: Szabolcs Nagy <szabolcs.nagy@arm.com>
+> > > > Reviewed-by: Catalin Marinas <catalin.marinas@arm.com>
+> > > > Cc: linux-doc@vger.kernel.org
+> > > > ---
+> > > >  Documentation/filesystems/proc.rst | 1 +
+> > > >  1 file changed, 1 insertion(+)
+> > > > 
+> > > > diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
+> > > > index 533c79e8d2cd..e5fa972d4c76 100644
+> > > > --- a/Documentation/filesystems/proc.rst
+> > > > +++ b/Documentation/filesystems/proc.rst
+> > > > @@ -546,6 +546,7 @@ encoded manner. The codes are the following:
+> > > >      nh    no huge page advise flag
+> > > >      mg    mergable advise flag
+> > > >      bt    arm64 BTI guarded page
+> > > > +    mt    arm64 MTE allocation tags are enabled
+> > > >      ==    =======================================
+> > > >  
+> > > >  Note that there is no guarantee that every flag and associated mnemonic will  
+> > > 
+> > > Are you ok with picking up this patch (it can be left for 5.11) or
+> > > should I queue it in the arm64 tree?
+> > 
+> > It wasn't sent to me, so it wasn't on my radar.  Up to you, I'm happy to
+> > grab it if you'd prefer.
+> 
+> Please do grab it. Thanks.
 
-Anyway, for QEMU/KVM it should be synced (unless there is a bug
-in the sync logic in the first place).
+In case it slipped through the cracks (I haven't seen it in -next).
+Otherwise I'll queue it sometime later this week for 5.11.
 
+Thanks.
+
+-- 
+Catalin
