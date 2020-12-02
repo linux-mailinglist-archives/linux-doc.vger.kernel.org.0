@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D52732CC5AB
-	for <lists+linux-doc@lfdr.de>; Wed,  2 Dec 2020 19:44:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 16B042CC5A7
+	for <lists+linux-doc@lfdr.de>; Wed,  2 Dec 2020 19:44:53 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389615AbgLBSnm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 2 Dec 2020 13:43:42 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53932 "EHLO
+        id S2389610AbgLBSnj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 2 Dec 2020 13:43:39 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53948 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2389620AbgLBSnl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Dec 2020 13:43:41 -0500
-Received: from mail-wm1-x341.google.com (mail-wm1-x341.google.com [IPv6:2a00:1450:4864:20::341])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BA571C094251
-        for <linux-doc@vger.kernel.org>; Wed,  2 Dec 2020 10:42:20 -0800 (PST)
-Received: by mail-wm1-x341.google.com with SMTP id x22so10035004wmc.5
-        for <linux-doc@vger.kernel.org>; Wed, 02 Dec 2020 10:42:20 -0800 (PST)
+        with ESMTP id S2389589AbgLBSni (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 2 Dec 2020 13:43:38 -0500
+Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com [IPv6:2a00:1450:4864:20::344])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EA37EC094253
+        for <linux-doc@vger.kernel.org>; Wed,  2 Dec 2020 10:42:22 -0800 (PST)
+Received: by mail-wm1-x344.google.com with SMTP id g25so1294292wmh.1
+        for <linux-doc@vger.kernel.org>; Wed, 02 Dec 2020 10:42:22 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=FBH6HEW5NPUtTsYV4IlYky2BDGVGm12SrN30lN4PkFY=;
-        b=GwirdQYpnGgq1EVsJzAuWcQcbP11n6x036yOyPPx1vuGLdUpAEBFHj+LcFwdzYyxw+
-         T8lnqGlHicu8lC1OG+9o9owM1KpTEfxKieiZO+v648VwSXWHshhhM5L5mcoUnNJoGpgP
-         JF9LDYFE971ZkAyI4UJiC9Wj2Xc8p3fiDo1tCV+m8q7oGRHw7LI+kmLYVPoNtx23niwN
-         DKnFEZdky5kwe4pgwVbOEWZKaUBtyvs+ZR+1j/PIZVxPLVLSf3X2PlsluY9qutX26LPO
-         CoDv2JHfB182QCETZ+fYEDp3BzS+9YTS+Cpc2qSLa7FqP4K3kA3VJYq5HemX3PVOurbw
-         WfCg==
+        bh=pdq1h6Iz7BaS9XHPJecHzTrxzCvHIq7bY+OCaqaUt9I=;
+        b=KOEK4s1Ox/QOtxtUNQV6lW8tsX7N/Qz11MQmpxX+mgoAtIqI4ROGadur0j1GvfPZ3S
+         qnd7H6icVbP7FDjQA0VS8bb07nR1MeQ9HF9dNdeQKXtjw8SrZGW8CvARHvvIL/pDJYw9
+         eub897JAH61yZK0cmDaSunb3DJmizow9dhDher5Z/q5p1VMb022tLjTj1d+6gVWvzGkI
+         lV5sPeEzfS+NmliZtrXh/m9lZlnFM4iwGM29uCkyDwzCsWZB16dkh9pbesIly660+TGZ
+         JZZN/EW6Xuubk9oqq8U0SFC0cRqU+n2i1xAYFPOjwGtz5rGvLtCOgvpc80RP5Qr2nhJv
+         CvJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=FBH6HEW5NPUtTsYV4IlYky2BDGVGm12SrN30lN4PkFY=;
-        b=LQK3Fc+z0AFZenfu3YFpoGaCWXK6q7aqUCzU1pIaxsfTLpERjTa4iWpT6Jtjb1KpJ1
-         eNaN/P2JD4x5pKZly4+M5RYv4L104va00F7p6R+CiVOB+Gz4TH7uJ6P5M2CyK+TO2KHv
-         ZeIdaPITfIxKRQ5aRyJd46/w1CMZWKdvhkdrFL8UO95vJygj/ktW4PkdrNONNVaqhUQ/
-         1tVMKOnLQ+EKbv7maNA2AkyvPPDwiQWnwL2G2F2TkKpoxX1yv4DBp5cxEGIZ16kN2iMA
-         WwOHkGikrAJCzmr9B5GeQfXNFNwZ1YfpRRJ46wtO10dH+SLLrzK7pvhRGQqZIzcSo2oT
-         qePQ==
-X-Gm-Message-State: AOAM532SptL6r64rmD77s5Cdb90Q9ORweCEGE0Ez2FjEC5qy/SYmEpNV
-        pti9tMGIgVBmHBbc0a1r2kg5vA==
-X-Google-Smtp-Source: ABdhPJxcoHouQF9MWhIcY2M29LL8SVnxKTEFmpQkXa7h00mrGlfxwPNATVEGfGu2v86fKDMdyLCvLQ==
-X-Received: by 2002:a1c:a402:: with SMTP id n2mr4626696wme.185.1606934539318;
-        Wed, 02 Dec 2020 10:42:19 -0800 (PST)
+        bh=pdq1h6Iz7BaS9XHPJecHzTrxzCvHIq7bY+OCaqaUt9I=;
+        b=eeaFG3lzDrb8/ijdvVNcLQ/UCnXqw1ZNkQeLUTMF7FJp5eMHNNsodbgLAzC6GrlH9E
+         2DVZIYr1LvFY/YTkRd5ZmHbcAHdGfsRvrMuCl5XXRfVNwHqOa4HBEfbrZy3KQlZ6VQ4C
+         6kMs22+YUiciXBXp+rvQq/fWS3dPIpptFVorjmlsnPJIXhUCtyq9VG+I7Sbf2ihzixv+
+         4Ui2zKTY5zo8jdoBJh0tEZL7dqmMKOykJMq0bYyUhgHROoogTsXgmT72hrzEW8oJF4WI
+         Z5BgQ384WgUKLVJ6YeaEs7k4iNDnu51X1XOm9jego00U6vEmMVcC8y6Ja6gihg6wjyHm
+         cxTA==
+X-Gm-Message-State: AOAM5329p+2Oas5gudbSTRu1xrL6z+jwXKSoiwQZUWY/p8rKWQalUcjI
+        D2G1QZpeOXxYZZoT47hWs6o2LA==
+X-Google-Smtp-Source: ABdhPJyAghBSBueIUZyEOdUpBSWInTgxUTJ9HrAjeXaOhO6iHRoqpQZbX/aG+qsqholRHQQrI3MT8A==
+X-Received: by 2002:a1c:9ac6:: with SMTP id c189mr4470560wme.137.1606934541552;
+        Wed, 02 Dec 2020 10:42:21 -0800 (PST)
 Received: from localhost ([2a01:4b00:8523:2d03:5ddd:b7c5:e3c9:e87a])
-        by smtp.gmail.com with ESMTPSA id x9sm3176873wru.55.2020.12.02.10.42.17
+        by smtp.gmail.com with ESMTPSA id o13sm2912807wmc.44.2020.12.02.10.42.20
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 02 Dec 2020 10:42:18 -0800 (PST)
+        Wed, 02 Dec 2020 10:42:20 -0800 (PST)
 From:   David Brazdil <dbrazdil@google.com>
 To:     kvmarm@lists.cs.columbia.edu
 Cc:     Jonathan Corbet <corbet@lwn.net>,
@@ -62,9 +62,9 @@ Cc:     Jonathan Corbet <corbet@lwn.net>,
         Sudeep Holla <sudeep.holla@arm.com>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
         kernel-team@android.com, David Brazdil <dbrazdil@google.com>
-Subject: [PATCH v4 23/26] kvm: arm64: Intercept host's SYSTEM_SUSPEND PSCI SMCs
-Date:   Wed,  2 Dec 2020 18:41:19 +0000
-Message-Id: <20201202184122.26046-24-dbrazdil@google.com>
+Subject: [PATCH v4 24/26] kvm: arm64: Keep nVHE EL2 vector installed
+Date:   Wed,  2 Dec 2020 18:41:20 +0000
+Message-Id: <20201202184122.26046-25-dbrazdil@google.com>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <20201202184122.26046-1-dbrazdil@google.com>
 References: <20201202184122.26046-1-dbrazdil@google.com>
@@ -74,73 +74,56 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a handler of SYSTEM_SUSPEND host PSCI SMCs. The semantics are
-equivalent to CPU_SUSPEND, typically called on the last online CPU.
-Reuse the same entry point and boot args struct as CPU_SUSPEND.
+KVM by default keeps the stub vector installed and installs the nVHE
+vector only briefly for init and later on demand. Change this policy
+to install the vector at init and then never uninstall it if the kernel
+was given the protected KVM command line parameter.
 
 Signed-off-by: David Brazdil <dbrazdil@google.com>
 ---
- arch/arm64/kvm/hyp/nvhe/hyp-init.S   |  2 +-
- arch/arm64/kvm/hyp/nvhe/psci-relay.c | 26 ++++++++++++++++++++++++++
- 2 files changed, 27 insertions(+), 1 deletion(-)
+ arch/arm64/kvm/arm.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/arch/arm64/kvm/hyp/nvhe/hyp-init.S b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
-index 0853f62b052b..a2e251547625 100644
---- a/arch/arm64/kvm/hyp/nvhe/hyp-init.S
-+++ b/arch/arm64/kvm/hyp/nvhe/hyp-init.S
-@@ -151,7 +151,7 @@ SYM_CODE_START(kvm_hyp_cpu_entry)
- SYM_CODE_END(kvm_hyp_cpu_entry)
+diff --git a/arch/arm64/kvm/arm.c b/arch/arm64/kvm/arm.c
+index fda7bfa440d5..5f8776eefe46 100644
+--- a/arch/arm64/kvm/arm.c
++++ b/arch/arm64/kvm/arm.c
+@@ -1531,7 +1531,8 @@ static void _kvm_arch_hardware_disable(void *discard)
  
- /*
-- * PSCI CPU_SUSPEND entry point
-+ * PSCI CPU_SUSPEND / SYSTEM_SUSPEND entry point
-  *
-  * x0: struct kvm_nvhe_init_params PA
-  */
-diff --git a/arch/arm64/kvm/hyp/nvhe/psci-relay.c b/arch/arm64/kvm/hyp/nvhe/psci-relay.c
-index 688cf7f40d42..08dc9de69314 100644
---- a/arch/arm64/kvm/hyp/nvhe/psci-relay.c
-+++ b/arch/arm64/kvm/hyp/nvhe/psci-relay.c
-@@ -201,6 +201,30 @@ static int psci_cpu_suspend(u64 func_id, struct kvm_cpu_context *host_ctxt)
- 			 __hyp_pa(init_params));
+ void kvm_arch_hardware_disable(void)
+ {
+-	_kvm_arch_hardware_disable(NULL);
++	if (!is_protected_kvm_enabled())
++		_kvm_arch_hardware_disable(NULL);
  }
  
-+static int psci_system_suspend(u64 func_id, struct kvm_cpu_context *host_ctxt)
-+{
-+	DECLARE_REG(unsigned long, pc, host_ctxt, 1);
-+	DECLARE_REG(unsigned long, r0, host_ctxt, 2);
-+
-+	struct psci_boot_args *boot_args;
-+	struct kvm_nvhe_init_params *init_params;
-+
-+	boot_args = this_cpu_ptr(hyp_symbol_addr(suspend_args));
-+	init_params = this_cpu_ptr(hyp_symbol_addr(kvm_init_params));
-+
-+	/*
-+	 * No need to acquire a lock before writing to boot_args because a core
-+	 * can only suspend itself. Racy CPU_ON calls use a separate struct.
-+	 */
-+	boot_args->pc = pc;
-+	boot_args->r0 = r0;
-+
-+	/* Will only return on error. */
-+	return psci_call(func_id,
-+			 __hyp_pa(hyp_symbol_addr(kvm_hyp_cpu_resume)),
-+			 __hyp_pa(init_params), 0);
-+}
-+
- asmlinkage void __noreturn kvm_host_psci_cpu_entry(bool is_cpu_on)
+ #ifdef CONFIG_CPU_PM
+@@ -1574,11 +1575,13 @@ static struct notifier_block hyp_init_cpu_pm_nb = {
+ 
+ static void __init hyp_cpu_pm_init(void)
  {
- 	struct psci_boot_args *boot_args;
-@@ -265,6 +289,8 @@ static unsigned long psci_1_0_handler(u64 func_id, struct kvm_cpu_context *host_
- 	case PSCI_1_0_FN_SET_SUSPEND_MODE:
- 	case PSCI_1_1_FN64_SYSTEM_RESET2:
- 		return psci_forward(host_ctxt);
-+	case PSCI_1_0_FN64_SYSTEM_SUSPEND:
-+		return psci_system_suspend(func_id, host_ctxt);
- 	default:
- 		return psci_0_2_handler(func_id, host_ctxt);
- 	}
+-	cpu_pm_register_notifier(&hyp_init_cpu_pm_nb);
++	if (!is_protected_kvm_enabled())
++		cpu_pm_register_notifier(&hyp_init_cpu_pm_nb);
+ }
+ static void __init hyp_cpu_pm_exit(void)
+ {
+-	cpu_pm_unregister_notifier(&hyp_init_cpu_pm_nb);
++	if (!is_protected_kvm_enabled())
++		cpu_pm_unregister_notifier(&hyp_init_cpu_pm_nb);
+ }
+ #else
+ static inline void hyp_cpu_pm_init(void)
+@@ -1666,7 +1669,8 @@ static int init_subsystems(void)
+ 	kvm_sys_reg_table_init();
+ 
+ out:
+-	on_each_cpu(_kvm_arch_hardware_disable, NULL, 1);
++	if (err || !is_protected_kvm_enabled())
++		on_each_cpu(_kvm_arch_hardware_disable, NULL, 1);
+ 
+ 	return err;
+ }
 -- 
 2.29.2.454.gaff20da3a2-goog
 
