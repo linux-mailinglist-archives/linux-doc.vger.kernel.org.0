@@ -2,100 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A0ABE2CE1D4
-	for <lists+linux-doc@lfdr.de>; Thu,  3 Dec 2020 23:35:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C8C0F2CE1E2
+	for <lists+linux-doc@lfdr.de>; Thu,  3 Dec 2020 23:38:16 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731920AbgLCWee (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 3 Dec 2020 17:34:34 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59060 "EHLO
+        id S1728020AbgLCWh1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 3 Dec 2020 17:37:27 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59500 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727889AbgLCWee (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Dec 2020 17:34:34 -0500
-Received: from mail-pl1-x641.google.com (mail-pl1-x641.google.com [IPv6:2607:f8b0:4864:20::641])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6FB23C09424F
-        for <linux-doc@vger.kernel.org>; Thu,  3 Dec 2020 14:32:33 -0800 (PST)
-Received: by mail-pl1-x641.google.com with SMTP id x4so1975659pln.8
-        for <linux-doc@vger.kernel.org>; Thu, 03 Dec 2020 14:32:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=dabbelt-com.20150623.gappssmtp.com; s=20150623;
-        h=subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding:cc:from:to;
-        bh=kWu6dOTpWM5OEhpvvxAmGbYOm4nAgVI2rftl3/PRnJw=;
-        b=bb3TCC2gTuwqOzen2Ppu96SWrslPoHVYn9ghrkgyDWdZa8ILSfqc1wrojX1K3U73Vm
-         /r50dYf+je7pw5TDPJsRRIofKlxMtnczpH8DEEMxc6f6su/Fyvrp7310ABwpwthtbxgE
-         dh4dAzwHX13qe8zGtbSnnHi6cpCoUgASyqy3geEYFliW8AwCp60EvA42stwrZe0OTchB
-         rezZqwJ7yndm/Mp1sQBTLVS9ar/3tS182u7HiIA9p8vP+QbSBWyQU6kQHLD0gAFo6uvX
-         9eeQitIK+S2t+aMW9Zj+hkdgmLuAEnshhl1Xud18G3YOS6yU07NUYpNnGGRtmo3zQ5cZ
-         GsGw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding:cc:from:to;
-        bh=kWu6dOTpWM5OEhpvvxAmGbYOm4nAgVI2rftl3/PRnJw=;
-        b=chEfRt2MKWkcZ7Tp3Gnn8znCxNF6O6kCCVsuA7H8mY8AQ+4hfmsos8rAbNtplbWJhw
-         Zap31PrtBBL9iWebqry68deDS/PTvMF2zGb/AJJvD+RUUw64aqiCeL5s9dbl+Z1ITefW
-         cc4+1V/IVB2kt4UBL6W3C0CFPe3gch5asXRjs5QtqPuHCjRh/SdxKGo8xSTbauvC9PKF
-         tRcFiQcTJ9mLLDL+CbxlHEwuk6KvnpvZvxnwYdToTEWn2IdHnsJuvBNmgmotnnqNPaC1
-         69E9IEArHFAr4gozo8/XXRtT9N3+nX9JjVlnFMi4FGt0rCeQAZP2lGX8GRchG2RRJcUe
-         e9rw==
-X-Gm-Message-State: AOAM532TdJYYjAdOhKt/cNQzZdxzUbmzAm4Zd8Q1Bw1h1l3Me19qtuxO
-        bo4wiWsMtzzYXn1YdXf3asn4IQ==
-X-Google-Smtp-Source: ABdhPJyss4HB0tRKuTdlmynwH8EalWY5UH5526iClcnKVeSXxYoDVLrUWDJ1cBtKdu4wdMbvN0OThQ==
-X-Received: by 2002:a17:902:758c:b029:da:a6e1:e06 with SMTP id j12-20020a170902758cb02900daa6e10e06mr1222353pll.67.1607034752937;
-        Thu, 03 Dec 2020 14:32:32 -0800 (PST)
-Received: from localhost (76-210-143-223.lightspeed.sntcca.sbcglobal.net. [76.210.143.223])
-        by smtp.gmail.com with ESMTPSA id g6sm305006pjd.3.2020.12.03.14.32.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 03 Dec 2020 14:32:32 -0800 (PST)
-Subject: [PATCH v1 5/5] MAINTAINERS: Add myself as a dm-user maintainer
-Date:   Thu,  3 Dec 2020 13:58:59 -0800
-Message-Id: <20201203215859.2719888-6-palmer@dabbelt.com>
-X-Mailer: git-send-email 2.29.2.454.gaff20da3a2-goog
-In-Reply-To: <20201203215859.2719888-1-palmer@dabbelt.com>
-References: <20201203215859.2719888-1-palmer@dabbelt.com>
+        with ESMTP id S1727664AbgLCWh1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 3 Dec 2020 17:37:27 -0500
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D1166C061A51;
+        Thu,  3 Dec 2020 14:36:46 -0800 (PST)
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id A638F2204;
+        Thu,  3 Dec 2020 22:36:43 +0000 (UTC)
+Date:   Thu, 3 Dec 2020 15:36:42 -0700
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org,
+        "Daniel W. S. Almeida" <dwlsalmeida@gmail.com>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        "James E.J. Bottomley" <James.Bottomley@HansenPartnership.com>,
+        Jonathan =?UTF-8?B?TmV1c2Now6RmZXI=?= <j.neuschaefer@gmx.net>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Andrew Cooper <andrew.cooper3@citrix.com>,
+        Benjamin Herrenschmidt <benh@kernel.crashing.org>,
+        Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Fenghua Yu <fenghua.yu@intel.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        Helge Deller <deller@gmx.de>, Ingo Molnar <mingo@redhat.com>,
+        Jonas Bonn <jonas@southpole.se>,
+        Kees Cook <keescook@chromium.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Paul Mackerras <paulus@samba.org>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Rich Felker <dalias@libc.org>,
+        Stafford Horne <shorne@gmail.com>,
+        Stefan Kristiansson <stefan.kristiansson@saunalahti.fi>,
+        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Tony Luck <tony.luck@intel.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Will Deacon <will@kernel.org>,
+        Yoshinori Sato <ysato@users.sourceforge.jp>,
+        linux-arm-kernel@lists.infradead.org, linux-ia64@vger.kernel.org,
+        linux-mips@vger.kernel.org, linux-parisc@vger.kernel.org,
+        linux-riscv@lists.infradead.org, linux-s390@vger.kernel.org,
+        linux-sh@vger.kernel.org, linuxppc-dev@lists.ozlabs.org,
+        openrisc@lists.librecores.org, x86@kernel.org
+Subject: Re: [PATCH 0/6] Add documentation for Documentation/features at the
+ built docs
+Message-ID: <20201203153642.594afd85@lwn.net>
+In-Reply-To: <cover.1606748711.git.mchehab+huawei@kernel.org>
+References: <cover.1606748711.git.mchehab+huawei@kernel.org>
+Organization: LWN.net
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 8bit
-Cc:     corbet@lwn.net, song@kernel.org,
-        Palmer Dabbelt <palmerdabbelt@google.com>, shuah@kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-raid@vger.kernel.org, linux-kselftest@vger.kernel.org,
-        kernel-team@android.com
-From:   Palmer Dabbelt <palmer@dabbelt.com>
-To:     dm-devel@redhat.com, agk@redhat.com, snitzer@redhat.com
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Palmer Dabbelt <palmerdabbelt@google.com>
+On Mon, 30 Nov 2020 16:36:29 +0100
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 
-I'm not sure this is big enough to warrant an entry in the MAINTAINERS file,
-but I know it can be quite a bit of work to maintain something like this so I'm
-happy to sign up if that helps.
+> This series got already submitted last year:
+> 
+>    https://lore.kernel.org/lkml/cover.1561222784.git.mchehab+samsung@kernel.org/
+> 
+> Yet, on that time, there were too many other patches related to ReST
+> conversion floating around. So, at the end, I guess this one got missed.
+> 
+> So, I did a rebase on the top of upstream, and added a few new changes.
 
-Signed-off-by: Palmer Dabbelt <palmerdabbelt@google.com>
----
- MAINTAINERS | 7 +++++++
- 1 file changed, 7 insertions(+)
+OK, I've gone ahead and applied these; it gains me a new trivial conflict
+with x86, but so be it...
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 2daa6ee673f7..ab9d7746cfb4 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -5198,6 +5198,13 @@ W:	http://sources.redhat.com/cluster/
- T:	git git://git.kernel.org/pub/scm/linux/kernel/git/teigland/linux-dlm.git
- F:	fs/dlm/
- 
-+DM USER (Block Device in Userspace)
-+M:	Palmer Dabbelt <palmerdabbelt@google.com>
-+S:	Maintained
-+F:	include/linux/dm-user.h
-+F:	drivers/md/dm-user.c
-+F:	tools/testing/selftests/dm-user/
-+
- DMA BUFFER SHARING FRAMEWORK
- M:	Sumit Semwal <sumit.semwal@linaro.org>
- M:	Christian König <christian.koenig@amd.com>
--- 
-2.29.2.454.gaff20da3a2-goog
+That said, I think that the RST table formatting could be *way* improved.
+The current tables are all white space and hard to make sense of.  What if
+we condensed the information?  Just looking at the first entry in
+Documentation/admin-guide/features.html, perhaps it could look like:
 
+    FEATURE	KCONFIG/DESCRIPTION		STATUS
+
+    cBPF-JIT	HAVE_CBPF_JIT			TODO: alpha, arc, arm...
+    						ok: mips, powerpc, ...
+		arch supports cBPF JIT
+		optimizations
+
+The result would be far more compact and easy to read, IMO.  I may get
+around to giving this a try if (hint :) nobody else gets there first.
+
+Thanks,
+
+jon
