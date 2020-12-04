@@ -2,27 +2,27 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 847332CEAB2
-	for <lists+linux-doc@lfdr.de>; Fri,  4 Dec 2020 10:19:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 665D32CEADE
+	for <lists+linux-doc@lfdr.de>; Fri,  4 Dec 2020 10:28:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729564AbgLDJSn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 4 Dec 2020 04:18:43 -0500
-Received: from mail.kernel.org ([198.145.29.99]:45142 "EHLO mail.kernel.org"
+        id S2387430AbgLDJ1S (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 4 Dec 2020 04:27:18 -0500
+Received: from mail.kernel.org ([198.145.29.99]:46226 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729563AbgLDJSn (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 4 Dec 2020 04:18:43 -0500
+        id S1725866AbgLDJ1R (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 4 Dec 2020 04:27:17 -0500
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Authentication-Results: mail.kernel.org; dkim=permerror (bad message/signature format)
 To:     "Jonathan Corbet" <corbet@lwn.net>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         linux-kernel@vger.kernel.org
-Subject: [PATCH] scripts: get_feat.pl: make complete table more coincise
-Date:   Fri,  4 Dec 2020 10:17:45 +0100
-Message-Id: <2fe5f94aa8e12279d36cfbf489b30d4482a9bebb.1607073431.git.mchehab+huawei@kernel.org>
+Subject: [PATCH v2] scripts: get_feat.pl: make complete table more coincise
+Date:   Fri,  4 Dec 2020 10:26:31 +0100
+Message-Id: <7c82a766867f2813a1e5c7b982b5e952e50b6c5e.1607073967.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20201203153642.594afd85@lwn.net>
-References: <20201203153642.594afd85@lwn.net>
+In-Reply-To: <2fe5f94aa8e12279d36cfbf489b30d4482a9bebb.1607073431.git.mchehab+huawei@kernel.org>
+References: <2fe5f94aa8e12279d36cfbf489b30d4482a9bebb.1607073431.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -38,41 +38,57 @@ Make the format a lot more compact.
 Suggested-by: Jonathan Corbet <corbet@lwn.net>
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- scripts/get_feat.pl | 107 +++++++++++++++++++++++++++++++++-----------
- 1 file changed, 81 insertions(+), 26 deletions(-)
+ scripts/get_feat.pl | 119 ++++++++++++++++++++++++++++++--------------
+ 1 file changed, 83 insertions(+), 36 deletions(-)
 
 diff --git a/scripts/get_feat.pl b/scripts/get_feat.pl
-index 81d1b78d65c9..f3777f6d32bb 100755
+index 81d1b78d65c9..2860abfdcd91 100755
 --- a/scripts/get_feat.pl
 +++ b/scripts/get_feat.pl
-@@ -325,7 +325,9 @@ sub output_feature {
+@@ -325,10 +325,10 @@ sub output_feature {
  # Output all features for all architectures
  #
  
 -sub matrix_lines($$) {
-+sub matrix_lines($$$$) {
+-	my $partial = shift;
++sub matrix_lines($$$) {
 +	my $desc_size = shift;
 +	my $status_size = shift;
- 	my $partial = shift;
  	my $header = shift;
- 	my $split;
-@@ -349,13 +351,9 @@ sub matrix_lines($$) {
- 	print $split;
+-	my $split;
+ 	my $fill;
+ 	my $ln_marker;
+ 
+@@ -338,24 +338,14 @@ sub matrix_lines($$) {
+ 		$ln_marker = "-";
+ 	}
+ 
+-	if ($partial) {
+-		$split = "|";
+-		$fill = " ";
+-	} else {
+-		$split = "+";
+-		$fill = $ln_marker;
+-	}
++	$fill = $ln_marker;
+ 
+-	print $split;
++	print "+";
  	print $fill x $max_size_name;
- 	print $split;
+-	print $split;
 -	print $fill x $max_size_kconfig;
 -	print $split;
 -	print $fill x $max_size_description;
-+	print $fill x $desc_size;
  	print "+";
 -	print $ln_marker x $max_size_arch;
--	print "+";
++	print $fill x $desc_size;
+ 	print "+";
 -	print $ln_marker x $max_size_status;
 +	print $ln_marker x $status_size;
  	print "+\n";
  }
  
-@@ -366,6 +364,14 @@ sub output_matrix {
+@@ -366,6 +356,14 @@ sub output_matrix {
  	print "$title\n";
  	print "=" x length($title) . "\n\n";
  
@@ -87,13 +103,13 @@ index 81d1b78d65c9..f3777f6d32bb 100755
  	my $cur_subsys = "";
  	foreach my $name (sort {
  				($data{$a}->{subsys} cmp $data{$b}->{subsys}) or
-@@ -383,36 +389,85 @@ sub output_matrix {
+@@ -383,36 +381,85 @@ sub output_matrix {
  			print "$title\n";
  			print "=" x length($title) . "\n\n";
  
 -			matrix_lines(0, 0);
 +
-+			matrix_lines($desc_size, $status_size, 0, 0);
++			matrix_lines($desc_size, $status_size, 0);
 +
  			printf "|%-${max_size_name}s", $h_name;
 -			printf "|%-${max_size_kconfig}s", $h_kconfig;
@@ -105,7 +121,7 @@ index 81d1b78d65c9..f3777f6d32bb 100755
 -
 -			matrix_lines(0, 1);
 +			printf "|%-${status_size}s|\n", "Status per architecture";
-+			matrix_lines($desc_size, $status_size, 0, 1);
++			matrix_lines($desc_size, $status_size, 1);
  		}
  
  		my %arch_table = %{$data{$name}->{table}};
@@ -188,7 +204,7 @@ index 81d1b78d65c9..f3777f6d32bb 100755
  		}
 -		matrix_lines(0, 0);
 +
-+		matrix_lines($desc_size, $status_size, 0, 0);
++		matrix_lines($desc_size, $status_size, 0);
  	}
  }
  
