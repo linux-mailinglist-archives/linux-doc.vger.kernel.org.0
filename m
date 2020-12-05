@@ -2,38 +2,36 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C52062CFCCA
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Dec 2020 19:51:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E8AA92CFCC6
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Dec 2020 19:51:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728732AbgLESTW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S1728090AbgLESTW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Sat, 5 Dec 2020 13:19:22 -0500
-Received: from mail.kernel.org ([198.145.29.99]:46420 "EHLO mail.kernel.org"
+Received: from mail.kernel.org ([198.145.29.99]:42898 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728356AbgLESEg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 5 Dec 2020 13:04:36 -0500
-Date:   Sat, 5 Dec 2020 17:03:50 +0100
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1607184234;
-        bh=j6/EpsPHQza8Klw86MQJoxgPG0CYgRR+DE263FUMw0U=;
-        h=From:To:Cc:Subject:In-Reply-To:References:From;
-        b=ldowca47whOC5chTBjM/tHnckWSi/4ecdFC7NmGXw03IrL/7lQD71dFwFDXkoh50n
-         9RvtyWMEZ1bxMdgzqkguHXll4ZUUIs5ILgTcKKyK7TppEkgHRHi0D8yKm7mBK2dP22
-         p0ylYeI2KyILMvJGcgiOmz0eOQ69I38rsa7AF/8cgj+4OZKwRCpgSoblLaULtLwBxR
-         3PgMARAl0PdAy8y/G4VeUPaDx51b+kYMUU+iOYF19gRb2dzRWvknkC1d+hp7zktx1Z
-         BrdGYk9Lb4kvjJW76YgKDgNwBrk0VMLnTGgZph8HvS7E3Hg1UAHR9rZYFBgMgH6zFj
-         hHSw878VHfZyQ==
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v4 0/3] improve get_feat.pl output when all features are
- displayed
-Message-ID: <20201205170350.19d91c51@coco.lan>
-In-Reply-To: <20201204144843.1ed3b988@lwn.net>
-References: <20201203153642.594afd85@lwn.net>
-        <cover.1607095090.git.mchehab+huawei@kernel.org>
-        <20201204144843.1ed3b988@lwn.net>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1727878AbgLERte (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sat, 5 Dec 2020 12:49:34 -0500
+Received: from archlinux (cpc108967-cmbg20-2-0-cust86.5-4.cable.virginm.net [81.101.6.87])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id B6106230FF;
+        Sat,  5 Dec 2020 17:12:50 +0000 (UTC)
+Date:   Sat, 5 Dec 2020 17:12:47 +0000
+From:   Jonathan Cameron <jic23@kernel.org>
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     linux-kernel@vger.kernel.org, Jiri Kosina <jikos@kernel.org>,
+        Benjamin Tissoires <benjamin.tissoires@redhat.com>,
+        linux-input@vger.kernel.org,
+        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+        linux-iio@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH 2/8] Documentation: HID: amd-sfh-hid editing &
+ corrections
+Message-ID: <20201205171247.5225d844@archlinux>
+In-Reply-To: <20201204062022.5095-3-rdunlap@infradead.org>
+References: <20201204062022.5095-1-rdunlap@infradead.org>
+        <20201204062022.5095-3-rdunlap@infradead.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
@@ -41,51 +39,77 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Fri, 4 Dec 2020 14:48:43 -0700
-Jonathan Corbet <corbet@lwn.net> escreveu:
+On Thu,  3 Dec 2020 22:20:16 -0800
+Randy Dunlap <rdunlap@infradead.org> wrote:
 
-> On Fri,  4 Dec 2020 16:32:27 +0100
-> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+> Do basic editing & correction to amd-sfh-hid.rst:
+> - fix punctuation
+> - use HID instead of hid consistently
+> - fix grammar, verb tense
 > 
-> > As requested, those patches improve the output of the script, when all features
-> > are displayed.
-> > 
-> > The first patch was already posted as-is at v3.
-> > 
-> > Patch 2 is optional. IMO, it makes more sense for the admin guide to show
-> > the architectures where the features are OK, then TODO, and finally the
-> > ones that are incompatible with the features. I already sent it together
-> > with a comment.
-> > 
-> > Patch 3 is new: it tries to reduce the width of the table, in order for it
-> > to better fit on a terminal. With the patch, the number of columns were
-> > reduced, in order to better fit at console output. Before the patch, the
-> > output takes 281 lines with 158 columns (total size: 38.9 kB). 
-> > After the patch, displaying all features require 439 lines and 92 columns
-> > (total size: 37.6 kB).  
+> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
+> Cc: Jiri Kosina <jikos@kernel.org>
+> Cc: Jonathan Cameron <jic23@kernel.org>
+> Cc: Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>
+> Cc: linux-input@vger.kernel.org
+> Cc: linux-iio@vger.kernel.org
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: linux-doc@vger.kernel.org
+
+Trivial suggested addition inline.
+
+> ---
+>  Documentation/hid/amd-sfh-hid.rst |   16 ++++++++--------
+>  1 file changed, 8 insertions(+), 8 deletions(-)
 > 
-> OK, this is much improved, thanks; applied.
+> --- linux-next-20201201.orig/Documentation/hid/amd-sfh-hid.rst
+> +++ linux-next-20201201/Documentation/hid/amd-sfh-hid.rst
+> @@ -3,7 +3,7 @@
+>  
+>  AMD Sensor Fusion Hub
+>  =====================
+> -AMD Sensor Fusion Hub (SFH) is part of an SOC starting from Ryzen based platforms.
+> +AMD Sensor Fusion Hub (SFH) is part of an SOC starting from Ryzen-based platforms.
+>  The solution is working well on several OEM products. AMD SFH uses HID over PCIe bus.
+>  In terms of architecture it resembles ISH, however the major difference is all
+>  the HID reports are generated as part of the kernel driver.
+> @@ -45,20 +45,20 @@ the HID reports are generated as part of
+>  AMD HID Transport Layer
+>  -----------------------
+>  AMD SFH transport is also implemented as a bus. Each client application executing in the AMD MP2 is
+> -registered as a device on this bus. Here: MP2 which is an ARM core connected to x86 for processing
+> +registered as a device on this bus. Here, MP2 is an ARM core connected to x86 for processing
+>  sensor data. The layer, which binds each device (AMD SFH HID driver) identifies the device type and
+> -registers with the hid core. Transport layer attach a constant "struct hid_ll_driver" object with
+> +registers with the HID core. Transport layer attaches a constant "struct hid_ll_driver" object with
+>  each device. Once a device is registered with HID core, the callbacks provided via this struct are
+>  used by HID core to communicate with the device. AMD HID Transport layer implements the synchronous calls.
+>  
+>  AMD HID Client Layer
+>  --------------------
+> -This layer is responsible to implement HID request and descriptors. As firmware is OS agnostic, HID
+> +This layer is responsible to implement HID requests and descriptors. As firmware is OS agnostic, HID
+>  client layer fills the HID request structure and descriptors. HID client layer is complex as it is
+> -interface between MP2 PCIe layer and HID. HID client layer initialized the MP2 PCIe layer and holds
+> +interface between MP2 PCIe layer and HID. HID client layer initializes the MP2 PCIe layer and holds
+>  the instance of MP2 layer. It identifies the number of sensors connected using MP2-PCIe layer. Base
 
-Anytime.
+Based ? (maybe)
 
-> 
-> The one last thing I would do is stick "valign=top" on all the table
-> entries, but we can leave the shed a different color for now :)
+> -on that allocates the DRAM address for each and every sensor and pass it to MP2-PCIe driver.On
+> -enumeration of each the sensor, client layer fills the HID Descriptor structure and HID input repor
+> +on that allocates the DRAM address for each and every sensor and passes it to MP2-PCIe driver. On
+> +enumeration of each sensor, client layer fills the HID Descriptor structure and HID input report
+>  structure. HID Feature report structure is optional. The report descriptor structure varies from
+>  sensor to sensor.
+>  
+> @@ -72,7 +72,7 @@ The communication between X86 and MP2 is
+>  2. Data transfer via DRAM.
+>  3. Supported sensor info via P2C registers.
+>  
+> -Commands are sent to MP2 using C2P Mailbox registers. Writing into C2P Message registers generate
+> +Commands are sent to MP2 using C2P Mailbox registers. Writing into C2P Message registers generates
+>  interrupt to MP2. The client layer allocates the physical memory and the same is sent to MP2 via
+>  the PCI layer. MP2 firmware writes the command output to the access DRAM memory which the client
+>  layer has allocated. Firmware always writes minimum of 32 bytes into DRAM. So as a protocol driver
 
-I actually prefer myself valign=center on tables ;-)
-
-In any case, a change like that should be simple to do.
-
-either adjust:
-
-	Documentation/sphinx-static/theme_overrides.css
-
-to change it globally for all tables or create a "table_valign_top" CSS
-class on it, changing the script to add:
-
-	.. cssclass:: table_valign_top
-
-Before each table.
-
-Thanks,
-Mauro
