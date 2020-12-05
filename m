@@ -2,118 +2,177 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 673072CFCC7
-	for <lists+linux-doc@lfdr.de>; Sat,  5 Dec 2020 19:51:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B5B602CFE6C
+	for <lists+linux-doc@lfdr.de>; Sat,  5 Dec 2020 20:34:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728719AbgLESTW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 5 Dec 2020 13:19:22 -0500
-Received: from mail.kernel.org ([198.145.29.99]:43212 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727787AbgLERyc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sat, 5 Dec 2020 12:54:32 -0500
-Received: from archlinux (cpc108967-cmbg20-2-0-cust86.5-4.cable.virginm.net [81.101.6.87])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id 5F6F92311C;
-        Sat,  5 Dec 2020 17:17:11 +0000 (UTC)
-Date:   Sat, 5 Dec 2020 17:17:08 +0000
-From:   Jonathan Cameron <jic23@kernel.org>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     linux-kernel@vger.kernel.org, Jiri Kosina <jikos@kernel.org>,
-        Benjamin Tissoires <benjamin.tissoires@redhat.com>,
-        linux-input@vger.kernel.org,
-        Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
-        linux-iio@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH 3/8] Documentation: HID: hiddev editing & corrections
-Message-ID: <20201205171708.55251bb7@archlinux>
-In-Reply-To: <20201204062022.5095-4-rdunlap@infradead.org>
-References: <20201204062022.5095-1-rdunlap@infradead.org>
-        <20201204062022.5095-4-rdunlap@infradead.org>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-pc-linux-gnu)
+        id S1726041AbgLETdo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 5 Dec 2020 14:33:44 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:28815 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726298AbgLETdn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 5 Dec 2020 14:33:43 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1607196736;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=ofSC9lpwG6+UCSNudemJILG6AFj0fHelQy+fBqMM60g=;
+        b=cy8Jq9wSk8gQuNZXnP2wE49QhpPshTkFa4tlzcDvmvPhuws7ZKzMhI5hGkX6pZwj+mzUCe
+        DXQNu1JhnlJb55XmEWUh4+dmjbz6PXe3YOl3CeJsxEADjCg4u6xScuRdK79jTsNGvHXhkl
+        XZnzGa8z/gBY3wbTFU0XMWlDbgus7Bk=
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-271-8f6U_0HeMOOTAJCfwUqGQw-1; Sat, 05 Dec 2020 14:32:12 -0500
+X-MC-Unique: 8f6U_0HeMOOTAJCfwUqGQw-1
+Received: by mail-wm1-f72.google.com with SMTP id d16so1039326wmd.1
+        for <linux-doc@vger.kernel.org>; Sat, 05 Dec 2020 11:32:12 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:content-transfer-encoding
+         :in-reply-to;
+        bh=ofSC9lpwG6+UCSNudemJILG6AFj0fHelQy+fBqMM60g=;
+        b=XtEZjAh4+uSg2cMkhmOXHOsHWpDultxBZ64E0xBOdjmCBORA/WLDZR62VWWsLZvY3r
+         yWBBebms6YOSi3fl1Lj4HCW92WeDQrnk+d3n+eXdU3j7/bHMCvutrCgSbAkGokp6WVqJ
+         Ccntib/IhEuiTGQr7aUqWB/ICLpD4mg3gJM4yhUdgTUx7lYoljLTGlGx/UGo7taySs1O
+         234CsBgnteiJdJGDtByPrh4kP9NeCJk4GUTVJD7qhM8eslF0bTzTM/hciOsBjCuzQe9U
+         wbNx14SvqCp00VjfK1F/KNkezNYmO8I8aMrmU48ZaMHvgv4jLCaQUJNz/qjNWa1v8wO9
+         AJtA==
+X-Gm-Message-State: AOAM5328fucEOXNioFN8wADtC3PBJ/PNLyh1HOUsnbwU84kuo00/MyiT
+        3nqk/0oJBYbnFDSBiOymRCeEYsROkT4+tjPsKP1Q74T+IaNWLHQTPRenv7xKGhjLjQZKrCQW6zh
+        U/tM6/CNXumM3m6w4d9O5
+X-Received: by 2002:a1c:9d85:: with SMTP id g127mr10659857wme.118.1607196729260;
+        Sat, 05 Dec 2020 11:32:09 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxTZFGnBU4zJ3vNUAlp7Lk23tATWWb8vX7NoCe2Rd1SBGhMQ9NKv0j2hhmXa23rEif7aIjTgQ==
+X-Received: by 2002:a1c:9d85:: with SMTP id g127mr10659834wme.118.1607196729032;
+        Sat, 05 Dec 2020 11:32:09 -0800 (PST)
+Received: from redhat.com (bzq-79-176-44-197.red.bezeqint.net. [79.176.44.197])
+        by smtp.gmail.com with ESMTPSA id b14sm8512163wrq.47.2020.12.05.11.32.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 05 Dec 2020 11:32:08 -0800 (PST)
+Date:   Sat, 5 Dec 2020 14:32:04 -0500
+From:   "Michael S. Tsirkin" <mst@redhat.com>
+To:     "Enrico Weigelt, metux IT consult" <lkml@metux.net>
+Cc:     Jason Wang <jasowang@redhat.com>,
+        "Enrico Weigelt, metux IT consult" <info@metux.net>,
+        linux-kernel@vger.kernel.org, corbet@lwn.net,
+        linus.walleij@linaro.org, bgolaszewski@baylibre.com,
+        linux-doc@vger.kernel.org, linux-gpio@vger.kernel.org,
+        virtualization@lists.linux-foundation.org,
+        linux-riscv@lists.infradead.org, stefanha@redhat.com,
+        msuchanek@suse.de
+Subject: Re: [PATCH v2 2/2] drivers: gpio: add virtio-gpio guest driver
+Message-ID: <20201205142218-mutt-send-email-mst@kernel.org>
+References: <20201203191135.21576-1-info@metux.net>
+ <20201203191135.21576-2-info@metux.net>
+ <8209ce55-a4aa-f256-b9b9-f7eb3cac877b@redhat.com>
+ <96aca1e6-2d5a-deb1-2444-88f938c7a9de@metux.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <96aca1e6-2d5a-deb1-2444-88f938c7a9de@metux.net>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu,  3 Dec 2020 22:20:17 -0800
-Randy Dunlap <rdunlap@infradead.org> wrote:
-
-> Do basic editing & correction to hiddev.rst:
-> - use HID instead of hid consistently
-
-One case inline, where I think the usage of hid-core
-might have been deliberate.
-
-> - add hyphenation of multi-word adjectives
-> - drop a duplicate word
-> - unhyphenate "a priori"
+On Sat, Dec 05, 2020 at 08:59:55AM +0100, Enrico Weigelt, metux IT consult wrote:
+> On 04.12.20 04:35, Jason Wang wrote:
 > 
+> >> --- a/drivers/gpio/Kconfig
+> >> +++ b/drivers/gpio/Kconfig
+> >> @@ -1615,6 +1615,15 @@ config GPIO_MOCKUP
+> >>         tools/testing/selftests/gpio/gpio-mockup.sh. Reference the
+> >> usage in
+> >>         it.
+> >>   +config GPIO_VIRTIO
+> >> +    tristate "VirtIO GPIO support"
+> >> +    depends on VIRTIO
+> > 
+> > 
+> > Let's use select, since there's no prompt for VIRTIO and it doesn't have
+> > any dependencies.
 > 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: Jiri Kosina <jikos@kernel.org>
-> Cc: Benjamin Tissoires <benjamin.tissoires@redhat.com>
-> Cc: linux-input@vger.kernel.org
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: linux-doc@vger.kernel.org
+> whoops, it's not that simple:
+> 
+> make: Entering directory '/home/nekrad/src/apu2-dev/pkg/kernel.apu2.git'
+> make[1]: Entering directory
+> '/home/nekrad/src/dk/DistroKit/platform-x86_64/build-target/linux-5.8.9-build'
+>   GEN     Makefile
+> drivers/gpu/drm/Kconfig:74:error: recursive dependency detected!
+> drivers/gpu/drm/Kconfig:74:	symbol DRM_KMS_HELPER is selected by
+> DRM_VIRTIO_GPU
+> drivers/gpu/drm/virtio/Kconfig:2:	symbol DRM_VIRTIO_GPU depends on VIRTIO
+> drivers/virtio/Kconfig:2:	symbol VIRTIO is selected by GPIO_VIRTIO
+> drivers/gpio/Kconfig:1618:	symbol GPIO_VIRTIO depends on GPIOLIB
+> drivers/gpio/Kconfig:14:	symbol GPIOLIB is selected by I2C_MUX_LTC4306
+> drivers/i2c/muxes/Kconfig:47:	symbol I2C_MUX_LTC4306 depends on I2C
+> drivers/i2c/Kconfig:8:	symbol I2C is selected by FB_DDC
+> drivers/video/fbdev/Kconfig:63:	symbol FB_DDC depends on FB
+> drivers/video/fbdev/Kconfig:12:	symbol FB is selected by DRM_KMS_FB_HELPER
+> drivers/gpu/drm/Kconfig:80:	symbol DRM_KMS_FB_HELPER depends on
+> DRM_KMS_HELPER
+> 
+> Seems that we can only depend on or select some symbol - we run into
+> huge trouble if thats mixed. Just changed DRM_VIRTIO_GPU to just select
+> VIRIO instead of depending on it, and now it works.
+> 
+> I've posted another patch for fixing drivers/gpu/drm/virtio/Kconfig
+> to use 'select' instead of 'depends on'.
+
+It seems a bit of a mess, at this point I'm not entirely sure when
+should drivers select VIRTIO and when depend on it.
+
+The text near it says:
+
+# SPDX-License-Identifier: GPL-2.0-only
+config VIRTIO
+        tristate
+        help
+          This option is selected by any driver which implements the virtio
+          bus, such as CONFIG_VIRTIO_PCI, CONFIG_VIRTIO_MMIO, CONFIG_RPMSG
+          or CONFIG_S390_GUEST.
+
+Which seems clear enough and would indicate drivers for devices *behind*
+the bus should not select VIRTIO and thus presumably should "depend on" it.
+This is violated in virtio console and virtio fs drivers.
+
+For console it says:
+
+commit 9f30eb29c514589e16f2999ea070598583d1f6ec
+Author: Michal Suchanek <msuchanek@suse.de>
+Date:   Mon Aug 31 18:58:50 2020 +0200
+
+    char: virtio: Select VIRTIO from VIRTIO_CONSOLE.
+    
+    Make it possible to have virtio console built-in when
+    other virtio drivers are modular.
+    
+    Signed-off-by: Michal Suchanek <msuchanek@suse.de>
+    Reviewed-by: Amit Shah <amit@kernel.org>
+    Link: https://lore.kernel.org/r/20200831165850.26163-1-msuchanek@suse.de
+    Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+
+which seems kind of bogus - why do we care about allowing a builtin
+virtio console driver if the pci virtio bus driver is a module?
+There won't be any devices on the bus to attach to ...
+
+And for virtio fs it was like this from the beginning.
+
+I am inclined to fix console and virtio fs to depend on VIRTIO:
+select is harder to use correctly ...
+
+Jason?
+
+
+> -- 
 > ---
->  Documentation/hid/hiddev.rst |   12 ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
-> 
-> --- linux-next-20201201.orig/Documentation/hid/hiddev.rst
-> +++ linux-next-20201201/Documentation/hid/hiddev.rst
-> @@ -27,7 +27,7 @@ the following::
->                            --> hiddev.c ----> POWER / MONITOR CONTROL  
->  
->  In addition, other subsystems (apart from USB) can potentially feed
-> -events into the input subsystem, but these have no effect on the hid
-> +events into the input subsystem, but these have no effect on the HID
->  device interface.
->  
->  Using the HID Device Interface
-> @@ -72,8 +72,8 @@ The hiddev API uses a read() interface,
->  
->  HID devices exchange data with the host computer using data
->  bundles called "reports".  Each report is divided into "fields",
-> -each of which can have one or more "usages".  In the hid-core,
-> -each one of these usages has a single signed 32 bit value.
-> +each of which can have one or more "usages".  In the HID core,
-
-Hmm. hid-core is (I think) kind of referring to the code in hid-core.c
-Whereas a Human Interface Device core (HID core) sounds like
-something different.  Not my doc though!
-
-> +each one of these usages has a single signed 32-bit value.
->  
->  read():
->  -------
-> @@ -113,7 +113,7 @@ HIDIOCAPPLICATION
->    - (none)
->  
->  This ioctl call returns the HID application usage associated with the
-> -hid device. The third argument to ioctl() specifies which application
-> +HID device. The third argument to ioctl() specifies which application
->  index to get. This is useful when the device has more than one
->  application collection. If the index is invalid (greater or equal to
->  the number of application collections this device has) the ioctl
-> @@ -181,7 +181,7 @@ looked up by type (input, output or feat
->  must be filled in by the user. The ID can be absolute -- the actual
->  report id as reported by the device -- or relative --
->  HID_REPORT_ID_FIRST for the first report, and (HID_REPORT_ID_NEXT |
-> -report_id) for the next report after report_id. Without a-priori
-> +report_id) for the next report after report_id. Without a priori
->  information about report ids, the right way to use this ioctl is to
->  use the relative IDs above to enumerate the valid IDs. The ioctl
->  returns non-zero when there is no more next ID. The real report ID is
-> @@ -200,7 +200,7 @@ HIDIOCGUCODE
->    - struct hiddev_usage_ref (read/write)
->  
->  Returns the usage_code in a hiddev_usage_ref structure, given that
-> -given its report type, report id, field index, and index within the
-> +its report type, report id, field index, and index within the
->  field have already been filled into the structure.
->  
->  HIDIOCGUSAGE
+> Hinweis: unverschlüsselte E-Mails können leicht abgehört und manipuliert
+> werden ! Für eine vertrauliche Kommunikation senden Sie bitte ihren
+> GPG/PGP-Schlüssel zu.
+> ---
+> Enrico Weigelt, metux IT consult
+> Free software and Linux embedded engineering
+> info@metux.net -- +49-151-27565287
 
