@@ -2,120 +2,151 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C526A2D2C12
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 14:37:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C45812D2D1C
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 15:25:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729210AbgLHNgl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Dec 2020 08:36:41 -0500
-Received: from mail-02.mail-europe.com ([51.89.119.103]:58238 "EHLO
-        mail-02.mail-europe.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729185AbgLHNgk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Dec 2020 08:36:40 -0500
-Date:   Tue, 08 Dec 2020 13:35:11 +0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-        s=protonmail; t=1607434515;
-        bh=Vrw+2+y13OInDneCYRDJSdbZRXAGFGkPu5XrP7lZRBQ=;
-        h=Date:To:From:Cc:Reply-To:Subject:From;
-        b=vO5tmDF2zv4rgc8iwoVaUYbGlTzgTPGCy0kNWFH45x/daNlsdfsgrfjeEJEsPT+p4
-         +qCFavjAPFdqaWT7EGXk+R2l7KpzscGsw1kJ0h0SGbtnJThL9JASSiUvn5xOdcw59s
-         jTg6KvEeO5gk5nOUVjs5TnnRvJcUyWgt3Szvt6sg=
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-From:   =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
-        <nfraprado@protonmail.com>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        id S1729769AbgLHOZP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Dec 2020 09:25:15 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:53615 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1729587AbgLHOZO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Dec 2020 09:25:14 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1607437427;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=1ocH5W3W6/BNUy9ovonqCXcdd/rBC0yAl/SfS8e31LM=;
+        b=SuZS1rFF0IUOnI0AsXPTFboASQkdlPs03XLxeW0GVjLltzvMDeTsGMZF1bsWi/9nHbupTZ
+        6UnyYrflegDD3cVfQtA9w4zWeLxOlqdMdXrj7V+n61pn0Wjmal1VNAIZB7wX1tdvM7Jyc+
+        U6CBcdHh6Wq2AslHR6v75FfE+WdxtIM=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-217-aK6QfRXaO3m8dgajqCgvOA-1; Tue, 08 Dec 2020 09:23:45 -0500
+X-MC-Unique: aK6QfRXaO3m8dgajqCgvOA-1
+Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 28E2E107ACE4;
+        Tue,  8 Dec 2020 14:23:43 +0000 (UTC)
+Received: from fuller.cnet (ovpn-112-8.gru2.redhat.com [10.97.112.8])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 53D7760877;
+        Tue,  8 Dec 2020 14:23:42 +0000 (UTC)
+Received: by fuller.cnet (Postfix, from userid 1000)
+        id 95B74416CD79; Mon,  7 Dec 2020 20:11:27 -0300 (-03)
+Date:   Mon, 7 Dec 2020 20:11:27 -0300
+From:   Marcelo Tosatti <mtosatti@redhat.com>
+To:     Andy Lutomirski <luto@amacapital.net>
+Cc:     Maxim Levitsky <mlevitsk@redhat.com>,
+        Thomas Gleixner <tglx@linutronix.de>, kvm@vger.kernel.org,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Oded Gabbay <oded.gabbay@gmail.com>, Tom Rix <trix@redhat.com>,
-        Vaibhav Jain <vaibhav@linux.ibm.com>,
-        linux-kernel@vger.kernel.org
-Reply-To: =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
-          <nfraprado@protonmail.com>
-Subject: Re: [PATCH v2 08/39] scripts: get_abi.pl: prevent duplicated file names
-Message-ID: <20201208133424.yrdzbb3bzqqtygtm@ArchWay.local>
+        Jim Mattson <jmattson@google.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Sean Christopherson <sean.j.christopherson@intel.com>,
+        open list <linux-kernel@vger.kernel.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        Joerg Roedel <joro@8bytes.org>, Borislav Petkov <bp@alien8.de>,
+        Shuah Khan <shuah@kernel.org>,
+        Andrew Jones <drjones@redhat.com>,
+        Oliver Upton <oupton@google.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v2 1/3] KVM: x86: implement KVM_{GET|SET}_TSC_STATE
+Message-ID: <20201207231127.GB27492@fuller.cnet>
+References: <636fecc20b0143128b484f159ff795ff65d05b82.camel@redhat.com>
+ <885C1725-B479-47F6-B08D-A7181637A80A@amacapital.net>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
-        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM shortcircuit=no
-        autolearn=disabled version=3.4.4
-X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
-        mailout.protonmail.ch
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <885C1725-B479-47F6-B08D-A7181637A80A@amacapital.net>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Oct 30, 2020 at 08:40:27AM +0100, Mauro Carvalho Chehab wrote:
-> The same filename may exist on multiple directories within
-> ABI. Create separate entries at the internal database for
-> each of them.
->=20
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
->  scripts/get_abi.pl | 15 ++++++++++-----
->  1 file changed, 10 insertions(+), 5 deletions(-)
->=20
-> diff --git a/scripts/get_abi.pl b/scripts/get_abi.pl
-> index e5a5588a8639..5612f019fae0 100755
-> --- a/scripts/get_abi.pl
-> +++ b/scripts/get_abi.pl
-> @@ -65,7 +65,10 @@ sub parse_abi {
->  =09my $name =3D $file;
->  =09$name =3D~ s,.*/,,;
-> =20
-> -=09my $nametag =3D "File $name";
-> +=09my $fn =3D $file;
-> +=09$fn =3D~ s,Documentation/ABI/,,;
-> +
-> +=09my $nametag =3D "File $fn";
->  =09$data{$nametag}->{what} =3D "File $name";
->  =09$data{$nametag}->{type} =3D "File";
->  =09$data{$nametag}->{file} =3D $name;
-> @@ -320,16 +323,18 @@ sub output_rest {
->  =09=09=09my $fileref =3D "abi_file_".$path;
-> =20
->  =09=09=09if ($type eq "File") {
-> -=09=09=09=09my $bar =3D $w;
-> -=09=09=09=09$bar =3D~ s/./-/g;
-> -
->  =09=09=09=09print ".. _$fileref:\n\n";
-> -=09=09=09=09print "$w\n$bar\n\n";
->  =09=09=09} else {
->  =09=09=09=09print "Defined on file :ref:`$f <$fileref>`\n\n";
->  =09=09=09}
->  =09=09}
-> =20
-> +=09=09if ($type eq "File") {
-> +=09=09=09my $bar =3D $w;
-> +=09=09=09$bar =3D~ s/./-/g;
-> +=09=09=09print "$w\n$bar\n\n";
-> +=09=09}
-> +
->  =09=09my $desc =3D "";
->  =09=09$desc =3D $data{$what}->{description} if (defined($data{$what}->{d=
-escription}));
->  =09=09$desc =3D~ s/\s+$/\n/;
-> --=20
-> 2.26.2
->=20
+On Mon, Dec 07, 2020 at 10:04:45AM -0800, Andy Lutomirski wrote:
+> 
+> > On Dec 7, 2020, at 9:00 AM, Maxim Levitsky <mlevitsk@redhat.com> wrote:
+> > 
+> > ﻿On Mon, 2020-12-07 at 08:53 -0800, Andy Lutomirski wrote:
+> >>>> On Dec 7, 2020, at 8:38 AM, Thomas Gleixner <tglx@linutronix.de> wrote:
+> >>> 
+> >>> ﻿On Mon, Dec 07 2020 at 14:16, Maxim Levitsky wrote:
+> >>>>> On Sun, 2020-12-06 at 17:19 +0100, Thomas Gleixner wrote:
+> >>>>> From a timekeeping POV and the guests expectation of TSC this is
+> >>>>> fundamentally wrong:
+> >>>>> 
+> >>>>>     tscguest = scaled(hosttsc) + offset
+> >>>>> 
+> >>>>> The TSC has to be viewed systemwide and not per CPU. It's systemwide
+> >>>>> used for timekeeping and for that to work it has to be synchronized. 
+> >>>>> 
+> >>>>> Why would this be different on virt? Just because it's virt or what? 
+> >>>>> 
+> >>>>> Migration is a guest wide thing and you're not migrating single vCPUs.
+> >>>>> 
+> >>>>> This hackery just papers over he underlying design fail that KVM looks
+> >>>>> at the TSC per vCPU which is the root cause and that needs to be fixed.
+> >>>> 
+> >>>> I don't disagree with you.
+> >>>> As far as I know the main reasons that kvm tracks TSC per guest are
+> >>>> 
+> >>>> 1. cases when host tsc is not stable 
+> >>>> (hopefully rare now, and I don't mind making
+> >>>> the new API just refuse to work when this is detected, and revert to old way
+> >>>> of doing things).
+> >>> 
+> >>> That's a trainwreck to begin with and I really would just not support it
+> >>> for anything new which aims to be more precise and correct.  TSC has
+> >>> become pretty reliable over the years.
+> >>> 
+> >>>> 2. (theoretical) ability of the guest to introduce per core tsc offfset
+> >>>> by either using TSC_ADJUST (for which I got recently an idea to stop
+> >>>> advertising this feature to the guest), or writing TSC directly which
+> >>>> is allowed by Intel's PRM:
+> >>> 
+> >>> For anything halfways modern the write to TSC is reflected in TSC_ADJUST
+> >>> which means you get the precise offset.
+> >>> 
+> >>> The general principle still applies from a system POV.
+> >>> 
+> >>>    TSC base (systemwide view) - The sane case
+> >>> 
+> >>>    TSC CPU  = TSC base + TSC_ADJUST
+> >>> 
+> >>> The guest TSC base is a per guest constant offset to the host TSC.
+> >>> 
+> >>>    TSC guest base = TSC host base + guest base offset
+> >>> 
+> >>> If the guest want's this different per vCPU by writing to the MSR or to
+> >>> TSC_ADJUST then you still can have a per vCPU offset in TSC_ADJUST which
+> >>> is the offset to the TSC base of the guest.
+> >> 
+> >> How about, if the guest wants to write TSC_ADJUST, it can turn off all paravirt features and keep both pieces?
+> >> 
+> > 
+> > This is one of the things I had in mind recently.
+> > 
+> > Even better, we can stop advertising TSC_ADJUST in CPUID to the guest 
+> > and forbid it from writing it at all.
+> 
+> Seems reasonable to me.
+> 
+> It also seems okay for some MSRs to stop working after the guest enabled new PV timekeeping.
+> 
+> I do have a feature request, though: IMO it would be quite nifty if the new kvmclock structure could also expose NTP corrections. In other words, if you could expose enough info to calculate CLOCK_MONOTONIC_RAW, CLOCK_MONOTONIC, and CLOCK_REALTIME, then we could have paravirt NTP.
 
-Hey Mauro,
+Hi Andy,
 
-just a heads-up.
+Any reason why drivers/ptp/ptp_kvm.c does not work for you?
 
-It seems the ABI page is showing the full file names as shown in [1], like =
-"File
-/srv/docbuild/lib/git/linux/stable/firewire-cdev", while only the file name
-would be enough, like "File firewire-cdev".
-
-By reverting this patch I got exactly the intended behavior, but it seems y=
-ou
-were fixing other things with this, so perhaps just reverting is breaking
-something that I can't see.
-
-Could you look into what would be the right fix for this? :)
-
-Thanks,
-N=C3=ADcolas
-
-[1] https://www.kernel.org/doc/html/latest/admin-guide/abi.html
+> Bonus points if whatever you do for CLOCK_REALTIME also exposes leap seconds in a race free way :). But I suppose that just exposing TAI and letting the guest deal with the TAI - UTC offset itself would get the job done just fine.
 
