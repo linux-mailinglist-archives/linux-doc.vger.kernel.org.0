@@ -2,131 +2,196 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 382C62D20CC
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 03:28:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 47B842D20E6
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 03:38:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727863AbgLHC12 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 7 Dec 2020 21:27:28 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39216 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727842AbgLHC12 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Dec 2020 21:27:28 -0500
-Received: from mail-pf1-x444.google.com (mail-pf1-x444.google.com [IPv6:2607:f8b0:4864:20::444])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 269F0C061749
-        for <linux-doc@vger.kernel.org>; Mon,  7 Dec 2020 18:26:42 -0800 (PST)
-Received: by mail-pf1-x444.google.com with SMTP id i3so8816203pfd.6
-        for <linux-doc@vger.kernel.org>; Mon, 07 Dec 2020 18:26:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=8uyek9MkTmVFbzSBRjPGvZAHmGE/+Xxg4KtWWjpNIQM=;
-        b=YPa5oW5Hgi1GhmfO+I8COAhhJ1zpJhBu3US5LoUescGZWhMX6Y3lQW0U3KTjwmn293
-         fhctzsSt5F9cFgmK4rpOaoVzygUNv/wq0alLedG+kjPBThKbaDnIxgVVEnpKstL2f98S
-         VlE7DpOtpIrICE5enlkHBREoTYhqvZW+vCfyCwfzgJrqLOLOF1JWnCq+C8BGfgYcqC8V
-         kEAEiKYAvFcbyNPJnR9rVKS/Rt3z5c+UNoVCewMEvV1F4yVXI54ukFZmnOJG+6mRssyS
-         UFSxwr0DtKP8q2Rf8O+wrblQwBigLOhR1/8jOT2rwGyN6a+A4uvUsKcmFHBa1+C5ojzM
-         KX+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=8uyek9MkTmVFbzSBRjPGvZAHmGE/+Xxg4KtWWjpNIQM=;
-        b=D4087zzLtHzu3NIhP1U1HGSamkPmtd+0jPE96BC/yHzeQt6FPWLOrW/aC78RE82vv4
-         UqztnzDm7DZUYOhnIBbaClAOyv/Xs8ItLaKzPicVZAQ2xb1iVxKJSs+XvU3odajlzAYN
-         zswiaybdzBbJS1HkBnjP6pD0lRIyysxPErqwMFLoHDkDWSJG3QCC5ic6supAHL8qaMaV
-         smbRc6N4wFIwLsfjft2tR5r1jzCGt10l+pLa+gjted3t1jLZvrVjyG+Dz5q9KTA7GX7t
-         JG1sn6Qop6mFWeMXHucYTTVp7QjVCJ83J1e48PLkEY8WVysW6TbgoPeqy+gO7rIvak2w
-         IxrQ==
-X-Gm-Message-State: AOAM533rYKa/bXz3HkI11Cx2dLxlmrohvDsKv8ZJhrGqeCl2DDNg2I74
-        w+NJdkNe2S4ZNNndHXTIYAVH1ba3H39xGm87J6neSA==
-X-Google-Smtp-Source: ABdhPJyCq3UF1fpgl0WcY/IWKImwVBiH+TUtaeJ0hWsOuC6cDWgqA4zTZpgtjMbTdH04swBbXun4cYCZlCpRJYe1Y4Q=
-X-Received: by 2002:a17:90a:ae14:: with SMTP id t20mr1867229pjq.13.1607394401606;
- Mon, 07 Dec 2020 18:26:41 -0800 (PST)
+        id S1727412AbgLHCho (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 7 Dec 2020 21:37:44 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:57893 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1727763AbgLHCho (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 7 Dec 2020 21:37:44 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1607394977;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=RYRh0BrbEydzQN0gbRsV8YUEFZZ1GUb2egfShjaZmZc=;
+        b=P0aV9UjLpsiKVrKWplZlCq4hLpTpQ0QmwSQ6xVdgfLB/Neldxq7+LVGzyfAQ/mi9kDIjfU
+        KIXrLyDSqJubUN3lixhn1WhF8syvtVboya/HCZTaqhMtwXqbg19nYsv28gU/DxS4FIUG+C
+        TD26sugKJaFmjVfNVSsFmpHc6Q75I1A=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-428-GP2LMSA8PV6LunypxUpYSg-1; Mon, 07 Dec 2020 21:36:15 -0500
+X-MC-Unique: GP2LMSA8PV6LunypxUpYSg-1
+Received: from smtp.corp.redhat.com (int-mx02.intmail.prod.int.phx2.redhat.com [10.5.11.12])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id BAC931005513;
+        Tue,  8 Dec 2020 02:36:13 +0000 (UTC)
+Received: from [10.72.12.91] (ovpn-12-91.pek2.redhat.com [10.72.12.91])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 4108060BE2;
+        Tue,  8 Dec 2020 02:36:01 +0000 (UTC)
+Subject: Re: [PATCH v2 2/2] drivers: gpio: add virtio-gpio guest driver
+To:     "Michael S. Tsirkin" <mst@redhat.com>
+Cc:     "Enrico Weigelt, metux IT consult" <lkml@metux.net>,
+        "Enrico Weigelt, metux IT consult" <info@metux.net>,
+        linux-kernel@vger.kernel.org, corbet@lwn.net,
+        linus.walleij@linaro.org, bgolaszewski@baylibre.com,
+        linux-doc@vger.kernel.org, linux-gpio@vger.kernel.org,
+        virtualization@lists.linux-foundation.org,
+        linux-riscv@lists.infradead.org, stefanha@redhat.com,
+        msuchanek@suse.de
+References: <20201203191135.21576-1-info@metux.net>
+ <20201203191135.21576-2-info@metux.net>
+ <8209ce55-a4aa-f256-b9b9-f7eb3cac877b@redhat.com>
+ <96aca1e6-2d5a-deb1-2444-88f938c7a9de@metux.net>
+ <20201205142218-mutt-send-email-mst@kernel.org>
+ <842519cc-94ca-3c11-ddd6-543e5a89c998@redhat.com>
+ <20201207085247-mutt-send-email-mst@kernel.org>
+From:   Jason Wang <jasowang@redhat.com>
+Message-ID: <0a9c19bd-0d25-1035-57e3-b1f5f204c309@redhat.com>
+Date:   Tue, 8 Dec 2020 10:36:00 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-References: <20201130151838.11208-1-songmuchun@bytedance.com>
- <CAMZfGtWvLEytN5gBN+OqntrNXNd3eNRWrfnkeCozvARmpTNAXw@mail.gmail.com>
- <600fd7e2-70b4-810f-8d12-62cba80af80d@oracle.com> <CAMZfGtX2mu1tyE_898mQeEpmP4Pd+rEKOHpYF=KN=5v4WExpig@mail.gmail.com>
- <20201207183814.GA3786@localhost.localdomain>
-In-Reply-To: <20201207183814.GA3786@localhost.localdomain>
-From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Tue, 8 Dec 2020 10:26:05 +0800
-Message-ID: <CAMZfGtVpTyUfpU7KXY8XZWxpguxLdZ=JmPAyHm4eipQ9o_Z6Bw@mail.gmail.com>
-Subject: Re: [External] Re: [PATCH v7 00/15] Free some vmemmap pages of
- hugetlb page
-To:     Oscar Salvador <osalvador@suse.de>
-Cc:     Mike Kravetz <mike.kravetz@oracle.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Jonathan Corbet <corbet@lwn.net>, dave.hansen@linux.intel.com,
-        hpa@zytor.com, x86@kernel.org, bp@alien8.de, mingo@redhat.com,
-        Thomas Gleixner <tglx@linutronix.de>,
-        pawan.kumar.gupta@linux.intel.com, mchehab+huawei@kernel.org,
-        paulmck@kernel.org, viro@zeniv.linux.org.uk,
-        Peter Zijlstra <peterz@infradead.org>, luto@kernel.org,
-        oneukum@suse.com, jroedel@suse.de,
-        Matthew Wilcox <willy@infradead.org>,
-        David Rientjes <rientjes@google.com>,
-        Mina Almasry <almasrymina@google.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        anshuman.khandual@arm.com, Michal Hocko <mhocko@suse.com>,
-        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
-        Xiongchun duan <duanxiongchun@bytedance.com>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        linux-doc@vger.kernel.org,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+In-Reply-To: <20201207085247-mutt-send-email-mst@kernel.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.12
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Dec 8, 2020 at 2:38 AM Oscar Salvador <osalvador@suse.de> wrote:
->
-> On Fri, Dec 04, 2020 at 11:39:31AM +0800, Muchun Song wrote:
-> > On Fri, Dec 4, 2020 at 7:49 AM Mike Kravetz <mike.kravetz@oracle.com> wrote:
-> > > As previously mentioned, I feel qualified to review the hugetlb changes
-> > > and some other closely related changes.  However, this patch set is
-> > > touching quite a few areas and I do not feel qualified to make authoritative
-> > > statements about them all.  I too hope others will take a look.
-> >
-> > Agree. I also hope others can take a look at other modules(e.g.
-> > sparse-vmemmap, memory-hotplug). Thanks for everyone's efforts
-> > on this.
->
-> I got sidetracked by some other stuff but I plan to continue reviewing
-> this series.
 
-Many thanks, Oscar.
+On 2020/12/7 下午9:53, Michael S. Tsirkin wrote:
+> On Mon, Dec 07, 2020 at 11:12:50AM +0800, Jason Wang wrote:
+>> On 2020/12/6 上午3:32, Michael S. Tsirkin wrote:
+>>> On Sat, Dec 05, 2020 at 08:59:55AM +0100, Enrico Weigelt, metux IT consult wrote:
+>>>> On 04.12.20 04:35, Jason Wang wrote:
+>>>>
+>>>>>> --- a/drivers/gpio/Kconfig
+>>>>>> +++ b/drivers/gpio/Kconfig
+>>>>>> @@ -1615,6 +1615,15 @@ config GPIO_MOCKUP
+>>>>>> Â Â Â Â Â Â Â  tools/testing/selftests/gpio/gpio-mockup.sh. Reference the
+>>>>>> usage in
+>>>>>> Â Â Â Â Â Â Â  it.
+>>>>>> Â  +config GPIO_VIRTIO
+>>>>>> +Â Â Â  tristate "VirtIO GPIO support"
+>>>>>> +Â Â Â  depends on VIRTIO
+>>>>> Let's use select, since there's no prompt for VIRTIO and it doesn't have
+>>>>> any dependencies.
+>>>> whoops, it's not that simple:
+>>>>
+>>>> make: Entering directory '/home/nekrad/src/apu2-dev/pkg/kernel.apu2.git'
+>>>> make[1]: Entering directory
+>>>> '/home/nekrad/src/dk/DistroKit/platform-x86_64/build-target/linux-5.8.9-build'
+>>>>     GEN     Makefile
+>>>> drivers/gpu/drm/Kconfig:74:error: recursive dependency detected!
+>>>> drivers/gpu/drm/Kconfig:74:	symbol DRM_KMS_HELPER is selected by
+>>>> DRM_VIRTIO_GPU
+>>>> drivers/gpu/drm/virtio/Kconfig:2:	symbol DRM_VIRTIO_GPU depends on VIRTIO
+>>>> drivers/virtio/Kconfig:2:	symbol VIRTIO is selected by GPIO_VIRTIO
+>>>> drivers/gpio/Kconfig:1618:	symbol GPIO_VIRTIO depends on GPIOLIB
+>>>> drivers/gpio/Kconfig:14:	symbol GPIOLIB is selected by I2C_MUX_LTC4306
+>>>> drivers/i2c/muxes/Kconfig:47:	symbol I2C_MUX_LTC4306 depends on I2C
+>>>> drivers/i2c/Kconfig:8:	symbol I2C is selected by FB_DDC
+>>>> drivers/video/fbdev/Kconfig:63:	symbol FB_DDC depends on FB
+>>>> drivers/video/fbdev/Kconfig:12:	symbol FB is selected by DRM_KMS_FB_HELPER
+>>>> drivers/gpu/drm/Kconfig:80:	symbol DRM_KMS_FB_HELPER depends on
+>>>> DRM_KMS_HELPER
+>>>>
+>>>> Seems that we can only depend on or select some symbol - we run into
+>>>> huge trouble if thats mixed. Just changed DRM_VIRTIO_GPU to just select
+>>>> VIRIO instead of depending on it, and now it works.
+>>>>
+>>>> I've posted another patch for fixing drivers/gpu/drm/virtio/Kconfig
+>>>> to use 'select' instead of 'depends on'.
+>>> It seems a bit of a mess, at this point I'm not entirely sure when
+>>> should drivers select VIRTIO and when depend on it.
+>>>
+>>> The text near it says:
+>>>
+>>> # SPDX-License-Identifier: GPL-2.0-only
+>>> config VIRTIO
+>>>           tristate
+>>>           help
+>>>             This option is selected by any driver which implements the virtio
+>>>             bus, such as CONFIG_VIRTIO_PCI, CONFIG_VIRTIO_MMIO, CONFIG_RPMSG
+>>>             or CONFIG_S390_GUEST.
+>>>
+>>> Which seems clear enough and would indicate drivers for devices *behind*
+>>> the bus should not select VIRTIO and thus presumably should "depend on" it.
+>>> This is violated in virtio console and virtio fs drivers.
+>>>
+>>> For console it says:
+>>>
+>>> commit 9f30eb29c514589e16f2999ea070598583d1f6ec
+>>> Author: Michal Suchanek <msuchanek@suse.de>
+>>> Date:   Mon Aug 31 18:58:50 2020 +0200
+>>>
+>>>       char: virtio: Select VIRTIO from VIRTIO_CONSOLE.
+>>>       Make it possible to have virtio console built-in when
+>>>       other virtio drivers are modular.
+>>>       Signed-off-by: Michal Suchanek <msuchanek@suse.de>
+>>>       Reviewed-by: Amit Shah <amit@kernel.org>
+>>>       Link: https://lore.kernel.org/r/20200831165850.26163-1-msuchanek@suse.de
+>>>       Signed-off-by: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+>>>
+>>> which seems kind of bogus - why do we care about allowing a builtin
+>>> virtio console driver if the pci virtio bus driver is a module?
+>>> There won't be any devices on the bus to attach to ...
+>>
+>> For testing like switching bus from pci to MMIO?
+>
+> Not sure I understand ... can you give an example?
+
+
+E.g testing
+
+modprobe -r virtio_mmio
+modprobe virtio_pci
+
+?
+
 
 >
-> One thing that came to my mind is that if we do as David suggested in
-> patch#4, and we move it towards the end to actually __enable__ this
-> once all the infrastructure is there (unless hstate->nr_vmemmap_pages
-> differs from 0 we should not be doing any work AFAIK), we could also
-> move patch#6 to the end (right before the enablement), kill patch#7
-> and only leave patch#13.
+>>> And for virtio fs it was like this from the beginning.
+>>>
+>>> I am inclined to fix console and virtio fs to depend on VIRTIO:
+>>> select is harder to use correctly ...
+>>>
+>>> Jason?
+>>
+>> I think it works, but we need a prompt for VIRTIO otherwise there's no way
+>> to enable it.
+>>
+>> Thanks
+> That's even messier. No one needs VIRTIO core by itself - it's only used
+> by transports and drivers.
+
+
+So we endup with two solutions (without a prompt):
+
+1) using select, user may end up with driver without transport
+2) using depends, user need to enable at least one transport
+
+2) looks a little bit better I admit.
+
+Thanks
+
+
 >
-> The reason for that (killing patch#7 and leaving patch#13 only)
-> is that it does not make much sense to me to disable PMD-mapped vmemmap
-> depending on the CONFIG_HUGETLB_xxxxx as that is enabled by default
-> to replace that later by the boot kernel parameter.
-> It looks more natural to me to disable it when we introduce the kernel
-> boot parameter, before the actual enablement of the feature.
+>>>
+>>>> -- 
+>>>> ---
+>>>> Hinweis: unverschlÃ¼sselte E-Mails kÃ¶nnen leicht abgehÃ¶rt und manipuliert
+>>>> werden ! FÃ¼r eine vertrauliche Kommunikation senden Sie bitte ihren
+>>>> GPG/PGP-SchlÃ¼ssel zu.
+>>>> ---
+>>>> Enrico Weigelt, metux IT consult
+>>>> Free software and Linux embedded engineering
+>>>> info@metux.net -- +49-151-27565287
 
-Thanks for your suggestions. I agree with you. :)
-
->
-> As I said, I plan to start the review again, but the order above would
-> make more sense to me.
->
-> thanks
->
-> --
-> Oscar Salvador
-> SUSE L3
-
-
-
--- 
-Yours,
-Muchun
