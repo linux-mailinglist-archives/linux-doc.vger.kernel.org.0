@@ -2,91 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 886C22D281A
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 10:49:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7DB172D28A9
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 11:18:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726441AbgLHJtN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Dec 2020 04:49:13 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50582 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728028AbgLHJtN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Dec 2020 04:49:13 -0500
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0C952C061749;
-        Tue,  8 Dec 2020 01:48:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=7bcvgstjEVppk7+MPyrtpEwXq1xns69yzQtxAznXpyE=; b=SkHw+uYjKNb2aRytJV+52kzv2l
-        MvuPXaK9BuESM9VjTmzXK7/dz2iUL0/CKuWMcKZ6ylR9V4qTU7kKLJA5oLvopX9zlQZ4lr/4q0pxn
-        pJ5DFi/Q9r5l3f8IE+PuhxpAgDXnh+rvAvTG3y8cWw1EoGb8l8jrm8Naru/+2I2BcKHaoig27oXck
-        b5//ZGMl6IejdckF35Y9xfmYGwR5VzWAxWNuFGEd8GaLJUYm5QLsYd/K0V235dnZSO3q0PLZd8f0n
-        huBpRfNObPAfLG2WG+A+Ez5TyuQpzHN9KZtrerHlyJ8KCFiD1PqDgzYQIE1W6V457XeIvQmtI4iQr
-        +aaB37sA==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=noisy.programming.kicks-ass.net)
-        by casper.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kmZbQ-0002Bc-38; Tue, 08 Dec 2020 09:48:12 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id 91DA7304BAE;
-        Tue,  8 Dec 2020 10:48:09 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 7B47720812B43; Tue,  8 Dec 2020 10:48:09 +0100 (CET)
-Date:   Tue, 8 Dec 2020 10:48:09 +0100
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Thomas Gleixner <tglx@linutronix.de>
-Cc:     Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Maxim Levitsky <mlevitsk@redhat.com>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jim Mattson <jmattson@google.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        Marcelo Tosatti <mtosatti@redhat.com>,
-        Sean Christopherson <sean.j.christopherson@intel.com>,
-        open list <linux-kernel@vger.kernel.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
-        Joerg Roedel <joro@8bytes.org>, Borislav Petkov <bp@alien8.de>,
-        Shuah Khan <shuah@kernel.org>,
-        Andrew Jones <drjones@redhat.com>,
-        Oliver Upton <oupton@google.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        kvm@vger.kernel.org
-Subject: Re: [PATCH v2 1/3] KVM: x86: implement KVM_{GET|SET}_TSC_STATE
-Message-ID: <20201208094809.GT2414@hirez.programming.kicks-ass.net>
-References: <20201203171118.372391-1-mlevitsk@redhat.com>
- <20201203171118.372391-2-mlevitsk@redhat.com>
- <87a6uq9abf.fsf@nanos.tec.linutronix.de>
- <1dbbeefc7c76c259b55582468ccd3aab35a6de60.camel@redhat.com>
- <87im9dlpsw.fsf@vitty.brq.redhat.com>
- <875z5d5x9m.fsf@nanos.tec.linutronix.de>
+        id S1729023AbgLHKSl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Dec 2020 05:18:41 -0500
+Received: from 9.mo177.mail-out.ovh.net ([46.105.72.238]:46996 "EHLO
+        9.mo177.mail-out.ovh.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728966AbgLHKSl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Dec 2020 05:18:41 -0500
+X-Greylist: delayed 4189 seconds by postgrey-1.27 at vger.kernel.org; Tue, 08 Dec 2020 05:18:40 EST
+Received: from player734.ha.ovh.net (unknown [10.108.54.119])
+        by mo177.mail-out.ovh.net (Postfix) with ESMTP id E601714A220
+        for <linux-doc@vger.kernel.org>; Tue,  8 Dec 2020 08:49:54 +0100 (CET)
+Received: from sk2.org (82-65-25-201.subs.proxad.net [82.65.25.201])
+        (Authenticated sender: steve@sk2.org)
+        by player734.ha.ovh.net (Postfix) with ESMTPSA id 0AFE618C8C42C;
+        Tue,  8 Dec 2020 07:49:42 +0000 (UTC)
+Authentication-Results: garm.ovh; auth=pass (GARM-106R006381ab9e9-fc16-4135-a55f-45b014094f44,
+                    F7F8495E9FE719388847EB9DDB8A3A77E3CADC2E) smtp.auth=steve@sk2.org
+X-OVh-ClientIp: 82.65.25.201
+From:   Stephen Kitt <steve@sk2.org>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Kees Cook <keescook@chromium.org>,
+        "Guilherme G . Piccoli" <gpiccoli@canonical.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Eric Biggers <ebiggers@google.com>,
+        Qais Yousef <qais.yousef@arm.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Stephen Kitt <steve@sk2.org>
+Subject: [PATCH] docs: clean up sysctl/kernel: titles, version
+Date:   Tue,  8 Dec 2020 08:49:22 +0100
+Message-Id: <20201208074922.30359-1-steve@sk2.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <875z5d5x9m.fsf@nanos.tec.linutronix.de>
+Content-Transfer-Encoding: 8bit
+X-Ovh-Tracer-Id: 3468334663265963397
+X-VR-SPAMSTATE: OK
+X-VR-SPAMSCORE: -100
+X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrgedujedrudejhedguddugecutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemucehtddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenucfjughrpefhvffufffkofgggfestdekredtredttdenucfhrhhomhepufhtvghphhgvnhcumfhithhtuceoshhtvghvvgesshhkvddrohhrgheqnecuggftrfgrthhtvghrnhepteegudfgleekieekteeggeetveefueefteeugfduieeitdfhhedtfeefkedvfeefnecukfhppedtrddtrddtrddtpdekvddrieehrddvhedrvddtudenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhhouggvpehsmhhtphdqohhuthdphhgvlhhopehplhgrhigvrhejfeegrdhhrgdrohhvhhdrnhgvthdpihhnvghtpedtrddtrddtrddtpdhmrghilhhfrhhomhepshhtvghvvgesshhkvddrohhrghdprhgtphhtthhopehlihhnuhigqdguohgtsehvghgvrhdrkhgvrhhnvghlrdhorhhg
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Dec 07, 2020 at 06:41:41PM +0100, Thomas Gleixner wrote:
+This cleans up a few titles with extra colons, and removes the
+reference to kernel 2.2. The docs don't yet cover *all* of 5.10 or
+5.11, but I think they're close enough. Most entries are documented,
+and have been checked against current kernels.
 
-> Right this happens still occasionally, but for quite some time this is
-> 100% firmware sillyness and not a fundamental property of the hardware
-> anymore.
+Signed-off-by: Stephen Kitt <steve@sk2.org>
+---
+ Documentation/admin-guide/sysctl/kernel.rst | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-Ever since Nehalem (2008) TSC is synchronized on <= 2 sockets, and any
-observed deviation is firmware fail. I don't remember exactly where 4
-socket and up got reliable.
+diff --git a/Documentation/admin-guide/sysctl/kernel.rst b/Documentation/admin-guide/sysctl/kernel.rst
+index d4b32cc32bb7..7d53146798c0 100644
+--- a/Documentation/admin-guide/sysctl/kernel.rst
++++ b/Documentation/admin-guide/sysctl/kernel.rst
+@@ -14,7 +14,7 @@ For general info and legal blurb, please look in :doc:`index`.
+ ------------------------------------------------------------------------------
+ 
+ This file contains documentation for the sysctl files in
+-``/proc/sys/kernel/`` and is valid for Linux kernel version 2.2.
++``/proc/sys/kernel/``.
+ 
+ The files in this directory can be used to tune and monitor
+ miscellaneous and general things in the operation of the Linux
+@@ -1095,8 +1095,8 @@ Enables/disables scheduler statistics. Enabling this feature
+ incurs a small amount of overhead in the scheduler but is
+ useful for debugging and performance tuning.
+ 
+-sched_util_clamp_min:
+-=====================
++sched_util_clamp_min
++====================
+ 
+ Max allowed *minimum* utilization.
+ 
+@@ -1106,8 +1106,8 @@ It means that any requested uclamp.min value cannot be greater than
+ sched_util_clamp_min, i.e., it is restricted to the range
+ [0:sched_util_clamp_min].
+ 
+-sched_util_clamp_max:
+-=====================
++sched_util_clamp_max
++====================
+ 
+ Max allowed *maximum* utilization.
+ 
+@@ -1117,8 +1117,8 @@ It means that any requested uclamp.max value cannot be greater than
+ sched_util_clamp_max, i.e., it is restricted to the range
+ [0:sched_util_clamp_max].
+ 
+-sched_util_clamp_min_rt_default:
+-================================
++sched_util_clamp_min_rt_default
++===============================
+ 
+ By default Linux is tuned for performance. Which means that RT tasks always run
+ at the highest frequency and most capable (highest capacity) CPU (in
 
-(there's the physical hotplug case, but let's not make this complicated)
+base-commit: 0477e92881850d44910a7e94fc2c46f96faa131f
+-- 
+2.20.1
 
-AMD has had Constant TSC since Barcelona which is roughly the same
-timeframe IIRC.
-
-So basically every TSC fail in the last decase is due to firmware being
-shit.
