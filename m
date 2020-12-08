@@ -2,124 +2,122 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BBC372D33C5
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 21:28:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B158D2D338A
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 21:27:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726890AbgLHUZt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Dec 2020 15:25:49 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38590 "EHLO
+        id S1726241AbgLHUVM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Dec 2020 15:21:12 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37842 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728998AbgLHUZf (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Dec 2020 15:25:35 -0500
-Received: from mail-wr1-x441.google.com (mail-wr1-x441.google.com [IPv6:2a00:1450:4864:20::441])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 42A41C0613D6
-        for <linux-doc@vger.kernel.org>; Tue,  8 Dec 2020 12:24:55 -0800 (PST)
-Received: by mail-wr1-x441.google.com with SMTP id t4so17546002wrr.12
-        for <linux-doc@vger.kernel.org>; Tue, 08 Dec 2020 12:24:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=REHA7EmuVy2412k5JBZlHnXSXCITuu5RQOyBaXf28o8=;
-        b=DgXW4UZBGLPpi3lT4JKM6pKgI6mSt/dk7wglJitvXIYua+es3r0i9AvLN/NQeGaP5U
-         0o39PUgticPGXS/fYZNwS8crslfcVJzP5XqpbflzbNi1WIPQQkwrD8L+PyURTqOQpZXK
-         juYMowq4SdzpKYgYEWh9mjAqdMeSmT5AuzeomKp9OBkSwKn/nhgrCcRcloOpBNFyF+LS
-         F7QTMAtYzWvCBhMO17hlxIie6tINGAutTZqZ+iA69roa3OxdwFqTXq3aWTLNOU3Nf25h
-         h+HiI5SvMkOHNJE2debg9Vgm+45pfSNQ7dCEr+eKCAP0z5nl66gJpg6Khb1Qiev3/hZh
-         EtJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=REHA7EmuVy2412k5JBZlHnXSXCITuu5RQOyBaXf28o8=;
-        b=NfqZET/cy0UtElFMkXI0eMvWBDUvF5/lkhAPxteSiDviNH0FsFOmY+LQosNHCzuZLx
-         N4pv/onuF563xqDjE6ZA2QySY4HqftZ2kMbbFlgGQaSpOQCG91yKEB3a5xSkrJjoZFko
-         YYziHJ108oF7C6PCgf+7o31cTfp8ajEPH0qr+Xg4d1VW3WTSKLkZ1PGLPdOtKmTrVbhB
-         zX/bFiVaeXSW+wh8R5VtMINVEtmEBtfyRSrarBcziyEEArvXourpKX74zssEgJpMLlkr
-         yIJpHiQgtyoE8RxCpin4bs62cXj8RWKzE3g8mDStCYSgEUy0QEJz93ThMuVdX5o76tnQ
-         OD+A==
-X-Gm-Message-State: AOAM532daIs2xkF5JqF3bBPmblr3IS3oHmed8d2vV6RwSG659hxSd9RE
-        uEyCsE1WjnS1KaiplMsKsC0tgEI8YChHDA==
-X-Google-Smtp-Source: ABdhPJzMvjijXhKf6UwzlQgGLdXNiyElYjmteXjfB+clUMsCI8Qf7bumNkex70eiOtelbQWNt3aQ2A==
-X-Received: by 2002:a5d:51d2:: with SMTP id n18mr19894485wrv.92.1607454888755;
-        Tue, 08 Dec 2020 11:14:48 -0800 (PST)
-Received: from google.com ([2a01:4b00:8523:2d03:258e:cb26:cef:a620])
-        by smtp.gmail.com with ESMTPSA id i16sm2846391wrx.89.2020.12.08.11.14.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 08 Dec 2020 11:14:47 -0800 (PST)
-Date:   Tue, 8 Dec 2020 19:14:47 +0000
-From:   David Brazdil <dbrazdil@google.com>
-To:     Marc Zyngier <maz@kernel.org>
-Cc:     kvmarm@lists.cs.columbia.edu,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        linux-kernel@vger.kernel.org, Will Deacon <will@kernel.org>,
-        Tejun Heo <tj@kernel.org>, Dennis Zhou <dennis@kernel.org>,
-        linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
-        kernel-team@android.com, linux-arm-kernel@lists.infradead.org,
-        Christoph Lameter <cl@linux.com>,
-        Sudeep Holla <sudeep.holla@arm.com>
-Subject: Re: [PATCH v4 00/26] Opt-in always-on nVHE hypervisor
-Message-ID: <20201208191447.47idqf7n2v3hvrdg@google.com>
-References: <20201202184122.26046-1-dbrazdil@google.com>
- <160702322202.1501317.9696987088711766533.b4-ty@kernel.org>
+        with ESMTP id S1726063AbgLHUVL (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Dec 2020 15:21:11 -0500
+Received: from galois.linutronix.de (Galois.linutronix.de [IPv6:2a0a:51c0:0:12e:550::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0A324C061793;
+        Tue,  8 Dec 2020 12:20:31 -0800 (PST)
+From:   Thomas Gleixner <tglx@linutronix.de>
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020; t=1607455499;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=NX+dI+aPvVmZ5UT6T3bLtK8/usUYcfZFeQOezcWF6Rk=;
+        b=Sctv5n3ThdqVixQDelXHXC/ev7xo7ehTkhbjfUrC7hycj0+zZ29XXZwuqwwUQWQpWRGg8N
+        LBtExKBXpkMXb339lKTamEs/1cp2PoSc8bE+PdPcUJ+SvpyRwR6+Kb+VcNNUXcdHWbKpJ5
+        SNgkFlINgd7vcLsxxcNIsMj0ySJ8UqCviWDeLByig7/g+MBrxQ7EHuQswizA0umGsTAmwg
+        ap8k3zOTSHcxn1poq/7KQVDAd573qazuVf2u+/+9gXmxjDzBXWAUHHhKtlYCi8Tp0Vhuvi
+        W6UlxzS4nAC4b8yil0PkOpg1KCrddZwHeH7rBtWrTOZjlB1/338G9OzDHIbj0A==
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
+        s=2020e; t=1607455499;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=NX+dI+aPvVmZ5UT6T3bLtK8/usUYcfZFeQOezcWF6Rk=;
+        b=wVYWw0bZ7SshnZxg3VzTml/7fZs5zRgfWibCjgLe16SxoTlPTl99hGujbncMlsWgu2+oIV
+        K/jrb432XCUI5WCQ==
+To:     Andy Lutomirski <luto@kernel.org>,
+        Marcelo Tosatti <mtosatti@redhat.com>
+Cc:     Maxim Levitsky <mlevitsk@redhat.com>,
+        kvm list <kvm@vger.kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jim Mattson <jmattson@google.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        "open list\:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Sean Christopherson <sean.j.christopherson@intel.com>,
+        open list <linux-kernel@vger.kernel.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        "maintainer\:X86 ARCHITECTURE \(32-BIT AND 64-BIT\)" <x86@kernel.org>,
+        Joerg Roedel <joro@8bytes.org>, Borislav Petkov <bp@alien8.de>,
+        Shuah Khan <shuah@kernel.org>,
+        Andrew Jones <drjones@redhat.com>,
+        Oliver Upton <oupton@google.com>,
+        "open list\:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v2 1/3] KVM: x86: implement KVM_{GET|SET}_TSC_STATE
+In-Reply-To: <CALCETrX7F3EgshyTfsNZy8R=NzyQNOY6JAULfiuOCxc1Fz8mPQ@mail.gmail.com>
+References: <636fecc20b0143128b484f159ff795ff65d05b82.camel@redhat.com> <885C1725-B479-47F6-B08D-A7181637A80A@amacapital.net> <20201207231127.GB27492@fuller.cnet> <CALCETrX7F3EgshyTfsNZy8R=NzyQNOY6JAULfiuOCxc1Fz8mPQ@mail.gmail.com>
+Date:   Tue, 08 Dec 2020 20:24:58 +0100
+Message-ID: <87h7ow2j91.fsf@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <160702322202.1501317.9696987088711766533.b4-ty@kernel.org>
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hey Marc,
+On Tue, Dec 08 2020 at 09:43, Andy Lutomirski wrote:
+> On Tue, Dec 8, 2020 at 6:23 AM Marcelo Tosatti <mtosatti@redhat.com> wrote:
+> It looks like it tries to accomplish the right goal, but in a rather
+> roundabout way.  The host knows how to convert from TSC to
+> CLOCK_REALTIME, and ptp_kvm.c exposes this data to the guest.  But,
+> rather than just making the guest use the same CLOCK_REALTIME data as
+> the host, ptp_kvm.c seems to expose information to usermode that a
+> user daemon could use to attempt (with some degree of error?) to use
+> to make the guest kernel track CLOCK_REALTIME.  This seems inefficient
+> and dubiously accurate.
+>
+> My feature request is for this to be fully automatic and completely
+> coherent.  I would like for a host user program and a guest user
+> program to be able to share memory, run concurrently, and use the
+> shared memory to exchange CLOCK_REALTIME values without ever observing
+> the clock going backwards.  This ought to be doable.  Ideally the
+> result should even be usable for Spanner-style synchronization
+> assuming the host clock is good enough.  Also, this whole thing should
+> work without needing to periodically wake the guest to remain
+> synchronized.  If the guest sleeps for two minutes (full nohz-idle, no
+> guest activity at all), the host makes a small REALTIME frequency
+> adjustment, and then the guest runs user code that reads
+> CLOCK_REALTIME, the guest clock should still be fully synchronized
+> with the host.  I don't think that ptp_kvm.c-style synchronization can
+> do this.
 
-On Thu, Dec 03, 2020 at 07:23:19PM +0000, Marc Zyngier wrote:
-> On Wed, 2 Dec 2020 18:40:56 +0000, David Brazdil wrote:
-> > As we progress towards being able to keep guest state private to the
-> > host running nVHE hypervisor, this series allows the hypervisor to
-> > install itself on newly booted CPUs before the host is allowed to run
-> > on them.
-> > 
-> > All functionality described below is opt-in, guarded by an early param
-> > 'kvm-arm.mode=protected'. Future patches specific to the new protected
-> > mode should be hidden behind the same param.
-> > 
-> > [...]
-> 
-> Applied to kvm-arm64/psci-relay, thanks!
-> 
-> Note that although I pushed it to -next, I still need people to
-> eyeball it and give it some Acks. The commit-IDs below will
-> thus change as I apply tags, if any.
-> 
+One issue here is that guests might want to run their own NTP/PTP. One
+reason to do that is that some people prefer the leap second smearing
+NTP servers. 
 
-I'm looking at -next and I think the merge with Mark Rutland's el2_setup
-refactor didn't go as planned.
+> tglx etc, I think that doing this really really nicely might involve
+> promoting something like the current vDSO data structures to ABI -- a
+> straightforward-ish implementation would be for the KVM host to export
+> its vvar clock data to the guest and for the guest to use it, possibly
+> with an offset applied.  The offset could work a lot like timens works
+> today.
 
-The `#ifdef CONFIG_ARM64_VHE` section needs to cover everything between
-init_el2 and init_el2_nvhe. Currently the code falls through into VHE init
-when CONFIG_ARM64_VHE is not set.
+Works nicely if the guest TSC is not scaled. But that means that on
+migration the raw TSC usage in the guest is borked because the new host
+might have a different TSC frequency.
 
-Here's the snippet:
+If you use TSC scaling then the conversion needs to take TSC scaling
+into account which needs some thought. And the guest would need to read
+the host conversion from 'vdso data' and the scaling from the next page
+(per guest) and then still has to support timens. Doable but adds extra
+overhead on every time read operation.
 
-SYM_INNER_LABEL(init_el2, SYM_L_LOCAL)
-#ifdef CONFIG_ARM64_VHE
-	/*
-	 * Check for VHE being present. x2 being non-zero indicates that we
-	 * do have VHE, and that the kernel is intended to run at EL2.
-	 */
-	mrs	x2, id_aa64mmfr1_el1
-	ubfx	x2, x2, #ID_AA64MMFR1_VHE_SHIFT, #4
-	cbz	x2, init_el2_nvhe
-#endif						// <--- THIS
+If you want to avoid that you are back to the point where you need to
+chase all guest data when the host NTP/PTP adjusts the host side.
+Chasing and updating all this stuff in the tick was the reason why I was
+fighting the idea of clock realtime in namespaces.
 
-	<... initialize VHE ...>
-	msr	elr_el2, lr
-	mov	w0, #BOOT_CPU_MODE_EL2
-	eret
-						// <--- NEEDS TO MOVE HERE
-SYM_INNER_LABEL(init_el2_nvhe, SYM_L_LOCAL)
-	<... initialize nVHE ...>
+Thanks,
 
--David
-
+        tglx
