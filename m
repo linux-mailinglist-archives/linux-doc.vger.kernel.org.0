@@ -2,116 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 21E012D2D10
-	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 15:25:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BB55B2D2C9F
+	for <lists+linux-doc@lfdr.de>; Tue,  8 Dec 2020 15:07:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729623AbgLHOZN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 8 Dec 2020 09:25:13 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:47970 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1729377AbgLHOZN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Dec 2020 09:25:13 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1607437426;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=bfs7R36tArLHPO/+HIzcgL+lyVc7901iiK5/fepesp8=;
-        b=CnIth2N4YjhmDuSTHAHEnf7P0rGsrexygqGd4pSpi3UvIrXl1xSwDwbT1vwm5rBX7g1fVA
-        dxLvUI4cin34fm8hIHcF2Mcdeg0yQEHlaUvwSnvx8BnzUMFrgU71k+WPxUMIECI9LuXg6e
-        0cwZzRNa7A08ilKZdd7MCgzCCC4XSIE=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-591-aHFPSlkaM7y4stEEN7OEgw-1; Tue, 08 Dec 2020 09:23:45 -0500
-X-MC-Unique: aHFPSlkaM7y4stEEN7OEgw-1
-Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id EB78A107ACE3;
-        Tue,  8 Dec 2020 14:23:42 +0000 (UTC)
-Received: from fuller.cnet (ovpn-112-8.gru2.redhat.com [10.97.112.8])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 7DE3960BD8;
-        Tue,  8 Dec 2020 14:23:42 +0000 (UTC)
-Received: by fuller.cnet (Postfix, from userid 1000)
-        id 8ACC04172ED9; Mon,  7 Dec 2020 20:34:23 -0300 (-03)
-Date:   Mon, 7 Dec 2020 20:34:23 -0300
-From:   Marcelo Tosatti <mtosatti@redhat.com>
-To:     Thomas Gleixner <tglx@linutronix.de>
-Cc:     Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
+        id S1729500AbgLHOHy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 8 Dec 2020 09:07:54 -0500
+Received: from mout.kundenserver.de ([217.72.192.74]:60269 "EHLO
+        mout.kundenserver.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729462AbgLHOHy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 8 Dec 2020 09:07:54 -0500
+Received: from [192.168.1.155] ([95.117.39.192]) by mrelayeu.kundenserver.de
+ (mreue109 [212.227.15.183]) with ESMTPSA (Nemesis) id
+ 1Mzhax-1jzus61WUL-00viD2; Tue, 08 Dec 2020 15:05:07 +0100
+Subject: Re: Howto listen to/handle gpio state changes ? Re: [PATCH v2 2/2]
+ drivers: gpio: add virtio-gpio guest driver
+To:     Linus Walleij <linus.walleij@linaro.org>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Cc:     "Enrico Weigelt, metux IT consult" <info@metux.net>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Jim Mattson <jmattson@google.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Sean Christopherson <sean.j.christopherson@intel.com>,
-        open list <linux-kernel@vger.kernel.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
-        Joerg Roedel <joro@8bytes.org>, Borislav Petkov <bp@alien8.de>,
-        Shuah Khan <shuah@kernel.org>,
-        Andrew Jones <drjones@redhat.com>,
-        Oliver Upton <oupton@google.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH v2 1/3] KVM: x86: implement KVM_{GET|SET}_TSC_STATE
-Message-ID: <20201207233423.GE27492@fuller.cnet>
-References: <20201203171118.372391-1-mlevitsk@redhat.com>
- <20201203171118.372391-2-mlevitsk@redhat.com>
- <87a6uq9abf.fsf@nanos.tec.linutronix.de>
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+        virtualization@lists.linux-foundation.org,
+        linux-riscv@lists.infradead.org
+References: <20201203191135.21576-1-info@metux.net>
+ <20201203191135.21576-2-info@metux.net>
+ <0080d492-2f07-d1c6-d18c-73d4204a5d40@metux.net>
+ <CACRpkdb4R4yHcUV2KbGEC_RkU+QmH6Xg7X+qee8sEa9TURGr8A@mail.gmail.com>
+From:   "Enrico Weigelt, metux IT consult" <lkml@metux.net>
+Message-ID: <51d3efb7-b7eb-83d7-673a-308dd51616d3@metux.net>
+Date:   Tue, 8 Dec 2020 15:04:50 +0100
+User-Agent: Mozilla/5.0 (X11; Linux i686 on x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.12.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87a6uq9abf.fsf@nanos.tec.linutronix.de>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
+In-Reply-To: <CACRpkdb4R4yHcUV2KbGEC_RkU+QmH6Xg7X+qee8sEa9TURGr8A@mail.gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: tl
+Content-Transfer-Encoding: 8bit
+X-Provags-ID: V03:K1:G4pb0xE5H22ojPKBimkPJ8QHTZy9Ztkg67vq+dnwAqAyIP7Owjp
+ PtM4xLyYwEOsOB5Jeky7p0oHn4OV0smr3NYA6ZBFzuAz8Wj154fwdKeJAA7RKqTpXhphJ0A
+ KZ+KK0E+bN0KXeCyh8zH7Zs4RpyqkMmgg1F2DoLmutar7t2c9swfhYmzbPPLxZS31ACp14U
+ zhqcJNgYORsE2qZ0/AFTw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:a0Ff9jNvXYo=:mUVNahr6lKpBJFzi+wLba2
+ BTDIDBHKoHwdSkhKUdoqJmrbqtF3ZYCKFqGIgJUBJmegkGz/SOcu3pd2KOd4s2s3/QuXaNdk0
+ uguRGeRDIcNPst62WfMtiwo4Iw/Vunm5FNmfJFeatXDqWazimqqDCanpscLSdrblTa20JB1VW
+ c7kuVDEz155jDxAxRrlCHa4xGdgZYPY0yAQaS4Dv3uUFDVLnMUFpMkDRsUEKPq4noO6+ucdvE
+ SRzQXp3T1n3zUjTN8U0oP43qsyQntWyl1RTCSoXTQO9xSgs89oOoNRoJT2rv1BUKKBfwqnqmI
+ LpZWwaBmU/uSsj4PGpYC4o/F9bS7XDbzC7/lddp5AyIn8cCAKy4qL8gpxMSWZ9sTqpjvl4Hqq
+ 945/WLdlpTWKQh+Nbd0YlPUVBPRRhnU8HM133F3fS5h9vHMLhveOWfk66rqfG
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, Dec 06, 2020 at 05:19:16PM +0100, Thomas Gleixner wrote:
-> On Thu, Dec 03 2020 at 19:11, Maxim Levitsky wrote:
-> > +	case KVM_SET_TSC_STATE: {
-> > +		struct kvm_tsc_state __user *user_tsc_state = argp;
-> > +		struct kvm_tsc_state tsc_state;
-> > +		u64 host_tsc, wall_nsec;
-> > +
-> > +		u64 new_guest_tsc, new_guest_tsc_offset;
-> > +
-> > +		r = -EFAULT;
-> > +		if (copy_from_user(&tsc_state, user_tsc_state, sizeof(tsc_state)))
-> > +			goto out;
-> > +
-> > +		kvm_get_walltime(&wall_nsec, &host_tsc);
-> > +		new_guest_tsc = tsc_state.tsc;
-> > +
-> > +		if (tsc_state.flags & KVM_TSC_STATE_TIMESTAMP_VALID) {
-> > +			s64 diff = wall_nsec - tsc_state.nsec;
-> > +			if (diff >= 0)
-> > +				new_guest_tsc += nsec_to_cycles(vcpu, diff);
-> > +			else
-> > +				new_guest_tsc -= nsec_to_cycles(vcpu, -diff);
-> > +		}
-> > +
-> > +		new_guest_tsc_offset = new_guest_tsc - kvm_scale_tsc(vcpu, host_tsc);
-> > +		kvm_vcpu_write_tsc_offset(vcpu, new_guest_tsc_offset);
-> 
-> >From a timekeeping POV and the guests expectation of TSC this is
-> fundamentally wrong:
-> 
->       tscguest = scaled(hosttsc) + offset
-> 
-> The TSC has to be viewed systemwide and not per CPU. It's systemwide
-> used for timekeeping and for that to work it has to be synchronized. 
-> 
-> Why would this be different on virt? Just because it's virt or what? 
-> 
-> Migration is a guest wide thing and you're not migrating single vCPUs.
-> 
-> This hackery just papers over he underlying design fail that KVM looks
-> at the TSC per vCPU which is the root cause and that needs to be fixed.
+On 08.12.20 10:38, Linus Walleij wrote:
 
-It already does it: The unified TSC offset is kept at kvm->arch.cur_tsc_offset.
+Hi,
 
+> This is Bartosz territory, but the gpio-mockup.c driver will insert
+> IRQs into the system, he went and added really core stuff
+> into kernel/irq to make this happen. Notice that in Kconfig
+> it does:
+> 
+> select IRQ_SIM
+> 
+> Then this is used:
+> include/linux/irq_sim.h
+> 
+> This is intended for simulating IRQs and both GPIO and IIO use it.
+> I think this inserts IRQs from debugfs and I have no idea how
+> flexible that is.
 
+Oh, thx.
+
+It seems to implement a pseudo-irqchip driver. I've already though about
+doing that, but didn't think its worth it, just for my driver alone.
+I've implemented a few irq handling cb's directly the driver. But since
+we already have it, I'll reconsider :)
+
+BUT: this wasn't exactly my question :p
+
+I've been looking for some more direct notification callback for gpio
+consumers: here the consumer would register itself as a listener on
+some gpio_desc and called back when something changes (with data what
+exactly changed, eg. "gpio #3 input switched to high").
+
+Seems we currently just have the indirect path via interrupts.
+
+--mtx
+
+-- 
+---
+Hinweis: unverschlüsselte E-Mails können leicht abgehört und manipuliert
+werden ! Für eine vertrauliche Kommunikation senden Sie bitte ihren
+GPG/PGP-Schlüssel zu.
+---
+Enrico Weigelt, metux IT consult
+Free software and Linux embedded engineering
+info@metux.net -- +49-151-27565287
