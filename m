@@ -2,431 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B23082D4A42
-	for <lists+linux-doc@lfdr.de>; Wed,  9 Dec 2020 20:32:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EDC662D4BAF
+	for <lists+linux-doc@lfdr.de>; Wed,  9 Dec 2020 21:25:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387776AbgLITbo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Dec 2020 14:31:44 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54924 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387767AbgLITbh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 14:31:37 -0500
-Received: from smtp-42aa.mail.infomaniak.ch (smtp-42aa.mail.infomaniak.ch [IPv6:2001:1600:4:17::42aa])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4A715C0619DE;
-        Wed,  9 Dec 2020 11:29:06 -0800 (PST)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
-        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4CrnD04WKHzlhPHX;
-        Wed,  9 Dec 2020 20:29:04 +0100 (CET)
-Received: from localhost (unknown [23.97.221.149])
-        by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4CrnCz1k2xzlh8TG;
-        Wed,  9 Dec 2020 20:29:03 +0100 (CET)
-From:   =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
-To:     James Morris <jmorris@namei.org>, Jann Horn <jannh@google.com>,
-        "Serge E . Hallyn" <serge@hallyn.com>
-Cc:     =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        Jeff Dike <jdike@addtoit.com>,
+        id S1733001AbgLIUYX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Dec 2020 15:24:23 -0500
+Received: from fllv0016.ext.ti.com ([198.47.19.142]:58502 "EHLO
+        fllv0016.ext.ti.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730039AbgLIUYX (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 15:24:23 -0500
+Received: from lelv0266.itg.ti.com ([10.180.67.225])
+        by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 0B9KMYrS093383;
+        Wed, 9 Dec 2020 14:22:34 -0600
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
+        s=ti-com-17Q1; t=1607545354;
+        bh=0YOr/KkSEFpTKDVBe5HkrfTXFveoPFaa5XWm7Svxg7A=;
+        h=Subject:To:CC:References:From:Date:In-Reply-To;
+        b=nJBYIQZr0v6lufvH0ZaFAm1rXVXE8Y46IxZPkAIl62WLJ1VxUa2c66AtQB25EgYiV
+         nL/a9qPUfn/JWmUpXk432xiAzXPWCSW+BNipBHHz1h0qVhdb2zU6coRwYG5Sla+gst
+         JWg7Xk7Z6MfewE8yF3BpQi9dZr39egrZldmiauW0=
+Received: from DFLE112.ent.ti.com (dfle112.ent.ti.com [10.64.6.33])
+        by lelv0266.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 0B9KMYbu010807
+        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
+        Wed, 9 Dec 2020 14:22:34 -0600
+Received: from DFLE112.ent.ti.com (10.64.6.33) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Wed, 9 Dec
+ 2020 14:22:34 -0600
+Received: from lelv0327.itg.ti.com (10.180.67.183) by DFLE112.ent.ti.com
+ (10.64.6.33) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
+ Frontend Transport; Wed, 9 Dec 2020 14:22:34 -0600
+Received: from [10.250.100.73] (ileax41-snat.itg.ti.com [10.172.224.153])
+        by lelv0327.itg.ti.com (8.15.2/8.15.2) with ESMTP id 0B9KMTT1020549;
+        Wed, 9 Dec 2020 14:22:31 -0600
+Subject: Re: Howto listen to/handle gpio state changes ? Re: [PATCH v2 2/2]
+ drivers: gpio: add virtio-gpio guest driver
+To:     Linus Walleij <linus.walleij@linaro.org>,
+        Arnd Bergmann <arnd@kernel.org>
+CC:     "Enrico Weigelt, metux IT consult" <lkml@metux.net>,
+        "Michael S. Tsirkin" <mst@redhat.com>,
+        Jason Wang <jasowang@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Michael Kerrisk <mtk.manpages@gmail.com>,
-        Richard Weinberger <richard@nod.at>,
-        Shuah Khan <shuah@kernel.org>,
-        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
-        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        linux-security-module@vger.kernel.org, x86@kernel.org,
-        =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@linux.microsoft.com>
-Subject: [PATCH v26 11/12] samples/landlock: Add a sandbox manager example
-Date:   Wed,  9 Dec 2020 20:28:38 +0100
-Message-Id: <20201209192839.1396820-12-mic@digikod.net>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20201209192839.1396820-1-mic@digikod.net>
-References: <20201209192839.1396820-1-mic@digikod.net>
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        <virtualization@lists.linux-foundation.org>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
+        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+        linux-riscv <linux-riscv@lists.infradead.org>,
+        "Enrico Weigelt, metux IT consult" <info@metux.net>
+References: <20201203191135.21576-1-info@metux.net>
+ <20201203191135.21576-2-info@metux.net>
+ <0080d492-2f07-d1c6-d18c-73d4204a5d40@metux.net>
+ <CACRpkdb4R4yHcUV2KbGEC_RkU+QmH6Xg7X+qee8sEa9TURGr8A@mail.gmail.com>
+ <51d3efb7-b7eb-83d7-673a-308dd51616d3@metux.net>
+ <CACRpkdbqVoT56H88hoZwDqV0kW_8XTaE5TkMQsg-RRrPqgF=cQ@mail.gmail.com>
+ <CAK8P3a1PRQGUXkjdSmqxXSONX_ZoCgsfx8hJBUdBUk14tyzErA@mail.gmail.com>
+ <CACRpkdbNAeDsi9B14kbkAeoqX7NE_Ua_yOX1iNF75oNK0ELefQ@mail.gmail.com>
+From:   Grygorii Strashko <grygorii.strashko@ti.com>
+Message-ID: <2827855a-dc4f-2e17-aca3-4b1b9f0d5084@ti.com>
+Date:   Wed, 9 Dec 2020 22:22:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <CACRpkdbNAeDsi9B14kbkAeoqX7NE_Ua_yOX1iNF75oNK0ELefQ@mail.gmail.com>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mickaël Salaün <mic@linux.microsoft.com>
 
-Add a basic sandbox tool to launch a command which can only access a
-whitelist of file hierarchies in a read-only or read-write way.
 
-Cc: James Morris <jmorris@namei.org>
-Cc: Jann Horn <jannh@google.com>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Serge E. Hallyn <serge@hallyn.com>
-Signed-off-by: Mickaël Salaün <mic@linux.microsoft.com>
----
+On 09/12/2020 14:53, Linus Walleij wrote:
+> On Wed, Dec 9, 2020 at 12:19 PM Arnd Bergmann <arnd@kernel.org> wrote:
+>> On Wed, Dec 9, 2020 at 9:51 AM Linus Walleij <linus.walleij@linaro.org> wrote:
+>>> On Tue, Dec 8, 2020 at 3:07 PM Enrico Weigelt, metux IT consult <lkml@metux.net> wrote:
+>>
+>>> What we need to understand is if your new usecase is an outlier
+>>> so it is simplest modeled by a "mock" irq_chip or we have to design
+>>> something new altogether like notifications on changes. I suspect
+>>> irq_chip would be best because all drivers using GPIOs for interrupts
+>>> are expecting interrupts, and it would be an enormous task to
+>>> change them all and really annoying to create a new mechanism
+>>> on the side.
+>>
+>> I would expect the platform abstraction to actually be close enough
+>> to a chained irqchip that it actually works: the notification should
+>> come in via vring_interrupt(), which is a normal interrupt handler
+>> that calls vq->vq.callback(), calling generic_handle_irq() (and
+>> possibly chained_irq_enter()/chained_irq_exit() around it) like the
+>> other gpio drivers do should just work here I think, and if it did
+>> not, then I would expect this to be just a bug in the driver rather
+>> than something missing in the gpio framework.
+> 
+> Performance/latency-wise that would also be strongly encouraged.
+> 
+> Tglx isn't super-happy about the chained interrupts at times, as they
+> can create really nasty bugs, but a pure IRQ in fastpath of some
+> kinde is preferable and intuitive either way.
 
-Changes since v25:
-* Remove useless errno set in the syscall wrappers.
-* Cosmetic variable renames.
+In my opinion the problem here is that proposed patch somehow describes Front end, but
+says nothing about Backend and overall design.
 
-Changes since v23:
-* Re-add hints to help users understand the required kernel
-  configuration.  This was removed with the removal of
-  landlock_get_features(2).
+What is expected to be virtualized? whole GPIO chip? or set of GPIOs from different GPIO chips?
+Most often nobody want to give Guest access to the whole GPIO chip, so, most probably, smth. similar to
+GPIO Aggregator will be needed.
 
-Changes since v21:
-* Remove LANDLOCK_ACCESS_FS_CHROOT.
-* Clean up help.
+How is situation going to be resolved that GPIO framework and IRQ framework are independent, but intersect, and
+GPIO controller drivers have no idea who and how requesting GPIO IRQ - threaded vs non-threaded vs oneshot.
+So, some information need to be transferred to Back end  - at minimum IRQ triggering type.
 
-Changes since v20:
-* Update with new syscalls and type names.
-* Update errno check for EOPNOTSUPP.
-* Use the full syscall interfaces: explicitely set the "flags" field to
-  zero.
-
-Changes since v19:
-* Update with the new Landlock syscalls.
-* Comply with commit 5f2fb52fac15 ("kbuild: rename hostprogs-y/always to
-  hostprogs/always-y").
-
-Changes since v16:
-* Switch syscall attribute pointer and size arguments.
-
-Changes since v15:
-* Update access right names.
-* Properly assign access right to files according to the new related
-  syscall restriction.
-* Replace "select" with "depends on" HEADERS_INSTALL (suggested by Randy
-  Dunlap).
-
-Changes since v14:
-* Fix Kconfig dependency.
-* Remove access rights that may be required for FD-only requests:
-  mmap, truncate, getattr, lock, chmod, chown, chgrp, ioctl.
-* Fix useless hardcoded syscall number.
-* Use execvpe().
-* Follow symlinks.
-* Extend help with common file paths.
-* Constify variables.
-* Clean up comments.
-* Improve error message.
-
-Changes since v11:
-* Add back the filesystem sandbox manager and update it to work with the
-  new Landlock syscall.
-
-Previous changes:
-https://lore.kernel.org/lkml/20190721213116.23476-9-mic@digikod.net/
----
- samples/Kconfig              |   7 ++
- samples/Makefile             |   1 +
- samples/landlock/.gitignore  |   1 +
- samples/landlock/Makefile    |  15 +++
- samples/landlock/sandboxer.c | 233 +++++++++++++++++++++++++++++++++++
- 5 files changed, 257 insertions(+)
- create mode 100644 samples/landlock/.gitignore
- create mode 100644 samples/landlock/Makefile
- create mode 100644 samples/landlock/sandboxer.c
-
-diff --git a/samples/Kconfig b/samples/Kconfig
-index 0ed6e4d71d87..e6129496ced5 100644
---- a/samples/Kconfig
-+++ b/samples/Kconfig
-@@ -124,6 +124,13 @@ config SAMPLE_HIDRAW
- 	bool "hidraw sample"
- 	depends on CC_CAN_LINK && HEADERS_INSTALL
- 
-+config SAMPLE_LANDLOCK
-+	bool "Build Landlock sample code"
-+	depends on HEADERS_INSTALL
-+	help
-+	  Build a simple Landlock sandbox manager able to launch a process
-+	  restricted by a user-defined filesystem access control.
-+
- config SAMPLE_PIDFD
- 	bool "pidfd sample"
- 	depends on CC_CAN_LINK && HEADERS_INSTALL
-diff --git a/samples/Makefile b/samples/Makefile
-index c3392a595e4b..087e0988ccc5 100644
---- a/samples/Makefile
-+++ b/samples/Makefile
-@@ -11,6 +11,7 @@ obj-$(CONFIG_SAMPLE_KDB)		+= kdb/
- obj-$(CONFIG_SAMPLE_KFIFO)		+= kfifo/
- obj-$(CONFIG_SAMPLE_KOBJECT)		+= kobject/
- obj-$(CONFIG_SAMPLE_KPROBES)		+= kprobes/
-+subdir-$(CONFIG_SAMPLE_LANDLOCK)	+= landlock
- obj-$(CONFIG_SAMPLE_LIVEPATCH)		+= livepatch/
- subdir-$(CONFIG_SAMPLE_PIDFD)		+= pidfd
- obj-$(CONFIG_SAMPLE_QMI_CLIENT)		+= qmi/
-diff --git a/samples/landlock/.gitignore b/samples/landlock/.gitignore
-new file mode 100644
-index 000000000000..f43668b2d318
---- /dev/null
-+++ b/samples/landlock/.gitignore
-@@ -0,0 +1 @@
-+/sandboxer
-diff --git a/samples/landlock/Makefile b/samples/landlock/Makefile
-new file mode 100644
-index 000000000000..21eda5774948
---- /dev/null
-+++ b/samples/landlock/Makefile
-@@ -0,0 +1,15 @@
-+# SPDX-License-Identifier: BSD-3-Clause
-+
-+hostprogs := sandboxer
-+
-+always-y := $(hostprogs)
-+
-+KBUILD_HOSTCFLAGS += -I$(objtree)/usr/include
-+
-+.PHONY: all clean
-+
-+all:
-+	$(MAKE) -C ../.. samples/landlock/
-+
-+clean:
-+	$(MAKE) -C ../.. M=samples/landlock/ clean
-diff --git a/samples/landlock/sandboxer.c b/samples/landlock/sandboxer.c
-new file mode 100644
-index 000000000000..82b2738b216c
---- /dev/null
-+++ b/samples/landlock/sandboxer.c
-@@ -0,0 +1,233 @@
-+// SPDX-License-Identifier: BSD-3-Clause
-+/*
-+ * Simple Landlock sandbox manager able to launch a process restricted by a
-+ * user-defined filesystem access control.
-+ *
-+ * Copyright © 2017-2020 Mickaël Salaün <mic@digikod.net>
-+ * Copyright © 2020 ANSSI
-+ */
-+
-+#define _GNU_SOURCE
-+#include <errno.h>
-+#include <fcntl.h>
-+#include <linux/landlock.h>
-+#include <linux/prctl.h>
-+#include <stddef.h>
-+#include <stdio.h>
-+#include <stdlib.h>
-+#include <string.h>
-+#include <sys/prctl.h>
-+#include <sys/stat.h>
-+#include <sys/syscall.h>
-+#include <unistd.h>
-+
-+#ifndef landlock_create_ruleset
-+static inline int landlock_create_ruleset(
-+		const struct landlock_ruleset_attr *const attr,
-+		const size_t size, const __u32 flags)
-+{
-+	return syscall(__NR_landlock_create_ruleset, attr, size, flags);
-+}
-+#endif
-+
-+#ifndef landlock_add_rule
-+static inline int landlock_add_rule(const int ruleset_fd,
-+		const enum landlock_rule_type rule_type,
-+		const void *const rule_attr, const __u32 flags)
-+{
-+	return syscall(__NR_landlock_add_rule, ruleset_fd, rule_type,
-+			rule_attr, flags);
-+}
-+#endif
-+
-+#ifndef landlock_enforce_ruleset_current
-+static inline int landlock_enforce_ruleset_current(const int ruleset_fd,
-+		const __u32 flags)
-+{
-+	return syscall(__NR_landlock_enforce_ruleset_current, ruleset_fd,
-+			flags);
-+}
-+#endif
-+
-+#define ENV_FS_RO_NAME "LL_FS_RO"
-+#define ENV_FS_RW_NAME "LL_FS_RW"
-+#define ENV_PATH_TOKEN ":"
-+
-+static int parse_path(char *env_path, const char ***const path_list)
-+{
-+	int i, num_paths = 0;
-+
-+	if (env_path) {
-+		num_paths++;
-+		for (i = 0; env_path[i]; i++) {
-+			if (env_path[i] == ENV_PATH_TOKEN[0])
-+				num_paths++;
-+		}
-+	}
-+	*path_list = malloc(num_paths * sizeof(**path_list));
-+	for (i = 0; i < num_paths; i++)
-+		(*path_list)[i] = strsep(&env_path, ENV_PATH_TOKEN);
-+
-+	return num_paths;
-+}
-+
-+#define ACCESS_FILE ( \
-+	LANDLOCK_ACCESS_FS_EXECUTE | \
-+	LANDLOCK_ACCESS_FS_WRITE_FILE | \
-+	LANDLOCK_ACCESS_FS_READ_FILE)
-+
-+static int populate_ruleset(
-+		const char *const env_var, const int ruleset_fd,
-+		const __u64 allowed_access)
-+{
-+	int num_paths, i;
-+	char *env_path_name;
-+	const char **path_list = NULL;
-+	struct landlock_path_beneath_attr path_beneath = {
-+		.parent_fd = -1,
-+	};
-+
-+	env_path_name = getenv(env_var);
-+	if (!env_path_name) {
-+		fprintf(stderr, "Missing environment variable %s\n", env_var);
-+		return 1;
-+	}
-+	env_path_name = strdup(env_path_name);
-+	unsetenv(env_var);
-+	num_paths = parse_path(env_path_name, &path_list);
-+	if (num_paths == 1 && path_list[0][0] == '\0') {
-+		fprintf(stderr, "Missing path in %s\n", env_var);
-+		goto err_free_name;
-+	}
-+
-+	for (i = 0; i < num_paths; i++) {
-+		struct stat statbuf;
-+
-+		path_beneath.parent_fd = open(path_list[i], O_PATH |
-+				O_CLOEXEC);
-+		if (path_beneath.parent_fd < 0) {
-+			fprintf(stderr, "Failed to open \"%s\": %s\n",
-+					path_list[i],
-+					strerror(errno));
-+			goto err_free_name;
-+		}
-+		if (fstat(path_beneath.parent_fd, &statbuf)) {
-+			close(path_beneath.parent_fd);
-+			goto err_free_name;
-+		}
-+		path_beneath.allowed_access = allowed_access;
-+		if (!S_ISDIR(statbuf.st_mode))
-+			path_beneath.allowed_access &= ACCESS_FILE;
-+		if (landlock_add_rule(ruleset_fd, LANDLOCK_RULE_PATH_BENEATH,
-+					&path_beneath, 0)) {
-+			fprintf(stderr, "Failed to update the ruleset with \"%s\": %s\n",
-+					path_list[i], strerror(errno));
-+			close(path_beneath.parent_fd);
-+			goto err_free_name;
-+		}
-+		close(path_beneath.parent_fd);
-+	}
-+	free(env_path_name);
-+	return 0;
-+
-+err_free_name:
-+	free(env_path_name);
-+	return 1;
-+}
-+
-+#define ACCESS_FS_ROUGHLY_READ ( \
-+	LANDLOCK_ACCESS_FS_EXECUTE | \
-+	LANDLOCK_ACCESS_FS_READ_FILE | \
-+	LANDLOCK_ACCESS_FS_READ_DIR)
-+
-+#define ACCESS_FS_ROUGHLY_WRITE ( \
-+	LANDLOCK_ACCESS_FS_WRITE_FILE | \
-+	LANDLOCK_ACCESS_FS_REMOVE_DIR | \
-+	LANDLOCK_ACCESS_FS_REMOVE_FILE | \
-+	LANDLOCK_ACCESS_FS_MAKE_CHAR | \
-+	LANDLOCK_ACCESS_FS_MAKE_DIR | \
-+	LANDLOCK_ACCESS_FS_MAKE_REG | \
-+	LANDLOCK_ACCESS_FS_MAKE_SOCK | \
-+	LANDLOCK_ACCESS_FS_MAKE_FIFO | \
-+	LANDLOCK_ACCESS_FS_MAKE_BLOCK | \
-+	LANDLOCK_ACCESS_FS_MAKE_SYM)
-+
-+int main(const int argc, char *const argv[], char *const *const envp)
-+{
-+	const char *cmd_path;
-+	char *const *cmd_argv;
-+	int ruleset_fd;
-+	struct landlock_ruleset_attr ruleset_attr = {
-+		.handled_access_fs = ACCESS_FS_ROUGHLY_READ |
-+			ACCESS_FS_ROUGHLY_WRITE,
-+	};
-+
-+	if (argc < 2) {
-+		fprintf(stderr, "usage: %s=\"...\" %s=\"...\" %s <cmd> [args]...\n\n",
-+				ENV_FS_RO_NAME, ENV_FS_RW_NAME, argv[0]);
-+		fprintf(stderr, "Launch a command in a restricted environment.\n\n");
-+		fprintf(stderr, "Environment variables containing paths, "
-+				"each separated by a colon:\n");
-+		fprintf(stderr, "* %s: list of paths allowed to be used in a read-only way.\n",
-+				ENV_FS_RO_NAME);
-+		fprintf(stderr, "* %s: list of paths allowed to be used in a read-write way.\n",
-+				ENV_FS_RO_NAME);
-+		fprintf(stderr, "\nexample:\n"
-+				"%s=\"/bin:/lib:/usr:/proc:/etc:/dev/urandom\" "
-+				"%s=\"/dev/null:/dev/full:/dev/zero:/dev/pts:/tmp\" "
-+				"%s bash -i\n",
-+				ENV_FS_RO_NAME, ENV_FS_RW_NAME, argv[0]);
-+		return 1;
-+	}
-+
-+	ruleset_fd = landlock_create_ruleset(&ruleset_attr, sizeof(ruleset_attr), 0);
-+	if (ruleset_fd < 0) {
-+		perror("Failed to create a ruleset");
-+		switch (errno) {
-+		case ENOSYS:
-+			fprintf(stderr, "Hint: Landlock is not supported by the current kernel. "
-+					"To support it, build the kernel with "
-+					"CONFIG_SECURITY_LANDLOCK=y and prepend "
-+					"\"landlock,\" to the content of CONFIG_LSM.\n");
-+			break;
-+		case EOPNOTSUPP:
-+			fprintf(stderr, "Hint: Landlock is currently disabled. "
-+					"It can be enabled in the kernel configuration by "
-+					"prepending \"landlock,\" to the content of CONFIG_LSM, "
-+					"or at boot time by setting the same content to the "
-+					"\"lsm\" kernel parameter.\n");
-+			break;
-+		}
-+		return 1;
-+	}
-+	if (populate_ruleset(ENV_FS_RO_NAME, ruleset_fd,
-+				ACCESS_FS_ROUGHLY_READ)) {
-+		goto err_close_ruleset;
-+	}
-+	if (populate_ruleset(ENV_FS_RW_NAME, ruleset_fd,
-+				ACCESS_FS_ROUGHLY_READ | ACCESS_FS_ROUGHLY_WRITE)) {
-+		goto err_close_ruleset;
-+	}
-+	if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0)) {
-+		perror("Failed to restrict privileges");
-+		goto err_close_ruleset;
-+	}
-+	if (landlock_enforce_ruleset_current(ruleset_fd, 0)) {
-+		perror("Failed to enforce ruleset");
-+		goto err_close_ruleset;
-+	}
-+	close(ruleset_fd);
-+
-+	cmd_path = argv[1];
-+	cmd_argv = argv + 1;
-+	execvpe(cmd_path, cmd_argv, envp);
-+	fprintf(stderr, "Failed to execute \"%s\": %s\n", cmd_path,
-+			strerror(errno));
-+	fprintf(stderr, "Hint: access to the binary, the interpreter or "
-+			"shared libraries may be denied.\n");
-+	return 1;
-+
-+err_close_ruleset:
-+	close(ruleset_fd);
-+	return 1;
-+}
+Overall, it might be better to start from pure gpio and leave GPIO IRQ aside.
 -- 
-2.29.2
-
+Best regards,
+grygorii
