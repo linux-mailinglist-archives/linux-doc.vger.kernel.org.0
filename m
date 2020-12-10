@@ -2,131 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 826192D5254
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 05:02:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AD48C2D5292
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 05:08:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732275AbgLJEAQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Dec 2020 23:00:16 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48602 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1732178AbgLJEAJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 23:00:09 -0500
-Received: from mail-pg1-x541.google.com (mail-pg1-x541.google.com [IPv6:2607:f8b0:4864:20::541])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C0DEBC061282
-        for <linux-doc@vger.kernel.org>; Wed,  9 Dec 2020 19:59:29 -0800 (PST)
-Received: by mail-pg1-x541.google.com with SMTP id w4so2929541pgg.13
-        for <linux-doc@vger.kernel.org>; Wed, 09 Dec 2020 19:59:29 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=t1l4xMSE0KQnA71H//bDmskGduWipXvDa6Vox+ZjNms=;
-        b=hMRBPFb96XJumXLHyGTTwBklAUnIrxY7ck3bVW6zB94E5E1bc8M4k6wRlkORblzegV
-         U5lvw2LfOIBvWm70vSuLDEgphWueRmLtAcavEysLQ5ehechfmSU3Ipi0TQWhQxUh3fHU
-         enQTfmCl5wcAOp4vSyEMwEiXSHozesuQAfXUZ6fBkXFMzThmMoahvOptGtxCChZaB4XP
-         20mAdPoysLnFwGnxcQGOb5pWjsSUWLErW/qIG10Grlgi3RBcVRbvDii7ytREaV09QuxP
-         79KAVZ1RimWNnqGRmifxuj5st5dcIkCJG/ehffyI5jMdPmllwYixCXtBDTnsPx3b4BOl
-         kbLg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=t1l4xMSE0KQnA71H//bDmskGduWipXvDa6Vox+ZjNms=;
-        b=NlyPuGytiTWTLkaYzhDGjkCzdlrzKLcvwJv00hIlkSkL2q7+FR2yX6NnNxNchb6Cnd
-         B/adncvGXTOhINlpVPJlmH4PKexcs5DKS+CGcfLknlFN0AWksL4QzfBgEsZywLWsJ/40
-         U2lt6vMat5kQqvfeyEsAi3SpxqgsjPkuGHA5YrWDsvNMfj3KDiL6UYBN6sGT6YBOvI+F
-         hq9dpgf52ZNsMUtn2u1VoyZwU2KSw1GxL1xa2aSronL0UJMhWqBq75Ub/IWm2wJlZCWj
-         RC6a1RY8cBaVK1ftNPpui/99F2h1N45m8cwv+UzANyrZDoU0YxGcMFKG4xAmKBYy+Y25
-         klXg==
-X-Gm-Message-State: AOAM533hmy6sHAw6nq0D9w2DHaNLkJ/RGTDnmjrEZrm8lJzbY3fBlxOf
-        aZ9+Sj0Xf2IiHRg1+ZNBB/WXFw==
-X-Google-Smtp-Source: ABdhPJydwdYQo79U6PP08VNvTBIzTtWxejp8DNMvx8xTTULpe736PdBuGNl589ah44qPUz1qAf8ZKw==
-X-Received: by 2002:a17:90a:c306:: with SMTP id g6mr5511722pjt.104.1607572769408;
-        Wed, 09 Dec 2020 19:59:29 -0800 (PST)
-Received: from localhost.localdomain ([103.136.220.85])
-        by smtp.gmail.com with ESMTPSA id f33sm4266535pgl.83.2020.12.09.19.59.19
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 09 Dec 2020 19:59:28 -0800 (PST)
-From:   Muchun Song <songmuchun@bytedance.com>
-To:     corbet@lwn.net, mike.kravetz@oracle.com, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
-        viro@zeniv.linux.org.uk, akpm@linux-foundation.org,
-        paulmck@kernel.org, mchehab+huawei@kernel.org,
-        pawan.kumar.gupta@linux.intel.com, rdunlap@infradead.org,
-        oneukum@suse.com, anshuman.khandual@arm.com, jroedel@suse.de,
-        almasrymina@google.com, rientjes@google.com, willy@infradead.org,
-        osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
-        david@redhat.com
-Cc:     duanxiongchun@bytedance.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        linux-fsdevel@vger.kernel.org,
-        Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v8 12/12] mm/hugetlb: Optimize the code with the help of the compiler
-Date:   Thu, 10 Dec 2020 11:55:26 +0800
-Message-Id: <20201210035526.38938-13-songmuchun@bytedance.com>
-X-Mailer: git-send-email 2.21.0 (Apple Git-122)
-In-Reply-To: <20201210035526.38938-1-songmuchun@bytedance.com>
-References: <20201210035526.38938-1-songmuchun@bytedance.com>
+        id S1731830AbgLJEHP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Dec 2020 23:07:15 -0500
+Received: from mga17.intel.com ([192.55.52.151]:18541 "EHLO mga17.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1731986AbgLJEHF (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 9 Dec 2020 23:07:05 -0500
+IronPort-SDR: 2eoUH9XhRqJnRd7TCgH850thxP5pn4+7D8KVtng9w7/15zkxXHmwKW8L+aYbvuTMZyexxmATmG
+ I0aCP+slH8vg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9830"; a="153999163"
+X-IronPort-AV: E=Sophos;i="5.78,407,1599548400"; 
+   d="scan'208";a="153999163"
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Dec 2020 20:06:19 -0800
+IronPort-SDR: 2yLRbXl1/SMNxb/j0Fi5OnKn8YGbzpse05mx+yG5B9ZZJfvWvYZxm9kkc/AhTBzU0eO2LRlSCA
+ s3rrjworJk+A==
+X-IronPort-AV: E=Sophos;i="5.78,407,1599548400"; 
+   d="scan'208";a="376793430"
+Received: from iweiny-desk2.sc.intel.com (HELO localhost) ([10.3.52.147])
+  by fmsmga003-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 09 Dec 2020 20:06:19 -0800
+Date:   Wed, 9 Dec 2020 20:06:19 -0800
+From:   Ira Weiny <ira.weiny@intel.com>
+To:     Pavel Tatashin <pasha.tatashin@soleen.com>
+Cc:     linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        akpm@linux-foundation.org, vbabka@suse.cz, mhocko@suse.com,
+        david@redhat.com, osalvador@suse.de, dan.j.williams@intel.com,
+        sashal@kernel.org, tyhicks@linux.microsoft.com,
+        iamjoonsoo.kim@lge.com, mike.kravetz@oracle.com,
+        rostedt@goodmis.org, mingo@redhat.com, jgg@ziepe.ca,
+        peterz@infradead.org, mgorman@suse.de, willy@infradead.org,
+        rientjes@google.com, jhubbard@nvidia.com, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 3/8] mm/gup: make __gup_longterm_locked common
+Message-ID: <20201210040618.GR1563847@iweiny-DESK2.sc.intel.com>
+References: <20201210004335.64634-1-pasha.tatashin@soleen.com>
+ <20201210004335.64634-4-pasha.tatashin@soleen.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201210004335.64634-4-pasha.tatashin@soleen.com>
+User-Agent: Mutt/1.11.1 (2018-12-01)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-We cannot optimize if a "struct page" crosses page boundaries. If
-it is true, we can optimize the code with the help of a compiler.
-When free_vmemmap_pages_per_hpage() returns zero, most functions are
-optimized by the compiler.
+On Wed, Dec 09, 2020 at 07:43:30PM -0500, Pavel Tatashin wrote:
+> __gup_longterm_locked() has CMA || FS_DAX version and a common stub
+> version. In the preparation of prohibiting longterm pinning of pages from
+> movable zone make the CMA || FS_DAX version common, and delete the stub
+> version.
 
-Signed-off-by: Muchun Song <songmuchun@bytedance.com>
----
- include/linux/hugetlb.h | 3 ++-
- mm/hugetlb_vmemmap.c    | 3 +++
- mm/hugetlb_vmemmap.h    | 2 +-
- 3 files changed, 6 insertions(+), 2 deletions(-)
+I thought Jason sent a patch which got rid of this as well?
 
-diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
-index 7295f6b3d55e..adc17765e0e9 100644
---- a/include/linux/hugetlb.h
-+++ b/include/linux/hugetlb.h
-@@ -791,7 +791,8 @@ extern bool hugetlb_free_vmemmap_enabled;
- 
- static inline bool is_hugetlb_free_vmemmap_enabled(void)
- {
--	return hugetlb_free_vmemmap_enabled;
-+	return hugetlb_free_vmemmap_enabled &&
-+	       is_power_of_2(sizeof(struct page));
- }
- #else
- static inline bool is_hugetlb_free_vmemmap_enabled(void)
-diff --git a/mm/hugetlb_vmemmap.c b/mm/hugetlb_vmemmap.c
-index 7f0b9e002be4..819ab9bb9298 100644
---- a/mm/hugetlb_vmemmap.c
-+++ b/mm/hugetlb_vmemmap.c
-@@ -208,6 +208,9 @@ bool hugetlb_free_vmemmap_enabled;
- 
- static int __init early_hugetlb_free_vmemmap_param(char *buf)
- {
-+	if (!is_power_of_2(sizeof(struct page)))
-+		return 0;
-+
- 	if (!buf)
- 		return -EINVAL;
- 
-diff --git a/mm/hugetlb_vmemmap.h b/mm/hugetlb_vmemmap.h
-index 0a1c0d33a316..5f5e90c81cd2 100644
---- a/mm/hugetlb_vmemmap.h
-+++ b/mm/hugetlb_vmemmap.h
-@@ -21,7 +21,7 @@ void free_huge_page_vmemmap(struct hstate *h, struct page *head);
-  */
- static inline unsigned int free_vmemmap_pages_per_hpage(struct hstate *h)
- {
--	return h->nr_free_vmemmap_pages;
-+	return h->nr_free_vmemmap_pages && is_power_of_2(sizeof(struct page));
- }
- #else
- static inline void hugetlb_vmemmap_init(struct hstate *h)
--- 
-2.11.0
+Ira
 
+> 
+> Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
+> Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+> ---
+>  mm/gup.c | 13 -------------
+>  1 file changed, 13 deletions(-)
+> 
+> diff --git a/mm/gup.c b/mm/gup.c
+> index 3a76c005a3e2..0e2de888a8b0 100644
+> --- a/mm/gup.c
+> +++ b/mm/gup.c
+> @@ -1567,7 +1567,6 @@ struct page *get_dump_page(unsigned long addr)
+>  }
+>  #endif /* CONFIG_ELF_CORE */
+>  
+> -#if defined(CONFIG_FS_DAX) || defined (CONFIG_CMA)
+>  #ifdef CONFIG_FS_DAX
+>  static bool check_dax_vmas(struct vm_area_struct **vmas, long nr_pages)
+>  {
+> @@ -1757,18 +1756,6 @@ static long __gup_longterm_locked(struct mm_struct *mm,
+>  		kfree(vmas_tmp);
+>  	return rc;
+>  }
+> -#else /* !CONFIG_FS_DAX && !CONFIG_CMA */
+> -static __always_inline long __gup_longterm_locked(struct mm_struct *mm,
+> -						  unsigned long start,
+> -						  unsigned long nr_pages,
+> -						  struct page **pages,
+> -						  struct vm_area_struct **vmas,
+> -						  unsigned int flags)
+> -{
+> -	return __get_user_pages_locked(mm, start, nr_pages, pages, vmas,
+> -				       NULL, flags);
+> -}
+> -#endif /* CONFIG_FS_DAX || CONFIG_CMA */
+>  
+>  static bool is_valid_gup_flags(unsigned int gup_flags)
+>  {
+> -- 
+> 2.25.1
+> 
+> 
