@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C6EDB2D5287
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 05:05:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3DC1C2D524D
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 05:02:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732225AbgLJEFZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Dec 2020 23:05:25 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48346 "EHLO
+        id S1732122AbgLJD7e (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Dec 2020 22:59:34 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48474 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1732073AbgLJD7E (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 22:59:04 -0500
-Received: from mail-pg1-x544.google.com (mail-pg1-x544.google.com [IPv6:2607:f8b0:4864:20::544])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67276C061793
-        for <linux-doc@vger.kernel.org>; Wed,  9 Dec 2020 19:58:16 -0800 (PST)
-Received: by mail-pg1-x544.google.com with SMTP id o4so2984277pgj.0
-        for <linux-doc@vger.kernel.org>; Wed, 09 Dec 2020 19:58:16 -0800 (PST)
+        with ESMTP id S1732081AbgLJD7a (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 22:59:30 -0500
+Received: from mail-pl1-x644.google.com (mail-pl1-x644.google.com [IPv6:2607:f8b0:4864:20::644])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A272CC0611CD
+        for <linux-doc@vger.kernel.org>; Wed,  9 Dec 2020 19:58:37 -0800 (PST)
+Received: by mail-pl1-x644.google.com with SMTP id y8so2094433plp.8
+        for <linux-doc@vger.kernel.org>; Wed, 09 Dec 2020 19:58:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bytedance-com.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=SoxvhqF5kzAZtJl03k3YBkt7stg9NndxerOH198myd8=;
-        b=MXyupVF4C4cCkx/KyGFP1cJoP8wY7D8/9aEvqQOJCMtFgA+BkPF7/NYM/FgO2W7gQu
-         JqQ3cLXLIYMl8h76esnC7KY0nF1ONxCW2Mrl2q9/VuQMmAeG0on/qltGuWyjqfDjpLsc
-         4PYMDWlTpZWe/VksXFYUV1XTSoSNx9FiGd2IRDCZX1zCXDd7evKpWDemGnmnh4j1RZNl
-         0/NYAYhCr1VFNcQjqyQmYKWkuy9GL+r6VmHwL0shSydfwrZUUBBewVMumSA+EWEFsq+y
-         jTyS2CKSiN1xBZzKbbHpo4r7n23yKRDTzw5lgPjMga3AVpoxUbsp2htKTQVCtC8rXr4s
-         ABzg==
+        bh=cJ9Kpw9euvaWeMiz77W9dHgAhVUDo0j7sOjcwheIHew=;
+        b=ghgjyxrsJ7T3/jqCtD+ypiLM9BEH2CLt5gtZONrJJTsdwKdYqavXofY8lXr9g8uc/t
+         qUGReab7rPAaXR7HMv2iBiOxHdhbPlaIW5NIKQtub81/vpTu+Q4gPxTqai/7eH/fTMAY
+         KVYDT3L0tGkj3Syi40CkpQoBAA+mVTuFSoenjCx6NiZeb2Lln2ajAkF6smCI0wTuGCgH
+         iAaMLnc+T+In0bYzzZKbG4IzF3BC63yD8soDcWKY/VWCSRbwQ+lIJJnQ0pu6DxvcSv8f
+         5PcwsBg79Tc0gRGGgTMOTRnzu96UK/sRIAvV2WvrX9gkti1p24TUHyY4t3AGud40NeYU
+         SmYw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=SoxvhqF5kzAZtJl03k3YBkt7stg9NndxerOH198myd8=;
-        b=emWAehwHpE2/0zfr2nPZZZd/GRkcbdSKfTU2Ekv4Bd1RpDMKEpqXkXYf4q8RgW6GaX
-         f6+uhFRC6Qho96W6NkkQS1zBokcgL6Tt04hGMloKyuIy4qk0MgEOnJVWdFRhzZd9qrC3
-         AHIk425bFh/C7wKwDTOmMFdvhOMGCCZ+X4V1mfSl58HCHGMmUMD4Tb2mQBN0dtzA3NWR
-         GyXIxpLx7qj97XZIBXAdOCMinaUI1m5/m4z828Otx1VrGVrZYh37gm2bViHZrJLjtrKW
-         qflKj6BB5pCRF5r5waT+f3h8lwr6GNSjcn5kjGUAEQi8oCTYLAufCIyMQNzvtSdw1jlX
-         8lkg==
-X-Gm-Message-State: AOAM531YhZP0cdG7mSCQbQfn92RSvRnBUszqhbQ+7hizF0Dv4clCwf5T
-        C/BewYlr9jXwI9XvCy6RT9E3WQ==
-X-Google-Smtp-Source: ABdhPJx1r4miuySzTBfZhOWgs3vw8Jwv3oc0mgrVWiMUCGZDAFQVsMCILxuRQC2oGK19TnVhK6n0oQ==
-X-Received: by 2002:a17:90a:2ec1:: with SMTP id h1mr5530853pjs.18.1607572695986;
-        Wed, 09 Dec 2020 19:58:15 -0800 (PST)
+        bh=cJ9Kpw9euvaWeMiz77W9dHgAhVUDo0j7sOjcwheIHew=;
+        b=JYAnoZlQlf6O6RDkIGjfEiA/VYjvGwMr9Yrpt6KK34Ykr0YGLyw0xsuQlzH6Vi47c3
+         E/HDNzyhfI6Tj0u1Jtp2ars6YW3pC17ZJ7wUoqWe9ad33bFOEnkjKw1NCxZq2FJF5rep
+         VJpCm9HTxwF83r/PJOOtWf+ZZK+VmRP+YIgZ7Tk9GLlFYF4av1fM+O1Ect9UsuO7Jga9
+         lBb+LHpCZhVg5vSODl7W4Bjz7imDoPhEsqmtcc6sLztPFAZgVcnZNgdJsusB8CiKK/kK
+         AfSWmORQLIhahK0Y834gz0Rdkj04eul20MzpFNXcJ19Ng9rO530WGlDXnSzPeo24clMk
+         2N8A==
+X-Gm-Message-State: AOAM531czsbX6fcECKLUb/5JAouTHy30oHu+TCUuMAB36GiBJAY2Tojp
+        Zn29bGXzhLnPCiIy2cxyKTs2vA==
+X-Google-Smtp-Source: ABdhPJzw5hLUvQdTuLt9Uua9WZQksiCrIptpkpMT26lr/lIhMe4UXVimr/dNHo2MdPSc2Jv07kMXcQ==
+X-Received: by 2002:a17:902:b08a:b029:d9:eca:7d38 with SMTP id p10-20020a170902b08ab02900d90eca7d38mr4807254plr.72.1607572717228;
+        Wed, 09 Dec 2020 19:58:37 -0800 (PST)
 Received: from localhost.localdomain ([103.136.220.85])
-        by smtp.gmail.com with ESMTPSA id f33sm4266535pgl.83.2020.12.09.19.58.05
+        by smtp.gmail.com with ESMTPSA id f33sm4266535pgl.83.2020.12.09.19.58.27
         (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Wed, 09 Dec 2020 19:58:15 -0800 (PST)
+        Wed, 09 Dec 2020 19:58:36 -0800 (PST)
 From:   Muchun Song <songmuchun@bytedance.com>
 To:     corbet@lwn.net, mike.kravetz@oracle.com, tglx@linutronix.de,
         mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
@@ -62,9 +62,9 @@ Cc:     duanxiongchun@bytedance.com, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org, linux-mm@kvack.org,
         linux-fsdevel@vger.kernel.org,
         Muchun Song <songmuchun@bytedance.com>
-Subject: [PATCH v8 05/12] mm/hugetlb: Defer freeing of HugeTLB pages
-Date:   Thu, 10 Dec 2020 11:55:19 +0800
-Message-Id: <20201210035526.38938-6-songmuchun@bytedance.com>
+Subject: [PATCH v8 07/12] mm/hugetlb: Set the PageHWPoison to the raw error page
+Date:   Thu, 10 Dec 2020 11:55:21 +0800
+Message-Id: <20201210035526.38938-8-songmuchun@bytedance.com>
 X-Mailer: git-send-email 2.21.0 (Apple Git-122)
 In-Reply-To: <20201210035526.38938-1-songmuchun@bytedance.com>
 References: <20201210035526.38938-1-songmuchun@bytedance.com>
@@ -74,177 +74,93 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In the subsequent patch, we will allocate the vmemmap pages when free
-HugeTLB pages. But update_and_free_page() is called from a non-task
-context(and hold hugetlb_lock), so we can defer the actual freeing in
-a workqueue to prevent use GFP_ATOMIC to allocate the vmemmap pages.
+Because we reuse the first tail vmemmap page frame and remap it
+with read-only, we cannot set the PageHWPosion on a tail page.
+So we can use the head[4].mapping to record the real error page
+index and set the raw error page PageHWPoison later.
 
 Signed-off-by: Muchun Song <songmuchun@bytedance.com>
 ---
- mm/hugetlb.c         | 77 ++++++++++++++++++++++++++++++++++++++++++++++++----
- mm/hugetlb_vmemmap.c | 12 --------
- mm/hugetlb_vmemmap.h | 17 ++++++++++++
- 3 files changed, 88 insertions(+), 18 deletions(-)
+ mm/hugetlb.c | 52 ++++++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 44 insertions(+), 8 deletions(-)
 
 diff --git a/mm/hugetlb.c b/mm/hugetlb.c
-index 140135fc8113..0ff9b90e524f 100644
+index 542e6cb81321..06157df08d8e 100644
 --- a/mm/hugetlb.c
 +++ b/mm/hugetlb.c
-@@ -1292,15 +1292,76 @@ static inline void destroy_compound_gigantic_page(struct page *page,
- 						unsigned int order) { }
- #endif
+@@ -1347,6 +1347,47 @@ static inline void __update_and_free_page(struct hstate *h, struct page *page)
+ 		schedule_work(&hpage_update_work);
+ }
  
--static void update_and_free_page(struct hstate *h, struct page *page)
-+static void __free_hugepage(struct hstate *h, struct page *page);
++static inline void subpage_hwpoison_deliver(struct hstate *h, struct page *head)
++{
++	struct page *page = head;
 +
-+/*
-+ * As update_and_free_page() is be called from a non-task context(and hold
-+ * hugetlb_lock), we can defer the actual freeing in a workqueue to prevent
-+ * use GFP_ATOMIC to allocate a lot of vmemmap pages.
-+ *
-+ * update_hpage_vmemmap_workfn() locklessly retrieves the linked list of
-+ * pages to be freed and frees them one-by-one. As the page->mapping pointer
-+ * is going to be cleared in update_hpage_vmemmap_workfn() anyway, it is
-+ * reused as the llist_node structure of a lockless linked list of huge
-+ * pages to be freed.
-+ */
-+static LLIST_HEAD(hpage_update_freelist);
++	if (!free_vmemmap_pages_per_hpage(h))
++		return;
 +
-+static void update_hpage_vmemmap_workfn(struct work_struct *work)
- {
--	int i;
-+	struct llist_node *node;
-+	struct page *page;
++	if (PageHWPoison(head))
++		page = head + page_private(head + 4);
 +
-+	node = llist_del_all(&hpage_update_freelist);
- 
-+	while (node) {
-+		page = container_of((struct address_space **)node,
-+				     struct page, mapping);
-+		node = node->next;
-+		page->mapping = NULL;
-+		__free_hugepage(page_hstate(page), page);
-+
-+		cond_resched();
++	/*
++	 * Move PageHWPoison flag from head page to the raw error page,
++	 * which makes any subpages rather than the error page reusable.
++	 */
++	if (page != head) {
++		SetPageHWPoison(page);
++		ClearPageHWPoison(head);
 +	}
 +}
-+static DECLARE_WORK(hpage_update_work, update_hpage_vmemmap_workfn);
 +
-+static inline void __update_and_free_page(struct hstate *h, struct page *page)
++static inline void set_subpage_hwpoison(struct hstate *h, struct page *head,
++					struct page *page)
 +{
-+	/* No need to allocate vmemmap pages */
-+	if (!free_vmemmap_pages_per_hpage(h)) {
-+		__free_hugepage(h, page);
++	if (!PageHWPoison(head))
++		return;
++
++	if (free_vmemmap_pages_per_hpage(h)) {
++		set_page_private(head + 4, page - head);
 +		return;
 +	}
 +
 +	/*
-+	 * Defer freeing to avoid using GFP_ATOMIC to allocate vmemmap
-+	 * pages.
-+	 *
-+	 * Only call schedule_work() if hpage_update_freelist is previously
-+	 * empty. Otherwise, schedule_work() had been called but the workfn
-+	 * hasn't retrieved the list yet.
++	 * Move PageHWPoison flag from head page to the raw error page,
++	 * which makes any subpages rather than the error page reusable.
 +	 */
-+	if (llist_add((struct llist_node *)&page->mapping,
-+		      &hpage_update_freelist))
-+		schedule_work(&hpage_update_work);
++	if (page != head) {
++		SetPageHWPoison(page);
++		ClearPageHWPoison(head);
++	}
 +}
 +
-+static void update_and_free_page(struct hstate *h, struct page *page)
-+{
+ static void update_and_free_page(struct hstate *h, struct page *page)
+ {
  	if (hstate_is_gigantic(h) && !gigantic_page_runtime_supported())
- 		return;
+@@ -1363,6 +1404,7 @@ static void __free_hugepage(struct hstate *h, struct page *page)
+ 	int i;
  
- 	h->nr_huge_pages--;
- 	h->nr_huge_pages_node[page_to_nid(page)]--;
-+
-+	__update_and_free_page(h, page);
-+}
-+
-+static void __free_hugepage(struct hstate *h, struct page *page)
-+{
-+	int i;
-+
+ 	alloc_huge_page_vmemmap(h, page);
++	subpage_hwpoison_deliver(h, page);
+ 
  	for (i = 0; i < pages_per_huge_page(h); i++) {
  		page[i].flags &= ~(1 << PG_locked | 1 << PG_error |
- 				1 << PG_referenced | 1 << PG_dirty |
-@@ -1313,13 +1374,17 @@ static void update_and_free_page(struct hstate *h, struct page *page)
- 	set_page_refcounted(page);
- 	if (hstate_is_gigantic(h)) {
- 		/*
--		 * Temporarily drop the hugetlb_lock, because
--		 * we might block in free_gigantic_page().
-+		 * Temporarily drop the hugetlb_lock only when this type of
-+		 * HugeTLB page does not support vmemmap optimization (which
-+		 * contex do not hold the hugetlb_lock), because we might block
-+		 * in free_gigantic_page().
- 		 */
--		spin_unlock(&hugetlb_lock);
-+		if (!free_vmemmap_pages_per_hpage(h))
-+			spin_unlock(&hugetlb_lock);
- 		destroy_compound_gigantic_page(page, huge_page_order(h));
- 		free_gigantic_page(page, huge_page_order(h));
--		spin_lock(&hugetlb_lock);
-+		if (!free_vmemmap_pages_per_hpage(h))
-+			spin_lock(&hugetlb_lock);
- 	} else {
- 		__free_pages(page, huge_page_order(h));
- 	}
-diff --git a/mm/hugetlb_vmemmap.c b/mm/hugetlb_vmemmap.c
-index c464c5db8967..d080488cde16 100644
---- a/mm/hugetlb_vmemmap.c
-+++ b/mm/hugetlb_vmemmap.c
-@@ -197,18 +197,6 @@
- 	(__boundary - 1 < (end) - 1) ? __boundary : (end);		 \
- })
- 
--/*
-- * How many vmemmap pages associated with a HugeTLB page that can be freed
-- * to the buddy allocator.
-- *
-- * Todo: Now it is zero, because all infrastructure is not ready. Once all the
-- * infrastructure is ready, we will rework this function to support the feature.
-- */
--static inline unsigned int free_vmemmap_pages_per_hpage(struct hstate *h)
--{
--	return 0;
--}
--
- static inline unsigned int vmemmap_pages_per_hpage(struct hstate *h)
- {
- 	return free_vmemmap_pages_per_hpage(h) + RESERVE_VMEMMAP_NR;
-diff --git a/mm/hugetlb_vmemmap.h b/mm/hugetlb_vmemmap.h
-index 6923f03534d5..bf22cd003acb 100644
---- a/mm/hugetlb_vmemmap.h
-+++ b/mm/hugetlb_vmemmap.h
-@@ -12,9 +12,26 @@
- 
- #ifdef CONFIG_HUGETLB_PAGE_FREE_VMEMMAP
- void free_huge_page_vmemmap(struct hstate *h, struct page *head);
+@@ -1840,14 +1882,8 @@ int dissolve_free_huge_page(struct page *page)
+ 		int nid = page_to_nid(head);
+ 		if (h->free_huge_pages - h->resv_huge_pages == 0)
+ 			goto out;
+-		/*
+-		 * Move PageHWPoison flag from head page to the raw error page,
+-		 * which makes any subpages rather than the error page reusable.
+-		 */
+-		if (PageHWPoison(head) && page != head) {
+-			SetPageHWPoison(page);
+-			ClearPageHWPoison(head);
+-		}
 +
-+/*
-+ * How many vmemmap pages associated with a HugeTLB page that can be freed
-+ * to the buddy allocator.
-+ *
-+ * Todo: Now it is zero, because all infrastructure is not ready. Once all the
-+ * infrastructure is ready, we will rework this function to support the feature.
-+ */
-+static inline unsigned int free_vmemmap_pages_per_hpage(struct hstate *h)
-+{
-+	return 0;
-+}
- #else
- static inline void free_huge_page_vmemmap(struct hstate *h, struct page *head)
- {
- }
-+
-+static inline unsigned int free_vmemmap_pages_per_hpage(struct hstate *h)
-+{
-+	return 0;
-+}
- #endif /* CONFIG_HUGETLB_PAGE_FREE_VMEMMAP */
- #endif /* _LINUX_HUGETLB_VMEMMAP_H */
++		set_subpage_hwpoison(h, head, page);
+ 		list_del(&head->lru);
+ 		h->free_huge_pages--;
+ 		h->free_huge_pages_node[nid]--;
 -- 
 2.11.0
 
