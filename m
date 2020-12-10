@@ -2,99 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E693E2D6398
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 18:33:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 655212D63FF
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 18:48:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389090AbgLJRbj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Dec 2020 12:31:39 -0500
-Received: from hqnvemgate25.nvidia.com ([216.228.121.64]:11569 "EHLO
-        hqnvemgate25.nvidia.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2392714AbgLJRab (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Dec 2020 12:30:31 -0500
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
-        id <B5fd25b090000>; Thu, 10 Dec 2020 09:29:45 -0800
-Received: from HQMAIL101.nvidia.com (172.20.187.10) by HQMAIL111.nvidia.com
- (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1473.3; Thu, 10 Dec
- 2020 17:29:45 +0000
-Received: from NAM12-DM6-obe.outbound.protection.outlook.com (104.47.59.171)
- by HQMAIL101.nvidia.com (172.20.187.10) with Microsoft SMTP Server (TLS) id
- 15.0.1473.3 via Frontend Transport; Thu, 10 Dec 2020 17:29:45 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mCbr7wogg5X+Yd539Igho5jaJXYSYQWv8zTaHjJDT5iRfqljmNbAVmwquVV4A0IDsTuskNJXMGsRlI1oa/x9otIF4w1ZFJYL2eyUGazqdibHUxorFWAtrWg8bCUsyG1Tjd97nFzkFKLXl6VOTAAHMlbx83lLX23lyx/8cs8OVef5Keb6yZinqYXvoE4tBvC19GyLBe5eETW5MzTcgO0a2Q/3icFoY84BfXJ9HmubG1I/I9AkiqRbqvsPK7M7yO2105I6aD96iK2fNDc1Kax7vfbAnTmk/46R6LCqpD7sDnN7kdqvykTDB/FBdTKxfKPaKC6alTXJGWT3FldzuXMayA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ijhB3/xMnWFMU6pv3I+YOoyRHDzZS6DgitkxaOu5XE8=;
- b=mF4wVkMK07m35pJ/mwaeQqd7jkhTwAYA+cc6TC+rycwQvZVN/uDZh85nmn4JLsgx8oMRrzpCNytGZKK1qdZuphqjxmDnEN+boQEEvotXU9X3L+NBV9hWrXSS65LS429+ieMCGY3swe2ylAluMAC2pDPeL2Zu8HuV9LeHOTP4YKau93Rg0gCZej6j281u0dO3Z60LKoU9s9kWYroiceKph/qqpPx9p1scMJrP6wPwgkVurQ/KbZR3loOFMzdvUMkrze1v+psq4S84aPQimeBbVQtCK1J5I5VnwqMvwTcbXjIL5udnHgEBqo+j4HiNSPI7hHsJNTntVcx5nEk/ikvvHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
- by DM5PR1201MB0107.namprd12.prod.outlook.com (2603:10b6:4:55::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3632.20; Thu, 10 Dec
- 2020 17:29:43 +0000
-Received: from DM6PR12MB3834.namprd12.prod.outlook.com
- ([fe80::1ce9:3434:90fe:3433]) by DM6PR12MB3834.namprd12.prod.outlook.com
- ([fe80::1ce9:3434:90fe:3433%3]) with mapi id 15.20.3632.023; Thu, 10 Dec 2020
- 17:29:43 +0000
-Date:   Thu, 10 Dec 2020 13:29:41 -0400
-From:   Jason Gunthorpe <jgg@nvidia.com>
-To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>
-CC:     Doug Ledford <dledford@redhat.com>,
-        Leon Romanovsky <leon@kernel.org>,
-        <linux-rdma@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <linux-doc@vger.kernel.org>, <kernel-janitors@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH] RDMA/restrack: update kernel documentation for
- ib_create_named_qp()
-Message-ID: <20201210172941.GC2117013@nvidia.com>
-References: <20201207173255.13355-1-lukas.bulwahn@gmail.com>
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <20201207173255.13355-1-lukas.bulwahn@gmail.com>
-X-ClientProxiedBy: MN2PR01CA0064.prod.exchangelabs.com (2603:10b6:208:23f::33)
- To DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
+        id S2392876AbgLJRmr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Dec 2020 12:42:47 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34346 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2391065AbgLJRmm (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Dec 2020 12:42:42 -0500
+Received: from mail.skyhub.de (mail.skyhub.de [IPv6:2a01:4f8:190:11c2::b:1457])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7FECAC0613CF;
+        Thu, 10 Dec 2020 09:42:02 -0800 (PST)
+Received: from zn.tnic (p200300ec2f0d4100e4701ee3c8ed8bc5.dip0.t-ipconnect.de [IPv6:2003:ec:2f0d:4100:e470:1ee3:c8ed:8bc5])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 125411EC054C;
+        Thu, 10 Dec 2020 18:42:01 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+        t=1607622121;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+        bh=DMxIl+sUswXky4hhx8cQNgi4k4soKTP3TjDz/GFCjaw=;
+        b=iNEHVi15kmRdMHYS4OMEd1JmZaUshnKRI5nbl3emQfzm4SnYizyFXY93PnbbSOvoLSYBQV
+        tWyfO3QpKd1baUIDBU1XePAbFK9WwLEWIw0dkN8xvaUtOrrcF5wgzsX1knpxXSRHRO79Ws
+        Ef3HwocPJpikX283wWeE1yYoYmvMiHQ=
+Date:   Thu, 10 Dec 2020 18:41:55 +0100
+From:   Borislav Petkov <bp@alien8.de>
+To:     "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
+Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>
+Subject: Re: [PATCH v15 08/26] x86/mm: Introduce _PAGE_COW
+Message-ID: <20201210174155.GD26529@zn.tnic>
+References: <20201110162211.9207-1-yu-cheng.yu@intel.com>
+ <20201110162211.9207-9-yu-cheng.yu@intel.com>
+ <20201208175014.GD27920@zn.tnic>
+ <218503f6-eec1-94b0-8404-6f92c55799e3@intel.com>
+ <20201208184727.GF27920@zn.tnic>
+ <cddc2cc5-a04e-ce9c-6fdf-2e7a29346cf7@intel.com>
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (142.162.115.133) by MN2PR01CA0064.prod.exchangelabs.com (2603:10b6:208:23f::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3654.12 via Frontend Transport; Thu, 10 Dec 2020 17:29:42 +0000
-Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1knPl7-008slJ-ND; Thu, 10 Dec 2020 13:29:41 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
-        t=1607621385; bh=ijhB3/xMnWFMU6pv3I+YOoyRHDzZS6DgitkxaOu5XE8=;
-        h=ARC-Seal:ARC-Message-Signature:ARC-Authentication-Results:Date:
-         From:To:CC:Subject:Message-ID:References:Content-Type:
-         Content-Disposition:In-Reply-To:X-ClientProxiedBy:MIME-Version:
-         X-MS-Exchange-MessageSentRepresentingType;
-        b=cawpmPkB6QKhHtOu7b4VSHF1zZpcmhJ7vu/RAZmL6K+BBO3wFzKnWZicAU00ZM+9b
-         TIxX2OtRvk5S5j+16vj19c1exo42/AR4RhY6gd+d+LowLIeX5XoMFkHmB4z+GKTIVp
-         /q9ciTKa1h9WYqR6aafV9JcIRrItmQrJh0hRkMS1sm9uT8Tixqregq9Avi8SfRfsmK
-         9wnijmUL/pmC2PNOu4ztKL04l6oZ28+M2z+/16HNlxJ+tFkNeqQnR8HDa6o3PRUNMz
-         lpJGXaAr4htqdiYKVLtN9eKtq3pyxIsExWCy52ie+sid1C5ps1bAq+qwBZGVwj18jT
-         o00mHnCKWVsqg==
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <cddc2cc5-a04e-ce9c-6fdf-2e7a29346cf7@intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Dec 07, 2020 at 06:32:55PM +0100, Lukas Bulwahn wrote:
-> Commit 66f57b871efc ("RDMA/restrack: Support all QP types") extends
-> ib_create_qp() to a named ib_create_named_qp(), which takes the caller's
-> name as argument, but it did not add the new argument description to the
-> function's kerneldoc.
-> 
-> make htmldocs warns:
-> 
->   ./drivers/infiniband/core/verbs.c:1206: warning: Function parameter or
->   member 'caller' not described in 'ib_create_named_qp'
-> 
-> Add a description for this new argument based on the description of the
-> same argument in other related functions.
-> 
-> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-> Reviewed-by: Leon Romanovsky <leonro@nvidia.com>
-> ---
->  drivers/infiniband/core/verbs.c | 1 +
->  1 file changed, 1 insertion(+)
+On Tue, Dec 08, 2020 at 11:24:16AM -0800, Yu, Yu-cheng wrote:
+> Case (a) is a normal writable data page that has gone through fork(). So it
 
-Applies to for-next, thanks
+Writable?
 
-Jason
+> has W=0, D=1.  But here, the software chooses not to use the D bit, and
+
+But it has W=0. So not writable?
+
+> instead, W=0, COW=1.
+
+So the "new" way of denoting that the page is modified is COW=1
+*when* on CET hw. The D=1 bit is still used on the rest thus the two
+_PAGE_DIRTY_BITS.
+
+Am I close?
+
+> Case (b) is a normal read-only data page.  Since it is read-only, fork()
+> won't affect it.  In __get_user_pages(), a copy of the read-only page is
+> needed, and the page is duplicated.  The software sets COW=1 for the new
+> copy.
+
+That makes more sense.
+
+> Thread-A is writing to a writable page, and the page's PTE is becoming W=1,
+> D=1.  In the middle of it, Thread-B is changing the PTE to W=0.
+
+Yah, add that to the explanation pls.
+
+-- 
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
