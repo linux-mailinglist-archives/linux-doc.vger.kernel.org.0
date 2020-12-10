@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8236D2D4FC4
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 01:47:49 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6AEC72D4FB6
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 01:44:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729578AbgLJAqN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Dec 2020 19:46:13 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46840 "EHLO
+        id S1730115AbgLJAod (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Dec 2020 19:44:33 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46848 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730702AbgLJAoU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 19:44:20 -0500
-Received: from mail-qv1-xf44.google.com (mail-qv1-xf44.google.com [IPv6:2607:f8b0:4864:20::f44])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 79360C0617A7
-        for <linux-doc@vger.kernel.org>; Wed,  9 Dec 2020 16:43:40 -0800 (PST)
-Received: by mail-qv1-xf44.google.com with SMTP id s6so1623671qvn.6
-        for <linux-doc@vger.kernel.org>; Wed, 09 Dec 2020 16:43:40 -0800 (PST)
+        with ESMTP id S1730476AbgLJAoW (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 19:44:22 -0500
+Received: from mail-qv1-xf42.google.com (mail-qv1-xf42.google.com [IPv6:2607:f8b0:4864:20::f42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3A546C0611CB
+        for <linux-doc@vger.kernel.org>; Wed,  9 Dec 2020 16:43:42 -0800 (PST)
+Received: by mail-qv1-xf42.google.com with SMTP id u16so1624242qvl.7
+        for <linux-doc@vger.kernel.org>; Wed, 09 Dec 2020 16:43:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=soleen.com; s=google;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=YDDAi2s6I9irj1eFCp+Xpz5CYfQrtxxsgY8jH6RM458=;
-        b=Nk+AuTMfxQ6BbAHmfpjqdXSFnw1CX0GCnpt5Rtr+S5ZZHzRoxhUkXzjSaLBFo9FKnP
-         +IGv/oMQZ60Z5oFcu+WcBKLRJVlJIYOStwwQhx8A63/pkfbIk01AMMQrVYLFm122JdCB
-         ZhbhX33sTQJUJplzJA2KCaOHlmGycGbsVHpDDZmMcTiFO6zgEcZ5bn3oKR/nhS7NmGXE
-         lSUNz94k7ztCGv2c6TPO+oYZAaXQIIpJzaTSorVPYYAS5rRfsh2MWxhI1wbtSM8fm6SD
-         ty0uVYq1b+GXDXOHEDRKOXvQB09Qf6VhbIcqJueEsD6VjWHJFlCxwCjTIUSuBPWyseQi
-         q3JQ==
+        bh=Vo/yLKAiBS5h7nMLASyDzuT56nkaTKWz46PdLnDqyVo=;
+        b=lWcq4VQzxkaWPyNizEDNGYhGjugYHnHlB7gIkV8AVNth2RU1O8bPJqDyqXkjGelUBb
+         DtuSfCf2vU3iQ2Aw2aHIB/OUhtzdIKvp9GPqGanu6vYYeLYd8uHYXfCfkRfHwbkwK0nn
+         AA+lWcTiJyWmv/jcnvBHdVb8hyCNhk7oArTBfqp+Rx1gSVn6hSBDo+x8ejNat3qPP7Pw
+         I0ouWxKweeSLCAuynp4EjKkntCkncxKCEJmdCf3dlExR9b+ZDCgZWGnvRPaP8NUKW7G2
+         V244hehbzwIJzbQTSVR+BTFmASHF1nXUTfYoDWSs1CLrVlB3p++uRUQ/RlMTreKpyCvF
+         RO7g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=YDDAi2s6I9irj1eFCp+Xpz5CYfQrtxxsgY8jH6RM458=;
-        b=kRwgQ/zNgN5q8V3t6c6B/LulS9LdceKrsucE9+h9+HqJ1jjptJui56jsbe5aKtQTQJ
-         2vCMP5XBrQiU2JXu/Bm2NKiWDMX9AYvbeG245NPMJXHtPgQywYGvLipgeqvZPTjVCRhB
-         MjlbAqNTs9pypTlVKR6Sso7VuSVSkADCn9tw+ZKVBPlj45RTQjFdZQG2u94ZqJTZXzM9
-         vzpHGCwi4pgx5dyMGKQ6hHnF/QDzsPTpt8CO/iJqmgpBwCtrcmtvO/t4UOZtY10pixsy
-         qbJQGk3LwchwKOtsOMjGOnIx9tBr/mqhc6pWPnfuuZm3MkSOhHxaE/DdKDBFaZCav8B3
-         bNiQ==
-X-Gm-Message-State: AOAM531CJi+8Irn74jC+9n7wvuXEsLbpkBd+W7VS8djncrfRl9p1yDGR
-        bmydWb+d4Z2r+dveRamKoUaJ1w==
-X-Google-Smtp-Source: ABdhPJzAa7q5sUByKWOSFZ0Py2q3Uc376O6i1oNIXW+AdlNdeOTECHVZXZpiUJYIRGDv8y9xQIyh+Q==
-X-Received: by 2002:ad4:4051:: with SMTP id r17mr5889435qvp.39.1607561019788;
-        Wed, 09 Dec 2020 16:43:39 -0800 (PST)
+        bh=Vo/yLKAiBS5h7nMLASyDzuT56nkaTKWz46PdLnDqyVo=;
+        b=qO5qyURiNUMi9SQbVj1T9KVFFPuyrAcX14tuOHj9oY9lDs2GpeXMKAoSIGPSVi3ivs
+         KZtRnBLZB4DTgYcxznELV6r6jb4Te5oCvQBv8U+cx9/Zx05/l+wZLzGM/Usc/Arj5O0x
+         r6PB3lmPh7DzS4t6+41jJWxrBl9t84nZhxcvsLFGk1GOp/jRwQ3s8ZMIduV9w97CxQcb
+         G361pYcrO46bFbdoBopkdi7w7odsNkVZ141xPnmwhTtpu2aA2oxsUVfSRuQ+X2XYjmgq
+         t31KtC1sJv9/u/d3x9hOuMHVK75KhNawDuQ3RuiPZZGOBrTE/eDe368YhyUcepP8QBiD
+         tLBQ==
+X-Gm-Message-State: AOAM533hrxXwMxqlGeKUxCAu+zNptLXxXAVCqjP3I2+ANTcR48/z9pyW
+        z6aKSul/hN/TP+FeELBc5QabjQ==
+X-Google-Smtp-Source: ABdhPJydALvSGS7GDNYtKUswYkrylNumV2tLiFG9B8JTmcFkB18LgsEdm1vhHem+5qCNXzlbBRkswg==
+X-Received: by 2002:a0c:e6e7:: with SMTP id m7mr6461346qvn.11.1607561021480;
+        Wed, 09 Dec 2020 16:43:41 -0800 (PST)
 Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
-        by smtp.gmail.com with ESMTPSA id y1sm2538745qky.63.2020.12.09.16.43.38
+        by smtp.gmail.com with ESMTPSA id y1sm2538745qky.63.2020.12.09.16.43.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Dec 2020 16:43:39 -0800 (PST)
+        Wed, 09 Dec 2020 16:43:40 -0800 (PST)
 From:   Pavel Tatashin <pasha.tatashin@soleen.com>
 To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
         linux-mm@kvack.org, akpm@linux-foundation.org, vbabka@suse.cz,
@@ -57,9 +57,9 @@ To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
         jgg@ziepe.ca, peterz@infradead.org, mgorman@suse.de,
         willy@infradead.org, rientjes@google.com, jhubbard@nvidia.com,
         linux-doc@vger.kernel.org
-Subject: [PATCH v2 1/8] mm/gup: perform check_dax_vmas only when FS_DAX is enabled
-Date:   Wed,  9 Dec 2020 19:43:28 -0500
-Message-Id: <20201210004335.64634-2-pasha.tatashin@soleen.com>
+Subject: [PATCH v2 2/8] mm/gup: don't pin migrated cma pages in movable zone
+Date:   Wed,  9 Dec 2020 19:43:29 -0500
+Message-Id: <20201210004335.64634-3-pasha.tatashin@soleen.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201210004335.64634-1-pasha.tatashin@soleen.com>
 References: <20201210004335.64634-1-pasha.tatashin@soleen.com>
@@ -69,42 +69,33 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-There is no need to check_dax_vmas() and run through the npage loop of
-pinned pages if FS_DAX is not enabled.
+In order not to fragment CMA the pinned pages are migrated. However,
+they are migrated to ZONE_MOVABLE, which also should not have pinned pages.
 
-Add a stub check_dax_vmas() function for no-FS_DAX case.
+Remove __GFP_MOVABLE, so pages can be migrated to zones where pinning
+is allowed.
 
 Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
+Reviewed-by: David Hildenbrand <david@redhat.com>
 Reviewed-by: John Hubbard <jhubbard@nvidia.com>
+Acked-by: Michal Hocko <mhocko@suse.com>
 ---
- mm/gup.c | 7 +++++++
- 1 file changed, 7 insertions(+)
+ mm/gup.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/mm/gup.c b/mm/gup.c
-index 98eb8e6d2609..cdb8b9eeb016 100644
+index cdb8b9eeb016..3a76c005a3e2 100644
 --- a/mm/gup.c
 +++ b/mm/gup.c
-@@ -1568,6 +1568,7 @@ struct page *get_dump_page(unsigned long addr)
- #endif /* CONFIG_ELF_CORE */
+@@ -1610,7 +1610,7 @@ static long check_and_migrate_cma_pages(struct mm_struct *mm,
+ 	long ret = nr_pages;
+ 	struct migration_target_control mtc = {
+ 		.nid = NUMA_NO_NODE,
+-		.gfp_mask = GFP_USER | __GFP_MOVABLE | __GFP_NOWARN,
++		.gfp_mask = GFP_USER | __GFP_NOWARN,
+ 	};
  
- #if defined(CONFIG_FS_DAX) || defined (CONFIG_CMA)
-+#ifdef CONFIG_FS_DAX
- static bool check_dax_vmas(struct vm_area_struct **vmas, long nr_pages)
- {
- 	long i;
-@@ -1586,6 +1587,12 @@ static bool check_dax_vmas(struct vm_area_struct **vmas, long nr_pages)
- 	}
- 	return false;
- }
-+#else
-+static bool check_dax_vmas(struct vm_area_struct **vmas, long nr_pages)
-+{
-+	return false;
-+}
-+#endif
- 
- #ifdef CONFIG_CMA
- static long check_and_migrate_cma_pages(struct mm_struct *mm,
+ check_again:
 -- 
 2.25.1
 
