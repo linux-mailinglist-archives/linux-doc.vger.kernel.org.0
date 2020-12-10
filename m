@@ -2,177 +2,209 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2C74B2D6885
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 21:19:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F9B12D6811
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 21:07:22 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2390068AbgLJUTE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Dec 2020 15:19:04 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:27022 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1729713AbgLJO1r (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Dec 2020 09:27:47 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1607610380;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=XemBX6GDiS8sIGiD/ca2Z1h8LOYV6Xo8hkAbb535R90=;
-        b=FEPw4x0DHkFxegi8SwOfnytBoco02qCe8tr3Mu/lPPbBdZVGK4r5ShEJEMz2HKjO3Hrebd
-        4zMwlqGJ0r7kKU1Gwt6/F+vuGDL0Aci46sEK6Wq0tsBmD30+AgxjhDbR5JQxR0R0htGC5B
-        728uh5OHpvwBdvOns8P8U3u3e/b1L00=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-256-0sU_Km6bOiuY1Rfj4BqIcA-1; Thu, 10 Dec 2020 09:26:18 -0500
-X-MC-Unique: 0sU_Km6bOiuY1Rfj4BqIcA-1
-Received: from smtp.corp.redhat.com (int-mx03.intmail.prod.int.phx2.redhat.com [10.5.11.13])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7D6FD1842146;
-        Thu, 10 Dec 2020 14:26:15 +0000 (UTC)
-Received: from starship (unknown [10.35.206.133])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 3083636FA;
-        Thu, 10 Dec 2020 14:25:58 +0000 (UTC)
-Message-ID: <7846c5452644a3c029d27361759cb82c2b8d4f2e.camel@redhat.com>
-Subject: Re: [PATCH v2 1/3] KVM: x86: implement KVM_{GET|SET}_TSC_STATE
-From:   Maxim Levitsky <mlevitsk@redhat.com>
-To:     Paolo Bonzini <pbonzini@redhat.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Oliver Upton <oupton@google.com>
-Cc:     kvm list <kvm@vger.kernel.org>, "H. Peter Anvin" <hpa@zytor.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jim Mattson <jmattson@google.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Marcelo Tosatti <mtosatti@redhat.com>,
-        Sean Christopherson <sean.j.christopherson@intel.com>,
-        open list <linux-kernel@vger.kernel.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
-        Joerg Roedel <joro@8bytes.org>, Borislav Petkov <bp@alien8.de>,
-        Shuah Khan <shuah@kernel.org>,
-        Andrew Jones <drjones@redhat.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-Date:   Thu, 10 Dec 2020 16:25:57 +0200
-In-Reply-To: <7c25e8c0-a7d4-8906-ae47-20714e6699fe@redhat.com>
-References: <20201203171118.372391-1-mlevitsk@redhat.com>
-         <20201203171118.372391-2-mlevitsk@redhat.com>
-         <CAOQ_Qsj6THRPj2ta3PdOxUJeCj8KxPnLkWV8EGpvN_J=qUv74A@mail.gmail.com>
-         <d3dd82950301517e47630cc86fa0e6dc84f63f90.camel@redhat.com>
-         <87lfe82quh.fsf@nanos.tec.linutronix.de>
-         <047afdde655350a6701803aa8ae739a8bd1c1c14.camel@redhat.com>
-         <7c25e8c0-a7d4-8906-ae47-20714e6699fe@redhat.com>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.36.5 (3.36.5-1.fc32) 
+        id S2404379AbgLJUGJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Dec 2020 15:06:09 -0500
+Received: from smtprelay0158.hostedemail.com ([216.40.44.158]:60664 "EHLO
+        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S2393719AbgLJUGC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Dec 2020 15:06:02 -0500
+Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
+        by smtprelay05.hostedemail.com (Postfix) with ESMTP id D474318026130;
+        Thu, 10 Dec 2020 20:05:06 +0000 (UTC)
+X-Session-Marker: 6A6F6540706572636865732E636F6D
+X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:2:41:69:355:379:599:800:960:973:982:988:989:1260:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1535:1593:1594:1605:1606:1730:1747:1777:1792:1981:2194:2197:2199:2200:2393:2559:2562:2828:2890:3138:3139:3140:3141:3142:3622:3653:3865:3866:3867:3868:3870:3871:3872:3874:4042:4117:4250:4321:4605:5007:6119:7875:7903:8531:10004:10946:11026:11232:11473:11658:11914:12043:12048:12291:12296:12297:12438:12555:12683:12740:12895:13141:13161:13229:13230:13255:13439:13894:14659:21080:21212:21221:21433:21450:21451:21627:21966:21990:30001:30012:30030:30054:30070:30075:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:2,LUA_SUMMARY:none
+X-HE-Tag: kick42_05118bb273fb
+X-Filterd-Recvd-Size: 6732
+Received: from XPS-9350.home (unknown [47.151.137.21])
+        (Authenticated sender: joe@perches.com)
+        by omf17.hostedemail.com (Postfix) with ESMTPA;
+        Thu, 10 Dec 2020 20:05:05 +0000 (UTC)
+Message-ID: <c3f1d9de2e5a61588f64e69a1309968d84a2dd12.camel@perches.com>
+Subject: Re: [PATCH] checkpatch: make the line length warnings match the
+ coding style document
+From:   Joe Perches <joe@perches.com>
+To:     Christoph Hellwig <hch@lst.de>, apw@canonical.com,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Andrew Morton <akpm@linux-foundation.org>
+Cc:     linux-kernel@vger.kernel.org,
+        linux-doc <linux-doc@vger.kernel.org>,
+        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Date:   Thu, 10 Dec 2020 12:05:04 -0800
+In-Reply-To: <20201210082251.2717564-1-hch@lst.de>
+References: <20201210082251.2717564-1-hch@lst.de>
+Content-Type: text/plain; charset="ISO-8859-1"
+User-Agent: Evolution 3.38.1-1 
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.13
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, 2020-12-10 at 12:48 +0100, Paolo Bonzini wrote:
-> On 08/12/20 18:08, Maxim Levitsky wrote:
-> > > Even if you support TSCADJUST and let the guest write to it does not
-> > > change the per guest offset at all. TSCADJUST is per [v]CPU and adds on
-> > > top:
-> > > 
-> > >      tscvcpu = tsc_host + guest_offset + TSC_ADJUST
-> > > 
-> > > Scaling is just orthogonal and does not change any of this.
-> > 
-> > I agree with this, and I think that this is what we will end up doing.
-> > Paulo, what do you think about this?
+On Thu, 2020-12-10 at 09:22 +0100, Christoph Hellwig wrote:
+> Add a new informational message that lines <= 80 chars are still
+> preffered.  Without this people unfortunately auto format code way over
+> 80 lines without the required benefit for readability.
+
+In general, I agree with some of the concept, though I think 80
+columns is sometimes overly restrictive.
+
+Also, given the ever increasing average identifier length, strict
+adherence to 80 columns is sometimes just not possible without silly
+visual gymnastics.  The kernel now has quite a lot of 30+ character
+length function names, constants, and structs.
+
+(these generic searches probably have some false positives and negatives)
+
+# defines
+$ git grep -P -oh 'define\s+\w{30,}(?!\()' -- '*.[ch]' | sort | uniq | wc -l
+1009715
+(A lot or even most of those are autogenerated and never used)
+
+# function like macros
+$ git grep -P -oh 'define\s+\w{30,}\(' -- '*.[ch]' | sort | uniq | wc -l
+6583
+
+# functions
+$ git grep -P -oh '\b(?!define)\w+\s+\w{30,}\s*\(' -- '*.[ch]' | sort | uniq | wc -l
+31091
+
+# structs
+$ git grep -P -oh 'struct\s+\w{30,}' -- '*.[ch]' | sort | uniq | wc -l
+3250
+
+Using those identifiers with 80 column restrictions is just stupid.
+
+A logical complexity analysis, and/or something that takes those long
+identifiers into account rather than a simple line length test might
+be more appropriate though more difficult to create.
+
+Perhaps this should be enabled/disabled similarly to --check where
+the reporting is not done unless specifically requested via something
+like --info.
+
+And in that case, maybe it should just as well be a --strict CHK test.
+
+> Signed-off-by: Christoph Hellwig <hch@lst.de>
+> ---
+>  scripts/checkpatch.pl | 41 ++++++++++++++++++++++++++++++-----------
+>  1 file changed, 30 insertions(+), 11 deletions(-)
 > 
-> Yes, you can have a VM ioctl that saves/restores cur_tsc_nsec and 
-> cur_tsc_write.  The restore side would loop on all vcpus.
-
-Why would the restore need to run on all VCPUs though?
-
-The picture that I have in mind is that we we will restore the 
-cur_tsc_nsec/cur_tsc_write pair once per VM, and then restore the 
-TSC_ADJUST value on all vCPUs as if the guest wrote it (with the quirk disabled), 
-which will restore all the horrible things that the guest did to its TSC.
-
-Since TSC adjust is enabled by default, if the user disables it in the CPUID, 
-we might as well just disable the whole thing, 
-make TSC readonly or something similar.
-
-This way we don't need to worry about TSC writes as 
-those will be reflected in the TSC_ADJUST.
-
+> diff --git a/scripts/checkpatch.pl b/scripts/checkpatch.pl
+> index fab38b493cef79..d937889a5fe3b2 100755
+> --- a/scripts/checkpatch.pl
+> +++ b/scripts/checkpatch.pl
+> @@ -54,6 +54,7 @@ my @ignore = ();
+>  my $help = 0;
+>  my $configuration_file = ".checkpatch.conf";
+>  my $max_line_length = 100;
+> +my $preferred_line_length = 80;
+>  my $ignore_perl_version = 0;
+>  my $minimum_perl_version = 5.10.0;
+>  my $min_conf_desc_length = 4;
+> @@ -2228,6 +2229,16 @@ sub WARN {
+>  	}
+>  	return 0;
+>  }
+> +sub INFO {
+> +	my ($type, $msg) = @_;
+> +
+> +	if (report("INFO", $type, $msg)) {
+> +		our $clean = 0;
+> +		our $cnt_info++;
+> +		return 1;
+> +	}
+> +	return 0;
+> +}
+>  sub CHK {
+>  	my ($type, $msg) = @_;
+>  
 > 
-> However, it is not so easy: 1) it would have to be usable only if 
-> KVM_X86_QUIRK_TSC_HOST_ACCESS is false, 2) it would fail if 
-> kvm->arch.nr_vcpus_matched_tsc == kvm->online_vcpus (which basically 
-> means that userspace didn't mess up the TSC configuration).  If not, it 
-> would return -EINVAL.
-
-Note though that we don't track the guest tsc/tsc_adjust writes anymore
-via the tsc sync code, and with the quirk disabled we don't track them
-even for the host writes, thus the (2) condition will always be true
-(the only call left to kvm_synchronize_tsc is in the kvm_arch_vcpu_postcreate)
-
-However I indeed see no reason to allow new per VM API when the masterclock is
-disabled, and therefore using cur_tsc_nsec/cur_tsc_write is reasonable.
-
-The cur_tsc_nsec should IMHO be converted to absolute time (CLOCK_REALTIME
-or similiar) or should the conversion be done in the userspace? 
-I don't know yet if I can convert between different POSIX clocks
-in race/error free manner. (e.g get the offset between them).
-
-
+> @@ -2396,6 +2407,7 @@ sub process {
+>  	our $cnt_lines = 0;
+>  	our $cnt_error = 0;
+>  	our $cnt_warn = 0;
+> +	our $cnt_info = 0;
+>  	our $cnt_chk = 0;
+>  
 > 
-> Also, while at it let's burn and pour salt on the support for 
-> KVM_SET_TSC_KHZ unless TSC scaling is supported, together with 
-> vcpu->tsc_catchup and all the "tolerance" crap that is in 
-> kvm_set_tsc_khz.  And initialize vcpu->arch.virtual_tsc_khz to 
-> kvm->arch.last_tsc_khz before calling kvm_synchronize_tsc.
-
-The tsc_catchup is enabled when host TSC is unstable, so that guest
-TSC at least roughtly follows real time (which host kernel gets
-by other means).
-
-We push the guest tsc forward roughtly each time VM entry from userspace
-happens:
-
-(On each kvm_arch_vcpu_load, we raise KVM_REQ_GLOBAL_CLOCK_UPDATE
-request which (with small delay) makes all vcpus go through 
-kvm_guest_time_update which pushes the guest tsc forward)
-
-However we also have the 'tsc_always_catchup' mode which is indeed 
-something I would like to remove.
-
-It is a poor man simulation of the TSC scaling which is enabled 
-when the host doesn't support TSC scaling, but we were asked 
-to run at frequency faster than host TSC frequency is.
-
-This way guest tsc runs slower than it should, but on each VM exit,
-we punt the guest tsc offset forward so on average the guest tsc
-doesn't lag behind.
-
-Unless backward compatibility is an issue, I have no objections
-to remove that code.
-
-The tolerance thing might be needed. On many systems 
-(including mine new 3970X), the hardware doesn't have means to report 
-the unscaled host TSC frequency, thus the kernel has to 
-measure it, and since the measurement is not 100% accurate, a slightly
-different value is used every time the host boots.
-
-Thus without a small tolerance, we will always have to use TSC scaling,
-while migrating even between two identical systems.
-I don't know if this is an issue.
-
-
-Best regards,
-	Maxim Levitsky
-
-
+>  	# Trace the real file/line as we go.
+> @@ -3343,15 +3355,15 @@ sub process {
+>  # if LONG_LINE is ignored, the other 2 types are also ignored
+>  #
+>  
 > 
-> Paolo
+> -		if ($line =~ /^\+/ && $length > $max_line_length) {
+> +		if ($line =~ /^\+/ && $length > $preferred_line_length) {
+>  			my $msg_type = "LONG_LINE";
+>  
 > 
+>  			# Check the allowed long line types first
+>  
+> 
+>  			# logging functions that end in a string that starts
+> -			# before $max_line_length
+> +			# before $preferred_line_length
+>  			if ($line =~ /^\+\s*$logFunctions\s*\(\s*(?:(?:KERN_\S+\s*|[^"]*))?($String\s*(?:|,|\)\s*;)\s*)$/ &&
+> -			    length(expand_tabs(substr($line, 1, length($line) - length($1) - 1))) <= $max_line_length) {
+> +			    length(expand_tabs(substr($line, 1, length($line) - length($1) - 1))) <= $preferred_line_length) {
+>  				$msg_type = "";
+>  
+> 
+>  			# lines with only strings (w/ possible termination)
+> @@ -3371,23 +3383,30 @@ sub process {
+>  
+> 
+>  			# Otherwise set the alternate message types
+>  
+> 
+> -			# a comment starts before $max_line_length
+> +			# a comment starts before $preferred_line_length
+>  			} elsif ($line =~ /($;[\s$;]*)$/ &&
+> -				 length(expand_tabs(substr($line, 1, length($line) - length($1) - 1))) <= $max_line_length) {
+> +				 length(expand_tabs(substr($line, 1, length($line) - length($1) - 1))) <= $preferred_line_length) {
+>  				$msg_type = "LONG_LINE_COMMENT"
+>  
+> 
+> -			# a quoted string starts before $max_line_length
+> +			# a quoted string starts before $preferred_line_length
+>  			} elsif ($sline =~ /\s*($String(?:\s*(?:\\|,\s*|\)\s*;\s*))?)$/ &&
+> -				 length(expand_tabs(substr($line, 1, length($line) - length($1) - 1))) <= $max_line_length) {
+> +				 length(expand_tabs(substr($line, 1, length($line) - length($1) - 1))) <= $preferred_line_length) {
+>  				$msg_type = "LONG_LINE_STRING"
+>  			}
+>  
+> 
+>  			if ($msg_type ne "" &&
+>  			    (show_type("LONG_LINE") || show_type($msg_type))) {
+> -				my $msg_level = \&WARN;
+> -				$msg_level = \&CHK if ($file);
+> -				&{$msg_level}($msg_type,
+> +				my $msg_level = \&CHK;
+> +		
+> +				if ($line =~ /^\+/ && $length <= $max_line_length) {
+> +					$msg_level = \&INFO if (!$file);
+> +					&{$msg_level}($msg_type,
+> +					      "line length of $length exceeds preferred $preferred_line_length columns\n" . $herecurr);
+> +				} else {
+> +					$msg_level = \&WARN if (!$file);
+> +					&{$msg_level}($msg_type,
+>  					      "line length of $length exceeds $max_line_length columns\n" . $herecurr);
+> +				}
+>  			}
+>  		}
+>  
+> 
+> @@ -7015,7 +7034,7 @@ sub process {
+>  	print report_dump();
+>  	if ($summary && !($clean == 1 && $quiet == 1)) {
+>  		print "$filename " if ($summary_file);
+> -		print "total: $cnt_error errors, $cnt_warn warnings, " .
+> +		print "total: $cnt_error errors, $cnt_warn warnings, $cnt_info informational, " .
+>  			(($check)? "$cnt_chk checks, " : "") .
+>  			"$cnt_lines lines checked\n";
+>  	}
 
 
