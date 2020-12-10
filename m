@@ -2,199 +2,169 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 070422D61F8
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 17:33:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AEEC82D61E8
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 17:32:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389221AbgLJQEu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Dec 2020 11:04:50 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47086 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387918AbgLJQEl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Dec 2020 11:04:41 -0500
-Received: from mail-wm1-x344.google.com (mail-wm1-x344.google.com [IPv6:2a00:1450:4864:20::344])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 44270C0613D6
-        for <linux-doc@vger.kernel.org>; Thu, 10 Dec 2020 08:04:01 -0800 (PST)
-Received: by mail-wm1-x344.google.com with SMTP id v14so5104285wml.1
-        for <linux-doc@vger.kernel.org>; Thu, 10 Dec 2020 08:04:01 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Hh8PxAhln6PiY96SsIvH4Jb4HnhnMqeMZCUSPG8j+s0=;
-        b=DLZ928rqaeb/lsTz6CetglcHdGdiZkSKcNbL+S0gXsaCg1O7UdHDnhC/o64G2rrVYd
-         K3heFF0KQl/eEspEWJJvlkIdqSFxbIeRzDTpk9PVoMOR24vo0uTw58xd71nL3srbmzv1
-         8TJOoxrvfbWu0J8wZGvX2E/JiRZTdgLa+jhq71FCJoDLykcycr246iElt6AiPtk6yLZ2
-         5KPwJ90ogvnpan9yngc2YYi6VIr1+OESuqABEZeVIXtiUU3fLkqGq1dbTmGC/B2cUD7x
-         s+YfUc5Kt1KAut4BzM/AVJJdR8UXi7j2vuXku9o2jBm5c+GCdiKuMfzfKqk+s5XeNRUh
-         C27A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=Hh8PxAhln6PiY96SsIvH4Jb4HnhnMqeMZCUSPG8j+s0=;
-        b=SecvmZ0n7VyRC8qLEi5iRMf/yqzjWLfKidrxDFqiz2rDdaHDpkLDtUz9KlDh5T1KPg
-         AdmqzaxC7/ulKV9Zk+dOwxL2zmNEIHSlrMmZ6htv+BVnJ4KfnxNVdVp7u/sqyYE0mT3Z
-         rgYLca9tU6eEnvFEKd6qyNUMfNXoCFMUlL/pzFwS+oTN3FnumE4ya2QjZPRVed4xVvnL
-         eHKCenC4r0CX2h9XG5sYbB3tYy/6DLKYKsd5ZEYGDEeyJG/XCTHjX6jfI4NNItT64OdC
-         S4Wrhe1/v4mGD88azp23ZKd7jLUz6nzjxWC7zATYWSSoiMbOYf+HOTUyvOq++gU2EZuT
-         eHuA==
-X-Gm-Message-State: AOAM5301uscbF1g8G28QNPgkhvcStB9LM/ObDa5W8VJir2rsT1P3zoyD
-        +FvgEcHY03KKWMh1KNEqZ4X67g==
-X-Google-Smtp-Source: ABdhPJwlL+iccy5h+6abVXgzPBfF873S9rja/ooxjbuBYTgwfozKKRBiUTpSGG43GvEvWnRDaZvTIw==
-X-Received: by 2002:a1c:e10b:: with SMTP id y11mr9199667wmg.65.1607616239854;
-        Thu, 10 Dec 2020 08:03:59 -0800 (PST)
-Received: from localhost.localdomain ([212.45.67.2])
-        by smtp.googlemail.com with ESMTPSA id d17sm9274768wro.62.2020.12.10.08.03.58
-        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
-        Thu, 10 Dec 2020 08:03:59 -0800 (PST)
-From:   Georgi Djakov <georgi.djakov@linaro.org>
-To:     akpm@linux-foundation.org
-Cc:     linux-mm@kvack.org, vbabka@suse.cz, corbet@lwn.net,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        lmark@codeaurora.org, georgi.djakov@linaro.org
-Subject: [PATCH v3] mm/page_owner: Record timestamp and pid
-Date:   Thu, 10 Dec 2020 18:03:57 +0200
-Message-Id: <20201210160357.27779-1-georgi.djakov@linaro.org>
-X-Mailer: git-send-email 2.29.0
+        id S2392328AbgLJQac (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Dec 2020 11:30:32 -0500
+Received: from mail.kernel.org ([198.145.29.99]:54358 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2392278AbgLJQaY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 10 Dec 2020 11:30:24 -0500
+Date:   Thu, 10 Dec 2020 17:29:38 +0100
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1607617783;
+        bh=wKoP18O5gMPLwquu/buxQ4EvFVAv2YOC8QSG6GaC+jQ=;
+        h=From:To:Cc:Subject:In-Reply-To:References:From;
+        b=Oh2ptG4ZVLCMhVKtFV4GX1Gr3/bKm6NIJvSboVEyeZe8uQ6hHt+N5rAoM6rTaduxl
+         HBY/f7WQvd8dGxp7rx23DFyZvq88hR0kzzYMIih8BJkGprPE1CD86gtYhYH89Fx1DJ
+         IMagpqVjLXGhdAvmefQ+Mt5yMPxbzdltgskX9uuEt4moX1l7Q4dJ6QpI+ZzCfGJoaz
+         UlHTa7aAni8ENe685aHLxDw1KIk+XFDpx/zx5jguM7xY8yo3ZZHPd/zmLN4z2+C7Z/
+         dZcf2NkEnqo8uLifUlVUC7moDPP4zQYh5J9ys9/4VC7Owhv/8l6YSuF/KxfzKku3ZU
+         /+zpsr0pxkbYg==
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     "Jonathan Corbet" <corbet@lwn.net>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Masahiro Yamada <masahiroy@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Michal Marek <michal.lkml@markovi.net>,
+        linux-kbuild@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-media@vger.kernel.org
+Subject: Re: [PATCH RFC] docs: experimental: build PDF with rst2pdf
+Message-ID: <20201210172938.3b3086b6@coco.lan>
+In-Reply-To: <a29b97f95cae490cb83da28410fade13d880f365.1607616056.git.mchehab+huawei@kernel.org>
+References: <20201210074845.4eb67f22@lwn.net>
+        <a29b97f95cae490cb83da28410fade13d880f365.1607616056.git.mchehab+huawei@kernel.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Liam Mark <lmark@codeaurora.org>
+Em Thu, 10 Dec 2020 17:01:19 +0100
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> escreveu:
 
-Collect the time for each allocation recorded in page owner so that
-allocation "surges" can be measured.
+> Add an experimental PDF builder using rst2pdf
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Record the pid for each allocation recorded in page owner so that the
-source of allocation "surges" can be better identified.
+I opened an issue at:
 
-The above is very useful when doing memory analysis.  On a crash for
-example, we can get this information from kdump (or ramdump) and parse it
-to figure out memory allocation problems.
+https://github.com/rst2pdf/rst2pdf/issues/958
 
-Please note that on x86_64 this increases the size of struct page_owner
-from 16 bytes to 32.
+Let's hope someone at rst2pdf could help fixing this ;-)
 
-Vlastimil: it's not a functionality intended for production, so unless
-somebody says they need to enable page_owner for debugging and this
-increase prevents them from fitting into available memory, let's not
-complicate things with making this optional.
+Regards,
+Mauro
 
-Signed-off-by: Liam Mark <lmark@codeaurora.org>
-Signed-off-by: Georgi Djakov <georgi.djakov@linaro.org>
-Acked-by: Vlastimil Babka <vbabka@suse.cz>
-Cc: Jonathan Corbet <corbet@lwn.net>
----
 
-v3:
-- Fix the warnings in the documentation (reported in linux-next) and make
-  Sphinx happy:
-  Documentation/vm/page_owner.rst:44: WARNING: Literal block ends without a blank line; unexpected unindent.
-  Documentation/vm/page_owner.rst:49: WARNING: Literal block ends without a blank line; unexpected unindent.
+> ---
+>  Documentation/Makefile                     |  5 +++++
+>  Documentation/conf.py                      | 21 +++++++++++++++------
+>  Documentation/userspace-api/media/Makefile |  1 +
+>  Makefile                                   |  4 ++--
+>  4 files changed, 23 insertions(+), 8 deletions(-)
+> 
+> diff --git a/Documentation/Makefile b/Documentation/Makefile
+> index 61a7310b49e0..c3c8fb10f94e 100644
+> --- a/Documentation/Makefile
+> +++ b/Documentation/Makefile
+> @@ -115,6 +115,10 @@ pdfdocs: latexdocs
+>  
+>  endif # HAVE_PDFLATEX
+>  
+> +rst2pdf:
+> +	@$(srctree)/scripts/sphinx-pre-install --version-check
+> +	@+$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,pdf,$(var),pdf,$(var)))
+> +
+>  epubdocs:
+>  	@$(srctree)/scripts/sphinx-pre-install --version-check
+>  	@+$(foreach var,$(SPHINXDIRS),$(call loop_cmd,sphinx,epub,$(var),epub,$(var)))
+> @@ -140,6 +144,7 @@ dochelp:
+>  	@echo  '  htmldocs        - HTML'
+>  	@echo  '  latexdocs       - LaTeX'
+>  	@echo  '  pdfdocs         - PDF'
+> +	@echo  '  rst2pdf         - PDF, using experimental rst2pdf support'
+>  	@echo  '  epubdocs        - EPUB'
+>  	@echo  '  xmldocs         - XML'
+>  	@echo  '  linkcheckdocs   - check for broken external links'
+> diff --git a/Documentation/conf.py b/Documentation/conf.py
+> index 66e121df59cd..6f2788aac81e 100644
+> --- a/Documentation/conf.py
+> +++ b/Documentation/conf.py
+> @@ -123,6 +123,12 @@ if (major == 1 and minor > 3) or (major > 1):
+>  else:
+>      extensions.append("sphinx.ext.pngmath")
+>  
+> +# Enable experimental rst2pdf, if available
+> +try:
+> +    extensions.append("rst2pdf.pdfbuilder")
+> +except:
+> +    sys.stderr.write('rst2pdf extension not available.\n')
+> +
+>  # Add any paths that contain templates here, relative to this directory.
+>  templates_path = ['_templates']
+>  
+> @@ -614,12 +620,15 @@ epub_exclude_files = ['search.html']
+>  #
+>  # See the Sphinx chapter of https://ralsina.me/static/manual.pdf
+>  #
+> -# FIXME: Do not add the index file here; the result will be too big. Adding
+> -# multiple PDF files here actually tries to get the cross-referencing right
+> -# *between* PDF files.
+> -pdf_documents = [
+> -    ('kernel-documentation', u'Kernel', u'Kernel', u'J. Random Bozo'),
+> -]
+> +
+> +# Add all LaTeX files to PDF documents as well
+> +pdf_documents = []
+> +for l in latex_documents:
+> +    doc = l[0]
+> +    fn = l[1].replace(".tex", "")
+> +    name = l[2]
+> +    authors = l[3]
+> +    pdf_documents.append((doc, fn, name, authors))
+>  
+>  # kernel-doc extension configuration for running Sphinx directly (e.g. by Read
+>  # the Docs). In a normal build, these are supplied from the Makefile via command
+> diff --git a/Documentation/userspace-api/media/Makefile b/Documentation/userspace-api/media/Makefile
+> index 81a4a1a53bce..8c6b3ac4ecb0 100644
+> --- a/Documentation/userspace-api/media/Makefile
+> +++ b/Documentation/userspace-api/media/Makefile
+> @@ -59,6 +59,7 @@ all: $(IMGDOT) $(BUILDDIR) ${TARGETS}
+>  html: all
+>  epub: all
+>  xml: all
+> +pdf: all
+>  latex: $(IMGPDF) all
+>  linkcheck:
+>  
+> diff --git a/Makefile b/Makefile
+> index 43ecedeb3f02..db4043578eec 100644
+> --- a/Makefile
+> +++ b/Makefile
+> @@ -264,7 +264,7 @@ no-dot-config-targets := $(clean-targets) \
+>  			 cscope gtags TAGS tags help% %docs check% coccicheck \
+>  			 $(version_h) headers headers_% archheaders archscripts \
+>  			 %asm-generic kernelversion %src-pkg dt_binding_check \
+> -			 outputmakefile
+> +			 outputmakefile rst2pdf
+>  no-sync-config-targets := $(no-dot-config-targets) %install kernelrelease
+>  single-targets := %.a %.i %.ko %.lds %.ll %.lst %.mod %.o %.s %.symtypes %/
+>  
+> @@ -1654,7 +1654,7 @@ $(help-board-dirs): help-%:
+>  
+>  # Documentation targets
+>  # ---------------------------------------------------------------------------
+> -DOC_TARGETS := xmldocs latexdocs pdfdocs htmldocs epubdocs cleandocs \
+> +DOC_TARGETS := xmldocs latexdocs pdfdocs rst2pdf htmldocs epubdocs cleandocs \
+>  	       linkcheckdocs dochelp refcheckdocs
+>  PHONY += $(DOC_TARGETS)
+>  $(DOC_TARGETS):
 
-v2: https://lore.kernel.org/r/20201209125153.10533-1-georgi.djakov@linaro.org
-- Improve the commit message (Andrew and Vlastimil)
-- Update page_owner.rst with more recent object size information (Andrew)
-- Use pid_t for the pid (Andrew)
-- Print the info also in __dump_page_owner() (Vlastimil)
 
-v1: https://lore.kernel.org/r/20201112184106.733-1-georgi.djakov@linaro.org
 
- Documentation/vm/page_owner.rst | 12 ++++++------
- mm/page_owner.c                 | 17 +++++++++++++----
- 2 files changed, 19 insertions(+), 10 deletions(-)
-
-diff --git a/Documentation/vm/page_owner.rst b/Documentation/vm/page_owner.rst
-index 02deac76673f..4e67c2e9bbed 100644
---- a/Documentation/vm/page_owner.rst
-+++ b/Documentation/vm/page_owner.rst
-@@ -41,17 +41,17 @@ size change due to this facility.
- - Without page owner::
- 
-    text    data     bss     dec     hex filename
--   40662   1493     644   42799    a72f mm/page_alloc.o
-+   48392   2333     644   51369    c8a9 mm/page_alloc.o
- 
- - With page owner::
- 
-    text    data     bss     dec     hex filename
--   40892   1493     644   43029    a815 mm/page_alloc.o
--   1427      24       8    1459     5b3 mm/page_ext.o
--   2722      50       0    2772     ad4 mm/page_owner.o
-+   48800   2445     644   51889    cab1 mm/page_alloc.o
-+   6574     108      29    6711    1a37 mm/page_owner.o
-+   1025       8       8    1041     411 mm/page_ext.o
- 
--Although, roughly, 4 KB code is added in total, page_alloc.o increase by
--230 bytes and only half of it is in hotpath. Building the kernel with
-+Although, roughly, 8 KB code is added in total, page_alloc.o increase by
-+520 bytes and less than half of it is in hotpath. Building the kernel with
- page owner and turning it on if needed would be great option to debug
- kernel memory problem.
- 
-diff --git a/mm/page_owner.c b/mm/page_owner.c
-index b735a8eafcdb..af464bb7fbe7 100644
---- a/mm/page_owner.c
-+++ b/mm/page_owner.c
-@@ -10,6 +10,7 @@
- #include <linux/migrate.h>
- #include <linux/stackdepot.h>
- #include <linux/seq_file.h>
-+#include <linux/sched/clock.h>
- 
- #include "internal.h"
- 
-@@ -25,6 +26,8 @@ struct page_owner {
- 	gfp_t gfp_mask;
- 	depot_stack_handle_t handle;
- 	depot_stack_handle_t free_handle;
-+	u64 ts_nsec;
-+	pid_t pid;
- };
- 
- static bool page_owner_enabled = false;
-@@ -172,6 +175,8 @@ static inline void __set_page_owner_handle(struct page *page,
- 		page_owner->order = order;
- 		page_owner->gfp_mask = gfp_mask;
- 		page_owner->last_migrate_reason = -1;
-+		page_owner->pid = current->pid;
-+		page_owner->ts_nsec = local_clock();
- 		__set_bit(PAGE_EXT_OWNER, &page_ext->flags);
- 		__set_bit(PAGE_EXT_OWNER_ALLOCATED, &page_ext->flags);
- 
-@@ -236,6 +241,8 @@ void __copy_page_owner(struct page *oldpage, struct page *newpage)
- 	new_page_owner->last_migrate_reason =
- 		old_page_owner->last_migrate_reason;
- 	new_page_owner->handle = old_page_owner->handle;
-+	new_page_owner->pid = old_page_owner->pid;
-+	new_page_owner->ts_nsec = old_page_owner->ts_nsec;
- 
- 	/*
- 	 * We don't clear the bit on the oldpage as it's going to be freed
-@@ -349,9 +356,10 @@ print_page_owner(char __user *buf, size_t count, unsigned long pfn,
- 		return -ENOMEM;
- 
- 	ret = snprintf(kbuf, count,
--			"Page allocated via order %u, mask %#x(%pGg)\n",
-+			"Page allocated via order %u, mask %#x(%pGg), pid %d, ts %llu ns\n",
- 			page_owner->order, page_owner->gfp_mask,
--			&page_owner->gfp_mask);
-+			&page_owner->gfp_mask, page_owner->pid,
-+			page_owner->ts_nsec);
- 
- 	if (ret >= count)
- 		goto err;
-@@ -427,8 +435,9 @@ void __dump_page_owner(struct page *page)
- 	else
- 		pr_alert("page_owner tracks the page as freed\n");
- 
--	pr_alert("page last allocated via order %u, migratetype %s, gfp_mask %#x(%pGg)\n",
--		 page_owner->order, migratetype_names[mt], gfp_mask, &gfp_mask);
-+	pr_alert("page last allocated via order %u, migratetype %s, gfp_mask %#x(%pGg), pid %d, ts %llu\n",
-+		 page_owner->order, migratetype_names[mt], gfp_mask, &gfp_mask,
-+		 page_owner->pid, page_owner->ts_nsec);
- 
- 	handle = READ_ONCE(page_owner->handle);
- 	if (!handle) {
+Thanks,
+Mauro
