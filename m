@@ -2,122 +2,82 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B01F72D6BC7
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Dec 2020 00:39:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5178A2D6B09
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Dec 2020 00:37:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1732785AbgLJXTU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Dec 2020 18:19:20 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45752 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2393214AbgLJXTD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Dec 2020 18:19:03 -0500
-Received: from galois.linutronix.de (Galois.linutronix.de [IPv6:2a0a:51c0:0:12e:550::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A1722C061285;
-        Thu, 10 Dec 2020 14:35:34 -0800 (PST)
-From:   Thomas Gleixner <tglx@linutronix.de>
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020; t=1607636890;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=fS6Q5Mzy8JmeMJ4Hud0TQwMZS+fqZnoguNO5e8v6TVs=;
-        b=QPVSgrSjXozmKT2n8R4x08cAnYxVSNVsEJIc2eOXdokOKwJWBs2OmryPk2gbH9m6ZOKoe8
-        e+FoOcRFR2pIFn5LvxJZAHjBjdUwn+McnauUHljGdaHlGQhHp7mcwOKFxgJnADdWgEa9+5
-        Wjwl0ZQnBnDjijvfKOKcoVnM9bGg8ZcJUDxLZMr40Tyep1mn50l2na3vzBcnlLIfSVGPHT
-        qd1Yig3bi9mFhuiQ3NybufG11BjowHHtfz+hoOB6XRlOCdjaFSoLIwD58Ra+5X0RLs4tmV
-        iV22mB1VyAas66wcX/Q3IA4GgfdryNM5nXZSiSOxGRiFKZEL9m0Hzvu7gx/57A==
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=linutronix.de;
-        s=2020e; t=1607636890;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=fS6Q5Mzy8JmeMJ4Hud0TQwMZS+fqZnoguNO5e8v6TVs=;
-        b=1mexZVqkZd9QyFLML/IjTcYSbIpLa2tYlJj+Jet5oFipyeOgV1RizLPTsRFrRHCrog9vOU
-        wBhOpA0OtkrUPIBA==
-To:     Marcelo Tosatti <mtosatti@redhat.com>
-Cc:     Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jim Mattson <jmattson@google.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        "open list\:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Sean Christopherson <sean.j.christopherson@intel.com>,
-        open list <linux-kernel@vger.kernel.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        "maintainer\:X86 ARCHITECTURE \(32-BIT AND 64-BIT\)" <x86@kernel.org>,
-        Joerg Roedel <joro@8bytes.org>, Borislav Petkov <bp@alien8.de>,
-        Shuah Khan <shuah@kernel.org>,
-        Andrew Jones <drjones@redhat.com>,
-        Oliver Upton <oupton@google.com>,
-        "open list\:DOCUMENTATION" <linux-doc@vger.kernel.org>
-Subject: Re: [PATCH v2 1/3] KVM: x86: implement KVM_{GET|SET}_TSC_STATE
-In-Reply-To: <20201210152618.GB23951@fuller.cnet>
-References: <20201203171118.372391-1-mlevitsk@redhat.com> <20201203171118.372391-2-mlevitsk@redhat.com> <20201207232920.GD27492@fuller.cnet> <05aaabedd4aac7d3bce81d338988108885a19d29.camel@redhat.com> <87sg8g2sn4.fsf@nanos.tec.linutronix.de> <20201208181107.GA31442@fuller.cnet> <875z5c2db8.fsf@nanos.tec.linutronix.de> <20201209163434.GA22851@fuller.cnet> <87r1nyzogg.fsf@nanos.tec.linutronix.de> <20201210152618.GB23951@fuller.cnet>
-Date:   Thu, 10 Dec 2020 22:48:10 +0100
-Message-ID: <87zh2lib8l.fsf@nanos.tec.linutronix.de>
+        id S2394159AbgLJWbV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Dec 2020 17:31:21 -0500
+Received: from mout.gmx.net ([212.227.15.19]:47963 "EHLO mout.gmx.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2405131AbgLJW0c (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 10 Dec 2020 17:26:32 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
+        s=badeba3b8450; t=1607639100;
+        bh=7URLmzolxMREC32enWTWWnTNWyOm+MhitVxzu34SbmM=;
+        h=X-UI-Sender-Class:To:Cc:From:Subject:Date;
+        b=YcINTNOWlxyDM4+JQ92XShZwnd2pltN4jg5R9udv19HTqz3UXenin8rdXpRzPv8cz
+         eKrUmblpHrRYwiavZOj9PqWJxpuUaNzcrDtUGrOdKmrcANkz+Nvuu41RX35k/pCT2L
+         FBFml5jsYmg0NVAWGM9uGf1BpxPn2yyTr3NbfJIA=
+X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
+Received: from [192.168.123.51] ([62.143.246.89]) by mail.gmx.com (mrgmx004
+ [212.227.17.190]) with ESMTPSA (Nemesis) id 1N2V4P-1k8TPt1MRL-013yGM; Thu, 10
+ Dec 2020 22:49:10 +0100
+To:     Ard Biesheuvel <ardb@kernel.org>, Jonathan Corbet <corbet@lwn.net>
+Cc:     Ivan Hu <ivan.hu@canonical.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-efi <linux-efi@vger.kernel.org>
+From:   Heinrich Schuchardt <xypron.glpk@gmx.de>
+Subject: [RFC] Documentation for /dev/efi_test
+Message-ID: <0d27217e-15c4-32e5-0dc3-47b94116ad64@gmx.de>
+Date:   Thu, 10 Dec 2020 22:49:09 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.5.1
 MIME-Version: 1.0
-Content-Type: text/plain
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
+X-Provags-ID: V03:K1:3AYM8Zp5TeY/xXUAv7fSWLEpWs5F99r66xB8IbuxRZ4gmka9n4Q
+ YQe0zGfghVLNHbTgGtD7796lS3fCf7QgcB1tMSqg7EIETsMaYW6ZbUQ9VoOwAnLbVTg82ny
+ cb7ShiZ6aR238dVMSFFdkIFu0Hi/239swWN1HbeTirKGKLgMFQOFKMDJn3iZDeCRRoI0TmD
+ 0u2u3A84pkfm1NptXHYFw==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:ycO+UZuZ0IE=:VbPnMlOzETVqKaj/LMTnc4
+ lH4BplfygMmmo+S0IOjiPhV1Pv3wMJTMJO2E2S5RQRZGZkYYYFD8HTD4LIxAsOHTVpgmsqoiK
+ VA3qau4GHcYnxz0ydl+DgUGFcyyCvIuraGK1IzROFzCOHlMlBAAFnN8ckNGPKXwQrOTSn7hor
+ cIWTgUf9ISi0v4lbcV69xj4L2UP9CoYNWyYWFXhppjWd5DMAMlK8nlYaQVK2mgCvi6ge3z06h
+ S+FdFjKqU7AYmiq7ow60vvfQBrzBH7a9T6xyTO9/4uwy6K9K9D/FjpO2t6nb0///Crn9D1b2R
+ rYblX5i0o7EWXZlXFiHqCplFoPhqwuHRI8VKqcFDOK4m4bkMMFc/k+M/imP2fUnoaDEkKvr7Z
+ 4KozzgVjErJSJb12z5wCizAJIF2J+bz4vMLDxsK8/3Psxj4dBithB0nTFOwwm5WKB7YaAYy5a
+ Q699WKfEjhZ8Hi7zce4wIB+pfW1hjr/zigVDajN2dSH1I5xF5inJG4wWBu3yuZUlbnG35BMOc
+ HkfQc2KvK0cgSHfhNaseByHokpk//E8wqX3KIw1n5t3sEK1E9XzvoPDS9Efzp7byLv4TwPmn7
+ IjKdrw75n8W6wZOGsxrdjGRm+32jABVi4FcUSLKoBCsoShWrpCyVKAveMy7V3GhFtU2j3jop3
+ mXkgWLBZTj60m3jVlGmp/qIX1PtZIbiGhR0jLhJgMmXrF5CYep7N2bwg6zPn46TxdjacpwQpo
+ srDx+H4ukP3P4jItRmvpMXVnG8dEvFJz1/XjhsMp28D5rDOOvIgqWMGlfuIb0+LpWdcZpaUW2
+ nw+b7JyA43ThTxtu01MHiKax7EU6ti6gScdiChagnLzXc9+uMB5TA50sVXLrpu4OcM7KVhM0O
+ lHUenSIhtBf3OPAPFSRQ==
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Dec 10 2020 at 12:26, Marcelo Tosatti wrote:
-> On Wed, Dec 09, 2020 at 09:58:23PM +0100, Thomas Gleixner wrote:
->> Marcelo,
->> 
->> On Wed, Dec 09 2020 at 13:34, Marcelo Tosatti wrote:
->> > On Tue, Dec 08, 2020 at 10:33:15PM +0100, Thomas Gleixner wrote:
->> >> On Tue, Dec 08 2020 at 15:11, Marcelo Tosatti wrote:
->> >> > max_cycles overflow. Sent a message to Maxim describing it.
->> >> 
->> >> Truly helpful. Why the hell did you not talk to me when you ran into
->> >> that the first time?
->> >
->> > Because 
->> >
->> > 1) Users wanted CLOCK_BOOTTIME to stop counting while the VM 
->> > is paused (so we wanted to stop guest clock when VM is paused anyway).
->> 
->> How is that supposed to work w/o the guest kernels help if you have to
->> keep clock realtime up to date? 
->
-> Upon VM resume, we notify NTP daemon in the guest to sync realtime
-> clock.
+Hello Ard, hello Jonathan,
 
-Brilliant. What happens if there is no NTP daemon? What happens if the
-NTP daemon is not part of the virt orchestration magic and cannot be
-notified, then it will notice the time jump after the next update
-interval.
+to test UEFI runtime services we have CONFIG_EFI_TEST which provides
+/dev/efi_test and a bunch of IOCTLs for excercising the runtime services
+(cf. drivers/firmware/efi/test/efi_test.h).
 
-What about correctness?
+Currently there is no user documentation for this ABI.
 
-ALL CLOCK_* stop and resume when the VM is resumed at the point where
-they stopped.
+Where should the documentation for the ABI be put in the documentation
+tree? Is this Documentation/ABI/stable/?
 
-So up to the point where NTP catches up and corrects clock realtime and
-TAI other processes can observe that time jumped in the outside world,
-e.g. via a network packet or whatever, but there is no reason why time
-should have jumped outside vs. the local one.
+Can includes be referenced in Documentation/ABI/stable/ files using
+reStructured text notation?
 
-You really all live in a seperate universe creating your own rules how
-things which other people work hard on to get it correct can be screwed
-over.
+I am hesitant to put the description into the man-pages project as this
+ABI is meant for testing only.
 
-Of course this all is nowhere documented in detail. At least a quick
-search with about 10 different keyword combinations revealed absolutely
-nothing.
+Best regards
 
-This features first, correctness later frenzy is insane and it better
-stops now before you pile even more crap on the existing steaming pile
-of insanities.
-
-Thanks,
-
-        tglx
-
-
+Heinrich
 
 
