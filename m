@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6AEC72D4FB6
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 01:44:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4789A2D4FB8
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 01:46:01 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730115AbgLJAod (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 9 Dec 2020 19:44:33 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46848 "EHLO
+        id S1730130AbgLJAoi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 9 Dec 2020 19:44:38 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46856 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730476AbgLJAoW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 19:44:22 -0500
-Received: from mail-qv1-xf42.google.com (mail-qv1-xf42.google.com [IPv6:2607:f8b0:4864:20::f42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3A546C0611CB
-        for <linux-doc@vger.kernel.org>; Wed,  9 Dec 2020 16:43:42 -0800 (PST)
-Received: by mail-qv1-xf42.google.com with SMTP id u16so1624242qvl.7
-        for <linux-doc@vger.kernel.org>; Wed, 09 Dec 2020 16:43:42 -0800 (PST)
+        with ESMTP id S1728477AbgLJAo2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 9 Dec 2020 19:44:28 -0500
+Received: from mail-qk1-x744.google.com (mail-qk1-x744.google.com [IPv6:2607:f8b0:4864:20::744])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EA201C0611CD
+        for <linux-doc@vger.kernel.org>; Wed,  9 Dec 2020 16:43:43 -0800 (PST)
+Received: by mail-qk1-x744.google.com with SMTP id z11so3303322qkj.7
+        for <linux-doc@vger.kernel.org>; Wed, 09 Dec 2020 16:43:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=soleen.com; s=google;
         h=from:to:subject:date:message-id:in-reply-to:references:mime-version
          :content-transfer-encoding;
-        bh=Vo/yLKAiBS5h7nMLASyDzuT56nkaTKWz46PdLnDqyVo=;
-        b=lWcq4VQzxkaWPyNizEDNGYhGjugYHnHlB7gIkV8AVNth2RU1O8bPJqDyqXkjGelUBb
-         DtuSfCf2vU3iQ2Aw2aHIB/OUhtzdIKvp9GPqGanu6vYYeLYd8uHYXfCfkRfHwbkwK0nn
-         AA+lWcTiJyWmv/jcnvBHdVb8hyCNhk7oArTBfqp+Rx1gSVn6hSBDo+x8ejNat3qPP7Pw
-         I0ouWxKweeSLCAuynp4EjKkntCkncxKCEJmdCf3dlExR9b+ZDCgZWGnvRPaP8NUKW7G2
-         V244hehbzwIJzbQTSVR+BTFmASHF1nXUTfYoDWSs1CLrVlB3p++uRUQ/RlMTreKpyCvF
-         RO7g==
+        bh=wKF1vMMrBlL3Nf1z4M/UQUVU8LetyRUPTbIEfnAIYlQ=;
+        b=gqbd9DoMaRvvzvvMIqaS5F41tXsvEg/1IPa7tX68ji4V8ZFM0lAhGyUZ1CmiVZXVSh
+         biDr/Ej0RPp58RM/ATaFiF2WLnZCp9mVyqJVF8saPqoaMIdnbxPdA9IzLH1s2jY1UK4Y
+         H2lHueaV79j1DW3rTXM50YMPOTq29GTP2KnfVIJxkLxzhdbc+fjGIE2Eq7Ue0jnYz0A/
+         cW2to2nIGGjeyaZYDoshUaphaprRyBhQwGVqtTeymXkz9SP2YoPNh3LxiaImeY19SgbI
+         w5Q+FiKl6hlqVYo0yVw5f3cEDEQ9eba8GOePohl4kJKP3tZk/EQx4jdfOaSRMeVu6A09
+         tSPg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=Vo/yLKAiBS5h7nMLASyDzuT56nkaTKWz46PdLnDqyVo=;
-        b=qO5qyURiNUMi9SQbVj1T9KVFFPuyrAcX14tuOHj9oY9lDs2GpeXMKAoSIGPSVi3ivs
-         KZtRnBLZB4DTgYcxznELV6r6jb4Te5oCvQBv8U+cx9/Zx05/l+wZLzGM/Usc/Arj5O0x
-         r6PB3lmPh7DzS4t6+41jJWxrBl9t84nZhxcvsLFGk1GOp/jRwQ3s8ZMIduV9w97CxQcb
-         G361pYcrO46bFbdoBopkdi7w7odsNkVZ141xPnmwhTtpu2aA2oxsUVfSRuQ+X2XYjmgq
-         t31KtC1sJv9/u/d3x9hOuMHVK75KhNawDuQ3RuiPZZGOBrTE/eDe368YhyUcepP8QBiD
-         tLBQ==
-X-Gm-Message-State: AOAM533hrxXwMxqlGeKUxCAu+zNptLXxXAVCqjP3I2+ANTcR48/z9pyW
-        z6aKSul/hN/TP+FeELBc5QabjQ==
-X-Google-Smtp-Source: ABdhPJydALvSGS7GDNYtKUswYkrylNumV2tLiFG9B8JTmcFkB18LgsEdm1vhHem+5qCNXzlbBRkswg==
-X-Received: by 2002:a0c:e6e7:: with SMTP id m7mr6461346qvn.11.1607561021480;
-        Wed, 09 Dec 2020 16:43:41 -0800 (PST)
+        bh=wKF1vMMrBlL3Nf1z4M/UQUVU8LetyRUPTbIEfnAIYlQ=;
+        b=UJJzc1N2fFnmOhP/F68lSHnOCal0lupcA/0520Tc5CPRGyBT9cUQ+LwHojz0iG7BdC
+         okAheSdSoiNGUoYe14/Hhyxa3dzYAK0ca4y6681qTvPHkqL94Qo6vhqTpNKsWgqUWr9v
+         tEF6O18xzOXpVrua36zURgcyNna8BzyfjUqwBMdvx3+g2BdPRtQ52Y6QL9yFR9R/V8od
+         bDOCAthhr8pddepvqIA8bQt4GacN0W2/u6nQ1AtJIbPd9l5dl7su7YwZlPMOPlob9CER
+         F+LdH2bUBPTnetD6GaMgOOb7mBtn4RDaXlrWiK9bDG3s6lFqlHCYoPlA1PdjcqFdH8gL
+         3J6A==
+X-Gm-Message-State: AOAM532s0LZUBWi+1tXbBXQGnq3+rCB0P4NdgO49e/Rt0PY9mOaC/elq
+        7R9YtNnHCRXtEB9hYufaCHvifw==
+X-Google-Smtp-Source: ABdhPJwVjQblG8lz4nHLZuO6EXQnNDMXKQRm0jhOeWrGTKeTLfE1Ij+ZT0B/O2DFXL+mzXgo5kPtBQ==
+X-Received: by 2002:a37:8384:: with SMTP id f126mr5922627qkd.500.1607561023216;
+        Wed, 09 Dec 2020 16:43:43 -0800 (PST)
 Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
-        by smtp.gmail.com with ESMTPSA id y1sm2538745qky.63.2020.12.09.16.43.39
+        by smtp.gmail.com with ESMTPSA id y1sm2538745qky.63.2020.12.09.16.43.41
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 09 Dec 2020 16:43:40 -0800 (PST)
+        Wed, 09 Dec 2020 16:43:42 -0800 (PST)
 From:   Pavel Tatashin <pasha.tatashin@soleen.com>
 To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
         linux-mm@kvack.org, akpm@linux-foundation.org, vbabka@suse.cz,
@@ -57,9 +57,9 @@ To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
         jgg@ziepe.ca, peterz@infradead.org, mgorman@suse.de,
         willy@infradead.org, rientjes@google.com, jhubbard@nvidia.com,
         linux-doc@vger.kernel.org
-Subject: [PATCH v2 2/8] mm/gup: don't pin migrated cma pages in movable zone
-Date:   Wed,  9 Dec 2020 19:43:29 -0500
-Message-Id: <20201210004335.64634-3-pasha.tatashin@soleen.com>
+Subject: [PATCH v2 3/8] mm/gup: make __gup_longterm_locked common
+Date:   Wed,  9 Dec 2020 19:43:30 -0500
+Message-Id: <20201210004335.64634-4-pasha.tatashin@soleen.com>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20201210004335.64634-1-pasha.tatashin@soleen.com>
 References: <20201210004335.64634-1-pasha.tatashin@soleen.com>
@@ -69,33 +69,48 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In order not to fragment CMA the pinned pages are migrated. However,
-they are migrated to ZONE_MOVABLE, which also should not have pinned pages.
-
-Remove __GFP_MOVABLE, so pages can be migrated to zones where pinning
-is allowed.
+__gup_longterm_locked() has CMA || FS_DAX version and a common stub
+version. In the preparation of prohibiting longterm pinning of pages from
+movable zone make the CMA || FS_DAX version common, and delete the stub
+version.
 
 Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
-Reviewed-by: David Hildenbrand <david@redhat.com>
 Reviewed-by: John Hubbard <jhubbard@nvidia.com>
-Acked-by: Michal Hocko <mhocko@suse.com>
 ---
- mm/gup.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ mm/gup.c | 13 -------------
+ 1 file changed, 13 deletions(-)
 
 diff --git a/mm/gup.c b/mm/gup.c
-index cdb8b9eeb016..3a76c005a3e2 100644
+index 3a76c005a3e2..0e2de888a8b0 100644
 --- a/mm/gup.c
 +++ b/mm/gup.c
-@@ -1610,7 +1610,7 @@ static long check_and_migrate_cma_pages(struct mm_struct *mm,
- 	long ret = nr_pages;
- 	struct migration_target_control mtc = {
- 		.nid = NUMA_NO_NODE,
--		.gfp_mask = GFP_USER | __GFP_MOVABLE | __GFP_NOWARN,
-+		.gfp_mask = GFP_USER | __GFP_NOWARN,
- 	};
+@@ -1567,7 +1567,6 @@ struct page *get_dump_page(unsigned long addr)
+ }
+ #endif /* CONFIG_ELF_CORE */
  
- check_again:
+-#if defined(CONFIG_FS_DAX) || defined (CONFIG_CMA)
+ #ifdef CONFIG_FS_DAX
+ static bool check_dax_vmas(struct vm_area_struct **vmas, long nr_pages)
+ {
+@@ -1757,18 +1756,6 @@ static long __gup_longterm_locked(struct mm_struct *mm,
+ 		kfree(vmas_tmp);
+ 	return rc;
+ }
+-#else /* !CONFIG_FS_DAX && !CONFIG_CMA */
+-static __always_inline long __gup_longterm_locked(struct mm_struct *mm,
+-						  unsigned long start,
+-						  unsigned long nr_pages,
+-						  struct page **pages,
+-						  struct vm_area_struct **vmas,
+-						  unsigned int flags)
+-{
+-	return __get_user_pages_locked(mm, start, nr_pages, pages, vmas,
+-				       NULL, flags);
+-}
+-#endif /* CONFIG_FS_DAX || CONFIG_CMA */
+ 
+ static bool is_valid_gup_flags(unsigned int gup_flags)
+ {
 -- 
 2.25.1
 
