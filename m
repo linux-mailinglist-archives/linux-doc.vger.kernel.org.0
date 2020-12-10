@@ -2,138 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 62DA52D619C
-	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 17:23:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 457E92D623D
+	for <lists+linux-doc@lfdr.de>; Thu, 10 Dec 2020 17:43:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388251AbgLJQVL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 10 Dec 2020 11:21:11 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49704 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729345AbgLJQVH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Dec 2020 11:21:07 -0500
-Received: from mail-pf1-x443.google.com (mail-pf1-x443.google.com [IPv6:2607:f8b0:4864:20::443])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E28B4C0613CF
-        for <linux-doc@vger.kernel.org>; Thu, 10 Dec 2020 08:20:26 -0800 (PST)
-Received: by mail-pf1-x443.google.com with SMTP id p4so4565852pfg.0
-        for <linux-doc@vger.kernel.org>; Thu, 10 Dec 2020 08:20:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=gOoShQoy2wQXY3FUgpRmJNV81X7XkJlcJzzP39yH8B4=;
-        b=LQDH7cHHyuvDFABjfdf9FCcJAaWrzP3BR5lBscpduE8+d/2f9mGS6XkaQKV0I60pqs
-         dNpfH8d0p1VK1cyAjKTaqlC5y3T808RJwN9j3zhRg/y9AEzktUHWw3XIMzzOnQGlkIMb
-         b4zsyh1x5M7w/lo/hNoZWTX6mjHZvhogI5SyMNajkwzm79JnfCyDV9rN3geEZVvVO0PE
-         QuKQKh6TyvxlTr7Gc0QAKbe5kd3kwVS0eqIVfQ5F6V17xzPNzcJ0t2jmgEzR1W50cgBC
-         t91uBNVmv8sHk1Lu39R8Dk2cdY6wbDcZ+k//sf9r0sxS5O3DnV4bQebIkJxjkwuBXsuK
-         +P6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=gOoShQoy2wQXY3FUgpRmJNV81X7XkJlcJzzP39yH8B4=;
-        b=L4jbirYlCIbGehjGYNtRWQ1gNhQlKrA3G4z5MqNFlRVyE3oJVwry0f9d7kFDaOo1gt
-         It/FOkqKx4WZBPIeIW9/ZD+1WzGFhLuyaThucE37Hh2jiNKeGJ6fi9uy8jfrwBJNwoOM
-         nlS/AZkNKih0pMrMZ2hFLqLARgnSxTomJDK0ATbKj2sKx6RACqjj0r4XTovYlRuqDTUO
-         6Zd2jsDBsAEyz88edgA3BihBHU3qzgYt2DrvtGuDaPNu7AsDmKPj6jW7z7tL1ps3Rs4s
-         QFMRt60Mv37AmPeSjXGst0qiQh06U9M9gGI1JHO/ARnMeUWljXGqIFloTIkiMCnrcSiQ
-         boRQ==
-X-Gm-Message-State: AOAM5336k5Kc3Q73C8HWIpzn2H/wozpvvHTkSJeLWU8cqCqTt2nydlVz
-        UsNRa+090QzricjGAULCHWHHKlwtr0/gpogJVaaFbA==
-X-Google-Smtp-Source: ABdhPJyFWG17IHNoAP1Thl1Hpjqvi91RsLyQZI9OQ0R4iCDqarpGl7qDkLFnU7RvxsSo3ZJbFWt8ym48Dt8Rp1jptMQ=
-X-Received: by 2002:a62:4e4e:0:b029:19e:aaab:8be with SMTP id
- c75-20020a624e4e0000b029019eaaab08bemr5287563pfb.59.1607617226427; Thu, 10
- Dec 2020 08:20:26 -0800 (PST)
+        id S2392394AbgLJQmN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 10 Dec 2020 11:42:13 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:26653 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S2391875AbgLJQmF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 10 Dec 2020 11:42:05 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1607618438;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=2N89GAWJh2oijgPtEoE6/Kndq4JEGomfZWV0U25Lc9I=;
+        b=Ux4n3MQu2Qn+QLjfNCABYRc6/JHIv9NE7dLEGjiJISq/ghZt5IfzHOPfGBbZs6XQnIO93m
+        76pZyDS/YLboXB+jfv6a7DyIduR4F9GXux5B5w9PVYv645IKH9/nOGB0W2nNMpqG6d1bJr
+        5DBtld3B+BvF/Ol8DUkPgwOUsBmEqUI=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-321-q2wahnQyOFCzTISxvSExEQ-1; Thu, 10 Dec 2020 11:40:35 -0500
+X-MC-Unique: q2wahnQyOFCzTISxvSExEQ-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 08BA8107ACE4;
+        Thu, 10 Dec 2020 16:40:31 +0000 (UTC)
+Received: from fuller.cnet (ovpn-112-7.gru2.redhat.com [10.97.112.7])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 3C95319718;
+        Thu, 10 Dec 2020 16:40:30 +0000 (UTC)
+Received: by fuller.cnet (Postfix, from userid 1000)
+        id CC8E441853FD; Thu, 10 Dec 2020 12:26:18 -0300 (-03)
+Date:   Thu, 10 Dec 2020 12:26:18 -0300
+From:   Marcelo Tosatti <mtosatti@redhat.com>
+To:     Thomas Gleixner <tglx@linutronix.de>
+Cc:     Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Paolo Bonzini <pbonzini@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Jim Mattson <jmattson@google.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Sean Christopherson <sean.j.christopherson@intel.com>,
+        open list <linux-kernel@vger.kernel.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        Joerg Roedel <joro@8bytes.org>, Borislav Petkov <bp@alien8.de>,
+        Shuah Khan <shuah@kernel.org>,
+        Andrew Jones <drjones@redhat.com>,
+        Oliver Upton <oupton@google.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Subject: Re: [PATCH v2 1/3] KVM: x86: implement KVM_{GET|SET}_TSC_STATE
+Message-ID: <20201210152618.GB23951@fuller.cnet>
+References: <20201203171118.372391-1-mlevitsk@redhat.com>
+ <20201203171118.372391-2-mlevitsk@redhat.com>
+ <20201207232920.GD27492@fuller.cnet>
+ <05aaabedd4aac7d3bce81d338988108885a19d29.camel@redhat.com>
+ <87sg8g2sn4.fsf@nanos.tec.linutronix.de>
+ <20201208181107.GA31442@fuller.cnet>
+ <875z5c2db8.fsf@nanos.tec.linutronix.de>
+ <20201209163434.GA22851@fuller.cnet>
+ <87r1nyzogg.fsf@nanos.tec.linutronix.de>
 MIME-Version: 1.0
-References: <20201210035526.38938-1-songmuchun@bytedance.com>
- <20201210035526.38938-13-songmuchun@bytedance.com> <375d6bad6bb37e3626f71bfabc20b384@suse.de>
- <CAMZfGtUQOXmuRumv48MYGCYh_JZn4bMPPz8HW2ExgTPCfFMMnw@mail.gmail.com>
- <20201210131608.GA7811@localhost.localdomain> <CAMZfGtX842XJC+C_OeptH4Ru_Q-qV1=5vCq_PgPJmuyTGKO_rg@mail.gmail.com>
-In-Reply-To: <CAMZfGtX842XJC+C_OeptH4Ru_Q-qV1=5vCq_PgPJmuyTGKO_rg@mail.gmail.com>
-From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Fri, 11 Dec 2020 00:19:50 +0800
-Message-ID: <CAMZfGtUH00bxOptddY0i2Zt2HJsy8C-QgN0aqXGOi=u4-f_MjQ@mail.gmail.com>
-Subject: Re: [External] Re: [PATCH v8 12/12] mm/hugetlb: Optimize the code
- with the help of the compiler
-To:     Oscar Salvador <osalvador@suse.de>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org,
-        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
-        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
-        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
-        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
-        anshuman.khandual@arm.com, jroedel@suse.de,
-        Mina Almasry <almasrymina@google.com>,
-        David Rientjes <rientjes@google.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Michal Hocko <mhocko@suse.com>,
-        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
-        David Hildenbrand <david@redhat.com>,
-        Xiongchun duan <duanxiongchun@bytedance.com>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87r1nyzogg.fsf@nanos.tec.linutronix.de>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Dec 10, 2020 at 9:29 PM Muchun Song <songmuchun@bytedance.com> wrote:
->
-> On Thu, Dec 10, 2020 at 9:16 PM Oscar Salvador <osalvador@suse.de> wrote:
+On Wed, Dec 09, 2020 at 09:58:23PM +0100, Thomas Gleixner wrote:
+> Marcelo,
+> 
+> On Wed, Dec 09 2020 at 13:34, Marcelo Tosatti wrote:
+> > On Tue, Dec 08, 2020 at 10:33:15PM +0100, Thomas Gleixner wrote:
+> >> On Tue, Dec 08 2020 at 15:11, Marcelo Tosatti wrote:
+> >> > max_cycles overflow. Sent a message to Maxim describing it.
+> >> 
+> >> Truly helpful. Why the hell did you not talk to me when you ran into
+> >> that the first time?
 > >
-> > On Thu, Dec 10, 2020 at 08:14:18PM +0800, Muchun Song wrote:
-> > > Yeah, you are right. But if we do this check can make the code simple.
-> > >
-> > > For example, here is a code snippet.
-> > >
-> > > void func(void)
-> > > {
-> > >         if (free_vmemmap_pages_per_hpage())
-> > >                 return;
-> > >         /* Do something */
-> > > }
-> > >
-> > > With this patch, the func will be optimized to null when is_power_of_2
-> > > returns false.
-> > >
-> > > void func(void)
-> > > {
-> > > }
-> > >
-> > > Without this patch, the compiler cannot do this optimization.
+> > Because 
 > >
-> > Ok, I misread the changelog.
-> >
-> > So, then is_hugetlb_free_vmemmap_enabled, free_huge_page_vmemmap,
-> > free_vmemmap_pages_per_hpage and hugetlb_vmemmap_init are optimized
-> > out, right?
->
-> Yes, that's right. I have disassembled to make sure of this. Thanks.
+> > 1) Users wanted CLOCK_BOOTTIME to stop counting while the VM 
+> > is paused (so we wanted to stop guest clock when VM is paused anyway).
+> 
+> How is that supposed to work w/o the guest kernels help if you have to
+> keep clock realtime up to date? 
 
-Hi Oscar,
+Upon VM resume, we notify NTP daemon in the guest to sync realtime
+clock.
+> 
+> > 2) The solution to inject NMIs to the guest seemed overly
+> > complicated.
+> 
+> Why do you need NMIs?
+> 
+> All you need is a way to communicate to the guest that it should prepare
+> for clock madness to happen. Whether that's an IPI or a bit in a
+> hyperpage which gets checked during the update of the guest timekeeping
+> does not matter at all.
+> 
+> But you certainly do not need an NMI because there is nothing useful you
+> can do within an NMI.
+> 
+> Thanks,
+> 
+>         tglx
 
-Because this is an optimization for code, I leave it in this
-separate patch. Do you still suggest squash this with
-patch#10? Thanks.
-
->
-> >
-> > --
-> > Oscar Salvador
-> > SUSE L3
->
->
->
-> --
-> Yours,
-> Muchun
-
-
-
--- 
-Yours,
-Muchun
