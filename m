@@ -2,171 +2,138 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 11D732D7779
-	for <lists+linux-doc@lfdr.de>; Fri, 11 Dec 2020 15:11:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EDDBB2D796C
+	for <lists+linux-doc@lfdr.de>; Fri, 11 Dec 2020 16:33:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726723AbgLKOKR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 11 Dec 2020 09:10:17 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41580 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2390375AbgLKOKA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Dec 2020 09:10:00 -0500
-Received: from mail-pl1-x644.google.com (mail-pl1-x644.google.com [IPv6:2607:f8b0:4864:20::644])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 485BCC061794
-        for <linux-doc@vger.kernel.org>; Fri, 11 Dec 2020 06:09:20 -0800 (PST)
-Received: by mail-pl1-x644.google.com with SMTP id u4so4623322plr.12
-        for <linux-doc@vger.kernel.org>; Fri, 11 Dec 2020 06:09:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=SJUsAyZid8ZpUCO1A6kJYtQfMdu1p6LphB094f0w3bg=;
-        b=Aj8ew0Hu3yHmTNKkdhjZ+X6b43SrHaczF4qZhuusrFL6cDfM/7VhTojRP/QDHzTBgT
-         iDuj+C/tHmdYwmm3ovc+i3N17HKVh7cYSnCelcgWY6O35mMi2Hu2VjqHvqEp96zhjev4
-         bZF/f0upjqsusL81IM5qMfVkpPR8mmnU4STGZxHf6Lw68FsEjUq+PRoTZ1HtyxQysEyG
-         fsawhedIjAPMW9279hsd3DFuGCQ+oKgIdwYrTdcM3PcFdVjVktEb/zZXpIwfIbkWAYOh
-         ErnmdqTBkSBXpel99roVOLdClBLUeF3AUteTb4o7wLJdhlLKA+6IYVvPF3py6NLkTwBB
-         5WEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=SJUsAyZid8ZpUCO1A6kJYtQfMdu1p6LphB094f0w3bg=;
-        b=DOwiOfhcosSE2t/llOAm9PSan0FE9sBadNz4uPm/LOaHlv1GA4vjtqvwzjqkwSofXp
-         8Ew9pLpUKVGXJU41RV65FbBAbkHpVl+mbIFfppfEt0cs4T/1u226FgYFTQmz1M9RhVZL
-         Bso0NFcwNRn914OGAqf10BMlw4Px6NFltb2Vp/ZM/XsTceZNgNbxLx3uwm2rq9Bj6M0L
-         tvRTS84i9uss5mP8nB2lr5yVr9rVma5AoSLX5NRwIpaKfBanKmLQXwvAdT8aJ4uV5qy0
-         envqvcTsJaOqJ9ArZwfBdB2sIaBIyxqIR9d5jyAjM/Ht1iSOyEOZxoGStNRkb8lOD0tp
-         AIvw==
-X-Gm-Message-State: AOAM530Y4d4ptkQHTptxp1kXHjyxUCylS6Pzv9fgY+grb+BaYyv1fnfw
-        xt5zEPDgHkQehsyvLfI3zc/J9qS3oHkrpqaf5S90lA==
-X-Google-Smtp-Source: ABdhPJwrLNBJOldmJmyWaGlf9L4YnEd4a4zJ98KF8M3D+Gy0rq+4D6xov12z8j4f0zvZiLabKSGqTiyYXwKPUSSjrQM=
-X-Received: by 2002:a17:902:76c8:b029:d9:d6c3:357d with SMTP id
- j8-20020a17090276c8b02900d9d6c3357dmr11055737plt.34.1607695759816; Fri, 11
- Dec 2020 06:09:19 -0800 (PST)
-MIME-Version: 1.0
-References: <20201210035526.38938-1-songmuchun@bytedance.com>
- <20201210035526.38938-8-songmuchun@bytedance.com> <20201211133624.GA27050@linux>
-In-Reply-To: <20201211133624.GA27050@linux>
-From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Fri, 11 Dec 2020 22:08:43 +0800
-Message-ID: <CAMZfGtXFtzJBifOrB2XdCrpazGP5MDuU3mp1Uag+TGLE3w49yw@mail.gmail.com>
-Subject: Re: [External] Re: [PATCH v8 07/12] mm/hugetlb: Set the PageHWPoison
- to the raw error page
-To:     Oscar Salvador <osalvador@suse.de>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org,
-        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
-        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
-        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
-        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
-        anshuman.khandual@arm.com, jroedel@suse.de,
-        Mina Almasry <almasrymina@google.com>,
-        David Rientjes <rientjes@google.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Michal Hocko <mhocko@suse.com>,
-        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
-        David Hildenbrand <david@redhat.com>,
-        Xiongchun duan <duanxiongchun@bytedance.com>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>
+        id S1728095AbgLKPbx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 11 Dec 2020 10:31:53 -0500
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:55800 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S2392580AbgLKPbY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 11 Dec 2020 10:31:24 -0500
+Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
+        by mx0b-001b2d01.pphosted.com (8.16.0.42/8.16.0.42) with SMTP id 0BBF1lBh032965;
+        Fri, 11 Dec 2020 10:29:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=message-id : subject :
+ from : to : cc : date : in-reply-to : references : content-type :
+ mime-version : content-transfer-encoding; s=pp1;
+ bh=dE77lBifutitPgjNq+uJQtv07f69I9KMEub6+IAdnRE=;
+ b=pbBH/5aHPByyVd73OZfxHOGPzCGuoL3RAF6Tw3fy/0I72vTWENfSuNhDocYek2jJhnmI
+ VkeYSZc31BgQaVDMk1Td2oPtU9+go5C7RXyA0xddPNxPT85qV0kl57plxBxBesGTfIqS
+ sz7lVH8Cj4sqyXF4DexvatUl4BovS2VRGrlM/Ys/Xh2+80gesrZlMjpJ2eQYUXEJwK4w
+ o2mzKLmz87j8xfHx4NZARdpD8rVKj72K9+H3QtpyRtveGPWU9l8qGQbH/hpoif10JVHX
+ NIXXqs9Q3M4KiwRcC75Us9Y6Bk0+SijmcJUnhQ13QCky6Tp5iLdi8m4LkSAQ/i3J9AtY /g== 
+Received: from pps.reinject (localhost [127.0.0.1])
+        by mx0b-001b2d01.pphosted.com with ESMTP id 35catw9ahq-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 11 Dec 2020 10:29:18 -0500
+Received: from m0098420.ppops.net (m0098420.ppops.net [127.0.0.1])
+        by pps.reinject (8.16.0.36/8.16.0.36) with SMTP id 0BBF2fWP038032;
+        Fri, 11 Dec 2020 10:29:18 -0500
+Received: from ppma06ams.nl.ibm.com (66.31.33a9.ip4.static.sl-reverse.com [169.51.49.102])
+        by mx0b-001b2d01.pphosted.com with ESMTP id 35catw9afx-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 11 Dec 2020 10:29:18 -0500
+Received: from pps.filterd (ppma06ams.nl.ibm.com [127.0.0.1])
+        by ppma06ams.nl.ibm.com (8.16.0.42/8.16.0.42) with SMTP id 0BBFSfN8006184;
+        Fri, 11 Dec 2020 15:29:15 GMT
+Received: from b06cxnps4076.portsmouth.uk.ibm.com (d06relay13.portsmouth.uk.ibm.com [9.149.109.198])
+        by ppma06ams.nl.ibm.com with ESMTP id 3581fhq6wa-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Fri, 11 Dec 2020 15:29:15 +0000
+Received: from d06av22.portsmouth.uk.ibm.com (d06av22.portsmouth.uk.ibm.com [9.149.105.58])
+        by b06cxnps4076.portsmouth.uk.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 0BBFTCGL16646498
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Fri, 11 Dec 2020 15:29:12 GMT
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 1B4E24C052;
+        Fri, 11 Dec 2020 15:29:12 +0000 (GMT)
+Received: from d06av22.portsmouth.uk.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id C991C4C046;
+        Fri, 11 Dec 2020 15:29:06 +0000 (GMT)
+Received: from sig-9-65-201-46.ibm.com (unknown [9.65.201.46])
+        by d06av22.portsmouth.uk.ibm.com (Postfix) with ESMTP;
+        Fri, 11 Dec 2020 15:29:06 +0000 (GMT)
+Message-ID: <16a279eaf2c209345044c3b4e1e57e2878798940.camel@linux.ibm.com>
+Subject: Re: [PATCH v8 3/4] doc: trusted-encrypted: updates with TEE as a
+ new trust source
+From:   Mimi Zohar <zohar@linux.ibm.com>
+To:     Jarkko Sakkinen <jarkko@kernel.org>
+Cc:     sumit.garg@linaro.org, Elaine Palmer <erpalmerny@gmail.com>,
+        jarkko.sakkinen@linux.intel.com, jejb@linux.ibm.com,
+        dhowells@redhat.com, jens.wiklander@linaro.org, corbet@lwn.net,
+        jmorris@namei.org, serge@hallyn.com, casey@schaufler-ca.com,
+        janne.karhunen@gmail.com, daniel.thompson@linaro.org,
+        Markus.Wamser@mixed-mode.de, lhinds@redhat.com,
+        keyrings@vger.kernel.org, linux-integrity@vger.kernel.org,
+        linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        op-tee@lists.trustedfirmware.org,
+        Kenneth Goldman <kgoldman@us.ibm.com>, gcwilson@linux.ibm.com,
+        zgu@us.ibm.com, stefanb@us.ibm.com, NAYNA JAIN1 <naynjain@ibm.com>,
+        Zohargshu Gu <zgu@us.ibm.com>
+Date:   Fri, 11 Dec 2020 10:29:05 -0500
+In-Reply-To: <20201211103627.GB12091@kernel.org>
+References: <1604419306-26105-1-git-send-email-sumit.garg@linaro.org>
+         <1604419306-26105-4-git-send-email-sumit.garg@linaro.org>
+         <81A6B61D-3811-4957-B270-52AE5FA6DE4F@gmail.com>
+         <20201204153037.GC4922@kernel.org>
+         <ba6cd934bf7460cf6e9fc101a759a63fdd4e6e9b.camel@linux.ibm.com>
+         <20201208174906.GA58572@kernel.org>
+         <b2465d27f3683331019c5a9b6d0856304d992a0a.camel@linux.ibm.com>
+         <20201211103627.GB12091@kernel.org>
 Content-Type: text/plain; charset="UTF-8"
+X-Mailer: Evolution 3.28.5 (3.28.5-12.el8) 
+Mime-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-TM-AS-GCONF: 00
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.343,18.0.737
+ definitions=2020-12-11_02:2020-12-11,2020-12-11 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 lowpriorityscore=0
+ suspectscore=0 adultscore=0 malwarescore=0 mlxlogscore=999 bulkscore=0
+ clxscore=1015 impostorscore=0 mlxscore=0 phishscore=0 spamscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2012110095
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Dec 11, 2020 at 9:36 PM Oscar Salvador <osalvador@suse.de> wrote:
->
-> On Thu, Dec 10, 2020 at 11:55:21AM +0800, Muchun Song wrote:
-> > +static inline void subpage_hwpoison_deliver(struct hstate *h, struct page *head)
-> > +{
-> > +     struct page *page = head;
-> > +
-> > +     if (!free_vmemmap_pages_per_hpage(h))
-> > +             return;
-> > +
-> > +     if (PageHWPoison(head))
-> > +             page = head + page_private(head + 4);
-> > +
-> > +     /*
-> > +      * Move PageHWPoison flag from head page to the raw error page,
-> > +      * which makes any subpages rather than the error page reusable.
-> > +      */
-> > +     if (page != head) {
-> > +             SetPageHWPoison(page);
-> > +             ClearPageHWPoison(head);
-> > +     }
-> > +}
->
-> I would make the names coherent.
-> I am not definitely goot at names, but something like:
-> hwpoison_subpage_{foo,bar} looks better.
+On Fri, 2020-12-11 at 12:36 +0200, Jarkko Sakkinen wrote:
+> On Wed, Dec 09, 2020 at 11:50:19AM -0500, Mimi Zohar wrote:
+> > On Tue, 2020-12-08 at 19:49 +0200, Jarkko Sakkinen wrote:
+> > > On Tue, Dec 08, 2020 at 10:02:57AM -0500, Mimi Zohar wrote:
+> > 
+> > > > > Please also use a proper email client and split your paragraphs into
+> > > > > at most 80 character lines with new line characters when writing email.
+> > > > > I prefer to use 72 character line length so that there's some space
+> > > > > for longer email threads.
+> > > > 
+> > > > Sure, we'll re-post the suggested documentation changes/additions.
+> > > > 
+> > > 
+> > > So. Wouldn't it be a better idea to post a patch that Sumit could
+> > > squash to his (and add co-developed-by tag)?
+> > 
+> > I just posted it on Elaine's behalf.
+> >   
+> 
+> I responded. It's good that this feedback came as I think the whole
+> thing does not have the correct label for it.
 
-It's better than mine. Thank you.
+Every HW is going to want to add "trusted keys" support.   We've seen
+this with Udit Agarwal's "secure keys" proposal for NXP CAAM crypto HW
+accelerator.  If we go down this route to extend "trusted keys" to
+support specific implementations like this one, I strongly recommend
+requiring an accompaying high-level threat model.  This is similar to
+how new LSMs need to comply with Documentation/security/lsm-
+development.rst.
 
->
-> Also, could not subpage_hwpoison_deliver be rewritten like:
->
->   static inline void subpage_hwpoison_deliver(struct hstate *h, struct page *head)
->   {
->        struct page *page;
->
->        if (!PageHWPoison(head) || !free_vmemmap_pages_per_hpage(h))
->                return;
->
->        page = head + page_private(head + 4);
->        /*
->         * Move PageHWPoison flag from head page to the raw error page,
->         * which makes any subpages rather than the error page reusable.
->         */
->        if (page != head) {
->                SetPageHWPoison(page);
->                ClearPageHWPoison(head);
->        }
->   }
->
-> I think it is better code-wise.
+Based on Elaine's work with OCP, an example of a high-level threat
+model is "Common Security Threats v1.0” (
+https://www.opencompute.org/documents/common-security-threats-notes-1-pdf
+ ).
 
-Will do. Thank you.
+thanks,
 
->
-> > +      * Move PageHWPoison flag from head page to the raw error page,
-> > +      * which makes any subpages rather than the error page reusable.
-> > +      */
-> > +     if (page != head) {
-> > +             SetPageHWPoison(page);
-> > +             ClearPageHWPoison(head);
-> > +     }
->
-> I would put this in an else-if above:
->
->         if (free_vmemmap_pages_per_hpage(h)) {
->                 set_page_private(head + 4, page - head);
->                 return;
->         } else if (page != head) {
->                 SetPageHWPoison(page);
->                 ClearPageHWPoison(head);
->         }
->
-> or will we lose the optimization in case free_vmemmap_pages_per_hpage gets compiled out?
->
+Mimi
 
-Either is OK. The compiler will help us optimize the code when
-free_vmemmap_pages_per_hpage always returns false.
-
-Thanks for your suggestions. :-)
-
->
-> --
-> Oscar Salvador
-> SUSE L3
-
-
-
--- 
-Yours,
-Muchun
