@@ -2,103 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 200962DACAB
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Dec 2020 13:06:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CCF902DACB1
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Dec 2020 13:06:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729126AbgLOMDo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Dec 2020 07:03:44 -0500
-Received: from smtp-fw-2101.amazon.com ([72.21.196.25]:6622 "EHLO
-        smtp-fw-2101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729110AbgLOMDm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Dec 2020 07:03:42 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1608033822; x=1639569822;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=ZcmRdL/x2C6IXdMdzrWoHX+6NFPKIIL3q0NR1NXFeQ4=;
-  b=Y+puxdfbWDOrHGxGcYg9ObvdiwYwuR7reEs3i15jx1oY2CjlD2DgCjJQ
-   VhWV991Bt6mu40KUlX/7r/AyhaQJrAUakhNvmYb3FkcXGucTi47NvOz2n
-   96QWVVo3XVcs+YywAcCCM++1NcDcrAnkWabZlCqco/4ahmmvGVPGgAYNJ
-   8=;
-X-IronPort-AV: E=Sophos;i="5.78,420,1599523200"; 
-   d="scan'208";a="69200030"
-Received: from iad12-co-svc-p1-lb1-vlan3.amazon.com (HELO email-inbound-relay-1a-821c648d.us-east-1.amazon.com) ([10.43.8.6])
-  by smtp-border-fw-out-2101.iad2.amazon.com with ESMTP; 15 Dec 2020 12:02:55 +0000
-Received: from EX13D31EUA001.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
-        by email-inbound-relay-1a-821c648d.us-east-1.amazon.com (Postfix) with ESMTPS id 353FAA07DB;
-        Tue, 15 Dec 2020 12:02:42 +0000 (UTC)
-Received: from u3f2cd687b01c55.ant.amazon.com (10.43.162.252) by
- EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Tue, 15 Dec 2020 12:02:26 +0000
-From:   SeongJae Park <sjpark@amazon.com>
-To:     <akpm@linux-foundation.org>
-CC:     SeongJae Park <sjpark@amazon.de>, <Jonathan.Cameron@Huawei.com>,
-        <aarcange@redhat.com>, <acme@kernel.org>,
-        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
-        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
-        <brendanhiggins@google.com>, <cai@lca.pw>,
-        <colin.king@canonical.com>, <corbet@lwn.net>, <david@redhat.com>,
-        <dwmw@amazon.com>, <elver@google.com>, <fan.du@intel.com>,
-        <foersleo@amazon.de>, <gthelen@google.com>, <irogers@google.com>,
-        <jolsa@redhat.com>, <kirill@shutemov.name>, <mark.rutland@arm.com>,
-        <mgorman@suse.de>, <minchan@kernel.org>, <mingo@redhat.com>,
-        <namhyung@kernel.org>, <peterz@infradead.org>,
-        <rdunlap@infradead.org>, <riel@surriel.com>, <rientjes@google.com>,
-        <rostedt@goodmis.org>, <rppt@kernel.org>, <sblbir@amazon.com>,
-        <shakeelb@google.com>, <shuah@kernel.org>, <sj38.park@gmail.com>,
-        <snu@amazon.de>, <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
-        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
-        <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
-        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>
-Subject: [PATCH v23 15/15] MAINTAINERS: Update for DAMON
-Date:   Tue, 15 Dec 2020 12:54:48 +0100
-Message-ID: <20201215115448.25633-16-sjpark@amazon.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201215115448.25633-1-sjpark@amazon.com>
-References: <20201215115448.25633-1-sjpark@amazon.com>
+        id S1729110AbgLOMFs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Dec 2020 07:05:48 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:32246 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1728912AbgLOMFr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Dec 2020 07:05:47 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1608033860;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         in-reply-to:in-reply-to:references:references;
+        bh=BMM7E9TuXF5eeNr/08yqebR2Dt2ctyis2zH1H/npDvk=;
+        b=K7+s+KnfBo4v9RnmU7i3mMOiTvTMfyQizYKVn1tFt2R5mY2j+JKP9zUoVK9P+yvR2ViePZ
+        9U1c8BKx7wHGYu+a0aaetZUJL36W3LafwkNVp7y/1AbR8BjDyTjNgG4MSnlwg/49QTNXCD
+        HWJyaAOCWKmA3rBs0nCvjDoZ+AYOZ4w=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-282-YS-IJu5KMfS3eRNExERwJw-1; Tue, 15 Dec 2020 07:04:16 -0500
+X-MC-Unique: YS-IJu5KMfS3eRNExERwJw-1
+Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 551CF180A096;
+        Tue, 15 Dec 2020 12:04:14 +0000 (UTC)
+Received: from T590 (ovpn-12-182.pek2.redhat.com [10.72.12.182])
+        by smtp.corp.redhat.com (Postfix) with ESMTPS id 40F5019C44;
+        Tue, 15 Dec 2020 12:04:01 +0000 (UTC)
+Date:   Tue, 15 Dec 2020 20:03:57 +0800
+From:   Ming Lei <ming.lei@redhat.com>
+To:     Pavel Begunkov <asml.silence@gmail.com>
+Cc:     linux-block@vger.kernel.org, Jens Axboe <axboe@kernel.dk>,
+        Christoph Hellwig <hch@infradead.org>,
+        Matthew Wilcox <willy@infradead.org>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        "Darrick J . Wong" <darrick.wong@oracle.com>,
+        "Martin K . Petersen" <martin.petersen@oracle.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-xfs@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org,
+        linux-kernel@vger.kernel.org, target-devel@vger.kernel.org,
+        linux-scsi@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH v1 0/6] no-copy bvec
+Message-ID: <20201215120357.GA1798021@T590>
+References: <cover.1607976425.git.asml.silence@gmail.com>
+ <20201215014114.GA1777020@T590>
+ <103235c1-e7d0-0b55-65d0-013d1a09304e@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.43.162.252]
-X-ClientProxiedBy: EX13D33UWC002.ant.amazon.com (10.43.162.11) To
- EX13D31EUA001.ant.amazon.com (10.43.165.15)
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <103235c1-e7d0-0b55-65d0-013d1a09304e@gmail.com>
+X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: SeongJae Park <sjpark@amazon.de>
+On Tue, Dec 15, 2020 at 11:14:20AM +0000, Pavel Begunkov wrote:
+> On 15/12/2020 01:41, Ming Lei wrote:
+> > On Tue, Dec 15, 2020 at 12:20:19AM +0000, Pavel Begunkov wrote:
+> >> Instead of creating a full copy of iter->bvec into bio in direct I/O,
+> >> the patchset makes use of the one provided. It changes semantics and
+> >> obliges users of asynchronous kiocb to track bvec lifetime, and [1/6]
+> >> converts the only place that doesn't.
+> > 
+> > Just think of one corner case: iov_iter(BVEC) may pass bvec table with zero
+> > length bvec, which may not be supported by block layer or driver, so
+> > this patchset has to address this case first.
+> 
+> The easiest for me would be to fallback to copy if there are zero bvecs,
+> e.g. finding such during iov_iter_alignment(), but do we know from where
+> zero bvecs can came? As it's internals we may want to forbid them if
+> there is not too much hassle.
 
-This commit updates MAINTAINERS file for DAMON related files.
+You may find clue from the following link:
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- MAINTAINERS | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
+https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2262077.html
 
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 281de213ef47..88b2125b0f07 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -4872,6 +4872,18 @@ F:	net/ax25/ax25_out.c
- F:	net/ax25/ax25_timer.c
- F:	net/ax25/sysctl_net_ax25.c
- 
-+DATA ACCESS MONITOR
-+M:	SeongJae Park <sjpark@amazon.de>
-+L:	linux-mm@kvack.org
-+S:	Maintained
-+F:	Documentation/admin-guide/mm/damon/*
-+F:	Documentation/vm/damon/*
-+F:	include/linux/damon.h
-+F:	include/trace/events/damon.h
-+F:	mm/damon/*
-+F:	tools/damon/*
-+F:	tools/testing/selftests/damon/*
-+
- DAVICOM FAST ETHERNET (DMFE) NETWORK DRIVER
- L:	netdev@vger.kernel.org
- S:	Orphan
--- 
-2.17.1
+
+Thanks,
+Ming
 
