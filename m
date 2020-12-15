@@ -2,110 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 86DD52DB265
-	for <lists+linux-doc@lfdr.de>; Tue, 15 Dec 2020 18:20:27 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5924A2DB29C
+	for <lists+linux-doc@lfdr.de>; Tue, 15 Dec 2020 18:32:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725973AbgLORT0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 15 Dec 2020 12:19:26 -0500
-Received: from guitar.tcltek.co.il ([192.115.133.116]:39062 "EHLO
-        mx.tkos.co.il" rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725850AbgLORT0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 15 Dec 2020 12:19:26 -0500
-Received: from tarshish.tkos.co.il (unknown [10.0.8.2])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
-        (No client certificate requested)
-        by mx.tkos.co.il (Postfix) with ESMTPS id C66614409D4;
-        Tue, 15 Dec 2020 19:18:43 +0200 (IST)
-From:   Baruch Siach <baruch@tkos.co.il>
-To:     "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        Baruch Siach <baruch@tkos.co.il>
-Subject: [PATCH net] docs: netdev-FAQ: add missing underlines to questions
-Date:   Tue, 15 Dec 2020 19:18:19 +0200
-Message-Id: <ccd6e8b9f1d87b683a0759e8954d03310cb0c09f.1608052699.git.baruch@tkos.co.il>
-X-Mailer: git-send-email 2.29.2
+        id S1730097AbgLOR3w (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 15 Dec 2020 12:29:52 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41978 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730449AbgLOR3p (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 15 Dec 2020 12:29:45 -0500
+Received: from mail-ed1-x52e.google.com (mail-ed1-x52e.google.com [IPv6:2a00:1450:4864:20::52e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 57E6AC0617A6
+        for <linux-doc@vger.kernel.org>; Tue, 15 Dec 2020 09:29:05 -0800 (PST)
+Received: by mail-ed1-x52e.google.com with SMTP id k4so21922463edl.0
+        for <linux-doc@vger.kernel.org>; Tue, 15 Dec 2020 09:29:05 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen.com; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=VeOwIZnD1d1CtAtOQLOWOLhM2A2wCecJ+qK1dyLboTU=;
+        b=I96T4pSs/iDVCNO7aKjW2AuZwWdxEU4n91uXkED0FYIBHx0CVqEOOvQXv4kyHisS+A
+         gnUtMYosW3bZnF2XVpR+v4DZTcvdLJC3svqRUoIJYTCHB5iE37EAGzkWAWhYaQpy3/Sv
+         m96dzGoXG6KSM79QFPjc6zvwIu6CJA7IXqKG0ZnS0D/3pUm8IbEWu46Zs+kc1ktqd4Bw
+         gbaxJoc/+fwc7jzPPY1ZRrYpVboVgiSrJ2HG0KqeEI6jSQhXxYxow+OQSOeJVd3wBwza
+         h1uBgBabe/R5P5ARfZ9aOAcrr7JWNJOcSYdiOSlzuB7XwH7wZjoKzJKfbwV7tYH66HKG
+         uVcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=VeOwIZnD1d1CtAtOQLOWOLhM2A2wCecJ+qK1dyLboTU=;
+        b=E5ZlFWs13EbOHVnSK66mYuRqCD/oHoykx7oKUlNqPkAbilf4NyBL38HyrWBrAN6gvk
+         dhclTZk7lbSIyYbjAiPq5rOPnq4617CJA++KHSb/B1JzUsbZEOnWcPBxI9cRbIlEBoLc
+         +wm5nqTeMP1NVqjcqe80v1iBMmpk6C6ibJxsKIEf74Uvld9vgjIyGUljQ4eFH8ipljwA
+         HfDcQfYP5MY7jC7onnWIMJ/VbMaI9l1zTgsMeVPIdbnz3v6vMcMig825c90uC5FWEVKI
+         S5Oqq6gawRy6SDkFRdY7FmRHReCAukhrWYR3QJNdoAmGCbhCpmto6+sA2gWPpbuCVoZ2
+         2YOQ==
+X-Gm-Message-State: AOAM531/vIBHJ2VJ3e7vkaBlwoU3u7jlHChk7VjSxp/I3hpug6tRa/Qm
+        pKHVYbceHfV+Wf97dq8CmU8kE1jIWp0M6e7McKGDxA==
+X-Google-Smtp-Source: ABdhPJwO7x4LC0rkTRzmFQ3G3z7COZCV+iAl/I4ipG0U3kkQDJA750UT3AF9UiLPI5TShsk8sR9viFmJkSFFwZNTOsM=
+X-Received: by 2002:a50:f404:: with SMTP id r4mr3451244edm.62.1608053343982;
+ Tue, 15 Dec 2020 09:29:03 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20201211202140.396852-1-pasha.tatashin@soleen.com>
+ <20201211202140.396852-5-pasha.tatashin@soleen.com> <20201214141715.GF32193@dhcp22.suse.cz>
+ <CA+CK2bCWkPDw-Aif6iXHq15Dpa+50hmrcAk_LpMCMk30zY5aFw@mail.gmail.com> <20201215082748.GL32193@dhcp22.suse.cz>
+In-Reply-To: <20201215082748.GL32193@dhcp22.suse.cz>
+From:   Pavel Tatashin <pasha.tatashin@soleen.com>
+Date:   Tue, 15 Dec 2020 12:28:28 -0500
+Message-ID: <CA+CK2bA3B=Awh2BK=jwZX39PTeQ9=O5tD0ohNCyL_Lf3LQwfog@mail.gmail.com>
+Subject: Re: [PATCH v3 4/6] mm: honor PF_MEMALLOC_PIN for all movable pages
+To:     Michal Hocko <mhocko@suse.com>
+Cc:     LKML <linux-kernel@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        David Hildenbrand <david@redhat.com>,
+        Oscar Salvador <osalvador@suse.de>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Sasha Levin <sashal@kernel.org>,
+        Tyler Hicks <tyhicks@linux.microsoft.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>, mike.kravetz@oracle.com,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ingo Molnar <mingo@redhat.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Mel Gorman <mgorman@suse.de>,
+        Matthew Wilcox <willy@infradead.org>,
+        David Rientjes <rientjes@google.com>,
+        John Hubbard <jhubbard@nvidia.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Signed-off-by: Baruch Siach <baruch@tkos.co.il>
----
- Documentation/networking/netdev-FAQ.rst | 18 +++++++++++-------
- 1 file changed, 11 insertions(+), 7 deletions(-)
+> Fair enough. I still dislike cma being called out explicitly because
+> that is slightly misleading as well. gpf_to_alloc_flags would be more
+> explicit I believe. But I do not want to bikeshed this to death.
 
-diff --git a/Documentation/networking/netdev-FAQ.rst b/Documentation/networking/netdev-FAQ.rst
-index 4b9ed5874d5a..4ef90fe26640 100644
---- a/Documentation/networking/netdev-FAQ.rst
-+++ b/Documentation/networking/netdev-FAQ.rst
-@@ -82,6 +82,7 @@ focus for ``net`` is on stabilization and bug fixes.
- Finally, the vX.Y gets released, and the whole cycle starts over.
- 
- Q: So where are we now in this cycle?
-+-------------------------------------
- 
- Load the mainline (Linus) page here:
- 
-@@ -108,6 +109,7 @@ with.
- Q: I sent a patch and I'm wondering what happened to it?
- --------------------------------------------------------
- Q: How can I tell whether it got merged?
-+----------------------------------------
- A: Start by looking at the main patchworks queue for netdev:
- 
-   https://patchwork.kernel.org/project/netdevbpf/list/
-@@ -124,8 +126,8 @@ bottom of the priority list.
- 
- Q: I submitted multiple versions of the patch series
- ----------------------------------------------------
--Q: should I directly update patchwork for the previous versions of these
--patch series?
-+Q: should I directly update patchwork for the previous versions of these patch series?
-+--------------------------------------------------------------------------------------
- A: No, please don't interfere with the patch status on patchwork, leave
- it to the maintainer to figure out what is the most recent and current
- version that should be applied. If there is any doubt, the maintainer
-@@ -171,8 +173,8 @@ simply clone the repo, and then git grep the mainline commit ID, e.g.
- 
- Q: I see a network patch and I think it should be backported to stable.
- -----------------------------------------------------------------------
--Q: Should I request it via stable@vger.kernel.org like the references in
--the kernel's Documentation/process/stable-kernel-rules.rst file say?
-+Q: Should I request it via stable@vger.kernel.org like the references in the kernel's Documentation/process/stable-kernel-rules.rst file say?
-+---------------------------------------------------------------------------------------------------------------------------------------------
- A: No, not for networking.  Check the stable queues as per above first
- to see if it is already queued.  If not, then send a mail to netdev,
- listing the upstream commit ID and why you think it should be a stable
-@@ -192,8 +194,8 @@ be avoided.
- 
- Q: I have created a network patch and I think it should be backported to stable.
- --------------------------------------------------------------------------------
--Q: Should I add a Cc: stable@vger.kernel.org like the references in the
--kernel's Documentation/ directory say?
-+Q: Should I add a Cc: stable@vger.kernel.org like the references in the kernel's Documentation/ directory say?
-+--------------------------------------------------------------------------------------------------------------
- A: No.  See above answer.  In short, if you think it really belongs in
- stable, then ensure you write a decent commit log that describes who
- gets impacted by the bug fix and how it manifests itself, and when the
-@@ -234,12 +236,14 @@ it is requested that you make it look like this::
- Q: I am working in existing code that has the former comment style and not the latter.
- --------------------------------------------------------------------------------------
- Q: Should I submit new code in the former style or the latter?
-+--------------------------------------------------------------
- A: Make it the latter style, so that eventually all code in the domain
- of netdev is of this format.
- 
- Q: I found a bug that might have possible security implications or similar.
- ---------------------------------------------------------------------------
--Q: Should I mail the main netdev maintainer off-list?**
-+Q: Should I mail the main netdev maintainer off-list?
-+-----------------------------------------------------
- A: No. The current netdev maintainer has consistently requested that
- people use the mailing lists and not reach out directly.  If you aren't
- OK with that, then perhaps consider mailing security@kernel.org or
--- 
-2.29.2
+Sounds good, I renamed it to gpf_to_alloc_flags.
 
+Thank you,
+Pasha
