@@ -2,35 +2,34 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 26E4B2DBCF7
-	for <lists+linux-doc@lfdr.de>; Wed, 16 Dec 2020 09:48:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E4FB42DBDD4
+	for <lists+linux-doc@lfdr.de>; Wed, 16 Dec 2020 10:44:24 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726181AbgLPIrz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 16 Dec 2020 03:47:55 -0500
-Received: from smtp-fw-33001.amazon.com ([207.171.190.10]:32468 "EHLO
-        smtp-fw-33001.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726155AbgLPIrz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Dec 2020 03:47:55 -0500
+        id S1725987AbgLPJoK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 16 Dec 2020 04:44:10 -0500
+Received: from smtp-fw-9103.amazon.com ([207.171.188.200]:44112 "EHLO
+        smtp-fw-9103.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725889AbgLPJoJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 16 Dec 2020 04:44:09 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
   d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1608108473; x=1639644473;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   references:mime-version;
-  bh=XEjhfcWOE6sCpVcYRXwQLFfPVP/yv/3hCxGv89889MM=;
-  b=De5km9mMjCj3dP5GYZlYy4r6rDaZZvzqB+wBntmAfBCpOoGB1OVFmqA2
-   4NiWZiGqpmH6viBuNxy7OU0G398IOKTeMkq8KeIr43DLNKEEK+3gGD6Fd
-   wXfS4tbDRwTI4fl4Xup0zdV4EvZTZBEgpjUuk9WiA7W9qtlMmUOapxztG
-   A=;
+  t=1608111848; x=1639647848;
+  h=from:to:cc:subject:date:message-id:mime-version;
+  bh=pJSYaBeSyknY70hlOO0x4rCmApA6A+LRe7dtLJZK0og=;
+  b=mAyOAa1XY5XtqtYxDZdAvm4xr3KRU1Mc+Rx/QDVmxQKNi/tm7zrgWArS
+   iXkD3q2dJIawpIj+GzQCaK1XfkO0S08XSlZIdG3rHkRMp7bY/jS9rIgvn
+   7yPM84WVCj+55tRGTajNggCdm25J16NRxZsxDyLJSh0TKaZp5+31w8A8F
+   w=;
 X-IronPort-AV: E=Sophos;i="5.78,424,1599523200"; 
-   d="scan'208";a="103481231"
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1e-a70de69e.us-east-1.amazon.com) ([10.47.23.38])
-  by smtp-border-fw-out-33001.sea14.amazon.com with ESMTP; 16 Dec 2020 08:47:09 +0000
-Received: from EX13D31EUA001.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan2.iad.amazon.com [10.40.163.34])
-        by email-inbound-relay-1e-a70de69e.us-east-1.amazon.com (Postfix) with ESMTPS id 75544A1EE6;
-        Wed, 16 Dec 2020 08:46:57 +0000 (UTC)
-Received: from u3f2cd687b01c55.ant.amazon.com (10.43.161.102) by
+   d="scan'208";a="903545393"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1a-67b371d8.us-east-1.amazon.com) ([10.47.23.38])
+  by smtp-border-fw-out-9103.sea19.amazon.com with ESMTP; 16 Dec 2020 09:43:08 +0000
+Received: from EX13D31EUA001.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
+        by email-inbound-relay-1a-67b371d8.us-east-1.amazon.com (Postfix) with ESMTPS id 5FBE4A1E17;
+        Wed, 16 Dec 2020 09:42:55 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.161.31) by
  EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Wed, 16 Dec 2020 08:46:41 +0000
+ id 15.0.1497.2; Wed, 16 Dec 2020 09:42:38 +0000
 From:   SeongJae Park <sjpark@amazon.com>
 To:     <akpm@linux-foundation.org>
 CC:     SeongJae Park <sjpark@amazon.de>, <Jonathan.Cameron@Huawei.com>,
@@ -52,16 +51,14 @@ CC:     SeongJae Park <sjpark@amazon.de>, <Jonathan.Cameron@Huawei.com>,
         <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
         <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
         <linux-kernel@vger.kernel.org>
-Subject: [RFC v15.1 8/8] Docs/admin-guide/mm/damon: Document DAMON-based Operation Schemes
-Date:   Wed, 16 Dec 2020 09:44:04 +0100
-Message-ID: <20201216084404.23183-9-sjpark@amazon.com>
+Subject: [RFC v10 00/13] DAMON: Support Physical Memory Address Space and Page-granularity Idleness Monitoring
+Date:   Wed, 16 Dec 2020 10:42:08 +0100
+Message-ID: <20201216094221.11898-1-sjpark@amazon.com>
 X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201216084404.23183-1-sjpark@amazon.com>
-References: <20201216084404.23183-1-sjpark@amazon.com>
 MIME-Version: 1.0
 Content-Type: text/plain
-X-Originating-IP: [10.43.161.102]
-X-ClientProxiedBy: EX13D22UWB003.ant.amazon.com (10.43.161.76) To
+X-Originating-IP: [10.43.161.31]
+X-ClientProxiedBy: EX13D16UWB001.ant.amazon.com (10.43.161.17) To
  EX13D31EUA001.ant.amazon.com (10.43.165.15)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
@@ -69,244 +66,173 @@ X-Mailing-List: linux-doc@vger.kernel.org
 
 From: SeongJae Park <sjpark@amazon.de>
 
-This commit add description of DAMON-based operation schemes in the
-DAMON documents.
+NOTE: This is only an RFC for future features of DAMON patchset[1], which is
+not merged in the mainline yet.  The aim of this RFC is to show how DAMON would
+be evolved once it is merged in.  So, if you have some interest in this RFC,
+please consider reviewing the DAMON patchset, either.
 
-Signed-off-by: SeongJae Park <sjpark@amazon.de>
----
- Documentation/admin-guide/mm/damon/guide.rst |  41 ++++++-
- Documentation/admin-guide/mm/damon/start.rst |  11 ++
- Documentation/admin-guide/mm/damon/usage.rst | 109 ++++++++++++++++++-
- Documentation/vm/damon/index.rst             |   1 -
- 4 files changed, 156 insertions(+), 6 deletions(-)
+Changes from Previous Version
+=============================
 
-diff --git a/Documentation/admin-guide/mm/damon/guide.rst b/Documentation/admin-guide/mm/damon/guide.rst
-index c51fb843efaa..1f9aa2ebbdb6 100644
---- a/Documentation/admin-guide/mm/damon/guide.rst
-+++ b/Documentation/admin-guide/mm/damon/guide.rst
-@@ -53,6 +53,11 @@ heats``.  If it shows a simple pattern consists of a small number of memory
- regions having high contrast of access temperature, you could consider manual
- `Program Modification`_.
- 
-+If the access pattern is very frequently changing so that you cannot figure out
-+what is the performance important region using your human eye, `Automated
-+DAMON-based Memory Operations`_ might help the case owing to its machine-level
-+microscope view.
-+
- If you still want to absorb more benefits, you should develop `Personalized
- DAMON Application`_ for your special case.
- 
-@@ -120,6 +125,36 @@ shows the visualized access patterns of streamcluster workload in PARSEC3
- benchmark suite.  We can easily identify the 100 MiB sized hot object.
- 
- 
-+Automated DAMON-based Memory Operations
-+---------------------------------------
-+
-+Though `Manual Program Optimization` works well in many cases and DAMON can
-+help it, modifying the source code is not a good option in many cases.  First
-+of all, the source code could be too old or unavailable.  And, many workloads
-+will have complex data access patterns that even hard to distinguish hot memory
-+objects and cold memory objects with the human eye.  Finding the mapping from
-+the visualized access pattern to the source code and injecting the hinting
-+system calls inside the code will also be quite challenging.
-+
-+By using DAMON-based operation schemes (DAMOS) via ``damo schemes``, you will
-+be able to easily optimize your workload in such a case.  Our example schemes
-+called 'efficient THP' and 'proactive reclamation' achieved significant speedup
-+and memory space saves against 25 realistic workloads [2]_.
-+
-+That said, note that you need careful tune of the schemes (e.g., target region
-+size and age) and monitoring attributes for the successful use of this
-+approach.  Because the optimal values of the parameters will be dependent on
-+each system and workload, misconfiguring the parameters could result in worse
-+memory management.
-+
-+For the tuning, you could measure the performance metrics such as IPC, TLB
-+misses, and swap in/out events and adjusts the parameters based on their
-+changes.  The total number and the total size of the regions that each scheme
-+is applied, which are provided via the debugfs interface and the programming
-+interface can also be useful.  Writing a program automating this optimal
-+parameter could be an option.
-+
-+
- Personalized DAMON Application
- ------------------------------
- 
-@@ -146,9 +181,9 @@ Referencing previously done successful practices could help you getting the
- sense for this kind of optimizations.  There is an academic paper [1]_
- reporting the visualized access pattern and manual `Program
- Modification`_ results for a number of realistic workloads.  You can also get
--the visualized access patterns [3]_ [4]_ [5]_ and automated DAMON-based memory
--operations results for other realistic workloads that collected with latest
--version of DAMON [2]_ .
-+the visualized access patterns [3]_ [4]_ [5]_ and
-+`Automated DAMON-based Memory Operations`_ results for other realistic
-+workloads that collected with latest version of DAMON [2]_ .
- 
- .. [1] https://dl.acm.org/doi/10.1145/3366626.3368125
- .. [2] https://damonitor.github.io/test/result/perf/latest/html/
-diff --git a/Documentation/admin-guide/mm/damon/start.rst b/Documentation/admin-guide/mm/damon/start.rst
-index deed2ea2321e..35cf4e4ca6aa 100644
---- a/Documentation/admin-guide/mm/damon/start.rst
-+++ b/Documentation/admin-guide/mm/damon/start.rst
-@@ -90,6 +90,17 @@ image files. ::
- You can show the images in a web page [1]_ .  Those made with other realistic
- workloads are also available [2]_ [3]_ [4]_.
- 
-+
-+Data Access Pattern Aware Memory Management
-+===========================================
-+
-+Below three commands make every memory region of size >=4K that doesn't
-+accessed for >=60 seconds in your workload to be swapped out. ::
-+
-+    $ echo "#min-size max-size min-acc max-acc min-age max-age action" > scheme
-+    $ echo "4K        max      0       0       60s     max     pageout" >> scheme
-+    $ damo schemes -c my_thp_scheme <pid of your workload>
-+
- .. [1] https://damonitor.github.io/doc/html/v17/admin-guide/mm/damon/start.html#visualizing-recorded-patterns
- .. [2] https://damonitor.github.io/test/result/visual/latest/rec.heatmap.1.png.html
- .. [3] https://damonitor.github.io/test/result/visual/latest/rec.wss_sz.png.html
-diff --git a/Documentation/admin-guide/mm/damon/usage.rst b/Documentation/admin-guide/mm/damon/usage.rst
-index a6606d27a559..96278227f925 100644
---- a/Documentation/admin-guide/mm/damon/usage.rst
-+++ b/Documentation/admin-guide/mm/damon/usage.rst
-@@ -219,11 +219,70 @@ Similar to that of ``heats --heatmap``, it also supports 'gnuplot' based simple
- visualization of the distribution via ``--plot`` option.
- 
- 
-+DAMON-based Operation Schemes
-+-----------------------------
-+
-+The ``schemes`` subcommand allows users to do DAMON-based memory management
-+optimizations in a few seconds.  Similar to ``record``, it receives monitoring
-+attributes and target.  However, in addition to those, ``schemes`` receives
-+data access pattern-based memory operation schemes, which describes what memory
-+operation action should be applied to memory regions showing specific data
-+access pattern.  Then, it starts the data access monitoring and automatically
-+applies the schemes to the targets.
-+
-+The operation schemes should be saved in a text file in below format and passed
-+to ``schemes`` subcommand via ``--schemes`` option. ::
-+
-+    min-size max-size min-acc max-acc min-age max-age action
-+
-+The format also supports comments, several units for size and age of regions,
-+and human readable action names.  Currently supported operation actions are
-+``willneed``, ``cold``, ``pageout``, ``hugepage`` and ``nohugepage``.  Each of
-+the actions works same to the madvise() system call hints having the name.
-+Please also note that the range is inclusive (closed interval), and ``0`` for
-+max values means infinite. Below example schemes are possible. ::
-+
-+    # format is:
-+    # <min/max size> <min/max frequency (0-100)> <min/max age> <action>
-+    #
-+    # B/K/M/G/T for Bytes/KiB/MiB/GiB/TiB
-+    # us/ms/s/m/h/d for micro-seconds/milli-seconds/seconds/minutes/hours/days
-+    # 'min/max' for possible min/max value.
-+
-+    # if a region keeps a high access frequency for >=100ms, put the region on
-+    # the head of the LRU list (call madvise() with MADV_WILLNEED).
-+    min    max      80      max     100ms   max willneed
-+
-+    # if a region keeps a low access frequency for >=200ms and <=one hour, put
-+    # the region on the tail of the LRU list (call madvise() with MADV_COLD).
-+    min     max     10      20      200ms   1h  cold
-+
-+    # if a region keeps a very low access frequency for >=60 seconds, swap out
-+    # the region immediately (call madvise() with MADV_PAGEOUT).
-+    min     max     0       10      60s     max pageout
-+
-+    # if a region of a size >=2MiB keeps a very high access frequency for
-+    # >=100ms, let the region to use huge pages (call madvise() with
-+    # MADV_HUGEPAGE).
-+    2M      max     90      100     100ms   max hugepage
-+
-+    # If a regions of a size >=2MiB keeps small access frequency for >=100ms,
-+    # avoid the region using huge pages (call madvise() with MADV_NOHUGEPAGE).
-+    2M      max     0       25      100ms   max nohugepage
-+
-+For example, you can make a running process named 'foo' to use huge pages for
-+memory regions keeping 2MB or larger size and having very high access frequency
-+for at least 100 milliseconds using below commands::
-+
-+    $ echo "2M max    90 max    100ms max    hugepage" > my_thp_scheme
-+    $ ./damo schemes --schemes my_thp_scheme `pidof foo`
-+
-+
- debugfs Interface
- =================
- 
--DAMON exports four files, ``attrs``, ``target_ids``, ``record``, and
--``monitor_on`` under its debugfs directory, ``<debugfs>/damon/``.
-+DAMON exports five files, ``attrs``, ``target_ids``, ``record``, ``schemes``
-+and ``monitor_on`` under its debugfs directory, ``<debugfs>/damon/``.
- 
- 
- Attributes
-@@ -280,6 +339,52 @@ saved in ``/damon.data``. ::
- The recording can be disabled by setting the buffer size zero.
- 
- 
-+Schemes
-+-------
-+
-+For usual DAMON-based data access aware memory management optimizations, users
-+would simply want the system to apply a memory management action to a memory
-+region of a specific size having a specific access frequency for a specific
-+time.  DAMON receives such formalized operation schemes from the user and
-+applies those to the target processes.  It also counts the total number and
-+size of regions that each scheme is applied.  This statistics can be used for
-+online analysis or tuning of the schemes.
-+
-+Users can get and set the schemes by reading from and writing to ``schemes``
-+debugfs file.  Reading the file also shows the statistics of each scheme.  To
-+the file, each of the schemes should be represented in each line in below form:
-+
-+    min-size max-size min-acc max-acc min-age max-age action
-+
-+Note that the ranges are closed interval.  Bytes for the size of regions
-+(``min-size`` and ``max-size``), number of monitored accesses per aggregate
-+interval for access frequency (``min-acc`` and ``max-acc``), number of
-+aggregate intervals for the age of regions (``min-age`` and ``max-age``), and a
-+predefined integer for memory management actions should be used.  The supported
-+numbers and their meanings are as below.
-+
-+ - 0: Call ``madvise()`` for the region with ``MADV_WILLNEED``
-+ - 1: Call ``madvise()`` for the region with ``MADV_COLD``
-+ - 2: Call ``madvise()`` for the region with ``MADV_PAGEOUT``
-+ - 3: Call ``madvise()`` for the region with ``MADV_HUGEPAGE``
-+ - 4: Call ``madvise()`` for the region with ``MADV_NOHUGEPAGE``
-+ - 5: Do nothing but count the statistics
-+
-+You can disable schemes by simply writing an empty string to the file.  For
-+example, below commands applies a scheme saying "If a memory region of size in
-+[4KiB, 8KiB] is showing accesses per aggregate interval in [0, 5] for aggregate
-+interval in [10, 20], page out the region", check the entered scheme again, and
-+finally remove the scheme. ::
-+
-+    # cd <debugfs>/damon
-+    # echo "4096 8192    0 5    10 20    2" > schemes
-+    # cat schemes
-+    4096 8192 0 5 10 20 2 0 0
-+    # echo > schemes
-+
-+The last two integers in the 4th line of above example is the total number and
-+the total size of the regions that the scheme is applied.
-+
- Turning On/Off
- --------------
- 
-diff --git a/Documentation/vm/damon/index.rst b/Documentation/vm/damon/index.rst
-index 17dca3c12aad..69aec1287aaf 100644
---- a/Documentation/vm/damon/index.rst
-+++ b/Documentation/vm/damon/index.rst
-@@ -28,4 +28,3 @@ workloads and systems.
-    design
-    eval
-    api
--   plans
+- Rebase on v5.10 + DAMON v23[1] + DAMOS v15.1[2]
+- Implement primitives for page granularity idleness monitoring
+
+Introduction
+============
+
+DAMON[1] programming interface users can extend DAMON for any address space by
+configuring the address-space specific low level primitives with appropriate
+ones.  However, because only the implementation for the virtual address spaces
+is available now, the users should implement their own for other address
+spaces.  Worse yet, the user space users who are using the debugfs interface of
+'damon-dbgfs' module or the DAMON user space tool, cannot implement their own.
+Therefore, this patchset implements reference implementation of the low level
+primitives for two other common use cases.
+
+First common use case is the physical memory address space monitoring.  This
+patchset, hence, implements monitoring primitives for the physical address
+space.  Further, this patchset links the implementation to the debugfs
+interface and the user space tool for the user space users.
+
+Another common use case is page-granularity idleness monitoring.  This is
+already available via 'Idle Page Tracking', but it requires frequent
+kernel-user context change.  DAMON can efficiently support the usecase via its
+arbitrary type monitoring target feature.  This patchset, therefore, provides
+yet another implementation of the monitoring primitives for the use case.
+Nonetheless, this version of the patchset doesn't provide user space friendly
+interface for that.  It would be included in a future version of this patchset.
+
+Note that the primitives support only the online user memory, as same to the
+Idle Page Tracking.
+
+Baseline and Complete Git Trees
+===============================
+
+The patches are based on the v5.10 linux kernel plus DAMON v23 patchset[1] and
+DAMOS RFC v15.1 patchset[2].  You can also clone the complete git tree:
+
+    $ git clone git://github.com/sjp38/linux -b cdamon/rfc/v10
+
+The web is also available:
+https://github.com/sjp38/linux/releases/tag/cdamon/rfc/v10
+
+[1] https://lore.kernel.org/linux-doc/20201005105522.23841-1-sjpark@amazon.com/
+[2] https://lore.kernel.org/linux-mm/20201006123931.5847-1-sjpark@amazon.com/
+
+Sequence of Patches
+===================
+
+The sequence of patches is as follow.
+
+The first 5 patches allow the user space users manually set the monitoring
+regions.  The 1st and 2nd patches implements the features in the 'damon-dbgfs'
+and the user space tool, respectively.  Following two patches update
+unittests (the 3rd patch) and selftests (the 4th patch) for the new feature.
+Finally, the 5th patch documents this new feature.
+
+Following 5 patches implement the physical memory monitoring.  The 6th patch
+makes some primitive functions for the virtual address spaces primitive
+reusable.  The 7th patch implements the physical address space monitoring
+primitive using it.  The 8th and the 9th patches links the primitives to the
+'damon-dbgfs' and the user space tool, respectively.  The 10th patch further
+implement a handy NUMA specific memory monitoring feature on the user space
+tool.  The 11th patch documents this new features.
+
+The 12th patch again separates some functions of the physical address space
+primitives to reusable, and the 13th patch implements the page granularity
+idleness monitoring primitives using those.
+
+Patch History
+=============
+
+Changes from RFC v9
+(https://lore.kernel.org/linux-mm/20201007071409.12174-1-sjpark@amazon.com/)
+- Rebase on v5.10 + DAMON v23[1] + DAMOS v15.1[2]
+- Implement primitives for page granularity idleness monitoring
+
+Changes from RFC v8
+(https://lore.kernel.org/linux-mm/20200831104730.28970-1-sjpark@amazon.com/)
+- s/snprintf()/scnprintf() (Marco Elver)
+- Place three parts of DAMON (core, primitives, and dbgfs) in different files
+
+Changes from RFC v7
+(https://lore.kernel.org/linux-mm/20200818072501.30396-1-sjpark@amazon.com/)
+- Add missed 'put_page()' calls
+- Support unmapped LRU pages
+
+Changes from RFC v6
+(https://lore.kernel.org/linux-mm/20200805065951.18221-1-sjpark@amazon.com/)
+- Use 42 as the fake target id for paddr instead of -1
+- Fix typo
+
+Changes from RFC v5
+(https://lore.kernel.org/linux-mm/20200707144540.21216-1-sjpark@amazon.com/)
+- Support nested iomem sections (Du Fan)
+- Rebase on v5.8
+
+Changes from RFC v4
+(https://lore.kernel.org/linux-mm/20200616140813.17863-1-sjpark@amazon.com/)
+ - Support NUMA specific physical memory monitoring
+
+Changes from RFC v3
+(https://lore.kernel.org/linux-mm/20200609141941.19184-1-sjpark@amazon.com/)
+ - Export rmap functions
+ - Reorganize for physical memory monitoring support only
+ - Clean up debugfs code
+
+Changes from RFC v2
+(https://lore.kernel.org/linux-mm/20200603141135.10575-1-sjpark@amazon.com/)
+ - Support the physical memory monitoring with the user space tool
+ - Use 'pfn_to_online_page()' (David Hildenbrand)
+ - Document more detail on random 'pfn' and its safeness (David Hildenbrand)
+
+Changes from RFC v1
+(https://lore.kernel.org/linux-mm/20200409094232.29680-1-sjpark@amazon.com/)
+ - Provide the reference primitive implementations for the physical memory
+ - Connect the extensions with the debugfs interface
+
+SeongJae Park (13):
+  damon/dbgfs: Allow users to set initial monitoring target regions
+  tools/damon: Support init target regions specification
+  damon/dbgfs-test: Add a unit test case for 'init_regions'
+  selftests/damon/_chk_record: Do not check number of gaps
+  Docs/admin-guide/mm/damon: Document 'init_regions' feature
+  mm/damon/vaddr: Separate commonly usable functions
+  mm/damon: Implement primitives for physical address space monitoring
+  damon/dbgfs: Support physical memory monitoring
+  tools/damon/record: Support physical memory monitoring
+  tools/damon/record: Support NUMA specific recording
+  Docs/DAMON: Document physical memory monitoring support
+  mm/damon/paddr: Separate commonly usable functions
+  mm/damon: Implement primitives for page granularity idleness
+    monitoring
+
+ Documentation/admin-guide/mm/damon/usage.rst |  77 ++++++-
+ Documentation/vm/damon/design.rst            |  29 ++-
+ Documentation/vm/damon/faq.rst               |   5 +-
+ include/linux/damon.h                        |  37 +++
+ include/trace/events/damon.h                 |  19 ++
+ mm/damon/Kconfig                             |  20 +-
+ mm/damon/Makefile                            |   4 +-
+ mm/damon/dbgfs-test.h                        |  55 +++++
+ mm/damon/dbgfs.c                             | 163 ++++++++++++-
+ mm/damon/paddr.c                             |  98 ++++++++
+ mm/damon/pgidle.c                            |  69 ++++++
+ mm/damon/prmtv-common.c                      | 226 +++++++++++++++++++
+ mm/damon/prmtv-common.h                      |  25 ++
+ mm/damon/vaddr.c                             | 108 +--------
+ tools/damon/_damon.py                        |  41 ++++
+ tools/damon/_paddr_layout.py                 | 147 ++++++++++++
+ tools/damon/record.py                        |  57 ++++-
+ tools/damon/schemes.py                       |  12 +-
+ tools/testing/selftests/damon/_chk_record.py |   6 -
+ 19 files changed, 1049 insertions(+), 149 deletions(-)
+ create mode 100644 mm/damon/paddr.c
+ create mode 100644 mm/damon/pgidle.c
+ create mode 100644 mm/damon/prmtv-common.c
+ create mode 100644 mm/damon/prmtv-common.h
+ create mode 100644 tools/damon/_paddr_layout.py
+
 -- 
 2.17.1
 
