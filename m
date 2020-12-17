@@ -2,157 +2,77 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AB4FB2DD8DF
-	for <lists+linux-doc@lfdr.de>; Thu, 17 Dec 2020 19:57:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A253E2DD9A5
+	for <lists+linux-doc@lfdr.de>; Thu, 17 Dec 2020 21:08:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731102AbgLQSyh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 17 Dec 2020 13:54:37 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49060 "EHLO
+        id S1726846AbgLQUH5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 17 Dec 2020 15:07:57 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60446 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731095AbgLQSyg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Dec 2020 13:54:36 -0500
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com [IPv6:2607:f8b0:4864:20::82a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B5E7EC0619E0
-        for <linux-doc@vger.kernel.org>; Thu, 17 Dec 2020 10:53:05 -0800 (PST)
-Received: by mail-qt1-x82a.google.com with SMTP id h19so20812920qtq.13
-        for <linux-doc@vger.kernel.org>; Thu, 17 Dec 2020 10:53:05 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=fRwryvuVhXYrAhLWdCvlg8zqrU0LccdvvXixZFgTlpI=;
-        b=gDva44QEcG/VWunZgNqEGGjC6m5HKRd5jC3iu5YSaDSrrwASQW3uz9D7uUgtQbFZS9
-         YN1YGfbBQ27Me0nqIB5dGg6H090zCpDkS2icZOHxNb/089r2kSUj+OVuhMTICDAYNLZT
-         HtRlXXdMCv904IqORReSjOaIMQk32q7XdGOEXHUvYw15a7J2dm++e/DVF6j7O6nvR7DY
-         rVzv4TB6dwm1dsjL4NUpH5/QlV9WBOeJOrkHBIuU/H4vVoDTO80obrJk96W54xN8KSgf
-         g6/DPummsvSPaE4NAtii+AUigVRv2OtUpjv2GFzonPdM+AdN8bG3gZYeRFoX9WxZ3SM9
-         stxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=fRwryvuVhXYrAhLWdCvlg8zqrU0LccdvvXixZFgTlpI=;
-        b=dpcGAPIG7DZFQjDw5i00ONienrITw/ooSyMu3j64CbIwJ+UhHmZtH25abJDcJpsQSJ
-         e09TxMa3BMk9o1WjJy1GC8XzLuOVaYdW+D22tvXavGlIAEX6jxiUqXrDK6xoe8wqrwrX
-         tS4pBNa0d/jnO5RsmieBRzRKNMwFwoGW3o7oOz+G8fNJ3cthHhW8YWT3r92bnloj0Gm3
-         wAHpTP+CYLZM5ZLGtbV8PKobn6br5RB8SJJBBzDlmC+Dkb+UhtA04iaVM1mSN1hOO5RK
-         ob9LwH3QMgoOVx/Vc0pISfeZ163ma65Z+2GUCKGFxatLUmoiRgdqBoG47dLlDr4qQy/J
-         HEsw==
-X-Gm-Message-State: AOAM531OcAUTM1N/yUipQUEXNWxPvp2oZYGGMMEs5RrCI6w4lXEz++EX
-        w3pKwre4kMtOlq/C1D1jQ5eCCA==
-X-Google-Smtp-Source: ABdhPJwU+kKYKSTYax2pFkwKEkMqmzxAc7GK//7UyTNHIEsyN/EH4UN0SEvfnPr8PHHMvDmMtUAQVg==
-X-Received: by 2002:ac8:730d:: with SMTP id x13mr171787qto.162.1608231185009;
-        Thu, 17 Dec 2020 10:53:05 -0800 (PST)
-Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
-        by smtp.gmail.com with ESMTPSA id m8sm4127434qkn.41.2020.12.17.10.53.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 17 Dec 2020 10:53:04 -0800 (PST)
-From:   Pavel Tatashin <pasha.tatashin@soleen.com>
-To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, akpm@linux-foundation.org, vbabka@suse.cz,
-        mhocko@suse.com, david@redhat.com, osalvador@suse.de,
-        dan.j.williams@intel.com, sashal@kernel.org,
-        tyhicks@linux.microsoft.com, iamjoonsoo.kim@lge.com,
-        mike.kravetz@oracle.com, rostedt@goodmis.org, mingo@redhat.com,
-        jgg@ziepe.ca, peterz@infradead.org, mgorman@suse.de,
-        willy@infradead.org, rientjes@google.com, jhubbard@nvidia.com,
-        linux-doc@vger.kernel.org, ira.weiny@intel.com,
-        linux-kselftest@vger.kernel.org
-Subject: [PATCH v4 10/10] selftests/vm: test faulting in kernel, and verify pinnable pages
-Date:   Thu, 17 Dec 2020 13:52:43 -0500
-Message-Id: <20201217185243.3288048-11-pasha.tatashin@soleen.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20201217185243.3288048-1-pasha.tatashin@soleen.com>
-References: <20201217185243.3288048-1-pasha.tatashin@soleen.com>
+        with ESMTP id S1725988AbgLQUH4 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 17 Dec 2020 15:07:56 -0500
+X-Greylist: delayed 2474 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Thu, 17 Dec 2020 12:07:16 PST
+Received: from the.earth.li (the.earth.li [IPv6:2a00:1098:86:4d:c0ff:ee:15:900d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 96B9FC061794
+        for <linux-doc@vger.kernel.org>; Thu, 17 Dec 2020 12:07:16 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=earth.li;
+         s=the; h=In-Reply-To:Content-Type:MIME-Version:Message-ID:Subject:Cc:To:From
+        :Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+        Content-Description:Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc
+        :Resent-Message-ID:References:List-Id:List-Help:List-Unsubscribe:
+        List-Subscribe:List-Post:List-Owner:List-Archive;
+        bh=id/RU4OEULTzXYn9FVYP9FWC/5fwm6DcgOfQXfSgdAw=; b=duW5i/z4gePeQy2kdqksQSYcpE
+        d/cu5oq7Owsz0j1u6bgAG091GDRfjrvipYXzLBlbYC4BfFbiJAi9Rwhdb00rWLvK2qTaFuAFzCcNO
+        qVp/Akyjwh7AQuFuSwKDU+A8/p/NGgU34FLvmi0ZW3kDmlnWLEdopsLEDoxoGJmSD173Mbfmj0M0g
+        ln2iC/PAHRsCnFM4SMpHKDotYmEz27G7VBfZVaohbSoHgkZINalK/yV/My66lD8fPzk2EyCW/q9sD
+        leQimD6p9/JjM0FxrDpFOXhnin5Xp1xbosyevJDsaPzg98f0k2fLWft+9k/u0rvN0TFfVxosH1CNu
+        2Wfm9Adw==;
+Received: from noodles by the.earth.li with local (Exim 4.92)
+        (envelope-from <noodles@earth.li>)
+        id 1kpyuS-0004ft-2Q; Thu, 17 Dec 2020 19:25:56 +0000
+Date:   Thu, 17 Dec 2020 19:25:56 +0000
+From:   Jonathan McDowell <noodles@earth.li>
+To:     konstantin@linuxfoundation.org
+Cc:     Matthew Wilcox <willy@infradead.org>,
+        Oliver Graute <oliver.graute@gmail.com>, corbet@lwn.net,
+        miguel.ojeda.sandonis@gmail.com, grandmaster@al2klimov.de,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: PGP pathfinder service is no longer maintained
+Message-ID: <20201217192555.GA17262@earth.li>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20201216224344.h3r7wbo7fgatupm5@chatter.i7.local>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When pages are pinned they can be faulted in userland and migrated, and
-they can be faulted right in kernel without migration.
 
-In either case, the pinned pages must end-up being pinnable (not movable).
+In article <20201216224344.h3r7wbo7fgatupm5@chatter.i7.local> (earth.lists.linux-kernel) you wrote:
+> On Wed, Dec 16, 2020 at 10:20:18PM +0000, Matthew Wilcox wrote:
+> > > Unfortunately the site https://pgp.cs.uu.nl/ is not maintained 
+> > > anymore
+> > > and the "Finding paths to Linus" link in the Kernel Maintainer PGP guide
+> > > is dead. Is there any alternative sites to find a way through the web of
+> > > trust?
+> > 
+> > Several.  Konstantin has a local one: https://github.com/mricon/wotmate
 
-Add a new test without touching pages in userland, and use FOLL_TOUCH
-instead. Also, verify that pinned pages are pinnable.
+> This is how we generate these:
+> https://git.kernel.org/pub/scm/docs/kernel/pgpkeys.git/tree/graphs
 
-Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
----
- mm/gup_test.c                         |  6 ++++++
- tools/testing/selftests/vm/gup_test.c | 17 +++++++++++++----
- 2 files changed, 19 insertions(+), 4 deletions(-)
+> > and if you want a web service, I like this one:
+> > https://the.earth.li/~noodles/pathfind.html
 
-diff --git a/mm/gup_test.c b/mm/gup_test.c
-index 24c70c5814ba..24fd542091ee 100644
---- a/mm/gup_test.c
-+++ b/mm/gup_test.c
-@@ -52,6 +52,12 @@ static void verify_dma_pinned(unsigned int cmd, struct page **pages,
- 
- 				dump_page(page, "gup_test failure");
- 				break;
-+			} else if (cmd == PIN_LONGTERM_BENCHMARK &&
-+				WARN(!is_pinnable_page(page),
-+				     "pages[%lu] is NOT pinnable but pinned\n",
-+				     i)) {
-+				dump_page(page, "gup_test failure");
-+				break;
- 			}
- 		}
- 		break;
-diff --git a/tools/testing/selftests/vm/gup_test.c b/tools/testing/selftests/vm/gup_test.c
-index 42c71483729f..f08cc97d424d 100644
---- a/tools/testing/selftests/vm/gup_test.c
-+++ b/tools/testing/selftests/vm/gup_test.c
-@@ -13,6 +13,7 @@
- 
- /* Just the flags we need, copied from mm.h: */
- #define FOLL_WRITE	0x01	/* check pte is writable */
-+#define FOLL_TOUCH	0x02	/* mark page accessed */
- 
- static char *cmd_to_str(unsigned long cmd)
- {
-@@ -39,11 +40,11 @@ int main(int argc, char **argv)
- 	unsigned long size = 128 * MB;
- 	int i, fd, filed, opt, nr_pages = 1, thp = -1, repeats = 1, write = 1;
- 	unsigned long cmd = GUP_FAST_BENCHMARK;
--	int flags = MAP_PRIVATE;
-+	int flags = MAP_PRIVATE, touch = 0;
- 	char *file = "/dev/zero";
- 	char *p;
- 
--	while ((opt = getopt(argc, argv, "m:r:n:F:f:abctTLUuwWSHp")) != -1) {
-+	while ((opt = getopt(argc, argv, "m:r:n:F:f:abctTLUuwWSHpz")) != -1) {
- 		switch (opt) {
- 		case 'a':
- 			cmd = PIN_FAST_BENCHMARK;
-@@ -110,6 +111,10 @@ int main(int argc, char **argv)
- 		case 'H':
- 			flags |= (MAP_HUGETLB | MAP_ANONYMOUS);
- 			break;
-+		case 'z':
-+			/* fault pages in gup, do not fault in userland */
-+			touch = 1;
-+			break;
- 		default:
- 			return -1;
- 		}
-@@ -167,8 +172,12 @@ int main(int argc, char **argv)
- 	else if (thp == 0)
- 		madvise(p, size, MADV_NOHUGEPAGE);
- 
--	for (; (unsigned long)p < gup.addr + size; p += PAGE_SIZE)
--		p[0] = 0;
-+	if (touch) {
-+		gup.flags |= FOLL_TOUCH;
-+	} else {
-+		for (; (unsigned long)p < gup.addr + size; p += PAGE_SIZE)
-+			p[0] = 0;
-+	}
- 
- 	/* Only report timing information on the *_BENCHMARK commands: */
- 	if ((cmd == PIN_FAST_BENCHMARK) || (cmd == GUP_FAST_BENCHMARK) ||
+> FYI, it says "The pathfinder is currently out of action due to queries 
+> taking far too long to respond. It may return in the future when I find 
+> enough time to optimize it." :)
+
+I've re-enabled it for the moment; the keyserver now only holds keys it
+has paths to so hopefully it'll be a bit better behaved now.
+
+J.
+
 -- 
-2.25.1
-
+Give me liberty or I will cut you.
