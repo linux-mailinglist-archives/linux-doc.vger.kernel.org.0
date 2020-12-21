@@ -2,116 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A89D02E0074
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Dec 2020 19:51:00 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8D6C62DFE25
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Dec 2020 17:45:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727667AbgLUSu7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Dec 2020 13:50:59 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56180 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727599AbgLUSu6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Dec 2020 13:50:58 -0500
-Received: from mail-pg1-x52f.google.com (mail-pg1-x52f.google.com [IPv6:2607:f8b0:4864:20::52f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 92399C0613D3
-        for <linux-doc@vger.kernel.org>; Mon, 21 Dec 2020 10:50:18 -0800 (PST)
-Received: by mail-pg1-x52f.google.com with SMTP id n7so6855720pgg.2
-        for <linux-doc@vger.kernel.org>; Mon, 21 Dec 2020 10:50:18 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=YliUtlY76/UIPuQ5v8deFXxZeb8eSvRLcMxme2JxEEk=;
-        b=HDksKqgKauZN6tvbdPBgggj8IeeTS2c7JRuSWMI+pRG1FwKAhMCJxMCv7JOIqk50wv
-         3X1HRLkpEKIsTmGLQK6vIyf/RMl8sqUJoc0+IVGVdkvPNiQkOjCyDbUhahzYluorDnrk
-         1PDsuxVXgwT/JnDR/e8fyiqWr/gjcp4gXGi2ngqD9bS5/EBS76qfZPKMvDBaRcXFxHGt
-         YOSyX7QbQ/Koym0Jms6BgoWpgnw/5heVHu2j7+FeQsRTUWVZEWILea7Byq/nnV5Cq6bO
-         YDDYicvRlZMY5s2D5oa9p6I/4Nwjhwv9qDpErWN/14vrvlkMgsgZNqe/YH2kcc3Fnt+d
-         1eOw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=YliUtlY76/UIPuQ5v8deFXxZeb8eSvRLcMxme2JxEEk=;
-        b=M/2GJOl9QtzhTJKCJ9KbMXUJZ7gLG5GVpIlxcX9X7chdrdxUJia1knTO6cDnq2IVfT
-         qI6XKrIPIjBfbXxR+xRqKvYoUru2wkcELiiFWFA+9xgsGV1qKdSOmdBebP4sW4Moqcth
-         eBHblY47imNO0ZXIwTh3OiLLgMEeFx30mMdilD2tug0ULyFnb8+OJ0oqebKMn+fVZCDU
-         6Sq+jdbsXadg+BhJniuaMRejaEtxb5B5zC9iMPVEjVMUCN/0TdI+1mURBYGv/1yeiPG6
-         yus4GoPznGIs7SLw9+l5S2kmKIRlogvVtDnhVPq+IzTvCRsIg5k3JGqDJpQvMTA33sJl
-         7Rmg==
-X-Gm-Message-State: AOAM53014pBftLQcj5yinzF5NHLsBM1d9bXSOI1rs1y0UMPyjqlfKd0s
-        2EV1l1x5TyTDpEqgncL60pQtsMfv+MnOZ84dDD/GkbYbj38ZeagE
-X-Google-Smtp-Source: ABdhPJxKT6tC6/ndV2N5i1FwKZxN3yOMknKcMYRbpSq6pVUOWTKpPSP2SnmFD7tg+Np8Z6fWmUqBTLjQBM+VPNs1bYw=
-X-Received: by 2002:a63:480f:: with SMTP id v15mr2249541pga.341.1608565986866;
- Mon, 21 Dec 2020 07:53:06 -0800 (PST)
+        id S1725841AbgLUQpg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Dec 2020 11:45:36 -0500
+Received: from ms.lwn.net ([45.79.88.28]:45818 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1725790AbgLUQpg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 21 Dec 2020 11:45:36 -0500
+Received: from lwn.net (localhost [127.0.0.1])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 789DC9B2;
+        Mon, 21 Dec 2020 16:44:53 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 789DC9B2
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1608569093; bh=0x4bn3amvPabhwdRTkhgk2jOAl4RQkmRqo6ffszm8fo=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=d4pKIq4gWbaUU/f/5dNJ1HZDv9XXaO+JofyEAYCXGAJZI0htgIhnJgT4XSInSmyzv
+         D9HPAAyT8nfsZ2AtZ9OPgHLv34wYN7mELVE+H7BdKEUhAtVozUJ+7mH+tCCYtkebQc
+         h5cAWiFhMOhh1Xahch2xKucc8vmX4qnfl76y/ej2WGEuMzFt6i9heuGv9+VUayKYEa
+         0UZLlhWP8TSCrbfMuiAjWskI0FcMeyBbbJo28+jGiiYbcERNQu+FJBU6k0AojFl7hm
+         Lrl5Aq9l3bZthA30TbRJpWTTl0LtMfmKQ5Zee/uT+mZaUKmQAi1mtk9Mj6sq6qlcFp
+         dwZ9uhpeyprxg==
+Date:   Mon, 21 Dec 2020 09:44:52 -0700
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Lee Jones <lee.jones@linaro.org>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 1/1] docs: submitting-patches: Trivial - fix grammatical
+ error
+Message-ID: <20201221094452.02851661@lwn.net>
+In-Reply-To: <20201216134654.271508-1-lee.jones@linaro.org>
+References: <20201216134654.271508-1-lee.jones@linaro.org>
+Organization: LWN.net
 MIME-Version: 1.0
-References: <20201217121303.13386-1-songmuchun@bytedance.com>
- <20201217121303.13386-4-songmuchun@bytedance.com> <20201221091123.GB14343@linux>
- <CAMZfGtVnS=_m4fpGBfDpOpdgzP02QCteUQn-gGiLADWfGiVJ=A@mail.gmail.com> <20201221134345.GA19324@linux>
-In-Reply-To: <20201221134345.GA19324@linux>
-From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Mon, 21 Dec 2020 23:52:30 +0800
-Message-ID: <CAMZfGtVTqYXOvTHSay-6WS+gtDSCtcN5ksnkj8hJgrUs_XWoWQ@mail.gmail.com>
-Subject: Re: [External] Re: [PATCH v10 03/11] mm/hugetlb: Free the vmemmap
- pages associated with each HugeTLB page
-To:     Oscar Salvador <osalvador@suse.de>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org,
-        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
-        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
-        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
-        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
-        anshuman.khandual@arm.com, jroedel@suse.de,
-        Mina Almasry <almasrymina@google.com>,
-        David Rientjes <rientjes@google.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Michal Hocko <mhocko@suse.com>,
-        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
-        David Hildenbrand <david@redhat.com>, naoya.horiguchi@nec.com,
-        Xiongchun duan <duanxiongchun@bytedance.com>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Dec 21, 2020 at 9:44 PM Oscar Salvador <osalvador@suse.de> wrote:
->
-> On Mon, Dec 21, 2020 at 07:25:15PM +0800, Muchun Song wrote:
->
-> > Should we add a BUG_ON in vmemmap_remap_free() for now?
-> >
-> >         BUG_ON(reuse != start + PAGE_SIZE);
->
-> I do not think we have to, plus we would be BUG_ing for some specific use
-> case in "generic" function.
+On Wed, 16 Dec 2020 13:46:54 +0000
+Lee Jones <lee.jones@linaro.org> wrote:
 
-The vmemmap_remap_range() walks page table range [start, end),
-if reuse is equal to (start + PAGE_SIZE), the range can adjust to
-[start - PAGE_SIZE, end). But if not, we need some work to
-implement the "generic" function.
+> "it is a used" does not make sense.  Should be "it is used".
+> 
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: linux-doc@vger.kernel.org
+> Signed-off-by: Lee Jones <lee.jones@linaro.org>
+> ---
+>  Documentation/process/submitting-patches.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/process/submitting-patches.rst b/Documentation/process/submitting-patches.rst
+> index fb8261a4be308..2c48a00a436e7 100644
+> --- a/Documentation/process/submitting-patches.rst
+> +++ b/Documentation/process/submitting-patches.rst
+> @@ -446,7 +446,7 @@ patch.  This tag documents that potentially interested parties
+>  have been included in the discussion.
+>  
+>  Co-developed-by: states that the patch was co-created by multiple developers;
+> -it is a used to give attribution to co-authors (in addition to the author
+> +it is used to give attribution to co-authors (in addition to the author
 
-  - adjust range to [min(start, reuse), end) and call
-    vmemmap_remap_rangeand which skip the hole
-    which is [reuse + PAGE_SIZE, start) or [end, reuse).
-  - call vmemmap_remap_range(reuse, reuse + PAGE_SIZE)
-    to get the reuse page.Then, call vmemmap_remap_range(start, end)
-    again to remap.
+Applied, thanks.
 
-Which one do you prefer?
-
-> Maybe others think different though.
->
-> --
-> Oscar Salvador
-> SUSE L3
-
-
-
---
-Yours,
-Muchun
+jon
