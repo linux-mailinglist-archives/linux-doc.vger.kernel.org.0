@@ -2,94 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 51F2B2DFF23
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Dec 2020 19:01:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id ED20C2DFF5F
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Dec 2020 19:11:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726022AbgLUSBH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Dec 2020 13:01:07 -0500
-Received: from mx2.suse.de ([195.135.220.15]:49680 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726010AbgLUSBG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 21 Dec 2020 13:01:06 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 99C07AD09;
-        Mon, 21 Dec 2020 18:00:24 +0000 (UTC)
-Date:   Mon, 21 Dec 2020 19:00:19 +0100
-From:   Oscar Salvador <osalvador@suse.de>
-To:     Muchun Song <songmuchun@bytedance.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org,
-        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
-        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
-        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
-        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
-        anshuman.khandual@arm.com, jroedel@suse.de,
-        Mina Almasry <almasrymina@google.com>,
-        David Rientjes <rientjes@google.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Michal Hocko <mhocko@suse.com>,
-        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
-        David Hildenbrand <david@redhat.com>, naoya.horiguchi@nec.com,
-        Xiongchun duan <duanxiongchun@bytedance.com>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>
-Subject: Re: [External] Re: [PATCH v10 03/11] mm/hugetlb: Free the vmemmap
- pages associated with each HugeTLB page
-Message-ID: <20201221180019.GA2884@localhost.localdomain>
-References: <20201217121303.13386-1-songmuchun@bytedance.com>
- <20201217121303.13386-4-songmuchun@bytedance.com>
- <20201221091123.GB14343@linux>
- <CAMZfGtVnS=_m4fpGBfDpOpdgzP02QCteUQn-gGiLADWfGiVJ=A@mail.gmail.com>
- <20201221134345.GA19324@linux>
- <CAMZfGtVTqYXOvTHSay-6WS+gtDSCtcN5ksnkj8hJgrUs_XWoWQ@mail.gmail.com>
+        id S1725791AbgLUSKf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Dec 2020 13:10:35 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49658 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726000AbgLUSKe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 21 Dec 2020 13:10:34 -0500
+Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com [IPv6:2607:f8b0:4864:20::62d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E7F1FC061793
+        for <linux-doc@vger.kernel.org>; Mon, 21 Dec 2020 10:09:53 -0800 (PST)
+Received: by mail-pl1-x62d.google.com with SMTP id 4so6018326plk.5
+        for <linux-doc@vger.kernel.org>; Mon, 21 Dec 2020 10:09:53 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=oKzr3FPkUPe+aYLEEdAws7uUObKGbIl98KSfBYhptN8=;
+        b=soNsn/OEkcxcg3tdMLUK8S9ZfkM2t2yqDVZhgO18mjV+PiB93rs9nVs4/WOxCehg/l
+         Zg1AKon2Kp22DOxk79DHwR6nf3NMY2EigMyBBHYEATgEmmoIAESPB5ryNAeJdcC/ABow
+         gu2QCIJsK3kY5FV0rUzPAZKM+Vu5PA9N1h2mZkoKFe5opMbOQqNy5Nv+ZylxufnFJNgp
+         M9n+UFZYYDVCrgxz1RYf1f7reW9o1Uj/tCIUJeJghbf4yqPqoHRS6HDcSsdLMgXS3j5C
+         il7Nm9zO2lJUTh3QxS6ymYW9gn3wf4DgrEL+jOFyt3bn8Bjnh1bYfSBVesfBWDPaEQ27
+         tqcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=oKzr3FPkUPe+aYLEEdAws7uUObKGbIl98KSfBYhptN8=;
+        b=C4otknzuTZ09U4Nk4HBEuxVzsOx7cGa8iGgFHwV+vlAtHBYw+u/dP3LVMk8wLKCrcU
+         5AH3NgONEfrWfohVw/KqJfSW8UfQnS7vh90i3FRM/We/RPaoL4MUCSKBmsxGN9EaygzS
+         OsknXumoNagAO/eYH5O1W+HKoiSCeDeuLB++wmAQ+Wra5HL+D7OHa6MUWtswCYpu4Lzo
+         mu74+JgYx+F7y9CBtyLRtY4Xcazo40Tsf+4wQQeqsO+l3nQlAfUUAdznhM2GwJHwIjJh
+         YtkTmpudzbyL7qc1hIbeCaN/ujWuUW3Nv03/iysaxCGF359y7lPWnz1vP9XJB8lI9RUy
+         1HLQ==
+X-Gm-Message-State: AOAM531Ml9QWbh6+2/i5FJrczUoWb6wDeteSLEgu0e9MLHJyGCODW2y5
+        LfCDgMAXMVEMJgqXHnz2hQxeWLYg1z/a7g==
+X-Google-Smtp-Source: ABdhPJztnTinUeHX3LcXJVPOkssICjBjG1WnlYcFyNRW4VUcZrVDlmsc2+SKAtrnjnsK75mEEiyg7Q==
+X-Received: by 2002:a17:902:5581:b029:da:a817:1753 with SMTP id g1-20020a1709025581b02900daa8171753mr17030542pli.76.1608574193380;
+        Mon, 21 Dec 2020 10:09:53 -0800 (PST)
+Received: from [192.168.1.70] (ip72-195-250-206.ph.ph.cox.net. [72.195.250.206])
+        by smtp.gmail.com with ESMTPSA id w63sm17017843pfc.20.2020.12.21.10.09.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 21 Dec 2020 10:09:52 -0800 (PST)
+Subject: Re: [PATCH] dmaengine: qcom: bam_dma: Add LOCK and UNLOCK flag bit
+ support
+To:     mdalam@codeaurora.org
+Cc:     vkoul@kernel.org, corbet@lwn.net, agross@kernel.org,
+        bjorn.andersson@linaro.org, dan.j.williams@intel.com,
+        dmaengine@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-arm-msm@vger.kernel.org,
+        sricharan@codeaurora.org
+References: <1608215842-15381-1-git-send-email-mdalam@codeaurora.org>
+ <6c85436d-e064-367e-736b-951af82256c8@linaro.org>
+ <9769c54acf54617a17346fea60ee38b6@codeaurora.org>
+From:   Thara Gopinath <thara.gopinath@linaro.org>
+Message-ID: <8c86f4db-9956-10d1-b380-a207137b50ef@linaro.org>
+Date:   Mon, 21 Dec 2020 13:09:50 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAMZfGtVTqYXOvTHSay-6WS+gtDSCtcN5ksnkj8hJgrUs_XWoWQ@mail.gmail.com>
+In-Reply-To: <9769c54acf54617a17346fea60ee38b6@codeaurora.org>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Dec 21, 2020 at 11:52:30PM +0800, Muchun Song wrote:
-> On Mon, Dec 21, 2020 at 9:44 PM Oscar Salvador <osalvador@suse.de> wrote:
-> >
-> > On Mon, Dec 21, 2020 at 07:25:15PM +0800, Muchun Song wrote:
-> >
-> > > Should we add a BUG_ON in vmemmap_remap_free() for now?
-> > >
-> > >         BUG_ON(reuse != start + PAGE_SIZE);
-> >
-> > I do not think we have to, plus we would be BUG_ing for some specific use
-> > case in "generic" function.
-> 
-> The vmemmap_remap_range() walks page table range [start, end),
-> if reuse is equal to (start + PAGE_SIZE), the range can adjust to
-> [start - PAGE_SIZE, end). But if not, we need some work to
-> implement the "generic" function.
-> 
->   - adjust range to [min(start, reuse), end) and call
->     vmemmap_remap_rangeand which skip the hole
->     which is [reuse + PAGE_SIZE, start) or [end, reuse).
->   - call vmemmap_remap_range(reuse, reuse + PAGE_SIZE)
->     to get the reuse page.Then, call vmemmap_remap_range(start, end)
->     again to remap.
-> 
-> Which one do you prefer?
 
-I would not overcomplicate things at this stage.
-Just follow my sugestion and add a BUG_ON as you said, that might be the
-easier way now.
-We can overthink this in the future when some other usecases come
-around, right?
 
-Thanks
+On 12/21/20 2:35 AM, mdalam@codeaurora.org wrote:
+> On 2020-12-19 09:05, Thara Gopinath wrote:
+>> On 12/17/20 9:37 AM, Md Sadre Alam wrote:
+>>> This change will add support for LOCK & UNLOCK flag bit support
+>>> on CMD descriptor.
+>>>
+>>> If DMA_PREP_LOCK flag passed in prep_slave_sg then requester of this
+>>> transaction wanted to lock the DMA controller for this transaction so
+>>> BAM driver should set LOCK bit for the HW descriptor.
+>>>
+>>> If DMA_PREP_UNLOCK flag passed in prep_slave_sg then requester of this
+>>> transaction wanted to unlock the DMA controller.so BAM driver should set
+>>> UNLOCK bit for the HW descriptor.
+>> Hi,
+>>
+>> This is a generic question. What is the point of LOCK/UNLOCK with
+>> allocating LOCK groups to the individual dma channels? By default
+>> doesn't all channels fall in the same group. This would mean that
+>> a lock does not prevent the dma controller from not executing a
+>> transaction on the other channels.
+>>
+> 
+> The Pipe Locking/Unlocking will be only on command-descriptor.
+> Upon encountering a command descriptor with LOCK bit set, the BAM
+> will lock all other pipes not related to the current pipe group, and keep
+> handling the current pipe only until it sees the UNLOCK set then it will
+> release all locked pipes.
+
+So unless you assign pipe groups, this will not work as intended right? 
+So this patch is only half of the solution. There should also be a patch 
+allowing pipe groups to be assigned. Without that extra bit this patch 
+does nothing , right ?
 
 
 -- 
-Oscar Salvador
-SUSE L3
+Warm Regards
+Thara
