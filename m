@@ -2,203 +2,145 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F7542DFA5E
-	for <lists+linux-doc@lfdr.de>; Mon, 21 Dec 2020 10:48:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E2A102DFAE8
+	for <lists+linux-doc@lfdr.de>; Mon, 21 Dec 2020 11:15:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727058AbgLUJr7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 21 Dec 2020 04:47:59 -0500
-Received: from mx2.suse.de ([195.135.220.15]:38070 "EHLO mx2.suse.de"
+        id S1726253AbgLUKO3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 21 Dec 2020 05:14:29 -0500
+Received: from mail.kernel.org ([198.145.29.99]:33602 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727053AbgLUJof (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 21 Dec 2020 04:44:35 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id A0714AD10;
-        Mon, 21 Dec 2020 09:11:27 +0000 (UTC)
-Date:   Mon, 21 Dec 2020 10:11:23 +0100
-From:   Oscar Salvador <osalvador@suse.de>
-To:     Muchun Song <songmuchun@bytedance.com>
-Cc:     corbet@lwn.net, mike.kravetz@oracle.com, tglx@linutronix.de,
-        mingo@redhat.com, bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
-        viro@zeniv.linux.org.uk, akpm@linux-foundation.org,
-        paulmck@kernel.org, mchehab+huawei@kernel.org,
-        pawan.kumar.gupta@linux.intel.com, rdunlap@infradead.org,
-        oneukum@suse.com, anshuman.khandual@arm.com, jroedel@suse.de,
-        almasrymina@google.com, rientjes@google.com, willy@infradead.org,
-        mhocko@suse.com, song.bao.hua@hisilicon.com, david@redhat.com,
-        naoya.horiguchi@nec.com, duanxiongchun@bytedance.com,
+        id S1726196AbgLUKO3 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 21 Dec 2020 05:14:29 -0500
+Date:   Mon, 21 Dec 2020 14:53:55 +0530
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1608542640;
+        bh=JO4ab5ou5wn2IYemAu40S3kxk97Cbr2moLnttUGZi3k=;
+        h=From:To:Cc:Subject:References:In-Reply-To:From;
+        b=OliryD7qqLmTqyoCTX6dzKbEVI2tjG+ledbsd0RWvXKG8A/KHGORZlnpNDKWkv0Wg
+         9ECU3LxcuWvxzrUcVc7REh/qTu1UGETQSsCOa8Ii2YUXE8Xez/WK/nw7esWPl9Vq7j
+         VVPm4txLNd/Xn/u+tT+WUE6Y3ByL4N+a3JhJBrNGs2yROsTuhaBFGu/XfzJMWvok7i
+         sc0qmk+08Asn6kgIJ4wudG9n2URG9y/tDJKJgFZK6mUD5RRuJP2xGLZYWNFTWnzi77
+         pSUgqMmMJZ36iRCOfqfusv7qq+21JEJTvchTilRnH8iAn8yhE3xHEX7XafyKloTPCq
+         uwkgSKJRNoHsQ==
+From:   Vinod Koul <vkoul@kernel.org>
+To:     Md Sadre Alam <mdalam@codeaurora.org>
+Cc:     corbet@lwn.net, agross@kernel.org, bjorn.andersson@linaro.org,
+        dan.j.williams@intel.com, dmaengine@vger.kernel.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v10 03/11] mm/hugetlb: Free the vmemmap pages associated
- with each HugeTLB page
-Message-ID: <20201221091123.GB14343@linux>
-References: <20201217121303.13386-1-songmuchun@bytedance.com>
- <20201217121303.13386-4-songmuchun@bytedance.com>
+        linux-arm-msm@vger.kernel.org, sricharan@codeaurora.org
+Subject: Re: [PATCH] dmaengine: qcom: bam_dma: Add LOCK and UNLOCK flag bit
+ support
+Message-ID: <20201221092355.GA3323@vkoul-mobl>
+References: <1608215842-15381-1-git-send-email-mdalam@codeaurora.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20201217121303.13386-4-songmuchun@bytedance.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <1608215842-15381-1-git-send-email-mdalam@codeaurora.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Dec 17, 2020 at 08:12:55PM +0800, Muchun Song wrote:
-> +static inline void free_bootmem_page(struct page *page)
-> +{
-> +	unsigned long magic = (unsigned long)page->freelist;
+Hello,
+
+On 17-12-20, 20:07, Md Sadre Alam wrote:
+> This change will add support for LOCK & UNLOCK flag bit support
+> on CMD descriptor.
+> 
+> If DMA_PREP_LOCK flag passed in prep_slave_sg then requester of this
+> transaction wanted to lock the DMA controller for this transaction so
+> BAM driver should set LOCK bit for the HW descriptor.
+> 
+> If DMA_PREP_UNLOCK flag passed in prep_slave_sg then requester of this
+> transaction wanted to unlock the DMA controller.so BAM driver should set
+> UNLOCK bit for the HW descriptor.
+
+Can you explain why would we need to first lock and then unlock..? How
+would this be used in real world.
+
+I have read a bit of documentation but is unclear to me. Also should
+this be exposed as an API to users, sounds like internal to driver..?
+
+
+> 
+> Signed-off-by: Md Sadre Alam <mdalam@codeaurora.org>
+> ---
+>  Documentation/driver-api/dmaengine/provider.rst | 9 +++++++++
+>  drivers/dma/qcom/bam_dma.c                      | 9 +++++++++
+>  include/linux/dmaengine.h                       | 5 +++++
+>  3 files changed, 23 insertions(+)
+> 
+> diff --git a/Documentation/driver-api/dmaengine/provider.rst b/Documentation/driver-api/dmaengine/provider.rst
+> index ddb0a81..d7516e2 100644
+> --- a/Documentation/driver-api/dmaengine/provider.rst
+> +++ b/Documentation/driver-api/dmaengine/provider.rst
+> @@ -599,6 +599,15 @@ DMA_CTRL_REUSE
+>    - This flag is only supported if the channel reports the DMA_LOAD_EOT
+>      capability.
+>  
+> +- DMA_PREP_LOCK
 > +
-> +	/*
-> +	 * The reserve_bootmem_region sets the reserved flag on bootmem
-> +	 * pages.
-> +	 */
-> +	VM_WARN_ON(page_ref_count(page) != 2);
+> +  - If set , the client driver tells DMA controller I am locking you for
+> +    this transcation.
 > +
-> +	if (magic == SECTION_INFO || magic == MIX_SECTION_INFO)
-> +		put_page_bootmem(page);
-> +	else
-> +		VM_WARN_ON(1);
-
-Ideally, I think we want to see what how the page looks since its state
-is not what we expected, so maybe join both conditions and use dump_page().
-
-> + * By removing redundant page structs for HugeTLB pages, memory can returned to
-                                                                     ^^ be
-> + * the buddy allocator for other uses.
-
-[...]
-
-> +void free_huge_page_vmemmap(struct hstate *h, struct page *head)
-> +{
-> +	unsigned long vmemmap_addr = (unsigned long)head;
+> +- DMA_PREP_UNLOCK
 > +
-> +	if (!free_vmemmap_pages_per_hpage(h))
-> +		return;
+> +  - If set, the client driver will tells DMA controller I am releasing the lock
 > +
-> +	vmemmap_remap_free(vmemmap_addr + RESERVE_VMEMMAP_SIZE,
-> +			   free_vmemmap_pages_size_per_hpage(h));
-
-I am not sure what others think, but I would like to see vmemmap_remap_free taking
-three arguments: start, end, and reuse addr, e.g:
-
- void free_huge_page_vmemmap(struct hstate *h, struct page *head)
- {
-      unsigned long vmemmap_addr = (unsigned long)head;
-      unsigned long vmemmap_end, vmemmap_reuse;
-      
-      if (!free_vmemmap_pages_per_hpage(h))
-              return;
-
-      vmemmap_addr += RESERVE_MEMMAP_SIZE;
-      vmemmap_end = vmemmap_addr + free_vmemmap_pages_size_per_hpage(h);
-      vmemmap_reuse = vmemmap_addr - PAGE_SIZE;
- 
-      vmemmap_remap_free(vmemmap_addr, vmemmap_end, vmemmap_reuse);
- }
-
-The reason for me to do this is to let the callers of vmemmap_remap_free decide
-__what__ they want to remap.
-
-More on this below.
-
-
-> +static void vmemmap_pte_range(pmd_t *pmd, unsigned long addr,
-> +			      unsigned long end,
-> +			      struct vmemmap_remap_walk *walk)
-> +{
-> +	pte_t *pte;
-> +
-> +	pte = pte_offset_kernel(pmd, addr);
-> +
-> +	if (walk->reuse_addr == addr) {
-> +		BUG_ON(pte_none(*pte));
-> +		walk->reuse_page = pte_page(*pte++);
-> +		addr += PAGE_SIZE;
+>  General Design Notes
+>  ====================
+>  
+> diff --git a/drivers/dma/qcom/bam_dma.c b/drivers/dma/qcom/bam_dma.c
+> index 4eeb8bb..cdbe395 100644
+> --- a/drivers/dma/qcom/bam_dma.c
+> +++ b/drivers/dma/qcom/bam_dma.c
+> @@ -58,6 +58,8 @@ struct bam_desc_hw {
+>  #define DESC_FLAG_EOB BIT(13)
+>  #define DESC_FLAG_NWD BIT(12)
+>  #define DESC_FLAG_CMD BIT(11)
+> +#define DESC_FLAG_LOCK BIT(10)
+> +#define DESC_FLAG_UNLOCK BIT(9)
+>  
+>  struct bam_async_desc {
+>  	struct virt_dma_desc vd;
+> @@ -644,6 +646,13 @@ static struct dma_async_tx_descriptor *bam_prep_slave_sg(struct dma_chan *chan,
+>  
+>  	/* fill in temporary descriptors */
+>  	desc = async_desc->desc;
+> +	if (flags & DMA_PREP_CMD) {
+> +		if (flags & DMA_PREP_LOCK)
+> +			desc->flags |= cpu_to_le16(DESC_FLAG_LOCK);
+> +		if (flags & DMA_PREP_UNLOCK)
+> +			desc->flags |= cpu_to_le16(DESC_FLAG_UNLOCK);
 > +	}
-
-Although it is quite obvious, a brief comment here pointing out what are we
-doing and that this is meant to be set only once would be nice.
-
-
-> +static void vmemmap_remap_range(unsigned long start, unsigned long end,
-> +				struct vmemmap_remap_walk *walk)
-> +{
-> +	unsigned long addr = start - PAGE_SIZE;
-> +	unsigned long next;
-> +	pgd_t *pgd;
 > +
-> +	VM_BUG_ON(!IS_ALIGNED(start, PAGE_SIZE));
-> +	VM_BUG_ON(!IS_ALIGNED(end, PAGE_SIZE));
-> +
-> +	walk->reuse_page = NULL;
-> +	walk->reuse_addr = addr;
-
-With the change I suggested above, struct vmemmap_remap_walk should be
-initialitzed at once in vmemmap_remap_free, so this should not longer be needed.
-(And btw, you do not need to set reuse_page to NULL, the way you init the struct
-in vmemmap_remap_free makes sure to null any field you do not explicitly set).
-
-
-> +static void vmemmap_remap_pte(pte_t *pte, unsigned long addr,
-> +			      struct vmemmap_remap_walk *walk)
-> +{
-> +	/*
-> +	 * Make the tail pages are mapped with read-only to catch
-> +	 * illegal write operation to the tail pages.
-        "Remap the tail pages as read-only to ..."
-
-> +	 */
-> +	pgprot_t pgprot = PAGE_KERNEL_RO;
-> +	pte_t entry = mk_pte(walk->reuse_page, pgprot);
-> +	struct page *page;
-> +
-> +	page = pte_page(*pte);
-
- struct page *page = pte_page(*pte);
-
-since you did the same for the other two.
-
-> +	list_add(&page->lru, walk->vmemmap_pages);
-> +
-> +	set_pte_at(&init_mm, addr, pte, entry);
-> +}
-> +
-> +/**
-> + * vmemmap_remap_free - remap the vmemmap virtual address range
-> + *                      [start, start + size) to the page which
-> + *                      [start - PAGE_SIZE, start) is mapped,
-> + *                      then free vmemmap pages.
-> + * @start:	start address of the vmemmap virtual address range
-> + * @size:	size of the vmemmap virtual address range
-> + */
-> +void vmemmap_remap_free(unsigned long start, unsigned long size)
-> +{
-> +	unsigned long end = start + size;
-> +	LIST_HEAD(vmemmap_pages);
-> +
-> +	struct vmemmap_remap_walk walk = {
-> +		.remap_pte	= vmemmap_remap_pte,
-> +		.vmemmap_pages	= &vmemmap_pages,
-> +	};
-
-As stated above, this would become:
-
- void vmemmap_remap_free(unsigned long start, unsigned long end,
-                         usigned long reuse)
- {
-       LIST_HEAD(vmemmap_pages);
-       struct vmemmap_remap_walk walk = {
-               .reuse_addr = reuse,
-               .remap_pte = vmemmap_remap_pte,
-               .vmemmap_pages = &vmemmap_pages,
-       };
-
-  You might have had your reasons to do this way, but this looks more natural
-  to me, with the plus that callers of vmemmap_remap_free can specify
-  what they want to remap.
-
+>  	for_each_sg(sgl, sg, sg_len, i) {
+>  		unsigned int remainder = sg_dma_len(sg);
+>  		unsigned int curr_offset = 0;
+> diff --git a/include/linux/dmaengine.h b/include/linux/dmaengine.h
+> index dd357a7..79ccadb4 100644
+> --- a/include/linux/dmaengine.h
+> +++ b/include/linux/dmaengine.h
+> @@ -190,6 +190,9 @@ struct dma_interleaved_template {
+>   *  transaction is marked with DMA_PREP_REPEAT will cause the new transaction
+>   *  to never be processed and stay in the issued queue forever. The flag is
+>   *  ignored if the previous transaction is not a repeated transaction.
+> + * @DMA_PREP_LOCK: tell the driver that DMA HW engine going to be locked for this
+> + *  transaction , until not seen DMA_PREP_UNLOCK flag set.
+> + * @DMA_PREP_UNLOCK: tell the driver to unlock the DMA HW engine.
+>   */
+>  enum dma_ctrl_flags {
+>  	DMA_PREP_INTERRUPT = (1 << 0),
+> @@ -202,6 +205,8 @@ enum dma_ctrl_flags {
+>  	DMA_PREP_CMD = (1 << 7),
+>  	DMA_PREP_REPEAT = (1 << 8),
+>  	DMA_PREP_LOAD_EOT = (1 << 9),
+> +	DMA_PREP_LOCK = (1 << 10),
+> +	DMA_PREP_UNLOCK = (1 << 11),
+>  };
+>  
+>  /**
+> -- 
+> 2.7.4
 
 -- 
-Oscar Salvador
-SUSE L3
+~Vinod
