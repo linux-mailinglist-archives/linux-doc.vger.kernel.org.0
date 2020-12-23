@@ -2,85 +2,105 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2B1122E1FA7
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Dec 2020 18:00:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 61E4D2E207F
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Dec 2020 19:40:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725811AbgLWRAX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Dec 2020 12:00:23 -0500
-Received: from mail-pl1-f170.google.com ([209.85.214.170]:34504 "EHLO
-        mail-pl1-f170.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725807AbgLWRAX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Dec 2020 12:00:23 -0500
-Received: by mail-pl1-f170.google.com with SMTP id t6so9426640plq.1;
-        Wed, 23 Dec 2020 09:00:07 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=C5J0im/g/lziWkOXhLJMkLHB39Y3IwOJRzVpXSFIMwo=;
-        b=b7FVHvlxZxgfeH70dfJLxtdeSo+wXThcBKdgGERIWTOI5L5I1oCrHxVRjOc/QM1QE/
-         XAZAYx/wf7IF2iqzGrel57kS4MBRpvgE3bjjhJYqsjnoAruEN53BxmkKkrPF0g2qdGkO
-         ixsyUqwkR6jEICWv3js50/+qXyuUzI6gC0A8/uDEKn8GtxscNMx5Qzgo+A0TMH6dqZCS
-         xNK5h/7r2b+Gp3XbHeUFV61UPPOj75yu+JJyGhXQutlba/I4oA5B884Ml5mEJ2d/0+GV
-         lIyddkVteXIkfbDepHQANFZw4pEZO0sMA5ChirvtOp+zWZO6TIzVzmtM6A7PsmFGUFR8
-         vt8g==
-X-Gm-Message-State: AOAM531qEV/o/DkBQufxCKDOg4WbBhtGy0QWM3+2HtCqwO8AVgje3Xpe
-        U3z/lcw+7lrt1sI2v2O50g69mS/yoxM=
-X-Google-Smtp-Source: ABdhPJzqv31c8q2ac9TtdhmNSe0N38boCxuCdDiKIhDRPStVefyp5/WAIeJm9xrsMsbN4NqKKvm8qw==
-X-Received: by 2002:a17:902:523:b029:dc:1aa4:28e7 with SMTP id 32-20020a1709020523b02900dc1aa428e7mr26256507plf.4.1608742781850;
-        Wed, 23 Dec 2020 08:59:41 -0800 (PST)
-Received: from [192.168.3.217] (c-73-241-217-19.hsd1.ca.comcast.net. [73.241.217.19])
-        by smtp.gmail.com with ESMTPSA id b10sm24081106pgh.15.2020.12.23.08.59.39
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 23 Dec 2020 08:59:40 -0800 (PST)
-Subject: Re: [PATCH v1 0/5] dm: dm-user: New target that proxies BIOs to
- userspace
-To:     Christoph Hellwig <hch@infradead.org>,
-        Palmer Dabbelt <palmer@dabbelt.com>
-Cc:     snitzer@redhat.com, josef@toxicpanda.com, corbet@lwn.net,
-        kernel-team@android.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-raid@vger.kernel.org,
-        song@kernel.org, dm-devel@redhat.com,
-        linux-kselftest@vger.kernel.org, shuah@kernel.org, agk@redhat.com,
-        michael.christie@oracle.com
-References: <20201222143616.GB12885@redhat.com>
- <mhng-26d96d8e-77aa-415b-a8ee-518a0e91b6ef@palmerdabbelt-glaptop>
- <20201223074850.GA15369@infradead.org>
-From:   Bart Van Assche <bvanassche@acm.org>
-Message-ID: <8f09b196-0977-3b81-2bfe-4a97b1e0e3aa@acm.org>
-Date:   Wed, 23 Dec 2020 08:59:38 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.1
+        id S1728235AbgLWSiw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Dec 2020 13:38:52 -0500
+Received: from smtp-fw-6002.amazon.com ([52.95.49.90]:61521 "EHLO
+        smtp-fw-6002.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727207AbgLWSiw (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Dec 2020 13:38:52 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1608748732; x=1640284732;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   mime-version;
+  bh=PMQG4qz/czIhu/3Vb66DfarbU9VPAw72RQIGHA4B6zU=;
+  b=fCYdRZh9d5cM3hF2hQNeZKPl/maSbdB3g3dOE2C9gClhmWUTAyKAITCM
+   0OHhiwiuhA354Vtj7Jxp3/Pt2YJyRIF2RCc220aGW4gzj5cbqMZ27M3TO
+   zOR6Vvtq7UOZzqTSfzJscDVBVkGmmOSzHqCHx+LqR097A4tVBneqtDmaW
+   c=;
+X-IronPort-AV: E=Sophos;i="5.78,442,1599523200"; 
+   d="scan'208";a="73319603"
+Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO email-inbound-relay-1e-303d0b0e.us-east-1.amazon.com) ([10.43.8.2])
+  by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP; 23 Dec 2020 18:38:04 +0000
+Received: from EX13D31EUA001.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan3.iad.amazon.com [10.40.163.38])
+        by email-inbound-relay-1e-303d0b0e.us-east-1.amazon.com (Postfix) with ESMTPS id 81C9BA1F19;
+        Wed, 23 Dec 2020 18:37:52 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.160.66) by
+ EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Wed, 23 Dec 2020 18:37:35 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     SeongJae Park <sjpark@amazon.com>
+CC:     <akpm@linux-foundation.org>, <Jonathan.Cameron@Huawei.com>,
+        <aarcange@redhat.com>, <acme@kernel.org>,
+        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
+        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
+        <brendanhiggins@google.com>, <cai@lca.pw>,
+        <colin.king@canonical.com>, <corbet@lwn.net>, <david@redhat.com>,
+        <dwmw@amazon.com>, <elver@google.com>, <fan.du@intel.com>,
+        <foersleo@amazon.de>, <gthelen@google.com>, <irogers@google.com>,
+        <jolsa@redhat.com>, <kirill@shutemov.name>, <mark.rutland@arm.com>,
+        <mgorman@suse.de>, <minchan@kernel.org>, <mingo@redhat.com>,
+        <namhyung@kernel.org>, <peterz@infradead.org>,
+        <rdunlap@infradead.org>, <riel@surriel.com>, <rientjes@google.com>,
+        <rostedt@goodmis.org>, <rppt@kernel.org>, <sblbir@amazon.com>,
+        <shakeelb@google.com>, <shuah@kernel.org>, <sj38.park@gmail.com>,
+        <snu@amazon.de>, <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
+        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
+        <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
+        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v23 11/15] tools: Introduce a minimal user-space tool for DAMON
+Date:   Wed, 23 Dec 2020 19:37:21 +0100
+Message-ID: <20201223183721.8898-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201215115448.25633-12-sjpark@amazon.com>
 MIME-Version: 1.0
-In-Reply-To: <20201223074850.GA15369@infradead.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
+X-Originating-IP: [10.43.160.66]
+X-ClientProxiedBy: EX13D35UWB003.ant.amazon.com (10.43.161.65) To
+ EX13D31EUA001.ant.amazon.com (10.43.165.15)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 12/22/20 11:48 PM, Christoph Hellwig wrote:
-> FYI, a few years ago I spent some time helping a customer to prepare
-> their block device in userspace using fuse code for upstreaming, but
-> at some point they abandoned the project.  But if for some reason we
-> don't want to use nbd I think a driver using the fuse infrastructure
-> would be the next logical choice.
+On Tue, 15 Dec 2020 12:54:44 +0100 SeongJae Park <sjpark@amazon.com> wrote:
 
-Hi Christoph,
+> From: SeongJae Park <sjpark@amazon.de>
+> 
+> 'damon-dbgfs' provides simple user space interface for DAMON, but using
+> the interface for complex usages could require annoying repetitive
+> works.  Writing a user space data access monitoring applications on top
+> of the debugfs interface and using the application would be better for
+> such complex cases.
+> 
+> This commit introduces a reference implementation of such user space
+> application built on top of the debugfs interface, namely 'DAMon
+> Operator' (DAMO).  It contains a shallow wrapper python script of the
+> debugfs interface and various visualization of the monitoring results
+> convenient user interface.
+> 
+> Note that it is initially aimed to be used for minimal reference of the
+> 'damon-dbgfs' interface and for debugging of the DAMON itself.
+> 
+> Signed-off-by: SeongJae Park <sjpark@amazon.de>
+> ---
+>  tools/damon/.gitignore    |   1 +
+>  tools/damon/_damon.py     | 130 ++++++++++++++
+>  tools/damon/_dist.py      |  35 ++++
+>  tools/damon/_recfile.py   |  23 +++
+>  tools/damon/bin2txt.py    |  67 +++++++
+>  tools/damon/damo          |  37 ++++
+>  tools/damon/heats.py      | 362 ++++++++++++++++++++++++++++++++++++++
+>  tools/damon/nr_regions.py |  91 ++++++++++
+>  tools/damon/record.py     | 135 ++++++++++++++
+>  tools/damon/report.py     |  45 +++++
+>  tools/damon/wss.py        | 100 +++++++++++
+>  11 files changed, 1026 insertions(+)
 
-Thanks for having shared this information. Since I'm not familiar with the
-FUSE code: does this mean translating block device accesses into FUSE_READ
-and FUSE_WRITE messages? Does the FUSE kernel code only support exchanging
-such messages between kernel and user space via the read() and write()
-system calls? I'm asking this since there is already an interface in the
-Linux kernel for implementing block devices in user space that uses another
-approach, namely a ring buffer for messages and data that is shared between
-kernel and user space (documented in Documentation/target/tcmu-design.rst).
-Is one system call per read and per write operation fast enough for all
-block-device-in-user-space implementations?
-
-Thanks,
-
-Bart.
+I will drop this patch from the next version of this patchset, because this is
+not the essential part but could only make the code review time consuming.  I
+will post another DAMON RFC patchset for convenient user space usages including
+this and the perf integration.
