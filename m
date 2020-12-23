@@ -2,57 +2,50 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B9E2F2E1976
-	for <lists+linux-doc@lfdr.de>; Wed, 23 Dec 2020 08:50:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 73E062E19F8
+	for <lists+linux-doc@lfdr.de>; Wed, 23 Dec 2020 09:31:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727184AbgLWHtv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 23 Dec 2020 02:49:51 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58324 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727179AbgLWHtv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 23 Dec 2020 02:49:51 -0500
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 126BDC0613D3;
-        Tue, 22 Dec 2020 23:49:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=VJA2Gqy8jGT0RgzTT5UVlJfq4XprQm8NpWSKksAaoTw=; b=Y2KK7HRkXqg1VLN9ubpTwYDI0w
-        Ep+SKigC5jwe2uB1UnUMz3uOsrVasAiYXZUzP9QprSSBjPJVqSZvomAb9NqBq8/VzqcNEclwAUs/a
-        9DpG7xDpanTsGh1QSz6ldIcRgzZwLujXZ+nZ/jcAJSf48gFxTkatMqAmJmc2aOcQMSVzk2xyxf/9+
-        tGNvyc4LINYaZpwmksQKJ4Mnlp6k069qYALw9MkYmOSKZVWgpS4Mesca9CJVr2T0TaIpy6LcqkJTl
-        9gjBt/ayYYok4M0W0gqXj+mKdlMVIPkSK6Ni3DTGAUivYygjDnO58CGjHXQgH7OiKrcppizSGoHq+
-        xahlPh9g==;
-Received: from hch by casper.infradead.org with local (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1kryt8-00046B-Vc; Wed, 23 Dec 2020 07:48:52 +0000
-Date:   Wed, 23 Dec 2020 07:48:50 +0000
-From:   Christoph Hellwig <hch@infradead.org>
-To:     Palmer Dabbelt <palmer@dabbelt.com>
-Cc:     snitzer@redhat.com, Christoph Hellwig <hch@infradead.org>,
-        josef@toxicpanda.com, bvanassche@acm.org, corbet@lwn.net,
-        kernel-team@android.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-raid@vger.kernel.org,
-        song@kernel.org, dm-devel@redhat.com,
-        linux-kselftest@vger.kernel.org, shuah@kernel.org, agk@redhat.com,
-        michael.christie@oracle.com
-Subject: Re: [PATCH v1 0/5] dm: dm-user: New target that proxies BIOs to
- userspace
-Message-ID: <20201223074850.GA15369@infradead.org>
-References: <20201222143616.GB12885@redhat.com>
- <mhng-26d96d8e-77aa-415b-a8ee-518a0e91b6ef@palmerdabbelt-glaptop>
+        id S1728133AbgLWIae (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 23 Dec 2020 03:30:34 -0500
+Received: from verein.lst.de ([213.95.11.211]:33782 "EHLO verein.lst.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1728002AbgLWIad (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 23 Dec 2020 03:30:33 -0500
+Received: by verein.lst.de (Postfix, from userid 2407)
+        id 9E9CA67373; Wed, 23 Dec 2020 09:29:50 +0100 (CET)
+Date:   Wed, 23 Dec 2020 09:29:50 +0100
+From:   Christoph Hellwig <hch@lst.de>
+To:     Joe Perches <joe@perches.com>
+Cc:     Christoph Hellwig <hch@lst.de>,
+        Matthew Wilcox <willy@infradead.org>, apw@canonical.com,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        linux-kernel@vger.kernel.org,
+        linux-doc <linux-doc@vger.kernel.org>,
+        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Subject: Re: [PATCH] checkpatch: make the line length warnings match the
+ coding style document
+Message-ID: <20201223082950.GA7129@lst.de>
+References: <20201210082251.2717564-1-hch@lst.de> <c3f1d9de2e5a61588f64e69a1309968d84a2dd12.camel@perches.com> <20201210200930.GB7338@casper.infradead.org> <4898c0c03d370a23b1b98ddabb72e70ec8d430fa.camel@perches.com> <93a470c7631d2607e7b2a12e9cc5d8e930911989.camel@perches.com> <20201222131234.GA29028@lst.de> <983e6452a7f2af14ca7edfa56cd2e2997172a771.camel@perches.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <mhng-26d96d8e-77aa-415b-a8ee-518a0e91b6ef@palmerdabbelt-glaptop>
-X-SRS-Rewrite: SMTP reverse-path rewritten from <hch@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+In-Reply-To: <983e6452a7f2af14ca7edfa56cd2e2997172a771.camel@perches.com>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Tue, Dec 22, 2020 at 08:22:06AM -0800, Joe Perches wrote:
+> Having checkpatch complain about > 80 column lines didn't stop
+> patches before, likely it wouldn't stop patches now.
+> 
+> Emitting yet more messages for trivial lines > 80 columns is also
+> against the intent of the commit that changed the line length maximum.
 
-FYI, a few years ago I spent some time helping a customer to prepare
-their block device in userspace using fuse code for upstreaming, but
-at some point they abandoned the project.  But if for some reason we
-don't want to use nbd I think a driver using the fuse infrastructure
-would be the next logical choice.
+It certainly helped.  Since that checkpatch change I waste a lot more
+of my time on finding all this crap, and people are confused because
+they only rely on checkpatch.  Other maintainers are similarly annoyed
+or just silently fix things up.
+
+Right now this is making things much worse.
