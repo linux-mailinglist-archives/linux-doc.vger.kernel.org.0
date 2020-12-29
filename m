@@ -2,103 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D3E252E6F3F
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Dec 2020 10:12:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A04902E70A7
+	for <lists+linux-doc@lfdr.de>; Tue, 29 Dec 2020 13:42:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1725866AbgL2JJk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Dec 2020 04:09:40 -0500
-Received: from guitar.tcltek.co.il ([192.115.133.116]:47623 "EHLO
-        mx.tkos.co.il" rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726138AbgL2JJf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 29 Dec 2020 04:09:35 -0500
-Received: from tarshish.tkos.co.il (unknown [10.0.8.2])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+        id S1726196AbgL2MmF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 29 Dec 2020 07:42:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41812 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1725964AbgL2MmE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 29 Dec 2020 07:42:04 -0500
+Received: from mail.skyhub.de (mail.skyhub.de [IPv6:2a01:4f8:190:11c2::b:1457])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5D7B5C0613D6;
+        Tue, 29 Dec 2020 04:41:24 -0800 (PST)
+Received: from zn.tnic (p2e584e83.dip0.t-ipconnect.de [46.88.78.131])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mx.tkos.co.il (Postfix) with ESMTPS id 14BEF440B08;
-        Tue, 29 Dec 2020 11:08:51 +0200 (IST)
-From:   Baruch Siach <baruch@tkos.co.il>
-To:     "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        =?UTF-8?q?Ulisses=20Alonso=20Camar=C3=B3?= <uaca@alumni.uv.es>,
-        Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
-        Baruch Siach <baruch@tkos.co.il>
-Subject: [PATCH v2 2/2] docs: networking: packet_mmap: fix old config reference
-Date:   Tue, 29 Dec 2020 11:08:39 +0200
-Message-Id: <80089f3783372c8fd7833f28ce774a171b2ef252.1609232919.git.baruch@tkos.co.il>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <5cb47005e7a59b64299e038827e295822193384c.1609232919.git.baruch@tkos.co.il>
-References: <5cb47005e7a59b64299e038827e295822193384c.1609232919.git.baruch@tkos.co.il>
+        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 8F8A61EC04EC;
+        Tue, 29 Dec 2020 13:41:22 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+        t=1609245682;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+        bh=OOvXZBMQoIK+UvAUZYe+0qhjBjyUbhc4PxiosDWY7K8=;
+        b=kSuZWitBGMRGQgaVggsdrAEL0Efy6toGfl5eErUFhou97tpqX+9b/p9nk/yCryuEtYGxJJ
+        nLtpzpe73aNhdSirVgFlhBSWelCg12bdGxtFgP7bfWtiRHIVkis2gYEbs9o8jv2mspotTD
+        n+cLy+uJbPZtThZnmxp/C/nzgtm7zFc=
+Date:   Tue, 29 Dec 2020 13:39:10 +0100
+From:   Borislav Petkov <bp@alien8.de>
+To:     Yu-cheng Yu <yu-cheng.yu@intel.com>
+Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>
+Subject: Re: [PATCH v16 02/26] x86/cet/shstk: Add Kconfig option for
+ user-mode control-flow protection
+Message-ID: <20201229123910.GB29947@zn.tnic>
+References: <20201209222320.1724-1-yu-cheng.yu@intel.com>
+ <20201209222320.1724-3-yu-cheng.yu@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20201209222320.1724-3-yu-cheng.yu@intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Before commit 889b8f964f2f ("packet: Kill CONFIG_PACKET_MMAP.") there
-used to be a CONFIG_PACKET_MMAP config symbol that depended on
-CONFIG_PACKET. The text still implies that PACKET_MMAP can be disabled.
-Remove that from the text, as well as reference to old kernel versions.
+On Wed, Dec 09, 2020 at 02:22:56PM -0800, Yu-cheng Yu wrote:
+> Shadow Stack provides protection against function return address
+> corruption.  It is active when the processor supports it, the kernel has
+> CONFIG_X86_CET_USER, and the application is built for the feature.
+		     ^
+		   enabled.
 
-Also, drop reference to broken link to information for pre 2.6.5
-kernels.
+> This is only implemented for the 64-bit kernel.  When it is enabled, legacy
+> non-Shadow Stack applications continue to work, but without protection.
+> 
+> Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
+> ---
+>  arch/x86/Kconfig           | 22 ++++++++++++++++++++++
+>  arch/x86/Kconfig.assembler |  5 +++++
+>  2 files changed, 27 insertions(+)
 
-Make a slight working improvement (s/In/On/) while at it.
+Rest looks good, thanks.
 
-Signed-off-by: Baruch Siach <baruch@tkos.co.il>
----
-v2: Address comments from Jakub Kicinski and Willem de Bruijn
-
-  * Don't change PACKET_MMAP
-
-  * Remove mention of specific kernel versions
-
-  * Don't reflow paragraphs
-
-  * s/In/On/
----
- Documentation/networking/packet_mmap.rst | 9 ++++-----
- 1 file changed, 4 insertions(+), 5 deletions(-)
-
-diff --git a/Documentation/networking/packet_mmap.rst b/Documentation/networking/packet_mmap.rst
-index f3646c80b019..500ef60b1b82 100644
---- a/Documentation/networking/packet_mmap.rst
-+++ b/Documentation/networking/packet_mmap.rst
-@@ -8,7 +8,7 @@ Abstract
- ========
- 
- This file documents the mmap() facility available with the PACKET
--socket interface on 2.4/2.6/3.x kernels. This type of sockets is used for
-+socket interface. This type of sockets is used for
- 
- i) capture network traffic with utilities like tcpdump,
- ii) transmit network traffic, or any other that needs raw
-@@ -25,12 +25,12 @@ Please send your comments to
- Why use PACKET_MMAP
- ===================
- 
--In Linux 2.4/2.6/3.x if PACKET_MMAP is not enabled, the capture process is very
-+Non PACKET_MMAP capture process (plain AF_PACKET) is very
- inefficient. It uses very limited buffers and requires one system call to
- capture each packet, it requires two if you want to get packet's timestamp
- (like libpcap always does).
- 
--In the other hand PACKET_MMAP is very efficient. PACKET_MMAP provides a size
-+On the other hand PACKET_MMAP is very efficient. PACKET_MMAP provides a size
- configurable circular buffer mapped in user space that can be used to either
- send or receive packets. This way reading packets just needs to wait for them,
- most of the time there is no need to issue a single system call. Concerning
-@@ -252,8 +252,7 @@ PACKET_MMAP setting constraints
- 
- In kernel versions prior to 2.4.26 (for the 2.4 branch) and 2.6.5 (2.6 branch),
- the PACKET_MMAP buffer could hold only 32768 frames in a 32 bit architecture or
--16384 in a 64 bit architecture. For information on these kernel versions
--see http://pusa.uv.es/~ulisses/packet_mmap/packet_mmap.pre-2.4.26_2.6.5.txt
-+16384 in a 64 bit architecture.
- 
- Block size limit
- ----------------
 -- 
-2.29.2
+Regards/Gruss,
+    Boris.
 
+https://people.kernel.org/tglx/notes-about-netiquette
