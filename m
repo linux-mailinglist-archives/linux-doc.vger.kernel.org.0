@@ -2,97 +2,161 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 521DE2E74CC
-	for <lists+linux-doc@lfdr.de>; Tue, 29 Dec 2020 22:39:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4BAA52E7731
+	for <lists+linux-doc@lfdr.de>; Wed, 30 Dec 2020 09:48:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727352AbgL2Vff (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 29 Dec 2020 16:35:35 -0500
-Received: from mga09.intel.com ([134.134.136.24]:31879 "EHLO mga09.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727351AbgL2Vfd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 29 Dec 2020 16:35:33 -0500
-IronPort-SDR: uPicJDn48RaQcZybJpL7Nyx1R5DaRTFimxJR4iv2uX7hH7+mjU3bi0n7rokYgHQTXqVepH6xVJ
- mgS4mihpdmxg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9849"; a="176695636"
-X-IronPort-AV: E=Sophos;i="5.78,459,1599548400"; 
-   d="scan'208";a="176695636"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Dec 2020 13:34:23 -0800
-IronPort-SDR: 039ybZnVZv3H42RPBEG94YL9PcwvK1bh/A5EYGAX2y2byYnFiBudaLa+OfDwhMYyNskXBShYyV
- 3gYfJ6125Bkg==
-X-IronPort-AV: E=Sophos;i="5.78,459,1599548400"; 
-   d="scan'208";a="376190153"
-Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Dec 2020 13:34:22 -0800
-From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
-To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
-Subject: [PATCH v17 7/7] x86/vdso: Insert endbr32/endbr64 to vDSO
-Date:   Tue, 29 Dec 2020 13:33:50 -0800
-Message-Id: <20201229213350.17010-8-yu-cheng.yu@intel.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20201229213350.17010-1-yu-cheng.yu@intel.com>
-References: <20201229213350.17010-1-yu-cheng.yu@intel.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1726352AbgL3Iri (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 30 Dec 2020 03:47:38 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57294 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726348AbgL3Iri (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 30 Dec 2020 03:47:38 -0500
+Received: from mail-pf1-x433.google.com (mail-pf1-x433.google.com [IPv6:2607:f8b0:4864:20::433])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5993DC061799;
+        Wed, 30 Dec 2020 00:46:58 -0800 (PST)
+Received: by mail-pf1-x433.google.com with SMTP id f9so9361922pfc.11;
+        Wed, 30 Dec 2020 00:46:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:subject:date:message-id;
+        bh=4hCJ1uMJpAFhFUoq0+DB5gxgdyiGzPgLXZHVoajEEEA=;
+        b=PHm5ofpjbWbsoLGYwa9L10tOUovyRO/uI6H5ddbo36wgCesQ7mcCy2z3oBMiUEaf3/
+         5Mc0kNcQk8jyewpciwrxPxJ5bgppu2LydQFqLUieJPndZtHr/bgH4raxv0RX+7sdlxcp
+         38BDnO6xoVzWIMbVYYfKNNUw0KSMSMraT0jur/NJB+YPnqXsvcXZMQB7wc3p+DXjkf0B
+         sg44yNm4lr6KHxZ/Cy+1db3DgaR3CNCnOETlOnJgPgwD3XAlN86C/9iO17DVM8XwRq4o
+         nZFvz/KntWpSba/IddB2VFM9A3Fjklaem/GsXSV03N+GgkLCWEBVyTYTcu5YFK+hWfqJ
+         dpJA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id;
+        bh=4hCJ1uMJpAFhFUoq0+DB5gxgdyiGzPgLXZHVoajEEEA=;
+        b=NvML41CRfy7AohAAnzgeu9f/p6sUmLp/r86HU7/YnhiXJ85XdVVkHQJBUPPihuQ1Uh
+         nJ7NhdLCpmDi4q6H+v6X4Aa7K7phg0sVpklBDMItugDn06rds8cCY8D2IdJL+KLtceVJ
+         UpEBx+27dBVGlsFo+pGwZ8CwdKw874NfbkqC/l91BLniPZ4xQXlbaoW/x43i97RD2yvm
+         OsCvjtVGLfBvlKSz+VgQJkSgpcseO4D3GMLkJPr6Osi+ZcYkrPxtD61kE686pUP4gyee
+         to34sqR8i28OpXywNGZuRJ4tGx/809wj0U0Ox2piDEf/SaUod+dSoeCdiYH+BQ5QUTbL
+         +1MA==
+X-Gm-Message-State: AOAM531bc4WTg1l8ewXIJDKWrDAHAZsg73N6cNUyHz/G5nFYkIXfaOdC
+        3oChq0mDgFQo5Qj3aVUbJgfjXIgbJw==
+X-Google-Smtp-Source: ABdhPJwcsakYdfFcFOfWAxfpjWtQAy1hsG9kYylK6U1z+W9dz0HstcNWGR26ZyKh7ZHxUq2BPHRlyw==
+X-Received: by 2002:a63:8f4c:: with SMTP id r12mr51411688pgn.311.1609318017913;
+        Wed, 30 Dec 2020 00:46:57 -0800 (PST)
+Received: from localhost.localdomain ([216.52.21.4])
+        by smtp.gmail.com with ESMTPSA id 22sm41936113pfn.190.2020.12.30.00.46.56
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Wed, 30 Dec 2020 00:46:57 -0800 (PST)
+From:   Praveen Chaudhary <praveen5582@gmail.com>
+X-Google-Original-From: Praveen Chaudhary <pchaudhary@linkedin.com>
+To:     davem@davemloft.net, kuba@kernel.org, corbet@lwn.net,
+        kuznet@ms2.inr.ac.ru, yoshfuji@linux-ipv6.org,
+        netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH] Allow user to set metric on default route learned via Router Advertisement.
+Date:   Wed, 30 Dec 2020 00:46:43 -0800
+Message-Id: <1609318004-12709-1-git-send-email-pchaudhary@linkedin.com>
+X-Mailer: git-send-email 2.7.4
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: "H.J. Lu" <hjl.tools@gmail.com>
+Allow user to set metric on default route learned via Router Advertisement.
+Not: RFC 4191 does not say anything for metric for IPv6 default route.
 
-When Indirect Branch Tracking (IBT) is enabled, vDSO functions may be
-called indirectly, and must have ENDBR32 or ENDBR64 as the first
-instruction.  The compiler must support -fcf-protection=branch so that it
-can be used to compile vDSO.
+Fix:
+For IPv4, default route is learned via DHCPv4 and user is allowed to change
+metric using config etc/network/interfaces. But for IPv6, default route can
+be learned via RA, for which, currently a fixed metric value 1024 is used.
 
-Signed-off-by: H.J. Lu <hjl.tools@gmail.com>
-Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
-Acked-by: Andy Lutomirski <luto@kernel.org>
----
- arch/x86/entry/vdso/Makefile | 4 ++++
- 1 file changed, 4 insertions(+)
+Ideally, user should be able to configure metric on default route for IPv6
+similar to IPv4. This fix adds sysctl for the same.
 
-diff --git a/arch/x86/entry/vdso/Makefile b/arch/x86/entry/vdso/Makefile
-index 02e3e42f380b..4d9225758a73 100644
---- a/arch/x86/entry/vdso/Makefile
-+++ b/arch/x86/entry/vdso/Makefile
-@@ -93,6 +93,10 @@ endif
- 
- $(vobjs): KBUILD_CFLAGS := $(filter-out $(GCC_PLUGINS_CFLAGS) $(RETPOLINE_CFLAGS),$(KBUILD_CFLAGS)) $(CFL)
- 
-+ifdef CONFIG_X86_CET_USER
-+$(vobjs) $(vobjs32): KBUILD_CFLAGS += -fcf-protection=branch
-+endif
-+
- #
- # vDSO code runs in userspace and -pg doesn't help with profiling anyway.
- #
+Logs:
+----------------------------------------------------------------
+For IPv4:
+----------------------------------------------------------------
+
+Config in etc/network/interfaces
+----------------------------------------------------------------
+```
+auto eth0
+iface eth0 inet dhcp
+    metric 4261413864
+```
+
+IPv4 Kernel Route Table:
+----------------------------------------------------------------
+```
+$ sudo route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+0.0.0.0         172.11.44.1     0.0.0.0         UG    -33553432 0        0 eth0
+```
+
+FRR Table, if default route is learned via routing protocol too.
+----------------------------------------------------------------
+```
+# show ip route 
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, P - PIM, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       > - selected route, * - FIB route
+
+S>* 0.0.0.0/0 [20/0] is directly connected, eth0, 00:00:03
+K   0.0.0.0/0 [254/1000] via 172.21.47.1, eth0, 6d08h51m
+```
+
+----------------------------------------------------------------
+i.e. User can prefer Default Router learned via Routing Protocol, 
+Similar behavior is not possible for IPv6, without this fix.
+
+
+----------------------------------------------------------------
+After fix [for IPv6]:
+----------------------------------------------------------------
+```
+sudo sysctl -w net.ipv6.conf.eth0.net.ipv6.conf.eth0.accept_ra_defrtr_metric=0x770003e9
+```
+
+IP monitor:
+----------------------------------------------------------------
+```
+default via fe80::be16:65ff:feb3:ce8e dev eth0 proto ra metric 1996489705  pref high
+```
+
+Kernel IPv6 routing table
+----------------------------------------------------------------
+```
+Destination                    Next Hop                   Flag Met Ref Use If
+::/0                           fe80::be16:65ff:feb3:ce8e  UGDAe 1996489705 0    
+ 0 eth0
+```
+
+FRR Routing Table, if default route is learned via routing protocol.
+----------------------------------------------------------------
+# show ipv6 route 
+Codes: K - kernel route, C - connected, S - static, R - RIPng,
+       O - OSPFv3, I - IS-IS, B - BGP, N - NHRP, T - Table,
+       v - VNC, V - VNC-Direct, A - Babel, D - SHARP,
+       > - selected route, * - FIB route
+
+S>* ::/0 [20/0] is directly connected, eth0, 00:00:06
+K   ::/0 [119/1001] via fe80::be16:65ff:feb3:ce8e, eth0, 6d07h43m
+----------------------------------------------------------------
+
+Praveen Chaudhary (1):
+  Allow user to set metric on default route learned via Router
+    Advertisement.
+
+ Documentation/networking/ip-sysctl.rst |  8 ++++++++
+ include/linux/ipv6.h                   |  1 +
+ include/net/ip6_route.h                |  3 ++-
+ include/uapi/linux/ipv6.h              |  1 +
+ include/uapi/linux/sysctl.h            |  1 +
+ net/ipv6/addrconf.c                    | 10 ++++++++++
+ net/ipv6/ndisc.c                       | 15 +++++++++++----
+ net/ipv6/route.c                       |  8 +++++---
+ 8 files changed, 39 insertions(+), 8 deletions(-)
+
 -- 
-2.21.0
+2.7.4
 
