@@ -2,86 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2B7172E85CD
-	for <lists+linux-doc@lfdr.de>; Fri,  1 Jan 2021 23:22:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B1CAE2E87C7
+	for <lists+linux-doc@lfdr.de>; Sat,  2 Jan 2021 16:25:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727173AbhAAWWJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 1 Jan 2021 17:22:09 -0500
-Received: from mout.gmx.net ([212.227.17.20]:47757 "EHLO mout.gmx.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727147AbhAAWWJ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 1 Jan 2021 17:22:09 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-        s=badeba3b8450; t=1609539590;
-        bh=jMwXiMjRPNgjy8AA61m/2S9siVt4OWWaNSlKQ33wBSk=;
-        h=X-UI-Sender-Class:From:To:Cc:Subject:Date;
-        b=UHfQ+4E8+6bt7niXqDPg9a/Bs8CVJccbrLd7hichakV7H7Wi1WmZeaHIhWtCdri4V
-         zyFBSGZDT+hzmXhMwg3bdU4JEOM0V4nnt83oivBV4ns2F8fbRdhcSzPhckcxzx8bdx
-         sPEGWOzBsfEUjG1j/q/hc1wHQQnp892KYhzBYHQw=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from longitude ([37.201.215.57]) by mail.gmx.com (mrgmx104
- [212.227.17.168]) with ESMTPSA (Nemesis) id 1MirjY-1kPRwY2E1k-00ewkT; Fri, 01
- Jan 2021 23:19:50 +0100
-From:   =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>
-To:     linux-doc@vger.kernel.org
-Cc:     =?UTF-8?q?Jonathan=20Neusch=C3=A4fer?= <j.neuschaefer@gmx.net>,
-        Jaroslav Kysela <perex@perex.cz>,
-        Takashi Iwai <tiwai@suse.com>,
-        Jonathan Corbet <corbet@lwn.net>, alsa-devel@alsa-project.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH] docs: ALSA: Fix reference to mixart.rst
-Date:   Fri,  1 Jan 2021 23:19:42 +0100
-Message-Id: <20210101221942.1068388-1-j.neuschaefer@gmx.net>
-X-Mailer: git-send-email 2.29.2
+        id S1726657AbhABPWE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 2 Jan 2021 10:22:04 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47478 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726599AbhABPWD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 2 Jan 2021 10:22:03 -0500
+Received: from mail-wm1-x32a.google.com (mail-wm1-x32a.google.com [IPv6:2a00:1450:4864:20::32a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3C5E5C061573;
+        Sat,  2 Jan 2021 07:21:23 -0800 (PST)
+Received: by mail-wm1-x32a.google.com with SMTP id 3so13738288wmg.4;
+        Sat, 02 Jan 2021 07:21:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=OJBITHaQqc5xps2gqOqR24Tyr4hGdZImALfk9kxilUw=;
+        b=NvGUGxltRkygnkWt8il2VY/VOJmppE+yq+zgwo8hmdFcFZfjYtKFZ/rhfCOQnBc+Zk
+         8xThlikKe45cXimJXDIexKr7ayg3lOvYuqlm7LgZ+jrDz+Caf5N0QJE0y2dlCjD+xd5b
+         sZMQP1sfAQPp+AM5Lig7wFNbxAechxk7ODSAJUgidqhfDVnAMOEFrXTIBGx+mFecPof/
+         RDRBMGsxVZmpKew2I0jLuZP/b9FqovcagcOCF3EuI1HhVpskaO+cUtenCizeHbbVp9KI
+         51z/mVU+s2eorqGFff/E7J47uV8DTSNJnYfBx8YnDhAPSiT9kSXtkQj0iJkYru2Hw4Zk
+         VRAQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=OJBITHaQqc5xps2gqOqR24Tyr4hGdZImALfk9kxilUw=;
+        b=rpMIAIeirbUfTJ56EvS5BvodnXqMozM4plCagANpQ4XaDpxq1XmqmOMZwWUokqr4JN
+         4QRg/sHIzrrJ9O5gFDQ0eh1zdho+r7ttOrZb8dA2dMK9MpK5/VAKj9bZpCOsIfzZPY83
+         JlwuvtkhjnaVne7VbXG/7GDDDxwrmNQgECFHKafgevYVLUhxfSmhGbCiKqmFx9sp11Dl
+         9RN4S5m3cv5pTjh9iF7RNtgKFUjKpBG/BH7DnbAAx/w/8kU8t6v7DcfxuAFWzPcFMueP
+         eXCGLsBUVeb2jAWQSCgUSieprF8FiD1GyOW/6jAdEKTMxj0hZ+VNrvZMoL8b3RP2Mkc1
+         oyvA==
+X-Gm-Message-State: AOAM533oIgF18UiNDvLB0e7NC2RavlPdNakp5Ahbe1BlgAT03rXnc+fA
+        VIsyaJ97NNnf1NMBFO/yK2our1I/8s55QQ==
+X-Google-Smtp-Source: ABdhPJz1HKKwKxVCoTsKOjB/MYoTeJtGzrGeOEkTWLP+7WGm6nET026PZQx1ZUd9bCXYV2kgxNirfg==
+X-Received: by 2002:a1c:87:: with SMTP id 129mr19523015wma.183.1609600881470;
+        Sat, 02 Jan 2021 07:21:21 -0800 (PST)
+Received: from localhost.localdomain ([85.255.236.0])
+        by smtp.gmail.com with ESMTPSA id h13sm78671243wrm.28.2021.01.02.07.21.19
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Sat, 02 Jan 2021 07:21:20 -0800 (PST)
+From:   Pavel Begunkov <asml.silence@gmail.com>
+To:     linux-block@vger.kernel.org
+Cc:     Jens Axboe <axboe@kernel.dk>,
+        Christoph Hellwig <hch@infradead.org>,
+        Matthew Wilcox <willy@infradead.org>,
+        Ming Lei <ming.lei@redhat.com>,
+        Johannes Weiner <hannes@cmpxchg.org>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        "Darrick J . Wong" <darrick.wong@oracle.com>,
+        "Martin K . Petersen" <martin.petersen@oracle.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-xfs@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org,
+        linux-kernel@vger.kernel.org, target-devel@vger.kernel.org,
+        linux-scsi@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [PATCH v2 0/7] no-copy bvec
+Date:   Sat,  2 Jan 2021 15:17:32 +0000
+Message-Id: <cover.1609461359.git.asml.silence@gmail.com>
+X-Mailer: git-send-email 2.24.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:u4OdV2KYuu67DbBoGJ+25LQDNFC8odVCZqA11wCKXavaJOYVKwA
- pcmu2JFhX/flR4D295h0ysUXE/v10ePDzBCr9IcbGlq0JWlwb6h7OWQC1bcDQ46QmQdk8tq
- L4W/P8d00ttRVpzgMypWKdezTwGZ18VkVUIiuNlfbs//F0mQEi7GdSiGLvfeVZdUOSzcTNH
- STehxjVcTlsvITUojTv0A==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:n+OgFaAHS4w=:sAJG1ANtldmAofN6xRLV+u
- e0siHJqME3EYMHQ/iVVlV0bwsjj9QHlSHYm18twbi4ELiu4RkcRu6xT8eQadCEP05Qg+KW/tL
- PEInvzoLsz71c+6u+rbSmtGhn33gQxPNi0cz8EpKS5rKzBUaPUF7Pm++NhM+QHdwSRxwqOQAo
- xabZOhEQ7uD7A+BUyrTqPzIVaAiiBR2GCDPd5x6s4cENQZgKkUsNQf3Ca0IOBxvNjqlwA8WxK
- jdL14vi4QJl2zVYQN7NjLd8c5FSxQIQXGMdbFjJ8X0i0ogyr5KjdYiuhF5e4zxW/EvxWmB9vn
- gklr3msPag3uIhPZ/e0fXJoBuoVQIwOzUVzbxjC16uIFZC4+EFwwPHNYN1botom4xNUhzkpSa
- M662+Bk01E+bSrGKGe81v8oqmh+ncGt1XH+TXuOhCyRnOfkphN5WhWGq3fcfl/W/ho4txXAv/
- P79l2ZfAiB5QSaZ0bOAK4Rm/0H1qAGlBnhBTd767Cw+1WLyw8BZZQfphEPkoVVKBLArrAdKXn
- 8eAT8SAJsewfUK/1l7i4BirIdAB5tXiF0m3InKZ9j66dexUkMpAUGoqb6C/6LIJcph9S6gr0b
- Lz9WBBLXLYW2IGO3ludLk/jVUPK04X6YPtoCnZvSsZO/LQmXJVVSkET1ICASPjU5tC5XzEWIg
- LB6v3Kxhi6x0zi9AfgHoX2ns1BJ2VdzaPqpB8xwpJ2OUnzEyKAQn7jKoFemY8FgrXsOid0tPp
- 0n0VdrQGBUl1MIdpKBzCpNs56kNKqNRHg0G3jDoGE+eBENRqgHsTKjBVXpf2dea0HrNNDEsu4
- olls2alLEG7/8PT0VpHdx7BTqs01mzo+UqU///Kc1PXYyUdtyKx878Q3dF1LQdceafP5NUAoi
- H12oeTUaUnKu6Fb9ZL0g==
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-MIXART.txt has been converted to ReST and renamed. Fix the reference
-in alsa-configuration.rst.
+Currently, when iomap and block direct IO gets a bvec based iterator
+the bvec will be copied, with all other accounting that takes much
+CPU time and causes additional allocation for larger bvecs. The
+patchset makes it to reuse the passed in iter bvec.
 
-Fixes: 3d8e81862ce4 ("ALSA: doc: ReSTize MIXART.txt")
-Signed-off-by: Jonathan Neusch=C3=A4fer <j.neuschaefer@gmx.net>
-=2D--
- Documentation/sound/alsa-configuration.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+[1,2] are forbidding zero-length bvec segments to not pile special
+cases, [3] skip/fix PSI tracking to not iterate over bvecs extra
+time.
 
-diff --git a/Documentation/sound/alsa-configuration.rst b/Documentation/so=
-und/alsa-configuration.rst
-index fe52c314b7639..b36af65a08edf 100644
-=2D-- a/Documentation/sound/alsa-configuration.rst
-+++ b/Documentation/sound/alsa-configuration.rst
-@@ -1501,7 +1501,7 @@ Module for Digigram miXart8 sound cards.
 
- This module supports multiple cards.
- Note: One miXart8 board will be represented as 4 alsa cards.
--See MIXART.txt for details.
-+See Documentation/sound/cards/mixart.rst for details.
+nullblk completion_nsec=0 submit_queues=NR_CORES, no merges, no stats
+fio/t/io_uring /dev/nullb0 -d 128 -s 32 -c 32 -p 0 -B 1 -F 1 -b BLOCK_SIZE
 
- When the driver is compiled as a module and the hotplug firmware
- is supported, the firmware data is loaded via hotplug automatically.
-=2D-
-2.29.2
+BLOCK_SIZE             512     4K      8K      16K     32K     64K
+===================================================================
+old (KIOPS)            1208    1208    1131    1039    863     699
+new (KIOPS)            1222    1222    1170    1137    1083    982
+
+Previously, Jens got before 10% difference for polling real HW and small
+block sizes, but that was for an older version that had one
+iov_iter_advance() less
+
+
+since RFC:
+- add target_core_file patch by Christoph
+- make no-copy default behaviour, remove iter flag
+- iter_advance() instead of hacks to revert to work
+- add bvec iter_advance() optimisation patch
+- remove PSI annotations from direct IO (iomap, block and fs/direct)
+- note in d/f/porting
+
+since v1:
+- don't allow zero-length bvec segments (Ming)
+- don't add a BIO_WORKINGSET-less version of bio_add_page(), just clear
+  the flag at the end and leave it for further cleanups (Christoph)
+- commit message and comments rewording (Dave)
+- other nits by Christoph
+
+Christoph Hellwig (1):
+  target/file: allocate the bvec array as part of struct
+    target_core_file_cmd
+
+Pavel Begunkov (6):
+  splice: don't generate zero-len segement bvecs
+  bvec/iter: disallow zero-length segment bvecs
+  block/psi: remove PSI annotations from direct IO
+  iov_iter: optimise bvec iov_iter_advance()
+  bio: add a helper calculating nr segments to alloc
+  bio: don't copy bvec for direct IO
+
+ Documentation/filesystems/porting.rst | 16 ++++++
+ block/bio.c                           | 71 +++++++++++++--------------
+ drivers/target/target_core_file.c     | 20 +++-----
+ fs/block_dev.c                        |  7 +--
+ fs/direct-io.c                        |  2 +
+ fs/iomap/direct-io.c                  |  9 ++--
+ fs/splice.c                           |  9 ++--
+ include/linux/bio.h                   | 13 +++++
+ lib/iov_iter.c                        | 21 +++++++-
+ 9 files changed, 103 insertions(+), 65 deletions(-)
+
+-- 
+2.24.0
 
