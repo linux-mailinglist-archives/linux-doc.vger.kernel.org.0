@@ -2,100 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D59CE2EC34C
-	for <lists+linux-doc@lfdr.de>; Wed,  6 Jan 2021 19:41:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BC05A2EC36B
+	for <lists+linux-doc@lfdr.de>; Wed,  6 Jan 2021 19:46:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726532AbhAFSkz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 6 Jan 2021 13:40:55 -0500
-Received: from mail.kernel.org ([198.145.29.99]:60954 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1725789AbhAFSkz (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 6 Jan 2021 13:40:55 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 8A2B223137;
-        Wed,  6 Jan 2021 18:40:14 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1609958414;
-        bh=0BrWNZz5FTEATIslw6poEkKFNsItoHl93UC2ZCWjyoE=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=HfQ2g8hPUPNlBlMXidj9GFsuK4OMZX/NKYDlnlH4XaeG/k9oKWeZuPTUzueec8Xd+
-         /3sidZ14IzfASQ2xT5f/ofLD6abPAvQBJFLuNtMiIe0jYEFemtJItziyWqYoVYB1OG
-         9KCdMzwpifrIy2InTt8PpUYhMDnS14nsN4hJ55PJetGTey8vcNGgOqdp0zrLGs+oAD
-         AITOrmyiTvvdeHAQqnHmXv4qvEvZ6GimVI1qqUYGo8BR+owdx7uvmujWudj5Rd8Tb8
-         muR7kgxCF7hM+2FeJb/hOCSkoFW74igvhpmbPUKOTL2LYtVmfgG+KFeDcqj6kNLeTj
-         f71eNB0Jphn/g==
-From:   Jakub Kicinski <kuba@kernel.org>
-To:     davem@davemloft.net
-Cc:     netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        f.fainelli@gmail.com, xiyou.wangcong@gmail.com,
-        Jakub Kicinski <kuba@kernel.org>,
-        Hulk Robot <hulkci@huawei.com>,
-        Yang Yingliang <yangyingliang@huawei.com>
-Subject: [PATCH net 3/3] net: make sure devices go through netdev_wait_all_refs
-Date:   Wed,  6 Jan 2021 10:40:07 -0800
-Message-Id: <20210106184007.1821480-4-kuba@kernel.org>
-X-Mailer: git-send-email 2.26.2
-In-Reply-To: <20210106184007.1821480-1-kuba@kernel.org>
-References: <20210106184007.1821480-1-kuba@kernel.org>
+        id S1727050AbhAFSqB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 6 Jan 2021 13:46:01 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40804 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726438AbhAFSqA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 6 Jan 2021 13:46:00 -0500
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com [IPv6:2607:f8b0:4864:20::432])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8733FC06134D
+        for <linux-doc@vger.kernel.org>; Wed,  6 Jan 2021 10:45:20 -0800 (PST)
+Received: by mail-pf1-x432.google.com with SMTP id t22so2222846pfl.3
+        for <linux-doc@vger.kernel.org>; Wed, 06 Jan 2021 10:45:20 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=ho+xRsAlnZPA9XwreJh6lam3mNeyMrjUZb8gp0Pijj4=;
+        b=pp1lm1jkJ+G032pTcswwk6Ab4cZJqTQ98WbtBympCzpKmXncEcv6qCTKzdSbVOifHF
+         uO+nl+4aB9LlmW27p+QnG2+/nu8cKCtE16/9E02D0atV5oYdFrwqTeb1hcvmgQQjdytE
+         BP1rIL3zXJL23b5bAWRaM36ihs/hLE+PLKsZFbf/TciuW23P2ye6vkAHfsnLnFQiw8op
+         SaTOOnQnWIsFOuYSjlppUh85Nmnt1nhpBQbFhMgLCW6419x2Pc3B2b/hRpknb8qcl2/J
+         v0XFc/9O3QoVmWuvbjNFMHTi5AJ8M6U2jnYB8YoB90TeBavfL516zS3wbFWGmGUCg3im
+         GPtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=ho+xRsAlnZPA9XwreJh6lam3mNeyMrjUZb8gp0Pijj4=;
+        b=XIH7FqXukeR/RVLMZI1zLMXPeV+86cRlYADeVNePf+2BHWPfuD7YGkj7B1je346hf3
+         CLJQgh5w+KO6EoGoCUeCaUPMaFaPXCI8uNwfASf8SHXeWshiSueCGyDlT0qhgL5dmdr0
+         DMD4FabCJuXz28F/ROtIVmDwIg9160xu+x3ntBIwZlM0WKTovu0bfMYk0v8C+2+HvECH
+         yiR3dU9ZislM1mqXsQeY5GGRYAKwVM/32KSldp38ybZkbhrCoPsIDlo34UBOuUsAsXZE
+         3VrQlufcK60ULa3nXjI/kSRFSRYvhFevNBWx0QW9PvnmpQXUZZEN6LJjwValZg9+iUhc
+         D1jQ==
+X-Gm-Message-State: AOAM530Zw7SWQFBrq+GTcPRQ0vu1TMIbo9GJxKciuZCzsepHFYLzFNc5
+        3+R4vypd/8u9xN+mCzZfMIbcKw==
+X-Google-Smtp-Source: ABdhPJwtNkxU+RDoHsd2aWmLEUDActU8ItlTVYihGE3QCDrRNmO5CRDj6A156uPcWiMvJZXbiH69+g==
+X-Received: by 2002:a63:1261:: with SMTP id 33mr5797347pgs.213.1609958719939;
+        Wed, 06 Jan 2021 10:45:19 -0800 (PST)
+Received: from google.com ([2620:0:1008:10:1ea0:b8ff:fe75:b885])
+        by smtp.gmail.com with ESMTPSA id 21sm3299297pfx.84.2021.01.06.10.45.18
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 06 Jan 2021 10:45:19 -0800 (PST)
+Date:   Wed, 6 Jan 2021 10:45:14 -0800
+From:   Vipin Sharma <vipinsh@google.com>
+To:     Tejun Heo <tj@kernel.org>
+Cc:     David Rientjes <rientjes@google.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Tom Lendacky <thomas.lendacky@amd.com>,
+        Brijesh <brijesh.singh@amd.com>, Jon <jon.grimm@amd.com>,
+        Eric <eric.vantassell@amd.com>, pbonzini@redhat.com,
+        Sean Christopherson <seanjc@google.com>, lizefan@huawei.com,
+        hannes@cmpxchg.org, Janosch Frank <frankja@linux.ibm.com>,
+        corbet@lwn.net, joro@8bytes.org, vkuznets@redhat.com,
+        wanpengli@tencent.com, Jim Mattson <jmattson@google.com>,
+        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
+        Matt Gingell <gingell@google.com>,
+        Dionna Glaze <dionnaglaze@google.com>, kvm@vger.kernel.org,
+        x86@kernel.org, cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [Patch v3 0/2] cgroup: KVM: New Encryption IDs cgroup controller
+Message-ID: <X/YFOvLp/mEk5z9W@google.com>
+References: <20201209205413.3391139-1-vipinsh@google.com>
+ <X9E6eZaIFDhzrqWO@mtj.duckdns.org>
+ <4f7b9c3f-200e-6127-1d94-91dd9c917921@de.ibm.com>
+ <5f8d4cba-d3f-61c2-f97-fdb338fec9b8@google.com>
+ <X9onUwvKovJeHpKR@mtj.duckdns.org>
+ <CAHVum0dS+QxWFSK+evxQtZDHkZZx9pr0m_jEDHc9ovd5jQcfaA@mail.gmail.com>
+ <X/SHiFHRsQM43VgC@mtj.duckdns.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <X/SHiFHRsQM43VgC@mtj.duckdns.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-If register_netdevice() fails at the very last stage - the
-notifier call - some subsystems may have already seen it and
-grabbed a reference. struct net_device can't be freed right
-away without calling netdev_wait_all_refs().
+On Tue, Jan 05, 2021 at 10:36:40AM -0500, Tejun Heo wrote:
+> Happy new year!
+> 
+> On Wed, Dec 16, 2020 at 12:02:37PM -0800, Vipin Sharma wrote:
+> > I like the idea of having a separate controller to keep the code simple and
+> > easier for maintenance.
+> 
+> Yeah, the more I think about it, keeping it separate seems like the right
+> thing to do. What bothers me primarily is that the internal logic is
+> identical between the RDMA controller and this one. If you wanna try
+> factoring them out into library, great. If not, I don't think it should
+> block merging this controller. We can get to refactoring later.
+> 
 
-Now that we have a clean interface in form of dev->needs_free_netdev
-and lenient free_netdev() we can undo what commit 93ee31f14f6f ("[NET]:
-Fix free_netdev on register_netdev failure.") has done and complete
-the unregistration path by bringing the net_set_todo() call back.
+Happy new year!
+Sounds great, I will send out a new patch which will not reject the new
+max limit based on the current usage. It will not include refactoring
+out common code between RDMA and Encryption ID controller. We can pursue
+that later.
 
-After registration fails user is still expected to explicitly
-free the net_device, so make sure ->needs_free_netdev is cleared,
-otherwise rolling back the registration will cause the old double
-free for callers who release rtnl_lock before the free.
-
-This also solves the problem of priv_destructor not being called
-on notifier error.
-
-net_set_todo() will be moved back into unregister_netdevice_queue()
-in a follow up.
-
-Reported-by: Hulk Robot <hulkci@huawei.com>
-Reported-by: Yang Yingliang <yangyingliang@huawei.com>
-Signed-off-by: Jakub Kicinski <kuba@kernel.org>
----
- net/core/dev.c | 14 ++++----------
- 1 file changed, 4 insertions(+), 10 deletions(-)
-
-diff --git a/net/core/dev.c b/net/core/dev.c
-index adde93cbca9f..0071a11a6dc3 100644
---- a/net/core/dev.c
-+++ b/net/core/dev.c
-@@ -10077,17 +10077,11 @@ int register_netdevice(struct net_device *dev)
- 	ret = call_netdevice_notifiers(NETDEV_REGISTER, dev);
- 	ret = notifier_to_errno(ret);
- 	if (ret) {
-+		/* Expect explicit free_netdev() on failure */
-+		dev->needs_free_netdev = false;
- 		rollback_registered(dev);
--		rcu_barrier();
--
--		dev->reg_state = NETREG_UNREGISTERED;
--		/* We should put the kobject that hold in
--		 * netdev_unregister_kobject(), otherwise
--		 * the net device cannot be freed when
--		 * driver calls free_netdev(), because the
--		 * kobject is being hold.
--		 */
--		kobject_put(&dev->dev.kobj);
-+		net_set_todo(dev);
-+		goto out;
- 	}
- 	/*
- 	 *	Prevent userspace races by waiting until the network
--- 
-2.26.2
-
+Thanks
+Vipin
