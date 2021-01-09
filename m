@@ -2,225 +2,452 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4000C2F0143
-	for <lists+linux-doc@lfdr.de>; Sat,  9 Jan 2021 17:09:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 835782F0416
+	for <lists+linux-doc@lfdr.de>; Sat,  9 Jan 2021 23:25:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726962AbhAIQIK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 9 Jan 2021 11:08:10 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38062 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726913AbhAIQII (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 9 Jan 2021 11:08:08 -0500
-Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com [IPv6:2a00:1450:4864:20::329])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F1482C0617A7;
-        Sat,  9 Jan 2021 08:06:55 -0800 (PST)
-Received: by mail-wm1-x329.google.com with SMTP id e25so11051015wme.0;
-        Sat, 09 Jan 2021 08:06:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=yD8zYkali7maLviDx2WTi8i72ihDIWnJKSJbAu6xfJ0=;
-        b=Ts4OoM5bqISNbtmG5sPDsmpk3BTHhh/QjboJ9FjJbTRW6os44a6JWrPaQeIq9a4gzB
-         ytPoZ/GW+c8ZRLyy3+gy3UFzrpFfiklRK34zsaVHar6VPLoh+t6didLQ79On2YaXPI61
-         pJYMvy+biZXWpv873DXVw0VcAA4BWzd8gzcFFTJKXfdRrqQ5DS5I/WBs9CIv7jzQeFMI
-         Hq3iECPsMcVtJgXRMv4wn1o2Hlj3wnnkuWosFYpHehQe35KojPpv+ALObFOb9wY8RLyx
-         lHcnE4uGyPIaA5yYJvbSruf6mQkaPTFCw8BRrqy91Lzpf7zZilpiDzluyMd0xwOv21xY
-         uFYw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=yD8zYkali7maLviDx2WTi8i72ihDIWnJKSJbAu6xfJ0=;
-        b=oeBGYqW+EAhOqFqgxPFX6WJCGqHZ+JDX1EsheS3j67f4MhBWYTIiiTY9KB5CDWa/QG
-         X+tXP0vw+Jncwg8KrXpIyQnb4lt5YS+30VHVVA883M0jTkIx1ylyXFndEK92PXxam2mq
-         sCQazQVcFUsJ9XgJ0vNrCpwmdleYMqeMHpiR1PAYODWze1ntqKMj8qGR8DnRuDBvmueD
-         h+1WEhQUDR/P0eYGfBRM/7rMEMAwPgvy77c/dnRVcR/3RSuMOAv+efWW3nuxMJABSosr
-         Jo9i+rJIFBmAbkkGea5ZPEDIjrkHS3mQQRyyHOhdCFY6PxTDvlsK4cR7sao3APTZcicS
-         hjSQ==
-X-Gm-Message-State: AOAM53204fXKCtpTwPObRcJPb2FH/gWzxkmLYwDz8CGiVqwcdkYXJbfX
-        P8dhy1JfCBMUi8UkTmutV+aBbiqLyusg13AY
-X-Google-Smtp-Source: ABdhPJyDJ7ivMuFntSJFW5N+/HuavTp+fJKVSfLb/Mv/WA3X5yhkivHrCndukCuTwkfjMzb7+EAADg==
-X-Received: by 2002:a1c:1d1:: with SMTP id 200mr7900279wmb.98.1610208414381;
-        Sat, 09 Jan 2021 08:06:54 -0800 (PST)
-Received: from localhost.localdomain ([185.69.144.125])
-        by smtp.gmail.com with ESMTPSA id j9sm17403866wrm.14.2021.01.09.08.06.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sat, 09 Jan 2021 08:06:53 -0800 (PST)
-From:   Pavel Begunkov <asml.silence@gmail.com>
-To:     linux-block@vger.kernel.org
-Cc:     Jens Axboe <axboe@kernel.dk>,
-        Christoph Hellwig <hch@infradead.org>,
-        Matthew Wilcox <willy@infradead.org>,
-        Ming Lei <ming.lei@redhat.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Alexander Viro <viro@zeniv.linux.org.uk>,
-        "Darrick J . Wong" <darrick.wong@oracle.com>,
-        "Martin K . Petersen" <martin.petersen@oracle.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-xfs@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, io-uring@vger.kernel.org,
-        linux-kernel@vger.kernel.org, target-devel@vger.kernel.org,
-        linux-scsi@vger.kernel.org, linux-doc@vger.kernel.org,
-        Christoph Hellwig <hch@lst.de>
-Subject: [PATCH v3 7/7] bio: don't copy bvec for direct IO
-Date:   Sat,  9 Jan 2021 16:03:03 +0000
-Message-Id: <69fef253b37fc44dd28c43398715e27cee5e0fe0.1610170479.git.asml.silence@gmail.com>
-X-Mailer: git-send-email 2.24.0
-In-Reply-To: <cover.1610170479.git.asml.silence@gmail.com>
-References: <cover.1610170479.git.asml.silence@gmail.com>
+        id S1726253AbhAIWZP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 9 Jan 2021 17:25:15 -0500
+Received: from new4-smtp.messagingengine.com ([66.111.4.230]:57845 "EHLO
+        new4-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726238AbhAIWZO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 9 Jan 2021 17:25:14 -0500
+Received: from compute5.internal (compute5.nyi.internal [10.202.2.45])
+        by mailnew.nyi.internal (Postfix) with ESMTP id 0C8985805EF;
+        Sat,  9 Jan 2021 17:24:07 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute5.internal (MEProxy); Sat, 09 Jan 2021 17:24:07 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sholland.org; h=
+        to:cc:references:from:subject:message-id:date:mime-version
+        :in-reply-to:content-type:content-transfer-encoding; s=fm1; bh=m
+        12NFdKt3bGrZeShAQKdpYummJW0fgdM/Zs/d2W6cXE=; b=YhmaFfwuMCWJ//o7d
+        xQPOOwawY+upfamD3yMo7ainVkyhPxe8Fa8R0GOV307DPKuU7A5JmFBtr98/gAK6
+        eRL65NmeF6PWmo98HCEfSobQrTEPJ+4N3MgYOcEGZ97+ZFIgjzlxWeb9ijt08dMs
+        yQMubyN5bvInwxVpZxqwCQFleNAIJ8aPma078GSO3XSb/j2ovhOEPpV5f7KnJwyg
+        pAwiIqOWA62ltBYiaeYGFqD3DljaRGI2JQGnvTEHbZlxCoAZyHEeU84WaFYA9T6x
+        0xxIhTyaL47yv+XgePozom5VQ+qUrePBIbcOUsJsLFuHp2NxLEGX980qehOQUxLi
+        ww9Tw==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:content-type
+        :date:from:in-reply-to:message-id:mime-version:references
+        :subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+        :x-sasl-enc; s=fm1; bh=m12NFdKt3bGrZeShAQKdpYummJW0fgdM/Zs/d2W6c
+        XE=; b=pw5W4y3Fd76Mbc1DC1ewxmUAwR94EhUk6k7JiKajubxmlmTKF/242wapQ
+        5Wt3bPLyAvDjdiPhaf5HokS2Qi6s+hXPKNbbYE6SMh5gIwTVVcYhyCVJ0jqAr3hF
+        VfCrXKISxFyQGFTHIJo8Ec7BtTkrtJz7h46ZDev7ncXQQ2eRwc/5BbpzYMd1FP2n
+        t+OZi2GCpkJNcGJF6P5WI7+I8aC5FtdrvPEYEr1VLEKxJ61fzO8szjkw06t3WQ6i
+        daaFzTj5XF7PwthYIbOqEmXH75kqX9HKt32TMbPAwsVgjOgfXi2yiAgz78/WMWdC
+        FAruv4juw+GYvOotiSn83E0hLW77w==
+X-ME-Sender: <xms:Ay36X1Y1h-KqjoodnccU38awJLJi-UIAdHnDx34zgR0HtxIvvZG-UQ>
+    <xme:Ay36X8YVu_TDdAS0-rJ74MaaqcDesfC2Ts_VFHQRQPGMGxReRBMze4N9M9Qv7eaxq
+    BThi2iuBWOQkp882w>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedujedrvdegjedgudeivdcutefuodetggdotefrod
+    ftvfcurfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfgh
+    necuuegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmd
+    enucfjughrpefvfhfhuffkffgfgggjtgfgsehtkeertddtfeejnecuhfhrohhmpefurghm
+    uhgvlhcujfholhhlrghnugcuoehsrghmuhgvlhesshhhohhllhgrnhgurdhorhhgqeenuc
+    ggtffrrghtthgvrhhnpedvtddtjeeiuddugfffveetkeffgeffgedutdfgfeekudevudek
+    ffehtdefveeuvdenucfkphepjedtrddufeehrddugeekrdduhedunecuvehluhhsthgvrh
+    fuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepshgrmhhuvghlsehshhholhhl
+    rghnugdrohhrgh
+X-ME-Proxy: <xmx:Ay36X3-BIAcYok8WBOWIHKzgH4DCnIqk_REtsCwrv88DnmAk72YeOw>
+    <xmx:Ay36XzqpJgWqkixv_77DUWmiPgRoN6SPrcxj-SSprreR03vtjacfBg>
+    <xmx:Ay36XwruO3cqQlTCyyiExYFTmeZt42XVRWmsttBNq3z_txMAhzESgg>
+    <xmx:Bi36X5ay336yNwVUfUsqrUZN98m-Yh_0P-BckXpbJjSjxzVQWP7q1Q>
+Received: from [70.135.148.151] (70-135-148-151.lightspeed.stlsmo.sbcglobal.net [70.135.148.151])
+        by mail.messagingengine.com (Postfix) with ESMTPA id 2DB9A1080057;
+        Sat,  9 Jan 2021 17:24:02 -0500 (EST)
+To:     Paul Kocialkowski <paul.kocialkowski@bootlin.com>,
+        linux-media@vger.kernel.org, devicetree@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, devel@driverdev.osuosl.org,
+        linux-sunxi@googlegroups.com
+Cc:     Yong Deng <yong.deng@magewell.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Maxime Ripard <mripard@kernel.org>,
+        Chen-Yu Tsai <wens@csie.org>,
+        Jernej Skrabec <jernej.skrabec@siol.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kishon Vijay Abraham I <kishon@ti.com>,
+        Vinod Koul <vkoul@kernel.org>,
+        Helen Koike <helen.koike@collabora.com>,
+        Dafna Hirschfeld <dafna.hirschfeld@collabora.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Philipp Zabel <p.zabel@pengutronix.de>,
+        Sakari Ailus <sakari.ailus@linux.intel.com>,
+        Hans Verkuil <hans.verkuil@cisco.com>,
+        Thomas Petazzoni <thomas.petazzoni@bootlin.com>,
+        kevin.lhopital@hotmail.com
+References: <20201231142948.3241780-1-paul.kocialkowski@bootlin.com>
+ <20201231142948.3241780-10-paul.kocialkowski@bootlin.com>
+From:   Samuel Holland <samuel@sholland.org>
+Subject: Re: [PATCH v4 09/15] media: sunxi: Add support for the A31 MIPI CSI-2
+ controller
+Message-ID: <4ea6a6d0-e2ef-9374-e24b-9d62d5f66e23@sholland.org>
+Date:   Sat, 9 Jan 2021 16:24:01 -0600
+User-Agent: Mozilla/5.0 (X11; Linux ppc64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
+In-Reply-To: <20201231142948.3241780-10-paul.kocialkowski@bootlin.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The block layer spends quite a while in blkdev_direct_IO() to copy and
-initialise bio's bvec. However, if we've already got a bvec in the input
-iterator it might be reused in some cases, i.e. when new
-ITER_BVEC_FLAG_FIXED flag is set. Simple tests show considerable
-performance boost, and it also reduces memory footprint.
+On 12/31/20 8:29 AM, Paul Kocialkowski wrote:
+> The A31 MIPI CSI-2 controller is a dedicated MIPI CSI-2 bridge
+> found on Allwinner SoCs such as the A31 and V3/V3s.
+> 
+> It is a standalone block, connected to the CSI controller on one side
+> and to the MIPI D-PHY block on the other. It has a dedicated address
+> space, interrupt line and clock.
+> 
+> It is represented as a V4L2 subdev to the CSI controller and takes a
+> MIPI CSI-2 sensor as its own subdev, all using the fwnode graph and
+> media controller API.
+> 
+> Only 8-bit and 10-bit Bayer formats are currently supported.
+> While up to 4 internal channels to the CSI controller exist, only one
+> is currently supported by this implementation.
+> 
+> Signed-off-by: Paul Kocialkowski <paul.kocialkowski@bootlin.com>
+> ---
+>  drivers/media/platform/sunxi/Kconfig          |   1 +
+>  drivers/media/platform/sunxi/Makefile         |   1 +
+>  .../platform/sunxi/sun6i-mipi-csi2/Kconfig    |  12 +
+>  .../platform/sunxi/sun6i-mipi-csi2/Makefile   |   4 +
+>  .../sunxi/sun6i-mipi-csi2/sun6i_mipi_csi2.c   | 590 ++++++++++++++++++
+>  .../sunxi/sun6i-mipi-csi2/sun6i_mipi_csi2.h   | 117 ++++
+>  6 files changed, 725 insertions(+)
+>  create mode 100644 drivers/media/platform/sunxi/sun6i-mipi-csi2/Kconfig
+>  create mode 100644 drivers/media/platform/sunxi/sun6i-mipi-csi2/Makefile
+>  create mode 100644 drivers/media/platform/sunxi/sun6i-mipi-csi2/sun6i_mipi_csi2.c
+>  create mode 100644 drivers/media/platform/sunxi/sun6i-mipi-csi2/sun6i_mipi_csi2.h
+> 
+> diff --git a/drivers/media/platform/sunxi/Kconfig b/drivers/media/platform/sunxi/Kconfig
+> index 7151cc249afa..9684e07454ad 100644
+> --- a/drivers/media/platform/sunxi/Kconfig
+> +++ b/drivers/media/platform/sunxi/Kconfig
+> @@ -2,3 +2,4 @@
+>  
+>  source "drivers/media/platform/sunxi/sun4i-csi/Kconfig"
+>  source "drivers/media/platform/sunxi/sun6i-csi/Kconfig"
+> +source "drivers/media/platform/sunxi/sun6i-mipi-csi2/Kconfig"
+> diff --git a/drivers/media/platform/sunxi/Makefile b/drivers/media/platform/sunxi/Makefile
+> index fc537c9f5ca9..887a7cae8fca 100644
+> --- a/drivers/media/platform/sunxi/Makefile
+> +++ b/drivers/media/platform/sunxi/Makefile
+> @@ -2,5 +2,6 @@
+>  
+>  obj-y		+= sun4i-csi/
+>  obj-y		+= sun6i-csi/
+> +obj-y		+= sun6i-mipi-csi2/
+>  obj-y		+= sun8i-di/
+>  obj-y		+= sun8i-rotate/
+> diff --git a/drivers/media/platform/sunxi/sun6i-mipi-csi2/Kconfig b/drivers/media/platform/sunxi/sun6i-mipi-csi2/Kconfig
+> new file mode 100644
+> index 000000000000..47f1bb0779a8
+> --- /dev/null
+> +++ b/drivers/media/platform/sunxi/sun6i-mipi-csi2/Kconfig
+> @@ -0,0 +1,12 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +config VIDEO_SUN6I_MIPI_CSI2
+> +	tristate "Allwinner A31 MIPI CSI-2 Controller Driver"
+> +	depends on ARCH_SUNXI || COMPILE_TEST
+> +	depends on PM && COMMON_CLK && VIDEO_V4L2
+> +	select REGMAP_MMIO
+> +	select PHY_SUN6I_MIPI_DPHY
+> +	select MEDIA_CONTROLLER
+> +	select VIDEO_V4L2_SUBDEV_API
+> +	select V4L2_FWNODE
+> +	help
+> +	   Support for the Allwinner A31 MIPI CSI-2 Controller.
+> diff --git a/drivers/media/platform/sunxi/sun6i-mipi-csi2/Makefile b/drivers/media/platform/sunxi/sun6i-mipi-csi2/Makefile
+> new file mode 100644
+> index 000000000000..14e4e03818b5
+> --- /dev/null
+> +++ b/drivers/media/platform/sunxi/sun6i-mipi-csi2/Makefile
+> @@ -0,0 +1,4 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +sun6i-mipi-csi2-y += sun6i_mipi_csi2.o
+> +
+> +obj-$(CONFIG_VIDEO_SUN6I_MIPI_CSI2) += sun6i-mipi-csi2.o
+> diff --git a/drivers/media/platform/sunxi/sun6i-mipi-csi2/sun6i_mipi_csi2.c b/drivers/media/platform/sunxi/sun6i-mipi-csi2/sun6i_mipi_csi2.c
+> new file mode 100644
+> index 000000000000..87307beda4cf
+> --- /dev/null
+> +++ b/drivers/media/platform/sunxi/sun6i-mipi-csi2/sun6i_mipi_csi2.c
+> @@ -0,0 +1,590 @@
+[...]
+> +/* Base Driver */
+> +
+> +static int sun6i_mipi_csi2_suspend(struct device *dev)
+> +{
+> +	struct sun6i_mipi_csi2_dev *cdev = dev_get_drvdata(dev);
+> +
+> +	clk_disable_unprepare(cdev->clk_mod);
+> +	clk_disable_unprepare(cdev->clk_bus);
+> +	reset_control_assert(cdev->reset);
+> +
+> +	return 0;
+> +}
+> +
+> +static int sun6i_mipi_csi2_resume(struct device *dev)
+> +{
+> +	struct sun6i_mipi_csi2_dev *cdev = dev_get_drvdata(dev);
+> +	int ret;
+> +
+> +	ret = reset_control_deassert(cdev->reset);
+> +	if (ret) {
+> +		dev_err(cdev->dev, "failed to deassert reset\n");
+> +		return ret;
+> +	}
+> +
+> +	ret = clk_prepare_enable(cdev->clk_bus);
+> +	if (ret) {
+> +		dev_err(cdev->dev, "failed to enable bus clock\n");
+> +		goto error_reset;
+> +	}
+> +
+> +	ret = clk_prepare_enable(cdev->clk_mod);
+> +	if (ret) {
+> +		dev_err(cdev->dev, "failed to enable module clock\n");
+> +		goto error_clk_bus;
+> +	}
+> +
+> +	return 0;
+> +
+> +error_clk_bus:
+> +	clk_disable_unprepare(cdev->clk_bus);
+> +
+> +error_reset:
+> +	reset_control_assert(cdev->reset);
+> +
+> +	return ret;
+> +}
+> +
+> +static int sun6i_mipi_csi2_v4l2_setup(struct sun6i_mipi_csi2_dev *cdev)
+> +{
+> +	struct sun6i_mipi_csi2_video *video = &cdev->video;
+> +	struct v4l2_subdev *subdev = &video->subdev;
+> +	struct v4l2_async_notifier *notifier = &video->notifier;
+> +	struct fwnode_handle *handle;
+> +	struct v4l2_fwnode_endpoint *endpoint;
+> +	struct v4l2_async_subdev *subdev_async;
+> +	int ret;
+> +
+> +	/* Subdev */
+> +
+> +	v4l2_subdev_init(subdev, &sun6i_mipi_csi2_subdev_ops);
+> +	subdev->dev = cdev->dev;
+> +	subdev->flags |= V4L2_SUBDEV_FL_HAS_DEVNODE;
+> +	strscpy(subdev->name, MODULE_NAME, sizeof(subdev->name));
+> +	v4l2_set_subdevdata(subdev, cdev);
+> +
+> +	/* Entity */
+> +
+> +	subdev->entity.function = MEDIA_ENT_F_VID_IF_BRIDGE;
+> +	subdev->entity.ops = &sun6i_mipi_csi2_entity_ops;
+> +
+> +	/* Pads */
+> +
+> +	video->pads[0].flags = MEDIA_PAD_FL_SINK;
+> +	video->pads[1].flags = MEDIA_PAD_FL_SOURCE;
+> +
+> +	ret = media_entity_pads_init(&subdev->entity, 2, video->pads);
+> +	if (ret)
+> +		return ret;
+> +
+> +	/* Endpoint */
+> +
+> +	handle = fwnode_graph_get_endpoint_by_id(dev_fwnode(cdev->dev), 0, 0,
+> +						 FWNODE_GRAPH_ENDPOINT_NEXT);
+> +	if (!handle) {
+> +		ret = -ENODEV;
+> +		goto error_media_entity;
+> +	}
+> +
+> +	endpoint = &video->endpoint;
+> +	endpoint->bus_type = V4L2_MBUS_CSI2_DPHY;
+> +
+> +	ret = v4l2_fwnode_endpoint_parse(handle, endpoint);
+> +	fwnode_handle_put(handle);
+> +	if (ret)
+> +		goto error_media_entity;
+> +
+> +	/* Notifier */
+> +
+> +	v4l2_async_notifier_init(notifier);
+> +
+> +	subdev_async = &video->subdev_async;
+> +	ret = v4l2_async_notifier_add_fwnode_remote_subdev(notifier, handle,
+> +							   subdev_async);
+> +	if (ret)
+> +		goto error_media_entity;
+> +
+> +	video->notifier.ops = &sun6i_mipi_csi2_notifier_ops;
+> +
+> +	ret = v4l2_async_subdev_notifier_register(subdev, notifier);
+> +	if (ret < 0)
+> +		goto error_notifier;
+> +
+> +	/* Subdev */
+> +
+> +	ret = v4l2_async_register_subdev(subdev);
+> +	if (ret < 0)
+> +		goto error_notifier_registered;
+> +
+> +	/* Runtime PM */
+> +
+> +	pm_runtime_enable(cdev->dev);
 
-Suggested-by: Matthew Wilcox <willy@infradead.org>
-Reviewed-by: Christoph Hellwig <hch@lst.de>
-Signed-off-by: Pavel Begunkov <asml.silence@gmail.com>
----
- Documentation/filesystems/porting.rst |  9 ++++
- block/bio.c                           | 67 ++++++++++++---------------
- include/linux/bio.h                   |  5 +-
- 3 files changed, 42 insertions(+), 39 deletions(-)
+I would expect to see this before registering with the class, since
+pm_runtime_get_sync() will fail if called before runtime PM is enabled.
 
-diff --git a/Documentation/filesystems/porting.rst b/Documentation/filesystems/porting.rst
-index c722d94f29ea..1f8cf8e10b34 100644
---- a/Documentation/filesystems/porting.rst
-+++ b/Documentation/filesystems/porting.rst
-@@ -872,3 +872,12 @@ its result is kern_unmount() or kern_unmount_array().
- 
- zero-length bvec segments are disallowed, they must be filtered out before
- passed on to an iterator.
-+
-+---
-+
-+**mandatory**
-+
-+For bvec based itererators bio_iov_iter_get_pages() now doesn't copy bvecs but
-+uses the one provided. Anyone issuing kiocb-I/O should ensure that the bvec and
-+page references stay until I/O has completed, i.e. until ->ki_complete() has
-+been called or returned with non -EIOCBQUEUED code.
-diff --git a/block/bio.c b/block/bio.c
-index 9f26984af643..6f031a04b59a 100644
---- a/block/bio.c
-+++ b/block/bio.c
-@@ -960,21 +960,17 @@ void bio_release_pages(struct bio *bio, bool mark_dirty)
- }
- EXPORT_SYMBOL_GPL(bio_release_pages);
- 
--static int __bio_iov_bvec_add_pages(struct bio *bio, struct iov_iter *iter)
-+static int bio_iov_bvec_set(struct bio *bio, struct iov_iter *iter)
- {
--	const struct bio_vec *bv = iter->bvec;
--	unsigned int len;
--	size_t size;
--
--	if (WARN_ON_ONCE(iter->iov_offset > bv->bv_len))
--		return -EINVAL;
--
--	len = min_t(size_t, bv->bv_len - iter->iov_offset, iter->count);
--	size = bio_add_page(bio, bv->bv_page, len,
--				bv->bv_offset + iter->iov_offset);
--	if (unlikely(size != len))
--		return -EINVAL;
--	iov_iter_advance(iter, size);
-+	WARN_ON_ONCE(BVEC_POOL_IDX(bio) != 0);
-+
-+	bio->bi_vcnt = iter->nr_segs;
-+	bio->bi_max_vecs = iter->nr_segs;
-+	bio->bi_io_vec = (struct bio_vec *)iter->bvec;
-+	bio->bi_iter.bi_bvec_done = iter->iov_offset;
-+	bio->bi_iter.bi_size = iter->count;
-+
-+	iov_iter_advance(iter, iter->count);
- 	return 0;
- }
- 
-@@ -1088,12 +1084,12 @@ static int __bio_iov_append_get_pages(struct bio *bio, struct iov_iter *iter)
-  * This takes either an iterator pointing to user memory, or one pointing to
-  * kernel pages (BVEC iterator). If we're adding user pages, we pin them and
-  * map them into the kernel. On IO completion, the caller should put those
-- * pages. If we're adding kernel pages, and the caller told us it's safe to
-- * do so, we just have to add the pages to the bio directly. We don't grab an
-- * extra reference to those pages (the user should already have that), and we
-- * don't put the page on IO completion. The caller needs to check if the bio is
-- * flagged BIO_NO_PAGE_REF on IO completion. If it isn't, then pages should be
-- * released.
-+ * pages. For bvec based iterators bio_iov_iter_get_pages() uses the provided
-+ * bvecs rather than copying them. Hence anyone issuing kiocb based IO needs
-+ * to ensure the bvecs and pages stay referenced until the submitted I/O is
-+ * completed by a call to ->ki_complete() or returns with an error other than
-+ * -EIOCBQUEUED. The caller needs to check if the bio is flagged BIO_NO_PAGE_REF
-+ * on IO completion. If it isn't, then pages should be released.
-  *
-  * The function tries, but does not guarantee, to pin as many pages as
-  * fit into the bio, or are requested in @iter, whatever is smaller. If
-@@ -1105,27 +1101,22 @@ static int __bio_iov_append_get_pages(struct bio *bio, struct iov_iter *iter)
-  */
- int bio_iov_iter_get_pages(struct bio *bio, struct iov_iter *iter)
- {
--	const bool is_bvec = iov_iter_is_bvec(iter);
--	int ret;
--
--	if (WARN_ON_ONCE(bio->bi_vcnt))
--		return -EINVAL;
-+	int ret = 0;
- 
--	do {
--		if (bio_op(bio) == REQ_OP_ZONE_APPEND) {
--			if (WARN_ON_ONCE(is_bvec))
--				return -EINVAL;
--			ret = __bio_iov_append_get_pages(bio, iter);
--		} else {
--			if (is_bvec)
--				ret = __bio_iov_bvec_add_pages(bio, iter);
-+	if (iov_iter_is_bvec(iter)) {
-+		if (WARN_ON_ONCE(bio_op(bio) == REQ_OP_ZONE_APPEND))
-+			return -EINVAL;
-+		bio_iov_bvec_set(bio, iter);
-+		bio_set_flag(bio, BIO_NO_PAGE_REF);
-+		return 0;
-+	} else {
-+		do {
-+			if (bio_op(bio) == REQ_OP_ZONE_APPEND)
-+				ret = __bio_iov_append_get_pages(bio, iter);
- 			else
- 				ret = __bio_iov_iter_get_pages(bio, iter);
--		}
--	} while (!ret && iov_iter_count(iter) && !bio_full(bio, 0));
--
--	if (is_bvec)
--		bio_set_flag(bio, BIO_NO_PAGE_REF);
-+		} while (!ret && iov_iter_count(iter) && !bio_full(bio, 0));
-+	}
- 
- 	/* don't account direct I/O as memory stall */
- 	bio_clear_flag(bio, BIO_WORKINGSET);
-diff --git a/include/linux/bio.h b/include/linux/bio.h
-index d8f9077c43ef..1d30572a8c53 100644
---- a/include/linux/bio.h
-+++ b/include/linux/bio.h
-@@ -444,10 +444,13 @@ static inline void bio_wouldblock_error(struct bio *bio)
- 
- /*
-  * Calculate number of bvec segments that should be allocated to fit data
-- * pointed by @iter.
-+ * pointed by @iter. If @iter is backed by bvec it's going to be reused
-+ * instead of allocating a new one.
-  */
- static inline int bio_iov_vecs_to_alloc(struct iov_iter *iter, int max_segs)
- {
-+	if (iov_iter_is_bvec(iter))
-+		return 0;
- 	return iov_iter_npages(iter, max_segs);
- }
- 
--- 
-2.24.0
+> +	pm_runtime_set_suspended(cdev->dev);
 
+This is already the default.
+
+> +
+> +	return 0;
+> +
+> +error_notifier_registered:
+> +	v4l2_async_notifier_unregister(notifier);
+> +error_notifier:
+> +	v4l2_async_notifier_cleanup(notifier);
+> +error_media_entity:
+> +	media_entity_cleanup(&subdev->entity);
+> +
+> +	return ret;
+> +}
+> +
+> +static int sun6i_mipi_csi2_v4l2_teardown(struct sun6i_mipi_csi2_dev *cdev)
+> +{
+> +	struct sun6i_mipi_csi2_video *video = &cdev->video;
+> +	struct v4l2_subdev *subdev = &video->subdev;
+> +	struct v4l2_async_notifier *notifier = &video->notifier;
+> +
+> +	v4l2_async_unregister_subdev(subdev);
+> +	v4l2_async_notifier_unregister(notifier);
+> +	v4l2_async_notifier_cleanup(notifier);
+> +	media_entity_cleanup(&subdev->entity);
+> +	v4l2_device_unregister_subdev(subdev);
+> +
+
+I would expect to see pm_runtime_suspend()/pm_runtime_disable() called
+here, so you do not leak clock prepare/enable references.
+
+Cheers,
+Samuel
+
+> +	return 0;
+> +}
+> +
+> +static const struct regmap_config sun6i_mipi_csi2_regmap_config = {
+> +	.reg_bits       = 32,
+> +	.reg_stride     = 4,
+> +	.val_bits       = 32,
+> +	.max_register	= 0x400,
+> +};
+> +
+> +static int sun6i_mipi_csi2_probe(struct platform_device *pdev)
+> +{
+> +	struct sun6i_mipi_csi2_dev *cdev;
+> +	struct resource *res;
+> +	void __iomem *io_base;
+> +	int ret;
+> +
+> +	cdev = devm_kzalloc(&pdev->dev, sizeof(*cdev), GFP_KERNEL);
+> +	if (!cdev)
+> +		return -ENOMEM;
+> +
+> +	cdev->dev = &pdev->dev;
+> +
+> +	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+> +	io_base = devm_ioremap_resource(&pdev->dev, res);
+> +	if (IS_ERR(io_base))
+> +		return PTR_ERR(io_base);
+> +
+> +	cdev->regmap = devm_regmap_init_mmio(&pdev->dev, io_base,
+> +					     &sun6i_mipi_csi2_regmap_config);
+> +	if (IS_ERR(cdev->regmap)) {
+> +		dev_err(&pdev->dev, "failed to init register map\n");
+> +		return PTR_ERR(cdev->regmap);
+> +	}
+> +
+> +	cdev->clk_bus = devm_clk_get(&pdev->dev, "bus");
+> +	if (IS_ERR(cdev->clk_bus)) {
+> +		dev_err(&pdev->dev, "failed to acquire bus clock\n");
+> +		return PTR_ERR(cdev->clk_bus);
+> +	}
+> +
+> +	cdev->clk_mod = devm_clk_get(&pdev->dev, "mod");
+> +	if (IS_ERR(cdev->clk_mod)) {
+> +		dev_err(&pdev->dev, "failed to acquire mod clock\n");
+> +		return PTR_ERR(cdev->clk_mod);
+> +	}
+> +
+> +	cdev->reset = devm_reset_control_get_shared(&pdev->dev, NULL);
+> +	if (IS_ERR(cdev->reset)) {
+> +		dev_err(&pdev->dev, "failed to get reset controller\n");
+> +		return PTR_ERR(cdev->reset);
+> +	}
+> +
+> +	cdev->dphy = devm_phy_get(&pdev->dev, NULL);
+> +	if (IS_ERR(cdev->dphy)) {
+> +		dev_err(&pdev->dev, "failed to get the MIPI D-PHY\n");
+> +		return PTR_ERR(cdev->dphy);
+> +	}
+> +
+> +	ret = phy_init(cdev->dphy);
+> +	if (ret) {
+> +		dev_err(&pdev->dev, "failed to initialize the MIPI D-PHY\n");
+> +		return ret;
+> +	}
+> +
+> +	platform_set_drvdata(pdev, cdev);
+> +
+> +	ret = sun6i_mipi_csi2_v4l2_setup(cdev);
+> +	if (ret)
+> +		return ret;
+> +
+> +	return 0;
+> +}
+> +
+> +static int sun6i_mipi_csi2_remove(struct platform_device *pdev)
+> +{
+> +	struct sun6i_mipi_csi2_dev *cdev = platform_get_drvdata(pdev);
+> +
+> +	phy_exit(cdev->dphy);
+> +
+> +	return sun6i_mipi_csi2_v4l2_teardown(cdev);
+> +}
+> +
+> +static const struct dev_pm_ops sun6i_mipi_csi2_pm_ops = {
+> +	SET_RUNTIME_PM_OPS(sun6i_mipi_csi2_suspend, sun6i_mipi_csi2_resume,
+> +			   NULL)
+> +};
+> +
+> +static const struct of_device_id sun6i_mipi_csi2_of_match[] = {
+> +	{ .compatible = "allwinner,sun6i-a31-mipi-csi2" },
+> +	{},
+> +};
+> +MODULE_DEVICE_TABLE(of, sun6i_mipi_csi2_of_match);
+> +
+> +static struct platform_driver sun6i_mipi_csi2_platform_driver = {
+> +	.probe = sun6i_mipi_csi2_probe,
+> +	.remove = sun6i_mipi_csi2_remove,
+> +	.driver = {
+> +		.name = MODULE_NAME,
+> +		.of_match_table = of_match_ptr(sun6i_mipi_csi2_of_match),
+> +		.pm = &sun6i_mipi_csi2_pm_ops,
+> +	},
+> +};
+> +module_platform_driver(sun6i_mipi_csi2_platform_driver);
+> +
+> +MODULE_DESCRIPTION("Allwinner A31 MIPI CSI-2 Controller Driver");
+> +MODULE_AUTHOR("Paul Kocialkowski <paul.kocialkowski@bootlin.com>");
+> +MODULE_LICENSE("GPL");
+[...]
