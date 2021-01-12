@@ -2,141 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 531672F2E6B
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Jan 2021 12:54:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 268522F2ED2
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Jan 2021 13:18:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729957AbhALLxZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 12 Jan 2021 06:53:25 -0500
-Received: from mail.loongson.cn ([114.242.206.163]:55372 "EHLO loongson.cn"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S1727181AbhALLxZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 12 Jan 2021 06:53:25 -0500
-Received: from localhost.localdomain (unknown [112.3.198.184])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dx77+Fjf1fzSMDAA--.5647S5;
-        Tue, 12 Jan 2021 19:52:41 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     Harry Wei <harryxiyou@gmail.com>
+        id S1732938AbhALMQy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 12 Jan 2021 07:16:54 -0500
+Received: from new4-smtp.messagingengine.com ([66.111.4.230]:55329 "EHLO
+        new4-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1732880AbhALMQy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 12 Jan 2021 07:16:54 -0500
+Received: from compute6.internal (compute6.nyi.internal [10.202.2.46])
+        by mailnew.nyi.internal (Postfix) with ESMTP id B2363580811;
+        Tue, 12 Jan 2021 07:16:08 -0500 (EST)
+Received: from mailfrontend1 ([10.202.2.162])
+  by compute6.internal (MEProxy); Tue, 12 Jan 2021 07:16:08 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=flygoat.com; h=
+        subject:to:cc:references:from:message-id:date:mime-version
+        :in-reply-to:content-type:content-transfer-encoding; s=fm1; bh=P
+        l+sQRxcdfwP/Fld1vlNfoBZIrtoZmjlXIO7CyoXDxU=; b=guLC8BF0Bxw3m6XH2
+        FRIyL7fclEUXX1PdrGKZ+wALEEhlOt8999DvoOacO2U7W2kjEK2IqeDBYGNqn2Ai
+        MtcyvPRe5+51wF6DSwhn4pzdkKLKfe6W/KgdkD5w6xVEmmDsEdqkZ4byinb1WjNA
+        s1OAJte1sfc02fglwFXxydFtfW8ECF4K6tnWXxHD3aziA+iV7OI3xl3taWP1huSB
+        ro5d3F4t/3JQp3npOKV3aKHW4a2D4QbjdSQuIKRNy57fPgCZtFnc0DzC0Q6kqqQP
+        HCvfZ94GSZJIdqhaoI0gLBVii1VQdl600wUVdg7rEBu5v2n5WI7l1GHcYHIZN6i9
+        D0MvA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:content-type
+        :date:from:in-reply-to:message-id:mime-version:references
+        :subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+        :x-sasl-enc; s=fm1; bh=Pl+sQRxcdfwP/Fld1vlNfoBZIrtoZmjlXIO7CyoXD
+        xU=; b=NpLOfPiYVUzponPR7ecAH559W/ZBmJbLi+QXjnEZzBMqHuBWgjlB9sosU
+        8VnVaOAsfMVoAJJnRQ9XD7s5hiChDsJAtAw1Ak04TVwP6IO4HpF3NCSeyDjfBzsb
+        jjfIrlap3irz02z0VI3L8Zu6HrDpgUvJEcBCxNoq1Tq2ZEdeWbADYg7iCKhm031K
+        d4L8vO2ZjRivRhERSLlwN3WuXA5p7gke1PNgPBve4oiBqMaThh3uW/Xv5CjbbP4n
+        RL1QZkO2WWaOMvTRJMicaWp2/jo04oib7jF+8qPoE2PKrhVCZTq+7tFEGE2rdhxN
+        pIgDPJ+mkIPBTUjqoWH4UP6ctyNmQ==
+X-ME-Sender: <xms:BpP9X7NF1Mn1foiD-2lTHCQdbGJrrwvQ8mEzJ8vqGyyZ2o3ASzDy8w>
+    <xme:BpP9X1-b-mjhXXpXzCC8lPRi6kJG8el0uIXLeGEGZFGW92eny5KNupgatq212qIPi
+    Jgx8lM54a_mnn1dgwg>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedukedrtddtgddthecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefuvfhfhffkffgfgggjtgfgsehtkeertddtfeejnecuhfhrohhmpeflihgrgihu
+    nhcujggrnhhguceojhhirgiguhhnrdihrghnghesfhhlhihgohgrthdrtghomheqnecugg
+    ftrfgrthhtvghrnhepiefhgffhieekudegjeevgfffveegveegheffhfduieeiffffveff
+    ueegveefgfefnecukfhppeeghedrfeefrdehtddrvdehgeenucevlhhushhtvghrufhiii
+    gvpedtnecurfgrrhgrmhepmhgrihhlfhhrohhmpehjihgrgihunhdrhigrnhhgsehflhih
+    ghhorghtrdgtohhm
+X-ME-Proxy: <xmx:BpP9X6TZP29UqeP9qAR8e5MDDIxY8IHSQ9Q1ZkYBn1hDOP189IV-Hg>
+    <xmx:BpP9X_tuzNvDSUyiPTq37hqogAY586iLCLtFV4BcVgbFm2_h1HJj3w>
+    <xmx:BpP9XzeHaHd-xSUNevNR4NZBsWxvtNJzNOMmu2p0eol0xV5brH08sQ>
+    <xmx:B5P9X65X8H-VFcUESNuAzyZ8AIqWxgEU9FeJdoxSp_tAJ2jnrN_uBg>
+Received: from [0.0.0.0] (li1000-254.members.linode.com [45.33.50.254])
+        by mail.messagingengine.com (Postfix) with ESMTPA id B5FB7240062;
+        Tue, 12 Jan 2021 07:16:01 -0500 (EST)
+Subject: Re: [PATCH v6 1/4] doc/zh_CN: add mips index.rst translation
+To:     Yanteng Si <siyanteng@loongson.cn>,
+        Harry Wei <harryxiyou@gmail.com>
 Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
         Yanteng Si <siyanteng01@gmail.com>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
-        Huacai Chen <chenhuacai@gmail.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v6 4/4] doc/zh_CN: add mips ingenic-tcu.rst translation
-Date:   Tue, 12 Jan 2021 19:52:59 +0800
-Message-Id: <20210112115259.217944-4-siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210112115259.217944-1-siyanteng@loongson.cn>
+        Huacai Chen <chenhuacai@gmail.com>
 References: <20210112115259.217944-1-siyanteng@loongson.cn>
+From:   Jiaxun Yang <jiaxun.yang@flygoat.com>
+Message-ID: <1c835149-0d95-1b2b-89c2-02f05d51cdc7@flygoat.com>
+Date:   Tue, 12 Jan 2021 20:15:57 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <20210112115259.217944-1-siyanteng@loongson.cn>
+Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9Dx77+Fjf1fzSMDAA--.5647S5
-X-Coremail-Antispam: 1UD129KBjvJXoWxCw1rtryrWr1xJFWDJF4kCrg_yoWrAr13pF
-        n7uFyfKa1xAFyayrWUGF18WF1rGr4xW3W293y8J3sIqr1Ut3WUtwn8Jr9xXFyxWr1rAFWx
-        XF1I9F40k34UAwUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUU9m14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWUuVWrJwAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
-        x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
-        Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
-        8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
-        0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
-        IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0
-        Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCF04k20xvY0x0EwIxGrwCFx2
-        IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v2
-        6r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67
-        AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IY
-        s7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr
-        0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUd8n5UUUUU=
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+Content-Language: en-US
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch translates Documentation/mips/ingenic-tcu.rst into Chinese.
+在 2021/1/12 下午7:52, Yanteng Si 写道:
+> This patch translates Documentation/mips/index.rst into Chinese.
+>
+> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+> Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
----
- .../translations/zh_CN/mips/ingenic-tcu.rst   | 69 +++++++++++++++++++
- 1 file changed, 69 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/mips/ingenic-tcu.rst
+Hi Yanteng,
 
-diff --git a/Documentation/translations/zh_CN/mips/ingenic-tcu.rst b/Documentation/translations/zh_CN/mips/ingenic-tcu.rst
-new file mode 100644
-index 000000000000..72b5d409ed89
---- /dev/null
-+++ b/Documentation/translations/zh_CN/mips/ingenic-tcu.rst
-@@ -0,0 +1,69 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: :ref:`Documentation/mips/ingenic-tcu.rst <ingenic-tcu>`
-+:Translator: Yanteng Si <siyanteng@loongson.cn>
-+
-+.. _cn_ingenic-tcu:
-+
-+===============================================
-+君正 JZ47xx SoC定时器/计数器硬件单元
-+===============================================
-+
-+君正 JZ47xx SoC中的定时器/计数器单元(TCU)是一个多功能硬件块。它有多达
-+8个通道，可以用作计数器，计时器，或脉冲宽度调制器。
-+
-+- JZ4725B, JZ4750, JZ4755 只有６个TCU通道。其它SoC都有８个通道。
-+
-+- JZ4725B引入了一个独立的通道，称为操作系统计时器(OST)。这是一个32位可
-+  编程定时器。在JZ4760B及以上型号上，它是64位的。
-+
-+- 每个TCU通道都有自己的时钟源，可以通过 TCSR 寄存器设置通道的父级时钟
-+  源（pclk、ext、rtc）、开关以及分频。
-+
-+    - 看门狗和OST硬件模块在它们的寄存器空间中也有相同形式的TCSR寄存器。
-+    - 用于关闭/开启的 TCU 寄存器也可以关闭/开启看门狗和 OST 时钟。
-+
-+- 每个TCU通道在两种模式的其中一种模式下运行：
-+
-+    - 模式 TCU1：通道无法在睡眠模式下运行，但更易于操作。
-+    - 模式 TCU2：通道可以在睡眠模式下运行，但操作比 TCU1 通道复杂一些。
-+
-+- 每个 TCU 通道的模式取决于使用的SoC：
-+
-+    - 在最老的SoC（高于JZ4740），八个通道都运行在TCU1模式。
-+    - 在 JZ4725B，通道5运行在TCU2,其它通道则运行在TCU1。
-+    - 在最新的SoC（JZ4750及之后），通道1-2运行在TCU2，其它通道则运行
-+      在TCU1。
-+
-+- 每个通道都可以生成中断。有些通道共享一条中断线，而有些没有，其在SoC型
-+  号之间的变更：
-+
-+    - 在很老的SoC（JZ4740及更低），通道0和通道1有它们自己的中断线；通
-+      道2-7共享最后一条中断线。
-+    - 在 JZ4725B，通道0有它自己的中断线；通道1-5共享一条中断线；OST
-+      使用最后一条中断线。
-+    - 在比较新的SoC（JZ4750及以后），通道5有它自己的中断线；通
-+      道0-4和（如果是8通道）6-7全部共享一条中断线；OST使用最后一条中
-+      断线。
-+
-+实现
-+====
-+
-+TCU硬件的功能分布在多个驱动程序：
-+
-+===========         =====
-+时钟                drivers/clk/ingenic/tcu.c
-+中断                drivers/irqchip/irq-ingenic-tcu.c
-+定时器              drivers/clocksource/ingenic-timer.c
-+OST                 drivers/clocksource/ingenic-ost.c
-+脉冲宽度调制器      drivers/pwm/pwm-jz4740.c
-+看门狗              drivers/watchdog/jz4740_wdt.c
-+===========         =====
-+
-+因为可以从相同的寄存器控制属于不同驱动程序和框架的TCU的各种功能，所以
-+所有这些驱动程序都通过相同的控制总线通用接口访问它们的寄存器。
-+
-+有关TCU驱动程序的设备树绑定的更多信息，请参阅:
-+Documentation/devicetree/bindings/timer/ingenic,tcu.yaml.
--- 
-2.27.0
+Reviewed-by: Jiaxun Yang <jiaxun.yang@flygoat.com>
 
+Thanks for your l10n works!
+
+Btw: As you have sent v6, it should be v7 instead.
+Also it is common practice to include a short changelog between revisions
+to help others reviewing your patches easier.
+You may include it in cover letter or comment section of commit message.
+
+Thanks
+
+- Jiaxun
+
+[...]
