@@ -2,75 +2,146 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 846042F23D6
-	for <lists+linux-doc@lfdr.de>; Tue, 12 Jan 2021 01:33:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7D86D2F2501
+	for <lists+linux-doc@lfdr.de>; Tue, 12 Jan 2021 02:18:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2391796AbhALA0C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 11 Jan 2021 19:26:02 -0500
-Received: from mga14.intel.com ([192.55.52.115]:29965 "EHLO mga14.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2404238AbhALAK0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 11 Jan 2021 19:10:26 -0500
-IronPort-SDR: 4WkjVdCVtSs4tpYTIl+Oru/a85CxppNMem/874N/QAWKFowtW91gsdxpnkxHf6q9HiJ2x3jM9/
- wWCRfLfdI+Jg==
-X-IronPort-AV: E=McAfee;i="6000,8403,9861"; a="177183523"
-X-IronPort-AV: E=Sophos;i="5.79,339,1602572400"; 
-   d="scan'208";a="177183523"
-Received: from fmsmga008.fm.intel.com ([10.253.24.58])
-  by fmsmga103.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jan 2021 16:09:46 -0800
-IronPort-SDR: MZ6o279zdJ2hukSqNJAelzE0N3EoPSuST80JVMJ0lG7cLsw+cOmSn4be9Fxg2PwEjeSvp7bcPZ
- 612cCvl1Cu1Q==
-X-IronPort-AV: E=Sophos;i="5.79,339,1602572400"; 
-   d="scan'208";a="352799931"
-Received: from yyu32-mobl1.amr.corp.intel.com (HELO [10.212.197.241]) ([10.212.197.241])
-  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 11 Jan 2021 16:09:43 -0800
-Subject: Re: [PATCH v17 04/26] x86/cpufeatures: Introduce X86_FEATURE_CET and
- setup functions
-To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>
-References: <20201229213053.16395-5-yu-cheng.yu@intel.com>
- <20210111230900.5916-1-yu-cheng.yu@intel.com>
-From:   "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Message-ID: <f88d2211-d314-5d9c-9471-a54c412525e0@intel.com>
-Date:   Mon, 11 Jan 2021 16:09:42 -0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.0
+        id S1728557AbhALAjY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 11 Jan 2021 19:39:24 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56088 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728983AbhALAir (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 11 Jan 2021 19:38:47 -0500
+Received: from mail-ej1-x632.google.com (mail-ej1-x632.google.com [IPv6:2a00:1450:4864:20::632])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 48BF9C0617A5
+        for <linux-doc@vger.kernel.org>; Mon, 11 Jan 2021 16:38:06 -0800 (PST)
+Received: by mail-ej1-x632.google.com with SMTP id ga15so1034193ejb.4
+        for <linux-doc@vger.kernel.org>; Mon, 11 Jan 2021 16:38:06 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=AAGK7QJnpAigixBsDwJOzFarQpa+uBn1LCtFQ6nqZOg=;
+        b=Zj+qOLhHhCXzhbKC6BIAew+AX4ps5bw/ov5suzZPwzPwiHyKHAlZpPGpfXEv10EV0C
+         f+u28iptdt6p3p/fA/LMgRUvZ0kd2jfsUajM6UJUSBoPn2lAtcEaVibSRudyHVAG4Dsh
+         5wbu9vfoEfHtNNaSfcndmEfzD+b2I4KevWgCKhp795ZOltdJO0dx3nFQahcQtqyMYYOD
+         C+m5v5SJZNDC8hJ4kQip8/63FIZVNzGX83A1ZZhSRmCpE6039rjwpXxqRHRMtjE9QYc0
+         9ucW1UVi0j32EE9Iam8Z1bs/Sa6LKBX/qLkboU4v1MA6+NRGJrzDgARi25KLBaPpYdf+
+         oFWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=AAGK7QJnpAigixBsDwJOzFarQpa+uBn1LCtFQ6nqZOg=;
+        b=Itta5HXclg/9Hn1LikXimBkHqwVaa/Cv+MHvcXtxOyR5NU/cB2ewk8NOHADP4klIlh
+         NmQ9ygdt6mn8CbmU1wnd9i/ALpGmhxuxvRx7HSNJWgs+VC1flHDvjEx+zvPf9UkMSlBt
+         X0nTMVxHYhd9NvJJg47MXM1IQaiUl4gaHigVxMnTWLyQIZv0aYf4aj8creLoT+nQU2t2
+         h0+uOe/OWI5oyqbl3T7jbw8ETC/EBU3pOrXR5d62rFI0wQ1vl4FZ/JDAvIImmNTv7Voc
+         obAhrnBV6xld9zsDhCNbrWBHjR23DkW1yMtcjctalkeF6lFqe+9CB7rMrh95mVtBlQIc
+         HXkg==
+X-Gm-Message-State: AOAM532hyQD1/JB9o2Oq3h+a979Nt3A7C4C9CUp2DXmlYWGd4vgqVuSC
+        HAqhTK/OAmpz/rWLJxHJz+hTfWOd9dsRVxDzMw7C
+X-Google-Smtp-Source: ABdhPJxzGLv08AscXEmZjjVg2gsLIwKeoO6Prumvngl5LoIbvGS5MQiYEFtsPvhL3T6YwqPt/MFDm1VJuygtgOcJAMM=
+X-Received: by 2002:a17:906:1194:: with SMTP id n20mr1301510eja.269.1610411884658;
+ Mon, 11 Jan 2021 16:38:04 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20210111230900.5916-1-yu-cheng.yu@intel.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <20210111081821.3041587-1-morbo@google.com> <20210111201224.l5r2zxuyd7ayszke@google.com>
+ <CAGG=3QWo5_wwTMHtif4BzFssByaW1ScvpaEH1p1nZ6ymVggLjA@mail.gmail.com> <20210111203120.daeef4yuwgmk5em4@google.com>
+In-Reply-To: <20210111203120.daeef4yuwgmk5em4@google.com>
+From:   Bill Wendling <morbo@google.com>
+Date:   Mon, 11 Jan 2021 16:37:53 -0800
+Message-ID: <CAGG=3QVs8dUaqcnuHYiaqccMhp7OmkxewZ_PAhAr96todNJhfQ@mail.gmail.com>
+Subject: Re: [PATCH] pgo: add clang's Profile Guided Optimization infrastructure
+To:     Fangrui Song <maskray@google.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        clang-built-linux <clang-built-linux@googlegroups.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Nathan Chancellor <natechancellor@gmail.com>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Sami Tolvanen <samitolvanen@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This is a minor revision of the original [PATCH v17 04/26] patch.  The 
-purpose of the revision is to address Boris' comment earlier by doing 
-setup_force_cpu_cap(X86_FEATURE_CET) in bsp_init_intel().
+On Mon, Jan 11, 2021 at 12:31 PM Fangrui Song <maskray@google.com> wrote:
+> On 2021-01-11, Bill Wendling wrote:
+> >On Mon, Jan 11, 2021 at 12:12 PM Fangrui Song <maskray@google.com> wrote:
+> >>
+> >> On 2021-01-11, 'Bill Wendling' via Clang Built Linux wrote:
+> >> >From: Sami Tolvanen <samitolvanen@google.com>
+> >> >
+> >> >Enable the use of clang's Profile-Guided Optimization[1]. To generate a
+> >> >profile, the kernel is instrumented with PGO counters, a representative
+> >> >workload is run, and the raw profile data is collected from
+> >> >/sys/kernel/debug/pgo/profraw.
+> >> >
+> >> >The raw profile data must be processed by clang's "llvm-profdata" tool before
+> >> >it can be used during recompilation:
+> >> >
+> >> >  $ cp /sys/kernel/debug/pgo/profraw vmlinux.profraw
+> >> >  $ llvm-profdata merge --output=vmlinux.profdata vmlinux.profraw
+> >> >
+> >> >Multiple raw profiles may be merged during this step.
+> >> >
+> >> >The data can be used either by the compiler if LTO isn't enabled:
+> >> >
+> >> >    ... -fprofile-use=vmlinux.profdata ...
+> >> >
+> >> >or by LLD if LTO is enabled:
+> >> >
+> >> >    ... -lto-cs-profile-file=vmlinux.profdata ...
+> >>
+> >> This LLD option does not exist.
+> >> LLD does have some `--lto-*` options but the `-lto-*` form is not supported
+> >> (it clashes with -l) https://reviews.llvm.org/D79371
+> >>
+> >That's strange. I've been using that option for years now. :-) Is this
+> >a recent change?
+>
+> The more frequently used options (specifyed by the clang driver) are
+> -plugin-opt=... (options implemented by LLVMgold.so).
+> `-lto-*` is rare.
+>
+> >> (There is an earlier -fprofile-instr-generate which does
+> >> instrumentation in Clang, but the option does not have broad usage.
+> >> It is used more for code coverage, not for optimization.
+> >> Noticeably, it does not even implement the Kirchhoff's current law
+> >> optimization)
+> >>
+> >Right. I've been told outside of this email that -fprofile-generate is
+> >the prefered flag to use.
+> >
+> >> -fprofile-use= is used by both regular PGO and context-sensitive PGO (CSPGO).
+> >>
+> >> clang -flto=thin -fprofile-use= passes -plugin-opt=cs-profile-path= to the linker.
+> >> For regular PGO, this option is effectively a no-op (confirmed with CSPGO main developer).
+> >>
+> >> So I think the "or by LLD if LTO is enabled:" part should be removed.
+> >
+> >But what if you specify the linking step explicitly? Linux doesn't
+> >call "clang" when linking, but "ld.lld".
+>
+> Regular PGO+LTO does not need -plugin-opt=cs-profile-path=
+> CSPGO+LTO needs it.
+> Because -fprofile-use= may be used by both, Clang driver adds it.
+> CSPGO is relevant in this this patch, so the linker option does not need to be mentioned.
 
---
-Yu-cheng
+I'm still a bit confused. Are you saying that when clang uses
+`-flto=thin -fprofile-use=foo` that the profile file "foo" is embedded
+into the bitcode file so that when the linker's run it'll be used?
+
+This is the workflow:
+
+clang ... -fprofile-use=vmlinux.profdata ... -c -o foo.o foo.c
+clang ... -fprofile-use=vmlinux.profdata ... -c -o bar.o bar.c
+ld.lld ... <output file> foo.o bar.o
+
+Are you saying that we don't need to have
+"-plugin-opt=cs-profile-path=vmlinux.profdata" on the "ld.lld ..."
+line?
+
+-bw
