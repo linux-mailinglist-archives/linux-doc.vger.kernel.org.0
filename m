@@ -2,83 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 019FE2F483B
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Jan 2021 11:09:02 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B1A962F4939
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Jan 2021 12:00:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726980AbhAMKE6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 13 Jan 2021 05:04:58 -0500
-Received: from mail.skyhub.de ([5.9.137.197]:37676 "EHLO mail.skyhub.de"
+        id S1726790AbhAMLAK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 13 Jan 2021 06:00:10 -0500
+Received: from mail.kernel.org ([198.145.29.99]:38266 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726948AbhAMKE5 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 13 Jan 2021 05:04:57 -0500
-Received: from zn.tnic (p200300ec2f0b5c00b2d62b1c55c494d5.dip0.t-ipconnect.de [IPv6:2003:ec:2f0b:5c00:b2d6:2b1c:55c4:94d5])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 052ED1EC0373;
-        Wed, 13 Jan 2021 11:04:16 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
-        t=1610532256;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
-        bh=6Q836lvEI8WL7BDS9FwTyp3jQYCAq9tax7h39eSviyg=;
-        b=QGhyTjv+8jrsJmW04auJ2WzRUI8x3z3h3Nxe1Iofsa5h9SNwPhWVcm/kTr2VofD+ot0uEi
-        bR8WMYNsVxyzR9uzfEztPrm+Wzta+YIiesKnMhkrnCnIz5NiIFbiNmce9zipmTdW9b6nvc
-        PUt9/J0L3nIz3b7JgjwDsvnXLiuuciE=
-Date:   Wed, 13 Jan 2021 11:04:16 +0100
-From:   Borislav Petkov <bp@alien8.de>
-To:     "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>
-Subject: Re: [PATCH v17 04/26] x86/cpufeatures: Introduce X86_FEATURE_CET and
- setup functions
-Message-ID: <20210113100416.GB16960@zn.tnic>
-References: <20201229213053.16395-5-yu-cheng.yu@intel.com>
- <20210111230900.5916-1-yu-cheng.yu@intel.com>
- <20210112123854.GE13086@zn.tnic>
- <0b144668-a989-6bc7-0b0d-2195d2d73397@intel.com>
+        id S1726652AbhAMLAK (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 13 Jan 2021 06:00:10 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 75EC2224B0;
+        Wed, 13 Jan 2021 10:59:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1610535569;
+        bh=y+ENxO6fogU99ORCO8xr4UpDZT49yjmxWCfiIejsSWs=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=eIIr2laNWy4rQidI2P9Wn6xsT6XmK1DpDnb8FKyY+xMBbgnpFuY9c4jrbrLm+GwR2
+         GfIc197OxegviK5gKq9HG9ZUW2v/9tlOwiGqmGkum6KA0BV4cmwLIuocxtgpvc+gMJ
+         gyN6cReyFHKIXKCK9RR/LKaGvaGBZqL+pTiwTb8jskXdgsncxIFPy955OuahneDGLB
+         tKa1MuBClTN6C79Tz8Sna7h+AyYwIEiG/U96owfsm5krW0A6eAsu3XSxtr0AWdBrZB
+         LabyGQvzU7aIRFUCRBxBKg6fR02L9bjufI0A29owCrEUSRDTwOE6Pz5udNuSgk9I6/
+         GSTuUWuTqK4oQ==
+Received: by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kzds7-00DpFq-31; Wed, 13 Jan 2021 11:59:27 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        "Jonathan Corbet" <corbet@lwn.net>, linux-kernel@vger.kernel.org
+Subject: [PATCH 01/24] MAINTAINERS: update adi,ad5758.yaml reference
+Date:   Wed, 13 Jan 2021 11:59:02 +0100
+Message-Id: <f492bd7d4c1717f04b59ee364459bf0d999fc4c7.1610535349.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.29.2
+In-Reply-To: <cover.1610535349.git.mchehab+huawei@kernel.org>
+References: <cover.1610535349.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <0b144668-a989-6bc7-0b0d-2195d2d73397@intel.com>
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jan 12, 2021 at 03:02:06PM -0800, Yu, Yu-cheng wrote:
-> Should I send an updated patch?  Thanks!
+Changeset 1e6536ee349b ("dt-bindings:iio:dac:adi,ad5758 yaml conversion")
+renamed: Documentation/devicetree/bindings/iio/dac/ad5758.txt
+to: Documentation/devicetree/bindings/iio/dac/adi,ad5758.yaml.
 
-No, this is not how review works.
+Update its cross-reference accordingly.
 
-Usually, you send your patchset, wait a week or two to gather feedback,
-incorporate that feedback or discuss/dispute it and you send your next
-version. You should know the process by now...
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+---
+ MAINTAINERS | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 289465785e88..68f43b83235b 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -1132,7 +1132,7 @@ W:	http://ez.analog.com/community/linux-device-drivers
+ F:	Documentation/ABI/testing/sysfs-bus-iio-frequency-ad9523
+ F:	Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4350
+ F:	Documentation/devicetree/bindings/iio/*/adi,*
+-F:	Documentation/devicetree/bindings/iio/dac/ad5758.txt
++F:	Documentation/devicetree/bindings/iio/dac/adi,ad5758.yaml
+ F:	drivers/iio/*/ad*
+ F:	drivers/iio/adc/ltc249*
+ F:	drivers/iio/amplifiers/hmc425a.c
 -- 
-Regards/Gruss,
-    Boris.
+2.29.2
 
-https://people.kernel.org/tglx/notes-about-netiquette
