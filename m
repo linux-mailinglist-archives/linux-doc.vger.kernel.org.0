@@ -2,37 +2,37 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 974CE2F4977
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Jan 2021 12:10:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C2B242F496A
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Jan 2021 12:10:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727848AbhAMLCK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 13 Jan 2021 06:02:10 -0500
-Received: from mail.kernel.org ([198.145.29.99]:38852 "EHLO mail.kernel.org"
+        id S1727748AbhAMLBi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 13 Jan 2021 06:01:38 -0500
+Received: from mail.kernel.org ([198.145.29.99]:39174 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727480AbhAMLAv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 13 Jan 2021 06:00:51 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id AC5F1233F7;
-        Wed, 13 Jan 2021 10:59:29 +0000 (UTC)
+        id S1727773AbhAMLBh (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 13 Jan 2021 06:01:37 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 96CDA238E7;
+        Wed, 13 Jan 2021 10:59:30 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
         s=k20201202; t=1610535570;
-        bh=a+dkjYxr1JQcyA3F/5+J8go+yX3JsyBH4EIlx2hcACo=;
+        bh=DQDknHPOnBWjCkPDysFt7tqeQlGBl/GidYLvIZ+e9d0=;
         h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=Fj42FGSOoNm/vx1BoyMwr0HbtVrkNXX4g+/0Kn5WrFhqsx/uueN0rR7dV8BNVPlgN
-         1/tuJQgvWGXPDtis3yygXGtPHY7ubK69F7/59fFSMiv/vGuOkYMp0PE6RSeV69N62I
-         99BIYjhn4g2YfqGjZYbv2niAIL7N3tkptbaPnTGP9x+TtIZ0hE0SoXb8HiXuwN0gOQ
-         vWqFIwR9PZPQ4dY6b5Z7ydBYqFMuRY3nTW412dK2QPwF+mdPBZ7dVKwdhbKrTR8QUA
-         hcWyEiuWVsGEHOBFy/LcsAhaiLGw95TLOfOxTxV3ynFMUhffS4tTzBdhneiq9eQURv
-         WQoukiHRoTy5A==
+        b=VQIhycGI01SKo48NJyvI5US3PuKM/rO7pTDs4hE1KGGCZ7Uui9LEM+oTzPjsolSov
+         hqaR3kfCQBWQEmTaMLfeyonbag7+qJxn3tJnJPvF2Wq/R1P1h7saMl53vYU1XWbeiQ
+         AeMM4Pn93FAjkVuZEHZ2RzZ+RL+a5/lCB+i+ntBgB+m/qzGoB4fd7Pa44iPxkTjA1X
+         BenpHLZU1CN/VPPEiaPR2YO0MCh2d1vqth6dPhJWDGy98Ll/ElhuypEvaMGi/wM14m
+         CPr9OPjP7MLkKWsQGASf7ytsMYyXrQrN1dkqus8atDq0KONN+e0VH6+h0h+PP9YRMA
+         9Ayj/Epxmi2Uw==
 Received: by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kzds7-00DpFw-6a; Wed, 13 Jan 2021 11:59:27 +0100
+        id 1kzds7-00DpG7-BJ; Wed, 13 Jan 2021 11:59:27 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
         "Jonathan Corbet" <corbet@lwn.net>, linux-kernel@vger.kernel.org
-Subject: [PATCH 04/24] MAINTAINERS: update dpot-dac.yaml reference
-Date:   Wed, 13 Jan 2021 11:59:05 +0100
-Message-Id: <15b0ff7bfe9ba7ca6d438e1ca7880061cfce05b3.1610535349.git.mchehab+huawei@kernel.org>
+Subject: [PATCH 08/24] MAINTAINERS: update voltage-divider.yaml reference
+Date:   Wed, 13 Jan 2021 11:59:09 +0100
+Message-Id: <8f0eb68c83148410a7efdf406b88c8e143c841ac.1610535349.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.29.2
 In-Reply-To: <cover.1610535349.git.mchehab+huawei@kernel.org>
 References: <cover.1610535349.git.mchehab+huawei@kernel.org>
@@ -43,9 +43,9 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Changeset 06d2ff6fe11e ("dt-bindings:iio:dac:dpot-dac: yaml conversion.")
-renamed: Documentation/devicetree/bindings/iio/dac/dpot-dac.txt
-to: Documentation/devicetree/bindings/iio/dac/dpot-dac.yaml.
+Changeset 6f633bc91ac1 ("dt-bindings:iio:afe:voltage-divider: txt to yaml conversion")
+renamed: Documentation/devicetree/bindings/iio/afe/voltage-divider.txt
+to: Documentation/devicetree/bindings/iio/afe/voltage-divider.yaml.
 
 Update its cross-reference accordingly.
 
@@ -55,18 +55,18 @@ Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/MAINTAINERS b/MAINTAINERS
-index b3fe85038eb8..0ff692445967 100644
+index a699a221a48b..6083de743261 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
-@@ -8683,7 +8683,7 @@ M:	Peter Rosin <peda@axentia.se>
- L:	linux-iio@vger.kernel.org
+@@ -8722,7 +8722,7 @@ L:	linux-iio@vger.kernel.org
  S:	Maintained
- F:	Documentation/ABI/testing/sysfs-bus-iio-dac-dpot-dac
--F:	Documentation/devicetree/bindings/iio/dac/dpot-dac.txt
-+F:	Documentation/devicetree/bindings/iio/dac/dpot-dac.yaml
- F:	drivers/iio/dac/dpot-dac.c
+ F:	Documentation/devicetree/bindings/iio/afe/current-sense-amplifier.yaml
+ F:	Documentation/devicetree/bindings/iio/afe/current-sense-shunt.yaml
+-F:	Documentation/devicetree/bindings/iio/afe/voltage-divider.txt
++F:	Documentation/devicetree/bindings/iio/afe/voltage-divider.yaml
+ F:	drivers/iio/afe/iio-rescale.c
  
- IIO ENVELOPE DETECTOR
+ IKANOS/ADI EAGLE ADSL USB DRIVER
 -- 
 2.29.2
 
