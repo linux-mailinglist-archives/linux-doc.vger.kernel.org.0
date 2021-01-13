@@ -2,105 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C60A42F56D9
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Jan 2021 02:58:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6DC132F5761
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Jan 2021 04:00:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728285AbhANBxv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 13 Jan 2021 20:53:51 -0500
-Received: from twspam01.aspeedtech.com ([211.20.114.71]:61505 "EHLO
-        twspam01.aspeedtech.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1725844AbhANBxv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 13 Jan 2021 20:53:51 -0500
-Received: from twspam01.aspeedtech.com (localhost [127.0.0.2] (may be forged))
-        by twspam01.aspeedtech.com with ESMTP id 10E1Y8tB015352;
-        Thu, 14 Jan 2021 09:34:08 +0800 (GMT-8)
-        (envelope-from troy_lee@aspeedtech.com)
-Received: from mail.aspeedtech.com ([192.168.0.24])
-        by twspam01.aspeedtech.com with ESMTP id 10E1UhIW015149;
-        Thu, 14 Jan 2021 09:30:43 +0800 (GMT-8)
-        (envelope-from troy_lee@aspeedtech.com)
-Received: from aspeedtech.com (192.168.100.253) by TWMBX02.aspeed.com
- (192.168.0.24) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 14 Jan
- 2021 09:35:43 +0800
-Date:   Thu, 14 Jan 2021 01:35:35 +0000
-From:   Troy Lee <troy_lee@aspeedtech.com>
-To:     Rob Herring <robh@kernel.org>
-CC:     Andrew Jeffery <andrew@aj.id.au>,
-        Ryan Chen <ryan_chen@aspeedtech.com>,
-        "leetroy@gmail.com" <leetroy@gmail.com>,
-        "openbmc@lists.ozlabs.org" <openbmc@lists.ozlabs.org>,
-        Philipp Zabel <p.zabel@pengutronix.de>,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        "moderated list:ARM/ASPEED MACHINE SUPPORT" 
-        <linux-arm-kernel@lists.infradead.org>,
-        "moderated list:ARM/ASPEED MACHINE SUPPORT" 
-        <linux-aspeed@lists.ozlabs.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Rob Herring <robh+dt@kernel.org>,
-        Jean Delvare <jdelvare@suse.com>,
-        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
-        <devicetree@vger.kernel.org>,
-        "open list:HARDWARE MONITORING" <linux-hwmon@vger.kernel.org>,
-        ChiaWei Wang <chiawei_wang@aspeedtech.com>,
-        Joel Stanley <joel@jms.id.au>,
-        Guenter Roeck <linux@roeck-us.net>,
-        open list <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v2 1/4] dt-bindings: hwmon: Add Aspeed AST2600 PWM/Fan
-Message-ID: <20210114013535.GB2151879@aspeedtech.com>
-References: <20210113070850.1184506-1-troy_lee@aspeedtech.com>
- <20210113070850.1184506-2-troy_lee@aspeedtech.com>
- <1610552704.291941.2506185.nullmailer@robh.at.kernel.org>
+        id S1729371AbhAMWdy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 13 Jan 2021 17:33:54 -0500
+Received: from aserp2120.oracle.com ([141.146.126.78]:48526 "EHLO
+        aserp2120.oracle.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726636AbhAMWdM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 13 Jan 2021 17:33:12 -0500
+Received: from pps.filterd (aserp2120.oracle.com [127.0.0.1])
+        by aserp2120.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 10DMO15C022373;
+        Wed, 13 Jan 2021 22:31:12 GMT
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=subject : to : cc :
+ references : from : message-id : date : mime-version : in-reply-to :
+ content-type : content-transfer-encoding; s=corp-2020-01-29;
+ bh=cbAaYYA369SOVtMavd6SqpAAxPSZNSJN5l6rUr3r578=;
+ b=hw1PkC/sUHVQ3mQIsWe5wLnCnD2UBEsLkifv+QVZj58xK8X58jAvZHonkY4pgU3pvEDj
+ Qbdg//OBSnnr5KhM1CRI+pUx8YpfyfYH6j9jCGSIiEjGCAW7ADrY1s+JbJ/rPaKRuNJ7
+ PqW5Aff7qhKGiz3m9c3YZnYnV0paT2Loxi7cTh/BWnDyVYu5qdlqzBieH8mF1mYGr9+i
+ WmNU4hCwh6GoY2StJhoj56q3c00HmJooyE3Mwy2Jczgsm0mtYCv1nuUF0ON7KkDArGIg
+ 9BElpiJWUeQU2dZSNnu4fGH2edtGH636RDEeJH74U0UD8GUsWHc3t9/2mS/wRnSnNS1u Mg== 
+Received: from aserp3020.oracle.com (aserp3020.oracle.com [141.146.126.70])
+        by aserp2120.oracle.com with ESMTP id 360kcywv8r-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 13 Jan 2021 22:31:12 +0000
+Received: from pps.filterd (aserp3020.oracle.com [127.0.0.1])
+        by aserp3020.oracle.com (8.16.0.42/8.16.0.42) with SMTP id 10DMTfZl061547;
+        Wed, 13 Jan 2021 22:31:11 GMT
+Received: from userv0121.oracle.com (userv0121.oracle.com [156.151.31.72])
+        by aserp3020.oracle.com with ESMTP id 360ke9591t-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Wed, 13 Jan 2021 22:31:11 +0000
+Received: from abhmp0009.oracle.com (abhmp0009.oracle.com [141.146.116.15])
+        by userv0121.oracle.com (8.14.4/8.13.8) with ESMTP id 10DMUxqN029174;
+        Wed, 13 Jan 2021 22:31:00 GMT
+Received: from [192.168.2.112] (/50.38.35.18)
+        by default (Oracle Beehive Gateway v4.0)
+        with ESMTP ; Wed, 13 Jan 2021 14:30:59 -0800
+Subject: Re: [PATCH v12 03/13] mm: Introduce VM_WARN_ON_PAGE macro
+To:     Muchun Song <songmuchun@bytedance.com>, corbet@lwn.net,
+        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, x86@kernel.org,
+        hpa@zytor.com, dave.hansen@linux.intel.com, luto@kernel.org,
+        peterz@infradead.org, viro@zeniv.linux.org.uk,
+        akpm@linux-foundation.org, paulmck@kernel.org,
+        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
+        rdunlap@infradead.org, oneukum@suse.com, anshuman.khandual@arm.com,
+        jroedel@suse.de, almasrymina@google.com, rientjes@google.com,
+        willy@infradead.org, osalvador@suse.de, mhocko@suse.com,
+        song.bao.hua@hisilicon.com, david@redhat.com,
+        naoya.horiguchi@nec.com
+Cc:     duanxiongchun@bytedance.com, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        linux-fsdevel@vger.kernel.org
+References: <20210106141931.73931-1-songmuchun@bytedance.com>
+ <20210106141931.73931-4-songmuchun@bytedance.com>
+From:   Mike Kravetz <mike.kravetz@oracle.com>
+Message-ID: <65b2103d-6198-3380-d36e-17dd774359bd@oracle.com>
+Date:   Wed, 13 Jan 2021 14:30:57 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.1.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
-In-Reply-To: <1610552704.291941.2506185.nullmailer@robh.at.kernel.org>
-X-Originating-IP: [192.168.100.253]
-X-ClientProxiedBy: TWMBX02.aspeed.com (192.168.0.24) To TWMBX02.aspeed.com
- (192.168.0.24)
-X-DNSRBL: 
-X-MAIL: twspam01.aspeedtech.com 10E1UhIW015149
+In-Reply-To: <20210106141931.73931-4-songmuchun@bytedance.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9863 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 adultscore=0 suspectscore=0 spamscore=0
+ mlxlogscore=999 malwarescore=0 bulkscore=0 mlxscore=0 phishscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2009150000
+ definitions=main-2101130135
+X-Proofpoint-Virus-Version: vendor=nai engine=6000 definitions=9863 signatures=668683
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0 phishscore=0
+ impostorscore=0 bulkscore=0 adultscore=0 suspectscore=0 malwarescore=0
+ lowpriorityscore=0 clxscore=1015 mlxlogscore=999 mlxscore=0
+ priorityscore=1501 classifier=spam adjust=0 reason=mlx scancount=1
+ engine=8.12.0-2009150000 definitions=main-2101130134
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Rob,
-The 01/13/2021 23:45, Rob Herring wrote:
-> On Wed, 13 Jan 2021 07:08:45 +0000, Troy Lee wrote:
-> > We add binding for supporting a new AST2600 PWM/Fan hwmon driver.
-> > 
-> > Changes since v1:
-> > - dt binding with DT schema format
-> > 
-> > Signed-off-by: Troy Lee <troy_lee@aspeedtech.com>
-> > ---
-> >  .../hwmon/aspeed,ast2600-pwm-tachometer.yaml  | 137 ++++++++++++++++++
-> >  1 file changed, 137 insertions(+)
-> >  create mode 100644 Documentation/devicetree/bindings/hwmon/aspeed,ast2600-pwm-tachometer.yaml
-> > 
+On 1/6/21 6:19 AM, Muchun Song wrote:
+> Very similar to VM_WARN_ON_ONCE_PAGE and VM_BUG_ON_PAGE, add
+> VM_WARN_ON_PAGE macro.
 > 
-> My bot found errors running 'make dt_binding_check' on your patch:
-> 
-> yamllint warnings/errors:
-> ./Documentation/devicetree/bindings/hwmon/aspeed,ast2600-pwm-tachometer.yaml:108:2: [warning] wrong indentation: expected 2 but found 1 (indentation)
-> 
-> dtschema/dtc warnings/errors:
-> 
-> See https://patchwork.ozlabs.org/patch/1425628
-> 
-> This check can fail if there are any dependencies. The base for a patch
-> series is generally the most recent rc1.
-> 
-> If you already ran 'make dt_binding_check' and didn't see the above
-> error(s), then make sure 'yamllint' is installed and dt-schema is up to
-> date:
-> 
-> pip3 install dtschema --upgrade
-> 
-> Please check and re-submit.
-> 
+> Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+> ---
+>  include/linux/mmdebug.h | 8 ++++++++
+>  1 file changed, 8 insertions(+)
 
-After install yamllint and ran 'make dt_binding_check' again, I can see
-the same issue. I'll fix it in v3 patch set.
+I was going to question the use/need for this macro in the following
+patch.  Looks like Oscar has already done that, and free_bootmem_page
+will now use VM_BUG_ON_PAGE.  So, this patch can be dropped.
 
-Thanks,
-Troy Lee
+-- 
+Mike Kravetz
