@@ -2,137 +2,160 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A58FC2F53AB
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Jan 2021 20:53:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B67CF2F53BC
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Jan 2021 20:56:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728787AbhAMTvW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 13 Jan 2021 14:51:22 -0500
-Received: from so254-31.mailgun.net ([198.61.254.31]:22807 "EHLO
-        so254-31.mailgun.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728757AbhAMTvW (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 13 Jan 2021 14:51:22 -0500
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
- s=smtp; t=1610567462; h=Message-ID: References: In-Reply-To: Subject:
- Cc: To: From: Date: Content-Transfer-Encoding: Content-Type:
- MIME-Version: Sender; bh=fmdHGVbp+4tw2+s9vPjb3eiPfcBMojAKFWUgjBhw8hU=;
- b=b0vtV8l+zp+TrqOF6EXc7xOCDp5BiCVj1u42OerFAsRXlFy7VscTz9NkWR5jJotS36gHizGc
- E1PHSrfgOF8P8c0tO31GH5jp967W3/8U7Be3My6c0U1TKpFh1z6uCjPMHb7imCoz0qTPRyji
- iwzpK2ZrO9GtQXzhKQzQuPBf3Aw=
-X-Mailgun-Sending-Ip: 198.61.254.31
-X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
-Received: from smtp.codeaurora.org
- (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
- smtp-out-n04.prod.us-west-2.postgun.com with SMTP id
- 5fff4f05d84bad3547491a76 (version=TLS1.2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Wed, 13 Jan 2021 19:50:29
- GMT
-Sender: mdalam=codeaurora.org@mg.codeaurora.org
-Received: by smtp.codeaurora.org (Postfix, from userid 1001)
-        id 5F7C3C43461; Wed, 13 Jan 2021 19:50:29 +0000 (UTC)
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
-        aws-us-west-2-caf-mail-1.web.codeaurora.org
-X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00,
-        URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
-Received: from mail.codeaurora.org (localhost.localdomain [127.0.0.1])
-        (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        (Authenticated sender: mdalam)
-        by smtp.codeaurora.org (Postfix) with ESMTPSA id 6FA37C433CA;
-        Wed, 13 Jan 2021 19:50:28 +0000 (UTC)
+        id S1728843AbhAMT4M (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 13 Jan 2021 14:56:12 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51476 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726599AbhAMT4M (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 13 Jan 2021 14:56:12 -0500
+Received: from mail-qt1-x82b.google.com (mail-qt1-x82b.google.com [IPv6:2607:f8b0:4864:20::82b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5D371C06179F
+        for <linux-doc@vger.kernel.org>; Wed, 13 Jan 2021 11:55:31 -0800 (PST)
+Received: by mail-qt1-x82b.google.com with SMTP id b9so2008981qtr.2
+        for <linux-doc@vger.kernel.org>; Wed, 13 Jan 2021 11:55:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ziepe.ca; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=j2KHy6ytFaCxtFCpnxnAAp4By3drKdosRae2NFEDzUM=;
+        b=IRMzoOo7LuVrwmBlGKEz71GRBRg7cY+S5B3mH3i0TSq/0N9aJCbG0tIGyFPQpMb4ya
+         M+spbtAg+5dXCn6zcd/Jrl060Cr7TMU76ssCVbKUfhbUL7Uyp9RnmbLNUNF1wZJglmWr
+         tmnaq5qtA4/PR1Tmp0nFTwXL5ztM45VMTnftRKHl3kzUzCi1IrHn5T+m+a2RNzBXBBsw
+         D/5mgCiv8McU+V8oEABeIz2Z9s70ro7kOe7JduuNX4D2YU0WJdzD8qTu8uOijnbQd2d0
+         hjyofIHk6YiUWrlvW5subuz/fltvSS4PijEe/pw8s2Xw/pDs2bMHD5jbMJrRrhg7zHph
+         15xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=j2KHy6ytFaCxtFCpnxnAAp4By3drKdosRae2NFEDzUM=;
+        b=ACHP7qfcqkcHBCd1/spSh9nZIx4/AIKPL3X7i/DgF7hw9kkxhb71Hxa5dW5kwRHfNy
+         uSbHqr+7kTRwAsskorPcESJwXZ0H9/iF7ENi/hCArQGzUVW1CAHSENd91MokDOfRouSu
+         +SaixrlLzaNeCDIEY1N/1JZLnmExqG9X8H1DkcLPDn5A0HpHM8A9HcbbAMZR/Xd50h9K
+         f1RvHDuFNJxSJFahDPQhyjoIwqjkMB0I79J7CnZQIR0Q5avRrc6BF7Z0ePNH1zvuqz9T
+         QroOZ1FP2kikLjXo7kewgReEv+uveVR1AXCp3WYAatlNXyV0t12J7q5/Zp80AaREAYIz
+         R04g==
+X-Gm-Message-State: AOAM533F8WT8Fbzw+knc2Ex4ANKzv03X9mF03JMW3G0vQnoXNVCSKGJo
+        E4nvj7pYer4hPwgXnA6H3mM2NA==
+X-Google-Smtp-Source: ABdhPJzMjn9xG2uNycc141Ms/0p2ycjTiyqWztEAjOhW86pox433bwVX8jUG36NBwT5vor4/WVqkjA==
+X-Received: by 2002:aed:39a6:: with SMTP id m35mr3951749qte.29.1610567730489;
+        Wed, 13 Jan 2021 11:55:30 -0800 (PST)
+Received: from ziepe.ca ([206.223.160.26])
+        by smtp.gmail.com with ESMTPSA id q6sm1716839qkd.41.2021.01.13.11.55.29
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 13 Jan 2021 11:55:29 -0800 (PST)
+Received: from jgg by mlx with local (Exim 4.94)
+        (envelope-from <jgg@ziepe.ca>)
+        id 1kzmEq-000f2u-QV; Wed, 13 Jan 2021 15:55:28 -0400
+Date:   Wed, 13 Jan 2021 15:55:28 -0400
+From:   Jason Gunthorpe <jgg@ziepe.ca>
+To:     Pavel Tatashin <pasha.tatashin@soleen.com>
+Cc:     LKML <linux-kernel@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Vlastimil Babka <vbabka@suse.cz>,
+        Michal Hocko <mhocko@suse.com>,
+        David Hildenbrand <david@redhat.com>,
+        Oscar Salvador <osalvador@suse.de>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Sasha Levin <sashal@kernel.org>,
+        Tyler Hicks <tyhicks@linux.microsoft.com>,
+        Joonsoo Kim <iamjoonsoo.kim@lge.com>, mike.kravetz@oracle.com,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Mel Gorman <mgorman@suse.de>,
+        Matthew Wilcox <willy@infradead.org>,
+        David Rientjes <rientjes@google.com>,
+        John Hubbard <jhubbard@nvidia.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Ira Weiny <ira.weiny@intel.com>,
+        linux-kselftest@vger.kernel.org
+Subject: Re: [PATCH v4 08/10] mm/gup: limit number of gup migration failures,
+ honor failures
+Message-ID: <20210113195528.GD4605@ziepe.ca>
+References: <20201217185243.3288048-1-pasha.tatashin@soleen.com>
+ <20201217185243.3288048-9-pasha.tatashin@soleen.com>
+ <20201217205048.GL5487@ziepe.ca>
+ <CA+CK2bA4F+SipkReJzFjCSC-8kZdK4yrwCQZM+TvCTrqV2CGHg@mail.gmail.com>
+ <20201218141927.GM5487@ziepe.ca>
+ <CA+CK2bDULopw649ndBybA-ST5EoRMHULwcfQcSQVKT9r8zAtwQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-Date:   Thu, 14 Jan 2021 01:20:28 +0530
-From:   mdalam@codeaurora.org
-To:     Vinod Koul <vkoul@kernel.org>
-Cc:     corbet@lwn.net, agross@kernel.org, bjorn.andersson@linaro.org,
-        dan.j.williams@intel.com, dmaengine@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-msm@vger.kernel.org, sricharan@codeaurora.org,
-        mdalam=codeaurora.org@codeaurora.org
-Subject: Re: [PATCH] dmaengine: qcom: bam_dma: Add LOCK and UNLOCK flag bit
- support
-In-Reply-To: <20210112101056.GI2771@vkoul-mobl>
-References: <1608215842-15381-1-git-send-email-mdalam@codeaurora.org>
- <20201221092355.GA3323@vkoul-mobl>
- <efcc74bbdf36b4ddbf764eb6b4ed99f2@codeaurora.org>
- <f7de0117c8ff2e61c09f58acdea0e5b0@codeaurora.org>
- <20210112101056.GI2771@vkoul-mobl>
-Message-ID: <e3cf7c4fc02c54d17fd2fd213f39005b@codeaurora.org>
-X-Sender: mdalam@codeaurora.org
-User-Agent: Roundcube Webmail/1.3.9
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CA+CK2bDULopw649ndBybA-ST5EoRMHULwcfQcSQVKT9r8zAtwQ@mail.gmail.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2021-01-12 15:40, Vinod Koul wrote:
-> On 12-01-21, 15:01, mdalam@codeaurora.org wrote:
->> On 2020-12-21 23:03, mdalam@codeaurora.org wrote:
->> > On 2020-12-21 14:53, Vinod Koul wrote:
->> > > Hello,
->> > >
->> > > On 17-12-20, 20:07, Md Sadre Alam wrote:
->> > > > This change will add support for LOCK & UNLOCK flag bit support
->> > > > on CMD descriptor.
->> > > >
->> > > > If DMA_PREP_LOCK flag passed in prep_slave_sg then requester of this
->> > > > transaction wanted to lock the DMA controller for this transaction so
->> > > > BAM driver should set LOCK bit for the HW descriptor.
->> > > >
->> > > > If DMA_PREP_UNLOCK flag passed in prep_slave_sg then requester
->> > > > of this
->> > > > transaction wanted to unlock the DMA controller.so BAM driver
->> > > > should set
->> > > > UNLOCK bit for the HW descriptor.
->> > >
->> > > Can you explain why would we need to first lock and then unlock..? How
->> > > would this be used in real world.
->> > >
->> > > I have read a bit of documentation but is unclear to me. Also should
->> > > this be exposed as an API to users, sounds like internal to driver..?
->> > >
->> >
->> > IPQ5018 SoC having only one Crypto Hardware Engine. This Crypto Hardware
->> > Engine
->> > will be shared between A53 core & ubi32 core. There is two separate
->> > driver dedicated
->> > to A53 core and ubi32 core. So to use Crypto Hardware Engine
->> > parallelly for encryption/description
->> > we need bam locking mechanism. if one driver will submit the request
->> > for encryption/description
->> > to Crypto then first it has to set LOCK flag bit on command descriptor
->> > so that other pipes will
->> > get locked.
->> >
->> > The Pipe Locking/Unlocking will be only on command-descriptor. Upon
->> > encountering a command descriptor
+On Wed, Jan 13, 2021 at 02:43:50PM -0500, Pavel Tatashin wrote:
+> On Fri, Dec 18, 2020 at 9:19 AM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+> >
+> > On Thu, Dec 17, 2020 at 05:02:03PM -0500, Pavel Tatashin wrote:
+> > > Hi Jason,
+> > >
+> > > Thank you for your comments. My replies below.
+> > >
+> > > On Thu, Dec 17, 2020 at 3:50 PM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+> > > >
+> > > > On Thu, Dec 17, 2020 at 01:52:41PM -0500, Pavel Tatashin wrote:
+> > > > > +/*
+> > > > > + * Verify that there are no unpinnable (movable) pages, if so return true.
+> > > > > + * Otherwise an unpinnable pages is found return false, and unpin all pages.
+> > > > > + */
+> > > > > +static bool check_and_unpin_pages(unsigned long nr_pages, struct page **pages,
+> > > > > +                               unsigned int gup_flags)
+> > > > > +{
+> > > > > +     unsigned long i, step;
+> > > > > +
+> > > > > +     for (i = 0; i < nr_pages; i += step) {
+> > > > > +             struct page *head = compound_head(pages[i]);
+> > > > > +
+> > > > > +             step = compound_nr(head) - (pages[i] - head);
+> > > >
+> > > > You can't assume that all of a compound head is in the pages array,
+> > > > this assumption would only work inside the page walkers if the page
+> > > > was found in a PMD or something.
+> > >
+> > > I am not sure I understand your comment. The compound head is not
+> > > taken from the pages array, and not assumed to be in it. It is exactly
+> > > the same logic as that we currently have:
+> > > https://soleen.com/source/xref/linux/mm/gup.c?r=a00cda3f#1565
+> >
+> > Oh, that existing logic is wrong too :( Another bug.
 > 
-> Can you explain what is a cmd descriptor?
-
-   In BAM pipe descriptor structure there is a field called CMD (Command 
-descriptor).
-   CMD allows the SW to create descriptors of type Command which does not 
-generate any data transmissions
-   but configures registers in the Peripheral (write operations, and read 
-registers operations ).
-   Using command descriptor enables the SW to queue new configurations 
-between data transfers in advance.
-
+> I do not think there is a bug.
 > 
->> > with LOCK bit set, The BAM will lock all other pipes not related to
->> > the current pipe group, and keep
->> > handling the current pipe only until it sees the UNLOCK set then it
->> > will release all locked pipes.
->> > locked pipe will not fetch new descriptors even if it got event/events
->> > adding more descriptors for
->> > this pipe (locked pipe).
->> >
->> > No need to expose as an API to user because its internal to driver, so
->> > while preparing command descriptor
->> > just we have to update the LOCK/UNLOCK flag.
+> > You can't skip pages in the pages[] array under the assumption they
+> > are contiguous. ie the i+=step is wrong.
 > 
-> So IIUC, no api right? it would be internal to driver..?
+> If pages[i] is part of a compound page, the other parts of this page
+> must be sequential in this array for this compound page
 
-   Yes its totally internal to deriver.
+That is true only if the PMD points to the page. If the PTE points to
+a tail page then there is no requirement that other PTEs are
+contiguous with the compount page.
+
+At this point we have no idea if the GUP logic got this compound page
+as a head page in a PMD or as a tail page from a PTE, so we can't
+assume a contiguous run of addresses.
+
+Look at split_huge_pmd() - it doesn't break up the compound page it
+just converts the PMD to a PTE array and scatters the tail pages to
+the PTE.
+
+I understand Matt is pushing on this idea more by having compound
+pages in the page cache, but still mapping tail pages when required.
+
+> This is actually standard migration procedure, elsewhere in the kernel
+> we migrate pages in exactly the same fashion: isolate and later
+> migrate. The isolation works for LRU only pages.
+
+But do other places cause a userspace visible random failure when LRU
+isolation fails?
+
+I don't like it at all, what is the user supposed to do?
+
+Jason
