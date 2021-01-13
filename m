@@ -2,44 +2,39 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2149E2F496D
-	for <lists+linux-doc@lfdr.de>; Wed, 13 Jan 2021 12:10:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 79DD42F49D4
+	for <lists+linux-doc@lfdr.de>; Wed, 13 Jan 2021 12:21:09 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727001AbhAMLBn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 13 Jan 2021 06:01:43 -0500
-Received: from mail.kernel.org ([198.145.29.99]:39168 "EHLO mail.kernel.org"
+        id S1728155AbhAMLQd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 13 Jan 2021 06:16:33 -0500
+Received: from mail.kernel.org ([198.145.29.99]:42858 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727767AbhAMLBg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 13 Jan 2021 06:01:36 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 3BA8823447;
-        Wed, 13 Jan 2021 10:59:30 +0000 (UTC)
+        id S1727285AbhAMLQc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 13 Jan 2021 06:16:32 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 07A5323329;
+        Wed, 13 Jan 2021 11:15:52 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1610535570;
-        bh=usBYgqfS4umIzINtxT4Nu+/0pMkIB1VBJg8Hcuu4a4Y=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=D0kQMvh+6xU4pn8wdIY/LKaWRNZRhq66KAxXllJtJRZMjpaqRVBu1cJM8r76AXOda
-         OdEujvrHbK2tzLM5FSMUhiQzEMaEOUHZij27aKs/aErdNyvGLGWrdyT1dLux3P1MI4
-         xuSk+i03y/oIjIkJ26vevI22vI9BOajrOkvWabA1GpQ+XCZ1k/ZoxKHudaHl3ZnMJF
-         iyg9jDsJDBsRoJHGtG2galUihyg+hifG2ax1szo38hTgiw4BWPgjLRYtu4yDFYcfRN
-         IAe+b9G9Gsm+wYFWFAwzh/YpQ+h+m927kE2GwubcxZ+/XK63Sx0dsI528IaUj5wqtd
-         L2QbpWf9GQ1Cw==
+        s=k20201202; t=1610536552;
+        bh=CDnWZOXyQijCFw320U07T/MrFsjYUeoNGJWzCOH1dHU=;
+        h=From:To:Cc:Subject:Date:From;
+        b=VLzRAbghvcovTVMkUlPiJbCaWG+OPJWDs8WD3fP0pIF1Dkgaeuk9W/cMOojauLeml
+         PTIRvlNChR1Y0NJWmtBaUBbeKLuzdb1+H39sZynHo4tWHAvA8SdyyAvxhmaiAGqTIY
+         JsLcjKHYTiv2eN4HLb1MlXblI0+k4BzfvTyrCS/xXKU/zZwdXHPSmm596aMwPNbxfu
+         R5veoy2UJfVcy03ix87u3tGhgHlPcA/gXMSLmt8ou2SnazKWm7QVvf1zsR0a5RJNmS
+         STnD2rBLZBSc7N6nJas1z4vk7HNR+KuJ5Oblcaz+U2yrE6ynq0v+evcbZGn7Iaa6lh
+         mwmDQe1bHH2zw==
 Received: by mail.kernel.org with local (Exim 4.94)
         (envelope-from <mchehab@kernel.org>)
-        id 1kzds7-00DpGu-Ux; Wed, 13 Jan 2021 11:59:27 +0100
+        id 1kze7w-00DqEw-6V; Wed, 13 Jan 2021 12:15:48 +0100
 From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Rob Herring <robh+dt@kernel.org>
+To:     Mark Brown <broonie@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
 Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Jonathan Corbet" <corbet@lwn.net>,
-        "Linux Doc Mailing List" <linux-doc@vger.kernel.org>,
-        Kishon Vijay Abraham I <kishon@ti.com>,
-        Vinod Koul <vkoul@kernel.org>, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 24/24] dt-bindings: phy: update phy-cadence-sierra.yaml reference
-Date:   Wed, 13 Jan 2021 11:59:25 +0100
-Message-Id: <3550b08d4e8312e7d4a247a3515a93a5f0fd04c5.1610535350.git.mchehab+huawei@kernel.org>
+        "Jonathan Corbet" <corbet@lwn.net>, linux-kernel@vger.kernel.org
+Subject: [PATCH] MAINTAINERS: update references to stm32 audio bindings
+Date:   Wed, 13 Jan 2021 12:15:43 +0100
+Message-Id: <03950bbd5cf7bac10eaaff3725e283d3ec2538c5.1610536535.git.mchehab+huawei@kernel.org>
 X-Mailer: git-send-email 2.29.2
-In-Reply-To: <cover.1610535349.git.mchehab+huawei@kernel.org>
-References: <cover.1610535349.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
@@ -47,30 +42,30 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Changeset ba2bf1f090eb ("dt-bindings: phy: Add Cadence Sierra PHY bindings in YAML format")
-renamed: Documentation/devicetree/bindings/phy/phy-cadence-sierra.txt
-to: Documentation/devicetree/bindings/phy/phy-cadence-sierra.yaml.
+Changeset 81437cc3b0d9 ("Merge series "dt-bindings: stm32: convert audio dfsdm to json-schema" from Olivier Moysan <olivier.moysan@st.com>:")
+removed bindings/sound/st,stm32-adfsdm.txt, as stm32-* audio
+bindings are now under: bindings/iio/adc/st,stm32-*.yaml.
 
-Update its cross-reference accordingly.
+Update cross-references to them accordingly.
 
 Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 ---
- Documentation/devicetree/bindings/phy/ti,phy-j721e-wiz.yaml | 2 +-
+ MAINTAINERS | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Documentation/devicetree/bindings/phy/ti,phy-j721e-wiz.yaml b/Documentation/devicetree/bindings/phy/ti,phy-j721e-wiz.yaml
-index c33e9bc79521..bbbd85501ada 100644
---- a/Documentation/devicetree/bindings/phy/ti,phy-j721e-wiz.yaml
-+++ b/Documentation/devicetree/bindings/phy/ti,phy-j721e-wiz.yaml
-@@ -151,7 +151,7 @@ patternProperties:
-       WIZ node should have '1' subnode for the SERDES. It could be either
-       Sierra SERDES or Torrent SERDES. Sierra SERDES should follow the
-       bindings specified in
--      Documentation/devicetree/bindings/phy/phy-cadence-sierra.txt
-+      Documentation/devicetree/bindings/phy/phy-cadence-sierra.yaml
-       Torrent SERDES should follow the bindings specified in
-       Documentation/devicetree/bindings/phy/phy-cadence-torrent.yaml
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 9318147e0791..7e233d789051 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -17044,7 +17044,7 @@ M:	Olivier Moysan <olivier.moysan@st.com>
+ M:	Arnaud Pouliquen <arnaud.pouliquen@st.com>
+ L:	alsa-devel@alsa-project.org (moderated for non-subscribers)
+ S:	Maintained
+-F:	Documentation/devicetree/bindings/sound/st,stm32-*.txt
++F:	Documentation/devicetree/bindings/iio/adc/st,stm32-*.yaml
+ F:	sound/soc/stm/
  
+ STM32 TIMER/LPTIMER DRIVERS
 -- 
 2.29.2
 
