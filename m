@@ -2,74 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 367482F5C22
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Jan 2021 09:07:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 75B372F5C2F
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Jan 2021 09:12:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727994AbhANIHS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Jan 2021 03:07:18 -0500
-Received: from mail.kernel.org ([198.145.29.99]:59016 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1728124AbhANIGW (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 14 Jan 2021 03:06:22 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id AD98123A57;
-        Thu, 14 Jan 2021 08:05:00 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1610611500;
-        bh=aM+KUU8ND9pyof4k4ykSf1dVmSEm8guTu48Zq/aOrf0=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=u4NqcvP0nUPY2+HwZQCa3P3Qty+DCPQOpt2FxL8ZXN0PQcmWo7Le3ZdKbcG/SOi6s
-         MzYDcHleMrNAfTdNkYoK5YlEkqvheOOU78YjjXiPDQb0MjMys7pQTt2+6Ktcv275d2
-         g+KywtcbpVfqw+Ku0Dtur8A6BSnx7MWq0Qm04Jl4UoKIVv5uIpAgvBFEFXpp/ptvs1
-         WTeBcbUCFuKtMRZaOYQPy6BaepHq9KxJMTM+HjtcF5fKWugBEaiB5sOccyfpebX+5/
-         Hfq8OpNqLQAkfm0mS9oQvjfUM/df9MiQCG+98pYeMPEAGa9Bzpi2FVLdiTIUlesbdk
-         /18zqSh2nVQVQ==
-Received: by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1kzxco-00EQ74-Hy; Thu, 14 Jan 2021 09:04:58 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Hans de Goede <hdegoede@redhat.com>,
-        Mark Gross <mgross@linux.intel.com>,
-        Maximilian Luz <luzmaximilian@gmail.com>,
-        linux-kernel@vger.kernel.org, platform-driver-x86@vger.kernel.org
-Subject: [PATCH v6 16/16] platform/surface: aggregator: fix a kernel-doc markup
-Date:   Thu, 14 Jan 2021 09:04:52 +0100
-Message-Id: <4a6bf33cfbd06654d78294127f2b6d354d073089.1610610937.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <cover.1610610937.git.mchehab+huawei@kernel.org>
-References: <cover.1610610937.git.mchehab+huawei@kernel.org>
+        id S1727184AbhANII1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Jan 2021 03:08:27 -0500
+Received: from mail-03.mail-europe.com ([91.134.188.129]:53612 "EHLO
+        mail-03.mail-europe.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726742AbhANII1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jan 2021 03:08:27 -0500
+Date:   Thu, 14 Jan 2021 08:06:52 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=emersion.fr;
+        s=protonmail2; t=1610611621;
+        bh=oZoLOvB8GFNjTNukq9k4F1x8Zrh7VuJWPVVKWBKbx6E=;
+        h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+        b=QntvKbV1vbBi+N/094QDG70LEkXfRBGSma8e3IoD4jHW+TxXVRJbXS9E1IGSKVB4d
+         r1x0dNCfc3xC0p7aPRVYcrCXoU/zHBPHs6VcIudLRyY/D8YlQtBOAIlUwlLWFsLTy6
+         mmrHtEA0JagQIO6GtkHlDdNY/uA5IsOJr5urCGRkg+G8K4w/hmRuPgq8lufieWChJD
+         5TcCRFeHcuvG+KLwDvBouFhhnl7ADS8pN4F/SPg4uoyG/3rE7WKxn3YWUzTM7WuiUy
+         5RjlIBQoAGXy+1qVUL3Mhm74oiIaUtj7oCiQnrh+BFVUKoZzfMmZCwRP8ixSh6c4yY
+         2Kh9d84w2LHiw==
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+From:   Simon Ser <contact@emersion.fr>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        linux-kernel@vger.kernel.org, David Airlie <airlied@linux.ie>,
+        dri-devel@lists.freedesktop.org
+Reply-To: Simon Ser <contact@emersion.fr>
+Subject: Re: [PATCH v6 15/16] drm: drm_crc: fix a kernel-doc markup
+Message-ID: <qe1toq6DLvoVNP7AaQXNqpa3qtfzGwKWuVz-uYiDIUcI0u0-xaQstZKPNqEbg9-lfHA0wN2yI_i-vQvoYJmoOS_v-XLO1pUfFE-9srEsxNY=@emersion.fr>
+In-Reply-To: <2439fb6713e9b2aa27a81f3269a4b0e8e7dfcd36.1610610937.git.mchehab+huawei@kernel.org>
+References: <cover.1610610937.git.mchehab+huawei@kernel.org> <2439fb6713e9b2aa27a81f3269a4b0e8e7dfcd36.1610610937.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF shortcircuit=no
+        autolearn=disabled version=3.4.4
+X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
+        mailout.protonmail.ch
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-A function has a different name between their prototype
-and its kernel-doc markup:
+On Thursday, January 14th, 2021 at 9:04 AM, Mauro Carvalho Chehab <mchehab+=
+huawei@kernel.org> wrote:
 
-	../drivers/platform/surface/aggregator/ssh_request_layer.c:1065: warning: expecting prototype for ssh_rtl_tx_start(). Prototype was for ssh_rtl_start() instead
+> A function has a different name between their prototype
+> and its kernel-doc markup:
+>
+> =09../include/drm/drm_crtc.h:1257: warning: expecting prototype for drm_c=
+rtc_alloc_with_planes(). Prototype was for drmm_crtc_alloc_with_planes() in=
+stead
+>
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- drivers/platform/surface/aggregator/ssh_request_layer.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/drivers/platform/surface/aggregator/ssh_request_layer.c b/drivers/platform/surface/aggregator/ssh_request_layer.c
-index bb1c862411a2..25db4d638cfa 100644
---- a/drivers/platform/surface/aggregator/ssh_request_layer.c
-+++ b/drivers/platform/surface/aggregator/ssh_request_layer.c
-@@ -1056,7 +1056,7 @@ void ssh_rtl_destroy(struct ssh_rtl *rtl)
- }
- 
- /**
-- * ssh_rtl_tx_start() - Start request transmitter and receiver.
-+ * ssh_rtl_start() - Start request transmitter and receiver.
-  * @rtl: The request transport layer.
-  *
-  * Return: Returns zero on success, a negative error code on failure.
--- 
-2.29.2
-
+Acked-by: Simon Ser <contact@emersion.fr>
