@@ -2,167 +2,99 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2E09A2F5B71
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Jan 2021 08:41:06 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 337322F5BAA
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Jan 2021 08:55:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727396AbhANHkE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Jan 2021 02:40:04 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33226 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727377AbhANHkD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jan 2021 02:40:03 -0500
-Received: from mail-io1-xd30.google.com (mail-io1-xd30.google.com [IPv6:2607:f8b0:4864:20::d30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D2390C061786;
-        Wed, 13 Jan 2021 23:39:22 -0800 (PST)
-Received: by mail-io1-xd30.google.com with SMTP id o6so9347296iob.10;
-        Wed, 13 Jan 2021 23:39:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:reply-to:from:date:message-id
-         :subject:to:cc;
-        bh=pDkl50wKKXvlnFEMyoCOA4eiXkVtCkofqFa11F/2prs=;
-        b=LZyONW5l41afxbiMWOMOs2HO+Ycvj/ZhU6K3xVqaHgQmQgTGvC1VQ1gc6kVTsnGFKJ
-         cmL7EHu+N03GO+52M3MV2CNuYp5od3c08tcT4hFsrAZpMZ3bmTUxl8b+L7yv4UNwPdU+
-         TvSw9dtuJ/2nVUNZlFoy1x22WzDToEqa8CQB8oUIaZRUkFbzU51MT90mThiwyeodhDZM
-         0f2nX0dcifQEi3DsWP81K2g5pcFZpilE/644iPlx2Ie6SraPNbekg18NWSylqf0BSYCt
-         /zrNRyt0B9abhw5pPdskxkXdremW4yHbcGPAr1aOBU+8Q9SfhmmByiTZ45JdMzj+IzMQ
-         pJTA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
-         :from:date:message-id:subject:to:cc;
-        bh=pDkl50wKKXvlnFEMyoCOA4eiXkVtCkofqFa11F/2prs=;
-        b=SMXAXCxx2a9ipsBYY9Fw+bNmiyoR2HgGBuVUcjdkLKQo2AXb9xM3itEqUI7ptHhG58
-         XJdsT9ntvH6ORA4owA5YBawiSTZQuxhOPX/8KyqEHK+Blv+wWnh53neF4wMRjSdaVfdG
-         NyByoa2JgoG/IS9TEFhXkKCflRxH01O+Qgzbz+ZKQv63wsbrA2Dk7p/BYSXA30KMiTkS
-         1kNH4r8d/czRl4ifGQ4Xl3F+F6BVUr073nC5Q2ttOF/spPLA2BSVHVpJTLJB1StvCgNR
-         zVia1aSMI6uzyT/VEWi+eZigYISGXjmUlu1O2Ahp/V2yFvtgmXZ0psuJmeHbyRn1ZTK0
-         x5MA==
-X-Gm-Message-State: AOAM5337QjXeKf3nFZpEZJNw19wStoy9J3UiIwcIKEmLF9nDds/XVdiS
-        kC0YuZT1uEzXv7lj6t69tazX+QAbZP8cBHtfB2I=
-X-Google-Smtp-Source: ABdhPJybXK0BLNSRQ7Ixe4ZXs/7KsiW13lw8MOehz5t9ImRNCgGZwZITi4quK9lNA4M+jLD8VYG7wr74zmhPCg8g1f8=
-X-Received: by 2002:a92:d990:: with SMTP id r16mr5718971iln.10.1610609962241;
- Wed, 13 Jan 2021 23:39:22 -0800 (PST)
+        id S1727441AbhANHyc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Jan 2021 02:54:32 -0500
+Received: from mail.kernel.org ([198.145.29.99]:56658 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726819AbhANHyb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 14 Jan 2021 02:54:31 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id D4C4C239EF;
+        Thu, 14 Jan 2021 07:53:49 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1610610830;
+        bh=BXt2olIMSsLtD8I2dioNC1dF1gnxlCbQs+WN6FCb4nE=;
+        h=From:To:Cc:Subject:Date:From;
+        b=s0XxntmYYJHZOMEV2ezXMlavrLQamHOON6XCuxktQJvVAECs99C5z/1aJ9vJhpL8u
+         ooeeAl2QTMZNzf+wMfEpKpWg40tk1M0qnksP48Wj5LotBytvL5l6d4s7r5DnGwrSaG
+         EH99zAztLa1B6MMeto4xMR8BJQ0ZLi5vAvwqfqQhhWEPmUUPibd3hUMclqtKjDn9OB
+         Utpv0Ju4+AOG0dmdSki7FZM9GtjIWxV8jruDU/sDouAY8GwvD2n2HBSlFqfv/WWpXP
+         DJr7Fq0cZK3daZV+WRhSNlCFNyWFUZ+j72ACR35krQCcJ9iaizMmnvIhYttJJ/HyQS
+         YKU4ctJMp8S5g==
+Received: by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1kzxRz-00EPu1-2O; Thu, 14 Jan 2021 08:53:47 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Chao Yu <chao@kernel.org>, Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>,
+        Felipe Balbi <balbi@kernel.org>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Jaegeuk Kim <jaegeuk@kernel.org>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Moritz Fischer <mdf@kernel.org>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Tom Rix <trix@redhat.com>, Will Deacon <will@kernel.org>,
+        Wu Hao <hao.wu@intel.com>, amd-gfx@lists.freedesktop.org,
+        dri-devel@lists.freedesktop.org, kvm@vger.kernel.org,
+        linux-f2fs-devel@lists.sourceforge.net, linux-fpga@vger.kernel.org,
+        linux-media@vger.kernel.org, linux-usb@vger.kernel.org
+Subject: [PATCH 00/10] Fix documentation warnings at linux-next
+Date:   Thu, 14 Jan 2021 08:53:35 +0100
+Message-Id: <cover.1610610444.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-References: <20210114003447.7363-1-natechancellor@gmail.com>
-In-Reply-To: <20210114003447.7363-1-natechancellor@gmail.com>
-Reply-To: sedat.dilek@gmail.com
-From:   Sedat Dilek <sedat.dilek@gmail.com>
-Date:   Thu, 14 Jan 2021 08:39:11 +0100
-Message-ID: <CA+icZUXyqRH_bR5xjwZ_GvHp8xoWOqJtCORBX34NX0y9u2JYcQ@mail.gmail.com>
-Subject: Re: [PATCH] Documentation/llvm: Add a section about supported architectures
-To:     Nathan Chancellor <natechancellor@gmail.com>
-Cc:     Nick Desaulniers <ndesaulniers@google.com>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Clang-Built-Linux ML <clang-built-linux@googlegroups.com>,
-        linux-kbuild@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Miguel Ojeda <ojeda@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jan 14, 2021 at 1:35 AM Nathan Chancellor
-<natechancellor@gmail.com> wrote:
->
-> The most common question around building the Linux kernel with clang is
-> "does it work?" and the answer has always been "it depends on your
-> architecture, configuration, and LLVM version" with no hard answers for
-> users wanting to experiment. LLVM support has significantly improved
-> over the past couple of years, resulting in more architectures and
-> configurations supported, and continuous integration has made it easier
-> to see what works and what does not.
->
-> Add a section that goes over what architectures are supported in the
-> current kernel version, how they should be built (with just clang or the
-> LLVM utilities as well), and the level of support they receive. This
-> will make it easier for people to try out building their kernel with
-> LLVM and reporting issues that come about from it.
->
+This series fixes the documentation warnings found at next-20210114.
 
-Thanks, this was overdue and is definitely helpful for users and developers.
+Most of the changes here are trivial. 
 
-For x86 64bit:
+While those patches could be merged via the docs tree during
+the next merge window, It sounds better to have those patches 
+merged directly via each maintainer's tree, where the new
+warnings were introduced.
 
-   Reviewed-by: Sedat Dilek <sedat.dilek@gmail.com>
+Regards,
+Mauro
 
-Together with "[PATCH] kbuild: check the minimum compiler version in
-Kconfig" this looks very good to me.
+Mauro Carvalho Chehab (10):
+  doc/zh_CN: fix Sphinx errors
+  ABI: sysfs-fs-f2fs: fix a table identation
+  KVM: x86: hyper-v: add a blank line to remove building warnings
+  ABI: sysfs-firmware-sgi_uv
+  docs: fpga: dfl.rst: Fix a couple building issues
+  drm: amd: amdgpu_dm.h: fix a wrong kernel-doc markup
+  dwc3: document gadget_max_speed
+  doc: zh_CN/mips: fix doc cross-references
+  media: v4l2-subdev.rst: fix a missing whitespace
+  seqlock: kernel-doc: fix a prototype
 
-/o\
-- Sedat -
+ Documentation/ABI/testing/sysfs-firmware-sgi_uv       | 1 +
+ Documentation/ABI/testing/sysfs-fs-f2fs               | 3 ++-
+ Documentation/driver-api/media/v4l2-subdev.rst        | 2 +-
+ Documentation/fpga/dfl.rst                            | 4 ++--
+ Documentation/translations/zh_CN/mips/booting.rst     | 2 +-
+ Documentation/translations/zh_CN/mips/features.rst    | 2 +-
+ Documentation/translations/zh_CN/mips/index.rst       | 2 +-
+ Documentation/translations/zh_CN/mips/ingenic-tcu.rst | 6 +++---
+ Documentation/virt/kvm/api.rst                        | 1 +
+ drivers/gpu/drm/amd/display/amdgpu_dm/amdgpu_dm.h     | 2 +-
+ drivers/usb/dwc3/core.h                               | 1 +
+ include/linux/seqlock.h                               | 2 +-
+ 12 files changed, 16 insertions(+), 12 deletions(-)
 
-[1] https://marc.info/?t=161059811000001&r=1&w=2
+-- 
+2.29.2
 
-> Suggested-by: Miguel Ojeda <ojeda@kernel.org>
-> Signed-off-by: Nathan Chancellor <natechancellor@gmail.com>
-> ---
->  Documentation/kbuild/llvm.rst | 44 +++++++++++++++++++++++++++++++++++
->  1 file changed, 44 insertions(+)
->
-> diff --git a/Documentation/kbuild/llvm.rst b/Documentation/kbuild/llvm.rst
-> index 21c847890d03..b18401d2ba82 100644
-> --- a/Documentation/kbuild/llvm.rst
-> +++ b/Documentation/kbuild/llvm.rst
-> @@ -63,6 +63,50 @@ They can be enabled individually. The full list of the parameters: ::
->  Currently, the integrated assembler is disabled by default. You can pass
->  ``LLVM_IAS=1`` to enable it.
->
-> +Supported Architectures
-> +-----------------------
-> +
-> +LLVM does not target all of the architectures that Linux supports and
-> +just because a target is supported in LLVM does not mean that the kernel
-> +will build or work without any issues. Below is a general summary of
-> +architectures that currently work with ``CC=clang`` or ``LLVM=1``. Level
-> +of support corresponds to "S" values in the MAINTAINERS files. If an
-> +architecture is not present, it either means that LLVM does not target
-> +it or there are known issues. Using the latest stable version of LLVM or
-> +even the development tree will generally yield the best results.
-> +An architecture's ``defconfig`` is generally expected to work well,
-> +certain configurations may have problems that have not been uncovered
-> +yet. Bug reports are always welcome at the issue tracker below!
-> +
-> +.. list-table::
-> +   :widths: 10 10 10
-> +   :header-rows: 1
-> +
-> +   * - Architecture
-> +     - Level of support
-> +     - ``make`` command
-> +   * - arm
-> +     - Supported
-> +     - ``LLVM=1``
-> +   * - arm64
-> +     - Supported
-> +     - ``LLVM=1``
-> +   * - mips
-> +     - Maintained
-> +     - ``CC=clang``
-> +   * - powerpc
-> +     - Maintained
-> +     - ``CC=clang``
-> +   * - riscv
-> +     - Maintained
-> +     - ``CC=clang``
-> +   * - s390
-> +     - Maintained
-> +     - ``CC=clang``
-> +   * - x86
-> +     - Supported
-> +     - ``LLVM=1``
-> +
->  Getting Help
->  ------------
->
->
-> base-commit: 7c53f6b671f4aba70ff15e1b05148b10d58c2837
-> --
-> 2.30.0
->
-> --
-> You received this message because you are subscribed to the Google Groups "Clang Built Linux" group.
-> To unsubscribe from this group and stop receiving emails from it, send an email to clang-built-linux+unsubscribe@googlegroups.com.
-> To view this discussion on the web visit https://groups.google.com/d/msgid/clang-built-linux/20210114003447.7363-1-natechancellor%40gmail.com.
+
