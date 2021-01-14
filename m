@@ -2,86 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CE8AC2F5CBF
-	for <lists+linux-doc@lfdr.de>; Thu, 14 Jan 2021 10:03:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 089022F5D18
+	for <lists+linux-doc@lfdr.de>; Thu, 14 Jan 2021 10:17:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727130AbhANJDV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 14 Jan 2021 04:03:21 -0500
-Received: from mail.kernel.org ([198.145.29.99]:41690 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726055AbhANJDU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 14 Jan 2021 04:03:20 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 6274E239FD;
-        Thu, 14 Jan 2021 09:02:38 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1610614960;
-        bh=8JWXn+104e4wLc5ViuSDBdATigU1sEcjDJ8JlrJKYe8=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=iAitPuQQqgqwfyDZtSbr4D/J1AIGcDdAi7UbVCwk2UY4brMJJ2zLexPmjmIxXKxuy
-         EmglCHi24dO7w0zkykqi3mVht4rlXvDdN5RXJaltZFowF2hB3lMwvuzS5EcF/Rn3YP
-         LYU4gGdIylZrNfI6eFpCHO/5fAihKzmrwLm6ApaGrG2+URjoVT0f3hIkl195/8xapb
-         Flm42PDpgUysXm7vbbB+g9gy3Mc5gQHzvHa/YmrySoQzQ9ze2l21ZqJWXg09GLHw1C
-         /Ux3fjifzxaRSzR39i32hS0CKr5n6wKroVFpcfSoh8do7BtqMcbAmRdMzPycxyRfXr
-         q/45k2eONUHZg==
-From:   Felipe Balbi <balbi@kernel.org>
+        id S1727382AbhANJQ6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 14 Jan 2021 04:16:58 -0500
+Received: from wnew1-smtp.messagingengine.com ([64.147.123.26]:37543 "EHLO
+        wnew1-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726478AbhANJQ5 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 14 Jan 2021 04:16:57 -0500
+X-Greylist: delayed 526 seconds by postgrey-1.27 at vger.kernel.org; Thu, 14 Jan 2021 04:16:57 EST
+Received: from compute4.internal (compute4.nyi.internal [10.202.2.44])
+        by mailnew.west.internal (Postfix) with ESMTP id 224F01404;
+        Thu, 14 Jan 2021 04:07:24 -0500 (EST)
+Received: from mailfrontend2 ([10.202.2.163])
+  by compute4.internal (MEProxy); Thu, 14 Jan 2021 04:07:25 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kroah.com; h=
+        date:from:to:cc:subject:message-id:references:mime-version
+        :content-type:in-reply-to; s=fm2; bh=MzQEL5nXPUgFtFul0I81bz1aKr8
+        E0pkihlMDkujhjtg=; b=iEIRil5QccyTB2U1KiSTyB9IsBq3GdM4AwzcU1TN63T
+        N7QwuI4Xbg3wfEBWYWDDGJribIcnM79kKrtdZAjQ/fdwd7nzrwEhc0h2foJogVpJ
+        326FXMJLnYBkycmONREjinhLoTI3MJEFbZQ1oTvtsjgDY0jB7h6aTrAiAXR4X1Gc
+        zG+E2KkD1k568dXhRA9xQF14EYdL5tMZ5TVJmzZqI7aI+VhYVn42j6cDPEXKhVKH
+        TJUYYRrnNKt6tM/MB4QJVNw3faRhGzKkmFJ7VsWOfOgUD3YCvuE0b8kX+oHwtJYS
+        JrVZ88tqjrvPTDDSAC7OGHTFY4ulY7KmBdegl/3FPKg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-type:date:from:in-reply-to
+        :message-id:mime-version:references:subject:to:x-me-proxy
+        :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=MzQEL5
+        nXPUgFtFul0I81bz1aKr8E0pkihlMDkujhjtg=; b=rpqMXhMGxw6Py1R8f81/ut
+        sBc1OsjdMG+huqSrg6NQFKWvPFOUbA82dCsux2X6XNPKFWF7nJY1SLmtM44TDEGU
+        WXaWailSY1nOxKQrwYYqkJIGdM36QAVf7FzjKqsYMcsy2SbZVrN4WnZLRXX2POTY
+        Kr/CtL+YyWe6hVRQKFLWUH/K9vk8ybeQfAb4R4L+ORvLKsvg3DGX5ZzKX/y/G3+n
+        TzLzr0IBsc4aZsV1NhblwAbSrYUXlJZB+WMBhgf2tC2BvLUIWvGESK3MBQyKP9E5
+        IEx+fV2BjLsWuOJtpNGUUGc+A82yYcuMEXsYffYCx3H7xkuvSRN3o+qKVXi2ehaA
+        ==
+X-ME-Sender: <xms:yQkAYP2guwVB_L-aYscfh-MPwPu7bVNilMjWjnVqEXZ4-_mOWiEDDw>
+    <xme:yQkAYOH1uBrFvnjbHvLTv5tVwO4Giy8hyV5Vwxgm6L5pJJ3RTrKslA6Ni1J5s8Kd5
+    BZfwknDhOAO7Q>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgedukedrtdeggdduvdejucetufdoteggodetrfdotf
+    fvucfrrhhofhhilhgvmecuhfgrshhtofgrihhlpdfqfgfvpdfurfetoffkrfgpnffqhgen
+    uceurghilhhouhhtmecufedttdenucesvcftvggtihhpihgvnhhtshculddquddttddmne
+    cujfgurhepfffhvffukfhfgggtuggjsehttdertddttddvnecuhfhrohhmpefirhgvghcu
+    mffjuceoghhrvghgsehkrhhorghhrdgtohhmqeenucggtffrrghtthgvrhhnpeevueehje
+    fgfffgiedvudekvdektdelleelgefhleejieeugeegveeuuddukedvteenucfkphepkeef
+    rdekiedrjeegrdeigeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhepmhgrih
+    hlfhhrohhmpehgrhgvgheskhhrohgrhhdrtghomh
+X-ME-Proxy: <xmx:yQkAYP4udU49hQGNBy8LavGDX7d2QCO-AsZzcPeBVvDMnsmmeW00wA>
+    <xmx:yQkAYE2iKIs5UkZer54VwWLaYOyhohCYo10V1vfK5nctLZXjgMDMLQ>
+    <xmx:yQkAYCENXmO62xzm0HlBW2_aFl97LrBSD0kgHYA81hbVgDrcJsiweQ>
+    <xmx:ywkAYFDwji62qW9MMc2jq5tLkfXQvG2KqkO4lIYB197uDQjCtHtSHQXCDVU>
+Received: from localhost (83-86-74-64.cable.dynamic.v4.ziggo.nl [83.86.74.64])
+        by mail.messagingengine.com (Postfix) with ESMTPA id B0A1D1080057;
+        Thu, 14 Jan 2021 04:07:20 -0500 (EST)
+Date:   Thu, 14 Jan 2021 10:08:26 +0100
+From:   Greg KH <greg@kroah.com>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
+Cc:     Rob Herring <robh+dt@kernel.org>,
         Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-kernel@vger.kernel.org, linux-usb@vger.kernel.org
-Subject: Re: [PATCH 07/10] dwc3: document gadget_max_speed
-In-Reply-To: <e9332e31bec9bcead2c7ced2b25462120488ca85.1610610444.git.mchehab+huawei@kernel.org>
-References: <cover.1610610444.git.mchehab+huawei@kernel.org>
- <e9332e31bec9bcead2c7ced2b25462120488ca85.1610610444.git.mchehab+huawei@kernel.org>
-Date:   Thu, 14 Jan 2021 11:02:32 +0200
-Message-ID: <87eein3n87.fsf@kernel.org>
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        devicetree@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+        linux-mediatek@lists.infradead.org,
+        linux-samsung-soc@vger.kernel.org, linux-usb@vger.kernel.org
+Subject: Re: [PATCH 0/3] Fix broken  references at next-20210114 due to yaml
+ conversion
+Message-ID: <YAAKCjARs6JZrknd@kroah.com>
+References: <cover.1610605373.git.mchehab+huawei@kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; boundary="=-=-=";
-        micalg=pgp-sha256; protocol="application/pgp-signature"
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <cover.1610605373.git.mchehab+huawei@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---=-=-=
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+On Thu, Jan 14, 2021 at 07:25:57AM +0100, Mauro Carvalho Chehab wrote:
+> Three new broken references were added between next-20210113 and
+> next-20210114, due to yaml conversion. 
+> 
+> Address them.
+> 
+> Please add those patches  at the same tree as the respective
+> conversion changesets were added.
 
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> writes:
+I've taken the USB patches here, thanks.
 
-> This new field was added to struct dwc3_scratchpad_array, but
-> a documentation for it was missed:
->
-> 	../drivers/usb/dwc3/core.h:1259: warning: Function parameter or member '=
-gadget_max_speed' not described in 'dwc3'
->
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
-Thanks, Mauro.
-
-Acked-by: Felipe Balbi <balbi@kernel.org>
-
-=2D-=20
-balbi
-
---=-=-=
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQJFBAEBCAAvFiEElLzh7wn96CXwjh2IzL64meEamQYFAmAACKgRHGJhbGJpQGtl
-cm5lbC5vcmcACgkQzL64meEamQajqBAAz4FkCxgMTAPnDGtlKXlCbZ7+iPH+XpEv
-j6JB7Ha+qZAmRLlDBeUIuB5bPJuohKRhNzgHSDFoDAup7PUKw3Bk/HYsNTGlJe3e
-0ltSiy6TTQonz5TVPCQCSxJCHOEi2T2EPkBRfIEPwRti0ntG2VVAv2+pB4fWbNsE
-d/Y5RI+YJueNyNp0VKyS2F9ex5T65Hc6HsUJWALHUMx5B1sRPNg1JfVtmb0d80Kv
-CUYvYY2DB7agJZdmyggLqV3hPozjOd4wDcu2HqzrMp4dGsVB7ZTcw/4YBaUhHW93
-FEoFxkfTpqeERduHIxvQaGWlQtlX7bB2h4POpE7GfwY1WtV+G8ud/Tngd8D6BM3g
-ksQD7HrM9rmpKnTx2ch/oj4GnvIMCC7vB/p1H4eDlDYinmWqaDmbaKy6lUQspip8
-QW8FyBvspLG+jOauNjg5GYUeJs9pimEUrO7HF6d/g15qf/vflzKwfWM0vVOkOhMM
-ygdnO/idFkyEmwy0pXctg04L72Dfcw09oacNniapbXrq52zIH8Mhq3h+fj+nYy71
-jztYiYn/dWWcQDl6l7iFyoFW+4Pg7O4m79dltOBERpHL++DrYeyDXIcyPUpFs1TE
-QvSkUyeOfQNJcRS1zFRK+Rrn/tR31tLUSd63eLGNuCx7pHlgWiPwlxnjG4BdIMuM
-AQj/+pdztls=
-=b1ns
------END PGP SIGNATURE-----
---=-=-=--
+greg k-h
