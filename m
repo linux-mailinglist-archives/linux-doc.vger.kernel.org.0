@@ -2,128 +2,114 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CC4222F79F5
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Jan 2021 13:44:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F39742F7C13
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Jan 2021 14:09:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387863AbhAOMmp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 15 Jan 2021 07:42:45 -0500
-Received: from mail.kernel.org ([198.145.29.99]:49538 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2388283AbhAOMmm (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 15 Jan 2021 07:42:42 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 3DD11206CB;
-        Fri, 15 Jan 2021 12:42:01 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1610714522;
-        bh=aGrB4k5ATKT6A9t16vBJEcOUKX5Ro/bXYB3+BrVkkFI=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=GfLPepF66gFALyyae4U0jruw+7mn3PhQOHTxfa2LEgdgG7vRptk5tjtwwifqr0IXB
-         7KUw3aQZ8vZybOleEjINEViCmXPV4SOc9d3/jvBhgAVSPHuxQD86m1+iBqQH1qy8LP
-         nGwujMcaalZfLXTMg4hLQhpgHXUKVobavNQZCu4E/JgsshbLB1dVoTssnm96DQ7sgW
-         9BczYYpWWpbR0YzLfu6gd3ZxC6fbOs/t/CNzzSDFWrHmkscsU4845nyqTQsUt7BLvA
-         casVqGN04YhgYWggVkuP2yLMA60Zhdb+YGmCjim1eq67x+XkmI6fyUgj2c8IcHlRDx
-         8v3cOC/n5Nzpw==
-Date:   Fri, 15 Jan 2021 13:41:57 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Subject: Re: [PATCH 00/10] Fix documentation warnings at linux-next
-Message-ID: <20210115134157.54c4956e@coco.lan>
-In-Reply-To: <20210115133623.16e19b48@coco.lan>
-References: <CAKXUXMziQ2H7_oiVSxbt1=bDFkjLQYOiOgd00YGyDnCTVDhbqA@mail.gmail.com>
-        <20210115104947.71d99e87@coco.lan>
-        <CAKXUXMxRp4tRbMi4+P6pW4Zom7vZ0hfAWX47+aQ7nunLmyYpUQ@mail.gmail.com>
-        <20210115133623.16e19b48@coco.lan>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S1733080AbhAONJJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 15 Jan 2021 08:09:09 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46822 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1732911AbhAONJI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 Jan 2021 08:09:08 -0500
+Received: from mail-io1-xd2b.google.com (mail-io1-xd2b.google.com [IPv6:2607:f8b0:4864:20::d2b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 15C39C0613D3
+        for <linux-doc@vger.kernel.org>; Fri, 15 Jan 2021 05:08:28 -0800 (PST)
+Received: by mail-io1-xd2b.google.com with SMTP id y19so17982126iov.2
+        for <linux-doc@vger.kernel.org>; Fri, 15 Jan 2021 05:08:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=RTaj+kQTI0f7LZEXnhvKOz2cpPUJhSCbtgTVKj7/e7M=;
+        b=EH9Lf/Qh5uutAxEfsjPu9Tu0c9s5EADzA4pymQanveSRfO8osic1lzoqlLFpKqmKgM
+         ePUT9SwlH1pgv9q9fuQy6uxulz1L+MdF/UTIPxzPc9vEm7feTrhKPS0IT9sN69GG/h/D
+         8x/BZqmWKrCkVwyxr6q7Or83KJQbyw2b5IrvU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=RTaj+kQTI0f7LZEXnhvKOz2cpPUJhSCbtgTVKj7/e7M=;
+        b=WG+QP77B3LbIsGIJetpyGx+WzPOSSJ14yKH3ZqjI7YxlRH/Dn20rAm2SfU0uh7nvJW
+         L5hXyXNS4c85zVRixSvS9oKBLzfsF5uVZnn+F2/jv3mes4dXzPsqiFzPC9mRDwATK+iD
+         bc4bM6T3L7lNCOmLqXS2bF/jodHErbCSy4z9B4EBMgNWZ23aXMMhmTGXqddgVhRlff52
+         2QXNzK1fO/Vh6hcZctqPeiEVd84H+mRHX1OiRxWrfGDGnUXHQ889o/N6/06WaX0+RVvs
+         LYylFBd24nZ2PisHkah75l1AWgKMznfa7hXmUayP/CQyO5xnlPvDEyfVVLC5Jl7AKlOa
+         EElg==
+X-Gm-Message-State: AOAM531wRIitHakvNHk6cJcVsqlThDgogmQRhed9ORjjsUbeDr4HnSPn
+        8dqTtReKES6NOxxo4dR/uV5wZ7QMh8rTdA==
+X-Google-Smtp-Source: ABdhPJwj6Ipv8EUMDzpRfijXmxnWwUDsLT22KgJLBaB0TyNYU0rggpPpO1Q7JxguWmmYBJjhy5fptw==
+X-Received: by 2002:a02:969a:: with SMTP id w26mr10252106jai.96.1610716107135;
+        Fri, 15 Jan 2021 05:08:27 -0800 (PST)
+Received: from mail-io1-f53.google.com (mail-io1-f53.google.com. [209.85.166.53])
+        by smtp.gmail.com with ESMTPSA id n11sm4038707ioh.37.2021.01.15.05.08.25
+        for <linux-doc@vger.kernel.org>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 15 Jan 2021 05:08:26 -0800 (PST)
+Received: by mail-io1-f53.google.com with SMTP id d13so14717794ioy.4
+        for <linux-doc@vger.kernel.org>; Fri, 15 Jan 2021 05:08:25 -0800 (PST)
+X-Received: by 2002:a05:6e02:cc7:: with SMTP id c7mr10850857ilj.218.1610716105308;
+ Fri, 15 Jan 2021 05:08:25 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+References: <20201125221917.150463-1-ribalda@chromium.org> <20201130083410.GD32234@lst.de>
+ <20201201033658.GE3723071@google.com> <20201201144916.GA14682@lst.de>
+ <CAAFQd5BBEbmENrrZ-vMK9cKOap19XWmfcxwrxKfjWx-wEew8rg@mail.gmail.com>
+ <20201208071320.GA1667627@google.com> <20201209111639.GB22806@lst.de>
+ <CANiDSCtsOdJUK3r_t8UNKhh7Px0ANNFJkuwM1fBgZ7wnVh0JFA@mail.gmail.com> <20210111083614.GA27589@lst.de>
+In-Reply-To: <20210111083614.GA27589@lst.de>
+From:   Ricardo Ribalda <ribalda@chromium.org>
+Date:   Fri, 15 Jan 2021 14:08:14 +0100
+X-Gmail-Original-Message-ID: <CANiDSCvuvj47=nhoWhvzc5raMxM60w+JYRWjd0YepcbcbkrUjA@mail.gmail.com>
+Message-ID: <CANiDSCvuvj47=nhoWhvzc5raMxM60w+JYRWjd0YepcbcbkrUjA@mail.gmail.com>
+Subject: Re: [PATCH v3 5/6] media: uvcvideo: Use dma_alloc_noncontiguos API
+To:     ". Christoph Hellwig" <hch@lst.de>
+Cc:     Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
+        Tomasz Figa <tfiga@chromium.org>,
+        Marek Szyprowski <m.szyprowski@samsung.com>,
+        Robin Murphy <robin.murphy@arm.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
+        Joerg Roedel <joro@8bytes.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Media Mailing List <linux-media@vger.kernel.org>,
+        Sergey Senozhatsky <senozhatsky@google.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Fri, 15 Jan 2021 13:36:23 +0100
-Mauro Carvalho Chehab <mchehab+huawei@kernel.org> escreveu:
-
-> Em Fri, 15 Jan 2021 13:05:56 +0100
-> Lukas Bulwahn <lukas.bulwahn@gmail.com> escreveu:
-> 
-> > On Fri, Jan 15, 2021 at 10:49 AM Mauro Carvalho Chehab
-> > <mchehab+huawei@kernel.org> wrote:  
+On Mon, Jan 11, 2021 at 9:36 AM . Christoph Hellwig <hch@lst.de> wrote:
+>
+> On Thu, Jan 07, 2021 at 03:14:08PM +0100, Ricardo Ribalda wrote:
+> > > So I think we do want these branches for coherent vs non-coherent as they
+> > > have very different semantics and I do not think that hiding them under
+> > > the same API helps people to understand those vastly different semantics.
 > > >
-> > > Hi Lukas,
+> > > OTOH we should look into a fallback for DMA API instances that do not
+> > > support the discontigous allocations.
 > > >
-> > > Em Fri, 15 Jan 2021 07:12:38 +0100
-> > > Lukas Bulwahn <lukas.bulwahn@gmail.com> escreveu:
-> > >    
-> > > > [reduced the recipient list to the main responsible ones and list]
-> > > >
-> > > > Hi Mauro, hi Jonathan,
-> > > >
-> > > > We both, Mauro and I, have been submitting patches to address the
-> > > > documentation warnings on linux-next. If it is okay with you, Mauro, I
-> > > > would like to take responsibility for the task to send out the patches
-> > > > to address all warnings on linux-next in make htmldocs and follow up
-> > > > with all the discussions. I can also provide a short weekly summary
-> > > > (probably always on Friday) on what is pending where and what I could
-> > > > not resolve by myself.
-> > > >
-> > > > Is that okay for you?
-> > > >
-> > > > If at some point I do not have the time to take care anymore, I will
-> > > > let you know.    
-> > >
-> > > Yeah, sure!
-> > >
-> > > Anyway, after applying the patches I sent this week, the warnings
-> > > I'm getting are all due to the validation scripts I wrote. So, if
-> > > everything gets merged (either yours or my version), we'll have zero
-> > > Sphinx/kernel-doc warnings again.
-> > >    
-> > 
-> > It is a never ending story... I already have seen two new warnings on
-> > today's linux-next and sent out patches.  
-> 
-> Yes, I know. After 5.10, it is easier to track new stuff, as
-> Sphinx/kernel-doc warnings were all shut up there.
-> 
-> >   
-> > > $ scripts/documentation-file-ref-check
-> > > $ scripts/get_abi.pl validate    
-> > 
-> > I will also try out those two scripts, but I cannot commit to
-> > follow-up on all of those yet.   
-> 
-> Yeah, some of those are not trivial to address.
-> 
-> FYI, those are called by default after make allmodconfig/allyesconfig.
-> 
-> > I am also looking into addressing all
-> > kerneldoc warnings, even if not pulled in by make htmldocs.  
-> 
-> Make sense. There are lots of kerneldoc warnings for files that 
-> aren't currently part of the docs building system. It makes sense to
-> fix those and add them to the Sphinx build logic.
-> 
-> Here, I have a local script that checks for those:
-> 
-> 	for i in $(git grep -h "\.\.\s*kernel-doc::" Documentation/|cut -d':' -f 3|grep -vE "\bsource$"|sort|uniq); do
-> 		./scripts/kernel-doc --none $i
-> 	done
-> 
-> It reports 101 warnings against next-20210114.
+> > > I think between your comments and those from Ricardo I have a good idea
+> > > for a somewhat updated API.  I'll try to post something in the next days.
+> >
+> > Did you have time to look into this?
+> >
+> > No hurry, I just want to make sure that I didn't miss anything ;)
+>
+> Haven't managed to get to it, sorry.
 
-In time: those are for the ones that are included, but that
-doesn't have all symbols added. I have another one somewhere
-that does a more deeply check. I submitted it as a RFC sometime
-ago to the docs ML:
+No worries!, is there something we can do to help you with this?
 
-	https://git.linuxtv.org/mchehab/experimental.git/tree/scripts/docs_check_exports?h=doc_export_symbol&id=3f7d1e1b0bcdbe1d95eaa4b256259dfaa08faece
+>
+> >
+> > Best regards!
+> >
+> >
+> >
+> > --
+> > Ricardo Ribalda
+> ---end quoted text---
 
-Such script checks only exported symbols.
 
-Thanks,
-Mauro
+
+-- 
+Ricardo Ribalda
