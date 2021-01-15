@@ -2,76 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2A7612F8212
-	for <lists+linux-doc@lfdr.de>; Fri, 15 Jan 2021 18:21:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 23BA12F8231
+	for <lists+linux-doc@lfdr.de>; Fri, 15 Jan 2021 18:25:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728633AbhAORU4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 15 Jan 2021 12:20:56 -0500
-Received: from ms.lwn.net ([45.79.88.28]:37762 "EHLO ms.lwn.net"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727049AbhAORU4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 15 Jan 2021 12:20:56 -0500
-Received: from lwn.net (unknown [IPv6:2601:281:8300:104d::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 70EC26144;
-        Fri, 15 Jan 2021 17:20:15 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 70EC26144
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1610731215; bh=oqtY8FiVdPzSIv0x1ovYAKgJlnLzyaUv/KHtQfpJhDU=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=HgJpJDItOsE06j+N7/+v5CzKXdhMg+fmiAp+75mQuLLAEo4XtBRu9XfzZ8wZZr8Wj
-         4cgyjc29cdWDsZoRQDfZotmkLJgQvcDzSzZfdLcq8EtC8NdcPncQwJ/X5fj0a7rx9C
-         DOWTA5HRPxEk3wubj8BGe4ru76bpYx43A7XPud2tYowdjfNg+6CQ9vwz+xfaZLORjI
-         hfuDIyKlUax/4rnsS/K2sfrb80qrXVmlgE/LFcrPL6cerBjn1fC4OF4nN6AIJ/bO2m
-         4uBnGkTLXCP26Xn7RktdLtnLJ6aSvdkgC7Fyp2OhvG70adg1O5zeuxcOFETJCA1u+U
-         B+vv4YTqYjBTg==
-Date:   Fri, 15 Jan 2021 10:20:14 -0700
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     Mark Brown <broonie@kernel.org>
-Cc:     Mark Rutland <mark.rutland@arm.com>,
-        Josh Poimboeuf <jpoimboe@redhat.com>,
-        linux-kernel@vger.kernel.org, Jiri Kosina <jikos@kernel.org>,
-        Joe Lawrence <joe.lawrence@redhat.com>,
-        Miroslav Benes <mbenes@suse.cz>,
-        Petr Mladek <pmladek@suse.com>, linux-doc@vger.kernel.org,
-        live-patching@vger.kernel.org, linux-doc@vgert.kernel.org
-Subject: Re: [PATCH v3] Documentation: livepatch: document reliable
- stacktrace
-Message-ID: <20210115102014.76e51309@lwn.net>
-In-Reply-To: <20210115171251.GF4384@sirena.org.uk>
-References: <20210115142446.13880-1-broonie@kernel.org>
-        <20210115164718.GE44111@C02TD0UTHF1T.local>
-        <20210115171251.GF4384@sirena.org.uk>
-Organization: LWN.net
+        id S1729927AbhAORZF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 15 Jan 2021 12:25:05 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45788 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729489AbhAORZF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 15 Jan 2021 12:25:05 -0500
+Received: from mail-ed1-x52f.google.com (mail-ed1-x52f.google.com [IPv6:2a00:1450:4864:20::52f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 46FF4C061795
+        for <linux-doc@vger.kernel.org>; Fri, 15 Jan 2021 09:23:43 -0800 (PST)
+Received: by mail-ed1-x52f.google.com with SMTP id b2so10377755edm.3
+        for <linux-doc@vger.kernel.org>; Fri, 15 Jan 2021 09:23:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=paul-moore-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=mJrsR9g+dyqkkVVvYtEu6xfD1Zo92dOcpjjoxvFadQo=;
+        b=ge+GnUbEBLY+2evuY9Uj+uaN2jIYKWBKeP45kxv0m+2jXjz3M/6ABWkT/cxfrrGRq1
+         4WNTMkLNR2uAeZ2AccElDyg/YHkMrBs/gGDoGct8UXXHPgz8PXATa6eEOBiANAdkuam1
+         rp+M7bSxWpd33oqT8kvS3U/BVZaLAyBg8GWwIsNdEKl63eBd3Rn+7qjvCaDpG6I6LmIz
+         ppYSC9rjrXDv9oNatkHLla47fsh0+pBergQGzDv+J33+ulldNGXUtGEltU+CgjYMpawp
+         IWlLnc68w4znX2PD84B4cD1COJHGuLzY3SuktMfTPpHDLoXv9Lwn5inJdv8LgtDK3SN3
+         jr3A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=mJrsR9g+dyqkkVVvYtEu6xfD1Zo92dOcpjjoxvFadQo=;
+        b=LL5Us2wfFY9+LYK33KsMc1CpaKaQnbtAotCIjE/9wF+2Rq7yb+rJyU2R9PijzvmMVc
+         ltM+PZaozmAAHLdT3ohWZoRwb2TCG+w3MyPmKiS6ATSoNWWX8c/+mk0RSHoQknDR3B+w
+         hvf1xoLdqukzBPL5DQJEE4dXQBvvP/OePZCd2m2qV/E6KcUwEGporhKNfIbgZ+HOFt7h
+         dIrO8q2MGkK/qL7xF9CcO5oHllB2/+Ld6r8JBHpaTU/2wV1TNIDJZ2SS0HEKvSfyECF3
+         MsM/KO1X+NnGbHP2O1d65XojPYYFIZUgTR0goN6rxCm6dm5eyngKtJwNnhLS6TZIfHjE
+         ED3g==
+X-Gm-Message-State: AOAM533aAxZxlQwqhdNjpwN7XiO0VHgb/jjtEklpeMItgPWfOZZWU6DW
+        EAM4cFd7Q8YSW0MMMiEgwlKNzua1LpXV3FU5Ay57
+X-Google-Smtp-Source: ABdhPJxNJ1+S8LITVO12epfE1LpA0SxxE+7Im+Q6DiX6C3VsYyEebNuKAcm5/5AsziFCv15wGpFl9G0psW/zml1Wnk0=
+X-Received: by 2002:a05:6402:ca1:: with SMTP id cn1mr10426635edb.128.1610731421674;
+ Fri, 15 Jan 2021 09:23:41 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 8bit
+References: <20210115120342.8849-1-lukas.bulwahn@gmail.com>
+In-Reply-To: <20210115120342.8849-1-lukas.bulwahn@gmail.com>
+From:   Paul Moore <paul@paul-moore.com>
+Date:   Fri, 15 Jan 2021 12:23:28 -0500
+Message-ID: <CAHC9VhSfn9Ux_KcDysAH_vOWhiS3TvPYcXYZLg_5pr9Vee0f2g@mail.gmail.com>
+Subject: Re: [PATCH] fs: anon_inodes: rephrase to appropriate kernel-doc
+To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Cc:     Daniel Colascione <dancol@google.com>,
+        Lokesh Gidra <lokeshgidra@google.com>,
+        Eric Biggers <ebiggers@google.com>,
+        linux-fsdevel@vger.kernel.org,
+        linux-security-module@vger.kernel.org, selinux@vger.kernel.org,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-doc@vger.kernel.org, kernel-janitors@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 15 Jan 2021 17:12:51 +0000
-Mark Brown <broonie@kernel.org> wrote:
+On Fri, Jan 15, 2021 at 7:03 AM Lukas Bulwahn <lukas.bulwahn@gmail.com> wrote:
+>
+> Commit e7e832ce6fa7 ("fs: add LSM-supporting anon-inode interface") adds
+> more kerneldoc description, but also a few new warnings on
+> anon_inode_getfd_secure() due to missing parameter descriptions.
+>
+> Rephrase to appropriate kernel-doc for anon_inode_getfd_secure().
+>
+> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+> ---
+>  fs/anon_inodes.c | 21 ++++++++++++++-------
+>  1 file changed, 14 insertions(+), 7 deletions(-)
 
-> On Fri, Jan 15, 2021 at 04:47:18PM +0000, Mark Rutland wrote:
-> > On Fri, Jan 15, 2021 at 02:24:46PM +0000, Mark Brown wrote:  
-> 
-> > > +    3. Considerations
-> > > +       3.1 Identifying successful termination  
-> 
-> > It looks like we forgot to update this with the addition of the new
-> > section 3, so this needs a trivial update to add that and fix the
-> > numbering.  
-> 
-> Bah, I thought the point with structured documentation formats was that
-> tooling would handle stuff like this :/
+Merged into selinux/next with the other related LSM/SELinux anon-inode
+patches, thank you!
 
-The tooling *will* handle it if you let it, it's a simple matter of
-replacing the hand-generated table of contents with a Sphinx directive.  I
-think that's generally the right thing to do, but it does have the
-downside of only putting the TOC in the generated docs.
-
-Thanks,
-
-jon
+-- 
+paul moore
+www.paul-moore.com
