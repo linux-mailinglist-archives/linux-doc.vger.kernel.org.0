@@ -2,220 +2,236 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C8A472F8E0E
-	for <lists+linux-doc@lfdr.de>; Sat, 16 Jan 2021 18:16:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 2C49B2F8E2F
+	for <lists+linux-doc@lfdr.de>; Sat, 16 Jan 2021 18:20:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728935AbhAPROM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 16 Jan 2021 12:14:12 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39952 "EHLO
+        id S1726883AbhAPRRb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 16 Jan 2021 12:17:31 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40654 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728926AbhAPROJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 16 Jan 2021 12:14:09 -0500
-Received: from mail-oi1-x229.google.com (mail-oi1-x229.google.com [IPv6:2607:f8b0:4864:20::229])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC574C061574;
-        Sat, 16 Jan 2021 09:13:28 -0800 (PST)
-Received: by mail-oi1-x229.google.com with SMTP id l200so13097587oig.9;
-        Sat, 16 Jan 2021 09:13:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=JQYyHv7IM57vI890lYmuj/Cq36xklEeLDd0LywTovy4=;
-        b=HsEOU9LhTmrMY5umpjFUy7M6AbjxsR96TayaPN8poWvcJ5Q3dJTYkPfhrZaonIPVCI
-         N5ePDDkQ+4GEMV5Iz2AXnZZ0RLtTrSK01G9gBoVRgbRPmmj9E66JeGQWE5k02fcgpn8j
-         y0eQQRKTtcDTSxzAkIbleO0Ob8c8FMAHYWsMfjUVXQJYYtGGpFkoQak2jtmB/m5rRXCE
-         EsJB+f8ArwkmBStrUe13I2Wejh4scYfRYL5e1x/LCoIcG7+RLaMhtOvoSrfMa0SfWWR9
-         hQnyQkPJ1rBbcHPL6UpnrJrTiaC2WkfFbJP8yiRZKEG/zWSCxf9yuKDstCk8nUQh1+QO
-         f/cg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=JQYyHv7IM57vI890lYmuj/Cq36xklEeLDd0LywTovy4=;
-        b=KQLQROiS6bXrrTHpZCZROOnA+0vbvHgg1bhJBAUqdXnN+esdClHuZMozWlqumCRaua
-         6s3Mr8UQjDj2vdYeVZo0uzvbogHeM/IqRc/zgJIcIriySg9DYo6J2mOTKvDVBp+Lnigt
-         p0gVmJwoRED2h9TpMLusNKWAr+TzQJM6myNy1aOuoAWg9qZym5kA7zizpx9fU7FmRHeX
-         M2GjW+24g6QSCcYTGq97uij23FM/qHfi5X3/Cp64nX5z7TrhanAp0iSWqpeIY5nly5MS
-         199OFprnutdDjYzUg00kM8loSHkQVLMvpZC/an4n9qYwJyoQU7YpMdAu6Lu8W2KHh+qn
-         IyRg==
-X-Gm-Message-State: AOAM533SuSxg9LVsPzaHMgOZTYkJIJKZW2p8L3wc85k5D+IeKvREiIzG
-        pxl+Ojpo4pfkLe1bsrSJG9C50Mk2pxc=
-X-Google-Smtp-Source: ABdhPJz2gXjXbLk831qAfBJ4HlYyzfZWNHw7t4HR18bJNH4EQQPtAX7xI4w33xt8twSiUEl/gO/tzA==
-X-Received: by 2002:aca:5493:: with SMTP id i141mr9034379oib.82.1610817207734;
-        Sat, 16 Jan 2021 09:13:27 -0800 (PST)
-Received: from Davids-MacBook-Pro.local ([8.20.123.23])
-        by smtp.googlemail.com with ESMTPSA id t26sm2630620otm.17.2021.01.16.09.13.26
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 16 Jan 2021 09:13:26 -0800 (PST)
-Subject: Re: [PATCH v2 net-next 1/1] Allow user to set metric on default route
- learned via Router Advertisement.
-To:     Praveen Chaudhary <praveen5582@gmail.com>, davem@davemloft.net,
-        kuba@kernel.org, corbet@lwn.net, kuznet@ms2.inr.ac.ru,
-        yoshfuji@linux-ipv6.org, netdev@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     Zhenggen Xu <zxu@linkedin.com>
-References: <20210115080203.8889-1-pchaudhary@linkedin.com>
-From:   David Ahern <dsahern@gmail.com>
-Message-ID: <0f64942e-debd-81bd-b29c-7d2728a5bd4b@gmail.com>
-Date:   Sat, 16 Jan 2021 10:13:23 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
- Gecko/20100101 Thunderbird/78.6.1
+        with ESMTP id S1726993AbhAPRR2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 16 Jan 2021 12:17:28 -0500
+X-Greylist: delayed 166611 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Sat, 16 Jan 2021 09:16:42 PST
+Received: from smtp-190f.mail.infomaniak.ch (smtp-190f.mail.infomaniak.ch [IPv6:2001:1600:3:17::190f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D3D29C061574;
+        Sat, 16 Jan 2021 09:16:42 -0800 (PST)
+Received: from smtp-2-0001.mail.infomaniak.ch (unknown [10.5.36.108])
+        by smtp-2-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4DJ4Th0JkRzMqHHH;
+        Sat, 16 Jan 2021 18:16:40 +0100 (CET)
+Received: from ns3096276.ip-94-23-54.eu (unknown [23.97.221.149])
+        by smtp-2-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4DJ4Tc5tpwzlh8TM;
+        Sat, 16 Jan 2021 18:16:36 +0100 (CET)
+Subject: Re: [PATCH v26 07/12] landlock: Support filesystem access-control
+To:     Jann Horn <jannh@google.com>
+Cc:     James Morris <jmorris@namei.org>,
+        "Serge E . Hallyn" <serge@hallyn.com>,
+        Al Viro <viro@zeniv.linux.org.uk>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Casey Schaufler <casey@schaufler-ca.com>,
+        Jeff Dike <jdike@addtoit.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Michael Kerrisk <mtk.manpages@gmail.com>,
+        Richard Weinberger <richard@nod.at>,
+        Shuah Khan <shuah@kernel.org>,
+        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
+        Kernel Hardening <kernel-hardening@lists.openwall.com>,
+        Linux API <linux-api@vger.kernel.org>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+        kernel list <linux-kernel@vger.kernel.org>,
+        "open list:KERNEL SELFTEST FRAMEWORK" 
+        <linux-kselftest@vger.kernel.org>,
+        linux-security-module <linux-security-module@vger.kernel.org>,
+        the arch/x86 maintainers <x86@kernel.org>,
+        =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@linux.microsoft.com>
+References: <20201209192839.1396820-1-mic@digikod.net>
+ <20201209192839.1396820-8-mic@digikod.net>
+ <CAG48ez1wbAQwU-eoC9DngHyUM_5F01MJQpRnLaJFvfRUrnXBdA@mail.gmail.com>
+ <aeb3e152-8108-89d2-0577-4b130368f14f@digikod.net>
+ <CAG48ez2HJCFvmFALDYDYnufE755Dqh3JquAMf-1mnzmRrdKaoQ@mail.gmail.com>
+ <9be6481f-9c03-dd32-378f-20bc7c52315c@digikod.net>
+ <CAG48ez1O0VTwEiRd3KqexoF78WR+cmP5bGk5Kh5Cs7aPepiDVg@mail.gmail.com>
+From:   =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@digikod.net>
+Message-ID: <28d2a149-0fe0-764b-85b3-6f979d1dd931@digikod.net>
+Date:   Sat, 16 Jan 2021 18:16:57 +0100
+User-Agent: 
 MIME-Version: 1.0
-In-Reply-To: <20210115080203.8889-1-pchaudhary@linkedin.com>
+In-Reply-To: <CAG48ez1O0VTwEiRd3KqexoF78WR+cmP5bGk5Kh5Cs7aPepiDVg@mail.gmail.com>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 1/15/21 1:02 AM, Praveen Chaudhary wrote:
-> For IPv4, default route is learned via DHCPv4 and user is allowed to change
-> metric using config etc/network/interfaces. But for IPv6, default route can
-> be learned via RA, for which, currently a fixed metric value 1024 is used.
+
+On 15/01/2021 19:31, Jann Horn wrote:
+> On Fri, Jan 15, 2021 at 10:10 AM Mickaël Salaün <mic@digikod.net> wrote:
+>> On 14/01/2021 23:43, Jann Horn wrote:
+>>> On Thu, Jan 14, 2021 at 7:54 PM Mickaël Salaün <mic@digikod.net> wrote:
+>>>> On 14/01/2021 04:22, Jann Horn wrote:
+>>>>> On Wed, Dec 9, 2020 at 8:28 PM Mickaël Salaün <mic@digikod.net> wrote:
+>>>>>> Thanks to the Landlock objects and ruleset, it is possible to identify
+>>>>>> inodes according to a process's domain.  To enable an unprivileged
+>>>>>> process to express a file hierarchy, it first needs to open a directory
+>>>>>> (or a file) and pass this file descriptor to the kernel through
+>>>>>> landlock_add_rule(2).  When checking if a file access request is
+>>>>>> allowed, we walk from the requested dentry to the real root, following
+>>>>>> the different mount layers.  The access to each "tagged" inodes are
+>>>>>> collected according to their rule layer level, and ANDed to create
+>>>>>> access to the requested file hierarchy.  This makes possible to identify
+>>>>>> a lot of files without tagging every inodes nor modifying the
+>>>>>> filesystem, while still following the view and understanding the user
+>>>>>> has from the filesystem.
+>>>>>>
+>>>>>> Add a new ARCH_EPHEMERAL_INODES for UML because it currently does not
+>>>>>> keep the same struct inodes for the same inodes whereas these inodes are
+>>>>>> in use.
+>>>>>>
+>>>>>> This commit adds a minimal set of supported filesystem access-control
+>>>>>> which doesn't enable to restrict all file-related actions.  This is the
+>>>>>> result of multiple discussions to minimize the code of Landlock to ease
+>>>>>> review.  Thanks to the Landlock design, extending this access-control
+>>>>>> without breaking user space will not be a problem.  Moreover, seccomp
+>>>>>> filters can be used to restrict the use of syscall families which may
+>>>>>> not be currently handled by Landlock.
+>>>>> [...]
+>>>>>> +static bool check_access_path_continue(
+>>>>>> +               const struct landlock_ruleset *const domain,
+>>>>>> +               const struct path *const path, const u32 access_request,
+>>>>>> +               u64 *const layer_mask)
+>>>>>> +{
+>>>>> [...]
+>>>>>> +       /*
+>>>>>> +        * An access is granted if, for each policy layer, at least one rule
+>>>>>> +        * encountered on the pathwalk grants the access, regardless of their
+>>>>>> +        * position in the layer stack.  We must then check not-yet-seen layers
+>>>>>> +        * for each inode, from the last one added to the first one.
+>>>>>> +        */
+>>>>>> +       for (i = 0; i < rule->num_layers; i++) {
+>>>>>> +               const struct landlock_layer *const layer = &rule->layers[i];
+>>>>>> +               const u64 layer_level = BIT_ULL(layer->level - 1);
+>>>>>> +
+>>>>>> +               if (!(layer_level & *layer_mask))
+>>>>>> +                       continue;
+>>>>>> +               if ((layer->access & access_request) != access_request)
+>>>>>> +                       return false;
+>>>>>> +               *layer_mask &= ~layer_level;
+>>>>>
+>>>>> Hmm... shouldn't the last 5 lines be replaced by the following?
+>>>>>
+>>>>> if ((layer->access & access_request) == access_request)
+>>>>>     *layer_mask &= ~layer_level;
+>>>>>
+>>>>> And then, since this function would always return true, you could
+>>>>> change its return type to "void".
+>>>>>
+>>>>>
+>>>>> As far as I can tell, the current version will still, if a ruleset
+>>>>> looks like this:
+>>>>>
+>>>>> /usr read+write
+>>>>> /usr/lib/ read
+>>>>>
+>>>>> reject write access to /usr/lib, right?
+>>>>
+>>>> If these two rules are from different layers, then yes it would work as
+>>>> intended. However, if these rules are from the same layer the path walk
+>>>> will not stop at /usr/lib but go down to /usr, which grants write
+>>>> access.
+>>>
+>>> I don't see why the code would do what you're saying it does. And an
+>>> experiment seems to confirm what I said; I checked out landlock-v26,
+>>> and the behavior I get is:
+>>
+>> There is a misunderstanding, I was responding to your proposition to
+>> modify check_access_path_continue(), not about the behavior of landlock-v26.
+>>
+>>>
+>>> user@vm:~/landlock$ dd if=/dev/null of=/tmp/aaa
+>>> 0+0 records in
+>>> 0+0 records out
+>>> 0 bytes copied, 0.00106365 s, 0.0 kB/s
+>>> user@vm:~/landlock$ LL_FS_RO='/lib' LL_FS_RW='/' ./sandboxer dd
+>>> if=/dev/null of=/tmp/aaa
+>>> 0+0 records in
+>>> 0+0 records out
+>>> 0 bytes copied, 0.000491814 s, 0.0 kB/s
+>>> user@vm:~/landlock$ LL_FS_RO='/tmp' LL_FS_RW='/' ./sandboxer dd
+>>> if=/dev/null of=/tmp/aaa
+>>> dd: failed to open '/tmp/aaa': Permission denied
+>>> user@vm:~/landlock$
+>>>
+>>> Granting read access to /tmp prevents writing to it, even though write
+>>> access was granted to /.
+>>>
+>>
+>> It indeed works like this with landlock-v26. However, with your above
+>> proposition, it would work like this:
+>>
+>> $ LL_FS_RO='/tmp' LL_FS_RW='/' ./sandboxer dd if=/dev/null of=/tmp/aaa
+>> 0+0 records in
+>> 0+0 records out
+>> 0 bytes copied, 0.000187265 s, 0.0 kB/s
+>>
+>> …which is not what users would expect I guess. :)
 > 
-> Ideally, user should be able to configure metric on default route for IPv6
-> similar to IPv4. This fix adds sysctl for the same.
+> Ah, so we are disagreeing about what the right semantics are. ^^ To
+> me, that is exactly the behavior I would expect.
 > 
-> Signed-off-by: Praveen Chaudhary <pchaudhary@linkedin.com>
-> Signed-off-by: Zhenggen Xu <zxu@linkedin.com>
+> Imagine that someone wants to write a program that needs to be able to
+> load libraries from /usr/lib (including subdirectories) and needs to
+> be able to write output to some user-specified output directory. So
+> they use something like this to sandbox their program (plus error
+> handling):
 > 
-> Changes in v1.
-> ---
-
-your trying to be too fancy in the log messages; everything after this
-first '---' is dropped. Just Remove all of the '---' lines and '```' tags.
-
-> 1.) Correct the call to rt6_add_dflt_router.
-> ---
+> static void add_fs_rule(int ruleset_fd, char *path, u64 allowed_access) {
+>   int fd = open(path, O_PATH);
+>   struct landlock_path_beneath_attr path_beneath = {
+>     .parent_fd = fd,
+>     .allowed_access = allowed_access
+>   };
+>   landlock_add_rule(ruleset_fd, LANDLOCK_RULE_PATH_BENEATH,
+>           &path_beneath, 0);
+>   close(fd);
+> }
+> int main(int argc, char **argv) {
+>   char *output_dir = argv[1];
+>   int ruleset_fd = landlock_create_ruleset(&ruleset_attr,
+> sizeof(ruleset_attr, 0);
+>   add_fs_rule(ruleset_fd, "/usr/lib", ACCESS_FS_ROUGHLY_READ);
+>   add_fs_rule(ruleset_fd, output_dir,
+> LANDLOCK_ACCESS_FS_WRITE_FILE|LANDLOCK_ACCESS_FS_MAKE_REG|LANDLOCK_ACCESS_FS_REMOVE_FILE);
+>   prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0);
+>   landlock_enforce_ruleset_current(ruleset_fd, 0);
+> }
 > 
-> Changes in v2.
-> [Refer: lkml.org/lkml/2021/1/14/1400]
-> ---
-> 1.) Replace accept_ra_defrtr_metric to ra_defrtr_metric.
-> 2.) Change Type to __u32 instead of __s32.
-> 3.) Change description in Documentation/networking/ip-sysctl.rst.
-> 4.) Use proc_douintvec instead of proc_dointvec.
-> 5.) Code style in ndisc_router_discovery().
-> 6.) Change Type to u32 instead of unsigned int.
-> ---
+> This will *almost* always work; but if the output directory is
+> /usr/lib/x86_64-linux-gnu/ , loading libraries from that directory
+> won't work anymore, right? So if userspace wanted this to *always*
+> works correctly, it would have to somehow figure out whether there is
+> a path upwards from the output directory (under any mount) that will
+> encounter /usr/lib, and set different permissions if that is the case.
+> That seems unnecessarily messy to me; and I think that this will make
+> it harder for generic commandline tools and such to adopt landlock.
 > 
-> Logs:
-> ----------------------------------------------------------------
-> For IPv4:
-> ----------------------------------------------------------------
 > 
-> Config in etc/network/interfaces
-> ----------------------------------------------------------------
-> ```
-> auto eth0
-> iface eth0 inet dhcp
->     metric 4261413864
+> If you do want to have the ability to deny access to subtrees of trees
+> to which access is permitted, I think that that should be made
+> explicit in the UAPI - e.g. you could (at a later point, after this
+> series has landed) introduce a new EXCLUDE flag for
+> landlock_add_rule() that means "I want to deny the access specified by
+> this rule", or something like that. (And you'd have to very carefully
+> document under which circumstances such rules are actually effective -
+> e.g. if someone grants full access to $HOME, but excludes $HOME/.ssh,
+> an attacker would still be able to rename $HOME/.ssh to $HOME/old_ssh,
+> and then if the program is later restarted and creates the ruleset
+> from scratch again, the old SSH folder will be accessible.)
+> 
 
-how does that work for IPv4? Is the metric passed to the dhclient and it
-inserts the route with the given metric or is a dhclient script used to
-replace the route after insert?
-
-
-> diff --git a/Documentation/networking/ip-sysctl.rst b/Documentation/networking/ip-sysctl.rst
-> index dd2b12a32b73..c4b8d4b8d213 100644
-> --- a/Documentation/networking/ip-sysctl.rst
-> +++ b/Documentation/networking/ip-sysctl.rst
-> @@ -1871,6 +1871,18 @@ accept_ra_defrtr - BOOLEAN
->  		- enabled if accept_ra is enabled.
->  		- disabled if accept_ra is disabled.
->  
-> +ra_defrtr_metric - INTEGER
-> +	Route metric for default route learned in Router Advertisement. This value
-> +	will be assigned as metric for the default route learned via IPv6 Router
-> +	Advertisement. Takes affect only if accept_ra_defrtr' is enabled.
-
-stray ' after accept_ra_defrtr
-
-> +
-> +	Possible values are:
-> +		0:
-> +			default value will be used for route metric
-> +			i.e. IP6_RT_PRIO_USER 1024.
-> +		1 to 0xFFFFFFFF:
-> +			current value will be used for route metric.
-> +
->  accept_ra_from_local - BOOLEAN
->  	Accept RA with source-address that is found on local machine
->  	if the RA is otherwise proper and able to be accepted.
-
-
-
-> diff --git a/net/ipv6/addrconf.c b/net/ipv6/addrconf.c
-> index eff2cacd5209..b13d3213e58f 100644
-> --- a/net/ipv6/addrconf.c
-> +++ b/net/ipv6/addrconf.c
-> @@ -205,6 +205,7 @@ static struct ipv6_devconf ipv6_devconf __read_mostly = {
->  	.max_desync_factor	= MAX_DESYNC_FACTOR,
->  	.max_addresses		= IPV6_MAX_ADDRESSES,
->  	.accept_ra_defrtr	= 1,
-> +	.ra_defrtr_metric = 0,
-
-make the the '=' align column wise with the existing entries; seems like
-your new line is missing a tab
-
->  	.accept_ra_from_local	= 0,
->  	.accept_ra_min_hop_limit= 1,
->  	.accept_ra_pinfo	= 1,
-> @@ -260,6 +261,7 @@ static struct ipv6_devconf ipv6_devconf_dflt __read_mostly = {
->  	.max_desync_factor	= MAX_DESYNC_FACTOR,
->  	.max_addresses		= IPV6_MAX_ADDRESSES,
->  	.accept_ra_defrtr	= 1,
-> +	.ra_defrtr_metric = 0,
-
-same here
-
->  	.accept_ra_from_local	= 0,
->  	.accept_ra_min_hop_limit= 1,
->  	.accept_ra_pinfo	= 1,
-> @@ -5475,6 +5477,7 @@ static inline void ipv6_store_devconf(struct ipv6_devconf *cnf,
->  	array[DEVCONF_MAX_DESYNC_FACTOR] = cnf->max_desync_factor;
->  	array[DEVCONF_MAX_ADDRESSES] = cnf->max_addresses;
->  	array[DEVCONF_ACCEPT_RA_DEFRTR] = cnf->accept_ra_defrtr;
-> +	array[DEVCONF_RA_DEFRTR_METRIC] = cnf->ra_defrtr_metric;
->  	array[DEVCONF_ACCEPT_RA_MIN_HOP_LIMIT] = cnf->accept_ra_min_hop_limit;
->  	array[DEVCONF_ACCEPT_RA_PINFO] = cnf->accept_ra_pinfo;
->  #ifdef CONFIG_IPV6_ROUTER_PREF
-> @@ -6667,6 +6670,13 @@ static const struct ctl_table addrconf_sysctl[] = {
->  		.mode		= 0644,
->  		.proc_handler	= proc_dointvec,
->  	},
-> +	{
-> +		.procname	= "ra_defrtr_metric",
-> +		.data		= &ipv6_devconf.ra_defrtr_metric,
-> +		.maxlen		= sizeof(u32),
-> +		.mode		= 0644,
-> +		.proc_handler	= proc_douintvec,
-> +	},
->  	{
->  		.procname	= "accept_ra_min_hop_limit",
->  		.data		= &ipv6_devconf.accept_ra_min_hop_limit,
-> diff --git a/net/ipv6/ndisc.c b/net/ipv6/ndisc.c
-> index 76717478f173..2bffed49f5c0 100644
-> --- a/net/ipv6/ndisc.c
-> +++ b/net/ipv6/ndisc.c
-> @@ -1173,6 +1173,7 @@ static void ndisc_router_discovery(struct sk_buff *skb)
->  	struct neighbour *neigh = NULL;
->  	struct inet6_dev *in6_dev;
->  	struct fib6_info *rt = NULL;
-> +	u32 defrtr_usr_metric;
->  	struct net *net;
->  	int lifetime;
->  	struct ndisc_options ndopts;
-> @@ -1303,18 +1304,23 @@ static void ndisc_router_discovery(struct sk_buff *skb)
->  			return;
->  		}
->  	}
-> -	if (rt && lifetime == 0) {
-> +	/* Set default route metric if specified by user */
-> +	defrtr_usr_metric = in6_dev->cnf.accept_ra_defrtr_metric;
-
-this tells me you did not compile this version of the patch since the
-'accept_' has been dropped. Always compile and test every patch before
-sending.
+OK, it's indeed a more pragmatic approach. I'll take your change and
+merge check_access_path_continue() with check_access_path(). Thanks!
