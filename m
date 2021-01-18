@@ -2,73 +2,74 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7DDB82F9DAD
-	for <lists+linux-doc@lfdr.de>; Mon, 18 Jan 2021 12:12:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6C7F92F9F6D
+	for <lists+linux-doc@lfdr.de>; Mon, 18 Jan 2021 13:24:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389949AbhARLJh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Jan 2021 06:09:37 -0500
-Received: from mga17.intel.com ([192.55.52.151]:16103 "EHLO mga17.intel.com"
+        id S2391341AbhARMWe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 18 Jan 2021 07:22:34 -0500
+Received: from foss.arm.com ([217.140.110.172]:34508 "EHLO foss.arm.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2389921AbhARLJf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 18 Jan 2021 06:09:35 -0500
-IronPort-SDR: EM95qc39Kh84LQLeEABwGGsw222w3ddFdZWJ+uwtSeLMPz0tvKMl+n3pv1csqVkgqzqgKUrwEh
- N5XtUvCEGEMA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9867"; a="158562681"
-X-IronPort-AV: E=Sophos;i="5.79,356,1602572400"; 
-   d="scan'208";a="158562681"
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-  by fmsmga107.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 18 Jan 2021 03:08:54 -0800
-IronPort-SDR: hrPNsvtljp3wRPO7t9KVKPA+99ng+jcgKo5UiIMIUtXSQeTSd5zb1oe0PehhWZ7Na+WkGro9Rm
- b33pNXPLw81Q==
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.79,356,1602572400"; 
-   d="scan'208";a="406186038"
-Received: from irvmail001.ir.intel.com ([10.43.11.63])
-  by FMSMGA003.fm.intel.com with ESMTP; 18 Jan 2021 03:08:52 -0800
-Received: from mwajdecz-MOBL.ger.corp.intel.com (mwajdecz-MOBL.ger.corp.intel.com [10.249.143.57])
-        by irvmail001.ir.intel.com (8.14.3/8.13.6/MailSET/Hub) with ESMTP id 10IB8pCj023113;
-        Mon, 18 Jan 2021 11:08:51 GMT
-From:   Michal Wajdeczko <michal.wajdeczko@intel.com>
-To:     linux-doc@vger.kernel.org
-Cc:     Michal Wajdeczko <michal.wajdeczko@intel.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jani Nikula <jani.nikula@intel.com>,
-        Chris Wilson <chris@chris-wilson.co.uk>
-Subject: [PATCH] scripts/kernel-doc: add internal hyperlink to DOC: sections
-Date:   Mon, 18 Jan 2021 12:08:13 +0100
-Message-Id: <20210118110813.1490-1-michal.wajdeczko@intel.com>
-X-Mailer: git-send-email 2.21.0
+        id S2391382AbhARMWb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 18 Jan 2021 07:22:31 -0500
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+        by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 5EC3431B;
+        Mon, 18 Jan 2021 04:21:45 -0800 (PST)
+Received: from C02TD0UTHF1T.local (unknown [10.57.39.202])
+        by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id B62633F719;
+        Mon, 18 Jan 2021 04:21:42 -0800 (PST)
+Date:   Mon, 18 Jan 2021 12:21:35 +0000
+From:   Mark Rutland <mark.rutland@arm.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Mark Brown <broonie@kernel.org>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        linux-kernel@vger.kernel.org, Jiri Kosina <jikos@kernel.org>,
+        Joe Lawrence <joe.lawrence@redhat.com>,
+        Miroslav Benes <mbenes@suse.cz>,
+        Petr Mladek <pmladek@suse.com>, linux-doc@vger.kernel.org,
+        live-patching@vger.kernel.org, linux-doc@vgert.kernel.org
+Subject: Re: [PATCH v3] Documentation: livepatch: document reliable stacktrace
+Message-ID: <20210118122135.GA31263@C02TD0UTHF1T.local>
+References: <20210115142446.13880-1-broonie@kernel.org>
+ <20210115164718.GE44111@C02TD0UTHF1T.local>
+ <20210115171251.GF4384@sirena.org.uk>
+ <20210115102014.76e51309@lwn.net>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210115102014.76e51309@lwn.net>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-While DOC: section titles are not converted into RST headings
-sections and are only decorated with strong emphasis markup,
-nothing stops us from generating internal hyperlinks for them,
-to mimic implicit hyperlinks to RST headings.
+On Fri, Jan 15, 2021 at 10:20:14AM -0700, Jonathan Corbet wrote:
+> On Fri, 15 Jan 2021 17:12:51 +0000
+> Mark Brown <broonie@kernel.org> wrote:
+> 
+> > On Fri, Jan 15, 2021 at 04:47:18PM +0000, Mark Rutland wrote:
+> > > On Fri, Jan 15, 2021 at 02:24:46PM +0000, Mark Brown wrote:  
+> > 
+> > > > +    3. Considerations
+> > > > +       3.1 Identifying successful termination  
+> > 
+> > > It looks like we forgot to update this with the addition of the new
+> > > section 3, so this needs a trivial update to add that and fix the
+> > > numbering.  
+> > 
+> > Bah, I thought the point with structured documentation formats was that
+> > tooling would handle stuff like this :/
+> 
+> The tooling *will* handle it if you let it, it's a simple matter of
+> replacing the hand-generated table of contents with a Sphinx directive.  I
+> think that's generally the right thing to do, but it does have the
+> downside of only putting the TOC in the generated docs.
 
-Signed-off-by: Michal Wajdeczko <michal.wajdeczko@intel.com>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Jani Nikula <jani.nikula@intel.com>
-Cc: Chris Wilson <chris@chris-wilson.co.uk>
----
- scripts/kernel-doc | 1 +
- 1 file changed, 1 insertion(+)
+Ah, I was not aware of that, and I had copied the TOC style from
+Documentation/livepatch/livepatch.rst.
 
-diff --git a/scripts/kernel-doc b/scripts/kernel-doc
-index 6325bec3f66f..272f70c9fb13 100755
---- a/scripts/kernel-doc
-+++ b/scripts/kernel-doc
-@@ -833,6 +833,7 @@ sub output_blockhead_rst(%) {
- 	next if (defined($nosymbol_table{$section}));
- 
- 	if ($output_selection != OUTPUT_INCLUDE) {
-+	    print ".. _$section:\n\n";
- 	    print "**$section**\n\n";
- 	}
-         print_lineno($section_start_lines{$section});
--- 
-2.25.1
+That does sound like the right thing to do generally, and I have no
+problem doing that here, but I guess we be consistent and either do that
+for all or none of the Documentation/livepatch/*.rst documents. I guess
+we could do that as a followup?
 
+Thanks,
+Mark.
