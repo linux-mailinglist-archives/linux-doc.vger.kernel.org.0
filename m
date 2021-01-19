@@ -2,126 +2,158 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 62C4A2FC025
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 20:39:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EB2502FC078
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 21:01:46 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728908AbhASThq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 14:37:46 -0500
-Received: from mga06.intel.com ([134.134.136.31]:26308 "EHLO mga06.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1729697AbhASThP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 19 Jan 2021 14:37:15 -0500
-IronPort-SDR: 0+4H1OMbq+Z3k3dNpg8TMaQ1vi7Vf67YJi4WVAtnLlhUNA0oBllE1cqyLmxczgLDudxOuUD88t
- xPN7QhvFlcQA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9869"; a="240525703"
-X-IronPort-AV: E=Sophos;i="5.79,359,1602572400"; 
-   d="scan'208";a="240525703"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2021 11:36:34 -0800
-IronPort-SDR: fm0aLemlT7MG5HKCe9xsp1Ifq+9Zp6/U4cGc0toMhg5UJPQKq6ePMCdEJXKxy7GxDh5YS8dhzE
- eRpoNdU525fw==
-X-IronPort-AV: E=Sophos;i="5.79,359,1602572400"; 
-   d="scan'208";a="501042644"
-Received: from yyu32-mobl1.amr.corp.intel.com (HELO [10.209.139.183]) ([10.209.139.183])
-  by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 19 Jan 2021 11:36:32 -0800
-Subject: Re: [PATCH v17 06/26] x86/cet: Add control-protection fault handler
-To:     Borislav Petkov <bp@alien8.de>
-Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>,
-        "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
-References: <20201229213053.16395-1-yu-cheng.yu@intel.com>
- <20201229213053.16395-7-yu-cheng.yu@intel.com>
- <20210119120425.GI27433@zn.tnic>
-From:   "Yu, Yu-cheng" <yu-cheng.yu@intel.com>
-Message-ID: <a6b18663-a53d-60bc-57e8-8b327a169bc4@intel.com>
-Date:   Tue, 19 Jan 2021 11:36:31 -0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+        id S1730167AbhAST7N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 14:59:13 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39222 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1729920AbhAST7J (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 14:59:09 -0500
+Received: from merlin.infradead.org (merlin.infradead.org [IPv6:2001:8b0:10b:1231::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6CFA8C061573;
+        Tue, 19 Jan 2021 11:58:27 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:Content-Type:
+        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+        :Reply-To:Content-ID:Content-Description;
+        bh=CVukzLoC6izto3DL8Ksb3vKHfyZG+Fn4DMqY6xEK3zI=; b=kUL68LCVRK1oAGBEfAeMIJ8S21
+        HhDyacbdMKUqivDjMTCXtHsdvwGSmZNSmKJr/j6+M3MaNCIKrfswJT5wwyowIsoL9WHD0wQ6q2tTK
+        7J+bHV9/R7egYt4b1Z9p+mXKWU3iCHRxrbsppzHbfroWkzPsBBAdsm2ho0i5HUsqM/t49KUC/C/ck
+        km3OVG9GVXbke4rAGT3wCPNLGTvBxyEp3ncwD8dLwGUG88Z7zDE04G7xfKtdDYmAI6NbXkaPXes74
+        EivoT4D+hwDc/eQ/UZno1/9yDpOAYfUCq3Y6SX/Wx1QAJ4Btq29Fr3ovdypYVIgeWN+9EtaM2o7ED
+        gJZCQ/2Q==;
+Received: from [2601:1c0:6280:3f0::9abc]
+        by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1l1x8y-0006be-4x; Tue, 19 Jan 2021 19:58:24 +0000
+Subject: Re: [PATCH v2 20/34] xlink-core: Add xlink core driver xLink
+To:     mgross@linux.intel.com, markgross@kernel.org, arnd@arndb.de,
+        bp@suse.de, damien.lemoal@wdc.com, dragan.cvetic@xilinx.com,
+        gregkh@linuxfoundation.org, corbet@lwn.net,
+        leonard.crestez@nxp.com, palmerdabbelt@google.com,
+        paul.walmsley@sifive.com, peng.fan@nxp.com, robh+dt@kernel.org,
+        shawnguo@kernel.org, jassisinghbrar@gmail.com
+Cc:     linux-kernel@vger.kernel.org,
+        Seamus Kelly <seamus.kelly@intel.com>,
+        Derek Kiernan <derek.kiernan@xilinx.com>,
+        linux-doc@vger.kernel.org
+References: <20210108212600.36850-1-mgross@linux.intel.com>
+ <20210108212600.36850-21-mgross@linux.intel.com>
+From:   Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <e52e4b7a-61f7-ed15-bc3b-466fc1d70b21@infradead.org>
+Date:   Tue, 19 Jan 2021 11:58:14 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
 MIME-Version: 1.0
-In-Reply-To: <20210119120425.GI27433@zn.tnic>
-Content-Type: text/plain; charset=utf-8; format=flowed
+In-Reply-To: <20210108212600.36850-21-mgross@linux.intel.com>
+Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 1/19/2021 4:04 AM, Borislav Petkov wrote:
-> On Tue, Dec 29, 2020 at 01:30:33PM -0800, Yu-cheng Yu wrote:
-[...]
->> +DEFINE_IDTENTRY_ERRORCODE(exc_control_protection)
->> +{
->> +	struct task_struct *tsk;
->> +
->> +	if (!user_mode(regs)) {
->> +		if (notify_die(DIE_TRAP, "control protection fault", regs,
->> +			       error_code, X86_TRAP_CP, SIGSEGV) == NOTIFY_STOP)
->> +			return;
->> +		die("Upexpected/unsupported kernel control protection fault", regs, error_code);
-> 
-> Isn't the machine supposed to panic() here and do no further progress?
+Doc comments only:
 
-Ok, make it panic().
+On 1/8/21 1:25 PM, mgross@linux.intel.com wrote:
+> diff --git a/Documentation/vpu/xlink-core.rst b/Documentation/vpu/xlink-core.rst
+> new file mode 100644
+> index 000000000000..1c471ec803d3
+> --- /dev/null
+> +++ b/Documentation/vpu/xlink-core.rst
+> @@ -0,0 +1,81 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +=============================
+> +xLink-core software subsystem
+> +=============================
+> +
+> +The purpose of the xLink software subsystem is to facilitate communication
+> +between multiple users on multiple nodes in the system.
+> +
+> +There are three types of xLink nodes:
+> +
+> +1. Remote Host: this is an external IA/x86 host system that is only capable of
+> +   communicating directly to the Local Host node on VPU 2.x products.
+> +2. Local Host: this is the ARM core within the VPU 2.x  SoC. The Local Host can
+> +   communicate upstream to the Remote Host node, and downstream to the VPU IP
+> +   node.
+> +3. VPU IP: this is the Leon RT core within the VPU 2.x SoC. The VPU IP can only
+> +   communicate upstream to the Local Host node.
+> +
+> +xLink provides a common API across all interfaces for users to access xLink
+> +functions and provides user space APIs via an IOCTL interface implemented in
+> +the xLink core.
+> +
+> +xLink manages communications from one interface to another and provides routing
+> +of data through multiple channels across a single physical interface.
+> +
+> +It exposes a common API across all interfaces at both kernel and user levels
+> +for processes/applications to access.
+> +
+> +It has typical API types (open, close, read, write) that you would associate
+> +with a communication interface.
+> +
+> +It also has other APIs that are related to other functions that the device can
+> +perform, e.g. boot, reset get/set device mode.
+> +The driver is broken down into 4 source files.
+> +
+> +xlink-core:
+> +Contains driver initialization, driver API and IOCTL interface (for user
+> +space).
+> +
+> +xlink-multiplexer:
+> +The Multiplexer component is responsible for securely routing messages through
+> +multiple communication channels over a single physical interface.
+> +
+> +xlink-dispatcher:
+> +The Dispatcher component is responsible for queueing and handling xLink
+> +communication requests from all users in the system and invoking the underlying
+> +platform interface drivers.
+> +
+> +xlink-platform:
+> +provides abstraction to each interface supported (PCIe, USB, IPC, etc).
+> +
+> +Typical xLink transaction (simplified):
+> +When a user wants to send data across an interface via xLink it firstly calls
+> +xlink connect which connects to the relevant interface (PCIe, USB, IPC, etc.)
+> +and then xlink open channel.
+> +
+> +Then it calls xlink write function, this takes the data, passes it to the
 
->> +	}
->> +
->> +	cond_local_irq_enable(regs);
->> +
->> +	if (!boot_cpu_has(X86_FEATURE_CET))
->> +		WARN_ONCE(1, "Control protection fault with CET support disabled\n");
->> +
->> +	tsk = current;
->> +	tsk->thread.error_code = error_code;
->> +	tsk->thread.trap_nr = X86_TRAP_CP;
->> +
->> +	if (show_unhandled_signals && unhandled_signal(tsk, SIGSEGV) &&
->> +	    printk_ratelimit()) {
-> 
-> WARNING: Prefer printk_ratelimited or pr_<level>_ratelimited to printk_ratelimit
-> #136: FILE: arch/x86/kernel/traps.c:645:
-> +	    printk_ratelimit()) {
-> 
-> Still not using checkpatch?
+                             function. This takes
 
-Most places in arch/x86 still use printk_ratelimit().  I should have 
-trusted checkpatch.  I will fix it.
+> +kernel which packages up the data and channel and then adds it to a transmit
+> +queue.
+> +
+> +A separate thread reads this transaction queue and pops off data if available
+> +and passes the data to the underlying interface (e.g. PCIe) write function.
+> +Using this thread provides serialization of transactions and decouples the user
+> +write from the platform write.
+> +
+> +On the other side of the interface, a thread is continually reading the
+> +interface (e.g. PCIe) via the platform interface read function and if it reads
+> +any data it adds it to channel packet container.
+> +
+> +The application at this side of the interface will have called xlink connect,
+> +opened the channel and called xlink read function to read data from the
+> +interface and if any exists for that channel , the data gets popped from the
 
->> +		unsigned int max_err;
->> +		unsigned long ssp;
->> +
->> +		max_err = ARRAY_SIZE(control_protection_err) - 1;
->> +		if ((error_code < 0) || (error_code > max_err))
->> +			error_code = 0;
->> +
->> +		rdmsrl(MSR_IA32_PL3_SSP, ssp);
->> +		pr_info("%s[%d] control protection ip:%lx sp:%lx ssp:%lx error:%lx(%s)",
-> 
-> If anything, all this stuff should be pr_emerg().
+                                        channel, the
 
-I will fix it.
+> +channel packet container and copied from kernel space to user space buffer
+> +provided by the call.
+> +
+> +xLink can handle API requests from multi-process and multi-threaded
+> +application/processes.
+> +
+> +xLink maintains 4096 channels per device connected (via xlink connect) and
+> +maintains a separate channel infrastructure for each device.
 
---
-Yu-cheng
+
+-- 
+~Randy
+"He closes his eyes and drops the goggles.  You can't get hurt
+by looking at a bitmap.  Or can you?"
+(Neal Stephenson: Snow Crash)
