@@ -2,231 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EE6302FB03A
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 06:25:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BA2192FB0CB
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 06:39:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387668AbhASEp1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 18 Jan 2021 23:45:27 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38944 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387645AbhASEmU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 18 Jan 2021 23:42:20 -0500
-Received: from mail-qk1-x735.google.com (mail-qk1-x735.google.com [IPv6:2607:f8b0:4864:20::735])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4AF5CC0617BC
-        for <linux-doc@vger.kernel.org>; Mon, 18 Jan 2021 20:39:42 -0800 (PST)
-Received: by mail-qk1-x735.google.com with SMTP id n142so20830314qkn.2
-        for <linux-doc@vger.kernel.org>; Mon, 18 Jan 2021 20:39:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=Mozcc4kuYbrNkd78OelIwDi34wEitfuXZj+0y++fO7I=;
-        b=nes348fen+42chjh/uf/Hck11INwC4iFF+XsgAEA6JHbTToYZq+aKmO9bDVdE+Lrmb
-         wcdXVwEqY0eTMoP4wHR43h/1DOgUOy/LtJm5xPD3IlHDtJprVyXbWMz6SOw9FuwIdU73
-         Ed+0/ijhnsSsDFNP5U1BUpB+suSRTWJyi5I6qI0duiYrXzY7K1aw59rgkLXhyAIGA37k
-         aIpWbLk+2Jxz51n6c4+fmw0vTapPA/zdo46f/yruQukd826LxWgTaw8LL1ONuOvTtN3I
-         6NF9IjGvqI0+5CTIrxPtxwbGMsFpLrduIO8IYFer47jbxzbGc48HQgDgBNyDhc5TZliz
-         3vEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Mozcc4kuYbrNkd78OelIwDi34wEitfuXZj+0y++fO7I=;
-        b=H14Lx8UE6AMGlpuhn3gIFouVhB3Uh043fMEit+UQfSgCNk/Ik2frNN696rcQ6TFjni
-         kKgAjgh/se+Um7L9m155NfPo/ZthWJgXIZtn0xphO5skIJVBVVm/Rn6UDrmeaWZzHygP
-         xXjl4eLGTjkV8XFQZmc79tW8P+0EKe4BUR7R/5spmPer3uGhUDbUjN4M+YZY3jofTSmA
-         OlcodO4nKZ2PjxL5YU54BOM0JAHylSQd2LjTvfb5+7AGy7Agxr/EAxvmVjS2dfDmFNH4
-         CkSxrgsZzJpIpYNbtAfzFDLum7BBnGDTDqiNTgYtGr9DTT36krdWNVY61UGj3p3ZjXih
-         PvQQ==
-X-Gm-Message-State: AOAM531oxdR5xmfKBUd8yDZ4ObJO1YUQ1iT2uzovQMLOvGtqpmTRkYC9
-        MOsvFL3VP9Da1XgZCzfjUVN1og==
-X-Google-Smtp-Source: ABdhPJz+FNci4xuBDvj9gcDJx+dJbGOnd11aZ4ctDWNnJNtrR0jWNj8Mqh5wiA0py6oc3gJCr/ZP1Q==
-X-Received: by 2002:a37:e211:: with SMTP id g17mr2709283qki.298.1611031181530;
-        Mon, 18 Jan 2021 20:39:41 -0800 (PST)
-Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
-        by smtp.gmail.com with ESMTPSA id z20sm11934536qkz.37.2021.01.18.20.39.40
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 18 Jan 2021 20:39:41 -0800 (PST)
-From:   Pavel Tatashin <pasha.tatashin@soleen.com>
-To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, akpm@linux-foundation.org, vbabka@suse.cz,
-        mhocko@suse.com, david@redhat.com, osalvador@suse.de,
-        dan.j.williams@intel.com, sashal@kernel.org,
-        tyhicks@linux.microsoft.com, iamjoonsoo.kim@lge.com,
-        mike.kravetz@oracle.com, rostedt@goodmis.org, mingo@redhat.com,
-        jgg@ziepe.ca, peterz@infradead.org, mgorman@suse.de,
-        willy@infradead.org, rientjes@google.com, jhubbard@nvidia.com,
-        linux-doc@vger.kernel.org, ira.weiny@intel.com,
-        linux-kselftest@vger.kernel.org
-Subject: [PATCH v5 12/14] mm/gup: longterm pin migration cleaup
-Date:   Mon, 18 Jan 2021 23:39:18 -0500
-Message-Id: <20210119043920.155044-13-pasha.tatashin@soleen.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210119043920.155044-1-pasha.tatashin@soleen.com>
-References: <20210119043920.155044-1-pasha.tatashin@soleen.com>
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S1728277AbhASFfg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 00:35:36 -0500
+Received: from wout1-smtp.messagingengine.com ([64.147.123.24]:33491 "EHLO
+        wout1-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1726991AbhASFRy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 00:17:54 -0500
+Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
+        by mailout.west.internal (Postfix) with ESMTP id 7482C1208;
+        Tue, 19 Jan 2021 00:16:34 -0500 (EST)
+Received: from imap5 ([10.202.2.55])
+  by compute2.internal (MEProxy); Tue, 19 Jan 2021 00:16:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mxxn.io; h=
+        mime-version:message-id:in-reply-to:references:date:from:to:cc
+        :subject:content-type:content-transfer-encoding; s=fm1; bh=YDAKd
+        F+AcV0IOYUFAl7UZNcNA1Tj/4JTP0p+Ir8b2cI=; b=KyenI5Z9EOV6MU2bX/LAY
+        72TWS8wH+xOQdwmizKtzF1TGQ3hDRuQVJqZ/H9KCv2XY1LD7GTKk02rpd0uPZZRC
+        sbLiHsmNm3rAZximIWq0aILsQMX3vpgopoh1+ewtJCrK8zO4wu9i63Kde5m6Hvj+
+        FmKBiQTc/7q7oCmPBve+HLxR2uDC+TYqjBRRFuZCyB+u3c685efzzUGxOphgI500
+        Hx8Jw3BcWtzQ2sd/jpjrUa77TKmAFQIO01qrTkZHURW1hvU3SihCSNrXBaLtXUzA
+        WfDnE5LUmdQPBt29tw/IJqLGVG2KVS/JNdGmkt/osBldvCjGKmyPHb0PB5wWAGkE
+        g==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+        messagingengine.com; h=cc:content-transfer-encoding:content-type
+        :date:from:in-reply-to:message-id:mime-version:references
+        :subject:to:x-me-proxy:x-me-proxy:x-me-sender:x-me-sender
+        :x-sasl-enc; s=fm1; bh=YDAKdF+AcV0IOYUFAl7UZNcNA1Tj/4JTP0p+Ir8b2
+        cI=; b=EjzOaPNGFlXNxVRpIHMZco6LNPt/pz+0eNp/ED+96YF9dpH/0/54jYWi8
+        uq9ISg6T4oZqsLc536ra6RMp6W2fZvnM4BMMvROmTBhkB05OBCE9M0mqx81gg34N
+        w5J0Ca97Zv8WU5KbANilo8jM0YO9KY/SykVrmUHgOCBNRVqp7Q/EaekJ2U+EvTjK
+        gvezJfwnutIM4hk3Xy3xYSSw/YBWAOyNurZLfqsoSUKzNv1eqhPgBCyzVotCQWnu
+        H6/jTFuUa2gsDmiFlMAhXv2bozWIVWaaL0rk2bsH2LJqrhpgnBXj56Mry9RgIePU
+        9oow767GPjs1BL9vxbEDpZBuEUnLg==
+X-ME-Sender: <xms:MWsGYCZv9KTBdSqsCylgsXj08EQBo46MMBFbCPcV4JSgusfmkEbgrw>
+    <xme:MWsGYFaT7YqgLLlywcVJjjcU00RbJVz5U_D5RfBkflgpWU8hrnnNg5RmcNxI3_mEc
+    bDNQuMpu08f6huKMA>
+X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrtdelgdejlecutefuodetggdotefrodftvf
+    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
+    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
+    fjughrpefofgggkfgjfhffhffvufgtgfesthhqredtreerjeenucfhrhhomhepuehlrgkk
+    pgfjrhgrshhtnhhikhcuoegslhgriiesmhiggihnrdhioheqnecuggftrfgrthhtvghrnh
+    epueetveelffduheefgeeftdfgvedttefhgfekhfekgfdtvdffvefhieetvdefudevnecu
+    vehluhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepsghlrgiise
+    hmgiignhdrihho
+X-ME-Proxy: <xmx:MWsGYM9XL_gzpMkTHKF9M34xNvq2iU8tnzNHz12NluNP9w7WpBikpQ>
+    <xmx:MWsGYErJw-6qEkXFYPQ_C_9aEFyDpwExyoQQiyRDNEJ5_wIKiN0PZw>
+    <xmx:MWsGYNr0sIhSi9gRqALqPaYjjnqfAtDt23Q1_RmOGGVk0Ys4PiwvmA>
+    <xmx:MmsGYOltsk2PDjvLhxCGR__AZr33vbQ9xtsFQFxpMK2zbl05QJ3njQ>
+Received: by mailuser.nyi.internal (Postfix, from userid 501)
+        id B6CF25C0099; Tue, 19 Jan 2021 00:16:33 -0500 (EST)
+X-Mailer: MessagingEngine.com Webmail Interface
+User-Agent: Cyrus-JMAP/3.5.0-alpha0-45-g4839256-fm-20210104.001-g48392560
+Mime-Version: 1.0
+Message-Id: <d5630b5e-52ec-4fc7-b8f3-ac219d0bfbbb@www.fastmail.com>
+In-Reply-To: <b08d641c-3fb5-4845-85f7-e1753149cd7d@www.fastmail.com>
+References: <b08d641c-3fb5-4845-85f7-e1753149cd7d@www.fastmail.com>
+Date:   Tue, 19 Jan 2021 14:15:58 +0900
+From:   =?UTF-8?Q?Bla=C5=BE_Hrastnik?= <blaz@mxxn.io>
+To:     "Jean Delvare" <jdelvare@suse.com>,
+        "Guenter Roeck" <linux@roeck-us.net>,
+        "Jonathan Corbet" <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
+        linux-doc@vger.kernel.org, lkml <linux-kernel@vger.kernel.org>
+Cc:     "David Bartley" <andareed@gmail.com>
+Subject: Re: hwmon: (nct6683) Support ASRock boards.
+Content-Type: text/plain;charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When pages are longterm pinned, we must migrated them out of movable zone.
-The function that migrates them has a hidden loop with goto. The loop is
-to retry on isolation failures, and after successful migration.
+(cc-ing David Bartley, who wrote the MSI patch)
 
-Make this code better by moving this loop to the caller.
+I had a follow-up question: I noticed that support for MSI was added in
+December, but there's this conditional that wasn't changed:
 
-Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
----
- mm/gup.c | 101 +++++++++++++++++++++++--------------------------------
- 1 file changed, 42 insertions(+), 59 deletions(-)
+	/* Only update pwm values for Mitac boards */
+	if (data->customer_id =3D=3D NCT6683_CUSTOMER_ID_MITAC)
+		return attr->mode | S_IWUSR;
 
-diff --git a/mm/gup.c b/mm/gup.c
-index dfe90b254bc6..3b46eb5fe3ba 100644
---- a/mm/gup.c
-+++ b/mm/gup.c
-@@ -1548,27 +1548,28 @@ struct page *get_dump_page(unsigned long addr)
- }
- #endif /* CONFIG_ELF_CORE */
- 
--static long check_and_migrate_movable_pages(struct mm_struct *mm,
--					    unsigned long start,
--					    unsigned long nr_pages,
-+/*
-+ * Check whether all pages are pinnable, if so return number of pages.  If some
-+ * pages are not pinnable, migrate them, and unpin all pages. Return zero if
-+ * pages were migrated, or if some pages were not successfully isolated.
-+ * Return negative error if migration fails.
-+ */
-+static long check_and_migrate_movable_pages(unsigned long nr_pages,
- 					    struct page **pages,
--					    struct vm_area_struct **vmas,
- 					    unsigned int gup_flags)
- {
--	unsigned long i, isolation_error_count;
--	bool drain_allow;
-+	unsigned long i;
-+	unsigned long isolation_error_count = 0;
-+	bool drain_allow = true;
- 	LIST_HEAD(movable_page_list);
--	long ret = nr_pages;
--	struct page *prev_head, *head;
-+	long ret = 0;
-+	struct page *prev_head = NULL;
-+	struct page *head;
- 	struct migration_target_control mtc = {
- 		.nid = NUMA_NO_NODE,
- 		.gfp_mask = GFP_USER | __GFP_NOWARN,
- 	};
- 
--check_again:
--	prev_head = NULL;
--	isolation_error_count = 0;
--	drain_allow = true;
- 	for (i = 0; i < nr_pages; i++) {
- 		head = compound_head(pages[i]);
- 		if (head == prev_head)
-@@ -1606,40 +1607,23 @@ static long check_and_migrate_movable_pages(struct mm_struct *mm,
- 	 * in the correct zone.
- 	 */
- 	if (list_empty(&movable_page_list) && !isolation_error_count)
--		return ret;
-+		return nr_pages;
- 
-+	if (gup_flags & FOLL_PIN) {
-+		unpin_user_pages(pages, nr_pages);
-+	} else {
-+		for (i = 0; i < nr_pages; i++)
-+			put_page(pages[i]);
-+	}
- 	if (!list_empty(&movable_page_list)) {
--		/*
--		 * drop the above get_user_pages reference.
--		 */
--		if (gup_flags & FOLL_PIN)
--			unpin_user_pages(pages, nr_pages);
--		else
--			for (i = 0; i < nr_pages; i++)
--				put_page(pages[i]);
--
- 		ret = migrate_pages(&movable_page_list, alloc_migration_target,
- 				    NULL, (unsigned long)&mtc, MIGRATE_SYNC,
- 				    MR_LONGTERM_PIN);
--		if (ret) {
--			if (!list_empty(&movable_page_list))
--				putback_movable_pages(&movable_page_list);
--			return ret > 0 ? -ENOMEM : ret;
--		}
--
--		/* We unpinned pages before migration, pin them again */
--		ret = __get_user_pages_locked(mm, start, nr_pages, pages, vmas,
--					      NULL, gup_flags);
--		if (ret <= 0)
--			return ret;
--		nr_pages = ret;
-+		if (ret && !list_empty(&movable_page_list))
-+			putback_movable_pages(&movable_page_list);
- 	}
- 
--	/*
--	 * check again because pages were unpinned, and we also might have
--	 * had isolation errors and need more pages to migrate.
--	 */
--	goto check_again;
-+	return ret > 0 ? -ENOMEM : ret;
- }
- 
- /*
-@@ -1653,30 +1637,29 @@ static long __gup_longterm_locked(struct mm_struct *mm,
- 				  struct vm_area_struct **vmas,
- 				  unsigned int gup_flags)
- {
--	unsigned long flags = 0;
-+	unsigned int flags;
- 	long rc;
- 
--	if (gup_flags & FOLL_LONGTERM) {
--		/*
--		 * We are long term pinning pages and their PA's should not
--		 * change until unpinned. Without FOLL_WRITE we might get zero
--		 * page which we do not want. Force creating normal
--		 * pages by adding FOLL_WRITE.
--		 */
--		gup_flags |= FOLL_WRITE;
--		flags = memalloc_pin_save();
--	}
-+	if (!(gup_flags & FOLL_LONGTERM))
-+		return __get_user_pages_locked(mm, start, nr_pages, pages, vmas,
-+					       NULL, gup_flags);
-+	/*
-+	 * We are long term pinning pages and their PA's should not change until
-+	 * unpinned. Without FOLL_WRITE we might get zero page which we do not
-+	 * want. Force creating normal pages by adding FOLL_WRITE.
-+	 */
-+	gup_flags |= FOLL_WRITE;
-+	flags = memalloc_pin_save();
- 
--	rc = __get_user_pages_locked(mm, start, nr_pages, pages, vmas, NULL,
--				     gup_flags);
-+	do {
-+		rc = __get_user_pages_locked(mm, start, nr_pages, pages, vmas,
-+					     NULL, gup_flags);
-+		if (rc <= 0)
-+			break;
-+		rc = check_and_migrate_movable_pages(rc, pages, gup_flags);
-+	} while (!rc);
-+	memalloc_pin_restore(flags);
- 
--	if (gup_flags & FOLL_LONGTERM) {
--		if (rc > 0)
--			rc = check_and_migrate_movable_pages(mm, start, rc,
--							     pages, vmas,
--							     gup_flags);
--		memalloc_pin_restore(flags);
--	}
- 	return rc;
- }
- 
--- 
-2.25.1
+Should this continue to only apply for Mitac boards, or should it be cha=
+nged to
+!=3D NCT6683_CUSTOMER_ID_INTEL?
+
+Bla=C5=BE
 
