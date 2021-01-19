@@ -2,340 +2,177 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 26EEF2FB8FA
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 15:34:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0B8BA2FB8FC
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 15:34:58 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2395168AbhASOKH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 09:10:07 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49094 "EHLO
+        id S2395174AbhASOKO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 09:10:14 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49754 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2392181AbhASMC1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 07:02:27 -0500
-Received: from mail-lj1-x232.google.com (mail-lj1-x232.google.com [IPv6:2a00:1450:4864:20::232])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D7967C061573;
-        Tue, 19 Jan 2021 04:01:33 -0800 (PST)
-Received: by mail-lj1-x232.google.com with SMTP id u11so21561340ljo.13;
-        Tue, 19 Jan 2021 04:01:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to:user-agent;
-        bh=PHK3uW1ehoTt4Ezk23WVaqtB8sRn9EScRJCT+I2CDCg=;
-        b=j5KqUqdaxR5ds1qdQVSY21HmVLFqNWRHpQ93h1dIOSZlq95DUifWcfuq9qqM1wrW51
-         0dswE0xJIfEuYVWY3S5jmuboGxjqgmnnSU3NhCroWi7BL+5g38y2VQy1ASCuR26Xh9Zt
-         44q0m1mjvgmJ/DnPlZYZLvuhRXIT3How3HlPzTsaRWQJUfduocSdifIDr1GPj5DhjTjo
-         2GfLcCYJQPu9mejiozKRrjSV20IBzT4WAsiwiWOkcGxYa2e2Tncmv8lGKyB2VZICeqKa
-         508KCFpC715BvpCTuWbkBdqVCdZQjjxXDSZvf1K1S6dmG3AZkK4CF/r4UcBmZbcz413x
-         otAw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to:user-agent;
-        bh=PHK3uW1ehoTt4Ezk23WVaqtB8sRn9EScRJCT+I2CDCg=;
-        b=X5TTDQ9PyGYrJ+7BkBOb2TfSjgm8X9QIocvZbEF68gLAmpYlaQU8ko725jVFe6I5t4
-         dObHUXzt1PChtR12PHW9I4RUM55UvgE5rXQVEMH/WQOAHsz2JbWPo+gO+V1sSr1E+g0m
-         s6xiZy/4VyszfnhEvShn1YR1cAaEcbHtfVB5xC3MSaTBrtU/bjlMENge0h04k/ZLGZXQ
-         exacdMNovbJ1P7+u7vAw1GIPLgb/G/XbvxlEJlHMMM9GYjuOcx4xF1lJck3hhYUxMspX
-         pstc+T8Ax92IGzhsb5/XxKWnF+O2J8nV//HmJyvIypbRLM3t7Xd+S+2Dr8ayvczCNFOo
-         S4FA==
-X-Gm-Message-State: AOAM533HP0zvo3DF38ywd8zq7Tr7QNcVk+h69V8NwOQvIIqDs8vbrxWE
-        hF2BWS1LbEqZmndXpaBkn+I=
-X-Google-Smtp-Source: ABdhPJx2J6wH0qJd7AmGy+0XlynS4++mSwLDH6+MryViSsRT/ZFjo+B8XgtScYFBqiKY+wAf5Pd2Qw==
-X-Received: by 2002:a2e:720f:: with SMTP id n15mr1793803ljc.405.1611057691988;
-        Tue, 19 Jan 2021 04:01:31 -0800 (PST)
-Received: from home.paul.comp (paulfertser.info. [2001:470:26:54b:226:9eff:fe70:80c2])
-        by smtp.gmail.com with ESMTPSA id k6sm168481ljj.130.2021.01.19.04.01.30
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Jan 2021 04:01:31 -0800 (PST)
-Received: from home.paul.comp (home.paul.comp [IPv6:0:0:0:0:0:0:0:1])
-        by home.paul.comp (8.15.2/8.15.2/Debian-14~deb10u1) with ESMTP id 10JC1RNx015506;
-        Tue, 19 Jan 2021 15:01:28 +0300
-Received: (from paul@localhost)
-        by home.paul.comp (8.15.2/8.15.2/Submit) id 10JC1QUN015505;
-        Tue, 19 Jan 2021 15:01:26 +0300
-Date:   Tue, 19 Jan 2021 15:01:26 +0300
-From:   Paul Fertser <fercerpav@gmail.com>
-To:     Ernesto Corona <ernesto.corona@intel.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-aspeed@lists.ozlabs.org, Arnd Bergmann <arnd@arndb.de>,
+        with ESMTP id S2392367AbhASMFQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 07:05:16 -0500
+Received: from mail.skyhub.de (mail.skyhub.de [IPv6:2a01:4f8:190:11c2::b:1457])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CAFC9C061574;
+        Tue, 19 Jan 2021 04:04:35 -0800 (PST)
+Received: from zn.tnic (p200300ec2f0bca00c2aa0e949335efb7.dip0.t-ipconnect.de [IPv6:2003:ec:2f0b:ca00:c2aa:e94:9335:efb7])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 7A35E1EC05E9;
+        Tue, 19 Jan 2021 13:04:31 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
+        t=1611057871;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
+        bh=/Pv8SRw220kJLxdDOBMETHVBBP03v/5o64vtmGCNBWM=;
+        b=aFehaN5VqYjE809Cxac/bMeLnYEeUHwYj7aStR7i3DSRTsYV1n9bR4MV51Fyepq+0KyUNv
+        Hgv6PDg2vj96bWjRz7a/bliHjv/5tAC5qZVCOD0B9zLErTlYWbS5i0lRdCXQZYuo82/mtf
+        TW846Qycog45LbPUY/XS3LDMejbLwp0=
+Date:   Tue, 19 Jan 2021 13:04:25 +0100
+From:   Borislav Petkov <bp@alien8.de>
+To:     Yu-cheng Yu <yu-cheng.yu@intel.com>
+Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Jeffrey Hugo <jhugo@codeaurora.org>,
-        Steven Filary <steven.a.filary@intel.com>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Vadim Pasternak <vadimp@mellanox.com>,
-        Amithash Prasad <amithash@fb.com>,
-        Jiri Pirko <jiri@mellanox.com>, Rgrs <rgrs@protonmail.com>,
-        Manivannan Sadhasivam <manivannan.sadhasivam@linaro.org>,
-        Mauro Carvalho Chehab <mchehab+samsung@kernel.org>,
-        Patrick Williams <patrickw3@fb.com>,
-        Oleksandr Shamray <oleksandrs@mellanox.com>
-Subject: Re: [PATCH v29 4/6] Documentation: jtag: Add ABI documentation
-Message-ID: <20210119120125.GD2971@home.paul.comp>
-References: <20200413222920.4722-1-ernesto.corona@intel.com>
- <20200413222920.4722-5-ernesto.corona@intel.com>
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>,
+        "Michael Kerrisk (man-pages)" <mtk.manpages@gmail.com>
+Subject: Re: [PATCH v17 06/26] x86/cet: Add control-protection fault handler
+Message-ID: <20210119120425.GI27433@zn.tnic>
+References: <20201229213053.16395-1-yu-cheng.yu@intel.com>
+ <20201229213053.16395-7-yu-cheng.yu@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <20200413222920.4722-5-ernesto.corona@intel.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+In-Reply-To: <20201229213053.16395-7-yu-cheng.yu@intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello,
-
-This review of the proposed API was written after independently
-developing and testing on hardware (only SVF playback to configure a
-CPLD) support for OpenOCD[0]. I also include points that come to mind
-from my prior experience using wide range of JTAG adapters with
-different targets.
-
-On Mon, Apr 13, 2020 at 03:29:18PM -0700, Ernesto Corona wrote:
-> --- /dev/null
-> +++ b/Documentation/jtag/jtag-summary.rst
-> +A JTAG interface is a special interface added to a chip.
-> +Depending on the version of JTAG, two, four, or five pins are added.
+On Tue, Dec 29, 2020 at 01:30:33PM -0800, Yu-cheng Yu wrote:
+> @@ -606,6 +606,65 @@ DEFINE_IDTENTRY_ERRORCODE(exc_general_protection)
+>  	cond_local_irq_disable(regs);
+>  }
+>  
+> +#ifdef CONFIG_X86_CET_USER
+> +static const char * const control_protection_err[] = {
+> +	"unknown",
+> +	"near-ret",
+> +	"far-ret/iret",
+> +	"endbranch",
+> +	"rstorssp",
+> +	"setssbsy",
+> +};
 > +
-> +The connector pins are:
-> + * TDI (Test Data In)
-> + * TDO (Test Data Out)
-> + * TCK (Test Clock)
-> + * TMS (Test Mode Select)
-> + * TRST (Test Reset) optional
+> +/*
+> + * When a control protection exception occurs, send a signal to the responsible
+> + * application.  Currently, control protection is only enabled for the user
+> + * mode.  This exception should not come from the kernel mode.
+> + */
 
-Generic JTAG API should also include SRST (system reset), it's
-essential when JTAG is used as a transport for different On-Chip-Debug
-protocols.
+There's no "the user mode" or "the kernel mode" - just "user mode" or
+"kernel mode".
 
-> +Call flow example:
-> +::
+> +DEFINE_IDTENTRY_ERRORCODE(exc_control_protection)
+> +{
+> +	struct task_struct *tsk;
 > +
-> +	User: open  -> /dev/jatgX -> JTAG core driver -> JTAG hardware specific driver
-> +	User: ioctl -> /dev/jtagX -> JTAG core driver -> JTAG hardware specific driver
-> +	User: close -> /dev/jatgX -> JTAG core driver -> JTAG hardware specific driver
+> +	if (!user_mode(regs)) {
+> +		if (notify_die(DIE_TRAP, "control protection fault", regs,
+> +			       error_code, X86_TRAP_CP, SIGSEGV) == NOTIFY_STOP)
+> +			return;
+> +		die("Upexpected/unsupported kernel control protection fault", regs, error_code);
 
-s/jatg/jtag/
+Isn't the machine supposed to panic() here and do no further progress?
 
-Not sure about the semantics here, as open needs a filesystem path
-while the other two operations take a file descriptor.
-
-> --- /dev/null
-> +++ b/Documentation/jtag/jtagdev.rst
-> @@ -0,0 +1,194 @@
-> +==================
-> +JTAG userspace API
-> +==================
-> +JTAG master devices can be accessed through a character misc-device.
+> +	}
 > +
-> +Each JTAG master interface can be accessed by using /dev/jtagN.
+> +	cond_local_irq_enable(regs);
 > +
-> +JTAG system calls set:
-> + * SIR (Scan Instruction Register, IEEE 1149.1 Instruction Register scan);
-> + * SDR (Scan Data Register, IEEE 1149.1 Data Register scan);
-
-These two are handled with JTAG_IOCXFER ioctl.
-
-> + * RUNTEST (Forces the IEEE 1149.1 bus to a run state for a specified number of clocks.
-
-This should be handled by JTAG_SIOCSTATE ioctl, apparently.
-
-ioctl itself is a system call here, the items mentioned are just
-different arguments to it, AFAICT.
-
-> +JTAG_SIOCFREQ
-> +~~~~~~~~~~~~~
-> +Set JTAG clock speed:
-> +::
+> +	if (!boot_cpu_has(X86_FEATURE_CET))
+> +		WARN_ONCE(1, "Control protection fault with CET support disabled\n");
 > +
-> +	unsigned int jtag_fd;
-> +	ioctl(jtag_fd, JTAG_SIOCFREQ, &frq);
-
-The example defining jtag_fd looks confusing. Not only it is usually a
-bad idea to use unsigned int for a file descriptor (as open() returns
-a signed one that should be checked for errors), but in this example
-it's not assigned anything. And "frq" is not specified at all, so it's
-unclear what type it really should be, and what measurement units are
-supposed to be used. And I'm still not sure it needs to be a
-pointer. It's also unclear how a userspace should tell if the
-frequency was successfully set or if it was probably out of range for
-the specific adapter (the ioctl should return a documented error in
-this case).
-
-> +JTAG_SIOCSTATE
-> +~~~~~~~~~~~~~~
-> +Force JTAG state machine to go into a TAPC state
-> +::
+> +	tsk = current;
+> +	tsk->thread.error_code = error_code;
+> +	tsk->thread.trap_nr = X86_TRAP_CP;
 > +
-> +	struct jtag_end_tap_state {
-> +		__u8	reset;
-> +		__u8	endstate;
-> +		__u8	tck;
+> +	if (show_unhandled_signals && unhandled_signal(tsk, SIGSEGV) &&
+> +	    printk_ratelimit()) {
 
-Limiting tck to 255 maximum is unreasonable.
+WARNING: Prefer printk_ratelimited or pr_<level>_ratelimited to printk_ratelimit
+#136: FILE: arch/x86/kernel/traps.c:645:
++	    printk_ratelimit()) {
 
-> +	};
+Still not using checkpatch?
+
+> +		unsigned int max_err;
+> +		unsigned long ssp;
 > +
-> +reset: one of below options
-> +::
+> +		max_err = ARRAY_SIZE(control_protection_err) - 1;
+> +		if ((error_code < 0) || (error_code > max_err))
+> +			error_code = 0;
 > +
-> +	JTAG_NO_RESET - go through selected endstate from current state
-> +	JTAG_FORCE_RESET - go through TEST_LOGIC/RESET state before selected endstate
+> +		rdmsrl(MSR_IA32_PL3_SSP, ssp);
+> +		pr_info("%s[%d] control protection ip:%lx sp:%lx ssp:%lx error:%lx(%s)",
+
+If anything, all this stuff should be pr_emerg().
+
+> +			tsk->comm, task_pid_nr(tsk),
+> +			regs->ip, regs->sp, ssp, error_code,
+> +			control_protection_err[error_code]);
+> +		print_vma_addr(KERN_CONT " in ", regs->ip);
+> +		pr_cont("\n");
+> +	}
 > +
-> +endstate: any state listed in jtag_endstate enum
-> +::
+> +	force_sig_fault(SIGSEGV, SEGV_CPERR,
+> +			(void __user *)uprobe_get_trap_addr(regs));
+> +	cond_local_irq_disable(regs);
+> +}
+> +#endif
 > +
-> +	enum jtag_endstate {
-> +		JTAG_STATE_TLRESET,
-> +		JTAG_STATE_IDLE,
-> +		JTAG_STATE_SELECTDR,
-> +		JTAG_STATE_CAPTUREDR,
-> +		JTAG_STATE_SHIFTDR,
-> +		JTAG_STATE_EXIT1DR,
-> +		JTAG_STATE_PAUSEDR,
-> +		JTAG_STATE_EXIT2DR,
-> +		JTAG_STATE_UPDATEDR,
-> +		JTAG_STATE_SELECTIR,
-> +		JTAG_STATE_CAPTUREIR,
-> +		JTAG_STATE_SHIFTIR,
-> +		JTAG_STATE_EXIT1IR,
-> +		JTAG_STATE_PAUSEIR,
-> +		JTAG_STATE_EXIT2IR,
-> +		JTAG_STATE_UPDATEIR
-> +	};
+>  static bool do_int3(struct pt_regs *regs)
+>  {
+>  	int res;
+> diff --git a/include/uapi/asm-generic/siginfo.h b/include/uapi/asm-generic/siginfo.h
+> index d2597000407a..1c2ea91284a0 100644
+> --- a/include/uapi/asm-generic/siginfo.h
+> +++ b/include/uapi/asm-generic/siginfo.h
+> @@ -231,7 +231,8 @@ typedef struct siginfo {
+>  #define SEGV_ADIPERR	7	/* Precise MCD exception */
+>  #define SEGV_MTEAERR	8	/* Asynchronous ARM MTE error */
+>  #define SEGV_MTESERR	9	/* Synchronous ARM MTE exception */
+> -#define NSIGSEGV	9
+> +#define SEGV_CPERR	10	/* Control protection fault */
+> +#define NSIGSEGV	10
 
-Even though there's no standard mapping between JTAG states and
-numbers, I would suggest to use the one documented by ARM[1] for their
-TAPSM register as was found in ARM7, ARM9 and other cores. Chances are
-that a userspace utility might have easier time converting between
-different encodings, at least it's the case for OpenOCD.
+This looks like it needs documentation in this manpage:
 
-> +tck: clock counter
+https://www.man7.org/linux/man-pages/man2/sigaction.2.html
 
-This is not nearly enough documentation for the parameter, IMHO. It
-doesn't work anyway in the current version so I had to add some
-bitbanging for CPLD configuration to work...
-
-> +Example:
-> +::
-> +
-> +	struct jtag_end_tap_state end_state;
-> +
-> +	end_state.endstate = JTAG_STATE_IDLE;
-> +	end_state.reset = 0;
-> +	end_state.tck = data_p->tck;
-> +	usleep(25 * 1000);
-> +	ioctl(jtag_fd, JTAG_SIOCSTATE, &end_state);
-
-usleep doesn't seem to be doing anything useful at all here.
-
-> +JTAG_GIOCSTATUS
-> +~~~~~~~~~~~~~~~
-> +Get JTAG TAPC current machine state
-> +::
-> +
-> +	unsigned int jtag_fd;
-> +	jtag_endstate endstate;
-> +	ioctl(jtag_fd, JTAG_GIOCSTATUS, &endstate);
-
-This should probably also include information about TRST and SRST states.
-
-> +JTAG_IOCXFER
-> +~~~~~~~~~~~~
-> +Send SDR/SIR transaction
-> +::
-> +
-> +	struct jtag_xfer {
-> +		__u8	type;
-> +		__u8	direction;
-> +		__u8	endstate;
-> +		__u8	padding;
-
-padding is both undocumented and unused.
-
-> +		__u32	length;
-> +		__u64	tdio;
-> +	};
-> +
-> +type: transfer type - JTAG_SIR_XFER/JTAG_SDR_XFER
-> +
-> +direction: xfer direction - JTAG_READ_XFER/JTAG_WRITE_XFER/JTAG_READ_WRITE_XFER
-> +
-> +length: xfer data length in bits
-
-I'm not sure if calling it just "length" is clear enough. Probably a
-better name would be "bitcount"?
-
-> +tdio : xfer data array
-
-It's not exactly obvious that this is a pointer to user buffer
-containing data to be shifted out. Bit and byte order are not
-specified.
-
-I also do not like the idea to reuse input buffer for output. It might
-be const in the user app, it might be used after the JTAG operation
-for logging or verification purposes etc. Are there other popular APIs
-that do not split input and output into their own buffers?
-
-> +JTAG_SIOCMODE
-> +~~~~~~~~~~~~~
-> +If hardware driver can support different running modes you can change it.
-> +
-> +Example:
-> +::
-> +
-> +	struct jtag_mode mode;
-> +	mode.feature = JTAG_XFER_MODE;
-> +	mode.mode = JTAG_XFER_HW_MODE;
-> +	ioctl(jtag_fd, JTAG_SIOCMODE, &mode);
-
-This is absolutely not generic enough, and struct jtag_mode is just
-odd. And not documented here, the example is not extensive.
-
-Please consider providing instead a generic function to pass arbitrary
-data to the adapter driver _and_ to get some information back from it.
-
-> +JTAG_IOCBITBANG
-> +~~~~~~~~~~~~~~~
-> +JTAG Bitbang low level operation.
-> +
-> +Example:
-> +::
-> +
-> +	struct tck_bitbang bitbang
-
-missing semicolon, missing declaration/documentation of the struct
-fields.
-
-> +	bitbang.tms = 1;
-> +	bitbang.tdi = 0;
-> +	ioctl(jtag_fd, JTAG_IOCBITBANG, &bitbang);
-> +	tdo = bitbang.tdo;
-
-This is ok, used it for implementing RUNTEST/STABLECLOCKS.
-
-
-Now follows the list of what I consider to be missing in this API if
-it's supposed to be generic enough to cover all regular JTAG devices:
-
-1. Multiple devices might be used at the same time, including
-hotplugging. This requires methods to somehow enumerate them, read
-serial numbers, probably allow matching on VID:PID for USB adapters;
-some people also want to be able to match based on "location"
-(e.g. USB bus topology, full path leading to the device).
-
-2. Bitbang-style control is often needed for SRST and TRST lines.
-
-3. Many adapters have LED(s) that host software is supposed to
-control.
-
-4. It'd be useful to have a way to emit a TMS sequence, e.g. modern
-ARM devices support both SWD and JTAG transports and a special
-sequence is needed to switch between them.
-
-[0] http://openocd.zylin.com/#/c/5975/
-[1] https://documentation-service.arm.com/static/5e8e27fcfd977155116a637f
++ Michael.
 
 -- 
-Be free, use free (http://www.gnu.org/philosophy/free-sw.html) software!
-mailto:fercerpav@gmail.com
+Regards/Gruss,
+    Boris.
+
+https://people.kernel.org/tglx/notes-about-netiquette
