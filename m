@@ -2,117 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E3B642FC1C5
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 22:03:41 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4FC0D2FC26F
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 22:37:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729933AbhASVDD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 16:03:03 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50168 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2404191AbhASUta (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 15:49:30 -0500
-Received: from mail-ed1-x532.google.com (mail-ed1-x532.google.com [IPv6:2a00:1450:4864:20::532])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E82E5C061757
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 12:48:48 -0800 (PST)
-Received: by mail-ed1-x532.google.com with SMTP id bx12so9178042edb.8
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 12:48:48 -0800 (PST)
+        id S1727959AbhASVf3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 16:35:29 -0500
+Received: from smtp-fw-9101.amazon.com ([207.171.184.25]:11020 "EHLO
+        smtp-fw-9101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727191AbhASSmd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 13:42:33 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=pkvwNS+El3HA8WD1wRriEqmYtWWjP+w29biUdXgRxJU=;
-        b=dSjBpa02JgglRGcx2/84mL0OXTCylHCQoDPgRwYBgrdb1HeoN9e0E5ozaqSaHQmRJQ
-         JEDFtdNYkjnRNQeiNWezHyCjWUGH/2rg0nNXA2QnrjGwXXd025IdsoTLQdA1uxQjS26+
-         cPfLfAiBXrj9cUDr24KbI0YvsYJLrKTOlLQ32ydg1HKyynrHQjQKJJ0mAgh3hNwrLJOz
-         zOStGtE9m+tRTCJAg3iZb5yyW4gCYRrXrq1RR6n6A1p7VVWXhf5XUvE71xzvcQbzG3+/
-         E8PEOsIclx3toavM02OCpAK44+Zx/5/MsgZKKBWQUOVOYE8kOLdYwf9kSTkRErEiWDiw
-         FCKQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=pkvwNS+El3HA8WD1wRriEqmYtWWjP+w29biUdXgRxJU=;
-        b=cdoyvMp19dLS+JEuOSCRjr6Dz7lN0s9WYHzetVNv/3ZlFqcav5w6DpGEuUZHsqbWau
-         DAjL5/GL0uTtpx7fec1roKOmInCQuV2ABCTC4HvYq5jcDozwB3SwhmoGEFxdRrzDxauP
-         LfOgeaFeUx3hunW3598/glg2RGo4nakuq9WMeJmeeKC2hlgAXbeUMrtJ1p61qZKh2E5F
-         zupoPM+YJWX1yKFi+6hjdej+eIUGuSuos0hRef8UCJcm28dgzWT6SgdRODpewZkI7YD/
-         /pBLyQy0l+0RkzslUvyLrNXWsPsg7XbM+IeO8n6wxTRwV5C1uZCh81gvEodM7hH03aXP
-         pq9Q==
-X-Gm-Message-State: AOAM532lIrHHUi1bklEEa8TuyUwAX7u7tz4I+Px1EajL2vfPhGE9xdMw
-        EAdUAGLnXCYaLgE/Fgg1Vd3nUD/iv1+kYKQCKdk/5w==
-X-Google-Smtp-Source: ABdhPJwV9Ku3qyoq2kBTxOz6KgfvN81wwX3pQbkfxuQ92kJTO4QXY1Tul7nDV11Bbxd6oY64UzZ7b7Hp4cw5mc6tznY=
-X-Received: by 2002:a05:6402:3508:: with SMTP id b8mr4912140edd.341.1611089327572;
- Tue, 19 Jan 2021 12:48:47 -0800 (PST)
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1611081753; x=1642617753;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   mime-version;
+  bh=ZbYUR5dcTR5Pg5QurOsZdrIiwJ14CgBmEcmfusCljVc=;
+  b=N5bvqEDLDrhA72rfMROcY6fblf1E61h/Ufk+fDitxQEnoydm1VSOIJlV
+   z1rX4nlwIeqhw6sPkig4NBT03TW6T4B8BDzx8/pI12z5Ru57HO+UBBq7/
+   Yu9SCW93jJH4fd8jp4MYtuDGtCQbQadIvByc6zRKAZ3wq1HybpkUP5lER
+   U=;
+X-IronPort-AV: E=Sophos;i="5.79,359,1602547200"; 
+   d="scan'208";a="104947850"
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-2b-a7fdc47a.us-west-2.amazon.com) ([10.47.23.38])
+  by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP; 19 Jan 2021 18:41:40 +0000
+Received: from EX13D31EUA004.ant.amazon.com (pdx1-ws-svc-p6-lb9-vlan2.pdx.amazon.com [10.236.137.194])
+        by email-inbound-relay-2b-a7fdc47a.us-west-2.amazon.com (Postfix) with ESMTPS id ECC5CC0616;
+        Tue, 19 Jan 2021 18:41:37 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.162.125) by
+ EX13D31EUA004.ant.amazon.com (10.43.165.161) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Tue, 19 Jan 2021 18:41:21 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     SeongJae Park <sjpark@amazon.com>
+CC:     <akpm@linux-foundation.org>, <Jonathan.Cameron@Huawei.com>,
+        <aarcange@redhat.com>, <acme@kernel.org>,
+        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
+        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
+        <brendanhiggins@google.com>, <cai@lca.pw>,
+        <colin.king@canonical.com>, <corbet@lwn.net>, <david@redhat.com>,
+        <dwmw@amazon.com>, <elver@google.com>, <fan.du@intel.com>,
+        <foersleo@amazon.de>, <gthelen@google.com>, <irogers@google.com>,
+        <jolsa@redhat.com>, <kirill@shutemov.name>, <mark.rutland@arm.com>,
+        <mgorman@suse.de>, <minchan@kernel.org>, <mingo@redhat.com>,
+        <namhyung@kernel.org>, <peterz@infradead.org>,
+        <rdunlap@infradead.org>, <riel@surriel.com>, <rientjes@google.com>,
+        <rostedt@goodmis.org>, <rppt@kernel.org>, <sblbir@amazon.com>,
+        <shakeelb@google.com>, <shuah@kernel.org>, <sj38.park@gmail.com>,
+        <snu@amazon.de>, <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
+        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
+        <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
+        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: Re: [RFC v10 01/13] damon/dbgfs: Allow users to set initial monitoring target regions
+Date:   Tue, 19 Jan 2021 19:41:07 +0100
+Message-ID: <20210119184107.1865-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20201216094221.11898-2-sjpark@amazon.com>
 MIME-Version: 1.0
-References: <20210119043920.155044-1-pasha.tatashin@soleen.com>
- <20210119043920.155044-9-pasha.tatashin@soleen.com> <20210119183013.GB4605@ziepe.ca>
- <CA+CK2bBKbht34Hkg9YvhwYAiAjd3NMd_+Eir9wfx+07V-Y2TTA@mail.gmail.com>
- <20210119184751.GD4605@ziepe.ca> <CA+CK2bDGDR9B=n5d4Dz6my6kKyFF=6y79HJt-k-SCpLhF1fUQQ@mail.gmail.com>
-In-Reply-To: <CA+CK2bDGDR9B=n5d4Dz6my6kKyFF=6y79HJt-k-SCpLhF1fUQQ@mail.gmail.com>
-From:   Pavel Tatashin <pasha.tatashin@soleen.com>
-Date:   Tue, 19 Jan 2021 15:48:11 -0500
-Message-ID: <CA+CK2bDo-9dP4JZeVscE65dhkJ9jPKk+0_6v0vQXTCM3m0J1DQ@mail.gmail.com>
-Subject: Re: [PATCH v5 08/14] mm/gup: do not allow zero page for pinned pages
-To:     Jason Gunthorpe <jgg@ziepe.ca>
-Cc:     LKML <linux-kernel@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Michal Hocko <mhocko@suse.com>,
-        David Hildenbrand <david@redhat.com>,
-        Oscar Salvador <osalvador@suse.de>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Sasha Levin <sashal@kernel.org>,
-        Tyler Hicks <tyhicks@linux.microsoft.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>, mike.kravetz@oracle.com,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Mel Gorman <mgorman@suse.de>,
-        Matthew Wilcox <willy@infradead.org>,
-        David Rientjes <rientjes@google.com>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Ira Weiny <ira.weiny@intel.com>,
-        linux-kselftest@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.43.162.125]
+X-ClientProxiedBy: EX13D22UWC003.ant.amazon.com (10.43.162.250) To
+ EX13D31EUA004.ant.amazon.com (10.43.165.161)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> I was thinking about a use case where userland would pin an address
-> without FOLL_WRITE, because the PTE for that address is not going to
-> be writable, but some device via DMA will write to it. Now, if we got
-> a zero page we have a problem... If this usecase is not valid then the
-> fix for movable zero page is make the zero page always come from a
-> non-movable zone so we do not need to isolate it during migration, and
-> so the memory can be offlined later.
+On Wed, 16 Dec 2020 10:42:09 +0100 SeongJae Park <sjpark@amazon.com> wrote:
 
-I looked into making zero_page non-movable, and I am confused here.
+> From: SeongJae Park <sjpark@amazon.de>
+> 
+> Some 'damon-dbgfs' users would want to monitor only a part of the entire
+> virtual memory address space.  The framework users in the kernel space
+> could use '->init_target_regions' callback or even set the regions
+> inside the context struct as they want, but 'damon-dbgfs' users cannot.
+> 
+> For the reason, this commit introduces a new debugfs file,
+> 'init_region'.  'damon-dbgfs' users can specify which initial monitoring
+> target address regions they want by writing special input to the file.
+> The input should describe each region in each line in below form:
+> 
+>     <pid> <start address> <end address>
+> 
+> Note that the regions will be updated to cover entire memory mapped
+> regions after 'regions update interval'.  If you want the regions to not
+> be updated after the initial setting, you could set the interval as a
+> very long time, say, a few decades.
+> 
+> Signed-off-by: SeongJae Park <sjpark@amazon.de>
+> ---
+>  mm/damon/dbgfs.c | 154 ++++++++++++++++++++++++++++++++++++++++++++++-
+>  1 file changed, 151 insertions(+), 3 deletions(-)
+> 
+> diff --git a/mm/damon/dbgfs.c b/mm/damon/dbgfs.c
+> index 06295c986dc3..2f1ec6ebd9f0 100644
+> --- a/mm/damon/dbgfs.c
+> +++ b/mm/damon/dbgfs.c
+[...]
+> +
+> +static ssize_t dbgfs_init_regions_read(struct file *file, char __user *buf,
+> +		size_t count, loff_t *ppos)
+> +{
+> +	struct damon_ctx *ctx = file->private_data;
+> +	char *kbuf;
+> +	ssize_t len;
+> +
+> +	kbuf = kmalloc(count, GFP_KERNEL);
+> +	if (!kbuf)
+> +		return -ENOMEM;
+> +
+> +	mutex_lock(&ctx->kdamond_lock);
+> +	if (ctx->kdamond) {
+> +		mutex_unlock(&ctx->kdamond_lock);
+> +		return -EBUSY;
 
-huge zero page is already not movable:
-get_huge_zero_page()
-   zero_page = alloc_pages((GFP_TRANSHUGE | __GFP_ZERO) & ~__GFP_MOVABLE, ...
+Coverity Static Analysis Security Testing (SAST) by Synopsys, Inc. found that
+above return is missing deallocation of 'kbuf'.  I will fix this in the next
+version.
 
-Base zero page can be in a movable zone, which is a bug: if there are
-references to zero page, that page cannot be migrated, and we won't be
-hot-remove memory area where that page is located. On x86, zero page
-should always come from the bottom 4G of physical memory / DMA32 ZONE.
+> +	}
+> +
+> +	len = sprint_init_regions(ctx, kbuf, count);
+> +	mutex_unlock(&ctx->kdamond_lock);
+> +	if (len < 0)
+> +		goto out;
+> +	len = simple_read_from_buffer(buf, count, ppos, kbuf, len);
+> +
+> +out:
+> +	kfree(kbuf);
+> +	return len;
+> +}
 
-However, I see that sometimes it is not (I reproduce in QEMU emulator):
-QEMU instance with 16G of memory and kernelcore=5G
 
-Boot#1:
-zero_pfn 48a8d
-zero_pfn zone: ZONE_DMA32
-
-Boot#2:
-zero_pfn 20168d
-zero_pfn zone: ZONE_MOVABLE (???)
-
-The problem is that the x86 zero page comes from the .bss segment:
-https://soleen.com/source/xref/linux/arch/x86/kernel/head_64.S?r=31d85460#583
-
-Which, I thought would always be set within the first 4G of physical
-memory. What is going on here?
-
-Pasha
+Thanks,
+SeongJae Park
+[...]
