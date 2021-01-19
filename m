@@ -2,151 +2,207 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 37B392FB8F8
+	by mail.lfdr.de (Postfix) with ESMTP id ADFD32FB8F9
 	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 15:34:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2395139AbhASOJS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 09:09:18 -0500
-Received: from mail.kernel.org ([198.145.29.99]:43388 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2390707AbhASKbZ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 19 Jan 2021 05:31:25 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 0CB002312D;
-        Tue, 19 Jan 2021 10:30:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1611052242;
-        bh=h2qMavtnvnddHYsIZ0jOJ4lwQL4t55sNi0FQrUQUgKM=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=M3zfuZHNh6pYqWuJkZ1ld1MPIlEvZwcI5SuVKpHdROd+NhQOzYSDSbqOGO0Nbwy5+
-         AG1tjF3fPZCxUBFOIt9pIgy4ccVEPcyPPD0zhFJOm06CK9DLC8cgq6JEliFLC0BK92
-         7fvmRcXw8pBgofzgtpXQQytFdN2ty5IhDMz3RDxY+4KLcAGfrRZ0I9IVPY1U6oR/zE
-         El+GyUAXHGtfDUQFme2Cb8RrRQmRGZuy20RvkU0NXQB2FkJEJVEEPeIEJtHu5eKxVO
-         nzOL/Uty/HmIk9TEX4d92H3zqqJkjeM1yxOEXzLG6u2CkXlY0YF1ln0jsLFgHncf5h
-         SVHKA0KmQOnJw==
-Date:   Tue, 19 Jan 2021 12:30:34 +0200
-From:   Jarkko Sakkinen <jarkko@kernel.org>
-To:     Sumit Garg <sumit.garg@linaro.org>
-Cc:     Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
-        Mimi Zohar <zohar@linux.ibm.com>,
-        James Bottomley <jejb@linux.ibm.com>,
-        David Howells <dhowells@redhat.com>,
-        Jens Wiklander <jens.wiklander@linaro.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        Janne Karhunen <janne.karhunen@gmail.com>,
-        Daniel Thompson <daniel.thompson@linaro.org>,
-        Markus Wamser <Markus.Wamser@mixed-mode.de>,
-        Luke Hinds <lhinds@redhat.com>,
-        "open list:ASYMMETRIC KEYS" <keyrings@vger.kernel.org>,
-        linux-integrity@vger.kernel.org,
-        "open list:SECURITY SUBSYSTEM" 
-        <linux-security-module@vger.kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-        op-tee@lists.trustedfirmware.org
-Subject: Re: [PATCH v8 2/4] KEYS: trusted: Introduce TEE based Trusted Keys
-Message-ID: <YAa0ys4YJcZtKdfF@kernel.org>
-References: <1604419306-26105-1-git-send-email-sumit.garg@linaro.org>
- <1604419306-26105-3-git-send-email-sumit.garg@linaro.org>
- <X/x+N0fgrzIZTeNi@kernel.org>
- <CAFA6WYOUvWAZtYfR4q8beZFkX-CtdxqwJaRQM+GHNMDfQiEWOA@mail.gmail.com>
- <X/+m6+m2/snYj9Vc@kernel.org>
- <CAFA6WYNyirit_AFhoE+XR9PHw=OjRgEdXDqz1uanj_SN2NXeMw@mail.gmail.com>
+        id S2395153AbhASOJu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 09:09:50 -0500
+Received: from frasgout.his.huawei.com ([185.176.79.56]:2371 "EHLO
+        frasgout.his.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2404430AbhASKm3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 05:42:29 -0500
+Received: from fraeml715-chm.china.huawei.com (unknown [172.18.147.206])
+        by frasgout.his.huawei.com (SkyGuard) with ESMTP id 4DKlW25QX4z67dXw;
+        Tue, 19 Jan 2021 18:38:38 +0800 (CST)
+Received: from lhreml710-chm.china.huawei.com (10.201.108.61) by
+ fraeml715-chm.china.huawei.com (10.206.15.34) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.2106.2; Tue, 19 Jan 2021 11:41:46 +0100
+Received: from localhost (10.47.77.36) by lhreml710-chm.china.huawei.com
+ (10.201.108.61) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id 15.1.2106.2; Tue, 19 Jan
+ 2021 10:41:45 +0000
+Date:   Tue, 19 Jan 2021 10:41:05 +0000
+From:   Jonathan Cameron <Jonathan.Cameron@Huawei.com>
+To:     William Breathitt Gray <vilhelm.gray@gmail.com>
+CC:     Jonathan Cameron <jic23@kernel.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>, <corbet@lwn.net>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-iio@vger.kernel.org>,
+        "Fabrice Gasnier" <fabrice.gasnier@st.com>,
+        Benjamin Gaignard <benjamin.gaignard@st.com>
+Subject: Re: [PATCH 00/10] Fix documentation warnings at linux-next
+Message-ID: <20210119104105.000010df@Huawei.com>
+In-Reply-To: <YAajkfaXPqkZUB/2@shinobu>
+References: <CAKXUXMziQ2H7_oiVSxbt1=bDFkjLQYOiOgd00YGyDnCTVDhbqA@mail.gmail.com>
+        <20210115104947.71d99e87@coco.lan>
+        <20210115134720.000011f9@Huawei.com>
+        <20210117154218.634dd5fa@archlinux>
+        <YAajkfaXPqkZUB/2@shinobu>
+Organization: Huawei Technologies Research and Development (UK) Ltd.
+X-Mailer: Claws Mail 3.17.4 (GTK+ 2.24.32; i686-w64-mingw32)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAFA6WYNyirit_AFhoE+XR9PHw=OjRgEdXDqz1uanj_SN2NXeMw@mail.gmail.com>
+Content-Type: text/plain; charset="US-ASCII"
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [10.47.77.36]
+X-ClientProxiedBy: lhreml735-chm.china.huawei.com (10.201.108.86) To
+ lhreml710-chm.china.huawei.com (10.201.108.61)
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jan 15, 2021 at 11:32:31AM +0530, Sumit Garg wrote:
-> On Thu, 14 Jan 2021 at 07:35, Jarkko Sakkinen <jarkko@kernel.org> wrote:
-> >
-> > On Wed, Jan 13, 2021 at 04:47:00PM +0530, Sumit Garg wrote:
-> > > Hi Jarkko,
-> > >
-> > > On Mon, 11 Jan 2021 at 22:05, Jarkko Sakkinen <jarkko@kernel.org> wrote:
-> > > >
-> > > > On Tue, Nov 03, 2020 at 09:31:44PM +0530, Sumit Garg wrote:
-> > > > > Add support for TEE based trusted keys where TEE provides the functionality
-> > > > > to seal and unseal trusted keys using hardware unique key.
-> > > > >
-> > > > > Refer to Documentation/tee.txt for detailed information about TEE.
-> > > > >
-> > > > > Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > >
-> > > > I haven't yet got QEMU environment working with aarch64, this produces
-> > > > just a blank screen:
-> > > >
-> > > > ./output/host/usr/bin/qemu-system-aarch64 -M virt -cpu cortex-a53 -smp 1 -kernel output/images/Image -initrd output/images/rootfs.cpio -serial stdio
-> > > >
-> > > > My BuildRoot fork for TPM and keyring testing is located over here:
-> > > >
-> > > > https://git.kernel.org/pub/scm/linux/kernel/git/jarkko/buildroot-tpmdd.git/
-> > > >
-> > > > The "ARM version" is at this point in aarch64 branch. Over time I will
-> > > > define tpmdd-x86_64 and tpmdd-aarch64 boards and everything will be then
-> > > > in the master branch.
-> > > >
-> > > > To create identical images you just need to
-> > > >
-> > > > $ make tpmdd_defconfig && make
-> > > >
-> > > > Can you check if you see anything obviously wrong? I'm eager to test this
-> > > > patch set, and in bigger picture I really need to have ready to run
-> > > > aarch64 environment available.
-> > >
-> > > I would rather suggest you to follow steps listed here [1] as to test
-> > > this feature on Qemu aarch64 we need to build firmwares such as TF-A,
-> > > OP-TEE, UEFI etc. which are all integrated into OP-TEE Qemu build
-> > > system [2]. And then it would be easier to migrate them to your
-> > > buildroot environment as well.
-> > >
-> > > [1] https://lists.trustedfirmware.org/pipermail/op-tee/2020-May/000027.html
-> > > [2] https://optee.readthedocs.io/en/latest/building/devices/qemu.html#qemu-v8
-> > >
-> > > -Sumit
-> >
-> > Can you provide 'keyctl_change'? Otherwise, the steps are easy to follow.
-> >
-> 
-> $ cat keyctl_change
-> diff --git a/common.mk b/common.mk
-> index aeb7b41..663e528 100644
-> --- a/common.mk
-> +++ b/common.mk
-> @@ -229,6 +229,7 @@ BR2_PACKAGE_OPTEE_TEST_SDK ?= $(OPTEE_OS_TA_DEV_KIT_DIR)
->  BR2_PACKAGE_OPTEE_TEST_SITE ?= $(OPTEE_TEST_PATH)
->  BR2_PACKAGE_STRACE ?= y
->  BR2_TARGET_GENERIC_GETTY_PORT ?= $(if
-> $(CFG_NW_CONSOLE_UART),ttyAMA$(CFG_NW_CONSOLE_UART),ttyAMA0)
-> +BR2_PACKAGE_KEYUTILS := y
-> 
->  # All BR2_* variables from the makefile or the environment are appended to
->  # ../out-br/extra.conf. All values are quoted "..." except y and n.
-> diff --git a/kconfigs/qemu.conf b/kconfigs/qemu.conf
-> index 368c18a..832ab74 100644
-> --- a/kconfigs/qemu.conf
-> +++ b/kconfigs/qemu.conf
-> @@ -20,3 +20,5 @@ CONFIG_9P_FS=y
->  CONFIG_9P_FS_POSIX_ACL=y
->  CONFIG_HW_RANDOM=y
->  CONFIG_HW_RANDOM_VIRTIO=y
-> +CONFIG_TRUSTED_KEYS=y
-> +CONFIG_ENCRYPTED_KEYS=y
-> 
-> > After I've successfully tested 2/4, I'd suggest that you roll out one more
-> > version and CC the documentation patch to Elaine and Mini, and clearly
-> > remark in the commit message that TEE is a standard, with a link to the
-> > specification.
-> >
-> 
-> Sure, I will roll out the next version after your testing.
+On Tue, 19 Jan 2021 18:17:05 +0900
+William Breathitt Gray <vilhelm.gray@gmail.com> wrote:
 
-Thanks, I'll try this at instant, and give my feedback.
+> On Sun, Jan 17, 2021 at 03:42:18PM +0000, Jonathan Cameron wrote:
+> > On Fri, 15 Jan 2021 13:47:20 +0000
+> > Jonathan Cameron <Jonathan.Cameron@Huawei.com> wrote:
+> >   
+> > > On Fri, 15 Jan 2021 10:49:47 +0100
+> > > Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+> > >   
+> > > > Hi Lukas,
+> > > > 
+> > > > Em Fri, 15 Jan 2021 07:12:38 +0100
+> > > > Lukas Bulwahn <lukas.bulwahn@gmail.com> escreveu:
+> > > >     
+> > > > > [reduced the recipient list to the main responsible ones and list]
+> > > > > 
+> > > > > Hi Mauro, hi Jonathan,
+> > > > > 
+> > > > > We both, Mauro and I, have been submitting patches to address the
+> > > > > documentation warnings on linux-next. If it is okay with you, Mauro, I
+> > > > > would like to take responsibility for the task to send out the patches
+> > > > > to address all warnings on linux-next in make htmldocs and follow up
+> > > > > with all the discussions. I can also provide a short weekly summary
+> > > > > (probably always on Friday) on what is pending where and what I could
+> > > > > not resolve by myself.
+> > > > > 
+> > > > > Is that okay for you?
+> > > > > 
+> > > > > If at some point I do not have the time to take care anymore, I will
+> > > > > let you know.      
+> > > > 
+> > > > Yeah, sure!
+> > > > 
+> > > > Anyway, after applying the patches I sent this week, the warnings
+> > > > I'm getting are all due to the validation scripts I wrote. So, if 
+> > > > everything gets merged (either yours or my version), we'll have zero
+> > > > Sphinx/kernel-doc warnings again.
+> > > > 
+> > > > The script-validation warnings are:
+> > > > 
+> > > > 1. Broken cross references
+> > > > --------------------------
+> > > > 
+> > > > $ scripts/documentation-file-ref-check
+> > > > Warning: Documentation/arm/booting.rst references a file that doesn't exist: Documentation/devicetree/booting-without-of.rst
+> > > > Warning: Documentation/devicetree/bindings/hwmon/ntc_thermistor.txt references a file that doesn't exist: Documentation/devicetree/bindings/iio/iio-bindings.txt
+> > > > Warning: Documentation/devicetree/bindings/input/adc-joystick.yaml references a file that doesn't exist: Documentation/devicetree/bindings/iio/iio-bindings.txt
+> > > > Warning: Documentation/devicetree/bindings/power/supply/da9150-charger.txt references a file that doesn't exist: Documentation/devicetree/bindings/iio/iio-bindings.txt
+> > > > Warning: Documentation/devicetree/bindings/regulator/rohm,bd9576-regulator.yaml references a file that doesn't exist: Documentation/devicetree/bindings/mfd/rohm,bd9576-pmic.yaml
+> > > > Warning: Documentation/translations/zh_CN/arm/Booting references a file that doesn't exist: Documentation/devicetree/booting-without-of.rst
+> > > > Warning: Documentation/virt/kvm/vcpu-requests.rst references a file that doesn't exist: Documentation/core-api/atomic_ops.rst
+> > > > Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/pinctrl/toshiba,tmpv7700-pinctrl.yaml
+> > > > Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/misc/hisilicon-hikey-usb.yaml
+> > > > Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/display/intel,kmb_display.yaml
+> > > > Warning: MAINTAINERS references a file that doesn't exist: Documentation/devicetree/bindings/media/i2c/ov2680.yaml
+> > > > Warning: include/linux/rculist_nulls.h references a file that doesn't exist: Documentation/core-api/atomic_ops.rst
+> > > > Warning: tools/memory-model/Documentation/simple.txt references a file that doesn't exist: Documentation/core-api/atomic_ops.rst
+> > > > 
+> > > > It sounds that part of the above is due to DT patches that weren't
+> > > > merged yet, but there are a few others that can be solved, but may
+> > > > require discussions with some Kernel developers/maintainers.
+> > > > 
+> > > > 2. Duplicated ABI definitions
+> > > > -----------------------------
+> > > > 
+> > > > $ scripts/get_abi.pl validate
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_x_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:0  ./Documentation/ABI/testing/sysfs-bus-iio:394
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_y_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:1  ./Documentation/ABI/testing/sysfs-bus-iio:395
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_z_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:2  ./Documentation/ABI/testing/sysfs-bus-iio:396
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_x_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:3  ./Documentation/ABI/testing/sysfs-bus-iio:397
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_y_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:4  ./Documentation/ABI/testing/sysfs-bus-iio:398
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_z_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:5  ./Documentation/ABI/testing/sysfs-bus-iio:399
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/in_count0_preset is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-timer-stm32:100  ./Documentation/ABI/testing/sysfs-bus-iio-lptimer-stm32:0
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/in_count_quadrature_mode_available is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-counter-104-quad-8:2  ./Documentation/ABI/testing/sysfs-bus-iio-lptimer-stm32:8
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/out_altvoltageY_frequency is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4371:0  ./Documentation/ABI/testing/sysfs-bus-iio:599
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/out_altvoltageY_powerdown is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-frequency-adf4371:36  ./Documentation/ABI/testing/sysfs-bus-iio:588
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/out_currentY_raw is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-light-lm3533-als:43  ./Documentation/ABI/testing/sysfs-bus-iio-health-afe440x:38
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/out_current_heater_raw is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-humidity-hdc2010:0  ./Documentation/ABI/testing/sysfs-bus-iio-humidity-hdc100x:0
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/out_current_heater_raw_available is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-humidity-hdc2010:1  ./Documentation/ABI/testing/sysfs-bus-iio-humidity-hdc100x:1
+> > > > Warning: /sys/bus/iio/devices/iio:deviceX/sensor_sensitivity is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-distance-srf08:0  ./Documentation/ABI/testing/sysfs-bus-iio-proximity-as3935:8
+> > > > Warning: /sys/bus/iio/devices/triggerX/sampling_frequency is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-timer-stm32:92  ./Documentation/ABI/testing/sysfs-bus-iio:45
+> > > > Warning: /sys/class/backlight/<backlight>/l1_daylight_max is defined 2 times:  ./Documentation/ABI/testing/sysfs-class-backlight-adp8860:12  ./Documentation/ABI/testing/sysfs-class-backlight-driver-adp8870:4
+> > > > Warning: /sys/class/leds/<led>/repeat is defined 2 times:  ./Documentation/ABI/testing/sysfs-class-led-trigger-pattern:28  ./Documentation/ABI/testing/sysfs-class-led-driver-el15203000:0
+> > > > Warning: /sys/kernel/iommu_groups/reserved_regions is defined 2 times:  ./Documentation/ABI/testing/sysfs-kernel-iommu_groups:15  ./Documentation/ABI/testing/sysfs-kernel-iommu_groups:27
+> > > > 
+> > > > Perhaps you could check with Jonathan Cameron some strategy to address
+> > > > the IIO warnings.    
+> > > 
+> > > I'm being a bit rubbish on those ones. All need a bit of thought...
+> > > 
+> > > I'll try to kill off a few of them this weekend as *touch wood* my
+> > > review queue is looking fairly short.  
+> > 
+> > As I mentioned in the cover letter for the series I've just sent out, I ran into
+> > a bit of an understanding gap around the two counter cases.  This isn't helped
+> > by the fact it is at least partly deprecated ABI given the counter subsystem
+> > has much richer ABI for these types of devices.
+> > 
+> > @Fabrice, Benjamin and William.
+> > What do we do about that one?
+> > 
+> > Thanks,
+> > 
+> > Jonathan  
+> 
+> I'd consider the IIO counter ABI as entirely deprecated -- the Counter
+> subsystem supports all the functionality that's provided by the IIO
+> counter ABI, as well as additional functionality that is missing. 
+> 
+> Regarding the iio:deviceX/in_count_quadrature_mode_available attribute:
+> superseded by the Counter subsystem counterX/countY/function attribute.
+> The IIO counter ABI allows users to select between a quadrature counting
+> mode or a non-quadrature counting mode; unfortunately, it does not
+> specify what kind of quadrature or what kind of non-quadrature counting
+> is actually being performed by the device.
+> 
+> Because the 104-quad-8 and stm32-lptimer-cnt drivers were the only ones
+> to use this attribute, they are luckily in sync -- both define the same
+> possible modes available: "quadrature" and "non-quadrature". You could
+> simply consolidate this attribute to the main sys-bus-iio file in order
+> to resolve this warning.
+> 
+> Given that it has already been superceded by the Counter subsystem, I'd
+> also be all right with just removing the IIO Counter ABI entirely from
+> the codebase, or alternatively setting a future date for removal.
 
-/Jarkko
+I agree that we should look to remove this ABI.  If we can establish no one
+is relying on it today then we can drop quickly.  If not it would be good
+to establish when we drop it.
+
+Fabrice, Benjami any thoughts on the stm32-lptimer-cnt?
+
+I'm going to hazard a guess that there aren't many 104-quad-8 users
+that you don't know about William, so if you think we can immediately drop
+the interface from that, lets do so, whether or not we can clean up
+the stm32 one at the same time.
+
+Jonathan
+
+> 
+> William Breathitt Gray
+> 
+> > > 
+> > > Jonathan
+> > >   
+> > > > 
+> > > > Thanks,
+> > > > Mauro    
+> > >   
+> >   
+> 
+
