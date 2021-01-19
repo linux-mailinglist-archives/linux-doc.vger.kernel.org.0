@@ -2,124 +2,225 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A71AF2FC0B5
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 21:16:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 32FA82FC248
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 22:30:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729780AbhASUPh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 15:15:37 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42772 "EHLO
+        id S1726882AbhASSni (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 13:43:38 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41722 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729497AbhASUPa (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 15:15:30 -0500
-Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com [IPv6:2a00:1450:4864:20::536])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87194C061573
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 12:14:41 -0800 (PST)
-Received: by mail-ed1-x536.google.com with SMTP id n6so8004870edt.10
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 12:14:41 -0800 (PST)
+        with ESMTP id S2392123AbhASSA2 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 13:00:28 -0500
+Received: from mail-lj1-x231.google.com (mail-lj1-x231.google.com [IPv6:2a00:1450:4864:20::231])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D526CC0617BC
+        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 09:45:30 -0800 (PST)
+Received: by mail-lj1-x231.google.com with SMTP id e7so22907010ljg.10
+        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 09:45:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
+        d=google.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=byRyQq0Zgtt5NgbHeIaYNBYUmY4ZzoHZBsdIAqa6syw=;
-        b=Gvl+pXMIcc2co0RDWG1pUGT2dp42EWP1Oa9B+3sOC1fEXqHYY0TNyn4mV/ProTlP1F
-         6ThCzCQJMElcNtFlKMxBEDs+M43Z3iur8b+I/VPtsNTEn3DRGKXGgQHDLK6dELHcR2if
-         ZHLG94pSN934JR9GRWS8HNj4barzLvHkGaTA708e9PQrN8RNfCZyVobjym7lfLJlenUa
-         8IEjgp2B1w5yyZccOskcIDNMCgMkjpWDivGrzGl9WjZsYw/oYhe93GkKRG6KmcDUeVkr
-         FO7Dk3NxbIwrPknVjZlUQmuSVKP4tIXyPHDJ5WnwBVugDNbaE5g4vXhLCKObLd+RZ6D0
-         6rxQ==
+        bh=Rd3A8g1IdM0Da3ayDEEkpfl0IAd1dLONzNOBcV3ebWU=;
+        b=HgxRSY1UqbS9/rhXLTNfxHXeBBzedejKfHX0k4UFydcfqonYyGAaZOkwTPWns4jkPQ
+         esF/GfzCdXeprMZcR0ldlHasvbgdLzQUQKuoonWfyg/1PJiYiAQCs6nEFq4JCNR8UoZ6
+         L6PyL622kWecWT47tVu+mk1cmbD2RTPlWjumHdsO+G0rhUhQvmeVflWNxLMaEi1TcrFh
+         VEoIk82Z1RZibJHkxhJoWvXlijEayutV5Qeas5v5D4ueg87Fq9K4GiUyA/cnWqroNvz9
+         QaepTABYH2v3/iunQHx1HEYEiJL77LViNqhc0EsnX8b1A80s0ELoGjKZWBLJngIbcwTJ
+         w/cA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=byRyQq0Zgtt5NgbHeIaYNBYUmY4ZzoHZBsdIAqa6syw=;
-        b=evthxLzAcMcWOgKuQIPrKHjwnZ1f9nG9iwBCQtoeuG0g0COTugN2wYJ4aOHmfn/jB1
-         W/FwTG/+q25PT2Uiohdr276WAAlw1PdceN6U/43RrGwAOtzc4gyptw3XQM+sL3ZIpFOa
-         E1H95dTuzxFcsbDuh4GP4tHcOOE6TLOC7J747xCGDxMoTWTG3BvwUQwgDesWdFbnBjQ2
-         8r2jV2q+Ise9ZQwP8pUTOwKhNi0dSEj2u/hhzfZSkMiI+F3iIfaRzU4oYY9pMeeOPlsh
-         yAFgJcUFfAykcVe56W8M6KYrpVMVOAxVL3DGVVMUEk9VnOTyBxacXDnpRn0LQ8qANQQu
-         Dphg==
-X-Gm-Message-State: AOAM532MOpn0HfeWjHmbkCSueK/bxwKenwz1cxbLUGO5UDpQbPUya17Z
-        2CCOOZKc3L8wobshBMEUxSSq34MDfyrFOdB9BUF4mQ==
-X-Google-Smtp-Source: ABdhPJz8pqr0iEoSJaOvD5DC/VO5AZGkgHQio8PjFJuSvIBVP2GzlgXm4FTOWjvYilIQV8nA55C/YRhAG3ldeAxU44U=
-X-Received: by 2002:a05:6402:304e:: with SMTP id bu14mr4545815edb.60.1611087280334;
- Tue, 19 Jan 2021 12:14:40 -0800 (PST)
+        bh=Rd3A8g1IdM0Da3ayDEEkpfl0IAd1dLONzNOBcV3ebWU=;
+        b=Vr8aEhuPV8LwZJnaj9AoTZrPHZcEQ0XJjr2G7aCUnxSkSzLTEH/cs62Ii+DCYB7Ry6
+         LAWbY0IzsywHaXZuLCKw3o+PAt6MK1OpR2S16KJju/plWM09YpQOoYG0pcRgDRjxn+jm
+         VbIbJG8JRobgcTGt7g2BWamL7QxUQ1jR6o8wu6PHv9/ryXGWFlEBfDqHERmntqslzrWt
+         ijFA6YDaIVp3PXCgkK/o/55SIeOcfaG5Q6DjW+2ZM6ViKORsZOsQgUTMPRQWkxLWiNzk
+         suJ7M+XxnYQa7gzFX4KIIUsdvZB/HTKM5UUPUaJyu+7GGdnFXZOUV4JEzPvJixDUBcFF
+         buvw==
+X-Gm-Message-State: AOAM5316930qXWMTitWza7nVLHvKiPEVtDpEadrGuOHHAL95ZjBYaJR7
+        Oj81GwoyfAjcIUmId48opShztZAeYCBxAOc1iCKKGQ==
+X-Google-Smtp-Source: ABdhPJyFFZcinaflCgiwdNd0xiMlKWjdDzL/Xpr4jPiXhnakZJ5AdohtfJ+lzfhFR9TjjIv+fAWjCZ2NgSAW2C3XYtE=
+X-Received: by 2002:a05:651c:328:: with SMTP id b8mr2402570ljp.106.1611078328902;
+ Tue, 19 Jan 2021 09:45:28 -0800 (PST)
 MIME-Version: 1.0
-References: <20210119043920.155044-1-pasha.tatashin@soleen.com>
- <20210119043920.155044-9-pasha.tatashin@soleen.com> <20210119183013.GB4605@ziepe.ca>
- <CA+CK2bBKbht34Hkg9YvhwYAiAjd3NMd_+Eir9wfx+07V-Y2TTA@mail.gmail.com> <20210119184751.GD4605@ziepe.ca>
-In-Reply-To: <20210119184751.GD4605@ziepe.ca>
-From:   Pavel Tatashin <pasha.tatashin@soleen.com>
-Date:   Tue, 19 Jan 2021 15:14:04 -0500
-Message-ID: <CA+CK2bDGDR9B=n5d4Dz6my6kKyFF=6y79HJt-k-SCpLhF1fUQQ@mail.gmail.com>
-Subject: Re: [PATCH v5 08/14] mm/gup: do not allow zero page for pinned pages
-To:     Jason Gunthorpe <jgg@ziepe.ca>
-Cc:     LKML <linux-kernel@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Michal Hocko <mhocko@suse.com>,
-        David Hildenbrand <david@redhat.com>,
-        Oscar Salvador <osalvador@suse.de>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Sasha Levin <sashal@kernel.org>,
-        Tyler Hicks <tyhicks@linux.microsoft.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>, mike.kravetz@oracle.com,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Mel Gorman <mgorman@suse.de>,
-        Matthew Wilcox <willy@infradead.org>,
+References: <20210116023204.670834-1-vipinsh@google.com> <20210116023204.670834-3-vipinsh@google.com>
+ <2a009bd9-fde5-4911-3525-e28379fe3be2@infradead.org>
+In-Reply-To: <2a009bd9-fde5-4911-3525-e28379fe3be2@infradead.org>
+From:   Vipin Sharma <vipinsh@google.com>
+Date:   Tue, 19 Jan 2021 09:45:12 -0800
+Message-ID: <CAHVum0e8qY7Nt23wSXU7KON8qZ5c6gnNWf=i5BeYji2+735COw@mail.gmail.com>
+Subject: Re: [Patch v5 2/2] cgroup: svm: Encryption IDs cgroup documentation.
+To:     Randy Dunlap <rdunlap@infradead.org>
+Cc:     Tom Lendacky <thomas.lendacky@amd.com>,
+        Brijesh <brijesh.singh@amd.com>, Jon <jon.grimm@amd.com>,
+        Eric <eric.vantassell@amd.com>, pbonzini@redhat.com,
+        Sean Christopherson <seanjc@google.com>,
+        Tejun Heo <tj@kernel.org>, hannes@cmpxchg.org,
+        Janosch Frank <frankja@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>, corbet@lwn.net,
+        joro@8bytes.org, vkuznets@redhat.com, wanpengli@tencent.com,
+        Jim Mattson <jmattson@google.com>, tglx@linutronix.de,
+        mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
+        Matt Gingell <gingell@google.com>,
         David Rientjes <rientjes@google.com>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Ira Weiny <ira.weiny@intel.com>,
-        linux-kselftest@vger.kernel.org
+        Dionna Glaze <dionnaglaze@google.com>, kvm@vger.kernel.org,
+        x86@kernel.org, cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jan 19, 2021 at 1:47 PM Jason Gunthorpe <jgg@ziepe.ca> wrote:
+On Mon, Jan 18, 2021 at 9:55 AM Randy Dunlap <rdunlap@infradead.org> wrote:
 >
-> On Tue, Jan 19, 2021 at 01:34:26PM -0500, Pavel Tatashin wrote:
-> > On Tue, Jan 19, 2021 at 1:30 PM Jason Gunthorpe <jgg@ziepe.ca> wrote:
-> > >
-> > > On Mon, Jan 18, 2021 at 11:39:14PM -0500, Pavel Tatashin wrote:
-> > > > Zero page should not be used for long term pinned pages. Once pages
-> > > > are pinned their physical addresses cannot changed until they are unpinned.
-> > > >
-> > > > Guarantee to always return real pages when they are pinned by adding
-> > > > FOLL_WRITE.
-> > > >
-> > > > Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
-> > > >  mm/gup.c | 10 +++++++++-
-> > > >  1 file changed, 9 insertions(+), 1 deletion(-)
-> > >
-> > > No, this will definitely break things
+> On 1/15/21 6:32 PM, Vipin Sharma wrote:
+> > Documentation of Encryption IDs controller. This new controller is used
+> > to track and limit usage of hardware memory encryption capabilities on
+> > the CPUs.
 > >
-> > What will break
->
-> Things assuming GUP doesn't break COW, making all GUP WRITE was
-> already tried and revered for some other reason
->
-> > > Why does the zero page have to be movable?
+> > Signed-off-by: Vipin Sharma <vipinsh@google.com>
+> > Reviewed-by: David Rientjes <rientjes@google.com>
+> > Reviewed-by: Dionna Glaze <dionnaglaze@google.com>
+> > ---
+> >  .../admin-guide/cgroup-v1/encryption_ids.rst  |  1 +
+> >  Documentation/admin-guide/cgroup-v2.rst       | 78 ++++++++++++++++++-
+> >  2 files changed, 77 insertions(+), 2 deletions(-)
+> >  create mode 100644 Documentation/admin-guide/cgroup-v1/encryption_ids.rst
 > >
-> > It is not even about being movable, we can't cow pinned pages returned
-> > by GUP call, how can we use zero page for that?
+> > diff --git a/Documentation/admin-guide/cgroup-v1/encryption_ids.rst b/Documentation/admin-guide/cgroup-v1/encryption_ids.rst
+> > new file mode 100644
+> > index 000000000000..8e9e9311daeb
+> > --- /dev/null
+> > +++ b/Documentation/admin-guide/cgroup-v1/encryption_ids.rst
+> > @@ -0,0 +1 @@
+> > +/Documentation/admin-guide/cgroup-v2.rst
+> > diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
+> > index 63521cd36ce5..72993571de2e 100644
+> > --- a/Documentation/admin-guide/cgroup-v2.rst
+> > +++ b/Documentation/admin-guide/cgroup-v2.rst
+> > @@ -63,8 +63,11 @@ v1 is available under :ref:`Documentation/admin-guide/cgroup-v1/index.rst <cgrou
+> >         5-7-1. RDMA Interface Files
+> >       5-8. HugeTLB
+> >         5.8-1. HugeTLB Interface Files
+> > -     5-8. Misc
+> > -       5-8-1. perf_event
+> > +     5-9. Encryption IDs
+> > +       5.9-1 Encryption IDs Interface Files
+> > +       5.9-2 Migration and Ownership
+> > +     5-10. Misc
+> > +       5-10-1. perf_event
+> >       5-N. Non-normative information
+> >         5-N-1. CPU controller root cgroup process behaviour
+> >         5-N-2. IO controller root cgroup process behaviour
+> > @@ -2160,6 +2163,77 @@ HugeTLB Interface Files
+> >       are local to the cgroup i.e. not hierarchical. The file modified event
+> >       generated on this file reflects only the local events.
+> >
+> > +Encryption IDs
+> > +--------------
+> > +
+> > +There are multiple hardware memory encryption capabilities provided by the
+> > +hardware vendors, like Secure Encrypted Virtualization (SEV) and SEV Encrypted
+> > +State (SEV-ES) from AMD.
+> > +
+> > +These features are being used in encrypting virtual machines (VMs) and user
+> > +space programs. However, only a small number of keys/IDs can be used
+> > +simultaneously.
+> > +
+> > +This limited availability of these IDs requires system admin to optimize
 >
-> The zero page is always zero, it is never written to. What does cow
-> matter?
-
-Hi Jason,
-
-I was thinking about a use case where userland would pin an address
-without FOLL_WRITE, because the PTE for that address is not going to
-be writable, but some device via DMA will write to it. Now, if we got
-a zero page we have a problem... If this usecase is not valid then the
-fix for movable zero page is make the zero page always come from a
-non-movable zone so we do not need to isolate it during migration, and
-so the memory can be offlined later.
-
-Pasha
-
+>                                                           admins
 >
-> Jason
+> > +allocation, control, and track the usage of the resources in the cloud
+> > +infrastructure. This resource also needs to be protected from getting exhausted
+> > +by some malicious program and causing starvation for other programs.
+> > +
+> > +Encryption IDs controller provides capability to register the resource for
+>
+>    The Encryption IDs controller provides the capability to register the resource for
+>
+> > +controlling and tracking through the cgroups.
+>
+>                             through cgroups.
+>
+> > +
+> > +Encryption IDs Interface Files
+> > +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> > +
+> > +Each encryption ID type have their own interface files,
+>
+>                            has its own
+>
+> > +encids.[ID TYPE].{max, current, stat}, where "ID TYPE" can be sev and
+>
+>                                                                      or
+>
+> > +sev-es.
+> > +
+> > +  encids.[ID TYPE].stat
+> > +        A read-only flat-keyed single value file. This file exists only in the
+> > +        root cgroup.
+> > +
+> > +        It shows the total number of encryption IDs available and currently in
+> > +        use on the platform::
+> > +          # cat encids.sev.stat
+> > +          total 509
+> > +          used 0
+>
+> This is described above as a single-value file...
+>
+> Is the max value a hardware limit or a software (flexible) limit?
+>
+>
+> > +
+> > +  encids.[ID TYPE].max
+> > +        A read-write file which exists on the non-root cgroups. File is used to
+> > +        set maximum count of "[ID TYPE]" which can be used in the cgroup.
+> > +
+> > +        Limit can be set to max by::
+> > +          # echo max > encids.sev.max
+> > +
+> > +        Limit can be set by::
+> > +          # echo 100 > encids.sev.max
+> > +
+> > +        This file shows the max limit of the encryption ID in the cgroup::
+> > +          # cat encids.sev.max
+> > +          max
+> > +
+> > +        OR::
+> > +          # cat encids.sev.max
+> > +          100
+> > +
+> > +        Limits can be set more than the "total" capacity value in the
+> > +        encids.[ID TYPE].stat file, however, the controller ensures
+> > +        that the usage never exceeds the "total" and the max limit.
+> > +
+> > +  encids.[ID TYPE].current
+> > +        A read-only single value file which exists on non-root cgroups.
+> > +
+> > +        Shows the total number of encrypted IDs being used in the cgroup.
+> > +
+> > +Migration and Ownership
+> > +~~~~~~~~~~~~~~~~~~~~~~~
+> > +
+> > +An encryption ID is charged to the cgroup in which it is used first, and
+> > +stays charged to that cgroup until that ID is freed. Migrating a process
+> > +to a different cgroup do not move the charge to the destination cgroup
+>
+>                          does
+>
+> > +where the process has moved.
+> > +
+> >  Misc
+> >  ----
+> >
+> >
+>
+>
+> --
+> ~Randy
+> You can't do anything without having to do something else first.
+> -- Belefant's Law
+
+Thank you, I will fix them in the next patch.
