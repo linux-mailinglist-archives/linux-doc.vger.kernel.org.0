@@ -2,90 +2,161 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 953282FBEF4
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 19:29:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5EEAF2FBF5C
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 19:52:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730005AbhASS32 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 13:29:28 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48014 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387927AbhASS3Q (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 13:29:16 -0500
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com [IPv6:2607:f8b0:4864:20::82a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BAF92C0613D3
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 10:28:26 -0800 (PST)
-Received: by mail-qt1-x82a.google.com with SMTP id r9so14422664qtp.11
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 10:28:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=ke7qD8F84c1d4EOseUsfShNOeUs7V6JI/1ybkVdZuas=;
-        b=XmQ0R0kZqyfx6kYtmKEuaQdnV3pA/Gk5AOzBRpiTYl4tlHVj1r8AGgHQ4HlCBrkqJq
-         d3htfUs3a6Vo7BoCaKhfTS/pKV/wBzzmfP1qsXIQg8CQxxbNzgZLm/tv7iPsO1sHRvpU
-         TCZW7i1jjllBwoa546R0ibB0zkSMqcrkOGwMgnllWMEUgURDH4T3uEK++bfZv7/+4pbj
-         kS8q1ESLc1z39UecPfNCeUXmJIGhwHZBA/TwP+5YpJBnaym8fbHoGkHnHv5RdAWXulup
-         dtDZh1pKug65yM1CA0ASf5OqBnSDmxdk7ota2wSPE6R9R/dxgH45I+bA7mqqlvFaweeD
-         jp4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=ke7qD8F84c1d4EOseUsfShNOeUs7V6JI/1ybkVdZuas=;
-        b=EqefLUgiVGcR3GCO1BfruqnfzjztUTV6j9/+lzrj6XkEblDh2euE+XHfR3p7J5C4I8
-         63zX6k702vDx9bkMrpTyttnwlVzSAY3j5NcdjMFo0YQKquM5aDE+rbacssxQ4O4MLb/V
-         2enzpeDlOmTh+ImfgmiEPp+KrakKS6hpYRvIty8h0RgmcYt8Ok57CvyoOz/0HFwxIQcY
-         AZQ1oTom4OFMg5QRY0nLvYCp1kq7KdOFzZuyRgOmneCk5Fx8E0N0hEMvhll7Fh9OXq95
-         51BGOYj9+a0og2DTspwUcRWrB2nzRv1GmptjwsChJuYPR7Y2AXqLDBeYzZx9kVu+WaOp
-         VB1w==
-X-Gm-Message-State: AOAM5326I2FRldqYAJ7djuQQRx4F/49xHZhij8ykspzeIWzE8cB69gsf
-        hHcu7yHSVTdWm6nlnXzp1jncCQ==
-X-Google-Smtp-Source: ABdhPJzA1g7p43l6AtNResDMMVS5o5wIwQMrXjddyfwRGWf3w+KrQJOMwx++nssqWWJKy8HjuEBVXA==
-X-Received: by 2002:ac8:2adb:: with SMTP id c27mr2484368qta.145.1611080906055;
-        Tue, 19 Jan 2021 10:28:26 -0800 (PST)
-Received: from ziepe.ca (hlfxns017vw-142-162-115-133.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.115.133])
-        by smtp.gmail.com with ESMTPSA id u5sm13640579qka.86.2021.01.19.10.28.25
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Jan 2021 10:28:25 -0800 (PST)
-Received: from jgg by mlx with local (Exim 4.94)
-        (envelope-from <jgg@ziepe.ca>)
-        id 1l1vjt-003pdK-4n; Tue, 19 Jan 2021 14:28:25 -0400
-Date:   Tue, 19 Jan 2021 14:28:25 -0400
-From:   Jason Gunthorpe <jgg@ziepe.ca>
-To:     Pavel Tatashin <pasha.tatashin@soleen.com>
-Cc:     linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        akpm@linux-foundation.org, vbabka@suse.cz, mhocko@suse.com,
-        david@redhat.com, osalvador@suse.de, dan.j.williams@intel.com,
-        sashal@kernel.org, tyhicks@linux.microsoft.com,
-        iamjoonsoo.kim@lge.com, mike.kravetz@oracle.com,
-        rostedt@goodmis.org, mingo@redhat.com, peterz@infradead.org,
-        mgorman@suse.de, willy@infradead.org, rientjes@google.com,
-        jhubbard@nvidia.com, linux-doc@vger.kernel.org,
-        ira.weiny@intel.com, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v5 03/14] mm/gup: return an error on migration failure
-Message-ID: <20210119182825.GA4605@ziepe.ca>
-References: <20210119043920.155044-1-pasha.tatashin@soleen.com>
- <20210119043920.155044-4-pasha.tatashin@soleen.com>
+        id S1728255AbhASSoD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 13:44:03 -0500
+Received: from mail.kernel.org ([198.145.29.99]:49914 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1730161AbhASS23 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 19 Jan 2021 13:28:29 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id A584A2339E;
+        Tue, 19 Jan 2021 16:45:19 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1611074720;
+        bh=hsbY9jVVjxPkTDo+83FR143J+Trhf5rfoVu0rt8eaRU=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=Hm2fl8vSTHyel68vvy54BFEYGnKKKObPD/GYX2P3MobIpRoPpKvqSzY1QvCiSboxN
+         Atbr+nOgyM5E6Ak1Tn2YDiYEwZQ1elcqJ3vKfj87oTm5IWkPVZHivOHUyi0op2Ui3+
+         rFv882mtsvqOkDXby9VRaoxXU+TPenjGAGlc+jwnQMbZ9nDbAfaAfIdBVXXiXgA8dm
+         sEePE7usRv/pyhTYuqzHx8zbAPl3d0MNbnzq+l6MhwwjtK9C1DcZmf07jLgG/EOfbn
+         IkNUlVH7H0QQrjmUZKLGXaB5LDyJXd3Fju03xRLM+dpaS4uxVMKMkNj5cqyqOrsRcy
+         z/j89Bn7TZGxg==
+Date:   Tue, 19 Jan 2021 22:15:11 +0530
+From:   Vinod Koul <vkoul@kernel.org>
+To:     mdalam@codeaurora.org
+Cc:     corbet@lwn.net, agross@kernel.org, bjorn.andersson@linaro.org,
+        dan.j.williams@intel.com, dmaengine@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, sricharan@codeaurora.org,
+        mdalam=codeaurora.org@codeaurora.org
+Subject: Re: [PATCH] dmaengine: qcom: bam_dma: Add LOCK and UNLOCK flag bit
+ support
+Message-ID: <20210119164511.GE2771@vkoul-mobl>
+References: <1608215842-15381-1-git-send-email-mdalam@codeaurora.org>
+ <20201221092355.GA3323@vkoul-mobl>
+ <efcc74bbdf36b4ddbf764eb6b4ed99f2@codeaurora.org>
+ <f7de0117c8ff2e61c09f58acdea0e5b0@codeaurora.org>
+ <20210112101056.GI2771@vkoul-mobl>
+ <e3cf7c4fc02c54d17fd2fd213f39005b@codeaurora.org>
+ <20210115055806.GE2771@vkoul-mobl>
+ <97ce29b230164a5848a38f6448d1be60@codeaurora.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20210119043920.155044-4-pasha.tatashin@soleen.com>
+In-Reply-To: <97ce29b230164a5848a38f6448d1be60@codeaurora.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jan 18, 2021 at 11:39:09PM -0500, Pavel Tatashin wrote:
-> When migration failure occurs, we still pin pages, which means
-> that we may pin CMA movable pages which should never be the case.
+On 18-01-21, 09:21, mdalam@codeaurora.org wrote:
+> On 2021-01-15 11:28, Vinod Koul wrote:
+> > On 14-01-21, 01:20, mdalam@codeaurora.org wrote:
+> > > On 2021-01-12 15:40, Vinod Koul wrote:
+> > > > On 12-01-21, 15:01, mdalam@codeaurora.org wrote:
+> > > > > On 2020-12-21 23:03, mdalam@codeaurora.org wrote:
+> > > > > > On 2020-12-21 14:53, Vinod Koul wrote:
+> > > > > > > Hello,
+> > > > > > >
+> > > > > > > On 17-12-20, 20:07, Md Sadre Alam wrote:
+> > > > > > > > This change will add support for LOCK & UNLOCK flag bit support
+> > > > > > > > on CMD descriptor.
+> > > > > > > >
+> > > > > > > > If DMA_PREP_LOCK flag passed in prep_slave_sg then requester of this
+> > > > > > > > transaction wanted to lock the DMA controller for this transaction so
+> > > > > > > > BAM driver should set LOCK bit for the HW descriptor.
+> > > > > > > >
+> > > > > > > > If DMA_PREP_UNLOCK flag passed in prep_slave_sg then requester
+> > > > > > > > of this
+> > > > > > > > transaction wanted to unlock the DMA controller.so BAM driver
+> > > > > > > > should set
+> > > > > > > > UNLOCK bit for the HW descriptor.
+> > > > > > >
+> > > > > > > Can you explain why would we need to first lock and then unlock..? How
+> > > > > > > would this be used in real world.
+> > > > > > >
+> > > > > > > I have read a bit of documentation but is unclear to me. Also should
+> > > > > > > this be exposed as an API to users, sounds like internal to driver..?
+> > > > > > >
+> > > > > >
+> > > > > > IPQ5018 SoC having only one Crypto Hardware Engine. This Crypto Hardware
+> > > > > > Engine
+> > > > > > will be shared between A53 core & ubi32 core. There is two separate
+> > > > > > driver dedicated
+> > > > > > to A53 core and ubi32 core. So to use Crypto Hardware Engine
+> > > > > > parallelly for encryption/description
+> > > > > > we need bam locking mechanism. if one driver will submit the request
+> > > > > > for encryption/description
+> > > > > > to Crypto then first it has to set LOCK flag bit on command descriptor
+> > > > > > so that other pipes will
+> > > > > > get locked.
+> > > > > >
+> > > > > > The Pipe Locking/Unlocking will be only on command-descriptor. Upon
+> > > > > > encountering a command descriptor
+> > > >
+> > > > Can you explain what is a cmd descriptor?
+> > > 
+> > >   In BAM pipe descriptor structure there is a field called CMD
+> > > (Command
+> > > descriptor).
+> > >   CMD allows the SW to create descriptors of type Command which does
+> > > not
+> > > generate any data transmissions
+> > >   but configures registers in the Peripheral (write operations, and
+> > > read
+> > > registers operations ).
+> > >   Using command descriptor enables the SW to queue new configurations
+> > > between data transfers in advance.
+> > 
+> > What and when is the CMD descriptor used for..?
 > 
-> Instead return an error without pinning pages when migration failure
-> happens.
-> 
-> No need to retry migrating, because migrate_pages() already retries
-> 10 times.
-> 
-> Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
->  mm/gup.c | 17 +++++++----------
->  1 file changed, 7 insertions(+), 10 deletions(-)
+>   CMD descriptor is mainly used for configuring controller register.
+>   We can read/write controller register via BAM using CMD descriptor only.
+>   CMD descriptor use command pipe for the transaction.
 
-Reviewed-by: Jason Gunthorpe <jgg@nvidia.com>
+In which use cases would you need to issue cmd descriptors..?
+
+> > 
+> > > >
+> > > > > > with LOCK bit set, The BAM will lock all other pipes not related to
+> > > > > > the current pipe group, and keep
+> > > > > > handling the current pipe only until it sees the UNLOCK set then it
+> > > > > > will release all locked pipes.
+> > > > > > locked pipe will not fetch new descriptors even if it got event/events
+> > > > > > adding more descriptors for
+> > > > > > this pipe (locked pipe).
+> > > > > >
+> > > > > > No need to expose as an API to user because its internal to driver, so
+> > > > > > while preparing command descriptor
+> > > > > > just we have to update the LOCK/UNLOCK flag.
+> > > >
+> > > > So IIUC, no api right? it would be internal to driver..?
+> > > 
+> > >   Yes its totally internal to deriver.
+> > 
+> > So no need for this patch then, right?
+> 
+>   This patch is needed , because if some hardware will shared between
+>   multiple core like A53 and ubi32 for example. In IPQ5018 there is
+>   only one crypto engine and this will be shared between A53 core and
+>   ubi32 core and in A53 core & ubi32 core there are different drivers
+>   is getting used. So if encryption/decryption request come at same
+>   time from both the driver then things will get messed up. So here we
+>   need LOCKING mechanism.  If first request is from A53 core driver
+>   then this driver should lock all the pipes other than pipe dedicated
+>   to A53 core. So while preparing CMD descriptor driver should used
+>   this flag "DMA_PREP_LOCK", Since LOCK and UNLOCK flag bit we can set
+>   only on CMD descriptor. Once request processed then driver will set
+>   UNLOCK flag on CMD descriptor. Driver should use this flag
+>   "DMA_PREP_UNLOCK" while preparing CMD descriptor. Same logic will be
+>   apply for ubi32 core driver as well.
+
+Why cant this be applied at driver level, based on txn being issued it
+can lock issue the txn and then unlock when done. I am not convinced yet
+that this needs to be exported to users and can be managed by dmaengine
+driver.
+
+Thanks
+-- 
+~Vinod
