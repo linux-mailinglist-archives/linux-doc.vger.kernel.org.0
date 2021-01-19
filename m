@@ -2,119 +2,108 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B3862FB200
-	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 07:52:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 661DA2FB396
+	for <lists+linux-doc@lfdr.de>; Tue, 19 Jan 2021 08:58:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731708AbhASFfA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 00:35:00 -0500
-Received: from wout1-smtp.messagingengine.com ([64.147.123.24]:51933 "EHLO
-        wout1-smtp.messagingengine.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S2389808AbhASFOY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 00:14:24 -0500
-Received: from compute2.internal (compute2.nyi.internal [10.202.2.42])
-        by mailout.west.internal (Postfix) with ESMTP id 654B711E8;
-        Tue, 19 Jan 2021 00:13:02 -0500 (EST)
-Received: from imap5 ([10.202.2.55])
-  by compute2.internal (MEProxy); Tue, 19 Jan 2021 00:13:02 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=mxxn.io; h=
-        mime-version:message-id:date:from:to:subject:content-type
-        :content-transfer-encoding; s=fm1; bh=0spCGCoqY7KSGH8CarOZcNA+Cq
-        9FEwb8V5as/niMdZs=; b=UFRKbJKYisucCyLX1gesl+FUldemdrorrD0TscO67A
-        SxcAdG1vw9SdXswvyZCwE/EaHHFLonCXTv6chqe53uHfXsClmecN4XeNe/z0m5Xa
-        xLsZn9vOjtaYZZA7318fdvkQyIruEsjahUfY3l806pTzDsv5Aeo7MEJYxEpEh6go
-        S0sr2Ijoe+Ym1MrQNT7IoT/FW2v5qi2mCl5z2Lt0uns/mn9HT0t26NTJ8O4uNPLq
-        D8cKMMpFm5sp8vhiOHHibwpPY63wx4b5GyME1IpNN1yU9fyNDa1MagNiYR+/xapb
-        BsMAKcP2C0WGm6Pv4W9IRGZShyXVEpG07aXOtKf72HFw==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-        messagingengine.com; h=content-transfer-encoding:content-type
-        :date:from:message-id:mime-version:subject:to:x-me-proxy
-        :x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; bh=0spCGC
-        oqY7KSGH8CarOZcNA+Cq9FEwb8V5as/niMdZs=; b=icJ7eWaGv656IdHEAV8AA/
-        oyN7tUyJURpiCK3FjucdGEvjbPKrILvxo9fusRPSOaMwhlBKc4VuAbOZ575qKbbi
-        udKRL8uVjedGruffUGwvMQHb6uM1PPoLCL0SoBR2q3EEtHMc0+NBPE+uOAhWkoM9
-        Qcbr2mibvQRo+ewzNm8GUfgOFLu/T6QmpOKhz3JnUIq/DVXpOTWBuSa3p4ChUNbb
-        qR6FeDB+zajIoA++P4D5Gtmf7bOm5yWFNMgdvLIf+yttPBxO2csZLMFSzLKjclNa
-        J7NppR+6YyTYshTZEedib1g6GERbrOh3dS32OnQVH9ROTamZ5W3dHIxlH54dGe4w
-        ==
-X-ME-Sender: <xms:XWoGYIwK8c_g9sl9lJq1odeclKSPyDiZQ2GjyAyyiT7_qhMlxyMzYA>
-    <xme:XWoGYMRhIYKjQDVqtB62-sC5As8zh5DDGL0RdcbKF0RFWx2OmK-SFIZ2_qJwYck_E
-    1BZf_-F5yGi7aq7Zg>
-X-ME-Proxy-Cause: gggruggvucftvghtrhhoucdtuddrgeduledrtdelgdejkecutefuodetggdotefrodftvf
-    curfhrohhfihhlvgemucfhrghsthforghilhdpqfgfvfdpuffrtefokffrpgfnqfghnecu
-    uegrihhlohhuthemuceftddtnecusecvtfgvtghiphhivghnthhsucdlqddutddtmdenuc
-    fjughrpefofgggkfffhffvufgtgfesthhqredtreerjeenucfhrhhomhepuehlrgkkpgfj
-    rhgrshhtnhhikhcuoegslhgriiesmhiggihnrdhioheqnecuggftrfgrthhtvghrnhepvd
-    etkeeludeiudduvdeijedvheevfffhveejveektdefieduudeffeevveelhfdvnecuvehl
-    uhhsthgvrhfuihiivgeptdenucfrrghrrghmpehmrghilhhfrhhomhepsghlrgiisehmgi
-    ignhdrihho
-X-ME-Proxy: <xmx:XWoGYKUQHXa0LOfEYSC5Uk3p1l8R-TWqYI6GIl5BtUt-LijmMnT-9g>
-    <xmx:XWoGYGjAUxrQHTPuBtb5lMmncr46Sru0BuupPAPBlUslj6HUJ_ZWNQ>
-    <xmx:XWoGYKAgqkDewB3hx41QZkHOAWu5XZwmquf1pHDGtjph8oEaXD95UA>
-    <xmx:XmoGYFOCF0HrG7CQey2qedB3nVguKnJDKc8xQj-MW8Pvm2z2L6eNnQ>
-Received: by mailuser.nyi.internal (Postfix, from userid 501)
-        id 71F765C0099; Tue, 19 Jan 2021 00:13:01 -0500 (EST)
-X-Mailer: MessagingEngine.com Webmail Interface
-User-Agent: Cyrus-JMAP/3.5.0-alpha0-45-g4839256-fm-20210104.001-g48392560
-Mime-Version: 1.0
-Message-Id: <b08d641c-3fb5-4845-85f7-e1753149cd7d@www.fastmail.com>
-Date:   Tue, 19 Jan 2021 14:12:41 +0900
-From:   =?UTF-8?Q?Bla=C5=BE_Hrastnik?= <blaz@mxxn.io>
-To:     "Jean Delvare" <jdelvare@suse.com>,
-        "Guenter Roeck" <linux@roeck-us.net>,
-        "Jonathan Corbet" <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: hwmon: (nct6683) Support ASRock boards.
-Content-Type: text/plain;charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+        id S1725983AbhASHqN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 02:46:13 -0500
+Received: from mail.kernel.org ([198.145.29.99]:37914 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1727511AbhASHod (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 19 Jan 2021 02:44:33 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E49CA2312D;
+        Tue, 19 Jan 2021 07:43:51 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1611042232;
+        bh=LwmCI6DkrJei1b8r1Zp6vrx7jK2blz6c0T5Ie2QRjYU=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=X8mdbWIH6Mm9kZKrfjaf5AYt1NelNyK/1tKwW5rJxD0gHKOqtlseU80MBHK+P+VvW
+         42HS0bz6vYgt5fgAWtuORqmeFSnEYrTk35s6SOX7dDyTeSLMuiMSKWTgskB4zIp5cN
+         XyqtA5fIqPXAQb+139dn+hxqU8ko6wufC3qlxR0yc5nEd1tdeWsFkSCjDBBPZ+tg/W
+         dFwCPLosNR4YbenWnjbXaw2fidiuEdIDTFz8GsEMzdGgjv69wXZgsD46baPCWwQtuG
+         8tX6Q6QmiAKw2tVV8lW6fGd2wUoHOfM9Rn1MvDmqobz8eRoZvUZPJFYhkjDPT99Cnx
+         A4ccrXEod5OnA==
+Date:   Tue, 19 Jan 2021 08:43:49 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v6 11/16] scripts: kernel-doc: validate kernel-doc
+ markup with the actual names
+Message-ID: <20210119084328.749e415f@coco.lan>
+In-Reply-To: <20210118133545.05af2277@lwn.net>
+References: <cover.1610610937.git.mchehab+huawei@kernel.org>
+        <081546f141a496d6cabb99a4adc140444c705e93.1610610937.git.mchehab+huawei@kernel.org>
+        <20210118133545.05af2277@lwn.net>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Tested with ASRock X570 Phantom Gaming-ITX/TB3. It also appears
-on other ASRock boards.
+Em Mon, 18 Jan 2021 13:35:45 -0700
+Jonathan Corbet <corbet@lwn.net> escreveu:
 
-Signed-off-by: Bla=C5=BE Hrastnik <blaz@mxxn.io>
----
- Documentation/hwmon/nct6683.rst | 1 +
- drivers/hwmon/nct6683.c         | 3 +++
- 2 files changed, 4 insertions(+)
+> On Thu, 14 Jan 2021 09:04:47 +0100
+> Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
+> 
+> > Kernel-doc currently expects that the kernel-doc markup to come
+> > just before the function/enum/struct/union/typedef prototype.
+> > 
+> > Yet, if it find things like:
+> > 
+> > 	/**
+> > 	 * refcount_add - add a value to a refcount
+> > 	 * @i: the value to add to the refcount
+> > 	 * @r: the refcount
+> > 	 */
+> > 	static inline void __refcount_add(int i, refcount_t *r, int *oldp);
+> > 	static inline void refcount_add(int i, refcount_t *r);
+> > 
+> > Kernel-doc will do the wrong thing:
+> > 
+> > 	foobar.h:6: warning: Function parameter or member 'oldp' not described in '__refcount_add'
+> > 	.. c:function:: void __refcount_add (int i, refcount_t *r, int *oldp)
+> > 
+> > 	   add a value to a refcount
+> > 
+> > 	**Parameters**
+> > 
+> > 	``int i``
+> > 	  the value to add to the refcount
+> > 
+> > 	``refcount_t *r``
+> > 	  the refcount
+> > 
+> > 	``int *oldp``
+> > 	  *undescribed*
+> > 
+> > Basically, it will document "__refcount_add" with the kernel-doc
+> > markup for refcount_add.
+> > 
+> > If both functions have the same arguments, this won't even
+> > produce any warning!
+> > 
+> > Add a logic to check if the kernel-doc identifier matches the actual
+> > name of the C function or data structure that will be documented.
+> > 
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>  
+> 
+> I've applied this one; 
 
-diff --git a/Documentation/hwmon/nct6683.rst b/Documentation/hwmon/nct66=
-83.rst
-index 8646ad519..2e1408d17 100644
---- a/Documentation/hwmon/nct6683.rst
-+++ b/Documentation/hwmon/nct6683.rst
-@@ -61,5 +61,6 @@ Board		Firmware version
- Intel DH87RL	NCT6683D EC firmware version 1.0 build 04/03/13
- Intel DH87MC	NCT6683D EC firmware version 1.0 build 04/03/13
- Intel DB85FL	NCT6683D EC firmware version 1.0 build 04/03/13
-+ASRock X570	NCT6683D EC firmware version 1.0 build 06/28/19
- MSI B550	NCT6687D EC firmware version 1.0 build 05/07/20
- =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D =3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-diff --git a/drivers/hwmon/nct6683.c b/drivers/hwmon/nct6683.c
-index 7f7e30f0d..a23047a3b 100644
---- a/drivers/hwmon/nct6683.c
-+++ b/drivers/hwmon/nct6683.c
-@@ -169,6 +169,7 @@ superio_exit(int ioreg)
- #define NCT6683_CUSTOMER_ID_INTEL	0x805
- #define NCT6683_CUSTOMER_ID_MITAC	0xa0e
- #define NCT6683_CUSTOMER_ID_MSI		0x201
-+#define NCT6683_CUSTOMER_ID_ASROCK		0xe2c
-=20
- #define NCT6683_REG_BUILD_YEAR		0x604
- #define NCT6683_REG_BUILD_MONTH		0x605
-@@ -1225,6 +1226,8 @@ static int nct6683_probe(struct platform_device *p=
-dev)
- 		break;
- 	case NCT6683_CUSTOMER_ID_MSI:
- 		break;
-+	case NCT6683_CUSTOMER_ID_ASROCK:
-+		break;
- 	default:
- 		if (!force)
- 			return -ENODEV;
---=20
-2.29.2
+Thanks!
 
+> it seems useful to have even if it creates more
+> warnings that Stephen will duly email me about tomorrow...:)  I have parts
+> 1-10 set aside and will apply any that don't get picked up directly by the
+> maintainers involved.
+
+Yeah, new warnings are unavoidable, as new patches may be introducing
+extra issues. Hopefully, the new warning will help people to detect
+the issue earlier before submitting upstream.
+
+
+Thanks,
+Mauro
