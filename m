@@ -2,174 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 29AE92FC711
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 02:47:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EC8FA2FC719
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 02:49:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731038AbhATBpx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 20:45:53 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57850 "EHLO
+        id S1731203AbhATBsC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 20:48:02 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58454 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1731172AbhATBpe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 20:45:34 -0500
-Received: from mail-qk1-x732.google.com (mail-qk1-x732.google.com [IPv6:2607:f8b0:4864:20::732])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2E316C061385
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 17:43:59 -0800 (PST)
-Received: by mail-qk1-x732.google.com with SMTP id b64so23973462qkc.12
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 17:43:59 -0800 (PST)
+        with ESMTP id S1728829AbhATBrz (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 20:47:55 -0500
+Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com [IPv6:2607:f8b0:4864:20::d2e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 94563C061573
+        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 17:47:14 -0800 (PST)
+Received: by mail-io1-xd2e.google.com with SMTP id u17so43874503iow.1
+        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 17:47:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=SWC85EvrfhDWN9GAMNSCIdaWub1yJYYIkxTKcYQyLVs=;
-        b=WezjidD20cBXiwyz9W0oPzrxqqnYifMOP5TKoe0jgFAZVKdB5J3R1PsP90gAYMxfdj
-         gjYlsEK7Wb/bNeMMaWgm+IUfGnQYiLyXUNFBYqaNgr79FjcxxtVlt3KXasC8BCilVSJZ
-         JJFEBvIITAa92TBHXdK7nxJAyRerq8z2rm64n1+8NZVgxMpII6a1QJIu41PIBAVh46cI
-         bXKeUlx3PzuSDhm+vwpxaZujsCO/rBPMKr+PFqMQ+DGHqH6tr59yOpzzWEtFYNCnMJrk
-         DH6O/5Tmptvy9ZUu4e7hBg6Pp/CO+dRcB9XOL1ady7bFnl38V7zYCLtU8UTS/bN9lxrO
-         H/ww==
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=5+WhwzNRDpmWcjMswnWq7E2yb90Yz7CDT/ASxX9uTR0=;
+        b=DRFzXjwMHdy+hp3QFZ75qgsM2DMUTCu6U75uWV2VOGqXS0/FMbGYG/AzxizWr/Scs5
+         Qc50Id8JeUBRxixIIvxskSBvu15A1fcg/gA5rLzShWXI4/XcZa1pe7sWgcneP8uhKh3S
+         FUoRfvO63ilUUXKt5pY7LrtBdxErGk3+hgJGWVPmy8C/Ojm9q2ygOcQONjivcqXQ4dgj
+         wEYXFWlZT162jiZh+r43cV0FYYz8J5+1qZk4No8XuJcJD+aPSbCGbyYLF00ylOjNjWiM
+         0phQoeusbKN85SOewFITjBGrJKePhWfB7vtIceeQuthp86eGwppeq605v9GVsu3ahi5T
+         vFbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=SWC85EvrfhDWN9GAMNSCIdaWub1yJYYIkxTKcYQyLVs=;
-        b=QHxLFK82Mo3sOROmtPSNJZBc8NmAdmDqSWfCP3BCRr59X6Dck70k3H2hkG8dwCrq7Q
-         LQj6GMu4tS1/QylQQDbJqKikvUPRXUHKJeutCB9d8MtToiKDpG1FFwgUIpZeN2jbXamU
-         x1VBssNRW9iLJEzpLXv7IwtXDGFeYtal3pZamApE7vv3o2ktRdLuywmEiBZQREz8wlr9
-         BfyumPl8NdfCaBGTd/XPGXUuOucZFHF/j9Lf4ksMLxZDQ9y1C78hFITTPuQBJMKr6zrK
-         ns0jyXRDTDHAc/xrDtixlhv5Tm8A2AiWX1KMmOCZ3ZcbkOtH9KmNYfY2+//6zYB/2ndk
-         bgfQ==
-X-Gm-Message-State: AOAM531wTlecHBZ/J2iu2LFe8H/Mnc729OSlqBsuL3jl5ibIS+zi20TJ
-        Cf6UNk11v8MAEyBEtstVwPwDjg==
-X-Google-Smtp-Source: ABdhPJw5izQeBjkRMqhjsC9TP9lgwkrU7chc1HNFB77ws4A9Zzmy0nyzIos4bjgkU0IReb0VVUFGvQ==
-X-Received: by 2002:a37:4587:: with SMTP id s129mr7500098qka.62.1611107038455;
-        Tue, 19 Jan 2021 17:43:58 -0800 (PST)
-Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
-        by smtp.gmail.com with ESMTPSA id a9sm391871qkk.39.2021.01.19.17.43.57
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Jan 2021 17:43:57 -0800 (PST)
-From:   Pavel Tatashin <pasha.tatashin@soleen.com>
-To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, akpm@linux-foundation.org, vbabka@suse.cz,
-        mhocko@suse.com, david@redhat.com, osalvador@suse.de,
-        dan.j.williams@intel.com, sashal@kernel.org,
-        tyhicks@linux.microsoft.com, iamjoonsoo.kim@lge.com,
-        mike.kravetz@oracle.com, rostedt@goodmis.org, mingo@redhat.com,
-        jgg@ziepe.ca, peterz@infradead.org, mgorman@suse.de,
-        willy@infradead.org, rientjes@google.com, jhubbard@nvidia.com,
-        linux-doc@vger.kernel.org, ira.weiny@intel.com,
-        linux-kselftest@vger.kernel.org
-Subject: [PATCH v6 14/14] selftests/vm: test faulting in kernel, and verify pinnable pages
-Date:   Tue, 19 Jan 2021 20:43:33 -0500
-Message-Id: <20210120014333.222547-15-pasha.tatashin@soleen.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210120014333.222547-1-pasha.tatashin@soleen.com>
-References: <20210120014333.222547-1-pasha.tatashin@soleen.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=5+WhwzNRDpmWcjMswnWq7E2yb90Yz7CDT/ASxX9uTR0=;
+        b=CyewnRyGHeD8HgsnwBcwASX2LVg6FbvL++CaJCwbv4A50VaOMYVqu0O15TEZEJhIR0
+         aLFCGNS6IXoDMjgiwiRLDXOh4YTx0+smAXzrOsUKplOqp0PUfr1cHxWjTowi4R3cBZ04
+         k6lESdeN20itG2Wk0m9o+aL1kavoJInYK9l8o4HIOVT2e0vHQVXHh1PEZdf5zJTBFkme
+         0gKCzN4XiQ1SrI880BpBrOi3S0kOKXaOhgKwXHMZRNfYz+vuVoMHWu4iX8ntT7qJTcmR
+         Quv5HNqcNcESMYgC+OWIAuPLjuGmprGWPWWGm79VozHHihZwAI8CTGVslrpONKM/sV2B
+         MRQA==
+X-Gm-Message-State: AOAM530Ss7DEoSI1bItuRQdu2ythBksrH5omNN64H/q/bPgQJgrK6cmA
+        Wp7yvsTMuwDIddRpeLC/luwKpwMXqOVBpugGzAI=
+X-Google-Smtp-Source: ABdhPJy62kEQieTeSA2J6yIZv87/eimIurRXjgMBcYObkijzPEWlGzRbQX6wsV0E6cxHBZ9oOfiSoU4rOcHt2SGgrds=
+X-Received: by 2002:a02:969a:: with SMTP id w26mr5871142jai.96.1611107233884;
+ Tue, 19 Jan 2021 17:47:13 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210119074617.3109276-1-siyanteng@loongson.cn>
+In-Reply-To: <20210119074617.3109276-1-siyanteng@loongson.cn>
+From:   Huacai Chen <chenhuacai@gmail.com>
+Date:   Wed, 20 Jan 2021 09:47:02 +0800
+Message-ID: <CAAhV-H6C+wWaSHe+zpsGJ=bGeRqsQK3aYJU3KTEB204dYMfHCw@mail.gmail.com>
+Subject: Re: [PATCH 1/3] docs: zh_CN: add mips index.rst translation
+To:     Yanteng Si <siyanteng@loongson.cn>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Yanteng Si <siyanteng01@gmail.com>, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, Jiaxun Yang <jiaxun.yang@flygoat.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When pages are pinned they can be faulted in userland and migrated, and
-they can be faulted right in kernel without migration.
+Hi, Yanteng,
 
-In either case, the pinned pages must end-up being pinnable (not movable).
+What is "MIPS" in the title??
 
-Add a new test to gup_test, to help verify that the gup/pup
-(get_user_pages() / pin_user_pages()) behavior with respect to pinnable
-and movable pages is reasonable and correct. Specifically, provide a
-way to:
+Huacai
 
-1) Verify that only "pinnable" pages are pinned. This is checked
-automatically for you.
-
-2) Verify that gup/pup performance is reasonable. This requires
-comparing benchmarks between doing gup/pup on pages that have been
-pre-faulted in from user space, vs. doing gup/pup on pages that are not
-faulted in until gup/pup time (via FOLL_TOUCH). This decision is
-controlled with the new -z command line option.
-
-Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
----
- mm/gup_test.c                         |  6 ++++++
- tools/testing/selftests/vm/gup_test.c | 23 +++++++++++++++++++----
- 2 files changed, 25 insertions(+), 4 deletions(-)
-
-diff --git a/mm/gup_test.c b/mm/gup_test.c
-index a6ed1c877679..d974dec19e1c 100644
---- a/mm/gup_test.c
-+++ b/mm/gup_test.c
-@@ -52,6 +52,12 @@ static void verify_dma_pinned(unsigned int cmd, struct page **pages,
- 
- 				dump_page(page, "gup_test failure");
- 				break;
-+			} else if (cmd == PIN_LONGTERM_BENCHMARK &&
-+				WARN(!is_pinnable_page(page),
-+				     "pages[%lu] is NOT pinnable but pinned\n",
-+				     i)) {
-+				dump_page(page, "gup_test failure");
-+				break;
- 			}
- 		}
- 		break;
-diff --git a/tools/testing/selftests/vm/gup_test.c b/tools/testing/selftests/vm/gup_test.c
-index 943cc2608dc2..1e662d59c502 100644
---- a/tools/testing/selftests/vm/gup_test.c
-+++ b/tools/testing/selftests/vm/gup_test.c
-@@ -13,6 +13,7 @@
- 
- /* Just the flags we need, copied from mm.h: */
- #define FOLL_WRITE	0x01	/* check pte is writable */
-+#define FOLL_TOUCH	0x02	/* mark page accessed */
- 
- static char *cmd_to_str(unsigned long cmd)
- {
-@@ -39,11 +40,11 @@ int main(int argc, char **argv)
- 	unsigned long size = 128 * MB;
- 	int i, fd, filed, opt, nr_pages = 1, thp = -1, repeats = 1, write = 1;
- 	unsigned long cmd = GUP_FAST_BENCHMARK;
--	int flags = MAP_PRIVATE;
-+	int flags = MAP_PRIVATE, touch = 0;
- 	char *file = "/dev/zero";
- 	char *p;
- 
--	while ((opt = getopt(argc, argv, "m:r:n:F:f:abctTLUuwWSHp")) != -1) {
-+	while ((opt = getopt(argc, argv, "m:r:n:F:f:abctTLUuwWSHpz")) != -1) {
- 		switch (opt) {
- 		case 'a':
- 			cmd = PIN_FAST_BENCHMARK;
-@@ -110,6 +111,10 @@ int main(int argc, char **argv)
- 		case 'H':
- 			flags |= (MAP_HUGETLB | MAP_ANONYMOUS);
- 			break;
-+		case 'z':
-+			/* fault pages in gup, do not fault in userland */
-+			touch = 1;
-+			break;
- 		default:
- 			return -1;
- 		}
-@@ -167,8 +172,18 @@ int main(int argc, char **argv)
- 	else if (thp == 0)
- 		madvise(p, size, MADV_NOHUGEPAGE);
- 
--	for (; (unsigned long)p < gup.addr + size; p += PAGE_SIZE)
--		p[0] = 0;
-+	/*
-+	 * FOLL_TOUCH, in gup_test, is used as an either/or case: either
-+	 * fault pages in from the kernel via FOLL_TOUCH, or fault them
-+	 * in here, from user space. This allows comparison of performance
-+	 * between those two cases.
-+	 */
-+	if (touch) {
-+		gup.gup_flags |= FOLL_TOUCH;
-+	} else {
-+		for (; (unsigned long)p < gup.addr + size; p += PAGE_SIZE)
-+			p[0] = 0;
-+	}
- 
- 	/* Only report timing information on the *_BENCHMARK commands: */
- 	if ((cmd == PIN_FAST_BENCHMARK) || (cmd == GUP_FAST_BENCHMARK) ||
--- 
-2.25.1
-
+On Tue, Jan 19, 2021 at 3:46 PM Yanteng Si <siyanteng@loongson.cn> wrote:
+>
+> This patch translates Documentation/iio/index.rst into Chinese.
+>
+> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+> ---
+>  .../translations/zh_CN/iio/index.rst          | 20 +++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+>  create mode 100644 Documentation/translations/zh_CN/iio/index.rst
+>
+> diff --git a/Documentation/translations/zh_CN/iio/index.rst b/Documentati=
+on/translations/zh_CN/iio/index.rst
+> new file mode 100644
+> index 000000000000..88b6ba5f233b
+> --- /dev/null
+> +++ b/Documentation/translations/zh_CN/iio/index.rst
+> @@ -0,0 +1,20 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +.. include:: ../disclaimer-zh_CN.rst
+> +
+> +:Original: :doc:`../../../iio/index`
+> +:Translator: Yanteng Si <siyanteng@loongson.cn>
+> +
+> +.. _cn_index:
+> +
+> +
+> +=3D=3D=3D=3D=3D=3D=3D=3D
+> +=E5=B7=A5=E4=B8=9A I/O
+> +=3D=3D=3D=3D=3D=3D=3D=3D
+> +
+> +.. toctree::
+> +   :maxdepth: 1
+> +
+> +   iio_configfs
+> +
+> +   ep93xx_adc
+> --
+> 2.27.0
+>
