@@ -2,85 +2,81 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2910A2FD615
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 17:53:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 533172FD62B
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 17:55:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727445AbhATQwo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 20 Jan 2021 11:52:44 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54028 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2391507AbhATQpQ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Jan 2021 11:45:16 -0500
-Received: from mail-qt1-x82c.google.com (mail-qt1-x82c.google.com [IPv6:2607:f8b0:4864:20::82c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9DAA0C061575;
-        Wed, 20 Jan 2021 08:44:34 -0800 (PST)
-Received: by mail-qt1-x82c.google.com with SMTP id c12so11158218qtv.5;
-        Wed, 20 Jan 2021 08:44:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=sender:date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=02Z6TkAFxEXED71l0h/isCElQR7bDCewo1h0J01+Wq0=;
-        b=ZFT116uGUty55tAT/lPBU+jK/pTkJif9rwc6f69o4n9DiLgm279sPG57CMy/5rnzVk
-         PfBUJZPULqvQU9M3UuFhTEVVFQDbx3agVb/qSmGHKpFGfnZmuW/e6sNCi6YPr7pj/UGw
-         V0kAZCN/2Pw+FzXKWB1Sk0RImOk4aaOwceptZTX94mOmjK08NFcsuHETyfHdkx8u/qL8
-         k4bgiPA2PWl7kPfKTu2hHcPmNAgfukZKjldhOkoPIHLfQDSGrwkhs/9uRnn+ifaD/sM5
-         ip1lcO42mVBRGiI1C9pdaeE+nTYOlrDsPgYHzi+vSOkighBozKL5FHt/uXzdZp75U53F
-         fczw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
-         :references:mime-version:content-disposition:in-reply-to;
-        bh=02Z6TkAFxEXED71l0h/isCElQR7bDCewo1h0J01+Wq0=;
-        b=mveUfedZRVKqKNbz3bgdkqJvzwN7W2HJC04mG0WuzVaEppfrqdbJ4lZDIYheWSkEP0
-         mpujpBEjB3LMiraS/rCagsnSUScV3ufNS1uc2C5HppTCoCekCIY2NvLDJJs0zE479E4T
-         B3a3ABF3KXBV4N288q2L1ysMxoqjEgLCfEc9501kiNSzS+0bjPuLDpOQqtiU0JcfS8e0
-         040d3YVR8CPoxPJy6tpEBtV/q59BCmAYGAXdF6ISWj2O8l9IcqnSSeef+v+kMK6bvvgq
-         Gs7y9Tx0EA/XelDFUF7z/aPCsW6Job8sXcJwQP8QhleJkPThwihSwTREl9R9SfCI43d9
-         E3yw==
-X-Gm-Message-State: AOAM531iRLNMzbzJebD3BLA0qwNxMRMXhJabYZjl08+PSqJjUKUKzMoE
-        COpNG5jcr1h0hHzbjtcj5eQ=
-X-Google-Smtp-Source: ABdhPJxn1raxfX/V/yiPGSWI1xjOUpn9xVevENN/MHdwBus5VX4sEhwoUzZC3JMITmzBq/bYJcKmZg==
-X-Received: by 2002:ac8:4f51:: with SMTP id i17mr9627134qtw.78.1611161073787;
-        Wed, 20 Jan 2021 08:44:33 -0800 (PST)
-Received: from localhost ([2620:10d:c091:480::1:1b8f])
-        by smtp.gmail.com with ESMTPSA id f125sm1628553qkd.22.2021.01.20.08.44.32
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 20 Jan 2021 08:44:33 -0800 (PST)
-Sender: Tejun Heo <htejun@gmail.com>
-Date:   Wed, 20 Jan 2021 11:43:46 -0500
-From:   Tejun Heo <tj@kernel.org>
-To:     Kir Kolyshkin <kolyshkin@gmail.com>
-Cc:     corbet@lwn.net, linux-doc@vger.kernel.org, cgroups@vger.kernel.org
-Subject: Re: [PATCH 00/10] docs: cgroup nits and fixes
-Message-ID: <YAhdwtMS98iPma+S@mtj.duckdns.org>
-References: <20210120001824.385168-1-kolyshkin@gmail.com>
+        id S2391457AbhATQxz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 20 Jan 2021 11:53:55 -0500
+Received: from mail.kernel.org ([198.145.29.99]:55626 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1731111AbhATQxK (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 20 Jan 2021 11:53:10 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id CB12A23358;
+        Wed, 20 Jan 2021 16:52:29 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1611161550;
+        bh=e+9f8iPYPhOz9ImfJPx0otLQhcIdYO8xuge7heB6EHU=;
+        h=From:To:Cc:Subject:Date:From;
+        b=DS7ZTQJ9Qjn1JtMEH7Cj8DnwI2CyUjp1UHW+vTj4TH9GWSdwYHtUI/QzmdjlWxda/
+         EjGBFuRuMU2RD6Hg24xYB+DXoFuBZN6tenIXTb4pE+V7C9kACca1dLZKNqY9KlXFA1
+         evqZcBJafU7rJCNe+YvK5jJZ22vMRe85FlZC5+uD42F7PDhFsCr1V6nMTQYX7blTet
+         Bq6L7AfX6V/EbpVpzXnq8CbLh1nii1EziGgAilkilZjCeJsql2u/5d0T4iKquvDJGy
+         H5qJaQxsmtFla2lKw+lmI6rcvEffCHRe+6sKRf63ft1trNAS9OgUd/AqPEiYGNyOMg
+         q6UjdGShWk3lA==
+From:   Mark Brown <broonie@kernel.org>
+To:     linux-kernel@vger.kernel.org
+Cc:     Mark Rutland <mark.rutland@arm.com>,
+        Jiri Kosina <jikos@kernel.org>,
+        Joe Lawrence <joe.lawrence@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Miroslav Benes <mbenes@suse.cz>,
+        Petr Mladek <pmladek@suse.com>,
+        Josh Poimboeuf <jpoimboe@redhat.com>,
+        linux-doc@vger.kernel.org, live-patching@vger.kernel.org,
+        Mark Brown <broonie@kernel.org>
+Subject: [PATCH v6 0/2] Documentation: livepatch: Document reliable stacktrace and minor cleanup
+Date:   Wed, 20 Jan 2021 16:47:12 +0000
+Message-Id: <20210120164714.16581-1-broonie@kernel.org>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210120001824.385168-1-kolyshkin@gmail.com>
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jan 19, 2021 at 04:18:14PM -0800, Kir Kolyshkin wrote:
-> These are mostly formatting fixes for a few cases where html
-> looks plain wrong, plus a couple of added cross-references,
-> and a typo.
-> 
-> All issues spotted while reading cgroup docs. Results are checked
-> manually for both html and pdf, using both Sphinx 2.4.4 and 3.2.1
-> for rendering.
-> 
-> All commits are against docs-next@52042e2db
+This series adds a document, mainly written by Mark Rutland, which makes
+explicit the requirements for implementing reliable stacktrace in order
+to aid architectures adding this feature.  It also updates the other
+livepatching documents to use automatically generated tables of contents
+following review comments on Mark's document.
 
-For the series,
+v6:
+ - Remove a duplicated "points".
+v5:
+ - Tweaks to the commit message for the new document.
+ - Convert new and existing documents to autogenerated tables of
+   contents.
+v4:
+ - Renumber table of contents
+v3:
+ - Incorporated objtool section from Mark.
+ - Deleted confusing notes about using annotations.
 
-Acked-by: Tejun Heo <tj@kernel.org>
+Mark Brown (1):
+  Documentation: livepatch: Convert to automatically generated contents
 
-I suppose it'd be best to route this through the doc tree?
+Mark Rutland (1):
+  Documentation: livepatch: document reliable stacktrace
 
-Thanks.
+ Documentation/livepatch/index.rst             |   1 +
+ Documentation/livepatch/livepatch.rst         |  15 +-
+ Documentation/livepatch/module-elf-format.rst |  10 +-
+ .../livepatch/reliable-stacktrace.rst         | 309 ++++++++++++++++++
+ 4 files changed, 313 insertions(+), 22 deletions(-)
+ create mode 100644 Documentation/livepatch/reliable-stacktrace.rst
 
+
+base-commit: 7c53f6b671f4aba70ff15e1b05148b10d58c2837
 -- 
-tejun
+2.20.1
+
