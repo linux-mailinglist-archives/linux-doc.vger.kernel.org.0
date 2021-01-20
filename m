@@ -2,124 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2194F2FC908
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 04:35:31 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EA2ED2FC9F1
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 05:28:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727738AbhATDbW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 22:31:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52482 "EHLO
+        id S1731083AbhATEZJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 23:25:09 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35422 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727834AbhATDbT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 22:31:19 -0500
-Received: from mail-qv1-xf2a.google.com (mail-qv1-xf2a.google.com [IPv6:2607:f8b0:4864:20::f2a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 61A2CC061575
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 19:30:38 -0800 (PST)
-Received: by mail-qv1-xf2a.google.com with SMTP id dj6so1125906qvb.1
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 19:30:38 -0800 (PST)
+        with ESMTP id S1727140AbhATEXa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 23:23:30 -0500
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com [IPv6:2607:f8b0:4864:20::234])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3BEC1C061575;
+        Tue, 19 Jan 2021 20:22:43 -0800 (PST)
+Received: by mail-oi1-x234.google.com with SMTP id x71so7931656oia.9;
+        Tue, 19 Jan 2021 20:22:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=CSOeaZyodXdFBT14EO9vXECxvzv1KuinOpOVirjXxmA=;
-        b=gcuc2WAKaqS1UMz2QgJXCirs1FgwKX161AzroxI8mOlEn7tEfVHcWB5Hm5wsReI6WU
-         uZXCl0FDm5Xf67Dwcxtb6mSdSSAe0lBD0Z1niPwXvMaPoDD7ZHTwKYGjJehcF0WbjATh
-         e/WL37caRjM85NIL+1c9FWXaKPqY/Y6QbXML4OqPL2qgAqmodwAz6NhoXmyHQchTdXgw
-         FgcPUiMDs7OyLJqA416Y+WvObhfTFO1efuwim8dZY8T05naSfJv4/a8ugcfY7Flq8HeQ
-         CdDnJKLXtfps+ExEfECcB8UjAIcHILjTVaY3Bk9pu0enMoKHY/p/jPoZu37zKKZRFz7v
-         gDpg==
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=GP6CcfjV/nEcKJK3Rxlv4zO7l7XOzbH7ZH19Z8QJF8E=;
+        b=Vcth5JiSXjuEHV3SJWLTc9nv/u3U5+IPgeWg9LYr2lj7oCtkjGxId8yuC5GIa4rw9h
+         q3oIvUyQHXsbeBV1dgvUKkROI2nVhlN9aFhr+iB/DW+2QVG8TivGlMoYzlcG09cCNA62
+         vKIRA06CBPIG1i7tkFwPI5sjiIZA7Xrj6QjL90opwNum4WTc8vXUbx392ZwVca9xmH0K
+         eK7hX5gDGKnUhK3L+lzlnXqqMNpf66YbfyTBtV8vH2d2f7j5bWQ9eWtgp43RUsdqYr3O
+         p/RyRtcPn77FOgCRW1VCP3M1VRVVQFAIKxPizO/SMELy0YkoQHHcg/u5c+rgcroC9onH
+         IOvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=CSOeaZyodXdFBT14EO9vXECxvzv1KuinOpOVirjXxmA=;
-        b=Y/csMk0jk0vrXmmesTZw6TMpqBgWzUnD93Hjao//pe1Stpw7BalBijLoUghxn/AYw5
-         o2fmVmvniH9GKXH7IgzCkcTsAJeVKlgxh/7xbWX4vFEcYBmXBd3Tnc8J+drtajU8rEIZ
-         2h2xprPj/LiiHtUUThWmpLu1GS6ZVmEjBaCYMlFB0hYXtg6Q/gwJbtHXTkrk1XctGepF
-         Oe4po07BLY4QYWiUR8e2mc1/dHkBF1Mz9ODzJY2TAJcucsmVcoTYf4E82Pvkf7AXeuv2
-         nyyWLkXGsiClV/nnPHEbZLdU8hyisl1BTK9IlXWkCgjskwjxizA0TSRRB5MgqInZUlyy
-         W6bw==
-X-Gm-Message-State: AOAM533W+a67tgTPKsHtpToS6/tUBr7k+1KAc65/tvP0r1ukf9YeZJ7t
-        igQnlFDPo/HuT7jSJsIayYYukViXz7XPkjdVh5A=
-X-Google-Smtp-Source: ABdhPJw9AYx3ljsS83TkUXhD4vwug3t7lRz0bOzBLKwMYBsGvzKmzDJdyb8wKerVRdTPFWAy1IrIsf/trLW0GMojdYY=
-X-Received: by 2002:a0c:e90a:: with SMTP id a10mr7554786qvo.38.1611113437754;
- Tue, 19 Jan 2021 19:30:37 -0800 (PST)
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=GP6CcfjV/nEcKJK3Rxlv4zO7l7XOzbH7ZH19Z8QJF8E=;
+        b=PzjCwiQbLrY4UUSR6TVozfLwnCN/81IVYlWayfcpAP063WFnfZ5Y80kUrUcsTZez/A
+         umQ5ytsAo441XJfn4KnE/1UA1vo9jyxy4s0DYSAYtbI4gt9fxtJh8CNDc9/S3QRg5BMB
+         qG9ihCVmn8gbYx6vB2M6a8tGd5Woxhc5WwJLyiZsJFh89KbgThIzIgJp1IIdtltNeSG9
+         Rb23OYtCd18jsCQqCzUEw/ruL42yJ5TXR8vdRsLDepesKwRV6V2pVpC38NOGd+5Tfbeb
+         p2R0y8vSoX81AJsw9EBBfbbYQEOLIP7M0yHjTTjAdQ6AEY1lXswdSeGFOcK/dGtJMkid
+         NiBw==
+X-Gm-Message-State: AOAM5313yo2kFI1wheJv4pF+74URom7LBohO43lb9MaMd6oPlo3EX9km
+        1GN9Bjd+gFp//v3qF+BmCv8=
+X-Google-Smtp-Source: ABdhPJy7cUXT/3a2USlFCorl1HDBicSLZCXIdOyOaH/EPPttM5sW7Yg2soQ/slabJaZe6wm5dgC44w==
+X-Received: by 2002:aca:be54:: with SMTP id o81mr1806904oif.67.1611116562271;
+        Tue, 19 Jan 2021 20:22:42 -0800 (PST)
+Received: from Davids-MacBook-Pro.local ([8.20.123.12])
+        by smtp.googlemail.com with ESMTPSA id f3sm185743otq.42.2021.01.19.20.22.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 19 Jan 2021 20:22:41 -0800 (PST)
+Subject: Re: [PATCH v2 net-next 1/1] Allow user to set metric on default route
+ learned via Router Advertisement.
+To:     praveen chaudhary <praveen5582@gmail.com>
+Cc:     davem@davemloft.net, kuba@kernel.org, corbet@lwn.net,
+        kuznet@ms2.inr.ac.ru, yoshfuji@linux-ipv6.org,
+        netdev@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Zhenggen Xu <zxu@linkedin.com>
+References: <20210115080203.8889-1-pchaudhary@linkedin.com>
+ <0f64942e-debd-81bd-b29c-7d2728a5bd4b@gmail.com>
+ <A2DE27CF-A988-4003-8A95-60CC101086DA@gmail.com>
+From:   David Ahern <dsahern@gmail.com>
+Message-ID: <7839be40-6555-3e5a-3459-c3f0e4726795@gmail.com>
+Date:   Tue, 19 Jan 2021 21:22:40 -0700
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.16; rv:78.0)
+ Gecko/20100101 Thunderbird/78.6.1
 MIME-Version: 1.0
-References: <20210119074617.3109276-1-siyanteng@loongson.cn> <5f3b32da-1b4a-23dc-ab50-7eed17b3196f@linux.alibaba.com>
-In-Reply-To: <5f3b32da-1b4a-23dc-ab50-7eed17b3196f@linux.alibaba.com>
-From:   teng sterling <sterlingteng@gmail.com>
-Date:   Wed, 20 Jan 2021 11:30:26 +0800
-Message-ID: <CAMU9jJoGdLV6bkJyXfKFbR6LOikX_cOwPgfaB6eJ_GLfCZYiZA@mail.gmail.com>
-Subject: Re: [PATCH 1/3] docs: zh_CN: add mips index.rst translation
-To:     Alex Shi <alex.shi@linux.alibaba.com>
-Cc:     Yanteng Si <siyanteng@loongson.cn>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Yanteng Si <siyanteng01@gmail.com>, linux-doc@vger.kernel.org,
-        realpuyuwang@gmail.com, Huacai Chen <chenhuacai@gmail.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <A2DE27CF-A988-4003-8A95-60CC101086DA@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Thank you!
-I will modify it in v2=E3=80=82
+On 1/19/21 3:17 PM, praveen chaudhary wrote:
+>>> ----------------------------------------------------------------
+>>> For IPv4:
+>>> ----------------------------------------------------------------
+>>>
+>>> Config in etc/network/interfaces
+>>> ----------------------------------------------------------------
+>>> ```
+>>> auto eth0
+>>> iface eth0 inet dhcp
+>>>    metric 4261413864
+>>
+>> how does that work for IPv4? Is the metric passed to the dhclient and it
+>> inserts the route with the given metric or is a dhclient script used to
+>> replace the route after insert?
+>>
+>>
+> 
+> Yes, DHCP client picks config under “iface eth0 inet dhcp” line and if metric is configured, then it adds the metric for all added routes.
 
-Yanteng Si
+As I recall ifupdown{2} forks dhclient as a process to handle dhcp
+config, and I believe there is a script that handles adding the default
+route with metric. Meaning ... it is not comparable to an RA.
 
-Alex Shi <alex.shi@linux.alibaba.com> =E4=BA=8E2021=E5=B9=B41=E6=9C=8820=E6=
-=97=A5=E5=91=A8=E4=B8=89 =E4=B8=8A=E5=8D=8811:13=E5=86=99=E9=81=93=EF=BC=9A
->
->
->
-> =E5=9C=A8 2021/1/19 =E4=B8=8B=E5=8D=883:46, Yanteng Si =E5=86=99=E9=81=93=
-:
-> > This patch translates Documentation/iio/index.rst into Chinese.
-> >
-> > Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-> > ---
-> >  .../translations/zh_CN/iio/index.rst          | 20 +++++++++++++++++++
-> >  1 file changed, 20 insertions(+)
-> >  create mode 100644 Documentation/translations/zh_CN/iio/index.rst
-> >
-> > diff --git a/Documentation/translations/zh_CN/iio/index.rst b/Documenta=
-tion/translations/zh_CN/iio/index.rst
-> > new file mode 100644
-> > index 000000000000..88b6ba5f233b
-> > --- /dev/null
-> > +++ b/Documentation/translations/zh_CN/iio/index.rst
-> > @@ -0,0 +1,20 @@
-> > +.. SPDX-License-Identifier: GPL-2.0
-> > +
-> > +.. include:: ../disclaimer-zh_CN.rst
-> > +
-> > +:Original: :doc:`../../../iio/index`
-> > +:Translator: Yanteng Si <siyanteng@loongson.cn>
-> > +
-> > +.. _cn_index:
->
-> the tag is unique in Docs, so you'd better use cn_iio_index
-> here and also cn_mips_index for mips Chinese doc.
->
->
->
-> > +
-> > +
-> > +=3D=3D=3D=3D=3D=3D=3D=3D
-> > +=E5=B7=A5=E4=B8=9A I/O
-> > +=3D=3D=3D=3D=3D=3D=3D=3D
-> > +
-> > +.. toctree::
-> > +   :maxdepth: 1
-> > +
-> > +   iio_configfs
-> > +
-> > +   ep93xx_adc
->
-> since your docs are not here now. this should be added after patches 2/3.
->
-> Thanks
-> Alex
->
-> >
+> 
+> Thanks a lot again for spending time for this Review,
+> This feature will help SONiC OS [and others Linux flavors] for better IPv6 support, so thanks again.
+
+I think SONiC is an abomination, so that is definitely not the
+motivation for my reviews. :-)
+
