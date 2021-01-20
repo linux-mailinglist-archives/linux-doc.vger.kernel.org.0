@@ -2,100 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9003B2FC4E0
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 00:39:18 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 089ED2FC547
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 01:03:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729070AbhASXhD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 18:37:03 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58108 "EHLO
+        id S1727200AbhATACL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 19:02:11 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35410 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729209AbhASXgE (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 18:36:04 -0500
-Received: from mail-qv1-xf30.google.com (mail-qv1-xf30.google.com [IPv6:2607:f8b0:4864:20::f30])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 04DD6C0613CF
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 15:35:23 -0800 (PST)
-Received: by mail-qv1-xf30.google.com with SMTP id l14so10070222qvh.2
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 15:35:23 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=EhvAcZQ5rgh2MmfIZWPPX4/VupxkzFvw5zJjAClJRLQ=;
-        b=KQP2/ghi3PyecmFsYOcygO6glPIdjbt4QD0Oum2Udyc5jCV+RO9CfcMEO5jRHIWdb1
-         KR55jJyCsWyHYwxbKA9AcPiyYGZhBiCRMjnz54xXKdAetGI1VBJB5ezLM1Bl452RWANG
-         3b35Xwdkv6mh/3cSZhpyxWCK+FayHVR6jl3HAzXsNrXEKL4ts2/9O+t+bA1DkprppOZU
-         ny4NEb98PxfewGNh+D+qXTvBHfK5J7sWwEUvODoc+nD8BQmER8+WQHiC4nwzmBsOQTKf
-         QAoPCzaIEKHaEiyQc9B2NrL2RGHihp7CFfbxTljqOuGbtv1hpxryOBfR/utcLZkwkrO9
-         Oo7w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=EhvAcZQ5rgh2MmfIZWPPX4/VupxkzFvw5zJjAClJRLQ=;
-        b=KRM8SsF43oAcnm3TbA01FJsS3zwL7DqGHGu0sw3/SUxgNN7lhDnh0hS4vnz4bBVgPB
-         ztSdZsUNVjCgAuviSqvOpxiieh9hRxo3F4ZNvn0y47BfIBbpbIDkDj3q4xw1Zw8JgnPa
-         xXwRXPkcQGj1UTUwOTEQi2sYogsPcdrs8hBkAEAmbttHnXTmyKEmkAd4EhbjHmMGXocF
-         CPGL6+evHwBTPcTxWpwF0Cyu+UN5LTegsLkp9M043YoK02MdeB0bLZXginnnGUpORf9W
-         SMUGZQvarbcq2gs9IpjA2y+lTDwzD7vxwU/xnKe6CzhZJhO+oNCvEIL2Sk7vPZTH16Lh
-         SPcA==
-X-Gm-Message-State: AOAM533qaFpvdS17Xo1Yh4GVHucxXMcCVRXmrx4OpC4/hEBPkNucypaZ
-        jwRrxm4hlObE9NbT7al8Uupuhw==
-X-Google-Smtp-Source: ABdhPJwQ5+FkffXGjNDuxxs8agNNaUF0vD5Ucc+XPCpjUzppX5ueLh25sKxSCYmaiwfTZk67Q0KfAw==
-X-Received: by 2002:a05:6214:1904:: with SMTP id er4mr6763558qvb.49.1611099323173;
-        Tue, 19 Jan 2021 15:35:23 -0800 (PST)
-Received: from ziepe.ca (hlfxns017vw-142-162-115-133.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.115.133])
-        by smtp.gmail.com with ESMTPSA id 2sm121866qtt.24.2021.01.19.15.35.22
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Jan 2021 15:35:22 -0800 (PST)
-Received: from jgg by mlx with local (Exim 4.94)
-        (envelope-from <jgg@ziepe.ca>)
-        id 1l20Wv-003v6u-K8; Tue, 19 Jan 2021 19:35:21 -0400
-Date:   Tue, 19 Jan 2021 19:35:21 -0400
-From:   Jason Gunthorpe <jgg@ziepe.ca>
-To:     Pavel Tatashin <pasha.tatashin@soleen.com>
-Cc:     LKML <linux-kernel@vger.kernel.org>, linux-mm <linux-mm@kvack.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Vlastimil Babka <vbabka@suse.cz>,
-        Michal Hocko <mhocko@suse.com>,
-        David Hildenbrand <david@redhat.com>,
-        Oscar Salvador <osalvador@suse.de>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Sasha Levin <sashal@kernel.org>,
-        Tyler Hicks <tyhicks@linux.microsoft.com>,
-        Joonsoo Kim <iamjoonsoo.kim@lge.com>, mike.kravetz@oracle.com,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Mel Gorman <mgorman@suse.de>,
-        Matthew Wilcox <willy@infradead.org>,
-        David Rientjes <rientjes@google.com>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Ira Weiny <ira.weiny@intel.com>,
-        linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH v5 08/14] mm/gup: do not allow zero page for pinned pages
-Message-ID: <20210119233521.GE4605@ziepe.ca>
-References: <20210119043920.155044-1-pasha.tatashin@soleen.com>
- <20210119043920.155044-9-pasha.tatashin@soleen.com>
- <20210119183013.GB4605@ziepe.ca>
- <CA+CK2bBKbht34Hkg9YvhwYAiAjd3NMd_+Eir9wfx+07V-Y2TTA@mail.gmail.com>
- <20210119184751.GD4605@ziepe.ca>
- <CA+CK2bDGDR9B=n5d4Dz6my6kKyFF=6y79HJt-k-SCpLhF1fUQQ@mail.gmail.com>
+        with ESMTP id S1728645AbhATABx (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 19:01:53 -0500
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 860E2C0613C1;
+        Tue, 19 Jan 2021 16:01:03 -0800 (PST)
+Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 1BFAA52BF;
+        Wed, 20 Jan 2021 00:01:03 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 1BFAA52BF
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1611100863; bh=tn1wINqlscY/vHOgWAz1D25iKzRtrck2nKofvI8A/kI=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=rFkD2YRmFgwXGihwHj/BER7Fu/rLxWwvkv8IhGNmeGl+RnJ7IDlBes0LuLupMvty5
+         fjZxFjosFKRJ+8MHMf5mvhfUWqf/xmFEmESej2UMtHDefHvuSXeLoGPsNM2GUNtlRM
+         ZXU6HmCMyjAqBfsww8Jcp/ck5L8alpGbOVaOERr7ZEkIoEZmQVBYWboB37eAaIUw+Z
+         tnrlwJeWmHUZRe688oByBJVuhS9tziMQerzBblnnALqR6G9bgLQR5LtGRB2NUtT2W0
+         QmYNSgJiiqnZECmt9VX+buUv/CmxFR4+BksuqcccCOCBYkxelqELZWTQKNN6XJhE9b
+         tdKN/XQchDuSA==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Milan Lakhani <milan.lakhani@codethink.co.uk>,
+        lukas.bulwahn@gmail.com, sudip.mukherjee@codethink.co.uk,
+        linux-safety@lists.elisa.tech, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, harryxiyou@gmail.com,
+        alex.shi@linux.alibaba.com
+Cc:     Milan Lakhani <milan.lakhani@codethink.co.uk>,
+        Rob Herring <robh@kernel.org>
+Subject: Re: [PATCH] docs: Change reference that was to removed file
+In-Reply-To: <1611051980-3834-1-git-send-email-milan.lakhani@codethink.co.uk>
+References: <1611051980-3834-1-git-send-email-milan.lakhani@codethink.co.uk>
+Date:   Tue, 19 Jan 2021 17:01:02 -0700
+Message-ID: <87y2gopjcx.fsf@meer.lwn.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CA+CK2bDGDR9B=n5d4Dz6my6kKyFF=6y79HJt-k-SCpLhF1fUQQ@mail.gmail.com>
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jan 19, 2021 at 03:14:04PM -0500, Pavel Tatashin wrote:
+Milan Lakhani <milan.lakhani@codethink.co.uk> writes:
 
-> I was thinking about a use case where userland would pin an address
-> without FOLL_WRITE, because the PTE for that address is not going to
-> be writable, but some device via DMA will write to it.
+[CC += Rob]
 
-That would be a serious bug in the get_user_pages caller to write to a
-page without using FOLL_WRITE
+> There were two references to
+> Documentation/devicetree/booting-without-of.rst for dtb format
+> information. This file has been removed, so I have changed the links to
+> Documentation/devicetree/usage-model.rst for this information, which
+> itself points to https://elinux.org/Device_Tree_Usage for an overview of
+> the device tree data format.
+>
+> Signed-off-by: Milan Lakhani <milan.lakhani@codethink.co.uk>
+> ---
+>  Documentation/arm/booting.rst                | 2 +-
+>  Documentation/translations/zh_CN/arm/Booting | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/Documentation/arm/booting.rst b/Documentation/arm/booting.rst
+> index a226345..5392d01 100644
+> --- a/Documentation/arm/booting.rst
+> +++ b/Documentation/arm/booting.rst
+> @@ -128,7 +128,7 @@ it.  The recommended placement is in the first 16KiB of RAM.
+>  
+>  The boot loader must load a device tree image (dtb) into system ram
+>  at a 64bit aligned address and initialize it with the boot data.  The
+> -dtb format is documented in Documentation/devicetree/booting-without-of.rst.
+> +dtb format is documented in Documentation/devicetree/usage-model.rst.
 
-Jason
+Except that ... usage-model.rst doesn't actually document the DTB
+format.  Perhaps we should instead substitute a link that does what's
+promised here?
+
+Thanks,
+
+jon
