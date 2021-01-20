@@ -2,109 +2,120 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EC8FA2FC719
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 02:49:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B6E4E2FC7EA
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 03:29:52 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1731203AbhATBsC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 20:48:02 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58454 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728829AbhATBrz (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 20:47:55 -0500
-Received: from mail-io1-xd2e.google.com (mail-io1-xd2e.google.com [IPv6:2607:f8b0:4864:20::d2e])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 94563C061573
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 17:47:14 -0800 (PST)
-Received: by mail-io1-xd2e.google.com with SMTP id u17so43874503iow.1
-        for <linux-doc@vger.kernel.org>; Tue, 19 Jan 2021 17:47:14 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=5+WhwzNRDpmWcjMswnWq7E2yb90Yz7CDT/ASxX9uTR0=;
-        b=DRFzXjwMHdy+hp3QFZ75qgsM2DMUTCu6U75uWV2VOGqXS0/FMbGYG/AzxizWr/Scs5
-         Qc50Id8JeUBRxixIIvxskSBvu15A1fcg/gA5rLzShWXI4/XcZa1pe7sWgcneP8uhKh3S
-         FUoRfvO63ilUUXKt5pY7LrtBdxErGk3+hgJGWVPmy8C/Ojm9q2ygOcQONjivcqXQ4dgj
-         wEYXFWlZT162jiZh+r43cV0FYYz8J5+1qZk4No8XuJcJD+aPSbCGbyYLF00ylOjNjWiM
-         0phQoeusbKN85SOewFITjBGrJKePhWfB7vtIceeQuthp86eGwppeq605v9GVsu3ahi5T
-         vFbg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=5+WhwzNRDpmWcjMswnWq7E2yb90Yz7CDT/ASxX9uTR0=;
-        b=CyewnRyGHeD8HgsnwBcwASX2LVg6FbvL++CaJCwbv4A50VaOMYVqu0O15TEZEJhIR0
-         aLFCGNS6IXoDMjgiwiRLDXOh4YTx0+smAXzrOsUKplOqp0PUfr1cHxWjTowi4R3cBZ04
-         k6lESdeN20itG2Wk0m9o+aL1kavoJInYK9l8o4HIOVT2e0vHQVXHh1PEZdf5zJTBFkme
-         0gKCzN4XiQ1SrI880BpBrOi3S0kOKXaOhgKwXHMZRNfYz+vuVoMHWu4iX8ntT7qJTcmR
-         Quv5HNqcNcESMYgC+OWIAuPLjuGmprGWPWWGm79VozHHihZwAI8CTGVslrpONKM/sV2B
-         MRQA==
-X-Gm-Message-State: AOAM530Ss7DEoSI1bItuRQdu2ythBksrH5omNN64H/q/bPgQJgrK6cmA
-        Wp7yvsTMuwDIddRpeLC/luwKpwMXqOVBpugGzAI=
-X-Google-Smtp-Source: ABdhPJy62kEQieTeSA2J6yIZv87/eimIurRXjgMBcYObkijzPEWlGzRbQX6wsV0E6cxHBZ9oOfiSoU4rOcHt2SGgrds=
-X-Received: by 2002:a02:969a:: with SMTP id w26mr5871142jai.96.1611107233884;
- Tue, 19 Jan 2021 17:47:13 -0800 (PST)
+        id S1731975AbhATC3f (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 21:29:35 -0500
+Received: from mail.kernel.org ([198.145.29.99]:47270 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1730641AbhATB3A (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 19 Jan 2021 20:29:00 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 57FEA2312D;
+        Wed, 20 Jan 2021 01:27:24 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1611106045;
+        bh=RXasSzsPwlyqWugfoG3XkngjRibGw7leLfBysKrf8B4=;
+        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
+        b=pAg10lR56ClIYbZShGRFOUX0Bec9zxo05MTV2e9nwWrtZwb84D41mFbFmBSGUbiSa
+         J63fH3rjSWQ1aMVtN9ckEV6QE29PdU7HtdHhOZs6rr/K2iJuc7YWc0TnDG/3nGzTGA
+         gaK4JUUNqoHHOvd3fwFCAPWn/I5wDj02F8PJNc+wcANdloWvqFNioGuCNn/sqPrwqT
+         raOxghCYy6RF7o32bpQD39X7JA46EPVqDVAdM8TbncjugDyRC2RonTLCQKEKNkzlN9
+         r0pDic+Ff/znW9xiINU5xOmRD7f3YH5cZtwM5mpJ643VLJiI7tLsRFr/Q+CBwDLmCn
+         jcwwrRNOYJ4Dg==
+From:   Sasha Levin <sashal@kernel.org>
+To:     linux-kernel@vger.kernel.org, stable@vger.kernel.org
+Cc:     David Woodhouse <dwmw@amazon.co.uk>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+        Juergen Gross <jgross@suse.com>,
+        Sasha Levin <sashal@kernel.org>, linux-doc@vger.kernel.org,
+        xen-devel@lists.xenproject.org
+Subject: [PATCH AUTOSEL 5.4 15/26] x86/xen: Add xen_no_vector_callback option to test PCI INTX delivery
+Date:   Tue, 19 Jan 2021 20:26:52 -0500
+Message-Id: <20210120012704.770095-15-sashal@kernel.org>
+X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20210120012704.770095-1-sashal@kernel.org>
+References: <20210120012704.770095-1-sashal@kernel.org>
 MIME-Version: 1.0
-References: <20210119074617.3109276-1-siyanteng@loongson.cn>
-In-Reply-To: <20210119074617.3109276-1-siyanteng@loongson.cn>
-From:   Huacai Chen <chenhuacai@gmail.com>
-Date:   Wed, 20 Jan 2021 09:47:02 +0800
-Message-ID: <CAAhV-H6C+wWaSHe+zpsGJ=bGeRqsQK3aYJU3KTEB204dYMfHCw@mail.gmail.com>
-Subject: Re: [PATCH 1/3] docs: zh_CN: add mips index.rst translation
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Yanteng Si <siyanteng01@gmail.com>, linux-doc@vger.kernel.org,
-        realpuyuwang@gmail.com, Jiaxun Yang <jiaxun.yang@flygoat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-stable: review
+X-Patchwork-Hint: Ignore
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi, Yanteng,
+From: David Woodhouse <dwmw@amazon.co.uk>
 
-What is "MIPS" in the title??
+[ Upstream commit b36b0fe96af13460278bf9b173beced1bd15f85d ]
 
-Huacai
+It's useful to be able to test non-vector event channel delivery, to make
+sure Linux will work properly on older Xen which doesn't have it.
 
-On Tue, Jan 19, 2021 at 3:46 PM Yanteng Si <siyanteng@loongson.cn> wrote:
->
-> This patch translates Documentation/iio/index.rst into Chinese.
->
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-> ---
->  .../translations/zh_CN/iio/index.rst          | 20 +++++++++++++++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 Documentation/translations/zh_CN/iio/index.rst
->
-> diff --git a/Documentation/translations/zh_CN/iio/index.rst b/Documentati=
-on/translations/zh_CN/iio/index.rst
-> new file mode 100644
-> index 000000000000..88b6ba5f233b
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/iio/index.rst
-> @@ -0,0 +1,20 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: :doc:`../../../iio/index`
-> +:Translator: Yanteng Si <siyanteng@loongson.cn>
-> +
-> +.. _cn_index:
-> +
-> +
-> +=3D=3D=3D=3D=3D=3D=3D=3D
-> +=E5=B7=A5=E4=B8=9A I/O
-> +=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +.. toctree::
-> +   :maxdepth: 1
-> +
-> +   iio_configfs
-> +
-> +   ep93xx_adc
-> --
-> 2.27.0
->
+It's also useful for those working on Xen and Xen-compatible hypervisors,
+because there are guest kernels still in active use which use PCI INTX
+even when vector delivery is available.
+
+Signed-off-by: David Woodhouse <dwmw@amazon.co.uk>
+Reviewed-by: Boris Ostrovsky <boris.ostrovsky@oracle.com>
+Link: https://lore.kernel.org/r/20210106153958.584169-4-dwmw2@infradead.org
+Signed-off-by: Juergen Gross <jgross@suse.com>
+Signed-off-by: Sasha Levin <sashal@kernel.org>
+---
+ Documentation/admin-guide/kernel-parameters.txt |  4 ++++
+ arch/x86/xen/enlighten_hvm.c                    | 11 ++++++++++-
+ 2 files changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+index 74ba077e99e56..a19ae163c0589 100644
+--- a/Documentation/admin-guide/kernel-parameters.txt
++++ b/Documentation/admin-guide/kernel-parameters.txt
+@@ -5452,6 +5452,10 @@
+ 			This option is obsoleted by the "nopv" option, which
+ 			has equivalent effect for XEN platform.
+ 
++	xen_no_vector_callback
++			[KNL,X86,XEN] Disable the vector callback for Xen
++			event channel interrupts.
++
+ 	xen_scrub_pages=	[XEN]
+ 			Boolean option to control scrubbing pages before giving them back
+ 			to Xen, for use by other domains. Can be also changed at runtime
+diff --git a/arch/x86/xen/enlighten_hvm.c b/arch/x86/xen/enlighten_hvm.c
+index e138f7de52d20..6024fafed1642 100644
+--- a/arch/x86/xen/enlighten_hvm.c
++++ b/arch/x86/xen/enlighten_hvm.c
+@@ -175,6 +175,8 @@ static int xen_cpu_dead_hvm(unsigned int cpu)
+        return 0;
+ }
+ 
++static bool no_vector_callback __initdata;
++
+ static void __init xen_hvm_guest_init(void)
+ {
+ 	if (xen_pv_domain())
+@@ -194,7 +196,7 @@ static void __init xen_hvm_guest_init(void)
+ 
+ 	xen_panic_handler_init();
+ 
+-	if (xen_feature(XENFEAT_hvm_callback_vector))
++	if (!no_vector_callback && xen_feature(XENFEAT_hvm_callback_vector))
+ 		xen_have_vector_callback = 1;
+ 
+ 	xen_hvm_smp_init();
+@@ -220,6 +222,13 @@ static __init int xen_parse_nopv(char *arg)
+ }
+ early_param("xen_nopv", xen_parse_nopv);
+ 
++static __init int xen_parse_no_vector_callback(char *arg)
++{
++	no_vector_callback = true;
++	return 0;
++}
++early_param("xen_no_vector_callback", xen_parse_no_vector_callback);
++
+ bool __init xen_hvm_need_lapic(void)
+ {
+ 	if (xen_pv_domain())
+-- 
+2.27.0
+
