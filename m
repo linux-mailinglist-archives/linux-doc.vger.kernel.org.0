@@ -2,105 +2,126 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 08C592FC5A7
-	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 01:21:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CFE102FC624
+	for <lists+linux-doc@lfdr.de>; Wed, 20 Jan 2021 01:53:35 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1730076AbhATAU2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 19 Jan 2021 19:20:28 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39344 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730751AbhATAT7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 19:19:59 -0500
-Received: from mail-pj1-x102f.google.com (mail-pj1-x102f.google.com [IPv6:2607:f8b0:4864:20::102f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E7DDAC061795;
-        Tue, 19 Jan 2021 16:18:38 -0800 (PST)
-Received: by mail-pj1-x102f.google.com with SMTP id lw17so2215539pjb.0;
-        Tue, 19 Jan 2021 16:18:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=AdWaVN+/y4nB7k2Y/h5vFo2XQMYLD7PwO6KnTXo1gOs=;
-        b=tc1iJDBzwbPdk+USFLGiRAiPsr6L571rZa3SCif6sTOwoQRJRXez/OTOLccvPK3pkU
-         5ab1xxV1QurDk1JxI7Yv4IxskuIOSIzpdB8otapSda/VCvcU454FGalL9pPXpv0izXPD
-         +HDMlU0j0o0hZNSHAih7DYTeaxiNhRtinyid5QBhYcHuflDF2gECapHYNPkdzmlW/aUq
-         +LnQINaUPaw/Li6mThzwPrSUBSV6lZLcsAbu831MVkoRkutl/D6prMiTRVYlY0ySDwDb
-         CVTVD+kFdzfOjkdu3DCRgshK+p2MXJCRU428sXP2CXbbVy5CVrRJUAv2feqRw2qdDKJ5
-         uQJg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=AdWaVN+/y4nB7k2Y/h5vFo2XQMYLD7PwO6KnTXo1gOs=;
-        b=YY7FgUBbJLUNYdlAH9CgsC4s19LWDc397JEgxgvKIsW1t3bRwTYMLk0w2e70rysZdM
-         TgUMd1xf4uQemVYRAI/e7S5EpX3sQPeDedL6JDNzlDw4y+qaNL6mLlf2Fndvs2nrIuOA
-         RXprd0J2ZU14VT9N+KjjQrcjwutdAMAjb0mRYseofvQJN9rgC1O5u055sZviYcmKqU5A
-         LL1SpzX5hVC2sO0cUGAGlQFNTuANSIupiMEtqhE3y+Jv+waNUUOtnYYvBNqkJm7kjpF0
-         aFnDB021CdMGRshaYV3m/+1yc4LyR4/OKJ81f8eZp5xr7C2NCdeJef22jVVU3gfWarDI
-         qM2Q==
-X-Gm-Message-State: AOAM5320NiNgF7pMDjOZvK5wuHu9Ox2uZgiacq2oYdcJbfPROzZ78zx3
-        TuilxPZvJIKb/resQEzhbjg=
-X-Google-Smtp-Source: ABdhPJx9VVeGndW2F1dr9mKWg8iyAVD4T5rpGnvT4t7mC1edQDfhQj0voOPiSNU1LuDrK5weMC63Iw==
-X-Received: by 2002:a17:902:a504:b029:da:fbca:d49 with SMTP id s4-20020a170902a504b02900dafbca0d49mr7245035plq.72.1611101918370;
-        Tue, 19 Jan 2021 16:18:38 -0800 (PST)
-Received: from kir-rhat.lan (c-76-104-243-248.hsd1.wa.comcast.net. [76.104.243.248])
-        by smtp.gmail.com with ESMTPSA id y6sm227452pfn.123.2021.01.19.16.18.37
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 19 Jan 2021 16:18:37 -0800 (PST)
-From:   Kir Kolyshkin <kolyshkin@gmail.com>
-To:     corbet@lwn.net
-Cc:     linux-doc@vger.kernel.org, cgroups@vger.kernel.org,
-        Kir Kolyshkin <kolyshkin@gmail.com>
-Subject: [PATCH 10/10] docs/admin-guide/cgroup-v2: fix mount opt rendering
-Date:   Tue, 19 Jan 2021 16:18:24 -0800
-Message-Id: <20210120001824.385168-11-kolyshkin@gmail.com>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210120001824.385168-1-kolyshkin@gmail.com>
-References: <20210120001824.385168-1-kolyshkin@gmail.com>
+        id S1731001AbhATAxL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 19 Jan 2021 19:53:11 -0500
+Received: from sender4-of-o51.zoho.com ([136.143.188.51]:21119 "EHLO
+        sender4-of-o51.zoho.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727025AbhATAxJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 19 Jan 2021 19:53:09 -0500
+X-Greylist: delayed 1080 seconds by postgrey-1.27 at vger.kernel.org; Tue, 19 Jan 2021 19:53:08 EST
+ARC-Seal: i=1; a=rsa-sha256; t=1611102836; cv=none; 
+        d=zohomail.com; s=zohoarc; 
+        b=bvfuEVpT4XhGIRZ7H3qUEKRtb4ThDEDdXfu0fGNznNoBq6hR3zJmUh1tILm8GWsl8Ncxbw2QP3QKCJ4GG3oQY1SWipvLA6G4ubbe6sep+36uX0KcX2vOvsF3CbK+ouvcFBMTujldMqYtnx8UNPsBWJ817z2Qnxaem7kN1GLaLIU=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+        t=1611102836; h=Content-Type:Content-Transfer-Encoding:Cc:Date:From:In-Reply-To:MIME-Version:Message-ID:References:Subject:To; 
+        bh=Gy6cxAGpQV06imIwuB7h3MwRSZjSFn29L4jucGrojIM=; 
+        b=XQhTC1LH6c79yVxqK8zC2C5CgP2MuAgUhz6d0ZmZ+dBHrUTvn8RfVbISO2NGH+Oe9IP0kiK4OUmFf2nrsyPWpbJyM4+ZNncEB18ELEw6q2VPLXEGEwx5YPHb2OiK/TuG5+k6upE0999/PUUMxVFwNoCTO0xJb7Jwd+WgRK/n0TU=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+        dkim=pass  header.i=apertussolutions.com;
+        spf=pass  smtp.mailfrom=dpsmith@apertussolutions.com;
+        dmarc=pass header.from=<dpsmith@apertussolutions.com> header.from=<dpsmith@apertussolutions.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1611102836;
+        s=zoho; d=apertussolutions.com; i=dpsmith@apertussolutions.com;
+        h=Subject:To:Cc:References:From:Message-ID:Date:MIME-Version:In-Reply-To:Content-Type:Content-Transfer-Encoding;
+        bh=Gy6cxAGpQV06imIwuB7h3MwRSZjSFn29L4jucGrojIM=;
+        b=M18bUZgt44glWZutDwWxXMoUKnlHR3szHDABEv1f06QiOrszMJbrC5eSxYaGjY71
+        N8wIIuJa243I9uWPqrYABy00MzADpYLPbVCBvfKdP9qfllPFibUM97Y3F9/ROsszVSX
+        getsmT810S+BbVsH7VgnSy8+vUtsHKg1nbnvB2AE=
+Received: from [10.10.1.24] (c-73-129-147-140.hsd1.md.comcast.net [73.129.147.140]) by mx.zohomail.com
+        with SMTPS id 1611102834623926.0489869436618; Tue, 19 Jan 2021 16:33:54 -0800 (PST)
+Subject: Re: [PATCH 05/13] x86: Add early TPM1.2/TPM2.0 interface support for
+ Secure Launch
+To:     Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
+        Ross Philipson <ross.philipson@oracle.com>
+Cc:     linux-kernel@vger.kernel.org, x86@kernel.org,
+        iommu@lists.linux-foundation.org, linux-integrity@vger.kernel.org,
+        linux-doc@vger.kernel.org, tglx@linutronix.de, mingo@redhat.com,
+        bp@alien8.de, hpa@zytor.com, luto@amacapital.net,
+        trenchboot-devel@googlegroups.com
+References: <1600959521-24158-1-git-send-email-ross.philipson@oracle.com>
+ <1600959521-24158-6-git-send-email-ross.philipson@oracle.com>
+ <20200925054313.GB165011@linux.intel.com>
+From:   "Daniel P. Smith" <dpsmith@apertussolutions.com>
+Message-ID: <933d9f3e-a509-bff4-54fe-20af44dc3ed0@apertussolutions.com>
+Date:   Tue, 19 Jan 2021 19:33:52 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20200925054313.GB165011@linux.intel.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-ZohoMailClient: External
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Due to an extra empty line between the option and its description
-it is rendered not like in other places.
+On 9/25/20 1:43 AM, Jarkko Sakkinen wrote:
+> On Thu, Sep 24, 2020 at 10:58:33AM -0400, Ross Philipson wrote:
+>> From: "Daniel P. Smith" <dpsmith@apertussolutions.com>
+>>
+>> This commit introduces an abstraction for TPM1.2 and TPM2.0 devices
+>> above the TPM hardware interface.
+>>
+>> Signed-off-by: Daniel P. Smith <dpsmith@apertussolutions.com>
+>> Signed-off-by: Ross Philipson <ross.philipson@oracle.com>
+> 
+> This is way, way too PoC. I wonder why there is no RFC tag.
+> 
+> Please also read section 2 of
+> 
+> https://www.kernel.org/doc/html/v5.8/process/submitting-patches.html
+> 
+> You should leverage existing TPM code in a way or another. Refine it so
+> that it scales for your purpose and then compile it into your thing
+> (just include the necesary C-files with relative paths).
+> 
+> How it is now is never going to fly.
+> 
+> /Jarkko
+> 
 
-Remove the empty lines to fix.
+After attempts to engage in finding alternative approaches, it appears
+that the only welcomed approach for sending measurements from the
+compressed kernel would be a major rewrite of the mainline TPM driver to:
 
-Signed-off-by: Kir Kolyshkin <kolyshkin@gmail.com>
----
- Documentation/admin-guide/cgroup-v2.rst | 3 ---
- 1 file changed, 3 deletions(-)
+1. Abstract out the mainline kernel infrastructure that is used by the
+driver
 
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index 136902cd0e98..14a7523c46a4 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -174,7 +174,6 @@ disabling controllers in v1 and make them always available in v2.
- cgroup v2 currently supports the following mount options.
- 
-   nsdelegate
--
- 	Consider cgroup namespaces as delegation boundaries.  This
- 	option is system wide and can only be set on mount or modified
- 	through remount from the init namespace.  The mount option is
-@@ -182,7 +181,6 @@ cgroup v2 currently supports the following mount options.
- 	Delegation section for details.
- 
-   memory_localevents
--
-         Only populate memory.events with data for the current cgroup,
-         and not any subtrees. This is legacy behaviour, the default
-         behaviour without this option is to include subtree counts.
-@@ -191,7 +189,6 @@ cgroup v2 currently supports the following mount options.
-         option is ignored on non-init namespace mounts.
- 
-   memory_recursiveprot
--
-         Recursively apply memory.min and memory.low protection to
-         entire subtrees, without requiring explicit downward
-         propagation into leaf cgroups.  This allows protecting entire
--- 
-2.29.2
+2. Find ways to introduce a minimal amount of the equivalent
+infrastructure into the compressed kernel, to make the driver code
+reusable within the compressed kernel.
 
+This approach would exceed the scope of changes we want to introduce to
+non-SecureLaunch code to enable direct DRTM launch for the Linux kernel.
+
+After careful consideration and discussions with colleagues from the
+trusted computing community, an alternative has been crafted. We aim to
+submit a version 2 with the following approach:
+
+1. SecureLaunch will take measurements in the compressed kernel as we do
+in version 1, but instead of immediately sending them to the TPM, they
+will be stored in the DRTM TPM event log.
+
+2. When the SecureLaunch module in the mainline kernel comes on line, it
+can send measurements to the TPM using the mainline TPM driver.
+
+While it would be ideal to record measurements at the time they are
+taken, the mainline kernel is measured alongside the compressed kernel
+as a single measurement. This means the same measured entity stays in
+control, prior to execution by any other entity within the system.
+
+At a later date, if the TPM maintainers refactor the TPM driver for
+reuse within the compressed kernel, then the sending of measurements can
+be revisited.
+
+For individuals and distributions that may prefer to record DRTM
+measurements earlier, the TrenchBoot project will do its best to
+maintain an external patch to provide that capability to a mainline LTS
+kernel.
+
+V/r,
+Daniel P. Smith
