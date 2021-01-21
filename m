@@ -2,42 +2,72 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7235B2FF469
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 20:29:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 290DA2FF40A
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 20:16:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727078AbhAUTTg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Jan 2021 14:19:36 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56730 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726952AbhAUTJy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 14:09:54 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 12439C061788;
-        Thu, 21 Jan 2021 10:56:55 -0800 (PST)
+        id S1726849AbhAUTMs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Jan 2021 14:12:48 -0500
+Received: from ms.lwn.net ([45.79.88.28]:37962 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726548AbhAUTK4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 21 Jan 2021 14:10:56 -0500
 Received: from lwn.net (unknown [IPv6:2601:281:8300:104d::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 86074615D;
-        Thu, 21 Jan 2021 18:56:54 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 86074615D
+        by ms.lwn.net (Postfix) with ESMTPSA id 67463615C;
+        Thu, 21 Jan 2021 19:09:55 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 67463615C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1611255414; bh=lBGcLtN3UNL5gr1BP+tAQ2KxSLmKSWTrpPek3ZhcEAQ=;
+        t=1611256197; bh=0PfEGC/cPJ5o5ce4iP7kPM3qg+xRX/ZAzMq8mA7LR+w=;
         h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=WGNRHEQdWkOCzSaE4PVU0Pmkn4fo1IUMXb+MFWMQ5Rcp8FMHFkYTgXW8IIWRJJNEr
-         lfPl2kFAG7iKXoAkQlD0B6BqEwNSuX4JNzJ7H8rhOvIM2GdPy0vaBzY9AGOKJS2k8N
-         ZXrtHsKlkesRMKMSnhWQQSCLQCbdWRLW/7leOqdhJUiqJe7gHL3b/sOzcLZUWPhcpV
-         xUT7lWkLgj8zrvS4M+4ZdWLkOy6hx31VQ3Rtpb9qDAbIpegMmYx+8pccSabHh20FIM
-         qAS101Yq+lEuD48uArfqbuVTnza/CMPjYW0b7SJsQZ1hKjXb1eCBvHiJbkpChHmJ+Q
-         7SzLwnenbg7WA==
-Date:   Thu, 21 Jan 2021 11:56:53 -0700
+        b=LfmTwdSQP3IBIFsgIimE+P0zc4qOuRRENhFAbFZ81/G0xiY0DScELhTCtldW3XIfz
+         Ugs8obCBqzDnsrsJoi5krEbWrGHjyZPpGee+9oAGUJ1ZDXrSP/jMHtPw39Va3bBst2
+         L4SlcWZ4eBnLVGq3hawDKWCzzYzGfx0DG20ajnIZZRO05FEVzu6Z6QH1o0t7hxv9Z5
+         FAGLGDnT/R3zaflLKjCnNdzZoWBPmMbSxH+vE+gp8swBNJrsI901YZhh5xO0J5KAQE
+         q+gS4MkjsOprcfN5wLvJLeHWfw2eGdzUGLUYeV2MifPW5V3sfXPnjMGNWyuhz0xfWx
+         Q0+/sodoN2x/A==
+Date:   Thu, 21 Jan 2021 12:09:54 -0700
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Randy Dunlap <rdunlap@infradead.org>
-Cc:     linux-kernel@vger.kernel.org, David Howells <dhowells@redhat.com>,
-        linux-afs@lists.infradead.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH] AFS: Documentation: fix a few typos in afs.rst
-Message-ID: <20210121115653.42f89325@lwn.net>
-In-Reply-To: <20210117213351.1075-1-rdunlap@infradead.org>
-References: <20210117213351.1075-1-rdunlap@infradead.org>
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        linux-kernel@vger.kernel.org,
+        "David S. Miller" <davem@davemloft.net>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Alexandre Bounine <alex.bou9@gmail.com>,
+        Andy Lutomirski <luto@amacapital.net>,
+        Anton Vorontsov <anton@enomsg.org>,
+        Colin Cross <ccross@android.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>,
+        Evgeniy Polyakov <zbr@ioremap.net>,
+        Hans de Goede <hdegoede@redhat.com>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Johannes Berg <johannes@sipsolutions.net>,
+        Jon Maloy <jmaloy@redhat.com>,
+        Kees Cook <keescook@chromium.org>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Mark Gross <mgross@linux.intel.com>,
+        Matt Porter <mporter@kernel.crashing.org>,
+        Maxime Ripard <mripard@kernel.org>,
+        Maximilian Luz <luzmaximilian@gmail.com>,
+        Mike Rapoport <rppt@kernel.org>,
+        Philipp Zabel <p.zabel@pengutronix.de>,
+        Richard Gong <richard.gong@linux.intel.com>,
+        Shuah Khan <shuah@kernel.org>,
+        Sudip Mukherjee <sudipm.mukherjee@gmail.com>,
+        Thomas Zimmermann <tzimmermann@suse.de>,
+        Tony Luck <tony.luck@intel.com>,
+        Will Drewry <wad@chromium.org>,
+        Ying Xue <ying.xue@windriver.com>,
+        dri-devel@lists.freedesktop.org, linux-fsdevel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org, linux-mm@kvack.org,
+        linux-wireless@vger.kernel.org, netdev@vger.kernel.org,
+        platform-driver-x86@vger.kernel.org,
+        tipc-discussion@lists.sourceforge.net
+Subject: Re: [PATCH v6 00/16] Fix several bad kernel-doc markups
+Message-ID: <20210121120954.5ed4c3b2@lwn.net>
+In-Reply-To: <cover.1610610937.git.mchehab+huawei@kernel.org>
+References: <cover.1610610937.git.mchehab+huawei@kernel.org>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -46,20 +76,25 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, 17 Jan 2021 13:33:51 -0800
-Randy Dunlap <rdunlap@infradead.org> wrote:
+On Thu, 14 Jan 2021 09:04:36 +0100
+Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 
-> Fix typos (punctuation, grammar, spelling) in afs.rst.
+> 1)  10 remaining fixup patches from the series I sent back on Dec, 1st:
 > 
-> Signed-off-by: Randy Dunlap <rdunlap@infradead.org>
-> Cc: David Howells <dhowells@redhat.com>
-> Cc: linux-afs@lists.infradead.org
-> Cc: Jonathan Corbet <corbet@lwn.net>
-> Cc: linux-doc@vger.kernel.org
-> ---
->  Documentation/filesystems/afs.rst |    8 ++++----
->  1 file changed, 4 insertions(+), 4 deletions(-)
+>    parport: fix a kernel-doc markup
+>    rapidio: fix kernel-doc a markup
+>    fs: fix kernel-doc markups
+>    pstore/zone: fix a kernel-doc markup
+>    firmware: stratix10-svc: fix kernel-doc markups
+>    connector: fix a kernel-doc markup
+>    lib/crc7: fix a kernel-doc markup
+>    memblock: fix kernel-doc markups
+>    w1: fix a kernel-doc markup
+>    selftests: kselftest_harness.h: partially fix kernel-doc markups
 
-Applied, thanks.
+A week later none of these have shown up in linux-next, so I went ahead
+and applied the set.
+
+Thanks,
 
 jon
