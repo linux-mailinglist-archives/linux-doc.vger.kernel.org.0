@@ -2,211 +2,157 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 537302FE00C
+	by mail.lfdr.de (Postfix) with ESMTP id C0AF62FE00D
 	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 04:44:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726698AbhAUDfG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 20 Jan 2021 22:35:06 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33152 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728511AbhAUCE1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Jan 2021 21:04:27 -0500
-Received: from mail-io1-xd36.google.com (mail-io1-xd36.google.com [IPv6:2607:f8b0:4864:20::d36])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 36919C061575;
-        Wed, 20 Jan 2021 18:03:28 -0800 (PST)
-Received: by mail-io1-xd36.google.com with SMTP id n2so1031593iom.7;
-        Wed, 20 Jan 2021 18:03:28 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:reply-to:from:date:message-id
-         :subject:to:cc;
-        bh=UQ1sOWJk4CRc1VRTEUkbh3QAItciVZ4tLwnuC/1/JiU=;
-        b=Bq+t2V2aAIe3czwI6nQ+U3PmrrmP0lwIAU0m9eHsoPYFMFoa5mkZ+/DSCWbE1xONu1
-         bR+ns1Jx/M9uzBeQX8R8/SqBf8l0WlB/q+NZSya8tXn8hHqYJIu8xY9e5tvHTDRJk+AZ
-         D/MH8cKiQmLcPHkpRrEah5lyAFlyLc3pdBus5Y8HR+Qk6wb6yPWfX6PlISJfQdEVilmq
-         YMViA6XtMUHTukyQL9Rdgy2FbSh2ekilhnaRd4qlEZ+TGAWmzmdIIXy+VexdQAE1WXzb
-         LXkPhWOKcsudK3XJAKgQCoJ9872walj+OWq52DWV7j9M4o2QLodpbbaRDwTvXbq9iwGl
-         o7yQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
-         :from:date:message-id:subject:to:cc;
-        bh=UQ1sOWJk4CRc1VRTEUkbh3QAItciVZ4tLwnuC/1/JiU=;
-        b=JttPXBUwAjUNq6HPu24D28LQhI2ppkjIo9Cg3GRx+w5XmL8iNV+2dnAMlDQ3xBYEgE
-         pU2D+1M3oaEVujkhKd1ublxg2v1clf3vSUa3/VorY2ztu94Gmq+Gs3vRVg9q499JVE0+
-         B/BhKIyklpq1wAaGkjgNyUH+Y8KoFCd6qS4U+IK+r0PuMVUl6x+us5M+eX8dIpnpum3v
-         frRBq3dTy7TwPYISLeAwF4RQQAkhIr/nTzgr7HcoQhCYKGPHEMpIrT1ld38gRZhvOidD
-         IcXcrIHrJnHJVBC31iiMpVjKWQ0VRG6JmPvmIHBxKJhCqua00G895VgXTj9bV2gEPAfp
-         aO+g==
-X-Gm-Message-State: AOAM532mx9QPVDT5vROMwoX55JhvUkothrWwHboYfEEx8iS60DBLZ9vv
-        WtKxtI1GlWlRboo7OW3e1UMM+zrSMLP5YcPxCqE=
-X-Google-Smtp-Source: ABdhPJyKPZGiZN4rZPH0yCZMWlruh1/9mZXgpIRQldf5bECd3DJT0yLvzZEew4/2oGrkJfZ7cb03i6qFYqYIhq72SyE=
-X-Received: by 2002:a05:6e02:d0:: with SMTP id r16mr10371308ilq.112.1611194607275;
- Wed, 20 Jan 2021 18:03:27 -0800 (PST)
+        id S1726829AbhAUDfR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 20 Jan 2021 22:35:17 -0500
+Received: from out30-57.freemail.mail.aliyun.com ([115.124.30.57]:45062 "EHLO
+        out30-57.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1728475AbhAUCFA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Jan 2021 21:05:00 -0500
+X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R121e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e01424;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=8;SR=0;TI=SMTPD_---0UMNRkxF_1611194647;
+Received: from IT-FVFX43SYHV2H.local(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0UMNRkxF_1611194647)
+          by smtp.aliyun-inc.com(127.0.0.1);
+          Thu, 21 Jan 2021 10:04:08 +0800
+Subject: Re: [PATCH v3 1/3] docs/zh_CN: add iio iio_configfs.rst translation
+To:     Yanteng Si <siyanteng@loongson.cn>,
+        Jonathan Corbet <corbet@lwn.net>
+Cc:     Harry Wei <harryxiyou@gmail.com>,
+        Yanteng Si <siyanteng01@gmail.com>, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, Huacai Chen <chenhuacai@gmail.com>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>
+References: <20210121012352.449558-1-siyanteng@loongson.cn>
+From:   Alex Shi <alex.shi@linux.alibaba.com>
+Message-ID: <9a65551a-04e4-1daa-4d49-39e6423ca751@linux.alibaba.com>
+Date:   Thu, 21 Jan 2021 10:04:06 +0800
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.0; rv:68.0)
+ Gecko/20100101 Thunderbird/68.12.0
 MIME-Version: 1.0
-References: <20210113061958.886723-1-morbo@google.com> <20210116094357.3620352-1-morbo@google.com>
- <CA+icZUUgTuD6fO_AZFs9KoRFS8FUmyhezvYeeoRX2dveG_ifDA@mail.gmail.com>
- <CAGG=3QXZTR_f9pKzAR=LrALmMzdDqsvWM_zrTXOb2PpiDGB-+A@mail.gmail.com>
- <CA+icZUWf05ek+DFsJNyBc-4cg0s6cVrn=rNJDyL4RJ6=fMO5NA@mail.gmail.com>
- <CA+icZUVD1AHaXYu4Ne8JhzmtMR5DReL4C=ZxKfA0hjLtbC79qQ@mail.gmail.com>
- <CA+icZUUTJbwmTYCDJhyRtif3BdsB_yzQ3bSdLR62EmttJf3Row@mail.gmail.com>
- <CA+icZUUfWR1v3GStn6t_6MYDmwTdJ_zDwBTe2jmQRg7aOA1Q2A@mail.gmail.com>
- <CA+icZUU-3i7Of71C6XaNmee7xD4y_DeoWJFvUHnMUyBaMN3Ywg@mail.gmail.com>
- <CA+icZUXmn15w=kSq2CZzQD5JggJw_9AEam=Sz13M0KpJ68MWZg@mail.gmail.com>
- <CA+icZUWUPCuLWCo=kuPr9YZ4-NZ3F8Fv1GzDXPbDevyWjaMrJg@mail.gmail.com>
- <CAGG=3QW+ayBzCxOusLyQ0-y5K5C_3hNXjara_pYOcxK8MseN9g@mail.gmail.com>
- <CA+icZUU1HihUFaEHzF69+01+Picg8aq6HAqHupxiRqyDGJ=Mpw@mail.gmail.com>
- <CA+icZUUuzA5JEXyVzKbVX+T3xeOdRAU6-mntbo+VwwTxqmN7LA@mail.gmail.com>
- <CAGG=3QWmOA+yM2GJF+cHUb7wUq6yiBpHasa-ry9OhAdvciDm6Q@mail.gmail.com>
- <CA+icZUVwbWDtGUzMEkitxYn2UvbZPnFTxfJyDOY46j6BTK0deQ@mail.gmail.com>
- <CA+icZUXa9wvSWe=21_gjAapoHpbgBmYzFpQjb=o_WRQgK+O4gA@mail.gmail.com> <CAGG=3QUcaY1wzJhBD4ZGhPSNPik-kL0PuoE1SJqkFJEM_mkGYA@mail.gmail.com>
-In-Reply-To: <CAGG=3QUcaY1wzJhBD4ZGhPSNPik-kL0PuoE1SJqkFJEM_mkGYA@mail.gmail.com>
-Reply-To: sedat.dilek@gmail.com
-From:   Sedat Dilek <sedat.dilek@gmail.com>
-Date:   Thu, 21 Jan 2021 03:03:15 +0100
-Message-ID: <CA+icZUU+OWW46CVq4Co-y7hckGjoV5bbqxS-G+HDqUDci_AzHw@mail.gmail.com>
-Subject: Re: [PATCH v5] pgo: add clang's Profile Guided Optimization infrastructure
-To:     Bill Wendling <morbo@google.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
-        Clang-Built-Linux ML <clang-built-linux@googlegroups.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Nathan Chancellor <natechancellor@gmail.com>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Sami Tolvanen <samitolvanen@google.com>,
-        Fangrui Song <maskray@google.com>
-Content-Type: multipart/mixed; boundary="0000000000003b46d105b95f7a76"
+In-Reply-To: <20210121012352.449558-1-siyanteng@loongson.cn>
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---0000000000003b46d105b95f7a76
-Content-Type: text/plain; charset="UTF-8"
+Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
 
-On Mon, Jan 18, 2021 at 10:56 PM Bill Wendling <morbo@google.com> wrote:
->
-> On Mon, Jan 18, 2021 at 9:26 AM Sedat Dilek <sedat.dilek@gmail.com> wrote:
-> >
-> > On Mon, Jan 18, 2021 at 1:39 PM Sedat Dilek <sedat.dilek@gmail.com> wrote:
-> > >
-> > > On Mon, Jan 18, 2021 at 3:32 AM Bill Wendling <morbo@google.com> wrote:
-> > > >
-> > > > On Sun, Jan 17, 2021 at 4:27 PM Sedat Dilek <sedat.dilek@gmail.com> wrote:
-> > > > >
-> > > > > [ big snip ]
-> > > >
-> > > > [More snippage.]
-> > > >
-> > > > > [ CC Fangrui ]
-> > > > >
-> > > > > With the attached...
-> > > > >
-> > > > >    [PATCH v3] module: Ignore _GLOBAL_OFFSET_TABLE_ when warning for
-> > > > > undefined symbols
-> > > > >
-> > > > > ...I was finally able to boot into a rebuild PGO-optimized Linux-kernel.
-> > > > > For details see ClangBuiltLinux issue #1250 "Unknown symbol
-> > > > > _GLOBAL_OFFSET_TABLE_ loading kernel modules".
-> > > > >
-> > > > Thanks for confirming that this works with the above patch.
-> > > >
-> > > > > @ Bill Nick Sami Nathan
-> > > > >
-> > > > > 1, Can you say something of the impact passing "LLVM_IAS=1" to make?
-> > > >
-> > > > The integrated assembler and this option are more-or-less orthogonal
-> > > > to each other. One can still use the GNU assembler with PGO. If you're
-> > > > having an issue, it may be related to ClangBuiltLinux issue #1250.
-> > > >
-> > > > > 2. Can you please try Nick's DWARF v5 support patchset v5 and
-> > > > > CONFIG_DEBUG_INFO_DWARF5=y (see attachments)?
-> > > > >
-> > > > I know Nick did several tests with PGO. He may have looked into it
-> > > > already, but we can check.
-> > > >
-> > >
-> > > Reproducible.
-> > >
-> > > LLVM_IAS=1 + DWARF5 = Not bootable
-> > >
-> > > I will try:
-> > >
-> > > LLVM_IAS=1 + DWARF4
-> > >
-> >
-> > I was not able to boot into such a built Linux-kernel.
-> >
-> PGO will have no effect on debugging data. If this is an issue with
-> DWARF, then it's likely orthogonal to the PGO patch.
->
-> > For me worked: DWARF2 and LLVM_IAS=1 *not* set.
-> >
-> > Of course, this could be an issue with my system's LLVM/Clang.
-> >
-> > Debian clang version
-> > 12.0.0-++20210115111113+45ef053bd709-1~exp1~20210115101809.3724
-> >
-> Please use the official clang 11.0.1 release
-> (https://releases.llvm.org/download.html), modifying the
-> kernel/pgo/Kconfig as I suggested above. The reason we specify clang
-> 12 for the minimal version is because of an issue that was recently
-> fixed.
->
-
-I downgraded to clang-11.1.0-rc1.
-( See attachment. )
-
-Doing the first build with PGO enabled plus DWARF5 and LLVM_IAS=1 works.
-
-But again after generating vmlinux.profdata and doing the PGO-rebuild
-- the resulting Linux-kernel does NOT boot in QEMU or on bare metal.
-With GNU/as I can boot.
-
-So this is independent of DWARF v4 or DWARF v5 (LLVM_IAS=1 and DWARF
-v2 is not allowed).
-There is something wrong (here) with passing LLVM_IAS=1 to make when
-doing the PGO-rebuild.
-
-Can someone please verify and confirm that the PGO-rebuild with
-LLVM_IAS=1 boots or boots not?
-
-Thanks.
-
-- Sedat -
-
-> > Can you give me a LLVM commit-id where you had success with LLVM_IAS=1
-> > and especially CONFIG_DEBUG_INFO_DWARF5=y?
-> > Success means I was able to boot in QEMU and/or bare metal.
-> >
-> The DWARF5 patch isn't in yet, so I don't want to rely upon it too much.
->
-> -bw
-
---0000000000003b46d105b95f7a76
-Content-Type: text/x-patch; charset="US-ASCII"; 
-	name="0001-pgo-Allow-to-use-clang-v11.0.1.patch"
-Content-Disposition: attachment; 
-	filename="0001-pgo-Allow-to-use-clang-v11.0.1.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kk67iy4m0>
-X-Attachment-Id: f_kk67iy4m0
-
-RnJvbSBhNjlkY2MzNzdjNjAxNTI1ZDhjNzYwZTdiMjBjNWQwNmVhZjFmZTc2IE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBTZWRhdCBEaWxlayA8c2VkYXQuZGlsZWtAZ21haWwuY29tPgpE
-YXRlOiBUdWUsIDE5IEphbiAyMDIxIDAwOjQ0OjM2ICswMTAwClN1YmplY3Q6IFtQQVRDSF0gcGdv
-OiBBbGxvdyB0byB1c2UgY2xhbmcgPj0gdjExLjAuMQoKLS0tCiBrZXJuZWwvcGdvL0tjb25maWcg
-fCAyICstCiAxIGZpbGUgY2hhbmdlZCwgMSBpbnNlcnRpb24oKyksIDEgZGVsZXRpb24oLSkKCmRp
-ZmYgLS1naXQgYS9rZXJuZWwvcGdvL0tjb25maWcgYi9rZXJuZWwvcGdvL0tjb25maWcKaW5kZXgg
-NzZhNjQwYjZjZjZlLi41ZmU5NjM1YWM2NGMgMTAwNjQ0Ci0tLSBhL2tlcm5lbC9wZ28vS2NvbmZp
-ZworKysgYi9rZXJuZWwvcGdvL0tjb25maWcKQEAgLTgsNyArOCw3IEBAIGNvbmZpZyBQR09fQ0xB
-TkcKIAlib29sICJFbmFibGUgY2xhbmcncyBQR08tYmFzZWQga2VybmVsIHByb2ZpbGluZyIKIAlk
-ZXBlbmRzIG9uIERFQlVHX0ZTCiAJZGVwZW5kcyBvbiBBUkNIX1NVUFBPUlRTX1BHT19DTEFORwot
-CWRlcGVuZHMgb24gQ0NfSVNfQ0xBTkcgJiYgQ0xBTkdfVkVSU0lPTiA+PSAxMjAwMDAKKwlkZXBl
-bmRzIG9uIENDX0lTX0NMQU5HICYmIENMQU5HX1ZFUlNJT04gPj0gMTIwMDAwIHx8IENMQU5HX1ZF
-UlNJT04gPj0gMTEwMDAxCiAJaGVscAogCSAgVGhpcyBvcHRpb24gZW5hYmxlcyBjbGFuZydzIFBH
-TyAoUHJvZmlsZSBHdWlkZWQgT3B0aW1pemF0aW9uKSBiYXNlZAogCSAgY29kZSBwcm9maWxpbmcg
-dG8gYmV0dGVyIG9wdGltaXplIHRoZSBrZXJuZWwuCi0tIAoyLjMwLjAKCg==
---0000000000003b46d105b95f7a76--
+在 2021/1/21 上午9:23, Yanteng Si 写道:
+> This patch translates Documentation/iio/iio_configfs.rst into Chinese.
+> 
+> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+> ---
+>  .../translations/zh_CN/iio/iio_configfs.rst   | 102 ++++++++++++++++++
+>  1 file changed, 102 insertions(+)
+>  create mode 100644 Documentation/translations/zh_CN/iio/iio_configfs.rst
+> 
+> diff --git a/Documentation/translations/zh_CN/iio/iio_configfs.rst b/Documentation/translations/zh_CN/iio/iio_configfs.rst
+> new file mode 100644
+> index 000000000000..223bc732ce66
+> --- /dev/null
+> +++ b/Documentation/translations/zh_CN/iio/iio_configfs.rst
+> @@ -0,0 +1,102 @@
+> +.. include:: ../disclaimer-zh_CN.rst
+> +
+> +:Original: :doc:`../../../iio/iio_configfs`
+> +:Translator: Yanteng Si <siyanteng@loongson.cn>
+> +
+> +.. _cn_iio_configfs:
+> +
+> +
+> +=====================
+> +工业 IIO configfs支持
+> +=====================
+> +
+> +1. 概述
+> +=======
+> +
+> +Configfs是一种内核对象的基于文件系统的管理系统，IIO使用一些可以通过
+> +configfs轻松配置的对象（例如：设备，触发器）。
+> +
+> +关于configfs是如何运行的，请查阅Documentation/filesystems/configfs.rst
+> +了解更多信息。
+> +
+> +2. 用法
+> +=======
+> +为了使configfs支持IIO，我们需要在编译时选中config的CONFIG_IIO_CONFIGFS
+> +选项。
+> +
+> +然后，挂载configfs文件系统(通常在 /config directory目录下）：：
+> +
+> +  $ mkdir/config
+> +  $ mount -t configfs none/config
+> +
+> +此时，将创建所有默认IIO组，并可以在/ config / iio下对其进行访问。 下一章
+> +将介绍可用的IIO配置对象。
+> +
+> +3. 软件触发器
+> +=============
+> +
+> +IIO默认configfs组之一是“触发器”组。 挂载configfs后可以自动访问它，并且可
+> +以在/config/iio/triggers下找到。
+> +
+> +IIO软件触发器为创建多种触发器类型提供了支持。 通常在include/linux/iio
+> +/sw_trigger.h：中的接口下将新的触发器类型实现为单独的内核模块：
+> +
+> +  /*
+> +   * drivers/iio/trigger/iio-trig-sample.c
+> +   * 一种新触发器类型的内核模块实例
+> +   */
+> +  #include <linux/iio/sw_trigger.h>
+> +
+> +
+> +  static struct iio_sw_trigger *iio_trig_sample_probe(const char *name)
+> +  {
+> +	/*
+> +	 * 这将分配并注册一个IIO触发器以及其他触发器类型特性的初始化。
+> +	 */
+> +  }
+> +
+> +  static int iio_trig_sample_remove(struct iio_sw_trigger *swt)
+> +  {
+> +	/*
+> +	 * 这会废弃iio_trig_sample_probe中的操作
+> +	 */
+> +  }
+> +
+> +  static const struct iio_sw_trigger_ops iio_trig_sample_ops = {
+> +	.probe		= iio_trig_sample_probe,
+> +	.remove		= iio_trig_sample_remove,
+> +  };
+> +
+> +  static struct iio_sw_trigger_type iio_trig_sample = {
+> +	.name = "trig-sample",
+> +	.owner = THIS_MODULE,
+> +	.ops = &iio_trig_sample_ops,
+> +  };
+> +
+> +module_iio_sw_trigger_driver(iio_trig_sample);
+> +
+> +每种触发器类型在/config/iio/triggers下都有其自己的目录。 加载iio-trig-sample
+> +模块将创建“ trig-sample”触发器类型目录/config/iio/triggers/trig-sample.
+> +
+> +我们支持以下中断源（触发器类型）
+> +
+> +	* hrtimer,使用高分辨率定时器作为中断源
+> +
+> +3.1 Hrtimer触发器创建与销毁
+> +---------------------------
+> +
+> +加载iio-trig-hrtimer模块将注册hrtimer触发器类型，从而允许用户在
+> +/config/iio/triggers/hrtimer下创建hrtimer触发器。
+> +
+> +例如::
+> +
+> +  $ mkdir /config/iio/triggers/hrtimer/instance1
+> +  $ rmdir /config/iio/triggers/hrtimer/instance1
+> +
+> +每个触发器可以具有一个或多个独特的触发器类型的属性。
+> +
+> +3.2 "hrtimer" 触发器类型属性
+> +----------------------------
+> +
+> +"hrtimer”触发器类型没有来自/config dir的任何可配置属性。
+> +但它确实将采样频率属性引入了触发目录。
+> 
