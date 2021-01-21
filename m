@@ -2,18 +2,18 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E828A2FE217
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 06:55:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AC8272FE21B
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 06:56:34 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726158AbhAUDdW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 20 Jan 2021 22:33:22 -0500
-Received: from mail.loongson.cn ([114.242.206.163]:49440 "EHLO loongson.cn"
+        id S1725854AbhAUDcA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 20 Jan 2021 22:32:00 -0500
+Received: from mail.loongson.cn ([114.242.206.163]:49474 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S2392390AbhAUBYi (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 20 Jan 2021 20:24:38 -0500
+        id S2392394AbhAUBYf (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 20 Jan 2021 20:24:35 -0500
 Received: from localhost.localdomain (unknown [112.3.198.184])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxn7+V1whgk1cIAA--.13107S2;
-        Thu, 21 Jan 2021 09:23:34 +0800 (CST)
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxn7+V1whgk1cIAA--.13107S3;
+        Thu, 21 Jan 2021 09:23:37 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
@@ -22,150 +22,98 @@ Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
         realpuyuwang@gmail.com, Huacai Chen <chenhuacai@gmail.com>,
         Jiaxun Yang <jiaxun.yang@flygoat.com>,
         Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v3 1/3] docs/zh_CN: add iio iio_configfs.rst translation
-Date:   Thu, 21 Jan 2021 09:23:50 +0800
-Message-Id: <20210121012352.449558-1-siyanteng@loongson.cn>
+Subject: [PATCH v3 2/3] docs/zh_CN: add iio ep93xx_adc.rst translation
+Date:   Thu, 21 Jan 2021 09:23:51 +0800
+Message-Id: <20210121012352.449558-2-siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.27.0
+In-Reply-To: <20210121012352.449558-1-siyanteng@loongson.cn>
+References: <20210121012352.449558-1-siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9Dxn7+V1whgk1cIAA--.13107S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxZF4DAr17tFWDuFyUGw4kZwb_yoWrWF15pF
-        sI9r97tFWUJFyrAF48KFy8WryfJrnayF4UJrWxXw1rt3s8Aryqkr4DtFWrJ397W392vF47
-        J34rCFyYvrsrCaUanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUyG14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-        1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
-        6F4UM28EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJV
-        WxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
-        2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
-        W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vI
-        r41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8Gjc
-        xK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0
-        cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8V
-        AvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7Cj
-        xVAFwI0_Jr0_GrUvcSsGvfC2KfnxnUUI43ZEXa7VUbXdbUUUUUU==
+X-CM-TRANSID: AQAAf9Dxn7+V1whgk1cIAA--.13107S3
+X-Coremail-Antispam: 1UD129KBjvJXoW7ur4fWrWDCr15AryxJFyfCrg_yoW8KryUpF
+        93GryfJa1UJry3Xr17Gr1UJr1UGrs5Ga1UtF4xtFy8Xrs5Aw4Utr1kJry8JryUKry8AF4U
+        XFy5JrW5Kr1jyw7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUU9l14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
+        x26xkF7I0E14v26r1I6r4UM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+        Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
+        8EF7xvwVC2z280aVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r4UJVWxJr1l
+        e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
+        8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
+        jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42xK82IYc2Ij64vIr41l4I
+        8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AK
+        xVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcV
+        AFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8I
+        cIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r
+        4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU5SoXUUUUU
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch translates Documentation/iio/iio_configfs.rst into Chinese.
+This patch translates Documentation/iio/ep93xx_adc.rst into Chinese.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
 ---
- .../translations/zh_CN/iio/iio_configfs.rst   | 102 ++++++++++++++++++
- 1 file changed, 102 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/iio/iio_configfs.rst
+ .../translations/zh_CN/iio/ep93xx_adc.rst     | 46 +++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/iio/ep93xx_adc.rst
 
-diff --git a/Documentation/translations/zh_CN/iio/iio_configfs.rst b/Documentation/translations/zh_CN/iio/iio_configfs.rst
+diff --git a/Documentation/translations/zh_CN/iio/ep93xx_adc.rst b/Documentation/translations/zh_CN/iio/ep93xx_adc.rst
 new file mode 100644
-index 000000000000..223bc732ce66
+index 000000000000..727a48d09090
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/iio/iio_configfs.rst
-@@ -0,0 +1,102 @@
++++ b/Documentation/translations/zh_CN/iio/ep93xx_adc.rst
+@@ -0,0 +1,46 @@
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: :doc:`../../../iio/iio_configfs`
++:Original: :doc:`../../../iio/ep93xx_adc`
 +:Translator: Yanteng Si <siyanteng@loongson.cn>
 +
-+.. _cn_iio_configfs:
++.. _cn_iio_ep93xx_adc:
 +
 +
-+=====================
-+工业 IIO configfs支持
-+=====================
++==================================
++思睿逻辑 EP93xx 模拟数字转换器驱动
++==================================
 +
 +1. 概述
 +=======
 +
-+Configfs是一种内核对象的基于文件系统的管理系统，IIO使用一些可以通过
-+configfs轻松配置的对象（例如：设备，触发器）。
++该驱动同时适用于具有5通道模拟数字转换器的低端 (EP9301, Ep9302) 设备和10通道
++触摸屏/模拟数字转换器的高端设备(EP9307, EP9312, EP9315)。
 +
-+关于configfs是如何运行的，请查阅Documentation/filesystems/configfs.rst
-+了解更多信息。
++2. 通道编号
++===========
 +
-+2. 用法
-+=======
-+为了使configfs支持IIO，我们需要在编译时选中config的CONFIG_IIO_CONFIGFS
-+选项。
++EP9301和EP9302数据表定义了通道0..4的编号方案。虽然EP9307, EP9312和EP9315多
++了3个通道（一共8个），但是编号并没有定义。所以说最后三个通道是随机编号的。
 +
-+然后，挂载configfs文件系统(通常在 /config directory目录下）：：
++如果ep93xx_adc是IIO设备0，您将在以下位置找到条目
++/sys/bus/iio/devices/iio:device0/:
 +
-+  $ mkdir/config
-+  $ mount -t configfs none/config
-+
-+此时，将创建所有默认IIO组，并可以在/ config / iio下对其进行访问。 下一章
-+将介绍可用的IIO配置对象。
-+
-+3. 软件触发器
-+=============
-+
-+IIO默认configfs组之一是“触发器”组。 挂载configfs后可以自动访问它，并且可
-+以在/config/iio/triggers下找到。
-+
-+IIO软件触发器为创建多种触发器类型提供了支持。 通常在include/linux/iio
-+/sw_trigger.h：中的接口下将新的触发器类型实现为单独的内核模块：
-+
-+  /*
-+   * drivers/iio/trigger/iio-trig-sample.c
-+   * 一种新触发器类型的内核模块实例
-+   */
-+  #include <linux/iio/sw_trigger.h>
-+
-+
-+  static struct iio_sw_trigger *iio_trig_sample_probe(const char *name)
-+  {
-+	/*
-+	 * 这将分配并注册一个IIO触发器以及其他触发器类型特性的初始化。
-+	 */
-+  }
-+
-+  static int iio_trig_sample_remove(struct iio_sw_trigger *swt)
-+  {
-+	/*
-+	 * 这会废弃iio_trig_sample_probe中的操作
-+	 */
-+  }
-+
-+  static const struct iio_sw_trigger_ops iio_trig_sample_ops = {
-+	.probe		= iio_trig_sample_probe,
-+	.remove		= iio_trig_sample_remove,
-+  };
-+
-+  static struct iio_sw_trigger_type iio_trig_sample = {
-+	.name = "trig-sample",
-+	.owner = THIS_MODULE,
-+	.ops = &iio_trig_sample_ops,
-+  };
-+
-+module_iio_sw_trigger_driver(iio_trig_sample);
-+
-+每种触发器类型在/config/iio/triggers下都有其自己的目录。 加载iio-trig-sample
-+模块将创建“ trig-sample”触发器类型目录/config/iio/triggers/trig-sample.
-+
-+我们支持以下中断源（触发器类型）
-+
-+	* hrtimer,使用高分辨率定时器作为中断源
-+
-+3.1 Hrtimer触发器创建与销毁
-+---------------------------
-+
-+加载iio-trig-hrtimer模块将注册hrtimer触发器类型，从而允许用户在
-+/config/iio/triggers/hrtimer下创建hrtimer触发器。
-+
-+例如::
-+
-+  $ mkdir /config/iio/triggers/hrtimer/instance1
-+  $ rmdir /config/iio/triggers/hrtimer/instance1
-+
-+每个触发器可以具有一个或多个独特的触发器类型的属性。
-+
-+3.2 "hrtimer" 触发器类型属性
-+----------------------------
-+
-+"hrtimer”触发器类型没有来自/config dir的任何可配置属性。
-+但它确实将采样频率属性引入了触发目录。
++  +-----------------+---------------+
++  | sysfs 入口      | ball/pin 名称 |
++  +=================+===============+
++  | in_voltage0_raw | YM            |
++  +-----------------+---------------+
++  | in_voltage1_raw | SXP           |
++  +-----------------+---------------+
++  | in_voltage2_raw | SXM           |
++  +-----------------+---------------+
++  | in_voltage3_raw | SYP           |
++  +-----------------+---------------+
++  | in_voltage4_raw | SYM           |
++  +-----------------+---------------+
++  | in_voltage5_raw | XP            |
++  +-----------------+---------------+
++  | in_voltage6_raw | XM            |
++  +-----------------+---------------+
++  | in_voltage7_raw | YP            |
++  +-----------------+---------------+
 -- 
 2.27.0
 
