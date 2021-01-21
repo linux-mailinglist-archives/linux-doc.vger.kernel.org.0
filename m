@@ -2,106 +2,129 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E4AFF2FE689
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 10:41:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0A1B42FE6E6
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 10:58:42 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728658AbhAUJkF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Jan 2021 04:40:05 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43910 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1728383AbhAUJ3F (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 04:29:05 -0500
-Received: from mail-io1-xd2f.google.com (mail-io1-xd2f.google.com [IPv6:2607:f8b0:4864:20::d2f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D4E7DC061757
-        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 01:28:24 -0800 (PST)
-Received: by mail-io1-xd2f.google.com with SMTP id h11so2629305ioh.11
-        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 01:28:24 -0800 (PST)
+        id S1728480AbhAUJ47 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Jan 2021 04:56:59 -0500
+Received: from smtp-fw-33001.amazon.com ([207.171.190.10]:52573 "EHLO
+        smtp-fw-33001.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1728456AbhAUJ4F (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 04:56:05 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=NSmskaQzCxd6S1zpafdVN+iroBrtoxVQVW1pdkIa5Cg=;
-        b=ATFm59HBGSbFnv3oCk466zKTQZOhZSd7T8PLYirndnvQ1THUzDFmLW9WybfuW4qY6b
-         NcYKEkwSxNWAT95vOGPlzf9sH7LYKIsWjZT72+DIoBxvFky/drLO+cV1oorGCVl4Jrj/
-         f0mvm+/IC9U+f7ePsDwIsTMRMO3mavSZaCeLyJaCbTivC9/5aNzjTwBLyreV4CR8einW
-         bZ8jAc+Roj0pSHt98UXoObvouDcGkMnApOw99sRmozlk5puohRL3Ammb3K6Bfm8qIpMs
-         1cEh7kSuKP5mev+A2/XMEMf7gBusBtG7NzfcTw+wAVVyKrkXrPguM0ySMshgb5ZKOzHk
-         eI6g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=NSmskaQzCxd6S1zpafdVN+iroBrtoxVQVW1pdkIa5Cg=;
-        b=mse1L0cI+hP7kGLEAsSS0cRi6hE0+nXVPcURjwdiHbhsvPcrxsYvqKDabqvHkpdol5
-         kDsvw2vrOyi6zL1d/126b/C4TOanCMo4XIzwtxRSFWV2F+9irIykLsIUtiDoeUhkFOj/
-         jOw37hwtUyh5Ocdj1mpBtWy0BSwHU0jOUSpr/SOYT1FpuartzdZA4ZIphzYSkaF12kcs
-         HCutmAOMRmnHaxFx6XSHlBuqyMHYl53iSpcAp+f1sCoJmF9/ivnD8OZfEHD+WBLn0jQ2
-         2Z2WZBpa+QwQeMt6wp9AkwgBBeYj/T9zulYJqTcxaAINWfPTE39DtIGz0NGDN0s5jwrX
-         WEEw==
-X-Gm-Message-State: AOAM531aEYKvf5lmbRbA+j+ZGiwU8XW0CYR5GAonqRxmJzI9TIGZg8z0
-        W6AIJc+maAhMdSZSJKnJ+mQRjJmE9SF2CMRY3AE=
-X-Google-Smtp-Source: ABdhPJzjZAjS1KK2+lfyiI9m7ByYnJ6txFhnMFD1Hfb0Va1snkViM5Ipej3HxX5Q9gJ6NtXuENLCWEXe5+t5OJNZBWU=
-X-Received: by 2002:a6b:7f45:: with SMTP id m5mr9835652ioq.180.1611221304358;
- Thu, 21 Jan 2021 01:28:24 -0800 (PST)
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1611222964; x=1642758964;
+  h=from:to:cc:date:message-id:references:in-reply-to:
+   content-id:mime-version:content-transfer-encoding:subject;
+  bh=tikY/ymWGHG7OvzSMWQNvUsnxukhLkfx1pylHsOnXHM=;
+  b=oH7NzyUYqX8s/yOzRqT08+gUGL+RdiMqEjXO+0aAZ6RwzaT2LpcLxv1T
+   TPtGII3IUIpy0fapAjbu0dD2q1UYal6lZx3KhFOOobAB02tSUV2LU+im9
+   YcJ/fhXOxv4mDAsWHW8WVWfxoLUdjZXwdBXu1uj1xELdYOPNpD5+fIMyW
+   o=;
+X-IronPort-AV: E=Sophos;i="5.79,363,1602547200"; 
+   d="scan'208";a="112521061"
+Subject: Re: [PATCH v4 1/2] drivers/misc: sysgenid: add system generation id driver
+Thread-Topic: [PATCH v4 1/2] drivers/misc: sysgenid: add system generation id driver
+Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-1a-715bee71.us-east-1.amazon.com) ([10.47.23.38])
+  by smtp-border-fw-out-33001.sea14.amazon.com with ESMTP; 21 Jan 2021 09:55:14 +0000
+Received: from EX13MTAUEE001.ant.amazon.com (iad12-ws-svc-p26-lb9-vlan2.iad.amazon.com [10.40.163.34])
+        by email-inbound-relay-1a-715bee71.us-east-1.amazon.com (Postfix) with ESMTPS id CA814A25BB;
+        Thu, 21 Jan 2021 09:55:03 +0000 (UTC)
+Received: from EX13D08UEE004.ant.amazon.com (10.43.62.182) by
+ EX13MTAUEE001.ant.amazon.com (10.43.62.226) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 21 Jan 2021 09:54:28 +0000
+Received: from EX13D08EUB004.ant.amazon.com (10.43.166.158) by
+ EX13D08UEE004.ant.amazon.com (10.43.62.182) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Thu, 21 Jan 2021 09:54:27 +0000
+Received: from EX13D08EUB004.ant.amazon.com ([10.43.166.158]) by
+ EX13D08EUB004.ant.amazon.com ([10.43.166.158]) with mapi id 15.00.1497.010;
+ Thu, 21 Jan 2021 09:54:27 +0000
+From:   "Catangiu, Adrian Costin" <acatan@amazon.com>
+To:     Greg KH <gregkh@linuxfoundation.org>
+CC:     "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>,
+        "kvm@vger.kernel.org" <kvm@vger.kernel.org>,
+        "linux-s390@vger.kernel.org" <linux-s390@vger.kernel.org>,
+        "Graf (AWS), Alexander" <graf@amazon.de>,
+        "arnd@arndb.de" <arnd@arndb.de>,
+        "ebiederm@xmission.com" <ebiederm@xmission.com>,
+        "rppt@kernel.org" <rppt@kernel.org>,
+        "0x7f454c46@gmail.com" <0x7f454c46@gmail.com>,
+        "borntraeger@de.ibm.com" <borntraeger@de.ibm.com>,
+        "Jason@zx2c4.com" <Jason@zx2c4.com>,
+        "jannh@google.com" <jannh@google.com>, "w@1wt.eu" <w@1wt.eu>,
+        "MacCarthaigh, Colm" <colmmacc@amazon.com>,
+        "luto@kernel.org" <luto@kernel.org>,
+        "tytso@mit.edu" <tytso@mit.edu>,
+        "ebiggers@kernel.org" <ebiggers@kernel.org>,
+        "Woodhouse, David" <dwmw@amazon.co.uk>,
+        "bonzini@gnu.org" <bonzini@gnu.org>,
+        "Singh, Balbir" <sblbir@amazon.com>,
+        "Weiss, Radu" <raduweis@amazon.com>,
+        "corbet@lwn.net" <corbet@lwn.net>,
+        "mst@redhat.com" <mst@redhat.com>,
+        "mhocko@kernel.org" <mhocko@kernel.org>,
+        "rafael@kernel.org" <rafael@kernel.org>,
+        "pavel@ucw.cz" <pavel@ucw.cz>,
+        "mpe@ellerman.id.au" <mpe@ellerman.id.au>,
+        "areber@redhat.com" <areber@redhat.com>,
+        "ovzxemul@gmail.com" <ovzxemul@gmail.com>,
+        "avagin@gmail.com" <avagin@gmail.com>,
+        "ptikhomirov@virtuozzo.com" <ptikhomirov@virtuozzo.com>,
+        "gil@azul.com" <gil@azul.com>,
+        "asmehra@redhat.com" <asmehra@redhat.com>,
+        "dgunigun@redhat.com" <dgunigun@redhat.com>,
+        "vijaysun@ca.ibm.com" <vijaysun@ca.ibm.com>,
+        "oridgar@gmail.com" <oridgar@gmail.com>,
+        "ghammer@redhat.com" <ghammer@redhat.com>
+Thread-Index: AQHW6NzJ6Ner/CpAZ0GLGgCheKaWxKoj9j+AgA4QXAA=
+Date:   Thu, 21 Jan 2021 09:54:27 +0000
+Message-ID: <0EFE3365-1698-4BFB-B2F2-BEF1A2634E45@amazon.com>
+References: <1610453760-13812-1-git-send-email-acatan@amazon.com>
+ <1610453760-13812-2-git-send-email-acatan@amazon.com>
+ <X/2fP9LNWXvp7up9@kroah.com>
+In-Reply-To: <X/2fP9LNWXvp7up9@kroah.com>
+Accept-Language: en-US
+Content-Language: en-GB
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-messagesentrepresentingtype: 1
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.43.164.195]
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <AC44F688DB044F439484826026445BBE@amazon.com>
 MIME-Version: 1.0
-References: <20210121033302.558935-1-siyanteng@loongson.cn> <20210121033302.558935-3-siyanteng@loongson.cn>
-In-Reply-To: <20210121033302.558935-3-siyanteng@loongson.cn>
-From:   Huacai Chen <chenhuacai@gmail.com>
-Date:   Thu, 21 Jan 2021 17:28:14 +0800
-Message-ID: <CAAhV-H4itVrn_1tA5gLQGPe9fOoe=Mx3pzKFMfKbe-E=A7DPfg@mail.gmail.com>
-Subject: Re: [PATCH v4 3/3] docs: zh_CN: add iio index.rst translation
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Yanteng Si <siyanteng01@gmail.com>, linux-doc@vger.kernel.org,
-        realpuyuwang@gmail.com, Jiaxun Yang <jiaxun.yang@flygoat.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: base64
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Reviewed-by: Huacai Chen <chenhuacai@kernel.org>
+T24gMTIvMDEvMjAyMSwgMTU6MDcsICJHcmVnIEtIIiA8Z3JlZ2toQGxpbnV4Zm91bmRhdGlvbi5v
+cmc+IHdyb3RlOg0KDQogICAgT24gVHVlLCBKYW4gMTIsIDIwMjEgYXQgMDI6MTU6NTlQTSArMDIw
+MCwgQWRyaWFuIENhdGFuZ2l1IHdyb3RlOg0KICAgID4gKyAgUGFydGlhbCByZWFkcyBhcmUgbm90
+IGFsbG93ZWQgLSByZWFkIGJ1ZmZlciBuZWVkcyB0byBiZSBhdCBsZWFzdA0KICAgID4gKyAgYGBz
+aXplb2YodW5zaWduZWQpYGAgaW4gc2l6ZS4NCg0KICAgICJzaXplb2YodW5zaWduZWQpIj8gIEhv
+dyBhYm91dCBiZWluZyBzcGVjaWZpYyBhbmQgbWFraW5nIHRoaXMgYSByZWFsICJYDQogICAgYml0
+cyBiaWciIHZhbHVlIHBsZWFzZS4NCg0KICAgICJ1bnNpZ25lZCIgZG9lcyBub3Qgd29yayB3ZWxs
+IGFjcm9zcyB1c2VyL2tlcm5lbCBib3VuZHJpZXMuICBPaywgdGhhdCdzDQogICAgb24gdW5kZXJz
+dGF0ZW1lbnQsIHRoZSBjb3JyZWN0IHRoaW5nIGlzICJkb2VzIG5vdCB3b3JrIGF0IGFsbCIuDQoN
+CiAgICBQbGVhc2UgYmUgc3BlY2lmaWMgaW4geW91ciBhcGlzLg0KDQogICAgVGhpcyBpcyBsaXN0
+ZWQgZWxzZXdoZXJlIGFsc28uDQoNClJpZ2h0LCB3aWxsIGRvIQ0KDQogICAgPiArICAtIFNZU0dF
+TklEX0dFVF9PVVREQVRFRF9XQVRDSEVSUzogaW1tZWRpYXRlbHkgcmV0dXJucyB0aGUgbnVtYmVy
+IG9mDQogICAgPiArICAgICpvdXRkYXRlZCogd2F0Y2hlcnMgLSBudW1iZXIgb2YgZmlsZSBkZXNj
+cmlwdG9ycyB0aGF0IHdlcmUgb3Blbg0KICAgID4gKyAgICBkdXJpbmcgYSBzeXN0ZW0gZ2VuZXJh
+dGlvbiBjaGFuZ2UsIGFuZCB3aGljaCBoYXZlIG5vdCB5ZXQgY29uZmlybWVkDQogICAgPiArICAg
+IHRoZSBuZXcgZ2VuZXJhdGlvbiBjb3VudGVyLg0KDQogICAgQnV0IHRoaXMgbnVtYmVyIGNhbiBp
+bnN0YW50bHkgY2hhbmdlIGFmdGVyIGl0IGlzIHJlYWQsIHdoYXQgZ29vZCBpcyBpdD8NCiAgICBJ
+dCBzaG91bGQgbmV2ZXIgYmUgcmVsaWVkIG9uLCBzbyB3aHkgaXMgdGhpcyBuZWVkZWQgYXQgYWxs
+Pw0KDQogICAgV2hhdCBjYW4gdXNlcnNwYWNlIGRvIHdpdGggdGhpcyBpbmZvcm1hdGlvbj8NCg0K
+VGhhdCBpcyB0cnVlLCBhIHVzZXJzcGFjZSBwcm9jZXNzIGVpdGhlciBoYXMgdG8gd2FpdCBmb3Ig
+YWxsIHRvIGFkanVzdCB0byB0aGUgbmV3IGdlbmVyYXRpb24NCm9yIG5vdCBjYXJlIGFib3V0IG90
+aGVyIHByb2Nlc3Nlcy4gSW50ZXJtZWRpYXRlIHByb2JpbmcgZG9lc24ndCBicmluZyByZWFsIHZh
+bHVlLiBXaWxsIHJlbW92ZS4NCg0KICAgIHRoYW5rcywNCg0KICAgIGdyZWcgay1oDQoNClRoYW5r
+cyBmb3IgdGhlIGZlZWRiYWNrIQ0KQWRyaWFuLg0KDQoKCgpBbWF6b24gRGV2ZWxvcG1lbnQgQ2Vu
+dGVyIChSb21hbmlhKSBTLlIuTC4gcmVnaXN0ZXJlZCBvZmZpY2U6IDI3QSBTZi4gTGF6YXIgU3Ry
+ZWV0LCBVQkM1LCBmbG9vciAyLCBJYXNpLCBJYXNpIENvdW50eSwgNzAwMDQ1LCBSb21hbmlhLiBS
+ZWdpc3RlcmVkIGluIFJvbWFuaWEuIFJlZ2lzdHJhdGlvbiBudW1iZXIgSjIyLzI2MjEvMjAwNS4K
 
-On Thu, Jan 21, 2021 at 11:32 AM Yanteng Si <siyanteng@loongson.cn> wrote:
->
-> This patch translates Documentation/iio/index.rst into Chinese.
->
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-> Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
-> ---
->  .../translations/zh_CN/iio/index.rst          | 20 +++++++++++++++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 Documentation/translations/zh_CN/iio/index.rst
->
-> diff --git a/Documentation/translations/zh_CN/iio/index.rst b/Documentati=
-on/translations/zh_CN/iio/index.rst
-> new file mode 100644
-> index 000000000000..88b6ba5f233b
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/iio/index.rst
-> @@ -0,0 +1,20 @@
-> +.. SPDX-License-Identifier: GPL-2.0
-> +
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: :doc:`../../../iio/index`
-> +:Translator: Yanteng Si <siyanteng@loongson.cn>
-> +
-> +.. _cn_iio_index:
-> +
-> +
-> +=3D=3D=3D=3D=3D=3D=3D=3D
-> +=E5=B7=A5=E4=B8=9A I/O
-> +=3D=3D=3D=3D=3D=3D=3D=3D
-> +
-> +.. toctree::
-> +   :maxdepth: 1
-> +
-> +   iio_configfs
-> +
-> +   ep93xx_adc
-> --
-> 2.27.0
->
