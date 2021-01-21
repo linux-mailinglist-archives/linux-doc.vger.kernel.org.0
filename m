@@ -2,157 +2,180 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C0AF62FE00D
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 04:44:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 39A2F2FE00E
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 04:44:58 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726829AbhAUDfR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 20 Jan 2021 22:35:17 -0500
-Received: from out30-57.freemail.mail.aliyun.com ([115.124.30.57]:45062 "EHLO
-        out30-57.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728475AbhAUCFA (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Jan 2021 21:05:00 -0500
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R121e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e01424;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=8;SR=0;TI=SMTPD_---0UMNRkxF_1611194647;
-Received: from IT-FVFX43SYHV2H.local(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0UMNRkxF_1611194647)
-          by smtp.aliyun-inc.com(127.0.0.1);
-          Thu, 21 Jan 2021 10:04:08 +0800
-Subject: Re: [PATCH v3 1/3] docs/zh_CN: add iio iio_configfs.rst translation
-To:     Yanteng Si <siyanteng@loongson.cn>,
-        Jonathan Corbet <corbet@lwn.net>
-Cc:     Harry Wei <harryxiyou@gmail.com>,
-        Yanteng Si <siyanteng01@gmail.com>, linux-doc@vger.kernel.org,
-        realpuyuwang@gmail.com, Huacai Chen <chenhuacai@gmail.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>
-References: <20210121012352.449558-1-siyanteng@loongson.cn>
-From:   Alex Shi <alex.shi@linux.alibaba.com>
-Message-ID: <9a65551a-04e4-1daa-4d49-39e6423ca751@linux.alibaba.com>
-Date:   Thu, 21 Jan 2021 10:04:06 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.0; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
+        id S1726894AbhAUDfV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 20 Jan 2021 22:35:21 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37076 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S2393193AbhAUCWf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 20 Jan 2021 21:22:35 -0500
+Received: from mail-io1-xd35.google.com (mail-io1-xd35.google.com [IPv6:2607:f8b0:4864:20::d35])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5C068C061757;
+        Wed, 20 Jan 2021 18:21:55 -0800 (PST)
+Received: by mail-io1-xd35.google.com with SMTP id p72so1033523iod.12;
+        Wed, 20 Jan 2021 18:21:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:reply-to:from:date:message-id
+         :subject:to:cc;
+        bh=Vp+AOE092k68RqEbMcBCp9/Ukm2GwYnsZJxTSLbTqcQ=;
+        b=fk76+8fpscXt1+UtR91rPJtqdpvBCfunS2NPWqFQX9XISsq0PZ8sH/qv3WZdswrS9q
+         DBvz/hwuLuOnz6LxyrR7Yg2cPoY4IKujYQXSSn49u8Kkkg6rP2pKxo/xivj/vVkCUvaX
+         GE4dNzLplqnAjW6YqsjmA4/fcWuv7lVhMETdXXNpzjr+coY5QFZXIM+yX7an5C0WMM6V
+         DMIOD4AF9DbkiQn2A4iZLTa7HwNCn4jHMABDokxaHtRcA19scknWYvHCZnbWMqRfCCi0
+         LusnYl4D191C2qNGhOnqQ5GiFFD3u9ED0FlIKYxc5Y8Z2zVkUsrC6c+cRQ001FE1AmYf
+         snAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:reply-to
+         :from:date:message-id:subject:to:cc;
+        bh=Vp+AOE092k68RqEbMcBCp9/Ukm2GwYnsZJxTSLbTqcQ=;
+        b=Nl7CwRVBADKK7a/Dj6HEDBeS3S/AGLR1R6TMgf3MNIlujO9CEBMUfFIg+xBTkGHXku
+         VcDRTATZGk/jPyJzIe9CHEQr5mzXXaczn1XR5zuj+mm7s/+YsS0ugmfmHdLlVUDGyQiV
+         bYRwEuTzaj4vLj0k6zz/iDF7Wmz1eNY1J8TLpTTBqdvc88KRaMIN1FfHBo8+sYgISF5W
+         RBkZem4GDXzF48WE8bFw6WxV20a4wv7BAvHslB368stqCTzdWV1AoIGg8BKhJs+MFUVi
+         abEYyrSCZqbFQ+vGWWYZ3f4AV2kW2eoYp8xhW1h5c3yauc8zVb9y0HCdoc3E/+wL2RZL
+         9J9w==
+X-Gm-Message-State: AOAM532bBpgxnM/A1WNaa/2clePiLnPOmhzFFxvub0ga9CubOCD0eOUc
+        6PjXOnHa6Hm0hBTvJJNMGAve3gHdsuL0Lh2zpvY=
+X-Google-Smtp-Source: ABdhPJxqCkgCdrYcxYFCtLfGMFZ/MHc8v+nNvK72BdWKJAS/FL85R1C2E6kKD/X0Qh7o4tQw39V9m84rZ4g5W4c4iAo=
+X-Received: by 2002:a02:2ace:: with SMTP id w197mr10061595jaw.132.1611195714793;
+ Wed, 20 Jan 2021 18:21:54 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20210121012352.449558-1-siyanteng@loongson.cn>
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+References: <20210111081821.3041587-1-morbo@google.com>
+In-Reply-To: <20210111081821.3041587-1-morbo@google.com>
+Reply-To: sedat.dilek@gmail.com
+From:   Sedat Dilek <sedat.dilek@gmail.com>
+Date:   Thu, 21 Jan 2021 03:21:43 +0100
+Message-ID: <CA+icZUW63tP7kzWCKofJH0E0xA7yLCYpSOYz_aw1D4mkhNhW=w@mail.gmail.com>
+Subject: Re: [PATCH] pgo: add clang's Profile Guided Optimization infrastructure
+To:     Bill Wendling <morbo@google.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kbuild@vger.kernel.org,
+        Clang-Built-Linux ML <clang-built-linux@googlegroups.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Nathan Chancellor <natechancellor@gmail.com>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Sami Tolvanen <samitolvanen@google.com>
+Content-Type: multipart/mixed; boundary="0000000000003e955e05b95fbcbc"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
+--0000000000003e955e05b95fbcbc
+Content-Type: text/plain; charset="UTF-8"
 
-在 2021/1/21 上午9:23, Yanteng Si 写道:
-> This patch translates Documentation/iio/iio_configfs.rst into Chinese.
-> 
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-> ---
->  .../translations/zh_CN/iio/iio_configfs.rst   | 102 ++++++++++++++++++
->  1 file changed, 102 insertions(+)
->  create mode 100644 Documentation/translations/zh_CN/iio/iio_configfs.rst
-> 
-> diff --git a/Documentation/translations/zh_CN/iio/iio_configfs.rst b/Documentation/translations/zh_CN/iio/iio_configfs.rst
-> new file mode 100644
-> index 000000000000..223bc732ce66
-> --- /dev/null
-> +++ b/Documentation/translations/zh_CN/iio/iio_configfs.rst
-> @@ -0,0 +1,102 @@
-> +.. include:: ../disclaimer-zh_CN.rst
-> +
-> +:Original: :doc:`../../../iio/iio_configfs`
-> +:Translator: Yanteng Si <siyanteng@loongson.cn>
-> +
-> +.. _cn_iio_configfs:
-> +
-> +
-> +=====================
-> +工业 IIO configfs支持
-> +=====================
-> +
-> +1. 概述
-> +=======
-> +
-> +Configfs是一种内核对象的基于文件系统的管理系统，IIO使用一些可以通过
-> +configfs轻松配置的对象（例如：设备，触发器）。
-> +
-> +关于configfs是如何运行的，请查阅Documentation/filesystems/configfs.rst
-> +了解更多信息。
-> +
-> +2. 用法
-> +=======
-> +为了使configfs支持IIO，我们需要在编译时选中config的CONFIG_IIO_CONFIGFS
-> +选项。
-> +
-> +然后，挂载configfs文件系统(通常在 /config directory目录下）：：
-> +
-> +  $ mkdir/config
-> +  $ mount -t configfs none/config
-> +
-> +此时，将创建所有默认IIO组，并可以在/ config / iio下对其进行访问。 下一章
-> +将介绍可用的IIO配置对象。
-> +
-> +3. 软件触发器
-> +=============
-> +
-> +IIO默认configfs组之一是“触发器”组。 挂载configfs后可以自动访问它，并且可
-> +以在/config/iio/triggers下找到。
-> +
-> +IIO软件触发器为创建多种触发器类型提供了支持。 通常在include/linux/iio
-> +/sw_trigger.h：中的接口下将新的触发器类型实现为单独的内核模块：
-> +
-> +  /*
-> +   * drivers/iio/trigger/iio-trig-sample.c
-> +   * 一种新触发器类型的内核模块实例
-> +   */
-> +  #include <linux/iio/sw_trigger.h>
-> +
-> +
-> +  static struct iio_sw_trigger *iio_trig_sample_probe(const char *name)
-> +  {
-> +	/*
-> +	 * 这将分配并注册一个IIO触发器以及其他触发器类型特性的初始化。
-> +	 */
-> +  }
-> +
-> +  static int iio_trig_sample_remove(struct iio_sw_trigger *swt)
-> +  {
-> +	/*
-> +	 * 这会废弃iio_trig_sample_probe中的操作
-> +	 */
-> +  }
-> +
-> +  static const struct iio_sw_trigger_ops iio_trig_sample_ops = {
-> +	.probe		= iio_trig_sample_probe,
-> +	.remove		= iio_trig_sample_remove,
-> +  };
-> +
-> +  static struct iio_sw_trigger_type iio_trig_sample = {
-> +	.name = "trig-sample",
-> +	.owner = THIS_MODULE,
-> +	.ops = &iio_trig_sample_ops,
-> +  };
-> +
-> +module_iio_sw_trigger_driver(iio_trig_sample);
-> +
-> +每种触发器类型在/config/iio/triggers下都有其自己的目录。 加载iio-trig-sample
-> +模块将创建“ trig-sample”触发器类型目录/config/iio/triggers/trig-sample.
-> +
-> +我们支持以下中断源（触发器类型）
-> +
-> +	* hrtimer,使用高分辨率定时器作为中断源
-> +
-> +3.1 Hrtimer触发器创建与销毁
-> +---------------------------
-> +
-> +加载iio-trig-hrtimer模块将注册hrtimer触发器类型，从而允许用户在
-> +/config/iio/triggers/hrtimer下创建hrtimer触发器。
-> +
-> +例如::
-> +
-> +  $ mkdir /config/iio/triggers/hrtimer/instance1
-> +  $ rmdir /config/iio/triggers/hrtimer/instance1
-> +
-> +每个触发器可以具有一个或多个独特的触发器类型的属性。
-> +
-> +3.2 "hrtimer" 触发器类型属性
-> +----------------------------
-> +
-> +"hrtimer”触发器类型没有来自/config dir的任何可配置属性。
-> +但它确实将采样频率属性引入了触发目录。
-> 
+Hi,
+
+When I looked through the code I wondered why we do not add a
+"CONFIG_PGO_CLANG_PROFDATA" which can be helpful when doing the PGO
+rebuild with a vmlinux.profdata.
+
+This introduces a "PGO_PROFDATA" to turn on/off to pass
+"-fprofile-use=vmlinux.profdata" (see CFLAGS_PGO_CLANG_PROFDATA in
+top-level Makefile).
+
+If we turn off via "PGO_PROFILE := n" in several Makefiles - we should
+do the same and add "PGO_PROFDATA := n" to the same Makefiles?
+
+Please see the attached diff.
+
+Regards,
+- Sedat -
+
+--0000000000003e955e05b95fbcbc
+Content-Type: text/x-patch; charset="US-ASCII"; name="CONFIG_PGO_CLANG_PROFDATA.diff"
+Content-Disposition: attachment; filename="CONFIG_PGO_CLANG_PROFDATA.diff"
+Content-Transfer-Encoding: base64
+Content-ID: <f_kk689dua0>
+X-Attachment-Id: f_kk689dua0
+
+ZGlmZiAtLWdpdCBhL01ha2VmaWxlIGIvTWFrZWZpbGUKaW5kZXggZGQ1OGZjYTY1YzlmLi5kOWE0
+ODI3OWM0ZDUgMTAwNjQ0Ci0tLSBhL01ha2VmaWxlCisrKyBiL01ha2VmaWxlCkBAIC02NjAsNyAr
+NjYwLDggQEAgZW5kaWYgIyBLQlVJTERfRVhUTU9ECiBhbGw6IHZtbGludXgKIAogQ0ZMQUdTX1BH
+T19DTEFORyA6PSAtZnByb2ZpbGUtZ2VuZXJhdGUKLWV4cG9ydCBDRkxBR1NfUEdPX0NMQU5HCitD
+RkxBR1NfUEdPX0NMQU5HX1BST0ZEQVRBIDo9IC1mcHJvZmlsZS11c2U9dm1saW51eC5wcm9mZGF0
+YQorZXhwb3J0IENGTEFHU19QR09fQ0xBTkcgQ0ZMQUdTX1BHT19DTEFOR19QUk9GREFUQQogCiBD
+RkxBR1NfR0NPVgk6PSAtZnByb2ZpbGUtYXJjcyAtZnRlc3QtY292ZXJhZ2UgXAogCSQoY2FsbCBj
+Yy1vcHRpb24sLWZuby10cmVlLWxvb3AtaW0pIFwKZGlmZiAtLWdpdCBhL2FyY2gveDg2L2Jvb3Qv
+TWFrZWZpbGUgYi9hcmNoL3g4Ni9ib290L01ha2VmaWxlCmluZGV4IDM4Mzg1M2UzMmY2Ny4uMzI2
+OGQxZWU2ZTQ1IDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9ib290L01ha2VmaWxlCisrKyBiL2FyY2gv
+eDg2L2Jvb3QvTWFrZWZpbGUKQEAgLTcyLDYgKzcyLDcgQEAgS0JVSUxEX0NGTEFHUwkrPSAkKGNh
+bGwgY2Mtb3B0aW9uLC1mbWFjcm8tcHJlZml4LW1hcD0kKHNyY3RyZWUpLz0pCiBLQlVJTERfQ0ZM
+QUdTCSs9IC1mbm8tYXN5bmNocm9ub3VzLXVud2luZC10YWJsZXMKIEdDT1ZfUFJPRklMRSA6PSBu
+CiBQR09fUFJPRklMRSA6PSBuCitQR09fUFJPRkRBVEEgOj0gbgogVUJTQU5fU0FOSVRJWkUgOj0g
+bgogCiAkKG9iaikvYnpJbWFnZTogYXNmbGFncy15ICA6PSAkKFNWR0FfTU9ERSkKZGlmZiAtLWdp
+dCBhL2FyY2gveDg2L2Jvb3QvY29tcHJlc3NlZC9NYWtlZmlsZSBiL2FyY2gveDg2L2Jvb3QvY29t
+cHJlc3NlZC9NYWtlZmlsZQppbmRleCBlZDEyYWI2NWY2MDYuLjcwN2M0MDM0YWVmNyAxMDA2NDQK
+LS0tIGEvYXJjaC94ODYvYm9vdC9jb21wcmVzc2VkL01ha2VmaWxlCisrKyBiL2FyY2gveDg2L2Jv
+b3QvY29tcHJlc3NlZC9NYWtlZmlsZQpAQCAtNTUsNiArNTUsNyBAQCBDRkxBR1Nfc2V2LWVzLm8g
+Kz0gLUkkKG9ianRyZWUpL2FyY2gveDg2L2xpYi8KIEtCVUlMRF9BRkxBR1MgIDo9ICQoS0JVSUxE
+X0NGTEFHUykgLURfX0FTU0VNQkxZX18KIEdDT1ZfUFJPRklMRSA6PSBuCiBQR09fUFJPRklMRSA6
+PSBuCitQR09fUFJPRkRBVEEgOj0gbgogVUJTQU5fU0FOSVRJWkUgOj1uCiAKIEtCVUlMRF9MREZM
+QUdTIDo9IC1tIGVsZl8kKFVUU19NQUNISU5FKQpkaWZmIC0tZ2l0IGEvYXJjaC94ODYvY3J5cHRv
+L01ha2VmaWxlIGIvYXJjaC94ODYvY3J5cHRvL01ha2VmaWxlCmluZGV4IGJhYTE0ZjgzZWRhZS4u
+MWIyY2I5MTQyNjcyIDEwMDY0NAotLS0gYS9hcmNoL3g4Ni9jcnlwdG8vTWFrZWZpbGUKKysrIGIv
+YXJjaC94ODYvY3J5cHRvL01ha2VmaWxlCkBAIC01LDYgKzUsNyBAQAogT0JKRUNUX0ZJTEVTX05P
+Tl9TVEFOREFSRCA6PSB5CiAKIFBHT19QUk9GSUxFX2N1cnZlMjU1MTkteDg2XzY0Lm8gOj0gbgor
+UEdPX1BST0ZEQVRBX2N1cnZlMjU1MTkteDg2XzY0Lm8gOj0gbgogCiBvYmotJChDT05GSUdfQ1JZ
+UFRPX1RXT0ZJU0hfNTg2KSArPSB0d29maXNoLWk1ODYubwogdHdvZmlzaC1pNTg2LXkgOj0gdHdv
+ZmlzaC1pNTg2LWFzbV8zMi5vIHR3b2Zpc2hfZ2x1ZS5vCmRpZmYgLS1naXQgYS9hcmNoL3g4Ni9l
+bnRyeS92ZHNvL01ha2VmaWxlIGIvYXJjaC94ODYvZW50cnkvdmRzby9NYWtlZmlsZQppbmRleCBm
+NzQyMWU0NDcyNWEuLjY3ODYwZWNkZTU0MiAxMDA2NDQKLS0tIGEvYXJjaC94ODYvZW50cnkvdmRz
+by9NYWtlZmlsZQorKysgYi9hcmNoL3g4Ni9lbnRyeS92ZHNvL01ha2VmaWxlCkBAIC0xODEsNiAr
+MTgxLDcgQEAgVkRTT19MREZMQUdTID0gLXNoYXJlZCAtLWhhc2gtc3R5bGU9Ym90aCAtLWJ1aWxk
+LWlkPXNoYTEgXAogCSQoY2FsbCBsZC1vcHRpb24sIC0tZWgtZnJhbWUtaGRyKSAtQnN5bWJvbGlj
+CiBHQ09WX1BST0ZJTEUgOj0gbgogUEdPX1BST0ZJTEUgOj0gbgorUEdPX1BST0ZEQVRBIDo9IG4K
+IAogcXVpZXRfY21kX3Zkc29fYW5kX2NoZWNrID0gVkRTTyAgICAkQAogICAgICAgY21kX3Zkc29f
+YW5kX2NoZWNrID0gJChjbWRfdmRzbyk7ICQoY21kX3Zkc29fY2hlY2spCmRpZmYgLS1naXQgYS9h
+cmNoL3g4Ni9wbGF0Zm9ybS9lZmkvTWFrZWZpbGUgYi9hcmNoL3g4Ni9wbGF0Zm9ybS9lZmkvTWFr
+ZWZpbGUKaW5kZXggNWYyMmIzMTQ0NmFkLi41ZDY0YjcyOGEwYTAgMTAwNjQ0Ci0tLSBhL2FyY2gv
+eDg2L3BsYXRmb3JtL2VmaS9NYWtlZmlsZQorKysgYi9hcmNoL3g4Ni9wbGF0Zm9ybS9lZmkvTWFr
+ZWZpbGUKQEAgLTMsNiArMyw3IEBAIE9CSkVDVF9GSUxFU19OT05fU1RBTkRBUkRfZWZpX3RodW5r
+XyQoQklUUykubyA6PSB5CiBLQVNBTl9TQU5JVElaRSA6PSBuCiBHQ09WX1BST0ZJTEUgOj0gbgog
+UEdPX1BST0ZJTEUgOj0gbgorUEdPX1BST0ZEQVRBIDo9IG4KIAogb2JqLSQoQ09ORklHX0VGSSkg
+CQkrPSBxdWlya3MubyBlZmkubyBlZmlfJChCSVRTKS5vIGVmaV9zdHViXyQoQklUUykubwogb2Jq
+LSQoQ09ORklHX0VGSV9NSVhFRCkJCSs9IGVmaV90aHVua18kKEJJVFMpLm8KZGlmZiAtLWdpdCBh
+L2FyY2gveDg2L3B1cmdhdG9yeS9NYWtlZmlsZSBiL2FyY2gveDg2L3B1cmdhdG9yeS9NYWtlZmls
+ZQppbmRleCAzNmYyMGU5OWRhMGIuLjk5ZjJlNGMxODg2ZSAxMDA2NDQKLS0tIGEvYXJjaC94ODYv
+cHVyZ2F0b3J5L01ha2VmaWxlCisrKyBiL2FyY2gveDg2L3B1cmdhdG9yeS9NYWtlZmlsZQpAQCAt
+MjQsNiArMjQsNyBAQCB0YXJnZXRzICs9IHB1cmdhdG9yeS5ybyBwdXJnYXRvcnkuY2hrCiAjIFNh
+bml0aXplciwgZXRjLiBydW50aW1lcyBhcmUgdW5hdmFpbGFibGUgYW5kIGNhbm5vdCBiZSBsaW5r
+ZWQgaGVyZS4KIEdDT1ZfUFJPRklMRQk6PSBuCiBQR09fUFJPRklMRQk6PSBuCitQR09fUFJPRkRB
+VEEJOj0gbgogS0FTQU5fU0FOSVRJWkUJOj0gbgogVUJTQU5fU0FOSVRJWkUJOj0gbgogS0NTQU5f
+U0FOSVRJWkUJOj0gbgpkaWZmIC0tZ2l0IGEvYXJjaC94ODYvcmVhbG1vZGUvcm0vTWFrZWZpbGUg
+Yi9hcmNoL3g4Ni9yZWFsbW9kZS9ybS9NYWtlZmlsZQppbmRleCAyMTc5NzE5MmY5NTguLmE0OTU4
+OTBlOWIxMSAxMDA2NDQKLS0tIGEvYXJjaC94ODYvcmVhbG1vZGUvcm0vTWFrZWZpbGUKKysrIGIv
+YXJjaC94ODYvcmVhbG1vZGUvcm0vTWFrZWZpbGUKQEAgLTc3LDQgKzc3LDUgQEAgS0JVSUxEX0FG
+TEFHUwk6PSAkKEtCVUlMRF9DRkxBR1MpIC1EX19BU1NFTUJMWV9fCiBLQlVJTERfQ0ZMQUdTCSs9
+IC1mbm8tYXN5bmNocm9ub3VzLXVud2luZC10YWJsZXMKIEdDT1ZfUFJPRklMRSA6PSBuCiBQR09f
+UFJPRklMRSA6PSBuCitQR09fUFJPRkRBVEEgOj0gbgogVUJTQU5fU0FOSVRJWkUgOj0gbgpkaWZm
+IC0tZ2l0IGEvYXJjaC94ODYvdW0vdmRzby9NYWtlZmlsZSBiL2FyY2gveDg2L3VtL3Zkc28vTWFr
+ZWZpbGUKaW5kZXggNTRmNTc2OGY1ODUzLi4yZTljZGMxMzdhZGUgMTAwNjQ0Ci0tLSBhL2FyY2gv
+eDg2L3VtL3Zkc28vTWFrZWZpbGUKKysrIGIvYXJjaC94ODYvdW0vdmRzby9NYWtlZmlsZQpAQCAt
+NjUsNiArNjUsNyBAQCBxdWlldF9jbWRfdmRzbyA9IFZEU08gICAgJEAKIFZEU09fTERGTEFHUyA9
+IC1mUElDIC1zaGFyZWQgLVdsLC0taGFzaC1zdHlsZT1zeXN2CiBHQ09WX1BST0ZJTEUgOj0gbgog
+UEdPX1BST0ZJTEUgOj0gbgorUEdPX1BST0ZEQVRBIDo9IG4KIAogIwogIyBJbnN0YWxsIHRoZSB1
+bnN0cmlwcGVkIGNvcHkgb2YgdmRzbyouc28gbGlzdGVkIGluICQodmRzby1pbnN0YWxsLXkpLgpk
+aWZmIC0tZ2l0IGEva2VybmVsL3Bnby9LY29uZmlnIGIva2VybmVsL3Bnby9LY29uZmlnCmluZGV4
+IDVmZTk2MzVhYzY0Yy4uY2UxZTFjMDYxYTk4IDEwMDY0NAotLS0gYS9rZXJuZWwvcGdvL0tjb25m
+aWcKKysrIGIva2VybmVsL3Bnby9LY29uZmlnCkBAIC0zMiw0ICszMiw4IEBAIGNvbmZpZyBQR09f
+Q0xBTkcKIAkgIE5vdGUgdGhhdCB0aGUgZGVidWdmcyBmaWxlc3lzdGVtIGhhcyB0byBiZSBtb3Vu
+dGVkIHRvIGFjY2VzcwogCSAgcHJvZmlsaW5nIGRhdGEuCiAKK2NvbmZpZyBQR09fQ0xBTkdfUFJP
+RkRBVEEKKwlib29sICJVc2Ugdm1saW51eC5wcm9mZGF0YSBwcm9maWxlIGZpbGUiCisJZGVwZW5k
+cyBvbiAhUEdPX0NMQU5HCisKIGVuZG1lbnUKZGlmZiAtLWdpdCBhL3NjcmlwdHMvTWFrZWZpbGUu
+bGliIGIvc2NyaXB0cy9NYWtlZmlsZS5saWIKaW5kZXggMTJmZWQ4MjVhYjRiLi4xNDE2OWE1NzVi
+NjQgMTAwNjQ0Ci0tLSBhL3NjcmlwdHMvTWFrZWZpbGUubGliCisrKyBiL3NjcmlwdHMvTWFrZWZp
+bGUubGliCkBAIC0xNTQsNiArMTU0LDEyIEBAIF9jX2ZsYWdzICs9ICQoaWYgJChwYXRzdWJzdCBu
+JSwsIFwKIAkJJChQR09fUFJPRklMRV8kKGJhc2V0YXJnZXQpLm8pJChQR09fUFJPRklMRSl5KSwg
+XAogCQkkKENGTEFHU19QR09fQ0xBTkcpKQogZW5kaWYKKyMgVXNlIHZtbGludXgucHJvZmRhdGEg
+cHJvZmlsZSBmaWxlCitpZmVxICgkKENPTkZJR19QR09fQ0xBTkdfUFJPRkRBVEEpLHkpCitfY19m
+bGFncyArPSAkKGlmICQocGF0c3Vic3QgbiUsLCBcCisJCSQoUEdPX1BST0ZEQVRBXyQoYmFzZXRh
+cmdldCkubykkKFBHT19QUk9GREFUQSl5KSwgXAorCQkkKENGTEFHU19QR09fQ0xBTkdfUFJPRkRB
+VEEpKQorZW5kaWYKIAogIwogIyBFbmFibGUgYWRkcmVzcyBzYW5pdGl6ZXIgZmxhZ3MgZm9yIGtl
+cm5lbCBleGNlcHQgc29tZSBmaWxlcyBvciBkaXJlY3Rvcmllcwo=
+--0000000000003e955e05b95fbcbc--
