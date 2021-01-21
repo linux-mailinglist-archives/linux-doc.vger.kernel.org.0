@@ -2,45 +2,38 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4BA072FF50F
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 20:49:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C1A0E2FF497
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 20:33:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726449AbhAUTsl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Jan 2021 14:48:41 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51908 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1726205AbhAUSro (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 13:47:44 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2EA7FC0613ED
-        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 10:46:58 -0800 (PST)
+        id S1726730AbhAUTdh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Jan 2021 14:33:37 -0500
+Received: from ms.lwn.net ([45.79.88.28]:36110 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S1726720AbhAUSvK (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 21 Jan 2021 13:51:10 -0500
 Received: from lwn.net (unknown [IPv6:2601:281:8300:104d::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id 9B1C1615C;
-        Thu, 21 Jan 2021 18:46:57 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 9B1C1615C
+        by ms.lwn.net (Postfix) with ESMTPSA id B3CB8615F;
+        Thu, 21 Jan 2021 18:50:27 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net B3CB8615F
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1611254818; bh=PViKmR17LWz+Sl/ns1BtHaIpYHK3G3dIAJK29571lpk=;
+        t=1611255027; bh=sbsHFAH86AOtDyGQjg0eGz0zupBshKqKdJPjqbJQxes=;
         h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=bHJv4pqvpwb5cg8GwKO+pNlVxyQQ1ZV/8XqJbvR2tkJiwmtk6Ai+YyJP4z7bFTK59
-         iVQp/RMbECeRLXouL346ygl4IbXc/hdNqIawvjvW7FH3vOi7ZVlROpJfQN4BO42D4f
-         IQixy/2PGybwx2hgb13LAO25Vu1YRLYyqNHeHW+3bMGX5bDUsdar8hHjGtaMbkciGj
-         CySbQU9mg+xmuZFrHUaVgIm+hlshB8nMqMceLIqe8hGxArTiPGddDCrXao5XaF5jsh
-         nfdN7zwWzTQ632wJohbO16hl8bhDfw3mXnh2vXi7jR1SVu10LVZEBnT/PSMbUTrH5E
-         tAGcQRRkTv9cA==
-Date:   Thu, 21 Jan 2021 11:46:56 -0700
+        b=HPswWyYZYZsL1icvgJcoR6ZqYXEs2j6Wg4kvSnoEdSyanBSWo6TaaYZs/ceqjdApG
+         Zf780Yc6P6E5E+lXTpnmmJPHRhXjeCdjCj0pWSyVidMXbiEXgV8KdBcWy0HDqxlHm+
+         fKD5SkrqCo5kx+aFLoziitXvlcxrW1bZf5tmTZvCYSHorM1luT3SvR9u6tV6+pfBFL
+         BUOJMMJQp5NQHyzZYs1rrJ3yVBolMk+UCMtkKXtg1pLhJg+W7Ps89r3e5gpF7bSTL3
+         vPHzcC2CLK93pFPZXqP6GZ2HePs1BJRuwbnSoH6lAy5d1ZxN8pYKOsSZeCBLiiPZvp
+         YgeimySvc0gZA==
+Date:   Thu, 21 Jan 2021 11:50:26 -0700
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     Lars Poeschel <poeschel@lemonage.de>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-doc@vger.kernel.org, realpuyuwang@gmail.com,
-        Huacai Chen <chenhuacai@gmail.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>
-Subject: Re: [PATCH] docs: iio: Correct a typo
-Message-ID: <20210121114656.55874140@lwn.net>
-In-Reply-To: <20210119030320.2860870-1-siyanteng@loongson.cn>
-References: <20210119030320.2860870-1-siyanteng@loongson.cn>
+To:     Alex Shi <alex.shi@linux.alibaba.com>
+Cc:     Yanteng Si <siyanteng@loongson.cn>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH] docs/zh_CN: remove cn_index tag in mips
+Message-ID: <20210121115026.77f2afa2@lwn.net>
+In-Reply-To: <20210121024113.16344-1-alex.shi@linux.alibaba.com>
+References: <20210121024113.16344-1-alex.shi@linux.alibaba.com>
 Organization: LWN.net
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -49,27 +42,31 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 19 Jan 2021 11:03:20 +0800
-Yanteng Si <siyanteng@loongson.cn> wrote:
+On Thu, 21 Jan 2021 10:41:13 +0800
+Alex Shi <alex.shi@linux.alibaba.com> wrote:
 
-> There are two EP9312, one of them should be 9315
+> It's a unused tag with a incorrect big name but just for mips arch.
+> So remove it.
 > 
-> Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+> Signed-off-by: Alex Shi <alex.shi@linux.alibaba.com>
+> Cc: Yanteng Si <siyanteng@loongson.cn>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: linux-doc@vger.kernel.org
 > ---
->  Documentation/iio/ep93xx_adc.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  Documentation/translations/zh_CN/mips/index.rst | 3 ---
+>  1 file changed, 3 deletions(-)
 > 
-> diff --git a/Documentation/iio/ep93xx_adc.rst b/Documentation/iio/ep93xx_adc.rst
-> index 4fd8dea3f6b8..0af0e9040457 100644
-> --- a/Documentation/iio/ep93xx_adc.rst
-> +++ b/Documentation/iio/ep93xx_adc.rst
-> @@ -13,7 +13,7 @@ touchscreen/ADC module.
->  ====================
+> diff --git a/Documentation/translations/zh_CN/mips/index.rst b/Documentation/translations/zh_CN/mips/index.rst
+> index 27a2eae8484a..b85033f9d67c 100644
+> --- a/Documentation/translations/zh_CN/mips/index.rst
+> +++ b/Documentation/translations/zh_CN/mips/index.rst
+> @@ -5,9 +5,6 @@
+>  :Original: :doc:`../../../mips/index`
+>  :Translator: Yanteng Si <siyanteng@loongson.cn>
 >  
->  Numbering scheme for channels 0..4 is defined in EP9301 and EP9302 datasheets.
-> -EP9307, EP9312 and EP9312 have 3 channels more (total 8), but the numbering is
-> +EP9307, EP9312 and EP9315 have 3 channels more (total 8), but the numbering is
->  not defined. So the last three are numbered randomly, let's say.
+> -.. _cn_index:
+> -
+> -
 
 Applied, thanks.
 
