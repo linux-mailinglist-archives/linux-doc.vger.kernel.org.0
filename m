@@ -2,101 +2,128 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8CD002FEC72
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 14:58:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1010C2FED99
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 15:55:53 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1729365AbhAUN54 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Jan 2021 08:57:56 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43086 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1729347AbhAUNqt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 08:46:49 -0500
-Received: from mail-ej1-x634.google.com (mail-ej1-x634.google.com [IPv6:2a00:1450:4864:20::634])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 67433C061793
-        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 05:44:46 -0800 (PST)
-Received: by mail-ej1-x634.google.com with SMTP id by1so2698573ejc.0
-        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 05:44:46 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=sartura-hr.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=MHgMDVFVKDKvtDgBJ6bSsn28+Hx3KTR2/9Rg1yeA1/0=;
-        b=Epwg9MmfT84c7AZZSAtt3VkZJXSsj7soBPEhI9/0szwu/a7jQ/4TyrgBWqo2W3aFbu
-         LMvaxbnkL23je/wK4jW17vQvw3ya02FEgNyU1/8YzKqq00rSXTZqNN4LzAcE9pDtqe8p
-         jPGaThFu2UI8UuVqxW3fJFDeCl0U3YJRu3GFt92vr3FxqMWbv+jPMHgz2H4v82ocFTs8
-         sLYqRvLcYJ98CJH/WET1F6wa+Oi+L1cghXBgEEppRk9lfVxoZLuSmDRfM6NmBkYUetkv
-         mner/MhldDpbAVP6hI6RSyzfowsl8ThOcpxog3bsHPdXNwLn+1gduH+OxbiJMHd7exqZ
-         QwWA==
+        id S1732077AbhAUOzD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Jan 2021 09:55:03 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:57831 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1731552AbhAUOyM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 09:54:12 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1611240765;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=loDog159VD/YZKvAODyHGMsyyVC+ozXQO6jj7oflSm0=;
+        b=X9ijhu+T/GkzrcmLK8PtZLjBdzbjrY1EaD/gw2+va0h6Xk9eMwFgfoWRJhgSh/NTANvpgE
+        iVcfLlvgx2KjMc1FVW7U1iffBpTP5tYqsG7CMGhAtucIFwNySEUJKJ3m1CCK3NVu7TuZ9f
+        hc1/M33Q1x2gddnVJ7VgUMlcywTTQQM=
+Received: from mail-wr1-f69.google.com (mail-wr1-f69.google.com
+ [209.85.221.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-179-0YOX6lCVOu2KWkFCFkSR8g-1; Thu, 21 Jan 2021 09:52:43 -0500
+X-MC-Unique: 0YOX6lCVOu2KWkFCFkSR8g-1
+Received: by mail-wr1-f69.google.com with SMTP id x12so1196252wrw.21
+        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 06:52:43 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=MHgMDVFVKDKvtDgBJ6bSsn28+Hx3KTR2/9Rg1yeA1/0=;
-        b=cHTcw9uAuDwR+A9WZl3jSfYrphFYCmWIbrCbMOuGqbfTbeGZtuflOUHBCaveWXpaTT
-         yjMaqP6Gsm7HzcbLxskfqU4yCAR71z8flHhiBCU7rjdsbZAUTZQj1lpR5grHuIksVYh6
-         4mTxDnlio4timmgr2nFfP6OXzOjlRJVolp9yGrkv57+0vLFPyB3XzrJbzcTs6KGus+cM
-         waft3d1ZnQQ0cNDEsussSD1qQWpLCfr3v+jfS8o3Lpt23RTHH2wjXKMRwdIhNWkVH8mC
-         OxcjxRu6PIgwHeWOR7cyl1F2F1jt4EqMX8govu7C6Wk9Z+YjIi1lVnPK6e19yuRnvWBC
-         0tyg==
-X-Gm-Message-State: AOAM53132VUX20jxwOs+9pDqtegH+ASJrQpqG9gffGjy+BfhCsJHC3pP
-        CUTQGL7l8CkgeE9EeDjziQecQg==
-X-Google-Smtp-Source: ABdhPJw3ZMcxnyc5Cnx5632MdTcRNssQjZ+YXRIFuTN+Zk3DUq06EZWaz1Nq8Laiz6fUfz7LyHJAjg==
-X-Received: by 2002:a17:906:7798:: with SMTP id s24mr9380830ejm.19.1611236685185;
-        Thu, 21 Jan 2021 05:44:45 -0800 (PST)
-Received: from localhost.localdomain (dh207-99-51.xnet.hr. [88.207.99.51])
-        by smtp.googlemail.com with ESMTPSA id j18sm2246376ejv.18.2021.01.21.05.44.43
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 21 Jan 2021 05:44:44 -0800 (PST)
-From:   Robert Marko <robert.marko@sartura.hr>
-To:     jdelvare@suse.com, linux@roeck-us.net, robh+dt@kernel.org,
-        linux-hwmon@vger.kernel.org, devicetree@vger.kernel.org,
-        linux-kernel@vger.kernel.org, corbet@lwn.net,
-        linux-doc@vger.kernel.org
-Cc:     Robert Marko <robert.marko@sartura.hr>,
-        Luka Perkov <luka.perkov@sartura.hr>
-Subject: [PATCH v5 3/3] MAINTAINERS: Add entry for Texas Instruments TPS23861 PoE PSE
-Date:   Thu, 21 Jan 2021 14:44:34 +0100
-Message-Id: <20210121134434.2782405-3-robert.marko@sartura.hr>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210121134434.2782405-1-robert.marko@sartura.hr>
-References: <20210121134434.2782405-1-robert.marko@sartura.hr>
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=loDog159VD/YZKvAODyHGMsyyVC+ozXQO6jj7oflSm0=;
+        b=r00dbVfvCNXJAuXLMXJ9odAoCm9hZ6JTpvpLuwJlXe7cuMSaZfbpCxHcXyEaNSJP5B
+         uZsla+Z/217Z1ajLTHc+GlKnqoZo+XkQCI9RINIzVB6lxyoh9rf+BOCQmSQEYaLDkgpw
+         1UCnnHI7g1lvRaJGMkD85mCIRhNG4v9zOyfVNl9QWcvIBS2KWNUPYGyAXAeeGnXEorTR
+         NXA6fDP3M2B5EKz/vnj/rpr4I0+6oJEDVeh4RvUtaf9vA6VvFcUuJ/meThsgta6V6eWN
+         NWm6ccyrNPGoZu79kkFFwFyk/TFF4j4XeANAy2euRFYg0BzXznWywJWRxWs+e3HOL70H
+         2RZg==
+X-Gm-Message-State: AOAM531ratQzbabTLgrHnJ6lNrGVby4munBKJJyh/jicVNbVb3OFrmwT
+        AX0O0XstscBY5KTajQyE9WtZHsLc6j0AtiaS0dXwnMRIlcWiBrkx/wESoEITy8eg3I8iA0LGTgw
+        wc6/5LWjx4WgekVIIGUsh
+X-Received: by 2002:a05:6000:90:: with SMTP id m16mr14796891wrx.165.1611240762407;
+        Thu, 21 Jan 2021 06:52:42 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJzTe5wBBwk9xIv6MUSk/XHCOU+J6DjPfd4tGzt152OLcgSMRBUxG5aHYa2I6DigvnCpGLXg/A==
+X-Received: by 2002:a05:6000:90:: with SMTP id m16mr14796880wrx.165.1611240762266;
+        Thu, 21 Jan 2021 06:52:42 -0800 (PST)
+Received: from ?IPv6:2001:b07:6468:f312:5e2c:eb9a:a8b6:fd3e? ([2001:b07:6468:f312:5e2c:eb9a:a8b6:fd3e])
+        by smtp.gmail.com with ESMTPSA id a25sm7920265wmb.25.2021.01.21.06.52.40
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 21 Jan 2021 06:52:41 -0800 (PST)
+Subject: Re: [PATCH] KVM: Documentation: Update description of
+ KVM_{GET,CLEAR}_DIRTY_LOG
+To:     Zenghui Yu <yuzenghui@huawei.com>, kvm@vger.kernel.org
+Cc:     corbet@lwn.net, wanghaibin.wang@huawei.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+References: <20201208043439.895-1-yuzenghui@huawei.com>
+From:   Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <4229828a-078f-0558-751a-3e56bec66aac@redhat.com>
+Date:   Thu, 21 Jan 2021 15:52:40 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <20201208043439.895-1-yuzenghui@huawei.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add maintainers entry for the Texas Instruments TPS23861 PoE PSE driver.
+On 08/12/20 05:34, Zenghui Yu wrote:
+> Update various words, including the wrong parameter name and the vague
+> description of the usage of "slot" field.
+> 
+> Signed-off-by: Zenghui Yu <yuzenghui@huawei.com>
+> ---
+>   Documentation/virt/kvm/api.rst | 16 +++++++---------
+>   1 file changed, 7 insertions(+), 9 deletions(-)
+> 
+> diff --git a/Documentation/virt/kvm/api.rst b/Documentation/virt/kvm/api.rst
+> index 70254eaa5229..0eb236737f80 100644
+> --- a/Documentation/virt/kvm/api.rst
+> +++ b/Documentation/virt/kvm/api.rst
+> @@ -360,10 +360,9 @@ since the last call to this ioctl.  Bit 0 is the first page in the
+>   memory slot.  Ensure the entire structure is cleared to avoid padding
+>   issues.
+>   
+> -If KVM_CAP_MULTI_ADDRESS_SPACE is available, bits 16-31 specifies
+> -the address space for which you want to return the dirty bitmap.
+> -They must be less than the value that KVM_CHECK_EXTENSION returns for
+> -the KVM_CAP_MULTI_ADDRESS_SPACE capability.
+> +If KVM_CAP_MULTI_ADDRESS_SPACE is available, bits 16-31 of slot field specifies
+> +the address space for which you want to return the dirty bitmap.  See
+> +KVM_SET_USER_MEMORY_REGION for details on the usage of slot field.
+>   
+>   The bits in the dirty bitmap are cleared before the ioctl returns, unless
+>   KVM_CAP_MANUAL_DIRTY_LOG_PROTECT2 is enabled.  For more information,
+> @@ -4427,7 +4426,7 @@ to I/O ports.
+>   :Capability: KVM_CAP_MANUAL_DIRTY_LOG_PROTECT2
+>   :Architectures: x86, arm, arm64, mips
+>   :Type: vm ioctl
+> -:Parameters: struct kvm_dirty_log (in)
+> +:Parameters: struct kvm_clear_dirty_log (in)
+>   :Returns: 0 on success, -1 on error
+>   
+>   ::
+> @@ -4454,10 +4453,9 @@ in KVM's dirty bitmap, and dirty tracking is re-enabled for that page
+>   (for example via write-protection, or by clearing the dirty bit in
+>   a page table entry).
+>   
+> -If KVM_CAP_MULTI_ADDRESS_SPACE is available, bits 16-31 specifies
+> -the address space for which you want to return the dirty bitmap.
+> -They must be less than the value that KVM_CHECK_EXTENSION returns for
+> -the KVM_CAP_MULTI_ADDRESS_SPACE capability.
+> +If KVM_CAP_MULTI_ADDRESS_SPACE is available, bits 16-31 of slot field specifies
+> +the address space for which you want to clear the dirty status.  See
+> +KVM_SET_USER_MEMORY_REGION for details on the usage of slot field.
+>   
+>   This ioctl is mostly useful when KVM_CAP_MANUAL_DIRTY_LOG_PROTECT2
+>   is enabled; for more information, see the description of the capability.
+> 
 
-Signed-off-by: Robert Marko <robert.marko@sartura.hr>
-Cc: Luka Perkov <luka.perkov@sartura.hr>
----
-Changes in v4:
-* Add documentation file
+Queued, thanks.
 
- MAINTAINERS | 9 +++++++++
- 1 file changed, 9 insertions(+)
-
-diff --git a/MAINTAINERS b/MAINTAINERS
-index f95e887e5d76..2a7f22587774 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -17602,6 +17602,15 @@ F:	include/dt-bindings/soc/ti,sci_pm_domain.h
- F:	include/linux/soc/ti/ti_sci_inta_msi.h
- F:	include/linux/soc/ti/ti_sci_protocol.h
- 
-+TEXAS INSTRUMENTS TPS23861 PoE PSE DRIVER
-+M:	Robert Marko <robert.marko@sartura.hr>
-+M:	Luka Perkov <luka.perkov@sartura.hr>
-+L:	linux-hwmon@vger.kernel.org
-+S:	Maintained
-+F:	Documentation/devicetree/bindings/hwmon/ti,tps23861.yaml
-+F:	Documentation/hwmon/tps23861.rst
-+F:	drivers/hwmon/tps23861.c
-+
- THANKO'S RAREMONO AM/FM/SW RADIO RECEIVER USB DRIVER
- M:	Hans Verkuil <hverkuil@xs4all.nl>
- L:	linux-media@vger.kernel.org
--- 
-2.29.2
+Paolo
 
