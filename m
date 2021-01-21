@@ -2,276 +2,104 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D56BE2FF03A
-	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 17:28:25 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B29432FF0ED
+	for <lists+linux-doc@lfdr.de>; Thu, 21 Jan 2021 17:50:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726993AbhAUQ2W (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Jan 2021 11:28:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49316 "EHLO
+        id S2388266AbhAUQtQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Jan 2021 11:49:16 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43694 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2387838AbhAUQY3 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 11:24:29 -0500
-Received: from mail-wm1-x331.google.com (mail-wm1-x331.google.com [IPv6:2a00:1450:4864:20::331])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CBC86C0613D6
-        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 08:23:48 -0800 (PST)
-Received: by mail-wm1-x331.google.com with SMTP id i63so1962718wma.4
-        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 08:23:48 -0800 (PST)
+        with ESMTP id S1732333AbhAUP6e (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 10:58:34 -0500
+Received: from mail-qt1-x829.google.com (mail-qt1-x829.google.com [IPv6:2607:f8b0:4864:20::829])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6D0B1C06121F;
+        Thu, 21 Jan 2021 07:56:02 -0800 (PST)
+Received: by mail-qt1-x829.google.com with SMTP id e17so1855233qto.3;
+        Thu, 21 Jan 2021 07:56:02 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=forissier-org.20150623.gappssmtp.com; s=20150623;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=zG4fhjKVJiNuv6SqQJL4fQU8mayLNazz740d5icTHSk=;
-        b=ACQBorxu3/kwafewpeR3kASLaNW2qE3a+LeKpdv3M3TLSCnWLdjLbiYm+U6tjQV+RE
-         ONy6LTJsNkMfU+MGdsm7xL5NqmfuKLFh3dXnZQWL0a9fSUos9Vn/jhVqCi8fwXEkaXOm
-         5r+qexj+CeJ4/QQuaWLRcx++MWLjWrFRcA0Hehd6iwC0yUiCQNK02Y8hmvyyuEk9Rq1v
-         r4BY60ZDPS+O6KufQY1Mm1oLPkkbwJCAs+zhkqu28cyPxoux8LhD31uZFLpShOmd/5N4
-         UL7P/WTIhQcMzzt/lHKN+qZneImjTFe6iL/lNR9+SiBQseOY7Gc21I8BWl+cMlEz2R3y
-         o7hg==
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=RgFdesqiZMPXxw2+lHkC+nOIxN2Hdy7A8pPSFD9aimI=;
+        b=vNyp82p47jqoLdij4TrB0pGsaHQMJ9ZtfFxJ3k/gjlPax2v0NfLp+MONyCPUjLEDR/
+         o8W7yrQU1d2o+rmTbByYaJrI/Gy8Et+KryvlEKvcjQIXeyZkBaufFhQW5LmnQhssI7aJ
+         /17MlJnHVYhq9JZUG8p83rGj4gC0Lx3T9zF0l7vm73Az1z8Rw9kbsB7O5nehtIZ8ywCr
+         l1EDbfGpQMaVGAlbZb39lFnaj3JKXxQf8zvITV7EFxPFOo1D0gbTbF1EER+qpHjLGh1n
+         5knJr4nJ6JQA1pDUbogmPleaktdT4HIREjqfogvE5YqYMUwLyxi0MO8ffxMxzJt92OG7
+         p0FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=zG4fhjKVJiNuv6SqQJL4fQU8mayLNazz740d5icTHSk=;
-        b=R+qe/sSXQcx/kXf8wPVb9K7/S9jeRw+HmrIiP94M8NgDIHd5rUeJQg6XhSbbiCUlId
-         DOlrwKccIFl2zcwRK/GEVYZXiyQq7065lSBger9Qn2P1IBHNsl9j99OVp6ycf7ohQPFr
-         U6BUzUqCsDjSbjzpVvY4pG8OdRVpZ7dW76ZtiJBju6FglEo4rj+dvPUWKyF+KVyvDzrH
-         boeDgIGJ5LsnXn+OXAdXT+9h3w62F8/peIEpIuUIB/f4a75ytf4iYhxMoZ+2oykWnlrG
-         GuFs+Cpwf3DyQD1CYfjPOSuNGPZVzk0rxhwUEa3BQdQYEYdxamV6ROQbD9XosgBMStc4
-         kEaA==
-X-Gm-Message-State: AOAM531pSwDXBfrxmBzp5tWsX3mQGsPE3YYLTVAELXAQbBcVPJHmk9wv
-        6ekHcdoYgFOABJP2kE4i8IivTg==
-X-Google-Smtp-Source: ABdhPJy7Jlp7SoWm7votj5JQCx3T1dGKSThe0DyKuoodKhe3dXjGdBt2Qq4v/5CcRHsGUxbv38P4cw==
-X-Received: by 2002:a1c:2501:: with SMTP id l1mr129269wml.41.1611246227264;
-        Thu, 21 Jan 2021 08:23:47 -0800 (PST)
-Received: from ?IPv6:2a01:e0a:3cb:7bb0:7932:cf59:b36c:1f60? ([2a01:e0a:3cb:7bb0:7932:cf59:b36c:1f60])
-        by smtp.gmail.com with ESMTPSA id w13sm9082040wrt.52.2021.01.21.08.23.45
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 21 Jan 2021 08:23:46 -0800 (PST)
-Subject: Re: [PATCH v8 2/4] KEYS: trusted: Introduce TEE based Trusted Keys
-To:     Jarkko Sakkinen <jarkko@kernel.org>
-Cc:     Sumit Garg <sumit.garg@linaro.org>,
-        "open list:SECURITY SUBSYSTEM" 
-        <linux-security-module@vger.kernel.org>,
-        Daniel Thompson <daniel.thompson@linaro.org>,
-        op-tee@lists.trustedfirmware.org, Jonathan Corbet <corbet@lwn.net>,
-        James Bottomley <jejb@linux.ibm.com>,
-        Janne Karhunen <janne.karhunen@gmail.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        James Morris <jmorris@namei.org>,
-        Mimi Zohar <zohar@linux.ibm.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        David Howells <dhowells@redhat.com>,
-        Luke Hinds <lhinds@redhat.com>,
-        "open list:ASYMMETRIC KEYS" <keyrings@vger.kernel.org>,
-        Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        linux-integrity@vger.kernel.org,
-        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>
-References: <X/x+N0fgrzIZTeNi@kernel.org>
- <CAFA6WYOUvWAZtYfR4q8beZFkX-CtdxqwJaRQM+GHNMDfQiEWOA@mail.gmail.com>
- <X/+m6+m2/snYj9Vc@kernel.org>
- <CAFA6WYNyirit_AFhoE+XR9PHw=OjRgEdXDqz1uanj_SN2NXeMw@mail.gmail.com>
- <YAa0ys4YJcZtKdfF@kernel.org> <YAeH2pb8szQyjusL@kernel.org>
- <CAFA6WYP5G6NfGk96ePOC+2kpD6B+4hz9nywyUM9Nh=dJDYMiuA@mail.gmail.com>
- <01000177223f74d3-1eef7685-4a19-40d2-ace6-d4cd7f35579d-000000@email.amazonses.com>
- <dc3979e8-6bf0-adb7-164d-d50e805a048f@forissier.org>
- <YAmYu9FxWcLPhBhs@kernel.org> <YAmcyKnYCK+Y4IGW@kernel.org>
-From:   Jerome Forissier <jerome@forissier.org>
-Message-ID: <1486cfe8-bc30-1266-12bd-0049f2b64820@forissier.org>
-Date:   Thu, 21 Jan 2021 17:23:45 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to;
+        bh=RgFdesqiZMPXxw2+lHkC+nOIxN2Hdy7A8pPSFD9aimI=;
+        b=V6pLCoAQGJOf4thevys7gebQZS0XogtpTGZBerdzTLo4Mq5ZuncvgY4gJCT9EAI1CS
+         edmxSEgAdqnlHz1Jr2VKE/D4N1/tCKnVKRs277EYnSHOQHnL+UjMV/ip7yQbhYFGA1BE
+         zgm9pIJgpq1a3e1vuy6FoPq/XN8YwQ3xMQ3Zvt3D1vnRAJf7ogo3hRsTxV8uCQl0KJIw
+         C2vR666oq7W+GMF2lebcLd8dd/4YspVpOR2hEPUXeZlQu6t4w39tmRFdVr7NV7Py1NTC
+         mkgQCbVw2HdXzLQopmXlrON3h5yYWTb7TtbvaTZzGljPyqAyeRqgeiCNcTNQVI8KSEr/
+         LI4Q==
+X-Gm-Message-State: AOAM532j6B6wI8+wUx70AlkhqzLXnsYa42EugJqzJaXh1uRR3rL163vD
+        Soax7x9fa6QUVgeToGmygMY=
+X-Google-Smtp-Source: ABdhPJz3bv4Sx6a3QAdc23npXr+czyCvAz3QTroWX0XotZEPOoMQoRfUqriMdvA8T2IxXy/3vTvn5A==
+X-Received: by 2002:aed:3306:: with SMTP id u6mr234827qtd.386.1611244561576;
+        Thu, 21 Jan 2021 07:56:01 -0800 (PST)
+Received: from localhost ([2620:10d:c091:480::1:1f82])
+        by smtp.gmail.com with ESMTPSA id o56sm3856440qtb.0.2021.01.21.07.56.00
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 Jan 2021 07:56:00 -0800 (PST)
+Sender: Tejun Heo <htejun@gmail.com>
+Date:   Thu, 21 Jan 2021 10:55:13 -0500
+From:   Tejun Heo <tj@kernel.org>
+To:     Tom Lendacky <thomas.lendacky@amd.com>
+Cc:     Vipin Sharma <vipinsh@google.com>, brijesh.singh@amd.com,
+        jon.grimm@amd.com, eric.vantassell@amd.com, pbonzini@redhat.com,
+        seanjc@google.com, lizefan@huawei.com, hannes@cmpxchg.org,
+        frankja@linux.ibm.com, borntraeger@de.ibm.com, corbet@lwn.net,
+        joro@8bytes.org, vkuznets@redhat.com, wanpengli@tencent.com,
+        jmattson@google.com, tglx@linutronix.de, mingo@redhat.com,
+        bp@alien8.de, hpa@zytor.com, gingell@google.com,
+        rientjes@google.com, dionnaglaze@google.com, kvm@vger.kernel.org,
+        x86@kernel.org, cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [Patch v4 1/2] cgroup: svm: Add Encryption ID controller
+Message-ID: <YAmj4Q2J9htW2Fe8@mtj.duckdns.org>
+References: <20210108012846.4134815-1-vipinsh@google.com>
+ <20210108012846.4134815-2-vipinsh@google.com>
+ <YAICLR8PBXxAcOMz@mtj.duckdns.org>
+ <YAIUwGUPDmYfUm/a@google.com>
+ <YAJg5MB/Qn5dRqmu@mtj.duckdns.org>
+ <YAJsUyH2zspZxF2S@google.com>
+ <YAb//EYCkZ7wnl6D@mtj.duckdns.org>
+ <YAfYL7V6E4/P83Mg@google.com>
+ <YAhc8khTUc2AFDcd@mtj.duckdns.org>
+ <be699d89-1bd8-25ae-fc6f-1e356b768c75@amd.com>
 MIME-Version: 1.0
-In-Reply-To: <YAmcyKnYCK+Y4IGW@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <be699d89-1bd8-25ae-fc6f-1e356b768c75@amd.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+Hello,
 
-
-On 1/21/21 4:24 PM, Jarkko Sakkinen wrote:
-> On Thu, Jan 21, 2021 at 05:07:42PM +0200, Jarkko Sakkinen wrote:
->> On Thu, Jan 21, 2021 at 09:44:07AM +0100, Jerome Forissier wrote:
->>>
->>>
->>> On 1/21/21 1:02 AM, Jarkko Sakkinen via OP-TEE wrote:
->>>> On Wed, Jan 20, 2021 at 12:53:28PM +0530, Sumit Garg wrote:
->>>>> On Wed, 20 Jan 2021 at 07:01, Jarkko Sakkinen <jarkko@kernel.org> wrote:
->>>>>>
->>>>>> On Tue, Jan 19, 2021 at 12:30:42PM +0200, Jarkko Sakkinen wrote:
->>>>>>> On Fri, Jan 15, 2021 at 11:32:31AM +0530, Sumit Garg wrote:
->>>>>>>> On Thu, 14 Jan 2021 at 07:35, Jarkko Sakkinen <jarkko@kernel.org> wrote:
->>>>>>>>>
->>>>>>>>> On Wed, Jan 13, 2021 at 04:47:00PM +0530, Sumit Garg wrote:
->>>>>>>>>> Hi Jarkko,
->>>>>>>>>>
->>>>>>>>>> On Mon, 11 Jan 2021 at 22:05, Jarkko Sakkinen <jarkko@kernel.org> wrote:
->>>>>>>>>>>
->>>>>>>>>>> On Tue, Nov 03, 2020 at 09:31:44PM +0530, Sumit Garg wrote:
->>>>>>>>>>>> Add support for TEE based trusted keys where TEE provides the functionality
->>>>>>>>>>>> to seal and unseal trusted keys using hardware unique key.
->>>>>>>>>>>>
->>>>>>>>>>>> Refer to Documentation/tee.txt for detailed information about TEE.
->>>>>>>>>>>>
->>>>>>>>>>>> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
->>>>>>>>>>>
->>>>>>>>>>> I haven't yet got QEMU environment working with aarch64, this produces
->>>>>>>>>>> just a blank screen:
->>>>>>>>>>>
->>>>>>>>>>> ./output/host/usr/bin/qemu-system-aarch64 -M virt -cpu cortex-a53 -smp 1 -kernel output/images/Image -initrd output/images/rootfs.cpio -serial stdio
->>>>>>>>>>>
->>>>>>>>>>> My BuildRoot fork for TPM and keyring testing is located over here:
->>>>>>>>>>>
->>>>>>>>>>> https://git.kernel.org/pub/scm/linux/kernel/git/jarkko/buildroot-tpmdd.git/
->>>>>>>>>>>
->>>>>>>>>>> The "ARM version" is at this point in aarch64 branch. Over time I will
->>>>>>>>>>> define tpmdd-x86_64 and tpmdd-aarch64 boards and everything will be then
->>>>>>>>>>> in the master branch.
->>>>>>>>>>>
->>>>>>>>>>> To create identical images you just need to
->>>>>>>>>>>
->>>>>>>>>>> $ make tpmdd_defconfig && make
->>>>>>>>>>>
->>>>>>>>>>> Can you check if you see anything obviously wrong? I'm eager to test this
->>>>>>>>>>> patch set, and in bigger picture I really need to have ready to run
->>>>>>>>>>> aarch64 environment available.
->>>>>>>>>>
->>>>>>>>>> I would rather suggest you to follow steps listed here [1] as to test
->>>>>>>>>> this feature on Qemu aarch64 we need to build firmwares such as TF-A,
->>>>>>>>>> OP-TEE, UEFI etc. which are all integrated into OP-TEE Qemu build
->>>>>>>>>> system [2]. And then it would be easier to migrate them to your
->>>>>>>>>> buildroot environment as well.
->>>>>>>>>>
->>>>>>>>>> [1] https://lists.trustedfirmware.org/pipermail/op-tee/2020-May/000027.html
->>>>>>>>>> [2] https://optee.readthedocs.io/en/latest/building/devices/qemu.html#qemu-v8
->>>>>>>>>>
->>>>>>>>>> -Sumit
->>>>>>>>>
->>>>>>>>> Can you provide 'keyctl_change'? Otherwise, the steps are easy to follow.
->>>>>>>>>
->>>>>>>>
->>>>>>>> $ cat keyctl_change
->>>>>>>> diff --git a/common.mk b/common.mk
->>>>>>>> index aeb7b41..663e528 100644
->>>>>>>> --- a/common.mk
->>>>>>>> +++ b/common.mk
->>>>>>>> @@ -229,6 +229,7 @@ BR2_PACKAGE_OPTEE_TEST_SDK ?= $(OPTEE_OS_TA_DEV_KIT_DIR)
->>>>>>>>  BR2_PACKAGE_OPTEE_TEST_SITE ?= $(OPTEE_TEST_PATH)
->>>>>>>>  BR2_PACKAGE_STRACE ?= y
->>>>>>>>  BR2_TARGET_GENERIC_GETTY_PORT ?= $(if
->>>>>>>> $(CFG_NW_CONSOLE_UART),ttyAMA$(CFG_NW_CONSOLE_UART),ttyAMA0)
->>>>>>>> +BR2_PACKAGE_KEYUTILS := y
->>>>>>>>
->>>>>>>>  # All BR2_* variables from the makefile or the environment are appended to
->>>>>>>>  # ../out-br/extra.conf. All values are quoted "..." except y and n.
->>>>>>>> diff --git a/kconfigs/qemu.conf b/kconfigs/qemu.conf
->>>>>>>> index 368c18a..832ab74 100644
->>>>>>>> --- a/kconfigs/qemu.conf
->>>>>>>> +++ b/kconfigs/qemu.conf
->>>>>>>> @@ -20,3 +20,5 @@ CONFIG_9P_FS=y
->>>>>>>>  CONFIG_9P_FS_POSIX_ACL=y
->>>>>>>>  CONFIG_HW_RANDOM=y
->>>>>>>>  CONFIG_HW_RANDOM_VIRTIO=y
->>>>>>>> +CONFIG_TRUSTED_KEYS=y
->>>>>>>> +CONFIG_ENCRYPTED_KEYS=y
->>>>>>>>
->>>>>>>>> After I've successfully tested 2/4, I'd suggest that you roll out one more
->>>>>>>>> version and CC the documentation patch to Elaine and Mini, and clearly
->>>>>>>>> remark in the commit message that TEE is a standard, with a link to the
->>>>>>>>> specification.
->>>>>>>>>
->>>>>>>>
->>>>>>>> Sure, I will roll out the next version after your testing.
->>>>>>>
->>>>>>> Thanks, I'll try this at instant, and give my feedback.
->>>>>>
->>>>>> I bump into this:
->>>>>>
->>>>>> $ make run-only
->>>>>> ln -sf /home/jarkko/devel/tpm/optee/build/../out-br/images/rootfs.cpio.gz /home/jarkko/devel/tpm/optee/build/../out/bin/
->>>>>> ln: failed to create symbolic link '/home/jarkko/devel/tpm/optee/build/../out/bin/': No such file or directory
->>>>>> make: *** [Makefile:194: run-only] Error 1
->>>>>>
->>>>>
->>>>> Could you check if the following directory tree is built after
->>>>> executing the below command?
->>>>>
->>>>> $ make -j`nproc`
->>>>> CFG_IN_TREE_EARLY_TAS=trusted_keys/f04a0fe7-1f5d-4b9b-abf7-619b85b4ce8c
->>>>>
->>>>> $ tree out/bin/
->>>>> out/bin/
->>>>> ├── bl1.bin -> /home/sumit/build/optee/build/../trusted-firmware-a/build/qemu/release/bl1.bin
->>>>> ├── bl2.bin -> /home/sumit/build/optee/build/../trusted-firmware-a/build/qemu/release/bl2.bin
->>>>> ├── bl31.bin ->
->>>>> /home/sumit/build/optee/build/../trusted-firmware-a/build/qemu/release/bl31.bin
->>>>> ├── bl32.bin ->
->>>>> /home/sumit/build/optee/build/../optee_os/out/arm/core/tee-header_v2.bin
->>>>> ├── bl32_extra1.bin ->
->>>>> /home/sumit/build/optee/build/../optee_os/out/arm/core/tee-pager_v2.bin
->>>>> ├── bl32_extra2.bin ->
->>>>> /home/sumit/build/optee/build/../optee_os/out/arm/core/tee-pageable_v2.bin
->>>>> ├── bl33.bin ->
->>>>> /home/sumit/build/optee/build/../edk2/Build/ArmVirtQemuKernel-AARCH64/RELEASE_GCC49/FV/QEMU_EFI.fd
->>>>> ├── Image -> /home/sumit/build/optee/build/../linux/arch/arm64/boot/Image
->>>>> └── rootfs.cpio.gz ->
->>>>> /home/sumit/build/optee/build/../out-br/images/rootfs.cpio.gz
->>>>>
->>>>> 0 directories, 9 files
->>>>>
->>>>> -Sumit
->>>>
->>>> I actually spotted a build error that was unnoticed last time:
->>>>
->>>> make[2]: Entering directory '/home/jarkko/devel/tpm/optee/edk2/BaseTools/Tests'
->>>> /bin/sh: 1: python: not found
->>>>
->>>> I'd prefer not to install Python2. It has been EOL over a year.
->>>
->>> AFAIK, everything should build fine with Python3. On my Ubuntu 20.04
->>> machine, this is accomplished by installing package "python-is-python3"
->>> (after uninstalling "python-is-python2" if need be).
->>>
->>> $ ls -l /usr/bin/python
->>> lrwxrwxrwx 1 root root 7 Apr 15  2020 /usr/bin/python -> python3
->>
->> Right, just found about this in unrelated context :-) [*]
->>
->> Hope this will work out...
->>
->> [*] https://github.com/surge-synthesizer/surge/pull/3655
+On Thu, Jan 21, 2021 at 08:55:07AM -0600, Tom Lendacky wrote:
+> The hardware will allow any SEV capable ASID to be run as SEV-ES, however,
+> the SEV firmware will not allow the activation of an SEV-ES VM to be
+> assigned to an ASID greater than or equal to the SEV minimum ASID value. The
+> reason for the latter is to prevent an !SEV-ES ASID starting out as an
+> SEV-ES guest and then disabling the SEV-ES VMCB bit that is used by VMRUN.
+> This would result in the downgrading of the security of the VM without the
+> VM realizing it.
 > 
-> Now I get
-> 
-> Traceback (most recent call last):
->   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/RunTests.py", line 36, in <module>
->     allTests = GetAllTestsSuite()
->   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/RunTests.py", line 33, in GetAllTestsSuite
->     return unittest.TestSuite([GetCTestSuite(), GetPythonTestSuite()])
->   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/RunTests.py", line 25, in GetCTestSuite
->     import CToolsTests
->   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/CToolsTests.py", line 22, in <module>
->     import TianoCompress
->   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/TianoCompress.py", line 69, in <module>
->     TheTestSuite = TestTools.MakeTheTestSuite(locals())
->   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/TestTools.py", line 43, in MakeTheTestSuite
->     for name, item in localItems.iteritems():
-> AttributeError: 'dict' object has no attribute 'iteritems'
+> As a result, you have a range of ASIDs that can only run SEV-ES VMs and a
+> range of ASIDs that can only run SEV VMs.
 
-Right. Same here after removing all traces of Python2 from my system :-/
+I see. That makes sense. What's the downside of SEV-ES compared to SEV w/o
+ES? Are there noticeable performance / feature penalties or is the split
+mostly for backward compatibility?
 
-A couple of fixes are needed:
-1. EDK2 needs to be upgraded to tag or later [1]
-2. The PYTHON3_ENABLE environment variable needs to be set to TRUE [2]
+Thanks.
 
-[1] https://github.com/OP-TEE/manifest/pull/177
-[2] https://github.com/OP-TEE/build/pull/450
-
-HTH,
 -- 
-Jerome
+tejun
