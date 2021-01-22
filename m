@@ -2,135 +2,197 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 060D52FFAE9
-	for <lists+linux-doc@lfdr.de>; Fri, 22 Jan 2021 04:14:56 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 643182FFB30
+	for <lists+linux-doc@lfdr.de>; Fri, 22 Jan 2021 04:40:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726644AbhAVDOf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 21 Jan 2021 22:14:35 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:27236 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1726149AbhAVDOd (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 22:14:33 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1611285187;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=/QaNoqoevPF7/8oe2sGB4sw16sOzsJuLdFQitZNlslw=;
-        b=E4MqgQxNgUQVGeuZ1LkPGxD7OKYiON8wosNIBXudEcvg3dVGW3iqQFLj145Tm5PhZgs9RK
-        XwloKAiDPiM/VPwtRqrQ1lYJyYlT88su6cwBr45Jf+Xb8V1XCJHRFBvfB/WameDxc3nhgA
-        kYvpkXlDAzQ1KlFY/oowWbk503DjIOU=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-324--DA1YC-sOGSQs-sLfxKiIw-1; Thu, 21 Jan 2021 22:13:03 -0500
-X-MC-Unique: -DA1YC-sOGSQs-sLfxKiIw-1
-Received: from smtp.corp.redhat.com (int-mx05.intmail.prod.int.phx2.redhat.com [10.5.11.15])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id C6BE5806664;
-        Fri, 22 Jan 2021 03:12:59 +0000 (UTC)
-Received: from dhcp-128-65.nay.redhat.com (ovpn-12-255.pek2.redhat.com [10.72.12.255])
-        by smtp.corp.redhat.com (Postfix) with ESMTPS id 5F890627DD;
-        Fri, 22 Jan 2021 03:12:48 +0000 (UTC)
-Date:   Fri, 22 Jan 2021 11:12:44 +0800
-From:   Dave Young <dyoung@redhat.com>
-To:     john.p.donnelly@oracle.com
-Cc:     Guilherme Piccoli <gpiccoli@canonical.com>,
-        Kairui Song <kasong@redhat.com>,
-        Saeed Mirzamohammadi <saeed.mirzamohammadi@oracle.com>,
-        Geert Uytterhoeven <geert+renesas@glider.be>,
-        linux-doc@vger.kernel.org,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Bjorn Andersson <bjorn.andersson@linaro.org>,
-        "H. Peter Anvin" <hpa@zytor.com>, Will Deacon <will@kernel.org>,
-        Anson Huang <Anson.Huang@nxp.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        the arch/x86 maintainers <x86@kernel.org>,
-        Michael Walle <michael@walle.cc>,
-        Krzysztof Kozlowski <krzk@kernel.org>,
-        Ingo Molnar <mingo@redhat.com>,
-        Vivek Goyal <vgoyal@redhat.com>, Arnd Bergmann <arnd@arndb.de>,
-        Borislav Petkov <bp@alien8.de>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        linux-arm-kernel@lists.infradead.org, Baoquan He <bhe@redhat.com>,
-        "Martin K. Petersen" <martin.petersen@oracle.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        kexec mailing list <kexec@lists.infradead.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "# v4 . 16+" <stable@vger.kernel.org>,
-        Li Yang <leoyang.li@nxp.com>,
-        Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
-        Vinod Koul <vkoul@kernel.org>,
-        Diego Elio =?iso-8859-1?Q?Petten=F2?= <flameeyes@flameeyes.com>,
-        Olof Johansson <olof@lixom.net>,
-        Shawn Guo <shawnguo@kernel.org>
-Subject: Re: [PATCH 1/1] kernel/crash_core.c - Add crashkernel=auto for x86
- and ARM
-Message-ID: <20210122031244.GA4717@dhcp-128-65.nay.redhat.com>
-References: <20201118232431.21832-1-saeed.mirzamohammadi@oracle.com>
- <CACPcB9e8p5Ayw15aOe5ZNPOa7MF3+pzPdcaZgTc_E_TZYkgD6Q@mail.gmail.com>
- <AC36B9BC-654C-4FC1-8EA3-94B986639F1E@oracle.com>
- <CACPcB9d7kU1TYaF-g2GH16Wg=hrQu71sGDoC8uMFFMc6oW_duQ@mail.gmail.com>
- <CAHD1Q_yB1B4gu7EDqbZJ5dxAAkr-dVKa9yRDK-tE3oLeTTmLJQ@mail.gmail.com>
- <20201123034705.GA5908@dhcp-128-65.nay.redhat.com>
- <d6b5b7f3-ba38-be61-d3fe-975c3343a79d@oracle.com>
- <20210122012254.GA3174@dhcp-128-65.nay.redhat.com>
+        id S1726743AbhAVDjE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 21 Jan 2021 22:39:04 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53300 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726558AbhAVDic (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 21 Jan 2021 22:38:32 -0500
+Received: from mail-qv1-xf2f.google.com (mail-qv1-xf2f.google.com [IPv6:2607:f8b0:4864:20::f2f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0AD1DC0613D6
+        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 19:37:52 -0800 (PST)
+Received: by mail-qv1-xf2f.google.com with SMTP id p5so2064083qvs.7
+        for <linux-doc@vger.kernel.org>; Thu, 21 Jan 2021 19:37:51 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=soleen.com; s=google;
+        h=from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=s59E/cH9Xmao+Y2rx3RINlo8VopyJ3wMUgW5EvdtGvw=;
+        b=mNjhvDvjEkATdmskggRHup5d3H9JzG+r0qK364cL39sHDm2qaVZAcThgxKFCK82fPK
+         HQHdB9Z+5xCT2S5q1h1fgHMC+U0wsezhUCY0yOcCUv6rgUsef2J3v/XLlciexWYep5Uy
+         wzQrqX2llQB9pC/zjmlqxUhy12YJUy081cZTE4uRp3ruyIvP/sO0X6QoXY3mLIfOywtS
+         FF8uwZ5F9Jl0wEuRabr+MShRRJFVY447nySO64CfCmdJQLx2UpsM2AL2Ps4WP0avu49h
+         iuzv1hYnmazOFEEuvbvC1bLgf+WmHXEbrKm8OcF0Iy5QrdFfE7quvkVsB8v8pHAgLImk
+         Y0fA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=s59E/cH9Xmao+Y2rx3RINlo8VopyJ3wMUgW5EvdtGvw=;
+        b=WsM0XiRHzVRUc9ivcGY9pfPHnHhulsbJiIbCkyO52Pya1eMMxUNQwDBmXz4i91i2oR
+         m37ikIc9s0CIS6Qf3CLDTZ+4x6fZ8+tji8Xnb24GUFu2bnFx+8TOPNUTB2bCmCxWCWWc
+         s6U62mNjViPRNn5Oml7sBQ3O8t8O3AD6tGSrsbbBEv4RV6AdFbUwZ2bsDSYFn9cPF/xi
+         E/cMMnbgQZTpqH7/vyfZCZkDHoTT7ptq0IHL9Nrx5/TN5X5xSGsbXcuKRRLoo4Hm/F0I
+         iRvxvbNhQgg6V7RD4bwv7IXzZrXOayQwlv3dweb2m0lUsVRd5KRjUo9cCuU/PEBhP+/Q
+         eHJA==
+X-Gm-Message-State: AOAM531qRCoDk8/sJzVq2lW85cjAH5ym/sQo6qZr60g6AFmULZbj667A
+        v6YmjLyuHif84v2Rjsi6SypHIw==
+X-Google-Smtp-Source: ABdhPJyL8MCvrzf3tavJE/2tM5z/Rcf6OM6sGOFEL2JaxzeltSw5Sv7EKR4Axm12m2FhAxcq5h/xUQ==
+X-Received: by 2002:a0c:eed3:: with SMTP id h19mr2816820qvs.18.1611286670609;
+        Thu, 21 Jan 2021 19:37:50 -0800 (PST)
+Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
+        by smtp.gmail.com with ESMTPSA id m85sm5426529qke.33.2021.01.21.19.37.48
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 21 Jan 2021 19:37:49 -0800 (PST)
+From:   Pavel Tatashin <pasha.tatashin@soleen.com>
+To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
+        linux-mm@kvack.org, akpm@linux-foundation.org, vbabka@suse.cz,
+        mhocko@suse.com, david@redhat.com, osalvador@suse.de,
+        dan.j.williams@intel.com, sashal@kernel.org,
+        tyhicks@linux.microsoft.com, iamjoonsoo.kim@lge.com,
+        mike.kravetz@oracle.com, rostedt@goodmis.org, mingo@redhat.com,
+        jgg@ziepe.ca, peterz@infradead.org, mgorman@suse.de,
+        willy@infradead.org, rientjes@google.com, jhubbard@nvidia.com,
+        linux-doc@vger.kernel.org, ira.weiny@intel.com,
+        linux-kselftest@vger.kernel.org
+Subject: [PATCH v7 00/14] prohibit pinning pages in ZONE_MOVABLE
+Date:   Thu, 21 Jan 2021 22:37:34 -0500
+Message-Id: <20210122033748.924330-1-pasha.tatashin@soleen.com>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210122012254.GA3174@dhcp-128-65.nay.redhat.com>
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.15
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 01/22/21 at 09:22am, Dave Young wrote:
-> Hi John,
-> 
-> On 01/21/21 at 09:32am, john.p.donnelly@oracle.com wrote:
-> > On 11/22/20 9:47 PM, Dave Young wrote:
-> > > Hi Guilherme,
-> > > On 11/22/20 at 12:32pm, Guilherme Piccoli wrote:
-> > > > Hi Dave and Kairui, thanks for your responses! OK, if that makes sense
-> > > > to you I'm fine with it. I'd just recommend to test recent kernels in
-> > > > multiple distros with the minimum "range" to see if 64M is enough for
-> > > > crashkernel, maybe we'd need to bump that.
-> > > 
-> > > Giving the different kernel configs and the different userspace
-> > > initramfs setup it is hard to get an uniform value for all distributions,
-> > > but we can have an interface/kconfig-option for them to provide a value like this patch
-> > > is doing. And it could be improved like Kairui said about some known
-> > > kernel added extra values later, probably some more improvements if
-> > > doable.
-> > > 
-> > > Thanks
-> > > Dave
-> > > 
-> > 
-> > Hi.
-> > 
-> > Are we going to move forward with implementing this for X86 and Arm ?
-> > 
-> > If other platform maintainers want to include this CONFIG option in their
-> > configuration settings they have a starting point.
-> 
-> I would expect this become arch independent.
+Changelog
+---------
+v7
+- Added reviewed-by's
+- Fixed a compile bug on non-mmu builds reported by robot
 
-Clarify a bit, it can be a general config option under arch/Kconfig and
-just put the code in general arch independent part.
+v6
+  Small update, but I wanted to send it out quicker, as it removes a
+  controversial patch and replaces it with something sane.
+- Removed forcing FOLL_WRITE for longterm gup, instead added a patch to
+  skip zero pages during migration.
+- Added reviewed-by's and minor log changes.
 
-> 
-> Saeed, Kairui, would any of you like to update the patch?
-> 
-> > 
-> > Thank you,
-> > 
-> > John.
-> > 
-> > ( I am not currently on many of the included dist lists  in this email, so
-> > hopefully key contributors are included in this exchange )
-> > 
-> 
-> Thanks
-> Dave
+v5
+- Added the following patches to the beginning of series, which are fixes
+   to the other existing problems with CMA migration code:
+	mm/gup: check every subpage of a compound page during isolation
+	mm/gup: return an error on migration failure
+	mm/gup: check for isolation errors also at the beginning of series
+	mm/gup: do not allow zero page for pinned pages
+- remove .gfp_mask/.reclaim_idx changes from mm/vmscan.c
+- update movable zone header comment in patch 8 instead of patch 3, fix
+  the comment
+- Added acked, sign-offs
+- Updated commit logs based on feedback
+- Addressed issues reported by Michal and Jason.
+- Remove:
+	#define PINNABLE_MIGRATE_MAX	10
+	#define PINNABLE_ISOLATE_MAX	100
+   Instead: fail on the first migration failure, and retry isolation
+   forever as their failures are transient.
+
+- In self-set addressed some of the comments from John Hubbard, updated
+  commit logs, and added comments. Renamed gup->flags with gup->test_flags.
+
+v4
+- Address page migration comments. New patch:
+  mm/gup: limit number of gup migration failures, honor failures
+  Implements the limiting number of retries for migration failures, and
+  also check for isolation failures.
+  Added a test case into gup_test to verify that pages never long-term
+  pinned in a movable zone, and also added tests to fault both in kernel
+  and in userland.
+v3
+- Merged with linux-next, which contains clean-up patch from Jason,
+  therefore this series is reduced by two patches which did the same
+  thing.
+v2
+- Addressed all review comments
+- Added Reviewed-by's.
+- Renamed PF_MEMALLOC_NOMOVABLE to PF_MEMALLOC_PIN
+- Added is_pinnable_page() to check if page can be longterm pinned
+- Fixed gup fast path by checking is_in_pinnable_zone()
+- rename cma_page_list to movable_page_list
+- add a admin-guide note about handling pinned pages in ZONE_MOVABLE,
+  updated caveat about pinned pages from linux/mmzone.h
+- Move current_gfp_context() to fast-path
+
+---------
+When page is pinned it cannot be moved and its physical address stays
+the same until pages is unpinned.
+
+This is useful functionality to allows userland to implementation DMA
+access. For example, it is used by vfio in vfio_pin_pages().
+
+However, this functionality breaks memory hotplug/hotremove assumptions
+that pages in ZONE_MOVABLE can always be migrated.
+
+This patch series fixes this issue by forcing new allocations during
+page pinning to omit ZONE_MOVABLE, and also to migrate any existing
+pages from ZONE_MOVABLE during pinning.
+
+It uses the same scheme logic that is currently used by CMA, and extends
+the functionality for all allocations.
+
+For more information read the discussion [1] about this problem.
+[1] https://lore.kernel.org/lkml/CA+CK2bBffHBxjmb9jmSKacm0fJMinyt3Nhk8Nx6iudcQSj80_w@mail.gmail.com
+
+Previous versions:
+v1
+https://lore.kernel.org/lkml/20201202052330.474592-1-pasha.tatashin@soleen.com
+v2
+https://lore.kernel.org/lkml/20201210004335.64634-1-pasha.tatashin@soleen.com
+v3
+https://lore.kernel.org/lkml/20201211202140.396852-1-pasha.tatashin@soleen.com
+v4
+https://lore.kernel.org/lkml/20201217185243.3288048-1-pasha.tatashin@soleen.com
+v5
+https://lore.kernel.org/lkml/20210119043920.155044-1-pasha.tatashin@soleen.com
+v6
+https://lore.kernel.org/lkml/20210120014333.222547-1-pasha.tatashin@soleen.com
+
+
+Pavel Tatashin (14):
+  mm/gup: don't pin migrated cma pages in movable zone
+  mm/gup: check every subpage of a compound page during isolation
+  mm/gup: return an error on migration failure
+  mm/gup: check for isolation errors
+  mm cma: rename PF_MEMALLOC_NOCMA to PF_MEMALLOC_PIN
+  mm: apply per-task gfp constraints in fast path
+  mm: honor PF_MEMALLOC_PIN for all movable pages
+  mm/gup: do not migrate zero page
+  mm/gup: migrate pinned pages out of movable zone
+  memory-hotplug.rst: add a note about ZONE_MOVABLE and page pinning
+  mm/gup: change index type to long as it counts pages
+  mm/gup: longterm pin migration cleanup
+  selftests/vm: test flag is broken
+  selftests/vm: test faulting in kernel, and verify pinnable pages
+
+ .../admin-guide/mm/memory-hotplug.rst         |   9 +
+ include/linux/migrate.h                       |   1 +
+ include/linux/mm.h                            |  11 ++
+ include/linux/mmzone.h                        |  13 +-
+ include/linux/pgtable.h                       |   3 +-
+ include/linux/sched.h                         |   2 +-
+ include/linux/sched/mm.h                      |  27 +--
+ include/trace/events/migrate.h                |   3 +-
+ mm/gup.c                                      | 176 ++++++++----------
+ mm/gup_test.c                                 |  29 +--
+ mm/gup_test.h                                 |   3 +-
+ mm/hugetlb.c                                  |   4 +-
+ mm/page_alloc.c                               |  33 ++--
+ tools/testing/selftests/vm/gup_test.c         |  36 +++-
+ 14 files changed, 191 insertions(+), 159 deletions(-)
+
+-- 
+2.25.1
 
