@@ -2,93 +2,153 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 04C683035D9
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 06:55:42 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 02FF63035E0
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 06:56:58 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2388951AbhAZFz1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 00:55:27 -0500
-Received: from mx2.suse.de ([195.135.220.15]:55492 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1727657AbhAYMKV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 25 Jan 2021 07:10:21 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id B8AA2ACF4;
-        Mon, 25 Jan 2021 12:08:36 +0000 (UTC)
-Date:   Mon, 25 Jan 2021 13:08:32 +0100
-From:   Oscar Salvador <osalvador@suse.de>
-To:     David Hildenbrand <david@redhat.com>
-Cc:     Muchun Song <songmuchun@bytedance.com>, corbet@lwn.net,
-        mike.kravetz@oracle.com, tglx@linutronix.de, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
-        viro@zeniv.linux.org.uk, akpm@linux-foundation.org,
-        paulmck@kernel.org, mchehab+huawei@kernel.org,
-        pawan.kumar.gupta@linux.intel.com, rdunlap@infradead.org,
-        oneukum@suse.com, anshuman.khandual@arm.com, jroedel@suse.de,
-        almasrymina@google.com, rientjes@google.com, willy@infradead.org,
-        mhocko@suse.com, song.bao.hua@hisilicon.com,
-        naoya.horiguchi@nec.com, duanxiongchun@bytedance.com,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org
-Subject: Re: [PATCH v13 09/12] mm: hugetlb: add a kernel parameter
- hugetlb_free_vmemmap
-Message-ID: <20210125120827.GA29289@linux>
-References: <20210117151053.24600-1-songmuchun@bytedance.com>
- <20210117151053.24600-10-songmuchun@bytedance.com>
- <7550ebba-fdb5-0dc9-a517-dda56bd105d9@redhat.com>
+        id S2388976AbhAZFzr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 00:55:47 -0500
+Received: from mail-oi1-f175.google.com ([209.85.167.175]:43333 "EHLO
+        mail-oi1-f175.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730147AbhAYPkC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jan 2021 10:40:02 -0500
+Received: by mail-oi1-f175.google.com with SMTP id i25so3757279oie.10;
+        Mon, 25 Jan 2021 07:39:46 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=xv2F8uEJDzNOELHmwTwNLPLNs8lRPkq+SnWZqNcKmSE=;
+        b=l0RiaogzJdbwI3BYj1NXzN9PA0A5mun/+03eFzsjANhlnWfE+LejPPZ85bnWGm8GEt
+         P8mwM89xcXvc3sOStSQsVTtRZ79DAVjUMUlAkEZrseS5/g6D6XBLED0tnaWoqFy8hhH6
+         kZ5wIL8bHBN7gcWHltYxXuJI8PZQwZkGUQvlRamY4clk7/9Nx2pjldLHcBoVopr3Q1lV
+         pB/dohKXuIPXa0TammoqpCckEiZuX66MChOceW0K0JJsh4qzvshOe+ASt8nKGRhHtEhx
+         WIAaG0PDEJuqD40HCs+/Q/+mZREE6GoN6+XGH1AOsnGT4DTWQvDRsnx0FfkfE0MguhkL
+         xiAg==
+X-Gm-Message-State: AOAM532xYGwCZyicwI041k9wISSwXBB4v3lc1Fad+4ndO0W3rSlPLyjb
+        rJox62RZq58+tphVi11bEtqA75vOzlRC9NnJQxQ=
+X-Google-Smtp-Source: ABdhPJwZj9WDxzrkp5B5fBpFQxEJMl3itE2IsPYlaaZPJaGCbLO05CDNwOR5DGdC23BcrNbXL/hWQx20i4ztPmfvMHc=
+X-Received: by 2002:aca:1219:: with SMTP id 25mr489984ois.54.1611589161153;
+ Mon, 25 Jan 2021 07:39:21 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <7550ebba-fdb5-0dc9-a517-dda56bd105d9@redhat.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+References: <20200916205434.GA10389@duo.ucw.cz> <87czyf5jjp.fsf@vps.thesusis.net>
+ <CAHk-=wjsjC1h7fskwYaaRLykN1ms6ZtxGvucQgmL-zZTfxPdBA@mail.gmail.com>
+ <CAKMK7uEGXOC_ci=Drm=Hz+xPGdcoxv8YZ-gcOckoPmu2XijiSA@mail.gmail.com>
+ <CAMuHMdVzCjVim4A3eAZzztqUyjb6a2bjmSkgxUnaugQFv42qag@mail.gmail.com> <87k0s4ai33.fsf@vps.thesusis.net>
+In-Reply-To: <87k0s4ai33.fsf@vps.thesusis.net>
+From:   Geert Uytterhoeven <geert@linux-m68k.org>
+Date:   Mon, 25 Jan 2021 16:39:09 +0100
+Message-ID: <CAMuHMdVe-pS4wT++RDzF+EYd-_SC9naGJj8dzWbN6mt0yAnVxg@mail.gmail.com>
+Subject: Re: fbcon: remove soft scrollback code (missing Doc. patch)
+To:     Phillip Susi <phill@thesusis.net>
+Cc:     Daniel Vetter <daniel@ffwll.ch>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Pavel Machek <pavel@ucw.cz>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        dri-devel <dri-devel@lists.freedesktop.org>,
+        Linux Fbdev development list <linux-fbdev@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jan 25, 2021 at 12:43:23PM +0100, David Hildenbrand wrote:
-> > -	if (end - start < PAGES_PER_SECTION * sizeof(struct page))
-> > +	if (is_hugetlb_free_vmemmap_enabled() ||
-> > +	    end - start < PAGES_PER_SECTION * sizeof(struct page))
-> 
-> This looks irresponsible. You ignore any altmap, even though current
-> altmap users (ZONE_DEVICE) will not actually result in applicable
-> vmemmaps that huge pages could ever use.
-> 
-> Why do you ignore the altmap completely? This has to be properly
-> documented, but IMHO it's not even the right approach to mess with
-> altmap here.
+Hi Phillip,
 
-The goal was not to ignore altmap but to disable PMD mapping sections
-when the feature was enabled.
-Shame on me I did not notice that with this, altmap will be ignored.
+On Fri, Jan 22, 2021 at 8:26 PM Phillip Susi <phill@thesusis.net> wrote:
+> Geert Uytterhoeven writes:
+> Judging from some of the comments in the code, it looks like you were
+> one of the original authors of fbcon?  I haven't been able to find any
 
-Something like below maybe:
+Indeed, a looooong time ago... Before DRM existed.
 
-int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node,
-                struct vmem_altmap *altmap)
-{
-        int err;
-        bool populate_base_pages = false;
+> of these sczbot crash reports, and am not sure how fuzzing syscalls
+> would really affect this code ( it's not really handling a buch of
+> ioctls or otherwise taking arguments from user space ) , but I am a bit
 
-        if ((end - start < PAGES_PER_SECTION * sizeof(struct page)) ||
-            (is_hugetlb_free_vmemmap_enabled() && !altmap))
-                populate_base_pages = true;
+AFAIU, most of these are triggered by VT ioctls.
+There is an intimate relation between the VT and fbev subsystems: VT
+changes impact fbdev, and vice versa.
 
-        if (populate_base_pages) {
-                err = vmemmap_populate_basepages(start, end, node, NULL);
-        } else if (boot_cpu_has(X86_FEATURE_PSE)) {
-	....
+Perhaps these should be decoupled, at the expense of worse user
+experience (i.e. the user needing to change both screen resolution and
+number of columns/rows of the text console)?
 
+> confused as to why the softback was implemented the way that it was.
+>
+> vgacon simply copies the main buffer to vram in ->set_origin() and then
+> changes the pointers to operate out of the much larger vram while that
+> virtual terminal is active.  If I understand it correctly, it looks like
+> fbcon instead opts to operate out of the main buffer but rescue lines as
+> they are scrolled off and relocate them to the softback buffer.  This
+> seems to be rather more convoluted.
+>
+> I'm thinking of re-implementing scrollback more like the way vgacon does
+> it: allocate a big "vram" buffer and operate out of that.  Obviously
+> ->scroll() and ->scrolldelta() have to actually repaint the screen rather
+> than simply change the pointer register, but that should be about the
+> only difference.
 
-> 
-> -- 
-> Thanks,
-> 
-> David / dhildenb
-> 
-> 
+I'm not that intimate familiar anymore with the current state of the
+code, but it used to be like this:
+  - vgacon used a VRAM buffer for the current VC, and multiple shadow
+    buffers to implement virtual consoles,
+  - fbcon always used the shadow buffers, with each update triggering
+    an update of the frame buffer (see below).
 
--- 
-Oscar Salvador
-SUSE L3
+As the text console buffer handling should be the same for vgacon and
+fbcon, I expect most scrollback bugs (if any) to be present in both.
+
+> I have also noticed that there was some code to use hardware panning of
+> the video buffer rather than having to do a block bitblt to scroll the
+> contents of the screen, but that it was disabled because virtually no
+> video drivers actually implemented it?  That seems like a shame, but if
+> it is so, then there's no sense carrying the dead code so I think I'll
+> clean that up now.
+>
+> Now that I look at it again, everything is simply always redrawn now
+> instead of even doing a simple bitblt.  Daniel, you mentioned that
+> almost nobody supports hardware acceleration, but even without any
+> specific hardware support, surely even if bitblt() is implemented just
+> as a memcpy(), it has to be faster than redrawing all of the characters
+> doesn't it?  Getting rid of the panning if it isn't generally supported
+> I can see, but I don't understand killing bitblt even if most devices
+> don't accelerate it.
+
+There are multiple ways to implement scrolling:
+  1. If the hardware supports a larger virtual screen and panning, and
+     the virtual screen is enabled, most scrolling can be implemented by
+     panning, with a casual copy when reaching the bottom (or top) of
+     the virtual screen.
+     This mode is (was) available on most graphics hardware with
+     dedicated graphics memory.
+  2. If a 2D acceleration engine is available, copying (and
+     clearing/filling) can be implemented by rectangle copy/fill
+     operations.
+  3. Rectangle copy/fill by the CPU is always available.
+  4. Redrawing characters by the CPU is always available.
+
+Which option was used depended on the hardware: not all options are
+available everywhere, and some perform better than others.
+E.g. on PCI graphics cards, reading graphics memory by the CPU is
+usually very slow, so option 3 is much slower than option 4 (given a
+sufficiently fast CPU).
+AFAIU, option 2 is not suitable for modern systems with 3D acceleration.
+On the older (slower) systems (lacking VGA text mode) for which fbcon
+was originally written, option 4 is usually the slowest.
+
+Support for 1-3 were removed in commit 39aead8373b3c20b ("fbcon: Disable
+accelerated scrolling"), which claimed only 3 (DRM) drivers made use of
+this, ignoring the other 32 (fbdev) drivers making use of it.
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
+--
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
+
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
