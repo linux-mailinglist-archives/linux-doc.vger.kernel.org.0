@@ -2,108 +2,95 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5D050303261
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 04:04:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CEC7D3035D5
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 06:55:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1728342AbhAYNAI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 25 Jan 2021 08:00:08 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:56567 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S1728544AbhAYM64 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jan 2021 07:58:56 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1611579421;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=DrrsduXw40spa9C0cPD/Y3KujjjqBKpfWwF9zUNXpbE=;
-        b=StpZjeMxx7xC2CGUa30pgzVOFXbICm63Z0O6HaAKdVG/JBY0+4zvljvpfFB/j/H0oSS6P2
-        qwm3HDADRjFIG6BD5xvpVB9oRS3edjexRbJcP+rd0j3ywSx4kuUpVfU5AQ0St+JB6rMkzL
-        coNFCOTjMA+N1/orBMQpae8zjQhP0LM=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-92-OndNxk3gOOqLsuKiAZjAQQ-1; Mon, 25 Jan 2021 06:43:34 -0500
-X-MC-Unique: OndNxk3gOOqLsuKiAZjAQQ-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id CFE6618C8C0E;
-        Mon, 25 Jan 2021 11:43:30 +0000 (UTC)
-Received: from [10.36.115.13] (ovpn-115-13.ams2.redhat.com [10.36.115.13])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 2BE4D19C44;
-        Mon, 25 Jan 2021 11:43:24 +0000 (UTC)
-Subject: Re: [PATCH v13 09/12] mm: hugetlb: add a kernel parameter
- hugetlb_free_vmemmap
-To:     Muchun Song <songmuchun@bytedance.com>, corbet@lwn.net,
-        mike.kravetz@oracle.com, tglx@linutronix.de, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org, peterz@infradead.org,
-        viro@zeniv.linux.org.uk, akpm@linux-foundation.org,
-        paulmck@kernel.org, mchehab+huawei@kernel.org,
-        pawan.kumar.gupta@linux.intel.com, rdunlap@infradead.org,
-        oneukum@suse.com, anshuman.khandual@arm.com, jroedel@suse.de,
-        almasrymina@google.com, rientjes@google.com, willy@infradead.org,
-        osalvador@suse.de, mhocko@suse.com, song.bao.hua@hisilicon.com,
-        naoya.horiguchi@nec.com
-Cc:     duanxiongchun@bytedance.com, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-mm@kvack.org,
-        linux-fsdevel@vger.kernel.org
-References: <20210117151053.24600-1-songmuchun@bytedance.com>
- <20210117151053.24600-10-songmuchun@bytedance.com>
-From:   David Hildenbrand <david@redhat.com>
-Organization: Red Hat GmbH
-Message-ID: <7550ebba-fdb5-0dc9-a517-dda56bd105d9@redhat.com>
-Date:   Mon, 25 Jan 2021 12:43:23 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.5.0
-MIME-Version: 1.0
-In-Reply-To: <20210117151053.24600-10-songmuchun@bytedance.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+        id S2388596AbhAZFzK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 00:55:10 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36502 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1726682AbhAYJbU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jan 2021 04:31:20 -0500
+Received: from mail-wm1-x332.google.com (mail-wm1-x332.google.com [IPv6:2a00:1450:4864:20::332])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 08194C061788;
+        Mon, 25 Jan 2021 00:18:12 -0800 (PST)
+Received: by mail-wm1-x332.google.com with SMTP id y187so9889228wmd.3;
+        Mon, 25 Jan 2021 00:18:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=L0W9wzZk2KHjHBqzXgEillis1FzBzYM0WKoWJPRNyc0=;
+        b=uT80n4EuuiPnr573jqlyrWg4gtgjyZltb26yudbKIK9JjhPrZynPr7Y6XNRcCMARTN
+         5tIOlWEXkhrgvvANF9iiUrMNtVM1kDWaSe1SBOJkjBYYJtE4CcXCQ+kzDA/SJ0uE0kIW
+         qWEUbfpW3S8gCHAlBwRakCSBzDlZZY4JrWmJpxzfwbKJHK4PRZwVgWwVwOsRXzb35049
+         iqkyJHDcKvRTf8388GCUp3Q5jP7w1peIQIyHPi5kH+LIKYbjoK75AoLj2d/exIoeVVvf
+         VmSr8uBUpSE+LUi9ejMv9mU6/A0bacI2MPYBIhyzJUAPfLmXjvhBK8xrF0OstrPf+Yk0
+         ZUuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=L0W9wzZk2KHjHBqzXgEillis1FzBzYM0WKoWJPRNyc0=;
+        b=cB1jT+mPZWHwodQ/wxx8hlnBjL0AYuiCTeA9wry5QS13goSEfWvDe9/i3ObB0cDiNX
+         9soFLGjkDNM5wtz/n1HqEpsk/JHLKgVG5Q4+czJ7TKo2Ba/bKp4uRy68dc7UJiJ4r0tE
+         JqoocQ/BK/YnnO/dTpBrj1cHgCmFsncJcNJqyOvlrYhhz/RUm6tHkdgUY0DeE7RSd1+z
+         ZcY6Gqu5e+U6ZKecjFfVMMHiFzuXNmou6Mw55TAxLI/7gn2D6TtDixKlhb8ZxLn69KKv
+         5U7fQcENBb8bM2skc8MNE/XdxlgOxZC5XgqWIUa6c3uThEj2NukFu6RFdl3gKQjfFApY
+         1czA==
+X-Gm-Message-State: AOAM5308DX31zu/8MouzmSeT/HsMU5JPISwRTF5/vU+H51lbtFigKIdL
+        CBldFXkY+09fJDElENi3RKE=
+X-Google-Smtp-Source: ABdhPJwEfP+Mgrdx9WUqHhmI4d/faaRuR7bmvVT6RogtYoEwA2G4GhvbxRdjZ7k/stx8O1SdulvCow==
+X-Received: by 2002:a7b:c1c6:: with SMTP id a6mr342079wmj.23.1611562690743;
+        Mon, 25 Jan 2021 00:18:10 -0800 (PST)
+Received: from felia.fritz.box ([2001:16b8:2d4b:4500:649e:f82b:bf2d:2571])
+        by smtp.gmail.com with ESMTPSA id b2sm5559333wmd.41.2021.01.25.00.18.09
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Jan 2021 00:18:10 -0800 (PST)
+From:   Lukas Bulwahn <lukas.bulwahn@gmail.com>
+To:     Petr Mladek <pmladek@suse.com>,
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        John Ogness <john.ogness@linutronix.de>,
+        linux-kernel@vger.kernel.org
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-doc@vger.kernel.org, kernel-janitors@vger.kernel.org,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Subject: [PATCH] printk: rectify kernel-doc for prb_rec_init_wr()
+Date:   Mon, 25 Jan 2021 09:17:48 +0100
+Message-Id: <20210125081748.19903-1-lukas.bulwahn@gmail.com>
+X-Mailer: git-send-email 2.17.1
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 17.01.21 16:10, Muchun Song wrote:
-> Add a kernel parameter hugetlb_free_vmemmap to enable the feature of
-> freeing unused vmemmap pages associated with each hugetlb page on boot.
+The command 'find ./kernel/printk/ | xargs ./scripts/kernel-doc -none'
+reported a mismatch with the kernel-doc of prb_rec_init_wr().
 
-The description completely lacks a description of the changes performed
-in arch/x86/mm/init_64.c.
+Rectify the kernel-doc, such that no issues remain for ./kernel/printk/.
 
-[...]
+Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+---
+applies cleanly on v5.11-rc5 and next-20210122
 
-> --- a/arch/x86/mm/init_64.c
-> +++ b/arch/x86/mm/init_64.c
-> @@ -34,6 +34,7 @@
->  #include <linux/gfp.h>
->  #include <linux/kcore.h>
->  #include <linux/bootmem_info.h>
-> +#include <linux/hugetlb.h>
->  
->  #include <asm/processor.h>
->  #include <asm/bios_ebda.h>
-> @@ -1557,7 +1558,8 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node,
->  {
->  	int err;
->  
-> -	if (end - start < PAGES_PER_SECTION * sizeof(struct page))
-> +	if (is_hugetlb_free_vmemmap_enabled() ||
-> +	    end - start < PAGES_PER_SECTION * sizeof(struct page))
+John, please ack.
+Petr, please pick this minor typo fixup.
 
-This looks irresponsible. You ignore any altmap, even though current
-altmap users (ZONE_DEVICE) will not actually result in applicable
-vmemmaps that huge pages could ever use.
+ kernel/printk/printk_ringbuffer.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Why do you ignore the altmap completely? This has to be properly
-documented, but IMHO it's not even the right approach to mess with
-altmap here.
-
+diff --git a/kernel/printk/printk_ringbuffer.h b/kernel/printk/printk_ringbuffer.h
+index 5dc9d022db07..73cc80e01cef 100644
+--- a/kernel/printk/printk_ringbuffer.h
++++ b/kernel/printk/printk_ringbuffer.h
+@@ -287,7 +287,7 @@ _DEFINE_PRINTKRB(name, descbits, avgtextbits, &_##name##_text[0])
+ /* Writer Interface */
+ 
+ /**
+- * prb_rec_init_wd() - Initialize a buffer for writing records.
++ * prb_rec_init_wr() - Initialize a buffer for writing records.
+  *
+  * @r:             The record to initialize.
+  * @text_buf_size: The needed text buffer size.
 -- 
-Thanks,
-
-David / dhildenb
+2.17.1
 
