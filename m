@@ -2,62 +2,58 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9160C3047DB
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 20:13:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1B0613047EB
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 20:14:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1726682AbhAZFzN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 00:55:13 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39864 "EHLO
+        id S2388969AbhAZFzj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 00:55:39 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49410 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1727062AbhAYJpv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jan 2021 04:45:51 -0500
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com [IPv6:2607:f8b0:4864:20::42c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8C832C06178B
-        for <linux-doc@vger.kernel.org>; Mon, 25 Jan 2021 01:34:46 -0800 (PST)
-Received: by mail-pf1-x42c.google.com with SMTP id m6so8061659pfm.6
-        for <linux-doc@vger.kernel.org>; Mon, 25 Jan 2021 01:34:46 -0800 (PST)
+        with ESMTP id S1727830AbhAYMkc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jan 2021 07:40:32 -0500
+Received: from mail-pl1-x629.google.com (mail-pl1-x629.google.com [IPv6:2607:f8b0:4864:20::629])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 934A9C06178B
+        for <linux-doc@vger.kernel.org>; Mon, 25 Jan 2021 04:31:09 -0800 (PST)
+Received: by mail-pl1-x629.google.com with SMTP id s15so7487491plr.9
+        for <linux-doc@vger.kernel.org>; Mon, 25 Jan 2021 04:31:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=bytedance-com.20150623.gappssmtp.com; s=20150623;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=Z8nrxtJb3XhTbQvd5j67XtkO/vay+xDoaZCK/pVC+LY=;
-        b=OffTwV4C2tkYhMHP6e+JkFb3UOud8nOV2gy5gMoKIW5bnZNdA+5n248fLiUoZ3y0N7
-         LvcraooP074rVny2vjWLcEzJUsyOgrGRAxb3225v3IAGn/yUOM08NmGUYwN3mE3kaoB0
-         u4YaR8QdfYX9ZiiNyuEUTNrdV/JhUilTlAVCMs99kfebStJUoBYBv5gqCKS8HRhVLxRx
-         2jVdPLkW8gspVaGYIaZqtha4Tvrx9gdQRI/9QIZvFxN5+R/GRrw2Jb17Qli5+89HuJaR
-         oXVh/O53vepMV9itsBDojL2HUASfwpKoMbAtL3qeww3Zfoooe4VH4a8gbNMEaAQXTK/o
-         rPxQ==
+        bh=QW8QHydhaLv2kCU+6eTvr2welYmg+FLV/r+/koJuoLk=;
+        b=xjDsgoFJfGSx+QNEJsDoPpI6efmJI7cXx1rArOBkvxtD5CI8yASxFFYDVnqLbfElBp
+         aLK4FtgR+15ZVnswDysdST3r8KI85QituFeOZJYVdcr8YztK0VXzUEZS8kWbBK1bHUoP
+         S305pTMQi8NXQ4QW/MLiaG+nkJK0HgJb0gd7hWR+K0hSfaOpDfCx4XKA/wSM6NKSJX6N
+         7BWmQaIN1x1BQ+m9UeMPWDTk+2eY7wqW6BGtJsdjC1Mpl6p4DL+hgAo3reOxHMiQK9Ij
+         Guuma2LpY+FkUSohEtdd9l3WTiP6AWVR4A2xM/CNxhjGd6u94DEW8dTpSSE4V818Ey53
+         xtiw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=Z8nrxtJb3XhTbQvd5j67XtkO/vay+xDoaZCK/pVC+LY=;
-        b=ZJkVoGts3cHyuALV5wZ3Wd+hN2MEw9JA85rI3xrtnIjJUNoxBvRSiuUsywg1I5L6a8
-         M+svVRMU/kTsyu7VNJPmRAdwLSV067XIDAgVSdgAeuu1c/rc9F+8ughrq8eZaeEmNOpR
-         qiAUuDZzesXVKD1FYSqRH0ALZejZ6oUWoExkFNvffD2vTaOv3cydyOsgIDE5d+wghA3o
-         yCX9WID/c3dMlW+/uTCOTMOm9Gd1P8hSm8XkvJ3C/YHy7Yya7xzZNr1TqYblDR2spisE
-         dLdDI6joGuelJ6CNpsMHgQ5CM1omOC6ATR8/iNylLjh2hmm5k0IQeTkfRuWowVldOqOQ
-         lyZA==
-X-Gm-Message-State: AOAM530Wzr8NYsaW7wCDPMOqiyVsofCWcsWIjhpc+Kz1AZkxD2vWv2tS
-        hpMajuQ9hWOatxWGsAJZX4m2sLgEjKMnYgUR4592UA==
-X-Google-Smtp-Source: ABdhPJxVx55V16cI4xy7oBEQg8xxEV5bUx60rUKse8vz37JdPHqIzHsWLuoVk+Wl8tff+ZV+FKqr9jBd+q5Qmp1fQDY=
-X-Received: by 2002:a62:7694:0:b029:1b9:8d43:95af with SMTP id
- r142-20020a6276940000b02901b98d4395afmr17392890pfc.2.1611567285933; Mon, 25
- Jan 2021 01:34:45 -0800 (PST)
+        bh=QW8QHydhaLv2kCU+6eTvr2welYmg+FLV/r+/koJuoLk=;
+        b=nJlYPbC5yjXA6gXiC3j0b7a9DwriYmcNxQTT0giZaknY8pfWvtg6uLWc8RGdKOptI6
+         eDuN1JzQU3uRoRYPDwS6Y0Bl4LLj4zrhyxdnrchDRtbejnyXGjXtEDKoStMYr0PGgR26
+         dxGKbYcR+FIHsmg/1A7zRWN9iUXZQzQ+HUhxnUByIV470TGgBrzQW6dYZpLT0kM9HuW8
+         ee9jB3xrCt4JC9BSaAmphHXzel/8vW6VTd3vI3cWajm+ce1kR/bMFuFpIghMMKEA0dp9
+         MVknm6B0LEb6F+7f+gs1U7ro8GUyBcMVS1MBcKW/ndSty1w3I1lTCWlUcPahYthvE5Ou
+         4uOQ==
+X-Gm-Message-State: AOAM5314ibeIJ8NQKI8j97tCU5mHwuqDhpeRfskv9/T7p06UFOt9RLWV
+        +hg0Ce0SILQFr6S26b4lDBkhhWyDKHxRm9wxEROXAw==
+X-Google-Smtp-Source: ABdhPJyY+tByzJR/2m5cQEXW38XAGhEuuitjV3/Wk3nuW0Q0nL5BLsXF/owMsdW62WXyPcjcnj/9dBD1hUwTOTMdINg=
+X-Received: by 2002:a17:90a:3e81:: with SMTP id k1mr179973pjc.13.1611577869029;
+ Mon, 25 Jan 2021 04:31:09 -0800 (PST)
 MIME-Version: 1.0
 References: <20210117151053.24600-1-songmuchun@bytedance.com>
- <20210117151053.24600-6-songmuchun@bytedance.com> <6a68fde-583d-b8bb-a2c8-fbe32e03b@google.com>
- <CAMZfGtXpg30RhrPm836S6Tr09ynKRPG=_DXtXt9sVTTponnC-g@mail.gmail.com>
- <CAMZfGtX19x8m+Bkvj+8Ue31m5L_4DmgtZevp2fd++JL7nuSzWw@mail.gmail.com> <552e8214-bc6f-8d90-0ed8-b3aff75d0e47@redhat.com>
-In-Reply-To: <552e8214-bc6f-8d90-0ed8-b3aff75d0e47@redhat.com>
+ <20210117151053.24600-10-songmuchun@bytedance.com> <7550ebba-fdb5-0dc9-a517-dda56bd105d9@redhat.com>
+In-Reply-To: <7550ebba-fdb5-0dc9-a517-dda56bd105d9@redhat.com>
 From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Mon, 25 Jan 2021 17:34:09 +0800
-Message-ID: <CAMZfGtWK=zBri_zAx=uP_dLv2Kh-2_vfjAyN7XtESwqukg5Eug@mail.gmail.com>
-Subject: Re: [External] Re: [PATCH v13 05/12] mm: hugetlb: allocate the
- vmemmap pages associated with each HugeTLB page
+Date:   Mon, 25 Jan 2021 20:30:32 +0800
+Message-ID: <CAMZfGtVX4HPNgvcdbAoEoi8uYtwc=kbk0ryuGm83dH3BPQ1sFQ@mail.gmail.com>
+Subject: Re: [External] Re: [PATCH v13 09/12] mm: hugetlb: add a kernel
+ parameter hugetlb_free_vmemmap
 To:     David Hildenbrand <david@redhat.com>
-Cc:     David Rientjes <rientjes@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
+Cc:     Jonathan Corbet <corbet@lwn.net>,
         Mike Kravetz <mike.kravetz@oracle.com>,
         Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
         bp@alien8.de, x86@kernel.org, hpa@zytor.com,
@@ -68,6 +64,7 @@ Cc:     David Rientjes <rientjes@google.com>,
         Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
         anshuman.khandual@arm.com, jroedel@suse.de,
         Mina Almasry <almasrymina@google.com>,
+        David Rientjes <rientjes@google.com>,
         Matthew Wilcox <willy@infradead.org>,
         Oscar Salvador <osalvador@suse.de>,
         Michal Hocko <mhocko@suse.com>,
@@ -83,128 +80,47 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jan 25, 2021 at 5:15 PM David Hildenbrand <david@redhat.com> wrote:
+On Mon, Jan 25, 2021 at 7:43 PM David Hildenbrand <david@redhat.com> wrote:
 >
-> On 25.01.21 08:41, Muchun Song wrote:
-> > On Mon, Jan 25, 2021 at 2:40 PM Muchun Song <songmuchun@bytedance.com> wrote:
-> >>
-> >> On Mon, Jan 25, 2021 at 8:05 AM David Rientjes <rientjes@google.com> wrote:
-> >>>
-> >>>
-> >>> On Sun, 17 Jan 2021, Muchun Song wrote:
-> >>>
-> >>>> diff --git a/mm/sparse-vmemmap.c b/mm/sparse-vmemmap.c
-> >>>> index ce4be1fa93c2..3b146d5949f3 100644
-> >>>> --- a/mm/sparse-vmemmap.c
-> >>>> +++ b/mm/sparse-vmemmap.c
-> >>>> @@ -29,6 +29,7 @@
-> >>>>  #include <linux/sched.h>
-> >>>>  #include <linux/pgtable.h>
-> >>>>  #include <linux/bootmem_info.h>
-> >>>> +#include <linux/delay.h>
-> >>>>
-> >>>>  #include <asm/dma.h>
-> >>>>  #include <asm/pgalloc.h>
-> >>>> @@ -40,7 +41,8 @@
-> >>>>   * @remap_pte:               called for each non-empty PTE (lowest-level) entry.
-> >>>>   * @reuse_page:              the page which is reused for the tail vmemmap pages.
-> >>>>   * @reuse_addr:              the virtual address of the @reuse_page page.
-> >>>> - * @vmemmap_pages:   the list head of the vmemmap pages that can be freed.
-> >>>> + * @vmemmap_pages:   the list head of the vmemmap pages that can be freed
-> >>>> + *                   or is mapped from.
-> >>>>   */
-> >>>>  struct vmemmap_remap_walk {
-> >>>>       void (*remap_pte)(pte_t *pte, unsigned long addr,
-> >>>> @@ -50,6 +52,10 @@ struct vmemmap_remap_walk {
-> >>>>       struct list_head *vmemmap_pages;
-> >>>>  };
-> >>>>
-> >>>> +/* The gfp mask of allocating vmemmap page */
-> >>>> +#define GFP_VMEMMAP_PAGE             \
-> >>>> +     (GFP_KERNEL | __GFP_RETRY_MAYFAIL | __GFP_NOWARN | __GFP_THISNODE)
-> >>>> +
-> >>>
-> >>> This is unnecessary, just use the gfp mask directly in allocator.
-> >>
-> >> Will do. Thanks.
-> >>
-> >>>
-> >>>>  static void vmemmap_pte_range(pmd_t *pmd, unsigned long addr,
-> >>>>                             unsigned long end,
-> >>>>                             struct vmemmap_remap_walk *walk)
-> >>>> @@ -228,6 +234,75 @@ void vmemmap_remap_free(unsigned long start, unsigned long end,
-> >>>>       free_vmemmap_page_list(&vmemmap_pages);
-> >>>>  }
-> >>>>
-> >>>> +static void vmemmap_restore_pte(pte_t *pte, unsigned long addr,
-> >>>> +                             struct vmemmap_remap_walk *walk)
-> >>>> +{
-> >>>> +     pgprot_t pgprot = PAGE_KERNEL;
-> >>>> +     struct page *page;
-> >>>> +     void *to;
-> >>>> +
-> >>>> +     BUG_ON(pte_page(*pte) != walk->reuse_page);
-> >>>> +
-> >>>> +     page = list_first_entry(walk->vmemmap_pages, struct page, lru);
-> >>>> +     list_del(&page->lru);
-> >>>> +     to = page_to_virt(page);
-> >>>> +     copy_page(to, (void *)walk->reuse_addr);
-> >>>> +
-> >>>> +     set_pte_at(&init_mm, addr, pte, mk_pte(page, pgprot));
-> >>>> +}
-> >>>> +
-> >>>> +static void alloc_vmemmap_page_list(struct list_head *list,
-> >>>> +                                 unsigned long start, unsigned long end)
-> >>>> +{
-> >>>> +     unsigned long addr;
-> >>>> +
-> >>>> +     for (addr = start; addr < end; addr += PAGE_SIZE) {
-> >>>> +             struct page *page;
-> >>>> +             int nid = page_to_nid((const void *)addr);
-> >>>> +
-> >>>> +retry:
-> >>>> +             page = alloc_pages_node(nid, GFP_VMEMMAP_PAGE, 0);
-> >>>> +             if (unlikely(!page)) {
-> >>>> +                     msleep(100);
-> >>>> +                     /*
-> >>>> +                      * We should retry infinitely, because we cannot
-> >>>> +                      * handle allocation failures. Once we allocate
-> >>>> +                      * vmemmap pages successfully, then we can free
-> >>>> +                      * a HugeTLB page.
-> >>>> +                      */
-> >>>> +                     goto retry;
-> >>>
-> >>> Ugh, I don't think this will work, there's no guarantee that we'll ever
-> >>> succeed and now we can't free a 2MB hugepage because we cannot allocate a
-> >>> 4KB page.  We absolutely have to ensure we make forward progress here.
-> >>
-> >> This can trigger a OOM when there is no memory and kill someone to release
-> >> some memory. Right?
-> >>
-> >>>
-> >>> We're going to be freeing the hugetlb page after this succeeeds, can we
-> >>> not use part of the hugetlb page that we're freeing for this memory
-> >>> instead?
-> >>
-> >> It seems a good idea. We can try to allocate memory firstly, if successful,
-> >> just use the new page to remap (it can reduce memory fragmentation).
-> >> If not, we can use part of the hugetlb page to remap. What's your opinion
-> >> about this?
-> >
-> > If the HugeTLB page is a gigantic page which is allocated from
-> > CMA. In this case, we cannot use part of the hugetlb page to remap.
-> > Right?
+> On 17.01.21 16:10, Muchun Song wrote:
+> > Add a kernel parameter hugetlb_free_vmemmap to enable the feature of
+> > freeing unused vmemmap pages associated with each hugetlb page on boot.
 >
-> Right; and I don't think the "reuse part of a huge page as vmemmap while
-> freeing, while that part itself might not have a proper vmemmap yet (or
-> might cover itself now)" is particularly straight forward. Maybe I'm
-> wrong :)
->
-> Also, watch out for huge pages on ZONE_MOVABLE, in that case you also
-> shouldn't allocate the vmemmap from there ...
+> The description completely lacks a description of the changes performed
+> in arch/x86/mm/init_64.c.
 
-Yeah, you are right. So I tend to trigger OOM to kill other processes to
-reclaim some memory when we allocate memory fails.
+Will update. Thanks.
+
+>
+> [...]
+>
+> > --- a/arch/x86/mm/init_64.c
+> > +++ b/arch/x86/mm/init_64.c
+> > @@ -34,6 +34,7 @@
+> >  #include <linux/gfp.h>
+> >  #include <linux/kcore.h>
+> >  #include <linux/bootmem_info.h>
+> > +#include <linux/hugetlb.h>
+> >
+> >  #include <asm/processor.h>
+> >  #include <asm/bios_ebda.h>
+> > @@ -1557,7 +1558,8 @@ int __meminit vmemmap_populate(unsigned long start, unsigned long end, int node,
+> >  {
+> >       int err;
+> >
+> > -     if (end - start < PAGES_PER_SECTION * sizeof(struct page))
+> > +     if (is_hugetlb_free_vmemmap_enabled() ||
+> > +         end - start < PAGES_PER_SECTION * sizeof(struct page))
+>
+> This looks irresponsible. You ignore any altmap, even though current
+> altmap users (ZONE_DEVICE) will not actually result in applicable
+> vmemmaps that huge pages could ever use.
+>
+> Why do you ignore the altmap completely? This has to be properly
+> documented, but IMHO it's not even the right approach to mess with
+> altmap here.
+
+Thanks for reminding me of this. Sorry I also did not notice that.
 
 >
 > --
