@@ -2,121 +2,93 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B40DC3035D7
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 06:55:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8225B3035D8
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 06:55:41 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1727062AbhAZFzQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 00:55:16 -0500
-Received: from mail.kernel.org ([198.145.29.99]:43078 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1726942AbhAYJ4j (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 25 Jan 2021 04:56:39 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 3873222597;
-        Mon, 25 Jan 2021 09:53:57 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1611568439;
-        bh=OOn7cmzw71J8lu3YYw6ES8LmbvuXLKRJR9o9mJxQkLc=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=tbvRBgTG48DsX8aTGhXT7RZuODV1evwh4xCr95tV4R9TzXJZAxmuA9AnVmG13jQ+5
-         PPtN2LRUYlp/oogxLh5KRxa+wdduJi8vKN8zzKxaK9CNlNOtyB2tEIjmOOyZj2HlFf
-         adYgLAX0MGmV5dzfq3tSomR87ZQzHh1QA23V345u30+JIbb3vMTqtang+2etUsfZnm
-         uzdH2kj7YlmIlPHOEZZKx9dySrc3J7fg6uqDl/ZKdzBUa1nymuHyBk21kw/7SBJWjP
-         x0eni/48tLa87cEm1JGV/JMdsiuItHQwsyWEsb4TVWZJun59witX3qqAvUapYkhg55
-         YE0LlnSp5F5GQ==
-Date:   Mon, 25 Jan 2021 10:53:53 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Jarkko Sakkinen <jarkko@kernel.org>
-Cc:     corbet@lwn.net,
-        "=?UTF-8?B?TsOtY29sYXM=?= F. R. A. Prado" <nfraprado@protonmail.com>,
-        Ben Widawsky <ben.widawsky@intel.com>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH] kernel-doc: Make the description of return value
- readable
-Message-ID: <20210125105353.5c695d42@coco.lan>
-In-Reply-To: <20210125081905.145569-1-jarkko@kernel.org>
-References: <20210125081905.145569-1-jarkko@kernel.org>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.32; x86_64-redhat-linux-gnu)
+        id S2388945AbhAZFzT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 00:55:19 -0500
+Received: from twspam01.aspeedtech.com ([211.20.114.71]:11411 "EHLO
+        twspam01.aspeedtech.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1727440AbhAYKSE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 25 Jan 2021 05:18:04 -0500
+Received: from twspam01.aspeedtech.com (localhost [127.0.0.2] (may be forged))
+        by twspam01.aspeedtech.com with ESMTP id 10P9viQf098151
+        for <linux-doc@vger.kernel.org>; Mon, 25 Jan 2021 17:57:44 +0800 (GMT-8)
+        (envelope-from troy_lee@aspeedtech.com)
+Received: from mail.aspeedtech.com ([192.168.0.24])
+        by twspam01.aspeedtech.com with ESMTP id 10P9tsXQ098016;
+        Mon, 25 Jan 2021 17:55:54 +0800 (GMT-8)
+        (envelope-from troy_lee@aspeedtech.com)
+Received: from aspeedtech.com (192.168.100.253) by TWMBX02.aspeed.com
+ (192.168.0.24) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 25 Jan
+ 2021 18:01:37 +0800
+Date:   Mon, 25 Jan 2021 10:01:19 +0000
+From:   Troy Lee <troy_lee@aspeedtech.com>
+To:     Guenter Roeck <linux@roeck-us.net>
+CC:     "openbmc@lists.ozlabs.org" <openbmc@lists.ozlabs.org>,
+        Jean Delvare <jdelvare@suse.com>,
+        Rob Herring <robh+dt@kernel.org>,
+        Joel Stanley <joel@jms.id.au>,
+        Andrew Jeffery <andrew@aj.id.au>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Philipp Zabel <p.zabel@pengutronix.de>,
+        Ryan Chen <ryan_chen@aspeedtech.com>,
+        "open list:HARDWARE MONITORING" <linux-hwmon@vger.kernel.org>,
+        "open list:OPEN FIRMWARE AND FLATTENED DEVICE TREE BINDINGS" 
+        <devicetree@vger.kernel.org>,
+        "moderated list:ARM/ASPEED MACHINE SUPPORT" 
+        <linux-arm-kernel@lists.infradead.org>,
+        "moderated list:ARM/ASPEED MACHINE SUPPORT" 
+        <linux-aspeed@lists.ozlabs.org>,
+        open list <linux-kernel@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        ChiaWei Wang <chiawei_wang@aspeedtech.com>,
+        "leetroy@gmail.com" <leetroy@gmail.com>
+Subject: Re: [PATCH v2 4/4] hwmon: Support Aspeed AST2600 PWM/Fan tachometer
+Message-ID: <20210125100119.GA2349720@aspeedtech.com>
+References: <20210113070850.1184506-1-troy_lee@aspeedtech.com>
+ <20210113070850.1184506-5-troy_lee@aspeedtech.com>
+ <20210123161405.GA50622@roeck-us.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+In-Reply-To: <20210123161405.GA50622@roeck-us.net>
+X-Originating-IP: [192.168.100.253]
+X-ClientProxiedBy: TWMBX02.aspeed.com (192.168.0.24) To TWMBX02.aspeed.com
+ (192.168.0.24)
+X-DNSRBL: 
+X-MAIL: twspam01.aspeedtech.com 10P9tsXQ098016
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Mon, 25 Jan 2021 10:19:04 +0200
-Jarkko Sakkinen <jarkko@kernel.org> escreveu:
+Hi Guenter,
 
-> The description on how to describe return values is over-complicated, and
-> hard to follow. For alien reason, the body of the section is a note, and
-> the first paragraph speaks about 'Return', albeit the section name is
-> actually 'Return:'.
+The 01/24/2021 00:14, Guenter Roeck wrote:
+> On Wed, Jan 13, 2021 at 07:08:48AM +0000, Troy Lee wrote:
+> > Add Aspeed AST2600 PWM/Fan tacho driver. AST2600 has 16 PWM channel and
+> > 16 FAN tacho channel.
+> > 
+> > Changes since v1:
+> > - fixed review comments
+> > - fixed double-looped calculation of div_h and div_l
+> > - moving configuration to device tree
+> > - register hwmon driver with devm_hwmon_device_register_with_info()
+> > 
+> > Signed-off-by: Troy Lee <troy_lee@aspeedtech.com>
 > 
-> To give a better help when both implementing and reviewing patches, provide
-> a straight-forward guideline, how to decribe return values, instead of
-> providing a note that starts by "blacklisting" one of the infinite possible
-> options of doing it wrong.
+> checkpatch says:
 > 
-> This decreases the cumulative amount of time, which is probably
-> substantial, on this otherwise somewhat trivial topic.
+> total: 0 errors, 9 warnings, 26 checks, 779 lines checked
 > 
-> Signed-off-by: Jarkko Sakkinen <jarkko@kernel.org>
-> ---
->  Documentation/doc-guide/kernel-doc.rst | 34 +++++++-------------------
->  1 file changed, 9 insertions(+), 25 deletions(-)
+> This is a bit much. Please run checkpatch --strict and fix the issues
+> it reports. Please also fix the issues reported by 0-day as well as
+> the issues reported by the bindings robot, and resubmit.
 > 
-> diff --git a/Documentation/doc-guide/kernel-doc.rst b/Documentation/doc-guide/kernel-doc.rst
-> index 79aaa55d6bcf..dc5e1722c150 100644
-> --- a/Documentation/doc-guide/kernel-doc.rst
-> +++ b/Documentation/doc-guide/kernel-doc.rst
-> @@ -136,34 +136,18 @@ Examples::
->  Return values
->  ~~~~~~~~~~~~~
->  
-> -The return value, if any, should be described in a dedicated section
-> -named ``Return``.
-> +The return value, if any, should be described in a dedicated section named
-> +``Return:``.
->  
-> -.. note::
-> -
-> -  #) The multi-line descriptive text you provide does *not* recognize
-> -     line breaks, so if you try to format some text nicely, as in::
-> -
-> -	* Return:
-> -	* 0 - OK
-> -	* -EINVAL - invalid argument
-> -	* -ENOMEM - out of memory
-> -
-> -     this will all run together and produce::
-> -
-> -	Return: 0 - OK -EINVAL - invalid argument -ENOMEM - out of memory
-> -
-> -     So, in order to produce the desired line breaks, you need to use a
-> -     ReST list, e. g.::
-> +In order to describe multiple return values, a ReST list should be used. That
-> +way Sphinx knows how to line-up them properly::
->  
-> -      * Return:
-> -      * * 0		- OK to runtime suspend the device
-> -      * * -EBUSY	- Device should not be runtime suspended
-> +  * Return:
-> +  * - 0:	The run-time is allowed to suspend the device.
-> +  * - -EBUSY:	Device should not be suspended.
->  
-> -  #) If the descriptive text you provide has lines that begin with
-> -     some phrase followed by a colon, each of those phrases will be taken
-> -     as a new section heading, which probably won't produce the desired
-> -     effect.
-> +Using a dash rather than asterisk an is probably a better idea, because it does
-> +not meddle as much with the C-comments.
+> Thanks,
+> Guenter
 
-Well, there are different opinions with that regards... Some devs think that
-using:
-
-	- -EBUSY
-
-is confusing. I ended agreeing with that. That's why the recommendation is
-to use an asterisk.
+I'll fix the WARNINGs and CHECKs.
 
 Thanks,
-Mauro
+Troy Lee
