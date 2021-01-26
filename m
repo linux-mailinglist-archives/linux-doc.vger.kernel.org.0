@@ -2,1161 +2,418 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8FB80304ECF
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 02:35:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 17F95304ED8
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 02:35:19 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2387499AbhA0BB0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 20:01:26 -0500
-Received: from mga06.intel.com ([134.134.136.31]:32218 "EHLO mga06.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2388450AbhAZFoc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 26 Jan 2021 00:44:32 -0500
-IronPort-SDR: fzd2Ud2KZnPVR8wz+YbJxdbLZ65zaVkzJ42jUklAk8KyCtCbw+I8hUBVrX9n5MMkbF7rbAQjmv
- 8l/FWvkaT9QA==
-X-IronPort-AV: E=McAfee;i="6000,8403,9875"; a="241381375"
-X-IronPort-AV: E=Sophos;i="5.79,375,1602572400"; 
-   d="scan'208";a="241381375"
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jan 2021 21:40:41 -0800
-IronPort-SDR: Nsldn7dsiWSp1jKZzY2MSudY7Ek0Y4A22s8VXVYbhn7QANpi43f9jnA9MhKkI6PHz3JT12rrSH
- 8swyqCuEWc0g==
-X-IronPort-AV: E=Sophos;i="5.79,375,1602572400"; 
-   d="scan'208";a="504418201"
-Received: from smtp.ostc.intel.com ([10.54.29.231])
-  by orsmga004-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 25 Jan 2021 21:40:41 -0800
-Received: from mtg-dev.jf.intel.com (mtg-dev.jf.intel.com [10.54.74.10])
-        by smtp.ostc.intel.com (Postfix) with ESMTP id 165FF6368;
-        Mon, 25 Jan 2021 21:40:41 -0800 (PST)
-Received: by mtg-dev.jf.intel.com (Postfix, from userid 1000)
-        id 09F6C36336C; Mon, 25 Jan 2021 21:40:41 -0800 (PST)
-From:   mgross@linux.intel.com
-To:     markgross@kernel.org, mgross@linux.intel.com, arnd@arndb.de,
-        bp@suse.de, damien.lemoal@wdc.com, dragan.cvetic@xilinx.com,
-        gregkh@linuxfoundation.org, corbet@lwn.net,
-        palmerdabbelt@google.com, paul.walmsley@sifive.com,
-        peng.fan@nxp.com, robh+dt@kernel.org, shawnguo@kernel.org,
-        jassisinghbrar@gmail.com
-Cc:     linux-kernel@vger.kernel.org,
-        Seamus Kelly <seamus.kelly@intel.com>,
-        "Cc : Derek Kiernan" <derek.kiernan@xilinx.com>,
-        linux-doc@vger.kernel.org,
-        Ryan Carnaghi <ryan.r.carnaghi@intel.com>
-Subject: [PATCH v3 18/34] xlink-ipc: Add xlink ipc driver
-Date:   Mon, 25 Jan 2021 21:40:20 -0800
-Message-Id: <20210126054036.61587-19-mgross@linux.intel.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210126054036.61587-1-mgross@linux.intel.com>
-References: <20210126054036.61587-1-mgross@linux.intel.com>
+        id S1727831AbhA0BE0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 20:04:26 -0500
+Received: from sonic302-28.consmr.mail.ne1.yahoo.com ([66.163.186.154]:45092
+        "EHLO sonic302-28.consmr.mail.ne1.yahoo.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S1730778AbhAZRJS (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jan 2021 12:09:18 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1611680890; bh=nJCAs0BPXA4cnnZxBHu1T/lun2t0PzuXUvUDYXsxOrI=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=H9wKhMiNmhc8SyFs9M1+tVFIkS6fWs8hdqHMY5PS2xBpecyBdNwRqyITF6aj/gngJprC4yZM92uwusfwZ/2KJuhjoHbHHpUZ/pGFhscRgUsk/C//WDZNiqakQBh19scZ4r4c+Dwe2hmSdDLjxqIKLkhEsausz9Br7G9Edrd4etNcIsFoZZaKRaysgnPclM23hZkP9vATnm047W4fO4gPFmwei35NhAsLLgferpSFuvgNd+i0xOprdhkD0R6Ff9tw2uGDQMCLVCfazS9jHKTpoIGXnlF+VE192WxkU1EdBalq0AVnkmrBv8NYckJVSwKdvejR0wFmLBreAQcBBYTHZg==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1611680890; bh=N5fsMAXluJkVM15EQ/IikQUFnuu3O1zCUxAykqgMNXG=; h=From:To:Subject:Date:From:Subject:Reply-To; b=dzpEIq9U8L1TBLAl81feFdvOPwdVMaZ7tJDenFeOw4U9ai3NAmhkGs24hp3GFTQzjviblg8Ypr8b0gmp0OTKuMGgAhsp3lS8sns4lIIuBCxUidK5dVeosenBtpIncH+F3o1ayv0zM+TTgF7P3X0lBsiTnAonHCK7ZwU2V2dPCCBX/e/x1cLAcgZtIeNC/G7mPstWWl+IFF1Um3xrqEORwrMRayExd6uV6mUgmUYGyXhAqFbD6Mak3ZafUCn/lhqNP7nFmD3InSZfLjvFmYSws6pB31m6amJMWq3Nhj+pYwXnnhe8VKyGd+upeo7JLj98RIjnVHcjrlFntDxamrHprg==
+X-YMail-OSG: mb7CpHAVM1mZAuLufEAKKFykBLBgQA5uIBjHwZlsAZAspXe67WaO92TZxurtdKt
+ FUBb6yZ8Hksx8DRRuyGrJsz9QLpqzpl6jQGtLwxj11fYU.oh.ZY7TONXtiqJv6vBxKRUDReAFkSw
+ AllZU_ZzAYByPUHdbgO6xw2olVOLGVWv5H.jbr852Cw.ZGfOxLRwUWYMjc5DMVtAdMWhAfUHT3sP
+ 6py9es64ZvAsYTNvixKOiOYe71iVHP1X.P6s3Q6XxHoEsvaQYaVf1a9y1t2OSqlCIIumD5g43RF1
+ KW.4VmmIbHyZJ4GduHn3qBNXOZAcaQ0HtsYqvKtN3a8OdQftWOH.ALBd0DE9WhOUWBAaCjQdMdjH
+ kU3BC0eA5Oz.P.uJZTd4pGVBb5.vYVgIc0RUdYJ2TRVuXGWYZXBX4C8C7knoUGsgPp8MpWa5Va0g
+ CamZQ8bR74lLfZDfXg0vvf2ZqNFG.ibQX2ALpHzH7QSHSWae.P7M_m3Xr7q5rquKPxjWtNKoL.bw
+ 884OAg8yol9._GXjcY6MBL8Wqmxdj2mqpUsUx5JjzBnzmTP_Tw6iJBZe6cCpzC.cV2DBEdr5hkhC
+ STd403A4gEB5hCx4h9NRl.i_JEEyCHQBz.LHDxHPhn0Gfj.d0heVUUgTm46XBpRD2Tih5OnVnXcT
+ 9PzTPRj0N2d.lkv.llWUw5WAbYxJOD6FBz3dpW0dZHkx51DBYoPQIwUrQfqYtI97H.az0WXYI4lZ
+ dTKiJF9bJHBU6rsgaoUOGy6BVhSU7BO0UJgFpeqJ_rwv4AcPf8auRCIRvu8_fYx7qtPDxiORZo.F
+ n0OgT0ZdLMIDbiNm5zwg1cdZ008DuM7k0tZfgrvvZUlSnYUjaDhap3WLNg.VG.XeqmxL3HGDb2l3
+ SXH1a92dSsKoBPpnyQFzFvVEL7vsLfhtDOWMZZu.KfIgQf_XYK6qCnNztD7XF0FvNFU6YQsHGMQt
+ ZmNIP8ISRPlKpiCKFSxLXy7NAQZ4EDdfUPVt9JhyasEAcIv3pHc0atcuhiPu5jTrW.wCiP2P_W6l
+ G_USvH12L_T_aIBuDhn2uUFpzzzY4S3PtSvhati2v2rgzlo8c_.bbXo0IGjpMtFRsCLbbeUNmIJN
+ TA00YJy57a9uHRCmNvkr4XVCdgCXSQfUuA94mOfwhYLNW7Fzig83PUqEvGxoS32k1I2PpaNVUcB_
+ JumE0OmjGjCfsq7NFuHexJTP_M1U_weaDPhdasVLNqSS4P9RamI15uHbZ3sXtXAsn9M1hrCv0kch
+ IFxPdy_mRdSH0P47lP0fjYVY5EdYbuHALEaOi4MB2aw5dQ48WVtDbL1fPlBbCSejnmnv9ut28y2Z
+ pqHuoHRkq1d_Uv6bMOVk_TnsFzfYYqcKbIFQER7be7uSf652L23IQX1NzZuwRIJ40mN2C7t72TKk
+ L.3oRStKX8vPTdwD.oQoa82w0CXx0la9gm8HugUIOoI6GZslyPcbqxLK02HxemLRbUQsH8iMDELO
+ 3i.pGO_ixxkT8S0LduRaGpMWNaExP_sJliY_yOLmJSPnS553nwl65A44Cs_KF4oyPeCf3.akjCL2
+ DrWw62y8cT0nNlvDep_4sUZsYKeywb8UrB3XJxVggfVhqQVXvm.nhrCdCcpPY0HgEK2COhkAD.MD
+ HFnjJ2Uu_pZGfT3j7Au0kt.UGO1sNi2TQUJGbxMVryrfurO1MkJxdJkeBhUpWtT4vfBTx1tJMx0r
+ ynu8cSHMhl1b4zQWd98EeJxSsJixqtlwBh7p4_6yGbzA.jlWe_r3SqGvsMyHsighWeWM.Z8gzjtx
+ FJpPujAe6LpHsdcof_E8yzmYwlxk6WBgO0o7pdc32rPbq9oFQmoUBmNZX_D0IwO0RE5b4hjbkxLD
+ fTNmm.DABkuaCtdhXdrFJStdJQ6xK02pMS9xKvgs6wV3Ca.yBQbay4DKS5.Wp7IgUCDMjrMNEXDU
+ 7lwEkIA7BmnVTLYN_WzC_jdJRGfX0lSs9r3HDBxkUqUA6u6icvgtoJIa0iWSqgwlmwqI1xLl0W3c
+ Pqd2ay8pN.ew9iyPuVBhTMfSXCJUxdTpSXzUVm3y_yPK3q5b6d8q3x5nZmavwX50jKlwIsr5N8Cc
+ zH0xQNeTQrQh1kD204273M4fuRHSjQ0lcpCZYf0RPrSfe4MDX75Y4RsXhY.WQ60me17K0gWl_p7m
+ cZ8wWlTOqIHPfWK6.o7stRptPm1y3zBBAHiutn.9kBoOZkMXsOid55MeHlGW7ji.6JSEts_dDUaR
+ ttqMlYqPBJUxVBUZcokqb3ULMm8foDyd8K_hlNYmDdS7hnc_RbnEeJbzlbdqN5YIYWzkhaQMYiLG
+ Nyh5xjClxB7IaW3ux6etDWecKNy8khGSkV6_KQchxjuS3WwnhSjhouZo4rn6TRPyikcaEU6nEW3d
+ cYibDiFEC9v.YBKpZY8QXI51JRDUpU2OkMd8debaq9MlDdAESlqTxiOG55uMq.g9f60aQH5JSMF4
+ 8BeKPJXvNLpMVnLCDGKEd8TDZciOBCEkT16gukD1dqwvyqrr0ZDmDOF_zyoLNj3pHzH_6em4jowY
+ PJh0xIxDuj6OlXgwjdOIANuQ9Cv6.ZnPw__XcSakTIzDE.ICl5231H7W9rlq2p1tNDkT.kj4xuMu
+ GtpJJEY9CnwckMmQ0vtC6x674hDfPj8I_3QDJM2OzR6GqUAdG1Wa6m4TI7EnThgMRgtY..xFY1HD
+ GO04F6_yHE9Tr2YsTWLuITF75lHnI7Ki_bjLttT_IZW8CNb2MGKPGxK5S1aROhyyVYFdUlzzRQOx
+ qOFBW7.QbX9HukJby8rBoChmCE4egY9pbwHrISNY_qgXFkeMTpE.kl5IH_q8NXWBE_AbCFIJ2KRT
+ CoNkBj0RunCN.hL0GVUsN7ZX4Dm3DFu5Jr4ULF2H9qxUsy61a9w8Mg5OOWUZja7qf__lJ9t5ZEfz
+ dB90bxTS2KT8_Gw1oc3R7z0UkQD9C7x0VOniwRDZ0k4PvExeRxY.fAYXB7ovaCSVMCz9mXR0plIG
+ XeEn6sl.f.nEXatjjQKUgzk7vcVnmLPfOrWxSDjqR2j..X9DQIGx9T4DX6nNFuxgHQTpKzYsubjZ
+ HHJBJ7kFjw_C5BJ2WI2k5pLlrWpfxaa4nSFKlUJ2UxJXKRhw_D7NIiLs2HdPWQPdV5ntK72rqa_0
+ 54ADNOaA94jpnpDCNQ5iyrN6a0xx.iVdouVv7DfwsizptueMWV3KpB_aTNT6lg7aQd1_8Ra_uS6I
+ .bPAP6jOJp8Rzd3M_F4vbn0bnEQ--
+Received: from sonic.gate.mail.ne1.yahoo.com by sonic302.consmr.mail.ne1.yahoo.com with HTTP; Tue, 26 Jan 2021 17:08:10 +0000
+Received: by smtp416.mail.ne1.yahoo.com (VZM Hermes SMTP Server) with ESMTPA ID 22de447dea88977b0d341466450f4ca5;
+          Tue, 26 Jan 2021 17:08:09 +0000 (UTC)
+From:   Casey Schaufler <casey@schaufler-ca.com>
+To:     casey.schaufler@intel.com, jmorris@namei.org,
+        linux-security-module@vger.kernel.org, selinux@vger.kernel.org
+Cc:     casey@schaufler-ca.com, linux-audit@redhat.com,
+        keescook@chromium.org, john.johansen@canonical.com,
+        penguin-kernel@i-love.sakura.ne.jp, paul@paul-moore.com,
+        sds@tycho.nsa.gov, linux-kernel@vger.kernel.org,
+        linux-api@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: [PATCH v24 24/25] LSM: Add /proc attr entry for full LSM context
+Date:   Tue, 26 Jan 2021 08:41:07 -0800
+Message-Id: <20210126164108.1958-25-casey@schaufler-ca.com>
+X-Mailer: git-send-email 2.25.4
+In-Reply-To: <20210126164108.1958-1-casey@schaufler-ca.com>
+References: <20210126164108.1958-1-casey@schaufler-ca.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Seamus Kelly <seamus.kelly@intel.com>
+Add an entry /proc/.../attr/context which displays the full
+process security "context" in compound format:
+        lsm1\0value\0lsm2\0value\0...
+This entry is not writable.
 
-Add xLink driver, which interfaces the xLink Core driver with the Keem
-Bay VPU IPC driver, thus enabling xLink to control and communicate with
-the VPU IP present on the Intel Keem Bay SoC.
+A security module may decide that its policy does not allow
+this information to be displayed. In this case none of the
+information will be displayed.
 
-Specifically the driver enables xLink Core to:
-
-* Boot / Reset the VPU IP
-* Register to VPU IP event notifications (device connected, device
-  disconnected, WDT event)
-* Query the status of the VPU IP (OFF, BUSY, READY, ERROR, RECOVERY)
-* Exchange data with the VPU IP, using the Keem Bay IPC mechanism
-  - Including the ability to send 'volatile' data (i.e., small amount of
-    data, up to 128-bytes that was not allocated in the CPU/VPU shared
-    memory region)
-
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Cc: Derek Kiernan <derek.kiernan@xilinx.com>
-Cc: Dragan Cvetic <dragan.cvetic@xilinx.com>
-Cc: Arnd Bergmann <arnd@arndb.de>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Reviewed-by: Kees Cook <keescook@chromium.org>
+Signed-off-by: Casey Schaufler <casey@schaufler-ca.com>
+Cc: linux-api@vger.kernel.org
 Cc: linux-doc@vger.kernel.org
-Reviewed-by: Mark Gross <mgross@linux.intel.com>
-Signed-off-by: Seamus Kelly <seamus.kelly@intel.com>
-Signed-off-by: Ryan Carnaghi <ryan.r.carnaghi@intel.com>
 ---
- Documentation/vpu/index.rst        |   1 +
- Documentation/vpu/xlink-ipc.rst    |  51 ++
- MAINTAINERS                        |   6 +
- drivers/misc/Kconfig               |   1 +
- drivers/misc/Makefile              |   1 +
- drivers/misc/xlink-ipc/Kconfig     |   7 +
- drivers/misc/xlink-ipc/Makefile    |   4 +
- drivers/misc/xlink-ipc/xlink-ipc.c | 878 +++++++++++++++++++++++++++++
- include/linux/xlink-ipc.h          |  48 ++
- 9 files changed, 997 insertions(+)
- create mode 100644 Documentation/vpu/xlink-ipc.rst
- create mode 100644 drivers/misc/xlink-ipc/Kconfig
- create mode 100644 drivers/misc/xlink-ipc/Makefile
- create mode 100644 drivers/misc/xlink-ipc/xlink-ipc.c
- create mode 100644 include/linux/xlink-ipc.h
+ Documentation/ABI/testing/procfs-attr-context | 14 ++++
+ Documentation/security/lsm.rst                | 14 ++++
+ fs/proc/base.c                                |  1 +
+ include/linux/lsm_hooks.h                     |  6 ++
+ security/apparmor/include/procattr.h          |  2 +-
+ security/apparmor/lsm.c                       |  8 +-
+ security/apparmor/procattr.c                  | 22 +++---
+ security/security.c                           | 79 +++++++++++++++++++
+ security/selinux/hooks.c                      |  2 +-
+ security/smack/smack_lsm.c                    |  2 +-
+ 10 files changed, 135 insertions(+), 15 deletions(-)
+ create mode 100644 Documentation/ABI/testing/procfs-attr-context
 
-diff --git a/Documentation/vpu/index.rst b/Documentation/vpu/index.rst
-index 661cc700ee45..49c78bb65b83 100644
---- a/Documentation/vpu/index.rst
-+++ b/Documentation/vpu/index.rst
-@@ -15,3 +15,4 @@ This documentation contains information for the Intel VPU stack.
+diff --git a/Documentation/ABI/testing/procfs-attr-context b/Documentation/ABI/testing/procfs-attr-context
+new file mode 100644
+index 000000000000..40da1c397c30
+--- /dev/null
++++ b/Documentation/ABI/testing/procfs-attr-context
+@@ -0,0 +1,14 @@
++What:		/proc/*/attr/context
++Contact:	linux-security-module@vger.kernel.org,
++Description:	The current security information used by all Linux
++		security module (LSMs) that are active on the system.
++		The details of permissions required to read from
++		this interface and hence obtain the security state
++		of the task identified is dependent on the LSMs that
++		are active on the system.
++		A process cannot write to this interface.
++		The data provided by this interface will have the form:
++			lsm_name\0lsm_data\0[lsm_name\0lsm_data\0]...
++		where lsm_name is the name of the LSM and the following
++		lsm_data is the process data for that LSM.
++Users:		LSM user-space
+diff --git a/Documentation/security/lsm.rst b/Documentation/security/lsm.rst
+index b77b4a540391..070225ae6ceb 100644
+--- a/Documentation/security/lsm.rst
++++ b/Documentation/security/lsm.rst
+@@ -143,3 +143,17 @@ separated list of the active security modules.
+ The file ``/proc/pid/attr/interface_lsm`` contains the name of the security
+ module for which the ``/proc/pid/attr/current`` interface will
+ apply. This interface can be written to.
++
++The infrastructure does provide an interface for the special
++case where multiple security modules provide a process context.
++This is provided in compound context format.
++
++-  `lsm\0value\0lsm\0value\0`
++
++The `lsm` and `value` fields are NUL-terminated bytestrings.
++Each field may contain whitespace or non-printable characters.
++The NUL bytes are included in the size of a compound context.
++The context ``Bell\0Secret\0Biba\0Loose\0`` has a size of 23.
++
++The file ``/proc/pid/attr/context`` provides the security
++context of the identified process.
+diff --git a/fs/proc/base.c b/fs/proc/base.c
+index 158771f87e94..bf23e2bb240a 100644
+--- a/fs/proc/base.c
++++ b/fs/proc/base.c
+@@ -2809,6 +2809,7 @@ static const struct pid_entry attr_dir_stuff[] = {
+ 	ATTR(NULL, "keycreate",		0666),
+ 	ATTR(NULL, "sockcreate",	0666),
+ 	ATTR(NULL, "interface_lsm",	0666),
++	ATTR(NULL, "context",		0444),
+ #ifdef CONFIG_SECURITY_SMACK
+ 	DIR("smack",			0555,
+ 	    proc_smack_attr_dir_inode_ops, proc_smack_attr_dir_ops),
+diff --git a/include/linux/lsm_hooks.h b/include/linux/lsm_hooks.h
+index 28a036374834..5e7b2c3ab133 100644
+--- a/include/linux/lsm_hooks.h
++++ b/include/linux/lsm_hooks.h
+@@ -1372,6 +1372,12 @@
+  *	@pages contains the number of pages.
+  *	Return 0 if permission is granted.
+  *
++ * @getprocattr:
++ *	Provide the named process attribute for display in special files in
++ *	the /proc/.../attr directory.  Attribute naming and the data displayed
++ *	is at the discretion of the security modules.  The exception is the
++ *	"context" attribute, which will contain the security context of the
++ *	task as a nul terminated text string without trailing whitespace.
+  * @ismaclabel:
+  *	Check if the extended attribute specified by @name
+  *	represents a MAC label. Returns 1 if name is a MAC
+diff --git a/security/apparmor/include/procattr.h b/security/apparmor/include/procattr.h
+index 31689437e0e1..03dbfdb2f2c0 100644
+--- a/security/apparmor/include/procattr.h
++++ b/security/apparmor/include/procattr.h
+@@ -11,7 +11,7 @@
+ #ifndef __AA_PROCATTR_H
+ #define __AA_PROCATTR_H
  
-    vpu-stack-overview
-    xlink-pcie
-+   xlink-ipc
-diff --git a/Documentation/vpu/xlink-ipc.rst b/Documentation/vpu/xlink-ipc.rst
-new file mode 100644
-index 000000000000..97ee62b10e93
---- /dev/null
-+++ b/Documentation/vpu/xlink-ipc.rst
-@@ -0,0 +1,51 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===============================
-+Kernel driver: xLink IPC driver
-+===============================
-+
-+Supported chips:
-+
-+* | Intel Edge.AI Computer Vision platforms: Keem Bay
-+  | Suffix: Bay
-+  | Datasheet: (not yet publicly available)
-+
-+Introduction
-+============
-+
-+The xLink IPC driver interfaces the xLink Core driver with the Keem Bay VPU IPC
-+driver, thus enabling xLink to control and communicate with the VPU IP present
-+on the Intel Keem Bay SoC.
-+
-+Specifically the driver enables xLink Core to:
-+
-+* Boot / Reset the VPU IP
-+* Register to VPU IP event notifications (device connected, device disconnected,
-+  WDT event)
-+* Query the status of the VPU IP (OFF, BUSY, READY, ERROR, RECOVERY)
-+* Exchange data with the VPU IP, using the Keem Bay IPC mechanism
-+
-+  * Including the ability to send 'volatile' data (i.e. small amounts of data,
-+    up to 128-bytes that was not allocated in the CPU/VPU shared memory region)
-+
-+Sending / Receiving 'volatile' data
-+===================================
-+
-+Data to be exchanged with Keem Bay IPC needs to be allocated in the portion of
-+DDR shared between the CPU and VPU.
-+
-+This can be impractical for small amounts of data that user code can allocate
-+on the stack.
-+
-+To reduce the burden on user code, xLink Core provides special send / receive
-+functions to send up to 128 bytes of 'volatile data', i.e., data that is not
-+allocated in the shared memory and that might also disappear after the xLink
-+API is called (e.g., because allocated on the stack).
-+
-+The xLink IPC driver implements support for transferring such 'volatile data'
-+to the VPU using Keem Bay IPC. To this end, the driver reserves some memory in
-+the shared memory region.
-+
-+When volatile data is to be sent, xLink IPC allocates a buffer from the
-+reserved memory region and copies the volatile data to the buffer. The buffer
-+is then transferred to the VPU using Keem Bay IPC.
-diff --git a/MAINTAINERS b/MAINTAINERS
-index e05fa34d72ce..22a7a1b03601 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -1961,6 +1961,12 @@ F:	Documentation/devicetree/bindings/arm/intel,keembay.yaml
- F:	arch/arm64/boot/dts/intel/keembay-evm.dts
- F:	arch/arm64/boot/dts/intel/keembay-soc.dtsi
+-int aa_getprocattr(struct aa_label *label, char **string);
++int aa_getprocattr(struct aa_label *label, char **string, bool newline);
+ int aa_setprocattr_changehat(char *args, size_t size, int flags);
  
-+ARM/INTEL XLINK IPC SUPPORT
-+M:	Seamus Kelly <seamus.kelly@intel.com>
-+M:	Mark Gross <mgross@linux.intel.com>
-+S:	Supported
-+F:	drivers/misc/xlink-ipc/
-+
- ARM/INTEL KEEM BAY XLINK PCIE SUPPORT
- M:	Srikanth Thokala <srikanth.thokala@intel.com>
- M:	Mark Gross <mgross@linux.intel.com>
-diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
-index dfb98e444c6e..1f81ea915b95 100644
---- a/drivers/misc/Kconfig
-+++ b/drivers/misc/Kconfig
-@@ -482,4 +482,5 @@ source "drivers/misc/cardreader/Kconfig"
- source "drivers/misc/habanalabs/Kconfig"
- source "drivers/misc/uacce/Kconfig"
- source "drivers/misc/xlink-pcie/Kconfig"
-+source "drivers/misc/xlink-ipc/Kconfig"
- endmenu
-diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
-index d17621fc43d5..b51495a2f1e0 100644
---- a/drivers/misc/Makefile
-+++ b/drivers/misc/Makefile
-@@ -58,3 +58,4 @@ obj-$(CONFIG_UACCE)		+= uacce/
- obj-$(CONFIG_XILINX_SDFEC)	+= xilinx_sdfec.o
- obj-$(CONFIG_HISI_HIKEY_USB)	+= hisi_hikey_usb.o
- obj-y                           += xlink-pcie/
-+obj-$(CONFIG_XLINK_IPC)		+= xlink-ipc/
-diff --git a/drivers/misc/xlink-ipc/Kconfig b/drivers/misc/xlink-ipc/Kconfig
-new file mode 100644
-index 000000000000..6e5374c7d85c
---- /dev/null
-+++ b/drivers/misc/xlink-ipc/Kconfig
-@@ -0,0 +1,7 @@
-+config XLINK_IPC
-+	tristate "Support for XLINK IPC"
-+	depends on KEEMBAY_VPU_IPC
-+	help
-+	  XLINK IPC enables the communication/control IPC Sub-System.
-+
-+	  Select M if you have an Intel SoC with a Vision Processing Unit (VPU).
-diff --git a/drivers/misc/xlink-ipc/Makefile b/drivers/misc/xlink-ipc/Makefile
-new file mode 100644
-index 000000000000..f92c95525e23
---- /dev/null
-+++ b/drivers/misc/xlink-ipc/Makefile
-@@ -0,0 +1,4 @@
-+#
-+# Makefile for xlink IPC Linux driver
-+#
-+obj-$(CONFIG_XLINK_IPC) += xlink-ipc.o
-diff --git a/drivers/misc/xlink-ipc/xlink-ipc.c b/drivers/misc/xlink-ipc/xlink-ipc.c
-new file mode 100644
-index 000000000000..e98a5a4b66a2
---- /dev/null
-+++ b/drivers/misc/xlink-ipc/xlink-ipc.c
-@@ -0,0 +1,878 @@
-+// SPDX-License-Identifier: GPL-2.0-only
-+/*
-+ * xlink Linux Kernel Platform API
-+ *
-+ * Copyright (C) 2018-2020 Intel Corporation
-+ *
-+ */
-+#include <linux/device.h>
-+#include <linux/dma-mapping.h>
-+#include <linux/kernel.h>
-+#include <linux/init.h>
-+#include <linux/module.h>
-+#include <linux/of.h>
-+#include <linux/of_address.h>
-+#include <linux/of_platform.h>
-+#include <linux/of_reserved_mem.h>
-+#include <linux/platform_device.h>
-+#include <linux/slab.h>
-+
-+#include <linux/soc/intel/keembay-vpu-ipc.h>
-+
-+#include <linux/xlink-ipc.h>
-+
-+#define XLINK_IPC_MAX_DEVICE_NAME_SIZE	12
-+
-+/* used to extract fields from and create xlink sw device id */
-+#define SW_DEVICE_ID_INTERFACE_SHIFT	24U
-+#define SW_DEVICE_ID_INTERFACE_MASK	0x7
-+#define SW_DEVICE_ID_INTERFACE_SMASK \
-+		(SW_DEVICE_ID_INTERFACE_MASK << SW_DEVICE_ID_INTERFACE_SHIFT)
-+#define SW_DEVICE_ID_INTERFACE_IPC_VALUE 0x0
-+#define SW_DEVICE_ID_INTERFACE_IPC_SVALUE \
-+		(SW_DEVICE_ID_INTERFACE_IPC_VALUE << SW_DEVICE_ID_INTERFACE_SHIFT)
-+#define SW_DEVICE_ID_VPU_ID_SHIFT 1U
-+#define SW_DEVICE_ID_VPU_ID_MASK 0x7
-+#define SW_DEVICE_ID_VPU_ID_SMASK \
-+		(SW_DEVICE_ID_VPU_ID_MASK << SW_DEVICE_ID_VPU_ID_SHIFT)
-+#define GET_VPU_ID_FROM_SW_DEVICE_ID(id) \
-+		(((id) >> SW_DEVICE_ID_VPU_ID_SHIFT) & SW_DEVICE_ID_VPU_ID_MASK)
-+#define GET_SW_DEVICE_ID_FROM_VPU_ID(id) \
-+		((((id) << SW_DEVICE_ID_VPU_ID_SHIFT) & SW_DEVICE_ID_VPU_ID_SMASK) \
-+		| SW_DEVICE_ID_INTERFACE_IPC_SVALUE)
-+
-+/* the maximum buffer size for volatile xlink operations */
-+#define XLINK_MAX_BUF_SIZE 128U
-+
-+/* indices used to retrieve reserved memory from the dt */
-+#define LOCAL_XLINK_IPC_BUFFER_IDX	0
-+#define REMOTE_XLINK_IPC_BUFFER_IDX	1
-+
-+/* index used to retrieve the vpu ipc device phandle from the dt */
-+#define VPU_IPC_DEVICE_PHANDLE_IDX	1
-+
-+/* the timeout (in ms) used to wait for the vpu ready message */
-+#define XLINK_VPU_WAIT_FOR_READY_MS 3000
-+
-+/* xlink buffer memory region */
-+struct xlink_buf_mem {
-+	struct device *dev;	/* child device managing the memory region */
-+	void *vaddr;		/* the virtual address of the memory region */
-+	dma_addr_t dma_handle;	/* the physical address of the memory region */
-+	size_t size;		/* the size of the memory region */
-+};
-+
-+/* xlink buffer pool */
-+struct xlink_buf_pool {
-+	void *buf;		/* pointer to the start of pool area */
-+	size_t buf_cnt;		/* pool size (i.e., number of buffers) */
-+	size_t idx;		/* current index */
-+	spinlock_t lock;	/* the lock protecting this pool */
-+};
-+
-+/* xlink ipc device */
-+struct xlink_ipc_dev {
-+	struct platform_device *pdev;		/* pointer to platform device */
-+	u32 vpu_id;				/* The VPU ID defined in the device tree */
-+	u32 sw_device_id;			/* the sw device id */
-+	const char *device_name;		/* the vpu device name */
-+	struct xlink_buf_mem local_xlink_mem;	/* tx buffer memory region */
-+	struct xlink_buf_mem remote_xlink_mem;	/* rx buffer memory region */
-+	struct xlink_buf_pool xlink_buf_pool;	/* tx buffer pool */
-+	struct device *vpu_dev;			/* pointer to vpu ipc device */
-+	int (*callback)(u32 sw_device_id, u32 event);
-+};
-+
-+/* Events that can be notified via callback, when registered. */
-+enum xlink_vpu_event {
-+	XLINK_VPU_NOTIFY_DISCONNECT = 0,
-+	XLINK_VPU_NOTIFY_CONNECT,
-+	XLINK_VPU_NOTIFY_MSS_WDT,
-+	XLINK_VPU_NOTIFY_NCE_WDT,
-+	NUM_EVENT_TYPE
-+};
-+
-+#define VPU_ID 0
-+#define VPU_DEVICE_NAME "vpu-0"
-+#define VPU_SW_DEVICE_ID 0
-+static struct xlink_ipc_dev *xlink_dev;
-+
-+/*
-+ * Functions related to reserved-memory sub-devices.
-+ */
-+
-+/*
-+ * xlink_reserved_memory_remove() - Removes the reserved memory sub-devices.
-+ *
-+ * @xlink_dev: [in] The xlink ipc device with reserved memory sub-devices.
-+ */
-+static void xlink_reserved_memory_remove(struct xlink_ipc_dev *xlink_dev)
-+{
-+	device_unregister(xlink_dev->local_xlink_mem.dev);
-+	device_unregister(xlink_dev->remote_xlink_mem.dev);
-+}
-+
-+/*
-+ * xlink_reserved_mem_release() - Reserved memory release callback function.
-+ *
-+ * @dev: [in] The reserved memory sub-device.
-+ */
-+static void xlink_reserved_mem_release(struct device *dev)
-+{
-+	of_reserved_mem_device_release(dev);
-+}
-+
-+/*
-+ * get_xlink_reserved_mem_size() - Gets the size of the reserved memory region.
-+ *
-+ * @dev: [in] The device the reserved memory region is allocated to.
-+ * @idx: [in] The reserved memory region's index in the phandle table.
-+ *
-+ * Return: The reserved memory size, 0 on failure.
-+ */
-+static resource_size_t get_xlink_reserved_mem_size(struct device *dev, int idx)
-+{
-+	struct device_node *np;
-+	struct resource mem;
-+	int rc;
-+
-+	np = of_parse_phandle(dev->of_node, "memory-region", idx);
-+	if (!np) {
-+		dev_err(dev, "Couldn't find memory-region %d\n", idx);
-+		return 0;
+ #endif /* __AA_PROCATTR_H */
+diff --git a/security/apparmor/lsm.c b/security/apparmor/lsm.c
+index bfcb78149e9c..4af0518b55d6 100644
+--- a/security/apparmor/lsm.c
++++ b/security/apparmor/lsm.c
+@@ -593,6 +593,7 @@ static int apparmor_getprocattr(struct task_struct *task, char *name,
+ 	const struct cred *cred = get_task_cred(task);
+ 	struct aa_task_ctx *ctx = task_ctx(current);
+ 	struct aa_label *label = NULL;
++	bool newline = true;
+ 
+ 	if (strcmp(name, "current") == 0)
+ 		label = aa_get_newest_label(cred_label(cred));
+@@ -600,11 +601,14 @@ static int apparmor_getprocattr(struct task_struct *task, char *name,
+ 		label = aa_get_newest_label(ctx->previous);
+ 	else if (strcmp(name, "exec") == 0 && ctx->onexec)
+ 		label = aa_get_newest_label(ctx->onexec);
+-	else
++	else if (strcmp(name, "context") == 0) {
++		label = aa_get_newest_label(cred_label(cred));
++		newline = false;
++	} else
+ 		error = -EINVAL;
+ 
+ 	if (label)
+-		error = aa_getprocattr(label, value);
++		error = aa_getprocattr(label, value, newline);
+ 
+ 	aa_put_label(label);
+ 	put_cred(cred);
+diff --git a/security/apparmor/procattr.c b/security/apparmor/procattr.c
+index c929bf4a3df1..be3b083d9b74 100644
+--- a/security/apparmor/procattr.c
++++ b/security/apparmor/procattr.c
+@@ -20,6 +20,7 @@
+  * aa_getprocattr - Return the profile information for @profile
+  * @profile: the profile to print profile info about  (NOT NULL)
+  * @string: Returns - string containing the profile info (NOT NULL)
++ * @newline: Should a newline be added to @string.
+  *
+  * Returns: length of @string on success else error on failure
+  *
+@@ -30,20 +31,21 @@
+  *
+  * Returns: size of string placed in @string else error code on failure
+  */
+-int aa_getprocattr(struct aa_label *label, char **string)
++int aa_getprocattr(struct aa_label *label, char **string, bool newline)
+ {
+ 	struct aa_ns *ns = labels_ns(label);
+ 	struct aa_ns *current_ns = aa_get_current_ns();
++	int flags = FLAG_VIEW_SUBNS | FLAG_HIDDEN_UNCONFINED;
+ 	int len;
+ 
+ 	if (!aa_ns_visible(current_ns, ns, true)) {
+ 		aa_put_ns(current_ns);
+ 		return -EACCES;
+ 	}
++	if (newline)
++		flags |= FLAG_SHOW_MODE;
+ 
+-	len = aa_label_snxprint(NULL, 0, current_ns, label,
+-				FLAG_SHOW_MODE | FLAG_VIEW_SUBNS |
+-				FLAG_HIDDEN_UNCONFINED);
++	len = aa_label_snxprint(NULL, 0, current_ns, label, flags);
+ 	AA_BUG(len < 0);
+ 
+ 	*string = kmalloc(len + 2, GFP_KERNEL);
+@@ -52,19 +54,19 @@ int aa_getprocattr(struct aa_label *label, char **string)
+ 		return -ENOMEM;
+ 	}
+ 
+-	len = aa_label_snxprint(*string, len + 2, current_ns, label,
+-				FLAG_SHOW_MODE | FLAG_VIEW_SUBNS |
+-				FLAG_HIDDEN_UNCONFINED);
++	len = aa_label_snxprint(*string, len + 2, current_ns, label, flags);
+ 	if (len < 0) {
+ 		aa_put_ns(current_ns);
+ 		return len;
+ 	}
+ 
+-	(*string)[len] = '\n';
+-	(*string)[len + 1] = 0;
++	if (newline) {
++		(*string)[len] = '\n';
++		(*string)[++len] = 0;
 +	}
-+
-+	rc = of_address_to_resource(np, 0, &mem);
-+	if (rc) {
-+		dev_err(dev, "Couldn't map address to resource %d\n", idx);
-+		return 0;
-+	}
-+	return resource_size(&mem);
-+}
-+
-+/*
-+ * init_xlink_reserved_mem_dev() - Initializes the reserved memory sub-devices.
+ 
+ 	aa_put_ns(current_ns);
+-	return len + 1;
++	return len;
+ }
+ 
+ /**
+diff --git a/security/security.c b/security/security.c
+index 9bb1fe69d310..50cf7c58fbbf 100644
+--- a/security/security.c
++++ b/security/security.c
+@@ -776,6 +776,57 @@ static void __init lsm_early_task(struct task_struct *task)
+ 		panic("%s: Early task alloc failed.\n", __func__);
+ }
+ 
++/**
++ * append_ctx - append a lsm/context pair to a compound context
++ * @ctx: the existing compound context
++ * @ctxlen: size of the old context, including terminating nul byte
++ * @lsm: new lsm name, nul terminated
++ * @new: new context, possibly nul terminated
++ * @newlen: maximum size of @new
 + *
-+ * @dev:	[in] The parent device of the reserved memory sub-device.
-+ * @name:	[in] The name to assign to the memory region.
-+ * @idx:	[in] The reserved memory region index in the phandle table.
++ * replace @ctx with a new compound context, appending @newlsm and @new
++ * to @ctx. On exit the new data replaces the old, which is freed.
++ * @ctxlen is set to the new size, which includes a trailing nul byte.
 + *
-+ * Return: The initialized sub-device, NULL on failure.
++ * Returns 0 on success, -ENOMEM if no memory is available.
 + */
-+static struct device *init_xlink_reserved_mem_dev(struct device *dev,
-+						  const char *name, int idx)
++static int append_ctx(char **ctx, int *ctxlen, const char *lsm, char *new,
++		      int newlen)
 +{
-+	struct device *child;
-+	int rc;
-+
-+	child = devm_kzalloc(dev, sizeof(*child), GFP_KERNEL);
-+	if (!child)
-+		return NULL;
-+
-+	device_initialize(child);
-+	dev_set_name(child, "%s:%s", dev_name(dev), name);
-+	dev_err(dev, " dev_name %s, name %s\n", dev_name(dev), name);
-+	child->parent = dev;
-+	child->dma_mask = dev->dma_mask;
-+	child->coherent_dma_mask = dev->coherent_dma_mask;
-+	/* set up dma configuration using information from parent's dt node */
-+	rc = of_dma_configure(child, dev->of_node, true);
-+	if (rc)
-+		return NULL;
-+	child->release = xlink_reserved_mem_release;
-+
-+	rc = device_add(child);
-+	if (rc)
-+		goto err;
-+	rc = of_reserved_mem_device_init_by_idx(child, dev->of_node, idx);
-+	if (rc) {
-+		dev_err(dev, "Couldn't get reserved memory with idx = %d, %d\n",
-+			idx, rc);
-+		device_del(child);
-+		goto err;
-+	}
-+	return child;
-+
-+err:
-+	put_device(child);
-+	return NULL;
-+}
-+
-+/*
-+ * xlink_reserved_memory_init() - Initialize reserved memory for the device.
-+ *
-+ * @xlink_dev:	[in] The xlink ipc device the reserved memory is allocated to.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+static int xlink_reserved_memory_init(struct xlink_ipc_dev *xlink_dev)
-+{
-+	struct device *dev = &xlink_dev->pdev->dev;
-+	struct xlink_buf_mem *lxm = &xlink_dev->local_xlink_mem;
-+	struct xlink_buf_mem *rxm = &xlink_dev->remote_xlink_mem;
-+
-+	lxm->dev = init_xlink_reserved_mem_dev(dev, "xlink_local_reserved",
-+					       LOCAL_XLINK_IPC_BUFFER_IDX);
-+	if (!lxm->dev)
-+		return -ENOMEM;
-+
-+	lxm->size = get_xlink_reserved_mem_size(dev, LOCAL_XLINK_IPC_BUFFER_IDX);
-+
-+	rxm->dev = init_xlink_reserved_mem_dev(dev, "xlink_remote_reserved",
-+					       REMOTE_XLINK_IPC_BUFFER_IDX);
-+	if (!rxm->dev) {
-+		device_unregister(xlink_dev->local_xlink_mem.dev);
-+		return -ENOMEM;
-+	}
-+
-+	rxm->size = get_xlink_reserved_mem_size(dev, REMOTE_XLINK_IPC_BUFFER_IDX);
-+
-+	return 0;
-+}
-+
-+/*
-+ * xlink_reserved_memory_alloc() - Allocate reserved memory for the device.
-+ *
-+ * @xlink_dev:	[in] The xlink ipc device.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+static int xlink_reserved_memory_alloc(struct xlink_ipc_dev *xlink_dev)
-+{
-+	struct xlink_buf_mem *lxm = &xlink_dev->local_xlink_mem;
-+	struct xlink_buf_mem *rxm = &xlink_dev->remote_xlink_mem;
-+
-+	lxm->vaddr = dmam_alloc_coherent(xlink_dev->local_xlink_mem.dev,
-+					 xlink_dev->local_xlink_mem.size,
-+					 &xlink_dev->local_xlink_mem.dma_handle,
-+					 GFP_KERNEL);
-+	if (!lxm->vaddr) {
-+		dev_err(&xlink_dev->pdev->dev,
-+			"Failed to allocate from local reserved memory.\n");
-+		return -ENOMEM;
-+	}
-+	rxm->vaddr = dmam_alloc_coherent(xlink_dev->remote_xlink_mem.dev,
-+					 xlink_dev->remote_xlink_mem.size,
-+					 &xlink_dev->remote_xlink_mem.dma_handle,
-+					 GFP_KERNEL);
-+	if (!rxm->vaddr) {
-+		dev_err(&xlink_dev->pdev->dev,
-+			"Failed to allocate from remote reserved memory.\n");
-+		return -ENOMEM;
-+	}
-+
-+	return 0;
-+}
-+
-+/*
-+ * init_xlink_buf_pool() - Initialize the device's tx buffer pool.
-+ *
-+ * @xlink_dev:	[in] The xlink ipc device.
-+ *
-+ * Return: 0 on success.
-+ */
-+static int init_xlink_buf_pool(struct xlink_ipc_dev *xlink_dev)
-+{
-+	struct xlink_buf_mem *mem = &xlink_dev->local_xlink_mem;
-+	struct xlink_buf_pool *xbufpool = &xlink_dev->xlink_buf_pool;
-+
-+	memset(mem->vaddr, 0, mem->size);
-+	xbufpool->buf = mem->vaddr;
-+	xbufpool->buf_cnt = mem->size / XLINK_MAX_BUF_SIZE;
-+	xbufpool->idx = 0;
-+	dev_info(&xlink_dev->pdev->dev, "xlink Buffer Pool size: %zX\n",
-+		 xbufpool->buf_cnt);
-+	spin_lock_init(&xbufpool->lock);
-+
-+	return 0;
-+}
-+
-+/*
-+ * xlink_phys_to_virt() - Convert an xlink physical addresses to a virtual one.
-+ *
-+ * @xlink_mem:	[in] The memory region where the physical address is located.
-+ * @paddr:		[in] The physical address to convert to a virtual one.
-+ *
-+ * Return:		The corresponding virtual address, or NULL if the
-+ *				physical address is not in the expected memory
-+ *				range.
-+ */
-+static void *xlink_phys_to_virt(const struct xlink_buf_mem *xlink_mem,
-+				u32 paddr)
-+{
-+	if (unlikely(paddr < xlink_mem->dma_handle) ||
-+	    paddr >= (xlink_mem->dma_handle + xlink_mem->size))
-+		return NULL;
-+
-+	return xlink_mem->vaddr + (paddr - xlink_mem->dma_handle);
-+}
-+
-+/*
-+ * xlink_virt_to_phys() - Convert an xlink virtual addresses to a physical one.
-+ *
-+ * @xlink_mem:	[in]  The memory region where the physical address is located.
-+ * @vaddr:		[in]  The virtual address to convert to a physical one.
-+ * @paddr:		[out] Where to store the computed physical address.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+static int xlink_virt_to_phys(struct xlink_buf_mem *xlink_mem, void *vaddr,
-+			      u32 *paddr)
-+{
-+	if (unlikely((xlink_mem->dma_handle + xlink_mem->size) > 0xFFFFFFFF))
-+		return -EINVAL;
-+	if (unlikely(vaddr < xlink_mem->vaddr ||
-+		     vaddr >= (xlink_mem->vaddr + xlink_mem->size)))
-+		return -EINVAL;
-+	*paddr = xlink_mem->dma_handle + (vaddr - xlink_mem->vaddr);
-+
-+	return 0;
-+}
-+
-+/*
-+ * get_next_xlink_buf() - Get next xlink buffer from an xlink device's pool.
-+ *
-+ * @xlink_dev:	[in]  The xlink ipc device to get a buffer from.
-+ * @buf:		[out] Where to store the reference to the next buffer.
-+ * @size:		[in]  The size of the buffer to get.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+static int get_next_xlink_buf(struct xlink_ipc_dev *xlink_dev, void **buf,
-+			      int size)
-+{
-+	struct xlink_buf_pool *pool;
-+	unsigned long flags;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	if (size > XLINK_MAX_BUF_SIZE)
-+		return -EINVAL;
-+
-+	pool = &xlink_dev->xlink_buf_pool;
-+
-+	spin_lock_irqsave(&pool->lock, flags);
-+	if (pool->idx == pool->buf_cnt) {
-+		/* reached end of buffers - wrap around */
-+		pool->idx = 0;
-+	}
-+	*buf = pool->buf + (pool->idx * XLINK_MAX_BUF_SIZE);
-+	pool->idx++;
-+	spin_unlock_irqrestore(&pool->lock, flags);
-+	return 0;
-+}
-+
-+/*
-+ * Functions related to the vpu ipc device reference.
-+ */
-+
-+/*
-+ * vpu_ipc_device_put() - Release the vpu ipc device held by the xlink device.
-+ *
-+ * @xlink_dev:	[in] The xlink ipc device.
-+ */
-+static void vpu_ipc_device_put(struct xlink_ipc_dev *xlink_dev)
-+{
-+	put_device(xlink_dev->vpu_dev);
-+}
-+
-+/*
-+ * vpu_ipc_device_get() - Get the vpu ipc device reference for the xlink device.
-+ *
-+ * @xlink_dev:	[in] The xlink ipc device.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+static int vpu_ipc_device_get(struct xlink_ipc_dev *xlink_dev)
-+{
-+	struct device *dev = &xlink_dev->pdev->dev;
-+	struct platform_device *pdev;
-+	struct device_node *np;
-+
-+	np = of_parse_phandle(dev->of_node, "intel,keembay-vpu-ipc", 0);
-+	if (!np)
-+		return -ENODEV;
-+
-+	pdev = of_find_device_by_node(np);
-+	if (!pdev) {
-+		dev_info(dev, "IPC device not probed\n");
-+		of_node_put(np);
-+		return -EPROBE_DEFER;
-+	}
-+
-+	xlink_dev->vpu_dev = get_device(&pdev->dev);
-+	of_node_put(np);
-+
-+	dev_info(dev, "Using IPC device: %s\n", dev_name(xlink_dev->vpu_dev));
-+	return 0;
-+}
-+
-+/*
-+ * xlink platform api - ipc interface functions
-+ */
-+
-+/*
-+ * xlink_ipc_connect() - platform connect interface.
-+ *
-+ * @sw_device_id:	[in]  The sw device id of the device to connect to.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_connect(u32 sw_device_id)
-+{
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_connect);
-+
-+/*
-+ * xlink_ipc_write() - platform write interface.
-+ *
-+ * @sw_device_id:	[in]     The sw device id of the device to write to.
-+ * @data:			[in]     The data buffer to write.
-+ * @size:			[in-out] The amount of data to write/written.
-+ * @timeout:		[in]     The time (in ms) to wait before timing out.
-+ * @context:		[in]     The ipc operation context.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_write(u32 sw_device_id, void *data, size_t * const size,
-+		    u32 timeout, void *context)
-+{
-+	struct xlink_ipc_context *ctx = context;
-+	void *vaddr = NULL;
-+	u32 paddr;
-+	int rc;
-+
-+	if (!ctx)
-+		return -EINVAL;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	if (ctx->is_volatile) {
-+		rc = get_next_xlink_buf(xlink_dev, &vaddr, XLINK_MAX_BUF_SIZE);
-+		if (rc)
-+			return rc;
-+		memcpy(vaddr, data, *size);
-+		rc = xlink_virt_to_phys(&xlink_dev->local_xlink_mem, vaddr,
-+					&paddr);
-+		if (rc)
-+			return rc;
-+	} else {
-+		paddr = *(u32 *)data;
-+	}
-+	rc = intel_keembay_vpu_ipc_send(xlink_dev->vpu_dev,
-+					KMB_VPU_IPC_NODE_LEON_MSS, ctx->chan,
-+					paddr, *size);
-+
-+	return rc;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_write);
-+
-+/*
-+ * xlink_ipc_read() - platform read interface.
-+ *
-+ * @sw_device_id:	[in]     The sw device id of the device to read from.
-+ * @data:			[out]    The data buffer to read into.
-+ * @size:			[in-out] The amount of data to read/was read.
-+ * @timeout:		[in]     The time (in ms) to wait before timing out.
-+ * @context:		[in]     The ipc operation context.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_read(u32 sw_device_id, void *data, size_t * const size,
-+		   u32 timeout, void *context)
-+{
-+	struct xlink_ipc_context *ctx = context;
-+	u32 addr = 0;
-+	void *vaddr;
-+	int rc;
-+
-+	if (!ctx)
-+		return -EINVAL;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	rc = intel_keembay_vpu_ipc_recv(xlink_dev->vpu_dev,
-+					KMB_VPU_IPC_NODE_LEON_MSS, ctx->chan,
-+					&addr, size, timeout);
-+
-+	if (ctx->is_volatile) {
-+		vaddr = xlink_phys_to_virt(&xlink_dev->remote_xlink_mem, addr);
-+		if (vaddr)
-+			memcpy(data, vaddr, *size);
-+		else
-+			return -ENXIO;
-+	} else {
-+		*(u32 *)data = addr;
-+	}
-+	return rc;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_read);
-+
-+/*
-+ * xlink_ipc_get_device_list() - platform get device list interface.
-+ *
-+ * @sw_device_id_list:	[out]  The list of devices found.
-+ * @num_devices:		[out]  The number of devices found.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_get_device_list(u32 *sw_device_id_list, u32 *num_devices)
-+{
-+	int i = 0;
-+
-+	if (!sw_device_id_list || !num_devices)
-+		return -EINVAL;
-+
-+	if (xlink_dev) {
-+		*sw_device_id_list = xlink_dev->sw_device_id;
-+		i++;
-+	}
-+
-+	*num_devices = i;
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_get_device_list);
-+
-+/*
-+ * xlink_ipc_get_device_name() - platform get device name interface.
-+ *
-+ * @sw_device_id:	[in]  The sw device id of the device to get name of.
-+ * @device_name:	[out] The name of the xlink ipc device.
-+ * @name_size:		[in]  The maximum size of the name.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_get_device_name(u32 sw_device_id, char *device_name,
-+			      size_t name_size)
-+{
-+	size_t size;
-+
-+	if (!device_name)
-+		return -EINVAL;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	size = (name_size > XLINK_IPC_MAX_DEVICE_NAME_SIZE)
-+			? XLINK_IPC_MAX_DEVICE_NAME_SIZE
-+			: name_size;
-+	strncpy(device_name, xlink_dev->device_name, size);
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_get_device_name);
-+
-+/*
-+ * xlink_ipc_get_device_status() - platform get device status interface.
-+ *
-+ * @sw_device_id:	[in]  The sw device id of the device to get status of.
-+ * @device_status:	[out] The device status.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_get_device_status(u32 sw_device_id, u32 *device_status)
-+{
-+	if (!device_status)
-+		return -EINVAL;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	*device_status = intel_keembay_vpu_status(xlink_dev->vpu_dev);
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_get_device_status);
-+
-+static void kernel_callback(struct device *dev, enum intel_keembay_vpu_event event)
-+{
-+	if ((enum xlink_vpu_event)event >= NUM_EVENT_TYPE)
-+		return;
-+
-+	if (xlink_dev) {
-+		if (xlink_dev->callback)
-+			xlink_dev->callback(xlink_dev->sw_device_id, event);
-+	}
-+}
-+
-+/*
-+ * xlink_ipc_register_for_events() - platform register for events
-+ *
-+ * @sw_device_id:	[in]	The sw device id of the device to get status of.
-+ * @callback:		[in]	Callback function for events
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_register_for_events(u32 sw_device_id,
-+				  int (*callback)(u32 sw_device_id, enum xlink_vpu_event event))
-+{
-+	int rc;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+	xlink_dev->callback = callback;
-+	rc = intel_keembay_vpu_register_for_events(xlink_dev->vpu_dev, kernel_callback);
-+	return rc;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_register_for_events);
-+/*
-+ * xlink_ipc_unregister_for_events() - platform register for events
-+ *
-+ * @sw_device_id:	[in]	The sw device id of the device to get status of.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_unregister_for_events(u32 sw_device_id)
-+{
-+	int rc;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+	rc = intel_keembay_vpu_unregister_for_events(xlink_dev->vpu_dev);
-+	return rc;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_unregister_for_events);
-+
-+/*
-+ * xlink_ipc_boot_device() - platform boot device interface.
-+ *
-+ * @sw_device_id:	[in] The sw device id of the device to boot.
-+ * @binary_name:	[in] The file name of the firmware binary to boot.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_boot_device(u32 sw_device_id, const char *binary_name)
-+{
-+	enum intel_keembay_vpu_state state;
-+	int rc;
-+
-+	if (!binary_name)
-+		return -EINVAL;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	pr_info("\nStart VPU 0x%x - %s\n", sw_device_id, binary_name);
-+	rc = intel_keembay_vpu_startup(xlink_dev->vpu_dev, binary_name);
-+	if (rc) {
-+		pr_err("Failed to start VPU: %d\n", rc);
-+		return -EBUSY;
-+	}
-+	pr_info("Successfully started VPU!\n");
-+
-+	/* Wait for VPU to be READY */
-+	rc = intel_keembay_vpu_wait_for_ready(xlink_dev->vpu_dev,
-+					      XLINK_VPU_WAIT_FOR_READY_MS);
-+	if (rc) {
-+		pr_err("Tried to start VPU but never got READY.\n");
-+		return -EBUSY;
-+	}
-+	pr_info("Successfully synchronised state with VPU!\n");
-+
-+	/* Check state */
-+	state = intel_keembay_vpu_status(xlink_dev->vpu_dev);
-+	if (state != KEEMBAY_VPU_READY) {
-+		pr_err("VPU was not ready, it was %d\n", state);
-+		return -EBUSY;
-+	}
-+	pr_info("VPU was ready.\n");
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_boot_device);
-+
-+/*
-+ * xlink_ipc_reset_device() - platform reset device interface.
-+ *
-+ * @sw_device_id:	[in] The sw device id of the device to reset.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_reset_device(u32 sw_device_id)
-+{
-+	enum intel_keembay_vpu_state state;
-+	int rc;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	/* stop the vpu */
-+	rc = intel_keembay_vpu_stop(xlink_dev->vpu_dev);
-+	if (rc) {
-+		pr_err("Failed to stop VPU: %d\n", rc);
-+		return -EBUSY;
-+	}
-+	pr_info("Successfully stopped VPU!\n");
-+
-+	/* check state */
-+	state = intel_keembay_vpu_status(xlink_dev->vpu_dev);
-+	if (state != KEEMBAY_VPU_OFF) {
-+		pr_err("VPU was not OFF after stop request, it was %d\n",
-+		       state);
-+		return -EBUSY;
-+	}
-+	return 0;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_reset_device);
-+
-+/*
-+ * xlink_ipc_open_channel() - platform open channel interface.
-+ *
-+ * @sw_device_id:	[in] The sw device id of the device to open channel to.
-+ * @channel:		[in] The channel id to open.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_open_channel(u32 sw_device_id, u32 channel)
-+{
-+	int rc;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	rc = intel_keembay_vpu_ipc_open_channel(xlink_dev->vpu_dev,
-+						KMB_VPU_IPC_NODE_LEON_MSS, channel);
-+	return rc;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_open_channel);
-+
-+/*
-+ * xlink_ipc_close_channel() - platform close channel interface.
-+ *
-+ * @sw_device_id:	[in] The sw device id of the device to close channel to.
-+ * @channel:		[in] The channel id to close.
-+ *
-+ * Return: 0 on success, negative error code otherwise.
-+ */
-+int xlink_ipc_close_channel(u32 sw_device_id, u32 channel)
-+{
-+	int rc;
-+
-+	if (!xlink_dev)
-+		return -ENODEV;
-+
-+	rc = intel_keembay_vpu_ipc_close_channel(xlink_dev->vpu_dev,
-+						 KMB_VPU_IPC_NODE_LEON_MSS, channel);
-+	return rc;
-+}
-+EXPORT_SYMBOL_GPL(xlink_ipc_close_channel);
-+
-+/*
-+ * xlink ipc driver functions
-+ */
-+
-+static int keembay_xlink_ipc_probe(struct platform_device *pdev)
-+{
-+	struct device *dev = &pdev->dev;
-+	int rc;
-+
-+	/* allocate device data structure */
-+	xlink_dev = kzalloc(sizeof(*xlink_dev), GFP_KERNEL);
-+	if (!xlink_dev)
-+		return -ENOMEM;
-+
-+	xlink_dev->pdev = pdev;
-+	dev_info(dev, "Keem Bay xlink IPC driver probed.\n");
-+
-+	/* grab reserved memory regions and assign to child devices */
-+	rc = xlink_reserved_memory_init(xlink_dev);
-+	if (rc < 0) {
-+		dev_err(&pdev->dev,
-+			"Failed to set up reserved memory regions.\n");
-+		goto r_cleanup;
-+	}
-+
-+	/* allocate memory from the reserved memory regions */
-+	rc = xlink_reserved_memory_alloc(xlink_dev);
-+	if (rc < 0) {
-+		dev_err(&pdev->dev,
-+			"Failed to allocate reserved memory regions.\n");
-+		goto r_cleanup;
-+	}
-+
-+	/* init the xlink buffer pool used for rx/tx */
-+	init_xlink_buf_pool(xlink_dev);
-+
-+	/* get reference to vpu ipc device */
-+	rc = vpu_ipc_device_get(xlink_dev);
-+	if (rc)
-+		goto r_cleanup;
-+
-+	/* get device id */
-+	rc = of_property_read_u32(dev->of_node, "intel,keembay-vpu-ipc-id",
-+				  &xlink_dev->vpu_id);
-+	if (rc) {
-+		dev_err(dev, "Cannot get VPU ID from DT.\n");
-+		goto r_cleanup;
-+	}
-+
-+	/* assign a sw device id */
-+	xlink_dev->sw_device_id = GET_SW_DEVICE_ID_FROM_VPU_ID
-+			(xlink_dev->vpu_id);
-+
-+	/* assign a device name */
-+	rc = of_property_read_string(dev->of_node, "intel,keembay-vpu-ipc-name",
-+				     &xlink_dev->device_name);
-+	if (rc) {
-+		/* only warn for now; we will enforce this in the future */
-+		dev_warn(dev, "VPU name not defined in DT, using %s as default.\n",
-+			 VPU_DEVICE_NAME);
-+		dev_warn(dev, "WARNING: additional VPU devices may fail probing.\n");
-+		xlink_dev->device_name = VPU_DEVICE_NAME;
-+	}
-+
-+	/* get platform data reference */
-+	platform_set_drvdata(pdev, xlink_dev);
-+
-+	dev_info(dev, "Device id=%u sw_device_id=0x%x name=%s probe complete.\n",
-+		 xlink_dev->vpu_id, xlink_dev->sw_device_id,
-+			xlink_dev->device_name);
-+	return 0;
-+
-+r_cleanup:
-+	xlink_reserved_memory_remove(xlink_dev);
-+	return rc;
-+}
-+
-+static int keembay_xlink_ipc_remove(struct platform_device *pdev)
-+{
-+	struct xlink_ipc_dev *xlink_dev = platform_get_drvdata(pdev);
-+	struct device *dev = &pdev->dev;
-+
++	char *final;
++	size_t llen;
++	size_t nlen;
++	size_t flen;
++
++	llen = strlen(lsm) + 1;
 +	/*
-+	 * no need to de-alloc xlink mem (local_xlink_mem and remote_xlink_mem)
-+	 * since it was allocated with dmam_alloc
++	 * A security module may or may not provide a trailing nul on
++	 * when returning a security context. There is no definition
++	 * of which it should be, and there are modules that do it
++	 * each way.
 +	 */
-+	xlink_reserved_memory_remove(xlink_dev);
++	nlen = strnlen(new, newlen);
 +
-+	/* release vpu ipc device */
-+	vpu_ipc_device_put(xlink_dev);
++	flen = *ctxlen + llen + nlen + 1;
++	final = kzalloc(flen, GFP_KERNEL);
 +
-+	dev_info(dev, "Keem Bay xlink IPC driver removed.\n");
++	if (final == NULL)
++		return -ENOMEM;
++
++	if (*ctxlen)
++		memcpy(final, *ctx, *ctxlen);
++
++	memcpy(final + *ctxlen, lsm, llen);
++	memcpy(final + *ctxlen + llen, new, nlen);
++
++	kfree(*ctx);
++
++	*ctx = final;
++	*ctxlen = flen;
++
 +	return 0;
 +}
 +
-+static const struct of_device_id keembay_xlink_ipc_of_match[] = {
-+	{
-+		.compatible = "intel,keembay-xlink-ipc",
-+	},
-+	{}
-+};
+ /*
+  * The default value of the LSM hook is defined in linux/lsm_hook_defs.h and
+  * can be accessed with:
+@@ -2161,6 +2212,10 @@ int security_getprocattr(struct task_struct *p, const char *lsm, char *name,
+ 				char **value)
+ {
+ 	struct security_hook_list *hp;
++	char *final = NULL;
++	char *cp;
++	int rc = 0;
++	int finallen = 0;
+ 	int ilsm = lsm_task_ilsm(current);
+ 	int slot = 0;
+ 
+@@ -2188,6 +2243,30 @@ int security_getprocattr(struct task_struct *p, const char *lsm, char *name,
+ 		return -ENOMEM;
+ 	}
+ 
++	if (!strcmp(name, "context")) {
++		hlist_for_each_entry(hp, &security_hook_heads.getprocattr,
++				     list) {
++			rc = hp->hook.getprocattr(p, "context", &cp);
++			if (rc == -EINVAL)
++				continue;
++			if (rc < 0) {
++				kfree(final);
++				return rc;
++			}
++			rc = append_ctx(&final, &finallen, hp->lsmid->lsm,
++					cp, rc);
++			kfree(cp);
++			if (rc < 0) {
++				kfree(final);
++				return rc;
++			}
++		}
++		if (final == NULL)
++			return -EINVAL;
++		*value = final;
++		return finallen;
++	}
 +
-+static struct platform_driver keembay_xlink_ipc_driver = {
-+	.driver = {
-+			.name = "keembay-xlink-ipc",
-+			.of_match_table = keembay_xlink_ipc_of_match,
-+		},
-+	.probe = keembay_xlink_ipc_probe,
-+	.remove = keembay_xlink_ipc_remove,
-+};
-+module_platform_driver(keembay_xlink_ipc_driver);
-+
-+MODULE_DESCRIPTION("Keem Bay xlink IPC Driver");
-+MODULE_AUTHOR("Ryan Carnaghi <ryan.r.carnaghi@intel.com>");
-+MODULE_LICENSE("GPL v2");
-diff --git a/include/linux/xlink-ipc.h b/include/linux/xlink-ipc.h
-new file mode 100644
-index 000000000000..f26b53bf6506
---- /dev/null
-+++ b/include/linux/xlink-ipc.h
-@@ -0,0 +1,48 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+/*****************************************************************************
-+ *
-+ * Intel Keem Bay xlink IPC Driver
-+ *
-+ * Copyright (C) 2020 Intel Corporation
-+ *
-+ ****************************************************************************/
-+
-+#ifndef _XLINK_IPC_H_
-+#define _XLINK_IPC_H_
-+
-+#include <linux/types.h>
-+
-+struct xlink_ipc_context {
-+	u16 chan;
-+	u8 is_volatile;
-+};
-+
-+int xlink_ipc_connect(u32 sw_device_id);
-+
-+int xlink_ipc_write(u32 sw_device_id, void *data, size_t * const size,
-+		    u32 timeout, void *context);
-+
-+int xlink_ipc_read(u32 sw_device_id, void *data, size_t * const size,
-+		   u32 timeout, void *context);
-+
-+int xlink_ipc_get_device_list(u32 *sw_device_id_list, u32 *num_devices);
-+
-+int xlink_ipc_get_device_name(u32 sw_device_id, char *device_name,
-+			      size_t name_size);
-+
-+int xlink_ipc_get_device_status(u32 sw_device_id, u32 *device_status);
-+
-+int xlink_ipc_boot_device(u32 sw_device_id, const char *binary_name);
-+
-+int xlink_ipc_reset_device(u32 sw_device_id);
-+
-+int xlink_ipc_open_channel(u32 sw_device_id, u32 channel);
-+
-+int xlink_ipc_close_channel(u32 sw_device_id, u32 channel);
-+
-+int xlink_ipc_register_for_events(u32 sw_device_id,
-+				  int (*callback)(u32 sw_device_id, u32 event));
-+
-+int xlink_ipc_unregister_for_events(u32 sw_device_id);
-+
-+#endif /* _XLINK_IPC_H_ */
+ 	hlist_for_each_entry(hp, &security_hook_heads.getprocattr, list) {
+ 		if (lsm != NULL && strcmp(lsm, hp->lsmid->lsm))
+ 			continue;
+diff --git a/security/selinux/hooks.c b/security/selinux/hooks.c
+index 60e35d31cc4c..05a98dcf377c 100644
+--- a/security/selinux/hooks.c
++++ b/security/selinux/hooks.c
+@@ -6300,7 +6300,7 @@ static int selinux_getprocattr(struct task_struct *p,
+ 			goto bad;
+ 	}
+ 
+-	if (!strcmp(name, "current"))
++	if (!strcmp(name, "current") || !strcmp(name, "context"))
+ 		sid = __tsec->sid;
+ 	else if (!strcmp(name, "prev"))
+ 		sid = __tsec->osid;
+diff --git a/security/smack/smack_lsm.c b/security/smack/smack_lsm.c
+index 03a1c40174d7..363c2cb76936 100644
+--- a/security/smack/smack_lsm.c
++++ b/security/smack/smack_lsm.c
+@@ -3478,7 +3478,7 @@ static int smack_getprocattr(struct task_struct *p, char *name, char **value)
+ 	char *cp;
+ 	int slen;
+ 
+-	if (strcmp(name, "current") != 0)
++	if (strcmp(name, "current") != 0 && strcmp(name, "context") != 0)
+ 		return -EINVAL;
+ 
+ 	cp = kstrdup(skp->smk_known, GFP_KERNEL);
 -- 
-2.17.1
+2.25.4
 
