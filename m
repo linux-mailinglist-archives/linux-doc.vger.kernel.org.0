@@ -2,111 +2,125 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8C8CE3044CC
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 18:18:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id CF2953044D3
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 18:18:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389367AbhAZROe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 12:14:34 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41322 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2389574AbhAZHkG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jan 2021 02:40:06 -0500
-Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com [IPv6:2607:f8b0:4864:20::42c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 982BAC061794;
-        Mon, 25 Jan 2021 23:25:40 -0800 (PST)
-Received: by mail-pf1-x42c.google.com with SMTP id w18so9969184pfu.9;
-        Mon, 25 Jan 2021 23:25:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=b5PII+l880JvLAxkfhvX3LNvZP6BvslBW+k7OQ9sST0=;
-        b=je4p1rgUJWpMa/gR5V8yIpGwf5oBZT7F04Q/MMs8+GPumfbOUQN6D7b/BoaVGlw0vM
-         IySs7mV7DvnYqoxls9D0V+OM1YjUR1K/ycIoJGiRO+x8niBLqTqxlhajqdv9yxYdrz+b
-         zY9GaT910cBKPMwUcT0dZFiefnRvp8V2QUgIQ1Q2Pic6Uk9+bUuiSquFPT8cILgdpzy9
-         6TM3HxlB7671Bt9bI/H9a3easEl6EGztlC6p88+QIRKVB2g7kFlanoIFsjxuzjlbOqZS
-         bPjnhYdS4o9nyh6o3uHchlQlUSHjQTVSKkaT2kNr9fkXDkJboiPvNJLC1CGt9MMHmuBH
-         qcRQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=b5PII+l880JvLAxkfhvX3LNvZP6BvslBW+k7OQ9sST0=;
-        b=cS1cfdyvlhiSY/WajfK4B0fKQ29ar7wM/0/6JF+4jNqlb4tFs11fVWBbrTzXjLhEw8
-         V0cPo8AoVGksq74xABMgNCQW8qu6LtR1Rrl28amv2mA3tk/wPSXjTZm7GGRj4VrfiMbr
-         5vDuDD/9ZRSxdub/Qzx1EUBZkgjFZiZL213s+PnCtViCSit74UHf9SvTASXBmY+zjYq5
-         cNsm2VydvpjKkVKQp1p/MKZ+X4WWX8RYKXViRiwbwKCASHBaxmYv97NVD2E1VcKvoo9b
-         ior/BjUx7iYDpkYm3DD3BZHFpGnVaJzCtqfjqLwpwSxSiZLH/bnAh4WAuZT5fQO6y342
-         YRBg==
-X-Gm-Message-State: AOAM5302pm8ZBkCA8BUdfjowTVs2QBDdw0294o5JmSS20uqqZgSE51wd
-        t2K4CRol8zkvd0+v2OIQWpQ=
-X-Google-Smtp-Source: ABdhPJyNTDLzw55L1eyjlYdCYAAcT9e9t6gJvUSDlB5zTNc2b+7cygnQ6TfCrROKaMfqJ2x/Z5Lz5g==
-X-Received: by 2002:a62:a11c:0:b029:1ba:bab6:6b02 with SMTP id b28-20020a62a11c0000b02901babab66b02mr4218858pff.51.1611645939743;
-        Mon, 25 Jan 2021 23:25:39 -0800 (PST)
-Received: from cl-arch-kdev.. (cl-arch-kdev.xen.prgmr.com. [2605:2700:0:2:a800:ff:fed6:fc0d])
-        by smtp.gmail.com with ESMTPSA id l12sm1320256pjg.54.2021.01.25.23.25.38
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Jan 2021 23:25:39 -0800 (PST)
-From:   Fox Chen <foxhlchen@gmail.com>
-To:     corbet@lwn.net, vegard.nossum@oracle.com, viro@zeniv.linux.org.uk,
-        rdunlap@infradead.org, grandmaster@al2klimov.de
-Cc:     Fox Chen <foxhlchen@gmail.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 11/12] docs: path-lookup: update get_link() ->follow_link description
-Date:   Tue, 26 Jan 2021 15:24:42 +0800
-Message-Id: <20210126072443.33066-12-foxhlchen@gmail.com>
-X-Mailer: git-send-email 2.30.0
-In-Reply-To: <20210126072443.33066-1-foxhlchen@gmail.com>
-References: <20210126072443.33066-1-foxhlchen@gmail.com>
+        id S2389531AbhAZRPA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 12:15:00 -0500
+Received: from mx2.suse.de ([195.135.220.15]:58664 "EHLO mx2.suse.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2387605AbhAZHtG (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 26 Jan 2021 02:49:06 -0500
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id CF3AEAD4E;
+        Tue, 26 Jan 2021 07:48:24 +0000 (UTC)
+Date:   Tue, 26 Jan 2021 08:48:20 +0100
+From:   Oscar Salvador <osalvador@suse.de>
+To:     Mike Kravetz <mike.kravetz@oracle.com>
+Cc:     Muchun Song <songmuchun@bytedance.com>,
+        David Hildenbrand <david@redhat.com>,
+        David Rientjes <rientjes@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
+        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
+        dave.hansen@linux.intel.com, luto@kernel.org,
+        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
+        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
+        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
+        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
+        anshuman.khandual@arm.com, jroedel@suse.de,
+        Mina Almasry <almasrymina@google.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Michal Hocko <mhocko@suse.com>,
+        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
+        HORIGUCHI =?utf-8?B?TkFPWUEo5aCA5Y+jIOebtOS5nyk=?= 
+        <naoya.horiguchi@nec.com>,
+        Xiongchun duan <duanxiongchun@bytedance.com>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>
+Subject: Re: [External] Re: [PATCH v13 05/12] mm: hugetlb: allocate the
+ vmemmap pages associated with each HugeTLB page
+Message-ID: <20210126074815.GA8809@linux>
+References: <20210117151053.24600-1-songmuchun@bytedance.com>
+ <20210117151053.24600-6-songmuchun@bytedance.com>
+ <6a68fde-583d-b8bb-a2c8-fbe32e03b@google.com>
+ <CAMZfGtXpg30RhrPm836S6Tr09ynKRPG=_DXtXt9sVTTponnC-g@mail.gmail.com>
+ <CAMZfGtX19x8m+Bkvj+8Ue31m5L_4DmgtZevp2fd++JL7nuSzWw@mail.gmail.com>
+ <552e8214-bc6f-8d90-0ed8-b3aff75d0e47@redhat.com>
+ <CAMZfGtWK=zBri_zAx=uP_dLv2Kh-2_vfjAyN7XtESwqukg5Eug@mail.gmail.com>
+ <b8ef43c1-e4b5-eae2-0cdf-1ce25accc36f@oracle.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <b8ef43c1-e4b5-eae2-0cdf-1ce25accc36f@oracle.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-get_link() is merged into pick_link(). i_op->follow_link is
-replaced with i_op->get_link(). get_link() can return ERR_PTR(0)
-which equals NULL.
+On Mon, Jan 25, 2021 at 03:25:35PM -0800, Mike Kravetz wrote:
+> IIUC, even non-gigantic hugetlb pages can exist in CMA.  They can be migrated
+> out of CMA if needed (except free pages in the pool, but that is a separate
+> issue David H already noted in another thread).
 
-Signed-off-by: Fox Chen <foxhlchen@gmail.com>
----
- Documentation/filesystems/path-lookup.rst | 13 ++++++-------
- 1 file changed, 6 insertions(+), 7 deletions(-)
+Yeah, as discussed I am taking a look at that.
+ 
+> When we first started discussing this patch set, one suggestion was to force
+> hugetlb pool pages to be allocated at boot time and never permit them to be
+> freed back to the buddy allocator.  A primary reason for the suggestion was
+> to avoid this issue of needing to allocate memory when freeing a hugetlb page
+> to buddy.  IMO, that would be an unreasonable restriction for many existing
+> hugetlb use cases.
 
-diff --git a/Documentation/filesystems/path-lookup.rst b/Documentation/filesystems/path-lookup.rst
-index 921779a4636f..2bb3ca486acd 100644
---- a/Documentation/filesystems/path-lookup.rst
-+++ b/Documentation/filesystems/path-lookup.rst
-@@ -1137,10 +1137,10 @@ Symlinks with no final component
- 
- A pair of special-case symlinks deserve a little further explanation.
- Both result in a new ``struct path`` (with mount and dentry) being set
--up in the ``nameidata``, and result in ``get_link()`` returning ``NULL``.
-+up in the ``nameidata``, and result in ``pick_link()`` returning ``NULL``.
- 
- The more obvious case is a symlink to "``/``".  All symlinks starting
--with "``/``" are detected in ``get_link()`` which resets the ``nameidata``
-+with "``/``" are detected in ``pick_link()`` which resets the ``nameidata``
- to point to the effective filesystem root.  If the symlink only
- contains "``/``" then there is nothing more to do, no components at all,
- so ``NULL`` is returned to indicate that the symlink can be released and
-@@ -1157,12 +1157,11 @@ something that looks like a symlink.  It is really a reference to the
- target file, not just the name of it.  When you ``readlink`` these
- objects you get a name that might refer to the same file - unless it
- has been unlinked or mounted over.  When ``walk_component()`` follows
--one of these, the ``->follow_link()`` method in "procfs" doesn't return
-+one of these, the ``->get_link()`` method in "procfs" doesn't return
- a string name, but instead calls ``nd_jump_link()`` which updates the
--``nameidata`` in place to point to that target.  ``->follow_link()`` then
--returns ``NULL``.  Again there is no final component and ``get_link()``
--reports this by leaving the ``last_type`` field of ``nameidata`` as
--``LAST_BIND``.
-+``nameidata`` in place to point to that target.  ``->get_link()`` then
-+returns ``0``.  Again there is no final component and ``pick_link()``
-+returns NULL.
- 
- Following the symlink in the final component
- --------------------------------------------
+AFAIK it was suggested as a way to simplify things in the first go of this
+patchset.
+Please note that the first versions of this patchset was dealing with PMD
+mapped vmemmap pages and overall it was quite convulated for a first
+version.
+Since then, things had simplified quite a lot (e.g: we went from 22 patches to 12),
+so I do not feel the need to force the pages to be allocated at boot time.
+
+> A simple thought is that we simply fail the 'freeing hugetlb page to buddy'
+> if we can not allocate the required vmemmap pages.  However, as David R says
+> freeing hugetlb pages to buddy is a reasonable way to free up memory in oom
+> situations.  However, failing the operation 'might' be better than looping
+> forever trying to allocate the pages needed?  As mentioned in the previous
+> patch, it would be better to use GFP_ATOMIC to at least dip into reserves if
+> we can.
+
+I also agree that GFP_ATOMIC might make some sense.
+If the system is under memory pressure, I think it is best if we go the extra
+mile in order to free up to 4096 pages or 512 pages.
+Otherwise we might have a nice hugetlb page we might not need and a lack of
+memory.
+
+> I think using pages of the hugetlb for vmemmap to cover pages of the hugetlb
+> is the only way we can guarantee success of freeing a hugetlb page to buddy.
+> However, this should only only be used when there is no other option and could
+> result in vmemmap pages residing in CMA or ZONE_MOVABLE.  I'm not sure how
+> much better this is than failing the free to buddy operation.
+
+And how would you tell when there is no other option?
+
+> I don't have a solution.  Just wanted to share some thoughts.
+> 
+> BTW, just thought of something else.  Consider offlining a memory section that
+> contains a free hugetlb page.  The offline code will try to disolve the hugetlb
+> page (free to buddy).  So, vmemmap pages will need to be allocated.  We will
+> try to allocate vmemap pages on the same node as the hugetlb page.  But, if
+> this memory section is the last of the node all the pages will have been
+> isolated and no allocations will succeed.  Is that a possible scenario, or am
+> I just having too many negative thoughts?
+
+IIUC, GFP_ATOMIC will reset ALLOC_CPUSET flags at some point and the nodemask will
+be cleared, so I guess the system will try to allocate from another node.
+But I am not sure about that one.
+
+I would like to hear Michal's thoughts on this.
+
+
 -- 
-2.30.0
-
+Oscar Salvador
+SUSE L3
