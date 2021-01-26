@@ -2,96 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 46F4B3044D6
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 18:18:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C3E1F304719
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 19:53:25 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389567AbhAZRPb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 12:15:31 -0500
-Received: from smtp.asem.it ([151.1.184.197]:52086 "EHLO smtp.asem.it"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S2389750AbhAZJ0X (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 26 Jan 2021 04:26:23 -0500
-Received: from webmail.asem.it
-        by asem.it (smtp.asem.it)
-        (SecurityGateway 6.5.2)
-        with ESMTP id SG000732223.MSG 
-        for <linux-doc@vger.kernel.org>; Tue, 26 Jan 2021 10:25:20 +0100S
-Received: from ASAS044.asem.intra (172.16.16.44) by ASAS044.asem.intra
- (172.16.16.44) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Tue, 26
- Jan 2021 10:25:18 +0100
-Received: from flavio-x.asem.intra (172.16.17.208) by ASAS044.asem.intra
- (172.16.16.44) with Microsoft SMTP Server id 15.1.1979.3 via Frontend
- Transport; Tue, 26 Jan 2021 10:25:18 +0100
-From:   Flavio Suligoi <f.suligoi@asem.it>
-To:     Tudor Ambarus <tudor.ambarus@microchip.com>,
-        Miquel Raynal <miquel.raynal@bootlin.com>,
-        Richard Weinberger <richard@nod.at>,
-        Vignesh Raghavendra <vigneshr@ti.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jonathan Neuschaefer <j.neuschaefer@gmx.net>
-CC:     <linux-mtd@lists.infradead.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, Flavio Suligoi <f.suligoi@asem.it>
-Subject: [PATCH v1] mtd: spi-nor: core: fix/remove references to spi-nor.c
-Date:   Tue, 26 Jan 2021 10:25:16 +0100
-Message-ID: <20210126092516.1431913-1-f.suligoi@asem.it>
-X-Mailer: git-send-email 2.25.1
+        id S2389145AbhAZRNx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 12:13:53 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40236 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1730180AbhAZHfy (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jan 2021 02:35:54 -0500
+Received: from mail-pl1-x630.google.com (mail-pl1-x630.google.com [IPv6:2607:f8b0:4864:20::630])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EFE0FC061573;
+        Mon, 25 Jan 2021 23:25:24 -0800 (PST)
+Received: by mail-pl1-x630.google.com with SMTP id u15so115875plf.1;
+        Mon, 25 Jan 2021 23:25:24 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=tpj3ybU4120wd2c47Rjps1g04Qm5dWT54O3NvokuXtg=;
+        b=SeREUFtvVta/QikDIsJfNDYjyCMZU53duhQ8BBqY+28nkpa6IHRILmBPRAvO4MDdGk
+         PH+KtN7UidVTheQitGPvKYulTXv7kHxV99ieogw6404k7JqTfvEtkbZZ3GaZ8GUIEX3x
+         /KSjeeNUIHfpbs8mZml3btb6UXPTw3qPqhVYLqifJjZvMhpxtsGmn5XhIYg++0t3ohya
+         6PL+3rhLMTM8STaZ3q57GVb5Aut0KPRB+ndH8tX4SvULQxO5uA3tHlSnP5TBpgIBGbzP
+         Jqelb9VPnAjY1X/WSYdiDzUVUFMOl0jG9sQxCUTWwsQNk/mA25l+nsIUktUkXJsQ3M7G
+         x7HQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=tpj3ybU4120wd2c47Rjps1g04Qm5dWT54O3NvokuXtg=;
+        b=sqi5hl/P4MpnSsnA8roMRaDFjmTeDOdPgGiX/oPpNZcdJBlEHDjKgYiw5fGd0O58xr
+         110MOHFu1ZdyGh6pqvYjN6BCk23x2wr7MGTJOURfCGlejUHhbee0v3LgkWSXNoGyCTP1
+         PdVNI5zfYXAzJwJHgWwtaEq0TDNn2AC5EwQ0OLvVXQiUYEcM8jHzOD5z8+bq6c5UtE6M
+         tRA/tbDTyTjf/2JGmQEwhYAt3NcVhfut4gmTYuSZzx0lNjaiuAk7qr5Lk6dOHdebenFI
+         sioLDO9BBCE+puhWytnMpil09Yh1lEZflzTIxtnz3qFivvdu6wa1KUWjJcnXrQxM+rxD
+         c7Gg==
+X-Gm-Message-State: AOAM530W+ZgdtZPi9vDXFmYB06JmalUdUYGdXEXUOC2scu+YmD/n4Wpg
+        x/lyqrgLr01gCDCp7Kj4Aps=
+X-Google-Smtp-Source: ABdhPJwpBsucfGKM8QZzzZillS1vNYCPRM2covSqQBV0gYQ77UogpTt3CXFV/oN1jG6oLP8Vt8i1Yw==
+X-Received: by 2002:a17:90a:8996:: with SMTP id v22mr4730206pjn.235.1611645924475;
+        Mon, 25 Jan 2021 23:25:24 -0800 (PST)
+Received: from cl-arch-kdev.. (cl-arch-kdev.xen.prgmr.com. [2605:2700:0:2:a800:ff:fed6:fc0d])
+        by smtp.gmail.com with ESMTPSA id l12sm1320256pjg.54.2021.01.25.23.25.22
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 25 Jan 2021 23:25:23 -0800 (PST)
+From:   Fox Chen <foxhlchen@gmail.com>
+To:     corbet@lwn.net, vegard.nossum@oracle.com, viro@zeniv.linux.org.uk,
+        rdunlap@infradead.org, grandmaster@al2klimov.de
+Cc:     Fox Chen <foxhlchen@gmail.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH 00/12] docs: path-lookup: Update pathlookup docs
+Date:   Tue, 26 Jan 2021 15:24:31 +0800
+Message-Id: <20210126072443.33066-1-foxhlchen@gmail.com>
+X-Mailer: git-send-email 2.30.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7BIT
-Content-Type:   text/plain; charset=US-ASCII
-X-SGHeloLookup-Result: pass smtp.helo=webmail.asem.it (ip=172.16.16.44)
-X-SGSPF-Result: none (smtp.asem.it)
-X-SGOP-RefID: str=0001.0A782F22.600FDFFF.0009,ss=1,re=0.000,recu=0.000,reip=0.000,cl=1,cld=1,fgs=0 (_st=1 _vt=0 _iwf=0)
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The old file:
+The Path lookup is a very complex subject in VFS. The path-lookup
+document provides a very detailed guidance to help people understand
+how path lookup works in the kernel.This document was originally
+written based on three lwn articles five years ago. As times goes by,
+some of the content was outdated. This patchset is intended to update
+the document to make it more relevant to current codebase.
 
-drivers/mtd/spi-nor/spi-nor.c
 
-is not more present and now some of its code is
-contained in:
+Fox Chen (12):
+  docs: path-lookup: update follow_managed() part
+  docs: path-lookup: update path_to_nameidata() parth
+  docs: path-lookup: update path_mountpoint() part
+  docs: path-lookup: update do_last() part
+  docs: path-lookup: remove filename_mountpoint
+  docs: path-lookup: Add macro name to symlink limit description
+  docs: path-lookup: i_op->follow_link replaced with i_op->get_link
+  docs: path-lookup: update i_op->put_link and cookie description
+  docs: path-lookup: no get_link()
+  docs: path-lookup: update WALK_GET, WALK_PUT desc
+  docs: path-lookup: update get_link() ->follow_link description
+  docs: path-lookup: update symlink description
 
-drivers/mtd/spi-nor/core.c
+ Documentation/filesystems/path-lookup.rst | 146 ++++++++++------------
+ 1 file changed, 63 insertions(+), 83 deletions(-)
 
-This patch fix/remove the references to the old
-spi-nor.c file.
-
-Signed-off-by: Flavio Suligoi <f.suligoi@asem.it>
----
- Documentation/driver-api/mtd/spi-nor.rst | 2 +-
- drivers/mtd/spi-nor/core.c               | 4 ++--
- 2 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/driver-api/mtd/spi-nor.rst b/Documentation/driver-api/mtd/spi-nor.rst
-index 4a3adca417fd..bf2db371d3fb 100644
---- a/Documentation/driver-api/mtd/spi-nor.rst
-+++ b/Documentation/driver-api/mtd/spi-nor.rst
-@@ -61,7 +61,7 @@ Part III - How can drivers use the framework?
- 
- The main API is spi_nor_scan(). Before you call the hook, a driver should
- initialize the necessary fields for spi_nor{}. Please see
--drivers/mtd/spi-nor/spi-nor.c for detail. Please also refer to spi-fsl-qspi.c
-+drivers/mtd/spi-nor/core.c for detail. Please also refer to spi-fsl-qspi.c
- when you want to write a new driver for a SPI NOR controller.
- Another API is spi_nor_restore(), this is used to restore the status of SPI
- flash chip such as addressing mode. Call it whenever detach the driver from
-diff --git a/drivers/mtd/spi-nor/core.c b/drivers/mtd/spi-nor/core.c
-index 20df44b753da..6ae7d4c2d2b6 100644
---- a/drivers/mtd/spi-nor/core.c
-+++ b/drivers/mtd/spi-nor/core.c
-@@ -3701,8 +3701,8 @@ static void spi_nor_shutdown(struct spi_mem *spimem)
-  * encourage new users to add support to the spi-nor library, and simply bind
-  * against a generic string here (e.g., "jedec,spi-nor").
-  *
-- * Many flash names are kept here in this list (as well as in spi-nor.c) to
-- * keep them available as module aliases for existing platforms.
-+ * Many flash names are kept here in this list to keep them available
-+ * as module aliases for existing platforms.
-  */
- static const struct spi_device_id spi_nor_dev_ids[] = {
- 	/*
 -- 
-2.25.1
+2.30.0
 
