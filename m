@@ -2,59 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1E84230470D
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 19:53:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EE4AC304720
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 19:54:36 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389260AbhAZRON (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 12:14:13 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40238 "EHLO
+        id S2389394AbhAZROl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 12:14:41 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41320 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1730332AbhAZHfy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jan 2021 02:35:54 -0500
-Received: from mail-pl1-x636.google.com (mail-pl1-x636.google.com [IPv6:2607:f8b0:4864:20::636])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 24EB0C061788;
-        Mon, 25 Jan 2021 23:25:33 -0800 (PST)
-Received: by mail-pl1-x636.google.com with SMTP id u15so116016plf.1;
-        Mon, 25 Jan 2021 23:25:33 -0800 (PST)
+        with ESMTP id S2389573AbhAZHkG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jan 2021 02:40:06 -0500
+Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 97C9AC06178A;
+        Mon, 25 Jan 2021 23:25:34 -0800 (PST)
+Received: by mail-pf1-x431.google.com with SMTP id t29so9955497pfg.11;
+        Mon, 25 Jan 2021 23:25:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=exoaYFCYrI1Kapbl0247/VMsceScMtEx+1JSl3RbtM0=;
-        b=rC9JpwUwVKNFrvZw2yKfzrFvW2/SphbDJvjQXkWM7BpoSeXE1CEaRMIDDRAtBsg1PR
-         x16z00FnWKMVb5sEF0XLjZu1y7kk4N62RIbzT4VqDMuWaEwpw22XQiGfCUeSVEz1UsL6
-         MMM4q48fybEv8giwc8M3nuhXET09XPPhF+Ud71yvL+XmYIb9VIGm0izs7EQZPWfyTv6t
-         nAgGJHhkZdZwiU4Eoig+8HXEiLS1Fj1ozQ2e/uwyPdClid8CD7G57MKOkAaL092CcOoR
-         RIdqKplGp71unbVk3vQxIfRYlRDQCAEynPP4ALElP+jOZZ5UEW6U7nbLfknPfjnUWM5w
-         SQaQ==
+        bh=V6thmsZF+JSK8J3bk0cVuqjQv0k5voA6tdBnKPzmfG8=;
+        b=f1Xm9VEsCYj7he6Gv4PqXWMB6/xRk0mXdfrIovCJTY3P8DupHkgZJ9QDGnrDkw9yJE
+         6KWCQ29wyJ2pxfFxslHNrf7qTp9FPdGTiHj+XGNHRhXGL7yp8mfkPOUZzmNsp1cDF2AM
+         xSBMcdoffXm1/CPhERMv2gHVHJTURwEfUWcBZptTq5YyPnO8ZMoCjhac+A6+3fDAsQKS
+         6Q4YDXoxSS7v5QO+mOJf0HIM4+rmMbmxZrQWlPcj10Lqafp0xQhCR3HYXTUVPMxL3eT1
+         WiESmp6oWHptYa2ZB0DY/subvX0oRjXfU4FwZ43wqj77LLKScnyt0C/y7FAVK3gomypS
+         wNTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=exoaYFCYrI1Kapbl0247/VMsceScMtEx+1JSl3RbtM0=;
-        b=TJDtdeiuyett/uva6DUS7wv/JNlcMHyt9AylILhoYmkKV0vw+GXtBw1CYVgTi1xt7Q
-         NpNc71QuTfVjOjVYhzcaTXhqY8mfnQkfCcwpUBF/iE9TXdEiWUaxSu5lsO0HfcZw+nZ9
-         CdGJesUr3nv5Kwjal556yTZmugqrqLA32e1buS+D7uGDkdHmoUuwvlfd0B9Alfrwlvfe
-         Vm9hLDJJIWz0OBYhFhZ/AAYdPJIQqiUL2ZXIQPM0EBXxbzi+/lTySp27UvpXfUUg7JOw
-         J2Yw4ju3SUM2nDlKRiWoYinOfxmT58HmdkAfYRkWuNVoBf+mp29BmoyPmtb7y1l+2g9Y
-         9hbQ==
-X-Gm-Message-State: AOAM530xy2/HzvZAP8AEtFyvwIh2k/iLvCcNIRgVg4h3e0yeLTlBq2OR
-        R94BCfKxfO3lSdWvLQQTo94=
-X-Google-Smtp-Source: ABdhPJzHNj7oVxZamieAaa6afql/shnLl7aTfjCyDznI7JKvjd0X356aJu8odMDX48Ep/NKC07St4A==
-X-Received: by 2002:a17:90a:c404:: with SMTP id i4mr4756979pjt.57.1611645932777;
-        Mon, 25 Jan 2021 23:25:32 -0800 (PST)
+        bh=V6thmsZF+JSK8J3bk0cVuqjQv0k5voA6tdBnKPzmfG8=;
+        b=T7Sk47GIz0QDdm63/OP7IvFTl/xeFbOWK33hdegU3+pBIqhCUT7Dl/fYpq6SCbllNo
+         NKoGgS3DOAdAnL1PIhEGgz1DYL4dikkdYmDvPXWQ16RtmvXGRsTMFeKKo0YrUKIRYvHK
+         UcxQNb33DH9ljoYfEDk8+gkE++zFDAePzHRKc/cggl4bZO35KuY3Xu6/lJ4o/dZZF6JZ
+         7cqfAfVhLgPSBGvDObar68mZ+EwtmVfSIQeynzYlnPcei8hILo5f+rOVpo7IC6GSdh7A
+         5upT1E6dSr26Af0KWLvOnxUd6dEvQGd9Fodh3BTHb08ClqYxYil94A/OJLjlwXlJ1NiM
+         qRAQ==
+X-Gm-Message-State: AOAM531ufEMwGgbJKz5Lcnib0YE2/41Devk2OQlWgOVvthg652dSjfH1
+        pwBtXXRd3AIF5o0++eFraa9vXUdMTSGl/GMBZp4=
+X-Google-Smtp-Source: ABdhPJx0mRPTO4Aa+qPF/q69Pcz0w1+TKsGZvdmMBil2ZLkFl3/qoRf8ipEvyPRV7OGu7gyIe6HsKA==
+X-Received: by 2002:a63:fb49:: with SMTP id w9mr4481865pgj.403.1611645934146;
+        Mon, 25 Jan 2021 23:25:34 -0800 (PST)
 Received: from cl-arch-kdev.. (cl-arch-kdev.xen.prgmr.com. [2605:2700:0:2:a800:ff:fed6:fc0d])
-        by smtp.gmail.com with ESMTPSA id l12sm1320256pjg.54.2021.01.25.23.25.31
+        by smtp.gmail.com with ESMTPSA id l12sm1320256pjg.54.2021.01.25.23.25.32
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Jan 2021 23:25:32 -0800 (PST)
+        Mon, 25 Jan 2021 23:25:33 -0800 (PST)
 From:   Fox Chen <foxhlchen@gmail.com>
 To:     corbet@lwn.net, vegard.nossum@oracle.com, viro@zeniv.linux.org.uk,
         rdunlap@infradead.org, grandmaster@al2klimov.de
 Cc:     Fox Chen <foxhlchen@gmail.com>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [PATCH 06/12] docs: path-lookup: Add macro name to symlink limit description
-Date:   Tue, 26 Jan 2021 15:24:37 +0800
-Message-Id: <20210126072443.33066-7-foxhlchen@gmail.com>
+Subject: [PATCH 07/12] docs: path-lookup: i_op->follow_link replaced with i_op->get_link
+Date:   Tue, 26 Jan 2021 15:24:38 +0800
+Message-Id: <20210126072443.33066-8-foxhlchen@gmail.com>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210126072443.33066-1-foxhlchen@gmail.com>
 References: <20210126072443.33066-1-foxhlchen@gmail.com>
@@ -64,29 +64,39 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add macro name MAXSYMLINKS to the symlink limit description, so
-that it is consistent with path name length description above.
+follow_link has been replaced by get_link() which can be
+called in RCU mode.
+
+see commit: 6b2553918d8b4e6de9853fd6315bec7271a2e592
 
 Signed-off-by: Fox Chen <foxhlchen@gmail.com>
 ---
- Documentation/filesystems/path-lookup.rst | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ Documentation/filesystems/path-lookup.rst | 12 +++++-------
+ 1 file changed, 5 insertions(+), 7 deletions(-)
 
 diff --git a/Documentation/filesystems/path-lookup.rst b/Documentation/filesystems/path-lookup.rst
-index bc450e0864d6..25d2a5a59f45 100644
+index 25d2a5a59f45..0a362849b26f 100644
 --- a/Documentation/filesystems/path-lookup.rst
 +++ b/Documentation/filesystems/path-lookup.rst
-@@ -994,8 +994,8 @@ is 4096.  There are a number of reasons for this limit; not letting the
- kernel spend too much time on just one path is one of them.  With
- symbolic links you can effectively generate much longer paths so some
- sort of limit is needed for the same reason.  Linux imposes a limit of
--at most 40 symlinks in any one path lookup.  It previously imposed a
--further limit of eight on the maximum depth of recursion, but that was
-+at most 40 (MAXSYMLINKS) symlinks in any one path lookup.  It previously imposed
-+a further limit of eight on the maximum depth of recursion, but that was
- raised to 40 when a separate stack was implemented, so there is now
- just the one limit.
+@@ -1062,13 +1062,11 @@ filesystem cannot successfully get a reference in RCU-walk mode, it
+ must return ``-ECHILD`` and ``unlazy_walk()`` will be called to return to
+ REF-walk mode in which the filesystem is allowed to sleep.
  
+-The place for all this to happen is the ``i_op->follow_link()`` inode
+-method.  In the present mainline code this is never actually called in
+-RCU-walk mode as the rewrite is not quite complete.  It is likely that
+-in a future release this method will be passed an ``inode`` pointer when
+-called in RCU-walk mode so it both (1) knows to be careful, and (2) has the
+-validated pointer.  Much like the ``i_op->permission()`` method we
+-looked at previously, ``->follow_link()`` would need to be careful that
++The place for all this to happen is the ``i_op->get_link()`` inode
++method. This is called both in RCU-walk and REF-walk. In RCU-walk the
++``dentry*`` argument is NULL, ``->get_link()`` can return -ECHILD to drop
++RCU-walk.  Much like the ``i_op->permission()`` method we
++looked at previously, ``->get_link()`` would need to be careful that
+ all the data structures it references are safe to be accessed while
+ holding no counted reference, only the RCU lock.  Though getting a
+ reference with ``->follow_link()`` is not yet done in RCU-walk mode, the
 -- 
 2.30.0
 
