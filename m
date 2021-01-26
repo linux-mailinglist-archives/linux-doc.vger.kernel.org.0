@@ -2,59 +2,59 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EE4AC304720
-	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 19:54:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 93D8D304710
+	for <lists+linux-doc@lfdr.de>; Tue, 26 Jan 2021 19:53:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S2389394AbhAZROl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 12:14:41 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41320 "EHLO
+        id S2389378AbhAZROh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 26 Jan 2021 12:14:37 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41324 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2389573AbhAZHkG (ORCPT
+        with ESMTP id S2389575AbhAZHkG (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jan 2021 02:40:06 -0500
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 97C9AC06178A;
-        Mon, 25 Jan 2021 23:25:34 -0800 (PST)
-Received: by mail-pf1-x431.google.com with SMTP id t29so9955497pfg.11;
-        Mon, 25 Jan 2021 23:25:34 -0800 (PST)
+Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com [IPv6:2607:f8b0:4864:20::52d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 9C4D1C061797;
+        Mon, 25 Jan 2021 23:25:41 -0800 (PST)
+Received: by mail-pg1-x52d.google.com with SMTP id t25so3033792pga.2;
+        Mon, 25 Jan 2021 23:25:41 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=V6thmsZF+JSK8J3bk0cVuqjQv0k5voA6tdBnKPzmfG8=;
-        b=f1Xm9VEsCYj7he6Gv4PqXWMB6/xRk0mXdfrIovCJTY3P8DupHkgZJ9QDGnrDkw9yJE
-         6KWCQ29wyJ2pxfFxslHNrf7qTp9FPdGTiHj+XGNHRhXGL7yp8mfkPOUZzmNsp1cDF2AM
-         xSBMcdoffXm1/CPhERMv2gHVHJTURwEfUWcBZptTq5YyPnO8ZMoCjhac+A6+3fDAsQKS
-         6Q4YDXoxSS7v5QO+mOJf0HIM4+rmMbmxZrQWlPcj10Lqafp0xQhCR3HYXTUVPMxL3eT1
-         WiESmp6oWHptYa2ZB0DY/subvX0oRjXfU4FwZ43wqj77LLKScnyt0C/y7FAVK3gomypS
-         wNTw==
+        bh=eYQjGrreBxAElr6Uc7E2xNYl1ZHh4lNeYv3YVnq1Azg=;
+        b=BYhvgjtyZnmRq/0OOKpD+u298xHkA/5FMpygS6NKJ0AK/dk/ZzlFCyiadPuQT21Bg+
+         4PQQkRyZKzFTq0qPj2KaLCx5BAtI2YjhGQr810HDMwaA3vL4OYzbQyi26FI8yBeAOpHr
+         oSvCEgoeuGOUZOjEyOtHyyUaDBWZUqWnylkDjljSeouJyF29w0c86CSXcf9HTA3rwfGm
+         +c8CJs5re387Wfc5BXfkbsP1CFoQRK1XvrEhzXwQZrWjwEHJaL+UvyX9RIlv4ivBRQqH
+         Th2UvzPpOlgYwmV1G+8i2UnBJ+KMtV5aTHpzmKWJgMKqXKKxSOVtvL+lilOEF5LUgWgJ
+         Z7aw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=V6thmsZF+JSK8J3bk0cVuqjQv0k5voA6tdBnKPzmfG8=;
-        b=T7Sk47GIz0QDdm63/OP7IvFTl/xeFbOWK33hdegU3+pBIqhCUT7Dl/fYpq6SCbllNo
-         NKoGgS3DOAdAnL1PIhEGgz1DYL4dikkdYmDvPXWQ16RtmvXGRsTMFeKKo0YrUKIRYvHK
-         UcxQNb33DH9ljoYfEDk8+gkE++zFDAePzHRKc/cggl4bZO35KuY3Xu6/lJ4o/dZZF6JZ
-         7cqfAfVhLgPSBGvDObar68mZ+EwtmVfSIQeynzYlnPcei8hILo5f+rOVpo7IC6GSdh7A
-         5upT1E6dSr26Af0KWLvOnxUd6dEvQGd9Fodh3BTHb08ClqYxYil94A/OJLjlwXlJ1NiM
-         qRAQ==
-X-Gm-Message-State: AOAM531ufEMwGgbJKz5Lcnib0YE2/41Devk2OQlWgOVvthg652dSjfH1
-        pwBtXXRd3AIF5o0++eFraa9vXUdMTSGl/GMBZp4=
-X-Google-Smtp-Source: ABdhPJx0mRPTO4Aa+qPF/q69Pcz0w1+TKsGZvdmMBil2ZLkFl3/qoRf8ipEvyPRV7OGu7gyIe6HsKA==
-X-Received: by 2002:a63:fb49:: with SMTP id w9mr4481865pgj.403.1611645934146;
-        Mon, 25 Jan 2021 23:25:34 -0800 (PST)
+        bh=eYQjGrreBxAElr6Uc7E2xNYl1ZHh4lNeYv3YVnq1Azg=;
+        b=uX0rjZO4IYjOY9dlw+4C9CoehC7wtKwOI7Dtjul9mX8epqqEG7KK+8AgR0puLF6yLE
+         8F3afZMARS4/HShk+/CT1x/EISfoioyzd7GlCLXB9HxtrAPSIa1WEhnQaNVMinIt6XLa
+         q2/EljGAmFBLVpAT9iLa+exjH4k0KLB3OIAbNjLG9In/HPlauOGz4uYQytPI0uO8kIK6
+         yHA/Yz2X9GZk4ewWLzyHwfOgUBUXF9ft/9DZT32CuL2QKyo3AxAPrBvctLL8RkECi8BC
+         MqhLuUhrqjPDllQDzhjFhlD6TkAyoZ5AYLQxIabF2DLy5rrU3kmosZL8RKST7IzVPHCE
+         dzXw==
+X-Gm-Message-State: AOAM531qgS7GiogROKxGz9fLommbbjyLXF6n8nQZ9iCFrTamwvQN4gQf
+        u2TxZsiUe1cQi1N/ZUwGBXM=
+X-Google-Smtp-Source: ABdhPJw779iXvaKTjbYXqgTFCTH7h+kyWKHt3/6+CBGwfc8AVjLc0oQommeyBIH9mR0jCF1vvgQh+A==
+X-Received: by 2002:a62:800d:0:b029:1bc:9cd1:8ee1 with SMTP id j13-20020a62800d0000b02901bc9cd18ee1mr4006255pfd.69.1611645941144;
+        Mon, 25 Jan 2021 23:25:41 -0800 (PST)
 Received: from cl-arch-kdev.. (cl-arch-kdev.xen.prgmr.com. [2605:2700:0:2:a800:ff:fed6:fc0d])
-        by smtp.gmail.com with ESMTPSA id l12sm1320256pjg.54.2021.01.25.23.25.32
+        by smtp.gmail.com with ESMTPSA id l12sm1320256pjg.54.2021.01.25.23.25.39
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 25 Jan 2021 23:25:33 -0800 (PST)
+        Mon, 25 Jan 2021 23:25:40 -0800 (PST)
 From:   Fox Chen <foxhlchen@gmail.com>
 To:     corbet@lwn.net, vegard.nossum@oracle.com, viro@zeniv.linux.org.uk,
         rdunlap@infradead.org, grandmaster@al2klimov.de
 Cc:     Fox Chen <foxhlchen@gmail.com>, linux-doc@vger.kernel.org,
         linux-kernel@vger.kernel.org
-Subject: [PATCH 07/12] docs: path-lookup: i_op->follow_link replaced with i_op->get_link
-Date:   Tue, 26 Jan 2021 15:24:38 +0800
-Message-Id: <20210126072443.33066-8-foxhlchen@gmail.com>
+Subject: [PATCH 12/12] docs: path-lookup: update symlink description
+Date:   Tue, 26 Jan 2021 15:24:43 +0800
+Message-Id: <20210126072443.33066-13-foxhlchen@gmail.com>
 X-Mailer: git-send-email 2.30.0
 In-Reply-To: <20210126072443.33066-1-foxhlchen@gmail.com>
 References: <20210126072443.33066-1-foxhlchen@gmail.com>
@@ -64,39 +64,55 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-follow_link has been replaced by get_link() which can be
-called in RCU mode.
+instead of lookup_real()/vfs_create(), i_op->lookup() and
+i_op->create() will be called directly.
 
-see commit: 6b2553918d8b4e6de9853fd6315bec7271a2e592
+update vfs_open() logic
+
+should_follow_link is merged into lookup_last() or open_last_lookup()
+which returns symlink name instead of an integer.
 
 Signed-off-by: Fox Chen <foxhlchen@gmail.com>
 ---
- Documentation/filesystems/path-lookup.rst | 12 +++++-------
- 1 file changed, 5 insertions(+), 7 deletions(-)
+ Documentation/filesystems/path-lookup.rst | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
 
 diff --git a/Documentation/filesystems/path-lookup.rst b/Documentation/filesystems/path-lookup.rst
-index 25d2a5a59f45..0a362849b26f 100644
+index 2bb3ca486acd..0c6fc296056c 100644
 --- a/Documentation/filesystems/path-lookup.rst
 +++ b/Documentation/filesystems/path-lookup.rst
-@@ -1062,13 +1062,11 @@ filesystem cannot successfully get a reference in RCU-walk mode, it
- must return ``-ECHILD`` and ``unlazy_walk()`` will be called to return to
- REF-walk mode in which the filesystem is allowed to sleep.
+@@ -1204,16 +1204,15 @@ the code.
+    it.  If the file was found in the dcache, then ``vfs_open()`` is used for
+    this.  If not, then ``lookup_open()`` will either call ``atomic_open()`` (if
+    the filesystem provides it) to combine the final lookup with the open, or
+-   will perform the separate ``lookup_real()`` and ``vfs_create()`` steps
++   will perform the separate ``i_op->lookup()`` and ``i_op->create()`` steps
+    directly.  In the later case the actual "open" of this newly found or
+    created file will be performed by ``vfs_open()``, just as if the name
+    were found in the dcache.
  
--The place for all this to happen is the ``i_op->follow_link()`` inode
--method.  In the present mainline code this is never actually called in
--RCU-walk mode as the rewrite is not quite complete.  It is likely that
--in a future release this method will be passed an ``inode`` pointer when
--called in RCU-walk mode so it both (1) knows to be careful, and (2) has the
--validated pointer.  Much like the ``i_op->permission()`` method we
--looked at previously, ``->follow_link()`` would need to be careful that
-+The place for all this to happen is the ``i_op->get_link()`` inode
-+method. This is called both in RCU-walk and REF-walk. In RCU-walk the
-+``dentry*`` argument is NULL, ``->get_link()`` can return -ECHILD to drop
-+RCU-walk.  Much like the ``i_op->permission()`` method we
-+looked at previously, ``->get_link()`` would need to be careful that
- all the data structures it references are safe to be accessed while
- holding no counted reference, only the RCU lock.  Though getting a
- reference with ``->follow_link()`` is not yet done in RCU-walk mode, the
+ 2. ``vfs_open()`` can fail with ``-EOPENSTALE`` if the cached information
+-   wasn't quite current enough.  Rather than restarting the lookup from
+-   the top with ``LOOKUP_REVAL`` set, ``lookup_open()`` is called instead,
+-   giving the filesystem a chance to resolve small inconsistencies.
+-   If that doesn't work, only then is the lookup restarted from the top.
++   wasn't quite current enough.  If it's in RCU-walk -ECHILD will be returned
++   otherwise will return -ESTALE.  When -ESTALE is returned, the caller may
++   retry with LOOKUP_REVAL flag set.
+ 
+ 3. An open with O_CREAT **does** follow a symlink in the final component,
+    unlike other creation system calls (like ``mkdir``).  So the sequence::
+@@ -1223,8 +1222,8 @@ the code.
+ 
+    will create a file called ``/tmp/bar``.  This is not permitted if
+    ``O_EXCL`` is set but otherwise is handled for an O_CREAT open much
+-   like for a non-creating open: ``should_follow_link()`` returns ``1``, and
+-   so does ``do_last()`` so that ``trailing_symlink()`` gets called and the
++   like for a non-creating open: ``lookup_last()`` or ``open_last_lookup()``
++   returns a non ``Null`` value, and ``link_path_walk()`` gets called and the
+    open process continues on the symlink that was found.
+ 
+ Updating the access time
 -- 
 2.30.0
 
