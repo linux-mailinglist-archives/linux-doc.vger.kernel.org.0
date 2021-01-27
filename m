@@ -2,71 +2,126 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 276463065BE
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 22:13:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9863D306604
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 22:28:50 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233129AbhA0VKz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 Jan 2021 16:10:55 -0500
-Received: from mail.kernel.org ([198.145.29.99]:50726 "EHLO mail.kernel.org"
+        id S1344103AbhA0V1Y (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Jan 2021 16:27:24 -0500
+Received: from mga04.intel.com ([192.55.52.120]:48884 "EHLO mga04.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S232246AbhA0VKv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 27 Jan 2021 16:10:51 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPS id 32AC264DA1;
-        Wed, 27 Jan 2021 21:10:11 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1611781811;
-        bh=xrBCpNJ6eb21yn73p5PBd0yA7KoTwV3NFDO2djz7Us0=;
-        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
-        b=IPKJQGfg9njE1l9msKhzGoC6DY/rifyalV23sZFGh6ikvr14E0nuEbiaY/BYh90Ck
-         dJEc5eD6/2wvgxnza9B98ad2mMNQ6jl+Kb4bof9Ww1mJ9Bh8DFRFm3xcaXlDWigQn4
-         f5zd3iaq6V0EfdKbpAL5F6rEOLn+metXhVg+YBDH3FGb324i9XLhN18xKi7tz9vnCn
-         7F4ZtS0FbT1v4rsz/tg2BEyFI4HWEQjynbybzGFKwUFRNcqj0MlhMU/bUldAOxkVNY
-         OFQgo4FNyvhiKqvwETCp3tqWuPPp5eZGROgyOL01uJ4ZrhGejPBihSFTmEk3IKlZ7X
-         y6d5600J/kd+w==
-Received: from pdx-korg-docbuild-2.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
-        by pdx-korg-docbuild-2.ci.codeaurora.org (Postfix) with ESMTP id 2081D613AE;
-        Wed, 27 Jan 2021 21:10:11 +0000 (UTC)
-Content-Type: text/plain; charset="utf-8"
+        id S234462AbhA0V0u (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 27 Jan 2021 16:26:50 -0500
+IronPort-SDR: 1Zd46pBw+eziIx0cYW1wxHOMPNqKo2Y8AKBd/JJn5KWoQi/CrCZ030NxxnUWOSkW+uha0mIw6e
+ gSZof/rlK5YA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9877"; a="177573098"
+X-IronPort-AV: E=Sophos;i="5.79,380,1602572400"; 
+   d="scan'208";a="177573098"
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2021 13:25:49 -0800
+IronPort-SDR: D4aDZfyvo1J+7UBhOQ49iNv7JhMiCuGG+vToy+qRFwayXLng2xzMnNfgwlbNXvFOqgPMTk+lub
+ v9NRQYJZNB5g==
+X-IronPort-AV: E=Sophos;i="5.79,380,1602572400"; 
+   d="scan'208";a="353948187"
+Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
+  by orsmga003-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Jan 2021 13:25:48 -0800
+From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
+To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>
+Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
+Subject: [PATCH v18 02/25] x86/cet/shstk: Add Kconfig option for user-mode control-flow protection
+Date:   Wed, 27 Jan 2021 13:25:01 -0800
+Message-Id: <20210127212524.10188-3-yu-cheng.yu@intel.com>
+X-Mailer: git-send-email 2.21.0
+In-Reply-To: <20210127212524.10188-1-yu-cheng.yu@intel.com>
+References: <20210127212524.10188-1-yu-cheng.yu@intel.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v4 net-next 1/1] Allow user to set metric on default route
- learned via Router Advertisement.
-From:   patchwork-bot+netdevbpf@kernel.org
-Message-Id: <161178181112.29925.10969160502449693741.git-patchwork-notify@kernel.org>
-Date:   Wed, 27 Jan 2021 21:10:11 +0000
-References: <20210125214430.24079-1-pchaudhary@linkedin.com>
-In-Reply-To: <20210125214430.24079-1-pchaudhary@linkedin.com>
-To:     Praveen Chaudhary <praveen5582@gmail.com>
-Cc:     davem@davemloft.net, kuba@kernel.org, corbet@lwn.net,
-        kuznet@ms2.inr.ac.ru, yoshfuji@linux-ipv6.org,
-        netdev@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, dsahern@gmail.com, zxu@linkedin.com,
-        dsahern@kernel.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello:
+Shadow Stack provides protection against function return address
+corruption.  It is active when the processor supports it, the kernel has
+CONFIG_X86_CET enabled, and the application is built for the feature.
+This is only implemented for the 64-bit kernel.  When it is enabled, legacy
+non-Shadow Stack applications continue to work, but without protection.
 
-This patch was applied to netdev/net-next.git (refs/heads/master):
+Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
+---
+ arch/x86/Kconfig           | 22 ++++++++++++++++++++++
+ arch/x86/Kconfig.assembler |  5 +++++
+ 2 files changed, 27 insertions(+)
 
-On Mon, 25 Jan 2021 13:44:30 -0800 you wrote:
-> For IPv4, default route is learned via DHCPv4 and user is allowed to change
-> metric using config etc/network/interfaces. But for IPv6, default route can
-> be learned via RA, for which, currently a fixed metric value 1024 is used.
-> 
-> Ideally, user should be able to configure metric on default route for IPv6
-> similar to IPv4. This fix adds sysctl for the same.
-> 
-> [...]
-
-Here is the summary with links:
-  - [v4,net-next,1/1] Allow user to set metric on default route learned via Router Advertisement.
-    https://git.kernel.org/netdev/net-next/c/6b2e04bc240f
-
-You are awesome, thank you!
---
-Deet-doot-dot, I am a bot.
-https://korg.docs.kernel.org/patchwork/pwbot.html
-
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 21f851179ff0..2d080a2335df 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -1951,6 +1951,28 @@ config X86_SGX
+ 
+ 	  If unsure, say N.
+ 
++config ARCH_HAS_SHADOW_STACK
++	def_bool n
++
++config X86_CET
++	prompt "Intel Control-flow protection for user-mode"
++	def_bool n
++	depends on CPU_SUP_INTEL && X86_64
++	depends on AS_WRUSS
++	select ARCH_USES_HIGH_VMA_FLAGS
++	select ARCH_HAS_SHADOW_STACK
++	help
++	  Control-flow protection is a hardware security hardening feature
++	  that detects function-return address or jump target changes by
++	  malicious code.  Applications must be enabled to use it, and old
++	  userspace does not get protection "for free".
++	  Support for this feature is present on processors released in
++	  2020 or later.  Enabling this feature increases kernel text size
++	  by 3.7 KB.
++	  See Documentation/x86/intel_cet.rst for more information.
++
++	  If unsure, say N.
++
+ config EFI
+ 	bool "EFI runtime service support"
+ 	depends on ACPI
+diff --git a/arch/x86/Kconfig.assembler b/arch/x86/Kconfig.assembler
+index 26b8c08e2fc4..00c79dd93651 100644
+--- a/arch/x86/Kconfig.assembler
++++ b/arch/x86/Kconfig.assembler
+@@ -19,3 +19,8 @@ config AS_TPAUSE
+ 	def_bool $(as-instr,tpause %ecx)
+ 	help
+ 	  Supported by binutils >= 2.31.1 and LLVM integrated assembler >= V7
++
++config AS_WRUSS
++	def_bool $(as-instr,wrussq %rax$(comma)(%rbx))
++	help
++	  Supported by binutils >= 2.31 and LLVM integrated assembler
+-- 
+2.21.0
 
