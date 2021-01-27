@@ -2,285 +2,460 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8B2CD3061CF
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 18:21:07 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DFD8530622E
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 18:38:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235755AbhA0RUq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 Jan 2021 12:20:46 -0500
-Received: from mail.kernel.org ([198.145.29.99]:40706 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S234165AbhA0RUU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 27 Jan 2021 12:20:20 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 690DB60187;
-        Wed, 27 Jan 2021 17:19:37 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1611767978;
-        bh=34HKEYL8Uu56NwWdQHHa7lTy6DQWGDrOdbZLSeUzLas=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=CcfFkYALbXpYIR968k4K6VSsCwjYIKLLVO+TvoC+Uwp/6Mcl9+I7o6GUH6bpcgxzr
-         xjx6Ukd7k7EPj4FuuZorAxyP7AEZms03pxIi/r+8XCmB29XBl6kYFT+FuIFFNOu1Hi
-         8p2FFSNJTmgymdMUCY5weC7GKTkOGoQh8J2R32PZ/9E/yPS7KCOa01BGz59E2q0sX8
-         npXkHmlqBK9FwbDxsYK0CKrc9u4yjfxAfuZ9xhJzmupMsDW1DUFhGQnHhKc+OIqBDA
-         EjsYtWaWd26MsVU1+Rmu42B8MqRdBh3/WqBKDL4SYU2uQ6YyRSRqmeBhV5+GyaMIra
-         zQw1qZ9+a5YZQ==
-Date:   Wed, 27 Jan 2021 19:19:34 +0200
-From:   Jarkko Sakkinen <jarkko@kernel.org>
-To:     Sumit Garg <sumit.garg@linaro.org>
-Cc:     Jerome Forissier <jerome@forissier.org>,
-        "open list:SECURITY SUBSYSTEM" 
-        <linux-security-module@vger.kernel.org>,
-        Daniel Thompson <daniel.thompson@linaro.org>,
-        op-tee@lists.trustedfirmware.org, Jonathan Corbet <corbet@lwn.net>,
-        James Bottomley <jejb@linux.ibm.com>,
-        Janne Karhunen <janne.karhunen@gmail.com>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        James Morris <jmorris@namei.org>,
-        Mimi Zohar <zohar@linux.ibm.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        David Howells <dhowells@redhat.com>,
-        Luke Hinds <lhinds@redhat.com>,
-        "open list:ASYMMETRIC KEYS" <keyrings@vger.kernel.org>,
-        Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        linux-integrity@vger.kernel.org,
-        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>
-Subject: Re: [PATCH v8 2/4] KEYS: trusted: Introduce TEE based Trusted Keys
-Message-ID: <YBGgpj1OgLihwSd0@kernel.org>
-References: <YAa0ys4YJcZtKdfF@kernel.org>
- <YAeH2pb8szQyjusL@kernel.org>
- <CAFA6WYP5G6NfGk96ePOC+2kpD6B+4hz9nywyUM9Nh=dJDYMiuA@mail.gmail.com>
- <01000177223f74d3-1eef7685-4a19-40d2-ace6-d4cd7f35579d-000000@email.amazonses.com>
- <dc3979e8-6bf0-adb7-164d-d50e805a048f@forissier.org>
- <YAmYu9FxWcLPhBhs@kernel.org>
- <YAmcyKnYCK+Y4IGW@kernel.org>
- <1486cfe8-bc30-1266-12bd-0049f2b64820@forissier.org>
- <YAsVenGkaqb8205f@kernel.org>
- <CAFA6WYPQ+LZyHKZJQb=3euTy8f8TO3HqCADojpZaHXgtzNj+fw@mail.gmail.com>
+        id S1344006AbhA0RhM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Jan 2021 12:37:12 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56090 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1343932AbhA0Rdi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Jan 2021 12:33:38 -0500
+Received: from mail-oi1-x234.google.com (mail-oi1-x234.google.com [IPv6:2607:f8b0:4864:20::234])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 94AA9C061573;
+        Wed, 27 Jan 2021 09:32:58 -0800 (PST)
+Received: by mail-oi1-x234.google.com with SMTP id h6so3000222oie.5;
+        Wed, 27 Jan 2021 09:32:58 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=sender:date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=Oz+/hcKZxIpJaMX8a8BFQY8IQewFeLmT4ZAvAqwd6ig=;
+        b=JmpUz8b2+/eGPi0g9usur5TmcWm0dZc0TErnAYt8LqUzfz2rdfoXfoOcNnKhkzUCBp
+         t4P2eZ27n70cM/obBZGVv2jQkjuIr4dzAvBsSaAm8+mid5lMGiyjlxQgjOxmYYf7pu1i
+         +5zDdG+RJajYyUZ7ReeRNlASuyZtdrTR1chtHTvuT+yQyuHQlTWZ6qAQeorAYeGYm89Z
+         F6TO3gb2qRXnVykxBPgxJpD/EnkVn2dTOOoMJkmtq5fctgr+rqcP6YjVQovVpXX+uT7z
+         liMJJQlna4jRWP3ZqyP8O8JkHnI9cdy1AmvVXttNqI891R19mEBtoaqRZ+dsjs1hUoU5
+         wvhQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:from:to:cc:subject:message-id
+         :references:mime-version:content-disposition:in-reply-to:user-agent;
+        bh=Oz+/hcKZxIpJaMX8a8BFQY8IQewFeLmT4ZAvAqwd6ig=;
+        b=s4mUFUJM6t5BQdQNME2twNvjNjE8YeHHBs7FDtMK+soLqVgXSRgkfUWtx5t9QLCRAr
+         jQeP15ofAwJH068cqyGXZxb1NLJCfJ9Jx5eZdoSLZJqciYhb1MNYhlWDdsknco2pBkpU
+         rFxBu9OFq4RG4T2pfUClGMogSGGqq7ZkjZlMzDwXm6fLZcWGNBLZEptc71I9c2fP+FvD
+         W1bLw2WPLf/2XugSwWy4i8uSJ/9QW5HTEJI4wdHU76oYM4Dy6xXNiDsCz/gV7biCxu4i
+         hQEuz/OOYk4bQXjHyw2+TTq4p+ypO3sQa5U69vxjXYzYptD7V3aTQUa+jkIP+x3v7Yih
+         AVwA==
+X-Gm-Message-State: AOAM531Ob+XSS+91uczO4ymS2bda2FgFeD+6FPBhEAe43Vy79COQkHLR
+        NcCkyw0Hm0PrQgnF/WPesNv3VEZkyfA=
+X-Google-Smtp-Source: ABdhPJwk3OyNzwKzu/MJGzCTXZ3ZrCm+jSiq9RlZLcdCy05OzhJwaKUkxHMjjDPglSnsEDitiFliZw==
+X-Received: by 2002:aca:b755:: with SMTP id h82mr3789287oif.5.1611768777878;
+        Wed, 27 Jan 2021 09:32:57 -0800 (PST)
+Received: from localhost ([2600:1700:e321:62f0:329c:23ff:fee3:9d7c])
+        by smtp.gmail.com with ESMTPSA id f6sm477510ote.28.2021.01.27.09.32.56
+        (version=TLS1_2 cipher=ECDHE-ECDSA-CHACHA20-POLY1305 bits=256/256);
+        Wed, 27 Jan 2021 09:32:56 -0800 (PST)
+Sender: Guenter Roeck <groeck7@gmail.com>
+Date:   Wed, 27 Jan 2021 09:32:55 -0800
+From:   Guenter Roeck <linux@roeck-us.net>
+To:     Erik Rosen <erik.rosen@metormote.com>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-hwmon@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Jean Delvare <jdelvare@suse.com>
+Subject: Re: [PATCH 1/1] Add ST STPDDC60 pmbus driver
+Message-ID: <20210127173255.GA144627@roeck-us.net>
+References: <20210127084140.35626-1-erik.rosen@metormote.com>
+ <20210127084140.35626-2-erik.rosen@metormote.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAFA6WYPQ+LZyHKZJQb=3euTy8f8TO3HqCADojpZaHXgtzNj+fw@mail.gmail.com>
+In-Reply-To: <20210127084140.35626-2-erik.rosen@metormote.com>
+User-Agent: Mutt/1.9.4 (2018-02-28)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Jan 25, 2021 at 02:47:38PM +0530, Sumit Garg wrote:
-> Hi Jarkko,
+On Wed, Jan 27, 2021 at 09:41:40AM +0100, Erik Rosen wrote:
+> Add ST STPDDC60 pmbus client driver.
 > 
-> On Fri, 22 Jan 2021 at 23:42, Jarkko Sakkinen <jarkko@kernel.org> wrote:
-> >
-> > On Thu, Jan 21, 2021 at 05:23:45PM +0100, Jerome Forissier wrote:
-> > >
-> > >
-> > > On 1/21/21 4:24 PM, Jarkko Sakkinen wrote:
-> > > > On Thu, Jan 21, 2021 at 05:07:42PM +0200, Jarkko Sakkinen wrote:
-> > > >> On Thu, Jan 21, 2021 at 09:44:07AM +0100, Jerome Forissier wrote:
-> > > >>>
-> > > >>>
-> > > >>> On 1/21/21 1:02 AM, Jarkko Sakkinen via OP-TEE wrote:
-> > > >>>> On Wed, Jan 20, 2021 at 12:53:28PM +0530, Sumit Garg wrote:
-> > > >>>>> On Wed, 20 Jan 2021 at 07:01, Jarkko Sakkinen <jarkko@kernel.org> wrote:
-> > > >>>>>>
-> > > >>>>>> On Tue, Jan 19, 2021 at 12:30:42PM +0200, Jarkko Sakkinen wrote:
-> > > >>>>>>> On Fri, Jan 15, 2021 at 11:32:31AM +0530, Sumit Garg wrote:
-> > > >>>>>>>> On Thu, 14 Jan 2021 at 07:35, Jarkko Sakkinen <jarkko@kernel.org> wrote:
-> > > >>>>>>>>>
-> > > >>>>>>>>> On Wed, Jan 13, 2021 at 04:47:00PM +0530, Sumit Garg wrote:
-> > > >>>>>>>>>> Hi Jarkko,
-> > > >>>>>>>>>>
-> > > >>>>>>>>>> On Mon, 11 Jan 2021 at 22:05, Jarkko Sakkinen <jarkko@kernel.org> wrote:
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> On Tue, Nov 03, 2020 at 09:31:44PM +0530, Sumit Garg wrote:
-> > > >>>>>>>>>>>> Add support for TEE based trusted keys where TEE provides the functionality
-> > > >>>>>>>>>>>> to seal and unseal trusted keys using hardware unique key.
-> > > >>>>>>>>>>>>
-> > > >>>>>>>>>>>> Refer to Documentation/tee.txt for detailed information about TEE.
-> > > >>>>>>>>>>>>
-> > > >>>>>>>>>>>> Signed-off-by: Sumit Garg <sumit.garg@linaro.org>
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> I haven't yet got QEMU environment working with aarch64, this produces
-> > > >>>>>>>>>>> just a blank screen:
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> ./output/host/usr/bin/qemu-system-aarch64 -M virt -cpu cortex-a53 -smp 1 -kernel output/images/Image -initrd output/images/rootfs.cpio -serial stdio
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> My BuildRoot fork for TPM and keyring testing is located over here:
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> https://git.kernel.org/pub/scm/linux/kernel/git/jarkko/buildroot-tpmdd.git/
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> The "ARM version" is at this point in aarch64 branch. Over time I will
-> > > >>>>>>>>>>> define tpmdd-x86_64 and tpmdd-aarch64 boards and everything will be then
-> > > >>>>>>>>>>> in the master branch.
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> To create identical images you just need to
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> $ make tpmdd_defconfig && make
-> > > >>>>>>>>>>>
-> > > >>>>>>>>>>> Can you check if you see anything obviously wrong? I'm eager to test this
-> > > >>>>>>>>>>> patch set, and in bigger picture I really need to have ready to run
-> > > >>>>>>>>>>> aarch64 environment available.
-> > > >>>>>>>>>>
-> > > >>>>>>>>>> I would rather suggest you to follow steps listed here [1] as to test
-> > > >>>>>>>>>> this feature on Qemu aarch64 we need to build firmwares such as TF-A,
-> > > >>>>>>>>>> OP-TEE, UEFI etc. which are all integrated into OP-TEE Qemu build
-> > > >>>>>>>>>> system [2]. And then it would be easier to migrate them to your
-> > > >>>>>>>>>> buildroot environment as well.
-> > > >>>>>>>>>>
-> > > >>>>>>>>>> [1] https://lists.trustedfirmware.org/pipermail/op-tee/2020-May/000027.html
-> > > >>>>>>>>>> [2] https://optee.readthedocs.io/en/latest/building/devices/qemu.html#qemu-v8
-> > > >>>>>>>>>>
-> > > >>>>>>>>>> -Sumit
-> > > >>>>>>>>>
-> > > >>>>>>>>> Can you provide 'keyctl_change'? Otherwise, the steps are easy to follow.
-> > > >>>>>>>>>
-> > > >>>>>>>>
-> > > >>>>>>>> $ cat keyctl_change
-> > > >>>>>>>> diff --git a/common.mk b/common.mk
-> > > >>>>>>>> index aeb7b41..663e528 100644
-> > > >>>>>>>> --- a/common.mk
-> > > >>>>>>>> +++ b/common.mk
-> > > >>>>>>>> @@ -229,6 +229,7 @@ BR2_PACKAGE_OPTEE_TEST_SDK ?= $(OPTEE_OS_TA_DEV_KIT_DIR)
-> > > >>>>>>>>  BR2_PACKAGE_OPTEE_TEST_SITE ?= $(OPTEE_TEST_PATH)
-> > > >>>>>>>>  BR2_PACKAGE_STRACE ?= y
-> > > >>>>>>>>  BR2_TARGET_GENERIC_GETTY_PORT ?= $(if
-> > > >>>>>>>> $(CFG_NW_CONSOLE_UART),ttyAMA$(CFG_NW_CONSOLE_UART),ttyAMA0)
-> > > >>>>>>>> +BR2_PACKAGE_KEYUTILS := y
-> > > >>>>>>>>
-> > > >>>>>>>>  # All BR2_* variables from the makefile or the environment are appended to
-> > > >>>>>>>>  # ../out-br/extra.conf. All values are quoted "..." except y and n.
-> > > >>>>>>>> diff --git a/kconfigs/qemu.conf b/kconfigs/qemu.conf
-> > > >>>>>>>> index 368c18a..832ab74 100644
-> > > >>>>>>>> --- a/kconfigs/qemu.conf
-> > > >>>>>>>> +++ b/kconfigs/qemu.conf
-> > > >>>>>>>> @@ -20,3 +20,5 @@ CONFIG_9P_FS=y
-> > > >>>>>>>>  CONFIG_9P_FS_POSIX_ACL=y
-> > > >>>>>>>>  CONFIG_HW_RANDOM=y
-> > > >>>>>>>>  CONFIG_HW_RANDOM_VIRTIO=y
-> > > >>>>>>>> +CONFIG_TRUSTED_KEYS=y
-> > > >>>>>>>> +CONFIG_ENCRYPTED_KEYS=y
-> > > >>>>>>>>
-> > > >>>>>>>>> After I've successfully tested 2/4, I'd suggest that you roll out one more
-> > > >>>>>>>>> version and CC the documentation patch to Elaine and Mini, and clearly
-> > > >>>>>>>>> remark in the commit message that TEE is a standard, with a link to the
-> > > >>>>>>>>> specification.
-> > > >>>>>>>>>
-> > > >>>>>>>>
-> > > >>>>>>>> Sure, I will roll out the next version after your testing.
-> > > >>>>>>>
-> > > >>>>>>> Thanks, I'll try this at instant, and give my feedback.
-> > > >>>>>>
-> > > >>>>>> I bump into this:
-> > > >>>>>>
-> > > >>>>>> $ make run-only
-> > > >>>>>> ln -sf /home/jarkko/devel/tpm/optee/build/../out-br/images/rootfs.cpio.gz /home/jarkko/devel/tpm/optee/build/../out/bin/
-> > > >>>>>> ln: failed to create symbolic link '/home/jarkko/devel/tpm/optee/build/../out/bin/': No such file or directory
-> > > >>>>>> make: *** [Makefile:194: run-only] Error 1
-> > > >>>>>>
-> > > >>>>>
-> > > >>>>> Could you check if the following directory tree is built after
-> > > >>>>> executing the below command?
-> > > >>>>>
-> > > >>>>> $ make -j`nproc`
-> > > >>>>> CFG_IN_TREE_EARLY_TAS=trusted_keys/f04a0fe7-1f5d-4b9b-abf7-619b85b4ce8c
-> > > >>>>>
-> > > >>>>> $ tree out/bin/
-> > > >>>>> out/bin/
-> > > >>>>> ├── bl1.bin -> /home/sumit/build/optee/build/../trusted-firmware-a/build/qemu/release/bl1.bin
-> > > >>>>> ├── bl2.bin -> /home/sumit/build/optee/build/../trusted-firmware-a/build/qemu/release/bl2.bin
-> > > >>>>> ├── bl31.bin ->
-> > > >>>>> /home/sumit/build/optee/build/../trusted-firmware-a/build/qemu/release/bl31.bin
-> > > >>>>> ├── bl32.bin ->
-> > > >>>>> /home/sumit/build/optee/build/../optee_os/out/arm/core/tee-header_v2.bin
-> > > >>>>> ├── bl32_extra1.bin ->
-> > > >>>>> /home/sumit/build/optee/build/../optee_os/out/arm/core/tee-pager_v2.bin
-> > > >>>>> ├── bl32_extra2.bin ->
-> > > >>>>> /home/sumit/build/optee/build/../optee_os/out/arm/core/tee-pageable_v2.bin
-> > > >>>>> ├── bl33.bin ->
-> > > >>>>> /home/sumit/build/optee/build/../edk2/Build/ArmVirtQemuKernel-AARCH64/RELEASE_GCC49/FV/QEMU_EFI.fd
-> > > >>>>> ├── Image -> /home/sumit/build/optee/build/../linux/arch/arm64/boot/Image
-> > > >>>>> └── rootfs.cpio.gz ->
-> > > >>>>> /home/sumit/build/optee/build/../out-br/images/rootfs.cpio.gz
-> > > >>>>>
-> > > >>>>> 0 directories, 9 files
-> > > >>>>>
-> > > >>>>> -Sumit
-> > > >>>>
-> > > >>>> I actually spotted a build error that was unnoticed last time:
-> > > >>>>
-> > > >>>> make[2]: Entering directory '/home/jarkko/devel/tpm/optee/edk2/BaseTools/Tests'
-> > > >>>> /bin/sh: 1: python: not found
-> > > >>>>
-> > > >>>> I'd prefer not to install Python2. It has been EOL over a year.
-> > > >>>
-> > > >>> AFAIK, everything should build fine with Python3. On my Ubuntu 20.04
-> > > >>> machine, this is accomplished by installing package "python-is-python3"
-> > > >>> (after uninstalling "python-is-python2" if need be).
-> > > >>>
-> > > >>> $ ls -l /usr/bin/python
-> > > >>> lrwxrwxrwx 1 root root 7 Apr 15  2020 /usr/bin/python -> python3
-> > > >>
-> > > >> Right, just found about this in unrelated context :-) [*]
-> > > >>
-> > > >> Hope this will work out...
-> > > >>
-> > > >> [*] https://github.com/surge-synthesizer/surge/pull/3655
-> > > >
-> > > > Now I get
-> > > >
-> > > > Traceback (most recent call last):
-> > > >   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/RunTests.py", line 36, in <module>
-> > > >     allTests = GetAllTestsSuite()
-> > > >   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/RunTests.py", line 33, in GetAllTestsSuite
-> > > >     return unittest.TestSuite([GetCTestSuite(), GetPythonTestSuite()])
-> > > >   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/RunTests.py", line 25, in GetCTestSuite
-> > > >     import CToolsTests
-> > > >   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/CToolsTests.py", line 22, in <module>
-> > > >     import TianoCompress
-> > > >   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/TianoCompress.py", line 69, in <module>
-> > > >     TheTestSuite = TestTools.MakeTheTestSuite(locals())
-> > > >   File "/home/jarkko/Projects/tpm/optee/edk2/BaseTools/Tests/TestTools.py", line 43, in MakeTheTestSuite
-> > > >     for name, item in localItems.iteritems():
-> > > > AttributeError: 'dict' object has no attribute 'iteritems'
-> > >
-> > > Right. Same here after removing all traces of Python2 from my system :-/
-> > >
-> > > A couple of fixes are needed:
-> > > 1. EDK2 needs to be upgraded to tag or later [1]
-> > > 2. The PYTHON3_ENABLE environment variable needs to be set to TRUE [2]
-> > >
-> > > [1] https://github.com/OP-TEE/manifest/pull/177
-> > > [2] https://github.com/OP-TEE/build/pull/450
-> >
-> > BTW, Is to *really* impossible to test this with plain BuildRoot.  It's
-> > obvious that this forks BR internally.
-> >
-> > I mean even if I get this working once, this will feels like a clumsy way
-> > to test Aarch64 regularly. I use BuildRoot extensively for x86 testing. And
-> > it would be nice to be able to start doing regular ARM testing.
+> Signed-off-by: Erik Rosen <erik.rosen@metormote.com>
+> ---
+>  Documentation/hwmon/index.rst    |   1 +
+>  Documentation/hwmon/stpddc60.rst |  79 +++++++++++++
+>  MAINTAINERS                      |   7 ++
+>  drivers/hwmon/pmbus/Kconfig      |  10 ++
+>  drivers/hwmon/pmbus/Makefile     |   2 +
+>  drivers/hwmon/pmbus/stpddc60.c   | 188 +++++++++++++++++++++++++++++++
+>  6 files changed, 287 insertions(+)
+>  create mode 100644 Documentation/hwmon/stpddc60.rst
+>  create mode 100644 drivers/hwmon/pmbus/stpddc60.c
 > 
-> The main reason to guide you towards the OP-TEE build system is that
-> you will be able to build all the firmwares (TF-A, OP-TEE, edk2 etc.)
-> from source. If you don't need to rebuild those then I have prepared a
-> flash firmware binary blob for your testing (attached flash.bin). So
-> Qemu cmdline will look like:
-> 
-> $ qemu-system-aarch64 -nographic -s -machine virt,secure=on -cpu
-> cortex-a57 -kernel out/bin/Image -no-acpi -append
-> 'console=ttyAMA0,38400 keep_bootcon root=/dev/vda2' -initrd
-> out/bin/rootfs.cpio.gz -smp 2 -m 1024 -bios flash.bin -d unimp
-> 
-> Here you can use "Image" and "rootfs.cpio.gz" from your plain BR builds.
-> 
-> Give it a try and let me know if this works for you.
+> diff --git a/Documentation/hwmon/index.rst b/Documentation/hwmon/index.rst
+> index fcb870ce6286..94b4fcf182cd 100644
+> --- a/Documentation/hwmon/index.rst
+> +++ b/Documentation/hwmon/index.rst
+> @@ -169,6 +169,7 @@ Hardware Monitoring Kernel Drivers
+>     smsc47m192
+>     smsc47m1
+>     sparx5-temp
+> +   stpddc60
+>     tc654
+>     tc74
+>     thmc50
+> diff --git a/Documentation/hwmon/stpddc60.rst b/Documentation/hwmon/stpddc60.rst
+> new file mode 100644
+> index 000000000000..11d5a9977e80
+> --- /dev/null
+> +++ b/Documentation/hwmon/stpddc60.rst
+> @@ -0,0 +1,79 @@
+> +.. SPDX-License-Identifier: GPL-2.0
+> +
+> +Kernel driver stpddc60
+> +======================
+> +
+> +Supported chips:
+> +
+> +  * ST STPDDC60
+> +
+> +    Prefix: 'stpddc60', 'bmr481'
+> +
+> +    Addresses scanned: -
+> +
+> +    Datasheet: https://flexpowermodules.com/documents/fpm-techspec-bmr481
+> +
+> +Author: Erik Rosen <erik.rosen@metormote.com>
+> +
+> +
+> +Description
+> +-----------
+> +
+> +This driver supports hardware monitoring for ST STPDDC60 controller chip and
+> +compatible modules.
+> +
+> +The driver is a client driver to the core PMBus driver. Please see
+> +Documentation/hwmon/pmbus.rst and Documentation.hwmon/pmbus-core for details
+> +on PMBus client drivers.
+> +
+> +
+> +Usage Notes
+> +-----------
+> +
+> +This driver does not auto-detect devices. You will have to instantiate the
+> +devices explicitly. Please see Documentation/i2c/instantiating-devices.rst for
+> +details.
+> +
+> +The vout under- and over-voltage limits are read-only for this chip.
+> +
+> +
+> +Platform data support
+> +---------------------
+> +
+> +The driver supports standard PMBus driver platform data.
+> +
+> +
+> +Sysfs entries
+> +-------------
+> +
+> +The following attributes are supported. Vin, iout and temp limits
+> +are read-write; all other attributes are read-only.
+> +
+> +======================= ========================================================
+> +in1_label		"vin"
+> +in1_input		Measured input voltage.
+> +in1_lcrit		Critical minimum input voltage.
+> +in1_crit		Critical maximum input voltage.
+> +in1_lcrit_alarm		Input voltage critical low alarm.
+> +in1_crit_alarm		Input voltage critical high alarm.
+> +
+> +in2_label		"vout1"
+> +in2_input		Measured output voltage.
+> +in2_lcrit		Critical minimum output Voltage.
+> +in2_crit		Critical maximum output voltage.
+> +in2_lcrit_alarm		Critical output voltage critical low alarm.
+> +in2_crit_alarm		Critical output voltage critical high alarm.
+> +
+> +curr1_label		"iout1"
+> +curr1_input		Measured output current.
+> +curr1_max		Maximum output current.
+> +curr1_max_alarm		Output current high alarm.
+> +curr1_crit		Critical maximum output current.
+> +curr1_crit_alarm	Output current critical high alarm.
+> +
+> +temp1_input		Measured maximum temperature of all phases.
+> +temp1_max		Maximum temperature limit.
+> +temp1_max_alarm		High temperature alarm.
+> +temp1_crit		Critical maximum temperature limit.
+> +temp1_crit_alarm	Critical maximum temperature alarm.
+> +======================= ========================================================
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 992fe3b0900a..e4c696f8eabe 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -16819,6 +16819,13 @@ L:	linux-i2c@vger.kernel.org
+>  S:	Maintained
+>  F:	drivers/i2c/busses/i2c-stm32*
+>  
+> +ST STPDDC60 DRIVER
+> +M:	Daniel Nilsson <daniel.nilsson@flex.com>
+> +L:	linux-hwmon@vger.kernel.org
+> +S:	Maintained
+> +F:	Documentation/hwmon/stpddc60.rst
+> +F:	drivers/hwmon/pmbus/stpddc60.c
+> +
+>  ST VL53L0X ToF RANGER(I2C) IIO DRIVER
+>  M:	Song Qiang <songqiang1304521@gmail.com>
+>  L:	linux-iio@vger.kernel.org
+> diff --git a/drivers/hwmon/pmbus/Kconfig b/drivers/hwmon/pmbus/Kconfig
+> index 03606d4298a4..b2becdd84b11 100644
+> --- a/drivers/hwmon/pmbus/Kconfig
+> +++ b/drivers/hwmon/pmbus/Kconfig
+> @@ -247,6 +247,16 @@ config SENSORS_Q54SJ108A2
+>  	  This driver can also be built as a module. If so, the module will
+>  	  be called q54sj108a2.
+>  
+> +config SENSORS_STPDDC60
+> +	tristate "ST STPDDC60"
+> +	help
+> +	  If you say yes here you get hardware monitoring support for ST
+> +	  STPDDC60 Universal Digital Multicell Controller, as well as for
+> +	  Flex BMR481.
+> +
+> +	  This driver can also be built as a module. If so, the module will
+> +	  be called stpddc60.
+> +
+>  config SENSORS_TPS40422
+>  	tristate "TI TPS40422"
+>  	help
+> diff --git a/drivers/hwmon/pmbus/Makefile b/drivers/hwmon/pmbus/Makefile
+> index 6a4ba0fdc1db..ef468806238c 100644
+> --- a/drivers/hwmon/pmbus/Makefile
+> +++ b/drivers/hwmon/pmbus/Makefile
+> @@ -28,9 +28,11 @@ obj-$(CONFIG_SENSORS_MP2975)	+= mp2975.o
+>  obj-$(CONFIG_SENSORS_PM6764TR)	+= pm6764tr.o
+>  obj-$(CONFIG_SENSORS_PXE1610)	+= pxe1610.o
+>  obj-$(CONFIG_SENSORS_Q54SJ108A2)	+= q54sj108a2.o
+> +obj-$(CONFIG_SENSORS_STPDDC60)	+= stpddc60.o
+>  obj-$(CONFIG_SENSORS_TPS40422)	+= tps40422.o
+>  obj-$(CONFIG_SENSORS_TPS53679)	+= tps53679.o
+>  obj-$(CONFIG_SENSORS_UCD9000)	+= ucd9000.o
+>  obj-$(CONFIG_SENSORS_UCD9200)	+= ucd9200.o
+>  obj-$(CONFIG_SENSORS_XDPE122)	+= xdpe12284.o
+>  obj-$(CONFIG_SENSORS_ZL6100)	+= zl6100.o
+> +
+> diff --git a/drivers/hwmon/pmbus/stpddc60.c b/drivers/hwmon/pmbus/stpddc60.c
+> new file mode 100644
+> index 000000000000..4e3ab260a3c2
+> --- /dev/null
+> +++ b/drivers/hwmon/pmbus/stpddc60.c
+> @@ -0,0 +1,188 @@
+> +// SPDX-License-Identifier: GPL-2.0-or-later
+> +/*
+> + * Hardware monitoring driver for the STPDDC60 controller
+> + *
+> + * Copyright (c) 2021 Flextronics International Sweden AB.
+> + */
+> +
+> +#include <linux/kernel.h>
+> +#include <linux/module.h>
+> +#include <linux/init.h>
+> +#include <linux/err.h>
+> +#include <linux/i2c.h>
+> +#include <linux/pmbus.h>
+> +#include "pmbus.h"
+> +
+> +enum chips { stpddc60 };
 
-Hi, sorry something happened with Evolution that I don't understand
-and it just sent the message quoted without my response. Should
-always stick to mutt.
+Seems pointless since it is not used.
 
-There's a bug in BuildRoot that prevents me testing right now, when
-you use LINUX_OVERRIDE_SRCDIR. BR developers are looking into that.
+> +
+> +static const struct i2c_device_id stpddc60_id[] = {
+> +	{"stpddc60", stpddc60},
+> +	{"bmr481", stpddc60},
+> +	{}
+> +};
+> +MODULE_DEVICE_TABLE(i2c, stpddc60_id);
+> +
+> +static struct pmbus_driver_info stpddc60_info = {
+> +	.pages = 1,
+> +	.func[0] = PMBUS_HAVE_VOUT | PMBUS_HAVE_STATUS_VOUT
+> +		| PMBUS_HAVE_VIN | PMBUS_HAVE_STATUS_INPUT
+> +		| PMBUS_HAVE_TEMP | PMBUS_HAVE_STATUS_TEMP
+> +		| PMBUS_HAVE_IOUT | PMBUS_HAVE_STATUS_IOUT
+> +		| PMBUS_HAVE_POUT,
+> +};
+> +
+> +/*
+> + * Convert VID value to milli-volt
+> + */
+> +static long stpddc60_vid2mv(int val)
+> +{
+> +	long rv = 0;
+> +
+> +	if (val >= 0x01)
+> +		rv = 250 + (val - 1) * 5;
+> +
+> +	return rv;
+> +}
+> +
+> +/*
+> + * Convert milli-volt to linear
+> + */
+> +static int stpddc60_mv2l(long mv)
+> +{
+> +	int rv;
+> +
+> +	rv = (mv << 8) / 1000;
 
-I'll test this once there's a resolution for that.
+DIV_ROUND_CLOSEST(), maybe ?
 
-/Jarkko
+> +
+> +	return rv;
+> +}
+
+Pleae combine those two functions into one to directly convert VID to
+linear format. Having two functions is confusing and adds unnecessary
+complexity.
+
+> +
+> +/*
+> + * The VOUT_COMMAND register uses the VID format but the vout alarm limit
+> + * registers use the linear format so we override VOUT_MODE here to force
+> + * linear format for all registers.
+> + */
+> +static int stpddc60_read_byte_data(struct i2c_client *client, int page, int reg)
+> +{
+> +	int ret;
+> +
+> +	if (page > 0)
+> +		return -ENXIO;
+> +
+> +	switch (reg) {
+> +	case PMBUS_VOUT_MODE:
+> +		ret = 0x18;
+> +		break;
+> +	default:
+> +		ret = -ENODATA;
+> +		break;
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +/*
+> + * Do the necessary conversions between VID and linear data format.
+> + */
+> +static int stpddc60_read_word_data(struct i2c_client *client, int page,
+> +				   int phase, int reg)
+> +{
+> +	int ret;
+> +
+> +	if (page > 0)
+> +		return -ENXIO;
+> +
+> +	switch (reg) {
+> +	case PMBUS_READ_VOUT:
+> +		ret = pmbus_read_word_data(client, page, phase, reg);
+> +		if (ret < 0)
+> +			return ret;
+> +		ret = stpddc60_mv2l(stpddc60_vid2mv(ret));
+
+It might possibly be simpler to just return the value reported
+by MFR_READ_VOUT. 
+
+> +		break;
+> +	case PMBUS_VOUT_OV_FAULT_LIMIT:
+> +	case PMBUS_VOUT_UV_FAULT_LIMIT:
+> +		ret = pmbus_read_word_data(client, page, phase, reg);
+> +		if (ret < 0)
+> +			return ret;
+> +		ret &= 0x07ff;
+
+This needs explanation. The BMR481 datasheet does not suggest that only
+11 bits are valid.
+
+> +		break;
+> +	default:
+> +		ret = -ENODATA;
+> +		break;
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +/*
+> + * The vout under- and over-voltage limits are readonly for this chip.
+> + */
+
+Not really. The BMR481 datasheet suggests that the value can be changed
+by writing to MFR_OV_LIMIT_OFFSET and MFR_UV_LIMIT_OFFSET.
+I am not saying that you should implement that if you don't want to,
+but I would suggest a better (more accurate) explanation.
+
+> +static int stpddc60_write_word_data(struct i2c_client *client, int page,
+> +				    int reg, u16 word)
+> +{
+> +	int ret;
+> +
+> +	if (page > 0)
+> +		return -ENXIO;
+> +
+> +	switch (reg) {
+> +	case PMBUS_VOUT_OV_FAULT_LIMIT:
+> +		ret = -EACCES;
+> +		break;
+> +	case PMBUS_VOUT_UV_FAULT_LIMIT:
+> +		ret = -EACCES;
+> +		break;
+> +	default:
+> +		ret = -ENODATA;
+> +		break;
+> +	}
+> +
+> +	return ret;
+> +}
+> +
+> +static int stpddc60_probe(struct i2c_client *client,
+> +			  const struct i2c_device_id *id)
+> +{
+> +	int status;
+> +	u8 device_id[I2C_SMBUS_BLOCK_MAX + 1];
+> +	const struct i2c_device_id *mid;
+> +	struct pmbus_driver_info *info = &stpddc60_info;
+> +
+> +	if (!i2c_check_functionality(client->adapter,
+> +				     I2C_FUNC_SMBUS_READ_BYTE_DATA
+> +				     | I2C_FUNC_SMBUS_BLOCK_DATA))
+> +		return -ENODEV;
+> +
+> +	status = i2c_smbus_read_block_data(client, PMBUS_MFR_MODEL, device_id);
+> +	if (status < 0) {
+> +		dev_err(&client->dev, "Failed to read Manufacturer Model\n");
+> +		return status;
+> +	}
+> +	for (mid = stpddc60_id; mid->name[0]; mid++) {
+> +		if (!strncasecmp(mid->name, device_id, strlen(mid->name)))
+> +			break;
+> +	}
+> +	if (!mid->name[0]) {
+> +		dev_err(&client->dev, "Unsupported device\n");
+> +		return -ENODEV;
+> +	}
+> +
+> +	info->read_byte_data = stpddc60_read_byte_data;
+> +	info->read_word_data = stpddc60_read_word_data;
+> +	info->write_word_data = stpddc60_write_word_data;
+> +
+> +	return pmbus_do_probe(client, info);
+> +}
+> +
+> +static struct i2c_driver stpddc60_driver = {
+> +	.driver = {
+> +		   .name = "stpddc60",
+> +		   },
+> +	.probe = stpddc60_probe,
+
+Please use the probe_new function callback (no id parameter).
+
+> +	.id_table = stpddc60_id,
+> +};
+> +
+> +module_i2c_driver(stpddc60_driver);
+> +
+> +MODULE_AUTHOR("Erik Rosen <erik.rosen@metormote.com>");
+> +MODULE_DESCRIPTION("PMBus driver for ST STPDDC60");
+> +MODULE_LICENSE("GPL");
+> -- 
+> 2.20.1
+> 
