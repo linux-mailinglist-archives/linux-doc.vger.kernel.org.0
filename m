@@ -2,120 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9FE8F305134
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 05:46:13 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id F282F305295
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 06:56:18 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239546AbhA0EqB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 26 Jan 2021 23:46:01 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46406 "EHLO
+        id S229817AbhA0FzL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Jan 2021 00:55:11 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54400 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2391941AbhA0BZT (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jan 2021 20:25:19 -0500
-Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com [IPv6:2607:f8b0:4864:20::534])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4E8F0C061788
-        for <linux-doc@vger.kernel.org>; Tue, 26 Jan 2021 17:12:05 -0800 (PST)
-Received: by mail-pg1-x534.google.com with SMTP id i7so429312pgc.8
-        for <linux-doc@vger.kernel.org>; Tue, 26 Jan 2021 17:12:05 -0800 (PST)
+        with ESMTP id S1343633AbhA0EUa (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 26 Jan 2021 23:20:30 -0500
+Received: from mail-pg1-x52e.google.com (mail-pg1-x52e.google.com [IPv6:2607:f8b0:4864:20::52e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id BF01BC061573;
+        Tue, 26 Jan 2021 20:19:50 -0800 (PST)
+Received: by mail-pg1-x52e.google.com with SMTP id r38so690699pgk.13;
+        Tue, 26 Jan 2021 20:19:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=h4YmZOf34leeTQFI3eVZ6RKnokT375TaRDpu5h/uKr0=;
-        b=C22G2NnLTkRdn/mttyEGOMoXxuTI2raLaGT4eCAOpNLzguJMhhMmlz0hxMQ5gA2Rj9
-         qTOfsm8D9kYABK9iahC0LW6TJZGFYlNTBRFUajK7C0nvPhjSPfRyPxrSld7uQxz5yEPk
-         8gOyD6zIHU7KjQD4jKwUI3I0eCeE4pQBotxDMRCpTJ3onB6SaWW6YcvXP1A3os4mkSh+
-         ZWrMmw2P91GRl1Zfse3yYl0EuS7KKt7X4SpR8JphUOejt6zAT3zvjROsAJ8vux6lw3Tb
-         YXzV6lDO0Zfg+oWDaGv5DDtrpWLiCpE/+MzqEQ1j9jOyYE+FHvZUTvAXPton0sk+fASu
-         ZqXw==
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=YGrPRxNt+RP6h4OeOrtja6PVCsuV/WKXvcTlJJ9DTbk=;
+        b=JLGEnAvhAwJZfHwdLlhmb0DSl4UZi3OZv3iWekFOGR3qFRUyW0DTs/gCwJjVdH9heU
+         g3IgtsRjNM8IbIG0d1R3jECKK4vMQQFCYaoC8iW/hEPmLOtYz9sBuh/rnlh7x8ieQRRk
+         SlvIypskATZnjm/Lvpye3dPgwr6E4tlcV8WjjUzJmDzgz0jmx8ZfAZF40RAAHTYiI2PE
+         /fpvQt9yoAMz03LPgmg76lrj4omYJPVJuIhIKoj5QTwLbnkgJsZwkDSyvSWM9+UtGRbp
+         LGaaekePubsHLZw3pC7kQtXYcpPAxlCbkIHqcniGQmG/7H3roHhg9QfUuKdRO5IOg6nG
+         FQnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=h4YmZOf34leeTQFI3eVZ6RKnokT375TaRDpu5h/uKr0=;
-        b=mj/EOOTsmGB0BZ7c6I4hV0A/IK2DwV7fSH1HOhR6wYC838Vi+gTh5EKtIayWcCaEEC
-         EsDOHvrLVxvRYGRWNFAPPRF64ROFUczriuEuXED97YFiabeJJXJ675MrtqQqNP6E/F8w
-         vauWd/8cjH66MwlBeaKlhg6dSJgnDA5k+drqJNmmRGndZTvvjTHF5OZirZPaYTij6UgH
-         kGZj6R5I/Sj0Xcp88i2mIBAczIXx00LzPNvVoWEuMBUryDvWpBayPXCY1amjBuzLoOyJ
-         oZpVRcecs2+63BZo6D/yASpuXL6FTYrq8UV11Two2BmFYEsTm/1LW3BVUezPOyyhkfnm
-         5Osg==
-X-Gm-Message-State: AOAM531CmzK/AtxZ0RCEwhd67PsYG2tuOGtRoXr8ne/U/GBHJRnr6NG4
-        FWT9qSb0gmkjIobmzJPc+HDgsQ==
-X-Google-Smtp-Source: ABdhPJyEFpCKvCKNjaSTTtBB/neKejTeHgWHIeRI3pSHLk8JaIe8gAIqZfxZc0fdfHzlPPO0ubyR3w==
-X-Received: by 2002:a65:6895:: with SMTP id e21mr8328535pgt.240.1611709924537;
-        Tue, 26 Jan 2021 17:12:04 -0800 (PST)
-Received: from google.com ([2620:0:1008:10:1ea0:b8ff:fe75:b885])
-        by smtp.gmail.com with ESMTPSA id gx21sm136854pjb.31.2021.01.26.17.12.03
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 26 Jan 2021 17:12:03 -0800 (PST)
-Date:   Tue, 26 Jan 2021 17:11:59 -0800
-From:   Vipin Sharma <vipinsh@google.com>
-To:     Tejun Heo <tj@kernel.org>
-Cc:     David Rientjes <rientjes@google.com>,
-        Sean Christopherson <seanjc@google.com>,
-        Tom Lendacky <thomas.lendacky@amd.com>,
-        "Singh, Brijesh" <brijesh.singh@amd.com>,
-        "Grimm, Jon" <jon.grimm@amd.com>,
-        "Van Tassell, Eric" <eric.vantassell@amd.com>, pbonzini@redhat.com,
-        lizefan@huawei.com, hannes@cmpxchg.org, frankja@linux.ibm.com,
-        borntraeger@de.ibm.com, corbet@lwn.net, joro@8bytes.org,
-        vkuznets@redhat.com, wanpengli@tencent.com, jmattson@google.com,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        gingell@google.com, dionnaglaze@google.com, kvm@vger.kernel.org,
-        x86@kernel.org, cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [Patch v4 1/2] cgroup: svm: Add Encryption ID controller
-Message-ID: <YBC937MFGEEiI63o@google.com>
-References: <YAJsUyH2zspZxF2S@google.com>
- <YAb//EYCkZ7wnl6D@mtj.duckdns.org>
- <YAfYL7V6E4/P83Mg@google.com>
- <YAhc8khTUc2AFDcd@mtj.duckdns.org>
- <be699d89-1bd8-25ae-fc6f-1e356b768c75@amd.com>
- <YAmj4Q2J9htW2Fe8@mtj.duckdns.org>
- <d11e58ec-4a8f-5b31-063a-b6b45d4ccdc5@amd.com>
- <YAopkDN85GtWAj3a@google.com>
- <1744f6c-551b-8de8-263e-5dac291b7ef@google.com>
- <YBCRIPcJyB2J85XS@slm.duckdns.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YBCRIPcJyB2J85XS@slm.duckdns.org>
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=YGrPRxNt+RP6h4OeOrtja6PVCsuV/WKXvcTlJJ9DTbk=;
+        b=dDgzy0jBESRsnAk7JVQS2od2UFBI1bj5U7sCikZ4Px3Pz9mIOg1LKQk74iW/jotQIR
+         L8nvR1tQqaIUpyf2lGXHDg7heyOW1oYmf6BKpyvv4zkYQpHW5N6jDL4y+4Frl0MAUJE7
+         jmEDnLrSPwkMFk6LsRkshCx/bTnx+DECQMpNQhoRyQLgfI8IsZ8MnYJaTZ7Xc2mmoihH
+         ecZ3UFxpe821lKAOFysGubFuJ5/GL5NXs21oGOTWS8VQSE8VDCBnxd7loJsCGEvuD8jM
+         0JCWIiSgbR0gjS3g/idDO+Spaf6Hyq+AyO4wP7hiEbqHkyYFxAhAz3BPpjxMapF3ZJUa
+         aX/w==
+X-Gm-Message-State: AOAM531NC0+Khj/y4HZqliD/CX+QRCAHm4guZoS2osNP7m5Pe7wFLsLF
+        bPrWQoMwm33Nv0TeatVrNjU=
+X-Google-Smtp-Source: ABdhPJxvHUy9zmqIrHolYOlbR0sPQ4plZ3TiuVLdfBSVsXvKKm5tNo2PbB9tIOxKzV8McWg+Q5+WnA==
+X-Received: by 2002:aa7:80c6:0:b029:1b6:92ae:a199 with SMTP id a6-20020aa780c60000b02901b692aea199mr8403118pfn.71.1611721190388;
+        Tue, 26 Jan 2021 20:19:50 -0800 (PST)
+Received: from lenovo.spreadtrum.com ([117.18.48.82])
+        by smtp.gmail.com with ESMTPSA id m10sm397760pjs.25.2021.01.26.20.19.34
+        (version=TLS1_2 cipher=ECDHE-ECDSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 26 Jan 2021 20:19:49 -0800 (PST)
+From:   Orson Zhai <orsonzhai@gmail.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Joe Perches <joe@perches.com>,
+        Denis Efremov <efremov@linux.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Christian Brauner <christian.brauner@ubuntu.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Sourabh Jain <sourabhjain@linux.ibm.com>
+Cc:     Orson Zhai <orson.zhai@unisoc.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org, Orson Zhai <orsonzhai@gmail.com>
+Subject: [PATCH] include: sysfs: Add macro to assign show for RO attributes
+Date:   Wed, 27 Jan 2021 12:19:22 +0800
+Message-Id: <1611721162-29982-1-git-send-email-orsonzhai@gmail.com>
+X-Mailer: git-send-email 2.7.4
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Jan 26, 2021 at 05:01:04PM -0500, Tejun Heo wrote:
-> The whole thing seems pretty immature to me and I agree with you that coming
-> up with an abstraction at this stage feels risky.
-> 
-> I'm leaning towards creating a misc controller to shove these things into:
-> 
-> * misc.max and misc.current: nested keyed files listing max and current
->   usage for the cgroup.
-> 
-> * Have an API to activate or update a given resource with total resource
->   count. I'd much prefer the resource list to be in the controller itself
->   rather than being through some dynamic API just so that there is some
->   review in what keys get added.
-> 
-> * Top level cgroup lists which resource is active and how many are
->   available.
+In some circumstances, multiple __ATTR_RO attributes need to be assigned
+with a single show function.
 
-Sounds good, we can have a single top level stat file
+Add this macro to make life easier with simple code.
 
-misc.stat
-  Shows how many are supported on the host:
-  $ cat misc.stat
-  sev 500
-  sev_es 10
+Signed-off-by: Orson Zhai <orsonzhai@gmail.com>
+---
+ Documentation/filesystems/sysfs.rst | 2 ++
+ include/linux/sysfs.h               | 5 +++++
+ 2 files changed, 7 insertions(+)
 
-If total value of some resource is 0 then it will be considered inactive and
-won't show in misc.{stat, current, max}
-
-We discussed earlier, instead of having "stat" file we should show
-"current" and "capacity" files in the root but I think we can just have stat
-at top showing total resources to keep it consistent with other cgroup
-files.
-
-Thanks
-Vipin
+diff --git a/Documentation/filesystems/sysfs.rst b/Documentation/filesystems/sysfs.rst
+index 004d490..0e2274a 100644
+--- a/Documentation/filesystems/sysfs.rst
++++ b/Documentation/filesystems/sysfs.rst
+@@ -141,6 +141,8 @@ __ATTR_RO_MODE(name, mode):
+ 	         fore more restrictive RO access currently
+                  only use case is the EFI System Resource Table
+                  (see drivers/firmware/efi/esrt.c)
++__ATTR_RO_SHOW(name, show):
++		 assumes default mode 0444 with specified show.
+ __ATTR_RW(name):
+ 	         assumes default name_show, name_store and setting
+                  mode to 0644.
+diff --git a/include/linux/sysfs.h b/include/linux/sysfs.h
+index 2caa34c..c851592 100644
+--- a/include/linux/sysfs.h
++++ b/include/linux/sysfs.h
+@@ -117,6 +117,11 @@ struct attribute_group {
+ 	.show	= _name##_show,						\
+ }
+ 
++#define __ATTR_RO_SHOW(_name, _show) {					\
++	.attr	= { .name = __stringify(_name), .mode = 0444 },		\
++	.show	= _show,						\
++}
++
+ #define __ATTR_RO_MODE(_name, _mode) {					\
+ 	.attr	= { .name = __stringify(_name),				\
+ 		    .mode = VERIFY_OCTAL_PERMISSIONS(_mode) },		\
+-- 
+2.7.4
 
