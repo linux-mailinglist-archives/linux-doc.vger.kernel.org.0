@@ -2,135 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9A3F330666D
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 22:39:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A8777306716
+	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 23:16:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234599AbhA0ViA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 Jan 2021 16:38:00 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51558 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233754AbhA0Vf4 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Jan 2021 16:35:56 -0500
-Received: from mail-il1-x12d.google.com (mail-il1-x12d.google.com [IPv6:2607:f8b0:4864:20::12d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 0B743C061756
-        for <linux-doc@vger.kernel.org>; Wed, 27 Jan 2021 13:35:16 -0800 (PST)
-Received: by mail-il1-x12d.google.com with SMTP id d6so3304402ilo.6
-        for <linux-doc@vger.kernel.org>; Wed, 27 Jan 2021 13:35:16 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=B1OrPnRGym/IRixVkvzf03+5dttK+B+Ggd5w3Ge31lw=;
-        b=WCzSGAO7mjzX3wOjkJ8Xi+N96UOte29yYftfMjgzGN07dKBxV6KHe6Mgk00CEi1ttL
-         60aWRQW3pAzpzTDPTMn35ux/Qi8CBERZCGV0kWR2Tq7KcxKkkiycwEzw3bglvBpsUXa8
-         jpX/rB8VmbY4VBdDKdaML9sNTelm7OUgk3Lac=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=B1OrPnRGym/IRixVkvzf03+5dttK+B+Ggd5w3Ge31lw=;
-        b=ECaZLsv/+DwNRYEaTAD5YMrCpRcVNez1VmIUfrDJ6TAxhsIgMdr1iAF+q9l7YlTQMG
-         xuqcEvfR86Sf8a+oHEOqhpIeKxpaqhVxRbORJGXftNWTAtICVuzUPoUmR5pwGD4pqHRk
-         olr8j/zwuIpCfljksoYxi7rKX/dzUhkREs3ZBHFwjuGeVLUVYZB/7JJwLJTSRSLlDT9k
-         BqsPNMHrWfLZzURoo4CtocqmLNMRfT3o36rWiDEfEsm3OsdYrr70xnBixSIBxiP8Nzdz
-         TA6oqh+9sR/vwgK53CBtVVT8593c7gbH8nt+4nrl1YXwMCGJu/d7n2DKJ3A5NuauWdL+
-         53Bw==
-X-Gm-Message-State: AOAM531Leq9Limxng83fWW4cDb1PzFniY2Q6UYpVLJoMyzCrNJQZRLrD
-        IXVvlZ8js7A4Ha2D2+rYQlNyRN/bacu1dz0D
-X-Google-Smtp-Source: ABdhPJwKWokXqdvWEQiA/cU9zHzThuxcL1K1Ga5PDS6FuzjmAmn7aGukcPWlUTaRcUYNueGgduhgGA==
-X-Received: by 2002:a05:6e02:1c8d:: with SMTP id w13mr10334195ill.301.1611783315239;
-        Wed, 27 Jan 2021 13:35:15 -0800 (PST)
-Received: from mail-il1-f178.google.com (mail-il1-f178.google.com. [209.85.166.178])
-        by smtp.gmail.com with ESMTPSA id k11sm1601723ilo.8.2021.01.27.13.35.13
-        for <linux-doc@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 27 Jan 2021 13:35:14 -0800 (PST)
-Received: by mail-il1-f178.google.com with SMTP id l4so3300281ilo.11
-        for <linux-doc@vger.kernel.org>; Wed, 27 Jan 2021 13:35:13 -0800 (PST)
-X-Received: by 2002:a05:6e02:194e:: with SMTP id x14mr10530200ilu.218.1611783313321;
- Wed, 27 Jan 2021 13:35:13 -0800 (PST)
+        id S232940AbhA0WQJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Jan 2021 17:16:09 -0500
+Received: from jabberwock.ucw.cz ([46.255.230.98]:37418 "EHLO
+        jabberwock.ucw.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231153AbhA0WQD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Jan 2021 17:16:03 -0500
+Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
+        id 88E5B1C0B8E; Wed, 27 Jan 2021 23:15:05 +0100 (CET)
+Date:   Wed, 27 Jan 2021 23:15:05 +0100
+From:   Pavel Machek <pavel@ucw.cz>
+To:     Adrian Catangiu <acatan@amazon.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        qemu-devel@nongnu.org, kvm@vger.kernel.org,
+        linux-s390@vger.kernel.org, gregkh@linuxfoundation.org,
+        graf@amazon.com, arnd@arndb.de, ebiederm@xmission.com,
+        rppt@kernel.org, 0x7f454c46@gmail.com, borntraeger@de.ibm.com,
+        Jason@zx2c4.com, jannh@google.com, w@1wt.eu, colmmacc@amazon.com,
+        luto@kernel.org, tytso@mit.edu, ebiggers@kernel.org,
+        dwmw@amazon.co.uk, bonzini@gnu.org, sblbir@amazon.com,
+        raduweis@amazon.com, corbet@lwn.net, mst@redhat.com,
+        mhocko@kernel.org, rafael@kernel.org, mpe@ellerman.id.au,
+        areber@redhat.com, ovzxemul@gmail.com, avagin@gmail.com,
+        ptikhomirov@virtuozzo.com, gil@azul.com, asmehra@redhat.com,
+        dgunigun@redhat.com, vijaysun@ca.ibm.com, oridgar@gmail.com,
+        ghammer@redhat.com
+Subject: Re: [PATCH v4 1/2] drivers/misc: sysgenid: add system generation id
+ driver
+Message-ID: <20210127221505.GB24799@amd>
+References: <1610453760-13812-1-git-send-email-acatan@amazon.com>
+ <1610453760-13812-2-git-send-email-acatan@amazon.com>
 MIME-Version: 1.0
-References: <20201201033658.GE3723071@google.com> <20201201144916.GA14682@lst.de>
- <CAAFQd5BBEbmENrrZ-vMK9cKOap19XWmfcxwrxKfjWx-wEew8rg@mail.gmail.com>
- <20201208071320.GA1667627@google.com> <20201209111639.GB22806@lst.de>
- <CANiDSCtsOdJUK3r_t8UNKhh7Px0ANNFJkuwM1fBgZ7wnVh0JFA@mail.gmail.com>
- <20210111083614.GA27589@lst.de> <CANiDSCvuvj47=nhoWhvzc5raMxM60w+JYRWjd0YepcbcbkrUjA@mail.gmail.com>
- <20210126170659.GA9104@lst.de> <CANiDSCsz+9DJesOTJ5C5HGEH-wwuTmEd3c8yLoHjnDz=2+ndJw@mail.gmail.com>
- <20210127155608.GA20272@lst.de>
-In-Reply-To: <20210127155608.GA20272@lst.de>
-From:   Ricardo Ribalda <ribalda@chromium.org>
-Date:   Wed, 27 Jan 2021 22:35:02 +0100
-X-Gmail-Original-Message-ID: <CANiDSCsHquQWgeGurmh83UDm3xPzkzaRTV0EOKQs=Q_a349f=Q@mail.gmail.com>
-Message-ID: <CANiDSCsHquQWgeGurmh83UDm3xPzkzaRTV0EOKQs=Q_a349f=Q@mail.gmail.com>
-Subject: Re: [PATCH v3 5/6] media: uvcvideo: Use dma_alloc_noncontiguos API
-To:     ". Christoph Hellwig" <hch@lst.de>
-Cc:     Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
-        Tomasz Figa <tfiga@chromium.org>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
-        Joerg Roedel <joro@8bytes.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Media Mailing List <linux-media@vger.kernel.org>,
-        Sergey Senozhatsky <senozhatsky@google.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: multipart/signed; micalg=pgp-sha1;
+        protocol="application/pgp-signature"; boundary="qlTNgmc+xy1dBmNv"
+Content-Disposition: inline
+In-Reply-To: <1610453760-13812-2-git-send-email-acatan@amazon.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Christoph
 
-On Wed, Jan 27, 2021 at 4:56 PM . Christoph Hellwig <hch@lst.de> wrote:
->
-> On Wed, Jan 27, 2021 at 12:29:08AM +0100, Ricardo Ribalda wrote:
-> > - Is there any platform where dma_alloc_noncontiguos can fail?
-> > This is, !ops->alloc_noncontiguous and !dev->coherent_dma_mask
-> > If yes then we need to add a function to let the driver know in
-> > advance that it has to use the coherent allocator (usb_alloc_coherent
-> > for uvc)
->
-> dev->coherent_dma_mask is set by the driver.  So the only reason why
-> dma_alloc_noncontiguos will fail is because is because it can't
-> allocate any memory.
->
-> > - In dma_alloc_noncontiguos, on the dma_alloc_pages fallback. If we
-> > have a device where the dma happens in only one direction, could not
-> > get more performance with DMA_FROM/TO_DEVICE instead of
-> > DMA_BIDIRECTIONAL ?
->
-> Yes, we could probably do that.
->
-> >
-> >
-> > Then I have tried to use the API, and I have encountered a problem: on
-> > uvcvideo the device passed to the memory allocator is different for
-> > DMA_PAGES and NON_CONTIGUOUS:
-> > https://github.com/ribalda/linux/blob/042cd497739f71c8d4a83a67ee970369e2baca4a/drivers/media/usb/uvc/uvc_video.c#L1236
-> >
-> > I need to dig a bit tomorrow to figure out why this is, I have
-> > hardware to test both paths, so it should not be too difficult.
->
-> I always found the USB dma alloc API a little weird, but we might have
-> to follow the scheme of the usb coherent wrappers there.
+--qlTNgmc+xy1dBmNv
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-I have used the current API here:
+Hi!
 
-https://git.kernel.org/pub/scm/linux/kernel/git/ribalda/linux.git/log/?h=uvc-noncontiguous
+> - Solution
+>=20
+> The System Generation ID is a simple concept meant to alleviate the
+> issue by providing a monotonically increasing u32 counter that changes
+> each time the VM or container is restored from a snapshot.
 
-And I think the result is very clean. Great work!
+I'd make it u64.
 
-I have tested it in X86 and in arm64, with similar performance as the
-previous patchset.
+But as people explained, this has race problems that may be impossible
+to solve?
 
-Maybe you want to cherry pick that commit into your series I can also
-send the patch to the list for review if you prefer so.
+Best regards,
+								Pavel
+							=09
+--=20
+http://www.livejournal.com/~pavelmachek
 
-At least in 5.11 rc5 I the same dmadev worked in arm64 and x86.
+--qlTNgmc+xy1dBmNv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Best regards!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
 
+iEYEARECAAYFAmAR5ekACgkQMOfwapXb+vIeRACdFFlEw9Qzjgj/nAuNJzxFeb2z
+28wAoKXL22jBt2ohyVp9BgmFr64wldNZ
+=T3KQ
+-----END PGP SIGNATURE-----
 
--- 
-Ricardo Ribalda
+--qlTNgmc+xy1dBmNv--
