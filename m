@@ -2,84 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A8777306716
-	for <lists+linux-doc@lfdr.de>; Wed, 27 Jan 2021 23:16:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EBEF330695A
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 02:05:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232940AbhA0WQJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 Jan 2021 17:16:09 -0500
-Received: from jabberwock.ucw.cz ([46.255.230.98]:37418 "EHLO
-        jabberwock.ucw.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231153AbhA0WQD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Jan 2021 17:16:03 -0500
-Received: by jabberwock.ucw.cz (Postfix, from userid 1017)
-        id 88E5B1C0B8E; Wed, 27 Jan 2021 23:15:05 +0100 (CET)
-Date:   Wed, 27 Jan 2021 23:15:05 +0100
-From:   Pavel Machek <pavel@ucw.cz>
-To:     Adrian Catangiu <acatan@amazon.com>
-Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        qemu-devel@nongnu.org, kvm@vger.kernel.org,
-        linux-s390@vger.kernel.org, gregkh@linuxfoundation.org,
-        graf@amazon.com, arnd@arndb.de, ebiederm@xmission.com,
-        rppt@kernel.org, 0x7f454c46@gmail.com, borntraeger@de.ibm.com,
-        Jason@zx2c4.com, jannh@google.com, w@1wt.eu, colmmacc@amazon.com,
-        luto@kernel.org, tytso@mit.edu, ebiggers@kernel.org,
-        dwmw@amazon.co.uk, bonzini@gnu.org, sblbir@amazon.com,
-        raduweis@amazon.com, corbet@lwn.net, mst@redhat.com,
-        mhocko@kernel.org, rafael@kernel.org, mpe@ellerman.id.au,
-        areber@redhat.com, ovzxemul@gmail.com, avagin@gmail.com,
-        ptikhomirov@virtuozzo.com, gil@azul.com, asmehra@redhat.com,
-        dgunigun@redhat.com, vijaysun@ca.ibm.com, oridgar@gmail.com,
-        ghammer@redhat.com
-Subject: Re: [PATCH v4 1/2] drivers/misc: sysgenid: add system generation id
- driver
-Message-ID: <20210127221505.GB24799@amd>
-References: <1610453760-13812-1-git-send-email-acatan@amazon.com>
- <1610453760-13812-2-git-send-email-acatan@amazon.com>
+        id S231649AbhA1BE6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Jan 2021 20:04:58 -0500
+Received: from mail-40136.protonmail.ch ([185.70.40.136]:57917 "EHLO
+        mail-40136.protonmail.ch" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231480AbhA1BCV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Jan 2021 20:02:21 -0500
+Date:   Thu, 28 Jan 2021 01:01:13 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
+        s=protonmail; t=1611795682;
+        bh=oN3yS61gBPJ9xdHSwY1nQqpqd4e0ESFLymvcdmGZwp0=;
+        h=Date:To:From:Cc:Reply-To:Subject:From;
+        b=oE963L2Oh2GbfTyYnc+jswD84Z7wFbj1K4D4c5axtEZt1VdZXOV+BYEsrmnT5EUxY
+         Dfw85b5AKNIrTAmCFw05l0c2NPf3ZM78H+3LseuTp7qCpTRKj2dckjle5Sha1KI2vy
+         Sm6zaX3l1n9+sbGEsf2lq70ZzW69CF8khFpSfoVc=
+To:     Jonathan Corbet <corbet@lwn.net>
+From:   =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
+        <nfraprado@protonmail.com>
+Cc:     Randy Dunlap <rdunlap@infradead.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        Miguel Ojeda <ojeda@kernel.org>,
+        Andrew Klychkov <andrew.a.klychkov@gmail.com>,
+        lkcamp@lists.libreplanetbr.org, andrealmeid@collabora.com
+Reply-To: =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
+          <nfraprado@protonmail.com>
+Subject: [PATCH 0/2] docs: Add support for relative paths in automarkup
+Message-ID: <20210128010028.58541-1-nfraprado@protonmail.com>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha1;
-        protocol="application/pgp-signature"; boundary="qlTNgmc+xy1dBmNv"
-Content-Disposition: inline
-In-Reply-To: <1610453760-13812-2-git-send-email-acatan@amazon.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-1.2 required=10.0 tests=ALL_TRUSTED,DKIM_SIGNED,
+        DKIM_VALID,DKIM_VALID_AU,DKIM_VALID_EF,FREEMAIL_FROM shortcircuit=no
+        autolearn=disabled version=3.4.4
+X-Spam-Checker-Version: SpamAssassin 3.4.4 (2020-01-24) on
+        mailout.protonmail.ch
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+As Jon previously noted [1], it would be nice if automarkup supported relat=
+ive
+paths as well when cross-referencing to other documents. This adds the supp=
+ort
+for it, and documents it.
 
---qlTNgmc+xy1dBmNv
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Jon, after applying this, 43bc3ed73639 ("docs: dt: Use full path to enable
+cross-reference") could be reverted without the link stopping to work.
 
-Hi!
+[1] https://lore.kernel.org/linux-doc/20201130142404.6ef6689e@lwn.net/
 
-> - Solution
->=20
-> The System Generation ID is a simple concept meant to alleviate the
-> issue by providing a monotonically increasing u32 counter that changes
-> each time the VM or container is restored from a snapshot.
+N=C3=ADcolas F. R. A. Prado (2):
+  docs: Enable usage of relative paths to docs on automarkup
+  docs: Document cross-referencing using relative path
 
-I'd make it u64.
+ Documentation/doc-guide/sphinx.rst | 30 ++++++++++++++++++++----------
+ Documentation/sphinx/automarkup.py |  7 +++++--
+ 2 files changed, 25 insertions(+), 12 deletions(-)
 
-But as people explained, this has race problems that may be impossible
-to solve?
-
-Best regards,
-								Pavel
-							=09
 --=20
-http://www.livejournal.com/~pavelmachek
+2.30.0
 
---qlTNgmc+xy1dBmNv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iEYEARECAAYFAmAR5ekACgkQMOfwapXb+vIeRACdFFlEw9Qzjgj/nAuNJzxFeb2z
-28wAoKXL22jBt2ohyVp9BgmFr64wldNZ
-=T3KQ
------END PGP SIGNATURE-----
-
---qlTNgmc+xy1dBmNv--
