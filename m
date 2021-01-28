@@ -2,60 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CC3C83070B1
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 09:09:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 359BB307144
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 09:20:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232385AbhA1IHJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 28 Jan 2021 03:07:09 -0500
-Received: from verein.lst.de ([213.95.11.211]:56359 "EHLO verein.lst.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S232178AbhA1IG2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 28 Jan 2021 03:06:28 -0500
-Received: by verein.lst.de (Postfix, from userid 2407)
-        id 18E2068C4E; Thu, 28 Jan 2021 08:57:38 +0100 (CET)
-Date:   Thu, 28 Jan 2021 08:57:37 +0100
-From:   ". Christoph Hellwig" <hch@lst.de>
-To:     Ricardo Ribalda <ribalda@chromium.org>
-Cc:     ". Christoph Hellwig" <hch@lst.de>,
-        Sergey Senozhatsky <sergey.senozhatsky.work@gmail.com>,
-        Tomasz Figa <tfiga@chromium.org>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
-        IOMMU DRIVERS <iommu@lists.linux-foundation.org>,
-        Joerg Roedel <joro@8bytes.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Media Mailing List <linux-media@vger.kernel.org>,
-        Sergey Senozhatsky <senozhatsky@google.com>
-Subject: Re: [PATCH v3 5/6] media: uvcvideo: Use dma_alloc_noncontiguos API
-Message-ID: <20210128075737.GA28741@lst.de>
-References: <CAAFQd5BBEbmENrrZ-vMK9cKOap19XWmfcxwrxKfjWx-wEew8rg@mail.gmail.com> <20201208071320.GA1667627@google.com> <20201209111639.GB22806@lst.de> <CANiDSCtsOdJUK3r_t8UNKhh7Px0ANNFJkuwM1fBgZ7wnVh0JFA@mail.gmail.com> <20210111083614.GA27589@lst.de> <CANiDSCvuvj47=nhoWhvzc5raMxM60w+JYRWjd0YepcbcbkrUjA@mail.gmail.com> <20210126170659.GA9104@lst.de> <CANiDSCsz+9DJesOTJ5C5HGEH-wwuTmEd3c8yLoHjnDz=2+ndJw@mail.gmail.com> <20210127155608.GA20272@lst.de> <CANiDSCsHquQWgeGurmh83UDm3xPzkzaRTV0EOKQs=Q_a349f=Q@mail.gmail.com>
+        id S231967AbhA1ISR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 28 Jan 2021 03:18:17 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:44122 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S231547AbhA1ISE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Jan 2021 03:18:04 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1611821798;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=pQjhFF8PA9KgrrHABCtOSMHOQHZwwUG/J8Os5OD+Pxg=;
+        b=hNcbxcUxX6UMc1RuVwuTBm6Fx6fB2ZIl+9Bz58KJC9zDVbpdVrseG8j/DoBPAIBsqch1qc
+        Tank4ZxQ71nr6egOMpj6wxGM7PMCJcS58Nz7ThCbQYofpiSSpN2y4rNpTu9UxKKtR+HCvR
+        KDwalIJFAcfJyL+TgPb61HyKUTH/FYw=
+Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
+ [209.85.218.70]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-485-ZH8p6GOWOoyCcBkEUXITfQ-1; Thu, 28 Jan 2021 03:16:35 -0500
+X-MC-Unique: ZH8p6GOWOoyCcBkEUXITfQ-1
+Received: by mail-ej1-f70.google.com with SMTP id z2so1840572ejf.3
+        for <linux-doc@vger.kernel.org>; Thu, 28 Jan 2021 00:16:35 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=pQjhFF8PA9KgrrHABCtOSMHOQHZwwUG/J8Os5OD+Pxg=;
+        b=pQdKB7rGDpimIIqm5Af8DAXXTT7pHlP9aunIAtaM/cKhRQX7ekDQ//6oYXJnRmZqHF
+         qhz+o90CYiAUaRqpFHiFkmL2thBuGJYdqRCrItWgJmbAnvPO7E0vr+d2HrD1wSzdwUHW
+         PBTz9sASo55Aqbsq/KAHy2zrPD14wftA29BeuU4cPQkZuoOFqG2PBRVxLQP7mV0l8xWF
+         5a8qxlWcPUPpuBcE8VNfzHiHtLj3XzEnJ8rr4tZm46Q8c0vr9IzGFT4I636UUa/fN3Dc
+         6gu5LAe8Z6H1YiDn6L32hqZ9/TSnooyKXUNZ0REE5ifbUE0HMk4wWXmdcdXDIsZAnTZl
+         CV6A==
+X-Gm-Message-State: AOAM533ueup6pe95/5XtTlcyK/swvFDczvHPGY9xMZeBsX84Z9RdYOO/
+        PnV+Bf+tWl9kRX5lCCNBnSWQwo8esaOjE8AE7zH2cBonzkN6wJdM4iEPrwlilQo+1GoSJvpOOu3
+        v4wfXwGv5NhtAkc9TDxTg
+X-Received: by 2002:a17:906:e106:: with SMTP id gj6mr9622383ejb.337.1611821794826;
+        Thu, 28 Jan 2021 00:16:34 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwLuNIFyC7TLo0nrn4d8vGNT4D7BktAvk9O6gTR9IZCzuzI9c/ieVRS9b86mNYO///7R1HwVw==
+X-Received: by 2002:a17:906:e106:: with SMTP id gj6mr9622375ejb.337.1611821794649;
+        Thu, 28 Jan 2021 00:16:34 -0800 (PST)
+Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a? ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+        by smtp.gmail.com with ESMTPSA id h16sm2722046edw.34.2021.01.28.00.16.33
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Thu, 28 Jan 2021 00:16:33 -0800 (PST)
+Subject: Re: [PATCH] KVM: Documentation: Fix documentation for nested.
+To:     Yu Zhang <yu.c.zhang@linux.intel.com>, kvm@vger.kernel.org
+Cc:     corbet@lwn.net, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20210128154747.4242-1-yu.c.zhang@linux.intel.com>
+From:   Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <1b5cf1ea-0ae9-acc2-d92f-c2f2da75f82f@redhat.com>
+Date:   Thu, 28 Jan 2021 09:16:32 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CANiDSCsHquQWgeGurmh83UDm3xPzkzaRTV0EOKQs=Q_a349f=Q@mail.gmail.com>
-User-Agent: Mutt/1.5.17 (2007-11-01)
+In-Reply-To: <20210128154747.4242-1-yu.c.zhang@linux.intel.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Jan 27, 2021 at 10:35:02PM +0100, Ricardo Ribalda wrote:
-> I have used the current API here:
+On 28/01/21 16:47, Yu Zhang wrote:
+> Nested VMX was enabled by default in commit <1e58e5e59148> ("KVM:
+> VMX: enable nested virtualization by default"), which was merged
+> in Linux 4.20. This patch is to fix the documentation accordingly.
 > 
-> https://git.kernel.org/pub/scm/linux/kernel/git/ribalda/linux.git/log/?h=uvc-noncontiguous
+> Signed-off-by: Yu Zhang <yu.c.zhang@linux.intel.com>
+> ---
+>   Documentation/virt/kvm/nested-vmx.rst            | 6 ++++--
+>   Documentation/virt/kvm/running-nested-guests.rst | 2 +-
+>   2 files changed, 5 insertions(+), 3 deletions(-)
 > 
-> And I think the result is very clean. Great work!
+> diff --git a/Documentation/virt/kvm/nested-vmx.rst b/Documentation/virt/kvm/nested-vmx.rst
+> index 6ab4e35..ac2095d 100644
+> --- a/Documentation/virt/kvm/nested-vmx.rst
+> +++ b/Documentation/virt/kvm/nested-vmx.rst
+> @@ -37,8 +37,10 @@ call L2.
+>   Running nested VMX
+>   ------------------
+>   
+> -The nested VMX feature is disabled by default. It can be enabled by giving
+> -the "nested=1" option to the kvm-intel module.
+> +The nested VMX feature is enabled by default since Linux kernel v4.20. For
+> +older Linux kernel, it can be enabled by giving the "nested=1" option to the
+> +kvm-intel module.
+> +
+>   
+>   No modifications are required to user space (qemu). However, qemu's default
+>   emulated CPU type (qemu64) does not list the "VMX" CPU feature, so it must be
+> diff --git a/Documentation/virt/kvm/running-nested-guests.rst b/Documentation/virt/kvm/running-nested-guests.rst
+> index d0a1fc7..bd70c69 100644
+> --- a/Documentation/virt/kvm/running-nested-guests.rst
+> +++ b/Documentation/virt/kvm/running-nested-guests.rst
+> @@ -74,7 +74,7 @@ few:
+>   Enabling "nested" (x86)
+>   -----------------------
+>   
+> -From Linux kernel v4.19 onwards, the ``nested`` KVM parameter is enabled
+> +From Linux kernel v4.20 onwards, the ``nested`` KVM parameter is enabled
+>   by default for Intel and AMD.  (Though your Linux distribution might
+>   override this default.)
+>   
 > 
-> I have tested it in X86 and in arm64, with similar performance as the
-> previous patchset.
-> 
-> Maybe you want to cherry pick that commit into your series I can also
-> send the patch to the list for review if you prefer so.
-> 
-> At least in 5.11 rc5 I the same dmadev worked in arm64 and x86.
 
-Given that Sergey mentioned the v4l patchset needs more work I'll
-use your commit as the example for sending out my series.
+Queued, thanks.
 
-Thanks for all the work!
+Paolo
+
