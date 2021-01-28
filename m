@@ -2,58 +2,54 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3E07F30791A
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 16:09:58 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 71D1E307937
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 16:15:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232425AbhA1PGQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 28 Jan 2021 10:06:16 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50746 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231696AbhA1PFl (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Jan 2021 10:05:41 -0500
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C3C33C061574;
-        Thu, 28 Jan 2021 07:05:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=i2BpbjiEMy/uoZsV+pGyxXHIRXV75JS+gpJXaA6/Vt8=; b=uVQQCvvuifCvUNXxKzqoRVkwCg
-        EsPu11izlSdVbGdWwh4F+y57Z2DPUgDJPXg3NePMa092xK+QeqQ8ov3tLWJeJbnRIVVHScPtdd/dB
-        pNEhjfVmx5qzUx9y50jFU84q0vf1eY8GW9YXZJ9bzbIJQSVkMrYysBXdjCpurDVoGURqNuM2KSHRD
-        NLZRZHr37qIy2UirH5j+biqJRZ/zAYA5zpbVQQWueuvy+d7nNSk7vjeGD3ysYBq78+XMM5BfovMfn
-        vPcQV29IHOWLJIYfgbg4wS13zfzu0RSCjGAWfmXQ73wo2pRbHS09QjG8NW+gbzIFn3kwqII4h6mnf
-        vpl+50Kg==;
-Received: from willy by casper.infradead.org with local (Exim 4.94 #2 (Red Hat Linux))
-        id 1l58qi-008bRt-3T; Thu, 28 Jan 2021 15:04:48 +0000
-Date:   Thu, 28 Jan 2021 15:04:44 +0000
-From:   Matthew Wilcox <willy@infradead.org>
-To:     Saravanan D <saravanand@fb.com>
-Cc:     x86@kernel.org, dave.hansen@linux.intel.com, luto@kernel.org,
-        peterz@infradead.org, corbet@lwn.net, linux-kernel@vger.kernel.org,
-        kernel-team@fb.com, linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        songliubraving@fb.com
-Subject: Re: [PATCH V5] x86/mm: Tracking linear mapping split events
-Message-ID: <20210128150444.GY308988@casper.infradead.org>
-References: <20210128045153.GW308988@casper.infradead.org>
- <20210128104934.2916679-1-saravanand@fb.com>
+        id S231945AbhA1PLF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 28 Jan 2021 10:11:05 -0500
+Received: from verein.lst.de ([213.95.11.211]:57690 "EHLO verein.lst.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S232554AbhA1PKk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 28 Jan 2021 10:10:40 -0500
+Received: by verein.lst.de (Postfix, from userid 2407)
+        id 4C75668AFE; Thu, 28 Jan 2021 16:09:55 +0100 (CET)
+Date:   Thu, 28 Jan 2021 16:09:55 +0100
+From:   Christoph Hellwig <hch@lst.de>
+To:     Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Marek Szyprowski <m.szyprowski@samsung.com>,
+        Tomasz Figa <tfiga@chromium.org>,
+        Ricardo Ribalda <ribalda@chromium.org>,
+        Sergey Senozhatsky <senozhatsky@google.com>,
+        iommu@lists.linux-foundation.org
+Cc:     linux-media@vger.kernel.org, Robin Murphy <robin.murphy@arm.com>,
+        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 6/6] media: uvcvideo: Use dma_alloc_noncontiguos API
+Message-ID: <20210128150955.GA30563@lst.de>
+References: <20210128145837.2250561-1-hch@lst.de> <20210128145837.2250561-7-hch@lst.de>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <20210128104934.2916679-1-saravanand@fb.com>
+In-Reply-To: <20210128145837.2250561-7-hch@lst.de>
+User-Agent: Mutt/1.5.17 (2007-11-01)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Jan 28, 2021 at 02:49:34AM -0800, Saravanan D wrote:
-> One of the many lasting (as we don't coalesce back) sources for huge page
-> splits is tracing as the granular page attribute/permission changes would
-> force the kernel to split code segments mapped to huge pages to smaller
-> ones thereby increasing the probability of TLB miss/reload even after
-> tracing has been stopped.
+I just included this patch as-is, but here are a few comments:
 
-You didn't answer my question.
+On Thu, Jan 28, 2021 at 03:58:37PM +0100, Christoph Hellwig wrote:
+> +static void uvc_urb_dma_sync(struct uvc_urb *uvc_urb, bool for_device)
+> +{
+> +	struct device *dma_dev = dma_dev = stream_to_dmadev(uvc_urb->stream);
+> +
+> +	if (for_device)
+> +		dma_sync_sgtable_for_device(dma_dev, uvc_urb->sgt,
+> +					    DMA_FROM_DEVICE);
+> +	else
+> +		dma_sync_sgtable_for_cpu(dma_dev, uvc_urb->sgt,
+> +					 DMA_FROM_DEVICE);
+> +}
 
-Is this tracing of userspace programs causing splits, or is it kernel
-tracing?  Also, we have lots of kinds of tracing these days; are you
-referring to kprobes?  tracepoints?  ftrace?  Something else?
+Given that we vmap the addresses this also needs
+flush_kernel_vmap_range / invalidate_kernel_vmap_range calls for
+VIVT architectures.
