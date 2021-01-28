@@ -2,119 +2,209 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 51CA1307BB7
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 18:06:05 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7A963307BE8
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 18:15:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232884AbhA1RDb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 28 Jan 2021 12:03:31 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:47442 "EHLO
+        id S232937AbhA1RMV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 28 Jan 2021 12:12:21 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49310 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232683AbhA1RBv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Jan 2021 12:01:51 -0500
-Received: from mail-il1-x129.google.com (mail-il1-x129.google.com [IPv6:2607:f8b0:4864:20::129])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 63936C061756
-        for <linux-doc@vger.kernel.org>; Thu, 28 Jan 2021 09:01:11 -0800 (PST)
-Received: by mail-il1-x129.google.com with SMTP id e7so5861564ile.7
-        for <linux-doc@vger.kernel.org>; Thu, 28 Jan 2021 09:01:11 -0800 (PST)
+        with ESMTP id S232882AbhA1RK0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 28 Jan 2021 12:10:26 -0500
+Received: from mail-wm1-x32d.google.com (mail-wm1-x32d.google.com [IPv6:2a00:1450:4864:20::32d])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 383B8C06178B
+        for <linux-doc@vger.kernel.org>; Thu, 28 Jan 2021 09:09:46 -0800 (PST)
+Received: by mail-wm1-x32d.google.com with SMTP id 190so4916496wmz.0
+        for <linux-doc@vger.kernel.org>; Thu, 28 Jan 2021 09:09:46 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=gar8fBlSsZFzuxpXobcokllNvMKbpQD2Smckqot5AV0=;
-        b=R3385CEDtxrszE24UXwkp0ZU2U/OxxdtH7/PIESlm6ZDdnLzURn5PTJpKHAz3HOjFV
-         4jddEodBYlle4AtEzG4w+16LjwVOb8uZLdLeydFODHiifeRe1u+cD6DkQHyQ70QWZRDh
-         sLAUPg5YB8to0myR+Mth92WbIszUnr71jwtds=
+        d=linaro.org; s=google;
+        h=from:to:cc:subject:date:message-id;
+        bh=qHj5B+XRBw8ZN//XBzRxFjouBYl1AmeCxw5wS7tt9Zs=;
+        b=ek9dujSJWuy1cvvTTTNxOdjHTrr/Mhptwq6r/6fF3skaS7p+lvvNlkgOghIwca3d+J
+         aUT/hqfmpoKWXk+l9RRSGJggPPe8t2PxxHGrleuYaNa4AWjUsgipBmS0MZ5yPx9QEByS
+         8Jx46mL68M5WOSRhbNNUpxLtHdZrFFdj3+Bzjtm95ovVxQbGiJpoZabOgyFDtRBmKRXN
+         FpZTuYsb6CCrvlfaZMqghyq3YH8usCqr0rBDPXmwdar5icB/gPYwkd6AeCZQMN+LfCEt
+         9e4sdJuozKivPar5bpIbAAqlMrIJrQ0S9+81NLhyWBSdxEamV/bP0Qgn3HdXxB47ai/Z
+         u9BA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=gar8fBlSsZFzuxpXobcokllNvMKbpQD2Smckqot5AV0=;
-        b=JdhDYPk6y+yYsxjomv8Zy4sInNxNBB4i3ykENOiInO0S1RyB59vZRB9o1L5c0iW2zx
-         XROiGeXdsR2gzsPnmcZAwS6eXRjyQ8WHQFlcVFlmSmo9jhTdh0FESbKn8sFoD2eruLPr
-         0+X5LzZh6g7EODnH9Oau2bpRLzAXz7AL7/3UiEnF0O4wT7z5QJAnCwzOTD/A+VVE3vL7
-         o30bRI0fC5aWjHzAys57aJTUsb1gQFFYw0b7Zktqnhd5sW6lKPM9pniVJufiCWKFmPue
-         nNhQDp//djLPpI54OFhInLEZiuHfSCUFvT6Vb7IXKExeUGI4vIHFGJEjXj5ukmT3zej3
-         ensw==
-X-Gm-Message-State: AOAM533rvuZ/Ec1f5yyuE2NxHt77kczoopoWJfdHT7ZMFOzJhoLJL3pO
-        gUb9uadty8UWyrAF0t1wau38t+TExu+++oyR
-X-Google-Smtp-Source: ABdhPJyQ88FopdP+WfD886fUebVxW1D7k7noPTIjs5NJoprDEq1Jir2i4f7sC7OGE+FQKaX+/rZOKA==
-X-Received: by 2002:a92:1b57:: with SMTP id b84mr13578244ilb.256.1611853270571;
-        Thu, 28 Jan 2021 09:01:10 -0800 (PST)
-Received: from mail-io1-f48.google.com (mail-io1-f48.google.com. [209.85.166.48])
-        by smtp.gmail.com with ESMTPSA id t5sm2799329ioc.15.2021.01.28.09.01.09
-        for <linux-doc@vger.kernel.org>
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 28 Jan 2021 09:01:09 -0800 (PST)
-Received: by mail-io1-f48.google.com with SMTP id n2so6278660iom.7
-        for <linux-doc@vger.kernel.org>; Thu, 28 Jan 2021 09:01:09 -0800 (PST)
-X-Received: by 2002:a5d:9717:: with SMTP id h23mr506478iol.4.1611853268632;
- Thu, 28 Jan 2021 09:01:08 -0800 (PST)
-MIME-Version: 1.0
-References: <20210128145837.2250561-1-hch@lst.de> <20210128145837.2250561-7-hch@lst.de>
- <20210128150955.GA30563@lst.de>
-In-Reply-To: <20210128150955.GA30563@lst.de>
-From:   Ricardo Ribalda <ribalda@chromium.org>
-Date:   Thu, 28 Jan 2021 18:00:57 +0100
-X-Gmail-Original-Message-ID: <CANiDSCtV8eiH7r6-mX3QhsYvJapqRfYufu4-iqmeiy6GiwwE_A@mail.gmail.com>
-Message-ID: <CANiDSCtV8eiH7r6-mX3QhsYvJapqRfYufu4-iqmeiy6GiwwE_A@mail.gmail.com>
-Subject: Re: [PATCH 6/6] media: uvcvideo: Use dma_alloc_noncontiguos API
-To:     Christoph Hellwig <hch@lst.de>
-Cc:     Mauro Carvalho Chehab <mchehab@kernel.org>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Tomasz Figa <tfiga@chromium.org>,
-        Sergey Senozhatsky <senozhatsky@google.com>,
-        "list@263.net:IOMMU DRIVERS <iommu@lists.linux-foundation.org>, Joerg
-        Roedel <joro@8bytes.org>," <iommu@lists.linux-foundation.org>,
-        Linux Media Mailing List <linux-media@vger.kernel.org>,
-        Robin Murphy <robin.murphy@arm.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=qHj5B+XRBw8ZN//XBzRxFjouBYl1AmeCxw5wS7tt9Zs=;
+        b=f2+l4UlCIBB5Q+ldGCtBHNx/QpuujkomWQadvTUFORfqd3dXP7utgWnInXZW8nZkyA
+         wuLGoWLI0hNjfUng3exFqU5vCLmhnA8vnmW71xFaMYoH13RdNQKkgR1c5ONH3QwjMAeF
+         l/z5SXQ6HapzfkIb9Mq4OTtc25mKY3t2LFdCVJhXaSyuQj7z9V2Bax1rCnv/tCWUQAS2
+         adQAleWlzqikaPoMgY6o73uPygYwrEdyySKTCpD/rzoXPoemfBkJz6tVPFNRRjP/kQ58
+         hcgfmHPYUi3z44to90G+0jlAXtDKhwOoNyNPjgZytGY0GImxsWR0rFnfWuVaafeShMCq
+         u9pw==
+X-Gm-Message-State: AOAM533/LcXahQHNti/1xzUNnA5ttXLcB4kirBVSc5nQzY9ztj0kHrOA
+        4CCM4NR3up9TXh7h9OTPKe8VbUwCHO4Ecw==
+X-Google-Smtp-Source: ABdhPJyqPKa4d7Pc3KiZLVsa+7wdwvoGKAYr16WPvIyT3ioKx2ryAffq+whZq7yT2UOXQLINGbA68Q==
+X-Received: by 2002:a1c:7906:: with SMTP id l6mr259740wme.22.1611853784623;
+        Thu, 28 Jan 2021 09:09:44 -0800 (PST)
+Received: from linaro.org ([2a00:23c5:6801:1801:40:2fca:953a:e6ba])
+        by smtp.gmail.com with ESMTPSA id p15sm7622355wrt.15.2021.01.28.09.09.43
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 28 Jan 2021 09:09:44 -0800 (PST)
+From:   Mike Leach <mike.leach@linaro.org>
+To:     linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org,
+        mathieu.poirier@linaro.org, linux-doc@vger.kernel.org,
+        suzuki.poulose@arm.com
+Cc:     yabinc@google.com, corbet@lwn.net, leo.yan@linaro.org,
+        alexander.shishkin@linux.intel.com, tingwei@codeaurora.org,
+        gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org,
+        Mike Leach <mike.leach@linaro.org>
+Subject: [PATCH v4 00/10]  CoreSight configuration management; ETM strobing
+Date:   Thu, 28 Jan 2021 17:09:26 +0000
+Message-Id: <20210128170936.9222-1-mike.leach@linaro.org>
+X-Mailer: git-send-email 2.17.1
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-HI Christoph
+This patchset introduces initial concepts in CoreSight system
+configuration management support. to allow more detailed and complex
+programming to be applied to CoreSight systems during trace capture.
 
-Thanks for your comments
+Configurations consist of 2 elements:-
+1) Features - programming combinations for devices, applied to a class of
+device on the system (all ETMv4), or individual devices.
+2) Configurations - a set of programmed features used when the named
+configuration is selected.
 
-On Thu, Jan 28, 2021 at 4:09 PM Christoph Hellwig <hch@lst.de> wrote:
->
-> I just included this patch as-is, but here are a few comments:
->
-> On Thu, Jan 28, 2021 at 03:58:37PM +0100, Christoph Hellwig wrote:
-> > +static void uvc_urb_dma_sync(struct uvc_urb *uvc_urb, bool for_device)
-> > +{
-> > +     struct device *dma_dev = dma_dev = stream_to_dmadev(uvc_urb->stream);
-> > +
-> > +     if (for_device)
-> > +             dma_sync_sgtable_for_device(dma_dev, uvc_urb->sgt,
-> > +                                         DMA_FROM_DEVICE);
-> > +     else
-> > +             dma_sync_sgtable_for_cpu(dma_dev, uvc_urb->sgt,
-> > +                                      DMA_FROM_DEVICE);
-> > +}
->
-> Given that we vmap the addresses this also needs
-> flush_kernel_vmap_range / invalidate_kernel_vmap_range calls for
-> VIVT architectures.
+Features and configurations are declared as a data table, a set of register,
+resource and parameter requirements. Features and configurations are loaded
+into the system by the virtual cs_syscfg device. This then matches features
+to any registered devices and loads the feature into them.
 
-We only read from the device to the cpu. Then can we run only
-invalidate_kernel_vmap_range() ?
+Individual device classes that support feature and configuration register
+with cs_syscfg.
 
-something like ?
-else {
-          dma_sync_sgtable_for_cpu(dma_dev, uvc_urb->sgt, DMA_FROM_DEVICE);
-           invalidate_kernel_vmap_range(uvc_urb->buffer,
-uvc_urb->stream->urb_size );
-}
+Once loaded a configuration can be enabled for a specific trace run.
+Configurations are registered with the perf cs_etm event as entries in
+cs_etm/cs_config. These can be selected on the perf command line as follows:-
 
-Thanks!
+perf record -e cs_etm/<config_name>/ ...
+
+This patch set has one pre-loaded configuration and feature.
+A named "strobing" feature is provided for ETMv4.
+A named "autofdo" configuration is provided. This configuration enables
+strobing on any ETM in used.
+
+Thus the command:
+perf record -e cs_etm/autofdo/ ...
+
+will trace the supplied application while enabling the "autofdo" configuation
+on each ETM as it is enabled by perf. This in turn will enable strobing for
+the ETM - with default parameters. Parameters can be adjusted using configfs.
+
+The sink used in the trace run will be automatically selected.
+
+A configuation can supply up to 15 of preset parameter values, which will
+subsitute in parameter values for any feature used in the configuration.
+
+Selection of preset values as follows
+perf record -e cs_etm/autofdo,preset=1/ ...
+
+(valid presets 1-N, where N is the number supplied in the configuration, not
+exceeding 15. preset=0 is the same as not selecting a preset.)
+
+Applies to coresight/next (5.11-rc2 base)
+
+Changes since v3: (Primarily based on comments from Matthieu)
+1) Locking mechanisms simplified.
+2) Removed the possibility to enable features independently from
+configurations.Only configurations can be enabled now. Simplifies programming
+logic.
+3) Configuration now uses an activate->enable mechanism. This means that perf
+will activate a selected configuration at the start of a session (during
+setup_aux), and disable at the end of a session (around free_aux)
+The active configuration and associated features will be programmed into the
+CoreSight device instances when they are enabled. This locks the configuration
+into the system while in use. Parameters cannot be altered while this is
+in place. This mechanism will be extended in future for dynamic load / unload
+of configurations to prevent removal while in use.
+4) Removed the custom bus / driver as un-necessary. A single device is
+registered to own perf fs elements and configfs.
+5) Various other minor issues addressed.
+
+Changes since v2:
+1) Added documentation file.
+2) Altered cs_syscfg driver to no longer be coresight_device based, and moved
+to its own custom bus to remove it from the main coresight bus. (Mathieu)
+3) Added configfs support to inspect and control loaded configurations and
+features. Allows listing of preset values (Yabin Cui)
+4) Dropped sysfs support for adjusting feature parameters on the per device
+basis, in favour of a single point adjustment in configfs that is pushed to all
+device instances.
+5) Altered how the config and preset command line options are handled in perf
+and the drivers. (Mathieu and Suzuki).
+6) Fixes for various issues and technical points (Mathieu, Yabin)
+
+Changes since v1:
+1) Moved preloaded configurations and features out of individual drivers.
+2) Added cs_syscfg driver to manage configurations and features. Individual
+drivers register with cs_syscfg indicating support for config, and provide
+matching information that the system uses to load features into the drivers.
+This allows individual drivers to be updated on an as needed basis - and
+removes the need to consider devices that cannot benefit from configuration -
+static replicators, funnels, tpiu.
+3) Added perf selection of configuarations.
+4) Rebased onto the coresight module loading set. 
 
 
+To follow in future revisions / sets:-
+a) load of additional config and features by loadable module.
+b) load of additional config and features by configfs
+c) enhanced resource management for ETMv4 and checking features have sufficient
+resources to be enabled.
+d) ECT and CTI support for configuration and features.
 
+Mike Leach (10):
+  coresight: syscfg: Initial coresight system configuration
+  coresight: syscfg: Add registration and feature loading for cs devices
+  coresight: config: Add configuration and feature generic functions
+  coresight: etm-perf: update to handle configuration selection
+  coresight: syscfg: Add API to activate and enable configurations
+  coresight: etm-perf: Update to activate selected configuration
+  coresight: etm4x: Add complex configuration handlers to etmv4
+  coresight: config: Add preloaded configurations
+  coresight: syscfg: Add initial configfs support
+  coresight: docs: Add documentation for CoreSight config
 
+ .../trace/coresight/coresight-config.rst      | 244 ++++++
+ Documentation/trace/coresight/coresight.rst   |  16 +
+ drivers/hwtracing/coresight/Makefile          |   7 +-
+ .../hwtracing/coresight/coresight-cfg-afdo.c  | 154 ++++
+ .../coresight/coresight-cfg-preload.c         |  25 +
+ .../coresight/coresight-cfg-preload.h         |  11 +
+ .../hwtracing/coresight/coresight-config.c    | 246 ++++++
+ .../hwtracing/coresight/coresight-config.h    | 282 +++++++
+ drivers/hwtracing/coresight/coresight-core.c  |  18 +-
+ .../hwtracing/coresight/coresight-etm-perf.c  | 180 ++++-
+ .../hwtracing/coresight/coresight-etm-perf.h  |  12 +-
+ .../hwtracing/coresight/coresight-etm4x-cfg.c | 184 +++++
+ .../hwtracing/coresight/coresight-etm4x-cfg.h |  29 +
+ .../coresight/coresight-etm4x-core.c          |  38 +-
+ .../coresight/coresight-etm4x-sysfs.c         |   3 +
+ .../coresight/coresight-syscfg-configfs.c     | 399 +++++++++
+ .../coresight/coresight-syscfg-configfs.h     |  45 ++
+ .../hwtracing/coresight/coresight-syscfg.c    | 761 ++++++++++++++++++
+ .../hwtracing/coresight/coresight-syscfg.h    |  90 +++
+ include/linux/coresight.h                     |   7 +
+ 20 files changed, 2721 insertions(+), 30 deletions(-)
+ create mode 100644 Documentation/trace/coresight/coresight-config.rst
+ create mode 100644 drivers/hwtracing/coresight/coresight-cfg-afdo.c
+ create mode 100644 drivers/hwtracing/coresight/coresight-cfg-preload.c
+ create mode 100644 drivers/hwtracing/coresight/coresight-cfg-preload.h
+ create mode 100644 drivers/hwtracing/coresight/coresight-config.c
+ create mode 100644 drivers/hwtracing/coresight/coresight-config.h
+ create mode 100644 drivers/hwtracing/coresight/coresight-etm4x-cfg.c
+ create mode 100644 drivers/hwtracing/coresight/coresight-etm4x-cfg.h
+ create mode 100644 drivers/hwtracing/coresight/coresight-syscfg-configfs.c
+ create mode 100644 drivers/hwtracing/coresight/coresight-syscfg-configfs.h
+ create mode 100644 drivers/hwtracing/coresight/coresight-syscfg.c
+ create mode 100644 drivers/hwtracing/coresight/coresight-syscfg.h
 
+-- 
+2.17.1
 
---
-Ricardo Ribalda
