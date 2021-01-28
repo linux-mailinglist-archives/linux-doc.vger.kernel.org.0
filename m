@@ -2,23 +2,23 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EBEF330695A
-	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 02:05:17 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5D05D306956
+	for <lists+linux-doc@lfdr.de>; Thu, 28 Jan 2021 02:05:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231649AbhA1BE6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 27 Jan 2021 20:04:58 -0500
-Received: from mail-40136.protonmail.ch ([185.70.40.136]:57917 "EHLO
-        mail-40136.protonmail.ch" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231480AbhA1BCV (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Jan 2021 20:02:21 -0500
-Date:   Thu, 28 Jan 2021 01:01:13 +0000
+        id S231248AbhA1BEc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 27 Jan 2021 20:04:32 -0500
+Received: from mail2.protonmail.ch ([185.70.40.22]:28841 "EHLO
+        mail2.protonmail.ch" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231636AbhA1BC3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 27 Jan 2021 20:02:29 -0500
+Date:   Thu, 28 Jan 2021 01:01:25 +0000
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=protonmail.com;
-        s=protonmail; t=1611795682;
-        bh=oN3yS61gBPJ9xdHSwY1nQqpqd4e0ESFLymvcdmGZwp0=;
-        h=Date:To:From:Cc:Reply-To:Subject:From;
-        b=oE963L2Oh2GbfTyYnc+jswD84Z7wFbj1K4D4c5axtEZt1VdZXOV+BYEsrmnT5EUxY
-         Dfw85b5AKNIrTAmCFw05l0c2NPf3ZM78H+3LseuTp7qCpTRKj2dckjle5Sha1KI2vy
-         Sm6zaX3l1n9+sbGEsf2lq70ZzW69CF8khFpSfoVc=
+        s=protonmail; t=1611795691;
+        bh=Eol7AqptGXRCq7Rc+rswtBnbWlKzHKoDGHTqWwoCE5I=;
+        h=Date:To:From:Cc:Reply-To:Subject:In-Reply-To:References:From;
+        b=X7n/6bqX7We7pqDj0N0GCbNE6Kghj7DbC7BaBB4jVl/VD8NSG0lfuJBXqjO1sHVAp
+         2Ugww63W2CYO/4n/0RaXUMjBtnBfEUjrEsbae3//V3WuKubvweSs6eAE0dBroF4QhO
+         wuG4DkPmNSWARjyDR66QAfW+rAeql+R7gPeQRG0I=
 To:     Jonathan Corbet <corbet@lwn.net>
 From:   =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
         <nfraprado@protonmail.com>
@@ -30,8 +30,10 @@ Cc:     Randy Dunlap <rdunlap@infradead.org>,
         lkcamp@lists.libreplanetbr.org, andrealmeid@collabora.com
 Reply-To: =?utf-8?Q?N=C3=ADcolas_F=2E_R=2E_A=2E_Prado?= 
           <nfraprado@protonmail.com>
-Subject: [PATCH 0/2] docs: Add support for relative paths in automarkup
-Message-ID: <20210128010028.58541-1-nfraprado@protonmail.com>
+Subject: [PATCH 1/2] docs: Enable usage of relative paths to docs on automarkup
+Message-ID: <20210128010028.58541-2-nfraprado@protonmail.com>
+In-Reply-To: <20210128010028.58541-1-nfraprado@protonmail.com>
+References: <20210128010028.58541-1-nfraprado@protonmail.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -44,25 +46,53 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-As Jon previously noted [1], it would be nice if automarkup supported relat=
-ive
-paths as well when cross-referencing to other documents. This adds the supp=
-ort
-for it, and documents it.
+Previously, a cross-reference to another document could only be created
+by writing the full path to the document starting from the
+Documentation/ directory.
 
-Jon, after applying this, 43bc3ed73639 ("docs: dt: Use full path to enable
-cross-reference") could be reverted without the link stopping to work.
+Extend this to also allow relative paths to be used. A relative path
+would be just the path, like ../filename.rst, while the absolute path
+still needs to start from Documentation, like Documentation/filename.rst.
 
-[1] https://lore.kernel.org/linux-doc/20201130142404.6ef6689e@lwn.net/
+As part of this change, the .rst extension is now required for both
+types of paths, since not requiring it would cause the regex to be too
+generic.
 
-N=C3=ADcolas F. R. A. Prado (2):
-  docs: Enable usage of relative paths to docs on automarkup
-  docs: Document cross-referencing using relative path
+Suggested-by: Jonathan Corbet <corbet@lwn.net>
+Signed-off-by: N=C3=ADcolas F. R. A. Prado <nfraprado@protonmail.com>
+---
+ Documentation/sphinx/automarkup.py | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
- Documentation/doc-guide/sphinx.rst | 30 ++++++++++++++++++++----------
- Documentation/sphinx/automarkup.py |  7 +++++--
- 2 files changed, 25 insertions(+), 12 deletions(-)
-
+diff --git a/Documentation/sphinx/automarkup.py b/Documentation/sphinx/auto=
+markup.py
+index 953b24b6e2b4..4b6aef9b35db 100644
+--- a/Documentation/sphinx/automarkup.py
++++ b/Documentation/sphinx/automarkup.py
+@@ -51,7 +51,7 @@ RE_typedef =3D re.compile(r'\b(typedef)\s+([a-zA-Z_]\w+)'=
+, flags=3Dascii_p3)
+ # Detects a reference to a documentation page of the form Documentation/..=
+. with
+ # an optional extension
+ #
+-RE_doc =3D re.compile(r'\bDocumentation(/[\w\-_/]+)(\.\w+)*')
++RE_doc =3D re.compile(r'(\bDocumentation/)?((\.\./)*[\w\-/]+)\.rst')
+=20
+ RE_namespace =3D re.compile(r'^\s*..\s*c:namespace::\s*(\S+)\s*$')
+=20
+@@ -234,7 +234,10 @@ def markup_doc_ref(docname, app, match):
+     #
+     # Go through the dance of getting an xref out of the std domain
+     #
+-    target =3D match.group(1)
++    absolute =3D match.group(1)
++    target =3D match.group(2)
++    if absolute:
++       target =3D "/" + target
+     xref =3D None
+     pxref =3D addnodes.pending_xref('', refdomain =3D 'std', reftype =3D '=
+doc',
+                                   reftarget =3D target, modname =3D None,
 --=20
 2.30.0
 
