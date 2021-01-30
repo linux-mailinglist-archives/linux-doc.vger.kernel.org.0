@@ -2,48 +2,172 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 967A83092E4
-	for <lists+linux-doc@lfdr.de>; Sat, 30 Jan 2021 10:10:20 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 22C173093C6
+	for <lists+linux-doc@lfdr.de>; Sat, 30 Jan 2021 10:55:54 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229851AbhA3JIt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 30 Jan 2021 04:08:49 -0500
-Received: from isilmar-4.linta.de ([136.243.71.142]:56112 "EHLO
-        isilmar-4.linta.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233864AbhA3JIH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 30 Jan 2021 04:08:07 -0500
-X-Greylist: delayed 530 seconds by postgrey-1.27 at vger.kernel.org; Sat, 30 Jan 2021 04:07:49 EST
-Received: by isilmar-4.linta.de (Postfix, from userid 1000)
-        id 4BCA3200EB0; Sat, 30 Jan 2021 07:18:25 +0000 (UTC)
-Date:   Sat, 30 Jan 2021 08:18:25 +0100
-From:   Dominik Brodowski <linux@dominikbrodowski.net>
-To:     =?iso-8859-1?Q?Andr=E9?= Almeida <andrealmeid@collabora.com>
-Cc:     corbet@lwn.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 1/2] docs: Make syscalls' helpers naming consistent
-Message-ID: <20210130071825.GA26647@isilmar-4.linta.de>
-References: <20210130014547.123006-1-andrealmeid@collabora.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20210130014547.123006-1-andrealmeid@collabora.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
+        id S231704AbhA3Jz1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 30 Jan 2021 04:55:27 -0500
+Received: from mga04.intel.com ([192.55.52.120]:31753 "EHLO mga04.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S233147AbhA3DAc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 29 Jan 2021 22:00:32 -0500
+IronPort-SDR: 9xUuqVu3CH3X9yqNDh7O4oNe0BTGnkeutUf6lC3ElF4kxnOLqoHBV3A3c5Db8ef6h356owLYfS
+ MFC72uUL2TBQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9879"; a="177945169"
+X-IronPort-AV: E=Sophos;i="5.79,387,1602572400"; 
+   d="scan'208";a="177945169"
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+  by fmsmga104.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Jan 2021 18:21:28 -0800
+IronPort-SDR: a1dJprSdqmWuhb5sumgn9MIZwZA6tR0mEXR4uUIJ5ZWy5qBPDAhazRYKDjZNqukqkmORWE0knB
+ BZOubujJ+AzA==
+X-IronPort-AV: E=Sophos;i="5.79,387,1602572400"; 
+   d="scan'208";a="475674087"
+Received: from smtp.ostc.intel.com ([10.54.29.231])
+  by fmsmga001-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 29 Jan 2021 18:21:28 -0800
+Received: from mtg-dev.jf.intel.com (mtg-dev.jf.intel.com [10.54.74.10])
+        by smtp.ostc.intel.com (Postfix) with ESMTP id 03E446371;
+        Fri, 29 Jan 2021 18:21:28 -0800 (PST)
+Received: by mtg-dev.jf.intel.com (Postfix, from userid 1000)
+        id EB883362EDF; Fri, 29 Jan 2021 18:21:27 -0800 (PST)
+From:   mgross@linux.intel.com
+To:     markgross@kernel.org, mgross@linux.intel.com, arnd@arndb.de,
+        bp@suse.de, damien.lemoal@wdc.com, dragan.cvetic@xilinx.com,
+        gregkh@linuxfoundation.org, corbet@lwn.net,
+        palmerdabbelt@google.com, paul.walmsley@sifive.com,
+        peng.fan@nxp.com, robh+dt@kernel.org, shawnguo@kernel.org,
+        jassisinghbrar@gmail.com
+Cc:     linux-kernel@vger.kernel.org,
+        Srikanth Thokala <srikanth.thokala@intel.com>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v3 08/34] misc: xlink-pcie: Add documentation for XLink PCIe driver
+Date:   Fri, 29 Jan 2021 18:20:23 -0800
+Message-Id: <20210130022124.65083-9-mgross@linux.intel.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <20210130022124.65083-1-mgross@linux.intel.com>
+References: <20210130022124.65083-1-mgross@linux.intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Jan 29, 2021 at 10:45:46PM -0300, André Almeida wrote:
-> The documentation explains the need to create internal syscalls' helpers,
-> and that they should be called `kern_xyzzy()`. However, the comment at
-> include/linux/syscall.h says that they should be named as
-> `ksys_xyzzy()`, and so are all the helpers declared bellow it. Change the
-> documentation to reflect this.
-> 
-> Cc: Dominik Brodowski <linux@dominikbrodowski.net>
-> Fixes: 819671ff849b ("syscalls: define and explain goal to not call syscalls in the kernel")
-> Signed-off-by: André Almeida <andrealmeid@collabora.com>
+From: Srikanth Thokala <srikanth.thokala@intel.com>
 
-Reviewed-by: Dominik Brodowski <linux@dominikbrodowski.net>
+Provide overview of XLink PCIe driver implementation
 
-Thanks,
-	Dominik
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: linux-doc@vger.kernel.org
+Reviewed-by: Mark Gross <mgross@linux.intel.com>
+Signed-off-by: Srikanth Thokala <srikanth.thokala@intel.com>
+---
+ Documentation/vpu/index.rst      |  1 +
+ Documentation/vpu/xlink-pcie.rst | 90 ++++++++++++++++++++++++++++++++
+ 2 files changed, 91 insertions(+)
+ create mode 100644 Documentation/vpu/xlink-pcie.rst
+
+diff --git a/Documentation/vpu/index.rst b/Documentation/vpu/index.rst
+index 7e290e048910..661cc700ee45 100644
+--- a/Documentation/vpu/index.rst
++++ b/Documentation/vpu/index.rst
+@@ -14,3 +14,4 @@ This documentation contains information for the Intel VPU stack.
+    :maxdepth: 2
+ 
+    vpu-stack-overview
++   xlink-pcie
+diff --git a/Documentation/vpu/xlink-pcie.rst b/Documentation/vpu/xlink-pcie.rst
+new file mode 100644
+index 000000000000..85a70990e9c9
+--- /dev/null
++++ b/Documentation/vpu/xlink-pcie.rst
+@@ -0,0 +1,90 @@
++.. SPDX-License-Identifier: GPL-2.0
++
++================================
++Kernel driver: Xlink-pcie driver
++================================
++Supported chips:
++  * Intel Edge.AI Computer Vision platforms: Keem Bay
++    Suffix: Bay
++    Slave address: 6240
++    Datasheet: Publicly available at Intel
++
++Author: Srikanth Thokala Srikanth.Thokala@intel.com
++
++Introduction
++============
++The Xlink-pcie driver provides transport layer implementation for
++the data transfers to support Xlink protocol subsystem communication with the
++peer device, i.e., between remote host system and Keem Bay device.
++
++The Keem Bay device is an ARM-based SOC that includes a vision processing
++unit (VPU) and deep learning, neural network core in the hardware.
++The Xlink-pcie driver exports a functional device endpoint to the Keem Bay
++device and supports two-way communication with the peer device.
++
++High-level architecture
++=======================
++Remote Host: IA CPU
++Local Host: ARM CPU (Keem Bay)::
++
++        +------------------------------------------------------------------------+
++        |  Remote Host IA CPU              | | Local Host ARM CPU (Keem Bay) |   |
++        +==================================+=+===============================+===+
++        |  User App                        | | User App                      |   |
++        +----------------------------------+-+-------------------------------+---+
++        |   XLink UAPI                     | | XLink UAPI                    |   |
++        +----------------------------------+-+-------------------------------+---+
++        |   XLink Core                     | | XLink Core                    |   |
++        +----------------------------------+-+-------------------------------+---+
++        |   XLink PCIe                     | | XLink PCIe                    |   |
++        +----------------------------------+-+-------------------------------+---+
++        |   XLink-PCIe Remote Host driver  | | XLink-PCIe Local Host driver  |   |
++        +----------------------------------+-+-------------------------------+---+
++        |-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:|:|:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:-:|
++        +----------------------------------+-+-------------------------------+---+
++        |     PCIe Host Controller         | | PCIe Device Controller        | HW|
++        +----------------------------------+-+-------------------------------+---+
++               ^                                             ^
++               |                                             |
++               |------------- PCIe x2 Link  -----------------|
++
++This XLink PCIe driver comprises of two variants:
++* Local Host driver
++
++  * Intended for ARM CPU
++  * It is based on PCI Endpoint Framework
++  * Driver path: {tree}/drivers/misc/Xlink-pcie/local_host
++
++* Remote Host driver
++
++       * Intended for IA CPU
++       * It is a PCIe endpoint driver
++       * Driver path: {tree}/drivers/misc/Xlink-pcie/remote_host
++
++XLink PCIe communication between local host and remote host is achieved through
++ring buffer management and MSI/Doorbell interrupts.
++
++The Xlink-pcie driver subsystem registers the Keem Bay device as an endpoint
++driver and provides standard Linux PCIe sysfs interface:
++'/sys/bus/pci/devices/xxxx:xx:xx.0/'
++
++
++XLink protocol subsystem
++========================
++Xlink is an abstracted control and communication subsystem based on channel
++identification. It is intended to support VPU technology both at SoC level as
++well as at IP level, over multiple interfaces.
++
++- The Xlink subsystem abstracts several types of communication channels
++  underneath, allowing the usage of different interfaces with the
++  same function call interface.
++- The Communication channels are full-duplex protocol channels allowing
++  concurrent bidirectional communication.
++- The Xlink subsystem also supports control operations to VPU either
++  from standalone local system or from remote system based on communication
++  interface underneath.
++- The Xlink subsystem supports the following communication interfaces:
++    * USB CDC
++    * Gigabit Ethernet
++    * PCIe
++    * IPC
+-- 
+2.17.1
+
