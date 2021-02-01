@@ -2,255 +2,229 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9BD4730B135
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Feb 2021 21:03:53 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0C15A30B183
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Feb 2021 21:21:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232143AbhBAUCM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Feb 2021 15:02:12 -0500
-Received: from fllv0016.ext.ti.com ([198.47.19.142]:42154 "EHLO
-        fllv0016.ext.ti.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232516AbhBAUAv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Feb 2021 15:00:51 -0500
-Received: from lelv0265.itg.ti.com ([10.180.67.224])
-        by fllv0016.ext.ti.com (8.15.2/8.15.2) with ESMTP id 111Jxo4P024272;
-        Mon, 1 Feb 2021 13:59:50 -0600
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ti.com;
-        s=ti-com-17Q1; t=1612209590;
-        bh=cy3YI0j7jgYLS3zYPT4KX3+IbsOlaRkg+3s1uwMt/SU=;
-        h=From:To:CC:Subject:Date:In-Reply-To:References;
-        b=k5GVlay2/Mcj+3rWVTR1QV5Iszsj7/IVis5bLjWpJvTXKkXUrTVdyegidIqKflv6L
-         STBUzm5cxPVvBkquoi4s4VCeNQvmx7iNV6ytivZuVVO1zRXSS0CYUNAg5B9s9yXDBk
-         ASQvKcqMhI+E1ufIiRj34xRwMwRiPtn8xuDPZUE0=
-Received: from DFLE101.ent.ti.com (dfle101.ent.ti.com [10.64.6.22])
-        by lelv0265.itg.ti.com (8.15.2/8.15.2) with ESMTPS id 111JxoX0043472
-        (version=TLSv1.2 cipher=AES256-GCM-SHA384 bits=256 verify=FAIL);
-        Mon, 1 Feb 2021 13:59:50 -0600
-Received: from DFLE114.ent.ti.com (10.64.6.35) by DFLE101.ent.ti.com
- (10.64.6.22) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3; Mon, 1 Feb
- 2021 13:59:50 -0600
-Received: from fllv0039.itg.ti.com (10.64.41.19) by DFLE114.ent.ti.com
- (10.64.6.35) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id 15.1.1979.3 via
- Frontend Transport; Mon, 1 Feb 2021 13:59:50 -0600
-Received: from a0393678-ssd.dal.design.ti.com (ileax41-snat.itg.ti.com [10.172.224.153])
-        by fllv0039.itg.ti.com (8.15.2/8.15.2) with ESMTP id 111JwAQo085814;
-        Mon, 1 Feb 2021 13:59:45 -0600
-From:   Kishon Vijay Abraham I <kishon@ti.com>
-To:     Bjorn Helgaas <bhelgaas@google.com>,
+        id S229646AbhBAUVN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Feb 2021 15:21:13 -0500
+Received: from mx2.suse.de ([195.135.220.15]:39656 "EHLO mx2.suse.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229692AbhBAUVM (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 1 Feb 2021 15:21:12 -0500
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id EB372B1C2;
+        Mon,  1 Feb 2021 20:20:29 +0000 (UTC)
+Date:   Mon, 1 Feb 2021 21:20:27 +0100
+From:   Oscar Salvador <osalvador@suse.de>
+To:     David Hildenbrand <david@redhat.com>
+Cc:     linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+        Michal Hocko <mhocko@suse.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Dave Hansen <dave.hansen@intel.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kishon Vijay Abraham I <kishon@ti.com>,
-        Lorenzo Pieralisi <lorenzo.pieralisi@arm.com>,
-        Arnd Bergmann <arnd@arndb.de>, Jon Mason <jdmason@kudzu.us>,
-        Dave Jiang <dave.jiang@intel.com>,
-        Allen Hubbe <allenbh@gmail.com>,
-        Tom Joseph <tjoseph@cadence.com>, Rob Herring <robh@kernel.org>
-CC:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        <linux-pci@vger.kernel.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>, <linux-ntb@googlegroups.com>
-Subject: [PATCH v11 17/17] Documentation: PCI: Add userguide for PCI endpoint NTB function
-Date:   Tue, 2 Feb 2021 01:28:09 +0530
-Message-ID: <20210201195809.7342-18-kishon@ti.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210201195809.7342-1-kishon@ti.com>
-References: <20210201195809.7342-1-kishon@ti.com>
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Ilya Dryomov <idryomov@gmail.com>,
+        Vaibhav Jain <vaibhav@linux.ibm.com>,
+        Tom Rix <trix@redhat.com>,
+        Geert Uytterhoeven <geert+renesas@glider.be>,
+        linux-doc@vger.kernel.org
+Subject: Re: [PATCH v2 1/2] drivers/base/memory: don't store phys_device in
+ memory blocks
+Message-ID: <20210201202027.GA3732@localhost.localdomain>
+References: <20210201181347.13262-1-david@redhat.com>
+ <20210201181347.13262-2-david@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-EXCLAIMER-MD-CONFIG: e1e8a2fd-e40a-4ac6-ac9b-f7e9cc9ee180
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210201181347.13262-2-david@redhat.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add documentation to help users use pci-epf-ntb function driver and
-existing host side NTB infrastructure for NTB functionality.
+On Mon, Feb 01, 2021 at 07:13:46PM +0100, David Hildenbrand wrote:
+> No need to store the value for each and every memory block, as we can
+> easily query the value at runtime. Reshuffle the members to optimize the
+> memory layout. Also, let's clarify what the interface once was used for
+> and why it's legacy nowadays.
+> 
+> "phys_device" was used on s390x in older versions of lsmem[2]/chmem[3],
+> back when they were still part of s390x-tools. They were later replaced
+> by the variants in linux-utils. For example, RHEL6 and RHEL7 contain
+> lsmem/chmem from s390-utils. RHEL8 switched to versions from util-linux
+> on s390x [4].
+> 
+> "phys_device" was added with sysfs support for memory hotplug in
+> commit 3947be1969a9 ("[PATCH] memory hotplug: sysfs and add/remove
+> functions") in 2005. It always returned 0.
+> 
+> s390x started returning something != 0 on some setups (if sclp.rzm is
+> set by HW) in 2010 via commit 57b552ba0b2f ("memory hotplug/s390: set
+> phys_device").
+> 
+> For s390x, it allowed for identifying which memory block devices belong
+> to the same storage increment (RZM). Only if all memory block devices
+> comprising a single storage increment were offline, the memory could
+> actually be removed in the hypervisor.
+> 
+> Since commit e5d709bb5fb7 ("s390/memory hotplug: provide
+> memory_block_size_bytes() function") in 2013 a memory block device
+> spans at least one storage increment - which is why the interface isn't
+> really helpful/used anymore (except by old lsmem/chmem tools).
+> 
+> There were once RFC patches to make use of "phys_device" in ACPI context;
+> however, the underlying problem could be solved using different
+> interfaces [1].
+> 
+> [1] https://patchwork.kernel.org/patch/2163871/
+> [2] https://github.com/ibm-s390-tools/s390-tools/blob/v2.1.0/zconf/lsmem
+> [3] https://github.com/ibm-s390-tools/s390-tools/blob/v2.1.0/zconf/chmem
+> [4] https://bugzilla.redhat.com/show_bug.cgi?id=1504134
+> 
+> Acked-by: Michal Hocko <mhocko@suse.com>
+> Cc: Andrew Morton <akpm@linux-foundation.org>
+> Cc: Dave Hansen <dave.hansen@intel.com>
+> Cc: Michal Hocko <mhocko@suse.com>
+> Cc: Oscar Salvador <osalvador@suse.de>
+> Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+> Cc: Gerald Schaefer <gerald.schaefer@linux.ibm.com>
+> Cc: Jonathan Corbet <corbet@lwn.net>
+> Cc: "Rafael J. Wysocki" <rafael@kernel.org>
+> Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> Cc: Ilya Dryomov <idryomov@gmail.com>
+> Cc: Vaibhav Jain <vaibhav@linux.ibm.com>
+> Cc: Tom Rix <trix@redhat.com>
+> Cc: Geert Uytterhoeven <geert+renesas@glider.be>
+> Cc: linux-doc@vger.kernel.org
+> Signed-off-by: David Hildenbrand <david@redhat.com>
 
-Signed-off-by: Kishon Vijay Abraham I <kishon@ti.com>
-Reviewed-by: Randy Dunlap <rdunlap@infradead.org>
----
- Documentation/PCI/endpoint/index.rst         |   1 +
- Documentation/PCI/endpoint/pci-ntb-howto.rst | 161 +++++++++++++++++++
- 2 files changed, 162 insertions(+)
- create mode 100644 Documentation/PCI/endpoint/pci-ntb-howto.rst
+Indeed, that is a valuable changelog with some research :-)
 
-diff --git a/Documentation/PCI/endpoint/index.rst b/Documentation/PCI/endpoint/index.rst
-index 9cb6e5f3c4d5..38ea1f604b6d 100644
---- a/Documentation/PCI/endpoint/index.rst
-+++ b/Documentation/PCI/endpoint/index.rst
-@@ -12,6 +12,7 @@ PCI Endpoint Framework
-    pci-test-function
-    pci-test-howto
-    pci-ntb-function
-+   pci-ntb-howto
- 
-    function/binding/pci-test
-    function/binding/pci-ntb
-diff --git a/Documentation/PCI/endpoint/pci-ntb-howto.rst b/Documentation/PCI/endpoint/pci-ntb-howto.rst
-new file mode 100644
-index 000000000000..9f905ea724d1
---- /dev/null
-+++ b/Documentation/PCI/endpoint/pci-ntb-howto.rst
-@@ -0,0 +1,161 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+===================================================================
-+PCI Non-Transparent Bridge (NTB) Endpoint Function (EPF) User Guide
-+===================================================================
-+
-+:Author: Kishon Vijay Abraham I <kishon@ti.com>
-+
-+This document is a guide to help users use pci-epf-ntb function driver
-+and ntb_hw_epf host driver for NTB functionality. The list of steps to
-+be followed in the host side and EP side is given below. For the hardware
-+configuration and internals of NTB using configurable endpoints see
-+Documentation/PCI/endpoint/pci-ntb-function.rst
-+
-+Endpoint Device
-+===============
-+
-+Endpoint Controller Devices
-+---------------------------
-+
-+For implementing NTB functionality at least two endpoint controller devices
-+are required.
-+
-+To find the list of endpoint controller devices in the system::
-+
-+        # ls /sys/class/pci_epc/
-+          2900000.pcie-ep  2910000.pcie-ep
-+
-+If PCI_ENDPOINT_CONFIGFS is enabled::
-+
-+	# ls /sys/kernel/config/pci_ep/controllers
-+	  2900000.pcie-ep  2910000.pcie-ep
-+
-+
-+Endpoint Function Drivers
-+-------------------------
-+
-+To find the list of endpoint function drivers in the system::
-+
-+	# ls /sys/bus/pci-epf/drivers
-+	  pci_epf_ntb   pci_epf_ntb
-+
-+If PCI_ENDPOINT_CONFIGFS is enabled::
-+
-+	# ls /sys/kernel/config/pci_ep/functions
-+	  pci_epf_ntb   pci_epf_ntb
-+
-+
-+Creating pci-epf-ntb Device
-+----------------------------
-+
-+PCI endpoint function device can be created using the configfs. To create
-+pci-epf-ntb device, the following commands can be used::
-+
-+	# mount -t configfs none /sys/kernel/config
-+	# cd /sys/kernel/config/pci_ep/
-+	# mkdir functions/pci_epf_ntb/func1
-+
-+The "mkdir func1" above creates the pci-epf-ntb function device that will
-+be probed by pci_epf_ntb driver.
-+
-+The PCI endpoint framework populates the directory with the following
-+configurable fields::
-+
-+	# ls functions/pci_epf_ntb/func1
-+          baseclass_code    deviceid          msi_interrupts    pci-epf-ntb.0
-+          progif_code       secondary         subsys_id         vendorid
-+          cache_line_size   interrupt_pin     msix_interrupts   primary
-+          revid             subclass_code     subsys_vendor_id
-+
-+The PCI endpoint function driver populates these entries with default values
-+when the device is bound to the driver. The pci-epf-ntb driver populates
-+vendorid with 0xffff and interrupt_pin with 0x0001::
-+
-+	# cat functions/pci_epf_ntb/func1/vendorid
-+	  0xffff
-+	# cat functions/pci_epf_ntb/func1/interrupt_pin
-+	  0x0001
-+
-+
-+Configuring pci-epf-ntb Device
-+-------------------------------
-+
-+The user can configure the pci-epf-ntb device using its configfs entry. In order
-+to change the vendorid and the deviceid, the following
-+commands can be used::
-+
-+	# echo 0x104c > functions/pci_epf_ntb/func1/vendorid
-+	# echo 0xb00d > functions/pci_epf_ntb/func1/deviceid
-+
-+In order to configure NTB specific attributes, a new sub-directory to func1
-+should be created::
-+
-+	# mkdir functions/pci_epf_ntb/func1/pci_epf_ntb.0/
-+
-+The NTB function driver will populate this directory with various attributes
-+that can be configured by the user::
-+
-+	# ls functions/pci_epf_ntb/func1/pci_epf_ntb.0/
-+          db_count    mw1         mw2         mw3         mw4         num_mws
-+          spad_count
-+
-+A sample configuration for NTB function is given below::
-+
-+	# echo 4 > functions/pci_epf_ntb/func1/pci_epf_ntb.0/db_count
-+	# echo 128 > functions/pci_epf_ntb/func1/pci_epf_ntb.0/spad_count
-+	# echo 2 > functions/pci_epf_ntb/func1/pci_epf_ntb.0/num_mws
-+	# echo 0x100000 > functions/pci_epf_ntb/func1/pci_epf_ntb.0/mw1
-+	# echo 0x100000 > functions/pci_epf_ntb/func1/pci_epf_ntb.0/mw2
-+
-+Binding pci-epf-ntb Device to EP Controller
-+--------------------------------------------
-+
-+NTB function device should be attached to two PCIe endpoint controllers
-+connected to the two hosts. Use the 'primary' and 'secondary' entries
-+inside NTB function device to attach one PCIe endpoint controller to
-+primary interface and the other PCIe endpoint controller to the secondary
-+interface. ::
-+
-+        # ln -s controllers/2900000.pcie-ep/ functions/pci-epf-ntb/func1/primary
-+        # ln -s controllers/2910000.pcie-ep/ functions/pci-epf-ntb/func1/secondary
-+
-+Once the above step is completed, both the PCI endpoint controllers are ready to
-+establish a link with the host.
-+
-+
-+Start the Link
-+--------------
-+
-+In order for the endpoint device to establish a link with the host, the _start_
-+field should be populated with '1'. For NTB, both the PCIe endpoint controllers
-+should establish link with the host::
-+
-+        #echo 1 > controllers/2900000.pcie-ep/start
-+        #echo 1 > controllers/2910000.pcie-ep/start
-+
-+
-+RootComplex Device
-+==================
-+
-+lspci Output
-+------------
-+
-+Note that the devices listed here correspond to the values populated in
-+"Creating pci-epf-ntb Device" section above::
-+
-+        # lspci
-+        0000:00:00.0 PCI bridge: Texas Instruments Device b00d
-+        0000:01:00.0 RAM memory: Texas Instruments Device b00d
-+
-+
-+Using ntb_hw_epf Device
-+-----------------------
-+
-+The host side software follows the standard NTB software architecture in Linux.
-+All the existing client side NTB utilities like NTB Transport Client and NTB
-+Netdev, NTB Ping Pong Test Client and NTB Tool Test Client can be used with NTB
-+function device.
-+
-+For more information on NTB see
-+:doc:`Non-Transparent Bridge <../../driver-api/ntb>`
+Reviewed-by: Oscar Salvador <osalvador@suse.de>
+
+> ---
+>  .../ABI/testing/sysfs-devices-memory          |  5 ++--
+>  .../admin-guide/mm/memory-hotplug.rst         |  4 +--
+>  drivers/base/memory.c                         | 25 +++++++------------
+>  include/linux/memory.h                        |  3 +--
+>  4 files changed, 15 insertions(+), 22 deletions(-)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-devices-memory b/Documentation/ABI/testing/sysfs-devices-memory
+> index 246a45b96d22..58dbc592bc57 100644
+> --- a/Documentation/ABI/testing/sysfs-devices-memory
+> +++ b/Documentation/ABI/testing/sysfs-devices-memory
+> @@ -26,8 +26,9 @@ Date:		September 2008
+>  Contact:	Badari Pulavarty <pbadari@us.ibm.com>
+>  Description:
+>  		The file /sys/devices/system/memory/memoryX/phys_device
+> -		is read-only and is designed to show the name of physical
+> -		memory device.  Implementation is currently incomplete.
+> +		is read-only;  it is a legacy interface only ever used on s390x
+> +		to expose the covered storage increment.
+> +Users:		Legacy s390-tools lsmem/chmem
+>  
+>  What:		/sys/devices/system/memory/memoryX/phys_index
+>  Date:		September 2008
+> diff --git a/Documentation/admin-guide/mm/memory-hotplug.rst b/Documentation/admin-guide/mm/memory-hotplug.rst
+> index 5c4432c96c4b..245739f55ac7 100644
+> --- a/Documentation/admin-guide/mm/memory-hotplug.rst
+> +++ b/Documentation/admin-guide/mm/memory-hotplug.rst
+> @@ -160,8 +160,8 @@ Under each memory block, you can see 5 files:
+>  
+>                      "online_movable", "online", "offline" command
+>                      which will be performed on all sections in the block.
+> -``phys_device``     read-only: designed to show the name of physical memory
+> -                    device.  This is not well implemented now.
+> +``phys_device``	    read-only: legacy interface only ever used on s390x to
+> +		    expose the covered storage increment.
+>  ``removable``       read-only: contains an integer value indicating
+>                      whether the memory block is removable or not
+>                      removable.  A value of 1 indicates that the memory
+> diff --git a/drivers/base/memory.c b/drivers/base/memory.c
+> index 901e379676be..f35298425575 100644
+> --- a/drivers/base/memory.c
+> +++ b/drivers/base/memory.c
+> @@ -290,20 +290,20 @@ static ssize_t state_store(struct device *dev, struct device_attribute *attr,
+>  }
+>  
+>  /*
+> - * phys_device is a bad name for this.  What I really want
+> - * is a way to differentiate between memory ranges that
+> - * are part of physical devices that constitute
+> - * a complete removable unit or fru.
+> - * i.e. do these ranges belong to the same physical device,
+> - * s.t. if I offline all of these sections I can then
+> - * remove the physical device?
+> + * Legacy interface that we cannot remove: s390x exposes the storage increment
+> + * covered by a memory block, allowing for identifying which memory blocks
+> + * comprise a storage increment. Since a memory block spans complete
+> + * storage increments nowadays, this interface is basically unused. Other
+> + * archs never exposed != 0.
+>   */
+>  static ssize_t phys_device_show(struct device *dev,
+>  				struct device_attribute *attr, char *buf)
+>  {
+>  	struct memory_block *mem = to_memory_block(dev);
+> +	unsigned long start_pfn = section_nr_to_pfn(mem->start_section_nr);
+>  
+> -	return sysfs_emit(buf, "%d\n", mem->phys_device);
+> +	return sysfs_emit(buf, "%d\n",
+> +			  arch_get_memory_phys_device(start_pfn));
+>  }
+>  
+>  #ifdef CONFIG_MEMORY_HOTREMOVE
+> @@ -488,11 +488,7 @@ static DEVICE_ATTR_WO(soft_offline_page);
+>  static DEVICE_ATTR_WO(hard_offline_page);
+>  #endif
+>  
+> -/*
+> - * Note that phys_device is optional.  It is here to allow for
+> - * differentiation between which *physical* devices each
+> - * section belongs to...
+> - */
+> +/* See phys_device_show(). */
+>  int __weak arch_get_memory_phys_device(unsigned long start_pfn)
+>  {
+>  	return 0;
+> @@ -574,7 +570,6 @@ int register_memory(struct memory_block *memory)
+>  static int init_memory_block(unsigned long block_id, unsigned long state)
+>  {
+>  	struct memory_block *mem;
+> -	unsigned long start_pfn;
+>  	int ret = 0;
+>  
+>  	mem = find_memory_block_by_id(block_id);
+> @@ -588,8 +583,6 @@ static int init_memory_block(unsigned long block_id, unsigned long state)
+>  
+>  	mem->start_section_nr = block_id * sections_per_block;
+>  	mem->state = state;
+> -	start_pfn = section_nr_to_pfn(mem->start_section_nr);
+> -	mem->phys_device = arch_get_memory_phys_device(start_pfn);
+>  	mem->nid = NUMA_NO_NODE;
+>  
+>  	ret = register_memory(mem);
+> diff --git a/include/linux/memory.h b/include/linux/memory.h
+> index 439a89e758d8..4da95e684e20 100644
+> --- a/include/linux/memory.h
+> +++ b/include/linux/memory.h
+> @@ -27,9 +27,8 @@ struct memory_block {
+>  	unsigned long start_section_nr;
+>  	unsigned long state;		/* serialized by the dev->lock */
+>  	int online_type;		/* for passing data to online routine */
+> -	int phys_device;		/* to which fru does this belong? */
+> -	struct device dev;
+>  	int nid;			/* NID for this memory block */
+> +	struct device dev;
+>  };
+>  
+>  int arch_get_memory_phys_device(unsigned long start_pfn);
+> -- 
+> 2.29.2
+> 
+
 -- 
-2.17.1
-
+Oscar Salvador
+SUSE L3
