@@ -2,175 +2,192 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3A73630ABB0
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Feb 2021 16:41:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 02C6C30ABF1
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Feb 2021 16:51:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229877AbhBAPk6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Feb 2021 10:40:58 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43800 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231785AbhBAPkq (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Feb 2021 10:40:46 -0500
-Received: from mail-qt1-x82a.google.com (mail-qt1-x82a.google.com [IPv6:2607:f8b0:4864:20::82a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7B6EFC061A27
-        for <linux-doc@vger.kernel.org>; Mon,  1 Feb 2021 07:38:55 -0800 (PST)
-Received: by mail-qt1-x82a.google.com with SMTP id z22so12521530qto.7
-        for <linux-doc@vger.kernel.org>; Mon, 01 Feb 2021 07:38:55 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=9bnQ1cYpKSogma2d9jSskcM/kWG+ieYizroT/wf+fYw=;
-        b=exsx+5QFq+cRHRqiZa7rT587NP5KQIe61OMLBG++wUWQatrxxRLn5sZDzzTFFCp+xI
-         v9use1KTetxdp+cIA0jCaFEohKGm/5a75xIqwgxKqgb6U89WSmsAcpUOx1rwE4WJMpwP
-         5xTfpHdnJ8557hubYdMhersWyJ2keNNwYaAU5joQ78f2Ijz2YmTYWTSoqOH+qjSZPpsY
-         nnj4x4/uqqtnGJkk2dZ8ogHmYPHpBp/CmkRz/kSZttI6P4BEZIl4MP1J+5e/jcHEvp+4
-         3fwI46nd8yxjkHX2IaqAJ90yRI9VEzyuShg4qk1IIjX2yiEkziLksJtV9M2TU5Y5CPG+
-         OyIA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=9bnQ1cYpKSogma2d9jSskcM/kWG+ieYizroT/wf+fYw=;
-        b=PD0McC166CE1403yfcnQLhhrmgQQKxbmig4owHSpPVJEIZyEdfkCP+8URC9Hv6hOco
-         IG/NuTsLi+5x14VsPxnH3otQxlMkGH8uSlSTPSwMhWekgiuJKvz4JKHap8dfiS85t6Jt
-         SYXRT6NteBd2Dj9aSq/OPcI7g8+RMUsvMQ9n6zrDYrF/ghPpwm+YZTgdPfMxmQ75ZkQ6
-         Qq+OmM9WpVe5yt7Hd9C4AblkFp0eNd8ICuWgfIoAXJ8kYdDPXzCJGphs8s6gfl8LgGCR
-         XTFmv2PWOvH5v1L/Ok66moaJKzzZU8v6zIumZaNX9zpZ3BVV7zcTa/KfVmz+eylazfao
-         B4kw==
-X-Gm-Message-State: AOAM531dTciKuVNDPYM6Vs9ld/dqtynP/W1z5id7hEjB5gWc3AInPFlH
-        gAOOZ29vI6SjwrRhnCGk0cl3KA==
-X-Google-Smtp-Source: ABdhPJyhr6Rr78ckZxktTwltqLPaxIcTqiiGpt+FOipTh9Ailw7X8EyiMAch+pl7JmPmb69X7j7Y+g==
-X-Received: by 2002:ac8:5156:: with SMTP id h22mr16073194qtn.176.1612193934750;
-        Mon, 01 Feb 2021 07:38:54 -0800 (PST)
-Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
-        by smtp.gmail.com with ESMTPSA id 22sm14853307qke.123.2021.02.01.07.38.53
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Feb 2021 07:38:54 -0800 (PST)
-From:   Pavel Tatashin <pasha.tatashin@soleen.com>
-To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, akpm@linux-foundation.org, vbabka@suse.cz,
-        mhocko@suse.com, david@redhat.com, osalvador@suse.de,
-        dan.j.williams@intel.com, sashal@kernel.org,
-        tyhicks@linux.microsoft.com, iamjoonsoo.kim@lge.com,
-        mike.kravetz@oracle.com, rostedt@goodmis.org, mingo@redhat.com,
-        jgg@ziepe.ca, peterz@infradead.org, mgorman@suse.de,
-        willy@infradead.org, rientjes@google.com, jhubbard@nvidia.com,
-        linux-doc@vger.kernel.org, ira.weiny@intel.com,
-        linux-kselftest@vger.kernel.org, jmorris@namei.org
-Subject: [PATCH v9 14/14] selftests/vm: gup_test: test faulting in kernel, and verify pinnable pages
-Date:   Mon,  1 Feb 2021 10:38:27 -0500
-Message-Id: <20210201153827.444374-15-pasha.tatashin@soleen.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210201153827.444374-1-pasha.tatashin@soleen.com>
-References: <20210201153827.444374-1-pasha.tatashin@soleen.com>
+        id S231831AbhBAPvZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Feb 2021 10:51:25 -0500
+Received: from mail29.static.mailgun.info ([104.130.122.29]:18680 "EHLO
+        mail29.static.mailgun.info" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S231714AbhBAPvC (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Feb 2021 10:51:02 -0500
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=mg.codeaurora.org; q=dns/txt;
+ s=smtp; t=1612194639; h=Message-ID: References: In-Reply-To: Subject:
+ Cc: To: From: Date: Content-Transfer-Encoding: Content-Type:
+ MIME-Version: Sender; bh=0JHy+RI+wqivBbAHeg6tMeuSs3uLzrkCav5CTvzzCWI=;
+ b=GFI5/inGsOpGdCJeagOw9HaMU2wCqO7hOq466tpxFuLPkmNKtc8FCX6EVeD9Uo5oXWq46EVZ
+ gPEwAneK1Asus+hW+8ypnYVQmDneFbcTeybd1fANOJvpvqbfG2TxZHxH9tN0xtXGUYqa1BL4
+ C0Nh8ptz288J1hKOdCuCXFA0AEw=
+X-Mailgun-Sending-Ip: 104.130.122.29
+X-Mailgun-Sid: WyIzNjUxMiIsICJsaW51eC1kb2NAdmdlci5rZXJuZWwub3JnIiwgImJlOWU0YSJd
+Received: from smtp.codeaurora.org
+ (ec2-35-166-182-171.us-west-2.compute.amazonaws.com [35.166.182.171]) by
+ smtp-out-n04.prod.us-east-1.postgun.com with SMTP id
+ 601823312d8ee3f99f68ae3c (version=TLS1.2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256); Mon, 01 Feb 2021 15:50:09
+ GMT
+Sender: mdalam=codeaurora.org@mg.codeaurora.org
+Received: by smtp.codeaurora.org (Postfix, from userid 1001)
+        id 778F4C433C6; Mon,  1 Feb 2021 15:50:08 +0000 (UTC)
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+        aws-us-west-2-caf-mail-1.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.9 required=2.0 tests=ALL_TRUSTED,BAYES_00,
+        URIBL_BLOCKED autolearn=unavailable autolearn_force=no version=3.4.0
+Received: from mail.codeaurora.org (localhost.localdomain [127.0.0.1])
+        (using TLSv1 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        (Authenticated sender: mdalam)
+        by smtp.codeaurora.org (Postfix) with ESMTPSA id 794ABC433CA;
+        Mon,  1 Feb 2021 15:50:07 +0000 (UTC)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date:   Mon, 01 Feb 2021 21:20:07 +0530
+From:   mdalam@codeaurora.org
+To:     Vinod Koul <vkoul@kernel.org>
+Cc:     corbet@lwn.net, agross@kernel.org, bjorn.andersson@linaro.org,
+        dan.j.williams@intel.com, dmaengine@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-arm-msm@vger.kernel.org, sricharan@codeaurora.org,
+        mdalam=codeaurora.org@codeaurora.org
+Subject: Re: [PATCH] dmaengine: qcom: bam_dma: Add LOCK and UNLOCK flag bit
+ support
+In-Reply-To: <20210201064314.GM2771@vkoul-mobl>
+References: <efcc74bbdf36b4ddbf764eb6b4ed99f2@codeaurora.org>
+ <f7de0117c8ff2e61c09f58acdea0e5b0@codeaurora.org>
+ <20210112101056.GI2771@vkoul-mobl>
+ <e3cf7c4fc02c54d17fd2fd213f39005b@codeaurora.org>
+ <20210115055806.GE2771@vkoul-mobl>
+ <97ce29b230164a5848a38f6448d1be60@codeaurora.org>
+ <20210119164511.GE2771@vkoul-mobl>
+ <534308caab7c18730ad0cc25248d116f@codeaurora.org>
+ <20210201060508.GK2771@vkoul-mobl>
+ <9d33d73682f24d92338757e1823ccd88@codeaurora.org>
+ <20210201064314.GM2771@vkoul-mobl>
+Message-ID: <73c871d3d674607fafc7b79e602ec587@codeaurora.org>
+X-Sender: mdalam@codeaurora.org
+User-Agent: Roundcube Webmail/1.3.9
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When pages are pinned they can be faulted in userland and migrated, and
-they can be faulted right in kernel without migration.
+On 2021-02-01 12:13, Vinod Koul wrote:
+> On 01-02-21, 11:52, mdalam@codeaurora.org wrote:
+>> On 2021-02-01 11:35, Vinod Koul wrote:
+>> > On 27-01-21, 23:56, mdalam@codeaurora.org wrote:
+> 
+>> > >   The actual LOCK/UNLOCK flag should be set on hardware command
+>> > > descriptor.
+>> > >   so this flag setting should be done in DMA engine driver. The user
+>> > > of the
+>> > > DMA
+>> > >   driver like (in case of IPQ5018) Crypto can use flag
+>> > > "DMA_PREP_LOCK" &
+>> > > "DMA_PREP_UNLOCK"
+>> > >   while preparing CMD descriptor before submitting to the DMA
+>> > > engine. In DMA
+>> > > engine driver
+>> > >   we are checking these flasgs on CMD descriptor and setting actual
+>> > > LOCK/UNLOCK flag on hardware
+>> > >   descriptor.
+>> >
+>> >
+>> > I am not sure I comprehend this yet.. when is that we would need to do
+>> > this... is this for each txn submitted to dmaengine.. or something
+>> > else..
+>> 
+>>  Its not for each transaction submitted to dmaengine. We have to set 
+>> this
+>> only
+>>  once on CMD descriptor. So when A53 crypto driver need to change the 
+>> crypto
+>> configuration
+>>  then first it will lock the all other pipes using setting the LOCK 
+>> flag bit
+>> on CMD
+>>  descriptor and then it can start the transaction , on data descriptor 
+>> this
+>> flag will
+>>  not get set once all transaction will be completed the A53 crypto 
+>> driver
+>> release the lock on
+>>  all other pipes using UNLOCK flag on CMD descriptor. So LOCK/UNLOCK 
+>> will be
+>> only once and not for
+>>  the each transaction.
+> 
+> Okay so why cant the bam driver check cmd descriptor and do lock/unlock
+> as below, why do we need users to do this.
+> 
+>         if (flags & DMA_PREP_CMD) {
+>                 do_lock_bam();
 
-In either case, the pinned pages must end-up being pinnable (not movable).
+  User will not decide to do this LOCK/UNLOCK mechanism. It depends on 
+use case.
+  This LOCK/UNLOCK mechanism not required always. It needs only when 
+hardware will be shared
+  between different core with different driver.
+  The LOCK/UNLOCK flags provides SW to enter ordering between pipes 
+execution.
+  (Generally, the BAM pipes are total independent from each other and 
+work in parallel manner).
+  This LOCK/UNLOCK flags are part of actual pipe hardware descriptor.
 
-Add a new test to gup_test, to help verify that the gup/pup
-(get_user_pages() / pin_user_pages()) behavior with respect to pinnable
-and movable pages is reasonable and correct. Specifically, provide a
-way to:
+  Pipe descriptor having the following flags:
+  INT : Interrupt
+  EOT: End of transfer
+  EOB: End of block
+  NWD: Notify when done
+  CMD: Command
+  LOCK: Lock
+  UNLOCK: Unlock
+  etc.
 
-1) Verify that only "pinnable" pages are pinned. This is checked
-automatically for you.
+  Here the BAM driver is common driver for (QPIC, Crypto, QUP etc. in 
+IPQ5018)
+  So here only Crypto will be shared b/w multiple cores so For crypto 
+request only the LOCK/UNLOCK
+  mechanism required.
+  For other request like for QPIC driver, QUPT driver etc. its not 
+required. So Crypto driver has to raise the flag for
+  LOCK/UNLOCK while preparing CMD descriptor. The actual locking will 
+happen in BAM driver only using condition
+  if (flags & DMA_PREP_CMD) {
+      if (flags & DMA_PREP_LOCK)
+         desc->flags |= cpu_to_le16(DESC_FLAG_LOCK);
+  }
 
-2) Verify that gup/pup performance is reasonable. This requires
-comparing benchmarks between doing gup/pup on pages that have been
-pre-faulted in from user space, vs. doing gup/pup on pages that are not
-faulted in until gup/pup time (via FOLL_TOUCH). This decision is
-controlled with the new -z command line option.
+  So Crypto driver should set this flag DMA_PREP_LOCK while preparing CMD 
+descriptor.
+  So LOCK should be set on actual hardware pipe descriptor with 
+descriptor type CMD.
 
-Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
-Reviewed-by: John Hubbard <jhubbard@nvidia.com>
----
- mm/gup_test.c                         |  6 ++++++
- tools/testing/selftests/vm/gup_test.c | 23 +++++++++++++++++++----
- 2 files changed, 25 insertions(+), 4 deletions(-)
+> 
+> The point here is that this seems to be internal to dma and should be
+> handled by dma driver.
+> 
+   This LOCK/UNLOK flags are part of actual hardware descriptor so this 
+should be handled by BAM driver only.
+   If we set condition like this
+   if (flags & DMA_PREP_CMD) {
+                 do_lock_bam();
+   Then LOCK/UNLOCK will be applied for all the CMD descriptor including 
+(QPIC driver, QUP driver , Crypto driver etc.).
+   So this is not our intension. So we need to set this LOCK/UNLOCK only 
+for the drivers it needs. So Crypto driver needs
+   locking mechanism so we will set LOCK/UNLOCK flag on Crypto driver 
+request only for other driver request like QPIC driver,
+   QUP driver will not set this.
 
-diff --git a/mm/gup_test.c b/mm/gup_test.c
-index a6ed1c877679..d974dec19e1c 100644
---- a/mm/gup_test.c
-+++ b/mm/gup_test.c
-@@ -52,6 +52,12 @@ static void verify_dma_pinned(unsigned int cmd, struct page **pages,
- 
- 				dump_page(page, "gup_test failure");
- 				break;
-+			} else if (cmd == PIN_LONGTERM_BENCHMARK &&
-+				WARN(!is_pinnable_page(page),
-+				     "pages[%lu] is NOT pinnable but pinned\n",
-+				     i)) {
-+				dump_page(page, "gup_test failure");
-+				break;
- 			}
- 		}
- 		break;
-diff --git a/tools/testing/selftests/vm/gup_test.c b/tools/testing/selftests/vm/gup_test.c
-index 943cc2608dc2..1e662d59c502 100644
---- a/tools/testing/selftests/vm/gup_test.c
-+++ b/tools/testing/selftests/vm/gup_test.c
-@@ -13,6 +13,7 @@
- 
- /* Just the flags we need, copied from mm.h: */
- #define FOLL_WRITE	0x01	/* check pte is writable */
-+#define FOLL_TOUCH	0x02	/* mark page accessed */
- 
- static char *cmd_to_str(unsigned long cmd)
- {
-@@ -39,11 +40,11 @@ int main(int argc, char **argv)
- 	unsigned long size = 128 * MB;
- 	int i, fd, filed, opt, nr_pages = 1, thp = -1, repeats = 1, write = 1;
- 	unsigned long cmd = GUP_FAST_BENCHMARK;
--	int flags = MAP_PRIVATE;
-+	int flags = MAP_PRIVATE, touch = 0;
- 	char *file = "/dev/zero";
- 	char *p;
- 
--	while ((opt = getopt(argc, argv, "m:r:n:F:f:abctTLUuwWSHp")) != -1) {
-+	while ((opt = getopt(argc, argv, "m:r:n:F:f:abctTLUuwWSHpz")) != -1) {
- 		switch (opt) {
- 		case 'a':
- 			cmd = PIN_FAST_BENCHMARK;
-@@ -110,6 +111,10 @@ int main(int argc, char **argv)
- 		case 'H':
- 			flags |= (MAP_HUGETLB | MAP_ANONYMOUS);
- 			break;
-+		case 'z':
-+			/* fault pages in gup, do not fault in userland */
-+			touch = 1;
-+			break;
- 		default:
- 			return -1;
- 		}
-@@ -167,8 +172,18 @@ int main(int argc, char **argv)
- 	else if (thp == 0)
- 		madvise(p, size, MADV_NOHUGEPAGE);
- 
--	for (; (unsigned long)p < gup.addr + size; p += PAGE_SIZE)
--		p[0] = 0;
-+	/*
-+	 * FOLL_TOUCH, in gup_test, is used as an either/or case: either
-+	 * fault pages in from the kernel via FOLL_TOUCH, or fault them
-+	 * in here, from user space. This allows comparison of performance
-+	 * between those two cases.
-+	 */
-+	if (touch) {
-+		gup.gup_flags |= FOLL_TOUCH;
-+	} else {
-+		for (; (unsigned long)p < gup.addr + size; p += PAGE_SIZE)
-+			p[0] = 0;
-+	}
- 
- 	/* Only report timing information on the *_BENCHMARK commands: */
- 	if ((cmd == PIN_FAST_BENCHMARK) || (cmd == GUP_FAST_BENCHMARK) ||
--- 
-2.25.1
+> Also if we do this, it needs to be done for specific platforms..
+> 
 
+
+
+
+
+
+
+> Thanks
