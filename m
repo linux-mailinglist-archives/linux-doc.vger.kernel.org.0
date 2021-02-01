@@ -2,669 +2,236 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4ED6630AE1A
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Feb 2021 18:40:46 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5B21630AF4B
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Feb 2021 19:31:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231419AbhBARix (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Feb 2021 12:38:53 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41234 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232277AbhBARic (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Feb 2021 12:38:32 -0500
-Received: from mail-lj1-x22b.google.com (mail-lj1-x22b.google.com [IPv6:2a00:1450:4864:20::22b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 13BA4C061756
-        for <linux-doc@vger.kernel.org>; Mon,  1 Feb 2021 09:37:52 -0800 (PST)
-Received: by mail-lj1-x22b.google.com with SMTP id f19so20655028ljn.5
-        for <linux-doc@vger.kernel.org>; Mon, 01 Feb 2021 09:37:51 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=cW1imzr0TE5kJBE/ANXfpVmRke4mNpObHrkdxIRCbXg=;
-        b=ai2rcrwcWCB9dWRt2sM9bDSwC7sf4hg7HgivyaczH3CBJtKKyAXlGkSd0gZjMGXWK/
-         Z9sGPqU4mzxc0xCKWDnQhYvyBiEKfinD4Zug2ohoNkedI0rpzl04Qpkloaicy7EAClXc
-         rt6GHla/RJzlR8vT/5m1Hz7jr9xHeRCE/4u88IvA3v+9hl4Xi9bimgKMrI9jhvZKNimP
-         12OjzB6rOHpaItiUAmPx3Zi6pmfr1yRbXzXAh9fbyfXJJnxXpzNRArGgLfNyPiWI4fwR
-         vZFdm358CADWxOiKVy5J4F6WMz+Hyn8asaTc7LtgUGICN/VjopdSslXBEDWLP+TcYGLn
-         R12Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=cW1imzr0TE5kJBE/ANXfpVmRke4mNpObHrkdxIRCbXg=;
-        b=XECwmcF+9tHDdKvne1bOy/k2YzPJpFOQpBMbdUfa9NrCUzZz+dB1/3C5FqJD61KPnI
-         zZ4ZgDBABSz/pmgQtnvq0BpYVPXmQ5LbXLYdtGjCKzSNIMMuZo29I4KRhYXWcfUYs6br
-         ehM0IWXFaQZY1o2ySNooKsqaetR6TnEX22+Lt2My6k/kKgglFE4YOZ5j8WrSFrKsJID3
-         xhaOvEw0RnZKzbLH8vLTxD8sm0+eEdb4PCJEVjxpQ2nwh0iWlBtrSPWVTgOJLqGHc87m
-         VnLIlY9z9upqJH92kHJl6swcx4F6SGzwdXBsuTqGoBoWHPnzwSJRzJ7kzgidx8CVnLmT
-         dzfQ==
-X-Gm-Message-State: AOAM531pkN1H1oiESIo07hjClH5wUXbxP7uHP7J+kRDxQ49LT4HfLDae
-        /PJ5q0GAOR3VEtyQgI9RFL6DtxUoqFUd+pXnaJNVkw==
-X-Google-Smtp-Source: ABdhPJy0OyAIx4kblAXsY93R/7eLdNt1LO2BhxLYqqyuQwrXUxL3u8PhllFMRMP8Ro6wEzbqGBbtQ0Z1mxdqTQt48Hs=
-X-Received: by 2002:a2e:8541:: with SMTP id u1mr11033467ljj.0.1612201070184;
- Mon, 01 Feb 2021 09:37:50 -0800 (PST)
-MIME-Version: 1.0
-References: <20201215115448.25633-1-sjpark@amazon.com> <20201215115448.25633-8-sjpark@amazon.com>
-In-Reply-To: <20201215115448.25633-8-sjpark@amazon.com>
-From:   Shakeel Butt <shakeelb@google.com>
-Date:   Mon, 1 Feb 2021 09:37:39 -0800
-Message-ID: <CALvZod69dwpS8ibuVD5baTXRwZUZAiqdgZtJUHbER=5SnMB8bw@mail.gmail.com>
-Subject: Re: [PATCH v23 07/15] mm/damon: Implement a debugfs-based user space interface
-To:     SeongJae Park <sjpark@amazon.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        SeongJae Park <sjpark@amazon.de>, Jonathan.Cameron@huawei.com,
-        Andrea Arcangeli <aarcange@redhat.com>, acme@kernel.org,
-        alexander.shishkin@linux.intel.com, amit@kernel.org,
-        benh@kernel.crashing.org, brendan.d.gregg@gmail.com,
-        Brendan Higgins <brendanhiggins@google.com>,
-        Qian Cai <cai@lca.pw>,
-        Colin Ian King <colin.king@canonical.com>,
+        id S232320AbhBASaM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Feb 2021 13:30:12 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:49514 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S232290AbhBASPe (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Feb 2021 13:15:34 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1612203247;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=dAX7GueyVaG6m75iPVmdP5d6g/SwNUAfhVVHI21U71M=;
+        b=MwTXw/tUMamJemtpsc3VNlAkzUhPZO9EEmBkVo6xFGo7EdrFAE4u9VhDMrSCp8+KL1P80w
+        +2MpnRy9lZ0lxyLISjxWlwAoejlggjxrP/SYmqPfBvS95qzoRFsrR+6igZ1A2FhbUsp3Zx
+        Xdq6ZLNVcLSNU2okatrSVGhKNTuQACM=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-248-BLBQQZBENLurE5KnNIZZPA-1; Mon, 01 Feb 2021 13:14:04 -0500
+X-MC-Unique: BLBQQZBENLurE5KnNIZZPA-1
+Received: from smtp.corp.redhat.com (int-mx06.intmail.prod.int.phx2.redhat.com [10.5.11.16])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 9BEDE106F8F7;
+        Mon,  1 Feb 2021 18:13:57 +0000 (UTC)
+Received: from t480s.redhat.com (ovpn-115-24.ams2.redhat.com [10.36.115.24])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 0ADFB18219;
+        Mon,  1 Feb 2021 18:13:53 +0000 (UTC)
+From:   David Hildenbrand <david@redhat.com>
+To:     linux-kernel@vger.kernel.org
+Cc:     linux-mm@kvack.org, David Hildenbrand <david@redhat.com>,
+        Michal Hocko <mhocko@suse.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Dave Hansen <dave.hansen@intel.com>,
+        Oscar Salvador <osalvador@suse.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Gerald Schaefer <gerald.schaefer@linux.ibm.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        David Hildenbrand <david@redhat.com>, dwmw@amazon.com,
-        Marco Elver <elver@google.com>, "Du, Fan" <fan.du@intel.com>,
-        foersleo@amazon.de, Greg Thelen <gthelen@google.com>,
-        Ian Rogers <irogers@google.com>, jolsa@redhat.com,
-        "Kirill A. Shutemov" <kirill@shutemov.name>,
-        Mark Rutland <mark.rutland@arm.com>,
-        Mel Gorman <mgorman@suse.de>, Minchan Kim <minchan@kernel.org>,
-        Ingo Molnar <mingo@redhat.com>, namhyung@kernel.org,
-        "Peter Zijlstra (Intel)" <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Rik van Riel <riel@surriel.com>,
-        David Rientjes <rientjes@google.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Mike Rapoport <rppt@kernel.org>, sblbir@amazon.com,
-        Shuah Khan <shuah@kernel.org>, sj38.park@gmail.com,
-        snu@amazon.de, Vlastimil Babka <vbabka@suse.cz>,
-        Vladimir Davydov <vdavydov.dev@gmail.com>,
-        Yang Shi <yang.shi@linux.alibaba.com>,
-        Huang Ying <ying.huang@intel.com>, zgf574564920@gmail.com,
-        linux-damon@amazon.com, Linux MM <linux-mm@kvack.org>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Ilya Dryomov <idryomov@gmail.com>,
+        Vaibhav Jain <vaibhav@linux.ibm.com>,
+        Tom Rix <trix@redhat.com>,
+        Geert Uytterhoeven <geert+renesas@glider.be>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH v2 1/2] drivers/base/memory: don't store phys_device in memory blocks
+Date:   Mon,  1 Feb 2021 19:13:46 +0100
+Message-Id: <20210201181347.13262-2-david@redhat.com>
+In-Reply-To: <20210201181347.13262-1-david@redhat.com>
+References: <20210201181347.13262-1-david@redhat.com>
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.16
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Dec 15, 2020 at 3:59 AM SeongJae Park <sjpark@amazon.com> wrote:
->
-> From: SeongJae Park <sjpark@amazon.de>
->
-> DAMON is designed to be used by kernel space code such as the memory
-> management subsystems, and therefore it provides only kernel space API.
+No need to store the value for each and every memory block, as we can
+easily query the value at runtime. Reshuffle the members to optimize the
+memory layout. Also, let's clarify what the interface once was used for
+and why it's legacy nowadays.
 
-Which kernel space APIs are being referred here?
+"phys_device" was used on s390x in older versions of lsmem[2]/chmem[3],
+back when they were still part of s390x-tools. They were later replaced
+by the variants in linux-utils. For example, RHEL6 and RHEL7 contain
+lsmem/chmem from s390-utils. RHEL8 switched to versions from util-linux
+on s390x [4].
 
-> That said, letting the user space control DAMON could provide some
-> benefits to them.  For example, it will allow user space to analyze
-> their specific workloads and make their own special optimizations.
->
-> For such cases, this commit implements a simple DAMON application kernel
-> module, namely 'damon-dbgfs', which merely wraps the DAMON api and
-> exports those to the user space via the debugfs.
->
-> 'damon-dbgfs' exports three files, ``attrs``, ``target_ids``, and
-> ``monitor_on`` under its debugfs directory, ``<debugfs>/damon/``.
->
-> Attributes
-> ----------
->
-> Users can read and write the ``sampling interval``, ``aggregation
-> interval``, ``regions update interval``, and min/max number of
-> monitoring target regions by reading from and writing to the ``attrs``
-> file.  For example, below commands set those values to 5 ms, 100 ms,
-> 1,000 ms, 10, 1000 and check it again::
->
->     # cd <debugfs>/damon
->     # echo 5000 100000 1000000 10 1000 > attrs
->     # cat attrs
->     5000 100000 1000000 10 1000
->
-> Target IDs
-> ----------
->
-> Some types of address spaces supports multiple monitoring target.  For
-> example, the virtual memory address spaces monitoring can have multiple
-> processes as the monitoring targets.  Users can set the targets by
-> writing relevant id values of the targets to, and get the ids of the
-> current targets by reading from the ``target_ids`` file.  In case of the
-> virtual address spaces monitoring, the values should be pids of the
-> monitoring target processes.  For example, below commands set processes
-> having pids 42 and 4242 as the monitoring targets and check it again::
->
->     # cd <debugfs>/damon
->     # echo 42 4242 > target_ids
->     # cat target_ids
->     42 4242
->
-> Note that setting the target ids doesn't start the monitoring.
->
-> Turning On/Off
-> --------------
->
-> Setting the files as described above doesn't incur effect unless you
-> explicitly start the monitoring.  You can start, stop, and check the
-> current status of the monitoring by writing to and reading from the
-> ``monitor_on`` file.  Writing ``on`` to the file starts the monitoring
-> of the targets with the attributes.  Writing ``off`` to the file stops
-> those.  DAMON also stops if every targets are invalidated (in case of
-> the virtual memory monitoring, target processes are invalidated when
-> terminated).  Below example commands turn on, off, and check the status
-> of DAMON::
->
->     # cd <debugfs>/damon
->     # echo on > monitor_on
->     # echo off > monitor_on
->     # cat monitor_on
->     off
->
-> Please note that you cannot write to the above-mentioned debugfs files
-> while the monitoring is turned on.  If you write to the files while
-> DAMON is running, an error code such as ``-EBUSY`` will be returned.
->
-> Signed-off-by: SeongJae Park <sjpark@amazon.de>
-> Reviewed-by: Leonard Foerster <foersleo@amazon.de>
-> ---
->  include/linux/damon.h |   3 +
->  mm/damon/Kconfig      |   9 ++
->  mm/damon/Makefile     |   1 +
->  mm/damon/core.c       |  45 ++++++
->  mm/damon/dbgfs.c      | 366 ++++++++++++++++++++++++++++++++++++++++++
->  5 files changed, 424 insertions(+)
->  create mode 100644 mm/damon/dbgfs.c
->
-> diff --git a/include/linux/damon.h b/include/linux/damon.h
-> index 39b4d6d3ddee..f9e0d4349352 100644
-> --- a/include/linux/damon.h
-> +++ b/include/linux/damon.h
-> @@ -265,9 +265,12 @@ unsigned int damon_nr_regions(struct damon_target *t);
->
->  struct damon_ctx *damon_new_ctx(enum damon_target_type type);
->  void damon_destroy_ctx(struct damon_ctx *ctx);
-> +int damon_set_targets(struct damon_ctx *ctx,
-> +               unsigned long *ids, ssize_t nr_ids);
->  int damon_set_attrs(struct damon_ctx *ctx, unsigned long sample_int,
->                 unsigned long aggr_int, unsigned long regions_update_int,
->                 unsigned long min_nr_reg, unsigned long max_nr_reg);
-> +int damon_nr_running_ctxs(void);
->
->  int damon_start(struct damon_ctx **ctxs, int nr_ctxs);
->  int damon_stop(struct damon_ctx **ctxs, int nr_ctxs);
-> diff --git a/mm/damon/Kconfig b/mm/damon/Kconfig
-> index 8ae080c52950..72f1683ba0ee 100644
-> --- a/mm/damon/Kconfig
-> +++ b/mm/damon/Kconfig
-> @@ -21,4 +21,13 @@ config DAMON_VADDR
->           This builds the default data access monitoring primitives for DAMON
->           that works for virtual address spaces.
->
-> +config DAMON_DBGFS
-> +       bool "DAMON debugfs interface"
-> +       depends on DAMON_VADDR && DEBUG_FS
-> +       help
-> +         This builds the debugfs interface for DAMON.  The user space admins
-> +         can use the interface for arbitrary data access monitoring.
-> +
-> +         If unsure, say N.
-> +
->  endmenu
-> diff --git a/mm/damon/Makefile b/mm/damon/Makefile
-> index 6ebbd08aed67..fed4be3bace3 100644
-> --- a/mm/damon/Makefile
-> +++ b/mm/damon/Makefile
-> @@ -2,3 +2,4 @@
->
->  obj-$(CONFIG_DAMON)            := core.o
->  obj-$(CONFIG_DAMON_VADDR)      += vaddr.o
-> +obj-$(CONFIG_DAMON_DBGFS)      += dbgfs.o
-> diff --git a/mm/damon/core.c b/mm/damon/core.c
-> index 5ca9f79ccbb6..b9575a6bebff 100644
-> --- a/mm/damon/core.c
-> +++ b/mm/damon/core.c
-> @@ -166,6 +166,37 @@ void damon_destroy_ctx(struct damon_ctx *ctx)
->         kfree(ctx);
->  }
->
-> +/**
-> + * damon_set_targets() - Set monitoring targets.
-> + * @ctx:       monitoring context
-> + * @ids:       array of target ids
-> + * @nr_ids:    number of entries in @ids
-> + *
-> + * This function should not be called while the kdamond is running.
-> + *
-> + * Return: 0 on success, negative error code otherwise.
-> + */
-> +int damon_set_targets(struct damon_ctx *ctx,
-> +                     unsigned long *ids, ssize_t nr_ids)
-> +{
-> +       ssize_t i;
-> +       struct damon_target *t, *next;
-> +
-> +       damon_for_each_target_safe(t, next, ctx)
-> +               damon_destroy_target(t);
+"phys_device" was added with sysfs support for memory hotplug in
+commit 3947be1969a9 ("[PATCH] memory hotplug: sysfs and add/remove
+functions") in 2005. It always returned 0.
 
-You need to put the reference on the target before destroying.
+s390x started returning something != 0 on some setups (if sclp.rzm is
+set by HW) in 2010 via commit 57b552ba0b2f ("memory hotplug/s390: set
+phys_device").
 
-> +
-> +       for (i = 0; i < nr_ids; i++) {
-> +               t = damon_new_target(ids[i]);
-> +               if (!t) {
-> +                       pr_err("Failed to alloc damon_target\n");
-> +                       return -ENOMEM;
-> +               }
-> +               damon_add_target(ctx, t);
-> +       }
-> +
-> +       return 0;
-> +}
-> +
->  /**
->   * damon_set_attrs() - Set attributes for the monitoring.
->   * @ctx:               monitoring context
-> @@ -206,6 +237,20 @@ int damon_set_attrs(struct damon_ctx *ctx, unsigned long sample_int,
->         return 0;
->  }
->
-> +/**
-> + * damon_nr_running_ctxs() - Return number of currently running contexts.
-> + */
-> +int damon_nr_running_ctxs(void)
-> +{
-> +       int nr_ctxs;
-> +
-> +       mutex_lock(&damon_lock);
-> +       nr_ctxs = nr_running_ctxs;
-> +       mutex_unlock(&damon_lock);
+For s390x, it allowed for identifying which memory block devices belong
+to the same storage increment (RZM). Only if all memory block devices
+comprising a single storage increment were offline, the memory could
+actually be removed in the hypervisor.
 
-READ_ONCE(nr_running_ctxs) ?
+Since commit e5d709bb5fb7 ("s390/memory hotplug: provide
+memory_block_size_bytes() function") in 2013 a memory block device
+spans at least one storage increment - which is why the interface isn't
+really helpful/used anymore (except by old lsmem/chmem tools).
 
-> +
-> +       return nr_ctxs;
-> +}
-> +
->  /* Returns the size upper limit for each monitoring region */
->  static unsigned long damon_region_sz_limit(struct damon_ctx *ctx)
->  {
-> diff --git a/mm/damon/dbgfs.c b/mm/damon/dbgfs.c
-> new file mode 100644
-> index 000000000000..fd1665a183c2
-> --- /dev/null
-> +++ b/mm/damon/dbgfs.c
-> @@ -0,0 +1,366 @@
-> +// SPDX-License-Identifier: GPL-2.0
-> +/*
-> + * DAMON Debugfs Interface
-> + *
-> + * Author: SeongJae Park <sjpark@amazon.de>
-> + */
-> +
-> +#define pr_fmt(fmt) "damon-dbgfs: " fmt
-> +
-> +#include <linux/damon.h>
-> +#include <linux/debugfs.h>
-> +#include <linux/file.h>
-> +#include <linux/mm.h>
-> +#include <linux/module.h>
-> +#include <linux/page_idle.h>
-> +#include <linux/slab.h>
-> +
-> +static struct damon_ctx **dbgfs_ctxs;
-> +static int dbgfs_nr_ctxs;
-> +static struct dentry **dbgfs_dirs;
-> +
-> +/*
-> + * Returns non-empty string on success, negarive error code otherwise.
-> + */
-> +static char *user_input_str(const char __user *buf, size_t count, loff_t *ppos)
-> +{
-> +       char *kbuf;
-> +       ssize_t ret;
-> +
-> +       /* We do not accept continuous write */
-> +       if (*ppos)
-> +               return ERR_PTR(-EINVAL);
-> +
-> +       kbuf = kmalloc(count + 1, GFP_KERNEL);
-> +       if (!kbuf)
-> +               return ERR_PTR(-ENOMEM);
-> +
-> +       ret = simple_write_to_buffer(kbuf, count + 1, ppos, buf, count);
-> +       if (ret != count) {
-> +               kfree(kbuf);
-> +               return ERR_PTR(-EIO);
-> +       }
-> +       kbuf[ret] = '\0';
-> +
-> +       return kbuf;
-> +}
-> +
-> +static ssize_t dbgfs_attrs_read(struct file *file,
-> +               char __user *buf, size_t count, loff_t *ppos)
-> +{
-> +       struct damon_ctx *ctx = file->private_data;
-> +       char kbuf[128];
-> +       int ret;
-> +
-> +       mutex_lock(&ctx->kdamond_lock);
-> +       ret = scnprintf(kbuf, ARRAY_SIZE(kbuf), "%lu %lu %lu %lu %lu\n",
-> +                       ctx->sample_interval, ctx->aggr_interval,
-> +                       ctx->regions_update_interval, ctx->min_nr_regions,
-> +                       ctx->max_nr_regions);
-> +       mutex_unlock(&ctx->kdamond_lock);
-> +
-> +       return simple_read_from_buffer(buf, count, ppos, kbuf, ret);
-> +}
-> +
-> +static ssize_t dbgfs_attrs_write(struct file *file,
-> +               const char __user *buf, size_t count, loff_t *ppos)
-> +{
-> +       struct damon_ctx *ctx = file->private_data;
-> +       unsigned long s, a, r, minr, maxr;
-> +       char *kbuf;
-> +       ssize_t ret = count;
-> +       int err;
-> +
-> +       kbuf = user_input_str(buf, count, ppos);
-> +       if (IS_ERR(kbuf))
-> +               return PTR_ERR(kbuf);
-> +
-> +       if (sscanf(kbuf, "%lu %lu %lu %lu %lu",
-> +                               &s, &a, &r, &minr, &maxr) != 5) {
-> +               ret = -EINVAL;
-> +               goto out;
-> +       }
-> +
-> +       mutex_lock(&ctx->kdamond_lock);
-> +       if (ctx->kdamond) {
-> +               ret = -EBUSY;
-> +               goto unlock_out;
-> +       }
-> +
-> +       err = damon_set_attrs(ctx, s, a, r, minr, maxr);
-> +       if (err)
-> +               ret = err;
-> +unlock_out:
-> +       mutex_unlock(&ctx->kdamond_lock);
-> +out:
-> +       kfree(kbuf);
-> +       return ret;
-> +}
-> +
-> +#define targetid_is_pid(ctx)   \
-> +       (ctx->primitive.target_valid == damon_va_target_valid)
-> +
-> +static ssize_t sprint_target_ids(struct damon_ctx *ctx, char *buf, ssize_t len)
-> +{
-> +       struct damon_target *t;
-> +       unsigned long id;
-> +       int written = 0;
-> +       int rc;
-> +
-> +       damon_for_each_target(t, ctx) {
-> +               id = t->id;
-> +               if (targetid_is_pid(ctx))
-> +                       /* Show pid numbers to debugfs users */
-> +                       id = (unsigned long)pid_vnr((struct pid *)id);
-> +
-> +               rc = scnprintf(&buf[written], len - written, "%lu ", id);
-> +               if (!rc)
-> +                       return -ENOMEM;
-> +               written += rc;
-> +       }
-> +       if (written)
-> +               written -= 1;
-> +       written += scnprintf(&buf[written], len - written, "\n");
-> +       return written;
-> +}
-> +
-> +static ssize_t dbgfs_target_ids_read(struct file *file,
-> +               char __user *buf, size_t count, loff_t *ppos)
-> +{
-> +       struct damon_ctx *ctx = file->private_data;
-> +       ssize_t len;
-> +       char ids_buf[320];
-> +
-> +       mutex_lock(&ctx->kdamond_lock);
-> +       len = sprint_target_ids(ctx, ids_buf, 320);
-> +       mutex_unlock(&ctx->kdamond_lock);
-> +       if (len < 0)
-> +               return len;
-> +
-> +       return simple_read_from_buffer(buf, count, ppos, ids_buf, len);
-> +}
-> +
-> +/*
-> + * Converts a string into an array of unsigned long integers
-> + *
-> + * Returns an array of unsigned long integers if the conversion success, or
-> + * NULL otherwise.
-> + */
-> +static unsigned long *str_to_target_ids(const char *str, ssize_t len,
-> +                                       ssize_t *nr_ids)
-> +{
-> +       unsigned long *ids;
-> +       const int max_nr_ids = 32;
-> +       unsigned long id;
-> +       int pos = 0, parsed, ret;
-> +
-> +       *nr_ids = 0;
-> +       ids = kmalloc_array(max_nr_ids, sizeof(id), GFP_KERNEL);
-> +       if (!ids)
-> +               return NULL;
-> +       while (*nr_ids < max_nr_ids && pos < len) {
-> +               ret = sscanf(&str[pos], "%lu%n", &id, &parsed);
-> +               pos += parsed;
-> +               if (ret != 1)
-> +                       break;
-> +               ids[*nr_ids] = id;
-> +               *nr_ids += 1;
-> +       }
-> +
-> +       return ids;
-> +}
-> +
-> +static ssize_t dbgfs_target_ids_write(struct file *file,
-> +               const char __user *buf, size_t count, loff_t *ppos)
-> +{
-> +       struct damon_ctx *ctx = file->private_data;
-> +       char *kbuf, *nrs;
-> +       unsigned long *targets;
-> +       ssize_t nr_targets;
-> +       ssize_t ret = count;
-> +       int i;
-> +       int err;
-> +
-> +       kbuf = user_input_str(buf, count, ppos);
-> +       if (IS_ERR(kbuf))
-> +               return PTR_ERR(kbuf);
-> +
-> +       nrs = kbuf;
-> +
-> +       targets = str_to_target_ids(nrs, ret, &nr_targets);
-> +       if (!targets) {
-> +               ret = -ENOMEM;
-> +               goto out;
-> +       }
-> +
-> +       if (targetid_is_pid(ctx)) {
-> +               for (i = 0; i < nr_targets; i++)
-> +                       targets[i] = (unsigned long)find_get_pid(
-> +                                       (int)targets[i]);
-> +       }
-> +
-> +       mutex_lock(&ctx->kdamond_lock);
-> +       if (ctx->kdamond) {
-> +               ret = -EINVAL;
-> +               goto unlock_out;
+There were once RFC patches to make use of "phys_device" in ACPI context;
+however, the underlying problem could be solved using different
+interfaces [1].
 
-You need to put_pid on the targets array.
+[1] https://patchwork.kernel.org/patch/2163871/
+[2] https://github.com/ibm-s390-tools/s390-tools/blob/v2.1.0/zconf/lsmem
+[3] https://github.com/ibm-s390-tools/s390-tools/blob/v2.1.0/zconf/chmem
+[4] https://bugzilla.redhat.com/show_bug.cgi?id=1504134
 
-> +       }
-> +
-> +       err = damon_set_targets(ctx, targets, nr_targets);
-> +       if (err)
-> +               ret = err;
+Acked-by: Michal Hocko <mhocko@suse.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>
+Cc: Dave Hansen <dave.hansen@intel.com>
+Cc: Michal Hocko <mhocko@suse.com>
+Cc: Oscar Salvador <osalvador@suse.de>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+Cc: Gerald Schaefer <gerald.schaefer@linux.ibm.com>
+Cc: Jonathan Corbet <corbet@lwn.net>
+Cc: "Rafael J. Wysocki" <rafael@kernel.org>
+Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+Cc: Ilya Dryomov <idryomov@gmail.com>
+Cc: Vaibhav Jain <vaibhav@linux.ibm.com>
+Cc: Tom Rix <trix@redhat.com>
+Cc: Geert Uytterhoeven <geert+renesas@glider.be>
+Cc: linux-doc@vger.kernel.org
+Signed-off-by: David Hildenbrand <david@redhat.com>
+---
+ .../ABI/testing/sysfs-devices-memory          |  5 ++--
+ .../admin-guide/mm/memory-hotplug.rst         |  4 +--
+ drivers/base/memory.c                         | 25 +++++++------------
+ include/linux/memory.h                        |  3 +--
+ 4 files changed, 15 insertions(+), 22 deletions(-)
 
-You need to handle the partial failure from damon_set_targets().
+diff --git a/Documentation/ABI/testing/sysfs-devices-memory b/Documentation/ABI/testing/sysfs-devices-memory
+index 246a45b96d22..58dbc592bc57 100644
+--- a/Documentation/ABI/testing/sysfs-devices-memory
++++ b/Documentation/ABI/testing/sysfs-devices-memory
+@@ -26,8 +26,9 @@ Date:		September 2008
+ Contact:	Badari Pulavarty <pbadari@us.ibm.com>
+ Description:
+ 		The file /sys/devices/system/memory/memoryX/phys_device
+-		is read-only and is designed to show the name of physical
+-		memory device.  Implementation is currently incomplete.
++		is read-only;  it is a legacy interface only ever used on s390x
++		to expose the covered storage increment.
++Users:		Legacy s390-tools lsmem/chmem
+ 
+ What:		/sys/devices/system/memory/memoryX/phys_index
+ Date:		September 2008
+diff --git a/Documentation/admin-guide/mm/memory-hotplug.rst b/Documentation/admin-guide/mm/memory-hotplug.rst
+index 5c4432c96c4b..245739f55ac7 100644
+--- a/Documentation/admin-guide/mm/memory-hotplug.rst
++++ b/Documentation/admin-guide/mm/memory-hotplug.rst
+@@ -160,8 +160,8 @@ Under each memory block, you can see 5 files:
+ 
+                     "online_movable", "online", "offline" command
+                     which will be performed on all sections in the block.
+-``phys_device``     read-only: designed to show the name of physical memory
+-                    device.  This is not well implemented now.
++``phys_device``	    read-only: legacy interface only ever used on s390x to
++		    expose the covered storage increment.
+ ``removable``       read-only: contains an integer value indicating
+                     whether the memory block is removable or not
+                     removable.  A value of 1 indicates that the memory
+diff --git a/drivers/base/memory.c b/drivers/base/memory.c
+index 901e379676be..f35298425575 100644
+--- a/drivers/base/memory.c
++++ b/drivers/base/memory.c
+@@ -290,20 +290,20 @@ static ssize_t state_store(struct device *dev, struct device_attribute *attr,
+ }
+ 
+ /*
+- * phys_device is a bad name for this.  What I really want
+- * is a way to differentiate between memory ranges that
+- * are part of physical devices that constitute
+- * a complete removable unit or fru.
+- * i.e. do these ranges belong to the same physical device,
+- * s.t. if I offline all of these sections I can then
+- * remove the physical device?
++ * Legacy interface that we cannot remove: s390x exposes the storage increment
++ * covered by a memory block, allowing for identifying which memory blocks
++ * comprise a storage increment. Since a memory block spans complete
++ * storage increments nowadays, this interface is basically unused. Other
++ * archs never exposed != 0.
+  */
+ static ssize_t phys_device_show(struct device *dev,
+ 				struct device_attribute *attr, char *buf)
+ {
+ 	struct memory_block *mem = to_memory_block(dev);
++	unsigned long start_pfn = section_nr_to_pfn(mem->start_section_nr);
+ 
+-	return sysfs_emit(buf, "%d\n", mem->phys_device);
++	return sysfs_emit(buf, "%d\n",
++			  arch_get_memory_phys_device(start_pfn));
+ }
+ 
+ #ifdef CONFIG_MEMORY_HOTREMOVE
+@@ -488,11 +488,7 @@ static DEVICE_ATTR_WO(soft_offline_page);
+ static DEVICE_ATTR_WO(hard_offline_page);
+ #endif
+ 
+-/*
+- * Note that phys_device is optional.  It is here to allow for
+- * differentiation between which *physical* devices each
+- * section belongs to...
+- */
++/* See phys_device_show(). */
+ int __weak arch_get_memory_phys_device(unsigned long start_pfn)
+ {
+ 	return 0;
+@@ -574,7 +570,6 @@ int register_memory(struct memory_block *memory)
+ static int init_memory_block(unsigned long block_id, unsigned long state)
+ {
+ 	struct memory_block *mem;
+-	unsigned long start_pfn;
+ 	int ret = 0;
+ 
+ 	mem = find_memory_block_by_id(block_id);
+@@ -588,8 +583,6 @@ static int init_memory_block(unsigned long block_id, unsigned long state)
+ 
+ 	mem->start_section_nr = block_id * sections_per_block;
+ 	mem->state = state;
+-	start_pfn = section_nr_to_pfn(mem->start_section_nr);
+-	mem->phys_device = arch_get_memory_phys_device(start_pfn);
+ 	mem->nid = NUMA_NO_NODE;
+ 
+ 	ret = register_memory(mem);
+diff --git a/include/linux/memory.h b/include/linux/memory.h
+index 439a89e758d8..4da95e684e20 100644
+--- a/include/linux/memory.h
++++ b/include/linux/memory.h
+@@ -27,9 +27,8 @@ struct memory_block {
+ 	unsigned long start_section_nr;
+ 	unsigned long state;		/* serialized by the dev->lock */
+ 	int online_type;		/* for passing data to online routine */
+-	int phys_device;		/* to which fru does this belong? */
+-	struct device dev;
+ 	int nid;			/* NID for this memory block */
++	struct device dev;
+ };
+ 
+ int arch_get_memory_phys_device(unsigned long start_pfn);
+-- 
+2.29.2
 
-
-> +unlock_out:
-> +       mutex_unlock(&ctx->kdamond_lock);
-> +       kfree(targets);
-> +out:
-> +       kfree(kbuf);
-> +       return ret;
-> +}
-> +
-> +static int damon_dbgfs_open(struct inode *inode, struct file *file)
-> +{
-> +       file->private_data = inode->i_private;
-> +
-> +       return nonseekable_open(inode, file);
-> +}
-> +
-> +static const struct file_operations attrs_fops = {
-> +       .owner = THIS_MODULE,
-> +       .open = damon_dbgfs_open,
-> +       .read = dbgfs_attrs_read,
-> +       .write = dbgfs_attrs_write,
-> +};
-> +
-> +static const struct file_operations target_ids_fops = {
-> +       .owner = THIS_MODULE,
-> +       .open = damon_dbgfs_open,
-> +       .read = dbgfs_target_ids_read,
-> +       .write = dbgfs_target_ids_write,
-> +};
-> +
-> +static int dbgfs_fill_ctx_dir(struct dentry *dir, struct damon_ctx *ctx)
-> +{
-> +       const char * const file_names[] = {"attrs", "target_ids"};
-> +       const struct file_operations *fops[] = {&attrs_fops, &target_ids_fops};
-> +       int i;
-> +
-> +       for (i = 0; i < ARRAY_SIZE(file_names); i++) {
-> +               if (!debugfs_create_file(file_names[i], 0600, dir,
-> +                                       ctx, fops[i])) {
-> +                       pr_err("failed to create %s file\n", file_names[i]);
-> +                       return -ENOMEM;
-> +               }
-> +       }
-> +
-> +       return 0;
-> +}
-> +
-> +static struct damon_ctx *dbgfs_new_ctx(void)
-> +{
-> +       struct damon_ctx *ctx;
-> +
-> +       ctx = damon_new_ctx(DAMON_ADAPTIVE_TARGET);
-> +       if (!ctx)
-> +               return NULL;
-> +
-> +       damon_va_set_primitives(ctx);
-> +       return ctx;
-> +}
-> +
-> +static ssize_t dbgfs_monitor_on_read(struct file *file,
-> +               char __user *buf, size_t count, loff_t *ppos)
-> +{
-> +       char monitor_on_buf[5];
-> +       bool monitor_on = damon_nr_running_ctxs() != 0;
-> +       int len;
-> +
-> +       len = scnprintf(monitor_on_buf, 5, monitor_on ? "on\n" : "off\n");
-> +
-> +       return simple_read_from_buffer(buf, count, ppos, monitor_on_buf, len);
-> +}
-> +
-> +static ssize_t dbgfs_monitor_on_write(struct file *file,
-> +               const char __user *buf, size_t count, loff_t *ppos)
-> +{
-> +       ssize_t ret = count;
-> +       char *kbuf;
-> +       int err;
-> +
-> +       kbuf = user_input_str(buf, count, ppos);
-> +       if (IS_ERR(kbuf))
-> +               return PTR_ERR(kbuf);
-> +
-> +       /* Remove white space */
-> +       if (sscanf(kbuf, "%s", kbuf) != 1) {
-> +               kfree(kbuf);
-> +               return -EINVAL;
-> +       }
-> +
-> +       if (!strncmp(kbuf, "on", count))
-> +               err = damon_start(dbgfs_ctxs, dbgfs_nr_ctxs);
-> +       else if (!strncmp(kbuf, "off", count))
-> +               err = damon_stop(dbgfs_ctxs, dbgfs_nr_ctxs);
-> +       else
-> +               err = -EINVAL;
-> +
-> +       if (err)
-> +               ret = err;
-> +       kfree(kbuf);
-> +       return ret;
-> +}
-> +
-> +static const struct file_operations monitor_on_fops = {
-> +       .owner = THIS_MODULE,
-> +       .read = dbgfs_monitor_on_read,
-> +       .write = dbgfs_monitor_on_write,
-> +};
-> +
-> +static int __init __damon_dbgfs_init(void)
-> +{
-> +       struct dentry *dbgfs_root;
-> +       const char * const file_names[] = {"monitor_on"};
-> +       const struct file_operations *fops[] = {&monitor_on_fops};
-> +       int i;
-> +
-> +       dbgfs_root = debugfs_create_dir("damon", NULL);
-> +       if (IS_ERR(dbgfs_root)) {
-> +               pr_err("failed to create the dbgfs dir\n");
-> +               return PTR_ERR(dbgfs_root);
-> +       }
-> +
-> +       for (i = 0; i < ARRAY_SIZE(file_names); i++) {
-> +               if (!debugfs_create_file(file_names[i], 0600, dbgfs_root,
-> +                                       NULL, fops[i])) {
-> +                       pr_err("failed to create %s file\n", file_names[i]);
-> +                       return -ENOMEM;
-> +               }
-> +       }
-> +       dbgfs_fill_ctx_dir(dbgfs_root, dbgfs_ctxs[0]);
-> +
-> +       dbgfs_dirs = kmalloc_array(1, sizeof(dbgfs_root), GFP_KERNEL);
-> +       dbgfs_dirs[0] = dbgfs_root;
-> +
-> +       return 0;
-> +}
-> +
-> +/*
-> + * Functions for the initialization
-> + */
-> +
-> +static int __init damon_dbgfs_init(void)
-> +{
-> +       int rc;
-> +
-> +       dbgfs_ctxs = kmalloc(sizeof(*dbgfs_ctxs), GFP_KERNEL);
-> +       dbgfs_ctxs[0] = dbgfs_new_ctx();
-> +       if (!dbgfs_ctxs[0])
-> +               return -ENOMEM;
-> +       dbgfs_nr_ctxs = 1;
-> +
-> +       rc = __damon_dbgfs_init();
-> +       if (rc)
-> +               pr_err("%s: dbgfs init failed\n", __func__);
-> +
-> +       return rc;
-> +}
-> +
-> +module_init(damon_dbgfs_init);
-> --
-> 2.17.1
->
