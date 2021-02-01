@@ -2,200 +2,229 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 143D830A5DA
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Feb 2021 11:55:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A70CE30A60E
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Feb 2021 12:01:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233341AbhBAKyB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Feb 2021 05:54:01 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:47736 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S233216AbhBAKxo (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Feb 2021 05:53:44 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1612176738;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=JnHeDpI4bvTxudk3KhEYwjLYvMmvMtJjXyTPeOgb0Is=;
-        b=ByBtY7XFjieob04k1Q0ONjI4UYMqeLK6rhEdUnG5L0D6s8W12S73bZhRFdXLF3LQt6r7l2
-        tB/q2wsx56tTFYG2q8uuSJn2x4hC8l1M+3TJmkoUKQ75Vwt2F/bhc3if+Dd7lYahsLGtDk
-        alxF/VC9ovUkZQa5IR0Z/1l5/Bmi9LQ=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-324-Xh8r5YozM_-Og_jNIsx-ww-1; Mon, 01 Feb 2021 05:52:14 -0500
-X-MC-Unique: Xh8r5YozM_-Og_jNIsx-ww-1
-Received: from smtp.corp.redhat.com (int-mx08.intmail.prod.int.phx2.redhat.com [10.5.11.23])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 6B30F801817;
-        Mon,  1 Feb 2021 10:52:12 +0000 (UTC)
-Received: from t480s.redhat.com (ovpn-115-24.ams2.redhat.com [10.36.115.24])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 700FB27CA9;
-        Mon,  1 Feb 2021 10:52:08 +0000 (UTC)
-From:   David Hildenbrand <david@redhat.com>
-To:     linux-kernel@vger.kernel.org
-Cc:     linux-mm@kvack.org, David Hildenbrand <david@redhat.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Dave Hansen <dave.hansen@intel.com>,
-        Michal Hocko <mhocko@suse.com>,
-        Oscar Salvador <osalvador@suse.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Jonathan Cameron <Jonathan.Cameron@huawei.com>,
-        Ilya Dryomov <idryomov@gmail.com>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Geert Uytterhoeven <geert+renesas@glider.be>,
-        linux-doc@vger.kernel.org
-Subject: [PATCH v1 2/2] Documentation: sysfs/memory: clarify some memory block device properties
-Date:   Mon,  1 Feb 2021 11:51:58 +0100
-Message-Id: <20210201105158.6393-3-david@redhat.com>
-In-Reply-To: <20210201105158.6393-1-david@redhat.com>
-References: <20210201105158.6393-1-david@redhat.com>
+        id S233410AbhBALAv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Feb 2021 06:00:51 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40146 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S233396AbhBALAY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Feb 2021 06:00:24 -0500
+Received: from mail-ej1-x633.google.com (mail-ej1-x633.google.com [IPv6:2a00:1450:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B44D1C06174A
+        for <linux-doc@vger.kernel.org>; Mon,  1 Feb 2021 02:59:43 -0800 (PST)
+Received: by mail-ej1-x633.google.com with SMTP id hs11so23666744ejc.1
+        for <linux-doc@vger.kernel.org>; Mon, 01 Feb 2021 02:59:43 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=lx4W7u0ABpsM7eUPv7hFsdl/vMIH6Tgd275uM+E90PA=;
+        b=CYaYjyJGWa9M5woKY7/2n3Stl/0XdwpBHtLmupB/ZGWB4aGiwXU5iH9Ob2XBKYqQaS
+         vdx5TDUSMXGBCdc2VqARO0cau3yrkhtUyL2HutROj62M4gYYFGuCUTwOLKSgdP2f0qgP
+         V6VG7RpOxTf4HTXGru7sG1HUp5vc+ZJRdWD/m0a9DaOCo4UdUvK7g64Alr3F4+4DVp/k
+         iJaUIllZupaT44gFREQ8KC1Ak/mRYKDCizxYM66D5z//WHydmd3RM8vFhOzRFxaEcI5j
+         iAaSMPfCbJ9ThaOBZO2dLNXhzgpI41Xd1Ah0C2K4fpipxM06pMwhzz5hSKILElSviv2B
+         JeDw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=lx4W7u0ABpsM7eUPv7hFsdl/vMIH6Tgd275uM+E90PA=;
+        b=SqfkapTq7/FphYMsDJ09uGrWg8XejcbKohXTwWFSJUVEBc6vAQpGHsXv+xJzAgFAXE
+         Ghp92DCvLv0M1mgItmwpfuk6d0BefM6e2Re7w+cBO/Cr8QS9K+QGj+SksVaQHG7sIrbr
+         YUFzRstd8qUbCEKy9QhNSa8o7JxPKPQGnnPLswLzJjL9Uo/Mg9HeMRSnZ71s8bsa5Csy
+         e8qG8mVWVva27a6rTItRe8ydx2GDIaBVDAyUXfz3TSqEazi+kWyN+BMrvSWnmNPnSHMd
+         4gJcqlGUWSu8p6OPcAJuOHW36A08UfqvVb9T1px8hp3tzBPooTdDgLz+5e1t9KyWnpiZ
+         9FDQ==
+X-Gm-Message-State: AOAM530/wcYyspq/pLcljcZhjpi7WYdz60E0im5ca2kqc5CSi92pLN6h
+        DMwM4Zdjwoz3voItbsAXV3B9p5aRaP88OqicBTZCsQ==
+X-Google-Smtp-Source: ABdhPJwjRHR8jRfbLq1RCIKHxZhV2YMK/caZS3zW7teEVN9nXdPPVMMHewbZfPTd+X2XEDvLqIdDgSN14peEiWum+Qk=
+X-Received: by 2002:a17:906:e03:: with SMTP id l3mr9190234eji.64.1612177182408;
+ Mon, 01 Feb 2021 02:59:42 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Scanned-By: MIMEDefang 2.84 on 10.5.11.23
+References: <20210129134624.9247-1-brgl@bgdev.pl> <20210129134624.9247-9-brgl@bgdev.pl>
+ <YBQwUkQz3LrG5G4i@smile.fi.intel.com> <CAMRc=MeSy4zWOAGxfoBih62WxAXuOLtkK3ROyt+4LuqLvDxtaQ@mail.gmail.com>
+ <YBfX38JBa0psBizQ@smile.fi.intel.com>
+In-Reply-To: <YBfX38JBa0psBizQ@smile.fi.intel.com>
+From:   Bartosz Golaszewski <brgl@bgdev.pl>
+Date:   Mon, 1 Feb 2021 11:59:31 +0100
+Message-ID: <CAMRc=Mfgw5oA-TA2PN-Z+ape0POAtLwVeDJnzH1iuzKw5wYQ5Q@mail.gmail.com>
+Subject: Re: [PATCH 8/8] gpio: sim: new testing module
+To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc:     Linus Walleij <linus.walleij@linaro.org>,
+        Joel Becker <jlbec@evilplan.org>,
+        Christoph Hellwig <hch@lst.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= 
+        <u.kleine-koenig@pengutronix.de>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Kent Gibson <warthog618@gmail.com>,
+        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
+        linux-doc <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-In commit 53cdc1cb29e8 ("drivers/base/memory.c: indicate all memory blocks
-as removable") we changed the output of the "removable" property of memory
-devices to return "1" if and only if the kernel supports memory offlining.
+On Mon, Feb 1, 2021 at 11:28 AM Andy Shevchenko
+<andriy.shevchenko@linux.intel.com> wrote:
+>
+> On Sat, Jan 30, 2021 at 09:37:55PM +0100, Bartosz Golaszewski wrote:
+> > On Fri, Jan 29, 2021 at 4:57 PM Andy Shevchenko
+> > <andriy.shevchenko@linux.intel.com> wrote:
+> > > On Fri, Jan 29, 2021 at 02:46:24PM +0100, Bartosz Golaszewski wrote:
+>
+> ...
+>
+> > > > +static int gpio_sim_set_config(struct gpio_chip *gc,
+> > > > +                               unsigned int offset, unsigned long config)
+> > > > +{
+> > > > +     struct gpio_sim_chip *chip = gpiochip_get_data(gc);
+> > > > +
+> > > > +     switch (pinconf_to_config_param(config)) {
+> > >
+> > > > +     case PIN_CONFIG_BIAS_PULL_UP:
+> > > > +             return gpio_sim_apply_pull(chip, offset, 1);
+> > > > +     case PIN_CONFIG_BIAS_PULL_DOWN:
+> > > > +             return gpio_sim_apply_pull(chip, offset, 0);
+> > >
+> > > But aren't we got a parameter (1 or 0) from config? And hence
+> > >
+> > >         case PIN_CONFIG_BIAS_PULL_UP:
+> > >         case PIN_CONFIG_BIAS_PULL_DOWN:
+> > >                 return gpio_sim_apply_pull(chip, offset, <param>);
+> > >
+> > > ?
+> >
+> > I believe this is more explicit and so easier to read if you don't
+> > know the GPIO and pinctrl internals.
+>
+>
+> If we ever go to change meanings of the values in param, it will require to fix
+> this occurrence which seems to me suboptimal.
+>
 
-Let's update documentation, stating that the interface is legacy. Also
-update documentation of the "state" property and "valid_zones"
-properties.
+Why would we do it? This is internal to this driver.
 
-Cc: Andrew Morton <akpm@linux-foundation.org>
-Cc: Dave Hansen <dave.hansen@intel.com>
-Cc: Michal Hocko <mhocko@suse.com>
-Cc: Oscar Salvador <osalvador@suse.de>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: David Hildenbrand <david@redhat.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-Cc: Jonathan Cameron <Jonathan.Cameron@huawei.com>
-Cc: Ilya Dryomov <idryomov@gmail.com>
-Cc: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Cc: Geert Uytterhoeven <geert+renesas@glider.be>
-Cc: linux-doc@vger.kernel.org
-Signed-off-by: David Hildenbrand <david@redhat.com>
----
- .../ABI/testing/sysfs-devices-memory          | 53 ++++++++++++-------
- .../admin-guide/mm/memory-hotplug.rst         | 16 +++---
- 2 files changed, 41 insertions(+), 28 deletions(-)
+> > > > +     default:
+> > > > +             break;
+> > > > +     }
+> > > > +
+> > > > +     return -ENOTSUPP;
+> > > > +}
+>
+> ...
+>
+> > > > +static ssize_t gpio_sim_sysfs_line_store(struct device *dev,
+> > > > +                                      struct device_attribute *attr,
+> > > > +                                      const char *buf, size_t len)
+> > > > +{
+> > > > +     struct gpio_sim_attribute *line_attr = to_gpio_sim_attr(attr);
+> > > > +     struct gpio_sim_chip *chip = dev_get_drvdata(dev);
+> > > > +     int ret, val;
+> > >
+> > > > +     ret = kstrtoint(buf, 0, &val);
+> > > > +     if (ret)
+> > > > +             return ret;
+> > > > +     if (val != 0 && val != 1)
+> > > > +             return -EINVAL;
+> > >
+> > > kstrtobool() ?
+> > >
+> >
+> > No, we really only want 0 or 1, no yes, Y etc.
+>
+> Side note: But you allow 0x00001, for example...
 
-diff --git a/Documentation/ABI/testing/sysfs-devices-memory b/Documentation/ABI/testing/sysfs-devices-memory
-index 58dbc592bc57..d8b0f80b9e33 100644
---- a/Documentation/ABI/testing/sysfs-devices-memory
-+++ b/Documentation/ABI/testing/sysfs-devices-memory
-@@ -13,13 +13,13 @@ What:		/sys/devices/system/memory/memoryX/removable
- Date:		June 2008
- Contact:	Badari Pulavarty <pbadari@us.ibm.com>
- Description:
--		The file /sys/devices/system/memory/memoryX/removable
--		indicates whether this memory block is removable or not.
--		This is useful for a user-level agent to determine
--		identify removable sections of the memory before attempting
--		potentially expensive hot-remove memory operation
-+		The file /sys/devices/system/memory/memoryX/removable is a
-+		legacy interface used to indicated whether a memory block is
-+		likely to be offlineable or not.  Newer kernel versions return
-+		"1" if and only if the kernel supports memory offlining.
- Users:		hotplug memory remove tools
- 		http://www.ibm.com/developerworks/wikis/display/LinuxP/powerpc-utils
-+		lsmem/chmem part of util-linux
- 
- What:		/sys/devices/system/memory/memoryX/phys_device
- Date:		September 2008
-@@ -44,23 +44,25 @@ Date:		September 2008
- Contact:	Badari Pulavarty <pbadari@us.ibm.com>
- Description:
- 		The file /sys/devices/system/memory/memoryX/state
--		is read-write.  When read, its contents show the
--		online/offline state of the memory section.  When written,
--		root can toggle the the online/offline state of a removable
--		memory section (see removable file description above)
--		using the following commands::
-+		is read-write.  When read, it returns the online/offline
-+		state of the memory block.  When written, root can toggle
-+		the online/offline state of a memory block using the following
-+		commands::
- 
- 		  # echo online > /sys/devices/system/memory/memoryX/state
- 		  # echo offline > /sys/devices/system/memory/memoryX/state
- 
--		For example, if /sys/devices/system/memory/memory22/removable
--		contains a value of 1 and
--		/sys/devices/system/memory/memory22/state contains the
--		string "online" the following command can be executed by
--		by root to offline that section::
--
--		  # echo offline > /sys/devices/system/memory/memory22/state
--
-+		On newer kernel versions, advanced states can be specified
-+		when onlining to select a target zone: "online_movable"
-+		selects the movable zone.  "online_kernel" selects the
-+		applicable kernel zone (DMA, DMA32, or Normal).  However,
-+		after successfully setting one of the advanced states,
-+		reading the file will return "online"; the zone information
-+		can be obtained via "valid_zones" instead.
-+
-+		While onlining is unlikely to fail, there are no guarantees
-+		that offlining will succeed.  Offlining is more likely to
-+		succeed if "valid_zones" indicates "Movable".
- Users:		hotplug memory remove tools
- 		http://www.ibm.com/developerworks/wikis/display/LinuxP/powerpc-utils
- 
-@@ -70,8 +72,19 @@ Date:           July 2014
- Contact:	Zhang Zhen <zhenzhang.zhang@huawei.com>
- Description:
- 		The file /sys/devices/system/memory/memoryX/valid_zones	is
--		read-only and is designed to show which zone this memory
--		block can be onlined to.
-+		read-only.
-+
-+		For online memory blocks, it returns in which zone memory
-+		provided by a memory block is managed.  If multiple zones
-+		apply (not applicable for hotplugged memory), "None" is returned
-+		and the memory block cannot be offlined.
-+
-+		For offline memory blocks, it returns by which zone memory
-+		provided by a memory block can be managed when onlining.
-+		The first returned zone ("default") will be used when setting
-+		the state of an offline memory block to "online".  Only one of
-+		the kernel zones (DMA, DMA32, Normal) is applicable for a single
-+		memory block.
- 
- What:		/sys/devices/system/memoryX/nodeY
- Date:		October 2009
-diff --git a/Documentation/admin-guide/mm/memory-hotplug.rst b/Documentation/admin-guide/mm/memory-hotplug.rst
-index 245739f55ac7..5307f90738aa 100644
---- a/Documentation/admin-guide/mm/memory-hotplug.rst
-+++ b/Documentation/admin-guide/mm/memory-hotplug.rst
-@@ -162,14 +162,14 @@ Under each memory block, you can see 5 files:
-                     which will be performed on all sections in the block.
- ``phys_device``	    read-only: legacy interface only ever used on s390x to
- 		    expose the covered storage increment.
--``removable``       read-only: contains an integer value indicating
--                    whether the memory block is removable or not
--                    removable.  A value of 1 indicates that the memory
--                    block is removable and a value of 0 indicates that
--                    it is not removable. A memory block is removable only if
--                    every section in the block is removable.
--``valid_zones``     read-only: designed to show which zones this memory block
--		    can be onlined to.
-+``removable``	    read-only: legacy interface that indicated whether a memory
-+		    block was likely to be offlineable or not.  Newer kernel
-+		    versions return "1" if and only if the kernel supports
-+		    memory offlining.
-+``valid_zones``     read-only: designed to show by which zone memory provided by
-+		    a memory block is managed, and to show by which zone memory
-+		    provided by an offline memory block could be managed when
-+		    onlining.
- 
- 		    The first column shows it`s default zone.
- 
--- 
-2.29.2
+Good point. In that case we should check if len > 2 and if buf[0] ==
+'1' or '0' and that's all we allow.
 
+>
+> Then why not to use unsigned type from the first place and add a comment?
+>
+> > > > +     ret = gpio_sim_apply_pull(chip, line_attr->offset, val);
+> > > > +     if (ret)
+> > > > +             return ret;
+> > > > +
+> > > > +     return len;
+> > > > +}
+>
+> ...
+>
+> > > > +struct gpio_sim_chip_config {
+> > > > +     struct config_item item;
+> > > > +
+> > > > +     /*
+> > > > +      * If pdev is NULL, the item is 'pending' (waiting for configuration).
+> > > > +      * Once the pointer is assigned, the device has been created and the
+> > > > +      * item is 'live'.
+> > > > +      */
+> > > > +     struct platform_device *pdev;
+> > >
+> > > Are you sure
+> > >
+> > >         struct device *dev;
+> > >
+> > > is not sufficient?
+> > >
+> >
+> > It may be but I really prefer those simulated devices to be on the platform bus.
+>
+> My point here is that there is no need to keep specific bus devices type,
+> because you may easily derive it from the struct device pointer. Basically if
+> you are almost using struct device in your code (seems to me the case), you
+> won't need to carry bus specific one and dereference it each time.
+>
+
+But don't we need a bus to even register a device? I haven't checked
+in a long time but IIRC it's mandatory.
+
+Let me give you a different argument - the platform device offers a
+very simple API for registering devices with properties being
+duplicated behind the scenes etc. It seems to me that registering a
+bare struct device * would take more boiler-plate code for not much
+gain.
+
+Bartosz
+
+> > > > +     /*
+> > > > +      * Each configfs filesystem operation is protected with the subsystem
+> > > > +      * mutex. Each separate attribute is protected with the buffer mutex.
+> > > > +      * This structure however can be modified by callbacks of different
+> > > > +      * attributes so we need another lock.
+> > > > +      */
+> > > > +     struct mutex lock;
+> > > > +
+> > > > +     char label[32];
+> > > > +     unsigned int num_lines;
+> > > > +     char **line_names;
+> > > > +     unsigned int num_line_names;
+> > > > +};
+>
+> ...
+>
+> > > Honestly, I don't like the idea of Yet Another (custom) Parser in the kernel.
+> > >
+> > > Have you investigated existing parsers? We have cmdline.c, gpio-aggregator.c,
+> > > etc. Besides the fact of test cases which are absent here. And who knows what
+> > > we allow to be entered.
+> > >
+> >
+> > Yes, I looked all around the kernel to find something I could reuse
+> > but failed to find anything useful for this particular purpose. If you
+> > have something you could point me towards, I'm open to alternatives.
+> >
+> > Once we agree on the form of the module, I'll port self-tests to using
+> > it instead of gpio-mockup, so we'll have some tests in the tree.
+>
+> I will look again when you send a new version, so I might give some hints.
+>
+> --
+> With Best Regards,
+> Andy Shevchenko
+>
+>
