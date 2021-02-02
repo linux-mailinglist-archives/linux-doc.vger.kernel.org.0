@@ -2,166 +2,135 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D1A3730BE2C
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Feb 2021 13:29:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 70EF930C949
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Feb 2021 19:16:26 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230439AbhBBM3C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Feb 2021 07:29:02 -0500
-Received: from smtp-fw-9101.amazon.com ([207.171.184.25]:30488 "EHLO
-        smtp-fw-9101.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230229AbhBBM2z (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Feb 2021 07:28:55 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
-  t=1612268935; x=1643804935;
-  h=from:to:cc:subject:date:message-id:in-reply-to:
-   mime-version;
-  bh=tPW+WSGCYnSNEPfsJLIzZMQfqRKCnJMi8qp6on18UiQ=;
-  b=IeZp0QBOUWYLpvNHXek8NlYOW/5KChaFB1aejjGfPGPoSBvb75ozQn6O
-   kr4RAvtknrGgWFAMAE+jH0AUe8QxkNzc7tHtgOm1U8TiOTkdTmhXbQfza
-   dM4Rq89+J/u29cSk5bxlhC2Jin+vpRTQaPvJqz9FGRiZb7VxBJk5C5Qwe
-   4=;
-X-IronPort-AV: E=Sophos;i="5.79,394,1602547200"; 
-   d="scan'208";a="108086815"
-Received: from sea32-co-svc-lb4-vlan3.sea.corp.amazon.com (HELO email-inbound-relay-2c-456ef9c9.us-west-2.amazon.com) ([10.47.23.38])
-  by smtp-border-fw-out-9101.sea19.amazon.com with ESMTP; 02 Feb 2021 12:28:07 +0000
-Received: from EX13D31EUA001.ant.amazon.com (pdx1-ws-svc-p6-lb9-vlan3.pdx.amazon.com [10.236.137.198])
-        by email-inbound-relay-2c-456ef9c9.us-west-2.amazon.com (Postfix) with ESMTPS id 0BF0AAECFE;
-        Tue,  2 Feb 2021 12:28:04 +0000 (UTC)
-Received: from u3f2cd687b01c55.ant.amazon.com (10.43.162.208) by
- EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
- id 15.0.1497.2; Tue, 2 Feb 2021 12:27:48 +0000
-From:   SeongJae Park <sjpark@amazon.com>
-To:     SeongJae Park <sjpark@amazon.com>
-CC:     <akpm@linux-foundation.org>, <Jonathan.Cameron@Huawei.com>,
-        <aarcange@redhat.com>, <acme@kernel.org>,
-        <alexander.shishkin@linux.intel.com>, <amit@kernel.org>,
-        <benh@kernel.crashing.org>, <brendan.d.gregg@gmail.com>,
-        <brendanhiggins@google.com>, <cai@lca.pw>,
-        <colin.king@canonical.com>, <corbet@lwn.net>, <david@redhat.com>,
-        <dwmw@amazon.com>, <elver@google.com>, <fan.du@intel.com>,
-        <foersleo@amazon.de>, <gthelen@google.com>, <irogers@google.com>,
-        <jolsa@redhat.com>, <kirill@shutemov.name>, <mark.rutland@arm.com>,
-        <mgorman@suse.de>, <minchan@kernel.org>, <mingo@redhat.com>,
-        <namhyung@kernel.org>, <peterz@infradead.org>,
-        <rdunlap@infradead.org>, <riel@surriel.com>, <rientjes@google.com>,
-        <rostedt@goodmis.org>, <rppt@kernel.org>, <sblbir@amazon.com>,
-        <shakeelb@google.com>, <shuah@kernel.org>, <sj38.park@gmail.com>,
-        <snu@amazon.de>, <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
-        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
-        <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
-        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
-        <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH v23 10/15] mm/damon/dbgfs: Support multiple contexts
-Date:   Tue, 2 Feb 2021 13:27:34 +0100
-Message-ID: <20210202122734.15627-1-sjpark@amazon.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20201215115448.25633-11-sjpark@amazon.com>
+        id S233783AbhBBSPA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Feb 2021 13:15:00 -0500
+Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:37940 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S233763AbhBBOGs (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Feb 2021 09:06:48 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1612274721;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=LXlNwCxVBCnWTgIRZ67SF78i3D9tADdgI1TeYfcOFjI=;
+        b=dgfbRFdLIqHdS62N7VsVilDe//MOtUhcLT1rlT+X0TvcOPCghhgGzb21VGp4/NFVetQmT6
+        y2V5E2ogIK6nLN24FGqbLzWFV5AstEOoLxqTU/s85rhGSe8HOUoG9T6EoINqDCYwxTgNd8
+        wpJmABfEriE+X3VSLY3Md2BiBluiHa4=
+Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
+ [209.85.218.69]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-520-2uLMyJOzOa2ezpnI4z5s0g-1; Tue, 02 Feb 2021 09:05:17 -0500
+X-MC-Unique: 2uLMyJOzOa2ezpnI4z5s0g-1
+Received: by mail-ej1-f69.google.com with SMTP id bx12so2733538ejc.15
+        for <linux-doc@vger.kernel.org>; Tue, 02 Feb 2021 06:05:17 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=LXlNwCxVBCnWTgIRZ67SF78i3D9tADdgI1TeYfcOFjI=;
+        b=ubegBaJ4ZN03TEsCHxI8TTfhRv1/5SaA5Mg9d2HUECK4yMeHKbe3fejwzFo2TNM9aK
+         eh9U2y+us8G6TReA3TxEM8QZSxL3C6Lj4Ox960wSUM6+GC2lnXImGf+3bQvDUKTiKZHz
+         HYmVIs8JdweB3AqoV1mMx4Z4lmLUaNZ2LoOvnFDcyIWlN1vVQfgxmD8CMVlSH6YVpiNR
+         GbRbJqPlUy/tw14YrMecwGAbRxz8PvGHBqiCmnZEvYOR88PI+3aIyS9yYfBnDDSOc8N+
+         WZ5BGwekQVGY1TsojdC+uSqOdUxhb3gkQWNwK4CpCOR2XeJT/H2vGL9K7RulpvELBcQ9
+         lv/w==
+X-Gm-Message-State: AOAM532dErJUCjEXwysB7Ko6PdjAqh7uW3Y8CqLrpnrkmWXbWt+kfVru
+        6eEJkz3drx4ca/sFhbz9f0Im6Cp6pWioFVpHhbTEiXoR0tSs9mltWuSIT1JOrAgvNfew4oA8IbL
+        0m6JcPUB9nvkKUxvIvSA8
+X-Received: by 2002:a17:906:780c:: with SMTP id u12mr22282921ejm.125.1612274715974;
+        Tue, 02 Feb 2021 06:05:15 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJxQ/DyaGLIBeJhjBFt5cegtfQ7kGKj1VDMfIj8k1n8QaRu28f438c65QA8HfxsXqI6Pm6fGcw==
+X-Received: by 2002:a17:906:780c:: with SMTP id u12mr22282903ejm.125.1612274715788;
+        Tue, 02 Feb 2021 06:05:15 -0800 (PST)
+Received: from x1.localdomain (2001-1c00-0c1e-bf00-37a3-353b-be90-1238.cable.dynamic.v6.ziggo.nl. [2001:1c00:c1e:bf00:37a3:353b:be90:1238])
+        by smtp.gmail.com with ESMTPSA id ec18sm9321262ejb.24.2021.02.02.06.05.14
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 02 Feb 2021 06:05:15 -0800 (PST)
+Subject: Re: [PATCH] platform/x86: thinkpad_acpi: rectify length of title
+ underline
+To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+        Nitin Joshi <njoshi1@lenovo.com>,
+        platform-driver-x86@vger.kernel.org
+Cc:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-doc@vger.kernel.org, kernel-janitors@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20210129040849.26740-1-lukas.bulwahn@gmail.com>
+From:   Hans de Goede <hdegoede@redhat.com>
+Message-ID: <3b91a535-b818-09be-456b-c728838612dc@redhat.com>
+Date:   Tue, 2 Feb 2021 15:05:14 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.6.1
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.43.162.208]
-X-ClientProxiedBy: EX13D06UWA004.ant.amazon.com (10.43.160.164) To
- EX13D31EUA001.ant.amazon.com (10.43.165.15)
+In-Reply-To: <20210129040849.26740-1-lukas.bulwahn@gmail.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 15 Dec 2020 12:54:43 +0100 SeongJae Park <sjpark@amazon.com> wrote:
+Hi,
 
-> From: SeongJae Park <sjpark@amazon.de>
+On 1/29/21 5:08 AM, Lukas Bulwahn wrote:
+> Commit d7cbe2773aed ("platform/x86: thinkpad_acpi: set keyboard language")
+> adds information on keyboard setting to the thinkpad documentation, but
+> made the subsection title underline too short.
 > 
-> In some use cases, users would want to run multiple monitoring context.
-> For example, if a user wants a high precision monitoring and dedicating
-> multiple CPUs for the job is ok, because DAMON creates one monitoring
-> thread per one context, the user can split the monitoring target regions
-> into multiple small regions and create one context for each region.  Or,
-> someone might want to simultaneously monitor different address spaces,
-> e.g., both virtual address space and physical address space.
+> Hence, make htmldocs warns:
 > 
-> The DAMON's API allows such usage, but 'damon-dbgfs' does not.
-> Therefore, only kernel space DAMON users can do multiple contexts
-> monitoring.
+>   Documentation/admin-guide/laptops/thinkpad-acpi.rst:1472: \
+>     WARNING: Title underline too short.
 > 
-> This commit allows the user space DAMON users to use multiple contexts
-> monitoring by introducing two new 'damon-dbgfs' debugfs files,
-> 'mk_context' and 'rm_context'.  Users can create a new monitoring
-> context by writing the desired name of the new context to 'mk_context'.
-> Then, a new directory with the name and having the files for setting of
-> the context ('attrs', 'target_ids' and 'record') will be created under
-> the debugfs directory.  Writing the name of the context to remove to
-> 'rm_context' will remove the related context and directory.
+> Rectify length of subsection title underline.
 > 
-> Signed-off-by: SeongJae Park <sjpark@amazon.de>
+> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
+
+Thank you for your patch, I've applied this patch to my review-hans 
+branch:
+https://git.kernel.org/pub/scm/linux/kernel/git/pdx86/platform-drivers-x86.git/log/?h=review-hans
+
+Note it will show up in my review-hans branch once I've pushed my
+local branch there, which might take a while.
+
+Once I've run some tests on this branch the patches there will be
+added to the platform-drivers-x86/for-next branch and eventually
+will be included in the pdx86 pull-request to Linus for the next
+merge-window.
+
+Regards,
+
+Hans
+
+
 > ---
->  mm/damon/dbgfs.c | 213 ++++++++++++++++++++++++++++++++++++++++++++++-
->  1 file changed, 211 insertions(+), 2 deletions(-)
+> applies cleanly on next-20210128
 > 
-> diff --git a/mm/damon/dbgfs.c b/mm/damon/dbgfs.c
-> index a1512d3e5afe..46186b057e1a 100644
-> --- a/mm/damon/dbgfs.c
-> +++ b/mm/damon/dbgfs.c
-[...]
-> +/*
-> + * Remove a context of @name and its debugfs directory.
-> + *
-> + * This function should be called while holding damon_dbgfs_lock.
-> + *
-> + * Return 0 on success, negative error code otherwise.
-> + */
-> +static int dbgfs_rm_context(char *name)
-> +{
-> +	struct dentry *root, *dir, **new_dirs;
-> +	struct damon_ctx **new_ctxs;
-> +	int i, j;
-> +
-> +	if (damon_nr_running_ctxs())
-> +		return -EBUSY;
-> +
-> +	root = dbgfs_dirs[0];
-> +	if (!root)
-> +		return -ENOENT;
-> +
-> +	dir = debugfs_lookup(name, root);
-> +	if (!dir)
-> +		return -ENOENT;
-> +
-> +	new_dirs = kmalloc_array(dbgfs_nr_ctxs - 1, sizeof(*dbgfs_dirs),
-> +			GFP_KERNEL);
-> +	if (!new_dirs)
-> +		return -ENOMEM;
-> +
-> +	new_ctxs = kmalloc_array(dbgfs_nr_ctxs - 1, sizeof(*dbgfs_ctxs),
-> +			GFP_KERNEL);
-> +	if (!new_ctxs) {
-> +		kfree(new_dirs);
-> +		return -ENOMEM;
-> +	}
-> +
-> +	for (i = 0, j = 0; i < dbgfs_nr_ctxs; i++) {
-> +		if (dbgfs_dirs[i] == dir) {
-> +			debugfs_remove(dbgfs_dirs[i]);
-> +			dbgfs_destroy_ctx(dbgfs_ctxs[i]);
+> Nitin, please ack.
+> 
+> Hans, please pick this minor fixup for your platform/x86 -next tree.
+> 
+>  Documentation/admin-guide/laptops/thinkpad-acpi.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/admin-guide/laptops/thinkpad-acpi.rst b/Documentation/admin-guide/laptops/thinkpad-acpi.rst
+> index b1188f05a99a..0e4c5bb7fb70 100644
+> --- a/Documentation/admin-guide/laptops/thinkpad-acpi.rst
+> +++ b/Documentation/admin-guide/laptops/thinkpad-acpi.rst
+> @@ -1469,7 +1469,7 @@ Sysfs notes
+>  
+>  
+>  Setting keyboard language
+> --------------------
+> +-------------------------
+>  
+>  sysfs: keyboard_lang
+>  
+> 
 
-In case of virtual address monitoring, dbgfs_destroy_ctx() calls
-damon_destroy_ctx() and damon_destroy_ctx() doesn't put the target pids.  I
-will fix this in the next version.
-
-> +			continue;
-> +		}
-> +		new_dirs[j] = dbgfs_dirs[i];
-> +		new_ctxs[j++] = dbgfs_ctxs[i];
-> +	}
-> +
-> +	kfree(dbgfs_dirs);
-> +	kfree(dbgfs_ctxs);
-> +
-> +	dbgfs_dirs = new_dirs;
-> +	dbgfs_ctxs = new_ctxs;
-> +	dbgfs_nr_ctxs--;
-> +
-> +	return 0;
-> +}
-
-Thanks,
-SeongJae Park
-[...]
