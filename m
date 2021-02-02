@@ -2,135 +2,156 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 70EF930C949
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Feb 2021 19:16:26 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3DD5730C1C4
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Feb 2021 15:35:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233783AbhBBSPA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Feb 2021 13:15:00 -0500
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:37940 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S233763AbhBBOGs (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Feb 2021 09:06:48 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1612274721;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=LXlNwCxVBCnWTgIRZ67SF78i3D9tADdgI1TeYfcOFjI=;
-        b=dgfbRFdLIqHdS62N7VsVilDe//MOtUhcLT1rlT+X0TvcOPCghhgGzb21VGp4/NFVetQmT6
-        y2V5E2ogIK6nLN24FGqbLzWFV5AstEOoLxqTU/s85rhGSe8HOUoG9T6EoINqDCYwxTgNd8
-        wpJmABfEriE+X3VSLY3Md2BiBluiHa4=
-Received: from mail-ej1-f69.google.com (mail-ej1-f69.google.com
- [209.85.218.69]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-520-2uLMyJOzOa2ezpnI4z5s0g-1; Tue, 02 Feb 2021 09:05:17 -0500
-X-MC-Unique: 2uLMyJOzOa2ezpnI4z5s0g-1
-Received: by mail-ej1-f69.google.com with SMTP id bx12so2733538ejc.15
-        for <linux-doc@vger.kernel.org>; Tue, 02 Feb 2021 06:05:17 -0800 (PST)
+        id S234336AbhBBOc1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Feb 2021 09:32:27 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53350 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231992AbhBBOTE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Feb 2021 09:19:04 -0500
+Received: from mail-wr1-x431.google.com (mail-wr1-x431.google.com [IPv6:2a00:1450:4864:20::431])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2455C06174A
+        for <linux-doc@vger.kernel.org>; Tue,  2 Feb 2021 06:18:22 -0800 (PST)
+Received: by mail-wr1-x431.google.com with SMTP id m13so20650035wro.12
+        for <linux-doc@vger.kernel.org>; Tue, 02 Feb 2021 06:18:22 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=ffwll.ch; s=google;
+        h=date:from:to:cc:subject:message-id:mail-followup-to:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=9FZzU82hRsBiBhCvFEyc1JNn9WVYxWSX0ROwEjKj8Rg=;
+        b=GwVbMM/GT+m8K5UcUXdmExA/pYjXDof3+EnMb7+8Cl6aIJlm1uCCHPw+tlPv1hohpT
+         1zTGdVrF2VGLmCwNxrlxlPiK78iFKTflXrGTi66wCosaQUGX5O0OStfWw78RHa9PiLJC
+         osn8fiaBb3p8cxCoJS8Ws2hlTRkIsSbxHMUU0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=LXlNwCxVBCnWTgIRZ67SF78i3D9tADdgI1TeYfcOFjI=;
-        b=ubegBaJ4ZN03TEsCHxI8TTfhRv1/5SaA5Mg9d2HUECK4yMeHKbe3fejwzFo2TNM9aK
-         eh9U2y+us8G6TReA3TxEM8QZSxL3C6Lj4Ox960wSUM6+GC2lnXImGf+3bQvDUKTiKZHz
-         HYmVIs8JdweB3AqoV1mMx4Z4lmLUaNZ2LoOvnFDcyIWlN1vVQfgxmD8CMVlSH6YVpiNR
-         GbRbJqPlUy/tw14YrMecwGAbRxz8PvGHBqiCmnZEvYOR88PI+3aIyS9yYfBnDDSOc8N+
-         WZ5BGwekQVGY1TsojdC+uSqOdUxhb3gkQWNwK4CpCOR2XeJT/H2vGL9K7RulpvELBcQ9
-         lv/w==
-X-Gm-Message-State: AOAM532dErJUCjEXwysB7Ko6PdjAqh7uW3Y8CqLrpnrkmWXbWt+kfVru
-        6eEJkz3drx4ca/sFhbz9f0Im6Cp6pWioFVpHhbTEiXoR0tSs9mltWuSIT1JOrAgvNfew4oA8IbL
-        0m6JcPUB9nvkKUxvIvSA8
-X-Received: by 2002:a17:906:780c:: with SMTP id u12mr22282921ejm.125.1612274715974;
-        Tue, 02 Feb 2021 06:05:15 -0800 (PST)
-X-Google-Smtp-Source: ABdhPJxQ/DyaGLIBeJhjBFt5cegtfQ7kGKj1VDMfIj8k1n8QaRu28f438c65QA8HfxsXqI6Pm6fGcw==
-X-Received: by 2002:a17:906:780c:: with SMTP id u12mr22282903ejm.125.1612274715788;
-        Tue, 02 Feb 2021 06:05:15 -0800 (PST)
-Received: from x1.localdomain (2001-1c00-0c1e-bf00-37a3-353b-be90-1238.cable.dynamic.v6.ziggo.nl. [2001:1c00:c1e:bf00:37a3:353b:be90:1238])
-        by smtp.gmail.com with ESMTPSA id ec18sm9321262ejb.24.2021.02.02.06.05.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 02 Feb 2021 06:05:15 -0800 (PST)
-Subject: Re: [PATCH] platform/x86: thinkpad_acpi: rectify length of title
- underline
-To:     Lukas Bulwahn <lukas.bulwahn@gmail.com>,
-        Nitin Joshi <njoshi1@lenovo.com>,
-        platform-driver-x86@vger.kernel.org
-Cc:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        linux-doc@vger.kernel.org, kernel-janitors@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20210129040849.26740-1-lukas.bulwahn@gmail.com>
-From:   Hans de Goede <hdegoede@redhat.com>
-Message-ID: <3b91a535-b818-09be-456b-c728838612dc@redhat.com>
-Date:   Tue, 2 Feb 2021 15:05:14 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.6.1
+        h=x-gm-message-state:date:from:to:cc:subject:message-id
+         :mail-followup-to:references:mime-version:content-disposition
+         :in-reply-to;
+        bh=9FZzU82hRsBiBhCvFEyc1JNn9WVYxWSX0ROwEjKj8Rg=;
+        b=qn/9SG4em+LVwjjuFgf4j+ZzCgHHEVTaV91rtDxAtPsIxTw9CM30cp/4kwLQ2SW6D7
+         bknDEqmeXHolX/JBtFSx7/ZRm2/7yqq5r2Tc6aAGVbsMyDZYmR6SFVlH9OcqmFUvIH6B
+         r7wnytgLevGw6rjnSwolWc7O2ygKvRWn/oA9HYGuNzd5xDwhNij2oL9n2agkxDzLdHxn
+         7clXyXppEk9Bb6J+lxwWlmKmqEV3ypooF4OYoU/mQBQc+3WrdlwavyunE5soFmSPF1EC
+         sqS/8ZTnDQRObHb9ijf65i5VgkeobVRGniVNxjvF+jPZKJ/ktQs9Mc+YP2QndplrLndi
+         AqFg==
+X-Gm-Message-State: AOAM530plaFbP2BNaQTNlz3GriNW1lria/VAqaRkc3Z4NSk6dAIZRTVg
+        S3a3nbUI9T30/gB8G68TxfScsA==
+X-Google-Smtp-Source: ABdhPJxWbAhjU2qfGmhuJhrSt3iNYt3WMYnXjgmiSCegUaxOoOCW83wp3SgyIYrGtzxriJ9bTMvKTg==
+X-Received: by 2002:adf:b64f:: with SMTP id i15mr23222482wre.279.1612275501681;
+        Tue, 02 Feb 2021 06:18:21 -0800 (PST)
+Received: from phenom.ffwll.local ([2a02:168:57f4:0:efd0:b9e5:5ae6:c2fa])
+        by smtp.gmail.com with ESMTPSA id t205sm3373846wmt.28.2021.02.02.06.18.20
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Feb 2021 06:18:20 -0800 (PST)
+Date:   Tue, 2 Feb 2021 15:18:18 +0100
+From:   Daniel Vetter <daniel@ffwll.ch>
+To:     Phillip Susi <phill@thesusis.net>
+Cc:     Geert Uytterhoeven <geert@linux-m68k.org>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Pavel Machek <pavel@ucw.cz>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        dri-devel <dri-devel@lists.freedesktop.org>,
+        Linux Fbdev development list <linux-fbdev@vger.kernel.org>
+Subject: Re: fbcon: remove soft scrollback code (missing Doc. patch)
+Message-ID: <YBlfKgQ1laQLFqpW@phenom.ffwll.local>
+Mail-Followup-To: Phillip Susi <phill@thesusis.net>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Pavel Machek <pavel@ucw.cz>, Randy Dunlap <rdunlap@infradead.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        dri-devel <dri-devel@lists.freedesktop.org>,
+        Linux Fbdev development list <linux-fbdev@vger.kernel.org>
+References: <20200916205434.GA10389@duo.ucw.cz>
+ <87czyf5jjp.fsf@vps.thesusis.net>
+ <CAHk-=wjsjC1h7fskwYaaRLykN1ms6ZtxGvucQgmL-zZTfxPdBA@mail.gmail.com>
+ <CAKMK7uEGXOC_ci=Drm=Hz+xPGdcoxv8YZ-gcOckoPmu2XijiSA@mail.gmail.com>
+ <CAMuHMdVzCjVim4A3eAZzztqUyjb6a2bjmSkgxUnaugQFv42qag@mail.gmail.com>
+ <87k0s4ai33.fsf@vps.thesusis.net>
 MIME-Version: 1.0
-In-Reply-To: <20210129040849.26740-1-lukas.bulwahn@gmail.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <87k0s4ai33.fsf@vps.thesusis.net>
+X-Operating-System: Linux phenom 5.7.0-1-amd64 
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
-
-On 1/29/21 5:08 AM, Lukas Bulwahn wrote:
-> Commit d7cbe2773aed ("platform/x86: thinkpad_acpi: set keyboard language")
-> adds information on keyboard setting to the thinkpad documentation, but
-> made the subsection title underline too short.
+On Fri, Jan 22, 2021 at 01:55:04PM -0500, Phillip Susi wrote:
 > 
-> Hence, make htmldocs warns:
+> Geert Uytterhoeven writes:
 > 
->   Documentation/admin-guide/laptops/thinkpad-acpi.rst:1472: \
->     WARNING: Title underline too short.
+> Judging from some of the comments in the code, it looks like you were
+> one of the original authors of fbcon?  I haven't been able to find any
+> of these sczbot crash reports, and am not sure how fuzzing syscalls
+> would really affect this code ( it's not really handling a buch of
+> ioctls or otherwise taking arguments from user space ) , but I am a bit
+> confused as to why the softback was implemented the way that it was.
 > 
-> Rectify length of subsection title underline.
+> vgacon simply copies the main buffer to vram in ->set_origin() and then
+> changes the pointers to operate out of the much larger vram while that
+> virtual terminal is active.  If I understand it correctly, it looks like
+> fbcon instead opts to operate out of the main buffer but rescue lines as
+> they are scrolled off and relocate them to the softback buffer.  This
+> seems to be rather more convoluted.
 > 
-> Signed-off-by: Lukas Bulwahn <lukas.bulwahn@gmail.com>
-
-Thank you for your patch, I've applied this patch to my review-hans 
-branch:
-https://git.kernel.org/pub/scm/linux/kernel/git/pdx86/platform-drivers-x86.git/log/?h=review-hans
-
-Note it will show up in my review-hans branch once I've pushed my
-local branch there, which might take a while.
-
-Once I've run some tests on this branch the patches there will be
-added to the platform-drivers-x86/for-next branch and eventually
-will be included in the pdx86 pull-request to Linus for the next
-merge-window.
-
-Regards,
-
-Hans
-
-
-> ---
-> applies cleanly on next-20210128
+> I'm thinking of re-implementing scrollback more like the way vgacon does
+> it: allocate a big "vram" buffer and operate out of that.  Obviously
+> ->scroll() and ->scrolldelta() have to actually repaint the screen rather
+> than simply change the pointer register, but that should be about the
+> only difference.
 > 
-> Nitin, please ack.
+> I have also noticed that there was some code to use hardware panning of
+> the video buffer rather than having to do a block bitblt to scroll the
+> contents of the screen, but that it was disabled because virtually no
+> video drivers actually implemented it?  That seems like a shame, but if
+> it is so, then there's no sense carrying the dead code so I think I'll
+> clean that up now.
 > 
-> Hans, please pick this minor fixup for your platform/x86 -next tree.
-> 
->  Documentation/admin-guide/laptops/thinkpad-acpi.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/admin-guide/laptops/thinkpad-acpi.rst b/Documentation/admin-guide/laptops/thinkpad-acpi.rst
-> index b1188f05a99a..0e4c5bb7fb70 100644
-> --- a/Documentation/admin-guide/laptops/thinkpad-acpi.rst
-> +++ b/Documentation/admin-guide/laptops/thinkpad-acpi.rst
-> @@ -1469,7 +1469,7 @@ Sysfs notes
->  
->  
->  Setting keyboard language
-> --------------------
-> +-------------------------
->  
->  sysfs: keyboard_lang
->  
-> 
+> Now that I look at it again, everything is simply always redrawn now
+> instead of even doing a simple bitblt.  Daniel, you mentioned that
+> almost nobody supports hardware acceleration, but even without any
+> specific hardware support, surely even if bitblt() is implemented just
+> as a memcpy(), it has to be faster than redrawing all of the characters
+> doesn't it?  Getting rid of the panning if it isn't generally supported
+> I can see, but I don't understand killing bitblt even if most devices
+> don't accelerate it.
 
+Just a quick comment on this: Since most framebuffers are write-combining,
+and reads from that tend to be ~3 orders of magnitude slower than writes
+(at least on the pile of machines I looked at here, there's big
+differences, and some special streaming cpu instructions to make the
+reading side not so slow).
+
+So scrolling by copying tends to be significantly slower than just
+redrawing everything.
+
+And once you're at that point it's really hard to write a 2d acceleration
+which is consistently faster than just cpu rendering.
+
+If you're interested in why 2d acceleration is rather hard as a general
+problem, not just specific to fbcon, I wrote a blog on that a while ago:
+
+https://blog.ffwll.ch/2018/08/no-2d-in-drm.html
+
+Cheers, Daniel
+
+> In addition, I noticed that ->screen_pos() was changed to just return
+> vc_origin+offset.  fbcon is the only console driver to implement
+> ->screenpos() and if not implemented, vt defaults to using
+> vc_visible_origin+offset, so it looks like this function isn't needed at
+> all anymore and ->screen_pos() can be removed from struct consw.
+> 
+> Does this make sense or am I talking crazy?
+
+-- 
+Daniel Vetter
+Software Engineer, Intel Corporation
+http://blog.ffwll.ch
