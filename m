@@ -2,97 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7664E30E6EA
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Feb 2021 00:14:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C42E130E7ED
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Feb 2021 00:54:56 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233520AbhBCXMx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 3 Feb 2021 18:12:53 -0500
-Received: from mga09.intel.com ([134.134.136.24]:18999 "EHLO mga09.intel.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233484AbhBCXAg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 3 Feb 2021 18:00:36 -0500
-IronPort-SDR: q6yeBnW0TVPKURu5OqXBYgoZuNibVud/LzKVInEW/Z6wnWphs31dtAqhwQRVGfFuJmjTb8i7Rj
- hEzG1TkIZpng==
-X-IronPort-AV: E=McAfee;i="6000,8403,9884"; a="181275677"
-X-IronPort-AV: E=Sophos;i="5.79,399,1602572400"; 
-   d="scan'208";a="181275677"
-Received: from orsmga008.jf.intel.com ([10.7.209.65])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Feb 2021 14:59:43 -0800
-IronPort-SDR: HKyLgSeePrWa9UUvtrIEA/AJaKsT0VkROxeCWAPLsUYgTiJDmXCLhNurah2ITnFnhc+m8++NQH
- xpPyd3dLjJbg==
-X-IronPort-AV: E=Sophos;i="5.79,399,1602572400"; 
-   d="scan'208";a="392698034"
-Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
-  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Feb 2021 14:59:42 -0800
-From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
-To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
-Subject: [PATCH v19 7/7] x86/vdso: Insert endbr32/endbr64 to vDSO
-Date:   Wed,  3 Feb 2021 14:59:02 -0800
-Message-Id: <20210203225902.479-8-yu-cheng.yu@intel.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20210203225902.479-1-yu-cheng.yu@intel.com>
-References: <20210203225902.479-1-yu-cheng.yu@intel.com>
+        id S233750AbhBCXyE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 3 Feb 2021 18:54:04 -0500
+Received: from mail.v3.sk ([167.172.186.51]:51430 "EHLO shell.v3.sk"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S233680AbhBCXyA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 3 Feb 2021 18:54:00 -0500
+Received: from localhost (localhost.localdomain [127.0.0.1])
+        by zimbra.v3.sk (Postfix) with ESMTP id 8BD53E0AED;
+        Wed,  3 Feb 2021 23:49:03 +0000 (UTC)
+Received: from shell.v3.sk ([127.0.0.1])
+        by localhost (zimbra.v3.sk [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id D1uaP4djWZsn; Wed,  3 Feb 2021 23:49:03 +0000 (UTC)
+Received: from localhost (localhost.localdomain [127.0.0.1])
+        by zimbra.v3.sk (Postfix) with ESMTP id 0B90EE070D;
+        Wed,  3 Feb 2021 23:49:03 +0000 (UTC)
+X-Virus-Scanned: amavisd-new at zimbra.v3.sk
+Received: from shell.v3.sk ([127.0.0.1])
+        by localhost (zimbra.v3.sk [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id v48ElttGFmTH; Wed,  3 Feb 2021 23:49:02 +0000 (UTC)
+Received: from localhost (unknown [109.183.109.54])
+        by zimbra.v3.sk (Postfix) with ESMTPSA id C974BDF16D;
+        Wed,  3 Feb 2021 23:49:01 +0000 (UTC)
+From:   Lubomir Rintel <lkundrak@v3.sk>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Maen Suleiman <maen@marvell.com>, Lior Amsalem <alior@marvell.com>,
+        Thomas Petazzoni <thomas.petazzoni@free-electrons.com>,
+        Andrew Lunn <andrew@lunn.ch>, Nicolas Pitre <nico@fluxnic.net>,
+        Eric Miao <eric.y.miao@gmail.com>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: [PATCH v2 0/5] docs: arm: Improvements to Marvell SoC documentation
+Date:   Thu,  4 Feb 2021 00:53:00 +0100
+Message-Id: <20210203235305.506528-1-lkundrak@v3.sk>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: "H.J. Lu" <hjl.tools@gmail.com>
+Hi,
 
-When Indirect Branch Tracking (IBT) is enabled, vDSO functions may be
-called indirectly, and must have ENDBR32 or ENDBR64 as the first
-instruction.  The compiler must support -fcf-protection=branch so that it
-can be used to compile vDSO.
+please consider applying the patches chained to this message.
 
-Signed-off-by: H.J. Lu <hjl.tools@gmail.com>
-Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
-Acked-by: Andy Lutomirski <luto@kernel.org>
----
- arch/x86/entry/vdso/Makefile | 4 ++++
- 1 file changed, 4 insertions(+)
+The objective is to deal with the a large amount of dead links to
+material that often comes handy in marvel.rst; and improve some details
+along the way.
 
-diff --git a/arch/x86/entry/vdso/Makefile b/arch/x86/entry/vdso/Makefile
-index 02e3e42f380b..ff7b56feb5c3 100644
---- a/arch/x86/entry/vdso/Makefile
-+++ b/arch/x86/entry/vdso/Makefile
-@@ -93,6 +93,10 @@ endif
- 
- $(vobjs): KBUILD_CFLAGS := $(filter-out $(GCC_PLUGINS_CFLAGS) $(RETPOLINE_CFLAGS),$(KBUILD_CFLAGS)) $(CFL)
- 
-+ifdef CONFIG_X86_CET
-+$(vobjs) $(vobjs32): KBUILD_CFLAGS += -fcf-protection=branch
-+endif
-+
- #
- # vDSO code runs in userspace and -pg doesn't help with profiling anyway.
- #
--- 
-2.21.0
+The most important change since v1 is the removal of "[PATCH 1/5] docs:
+arm: marvell: turn the automatic links into labels" patch and replacing
+the URLs inline instead. Detailed changelogs in individual patches.
+
+Thank you
+Lubo
+
 
