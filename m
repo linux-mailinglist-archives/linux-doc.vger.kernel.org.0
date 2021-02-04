@@ -2,62 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4020630E7EE
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Feb 2021 00:54:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1654E30E84A
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Feb 2021 01:07:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233618AbhBCXyF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 3 Feb 2021 18:54:05 -0500
-Received: from mail.v3.sk ([167.172.186.51]:51506 "EHLO shell.v3.sk"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S233723AbhBCXyA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 3 Feb 2021 18:54:00 -0500
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by zimbra.v3.sk (Postfix) with ESMTP id B1196DF61E;
-        Wed,  3 Feb 2021 23:49:05 +0000 (UTC)
-Received: from shell.v3.sk ([127.0.0.1])
-        by localhost (zimbra.v3.sk [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id qCsJZwXITT8D; Wed,  3 Feb 2021 23:49:04 +0000 (UTC)
-Received: from localhost (localhost.localdomain [127.0.0.1])
-        by zimbra.v3.sk (Postfix) with ESMTP id 46636E0B3D;
-        Wed,  3 Feb 2021 23:49:04 +0000 (UTC)
-X-Virus-Scanned: amavisd-new at zimbra.v3.sk
-Received: from shell.v3.sk ([127.0.0.1])
-        by localhost (zimbra.v3.sk [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id PvUNxx1hkyMa; Wed,  3 Feb 2021 23:49:04 +0000 (UTC)
-Received: from localhost (unknown [109.183.109.54])
-        by zimbra.v3.sk (Postfix) with ESMTPSA id F3021E09D2;
-        Wed,  3 Feb 2021 23:49:03 +0000 (UTC)
-From:   Lubomir Rintel <lkundrak@v3.sk>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Maen Suleiman <maen@marvell.com>, Lior Amsalem <alior@marvell.com>,
-        Thomas Petazzoni <thomas.petazzoni@free-electrons.com>,
-        Andrew Lunn <andrew@lunn.ch>, Nicolas Pitre <nico@fluxnic.net>,
-        Eric Miao <eric.y.miao@gmail.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Lubomir Rintel <lkundrak@v3.sk>
-Subject: [PATCH v2 5/5] docs: arm: marvell: rename marvel.rst to marvell.rst
-Date:   Thu,  4 Feb 2021 00:53:05 +0100
-Message-Id: <20210203235305.506528-6-lkundrak@v3.sk>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <20210203235305.506528-1-lkundrak@v3.sk>
-References: <20210203235305.506528-1-lkundrak@v3.sk>
+        id S234010AbhBDAGf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 3 Feb 2021 19:06:35 -0500
+Received: from mail.kernel.org ([198.145.29.99]:32792 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S233288AbhBDAGd (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 3 Feb 2021 19:06:33 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 6DDED64E40;
+        Thu,  4 Feb 2021 00:05:52 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1612397152;
+        bh=FAOEqJqOki9bCT6WXoW+ukEFUCMr85/l4i4KTBllngQ=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=B/EtOe+Wtnkgu7tZ1fIEmgMOVLesKKLVUioSQah+hpkwFycB8GIqacfK+hzSOP7Pe
+         JgkkbO5h0K/S5HvS969GQIOpRhD2AwBLjgSJ4+xMXjl9gpFfj8Fju2g5ndkicSWph5
+         B3sBiNDPPJImlpFL9Q5CzDpWPV56GKy6IbpWuvoMD+ya2Aip/n6yocDvr1Z8RfriDP
+         Ghe+qckAelI5g+698B973bOpPDAFXee+S2iNQOFz1vPlvBYmMbsSbmQw40LUK5b+Xn
+         1l8Jmwq/Y8Q3S+o/PJuJIueY7kPG8bY5Cz3RF93pagOB+08ghwxr96WUeVG8Wic9Au
+         jTH63eyVYOyKw==
+Date:   Thu, 4 Feb 2021 02:05:46 +0200
+From:   Jarkko Sakkinen <jarkko@kernel.org>
+To:     Sumit Garg <sumit.garg@linaro.org>
+Cc:     Jerome Forissier <jerome@forissier.org>,
+        "open list:SECURITY SUBSYSTEM" 
+        <linux-security-module@vger.kernel.org>,
+        Daniel Thompson <daniel.thompson@linaro.org>,
+        op-tee@lists.trustedfirmware.org, Jonathan Corbet <corbet@lwn.net>,
+        James Bottomley <jejb@linux.ibm.com>,
+        Janne Karhunen <janne.karhunen@gmail.com>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        James Morris <jmorris@namei.org>,
+        Mimi Zohar <zohar@linux.ibm.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        David Howells <dhowells@redhat.com>,
+        Luke Hinds <lhinds@redhat.com>,
+        "open list:ASYMMETRIC KEYS" <keyrings@vger.kernel.org>,
+        Jarkko Sakkinen <jarkko.sakkinen@linux.intel.com>,
+        Casey Schaufler <casey@schaufler-ca.com>,
+        linux-integrity@vger.kernel.org,
+        linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>,
+        "Yann E. MORIN" <yann.morin.1998@free.fr>
+Subject: Re: [PATCH v8 2/4] KEYS: trusted: Introduce TEE based Trusted Keys
+Message-ID: <YBs6WsGifYudzzPB@kernel.org>
+References: <YAa0ys4YJcZtKdfF@kernel.org>
+ <YAeH2pb8szQyjusL@kernel.org>
+ <CAFA6WYP5G6NfGk96ePOC+2kpD6B+4hz9nywyUM9Nh=dJDYMiuA@mail.gmail.com>
+ <01000177223f74d3-1eef7685-4a19-40d2-ace6-d4cd7f35579d-000000@email.amazonses.com>
+ <dc3979e8-6bf0-adb7-164d-d50e805a048f@forissier.org>
+ <YAmYu9FxWcLPhBhs@kernel.org>
+ <YAmcyKnYCK+Y4IGW@kernel.org>
+ <1486cfe8-bc30-1266-12bd-0049f2b64820@forissier.org>
+ <YAsVenGkaqb8205f@kernel.org>
+ <CAFA6WYPQ+LZyHKZJQb=3euTy8f8TO3HqCADojpZaHXgtzNj+fw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CAFA6WYPQ+LZyHKZJQb=3euTy8f8TO3HqCADojpZaHXgtzNj+fw@mail.gmail.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This company is not the superheroes you're looking for.
+On Mon, Jan 25, 2021 at 02:47:38PM +0530, Sumit Garg wrote:
+> The main reason to guide you towards the OP-TEE build system is that
+> you will be able to build all the firmwares (TF-A, OP-TEE, edk2 etc.)
+> from source. If you don't need to rebuild those then I have prepared a
+> flash firmware binary blob for your testing (attached flash.bin). So
+> Qemu cmdline will look like:
+> 
+> $ qemu-system-aarch64 -nographic -s -machine virt,secure=on -cpu
+> cortex-a57 -kernel out/bin/Image -no-acpi -append
+> 'console=ttyAMA0,38400 keep_bootcon root=/dev/vda2' -initrd
+> out/bin/rootfs.cpio.gz -smp 2 -m 1024 -bios flash.bin -d unimp
+> 
+> Here you can use "Image" and "rootfs.cpio.gz" from your plain BR builds.
+> 
+> Give it a try and let me know if this works for you.
 
-Signed-off-by: Lubomir Rintel <lkundrak@v3.sk>
----
- Documentation/arm/{marvel.rst =3D> marvell.rst} | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename Documentation/arm/{marvel.rst =3D> marvell.rst} (100%)
+Sumit, I can try this again now :-) Thanks Yann for fixing the issue!
 
-diff --git a/Documentation/arm/marvel.rst b/Documentation/arm/marvell.rst
-similarity index 100%
-rename from Documentation/arm/marvel.rst
-rename to Documentation/arm/marvell.rst
---=20
-2.29.2
+https://git.busybox.net/buildroot/commit/?id=b9e7adc152b5811b20724d8c05f0f2117254919c
 
+/Jarkko
