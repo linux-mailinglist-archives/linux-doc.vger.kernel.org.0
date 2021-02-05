@@ -2,145 +2,162 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 599B63114E0
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Feb 2021 23:23:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6078F31154D
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Feb 2021 23:32:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232742AbhBEWRW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 5 Feb 2021 17:17:22 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44400 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232743AbhBEOfy (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 09:35:54 -0500
-Received: from mail-pg1-x52d.google.com (mail-pg1-x52d.google.com [IPv6:2607:f8b0:4864:20::52d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4F1E3C06121C
-        for <linux-doc@vger.kernel.org>; Fri,  5 Feb 2021 08:14:00 -0800 (PST)
-Received: by mail-pg1-x52d.google.com with SMTP id r38so4832656pgk.13
-        for <linux-doc@vger.kernel.org>; Fri, 05 Feb 2021 08:14:00 -0800 (PST)
+        id S232508AbhBEW2G (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 5 Feb 2021 17:28:06 -0500
+Received: from smtp-fw-6002.amazon.com ([52.95.49.90]:24639 "EHLO
+        smtp-fw-6002.amazon.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232066AbhBEOVn (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 09:21:43 -0500
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=tgToZXIcR//slb37mMxyXMF6K319Gf4e4xqtIkg5mSQ=;
-        b=vi1eZTDGn0s+c7nDc/UcaxmiZ8SO8djhd8YKp6I27b2SvO+LfWMsqNulS/rqad1/EE
-         zti94jrpclnDbtIra0/SF7oO933+vtLmvQh0LOlXgTtUA/Ys9pWpCzEJCP/8EeKnN7RY
-         KpnRSlevGccsTyUxdhwrPyWiJ1Hac/O8fH2AVQtrKbP/z2fQG58C63wBM+0nDMC0Ynvk
-         4eOqfX54/u8Ei+AiBWg43xL9oUa8Xrf8Zjdlyh5mAdzbTEcTH01mFIo52cFaP8k0nK7Z
-         Q4Y7yFF8vBMHXuXjyC1YB7Zwja6igzBF2grNPDY3PHAeLebuziRPFkGYUNNyVT7trndg
-         fTZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=tgToZXIcR//slb37mMxyXMF6K319Gf4e4xqtIkg5mSQ=;
-        b=O1Fpve3dK/GVY7R2/DuzD7GggDXdogPJy7HtbqK/jVUnKoI8vl5UUPRii7NoYEIdld
-         N1tqS8+GxlmuxJmGsmeLF+owx/5TR5uOYelqYuJHs6JHWA2t14tmylACUQbBcvvJp8yM
-         tASLDMK8EKGUpBf5K2KfR6XBxufsW6+86J+N+ShEKWuNYyAEtifNV/fIXZxiyLcfsJ2N
-         iutOpT4mBlSa3LeG83LRZzs6qBgFWMFulqf4xM061nReC+egnnMFlxKQDJAIuLrncNeM
-         xUIFIWByMXIGQ2O51gIRSi8xKq6dnJTsdXVKgEZ3EwSG2fz2Ur1FMEiNKrYSPpEFjNQV
-         lBrw==
-X-Gm-Message-State: AOAM532/PxvaGZ/O6fJFj69/ftq4CSrCz0cToTnR2Tl4v07M16OHyoiz
-        OTCgov71LtsMA1ETe63U+cmnTXzADpPA/Kmw6+zxTA==
-X-Google-Smtp-Source: ABdhPJwkirrFi8xuKWL/S5D2cKkWHr8/viSsyFvrNlI047a1E3Q16PWtG8tYxcyd1lVj1EuEzbAYJyMFxhtmMXc0PgQ=
-X-Received: by 2002:a62:1b93:0:b029:1cb:4985:623b with SMTP id
- b141-20020a621b930000b02901cb4985623bmr5289599pfb.59.1612541639757; Fri, 05
- Feb 2021 08:13:59 -0800 (PST)
+  d=amazon.com; i=@amazon.com; q=dns/txt; s=amazon201209;
+  t=1612540829; x=1644076829;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   mime-version;
+  bh=TBohInsGRwLMOnqJDl8Pqhxj7U/fXFbfpMKPhnZcUFw=;
+  b=jgYImARJD6qkBQV5QsAiU36i737f/WHvRPDZ28run0cIE4FTZ8ks4Jn8
+   GyOSqHmIGskwEXAHpLVo3laroKOZolM7mIV/Fcrpf5bUZzk7nuh93Bojd
+   YT2CYWqYhsU+6iqwlVGmn8eK14yOvhhs7DyE8hGq1ttOyjvQH9Q7XOrd0
+   I=;
+X-IronPort-AV: E=Sophos;i="5.81,155,1610409600"; 
+   d="scan'208";a="82731861"
+Received: from iad12-co-svc-p1-lb1-vlan2.amazon.com (HELO email-inbound-relay-2b-81e76b79.us-west-2.amazon.com) ([10.43.8.2])
+  by smtp-border-fw-out-6002.iad6.amazon.com with ESMTP; 05 Feb 2021 15:59:38 +0000
+Received: from EX13D31EUA001.ant.amazon.com (pdx1-ws-svc-p6-lb9-vlan3.pdx.amazon.com [10.236.137.198])
+        by email-inbound-relay-2b-81e76b79.us-west-2.amazon.com (Postfix) with ESMTPS id 0A050A1D83;
+        Fri,  5 Feb 2021 15:59:34 +0000 (UTC)
+Received: from u3f2cd687b01c55.ant.amazon.com (10.43.162.194) by
+ EX13D31EUA001.ant.amazon.com (10.43.165.15) with Microsoft SMTP Server (TLS)
+ id 15.0.1497.2; Fri, 5 Feb 2021 15:59:17 +0000
+From:   SeongJae Park <sjpark@amazon.com>
+To:     Greg KH <greg@kroah.com>
+CC:     SeongJae Park <sjpark@amazon.com>,
+        SeongJae Park <sjpark@amazon.de>,
+        <Jonathan.Cameron@huawei.com>, <aarcange@redhat.com>,
+        <acme@kernel.org>, <alexander.shishkin@linux.intel.com>,
+        <amit@kernel.org>, <benh@kernel.crashing.org>,
+        <brendan.d.gregg@gmail.com>, <brendanhiggins@google.com>,
+        <cai@lca.pw>, <colin.king@canonical.com>, <corbet@lwn.net>,
+        <david@redhat.com>, <dwmw@amazon.com>, <elver@google.com>,
+        <fan.du@intel.com>, <foersleo@amazon.de>, <gthelen@google.com>,
+        <irogers@google.com>, <jolsa@redhat.com>, <kirill@shutemov.name>,
+        <mark.rutland@arm.com>, <mgorman@suse.de>, <minchan@kernel.org>,
+        <mingo@redhat.com>, <namhyung@kernel.org>, <peterz@infradead.org>,
+        <rdunlap@infradead.org>, <riel@surriel.com>, <rientjes@google.com>,
+        <rostedt@goodmis.org>, <rppt@kernel.org>, <sblbir@amazon.com>,
+        <shakeelb@google.com>, <shuah@kernel.org>, <sj38.park@gmail.com>,
+        <snu@amazon.de>, <vbabka@suse.cz>, <vdavydov.dev@gmail.com>,
+        <yang.shi@linux.alibaba.com>, <ying.huang@intel.com>,
+        <zgf574564920@gmail.com>, <linux-damon@amazon.com>,
+        <linux-mm@kvack.org>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH v24 07/14] mm/damon: Implement a debugfs-based user space interface
+Date:   Fri, 5 Feb 2021 16:59:02 +0100
+Message-ID: <20210205155902.31102-1-sjpark@amazon.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <YB1kZaD/7omxXztF@kroah.com>
 MIME-Version: 1.0
-References: <20210204035043.36609-1-songmuchun@bytedance.com> <a14113c5-08ae-2819-7e24-3d2687ef88da@oracle.com>
-In-Reply-To: <a14113c5-08ae-2819-7e24-3d2687ef88da@oracle.com>
-From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Sat, 6 Feb 2021 00:13:22 +0800
-Message-ID: <CAMZfGtXyWkeO9gGKGpEXYA9DA75mMZUaHboTXH6dGxZgEHvMpA@mail.gmail.com>
-Subject: Re: [External] Re: [PATCH v14 0/8] Free some vmemmap pages of HugeTLB page
-To:     Joao Martins <joao.m.martins@oracle.com>
-Cc:     Xiongchun duan <duanxiongchun@bytedance.com>,
-        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
-        Linux Memory Management List <linux-mm@kvack.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Thomas Gleixner <tglx@linutronix.de>, mingo@redhat.com,
-        bp@alien8.de, x86@kernel.org, hpa@zytor.com,
-        dave.hansen@linux.intel.com, luto@kernel.org,
-        Peter Zijlstra <peterz@infradead.org>, viro@zeniv.linux.org.uk,
-        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
-        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
-        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
-        anshuman.khandual@arm.com, jroedel@suse.de,
-        Mina Almasry <almasrymina@google.com>,
-        David Rientjes <rientjes@google.com>,
-        Matthew Wilcox <willy@infradead.org>,
-        Oscar Salvador <osalvador@suse.de>,
-        Michal Hocko <mhocko@suse.com>,
-        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
-        David Hildenbrand <david@redhat.com>,
-        =?UTF-8?B?SE9SSUdVQ0hJIE5BT1lBKOWggOWPoyDnm7TkuZ8p?= 
-        <naoya.horiguchi@nec.com>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain
+X-Originating-IP: [10.43.162.194]
+X-ClientProxiedBy: EX13D11UWB002.ant.amazon.com (10.43.161.20) To
+ EX13D31EUA001.ant.amazon.com (10.43.165.15)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, Feb 6, 2021 at 12:01 AM Joao Martins <joao.m.martins@oracle.com> wrote:
->
-> On 2/4/21 3:50 AM, Muchun Song wrote:
-> > Hi all,
-> >
->
-> [...]
->
-> > When a HugeTLB is freed to the buddy system, we should allocate 6 pages for
-> > vmemmap pages and restore the previous mapping relationship.
-> >
-> > Apart from 2MB HugeTLB page, we also have 1GB HugeTLB page. It is similar
-> > to the 2MB HugeTLB page. We also can use this approach to free the vmemmap
-> > pages.
-> >
-> > In this case, for the 1GB HugeTLB page, we can save 4094 pages. This is a
-> > very substantial gain. On our server, run some SPDK/QEMU applications which
-> > will use 1024GB hugetlbpage. With this feature enabled, we can save ~16GB
-> > (1G hugepage)/~12GB (2MB hugepage) memory.
-> >
-> > Because there are vmemmap page tables reconstruction on the freeing/allocating
-> > path, it increases some overhead. Here are some overhead analysis.
->
-> [...]
->
-> > Although the overhead has increased, the overhead is not significant. Like Mike
-> > said, "However, remember that the majority of use cases create hugetlb pages at
-> > or shortly after boot time and add them to the pool. So, additional overhead is
-> > at pool creation time. There is no change to 'normal run time' operations of
-> > getting a page from or returning a page to the pool (think page fault/unmap)".
-> >
->
-> Despite the overhead and in addition to the memory gains from this series ...
-> there's an additional benefit there isn't talked here with your vmemmap page
-> reuse trick. That is page (un)pinners will see an improvement and I presume because
-> there are fewer memmap pages and thus the tail/head pages are staying in cache more
-> often.
->
-> Out of the box I saw (when comparing linux-next against linux-next + this series)
-> with gup_test and pinning a 16G hugetlb file (with 1G pages):
->
->         get_user_pages(): ~32k -> ~9k
->         unpin_user_pages(): ~75k -> ~70k
->
-> Usually any tight loop fetching compound_head(), or reading tail pages data (e.g.
-> compound_head) benefit a lot. There's some unpinning inefficiencies I am fixing[0], but
-> with that in added it shows even more:
->
->         unpin_user_pages(): ~27k -> ~3.8k
->
-> FWIW, I was also seeing that with devdax and the ZONE_DEVICE vmemmap page reuse equivalent
-> series[1] but it was mixed with other numbers.
+On Fri, 5 Feb 2021 16:29:41 +0100 Greg KH <greg@kroah.com> wrote:
 
-It's really a surprise. Thank you very much for the test data.
-Very nice. Thanks again.
+> On Thu, Feb 04, 2021 at 04:31:43PM +0100, SeongJae Park wrote:
+> > From: SeongJae Park <sjpark@amazon.de>
+> > 
+> > DAMON is designed to be used by kernel space code such as the memory
+> > management subsystems, and therefore it provides only kernel space API.
+> > That said, letting the user space control DAMON could provide some
+> > benefits to them.  For example, it will allow user space to analyze
+> > their specific workloads and make their own special optimizations.
+> > 
+> > For such cases, this commit implements a simple DAMON application kernel
+> > module, namely 'damon-dbgfs', which merely wraps the DAMON api and
+> > exports those to the user space via the debugfs.
+> > 
+> > 'damon-dbgfs' exports three files, ``attrs``, ``target_ids``, and
+> > ``monitor_on`` under its debugfs directory, ``<debugfs>/damon/``.
+[...]
+> > ---
+> >  include/linux/damon.h |   3 +
+> >  mm/damon/Kconfig      |   9 +
+> >  mm/damon/Makefile     |   1 +
+> >  mm/damon/core.c       |  47 +++++
+> >  mm/damon/dbgfs.c      | 387 ++++++++++++++++++++++++++++++++++++++++++
+> >  5 files changed, 447 insertions(+)
+> >  create mode 100644 mm/damon/dbgfs.c
+[...]
+> > diff --git a/mm/damon/dbgfs.c b/mm/damon/dbgfs.c
+> > new file mode 100644
+> > index 000000000000..db15380737d1
+> > --- /dev/null
+> > +++ b/mm/damon/dbgfs.c
+[...]
+> > +
+> > +static int dbgfs_fill_ctx_dir(struct dentry *dir, struct damon_ctx *ctx)
+> > +{
+> > +	const char * const file_names[] = {"attrs", "target_ids"};
+> > +	const struct file_operations *fops[] = {&attrs_fops, &target_ids_fops};
+> > +	int i;
+> > +
+> > +	for (i = 0; i < ARRAY_SIZE(file_names); i++) {
+> > +		if (!debugfs_create_file(file_names[i], 0600, dir,
+> > +					ctx, fops[i])) {
+> > +			pr_err("failed to create %s file\n", file_names[i]);
+> > +			return -ENOMEM;
+> 
+> No need to check the return value of this function, just keep going and
+> ignore it as there's nothing to do and kernel code should not do
+> different things based on the output of any debugfs calls.
+> 
+> Also, this check is totally wrong and doesn't do what you think it is
+> doing...
+
+Ok, I will drop the check.
+
+> 
+> > +static int __init __damon_dbgfs_init(void)
+> > +{
+> > +	struct dentry *dbgfs_root;
+> > +	const char * const file_names[] = {"monitor_on"};
+> > +	const struct file_operations *fops[] = {&monitor_on_fops};
+> > +	int i;
+> > +
+> > +	dbgfs_root = debugfs_create_dir("damon", NULL);
+> > +	if (IS_ERR(dbgfs_root)) {
+> > +		pr_err("failed to create the dbgfs dir\n");
+> > +		return PTR_ERR(dbgfs_root);
+> 
+> Again, no need to check anything, just pass the result of a debugfs call
+> back into another one just fine.
+
+Ok.
+
+> 
+> > +	}
+> > +
+> > +	for (i = 0; i < ARRAY_SIZE(file_names); i++) {
+> > +		if (!debugfs_create_file(file_names[i], 0600, dbgfs_root,
+> > +					NULL, fops[i])) {
+> 
+> Again, this isn't checking what you think it is, so please don't do it.
+
+Got it.
+
+I will fix those as you suggested in the next version.
 
 
->
-> Anyways, JFYI :)
->
->         Joao
->
-> [0] https://lore.kernel.org/linux-mm/20210204202500.26474-1-joao.m.martins@oracle.com/
-> [1] https://lore.kernel.org/linux-mm/20201208172901.17384-1-joao.m.martins@oracle.com/
+Thanks,
+SeongJae Park
+
+> 
+> thanks,
+> 
+> greg k-h
