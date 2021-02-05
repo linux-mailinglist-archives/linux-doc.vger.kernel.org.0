@@ -2,222 +2,183 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DF8033113A7
-	for <lists+linux-doc@lfdr.de>; Fri,  5 Feb 2021 22:38:08 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 9A57E3114B6
+	for <lists+linux-doc@lfdr.de>; Fri,  5 Feb 2021 23:14:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229622AbhBEVgk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 5 Feb 2021 16:36:40 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56922 "EHLO
+        id S229564AbhBEWMo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 5 Feb 2021 17:12:44 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:44796 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232010AbhBEVev (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 16:34:51 -0500
-Received: from mail-qv1-xf49.google.com (mail-qv1-xf49.google.com [IPv6:2607:f8b0:4864:20::f49])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B487FC061797
-        for <linux-doc@vger.kernel.org>; Fri,  5 Feb 2021 13:34:09 -0800 (PST)
-Received: by mail-qv1-xf49.google.com with SMTP id m1so6049861qvp.0
-        for <linux-doc@vger.kernel.org>; Fri, 05 Feb 2021 13:34:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=sender:date:in-reply-to:message-id:mime-version:references:subject
-         :from:cc;
-        bh=8MAy8AaN6ZS5Avy4E0Q7L68GZ02PGsx9JgCkTgKoHNQ=;
-        b=WnliLim5ZvWL9ZBmepw0MTbma5fCSUQs19cvbXGTo+LnqW1tu36qu/K4HvniKmFTjd
-         o/nv5QHpFhvC1eCslPC0jr1VAqkMPdVYGLNyfvhw7JiuBUz0u4i6PkS0c67rvgIQYiBO
-         g5+n6GO294I+aASt6Okdy9Y9hDftPtnxffwm4veUH2aPdEe1/mbXdiZO0+1PytM4wtcZ
-         4SBS8PoKpJ2a5KG8d3InFVtCAvi162x32ueOqd1DR2iJ9rUXtXQWvryG0yK/b9Gg8CUZ
-         F9LvfX+RVQiieanUmyi8TtjNs5RuLFq2g/8ltJvxdZrRvjYSm0t4RNN5SN+xVXeIeXlV
-         d4VQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:sender:date:in-reply-to:message-id:mime-version
-         :references:subject:from:cc;
-        bh=8MAy8AaN6ZS5Avy4E0Q7L68GZ02PGsx9JgCkTgKoHNQ=;
-        b=RR03RJMVjpfOFVFKxhcCGx+pj4U14zrfVlbO0AQ18oz0IVJzoLsWCkNMLmSniEg1eV
-         dqX9D9Z5StJ3VHhiMc7+MeUEn6Arnul+e5vgphOBAvYBB99kZfezVYusLBUC47W/Oh97
-         l4pkaPYtFsBeGS7dSdiog1QcVPauc0VksNIgEbNd/5jOf9XMbe1OKzT8ieHuvcBWuLN/
-         uS3P12yJ5bZLKaB5wzmfQrtNCLPdWnoA5HrPxDIy2JqeSy5EabupsECNA9z5xgsITEdB
-         JbycBnF8CDtmKJAec2SFh2XsDnNp6s8GTZplPWUDfyo7vlHL5VGe/SfAlHX8Il3gF88F
-         aOqg==
-X-Gm-Message-State: AOAM531WiA6UpYH+wFqKguBhj/dhsRT+rjwh3kb5/CG8aFu87uCsw/qZ
-        VzqI4d0BKRZpGGYkU/2NGXj3+Zb8ziN8Pp8dow==
-X-Google-Smtp-Source: ABdhPJy5Phpkm8UmSoQT/cka7X8jy/KGgS1Wrb3leZpBdapsYf0YaqsduncqfY+tg1G+WZk5ym5FvVPgD1lNua+NiA==
-Sender: "kaleshsingh via sendgmr" <kaleshsingh@kaleshsingh.c.googlers.com>
-X-Received: from kaleshsingh.c.googlers.com ([fda3:e722:ac3:10:14:4d90:c0a8:2145])
- (user=kaleshsingh job=sendgmr) by 2002:ad4:486c:: with SMTP id
- u12mr6427106qvy.5.1612560848833; Fri, 05 Feb 2021 13:34:08 -0800 (PST)
-Date:   Fri,  5 Feb 2021 21:33:44 +0000
-In-Reply-To: <20210205213353.669122-1-kaleshsingh@google.com>
-Message-Id: <20210205213353.669122-2-kaleshsingh@google.com>
-Mime-Version: 1.0
-References: <20210205213353.669122-1-kaleshsingh@google.com>
-X-Mailer: git-send-email 2.30.0.478.g8a0d178c01-goog
-Subject: [PATCH v4 2/2] dmabuf: Add dmabuf inode number to /proc/*/fdinfo
-From:   Kalesh Singh <kaleshsingh@google.com>
-Cc:     jannh@google.com, jeffv@google.com, keescook@chromium.org,
-        surenb@google.com, minchan@kernel.org, hridya@google.com,
-        rdunlap@infradead.org, christian.koenig@amd.com,
-        kernel-team@android.com, Kalesh Singh <kaleshsingh@google.com>,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
+        with ESMTP id S232716AbhBEOiU (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 09:38:20 -0500
+Received: from smtp-190a.mail.infomaniak.ch (smtp-190a.mail.infomaniak.ch [IPv6:2001:1600:4:17::190a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EA323C06121E
+        for <linux-doc@vger.kernel.org>; Fri,  5 Feb 2021 08:08:47 -0800 (PST)
+Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
+        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4DXJRw6S0qzMqPtr;
+        Fri,  5 Feb 2021 15:57:32 +0100 (CET)
+Received: from ns3096276.ip-94-23-54.eu (unknown [23.97.221.149])
+        by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4DXJRs4xvlzlh8TC;
+        Fri,  5 Feb 2021 15:57:29 +0100 (CET)
+Subject: Re: [PATCH v28 06/12] fs,security: Add sb_delete hook
+To:     "Serge E. Hallyn" <serge@hallyn.com>
+Cc:     James Morris <jmorris@namei.org>, Jann Horn <jannh@google.com>,
+        Al Viro <viro@zeniv.linux.org.uk>,
         Andrew Morton <akpm@linux-foundation.org>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Michal Hocko <mhocko@suse.com>,
-        Alexey Gladkov <gladkov.alexey@gmail.com>,
-        NeilBrown <neilb@suse.de>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        Michel Lespinasse <walken@google.com>,
-        Bernd Edlinger <bernd.edlinger@hotmail.de>,
-        Andrei Vagin <avagin@gmail.com>,
-        Yafang Shao <laoar.shao@gmail.com>,
-        Christian Brauner <christian.brauner@ubuntu.com>,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-To:     unlisted-recipients:; (no To-header on input)
+        Andy Lutomirski <luto@amacapital.net>,
+        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Casey Schaufler <casey@schaufler-ca.com>,
+        Jeff Dike <jdike@addtoit.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Michael Kerrisk <mtk.manpages@gmail.com>,
+        Richard Weinberger <richard@nod.at>,
+        Shuah Khan <shuah@kernel.org>,
+        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
+        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        linux-security-module@vger.kernel.org, x86@kernel.org,
+        =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@linux.microsoft.com>
+References: <20210202162710.657398-1-mic@digikod.net>
+ <20210202162710.657398-7-mic@digikod.net>
+ <20210205142143.GA18451@mail.hallyn.com>
+From:   =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@digikod.net>
+Message-ID: <92e6a8a6-19da-0b1f-c1cf-01dc0af61299@digikod.net>
+Date:   Fri, 5 Feb 2021 15:57:37 +0100
+User-Agent: 
+MIME-Version: 1.0
+In-Reply-To: <20210205142143.GA18451@mail.hallyn.com>
+Content-Type: text/plain; charset=iso-8859-15
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-And 'inode_no' field to /proc/<pid>/fdinfo/<FD> and
-/proc/<pid>/task/<tid>/fdinfo/<FD>.
 
-The inode numbers can be used to uniquely identify DMA buffers
-in user space and avoids a dependency on /proc/<pid>/fd/* when
-accounting per-process DMA buffer sizes.
+On 05/02/2021 15:21, Serge E. Hallyn wrote:
+> On Tue, Feb 02, 2021 at 05:27:04PM +0100, Mickaël Salaün wrote:
+>> From: Mickaël Salaün <mic@linux.microsoft.com>
+>>
+>> The sb_delete security hook is called when shutting down a superblock,
+>> which may be useful to release kernel objects tied to the superblock's
+>> lifetime (e.g. inodes).
+>>
+>> This new hook is needed by Landlock to release (ephemerally) tagged
+>> struct inodes.  This comes from the unprivileged nature of Landlock
+>> described in the next commit.
+>>
+>> Cc: Al Viro <viro@zeniv.linux.org.uk>
+>> Cc: James Morris <jmorris@namei.org>
+>> Cc: Kees Cook <keescook@chromium.org>
+>> Cc: Serge E. Hallyn <serge@hallyn.com>
+> 
+> One note below, but
+> 
+> Acked-by: Serge Hallyn <serge@hallyn.com>
+> 
+>> Signed-off-by: Mickaël Salaün <mic@linux.microsoft.com>
+>> Reviewed-by: Jann Horn <jannh@google.com>
+>> ---
+>>
+>> Changes since v22:
+>> * Add Reviewed-by: Jann Horn <jannh@google.com>
+>>
+>> Changes since v17:
+>> * Initial patch to replace the direct call to landlock_release_inodes()
+>>   (requested by James Morris).
+>>   https://lore.kernel.org/lkml/alpine.LRH.2.21.2005150536440.7929@namei.org/
+>> ---
+>>  fs/super.c                    | 1 +
+>>  include/linux/lsm_hook_defs.h | 1 +
+>>  include/linux/lsm_hooks.h     | 2 ++
+>>  include/linux/security.h      | 4 ++++
+>>  security/security.c           | 5 +++++
+>>  5 files changed, 13 insertions(+)
+>>
+>> diff --git a/fs/super.c b/fs/super.c
+>> index 2c6cdea2ab2d..c3c5178cde65 100644
+>> --- a/fs/super.c
+>> +++ b/fs/super.c
+>> @@ -454,6 +454,7 @@ void generic_shutdown_super(struct super_block *sb)
+>>  		evict_inodes(sb);
+>>  		/* only nonzero refcount inodes can have marks */
+>>  		fsnotify_sb_delete(sb);
+>> +		security_sb_delete(sb);
+>>  
+>>  		if (sb->s_dio_done_wq) {
+>>  			destroy_workqueue(sb->s_dio_done_wq);
+>> diff --git a/include/linux/lsm_hook_defs.h b/include/linux/lsm_hook_defs.h
+>> index 7aaa753b8608..32472b3849bc 100644
+>> --- a/include/linux/lsm_hook_defs.h
+>> +++ b/include/linux/lsm_hook_defs.h
+>> @@ -59,6 +59,7 @@ LSM_HOOK(int, 0, fs_context_dup, struct fs_context *fc,
+>>  LSM_HOOK(int, -ENOPARAM, fs_context_parse_param, struct fs_context *fc,
+>>  	 struct fs_parameter *param)
+>>  LSM_HOOK(int, 0, sb_alloc_security, struct super_block *sb)
+>> +LSM_HOOK(void, LSM_RET_VOID, sb_delete, struct super_block *sb)
+>>  LSM_HOOK(void, LSM_RET_VOID, sb_free_security, struct super_block *sb)
+>>  LSM_HOOK(void, LSM_RET_VOID, sb_free_mnt_opts, void *mnt_opts)
+>>  LSM_HOOK(int, 0, sb_eat_lsm_opts, char *orig, void **mnt_opts)
+>> diff --git a/include/linux/lsm_hooks.h b/include/linux/lsm_hooks.h
+>> index 970106d98306..e339b201f79b 100644
+>> --- a/include/linux/lsm_hooks.h
+>> +++ b/include/linux/lsm_hooks.h
+>> @@ -108,6 +108,8 @@
+>>   *	allocated.
+>>   *	@sb contains the super_block structure to be modified.
+>>   *	Return 0 if operation was successful.
+>> + * @sb_delete:
+>> + *	Release objects tied to a superblock (e.g. inodes).
+> 
+> It's customary here to add the line detailing the @sb argument.
 
-Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
----
-Changes in v4:
-  - Add inode number as common field in fdinfo, per Christian
-Changes in v3:
-  - Add documentation in proc.rst, per Randy
-Changes in v2:
-  - Update patch description
+What about "@sb contains the super_block structure being released."?
 
- Documentation/filesystems/proc.rst | 37 +++++++++++++++++++++++++-----
- fs/proc/fd.c                       |  5 ++--
- 2 files changed, 34 insertions(+), 8 deletions(-)
-
-diff --git a/Documentation/filesystems/proc.rst b/Documentation/filesystems/proc.rst
-index 2fa69f710e2a..db46da32230c 100644
---- a/Documentation/filesystems/proc.rst
-+++ b/Documentation/filesystems/proc.rst
-@@ -1902,18 +1902,20 @@ if precise results are needed.
- 3.8	/proc/<pid>/fdinfo/<fd> - Information about opened file
- ---------------------------------------------------------------
- This file provides information associated with an opened file. The regular
--files have at least three fields -- 'pos', 'flags' and 'mnt_id'. The 'pos'
--represents the current offset of the opened file in decimal form [see lseek(2)
--for details], 'flags' denotes the octal O_xxx mask the file has been
--created with [see open(2) for details] and 'mnt_id' represents mount ID of
--the file system containing the opened file [see 3.5 /proc/<pid>/mountinfo
--for details].
-+files have at least four fields -- 'pos', 'flags', 'mnt_id' and 'inode_no'.
-+The 'pos' represents the current offset of the opened file in decimal
-+form [see lseek(2) for details], 'flags' denotes the octal O_xxx mask the
-+file has been created with [see open(2) for details] and 'mnt_id' represents
-+mount ID of the file system containing the opened file [see 3.5
-+/proc/<pid>/mountinfo for details]. 'inode_no' represents the inode number
-+of the file.
- 
- A typical output is::
- 
- 	pos:	0
- 	flags:	0100002
- 	mnt_id:	19
-+	inode_no:       63107
- 
- All locks associated with a file descriptor are shown in its fdinfo too::
- 
-@@ -1930,6 +1932,7 @@ Eventfd files
- 	pos:	0
- 	flags:	04002
- 	mnt_id:	9
-+	inode_no:       63107
- 	eventfd-count:	5a
- 
- where 'eventfd-count' is hex value of a counter.
-@@ -1942,6 +1945,7 @@ Signalfd files
- 	pos:	0
- 	flags:	04002
- 	mnt_id:	9
-+	inode_no:       63107
- 	sigmask:	0000000000000200
- 
- where 'sigmask' is hex value of the signal mask associated
-@@ -1955,6 +1959,7 @@ Epoll files
- 	pos:	0
- 	flags:	02
- 	mnt_id:	9
-+	inode_no:       63107
- 	tfd:        5 events:       1d data: ffffffffffffffff pos:0 ino:61af sdev:7
- 
- where 'tfd' is a target file descriptor number in decimal form,
-@@ -1971,6 +1976,8 @@ For inotify files the format is the following::
- 
- 	pos:	0
- 	flags:	02000000
-+	mnt_id:	9
-+	inode_no:       63107
- 	inotify wd:3 ino:9e7e sdev:800013 mask:800afce ignored_mask:0 fhandle-bytes:8 fhandle-type:1 f_handle:7e9e0000640d1b6d
- 
- where 'wd' is a watch descriptor in decimal form, i.e. a target file
-@@ -1993,6 +2000,7 @@ For fanotify files the format is::
- 	pos:	0
- 	flags:	02
- 	mnt_id:	9
-+	inode_no:       63107
- 	fanotify flags:10 event-flags:0
- 	fanotify mnt_id:12 mflags:40 mask:38 ignored_mask:40000003
- 	fanotify ino:4f969 sdev:800013 mflags:0 mask:3b ignored_mask:40000000 fhandle-bytes:8 fhandle-type:1 f_handle:69f90400c275b5b4
-@@ -2017,6 +2025,7 @@ Timerfd files
- 	pos:	0
- 	flags:	02
- 	mnt_id:	9
-+	inode_no:       63107
- 	clockid: 0
- 	ticks: 0
- 	settime flags: 01
-@@ -2031,6 +2040,22 @@ details]. 'it_value' is remaining time until the timer expiration.
- with TIMER_ABSTIME option which will be shown in 'settime flags', but 'it_value'
- still exhibits timer's remaining time.
- 
-+DMA Buffer files
-+~~~~~~~~~~~~~~~~
-+
-+::
-+
-+	pos:	0
-+	flags:	04002
-+	mnt_id:	9
-+	inode_no:       63107
-+	size:   32768
-+	count:  2
-+	exp_name:  system-heap
-+
-+where 'size' is the size of the DMA buffer in bytes. 'count' is the file count of
-+the DMA buffer file. 'exp_name' is the name of the DMA buffer exporter.
-+
- 3.9	/proc/<pid>/map_files - Information about memory mapped files
- ---------------------------------------------------------------------
- This directory contains symbolic links which represent memory mapped files
-diff --git a/fs/proc/fd.c b/fs/proc/fd.c
-index 585e213301f9..2c25909bf9d1 100644
---- a/fs/proc/fd.c
-+++ b/fs/proc/fd.c
-@@ -54,9 +54,10 @@ static int seq_show(struct seq_file *m, void *v)
- 	if (ret)
- 		return ret;
- 
--	seq_printf(m, "pos:\t%lli\nflags:\t0%o\nmnt_id:\t%i\n",
-+	seq_printf(m, "pos:\t%lli\nflags:\t0%o\nmnt_id:\t%i\ninode_no:\t%lu\n",
- 		   (long long)file->f_pos, f_flags,
--		   real_mount(file->f_path.mnt)->mnt_id);
-+		   real_mount(file->f_path.mnt)->mnt_id,
-+		   file_inode(file)->i_ino);
- 
- 	/* show_fd_locks() never deferences files so a stale value is safe */
- 	show_fd_locks(m, file, files);
--- 
-2.30.0.478.g8a0d178c01-goog
-
+> 
+>>   * @sb_free_security:
+>>   *	Deallocate and clear the sb->s_security field.
+>>   *	@sb contains the super_block structure to be modified.
+>> diff --git a/include/linux/security.h b/include/linux/security.h
+>> index c35ea0ffccd9..c41a94e29b62 100644
+>> --- a/include/linux/security.h
+>> +++ b/include/linux/security.h
+>> @@ -288,6 +288,7 @@ void security_bprm_committed_creds(struct linux_binprm *bprm);
+>>  int security_fs_context_dup(struct fs_context *fc, struct fs_context *src_fc);
+>>  int security_fs_context_parse_param(struct fs_context *fc, struct fs_parameter *param);
+>>  int security_sb_alloc(struct super_block *sb);
+>> +void security_sb_delete(struct super_block *sb);
+>>  void security_sb_free(struct super_block *sb);
+>>  void security_free_mnt_opts(void **mnt_opts);
+>>  int security_sb_eat_lsm_opts(char *options, void **mnt_opts);
+>> @@ -620,6 +621,9 @@ static inline int security_sb_alloc(struct super_block *sb)
+>>  	return 0;
+>>  }
+>>  
+>> +static inline void security_sb_delete(struct super_block *sb)
+>> +{ }
+>> +
+>>  static inline void security_sb_free(struct super_block *sb)
+>>  { }
+>>  
+>> diff --git a/security/security.c b/security/security.c
+>> index 9f979d4afe6c..1b4a73b2549a 100644
+>> --- a/security/security.c
+>> +++ b/security/security.c
+>> @@ -900,6 +900,11 @@ int security_sb_alloc(struct super_block *sb)
+>>  	return rc;
+>>  }
+>>  
+>> +void security_sb_delete(struct super_block *sb)
+>> +{
+>> +	call_void_hook(sb_delete, sb);
+>> +}
+>> +
+>>  void security_sb_free(struct super_block *sb)
+>>  {
+>>  	call_void_hook(sb_free_security, sb);
+>> -- 
+>> 2.30.0
