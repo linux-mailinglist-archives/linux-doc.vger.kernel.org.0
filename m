@@ -2,106 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 6C811311873
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Feb 2021 03:38:51 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AE5F331196B
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Feb 2021 04:07:17 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229963AbhBFCid (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 5 Feb 2021 21:38:33 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38360 "EHLO
+        id S232001AbhBFDFG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 5 Feb 2021 22:05:06 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40998 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231278AbhBFCgR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 21:36:17 -0500
-Received: from merlin.infradead.org (merlin.infradead.org [IPv6:2001:8b0:10b:1231::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D2D17C08EE7B;
-        Fri,  5 Feb 2021 16:39:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:Content-Type:
-        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
-        :Reply-To:Content-ID:Content-Description;
-        bh=mZCRVETJ8PFFSolgHhB5Tp0serDneMbD0XJnnQKOZTI=; b=BxHBM4b9ULo1IOmmp+yYoLbHzA
-        T7jAwmuzi3nMiMuX4tSkT/PrHmdvmiGIRtRT/UkrGY+MQn3UjhuH9epQ5p+ZfcNl6+MGqcoaQTzOA
-        3u9fGYgTMy7MutsAZYCmCG0OHhLpFF54+pcZVvNUrQol7VN1x8yplUX+rdXTzoCUqFlzpK8rwKzOJ
-        diBnw2RUzvs+/6D90s2sCtbcRqjpD9AINeb0tex9RhkHpmLzu0NaLJXeHfsRlLizZU5m9K5zi40tm
-        QNvThKpybBm2o4UpU5v+Xa3rIySjTRMa2Ah7VNAJ7CBgXfTwVgoU6hQwCFVDeU9jgxIKa2NtGEDov
-        vygqBJ+w==;
-Received: from [2601:1c0:6280:3f0::aec2]
-        by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1l8BdT-0004md-Uz; Sat, 06 Feb 2021 00:39:40 +0000
-Subject: Re: [PATCH v4 1/2] procfs: Allow reading fdinfo with PTRACE_MODE_READ
-To:     Kalesh Singh <kaleshsingh@google.com>
-Cc:     jannh@google.com, jeffv@google.com, keescook@chromium.org,
-        surenb@google.com, minchan@kernel.org, hridya@google.com,
-        christian.koenig@amd.com, kernel-team@android.com,
-        Alexey Dobriyan <adobriyan@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Michal Hocko <mhocko@suse.com>,
-        Alexey Gladkov <gladkov.alexey@gmail.com>,
-        NeilBrown <neilb@suse.de>, Szabolcs Nagy <szabolcs.nagy@arm.com>,
-        "Eric W. Biederman" <ebiederm@xmission.com>,
-        Michel Lespinasse <walken@google.com>,
-        Bernd Edlinger <bernd.edlinger@hotmail.de>,
-        Andrei Vagin <avagin@gmail.com>,
-        Yafang Shao <laoar.shao@gmail.com>,
-        Christian Brauner <christian.brauner@ubuntu.com>,
-        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org
-References: <20210205213353.669122-1-kaleshsingh@google.com>
-From:   Randy Dunlap <rdunlap@infradead.org>
-Message-ID: <fe8780a1-364e-ec8f-48ee-192438d52c01@infradead.org>
-Date:   Fri, 5 Feb 2021 16:39:29 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.4.0
-MIME-Version: 1.0
-In-Reply-To: <20210205213353.669122-1-kaleshsingh@google.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+        with ESMTP id S231731AbhBFCxB (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 21:53:01 -0500
+Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com [IPv6:2607:f8b0:4864:20::b49])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id B639DC0698E1
+        for <linux-doc@vger.kernel.org>; Fri,  5 Feb 2021 14:26:54 -0800 (PST)
+Received: by mail-yb1-xb49.google.com with SMTP id w4so8772751ybc.7
+        for <linux-doc@vger.kernel.org>; Fri, 05 Feb 2021 14:26:54 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=sender:date:in-reply-to:message-id:mime-version:references:subject
+         :from:to:cc;
+        bh=j8xLJ/gRsabqXmVqApH6UU1AJY7QICocc5XvPOoh2CA=;
+        b=E5sFvJO7MoqTQ5HU1iZRDkvKf3YEJnMxgLBzB4Bdzzu+OwTihKotepF9+vecFbKNIx
+         RMScWAE2zE8rfvaCnxQasMRx1b2r+VjvXf9v4q+HNHmXZS+zJmKBYlJ1jOnNKPkYLUUx
+         +9C9RV4z0aszLyrKr2OQQUAT3XhAqGUElzBIGIsskZIGV69KYaqaW83ucTaO/doqcRq5
+         aA1hFJJYjJVvodQlIzs4Yf6qBGi+RWhj71EWMUCnJT+YB8Jg9U54RCqfkCTP8s/4Q2lH
+         nfjbItiLvc4Ce0s3du8UwLa5Sd+7cG0N/EYOX2N9Kz9ci0pHOQ3JMNDAeaGfizIIj8Tt
+         OyuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:in-reply-to:message-id:mime-version
+         :references:subject:from:to:cc;
+        bh=j8xLJ/gRsabqXmVqApH6UU1AJY7QICocc5XvPOoh2CA=;
+        b=OWP/yGRfsMfJoFNfAW4joMQoAxaoiTg0n2XWS9PJwS17VhWeMnyYtEU51sUp/segW0
+         YigAvYMfgphVJYaQlw+4rV6+c2zDOa9gCTS/ynwVqCw8gdfXJw77mLxJw14BplHjdxX6
+         a0n2mOWdeDu/SD9taq5A3nDuO+xbEA0DD0Em7oxuHjoa0+rjE8daFy8dHxPkFfn7CbTB
+         L+GfNOnKlt6XakbPLA3BmbdY4CQnWN9b0qLSTOEl+9mb0Qm0yjJrD12CoMPxeODNSycK
+         4O7XSebAQL+4jVq7L1KHO58Qe5MYYiGC0u7u3x0o49E8rGQuLBW1aibj16EyaZy3EL9v
+         0Jzg==
+X-Gm-Message-State: AOAM531hC5gQMe61/Fo2AgqKolpc6/hGmgrIpUZt36Q26iylFI2jNDUY
+        oXjU9fKsiMN7kop6B0yksbBcruPwCnr2dvo=
+X-Google-Smtp-Source: ABdhPJwaxJzPZ4XSeGkT3P5EprKNXkjzOOR8qEj+Bd02rhMYgGuOOcL7rRwb/dvXftOqDNpM24CwbGcGHu5s6VY=
+Sender: "saravanak via sendgmr" <saravanak@saravanak.san.corp.google.com>
+X-Received: from saravanak.san.corp.google.com ([2620:15c:2d:3:6d36:b798:55d7:f5c5])
+ (user=saravanak job=sendgmr) by 2002:a25:d648:: with SMTP id
+ n69mr8876885ybg.462.1612564014028; Fri, 05 Feb 2021 14:26:54 -0800 (PST)
+Date:   Fri,  5 Feb 2021 14:26:38 -0800
+In-Reply-To: <20210205222644.2357303-1-saravanak@google.com>
+Message-Id: <20210205222644.2357303-3-saravanak@google.com>
+Mime-Version: 1.0
+References: <20210205222644.2357303-1-saravanak@google.com>
+X-Mailer: git-send-email 2.30.0.478.g8a0d178c01-goog
+Subject: [PATCH v4 2/8] of: property: Don't add links to absent suppliers
+From:   Saravana Kannan <saravanak@google.com>
+To:     Jonathan Corbet <corbet@lwn.net>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Rafael J. Wysocki" <rafael@kernel.org>,
+        Kevin Hilman <khilman@kernel.org>,
+        Ulf Hansson <ulf.hansson@linaro.org>,
+        Len Brown <len.brown@intel.com>, Len Brown <lenb@kernel.org>,
+        Pavel Machek <pavel@ucw.cz>,
+        Michael Turquette <mturquette@baylibre.com>,
+        Stephen Boyd <sboyd@kernel.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Frank Rowand <frowand.list@gmail.com>,
+        Marc Zyngier <maz@kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Saravana Kannan <saravanak@google.com>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-pm@vger.kernel.org, linux-clk@vger.kernel.org,
+        devicetree@vger.kernel.org, linux-acpi@vger.kernel.org,
+        Marek Szyprowski <m.szyprowski@samsung.com>,
+        Geert Uytterhoeven <geert@linux-m68k.org>,
+        kernel-team@android.com
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 2/5/21 1:33 PM, Kalesh Singh wrote:
-> Android captures per-process system memory state when certain low memory
-> events (e.g a foreground app kill) occur, to identify potential memory
-> hoggers. In order to measure how much memory a process actually consumes,
-> it is necessary to include the DMA buffer sizes for that process in the
-> memory accounting. Since the handle to DMA buffers are raw FDs, it is
-> important to be able to identify which processes have FD references to
-> a DMA buffer.
-> 
-> Currently, DMA buffer FDs can be accounted using /proc/<pid>/fd/* and
-> /proc/<pid>/fdinfo -- both are only readable by the process owner,
-> as follows:
->   1. Do a readlink on each FD.
->   2. If the target path begins with "/dmabuf", then the FD is a dmabuf FD.
->   3. stat the file to get the dmabuf inode number.
->   4. Read/ proc/<pid>/fdinfo/<fd>, to get the DMA buffer size.
-> 
-> Accessing other processes’ fdinfo requires root privileges. This limits
+If driver core marks a firmware node as not a device, don't add fwnode
+links where it's a supplier.
 
-Tangential:
-Please just use ASCII "'" -- it's good enough.
+Fixes: e590474768f1 ("driver core: Set fw_devlink=on by default")
+Signed-off-by: Saravana Kannan <saravanak@google.com>
+---
+ drivers/of/property.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-> the use of the interface to debugging environments and is not suitable
-> for production builds.  Granting root privileges even to a system process
-> increases the attack surface and is highly undesirable.
-> 
-> Since fdinfo doesn't permit reading process memory and manipulating
-> process state, allow accessing fdinfo under PTRACE_MODE_READ_FSCRED.
-> 
-> Suggested-by: Jann Horn <jannh@google.com>
-> Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
-> ---
-> Changes in v2:
->   - Update patch description
-> 
->  fs/proc/base.c |  4 ++--
->  fs/proc/fd.c   | 15 ++++++++++++++-
->  2 files changed, 16 insertions(+), 3 deletions(-)
-
-
+diff --git a/drivers/of/property.c b/drivers/of/property.c
+index 6287c6d60bb7..53d163c8d39b 100644
+--- a/drivers/of/property.c
++++ b/drivers/of/property.c
+@@ -1103,7 +1103,9 @@ static int of_link_to_phandle(struct device_node *con_np,
+ 	 * created for them.
+ 	 */
+ 	sup_dev = get_dev_from_fwnode(&sup_np->fwnode);
+-	if (!sup_dev && of_node_check_flag(sup_np, OF_POPULATED)) {
++	if (!sup_dev &&
++	    (of_node_check_flag(sup_np, OF_POPULATED) ||
++	     sup_np->fwnode.flags & FWNODE_FLAG_NOT_DEVICE)) {
+ 		pr_debug("Not linking %pOFP to %pOFP - No struct device\n",
+ 			 con_np, sup_np);
+ 		of_node_put(sup_np);
 -- 
-~Randy
+2.30.0.478.g8a0d178c01-goog
 
