@@ -2,56 +2,56 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3A0523118BB
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Feb 2021 03:49:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5F80331191C
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Feb 2021 03:57:13 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230103AbhBFCoo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 5 Feb 2021 21:44:44 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37438 "EHLO
+        id S230075AbhBFCy6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 5 Feb 2021 21:54:58 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39770 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230087AbhBFCcP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 21:32:15 -0500
-Received: from mail-yb1-xb49.google.com (mail-yb1-xb49.google.com [IPv6:2607:f8b0:4864:20::b49])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 293E5C03C061
-        for <linux-doc@vger.kernel.org>; Fri,  5 Feb 2021 14:27:00 -0800 (PST)
-Received: by mail-yb1-xb49.google.com with SMTP id b125so8783422ybg.10
-        for <linux-doc@vger.kernel.org>; Fri, 05 Feb 2021 14:27:00 -0800 (PST)
+        with ESMTP id S231451AbhBFCpF (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 21:45:05 -0500
+Received: from mail-qv1-xf4a.google.com (mail-qv1-xf4a.google.com [IPv6:2607:f8b0:4864:20::f4a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6C5A2C08EB23
+        for <linux-doc@vger.kernel.org>; Fri,  5 Feb 2021 14:27:05 -0800 (PST)
+Received: by mail-qv1-xf4a.google.com with SMTP id dj13so6097863qvb.20
+        for <linux-doc@vger.kernel.org>; Fri, 05 Feb 2021 14:27:05 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=google.com; s=20161025;
         h=sender:date:in-reply-to:message-id:mime-version:references:subject
          :from:to:cc;
-        bh=Bw5DCGRTYuHhV6CaEDXr7VykkGUog594vA90XJtHO1Y=;
-        b=OJ24USk8NaXzKxxqD9cIc2fuOOLVmyyzmeeBnuhX2haf4opjBLOqqJRPp0oJB2TcJy
-         QU5VBOCElNExNGxqLUxqgYZItGUiFhRtQzb3LQdbw3Y0LZcW3LuI88Njj48rtjKPsSZ2
-         4F0icSi17k6dTngdFP+PaTB0cFBlMjBumwi1fy39MHFAPu/w9n8my2gcennaSg5vjErP
-         sQRLYkA7SGqEGGXM0TBNdHDG5nonXhw92Rf6mDDQik8AxtIwTOsa++xp6SeuTGFyIXpz
-         MAv6/0kL+jIazKDHFcWr73Ze5NFqgWo6QJFSaG2D5SJFVSY04331pMLEzlZOwVgZ2YBU
-         uyXA==
+        bh=TYrtpVLRn3by/Vo/kcPBrt+TPgx+fv0qz/2DUsVYehs=;
+        b=U3Djp3k+GP8+qJmYpXluNSRzD2CCSzeiwHY7gG5D/DqWI0d0WLtnjKmxmVZwbiIl0a
+         DFuApaMx2zqSpPNTf2PGF1oJpYthPmhJ2nm7rd2FmpuV1zS4CjVC38Mf9NqZTb6tJ5Rs
+         93wkaMcPIgBSX8jCDP5L9RSQLRvhi2UMzrLfRacvFGFL/pq/TEt1Cdp+4z3JxfX6hUPY
+         3SaWd0T0LeIsrDoy5GbOj+zSX+2Le6Rc6XHW6dAFGuVc9CI83wb9jLeqsHTQhT8g0xqk
+         FYbC9sFBEawc8DYagceFE3B8UJcbArkFf7OvdDS8fCXYYPCcSAz2G0+SwR2UiM/F+Tui
+         URvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:sender:date:in-reply-to:message-id:mime-version
          :references:subject:from:to:cc;
-        bh=Bw5DCGRTYuHhV6CaEDXr7VykkGUog594vA90XJtHO1Y=;
-        b=WNQIVDU6IJjr4z2/6+SQN+eI0xYPgLpfCH9dG0RtFVF0hnv/hhqtQUuSupbnZWy20l
-         qxB5jpaoufJZ6PG++vQnM6Q0SERxfy5eLOrNuH5eeJjxqPSQ8tsXxQxS5aq0mY23u7uu
-         e3JJhWLrHUChiKUSDoRMD2rQutMM/veZR2ps28n/fNfmhwyy8C24J8Y14coE3fIXxSLS
-         9KeWbFnROVnILmCLC5epsF/7UbGJXzwkhIrKVzthJC1gJzWz0R68ul8TIOfqkOEDaRO0
-         wVm4oYNWq+VmdzI5pB7YQ9dUyLV5HNSgtHlgK+k2NX9YnZXV5KIW+qyg2uPwg5ONcVgg
-         96Dg==
-X-Gm-Message-State: AOAM532725TmZTVn/NL2dWMUQkogkT48BdjMl8IAvsdi85vRvnipkG3y
-        fpOpPoXtlay2H3ZzN2WED7N4Ja2mBA7VTTY=
-X-Google-Smtp-Source: ABdhPJy8zXEis/xhZQjdQJH/U4yg9J4P3415kxIuICG74Qvlo/PkTtrQfpR8JQK+yrBlCNXAjS7e2k4VjoRZpiE=
+        bh=TYrtpVLRn3by/Vo/kcPBrt+TPgx+fv0qz/2DUsVYehs=;
+        b=faXiV3e8yd2XZgC8McVLFFl1Z1rEi4lLTtBJRR8P9ViGI4WwCUarZZkYYgm9MSqL1A
+         N1xuQo2ZsuoZfbW+gcUp/xpPTsnLqC83vWs0mZNeUWlW63oXzx3WdyqWKRePdsmbUA/y
+         u3imAoiZG+ngpuUxUwJAozWMNPZzqImn8rjje1lacNNJSRsUSm4dV80XGQM7zlkciW/a
+         V6lAIebAkOiKkovFqV5/khxrg79FN/O0yJbjhK0+b2DTXR+mhpQ/X4IXA/BwbbQfuu1q
+         GH2MJnB6u57TnAAmyFR9anMBDshvyFgSxhnvM5yBJrHPiOZn+xNZBKCyRJIGXXT6PJp3
+         vDew==
+X-Gm-Message-State: AOAM531JHEKP7/WOossPqFZKVzErP5oGIk4BwntLtwW+02u2woyzJlRi
+        yG9bXONkamG1Kb1Tmm2lZgGvshTgQrSEJcY=
+X-Google-Smtp-Source: ABdhPJwdjYLytH5Kf+IR/URLqg4oBMorIriHqSmnCdh9rbCozFjv7tkF2iAFZexBUHOTPiNpU3ZtLytbJBYvjy8=
 Sender: "saravanak via sendgmr" <saravanak@saravanak.san.corp.google.com>
 X-Received: from saravanak.san.corp.google.com ([2620:15c:2d:3:6d36:b798:55d7:f5c5])
- (user=saravanak job=sendgmr) by 2002:a25:e54:: with SMTP id
- 81mr9240781ybo.404.1612564019429; Fri, 05 Feb 2021 14:26:59 -0800 (PST)
-Date:   Fri,  5 Feb 2021 14:26:40 -0800
+ (user=saravanak job=sendgmr) by 2002:ad4:4e8a:: with SMTP id
+ dy10mr6613039qvb.36.1612564024540; Fri, 05 Feb 2021 14:27:04 -0800 (PST)
+Date:   Fri,  5 Feb 2021 14:26:42 -0800
 In-Reply-To: <20210205222644.2357303-1-saravanak@google.com>
-Message-Id: <20210205222644.2357303-5-saravanak@google.com>
+Message-Id: <20210205222644.2357303-7-saravanak@google.com>
 Mime-Version: 1.0
 References: <20210205222644.2357303-1-saravanak@google.com>
 X-Mailer: git-send-email 2.30.0.478.g8a0d178c01-goog
-Subject: [PATCH v4 4/8] of: property: Add fw_devlink support for optional properties
+Subject: [PATCH v4 6/8] irqdomain: Mark fwnodes when their irqdomain is added/removed
 From:   Saravana Kannan <saravanak@google.com>
 To:     Jonathan Corbet <corbet@lwn.net>,
         Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
@@ -78,54 +78,37 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Not all DT bindings are mandatory bindings. Add support for optional DT
-bindings and mark iommus, iommu-map, dmas as optional DT bindings.
+This allows fw_devlink to recognize irqdomain drivers that don't use the
+device-driver model to initialize the device. fw_devlink will use this
+information to make sure consumers of such irqdomain aren't indefinitely
+blocked from probing, waiting for the irqdomain device to appear and
+bind to a driver.
 
 Signed-off-by: Saravana Kannan <saravanak@google.com>
 ---
- drivers/of/property.c | 12 +++++++++---
- 1 file changed, 9 insertions(+), 3 deletions(-)
+ kernel/irq/irqdomain.c | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/drivers/of/property.c b/drivers/of/property.c
-index 53d163c8d39b..962109082df1 100644
---- a/drivers/of/property.c
-+++ b/drivers/of/property.c
-@@ -1235,6 +1235,7 @@ static struct device_node *parse_##fname(struct device_node *np,	     \
- struct supplier_bindings {
- 	struct device_node *(*parse_prop)(struct device_node *np,
- 					  const char *prop_name, int index);
-+	bool optional;
- };
+diff --git a/kernel/irq/irqdomain.c b/kernel/irq/irqdomain.c
+index 6aacd342cd14..288151393a06 100644
+--- a/kernel/irq/irqdomain.c
++++ b/kernel/irq/irqdomain.c
+@@ -205,6 +205,7 @@ struct irq_domain *__irq_domain_add(struct fwnode_handle *fwnode, int size,
+ 	}
  
- DEFINE_SIMPLE_PROP(clocks, "clocks", "#clock-cells")
-@@ -1308,12 +1309,12 @@ static struct device_node *parse_interrupts(struct device_node *np,
- static const struct supplier_bindings of_supplier_bindings[] = {
- 	{ .parse_prop = parse_clocks, },
- 	{ .parse_prop = parse_interconnects, },
--	{ .parse_prop = parse_iommus, },
--	{ .parse_prop = parse_iommu_maps, },
-+	{ .parse_prop = parse_iommus, .optional = true, },
-+	{ .parse_prop = parse_iommu_maps, .optional = true, },
- 	{ .parse_prop = parse_mboxes, },
- 	{ .parse_prop = parse_io_channels, },
- 	{ .parse_prop = parse_interrupt_parent, },
--	{ .parse_prop = parse_dmas, },
-+	{ .parse_prop = parse_dmas, .optional = true, },
- 	{ .parse_prop = parse_power_domains, },
- 	{ .parse_prop = parse_hwlocks, },
- 	{ .parse_prop = parse_extcon, },
-@@ -1368,6 +1369,11 @@ static int of_link_property(struct device_node *con_np, const char *prop_name)
+ 	fwnode_handle_get(fwnode);
++	fwnode_dev_initialized(fwnode, true);
  
- 	/* Do not stop at first failed link, link all available suppliers. */
- 	while (!matched && s->parse_prop) {
-+		if (s->optional && !fw_devlink_is_strict()) {
-+			s++;
-+			continue;
-+		}
-+
- 		while ((phandle = s->parse_prop(con_np, prop_name, i))) {
- 			matched = true;
- 			i++;
+ 	/* Fill structure */
+ 	INIT_RADIX_TREE(&domain->revmap_tree, GFP_KERNEL);
+@@ -253,6 +254,7 @@ void irq_domain_remove(struct irq_domain *domain)
+ 
+ 	pr_debug("Removed domain %s\n", domain->name);
+ 
++	fwnode_dev_initialized(domain->fwnode, false);
+ 	fwnode_handle_put(domain->fwnode);
+ 	if (domain->flags & IRQ_DOMAIN_NAME_ALLOCATED)
+ 		kfree(domain->name);
 -- 
 2.30.0.478.g8a0d178c01-goog
 
