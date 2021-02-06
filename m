@@ -2,69 +2,106 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9FF60311920
-	for <lists+linux-doc@lfdr.de>; Sat,  6 Feb 2021 03:57:22 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6C811311873
+	for <lists+linux-doc@lfdr.de>; Sat,  6 Feb 2021 03:38:51 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231739AbhBFCzI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 5 Feb 2021 21:55:08 -0500
-Received: from mail.kernel.org ([198.145.29.99]:39752 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231221AbhBFCvz (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 5 Feb 2021 21:51:55 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 04C2264F51;
-        Fri,  5 Feb 2021 22:35:50 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linux-foundation.org;
-        s=korg; t=1612564551;
-        bh=/d7hyScWKy7rmoffTYVW8U8Hr6uQSMMsfR6pwjRMA6Y=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=eI5GH/v34mz5bxoyj0tyMgr4duFyxIKSgiuDVYXwI0Mw6RZO9YyoC/wwf+APLDn/D
-         IUIpI6af6qVqQQlAjixLznBHAhUVPlrFMgKED2ySuO/WFx18j1mpfLtq/bSUahZSEp
-         UqllQfm9SeE3k2A209qzOLjDabtsY7t9zsRpyV7w=
-Date:   Fri, 5 Feb 2021 14:35:50 -0800
-From:   Andrew Morton <akpm@linux-foundation.org>
-To:     NeilBrown <neilb@suse.de>
-Cc:     Alexander Viro <viro@zeniv.linux.org.uk>,
+        id S229963AbhBFCid (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 5 Feb 2021 21:38:33 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38360 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231278AbhBFCgR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 5 Feb 2021 21:36:17 -0500
+Received: from merlin.infradead.org (merlin.infradead.org [IPv6:2001:8b0:10b:1231::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D2D17C08EE7B;
+        Fri,  5 Feb 2021 16:39:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=merlin.20170209; h=Content-Transfer-Encoding:Content-Type:
+        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
+        :Reply-To:Content-ID:Content-Description;
+        bh=mZCRVETJ8PFFSolgHhB5Tp0serDneMbD0XJnnQKOZTI=; b=BxHBM4b9ULo1IOmmp+yYoLbHzA
+        T7jAwmuzi3nMiMuX4tSkT/PrHmdvmiGIRtRT/UkrGY+MQn3UjhuH9epQ5p+ZfcNl6+MGqcoaQTzOA
+        3u9fGYgTMy7MutsAZYCmCG0OHhLpFF54+pcZVvNUrQol7VN1x8yplUX+rdXTzoCUqFlzpK8rwKzOJ
+        diBnw2RUzvs+/6D90s2sCtbcRqjpD9AINeb0tex9RhkHpmLzu0NaLJXeHfsRlLizZU5m9K5zi40tm
+        QNvThKpybBm2o4UpU5v+Xa3rIySjTRMa2Ah7VNAJ7CBgXfTwVgoU6hQwCFVDeU9jgxIKa2NtGEDov
+        vygqBJ+w==;
+Received: from [2601:1c0:6280:3f0::aec2]
+        by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
+        id 1l8BdT-0004md-Uz; Sat, 06 Feb 2021 00:39:40 +0000
+Subject: Re: [PATCH v4 1/2] procfs: Allow reading fdinfo with PTRACE_MODE_READ
+To:     Kalesh Singh <kaleshsingh@google.com>
+Cc:     jannh@google.com, jeffv@google.com, keescook@chromium.org,
+        surenb@google.com, minchan@kernel.org, hridya@google.com,
+        christian.koenig@amd.com, kernel-team@android.com,
+        Alexey Dobriyan <adobriyan@gmail.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Xin Long <lucien.xin@gmail.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, Ingo Molnar <mingo@redhat.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Andy Lutomirski <luto@kernel.org>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Vlad Yasevich <vyasevich@gmail.com>,
-        Neil Horman <nhorman@tuxdriver.com>,
-        Marcelo Ricardo Leitner <marcelo.leitner@gmail.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        linux-sctp@vger.kernel.org, netdev@vger.kernel.org
-Subject: Re: [PATCH 0/3] Fix some seq_file users that were recently broken
-Message-Id: <20210205143550.58d3530918459eafa918ad0c@linux-foundation.org>
-In-Reply-To: <161248518659.21478.2484341937387294998.stgit@noble1>
-References: <161248518659.21478.2484341937387294998.stgit@noble1>
-X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
-Mime-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Michal Hocko <mhocko@suse.com>,
+        Alexey Gladkov <gladkov.alexey@gmail.com>,
+        NeilBrown <neilb@suse.de>, Szabolcs Nagy <szabolcs.nagy@arm.com>,
+        "Eric W. Biederman" <ebiederm@xmission.com>,
+        Michel Lespinasse <walken@google.com>,
+        Bernd Edlinger <bernd.edlinger@hotmail.de>,
+        Andrei Vagin <avagin@gmail.com>,
+        Yafang Shao <laoar.shao@gmail.com>,
+        Christian Brauner <christian.brauner@ubuntu.com>,
+        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-doc@vger.kernel.org
+References: <20210205213353.669122-1-kaleshsingh@google.com>
+From:   Randy Dunlap <rdunlap@infradead.org>
+Message-ID: <fe8780a1-364e-ec8f-48ee-192438d52c01@infradead.org>
+Date:   Fri, 5 Feb 2021 16:39:29 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.4.0
+MIME-Version: 1.0
+In-Reply-To: <20210205213353.669122-1-kaleshsingh@google.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, 05 Feb 2021 11:36:30 +1100 NeilBrown <neilb@suse.de> wrote:
-
-> A recent change to seq_file broke some users which were using seq_file
-> in a non-"standard" way ...  though the "standard" isn't documented, so
-> they can be excused.  The result is a possible leak - of memory in one
-> case, of references to a 'transport' in the other.
+On 2/5/21 1:33 PM, Kalesh Singh wrote:
+> Android captures per-process system memory state when certain low memory
+> events (e.g a foreground app kill) occur, to identify potential memory
+> hoggers. In order to measure how much memory a process actually consumes,
+> it is necessary to include the DMA buffer sizes for that process in the
+> memory accounting. Since the handle to DMA buffers are raw FDs, it is
+> important to be able to identify which processes have FD references to
+> a DMA buffer.
 > 
-> These three patches:
->  1/ document and explain the problem
->  2/ fix the problem user in x86
->  3/ fix the problem user in net/sctp
+> Currently, DMA buffer FDs can be accounted using /proc/<pid>/fd/* and
+> /proc/<pid>/fdinfo -- both are only readable by the process owner,
+> as follows:
+>   1. Do a readlink on each FD.
+>   2. If the target path begins with "/dmabuf", then the FD is a dmabuf FD.
+>   3. stat the file to get the dmabuf inode number.
+>   4. Read/ proc/<pid>/fdinfo/<fd>, to get the DMA buffer size.
 > 
+> Accessing other processes’ fdinfo requires root privileges. This limits
 
-1f4aace60b0e ("fs/seq_file.c: simplify seq_file iteration code and
-interface") was August 2018, so I don't think "recent" applies here?
+Tangential:
+Please just use ASCII "'" -- it's good enough.
 
-I didn't look closely, but it appears that the sctp procfs file is
-world-readable.  So we gave unprivileged userspace the ability to leak
-kernel memory?
+> the use of the interface to debugging environments and is not suitable
+> for production builds.  Granting root privileges even to a system process
+> increases the attack surface and is highly undesirable.
+> 
+> Since fdinfo doesn't permit reading process memory and manipulating
+> process state, allow accessing fdinfo under PTRACE_MODE_READ_FSCRED.
+> 
+> Suggested-by: Jann Horn <jannh@google.com>
+> Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
+> ---
+> Changes in v2:
+>   - Update patch description
+> 
+>  fs/proc/base.c |  4 ++--
+>  fs/proc/fd.c   | 15 ++++++++++++++-
+>  2 files changed, 16 insertions(+), 3 deletions(-)
 
-So I'm thinking that we aim for 5.12-rc1 on all three patches with a cc:stable?
+
+-- 
+~Randy
+
