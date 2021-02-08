@@ -2,109 +2,177 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 76B6E313846
-	for <lists+linux-doc@lfdr.de>; Mon,  8 Feb 2021 16:43:12 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 806F931389A
+	for <lists+linux-doc@lfdr.de>; Mon,  8 Feb 2021 16:55:11 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233744AbhBHPl3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 8 Feb 2021 10:41:29 -0500
-Received: from mail.kernel.org ([198.145.29.99]:41384 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233758AbhBHPjk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 8 Feb 2021 10:39:40 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 68DDF64E88;
-        Mon,  8 Feb 2021 15:38:59 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1612798739;
-        bh=C034IrTVhQbEJ3ajlv6WrWRUJxx8ppxLnRBANxOdy/g=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
-        b=r9jJGCr7R7RYEvSKD0hZSi3jCz2TF2ak9cxeLBc0NcajP5yDMbVVDR8Y3MJK0Ybt+
-         XbG01QWnofikSLxL7rSQMT7PaVCM+D3xUxfkdk8EY+p5zmiI6NZclcNCOBFRHHwy7I
-         d/zniqlCOOaqNAt/MxN7BlnotwcMKSrlquS7QHLuwo8zU0NmbWsLrX7fBkn64kXWa2
-         pSq1q7cDjmcnXMOePwl/J8W4ebq1UyAa5y5+8+0Xvlll56Zv3Wd/alAGk5ydbSZfgi
-         a41buJgmsI+2YFuVA3tWBcng7EbJaE3IuZ5OeudOU0MyHUeG7NjPh7Lu7hbU02yxfw
-         CWn1NMAWRWtIA==
-Received: by mail-qk1-f176.google.com with SMTP id l27so14725180qki.9;
-        Mon, 08 Feb 2021 07:38:59 -0800 (PST)
-X-Gm-Message-State: AOAM5320fQnblUl7oFMJebOepkd3sx5cqd0xxOYIMHfIfuRKWE6Cprrw
-        I48edlOzrLmVtM9V5Fn/9EJXuH2f245G65LbGw==
-X-Google-Smtp-Source: ABdhPJwUlbH9545MTd15G8WLEpDvOJelS15H4dOXXykl4felpUc4bGpib+NBOAQICuAM4jKRlXweB35IiC3gXZN0+r0=
-X-Received: by 2002:a05:620a:22c5:: with SMTP id o5mr16753642qki.364.1612798738274;
- Mon, 08 Feb 2021 07:38:58 -0800 (PST)
-MIME-Version: 1.0
-References: <20210205222644.2357303-1-saravanak@google.com> <20210205222644.2357303-9-saravanak@google.com>
-In-Reply-To: <20210205222644.2357303-9-saravanak@google.com>
-From:   Rob Herring <robh+dt@kernel.org>
-Date:   Mon, 8 Feb 2021 09:38:46 -0600
-X-Gmail-Original-Message-ID: <CAL_JsqJc8XRAL5Bj5LpH0M528K7ZL=wSqt8t=ibwjWutjCgB-Q@mail.gmail.com>
-Message-ID: <CAL_JsqJc8XRAL5Bj5LpH0M528K7ZL=wSqt8t=ibwjWutjCgB-Q@mail.gmail.com>
-Subject: Re: [PATCH v4 8/8] clk: Mark fwnodes when their clock provider is added/removed
-To:     Saravana Kannan <saravanak@google.com>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J. Wysocki" <rafael@kernel.org>,
-        Kevin Hilman <khilman@kernel.org>,
-        Ulf Hansson <ulf.hansson@linaro.org>,
-        Len Brown <len.brown@intel.com>, Len Brown <lenb@kernel.org>,
-        Pavel Machek <pavel@ucw.cz>,
-        Michael Turquette <mturquette@baylibre.com>,
-        Stephen Boyd <sboyd@kernel.org>,
-        Frank Rowand <frowand.list@gmail.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "open list:THERMAL" <linux-pm@vger.kernel.org>,
-        linux-clk <linux-clk@vger.kernel.org>,
-        devicetree@vger.kernel.org,
-        "open list:ACPI FOR ARM64 (ACPI/arm64)" <linux-acpi@vger.kernel.org>,
-        Marek Szyprowski <m.szyprowski@samsung.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Android Kernel Team <kernel-team@android.com>
+        id S233186AbhBHPyY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 8 Feb 2021 10:54:24 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60928 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234213AbhBHPx7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 8 Feb 2021 10:53:59 -0500
+Received: from mail-yb1-xb4a.google.com (mail-yb1-xb4a.google.com [IPv6:2607:f8b0:4864:20::b4a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6631DC06178B
+        for <linux-doc@vger.kernel.org>; Mon,  8 Feb 2021 07:53:19 -0800 (PST)
+Received: by mail-yb1-xb4a.google.com with SMTP id 203so17375680ybz.2
+        for <linux-doc@vger.kernel.org>; Mon, 08 Feb 2021 07:53:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=sender:date:message-id:mime-version:subject:from:cc;
+        bh=KABW1PbKP87UHlmwOVcrjPZPD/KiH4IFW6HwyHI8HLw=;
+        b=k+plAvQWKUQQEFSYtdDrmR64LjfOFfyNvE5bQyLeuXXk0gQM9M1YLhI+Kpb8Pq6RRy
+         xXUgZ8Lu748qxXqRshn9BfzpFkBuZqYWwc0HB+CQPVijF0hLdpKZa0Wx4BE7Cq3qKTcG
+         4YemrGBQUUzxrqVLCDIK+5YyUj35ExFZfnKSA5iVF/fkayXaj4lu7prTK/0JiyDIhICI
+         fXnLZV8WgGU72cjZral6rTKmmKeGcLVviG4fVVZG1/XbYWgaMoD+guk+XrCXEOwOG7++
+         Q2YwHsK7pUuG96I5oZHtxrbJLTTP4zgpIcc4M/9Rss6yk5IY9M17KM/eqzugs31WXzmT
+         5VjA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:sender:date:message-id:mime-version:subject:from
+         :cc;
+        bh=KABW1PbKP87UHlmwOVcrjPZPD/KiH4IFW6HwyHI8HLw=;
+        b=ls2cbn3GBLvk7O2T1PkbV+cq1bEAFQ06pLAbCMT/u2FTHJG0ztAJahPLktjPFQzCms
+         UFZ10MzEZvS7F6AQKQMYDQDTczckH+x3vXdd3OuhSRYmTvErNN31Nc/aHulCMDGP/jb+
+         5+WgFQBlUw5RP8gXoB8p9bzUmK+COiM/poeMV1UbQ4VGTTEqSD9lOWRrCOiC2ovj0FRr
+         Rx6yWl1t36bxIkrcjS6gZIi0dNod408AYfDW5MPmKAf2AGRVd3l8qyTcG+1C6VlcM/Lt
+         sItWERreaZSACardjGKrZ+Wmj6I2Rzy8Uhdr/SgzY+F0Ei4Q++w/cgY07BZf2vI8HOtp
+         ovaA==
+X-Gm-Message-State: AOAM5336TGryrSO9kqG8xqK+hWsffD3NtYshrCAciQPBldbvMboK/SWB
+        NcoPEouoTGiyGyuuKA+OXLTFaxpjnsi51EolXA==
+X-Google-Smtp-Source: ABdhPJy5TCKk45UVECdZNGWDZgT1hEcr/O9DAIgFSw2AggyhYlchwyA7OBiwJdM5EuiQp2ZNxIUAKTng2zlyA28byw==
+Sender: "kaleshsingh via sendgmr" <kaleshsingh@kaleshsingh.c.googlers.com>
+X-Received: from kaleshsingh.c.googlers.com ([fda3:e722:ac3:10:14:4d90:c0a8:2145])
+ (user=kaleshsingh job=sendgmr) by 2002:a25:a267:: with SMTP id
+ b94mr25868498ybi.218.1612799598492; Mon, 08 Feb 2021 07:53:18 -0800 (PST)
+Date:   Mon,  8 Feb 2021 15:53:06 +0000
+Message-Id: <20210208155315.1367371-1-kaleshsingh@google.com>
+Mime-Version: 1.0
+X-Mailer: git-send-email 2.30.0.478.g8a0d178c01-goog
+Subject: [PATCH v6 1/2] procfs: Allow reading fdinfo with PTRACE_MODE_READ
+From:   Kalesh Singh <kaleshsingh@google.com>
+Cc:     jannh@google.com, jeffv@google.com, keescook@chromium.org,
+        surenb@google.com, minchan@kernel.org, hridya@google.com,
+        rdunlap@infradead.org, christian.koenig@amd.com,
+        willy@infradead.org, kernel-team@android.com,
+        Kalesh Singh <kaleshsingh@google.com>,
+        Alexey Dobriyan <adobriyan@gmail.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Michal Hocko <mhocko@suse.com>,
+        Alexey Gladkov <gladkov.alexey@gmail.com>,
+        NeilBrown <neilb@suse.de>,
+        "Eric W. Biederman" <ebiederm@xmission.com>,
+        Daniel Jordan <daniel.m.jordan@oracle.com>,
+        Michel Lespinasse <walken@google.com>,
+        Bernd Edlinger <bernd.edlinger@hotmail.de>,
+        Andrei Vagin <avagin@gmail.com>,
+        Yafang Shao <laoar.shao@gmail.com>,
+        Christian Brauner <christian.brauner@ubuntu.com>,
+        linux-kernel@vger.kernel.org, linux-fsdevel@vger.kernel.org,
+        linux-doc@vger.kernel.org
 Content-Type: text/plain; charset="UTF-8"
+To:     unlisted-recipients:; (no To-header on input)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Feb 5, 2021 at 4:27 PM Saravana Kannan <saravanak@google.com> wrote:
->
-> This allows fw_devlink to recognize clock provider drivers that don't
-> use the device-driver model to initialize the device. fw_devlink will
-> use this information to make sure consumers of such clock providers
-> aren't indefinitely blocked from probing, waiting for the power domain
-> device to appear and bind to a driver.
+Android captures per-process system memory state when certain low memory
+events (e.g a foreground app kill) occur, to identify potential memory
+hoggers. In order to measure how much memory a process actually consumes,
+it is necessary to include the DMA buffer sizes for that process in the
+memory accounting. Since the handle to DMA buffers are raw FDs, it is
+important to be able to identify which processes have FD references to
+a DMA buffer.
 
-Don't we have cases that are a mixture? IOW, a subset of the clock
-provider is initialized early, then the full driver takes over. You'd
-want consumers that are not a driver to succeed, but drivers to defer
-until the full driver is up.
+Currently, DMA buffer FDs can be accounted using /proc/<pid>/fd/* and
+/proc/<pid>/fdinfo -- both are only readable by the process owner,
+as follows:
+  1. Do a readlink on each FD.
+  2. If the target path begins with "/dmabuf", then the FD is a dmabuf FD.
+  3. stat the file to get the dmabuf inode number.
+  4. Read/ proc/<pid>/fdinfo/<fd>, to get the DMA buffer size.
 
->
-> Signed-off-by: Saravana Kannan <saravanak@google.com>
-> ---
->  drivers/clk/clk.c | 3 +++
->  1 file changed, 3 insertions(+)
->
-> diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
-> index 8c1d04db990d..27ff90eacb1f 100644
-> --- a/drivers/clk/clk.c
-> +++ b/drivers/clk/clk.c
-> @@ -4555,6 +4555,8 @@ int of_clk_add_provider(struct device_node *np,
->         if (ret < 0)
->                 of_clk_del_provider(np);
->
-> +       fwnode_dev_initialized(&np->fwnode, true);
-> +
->         return ret;
->  }
->  EXPORT_SYMBOL_GPL(of_clk_add_provider);
-> @@ -4672,6 +4674,7 @@ void of_clk_del_provider(struct device_node *np)
->         list_for_each_entry(cp, &of_clk_providers, link) {
->                 if (cp->node == np) {
->                         list_del(&cp->link);
-> +                       fwnode_dev_initialized(&np->fwnode, false);
->                         of_node_put(cp->node);
->                         kfree(cp);
->                         break;
-> --
-> 2.30.0.478.g8a0d178c01-goog
->
+Accessing other processes' fdinfo requires root privileges. This limits
+the use of the interface to debugging environments and is not suitable
+for production builds.  Granting root privileges even to a system process
+increases the attack surface and is highly undesirable.
+
+Since fdinfo doesn't permit reading process memory and manipulating
+process state, allow accessing fdinfo under PTRACE_MODE_READ_FSCRED.
+
+Suggested-by: Jann Horn <jannh@google.com>
+Signed-off-by: Kalesh Singh <kaleshsingh@google.com>
+---
+Changes in v2:
+  - Update patch description
+
+ fs/proc/base.c |  4 ++--
+ fs/proc/fd.c   | 15 ++++++++++++++-
+ 2 files changed, 16 insertions(+), 3 deletions(-)
+
+diff --git a/fs/proc/base.c b/fs/proc/base.c
+index b3422cda2a91..a37f9de7103f 100644
+--- a/fs/proc/base.c
++++ b/fs/proc/base.c
+@@ -3160,7 +3160,7 @@ static const struct pid_entry tgid_base_stuff[] = {
+ 	DIR("task",       S_IRUGO|S_IXUGO, proc_task_inode_operations, proc_task_operations),
+ 	DIR("fd",         S_IRUSR|S_IXUSR, proc_fd_inode_operations, proc_fd_operations),
+ 	DIR("map_files",  S_IRUSR|S_IXUSR, proc_map_files_inode_operations, proc_map_files_operations),
+-	DIR("fdinfo",     S_IRUSR|S_IXUSR, proc_fdinfo_inode_operations, proc_fdinfo_operations),
++	DIR("fdinfo",     S_IRUGO|S_IXUGO, proc_fdinfo_inode_operations, proc_fdinfo_operations),
+ 	DIR("ns",	  S_IRUSR|S_IXUGO, proc_ns_dir_inode_operations, proc_ns_dir_operations),
+ #ifdef CONFIG_NET
+ 	DIR("net",        S_IRUGO|S_IXUGO, proc_net_inode_operations, proc_net_operations),
+@@ -3504,7 +3504,7 @@ static const struct inode_operations proc_tid_comm_inode_operations = {
+  */
+ static const struct pid_entry tid_base_stuff[] = {
+ 	DIR("fd",        S_IRUSR|S_IXUSR, proc_fd_inode_operations, proc_fd_operations),
+-	DIR("fdinfo",    S_IRUSR|S_IXUSR, proc_fdinfo_inode_operations, proc_fdinfo_operations),
++	DIR("fdinfo",    S_IRUGO|S_IXUGO, proc_fdinfo_inode_operations, proc_fdinfo_operations),
+ 	DIR("ns",	 S_IRUSR|S_IXUGO, proc_ns_dir_inode_operations, proc_ns_dir_operations),
+ #ifdef CONFIG_NET
+ 	DIR("net",        S_IRUGO|S_IXUGO, proc_net_inode_operations, proc_net_operations),
+diff --git a/fs/proc/fd.c b/fs/proc/fd.c
+index cb51763ed554..585e213301f9 100644
+--- a/fs/proc/fd.c
++++ b/fs/proc/fd.c
+@@ -6,6 +6,7 @@
+ #include <linux/fdtable.h>
+ #include <linux/namei.h>
+ #include <linux/pid.h>
++#include <linux/ptrace.h>
+ #include <linux/security.h>
+ #include <linux/file.h>
+ #include <linux/seq_file.h>
+@@ -72,6 +73,18 @@ static int seq_show(struct seq_file *m, void *v)
+ 
+ static int seq_fdinfo_open(struct inode *inode, struct file *file)
+ {
++	bool allowed = false;
++	struct task_struct *task = get_proc_task(inode);
++
++	if (!task)
++		return -ESRCH;
++
++	allowed = ptrace_may_access(task, PTRACE_MODE_READ_FSCREDS);
++	put_task_struct(task);
++
++	if (!allowed)
++		return -EACCES;
++
+ 	return single_open(file, seq_show, inode);
+ }
+ 
+@@ -307,7 +320,7 @@ static struct dentry *proc_fdinfo_instantiate(struct dentry *dentry,
+ 	struct proc_inode *ei;
+ 	struct inode *inode;
+ 
+-	inode = proc_pid_make_inode(dentry->d_sb, task, S_IFREG | S_IRUSR);
++	inode = proc_pid_make_inode(dentry->d_sb, task, S_IFREG | S_IRUGO);
+ 	if (!inode)
+ 		return ERR_PTR(-ENOENT);
+ 
+-- 
+2.30.0.478.g8a0d178c01-goog
+
