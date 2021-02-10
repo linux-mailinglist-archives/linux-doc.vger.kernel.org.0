@@ -2,55 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 41909316497
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Feb 2021 12:06:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 86BB4316597
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Feb 2021 12:48:43 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230499AbhBJLG3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 10 Feb 2021 06:06:29 -0500
-Received: from mta02.infotec.mx ([207.249.113.20]:45152 "EHLO mta02.infotec.mx"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231447AbhBJLE1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 10 Feb 2021 06:04:27 -0500
-X-Greylist: delayed 1319 seconds by postgrey-1.27 at vger.kernel.org; Wed, 10 Feb 2021 06:04:26 EST
-Received: from mta02.infotec.mx (localhost [127.0.0.1])
-        by mta02.infotec.mx (Postfix) with ESMTPS id 5182AAD637F2;
-        Wed, 10 Feb 2021 04:32:35 -0600 (CST)
-Received: from localhost (localhost [127.0.0.1])
-        by mta02.infotec.mx (Postfix) with ESMTP id 4A70EA617D0F;
-        Wed, 10 Feb 2021 04:22:38 -0600 (CST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mta02.infotec.mx 4A70EA617D0F
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=infotec.mx;
-        s=dkiminfotec; t=1612952558;
-        bh=Y5M8M/Pmz7vhvySj3WjncMbC7FqeDyPRaiLdnTcwuuE=;
-        h=MIME-Version:To:From:Date:Message-Id;
-        b=nAJs3c4nFFYWDXQaPs3qW7o0xiUheGW3C5+02wCY24VtdGWcHMXrbbZCsZwa1VCJk
-         bWU0z+q7RARoeTuhren0Apf63Tjf4UwkNY4anUT9g9wTJ8bZPbrfaP8A6Y1JcYmNPn
-         IEVbvavWvXJ/Ez6v2mg7wyb8rU/6C0cnb0ozH6lguei+tMCQzjTyJ7SfZhNXNh0E7D
-         HfUhEIUFYIQEGhNCzuwb+pl4RwapB6W+ReDWZybziWIdgHqaXhgSBB5KxrZIxGYut3
-         HxJHfLP18HhBjDlI68au7OF4aDPn+4vo529D8oxu7zS+GmIVVji3ugdTrOGru9BcRM
-         Yr3MKbJqvTlXw==
-X-Virus-Scanned: amavisd-new at mta02.infotec.mx
-Received: from mta02.infotec.mx ([127.0.0.1])
-        by localhost (mta02.infotec.mx [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id tszw88JfKqDJ; Wed, 10 Feb 2021 04:22:38 -0600 (CST)
-Received: from [192.168.100.103] (unknown [105.12.6.23])
-        by mta02.infotec.mx (Postfix) with ESMTPSA id AA61DB1CCF6F;
-        Wed, 10 Feb 2021 04:22:19 -0600 (CST)
-Content-Type: text/plain; charset="iso-8859-1"
+        id S231431AbhBJLsT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 10 Feb 2021 06:48:19 -0500
+Received: from esa.microchip.iphmx.com ([68.232.153.233]:53048 "EHLO
+        esa.microchip.iphmx.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231260AbhBJLqN (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Feb 2021 06:46:13 -0500
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+  d=microchip.com; i=@microchip.com; q=dns/txt; s=mchp;
+  t=1612957572; x=1644493572;
+  h=from:to:cc:subject:date:message-id:in-reply-to:
+   references:mime-version:content-transfer-encoding;
+  bh=HiRooR0JRPW34th/7QSHeDW6g1Xmz/WY9IkNdXFN45o=;
+  b=XfUqdweFbC/6vzRVj/mX53tPvRbWTx2asMr2LtKB+S27ggN2Iz5USJ6H
+   toWzlY0NF28TrX/n6NELdiNqu0kr7+OiY+sVItJ30Sgh7Z6A6OpkZ+2uh
+   CX9+nNBO5mhAUPKmNxPjYYL10QSELyBIIfLa2keByWbNhKh6u1eDf38Xq
+   RprVo2Ql/dRESLvgsmiHzgYdDf2zE7fOgz79t2vSSg8sRRv6i6ikymtwa
+   gALslvPkMakBlP5ubrJIOOcstZbvvxuJU2m2W08BX3XoXGYgTHmbhm88q
+   tpcTFR30ONpkd7Awy0i1t3ipp09cWKv1i37HIcSEvTX16Gx6WD58NIsmE
+   g==;
+IronPort-SDR: OJzOT1L7uR9EmsWc/byKWwNOkbxZX5ra5Qezzd8kgRQ5TkFJOnClQLYVRAhlaYG4DOUZBeg/Du
+ tc8jDnu5zgYjn1ZPne5vnQclQ/SYOg7EDOT27/vbn4zYVlcGyyBzd7dsK8QHtlPv3W9LLuWXs5
+ fA0+sXRCAF8SDN7JnFwc5KXcjkH2HaRAjecHslK0blQ16mHCN17TgsS3p4WSbpWKZS89oiviWC
+ In5HEVkM+jLk/NmesobzktSTduQGvBR6xxpa4cZzRegMmsvSlTBAHcBublgXQlWf3a5D+JaVrx
+ yBY=
+X-IronPort-AV: E=Sophos;i="5.81,168,1610434800"; 
+   d="scan'208";a="114541425"
+Received: from smtpout.microchip.com (HELO email.microchip.com) ([198.175.253.82])
+  by esa1.microchip.iphmx.com with ESMTP/TLS/AES256-SHA256; 10 Feb 2021 04:44:54 -0700
+Received: from chn-vm-ex01.mchp-main.com (10.10.85.143) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256) id
+ 15.1.1979.3; Wed, 10 Feb 2021 04:44:53 -0700
+Received: from atudor-ThinkPad-T470p.amer.actel.com (10.10.115.15) by
+ chn-vm-ex01.mchp-main.com (10.10.85.143) with Microsoft SMTP Server id
+ 15.1.1979.3 via Frontend Transport; Wed, 10 Feb 2021 04:44:47 -0700
+From:   Tudor Ambarus <tudor.ambarus@microchip.com>
+To:     <corbet@lwn.net>, <gregkh@linuxfoundation.org>,
+        <rafael@kernel.org>, <khilman@kernel.org>,
+        <ulf.hansson@linaro.org>, <len.brown@intel.com>, <lenb@kernel.org>,
+        <pavel@ucw.cz>, <mturquette@baylibre.com>, <sboyd@kernel.org>,
+        <robh+dt@kernel.org>, <frowand.list@gmail.com>, <maz@kernel.org>,
+        <tglx@linutronix.de>, <saravanak@google.com>
+CC:     <nicolas.ferre@microchip.com>, <claudiu.beznea@microchip.com>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <linux-pm@vger.kernel.org>, <linux-clk@vger.kernel.org>,
+        <devicetree@vger.kernel.org>, <linux-acpi@vger.kernel.org>,
+        <m.szyprowski@samsung.com>, <geert@linux-m68k.org>,
+        <kernel-team@android.com>,
+        Tudor Ambarus <tudor.ambarus@microchip.com>
+Subject: [PATCH] clk: Mark fwnodes when their clock provider is added
+Date:   Wed, 10 Feb 2021 13:44:34 +0200
+Message-ID: <20210210114435.122242-1-tudor.ambarus@microchip.com>
+X-Mailer: git-send-email 2.25.1
+In-Reply-To: <20210205222644.2357303-9-saravanak@google.com>
+References: <20210205222644.2357303-9-saravanak@google.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: =?utf-8?q?Sie_haben_eine_Spende_von_=E2=82=AC_2=2E000=2E000=2C00?=
-To:     Recipients <sandra.marin@infotec.mx>
-From:   <sandra.marin@infotec.mx>
-Date:   Wed, 10 Feb 2021 12:22:19 +0200
-Reply-To: billlawrencedonations@yahoo.com
-Message-Id: <20210210102220.AA61DB1CCF6F@mta02.infotec.mx>
-X-Spam: Yes
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Sie wurden ausgew=E4hlt, um eine Geldspende von 2.000.000,00 Euro von Bill =
-Lawrence zu erhalten. Antwort f=FCr weitere Informationen. Senden Sie eine =
-E-Mail an: billlawrencedonations@yahoo.com
+This is a follow-up for:
+commit 3c9ea42802a1 ("clk: Mark fwnodes when their clock provider is added/removed")
+
+The above commit updated the deprecated of_clk_add_provider(),
+but missed to update the preferred of_clk_add_hw_provider().
+Update it now.
+
+Signed-off-by: Tudor Ambarus <tudor.ambarus@microchip.com>
+---
+ drivers/clk/clk.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/clk/clk.c b/drivers/clk/clk.c
+index 27ff90eacb1f..9370e4dfecae 100644
+--- a/drivers/clk/clk.c
++++ b/drivers/clk/clk.c
+@@ -4594,6 +4594,8 @@ int of_clk_add_hw_provider(struct device_node *np,
+ 	if (ret < 0)
+ 		of_clk_del_provider(np);
+ 
++	fwnode_dev_initialized(&np->fwnode, true);
++
+ 	return ret;
+ }
+ EXPORT_SYMBOL_GPL(of_clk_add_hw_provider);
+-- 
+2.25.1
+
