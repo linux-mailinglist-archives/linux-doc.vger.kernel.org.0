@@ -2,97 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9C0F6316D9C
-	for <lists+linux-doc@lfdr.de>; Wed, 10 Feb 2021 19:02:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BCFF6316DF7
+	for <lists+linux-doc@lfdr.de>; Wed, 10 Feb 2021 19:09:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232732AbhBJSCE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 10 Feb 2021 13:02:04 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58624 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233738AbhBJR74 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 10 Feb 2021 12:59:56 -0500
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com [IPv6:2607:f8b0:4864:20::f35])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id DC303C061786
-        for <linux-doc@vger.kernel.org>; Wed, 10 Feb 2021 09:59:15 -0800 (PST)
-Received: by mail-qv1-xf35.google.com with SMTP id a1so1247741qvd.13
-        for <linux-doc@vger.kernel.org>; Wed, 10 Feb 2021 09:59:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=ziepe.ca; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=mEPuatLoyym+J6ItA3BIfCEOLL8sQ3QwAzMr1dNPupk=;
-        b=jW9PVjGrRwIiTu0DvrBNx4ykL4I0ErasGCeEaMHeyrXRbfEG9LB3dcE8vE11UBawk6
-         1G1tcdRNTWBDtUg+fhfGsQMXOWfqjp3mTLwZKFq4HmTvwSr/K8tGSYW63Zm+KpQxHBXW
-         u0ZOrWnXE5JBPOQyNkpBsjDIpzJF/xZBBZ9sBVx4nngGJfwe8dUE8XiCc/Io+j7LyXb3
-         qrq9PeYWhfP2y1Eo2XwOk5F4UEKCmphlVy4z7L2moVXVcz43s9cOi+RdntHzTecyr9XT
-         0EAPy3emAM7JVX2q3gq8vXafguG5d+qLtIeyiWB7Whu98AaOeG5oA/d4Anm2Sc/eA5pZ
-         rwJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=mEPuatLoyym+J6ItA3BIfCEOLL8sQ3QwAzMr1dNPupk=;
-        b=OZT1GLgp94j6JuOgI3XeS81PxCvzwLkh+NL9KPA+RugRedqx734lZDuWoktxCpnVgC
-         F3mg3iYkkrlQcOzKB8CB+p5E7Q4xCR/Ghm8B6khApjhUo4tLcc+yjMUDZHjNwrKlq1l6
-         VTzAW4Fw68OHbubMXuQwMN7AsnyrrH/UIqjYjhoaGMkJm1vVo+LnhlXVZhaR23XZQgmI
-         w6kimJm9NztI9NfJctiWD6lmz30DKlOhEnEXgPUmT/4BmP63xSMSo0rexMJd0/W3o4OS
-         DtzTEuzSePDp+p9Za9cZ9Zg++URs0Dps+gJ0lhuJxHNIoAsegI/r4CN+K1bBSeXk1uxx
-         P3MA==
-X-Gm-Message-State: AOAM533kmab1SeS/ZiT28Ezu0QYXWpYnZm2uVjCUMAeL4oY8AN0yVlj/
-        2jnLdEodjsVHb2ZWcfFdqBKYvg==
-X-Google-Smtp-Source: ABdhPJxwZzRaoXxpNKuY9U9fnfERIckZW7aYN7mA/qmqVG4TxZ7Frx9umWXL+42aGA2CymOfvFagoA==
-X-Received: by 2002:a0c:ed42:: with SMTP id v2mr3900087qvq.15.1612979954649;
-        Wed, 10 Feb 2021 09:59:14 -0800 (PST)
-Received: from ziepe.ca (hlfxns017vw-142-162-115-133.dhcp-dynamic.fibreop.ns.bellaliant.net. [142.162.115.133])
-        by smtp.gmail.com with ESMTPSA id p16sm1742656qtq.24.2021.02.10.09.59.14
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 10 Feb 2021 09:59:14 -0800 (PST)
-Received: from jgg by mlx with local (Exim 4.94)
-        (envelope-from <jgg@ziepe.ca>)
-        id 1l9tlh-006895-Mz; Wed, 10 Feb 2021 13:59:13 -0400
-Date:   Wed, 10 Feb 2021 13:59:13 -0400
-From:   Jason Gunthorpe <jgg@ziepe.ca>
-To:     John Hubbard <jhubbard@nvidia.com>
-Cc:     Daniel Vetter <daniel@ffwll.ch>,
-        Alistair Popple <apopple@nvidia.com>,
-        Linux MM <linux-mm@kvack.org>,
-        Nouveau Dev <nouveau@lists.freedesktop.org>,
-        Ben Skeggs <bskeggs@redhat.com>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        kvm-ppc@vger.kernel.org,
-        dri-devel <dri-devel@lists.freedesktop.org>,
-        Ralph Campbell <rcampbell@nvidia.com>,
-        Jerome Glisse <jglisse@redhat.com>
-Subject: Re: [PATCH 0/9] Add support for SVM atomics in Nouveau
-Message-ID: <20210210175913.GO4718@ziepe.ca>
-References: <20210209010722.13839-1-apopple@nvidia.com>
- <CAKMK7uGwg2-DTU7Zrco=TSkcR4yTqN1AF0hvVYEAbuj4BUYi5Q@mail.gmail.com>
- <3426910.QXTomnrpqD@nvdebian>
- <CAKMK7uHp+BzHF1=JhKjv5HYm_j0SVqsGdRqjUxVFYx4GSEPucg@mail.gmail.com>
- <57fe0deb-8bf6-d3ee-3545-11109e946528@nvidia.com>
+        id S233591AbhBJSHd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 10 Feb 2021 13:07:33 -0500
+Received: from mga07.intel.com ([134.134.136.100]:19693 "EHLO mga07.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S233199AbhBJSE2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 10 Feb 2021 13:04:28 -0500
+IronPort-SDR: OATUapw/TctPpfgwYIitU52itFbsVVktFlJONhgZGzDpx9eYnWFjDIadESlBmT0fGRizXrt85k
+ PyXkJw9sejzg==
+X-IronPort-AV: E=McAfee;i="6000,8403,9891"; a="246189800"
+X-IronPort-AV: E=Sophos;i="5.81,168,1610438400"; 
+   d="scan'208";a="246189800"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2021 10:02:56 -0800
+IronPort-SDR: IWazrkUP5rGUVxzdHsy7ZSs1uBnTfJjgAZH53SQiN9snK+aRMapwJYi0UFqEd0BH+IvWp71B0q
+ sNGWjV7ohP5A==
+X-IronPort-AV: E=Sophos;i="5.81,168,1610438400"; 
+   d="scan'208";a="380239191"
+Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
+  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 10 Feb 2021 10:02:55 -0800
+From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
+To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>, <haitao.huang@intel.com>
+Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
+Subject: [PATCH v20 0/7] Control-flow Enforcement: Indirect Branch Tracking
+Date:   Wed, 10 Feb 2021 10:02:38 -0800
+Message-Id: <20210210180245.13770-1-yu-cheng.yu@intel.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <57fe0deb-8bf6-d3ee-3545-11109e946528@nvidia.com>
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Feb 09, 2021 at 12:53:27PM -0800, John Hubbard wrote:
+Control-flow Enforcement (CET) is a new Intel processor feature that blocks
+return/jump-oriented programming attacks.  Details are in "Intel 64 and
+IA-32 Architectures Software Developer's Manual" [1].
 
-> This direction sounds at least...possible. Using MMU notifiers instead of pins
-> is definitely appealing. I'm not quite clear on the callback idea above, but
-> overall it seems like taking advantage of the ZONE_DEVICE tracking of pages
-> (without having to put anything additional in each struct page), could work.
+This is the second part of CET and enables Indirect Branch Tracking (IBT).
+It is built on top of the shadow stack series.
 
-It isn't the ZONE_DEVICE page that needs to be tracked.
+Changes in v20:
+- Pick up Reviewed-by tags.
+- Rebase to Linus tree v5.11-rc7.
 
-Really what you want to do here is leave the CPU page in the VMA and
-the page tables where it started and deny CPU access to the page. Then
-all the proper machinery will continue to work.
+[1] Intel 64 and IA-32 Architectures Software Developer's Manual:
 
-IMHO "migration" is the wrong idea if the data isn't actually moving.
+    https://software.intel.com/en-us/download/intel-64-and-ia-32-
+    architectures-sdm-combined-volumes-1-2a-2b-2c-2d-3a-3b-3c-3d-and-4
 
-Jason
+[2] Indirect Branch Tracking patches v19:
+
+    https://lkml.kernel.org/r/20210203225902.479-1-yu-cheng.yu@intel.com/
+
+H.J. Lu (3):
+  x86/cet/ibt: Update arch_prctl functions for Indirect Branch Tracking
+  x86/vdso/32: Add ENDBR32 to __kernel_vsyscall entry point
+  x86/vdso: Insert endbr32/endbr64 to vDSO
+
+Yu-cheng Yu (4):
+  x86/cet/ibt: Update Kconfig for user-mode Indirect Branch Tracking
+  x86/cet/ibt: User-mode Indirect Branch Tracking support
+  x86/cet/ibt: Handle signals for Indirect Branch Tracking
+  x86/cet/ibt: Update ELF header parsing for Indirect Branch Tracking
+
+ arch/x86/Kconfig                         |  1 +
+ arch/x86/entry/vdso/Makefile             |  4 ++
+ arch/x86/entry/vdso/vdso32/system_call.S |  3 ++
+ arch/x86/include/asm/cet.h               |  3 ++
+ arch/x86/kernel/cet.c                    | 59 +++++++++++++++++++++++-
+ arch/x86/kernel/cet_prctl.c              |  5 ++
+ arch/x86/kernel/fpu/signal.c             |  8 ++--
+ arch/x86/kernel/process_64.c             |  8 ++++
+ 8 files changed, 86 insertions(+), 5 deletions(-)
+
+-- 
+2.21.0
+
