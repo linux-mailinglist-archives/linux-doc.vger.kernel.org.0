@@ -2,86 +2,85 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E9C2231C131
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Feb 2021 19:12:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 34DBC31C157
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Feb 2021 19:17:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229764AbhBOSLy (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 15 Feb 2021 13:11:54 -0500
-Received: from smtprelay0134.hostedemail.com ([216.40.44.134]:33400 "EHLO
-        smtprelay.hostedemail.com" rhost-flags-OK-OK-OK-FAIL)
-        by vger.kernel.org with ESMTP id S230105AbhBOSLv (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Feb 2021 13:11:51 -0500
-Received: from filter.hostedemail.com (clb03-v110.bra.tucows.net [216.40.38.60])
-        by smtprelay06.hostedemail.com (Postfix) with ESMTP id 37C57180060E3;
-        Mon, 15 Feb 2021 18:11:09 +0000 (UTC)
-X-Session-Marker: 6A6F6540706572636865732E636F6D
-X-Spam-Summary: 2,0,0,,d41d8cd98f00b204,joe@perches.com,,RULES_HIT:41:355:379:599:982:988:989:1260:1261:1277:1311:1313:1314:1345:1359:1437:1515:1516:1518:1534:1540:1593:1594:1711:1730:1747:1777:1792:2197:2199:2393:2553:2559:2562:2828:3138:3139:3140:3141:3142:3352:3622:3865:3866:3871:3872:3873:3874:4250:4321:4605:5007:6117:6119:6120:7652:7901:7903:8527:10004:10400:11232:11658:11914:12297:12740:12760:12895:13069:13161:13229:13311:13357:13439:14181:14659:21080:21221:21324:21611:21627:30054:30056:30090:30091,0,RBL:none,CacheIP:none,Bayesian:0.5,0.5,0.5,Netcheck:none,DomainCache:0,MSF:not bulk,SPF:,MSBL:0,DNSBL:none,Custom_rules:0:0:0,LFtime:1,LUA_SUMMARY:none
-X-HE-Tag: horse35_6111c282763d
-X-Filterd-Recvd-Size: 1908
-Received: from [192.168.43.37] (unknown [172.58.92.12])
-        (Authenticated sender: joe@perches.com)
-        by omf01.hostedemail.com (Postfix) with ESMTPA;
-        Mon, 15 Feb 2021 18:11:06 +0000 (UTC)
-Message-ID: <2162334bdf4d635f1414ffef52378c0f423366a7.camel@perches.com>
-Subject: Re: [PATCH RFC v3 2/3] docs: add documentation for checkpatch
-From:   Joe Perches <joe@perches.com>
-To:     Matthew Wilcox <willy@infradead.org>,
-        Dwaipayan Ray <dwaipayanray1@gmail.com>
-Cc:     linux-doc@vger.kernel.org, lukas.bulwahn@gmail.com,
-        linux-kernel-mentees@lists.linuxfoundation.org,
-        linux-kernel@vger.kernel.org
-Date:   Mon, 15 Feb 2021 10:11:03 -0800
-In-Reply-To: <20210214121501.GC2858050@casper.infradead.org>
-References: <20210213131513.51386-1-dwaipayanray1@gmail.com>
-         <20210213131513.51386-3-dwaipayanray1@gmail.com>
-         <20210214121501.GC2858050@casper.infradead.org>
-Content-Type: text/plain; charset="ISO-8859-1"
-User-Agent: Evolution 3.38.1-1 
+        id S230495AbhBOSQm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 15 Feb 2021 13:16:42 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:46018 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230507AbhBOSQf (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Feb 2021 13:16:35 -0500
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com [IPv6:2607:f8b0:4864:20::42a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4E803C0613D6;
+        Mon, 15 Feb 2021 10:15:55 -0800 (PST)
+Received: by mail-pf1-x42a.google.com with SMTP id m6so4655536pfk.1;
+        Mon, 15 Feb 2021 10:15:55 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=CaLpm+5J78M4+zCEbUWIB2sizz+gR6AHfJVO60Uso3o=;
+        b=Zlr6P8drhqgtwUWpogXsXLZg0ftRWKdW1LomVGnz4HxL6q0pYI2XK+3tdm4o3xeyLL
+         60jP014ys+YScSZeVBg0/eMXGwVgJ8WxqHBZCf46p0Br5c42zASiZMKbTbjqrl+kEMwh
+         ccL3X2dt6DkzMoBz+yDfsVMJdAKXvMjKgxzakJk3VoSk2DXdcpcYTcbjj85GW5reOKGa
+         4erKd5XlKdxAN3GMuVbOjx5Bzzcjyf1IVmDGH/lgFtmBWaHTLue/wXvviT6UbL9as+Hs
+         UvuOW/cj8ECTALRqp8tRxYv4Z9q2DyGOXbBbPIrS8gI69k9UVcvE+SMmGFzBv4deYcIt
+         ZnHg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=CaLpm+5J78M4+zCEbUWIB2sizz+gR6AHfJVO60Uso3o=;
+        b=ByanLKDMTE2+xmoQHlwNnDipuua++eH6JtfsSfmLxMHjjjAQ0WIRC+lkVsXEUd+37K
+         QlRBiMiWqUWscF5FbKfaC1NKxeBGn5D4xV2oxohls03FFQmLmrStcXvl3j04dd5njpyA
+         f8ICc8KGlJ1/p4c2/jbzBo3xf+XAcQLw2eSGgs6wHY91Yl0GHaeI6TiN+wrzJ0ICF69y
+         ZJZRSSYsFWmhuXqVfy20Rn+C4ofd87zbKVdQqVGQVaOP4gZNprSWU8RR9RgKKopK8dSa
+         ObCPQoZAZ72x4Z1S21QpHdUvuIEgz8azc8TruD6pQxarzrox7vZOVX06+REJ77cilz39
+         MHQA==
+X-Gm-Message-State: AOAM532sHU3N8pEH3vauKweQ/paiSKspU/os4Me0AjuvZC7KZk1XBwcF
+        xsyWn3xzcOiLO7KwyDXhH++GoKa3QN1sxg==
+X-Google-Smtp-Source: ABdhPJydTyCPuF8hvURnTih4047bCFhevML+/3+RyAyoPmdY/ts4kqdaIN45LIff29Dqd06TO6yCkA==
+X-Received: by 2002:aa7:8598:0:b029:1dd:9cb4:37ee with SMTP id w24-20020aa785980000b02901dd9cb437eemr16515951pfn.54.1613412954909;
+        Mon, 15 Feb 2021 10:15:54 -0800 (PST)
+Received: from localhost (185.212.56.4.16clouds.com. [185.212.56.4])
+        by smtp.gmail.com with ESMTPSA id y24sm18978244pfr.152.2021.02.15.10.15.54
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Mon, 15 Feb 2021 10:15:54 -0800 (PST)
+From:   Dejin Zheng <zhengdejin5@gmail.com>
+To:     corbet@lwn.net, jarkko.nikula@linux.intel.com,
+        andriy.shevchenko@linux.intel.com, mika.westerberg@linux.intel.com,
+        rric@kernel.org, bhelgaas@google.com, wsa@kernel.org,
+        linux-doc@vger.kernel.org, linux-i2c@vger.kernel.org,
+        linux-pci@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org, Dejin Zheng <zhengdejin5@gmail.com>
+Subject: [PATCH v1 0/4] Introduce pcim_alloc_irq_vectors()
+Date:   Tue, 16 Feb 2021 02:15:46 +0800
+Message-Id: <20210215181550.714101-1-zhengdejin5@gmail.com>
+X-Mailer: git-send-email 2.25.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, 2021-02-14 at 12:15 +0000, Matthew Wilcox wrote:
-> On Sat, Feb 13, 2021 at 06:45:12PM +0530, Dwaipayan Ray wrote:
-> > +Checkpatch (scripts/checkpatch.pl) is a perl script which checks for trivial style
-> 
-> It's quite amusing that this patch contains lines > 80 columns.
+Introduce pcim_alloc_irq_vectors(), a explicit device-managed version of
+pci_alloc_irq_vectors(). and use the correct name of device-managed
+function to alloc irq vectors in i2c drivers.
 
-Then you could amuse yourself further by looking at the existing
-line lengths of .rst files.
+Dejin Zheng (4):
+  PCI: Introduce pcim_alloc_irq_vectors()
+  Documentation: devres: add pcim_alloc_irq_vectors()
+  i2c: designware: Use the correct name of device-managed function
+  i2c: thunderx: Use the correct name of device-managed function
 
-$ git ls-files -- '*.rst' | \
-  xargs cat | \
-  awk '{print length($0);}' | \
-  sort -n | \
-  uniq -c | \
-  tail -20
-      2 226
-      1 230
-      1 233
-      1 234
-     48 246
-      1 253
-      2 257
-      1 263
-      1 270
-      1 275
-      1 276
-      1 293
-      1 294
-      1 308
-      2 324
-      1 359
-      1 360
-      5 369
-      1 370
-      2 409
+ .../driver-api/driver-model/devres.rst        |  1 +
+ drivers/i2c/busses/i2c-designware-pcidrv.c    |  2 +-
+ drivers/i2c/busses/i2c-thunderx-pcidrv.c      |  2 +-
+ drivers/pci/pci.c                             | 19 +++++++++++++++++++
+ include/linux/pci.h                           |  3 +++
+ 5 files changed, 25 insertions(+), 2 deletions(-)
 
-Other than testing whether or not an SPDX license line exists,
-checkpatch doesn't inspect .rst files.
-
-There are better tools for that.
-
+-- 
+2.25.0
 
