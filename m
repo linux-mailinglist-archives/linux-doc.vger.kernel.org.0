@@ -2,175 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D37D031BEFC
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Feb 2021 17:24:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3E9C431BF23
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Feb 2021 17:27:27 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231668AbhBOQWK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 15 Feb 2021 11:22:10 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48682 "EHLO
+        id S232000AbhBOQZU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 15 Feb 2021 11:25:20 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48656 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231847AbhBOQTi (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Feb 2021 11:19:38 -0500
-Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com [IPv6:2607:f8b0:4864:20::72c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 93CBFC061D7D
-        for <linux-doc@vger.kernel.org>; Mon, 15 Feb 2021 08:14:15 -0800 (PST)
-Received: by mail-qk1-x72c.google.com with SMTP id x14so6839477qkm.2
-        for <linux-doc@vger.kernel.org>; Mon, 15 Feb 2021 08:14:15 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=soleen.com; s=google;
-        h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-         :content-transfer-encoding;
-        bh=9bnQ1cYpKSogma2d9jSskcM/kWG+ieYizroT/wf+fYw=;
-        b=fZdFf8Y10WJwP3iDSS3Z5VyVZRkc0J09nWK3ghTjLayZaQBtALZ8zAhfs0QfifSEkk
-         9UCDPSqsKM90EEUU7EzN/KjQ+x1vD4LB875bg3UUqglChgzLgAyVi/Uyh8m6nO9cEpMt
-         b7wkQN91QNBa4v28HydDX2RkbwWLvNrOVV9oodQvnyQfSxXC2fq8zvZoODL3os3uHDYN
-         CmhqhnaZW2woCDh1PDNhzPD8JZcK9CkmdfedTTwMtsUUtu4aRa7FJ9BVU0As4/HoW2+R
-         JUUAPf3HP2CRj37EmDMU3/PYEc4vc2IsqQHVBGVxXMgHNUlI51p/exyLfxOCpxQ3jXl6
-         2sjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=9bnQ1cYpKSogma2d9jSskcM/kWG+ieYizroT/wf+fYw=;
-        b=pjURUjCOAWULYK7UQPf9EwrhL1sLcdtXr4gOcOOJnyVXVRU2CJhNd42vw0Y+VbWKbO
-         f2gS1cazmyyTJCh5lPWzLV9v6dK1mZY6EnjOWixyHd2lKJVxDrJdlhAWHOAaWfZXQ369
-         eT1SObf14bSJtpPg7QfVI/jwWKLtg3WJqrecsU2Cs/r2df/sFhNRk4Ht+izNznj12yjc
-         j+27u8fYNEZz5wFes6+TICYyE1p9Hsx1AfXsaSwfYDmq+lL4SPkXIEWlVTatFeV3twwK
-         WrZ8C3NbSKYg/A+VzXi2YRFBlMQFFzW7LUBQ6irx03I6fXdkXM0WgBLLcqnH2RGHp/QE
-         rEyw==
-X-Gm-Message-State: AOAM532FF9cUm+KFACeAoJ7T3SLuKbIBB31EgOs8BUUfJ4OuQi2CASeG
-        Ag3FLvsKwYZmFmaVvDYLvHj/kA==
-X-Google-Smtp-Source: ABdhPJzovM58HaLCClF3VUBYsDOrSP/+0sT1fDIUz4gtaDsL/dH2pL1TQ1nvopCVb2IFGgIQdJpNgA==
-X-Received: by 2002:a37:57c7:: with SMTP id l190mr15700031qkb.487.1613405653668;
-        Mon, 15 Feb 2021 08:14:13 -0800 (PST)
-Received: from localhost.localdomain (c-73-69-118-222.hsd1.nh.comcast.net. [73.69.118.222])
-        by smtp.gmail.com with ESMTPSA id u7sm10909213qta.75.2021.02.15.08.14.12
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Feb 2021 08:14:13 -0800 (PST)
-From:   Pavel Tatashin <pasha.tatashin@soleen.com>
-To:     pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
-        linux-mm@kvack.org, akpm@linux-foundation.org, vbabka@suse.cz,
-        mhocko@suse.com, david@redhat.com, osalvador@suse.de,
-        dan.j.williams@intel.com, sashal@kernel.org,
-        tyhicks@linux.microsoft.com, iamjoonsoo.kim@lge.com,
-        mike.kravetz@oracle.com, rostedt@goodmis.org, mingo@redhat.com,
-        jgg@ziepe.ca, peterz@infradead.org, mgorman@suse.de,
-        willy@infradead.org, rientjes@google.com, jhubbard@nvidia.com,
-        linux-doc@vger.kernel.org, ira.weiny@intel.com,
-        linux-kselftest@vger.kernel.org, jmorris@namei.org
-Subject: [PATCH v11 14/14] selftests/vm: gup_test: test faulting in kernel, and verify pinnable pages
-Date:   Mon, 15 Feb 2021 11:13:49 -0500
-Message-Id: <20210215161349.246722-15-pasha.tatashin@soleen.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210215161349.246722-1-pasha.tatashin@soleen.com>
-References: <20210215161349.246722-1-pasha.tatashin@soleen.com>
+        with ESMTP id S232483AbhBOQVg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Feb 2021 11:21:36 -0500
+Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F3B57C061797
+        for <linux-doc@vger.kernel.org>; Mon, 15 Feb 2021 08:18:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=Content-Type:MIME-Version:Message-ID:
+        Subject:Cc:To:From:Date:Sender:Reply-To:Content-Transfer-Encoding:Content-ID:
+        Content-Description:In-Reply-To:References;
+        bh=dPwDA9f36jIiA9u+9rbZ4zRphrpbPB5TI4ZFHHGGJrs=; b=mlfpl0XGY9e/pY7yIJOwOskv23
+        QA1bO+abTCk6tM+swTXr3HCf+OIRlKrvKrOr1pbPZFnXCnH7XwpWNrnVJuBfTpmFz6/58wl/w5qrL
+        Ob0NAeKXsBv235n85ErWJroDFDrd4TENyJrGBzEbMD/jIv0tgkNpObMkn0O2tjK9fdYWOkDrOqcMw
+        3CHkEC7esoRUz1pZgv5EpZFlApQ1poPitksRGOtNWpuYq0soU2v6d1ZdrGx5Wwp45aazqDhGTCyon
+        HG64X/Y630U9uJJGOpv5lm7V41e6LvXpW2vCMWDr+cu5jjqqDtJY2ZEm+KMrrJJow4Vtjantlll1J
+        axLzKYyw==;
+Received: from willy by casper.infradead.org with local (Exim 4.94 #2 (Red Hat Linux))
+        id 1lBgZR-00Flvf-Q2; Mon, 15 Feb 2021 16:17:58 +0000
+Date:   Mon, 15 Feb 2021 16:17:57 +0000
+From:   Matthew Wilcox <willy@infradead.org>
+To:     linux-doc@vger.kernel.org
+Cc:     Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH] Fix unaesthetic indentation
+Message-ID: <20210215161757.GD2858050@casper.infradead.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-When pages are pinned they can be faulted in userland and migrated, and
-they can be faulted right in kernel without migration.
+The current documentation build looks like this:
 
-In either case, the pinned pages must end-up being pinnable (not movable).
+$ make htmldocs
+  SPHINX  htmldocs --> file:///home/willy/kernel/linux-next/Documentation/output
+make[2]: Nothing to be done for 'html'.
+WARNING: The kernel documentation build process
+        support for Sphinx v3.0 and above is brand new. Be prepared for
+        possible issues in the generated output.
+        $
 
-Add a new test to gup_test, to help verify that the gup/pup
-(get_user_pages() / pin_user_pages()) behavior with respect to pinnable
-and movable pages is reasonable and correct. Specifically, provide a
-way to:
+That extra indentation before my next prompt isn't pretty.  This patch
+fixes it, but I'm not a pythonista, and maybe there's a better way.
 
-1) Verify that only "pinnable" pages are pinned. This is checked
-automatically for you.
+Signed-off-by: Matthew Wilcox (Oracle) <willy@infradead.org>
 
-2) Verify that gup/pup performance is reasonable. This requires
-comparing benchmarks between doing gup/pup on pages that have been
-pre-faulted in from user space, vs. doing gup/pup on pages that are not
-faulted in until gup/pup time (via FOLL_TOUCH). This decision is
-controlled with the new -z command line option.
-
-Signed-off-by: Pavel Tatashin <pasha.tatashin@soleen.com>
-Reviewed-by: John Hubbard <jhubbard@nvidia.com>
----
- mm/gup_test.c                         |  6 ++++++
- tools/testing/selftests/vm/gup_test.c | 23 +++++++++++++++++++----
- 2 files changed, 25 insertions(+), 4 deletions(-)
-
-diff --git a/mm/gup_test.c b/mm/gup_test.c
-index a6ed1c877679..d974dec19e1c 100644
---- a/mm/gup_test.c
-+++ b/mm/gup_test.c
-@@ -52,6 +52,12 @@ static void verify_dma_pinned(unsigned int cmd, struct page **pages,
- 
- 				dump_page(page, "gup_test failure");
- 				break;
-+			} else if (cmd == PIN_LONGTERM_BENCHMARK &&
-+				WARN(!is_pinnable_page(page),
-+				     "pages[%lu] is NOT pinnable but pinned\n",
-+				     i)) {
-+				dump_page(page, "gup_test failure");
-+				break;
- 			}
- 		}
- 		break;
-diff --git a/tools/testing/selftests/vm/gup_test.c b/tools/testing/selftests/vm/gup_test.c
-index 943cc2608dc2..1e662d59c502 100644
---- a/tools/testing/selftests/vm/gup_test.c
-+++ b/tools/testing/selftests/vm/gup_test.c
-@@ -13,6 +13,7 @@
- 
- /* Just the flags we need, copied from mm.h: */
- #define FOLL_WRITE	0x01	/* check pte is writable */
-+#define FOLL_TOUCH	0x02	/* mark page accessed */
- 
- static char *cmd_to_str(unsigned long cmd)
- {
-@@ -39,11 +40,11 @@ int main(int argc, char **argv)
- 	unsigned long size = 128 * MB;
- 	int i, fd, filed, opt, nr_pages = 1, thp = -1, repeats = 1, write = 1;
- 	unsigned long cmd = GUP_FAST_BENCHMARK;
--	int flags = MAP_PRIVATE;
-+	int flags = MAP_PRIVATE, touch = 0;
- 	char *file = "/dev/zero";
- 	char *p;
- 
--	while ((opt = getopt(argc, argv, "m:r:n:F:f:abctTLUuwWSHp")) != -1) {
-+	while ((opt = getopt(argc, argv, "m:r:n:F:f:abctTLUuwWSHpz")) != -1) {
- 		switch (opt) {
- 		case 'a':
- 			cmd = PIN_FAST_BENCHMARK;
-@@ -110,6 +111,10 @@ int main(int argc, char **argv)
- 		case 'H':
- 			flags |= (MAP_HUGETLB | MAP_ANONYMOUS);
- 			break;
-+		case 'z':
-+			/* fault pages in gup, do not fault in userland */
-+			touch = 1;
-+			break;
- 		default:
- 			return -1;
- 		}
-@@ -167,8 +172,18 @@ int main(int argc, char **argv)
- 	else if (thp == 0)
- 		madvise(p, size, MADV_NOHUGEPAGE);
- 
--	for (; (unsigned long)p < gup.addr + size; p += PAGE_SIZE)
--		p[0] = 0;
-+	/*
-+	 * FOLL_TOUCH, in gup_test, is used as an either/or case: either
-+	 * fault pages in from the kernel via FOLL_TOUCH, or fault them
-+	 * in here, from user space. This allows comparison of performance
-+	 * between those two cases.
-+	 */
-+	if (touch) {
-+		gup.gup_flags |= FOLL_TOUCH;
-+	} else {
-+		for (; (unsigned long)p < gup.addr + size; p += PAGE_SIZE)
-+			p[0] = 0;
-+	}
- 
- 	/* Only report timing information on the *_BENCHMARK commands: */
- 	if ((cmd == PIN_FAST_BENCHMARK) || (cmd == GUP_FAST_BENCHMARK) ||
--- 
-2.25.1
-
+diff --git a/Documentation/conf.py b/Documentation/conf.py
+index 5bd45d5fb0a0..8a9ed3f29cd5 100644
+--- a/Documentation/conf.py
++++ b/Documentation/conf.py
+@@ -50,7 +50,7 @@ if major >= 3:
+     sys.stderr.write('''WARNING: The kernel documentation build process
+         support for Sphinx v3.0 and above is brand new. Be prepared for
+         possible issues in the generated output.
+-        ''')
++''')
+     if (major > 3) or (minor > 0 or patch >= 2):
+         # Sphinx c function parser is more pedantic with regards to type
+         # checking. Due to that, having macros at c:function cause problems.
