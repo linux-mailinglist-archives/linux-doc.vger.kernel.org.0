@@ -2,132 +2,221 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DADD231E1E9
-	for <lists+linux-doc@lfdr.de>; Wed, 17 Feb 2021 23:17:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6A57E31E216
+	for <lists+linux-doc@lfdr.de>; Wed, 17 Feb 2021 23:31:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233328AbhBQWQk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 17 Feb 2021 17:16:40 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35750 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233358AbhBQWQg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 17 Feb 2021 17:16:36 -0500
-Received: from mail-pl1-x631.google.com (mail-pl1-x631.google.com [IPv6:2607:f8b0:4864:20::631])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2EB50C061794
-        for <linux-doc@vger.kernel.org>; Wed, 17 Feb 2021 14:15:19 -0800 (PST)
-Received: by mail-pl1-x631.google.com with SMTP id r2so84133plr.10
-        for <linux-doc@vger.kernel.org>; Wed, 17 Feb 2021 14:15:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=beagleboard-org.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=Y9rWQpGXIz66daXxWsY1gOWjvlN/z304wIufJTlMDGo=;
-        b=KxHon1W8x3c1Lf5e3+SIMFIcGK+3MYlyYBNOs1EzakzAbVFcOgAV5T3A/GQBBEPNxC
-         Won0BbFPxtwnDFkP1UoxPsTL0sK7uaqqo+bmvNsjyEireyD22g6THwD7ERhjlNs+ALb4
-         G77Z21EVUT2GFaXXWI3yDY2FDU9gky60rC2cMyPpc9HmsdzDaE0gEgNRlLe2+5LxrOHX
-         bLMq8+G+B4cqtz6Wrf7ecyHKBjCrehDo26vSBYvIBGRQuUK/0cGYEE08en+/Df0HoH4y
-         ANJS1myo0PyvHEbb4WQX7DhYRnO+Pe0FHz3HTpFV7gQVW1GbTO7QqqhL2bTFHhbuBfgp
-         OV8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=Y9rWQpGXIz66daXxWsY1gOWjvlN/z304wIufJTlMDGo=;
-        b=N579509HmCQ0VYp4JB8rwfyZNsnjAj1gfqDk6JH8ek6GUTU8YV/ZkZiulzgqRjp5IG
-         nARSfaebK3hWP050HzFK5vcxxxFDV/ACDTAzeEgLx5v462HQqUOPdUoNX9C7zsvmpcmw
-         CoQHGS9UaAuNKu4aXmcoGp6Pg1D+iNrmO/4aneZq1C+732LIchbMhm0hpibm5MJLzsTd
-         Lo4xwqR0A+HDEyQH0Xig1RErDYjyNKAv8dni9SjE8wp1llgZWhAx7KOgTOs2yXwEwg1N
-         FIG3F7YZabogaM9pCWgghSGCMuaDGU97JSxIxyScziJK/sDqfsD9gQvQVBawqJB7A5AD
-         BB6g==
-X-Gm-Message-State: AOAM532V8rghXJHolKTUrZVYtRGQibEoQiUbPBwLeTfZ5XLzyRRvhfbu
-        hdQ+aHDpCPOkoR0DRtzVGrj36g==
-X-Google-Smtp-Source: ABdhPJx7a2TKoUOvKWFwYDqvHzZTQEJxsPaU8z/ZcnkpVNh44lma3zVa8OXhOGi1PvaG0JWX7SVdtw==
-X-Received: by 2002:a17:90b:618:: with SMTP id gb24mr874830pjb.163.1613600118771;
-        Wed, 17 Feb 2021 14:15:18 -0800 (PST)
-Received: from x1.hsd1.or.comcast.net ([2601:1c0:4701:ae70:c31f:9bea:96ec:ef07])
-        by smtp.gmail.com with ESMTPSA id q43sm3142591pjq.25.2021.02.17.14.15.17
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 17 Feb 2021 14:15:18 -0800 (PST)
-From:   Drew Fustini <drew@beagleboard.org>
-To:     Linus Walleij <linus.walleij@linaro.org>,
-        linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Tony Lindgren <tony@atomide.com>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        Alexandre Belloni <alexandre.belloni@bootlin.com>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Pantelis Antoniou <pantelis.antoniou@konsulko.com>,
-        Jason Kridner <jkridner@beagleboard.org>,
-        Robert Nelson <robertcnelson@beagleboard.org>,
-        Joe Perches <joe@perches.com>,
-        Dan Carpenter <dan.carpenter@oracle.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     Drew Fustini <drew@beagleboard.org>
-Subject: [PATCH v7 3/3] docs/pinctrl: document debugfs files
-Date:   Wed, 17 Feb 2021 14:14:58 -0800
-Message-Id: <20210217221457.1827266-4-drew@beagleboard.org>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210217221457.1827266-1-drew@beagleboard.org>
-References: <20210217221457.1827266-1-drew@beagleboard.org>
+        id S232778AbhBQW3D (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 17 Feb 2021 17:29:03 -0500
+Received: from mga09.intel.com ([134.134.136.24]:13773 "EHLO mga09.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S233533AbhBQW2e (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 17 Feb 2021 17:28:34 -0500
+IronPort-SDR: OSiNBt0a1kZ/VoJCaGTEpntP10eE4YWI8AMT8iMSPtSh131Fx7KqGI5BgYJy4gJ7sc6HFXDdDA
+ dsuDaeUjGICQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9898"; a="183461418"
+X-IronPort-AV: E=Sophos;i="5.81,185,1610438400"; 
+   d="scan'208";a="183461418"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Feb 2021 14:27:52 -0800
+IronPort-SDR: kzz9963nM/Q2d2fVGAOmmKm/QVR3y9GPM82WR0v0LUBRfEoW24Fap2kZsaASrZP1z70u0QIEI1
+ p90+JBMoTPkA==
+X-IronPort-AV: E=Sophos;i="5.81,185,1610438400"; 
+   d="scan'208";a="400172554"
+Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 17 Feb 2021 14:27:51 -0800
+From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
+To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>,
+        Haitao Huang <haitao.huang@intel.com>
+Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>
+Subject: [PATCH v21 00/26] Control-flow Enforcement: Shadow Stack
+Date:   Wed, 17 Feb 2021 14:27:04 -0800
+Message-Id: <20210217222730.15819-1-yu-cheng.yu@intel.com>
+X-Mailer: git-send-email 2.21.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Document debugfs directories and files created for pinctrl subsystem.
+Control-flow Enforcement (CET) is a new Intel processor feature that blocks
+return/jump-oriented programming attacks.  Details are in "Intel 64 and
+IA-32 Architectures Software Developer's Manual" [1].
 
-Suggested-by: Andy Shevchenko <andy.shevchenko@gmail.com>
-Reviewed-by: Andy Shevchenko <andy.shevchenko@gmail.com>
-Reviewed-by: Tony Lindgren <tony@atomide.com>
-Signed-off-by: Drew Fustini <drew@beagleboard.org>
----
- Documentation/driver-api/pinctl.rst | 37 +++++++++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
+CET can protect applications and the kernel.  This series enables only
+application-level protection, and has three parts:
 
-diff --git a/Documentation/driver-api/pinctl.rst b/Documentation/driver-api/pinctl.rst
-index 3d2deaf48841..37bc3bd64cd8 100644
---- a/Documentation/driver-api/pinctl.rst
-+++ b/Documentation/driver-api/pinctl.rst
-@@ -1428,3 +1428,40 @@ on the pins defined by group B::
- The above has to be done from process context. The reservation of the pins
- will be done when the state is activated, so in effect one specific pin
- can be used by different functions at different times on a running system.
-+
-+
-+Debugfs files
-+=============
-+These files are created in ``/sys/kernel/debug/pinctrl``:
-+
-+- ``pinctrl-devices``: prints each pin controller device along with columns to
-+  indicate support for pinmux and pinconf
-+
-+- ``pinctrl-handles``: iterate through the list of pin controller handles and
-+  print the corresponding pinmux maps
-+
-+- ``pinctrl-maps``: print all pinctrl maps
-+
-+A sub-directory is created inside of ``/sys/kernel/debug/pinctrl`` for each pin
-+controller device containing these files:
-+
-+- ``pins``: prints a line for each pin registered on the pin controller. The
-+  pinctrl driver may add additional information such as register contents.
-+
-+- ``gpio-ranges``: print ranges that map gpio lines to pins on the controller
-+
-+- ``pingroups``: print all pin groups registered on the pin controller
-+
-+- ``pinconf-pins``: print pin config settings for each pin
-+
-+- ``pinconf-groups``: print pin config settings per pin group
-+
-+- ``pinmux-functions``: print each pin function along with the pin groups that
-+  map to the pin function
-+
-+- ``pinmux-pins``: iterate through all pins and print mux owner, gpio owner
-+  and if the pin is a hog
-+
-+- ``pinmux-select``: write to this file to activate a pin function and group::
-+
-+        echo "<function-name group-name>" > pinmux-select
+  - Shadow stack [2],
+  - Indirect branch tracking [3], and
+  - Selftests [4].
+
+I have run tests on these patches for quite some time, and they have been
+very stable.  Linux distributions with CET are available now, and Intel
+processors with CET are already on the market.  It would be nice if CET
+support can be accepted into the kernel.  I will be working to address any
+issues should they come up.
+
+Changes in v21:
+- Patch #2: Remove X86_CET's dependency on X86_64, since it now depends on
+  ARCH_HAS_SHADOW_STACK.
+- Patch #8: Create helpers for _PAGE_DIRTY/_PAGE_COW swapping.
+- Patch #21: Update commit logs, explain token checking.
+- Patch #23: Instead of RLIMIT_STACK, use stack_size passed from clone3() as
+  thread shadow stack size.
+- Patch #25: split out moving arch_vm_get_page_prot() and arch_calc_vm_prot_
+  bits() to a separate patch.
+- Pick up Reviewed-by tags.
+- Rebase to Linus tree v5.11.
+
+[1] Intel 64 and IA-32 Architectures Software Developer's Manual:
+
+    https://software.intel.com/en-us/download/intel-64-and-ia-32-
+    architectures-sdm-combined-volumes-1-2a-2b-2c-2d-3a-3b-3c-3d-and-4
+
+[2] CET Shadow Stack patches v20:
+
+    https://lkml.kernel.org/r/20210210175703.12492-1-yu-cheng.yu@intel.com/
+
+[3] Indirect Branch Tracking patches v20.
+
+    https://lkml.kernel.org/r/20210210180245.13770-1-yu-cheng.yu@intel.com/
+
+[4] I am holding off the selftests changes and working to get Reviewed-by's.
+    The earlier version of the selftests patches:
+
+    https://lkml.kernel.org/r/20200521211720.20236-1-yu-cheng.yu@intel.com/
+
+[5] The kernel ptrace patch is tested with an Intel-internal updated GDB.
+    I am holding off the kernel ptrace patch to re-test it with my earlier
+    patch for fixing regset holes.
+
+Yu-cheng Yu (26):
+  Documentation/x86: Add CET description
+  x86/cet/shstk: Add Kconfig option for user-mode control-flow
+    protection
+  x86/cpufeatures: Add CET CPU feature flags for Control-flow
+    Enforcement Technology (CET)
+  x86/cpufeatures: Introduce X86_FEATURE_CET and setup functions
+  x86/fpu/xstate: Introduce CET MSR and XSAVES supervisor states
+  x86/cet: Add control-protection fault handler
+  x86/mm: Remove _PAGE_DIRTY from kernel RO pages
+  x86/mm: Introduce _PAGE_COW
+  drm/i915/gvt: Change _PAGE_DIRTY to _PAGE_DIRTY_BITS
+  x86/mm: Update pte_modify for _PAGE_COW
+  x86/mm: Update ptep_set_wrprotect() and pmdp_set_wrprotect() for
+    transition from _PAGE_DIRTY to _PAGE_COW
+  mm: Introduce VM_SHSTK for shadow stack memory
+  x86/mm: Shadow Stack page fault error checking
+  x86/mm: Update maybe_mkwrite() for shadow stack
+  mm: Fixup places that call pte_mkwrite() directly
+  mm: Add guard pages around a shadow stack.
+  mm/mmap: Add shadow stack pages to memory accounting
+  mm: Update can_follow_write_pte() for shadow stack
+  mm: Re-introduce vm_flags to do_mmap()
+  x86/cet/shstk: User-mode shadow stack support
+  x86/cet/shstk: Handle signals for shadow stack
+  ELF: Introduce arch_setup_elf_property()
+  x86/cet/shstk: Handle thread shadow stack
+  x86/cet/shstk: Add arch_prctl functions for shadow stack
+  mm: Move arch_calc_vm_prot_bits() to arch/x86/include/asm/mman.h
+  mm: Introduce PROT_SHSTK for shadow stack
+
+ .../admin-guide/kernel-parameters.txt         |   6 +
+ Documentation/filesystems/proc.rst            |   1 +
+ Documentation/x86/index.rst                   |   1 +
+ Documentation/x86/intel_cet.rst               | 136 +++++++
+ arch/arm64/include/asm/elf.h                  |   5 +
+ arch/x86/Kconfig                              |  28 ++
+ arch/x86/Kconfig.assembler                    |   5 +
+ arch/x86/ia32/ia32_signal.c                   |  17 +
+ arch/x86/include/asm/cet.h                    |  44 +++
+ arch/x86/include/asm/cpufeatures.h            |   4 +-
+ arch/x86/include/asm/disabled-features.h      |  17 +-
+ arch/x86/include/asm/elf.h                    |  13 +
+ arch/x86/include/asm/fpu/internal.h           |  10 +
+ arch/x86/include/asm/fpu/types.h              |  23 +-
+ arch/x86/include/asm/fpu/xstate.h             |   6 +-
+ arch/x86/include/asm/idtentry.h               |   4 +
+ arch/x86/include/asm/mman.h                   |  85 +++++
+ arch/x86/include/asm/mmu_context.h            |   3 +
+ arch/x86/include/asm/msr-index.h              |  19 +
+ arch/x86/include/asm/page_64_types.h          |  10 +
+ arch/x86/include/asm/pgtable.h                | 254 ++++++++++++-
+ arch/x86/include/asm/pgtable_types.h          |  48 ++-
+ arch/x86/include/asm/processor.h              |   5 +
+ arch/x86/include/asm/special_insns.h          |  32 ++
+ arch/x86/include/asm/trap_pf.h                |   2 +
+ arch/x86/include/uapi/asm/mman.h              |  28 +-
+ arch/x86/include/uapi/asm/prctl.h             |   4 +
+ arch/x86/include/uapi/asm/processor-flags.h   |   2 +
+ arch/x86/include/uapi/asm/sigcontext.h        |   9 +
+ arch/x86/kernel/Makefile                      |   2 +
+ arch/x86/kernel/cet.c                         | 348 ++++++++++++++++++
+ arch/x86/kernel/cet_prctl.c                   |  60 +++
+ arch/x86/kernel/cpu/common.c                  |  14 +
+ arch/x86/kernel/cpu/cpuid-deps.c              |   2 +
+ arch/x86/kernel/cpu/intel.c                   |   3 +
+ arch/x86/kernel/fpu/signal.c                  | 100 +++++
+ arch/x86/kernel/fpu/xstate.c                  |  10 +-
+ arch/x86/kernel/idt.c                         |   4 +
+ arch/x86/kernel/process.c                     |  21 +-
+ arch/x86/kernel/process_64.c                  |  32 ++
+ arch/x86/kernel/signal.c                      |  10 +
+ arch/x86/kernel/signal_compat.c               |   2 +-
+ arch/x86/kernel/traps.c                       |  63 ++++
+ arch/x86/mm/fault.c                           |  19 +
+ arch/x86/mm/mmap.c                            |   2 +
+ arch/x86/mm/pat/set_memory.c                  |   2 +-
+ arch/x86/mm/pgtable.c                         |  25 ++
+ drivers/gpu/drm/i915/gvt/gtt.c                |   2 +-
+ fs/aio.c                                      |   2 +-
+ fs/binfmt_elf.c                               |   4 +
+ fs/proc/task_mmu.c                            |   3 +
+ include/linux/elf.h                           |   6 +
+ include/linux/mm.h                            |  38 +-
+ include/linux/pgtable.h                       |  35 ++
+ include/uapi/asm-generic/siginfo.h            |   3 +-
+ include/uapi/linux/elf.h                      |   9 +
+ ipc/shm.c                                     |   2 +-
+ mm/gup.c                                      |   8 +-
+ mm/huge_memory.c                              |  10 +-
+ mm/memory.c                                   |   5 +-
+ mm/migrate.c                                  |   3 +-
+ mm/mmap.c                                     |  23 +-
+ mm/mprotect.c                                 |   2 +-
+ mm/nommu.c                                    |   4 +-
+ mm/util.c                                     |   2 +-
+ 65 files changed, 1606 insertions(+), 95 deletions(-)
+ create mode 100644 Documentation/x86/intel_cet.rst
+ create mode 100644 arch/x86/include/asm/cet.h
+ create mode 100644 arch/x86/include/asm/mman.h
+ create mode 100644 arch/x86/kernel/cet.c
+ create mode 100644 arch/x86/kernel/cet_prctl.c
+
 -- 
-2.25.1
+2.21.0
 
