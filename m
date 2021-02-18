@@ -2,73 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3F38B31E8EE
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Feb 2021 12:07:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DD26331EB05
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Feb 2021 15:41:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231430AbhBRLDn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 18 Feb 2021 06:03:43 -0500
-Received: from mail.kernel.org ([198.145.29.99]:57182 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231272AbhBRKiE (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 18 Feb 2021 05:38:04 -0500
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 768DF64DE9;
-        Thu, 18 Feb 2021 10:37:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1613644633;
-        bh=GC/+qGL4jWqb0AlBV+rnFjuMEIRv27x+lfUlOQ/3QCM=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=LHZywTMg4ggnBnh7h4rxOOyA9sZaj0kObrbRX3ik6J89xnZQYGoj0GVy/YFtS/BIf
-         eFOP4g90bnhdKzcv4HQTF0x5WOJgJSkKGor9AT7lQyMyzD+RX9sRitFY9BsV4eFP2Z
-         hL6MC4Ps52qUO/P5Mz7p7IYe139BtyTv8LTLsx5rtQaMmlW9oMOk1Q8lW/Xi07xgnb
-         HHRz2QU/vC1lEvtkpf4aPCNAxJq56ysa0w+wgpB6Qi815ploMBwk86E6pUZxGP5bFf
-         Gwdovi+95e3ZsKIbzW0aex+m2WLwo6GCg6vLLXiCQubvVc5YGXQ9KQUP0EfqL5CN8i
-         2ZlX6yAM/EL6A==
-Date:   Thu, 18 Feb 2021 12:37:09 +0200
-From:   Leon Romanovsky <leon@kernel.org>
-To:     Xie He <xie.he.0141@gmail.com>
-Cc:     "David S. Miller" <davem@davemloft.net>,
-        Jakub Kicinski <kuba@kernel.org>,
-        Linux X25 <linux-x25@vger.kernel.org>,
-        Linux Kernel Network Developers <netdev@vger.kernel.org>,
-        LKML <linux-kernel@vger.kernel.org>,
-        Martin Schiller <ms@dev.tdt.de>,
-        Krzysztof Halasa <khc@pm.waw.pl>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH net-next RFC v4] net: hdlc_x25: Queue outgoing LAPB frames
-Message-ID: <YC5DVTHHd6OOs459@unreal>
-References: <20210216201813.60394-1-xie.he.0141@gmail.com>
- <YC4sB9OCl5mm3JAw@unreal>
- <CAJht_EN2ZO8r-dpou5M4kkg3o3J5mHvM7NdjS8nigRCGyih7mg@mail.gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <CAJht_EN2ZO8r-dpou5M4kkg3o3J5mHvM7NdjS8nigRCGyih7mg@mail.gmail.com>
+        id S231810AbhBROlA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 18 Feb 2021 09:41:00 -0500
+Received: from smtp.outgoing.loopia.se ([93.188.3.37]:41606 "EHLO
+        smtp.outgoing.loopia.se" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231751AbhBRL6G (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 Feb 2021 06:58:06 -0500
+Received: from s807.loopia.se (localhost [127.0.0.1])
+        by s807.loopia.se (Postfix) with ESMTP id 79B8D2467AE3
+        for <linux-doc@vger.kernel.org>; Thu, 18 Feb 2021 12:53:08 +0100 (CET)
+Received: from s499.loopia.se (unknown [172.22.191.5])
+        by s807.loopia.se (Postfix) with ESMTP id 5A5222E2759E;
+        Thu, 18 Feb 2021 12:53:08 +0100 (CET)
+Received: from s476.loopia.se (unknown [172.22.191.6])
+        by s499.loopia.se (Postfix) with ESMTP id 4A7A91CE61FF;
+        Thu, 18 Feb 2021 12:53:08 +0100 (CET)
+X-Virus-Scanned: amavisd-new at amavis.loopia.se
+X-Spam-Flag: NO
+X-Spam-Score: -1
+X-Spam-Level: 
+X-Spam-Status: No, score=-1 tagged_above=-999 required=6.2
+        tests=[ALL_TRUSTED=-1] autolearn=disabled
+Received: from s630.loopia.se ([172.22.191.5])
+        by s476.loopia.se (s476.loopia.se [172.22.190.16]) (amavisd-new, port 10024)
+        with LMTP id UAaIMZeNH7Cm; Thu, 18 Feb 2021 12:53:07 +0100 (CET)
+X-Loopia-Auth: user
+X-Loopia-User: carl@hgsystem.se
+X-Loopia-Originating-IP: 94.234.46.141
+Received: from localhost.localdomain (c-5eea2e8d-74736162.cust.telenor.se [94.234.46.141])
+        (Authenticated sender: carl@hgsystem.se)
+        by s630.loopia.se (Postfix) with ESMTPSA id D7DF713ABE15;
+        Thu, 18 Feb 2021 12:53:06 +0100 (CET)
+From:   Erik Rosen <erik.rosen@metormote.com>
+To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-hwmon@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        Guenter Roeck <linux@roeck-us.net>,
+        Jean Delvare <jdelvare@suse.com>
+Cc:     Erik Rosen <erik.rosen@metormote.com>
+Subject: [PATCH v3 0/2] hwmon: (pmbus) Add ST STPDDC60 pmbus driver
+Date:   Thu, 18 Feb 2021 12:52:47 +0100
+Message-Id: <20210218115249.28513-1-erik.rosen@metormote.com>
+X-Mailer: git-send-email 2.11.0 (Apple Git-81)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Feb 18, 2021 at 01:07:13AM -0800, Xie He wrote:
-> On Thu, Feb 18, 2021 at 12:57 AM Leon Romanovsky <leon@kernel.org> wrote:
-> >
-> > It is nice that you are resending your patch without the resolution.
-> > However it will be awesome if you don't ignore review comments and fix this "3 - 1"
-> > by writing solid comment above.
->
-> I thought you already agreed with me? It looks like you didn't?
->
-> I still don't think there is any problem with my current way.
->
-> I still don't understand your point. What problem do you think is
-> there? Why is your way better than my way? I've already given multiple
-> reasons about why my way is better than yours. But you didn't explain
-> clearly why yours is better than mine.
+This patch series adds hardware monitoring support for the ST STPDDC60
+chip. The driver has been tested with a Flex BMR481 converter.
 
-It is not me who didn't explain, it is you who didn't want to write clear
-comment that describes the headroom size without need of "3 - 1".
+The checkpatch script complains about an unneeded paranthesis in an
+if-statement but gcc gives a warning if it is removed.
 
-So in current situation, you added two things: comment and assignment.
-Both of them aren't serve their goals. Your comment doesn't explain
-enough and needs extra help and your assignment is useless without
-comment.
+v3
+stpddc60_get_offset:
+  -Change type from u8 to int for "offset" to avoid potential overflow in calculation
+  -Simplify if-expression for checking limits
 
-Thanks
+v2
+-Remove "chips" enum since it is not used
+-Remove stpddc60_vid2mv function
+-Remove stpddc60_mv2l function
+-Add stpddc60_get_offset function
+-Add stpddc60_adjust_linear function
+stpddc60_read_word_data:
+  -Return the value reported by MFR_READ_VOUT to avoid having to convert from VID
+  -Add explanation why only 11 bits are used
+stpddc60_write_word_data:
+  -Rewrite comment
+  -Add support writing vout limits
+  -Adjust linear exponent to match read value
+-Use the probe_new function callback
+
+Erik Rosen (2):
+  Add pmbus_set_update() function to set update flag on selected sensors
+  Add ST STPDDC60 pmbus driver
+
+ Documentation/hwmon/index.rst    |   1 +
+ Documentation/hwmon/stpddc60.rst |  90 +++++++++++
+ MAINTAINERS                      |   7 +
+ drivers/hwmon/pmbus/Kconfig      |  10 ++
+ drivers/hwmon/pmbus/Makefile     |   2 +
+ drivers/hwmon/pmbus/pmbus.h      |   1 +
+ drivers/hwmon/pmbus/pmbus_core.c |  11 ++
+ drivers/hwmon/pmbus/stpddc60.c   | 248 +++++++++++++++++++++++++++++++
+ 8 files changed, 370 insertions(+)
+ create mode 100644 Documentation/hwmon/stpddc60.rst
+ create mode 100644 drivers/hwmon/pmbus/stpddc60.c
+
+
+base-commit: 6ee1d745b7c9fd573fba142a2efdad76a9f1cb04
+-- 
+2.20.1
+
