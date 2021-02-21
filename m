@@ -2,168 +2,130 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F1BB6320BB1
-	for <lists+linux-doc@lfdr.de>; Sun, 21 Feb 2021 17:25:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D1F58320BA0
+	for <lists+linux-doc@lfdr.de>; Sun, 21 Feb 2021 17:06:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229884AbhBUQZV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 21 Feb 2021 11:25:21 -0500
-Received: from mout.gmx.net ([212.227.17.21]:38469 "EHLO mout.gmx.net"
+        id S229844AbhBUQGR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 21 Feb 2021 11:06:17 -0500
+Received: from mail.kernel.org ([198.145.29.99]:48028 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229817AbhBUQZU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 21 Feb 2021 11:25:20 -0500
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=gmx.net;
-        s=badeba3b8450; t=1613924601;
-        bh=Mig8mLw6txPp64eklWsPmtDq+qJ7Ux3BOxxRc/jYndU=;
-        h=X-UI-Sender-Class:From:To:Cc:Subject:Date:In-Reply-To:References;
-        b=HplHLhejOO3vcTUhTyHaFtyxF3k8LaTeI5sM3tlux0xQfT70pqiwVrWT1U/joJbA6
-         XSofeh0uUMWrVIUeMKDGsSka9kzMJyjV7bl0lK+C0+MUanz2ogJn9/Z0aY+zFatYuc
-         yQ4shj+QhmaBFf4u6hqaFBWTOdlZ5hFdBaqMO504=
-X-UI-Sender-Class: 01bb95c1-4bf8-414a-932a-4f6e2808ef9c
-Received: from localhost.localdomain ([83.52.229.153]) by mail.gmx.net
- (mrgmx105 [212.227.17.174]) with ESMTPSA (Nemesis) id
- 1MVN6t-1lNb3u0kqN-00SOz1; Sun, 21 Feb 2021 17:23:21 +0100
-From:   John Wood <john.wood@gmx.com>
-To:     Kees Cook <keescook@chromium.org>, Jann Horn <jannh@google.com>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        James Morris <jmorris@namei.org>, Shuah Khan <shuah@kernel.org>
-Cc:     John Wood <john.wood@gmx.com>,
-        "Serge E. Hallyn" <serge@hallyn.com>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-security-module@vger.kernel.org,
-        linux-kselftest@vger.kernel.org
-Subject: [PATCH v3 1/8] security: Add LSM hook at the point where a task gets a fatal signal
-Date:   Sun, 21 Feb 2021 16:49:12 +0100
-Message-Id: <20210221154919.68050-2-john.wood@gmx.com>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210221154919.68050-1-john.wood@gmx.com>
-References: <20210221154919.68050-1-john.wood@gmx.com>
+        id S229685AbhBUQGR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 21 Feb 2021 11:06:17 -0500
+Received: from archlinux (cpc108967-cmbg20-2-0-cust86.5-4.cable.virginm.net [81.101.6.87])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by mail.kernel.org (Postfix) with ESMTPSA id 6BC9064E43;
+        Sun, 21 Feb 2021 16:05:34 +0000 (UTC)
+Date:   Sun, 21 Feb 2021 16:05:29 +0000
+From:   Jonathan Cameron <jic23@kernel.org>
+To:     linux-iio@vger.kernel.org, linux-doc@vger.kernel.org,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Cc:     Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Jean-Baptiste Maneyrol <jmaneyrol@invensense.com>
+Subject: Re: [RFC PATCH 1/7] iio:ABI docs: Fix up duplicate *_calibbias_*
+ documentation for icm42600
+Message-ID: <20210221160529.0012c931@archlinux>
+In-Reply-To: <20210117153816.696693-2-jic23@kernel.org>
+References: <20210117153816.696693-1-jic23@kernel.org>
+        <20210117153816.696693-2-jic23@kernel.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-X-Provags-ID: V03:K1:Mk8QK57R80ANwQs60TNWIOOGi7oZIl0vZSBtlU2wG9EQTvfcyUN
- Ypqj7CRTNjXwl032tG5aHovn1oS8TsU0YzyLyyONXYyaIUVd8SoNxQNL30wpSF8+sszPqiK
- eo7FPfJnUSFxCg0ve5ZOyEUCDtTUuTRLa3lraiBV/83zihO9+ry56SLBvWngiAoEcghfZ9Y
- d10x7SVYQccjY8XDHAIsg==
-X-Spam-Flag: NO
-X-UI-Out-Filterresults: notjunk:1;V03:K0:PLP7KhJEMYw=:I0hZ3CUHTLIKbo8z3JwUiy
- czCfT7CKWPXnhyNrztr0MmnxVl5HQtibEObi6Q5zNhTragbUB6I933/g5zLCxqvkfbwBMRjLR
- c6g02r2bBHgxgBCiBETUj4Shg5F5YGgH/bUj3y6NnHtWV0QGtzmB2j4nnWLMXf5aA6Gck6bFN
- o6GGOdzD7RqpjX+ZrDPScV5LxGmEF/j31eIkLInSHjBrDHHMtMVwaBNcMpksZv4FOdK4LwQfW
- eOLC1IItJx2baHWC67Efw9s/OeSP1KpmhV/vXwDbu8liwDshc//1y+c3Yltn9dVezpjemwoaN
- JFTDzlNGclEmRyw1m8r37DNGH3+3AvZRaS1gTteUeiWLi8fuTSxit+Z1TnjxO9Vx2tY4h4JOi
- oRpQr7EP7y6PkQxnJrIaSHVQT6x9NLtvjkBNzEOIGBXaElKsh3M7Q9ghsXQKj8b9zi5cW3aa/
- B+XTchNaFqVgXT0yobrXHHcORuk3W+ex7FQJIxThtCbhTm9reecY2oIv2Ai3MDUbGY4R8PqSy
- RyMOoLBRmQTJ7M/egc3W2Wm4Bs/Tl3HvNrTaBE4SPVaaeM7TaFQIklppyLwm89dXrP3Jt1UI9
- LhWCs3COYHO5U9ILUplhqJeGfBrnAzgJtW0zlR7JoX5StEIxnnwLpqilYwlVW9eG+vZpdsHbM
- iEUplBp/jHXjYY5N8qaZpvmfGJ2KAKdeCPCpY4acZ0MeCRlAGQZ4m8U24NLIV2qRBpidG+hdW
- qjBKMCl6rwIad1h+iWWxXRnfKUgLZszBNcCH1TplBKNz+w69TZwPKN5TclHQqFLmCnOjNfAJU
- 0QXdf4gOBgrFKtbxA/adjkVQ3xiMFHjUG/Gk/UO6F3NZ3p3i8uhLsPiIBmcBLLCJvxTtjb9cM
- UWuwG9B96Hk7sU6UD/xA==
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add a security hook that allows a LSM to be notified when a task gets a
-fatal signal. This patch is a previous step on the way to compute the
-task crash period by the "brute" LSM (linux security module to detect
-and mitigate fork brute force attack against vulnerable userspace
-processes).
+On Sun, 17 Jan 2021 15:38:10 +0000
+Jonathan Cameron <jic23@kernel.org> wrote:
 
-Signed-off-by: John Wood <john.wood@gmx.com>
-=2D--
- include/linux/lsm_hook_defs.h | 1 +
- include/linux/lsm_hooks.h     | 4 ++++
- include/linux/security.h      | 4 ++++
- kernel/signal.c               | 1 +
- security/security.c           | 5 +++++
- 5 files changed, 15 insertions(+)
+> From: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+@Jean-Baptiste.
 
-diff --git a/include/linux/lsm_hook_defs.h b/include/linux/lsm_hook_defs.h
-index 7aaa753b8608..fa9bfa9676f3 100644
-=2D-- a/include/linux/lsm_hook_defs.h
-+++ b/include/linux/lsm_hook_defs.h
-@@ -215,6 +215,7 @@ LSM_HOOK(int, -ENOSYS, task_prctl, int option, unsigne=
-d long arg2,
- 	 unsigned long arg3, unsigned long arg4, unsigned long arg5)
- LSM_HOOK(void, LSM_RET_VOID, task_to_inode, struct task_struct *p,
- 	 struct inode *inode)
-+LSM_HOOK(void, LSM_RET_VOID, task_fatal_signal, const kernel_siginfo_t *s=
-iginfo)
- LSM_HOOK(int, 0, ipc_permission, struct kern_ipc_perm *ipcp, short flag)
- LSM_HOOK(void, LSM_RET_VOID, ipc_getsecid, struct kern_ipc_perm *ipcp,
- 	 u32 *secid)
-diff --git a/include/linux/lsm_hooks.h b/include/linux/lsm_hooks.h
-index a19adef1f088..1ec253e557a4 100644
-=2D-- a/include/linux/lsm_hooks.h
-+++ b/include/linux/lsm_hooks.h
-@@ -774,6 +774,10 @@
-  *	security attributes, e.g. for /proc/pid inodes.
-  *	@p contains the task_struct for the task.
-  *	@inode contains the inode structure for the inode.
-+ * @task_fatal_signal:
-+ *	This hook allows security modules to be notified when a task gets a
-+ *	fatal signal.
-+ *	@siginfo contains the signal information.
-  *
-  * Security hooks for Netlink messaging.
-  *
-diff --git a/include/linux/security.h b/include/linux/security.h
-index c35ea0ffccd9..0663db6fca7e 100644
-=2D-- a/include/linux/security.h
-+++ b/include/linux/security.h
-@@ -419,6 +419,7 @@ int security_task_kill(struct task_struct *p, struct k=
-ernel_siginfo *info,
- int security_task_prctl(int option, unsigned long arg2, unsigned long arg=
-3,
- 			unsigned long arg4, unsigned long arg5);
- void security_task_to_inode(struct task_struct *p, struct inode *inode);
-+void security_task_fatal_signal(const kernel_siginfo_t *siginfo);
- int security_ipc_permission(struct kern_ipc_perm *ipcp, short flag);
- void security_ipc_getsecid(struct kern_ipc_perm *ipcp, u32 *secid);
- int security_msg_msg_alloc(struct msg_msg *msg);
-@@ -1141,6 +1142,9 @@ static inline int security_task_prctl(int option, un=
-signed long arg2,
- static inline void security_task_to_inode(struct task_struct *p, struct i=
-node *inode)
- { }
+Whilst this is 'fairly obviously' fine, could you take a quick glance at it.
+I'm never keen to take my own patches without someone having agreed
+I haven't done anything particularly silly ;)
 
-+static inline void security_task_fatal_signal(const kernel_siginfo_t *sig=
-info)
-+{ }
-+
- static inline int security_ipc_permission(struct kern_ipc_perm *ipcp,
- 					  short flag)
- {
-diff --git a/kernel/signal.c b/kernel/signal.c
-index 5ad8566534e7..893c07a77c76 100644
-=2D-- a/kernel/signal.c
-+++ b/kernel/signal.c
-@@ -2750,6 +2750,7 @@ bool get_signal(struct ksignal *ksig)
- 		/*
- 		 * Anything else is fatal, maybe with a core dump.
- 		 */
-+		security_task_fatal_signal(&ksig->info);
- 		current->flags |=3D PF_SIGNALED;
+Jonathan
 
- 		if (sig_kernel_coredump(signr)) {
-diff --git a/security/security.c b/security/security.c
-index 7b09cfbae94f..96731d0428f9 100644
-=2D-- a/security/security.c
-+++ b/security/security.c
-@@ -1827,6 +1827,11 @@ void security_task_to_inode(struct task_struct *p, =
-struct inode *inode)
- 	call_void_hook(task_to_inode, p, inode);
- }
-
-+void security_task_fatal_signal(const kernel_siginfo_t *siginfo)
-+{
-+	call_void_hook(task_fatal_signal, siginfo);
-+}
-+
- int security_ipc_permission(struct kern_ipc_perm *ipcp, short flag)
- {
- 	return call_int_hook(ipc_permission, 0, ipcp, flag);
-=2D-
-2.25.1
+> 
+> This device has the unusual characteristic that the calibbias values
+> have well defined units (more commonly they are tweaks to a DAC)
+> Unfortunately the previous approach of having more specific documentation
+> in sysfs-bus-iio-icm42600 results in warnings during the documentation
+> build and random ordering in the resulting documentation.
+> 
+> To avoid this, add a note to the main documentation on this special
+> characteristic for the icm42600.   The _available for calibbias was
+> missing from the main sysfs-bus-iio docs so also add that, allowing
+> us to drop the icm42600 specific file.
+> 
+> Fixes
+> $ scripts/get_abi.pl validate warning:
+> Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_x_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:0  ./Documentation/ABI/testing/sysfs-bus-iio:394
+> Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_y_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:1  ./Documentation/ABI/testing/sysfs-bus-iio:395
+> Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_z_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:2  ./Documentation/ABI/testing/sysfs-bus-iio:396
+> Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_x_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:3  ./Documentation/ABI/testing/sysfs-bus-iio:397
+> Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_y_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:4  ./Documentation/ABI/testing/sysfs-bus-iio:398
+> Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_z_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:5  ./Documentation/ABI/testing/sysfs-bus-iio:399
+> 
+> Cc: Jean-Baptiste Maneyrol <jmaneyrol@invensense.com>
+> Reported-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> Signed-off-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+> ---
+>  Documentation/ABI/testing/sysfs-bus-iio       | 13 ++++++++++++
+>  .../ABI/testing/sysfs-bus-iio-icm42600        | 20 -------------------
+>  2 files changed, 13 insertions(+), 20 deletions(-)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-bus-iio b/Documentation/ABI/testing/sysfs-bus-iio
+> index d957f5da5c04..d2dd9cc280f9 100644
+> --- a/Documentation/ABI/testing/sysfs-bus-iio
+> +++ b/Documentation/ABI/testing/sysfs-bus-iio
+> @@ -408,6 +408,19 @@ Contact:	linux-iio@vger.kernel.org
+>  Description:
+>  		Hardware applied calibration offset (assumed to fix production
+>  		inaccuracies).
+> +		icm42600: For this device values are real physical offsets
+> +		expressed in SI units (m/s^2 for accelerometers and rad/s
+> +		for gyroscope)/
+> +
+> +What:		/sys/bus/iio/devices/iio:deviceX/in_accel_calibbias_available
+> +What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_calibbias_available
+> +KernelVersion:  5.8
+> +Contact:        linux-iio@vger.kernel.org
+> +Description:
+> +		Available values of calibbias. Maybe expressed as either of:
+> +
+> +		- a small discrete set of values like "0 2 4 6 8"
+> +		- a range specified as "[min step max]"
+>  
+>  What:		/sys/bus/iio/devices/iio:deviceX/in_voltageY_calibscale
+>  What:		/sys/bus/iio/devices/iio:deviceX/in_voltageY_supply_calibscale
+> diff --git a/Documentation/ABI/testing/sysfs-bus-iio-icm42600 b/Documentation/ABI/testing/sysfs-bus-iio-icm42600
+> deleted file mode 100644
+> index 0bf1fd4f5bf1..000000000000
+> --- a/Documentation/ABI/testing/sysfs-bus-iio-icm42600
+> +++ /dev/null
+> @@ -1,20 +0,0 @@
+> -What:		/sys/bus/iio/devices/iio:deviceX/in_accel_x_calibbias
+> -What:		/sys/bus/iio/devices/iio:deviceX/in_accel_y_calibbias
+> -What:		/sys/bus/iio/devices/iio:deviceX/in_accel_z_calibbias
+> -What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_x_calibbias
+> -What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_y_calibbias
+> -What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_z_calibbias
+> -KernelVersion:  5.8
+> -Contact:        linux-iio@vger.kernel.org
+> -Description:
+> -		Hardware applied calibration offset (assumed to fix production
+> -		inaccuracies). Values represent a real physical offset expressed
+> -		in SI units (m/s^2 for accelerometer and rad/s for gyroscope).
+> -
+> -What:		/sys/bus/iio/devices/iio:deviceX/in_accel_calibbias_available
+> -What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_calibbias_available
+> -KernelVersion:  5.8
+> -Contact:        linux-iio@vger.kernel.org
+> -Description:
+> -		Range of available values for hardware offset. Values in SI
+> -		units (m/s^2 for accelerometer and rad/s for gyroscope).
 
