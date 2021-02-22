@@ -2,68 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 352A232101E
-	for <lists+linux-doc@lfdr.de>; Mon, 22 Feb 2021 06:08:30 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id AFB5A32109F
+	for <lists+linux-doc@lfdr.de>; Mon, 22 Feb 2021 07:00:39 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230090AbhBVFGk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 22 Feb 2021 00:06:40 -0500
-Received: from out30-56.freemail.mail.aliyun.com ([115.124.30.56]:46850 "EHLO
-        out30-56.freemail.mail.aliyun.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S229487AbhBVFGj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 22 Feb 2021 00:06:39 -0500
-X-Alimail-AntiSpam: AC=PASS;BC=-1|-1;BR=01201311R101e4;CH=green;DM=||false|;DS=||;FP=0|-1|-1|-1|0|-1|-1|-1;HT=e01e04420;MF=alex.shi@linux.alibaba.com;NM=1;PH=DS;RN=11;SR=0;TI=SMTPD_---0UP9fL7J_1613970355;
-Received: from IT-FVFX43SYHV2H.local(mailfrom:alex.shi@linux.alibaba.com fp:SMTPD_---0UP9fL7J_1613970355)
-          by smtp.aliyun-inc.com(127.0.0.1);
-          Mon, 22 Feb 2021 13:05:56 +0800
-Subject: Re: [PATCH] doc: use KCFLAGS instead of EXTRA_CFLAGS to pass flags
- from command line
-To:     Masahiro Yamada <masahiroy@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>,
-        Federico Vaga <federico.vaga@vaga.pv.it>,
-        Harry Wei <harryxiyou@gmail.com>, Jyri Sarha <jsarha@ti.com>,
-        Tomi Valkeinen <tomi.valkeinen@ti.com>,
-        dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-References: <20210221152524.197693-1-masahiroy@kernel.org>
-From:   Alex Shi <alex.shi@linux.alibaba.com>
-Message-ID: <b1d148cf-5264-54c7-1b6a-b0b4a5e866a1@linux.alibaba.com>
-Date:   Mon, 22 Feb 2021 13:05:54 +0800
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.0; rv:68.0)
- Gecko/20100101 Thunderbird/68.12.0
+        id S229748AbhBVGAT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 22 Feb 2021 01:00:19 -0500
+Received: from mail.loongson.cn ([114.242.206.163]:44610 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S229549AbhBVGAS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 22 Feb 2021 01:00:18 -0500
+Received: from LAPTOP-O8VTVVS6.localdomain (unknown [112.20.113.231])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxD_NESDNgDTANAA--.17646S2;
+        Mon, 22 Feb 2021 13:59:33 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Harry Wei <harryxiyou@gmail.com>,
+        Yanteng Si <siyanteng01@gmail.com>, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, Huacai Chen <chenhuacai@gmail.com>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>,
+        Yanteng Si <siyanteng@loongson.cn>
+Subject: [PATCH 0/5] docs/zh_CN:cover letter
+Date:   Mon, 22 Feb 2021 13:59:25 +0800
+Message-Id: <20210222055930.10454-1-siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <20210221152524.197693-1-masahiroy@kernel.org>
-Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9DxD_NESDNgDTANAA--.17646S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7CF4UCFW7CFWfAFW3GFyUJrb_yoW8GrWfpF
+        1UKr1fJ3WfAr13Cw1fKr1UJF15JF4xCay5tr17Xwn3tr4DJr4Dtrn8t34DKrW7Jr18XFy5
+        Xr4YkryUCr1Yyw7anT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUkv14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+        6F4UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+        Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+        I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+        4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY02Avz4vE14v_GrWl
+        42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJV
+        WUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAK
+        I48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r1j6r
+        4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v26r4j6F4UMIIF
+        0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUP5rcUUUUU=
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
+This series of patches translates all documents in the Doc/riscv directory.
 
+Yanteng Si(5):
+docs/zh_CN:add riscv boot-image-header.rst translation
+docs/zh_CN: add riscv features.rst translation
+docs/zh_CN: add riscv patch-acceptance.rst translation
+docs/zh_CN: add riscv pmu.rst translation
+docs/zh_CN: add riscv index.rst translation
 
-在 2021/2/21 下午11:25, Masahiro Yamada 写道:
-> You should use KCFLAGS to pass additional compiler flags from the
-> command line. Using EXTRA_CFLAGS is wrong.
-> 
-> EXTRA_CFLAGS is supposed to specify flags applied only to the current
-> Makefile (and now deprecated in favor of ccflags-y).
-> 
-> It is still used in arch/mips/kvm/Makefile (and possibly in external
-> modules too). Passing EXTRA_CFLAGS from the command line overwrites
-> it and breaks the build.
-> 
-> I also fixed drivers/gpu/drm/tilcdc/Makefile because commit 816175dd1fd7
-> ("drivers/gpu/drm/tilcdc: Makefile, only -Werror when no -W* in
-> EXTRA_CFLAGS") was based on the same misunderstanding.
-> 
-> Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
-> ---
-> 
->  Documentation/process/4.Coding.rst                            | 2 +-
->  Documentation/process/submit-checklist.rst                    | 2 +-
->  Documentation/translations/it_IT/process/4.Coding.rst         | 2 +-
->  Documentation/translations/it_IT/process/submit-checklist.rst | 2 +-
->  Documentation/translations/zh_CN/process/4.Coding.rst         | 2 +-
->  drivers/gpu/drm/tilcdc/Makefile                               | 2 +-
->  6 files changed, 6 insertions(+), 6 deletions(-)
-> 
+Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+---
+cumentation/translations/zh_CN/riscv/boot-image-header.rst |  67
+++++++++++++++++++++++++++++++++++++++++
+ Documentation/translations/zh_CN/riscv/features.rst          |  11
++++++++
+ Documentation/translations/zh_CN/riscv/index.rst             |  29
+++++++++++++++++++
+ Documentation/translations/zh_CN/riscv/patch-acceptance.rst  |  32
+++++++++++++++++++++
+ Documentation/translations/zh_CN/riscv/pmu.rst               | 233
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 5 files changed, 372 insertions(+)
+
+diff --git a/Documentation/translations/zh_CN/riscv/boot-image-header.rst b/Documentation/translations/zh_CN/riscv/boot-image-header.rst
+new file mode 100644
+index 000000000000..3e9a9abb5d6f
+--- /dev/null
++++ b/Documentation/translations/zh_CN/riscv/boot-image-header.rst
+
