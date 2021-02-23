@@ -2,104 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4F0A932298C
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Feb 2021 12:37:24 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 7C91C3229E0
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Feb 2021 13:01:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230459AbhBWLgV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Feb 2021 06:36:21 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48260 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230429AbhBWLgU (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Feb 2021 06:36:20 -0500
-Received: from mail-pg1-x52c.google.com (mail-pg1-x52c.google.com [IPv6:2607:f8b0:4864:20::52c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A0E2AC061574;
-        Tue, 23 Feb 2021 03:35:40 -0800 (PST)
-Received: by mail-pg1-x52c.google.com with SMTP id o38so12171418pgm.9;
-        Tue, 23 Feb 2021 03:35:40 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=ZXknYZa22rU4H1Kyhm91bekSW7PvKMTDIpqNkOqobg0=;
-        b=CVmm/41qEVa8VkqYO/9hoDhX1BID2L/663fz5V7U+F4AZkVdnGavR376wsVaYXywWv
-         GwaxEEG7ONNBS3a2yM1x56LTm3nuDPq1uFXJjz0zHD7LJfVpMhzcT/0am1a+pSHHe8fp
-         DMdjnmnXYq/+FU0IzTGSoyNWULwftomnuO9VsI7U2rVxA8toBCTlAb/uEHd2CHyVKwdy
-         yAF6dHL5Tz+nkNM+q84Fg82BhD42/Q6znMcw1086F25m89CGXK5YgSGhwwpzwIqGJLs9
-         HBg/GBQ4EU49gd5yXsMj3njGJKQrWmLmha8gigkWuwTDoxh9iAUlhW91D7SmlKhP//CT
-         3C6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=ZXknYZa22rU4H1Kyhm91bekSW7PvKMTDIpqNkOqobg0=;
-        b=s0eSH+p+9tCk6X2x1VwQG85UfWlUjmB/bfAJsrt6fdyrB1BJ2Wug4Nz1taGSCMmTlG
-         yjEzg7umUpMr2Fl5Y0NLazQfIpTc8owKVvxhubd7E8oGnI2y6HTdQ92g1HnEL7ROPYZb
-         +NNu2iyST9u+Qq3NlUoNczio+MslAe4ebqsfYVdWNqRcpv0jxgu5kjKCYwiZENc9X2zc
-         WwfOZ9ZBA9dF6g7/jgTTMY1nGBrPgDkEAZ3N06iEdfzCPs85/k7nziP8rTllWgYOxflW
-         p7j7aa0ct1P9ei0Gw48TBAme6aAdoH9f38+TwM2YbuY6WMp3stfbkm6LI/LgpvOVbyhm
-         TnXA==
-X-Gm-Message-State: AOAM533gdijYW0Q1bUHIie0finOVXyLK8bL1x8fm4EUv7eb6o1bu6Qh0
-        PSCmUycBM6sx83CKhrX3hqa+aIvgKdRMNA==
-X-Google-Smtp-Source: ABdhPJx9a0hukooQl+z13/uQEycH7Ffx7KnAqyXf1sCpbyl4sm/4sgSImvbkUxroEOUNSBqVplDsIw==
-X-Received: by 2002:a63:f953:: with SMTP id q19mr3171093pgk.125.1614080139936;
-        Tue, 23 Feb 2021 03:35:39 -0800 (PST)
-Received: from ?IPv6:2405:201:600d:a089:71c8:9c21:1a6d:84ab? ([2405:201:600d:a089:71c8:9c21:1a6d:84ab])
-        by smtp.gmail.com with ESMTPSA id b7sm21630037pfp.139.2021.02.23.03.35.36
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 23 Feb 2021 03:35:39 -0800 (PST)
-Subject: Re: [RFC] scripts: kernel-doc: fix array element capture in
- pointer-to-func parsing
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     lukas.bulwahn@gmail.com,
-        linux-kernel-mentees@lists.linuxfoundation.org,
-        linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
-References: <20210217145625.14006-1-yashsri421@gmail.com>
- <878s7flrdf.fsf@meer.lwn.net>
-From:   Aditya <yashsri421@gmail.com>
-Message-ID: <1e4c4108-feb4-9ab6-7c1c-13200658470c@gmail.com>
-Date:   Tue, 23 Feb 2021 17:05:34 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        id S232662AbhBWL4e (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Feb 2021 06:56:34 -0500
+Received: from mail.jvpinto.com ([65.49.11.60]:54491 "EHLO mail.JVPinto.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S232501AbhBWLyb (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 23 Feb 2021 06:54:31 -0500
+Received: from RW-EXC1.JVPinto.com (2002:ac20:10d::ac20:10d) by
+ RW-EXC1.JVPinto.com (2002:ac20:10d::ac20:10d) with Microsoft SMTP Server
+ (TLS) id 15.0.1497.2; Tue, 23 Feb 2021 03:52:35 -0800
+Received: from User (52.231.198.195) by RW-EXC1.JVPinto.com (172.32.1.13) with
+ Microsoft SMTP Server id 15.0.1497.2 via Frontend Transport; Tue, 23 Feb 2021
+ 03:52:20 -0800
+Reply-To: <ms.reem@yandex.com>
+From:   "Ms. Reem" <johnpinto@jvpinto.com>
+Subject: Hello okay
+Date:   Tue, 23 Feb 2021 11:52:34 +0000
 MIME-Version: 1.0
-In-Reply-To: <878s7flrdf.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1251"
 Content-Transfer-Encoding: 7bit
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2600.0000
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2600.0000
+Message-ID: <933f089f49b04946b97b7d0f2a305064@RW-EXC1.JVPinto.com>
+To:     Undisclosed recipients:;
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 23/2/21 3:03 am, Jonathan Corbet wrote:
-> Aditya Srivastava <yashsri421@gmail.com> writes:
-> 
->> Currently, kernel-doc causes an unexpected error when array element (i.e.,
->> "type (*foo[bar])(args)") is present as pointer parameter in
->> pointer-to-function parsing.
->>
->> For e.g., running kernel-doc -none on kernel/gcov/gcc_4_7.c causes this
->> error:
->> "Use of uninitialized value $param in regexp compilation at ...", in
->> combination with:
->> "warning: Function parameter or member '' not described in 'gcov_info'"
-> 
-> In the future, please quote error messages from the kernel verbatim.
-> You can trim irrelevant stuff before or after, but please do not edit
-> them in this way.  That helps me to understand what you are fixing, and
-> is also useful for anybody else who might be searching for a solution to
-> the same problem.
-> 
->> Here, the parameter parsing does not take into account the presence of
->> array element (i.e. square brackets) in $param.
->>
->> Provide a simple fix by adding square brackets in the regex, responsible
-[]
->> -- 
-> 
-> ...meanwhile, I have applied this one, thanks.
-> 
+Hello,
 
-Thanks Jonathan! Will keep this in mind..
+My name is Ms. Reem Ebrahim Al-Hashimi, I am the "Minister of state
+and Petroleum" also "Minister of State for International Cooperation"
+in UAE. I write to you on behalf of my other "three (3) colleagues"
+who has approved me to solicit for your "partnership in claiming of
+{us$47=Million}" from a Financial Home in Cambodia on their behalf and
+for our "Mutual Benefits".
 
-Thanks
-Aditya
+The Fund {us$47=Million} is our share from the (over-invoiced) Oil/Gas
+deal with Cambodian/Vietnam Government within 2013/2014, however, we
+don't want our government to know about the fund. If this proposal
+interests you, let me know, by sending me an email and I will send to
+you detailed information on how this business would be successfully
+transacted. Be informed that nobody knows about the secret of this
+fund except us, and we know how to carry out the entire transaction.
+So I am compelled to ask, that you will stand on our behalf and
+receive this fund into any account that is solely controlled by you.
+
+We will compensate you with 15% of the total amount involved as
+gratification for being our partner in this transaction. Reply to:
+ms.reem@yandex.com
+
+Regards,
+Ms. Reem.
