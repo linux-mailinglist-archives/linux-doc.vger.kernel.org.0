@@ -2,17 +2,17 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 210A33235F0
+	by mail.lfdr.de (Postfix) with ESMTP id 9C7483235F1
 	for <lists+linux-doc@lfdr.de>; Wed, 24 Feb 2021 04:13:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232086AbhBXDMn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Feb 2021 22:12:43 -0500
-Received: from mail.loongson.cn ([114.242.206.163]:47010 "EHLO loongson.cn"
+        id S232042AbhBXDMo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Feb 2021 22:12:44 -0500
+Received: from mail.loongson.cn ([114.242.206.163]:47022 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S232042AbhBXDMl (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 23 Feb 2021 22:12:41 -0500
+        id S232473AbhBXDMm (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 23 Feb 2021 22:12:42 -0500
 Received: from LAPTOP-O8VTVVS6.localdomain (unknown [112.20.111.70])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxr_L3wzVgo00OAA--.18095S4;
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxr_L3wzVgo00OAA--.18095S5;
         Wed, 24 Feb 2021 11:11:54 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     Jonathan Corbet <corbet@lwn.net>
@@ -22,61 +22,83 @@ Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
         realpuyuwang@gmail.com, Huacai Chen <chenhuacai@gmail.com>,
         Jiaxun Yang <jiaxun.yang@flygoat.com>,
         Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v2 2/5] docs/zh_CN: add riscv features.rst translation
-Date:   Wed, 24 Feb 2021 11:11:46 +0800
-Message-Id: <20210224031149.15179-3-siyanteng@loongson.cn>
+Subject: [PATCH v2 3/5] docs/zh_CN: add riscv patch-acceptance.rst translation
+Date:   Wed, 24 Feb 2021 11:11:47 +0800
+Message-Id: <20210224031149.15179-4-siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210224031149.15179-1-siyanteng@loongson.cn>
 References: <20210224031149.15179-1-siyanteng@loongson.cn>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9Dxr_L3wzVgo00OAA--.18095S4
-X-Coremail-Antispam: 1UD129KBjvdXoW7Gr43tr48Kw1DAF4rCr48Zwb_yoWfCFgEkw
-        s5tF4Ik3y7tF1IkFWkJF1UGryxCF4Skr18A3Zrtay5C34DC39rGasFqwn3ua98Zr4ruryF
-        k397Xr97JrnFgjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-        9fnUUIcSsGvfJTRUUUbhxFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUXwA2048vs2IY02
-        0Ec7CjxVAFwI0_Gr0_Xr1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28EF7xv
-        wVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr1UM2
-        8EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
-        e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
-        8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
-        jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc2xSY4AK67AK6r48MxAIw2
-        8IcxkI7VAKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4l
-        x2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrw
-        CI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI
-        42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z2
-        80aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7VUUjNt3UUUUU==
+X-CM-TRANSID: AQAAf9Dxr_L3wzVgo00OAA--.18095S5
+X-Coremail-Antispam: 1UD129KBjvJXoW7ur43try3ZrW7uw4kKF43Awb_yoW5JFWUpr
+        ZagrySgF18A342k3WfKr18JrW8AF4rWaya9w1kA3s3tr1kArWqqFWDJ343CFyag3s5uFyj
+        v34kuFy5CryUA3JanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUBv14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JrWl82xGYIkIc2
+        x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
+        Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJw
+        A2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
+        M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
+        v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
+        F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkIecxEwVAFwVW8GwCF04
+        k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18
+        MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr4
+        1lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l
+        IxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4
+        A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JU-189UUUUU=
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch translates Documentation/riscv/features.rst into Chinese.
+This patch translates Documentation/riscv/patch-acceptance.rst into Chineae.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 ---
- Documentation/translations/zh_CN/riscv/features.rst | 11 +++++++++++
- 1 file changed, 11 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/riscv/features.rst
+ .../zh_CN/riscv/patch-acceptance.rst          | 32 +++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/riscv/patch-acceptance.rst
 
-diff --git a/Documentation/translations/zh_CN/riscv/features.rst b/Documentation/translations/zh_CN/riscv/features.rst
+diff --git a/Documentation/translations/zh_CN/riscv/patch-acceptance.rst b/Documentation/translations/zh_CN/riscv/patch-acceptance.rst
 new file mode 100644
-index 000000000000..37f557c38047
+index 000000000000..75446871559f
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/riscv/features.rst
-@@ -0,0 +1,11 @@
++++ b/Documentation/translations/zh_CN/riscv/patch-acceptance.rst
+@@ -0,0 +1,32 @@
 +.. SPDX-License-Identifier: GPL-2.0
 +
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: :doc:`../../../riscv/features`
++:Original: :doc:`../../../riscv/patch-acceptance`
 +:Translator: Yanteng Si <siyanteng@loongson.cn>
 +
-+.. _cn_features.rst:
++.. _cn_riscv_patch-acceptance:
 +
 +
-+.. kernel-feat:: $srctree/Documentation/features riscv
++arch/riscv 开发者维护指南
++=========================
++
++概述
++----
++RISC-V指令集体系结构是公开开发的：
++正在进行的草案可供所有人查看和测试实现。新模块或者扩展草案可能会在开发过程中发
++生更改---有时以不兼容的方式对以前的草案进行更改。这种灵活性可能会给RISC-V Linux
++维护者带来挑战。Linux开发过程更喜欢经过良好检查和测试的代码，而不是试验代码。我
++们希望推广同样的规则到即将被内核合并的RISC-V相关代码。
++
++提交补遗清单
++-------------------------
++如果RISC-V基金会将这些模块或扩展的规范列为“冻结”或“已批准”，则我们仅接受新模块
++或扩展的补丁。 （爱好者当然可以维护自己的Linux内核树，其中包含所需代码扩展草案
++的代码。）
++
++此外，RISC-V规范允许爱好者创建自己的自定义扩展。这些自定义拓展不需要通过RISC-V
++基金会的任何审核或批准。为了避免将爱好者一些特别的RISC-V拓展添加进内核代码带来
++的维护复杂性和对性能的潜在影响，我们将只接受RISC-V基金会正式冻结或批准的的扩展
++补丁。（爱好者当然可以维护自己的Linux内核树，其中包含他们想要的任何自定义扩展
++的代码。）
 -- 
 2.25.1
 
