@@ -2,98 +2,115 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7FD83324035
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Feb 2021 16:26:45 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6B4B6324039
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Feb 2021 16:26:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231414AbhBXOl6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Feb 2021 09:41:58 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39966 "EHLO
+        id S233502AbhBXOmo (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Feb 2021 09:42:44 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43012 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236431AbhBXNUm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Feb 2021 08:20:42 -0500
-Received: from mail-oo1-xc35.google.com (mail-oo1-xc35.google.com [IPv6:2607:f8b0:4864:20::c35])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 99C97C06121E
-        for <linux-doc@vger.kernel.org>; Wed, 24 Feb 2021 05:18:45 -0800 (PST)
-Received: by mail-oo1-xc35.google.com with SMTP id l5so495364ooj.7
-        for <linux-doc@vger.kernel.org>; Wed, 24 Feb 2021 05:18:45 -0800 (PST)
+        with ESMTP id S236991AbhBXNcZ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Feb 2021 08:32:25 -0500
+Received: from mail-pl1-x62f.google.com (mail-pl1-x62f.google.com [IPv6:2607:f8b0:4864:20::62f])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 005B5C06178C;
+        Wed, 24 Feb 2021 05:30:10 -0800 (PST)
+Received: by mail-pl1-x62f.google.com with SMTP id w18so1184568plc.12;
+        Wed, 24 Feb 2021 05:30:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2QMkH64M8As4l+KSDTQdK+u4M5qrIN7PaZOHlR51wic=;
-        b=QmN0FsJYiPxmCNa2Tha1APhsUK8o/7UaZLHeTlgpjASwj19luMRyZbWjrLxbXnOWSq
-         QX3Widqm0McOoSM3HTXHxcQmOE55BROws/lIjp65Idz5F6TUFsQCip3AEZUVrDi4802W
-         a1DgYxiomsD1lW1EmR4QuPaF4FxC5XnzYOdkw7NhBJMriRHA9/xsyO/aNXKB4gX+Akwl
-         XZDq3lTBz1baGF2HPr2Zj2AtovQtHjgyajNkzw0upFslmhr/BtBhrG2tOL3fl4ZgMHp+
-         eyKWP2uXQHTgp4Q/AvKzKs1YWSL4aGdSzROSCh8GqzzcYz7IiSTyQg3cPlVOLhACAypy
-         MH3g==
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id:in-reply-to:references;
+        bh=qfRfzFAwrIoV1GXQkJdn6bloQGW/Oh86EcITr8l8t7o=;
+        b=SZoAHANGnhmCzJHG1dCPjNAO/11Ivn7BKBvM+XcDvW+Cc2H5L+epyrPF+ywHodcFyV
+         +vKe5obmeeRtNmM/z4AekygbVJU7JW8hQsTuG/9DHJSQjXi9aV0DukKRjQwwbH7CiQk+
+         afpA0OzYsOGeYlF4/QzCj2SAAv56Ux6QRAM6tIEShVwD+v1WjM2kW/1wgKjpy6ebXDMo
+         U8igCoWCGv+luVMNG9zdre/woqzpuh88dHoUpG3qHirNr/GGngN+F59zyitkRyFrQpRP
+         BN/9qwOdBGFgkgC43FJxUR9k0yG1BWXVtyhvhJqoVOi08QGQFbOvpm/MOSFyD4W+Ebij
+         uh1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=2QMkH64M8As4l+KSDTQdK+u4M5qrIN7PaZOHlR51wic=;
-        b=AF732cZZp7cfHVUn2Tt2MVKeELbft8ZAn0JjIK6Ux0s6qcd9MR84gqId0+xMbAxzOY
-         Y0riIefvelfW4OfsZhyqFJ8s58wWXKKylzu2Cnb522jU6/YG2V2roPnj38Z9/V56bv1A
-         yGE4mTF1lqsHCutKKlsRGhf3yo564QdqpnnrvXWs6olNHdkJkM54LAnJAyoQAF+/eBme
-         6Qfyl0u1NHuYdSFZvOPZyJA5IvglmxoqXXQjYfwLRrGS5yI1PQfz2ZmizOFjM5PCJrqQ
-         5XNPanAUqS4OMYzrJDfmKrdGnFdwlZ6Xdqv3w2shUsUmZvRIa4E97XfXbKiI/3R3EyyD
-         S5xQ==
-X-Gm-Message-State: AOAM533mPhqWBOIVIULcm17P2hJMy0s7DJ0vkaPTP5V1qnD/px2oS52x
-        xgb+60xHrjYF1bzsYpP2bLAZQQ==
-X-Google-Smtp-Source: ABdhPJzZENaJ/w4FIbF/u86i6KIgI4boKlF8cypFxWZArBN+CEJ43ycBpfR7AD/CKXEZpGzOO2u34Q==
-X-Received: by 2002:a4a:c44:: with SMTP id n4mr23749084ooe.62.1614172725035;
-        Wed, 24 Feb 2021 05:18:45 -0800 (PST)
-Received: from winterfell.papolivre.org (winterfell.papolivre.org. [198.58.116.17])
-        by smtp.gmail.com with ESMTPSA id b21sm380149oot.34.2021.02.24.05.18.44
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references;
+        bh=qfRfzFAwrIoV1GXQkJdn6bloQGW/Oh86EcITr8l8t7o=;
+        b=PLJ23WZPb82UqxCGMuBl5CA6/Cj6uaIv+OY4VdcMSk3mW5f5az2f/XkGP/F264sJW4
+         5USb/Hcs8PSDasLCwQToQtAwrsM0Iy0I/I6bX3igL+xBOkhCpjc5ZDpqbBt+UflnSlF+
+         iSkoQ/FIGIQGK2Pm5hGxhQ5bUATZffZD0UXm3K1IxRXJNA5e8jTtJT6uCA3ONAEzRnVT
+         QgUdkQQClSHe7YUqqXH4xTMunJl19Tg/UPJ5OL5AqifXbmge3KGgeDrGEhIkKMW7mq0w
+         wI8N2yATq52FCVJU9rfUq2SvEHzfgJAYbGDbGQSuOkuR1rFT4pO0XyQ7UAaOup45/6Y8
+         a/Uw==
+X-Gm-Message-State: AOAM530TvugkR7IN64E2fuDMUH5SEEhtpK2MxzeRA6tglr93YFsuvJcR
+        inYCVRCQWDZem/EmjZmQQROwZvGS73uR7B4m
+X-Google-Smtp-Source: ABdhPJxIPjwG9lM4N5J/rrkK6hFq/627Aqe0h8jJPpIfPt26lVSWCEX1mKKxaUKytjrY5nrJyS2xbw==
+X-Received: by 2002:a17:902:9f8b:b029:e0:a90:b62 with SMTP id g11-20020a1709029f8bb02900e00a900b62mr32736085plq.70.1614173410483;
+        Wed, 24 Feb 2021 05:30:10 -0800 (PST)
+Received: from localhost.localdomain ([2405:201:600d:a089:5c4:262b:be36:c819])
+        by smtp.googlemail.com with ESMTPSA id p11sm2809756pjb.31.2021.02.24.05.30.06
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 24 Feb 2021 05:18:44 -0800 (PST)
-Received: from localhost (unknown [IPv6:2001:1284:f016:4cfd:27e0:441e:870:6787])
-        by winterfell.papolivre.org (Postfix) with ESMTPSA id 7BFBE1C2F43;
-        Wed, 24 Feb 2021 10:18:43 -0300 (-03)
-From:   Antonio Terceiro <antonio.terceiro@linaro.org>
-To:     cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Cc:     Tejun Heo <tj@kernel.org>, Zefan Li <lizefan.x@bytedance.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Jiong Wang <jiong.wang@netronome.com>
-Subject: [PATCH] Documentation: cgroup-v2: fix path to example BPF program
-Date:   Wed, 24 Feb 2021 10:16:31 -0300
-Message-Id: <20210224131631.349287-1-antonio.terceiro@linaro.org>
-X-Mailer: git-send-email 2.30.1
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        Wed, 24 Feb 2021 05:30:10 -0800 (PST)
+From:   Aditya Srivastava <yashsri421@gmail.com>
+To:     corbet@lwn.net
+Cc:     yashsri421@gmail.com, lukas.bulwahn@gmail.com,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-kernel-mentees@lists.linuxfoundation.org
+Subject: [RFC v2] scripts: kernel-doc: fix typedef support for struct/union parsing
+Date:   Wed, 24 Feb 2021 19:00:02 +0530
+Message-Id: <20210224133002.13503-1-yashsri421@gmail.com>
+X-Mailer: git-send-email 2.17.1
+In-Reply-To: <875z2jlr2j.fsf@meer.lwn.net>
+References: <875z2jlr2j.fsf@meer.lwn.net>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This file has been moved into the "progs" subdirectory in
-bd4aed0ee73ca873bef3cb3ec746dd796f03df28, together with all test BPF
-programs.
+Currently, there are 447 files in the kernel tree, which use 'typedef
+struct/union' syntax for defining some struct/union. In total, there
+are ~1290 such occurrences in the kernel tree.
 
-Signed-off-by: Antonio Terceiro <antonio.terceiro@linaro.org>
-Cc: Tejun Heo <tj@kernel.org>
-Cc: Zefan Li <lizefan.x@bytedance.com>
-Cc: Johannes Weiner <hannes@cmpxchg.org>
-Cc: Jonathan Corbet <corbet@lwn.net>
-Cc: Jiong Wang <jiong.wang@netronome.com>
+However, kernel-doc does not support it currently, and running
+scripts/kernel-doc -none on include/linux/zstd.h emits:
+"error: Cannot parse struct or union!"
+
+Add support for parsing struct/union following this syntax.
+
+Signed-off-by: Aditya Srivastava <yashsri421@gmail.com>
 ---
- Documentation/admin-guide/cgroup-v2.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Changes in v2:
+- Split recurring regex into multiple variables
+- Modify commit message
 
-diff --git a/Documentation/admin-guide/cgroup-v2.rst b/Documentation/admin-guide/cgroup-v2.rst
-index c513eafaddea..befe9425d028 100644
---- a/Documentation/admin-guide/cgroup-v2.rst
-+++ b/Documentation/admin-guide/cgroup-v2.rst
-@@ -2094,7 +2094,7 @@ If the program returns 0, the attempt fails with -EPERM, otherwise
- it succeeds.
+ scripts/kernel-doc | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/scripts/kernel-doc b/scripts/kernel-doc
+index 8b5bc7bf4bb8..68df17877384 100755
+--- a/scripts/kernel-doc
++++ b/scripts/kernel-doc
+@@ -1201,12 +1201,23 @@ sub dump_union($$) {
+ sub dump_struct($$) {
+     my $x = shift;
+     my $file = shift;
++    my $decl_type;
++    my $members;
++    my $type = qr{struct|union};
++    # For capturing struct/union definition body, i.e. "{members*}qualifiers*"
++    my $definition_body = qr{\{(.*)\}(?:\s*(?:__packed|__aligned|____cacheline_aligned_in_smp|____cacheline_aligned|__attribute__\s*\(\([a-z0-9,_\s\(\)]*\)\)))*};
  
- An example of BPF_CGROUP_DEVICE program may be found in the kernel
--source tree in the tools/testing/selftests/bpf/dev_cgroup.c file.
-+source tree in the tools/testing/selftests/bpf/progs/dev_cgroup.c file.
+-    if ($x =~ /(struct|union)\s+(\w+)\s*\{(.*)\}(\s*(__packed|__aligned|____cacheline_aligned_in_smp|____cacheline_aligned|__attribute__\s*\(\([a-z0-9,_\s\(\)]*\)\)))*/) {
+-	my $decl_type = $1;
++    if ($x =~ /($type)\s+(\w+)\s*$definition_body/) {
++	$decl_type = $1;
+ 	$declaration_name = $2;
+-	my $members = $3;
++	$members = $3;
++    } elsif ($x =~ /typedef\s+($type)\s*$definition_body\s*(\w+)\s*;/) {
++	$decl_type = $1;
++	$declaration_name = $3;
++	$members = $2;
++    }
  
- 
- RDMA
++    if ($members) {
+ 	if ($identifier ne $declaration_name) {
+ 	    print STDERR "${file}:$.: warning: expecting prototype for $decl_type $identifier. Prototype was for $decl_type $declaration_name instead\n";
+ 	    return;
 -- 
-2.30.1
+2.17.1
 
