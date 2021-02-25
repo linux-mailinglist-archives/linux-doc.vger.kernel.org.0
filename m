@@ -2,18 +2,18 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4B30E325BB1
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Feb 2021 03:42:38 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1175E325BB5
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Feb 2021 03:42:49 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229492AbhBZCmW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 25 Feb 2021 21:42:22 -0500
-Received: from mail.loongson.cn ([114.242.206.163]:47012 "EHLO loongson.cn"
+        id S229498AbhBZCmZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 25 Feb 2021 21:42:25 -0500
+Received: from mail.loongson.cn ([114.242.206.163]:47036 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S229491AbhBZCmV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 25 Feb 2021 21:42:21 -0500
+        id S229460AbhBZCmY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 25 Feb 2021 21:42:24 -0500
 Received: from LAPTOP-O8VTVVS6.localdomain (unknown [112.20.111.70])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxj_PhXzhg07sPAA--.3070S3;
-        Fri, 26 Feb 2021 10:41:38 +0800 (CST)
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxj_PhXzhg07sPAA--.3070S4;
+        Fri, 26 Feb 2021 10:41:39 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
@@ -22,22 +22,22 @@ Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
         realpuyuwang@gmail.com, Huacai Chen <chenhuacai@gmail.com>,
         Jiaxun Yang <jiaxun.yang@flygoat.com>,
         Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v3 1/4] docs/zh_CN:add riscv boot-image-header.rst translation
-Date:   Fri, 26 Feb 2021 02:41:33 +0800
-Message-Id: <20210225184136.4526-2-siyanteng@loongson.cn>
+Subject: [PATCH v3 2/4] docs/zh_CN: add riscv patch-acceptance.rst translation
+Date:   Fri, 26 Feb 2021 02:41:34 +0800
+Message-Id: <20210225184136.4526-3-siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210225184136.4526-1-siyanteng@loongson.cn>
 References: <20210225184136.4526-1-siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9Dxj_PhXzhg07sPAA--.3070S3
-X-Coremail-Antispam: 1UD129KBjvJXoWxGF17CrWDZw1UGrWrCFWDXFb_yoW5tF1fpw
-        1DKrWxG3WxJry7Ar1Ikr17XF43JF4rW3W7C3WxW342vr4YqrZ8Kw1rtr90g347GFyIyF9x
-        XrsYkw13CryYvw7anT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUmK14x267AKxVW5JVWrJwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+X-CM-TRANSID: AQAAf9Dxj_PhXzhg07sPAA--.3070S4
+X-Coremail-Antispam: 1UD129KBjvJXoWxZFWfGw1ftw1kCrWDXr17GFg_yoW5Gr4fpr
+        Zag34SgF18A342kw1fKr1UJrW8AF4rWaya9w1kJ3s3tr1kJrWqqFWDJ343CFyag3s5uFyU
+        Z34kCFy5CryUA3JanT9S1TB71UUUUUDqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUmK14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
         rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2jI8I6cxK6x804I0_JFv_Gryl82xGYIkIc2x262
-        80x7IE14v26r18M28IrcIa0xkI8VCY1x0267AKxVWUCVW8JwA2ocxC64kIII0Yj41l84x0
+        80x7IE14v26r15M28IrcIa0xkI8VCY1x0267AKxVW8JVW5JwA2ocxC64kIII0Yj41l84x0
         c7CEw4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2
         IY6xkF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2
         z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0V
@@ -48,94 +48,59 @@ X-Coremail-Antispam: 1UD129KBjvJXoWxGF17CrWDZw1UGrWrCFWDXFb_yoW5tF1fpw
         WUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAF
         wI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcI
         k0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4j
-        6r4UJbIYCTnIWIevJa73UjIFyTuYvjfUYsjbUUUUU
+        6r4UJbIYCTnIWIevJa73UjIFyTuYvjfU0DGOUUUUU
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch translates Documentation/riscv/boot-image-header.rst intoChinese.
+This patch translates Documentation/riscv/patch-acceptance.rst into Chineae.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 Reviewed-by: Alex Shi <alex.shi@linux.alibaba.com>
 ---
- .../zh_CN/riscv/boot-image-header.rst         | 67 +++++++++++++++++++
- 1 file changed, 67 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/riscv/boot-image-header.rst
+ .../zh_CN/riscv/patch-acceptance.rst          | 32 +++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/riscv/patch-acceptance.rst
 
-diff --git a/Documentation/translations/zh_CN/riscv/boot-image-header.rst b/Documentation/translations/zh_CN/riscv/boot-image-header.rst
+diff --git a/Documentation/translations/zh_CN/riscv/patch-acceptance.rst b/Documentation/translations/zh_CN/riscv/patch-acceptance.rst
 new file mode 100644
-index 000000000000..fadfe08d03d5
+index 000000000000..75446871559f
 --- /dev/null
-+++ b/Documentation/translations/zh_CN/riscv/boot-image-header.rst
-@@ -0,0 +1,67 @@
++++ b/Documentation/translations/zh_CN/riscv/patch-acceptance.rst
+@@ -0,0 +1,32 @@
++.. SPDX-License-Identifier: GPL-2.0
++
 +.. include:: ../disclaimer-zh_CN.rst
 +
-+:Original: :doc:`../../../riscv/boot-image-header`
++:Original: :doc:`../../../riscv/patch-acceptance`
 +:Translator: Yanteng Si <siyanteng@loongson.cn>
 +
-+.. _cn_boot-image-header.rst:
++.. _cn_riscv_patch-acceptance:
 +
 +
-+==========================
-+RISC-V Linux启动镜像文件头
-+==========================
++arch/riscv 开发者维护指南
++=========================
 +
-+:Author: Atish Patra <atish.patra@wdc.com>
-+:Date:   20 May 2019
++概述
++----
++RISC-V指令集体系结构是公开开发的：
++正在进行的草案可供所有人查看和测试实现。新模块或者扩展草案可能会在开发过程中发
++生更改---有时以不兼容的方式对以前的草案进行更改。这种灵活性可能会给RISC-V Linux
++维护者带来挑战。Linux开发过程更喜欢经过良好检查和测试的代码，而不是试验代码。我
++们希望推广同样的规则到即将被内核合并的RISC-V相关代码。
 +
-+此文档仅描述RISC-V Linux 启动文件头的详情。
++提交补遗清单
++-------------------------
++如果RISC-V基金会将这些模块或扩展的规范列为“冻结”或“已批准”，则我们仅接受新模块
++或扩展的补丁。 （爱好者当然可以维护自己的Linux内核树，其中包含所需代码扩展草案
++的代码。）
 +
-+TODO:
-+  写一个完整的启动指南。
-+
-+在解压后的Linux内核镜像中存在以下64字节的文件头::
-+
-+	u32 code0;		  /* Executable code */
-+	u32 code1;		  /* Executable code */
-+	u64 text_offset;	  /* Image load offset, little endian */
-+	u64 image_size;		  /* Effective Image size, little endian */
-+	u64 flags;		  /* kernel flags, little endian */
-+	u32 version;		  /* Version of this header */
-+	u32 res1 = 0;		  /* Reserved */
-+	u64 res2 = 0;		  /* Reserved */
-+	u64 magic = 0x5643534952; /* Magic number, little endian, "RISCV" */
-+	u32 magic2 = 0x05435352;  /* Magic number 2, little endian, "RSC\x05" */
-+	u32 res3;		  /* Reserved for PE COFF offset */
-+
-+这种头格式与PE/COFF文件头兼容，并在很大程度上受到ARM64文件头的启发。因此，ARM64
-+和RISC-V文件头可以在未来合并为一个共同的头。
-+
-+注意
-+====
-+
-+- 将来也可以复用这个文件头，用来对RISC-V的EFI桩提供支持。为了使内核镜像如同一个
-+  EFI应用程序一样加载，EFI规范中规定在内核镜像的开始需要PE/COFF镜像文件头。为了
-+  支持EFI桩，应该用“MZ”魔术字符替换掉code0，并且res3（偏移量未0x3c）应指向PE/COFF
-+  文件头的其余部分.
-+
-+- 表示文件头的版本号的bit位域
-+
-+	==========  ==========
-+	Bits 0:15   次要  版本
-+	Bits 16:31  主要  版本
-+	==========  ==========
-+
-+  这保持了新旧版本之间的兼容性。
-+  当前版本被定义为0.2。
-+
-+- 从版本0.2开始，结构体成员“magic”就已经被弃用，在之后的版本中，可能会移除掉它。
-+  最初，该成员应该与ARM64头的“magic”成员匹配，但遗憾的是并没有。
-+  “magic2”成员代替“magic”成员与ARM64头相匹配。
-+
-+- 在当前的文件头，标志位域只剩下了一个。
-+
-+	=====  ==============================
-+	Bit 0  内核字节序。1 if BE, 0 if LE.
-+	=====  ==============================
-+
-+- 对于引导加载程序加载内核映像来说，image_size成员是强制性要写进文件头的，否则将引
-+  导失败。
++此外，RISC-V规范允许爱好者创建自己的自定义扩展。这些自定义拓展不需要通过RISC-V
++基金会的任何审核或批准。为了避免将爱好者一些特别的RISC-V拓展添加进内核代码带来
++的维护复杂性和对性能的潜在影响，我们将只接受RISC-V基金会正式冻结或批准的的扩展
++补丁。（爱好者当然可以维护自己的Linux内核树，其中包含他们想要的任何自定义扩展
++的代码。）
 -- 
 2.25.1
 
