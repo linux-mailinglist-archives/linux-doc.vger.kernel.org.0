@@ -2,101 +2,124 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 661A5326406
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Feb 2021 15:25:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id EAC063264A1
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Feb 2021 16:24:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230144AbhBZOYp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Feb 2021 09:24:45 -0500
-Received: from mx2.suse.de ([195.135.220.15]:56710 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S230125AbhBZOYi (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 26 Feb 2021 09:24:38 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-        t=1614349429; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-         mime-version:mime-version:content-type:content-type:
-         in-reply-to:in-reply-to:references:references;
-        bh=EZ8keW/MmYo/ENSptctxMrJ/qqagf2xtsHbib8YaQAw=;
-        b=LSycJx2ivWEdJJgeje1f3n3MzxIWq9i+1H14zarEBVnqfjsRyrE1qdgTZ8NRjn2eZHcbOM
-        XyLdocTAt8/EyLAHtETrPeE/SklJq3eKUO2b+f5R8AKF6x5kuJ09iEfrJeDvX7XVPiq1ra
-        t+e3m83qhS/4gCKyc9EfHgyaAdxWen4=
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 5A13EAE30;
-        Fri, 26 Feb 2021 14:23:49 +0000 (UTC)
-Date:   Fri, 26 Feb 2021 15:23:42 +0100
-From:   Michal =?iso-8859-1?Q?Koutn=FD?= <mkoutny@suse.com>
-To:     Vipin Sharma <vipinsh@google.com>
-Cc:     thomas.lendacky@amd.com, tj@kernel.org, brijesh.singh@amd.com,
-        jon.grimm@amd.com, eric.vantassell@amd.com, pbonzini@redhat.com,
-        hannes@cmpxchg.org, frankja@linux.ibm.com, borntraeger@de.ibm.com,
-        corbet@lwn.net, seanjc@google.com, vkuznets@redhat.com,
-        wanpengli@tencent.com, jmattson@google.com, joro@8bytes.org,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        gingell@google.com, rientjes@google.com, dionnaglaze@google.com,
-        kvm@vger.kernel.org, x86@kernel.org, cgroups@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [RFC 1/2] cgroup: sev: Add misc cgroup controller
-Message-ID: <YDkEbv9u3OBNpk6f@blackbook>
-References: <20210218195549.1696769-1-vipinsh@google.com>
- <20210218195549.1696769-2-vipinsh@google.com>
- <YDVIdycgk8XL0Zgx@blackbook>
- <YDcuQFMbe5MaatBe@google.com>
- <YDdzcfLxsCeYxLNG@blackbook>
- <YDf6bpSxX6I5xdqZ@google.com>
+        id S230099AbhBZPXG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Feb 2021 10:23:06 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34774 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229989AbhBZPXE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Feb 2021 10:23:04 -0500
+Received: from mail-pl1-x633.google.com (mail-pl1-x633.google.com [IPv6:2607:f8b0:4864:20::633])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2AB6BC061574;
+        Fri, 26 Feb 2021 07:22:23 -0800 (PST)
+Received: by mail-pl1-x633.google.com with SMTP id f8so5467137plg.5;
+        Fri, 26 Feb 2021 07:22:23 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=N+8bSP4jmKRK45sk0elNZOZAzDCg0/KrbuIhk6AYYpI=;
+        b=of6GrdclCGu6wWKR3lfeZTkk193cw4Pc/er951ZhLuVJbFJ+Q4X8ib+ietQkvWsuEg
+         V7Mn/cpu1wKOZpPuAIlLcXKCu142LRz0FezFPS+CZkcmjOYofO1MpCdPmS+3hqb1k0pE
+         Tq3VHW7wcuTh4y1GeinZeoFlSRqFhwbrvxoFNdcHE8/6AhjOss2yS+ltfOxQ8for4sr1
+         xfqqFbK4IUnq2ZiKZNXlNY1VjmWsKbmHrXk84zvGxhgqw7P2janJ4zGkhN4bXXNjo5II
+         TrXvgZW0/JxUebyaCNZKD0YM/N3mnvxTYMZQKN29/MVecbOnHIF9SX1SUQqHEFO9hn9z
+         sB/Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=N+8bSP4jmKRK45sk0elNZOZAzDCg0/KrbuIhk6AYYpI=;
+        b=JLTasXmVvehLKnj49qjNbFZYDzxfoF4MVQnCaHmIvJ6beYlb8+6C9RxklQyGGVFop/
+         CDvt623ZP7F0cgpLikfZjkUCxPaFBVOhmFAzIaYo3ATot8P+Fp5rcPYMfu3U6JZsk0q/
+         SiaPz7zkUfQMWdy6q6zEKWPPgTgP+dbaHIAIFJJ8g0N7MCETwBTR5fhkVMRBmQEYu/Fw
+         ZphGeCe3ePFMNeWeRZ56eIiYg8CcvJoBcHkaiit/NZ/lIJuzzWY6aZfcHw+6xohsWEWe
+         NmX1aeHuJc/v08355F2ZyYXKKngJdEcw0+9nIN4vnydYuOLgn2xm03b3+oiVPSigWaiC
+         gsVQ==
+X-Gm-Message-State: AOAM532JUqVXP9lV0w3o4PCPQUdnZ8cAQZ7FtMtslJgEtPQ32Fyi7NSx
+        SQJy3pRYLGJdhcJQsXzscKh1NrZ1pOGh4g==
+X-Google-Smtp-Source: ABdhPJxhJNQFy77Bza8Jh3C1dv53eJTpmV0dwial77CDPlDY1jQvGL2YNRo4nRBr0bPrIAP1L7+nbw==
+X-Received: by 2002:a17:90a:13c1:: with SMTP id s1mr3878764pjf.60.1614352942649;
+        Fri, 26 Feb 2021 07:22:22 -0800 (PST)
+Received: from localhost (89.208.244.53.16clouds.com. [89.208.244.53])
+        by smtp.gmail.com with ESMTPSA id gm13sm9401596pjb.47.2021.02.26.07.22.21
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 26 Feb 2021 07:22:22 -0800 (PST)
+Date:   Fri, 26 Feb 2021 23:22:20 +0800
+From:   Dejin Zheng <zhengdejin5@gmail.com>
+To:     Robert Richter <rric@kernel.org>
+Cc:     corbet@lwn.net, jarkko.nikula@linux.intel.com,
+        andriy.shevchenko@linux.intel.com, mika.westerberg@linux.intel.com,
+        bhelgaas@google.com, wsa@kernel.org, linux-doc@vger.kernel.org,
+        linux-i2c@vger.kernel.org, linux-pci@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v4 1/4] PCI: Introduce pcim_alloc_irq_vectors()
+Message-ID: <20210226152220.GA1053401@nuc8i5>
+References: <20210218150458.798347-1-zhengdejin5@gmail.com>
+ <20210218150458.798347-2-zhengdejin5@gmail.com>
+ <YC/NxfsQn2RKkrp8@rric.localdomain>
+ <20210219164649.GA814637@nuc8i5>
+ <YDONyMSHO9FDeY69@rric.localdomain>
+ <20210222151415.GA896979@nuc8i5>
+ <YDS2rkJu7PTJJiZr@rric.localdomain>
+ <20210223141435.GA912403@nuc8i5>
+ <YDdvAYLckBHi7qSe@rric.localdomain>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-        protocol="application/pgp-signature"; boundary="0cdvV5m4yIkS6Bx1"
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <YDf6bpSxX6I5xdqZ@google.com>
+In-Reply-To: <YDdvAYLckBHi7qSe@rric.localdomain>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+On Thu, Feb 25, 2021 at 10:33:53AM +0100, Robert Richter wrote:
+> On 23.02.21 22:14:35, Dejin Zheng wrote:
+> > On Tue, Feb 23, 2021 at 09:02:54AM +0100, Robert Richter wrote:
+> > > On 22.02.21 23:14:15, Dejin Zheng wrote:
+> > > > On Mon, Feb 22, 2021 at 11:56:08AM +0100, Robert Richter wrote:
+> > > > > On 20.02.21 00:46:49, Dejin Zheng wrote:
+> > > > > > > On 18.02.21 23:04:55, Dejin Zheng wrote:
+> > > > > 
+> > > > > > > > +	if (!dr || !dr->enabled)
+> > > > > > here checks whether the pci device is enabled.
+> > > > > 
+> > > > > What is the purpose of this? The device "is_managed" or not.
+> > > > >
+> > > > The device is managed or not by check whether "dr" is NULL. And
+> > > > check the "dr->enabled" is for the PCI device enable. I think it
+> > > > may not make sense to apply for irq vectors when PCI device is not
+> > > > enabled.
+> > > 
+> > > I don't see how a disabled device affects in any way the release of
+> > > the irq vectors during device removal. dr is always non-null in case
+> > > the device is managed, a check isn't needed for that.
+> > >
+> > Yes, the disabled device does not affect release irq vectors, But
+> > the disabled device affects apply for irq vectors, It is wrong to apply
+> > for the irq vectors when the device is not enabled.
+> 
+> What is the scenario you have in mind here? What does happen then?
+> The typical use case is to pcim_enable_device() it and then add the
+> irq vectors. It is always enabled then.
+> 
+> Even if the device could wrongly be disabled, it does not affect the
+> device's release.
+> 
+> Also, how is this related to pcim? There isn't a check in
+> pci_alloc_irq_vectors() either for that case. 
+> 
+> > Add this check can
+> > facilitate developers to find problems as soon as possible.
+> 
+> No, there are many ways to shoot yourself in the foot. We cannot add
+> checks here and there for this, esp. at runtime. If there is a valid
+> reason that the device must always be enabled and we cannot assume
+> this is the case, then we could add a WARN_ON(). But I doubt that.
+>
+Robert, You are right, I will remove the enable check. Thanks!
 
---0cdvV5m4yIkS6Bx1
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-
-On Thu, Feb 25, 2021 at 11:28:46AM -0800, Vipin Sharma <vipinsh@google.com> wrote:
-> My approach here is that it is the responsibility of the caller to:
-> 1. Check the return value and proceed accordingly.
-> 2. Ideally, let all of the usage be 0 before deactivating this resource
->    by setting capacity to 0
-If the calling side can ensure itself that no new units of the resource
-are used from that moment on, then it can work this way -- but describe
-that in misc_cg_set_capacity() comment.
-
-> Is the above change good?
-I think both alternatives would work. But the latter (as I see it now)
-would mandate dependency on CONFIG_CGROUP or it'd have to double the
-similar logic itself. So maybe keeping the caller responsible explicitly
-is simpler from this POV.
-
-> Will there be any objection to extra information?
-IMO it's unnecessary (stating this just for consistency reasons), no
-strong opinion.
-
-Michal
-
---0cdvV5m4yIkS6Bx1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iQIzBAEBCAAdFiEEEoQaUCWq8F2Id1tNia1+riC5qSgFAmA5BGsACgkQia1+riC5
-qSgTGRAAoZ8UZQoAOpamNp2/t/ZoGBQlc2u+5XDs9tPI1LzW7tJ3hNNitPkhB+aC
-oh7SiaI8f6LkAqKPRjKsZwPi1oXJUHjaf9T7Vf8HF+CfmahqQBDI+iR3tHO2GDw8
-Fn8GabyVuBtFQn8XDHmINeiYkXhTn4IGBO0VO1vrYkZrUSOoE4uIfIRz+8thfpeh
-vigJRDm+DTSyNX1klJlfe3li8UHgK282Hf/C2EqXmpMULCdTcrxmsayzh9UgONjX
-6ElaMeFSjYIPyYZUFlkwGYmXZ6Kfk0Z+HTm6D+/1nIIuvFImr5u7lY6ssxIb5BhG
-VDuJDoIGZp+H7MvB1yRhPnygltT1JkRbi1EDpX5q8HDtFn05h/opFWU5A1leAh6U
-mVwn1i6VZ7DEtyqEaCI8iyRLqCK86+fr4W0q9i5QzG5YzddlHqv9QZkF8mPJL5aj
-ng008bFSfGliYdIoqmTeHYho+K6hgSVT6W+Sf5bUb0P2w8vWKPwJiFiYlBtitdv/
-gReKLtnFUAzHV+w2J7loq0ZbrPAQhdqzHrJo1zpQsByTed0q/Nby8MM3OKk3vmFo
-RjxxF7cLao8PIsud76c8LnwkLe3tqLjaXeUYeIKlLdrTjOJeSBjfUEx0nhywg88R
-CDTzmts8VVbqWyhBmyuxSmgxYLWdcyX/XZlVexBZotGpGDk6ZWI=
-=uKkz
------END PGP SIGNATURE-----
-
---0cdvV5m4yIkS6Bx1--
+BR,
+Dejin
+> -Robert
