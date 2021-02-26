@@ -2,217 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 69D31326183
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Feb 2021 11:45:23 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E1B603261F6
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Feb 2021 12:26:20 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231222AbhBZKoT (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 26 Feb 2021 05:44:19 -0500
-Received: from szxga06-in.huawei.com ([45.249.212.32]:12954 "EHLO
-        szxga06-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231219AbhBZKoC (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 26 Feb 2021 05:44:02 -0500
-Received: from DGGEMS403-HUB.china.huawei.com (unknown [172.30.72.59])
-        by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4Dn5nK5TKZzjRDC;
-        Fri, 26 Feb 2021 18:41:57 +0800 (CST)
-Received: from [10.174.176.191] (10.174.176.191) by
- DGGEMS403-HUB.china.huawei.com (10.3.19.203) with Microsoft SMTP Server id
- 14.3.498.0; Fri, 26 Feb 2021 18:43:08 +0800
-Subject: Re: [PATCH v14 08/11] arm64: kdump: reimplement crashkernel=X
-To:     Catalin Marinas <catalin.marinas@arm.com>, <bhe@redhat.com>
-References: <20210130071025.65258-1-chenzhou10@huawei.com>
- <20210130071025.65258-9-chenzhou10@huawei.com>
- <20210224160408.GC28965@arm.com>
- <94cc9191-4eff-355f-ff02-1c5da416960e@huawei.com>
-CC:     <mingo@redhat.com>, <tglx@linutronix.de>, <rppt@kernel.org>,
-        <dyoung@redhat.com>, <will@kernel.org>, <nsaenzjulienne@suse.de>,
-        <corbet@lwn.net>, <John.P.donnelly@oracle.com>,
-        <bhsharma@redhat.com>, <prabhakar.pkin@gmail.com>,
-        <horms@verge.net.au>, <robh+dt@kernel.org>, <arnd@arndb.de>,
-        <james.morse@arm.com>, <xiexiuqi@huawei.com>,
-        <guohanjun@huawei.com>, <huawei.libin@huawei.com>,
-        <wangkefeng.wang@huawei.com>, <linux-doc@vger.kernel.org>,
-        <linux-arm-kernel@lists.infradead.org>,
-        <linux-kernel@vger.kernel.org>, <kexec@lists.infradead.org>
-From:   chenzhou <chenzhou10@huawei.com>
-Message-ID: <4722d365-154b-d3bb-3897-92f229e8e84f@huawei.com>
-Date:   Fri, 26 Feb 2021 18:43:07 +0800
-User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:45.0) Gecko/20100101
- Thunderbird/45.7.1
+        id S230318AbhBZL0T (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 26 Feb 2021 06:26:19 -0500
+Received: from mx2.suse.de ([195.135.220.15]:60082 "EHLO mx2.suse.de"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S230124AbhBZL0P (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 26 Feb 2021 06:26:15 -0500
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+        t=1614338728; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+         mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+        bh=oeBa5dwQSjpXQzLYQYGEoVzkSCXLkRRKiXAJEhW1P8I=;
+        b=f6niMuV1F3Ivi2wUE/zGN4IrPT40LcYGv2Pirmh7l0KftZvDngRdPPHnFC0O9eBj6Yh1kC
+        3j/bAYOx4EWqQl64X2VGCnWs72axWZcqkMS8z1HrcZECO1omRhLaGIgfEDa+BWjD0qAd1n
+        UlNcHxjK4wA2GZRAiMx4lbo2p13/e2U=
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id 5A511B001;
+        Fri, 26 Feb 2021 11:25:28 +0000 (UTC)
+From:   Juergen Gross <jgross@suse.com>
+To:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     paulmck@kernel.org, mhocko@suse.com,
+        Juergen Gross <jgross@suse.com>,
+        Jonathan Corbet <corbet@lwn.net>
+Subject: [PATCH 0/3] kernel/smp.c: add more CSD lock debugging
+Date:   Fri, 26 Feb 2021 12:25:18 +0100
+Message-Id: <20210226112521.8641-1-jgross@suse.com>
+X-Mailer: git-send-email 2.26.2
 MIME-Version: 1.0
-In-Reply-To: <94cc9191-4eff-355f-ff02-1c5da416960e@huawei.com>
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 7bit
-X-Originating-IP: [10.174.176.191]
-X-CFilter-Loop: Reflected
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+This patch series was created to help catching a rather long standing
+problem with smp_call_function_any() and friends.
 
+Very rarely a remote cpu seems not to execute a queued function and
+the cpu queueing that function request will wait forever for the
+CSD lock to be released by the remote cpu.
 
-On 2021/2/26 18:31, chenzhou wrote:
->
-> On 2021/2/25 0:04, Catalin Marinas wrote:
->> On Sat, Jan 30, 2021 at 03:10:22PM +0800, Chen Zhou wrote:
->>> There are following issues in arm64 kdump:
->>> 1. We use crashkernel=X to reserve crashkernel below 4G, which
->>> will fail when there is no enough low memory.
->>> 2. If reserving crashkernel above 4G, in this case, crash dump
->>> kernel will boot failure because there is no low memory available
->>> for allocation.
->>>
->>> To solve these issues, change the behavior of crashkernel=X and
->>> introduce crashkernel=X,[high,low]. crashkernel=X tries low allocation
->>> in DMA zone, and fall back to high allocation if it fails.
->>> We can also use "crashkernel=X,high" to select a region above DMA zone,
->>> which also tries to allocate at least 256M in DMA zone automatically.
->>> "crashkernel=Y,low" can be used to allocate specified size low memory.
->>>
->>> Another minor change, there may be two regions reserved for crash
->>> dump kernel, in order to distinct from the high region and make no
->>> effect to the use of existing kexec-tools, rename the low region as
->>> "Crash kernel (low)".
->> I think we discussed this but I don't remember the conclusion. Is this
->> only renamed conditionally so that we don't break current kexec-tools?
-> Yes.
->> IOW, assuming that the full crashkernel region is reserved below 4GB,
->> does the "(low)" suffix still appear or it's only if a high region is
->> additionally reserved?
-> Suffix "low" only appear if a high region is additionally reserved.
->>> diff --git a/arch/arm64/include/asm/kexec.h b/arch/arm64/include/asm/kexec.h
->>> index 3f6ecae0bc68..f0caed0cb5e1 100644
->>> --- a/arch/arm64/include/asm/kexec.h
->>> +++ b/arch/arm64/include/asm/kexec.h
->>> @@ -96,6 +96,10 @@ static inline void crash_prepare_suspend(void) {}
->>>  static inline void crash_post_resume(void) {}
->>>  #endif
->>>  
->>> +#ifdef CONFIG_KEXEC_CORE
->>> +extern void __init reserve_crashkernel(void);
->>> +#endif
->> Why not have this in some generic header?
->>
->>> diff --git a/arch/arm64/kernel/setup.c b/arch/arm64/kernel/setup.c
->>> index c18aacde8bb0..69c592c546de 100644
->>> --- a/arch/arm64/kernel/setup.c
->>> +++ b/arch/arm64/kernel/setup.c
->>> @@ -238,7 +238,18 @@ static void __init request_standard_resources(void)
->>>  		    kernel_data.end <= res->end)
->>>  			request_resource(res, &kernel_data);
->>>  #ifdef CONFIG_KEXEC_CORE
->>> -		/* Userspace will find "Crash kernel" region in /proc/iomem. */
->>> +		/*
->>> +		 * Userspace will find "Crash kernel" or "Crash kernel (low)"
->>> +		 * region in /proc/iomem.
->>> +		 * In order to distinct from the high region and make no effect
->>> +		 * to the use of existing kexec-tools, rename the low region as
->>> +		 * "Crash kernel (low)".
->>> +		 */
->>> +		if (crashk_low_res.end && crashk_low_res.start >= res->start &&
->>> +				crashk_low_res.end <= res->end) {
->>> +			crashk_low_res.name = "Crash kernel (low)";
->>> +			request_resource(res, &crashk_low_res);
->>> +		}
->>>  		if (crashk_res.end && crashk_res.start >= res->start &&
->>>  		    crashk_res.end <= res->end)
->>>  			request_resource(res, &crashk_res);
->> My reading of the new generic reserve_crashkernel() is that
->> crashk_low_res will only be populated if crask_res is above 4GB. If
->> that's correct, I'm fine with the renaming here since current systems
->> would not get a renamed low reservation (as long as they don't change
->> the kernel cmdline).
->>
->>> diff --git a/arch/arm64/mm/init.c b/arch/arm64/mm/init.c
->>> index 912f64f505f7..d20f5c444ebf 100644
->>> --- a/arch/arm64/mm/init.c
->>> +++ b/arch/arm64/mm/init.c
->>> @@ -35,6 +35,7 @@
->>>  #include <asm/fixmap.h>
->>>  #include <asm/kasan.h>
->>>  #include <asm/kernel-pgtable.h>
->>> +#include <asm/kexec.h>
->>>  #include <asm/memory.h>
->>>  #include <asm/numa.h>
->>>  #include <asm/sections.h>
->>> @@ -61,66 +62,11 @@ EXPORT_SYMBOL(memstart_addr);
->>>   */
->>>  phys_addr_t arm64_dma_phys_limit __ro_after_init;
->>>  
->>> -#ifdef CONFIG_KEXEC_CORE
->>> -/*
->>> - * reserve_crashkernel() - reserves memory for crash kernel
->>> - *
->>> - * This function reserves memory area given in "crashkernel=" kernel command
->>> - * line parameter. The memory reserved is used by dump capture kernel when
->>> - * primary kernel is crashing.
->>> - */
->>> +#ifndef CONFIG_KEXEC_CORE
->>>  static void __init reserve_crashkernel(void)
->>>  {
->> [...]
->>>  }
->>> +#endif
->> Can we not have the dummy reserve_crashkernel() in the generic code as
->> well and avoid the #ifndef here?
-> You mean put the dummy reserve_crashkernel() and the relate function declaration in some generic header?
->  
-> Baoquan also mentioned about this.
-> Now all the arch that support kdump have the dummy reserve_crashkernel() and
-> function declaration, such as arm/arm64/ppc/s390..
->
-> But currently different arch may have different CONFIG and different function declaration about this,
-> for example,
->
-> for s390,
-> static void __init reserve_crashkernel(void)
-> {                  
-> #ifdef CONFIG_CRASH_DUMP
-> ...
-> #endif        
-> }
->
-> for ppc,
-> #ifdef CONFIG_KEXEC_CORE
-> extern void reserve_crashkernel(void);
-> #else
-> static inline void reserve_crashkernel(void) { ; }
-> #endif
->
-> If we move these to generic header we need think about:
-> 1. the related config in different arch
-> 2. function declaration(static/non static)
->
-> As Baoquan said in patch 9, how about leave with it for now and i try to solve this later?
->
->>>  #ifdef CONFIG_CRASH_DUMP
->>>  static int __init early_init_dt_scan_elfcorehdr(unsigned long node,
->>> @@ -446,6 +392,14 @@ void __init bootmem_init(void)
->>>  	 * reserved, so do it here.
->>>  	 */
->>>  	reserve_crashkernel();
->>> +#ifdef CONFIG_KEXEC_CORE
->>> +	/*
->>> +	 * The low region is intended to be used for crash dump kernel devices,
->>> +	 * just mark the low region as "nomap" simply.
->>> +	 */
->>> +	if (crashk_low_res.end)
->>> +		memblock_mark_nomap(crashk_low_res.start, resource_size(&crashk_low_res));
->>> +#endif
->> Do we do something similar for crashk_res?
-> Not. In the primary kernel(production kernel), we need to use crashk_res memory for crash kernel
-> elf core header, initrd...
+This problem has been observed primarily when running as a guest on
+top of KVM or Xen, but there are reports of the same pattern for the
+bare metal case, too. It seems to exist since about 2 years now, and
+there is not much data available.
 
-Sorry, missed one comma after crash kernel.
-Not. In the primary kernel(production kernel), we need to use crashk_res memory for crash kernel,
-elf core header, initrd and so on.
+What is known up to now is that resending an IPI to the remote cpu is
+helping.
 
+The patches are adding more debug data being printed in a hang
+situation using a kernel with CONFIG_CSD_LOCK_WAIT_DEBUG configured.
+Additionally the debug coding can be controlled via a new parameter
+in order to make it easier to use such a kernel in a production
+environment without too much negative performance impact. Per default
+the debugging additions will be switched off and they can be activated
+via the new boot parameter:
 
->
-> Different with this, the crashk_low_res is only for crash dump kernel devices.
->> Also, I can see we call crash_exclude_mem_range() only for crashk_res.
->> Do we need to do this for crashk_low_res as well?
-> You are right, i missed about this. Will do in next version.
->
-> Thanks,
-> Chen Zhou
+csdlock_debug=1 will switch on the basic debugging and IPI resend
+csdlock_debug=ext will add additional data printed out in a hang
+  situation, but this option will have a larger impact on performance.
+
+I hope that the "ext" setting will help to find the root cause of the
+problem.
+
+Juergen Gross (3):
+  kernel/smp: add boot parameter for controlling CSD lock debugging
+  kernel/smp: prepare more CSD lock debugging
+  kernel/smp: add more data to CSD lock debugging
+
+ .../admin-guide/kernel-parameters.txt         |  10 +
+ kernel/smp.c                                  | 193 +++++++++++++++++-
+ 2 files changed, 192 insertions(+), 11 deletions(-)
+
+-- 
+2.26.2
 
