@@ -2,72 +2,60 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F0A553294BC
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Mar 2021 23:17:11 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id D13E23294D8
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Mar 2021 23:25:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237891AbhCAWPn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Mar 2021 17:15:43 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54240 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238411AbhCAWNh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Mar 2021 17:13:37 -0500
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 74782C061756;
-        Mon,  1 Mar 2021 14:12:57 -0800 (PST)
+        id S240806AbhCAWWp (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Mar 2021 17:22:45 -0500
+Received: from ms.lwn.net ([45.79.88.28]:44576 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S240332AbhCAWUO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 1 Mar 2021 17:20:14 -0500
 Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id E53B42BA;
-        Mon,  1 Mar 2021 22:12:56 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net E53B42BA
+        by ms.lwn.net (Postfix) with ESMTPSA id 36A142C4;
+        Mon,  1 Mar 2021 22:19:27 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 36A142C4
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1614636777; bh=F9P99DsgHbCwVM4++wlvvEKHdYaFXK/MFSqiZkjVIgI=;
+        t=1614637167; bh=yk5dLYEDSZ0+FebCJm2RFjHCAGMhe2RLIW1IZ5ZFlA4=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=FqNzZVXo1E1c1Akv+Scvt5b1NdTwqhm2qxEY5ITdxTi17Mu8Hokc1K4Z5lG4duGpE
-         RAikd6J121LippGoNZXicnPEcAdEn0GRa31cKZDit5WFMasNeW/F+OnqTogZYHTV/l
-         OdTa/Ii9IvlQ5hEu5//TWVXMNyfHETuTUbKMs3sFQjg+WH6kRx8ylRPXfxaevwrnTv
-         GeR8Klo0cxhrE9aI6xRbPu4sXXKVMCBA5uYowi8yuXb+AtjEyc+SnNFzw1Aq0Xs4lB
-         l9OZgXFs3r2pKkiOcEW6CvygmzRGnn72fjT8Rt+iuHDoCMbhBq0h7p6B2DufAw3NnN
-         lgkuaZH/SKOhg==
+        b=IbC7ZCPfglaeMNzv8ma7xX+0QjoQgqeubxgu/jNWq3AvoS9s+81x5TR2zEPmQluhr
+         p2QOY+Hgwhtz3nERQWqYXrUNOxdLPz51geZMrZux2afewRTFM29tNgZrO3oy1Mgw3d
+         J5HYagzIpPV3Wk5AM32D+uCxbiSIrJXrIhkiGptLSonH84QBKPbkLcjgwaa7FIYuxU
+         A9DMougUbOgESdYyY3A1s2GUUnqXr1lRfWgBCbyHANgmKxS0Fj3MthyqiRlTBisL01
+         9o/vgQN7wGlTbxoPCLcpZyRrOn2vcK7LLXzGTcLFTmAqKyYCEeuwC2H3zXrVSEcmBu
+         8W3t55ayleQLg==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Lubomir Rintel <lkundrak@v3.sk>
-Cc:     Maen Suleiman <maen@marvell.com>, Lior Amsalem <alior@marvell.com>,
-        Thomas Petazzoni <thomas.petazzoni@free-electrons.com>,
-        Andrew Lunn <andrew@lunn.ch>, Nicolas Pitre <nico@fluxnic.net>,
-        Eric Miao <eric.y.miao@gmail.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v3 0/3] docs: arm: Improvements to Marvell SoC
- documentation
-In-Reply-To: <20210215220839.423709-1-lkundrak@v3.sk>
-References: <20210215220839.423709-1-lkundrak@v3.sk>
-Date:   Mon, 01 Mar 2021 15:12:56 -0700
-Message-ID: <87zgzm1q1j.fsf@meer.lwn.net>
+To:     Kees Cook <keescook@chromium.org>, linux-kernel@vger.kernel.org
+Cc:     Kees Cook <keescook@chromium.org>, linux-doc@vger.kernel.org,
+        Jakub Kicinski <kuba@kernel.org>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>, Joe Perches <joe@perches.com>
+Subject: Re: [PATCH] Documentation: Replace more lkml.org links with lore
+In-Reply-To: <20210210234005.2236201-1-keescook@chromium.org>
+References: <20210210234005.2236201-1-keescook@chromium.org>
+Date:   Mon, 01 Mar 2021 15:19:26 -0700
+Message-ID: <87r1ky1pqp.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Lubomir Rintel <lkundrak@v3.sk> writes:
+Kees Cook <keescook@chromium.org> writes:
 
-> Hi,
+> As started by commit 05a5f51ca566 ("Documentation: Replace lkml.org
+> links with lore"), replace a few more scattered lkml.org links with
+> lore to better use a single source that's more likely to stay available
+> long-term.
 >
-> please consider applying the patches chained to this message.
->
-> The objective is to deal with the a large amount of dead links to
-> material that often comes handy in marvel.rst; and improve some details
-> along the way.
->
-> Compared to v2, the patches "[PATCH v2 2/5] docs: arm: marvell: fix 38x
-> functional spec link" and "[PATCH v2 5/5] docs: arm: marvell: rename
-> marvel.rst to marvell.rst" have been removed, because analogous patches
-> have already been applied. Also, more dead links have been removed,
-> reducing the count of links removed in [PATCH v3 1/3] to one.
-> Detailed changelogs in individual patches.
+> Signed-off-by: Kees Cook <keescook@chromium.org>
+> ---
+>  CREDITS                        | 2 +-
+>  tools/scripts/Makefile.include | 3 ++-
+>  2 files changed, 3 insertions(+), 2 deletions(-)
 
-I've applied parts 1 and 3; since there is evidently an archive link for
-the one killed in part 2, I left that out.
-
-Thanks,
+I've (rather belatedly) applied this, thanks.
 
 jon
