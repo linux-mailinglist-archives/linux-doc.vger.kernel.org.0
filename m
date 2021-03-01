@@ -2,88 +2,98 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id F180E328960
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Mar 2021 18:56:40 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 87317328967
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Mar 2021 18:56:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238802AbhCARzt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Mar 2021 12:55:49 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54036 "EHLO
+        id S234411AbhCAR4I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Mar 2021 12:56:08 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:54202 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S238468AbhCARtg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Mar 2021 12:49:36 -0500
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E0359C0617A7
-        for <linux-doc@vger.kernel.org>; Mon,  1 Mar 2021 09:47:52 -0800 (PST)
-Received: by mail-pj1-x102a.google.com with SMTP id o6so22394pjf.5
-        for <linux-doc@vger.kernel.org>; Mon, 01 Mar 2021 09:47:52 -0800 (PST)
+        with ESMTP id S234877AbhCARuK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Mar 2021 12:50:10 -0500
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com [IPv6:2607:f8b0:4864:20::42b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 66BD3C06121F
+        for <linux-doc@vger.kernel.org>; Mon,  1 Mar 2021 09:47:58 -0800 (PST)
+Received: by mail-pf1-x42b.google.com with SMTP id 192so5008483pfv.0
+        for <linux-doc@vger.kernel.org>; Mon, 01 Mar 2021 09:47:58 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=chromium.org; s=google;
-        h=from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=k3Lzi2uN/Y9F/XcvNTQPp0C3tT032B+1lln6fkGmxQM=;
-        b=W6Y3xeLEBEydaudB2OKXdlRNkLkCmUgOSSaspm8H1hRvaOqBKzWqjGHnGL8h21eDor
-         1+nzgqgsPmXt6thWpsj1DvCRf2Fvb2KINTGcPzZM1KApedY2Dxed/XS3byNczNPrDRNk
-         UTFi2KeqBDJGV7iauQ0xLPRQWYFCRZu2dAomE=
+        h=from:to:cc:subject:date:message-id:in-reply-to:references
+         :mime-version:content-transfer-encoding;
+        bh=Wshkt8l8FrWJwzfMDHkPetk+cACmLQC6B2ayLm9ZVq0=;
+        b=N6PBZj7Pd7xIg7E3dTc2K/JuPk49LNWwbD1X1s00G4eb9oc/vvaGcMxls8yS907RXN
+         xxcwzXerI0vDsNnlwCSWNw9MsWKFAIL5OdrWTkxgEtTrz56clfgFaRtUmbxdfV7sm/t4
+         O8FMq/tuJWL4iSS1rIzUT9hI2HBXJryH2va+U=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-         :content-transfer-encoding;
-        bh=k3Lzi2uN/Y9F/XcvNTQPp0C3tT032B+1lln6fkGmxQM=;
-        b=otWNLQK9y7HLKyNcsHLdUleNtheWL0bK4u7jHapzh4JbBofY8ssIKLUG80jQonJJi7
-         jIvBp9oZWbIyWjb88W8GSLRwXyt4DlCKOlPrcsxlSVYq9cFZjAj8DbHWrox4+bjBTJza
-         Ae853JHkOTsGV5HXKlYWKjZlsOhie2HFZK8yeGCiJjDkhTWZb1m6CN/nI4faSH2mfEBq
-         lFMQboPRq8Ma3ULbhmhURT6+KxOWlkBq+KCkh/o4ybVaMcxH0R98RPh7anJ4yzhjiJ6Z
-         N73JxdGqef9tZFZ1Vx10U7BWQ9xHOJqPiBjJa/gvoca3X19IrQtxmp3TC4Slg6O2vIzN
-         l1mw==
-X-Gm-Message-State: AOAM531kTy9Xkf+C5XR2Y3gCuIFGLW4m8LY/8ejxn2Us39gYWniz9rjW
-        pHuaYfMfKtcqDRAw0akjMBj91Q==
-X-Google-Smtp-Source: ABdhPJzwFouF0rR1bCQLTwJzasePHVhOOCTepYinWvJ45raB0eARzkIWO56P0a8cra6XYVFiUl4zdw==
-X-Received: by 2002:a17:902:bd0a:b029:e0:612:ad38 with SMTP id p10-20020a170902bd0ab02900e00612ad38mr17389147pls.30.1614620872137;
-        Mon, 01 Mar 2021 09:47:52 -0800 (PST)
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+         :references:mime-version:content-transfer-encoding;
+        bh=Wshkt8l8FrWJwzfMDHkPetk+cACmLQC6B2ayLm9ZVq0=;
+        b=RfywvnALL5GnkL1PWSNZWNc/17oLGMsZnlE5rWgVYlf/tn4QXd9KxrNqFE9fJ9/NcB
+         Od+zRqd5HMDS1tCwgcwaCge1jFjahn2XFA+QKyqpLB//c0cEKdWoFqMln6Nnv3IEX3/I
+         NexIuo/UwjI3zhrdNLxO95YSpb5KbRww46SHAOebUNrePS+COIc3ZjATzrVN0O/3vhO/
+         AcTuqDOamikatd1mDbXLBPwF3sNQbcQiAMbVAiBchCVgO3UU3ZN3LRRgBHTJh5MYk51q
+         a8kZZ22FAZprVZw+i4708Y2rP8oc4VN8QhtpxqYusEwxfXqxaWi6hwITFc/J2EIxmlSY
+         8qtw==
+X-Gm-Message-State: AOAM530X03ChcYKtNds/hQi2alVYGLsavKpSnPxpIjcQXsflL+8pRGu9
+        27xeIVohziTwvsSfiR0SGOdNNA==
+X-Google-Smtp-Source: ABdhPJy6R9TXUerH72CO6pbJ+lYTrH5prITFBBz3lpvofDWNIpixeapbzCShJrdBNc5l8jKB/5vwIA==
+X-Received: by 2002:a63:5044:: with SMTP id q4mr3937871pgl.178.1614620877938;
+        Mon, 01 Mar 2021 09:47:57 -0800 (PST)
 Received: from smtp.gmail.com ([2620:15c:202:201:3c20:df33:e36:93df])
-        by smtp.gmail.com with ESMTPSA id y202sm19071325pfb.153.2021.03.01.09.47.50
+        by smtp.gmail.com with ESMTPSA id y202sm19071325pfb.153.2021.03.01.09.47.56
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Mar 2021 09:47:51 -0800 (PST)
+        Mon, 01 Mar 2021 09:47:57 -0800 (PST)
 From:   Stephen Boyd <swboyd@chromium.org>
 To:     Andrew Morton <akpm@linux-foundation.org>
-Cc:     linux-kernel@vger.kernel.org, Alexei Starovoitov <ast@kernel.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Baoquan He <bhe@redhat.com>, Dave Young <dyoung@redhat.com>,
+Cc:     linux-kernel@vger.kernel.org, Jiri Olsa <jolsa@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Jessica Yu <jeyu@kernel.org>,
         Evan Green <evgreen@chromium.org>,
         Hsin-Yi Wang <hsinyi@chromium.org>,
-        Jessica Yu <jeyu@kernel.org>, Jiri Olsa <jolsa@kernel.org>,
-        kexec@lists.infradead.org, linux-doc@vger.kernel.org,
         Petr Mladek <pmladek@suse.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
         Steven Rostedt <rostedt@goodmis.org>,
-        Vivek Goyal <vgoyal@redhat.com>
-Subject: [PATCH 0/7] Add build ID to stacktraces
-Date:   Mon,  1 Mar 2021 09:47:42 -0800
-Message-Id: <20210301174749.1269154-1-swboyd@chromium.org>
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        linux-doc@vger.kernel.org
+Subject: [PATCH 5/7] printk: Make %pS and friends print module build ID
+Date:   Mon,  1 Mar 2021 09:47:47 -0800
+Message-Id: <20210301174749.1269154-6-swboyd@chromium.org>
 X-Mailer: git-send-email 2.30.1.766.gb4fecdf3b7-goog
+In-Reply-To: <20210301174749.1269154-1-swboyd@chromium.org>
+References: <20210301174749.1269154-1-swboyd@chromium.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This series adds the kernel's build ID to the stacktrace header printed
-in oops messages, warnings, etc. and the build ID for any module that
-appears in the stacktrace after the module name. The goal is to make the
-stacktrace more self-contained and descriptive by including the relevant
-build IDs in the kernel logs when something goes wrong. This can be used
-by post processing tools like script/decode_stacktrace.sh and kernel
-developers to easily locate the debug info associated with a kernel
-crash and line up what line and file things started falling apart at.
+The %pS printk format (among some others) is used to print kernel
+addresses symbolically. When the kernel prints an address inside of a
+module, the kernel prints the addresses' symbol name along with the
+module's name that contains the address. Let's make kernel stacktraces
+easier to identify on KALLSYMS builds by including the build ID of a
+module when we print the address.
 
-This also includes a patch to make the buildid.c file use more const
-arguments and consolidate logic into buildid.c from kdump. These are
-left to the end as they were mostly cleanup patches. I don't know who
-exactly maintains this so I guess Andrew is the best option to merge all
-this code.
+This is especially helpful for crash debugging with pstore or crashdump
+kernels. If we have the build ID for the module in the stacktrace we can
+request the debug symbols for the module from a remote debuginfod server
+or parse stacktraces at a later time with decode_stacktrace.sh by
+downloading the correct symbols based on the build ID. This cuts down on
+the amount of time and effort needed to find the correct kernel modules
+for a stacktrace by encoding that information into it.
 
-Here's an example lkdtm stacktrace
+An alternative to changing the printk format would be to update the
+"Modules linked in:" line to include the build ID of each module linked
+in. This can become quite long when many modules are loaded (i.e. on a
+distro) so I've opted for the printk format instead. Similarly,
+collecting each module build ID in a stacktrace and then printing it
+after the trace would require some architecture level surgery to the
+dump stack code and also provide the ID "too late" for code that is
+parsing each line of the stacktrace.
+
+Example:
 
  WARNING: CPU: 4 PID: 3255 at drivers/misc/lkdtm/bugs.c:83 lkdtm_WARNING+0x28/0x30 [lkdtm] (ed5019fdf5e53be37cb1ba7899292d7e143b259e)
  Modules linked in: lkdtm rfcomm algif_hash algif_skcipher af_alg xt_cgroup uinput xt_MASQUERADE
@@ -122,44 +132,205 @@ Here's an example lkdtm stacktrace
   el0_sync_compat+0x178/0x180
  ---[ end trace 3d95032303e59e68 ]---
 
+Cc: Jiri Olsa <jolsa@kernel.org>
 Cc: Alexei Starovoitov <ast@kernel.org>
-Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc: Baoquan He <bhe@redhat.com>
-Cc: Dave Young <dyoung@redhat.com>
+Cc: Jessica Yu <jeyu@kernel.org>
 Cc: Evan Green <evgreen@chromium.org>
 Cc: Hsin-Yi Wang <hsinyi@chromium.org>
-Cc: Jessica Yu <jeyu@kernel.org>
-Cc: Jiri Olsa <jolsa@kernel.org>
-Cc: <kexec@lists.infradead.org>
-Cc: <linux-doc@vger.kernel.org>
 Cc: Petr Mladek <pmladek@suse.com>
-Cc: Rasmus Villemoes <linux@rasmusvillemoes.dk>
-Cc: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
 Cc: Steven Rostedt <rostedt@goodmis.org>
-Cc: Vivek Goyal <vgoyal@redhat.com>
+Cc: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Cc: <linux-doc@vger.kernel.org>
+Signed-off-by: Stephen Boyd <swboyd@chromium.org>
+---
 
-Stephen Boyd (7):
-  buildid: Add method to get running kernel's build ID
-  dump_stack: Add vmlinux build ID to stack traces
-  buildid: Add API to parse build ID out of buffer
-  module: Parse and stash build ID on insertion
-  printk: Make %pS and friends print module build ID
-  buildid: Mark some arguments const
-  kdump: Use vmlinux_build_id() to simplify
+Yet another alternative is to add a printk format like %pSB for
+backtrace prints. This would require a handful of architecture updates
+and I'm not sure it's worth the effort for that.
 
- Documentation/core-api/printk-formats.rst |  6 ++
- include/linux/buildid.h                   |  4 +
- include/linux/kallsyms.h                  |  6 +-
- include/linux/module.h                    |  6 +-
- kernel/crash_core.c                       | 46 ++----------
- kernel/kallsyms.c                         | 45 ++++++++----
- kernel/module.c                           | 24 +++++-
- lib/buildid.c                             | 89 +++++++++++++++++++----
- lib/dump_stack.c                          |  5 +-
- 9 files changed, 157 insertions(+), 74 deletions(-)
+ Documentation/core-api/printk-formats.rst |  6 +++
+ include/linux/kallsyms.h                  |  6 ++-
+ include/linux/module.h                    |  2 +-
+ kernel/kallsyms.c                         | 45 +++++++++++++++--------
+ kernel/module.c                           |  4 +-
+ 5 files changed, 44 insertions(+), 19 deletions(-)
 
-
-base-commit: fe07bfda2fb9cdef8a4d4008a409bb02f35f1bd8
+diff --git a/Documentation/core-api/printk-formats.rst b/Documentation/core-api/printk-formats.rst
+index 160e710d992f..7f05962f7f68 100644
+--- a/Documentation/core-api/printk-formats.rst
++++ b/Documentation/core-api/printk-formats.rst
+@@ -114,6 +114,12 @@ used when printing stack backtraces. The specifier takes into
+ consideration the effect of compiler optimisations which may occur
+ when tail-calls are used and marked with the noreturn GCC attribute.
+ 
++If the pointer is within a module, the module name and build ID is printed after
++the symbol name.
++
++::
++	%pS	versatile_init+0x0/0x110 [module_name] (ed5019fdf5e53be37cb1ba7899292d7e143b259e)
++
+ Probed Pointers from BPF / tracing
+ ----------------------------------
+ 
+diff --git a/include/linux/kallsyms.h b/include/linux/kallsyms.h
+index 465060acc981..c2f1660823cb 100644
+--- a/include/linux/kallsyms.h
++++ b/include/linux/kallsyms.h
+@@ -7,6 +7,7 @@
+ #define _LINUX_KALLSYMS_H
+ 
+ #include <linux/errno.h>
++#include <linux/buildid.h>
+ #include <linux/kernel.h>
+ #include <linux/stddef.h>
+ #include <linux/mm.h>
+@@ -15,8 +16,9 @@
+ #include <asm/sections.h>
+ 
+ #define KSYM_NAME_LEN 128
+-#define KSYM_SYMBOL_LEN (sizeof("%s+%#lx/%#lx [%s]") + (KSYM_NAME_LEN - 1) + \
+-			 2*(BITS_PER_LONG*3/10) + (MODULE_NAME_LEN - 1) + 1)
++#define KSYM_SYMBOL_LEN (sizeof("%s+%#lx/%#lx [%s] (%s)") + (KSYM_NAME_LEN - 1) + \
++			 2*(BITS_PER_LONG*3/10) + (MODULE_NAME_LEN - 1) + \
++			 (BUILD_ID_STR_SIZE_MAX - 1) + 1)
+ 
+ struct cred;
+ struct module;
+diff --git a/include/linux/module.h b/include/linux/module.h
+index 9d1f6a5240c1..c12f9215f63e 100644
+--- a/include/linux/module.h
++++ b/include/linux/module.h
+@@ -634,7 +634,7 @@ void *dereference_module_function_descriptor(struct module *mod, void *ptr);
+ const char *module_address_lookup(unsigned long addr,
+ 			    unsigned long *symbolsize,
+ 			    unsigned long *offset,
+-			    char **modname,
++			    char **modname, char **modbuildid,
+ 			    char *namebuf);
+ int lookup_module_symbol_name(unsigned long addr, char *symname);
+ int lookup_module_symbol_attrs(unsigned long addr, unsigned long *size, unsigned long *offset, char *modname, char *name);
+diff --git a/kernel/kallsyms.c b/kernel/kallsyms.c
+index 8043a90aa50e..a70c53764b8a 100644
+--- a/kernel/kallsyms.c
++++ b/kernel/kallsyms.c
+@@ -273,21 +273,13 @@ int kallsyms_lookup_size_offset(unsigned long addr, unsigned long *symbolsize,
+ 		get_symbol_pos(addr, symbolsize, offset);
+ 		return 1;
+ 	}
+-	return !!module_address_lookup(addr, symbolsize, offset, NULL, namebuf) ||
++	return !!module_address_lookup(addr, symbolsize, offset, NULL, NULL, namebuf) ||
+ 	       !!__bpf_address_lookup(addr, symbolsize, offset, namebuf);
+ }
+ 
+-/*
+- * Lookup an address
+- * - modname is set to NULL if it's in the kernel.
+- * - We guarantee that the returned name is valid until we reschedule even if.
+- *   It resides in a module.
+- * - We also guarantee that modname will be valid until rescheduled.
+- */
+-const char *kallsyms_lookup(unsigned long addr,
+-			    unsigned long *symbolsize,
+-			    unsigned long *offset,
+-			    char **modname, char *namebuf)
++const char *kallsyms_lookup_buildid(unsigned long addr, unsigned long *symbolsize,
++				    unsigned long *offset, char **modname,
++				    char **modbuildid, char *namebuf)
+ {
+ 	const char *ret;
+ 
+@@ -303,12 +295,14 @@ const char *kallsyms_lookup(unsigned long addr,
+ 				       namebuf, KSYM_NAME_LEN);
+ 		if (modname)
+ 			*modname = NULL;
++		if (modbuildid)
++			*modbuildid = NULL;
+ 		return namebuf;
+ 	}
+ 
+ 	/* See if it's in a module or a BPF JITed image. */
+ 	ret = module_address_lookup(addr, symbolsize, offset,
+-				    modname, namebuf);
++				    modname, modbuildid, namebuf);
+ 	if (!ret)
+ 		ret = bpf_address_lookup(addr, symbolsize,
+ 					 offset, modname, namebuf);
+@@ -319,6 +313,22 @@ const char *kallsyms_lookup(unsigned long addr,
+ 	return ret;
+ }
+ 
++/*
++ * Lookup an address
++ * - modname is set to NULL if it's in the kernel.
++ * - We guarantee that the returned name is valid until we reschedule even if.
++ *   It resides in a module.
++ * - We also guarantee that modname will be valid until rescheduled.
++ */
++const char *kallsyms_lookup(unsigned long addr,
++			    unsigned long *symbolsize,
++			    unsigned long *offset,
++			    char **modname, char *namebuf)
++{
++	return kallsyms_lookup_buildid(addr, symbolsize, offset, modname,
++				       NULL, namebuf);
++}
++
+ int lookup_symbol_name(unsigned long addr, char *symname)
+ {
+ 	symname[0] = '\0';
+@@ -362,12 +372,14 @@ static int __sprint_symbol(char *buffer, unsigned long address,
+ 			   int symbol_offset, int add_offset)
+ {
+ 	char *modname;
++	char *modbuildid;
+ 	const char *name;
+ 	unsigned long offset, size;
+ 	int len;
+ 
+ 	address += symbol_offset;
+-	name = kallsyms_lookup(address, &size, &offset, &modname, buffer);
++	name = kallsyms_lookup_buildid(address, &size, &offset, &modname, &modbuildid,
++				       buffer);
+ 	if (!name)
+ 		return sprintf(buffer, "0x%lx", address - symbol_offset);
+ 
+@@ -379,8 +391,11 @@ static int __sprint_symbol(char *buffer, unsigned long address,
+ 	if (add_offset)
+ 		len += sprintf(buffer + len, "+%#lx/%#lx", offset, size);
+ 
+-	if (modname)
++	if (modname) {
+ 		len += sprintf(buffer + len, " [%s]", modname);
++		if (modbuildid)
++			len += sprintf(buffer + len, " (%s)", modbuildid);
++	}
+ 
+ 	return len;
+ }
+diff --git a/kernel/module.c b/kernel/module.c
+index a7559a0de9d8..2909e62f147b 100644
+--- a/kernel/module.c
++++ b/kernel/module.c
+@@ -4255,7 +4255,7 @@ void * __weak dereference_module_function_descriptor(struct module *mod,
+ const char *module_address_lookup(unsigned long addr,
+ 			    unsigned long *size,
+ 			    unsigned long *offset,
+-			    char **modname,
++			    char **modname, char **modbuildid,
+ 			    char *namebuf)
+ {
+ 	const char *ret = NULL;
+@@ -4266,6 +4266,8 @@ const char *module_address_lookup(unsigned long addr,
+ 	if (mod) {
+ 		if (modname)
+ 			*modname = mod->name;
++		if (modbuildid)
++			*modbuildid = mod->build_id;
+ 
+ 		ret = find_kallsyms_symbol(mod, addr, size, offset);
+ 	}
 -- 
 https://chromeos.dev
 
