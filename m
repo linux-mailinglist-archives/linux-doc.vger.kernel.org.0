@@ -2,146 +2,247 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 726CC327646
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Mar 2021 04:02:43 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8AE8F327651
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Mar 2021 04:10:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231887AbhCADCm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 28 Feb 2021 22:02:42 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33372 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231494AbhCADCk (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 28 Feb 2021 22:02:40 -0500
-Received: from mail-pl1-x62a.google.com (mail-pl1-x62a.google.com [IPv6:2607:f8b0:4864:20::62a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id C523CC061756
-        for <linux-doc@vger.kernel.org>; Sun, 28 Feb 2021 19:01:59 -0800 (PST)
-Received: by mail-pl1-x62a.google.com with SMTP id b8so6170588plh.0
-        for <linux-doc@vger.kernel.org>; Sun, 28 Feb 2021 19:01:59 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=GSiKByfZ5sqEV0qlOVhjWGxYdaWwaDIUdK2lORLzOS0=;
-        b=ScCVJ0YypEy9MWpAu9R+ZNlfSdfwEpgJAxQFP/l3D0VDMmjBCQ3vzrVPFWhT25prCj
-         QXpGyxHcSbNpVLiMISI/iCjxFsHc4dDIkA4EuVtGQmdynb1UUw3QA3C6177M7HJJpVdQ
-         2oHKGLvEm/skQ9iXU55IE9jzrKshZDXrVsz50f78kRmzg/lL+MFtIFxR1Ep2Tyick7TF
-         WFSl4S2UJPWN9MUz74NFEXEqpZNcJ8zRf4RchXpZ+64i22hXDYsJWA2BmFOuszbLCYWY
-         r/jwOV0+WCDa7Onk+WEWPlrFNUFBH60Ids0G9DKUKvkOOAbTk4gN2Ri1da1QBerJFzlI
-         dewg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=GSiKByfZ5sqEV0qlOVhjWGxYdaWwaDIUdK2lORLzOS0=;
-        b=tvu85wRDMi9+Nfxcjddpp4mneo++zSYjGPDKAV9rJ4LFxkQQeCe7isq2bZTAVIoh88
-         PVddw2ve9J/6StpPXuaMe8vSEDa2tIaXshd8KjpYxzipgMpSti5sfzgOS0zWY6RYMeaM
-         Z3Q3eB9W3QCZevS75lYcO5sJrZqQRhSQuIadq4Gs5WIJj+GjYzpx/eKNMXEHlxoFmICX
-         TM2+1oIEkUlNFkw5318h1Ha2UOlGsg7J1jzXChgd1ZmZ5OrpP2stWUPkKTO2H2NauVqC
-         xWcBZOHsCT45+P3M534qTAPUbKer/SmviUNLZuuBYsjAMIHak+7Iaxru5tG+buwX6UHB
-         xr9A==
-X-Gm-Message-State: AOAM5320gMPgAdnW0PBO07tfDMJMDyCOrz/0ZhpD1kVMLLbdCaM3/CKS
-        4NSxb+3mIusPUmHevFdOVuwGainT5FBVcJKTE69TBw==
-X-Google-Smtp-Source: ABdhPJwEVjHQ1fPeJFLixQCWUSnlzdl/87wWdv9p8yk+ouhkV58sQu0KSI0Fa2jLhHCKNFak15hUdD0cupv16k+ZTO4=
-X-Received: by 2002:a17:902:e54e:b029:e3:9f84:db8e with SMTP id
- n14-20020a170902e54eb02900e39f84db8emr13640880plf.24.1614567719209; Sun, 28
- Feb 2021 19:01:59 -0800 (PST)
+        id S231574AbhCADKl (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 28 Feb 2021 22:10:41 -0500
+Received: from regular1.263xmail.com ([211.150.70.198]:43858 "EHLO
+        regular1.263xmail.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231535AbhCADKl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 28 Feb 2021 22:10:41 -0500
+Received: from localhost (unknown [192.168.167.16])
+        by regular1.263xmail.com (Postfix) with ESMTP id F045A758;
+        Mon,  1 Mar 2021 11:03:49 +0800 (CST)
+X-MAIL-GRAY: 0
+X-MAIL-DELIVERY: 1
+X-ADDR-CHECKED4: 1
+X-ANTISPAM-LEVEL: 2
+X-SKE-CHECKED: 1
+X-ABS-CHECKED: 1
+Received: from localhost.localdomain (unknown [113.57.152.160])
+        by smtp.263.net (postfix) whith ESMTP id P32471T140679485314816S1614567829728328_;
+        Mon, 01 Mar 2021 11:03:50 +0800 (CST)
+X-IP-DOMAINF: 1
+X-UNIQUE-TAG: <fdc79934985dc38ad1287372d729838c>
+X-RL-SENDER: huangjianghui@uniontech.com
+X-SENDER: huangjianghui@uniontech.com
+X-LOGIN-NAME: huangjianghui@uniontech.com
+X-FST-TO: corbet@lwn.net
+X-SENDER-IP: 113.57.152.160
+X-ATTACHMENT-NUM: 0
+X-System-Flag: 0
+From:   hjh <huangjianghui@uniontech.com>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Harry Wei <harryxiyou@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: [PATCH] PATCH Documentation translations:translate sound/hd-audio/controls to chinese
+Date:   Mon,  1 Mar 2021 11:03:49 +0800
+Message-Id: <20210301030349.37275-1-huangjianghui@uniontech.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <FE7425D7-3006-4F31-AE41-07E4EB6D030F@contoso.com>
-In-Reply-To: <FE7425D7-3006-4F31-AE41-07E4EB6D030F@contoso.com>
-From:   Muchun Song <songmuchun@bytedance.com>
-Date:   Mon, 1 Mar 2021 11:01:23 +0800
-Message-ID: <CAMZfGtUY6z3g1_=mj8_LAWcxc_OKVfwPQq9vrdhdkjs=hyW5rQ@mail.gmail.com>
-Subject: Re: [External] Re: [PATCH v17 1/9] mm: memory_hotplug: factor out
- bootmem core functions to bootmem_info.c
-To:     "Bodeddula, Balasubramaniam" <bodeddub@amazon.com>
-Cc:     "akpm@linux-foundation.org" <akpm@linux-foundation.org>,
-        "almasrymina@google.com" <almasrymina@google.com>,
-        "anshuman.khandual@arm.com" <anshuman.khandual@arm.com>,
-        "bp@alien8.de" <bp@alien8.de>, "corbet@lwn.net" <corbet@lwn.net>,
-        "dave.hansen@linux.intel.com" <dave.hansen@linux.intel.com>,
-        "david@redhat.com" <david@redhat.com>,
-        "duanxiongchun@bytedance.com" <duanxiongchun@bytedance.com>,
-        "hpa@zytor.com" <hpa@zytor.com>,
-        "joao.m.martins@oracle.com" <joao.m.martins@oracle.com>,
-        "jroedel@suse.de" <jroedel@suse.de>,
-        "linmiaohe@huawei.com" <linmiaohe@huawei.com>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-fsdevel@vger.kernel.org" <linux-fsdevel@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-mm@kvack.org" <linux-mm@kvack.org>,
-        "luto@kernel.org" <luto@kernel.org>,
-        "mchehab+huawei@kernel.org" <mchehab+huawei@kernel.org>,
-        "mhocko@suse.com" <mhocko@suse.com>,
-        "mike.kravetz@oracle.com" <mike.kravetz@oracle.com>,
-        "mingo@redhat.com" <mingo@redhat.com>,
-        "naoya.horiguchi@nec.com" <naoya.horiguchi@nec.com>,
-        "oneukum@suse.com" <oneukum@suse.com>,
-        "osalvador@suse.de" <osalvador@suse.de>,
-        "paulmck@kernel.org" <paulmck@kernel.org>,
-        "pawan.kumar.gupta@linux.intel.com" 
-        <pawan.kumar.gupta@linux.intel.com>,
-        "peterz@infradead.org" <peterz@infradead.org>,
-        "rdunlap@infradead.org" <rdunlap@infradead.org>,
-        "rientjes@google.com" <rientjes@google.com>,
-        "song.bao.hua@hisilicon.com" <song.bao.hua@hisilicon.com>,
-        "tglx@linutronix.de" <tglx@linutronix.de>,
-        "viro@zeniv.linux.org.uk" <viro@zeniv.linux.org.uk>,
-        "willy@infradead.org" <willy@infradead.org>,
-        "x86@kernel.org" <x86@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, Feb 27, 2021 at 2:06 AM Bodeddula, Balasubramaniam
-<bodeddub@amazon.com> wrote:
->
-> Tested-by: bodeddub@amazon.com
+Signed-off-by: hjh <huangjianghui@uniontech.com>
+---
+ Documentation/translations/zh_CN/index.rst    |   1 +
+ .../zh_CN/sound/hd-audio/controls.rst         | 109 ++++++++++++++++++
+ .../zh_CN/sound/hd-audio/index.rst            |  17 +++
+ .../translations/zh_CN/sound/index.rst        |  26 +++++
+ 4 files changed, 153 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/sound/hd-audio/controls.rst
+ create mode 100644 Documentation/translations/zh_CN/sound/hd-audio/index.rst
+ create mode 100644 Documentation/translations/zh_CN/sound/index.rst
 
-Very thanks for your test.
+diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
+index be6f11176200..2767dacfe86d 100644
+--- a/Documentation/translations/zh_CN/index.rst
++++ b/Documentation/translations/zh_CN/index.rst
+@@ -20,6 +20,7 @@
+    process/index
+    filesystems/index
+    arm64/index
++   sound/index
+ 
+ 目录和表格
+ ----------
+diff --git a/Documentation/translations/zh_CN/sound/hd-audio/controls.rst b/Documentation/translations/zh_CN/sound/hd-audio/controls.rst
+new file mode 100644
+index 000000000000..662bacc5a45f
+--- /dev/null
++++ b/Documentation/translations/zh_CN/sound/hd-audio/controls.rst
+@@ -0,0 +1,109 @@
++.. SPDX-License-Identifier: GPL-2.0
++Chinese translated version of Documentation/sound/hd-audio/controls.rst
++
++If you have any comment or update to the content, please contact the
++original document maintainer directly.  However, if you have a problem
++communicating in English you can also ask the Chinese maintainer for
++help.  Contact the Chinese maintainer if this translation is outdated
++or if there is a problem with the translation.
++
++Chinese maintainer: Huang Jianghui <huangjianghui@uniontech.com>
++---------------------------------------------------------------------
++.. include:: ../../disclaimer-zh_CN.rst
++以下为正文
++---------------------------------------------------------------------
++======================================
++高清音频编解码器特定混音器控件
++======================================
++
++
++此文件解释特定于编解码器的混音器控件.
++
++瑞昱编解码器
++------------
++
++声道模式
++  这是一个用于更改环绕声道设置的枚举控件,仅在环绕声道打开时显示出现。
++  它给出要使用的通道数:"2ch","4ch","6ch"，和"8ch"。根据配置，这还控
++  制多I/O插孔的插孔重分配。
++
++自动静音模式
++  这是一个枚举控件，用于更改耳机和线路输出插孔的自动静音行为。如果内
++  置扬声器、耳机和/或线路输出插孔在机器上可用，则显示该控件。当只有
++  耳机或者线路输出的时候，它给出”禁用“和”启用“状态。当启用后，插孔插
++  入后扬声器会自动静音。
++
++  当耳机和线路输出插孔都存在时，它给出”禁用“、”仅扬声器“和”线路输出+扬
++  声器“。当”仅扬声器“被选择，插入耳机或者线路输出插孔可使扬声器静音，
++  但不会使线路输出静音。当线路输出+扬声器被选择，插入耳机插孔会同时使扬
++  声器和线路输出静音。
++
++
++矽玛特编解码器
++--------------
++
++模拟环回
++   此控件启用/禁用模拟环回电路。只有在编解码器提示中将”lookback“设置为真
++   时才会出现(见HD-Audio.txt)。请注意，在某些编解码器上，模拟环回和正常
++   PCM播放是独占的,即当此选项打开时，您将听不到任何PCM流。
++
++交换中置/低频
++   交换中置和低频通道顺序，通常情况下，左侧对应中置，右侧对应低频,启动此
++   项后，左边低频，右边中置。
++
++耳机作为线路输出
++   当此控制开启时，将耳机视为线路输出插孔。也就是说，耳机不会自动静音其他
++   线路输出，没有耳机放大器被设置到引脚上。
++
++麦克风插口模式、线路插孔模式等
++   这些枚举控制输入插孔引脚的方向和偏置。根据插孔类型，它可以设置为”麦克风
++   输入“和”线路输入“以确定输入偏置,或者当引脚是环绕声道的多I/O插孔时，它
++   可以设置为”线路输出“。
++
++
++威盛编解码器
++------------
++
++智能5.1
++   一个枚举控件，用于为环绕输出重新分配多个I/O插孔的任务。当它打开时，相应
++   的输入插孔（通常是线路输入和麦克风输入）被切换为环绕和中央低频输出插孔。
++
++独立耳机
++   启用此枚举控制时，耳机输出从单个流（第三个PCM，如hw:0,2）而不是主流路由。
++   如果耳机DAC与侧边或中央低频通道DAC共享，则DAC将自动切换到耳机。
++
++环回混合
++   一个用于确定是否启动了模拟环回路由的枚举控件。当它启用后，模拟环回路由到
++   前置通道。同样，耳机与扬声器输出也采用相同的路径。作为一个副作用，当设置
++   此模式后，单个音量控制将不再适用于耳机和扬声器，因为只有一个DAC连接到混
++   音器小部件。
++
++动态电源控制
++   此控件决定是否启动每个插孔的动态电源控制检测。启用时，根据插孔的插入情况
++   动态更改组件的电源状态（D0/D3）以节省电量消耗。但是，如果您的系统没有提
++   供正确的插孔检测，这将无法工作;在这种情况下，请关闭此控件。
++
++插孔检测
++   此控件仅为VT1708编解码器提供，它不会为每个插孔插拔提供适当的未请求事件。
++   当此控件打开，驱动将轮询插孔检测，以便耳机自动静音可以工作，而关闭此控
++   件将降低功耗。
++
++
++科胜讯编解码器
++--------------
++
++自动静音模式
++   见瑞昱解码器
++
++
++
++模拟编解码器
++------------
++
++通道模式
++   这是一个用于更改环绕声道设置的枚举控件,仅在环绕声道可用时显示。它提供了能
++   被使用的通道数:”2ch“、”4ch“和”6ch“。根据配置，这还控制多I/O插孔的插孔重
++   分配。
++
++独立耳机
++   启动此枚举控制后，耳机输出从单个流（第三个PCM，如hw:0,2）而不是主流路由。
+diff --git a/Documentation/translations/zh_CN/sound/hd-audio/index.rst b/Documentation/translations/zh_CN/sound/hd-audio/index.rst
+new file mode 100644
+index 000000000000..c287aad51066
+--- /dev/null
++++ b/Documentation/translations/zh_CN/sound/hd-audio/index.rst
+@@ -0,0 +1,17 @@
++.. include:: ../../disclaimer-zh_CN.rst
++
++:Original: :doc:`../../../../sound/hd-audio/index`
++:Translator: Huang Jianghui <huangjianghui@uniontech.com>
++
++
++高清音频
++========
++
++.. toctree::
++   :maxdepth: 2
++
++   notes
++   models
++   controls
++   dp-mst
++   realtek-pc-beep
+diff --git a/Documentation/translations/zh_CN/sound/index.rst b/Documentation/translations/zh_CN/sound/index.rst
+new file mode 100644
+index 000000000000..42d86b361e42
+--- /dev/null
++++ b/Documentation/translations/zh_CN/sound/index.rst
+@@ -0,0 +1,26 @@
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: :doc:`../../../sound/index`
++:Translator: Huang Jianghui <huangjianghui@uniontech.com>
++
++
++====================
++Linux 声音子系统文档
++====================
++
++.. toctree::
++   :maxdepth: 2
++
++   kernel-api/index
++   designs/index
++   soc/index
++   alsa-configuration
++   hd-audio/index
++   cards/index
++
++.. only::  subproject and html
++
++   Indices
++   =======
++
++   * :ref:`genindex`
+-- 
+2.20.1
 
->
->
->
-> We are interested in this patch and have tested an earlier version of thi=
-s patch on 5.11-rc4 kernel version. I did a functional validation of the ch=
-anges and saw that the total memory listed by free command increasing and m=
-ore memory was made available when memory was allocated in hugepages. 1G hu=
-gepages gave higher improvements compared to 2M, as expected. Is there a fo=
-rmal way to publish the results? I can do the same as required (I am new to=
- Linux Kernel patching process).
 
-I don=E2=80=99t know if there is a formal way. But maybe you can share
-the test result directly through this thread. If someone knows
-this, please let me know. Thanks.
 
->
->
->
-> I have a few follow-up questions on this patch:
->
-> 1. What is the overall status of this patch? What is the ballpark timelin=
-e we are looking for this patch to be accepted.
-
-There is only one patch of this patchset that has no reviewed-by tag.
-I think it might be 5.13 in the best case But I don't have the right to
-decide.
-
->
-> 2. Why is this patch not working when memory is allocated as hugepages by=
- THP (transparent hugepages). THP uses AnonHugePages, doesn=E2=80=99t this =
-patch generalize for all =E2=80=98type=E2=80=99 of hugepages?
-
-Now it only supports HugeTLB pages. THP is a little different
-and complex compared to HugeTLB. I need to investigate THP
-in depth to determine the possible problems.
-
->
->
->
-> Please let me know if there are any additional tasks that I can help. Hap=
-py to help.
->
->
->
-> Thanks.
