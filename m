@@ -2,157 +2,123 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A9DC6328667
-	for <lists+linux-doc@lfdr.de>; Mon,  1 Mar 2021 18:10:37 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 38F88328962
+	for <lists+linux-doc@lfdr.de>; Mon,  1 Mar 2021 18:56:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236986AbhCARJs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 1 Mar 2021 12:09:48 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45156 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237402AbhCARIP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Mar 2021 12:08:15 -0500
-Received: from merlin.infradead.org (merlin.infradead.org [IPv6:2001:8b0:10b:1231::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 76F81C06178A;
-        Mon,  1 Mar 2021 09:07:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=merlin.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=S9ngvRlZtXf9VEt5DT/R9Al/YBoa50u8y8yRC5/eV3I=; b=DvRBJz9kin5uzPMV/NRyHhC0rI
-        9Gg0FQgbtkHERwtTR2bCEGI/e54MTjeSd8b/hrXp98bMFZTcp3k4pCtIO/4h4huFXa9LRxdVFL2ys
-        F8gMhjpzgjWZN9GAGqcizX9hN4IIaBrAwEzifE/ctLfiJXLSgATDLmaYHcUInSiYOsxTVz84rP5xI
-        50hvL61tjgE0PRPn1+9rqJNbGOu67CKo3ViuCzIUuoFGxwXmo3/3FElmLhPLmYrVnLh/mX9vnRKT0
-        ubudCUviIAg1aJV38q+iC2vzeDyNhcp/C5IHmr+323TaWt0NFivB6rVOsxBZaKq46/qIj66w8yh/O
-        fbW6DGZw==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=noisy.programming.kicks-ass.net)
-        by merlin.infradead.org with esmtpsa (Exim 4.92.3 #3 (Red Hat Linux))
-        id 1lGm12-0006Aw-Av; Mon, 01 Mar 2021 17:07:28 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id A23CE3003E1;
-        Mon,  1 Mar 2021 18:07:24 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id 942022059E7A6; Mon,  1 Mar 2021 18:07:24 +0100 (CET)
-Date:   Mon, 1 Mar 2021 18:07:24 +0100
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Juergen Gross <jgross@suse.com>
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        paulmck@kernel.org, mhocko@suse.com,
-        Jonathan Corbet <corbet@lwn.net>
-Subject: Re: [PATCH v2 3/3] kernel/smp: add more data to CSD lock debugging
-Message-ID: <YD0fTLnQTQ7/M7fx@hirez.programming.kicks-ass.net>
-References: <20210301101336.7797-1-jgross@suse.com>
- <20210301101336.7797-4-jgross@suse.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+        id S235412AbhCARzz (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 1 Mar 2021 12:55:55 -0500
+Received: from hqnvemgate25.nvidia.com ([216.228.121.64]:13209 "EHLO
+        hqnvemgate25.nvidia.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S238631AbhCARuJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 1 Mar 2021 12:50:09 -0500
+Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
+        id <B603d29230000>; Mon, 01 Mar 2021 09:49:23 -0800
+Received: from HKMAIL103.nvidia.com (10.18.16.12) by HQMAIL105.nvidia.com
+ (172.20.187.12) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 1 Mar
+ 2021 17:49:20 +0000
+Received: from HKMAIL103.nvidia.com (10.18.16.12) by HKMAIL103.nvidia.com
+ (10.18.16.12) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Mon, 1 Mar
+ 2021 17:46:46 +0000
+Received: from NAM10-DM6-obe.outbound.protection.outlook.com (104.47.58.108)
+ by HKMAIL103.nvidia.com (10.18.16.12) with Microsoft SMTP Server (TLS) id
+ 15.0.1497.2 via Frontend Transport; Mon, 1 Mar 2021 17:46:46 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=EFVbnwnrw8qnly/zwDwfbu+B94qDVwSg3iuERtvKOGPh4Y22OMfahxfI9Ie74AvbWF1cwwWy/2Cj7tOcC0VaQUp7KB9Vd6mbI8x+LC2TGzspQMPlZ+XdlDeUyiJk69DJnftqYvmclYhrBGled0gZKsftrOTLi/fiO5N3S6IKPxu73MJ3pfZHJiDvCXcoF6R+orT/fEScVedMvxudcNLDQg2shcxfxPre+ViaV7YoEWhUd7t7Kuu7Kw/k7zGCy8vEVgjOT3fMUrvq1ibbZdxMGO//DhFbC85uCnK+B+aUxeunzv8M7PifAiLwQoKfjXUx4m0iMIahWfewzYK23SffMg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Y8pdUlkTt7laEoofqh+gCwYtoAFeW/XvvLozoOUJdds=;
+ b=IVoNxQsXijD7eGHGmSHm2UfKhgfr11UZ35gle62wNb/GyVSL7V4Sj9+Dl3t/RQZ2Ux0vmxjriE0Z9W1JmpU2TK/7R6zy1kV0fVtotjmRcYFhEM8ChXKQpoYrNFImoEYAQo10kOW/ZZvJH75HYXZ3JRO+hcDtmt8UlA6fazqpR0dDgqsnzGDLm4rHrm+AeAF1bMXXGiW97ydj17jLuWBRuaoZ4ay/xSO34x5zJehXPjRxXe/pySQvytUsdW++LPgAF332jW8oT954iJuM3ObEMC7c+LGUs61X3Y50emCCprRy7cpeUrXk3kIC6HJ/11Hk2hxmTh5nF6cJhTL5X+1KrA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
+ by DM6PR12MB3833.namprd12.prod.outlook.com (2603:10b6:5:1cf::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19; Mon, 1 Mar
+ 2021 17:46:43 +0000
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::1c62:7fa3:617b:ab87]) by DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::1c62:7fa3:617b:ab87%6]) with mapi id 15.20.3890.026; Mon, 1 Mar 2021
+ 17:46:43 +0000
+Date:   Mon, 1 Mar 2021 13:46:42 -0400
+From:   Jason Gunthorpe <jgg@nvidia.com>
+To:     Alistair Popple <apopple@nvidia.com>
+CC:     <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
+        <bskeggs@redhat.com>, <akpm@linux-foundation.org>,
+        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <dri-devel@lists.freedesktop.org>, <jhubbard@nvidia.com>,
+        <rcampbell@nvidia.com>, <jglisse@redhat.com>, <hch@infradead.org>,
+        <daniel@ffwll.ch>
+Subject: Re: [PATCH v3 1/8] mm: Remove special swap entry functions
+Message-ID: <20210301174642.GP4247@nvidia.com>
+References: <20210226071832.31547-1-apopple@nvidia.com>
+ <20210226071832.31547-2-apopple@nvidia.com>
+Content-Type: text/plain; charset="us-ascii"
 Content-Disposition: inline
-In-Reply-To: <20210301101336.7797-4-jgross@suse.com>
+In-Reply-To: <20210226071832.31547-2-apopple@nvidia.com>
+X-ClientProxiedBy: BL0PR0102CA0061.prod.exchangelabs.com
+ (2603:10b6:208:25::38) To DM6PR12MB3834.namprd12.prod.outlook.com
+ (2603:10b6:5:14a::12)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (142.162.115.133) by BL0PR0102CA0061.prod.exchangelabs.com (2603:10b6:208:25::38) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.19 via Frontend Transport; Mon, 1 Mar 2021 17:46:43 +0000
+Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1lGmd0-0033mo-3R; Mon, 01 Mar 2021 13:46:42 -0400
+X-Header: ProcessedBy-CMR-outbound
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
+        t=1614620963; bh=Y8pdUlkTt7laEoofqh+gCwYtoAFeW/XvvLozoOUJdds=;
+        h=ARC-Seal:ARC-Message-Signature:ARC-Authentication-Results:Date:
+         From:To:CC:Subject:Message-ID:References:Content-Type:
+         Content-Disposition:In-Reply-To:X-ClientProxiedBy:MIME-Version:
+         X-MS-Exchange-MessageSentRepresentingType:X-Header;
+        b=WQek7+9WJID/D6OIMheZEoOPDcWZGUB5ZPAr6KaS7u8L9vDATkZMXw5QBb4cV4wJ5
+         i1Fs1mBiT0/wKq7K+3SJ3e+x2Oj353Rh9acmIyg8whhpOPl2UiyiXKrZ0ppddJsCwd
+         wtW2k7cZy9GEYxh4c0wKaFoJ0qfsgg3XRYNzjhRQjSLYd3jvDbgL9A2+TdgShRCzNk
+         JLaAA6z/HVfn1lJz2LdyJNRTycw7yntrOgdwqJIFD3An5xh9AEO8heby/yOZE4OcGw
+         AmTK9kotlxGE41E7tqbBe9EM4esvk3ACNAyFCP5MbbpEs1CHImbQ2EIOHj60JN2c1h
+         On9fWJPWy2Z5A==
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Mar 01, 2021 at 11:13:36AM +0100, Juergen Gross wrote:
-> In order to help identifying problems with IPI handling and remote
-> function execution add some more data to IPI debugging code.
+On Fri, Feb 26, 2021 at 06:18:25PM +1100, Alistair Popple wrote:
+> Remove the migration and device private entry_to_page() and
+> entry_to_pfn() inline functions and instead open code them directly.
+> This results in shorter code which is easier to understand.
 > 
-> There have been multiple reports of cpus looping long times (many
-> seconds) in smp_call_function_many() waiting for another cpu executing
-> a function like tlb flushing. Most of these reports have been for
-> cases where the kernel was running as a guest on top of KVM or Xen
-> (there are rumours of that happening under VMWare, too, and even on
-> bare metal).
-> 
-> Finding the root cause hasn't been successful yet, even after more than
-> 2 years of chasing this bug by different developers.
-> 
-> Commit 35feb60474bf4f7 ("kernel/smp: Provide CSD lock timeout
-> diagnostics") tried to address this by adding some debug code and by
-> issuing another IPI when a hang was detected. This helped mitigating
-> the problem (the repeated IPI unlocks the hang), but the root cause is
-> still unknown.
-> 
-> Current available data suggests that either an IPI wasn't sent when it
-> should have been, or that the IPI didn't result in the target cpu
-> executing the queued function (due to the IPI not reaching the cpu,
-> the IPI handler not being called, or the handler not seeing the queued
-> request).
-> 
-> Try to add more diagnostic data by introducing a global atomic counter
-> which is being incremented when doing critical operations (before and
-> after queueing a new request, when sending an IPI, and when dequeueing
-> a request). The counter value is stored in percpu variables which can
-> be printed out when a hang is detected.
-> 
-> The data of the last event (consisting of sequence counter, source
-> cpu, target cpu, and event type) is stored in a global variable. When
-> a new event is to be traced, the data of the last event is stored in
-> the event related percpu location and the global data is updated with
-> the new event's data. This allows to track two events in one data
-> location: one by the value of the event data (the event before the
-> current one), and one by the location itself (the current event).
-> 
-> A typical printout with a detected hang will look like this:
-> 
-> csd: Detected non-responsive CSD lock (#1) on CPU#1, waiting 5000000003 ns for CPU#06 scf_handler_1+0x0/0x50(0xffffa2a881bb1410).
-> 	csd: CSD lock (#1) handling prior scf_handler_1+0x0/0x50(0xffffa2a8813823c0) request.
->         csd: cnt(00008cc): ffff->0000 dequeue (src cpu 0 == empty)
->         csd: cnt(00008cd): ffff->0006 idle
->         csd: cnt(0003668): 0001->0006 queue
->         csd: cnt(0003669): 0001->0006 ipi
->         csd: cnt(0003e0f): 0007->000a queue
->         csd: cnt(0003e10): 0001->ffff ping
->         csd: cnt(0003e71): 0003->0000 ping
->         csd: cnt(0003e72): ffff->0006 gotipi
->         csd: cnt(0003e73): ffff->0006 handle
->         csd: cnt(0003e74): ffff->0006 dequeue (src cpu 0 == empty)
->         csd: cnt(0003e7f): 0004->0006 ping
->         csd: cnt(0003e80): 0001->ffff pinged
->         csd: cnt(0003eb2): 0005->0001 noipi
->         csd: cnt(0003eb3): 0001->0006 queue
->         csd: cnt(0003eb4): 0001->0006 noipi
->         csd: cnt now: 0003f00
-> 
-> The idea is to print only relevant entries. Those are all events which
-> are associated with the hang (so sender side events for the source cpu
-> of the hanging request, and receiver side events for the target cpu),
-> and the related events just before those (for adding data needed to
-> identify a possible race). Printing all available data would be
-> possible, but this would add large amounts of data printed on larger
-> configurations.
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> Tested-by: Paul E. McKenney <paulmck@kernel.org>
+> Signed-off-by: Alistair Popple <apopple@nvidia.com>
 > ---
-> V2:
-> - add automatic data deciphering and sorting of entries
-> - add new trace point for leaving flush_smp_call_function_queue()
-> - add information when finding an empty call_single_queue
+>  arch/s390/mm/pgtable.c  |  2 +-
+>  fs/proc/task_mmu.c      | 23 +++++++------------
+>  include/linux/swap.h    |  4 ++--
+>  include/linux/swapops.h | 51 ++++-------------------------------------
+>  mm/hmm.c                |  5 ++--
+>  mm/memcontrol.c         |  2 +-
+>  mm/memory.c             | 10 ++++----
+>  mm/migrate.c            |  6 ++---
+>  mm/page_vma_mapped.c    |  6 ++---
+>  9 files changed, 30 insertions(+), 79 deletions(-)
 
-They do not apply on top of these:
+I wish you could come up with a more descriptive word that special
+here
 
-  https://lkml.kernel.org/r/20210220231712.2475218-2-namit@vmware.com
+What I understand is this is true when the swap_offset is a pfn?
 
-:-/
+> -static inline struct page *migration_entry_to_page(swp_entry_t entry)
+> -{
+> -	struct page *p = pfn_to_page(swp_offset(entry));
+> -	/*
+> -	 * Any use of migration entries may only occur while the
+> -	 * corresponding page is locked
+> -	 */
+> -	BUG_ON(!PageLocked(compound_head(p)));
+> -	return p;
 
-> @@ -290,6 +476,19 @@ static DEFINE_PER_CPU_SHARED_ALIGNED(call_single_data_t, csd_data);
->  
->  void __smp_call_single_queue(int cpu, struct llist_node *node)
->  {
-> +#ifdef CONFIG_CSD_LOCK_WAIT_DEBUG
-> +	if (static_branch_unlikely(&csdlock_debug_extended)) {
-> +		unsigned int type;
-> +
-> +		type = CSD_TYPE(container_of(node, call_single_data_t,
-> +					     node.llist));
-> +		if (type == CSD_TYPE_SYNC || type == CSD_TYPE_ASYNC) {
-> +			__smp_call_single_queue_debug(cpu, node);
-> +			return;
-> +		}
-> +	}
-> +#endif
+And this constraint has been completely lost?
 
-This really ought to be in generic_exec_single(), because there we know
-the type matches.
+A comment in front of the is_special_entry explaining all the rule
+would help alot
 
+Transformation looks fine otherwise
 
+Jason
