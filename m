@@ -2,140 +2,149 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0722E32A8EC
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Mar 2021 19:09:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 785FA32A8EE
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Mar 2021 19:09:16 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1580418AbhCBSDB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Mar 2021 13:03:01 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58806 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1839218AbhCBQGJ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 11:06:09 -0500
-Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com [IPv6:2607:f8b0:4864:20::830])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45097C06178A
-        for <linux-doc@vger.kernel.org>; Tue,  2 Mar 2021 07:56:08 -0800 (PST)
-Received: by mail-qt1-x830.google.com with SMTP id 2so5999948qtw.1
-        for <linux-doc@vger.kernel.org>; Tue, 02 Mar 2021 07:56:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cmpxchg-org.20150623.gappssmtp.com; s=20150623;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=tNdOP429TQBqbFjtRfcboNnC/yDVMr5sai/pD5T/IRg=;
-        b=IlpWwYdHCRDOk3kWpi+d9K5sL2BkH9JZ1CEz1ZKimdPVIRwTuGRq3u8IVkuopTydJj
-         arkp2Jdxkb6AEwpjHEzEBCdWsa3q3RVDDAD6bSnR4o1EyuK4taQfQjgDPmaAJ9E1rc7M
-         d4jHzAyynuq2BzJCokhaQdMM8AN7WuMyNhHQlCWn80oKplc03XM+gFnGwD3Z51x4lbml
-         2TCJwmgtS2OfBFJdEHlD5w8ufPSSU3VTgvHICNQAxeKAsegXHKO2hfv/m04PEbTEcSNF
-         E3mw5ycnDw+JDvecUfy1I1YGGLn5VeegekbNe2l96F37r1kFSVfRi5rflI3VL2KtZugd
-         9xdA==
+        id S1580421AbhCBSDF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Mar 2021 13:03:05 -0500
+Received: from mail-pf1-f176.google.com ([209.85.210.176]:39602 "EHLO
+        mail-pf1-f176.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1576891AbhCBQ1k (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 11:27:40 -0500
+Received: by mail-pf1-f176.google.com with SMTP id e3so10162511pfj.6;
+        Tue, 02 Mar 2021 08:27:21 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:date:from:to:cc:subject:message-id:references
          :mime-version:content-disposition:in-reply-to;
-        bh=tNdOP429TQBqbFjtRfcboNnC/yDVMr5sai/pD5T/IRg=;
-        b=diMXELIWrcss7X0e3NyfBJcRPupuDxe8bSfXAHUUj9TNvJ4LMN10n7CfHwt+XhUByg
-         r8z9YJNYlquyh8PAxASVvUa1E/Wqs9d02cfhyIku9RfjBsv+44Nxo7ABnD390ADKdGdD
-         70dmg3tic8YbDj+cqxAdr4Nynmcb/i99ZaqC2EW+jrQeFd7eetOrJkfxUDr0tFy14xb4
-         3Nk1tcuH1Ptd9N1xmoaZ/dI8825IvWR6s3jS3xP4JsrunfwkUwLVRzPceeKFQyPFLOnw
-         zFVKGDyHl5rcHALmChszg92iVqeaDPuS/FIN0F+nTprfFBZdG0wYF/jlNfxCQrgPwDrt
-         /JMA==
-X-Gm-Message-State: AOAM530qKaRKeK2kqzneoejyTCXVvhs8aScCwDPewN7WdkI7CNORSEc3
-        lfZiJYJcvyog3bTLbtJwZ5gOyA==
-X-Google-Smtp-Source: ABdhPJyOfWYuIhZl4tG2VoD6q45/j1mxf/N5hHiy8YupUY6yiNz/e3N1wA6PcoAeeK96MehQQtO/QA==
-X-Received: by 2002:ac8:7392:: with SMTP id t18mr17887295qtp.104.1614700567462;
-        Tue, 02 Mar 2021 07:56:07 -0800 (PST)
-Received: from localhost (70.44.39.90.res-cmts.bus.ptd.net. [70.44.39.90])
-        by smtp.gmail.com with ESMTPSA id o7sm1251394qkb.104.2021.03.02.07.56.06
+        bh=rhSN6EJUjlxVTEYhX0PMy9XPYvHtkvkyN9nKIz9f20o=;
+        b=YoVGlzjeO1eDA4DGEGUIRhx/CsANqRjZmmV1mtJcCMvhOTaBNc8xeA8Cz273jx7BU4
+         6ae8lUeEwIfd+GGcj1Psnavf4GFPtx5tgpONp/QSbc6J/qbRRoZ5y0RRcE4kEv/I3+Ex
+         wG8/j03pl/jGptI1wzzu6ocZgtasulHi7zHTLc/JBjy/HH/WgLKcICpGo6LI+WVKRhTl
+         KyU6XHUD8omThzHdx/pZiTzuWKohHgfSe/I6fIBy2NabQP/eWoJ3VFKlh0wsZHjO12Ag
+         HAa8iLswP6iSPGqb+B3AfaGjImtL+zlCqoCpEAWcOWDDEz0PGfUeOM6HFQau3mexQzYT
+         9LlQ==
+X-Gm-Message-State: AOAM531YICZjt2t0hkN1aBl3jGtFx2lJDe7PJToM7rb7aYucnA9qj/0M
+        UHFA/2fAo3vTpcKF5Ek2G6o=
+X-Google-Smtp-Source: ABdhPJxHlIacQIDI0Jp1SP0zuONV5jNgKRu1emvm93y9yY7Dyrwvw7WvrPzaO7ylYa5Y+2D2/O0jvA==
+X-Received: by 2002:a65:448c:: with SMTP id l12mr18859525pgq.386.1614702416119;
+        Tue, 02 Mar 2021 08:26:56 -0800 (PST)
+Received: from 42.do-not-panic.com (42.do-not-panic.com. [157.230.128.187])
+        by smtp.gmail.com with ESMTPSA id v3sm20806728pff.217.2021.03.02.08.26.54
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Mar 2021 07:56:06 -0800 (PST)
-Date:   Tue, 2 Mar 2021 10:56:05 -0500
-From:   Johannes Weiner <hannes@cmpxchg.org>
-To:     pintu@codeaurora.org
-Cc:     linux-kernel@vger.kernel.org, akpm@linux-foundation.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-doc@vger.kernel.org, jaewon31.kim@samsung.com,
-        yuzhao@google.com, shakeelb@google.com, guro@fb.com,
-        mchehab+huawei@kernel.org, xi.fengfei@h3c.com,
-        lokeshgidra@google.com, nigupta@nvidia.com, famzheng@amazon.com,
-        andrew.a.klychkov@gmail.com, bigeasy@linutronix.de,
-        ping.ping@gmail.com, vbabka@suse.cz, yzaikin@google.com,
-        keescook@chromium.org, mcgrof@kernel.org, corbet@lwn.net,
-        pintu.ping@gmail.com
-Subject: Re: [PATCH] mm: introduce clear all vm events counters
-Message-ID: <YD5gFYalXJh0dMLn@cmpxchg.org>
-References: <1614595766-7640-1-git-send-email-pintu@codeaurora.org>
- <YD0EOyW3pZXDnuuJ@cmpxchg.org>
- <419bb403c33b7e48291972df938d0cae@codeaurora.org>
+        Tue, 02 Mar 2021 08:26:54 -0800 (PST)
+Received: by 42.do-not-panic.com (Postfix, from userid 1000)
+        id D41AA403DC; Tue,  2 Mar 2021 16:26:53 +0000 (UTC)
+Date:   Tue, 2 Mar 2021 16:26:53 +0000
+From:   Luis Chamberlain <mcgrof@kernel.org>
+To:     Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Borislav Petkov <bp@alien8.de>, Jessica Yu <jeyu@kernel.org>,
+        Takashi Iwai <tiwai@suse.de>
+Cc:     linux-kernel@vger.kernel.org,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Linus Torvalds <torvalds@linux-foundation.org>,
+        Peter Zijlstra <peterz@infradead.org>
+Subject: Re: [PATCH/RFC 1/2] init/initramfs.c: allow asynchronous unpacking
+Message-ID: <20210302162653.GO4332@42.do-not-panic.com>
+References: <20210224142909.2092914-1-linux@rasmusvillemoes.dk>
+ <20210224142909.2092914-2-linux@rasmusvillemoes.dk>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-In-Reply-To: <419bb403c33b7e48291972df938d0cae@codeaurora.org>
+In-Reply-To: <20210224142909.2092914-2-linux@rasmusvillemoes.dk>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 02, 2021 at 04:00:34PM +0530, pintu@codeaurora.org wrote:
-> On 2021-03-01 20:41, Johannes Weiner wrote:
-> > On Mon, Mar 01, 2021 at 04:19:26PM +0530, Pintu Kumar wrote:
-> > > At times there is a need to regularly monitor vm counters while we
-> > > reproduce some issue, or it could be as simple as gathering some
-> > > system
-> > > statistics when we run some scenario and every time we like to start
-> > > from
-> > > beginning.
-> > > The current steps are:
-> > > Dump /proc/vmstat
-> > > Run some scenario
-> > > Dump /proc/vmstat again
-> > > Generate some data or graph
-> > > reboot and repeat again
-> > 
-> > You can subtract the first vmstat dump from the second to get the
-> > event delta for the scenario run. That's what I do, and I'd assume
-> > most people are doing. Am I missing something?
+On Wed, Feb 24, 2021 at 03:29:08PM +0100, Rasmus Villemoes wrote:
+> This is primarily motivated by an embedded ppc target, where unpacking
+> even the rather modest sized initramfs takes 0.6 seconds, which is
+> long enough that the external watchdog becomes unhappy that it doesn't
+> get enough attention soon enough.
 > 
-> Thanks so much for your comments.
-> Yes in most cases it works.
+> But normal desktops might benefit as well. On my mostly stock Ubuntu
+> kernel, my initramfs is a 26M xz-compressed blob, decompressing to
+> around 126M. That takes almost two seconds.
 > 
-> But I guess there are sometimes where we need to compare with fresh data
-> (just like reboot) at least for some of the counters.
-> Suppose we wanted to monitor pgalloc_normal and pgfree.
+> So add an initramfs_async= kernel parameter, allowing the main init
+> process to proceed to handling device_initcall()s without waiting for
+> populate_rootfs() to finish.
+> 
+> Should one of those initcalls need something from the initramfs (say,
+> a kernel module or a firmware blob), it will simply wait for the
+> initramfs unpacking to be done before proceeding, which should in
+> theory make this completely safe to always enable. But if some driver
+> pokes around in the filesystem directly and not via one of the
+> official kernel interfaces (i.e. request_firmware*(),
+> call_usermodehelper*) that theory may not hold - also, I certainly
+> might have missed a spot when sprinkling wait_for_initramfs().
+> 
+> Signed-off-by: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+> ---
+>  .../admin-guide/kernel-parameters.txt         | 12 +++++
+>  drivers/base/firmware_loader/main.c           |  2 +
+>  include/linux/initrd.h                        |  7 +++
+>  init/initramfs.c                              | 51 ++++++++++++++++++-
+>  init/main.c                                   |  1 +
+>  kernel/umh.c                                  |  2 +
+>  usr/Kconfig                                   | 10 ++++
+>  7 files changed, 84 insertions(+), 1 deletion(-)
+> 
+> diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
+> index 0ac883777318..e9aca86d429b 100644
+> --- a/Documentation/admin-guide/kernel-parameters.txt
+> +++ b/Documentation/admin-guide/kernel-parameters.txt
+> @@ -1820,6 +1820,18 @@
+>  			initcall functions.  Useful for debugging built-in
+>  			modules and initcalls.
+>  
+> +	initramfs_async= [KNL] Normally, the initramfs image is
+> +			unpacked synchronously, before most devices
+> +			are initialized. When the initramfs is huge,
+> +			or on slow CPUs, this can take a significant
+> +			amount of time. Setting this option means the
+> +			unpacking is instead done in a background
+> +			thread, allowing the main init process to
+> +			begin calling device_initcall()s while the
+> +			initramfs is being unpacked.
+> +			Format: <bool>
+> +			Default set by CONFIG_INITRAMFS_ASYNC.
+> +
+>  	initrd=		[BOOT] Specify the location of the initial ramdisk
+>  
+>  	initrdmem=	[KNL] Specify a physical address and size from which to
+> diff --git a/drivers/base/firmware_loader/main.c b/drivers/base/firmware_loader/main.c
+> index 78355095e00d..4fdb8219cd08 100644
+> --- a/drivers/base/firmware_loader/main.c
+> +++ b/drivers/base/firmware_loader/main.c
+> @@ -15,6 +15,7 @@
+>  #include <linux/kernel_read_file.h>
+>  #include <linux/module.h>
+>  #include <linux/init.h>
+> +#include <linux/initrd.h>
+>  #include <linux/timer.h>
+>  #include <linux/vmalloc.h>
+>  #include <linux/interrupt.h>
+> @@ -504,6 +505,7 @@ fw_get_filesystem_firmware(struct device *device, struct fw_priv *fw_priv,
+>  	if (!path)
+>  		return -ENOMEM;
+>  
+> +	wait_for_initramfs();
 
-Hopefully these would already be balanced out pretty well before you
-run a test, or there is a risk that whatever outstanding allocations
-there are can cause a large number of frees during your test that
-don't match up to your recorded allocation events. Resetting to zero
-doesn't eliminate the risk of such background noise.
+Some folks might want this to not wait, say for folks who use built-in
+firmware, but for such use cases a new API which *purposely* only look
+for builtin-firmware would resolve that. The only case I think think of
+that folks may explicitly want this today is in
+arch/x86/kernel/cpu/microcode/, see get_builtin_firmware() calls, those
+should use a proper API, not a hack-in solution like that.
+I think Boris was working on this long ago, but he's as usual busy.
 
-> Or, suppose we want to monitor until the field becomes non-zero..
-> Or, how certain values are changing compared to fresh reboot.
-> Or, suppose we want to reset all counters after boot and start capturing
-> fresh stats.
+But since this use the builtin stuff directly it is not affected. And
+even if it was affected by this delay, it would have been before.
 
-Again, there simply is no mathematical difference between
+Other than what Linus pointed out, I see no reason why folks could
+experiment with this, in fact I welcome it.
 
-	reset events to 0
-	run test
-	look at events - 0
-
-and
-
-	read events baseline
-	run test
-	look at events - baseline
-
-> Some of the counters could be growing too large and too fast. Will there be
-> chances of overflow ?
-> Then resetting using this could help without rebooting.
-
-Overflows are just a fact of life on 32 bit systems. However, they can
-also be trivially handled - you can always subtract a ulong start
-state from a ulong end state and get a reliable delta of up to 2^32
-events, whether the end state has overflowed or not.
-
-The bottom line is that the benefit of this patch adds a minor
-convenience for something that can already be done in userspace. But
-the downside is that there would be one more possible source of noise
-for kernel developers to consider when looking at a bug report. Plus
-the extra code and user interface that need to be maintained.
-
-I don't think we should merge this patch.
+  Luis
