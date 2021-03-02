@@ -2,140 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 149BE32B6FF
-	for <lists+linux-doc@lfdr.de>; Wed,  3 Mar 2021 12:02:19 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id DE45732B705
+	for <lists+linux-doc@lfdr.de>; Wed,  3 Mar 2021 12:02:21 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232129AbhCCKby (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 3 Mar 2021 05:31:54 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42458 "EHLO
+        id S240518AbhCCKbv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 3 Mar 2021 05:31:51 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:32846 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1347838AbhCBTL1 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 14:11:27 -0500
-Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com [IPv6:2607:f8b0:4864:20::42a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F2E77C0698CF
-        for <linux-doc@vger.kernel.org>; Tue,  2 Mar 2021 09:20:47 -0800 (PST)
-Received: by mail-pf1-x42a.google.com with SMTP id e3so10257682pfj.6
-        for <linux-doc@vger.kernel.org>; Tue, 02 Mar 2021 09:20:47 -0800 (PST)
+        with ESMTP id S1350259AbhCBS04 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 13:26:56 -0500
+Received: from mail-il1-x134.google.com (mail-il1-x134.google.com [IPv6:2607:f8b0:4864:20::134])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 669F3C061221
+        for <linux-doc@vger.kernel.org>; Tue,  2 Mar 2021 10:25:53 -0800 (PST)
+Received: by mail-il1-x134.google.com with SMTP id c10so18902428ilo.8
+        for <linux-doc@vger.kernel.org>; Tue, 02 Mar 2021 10:25:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=cilium-io.20150623.gappssmtp.com; s=20150623;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=rmdTY77liaK5SCzblCmMtRzezZEYkkZ3aYrvDg9Bb+E=;
-        b=p9hHu6afCZiTeY1E2o7wqOBNpd4yP9RN7pqA9fb8WlkZPV30o1OCEflhsc5apRPWv4
-         iMPtN5VkEsGOdttYFE5L+1Yt2IF4l15BtvKhXHmM/AOAtIepywDnEoFZH99Hkdxze+IO
-         x7Vzhvw0CeSQhBlu3znvB4qUMuvygCNfjHUhwlSC7/bub5rtE24XV9muUvlWYk5MIwCj
-         F0dwgDhTkY4tkWXKxYgGKpa7z17B9yC2O/h2UwS53Unuw6oh2FOe5uyyR9hzRI3nS3Mu
-         4Y7I609pruhVIOhhWGR9iEwcX293Uxuf6Q40VU/LQcymk7P0zlT+PeClA05jA5PR+K1V
-         2/ow==
+        d=kernel-dk.20150623.gappssmtp.com; s=20150623;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=/tR2XTG0HxjyVGlaiC+WrfL7p8OXI5fljdp3i9qrHB0=;
+        b=aqjY/V6RGVgwKRL3/lnscUN2LZ6ifrGWr6AfB4V8YKtxF6R2oeWYBA19kyaPGfjI9i
+         1+OZ+ZoBIQgOmkat3LFIZ4oXs9nUp3wluYxoRBavOpqQg7AlgdOkqYIJ6ha4GCWhniZj
+         eudr58unxm0p5t6SC2J12nC6zk14Dj2uUIW7P+JeI/hiwPLRMyFW41Pk+HDwY6szSXOR
+         pjb7i5NyzCaMtMcGxYV9snoFVZBU8xrnFi+bvEOXzgOJd4/AsdNLWTc2uaw1Zc1cg9fT
+         ZC+Xptql+b5CzelkIDp7i0xdCCi8cLL5qhvnVz0IuPq5naC/xtkBdtv0HdPrzlCy8ABM
+         uq0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=rmdTY77liaK5SCzblCmMtRzezZEYkkZ3aYrvDg9Bb+E=;
-        b=k/JF6eif+NScPVeOLRAS9NdTjl/tKle2k5X1KDBM/rOHGCkzPQSufhzbI48ZTypR3B
-         Y0EPchLODS+WMOCSnUdK8e4yMRZMtTLqECBMHQLJP7mVcXFnDyEQD8sgrhx2FUmGMIf5
-         p7KX1vyyQ4Y8MGnTIdY9QYg1z7QEnTFtqq/JwiJHIswvnfLOe3GdfgEQoXPrgJGFSEj4
-         GduG+9VVgfaeZWmBEfWz4ds+Ptpwirc4G8V5JOegKhhtuOm0FBWMtN5MKp98JwB9shPL
-         3V5XDV9RPnmq3gMk2Eu4nk+hzPRks2T+oOffDoOmsp+XEUQJPdDgIr8Oo/ShSzCokZXL
-         /RUA==
-X-Gm-Message-State: AOAM533fi1OTVMCVHK2Bi8Om9KTYRvCjuVUEEmeMhhkgGkMNb05B8Ut5
-        I9wJQk6WusuUgnmWhyves+qFWQ==
-X-Google-Smtp-Source: ABdhPJxzMU6Z6i/uOCRFlao8nR5bI1iSGEHnPO+VSAqFodLOhv1U+lT+DkshsxXusKr2knhcrf6mpA==
-X-Received: by 2002:a63:cc05:: with SMTP id x5mr18634644pgf.254.1614705647537;
-        Tue, 02 Mar 2021 09:20:47 -0800 (PST)
-Received: from localhost.localdomain (c-73-93-5-123.hsd1.ca.comcast.net. [73.93.5.123])
-        by smtp.gmail.com with ESMTPSA id b15sm20073923pgg.85.2021.03.02.09.20.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Mar 2021 09:20:47 -0800 (PST)
-From:   Joe Stringer <joe@cilium.io>
-To:     bpf@vger.kernel.org
-Cc:     daniel@iogearbox.net, ast@kernel.org, linux-doc@vger.kernel.org,
-        linux-man@vger.kernel.org,
-        =?UTF-8?q?Toke=20H=C3=B8iland-J=C3=B8rgensen?= <toke@redhat.com>,
-        Quentin Monnet <quentin@isovalent.com>
-Subject: [PATCHv2 bpf-next 12/15] selftests/bpf: Templatize man page generation
-Date:   Tue,  2 Mar 2021 09:19:44 -0800
-Message-Id: <20210302171947.2268128-13-joe@cilium.io>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210302171947.2268128-1-joe@cilium.io>
-References: <20210302171947.2268128-1-joe@cilium.io>
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=/tR2XTG0HxjyVGlaiC+WrfL7p8OXI5fljdp3i9qrHB0=;
+        b=R8lvxL/fVXxrobDjpZflToxJ26vGxTVbzk/Qm8Nc1D2HL+yYx3MzdKoqX1eHLE+WAB
+         gvrNP+ukP7+poHwad/LhQsaXpHuX/hHWOtWbpkVMjHbDXWMDZ88CUsb09NwbDsQJs87H
+         QWsIG5So3aNc09/AKlkug7LTtwivDBcA08qNnxK2BBsWUI6E7EX3RuWaQNfeVvbpMTNC
+         mXM+Zst5g5U5k7X3WA0jXg7dfM7u0yN7d8DOANVZjZoAYr+2SNTPmmv9nvPbsmVhCma+
+         bN2ipyQV8i7ooxttBwio86an9Ewg3rSGvwRg+2rEBIezJq5OzYgvQZ9lOEr21ZX8Q+kX
+         KUqQ==
+X-Gm-Message-State: AOAM5331x0m6xM5OWxOOKtqeU9hN9wqCHuFlfe4s6uSLzRIgWdFqNHAO
+        HZeLA3PxcqyX6om7M2hoJMAD38feHvH/Tg==
+X-Google-Smtp-Source: ABdhPJxy5HeFvi7BpQUeJ7U/Std4KxNuGk5C3a6ucMAQfIiEHxLI3BHv4WrSSKvXo1Q9FozOFscU1A==
+X-Received: by 2002:a05:6e02:e87:: with SMTP id t7mr18767828ilj.211.1614709552488;
+        Tue, 02 Mar 2021 10:25:52 -0800 (PST)
+Received: from [192.168.1.30] ([65.144.74.34])
+        by smtp.gmail.com with ESMTPSA id g6sm8840282ilj.28.2021.03.02.10.25.51
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Tue, 02 Mar 2021 10:25:52 -0800 (PST)
+Subject: Re: [PATCH] block/bfq: update comments and default value in docs for
+ fifo_expire
+To:     Joseph Qi <joseph.qi@linux.alibaba.com>,
+        Paolo Valente <paolo.valente@linaro.org>
+Cc:     linux-block@vger.kernel.org, linux-doc@vger.kernel.org
+References: <1614045328-87234-1-git-send-email-joseph.qi@linux.alibaba.com>
+From:   Jens Axboe <axboe@kernel.dk>
+Message-ID: <a98d251d-f68f-a0e0-acda-54ad0b2779d8@kernel.dk>
+Date:   Tue, 2 Mar 2021 11:25:51 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <1614045328-87234-1-git-send-email-joseph.qi@linux.alibaba.com>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Previously, the Makefile here was only targeting a single manual page so
-it just hardcoded a bunch of individual rules to specifically handle
-build, clean, install, uninstall for that particular page.
+On 2/22/21 6:55 PM, Joseph Qi wrote:
+> Correct the comments since bfq_fifo_expire[0] is for async request,
+> while bfq_fifo_expire[1] is for sync request.
+> Also update docs, according the source code, the default
+> fifo_expire_async is 250ms, and fifo_expire_sync is 125ms.
 
-Upcoming commits will generate manual pages for an additional section,
-so this commit prepares the makefile first by converting the existing
-targets into an evaluated set of targets based on the manual page name
-and section.
+Applied, thanks.
 
-Acked-by: Toke Høiland-Jørgensen <toke@redhat.com>
-Reviewed-by: Quentin Monnet <quentin@isovalent.com>
-Signed-off-by: Joe Stringer <joe@cilium.io>
----
- tools/testing/selftests/bpf/Makefile.docs | 40 ++++++++++++++---------
- 1 file changed, 25 insertions(+), 15 deletions(-)
-
-diff --git a/tools/testing/selftests/bpf/Makefile.docs b/tools/testing/selftests/bpf/Makefile.docs
-index 546c4a763b46..f39ad19317c8 100644
---- a/tools/testing/selftests/bpf/Makefile.docs
-+++ b/tools/testing/selftests/bpf/Makefile.docs
-@@ -39,24 +39,34 @@ $(OUTPUT)bpf-$1.rst: ../../../../include/uapi/linux/bpf.h
- 	$$(QUIET_GEN)../../../../scripts/bpf_doc.py $1 \
- 		--filename $$< > $$@
- 
--$(OUTPUT)%.7: $(OUTPUT)%.rst
-+$(OUTPUT)%.$2: $(OUTPUT)%.rst
- ifndef RST2MAN_DEP
--	$(error "rst2man not found, but required to generate man pages")
-+	$$(error "rst2man not found, but required to generate man pages")
- endif
--	$(QUIET_GEN)rst2man $< > $@
-+	$$(QUIET_GEN)rst2man $$< > $$@
- 
--docs-clean:
--	$(call QUIET_CLEAN, eBPF_helpers-manpage)
--	$(Q)$(RM) $(DOC_MAN7) $(OUTPUT)$(HELPERS_RST)
-+docs-clean-$1:
-+	$$(call QUIET_CLEAN, eBPF_$1-manpage)
-+	$(Q)$(RM) $$(DOC_MAN$2) $(OUTPUT)bpf-$1.rst
- 
--docs-install: helpers
--	$(call QUIET_INSTALL, eBPF_helpers-manpage)
--	$(Q)$(INSTALL) -d -m 755 $(DESTDIR)$(man7dir)
--	$(Q)$(INSTALL) -m 644 $(DOC_MAN7) $(DESTDIR)$(man7dir)
-+docs-install-$1: docs
-+	$$(call QUIET_INSTALL, eBPF_$1-manpage)
-+	$(Q)$(INSTALL) -d -m 755 $(DESTDIR)$$(man$2dir)
-+	$(Q)$(INSTALL) -m 644 $$(DOC_MAN$2) $(DESTDIR)$$(man$2dir)
- 
--docs-uninstall:
--	$(call QUIET_UNINST, eBPF_helpers-manpage)
--	$(Q)$(RM) $(addprefix $(DESTDIR)$(man7dir)/,$(_DOC_MAN7))
--	$(Q)$(RMDIR) $(DESTDIR)$(man7dir)
-+docs-uninstall-$1:
-+	$$(call QUIET_UNINST, eBPF_$1-manpage)
-+	$(Q)$(RM) $$(addprefix $(DESTDIR)$$(man$2dir)/,$$(_DOC_MAN$2))
-+	$(Q)$(RMDIR) $(DESTDIR)$$(man$2dir)
- 
--.PHONY: docs docs-clean docs-install docs-uninstall
-+.PHONY: $1 docs-clean-$1 docs-install-$1 docs-uninstall-$1
-+endef
-+
-+# Create the make targets to generate manual pages by name and section
-+$(eval $(call DOCS_RULES,helpers,7))
-+
-+docs-clean: $(foreach doctarget,$(DOCTARGETS), docs-clean-$(doctarget))
-+docs-install: $(foreach doctarget,$(DOCTARGETS), docs-install-$(doctarget))
-+docs-uninstall: $(foreach doctarget,$(DOCTARGETS), docs-uninstall-$(doctarget))
-+
-+.PHONY: docs docs-clean docs-install docs-uninstall man7
 -- 
-2.27.0
+Jens Axboe
 
