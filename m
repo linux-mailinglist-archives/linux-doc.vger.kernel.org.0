@@ -2,170 +2,140 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B042732A8EB
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Mar 2021 19:08:57 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0722E32A8EC
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Mar 2021 19:09:15 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1580413AbhCBSC4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Mar 2021 13:02:56 -0500
-Received: from conuserg-08.nifty.com ([210.131.2.75]:55621 "EHLO
-        conuserg-08.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1448437AbhCBOUd (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 09:20:33 -0500
-Received: from oscar.flets-west.jp (softbank126026090165.bbtec.net [126.26.90.165]) (authenticated)
-        by conuserg-08.nifty.com with ESMTP id 122EIQx0008022;
-        Tue, 2 Mar 2021 23:18:26 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-08.nifty.com 122EIQx0008022
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1614694707;
-        bh=VCeA0PWI/KpvDWvDmIzbSqbL1uVVr9co70j2lM2jmC8=;
-        h=From:To:Cc:Subject:Date:From;
-        b=2TgU0n6i5FG+/Le+H7wIGKG9bZa6FOgZTGlzNxsGYO4V3doLohIjNvS12Bcuynxqz
-         WKprLEeCZfy4Jom5ag79Rftz4r+VdJfq5MF141p8nZXZtvlaUmD8rdMD1lmyrnq6WD
-         aUXtVvT7mtZAaxts8uPFceW/UW3ZM5jyTQue++x5ukJQtFTlx76k2rRoSvUXjAgCnm
-         LGXjIj9UC2Xfb703qF1pY9cDh9bj5iUu1T30k0rhVVNHx87ArudNIAt+QQFHNhtV0o
-         o27NRFmzoQnyjYZ1klry7h7XWvU5YSOj0i8Da8NGtge5rqET3+2iYvM5pNahCimIrw
-         3pJ/taQhorlnA==
-X-Nifty-SrcIP: [126.26.90.165]
-From:   Masahiro Yamada <masahiroy@kernel.org>
-To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     linux-kernel@vger.kernel.org,
-        Masahiro Yamada <masahiroy@kernel.org>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Federico Vaga <federico.vaga@vaga.pv.it>,
-        Harry Wei <harryxiyou@gmail.com>,
-        Marc Zyngier <maz@kernel.org>,
-        Mathieu Poirier <mathieu.poirier@linaro.org>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        "Paul E. McKenney" <paulmck@kernel.org>
-Subject: [PATCH] docs: Remove make headers_check from checklist in translations
-Date:   Tue,  2 Mar 2021 23:18:22 +0900
-Message-Id: <20210302141822.504773-1-masahiroy@kernel.org>
-X-Mailer: git-send-email 2.27.0
+        id S1580418AbhCBSDB (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Mar 2021 13:03:01 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58806 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1839218AbhCBQGJ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 11:06:09 -0500
+Received: from mail-qt1-x830.google.com (mail-qt1-x830.google.com [IPv6:2607:f8b0:4864:20::830])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 45097C06178A
+        for <linux-doc@vger.kernel.org>; Tue,  2 Mar 2021 07:56:08 -0800 (PST)
+Received: by mail-qt1-x830.google.com with SMTP id 2so5999948qtw.1
+        for <linux-doc@vger.kernel.org>; Tue, 02 Mar 2021 07:56:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=cmpxchg-org.20150623.gappssmtp.com; s=20150623;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=tNdOP429TQBqbFjtRfcboNnC/yDVMr5sai/pD5T/IRg=;
+        b=IlpWwYdHCRDOk3kWpi+d9K5sL2BkH9JZ1CEz1ZKimdPVIRwTuGRq3u8IVkuopTydJj
+         arkp2Jdxkb6AEwpjHEzEBCdWsa3q3RVDDAD6bSnR4o1EyuK4taQfQjgDPmaAJ9E1rc7M
+         d4jHzAyynuq2BzJCokhaQdMM8AN7WuMyNhHQlCWn80oKplc03XM+gFnGwD3Z51x4lbml
+         2TCJwmgtS2OfBFJdEHlD5w8ufPSSU3VTgvHICNQAxeKAsegXHKO2hfv/m04PEbTEcSNF
+         E3mw5ycnDw+JDvecUfy1I1YGGLn5VeegekbNe2l96F37r1kFSVfRi5rflI3VL2KtZugd
+         9xdA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=tNdOP429TQBqbFjtRfcboNnC/yDVMr5sai/pD5T/IRg=;
+        b=diMXELIWrcss7X0e3NyfBJcRPupuDxe8bSfXAHUUj9TNvJ4LMN10n7CfHwt+XhUByg
+         r8z9YJNYlquyh8PAxASVvUa1E/Wqs9d02cfhyIku9RfjBsv+44Nxo7ABnD390ADKdGdD
+         70dmg3tic8YbDj+cqxAdr4Nynmcb/i99ZaqC2EW+jrQeFd7eetOrJkfxUDr0tFy14xb4
+         3Nk1tcuH1Ptd9N1xmoaZ/dI8825IvWR6s3jS3xP4JsrunfwkUwLVRzPceeKFQyPFLOnw
+         zFVKGDyHl5rcHALmChszg92iVqeaDPuS/FIN0F+nTprfFBZdG0wYF/jlNfxCQrgPwDrt
+         /JMA==
+X-Gm-Message-State: AOAM530qKaRKeK2kqzneoejyTCXVvhs8aScCwDPewN7WdkI7CNORSEc3
+        lfZiJYJcvyog3bTLbtJwZ5gOyA==
+X-Google-Smtp-Source: ABdhPJyOfWYuIhZl4tG2VoD6q45/j1mxf/N5hHiy8YupUY6yiNz/e3N1wA6PcoAeeK96MehQQtO/QA==
+X-Received: by 2002:ac8:7392:: with SMTP id t18mr17887295qtp.104.1614700567462;
+        Tue, 02 Mar 2021 07:56:07 -0800 (PST)
+Received: from localhost (70.44.39.90.res-cmts.bus.ptd.net. [70.44.39.90])
+        by smtp.gmail.com with ESMTPSA id o7sm1251394qkb.104.2021.03.02.07.56.06
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 02 Mar 2021 07:56:06 -0800 (PST)
+Date:   Tue, 2 Mar 2021 10:56:05 -0500
+From:   Johannes Weiner <hannes@cmpxchg.org>
+To:     pintu@codeaurora.org
+Cc:     linux-kernel@vger.kernel.org, akpm@linux-foundation.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-doc@vger.kernel.org, jaewon31.kim@samsung.com,
+        yuzhao@google.com, shakeelb@google.com, guro@fb.com,
+        mchehab+huawei@kernel.org, xi.fengfei@h3c.com,
+        lokeshgidra@google.com, nigupta@nvidia.com, famzheng@amazon.com,
+        andrew.a.klychkov@gmail.com, bigeasy@linutronix.de,
+        ping.ping@gmail.com, vbabka@suse.cz, yzaikin@google.com,
+        keescook@chromium.org, mcgrof@kernel.org, corbet@lwn.net,
+        pintu.ping@gmail.com
+Subject: Re: [PATCH] mm: introduce clear all vm events counters
+Message-ID: <YD5gFYalXJh0dMLn@cmpxchg.org>
+References: <1614595766-7640-1-git-send-email-pintu@codeaurora.org>
+ <YD0EOyW3pZXDnuuJ@cmpxchg.org>
+ <419bb403c33b7e48291972df938d0cae@codeaurora.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <419bb403c33b7e48291972df938d0cae@codeaurora.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Commit 1a63f9cce7b7 ("docs: Remove make headers_check from checklist")
-fixed only the English version.
+On Tue, Mar 02, 2021 at 04:00:34PM +0530, pintu@codeaurora.org wrote:
+> On 2021-03-01 20:41, Johannes Weiner wrote:
+> > On Mon, Mar 01, 2021 at 04:19:26PM +0530, Pintu Kumar wrote:
+> > > At times there is a need to regularly monitor vm counters while we
+> > > reproduce some issue, or it could be as simple as gathering some
+> > > system
+> > > statistics when we run some scenario and every time we like to start
+> > > from
+> > > beginning.
+> > > The current steps are:
+> > > Dump /proc/vmstat
+> > > Run some scenario
+> > > Dump /proc/vmstat again
+> > > Generate some data or graph
+> > > reboot and repeat again
+> > 
+> > You can subtract the first vmstat dump from the second to get the
+> > event delta for the scenario run. That's what I do, and I'd assume
+> > most people are doing. Am I missing something?
+> 
+> Thanks so much for your comments.
+> Yes in most cases it works.
+> 
+> But I guess there are sometimes where we need to compare with fresh data
+> (just like reboot) at least for some of the counters.
+> Suppose we wanted to monitor pgalloc_normal and pgfree.
 
-Let's fix the translated variants too.
+Hopefully these would already be balanced out pretty well before you
+run a test, or there is a risk that whatever outstanding allocations
+there are can cause a large number of frees during your test that
+don't match up to your recorded allocation events. Resetting to zero
+doesn't eliminate the risk of such background noise.
 
-Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
----
+> Or, suppose we want to monitor until the field becomes non-zero..
+> Or, how certain values are changing compared to fresh reboot.
+> Or, suppose we want to reset all counters after boot and start capturing
+> fresh stats.
 
- .../it_IT/process/submit-checklist.rst             | 14 ++++++--------
- Documentation/translations/ja_JP/SubmitChecklist   |  8 +++-----
- .../zh_CN/process/submit-checklist.rst             | 14 ++++++--------
- 3 files changed, 15 insertions(+), 21 deletions(-)
+Again, there simply is no mathematical difference between
 
-diff --git a/Documentation/translations/it_IT/process/submit-checklist.rst b/Documentation/translations/it_IT/process/submit-checklist.rst
-index 614fc17d9086..62ba471921b6 100644
---- a/Documentation/translations/it_IT/process/submit-checklist.rst
-+++ b/Documentation/translations/it_IT/process/submit-checklist.rst
-@@ -95,31 +95,29 @@ sottomissione delle patch, in particolare
-     informazioni.  Le patch che modificano le interfacce utente dovrebbero
-     essere inviate in copia anche a linux-api@vger.kernel.org.
- 
--20) Verifica che il kernel passi con successo ``make headers_check``
--
--21) La patch è stata verificata con l'iniezione di fallimenti in slab e
-+20) La patch è stata verificata con l'iniezione di fallimenti in slab e
-     nell'allocazione di pagine.  Vedere ``Documentation/fault-injection/``.
- 
-     Se il nuovo codice è corposo, potrebbe essere opportuno aggiungere
-     l'iniezione di fallimenti specifici per il sottosistema.
- 
--22) Il nuovo codice è stato compilato con ``gcc -W`` (usate
-+21) Il nuovo codice è stato compilato con ``gcc -W`` (usate
-     ``make KCFLAGS=-W``).  Questo genererà molti avvisi, ma è ottimo
-     per scovare bachi come  "warning: comparison between signed and unsigned".
- 
--23) La patch è stata verificata dopo essere stata inclusa nella serie di patch
-+22) La patch è stata verificata dopo essere stata inclusa nella serie di patch
-     -mm; questo al fine di assicurarsi che continui a funzionare assieme a
-     tutte le altre patch in coda e i vari cambiamenti nei sottosistemi VM, VFS
-     e altri.
- 
--24) Tutte le barriere di sincronizzazione {per esempio, ``barrier()``,
-+23) Tutte le barriere di sincronizzazione {per esempio, ``barrier()``,
-     ``rmb()``, ``wmb()``} devono essere accompagnate da un commento nei
-     sorgenti che ne spieghi la logica: cosa fanno e perché.
- 
--25) Se la patch aggiunge nuove chiamate ioctl, allora aggiornate
-+24) Se la patch aggiunge nuove chiamate ioctl, allora aggiornate
-     ``Documentation/userspace-api/ioctl/ioctl-number.rst``.
- 
--26) Se il codice che avete modificato dipende o usa una qualsiasi interfaccia o
-+25) Se il codice che avete modificato dipende o usa una qualsiasi interfaccia o
-     funzionalità del kernel che è associata a uno dei seguenti simboli
-     ``Kconfig``, allora verificate che il kernel compili con diverse
-     configurazioni dove i simboli sono disabilitati e/o ``=m`` (se c'è la
-diff --git a/Documentation/translations/ja_JP/SubmitChecklist b/Documentation/translations/ja_JP/SubmitChecklist
-index b42220d3d46c..4429447b0965 100644
---- a/Documentation/translations/ja_JP/SubmitChecklist
-+++ b/Documentation/translations/ja_JP/SubmitChecklist
-@@ -88,20 +88,18 @@ Linux カーネルパッチ投稿者向けチェックリスト
- 18: 新しいuserspaceインタフェースを作成した場合には、Documentation/ABI/ に
-     Documentation/ABI/README を参考にして必ずドキュメントを追加してください。
- 
--19: 'make headers_check'を実行して全く問題がないことを確認してください。
--
--20: 少なくともslabアロケーションとpageアロケーションに失敗した場合の
-+19: 少なくともslabアロケーションとpageアロケーションに失敗した場合の
-     挙動について、fault-injectionを利用して確認してください。
-     Documentation/fault-injection/ を参照してください。
- 
-     追加したコードがかなりの量であったならば、サブシステム特有の
-     fault-injectionを追加したほうが良いかもしれません。
- 
--21: 新たに追加したコードは、`gcc -W'でコンパイルしてください。
-+20: 新たに追加したコードは、`gcc -W'でコンパイルしてください。
-     このオプションは大量の不要なメッセージを出力しますが、
-     "warning: comparison between signed and unsigned" のようなメッセージは、
-     バグを見つけるのに役に立ちます。
- 
--22: 投稿したパッチが -mm パッチセットにマージされた後、全ての既存のパッチや
-+21: 投稿したパッチが -mm パッチセットにマージされた後、全ての既存のパッチや
-     VM, VFS およびその他のサブシステムに関する様々な変更と、現時点でも共存
-     できることを確認するテストを行ってください。
-diff --git a/Documentation/translations/zh_CN/process/submit-checklist.rst b/Documentation/translations/zh_CN/process/submit-checklist.rst
-index 50386e0e42e7..a64858d321fc 100644
---- a/Documentation/translations/zh_CN/process/submit-checklist.rst
-+++ b/Documentation/translations/zh_CN/process/submit-checklist.rst
-@@ -82,24 +82,22 @@ Linux内核补丁提交清单
-     请参阅 ``Documentation/ABI/README`` 。更改用户空间接口的补丁应该抄送
-     linux-api@vger.kernel.org。
- 
--20) 检查是否全部通过 ``make headers_check`` 。
--
--21) 已通过至少注入slab和page分配失败进行检查。请参阅 ``Documentation/fault-injection/``
-+20) 已通过至少注入slab和page分配失败进行检查。请参阅 ``Documentation/fault-injection/``
-     如果新代码是实质性的，那么添加子系统特定的故障注入可能是合适的。
- 
--22) 新添加的代码已经用 ``gcc -W`` 编译（使用 ``make EXTRA-CFLAGS=-W`` ）。这
-+21) 新添加的代码已经用 ``gcc -W`` 编译（使用 ``make EXTRA-CFLAGS=-W`` ）。这
-     将产生大量噪声，但对于查找诸如“警告：有符号和无符号之间的比较”之类的错误
-     很有用。
- 
--23) 在它被合并到-mm补丁集中之后进行测试，以确保它仍然与所有其他排队的补丁以
-+22) 在它被合并到-mm补丁集中之后进行测试，以确保它仍然与所有其他排队的补丁以
-     及VM、VFS和其他子系统中的各种更改一起工作。
- 
--24) 所有内存屏障例如 ``barrier()``, ``rmb()``, ``wmb()`` 都需要源代码中的注
-+23) 所有内存屏障例如 ``barrier()``, ``rmb()``, ``wmb()`` 都需要源代码中的注
-     释来解释它们正在执行的操作及其原因的逻辑。
- 
--25) 如果补丁添加了任何ioctl，那么也要更新 ``Documentation/userspace-api/ioctl/ioctl-number.rst``
-+24) 如果补丁添加了任何ioctl，那么也要更新 ``Documentation/userspace-api/ioctl/ioctl-number.rst``
- 
--26) 如果修改后的源代码依赖或使用与以下 ``Kconfig`` 符号相关的任何内核API或
-+25) 如果修改后的源代码依赖或使用与以下 ``Kconfig`` 符号相关的任何内核API或
-     功能，则在禁用相关 ``Kconfig`` 符号和/或 ``=m`` （如果该选项可用）的情况
-     下测试以下多个构建[并非所有这些都同时存在，只是它们的各种/随机组合]：
- 
--- 
-2.27.0
+	reset events to 0
+	run test
+	look at events - 0
 
+and
+
+	read events baseline
+	run test
+	look at events - baseline
+
+> Some of the counters could be growing too large and too fast. Will there be
+> chances of overflow ?
+> Then resetting using this could help without rebooting.
+
+Overflows are just a fact of life on 32 bit systems. However, they can
+also be trivially handled - you can always subtract a ulong start
+state from a ulong end state and get a reliable delta of up to 2^32
+events, whether the end state has overflowed or not.
+
+The bottom line is that the benefit of this patch adds a minor
+convenience for something that can already be done in userspace. But
+the downside is that there would be one more possible source of noise
+for kernel developers to consider when looking at a bug report. Plus
+the extra code and user interface that need to be maintained.
+
+I don't think we should merge this patch.
