@@ -2,133 +2,109 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 555DD32B6C1
+	by mail.lfdr.de (Postfix) with ESMTP id C8D1732B6C2
 	for <lists+linux-doc@lfdr.de>; Wed,  3 Mar 2021 11:39:32 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232465AbhCCKgx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 3 Mar 2021 05:36:53 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40476 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S2361116AbhCBXZ2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 18:25:28 -0500
-Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CE4D7C061788
-        for <linux-doc@vger.kernel.org>; Tue,  2 Mar 2021 15:24:48 -0800 (PST)
-Received: by mail-pj1-x1032.google.com with SMTP id d13-20020a17090abf8db02900c0590648b1so1917387pjs.1
-        for <linux-doc@vger.kernel.org>; Tue, 02 Mar 2021 15:24:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:content-transfer-encoding:in-reply-to:references
-         :subject:from:cc:to:date:message-id:user-agent;
-        bh=cVH5d/wlkVioJQ8yaRjGio3SpYP+21NMWCupiYF1zx0=;
-        b=ZZ9TYiWE+HaCf38K23Z0mjbPlwSC7Mpp2LTsWQfleMxBr4rObP317sK7ZdUNxOll0X
-         FWLhYARPvJNfcrwwzUbFf3r12KOCKxrrOnA8zjRgEKEYKwcykyv8XfN56OCs9dCV2gif
-         cw0yeZCsZBlQpAVqag7uBB+HSMW1CZ9OhFC9s=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:content-transfer-encoding
-         :in-reply-to:references:subject:from:cc:to:date:message-id
-         :user-agent;
-        bh=cVH5d/wlkVioJQ8yaRjGio3SpYP+21NMWCupiYF1zx0=;
-        b=FLRbZwyo/4FoREzQLGVJRRz1OP+m5emisq373TIvqLgaY5v6wJVFcSG90J2q4vdC9Z
-         +gKSdmPNFroPbqvwcR2XGnrH2npFGefvZ588QrREwdSJrqaoTS6hOk7e19aJqmL7lH4J
-         vXr47ZIVOTnC9zm1o7vsQWJhd88YXLGjV1/b3LptcucwIPWR79FMcD0HPQDRkzIBiAZc
-         D9pZlnpcFdhWOpbEaOZTrfJ9ul3e8e881/6jn48RJVoUJ5DFpByaipWWhPcX1gEIowzv
-         vIJqcpfba4IgMgmTt0zVHSzTh/AqvKx4xBiSqb2CnqGEaitpBK4tZqASiTG3ElqGuave
-         FwyQ==
-X-Gm-Message-State: AOAM533lHIaKxXbMuYngE3+rXXwexRPwfPiynHC94NUQmsg1uCquyP2f
-        pruHnzHs8QuHtz8NGyUqeag9HA==
-X-Google-Smtp-Source: ABdhPJx2JFIPDEGodpwstGmoV3rikG48R+IdlndamcWqTTLhtHjYOUQS/fBVQdkv6MgRQBu+0swIng==
-X-Received: by 2002:a17:90a:6587:: with SMTP id k7mr6812294pjj.34.1614727488133;
-        Tue, 02 Mar 2021 15:24:48 -0800 (PST)
-Received: from chromium.org ([2620:15c:202:201:2510:ab07:78a:7d78])
-        by smtp.gmail.com with ESMTPSA id cv3sm4694590pjb.9.2021.03.02.15.24.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 02 Mar 2021 15:24:47 -0800 (PST)
-Content-Type: text/plain; charset="utf-8"
+        id S239833AbhCCKhW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 3 Mar 2021 05:37:22 -0500
+Received: from mail.kernel.org ([198.145.29.99]:42046 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S2361127AbhCBXbQ (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 2 Mar 2021 18:31:16 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0B04F64F3A;
+        Tue,  2 Mar 2021 23:30:35 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1614727835;
+        bh=eaqbGMdh02IVWXqfTzJMMG0eXfyji5TImxVinimTfZ8=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=mNGVJGj74sulK1XpDtC+1PkfDz8pu+vd5dy/11440qyYXhOmgfChR3ePqAJ66/tFm
+         whjv4sQsgIG6JcRttlCQV/iA0GGZCXaZlNGnN3YLuQK4l/L2mXxFz35Xav1425icea
+         XTEP2yCPViD+lHhpxOKV4QhNpSI5eZkHuLbQGWgYyQqgCXwG/9xDgY/ZNO6XNzX/dL
+         euOlDcj+MHjwH7K1sz448UerEeBKMQND73XvXHTysPTBgmqT1JhaL8LyOnDfOWMIM8
+         uhb9TnP9VyQ9MX+03SHMZWRiczJF0yplPbGVe/KJnvDQRhda8PSQOTt0NmaUh487kp
+         2p84s69/cvvow==
+Date:   Tue, 2 Mar 2021 15:30:34 -0800
+From:   Jakub Kicinski <kuba@kernel.org>
+To:     Martin Schiller <ms@dev.tdt.de>
+Cc:     Xie He <xie.he.0141@gmail.com>, Leon Romanovsky <leon@kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        Linux X25 <linux-x25@vger.kernel.org>,
+        Linux Kernel Network Developers <netdev@vger.kernel.org>,
+        LKML <linux-kernel@vger.kernel.org>,
+        Krzysztof Halasa <khc@pm.waw.pl>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH net-next RFC v4] net: hdlc_x25: Queue outgoing LAPB
+ frames
+Message-ID: <20210302153034.5f4e320b@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+In-Reply-To: <41b77b1c3cf1bb7a51b750faf23900ef@dev.tdt.de>
+References: <20210216201813.60394-1-xie.he.0141@gmail.com>
+        <YC4sB9OCl5mm3JAw@unreal>
+        <CAJht_EN2ZO8r-dpou5M4kkg3o3J5mHvM7NdjS8nigRCGyih7mg@mail.gmail.com>
+        <YC5DVTHHd6OOs459@unreal>
+        <CAJht_EOhu+Wsv91yDS5dEt+YgSmGsBnkz=igeTLibenAgR=Tew@mail.gmail.com>
+        <YC7GHgYfGmL2wVRR@unreal>
+        <CAJht_EPZ7rVFd-XD6EQD2VJTDtmZZv0HuZvii+7=yhFgVz68VQ@mail.gmail.com>
+        <CAJht_EPPMhB0JTtjWtMcGbRYNiZwJeMLWSC5hS6WhWuw5FgZtg@mail.gmail.com>
+        <20210219103948.6644e61f@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+        <CAJht_EOru3pW6AHN4QVjiaERpLSfg-0G0ZEaqU_hkhX1acv0HQ@mail.gmail.com>
+        <906d8114f1965965749f1890680f2547@dev.tdt.de>
+        <CAJht_EPBJhhdCBoon=WMuPBk-sxaeYOq3veOpAd2jq5kFqQHBg@mail.gmail.com>
+        <e1750da4179aca52960703890e985af3@dev.tdt.de>
+        <CAJht_ENP3Y98jgj1peGa3fGpQ-qPaF=1gtyYwMcawRFW_UCpeA@mail.gmail.com>
+        <ff200b159ef358494a922a676cbef8a6@dev.tdt.de>
+        <CAJht_EMG27YU+Jxtb2qeq1nXwu8uV8FXQPr62OcNHsE7DozD1g@mail.gmail.com>
+        <41b77b1c3cf1bb7a51b750faf23900ef@dev.tdt.de>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <20210301214319.7e54c66f@oasis.local.home>
-References: <20210301174749.1269154-1-swboyd@chromium.org> <20210301174749.1269154-6-swboyd@chromium.org> <20210301214319.7e54c66f@oasis.local.home>
-Subject: Re: [PATCH 5/7] printk: Make %pS and friends print module build ID
-From:   Stephen Boyd <swboyd@chromium.org>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        linux-kernel@vger.kernel.org, Jiri Olsa <jolsa@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Jessica Yu <jeyu@kernel.org>,
-        Evan Green <evgreen@chromium.org>,
-        Hsin-Yi Wang <hsinyi@chromium.org>,
-        Petr Mladek <pmladek@suse.com>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        linux-doc@vger.kernel.org
-To:     Steven Rostedt <rostedt@goodmis.org>
-Date:   Tue, 02 Mar 2021 15:24:46 -0800
-Message-ID: <161472748610.1478170.16522080242572382702@swboyd.mtv.corp.google.com>
-User-Agent: alot/0.9.1
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Quoting Steven Rostedt (2021-03-01 18:43:19)
-> On Mon,  1 Mar 2021 09:47:47 -0800
-> Stephen Boyd <swboyd@chromium.org> wrote:
->=20
-> > The %pS printk format (among some others) is used to print kernel
-> > addresses symbolically. When the kernel prints an address inside of a
-> > module, the kernel prints the addresses' symbol name along with the
-> > module's name that contains the address. Let's make kernel stacktraces
-> > easier to identify on KALLSYMS builds by including the build ID of a
-> > module when we print the address.
->=20
-> Please no!
->=20
-> This kills the output of tracing with offset, and can possibly break
-> scripts. I don't want to look at traces like this!
->=20
->           <idle>-0       [004] ..s1   353.842577: ipv4_conntrack_in+0x0/0=
-x10 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051) <-nf_hook_slo=
-w+0x40/0xb0
->           <idle>-0       [004] ..s1   353.842577: nf_conntrack_in+0x0/0x5=
-c0 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051) <-nf_hook_slow=
-+0x40/0xb0
->           <idle>-0       [004] ..s1   353.842577: get_l4proto+0x0/0x190 [=
-nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051) <-nf_conntrack_in+=
-0x92/0x5c0 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051)
->           <idle>-0       [004] ..s1   353.842577: nf_ct_get_tuple+0x0/0x2=
-40 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051) <-nf_conntrack=
-_in+0xec/0x5c0 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051)
->           <idle>-0       [004] ..s1   353.842577: hash_conntrack_raw+0x0/=
-0x170 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051) <-nf_conntr=
-ack_in+0x28c/0x5c0 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051)
->           <idle>-0       [004] ..s1   353.842578: __nf_conntrack_find_get=
-.isra.0+0x0/0x2f0 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051)=
- <-nf_conntrack_in+0x29d/0x5c0 [nf_conntrack] (3b39eb771b2566331887f671c741=
-f90bfba0b051)
->           <idle>-0       [004] ..s1   353.842578: nf_conntrack_tcp_packet=
-+0x0/0x1760 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051) <-nf_=
-conntrack_in+0x3c8/0x5c0 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfb=
-a0b051)
->           <idle>-0       [004] ..s2   353.842578: nf_ct_seq_offset+0x0/0x=
-40 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051) <-nf_conntrack=
-_tcp_packet+0x26d/0x1760 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfb=
-a0b051)
->           <idle>-0       [004] ..s1   353.842578: __nf_ct_refresh_acct+0x=
-0/0x50 [nf_conntrack] (3b39eb771b2566331887f671c741f90bfba0b051) <-nf_connt=
-rack_tcp_packet+0x558/0x1760 [nf_conntrack] (3b39eb771b2566331887f671c741f9=
-0bfba0b051)
->=20
->  NACK!
->=20
+On Tue, 02 Mar 2021 08:04:20 +0100 Martin Schiller wrote:
+> On 2021-03-01 09:56, Xie He wrote:
+> > On Sun, Feb 28, 2021 at 10:56 PM Martin Schiller <ms@dev.tdt.de> wrote:  
+> >> I mean the change from only one hdlc<x> interface to both hdlc<x> and
+> >> hdlc<x>_x25.
+> >> 
+> >> I can't estimate how many users are out there and how their setup 
+> >> looks
+> >> like.  
+> > 
+> > I'm also thinking about solving this issue by adding new APIs to the
+> > HDLC subsystem (hdlc_stop_queue / hdlc_wake_queue) for hardware
+> > drivers to call instead of netif_stop_queue / netif_wake_queue. This
+> > way we can preserve backward compatibility.
+> > 
+> > However I'm reluctant to change the code of all the hardware drivers
+> > because I'm afraid of introducing bugs, etc. When I look at the code
+> > of "wan/lmc/lmc_main.c", I feel I'm not able to make sure there are no
+> > bugs (related to stop_queue / wake_queue) after my change (and even
+> > before my change, actually). There are even serious style problems:
+> > the majority of its lines are indented by spaces.
+> > 
+> > So I don't want to mess with all the hardware drivers. Hardware driver
+> > developers (if they wish to properly support hdlc_x25) should do the
+> > change themselves. This is not a problem for me, because I use my own
+> > out-of-tree hardware driver. However if I add APIs with no user code
+> > in the kernel, other developers may think these APIs are not
+> > necessary.  
+> 
+> I don't think a change that affects the entire HDLC subsystem is
+> justified, since the actual problem only affects the hdlc_x25 area.
+> 
+> The approach with the additional hdlc<x>_x25 is clean and purposeful and
+> I personally could live with it.
+> 
+> I just don't see myself in the position to decide such a change at the
+> moment.
+> 
+> @Jakub: What is your opinion on this.
 
-Heh, OK. Would adding a new printk format work then? From after the cut:
+Hard question to answer, existing users seem happy and Xie's driver
+isn't upstream, so the justification for potentially breaking backward
+compatibility isn't exactly "strong".
 
-> Yet another alternative is to add a printk format like %pSB for
-> backtrace prints. This would require a handful of architecture updates
-> and I'm not sure it's worth the effort for that.
->
-
-Or maybe take the approach of putting all the linked in module build IDs
-in the "Modules linked in:" section? But as I said in the commit text
-that can become quite verbose. Looking forward to your suggestions here.
+Can we cop out and add a knob somewhere to control spawning the extra
+netdev? Let people who just want a newer kernel carry on without
+distractions and those who want the extra layer can flip the switch?
