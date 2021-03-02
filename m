@@ -2,51 +2,51 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0CFE632A8C3
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Mar 2021 19:06:15 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1564832A8C6
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Mar 2021 19:06:33 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1350190AbhCBR4s (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Mar 2021 12:56:48 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35894 "EHLO
+        id S1574532AbhCBR6b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Mar 2021 12:58:31 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:35918 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1576913AbhCBFfK (ORCPT
+        with ESMTP id S1576909AbhCBFfK (ORCPT
         <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 00:35:10 -0500
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1FBEEC061797
-        for <linux-doc@vger.kernel.org>; Mon,  1 Mar 2021 21:32:14 -0800 (PST)
-Received: by mail-pf1-x431.google.com with SMTP id 201so13111388pfw.5
-        for <linux-doc@vger.kernel.org>; Mon, 01 Mar 2021 21:32:14 -0800 (PST)
+Received: from mail-pg1-x534.google.com (mail-pg1-x534.google.com [IPv6:2607:f8b0:4864:20::534])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3A788C061356
+        for <linux-doc@vger.kernel.org>; Mon,  1 Mar 2021 21:32:16 -0800 (PST)
+Received: by mail-pg1-x534.google.com with SMTP id a4so13101889pgc.11
+        for <linux-doc@vger.kernel.org>; Mon, 01 Mar 2021 21:32:16 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=beagleboard-org.20150623.gappssmtp.com; s=20150623;
         h=from:to:cc:subject:date:message-id:in-reply-to:references
          :mime-version:content-transfer-encoding;
-        bh=2DbGvfOj1DMYYHtWVJxAg+wtPMMn58r4EIDpHlv7W5Y=;
-        b=oJL1BJF+uyiVd6FSeZRvyOFmVXxR6JUbGB57F3OnJesw3QFTlRvwU6hSWEmgfiS2bR
-         ElgM4iKD06OAh+kp+Yso+Xpj7PERqnZ9dp1jUaJSumbU81Oqn+/ti2SkIcLXfT3+2LiL
-         cIdK+e0TyM3gD655GkI9ZNm5hQsJ7Pi/G3o1+rhXzrxx/dggP0zFs6V2uo3rzahv0kUB
-         vAaHwrx0Te+gDe6Xix7rFx4akwgDVreho6yHu/T3L33cUthHdUuCdsJfULDXLG7sviSH
-         33wxvUq9SJkPiW49UQzM6noCYtFeykGRbFsWWkCjsqSLjEcAGEbxWDbq5pgi5FSmTFoM
-         Cfbw==
+        bh=Ht1wwu87z3JhpBjBpd8FKyeEduSGnqVohpzCm9+7/Ow=;
+        b=apVKSZWgoeLiDpHGcX9NymEg4gxI8eP1A0FI3ekhcDryElSYAp1Cv9S2hb5Q1Fvd94
+         qDppsqWoER9gr7I3cb6h159kaZJ47P/CzWeQL6Uh8umGZQyPgnugA+OZZwDL8BN5NqlF
+         aR58jeM97uEpZvimxpMIlzOMouImC/zkebnEwYU54EtMB7TFh3f10qA9KBwDZic2n1j3
+         qTiJVVF3qdm09EJeDi3YuYkU694RWSDSSFeBJvJ1zN/TRHJz0235FA6fFFxpwiAWOTwo
+         zjNpFfIi3IQa3uIh1N2rK6oCgqxWszWvg5CQG0iG7ICaR9hc2K7Z9WSSdZiv98+7I6lk
+         LF6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
          :references:mime-version:content-transfer-encoding;
-        bh=2DbGvfOj1DMYYHtWVJxAg+wtPMMn58r4EIDpHlv7W5Y=;
-        b=radcAKUMRb7Ky3+BrXIYDbH/xUDhLxuRo07ulap59DvPHSOE9xvycD1qv53md8MhcP
-         JwxNl8s2mcjXjDtVoaNhLngSteroLU+gMkOvwQLKAOkjaxd/TWbUokZn9W+ZgXzbda8b
-         9xu88cnlDiSl5NYR6RsEK0+6TmfU73YxVsaFKRvPQYTHyW2WjqPvmlkyE5Rv5xJdocNi
-         rUO4mKZM6WMJMvBK3UsZz6JkXrNY/7PwaJNaMU+z8PqKzreJkJUpKQXVwOfrgdOwtVaW
-         jfEKLnjWixYiyH/wuSELp63sGULR6P9G1+h3An41arsSi6R8lbX1lSZHkNvo8oHL23hJ
-         7HnA==
-X-Gm-Message-State: AOAM5328MZ8nA8ChMDH0oR/2T+0q2jCPo8OBQ5JW7WUOANyn9K0J0Fzq
-        7q9USc6H2vBNtLJKYhF+TNg7kA==
-X-Google-Smtp-Source: ABdhPJyhWpprOajovew/hxFF0zbRLsFXE+yVL4rITdbVY9l+SQvRWEhH932A6nx0YSHs02mI8SI3Eg==
-X-Received: by 2002:a63:6dc3:: with SMTP id i186mr9446310pgc.314.1614663133698;
-        Mon, 01 Mar 2021 21:32:13 -0800 (PST)
+        bh=Ht1wwu87z3JhpBjBpd8FKyeEduSGnqVohpzCm9+7/Ow=;
+        b=tk5V8utl42jM1n4S8xOoPjwjneRGfAyhsQGcS4kORKiXdNNPueJTKOVUfUy9o/WX/P
+         kXnT/X0xljVRi6GZmr3tlnpuRegMDWghwulFUT+gdc+PmPwWzJ0TlDfD+BsI7YLRNWA9
+         rwr8PvSJ9EvKr20h0JcleOqnHsjwplllJH/UEBStrDUWdwBCXP4ucJOK+GHv/K21rmoh
+         Pv5iIABqEhb4kcb3q/UR0OwdzH9G9S63ZI7KATsVYD/PjNOHnL7Jc0+ToCWCyxU5Q7eR
+         jCVQMKLKoj1J1dd3R+zPSPcVmZaEE2GSSFvto7aQV/5VgNyBTDM3UHhObHcyvpVbZGji
+         Gtlg==
+X-Gm-Message-State: AOAM532P0E691Yd103O6hEsxRROvjwoaRU3hO2igIfxQgAbqZF6AXNaZ
+        6I7i5BRQrfWNUH1zQMQK1bwzDA==
+X-Google-Smtp-Source: ABdhPJxKSVFYlEEmAbq+oSCI5KZXWULv5hz+F0Clg77XGNbgbbBU2Yuq3l2SVsGYd7wf76F6Tso05A==
+X-Received: by 2002:a63:505d:: with SMTP id q29mr16349370pgl.218.1614663135741;
+        Mon, 01 Mar 2021 21:32:15 -0800 (PST)
 Received: from x1.hsd1.or.comcast.net ([2601:1c0:4701:ae70:37ab:7b44:a136:e385])
-        by smtp.gmail.com with ESMTPSA id o129sm17929757pgo.27.2021.03.01.21.32.11
+        by smtp.gmail.com with ESMTPSA id o129sm17929757pgo.27.2021.03.01.21.32.13
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 01 Mar 2021 21:32:12 -0800 (PST)
+        Mon, 01 Mar 2021 21:32:14 -0800 (PST)
 From:   Drew Fustini <drew@beagleboard.org>
 To:     Linus Walleij <linus.walleij@linaro.org>,
         linux-gpio@vger.kernel.org, linux-kernel@vger.kernel.org,
@@ -60,11 +60,10 @@ To:     Linus Walleij <linus.walleij@linaro.org>,
         Joe Perches <joe@perches.com>,
         Dan Carpenter <dan.carpenter@oracle.com>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Cc:     Drew Fustini <drew@beagleboard.org>,
-        Geert Uytterhoeven <geert+renesas@glider.be>
-Subject: [PATCH v9 2/4] pinctrl: pinmux: Add pinmux-select debugfs file
-Date:   Mon,  1 Mar 2021 21:30:57 -0800
-Message-Id: <20210302053059.1049035-3-drew@beagleboard.org>
+Cc:     Drew Fustini <drew@beagleboard.org>
+Subject: [PATCH v9 3/4] Documentation: rename pinctl to pin-control
+Date:   Mon,  1 Mar 2021 21:30:58 -0800
+Message-Id: <20210302053059.1049035-4-drew@beagleboard.org>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210302053059.1049035-1-drew@beagleboard.org>
 References: <20210302053059.1049035-1-drew@beagleboard.org>
@@ -74,164 +73,63 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add "pinmux-select" to debugfs which will activate a pin function for a
-given pin group:
+pinctl is not ideal as pinctrl (with an 'r') is much more common. Linus
+state that pin-control.rst would be the best name for the documentation.
 
-  echo "<group-name function-name>" > pinmux-select
-
-The write operation pinmux_select() handles this by checking that the
-names map to valid selectors and then calling ops->set_mux().
-
-The existing "pinmux-functions" debugfs file lists the pin functions
-registered for the pin controller. For example:
-
-  function: pinmux-uart0, groups = [ pinmux-uart0-pins ]
-  function: pinmux-mmc0, groups = [ pinmux-mmc0-pins ]
-  function: pinmux-mmc1, groups = [ pinmux-mmc1-pins ]
-  function: pinmux-i2c0, groups = [ pinmux-i2c0-pins ]
-  function: pinmux-i2c1, groups = [ pinmux-i2c1-pins ]
-  function: pinmux-spi1, groups = [ pinmux-spi1-pins ]
-
-To activate function pinmux-i2c1 on group pinmux-i2c1-pins:
-
-  echo "pinmux-i2c1-pins pinmux-i2c1" > pinmux-select
-
-Reviewed-by: Andy Shevchenko <andy.shevchenko@gmail.com>
-Reviewed-by: Tony Lindgren <tony@atomide.com>
-Reviewed-by: Geert Uytterhoeven <geert+renesas@glider.be>
-Tested-by: Geert Uytterhoeven <geert+renesas@glider.be>
+Link: https://lore.kernel.org/linux-gpio/20210126050817.GA187797@x1/#t
+Suggested-by: Linus Walleij <linus.walleij@linaro.org>
 Signed-off-by: Drew Fustini <drew@beagleboard.org>
 ---
- drivers/pinctrl/pinmux.c | 102 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 102 insertions(+)
+ Documentation/driver-api/gpio/legacy.rst                 | 2 +-
+ Documentation/driver-api/index.rst                       | 2 +-
+ Documentation/driver-api/{pinctl.rst => pin-control.rst} | 0
+ MAINTAINERS                                              | 2 +-
+ 4 files changed, 3 insertions(+), 3 deletions(-)
+ rename Documentation/driver-api/{pinctl.rst => pin-control.rst} (100%)
 
-diff --git a/drivers/pinctrl/pinmux.c b/drivers/pinctrl/pinmux.c
-index c651b2db0925..f4abfaecfc5c 100644
---- a/drivers/pinctrl/pinmux.c
-+++ b/drivers/pinctrl/pinmux.c
-@@ -12,6 +12,7 @@
-  */
- #define pr_fmt(fmt) "pinmux core: " fmt
+diff --git a/Documentation/driver-api/gpio/legacy.rst b/Documentation/driver-api/gpio/legacy.rst
+index 9bc34ba697d9..9b12eeb89170 100644
+--- a/Documentation/driver-api/gpio/legacy.rst
++++ b/Documentation/driver-api/gpio/legacy.rst
+@@ -461,7 +461,7 @@ pin controller?
  
-+#include <linux/ctype.h>
- #include <linux/kernel.h>
- #include <linux/module.h>
- #include <linux/init.h>
-@@ -673,6 +674,105 @@ void pinmux_show_setting(struct seq_file *s,
- DEFINE_SHOW_ATTRIBUTE(pinmux_functions);
- DEFINE_SHOW_ATTRIBUTE(pinmux_pins);
+ This is done by registering "ranges" of pins, which are essentially
+ cross-reference tables. These are described in
+-Documentation/driver-api/pinctl.rst
++Documentation/driver-api/pin-control.rst
  
-+#define PINMUX_SELECT_MAX 128
-+static ssize_t pinmux_select(struct file *file, const char __user *user_buf,
-+				   size_t len, loff_t *ppos)
-+{
-+	struct seq_file *sfile = file->private_data;
-+	struct pinctrl_dev *pctldev = sfile->private;
-+	const struct pinmux_ops *pmxops = pctldev->desc->pmxops;
-+	const char *const *groups;
-+	char *buf, *gname, *fname;
-+	unsigned int num_groups;
-+	int fsel, gsel, ret;
-+
-+	if (len > PINMUX_SELECT_MAX)
-+		return -ENOMEM;
-+
-+	buf = kzalloc(PINMUX_SELECT_MAX, GFP_KERNEL);
-+	if (!buf)
-+		return -ENOMEM;
-+
-+	ret = strncpy_from_user(buf, user_buf, PINMUX_SELECT_MAX);
-+	if (ret < 0)
-+		goto exit_free_buf;
-+	buf[len-1] = '\0';
-+
-+	/* remove leading and trailing spaces of input buffer */
-+	gname = strstrip(buf);
-+	if (*gname == '\0') {
-+		ret = -EINVAL;
-+		goto exit_free_buf;
-+	}
-+
-+	/* find a separator which is a spacelike character */
-+	for (fname = gname; !isspace(*fname); fname++) {
-+		if (*fname == '\0') {
-+			ret = -EINVAL;
-+			goto exit_free_buf;
-+		}
-+	}
-+	*fname = '\0';
-+
-+	/* drop extra spaces between function and group names */
-+	fname = skip_spaces(fname + 1);
-+	if (*fname == '\0') {
-+		ret = -EINVAL;
-+		goto exit_free_buf;
-+	}
-+
-+	ret = pinmux_func_name_to_selector(pctldev, fname);
-+	if (ret < 0) {
-+		dev_err(pctldev->dev, "invalid function %s in map table\n", fname);
-+		goto exit_free_buf;
-+	}
-+	fsel = ret;
-+
-+	ret = pmxops->get_function_groups(pctldev, fsel, &groups, &num_groups);
-+	if (ret) {
-+		dev_err(pctldev->dev, "no groups for function %d (%s)", fsel, fname);
-+		goto exit_free_buf;
-+	}
-+
-+	ret = match_string(groups, num_groups, gname);
-+	if (ret < 0) {
-+		dev_err(pctldev->dev, "invalid group %s", gname);
-+		goto exit_free_buf;
-+	}
-+
-+	ret = pinctrl_get_group_selector(pctldev, gname);
-+	if (ret < 0) {
-+		dev_err(pctldev->dev, "failed to get group selector for %s", gname);
-+		goto exit_free_buf;
-+	}
-+	gsel = ret;
-+
-+	ret = pmxops->set_mux(pctldev, fsel, gsel);
-+	if (ret) {
-+		dev_err(pctldev->dev, "set_mux() failed: %d", ret);
-+		goto exit_free_buf;
-+	}
-+	ret = len;
-+
-+exit_free_buf:
-+	kfree(buf);
-+
-+	return ret;
-+}
-+
-+static int pinmux_select_open(struct inode *inode, struct file *file)
-+{
-+	return single_open(file, NULL, inode->i_private);
-+}
-+
-+static const struct file_operations pinmux_select_ops = {
-+	.owner = THIS_MODULE,
-+	.open = pinmux_select_open,
-+	.write = pinmux_select,
-+	.llseek = no_llseek,
-+	.release = single_release,
-+};
-+
- void pinmux_init_device_debugfs(struct dentry *devroot,
- 			 struct pinctrl_dev *pctldev)
- {
-@@ -680,6 +780,8 @@ void pinmux_init_device_debugfs(struct dentry *devroot,
- 			    devroot, pctldev, &pinmux_functions_fops);
- 	debugfs_create_file("pinmux-pins", 0444,
- 			    devroot, pctldev, &pinmux_pins_fops);
-+	debugfs_create_file("pinmux-select", 0200,
-+			    devroot, pctldev, &pinmux_select_ops);
- }
+ While the pin allocation is totally managed by the pinctrl subsystem,
+ gpio (under gpiolib) is still maintained by gpio drivers. It may happen
+diff --git a/Documentation/driver-api/index.rst b/Documentation/driver-api/index.rst
+index f357f3eb400c..cd382bda2cf9 100644
+--- a/Documentation/driver-api/index.rst
++++ b/Documentation/driver-api/index.rst
+@@ -60,7 +60,7 @@ available subsections can be seen below.
+    80211/index
+    uio-howto
+    firmware/index
+-   pinctl
++   pin-control
+    gpio/index
+    md/index
+    media/index
+diff --git a/Documentation/driver-api/pinctl.rst b/Documentation/driver-api/pin-control.rst
+similarity index 100%
+rename from Documentation/driver-api/pinctl.rst
+rename to Documentation/driver-api/pin-control.rst
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 281de213ef47..c54c98910dd4 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -13800,7 +13800,7 @@ L:	linux-gpio@vger.kernel.org
+ S:	Maintained
+ T:	git git://git.kernel.org/pub/scm/linux/kernel/git/linusw/linux-pinctrl.git
+ F:	Documentation/devicetree/bindings/pinctrl/
+-F:	Documentation/driver-api/pinctl.rst
++F:	Documentation/driver-api/pin-control.rst
+ F:	drivers/pinctrl/
+ F:	include/linux/pinctrl/
  
- #endif /* CONFIG_DEBUG_FS */
 -- 
 2.25.1
 
