@@ -2,107 +2,170 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AD1D432A8E7
-	for <lists+linux-doc@lfdr.de>; Tue,  2 Mar 2021 19:08:55 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B042732A8EB
+	for <lists+linux-doc@lfdr.de>; Tue,  2 Mar 2021 19:08:57 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1580398AbhCBSCu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 2 Mar 2021 13:02:50 -0500
-Received: from hqnvemgate25.nvidia.com ([216.228.121.64]:18119 "EHLO
-        hqnvemgate25.nvidia.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1447143AbhCBMmj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 07:42:39 -0500
-Received: from hqmail.nvidia.com (Not Verified[216.228.121.13]) by hqnvemgate25.nvidia.com (using TLS: TLSv1.2, AES256-SHA)
-        id <B603e32960000>; Tue, 02 Mar 2021 04:41:58 -0800
-Received: from HQMAIL109.nvidia.com (172.20.187.15) by HQMAIL111.nvidia.com
- (172.20.187.18) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Tue, 2 Mar
- 2021 12:41:57 +0000
-Received: from NAM11-BN8-obe.outbound.protection.outlook.com (104.47.58.174)
- by HQMAIL109.nvidia.com (172.20.187.15) with Microsoft SMTP Server (TLS) id
- 15.0.1497.2 via Frontend Transport; Tue, 2 Mar 2021 12:41:57 +0000
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=krA99G49gRreljlKnK0aS7mxZ7LlG+Ie6zX++/BaLGR8IVZ2rACMD3perTBfdZeKJNwNPv2B/qg7aDWJK/ECQOvAUMX11b6ZH/JIw8b8Q4vOGJRqQBJ4kxutBukAm45pTiSAsRWR+WKHRv1XrnJZMEK9q7cUcY4yK8tcv0zXdVvvKGscZqRiFh2BBNTA2J0iM6hLviWYVoOQ9Jtgvnpl2J56M/IuxOHnavUvxN4P9bPevR1pYIIuAUMVjb0TePnxgIEkiDzHLmM6Grz95ZWZzSwWCxB3NOus6ZxtFtNoj8EGleLaUR5kO259yA9NVT6g3G/Q9XS0Hz1mFR8OzNqrRw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oE+KS2DDNZXXTciEYWOFI2+Rv0T7GevVzlHvgXrL1vk=;
- b=Cpob7Z6LjeMafeO1X3g9tmDrZSYJZRWzkeQvw+/vfl+L9NBvUyNv42P8vtOWjF4jd3qHcfMvVu/IaDRKIUak3Sdd/KJdSFjhYIkUEOpJdWZuxF7TQzrfr2NStXg3A6rtyQot4M30+D7Hynnjw+QEmqzp/NDX3XMCwGrUXEBHoOalvSCtcnK7/5rObPVDcO2Du4fva4PVsJkHB6aduNt0vIL8sFxdFbU0w1L2POULgYQVAUX/p+gj1kICvEes47Ak3XJGKpq+Nq3zm8AYqJT40DrooGR3NWcF2qY+W32nihdri0QQXbVkt9FHsh6CqreHXHiVXLA/7CeY2ysFUwaiaA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
- by DM5PR12MB2486.namprd12.prod.outlook.com (2603:10b6:4:b2::32) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3890.23; Tue, 2 Mar
- 2021 12:41:54 +0000
-Received: from DM6PR12MB3834.namprd12.prod.outlook.com
- ([fe80::1c62:7fa3:617b:ab87]) by DM6PR12MB3834.namprd12.prod.outlook.com
- ([fe80::1c62:7fa3:617b:ab87%6]) with mapi id 15.20.3912.017; Tue, 2 Mar 2021
- 12:41:54 +0000
-Date:   Tue, 2 Mar 2021 08:41:52 -0400
-From:   Jason Gunthorpe <jgg@nvidia.com>
-To:     Alistair Popple <apopple@nvidia.com>
-CC:     <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
-        <bskeggs@redhat.com>, <akpm@linux-foundation.org>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <dri-devel@lists.freedesktop.org>, <jhubbard@nvidia.com>,
-        <rcampbell@nvidia.com>, <jglisse@redhat.com>, <hch@infradead.org>,
-        <daniel@ffwll.ch>
-Subject: Re: [PATCH v3 5/8] mm: Device exclusive memory access
-Message-ID: <20210302124152.GF4247@nvidia.com>
-References: <20210226071832.31547-1-apopple@nvidia.com>
- <20210226071832.31547-6-apopple@nvidia.com>
- <20210302000559.GA763995@nvidia.com> <2758096.Z30Q8iEM0t@nvdebian>
-Content-Type: text/plain; charset="us-ascii"
-Content-Disposition: inline
-In-Reply-To: <2758096.Z30Q8iEM0t@nvdebian>
-X-ClientProxiedBy: BL0PR05CA0018.namprd05.prod.outlook.com
- (2603:10b6:208:91::28) To DM6PR12MB3834.namprd12.prod.outlook.com
- (2603:10b6:5:14a::12)
+        id S1580413AbhCBSC4 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 2 Mar 2021 13:02:56 -0500
+Received: from conuserg-08.nifty.com ([210.131.2.75]:55621 "EHLO
+        conuserg-08.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S1448437AbhCBOUd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 2 Mar 2021 09:20:33 -0500
+Received: from oscar.flets-west.jp (softbank126026090165.bbtec.net [126.26.90.165]) (authenticated)
+        by conuserg-08.nifty.com with ESMTP id 122EIQx0008022;
+        Tue, 2 Mar 2021 23:18:26 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-08.nifty.com 122EIQx0008022
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1614694707;
+        bh=VCeA0PWI/KpvDWvDmIzbSqbL1uVVr9co70j2lM2jmC8=;
+        h=From:To:Cc:Subject:Date:From;
+        b=2TgU0n6i5FG+/Le+H7wIGKG9bZa6FOgZTGlzNxsGYO4V3doLohIjNvS12Bcuynxqz
+         WKprLEeCZfy4Jom5ag79Rftz4r+VdJfq5MF141p8nZXZtvlaUmD8rdMD1lmyrnq6WD
+         aUXtVvT7mtZAaxts8uPFceW/UW3ZM5jyTQue++x5ukJQtFTlx76k2rRoSvUXjAgCnm
+         LGXjIj9UC2Xfb703qF1pY9cDh9bj5iUu1T30k0rhVVNHx87ArudNIAt+QQFHNhtV0o
+         o27NRFmzoQnyjYZ1klry7h7XWvU5YSOj0i8Da8NGtge5rqET3+2iYvM5pNahCimIrw
+         3pJ/taQhorlnA==
+X-Nifty-SrcIP: [126.26.90.165]
+From:   Masahiro Yamada <masahiroy@kernel.org>
+To:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Cc:     linux-kernel@vger.kernel.org,
+        Masahiro Yamada <masahiroy@kernel.org>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Federico Vaga <federico.vaga@vaga.pv.it>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Marc Zyngier <maz@kernel.org>,
+        Mathieu Poirier <mathieu.poirier@linaro.org>,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        "Paul E. McKenney" <paulmck@kernel.org>
+Subject: [PATCH] docs: Remove make headers_check from checklist in translations
+Date:   Tue,  2 Mar 2021 23:18:22 +0900
+Message-Id: <20210302141822.504773-1-masahiroy@kernel.org>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (142.162.115.133) by BL0PR05CA0018.namprd05.prod.outlook.com (2603:10b6:208:91::28) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3912.16 via Frontend Transport; Tue, 2 Mar 2021 12:41:53 +0000
-Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1lH4LY-0049UW-8j; Tue, 02 Mar 2021 08:41:52 -0400
-X-Header: ProcessedBy-CMR-outbound
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nvidia.com; s=n1;
-        t=1614688918; bh=oE+KS2DDNZXXTciEYWOFI2+Rv0T7GevVzlHvgXrL1vk=;
-        h=ARC-Seal:ARC-Message-Signature:ARC-Authentication-Results:Date:
-         From:To:CC:Subject:Message-ID:References:Content-Type:
-         Content-Disposition:In-Reply-To:X-ClientProxiedBy:MIME-Version:
-         X-MS-Exchange-MessageSentRepresentingType:X-Header;
-        b=Bw0nEP7xQqtv/nLkS6v87rsYK4W26pKht7z811sA9bGQ3XHCUEIfPvhuuBMUKZcRU
-         pAJq9hfH1SoA0dHn+aJGBP04I4M2L2qPJE1TygCDd5kzCoIOQcGEMPS/NNNxZnLCke
-         x8ntsVBil6b42sWjx7HjnuKjj1uzGa9TYXcyj0X/7S44f25X84ctGNS+nO9EP8gULV
-         /Hvqqk8TbzX0WaGb91HnEorl8EjdWgaz+/iBNcbX+JKwJ1TwXI1wXq0m50R+r4U6o+
-         2nrlhXmgtatriXc63+cNtMOVqtHh2T5ak/Hbdu27vvIMlE5M13UxGUGX5Ah8HiurSt
-         x1cR2frsdzj6g==
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 02, 2021 at 07:57:58PM +1100, Alistair Popple wrote:
+Commit 1a63f9cce7b7 ("docs: Remove make headers_check from checklist")
+fixed only the English version.
 
-> The intent was a driver could use HMM or some other mechanism to keep PTEs 
-> synchronised if required. However I just looked at patch 8 in the series again 
-> and it appears I got this wrong when converting from the old migration 
-> approach:
-> 
-> +               mutex_unlock(&svmm->mutex);
-> +               ret = nouveau_atomic_range_fault(svmm, drm, args,
-> +                                               size, hmm_flags, mm);
-> 
-> The mutex needs to be unlocked after the range fault to ensure the PTE hasn't 
-> changed. But this ends up being a problem because try_to_protect() calls 
-> notifiers which need to take that mutex and hence deadlocks.
+Let's fix the translated variants too.
 
-you have to check the notifier sequence under the mutex and loop
-again. The mutex should only cover programming the HW to use the
-pages, nothing else.
+Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
+---
 
-> However try_to_protect() scans the PTEs again under the PTL so checking the 
-> mapping of interest actually gets replaced during the rmap walk seems like a 
-> reasonable solution. Thanks for the comments.
+ .../it_IT/process/submit-checklist.rst             | 14 ++++++--------
+ Documentation/translations/ja_JP/SubmitChecklist   |  8 +++-----
+ .../zh_CN/process/submit-checklist.rst             | 14 ++++++--------
+ 3 files changed, 15 insertions(+), 21 deletions(-)
 
-It does seem cleaner if you can manage it, the notifier will still be
-needd to program the HW though
+diff --git a/Documentation/translations/it_IT/process/submit-checklist.rst b/Documentation/translations/it_IT/process/submit-checklist.rst
+index 614fc17d9086..62ba471921b6 100644
+--- a/Documentation/translations/it_IT/process/submit-checklist.rst
++++ b/Documentation/translations/it_IT/process/submit-checklist.rst
+@@ -95,31 +95,29 @@ sottomissione delle patch, in particolare
+     informazioni.  Le patch che modificano le interfacce utente dovrebbero
+     essere inviate in copia anche a linux-api@vger.kernel.org.
+ 
+-20) Verifica che il kernel passi con successo ``make headers_check``
+-
+-21) La patch è stata verificata con l'iniezione di fallimenti in slab e
++20) La patch è stata verificata con l'iniezione di fallimenti in slab e
+     nell'allocazione di pagine.  Vedere ``Documentation/fault-injection/``.
+ 
+     Se il nuovo codice è corposo, potrebbe essere opportuno aggiungere
+     l'iniezione di fallimenti specifici per il sottosistema.
+ 
+-22) Il nuovo codice è stato compilato con ``gcc -W`` (usate
++21) Il nuovo codice è stato compilato con ``gcc -W`` (usate
+     ``make KCFLAGS=-W``).  Questo genererà molti avvisi, ma è ottimo
+     per scovare bachi come  "warning: comparison between signed and unsigned".
+ 
+-23) La patch è stata verificata dopo essere stata inclusa nella serie di patch
++22) La patch è stata verificata dopo essere stata inclusa nella serie di patch
+     -mm; questo al fine di assicurarsi che continui a funzionare assieme a
+     tutte le altre patch in coda e i vari cambiamenti nei sottosistemi VM, VFS
+     e altri.
+ 
+-24) Tutte le barriere di sincronizzazione {per esempio, ``barrier()``,
++23) Tutte le barriere di sincronizzazione {per esempio, ``barrier()``,
+     ``rmb()``, ``wmb()``} devono essere accompagnate da un commento nei
+     sorgenti che ne spieghi la logica: cosa fanno e perché.
+ 
+-25) Se la patch aggiunge nuove chiamate ioctl, allora aggiornate
++24) Se la patch aggiunge nuove chiamate ioctl, allora aggiornate
+     ``Documentation/userspace-api/ioctl/ioctl-number.rst``.
+ 
+-26) Se il codice che avete modificato dipende o usa una qualsiasi interfaccia o
++25) Se il codice che avete modificato dipende o usa una qualsiasi interfaccia o
+     funzionalità del kernel che è associata a uno dei seguenti simboli
+     ``Kconfig``, allora verificate che il kernel compili con diverse
+     configurazioni dove i simboli sono disabilitati e/o ``=m`` (se c'è la
+diff --git a/Documentation/translations/ja_JP/SubmitChecklist b/Documentation/translations/ja_JP/SubmitChecklist
+index b42220d3d46c..4429447b0965 100644
+--- a/Documentation/translations/ja_JP/SubmitChecklist
++++ b/Documentation/translations/ja_JP/SubmitChecklist
+@@ -88,20 +88,18 @@ Linux カーネルパッチ投稿者向けチェックリスト
+ 18: 新しいuserspaceインタフェースを作成した場合には、Documentation/ABI/ に
+     Documentation/ABI/README を参考にして必ずドキュメントを追加してください。
+ 
+-19: 'make headers_check'を実行して全く問題がないことを確認してください。
+-
+-20: 少なくともslabアロケーションとpageアロケーションに失敗した場合の
++19: 少なくともslabアロケーションとpageアロケーションに失敗した場合の
+     挙動について、fault-injectionを利用して確認してください。
+     Documentation/fault-injection/ を参照してください。
+ 
+     追加したコードがかなりの量であったならば、サブシステム特有の
+     fault-injectionを追加したほうが良いかもしれません。
+ 
+-21: 新たに追加したコードは、`gcc -W'でコンパイルしてください。
++20: 新たに追加したコードは、`gcc -W'でコンパイルしてください。
+     このオプションは大量の不要なメッセージを出力しますが、
+     "warning: comparison between signed and unsigned" のようなメッセージは、
+     バグを見つけるのに役に立ちます。
+ 
+-22: 投稿したパッチが -mm パッチセットにマージされた後、全ての既存のパッチや
++21: 投稿したパッチが -mm パッチセットにマージされた後、全ての既存のパッチや
+     VM, VFS およびその他のサブシステムに関する様々な変更と、現時点でも共存
+     できることを確認するテストを行ってください。
+diff --git a/Documentation/translations/zh_CN/process/submit-checklist.rst b/Documentation/translations/zh_CN/process/submit-checklist.rst
+index 50386e0e42e7..a64858d321fc 100644
+--- a/Documentation/translations/zh_CN/process/submit-checklist.rst
++++ b/Documentation/translations/zh_CN/process/submit-checklist.rst
+@@ -82,24 +82,22 @@ Linux内核补丁提交清单
+     请参阅 ``Documentation/ABI/README`` 。更改用户空间接口的补丁应该抄送
+     linux-api@vger.kernel.org。
+ 
+-20) 检查是否全部通过 ``make headers_check`` 。
+-
+-21) 已通过至少注入slab和page分配失败进行检查。请参阅 ``Documentation/fault-injection/``
++20) 已通过至少注入slab和page分配失败进行检查。请参阅 ``Documentation/fault-injection/``
+     如果新代码是实质性的，那么添加子系统特定的故障注入可能是合适的。
+ 
+-22) 新添加的代码已经用 ``gcc -W`` 编译（使用 ``make EXTRA-CFLAGS=-W`` ）。这
++21) 新添加的代码已经用 ``gcc -W`` 编译（使用 ``make EXTRA-CFLAGS=-W`` ）。这
+     将产生大量噪声，但对于查找诸如“警告：有符号和无符号之间的比较”之类的错误
+     很有用。
+ 
+-23) 在它被合并到-mm补丁集中之后进行测试，以确保它仍然与所有其他排队的补丁以
++22) 在它被合并到-mm补丁集中之后进行测试，以确保它仍然与所有其他排队的补丁以
+     及VM、VFS和其他子系统中的各种更改一起工作。
+ 
+-24) 所有内存屏障例如 ``barrier()``, ``rmb()``, ``wmb()`` 都需要源代码中的注
++23) 所有内存屏障例如 ``barrier()``, ``rmb()``, ``wmb()`` 都需要源代码中的注
+     释来解释它们正在执行的操作及其原因的逻辑。
+ 
+-25) 如果补丁添加了任何ioctl，那么也要更新 ``Documentation/userspace-api/ioctl/ioctl-number.rst``
++24) 如果补丁添加了任何ioctl，那么也要更新 ``Documentation/userspace-api/ioctl/ioctl-number.rst``
+ 
+-26) 如果修改后的源代码依赖或使用与以下 ``Kconfig`` 符号相关的任何内核API或
++25) 如果修改后的源代码依赖或使用与以下 ``Kconfig`` 符号相关的任何内核API或
+     功能，则在禁用相关 ``Kconfig`` 符号和/或 ``=m`` （如果该选项可用）的情况
+     下测试以下多个构建[并非所有这些都同时存在，只是它们的各种/随机组合]：
+ 
+-- 
+2.27.0
 
-Jason
