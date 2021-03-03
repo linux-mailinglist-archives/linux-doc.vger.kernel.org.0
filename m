@@ -2,84 +2,67 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7C6A132C706
-	for <lists+linux-doc@lfdr.de>; Thu,  4 Mar 2021 02:09:34 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id BC2B032C707
+	for <lists+linux-doc@lfdr.de>; Thu,  4 Mar 2021 02:09:37 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239453AbhCDAay (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S239635AbhCDAay (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Wed, 3 Mar 2021 19:30:54 -0500
-Received: from mga06.intel.com ([134.134.136.31]:45588 "EHLO mga06.intel.com"
+Received: from mail.kernel.org ([198.145.29.99]:54458 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S1382998AbhCCQ2U (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 3 Mar 2021 11:28:20 -0500
-IronPort-SDR: X98ptwmCA8JW+xOSZQev0BMOr1Mr6nBRgVFg6bxYqCP9Gz33YFpHCL/3dEj1NQscjHTZxW0BMA
- M+t1RSwapXqw==
-X-IronPort-AV: E=McAfee;i="6000,8403,9912"; a="248629274"
-X-IronPort-AV: E=Sophos;i="5.81,220,1610438400"; 
-   d="scan'208";a="248629274"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by orsmga104.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Mar 2021 08:17:07 -0800
-IronPort-SDR: HK6BqoCOxzow7Nb+DpilmIyDt0ONRht09Opyru2m3nxMWlc57oeZ9IbhzMHuvtnLb6GkVpB1SI
- TFaQCPef4zeA==
-X-IronPort-AV: E=Sophos;i="5.81,220,1610438400"; 
-   d="scan'208";a="384042326"
-Received: from smile.fi.intel.com (HELO smile) ([10.237.68.40])
-  by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 03 Mar 2021 08:17:04 -0800
-Received: from andy by smile with local (Exim 4.94)
-        (envelope-from <andriy.shevchenko@linux.intel.com>)
-        id 1lHUBJ-009g4x-EE; Wed, 03 Mar 2021 18:17:01 +0200
-Date:   Wed, 3 Mar 2021 18:17:01 +0200
-From:   Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-To:     Steven Rostedt <rostedt@goodmis.org>
-Cc:     Petr Mladek <pmladek@suse.com>, Stephen Boyd <swboyd@chromium.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        linux-kernel@vger.kernel.org, Jiri Olsa <jolsa@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Jessica Yu <jeyu@kernel.org>,
-        Evan Green <evgreen@chromium.org>,
-        Hsin-Yi Wang <hsinyi@chromium.org>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        linux-doc@vger.kernel.org
-Subject: Re: [PATCH 5/7] printk: Make %pS and friends print module build ID
-Message-ID: <YD+2fRo4J/ffQF8z@smile.fi.intel.com>
-References: <20210301174749.1269154-1-swboyd@chromium.org>
- <20210301174749.1269154-6-swboyd@chromium.org>
- <YD9kNphaSRPk83KJ@alley>
- <20210303100012.0e6e4de3@gandalf.local.home>
+        id S235014AbhCCRBA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 3 Mar 2021 12:01:00 -0500
+Received: by mail.kernel.org (Postfix) with ESMTPS id A55B064EDF;
+        Wed,  3 Mar 2021 17:00:07 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1614790807;
+        bh=GlpLp6hgSgh1lfq00GHEJic23eMw+Dv0Nw+gC2Vh1a4=;
+        h=Subject:From:Date:References:In-Reply-To:To:Cc:From;
+        b=r+a0FajFHHOV4ZuIu/k25ny2bGkzo0Fo/HbtmumalLEXz07gXjiRVY3xCd2HjT6s4
+         O8STBYvFkyal1arOdDVKDuaxBcoA9N6xSFPp734beajFo6tWKUEE2e4QWmgg+W1zP9
+         j1g6RWHOyw9BEEWWi+jRgcw7EdhLtXAQ/TRZSsDRj7E+kki90pmbAb2gj+ZzxX/T1p
+         bM4Z5pmR1RNgTIxnjNCO5rC8hgcO73zUsMhpJ0fvI51X1i+ujuNU2GE3UOh4i1t1UL
+         XAjmNVHpAbl/UemlRO3hN73OKmDL6M1LJQSRiX1ti8Fub3IL4x9Ak4CR3G3dVJ78sY
+         V19/RkhvxqxLg==
+Received: from pdx-korg-docbuild-2.ci.codeaurora.org (localhost.localdomain [127.0.0.1])
+        by pdx-korg-docbuild-2.ci.codeaurora.org (Postfix) with ESMTP id 9BEFA609EA;
+        Wed,  3 Mar 2021 17:00:07 +0000 (UTC)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210303100012.0e6e4de3@gandalf.local.home>
-Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH net] docs: networking: drop special stable handling
+From:   patchwork-bot+netdevbpf@kernel.org
+Message-Id: <161479080763.4362.12115440673038425798.git-patchwork-notify@kernel.org>
+Date:   Wed, 03 Mar 2021 17:00:07 +0000
+References: <20210303024643.1076846-1-kuba@kernel.org>
+In-Reply-To: <20210303024643.1076846-1-kuba@kernel.org>
+To:     Jakub Kicinski <kuba@kernel.org>
+Cc:     davem@davemloft.net, netdev@vger.kernel.org,
+        linux-doc@vger.kernel.org, gregkh@linuxfoundation.org
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Mar 03, 2021 at 10:00:12AM -0500, Steven Rostedt wrote:
-> On Wed, 3 Mar 2021 11:25:58 +0100
-> Petr Mladek <pmladek@suse.com> wrote:
+Hello:
+
+This patch was applied to netdev/net.git (refs/heads/master):
+
+On Tue,  2 Mar 2021 18:46:43 -0800 you wrote:
+> Leave it to Greg.
 > 
-> > Alternative solution would be to minimize the information, for
-> > example, by printing only the modules that appear in the backtrace.
-> > But this might be complicated to implement.
-> 
-> It could be a list after the backtrace perhaps, and not part of the
-> "modules linked in"?
-> 
-> But then you need a generic way of capturing those modules in the backtrace
-> that works for every architecture.
+> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
+> ---
+>  Documentation/networking/netdev-FAQ.rst       | 72 ++-----------------
+>  Documentation/process/stable-kernel-rules.rst |  6 --
+>  Documentation/process/submitting-patches.rst  |  5 --
+>  3 files changed, 6 insertions(+), 77 deletions(-)
 
-> Honestly, I don't even know what a buildid is, and it is totally useless
-> information for myself. What exactly is it used for?
+Here is the summary with links:
+  - [net] docs: networking: drop special stable handling
+    https://git.kernel.org/netdev/net/c/dbbe7c962c3a
 
-Dunno Stephen's motivation, but build ID is very useful when you do tracing,
-then based on ID the decoders can know what exactly was the layout of the
-binary and list of (exported) functions, etc.
-
-At least that was my (shallow) experience with perf last time I have tried it.
-
--- 
-With Best Regards,
-Andy Shevchenko
+You are awesome, thank you!
+--
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
 
