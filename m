@@ -2,104 +2,71 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AF034330208
-	for <lists+linux-doc@lfdr.de>; Sun,  7 Mar 2021 15:25:21 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4C9A9330296
+	for <lists+linux-doc@lfdr.de>; Sun,  7 Mar 2021 16:20:06 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230002AbhCGOYs (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 7 Mar 2021 09:24:48 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57834 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229757AbhCGOYY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 7 Mar 2021 09:24:24 -0500
-Received: from mail-pl1-x62c.google.com (mail-pl1-x62c.google.com [IPv6:2607:f8b0:4864:20::62c])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 48C9AC06174A;
-        Sun,  7 Mar 2021 06:24:24 -0800 (PST)
-Received: by mail-pl1-x62c.google.com with SMTP id p5so3642967plo.4;
-        Sun, 07 Mar 2021 06:24:24 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id;
-        bh=B2+RZVdJEIGjYvBplx65Ssevyg8xALCta0oPDumrCXQ=;
-        b=Kxw27O2Ia52HybpYuESfaEP6QG9+MlcxmOOkoEUhoLcvjjUOSPDD6kvb4jtd85zbr4
-         Eh2EI+0YUth5sLuA888oN4fbk+aFNVtdaKFZVeHpB4havhI9jxREYVqGYncmqUuRFED4
-         fJ2TkRjr5gh30b9/98UiCuc6zIbqLj6NR5nPx4vtFGdzTe3AsF/Dn+6SOS2TewWmHBUG
-         AcG6v1RnObc9nzMGMauu2o8GQ7mMUZjJSMvQb5gPaNoB/qT5fLn7rLvhtCz2dxtNycHT
-         Bpe5kRKVwKMNtHnrQ2DvYXK9OrCd67QKN5k8ad6NxxFl/rfMGpIZzYKSKZIUqhpmNQdy
-         DtvQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id;
-        bh=B2+RZVdJEIGjYvBplx65Ssevyg8xALCta0oPDumrCXQ=;
-        b=dnUFOT9gFLYCzE0gw7hM2wvqAEpMr6b3lzB8aCY2fYaxxFyOCsXS3yCOtu2uBbq34U
-         6emm1AQw5qC6DCK98S3RraA6YA8GXY6T0xZdBGBiGU9I+TjtTVTyez6XnZG6PY7tvGfF
-         i3f6sQ7pCM52/H1uGHsDH01XHd3/Of1V/WefIytqmBjfBtC1XDAG4jIZ4XWZX7t1No7Q
-         0tban53o4wfRer8Z54wkgyosvwEg/CNcYfH/JQJ04LagnmyU99uNwDOvHdCEu7R71cC1
-         rl5y538ZgunO0aWEO9srhpt67Vo+wB/q2jvveGxLjWZE7NYcR1CtRmV/Sw+Buc7BK4rl
-         ENRA==
-X-Gm-Message-State: AOAM532oY0lP3jmOzhhx+QLzn6/OyAvt+GMasJykn/w5Wmc6oEtYzDoR
-        OGAIfJIgasl3RfjLAsVRzUE=
-X-Google-Smtp-Source: ABdhPJyTRsjZBJi/VXtYo4IZA0ygGV0lZDPTZ6OCy2TjQKAjTxErBO1H1s5yKM9vZfh+WU2YwXkp9w==
-X-Received: by 2002:a17:90a:eac7:: with SMTP id ev7mr20559717pjb.158.1615127063574;
-        Sun, 07 Mar 2021 06:24:23 -0800 (PST)
-Received: from AHUANG12-1LT7M0.lenovo.com (1-174-52-149.dynamic-ip.hinet.net. [1.174.52.149])
-        by smtp.gmail.com with ESMTPSA id t6sm2626600pjs.26.2021.03.07.06.24.21
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 07 Mar 2021 06:24:23 -0800 (PST)
-From:   Adrian Huang <adrianhuang0701@gmail.com>
-To:     Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>
-Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org,
-        Adrian Huang <adrianhuang0701@gmail.com>,
-        Adrian Huang <ahuang12@lenovo.com>,
-        Kees Cook <keescook@chromium.org>
-Subject: [PATCH 1/1] Documentation/x86/boot: Correct algorithm for runtime start address
-Date:   Sun,  7 Mar 2021 22:22:51 +0800
-Message-Id: <20210307142251.797-1-adrianhuang0701@gmail.com>
-X-Mailer: git-send-email 2.17.1
+        id S232113AbhCGPTe (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 7 Mar 2021 10:19:34 -0500
+Received: from mga12.intel.com ([192.55.52.136]:15647 "EHLO mga12.intel.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S232033AbhCGPTV (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 7 Mar 2021 10:19:21 -0500
+IronPort-SDR: rcwVF1zsDWWfeydQ/onW8Q1t7k1DFqOO6V6HjdFh7is5vmZLV2snJ1iMeExH8+32o6TV9mDP9Z
+ 8Nx8zFLfjWrA==
+X-IronPort-AV: E=McAfee;i="6000,8403,9916"; a="167172190"
+X-IronPort-AV: E=Sophos;i="5.81,230,1610438400"; 
+   d="scan'208";a="167172190"
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+  by fmsmga106.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Mar 2021 07:19:21 -0800
+IronPort-SDR: VBQ85G5YYI/WVTz2b41mxqzXqF0+ssZMx7MQbDyrg3QsWTdTEwQLosgUq9Ov6r51Cb94QFKhyQ
+ E0ZQT8/IMYEw==
+X-IronPort-AV: E=Sophos;i="5.81,230,1610438400"; 
+   d="scan'208";a="409008502"
+Received: from tassilo.jf.intel.com ([10.54.74.11])
+  by orsmga008-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 07 Mar 2021 07:19:21 -0800
+Date:   Sun, 7 Mar 2021 07:19:20 -0800
+From:   Andi Kleen <ak@linux.intel.com>
+To:     John Wood <john.wood@gmx.com>
+Cc:     Kees Cook <keescook@chromium.org>, Jann Horn <jannh@google.com>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        James Morris <jmorris@namei.org>,
+        Shuah Khan <shuah@kernel.org>,
+        "Serge E. Hallyn" <serge@hallyn.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        linux-security-module@vger.kernel.org,
+        linux-kselftest@vger.kernel.org,
+        kernel-hardening@lists.openwall.com
+Subject: Re: [PATCH v5 7/8] Documentation: Add documentation for the Brute LSM
+Message-ID: <20210307151920.GR472138@tassilo.jf.intel.com>
+References: <20210227153013.6747-1-john.wood@gmx.com>
+ <20210227153013.6747-8-john.wood@gmx.com>
+ <878s78dnrm.fsf@linux.intel.com>
+ <20210302183032.GA3049@ubuntu>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210302183032.GA3049@ubuntu>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Adrian Huang <ahuang12@lenovo.com>
+Sorry for the late answer. I somehow missed your email earlier.
 
-Commit 8ab3820fd5b2 ("x86, kaslr: Return location from decompress_kernel")
-enforces CONFIG_PHYSICAL_START as the minimum relocation address when
-the kernel option CONFIG_RELOCATABLE is enabled. This change should be
-included accordingly.
+> As a mitigation method, all the offending tasks involved in the attack are
+> killed. Or in other words, all the tasks that share the same statistics
+> (statistics showing a fast crash rate) are killed.
 
-Signed-off-by: Adrian Huang <ahuang12@lenovo.com>
-Cc: Kees Cook <keescook@chromium.org>
----
- Documentation/x86/boot.rst | 14 ++++++++++----
- 1 file changed, 10 insertions(+), 4 deletions(-)
+So systemd will just restart the network daemon and then the attack works
+again?
 
-diff --git a/Documentation/x86/boot.rst b/Documentation/x86/boot.rst
-index fc844913dece..808ea181ca40 100644
---- a/Documentation/x86/boot.rst
-+++ b/Documentation/x86/boot.rst
-@@ -894,10 +894,16 @@ Offset/size:	0x260/4
- 
-   The kernel runtime start address is determined by the following algorithm::
- 
--	if (relocatable_kernel)
--	runtime_start = align_up(load_address, kernel_alignment)
--	else
--	runtime_start = pref_address
-+	if (relocatable_kernel) {
-+		runtime_start = align_up(load_address, kernel_alignment);
-+
-+		/* pref_address is the minimum relocation address */
-+		if (runtime_start < pref_address)
-+			runtime_start = pref_address;
-+	} else {
-+		/* Adhere to the statement describing in field 'pref_address' */
-+		runtime_start = pref_address;
-+	}
- 
- ============	===============
- Field name:	handover_offset
--- 
-2.17.1
+Or if it's a interactive login you log in again.
 
+I think it might be useful even with these limitations, but it would
+be good to spell out the limitations of the method more clearly.
+
+I suspect to be useful it'll likely need some user space configuration
+changes too.
+
+-Andi
