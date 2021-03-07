@@ -2,241 +2,110 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CB556330055
-	for <lists+linux-doc@lfdr.de>; Sun,  7 Mar 2021 12:34:59 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 1036233005E
+	for <lists+linux-doc@lfdr.de>; Sun,  7 Mar 2021 12:36:02 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229928AbhCGLeZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 7 Mar 2021 06:34:25 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49028 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229791AbhCGLd5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sun, 7 Mar 2021 06:33:57 -0500
-Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6DD08C06174A;
-        Sun,  7 Mar 2021 03:33:57 -0800 (PST)
-Received: from ip4d142c50.dynamic.kabel-deutschland.de ([77.20.44.80] helo=truhe.fritz.box); authenticated
-        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_256_GCM_SHA384:256)
-        id 1lIrfT-0002Ox-R9; Sun, 07 Mar 2021 12:33:51 +0100
-From:   Thorsten Leemhuis <linux@leemhuis.info>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v2 2/2] docs: reporting-issues.rst: shortcut for reporting stable regressions
-Date:   Sun,  7 Mar 2021 12:33:50 +0100
-Message-Id: <148a84de8d109ebbc01a337fb93cb246410c4351.1615116592.git.linux@leemhuis.info>
-X-Mailer: git-send-email 2.29.2
-In-Reply-To: <cover.1615116592.git.linux@leemhuis.info>
-References: <cover.1615116592.git.linux@leemhuis.info>
+        id S230143AbhCGLf3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 7 Mar 2021 06:35:29 -0500
+Received: from youngberry.canonical.com ([91.189.89.112]:49497 "EHLO
+        youngberry.canonical.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230112AbhCGLe7 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sun, 7 Mar 2021 06:34:59 -0500
+Received: from mail-ed1-f70.google.com ([209.85.208.70])
+        by youngberry.canonical.com with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        (Exim 4.86_2)
+        (envelope-from <krzysztof.kozlowski@canonical.com>)
+        id 1lIrgX-0001pW-GS
+        for linux-doc@vger.kernel.org; Sun, 07 Mar 2021 11:34:57 +0000
+Received: by mail-ed1-f70.google.com with SMTP id cq11so3568448edb.14
+        for <linux-doc@vger.kernel.org>; Sun, 07 Mar 2021 03:34:57 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=Op5mu56rLKVeXZ5BYHLLFs3XBf2gdeKehd8++u/6LDA=;
+        b=t12IVJGt3K91uw6UB2NUKF5OjIT5JOynL+9eRHXsyazuG48P5rY2J06eRqB4wDcFJv
+         Yv6nCUCJxUV0NmV0Gfbme32UwfBRkQ3hY54Vgibydzygk3hTRkyVYPLIEnwso41yxWNV
+         LKLpfJZeU4yuu6IkHDQeKoZFkjjW/iUL2VaFZ7pKTy9dzBGFYLUbToEQIezv5NgN/c+/
+         lp+PcrqLxGh5O1JZFli1O6rcP9eVzCSIRfecXF1uITTiWicfFCrTq37VfEWv5DTlPsCa
+         Pzaqxbli+HGBtC/jxDMUUTTyR7blYURqn0fza4rJ5eOx8H94hHCj1KjyW8N58zZwrvmv
+         e5HA==
+X-Gm-Message-State: AOAM531QCBQE58Ez82con1GA82Sdk5Yw16VIm2qJvG6ifMcwN3bD9IIT
+        a3DNWTo7bfPM0peFvObVrXf7DXQtCx6YuaHKFiAelTcwZBNOfgxyMaWJfuxGAPtEb8rknS3UHVw
+        EyvgsqWcKWMg/DAes/+bJW+ZG1fY9YThmITm2jg==
+X-Received: by 2002:a50:fa04:: with SMTP id b4mr17812457edq.293.1615116896809;
+        Sun, 07 Mar 2021 03:34:56 -0800 (PST)
+X-Google-Smtp-Source: ABdhPJwN50SNAvRJvyv1TTGSoHps9ZM3d2RwZosjPBjKJrezHq2PpQu4f0MDG5tTUROmsW8Jne4o4A==
+X-Received: by 2002:a50:fa04:: with SMTP id b4mr17812435edq.293.1615116896694;
+        Sun, 07 Mar 2021 03:34:56 -0800 (PST)
+Received: from [192.168.1.116] (adsl-84-226-167-205.adslplus.ch. [84.226.167.205])
+        by smtp.gmail.com with ESMTPSA id g25sm5016167edp.95.2021.03.07.03.34.55
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Sun, 07 Mar 2021 03:34:56 -0800 (PST)
+Subject: Re: [RFT PATCH v3 21/27] tty: serial: samsung_tty: IRQ rework
+To:     Hector Martin <marcan@marcan.st>,
+        Andy Shevchenko <andy.shevchenko@gmail.com>
+Cc:     linux-arm Mailing List <linux-arm-kernel@lists.infradead.org>,
+        Marc Zyngier <maz@kernel.org>, Rob Herring <robh@kernel.org>,
+        Arnd Bergmann <arnd@kernel.org>,
+        Olof Johansson <olof@lixom.net>,
+        Mark Kettenis <mark.kettenis@xs4all.nl>,
+        Tony Lindgren <tony@atomide.com>,
+        Mohamed Mediouni <mohamed.mediouni@caramail.com>,
+        Stan Skowronek <stan@corellium.com>,
+        Alexander Graf <graf@amazon.com>,
+        Will Deacon <will@kernel.org>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoph Hellwig <hch@infradead.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        devicetree <devicetree@vger.kernel.org>,
+        "open list:SERIAL DRIVERS" <linux-serial@vger.kernel.org>,
+        Linux Documentation List <linux-doc@vger.kernel.org>,
+        Linux Samsung SOC <linux-samsung-soc@vger.kernel.org>,
+        Linux-Arch <linux-arch@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+References: <20210304213902.83903-1-marcan@marcan.st>
+ <20210304213902.83903-22-marcan@marcan.st>
+ <CAHp75Vc+t9_FNHZ0xYNaJ1+Ny+FFeZKA79abxV2NAsZvpBh3Bg@mail.gmail.com>
+ <535ff48e-160e-4ba4-23ac-54e478a2f3ee@marcan.st>
+ <CAHp75Vd_kwdjbus3iq_39+p_xRk3rum2ek3nLLFbBDzMwggnKA@mail.gmail.com>
+ <05ccc09f-ffea-71cd-4288-beed3020bd45@marcan.st>
+From:   Krzysztof Kozlowski <krzysztof.kozlowski@canonical.com>
+Message-ID: <d33fffec-28bd-99b2-a8b1-cc83b628e4b3@canonical.com>
+Date:   Sun, 7 Mar 2021 12:34:55 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1615116837;e43d2063;
-X-HE-SMSGID: 1lIrfT-0002Ox-R9
+In-Reply-To: <05ccc09f-ffea-71cd-4288-beed3020bd45@marcan.st>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Provide a much shorter and easier process for users that deal with
-regressions in stable and longterm kernels, as those should be reported
-quickly.
+On 05/03/2021 17:29, Hector Martin wrote:
+> On 06/03/2021 01.20, Andy Shevchenko wrote:
+>>> I am just splitting an
+>>> existing function into two, where one takes the lock and the other does
+>>> the work. Do you mean using a different locking function? I'm not
+>>> entirely sure what you're suggesting.
+>>
+>> Yes, as a prerequisite
+>>
+>> spin_lock_irqsave -> spin_lock().
+> 
+> Krzysztof, is this something you want in this series? I was trying to 
+> avoid logic changes to the non-Apple paths.
 
-Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
-CC: Randy Dunlap <rdunlap@infradead.org>
----
-v2
-* revist, lots of small improvements in various places
+I don't quite get the need for such change (the code will be still
+called in interrupt handler, right?), but assuming the "why?" is
+properly documented, it can be a separate patch here.
 
-v1
-* https://lore.kernel.org/linux-doc/20210214145454.357392-1-linux@leemhuis.info/
-* initial version
----
- .../admin-guide/reporting-issues.rst          | 140 ++++++++++++------
- 1 file changed, 94 insertions(+), 46 deletions(-)
-
-diff --git a/Documentation/admin-guide/reporting-issues.rst b/Documentation/admin-guide/reporting-issues.rst
-index 24ee78455d3e..937797e52837 100644
---- a/Documentation/admin-guide/reporting-issues.rst
-+++ b/Documentation/admin-guide/reporting-issues.rst
-@@ -106,6 +106,10 @@ process won't feel wasted in the end:
-    issue, or a really severe problem: those are 'issues of high priority' that
-    need special handling in some steps that are about to follow.
- 
-+ * If you are facing a regression within a stable or longterm version line
-+   (say something broke when updating from 5.10.4 to 5.10.5), head over to
-+   'Dealing with regressions within a stable and longterm kernel line'.
-+
-  * Locate the driver or kernel subsystem that seems to be causing the issue.
-    Find out how and where its developers expect reports. Note: most of the
-    time this won't be bugzilla.kernel.org, as issues typically need to be sent
-@@ -215,23 +219,42 @@ rebased on new stable or longterm releases. If that case follow these steps:
-    deemed unsuitable for backporting. If backporting was not considered at
-    all, join the newest discussion, asking if it's in the cards.
- 
-- * Check if you're dealing with a regression that was never present in
--   mainline by installing the first release of the version line you care
--   about. If the issue doesn't show up with it, you basically need to report
--   the issue with this version like you would report a problem with mainline
--   (see above). This ideally includes a bisection followed by a search for
--   existing reports on the net; with the help of the subject and the two
--   relevant commit-ids. If that doesn't turn up anything, write the report; CC
--   or forward the report to the stable maintainers, the stable mailing list,
--   and those who authored the change. Include the shortened commit-id if you
--   found the change that causes it.
--
-  * One of the former steps should lead to a solution. If that doesn't work
-    out, ask the maintainers for the subsystem that seems to be causing the
-    issue for advice; CC the mailing list for the particular subsystem as well
-    as the stable mailing list.
- 
- 
-+Dealing with regressions within a stable and longterm kernel line
-+-----------------------------------------------------------------
-+
-+This section is for you, if you face a regression within a stable or longterm
-+kernel version line, e.g. if something breaks when updating from 5.10.4 to
-+5.10.5 (a switch from 5.9.15 to 5.10.5 would not qualify). The developers want
-+to fix such regressions as quickly as possible, hence there is a streamlined
-+process to report them:
-+
-+ * Check the archives of the Linux stable mailing list for existing reports.
-+
-+ * Check if the kernel developers still maintain the Linux kernel version
-+   line you care about: go to the front page of kernel.org and make sure it
-+   mentions the latest release of the particular version line without an
-+   '[EOL]' tag.
-+
-+ * Install the latest release from the particular version line as a vanilla
-+   kernel. Ensure this kernel is not tainted and still shows the problem, as
-+   the issue might have already been fixed there.
-+
-+ * Make sure it's not the kernel's surroundings that are causing the issue
-+   you face.
-+
-+ * Send a short problem report by mail to the people and mailing lists the
-+   :ref:`MAINTAINERS <maintainers>` file specifies in the section 'STABLE
-+   BRANCH'. Roughly describe the issue and ideally explain how to reproduce
-+   it. Mention the first version that shows the problem and the last version
-+   that's working fine. Then wait for further instructions.
-+
-+
- Reference section: Reporting issues to the kernel maintainers
- =============================================================
- 
-@@ -433,6 +456,22 @@ fatal error where the kernel stop itself) with a 'Oops' (a recoverable error),
- as the kernel remains running after the latter.
- 
- 
-+Regression in stable or longterm kernel?
-+----------------------------------------
-+
-+    *If you are facing a regression within a stable or longterm version line
-+    (say something broke when updating from 5.10.4 to 5.10.5), head over to
-+    'Dealing with regressions within a stable and longterm kernel line'.*
-+
-+Regression within a stable and longterm kernel version line are something the
-+Linux developers want to fix badly, as such issues are even more unwanted than
-+regression in the main development branch, as they can quickly affect a lot of
-+people. The developers thus want to learn about such issues as quickly as
-+possible, hence there is a streamlined process to report them. Note,
-+regressions with newer kernel version line (say something broke when switching
-+from 5.9.15 to 5.10.5) do not qualify.
-+
-+
- Locate kernel area that causes the issue
- ----------------------------------------
- 
-@@ -1550,41 +1589,6 @@ discussions abound it.
-      join the discussion: mention the version where you face the issue and that
-      you would like to see it fixed, if suitable.
- 
--Check if it's a regression specific to stable or longterm kernels
--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--
--    *Check if you're dealing with a regression that was never present in
--    mainline by installing the first release of the version line you care
--    about. If the issue doesn't show up with it, you basically need to report
--    the issue with this version like you would report a problem with mainline
--    (see above). This ideally includes a bisection followed by a search for
--    existing reports on the net; with the help of the subject and the two
--    relevant commit-ids. If that doesn't turn up anything, write the report; CC
--    or forward the report to the stable maintainers, the stable mailing list,
--    and those who authored the change. Include the shortened commit-id if you
--    found the change that causes it.*
--
--Sometimes you won't find anything in the previous step: the issue you face
--might have never occurred in mainline, as it is caused by some change that is
--incomplete or not correctly applied. To check this, install the first release
--from version line you care about, e.g., if you care about 5.4.x, install 5.4.
--
--If the issue doesn't show itself there, it's a regression specific to the
--particular version line. In that case you need to report it like an issue
--happening in mainline, like the last few steps in the main section in the above
--outline.
--
--One of them suggests doing a bisection, which you are strongly advised to do in
--this case. After finding the culprit, search the net for existing reports
--again: not only search for the exact subject and the commit-id (proper and
--shortened to twelve characters) of the change, but also for the commit-id
--(proper and shortened) mentioned as 'Upstream commit' in the commit message.
--
--Write the report; just keep a few specialties in mind: CC or forward the report
--to the stable maintainers, the stable mailing list, which the :ref:`MAINTAINERS
--<maintainers>` file mentions in the section "STABLE BRANCH". If you performed a
--successful bisection, CC the author of the change and include its subject and
--the shortened commit-id.
- 
- Ask for advice
- ~~~~~~~~~~~~~~
-@@ -1601,6 +1605,50 @@ for the subsystem as well as the stable mailing list the :ref:`MAINTAINERS
- <maintainers>` file mention in the section "STABLE BRANCH".
- 
- 
-+Details about reporting regressions within a stable and longterm kernel lines
-+-----------------------------------------------------------------------------
-+
-+This subsection provides details for the last step you need to perform if you
-+face a regression within a stable and longterm kernel line. Four other steps
-+need to be taken beforehand, as mentioned in the section 'Dealing with
-+regressions within a stable and longterm kernel line' above. They are performed
-+during the regular reporting process as well and thus already explained in
-+other sections above in detail already.
-+
-+Report for stable or longterm regression
-+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-+
-+    *Send a short problem report by mail to the people and mailing lists the
-+    :ref:`MAINTAINERS <maintainers>` file specifies in the section 'STABLE
-+    BRANCH'. Roughly describe the issue and ideally explain how to reproduce
-+    it. Mention the first version that shows the problem and the last version
-+    that's working fine. Then wait for further instructions.*
-+
-+When reporting a regression that happens within a stable or longterm kernel
-+line (say when updating from 5.10.4 to 5.10.5) a brief report is enough for
-+the start to get the issue reported quickly. Hence a rough description is all
-+it takes.
-+
-+But note, it helps developers a great deal if you can specify the exact version
-+that introduced the problem. Hence if possible within a reasonable time frame,
-+try to find that version using vanilla kernels. Lets assume something broke when
-+your distributor released a update from Linux kernel 5.10.5 to 5.10.8. Then as
-+instructed above go and check the latest kernel from that version line, say
-+5.10.9. If it shows the problem, try a vanilla 5.10.5 to ensure that no patches
-+the distributor applied interfere. If the issue doesn't manifest itself there,
-+try 5.10.7 and then (depending on the outcome) 5.10.8 or 5.10.6 to find the
-+first version where things broke. Mention it in the report and state that 5.10.9
-+is still broken.
-+
-+What the previous paragraph outlines is basically a rough manual 'bisection'.
-+Once your report is out your might get asked to do a proper one, as it allows to
-+pinpoint the exact change that causes the issue (which then can easily get
-+reverted to fix the issue quickly). Hence consider to do a proper bisection
-+right away if time permits. See the section 'Special care for regressions' and
-+the document 'Documentation/admin-guide/bug-bisect.rst' for details how to
-+perform one.
-+
-+
- Why some issues won't get any reaction or remain unfixed after being reported
- =============================================================================
- 
--- 
-2.29.2
-
+Best regards,
+Krzysztof
