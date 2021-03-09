@@ -2,101 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 75D913327B5
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Mar 2021 14:50:03 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B687D3328F5
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Mar 2021 15:47:14 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231744AbhCINt0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 9 Mar 2021 08:49:26 -0500
-Received: from mail-ot1-f47.google.com ([209.85.210.47]:33262 "EHLO
-        mail-ot1-f47.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231428AbhCINs5 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Mar 2021 08:48:57 -0500
-Received: by mail-ot1-f47.google.com with SMTP id j8so12877234otc.0;
-        Tue, 09 Mar 2021 05:48:57 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=mpza37x2a6jOovJHwQKMXxHs0CUszPBiFGSPamapf+Y=;
-        b=Vm+ziBbgzb9jzKIdrPvLMr3V1+dC1/IVrey11QCKSJS+YyCsL4AkEbmcu/YhL81IZM
-         ZiJSeRA4HAvTjPcz4iY/VL5oh6p2rkZUUiKrKLkPYOIaeWbWc87tmMgmnKPHNaUs/B67
-         f9H04ux1h5rKu67oLSqEexA/3y64wEmngyk5/K2kOAnTDSVYpwz5BrrCmVIj3VkMV0Fz
-         TQ8OsiLzytxVumOnseygx+FB7QJaX4RtszLC3vM9Vuikak4X0x0u1qsiURolfG6GIuqg
-         qShXZWGfd58Ns9FY16uEmkXALrberZcBNDJdkrmeCtrQL93r5qT3OHGxvh07YewS0W9F
-         MZAA==
-X-Gm-Message-State: AOAM531uVllYbxPHne4sSJuE1x1gSMLytalcWseVlU8tfvk7U/MzdNXm
-        Ojsw+B3PKFBd7QNrksFLYwxVn25mR8obzfGC7nY=
-X-Google-Smtp-Source: ABdhPJyC5dNphe6C3nIg/ocHMyKLDanpr2WztK8rHJ2jhVEQkEbs8vWPuTu7WsVpzoBnHVqtq7Z3lSZLo/h+GSM/3o8=
-X-Received: by 2002:a05:6830:1e03:: with SMTP id s3mr13608965otr.321.1615297736685;
- Tue, 09 Mar 2021 05:48:56 -0800 (PST)
+        id S229599AbhCIOql (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 Mar 2021 09:46:41 -0500
+Received: from mailomta13-sa.btinternet.com ([213.120.69.19]:57856 "EHLO
+        sa-prd-fep-041.btinternet.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S231596AbhCIOqO (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Mar 2021 09:46:14 -0500
+Received: from sa-prd-rgout-002.btmx-prd.synchronoss.net ([10.2.38.5])
+          by sa-prd-fep-040.btinternet.com with ESMTP
+          id <20210309144002.DMPA32153.sa-prd-fep-040.btinternet.com@sa-prd-rgout-002.btmx-prd.synchronoss.net>;
+          Tue, 9 Mar 2021 14:40:02 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=btinternet.com; s=btmx201904; t=1615300802; 
+        bh=n2nmFWy/2P5LgAC5TNi1QDq/XzLB5HbajAyu+dTZSdM=;
+        h=From:To:Cc:Subject:Date:Message-Id:X-Mailer:MIME-Version;
+        b=Nz6bePhWX7oWhRKhW5fih4RqHdynQixWNBnsWxop7LjgbIEnoLBCpnsbUKwIXepppsxW/60P9f0pjRsC5rmLqcp8umsDCEMNeygx31BqukWwVBrHk7uWqP3o2WyjOQxmorxGxGZq7UY805fyf6Wq4b6QQ1sNjOR1Eqq79hoPBkgrxKulHSfUzV6NTxFvJGjV21A2RenaDVNG8zW3MrGpKqCpYrFFI2+pHB2Qvx7n7mmOaVn7EoqhchhvUUTcfw8331TACxZssBHjgHCeJ6aHt0jue1SpplCBTux9iPy1jvTi0/rP4FE0aNB/XGsX6EjqCxll0qijGwqJ0OzyrQht9Q==
+Authentication-Results: btinternet.com;
+    auth=pass (PLAIN) smtp.auth=richard_c_haines@btinternet.com
+X-SNCR-Rigid: 6038718301A65373
+X-Originating-IP: [86.133.207.84]
+X-OWM-Source-IP: 86.133.207.84 (GB)
+X-OWM-Env-Sender: richard_c_haines@btinternet.com
+X-VadeSecure-score: verdict=clean score=0/300, class=clean
+X-RazorGate-Vade: gggruggvucftvghtrhhoucdtuddrgeduledrudduiedgieejucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuueftkffvkffujffvgffngfevqffopdfqfgfvnecuuegrihhlohhuthemuceftddunecunecujfgurhephffvufffkffoggfgsedtkeertdertddtnecuhfhrohhmpeftihgthhgrrhguucfjrghinhgvshcuoehrihgthhgrrhgupggtpghhrghinhgvshessghtihhnthgvrhhnvghtrdgtohhmqeenucggtffrrghtthgvrhhnpeelteffgeevveejheevhfetgfeuveduteetuddtffdvjeekieetgeehveefjedtfeenucfkphepkeeirddufeefrddvtdejrdekgeenucevlhhushhtvghrufhiiigvpedtnecurfgrrhgrmhephhgvlhhopehlohgtrghlhhhoshhtrdhlohgtrghlughomhgrihhnpdhinhgvthepkeeirddufeefrddvtdejrdekgedpmhgrihhlfhhrohhmpeeorhhitghhrghruggptggphhgrihhnvghssegsthhinhhtvghrnhgvthdrtghomheqpdhrtghpthhtohepoegtrghsvgihsehstghhrghufhhlvghrqdgtrgdrtghomheqpdhrtghpthhtohepoegtohhrsggvtheslhifnhdrnhgvtheqpdhrtghpthhtohepoehjmhhorhhrihhssehnrghmvghirdhorhhgqedprhgtphhtthhopeeolhhinhhugidqughotgesvhhgvghrrdhkvghrnhgvlhdrohhrgheqpdhrtghpthhtohepoehlihhnuhigqdhsvggtuhhrihhthidqmhhoughulhgvsehvghgvrhdrkhgvrhhnvghl
+        rdhorhhgqedprhgtphhtthhopeeophgruhhlsehprghulhdqmhhoohhrvgdrtghomheqpdhrtghpthhtohepoehrihgthhgrrhgupggtpghhrghinhgvshessghtihhnthgvrhhnvghtrdgtohhmqecuqfftvefrvfeprhhftgekvddvnehrihgthhgrrhgupggtpghhrghinhgvshessghtihhnthgvrhhnvghtrdgtohhmpdhrtghpthhtohepoehsvghrghgvsehhrghllhihnhdrtghomheq
+X-RazorGate-Vade-Verdict: clean 0
+X-RazorGate-Vade-Classification: clean
+X-SNCR-hdrdom: btinternet.com
+Received: from localhost.localdomain (86.133.207.84) by sa-prd-rgout-002.btmx-prd.synchronoss.net (5.8.340) (authenticated as richard_c_haines@btinternet.com)
+        id 6038718301A65373; Tue, 9 Mar 2021 14:40:02 +0000
+From:   Richard Haines <richard_c_haines@btinternet.com>
+To:     linux-security-module@vger.kernel.org, linux-doc@vger.kernel.org
+Cc:     corbet@lwn.net, paul@paul-moore.com, jmorris@namei.org,
+        serge@hallyn.com, casey@schaufler-ca.com,
+        Richard Haines <richard_c_haines@btinternet.com>
+Subject: [RFC PATCH 0/3] LSM Documentation - Render lsm_hooks.h for kernel_docs
+Date:   Tue,  9 Mar 2021 14:39:50 +0000
+Message-Id: <20210309143953.142341-1-richard_c_haines@btinternet.com>
+X-Mailer: git-send-email 2.29.2
 MIME-Version: 1.0
-References: <20210309093736.67925-1-andriy.shevchenko@linux.intel.com> <20210309093736.67925-7-andriy.shevchenko@linux.intel.com>
-In-Reply-To: <20210309093736.67925-7-andriy.shevchenko@linux.intel.com>
-From:   "Rafael J. Wysocki" <rafael@kernel.org>
-Date:   Tue, 9 Mar 2021 14:48:44 +0100
-Message-ID: <CAJZ5v0jHnCE0=k8GG6r5VKFjJ-vYHnaDOas5BSxiu+oa=rfUcQ@mail.gmail.com>
-Subject: Re: [PATCH v6 6/6] gpiolib: Fold conditionals into a simple ternary operator
-To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc:     Mika Westerberg <mika.westerberg@linux.intel.com>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
-        ACPI Devel Maling List <linux-acpi@vger.kernel.org>,
-        Marc Zyngier <maz@kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        "Rafael J. Wysocki" <rafael@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 9, 2021 at 10:37 AM Andy Shevchenko
-<andriy.shevchenko@linux.intel.com> wrote:
->
-> It's quite spread code to initialize IRQ domain options.
-> Let's fold it into a simple oneliner.
->
-> Signed-off-by: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+This patch series updates the LSM hook text defined in the comments
+section of inlcude/linux/lsm_hooks.h. This enables the hook functions to
+be rendered in kernel_docs html or pdf format.
 
-Reviewed-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+Note that no text has been changed in lsm_hooks.h, only formatting
+to render the text.
 
-> ---
->  drivers/gpio/gpiolib.c | 9 ++-------
->  1 file changed, 2 insertions(+), 7 deletions(-)
->
-> diff --git a/drivers/gpio/gpiolib.c b/drivers/gpio/gpiolib.c
-> index afee48e7dd41..cee4333f8ac7 100644
-> --- a/drivers/gpio/gpiolib.c
-> +++ b/drivers/gpio/gpiolib.c
-> @@ -1458,7 +1458,6 @@ static int gpiochip_add_irqchip(struct gpio_chip *gc,
->  {
->         struct fwnode_handle *fwnode = dev_fwnode(&gc->gpiodev->dev);
->         struct irq_chip *irqchip = gc->irq.chip;
-> -       const struct irq_domain_ops *ops = NULL;
->         unsigned int type;
->         unsigned int i;
->
-> @@ -1496,15 +1495,11 @@ static int gpiochip_add_irqchip(struct gpio_chip *gc,
->                         return ret;
->         } else {
->                 /* Some drivers provide custom irqdomain ops */
-> -               if (gc->irq.domain_ops)
-> -                       ops = gc->irq.domain_ops;
-> -
-> -               if (!ops)
-> -                       ops = &gpiochip_domain_ops;
->                 gc->irq.domain = irq_domain_create_simple(fwnode,
->                         gc->ngpio,
->                         gc->irq.first,
-> -                       ops, gc);
-> +                       gc->irq.domain_ops ?: &gpiochip_domain_ops,
-> +                       gc);
->                 if (!gc->irq.domain)
->                         return -EINVAL;
->         }
-> --
-> 2.30.1
->
+To get the correct rendering some lines have exceeded checkpatch limits and
+therefore has a moan. The function statements seem to need being a
+continuous line. The others can be split, but decided not to.
+Any better ideas ??
+
+The hook functions render in HTML ok, however in PDF format the only issue
+is that the long function definitions do not wrap and therefore truncated.
+Check the 'int sb_mount(const char *dev_name' entry in:
+Documentation/output/pdf/security.pdf
+
+For reference two hooks have been marked as deprecated: sb_copy_data() and
+sb_parse_opts_str()
+
+Tested using 'make pdfdocs' and 'make htmldocs'
+
+Richard Haines (3):
+  Documentation/security: Update LSM security hook text
+  include/linux: Update LSM hook text part1
+  include/linux: Update LSM hook text part2
+
+ Documentation/security/lsm-development.rst |    5 +-
+ include/linux/lsm_hooks.h                  | 2365 +++++++++++---------
+ 2 files changed, 1364 insertions(+), 1006 deletions(-)
+
+-- 
+2.29.2
+
