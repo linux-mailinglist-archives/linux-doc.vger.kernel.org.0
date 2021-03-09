@@ -2,144 +2,94 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3C1C63329D3
-	for <lists+linux-doc@lfdr.de>; Tue,  9 Mar 2021 16:10:52 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 39E593329FE
+	for <lists+linux-doc@lfdr.de>; Tue,  9 Mar 2021 16:16:44 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231660AbhCIPKU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 9 Mar 2021 10:10:20 -0500
-Received: from mx2.suse.de ([195.135.220.15]:38848 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S230081AbhCIPJr (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 9 Mar 2021 10:09:47 -0500
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 43273AC8C;
-        Tue,  9 Mar 2021 15:09:46 +0000 (UTC)
-Subject: Re: [PATCH] mm/slub: Add slub_debug option to panic on memory
- corruption
-To:     Georgi Djakov <georgi.djakov@linaro.org>, linux-mm@kvack.org,
-        akpm@linux-foundation.org, cl@linux.com, penberg@kernel.org,
-        rientjes@google.com, iamjoonsoo.kim@lge.com
-Cc:     corbet@lwn.net, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-References: <20210309134720.29052-1-georgi.djakov@linaro.org>
-From:   Vlastimil Babka <vbabka@suse.cz>
-Message-ID: <390d8a2f-ead9-48a9-99eb-65c73bd18422@suse.cz>
-Date:   Tue, 9 Mar 2021 16:09:45 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.0
+        id S231899AbhCIPQM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 9 Mar 2021 10:16:12 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40466 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S231760AbhCIPPl (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 9 Mar 2021 10:15:41 -0500
+Received: from mail-vs1-xe42.google.com (mail-vs1-xe42.google.com [IPv6:2607:f8b0:4864:20::e42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D6429C061760
+        for <linux-doc@vger.kernel.org>; Tue,  9 Mar 2021 07:15:40 -0800 (PST)
+Received: by mail-vs1-xe42.google.com with SMTP id d25so6953725vsr.11
+        for <linux-doc@vger.kernel.org>; Tue, 09 Mar 2021 07:15:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:reply-to:from:date:message-id:subject:to;
+        bh=7Vrbe4gpVhb7cfcmpNanXi5E+OCzidx3VGMrGNR2bC4=;
+        b=W6m1x9vVQbzNvVyjisgVt9qG/7lEy4tGWPLpX9GSDfhYipsTmt7BLCiEddTdv9kk03
+         bmknmySaIwEgB/EuzOlXG5H8PeTyBoJoTnCcUAlWLaZriuGuBUZhjgxn1xc8BoXmkk1k
+         5W/goGGsj8dzSulIapfS6MWHrnfDSs0buGRNTJ95fEZ+f6LaqzoJppc1sHx22BvxBIdV
+         eGw+MiGvCmfrSpOzAIfLkEgI1MqQ60xMXjj79/G8F5TWI2mk9PL4IEdb5+JK2JhlG/Ku
+         BxxNSwoCMZ0J/s2ro6DKwI0QL4H2CfEJrD1DBbqkyoiW0O78qdnU+pX9H7wjOssYVst6
+         PmWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:reply-to:from:date:message-id
+         :subject:to;
+        bh=7Vrbe4gpVhb7cfcmpNanXi5E+OCzidx3VGMrGNR2bC4=;
+        b=KOONv4mbQISz5IKV4t80Q6Wq6grrEmE1lH60GcYMrvB4Dg2IA+UkKKOHwsV40N3qge
+         Z+1cLQgjQPL48WZvI78w4RLIypR+CT8GL9eQ50+pL8Eb70Uz/VVMncRcHClNeQaBlJQE
+         LAcR+MAe0opfRbLRZx85zcrEeqGpMmf19btH3ey+DblJnCOit1BqUnVNV+p1ZcXRlE2v
+         DcbrfHiyx+NlCKZbzBg3ifrTIuroy0RaZoadUtVp/yy/sfMtdWVNrGNTpRn/sCgVPyeF
+         FU8ZsyWeaQ8ycwJK5QSis3E88UE3/lEXmGM9t7+T+Ry8HVErnmVxXFBNAzU3ybWk/fEe
+         pTrA==
+X-Gm-Message-State: AOAM5327rkTrl5EG8QUx+azrkMKXbo9Uby9SfINfWctLUusphlRBy3Pj
+        j4LONh1RDbor/8+LHWXJSnjAjxJO9mOyioS2F5w=
+X-Google-Smtp-Source: ABdhPJwEODiye80SJYf/nd59OasyPYRvIvyRkqCfn/3eFrS1Qe91J5HlzfN5x8jiLpXbwBbL4CU8g8295sz52e9KeE0=
+X-Received: by 2002:a67:798b:: with SMTP id u133mr15927338vsc.9.1615302939973;
+ Tue, 09 Mar 2021 07:15:39 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <20210309134720.29052-1-georgi.djakov@linaro.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Received: by 2002:ab0:2e8f:0:0:0:0:0 with HTTP; Tue, 9 Mar 2021 07:15:39 -0800 (PST)
+Reply-To: ezbtg22@gmail.com
+From:   "Mrs.E.Glenn" <mrganuserge654@gmail.com>
+Date:   Tue, 9 Mar 2021 07:15:39 -0800
+Message-ID: <CAH16wSMcV7V1J6SteVcAVvb7pLSa_Prz0XUnOS7M+y0S6xmjGg@mail.gmail.com>
+Subject: From Mrs.E.Glenn
+To:     undisclosed-recipients:;
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 3/9/21 2:47 PM, Georgi Djakov wrote:
-> Being able to stop the system immediately when a memory corruption
-> is detected is crucial to finding the source of it. This is very
-> useful when the memory can be inspected with kdump or other tools.
+-- 
+Dear Beloved,
 
-Is this in some testing scenarios where you would also use e.g. panic_on_warn?
-We could hook to that. If not, we could introduce a new
-panic_on_memory_corruption that would apply also for debug_pagealloc and whatnot?
+I am Mrs Elizabet Glenn from Israel. I am a missionary but right now
+in a hospital bed in Israel. I am 59 years and childless; my husband
+is dead. I was diagnosed with terminal cancer. And my doctor just
+predicted that I have but very limited time to live due to damages in
+my system and as a result of that I decided to dispose my 10.5 million
+US dollars to a God-fearing one for the continuation of charitable
+work. This is why I located you.
 
-> Let's add an option panic the kernel when slab debug catches an
-> object or list corruption.
-> 
-> This new option is not enabled by default (yet), so it needs to be
-> enabled explicitly (for example by adding "slub_debug=FZPUC" to
-> the kernel command line).
-> 
-> Signed-off-by: Georgi Djakov <georgi.djakov@linaro.org>
-> ---
->  Documentation/vm/slub.rst | 1 +
->  include/linux/slab.h      | 3 +++
->  mm/slab.h                 | 2 +-
->  mm/slub.c                 | 9 +++++++++
->  4 files changed, 14 insertions(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/vm/slub.rst b/Documentation/vm/slub.rst
-> index 03f294a638bd..32878c44f3de 100644
-> --- a/Documentation/vm/slub.rst
-> +++ b/Documentation/vm/slub.rst
-> @@ -53,6 +53,7 @@ Possible debug options are::
->  	Z		Red zoning
->  	P		Poisoning (object and padding)
->  	U		User tracking (free and alloc)
-> +	C		Panic on object corruption (enables SLAB_CORRUPTION_PANIC)
->  	T		Trace (please only use on single slabs)
->  	A		Enable failslab filter mark for the cache
->  	O		Switch debugging off for caches that would have
-> diff --git a/include/linux/slab.h b/include/linux/slab.h
-> index 0c97d788762c..ebff5e704d08 100644
-> --- a/include/linux/slab.h
-> +++ b/include/linux/slab.h
-> @@ -39,6 +39,9 @@
->  #define SLAB_STORE_USER		((slab_flags_t __force)0x00010000U)
->  /* Panic if kmem_cache_create() fails */
->  #define SLAB_PANIC		((slab_flags_t __force)0x00040000U)
-> +/* Panic if memory corruption is detected */
-> +#define SLAB_CORRUPTION_PANIC	((slab_flags_t __force)0x00080000U)
-> +
->  /*
->   * SLAB_TYPESAFE_BY_RCU - **WARNING** READ THIS!
->   *
-> diff --git a/mm/slab.h b/mm/slab.h
-> index 120b1d0dfb6d..ae0079017fc6 100644
-> --- a/mm/slab.h
-> +++ b/mm/slab.h
-> @@ -134,7 +134,7 @@ static inline slab_flags_t kmem_cache_flags(unsigned int object_size,
->  #define SLAB_DEBUG_FLAGS (SLAB_RED_ZONE | SLAB_POISON | SLAB_STORE_USER)
->  #elif defined(CONFIG_SLUB_DEBUG)
->  #define SLAB_DEBUG_FLAGS (SLAB_RED_ZONE | SLAB_POISON | SLAB_STORE_USER | \
-> -			  SLAB_TRACE | SLAB_CONSISTENCY_CHECKS)
-> +			  SLAB_TRACE | SLAB_CONSISTENCY_CHECKS | SLAB_CORRUPTION_PANIC)
->  #else
->  #define SLAB_DEBUG_FLAGS (0)
->  #endif
-> diff --git a/mm/slub.c b/mm/slub.c
-> index 077a019e4d7a..49351427f701 100644
-> --- a/mm/slub.c
-> +++ b/mm/slub.c
-> @@ -741,6 +741,8 @@ void object_err(struct kmem_cache *s, struct page *page,
->  {
->  	slab_bug(s, "%s", reason);
->  	print_trailer(s, page, object);
-> +	if (slub_debug & SLAB_CORRUPTION_PANIC)
-> +		panic(reason);
->  }
->  
->  static __printf(3, 4) void slab_err(struct kmem_cache *s, struct page *page,
-> @@ -755,6 +757,8 @@ static __printf(3, 4) void slab_err(struct kmem_cache *s, struct page *page,
->  	slab_bug(s, "%s", buf);
->  	print_page_info(page);
->  	dump_stack();
-> +	if (slub_debug & SLAB_CORRUPTION_PANIC)
-> +		panic("slab: slab error\n");
->  }
->  
->  static void init_object(struct kmem_cache *s, void *object, u8 val)
-> @@ -776,6 +780,8 @@ static void init_object(struct kmem_cache *s, void *object, u8 val)
->  static void restore_bytes(struct kmem_cache *s, char *message, u8 data,
->  						void *from, void *to)
->  {
-> +	if (slub_debug & SLAB_CORRUPTION_PANIC)
-> +		panic("slab: object overwritten\n");
->  	slab_fix(s, "Restoring 0x%p-0x%p=0x%x\n", from, to - 1, data);
->  	memset(from, data, to - from);
->  }
-> @@ -1319,6 +1325,9 @@ parse_slub_debug_flags(char *str, slab_flags_t *flags, char **slabs, bool init)
->  		case 'a':
->  			*flags |= SLAB_FAILSLAB;
->  			break;
-> +		case 'c':
-> +			*flags |= SLAB_CORRUPTION_PANIC;
-> +			break;
->  		case 'o':
->  			/*
->  			 * Avoid enabling debugging on caches if its minimum
-> 
+My guess about you may not be accurate because I came across your
+contact at the humanitarian calendar event of the year but I believe
+in God who divinely directed me to you for this solemn proposal of
+charitable work.
 
+Therefore I wholeheartedly wish to bequeath my fortune to you as a
+God-fearing person for the continuation of charitable work anywhere
+around the world.
+
+I shall be going in for a surgery operations soonest and desire this
+money to be transferred to you as I do not wish to leave this money in
+the bank because bankers might misuse it for their own interest after
+my death.
+
+As soon as I receive your quick reply assuring me that you will
+utilize the money as I instructed you for the benefit of the less
+privilege, I shall give you more details and also instruct my bank to
+release the money to you for the charity project. I hope you receive
+this mail in good health.
+
+Please contact me on this E-mail (ezbtg22@gmail.com) because I don t
+know what will be my situation in next minute,
+
+I am waiting for your reply.
+
+Yours sincerely,
+Mrs Elizabet Glenn.
