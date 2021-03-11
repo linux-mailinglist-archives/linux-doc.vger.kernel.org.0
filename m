@@ -2,88 +2,159 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 15CC0336E13
-	for <lists+linux-doc@lfdr.de>; Thu, 11 Mar 2021 09:42:54 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 22182336E1D
+	for <lists+linux-doc@lfdr.de>; Thu, 11 Mar 2021 09:46:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231584AbhCKImv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 11 Mar 2021 03:42:51 -0500
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41324 "EHLO
+        id S231362AbhCKIqg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 11 Mar 2021 03:46:36 -0500
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:42146 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231309AbhCKIml (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Mar 2021 03:42:41 -0500
-Received: from desiato.infradead.org (desiato.infradead.org [IPv6:2001:8b0:10b:1:d65d:64ff:fe57:4e05])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4976EC061574;
-        Thu, 11 Mar 2021 00:42:41 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=desiato.20200630; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=iNur3LddLbqOxPZObj0ioFPvfinKVBSW9anyjtwfwJM=; b=WanEzgwFy9TFzNVXe3OsRG/IHe
-        +z77vFr5wAdeiwyeKU9/63vQ/AtB1LaHCbqMYn3iPc97V5JHDGCASbLctR3UyHWhTnuwKn5na5HUR
-        Z9dT+KOA47twNFbGCz71zvp8Cj6gGNJe2KKNKC6+zav92iIQuRujY2TNxTk2Syh2TYFau62sdkXb+
-        pk3BCo7z1N92aWL1Hl1qE1HtNE2PldWZYFdC6gLxu0LD15aklrkDWepqleY4zoMDzl32450+mUSfu
-        mqdu2B6R4AeSq5zUGU0gUy7y2gkjJCizQ21sbnDHpLBYjlnPckdtNBUofSO09gALBBqkpgJGGIFqG
-        KXKLP1xw==;
-Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=noisy.programming.kicks-ass.net)
-        by desiato.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
-        id 1lKGtU-008ghN-MZ; Thu, 11 Mar 2021 08:42:08 +0000
-Received: from hirez.programming.kicks-ass.net (hirez.programming.kicks-ass.net [192.168.1.225])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (Client did not present a certificate)
-        by noisy.programming.kicks-ass.net (Postfix) with ESMTPS id DF4D83010CF;
-        Thu, 11 Mar 2021 09:42:05 +0100 (CET)
-Received: by hirez.programming.kicks-ass.net (Postfix, from userid 1000)
-        id D31EF299E3D08; Thu, 11 Mar 2021 09:42:05 +0100 (CET)
-Date:   Thu, 11 Mar 2021 09:42:05 +0100
-From:   Peter Zijlstra <peterz@infradead.org>
-To:     Jarkko Sakkinen <jarkko@kernel.org>
-Cc:     "Yu, Yu-cheng" <yu-cheng.yu@intel.com>, x86@kernel.org,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>,
-        Haitao Huang <haitao.huang@intel.com>
-Subject: Re: [PATCH v22 8/8] x86/vdso: Add ENDBR64 to __vdso_sgx_enter_enclave
-Message-ID: <YEnX3Zn0FXPt7pcM@hirez.programming.kicks-ass.net>
-References: <20210310220519.16811-1-yu-cheng.yu@intel.com>
- <20210310220519.16811-9-yu-cheng.yu@intel.com>
- <YElKjT2v628tidE/@kernel.org>
- <8b8efe44-b79f-ce29-ee28-066f88c93840@intel.com>
- <YEmQJjwjs8UCEO2F@kernel.org>
+        with ESMTP id S230048AbhCKIq3 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 11 Mar 2021 03:46:29 -0500
+Received: from mail-pg1-x536.google.com (mail-pg1-x536.google.com [IPv6:2607:f8b0:4864:20::536])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CB25AC061761
+        for <linux-doc@vger.kernel.org>; Thu, 11 Mar 2021 00:46:28 -0800 (PST)
+Received: by mail-pg1-x536.google.com with SMTP id g4so13239436pgj.0
+        for <linux-doc@vger.kernel.org>; Thu, 11 Mar 2021 00:46:28 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=cQx/Zk70+m6LOsndOKLwPgVvEXoFZWWNDN7Tc+66h78=;
+        b=d5ZOzK0nHfiuWFgsYpozB26n2SNLgu+yC+cyMbLJskAa4uat6g2X7ZqzHq3MPzJkqT
+         e2EeCNXm48n2JGpBerR8kVEVlvjHVLj2cIpMFh2z9BIC+yQpRZzFcWfa5p5RF+Coj8z3
+         AdKrqpImJC5chGGGPbL0t4QjWFC13Y27lJvZ3x107SX7Uq6cE7Ao0/WkX5EjePrutbnD
+         HRvbrEiVa5H4a2RLFhQ0SPgGj02m2BvYCSW1GdfChG78rbnzWdwpmOpUbjQMvbja7gTy
+         NNTD6eQ6jEKoYCjDzGXv3JAQas4n8S7WxpjA5BPhKvy4EUFsH6oCrU4VsIfvVty8/8wt
+         M43g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=cQx/Zk70+m6LOsndOKLwPgVvEXoFZWWNDN7Tc+66h78=;
+        b=k5YQeKscflDYRQo9vbRcNxlJYlKevY/pmMlUlouhbZ4+BKvCwK64zuiDxfqmcrf4BJ
+         sWCIS0KmvJqnXQPfHVNv9zV69c9lYuG/1rNhf9rphXptDytoeHuSY+TDLiJkMk0LbppQ
+         hXx7CaJxgFiaRnO6HBGs39cO6eXxTXr/Q1ktwBwnClug6MjmywQybCX3aRotbVZOHylx
+         LDHbtCywyUHXyzs9q2Ce/44rWAnixv2Ot5XYr5w64w6MbD06X+WfgI4JIlg6Jwd7dAai
+         SV0KjplYjn5Hc96cyuZkPFZBx6BjoQ+1kackGtRZCqe9xltT6ux9fYjlEj2rOfiDd2Ex
+         dhBw==
+X-Gm-Message-State: AOAM533C0bSBYGMs+NZaY8DLBLif4DQo/jXBaywazRz1Nwmb4AaKHe5s
+        8NkyUBRtb/aE7gdqsrVVyFkhMINFF8ml1G+kpxifyw==
+X-Google-Smtp-Source: ABdhPJx8xoUZld8Sv1xB5EcygOS8Cx3xevOUQo1rIS2UOdYOWKLXng+0qazdq2+zuAO7Wv4IQBY5jVo18AZxOgHgpOo=
+X-Received: by 2002:aa7:9614:0:b029:1fa:e77b:722 with SMTP id
+ q20-20020aa796140000b02901fae77b0722mr6837612pfg.2.1615452388283; Thu, 11 Mar
+ 2021 00:46:28 -0800 (PST)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <YEmQJjwjs8UCEO2F@kernel.org>
+References: <20210308102807.59745-1-songmuchun@bytedance.com>
+ <20210308102807.59745-2-songmuchun@bytedance.com> <YEjUYOIJb2kYoQIA@dhcp22.suse.cz>
+ <CAMZfGtUj9vcVrSjT8Tk12jfkVE127Vkdkx6Js1JXzL+=rmu7Qw@mail.gmail.com>
+In-Reply-To: <CAMZfGtUj9vcVrSjT8Tk12jfkVE127Vkdkx6Js1JXzL+=rmu7Qw@mail.gmail.com>
+From:   Muchun Song <songmuchun@bytedance.com>
+Date:   Thu, 11 Mar 2021 16:45:51 +0800
+Message-ID: <CAMZfGtX37yBkKJjmBBSBeDeVAM6XywAJuEXjTSm7apOmQ-FOxA@mail.gmail.com>
+Subject: Re: [External] Re: [PATCH v18 1/9] mm: memory_hotplug: factor out
+ bootmem core functions to bootmem_info.c
+To:     Michal Hocko <mhocko@suse.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, bp@alien8.de, x86@kernel.org,
+        hpa@zytor.com, dave.hansen@linux.intel.com, luto@kernel.org,
+        Peter Zijlstra <peterz@infradead.org>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
+        mchehab+huawei@kernel.org, pawan.kumar.gupta@linux.intel.com,
+        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
+        anshuman.khandual@arm.com, jroedel@suse.de,
+        Mina Almasry <almasrymina@google.com>,
+        David Rientjes <rientjes@google.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Oscar Salvador <osalvador@suse.de>,
+        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
+        David Hildenbrand <david@redhat.com>,
+        =?UTF-8?B?SE9SSUdVQ0hJIE5BT1lBKOWggOWPoyDnm7TkuZ8p?= 
+        <naoya.horiguchi@nec.com>,
+        Joao Martins <joao.m.martins@oracle.com>,
+        Xiongchun duan <duanxiongchun@bytedance.com>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
+        Miaohe Lin <linmiaohe@huawei.com>,
+        Chen Huang <chenhuang5@huawei.com>,
+        Bodeddula Balasubramaniam <bodeddub@amazon.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Mar 11, 2021 at 05:36:06AM +0200, Jarkko Sakkinen wrote:
-> Does it do any harm to put it there unconditionally?
+On Thu, Mar 11, 2021 at 10:58 AM Muchun Song <songmuchun@bytedance.com> wrote:
+>
+> On Wed, Mar 10, 2021 at 10:14 PM Michal Hocko <mhocko@suse.com> wrote:
+> >
+> > [I am sorry for a late review]
+>
+> Thanks for your review.
+>
+> >
+> > On Mon 08-03-21 18:27:59, Muchun Song wrote:
+> > > Move bootmem info registration common API to individual bootmem_info.c.
+> > > And we will use {get,put}_page_bootmem() to initialize the page for the
+> > > vmemmap pages or free the vmemmap pages to buddy in the later patch.
+> > > So move them out of CONFIG_MEMORY_HOTPLUG_SPARSE. This is just code
+> > > movement without any functional change.
+> > >
+> > > Signed-off-by: Muchun Song <songmuchun@bytedance.com>
+> > > Acked-by: Mike Kravetz <mike.kravetz@oracle.com>
+> > > Reviewed-by: Oscar Salvador <osalvador@suse.de>
+> > > Reviewed-by: David Hildenbrand <david@redhat.com>
+> > > Reviewed-by: Miaohe Lin <linmiaohe@huawei.com>
+> > > Tested-by: Chen Huang <chenhuang5@huawei.com>
+> > > Tested-by: Bodeddula Balasubramaniam <bodeddub@amazon.com>
+> >
+> > Separation from memory_hotplug.c is definitely a right step. I am
+> > wondering about the config dependency though
+> > [...]
+> > > diff --git a/mm/Makefile b/mm/Makefile
+> > > index 72227b24a616..daabf86d7da8 100644
+> > > --- a/mm/Makefile
+> > > +++ b/mm/Makefile
+> > > @@ -83,6 +83,7 @@ obj-$(CONFIG_SLUB) += slub.o
+> > >  obj-$(CONFIG_KASAN)  += kasan/
+> > >  obj-$(CONFIG_KFENCE) += kfence/
+> > >  obj-$(CONFIG_FAILSLAB) += failslab.o
+> > > +obj-$(CONFIG_HAVE_BOOTMEM_INFO_NODE) += bootmem_info.o
+> >
+> > I would have expected this would depend on CONFIG_SPARSE.
+> > BOOTMEM_INFO_NODE is really an odd thing to depend on here. There is
+> > some functionality which requires the node info but that can be gated
+> > specifically. Or what is the thinking behind?
 
-Blows up your text footprint and I$ pressure. These instructions are 4
-bytes each.
+I have tried this. And I find that it is better to depend on
+BOOTMEM_INFO_NODE instead of SPARSEMEM.
 
-Aside from that, they're a NOP, so only consume front-end resources
-(hopefully) on older CPUs and when IBT is disabled.
+If we enable SPARSEMEM but disable HAVE_BOOTMEM_INFO_NODE,
+the bootmem_info.c also is compiled. Actually, we do not
+need those functions on other architectures. And these
+functions are also related to bootmem info. So it may be
+more reasonable to depend on BOOTMEM_INFO_NODE.
+Just my thoughts.
+
+Thanks.
+
+
+>
+> At first my idea was to free vmemmap pages through the bootmem
+> interface. My first instinct is to rely on BOOTMEM_INFO_NODE.
+> It makes sense to me to depend on CONFIG_SPARSE. I will
+> update this in the next version.
+>
+> Thanks.
+>
+> >
+> > This doesn't matter right now because it seems that the *_page_bootmem
+> > is only used by x86 outside of the memory hotplug.
+> >
+> > Other than that looks good to me.
+> > --
+> > Michal Hocko
+> > SUSE Labs
