@@ -2,223 +2,83 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C11D933A0B7
-	for <lists+linux-doc@lfdr.de>; Sat, 13 Mar 2021 20:51:33 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 6BEF533A1B1
+	for <lists+linux-doc@lfdr.de>; Sat, 13 Mar 2021 23:36:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234395AbhCMTuQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 13 Mar 2021 14:50:16 -0500
-Received: from conuserg-11.nifty.com ([210.131.2.78]:40816 "EHLO
-        conuserg-11.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234458AbhCMTuH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 13 Mar 2021 14:50:07 -0500
-Received: from localhost.localdomain (133-32-232-101.west.xps.vectant.ne.jp [133.32.232.101]) (authenticated)
-        by conuserg-11.nifty.com with ESMTP id 12DJmefC018162;
-        Sun, 14 Mar 2021 04:48:49 +0900
-DKIM-Filter: OpenDKIM Filter v2.10.3 conuserg-11.nifty.com 12DJmefC018162
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
-        s=dec2015msa; t=1615664929;
-        bh=ZuPe/bNbHJvZwK00JxrmLYSLm2hmLxZEK/PBz1r2NmI=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=aGllyCA3QeSLvfIGkIcViyl3OL5CeNbKdGL6LKTDMudW7lB1+ftIYgsohQvaz9OVp
-         tJf9lzH1/k/Mvdy0kuo7MFiSEKmUQoAOlNHLHFcj3wC9A38DCxgIVgawLeWwRPCQOM
-         hlOOx1wL1OJ3UkWrdgu6ZDTVVFnYWHT/QBQ+DwJe6iTxyYbKqc61oBam2poDpgYFp4
-         izKOcMmG4ltavLm3phTovBazRx7aB020wX/CvSrrq0qieUX928V58pnbGONueBZRqj
-         h0uIUPXPl0CnkfKEL54jvIHG7pvcYXw9cDwG72uiltegJzfIgBpcNMvj9gcAIUsHJU
-         8e480jtXJzUwQ==
-X-Nifty-SrcIP: [133.32.232.101]
-From:   Masahiro Yamada <masahiroy@kernel.org>
-To:     linux-kbuild@vger.kernel.org
-Cc:     Masahiro Yamada <masahiroy@kernel.org>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        David Howells <dhowells@redhat.com>,
-        Johannes Weiner <hannes@cmpxchg.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        KP Singh <kpsingh@google.com>,
-        Kees Cook <keescook@chromium.org>,
-        Michal Marek <michal.lkml@markovi.net>,
-        Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Nick Terrell <terrelln@fb.com>,
-        Valentin Schneider <valentin.schneider@arm.com>,
-        Vlastimil Babka <vbabka@suse.cz>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 13/13] kconfig: change "modules" from sub-option to first-level attribute
-Date:   Sun, 14 Mar 2021 04:48:36 +0900
-Message-Id: <20210313194836.372585-13-masahiroy@kernel.org>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210313194836.372585-1-masahiroy@kernel.org>
-References: <20210313194836.372585-1-masahiroy@kernel.org>
+        id S234771AbhCMWfX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 13 Mar 2021 17:35:23 -0500
+Received: from mout.kundenserver.de ([212.227.17.10]:54831 "EHLO
+        mout.kundenserver.de" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234735AbhCMWfT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 13 Mar 2021 17:35:19 -0500
+Received: from mail-ot1-f44.google.com ([209.85.210.44]) by
+ mrelayeu.kundenserver.de (mreue106 [213.165.67.113]) with ESMTPSA (Nemesis)
+ id 1MnqbU-1m61rL1EV8-00pL7m; Sat, 13 Mar 2021 23:35:17 +0100
+Received: by mail-ot1-f44.google.com with SMTP id h6-20020a0568300346b02901b71a850ab4so3304081ote.6;
+        Sat, 13 Mar 2021 14:35:16 -0800 (PST)
+X-Gm-Message-State: AOAM533WI9i5zO7Xh7Al8BdWsD+1YmOGiCE2rbhSTxMrGSvBndYGMNcF
+        W7ChQaG+G50w8gF5+vJX6CHqFgkJRoWQZVZPk1o=
+X-Google-Smtp-Source: ABdhPJy1hCZSOZgjWjUIiV7y81YWmhIh+++bR5CYo5jf0Rk/VdQv1W4rLs5PJp++TQ7iq07uGhi7ibXsnePfk6JNHFs=
+X-Received: by 2002:a05:6830:148c:: with SMTP id s12mr8850529otq.251.1615674915810;
+ Sat, 13 Mar 2021 14:35:15 -0800 (PST)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210225080453.1314-1-alex@ghiti.fr> <20210225080453.1314-3-alex@ghiti.fr>
+ <5279e97c-3841-717c-2a16-c249a61573f9@redhat.com> <7d9036d9-488b-47cc-4673-1b10c11baad0@ghiti.fr>
+ <CAK8P3a3mVDwJG6k7PZEKkteszujP06cJf8Zqhq43F0rNsU=h4g@mail.gmail.com>
+ <236a9788-8093-9876-a024-b0ad0d672c72@ghiti.fr> <CAK8P3a1+vSoEBqHPzj9S07B7h-Xuwvccpsh1pnn+1xJmS3UdbA@mail.gmail.com>
+ <50109729-9a86-6b49-b608-dd5c8eb2d88e@ghiti.fr>
+In-Reply-To: <50109729-9a86-6b49-b608-dd5c8eb2d88e@ghiti.fr>
+From:   Arnd Bergmann <arnd@arndb.de>
+Date:   Sat, 13 Mar 2021 23:34:59 +0100
+X-Gmail-Original-Message-ID: <CAK8P3a1Nh4KUD85Fg_vFHf2fLMOqZThBgzyduLgfEtjGf-pm4g@mail.gmail.com>
+Message-ID: <CAK8P3a1Nh4KUD85Fg_vFHf2fLMOqZThBgzyduLgfEtjGf-pm4g@mail.gmail.com>
+Subject: Re: [PATCH 2/3] Documentation: riscv: Add documentation that
+ describes the VM layout
+To:     Alexandre Ghiti <alex@ghiti.fr>
+Cc:     David Hildenbrand <david@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Alexander Potapenko <glider@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        linux-riscv <linux-riscv@lists.infradead.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        kasan-dev <kasan-dev@googlegroups.com>,
+        linux-arch <linux-arch@vger.kernel.org>,
+        Linux-MM <linux-mm@kvack.org>,
+        Linus Walleij <linus.walleij@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+X-Provags-ID: V03:K1:V+OHT2A8p0Alfk/QhAkFqphd5ZJSQR+7XtNqCvKUrqFy2NdWyll
+ 1qyVMptACR8kGCItDWu42EsGarUVRu8pIE0ZnUB5cSZvEkKQqFXcnrKz134USgs+viQbWKJ
+ mMi0e7LRvnelcW0IYeLDMb0vWcJDxKzl5IxVCwaUT3kvkekMBcgcAAIwpQVPjAEjUPtfeCN
+ XO18VFbP/Qi3B4xjXJa3g==
+X-Spam-Flag: NO
+X-UI-Out-Filterresults: notjunk:1;V03:K0:+AUsDVhfPHQ=:49MT2eZT6ouNXqMnB8iHch
+ g6HuERmaOBO5ydi+3dCNx8RQZ/gtCCjBIXcSLuh4Ce9kslxhjrtn7kWiGfdQBY2S+/0PU77jz
+ HUyzKdvaHO9onY7RR3/lZtnqZgu+TMuzlzeIRDPy7JPGli5wpvJa3VF9CD0awg6kfa3GFJjBp
+ EQ//N4tkMTnvVxLBKyleHspaeFxLgmKcmbJr8fzAzOEnyJ6W/nbIIJ3+6WWQZmwWXFb+StVSf
+ krVUQVWBicfTwN6Kj9dL2nT2+GPjhCs3zDN1QtV0WAsVLQfHdSpxtFcyxdM2F7qMowRuoFtb3
+ rWq+T5rEwu4DaqTXzroO4n+ry75VL9VjRYzpqFEf58teCKhA4tauHy4lcXvyfERJSjDDsf8BJ
+ EG/mGZ6VYcmmbfhSDC0sX+/cTKhydnk811OBHTPPV9vH91YEmJJB9S+Grs09LDprdRoT/AqU8
+ +Bg9hvkoYsoTHdValZBTyIluWUwUKD9+TU9l2zxWqO3Fz2lx0fjd5TTKJ4ZOOrm8koJuag95D
+ PC1JQsD+MPB0HGDnDcu/po2UnUmIWhvYgX8xZSm0/ujvUnsHnZOr96/JToFOHAKHA==
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Now "modules" is the only member of the "option" property.
+On Sat, Mar 13, 2021 at 9:23 AM Alex Ghiti <alex@ghiti.fr> wrote:
+>
+> Yes I considered it...when you re-proposed it :) I'm not opposed to your
+> solution in the vmalloc region but I can't find any advantage over the
+> current solution, are there ? That would harmonize with Linus's work,
+> but then we'd be quite different from x86 address space.
+>
+> And by the way, thanks for having suggested the current solution in a
+> previous conversation :)
 
-Remove "option", and move "modules" to the top level property.
+Ah, I really need to keep track better of what I already commented on...
 
-Signed-off-by: Masahiro Yamada <masahiroy@kernel.org>
----
-
- Documentation/kbuild/kconfig-language.rst          | 14 ++++----------
- init/Kconfig                                       |  2 +-
- scripts/kconfig/lexer.l                            |  1 -
- scripts/kconfig/lkc.h                              |  1 -
- scripts/kconfig/menu.c                             |  8 --------
- scripts/kconfig/parser.y                           |  8 +++++---
- scripts/kconfig/tests/choice/Kconfig               |  2 +-
- .../kconfig/tests/choice_value_with_m_dep/Kconfig  |  2 +-
- scripts/kconfig/tests/inter_choice/Kconfig         |  2 +-
- 9 files changed, 13 insertions(+), 27 deletions(-)
-
-diff --git a/Documentation/kbuild/kconfig-language.rst b/Documentation/kbuild/kconfig-language.rst
-index 4a796c601446..98c24183d8c3 100644
---- a/Documentation/kbuild/kconfig-language.rst
-+++ b/Documentation/kbuild/kconfig-language.rst
-@@ -223,16 +223,10 @@ applicable everywhere (see syntax).
-   the indentation level, this means it ends at the first line which has
-   a smaller indentation than the first line of the help text.
- 
--- misc options: "option" <symbol>[=<value>]
--
--  Various less common options can be defined via this option syntax,
--  which can modify the behaviour of the menu entry and its config
--  symbol. These options are currently possible:
--
--  - "modules"
--    This declares the symbol to be used as the MODULES symbol, which
--    enables the third modular state for all config symbols.
--    At most one symbol may have the "modules" option set.
-+- module attribute: "modules"
-+  This declares the symbol to be used as the MODULES symbol, which
-+  enables the third modular state for all config symbols.
-+  At most one symbol may have the "modules" option set.
- 
- Menu dependencies
- -----------------
-diff --git a/init/Kconfig b/init/Kconfig
-index beb8314fdf96..5b71e1c0edb4 100644
---- a/init/Kconfig
-+++ b/init/Kconfig
-@@ -2043,7 +2043,7 @@ config MODULE_SIG_FORMAT
- 
- menuconfig MODULES
- 	bool "Enable loadable module support"
--	option modules
-+	modules
- 	help
- 	  Kernel modules are small pieces of compiled code which can
- 	  be inserted in the running kernel, rather than being
-diff --git a/scripts/kconfig/lexer.l b/scripts/kconfig/lexer.l
-index 08c96a6ffe05..312cbad2d34d 100644
---- a/scripts/kconfig/lexer.l
-+++ b/scripts/kconfig/lexer.l
-@@ -112,7 +112,6 @@ n	[A-Za-z0-9_-]
- "menuconfig"		return T_MENUCONFIG;
- "modules"		return T_MODULES;
- "on"			return T_ON;
--"option"		return T_OPTION;
- "optional"		return T_OPTIONAL;
- "prompt"		return T_PROMPT;
- "range"			return T_RANGE;
-diff --git a/scripts/kconfig/lkc.h b/scripts/kconfig/lkc.h
-index c1ab05f73ca2..246eba37ca0e 100644
---- a/scripts/kconfig/lkc.h
-+++ b/scripts/kconfig/lkc.h
-@@ -105,7 +105,6 @@ void menu_add_visibility(struct expr *dep);
- struct property *menu_add_prompt(enum prop_type type, char *prompt, struct expr *dep);
- void menu_add_expr(enum prop_type type, struct expr *expr, struct expr *dep);
- void menu_add_symbol(enum prop_type type, struct symbol *sym, struct expr *dep);
--void menu_add_option_modules(void);
- void menu_finalize(struct menu *parent);
- void menu_set_type(int type);
- 
-diff --git a/scripts/kconfig/menu.c b/scripts/kconfig/menu.c
-index d50d0de55222..8b2108b74821 100644
---- a/scripts/kconfig/menu.c
-+++ b/scripts/kconfig/menu.c
-@@ -211,14 +211,6 @@ void menu_add_symbol(enum prop_type type, struct symbol *sym, struct expr *dep)
- 	menu_add_prop(type, expr_alloc_symbol(sym), dep);
- }
- 
--void menu_add_option_modules(void)
--{
--	if (modules_sym)
--		zconf_error("symbol '%s' redefines option 'modules' already defined by symbol '%s'",
--			    current_entry->sym->name, modules_sym->name);
--	modules_sym = current_entry->sym;
--}
--
- static int menu_validate_number(struct symbol *sym, struct symbol *sym2)
- {
- 	return sym2->type == S_INT || sym2->type == S_HEX ||
-diff --git a/scripts/kconfig/parser.y b/scripts/kconfig/parser.y
-index 2ada169c8b5d..e46ce21a2fc4 100644
---- a/scripts/kconfig/parser.y
-+++ b/scripts/kconfig/parser.y
-@@ -69,7 +69,6 @@ static struct menu *current_menu, *current_entry;
- %token T_MODULES
- %token T_ON
- %token T_OPEN_PAREN
--%token T_OPTION
- %token T_OPTIONAL
- %token T_PLUS_EQUAL
- %token T_PROMPT
-@@ -216,9 +215,12 @@ config_option: T_RANGE symbol symbol if_expr T_EOL
- 	printd(DEBUG_PARSE, "%s:%d:range\n", zconf_curname(), zconf_lineno());
- };
- 
--config_option: T_OPTION T_MODULES T_EOL
-+config_option: T_MODULES T_EOL
- {
--	menu_add_option_modules();
-+	if (modules_sym)
-+		zconf_error("symbol '%s' redefines option 'modules' already defined by symbol '%s'",
-+			    current_entry->sym->name, modules_sym->name);
-+	modules_sym = current_entry->sym;
- };
- 
- /* choice entry */
-diff --git a/scripts/kconfig/tests/choice/Kconfig b/scripts/kconfig/tests/choice/Kconfig
-index a412205b1b0c..0930eb65e932 100644
---- a/scripts/kconfig/tests/choice/Kconfig
-+++ b/scripts/kconfig/tests/choice/Kconfig
-@@ -2,7 +2,7 @@
- 
- config MODULES
- 	bool "Enable loadable module support"
--	option modules
-+	modules
- 	default y
- 
- choice
-diff --git a/scripts/kconfig/tests/choice_value_with_m_dep/Kconfig b/scripts/kconfig/tests/choice_value_with_m_dep/Kconfig
-index 7106c26bb3a8..bd970cec07d6 100644
---- a/scripts/kconfig/tests/choice_value_with_m_dep/Kconfig
-+++ b/scripts/kconfig/tests/choice_value_with_m_dep/Kconfig
-@@ -2,7 +2,7 @@
- 
- config MODULES
- 	def_bool y
--	option modules
-+	modules
- 
- config DEP
- 	tristate
-diff --git a/scripts/kconfig/tests/inter_choice/Kconfig b/scripts/kconfig/tests/inter_choice/Kconfig
-index 5698a4018dd0..26c25f68695b 100644
---- a/scripts/kconfig/tests/inter_choice/Kconfig
-+++ b/scripts/kconfig/tests/inter_choice/Kconfig
-@@ -2,7 +2,7 @@
- 
- config MODULES
- 	def_bool y
--	option modules
-+	modules
- 
- choice
- 	prompt "Choice"
--- 
-2.27.0
-
+      Arnd
