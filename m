@@ -2,107 +2,89 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 045D633BFC3
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Mar 2021 16:32:16 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id C2AF933C1A8
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Mar 2021 17:26:10 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231203AbhCOPbo convert rfc822-to-8bit (ORCPT
-        <rfc822;lists+linux-doc@lfdr.de>); Mon, 15 Mar 2021 11:31:44 -0400
-Received: from eu-smtp-delivery-151.mimecast.com ([185.58.86.151]:31010 "EHLO
-        eu-smtp-delivery-151.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S231755AbhCOPbh (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Mar 2021 11:31:37 -0400
-Received: from AcuMS.aculab.com (156.67.243.126 [156.67.243.126]) (Using
- TLS) by relay.mimecast.com with ESMTP id
- uk-mta-267-YYshquLuNiyLYx0KEZ2_ng-1; Mon, 15 Mar 2021 15:31:34 +0000
-X-MC-Unique: YYshquLuNiyLYx0KEZ2_ng-1
-Received: from AcuMS.Aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) by
- AcuMS.aculab.com (fd9f:af1c:a25b:0:994c:f5c2:35d6:9b65) with Microsoft SMTP
- Server (TLS) id 15.0.1497.2; Mon, 15 Mar 2021 15:31:27 +0000
-Received: from AcuMS.Aculab.com ([fe80::994c:f5c2:35d6:9b65]) by
- AcuMS.aculab.com ([fe80::994c:f5c2:35d6:9b65%12]) with mapi id
- 15.00.1497.012; Mon, 15 Mar 2021 15:31:27 +0000
-From:   David Laight <David.Laight@ACULAB.COM>
-To:     'Bartosz Golaszewski' <brgl@bgdev.pl>,
-        Joel Becker <jlbec@evilplan.org>,
-        Christoph Hellwig <hch@lst.de>, Shuah Khan <shuah@kernel.org>,
-        Linus Walleij <linus.walleij@linaro.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        =?iso-8859-1?Q?Uwe_Kleine-K=F6nig?= 
-        <u.kleine-koenig@pengutronix.de>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Kent Gibson <warthog618@gmail.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        "Greg Kroah-Hartman" <gregkh@linuxfoundation.org>
-CC:     "linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        Bartosz Golaszewski <bgolaszewski@baylibre.com>
-Subject: RE: [PATCH v5 02/11] configfs: use (1UL << bit) for internal flags
-Thread-Topic: [PATCH v5 02/11] configfs: use (1UL << bit) for internal flags
-Thread-Index: AQHXGXuz8CFTZTXyV0K3e3EZ1vnDeKqFLTtg
-Date:   Mon, 15 Mar 2021 15:31:27 +0000
-Message-ID: <6bc83972093a4be4ad163069a437ec25@AcuMS.aculab.com>
-References: <20210315091400.13772-1-brgl@bgdev.pl>
- <20210315091400.13772-3-brgl@bgdev.pl>
-In-Reply-To: <20210315091400.13772-3-brgl@bgdev.pl>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.202.205.107]
+        id S232170AbhCOQZi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 15 Mar 2021 12:25:38 -0400
+Received: from conssluserg-05.nifty.com ([210.131.2.90]:48194 "EHLO
+        conssluserg-05.nifty.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232406AbhCOQZI (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Mar 2021 12:25:08 -0400
+Received: from mail-pl1-f178.google.com (mail-pl1-f178.google.com [209.85.214.178]) (authenticated)
+        by conssluserg-05.nifty.com with ESMTP id 12FGOs4P030816;
+        Tue, 16 Mar 2021 01:24:55 +0900
+DKIM-Filter: OpenDKIM Filter v2.10.3 conssluserg-05.nifty.com 12FGOs4P030816
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nifty.com;
+        s=dec2015msa; t=1615825495;
+        bh=8fR/k4S+x7zJcwVimEWtVYSZGWek5y8oJcBpe9Z1Yi4=;
+        h=References:In-Reply-To:From:Date:Subject:To:Cc:From;
+        b=E8MsSaQxGxgTFg3tR0era08mFakTDjLx8+8Z0Tqr5DTNS5dgNaxVCU+mq7DIrYg/b
+         UpZnIwq3KTwLE5tciTnWkcMl8+FIGQdUy6h77AXizyBrqRNd9drRzdCGtIoeyF2N5q
+         sqgFNlzLRLVPz9jQ12HvCjgbM3tCytH0fadiLZH4a/K4e90IQ/H3JgrixoXz6ZltZ6
+         KQYGHJnM96S7PT+VccRPx9PTxeNwdnTaOaUZe640DnuXAMYeSH4X5sSuu/wram8ktv
+         eK8NQv7t32n2l3iQLLR4Zy51grt7tN7sQScIIJuKxGS8dAt8V+V5nLCyIfKB2LKIpQ
+         t8pUFhW6zOrpQ==
+X-Nifty-SrcIP: [209.85.214.178]
+Received: by mail-pl1-f178.google.com with SMTP id a8so9047665plp.13;
+        Mon, 15 Mar 2021 09:24:55 -0700 (PDT)
+X-Gm-Message-State: AOAM53195XXRcnBdfIHys7wgNlJv30wrynfWobwuIeFu+I4NC83QkqQ1
+        6HeEd8NHuo5Hs026nN5nPl37yQhF7xqVKPtnc9s=
+X-Google-Smtp-Source: ABdhPJzHP7b6j7mjgLRsHEFFgwnPQPIGFgz/LIxXsbmvcn18OKnSiDrClLJJ+xqGzUH7q1yiFF8bRLDCTo6NenZbRZE=
+X-Received: by 2002:a17:90a:fb54:: with SMTP id iq20mr13128873pjb.153.1615825494285;
+ Mon, 15 Mar 2021 09:24:54 -0700 (PDT)
 MIME-Version: 1.0
-Authentication-Results: relay.mimecast.com;
-        auth=pass smtp.auth=C51A453 smtp.mailfrom=david.laight@aculab.com
-X-Mimecast-Spam-Score: 0
-X-Mimecast-Originator: aculab.com
-Content-Language: en-US
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8BIT
+References: <20210314043044.15926-1-unixbhaskar@gmail.com>
+In-Reply-To: <20210314043044.15926-1-unixbhaskar@gmail.com>
+From:   Masahiro Yamada <masahiroy@kernel.org>
+Date:   Tue, 16 Mar 2021 01:24:16 +0900
+X-Gmail-Original-Message-ID: <CAK7LNAQEYAiV7+19LXNs8-HjWNLvX4hGLvDVMjLXrshLb4BawQ@mail.gmail.com>
+Message-ID: <CAK7LNAQEYAiV7+19LXNs8-HjWNLvX4hGLvDVMjLXrshLb4BawQ@mail.gmail.com>
+Subject: Re: [PATCH] docs: kbuild: Fix a typo in the file Kconfig.recursion-issue-02
+To:     Bhaskar Chowdhury <unixbhaskar@gmail.com>
+Cc:     Michal Marek <michal.lkml@markovi.net>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Randy Dunlap <rdunlap@infradead.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Bartosz Golaszewski
-> Sent: 15 March 2021 09:14
-> 
-> From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
-> 
-> For better readability and maintenance: use the (1UL << bit) for flag
-> definitions.
+On Sun, Mar 14, 2021 at 1:33 PM Bhaskar Chowdhury <unixbhaskar@gmail.com> wrote:
+>
+>
+> s/sematics/semantics/
+>
+> Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+> ---
 
-If the values ever get printed in hex the hex definitions are
-actually more useful.
+Applied to linux-kbuild. Thanks.
 
-	David
 
-...
-> -#define CONFIGFS_ROOT		0x0001
-> -#define CONFIGFS_DIR		0x0002
-> -#define CONFIGFS_ITEM_ATTR	0x0004
-> -#define CONFIGFS_ITEM_BIN_ATTR	0x0008
-> -#define CONFIGFS_ITEM_LINK	0x0020
-> -#define CONFIGFS_USET_DIR	0x0040
-> -#define CONFIGFS_USET_DEFAULT	0x0080
-> -#define CONFIGFS_USET_DROPPING	0x0100
-> -#define CONFIGFS_USET_IN_MKDIR	0x0200
-> -#define CONFIGFS_USET_CREATING	0x0400
-> +#define CONFIGFS_ROOT			(1UL << 0)
-> +#define CONFIGFS_DIR			(1UL << 1)
-> +#define CONFIGFS_ITEM_ATTR		(1UL << 2)
-> +#define CONFIGFS_ITEM_BIN_ATTR		(1UL << 3)
-> +#define CONFIGFS_ITEM_LINK		(1UL << 5)
-> +#define CONFIGFS_USET_DIR		(1UL << 6)
-> +#define CONFIGFS_USET_DEFAULT		(1UL << 7)
-> +#define CONFIGFS_USET_DROPPING		(1UL << 8)
-> +#define CONFIGFS_USET_IN_MKDIR		(1UL << 9)
-> +#define CONFIGFS_USET_CREATING		(1UL << 10)
->  #define CONFIGFS_NOT_PINNED	(CONFIGFS_ITEM_ATTR | CONFIGFS_ITEM_BIN_ATTR)
-> 
->  extern struct mutex configfs_symlink_mutex;
+>  Documentation/kbuild/Kconfig.recursion-issue-02 | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/kbuild/Kconfig.recursion-issue-02 b/Documentation/kbuild/Kconfig.recursion-issue-02
+> index df245fd7670d..0034eb494d11 100644
+> --- a/Documentation/kbuild/Kconfig.recursion-issue-02
+> +++ b/Documentation/kbuild/Kconfig.recursion-issue-02
+> @@ -6,7 +6,7 @@
+>  # make KBUILD_KCONFIG=Documentation/kbuild/Kconfig.recursion-issue-02 allnoconfig
+>  #
+>  # The recursive limitations with Kconfig has some non intuitive implications on
+> -# kconfig sematics which are documented here. One known practical implication
+> +# kconfig semantics which are documented here. One known practical implication
+>  # of the recursive limitation is that drivers cannot negate features from other
+>  # drivers if they share a common core requirement and use disjoint semantics to
+>  # annotate those requirements, ie, some drivers use "depends on" while others
 > --
-> 2.30.1
+> 2.26.2
+>
 
--
-Registered Address Lakeside, Bramley Road, Mount Farm, Milton Keynes, MK1 1PT, UK
-Registration No: 1397386 (Wales)
 
+-- 
+Best Regards
+Masahiro Yamada
