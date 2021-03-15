@@ -2,101 +2,91 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 51F5B33C1A6
-	for <lists+linux-doc@lfdr.de>; Mon, 15 Mar 2021 17:25:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5AC2133C239
+	for <lists+linux-doc@lfdr.de>; Mon, 15 Mar 2021 17:38:04 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231183AbhCOQZG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 15 Mar 2021 12:25:06 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48078 "EHLO
+        id S233909AbhCOQhX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 15 Mar 2021 12:37:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50848 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S233228AbhCOQYe (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Mar 2021 12:24:34 -0400
-Received: from mail-lj1-x236.google.com (mail-lj1-x236.google.com [IPv6:2a00:1450:4864:20::236])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 36396C06175F
-        for <linux-doc@vger.kernel.org>; Mon, 15 Mar 2021 09:24:34 -0700 (PDT)
-Received: by mail-lj1-x236.google.com with SMTP id u20so16959291lja.13
-        for <linux-doc@vger.kernel.org>; Mon, 15 Mar 2021 09:24:34 -0700 (PDT)
+        with ESMTP id S233454AbhCOQhM (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 15 Mar 2021 12:37:12 -0400
+Received: from mail-pj1-x1032.google.com (mail-pj1-x1032.google.com [IPv6:2607:f8b0:4864:20::1032])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6AB1CC06174A;
+        Mon, 15 Mar 2021 09:37:11 -0700 (PDT)
+Received: by mail-pj1-x1032.google.com with SMTP id kk2-20020a17090b4a02b02900c777aa746fso15079728pjb.3;
+        Mon, 15 Mar 2021 09:37:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
+        d=gmail.com; s=20161025;
         h=mime-version:references:in-reply-to:from:date:message-id:subject:to
          :cc;
-        bh=+jijPdUSqMWGA4azd9UUsLc7iUCEpYRxzK2+H3ibJFc=;
-        b=HBfH0hJjHZsJUIABSUUUnDm9OcQhN+J/+SjcbxyL9bvFjPm4gci2HRaUu7JRaOiIhT
-         FyldEpW+pn1sucRDLZXbYYakoJqm9/lcum8y1SjpY5QhppT9fF1l52QMBkK2DC8JMSwE
-         HcurWBp6osin0yQ976e4QdBXl6CtJHbgziNo4IEWI9GaIIDNeC/NFPJQo+X/jItD/ccb
-         qwZShnN2J750y0dlOUTCon4cgZx/QvffWIKnEkTc/WhDfNTzTkvWQ/mSjZvgOQQblqaS
-         4qAEPJhPhFJ6XPu76NtDXSYJ0iu6MpSuwanMeuTya0F0v9btVjtSl/XpeveRtuUwiAsN
-         vE3A==
+        bh=hxTr+jCjNOdK/SRs3Tz7jJtcDFSQzLPh/SdXv7CFTJg=;
+        b=JHodpzXGHG28Jf7mWc3g/MgAtc320RuyEet1UCcaWQyK7ZZuuQwfPATnMaaDu3UZ6g
+         rfSKVM9y1Cr2jQHWZ3puucVOcr3BEdF/82IRcLQpmMac6pXzmSwKeVsHJKj39o4z5iaj
+         5RK4yk/8FJtIL8tKGtaxR87ThL2p6796IsY3aCSCYqweaI7SU5IYz30cJ7CF6Ep2zaXI
+         6V+GeqBOtftcGES3z677GDgAVpkObIjjPV5fd1KbBpQoEqvLCR+Cbwns5YotzYe0qGV6
+         yqKklX7LkN3/XQmjYwYxg63j2XS/mjqnZEiZBQGR+8+G2lPWn/74mfxMELRmmUnVuX4N
+         +9qQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:mime-version:references:in-reply-to:from:date
          :message-id:subject:to:cc;
-        bh=+jijPdUSqMWGA4azd9UUsLc7iUCEpYRxzK2+H3ibJFc=;
-        b=YSbptdpeo8d4d5yxquxmEP0/uUWsJBtOhxiUmU49bmv6sgsDusvTBzA6BpI2AQW6jg
-         0k5cvdyMSWEAAFeB34qt9lBwRWmZ46WZ+JDAG2fKnNxxAy0kzLXP38M/ivdtqSWKLiyL
-         7XRw7uPn/85esk8Vn8EdUv6XMiYq9J+MYNlvV1WGeqOKWh61ql9Kfah68eqYkzIhpUvK
-         bc43mz/bOhMLZdGaMNTOXfPxB3VPdNuRr13v79tyuxp54733C8SZetlhclmdknwe+i4K
-         QkzINxK26N5Sil/fsHSz+869Nz0m4lY8XZ5tFoSHV7LIWxIDcdipyQkFVFfypf9O1iU0
-         raVw==
-X-Gm-Message-State: AOAM532xBPSSyS5CbeMyfxnwC1P15uUtbvDGIsK1JitBc2kerpXLhJtH
-        bB8gTfKuywGISCugYktE1jmKUVjIxVt8zojte0KkNQ==
-X-Google-Smtp-Source: ABdhPJyxd/mpXT0lN/bRNEsisnm6+S01PvbUvL2Q8FY2E6phgBdUpAOl8aU+deK9u8wVwU9D+/gtaXhvcy+c7qQjBcE=
-X-Received: by 2002:a05:651c:103a:: with SMTP id w26mr11107541ljm.273.1615825472712;
- Mon, 15 Mar 2021 09:24:32 -0700 (PDT)
+        bh=hxTr+jCjNOdK/SRs3Tz7jJtcDFSQzLPh/SdXv7CFTJg=;
+        b=WNgvFgkPGipVhjlJO1Rs7Z9fnKev7EBdLUxKmCj4pF5hKUZ3R/6k5AKEwYdtNtpsyo
+         0yBqCq/lJKE3RCqZDTQtbSb62N/Bfr3x3ldbUjPgwZzUSLwLinLMZnphx5OvOS1YxCOv
+         vdMpclm7eST9bWC1WGSq+yUJAUNbnNgI76E2SUA2sTjWYe8lwZaeBHCY4X8T1RgGJpjB
+         0ak7vGkZ7y7sgZ+cseB99Mj3nwRpKDl2nnLAIZyH2PdJ1gHd/4Q3vQNzpK3PP4sAUrbT
+         JFjupJ/fO6N8w5vhjBevfuuVYEf/2UzAdmU88rTw3XBHvda2MFiMUduQkHRm1BwJFuJO
+         LjsA==
+X-Gm-Message-State: AOAM530tnw+VRyTikVv1YEEHHNPOsNc75h2ZaOnk8MtJfNso3YmtrIqK
+        UyNaGjarW/10abnXL6U+bYWO0HdXArJMy2zI9h8=
+X-Google-Smtp-Source: ABdhPJzmD16eNSoHlg+ME0sV5oDSP8McG43pWnGy+W7nRmQ+OXh1nwhgopO1tf+cpxtFevI+9RbX/bEtq6FbXbhrpH0=
+X-Received: by 2002:a17:90a:db49:: with SMTP id u9mr14249289pjx.181.1615826230873;
+ Mon, 15 Mar 2021 09:37:10 -0700 (PDT)
 MIME-Version: 1.0
-References: <20210302053059.1049035-1-drew@beagleboard.org>
- <20210302053059.1049035-3-drew@beagleboard.org> <349b09f8-fe99-d0d4-dd11-c288bf66cb4d@metux.net>
-In-Reply-To: <349b09f8-fe99-d0d4-dd11-c288bf66cb4d@metux.net>
-From:   Linus Walleij <linus.walleij@linaro.org>
-Date:   Mon, 15 Mar 2021 17:24:21 +0100
-Message-ID: <CACRpkda=_qSY04mjyYUt1ox_yGgmTR3YPRrOYeJeMLjvba0ADA@mail.gmail.com>
-Subject: Re: [PATCH v9 2/4] pinctrl: pinmux: Add pinmux-select debugfs file
-To:     "Enrico Weigelt, metux IT consult" <lkml@metux.net>
-Cc:     Drew Fustini <drew@beagleboard.org>,
-        "open list:GPIO SUBSYSTEM" <linux-gpio@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        Tony Lindgren <tony@atomide.com>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>,
-        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+References: <20210315091400.13772-1-brgl@bgdev.pl> <20210315091400.13772-3-brgl@bgdev.pl>
+ <6bc83972093a4be4ad163069a437ec25@AcuMS.aculab.com>
+In-Reply-To: <6bc83972093a4be4ad163069a437ec25@AcuMS.aculab.com>
+From:   Andy Shevchenko <andy.shevchenko@gmail.com>
+Date:   Mon, 15 Mar 2021 18:36:54 +0200
+Message-ID: <CAHp75Vc3Fr3Ysv0p7-W1Bf5y1Em17psZ=eCgVNewdVF=AjPm-g@mail.gmail.com>
+Subject: Re: [PATCH v5 02/11] configfs: use (1UL << bit) for internal flags
+To:     David Laight <David.Laight@aculab.com>
+Cc:     Bartosz Golaszewski <brgl@bgdev.pl>,
+        Joel Becker <jlbec@evilplan.org>,
+        Christoph Hellwig <hch@lst.de>, Shuah Khan <shuah@kernel.org>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        =?UTF-8?Q?Uwe_Kleine=2DK=C3=B6nig?= 
+        <u.kleine-koenig@pengutronix.de>,
         Geert Uytterhoeven <geert@linux-m68k.org>,
-        Pantelis Antoniou <pantelis.antoniou@konsulko.com>,
-        Jason Kridner <jkridner@beagleboard.org>,
-        Robert Nelson <robertcnelson@beagleboard.org>,
-        Joe Perches <joe@perches.com>,
-        Dan Carpenter <dan.carpenter@oracle.com>,
+        Kent Gibson <warthog618@gmail.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Geert Uytterhoeven <geert+renesas@glider.be>
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "linux-gpio@vger.kernel.org" <linux-gpio@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        Bartosz Golaszewski <bgolaszewski@baylibre.com>
 Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Fri, Mar 12, 2021 at 2:57 PM Enrico Weigelt, metux IT consult
-<lkml@metux.net> wrote:
-> On 02.03.21 06:30, Drew Fustini wrote:
->
-> Hi folks,
->
-> > Add "pinmux-select" to debugfs which will activate a pin function for a
-> > given pin group:
+On Mon, Mar 15, 2021 at 5:33 PM David Laight <David.Laight@aculab.com> wrote:
+> From: Bartosz Golaszewski
+> > Sent: 15 March 2021 09:14
 > >
-> >    echo "<group-name function-name>" > pinmux-select
+> > From: Bartosz Golaszewski <bgolaszewski@baylibre.com>
 > >
-> > The write operation pinmux_select() handles this by checking that the
-> > names map to valid selectors and then calling ops->set_mux().
+> > For better readability and maintenance: use the (1UL << bit) for flag
+> > definitions.
 >
-> I've already been playing with similar idea, but for external muxes.
-> For example, some boards have multiple SIM slots that can be switched
-> via some gpio pin.
->
-> Not sure whether traditional pinmux would be a good match for that.
+> If the values ever get printed in hex the hex definitions are
+> actually more useful.
 
-What is wrong with the subsystem
-drivers/mux?
+Huh?!
 
-It's exactly for this usecase I think. Peter Rosin already wrote
-a GPIO-controlled mux driver too.
 
-Yours,
-Linus Walleij
+-- 
+With Best Regards,
+Andy Shevchenko
