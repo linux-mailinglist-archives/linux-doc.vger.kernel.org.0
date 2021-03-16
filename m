@@ -2,135 +2,134 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D089D33DBAA
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Mar 2021 18:57:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id B99DB33DBB1
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Mar 2021 18:58:00 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239484AbhCPR5E (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 Mar 2021 13:57:04 -0400
-Received: from mail-ej1-f43.google.com ([209.85.218.43]:32912 "EHLO
-        mail-ej1-f43.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236097AbhCPR4G (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Mar 2021 13:56:06 -0400
-Received: by mail-ej1-f43.google.com with SMTP id jt13so73712640ejb.0;
-        Tue, 16 Mar 2021 10:56:05 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=vY2V+uyPZYUFi1y4IUX19nPs6rR9J3Tb7jFOivds7Lw=;
-        b=S8qm0QlU42Y1FFD7itHAI8uJ8bW9BJIy0KtVm0hl6sgJWqMHLG6AimqOrBFKczYSIg
-         jRzQqU7enGZqAdJKaEsqat6TToVR81ZbqYQ4bsT50UsMZDMPJx3Xwy+Su44RdXONNXjw
-         mPyolGBenIXWcm8TnZ26yIAEY4uIqfRsnRHlvGIKOgXncfDiFZPQ/uc2jYs3ezP/veeC
-         Qno6M/G5HFHcV7lOQr96KAIw/YZb/oiGV+lhctiA7AaqDTuvcpJJ12oxACnFtexsY+Dz
-         zOZAne+SKT+z8TECJhNP1Q3q6W49BAIQwAAt+okm0q8/+5zUBaYKn1YwmUKK/FpKkPNr
-         o0lQ==
-X-Gm-Message-State: AOAM531FWDaFuWX/ppjI4oy6xbeW56qR0jecLf3A2qMO4ES7vbKgscrT
-        IBWweVzO6zCarl2Ov+QFs2k=
-X-Google-Smtp-Source: ABdhPJyqpgQnFPJPRAW/6JN4+pTj+vJtCDYYBR2exl1eEWr35NhcruFJGLCH7m31sRtC49vNjGGB+g==
-X-Received: by 2002:a17:906:d71:: with SMTP id s17mr31847965ejh.126.1615917364950;
-        Tue, 16 Mar 2021 10:56:04 -0700 (PDT)
-Received: from localhost ([2a02:8308:387:c900:a7b5:b859:9449:c07b])
-        by smtp.gmail.com with ESMTPSA id r19sm10912390edp.52.2021.03.16.10.56.04
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Tue, 16 Mar 2021 10:56:04 -0700 (PDT)
-From:   =?UTF-8?q?V=C3=A1clav=20Kubern=C3=A1t?= <kubernat@cesnet.cz>
-Cc:     =?UTF-8?q?V=C3=A1clav=20Kubern=C3=A1t?= <kubernat@cesnet.cz>,
-        Jean Delvare <jdelvare@suse.com>,
-        Guenter Roeck <linux@roeck-us.net>,
-        Jonathan Corbet <corbet@lwn.net>, linux-hwmon@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [PATCH v2 5/5] hwmon: (max31790) Update documentation
-Date:   Tue, 16 Mar 2021 18:55:02 +0100
-Message-Id: <20210316175503.1003051-5-kubernat@cesnet.cz>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210316175503.1003051-1-kubernat@cesnet.cz>
-References: <20210316175503.1003051-1-kubernat@cesnet.cz>
+        id S231919AbhCPR53 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 Mar 2021 13:57:29 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:40494 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S239422AbhCPR4f (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Mar 2021 13:56:35 -0400
+Received: from wp530.webpack.hosteurope.de (wp530.webpack.hosteurope.de [IPv6:2a01:488:42:1000:50ed:8234::])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A166EC06174A;
+        Tue, 16 Mar 2021 10:56:33 -0700 (PDT)
+Received: from ip4d142c50.dynamic.kabel-deutschland.de ([77.20.44.80] helo=[192.168.66.200]); authenticated
+        by wp530.webpack.hosteurope.de running ExIM with esmtpsa (TLS1.3:ECDHE_RSA_AES_128_GCM_SHA256:128)
+        id 1lMDvg-00089h-6R; Tue, 16 Mar 2021 18:56:28 +0100
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Randy Dunlap <rdunlap@infradead.org>, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+References: <20210310072858.231776-1-linux@leemhuis.info>
+ <874khc1844.fsf@meer.lwn.net>
+From:   Thorsten Leemhuis <linux@leemhuis.info>
+Subject: Re: [PATCH v1, RFC] docs: reporting-issues.rst: tone down 'test
+ vanilla mainline' a little
+Message-ID: <72d42b6c-e7d3-0243-d547-b5270dc00ef0@leemhuis.info>
+Date:   Tue, 16 Mar 2021 18:56:27 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <874khc1844.fsf@meer.lwn.net>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-BS
 Content-Transfer-Encoding: 8bit
-To:     unlisted-recipients:; (no To-header on input)
+X-bounce-key: webpack.hosteurope.de;linux@leemhuis.info;1615917393;45c58f66;
+X-HE-SMSGID: 1lMDvg-00089h-6R
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The conditions for fan fault and its connection to the PWM mode are now
-documented.
+On 15.03.21 21:20, Jonathan Corbet wrote:
+> Thorsten Leemhuis <linux@leemhuis.info> writes:
+>> Tell users that reporting bugs with vendor kernels which are only
+>> slightly patched can be okay in some situations, but point out there's a
+>> risk in doing so.
+>>
+>> Adjust some related sections to make them compatible and a bit clearer.
+>> At the same time make them less daunting: we want users to report bugs,
+>> even if they can't test vanilla mainline kernel.
+>>
+>> Signed-off-by: Thorsten Leemhuis <linux@leemhuis.info>
+>> CC: Randy Dunlap <rdunlap@infradead.org>
+>>
+>> ---
+>> With this I try to get rid of the last remaining parts that have a
+>> 'this needs discussion' box that's in the text. I hope I've found a
+>> middle ground that everybody can live with.
+> 
+> For the most part it seems OK to me.
 
-The pwm_rate_of_change and fan_window are now mentioned. According to
-our testing with Sunon PF36281BX-000U-S99, these values are crucial in
-how RPM mode works and how long it takes for the RPM to stabilize. For
-example, setting 5000 RPM (the fan goes up to 23000), the
-pwm_rate_of_change needed to be changed to the lowest possible value,
-otherwise the chip would just go from pwm 0 to pwm 60 back and forth and
-never achieving 5000 RPM (and also signaling fan fault). Based on this
-testing, we found out that the pwm_rate_of_change and fan_window values
-need to be changed manually by the user, based on the user's exact fan
-configuration.
+Thx for looking at it!
 
-Signed-off-by: Václav Kubernát <kubernat@cesnet.cz>
----
- Documentation/hwmon/max31790.rst | 41 +++++++++++++++++++++++++++++++-
- 1 file changed, 40 insertions(+), 1 deletion(-)
+> I *really* worry, though, that this file is getting so big that few
+> people will work their way through it.
 
-diff --git a/Documentation/hwmon/max31790.rst b/Documentation/hwmon/max31790.rst
-index 2979addeac8f..6056b67c3a95 100644
---- a/Documentation/hwmon/max31790.rst
-+++ b/Documentation/hwmon/max31790.rst
-@@ -30,6 +30,44 @@ monitoring and control of fan RPM as well as detection of fan failure.
- Six pins are dedicated tachometer inputs. Any of the six PWM outputs can
- also be configured to serve as tachometer inputs.
- 
-+About pwm[1-6]_enable
-+---------------------
-+0 - full-speed
-+    The chip doesn't have a specific way to set "full speed", so setting
-+    pwm[1-6]_enable to 0 is just "set PWM mode with 255 duty cycle".
-+1 - PWM mode
-+    Fan speed is controlled by writing a value to pwm[1-6].
-+2 - RPM mode
-+    Fan speed is controlled by writing a value to fan[1-6]_target.
-+
-+About fan[1-6]_fault
-+--------------------
-+In PWM (or full-speed) mode, if the input RPM goes below what is set
-+in fan[1-6]_target, fan[1-6]_fault gets set to 1. In other words,
-+fan[1-6]_target works as the minimum input RPM before a fan fault goes off.
-+
-+In RPM mode, fan fault is set when the fan spins "too slowly" (exact
-+conditions are in the datasheet). RPM mode depends on four variables:
-+    target_speed:        This is set by fan[1-6]_target.
-+    speed_range:         This is set automatically when setting target_speed
-+                         or manually by fan[1-12]_div.
-+    pwm_rate_of_change:  NOT set by the driver.
-+    fan_window:          NOT set by the driver.
-+
-+The last two values are not set by the driver, because there's no generic way to
-+compute them. You should set them manually through i2c (in the bootloader for
-+example). Check the datasheet for details.
-+
-+The fan fault value latches, to reset it, set a value to pwm[1-6]
-+or fan[1-6]_target.
-+
-+About fan[1-12]_div
-+-------------------
-+This value affects the measurable range of the chip. The driver sets this value
-+automatically in RPM based on fan[1-6]_target. In PWM mode, you should set this
-+value manually based on the details from the datasheet. Setting the speed range
-+is disabled while in RPM mode to prevent overwriting the automatically
-+calculated value.
- 
- Sysfs entries
- -------------
-@@ -39,7 +77,8 @@ fan[1-12]_enable   RW  enable fan speed monitoring
- fan[1-12]_input    RO  fan tachometer speed in RPM
- fan[1-12]_fault    RO  fan experienced fault
- fan[1-12]_div      RW  set the measurable speed range, not available in RPM mode
--fan[1-6]_target    RW  desired fan speed in RPM
-+fan[1-6]_target    RW  RPM mode = desired fan speed
-+                       PWM mode = minimum fan speed until fault
- pwm[1-6]_enable    RW  regulator mode, 0=full speed, 1=manual (pwm) mode, 2=rpm mode
-                        setting rpm mode sets fan*_enable to 1
- pwm[1-6]           RW  fan target duty cycle (0-255)
--- 
-2.30.2
+Yeah, this is a problem, definitely, but the document was written to
+make sure that nobody has to work their way through it, as the "step by
+step" guide tells all the important things already – and that guide
+(even with this patch and the other one that you looked at yesterday)
+should still be shorter (and clearer) then the old "reporting bugs" text
+(I hope, I didn't verify...).
 
+>  Anything that could be done to
+> make it more concise going forward would be more than welcome.
+
+Yeah, will think about it, especially WRT to the other patch you looked
+at. Maybe I can come up with something. But no promises, I put a lot of
+thought into the problem already.
+
+The real solution for the problem IMHO looks totally different anyway:
+provide pre-compiled kernels somewhere that users can install and even
+bisect without installing a compiler at all (sure, there is a the
+problem with the configuration, but whatever, just pick one and see how
+things work out). Would be a fun project I'd really like to work on
+sooner or later, but for now I have different priorities...
+
+> [...]
+>> +   suspend your efforts for a few days anyway. Whatever version you choose,
+>> +   ideally use a 'vanilla' built. Ignoring these advices will dramatically
+>> +   increase the risk you report will be rejected or ignored.
+> s/built/build/
+
+Argh, thx for pointing it out.
+
+> Also, I would stop quoting terms like "mainline", "stable" and "vanilla"
+> throughout.  It makes the reading experience a bit stranger without
+> (IMO) adding anything.
+
+Yeah, let me provide a patch to reduce the quoting. If it's okay for you
+I'd like to leave the quotes in the section that round about explains
+the terms mainline, stable, and longterm. I think it's wise there to
+point out that these are terms that have a special meaning in kernel
+context. That's why I quoted them in a lot of places – especially those
+where the reader might see them for the first time, as "stable" is kind
+of ambiguous, which I wanted to avoid somehow.
+
+Which brings me to another, but related issue. That patch could also fix
+an inconsistency I recently noticed: how to spell panic, oops, bug,
+warning? I sometimes quoted them  because in kernel context they have
+special meaning, as a BUG() is not some random bug... And is it Oops or
+oops (I recently noticed I used both spellings, but I found both when I
+grepped Documentation/)? Here are some options:
+
+1) panic, oops, bug, warning
+2a) 'panic', 'oops', 'bug', 'warning',
+2b) *panic*, *oops*, *bug*, *warning*,
+3) panic, Oops, BUG, WARNING,
+4) panic, Oops, BUG(), WARN()
+
+The problem there is similar with the term 'stable': the words bug and
+warning are ambiguous for people that are not familiar with the terms
+used by the kernel community. Putting them in quotes at least give a
+subtle hint like "this term might have a special meaning". It works for
+my subconscious, but I guess won't for many others.
+
+Nevertheless I'd go option 2a or 2b above: doesn't look to ugly (like 3
+and 4) and avoids being ambiguous (like 1, which I for one don't like at
+all).
+
+What's your opinion on this? Or do you say "ohh, you are overthinking
+it, just go with option 1!". :-D
+
+Ciao, Thorsten
