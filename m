@@ -2,174 +2,90 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 67E4233E018
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Mar 2021 22:14:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 388F033E0D9
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Mar 2021 22:52:38 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231985AbhCPVNg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 Mar 2021 17:13:36 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:54723 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S231851AbhCPVNP (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Mar 2021 17:13:15 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1615929194;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=mdowvEkJ8P/U6Lm1Fbd74yNjySwIfdTY6FFlx2Kgs+o=;
-        b=JYlG/rhmvENVb8YpmzmEu0VahkmfGDN8uYCq2Mip6w7zepV7CXVcFm21MNFNedbsgAQ1A/
-        GRPZBI5EQqvMsRj9LH8Z7vVTlDYKhfuitn4vnm034bFADX6iDjwAoStuYq04itQZFPNRYF
-        WWiPDqRmRg+k3S3IYjWrs41MkeNbtA4=
-Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
- [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-393-1wpZkmmNOuWkvUVdSIdRzA-1; Tue, 16 Mar 2021 17:13:10 -0400
-X-MC-Unique: 1wpZkmmNOuWkvUVdSIdRzA-1
-Received: from smtp.corp.redhat.com (int-mx04.intmail.prod.int.phx2.redhat.com [10.5.11.14])
-        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
-        (No client certificate requested)
-        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id 7E38E760C4;
-        Tue, 16 Mar 2021 21:13:07 +0000 (UTC)
-Received: from omen.home.shazbot.org (ovpn-112-255.phx2.redhat.com [10.3.112.255])
-        by smtp.corp.redhat.com (Postfix) with ESMTP id 94CDB5D9DC;
-        Tue, 16 Mar 2021 21:13:06 +0000 (UTC)
-Date:   Tue, 16 Mar 2021 15:13:06 -0600
-From:   Alex Williamson <alex.williamson@redhat.com>
-To:     Cornelia Huck <cohuck@redhat.com>
-Cc:     Jason Gunthorpe <jgg@nvidia.com>, Jonathan Corbet <corbet@lwn.net>,
-        kvm@vger.kernel.org, linux-doc@vger.kernel.org,
-        "Raj, Ashok" <ashok.raj@intel.com>,
-        Dan Williams <dan.j.williams@intel.com>,
-        Daniel Vetter <daniel@ffwll.ch>,
-        Christoph Hellwig <hch@lst.de>,
-        Leon Romanovsky <leonro@nvidia.com>,
-        Max Gurtovoy <mgurtovoy@nvidia.com>,
-        Tarun Gupta <targupta@nvidia.com>,
-        Liu Yi L <yi.l.liu@intel.com>
-Subject: Re: [PATCH v2 03/14] vfio: Split creation of a vfio_device into
- init and register ops
-Message-ID: <20210316151306.3829ef82@omen.home.shazbot.org>
-In-Reply-To: <20210316132559.6e6bc79a.cohuck@redhat.com>
-References: <0-v2-20d933792272+4ff-vfio1_jgg@nvidia.com>
-        <3-v2-20d933792272+4ff-vfio1_jgg@nvidia.com>
-        <20210316132559.6e6bc79a.cohuck@redhat.com>
+        id S229800AbhCPVwD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 Mar 2021 17:52:03 -0400
+Received: from casper.infradead.org ([90.155.50.34]:37684 "EHLO
+        casper.infradead.org" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S232943AbhCPVRA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Mar 2021 17:17:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
+        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
+        Content-Transfer-Encoding:Content-ID:Content-Description;
+        bh=5gozf9msiE9KxmQI3WyWORDOu9a/cAx+NIytFUdmLig=; b=X/SgE772DCUsq82Z3cmFeX95oO
+        PqfjJ2FRHKtH42r39m6MsvF9e5TdZgVBI17+s6kSwsdLRIH6v9V4li+P1j+8WqrEOiBkH6dTpmXCl
+        zj1Kf2d5mWrKPa8KsbpoPAW1aiwZWNaloYuw/CAIYs+xvotJFNzpXH8o2sLJTPSdxOe8bKxhzoW7R
+        Fj+2vE8z7DbOu1UEzcqo4TMCRdDso4boo0dWkPh4i3GG1J0Wl3oHeTBkK6TokK4mP/RePGYbmcBdt
+        UCFi0He2Yd3bwFvSsH+Qnhs7glJ4VOkYI0qVv+/wM6AHgCid9xL3/c/oJyHftKdVv1DVOVvqYwv5V
+        V7lwKkHg==;
+Received: from j217100.upc-j.chello.nl ([24.132.217.100] helo=worktop.programming.kicks-ass.net)
+        by casper.infradead.org with esmtpsa (Exim 4.94 #2 (Red Hat Linux))
+        id 1lMH2e-000dKj-Op; Tue, 16 Mar 2021 21:15:57 +0000
+Received: by worktop.programming.kicks-ass.net (Postfix, from userid 1000)
+        id 59827981337; Tue, 16 Mar 2021 22:15:52 +0100 (CET)
+Date:   Tue, 16 Mar 2021 22:15:52 +0100
+From:   Peter Zijlstra <peterz@infradead.org>
+To:     Yu-cheng Yu <yu-cheng.yu@intel.com>
+Cc:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-mm@kvack.org,
+        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andy Lutomirski <luto@kernel.org>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Cyrill Gorcunov <gorcunov@gmail.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>,
+        Haitao Huang <haitao.huang@intel.com>
+Subject: Re: [PATCH v23 00/28] Control-flow Enforcement: Shadow Stack
+Message-ID: <20210316211552.GU4746@worktop.programming.kicks-ass.net>
+References: <20210316151054.5405-1-yu-cheng.yu@intel.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Scanned-By: MIMEDefang 2.79 on 10.5.11.14
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210316151054.5405-1-yu-cheng.yu@intel.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 16 Mar 2021 13:25:59 +0100
-Cornelia Huck <cohuck@redhat.com> wrote:
-
-> On Fri, 12 Mar 2021 20:55:55 -0400
-> Jason Gunthorpe <jgg@nvidia.com> wrote:
+On Tue, Mar 16, 2021 at 08:10:26AM -0700, Yu-cheng Yu wrote:
+> Control-flow Enforcement (CET) is a new Intel processor feature that blocks
+> return/jump-oriented programming attacks.  Details are in "Intel 64 and
+> IA-32 Architectures Software Developer's Manual" [1].
 > 
-> > This makes the struct vfio_pci_device part of the public interface so it
-
-s/_pci//
-
-> > can be used with container_of and so forth, as is typical for a Linux
-> > subystem.
-> > 
-> > This is the first step to bring some type-safety to the vfio interface by
-> > allowing the replacement of 'void *' and 'struct device *' inputs with a
-> > simple and clear 'struct vfio_pci_device *'
-
-s/_pci//
-
-> > 
-> > For now the self-allocating vfio_add_group_dev() interface is kept so each
-> > user can be updated as a separate patch.
-> > 
-> > The expected usage pattern is
-> > 
-> >   driver core probe() function:
-> >      my_device = kzalloc(sizeof(*mydevice));
-> >      vfio_init_group_dev(&my_device->vdev, dev, ops, mydevice);
-> >      /* other driver specific prep */
-> >      vfio_register_group_dev(&my_device->vdev);
-> >      dev_set_drvdata(my_device);
-> > 
-> >   driver core remove() function:
-> >      my_device = dev_get_drvdata(dev);
-> >      vfio_unregister_group_dev(&my_device->vdev);
-> >      /* other driver specific tear down */
-> >      kfree(my_device);
-> > 
-> > Allowing the driver to be able to use the drvdata and vifo_device to go  
+> CET can protect applications and the kernel.  This series enables only
+> application-level protection, and has three parts:
 > 
-> s/vifo_device/vfio_device/
-> 
-> > to/from its own data.
-> > 
-> > The pattern also makes it clear that vfio_register_group_dev() must be
-> > last in the sequence, as once it is called the core code can immediately
-> > start calling ops. The init/register gap is provided to allow for the
-> > driver to do setup before ops can be called and thus avoid races.
-> > 
-> > Reviewed-by: Christoph Hellwig <hch@lst.de>
-> > Reviewed-by: Liu Yi L <yi.l.liu@intel.com>
-> > Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
-> > ---
-> >  Documentation/driver-api/vfio.rst |  31 ++++----
-> >  drivers/vfio/vfio.c               | 123 ++++++++++++++++--------------
-> >  include/linux/vfio.h              |  16 ++++
-> >  3 files changed, 98 insertions(+), 72 deletions(-)
-> > 
-> > diff --git a/Documentation/driver-api/vfio.rst b/Documentation/driver-api/vfio.rst
-> > index f1a4d3c3ba0bb1..d3a02300913a7f 100644
-> > --- a/Documentation/driver-api/vfio.rst
-> > +++ b/Documentation/driver-api/vfio.rst
-> > @@ -249,18 +249,23 @@ VFIO bus driver API
-> >  
-> >  VFIO bus drivers, such as vfio-pci make use of only a few interfaces
-> >  into VFIO core.  When devices are bound and unbound to the driver,
-> > -the driver should call vfio_add_group_dev() and vfio_del_group_dev()
-> > -respectively::
-> > -
-> > -	extern int vfio_add_group_dev(struct device *dev,
-> > -				      const struct vfio_device_ops *ops,
-> > -				      void *device_data);
-> > -
-> > -	extern void *vfio_del_group_dev(struct device *dev);
-> > -
-> > -vfio_add_group_dev() indicates to the core to begin tracking the
-> > -iommu_group of the specified dev and register the dev as owned by
-> > -a VFIO bus driver.  The driver provides an ops structure for callbacks
-> > +the driver should call vfio_register_group_dev() and
-> > +vfio_unregister_group_dev() respectively::
-> > +
-> > +	void vfio_init_group_dev(struct vfio_device *device,
-> > +				struct device *dev,
-> > +				const struct vfio_device_ops *ops,
-> > +				void *device_data);
-> > +	int vfio_register_group_dev(struct vfio_device *device);
-> > +	void vfio_unregister_group_dev(struct vfio_device *device);
-> > +
-> > +The driver should embed the vfio_device in its own structure and call
-> > +vfio_init_group_dev() to pre-configure it before going to registration.  
-> 
-> s/it/that structure/ (I guess?)
+>   - Shadow stack [2],
+>   - Indirect branch tracking [3], and
+>   - Selftests [4].
 
-Seems less clear actually, is the object of "that structure" the
-"vfio_device" or "its own structure".  Phrasing somewhat suggests the
-latter.  s/it/the vfio_device structure/ seems excessively verbose.  I
-think "it" is probably sufficient here.  Thanks,
+CET is marketing; afaict SS and IBT are 100% independent and there's no
+reason what so ever to have them share any code, let alone a Kconfig
+knob.
 
-Alex
+In fact, I think all of this would improve is you remove the CET name
+from all of this entirely. Put this series under CONFIG_X86_SHSTK (or
+_SS) and use CONFIG_X86_IBT for the other one.
 
- 
-> > +vfio_register_group_dev() indicates to the core to begin tracking the
-> > +iommu_group of the specified dev and register the dev as owned by a VFIO bus
-> > +driver. Once vfio_register_group_dev() returns it is possible for userspace to
-> > +start accessing the driver, thus the driver should ensure it is completely
-> > +ready before calling it. The driver provides an ops structure for callbacks
-> >  similar to a file operations structure::
-> >  
-> >  	struct vfio_device_ops {  
-> 
-> Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+Similarly with the .c file.
 
+All this CET business is just pure confusion.
