@@ -2,58 +2,61 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DA76433CCAC
-	for <lists+linux-doc@lfdr.de>; Tue, 16 Mar 2021 05:45:39 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4B10B33CD82
+	for <lists+linux-doc@lfdr.de>; Tue, 16 Mar 2021 06:48:25 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231966AbhCPEpH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 16 Mar 2021 00:45:07 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38506 "EHLO
+        id S232953AbhCPFrw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 16 Mar 2021 01:47:52 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52040 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229962AbhCPEot (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Mar 2021 00:44:49 -0400
-Received: from mail-qt1-x832.google.com (mail-qt1-x832.google.com [IPv6:2607:f8b0:4864:20::832])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 3C571C06174A;
-        Mon, 15 Mar 2021 21:44:49 -0700 (PDT)
-Received: by mail-qt1-x832.google.com with SMTP id h7so4027120qtx.3;
-        Mon, 15 Mar 2021 21:44:49 -0700 (PDT)
+        with ESMTP id S233064AbhCPFrr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 16 Mar 2021 01:47:47 -0400
+Received: from mail-pf1-x42c.google.com (mail-pf1-x42c.google.com [IPv6:2607:f8b0:4864:20::42c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 78F6BC06174A;
+        Mon, 15 Mar 2021 22:47:47 -0700 (PDT)
+Received: by mail-pf1-x42c.google.com with SMTP id 18so8069425pfo.6;
+        Mon, 15 Mar 2021 22:47:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Ln6IROcL0oqmiyWgZVylBCyeTAvDQnVtqaLoFG3jsSA=;
-        b=Lkh6Qx6Q7o3RBAorjTjSkvKFkltnLwjRXu/3fiMeGJEQEMoLLu59QV6qN7aDvOo/21
-         JnVdfWhhzEjz9Ytx66L0CDdqcIHYlV/H5cITChcr+ZvL/TtNtc3W79q807BHlHZNnB3A
-         a1H+tR//ncYKigcDknno3igITuo7a55hTEivqGv77MnSjrx+3oOCng49rOD5UTt52NpY
-         J4nVZjCyz5m+xCvT1cKOlffLFgHjUNPSpbOpOXY0bD+eBA+OxthhUL5jo+pTrpqEOEy7
-         oXMKOVEiRdUfXS+GJHjbyIivWCQPgpTXXIuYLx+eyBsqxl3fACNx3MXb776Tm/7XB7xS
-         LPvg==
+        bh=+kjXRUyRx/w7Y8GaJq7eCfF5pid4PKqWc6tkkujLoCo=;
+        b=GOtQLLzKYgSfUtq5WLIWXNJSK0unMMDwpKZvYGLRLdlXUKEUi1ApC9ipDYEdPiZkNv
+         FbxUUp9CdHFBPSebPXM1Ojj/eVFMoYcilQl5r4TOCdUVire12/dV/OUlKJsZJCvE7qaA
+         jUjcuj8MNtedi/XvZxOfWPGcXrBpm6A97jw+sf7W0J39dTrQ3zjGA+rIIQ9ap5pUBe+B
+         NLSP0ArKnJevbfmDr2mSj/G8MNRImqrQqI9FRHYYVim/tdbSigMhO5K3xodfcWS4BX/Q
+         E4NL4SrtYQJ9i11CxieSghuwMpCG/e6tXj4C8rrGEkysN4FX2HW6do/oSCc95Iw4vsA6
+         gEQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
          :content-transfer-encoding;
-        bh=Ln6IROcL0oqmiyWgZVylBCyeTAvDQnVtqaLoFG3jsSA=;
-        b=h4nXQipthQ5VHsq9RetQ0CY+R0JS346n1d5KIA6a1D18Eqh+GHyrfCbT26O0qds/if
-         ZVgxCiijjVdu3bQZW+2GVnx9G0hDdyN36emS/ya3Lhe1mRe8XB73lFQSbxCIaXt85Fhw
-         OkEl9I0ol5IV7aPYEijjmFRmj2pywzJHd9VMWL/n9dFLIbqMjWnaell29hUa0J1VlrBU
-         n3SSSzUS959wDyfHnNl8e8VfZ5Z6LVdF5PPJR0O1IOk1iFylAXBzcfLb2GGFKqtTYLv3
-         U7RougDanxLXyMCZuUGYRiF4Z6YbKOD+EqZmXqXxzyZvbrwCNaWyJZzARu9rpRKzC11A
-         Z33w==
-X-Gm-Message-State: AOAM532PDROGGMuqLgfZ2zhcFephPn5nmAJlCd3aLRGUSZa0Wm1zI/9r
-        wxKakbdmLhJMTzAeYV2Koyw=
-X-Google-Smtp-Source: ABdhPJxRoDEvfZK3pGTpLK8ocuHyLorhAGB8PQ4JCJWBaKlabF+nz/DW1jipdHChWgkcJtt8glqz5Q==
-X-Received: by 2002:ac8:6b8a:: with SMTP id z10mr6231616qts.243.1615869888471;
-        Mon, 15 Mar 2021 21:44:48 -0700 (PDT)
-Received: from localhost.localdomain ([156.146.58.45])
-        by smtp.gmail.com with ESMTPSA id g14sm14306322qkm.98.2021.03.15.21.44.44
+        bh=+kjXRUyRx/w7Y8GaJq7eCfF5pid4PKqWc6tkkujLoCo=;
+        b=TUa/1LTHssp0upHEhVeTU7Ma4TUKg3guuORHS0quem7t92Z28Fs1DfaQXpRIWHExOV
+         cDrLUVr2b7rmME2+tYKI5yrYi6mWZZQiPNbvKyd727EYi5jRQX0ob8Mjwa9mU6LqmAUQ
+         jbPlBk7e+0iXmXB2XFtSaWDPvebDmZCVeymDqEJYFnrT5ZH3d9gzFYdlYuYdGgwBoKHE
+         8xv/HpYWjaMWTcYpd+veIlJOYKK8PoRRhuyDkLmFyqsV8usNBiimJLLchg1RdNrVF8dz
+         6yw187V/C8azijxiLCWia0fdPJHYh+Wd2kp60Q94Xbw55abivYI1cVbnX/Hkj6iLejiV
+         Dkqw==
+X-Gm-Message-State: AOAM533/2zA1twmBJFVawyYHh2u3xl7dn7kO30CYmxfKWoqdxEAgwYOZ
+        FquIhqxXz9FSDI6Ykr6mwiA=
+X-Google-Smtp-Source: ABdhPJyryS3L9fRf5yllrbFMfwZeFbTAV2mAViIl/f+8AKQAzR+1NqwMUvywyH1/gZxiXxXfUAwDTQ==
+X-Received: by 2002:aa7:8e8f:0:b029:1f1:5a1a:7f82 with SMTP id a15-20020aa78e8f0000b02901f15a1a7f82mr13686329pfr.52.1615873666781;
+        Mon, 15 Mar 2021 22:47:46 -0700 (PDT)
+Received: from cl-arch-kdev.. (cl-arch-kdev.xen.prgmr.com. [2605:2700:0:2:a800:ff:fed6:fc0d])
+        by smtp.gmail.com with ESMTPSA id l22sm15096513pfd.145.2021.03.15.22.47.45
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Mon, 15 Mar 2021 21:44:47 -0700 (PDT)
-From:   Bhaskar Chowdhury <unixbhaskar@gmail.com>
-To:     pbonzini@redhat.com, corbet@lwn.net, kvm@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc:     rdunlap@infradead.org, Bhaskar Chowdhury <unixbhaskar@gmail.com>
-Subject: [PATCH] docs: virt: kvm: Trivial typo fix in the file timekeeping.rst
-Date:   Tue, 16 Mar 2021 10:14:24 +0530
-Message-Id: <20210316044424.3068802-1-unixbhaskar@gmail.com>
+        Mon, 15 Mar 2021 22:47:46 -0700 (PDT)
+From:   Fox Chen <foxhlchen@gmail.com>
+To:     neilb@suse.de
+Cc:     Fox Chen <foxhlchen@gmail.com>, corbet@lwn.net,
+        vegard.nossum@oracle.com, viro@zeniv.linux.org.uk,
+        rdunlap@infradead.org, grandmaster@al2klimov.de,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        gregkh@linuxfoundation.org
+Subject: [PATCH v2 00/12] docs: path-lookup: Update pathlookup docs
+Date:   Tue, 16 Mar 2021 13:47:15 +0800
+Message-Id: <20210316054727.25655-1-foxhlchen@gmail.com>
 X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
@@ -61,29 +64,48 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+The Path lookup is a very complex subject in VFS. The path-lookup
+document provides a very detailed guidance to help people understand
+how path lookup works in the kernel. This document was originally
+written based on three lwn articles five years ago. As times goes by,
+some of the content is outdated. This patchset is intended to update
+the document to make it more relevant to current codebase.
 
-s/extremal/external/
 
-Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
 ---
- But...Paolo,is it also "extreme"? I am in a catch-22?
+v1: https://lore.kernel.org/lkml/20210126072443.33066-1-foxhlchen@gmail.com/
+v2:
+ - Fix problems in v1 reviewed by Neil:
+   1. In Patch 01 and 02 rewrite a new paragrah to describe step_into()
+   2. In Patch 01 instead of changing it to traverse_mounts, remove follow_managed()
+   3. In Patch 03 re-telling the story rather than adding notes
+   4. In Patch 04 do_open() should be outside of loop, fix it and fix other problems
+      in following paragrah
+   5. In Patch 07 use "drop out of RCU-walk"
+   6. In Patch 08 "latter" should be "later", fix it and restructure the next paragrah
+      removing "Finally"
 
- Documentation/virt/kvm/timekeeping.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+To help review, I've put a compiled html version here: 
+http://linux-docs.54fox.com/linux_docs/filesystems/path-lookup-v2.html
 
-diff --git a/Documentation/virt/kvm/timekeeping.rst b/Documentation/virt/kvm/timekeeping.rst
-index 21ae7efa29ba..932d7f7d1ece 100644
---- a/Documentation/virt/kvm/timekeeping.rst
-+++ b/Documentation/virt/kvm/timekeeping.rst
-@@ -299,7 +299,7 @@ device.
 
- The HPET spec is rather loose and vague, requiring at least 3 hardware timers,
- but allowing implementation freedom to support many more.  It also imposes no
--fixed rate on the timer frequency, but does impose some extremal values on
-+fixed rate on the timer frequency, but does impose some external values on
- frequency, error and slew.
+Fox Chen (12):
+  docs: path-lookup: update follow_managed() part
+  docs: path-lookup: update path_to_nameidata() part
+  docs: path-lookup: update path_mountpoint() part
+  docs: path-lookup: update do_last() part
+  docs: path-lookup: remove filename_mountpoint
+  docs: path-lookup: Add macro name to symlink limit description
+  docs: path-lookup: i_op->follow_link replaced with i_op->get_link
+  docs: path-lookup: update i_op->put_link and cookie description
+  docs: path-lookup: no get_link()
+  docs: path-lookup: update WALK_GET, WALK_PUT desc
+  docs: path-lookup: update get_link() ->follow_link description
+  docs: path-lookup: update symlink description
 
- In general, the HPET is recommended as a high precision (compared to PIT /RTC)
---
+ Documentation/filesystems/path-lookup.rst | 164 ++++++++++------------
+ 1 file changed, 71 insertions(+), 93 deletions(-)
+
+-- 
 2.30.2
 
