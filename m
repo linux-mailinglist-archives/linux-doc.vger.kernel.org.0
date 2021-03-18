@@ -2,226 +2,127 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ACF95340352
-	for <lists+linux-doc@lfdr.de>; Thu, 18 Mar 2021 11:30:32 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0B508340388
+	for <lists+linux-doc@lfdr.de>; Thu, 18 Mar 2021 11:39:59 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230101AbhCRK35 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 18 Mar 2021 06:29:57 -0400
-Received: from mx2.suse.de ([195.135.220.15]:46084 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S230142AbhCRK3c (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 18 Mar 2021 06:29:32 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 7F6D6AC75;
-        Thu, 18 Mar 2021 10:29:31 +0000 (UTC)
-From:   Thomas Zimmermann <tzimmermann@suse.de>
-To:     daniel@ffwll.ch, airlied@linux.ie,
-        maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-        kraxel@redhat.com, corbet@lwn.net, lgirdwood@gmail.com,
-        broonie@kernel.org, sam@ravnborg.org, robh@kernel.org,
-        emil.l.velikov@gmail.com, geert+renesas@glider.be,
-        hdegoede@redhat.com, bluescreen_avenger@verizon.net
-Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        virtualization@lists.linux-foundation.org,
-        Thomas Zimmermann <tzimmermann@suse.de>
-Subject: [PATCH v2 10/10] drm/simpledrm: Acquire memory aperture for framebuffer
-Date:   Thu, 18 Mar 2021 11:29:21 +0100
-Message-Id: <20210318102921.21536-11-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.30.1
-In-Reply-To: <20210318102921.21536-1-tzimmermann@suse.de>
-References: <20210318102921.21536-1-tzimmermann@suse.de>
+        id S230106AbhCRKjZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 18 Mar 2021 06:39:25 -0400
+Received: from mail-vs1-f50.google.com ([209.85.217.50]:40612 "EHLO
+        mail-vs1-f50.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230094AbhCRKjT (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 18 Mar 2021 06:39:19 -0400
+Received: by mail-vs1-f50.google.com with SMTP id l4so1260496vsc.7
+        for <linux-doc@vger.kernel.org>; Thu, 18 Mar 2021 03:39:19 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=tAvzu8nz5iln6WgpiSW86z6S3Eft+tfyr3DeEjUUSh8=;
+        b=k3wEmRBiSHmqdvT1QxLdAhoUDT/77wkvMAcZzDurHsx1lJHYY8pHxBO8twyMELRH+/
+         C0/FKOD2N3OJWhhx71NHO8ayvYrbrNaDWFXpFOGQ9DpKbbq6HrKeP+Kd4gd4hBaIVHVs
+         HwEVDQHG1aSWswRgqlBXVozTJT0AIx4iONWP65y2ieY3iHqY0mn1luzpAUun+3dWAYhT
+         E6u1EEKn2+c50QO2MuByhT0SsWAb8luCPRGjhJ6+N0YDFBvFiJ8wXP56wnWBBwQMt8qk
+         IgLfduzft2hwvWEV7yc2j22yao66mqmz2+gYYd3FKR9NPt0FFxZoXd/zHCzs7V7GQV9H
+         EsVw==
+X-Gm-Message-State: AOAM531nvc2SiB47cVXTtythKuDPDu4NQ4QnzVhiQY7yqgPuSWVVf1E2
+        kBED95xkZy/PegESv/AGREmbLF6DwbhgWv/fagU=
+X-Google-Smtp-Source: ABdhPJyLRkuI65bcr5OT1r++d1vw1tuL9YMffz3SQ5rZYOlZEhaTfC7OjKL8YtBiPs1j+K6eLMB172cH0IogWEpFT0k=
+X-Received: by 2002:a67:ef0e:: with SMTP id j14mr5704768vsr.40.1616063958823;
+ Thu, 18 Mar 2021 03:39:18 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <20210318102921.21536-1-tzimmermann@suse.de> <20210318102921.21536-9-tzimmermann@suse.de>
+In-Reply-To: <20210318102921.21536-9-tzimmermann@suse.de>
+From:   Geert Uytterhoeven <geert@linux-m68k.org>
+Date:   Thu, 18 Mar 2021 11:39:07 +0100
+Message-ID: <CAMuHMdVa6hw89zr5nRFaKG0sZYLXdTOktGN7pU2LiAPPbsHEdw@mail.gmail.com>
+Subject: Re: [PATCH v2 08/10] drm/simpledrm: Acquire clocks from DT device node
+To:     Thomas Zimmermann <tzimmermann@suse.de>
+Cc:     Daniel Vetter <daniel@ffwll.ch>, David Airlie <airlied@linux.ie>,
+        Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+        Maxime Ripard <mripard@kernel.org>,
+        Gerd Hoffmann <kraxel@redhat.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Liam Girdwood <lgirdwood@gmail.com>,
+        Mark Brown <broonie@kernel.org>,
+        Sam Ravnborg <sam@ravnborg.org>, Rob Herring <robh@kernel.org>,
+        Emil Velikov <emil.l.velikov@gmail.com>,
+        Hans de Goede <hdegoede@redhat.com>,
+        bluescreen_avenger@verizon.net,
+        DRI Development <dri-devel@lists.freedesktop.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        virtualization@lists.linux-foundation.org
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-We register the simplekms device with the DRM platform helpers. A
-native driver for the graphics hardware will kick-out the simpledrm
-driver before taking over the device.
+Hi Thomas,
 
-v2:
-	* adapt to aperture changes
-	* use drm_dev_unplug() and drm_dev_enter/exit()
-	* don't split error string
+On Thu, Mar 18, 2021 at 11:29 AM Thomas Zimmermann <tzimmermann@suse.de> wrote:
+> Make sure required hardware clocks are enabled while the firmware
+> framebuffer is in use.
+>
+> The basic code has been taken from the simplefb driver and adapted
+> to DRM. Clocks are released automatically via devres helpers.
+>
+> Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
+> Tested-by: nerdopolis <bluescreen_avenger@verizon.net>
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Tested-by: nerdopolis <bluescreen_avenger@verizon.net>
----
- drivers/gpu/drm/tiny/Kconfig     |  1 +
- drivers/gpu/drm/tiny/simpledrm.c | 83 ++++++++++++++++++++++++++++++--
- 2 files changed, 81 insertions(+), 3 deletions(-)
+Thanks for your patch!
 
-diff --git a/drivers/gpu/drm/tiny/Kconfig b/drivers/gpu/drm/tiny/Kconfig
-index d46f95d9196d..5b72dd8e93f9 100644
---- a/drivers/gpu/drm/tiny/Kconfig
-+++ b/drivers/gpu/drm/tiny/Kconfig
-@@ -41,6 +41,7 @@ config DRM_GM12U320
- config DRM_SIMPLEDRM
- 	tristate "Simple framebuffer driver"
- 	depends on DRM
-+	select DRM_APERTURE
- 	select DRM_GEM_SHMEM_HELPER
- 	select DRM_KMS_HELPER
- 	help
-diff --git a/drivers/gpu/drm/tiny/simpledrm.c b/drivers/gpu/drm/tiny/simpledrm.c
-index 2e27eeb791a1..67d33af19086 100644
---- a/drivers/gpu/drm/tiny/simpledrm.c
-+++ b/drivers/gpu/drm/tiny/simpledrm.c
-@@ -5,7 +5,9 @@
- #include <linux/platform_data/simplefb.h>
- #include <linux/platform_device.h>
- #include <linux/regulator/consumer.h>
-+#include <linux/spinlock.h>
- 
-+#include <drm/drm_aperture.h>
- #include <drm/drm_atomic_state_helper.h>
- #include <drm/drm_connector.h>
- #include <drm/drm_damage_helper.h>
-@@ -37,6 +39,12 @@
- #define SIMPLEDRM_MODE(hd, vd)	\
- 	DRM_SIMPLE_MODE(hd, vd, RES_MM(hd), RES_MM(vd))
- 
-+/*
-+ * Protects the platform device's drvdata against
-+ * concurrent manipulation.
-+ */
-+static DEFINE_SPINLOCK(simpledrm_drvdata_lock);
-+
- /*
-  * Helpers for simplefb
-  */
-@@ -515,16 +523,53 @@ static int simpledrm_device_init_fb(struct simpledrm_device *sdev)
-  * Memory management
-  */
- 
-+static void simpledrm_aperture_detach(struct drm_device *dev, resource_size_t base,
-+				      resource_size_t size)
-+{
-+	struct simpledrm_device *sdev = simpledrm_device_of_dev(dev);
-+	struct platform_device *pdev = sdev->pdev;
-+
-+	if (WARN_ON(drm_dev_is_unplugged(dev)))
-+		return; /* BUG: driver already got detached */
-+
-+	/*
-+	 * If simpledrm gets detached from the aperture, it's like unplugging
-+	 * the device. So call drm_dev_unplug().
-+	 */
-+	drm_dev_unplug(dev);
-+
-+	spin_lock(&simpledrm_drvdata_lock);
-+	sdev = platform_get_drvdata(pdev);
-+	platform_set_drvdata(pdev, NULL); /* required; see simpledrm_remove() */
-+	spin_unlock(&simpledrm_drvdata_lock);
-+}
-+
-+static const struct drm_aperture_funcs simpledrm_aperture_funcs = {
-+	.detach = simpledrm_aperture_detach,
-+};
-+
- static int simpledrm_device_init_mm(struct simpledrm_device *sdev)
- {
-+	struct drm_device *dev = &sdev->dev;
- 	struct platform_device *pdev = sdev->pdev;
- 	struct resource *mem;
-+	struct drm_aperture *ap;
- 	void __iomem *screen_base;
-+	int ret;
- 
- 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
- 	if (!mem)
- 		return -EINVAL;
- 
-+	ap = devm_aperture_acquire(dev, mem->start, resource_size(mem),
-+				   &simpledrm_aperture_funcs);
-+	if (IS_ERR(ap)) {
-+		ret = PTR_ERR(ap);
-+		drm_err(dev, "could not acquire memory range [0x%llx:0x%llx]: error %d\n",
-+			mem->start, mem->end, ret);
-+		return ret;
-+	}
-+
- 	screen_base = devm_ioremap_wc(&pdev->dev, mem->start,
- 				      resource_size(mem));
- 	if (!screen_base)
-@@ -625,12 +670,18 @@ simpledrm_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
- 	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
- 	struct drm_framebuffer *fb = plane_state->fb;
- 	void *vmap = shadow_plane_state->map[0].vaddr; /* TODO: Use mapping abstraction properly */
-+	struct drm_device *dev = &sdev->dev;
-+	int idx;
- 
- 	if (!fb)
- 		return;
- 
-+	if (!drm_dev_enter(dev, &idx))
-+		return;
-+
- 	drm_fb_blit_dstclip(sdev->screen_base, sdev->pitch,
- 			    sdev->format->format, vmap, fb);
-+	drm_dev_exit(idx);
- }
- 
- static void
-@@ -642,7 +693,9 @@ simpledrm_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
- 	void *vmap = shadow_plane_state->map[0].vaddr; /* TODO: Use mapping abstraction properly */
- 	struct drm_framebuffer *fb = plane_state->fb;
-+	struct drm_device *dev = &sdev->dev;
- 	struct drm_rect clip;
-+	int idx;
- 
- 	if (!fb)
- 		return;
-@@ -650,8 +703,13 @@ simpledrm_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 	if (!drm_atomic_helper_damage_merged(old_plane_state, plane_state, &clip))
- 		return;
- 
-+	if (!drm_dev_enter(dev, &idx))
-+		return;
-+
- 	drm_fb_blit_rect_dstclip(sdev->screen_base, sdev->pitch,
- 				 sdev->format->format, vmap, fb, &clip);
-+
-+	drm_dev_exit(idx);
- }
- 
- static const struct drm_simple_display_pipe_funcs
-@@ -826,10 +884,29 @@ static int simpledrm_probe(struct platform_device *pdev)
- 
- static int simpledrm_remove(struct platform_device *pdev)
- {
--	struct simpledrm_device *sdev = platform_get_drvdata(pdev);
--	struct drm_device *dev = &sdev->dev;
-+	struct simpledrm_device *sdev;
-+
-+	spin_lock(&simpledrm_drvdata_lock);
-+	sdev = platform_get_drvdata(pdev);
-+	platform_set_drvdata(pdev, NULL);
-+	spin_unlock(&simpledrm_drvdata_lock);
-+
-+	/*
-+	 * The platform driver shares its reference to dev with the
-+	 * platform helpers for apertures. That reference is either
-+	 * released here when unloading the driver; or it's released
-+	 * when the driver gets kicked out by another driver. In the
-+	 * latter case, the aperture release routine clears the data
-+	 * field of the platform device.
-+	 *
-+	 * Therefore, sdev being NULL is a valid state if the driver
-+	 * has been kicked out by another DRM driver. In this case,
-+	 * it's all been cleaned up and we can return immediately.
-+	 */
-+	if (!sdev)
-+		return 0;
- 
--	drm_dev_unregister(dev);
-+	drm_dev_unplug(&sdev->dev);
- 
- 	return 0;
- }
+> --- a/drivers/gpu/drm/tiny/simpledrm.c
+> +++ b/drivers/gpu/drm/tiny/simpledrm.c
+
+> +static int simpledrm_device_init_clocks(struct simpledrm_device *sdev)
+> +{
+> +       struct drm_device *dev = &sdev->dev;
+> +       struct platform_device *pdev = sdev->pdev;
+> +       struct device_node *of_node = pdev->dev.of_node;
+> +       struct clk *clock;
+> +       unsigned int i;
+> +       int ret;
+> +
+> +       if (dev_get_platdata(&pdev->dev) || !of_node)
+> +               return 0;
+> +
+> +       sdev->clk_count = of_clk_get_parent_count(of_node);
+> +       if (!sdev->clk_count)
+> +               return 0;
+> +
+> +       sdev->clks = drmm_kzalloc(dev, sdev->clk_count * sizeof(sdev->clks[0]),
+> +                                 GFP_KERNEL);
+> +       if (!sdev->clks)
+> +               return -ENOMEM;
+> +
+> +       for (i = 0; i < sdev->clk_count; ++i) {
+> +               clock = of_clk_get(of_node, i);
+> +               if (IS_ERR(clock)) {
+> +                       ret = PTR_ERR(clock);
+> +                       if (ret == -EPROBE_DEFER)
+> +                               goto err;
+> +                       drm_err(dev, "clock %u not found: %d\n", i, ret);
+> +                       continue;
+> +               }
+> +               ret = clk_prepare_enable(clock);
+> +               if (ret) {
+> +                       drm_err(dev, "failed to enable clock %u: %d\n",
+> +                               i, ret);
+> +                       clk_put(clock);
+> +               }
+> +               sdev->clks[i] = clock;
+> +       }
+
+of_clk_bulk_get_all() + clk_bulk_prepare_enable()?
+
+There's also devm_clk_bulk_get_all(), but not for the OF variant.
+
+Gr{oetje,eeting}s,
+
+                        Geert
+
 -- 
-2.30.1
+Geert Uytterhoeven -- There's lots of Linux beyond ia32 -- geert@linux-m68k.org
 
+In personal conversations with technical people, I call myself a hacker. But
+when I'm talking to journalists I just say "programmer" or something like that.
+                                -- Linus Torvalds
