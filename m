@@ -2,19 +2,19 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 4B6BE34034E
+	by mail.lfdr.de (Postfix) with ESMTP id 9793434034F
 	for <lists+linux-doc@lfdr.de>; Thu, 18 Mar 2021 11:30:31 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230001AbhCRK34 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        id S229890AbhCRK34 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
         Thu, 18 Mar 2021 06:29:56 -0400
-Received: from mx2.suse.de ([195.135.220.15]:45988 "EHLO mx2.suse.de"
+Received: from mx2.suse.de ([195.135.220.15]:46038 "EHLO mx2.suse.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229948AbhCRK30 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 18 Mar 2021 06:29:26 -0400
+        id S230001AbhCRK31 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 18 Mar 2021 06:29:27 -0400
 X-Virus-Scanned: by amavisd-new at test-mx.suse.de
 Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 814CCAD77;
-        Thu, 18 Mar 2021 10:29:25 +0000 (UTC)
+        by mx2.suse.de (Postfix) with ESMTP id 3E05AAC1E;
+        Thu, 18 Mar 2021 10:29:26 +0000 (UTC)
 From:   Thomas Zimmermann <tzimmermann@suse.de>
 To:     daniel@ffwll.ch, airlied@linux.ie,
         maarten.lankhorst@linux.intel.com, mripard@kernel.org,
@@ -24,11 +24,10 @@ To:     daniel@ffwll.ch, airlied@linux.ie,
         hdegoede@redhat.com, bluescreen_avenger@verizon.net
 Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
         virtualization@lists.linux-foundation.org,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: [PATCH v2 02/10] drm/format-helper: Add blitter functions
-Date:   Thu, 18 Mar 2021 11:29:13 +0100
-Message-Id: <20210318102921.21536-3-tzimmermann@suse.de>
+        Thomas Zimmermann <tzimmermann@suse.de>
+Subject: [PATCH v2 03/10] drm/aperture: Move fbdev conflict helpers into drm_aperture.h
+Date:   Thu, 18 Mar 2021 11:29:14 +0100
+Message-Id: <20210318102921.21536-4-tzimmermann@suse.de>
 X-Mailer: git-send-email 2.30.1
 In-Reply-To: <20210318102921.21536-1-tzimmermann@suse.de>
 References: <20210318102921.21536-1-tzimmermann@suse.de>
@@ -38,129 +37,179 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The blitter functions copy a framebuffer to I/O memory using one of
-the existing conversion functions.
+Fbdev's helpers for handling conflicting framebuffers are related to
+framebuffer apertures, not console emulation. Therefore move them into a
+drm_aperture.h, which will contain the interfaces for the new aperture
+helpers.
 
 Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Reviewed-by: Daniel Vetter <daniel.vetter@ffwll.ch>
 Tested-by: nerdopolis <bluescreen_avenger@verizon.net>
 ---
- drivers/gpu/drm/drm_format_helper.c | 87 +++++++++++++++++++++++++++++
- include/drm/drm_format_helper.h     |  8 +++
- 2 files changed, 95 insertions(+)
+ Documentation/gpu/drm-internals.rst |  6 +++
+ include/drm/drm_aperture.h          | 60 +++++++++++++++++++++++++++++
+ include/drm/drm_fb_helper.h         | 56 ++-------------------------
+ 3 files changed, 69 insertions(+), 53 deletions(-)
+ create mode 100644 include/drm/drm_aperture.h
 
-diff --git a/drivers/gpu/drm/drm_format_helper.c b/drivers/gpu/drm/drm_format_helper.c
-index 8d5a683afea7..0e885cd34107 100644
---- a/drivers/gpu/drm/drm_format_helper.c
-+++ b/drivers/gpu/drm/drm_format_helper.c
-@@ -344,3 +344,90 @@ void drm_fb_xrgb8888_to_gray8(u8 *dst, void *vaddr, struct drm_framebuffer *fb,
- }
- EXPORT_SYMBOL(drm_fb_xrgb8888_to_gray8);
+diff --git a/Documentation/gpu/drm-internals.rst b/Documentation/gpu/drm-internals.rst
+index 12272b168580..4c7642d2ca34 100644
+--- a/Documentation/gpu/drm-internals.rst
++++ b/Documentation/gpu/drm-internals.rst
+@@ -75,6 +75,12 @@ update it, its value is mostly useless. The DRM core prints it to the
+ kernel log at initialization time and passes it to userspace through the
+ DRM_IOCTL_VERSION ioctl.
  
-+/**
-+ * drm_fb_blit_rect_dstclip - Copy parts of a framebuffer to display memory
-+ * @dst:	The display memory to copy to
-+ * @dst_pitch:	Number of bytes between two consecutive scanlines within dst
-+ * @dst_format:	FOURCC code of the display's color format
-+ * @vmap:	The framebuffer memory to copy from
-+ * @fb:		The framebuffer to copy from
-+ * @clip:	Clip rectangle area to copy
-+ *
-+ * This function copies parts of a framebuffer to display memory. If the
-+ * formats of the display and the framebuffer mismatch, the blit function
-+ * will attempt to convert between them.
-+ *
-+ * Use drm_fb_blit_dstclip() to copy the full framebuffer.
-+ *
-+ * Returns:
-+ * 0 on success, or
-+ * -EINVAL if the color-format conversion failed, or
-+ * a negative error code otherwise.
-+ */
-+int drm_fb_blit_rect_dstclip(void __iomem *dst, unsigned int dst_pitch,
-+			     uint32_t dst_format, void *vmap,
-+			     struct drm_framebuffer *fb,
-+			     struct drm_rect *clip)
-+{
-+	uint32_t fb_format = fb->format->format;
++Managing Ownership of the Framebuffer Aperture
++----------------------------------------------
 +
-+	/* treat alpha channel like filler bits */
-+	if (fb_format == DRM_FORMAT_ARGB8888)
-+		fb_format = DRM_FORMAT_XRGB8888;
-+	if (dst_format == DRM_FORMAT_ARGB8888)
-+		dst_format = DRM_FORMAT_XRGB8888;
++.. kernel-doc:: include/drm/drm_aperture.h
++   :internal:
 +
-+	if (dst_format == fb_format) {
-+		drm_fb_memcpy_dstclip(dst, dst_pitch, vmap, fb, clip);
-+		return 0;
+ Device Instance and Driver Handling
+ -----------------------------------
+ 
+diff --git a/include/drm/drm_aperture.h b/include/drm/drm_aperture.h
+new file mode 100644
+index 000000000000..13766efe9517
+--- /dev/null
++++ b/include/drm/drm_aperture.h
+@@ -0,0 +1,60 @@
++/* SPDX-License-Identifier: MIT */
 +
-+	} else if (dst_format == DRM_FORMAT_RGB565) {
-+		if (fb_format == DRM_FORMAT_XRGB8888) {
-+			drm_fb_xrgb8888_to_rgb565_dstclip(dst, dst_pitch,
-+							  vmap, fb, clip,
-+							  false);
-+			return 0;
-+		}
-+	} else if (dst_format == DRM_FORMAT_RGB888) {
-+		if (fb_format == DRM_FORMAT_XRGB8888) {
-+			drm_fb_xrgb8888_to_rgb888_dstclip(dst, dst_pitch,
-+							  vmap, fb, clip);
-+			return 0;
-+		}
-+	}
++#ifndef _DRM_APERTURE_H_
++#define _DRM_APERTURE_H_
 +
-+	return -EINVAL;
-+}
-+EXPORT_SYMBOL(drm_fb_blit_rect_dstclip);
++#include <linux/fb.h>
++#include <linux/vgaarb.h>
 +
 +/**
-+ * drm_fb_blit_dstclip - Copy framebuffer to display memory
-+ * @dst:	The display memory to copy to
-+ * @dst_pitch:	Number of bytes between two consecutive scanlines within dst
-+ * @dst_format:	FOURCC code of the display's color format
-+ * @vmap:	The framebuffer memory to copy from
-+ * @fb:		The framebuffer to copy from
++ * drm_fb_helper_remove_conflicting_framebuffers - remove firmware-configured framebuffers
++ * @a: memory range, users of which are to be removed
++ * @name: requesting driver name
++ * @primary: also kick vga16fb if present
 + *
-+ * This function copies a full framebuffer to display memory. If the formats
-+ * of the display and the framebuffer mismatch, the copy function will
-+ * attempt to convert between them.
-+ *
-+ * See drm_fb_blit_rect_dstclip() for more inforamtion.
-+ *
-+ * Returns:
-+ * 0 on success, or a negative error code otherwise.
++ * This function removes framebuffer devices (initialized by firmware/bootloader)
++ * which use memory range described by @a. If @a is NULL all such devices are
++ * removed.
 + */
-+int drm_fb_blit_dstclip(void __iomem *dst, unsigned int dst_pitch,
-+			uint32_t dst_format, void *vmap,
-+			struct drm_framebuffer *fb)
++static inline int
++drm_fb_helper_remove_conflicting_framebuffers(struct apertures_struct *a,
++					      const char *name, bool primary)
 +{
-+	struct drm_rect fullscreen = {
-+		.x1 = 0,
-+		.x2 = fb->width,
-+		.y1 = 0,
-+		.y2 = fb->height,
-+	};
-+	return drm_fb_blit_rect_dstclip(dst, dst_pitch, dst_format, vmap, fb,
-+					&fullscreen);
++#if IS_REACHABLE(CONFIG_FB)
++	return remove_conflicting_framebuffers(a, name, primary);
++#else
++	return 0;
++#endif
 +}
-+EXPORT_SYMBOL(drm_fb_blit_dstclip);
-diff --git a/include/drm/drm_format_helper.h b/include/drm/drm_format_helper.h
-index 2b5036a5fbe7..4e0258a61311 100644
---- a/include/drm/drm_format_helper.h
-+++ b/include/drm/drm_format_helper.h
-@@ -28,4 +28,12 @@ void drm_fb_xrgb8888_to_rgb888_dstclip(void __iomem *dst, unsigned int dst_pitch
- void drm_fb_xrgb8888_to_gray8(u8 *dst, void *vaddr, struct drm_framebuffer *fb,
- 			      struct drm_rect *clip);
- 
-+int drm_fb_blit_rect_dstclip(void __iomem *dst, unsigned int dst_pitch,
-+			     uint32_t dst_format, void *vmap,
-+			     struct drm_framebuffer *fb,
-+			     struct drm_rect *rect);
-+int drm_fb_blit_dstclip(void __iomem *dst, unsigned int dst_pitch,
-+			uint32_t dst_format, void *vmap,
-+			struct drm_framebuffer *fb);
 +
- #endif /* __LINUX_DRM_FORMAT_HELPER_H */
++/**
++ * drm_fb_helper_remove_conflicting_pci_framebuffers - remove firmware-configured
++ *                                                     framebuffers for PCI devices
++ * @pdev: PCI device
++ * @name: requesting driver name
++ *
++ * This function removes framebuffer devices (eg. initialized by firmware)
++ * using memory range configured for any of @pdev's memory bars.
++ *
++ * The function assumes that PCI device with shadowed ROM drives a primary
++ * display and so kicks out vga16fb.
++ */
++static inline int
++drm_fb_helper_remove_conflicting_pci_framebuffers(struct pci_dev *pdev,
++						  const char *name)
++{
++	int ret = 0;
++
++	/*
++	 * WARNING: Apparently we must kick fbdev drivers before vgacon,
++	 * otherwise the vga fbdev driver falls over.
++	 */
++#if IS_REACHABLE(CONFIG_FB)
++	ret = remove_conflicting_pci_framebuffers(pdev, name);
++#endif
++	if (ret == 0)
++		ret = vga_remove_vgacon(pdev);
++	return ret;
++}
++
++#endif
+diff --git a/include/drm/drm_fb_helper.h b/include/drm/drm_fb_helper.h
+index 3b273f9ca39a..d06a3942fddb 100644
+--- a/include/drm/drm_fb_helper.h
++++ b/include/drm/drm_fb_helper.h
+@@ -30,13 +30,13 @@
+ #ifndef DRM_FB_HELPER_H
+ #define DRM_FB_HELPER_H
+ 
+-struct drm_fb_helper;
+-
++#include <drm/drm_aperture.h>
+ #include <drm/drm_client.h>
+ #include <drm/drm_crtc.h>
+ #include <drm/drm_device.h>
+ #include <linux/kgdb.h>
+-#include <linux/vgaarb.h>
++
++struct drm_fb_helper;
+ 
+ enum mode_set_atomic {
+ 	LEAVE_ATOMIC_MODE_SET,
+@@ -451,54 +451,4 @@ drm_fbdev_generic_setup(struct drm_device *dev, unsigned int preferred_bpp)
+ 
+ #endif
+ 
+-/**
+- * drm_fb_helper_remove_conflicting_framebuffers - remove firmware-configured framebuffers
+- * @a: memory range, users of which are to be removed
+- * @name: requesting driver name
+- * @primary: also kick vga16fb if present
+- *
+- * This function removes framebuffer devices (initialized by firmware/bootloader)
+- * which use memory range described by @a. If @a is NULL all such devices are
+- * removed.
+- */
+-static inline int
+-drm_fb_helper_remove_conflicting_framebuffers(struct apertures_struct *a,
+-					      const char *name, bool primary)
+-{
+-#if IS_REACHABLE(CONFIG_FB)
+-	return remove_conflicting_framebuffers(a, name, primary);
+-#else
+-	return 0;
+-#endif
+-}
+-
+-/**
+- * drm_fb_helper_remove_conflicting_pci_framebuffers - remove firmware-configured framebuffers for PCI devices
+- * @pdev: PCI device
+- * @name: requesting driver name
+- *
+- * This function removes framebuffer devices (eg. initialized by firmware)
+- * using memory range configured for any of @pdev's memory bars.
+- *
+- * The function assumes that PCI device with shadowed ROM drives a primary
+- * display and so kicks out vga16fb.
+- */
+-static inline int
+-drm_fb_helper_remove_conflicting_pci_framebuffers(struct pci_dev *pdev,
+-						  const char *name)
+-{
+-	int ret = 0;
+-
+-	/*
+-	 * WARNING: Apparently we must kick fbdev drivers before vgacon,
+-	 * otherwise the vga fbdev driver falls over.
+-	 */
+-#if IS_REACHABLE(CONFIG_FB)
+-	ret = remove_conflicting_pci_framebuffers(pdev, name);
+-#endif
+-	if (ret == 0)
+-		ret = vga_remove_vgacon(pdev);
+-	return ret;
+-}
+-
+ #endif
 -- 
 2.30.1
 
