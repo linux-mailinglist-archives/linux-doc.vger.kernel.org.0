@@ -2,61 +2,103 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 51EF3342A4D
-	for <lists+linux-doc@lfdr.de>; Sat, 20 Mar 2021 05:05:48 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 3D921342BDE
+	for <lists+linux-doc@lfdr.de>; Sat, 20 Mar 2021 12:15:18 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229732AbhCTEFN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 20 Mar 2021 00:05:13 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:33278 "EHLO
+        id S231217AbhCTLOk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 20 Mar 2021 07:14:40 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39856 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229618AbhCTEE7 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 20 Mar 2021 00:04:59 -0400
-Received: from angie.orcam.me.uk (angie.orcam.me.uk [IPv6:2001:4190:8020::4])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTP id 37782C061761;
-        Fri, 19 Mar 2021 21:04:59 -0700 (PDT)
-Received: by angie.orcam.me.uk (Postfix, from userid 500)
-        id BAA7A92009C; Sat, 20 Mar 2021 05:04:57 +0100 (CET)
-Received: from localhost (localhost [127.0.0.1])
-        by angie.orcam.me.uk (Postfix) with ESMTP id AC6A092009B;
-        Sat, 20 Mar 2021 05:04:57 +0100 (CET)
-Date:   Sat, 20 Mar 2021 05:04:57 +0100 (CET)
-From:   "Maciej W. Rozycki" <macro@orcam.me.uk>
-To:     Christoph Hellwig <hch@lst.de>
-cc:     "David S. Miller" <davem@davemloft.net>,
-        Jens Axboe <axboe@kernel.dk>,
-        Geert Uytterhoeven <geert@linux-m68k.org>,
-        Richard Henderson <rth@twiddle.net>,
-        Ivan Kokshaysky <ink@jurassic.park.msu.ru>,
-        Matt Turner <mattst88@gmail.com>,
-        Russell King <linux@armlinux.org.uk>,
-        Thomas Bogendoerfer <tsbogend@alpha.franken.de>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        linux-ide@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-alpha@vger.kernel.org,
-        linux-arm-kernel@lists.infradead.org,
-        linux-m68k@lists.linux-m68k.org, linux-mips@vger.kernel.org,
-        linuxppc-dev@lists.ozlabs.org
-Subject: Re: [PATCH 10/10] ide: remove the legacy ide driver
-In-Reply-To: <alpine.DEB.2.21.2103200425360.21463@angie.orcam.me.uk>
-Message-ID: <alpine.DEB.2.21.2103200455410.21463@angie.orcam.me.uk>
-References: <20210318045706.200458-1-hch@lst.de> <20210318045706.200458-11-hch@lst.de> <alpine.DEB.2.21.2103200425360.21463@angie.orcam.me.uk>
-User-Agent: Alpine 2.21 (DEB 202 2017-01-01)
+        with ESMTP id S231293AbhCTLOd (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 20 Mar 2021 07:14:33 -0400
+Received: from mail-qk1-x72c.google.com (mail-qk1-x72c.google.com [IPv6:2607:f8b0:4864:20::72c])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 19BB5C061223
+        for <linux-doc@vger.kernel.org>; Sat, 20 Mar 2021 03:52:58 -0700 (PDT)
+Received: by mail-qk1-x72c.google.com with SMTP id y18so5602037qky.11
+        for <linux-doc@vger.kernel.org>; Sat, 20 Mar 2021 03:52:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=protocubo.io; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=iQYzfriQFS4iM4QGzjdYe/EwNKnei3uiMSlE8+pjoTw=;
+        b=RZJmA14Qn4LiKY6BI3f/uMh2na5/N/aCRPh1Pxn74IU5wK+LTAkUoMJs3JRXIujULC
+         uEYz54pHgXGD/0PRED95NZMQ1GKGfWgI6T8xdCn9GjVbs+r0aZ8wzyxobxh9Y/v5+b0U
+         DSNKHWZ3G0CXB8uvCQhEQz7A9Hawt7nmVwXYg0Vmix+1AKLcgUdAncZbNAOc3mY2Q0DO
+         XHky0fR4qSnNI2jxx+cWWRBdl8C+vaoNs4iS9fFjAGW5hpNDOSE/VHOku8Pqh3GXwAlq
+         xE5h4kZKOaDAiNtB7Q52OuYwI3u8kqLf9blWptjuIqRkfNNuu/AOxl0i6BPoTUuCD9So
+         NFOA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=iQYzfriQFS4iM4QGzjdYe/EwNKnei3uiMSlE8+pjoTw=;
+        b=kDrg8k0GJQqp5jg8cvyia1a9QgmZBJtgVKdncWmtTurRaoGcwKM8PD3J+VsySxi+IM
+         RS5sfWDA2ybOaDYBi6GlUxN6AeMRKUuRQFDFZ5HXzT2w0NlHCfPST9Y07/RwyTnIs5a/
+         PCoNgV0mOBJ/olERDTu8gFvXZa/zV2B9uUs7bCl8A2dhT6o4+3wKpoZzNlbRRTwEKv3T
+         hw2FylYzX/Xr/C2zIj4UsTI0b9N5+R8Wehsmc5tgdHlW7iM5CTN+5jeJA0Pv37cVGbNZ
+         BaNM7ApSlFQMOUuLOGsdEChA+/t7GEBVkdLy4KuMKnirM0f5McdNVpXDwTlS15FN6/Rn
+         rcbw==
+X-Gm-Message-State: AOAM531ywtL1BwwhXu2LqPTF4oYYXOkaLWcmDmpgFE/JqatFsviEODEj
+        pM7C5OsOmYqNVEkeniiwmr1a95ca1lt/GO5w
+X-Google-Smtp-Source: ABdhPJz1FMB/45PEuvrU181x6rcn5zNT04hOB3ou2ijZjBDr0Pz7vi5oxJeBK04ql8fXnQDDp8PZqg==
+X-Received: by 2002:aed:2ce3:: with SMTP id g90mr1873788qtd.308.1616221794679;
+        Fri, 19 Mar 2021 23:29:54 -0700 (PDT)
+Received: from calvin.localdomain ([2804:14d:5c5a:802e:bdc9:ded9:cc08:a4e9])
+        by smtp.gmail.com with ESMTPSA id p7sm6221092qkc.75.2021.03.19.23.29.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 19 Mar 2021 23:29:54 -0700 (PDT)
+Date:   Sat, 20 Mar 2021 03:29:49 -0300
+From:   Jonas Malaco <jonas@protocubo.io>
+To:     Guenter Roeck <linux@roeck-us.net>
+Cc:     linux-hwmon@vger.kernel.org, Jean Delvare <jdelvare@suse.com>,
+        linux-input@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2] hwmon: add driver for NZXT Kraken X42/X52/X62/X72
+Message-ID: <20210320062949.h2ggfmzq7lyn3zsi@calvin.localdomain>
+References: <20210319045544.416138-1-jonas@protocubo.io>
+ <20210319212640.GA23767@roeck-us.net>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20210319212640.GA23767@roeck-us.net>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sat, 20 Mar 2021, Maciej W. Rozycki wrote:
-
-> > been scheduled for removal for a while.  Finally kill it off so that we
-> > can start cleaning up various bits of cruft it forced on the block layer.
+On Fri, Mar 19, 2021 at 02:26:40PM -0700, Guenter Roeck wrote:
+> On Fri, Mar 19, 2021 at 01:55:44AM -0300, Jonas Malaco wrote:
+> > These are "all-in-one" CPU liquid coolers that can be monitored and
+> > controlled through a proprietary USB HID protocol.
+> > 
+> > While the models have differently sized radiators and come with varying
+> > numbers of fans, they are all indistinguishable at the software level.
+> > 
+> > The driver exposes fan/pump speeds and coolant temperature through the
+> > standard hwmon sysfs interface.
+> > 
+> > Fan and pump control, while supported by the devices, are not currently
+> > exposed.  The firmware accepts up to 61 trip points per channel
+> > (fan/pump), but the same set of trip temperatures has to be maintained
+> > for both; with pwmX_auto_point_Y_temp attributes, users would need to
+> > maintain this invariant themselves.
+> > 
+> > Instead, fan and pump control, as well as LED control (which the device
+> > also supports for 9 addressable RGB LEDs on the CPU water block) are
+> > left for existing and already mature user-space tools, which can still
+> > be used alongside the driver, thanks to hidraw.  A link to one, which I
+> > also maintain, is provided in the documentation.
+> > 
+> > The implementation is based on USB traffic analysis.  It has been
+> > runtime tested on x86_64, both as a built-in driver and as a module.
+> > 
+> > Signed-off-by: Jonas Malaco <jonas@protocubo.io>
 > 
->  You need to adjust Documentation/admin-guide/kernel-parameters.txt too, 
-> i.e. remove all the `ide*' options, possibly more (I haven't checked in 
-> detail).
+> Applied (after removing the now unnecessary spinlock.h include).
 
- And also Documentation/ide/ide.rst.  Also do we have all the necessary 
-`hdparm' features supported in libata nowadays for PATA devices?
+Thanks for catching/fixing that.
 
-  Maciej
+Jonas
+
+> 
+> Thanks,
+> Guenter
