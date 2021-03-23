@@ -2,222 +2,462 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B064C3464AD
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Mar 2021 17:16:04 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 0977B3464AF
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Mar 2021 17:16:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233001AbhCWQPb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Mar 2021 12:15:31 -0400
-Received: from mail-mw2nam10on2048.outbound.protection.outlook.com ([40.107.94.48]:9569
-        "EHLO NAM10-MW2-obe.outbound.protection.outlook.com"
+        id S233115AbhCWQPc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Mar 2021 12:15:32 -0400
+Received: from mail-co1nam11on2068.outbound.protection.outlook.com ([40.107.220.68]:19553
+        "EHLO NAM11-CO1-obe.outbound.protection.outlook.com"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S233118AbhCWQPL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Tue, 23 Mar 2021 12:15:11 -0400
+        id S233159AbhCWQPT (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 23 Mar 2021 12:15:19 -0400
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=mq9tEAE9lyh4rvIZd4hkjyJ5vpCalmKWket4r+G0S5VCPwEs5mO6TekYUUV/A76svplRaCGnFeHrrGuDidY2USeBrdtE8KdetazoKQpVg3COIG8FeiHZuGOwW220UKreUfQOaRIY3AoqtCOuOUAN/onJ+dJWxfyjr6XQx3UP0s3OpYIlz38xyzYX4u1PYce48d0vNZbJOtWTner+92wGYERJb0n1XbVMU1jnZqLjggkQ95DTO+O7q6ZDkIsFBTij65QF1oPJLwS7RW5LWGjaNJJm5cFl44dFld2NUOMwmT+zWvASGa9wFYm/GmjhTXg2sCyCtP9+GFNZDEJ+Ve8PTw==
+ b=Ns1rs91FtesS24C27g4Xv1EjBkppLeBPAJA/Eq2iaiWSjy2InDe2HXNCWTv7LOCOAENLaTlaQvZzwI3YkuwJ6VwgJRgLDxLlNg06ETTdAYxWkvfSb5pXErzIwFrmZ5wfrXnxkScgk61D0jRTe21yX2yvemI3WfZY2BVYcDSNNT5Qp1iJoybGIPk0pIuopV+ALA29RzfSE7D0iKdorCTOOWcHRXDNOM0HU4VUlgaj8vFzJx5uAOd05o5mu2aJD2VkYfDmY5YkyRoSO538cbSnM+oM5/0xkzg4V7joX+XVlMogowkuEczhosnR4pWjlvXG/siS5FdVrNJYIw6lnqb7Iw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector9901;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jPMesbtEJoef/OEF6aKiGz53e7AWyoPvfx/uKZplaHM=;
- b=hadnfrvGaWA44J53qmfyv6W8umw3Id68U9CJINv0LfXmCNqdXt1/EKM/Fs8cG0Q1xVOdAcjiGP/vhNCxmRpYvmiR8MNoXR1K3LT+3GaIpmC0hSrGT8t7xCT5NIdFdvAAXsvvDJH1gSv26MV2+pLWeaMtw1OCt+JGvKO/+SbUerbl4KetkiJiwxM88uwj8qgRQ9XZZ30zfMzaPqVyvAGbnGaL74qeULFZP7ve38QRNEIjdFH6wvzNUNc5Z95mzxvhHL6MlL9CmCgqNxjLkPbUmtvNBJ3VoY48wCbzJ6m61j3CRVdYseXzyFtD2lEk8b4epRGdsv170fGxer4E2o6bHw==
+ bh=+xPBC3xPaI8fc+7REGhZLu3AHPQyC6odvVGpV0xzeNo=;
+ b=LItbQZVVUb9h3z+/R+vMJ5OkkWBsOKwOYBDXAORCWpU9HQK0JV+DLilNk54deeYXK+eoCHrkM+CnmBL42mkkai7GvZacBPLF1suWexURlUzwLPwzGC6fJpecLQuVcEuOwSlZpg4Ytl1soX71LTW1+kCTYDi+TBIh76pjrNIossEbW1BmCrA5fZGRLgOheu7gk9XREDKTgbJmcPiGpc3F3/pkoWf4vHjyG7glX8auZjYG1VbsG0Z2YZht++DECDf5XfDwMzZDHy67rGk3aHDNBDeKzrwTuT8RefvuJFn95AyKBmo+C3ZDra/6xfi8HQQygbRsWsyYc6oRZWkaeqXvgQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
  dkim=pass header.d=nvidia.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
  s=selector2;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jPMesbtEJoef/OEF6aKiGz53e7AWyoPvfx/uKZplaHM=;
- b=Tpp0NW1DuhiHWUOTnNs74CPLc4lKuNHLlqEgb+l/fyUi2Jg6vosYxgetmCXp0zh6kwzo1Mt3hUEmkvWQqWOwIMr1O8sxSVqYxQ2v32m78dL+xvr6tppmNxTq725IGg2HjPqSB3BwMJEY+XSnYBciA7n/HA1CUtj5DUZEVGh4mZMzjrnr7ljJES8HUeVHfO+NEM7cAr4Gb0TJ+TAhwar2WjyrHBFXvK3cMnvdwnXX6UT3mMp2PBXMPzx7bctYBcwT+/E4YRD9M5EEKTvBSFWRUvYxE3v5b0tfFh2SczkKG+aL1q2kNvhXCbOtgzN/oAuq9C2U9sSa2upEA88ZSYvnUA==
+ bh=+xPBC3xPaI8fc+7REGhZLu3AHPQyC6odvVGpV0xzeNo=;
+ b=JA7QU/g5XBtxia12dDlvaCxo+TBfTvB01z7aWxPSfKVrQy00PX5IvxqRk8+UJxmmRy5eChcDodAC69F6/Xcj2SokyqYr7UJ83NPfdSDLrYrd7PWEbZQ8jGDoZpBNRnG3Nxn2qviUxjfMOVUC4cocq2nWI7tXYqKwRwNBw1GP9J5SLhOYazUIWUjCa2nPWt7IobAbR03561Zva2FYEuQD9YfNRugmYGQAYXijq/QWoxKFQncO9kliP6t1/EfL0xOg7fycQqkJ0rHeOFxs1m9qCZVxmz1o6tAoVKMTOvbzXyl2D32p9ZfMjHN64cR5x74Cn4763dsQNvUxGauTG4eT+w==
 Authentication-Results: redhat.com; dkim=none (message not signed)
  header.d=none;redhat.com; dmarc=none action=none header.from=nvidia.com;
 Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
- by DM5PR12MB2440.namprd12.prod.outlook.com (2603:10b6:4:b6::39) with
+ by DM6PR12MB4267.namprd12.prod.outlook.com (2603:10b6:5:21e::16) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3933.32; Tue, 23 Mar
- 2021 16:15:08 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.24; Tue, 23 Mar
+ 2021 16:15:13 +0000
 Received: from DM6PR12MB3834.namprd12.prod.outlook.com
  ([fe80::1c62:7fa3:617b:ab87]) by DM6PR12MB3834.namprd12.prod.outlook.com
  ([fe80::1c62:7fa3:617b:ab87%6]) with mapi id 15.20.3955.027; Tue, 23 Mar 2021
- 16:15:08 +0000
+ 16:15:13 +0000
 From:   Jason Gunthorpe <jgg@nvidia.com>
 To:     Alex Williamson <alex.williamson@redhat.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Diana Craciun <diana.craciun@oss.nxp.com>,
-        Eric Auger <eric.auger@redhat.com>, kvm@vger.kernel.org,
-        Kirti Wankhede <kwankhede@nvidia.com>,
+        Jonathan Corbet <corbet@lwn.net>, kvm@vger.kernel.org,
         linux-doc@vger.kernel.org
 Cc:     "Raj, Ashok" <ashok.raj@intel.com>,
-        Bharat Bhushan <Bharat.Bhushan@nxp.com>,
-        Christian Ehrhardt <christian.ehrhardt@canonical.com>,
+        Cornelia Huck <cohuck@redhat.com>,
         Dan Williams <dan.j.williams@intel.com>,
         Daniel Vetter <daniel@ffwll.ch>,
+        Eric Auger <eric.auger@redhat.com>,
         Christoph Hellwig <hch@lst.de>,
-        Jike Song <jike.song@intel.com>,
         Kevin Tian <kevin.tian@intel.com>,
         Leon Romanovsky <leonro@nvidia.com>,
         Max Gurtovoy <mgurtovoy@nvidia.com>,
         Tarun Gupta <targupta@nvidia.com>,
-        Liu Yi L <yi.l.liu@intel.com>,
-        Zhenyu Wang <zhenyuw@linux.intel.com>,
-        Zhi Wang <zhi.a.wang@intel.com>
-Subject: [PATCH v3 00/14] Embed struct vfio_device in all sub-structures
-Date:   Tue, 23 Mar 2021 13:14:52 -0300
-Message-Id: <0-v3-225de1400dfc+4e074-vfio1_jgg@nvidia.com>
+        Liu Yi L <yi.l.liu@intel.com>
+Subject: [PATCH v3 03/14] vfio: Split creation of a vfio_device into init and register ops
+Date:   Tue, 23 Mar 2021 13:14:55 -0300
+Message-Id: <3-v3-225de1400dfc+4e074-vfio1_jgg@nvidia.com>
+In-Reply-To: <0-v3-225de1400dfc+4e074-vfio1_jgg@nvidia.com>
+References: 
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
 X-Originating-IP: [206.223.160.26]
-X-ClientProxiedBy: MN2PR19CA0019.namprd19.prod.outlook.com
- (2603:10b6:208:178::32) To DM6PR12MB3834.namprd12.prod.outlook.com
+X-ClientProxiedBy: BL1PR13CA0208.namprd13.prod.outlook.com
+ (2603:10b6:208:2be::33) To DM6PR12MB3834.namprd12.prod.outlook.com
  (2603:10b6:5:14a::12)
 MIME-Version: 1.0
 X-MS-Exchange-MessageSentRepresentingType: 1
-Received: from mlx.ziepe.ca (206.223.160.26) by MN2PR19CA0019.namprd19.prod.outlook.com (2603:10b6:208:178::32) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18 via Frontend Transport; Tue, 23 Mar 2021 16:15:07 +0000
-Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1lOjgQ-001aCM-9T; Tue, 23 Mar 2021 13:15:06 -0300
+Received: from mlx.ziepe.ca (206.223.160.26) by BL1PR13CA0208.namprd13.prod.outlook.com (2603:10b6:208:2be::33) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.14 via Frontend Transport; Tue, 23 Mar 2021 16:15:10 +0000
+Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1lOjgQ-001aCY-E9; Tue, 23 Mar 2021 13:15:06 -0300
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 22e52f60-0197-4766-02c5-08d8ee16d36f
-X-MS-TrafficTypeDiagnostic: DM5PR12MB2440:
+X-MS-Office365-Filtering-Correlation-Id: a19d3db3-8609-4dce-cb7f-08d8ee16d4d2
+X-MS-TrafficTypeDiagnostic: DM6PR12MB4267:
 X-MS-Exchange-Transport-Forked: True
-X-Microsoft-Antispam-PRVS: <DM5PR12MB2440653A003C886004198117C2649@DM5PR12MB2440.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:4714;
+X-Microsoft-Antispam-PRVS: <DM6PR12MB4267A130CA93E21A7CE1B04BC2649@DM6PR12MB4267.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:2733;
 X-MS-Exchange-SenderADCheck: 1
 X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: ulJo4HeASzBmUefh8SVlb3gATJh2nG2Mq3C2jibQ/Vl/etwKzNSGRUn2/CA/AH84ofU/0XH4coLwoyufsRsZOuvNGJljUEjSTb1RGjXAy0cb8EFHcNynrkrYfNg/LIitzbi8sQoX9ShikzFTkAzQgYCZwqB9Mdcb7zjKhsNCJpVTU4GDPKricRnFaStvhezWkt2dZeEpgsYecENGjsrfSvbpm1wm/UUIBgbpAy0zR2UikXrsI6T80U8O5wB2dyngUHl2bLJn2I45PuHY9Pw+u7DdSeb1SbOfEr9oF3/wrdLHowQEZlm7WrxKzYGGeJ2F6zEMfWLdA14T2BiNYvt/JW8iQWEDg0XbZKCy8de6/rUCju3mWg1E1BjBcOL31bIi9g1Hb9pwleAFrm149QhKw8nxlKV/mFdp7jgaIS5lRDMGvsNNeFyoetvFKSvUOSMzLPBc/Wd+y86ZQOI2o9FAD6o5ql/z8XhzgDVa9ZhE11d4e/Kig5U9eibbexFdovCxhU1aiMrs3EQv+MvMTvqy/BH3QRK9SQTU6nFVpMKLQ0+uj7xEktRHoqx/QLZoHUyFmE8/beNf/N6NjtdEcp6/e68hhSotno09h4I2zLET8uR1XT8VY3eKN9/THZae6uZLIwXltVtiOpWXwHW9ESmI18ArTODUcOWM7iWj39JLgXTOM4Vz7TL+YDxV7lXTDViCTc3d1MvmeORQ62Z/kdb71UaDDbozpk7YQl9LTxNoqupkZnJvRRspTLzgxvkdn5gcdQJiyVnuf084zTScWoXVMQ==
-X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3834.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(346002)(396003)(376002)(39860400002)(136003)(66476007)(66556008)(186003)(36756003)(966005)(6666004)(86362001)(38100700001)(66946007)(4326008)(7416002)(8936002)(54906003)(9746002)(26005)(478600001)(426003)(8676002)(9786002)(83380400001)(110136005)(2906002)(316002)(5660300002)(2616005)(4216001);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData: =?us-ascii?Q?FxyUsTzlrrUgz5lDeW1O3G+zKAIqqwCOvDTQfQbBAM8sN7XNT7QKSyP6o3G9?=
- =?us-ascii?Q?L3Bke1gxvS3ezryztU9pUNPjyKfVbNND+e3BwzDplRvxeu4p3S1MNPs8jdPP?=
- =?us-ascii?Q?d+GK1PKFdFgtZ/R26zh1HC0gPt5RXL9Ds8IJYVd8NNoByxzv7lBsIVmuxEMh?=
- =?us-ascii?Q?83wD2GwxMWEAxP0E7RAZZISTZPsjG+0S1FR/nVM/ohm5cCjuKayTVOduSjr+?=
- =?us-ascii?Q?yUleDq+qDTCvE2LwbDVDuV0NmmPsjFj6LFTWGlQPT7BUnDtcJX0kZ0Ja5piv?=
- =?us-ascii?Q?adjlxU1AmPS3ZugAF4/47YTOV1GyVZunsnALKcrCFJ3dJH5gaQ6SIS12W9Lv?=
- =?us-ascii?Q?lRMC6nKS+X1NTz4xcvot/rGsCjvQQV+NV39WAs0ly8P5USTuH6j5TBcMmAhV?=
- =?us-ascii?Q?rQPstQNpHDnyskqdb51uhQRQ8CYjHbbFeQyy0P8F64xBa/TeMvp/DYaBUjwF?=
- =?us-ascii?Q?/rqkrR8H1JS0NuIhaW8c0DQy5cPn8g3B9KSMarlRfISw9bwzVL2SEaQcF0em?=
- =?us-ascii?Q?1vuirRVRIKzXW79ir8mJWTQm0d265a7pf4WLDHszYpuy+xipnMGspU06XQeA?=
- =?us-ascii?Q?InUBsBO+uHbur4y36yIVdKf2jtIdODTy2YnG8FambgsI2KFF2LLCMgU4Fp62?=
- =?us-ascii?Q?QgcGACGGLREB6Pe+l2/u8N3HLM17ZeR9l/p2OHFY8P5eBeGBftUwFCBqBylQ?=
- =?us-ascii?Q?GaZFWadiCx6JEGLpfHqrkhRHKBkyr4/53RhdpK5J4lW7yO0ey5mWkdzpSOkT?=
- =?us-ascii?Q?QLKHbefDgMMDuYuPnoM7zjiDtWUd0Y1xZP1uJOwsWUWn1JTuIPExdU4JNcsB?=
- =?us-ascii?Q?FSwdwcZQ5RJ+rv+g0MMPk3wb0Z9vFwc3uDm36sd3ctpBXsNS3TCRBocm+9Bl?=
- =?us-ascii?Q?RpzuZEtfLMkWIc7RMZWwS1rM1gprsFqCGov5w5ohxntCFjzrJkhgxMjtDLu+?=
- =?us-ascii?Q?jOBSypxiba7KAACM29TZ+qRM9jTttp+CN8N8Y8MPqeRBWjYCUi5bf5QPCjjA?=
- =?us-ascii?Q?0QbRTLIqMHWxUuConHQf0n33WrEnwAGRjHq53qMvPfijddwpXXh59AwKHCls?=
- =?us-ascii?Q?o+tjVlwE3BM/9xg2D8FhdxRk3XA/oDanJsNNW3CaJO9FkoUakN5i4yg+JxBR?=
- =?us-ascii?Q?/d60xdE/R0uZkdCs89SdZ1hb3qKvEhvpol1i9Y6KKlA7BorVvsZqKyJBwb3q?=
- =?us-ascii?Q?+cevgk86gwhdyDrDQ4Z16dh2g3kBTDzhqgbLTLlM2nei5BkfuDZ3+Cekjuo7?=
- =?us-ascii?Q?B8DdloOwUpdFo1Az4Z50ttUqCJH8cJw1el7uq7CL8J+auE1rqxyqC3aM1G9R?=
- =?us-ascii?Q?GEuJzwEgVnFjCMGQ37ewMCfu?=
+X-Microsoft-Antispam-Message-Info: c0uY+sVyS8SBfiT0GSQ5UHyMDY+3PDrn7vhj7BDRKCtEyGJZ9cAvMMRPd7/jtr9MjA/b+cim0JZA5kHL0HLpUmdCTXaSVeSuafN9UZoarYNQHDn0H4Pg8fiXx6i4t6sH2sRAMI3XY/DcjTwUs88CXfEWMcRWobBV1mA1Xe+5TguIK0A+fbG2pkJLSJxMaj7FgVJW7wpHZmF4tDw2ECAfQXnLGVd2gzXbKrnUTMuhUNHzzjCrmv96L5FdIWMnkaGqtDKxMWCE7WobOYby9jjtAYIV+QxgPm1+96rdouXWmKLTiC7lZRlUvBnn9tDEMioYCxZnDfEHnRM4JSrkm31dli1o1rYCXk4rEwCYEpBHWYTARFEtV1s27omBXQX41bP/O0/EVVOaDHm8qu9zs7Iqgr/05vMfsoxgwhAbQyASXdVxLYCtLd/gShU3ckFT6BklY5lvxSg7lSEo3qFnc04UfTYGPA8EK9bh36Mwc8r7FQ7xv65GlSMhm35HzXq6Z9e+ZqqTPVx2CtwEFZ02U8SNelZZwOoXJ2DsR9F1hv2vyRcxbznFCvKufCcyLO/3Am30TcdwFW9OIQ3t147jLCU10sgwqFamoEnFxJZOZA8aaVfaxulTZTMKSASWdI85t8kvezNEwTzWYwH14ZyJvuIDli2teXwf7se7nuTyIMRrwntDSEB0fxe3pqzIWy7d1nsP
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3834.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(39860400002)(346002)(376002)(136003)(396003)(366004)(5660300002)(66476007)(30864003)(2616005)(66946007)(66556008)(2906002)(186003)(7416002)(6666004)(83380400001)(426003)(54906003)(110136005)(316002)(8936002)(478600001)(8676002)(4326008)(26005)(9746002)(9786002)(86362001)(36756003)(38100700001)(4216001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?us-ascii?Q?hd/QjxBXufRo+U+3cqDaCl7rMs++NdT3il0W0k/fQfMVc+g+xlaVHyVpHomx?=
+ =?us-ascii?Q?TesTq+7LWD6JOrS7l1K9GWdBDU7f+FZAP/K7J0aadwUoL19xsjXR76D82wOB?=
+ =?us-ascii?Q?ccMpvwxUC1JEBjyfvk85F7szC4CaOIbBZxl3/nqVWdtqIgUKmli570kmX1c7?=
+ =?us-ascii?Q?g0sv5jTXwS7fV+8s+6GwaaRaGZL6MLsqT5nAeUBcceifJsJcNHrMyffl0s2b?=
+ =?us-ascii?Q?WX0i4Dl7jBSheGUSLXyeh0wTC+ths5ADZyqeYGCIwXUgMM2oPbLF/WnIkVou?=
+ =?us-ascii?Q?nrhBVyByR7duMavBnu5CJs6Wj5sRVps/DADdeqdQelCEZUTY/bUf3RsxtRPq?=
+ =?us-ascii?Q?8TP7/Uv2r9uhixrRIbWjlyUjMT+G4EBxZFFZCDBjV7CTKJVSGSfwwor6/d6i?=
+ =?us-ascii?Q?e7O/ePderVjJsXJRwZL7XIOVzHAb7xmXZBoSgy2v5QUSx+5eHphcbzARRNOq?=
+ =?us-ascii?Q?x1yvGYUD/Vubb0I5+BkgOsONNSnnK02Q7TgJobQtcGhdkC4RpJuBoZmMX3tc?=
+ =?us-ascii?Q?dvkQUC8wQO64ve9IOODvYyi87phX6MVUEKV4pVCQiG1/V4ojikvHDWssVpc2?=
+ =?us-ascii?Q?L9GgUVraZhlb293bjdnyOqVZ6Lc2wGA7LjtGGGOu4lRsh1eDCCzNEjqPMOzf?=
+ =?us-ascii?Q?0WCgwwCORnoR4mzBF8HXg7ANf/YIAlQQalyNcaYffdbOwwfqVll83FnrMOCD?=
+ =?us-ascii?Q?Urj6pDQaQl1ERiZMDTEyKqiKE6iYVVbkJ89lN7E76zCnXNVMfQXZY6py4AWK?=
+ =?us-ascii?Q?sTUtet+mQnRXxjiuMdhxHei4Ocd8ExpyOOFKy0zFJYsMcx4OLg/zfAA16r1M?=
+ =?us-ascii?Q?wigwFs/OM1TrhKyPW+cAmoY7xPF4Cu1hhYG48bh/hzcxU0rueTlFzRdjj1D8?=
+ =?us-ascii?Q?N0Q22QIV3oce6kdf5mjZ9H9a2VZDG8WnqCo+wVbo8rqpVNL2fVTHHlHXMHID?=
+ =?us-ascii?Q?+H+84oEC5iKTCL3IfVAay5tHvd51MSP3XRvF+FSQYUD83pBVgw4QYPxIP0hK?=
+ =?us-ascii?Q?lkvYe1l+GDCGAwTRrU9cfIP6y9Us8kEvp76dwVdcP2XgjkuOrtyVrr13gZLA?=
+ =?us-ascii?Q?F5lw2jquT5Jxsy/edXUPTsYalFATF6dFMdTKEHqFsDXJ5JcqnheooPSF6nY3?=
+ =?us-ascii?Q?ir9eSijcB/DPv4Lup1PpJPbVSEu1qd5UccEl0O3Y3E+8HO3mHFRr1XiHIbGy?=
+ =?us-ascii?Q?YR6FAMzcGp7UEjgNmDyAvOC6IYf49sHLf8SlHgzlR6Nxf5xVn2mYGJnEQNeg?=
+ =?us-ascii?Q?mJt80ZtuGDghRZgDlRPizr+lzs6frr2sJn2bVfnbG8rhipsMv23J5t/5wkom?=
+ =?us-ascii?Q?g+e5Q5E5Z82xjPX3hDsUTojJ?=
 X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 22e52f60-0197-4766-02c5-08d8ee16d36f
+X-MS-Exchange-CrossTenant-Network-Message-Id: a19d3db3-8609-4dce-cb7f-08d8ee16d4d2
 X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3834.namprd12.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2021 16:15:07.8962
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2021 16:15:10.2289
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: MjdfHtupLxQixeGUbeM7T0yeFDUHQdevO0oxOW4uodxyoa1uGwOGirauI4R16VsD
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM5PR12MB2440
+X-MS-Exchange-CrossTenant-UserPrincipalName: IARZt3T9BD1or7Cdfbiachz2NWW69fXKVit3Al6NiwBLtlWcwbxuUzzfV5PIZ1ax
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4267
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The main focus of this series is to make VFIO follow the normal kernel
-convention of structure embedding for structure inheritance instead of
-linking using a 'void *opaque'. Here we focus on moving the vfio_device to
-be a member of every struct vfio_XX_device that is linked by a
-vfio_add_group_dev().
+This makes the struct vfio_device part of the public interface so it
+can be used with container_of and so forth, as is typical for a Linux
+subystem.
 
-In turn this allows 'struct vfio_device *' to be used everwhere, and the
-public API out of vfio.c can be cleaned to remove places using 'struct
-device *' and 'void *' as surrogates to refer to the device.
+This is the first step to bring some type-safety to the vfio interface by
+allowing the replacement of 'void *' and 'struct device *' inputs with a
+simple and clear 'struct vfio_device *'
 
-While this has the minor trade off of moving 'struct vfio_device' the
-clarity of the design is worth it. I can speak directly to this idea, as
-I've invested a fair amount of time carefully working backwards what all
-the type-erased APIs are supposed to be and it is certainly not trivial or
-intuitive.
+For now the self-allocating vfio_add_group_dev() interface is kept so each
+user can be updated as a separate patch.
 
-When we get into mdev land things become even more inscrutable, and while
-I now have a pretty clear picture, it was hard to obtain. I think this
-agrees with the kernel style ideal of being explicit in typing and not
-sacrificing clarity to create opaque structs.
+The expected usage pattern is
 
-After this series the general rules are:
- - Any vfio_XX_device * can be obtained at no cost from a vfio_device *
-   using container_of(), and the reverse is possible by &XXdev->vdev
+  driver core probe() function:
+     my_device = kzalloc(sizeof(*mydevice));
+     vfio_init_group_dev(&my_device->vdev, dev, ops, mydevice);
+     /* other driver specific prep */
+     vfio_register_group_dev(&my_device->vdev);
+     dev_set_drvdata(dev, my_device);
 
-   This is similar to how 'struct pci_device' and 'struct device' are
-   interrelated.
+  driver core remove() function:
+     my_device = dev_get_drvdata(dev);
+     vfio_unregister_group_dev(&my_device->vdev);
+     /* other driver specific tear down */
+     kfree(my_device);
 
-   This allows 'device_data' to be completely removed from the vfio.c API.
+Allowing the driver to be able to use the drvdata and vfio_device to go
+to/from its own data.
 
- - The drvdata for a struct device points at the vfio_XX_device that
-   belongs to the driver that was probed. drvdata is removed from the core
-   code, and only used as part of the implementation of the struct
-   device_driver.
+The pattern also makes it clear that vfio_register_group_dev() must be
+last in the sequence, as once it is called the core code can immediately
+start calling ops. The init/register gap is provided to allow for the
+driver to do setup before ops can be called and thus avoid races.
 
- - The lifetime of vfio_XX_device and vfio_device are identical, they are
-   the same memory.
+Reviewed-by: Christoph Hellwig <hch@lst.de>
+Reviewed-by: Liu Yi L <yi.l.liu@intel.com>
+Reviewed-by: Cornelia Huck <cohuck@redhat.com>
+Reviewed-by: Max Gurtovoy <mgurtovoy@nvidia.com>
+Reviewed-by: Kevin Tian <kevin.tian@intel.com>
+Reviewed-by: Eric Auger <eric.auger@redhat.com>
+Signed-off-by: Jason Gunthorpe <jgg@nvidia.com>
+---
+ Documentation/driver-api/vfio.rst |  31 ++++----
+ drivers/vfio/vfio.c               | 125 ++++++++++++++++--------------
+ include/linux/vfio.h              |  16 ++++
+ 3 files changed, 99 insertions(+), 73 deletions(-)
 
-   This follows the existing model where vfio_del_group_dev() blocks until
-   all vfio_device_put()'s are completed. This in turn means the struct
-   device_driver remove() blocks, and thus under the driver_lock() a bound
-   driver must have a valid drvdata pointing at both vfio device
-   structs. A following series exploits this further.
-
-Most vfio_XX_device structs have data that duplicates the 'struct
-device *dev' member of vfio_device, a following series removes that
-duplication too.
-
-Thanks everyone for the reviews!
-
-v3:
- - Fix typos in commit messages
- - Fix missed name change of vfio_group_create_device() in a comment
- - Remove wrong kfree(vdev->name) in vfio_platform
- - Keep dprc_scan_container() after vfio_add_group_dev()
- - Remove struct mdev_vfio_device
-v2: https://lore.kernel.org/r/0-v2-20d933792272+4ff-vfio1_jgg@nvidia.com
- - Split the get/put changes out of "Simlpify the lifetime logic for
-   vfio_device"
- - Add a patch to fix probe ordering in fsl-mc and remove FIXME
- - Add a patch to re-org pci probe
- - Add a patch to fix probe odering in pci and remove FIXME
- - Remove the **pf_dev output from get_pf_vdev()
-v1: https://lore.kernel.org/r/0-v1-7355d38b9344+17481-vfio1_jgg@nvidia.com
-
-Jason Gunthorpe (14):
-  vfio: Remove extra put/gets around vfio_device->group
-  vfio: Simplify the lifetime logic for vfio_device
-  vfio: Split creation of a vfio_device into init and register ops
-  vfio/platform: Use vfio_init/register/unregister_group_dev
-  vfio/fsl-mc: Re-order vfio_fsl_mc_probe()
-  vfio/fsl-mc: Use vfio_init/register/unregister_group_dev
-  vfio/pci: Move VGA and VF initialization to functions
-  vfio/pci: Re-order vfio_pci_probe()
-  vfio/pci: Use vfio_init/register/unregister_group_dev
-  vfio/mdev: Use vfio_init/register/unregister_group_dev
-  vfio/mdev: Make to_mdev_device() into a static inline
-  vfio: Make vfio_device_ops pass a 'struct vfio_device *' instead of
-    'void *'
-  vfio/pci: Replace uses of vfio_device_data() with container_of
-  vfio: Remove device_data from the vfio bus driver API
-
- Documentation/driver-api/vfio.rst             |  48 ++--
- drivers/vfio/fsl-mc/vfio_fsl_mc.c             | 127 +++++----
- drivers/vfio/fsl-mc/vfio_fsl_mc_private.h     |   1 +
- drivers/vfio/mdev/mdev_private.h              |   5 +-
- drivers/vfio/mdev/vfio_mdev.c                 |  53 ++--
- drivers/vfio/pci/vfio_pci.c                   | 253 ++++++++++--------
- drivers/vfio/pci/vfio_pci_private.h           |   1 +
- drivers/vfio/platform/vfio_amba.c             |   8 +-
- drivers/vfio/platform/vfio_platform.c         |  20 +-
- drivers/vfio/platform/vfio_platform_common.c  |  56 ++--
- drivers/vfio/platform/vfio_platform_private.h |   5 +-
- drivers/vfio/vfio.c                           | 210 +++++----------
- include/linux/vfio.h                          |  37 ++-
- 13 files changed, 417 insertions(+), 407 deletions(-)
-
+diff --git a/Documentation/driver-api/vfio.rst b/Documentation/driver-api/vfio.rst
+index f1a4d3c3ba0bb1..d3a02300913a7f 100644
+--- a/Documentation/driver-api/vfio.rst
++++ b/Documentation/driver-api/vfio.rst
+@@ -249,18 +249,23 @@ VFIO bus driver API
+ 
+ VFIO bus drivers, such as vfio-pci make use of only a few interfaces
+ into VFIO core.  When devices are bound and unbound to the driver,
+-the driver should call vfio_add_group_dev() and vfio_del_group_dev()
+-respectively::
+-
+-	extern int vfio_add_group_dev(struct device *dev,
+-				      const struct vfio_device_ops *ops,
+-				      void *device_data);
+-
+-	extern void *vfio_del_group_dev(struct device *dev);
+-
+-vfio_add_group_dev() indicates to the core to begin tracking the
+-iommu_group of the specified dev and register the dev as owned by
+-a VFIO bus driver.  The driver provides an ops structure for callbacks
++the driver should call vfio_register_group_dev() and
++vfio_unregister_group_dev() respectively::
++
++	void vfio_init_group_dev(struct vfio_device *device,
++				struct device *dev,
++				const struct vfio_device_ops *ops,
++				void *device_data);
++	int vfio_register_group_dev(struct vfio_device *device);
++	void vfio_unregister_group_dev(struct vfio_device *device);
++
++The driver should embed the vfio_device in its own structure and call
++vfio_init_group_dev() to pre-configure it before going to registration.
++vfio_register_group_dev() indicates to the core to begin tracking the
++iommu_group of the specified dev and register the dev as owned by a VFIO bus
++driver. Once vfio_register_group_dev() returns it is possible for userspace to
++start accessing the driver, thus the driver should ensure it is completely
++ready before calling it. The driver provides an ops structure for callbacks
+ similar to a file operations structure::
+ 
+ 	struct vfio_device_ops {
+@@ -276,7 +281,7 @@ similar to a file operations structure::
+ 	};
+ 
+ Each function is passed the device_data that was originally registered
+-in the vfio_add_group_dev() call above.  This allows the bus driver
++in the vfio_register_group_dev() call above.  This allows the bus driver
+ an easy place to store its opaque, private data.  The open/release
+ callbacks are issued when a new file descriptor is created for a
+ device (via VFIO_GROUP_GET_DEVICE_FD).  The ioctl interface provides
+diff --git a/drivers/vfio/vfio.c b/drivers/vfio/vfio.c
+index 32660e8a69ae20..2ea430de505b3b 100644
+--- a/drivers/vfio/vfio.c
++++ b/drivers/vfio/vfio.c
+@@ -89,16 +89,6 @@ struct vfio_group {
+ 	struct blocking_notifier_head	notifier;
+ };
+ 
+-struct vfio_device {
+-	refcount_t			refcount;
+-	struct completion		comp;
+-	struct device			*dev;
+-	const struct vfio_device_ops	*ops;
+-	struct vfio_group		*group;
+-	struct list_head		group_next;
+-	void				*device_data;
+-};
+-
+ #ifdef CONFIG_VFIO_NOIOMMU
+ static bool noiommu __read_mostly;
+ module_param_named(enable_unsafe_noiommu_mode,
+@@ -532,35 +522,6 @@ static struct vfio_group *vfio_group_get_from_dev(struct device *dev)
+ /**
+  * Device objects - create, release, get, put, search
+  */
+-static
+-struct vfio_device *vfio_group_create_device(struct vfio_group *group,
+-					     struct device *dev,
+-					     const struct vfio_device_ops *ops,
+-					     void *device_data)
+-{
+-	struct vfio_device *device;
+-
+-	device = kzalloc(sizeof(*device), GFP_KERNEL);
+-	if (!device)
+-		return ERR_PTR(-ENOMEM);
+-
+-	refcount_set(&device->refcount, 1);
+-	init_completion(&device->comp);
+-	device->dev = dev;
+-	/* Our reference on group is moved to the device */
+-	device->group = group;
+-	device->ops = ops;
+-	device->device_data = device_data;
+-	dev_set_drvdata(dev, device);
+-
+-	mutex_lock(&group->device_lock);
+-	list_add(&device->group_next, &group->device_list);
+-	group->dev_counter++;
+-	mutex_unlock(&group->device_lock);
+-
+-	return device;
+-}
+-
+ /* Device reference always implies a group reference */
+ void vfio_device_put(struct vfio_device *device)
+ {
+@@ -779,14 +740,23 @@ static int vfio_iommu_group_notifier(struct notifier_block *nb,
+ /**
+  * VFIO driver API
+  */
+-int vfio_add_group_dev(struct device *dev,
+-		       const struct vfio_device_ops *ops, void *device_data)
++void vfio_init_group_dev(struct vfio_device *device, struct device *dev,
++			 const struct vfio_device_ops *ops, void *device_data)
++{
++	init_completion(&device->comp);
++	device->dev = dev;
++	device->ops = ops;
++	device->device_data = device_data;
++}
++EXPORT_SYMBOL_GPL(vfio_init_group_dev);
++
++int vfio_register_group_dev(struct vfio_device *device)
+ {
++	struct vfio_device *existing_device;
+ 	struct iommu_group *iommu_group;
+ 	struct vfio_group *group;
+-	struct vfio_device *device;
+ 
+-	iommu_group = iommu_group_get(dev);
++	iommu_group = iommu_group_get(device->dev);
+ 	if (!iommu_group)
+ 		return -EINVAL;
+ 
+@@ -805,21 +775,50 @@ int vfio_add_group_dev(struct device *dev,
+ 		iommu_group_put(iommu_group);
+ 	}
+ 
+-	device = vfio_group_get_device(group, dev);
+-	if (device) {
+-		dev_WARN(dev, "Device already exists on group %d\n",
++	existing_device = vfio_group_get_device(group, device->dev);
++	if (existing_device) {
++		dev_WARN(device->dev, "Device already exists on group %d\n",
+ 			 iommu_group_id(iommu_group));
+-		vfio_device_put(device);
++		vfio_device_put(existing_device);
+ 		vfio_group_put(group);
+ 		return -EBUSY;
+ 	}
+ 
+-	device = vfio_group_create_device(group, dev, ops, device_data);
+-	if (IS_ERR(device)) {
+-		vfio_group_put(group);
+-		return PTR_ERR(device);
+-	}
++	/* Our reference on group is moved to the device */
++	device->group = group;
++
++	/* Refcounting can't start until the driver calls register */
++	refcount_set(&device->refcount, 1);
++
++	mutex_lock(&group->device_lock);
++	list_add(&device->group_next, &group->device_list);
++	group->dev_counter++;
++	mutex_unlock(&group->device_lock);
++
++	return 0;
++}
++EXPORT_SYMBOL_GPL(vfio_register_group_dev);
++
++int vfio_add_group_dev(struct device *dev, const struct vfio_device_ops *ops,
++		       void *device_data)
++{
++	struct vfio_device *device;
++	int ret;
++
++	device = kzalloc(sizeof(*device), GFP_KERNEL);
++	if (!device)
++		return -ENOMEM;
++
++	vfio_init_group_dev(device, dev, ops, device_data);
++	ret = vfio_register_group_dev(device);
++	if (ret)
++		goto err_kfree;
++	dev_set_drvdata(dev, device);
+ 	return 0;
++
++err_kfree:
++	kfree(device);
++	return ret;
+ }
+ EXPORT_SYMBOL_GPL(vfio_add_group_dev);
+ 
+@@ -887,11 +886,9 @@ EXPORT_SYMBOL_GPL(vfio_device_data);
+ /*
+  * Decrement the device reference count and wait for the device to be
+  * removed.  Open file descriptors for the device... */
+-void *vfio_del_group_dev(struct device *dev)
++void vfio_unregister_group_dev(struct vfio_device *device)
+ {
+-	struct vfio_device *device = dev_get_drvdata(dev);
+ 	struct vfio_group *group = device->group;
+-	void *device_data = device->device_data;
+ 	struct vfio_unbound_dev *unbound;
+ 	unsigned int i = 0;
+ 	bool interrupted = false;
+@@ -908,7 +905,7 @@ void *vfio_del_group_dev(struct device *dev)
+ 	 */
+ 	unbound = kzalloc(sizeof(*unbound), GFP_KERNEL);
+ 	if (unbound) {
+-		unbound->dev = dev;
++		unbound->dev = device->dev;
+ 		mutex_lock(&group->unbound_lock);
+ 		list_add(&unbound->unbound_next, &group->unbound_list);
+ 		mutex_unlock(&group->unbound_lock);
+@@ -919,7 +916,7 @@ void *vfio_del_group_dev(struct device *dev)
+ 	rc = try_wait_for_completion(&device->comp);
+ 	while (rc <= 0) {
+ 		if (device->ops->request)
+-			device->ops->request(device_data, i++);
++			device->ops->request(device->device_data, i++);
+ 
+ 		if (interrupted) {
+ 			rc = wait_for_completion_timeout(&device->comp,
+@@ -929,7 +926,7 @@ void *vfio_del_group_dev(struct device *dev)
+ 				&device->comp, HZ * 10);
+ 			if (rc < 0) {
+ 				interrupted = true;
+-				dev_warn(dev,
++				dev_warn(device->dev,
+ 					 "Device is currently in use, task"
+ 					 " \"%s\" (%d) "
+ 					 "blocked until device is released",
+@@ -960,11 +957,19 @@ void *vfio_del_group_dev(struct device *dev)
+ 	if (list_empty(&group->device_list))
+ 		wait_event(group->container_q, !group->container);
+ 
+-	/* Matches the get in vfio_group_create_device() */
++	/* Matches the get in vfio_register_group_dev() */
+ 	vfio_group_put(group);
++}
++EXPORT_SYMBOL_GPL(vfio_unregister_group_dev);
++
++void *vfio_del_group_dev(struct device *dev)
++{
++	struct vfio_device *device = dev_get_drvdata(dev);
++	void *device_data = device->device_data;
++
++	vfio_unregister_group_dev(device);
+ 	dev_set_drvdata(dev, NULL);
+ 	kfree(device);
+-
+ 	return device_data;
+ }
+ EXPORT_SYMBOL_GPL(vfio_del_group_dev);
+diff --git a/include/linux/vfio.h b/include/linux/vfio.h
+index b7e18bde5aa8b3..ad8b579d67d34a 100644
+--- a/include/linux/vfio.h
++++ b/include/linux/vfio.h
+@@ -15,6 +15,18 @@
+ #include <linux/poll.h>
+ #include <uapi/linux/vfio.h>
+ 
++struct vfio_device {
++	struct device *dev;
++	const struct vfio_device_ops *ops;
++	struct vfio_group *group;
++
++	/* Members below here are private, not for driver use */
++	refcount_t refcount;
++	struct completion comp;
++	struct list_head group_next;
++	void *device_data;
++};
++
+ /**
+  * struct vfio_device_ops - VFIO bus driver device callbacks
+  *
+@@ -48,11 +60,15 @@ struct vfio_device_ops {
+ extern struct iommu_group *vfio_iommu_group_get(struct device *dev);
+ extern void vfio_iommu_group_put(struct iommu_group *group, struct device *dev);
+ 
++void vfio_init_group_dev(struct vfio_device *device, struct device *dev,
++			 const struct vfio_device_ops *ops, void *device_data);
++int vfio_register_group_dev(struct vfio_device *device);
+ extern int vfio_add_group_dev(struct device *dev,
+ 			      const struct vfio_device_ops *ops,
+ 			      void *device_data);
+ 
+ extern void *vfio_del_group_dev(struct device *dev);
++void vfio_unregister_group_dev(struct vfio_device *device);
+ extern struct vfio_device *vfio_device_get_from_dev(struct device *dev);
+ extern void vfio_device_put(struct vfio_device *device);
+ extern void *vfio_device_data(struct vfio_device *device);
 -- 
 2.31.0
 
