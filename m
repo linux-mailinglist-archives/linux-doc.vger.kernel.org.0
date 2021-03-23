@@ -2,299 +2,221 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9E76A3466BD
-	for <lists+linux-doc@lfdr.de>; Tue, 23 Mar 2021 18:50:44 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 5B2133466EA
+	for <lists+linux-doc@lfdr.de>; Tue, 23 Mar 2021 18:56:40 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231229AbhCWRuM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 23 Mar 2021 13:50:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36270 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231189AbhCWRtw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 23 Mar 2021 13:49:52 -0400
-Received: from mail-lf1-x12b.google.com (mail-lf1-x12b.google.com [IPv6:2a00:1450:4864:20::12b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8488EC061763
-        for <linux-doc@vger.kernel.org>; Tue, 23 Mar 2021 10:49:51 -0700 (PDT)
-Received: by mail-lf1-x12b.google.com with SMTP id b4so3994967lfi.6
-        for <linux-doc@vger.kernel.org>; Tue, 23 Mar 2021 10:49:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=P7FG8frtqOnIaco1BBcfNWyiT6YFpbAkPyq6JjHD/SQ=;
-        b=RqC83U3mrLkb+QFRLoON0Zw9/YzFosu29mToXdupbyes+eP8PIbUGwPqm8r7/KpwRR
-         oZelC5ZmxImg8iBbM2gmLroSoYCiCEUvGtkQiOC4/PAEclQS7ugWWjIJNtnS3605Q2J8
-         ZIN/PuHLu1RX17VYbH9ddtJ1VMYZ2UYl/zac1wDW7HAuCdsaxKFv6RGRsTr5dG5anaRB
-         vswno94C7eL1m8PiYJ70kLt+hevGKr4aTJ011awdWOMnAZwre4yQob6AqxNo1DVYfd7u
-         GLlsD8eUCAS1xPvQV5CkZ/lmgLn5dFcI7bh1eIS+ioRFxMljDx1upkfbDIXRXDqwZEuq
-         dslw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=P7FG8frtqOnIaco1BBcfNWyiT6YFpbAkPyq6JjHD/SQ=;
-        b=lPFFn4RhIdPt37XFql1WZ089O0bQIpu4cO5NG1nJkbwu2si7siV0+qgJ2m7FnrOafy
-         7Nb385/8LFZ8jciZ/y0qxU5sFrom+xYazMUIW/6szPmE6Ue4seussEKZFWgjUSBM3ibV
-         fZzJ8oCKPlMfADNNo/o0dfEhrbmlOEe97aUixQ1iDuuHt5h7QMN6cBwg3hLk0Ti3Ocy9
-         Qs8iWLe72LD3QP9tg6zBtEDwMnI4NSLoMVbZ0qSBks1uB2ihLF/2zwvici9PqwRkJ5YP
-         JRryasyO0iSbYlkMQ1x8LyMOdsr0N26EeQmrW2x2eEnqipDcTUMVlqASKtb8BHovrZ/6
-         Ollg==
-X-Gm-Message-State: AOAM533T+10OaCVvFy7JihigEYnUL1GPlVZ/a52iOk5Z+z/gYJPfCgi0
-        6CjZr0gmrWUCsoHjiyT/X8w7xCNxUHiwybf34FbgZg==
-X-Google-Smtp-Source: ABdhPJwyenFneH4fs+z0uzL0vIEhWiSdc0Ge3Zq/4vWaO4unkEzFLjqdXBLZ4GR4Y3t93oZd2IPWbg1ktdyPCk9cf3w=
-X-Received: by 2002:a19:22d6:: with SMTP id i205mr3164515lfi.352.1616521789635;
- Tue, 23 Mar 2021 10:49:49 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210316204252.427806-1-mic@digikod.net> <20210316204252.427806-8-mic@digikod.net>
- <CAG48ez1arKO3uYzwng8fst-UHkcH6J7YzyHFN+vfXUT2=1HT+w@mail.gmail.com> <b41a021c-69f4-075f-e9a0-a4483b280df8@digikod.net>
-In-Reply-To: <b41a021c-69f4-075f-e9a0-a4483b280df8@digikod.net>
-From:   Jann Horn <jannh@google.com>
-Date:   Tue, 23 Mar 2021 18:49:22 +0100
-Message-ID: <CAG48ez1Vkd3KtYphDHLLbbkKY9T_ByhUcxwYAcWuDAyiA04A+w@mail.gmail.com>
-Subject: Re: [PATCH v30 07/12] landlock: Support filesystem access-control
-To:     =?UTF-8?B?TWlja2HDq2wgU2FsYcO8bg==?= <mic@digikod.net>
-Cc:     James Morris <jmorris@namei.org>,
-        "Serge E . Hallyn" <serge@hallyn.com>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        David Howells <dhowells@redhat.com>,
-        Jeff Dike <jdike@addtoit.com>,
+        id S231340AbhCWR4I (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 23 Mar 2021 13:56:08 -0400
+Received: from mail-bn8nam12on2077.outbound.protection.outlook.com ([40.107.237.77]:36673
+        "EHLO NAM12-BN8-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S231339AbhCWRzr (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 23 Mar 2021 13:55:47 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Gd9YSYbi24A8ZJ77mfUT+K2WxEEKXA2xOEcCdIppqUHaZhKvXsYFZ1Qj7LMc8wPmuKUtctYrWXePoMMVtk2O6TcIMGc7mfsA/lRyxl9/uFjNwUepWddqCn4QyovHK/E2BvZXlosnRiRmMehJdCbAW25fdrOpu/RB6aOuD+0STHQJ1ZSs+xeR2ByGtn27Szcmefx7JE/KAczFE8ErQZoFjv9tfY8foZR6I80RWT2lCgx5lzyEhemT2I+GEAhW62dzK3poQjMzucR/M+FJBEpFnDCddJd6sorYtcdtmM6YDqW/zwkED+YTRvWnSDS81nyk0Q4XggnrTSRgA7o00V3Igw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2cB46sAu2SciDQDzTmKXSxgAAyCiQmySsGT1aw/yhJo=;
+ b=bhC1Gcn9HakhvHSYqPOwKWJK3BZOlsQ9W9L6ICK3HriuP43NCeY/lm6tvo8PXPseZfETKz4SgicoiVmsf2s0Qtmn+a4RRWycSpNE7kf7BVo5q3Zc0dfdh6z4dUbr606wunnEoYW4SecNlgaGsjbiDBo5K/RzogjInC9syilmMCcaGVt4wBODQsYj3/nlvtG0jSM1mdUjAcWgxKlozRAF5lD3QEHJHrQ5Z6U3qSZd6EeW5980aML4yVTQAbWhCKTvOIMsufjzeogTbYiVtFoyOceU2ZApluppnqK8QQmshwn+/jxhO3E8eUck/KnfIvoquFmG1y3exnvDkOUtdCBi7g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2cB46sAu2SciDQDzTmKXSxgAAyCiQmySsGT1aw/yhJo=;
+ b=YRnHheeU+Zm/So/cOl/qJMoHkYB/QGBhNNSmS4DGGNSn1/M6z5RS9YMwzEEW+CHwHJzgD1uEd4XFDiPuF6P00JsWYwxvZ4RNC50gmeWkocr4bFzXPEKZTxbepdDCJm6XRpwPqMZsdtVjOXzzVbD8bMh6VET7WFcbyLLBxju9dXgZjwUU5yPDqNUTI9laKOCwqNBPI3JWnyyn5T3ZLce1ZWmSs/7kPy/yPR/51/EAoEdmgzYOS/uERBkTUyibI4TO3eTMfZeHr608TyPerm4jYALTiXyrhgSRN5GRsfGWolIj4wQDgDgsi9P0JbCP5OZblSk9XlkTSD4OgJlf+Upyrw==
+Authentication-Results: linux.ie; dkim=none (message not signed)
+ header.d=none;linux.ie; dmarc=none action=none header.from=nvidia.com;
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com (2603:10b6:5:14a::12)
+ by DM6PR12MB4943.namprd12.prod.outlook.com (2603:10b6:5:1bc::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18; Tue, 23 Mar
+ 2021 17:55:44 +0000
+Received: from DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::1c62:7fa3:617b:ab87]) by DM6PR12MB3834.namprd12.prod.outlook.com
+ ([fe80::1c62:7fa3:617b:ab87%6]) with mapi id 15.20.3955.027; Tue, 23 Mar 2021
+ 17:55:44 +0000
+From:   Jason Gunthorpe <jgg@nvidia.com>
+To:     David Airlie <airlied@linux.ie>,
+        Tony Krowiak <akrowiak@linux.ibm.com>,
+        Alex Williamson <alex.williamson@redhat.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        Cornelia Huck <cohuck@redhat.com>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Michael Kerrisk <mtk.manpages@gmail.com>,
-        Richard Weinberger <richard@nod.at>,
-        Shuah Khan <shuah@kernel.org>,
-        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
-        Kernel Hardening <kernel-hardening@lists.openwall.com>,
-        Linux API <linux-api@vger.kernel.org>,
-        linux-arch <linux-arch@vger.kernel.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        linux-fsdevel <linux-fsdevel@vger.kernel.org>,
-        kernel list <linux-kernel@vger.kernel.org>,
-        "open list:KERNEL SELFTEST FRAMEWORK" 
-        <linux-kselftest@vger.kernel.org>,
-        linux-security-module <linux-security-module@vger.kernel.org>,
-        "the arch/x86 maintainers" <x86@kernel.org>,
-        =?UTF-8?B?TWlja2HDq2wgU2FsYcO8bg==?= <mic@linux.microsoft.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+        Daniel Vetter <daniel@ffwll.ch>,
+        dri-devel@lists.freedesktop.org,
+        Eric Farman <farman@linux.ibm.com>,
+        Harald Freudenberger <freude@linux.ibm.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        intel-gfx@lists.freedesktop.org,
+        intel-gvt-dev@lists.freedesktop.org,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        kvm@vger.kernel.org, Kirti Wankhede <kwankhede@nvidia.com>,
+        linux-doc@vger.kernel.org, linux-s390@vger.kernel.org,
+        Peter Oberparleiter <oberpar@linux.ibm.com>,
+        Halil Pasic <pasic@linux.ibm.com>,
+        Pierre Morel <pmorel@linux.ibm.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Vineeth Vijayan <vneethv@linux.ibm.com>,
+        Zhenyu Wang <zhenyuw@linux.intel.com>,
+        Zhi Wang <zhi.a.wang@intel.com>
+Cc:     "Raj, Ashok" <ashok.raj@intel.com>,
+        Dong Jia Shi <bjsdjshi@linux.vnet.ibm.com>,
+        Neo Jia <cjia@nvidia.com>,
+        Dan Williams <dan.j.williams@intel.com>,
+        Christoph Hellwig <hch@lst.de>,
+        Jike Song <jike.song@intel.com>,
+        Gerd Hoffmann <kraxel@redhat.com>,
+        Leon Romanovsky <leonro@nvidia.com>,
+        Max Gurtovoy <mgurtovoy@nvidia.com>,
+        Tarun Gupta <targupta@nvidia.com>
+Subject: [PATCH 00/18] Make vfio_mdev type safe
+Date:   Tue, 23 Mar 2021 14:55:17 -0300
+Message-Id: <0-v1-7dedf20b2b75+4f785-vfio2_jgg@nvidia.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [206.223.160.26]
+X-ClientProxiedBy: BL0PR0102CA0030.prod.exchangelabs.com
+ (2603:10b6:207:18::43) To DM6PR12MB3834.namprd12.prod.outlook.com
+ (2603:10b6:5:14a::12)
+MIME-Version: 1.0
+X-MS-Exchange-MessageSentRepresentingType: 1
+Received: from mlx.ziepe.ca (206.223.160.26) by BL0PR0102CA0030.prod.exchangelabs.com (2603:10b6:207:18::43) with Microsoft SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3955.18 via Frontend Transport; Tue, 23 Mar 2021 17:55:41 +0000
+Received: from jgg by mlx with local (Exim 4.94)        (envelope-from <jgg@nvidia.com>)        id 1lOlFf-001cgN-4b; Tue, 23 Mar 2021 14:55:35 -0300
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: c95c21d7-1be6-4a9b-d7dc-08d8ee24dfc5
+X-MS-TrafficTypeDiagnostic: DM6PR12MB4943:
+X-MS-Exchange-Transport-Forked: True
+X-Microsoft-Antispam-PRVS: <DM6PR12MB494349D76CDE94E9A4C36164C2649@DM6PR12MB4943.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: 95OIdF3tDilJGswE5bYcVx4FnZGlswa+LJA+7F8vKcmP0uc8WrIaZd8mWfw21F8M4cjIT8gmsBzPMuw92tUB8WoHJ1GGF0OToGjc8CvZBzcn8Bk66Y4lhVx9otrlnUVrGi1B1iCENACIB8FS715B/EcIvGwzfhXEUOTsEYYdjnhvkGzzfmT7Tv35Wb1PWlG9R26n/CeQ5KudMiwPsEadaX08+CCtQDO6NseVxQl1SxD4l3saiDlth0Gf4hh3PoNzIo58pr+H7zSp2+CRpbbmXVg18Otx1kQpyokUbXgEb2CR4r404WaGWqIaeMNSNPCiJKgrPtJIAs/7JeLS9ntxi6fhOBWxQ4IQZa2wpUKXV6/wlij7L33UPjft6eoBoWVIYXGhuhNhcd5I4RUSXWtzgLlLm5/k4L7tWF7dXY7ZXh/4OAArDZd+8ufN0jyk7HkJVqjhmMbTk+FLou2Twrxt0KmMR7MWP437wxktr57VYxzmzEzd6uehxgjhVIAAWXLhOaqrQ8d0TO3naCLoNqD9ugqZQk9uMami7FAEx2MaffkLE0PudWq7yJZh0ib7BwSeRMkPCYawVq1eKAi92ImCjfVf9PjetJldoyerOLVM0sjarkeiQeME3wg0saECio7u1DFWYUmsCY0yL5Xa7GjvNvUE5SjNBnGN9PMJ+j0I5Ex03jSaS8vB9CixvK1j8a6q1EMBVnAd++Yw0ugpDO8N35J3AZt+edYNsHw5/Dbu8HEn6UZwgtqMsN+As8L4GXgYasJKjNVL3eKceHrGhiONnw==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM6PR12MB3834.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(396003)(39860400002)(136003)(376002)(366004)(346002)(66476007)(186003)(107886003)(6666004)(8936002)(110136005)(36756003)(426003)(86362001)(54906003)(83380400001)(2616005)(38100700001)(921005)(7406005)(7416002)(66946007)(5660300002)(478600001)(9746002)(66556008)(8676002)(4326008)(2906002)(26005)(316002)(966005)(9786002)(4216001);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData: =?us-ascii?Q?Barf92TEnVhxUlFj8VkY0tehCEbocCtWIFasMdTagPC7fvi402RbcB4sYMLr?=
+ =?us-ascii?Q?R3+b8DtagKJl29/bMI21ribFTLoN1s2ecg3kDWgt2i0EQT0nuwgBFMx7559S?=
+ =?us-ascii?Q?+ghMISTOgsNuXXgQzUDFlGyq4zYHAfbweyOKoxmpTdtKAGCRsq6rmxuZCqcc?=
+ =?us-ascii?Q?5wgmfPcfbRpmMc8NylZEuh1szk6a9p3Lu+fOUFuPES11rQMJEMZLdM3AL09q?=
+ =?us-ascii?Q?ePUeqvrrT5lu8+3jpEWn8A3NLaAyGeEGcORKHbnhkDaqRMDZZH4QbHX38G6a?=
+ =?us-ascii?Q?E+FL/djDUzf622shvv5KZqxPaisckmN1p+CSo4o0OHUwPK9UPcWRub/ZYMDc?=
+ =?us-ascii?Q?5XiKYFMhy7SER+Spmc2avc+U7yUR644OoyWoi1Pz3xk32GXda9S32QHNwZPz?=
+ =?us-ascii?Q?xDLoGvdTTeD9dXQ/fc2tJk2I0+hDg6iEVQTkuxdAiWBX8oBOB6lXJAXyKtFy?=
+ =?us-ascii?Q?kVUg1ltWCNaqp+3hG2fd8oHTfOegdpAw3PV6WIrB2Tv0jXePlJCEzJETlTqn?=
+ =?us-ascii?Q?QE/7r+496M+0LVFVu+LC9v9qEBJUPMNWCAV6+iuBe3okSEaNgx9FcCPt92DX?=
+ =?us-ascii?Q?TIMBxT57ORkvGMucFpqFosl3xjT35o/R7uDWyO5cGsxnZkYQSa0DvEMa4NvO?=
+ =?us-ascii?Q?xz7jz45/7nCw8dapJpAkLFnnJ1BZsxOKzHfjO5uyXj1+8Z8e41Qmow2Y2bK8?=
+ =?us-ascii?Q?56ketiGmbUwdIRH767p3jm1+qr/CCiRYrBnjMXzOlWbWLzscxNDHfIwb8dAO?=
+ =?us-ascii?Q?MKlSp7j+Ao0K/UtAqVsUL1PuodYN4GHGh9xKBAu2J2pTdAWBOM9E+yaUBDkb?=
+ =?us-ascii?Q?SDkpRWdFUJ5Coy8ho53AZClIYuLHm7XrD0hx3ria3QM01KYxyPsTETAXrF6c?=
+ =?us-ascii?Q?WMg2HLRIPqn2sd0SK1hFECgZ6RAk/yZJNQp55AQUUzIaeP1zDZmOWyyMY2cG?=
+ =?us-ascii?Q?ZoTw499iCpuhfhCLSHhmeAl8FWxOnWK/hB+2Zu1ba41oRfZfOnQC637YWVyU?=
+ =?us-ascii?Q?9Jp1ZityVXX7lRVXuCKvfHXlA18/woeAQmdd0oUCQQMh301NAkAkRuIdDi9w?=
+ =?us-ascii?Q?JHakswqDKXzjQrytUygItZqg7SuKqwCILIf6AVVt2C50hni80+F26tb8TigW?=
+ =?us-ascii?Q?+3SDjPn3ZjV8xosvoJXfCi4sW0A21UvQIYpE1wpXgVjDDrq+mR9VvX2tIlrP?=
+ =?us-ascii?Q?2Xkq4yy1qVMTIsMa5fcVH6BvCp3ecbEB+bKFfRi02Ca46AF7QksuaqHiGpt4?=
+ =?us-ascii?Q?iCUsaML8wifuXuA/CcJ93ORYhVk7NlU0TpqQ5448iaIwISZGe/Ois+OwxXd8?=
+ =?us-ascii?Q?m6au5WkdUragXfrGPZjR+0Yi?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c95c21d7-1be6-4a9b-d7dc-08d8ee24dfc5
+X-MS-Exchange-CrossTenant-AuthSource: DM6PR12MB3834.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Mar 2021 17:55:41.5272
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: BipZJ1FNj4iKcf3aXT3x7UX9hZKdcNuxcW3+zKsbXYAtWbwyZReWnwwQhaFdLl/M
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4943
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 23, 2021 at 4:54 PM Micka=C3=ABl Sala=C3=BCn <mic@digikod.net> =
-wrote:
-> On 23/03/2021 01:13, Jann Horn wrote:
-> >  On Tue, Mar 16, 2021 at 9:43 PM Micka=C3=ABl Sala=C3=BCn <mic@digikod.=
-net> wrote:
-> >> Using Landlock objects and ruleset, it is possible to tag inodes
-> >> according to a process's domain.
-> > [...]
-> >> +static void release_inode(struct landlock_object *const object)
-> >> +       __releases(object->lock)
-> >> +{
-> >> +       struct inode *const inode =3D object->underobj;
-> >> +       struct super_block *sb;
-> >> +
-> >> +       if (!inode) {
-> >> +               spin_unlock(&object->lock);
-> >> +               return;
-> >> +       }
-> >> +
-> >> +       /*
-> >> +        * Protects against concurrent use by hook_sb_delete() of the =
-reference
-> >> +        * to the underlying inode.
-> >> +        */
-> >> +       object->underobj =3D NULL;
-> >> +       /*
-> >> +        * Makes sure that if the filesystem is concurrently unmounted=
-,
-> >> +        * hook_sb_delete() will wait for us to finish iput().
-> >> +        */
-> >> +       sb =3D inode->i_sb;
-> >> +       atomic_long_inc(&landlock_superblock(sb)->inode_refs);
-> >> +       spin_unlock(&object->lock);
-> >> +       /*
-> >> +        * Because object->underobj was not NULL, hook_sb_delete() and
-> >> +        * get_inode_object() guarantee that it is safe to reset
-> >> +        * landlock_inode(inode)->object while it is not NULL.  It is =
-therefore
-> >> +        * not necessary to lock inode->i_lock.
-> >> +        */
-> >> +       rcu_assign_pointer(landlock_inode(inode)->object, NULL);
-> >> +       /*
-> >> +        * Now, new rules can safely be tied to @inode with get_inode_=
-object().
-> >> +        */
-> >> +
-> >> +       iput(inode);
-> >> +       if (atomic_long_dec_and_test(&landlock_superblock(sb)->inode_r=
-efs))
-> >> +               wake_up_var(&landlock_superblock(sb)->inode_refs);
-> >> +}
-> > [...]
-> >> +static struct landlock_object *get_inode_object(struct inode *const i=
-node)
-> >> +{
-> >> +       struct landlock_object *object, *new_object;
-> >> +       struct landlock_inode_security *inode_sec =3D landlock_inode(i=
-node);
-> >> +
-> >> +       rcu_read_lock();
-> >> +retry:
-> >> +       object =3D rcu_dereference(inode_sec->object);
-> >> +       if (object) {
-> >> +               if (likely(refcount_inc_not_zero(&object->usage))) {
-> >> +                       rcu_read_unlock();
-> >> +                       return object;
-> >> +               }
-> >> +               /*
-> >> +                * We are racing with release_inode(), the object is g=
-oing
-> >> +                * away.  Wait for release_inode(), then retry.
-> >> +                */
-> >> +               spin_lock(&object->lock);
-> >> +               spin_unlock(&object->lock);
-> >> +               goto retry;
-> >> +       }
-> >> +       rcu_read_unlock();
-> >> +
-> >> +       /*
-> >> +        * If there is no object tied to @inode, then create a new one=
- (without
-> >> +        * holding any locks).
-> >> +        */
-> >> +       new_object =3D landlock_create_object(&landlock_fs_underops, i=
-node);
-> >> +       if (IS_ERR(new_object))
-> >> +               return new_object;
-> >> +
-> >> +       /* Protects against concurrent get_inode_object() calls. */
-> >> +       spin_lock(&inode->i_lock);
-> >> +       object =3D rcu_dereference_protected(inode_sec->object,
-> >> +                       lockdep_is_held(&inode->i_lock));
-> >
-> > rcu_dereference_protected() requires that inode_sec->object is not
-> > concurrently changed, but I think another thread could call
-> > get_inode_object() while we're in landlock_create_object(), and then
-> > we could race with the NULL write in release_inode() here? (It
-> > wouldn't actually be a UAF though because we're not actually accessing
-> > `object` here.) Or am I missing a lock that prevents this?
-> >
-> > In v28 this wasn't an issue because release_inode() was holding
-> > inode->i_lock (and object->lock) during the NULL store; but in v29 and
-> > this version the NULL store in release_inode() moved out of the locked
-> > region. I think you could just move the NULL store in release_inode()
-> > back up (and maybe add a comment explaining the locking rules for
-> > landlock_inode(...)->object)?
-> >
-> > (Or alternatively you could use rcu_dereference_raw() with a comment
-> > explaining that the read pointer is only used to check for NULL-ness,
-> > and that it is guaranteed that the pointer can't change if it is NULL
-> > and we're holding the lock. But that'd be needlessly complicated, I
-> > think.)
->
-> To reach rcu_assign_pointer(landlock_inode(inode)->object, NULL) in
-> release_inode() or in hook_sb_delete(), the
-> landlock_inode(inode)->object need to be non-NULL,
+Prologue
+========
 
-Yes.
+This is series #2 in part of a larger work that arose from the minor
+remark that the mdev_parent_ops indirection shim is useless and
+complicates things.
 
-> which implies that a
-> call to get_inode_object(inode) either "retry" (because release_inode is
-> only called by landlock_put_object, which set object->usage to 0) until
-> it creates a new object, or reuses the existing referenced object (and
-> increments object->usage).
+It follows the "Embed struct vfio_device in all sub-structures" already
+sent, and must be applied on top of it.
 
-But it can be that landlock_inode(inode)->object only becomes non-NULL
-after get_inode_object() has checked
-rcu_dereference(inode_sec->object).
+A preview of the future series's is here:
+  https://github.com/jgunthorpe/linux/pull/3/commits
 
-> The worse case would be if
-> get_inode_object(inode) is called just before the
-> rcu_assign_pointer(landlock_inode(inode)->object, NULL) from
-> hook_sb_delete(), which would result in an object with a NULL underobj,
-> which is the expected behavior (and checked by release_inode).
+========
+This series:
 
-The scenario I'm talking about doesn't involve hook_sb_delete().
+vfio_mdev has a number of different objects: mdev_parent, mdev_type and
+mdev_device.
 
-> The line rcu_assign_pointer(inode_sec->object, new_object) from
-> get_inode_object() can only be reached if the underlying inode doesn't
-> reference an object,
+Unfortunately the types of these have been erased in various places
+throughout the API, and this makes it very hard to understand this code or
+maintain it by the time it reaches all of the drivers.
 
-Yes.
+This series puts in all the types and aligns some of the design with the
+driver core standard for a driver core bus driver:
 
-> in which case hook_sb_delete() will not reach the
-> rcu_assign_pointer(landlock_inode(inode)->object, NULL) line for this
-> same inode.
->
-> This works because get_inode_object(inode) is mutually exclusive to
-> itself with the same inode (i.e. an inode can only point to an object
-> that references this same inode).
+ - Replace 'struct device *' with 'struct mdev_device *
+ - Replace 'struct device *' with 'struct mdev_type *' and
+   mtype_get_parent_dev()
+ - Replace 'struct kobject *' with 'struct mdev_type *'
 
-To clarify: You can concurrently call get_inode_object() multiple
-times on the same inode, right? There are no locks held on entry to
-that function.
+Now that types are clear it is easy to spot a few places that have
+duplicated information.
 
-> I tried to explain this with the comment "Protects against concurrent
-> get_inode_object() calls" in get_inode_object(), and the comments just
-> before both rcu_assign_pointer(landlock_inode(inode)->object, NULL).
+More significantly we can now understand how to directly fix the
+obfuscated 'kobj->name' matching by realizing the the kobj is a mdev_type,
+which is linked to the supported_types_list provided by the driver, and
+thus the core code can directly return the array indexes all the drivers
+actually want.
 
-The scenario I'm talking about is:
+Jason
 
-Initially the inode does not have an associated landlock_object. There
-are two threads A and B. Thread A is going to execute
-get_inode_object(). Thread B is going to execute get_inode_object()
-followed immediately by landlock_put_object().
+Jason Gunthorpe (18):
+  vfio/mdev: Fix missing static's on MDEV_TYPE_ATTR's
+  vfio/mdev: Add missing typesafety around mdev_device
+  vfio/mdev: Simplify driver registration
+  vfio/mdev: Use struct mdev_type in struct mdev_device
+  vfio/mdev: Do not allow a mdev_type to have a NULL parent pointer
+  vfio/mdev: Expose mdev_get/put_parent to mdev_private.h
+  vfio/mdev: Add missing reference counting to mdev_type
+  vfio/mdev: Reorganize mdev_device_create()
+  vfio/mdev: Add missing error handling to dev_set_name()
+  vfio/mdev: Remove duplicate storage of parent in mdev_device
+  vfio/mdev: Add mdev/mtype_get_type_group_id()
+  vfio/mtty: Use mdev_get_type_group_id()
+  vfio/mdpy: Use mdev_get_type_group_id()
+  vfio/mbochs: Use mdev_get_type_group_id()
+  vfio/gvt: Make DRM_I915_GVT depend on VFIO_MDEV
+  vfio/gvt: Use mdev_get_type_group_id()
+  vfio/mdev: Remove kobj from mdev_parent_ops->create()
+  vfio/mdev: Correct the function signatures for the
+    mdev_type_attributes
 
-thread A: enters get_inode_object()
-thread A: rcu_dereference(inode_sec->object) returns NULL
-thread A: enters landlock_create_object()
-thread B: enters get_inode_object()
-thread B: rcu_dereference(inode_sec->object) returns NULL
-thread B: calls landlock_create_object()
-thread B: sets inode_sec->object while holding inode->i_lock
-thread B: leaves get_inode_object()
-thread B: enters landlock_put_object()
-thread B: object->usage drops to 0, object->lock is taken
-thread B: calls release_inode()
-thread B: drops object->lock
-thread A: returns from landlock_create_object()
-thread A: takes inode->i_lock
+ .../driver-api/vfio-mediated-device.rst       |   9 +-
+ drivers/gpu/drm/i915/Kconfig                  |   1 +
+ drivers/gpu/drm/i915/gvt/gvt.c                |  41 ++---
+ drivers/gpu/drm/i915/gvt/gvt.h                |   4 +-
+ drivers/gpu/drm/i915/gvt/kvmgt.c              |   7 +-
+ drivers/s390/cio/vfio_ccw_ops.c               |  17 +-
+ drivers/s390/crypto/vfio_ap_ops.c             |  14 +-
+ drivers/vfio/mdev/mdev_core.c                 | 160 ++++++------------
+ drivers/vfio/mdev/mdev_driver.c               |  19 +--
+ drivers/vfio/mdev/mdev_private.h              |  40 ++---
+ drivers/vfio/mdev/mdev_sysfs.c                |  59 ++++---
+ drivers/vfio/mdev/vfio_mdev.c                 |  29 ++--
+ drivers/vfio/vfio_iommu_type1.c               |  25 +--
+ include/linux/mdev.h                          |  80 ++++++---
+ samples/vfio-mdev/mbochs.c                    |  55 +++---
+ samples/vfio-mdev/mdpy.c                      |  56 +++---
+ samples/vfio-mdev/mtty.c                      |  66 ++------
+ 17 files changed, 306 insertions(+), 376 deletions(-)
 
-At this point, thread B will run:
+-- 
+2.31.0
 
-    rcu_assign_pointer(landlock_inode(inode)->object, NULL);
-
-while thread A runs:
-
-    rcu_dereference_protected(inode_sec->object,
-        lockdep_is_held(&inode->i_lock));
-
-meaning there is a (theoretical) data race, since
-rcu_dereference_protected() doesn't use READ_ONCE().
-
-> >> +       if (unlikely(object)) {
-> >> +               /* Someone else just created the object, bail out and =
-retry. */
-> >> +               spin_unlock(&inode->i_lock);
-> >> +               kfree(new_object);
-> >> +
-> >> +               rcu_read_lock();
-> >> +               goto retry;
-> >> +       }
-> >> +
-> >> +       rcu_assign_pointer(inode_sec->object, new_object);
-> >> +       /*
-> >> +        * @inode will be released by hook_sb_delete() on its superblo=
-ck
-> >> +        * shutdown.
-> >> +        */
-> >> +       ihold(inode);
-> >> +       spin_unlock(&inode->i_lock);
-> >> +       return new_object;
-> >> +}
