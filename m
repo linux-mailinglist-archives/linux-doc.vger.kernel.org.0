@@ -2,140 +2,152 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B668C3480BF
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Mar 2021 19:39:36 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 8EFAD3480AE
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Mar 2021 19:39:30 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237737AbhCXSjD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Mar 2021 14:39:03 -0400
-Received: from mga09.intel.com ([134.134.136.24]:17741 "EHLO mga09.intel.com"
+        id S237621AbhCXSi6 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Mar 2021 14:38:58 -0400
+Received: from mail.kernel.org ([198.145.29.99]:48326 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S237691AbhCXSiw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 24 Mar 2021 14:38:52 -0400
-IronPort-SDR: Vry9XIMZyM3cYzJNDxsKdJxFQ1g7kQ1vUas7jclMGzpNDb7d3HrwMSaxuPJyw9UplxgA7ba9cB
- HyRX4x0UrR1w==
-X-IronPort-AV: E=McAfee;i="6000,8403,9933"; a="190859585"
-X-IronPort-AV: E=Sophos;i="5.81,275,1610438400"; 
-   d="scan'208";a="190859585"
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-  by orsmga102.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Mar 2021 11:38:52 -0700
-IronPort-SDR: Ck0UDrK3J/KzAcuje5/Avfx+nteDZ2PA5dQgq2nPVJ2x97zXIVlBYd4rAaR5tkfU+4UvPbU25V
- m9Mxy25UQYuw==
-X-IronPort-AV: E=Sophos;i="5.81,275,1610438400"; 
-   d="scan'208";a="608203941"
-Received: from gna-dev.igk.intel.com ([10.102.80.34])
-  by fmsmga005-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 24 Mar 2021 11:38:49 -0700
-From:   Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>
-To:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Arnd Bergmann <arnd@arndb.de>,
+        id S237595AbhCXSi0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 24 Mar 2021 14:38:26 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id B161761A16;
+        Wed, 24 Mar 2021 18:38:21 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1616611105;
+        bh=2goQGhK9s/vJ0sA2UDpMJYC1frOuoZRBT/P1ep5MeLI=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=jY7ScJi+1viiIuWHbYWQ14rsshc4fwsLFktskMndtqTZ3QMnvrFERgftm0Zu1HkB2
+         U4M0Ja4iFHE8fT1hLWeMFrAQ3k2UdAph17ovXmz9vIvgifvoLQaqW72X5xtAKpxnSB
+         M5t1tU43Itok8Iy5znf/PSLu6gZW/HsVtachVXTXETj1TXjmqCPFngQvAa7Hcz3tvr
+         Kd9fcGrUa2wo9Nf7hY4YHh4WL+wKOw4zDUJ2kG6dDC5T99LlO+VpYk39aJMwKFjRDw
+         u3kb6uwO5hHl0r6AOSTfcdWetfFlkbYIhDzCM8/XkoKukCVojeiriXwCZntSDQro95
+         dY1I923BXMANg==
+Date:   Wed, 24 Mar 2021 18:38:18 +0000
+From:   Will Deacon <will@kernel.org>
+To:     Hector Martin <marcan@marcan.st>
+Cc:     linux-arm-kernel@lists.infradead.org,
+        Marc Zyngier <maz@kernel.org>, Rob Herring <robh@kernel.org>,
+        Arnd Bergmann <arnd@kernel.org>,
+        Olof Johansson <olof@lixom.net>,
+        Krzysztof Kozlowski <krzk@kernel.org>,
+        Mark Kettenis <mark.kettenis@xs4all.nl>,
+        Tony Lindgren <tony@atomide.com>,
+        Mohamed Mediouni <mohamed.mediouni@caramail.com>,
+        Stan Skowronek <stan@corellium.com>,
+        Alexander Graf <graf@amazon.com>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Mark Rutland <mark.rutland@arm.com>,
+        Andy Shevchenko <andy.shevchenko@gmail.com>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Derek Kiernan <derek.kiernan@xilinx.com>,
-        Dragan Cvetic <dragan.cvetic@xilinx.com>,
-        Andy Shevchenko <andy.shevchenko@gmail.com>
-Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
-        Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>,
-        Tomasz Jankowski <tomasz1.jankowski@intel.com>,
-        Savo Novakovic <savox.novakovic@intel.com>,
-        Jianxun Zhang <jianxun.zhang@linux.intel.com>
-Subject: [PATCH v2 13/13] intel_gna: add file operations to a 'misc' device
-Date:   Wed, 24 Mar 2021 19:36:10 +0100
-Message-Id: <20210324183610.4574-14-maciej.kwapulinski@linux.intel.com>
-X-Mailer: git-send-email 2.28.0
-In-Reply-To: <20210324183610.4574-1-maciej.kwapulinski@linux.intel.com>
-References: <20210324183610.4574-1-maciej.kwapulinski@linux.intel.com>
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Christoph Hellwig <hch@infradead.org>,
+        "David S. Miller" <davem@davemloft.net>,
+        devicetree@vger.kernel.org, linux-serial@vger.kernel.org,
+        linux-doc@vger.kernel.org, linux-samsung-soc@vger.kernel.org,
+        linux-arch@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [RFT PATCH v3 13/27] arm64: Add Apple vendor-specific system
+ registers
+Message-ID: <20210324183818.GF13181@willie-the-truck>
+References: <20210304213902.83903-1-marcan@marcan.st>
+ <20210304213902.83903-14-marcan@marcan.st>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210304213902.83903-14-marcan@marcan.st>
+User-Agent: Mutt/1.10.1 (2018-07-13)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Tomasz Jankowski <tomasz1.jankowski@intel.com>
+On Fri, Mar 05, 2021 at 06:38:48AM +0900, Hector Martin wrote:
+> Apple ARM64 SoCs have a ton of vendor-specific registers we're going to
+> have to deal with, and those don't really belong in sysreg.h with all
+> the architectural registers. Make a new home for them, and add some
+> registers which are useful for early bring-up.
+> 
+> Signed-off-by: Hector Martin <marcan@marcan.st>
+> ---
+>  MAINTAINERS                           |  1 +
+>  arch/arm64/include/asm/sysreg_apple.h | 69 +++++++++++++++++++++++++++
+>  2 files changed, 70 insertions(+)
+>  create mode 100644 arch/arm64/include/asm/sysreg_apple.h
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index aec14fbd61b8..3a352c687d4b 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -1646,6 +1646,7 @@ B:	https://github.com/AsahiLinux/linux/issues
+>  C:	irc://chat.freenode.net/asahi-dev
+>  T:	git https://github.com/AsahiLinux/linux.git
+>  F:	Documentation/devicetree/bindings/arm/apple.yaml
+> +F:	arch/arm64/include/asm/sysreg_apple.h
 
-Signed-off-by: Tomasz Jankowski <tomasz1.jankowski@intel.com>
-Tested-by: Savo Novakovic <savox.novakovic@intel.com>
-Co-developed-by: Jianxun Zhang <jianxun.zhang@linux.intel.com>
-Signed-off-by: Jianxun Zhang <jianxun.zhang@linux.intel.com>
-Co-developed-by: Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>
-Signed-off-by: Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>
----
- drivers/misc/intel/gna/gna_device.c | 60 ++++++++++++++++++++++++++++-
- 1 file changed, 59 insertions(+), 1 deletion(-)
+(this isn't needed with my suggestion below).
 
-diff --git a/drivers/misc/intel/gna/gna_device.c b/drivers/misc/intel/gna/gna_device.c
-index 3f7f4c07d1a1..3f74a0a3bd30 100644
---- a/drivers/misc/intel/gna/gna_device.c
-+++ b/drivers/misc/intel/gna/gna_device.c
-@@ -93,12 +93,70 @@ MODULE_DEVICE_TABLE(pci, gna_pci_ids);
- 
- static int gna_open(struct inode *inode, struct file *f)
- {
--	return -EPERM;
-+	struct gna_file_private *file_priv;
-+	struct gna_private *gna_priv;
-+
-+	gna_priv = container_of(f->private_data, struct gna_private, misc);
-+
-+	file_priv = kzalloc(sizeof(*file_priv), GFP_KERNEL);
-+	if (!file_priv)
-+		return -ENOMEM;
-+
-+	file_priv->fd = f;
-+	file_priv->gna_priv = gna_priv;
-+
-+	mutex_init(&file_priv->memlist_lock);
-+	INIT_LIST_HEAD(&file_priv->memory_list);
-+
-+	mutex_lock(&gna_priv->flist_lock);
-+	list_add_tail(&file_priv->flist, &gna_priv->file_list);
-+	mutex_unlock(&gna_priv->flist_lock);
-+
-+	f->private_data = file_priv;
-+
-+	return 0;
-+}
-+
-+static int gna_release(struct inode *inode, struct file *f)
-+{
-+	struct gna_file_private *iter_file, *temp_file;
-+	struct gna_memory_object *iter_mo, *temp_mo;
-+	struct gna_file_private *file_priv;
-+	struct gna_private *gna_priv;
-+
-+	/* free all memory objects created by that file */
-+	file_priv = (struct gna_file_private *)f->private_data;
-+	gna_priv = file_priv->gna_priv;
-+
-+	mutex_lock(&file_priv->memlist_lock);
-+	list_for_each_entry_safe(iter_mo, temp_mo, &file_priv->memory_list, file_mem_list) {
-+		queue_work(gna_priv->request_wq, &iter_mo->work);
-+		wait_event(iter_mo->waitq, true);
-+		gna_memory_free(gna_priv, iter_mo);
-+	}
-+	mutex_unlock(&file_priv->memlist_lock);
-+
-+	gna_delete_file_requests(f, gna_priv);
-+
-+	mutex_lock(&gna_priv->flist_lock);
-+	list_for_each_entry_safe(iter_file, temp_file, &gna_priv->file_list, flist) {
-+		if (iter_file->fd == f) {
-+			list_del(&iter_file->flist);
-+			f->private_data = NULL;
-+			kfree(iter_file);
-+			break;
-+		}
-+	}
-+	mutex_unlock(&gna_priv->flist_lock);
-+
-+	return 0;
- }
- 
- static const struct file_operations gna_file_ops = {
- 	.owner		=	THIS_MODULE,
- 	.open		=	gna_open,
-+	.release	=	gna_release,
-+	.unlocked_ioctl =	gna_ioctl,
- };
- 
- static void gna_dev_release(struct gna_private *gna_priv)
--- 
-2.28.0
+>  ARM/ARTPEC MACHINE SUPPORT
+>  M:	Jesper Nilsson <jesper.nilsson@axis.com>
+> diff --git a/arch/arm64/include/asm/sysreg_apple.h b/arch/arm64/include/asm/sysreg_apple.h
+> new file mode 100644
+> index 000000000000..48347a51d564
+> --- /dev/null
+> +++ b/arch/arm64/include/asm/sysreg_apple.h
 
+I doubt apple are the only folks doing this, so can we instead have
+sysreg-impdef.h please, and then have an Apple section in there for these
+registers? That way, we could also have an imp_sys_reg() macro to limit
+CRn to 11 or 15, which is the reserved encoding space for these registers.
+
+We'll cc you for any patches touching the Apple parts, as we don't have
+the first clue about what's hiding in there.
+
+> @@ -0,0 +1,69 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Apple SoC vendor-defined system register definitions
+> + *
+> + * Copyright The Asahi Linux Contributors
+> +
+> + * This file contains only well-understood registers that are useful to
+> + * Linux. If you are looking for things to add here, you should visit:
+> + *
+> + * https://github.com/AsahiLinux/docs/wiki/HW:ARM-System-Registers
+> + */
+> +
+> +#ifndef __ASM_SYSREG_APPLE_H
+> +#define __ASM_SYSREG_APPLE_H
+> +
+> +#include <asm/sysreg.h>
+> +#include <linux/bits.h>
+> +#include <linux/bitfield.h>
+> +
+> +/*
+> + * Keep these registers in encoding order, except for register arrays;
+> + * those should be listed in array order starting from the position of
+> + * the encoding of the first register.
+> + */
+> +
+> +#define SYS_APL_PMCR0_EL1		sys_reg(3, 1, 15, 0, 0)
+> +#define PMCR0_IMODE			GENMASK(10, 8)
+> +#define PMCR0_IMODE_OFF			0
+> +#define PMCR0_IMODE_PMI			1
+> +#define PMCR0_IMODE_AIC			2
+> +#define PMCR0_IMODE_HALT		3
+> +#define PMCR0_IMODE_FIQ			4
+> +#define PMCR0_IACT			BIT(11)
+
+The Arm ARM says this about imp-def sysregs:
+
+  | The Arm architecture guarantees not to define any register name
+  | prefixed with IMP_ as part of the standard Arm architecture.
+  |
+  | Note
+  | Arm strongly recommends that any register names created in the
+  | IMPLEMENTATION DEFINED register spaces be prefixed with IMP_ and
+  | postfixed with _ELx, where appropriate.
+
+and it seems like we could follow that here without much effort, if you
+don't mind.
+
+Will
