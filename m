@@ -2,606 +2,667 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7AA8434817C
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Mar 2021 20:16:01 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 28B453481F9
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Mar 2021 20:32:08 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237959AbhCXTPS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Mar 2021 15:15:18 -0400
-Received: from smtp-42ae.mail.infomaniak.ch ([84.16.66.174]:50343 "EHLO
-        smtp-42ae.mail.infomaniak.ch" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S237912AbhCXTPF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Mar 2021 15:15:05 -0400
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
-        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4F5HxN0DM0zMq012;
-        Wed, 24 Mar 2021 20:15:04 +0100 (CET)
-Received: from localhost (unknown [23.97.221.149])
-        by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4F5HxM4CpCzlh8TX;
-        Wed, 24 Mar 2021 20:15:03 +0100 (CET)
-From:   =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
-To:     James Morris <jmorris@namei.org>, Jann Horn <jannh@google.com>,
-        "Serge E . Hallyn" <serge@hallyn.com>
-Cc:     =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        David Howells <dhowells@redhat.com>,
-        Jeff Dike <jdike@addtoit.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Michael Kerrisk <mtk.manpages@gmail.com>,
-        Richard Weinberger <richard@nod.at>,
-        Shuah Khan <shuah@kernel.org>,
-        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
-        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        linux-security-module@vger.kernel.org, x86@kernel.org,
-        =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@linux.microsoft.com>
-Subject: [PATCH v31 12/12] landlock: Add user and kernel documentation
-Date:   Wed, 24 Mar 2021 20:15:20 +0100
-Message-Id: <20210324191520.125779-13-mic@digikod.net>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210324191520.125779-1-mic@digikod.net>
-References: <20210324191520.125779-1-mic@digikod.net>
+        id S237876AbhCXTbd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Mar 2021 15:31:33 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59386 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S237783AbhCXTbH (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Mar 2021 15:31:07 -0400
+Received: from mail-pf1-x42b.google.com (mail-pf1-x42b.google.com [IPv6:2607:f8b0:4864:20::42b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 8A4A9C061763;
+        Wed, 24 Mar 2021 12:31:07 -0700 (PDT)
+Received: by mail-pf1-x42b.google.com with SMTP id j25so18122593pfe.2;
+        Wed, 24 Mar 2021 12:31:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=kPViiWzpd+vtjyHTG7l19ffYtZablT+7CwlxZ0j8qsA=;
+        b=FhpA2GxkcctvO1gdcphTKGzMpf4llu2lp/YGRtJxxfwnLRx6c7sKIWeto7Q2aa4b9I
+         qCOHrx0ttTaCG3nrL6AVitTvZ7kGstK2ZwE0fR6iSrUjy5Wvs9opHCeoxXq8EqejChLH
+         o0NQ8neuGIzOgah4XsjjOz9Vhr8mqmxk0ebjxxMfdu5jlERiW/+TKBR6zQmZdlxqetit
+         IC2sAW1UOw9+G97XFVcODmcHiyjzBJPvBtZjV5+HL2ujA+t61FQwrD+4PNTbqcUX+Vx9
+         exgDnGqAbTVmc4lfQRWCsS8wZLTCit196WxMCok0ezb9t1megSiGxEMd9ZKl2F1BjHTO
+         U/gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=kPViiWzpd+vtjyHTG7l19ffYtZablT+7CwlxZ0j8qsA=;
+        b=jEu0jMbEukgK/BAuufrvJcaj+8hkljI+46AnHIf6U7C/+4duysGVO/rrOEf2/G2vUj
+         5EbCbOT5AClz3riPkJ+iYHxtyO205vYc+6RxGO6htblJXRjTaqdZoNIvh0MP/CAxtWcV
+         b/0MohfkKvb2S6aVV+pdrn1wPV/pHqU42hQwZ6rs941Zu4qPoRgNKUR3esoGSHvZS02M
+         MaCmo9AggqMgNKunivOxNcVf0EB+p564DhrlKqMgbTSgEdpXGs86hteW++eZQIo91HfL
+         7ksuyfg4jn7v9560W3Oc+aeLm18+/QWQyT1dFWO+OXymXBwjxcNCY24DAZkEyW1iG1CE
+         USXA==
+X-Gm-Message-State: AOAM531KDAwR9KZ5bEGJn7ZC8+/8fmQX0GWlrQ4BGiXEH4WaJxy/W9UT
+        OU1okZz4XxaA1fxHRpy2ghKhVbCOVb6YAZUIg84=
+X-Google-Smtp-Source: ABdhPJyP8MZr8HircpDEznu1/OzkKhg9f/Hc4muQoq6lbrgZqvcxbosf4BNPiXPFLnn/UMORz0VV2o/wnNDHLC9nN6E=
+X-Received: by 2002:a17:902:c808:b029:e6:4204:f62f with SMTP id
+ u8-20020a170902c808b02900e64204f62fmr5145533plx.0.1616614266814; Wed, 24 Mar
+ 2021 12:31:06 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+References: <20210324183610.4574-1-maciej.kwapulinski@linux.intel.com> <20210324183610.4574-2-maciej.kwapulinski@linux.intel.com>
+In-Reply-To: <20210324183610.4574-2-maciej.kwapulinski@linux.intel.com>
+From:   Andy Shevchenko <andy.shevchenko@gmail.com>
+Date:   Wed, 24 Mar 2021 21:30:49 +0200
+Message-ID: <CAHp75Vf54GNsw_xWqiOhZx5aHHnQ_-wUWugQ8w9vJPRheLxHFA@mail.gmail.com>
+Subject: Re: [PATCH v2 01/13] intel_gna: add driver module
+To:     Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>
+Cc:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Derek Kiernan <derek.kiernan@xilinx.com>,
+        Dragan Cvetic <dragan.cvetic@xilinx.com>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
+        Linux Documentation List <linux-doc@vger.kernel.org>,
+        Tomasz Jankowski <tomasz1.jankowski@intel.com>,
+        Savo Novakovic <savox.novakovic@intel.com>,
+        Jianxun Zhang <jianxun.zhang@linux.intel.com>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mickaël Salaün <mic@linux.microsoft.com>
+On Wed, Mar 24, 2021 at 8:38 PM Maciej Kwapulinski
+<maciej.kwapulinski@linux.intel.com> wrote:
+>
+> From: Tomasz Jankowski <tomasz1.jankowski@intel.com>
+>
+> Add a new PCI driver for Intel(R) Gaussian & Neural Accelerator
+> with basic support like module loading and unloading. The full
+> function of the driver will be added by further changes.
+>
+> Signed-off-by: Tomasz Jankowski <tomasz1.jankowski@intel.com>
+> Tested-by: Savo Novakovic <savox.novakovic@intel.com>
+> Co-developed-by: Jianxun Zhang <jianxun.zhang@linux.intel.com>
+> Signed-off-by: Jianxun Zhang <jianxun.zhang@linux.intel.com>
+> Co-developed-by: Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>
+> Signed-off-by: Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>
+> ---
+>  Documentation/misc-devices/index.rst          |   1 +
+>  Documentation/misc-devices/intel/gna.rst      |  48 ++++++
+>  .../userspace-api/ioctl/ioctl-number.rst      |   1 +
+>  MAINTAINERS                                   |   7 +
+>  drivers/misc/Kconfig                          |   1 +
+>  drivers/misc/Makefile                         |   1 +
+>  drivers/misc/intel/gna/Kbuild                 |   5 +
+>  drivers/misc/intel/gna/Kconfig                |  13 ++
+>  drivers/misc/intel/gna/gna_device.c           |  74 +++++++++
+>  drivers/misc/intel/gna/gna_device.h           |  36 ++++
+>  drivers/misc/intel/gna/gna_driver.c           |  39 +++++
+>  drivers/misc/intel/gna/gna_driver.h           |  15 ++
 
-Add a first document describing userspace API: how to define and enforce
-a Landlock security policy.  This is explained with a simple example.
-The Landlock system calls are described with their expected behavior and
-current limitations.
+What is the point now to have gna/gna_, I guess the latter should go?
 
-Another document is dedicated to kernel developers, describing guiding
-principles and some important kernel structures.
+>  include/uapi/misc/intel/gna.h                 | 155 ++++++++++++++++++
+>  13 files changed, 396 insertions(+)
+>  create mode 100644 Documentation/misc-devices/intel/gna.rst
+>  create mode 100644 drivers/misc/intel/gna/Kbuild
+>  create mode 100644 drivers/misc/intel/gna/Kconfig
+>  create mode 100644 drivers/misc/intel/gna/gna_device.c
+>  create mode 100644 drivers/misc/intel/gna/gna_device.h
+>  create mode 100644 drivers/misc/intel/gna/gna_driver.c
+>  create mode 100644 drivers/misc/intel/gna/gna_driver.h
+>  create mode 100644 include/uapi/misc/intel/gna.h
+>
+> diff --git a/Documentation/misc-devices/index.rst b/Documentation/misc-devices/index.rst
+> index 64420b3314fe..1b187ee121b0 100644
+> --- a/Documentation/misc-devices/index.rst
+> +++ b/Documentation/misc-devices/index.rst
+> @@ -19,6 +19,7 @@ fit into other categories.
+>     bh1770glc
+>     eeprom
+>     c2port
+> +   intel/gna
 
-This documentation can be built with the Sphinx framework.
+Shouldn't it preserve ordering?
 
-Cc: James Morris <jmorris@namei.org>
-Cc: Jann Horn <jannh@google.com>
-Cc: Kees Cook <keescook@chromium.org>
-Cc: Serge E. Hallyn <serge@hallyn.com>
-Signed-off-by: Mickaël Salaün <mic@linux.microsoft.com>
-Reviewed-by: Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>
-Link: https://lore.kernel.org/r/20210324191520.125779-13-mic@digikod.net
----
+>     ibmvmc
+>     ics932s401
+>     isl29003
+> diff --git a/Documentation/misc-devices/intel/gna.rst b/Documentation/misc-devices/intel/gna.rst
+> new file mode 100644
+> index 000000000000..9baeec5ceb5c
+> --- /dev/null
+> +++ b/Documentation/misc-devices/intel/gna.rst
+> @@ -0,0 +1,48 @@
+> +.. SPDX-License-Identifier: GPL-2.0-only
+> +
+> +=====================================================
+> +Intel(R) Gaussian & Neural Accelerator (Intel(R) GNA)
+> +=====================================================
+> +
+> +Acronyms
+> +--------
+> +GNA    - Gaussian & Neural Accelerator
+> +GMM    - Gaussian Mixer Model
+> +CNN    - Convolutional Neural Network
+> +RNN    - Recurrent Neural Networks
+> +DNN    - Deep Neural Networks
+> +
+> +Introduction
+> +------------
+> +The Intel(R) GNA is an internal PCI fixed device available on several Intel platforms/SoCs.
+> +Feature set depends on the Intel chipset SKU.
+> +
+> +Intel(R) GNA provides hardware accelerated computation for GMMs and Neural Networks.
+> +It supports several layer types: affine, recurrent, and convolutional among others.
+> +Hardware also provides helper layer types for copying and transposing matrices.
+> +
+> +Linux Driver
+> +------------
+> +The driver also registers a character device to expose file operations via dev node.
+> +
+> +The driver probes/removes PCI device, implements file operations, handles runtime
 
-Changes since v30:
-* Fix typo (spotted by Kees Cook).
-* Extend commit description (suggested by Kees Cook).
-* Add note about what a Landlock user should do about OverlayFS
-  (requested by Kees Cook).
-* Include inode and superblock documentation.
-* Improve explanations about special filesystem limitations, and
-  highlight automatic /proc restrictions.
-* Bump the last modification date.
+a PCI device
 
-Changes since v28:
-* Reorder subsections by importance in the "Current limitations"
-  section.
 
-Changes since v27:
-* Update landlock_restrict_self(2).
-* Update date and copyright.
+> +power management, and interacts with hardware through MMIO registers.
+> +
+> +Multiple processes can independently file many requests to the driver. These requests are
+> +processed in a FIFO manner. The hardware can process one request at a time by using a FIFO
+> +queue.
+> +
+> +IOCTL
+> +-----
+> +Intel(R) GNA driver controls the device through IOCTL interfaces.
+> +Following IOCTL commands are supported:
+> +
+> +GNA_IOCTL_PARAM_GET gets driver and device capabilities.
+> +
+> +GNA_IOCTL_MEMORY_MAP locks user pages and GNA MMU setups for DMA transfer.
+> +
+> +GNA_IOCTL_MEMORY_UNMAP unlocks user pages and releases GNA MMU structures.
+> +
+> +GNA_IOCTL_COMPUTE submits a request to the device queue.
+> +
+> +GNA_IOCTL_WAIT blocks and waits on the submitted request.
+> diff --git a/Documentation/userspace-api/ioctl/ioctl-number.rst b/Documentation/userspace-api/ioctl/ioctl-number.rst
+> index a4c75a28c839..9ec2b32f656a 100644
+> --- a/Documentation/userspace-api/ioctl/ioctl-number.rst
+> +++ b/Documentation/userspace-api/ioctl/ioctl-number.rst
+> @@ -115,6 +115,7 @@ Code  Seq#    Include File                                           Comments
+>  'B'   C0-FF  advanced bbus                                           <mailto:maassen@uni-freiburg.de>
+>  'C'   all    linux/soundcard.h                                       conflict!
+>  'C'   01-2F  linux/capi.h                                            conflict!
+> +'C'   01-5F  uapi/misc/intel/gna.h                                   conflict!
+>  'C'   F0-FF  drivers/net/wan/cosa.h                                  conflict!
+>  'D'   all    arch/s390/include/asm/dasd.h
+>  'D'   40-5F  drivers/scsi/dpt/dtpi_ioctl.h
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index bfc1b86e3e73..da926aa4523c 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -8928,6 +8928,13 @@ S:       Maintained
+>  F:     Documentation/fb/intelfb.rst
+>  F:     drivers/video/fbdev/intelfb/
+>
+> +INTEL GNA PCI DRIVER
+> +M:     Maciej Kwapulinski <maciej.kwapulinski@linux.intel.com>
+> +S:     Maintained
+> +F:     Documentation/misc-devices/intel/gna.rst
+> +F:     drivers/misc/intel/gna/*
+> +F:     include/uapi/misc/intel/gna.h
+> +
+>  INTEL GPIO DRIVERS
+>  M:     Andy Shevchenko <andy@kernel.org>
+>  L:     linux-gpio@vger.kernel.org
+> diff --git a/drivers/misc/Kconfig b/drivers/misc/Kconfig
+> index fafa8b0d8099..ce3dc5b9f821 100644
+> --- a/drivers/misc/Kconfig
+> +++ b/drivers/misc/Kconfig
+> @@ -481,4 +481,5 @@ source "drivers/misc/ocxl/Kconfig"
+>  source "drivers/misc/cardreader/Kconfig"
+>  source "drivers/misc/habanalabs/Kconfig"
+>  source "drivers/misc/uacce/Kconfig"
+> +source "drivers/misc/intel/gna/Kconfig"
+>  endmenu
+> diff --git a/drivers/misc/Makefile b/drivers/misc/Makefile
+> index d23231e73330..5fca2e730d96 100644
+> --- a/drivers/misc/Makefile
+> +++ b/drivers/misc/Makefile
+> @@ -57,3 +57,4 @@ obj-$(CONFIG_HABANA_AI)               += habanalabs/
+>  obj-$(CONFIG_UACCE)            += uacce/
+>  obj-$(CONFIG_XILINX_SDFEC)     += xilinx_sdfec.o
+>  obj-$(CONFIG_HISI_HIKEY_USB)   += hisi_hikey_usb.o
+> +obj-$(CONFIG_INTEL_GNA)                += intel/gna/
+> diff --git a/drivers/misc/intel/gna/Kbuild b/drivers/misc/intel/gna/Kbuild
+> new file mode 100644
+> index 000000000000..5d3becc71683
+> --- /dev/null
+> +++ b/drivers/misc/intel/gna/Kbuild
+> @@ -0,0 +1,5 @@
+> +# SPDX-License-Identifier: GPL-2.0-only
+> +
+> +intel_gna-y := gna_device.o gna_driver.o
+> +
+> +obj-$(CONFIG_INTEL_GNA) += intel_gna.o
+> diff --git a/drivers/misc/intel/gna/Kconfig b/drivers/misc/intel/gna/Kconfig
+> new file mode 100644
+> index 000000000000..c3b768a40684
+> --- /dev/null
+> +++ b/drivers/misc/intel/gna/Kconfig
+> @@ -0,0 +1,13 @@
+> +#
+> +# Intel(R) Gaussian & Neural Accelerator (Intel(R) GNA)
+> +#
+> +
+> +config INTEL_GNA
+> +       tristate "Intel(R) Gaussian & Neural Accelerator (Intel(R) GNA)"
+> +       depends on X86_64 && PCI
 
-Changes since v25:
-* Explain the behavior of layered access rights.
-* Explain how bind mounts and overayfs mounts are handled by Landlock:
-  merged overlayfs mount points have their own inodes, which makes these
-  hierarchies independent from its upper and lower layers, unlike bind
-  mounts which share the same inodes between the source hierarchy and
-  the mount point hierarchy.
-  New overlayfs mount and bind mount tests check these behaviors.
-* Synchronize with the new syscalls.c file and update syscall names.
-* Fix spelling.
-* Remove Reviewed-by Jann Horn because of the above changes.
+Why 64?
 
-Changes since v24:
-* Add Reviewed-by Jann Horn.
-* Add a paragraph to explain how the ruleset layers work.
-* Bump date.
+> +       help
+> +         This option enables the Intel(R) Gaussian & Neural Accelerator
+> +         (Intel(R) GNA) driver: intel_gna.
+> +         User space interface is defined in include/uapi/misc/intel/gna.h, while
+> +         information about functionality is in
+> +         Documentation/misc-devices/intel/gna.rst
+> diff --git a/drivers/misc/intel/gna/gna_device.c b/drivers/misc/intel/gna/gna_device.c
+> new file mode 100644
+> index 000000000000..431113297879
+> --- /dev/null
+> +++ b/drivers/misc/intel/gna/gna_device.c
+> @@ -0,0 +1,74 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +// Copyright(c) 2017-2021 Intel Corporation
+> +
+> +#include <linux/module.h>
+> +#include <linux/pci.h>
+> +
+> +#include "gna_device.h"
+> +#include "gna_driver.h"
 
-Changes since v23:
-* Explain limitations for the maximum number of stacked ruleset, and the
-  memory usage restrictions.
+> +#define GNA_BAR0               0
 
-Changes since v22:
-* Fix spelling and remove obsolete sentence (spotted by Jann Horn).
-* Bump date.
+Why? Expecting something different?
 
-Changes since v21:
-* Move the user space documentation to userspace-api/landlock.rst and
-  the kernel documentation to security/landlock.rst .
-* Add license headers.
-* Add last update dates.
-* Update MAINTAINERS file.
-* Add (back) links to git.kernel.org .
-* Fix spelling.
+> +static void gna_dev_init(struct gna_private *gna_priv, struct pci_dev *pcidev,
+> +                       const struct pci_device_id *pci_id)
+> +{
 
-Changes since v20:
-* Update examples and documentation with the new syscalls.
+> +       pci_set_drvdata(pcidev, gna_priv);
 
-Changes since v19:
-* Update examples and documentation with the new syscalls.
+You assign this and make it visible before assigning fields. Not good.
 
-Changes since v15:
-* Add current limitations.
+> +       gna_priv->parent = &pcidev->dev;
+> +       gna_priv->pdev = pcidev;
+> +       gna_priv->info = *(struct gna_drv_info *)pci_id->driver_data;
+> +       gna_priv->drv_priv = &gna_drv_priv;
+> +}
 
-Changes since v14:
-* Fix spelling (contributed by Randy Dunlap).
-* Extend documentation about inheritance and explain layer levels.
-* Remove the use of now-removed access rights.
-* Use GitHub links.
-* Improve kernel documentation.
-* Add section for tests.
-* Update example.
+Why is this can't be inlined into ->probe() ?
 
-Changes since v13:
-* Rewrote the documentation according to the major revamp.
+> +int gna_probe(struct pci_dev *pcidev, const struct pci_device_id *pci_id)
+> +{
+> +       struct gna_private *gna_priv;
+> +       void __iomem *const *iomap;
+> +       unsigned long phys_len;
+> +       phys_addr_t phys;
+> +       int ret;
+> +
+> +       ret = pcim_enable_device(pcidev);
+> +       if (ret) {
+> +               dev_err(&pcidev->dev, "pci device can't be enabled\n");
+> +               return ret;
+> +       }
+> +
+> +       ret = pcim_iomap_regions(pcidev, 1 << GNA_BAR0, GNA_DV_NAME);
+> +       if (ret) {
+> +               dev_err(&pcidev->dev, "cannot iomap regions\n");
+> +               return ret;
+> +       }
 
-Previous changes:
-https://lore.kernel.org/lkml/20191104172146.30797-8-mic@digikod.net/
----
- Documentation/security/index.rst         |   1 +
- Documentation/security/landlock.rst      |  85 +++++++
- Documentation/userspace-api/index.rst    |   1 +
- Documentation/userspace-api/landlock.rst | 311 +++++++++++++++++++++++
- MAINTAINERS                              |   2 +
- 5 files changed, 400 insertions(+)
- create mode 100644 Documentation/security/landlock.rst
- create mode 100644 Documentation/userspace-api/landlock.rst
+> +       phys = pci_resource_start(pcidev, GNA_BAR0);
+> +       phys_len = pci_resource_len(pcidev, GNA_BAR0);
+> +
+> +       dev_info(&pcidev->dev, "physical base address %pap, %lu bytes\n",
+> +               &phys, phys_len);
 
-diff --git a/Documentation/security/index.rst b/Documentation/security/index.rst
-index 8129405eb2cc..16335de04e8c 100644
---- a/Documentation/security/index.rst
-+++ b/Documentation/security/index.rst
-@@ -16,3 +16,4 @@ Security Documentation
-    siphash
-    tpm/index
-    digsig
-+   landlock
-diff --git a/Documentation/security/landlock.rst b/Documentation/security/landlock.rst
-new file mode 100644
-index 000000000000..2e84925ae971
---- /dev/null
-+++ b/Documentation/security/landlock.rst
-@@ -0,0 +1,85 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. Copyright © 2017-2020 Mickaël Salaün <mic@digikod.net>
-+.. Copyright © 2019-2020 ANSSI
-+
-+==================================
-+Landlock LSM: kernel documentation
-+==================================
-+
-+:Author: Mickaël Salaün
-+:Date: March 2021
-+
-+Landlock's goal is to create scoped access-control (i.e. sandboxing).  To
-+harden a whole system, this feature should be available to any process,
-+including unprivileged ones.  Because such process may be compromised or
-+backdoored (i.e. untrusted), Landlock's features must be safe to use from the
-+kernel and other processes point of view.  Landlock's interface must therefore
-+expose a minimal attack surface.
-+
-+Landlock is designed to be usable by unprivileged processes while following the
-+system security policy enforced by other access control mechanisms (e.g. DAC,
-+LSM).  Indeed, a Landlock rule shall not interfere with other access-controls
-+enforced on the system, only add more restrictions.
-+
-+Any user can enforce Landlock rulesets on their processes.  They are merged and
-+evaluated according to the inherited ones in a way that ensures that only more
-+constraints can be added.
-+
-+User space documentation can be found here: :doc:`/userspace-api/landlock`.
-+
-+Guiding principles for safe access controls
-+===========================================
-+
-+* A Landlock rule shall be focused on access control on kernel objects instead
-+  of syscall filtering (i.e. syscall arguments), which is the purpose of
-+  seccomp-bpf.
-+* To avoid multiple kinds of side-channel attacks (e.g. leak of security
-+  policies, CPU-based attacks), Landlock rules shall not be able to
-+  programmatically communicate with user space.
-+* Kernel access check shall not slow down access request from unsandboxed
-+  processes.
-+* Computation related to Landlock operations (e.g. enforcing a ruleset) shall
-+  only impact the processes requesting them.
-+
-+Tests
-+=====
-+
-+Userspace tests for backward compatibility, ptrace restrictions and filesystem
-+support can be found here: `tools/testing/selftests/landlock/`_.
-+
-+Kernel structures
-+=================
-+
-+Object
-+------
-+
-+.. kernel-doc:: security/landlock/object.h
-+    :identifiers:
-+
-+Filesystem
-+----------
-+
-+.. kernel-doc:: security/landlock/fs.h
-+    :identifiers:
-+
-+Ruleset and domain
-+------------------
-+
-+A domain is a read-only ruleset tied to a set of subjects (i.e. tasks'
-+credentials).  Each time a ruleset is enforced on a task, the current domain is
-+duplicated and the ruleset is imported as a new layer of rules in the new
-+domain.  Indeed, once in a domain, each rule is tied to a layer level.  To
-+grant access to an object, at least one rule of each layer must allow the
-+requested action on the object.  A task can then only transit to a new domain
-+that is the intersection of the constraints from the current domain and those
-+of a ruleset provided by the task.
-+
-+The definition of a subject is implicit for a task sandboxing itself, which
-+makes the reasoning much easier and helps avoid pitfalls.
-+
-+.. kernel-doc:: security/landlock/ruleset.h
-+    :identifiers:
-+
-+.. Links
-+.. _tools/testing/selftests/landlock/:
-+   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/tools/testing/selftests/landlock/
-diff --git a/Documentation/userspace-api/index.rst b/Documentation/userspace-api/index.rst
-index d29b020e5622..744c6491610c 100644
---- a/Documentation/userspace-api/index.rst
-+++ b/Documentation/userspace-api/index.rst
-@@ -18,6 +18,7 @@ place where this information is gathered.
- 
-    no_new_privs
-    seccomp_filter
-+   landlock
-    unshare
-    spec_ctrl
-    accelerators/ocxl
-diff --git a/Documentation/userspace-api/landlock.rst b/Documentation/userspace-api/landlock.rst
-new file mode 100644
-index 000000000000..b1040311402d
---- /dev/null
-+++ b/Documentation/userspace-api/landlock.rst
-@@ -0,0 +1,311 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. Copyright © 2017-2020 Mickaël Salaün <mic@digikod.net>
-+.. Copyright © 2019-2020 ANSSI
-+.. Copyright © 2021 Microsoft Corporation
-+
-+=====================================
-+Landlock: unprivileged access control
-+=====================================
-+
-+:Author: Mickaël Salaün
-+:Date: March 2021
-+
-+The goal of Landlock is to enable to restrict ambient rights (e.g. global
-+filesystem access) for a set of processes.  Because Landlock is a stackable
-+LSM, it makes possible to create safe security sandboxes as new security layers
-+in addition to the existing system-wide access-controls. This kind of sandbox
-+is expected to help mitigate the security impact of bugs or
-+unexpected/malicious behaviors in user space applications.  Landlock empowers
-+any process, including unprivileged ones, to securely restrict themselves.
-+
-+Landlock rules
-+==============
-+
-+A Landlock rule describes an action on an object.  An object is currently a
-+file hierarchy, and the related filesystem actions are defined with `access
-+rights`_.  A set of rules is aggregated in a ruleset, which can then restrict
-+the thread enforcing it, and its future children.
-+
-+Defining and enforcing a security policy
-+----------------------------------------
-+
-+We first need to create the ruleset that will contain our rules.  For this
-+example, the ruleset will contain rules that only allow read actions, but write
-+actions will be denied.  The ruleset then needs to handle both of these kind of
-+actions.
-+
-+.. code-block:: c
-+
-+    int ruleset_fd;
-+    struct landlock_ruleset_attr ruleset_attr = {
-+        .handled_access_fs =
-+            LANDLOCK_ACCESS_FS_EXECUTE |
-+            LANDLOCK_ACCESS_FS_WRITE_FILE |
-+            LANDLOCK_ACCESS_FS_READ_FILE |
-+            LANDLOCK_ACCESS_FS_READ_DIR |
-+            LANDLOCK_ACCESS_FS_REMOVE_DIR |
-+            LANDLOCK_ACCESS_FS_REMOVE_FILE |
-+            LANDLOCK_ACCESS_FS_MAKE_CHAR |
-+            LANDLOCK_ACCESS_FS_MAKE_DIR |
-+            LANDLOCK_ACCESS_FS_MAKE_REG |
-+            LANDLOCK_ACCESS_FS_MAKE_SOCK |
-+            LANDLOCK_ACCESS_FS_MAKE_FIFO |
-+            LANDLOCK_ACCESS_FS_MAKE_BLOCK |
-+            LANDLOCK_ACCESS_FS_MAKE_SYM,
-+    };
-+
-+    ruleset_fd = landlock_create_ruleset(&ruleset_attr, sizeof(ruleset_attr), 0);
-+    if (ruleset_fd < 0) {
-+        perror("Failed to create a ruleset");
-+        return 1;
-+    }
-+
-+We can now add a new rule to this ruleset thanks to the returned file
-+descriptor referring to this ruleset.  The rule will only allow reading the
-+file hierarchy ``/usr``.  Without another rule, write actions would then be
-+denied by the ruleset.  To add ``/usr`` to the ruleset, we open it with the
-+``O_PATH`` flag and fill the &struct landlock_path_beneath_attr with this file
-+descriptor.
-+
-+.. code-block:: c
-+
-+    int err;
-+    struct landlock_path_beneath_attr path_beneath = {
-+        .allowed_access =
-+            LANDLOCK_ACCESS_FS_EXECUTE |
-+            LANDLOCK_ACCESS_FS_READ_FILE |
-+            LANDLOCK_ACCESS_FS_READ_DIR,
-+    };
-+
-+    path_beneath.parent_fd = open("/usr", O_PATH | O_CLOEXEC);
-+    if (path_beneath.parent_fd < 0) {
-+        perror("Failed to open file");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+    err = landlock_add_rule(ruleset_fd, LANDLOCK_RULE_PATH_BENEATH,
-+                            &path_beneath, 0);
-+    close(path_beneath.parent_fd);
-+    if (err) {
-+        perror("Failed to update ruleset");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+
-+We now have a ruleset with one rule allowing read access to ``/usr`` while
-+denying all other handled accesses for the filesystem.  The next step is to
-+restrict the current thread from gaining more privileges (e.g. thanks to a SUID
-+binary).
-+
-+.. code-block:: c
-+
-+    if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0)) {
-+        perror("Failed to restrict privileges");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+
-+The current thread is now ready to sandbox itself with the ruleset.
-+
-+.. code-block:: c
-+
-+    if (landlock_restrict_self(ruleset_fd, 0)) {
-+        perror("Failed to enforce ruleset");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+    close(ruleset_fd);
-+
-+If the `landlock_restrict_self` system call succeeds, the current thread is now
-+restricted and this policy will be enforced on all its subsequently created
-+children as well.  Once a thread is landlocked, there is no way to remove its
-+security policy; only adding more restrictions is allowed.  These threads are
-+now in a new Landlock domain, merge of their parent one (if any) with the new
-+ruleset.
-+
-+Full working code can be found in `samples/landlock/sandboxer.c`_.
-+
-+Layers of file path access rights
-+---------------------------------
-+
-+Each time a thread enforces a ruleset on itself, it updates its Landlock domain
-+with a new layer of policy.  Indeed, this complementary policy is stacked with
-+the potentially other rulesets already restricting this thread.  A sandboxed
-+thread can then safely add more constraints to itself with a new enforced
-+ruleset.
-+
-+One policy layer grants access to a file path if at least one of its rules
-+encountered on the path grants the access.  A sandboxed thread can only access
-+a file path if all its enforced policy layers grant the access as well as all
-+the other system access controls (e.g. filesystem DAC, other LSM policies,
-+etc.).
-+
-+Bind mounts and OverlayFS
-+-------------------------
-+
-+Landlock enables to restrict access to file hierarchies, which means that these
-+access rights can be propagated with bind mounts (cf.
-+:doc:`/filesystems/sharedsubtree`) but not with :doc:`/filesystems/overlayfs`.
-+
-+A bind mount mirrors a source file hierarchy to a destination.  The destination
-+hierarchy is then composed of the exact same files, on which Landlock rules can
-+be tied, either via the source or the destination path.  These rules restrict
-+access when they are encountered on a path, which means that they can restrict
-+access to multiple file hierarchies at the same time, whether these hierarchies
-+are the result of bind mounts or not.
-+
-+An OverlayFS mount point consists of upper and lower layers.  These layers are
-+combined in a merge directory, result of the mount point.  This merge hierarchy
-+may include files from the upper and lower layers, but modifications performed
-+on the merge hierarchy only reflects on the upper layer.  From a Landlock
-+policy point of view, each OverlayFS layers and merge hierarchies are
-+standalone and contains their own set of files and directories, which is
-+different from bind mounts.  A policy restricting an OverlayFS layer will not
-+restrict the resulted merged hierarchy, and vice versa.  Landlock users should
-+then only think about file hierarchies they want to allow access to, regardless
-+of the underlying filesystem.
-+
-+Inheritance
-+-----------
-+
-+Every new thread resulting from a :manpage:`clone(2)` inherits Landlock domain
-+restrictions from its parent.  This is similar to the seccomp inheritance (cf.
-+:doc:`/userspace-api/seccomp_filter`) or any other LSM dealing with task's
-+:manpage:`credentials(7)`.  For instance, one process's thread may apply
-+Landlock rules to itself, but they will not be automatically applied to other
-+sibling threads (unlike POSIX thread credential changes, cf.
-+:manpage:`nptl(7)`).
-+
-+When a thread sandboxes itself, we have the guarantee that the related security
-+policy will stay enforced on all this thread's descendants.  This allows
-+creating standalone and modular security policies per application, which will
-+automatically be composed between themselves according to their runtime parent
-+policies.
-+
-+Ptrace restrictions
-+-------------------
-+
-+A sandboxed process has less privileges than a non-sandboxed process and must
-+then be subject to additional restrictions when manipulating another process.
-+To be allowed to use :manpage:`ptrace(2)` and related syscalls on a target
-+process, a sandboxed process should have a subset of the target process rules,
-+which means the tracee must be in a sub-domain of the tracer.
-+
-+Kernel interface
-+================
-+
-+Access rights
-+-------------
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: fs_access
-+
-+Creating a new ruleset
-+----------------------
-+
-+.. kernel-doc:: security/landlock/syscalls.c
-+    :identifiers: sys_landlock_create_ruleset
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: landlock_ruleset_attr
-+
-+Extending a ruleset
-+-------------------
-+
-+.. kernel-doc:: security/landlock/syscalls.c
-+    :identifiers: sys_landlock_add_rule
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: landlock_rule_type landlock_path_beneath_attr
-+
-+Enforcing a ruleset
-+-------------------
-+
-+.. kernel-doc:: security/landlock/syscalls.c
-+    :identifiers: sys_landlock_restrict_self
-+
-+Current limitations
-+===================
-+
-+File renaming and linking
-+-------------------------
-+
-+Because Landlock targets unprivileged access controls, it is needed to properly
-+handle composition of rules.  Such property also implies rules nesting.
-+Properly handling multiple layers of ruleset, each one of them able to restrict
-+access to files, also implies to inherit the ruleset restrictions from a parent
-+to its hierarchy.  Because files are identified and restricted by their
-+hierarchy, moving or linking a file from one directory to another implies to
-+propagate the hierarchy constraints.  To protect against privilege escalations
-+through renaming or linking, and for the sake of simplicity, Landlock currently
-+limits linking and renaming to the same directory.  Future Landlock evolutions
-+will enable more flexibility for renaming and linking, with dedicated ruleset
-+flags.
-+
-+Filesystem layout modification
-+------------------------------
-+
-+As for file renaming and linking, a sandboxed thread cannot modify its
-+filesystem layout, whether via :manpage:`mount(2)` or :manpage:`pivot_root(2)`.
-+However, :manpage:`chroot(2)` calls are not denied.
-+
-+Special filesystems
-+-------------------
-+
-+Access to regular files and directories can be restricted by Landlock,
-+according to the handled accesses of a ruleset.  However, files that do not
-+come from a user-visible filesystem (e.g. pipe, socket), but can still be
-+accessed through ``/proc/<pid>/fd/*``, cannot currently be explicitly
-+restricted.  Likewise, some special kernel filesystems such as nsfs, which can
-+be accessed through ``/proc/<pid>/ns/*``, cannot currently be explicitly
-+restricted.  However, thanks to the `ptrace restrictions`_, access to such
-+sensitive ``/proc`` files are automatically restricted according to domain
-+hierarchies.  Future Landlock evolutions could still enable to explicitly
-+restrict such paths with dedicated ruleset flags.
-+
-+Ruleset layers
-+--------------
-+
-+There is a limit of 64 layers of stacked rulesets.  This can be an issue for a
-+task willing to enforce a new ruleset in complement to its 64 inherited
-+rulesets.  Once this limit is reached, sys_landlock_restrict_self() returns
-+E2BIG.  It is then strongly suggested to carefully build rulesets once in the
-+life of a thread, especially for applications able to launch other applications
-+that may also want to sandbox themselves (e.g. shells, container managers,
-+etc.).
-+
-+Memory usage
-+------------
-+
-+Kernel memory allocated to create rulesets is accounted and can be restricted
-+by the :doc:`/admin-guide/cgroup-v1/memory`.
-+
-+Questions and answers
-+=====================
-+
-+What about user space sandbox managers?
-+---------------------------------------
-+
-+Using user space process to enforce restrictions on kernel resources can lead
-+to race conditions or inconsistent evaluations (i.e. `Incorrect mirroring of
-+the OS code and state
-+<https://www.ndss-symposium.org/ndss2003/traps-and-pitfalls-practical-problems-system-call-interposition-based-security-tools/>`_).
-+
-+What about namespaces and containers?
-+-------------------------------------
-+
-+Namespaces can help create sandboxes but they are not designed for
-+access-control and then miss useful features for such use case (e.g. no
-+fine-grained restrictions).  Moreover, their complexity can lead to security
-+issues, especially when untrusted processes can manipulate them (cf.
-+`Controlling access to user namespaces <https://lwn.net/Articles/673597/>`_).
-+
-+Additional documentation
-+========================
-+
-+* :doc:`/security/landlock`
-+* https://landlock.io
-+
-+.. Links
-+.. _samples/landlock/sandboxer.c:
-+   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/samples/landlock/sandboxer.c
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 88175ed1f315..7b0c6de5946a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -10003,6 +10003,8 @@ L:	linux-security-module@vger.kernel.org
- S:	Supported
- W:	https://landlock.io
- T:	git https://github.com/landlock-lsm/linux.git
-+F:	Documentation/security/landlock.rst
-+F:	Documentation/userspace-api/landlock.rst
- F:	include/uapi/linux/landlock.h
- F:	samples/landlock/
- F:	security/landlock/
+Why is it important?
+
+> +       iomap = pcim_iomap_table(pcidev);
+
+> +       if (!iomap) {
+> +               dev_err(&pcidev->dev, "failed to iomap table\n");
+> +               return -ENODEV;
+> +       }
+
+This conditional is redundant.
+
+> +       gna_priv = devm_kzalloc(&pcidev->dev, sizeof(*gna_priv), GFP_KERNEL);
+> +       if (!gna_priv)
+> +               return -ENOMEM;
+> +
+> +       gna_priv->bar0_base = iomap[GNA_BAR0];
+> +
+> +       dev_dbg(&pcidev->dev, "bar0 memory address: %p\n", gna_priv->bar0_base);
+> +
+> +       ret = dma_set_mask(&pcidev->dev, DMA_BIT_MASK(64));
+> +       if (ret) {
+> +               dev_err(&pcidev->dev, "pci_set_dma_mask returned error %d\n", ret);
+
+Typo in the message.
+
+Why not try to fall back to 32 bit mask and support 32-bit builds?
+
+> +               return ret;
+> +       }
+> +
+> +       pci_set_master(pcidev);
+> +
+> +       gna_dev_init(gna_priv, pcidev, pci_id);
+> +
+> +       return 0;
+> +}
+> diff --git a/drivers/misc/intel/gna/gna_device.h b/drivers/misc/intel/gna/gna_device.h
+> new file mode 100644
+> index 000000000000..d0b47f75f47f
+> --- /dev/null
+> +++ b/drivers/misc/intel/gna/gna_device.h
+> @@ -0,0 +1,36 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/* Copyright(c) 2017-2021 Intel Corporation */
+> +
+> +#ifndef __GNA_DEVICE_H__
+> +#define __GNA_DEVICE_H__
+> +
+> +#include <linux/types.h>
+> +
+> +struct gna_driver_private;
+> +struct pci_device_id;
+> +struct pci_dev;
+> +struct device;
+> +
+> +struct gna_drv_info {
+> +       u32 hwid;
+> +       u32 num_pagetables;
+> +       u32 num_page_entries;
+> +       u32 max_layer_count;
+> +       u64 max_hw_mem;
+> +};
+> +
+> +struct gna_private {
+> +       struct gna_driver_private *drv_priv;
+
+> +       struct pci_dev *pdev;
+> +       /* pdev->dev */
+> +       struct device *parent;
+
+This is a mess. One struct device is enough.
+Comment  doesn't bring any value and is confusing.
+
+> +       /* device related resources */
+> +       void __iomem *bar0_base;
+> +       struct gna_drv_info info;
+> +};
+
+> +int gna_probe(struct pci_dev *dev, const struct pci_device_id *id);
+
+This looks wrong. If you provide ->probe() function for others, it's
+probably generalized enough and mustn't be PCI or any other bus
+dependent. See below.
+
+> +#endif /* __GNA_DEVICE_H__ */
+> diff --git a/drivers/misc/intel/gna/gna_driver.c b/drivers/misc/intel/gna/gna_driver.c
+> new file mode 100644
+> index 000000000000..f4922a388be7
+> --- /dev/null
+> +++ b/drivers/misc/intel/gna/gna_driver.c
+> @@ -0,0 +1,39 @@
+> +// SPDX-License-Identifier: GPL-2.0-only
+> +// Copyright(c) 2017-2021 Intel Corporation
+> +
+> +#include <linux/jiffies.h>
+> +#include <linux/module.h>
+> +#include <linux/pci.h>
+> +
+> +#include "gna_device.h"
+> +#include "gna_driver.h"
+> +
+> +static int recovery_timeout = 60;
+> +module_param(recovery_timeout, int, 0644);
+> +MODULE_PARM_DESC(recovery_timeout, "Recovery timeout in seconds");
+
+Why module parameters?!
+
+> +struct gna_driver_private gna_drv_priv;
+
+Global?!
+
+> +static struct pci_driver gna_driver = {
+> +       .name = GNA_DV_NAME,
+> +       .probe = gna_probe,
+> +};
+> +
+> +static int __init gna_drv_init(void)
+> +{
+> +       gna_drv_priv.recovery_timeout_jiffies = msecs_to_jiffies(recovery_timeout * 1000);
+> +
+> +       return pci_register_driver(&gna_driver);
+> +}
+> +
+> +static void __exit gna_drv_exit(void)
+> +{
+> +       pci_unregister_driver(&gna_driver);
+> +}
+> +
+> +module_init(gna_drv_init);
+> +module_exit(gna_drv_exit);
+
+What is this entire module for?!
+
+Really you should not split this like above. This belongs to the PCI
+glue driver.
+
+
+> +MODULE_AUTHOR("Intel Corporation");
+> +MODULE_DESCRIPTION("Intel(R) Gaussian & Neural Accelerator (Intel(R) GNA) Driver");
+> +MODULE_LICENSE("GPL");
+> diff --git a/drivers/misc/intel/gna/gna_driver.h b/drivers/misc/intel/gna/gna_driver.h
+> new file mode 100644
+> index 000000000000..ed507ea10866
+> --- /dev/null
+> +++ b/drivers/misc/intel/gna/gna_driver.h
+> @@ -0,0 +1,15 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/* Copyright(c) 2017-2021 Intel Corporation */
+> +
+> +#ifndef __GNA_DRIVER_H__
+> +#define __GNA_DRIVER_H__
+> +
+> +#define GNA_DV_NAME    "intel_gna"
+> +
+> +struct gna_driver_private {
+> +       int recovery_timeout_jiffies;
+> +};
+> +
+> +extern struct gna_driver_private gna_drv_priv;
+> +
+> +#endif /* __GNA_DRIVER_H__ */
+> diff --git a/include/uapi/misc/intel/gna.h b/include/uapi/misc/intel/gna.h
+> new file mode 100644
+> index 000000000000..a7e435b74a0a
+> --- /dev/null
+> +++ b/include/uapi/misc/intel/gna.h
+> @@ -0,0 +1,155 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only WITH Linux-syscall-note */
+> +/* Copyright(c) 2017-2021 Intel Corporation */
+> +
+> +#ifndef _UAPI_GNA_H_
+> +#define _UAPI_GNA_H_
+> +
+> +#if defined(__cplusplus)
+> +extern "C" {
+> +#endif
+
+> +#include <linux/types.h>
+> +#include <linux/ioctl.h>
+> +#include <linux/const.h>
+
+Ordered?
+
+> +#ifndef __user
+> +#define __user
+> +#endif
+
+What for?
+
+> +/* Operation modes */
+> +#define GNA_MODE_GMM   0
+> +#define GNA_MODE_XNN   1
+> +
+> +#define GNA_PARAM_DEVICE_ID            1
+> +#define GNA_PARAM_RECOVERY_TIMEOUT     2
+> +#define GNA_PARAM_DEVICE_TYPE          3
+> +#define GNA_PARAM_INPUT_BUFFER_S       4
+> +
+> +#define GNA_STS_SCORE_COMPLETED                _BITUL(0)
+> +#define GNA_STS_STATISTICS_VALID       _BITUL(3)
+> +#define GNA_STS_PCI_MMU_ERR            _BITUL(4)
+> +#define GNA_STS_PCI_DMA_ERR            _BITUL(5)
+> +#define GNA_STS_PCI_UNEXCOMPL_ERR      _BITUL(6)
+> +#define GNA_STS_VA_OOR                 _BITUL(7)
+> +#define GNA_STS_PARAM_OOR              _BITUL(8)
+> +#define GNA_STS_SATURATE               _BITUL(17)
+> +
+> +#define GNA_ERROR      (GNA_STS_PCI_DMA_ERR            | \
+
+Better to start value on the new line.
+
+> +                       GNA_STS_PCI_MMU_ERR             | \
+> +                       GNA_STS_PCI_UNEXCOMPL_ERR       | \
+> +                       GNA_STS_PARAM_OOR               | \
+> +                       GNA_STS_VA_OOR)
+> +
+> +#define GNA_DEV_TYPE_0_9       0x09
+> +#define GNA_DEV_TYPE_1_0       0x10
+> +#define GNA_DEV_TYPE_2_0       0x20
+> +
+> +/*
+> + * Structure describes part of memory to be overwritten before starting GNA
+> + */
+> +struct gna_memory_patch {
+> +       /* offset from targeted memory */
+> +       __u64 offset;
+> +
+> +       __u64 size;
+> +       __u64 value;
+> +};
+> +
+> +struct gna_buffer {
+> +       __u64 memory_id;
+> +
+> +       __u64 offset;
+> +       __u64 size;
+> +
+> +       __u64 patch_count;
+> +       __u64 patches_ptr;
+> +};
+> +
+> +/*
+> + * Driver performance timestamps in nanoseconds.
+> + * Values regard system boot time, but do not count during suspend.
+> + */
+> +struct gna_drv_perf {
+> +       __u64 pre_processing;   /* driver starts pre-processing */
+> +       __u64 processing;       /* hw starts processing */
+> +       __u64 hw_completed;     /* hw finishes processing */
+> +       __u64 completion;       /* driver finishes post-processing */
+> +};
+> +
+> +struct gna_hw_perf {
+> +       __u64 total;
+> +       __u64 stall;
+> +};
+> +
+> +struct gna_compute_cfg {
+> +       __u32 layer_base;
+> +       __u32 layer_count;
+> +
+> +       /* List of GNA memory buffers */
+> +       __u64 buffers_ptr;
+> +       __u64 buffer_count;
+> +
+> +       __u8 active_list_on;
+> +       __u8 gna_mode;
+> +       __u8 hw_perf_encoding;
+> +       __u8 pad[5];
+> +};
+> +
+> +union gna_parameter {
+> +       struct {
+> +               __u64 id;
+> +       } in;
+> +
+> +       struct {
+> +               __u64 value;
+> +       } out;
+> +};
+> +
+> +union gna_memory_map {
+> +       struct {
+> +               __u64 address;
+> +               __u32 size;
+> +               __u32 pad;
+> +       } in;
+> +
+> +       struct {
+> +               __u64 memory_id;
+> +       } out;
+> +};
+> +
+> +union gna_compute {
+> +       struct {
+> +               struct gna_compute_cfg config;
+> +       } in;
+> +
+> +       struct {
+> +               __u64 request_id;
+> +       } out;
+> +};
+> +
+> +union gna_wait {
+> +       struct {
+> +               __u64 request_id;
+> +               __u32 timeout;
+> +               __u32 pad;
+> +       } in;
+> +
+> +       struct {
+> +               __u32 hw_status;
+> +               __u32 pad;
+> +               struct gna_drv_perf drv_perf;
+> +               struct gna_hw_perf hw_perf;
+> +       } out;
+> +};
+
+For all unions:
+How do you know which branch is used (out, in)? What field and where
+in the ABI points to that?
+
+> +#define GNA_GET_PARAMETER      _IOWR('C', 0x01, union gna_parameter)
+> +#define GNA_MAP_MEMORY         _IOWR('C', 0x02, union gna_memory_map)
+> +#define GNA_UNMAP_MEMORY       _IOWR('C', 0x03, __u64)
+> +#define GNA_COMPUTE            _IOWR('C', 0x04, union gna_compute)
+> +#define GNA_WAIT               _IOWR('C', 0x05, union gna_wait)
+> +
+> +#if defined(__cplusplus)
+> +}
+> +#endif
+> +
+> +#endif /* _UAPI_GNA_H_ */
+> --
+> 2.28.0
+>
+
+
 -- 
-2.30.2
-
+With Best Regards,
+Andy Shevchenko
