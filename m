@@ -2,117 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 998C1347B97
-	for <lists+linux-doc@lfdr.de>; Wed, 24 Mar 2021 16:04:09 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 600C0347BAC
+	for <lists+linux-doc@lfdr.de>; Wed, 24 Mar 2021 16:08:23 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236438AbhCXPDh (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 24 Mar 2021 11:03:37 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57272 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S236428AbhCXPDH (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 24 Mar 2021 11:03:07 -0400
-Received: from smtp-8fa8.mail.infomaniak.ch (smtp-8fa8.mail.infomaniak.ch [IPv6:2001:1600:4:17::8fa8])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A0711C061763;
-        Wed, 24 Mar 2021 08:03:06 -0700 (PDT)
-Received: from smtp-3-0001.mail.infomaniak.ch (unknown [10.4.36.108])
-        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4F5BLY1j83zMq3Y5;
-        Wed, 24 Mar 2021 16:03:01 +0100 (CET)
-Received: from ns3096276.ip-94-23-54.eu (unknown [23.97.221.149])
-        by smtp-3-0001.mail.infomaniak.ch (Postfix) with ESMTPA id 4F5BLT1HXmzlh8TT;
-        Wed, 24 Mar 2021 16:02:57 +0100 (CET)
-Subject: Re: [PATCH v30 08/12] landlock: Add syscall implementations
-From:   =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@digikod.net>
-To:     Kees Cook <keescook@chromium.org>
-Cc:     James Morris <jmorris@namei.org>, Jann Horn <jannh@google.com>,
-        "Serge E . Hallyn" <serge@hallyn.com>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        David Howells <dhowells@redhat.com>,
-        Jeff Dike <jdike@addtoit.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Michael Kerrisk <mtk.manpages@gmail.com>,
-        Richard Weinberger <richard@nod.at>,
-        Shuah Khan <shuah@kernel.org>,
-        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
-        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        linux-security-module@vger.kernel.org, x86@kernel.org,
-        =?UTF-8?Q?Micka=c3=abl_Sala=c3=bcn?= <mic@linux.microsoft.com>
-References: <20210316204252.427806-1-mic@digikod.net>
- <20210316204252.427806-9-mic@digikod.net> <202103191157.CF13C34@keescook>
- <380d65b2-f515-f3f5-5d57-7f99c528e5c7@digikod.net>
-Message-ID: <9062d586-8fa7-a972-9615-ca3a5fe38cef@digikod.net>
-Date:   Wed, 24 Mar 2021 16:03:36 +0100
-User-Agent: 
+        id S236489AbhCXPHw (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 24 Mar 2021 11:07:52 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:47070 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S236410AbhCXPHk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 24 Mar 2021 11:07:40 -0400
+Received: from LAPTOP-O8VTVVS6.localdomain (unknown [153.37.224.188])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9CxU+C1VVtgilQAAA--.1175S2;
+        Wed, 24 Mar 2021 23:07:33 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     Jonathan Corbet <corbet@lwn.net>
+Cc:     Alex Shi <alex.shi@linux.alibaba.com>,
+        Huacai Chen <chenhuacai@gmail.com>,
+        Jiaxun Yang <jiaxun.yang@flygoat.com>,
+        Harry Wei <harryxiyou@gmail.com>, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, siyanteng01@gmail.com,
+        Yanteng Si <siyanteng@loongson.cn>
+Subject: [PATCH 0/8] docs/zh_CN: add cpu-freq translation
+Date:   Wed, 24 Mar 2021 23:07:23 +0800
+Message-Id: <20210324150731.4512-1-siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.25.1
 MIME-Version: 1.0
-In-Reply-To: <380d65b2-f515-f3f5-5d57-7f99c528e5c7@digikod.net>
-Content-Type: text/plain; charset=iso-8859-15
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9CxU+C1VVtgilQAAA--.1175S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7Kw1rtr1rJryUGFyDuw4rZrb_yoW8JF4DpF
+        1DKryrZF10yr13Jw1fGrW7JF15JF4xC3y5tr17JwnYvr15Jw4UtFyUtrW7tF9rJr1xXFyY
+        qr4rKr1Dur1UAr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUkv14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j
+        6F4UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s
+        0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xII
+        jxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr
+        1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxkIecxEwVAFwVW5WwCF
+        04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r
+        18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFylIxkGc2Ij64vI
+        r41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr
+        1lIxAIcVCF04k26cxKx2IYs7xG6rWUJVWrZr1UMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF
+        0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0JUgmRUUUUUU=
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
+This series of patches:
+ translates Documention/cpu-freq/* into Chinese.
+ add .../zh_CN/mips to zh_CN index
+ add .../zh_CN/iio to zh_CN index
+ add .../zh_CN/riscv to zh_CN index
 
-On 19/03/2021 22:53, Mickaël Salaün wrote:
-> 
-> On 19/03/2021 20:06, Kees Cook wrote:
->> On Tue, Mar 16, 2021 at 09:42:48PM +0100, Mickaël Salaün wrote:
->>> From: Mickaël Salaün <mic@linux.microsoft.com>
+Yabteng Si(8):
+docs/zh_CN: add cpu-freq core.rst translation
+docs/zh_CN: add cpu-freq cpu-drivers.rst translation
+docs/zh_CN: add cpu-freq cpufreq-stats.rst translation
+docs/zh_CN: add cpu-freq index.rst translation
+docs/zh_CN: add cpu-freq to zh_CN index
+docs/zh_CN: add mips to zh_CN index
+docs/zh_CN: add iio to zh_CN index
+docs/zh_CN: add riscv to zh_CN index
 
-[...]
+Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+---
+ Documentation/translations/zh_CN/cpu-freq/core.rst          | 105
++++++++++++++++++++++++++++++++++++++++++++++
+ Documentation/translations/zh_CN/cpu-freq/cpu-drivers.rst   | 259
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Documentation/translations/zh_CN/cpu-freq/cpufreq-stats.rst | 130
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ Documentation/translations/zh_CN/cpu-freq/index.rst         |  45
+++++++++++++++++++++
+ Documentation/translations/zh_CN/index.rst                  |   4 ++
+ 5 files changed, 543 insertions(+)
 
->>> +/**
->>> + * sys_landlock_create_ruleset - Create a new ruleset
->>> + *
->>> + * @attr: Pointer to a &struct landlock_ruleset_attr identifying the scope of
->>> + *        the new ruleset.
->>> + * @size: Size of the pointed &struct landlock_ruleset_attr (needed for
->>> + *        backward and forward compatibility).
->>> + * @flags: Must be 0.
->>> + *
->>> + * This system call enables to create a new Landlock ruleset, and returns the
->>> + * related file descriptor on success.
->>> + *
->>> + * Possible returned errors are:
->>> + *
->>> + * - EOPNOTSUPP: Landlock is supported by the kernel but disabled at boot time;
->>> + * - EINVAL: @flags is not 0, or unknown access, or too small @size;
->>> + * - E2BIG or EFAULT: @attr or @size inconsistencies;
->>> + * - ENOMSG: empty &landlock_ruleset_attr.handled_access_fs.
->>> + */
->>> +SYSCALL_DEFINE3(landlock_create_ruleset,
->>> +		const struct landlock_ruleset_attr __user *const, attr,
->>> +		const size_t, size, const __u32, flags)
->>> +{
->>> +	struct landlock_ruleset_attr ruleset_attr;
->>> +	struct landlock_ruleset *ruleset;
->>> +	int err, ruleset_fd;
->>> +
->>> +	/* Build-time checks. */
->>> +	build_check_abi();
->>> +
->>> +	if (!landlock_initialized)
->>> +		return -EOPNOTSUPP;
->>> +
->>> +	/* No flag for now. */
->>> +	if (flags)
->>> +		return -EINVAL;
->>> +
->>> +	/* Copies raw user space buffer. */
->>> +	err = copy_min_struct_from_user(&ruleset_attr, sizeof(ruleset_attr),
->>> +			offsetofend(typeof(ruleset_attr), handled_access_fs),
->>
->> The use of offsetofend() here appears to be kind of the "V1", "V2", ...
->> sizes used in other extensible syscall implementations?
-> 
-> ruleset_attr is an extensible argument.
-
-offsetofen() is used to set the minimum size of a valid argument. This
-code will then not change with future extended ruleset_attr.
