@@ -2,81 +2,70 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0964C348E26
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Mar 2021 11:39:28 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 64642348E7E
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Mar 2021 12:07:05 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230230AbhCYKiv (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 25 Mar 2021 06:38:51 -0400
-Received: from mail.kernel.org ([198.145.29.99]:53580 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S230173AbhCYKid (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 25 Mar 2021 06:38:33 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id DA47661A2C;
-        Thu, 25 Mar 2021 10:38:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1616668712;
-        bh=wrrYLBWnyLJ2Nn2/jedot7XUqegfjMKZxIQEc4fg+/w=;
-        h=From:To:Cc:Subject:Date:In-Reply-To:References:From;
-        b=FEY8vW+9Slf6gLgA+h2dXSozXcZ8+eEiWspQtnx9c85U12GrG9sU0q89tVF/HRMtm
-         eOj6ywd0K7eK3wP44zXryqUv1h6wOdPTGbEAUfihqIkRjxVDE5ZpUEy1DSZ+F4NfHE
-         k6Q/iaLmlZYKCJgErGU4g+9unFfqVKTBnPwXz3Xo6LGiZhuul2aWy+0E1WWJ6/eRxC
-         KWwJAqbWLghTYisJH/lqYnqXzAwlnKB8MkDo4PVfVXW3SevTHBns7U8uRw2z9A8hdz
-         UZvNxeC7IdkYw+TkCxyAB5LzZlTGcmXH6EtKrY+9F/cwommMyOp0f9GwKvQ962e9d8
-         vxCYrj0EIBNXw==
-Received: by mail.kernel.org with local (Exim 4.94)
-        (envelope-from <mchehab@kernel.org>)
-        id 1lPNNl-001Avg-CW; Thu, 25 Mar 2021 11:38:29 +0100
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Andrew Morton <akpm@linux-foundation.org>
-Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        John Hubbard <jhubbard@nvidia.com>,
-        Minchan Kim <minchan@kernel.org>,
-        Stephen Rothwell <sfr@canb.auug.org.au>,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH v2 7/7] ABI: sysfs-kernel-mm-cma: fix two cross-references
-Date:   Thu, 25 Mar 2021 11:38:28 +0100
-Message-Id: <87907316390311c6b42e86c3ba9fb2f2903d9499.1616668017.git.mchehab+huawei@kernel.org>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <cover.1616668017.git.mchehab+huawei@kernel.org>
-References: <cover.1616668017.git.mchehab+huawei@kernel.org>
+        id S229716AbhCYLGd convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Thu, 25 Mar 2021 07:06:33 -0400
+Received: from jptosegrel01.sonyericsson.com ([124.215.201.71]:10591 "EHLO
+        JPTOSEGREL01.sonyericsson.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S229801AbhCYLGc (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Mar 2021 07:06:32 -0400
+Subject: Re: [PATCH v2 00/12] Add build ID to stacktraces
+To:     Christoph Hellwig <hch@infradead.org>,
+        Stephen Boyd <swboyd@chromium.org>
+CC:     Andrew Morton <akpm@linux-foundation.org>,
+        <linux-kernel@vger.kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Baoquan He <bhe@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Dave Young <dyoung@redhat.com>,
+        Evan Green <evgreen@chromium.org>,
+        Hsin-Yi Wang <hsinyi@chromium.org>,
+        Ingo Molnar <mingo@redhat.com>, Jessica Yu <jeyu@kernel.org>,
+        Jiri Olsa <jolsa@kernel.org>, <kexec@lists.infradead.org>,
+        Konstantin Khlebnikov <khlebnikov@yandex-team.ru>,
+        <linux-arm-kernel@lists.infradead.org>,
+        <linux-doc@vger.kernel.org>, Matthew Wilcox <willy@infradead.org>,
+        Petr Mladek <pmladek@suse.com>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Sasha Levin <sashal@kernel.org>,
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Vivek Goyal <vgoyal@redhat.com>, Will Deacon <will@kernel.org>,
+        <x86@kernel.org>
+References: <20210324020443.1815557-1-swboyd@chromium.org>
+ <20210324085543.GA2660708@infradead.org>
+From:   peter enderborg <peter.enderborg@sony.com>
+Message-ID: <dbb430e1-2223-9df0-2563-4b017d6b409d@sony.com>
+Date:   Thu, 25 Mar 2021 12:06:17 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
+In-Reply-To: <20210324085543.GA2660708@infradead.org>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8BIT
+Content-Language: en-GB
+X-SEG-SpamProfiler-Analysis: v=2.3 cv=crzlbGwi c=1 sm=1 tr=0 a=fZcToFWbXLKijqHhjJ02CA==:117 a=IkcTkHD0fZMA:10 a=dESyimp9J3IA:10 a=9PaoSj5ytQdNhtA7W4EA:9 a=QEXdDO2ut3YA:10 a=fCgQI5UlmZDRPDxm0A3o:22
+X-SEG-SpamProfiler-Score: 0
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Change the text in order to generate cross-references for
-alloc_pages_success and alloc_pages_fail symbols.
+On 3/24/21 9:55 AM, Christoph Hellwig wrote:
+> On Tue, Mar 23, 2021 at 07:04:31PM -0700, Stephen Boyd wrote:
+>>  x5 : 0000000000000000 x4 : 0000000000000001
+>>  x3 : 0000000000000008 x2 : ffffff93fef25a70
+>>  x1 : ffffff93fef15788 x0 : ffffffe3622352e0
+>>  Call trace:
+>>   lkdtm_WARNING+0x28/0x30 [lkdtm ed5019fdf5e53be37cb1ba7899292d7e143b259e]
+>>   direct_entry+0x16c/0x1b4 [lkdtm ed5019fdf5e53be37cb1ba7899292d7e143b259e]
+> Yikes.  No, please do not make the backtraces a complete mess for
+> something that serves absolutely no need.
 
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
----
- Documentation/ABI/testing/sysfs-kernel-mm-cma | 8 +++-----
- 1 file changed, 3 insertions(+), 5 deletions(-)
+Would a "verbose" flag be acceptable solution?    Something like write 1 to /sys/kernel/debug/verbose_stack to get the extra info.
 
-diff --git a/Documentation/ABI/testing/sysfs-kernel-mm-cma b/Documentation/ABI/testing/sysfs-kernel-mm-cma
-index 02b2bb60c296..86e261185561 100644
---- a/Documentation/ABI/testing/sysfs-kernel-mm-cma
-+++ b/Documentation/ABI/testing/sysfs-kernel-mm-cma
-@@ -5,12 +5,10 @@ Description:
- 		/sys/kernel/mm/cma/ contains a subdirectory for each CMA
- 		heap name (also sometimes called CMA areas).
- 
--		Each CMA heap subdirectory (that is, each
--		/sys/kernel/mm/cma/<cma-heap-name> directory) contains the
--		following items:
-+		Each CMA heap subdirectory contains the following items:
- 
--			alloc_pages_success
--			alloc_pages_fail
-+			- /sys/kernel/mm/cma/<cma-heap-name>/alloc_pages_success
-+			- /sys/kernel/mm/cma/<cma-heap-name>/alloc_pages_fail
- 
- What:		/sys/kernel/mm/cma/<cma-heap-name>/alloc_pages_success
- Date:		Feb 2021
--- 
-2.30.2
+I think I see a need for it.
 
