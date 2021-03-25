@@ -2,143 +2,221 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5D60534973A
-	for <lists+linux-doc@lfdr.de>; Thu, 25 Mar 2021 17:48:29 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id E0D793497E3
+	for <lists+linux-doc@lfdr.de>; Thu, 25 Mar 2021 18:25:47 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230006AbhCYQr5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 25 Mar 2021 12:47:57 -0400
-Received: from mail-il1-f180.google.com ([209.85.166.180]:34773 "EHLO
-        mail-il1-f180.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229676AbhCYQrt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Mar 2021 12:47:49 -0400
-Received: by mail-il1-f180.google.com with SMTP id u2so2693350ilk.1;
-        Thu, 25 Mar 2021 09:47:49 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=1O1E/xRwZme5NOHcXojTDxawVUZizZj5kgRyChIK9Ao=;
-        b=sfi7ror6M6j9nyTvcoRvlWfNcETGxKZaeUeJtcOY1SOnTUmKBhzakvuSGzT0IfPxxl
-         beEfrwA+u2bm+8jQE/+yDv6jWvXs1049j0lv7fQ7tsAELZ7qn1XJvC+BrpPn8l6IMh9G
-         nwYDhFEz4MP/6gJSO28dpkGSoWUfLfM3KliIjCXarWhClpVAK1lEIattqqlOhi+mk8yN
-         /Wunr4bdbGXJU1XknqA+zCOxhiLzqXMeWDRVklOtBXw+fWYVTb77RiA6LAUEH9/gIZ7z
-         OSqhWIW48NxO+vIna50tiFAHd7cLOw4uWrM1X01uSSWNE2yiwOXN7WlzNaghFYlhM8x3
-         uVPw==
-X-Gm-Message-State: AOAM5326XItPh+mNexOp7fxztIrmwm4alh3nCyIYoPeycmMAd3ZYtQfC
-        7Q4jaYmBBraPFHIsv9OnaBqxeVB5rg==
-X-Google-Smtp-Source: ABdhPJyYIbxtyMkD85vDHkGNFWPiFlXHfzohxPgp8c0NXKytdpBdfMpWXOPqzFN5cE03yAPqwtByVA==
-X-Received: by 2002:a05:6e02:1d9b:: with SMTP id h27mr7501787ila.279.1616690868432;
-        Thu, 25 Mar 2021 09:47:48 -0700 (PDT)
-Received: from xps15.herring.priv ([64.188.179.253])
-        by smtp.googlemail.com with ESMTPSA id h13sm2868615ila.82.2021.03.25.09.47.45
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Mar 2021 09:47:47 -0700 (PDT)
-From:   Rob Herring <robh@kernel.org>
-To:     devicetree@vger.kernel.org
-Cc:     linux-kernel@vger.kernel.org,
+        id S229920AbhCYRZQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 25 Mar 2021 13:25:16 -0400
+Received: from mail.kernel.org ([198.145.29.99]:42416 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229981AbhCYRZL (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 25 Mar 2021 13:25:11 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id B874B61A16;
+        Thu, 25 Mar 2021 17:25:09 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1616693111;
+        bh=PnHeLzccghzbrXM0sHo7bxWwWRa43ib0gDtD0OvYJi0=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=K1/xyzkdCjUE6a8BUuwB68ZZAOjzEhYwQmN1VV+rcbz31oqOkNSHEZyTl17wNAJ4a
+         TGhVVwd0xYZgrCuCHoofhdoEOAm3nKazmUAZVsDOL9LlrHBNUsls/jzYlOAQhOJdCh
+         dzf1sjpiJqO0aJqv0Wpp5BmLu/TyTdfYbUHwmMmNGON9izz6RWmW2GX+NxcwYl2ZOL
+         eneMTlh2kCZqvVlnN68KFoY5rNZ6ikP9n/xupgI4t3G86GuUh74GD5ncczQ69TL3hX
+         u5HIIgq2UCoZjn4g+V8eQw1HKx2iBiFagK1cAkWv8m3JPlSE3vJyWDbC9yfQenoVPZ
+         6uOnPu+Ve0Dyg==
+Date:   Thu, 25 Mar 2021 18:25:06 +0100
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Rob Herring <robh@kernel.org>
+Cc:     devicetree@vger.kernel.org, linux-kernel@vger.kernel.org,
         Frank Rowand <frowand.list@gmail.com>,
         Lee Jones <lee.jones@linaro.org>,
-        Mauro Carvalho Chehab <mchehab@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 8/8] docs: dt: Add DT API documentation
-Date:   Thu, 25 Mar 2021 10:47:13 -0600
-Message-Id: <20210325164713.1296407-9-robh@kernel.org>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210325164713.1296407-1-robh@kernel.org>
+Subject: Re: [PATCH 4/8] docs: dt: Make 'Devicetree' wording more consistent
+Message-ID: <20210325182506.184d251b@coco.lan>
+In-Reply-To: <20210325164713.1296407-5-robh@kernel.org>
 References: <20210325164713.1296407-1-robh@kernel.org>
+        <20210325164713.1296407-5-robh@kernel.org>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-The kernel-doc for the DT APIs are not included in the documentation
-build. Add them.
+Em Thu, 25 Mar 2021 10:47:09 -0600
+Rob Herring <robh@kernel.org> escreveu:
 
-Cc: Frank Rowand <frowand.list@gmail.com>
-Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
-Signed-off-by: Rob Herring <robh@kernel.org>
----
- Documentation/devicetree/index.rst      |  1 +
- Documentation/devicetree/kernel-api.rst | 57 +++++++++++++++++++++++++
- 2 files changed, 58 insertions(+)
- create mode 100644 Documentation/devicetree/kernel-api.rst
+> There's a variety of ways 'Devicetree' has been written. This is most
+> evident in the documentation build contents where we have 'Device Tree',
+> 'DeviceTree', etc. The DT spec has somewhat standardized on
+> 'Devicetree', so let's use that.
+> 
+> Cc: Frank Rowand <frowand.list@gmail.com>
+> Cc: Mauro Carvalho Chehab <mchehab@kernel.org>
+> Signed-off-by: Rob Herring <robh@kernel.org>
+> ---
+>  Documentation/devicetree/bindings/submitting-patches.rst | 2 +-
+>  Documentation/devicetree/changesets.rst                  | 8 ++++----
+>  Documentation/devicetree/dynamic-resolution-notes.rst    | 8 ++++----
+>  Documentation/devicetree/index.rst                       | 2 +-
+>  Documentation/devicetree/of_unittest.rst                 | 6 +++---
+>  Documentation/devicetree/overlay-notes.rst               | 8 ++++----
+>  Documentation/devicetree/usage-model.rst                 | 8 ++++----
+>  Documentation/devicetree/writing-schema.rst              | 2 +-
+>  8 files changed, 22 insertions(+), 22 deletions(-)
+> 
+> diff --git a/Documentation/devicetree/bindings/submitting-patches.rst b/Documentation/devicetree/bindings/submitting-patches.rst
+> index 42e86f978be2..51c459909575 100644
+> --- a/Documentation/devicetree/bindings/submitting-patches.rst
+> +++ b/Documentation/devicetree/bindings/submitting-patches.rst
+> @@ -1,7 +1,7 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+>  ==========================================
+> -Submitting devicetree (DT) binding patches
+> +Submitting Devicetree (DT) binding patches
+>  ==========================================
+>  
+>  I. For patch submitters
+> diff --git a/Documentation/devicetree/changesets.rst b/Documentation/devicetree/changesets.rst
+> index c7fd8cd6a270..2091468d4837 100644
+> --- a/Documentation/devicetree/changesets.rst
+> +++ b/Documentation/devicetree/changesets.rst
+> @@ -1,10 +1,10 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+> -=============
+> -DT Changesets
+> -=============
+> +=====================
+> +Devicetree Changesets
+> +=====================
+>  
+> -A DT changeset is a method which allows one to apply changes
+> +A Devicetree changeset is a method which allows one to apply changes
+>  in the live tree in such a way that either the full set of changes
+>  will be applied, or none of them will be. If an error occurs partway
+>  through applying the changeset, then the tree will be rolled back to the
+> diff --git a/Documentation/devicetree/dynamic-resolution-notes.rst b/Documentation/devicetree/dynamic-resolution-notes.rst
+> index 570b7e1f39eb..f81ad8daa36f 100644
+> --- a/Documentation/devicetree/dynamic-resolution-notes.rst
+> +++ b/Documentation/devicetree/dynamic-resolution-notes.rst
+> @@ -1,11 +1,11 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+> -==================================
+> -Device Tree Dynamic Resolver Notes
+> -==================================
+> +=================================
+> +Devicetree Dynamic Resolver Notes
+> +=================================
+>  
+>  This document describes the implementation of the in-kernel
+> -Device Tree resolver, residing in drivers/of/resolver.c
+> +DeviceTree resolver, residing in drivers/of/resolver.c
 
-diff --git a/Documentation/devicetree/index.rst b/Documentation/devicetree/index.rst
-index 70b5dcdbcf07..1a2fc8014996 100644
---- a/Documentation/devicetree/index.rst
-+++ b/Documentation/devicetree/index.rst
-@@ -11,6 +11,7 @@ Kernel Devicetree Usage
- 
-    usage-model
-    of_unittest
-+   kernel-api
- 
- Devicetree Overlays
- ===================
-diff --git a/Documentation/devicetree/kernel-api.rst b/Documentation/devicetree/kernel-api.rst
-new file mode 100644
-index 000000000000..b7429e6ed6d5
---- /dev/null
-+++ b/Documentation/devicetree/kernel-api.rst
-@@ -0,0 +1,57 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. _devicetree:
-+
-+======================================
-+DeviceTree Kernel API
-+======================================
-+
-+Core functions
-+--------------
-+
-+.. kernel-doc:: drivers/of/base.c
-+   :export:
-+
-+.. kernel-doc:: include/linux/of.h
-+   :internal:
-+
-+.. kernel-doc:: drivers/of/property.c
-+   :export:
-+
-+.. kernel-doc:: include/linux/of_graph.h
-+   :internal:
-+
-+.. kernel-doc:: drivers/of/address.c
-+   :export:
-+
-+.. kernel-doc:: drivers/of/irq.c
-+   :export:
-+
-+.. kernel-doc:: drivers/of/fdt.c
-+   :export:
-+
-+Driver model functions
-+----------------------
-+
-+.. kernel-doc:: include/linux/of_device.h
-+   :internal:
-+
-+.. kernel-doc:: drivers/of/device.c
-+   :export:
-+
-+.. kernel-doc:: include/linux/of_platform.h
-+   :internal:
-+
-+.. kernel-doc:: drivers/of/platform.c
-+   :export:
-+
-+Overlay and Dynamic DT functions
-+--------------------------------
-+
-+.. kernel-doc:: drivers/of/resolver.c
-+   :export:
-+
-+.. kernel-doc:: drivers/of/dynamic.c
-+   :export:
-+
-+.. kernel-doc:: drivers/of/overlay.c
-+   :export:
--- 
-2.27.0
+DeviceTree -> Devicetree.
 
+The rest looks ok to me.
+
+Reviewed-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+
+>  
+>  How the resolver works
+>  ----------------------
+> diff --git a/Documentation/devicetree/index.rst b/Documentation/devicetree/index.rst
+> index 54026763916d..32509e8de8da 100644
+> --- a/Documentation/devicetree/index.rst
+> +++ b/Documentation/devicetree/index.rst
+> @@ -1,7 +1,7 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+>  =============================
+> -Open Firmware and Device Tree
+> +Open Firmware and Devicetree
+>  =============================
+>  
+>  .. toctree::
+> diff --git a/Documentation/devicetree/of_unittest.rst b/Documentation/devicetree/of_unittest.rst
+> index dea05214f3ad..2afe41a37148 100644
+> --- a/Documentation/devicetree/of_unittest.rst
+> +++ b/Documentation/devicetree/of_unittest.rst
+> @@ -1,8 +1,8 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+> -==================================
+> -Open Firmware Device Tree Unittest
+> -==================================
+> +=================================
+> +Open Firmware Devicetree Unittest
+> +=================================
+>  
+>  Author: Gaurav Minocha <gaurav.minocha.os@gmail.com>
+>  
+> diff --git a/Documentation/devicetree/overlay-notes.rst b/Documentation/devicetree/overlay-notes.rst
+> index c67cc676bbd2..b2b8db765b8c 100644
+> --- a/Documentation/devicetree/overlay-notes.rst
+> +++ b/Documentation/devicetree/overlay-notes.rst
+> @@ -1,8 +1,8 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+> -=========================
+> -Device Tree Overlay Notes
+> -=========================
+> +========================
+> +Devicetree Overlay Notes
+> +========================
+>  
+>  This document describes the implementation of the in-kernel
+>  device tree overlay functionality residing in drivers/of/overlay.c and is a
+> @@ -11,7 +11,7 @@ companion document to Documentation/devicetree/dynamic-resolution-notes.rst[1]
+>  How overlays work
+>  -----------------
+>  
+> -A Device Tree's overlay purpose is to modify the kernel's live tree, and
+> +A Devicetree's overlay purpose is to modify the kernel's live tree, and
+>  have the modification affecting the state of the kernel in a way that
+>  is reflecting the changes.
+>  Since the kernel mainly deals with devices, any new device node that result
+> diff --git a/Documentation/devicetree/usage-model.rst b/Documentation/devicetree/usage-model.rst
+> index 1eb83496ca1e..b6a287955ee5 100644
+> --- a/Documentation/devicetree/usage-model.rst
+> +++ b/Documentation/devicetree/usage-model.rst
+> @@ -1,8 +1,8 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+> -=========================
+> -Linux and the Device Tree
+> -=========================
+> +========================
+> +Linux and the Devicetree
+> +========================
+>  
+>  The Linux usage model for device tree data
+>  
+> @@ -14,7 +14,7 @@ at devicetree.org\ [1]_.
+>  
+>  .. [1] https://www.devicetree.org/specifications/
+>  
+> -The "Open Firmware Device Tree", or simply Device Tree (DT), is a data
+> +The "Open Firmware Device Tree", or simply Devicetree (DT), is a data
+>  structure and language for describing hardware.  More specifically, it
+>  is a description of hardware that is readable by an operating system
+>  so that the operating system doesn't need to hard code details of the
+> diff --git a/Documentation/devicetree/writing-schema.rst b/Documentation/devicetree/writing-schema.rst
+> index be14dbed6081..23d6579aea2c 100644
+> --- a/Documentation/devicetree/writing-schema.rst
+> +++ b/Documentation/devicetree/writing-schema.rst
+> @@ -1,6 +1,6 @@
+>  .. SPDX-License-Identifier: GPL-2.0
+>  
+> -Writing DeviceTree Bindings in json-schema
+> +Writing Devicetree Bindings in json-schema
+>  ==========================================
+>  
+>  Devicetree bindings are written using json-schema vocabulary. Schema files are
+
+
+
+Thanks,
+Mauro
