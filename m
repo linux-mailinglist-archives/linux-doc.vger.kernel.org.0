@@ -2,112 +2,174 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C1CE4349CDA
-	for <lists+linux-doc@lfdr.de>; Fri, 26 Mar 2021 00:22:35 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id A2922349D67
+	for <lists+linux-doc@lfdr.de>; Fri, 26 Mar 2021 01:09:25 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231393AbhCYXWD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 25 Mar 2021 19:22:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53500 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231352AbhCYXVt (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 25 Mar 2021 19:21:49 -0400
-Received: from mail-pf1-x431.google.com (mail-pf1-x431.google.com [IPv6:2607:f8b0:4864:20::431])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CB93FC06175F
-        for <linux-doc@vger.kernel.org>; Thu, 25 Mar 2021 16:21:48 -0700 (PDT)
-Received: by mail-pf1-x431.google.com with SMTP id x26so3672345pfn.0
-        for <linux-doc@vger.kernel.org>; Thu, 25 Mar 2021 16:21:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:content-transfer-encoding:in-reply-to:references
-         :subject:from:cc:to:date:message-id:user-agent;
-        bh=9Ws84vBwdALUNuDSs4jVAMy+diRDx2Md148g1OQbTTc=;
-        b=bIomJr2Bk4Zm9vhKtqgmB0DgBhdG+cAXemq/KNJQ5YjdF4Ir8D3FPn0QzrNvJQji2X
-         0FSNW5TDAS+UMEl7QAIPqKT4l92ItP2sI3vIMDpml6JDcdQeH+0GBbK+2yeD05dBYQHk
-         rx5DXqpnAmlg6KEw7mE6P1laO6ApWHZvR4K+Y=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:content-transfer-encoding
-         :in-reply-to:references:subject:from:cc:to:date:message-id
-         :user-agent;
-        bh=9Ws84vBwdALUNuDSs4jVAMy+diRDx2Md148g1OQbTTc=;
-        b=hnGArxkwUL0ypAzcS/KK5QUZt7yitUCM2lpLTFseZX/5RwqALH+uz7bvNpwjh9+Ch5
-         nA9eyOWrrkztMNQ72HDgPfCUci95EYGbBi/rJp6FJxRRYSlF2U+TnEBsIHhJ+QML0y/r
-         hHLTFM0JbwO2+0566oG9GuHDbJr4IbLLQWj+PhTCy7TIdfyUJQi5z4O6UDYrR7vGAbHy
-         odiisPzJQqWsOA5eKYgylqQuD3vUYSU+BcK8mHCBXPD1UcaVwam2jBHoT2ctsivuZKjG
-         IuuOq1ukXOZUEJF30MLY+Fn7cs8zZZBBeCWC6QhY059/k7bqwrhl1gADSPV3kL1CfBRq
-         EefA==
-X-Gm-Message-State: AOAM533PgGmHO6uTJMSI3+wylcyaZbFMRjbeeu8Hn9LTNl4uXy2sDudm
-        t0IomAi+y+03kc32tlEhnOZi02t0yYsaew==
-X-Google-Smtp-Source: ABdhPJykDfKVVwZo+5CSu0mjkD2WFYRhREfbbV6tuLaHdiUl06r8vWpbnf33gx07jSpcUGpHl/oFiQ==
-X-Received: by 2002:a17:902:bc49:b029:e6:6750:7fab with SMTP id t9-20020a170902bc49b02900e667507fabmr12773405plz.4.1616714508455;
-        Thu, 25 Mar 2021 16:21:48 -0700 (PDT)
-Received: from chromium.org ([2620:15c:202:201:18a3:238:26c5:1521])
-        by smtp.gmail.com with ESMTPSA id v18sm8077901pgo.0.2021.03.25.16.21.47
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 25 Mar 2021 16:21:47 -0700 (PDT)
-Content-Type: text/plain; charset="utf-8"
+        id S229866AbhCZAIq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 25 Mar 2021 20:08:46 -0400
+Received: from mail-bn8nam11on2067.outbound.protection.outlook.com ([40.107.236.67]:17521
+        "EHLO NAM11-BN8-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S229669AbhCZAIX (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 25 Mar 2021 20:08:23 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=nUbjwMnZBPqw6tSNRj/T60PgCbniElmolkVfkLpsaulZylkPZ/J+U4f+8hOcvv8xn2v44BncG0mqkH78A2EGl4n8B0dQqgB+qVMlkstsH/NVEumgPoFdBSH7lR0X1fb8rtvsq1rXIybPlGb1rxArjLdosR7W4CqwrWbby+XaIguUYFeAesxkNWyjlGDr7keWROjqdDmg+le6fKCqDbKOVc2iCfauy0E+/2oAfmOooCbYYcx88XtB+gmfC6DVu/o+eWLLuanmPp5WopBXSaqwqI2CgqTIDuxD7LQFTINbCwJuOBuFDYxxsjIU/zEoolO+f12+1o+7zRSj3PxI22F03A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7HcUM27MO/owEVgYTcHS/zla3mCdFZ6+2LZOtChNB0M=;
+ b=J/iNPHXgIYstLaWEEldZxSx8Wq+yrPxQJ5Zb89W1PbQ1kpYsQCHTuSyKZbJqpVhVuvCNtIR+qEa9C0+N7zTUOC05ditfDGXBNsldMCE6qswo4mBPgspmlW5TDy0a4uaehVfG216Es8F0CNIFIQVpLYeGlYZJaAD3lpug2z27GzPYU4aTAIT7fKbXI8I2BiomC4E9wb6FJlT9gInmL73tZBNBT5X3Az8xuw8oMpIRrUYIrT4BHE6cMv2XJ472DPc4UwerWJGOaijwgcpnwXcxz+ZC6TL2Hl6WLIHzErzq20iVtK9r59DVjb6DG0h+yq5PHa2zDIdyfuqJOo+TRsk6lA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=redhat.com smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7HcUM27MO/owEVgYTcHS/zla3mCdFZ6+2LZOtChNB0M=;
+ b=dIyS6dAxmeeVSEB1u+ZBotqXhgKiphonVaV+Gj3BPb81X7K6RqEdcKAgS4QUxt3vZadBaJ1PIZK5PHz+5LtATUGGazvf2lMOWRbF0mEKgZplcntgpxj0IUgEuTNi+Qw5U0+paR3p0WVEpjj3kf3umnQYKP8LiO4UX/6PZlEpkk8tPzWuGT3S7uz2jRYWdskggh3O540724aifRsa/HWSfiI801agYOeO5pr2Px3xtgNc2m4Q1a60AvNN50aPlCYAxww8EphcnJM7d7S7SdUrurm6FTifMo9HiSAA07qPBKB7n89tcYPxGujP4Ee04BBdeejFMrnTBQuTF3T8srnrUw==
+Received: from MWHPR10CA0020.namprd10.prod.outlook.com (2603:10b6:301::30) by
+ BYAPR12MB3272.namprd12.prod.outlook.com (2603:10b6:a03:131::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.24; Fri, 26 Mar
+ 2021 00:08:21 +0000
+Received: from CO1NAM11FT065.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:301:0:cafe::ed) by MWHPR10CA0020.outlook.office365.com
+ (2603:10b6:301::30) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.24 via Frontend
+ Transport; Fri, 26 Mar 2021 00:08:21 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; redhat.com; dkim=none (message not signed)
+ header.d=none;redhat.com; dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ CO1NAM11FT065.mail.protection.outlook.com (10.13.174.62) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.3955.18 via Frontend Transport; Fri, 26 Mar 2021 00:08:20 +0000
+Received: from localhost (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Fri, 26 Mar
+ 2021 00:08:20 +0000
+From:   Alistair Popple <apopple@nvidia.com>
+To:     <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
+        <bskeggs@redhat.com>, <akpm@linux-foundation.org>
+CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
+        <kvm-ppc@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+        <jhubbard@nvidia.com>, <rcampbell@nvidia.com>,
+        <jglisse@redhat.com>, <jgg@nvidia.com>, <hch@infradead.org>,
+        <daniel@ffwll.ch>, <willy@infradead.org>,
+        Alistair Popple <apopple@nvidia.com>
+Subject: [PATCH v7 0/8] Add support for SVM atomics in Nouveau
+Date:   Fri, 26 Mar 2021 11:07:57 +1100
+Message-ID: <20210326000805.2518-1-apopple@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-In-Reply-To: <dbb430e1-2223-9df0-2563-4b017d6b409d@sony.com>
-References: <20210324020443.1815557-1-swboyd@chromium.org> <20210324085543.GA2660708@infradead.org> <dbb430e1-2223-9df0-2563-4b017d6b409d@sony.com>
-Subject: Re: [PATCH v2 00/12] Add build ID to stacktraces
-From:   Stephen Boyd <swboyd@chromium.org>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        linux-kernel@vger.kernel.org, Alexei Starovoitov <ast@kernel.org>,
-        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
-        Baoquan He <bhe@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        Catalin Marinas <catalin.marinas@arm.com>,
-        Dave Young <dyoung@redhat.com>,
-        Evan Green <evgreen@chromium.org>,
-        Hsin-Yi Wang <hsinyi@chromium.org>,
-        Ingo Molnar <mingo@redhat.com>, Jessica Yu <jeyu@kernel.org>,
-        Jiri Olsa <jolsa@kernel.org>, kexec@lists.infradead.org,
-        Konstantin Khlebnikov <khlebnikov@yandex-team.ru>,
-        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
-        Matthew Wilcox <willy@infradead.org>,
-        Petr Mladek <pmladek@suse.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        Sasha Levin <sashal@kernel.org>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Vivek Goyal <vgoyal@redhat.com>, Will Deacon <will@kernel.org>,
-        x86@kernel.org
-To:     Christoph Hellwig <hch@infradead.org>,
-        peter enderborg <peter.enderborg@sony.com>
-Date:   Thu, 25 Mar 2021 16:21:46 -0700
-Message-ID: <161671450646.3012082.10177164412320557022@swboyd.mtv.corp.google.com>
-User-Agent: alot/0.9.1
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: ca2ac8f7-a39d-4995-8952-08d8efeb4400
+X-MS-TrafficTypeDiagnostic: BYAPR12MB3272:
+X-Microsoft-Antispam-PRVS: <BYAPR12MB3272D086A6940DDDBBC96B5FDF619@BYAPR12MB3272.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:9508;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: x3lhGOPOQtaEIY7TyxlUyEJR/2B4zpc4ZkbMpZCxnv30ZCCNBxuDvFTU4ZmQDCyQYU3agjgwghFusOvLtT6+YUGpcwdKM62sPQqLOwDShbPB+/qwNI49SWlIlBE/gWGc3yaUDuJ8Ezda0D6JZp3VY2WPm3L4wJ4js1JWz4U//OvaROMG0DoTHLEYR3lAcQinixZpi3fG8hkwktB69UONGCAJOL/b3hf7b0zjwHPFC/sIV3DOvlsqkdBaH9qxEWkUfePJGpGrSvgOORhL3Un4C2LKUwHF8kXZn47W+cwmGEWbPBbiGlX9p6fBM4xzjczdvH6kFln/RQtptpPgNBDZwymFtJIyvyS9tk3Quyyv/SfANd6lbas8zhR+Xue+h1shqF52fDeuOKXwRB5jvFnSqN8iLoZuCILMErqsPHfbmJwtSaha5Lkkw1TVV7CSADLmUqEocUppfyM2wN0FCTIH9wpQIL5xFe4FUuW+ciJQjbHa0fv7/hI8+5QtYwXYB3kqwC9lu35ZR10wgepRa2qF8uLSrkh3Yi0Sf3WmK7cBGegHEFNHi46S1Pc2/ruyVpVP2xE1/BH22yj9XNz2Tc2sLmaS/fctBru1WUADuPgKi/9uL5VuitTClg52o0xbgQVjddCGGXHvd1A7oB8l4yZoRRHcSux7lpyL0BMqkQjpCcw=
+X-Forefront-Antispam-Report: CIP:216.228.112.34;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:schybrid03.nvidia.com;CAT:NONE;SFS:(4636009)(346002)(376002)(396003)(136003)(39860400002)(36840700001)(46966006)(82310400003)(82740400003)(16526019)(7636003)(36756003)(86362001)(356005)(70206006)(83380400001)(47076005)(36860700001)(70586007)(336012)(5660300002)(110136005)(54906003)(478600001)(8936002)(1076003)(6666004)(186003)(26005)(8676002)(2906002)(36906005)(7416002)(2616005)(316002)(426003)(4326008)(107886003);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Mar 2021 00:08:20.8654
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: ca2ac8f7-a39d-4995-8952-08d8efeb4400
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.112.34];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT065.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BYAPR12MB3272
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Quoting peter enderborg (2021-03-25 04:06:17)
-> On 3/24/21 9:55 AM, Christoph Hellwig wrote:
-> > On Tue, Mar 23, 2021 at 07:04:31PM -0700, Stephen Boyd wrote:
-> >>  x5 : 0000000000000000 x4 : 0000000000000001
-> >>  x3 : 0000000000000008 x2 : ffffff93fef25a70
-> >>  x1 : ffffff93fef15788 x0 : ffffffe3622352e0
-> >>  Call trace:
-> >>   lkdtm_WARNING+0x28/0x30 [lkdtm ed5019fdf5e53be37cb1ba7899292d7e143b2=
-59e]
-> >>   direct_entry+0x16c/0x1b4 [lkdtm ed5019fdf5e53be37cb1ba7899292d7e143b=
-259e]
-> > Yikes.  No, please do not make the backtraces a complete mess for
-> > something that serves absolutely no need.
+This is the seventh version of a series to add support to Nouveau for
+atomic memory operations on OpenCL shared virtual memory (SVM) regions.
 
-It serves a need. Please look at the patches to understand that I'm
-adding the buildid to automatically find the associated debug
-information on distros.
+This version primarily improves readability of the Nouveau fault priority
+calculation code along with other minor functional and cosmetic
+improvements listed in the changelogs.
 
->=20
-> Would a "verbose" flag be acceptable solution?=C2=A0=C2=A0=C2=A0 Somethin=
-g like write 1 to /sys/kernel/debug/verbose_stack to get the extra info.
->=20
-> I think I see a need for it.
->=20
+Exclusive device access is implemented by adding a new swap entry type
+(SWAP_DEVICE_EXCLUSIVE) which is similar to a migration entry. The main
+difference is that on fault the original entry is immediately restored by
+the fault handler instead of waiting.
 
-Or a kernel config option and a commandline parameter? That would be OK
-for me as I said on v1 of this series. I'll add that in for the next
-patch series given all the distaste for some more hex characters next to
-the module name.
+Restoring the entry triggers calls to MMU notifers which allows a device
+driver to revoke the atomic access permission from the GPU prior to the CPU
+finalising the entry.
+
+Patches 1 & 2 refactor existing migration and device private entry
+functions.
+
+Patches 3 & 4 rework try_to_unmap_one() by splitting out unrelated
+functionality into separate functions - try_to_migrate_one() and
+try_to_munlock_one(). These should not change any functionality, but any
+help testing would be much appreciated as I have not been able to test
+every usage of try_to_unmap_one().
+
+Patch 5 contains the bulk of the implementation for device exclusive
+memory.
+
+Patch 6 contains some additions to the HMM selftests to ensure everything
+works as expected.
+
+Patch 7 is a cleanup for the Nouveau SVM implementation.
+
+Patch 8 contains the implementation of atomic access for the Nouveau
+driver.
+
+This has been tested using the latest upstream Mesa userspace with a simple
+OpenCL test program which checks the results of atomic GPU operations on a
+SVM buffer whilst also writing to the same buffer from the CPU.
+
+Alistair Popple (8):
+  mm: Remove special swap entry functions
+  mm/swapops: Rework swap entry manipulation code
+  mm/rmap: Split try_to_munlock from try_to_unmap
+  mm/rmap: Split migration into its own function
+  mm: Device exclusive memory access
+  mm: Selftests for exclusive device memory
+  nouveau/svm: Refactor nouveau_range_fault
+  nouveau/svm: Implement atomic SVM access
+
+ Documentation/vm/hmm.rst                      |  19 +-
+ arch/s390/mm/pgtable.c                        |   2 +-
+ drivers/gpu/drm/nouveau/include/nvif/if000c.h |   1 +
+ drivers/gpu/drm/nouveau/nouveau_svm.c         | 156 ++++-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |   1 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   6 +
+ fs/proc/task_mmu.c                            |  23 +-
+ include/linux/mmu_notifier.h                  |  26 +-
+ include/linux/rmap.h                          |   9 +-
+ include/linux/swap.h                          |   8 +-
+ include/linux/swapops.h                       | 123 ++--
+ lib/test_hmm.c                                | 126 +++-
+ lib/test_hmm_uapi.h                           |   2 +
+ mm/debug_vm_pgtable.c                         |  12 +-
+ mm/hmm.c                                      |  12 +-
+ mm/huge_memory.c                              |  45 +-
+ mm/hugetlb.c                                  |  10 +-
+ mm/memcontrol.c                               |   2 +-
+ mm/memory.c                                   | 128 +++-
+ mm/migrate.c                                  |  51 +-
+ mm/mprotect.c                                 |  18 +-
+ mm/page_vma_mapped.c                          |  15 +-
+ mm/rmap.c                                     | 604 +++++++++++++++---
+ tools/testing/selftests/vm/hmm-tests.c        | 158 +++++
+ 24 files changed, 1282 insertions(+), 275 deletions(-)
+
+-- 
+2.20.1
+
