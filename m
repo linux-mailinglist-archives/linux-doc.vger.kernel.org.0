@@ -2,154 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B2D6C34B448
-	for <lists+linux-doc@lfdr.de>; Sat, 27 Mar 2021 05:54:14 +0100 (CET)
+	by mail.lfdr.de (Postfix) with ESMTP id 4BA1C34B4E1
+	for <lists+linux-doc@lfdr.de>; Sat, 27 Mar 2021 07:57:45 +0100 (CET)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229620AbhC0Exj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 27 Mar 2021 00:53:39 -0400
-Received: from mail-ed1-f41.google.com ([209.85.208.41]:37377 "EHLO
-        mail-ed1-f41.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229436AbhC0ExS (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 27 Mar 2021 00:53:18 -0400
-Received: by mail-ed1-f41.google.com with SMTP id x21so8556223eds.4;
-        Fri, 26 Mar 2021 21:53:18 -0700 (PDT)
+        id S231298AbhC0G5N (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 27 Mar 2021 02:57:13 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:37426 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S230111AbhC0G4z (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 27 Mar 2021 02:56:55 -0400
+Received: from mail-ed1-x536.google.com (mail-ed1-x536.google.com [IPv6:2a00:1450:4864:20::536])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E28DDC0613AA;
+        Fri, 26 Mar 2021 23:56:54 -0700 (PDT)
+Received: by mail-ed1-x536.google.com with SMTP id w18so8798476edc.0;
+        Fri, 26 Mar 2021 23:56:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=from:to:cc:subject:date:message-id;
+        bh=/nrHAis2P0dzTZHAmJMrftoMP2h0cNOfMK41ddHP2/g=;
+        b=C5IEoc74WXY/u4vf0C6XQshmwLzJw4CBBfLwWWB6ovJtW/9RSA95bSPB+UE7Hgk4xn
+         MoDB/Tg4B//mB5PWUofFsfly5uWRI6azEaekxsBwhJ9TU/1qwf3WsL98MqOrl6lNayT6
+         ZoX0ztN08FMpQPGG/0EhmXhaIZZV5qMh5BJUxIHaHpJhD7ExaZJ5A9/bO/dpTh4PnIH1
+         FHZZJVcU5PRUfayMgBK3Y9BRT0IS3LsvjPz8X8pmTyJRsujnt9BINr51UpY2LL5pKvLu
+         1FSas9QPZcU1WPKCs6SM7WJSpJOWohQzs0reW+t0hDJCB1frG10T8VwS/FWncNqYqKCr
+         LirA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=f/bL9HzL8raBAZm+7gFcLtKeJ3h77dE10M5csH8ISDA=;
-        b=qIuhenVqIlF5JwkJmgy34dxI2l9fqSQUMUifPjPFVHd3FMnlQSXPAAh9If0vpTQbMN
-         kg20mypYGj3jAxw9uZY/ELzoEd4MEZUDKqfRU5xlhsc3g4vgM73vfcrKTn+f5U2kvG3X
-         J7HwMJE7V/Eqo5G46br1nPFdtO8aSnYYfMDlp7v2QSXmpEINIQydSw/LClKmQYWb7KkH
-         bLOf5YjOiXL21TIGrcgHea53bFT9W4rgzdARX+xl/HMxKC717/qFd4St2zdV5kSFJe2A
-         gRcjbZ2beia5G3QcVmZJedCOfJhYzq2R3oT9/FJWG7lQFBFNUwkFt40T8OOOgl/HVAve
-         7ffw==
-X-Gm-Message-State: AOAM531LodLvQygwOZY60L96Rx4KZr9X6Fdj6Wg5zN1n6f78qB15MZXJ
-        gYRmTghRPOuWfgdBf8LWMw/hdlMLh1v60IGRMEI=
-X-Google-Smtp-Source: ABdhPJyeyYE5KV72OPgbU3en6i98b1C+XWjf2E6bBMDRMypsgyCeyjUYx9hglIC/LRCEC1uou4EDMtaRxYIu0BuHcNQ=
-X-Received: by 2002:a05:6402:1855:: with SMTP id v21mr18635691edy.310.1616820797709;
- Fri, 26 Mar 2021 21:53:17 -0700 (PDT)
-MIME-Version: 1.0
-References: <20210221185637.19281-1-chang.seok.bae@intel.com>
- <20210221185637.19281-23-chang.seok.bae@intel.com> <871rc9bl3v.fsf@nanos.tec.linutronix.de>
- <CAJvTdKkOKOgnmvAiPS6mWVoyAggbOB6hBOqb_tcHYDe8+-X+FQ@mail.gmail.com>
- <CALCETrWOc7wwW=KY2dGJGy9k5Ag=KhkdGGTDZMvgRHgyQ5fDjQ@mail.gmail.com>
- <CAJvTdK=OGALDso0H+asjgkjD_VaPNZzm+LpV+msM_i5aVUm_qw@mail.gmail.com>
- <CALCETrXky0RuA5WeQ0Mxjs+e4ywk1A7vmpBxqCo=PTSBzUsz-g@mail.gmail.com>
- <CAJvTdK=_G11phL6=9Ri41fJQvhRNopok_oktgvRjTM0v6ojcbg@mail.gmail.com> <CALCETrX-34QqeVLjX39ZAD+4Y6XkZ3=bPEtEPxTi0YHvLgBKig@mail.gmail.com>
-In-Reply-To: <CALCETrX-34QqeVLjX39ZAD+4Y6XkZ3=bPEtEPxTi0YHvLgBKig@mail.gmail.com>
-From:   Len Brown <lenb@kernel.org>
-Date:   Sat, 27 Mar 2021 00:53:06 -0400
-Message-ID: <CAJvTdKmdMfD4BddMJs4iwvHWRSv4PV7Dh2vxjM57UJ3pw5UJDQ@mail.gmail.com>
-Subject: Re: [PATCH v4 22/22] x86/fpu/xstate: Introduce boot-parameters to
- control state component support
-To:     Andy Lutomirski <luto@kernel.org>
-Cc:     Thomas Gleixner <tglx@linutronix.de>,
-        "Chang S. Bae" <chang.seok.bae@intel.com>,
-        Borislav Petkov <bp@suse.de>, Ingo Molnar <mingo@kernel.org>,
-        X86 ML <x86@kernel.org>, "Brown, Len" <len.brown@intel.com>,
-        Dave Hansen <dave.hansen@intel.com>,
-        "Liu, Jing2" <jing2.liu@intel.com>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>,
-        Linux Documentation List <linux-doc@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+        h=x-gm-message-state:from:to:cc:subject:date:message-id;
+        bh=/nrHAis2P0dzTZHAmJMrftoMP2h0cNOfMK41ddHP2/g=;
+        b=Jkl/HAiXfbKR3dToUjAt+TOCGOVnIaaiZ7jdyD6ZGXxiqe5ydVTtPSfQYGpjJ4+coj
+         RbEeywKIWUHSq+bInYu+R7h7fBRTHMA4pFuqzHNWuwJAgSQyccRMtOTMK2qEbZ0fP3uD
+         KFWBibYlItOfVZ50uZ4gfZcTI6nfDg12Hy37yiCNcxthuTpCliUe7oP4cYIC46gdPCqD
+         mrSWa5L0uKlwX+Vj+Uy5lhpplW/tkYLaUxdn+u529hRMJ+TjHp01J/hj8SoSGTWQl2QD
+         koaShzZsUR8p1T/UTyndTs+Tvu+5A2RCdf69NPMFXl+UdbAtM5y5SnPL6JCTP8eEYrLs
+         lhRA==
+X-Gm-Message-State: AOAM530/ftUx1YnhJw98JUobEuUl6o7zkeAnDe55TrT4IO61sCuRKS1B
+        YaT3lhdhDo40yOTT2V/kv5k=
+X-Google-Smtp-Source: ABdhPJyWImLozKgeuzDkNlFnXnyHXhJtADkkuGj20j+FlbB4dM/I91CEEbQdxt1v9O5UaC/r7bdErA==
+X-Received: by 2002:a05:6402:254f:: with SMTP id l15mr19045252edb.189.1616828213567;
+        Fri, 26 Mar 2021 23:56:53 -0700 (PDT)
+Received: from felia.fritz.box ([2001:16b8:2de6:9900:7d51:74f6:ebfb:3cdc])
+        by smtp.gmail.com with ESMTPSA id i11sm4774005ejc.101.2021.03.26.23.56.52
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Fri, 26 Mar 2021 23:56:52 -0700 (PDT)
+From:   Lukas Bulwahn <lukas.bulwahn@gmail.com>
+To:     Andy Gross <agross@kernel.org>,
+        Bjorn Andersson <bjorn.andersson@linaro.org>
+Cc:     linux-arm-msm@vger.kernel.org,
+        Ralf Ramsauer <ralf.ramsauer@oth-regensburg.de>,
+        linux-doc@vger.kernel.org, kernel-janitors@vger.kernel.org,
+        linux-kernel@vger.kernel.org,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Subject: [PATCH 0/2] kernel-doc and MAINTAINERS clean-up
+Date:   Sat, 27 Mar 2021 07:56:40 +0100
+Message-Id: <20210327065642.11969-1-lukas.bulwahn@gmail.com>
+X-Mailer: git-send-email 2.17.1
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-> 3.3 RECOMMENDATIONS FOR SYSTEM SOFTWARE
->
-> System software may disable use of Intel AMX by clearing XCR0[18:17],
-> by clearing CR4.OSXSAVE, or by setting
-> IA32_XFD[18]. It is recommended that system software initialize AMX
-> state (e.g., by executing TILERELEASE)
-> before doing so. This is because maintaining AMX state in a
-> non-initialized state may have negative power and
-> performance implications.
+Roughly 900 warnings of about 21.000 kernel-doc warnings in the kernel tree
+warn with 'cannot understand function prototype:', i.e., the kernel-doc parser
+cannot parse the function's signature. The majority, about 600 cases of those,
+are just struct definitions following the kernel-doc description. Further,
+spot-check investigations suggest that the authors of the specific kernel-doc
+descriptions simply were not aware that the general format for a kernel-doc
+description for a structure requires to prefix the struct name with the keyword
+'struct', as in 'struct struct_name - Brief description.'. Details on
+kernel-doc are at the Link below.
 
-I agree that the wording here about disabling AMX is ominous.
+Without the struct keyword, kernel-doc does not check if the kernel-doc
+description fits to the actual struct definition in the source code.
+Fortunately, in roughly a quarter of these cases, the kernel-doc description is
+actually complete wrt. its corresponding struct definition. So, the trivial
+change adding the struct keyword will allow us to keep the kernel-doc
+descriptions more consistent for future changes, by checking for new kernel-doc
+warnings.
 
-The hardware initializes with AMX disabled.
-The kernel probes AMX, enables it in XCR0, and keeps it enabled.
+Also, some of the files in ./include/ are not assigned to a specific
+MAINTAINERS section and hence have no dedicated maintainer. So, if needed, the
+files in ./include/ are also assigned to the fitting MAINTAINERS section, as I
+need to identify whom to send the clean-up patch anyway.
 
-Initially, XFD is "armed" for all tasks.
-When a task accesses AMX state, #NM fires, we allocate a context
-switch buffer, and we "disarm" XFD for that task.
-As we have that buffer in-hand for the lifetime of the task, we never
-"arm" XFD for that task again.
+Here is the change from this kernel-doc janitorial work in the ./include/
+directory for ARM/QUALCOMM SUPPORT.
 
-XFD is context switched, and so the next time it is set, is when we
-are restoring some other task's state.
+Andy, Bjorn, please pick this clean-up patch series for your tree.
 
-n.b. I'm describing the Linux flow.  The VMM scenario is a little different.
+Link: https://www.kernel.org/doc/html/latest/doc-guide/kernel-doc.html
 
-> Since you reviewed the patch set, I assume you are familiar with how
-> Linux manages XSTATE.  Linux does *not* eagerly load XSTATE on context
-> switch.  Instead, Linux loads XSTATE when the kernel needs it loaded
-> or before executing user code.  This means that the kernel can (and
-> does, and it's a performance win) execute kernel thread code and/or go
-> idle, *including long-term deep idle*, with user XSTATE loaded.
 
-Yes, this scenario is clear.
+Lukas Bulwahn (2):
+  MAINTAINERS: add another entry for ARM/QUALCOMM SUPPORT
+  soc: qcom: address kernel-doc warnings
 
-There are several cases.
+ MAINTAINERS                        | 1 +
+ include/linux/soc/qcom/apr.h       | 2 +-
+ include/linux/soc/qcom/irq.h       | 2 +-
+ include/linux/soc/qcom/llcc-qcom.h | 6 +++---
+ include/linux/soc/qcom/qmi.h       | 4 ++--
+ 5 files changed, 8 insertions(+), 7 deletions(-)
 
-1. Since TMM registers are volatile, a routine using TMM that wants
-them to persist across a call must save them,
-    and will TILERELEASE before invoking that call.  That is the
-calling convention,
-    and I expect that if it is not followed, debugging (of tools) will
-occur until it is.
+-- 
+2.17.1
 
-    The only way for a user program's XSTATE to be present during the
-kernel's call to idle
-    is if it sleep via a system call when no other task wants to run
-on that CPU.
-
-    Since system calls are calls, in this case, AMX INIT=1 during idle.
-    All deep C-state are enabled, the idle CPU is able to contribute
-it's maximum turbo buget to its peers.
-
-2. A correct program with live TMM registers takes an interrupt, and
-we enter the kernel AMX INIT=0.
-    Yes, we will enter the syscall at the frequency of the app (like
-we always do).
-    Yes, turbo frequency may be limited by the activity of this
-processor and its peers (like it always is)
-
-   2a. If we return to the same program, then depending on how long
-the syscall runs, we may execute
-         the program and the system call code at a frequency lower
-than we might if AMX INIT=1 at time of interrupt.
-
-   2b. If we context switch to a task that has AMX INIT=1, then any
-AMX-imposed limits on turbo
-         are immediately gone.
-
-    Note for 2b.  4 generations have passed since SKX had significant
-delay releasing AVX-512 credits.
-    The delay in the first hardware that supports AXM should be
-negligible for both AVX-512 and AMX.
-
-3. A buggy or purposely bogus program is fully empowered to violate
-the programming conventions.
-    Say such a program called a long sleep, and nothing else wanted to
-run on that CPU, so the kernel
-    went idle with AMX INIT=0.  Indeed, this could retard the core
-from getting into the deepest available
-    C-state, which could impact the turbo budget of neighboring cores.
-However, if that were some kind
-    of DOS, it would be simpler and more effective to simply hog a CPU
-by running code.  Also, as soon
-    as another thread switches in with INIT=1, there is no concept of
-AMX frequency caps. (see note for 2b)
-
-I do not see a situation where the kernel needs to issue TILERELEASE
-(though a VMM likely would).
-What did I miss?
-
-thanks,
-Len Brown, Intel Open Source Technology Center
-
-ps. I will respond to your ABI thoughts on your new ABI thread.
