@@ -2,78 +2,66 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id EC54E34C20B
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Mar 2021 04:54:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1D41634C2BB
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Mar 2021 07:04:16 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230209AbhC2CyF (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 28 Mar 2021 22:54:05 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:46518 "EHLO loongson.cn"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S230210AbhC2Cxw (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 28 Mar 2021 22:53:52 -0400
-Received: from LAPTOP-O8VTVVS6.localdomain (unknown [223.106.57.161])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9CxCcr_QGFgLdABAA--.4771S10;
-        Mon, 29 Mar 2021 10:53:44 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     alexs@kernel.org, Alex Shi <alex.shi@linux.alibaba.com>,
-        Huacai Chen <chenhuacai@gmail.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        Harry Wei <harryxiyou@gmail.com>, linux-doc@vger.kernel.org,
-        realpuyuwang@gmail.com, siyanteng01@gmail.com,
-        "Wu X . C ." <bobwxc@email.cn>, Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v2 8/8] docs/zh_CN: add riscv to zh_CN index
-Date:   Mon, 29 Mar 2021 10:51:44 +0800
-Message-Id: <20210329025144.9776-9-siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.25.1
-In-Reply-To: <20210329025144.9776-1-siyanteng@loongson.cn>
-References: <20210329025144.9776-1-siyanteng@loongson.cn>
+        id S229502AbhC2FDn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Mar 2021 01:03:43 -0400
+Received: from mail.kernel.org ([198.145.29.99]:55166 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229483AbhC2FD2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 29 Mar 2021 01:03:28 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 83E7F6193C;
+        Mon, 29 Mar 2021 05:03:27 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=linuxfoundation.org;
+        s=korg; t=1616994208;
+        bh=kQHa25Re0VmMnnSYwE0WwlnZwlFjdDOzl4IYFbWowLQ=;
+        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+        b=VOK9FatGGORZpQKEKjeOEN8ZSdOvAa1J8Go49aroLSC4yh50fHNbdsU6KQs5pbPn9
+         FOcEkPAGkZi/LoEkmSDrcnM+rRlWfZJC8uZ665/fmQBDEv8jMxEVug7tKJMokvrV3D
+         2lDVJUtC+ZAsCcVLxn5v/AArEswJymEZu73LENcw=
+Date:   Mon, 29 Mar 2021 07:03:25 +0200
+From:   Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To:     Gustavo Pimentel <Gustavo.Pimentel@synopsys.com>
+Cc:     "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-pci@vger.kernel.org" <linux-pci@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
+        Derek Kiernan <derek.kiernan@xilinx.com>,
+        Dragan Cvetic <dragan.cvetic@xilinx.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Bjorn Helgaas <bhelgaas@google.com>,
+        Krzysztof =?utf-8?Q?Wilczy=C5=84ski?= <kw@linux.com>
+Subject: Re: [PATCH v7 1/5] misc: Add Synopsys DesignWare xData IP driver
+Message-ID: <YGFfnX1bDrJ/eAO9@kroah.com>
+References: <cover.1616814273.git.gustavo.pimentel@synopsys.com>
+ <726feba26faebc2620b36d57859aa526bef1c0b9.1616814273.git.gustavo.pimentel@synopsys.com>
+ <YGB7SfmrJkLLoL3B@kroah.com>
+ <DM5PR12MB18356331B588B123FC0E1F56DA7F9@DM5PR12MB1835.namprd12.prod.outlook.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9CxCcr_QGFgLdABAA--.4771S10
-X-Coremail-Antispam: 1UD129KBjvdXoWrGF1xWr45AFWrZryruF47XFb_yoWxWFc_Aa
-        s7XF4kZFy3tFyIqF4rCr18JF1FyFWxKw1UCr98t398Gw15Gws8Gw1DXrykZF4DWFW3ury5
-        CrZ5ZryfXrnrKjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-        9fnUUIcSsGvfJTRUUUbvxFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
-        IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
-        F7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
-        1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Cr1j
-        6rxdM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x
-        IIjxv20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_
-        Gr1lF7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8c
-        xan2IY04v7MxkIecxEwVAFwVW8JwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWU
-        JVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67
-        kF1VAFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY
-        6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_JFI_Gr1lIx
-        AIcVC2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVF
-        xhVjvjDU0xZFpf9x0JUWxRDUUUUU=
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <DM5PR12MB18356331B588B123FC0E1F56DA7F9@DM5PR12MB1835.namprd12.prod.outlook.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-All the files in the riscv directory have been translated into
-Chinese and it is time to add them to the zh_CN index.
+On Sun, Mar 28, 2021 at 09:06:47PM +0000, Gustavo Pimentel wrote:
+> > > +static const struct pci_device_id dw_xdata_pcie_id_table[] = {
+> > > +	{ PCI_DEVICE_DATA(SYNOPSYS, EDDA, &snps_edda_data) },
+> > 
+> > Why do you need a pointer to snps_edda_data here?
+> 
+> The structure snps_edda_data indicates the location of this IP block (BAR 
+> and offset) for this particular endpoint.
+> It's very likely in the future to be more variants that for HW design 
+> reasons might require this IP block to be on a different location.
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
----
- Documentation/translations/zh_CN/index.rst | 1 +
- 1 file changed, 1 insertion(+)
+Then make the change when that happens sometime in the future.  Don't
+add unneeded complexity today, that just makes the code harder to review
+by us now, and for you to maintain today.
 
-diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
-index 51c50f319487..892b6e85a8aa 100644
---- a/Documentation/translations/zh_CN/index.rst
-+++ b/Documentation/translations/zh_CN/index.rst
-@@ -24,6 +24,7 @@
-    cpu-freq/index
-    mips/index
-    iio/index
-+   riscv/index
- 
- 目录和表格
- ----------
--- 
-2.25.1
+thanks,
 
+greg k-h
