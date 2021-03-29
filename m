@@ -2,87 +2,86 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id ABC0834C2F3
-	for <lists+linux-doc@lfdr.de>; Mon, 29 Mar 2021 07:19:17 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D14D234C328
+	for <lists+linux-doc@lfdr.de>; Mon, 29 Mar 2021 07:48:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231314AbhC2FRJ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 29 Mar 2021 01:17:09 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:36792 "EHLO
+        id S230305AbhC2Frc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 29 Mar 2021 01:47:32 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:43280 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231281AbhC2FQw (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Mar 2021 01:16:52 -0400
-Received: from mail-qv1-xf35.google.com (mail-qv1-xf35.google.com [IPv6:2607:f8b0:4864:20::f35])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 40AE6C061574;
-        Sun, 28 Mar 2021 22:16:52 -0700 (PDT)
-Received: by mail-qv1-xf35.google.com with SMTP id q9so5905012qvm.6;
-        Sun, 28 Mar 2021 22:16:52 -0700 (PDT)
+        with ESMTP id S229555AbhC2FrP (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 29 Mar 2021 01:47:15 -0400
+Received: from mail-ej1-x62e.google.com (mail-ej1-x62e.google.com [IPv6:2a00:1450:4864:20::62e])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 87FE4C061574;
+        Sun, 28 Mar 2021 22:47:14 -0700 (PDT)
+Received: by mail-ej1-x62e.google.com with SMTP id l4so17469660ejc.10;
+        Sun, 28 Mar 2021 22:47:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references
-         :mime-version:content-transfer-encoding;
-        bh=6g+lgLBSDX6TD/T6Z84lMITA6ycCwCQ9sjXvqkoHkaU=;
-        b=qeJfZUD3Qvxi9jy39JQmbXif4CGrf35Dy53578/XM7ztPIxdiz/GMrpFP0O1mapHlL
-         ZsQNtWYetBkvPn0WxjdVsUghLTQjmuenvBU9GtJXuu4JD9Zyb23rcuXqJegCu3j7R6h7
-         9Qtg2gT5fORIsWInNktgNw4iTX/Zp/jgoj9NT1zWlndYFqzHc6U0VwyNgehGT4EiNQNE
-         Y3+y9/V7RYnUrjeQIH9IZlksJZyQQnuhTJ+BTrDO3ruzP4c5tu/CLf34ysg5qZ+0/gwy
-         RoXlr7NcrXslvbTH9aMaxCMYD53cTuXv5UMFFUht6jnx169BTZbzqvmSw4jYyHuldezR
-         HejQ==
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=bXlnApRgNcMIGT76ZQV04rA/bCo848YrNvuPlqGQpvQ=;
+        b=t5H1cq6mR2J0tNuRkpuD+P0HTf9//Q22IVkgTelMDLHB/+bIZG7ylZ2HP/w7E5HXkY
+         bfV25OEHAbbMQkyZbBctBs/eTnc3jSKTZn8R2WzQCnlaArK6aqjJYFPtrpv91BSk7tH1
+         gncpjD5X4FwLEn8q3Z6LZh6PElzsHQoEjkT1pa74GNuuBeIACZj+BfUswV+MJ37IMCjn
+         u4q5JI0Bm11dyaR9j1kgWKI6heTey/cgjNE/eoOxo3d5+1DLxmtAozDWZ6zTDN4dzOog
+         A9x7UZbvFtczgl9u+NsFfVx1wSBV2fwhI1VTVd3iz5qBtZRfQTlrRPoHdZ7Kh6SkZbJU
+         Y2hQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references:mime-version:content-transfer-encoding;
-        bh=6g+lgLBSDX6TD/T6Z84lMITA6ycCwCQ9sjXvqkoHkaU=;
-        b=COYOUujllKwqDBivSuQ/Gjw/qGAHrAzRRnudlKOvZahLU88j6RTICH0Y+tcfSWLxf7
-         tSuZ56jss428HzfiE/hWdWVFiUCORNM4NrOgbaICEJctRbqh5q1M/Kbp1h7t3gLf9xI0
-         A4qn1hh0IcDEqbEEgHPIXcKJdCi7dJpkmXmdpflanQ4/aEruK4Ovk1VcD3iZPWyq/gaC
-         5BpGTBTfGGSbxcc4qgpBWkeiaihZTLr+nVn1jSvaq6GBlndSbxtqkjoN7tV1y65/zEmh
-         OJidwIwsLqsqpXqo9DtG7U78jSzRLPeghe9VEfC44Ap8awCQW++jvnfu++ZQp0qhhX3u
-         Ma7w==
-X-Gm-Message-State: AOAM531fG6Pi9OUoycEcPg8NlCQ5u3OuIMxANMZN7lzEgrmcHxOTlGud
-        IIv+eV9dfJf5im9zRoXIF4g=
-X-Google-Smtp-Source: ABdhPJzv3X6nHOkOXiP7iEOiKZsVdwqvEWOvk9wVBoqP+sEV++J4MV2dCZPSp5s7ziq9zSi1Ge4Wug==
-X-Received: by 2002:a0c:a954:: with SMTP id z20mr23840330qva.29.1616995011623;
-        Sun, 28 Mar 2021 22:16:51 -0700 (PDT)
-Received: from localhost.localdomain ([156.146.37.195])
-        by smtp.gmail.com with ESMTPSA id z124sm12993181qke.36.2021.03.28.22.16.48
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Sun, 28 Mar 2021 22:16:51 -0700 (PDT)
-From:   Bhaskar Chowdhury <unixbhaskar@gmail.com>
-To:     corbet@lwn.net, linux-doc@vger.kernel.org
-Cc:     Bhaskar Chowdhury <unixbhaskar@gmail.com>, rdunlap@infradead.org,
-        linux-kernel@vger.kernel.org
-Subject: [PATCH 23/23] openrisc: openrisc_port.rst: Fix a typo
-Date:   Mon, 29 Mar 2021 10:42:59 +0530
-Message-Id: <3f294d0860973889e0e7826b86a8779d4834fb6e.1616992679.git.unixbhaskar@gmail.com>
-X-Mailer: git-send-email 2.26.3
-In-Reply-To: <cover.1616992679.git.unixbhaskar@gmail.com>
-References: <cover.1616992679.git.unixbhaskar@gmail.com>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=bXlnApRgNcMIGT76ZQV04rA/bCo848YrNvuPlqGQpvQ=;
+        b=QTV8AdGIRKFMom2tY6BHyZS6GmNgXvGMOphus4JGLjlKHOX+3HjqDd4/Fm+OoRTmBo
+         8vHLnmm8RkngS9Dpc87i0/0qA0iIx3Qxzkzt6exrGlWouxPhZdQ8wdtiJAvyh+maEKsE
+         aWWHrRDVFdIoJuAF/vvdIM97JtscN1oHXgZdY3TvR4ekT1jTBo//c/FV+IM/iWsp2lof
+         T1ktO9j7cTy61aQYIOxUQWdo6sc0mSg+O5Oly5QlgCr/bpLCj+vc7Z7ZOfNPXWY8KmYp
+         3YIpMZc+mtAtYKxvZP3JB7EsuWYvhrbAjq9I+49SGuudqsYRZUQbGgcp0+bIlSVj3U4G
+         yNnw==
+X-Gm-Message-State: AOAM5302XW+CoRp31SCXRj5+DkfYJfq1NAb/ypzkvcoEwA4pr0PNIDrY
+        m83D4APgXQG3PsSvFkr9wd8tY1FV0biRPzkPgKWBdUG7
+X-Google-Smtp-Source: ABdhPJwsXHthTgYYf5UWRTTp8fSSNWg4ScWBunwhAhbFWXal+Dh9hBCdEvFYZ0Zi1hquu/AVrO97JjiZ4rJHejGMElM=
+X-Received: by 2002:aa7:d316:: with SMTP id p22mr26038498edq.107.1616996231621;
+ Sun, 28 Mar 2021 22:37:11 -0700 (PDT)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+References: <cover.1616992679.git.unixbhaskar@gmail.com> <b103bd6a8bcdad7f90806dbe7680017235cf1d9c.1616992679.git.unixbhaskar@gmail.com>
+In-Reply-To: <b103bd6a8bcdad7f90806dbe7680017235cf1d9c.1616992679.git.unixbhaskar@gmail.com>
+From:   Max Filippov <jcmvbkbc@gmail.com>
+Date:   Sun, 28 Mar 2021 22:37:00 -0700
+Message-ID: <CAMo8BfKj+ojEbc1ZJ6QL+f9Sq+7oZeqVNMu6nTP=OSbrqD2XOg@mail.gmail.com>
+Subject: Re: [PATCH 01/23] atomctl.rst: A typo fix
+To:     Bhaskar Chowdhury <unixbhaskar@gmail.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org,
+        Randy Dunlap <rdunlap@infradead.org>,
+        LKML <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-s/enhancments/enhancements/
+On Sun, Mar 28, 2021 at 10:18 PM Bhaskar Chowdhury
+<unixbhaskar@gmail.com> wrote:
+>
+> s/controlers/controllers/
+>
+> Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
+> ---
+>  Documentation/xtensa/atomctl.rst | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/Documentation/xtensa/atomctl.rst b/Documentation/xtensa/atomctl.rst
+> index 1ecbd0ba9a2e..a0efab2abe8f 100644
+> --- a/Documentation/xtensa/atomctl.rst
+> +++ b/Documentation/xtensa/atomctl.rst
+> @@ -23,7 +23,7 @@ doing a Cached (WB) transaction and use the Memory RCW for un-cached
+>  operations.
+>
+>  For systems without an coherent cache controller, non-MX, we always
+> -use the memory controllers RCW, thought non-MX controlers likely
+> +use the memory controllers RCW, thought non-MX controllers likely
 
-Signed-off-by: Bhaskar Chowdhury <unixbhaskar@gmail.com>
----
- Documentation/openrisc/openrisc_port.rst | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+In this line you could also do s/thought/though/.
 
-diff --git a/Documentation/openrisc/openrisc_port.rst b/Documentation/openrisc/openrisc_port.rst
-index 657ac4af7be6..b3c6c5e258b0 100644
---- a/Documentation/openrisc/openrisc_port.rst
-+++ b/Documentation/openrisc/openrisc_port.rst
-@@ -114,7 +114,7 @@ History
- 	port to 2.6.x
-
- 30-11-2004	Matjaz Breskvar (phoenix@bsemi.com)
--	lots of bugfixes and enhancments.
-+	lots of bugfixes and enhancements.
- 	added opencores framebuffer driver.
-
- 09-10-2010    Jonas Bonn (jonas@southpole.se)
---
-2.26.3
-
+-- 
+Thanks.
+-- Max
