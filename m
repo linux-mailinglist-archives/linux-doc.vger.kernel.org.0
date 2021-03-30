@@ -2,18 +2,18 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id AE65E34E6D4
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Mar 2021 13:49:03 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0641D34E6D5
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Mar 2021 13:49:04 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232023AbhC3Lsd (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Mar 2021 07:48:33 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:46688 "EHLO loongson.cn"
+        id S231993AbhC3Lsc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Mar 2021 07:48:32 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:46710 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S232240AbhC3Lro (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S232243AbhC3Lro (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Tue, 30 Mar 2021 07:47:44 -0400
 Received: from LAPTOP-O8VTVVS6.localdomain (unknown [223.106.57.161])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9AxzcjSD2NgLF4CAA--.2278S6;
-        Tue, 30 Mar 2021 19:47:35 +0800 (CST)
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9AxzcjSD2NgLF4CAA--.2278S7;
+        Tue, 30 Mar 2021 19:47:38 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <alex.shi@linux.alibaba.com>,
@@ -22,97 +22,58 @@ Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <alex.shi@linux.alibaba.com>,
         Harry Wei <harryxiyou@gmail.com>, linux-doc@vger.kernel.org,
         realpuyuwang@gmail.com, siyanteng01@gmail.com,
         Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v3 4/8] docs/zh_CN: add cpu-freq index.rst translation
-Date:   Tue, 30 Mar 2021 19:47:24 +0800
-Message-Id: <20210330114728.2680-5-siyanteng@loongson.cn>
+Subject: [PATCH v3 5/8] docs/zh_CN: add cpu-freq to zh_CN index
+Date:   Tue, 30 Mar 2021 19:47:25 +0800
+Message-Id: <20210330114728.2680-6-siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210330114728.2680-1-siyanteng@loongson.cn>
 References: <20210330114728.2680-1-siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9AxzcjSD2NgLF4CAA--.2278S6
-X-Coremail-Antispam: 1UD129KBjvJXoW7Kw15WF4xZF48CrW7GFWktFb_yoW8Zry5pr
-        n0grWfGF4UJFyxArZ3GF1UGF15X3Z7Cw47GF97Gw1FvFy8JF15tF1DtFW09a47Gr97ZFW8
-        JFn7JrWv9ry8A37anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUmj14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_JF0E3s1l82xGYI
-        kIc2x26xkF7I0E14v26ryj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2
-        z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j6F
-        4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq
-        3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7
-        IYx2IY67AKxVWUGVWUXwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r4U
-        M4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628vn2
-        kIc2xKxwCY02Avz4vE14v_Gw4l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_
-        Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
-        CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAIcVC0
-        I7IYx2IY6xkF7I0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
-        C2z280aVAFwI0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2Kfnx
-        nUUI43ZEXa7VUbvD73UUUUU==
+X-CM-TRANSID: AQAAf9AxzcjSD2NgLF4CAA--.2278S7
+X-Coremail-Antispam: 1UD129KBjvdXoWrur43Gw17Gr4DGrWrJw13urg_yoWxAFX_Aa
+        s7XF4vvFy3AF92qF4rCF15Ar10vFWxKw1UCrn8ta98G343G398Gw1DXrZ5ZF4DWFW3uryY
+        kFZ5Xr1rXrnrKjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+        9fnUUIcSsGvfJTRUUUbk8FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
+        IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
+        F7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
+        1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
+        M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
+        v20xvE14v26r106r15McIj6I8E87Iv67AKxVWUJVW8JwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
+        F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
+        IY04v7MxkIecxEwVAFwVW8KwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8
+        JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1V
+        AFwI0_Jw0_GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY6xII
+        jxv20xvEc7CjxVAFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I
+        8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73
+        UjIFyTuYvjfUOsjjDUUUU
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch translates Documention/cpu-freq/index.rst into Chinese.
+All the files in the cpu-freq directory have been translated into
+Chinese and it is time to add them to the zh_CN index.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
 ---
- .../translations/zh_CN/cpu-freq/index.rst     | 45 +++++++++++++++++++
- 1 file changed, 45 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/cpu-freq/index.rst
+ Documentation/translations/zh_CN/index.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/Documentation/translations/zh_CN/cpu-freq/index.rst b/Documentation/translations/zh_CN/cpu-freq/index.rst
-new file mode 100644
-index 000000000000..39d4b058fd7f
---- /dev/null
-+++ b/Documentation/translations/zh_CN/cpu-freq/index.rst
-@@ -0,0 +1,45 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: :doc:`../../../cpu-freq/index`
-+:Translator: Yanteng Si <siyanteng@loongson.cn>
-+
-+.. _cn_index.rst:
-+
-+
-+=======================================================
-+Linux CPUFreq - Linux(TM)内核中的CPU频率和电压升降代码
-+=======================================================
-+
-+Author: Dominik Brodowski  <linux@brodo.de>
-+
-+      时钟升降允许你在运行中改变CPU的时钟速度。这是一个很好的节省电池电量的方法，因为时
-+      钟速度越低，CPU消耗的电量越少。
-+
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   core
-+   cpu-drivers
-+   cpufreq-stats
-+
-+邮件列表
-+------------
-+这里有一个 CPU 频率变化的 CVS 提交和通用列表，您可以在这里报告bug、问题或提交补丁。要发
-+布消息，请发送电子邮件到 linux-pm@vger.kernel.org。
-+
-+链接
-+-----
-+FTP档案:
-+* ftp://ftp.linux.org.uk/pub/linux/cpufreq/
-+
-+如何访问CVS仓库:
-+* http://cvs.arm.linux.org.uk/
-+
-+CPUFreq邮件列表:
-+* http://vger.kernel.org/vger-lists.html#linux-pm
-+
-+SA-1100的时钟和电压标度:
-+* http://www.lartmaker.nl/projects/scaling
+diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
+index 2767dacfe86d..cd55c1aea604 100644
+--- a/Documentation/translations/zh_CN/index.rst
++++ b/Documentation/translations/zh_CN/index.rst
+@@ -21,6 +21,7 @@
+    filesystems/index
+    arm64/index
+    sound/index
++   cpu-freq/index
+ 
+ 目录和表格
+ ----------
 -- 
 2.25.1
 
