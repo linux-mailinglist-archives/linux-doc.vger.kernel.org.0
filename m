@@ -2,18 +2,18 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 0641D34E6D5
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Mar 2021 13:49:04 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6298934E6D3
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Mar 2021 13:49:03 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231993AbhC3Lsc (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Mar 2021 07:48:32 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:46710 "EHLO loongson.cn"
+        id S231812AbhC3Lsb (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Mar 2021 07:48:31 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:46730 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S232243AbhC3Lro (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        id S232246AbhC3Lro (ORCPT <rfc822;linux-doc@vger.kernel.org>);
         Tue, 30 Mar 2021 07:47:44 -0400
 Received: from LAPTOP-O8VTVVS6.localdomain (unknown [223.106.57.161])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9AxzcjSD2NgLF4CAA--.2278S7;
-        Tue, 30 Mar 2021 19:47:38 +0800 (CST)
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9AxzcjSD2NgLF4CAA--.2278S8;
+        Tue, 30 Mar 2021 19:47:39 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     Jonathan Corbet <corbet@lwn.net>
 Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <alex.shi@linux.alibaba.com>,
@@ -22,19 +22,19 @@ Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <alex.shi@linux.alibaba.com>,
         Harry Wei <harryxiyou@gmail.com>, linux-doc@vger.kernel.org,
         realpuyuwang@gmail.com, siyanteng01@gmail.com,
         Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v3 5/8] docs/zh_CN: add cpu-freq to zh_CN index
-Date:   Tue, 30 Mar 2021 19:47:25 +0800
-Message-Id: <20210330114728.2680-6-siyanteng@loongson.cn>
+Subject: [PATCH v3 6/8] docs/zh_CN: add mips to zh_CN index
+Date:   Tue, 30 Mar 2021 19:47:26 +0800
+Message-Id: <20210330114728.2680-7-siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.25.1
 In-Reply-To: <20210330114728.2680-1-siyanteng@loongson.cn>
 References: <20210330114728.2680-1-siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9AxzcjSD2NgLF4CAA--.2278S7
-X-Coremail-Antispam: 1UD129KBjvdXoWrur43Gw17Gr4DGrWrJw13urg_yoWxAFX_Aa
-        s7XF4vvFy3AF92qF4rCF15Ar10vFWxKw1UCrn8ta98G343G398Gw1DXrZ5ZF4DWFW3uryY
-        kFZ5Xr1rXrnrKjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+X-CM-TRANSID: AQAAf9AxzcjSD2NgLF4CAA--.2278S8
+X-Coremail-Antispam: 1UD129KBjvdXoWrXF17uFy3Cr1ktFy7CrWfZrb_yoWxWFg_Aa
+        s7XF4kZry3JFyIqr4rZr1rJr10vFWxKw4UGr98ta98G343Jws8Gw4DWrZ5ZF4DWFW3ury5
+        CrWkZr1rXrnrKjkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
         9fnUUIcSsGvfJTRUUUbk8FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
         6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
         IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
@@ -54,7 +54,7 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-All the files in the cpu-freq directory have been translated into
+All the files in the mips directory have been translated into
 Chinese and it is time to add them to the zh_CN index.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
@@ -63,14 +63,14 @@ Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
  1 file changed, 1 insertion(+)
 
 diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
-index 2767dacfe86d..cd55c1aea604 100644
+index cd55c1aea604..16641203dc88 100644
 --- a/Documentation/translations/zh_CN/index.rst
 +++ b/Documentation/translations/zh_CN/index.rst
-@@ -21,6 +21,7 @@
-    filesystems/index
+@@ -22,6 +22,7 @@
     arm64/index
     sound/index
-+   cpu-freq/index
+    cpu-freq/index
++   mips/index
  
  目录和表格
  ----------
