@@ -2,315 +2,226 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id B536434E044
-	for <lists+linux-doc@lfdr.de>; Tue, 30 Mar 2021 06:43:13 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4491E34E06D
+	for <lists+linux-doc@lfdr.de>; Tue, 30 Mar 2021 06:57:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229569AbhC3Emn (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Mar 2021 00:42:43 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59622 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229755AbhC3EmX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Mar 2021 00:42:23 -0400
-Received: from mail-pl1-x649.google.com (mail-pl1-x649.google.com [IPv6:2607:f8b0:4864:20::649])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EA542C061765
-        for <linux-doc@vger.kernel.org>; Mon, 29 Mar 2021 21:42:22 -0700 (PDT)
-Received: by mail-pl1-x649.google.com with SMTP id y19so6645658pll.8
-        for <linux-doc@vger.kernel.org>; Mon, 29 Mar 2021 21:42:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:in-reply-to:message-id:mime-version:references:subject:from:to
-         :cc;
-        bh=CIy5ACCF0ofpwh9zYe0S73BRRk0v0OISzt23gHBSsNA=;
-        b=tx1gG07Ck0mnE68/XTiNe7DMvwTmOjF63Ee6rvYBpVtmUo1jx0zb+lJOqCOsnt1hXe
-         bELVj5fbj0lz7PS2TONyKBpXYIg+feIwlb2VQCl1bb726ea+kHs6yTAp4a/TBF1k5cNh
-         WQ7JT51oLru86QmE3Bug1CsPCNupA0AQxQOQpqcQ70fD/3FS6gFl8U/KXywKfbykWixr
-         FLW0fgOQNvjlRhnIMpfTgmDUmGu+0C64hBYrbb0iuGPxZ/r0bhCzaVMdH0iuouV3fY5z
-         CRrv0gWHJDdl+0FnWRe3z8iJedXnrjVHTw6g8/yhbA4D/qPiBYGRKtuMsiyj56DxIK4s
-         rCWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:in-reply-to:message-id:mime-version
-         :references:subject:from:to:cc;
-        bh=CIy5ACCF0ofpwh9zYe0S73BRRk0v0OISzt23gHBSsNA=;
-        b=uDz0l40eYOusg2GXM+f+vO9ncGfvaZbDyc6anvi7/33NUc50OqGZBv81GxNe3GhMoF
-         3D0p1Qc8QkiBVbj/DQCZmma7a3Jm7Ds1DDYQ3SzwfifP5wY3mGkwgVVZ8Vn/Kn7KsSkW
-         +ml47DBpVlr6BXDvW31J9F/te9qNOKFeMBN1faZyVlA0+M7uqafwf5XCo76RQpCoig1Q
-         VyJqnWyyYJlFQj0CYgB2U81QO6+PVASjdjtV9Pbd0Ohqj8n43i5tZLPiuoZRarO5Dz2V
-         0nE9agmq0xmr2eIRtdaP1ek2ib/3haOMpPNdLzEJKMcoB0fm6YF9wqrTJP53w4UwEmtZ
-         5DtQ==
-X-Gm-Message-State: AOAM530T3D2843CaAVnfFFfQ0HHuomS42VFhlXQSAelEBtsq9zkgvYaq
-        cBXnn1qtXBqdrqAJy62ybP9Fiopqfpi7
-X-Google-Smtp-Source: ABdhPJwanaoy2S9Ezkf/flm++wEraYEBntfDjzkoZHgSRvzrtsWUrXoc50qrb0BGZ58rkL39rEm7UGOWdahi
-X-Received: from vipinsh.kir.corp.google.com ([2620:0:1008:10:8048:6a12:bd4f:a453])
- (user=vipinsh job=sendgmr) by 2002:a17:90a:6708:: with SMTP id
- n8mr2606697pjj.174.1617079342367; Mon, 29 Mar 2021 21:42:22 -0700 (PDT)
-Date:   Mon, 29 Mar 2021 21:42:06 -0700
-In-Reply-To: <20210330044206.2864329-1-vipinsh@google.com>
-Message-Id: <20210330044206.2864329-4-vipinsh@google.com>
-Mime-Version: 1.0
-References: <20210330044206.2864329-1-vipinsh@google.com>
-X-Mailer: git-send-email 2.31.0.291.g576ba9dcdaf-goog
-Subject: [PATCH v4 3/3] svm/sev: Register SEV and SEV-ES ASIDs to the misc controller
-From:   Vipin Sharma <vipinsh@google.com>
-To:     tj@kernel.org, mkoutny@suse.com, jacob.jun.pan@intel.com,
-        rdunlap@infradead.org, thomas.lendacky@amd.com,
-        brijesh.singh@amd.com, jon.grimm@amd.com, eric.vantassell@amd.com,
-        pbonzini@redhat.com, hannes@cmpxchg.org, frankja@linux.ibm.com,
-        borntraeger@de.ibm.com
-Cc:     corbet@lwn.net, seanjc@google.com, vkuznets@redhat.com,
-        wanpengli@tencent.com, jmattson@google.com, joro@8bytes.org,
-        tglx@linutronix.de, mingo@redhat.com, bp@alien8.de, hpa@zytor.com,
-        gingell@google.com, rientjes@google.com, kvm@vger.kernel.org,
-        x86@kernel.org, cgroups@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, Vipin Sharma <vipinsh@google.com>
-Content-Type: text/plain; charset="UTF-8"
+        id S230122AbhC3E4b (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Mar 2021 00:56:31 -0400
+Received: from mx0b-001b2d01.pphosted.com ([148.163.158.5]:62818 "EHLO
+        mx0a-001b2d01.pphosted.com" rhost-flags-OK-OK-OK-FAIL)
+        by vger.kernel.org with ESMTP id S229884AbhC3E4a (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Mar 2021 00:56:30 -0400
+Received: from pps.filterd (m0098420.ppops.net [127.0.0.1])
+        by mx0b-001b2d01.pphosted.com (8.16.0.43/8.16.0.43) with SMTP id 12U4XjGh153202;
+        Tue, 30 Mar 2021 00:56:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=from : to : cc : subject
+ : in-reply-to : references : date : message-id : content-type :
+ mime-version; s=pp1; bh=ixon0YOaD+yk5jEcvTn+006DJtnnwrreLGNiOXPZZ8U=;
+ b=pZL7kRibx+a9H6EimI/ezEXcfCF6QjiUayoDyvdmqxJPf0lE8LuGU2VsaIPLg3JHJsQl
+ 6kAWgj5vbVu5MPM6i7mgOSaS8epg8738DJSfbjbGt3DnbuZ2zYoOJOD4TLqWLuHV0c5i
+ HIvSDOHERRIh9h8Svl4jUtupIcIcAh+EkLIHkpda05e0s1gW264vElQ9vFZ8Vydp12hR
+ jMHXN/zimRKUJYxRXpBsy/ShCJmXkLa6NatoT86T+6wXFq+BNzAzNnIrSqiolYDCYQQ7
+ xNcb5+I4jMCiHsdHPE9Lqj0KHgGKE7bV55I4myqn9x5QgXtcMm6wMKsMyzsiouMcfaJw fQ== 
+Received: from ppma03wdc.us.ibm.com (ba.79.3fa9.ip4.static.sl-reverse.com [169.63.121.186])
+        by mx0b-001b2d01.pphosted.com with ESMTP id 37jjb5m4wa-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 30 Mar 2021 00:56:23 -0400
+Received: from pps.filterd (ppma03wdc.us.ibm.com [127.0.0.1])
+        by ppma03wdc.us.ibm.com (8.16.0.43/8.16.0.43) with SMTP id 12U4pjkq017077;
+        Tue, 30 Mar 2021 04:56:22 GMT
+Received: from b01cxnp22033.gho.pok.ibm.com (b01cxnp22033.gho.pok.ibm.com [9.57.198.23])
+        by ppma03wdc.us.ibm.com with ESMTP id 37jqmn36fh-1
+        (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+        Tue, 30 Mar 2021 04:56:22 +0000
+Received: from b01ledav002.gho.pok.ibm.com (b01ledav002.gho.pok.ibm.com [9.57.199.107])
+        by b01cxnp22033.gho.pok.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id 12U4uMQJ31130042
+        (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+        Tue, 30 Mar 2021 04:56:22 GMT
+Received: from b01ledav002.gho.pok.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 5CA69124053;
+        Tue, 30 Mar 2021 04:56:22 +0000 (GMT)
+Received: from b01ledav002.gho.pok.ibm.com (unknown [127.0.0.1])
+        by IMSVA (Postfix) with ESMTP id 3F58A124055;
+        Tue, 30 Mar 2021 04:56:19 +0000 (GMT)
+Received: from skywalker.linux.ibm.com (unknown [9.199.52.226])
+        by b01ledav002.gho.pok.ibm.com (Postfix) with ESMTP;
+        Tue, 30 Mar 2021 04:56:18 +0000 (GMT)
+X-Mailer: emacs 28.0.50 (via feedmail 11-beta-1 I)
+From:   "Aneesh Kumar K.V" <aneesh.kumar@linux.ibm.com>
+To:     Shivaprasad G Bhat <sbhat@linux.ibm.com>, sbhat@linux.vnet.ibm.com,
+        linuxppc-dev@lists.ozlabs.org, kvm-ppc@vger.kernel.org,
+        linux-nvdimm@lists.01.org, ellerman@au1.ibm.com
+Cc:     linux-doc@vger.kernel.org, vaibhav@linux.ibm.com
+Subject: Re: [PATCH v3] powerpc/papr_scm: Implement support for H_SCM_FLUSH
+ hcall
+In-Reply-To: <161703936121.36.7260632399582101498.stgit@e1fbed493c87>
+References: <161703936121.36.7260632399582101498.stgit@e1fbed493c87>
+Date:   Tue, 30 Mar 2021 10:26:16 +0530
+Message-ID: <87mtul6xzj.fsf@linux.ibm.com>
+Content-Type: text/plain
+X-TM-AS-GCONF: 00
+X-Proofpoint-GUID: aPcBfXRo3onOJJbKX49psqOTu0g8NSFj
+X-Proofpoint-ORIG-GUID: aPcBfXRo3onOJJbKX49psqOTu0g8NSFj
+X-Proofpoint-UnRewURL: 0 URL was un-rewritten
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10434:6.0.369,18.0.761
+ definitions=2021-03-30_01:2021-03-26,2021-03-30 signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0 mlxlogscore=999 bulkscore=0
+ mlxscore=0 impostorscore=0 adultscore=0 lowpriorityscore=0 clxscore=1011
+ spamscore=0 priorityscore=1501 phishscore=0 malwarescore=0 suspectscore=0
+ classifier=spam adjust=0 reason=mlx scancount=1 engine=8.12.0-2103250000
+ definitions=main-2103300029
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Secure Encrypted Virtualization (SEV) and Secure Encrypted
-Virtualization - Encrypted State (SEV-ES) ASIDs are used to encrypt KVMs
-on AMD platform. These ASIDs are available in the limited quantities on
-a host.
+Shivaprasad G Bhat <sbhat@linux.ibm.com> writes:
 
-Register their capacity and usage to the misc controller for tracking
-via cgroups.
+> Add support for ND_REGION_ASYNC capability if the device tree
+> indicates 'ibm,hcall-flush-required' property in the NVDIMM node.
+> Flush is done by issuing H_SCM_FLUSH hcall to the hypervisor.
+>
+> If the flush request failed, the hypervisor is expected to
+> to reflect the problem in the subsequent nvdimm H_SCM_HEALTH call.
+>
+> This patch prevents mmap of namespaces with MAP_SYNC flag if the
+> nvdimm requires an explicit flush[1].
+>
+> References:
+> [1] https://github.com/avocado-framework-tests/avocado-misc-tests/blob/master/memory/ndctl.py.data/map_sync.c
 
-Signed-off-by: Vipin Sharma <vipinsh@google.com>
-Reviewed-by: David Rientjes <rientjes@google.com>
----
- arch/x86/kvm/svm/sev.c      | 70 +++++++++++++++++++++++++++++++------
- arch/x86/kvm/svm/svm.h      |  1 +
- include/linux/misc_cgroup.h |  6 ++++
- kernel/cgroup/misc.c        |  6 ++++
- 4 files changed, 73 insertions(+), 10 deletions(-)
 
-diff --git a/arch/x86/kvm/svm/sev.c b/arch/x86/kvm/svm/sev.c
-index 874ea309279f..214eefb20414 100644
---- a/arch/x86/kvm/svm/sev.c
-+++ b/arch/x86/kvm/svm/sev.c
-@@ -14,6 +14,7 @@
- #include <linux/psp-sev.h>
- #include <linux/pagemap.h>
- #include <linux/swap.h>
-+#include <linux/misc_cgroup.h>
- #include <linux/processor.h>
- #include <linux/trace_events.h>
- #include <asm/fpu/internal.h>
-@@ -28,6 +29,21 @@
- 
- #define __ex(x) __kvm_handle_fault_on_reboot(x)
- 
-+#ifndef CONFIG_KVM_AMD_SEV
-+/*
-+ * When this config is not defined, SEV feature is not supported and APIs in
-+ * this file are not used but this file still gets compiled into the KVM AMD
-+ * module.
-+ *
-+ * We will not have MISC_CG_RES_SEV and MISC_CG_RES_SEV_ES entries in the enum
-+ * misc_res_type {} defined in linux/misc_cgroup.h.
-+ *
-+ * Below macros allow compilation to succeed.
-+ */
-+#define MISC_CG_RES_SEV MISC_CG_RES_TYPES
-+#define MISC_CG_RES_SEV_ES MISC_CG_RES_TYPES
-+#endif
-+
- static u8 sev_enc_bit;
- static int sev_flush_asids(void);
- static DECLARE_RWSEM(sev_deactivate_lock);
-@@ -89,8 +105,19 @@ static bool __sev_recycle_asids(int min_asid, int max_asid)
- 
- static int sev_asid_new(struct kvm_sev_info *sev)
- {
--	int pos, min_asid, max_asid;
-+	int pos, min_asid, max_asid, ret;
- 	bool retry = true;
-+	enum misc_res_type type;
-+
-+	type = sev->es_active ? MISC_CG_RES_SEV_ES : MISC_CG_RES_SEV;
-+	WARN_ON(sev->misc_cg);
-+	sev->misc_cg = get_current_misc_cg();
-+	ret = misc_cg_try_charge(type, sev->misc_cg, 1);
-+	if (ret) {
-+		put_misc_cg(sev->misc_cg);
-+		sev->misc_cg = NULL;
-+		return ret;
-+	}
- 
- 	mutex_lock(&sev_bitmap_lock);
- 
-@@ -108,7 +135,8 @@ static int sev_asid_new(struct kvm_sev_info *sev)
- 			goto again;
- 		}
- 		mutex_unlock(&sev_bitmap_lock);
--		return -EBUSY;
-+		ret = -EBUSY;
-+		goto e_uncharge;
- 	}
- 
- 	__set_bit(pos, sev_asid_bitmap);
-@@ -116,6 +144,11 @@ static int sev_asid_new(struct kvm_sev_info *sev)
- 	mutex_unlock(&sev_bitmap_lock);
- 
- 	return pos + 1;
-+e_uncharge:
-+	misc_cg_uncharge(type, sev->misc_cg, 1);
-+	put_misc_cg(sev->misc_cg);
-+	sev->misc_cg = NULL;
-+	return ret;
- }
- 
- static int sev_get_asid(struct kvm *kvm)
-@@ -125,14 +158,15 @@ static int sev_get_asid(struct kvm *kvm)
- 	return sev->asid;
- }
- 
--static void sev_asid_free(int asid)
-+static void sev_asid_free(struct kvm_sev_info *sev)
- {
- 	struct svm_cpu_data *sd;
- 	int cpu, pos;
-+	enum misc_res_type type;
- 
- 	mutex_lock(&sev_bitmap_lock);
- 
--	pos = asid - 1;
-+	pos = sev->asid - 1;
- 	__set_bit(pos, sev_reclaim_asid_bitmap);
- 
- 	for_each_possible_cpu(cpu) {
-@@ -141,6 +175,11 @@ static void sev_asid_free(int asid)
- 	}
- 
- 	mutex_unlock(&sev_bitmap_lock);
-+
-+	type = sev->es_active ? MISC_CG_RES_SEV_ES : MISC_CG_RES_SEV;
-+	misc_cg_uncharge(type, sev->misc_cg, 1);
-+	put_misc_cg(sev->misc_cg);
-+	sev->misc_cg = NULL;
- }
- 
- static void sev_unbind_asid(struct kvm *kvm, unsigned int handle)
-@@ -188,19 +227,20 @@ static int sev_guest_init(struct kvm *kvm, struct kvm_sev_cmd *argp)
- 	asid = sev_asid_new(sev);
- 	if (asid < 0)
- 		return ret;
-+	sev->asid = asid;
- 
- 	ret = sev_platform_init(&argp->error);
- 	if (ret)
- 		goto e_free;
- 
- 	sev->active = true;
--	sev->asid = asid;
- 	INIT_LIST_HEAD(&sev->regions_list);
- 
- 	return 0;
- 
- e_free:
--	sev_asid_free(asid);
-+	sev_asid_free(sev);
-+	sev->asid = 0;
- 	return ret;
- }
- 
-@@ -1315,12 +1355,12 @@ void sev_vm_destroy(struct kvm *kvm)
- 	mutex_unlock(&kvm->lock);
- 
- 	sev_unbind_asid(kvm, sev->handle);
--	sev_asid_free(sev->asid);
-+	sev_asid_free(sev);
- }
- 
- void __init sev_hardware_setup(void)
- {
--	unsigned int eax, ebx, ecx, edx;
-+	unsigned int eax, ebx, ecx, edx, sev_asid_count, sev_es_asid_count;
- 	bool sev_es_supported = false;
- 	bool sev_supported = false;
- 
-@@ -1352,7 +1392,11 @@ void __init sev_hardware_setup(void)
- 	if (!sev_reclaim_asid_bitmap)
- 		goto out;
- 
--	pr_info("SEV supported: %u ASIDs\n", max_sev_asid - min_sev_asid + 1);
-+	sev_asid_count = max_sev_asid - min_sev_asid + 1;
-+	if (misc_cg_set_capacity(MISC_CG_RES_SEV, sev_asid_count))
-+		goto out;
-+
-+	pr_info("SEV supported: %u ASIDs\n", sev_asid_count);
- 	sev_supported = true;
- 
- 	/* SEV-ES support requested? */
-@@ -1367,7 +1411,11 @@ void __init sev_hardware_setup(void)
- 	if (min_sev_asid == 1)
- 		goto out;
- 
--	pr_info("SEV-ES supported: %u ASIDs\n", min_sev_asid - 1);
-+	sev_es_asid_count = min_sev_asid - 1;
-+	if (misc_cg_set_capacity(MISC_CG_RES_SEV_ES, sev_es_asid_count))
-+		goto out;
-+
-+	pr_info("SEV-ES supported: %u ASIDs\n", sev_es_asid_count);
- 	sev_es_supported = true;
- 
- out:
-@@ -1382,6 +1430,8 @@ void sev_hardware_teardown(void)
- 
- 	bitmap_free(sev_asid_bitmap);
- 	bitmap_free(sev_reclaim_asid_bitmap);
-+	misc_cg_set_capacity(MISC_CG_RES_SEV, 0);
-+	misc_cg_set_capacity(MISC_CG_RES_SEV_ES, 0);
- 
- 	sev_flush_asids();
- }
-diff --git a/arch/x86/kvm/svm/svm.h b/arch/x86/kvm/svm/svm.h
-index 39e071fdab0c..9806aaebc37f 100644
---- a/arch/x86/kvm/svm/svm.h
-+++ b/arch/x86/kvm/svm/svm.h
-@@ -65,6 +65,7 @@ struct kvm_sev_info {
- 	unsigned long pages_locked; /* Number of pages locked */
- 	struct list_head regions_list;  /* List of registered regions */
- 	u64 ap_jump_table;	/* SEV-ES AP Jump Table address */
-+	struct misc_cg *misc_cg; /* For misc cgroup accounting */
- };
- 
- struct kvm_svm {
-diff --git a/include/linux/misc_cgroup.h b/include/linux/misc_cgroup.h
-index 1195d36558b4..c5af592481c0 100644
---- a/include/linux/misc_cgroup.h
-+++ b/include/linux/misc_cgroup.h
-@@ -12,6 +12,12 @@
-  * Types of misc cgroup entries supported by the host.
-  */
- enum misc_res_type {
-+#ifdef CONFIG_KVM_AMD_SEV
-+	/* AMD SEV ASIDs resource */
-+	MISC_CG_RES_SEV,
-+	/* AMD SEV-ES ASIDs resource */
-+	MISC_CG_RES_SEV_ES,
-+#endif
- 	MISC_CG_RES_TYPES
- };
- 
-diff --git a/kernel/cgroup/misc.c b/kernel/cgroup/misc.c
-index 4352bc4a3bd5..ec02d963cad1 100644
---- a/kernel/cgroup/misc.c
-+++ b/kernel/cgroup/misc.c
-@@ -18,6 +18,12 @@
- 
- /* Miscellaneous res name, keep it in sync with enum misc_res_type */
- static const char *const misc_res_name[] = {
-+#ifdef CONFIG_KVM_AMD_SEV
-+	/* AMD SEV ASIDs resource */
-+	"sev",
-+	/* AMD SEV-ES ASIDs resource */
-+	"sev_es",
-+#endif
- };
- 
- /* Root misc cgroup */
--- 
-2.31.0.291.g576ba9dcdaf-goog
+Reviewed-by: Aneesh Kumar K.V <aneesh.kumar@linux.ibm.com>
 
+>
+> Signed-off-by: Shivaprasad G Bhat <sbhat@linux.ibm.com>
+> ---
+> v2 - https://www.spinics.net/lists/kvm-ppc/msg18799.html
+> Changes from v2:
+>        - Fixed the commit message.
+>        - Add dev_dbg before the H_SCM_FLUSH hcall
+>
+> v1 - https://www.spinics.net/lists/kvm-ppc/msg18272.html
+> Changes from v1:
+>        - Hcall semantics finalized, all changes are to accomodate them.
+>
+>  Documentation/powerpc/papr_hcalls.rst     |   14 ++++++++++
+>  arch/powerpc/include/asm/hvcall.h         |    3 +-
+>  arch/powerpc/platforms/pseries/papr_scm.c |   40 +++++++++++++++++++++++++++++
+>  3 files changed, 56 insertions(+), 1 deletion(-)
+>
+> diff --git a/Documentation/powerpc/papr_hcalls.rst b/Documentation/powerpc/papr_hcalls.rst
+> index 48fcf1255a33..648f278eea8f 100644
+> --- a/Documentation/powerpc/papr_hcalls.rst
+> +++ b/Documentation/powerpc/papr_hcalls.rst
+> @@ -275,6 +275,20 @@ Health Bitmap Flags:
+>  Given a DRC Index collect the performance statistics for NVDIMM and copy them
+>  to the resultBuffer.
+>  
+> +**H_SCM_FLUSH**
+> +
+> +| Input: *drcIndex, continue-token*
+> +| Out: *continue-token*
+> +| Return Value: *H_SUCCESS, H_Parameter, H_P2, H_BUSY*
+> +
+> +Given a DRC Index Flush the data to backend NVDIMM device.
+> +
+> +The hcall returns H_BUSY when the flush takes longer time and the hcall needs
+> +to be issued multiple times in order to be completely serviced. The
+> +*continue-token* from the output to be passed in the argument list of
+> +subsequent hcalls to the hypervisor until the hcall is completely serviced
+> +at which point H_SUCCESS or other error is returned by the hypervisor.
+> +
+>  References
+>  ==========
+>  .. [1] "Power Architecture Platform Reference"
+> diff --git a/arch/powerpc/include/asm/hvcall.h b/arch/powerpc/include/asm/hvcall.h
+> index ed6086d57b22..9f7729a97ebd 100644
+> --- a/arch/powerpc/include/asm/hvcall.h
+> +++ b/arch/powerpc/include/asm/hvcall.h
+> @@ -315,7 +315,8 @@
+>  #define H_SCM_HEALTH            0x400
+>  #define H_SCM_PERFORMANCE_STATS 0x418
+>  #define H_RPT_INVALIDATE	0x448
+> -#define MAX_HCALL_OPCODE	H_RPT_INVALIDATE
+> +#define H_SCM_FLUSH		0x44C
+> +#define MAX_HCALL_OPCODE	H_SCM_FLUSH
+>  
+>  /* Scope args for H_SCM_UNBIND_ALL */
+>  #define H_UNBIND_SCOPE_ALL (0x1)
+> diff --git a/arch/powerpc/platforms/pseries/papr_scm.c b/arch/powerpc/platforms/pseries/papr_scm.c
+> index 835163f54244..b7a47fcc5aa5 100644
+> --- a/arch/powerpc/platforms/pseries/papr_scm.c
+> +++ b/arch/powerpc/platforms/pseries/papr_scm.c
+> @@ -93,6 +93,7 @@ struct papr_scm_priv {
+>  	uint64_t block_size;
+>  	int metadata_size;
+>  	bool is_volatile;
+> +	bool hcall_flush_required;
+>  
+>  	uint64_t bound_addr;
+>  
+> @@ -117,6 +118,39 @@ struct papr_scm_priv {
+>  	size_t stat_buffer_len;
+>  };
+>  
+> +static int papr_scm_pmem_flush(struct nd_region *nd_region,
+> +			       struct bio *bio __maybe_unused)
+> +{
+> +	struct papr_scm_priv *p = nd_region_provider_data(nd_region);
+> +	unsigned long ret_buf[PLPAR_HCALL_BUFSIZE];
+> +	uint64_t token = 0;
+> +	int64_t rc;
+> +
+> +	dev_dbg(&p->pdev->dev, "flush drc 0x%x", p->drc_index);
+> +
+> +	do {
+> +		rc = plpar_hcall(H_SCM_FLUSH, ret_buf, p->drc_index, token);
+> +		token = ret_buf[0];
+> +
+> +		/* Check if we are stalled for some time */
+> +		if (H_IS_LONG_BUSY(rc)) {
+> +			msleep(get_longbusy_msecs(rc));
+> +			rc = H_BUSY;
+> +		} else if (rc == H_BUSY) {
+> +			cond_resched();
+> +		}
+> +	} while (rc == H_BUSY);
+> +
+> +	if (rc) {
+> +		dev_err(&p->pdev->dev, "flush error: %lld", rc);
+> +		rc = -EIO;
+> +	} else {
+> +		dev_dbg(&p->pdev->dev, "flush drc 0x%x complete", p->drc_index);
+> +	}
+> +
+> +	return rc;
+> +}
+> +
+>  static LIST_HEAD(papr_nd_regions);
+>  static DEFINE_MUTEX(papr_ndr_lock);
+>  
+> @@ -943,6 +977,11 @@ static int papr_scm_nvdimm_init(struct papr_scm_priv *p)
+>  	ndr_desc.num_mappings = 1;
+>  	ndr_desc.nd_set = &p->nd_set;
+>  
+> +	if (p->hcall_flush_required) {
+> +		set_bit(ND_REGION_ASYNC, &ndr_desc.flags);
+> +		ndr_desc.flush = papr_scm_pmem_flush;
+> +	}
+> +
+>  	if (p->is_volatile)
+>  		p->region = nvdimm_volatile_region_create(p->bus, &ndr_desc);
+>  	else {
+> @@ -1088,6 +1127,7 @@ static int papr_scm_probe(struct platform_device *pdev)
+>  	p->block_size = block_size;
+>  	p->blocks = blocks;
+>  	p->is_volatile = !of_property_read_bool(dn, "ibm,cache-flush-required");
+> +	p->hcall_flush_required = of_property_read_bool(dn, "ibm,hcall-flush-required");
+>  
+>  	/* We just need to ensure that set cookies are unique across */
+>  	uuid_parse(uuid_str, (uuid_t *) uuid);
+>
+> _______________________________________________
+> Linux-nvdimm mailing list -- linux-nvdimm@lists.01.org
+> To unsubscribe send an email to linux-nvdimm-leave@lists.01.org
