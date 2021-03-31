@@ -2,128 +2,218 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DE99F34F713
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Mar 2021 05:03:22 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id DA05734F720
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Mar 2021 05:06:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233309AbhCaDC2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 30 Mar 2021 23:02:28 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:38438 "EHLO
+        id S233305AbhCaDFj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 30 Mar 2021 23:05:39 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39240 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S232874AbhCaDBj (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Mar 2021 23:01:39 -0400
-Received: from mail-pj1-x1036.google.com (mail-pj1-x1036.google.com [IPv6:2607:f8b0:4864:20::1036])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 144E5C06175F
-        for <linux-doc@vger.kernel.org>; Tue, 30 Mar 2021 20:01:39 -0700 (PDT)
-Received: by mail-pj1-x1036.google.com with SMTP id x21-20020a17090a5315b029012c4a622e4aso479047pjh.2
-        for <linux-doc@vger.kernel.org>; Tue, 30 Mar 2021 20:01:39 -0700 (PDT)
+        with ESMTP id S232805AbhCaDFY (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 30 Mar 2021 23:05:24 -0400
+Received: from mail-pf1-x42a.google.com (mail-pf1-x42a.google.com [IPv6:2607:f8b0:4864:20::42a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E4399C061574
+        for <linux-doc@vger.kernel.org>; Tue, 30 Mar 2021 20:05:23 -0700 (PDT)
+Received: by mail-pf1-x42a.google.com with SMTP id 11so13508948pfn.9
+        for <linux-doc@vger.kernel.org>; Tue, 30 Mar 2021 20:05:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=stnuRek4sOjIWVbHiF6Zw30QkQ1wKjPo9ZYhQ5gXeIc=;
-        b=niXRWlsP6nWYOz464OcK85FUi8OH0IvOD5tYyB/n4qHA/fz+1UeCwrVgIj9QbSKuJs
-         9In3WzOp3YhE4aF7+nrgA0j3qQcaR2Ip29sgsP1IuNG6cdVgq7gY8lZe1WCrD2TQJenI
-         ORcasWtvvKCFXDM/Fh4//SyDQ3gtU63zmWQ5KS7tS8Pbb5W9fhidBezi8/AEOg9HbmjZ
-         k6fL5ju5NVz4MXfKI88aR2rVlZ6HFrSrEYbWH8lTzBYqcWo/QJTstjygBi1tebOXObXF
-         d0d5C2yxDVZJemqMLcwdyWiLGKNjvdqITv++rg+ZHPn6OK5imYyRQZqVtPmkWcscIftT
-         zYJg==
+        d=chromium.org; s=google;
+        h=from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=R7r8q4+jfsqYeWSmQl9ewOqEIRdKZ2+jiQXqx874UHs=;
+        b=UTASMEMUx99NzjIyWpHr0/mcSp2UvLaPGwlBGhjTEX4Reie8C5xZwwYVbv51SF7m8p
+         gR/lbTntdfxAlXU9VGtIUXBzgY0SibsG5+MxvZwWAsH/+xpb9Ky/dYRvIAdf/fgWPM/w
+         J7wYZF1zOPt8WMWSAStbrO7dGspJtpl/yDgKQ=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=stnuRek4sOjIWVbHiF6Zw30QkQ1wKjPo9ZYhQ5gXeIc=;
-        b=ay+MiyDBIZsj+QMrbp7p4SqbW0K800g4EbdGPKYQBz7VhhqITFBmA65+eeBhpUTL2h
-         yQnbF3QON0gVbDVUXGsyujSEUNBeg2SBDHp78d3kktVxrgg6BJvz8vGT7mUOtDhxZR+x
-         rmZN1vi2DsnGi20sIWVz5d0J4zRw5nqIupd3wX8QdlqRlyjzTJ4Mseh+9bz4ntb5vcIN
-         dV3n8UF/D77wkXzYY78coglXxB2yIJVJ4fGkrZO8c/o3o8m/QYI+FJBFkoq1Ag2R7yvA
-         j3zAA9IC8whzVQ5gWjBEFzwecYv6pyLHuiC5Bx/fPzzfnSkXRLGyICOLwkRlRoJ0EitB
-         QFWw==
-X-Gm-Message-State: AOAM530tPRjxOxwdZBA5V1aVUvUjR3gJys2rDuPJPWYPnNg+Ik7CA9a3
-        LOUKy4/iMfzCWL4tE01vz4i+Yg==
-X-Google-Smtp-Source: ABdhPJzGQXAE+cVEv4iUgsow9YdddJYSNGV5fSw+Q1hZhK7KifScyxTT+YTaUQqGdwqKrP1GWz8PZg==
-X-Received: by 2002:a17:902:c408:b029:e7:3242:5690 with SMTP id k8-20020a170902c408b02900e732425690mr1241746plk.85.1617159697700;
-        Tue, 30 Mar 2021 20:01:37 -0700 (PDT)
-Received: from google.com (240.111.247.35.bc.googleusercontent.com. [35.247.111.240])
-        by smtp.gmail.com with ESMTPSA id w84sm360419pfc.142.2021.03.30.20.01.36
+        h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+         :content-transfer-encoding;
+        bh=R7r8q4+jfsqYeWSmQl9ewOqEIRdKZ2+jiQXqx874UHs=;
+        b=A5bPZUW/5ivxFRS7WhV2mKt3E5lb9Si/C0Gad1OPVJ/PajQylv+Aq6QIRzpnQCz/Aj
+         KDUMUd+rQIgenV1pm5fg2CQX34HnJhXGubwBLEGE/+Ug/NoSkeop/srtPSV8T01LoMo2
+         k1x6lpqDWXtin5IDBv/ljkhFzXaFd8T6pDHXEe5MrgHiDHRbG5FtKxtL3F7fRqYdXRsb
+         6hD6AukRn1BbBi0v2wOiv5QWdkWWpt4FUiLEh0O5TS0FyrVljzpgzTAJ1BMxhH4TqANt
+         7TGoVF7jaYfNhgk24LmaiSQhVYbQk96MxaWyrIR2qfWLVyCURB/xfvXxRhE845k3WNpT
+         PiEQ==
+X-Gm-Message-State: AOAM532dRmG7f1uj3n58LDFfwyr+/0r/r/igV3r91nx8BZWLaO3IPOY7
+        JbKTq+eGyyHnOv94342l3T71Dg==
+X-Google-Smtp-Source: ABdhPJzZ7w61YABPCh5iarbocuVmY15xbWpwl08B90IgwSEEUshWM4L54HpsqO1Rw1j4ZI3sZ1QM8A==
+X-Received: by 2002:a63:f443:: with SMTP id p3mr1139952pgk.378.1617159923437;
+        Tue, 30 Mar 2021 20:05:23 -0700 (PDT)
+Received: from smtp.gmail.com ([2620:15c:202:201:c8c2:b814:df0f:253f])
+        by smtp.gmail.com with ESMTPSA id c6sm389024pfj.99.2021.03.30.20.05.21
         (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Tue, 30 Mar 2021 20:01:36 -0700 (PDT)
-Date:   Wed, 31 Mar 2021 03:01:33 +0000
-From:   Sean Christopherson <seanjc@google.com>
-To:     Emanuele Giuseppe Esposito <eesposit@redhat.com>
-Cc:     kvm@vger.kernel.org, Paolo Bonzini <pbonzini@redhat.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Jim Mattson <jmattson@google.com>,
-        Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-        "H. Peter Anvin" <hpa@zytor.com>, Shuah Khan <shuah@kernel.org>,
-        Alexander Graf <graf@amazon.com>,
-        Andrew Jones <drjones@redhat.com>, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, linux-kselftest@vger.kernel.org
-Subject: Re: [PATCH 1/4] kvm: cpuid: adjust the returned nent field of
- kvm_cpuid2 for KVM_GET_SUPPORTED_CPUID and KVM_GET_EMULATED_CPUID
-Message-ID: <YGPmDbO++agqdqQL@google.com>
-References: <20210330185841.44792-1-eesposit@redhat.com>
- <20210330185841.44792-2-eesposit@redhat.com>
+        Tue, 30 Mar 2021 20:05:23 -0700 (PDT)
+From:   Stephen Boyd <swboyd@chromium.org>
+To:     Andrew Morton <akpm@linux-foundation.org>
+Cc:     linux-kernel@vger.kernel.org, Alexei Starovoitov <ast@kernel.org>,
+        Andy Shevchenko <andriy.shevchenko@linux.intel.com>,
+        Baoquan He <bhe@redhat.com>, Borislav Petkov <bp@alien8.de>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        Dave Young <dyoung@redhat.com>,
+        Evan Green <evgreen@chromium.org>,
+        Hsin-Yi Wang <hsinyi@chromium.org>,
+        Ingo Molnar <mingo@redhat.com>, Jessica Yu <jeyu@kernel.org>,
+        Jiri Olsa <jolsa@kernel.org>, kexec@lists.infradead.org,
+        Konstantin Khlebnikov <khlebnikov@yandex-team.ru>,
+        linux-arm-kernel@lists.infradead.org, linux-doc@vger.kernel.org,
+        Matthew Wilcox <willy@infradead.org>,
+        Petr Mladek <pmladek@suse.com>,
+        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
+        Sasha Levin <sashal@kernel.org>,
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Vivek Goyal <vgoyal@redhat.com>, Will Deacon <will@kernel.org>,
+        x86@kernel.org, Christoph Hellwig <hch@infradead.org>,
+        peter enderborg <peter.enderborg@sony.com>
+Subject: [PATCH v3 00/12] Add build ID to stacktraces
+Date:   Tue, 30 Mar 2021 20:05:08 -0700
+Message-Id: <20210331030520.3816265-1-swboyd@chromium.org>
+X-Mailer: git-send-email 2.31.0.291.g576ba9dcdaf-goog
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210330185841.44792-2-eesposit@redhat.com>
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 30, 2021, Emanuele Giuseppe Esposito wrote:
-> Calling the kvm KVM_GET_[SUPPORTED/EMULATED]_CPUID ioctl requires
-> a nent field inside the kvm_cpuid2 struct to be big enough to contain
-> all entries that will be set by kvm.
-> Therefore if the nent field is too high, kvm will adjust it to the
-> right value. If too low, -E2BIG is returned.
-> 
-> However, when filling the entries do_cpuid_func() requires an
-> additional entry, so if the right nent is known in advance,
-> giving the exact number of entries won't work because it has to be increased
-> by one.
-> 
-> Signed-off-by: Emanuele Giuseppe Esposito <eesposit@redhat.com>
-> ---
->  arch/x86/kvm/cpuid.c | 6 ++++++
->  1 file changed, 6 insertions(+)
-> 
-> diff --git a/arch/x86/kvm/cpuid.c b/arch/x86/kvm/cpuid.c
-> index 6bd2f8b830e4..5412b48b9103 100644
-> --- a/arch/x86/kvm/cpuid.c
-> +++ b/arch/x86/kvm/cpuid.c
-> @@ -975,6 +975,12 @@ int kvm_dev_ioctl_get_cpuid(struct kvm_cpuid2 *cpuid,
->  
->  	if (cpuid->nent < 1)
->  		return -E2BIG;
-> +
-> +	/* if there are X entries, we need to allocate at least X+1
-> +	 * entries but return the actual number of entries
-> +	 */
-> +	cpuid->nent++;
+This series adds the kernel's build ID[1] to the stacktrace header printed
+in oops messages, warnings, etc. and the build ID for any module that
+appears in the stacktrace after the module name. The goal is to make the
+stacktrace more self-contained and descriptive by including the relevant
+build IDs in the kernel logs when something goes wrong. This can be used
+by post processing tools like script/decode_stacktrace.sh and kernel
+developers to easily locate the debug info associated with a kernel
+crash and line up what line and file things started falling apart at.
 
-I don't see how this can be correct.
+To show how this can be used I've included a patch to
+decode_stacktrace.sh that downloads the debuginfo from a debuginfod
+server.
 
-If this bonus entry really is needed, then won't that be reflected in array.nent?
-I.e won't KVM overrun the userspace buffer?
+This also includes some patches to make the buildid.c file use more
+const arguments and consolidate logic into buildid.c from kdump. These
+are left to the end as they were mostly cleanup patches. I don't know
+who exactly maintains this so I guess Andrew is the best option to merge
+all this code.
 
-If it's not reflected in array.nent, that would imply there's an off-by-one check
-somewhere, or KVM is creating an entry that it doesn't copy to userspace.  The
-former seems unlikely as there are literally only two checks against maxnent,
-and they both look correct (famous last words...).
+Here's an example lkdtm stacktrace on arm64.
 
-KVM does decrement array->nent in one specific case (CPUID.0xD.2..64), i.e. a
-false positive is theoretically possible, but that carries a WARN and requires a
-kernel or CPU bug as well.  And fudging nent for that case would still break
-normal use cases due to the overrun problem.
+ WARNING: CPU: 4 PID: 3255 at drivers/misc/lkdtm/bugs.c:83 lkdtm_WARNING+0x28/0x30 [lkdtm]
+ Modules linked in: lkdtm rfcomm algif_hash algif_skcipher af_alg xt_cgroup uinput xt_MASQUERADE
+ CPU: 4 PID: 3255 Comm: bash Not tainted 5.11 #3 aa23f7a1231c229de205662d5a9e0d4c580f19a1
+ Hardware name: Google Lazor (rev3+) with KB Backlight (DT)
+ pstate: 00400009 (nzcv daif +PAN -UAO -TCO BTYPE=--)
+ pc : lkdtm_WARNING+0x28/0x30 [lkdtm]
+ lr : lkdtm_do_action+0x24/0x40 [lkdtm]
+ sp : ffffffc0134fbca0
+ x29: ffffffc0134fbca0 x28: ffffff92d53ba240
+ x27: 0000000000000000 x26: 0000000000000000
+ x25: 0000000000000000 x24: ffffffe3622352c0
+ x23: 0000000000000020 x22: ffffffe362233366
+ x21: ffffffe3622352e0 x20: ffffffc0134fbde0
+ x19: 0000000000000008 x18: 0000000000000000
+ x17: ffffff929b6536fc x16: 0000000000000000
+ x15: 0000000000000000 x14: 0000000000000012
+ x13: ffffffe380ed892c x12: ffffffe381d05068
+ x11: 0000000000000000 x10: 0000000000000000
+ x9 : 0000000000000001 x8 : ffffffe362237000
+ x7 : aaaaaaaaaaaaaaaa x6 : 0000000000000000
+ x5 : 0000000000000000 x4 : 0000000000000001
+ x3 : 0000000000000008 x2 : ffffff93fef25a70
+ x1 : ffffff93fef15788 x0 : ffffffe3622352e0
+ Call trace:
+  lkdtm_WARNING+0x28/0x30 [lkdtm ed5019fdf5e53be37cb1ba7899292d7e143b259e]
+  direct_entry+0x16c/0x1b4 [lkdtm ed5019fdf5e53be37cb1ba7899292d7e143b259e]
+  full_proxy_write+0x74/0xa4
+  vfs_write+0xec/0x2e8
+  ksys_write+0x84/0xf0
+  __arm64_sys_write+0x24/0x30
+  el0_svc_common+0xf4/0x1c0
+  do_el0_svc_compat+0x28/0x3c
+  el0_svc_compat+0x10/0x1c
+  el0_sync_compat_handler+0xa8/0xcc
+  el0_sync_compat+0x178/0x180
+ ---[ end trace 3d95032303e59e68 ]---
 
-What am I missing?
+Changes from v2 (https://lore.kernel.org/r/20210324020443.1815557-1-swboyd@chromium.org):
+ * Renamed symbol printing function to indicate build IDness
+ * Put build ID information behind Kconfig knob
+ * Build ID for vmlinux is calculated in early init instead of on demand
+ * printk format is %pS[R]b
 
-> +
->  	if (cpuid->nent > KVM_MAX_CPUID_ENTRIES)
->  		cpuid->nent = KVM_MAX_CPUID_ENTRIES;
->  
-> -- 
-> 2.30.2
-> 
+Changes from v1 (https://lore.kernel.org/r/20210301174749.1269154-1-swboyd@chromium.org):
+ * New printk format %pSb and %pSr
+ * Return binary format instead of hex format string from build ID APIs
+ * Some new patches to cleanup buildid/decode_stacktrace.sh
+ * A new patch to decode_stacktrace.sh to parse output
+
+[1] https://fedoraproject.org/wiki/Releases/FeatureBuildId
+
+Cc: Alexei Starovoitov <ast@kernel.org>
+Cc: Andy Shevchenko <andriy.shevchenko@linux.intel.com>
+Cc: Baoquan He <bhe@redhat.com>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: Catalin Marinas <catalin.marinas@arm.com>
+Cc: Dave Young <dyoung@redhat.com>
+Cc: Evan Green <evgreen@chromium.org>
+Cc: Hsin-Yi Wang <hsinyi@chromium.org>
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Jessica Yu <jeyu@kernel.org>
+Cc: Jiri Olsa <jolsa@kernel.org>
+Cc: <kexec@lists.infradead.org>
+Cc: Konstantin Khlebnikov <khlebnikov@yandex-team.ru>
+Cc: <linux-arm-kernel@lists.infradead.org>
+Cc: <linux-doc@vger.kernel.org>
+Cc: <linux-kernel@vger.kernel.org>
+Cc: Matthew Wilcox <willy@infradead.org>
+Cc: Petr Mladek <pmladek@suse.com>
+Cc: Rasmus Villemoes <linux@rasmusvillemoes.dk>
+Cc: Sasha Levin <sashal@kernel.org>
+Cc: Sergey Senozhatsky <sergey.senozhatsky@gmail.com>
+Cc: Steven Rostedt <rostedt@goodmis.org>
+Cc: Thomas Gleixner <tglx@linutronix.de>
+Cc: Vivek Goyal <vgoyal@redhat.com>
+Cc: Will Deacon <will@kernel.org>
+Cc: <x86@kernel.org>
+Cc: Christoph Hellwig <hch@infradead.org>
+Cc: peter enderborg <peter.enderborg@sony.com>
+
+Stephen Boyd (12):
+  buildid: Add API to parse build ID out of buffer
+  buildid: Stash away kernels build ID on init
+  dump_stack: Add vmlinux build ID to stack traces
+  module: Add printk format to add module build ID to stacktraces
+  arm64: stacktrace: Use %pSb for backtrace printing
+  x86/dumpstack: Use %pSb for backtrace printing
+  scripts/decode_stacktrace.sh: Support debuginfod
+  scripts/decode_stacktrace.sh: Silence stderr messages from
+    addr2line/nm
+  scripts/decode_stacktrace.sh: Indicate 'auto' can be used for base
+    path
+  buildid: Mark some arguments const
+  buildid: Fix kernel-doc notation
+  kdump: Use vmlinux_build_id to simplify
+
+ Documentation/core-api/printk-formats.rst |  9 +++
+ arch/arm64/kernel/stacktrace.c            |  2 +-
+ arch/x86/kernel/dumpstack.c               |  4 +-
+ include/linux/buildid.h                   |  4 +
+ include/linux/crash_core.h                |  6 +-
+ include/linux/kallsyms.h                  | 13 +++-
+ include/linux/module.h                    |  6 +-
+ init/main.c                               |  1 +
+ kernel/crash_core.c                       | 41 +----------
+ kernel/kallsyms.c                         | 73 ++++++++++++++-----
+ kernel/module.c                           | 24 +++++-
+ lib/Kconfig.debug                         | 11 +++
+ lib/buildid.c                             | 73 +++++++++++++++----
+ lib/dump_stack.c                          | 12 ++-
+ lib/vsprintf.c                            |  3 +
+ scripts/decode_stacktrace.sh              | 89 +++++++++++++++++++----
+ 16 files changed, 267 insertions(+), 104 deletions(-)
+
+
+base-commit: a38fd8748464831584a19438cbb3082b5a2dab15
+-- 
+https://chromeos.dev
+
