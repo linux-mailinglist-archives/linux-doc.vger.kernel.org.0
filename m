@@ -2,148 +2,333 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 71BE23500D1
-	for <lists+linux-doc@lfdr.de>; Wed, 31 Mar 2021 15:00:40 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 2696035011E
+	for <lists+linux-doc@lfdr.de>; Wed, 31 Mar 2021 15:21:51 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235521AbhCaNAH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 31 Mar 2021 09:00:07 -0400
-Received: from mail-mw2nam10on2044.outbound.protection.outlook.com ([40.107.94.44]:1889
-        "EHLO NAM10-MW2-obe.outbound.protection.outlook.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S235707AbhCaM7j (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 31 Mar 2021 08:59:39 -0400
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
- b=Y79zYly4IM2md+4IbMb5XOceAyXW6hGi4TF4QvdRuMoYgQDVm8dm+qN5P5lBirax40J0RObiq8VvYnl786KsS9KyeSCAh6GJrL0Ouke42tIkFl6mDIonb0SRFpeZ50/WPF3T5LkOdUdUsEcX2ofzhJMnMMLKbu0AQb1qDV/QfqtpoSMK3aDPcgwPJN1Ih2lMqn93YjAyRRzsW7LZdasgODD2XSJHuECt1XPPOMDoVt7pKydrvXL2bYATFrfxpGe6FwhW572+1x0rWdOJ1x1rJGBElx29lpR8ZxQtAwijSNPlaNdl3sGTVt2Ze2JDxGY3pAXgmuiyC+DqeIrIhBc/PA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector9901;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AWJEySXboLipER8oMW8rutazhWLcYjjKoDiU6MlsDME=;
- b=Ae/8acdDXQYAknGwj8GFaK2kyBzf7VZVQGfvX1JnvEs6HsCRnQlvumn/RYEpwd8JtLPzJLiIwhb3VbZ+9ZL6zdDAhCOegBK/Sbq5NxZy9ZI1tFmzlSVO7pm8ASrT68zKuVC5LIG0BbKeOUpWN6Y/OvdpTPFbvj2L/xTf6Qoun4KIpmDLVEy8NUBm8TVFokX77joSbYL6SVvZAnbXonyZ/+28/hYugYDMPGDS08F72LIcX3QiNqtwt4bummOwAVmyILmAT7Iha9XsyajwYkwTgYfhibnIhGB1xcIMEqyjY0x3ibMQ3wQtWCSiWqGrlyl2vBTnK577lD8WaDmp1aHRHA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 216.228.112.34) smtp.rcpttodomain=infradead.org smtp.mailfrom=nvidia.com;
- dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
- dkim=none (message not signed); arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AWJEySXboLipER8oMW8rutazhWLcYjjKoDiU6MlsDME=;
- b=Ugmbz7IrCTklLJwoA5eoZHK6YHnuvtuWXJuYNwLiRUyHd3WXcjEvv+FUjkk26X1Ie+kwAIKDSN8Cl5g3doXd7fDxkT7pIKH5bB4og6WAec5OORvT3IJbd7d1qNA5UVnjEkBEi98Z6luDOwn0IfuTZU5zPJTXV1rIcrsVrZ3Bqk0udDE88lu7m5XdaGRLKHuAUdV7IeB9ljSlO2QCfgKmytK12wRMmQ3VLv5HiegcQcjogiaSDYX8+W+feCYx72YWYmi8c+KgwKbTM1Ad813OdS2TKZHVJ+SxHMKKqJwBWmD9Zqrgx6TugycRNhqByTEs4UqIy5jOtRKw1tPEUAey0g==
-Received: from MW4PR03CA0203.namprd03.prod.outlook.com (2603:10b6:303:b8::28)
- by BN6PR12MB1426.namprd12.prod.outlook.com (2603:10b6:404:22::16) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.29; Wed, 31 Mar
- 2021 12:59:35 +0000
-Received: from CO1NAM11FT053.eop-nam11.prod.protection.outlook.com
- (2603:10b6:303:b8:cafe::8c) by MW4PR03CA0203.outlook.office365.com
- (2603:10b6:303:b8::28) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.26 via Frontend
- Transport; Wed, 31 Mar 2021 12:59:35 +0000
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
- smtp.mailfrom=nvidia.com; infradead.org; dkim=none (message not signed)
- header.d=none;infradead.org; dmarc=pass action=none header.from=nvidia.com;
-Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
- 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
- client-ip=216.228.112.34; helo=mail.nvidia.com;
-Received: from mail.nvidia.com (216.228.112.34) by
- CO1NAM11FT053.mail.protection.outlook.com (10.13.175.63) with Microsoft SMTP
- Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
- 15.20.3955.18 via Frontend Transport; Wed, 31 Mar 2021 12:59:33 +0000
-Received: from nvdebian.localnet (172.20.145.6) by HQMAIL107.nvidia.com
- (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 31 Mar
- 2021 12:59:30 +0000
-From:   Alistair Popple <apopple@nvidia.com>
-To:     Jason Gunthorpe <jgg@nvidia.com>
-CC:     <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
-        <bskeggs@redhat.com>, <akpm@linux-foundation.org>,
-        <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        <kvm-ppc@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
-        <jhubbard@nvidia.com>, <rcampbell@nvidia.com>,
-        <jglisse@redhat.com>, <hch@infradead.org>, <daniel@ffwll.ch>,
-        <willy@infradead.org>, "Christoph Hellwig" <hch@lst.de>
-Subject: Re: [PATCH v7 5/8] mm: Device exclusive memory access
-Date:   Wed, 31 Mar 2021 23:59:28 +1100
-Message-ID: <2521635.masqiumSp9@nvdebian>
-In-Reply-To: <20210330193234.GA2356281@nvidia.com>
-References: <20210326000805.2518-1-apopple@nvidia.com> <20210326000805.2518-6-apopple@nvidia.com> <20210330193234.GA2356281@nvidia.com>
+        id S235791AbhCaNVS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 31 Mar 2021 09:21:18 -0400
+Received: from mail-m121143.qiye.163.com ([115.236.121.143]:34692 "EHLO
+        mail-m121143.qiye.163.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S235773AbhCaNVK (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 31 Mar 2021 09:21:10 -0400
+Received: from ubuntu.localdomain (unknown [36.152.145.181])
+        by mail-m121143.qiye.163.com (Hmail) with ESMTPA id ED9D354027F;
+        Wed, 31 Mar 2021 21:14:14 +0800 (CST)
+From:   Bernard Zhao <bernard@vivo.com>
+To:     Harry Wei <harryxiyou@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        clang-built-linux@googlegroups.com
+Cc:     opensource.kernel@vivo.com, Bernard Zhao <bernard@vivo.com>
+Subject: [PATCH] translations/zh_CN: add translations to dev-tools gcov
+Date:   Wed, 31 Mar 2021 06:14:05 -0700
+Message-Id: <20210331131408.61061-1-bernard@vivo.com>
+X-Mailer: git-send-email 2.31.0
 MIME-Version: 1.0
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
-X-Originating-IP: [172.20.145.6]
-X-ClientProxiedBy: HQMAIL105.nvidia.com (172.20.187.12) To
- HQMAIL107.nvidia.com (172.20.187.13)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2c958375-292d-419d-1aaf-08d8f444d4f1
-X-MS-TrafficTypeDiagnostic: BN6PR12MB1426:
-X-Microsoft-Antispam-PRVS: <BN6PR12MB1426145C4B69B1C7A5F30701DF7C9@BN6PR12MB1426.namprd12.prod.outlook.com>
-X-MS-Oob-TLC-OOBClassifiers: OLM:2657;
-X-MS-Exchange-SenderADCheck: 1
-X-Microsoft-Antispam: BCL:0;
-X-Microsoft-Antispam-Message-Info: /yvKwYVH+mNpwUO2VKY1vJN4IiRfDx6+aBXpGV4N9Y2sMvb6Eu+lLBSLTa6i74aL34bN5gVeT4BEQ2lGzwWLjJC+yueZpxqrB7W3LOVjWHgkIBfJ5NtzP9m2b9S4QoxgYoa6eAQwSaLPMuGosDMBUcu7qLKV5GFsuAhODVTRGYZUyhhz4CJeWWRh50tfEqM7YCJUno6jhkh9ZL1O839wg2XPyXKqlem/P2/1CKqgHifePrhABQE8q1CE7JwCwsbmAsG2dMYorIiWjIV4KZgblNV/U6VEBQ7cwapWWaut7182Mc0Ef6PinT++cCzf8mfI2FaYjD3q2VpRAUjDyXwulbmGmZ37jh/kyWn4MubTPyx+UJzzQCPt2uT5lMXNAqzh3H1kW/X0a/nKk4vPRRPhvd3w31vz6j0zjQ5o939jQ+SLub9lSvTJEwO9Ny9GGIopT57Rljy5AUFFiI6T24349D35hNOK4bEVRyU/vAWrORG5Yb0/4ULBqQbnPEnXXNLM9kdQu2OFa1Yo6ZITFbK21RRaQJuUp5BrMSkT3iMx8QZHDWLxYDO6B+6geeHnrHuCA3yvU1Qv5GDkxhB6LnXzvmEpaKbz1tCVNz3GK6FqEgWXLW0pzZz/gWzuK2oNMBB4laRZaggk8zg0cAzL3CUr5mlK5ngw3FSQx1weDadXz22mA5P7XRIgP/ZQUM9Xn2TT
-X-Forefront-Antispam-Report: CIP:216.228.112.34;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:schybrid03.nvidia.com;CAT:NONE;SFS:(4636009)(39860400002)(136003)(376002)(346002)(396003)(46966006)(36840700001)(36906005)(4326008)(54906003)(70586007)(70206006)(86362001)(316002)(8676002)(36860700001)(6636002)(33716001)(8936002)(426003)(186003)(16526019)(9576002)(336012)(26005)(6862004)(478600001)(2906002)(7416002)(9686003)(5660300002)(47076005)(82740400003)(7636003)(82310400003)(356005)(39026012);DIR:OUT;SFP:1101;
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 31 Mar 2021 12:59:33.9340
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2c958375-292d-419d-1aaf-08d8f444d4f1
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.112.34];Helo=[mail.nvidia.com]
-X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT053.eop-nam11.prod.protection.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR12MB1426
+Content-Type: text/plain; charset=y
+Content-Transfer-Encoding: 8bit
+X-HM-Spam-Status: e1kfGhgUHx5ZQUtXWQgYFAkeWUFZS1VLWVdZKFlBSE83V1ktWUFJV1kPCR
+        oVCBIfWUFZHx8eGkNNGEIeGUwaVkpNSkxKQk1PTk5JQklVEwETFhoSFyQUDg9ZV1kWGg8SFR0UWU
+        FZT0tIVUpKS0hKTFVLWQY+
+X-HM-Sender-Digest: e1kMHhlZQR0aFwgeV1kSHx4VD1lBWUc6NBg6Tzo6AT8KEjUuGS9WKzEr
+        NzBPFAJVSlVKTUpMSkJNT05OTU9PVTMWGhIXVRkeCRUaCR87DRINFFUYFBZFWVdZEgtZQVlITVVK
+        TklVSk9OVUpDSllXWQgBWUFKSk5LTTcG
+X-HM-Tid: 0a78886b952eb038kuuued9d354027f
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wednesday, 31 March 2021 6:32:34 AM AEDT Jason Gunthorpe wrote:
-> On Fri, Mar 26, 2021 at 11:08:02AM +1100, Alistair Popple wrote:
-> > diff --git a/mm/memory.c b/mm/memory.c
-> > index 3a5705cfc891..33d11527ef77 100644
-> > +++ b/mm/memory.c
-> > @@ -781,6 +781,27 @@ copy_nonpresent_pte(struct mm_struct *dst_mm, struct 
-mm_struct *src_mm,
-> >  				pte = pte_swp_mkuffd_wp(pte);
-> >  			set_pte_at(src_mm, addr, src_pte, pte);
-> >  		}
-> > +	} else if (is_device_exclusive_entry(entry)) {
-> > +		page = pfn_swap_entry_to_page(entry);
-> > +
-> > +		get_page(page);
-> > +		rss[mm_counter(page)]++;
-> > +
-> > +		if (is_writable_device_exclusive_entry(entry) &&
-> > +		    is_cow_mapping(vm_flags)) {
-> > +			/*
-> > +			 * COW mappings require pages in both
-> > +			 * parent and child to be set to read.
-> > +			 */
-> > +			entry = make_readable_device_exclusive_entry(
-> > +							swp_offset(entry));
-> > +			pte = swp_entry_to_pte(entry);
-> > +			if (pte_swp_soft_dirty(*src_pte))
-> > +				pte = pte_swp_mksoft_dirty(pte);
-> > +			if (pte_swp_uffd_wp(*src_pte))
-> > +				pte = pte_swp_mkuffd_wp(pte);
-> > +			set_pte_at(src_mm, addr, src_pte, pte);
-> > +		}
-> 
-> This needs to have the same logic as we now have in
-> copy_present_page(). The page *is* present and we can't copy the PTE
-> value hidden in a swap entry if we can't copy the PTE normally.
+Add translations to dev-tools gcov
 
-You're saying we need to use copy_present_page() to make sure the split goes 
-the right way for pinned pages? I guess that makes sense as the split could go 
-either way at the moment but I should add a check to make sure this isn't used 
-with pinned pages anyway.
+Signed-off-by: Bernard Zhao <bernard@vivo.com>
+---
+ .../translations/zh_CN/dev-tools/gcov.rst     | 274 ++++++++++++++++++
+ 1 file changed, 274 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/dev-tools/gcov.rst
 
- - Alistair
-
-> The code should be shared because nobody is going to remember about
-> this corner case.
-> 
-> Jason
-> 
-
-
-
+diff --git a/Documentation/translations/zh_CN/dev-tools/gcov.rst b/Documentation/translations/zh_CN/dev-tools/gcov.rst
+new file mode 100644
+index 000000000000..5ebbc55e5881
+--- /dev/null
++++ b/Documentation/translations/zh_CN/dev-tools/gcov.rst
+@@ -0,0 +1,274 @@
++Chinese translated version of Documentation/dev-tools/gcov.rst
++
++If you have any comment or update to the content, please contact the
++original document maintainer directly.  However, if you have a problem
++communicating in English you can also ask the Chinese maintainer for
++help.  Contact the Chinese maintainer if this translation is outdated
++or if there is a problem with the translation.
++
++Chinese maintainer: Bernard Zhao <bernard@vivo.com>
++---------------------------------------------------------------------
++Documentation/dev-tools/gcov.rst 的中文翻译
++
++如果想评论或更新本文的内容，请直接联系原文档的维护者。如果你使用英文
++交流有困难的话，也可以向中文版维护者求助。如果本翻译更新不及时或者翻
++译存在问题，请联系中文版维护者。
++
++中文版维护者： 赵军奎 Bernard Zhao <bernard@vivo.com>
++中文版翻译者： 赵军奎 Bernard Zhao <bernard@vivo.com>
++
++以下为正文
++---------------------------------------------------------------------
++
++在Linux内核里使用gcov做代码覆盖率检查
++===============================
++gcov是linux中已经集成的一个分析模块，该模块在内核中对GCC的代码覆盖率统
++计提供了支持。
++linux内核运行时的代码覆盖率数据会以gcov兼容的格式存储在debug-fs中，可
++以通过如下的方式获得指定文件的代码运行覆盖率统计数据（需要跳转到内核
++编译路径下并且要有root权限）：
++
++    # cd /tmp/linux-out
++    # gcov -o /sys/kernel/debug/gcov/tmp/linux-out/kernel spinlock.c
++
++这个命令会在当前编译路径下创建带有注释的代码实际运行次数的计数源文件。
++在获得这些统计文件后，可以使用图形化的gcov前端工具（比如lcov），
++来实现自动化处理linux kernel的覆盖率运行数据，同时生成易于阅读的HTML格
++式文件。
++
++可能的用途：
++
++* 调试（用来判断每一行的代码是否已经运行过）
++* 测试改进（如何修改测试代码，尽可能地覆盖到没有运行过的代码）
++* 内核配置优化（对于某一个config配置，如果关联的代码从来没有运行过，是
++否还需要这个配置）
++
++gcov和lcov的关联网站
++.. _gcov: https://gcc.gnu.org/onlinedocs/gcc/Gcov.html
++.. _lcov: http://ltp.sourceforge.net/coverage/lcov.php
++
++
++准备
++-----------
++
++打开如下配置：
++
++        CONFIG_DEBUG_FS=y
++        CONFIG_GCOV_KERNEL=y
++
++获取整个内核的覆盖率数据，还需要打开：
++
++        CONFIG_GCOV_PROFILE_ALL=y
++
++需要注意的是，整个kernel开启覆盖率统计回造成kernel镜像文件尺寸的增大，
++同时kernel运行的也会变慢一些。
++另外，并不是所有的架构都支持整个kernel开启覆盖率统计。
++
++代码运行覆盖率数据只在debugfs挂载完成后才可以访问：
++
++        mount -t debugfs none /sys/kernel/debug
++
++
++客制化
++-------------
++
++如果要单独针对某一个路径或者文件进行代码覆盖率统计，可以在kernel相应路
++径的Makefile中增加如下的配置：
++
++- 单独统计单个文件（例如main.o）
++
++	GCOV_PROFILE_main.o := y
++
++- 单独统计某一个路径
++
++	GCOV_PROFILE := y
++
++如果要在整个kernel的覆盖率统计（开启CONFIG_GCOV_PROFILE_ALL）中单独排除
++某一个文件或者路径，可以使用如下的方法：
++
++- 不统计单个文件（例如main.o）
++
++	GCOV_PROFILE_main.o := n
++
++- 不统计某一个路径
++
++	GCOV_PROFILE := n
++
++
++关联的文件
++-------------
++
++gcov功能需要在debugfs中创建如下文件
++
++``/sys/kernel/debug/gcov``
++    gcov相关功能的根路径
++
++``/sys/kernel/debug/gcov/reset``
++    gcov复位，向该文件写入数据后会将所有的gcov统计数据清0
++
++``/sys/kernel/debug/gcov/path/to/compile/dir/file.gcda``
++    gcov工具可以识别的覆盖率统计数据文件
++
++``/sys/kernel/debug/gcov/path/to/compile/dir/file.gcno``
++    gcov工具需要的软连接文件（指向编译时生成的信息统计文件），这个文件是
++    在gcc编译时如果配置了选项-ftest-coverage时生成的。
++
++
++针对module的统计
++-------
++
++kernel中的模块会动态的加载和卸载，模块卸载时对应的数据会被清除掉。
++gcov提供了一种机制，通过保留相关数据的副本来收集这部分卸载模块的覆盖率数据。
++模块卸载后这些备份数据在debugfs中会继续存在。
++一旦这个模块重新加载，模块关联的运行统计会被初始化成debugfs中备份的数据。
++
++可以通过对内核参数gcov_persist的修改来停用gcov对module的备份机制：
++
++        gcov_persist = 0
++
++在运行时，用户还可以通过写入模块的数据文件或者写入gcov复位文件来丢弃已卸
++载模块的数据。
++
++
++分离的编译和运行设备
++---------------------------------
++
++gcov的内核分析架构支持内核的编译和分析是在同一台设备上，也可以编译和运
++行是在不同的设备上。
++如果内核编译和运行是不同的设备，那么需要额外的准备工作，这取决于gcov tools
++是在哪里使用的：
++
++a) gcov如果运行在测试设备上
++
++    测试设备上面gcov工具的版本必须要跟设备内核编译使用的gcc版本相兼容，
++    同时下面的文件要从编译设备拷贝到测试设备上：
++
++    从源代码中：
++      - 所有的C文件和头文件
++	  
++    从编译目录中：
++      - 所有的C文件和头文件
++      - 所有的.gcda文件和.gcno文件
++      - 所有目录的链接
++
++    需要注意的是，测试机器上面的目录结构跟编译机器上面的目录机构必须完全一致。
++    如果文件是软链接，需要替换成真正的目录文件（这是由make的当前工作目录变量
++    CURDIR引起的）。
++
++b) gcov如果运行在编译设备上
++
++    测试用例运行结束后，如下的文件需要从测试设备中拷贝到编译设备上：
++	
++    从sysfs中的gcov目录中：
++      - 所有的.gcda文件
++      - 所有的.gcno文件软链接
++
++    这些文件可以拷贝到编译设备的任意目录下，gcov使用-o选项指定拷贝的目录。
++	
++    比如一个是示例的目录结构如下：
++      /tmp/linux:    内核源码目录
++      /tmp/out:      内核编译文件路径（make O=指定）
++      /tmp/coverage: 从测试机器上面拷贝的数据文件路径
++	
++      [user@build] cd /tmp/out
++      [user@build] gcov -o /tmp/coverage/tmp/out/init main.c
++
++
++关于编译器的注意事项
++-----------------
++
++GCC和LLVM gcov工具不一定兼容。
++如果编译器是GCC，使用gcov_来处理.gcno和.gcda文件，如果是Clang编译器，
++则使用llvm-cov_。
++
++gcc gcov和llvm cov的关联网站
++.. _gcov: https://gcc.gnu.org/onlinedocs/gcc/Gcov.html
++.. _llvm-cov: https://llvm.org/docs/CommandGuide/llvm-cov.html
++
++GCC和Clang gcov之间的版本差异由Kconfig处理的。
++kconfig会根据编译工具链的检查自动选择合适的gcov格式。
++
++问题定位
++---------------
++
++可能出现的问题1
++    编译到链接阶段报错终止
++
++问题原因
++    分析标志指定在了源文件但是没有链接到主内核，或者客制化了链接程序
++
++解决方法
++    通过在Makefile中使用GCOV_PROFILE := n或者
++    GCOV_PROFILE_basename.o := n来将链接报错的文件排除掉
++
++可能出现的问题2
++    文件从sysfs拷贝时不存在或者不可访问
++
++问题原因
++    由于seq_file的工作方式，某些工具（例如cp或tar）可能无法正确地从
++    sysfs复制文件。
++
++解决方法
++    使用cat读取.gcda文件，使用cp -d复制链接，或者使用附录B中所示的
++    机制。
++
++
++附录A：collect_on_build.sh
++------------------------------
++
++用于在编译设备上收集覆盖率编译中间数据文件的示例脚本
++
++.. code-block:: sh
++
++    #!/bin/bash
++
++    KSRC=$1
++    KOBJ=$2
++    DEST=$3
++
++    if [ -z "$KSRC" ] || [ -z "$KOBJ" ] || [ -z "$DEST" ]; then
++      echo "Usage: $0 <ksrc directory> <kobj directory> <output.tar.gz>" >&2
++      exit 1
++    fi
++
++    KSRC=$(cd $KSRC; printf "all:\n\t@echo \${CURDIR}\n" | make -f -)
++    KOBJ=$(cd $KOBJ; printf "all:\n\t@echo \${CURDIR}\n" | make -f -)
++
++    find $KSRC $KOBJ \( -name '*.gcno' -o -name '*.[ch]' -o -type l \) -a \
++                     -perm /u+r,g+r | tar cfz $DEST -P -T -
++
++    if [ $? -eq 0 ] ; then
++      echo "$DEST successfully created, copy to test system and unpack with:"
++      echo "  tar xfz $DEST -P"
++    else
++      echo "Could not create file $DEST"
++    fi
++
++
++附录B：collect_on_test.sh
++-----------------------------
++
++用于在测试设备上收集覆盖里统计数据数据文件的示例脚本
++
++.. code-block:: sh
++
++    #!/bin/bash -e
++
++    DEST=$1
++    GCDA=/sys/kernel/debug/gcov
++
++    if [ -z "$DEST" ] ; then
++      echo "Usage: $0 <output.tar.gz>" >&2
++      exit 1
++    fi
++
++    TEMPDIR=$(mktemp -d)
++    echo Collecting data..
++    find $GCDA -type d -exec mkdir -p $TEMPDIR/\{\} \;
++    find $GCDA -name '*.gcda' -exec sh -c 'cat < $0 > '$TEMPDIR'/$0' {} \;
++    find $GCDA -name '*.gcno' -exec sh -c 'cp -d $0 '$TEMPDIR'/$0' {} \;
++    tar czf $DEST -C $TEMPDIR sys
++    rm -rf $TEMPDIR
++
++    echo "$DEST successfully created, copy to build system and unpack with:"
++    echo "  tar xfz $DEST"
+-- 
+2.31.0
 
