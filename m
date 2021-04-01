@@ -2,73 +2,128 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id A48BE351B1C
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:08:43 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 99D91351D4D
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:49:00 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234256AbhDASGg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 14:06:36 -0400
-Received: from mail-il1-f198.google.com ([209.85.166.198]:43961 "EHLO
-        mail-il1-f198.google.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234711AbhDASBI (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 14:01:08 -0400
-Received: by mail-il1-f198.google.com with SMTP id d15so4362951ila.10
-        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 11:01:08 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:date:in-reply-to:message-id:subject
-         :from:to;
-        bh=t1PSBwAKPIxSsjyHhjvOvydGcJv2nwxNeNnnB0pN5z4=;
-        b=fP9ZjF6FYBfRx0YMdRqf/gXEac77+tzsJ5rEEMTHLYm/9fUf17Hcu6tPfBBqjVI5k9
-         ahVwPW+AXQi5oX3OYqys0cBzlFzWwnjl999GExFZtCo9ZW6zOIGL20jNZCEvZNO8ZCt5
-         OzHRxpBGQf6HLR9xWltADYrFeJWzUqudwzk2xbHk/HtcaocQvRpHmoIEGZtE4oLZQojZ
-         DkGHmXYyyEXiTf3zDXZGj6BH+p5Y/kE7XbVsLa9hs6O3gKue5bjYXodZb7jX7Yw0cOw4
-         JZSze+NJBBOzvGB7T32tDXRNYjGY0EvHjJG+3+cQ19I/u8K3On/lBj3YeQzwubXNWUed
-         hBOw==
-X-Gm-Message-State: AOAM532g3bvq1GqvHJuYZjUW7lPFuI7hKEWUEi6MA7NNUay86BetyqM6
-        9zpxLqFV/CfMF5HHBqrh2hXjZPGbBsNpYcEJzkQdBXKT8tqV
-X-Google-Smtp-Source: ABdhPJyvO0s22tKhZ9WnikY25h0lMQFGQxk3fm8YQuGAfS4QejjBrmdhMtUZGFynSyNRa1nHaVnvvFGyw+hSTQlenTkj1ltd289T
+        id S237531AbhDAS1x (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 14:27:53 -0400
+Received: from mail.kernel.org ([198.145.29.99]:45700 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S239627AbhDASQn (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Apr 2021 14:16:43 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0169F6113E;
+        Thu,  1 Apr 2021 12:17:55 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1617279476;
+        bh=wRad7N84rWD9dSoio69a4lZ1e70YET8Y/U4ELbCnnho=;
+        h=From:To:Cc:Subject:Date:From;
+        b=Q1xGCX8CjWBXtQC1pgo9/9vi4nDHYsR9ze0Q3GiyebU0GCkZVF2x7Dm68maSFFiUb
+         aYhFb4Mtsxe3dwyRk1InCmoNe+43BkSOmz3+yXmoJlqQon680CoD7Fu0OV/kMatoKB
+         POCl1bXAfQ85z4s39lkLH+3JCvV54zR+CeAxccTEvavGiJh0qGmRlyOcVNt9cvXxRq
+         kYRsUf12VYN3g12XZxM/SAQ9Jf1Po6QForEFkcVk/jW0b2lIFgc1wXKAcg30pF7BC8
+         U8xRKFjOp2o3cBdsuc5vEOD8ftGdy/B8MUbxDoRdCuirrnPb1300SCFtXBNU1EX6Km
+         N9eYgXDgwnnkA==
+Received: by mail.kernel.org with local (Exim 4.94)
+        (envelope-from <mchehab@kernel.org>)
+        id 1lRwGn-001c2K-FQ; Thu, 01 Apr 2021 14:17:53 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        linux-kernel@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>,
+        =?UTF-8?q?Przemys=C5=82aw=20Gaj?= <pgaj@cadence.com>,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        Andy Whitcroft <apw@canonical.com>,
+        Daniel Vetter <daniel@ffwll.ch>,
+        David Airlie <airlied@linux.ie>,
+        Dwaipayan Ray <dwaipayanray1@gmail.com>,
+        Joe Perches <joe@perches.com>,
+        Jonathan Cameron <jic23@kernel.org>,
+        Lars-Peter Clausen <lars@metafoo.de>,
+        Linus Walleij <linus.walleij@linaro.org>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>,
+        Matthias Brugger <matthias.bgg@gmail.com>,
+        Mauro Carvalho Chehab <mchehab@kernel.org>,
+        Rob Herring <robh+dt@kernel.org>,
+        Vitor Soares <vitor.soares@synopsys.com>,
+        alsa-devel@alsa-project.org, devicetree@vger.kernel.org,
+        dri-devel@lists.freedesktop.org,
+        linux-arm-kernel@lists.infradead.org, linux-gpio@vger.kernel.org,
+        linux-i3c@lists.infradead.org, linux-iio@vger.kernel.org,
+        linux-media@vger.kernel.org, linux-mediatek@lists.infradead.org,
+        linux-pm@vger.kernel.org, patches@opensource.cirrus.com
+Subject: [PATCH 00/32] Fix broken documentation file references
+Date:   Thu,  1 Apr 2021 14:17:20 +0200
+Message-Id: <cover.1617279355.git.mchehab+huawei@kernel.org>
+X-Mailer: git-send-email 2.30.2
 MIME-Version: 1.0
-X-Received: by 2002:a05:6e02:170c:: with SMTP id u12mr7856308ill.100.1617300067465;
- Thu, 01 Apr 2021 11:01:07 -0700 (PDT)
-Date:   Thu, 01 Apr 2021 11:01:07 -0700
-In-Reply-To: <000000000000680f2905afd0649c@google.com>
-X-Google-Appengine-App-Id: s~syzkaller
-X-Google-Appengine-App-Id-Alias: syzkaller
-Message-ID: <000000000000043f2c05beed04d8@google.com>
-Subject: Re: [syzbot] BUG: unable to handle kernel paging request in bpf_trace_run2
-From:   syzbot <syzbot+cc36fd07553c0512f5f7@syzkaller.appspotmail.com>
-To:     andrii@kernel.org, andriin@fb.com, ast@kernel.org,
-        bpf@vger.kernel.org, corbet@lwn.net, daniel@iogearbox.net,
-        davem@davemloft.net, dsahern@gmail.com, hawk@kernel.org,
-        john.fastabend@gmail.com, kafai@fb.com, kpsingh@chromium.org,
-        kpsingh@kernel.org, kuba@kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org, mathieu.desnoyers@efficios.com,
-        mingo@kernel.org, mingo@redhat.com, mmullins@mmlx.us,
-        netdev@vger.kernel.org, peterz@infradead.org, rostedt@goodmis.org,
-        songliubraving@fb.com, syzkaller-bugs@googlegroups.com, yhs@fb.com
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+Sender: Mauro Carvalho Chehab <mchehab@kernel.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-syzbot suspects this issue was fixed by commit:
+Each patch on this series can be applied independently. They fix broken
+file references.
 
-commit befe6d946551d65cddbd32b9cb0170b0249fd5ed
-Author: Steven Rostedt (VMware) <rostedt@goodmis.org>
-Date:   Wed Nov 18 14:34:05 2020 +0000
+Most of them are due to DT binding renames, but there are also other
+unrelated changes.
 
-    tracepoint: Do not fail unregistering a probe due to memory failure
+This series is based on next-20210401.
 
-bisection log:  https://syzkaller.appspot.com/x/bisect.txt?x=14f0260ed00000
-start commit:   12450081 libbpf: Fix native endian assumption when parsing..
-git tree:       bpf
-kernel config:  https://syzkaller.appspot.com/x/.config?x=5ac0d21536db480b
-dashboard link: https://syzkaller.appspot.com/bug?extid=cc36fd07553c0512f5f7
-syz repro:      https://syzkaller.appspot.com/x/repro.syz?x=1365d2c3900000
-C reproducer:   https://syzkaller.appspot.com/x/repro.c?x=16d5f08d900000
+Mauro Carvalho Chehab (32):
+  MAINTAINERS: update adi,ad5758.yaml reference
+  MAINTAINERS: update ste,mcde.yaml reference
+  MAINTAINERS: update brcm,bcm-v3d.yaml reference
+  MAINTAINERS: update fsl,dpaa2-console.yaml reference
+  MAINTAINERS: update st,hts221.yaml reference
+  MAINTAINERS: update dpot-dac.yaml reference
+  MAINTAINERS: update envelope-detector.yaml reference
+  MAINTAINERS: update current-sense-amplifier.yaml reference
+  MAINTAINERS: update current-sense-shunt.yaml reference
+  MAINTAINERS: update voltage-divider.yaml reference
+  MAINTAINERS: update invensense,mpu3050.yaml reference
+  MAINTAINERS: update lego,ev3-battery.yaml reference
+  MAINTAINERS: update marvell,armada-3700-utmi-phy.yaml reference
+  MAINTAINERS: update mtk-sd.yaml reference
+  MAINTAINERS: update atmel,sama5d2-adc.yaml reference
+  MAINTAINERS: update pni,rm3100.yaml reference
+  MAINTAINERS: update renesas,rcar-gyroadc.yaml reference
+  MAINTAINERS: update st,lsm6dsx.yaml reference
+  MAINTAINERS: update st,vl53l0x.yaml reference
+  MAINTAINERS: update snps,dw-axi-dmac.yaml reference
+  MAINTAINERS: update ti,dac7612.yaml reference
+  MAINTAINERS: update nxp,imx8-jpeg.yaml reference
+  MAINTAINERS: update ovti,ov2680.yaml reference
+  MAINTAINERS: update imi,rdacm2x-gmsl.yaml reference
+  dt-bindings:iio:dac: update microchip,mcp4725.yaml reference
+  dt-bindings: iommu: mediatek: update mediatek,iommu.yaml references
+  dt-bindings: i3c: update i3c.yaml references
+  dt-bindings: power: update battery.yaml reference
+  docs: dt: update writing-schema.rst references
+  Documentation: net: dsa: update configuration.rst reference
+  Documentation: update sysfs-platform_profile.rst reference
+  pinctrl: update pin-control.rst references
 
-If the result looks correct, please mark the issue as fixed by replying with:
+ .../display/mediatek/mediatek,disp.txt        |  2 +-
+ .../bindings/i3c/cdns,i3c-master.txt          |  6 +--
+ .../bindings/i3c/snps,dw-i3c-master.txt       |  6 +--
+ .../bindings/media/mediatek-jpeg-decoder.txt  |  2 +-
+ .../bindings/media/mediatek-jpeg-encoder.txt  |  2 +-
+ .../bindings/media/mediatek-mdp.txt           |  2 +-
+ .../bindings/media/mediatek-vcodec.txt        |  2 +-
+ .../bindings/submitting-patches.rst           |  2 +-
+ Documentation/filesystems/cifs/cifsd.rst      |  2 +-
+ Documentation/power/power_supply_class.rst    |  2 +-
+ MAINTAINERS                                   | 48 +++++++++----------
+ include/linux/device.h                        |  2 +-
+ include/linux/iio/dac/mcp4725.h               |  2 +-
+ include/linux/mfd/madera/pdata.h              |  2 +-
+ include/linux/pinctrl/pinconf-generic.h       |  2 +-
+ include/linux/platform_profile.h              |  2 +-
+ scripts/checkpatch.pl                         |  2 +-
+ 17 files changed, 44 insertions(+), 44 deletions(-)
 
-#syz fix: tracepoint: Do not fail unregistering a probe due to memory failure
+-- 
+2.30.2
 
-For information about bisection process see: https://goo.gl/tpsmEJ#bisection
+
