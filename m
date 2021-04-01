@@ -2,108 +2,42 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id C6E62351820
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 19:48:16 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 13364351B2D
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:08:54 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234594AbhDARoE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 13:44:04 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:59047 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S234726AbhDARj2 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 13:39:28 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1617298768;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=d/BBKBlx1OfSHWLkYgonnSO4l/9MHzCO752YaBajZ8Q=;
-        b=e/y5Vt107g4vnqRGvS5uGHAH0rQ8rCJDmLbeeOtclNDj9oiB1YSZCCEXMEXPAgYuL59iGL
-        9Ec1EKJ8pRj+umymYx8e+vyu2MzfaT+Nmj0iqmfFOPWaRoQpeyeCuHWt4uQPIeuZar87oy
-        6Th8uc9+QOGB9RiGQA3g+L1P0qSXxFk=
-Received: from mail-ej1-f71.google.com (mail-ej1-f71.google.com
- [209.85.218.71]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-594-gw-7THCZO2u2tSSGoGXWHg-1; Thu, 01 Apr 2021 13:33:16 -0400
-X-MC-Unique: gw-7THCZO2u2tSSGoGXWHg-1
-Received: by mail-ej1-f71.google.com with SMTP id t21so2522302ejf.14
-        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 10:33:15 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=d/BBKBlx1OfSHWLkYgonnSO4l/9MHzCO752YaBajZ8Q=;
-        b=AeVcIr8riPwPHWDPElImG0wqXZGW4kkqG+6oqFM8gHFj+BsKPZk53OR09lyFkcSrSY
-         LkRToWSgbpBcclvAEXWI1df8RT3beiFkt5dq6YBxFaVxf3/MAAnoszvLPF+cSMPgf9+x
-         Y/qaXq7bbnJDUaEasclKikCfUB0nE5G0DSbcMwI9La9J1vwP/zfbh/6BjUVmmpg4diJS
-         hNGKY2R4kdOtKUqyWzG0UXRJRfhZ/BUgFp/f7bteLshaPZdLPxWK37v7FCXxAtp9MmRw
-         +AD+9oDQquv0TBWs4LR69F0y7c02/3hmRqdJjJ0PUPM67nYV5BG0H1fzA2jC7zdsNNnS
-         3JNg==
-X-Gm-Message-State: AOAM5305+9mNEdabtIouLHlLcWpOEP9/FabHT+UO/wfGifAD++mjLGPE
-        dWahSJLTvKfWsqQHx7WrchGEUsr/sE+5j5IdXQQicdhwMS5ExC4Snmw5GbrS3xyZ/4DzQ63MYGb
-        UEUGn1z1OJTG1Df5PrVxvNO59f1FPhS/d49bX2bfeukSfDlWql7a8rQIkvYTknAK5X9Cdjvbc
-X-Received: by 2002:aa7:c5cf:: with SMTP id h15mr11231710eds.190.1617298394538;
-        Thu, 01 Apr 2021 10:33:14 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJyZfN64zCsvdLd6I8M1pmmbc99mo22JNIWQgtMGhG11m0FRnXFOPVa57b9jEod6y04/Mur8fw==
-X-Received: by 2002:aa7:c5cf:: with SMTP id h15mr11231685eds.190.1617298394363;
-        Thu, 01 Apr 2021 10:33:14 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a? ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
-        by smtp.gmail.com with ESMTPSA id q26sm3097846eja.45.2021.04.01.10.33.13
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 01 Apr 2021 10:33:13 -0700 (PDT)
-Subject: Re: [PATCH 4/6] KVM: x86: Introduce KVM_GET_SREGS2 / KVM_SET_SREGS2
-To:     Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org
-Cc:     "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
-        Jim Mattson <jmattson@google.com>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Sean Christopherson <seanjc@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        "open list:X86 ARCHITECTURE (32-BIT AND 64-BIT)" 
-        <linux-kernel@vger.kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Borislav Petkov <bp@alien8.de>, Ingo Molnar <mingo@redhat.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-References: <20210401141814.1029036-1-mlevitsk@redhat.com>
- <20210401141814.1029036-5-mlevitsk@redhat.com>
- <b1a36c94-6dd5-88ef-a503-f6d91eb2d267@redhat.com>
- <0b3a93e3d1ba6a89da327b93be2ecf47f22010d4.camel@redhat.com>
-From:   Paolo Bonzini <pbonzini@redhat.com>
-Message-ID: <514c1f1f-5c7d-7b27-b893-87d9b85db523@redhat.com>
-Date:   Thu, 1 Apr 2021 19:33:12 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+        id S234744AbhDASGk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 14:06:40 -0400
+Received: from mail.kernel.org ([198.145.29.99]:37006 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S236816AbhDASDB (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Apr 2021 14:03:01 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id E8E45611CC;
+        Thu,  1 Apr 2021 12:37:05 +0000 (UTC)
+From:   Catalin Marinas <catalin.marinas@arm.com>
+To:     corbet@lwn.net, will@kernel.org, He Ying <heying24@huawei.com>
+Cc:     linux-kernel@vger.kernel.org, linux-doc@vger.kernel.org,
+        linux-arm-kernel@lists.infradead.org
+Subject: Re: [PATCH -next] docs: arm64: Fix a grammar error
+Date:   Thu,  1 Apr 2021 13:37:04 +0100
+Message-Id: <161728062026.15531.9076497905075968278.b4-ty@arm.com>
+X-Mailer: git-send-email 2.20.1
+In-Reply-To: <20210330085817.86185-1-heying24@huawei.com>
+References: <20210330085817.86185-1-heying24@huawei.com>
 MIME-Version: 1.0
-In-Reply-To: <0b3a93e3d1ba6a89da327b93be2ecf47f22010d4.camel@redhat.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 01/04/21 19:10, Maxim Levitsky wrote:
-> I haven't yet studied in depth the locking that is used in the kvm,
-> so I put this to be on the safe side.
-> 
-> I looked at it a bit and it looks like the pdptr reading code takes
-> this lock because it accesses the memslots, which is not done here,
-> and therefore the lock is indeed not needed here.
-> 
-> I need to study in depth how locking is done in kvm to be 100% sure
-> about this.
+On Tue, 30 Mar 2021 04:58:17 -0400, He Ying wrote:
+> depending -> depending on
 
-Yes, SRCU protects reading the memslots (and therefore accessing guest 
-memory).
+Applied to arm64 (for-next/misc), thanks!
 
->> 195, not 196.
-> 
-> I am also planning to add KVM_CAP_SET_GUEST_DEBUG2 for which I
-> used 195.
+[1/1] docs: arm64: Fix a grammar error
+      https://git.kernel.org/arm64/c/68f638a432df
 
-Sounds good then.
-
-Paolo
+-- 
+Catalin
 
