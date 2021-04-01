@@ -2,473 +2,115 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 85047351B00
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:08:11 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 3FA57351BE0
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:12:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237693AbhDASEK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 14:04:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34208 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237557AbhDASAg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 14:00:36 -0400
-Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com [IPv6:2a00:1450:4864:20::32b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 799DDC08EC67
-        for <linux-doc@vger.kernel.org>; Thu,  1 Apr 2021 06:46:11 -0700 (PDT)
-Received: by mail-wm1-x32b.google.com with SMTP id d191so1087745wmd.2
-        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 06:46:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc;
-        bh=t2C9ZBZpxFUdpoBYge46oy4VcBaZCLp0NntE0LDe6hI=;
-        b=M0Aom6XfZr/NmgFX/0O6hWdAMCW+M1dqFKwiooa1d26MrQvoC6JBCz0J/If8RhgBKC
-         2jxNjYGqYuoJ+khnqb6KwB7Hrav5Cj3F8eYzDupR8CE6GU722CPYSr9qsK9DqGcg7LGl
-         XiF4R8hLFk6Vq25LfhvO630elyTEIo2umzVNtKfjIXnNYn6ZHfzw9bM7MOXpkjk1Cccc
-         jWJBGUbTjEAbqexTVMOmach7WutZv5h+ef2FGQ5G+yK5oZrV8xy4V/CveOR/gGJi/ibQ
-         yP/4QRrq4wrJdwMc8Q3FSa6U7g9OGvQTFm4Gch1b53NpY7k3QhfXWaSTOEU9ytnNn3qR
-         j4jQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc;
-        bh=t2C9ZBZpxFUdpoBYge46oy4VcBaZCLp0NntE0LDe6hI=;
-        b=N04GxWuOcqqAsY8X94LMCA37Jzh8y6bEq04NodkPt/mpwV3jAh9jSfwVvhqCb2CjfR
-         VByuyUwRc4gzggjr/+YZO/Ml9yN1Jsx0fpSCSVYXnpBfD4iGh5Z4/zoDAFG0q91Hdbej
-         jn3i4060UXeAQ4g6SH0GjFqs+KiwMPUp4qvnSV9s03Ba9WwpOnyzdLObuKi92hoVYuPQ
-         IEKWOkgti1iFd1JzdPCVJJASn02nXxFRq8m2legUo0rrD6qutyeraAzUFhnRSnnvwffa
-         OUHcLwR28hdBZTfow6DETEWSPRPVTsPS+6IVBuHWoPhcMRoyN5B06fP1lkHMeMDciUdi
-         KiPw==
-X-Gm-Message-State: AOAM533qrxsE1OxT1gAjuUEe8goUpEoHnIkIoVrjpkqYr4JiRAjaLDuj
-        dsbQ7xP1+qwtO0LiFlsnbz0W65kW0EHcibTs26AWFQ==
-X-Google-Smtp-Source: ABdhPJyQSpNJtmTx7RTbj+kkBxtoY0CXJ7wmb8eu5YbpjkQwuR1fKep/NoHu/KAvjcZRNw2LeNGLE9kCElxG6KgxcXU=
-X-Received: by 2002:a05:600c:259:: with SMTP id 25mr8424291wmj.5.1617284770113;
- Thu, 01 Apr 2021 06:46:10 -0700 (PDT)
+        id S236578AbhDASLm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 14:11:42 -0400
+Received: from m34-101.88.com ([104.250.34.101]:12216 "EHLO 88.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S236453AbhDASHY (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Apr 2021 14:07:24 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
+        s=dkim; h=Date:From:To; bh=f7RlGg0aEU2tgMSyKfVBbwhIcx9nWJDynfhEe
+        vV0EAI=; b=gGTofAVvHIGBbKGxHDaTuXz6nxq/E1ag7Afo3u8dbcAwY3QnM7JIA
+        /39b78Xis0MYWKXeWiR2g12oI37mclzJ+qm+2KmRboCMj4BV6tjlkfLEjWFc11cY
+        1MuxynRYDNN7ACZ0Wx1SFxPFw5guh5F6sDcbuayw/9Vbq7qLhnTLJc=
+Received: from mipc (unknown [120.238.248.129])
+        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgAXoiLPzmVg7VJVAA--.57057S2;
+        Thu, 01 Apr 2021 21:46:56 +0800 (CST)
+Date:   Thu, 1 Apr 2021 21:46:54 +0800
+From:   "Wu X.C." <bobwxc@email.cn>
+To:     teng sterling <sterlingteng@gmail.com>
+Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <seakeel@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 5/5] docs/zh_CN: Add translation
+ zh_CN/doc-guide/kernel-doc.rst
+Message-ID: <20210401134654.GB27759@mipc>
+References: <cover.1617260163.git.bobwxc@email.cn>
+ <7655ab75cf3f7cfc5c1788ceb70a7ba822f34335.1617260163.git.bobwxc@email.cn>
+ <CAMU9jJopesz8zvy4yppcecxMQT7JVsadqkJJcSDEdNfiMGFm-w@mail.gmail.com>
 MIME-Version: 1.0
-References: <20210316180400.7184-1-mike.leach@linaro.org> <20210316180400.7184-5-mike.leach@linaro.org>
- <20210331204859.GA51243@xps15>
-In-Reply-To: <20210331204859.GA51243@xps15>
-From:   Mike Leach <mike.leach@linaro.org>
-Date:   Thu, 1 Apr 2021 14:45:59 +0100
-Message-ID: <CAJ9a7Vg+ua_ZBmn1Dk2U8-mkDpgEyrASgTqZ5jPXUumQMvqzAA@mail.gmail.com>
-Subject: Re: [PATCH v5 04/10] coresight: etm-perf: update to handle
- configuration selection
-To:     Mathieu Poirier <mathieu.poirier@linaro.org>
-Cc:     linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
-        Coresight ML <coresight@lists.linaro.org>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
-        "Suzuki K. Poulose" <suzuki.poulose@arm.com>,
-        Yabin Cui <yabinc@google.com>,
-        Jonathan Corbet <corbet@lwn.net>, Leo Yan <leo.yan@linaro.org>,
-        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-        Tingwei Zhang <tingwei@codeaurora.org>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CAMU9jJopesz8zvy4yppcecxMQT7JVsadqkJJcSDEdNfiMGFm-w@mail.gmail.com>
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CM-TRANSID: GiKnCgAXoiLPzmVg7VJVAA--.57057S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7uFyftr4fJF43tF15Aw43Jrb_yoW8AF4fpr
+        1kKrWfGFsayFy7Gw1fWr1xCrWrAr4xWw4Ygr4xtw1Fqr9Igr4qqr4UKry7uryIgrW0yFW5
+        CF1jvFWj93y7Z3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUgab7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
+        cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
+        v20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r4j6F4UM28EF7xvwVC2
+        z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcx
+        kEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x8ErcxFaVAv8VWx
+        Jr1UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc2xSY4AK67AK6ry8MxAIw2
+        8IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_Cr1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_
+        Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
+        CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0
+        I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I
+        8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73
+        UjIFyTuYvjxU1_MaUUUUU
+X-Originating-IP: [120.238.248.129]
+X-CM-SenderInfo: pere453f6hztlloou0/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Mathieu,
-
-On Wed, 31 Mar 2021 at 21:49, Mathieu Poirier
-<mathieu.poirier@linaro.org> wrote:
->
-> On Tue, Mar 16, 2021 at 06:03:54PM +0000, Mike Leach wrote:
-> > Loaded coresight configurations are registered in the cs_etm\cs_config sub
->
-> This changelog is obsolete - cs_config is no longer under cs_etm.
->
-Agreed.
-
-> > directory. This extends the etm-perf code to handle these registrations,
-> > and the cs_syscfg driver to perform the registration on load.
+On Thu, Apr 01, 2021 at 08:54:46PM +0800, teng sterling wrote:
+> Hi~
+> Xiangcheng
+> 
+> Wu XiangCheng <bobwxc@email.cn> 于2021年4月1日周四 下午3:08写道：
 > >
-> > Signed-off-by: Mike Leach <mike.leach@linaro.org>
+> > Add new translation
+> >   Documentation/translations/zh_CN/doc-guide/kernel-doc.rst
+> >
+> > Signed-off-by: Wu XiangCheng <bobwxc@email.cn>
 > > ---
-> >  .../hwtracing/coresight/coresight-config.h    |   2 +
-> >  .../hwtracing/coresight/coresight-etm-perf.c  | 139 ++++++++++++++----
-> >  .../hwtracing/coresight/coresight-etm-perf.h  |   8 +
-> >  .../hwtracing/coresight/coresight-syscfg.c    |  12 ++
-> >  4 files changed, 130 insertions(+), 31 deletions(-)
+> >  .../zh_CN/doc-guide/kernel-doc.rst            | 497 ++++++++++++++++++
+> >  1 file changed, 497 insertions(+)
+> >  create mode 100644 Documentation/translations/zh_CN/doc-guide/kernel-doc.rst
 > >
-> > diff --git a/drivers/hwtracing/coresight/coresight-config.h b/drivers/hwtracing/coresight/coresight-config.h
-> > index f70561c1504b..38fd1c71eb05 100644
-> > --- a/drivers/hwtracing/coresight/coresight-config.h
-> > +++ b/drivers/hwtracing/coresight/coresight-config.h
-> > @@ -126,6 +126,7 @@ struct cscfg_feature_desc {
-> >   * @nr_presets:              Number of sets of presets supplied by this configuration.
-> >   * @nr_total_params: Sum of all parameters declared by used features
-> >   * @presets:         Array of preset values.
-> > + * @event_ea:                Extended attribute for perf event value
-> >   *
-> >   */
-> >  struct cscfg_config_desc {
-> > @@ -137,6 +138,7 @@ struct cscfg_config_desc {
-> >       int nr_presets;
-> >       int nr_total_params;
-> >       const u64 *presets; /* nr_presets * nr_total_params */
-> > +     struct dev_ext_attribute *event_ea;
-> >  };
-> >
-> >  /**
-> > diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.c b/drivers/hwtracing/coresight/coresight-etm-perf.c
-> > index 0e392513b2d6..66bda452a2f4 100644
-> > --- a/drivers/hwtracing/coresight/coresight-etm-perf.c
-> > +++ b/drivers/hwtracing/coresight/coresight-etm-perf.c
-> > @@ -18,8 +18,10 @@
-> >  #include <linux/types.h>
-> >  #include <linux/workqueue.h>
-> >
-> > +#include "coresight-config.h"
-> >  #include "coresight-etm-perf.h"
-> >  #include "coresight-priv.h"
-> > +#include "coresight-syscfg.h"
-> >
-> >  static struct pmu etm_pmu;
-> >  static bool etm_perf_up;
-> > @@ -38,8 +40,13 @@ PMU_FORMAT_ATTR(contextid1,        "config:" __stringify(ETM_OPT_CTXTID));
-> >  PMU_FORMAT_ATTR(contextid2,  "config:" __stringify(ETM_OPT_CTXTID2));
-> >  PMU_FORMAT_ATTR(timestamp,   "config:" __stringify(ETM_OPT_TS));
-> >  PMU_FORMAT_ATTR(retstack,    "config:" __stringify(ETM_OPT_RETSTK));
-> > +/* preset - if sink ID is used as a configuration selector */
-> > +PMU_FORMAT_ATTR(preset,              "config:0-3");
-> >  /* Sink ID - same for all ETMs */
-> >  PMU_FORMAT_ATTR(sinkid,              "config2:0-31");
-> > +/* config ID - set if a system configuration is selected */
-> > +PMU_FORMAT_ATTR(configid,    "config2:32-63");
+> > diff --git a/Documentation/translations/zh_CN/doc-guide/kernel-doc.rst b/Documentation/translations/zh_CN/doc-guide/kernel-doc.rst
+> > new file mode 100644
+> > index 000000000000..84f91eeedf61
+> > --- /dev/null
+> > +++ b/Documentation/translations/zh_CN/doc-guide/kernel-doc.rst
+> > @@ -0,0 +1,497 @@
+> > +.. include:: ../disclaimer-zh_CN.rst
 > > +
-> >
-> >  /*
-> >   * contextid always traces the "PID".  The PID is in CONTEXTIDR_EL1
-> > @@ -69,6 +76,8 @@ static struct attribute *etm_config_formats_attr[] = {
-> >       &format_attr_timestamp.attr,
-> >       &format_attr_retstack.attr,
-> >       &format_attr_sinkid.attr,
-> > +     &format_attr_preset.attr,
-> > +     &format_attr_configid.attr,
-> >       NULL,
-> >  };
-> >
-> > @@ -86,9 +95,19 @@ static const struct attribute_group etm_pmu_sinks_group = {
-> >       .attrs  = etm_config_sinks_attr,
-> >  };
-> >
-> > +static struct attribute *etm_config_events_attr[] = {
-> > +     NULL,
-> > +};
+> > +:Original: Documentation/doc-guide/kernel-doc.rst
 > > +
-> > +static const struct attribute_group etm_pmu_events_group = {
-> > +     .name   = "events",
-> > +     .attrs  = etm_config_events_attr,
-> > +};
+> > +:译者: 吴想成 Wu XiangCheng <bobwxc@email.cn>
 > > +
-> >  static const struct attribute_group *etm_pmu_attr_groups[] = {
-> >       &etm_pmu_format_group,
-> >       &etm_pmu_sinks_group,
-> > +     &etm_pmu_events_group,
-> >       NULL,
-> >  };
-> >
-> > @@ -247,7 +266,7 @@ static void *etm_setup_aux(struct perf_event *event, void **pages,
-> >       INIT_WORK(&event_data->work, free_event_data);
-> >
-> >       /* First get the selected sink from user space. */
-> > -     if (event->attr.config2) {
-> > +     if (event->attr.config2 & GENMASK_ULL(31, 0)) {
-> >               id = (u32)event->attr.config2;
-> >               sink = coresight_get_sink_by_id(id);
-> >       }
-> > @@ -555,9 +574,9 @@ int etm_perf_symlink(struct coresight_device *csdev, bool link)
-> >  }
-> >  EXPORT_SYMBOL_GPL(etm_perf_symlink);
-> >
-> > -static ssize_t etm_perf_sink_name_show(struct device *dev,
-> > -                                    struct device_attribute *dattr,
-> > -                                    char *buf)
+> > +编写kernel-doc注释
+> > +===========================
+> > +
+> > +Linux内核源文件可以包含kernel-doc格式的结构化文档注释，用以描述代码的函数、
+> > +类型和设计。将文档嵌入源文件更容易保持文档最新。
+> > +
+> > +.. note:: 内核文档格式与javadoc、gtk-doc或Doxygen看似很相似，但由于历史原因，
+> > +          实际有着明显的不同。内核源包含成千上万个kernel-doc注释。请坚持遵循
+> > +          此处描述的风格。
 >
-> Because we now have etm_perf_cscfg_event_show(), this could have remained
-> unchanged.
->
-> > +static ssize_t etm_perf_name_show(struct device *dev,
-> > +                               struct device_attribute *dattr,
-> > +                               char *buf)
-> >  {
-> >       struct dev_ext_attribute *ea;
-> >
-> > @@ -565,68 +584,126 @@ static ssize_t etm_perf_sink_name_show(struct device *dev,
-> >       return scnprintf(buf, PAGE_SIZE, "0x%lx\n", (unsigned long)(ea->var));
-> >  }
-> >
-> > -int etm_perf_add_symlink_sink(struct coresight_device *csdev)
-> > +static struct dev_ext_attribute *
-> > +etm_perf_add_symlink_group(struct device *dev, const char *name, const char *group_name)
-> >  {
-> > -     int ret;
-> > +     struct dev_ext_attribute *ea;
-> >       unsigned long hash;
-> > -     const char *name;
-> > +     int ret;
-> >       struct device *pmu_dev = etm_pmu.dev;
-> > -     struct device *dev = &csdev->dev;
-> > -     struct dev_ext_attribute *ea;
-> > -
-> > -     if (csdev->type != CORESIGHT_DEV_TYPE_SINK &&
-> > -         csdev->type != CORESIGHT_DEV_TYPE_LINKSINK)
-> > -             return -EINVAL;
-> > -
-> > -     if (csdev->ea != NULL)
-> > -             return -EINVAL;
-> >
-> >       if (!etm_perf_up)
-> > -             return -EPROBE_DEFER;
-> > +             return ERR_PTR(-EPROBE_DEFER);
-> >
-> >       ea = devm_kzalloc(dev, sizeof(*ea), GFP_KERNEL);
-> >       if (!ea)
-> > -             return -ENOMEM;
-> > +             return ERR_PTR(-ENOMEM);
-> >
-> > -     name = dev_name(dev);
-> > -     /* See function coresight_get_sink_by_id() to know where this is used */
-> > +     /*
-> > +      * If this function is called adding a sink then the hash is used for
-> > +      * sink selection - see function coresight_get_sink_by_id().
-> > +      * If adding a configuration then the hash is used for selection in
-> > +      * cscfg_activate_config()
-> > +      */
-> >       hash = hashlen_hash(hashlen_string(NULL, name));
-> >
-> >       sysfs_attr_init(&ea->attr.attr);
-> >       ea->attr.attr.name = devm_kstrdup(dev, name, GFP_KERNEL);
-> >       if (!ea->attr.attr.name)
-> > -             return -ENOMEM;
-> > +             return ERR_PTR(-ENOMEM);
-> >
-> >       ea->attr.attr.mode = 0444;
-> > -     ea->attr.show = etm_perf_sink_name_show;
-> > +     ea->attr.show = etm_perf_name_show;
->
-> I would have removed the assignment entirely from this function and moved it to
-> etm_perf_add_symlink_cscfg() (like you already did) and
-> etm_perf_add_symlink_link().
->
-OK
+> Missing two lines！！！
 
-> >       ea->var = (unsigned long *)hash;
-> >
-> >       ret = sysfs_add_file_to_group(&pmu_dev->kobj,
-> > -                                   &ea->attr.attr, "sinks");
-> > +                                   &ea->attr.attr, group_name);
-> >
-> > -     if (!ret)
-> > -             csdev->ea = ea;
-> > +     return ret ? ERR_PTR(ret) : ea;
-> > +}
-> >
-> > -     return ret;
-> > +int etm_perf_add_symlink_sink(struct coresight_device *csdev)
-> > +{
-> > +     const char *name;
-> > +     struct device *dev = &csdev->dev;
-> > +     int err = 0;
-> > +
-> > +     if (csdev->type != CORESIGHT_DEV_TYPE_SINK &&
-> > +         csdev->type != CORESIGHT_DEV_TYPE_LINKSINK)
-> > +             return -EINVAL;
-> > +
-> > +     if (csdev->ea != NULL)
-> > +             return -EINVAL;
-> > +
-> > +     name = dev_name(dev);
-> > +     csdev->ea = etm_perf_add_symlink_group(dev, name, "sinks");
-> > +     if (IS_ERR(csdev->ea)) {
-> > +             err = PTR_ERR(csdev->ea);
-> > +             csdev->ea = NULL;
-> > +     }
-> > +     return err;
-> >  }
-> >
-> > -void etm_perf_del_symlink_sink(struct coresight_device *csdev)
-> > +void etm_perf_del_symlink_group(struct dev_ext_attribute *ea, const char *group_name)
-> >  {
-> >       struct device *pmu_dev = etm_pmu.dev;
-> > -     struct dev_ext_attribute *ea = csdev->ea;
-> >
-> > +     sysfs_remove_file_from_group(&pmu_dev->kobj,
-> > +                                  &ea->attr.attr, group_name);
-> > +}
-> > +
-> > +void etm_perf_del_symlink_sink(struct coresight_device *csdev)
-> > +{
-> >       if (csdev->type != CORESIGHT_DEV_TYPE_SINK &&
-> >           csdev->type != CORESIGHT_DEV_TYPE_LINKSINK)
-> >               return;
-> >
-> > -     if (!ea)
-> > +     if (!csdev->ea)
-> >               return;
-> >
-> > -     sysfs_remove_file_from_group(&pmu_dev->kobj,
-> > -                                  &ea->attr.attr, "sinks");
-> > +     etm_perf_del_symlink_group(csdev->ea, "sinks");
-> >       csdev->ea = NULL;
-> >  }
-> >
-> > +static ssize_t etm_perf_cscfg_event_show(struct device *dev,
-> > +                                      struct device_attribute *dattr,
-> > +                                      char *buf)
-> > +{
-> > +     struct dev_ext_attribute *ea;
-> > +
-> > +     ea = container_of(dattr, struct dev_ext_attribute, attr);
-> > +     return scnprintf(buf, PAGE_SIZE, "configid=0x%lx\n", (unsigned long)(ea->var));
-> > +}
-> > +
-> > +int etm_perf_add_symlink_cscfg(struct device *dev, struct cscfg_config_desc *config_desc)
-> > +{
-> > +     int err = 0;
-> > +
-> > +     if (config_desc->event_ea != NULL)
-> > +             return 0;
-> > +
-> > +     config_desc->event_ea = etm_perf_add_symlink_group(dev, config_desc->name, "events");
-> > +
-> > +     /* override the show function to the custom cscfg event */
-> > +     if (!IS_ERR(config_desc->event_ea))
-> > +             config_desc->event_ea->attr.show = etm_perf_cscfg_event_show;
-> > +     else {
-> > +             err = PTR_ERR(config_desc->event_ea);
-> > +             config_desc->event_ea = NULL;
-> > +     }
-> > +
-> > +     return err;
-> > +}
-> > +
-> > +void etm_perf_del_symlink_cscfg(struct cscfg_config_desc *config_desc)
-> > +{
-> > +     if (!config_desc->event_ea)
-> > +             return;
-> > +
-> > +     etm_perf_del_symlink_group(config_desc->event_ea, "events");
-> > +     config_desc->event_ea = NULL;
-> > +}
-> > +
-> >  int __init etm_perf_init(void)
-> >  {
-> >       int ret;
-> > diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.h b/drivers/hwtracing/coresight/coresight-etm-perf.h
-> > index 29d90dfeba31..ba617fe2217e 100644
-> > --- a/drivers/hwtracing/coresight/coresight-etm-perf.h
-> > +++ b/drivers/hwtracing/coresight/coresight-etm-perf.h
-> > @@ -11,6 +11,7 @@
-> >  #include "coresight-priv.h"
-> >
-> >  struct coresight_device;
-> > +struct cscfg_config_desc;
-> >
-> >  /*
-> >   * In both ETMv3 and v4 the maximum number of address comparator implentable
-> > @@ -69,6 +70,9 @@ static inline void *etm_perf_sink_config(struct perf_output_handle *handle)
-> >               return data->snk_config;
-> >       return NULL;
-> >  }
-> > +int etm_perf_add_symlink_cscfg(struct device *dev,
-> > +                            struct cscfg_config_desc *config_desc);
-> > +void etm_perf_del_symlink_cscfg(struct cscfg_config_desc *config_desc);
-> >  #else
-> >  static inline int etm_perf_symlink(struct coresight_device *csdev, bool link)
-> >  { return -EINVAL; }
-> > @@ -79,6 +83,10 @@ static inline void *etm_perf_sink_config(struct perf_output_handle *handle)
-> >  {
-> >       return NULL;
-> >  }
-> > +int etm_perf_add_symlink_cscfg(struct device *dev,
-> > +                            struct cscfg_config_desc *config_desc)
-> > +{ return -EINVAL; }
-> > +void etm_perf_del_symlink_cscfg(struct cscfg_config_desc *config_desc) {}
-> >
-> >  #endif /* CONFIG_CORESIGHT */
-> >
-> > diff --git a/drivers/hwtracing/coresight/coresight-syscfg.c b/drivers/hwtracing/coresight/coresight-syscfg.c
-> > index 11d1422f0ed3..03014a2142c1 100644
-> > --- a/drivers/hwtracing/coresight/coresight-syscfg.c
-> > +++ b/drivers/hwtracing/coresight/coresight-syscfg.c
-> > @@ -7,6 +7,7 @@
-> >  #include <linux/platform_device.h>
-> >
-> >  #include "coresight-config.h"
-> > +#include "coresight-etm-perf.h"
-> >  #include "coresight-syscfg.h"
-> >
-> >  /*
-> > @@ -86,6 +87,7 @@ static int cscfg_add_csdev_cfg(struct coresight_device *csdev,
-> >                       config_csdev->feats_csdev[config_csdev->nr_feat++] = feat_csdev;
-> >               }
-> >       }
-> > +
->
-> Spurious newline.
->
-> If you end up respinning:
->
-> Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
->
-> Otherwise I have fixed it on my side.
->
-> Thanks,
-> Mathieu
->
+Ah, ok.
+The two have been in next tree for 22h.
 
-I have a v6 underway that picks up the kernel robot issues and a
-couple of minor fixes I spotted in patches 5 (missing NULL assignment
-for the enabled config on disable)  and 8 (unused #define) while
-re-basing the follow-up dynamic config load / unload set. Only one in
-patch 5 has potential to actually cause incorrect behaviour - then
-only when configs have been unloaded - but it is part of the baseline
-code so must be fixed there.
-
-Assuming no major issues from your reviews of the rest of this set, v6
-should be available quickly.
-
-Thanks
-
-Mike
-
-> >       /* if matched features, add config to device.*/
-> >       if (config_csdev) {
-> >               mutex_lock(&cscfg_csdev_mutex);
-> > @@ -276,6 +278,11 @@ static int cscfg_load_config(struct cscfg_config_desc *config_desc)
-> >       if (err)
-> >               return err;
-> >
-> > +     /* add config to perf fs to allow selection */
-> > +     err = etm_perf_add_symlink_cscfg(cscfg_device(), config_desc);
-> > +     if (err)
-> > +             return err;
-> > +
-> >       list_add(&config_desc->item, &cscfg_mgr->config_desc_list);
-> >       return 0;
-> >  }
-> > @@ -490,7 +497,12 @@ int cscfg_create_device(void)
-> >
-> >  void cscfg_clear_device(void)
-> >  {
-> > +     struct cscfg_config_desc *cfg_desc;
-> > +
-> >       mutex_lock(&cscfg_mutex);
-> > +     list_for_each_entry(cfg_desc, &cscfg_mgr->config_desc_list, item) {
-> > +             etm_perf_del_symlink_cscfg(cfg_desc);
-> > +     }
-> >       device_unregister(cscfg_device());
-> >       mutex_unlock(&cscfg_mutex);
-> >  }
+[...]
 > > --
-> > 2.17.1
+> > 2.20.1
 > >
+> 
+> Thanks！
+> 
+> Yanteng
 
+Thanks for your review!
 
+Wu X.C.
 
--- 
-Mike Leach
-Principal Engineer, ARM Ltd.
-Manchester Design Centre. UK
