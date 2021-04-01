@@ -2,106 +2,136 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5A97935182A
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 19:48:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7F8013518C3
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 19:49:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236249AbhDARoM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 13:44:12 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57160 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234899AbhDARlL (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 13:41:11 -0400
-Received: from mail-wm1-x32f.google.com (mail-wm1-x32f.google.com [IPv6:2a00:1450:4864:20::32f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 06645C08EA7D;
-        Thu,  1 Apr 2021 06:30:54 -0700 (PDT)
-Received: by mail-wm1-x32f.google.com with SMTP id n11-20020a05600c4f8bb029010e5cf86347so3867290wmq.1;
-        Thu, 01 Apr 2021 06:30:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=xkmJRNyHZF6zO/+Ccr4Et1V1ZjM78NEZ05svjz/naMI=;
-        b=lILFftuC0IPr3uLEncMP2OrLr9zLpsfw4zdDDm7j/WvMTg4Db4ko0/YIULamJlFGkE
-         y+BZXopV/bNZnncS7HNQPDTUOcOum/4KbED+UvkANuDAxpcXKe1e12G1o/jmxWbwYMcf
-         eP6vU4RDt7W3qNd3u/u0T7m/mqjicz6H+sJ58bgAcl4H5txfKWEJf9eErSX7BbyyKRMs
-         2CAvYaa4b98Yw8cKEgUd2FqQpG0gEaeYsU8BsEM1sn9BkuogXAe5uqI4Hotknm5m8tBl
-         /m9NP93JunHEhR+8kzHXvkKsypa3MSEyYzvQNPY+xsxzIu26e0+NXxJZ/DohMz19MwNu
-         lj7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=xkmJRNyHZF6zO/+Ccr4Et1V1ZjM78NEZ05svjz/naMI=;
-        b=NQ5R8gTfd/bkXQFSCcNwDEjku+FZGamUrcAVZot9ZyY1COXp5dlzVnZtd52sRo/mvn
-         Y/SHTSCwqpHvZ3cobey2kWOApr717MVxTqBQE/pQ8O1Wk24DAHE3OAY1toQitMipXADw
-         CxcpyBxg5TzChsP5W9VgxtWnO2TpJKwdZk0hhHIbKUTeIy04p5BgIzgUU+hM9BS+A67x
-         ZbS9nG1WSxavBAwTZ2ElnzJ+FMzoDXklA0L1HVxykhW2xpl6imeuHQdeDDmNmgkCGsJz
-         JQ/cdqYJsDjGiZLZik7oqYDI0dbwFW62VZELJeGCB8UQiKKava1biurf7mkldwx/YSoV
-         FwSA==
-X-Gm-Message-State: AOAM531+nmydr0w0abGqDaYPp6asYyzWt1YITxhN4Pb6y6l94HtLt/VR
-        1MWGfC58Vcx0q5RK59alLsg=
-X-Google-Smtp-Source: ABdhPJyCyaREQFPgcDkUYPNV4ggRYGiB0YNKqwnW2+WJUTFQMJ4jUJs75EA85o1xxpFIvrmPyn/t4g==
-X-Received: by 2002:a1c:b006:: with SMTP id z6mr7775346wme.19.1617283852803;
-        Thu, 01 Apr 2021 06:30:52 -0700 (PDT)
-Received: from arch-thunder.localdomain (a109-49-46-234.cpe.netcabo.pt. [109.49.46.234])
-        by smtp.gmail.com with ESMTPSA id l15sm8215400wme.43.2021.04.01.06.30.51
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Apr 2021 06:30:52 -0700 (PDT)
-Date:   Thu, 1 Apr 2021 14:30:50 +0100
-From:   Rui Miguel Silva <rmfrfs@gmail.com>
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+        id S236842AbhDARre (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 13:47:34 -0400
+Received: from mail.kernel.org ([198.145.29.99]:42944 "EHLO mail.kernel.org"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S235596AbhDARnA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Apr 2021 13:43:00 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 0398561285;
+        Thu,  1 Apr 2021 14:07:31 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1617286054;
+        bh=V9bgGYiXE/LDBTtHWvl7WWQChZzjc4Q9/uN+D4DIQy0=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=EOF9Y/ffwJdLpVX103cX18Q3xPEvwbjUOBxWoJakgB0+ZUiWZBijfZ+bnYgMESBUk
+         0k/HgFAi3Wwk/R1XtRMpAhFU2su5ZHMBU+xO2Ph2VFV5FKZW0fpFuFgb5x3bg/gId9
+         nWg83yDf4xdEnfZcPgMxtrSWXkjeW3kZjGkCAN9L87o3hNjU5pMIJA/CAxDpnb/jsC
+         Rs195DiAnGhJ9UsWS26pcpcYv6koBJTVFQiSpW9DdOByGyKBiqfJulxtBLDkkupDYq
+         6tVeoKcLiVUkJRYA0ReZCa5kn+rpxZhLU4ce88Pr+jR5x7MO2h4GncVNEl+IDkhd6J
+         p9DZgt1NYdCOg==
+Date:   Thu, 1 Apr 2021 16:07:29 +0200
+From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+To:     Andrew Lunn <andrew@lunn.ch>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
+        "David S. Miller" <davem@davemloft.net>,
         Jonathan Corbet <corbet@lwn.net>,
-        Jacopo Mondi <jacopo+renesas@jmondi.org>,
-        Rob Herring <robh@kernel.org>,
-        Sakari Ailus <sakari.ailus@linux.intel.com>,
+        Benedikt Spranger <b.spranger@linutronix.de>,
+        Florian Fainelli <f.fainelli@gmail.com>,
+        Hyunchul Lee <hyc.lee@gmail.com>,
+        Namjae Jeon <namjae.jeon@samsung.com>,
+        Ronnie Sahlberg <lsahlber@redhat.com>,
+        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
+        Steve French <stfrench@microsoft.com>,
         linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 23/32] MAINTAINERS: update ovti,ov2680.yaml reference
-Message-ID: <20210401133050.dmnteppqmtst37f5@arch-thunder.localdomain>
+Subject: Re: [PATCH 30/32] Documentation: net: dsa: update configuration.rst
+ reference
+Message-ID: <20210401160729.6ee45872@coco.lan>
+In-Reply-To: <YGW/a8FuCO+Q6hEg@lunn.ch>
 References: <cover.1617279355.git.mchehab+huawei@kernel.org>
- <f6474fa072117ec42bef82379abb5df958fab426.1617279355.git.mchehab+huawei@kernel.org>
+        <a3d52c1380624f34b4a04e9698f67e1e6d8d23f8.1617279356.git.mchehab+huawei@kernel.org>
+        <YGW/a8FuCO+Q6hEg@lunn.ch>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <f6474fa072117ec42bef82379abb5df958fab426.1617279355.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Mauro,
-Thanks for fixing this.
+Em Thu, 1 Apr 2021 14:41:15 +0200
+Andrew Lunn <andrew@lunn.ch> escreveu:
 
-On Thu, Apr 01, 2021 at 02:17:43PM +0200, Mauro Carvalho Chehab wrote:
-> The file name: Documentation/devicetree/bindings/media/i2c/ov2680.yaml
-> should be, instead: Documentation/devicetree/bindings/media/i2c/ovti,ov2680.yaml.
+> On Thu, Apr 01, 2021 at 02:17:50PM +0200, Mauro Carvalho Chehab wrote:
+> > The file name: Documentation/configuration.txt
+> > should be, instead: Documentation/networking/dsa/configuration.rst.
+> > 
+> > Update its cross-reference accordingly.
+> > 
+> > Fixes: 75b8988dfe83 ("cifsd: add server handler for central processing and tranport layers")
+> > Fixes: 58dd7a8d9d02 ("Documentation: net: dsa: Describe DSA switch configuration")
+> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> > ---
+> >  Documentation/filesystems/cifs/cifsd.rst | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > 
+> > diff --git a/Documentation/filesystems/cifs/cifsd.rst b/Documentation/filesystems/cifs/cifsd.rst
+> > index 48ae58f2a53c..082a839535e7 100644
+> > --- a/Documentation/filesystems/cifs/cifsd.rst
+> > +++ b/Documentation/filesystems/cifs/cifsd.rst
+> > @@ -114,7 +114,7 @@ How to run
+> >  	# ksmbd.adduser -a <Enter USERNAME for SMB share access>
+> >  
+> >  3. Create /etc/ksmbd/smb.conf file, add SMB share in smb.conf file
+> > -	- Refer smb.conf.example and Documentation/configuration.txt
+> > +	- Refer smb.conf.example and Documentation/networking/dsa/configuration.rst
+> >  	  in ksmbd-tools  
 > 
-> Update its cross-reference accordingly.
+> Hi Mauro
 > 
-> Fixes: 57226cd8c8bf ("media: dt-bindings: ov2680: convert bindings to yaml")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> This looks wrong. There is no relationship between SMB and DSA. I
+> suspect you are looking for some other configuration.txt
 
-Reviewed-by: Rui Miguel Silva <rmfrfs@gmail.com>
+Thanks for reviewing it.
 
-------
-Cheers,
-     Rui
-> ---
->  MAINTAINERS | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 0ee42d68a269..1644b6e9697c 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -13351,7 +13351,7 @@ M:	Rui Miguel Silva <rmfrfs@gmail.com>
->  L:	linux-media@vger.kernel.org
->  S:	Maintained
->  T:	git git://linuxtv.org/media_tree.git
-> -F:	Documentation/devicetree/bindings/media/i2c/ov2680.yaml
-> +F:	Documentation/devicetree/bindings/media/i2c/ovti,ov2680.yaml
->  F:	drivers/media/i2c/ov2680.c
->  
->  OMNIVISION OV2685 SENSOR DRIVER
-> -- 
-> 2.30.2
-> 
+I'll drop the patch from my series.
+
+After re-reading cifsd.rst, I suspect that it is actually trying to
+refer to:
+
+	https://github.com/cifsd-team/ksmbd-tools/blob/master/Documentation/configuration.txt
+
+and not to a local file.
+
+So, IMO, the right thing to do is to apply the enclosed patch instead.
+	
+
+Thanks,
+Mauro
+
+[PATCH] docs: cifsd: change the reference to configuration.txt
+
+Changeset 75b8988dfe83 ("cifsd: add server handler for central processing and tranport layers")
+added documentation for cifsd. There, it points to a file
+named:
+	Documentation/configuration.txt
+
+This confuses Kernel scripts, as they think that this is a
+document within the Kernel tree, instead of a file from
+some other place.
+
+Replace it by an hyperlink to the ksmbd-tools tree, in order
+to avoid false-positives.
+
+Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+
+diff --git a/Documentation/filesystems/cifs/cifsd.rst b/Documentation/filesystems/cifs/cifsd.rst
+index 48ae58f2a53c..a6ab85e68252 100644
+--- a/Documentation/filesystems/cifs/cifsd.rst
++++ b/Documentation/filesystems/cifs/cifsd.rst
+@@ -114,8 +114,8 @@ How to run
+ 	# ksmbd.adduser -a <Enter USERNAME for SMB share access>
+ 
+ 3. Create /etc/ksmbd/smb.conf file, add SMB share in smb.conf file
+-	- Refer smb.conf.example and Documentation/configuration.txt
+-	  in ksmbd-tools
++	- Refer smb.conf.example and
++	  https://github.com/cifsd-team/ksmbd-tools/blob/master/Documentation/configuration.txt
+ 
+ 4. Insert ksmbd.ko module
+ 
+
+
