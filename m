@@ -2,88 +2,436 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8A640351B28
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:08:49 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 20157351965
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:02:42 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234558AbhDASGg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 14:06:36 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34008 "EHLO
+        id S235530AbhDARxH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 13:53:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59540 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235093AbhDASBg (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 14:01:36 -0400
-Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [IPv6:2001:4b98:dc2:55:216:3eff:fef7:d647])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C9AAC02FE95;
-        Thu,  1 Apr 2021 09:01:45 -0700 (PDT)
-Received: from [192.168.0.20] (cpc89244-aztw30-2-0-cust3082.18-1.cable.virginm.net [86.31.172.11])
-        by perceval.ideasonboard.com (Postfix) with ESMTPSA id D94A589B;
-        Thu,  1 Apr 2021 18:01:40 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
-        s=mail; t=1617292901;
-        bh=9PpGK5DYSDHyjsBaiZozxLkq3MRlWpOKUyVcUk0phsM=;
-        h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
-        b=Uiw4WeVEXPnxxHr7LLQidTggt4sWeyauxEFAhUcE0FUK7yFqCD2KdFq8rV2lw76U+
-         gkiQAf9iyDxgO+JlkvUSWu9vQgIxmbPZXOwy0enYuP9Xrh4qz4q8Vgxrc2Yoag0hry
-         2siBoSR0PL/6S54FPzmolSfRMU2WcluNHE9owqUg=
-Reply-To: kieran.bingham+renesas@ideasonboard.com
-Subject: Re: [PATCH 24/32] MAINTAINERS: update imi,rdacm2x-gmsl.yaml reference
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        Jacopo Mondi <jacopo+renesas@jmondi.org>,
-        Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
-        Rob Herring <robh@kernel.org>,
-        Sakari Ailus <sakari.ailus@linux.intel.com>,
-        linux-kernel@vger.kernel.org
-References: <cover.1617279355.git.mchehab+huawei@kernel.org>
- <b03a41b5051b6cb115b2aa9c3d610e75d84dcfea.1617279356.git.mchehab+huawei@kernel.org>
-From:   Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
-Organization: Ideas on Board
-Message-ID: <aee4c49c-04f8-c553-63ce-868c46ade0e8@ideasonboard.com>
-Date:   Thu, 1 Apr 2021 17:01:38 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+        with ESMTP id S236822AbhDARr0 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 13:47:26 -0400
+Received: from mail-pl1-x635.google.com (mail-pl1-x635.google.com [IPv6:2607:f8b0:4864:20::635])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 451B4C031179
+        for <linux-doc@vger.kernel.org>; Thu,  1 Apr 2021 10:10:36 -0700 (PDT)
+Received: by mail-pl1-x635.google.com with SMTP id h20so1341347plr.4
+        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 10:10:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=qi9DWPzvh8xpthzD7m23b/+Ii/SCe/hILaqXm6TmfaI=;
+        b=WeAQQTrFYBn3LyIPqzSZRr7exlJPDULAQ60xJK7IHW5jd7VnwqpTEQn7SK+nemL6M1
+         OWEwIxB+vFp2hyec6Gyz2PirlcNb/4K+9MzSFeMgt3qD9NaSsbezJMQl20Nbtoj1K2j7
+         whwLPhjzmutCSpWAoC0w40hiWuojMbtfe4EWtsQdEL+fIku3RUsOanHToece+fvv9Nqf
+         h7DOT67h3XfI8fyArkKVoqIN9he+KkGDkXV6e+zSnrKTd0LAtTvVxSHv5UyADcZfbQgN
+         qtrIw/t909RgPRWh/2alL2keXDq/AzQYYN4hRemsrbgdcT1gnInBsr7o4rIDDLwzQILa
+         k3Mg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=qi9DWPzvh8xpthzD7m23b/+Ii/SCe/hILaqXm6TmfaI=;
+        b=rCWozwSpQByfhEVhjwjSZ9v8NOOO4EHAIcoL7QkknoYPDaxGaFjVBzZWy42Baga7Jd
+         lDpjq5XvP88GkhMmWp62/4ES6alFBsSfVrHtM4vKk5e0q73edpejWIaQtQLdA4bQXDVE
+         3JVe8snIiR2OcaECw7IcxLJ3jXBBaWJx0UK96veAOPqAwJ+7zlAXLZXXrrx1oYBxTxhq
+         z681wz8e93KxLLsvfk/EK17qNQD5tLmBY1FOa7yB20HUk+MB7XGROfF/fbhzbSerO+hU
+         9af/eCbArl5z6j8IC5Wbhey6oUvt9sJsPw/YbwR6az8u9nx6+FVD0Dl3AdmaRn7tNf4/
+         LeIw==
+X-Gm-Message-State: AOAM533uikJcEJFj+mkroeJ5SsemxRgC+8aAtsKV64/L8ATBiCbh0Stn
+        JdRMJPS51llQoNXG2NSLNimBEvpC3AuBXA==
+X-Google-Smtp-Source: ABdhPJywbgy7WN5poUvMMyIvtg6Ri38Bn6vafakosDHUzQngWr6TxThc+KHIGjqNbC7TfzHz6VSuKQ==
+X-Received: by 2002:a17:90a:c7d5:: with SMTP id gf21mr9506249pjb.165.1617297035636;
+        Thu, 01 Apr 2021 10:10:35 -0700 (PDT)
+Received: from xps15 (S0106889e681aac74.cg.shawcable.net. [68.147.0.187])
+        by smtp.gmail.com with ESMTPSA id 81sm6170305pfu.164.2021.04.01.10.10.33
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Apr 2021 10:10:34 -0700 (PDT)
+Date:   Thu, 1 Apr 2021 11:10:32 -0600
+From:   Mathieu Poirier <mathieu.poirier@linaro.org>
+To:     Mike Leach <mike.leach@linaro.org>
+Cc:     linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org,
+        linux-doc@vger.kernel.org, suzuki.poulose@arm.com,
+        yabinc@google.com, corbet@lwn.net, leo.yan@linaro.org,
+        alexander.shishkin@linux.intel.com, tingwei@codeaurora.org,
+        gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 07/10] coresight: etm4x: Add complex configuration
+ handlers to etmv4
+Message-ID: <20210401171032.GC145043@xps15>
+References: <20210316180400.7184-1-mike.leach@linaro.org>
+ <20210316180400.7184-8-mike.leach@linaro.org>
 MIME-Version: 1.0
-In-Reply-To: <b03a41b5051b6cb115b2aa9c3d610e75d84dcfea.1617279356.git.mchehab+huawei@kernel.org>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-GB
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210316180400.7184-8-mike.leach@linaro.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi Mauro,
-
-On 01/04/2021 13:17, Mauro Carvalho Chehab wrote:
-> The file name: Documentation/devicetree/bindings/media/i2c/rdacm2x-gmsl.yaml
-> should be, instead: Documentation/devicetree/bindings/media/i2c/imi,rdacm2x-gmsl.yaml.
+On Tue, Mar 16, 2021 at 06:03:57PM +0000, Mike Leach wrote:
+> Adds in handlers to allow the ETMv4 to use the complex configuration
+> support. Features and configurations can be loaded and selected in the
+> device.
 > 
-> Update its cross-reference accordingly.
-> 
-> Fixes: 34009bffc1c6 ("media: i2c: Add RDACM20 driver")
-> Fixes: e9f817689789 ("media: dt-bindings: media: i2c: Add bindings for IMI RDACM2x")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
-Indeed, confirmed,
-
-Reviewed-by: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
-
-
+> Signed-off-by: Mike Leach <mike.leach@linaro.org>
 > ---
->  MAINTAINERS | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 1644b6e9697c..b405ee71f730 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -15258,7 +15258,7 @@ M:	Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
->  M:	Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
->  L:	linux-media@vger.kernel.org
->  S:	Maintained
-> -F:	Documentation/devicetree/bindings/media/i2c/rdacm2x-gmsl.yaml
-> +F:	Documentation/devicetree/bindings/media/i2c/imi,rdacm2x-gmsl.yaml
->  F:	drivers/media/i2c/max9271.c
->  F:	drivers/media/i2c/max9271.h
->  F:	drivers/media/i2c/rdacm21.c
-> 
+>  drivers/hwtracing/coresight/Makefile          |   3 +-
+>  .../hwtracing/coresight/coresight-etm4x-cfg.c | 182 ++++++++++++++++++
+>  .../hwtracing/coresight/coresight-etm4x-cfg.h |  15 ++
+>  .../coresight/coresight-etm4x-core.c          |  38 +++-
+>  .../coresight/coresight-etm4x-sysfs.c         |   3 +
+>  5 files changed, 238 insertions(+), 3 deletions(-)
+>  create mode 100644 drivers/hwtracing/coresight/coresight-etm4x-cfg.c
+>  create mode 100644 drivers/hwtracing/coresight/coresight-etm4x-cfg.h
+>
 
+Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
+ 
+> diff --git a/drivers/hwtracing/coresight/Makefile b/drivers/hwtracing/coresight/Makefile
+> index daad9f103a78..ea544206204d 100644
+> --- a/drivers/hwtracing/coresight/Makefile
+> +++ b/drivers/hwtracing/coresight/Makefile
+> @@ -16,7 +16,8 @@ obj-$(CONFIG_CORESIGHT_SOURCE_ETM3X) += coresight-etm3x.o
+>  coresight-etm3x-y := coresight-etm3x-core.o coresight-etm-cp14.o \
+>  		     coresight-etm3x-sysfs.o
+>  obj-$(CONFIG_CORESIGHT_SOURCE_ETM4X) += coresight-etm4x.o
+> -coresight-etm4x-y := coresight-etm4x-core.o coresight-etm4x-sysfs.o
+> +coresight-etm4x-y := coresight-etm4x-core.o coresight-etm4x-sysfs.o \
+> +			coresight-etm4x-cfg.o
+>  obj-$(CONFIG_CORESIGHT_STM) += coresight-stm.o
+>  obj-$(CONFIG_CORESIGHT_CPU_DEBUG) += coresight-cpu-debug.o
+>  obj-$(CONFIG_CORESIGHT_CATU) += coresight-catu.o
+> diff --git a/drivers/hwtracing/coresight/coresight-etm4x-cfg.c b/drivers/hwtracing/coresight/coresight-etm4x-cfg.c
+> new file mode 100644
+> index 000000000000..de612498b29d
+> --- /dev/null
+> +++ b/drivers/hwtracing/coresight/coresight-etm4x-cfg.c
+> @@ -0,0 +1,182 @@
+> +// SPDX-License-Identifier: GPL-2.0
+> +/*
+> + * Copyright(C) 2020 Linaro Limited. All rights reserved.
+> + * Author: Mike Leach <mike.leach@linaro.org>
+> + */
+> +
+> +#include "coresight-etm4x.h"
+> +#include "coresight-etm4x-cfg.h"
+> +#include "coresight-priv.h"
+> +#include "coresight-syscfg.h"
+> +
+> +/* defines to associate register IDs with driver data locations */
+> +#define CHECKREG(cval, elem) \
+> +	{ \
+> +		if (offset == cval) { \
+> +			reg_csdev->driver_regval = &drvcfg->elem; \
+> +			err = 0; \
+> +			break; \
+> +		} \
+> +	}
+> +
+> +#define CHECKREGIDX(cval, elem, off_idx, mask)	\
+> +	{ \
+> +		if (mask == cval) { \
+> +			reg_csdev->driver_regval = &drvcfg->elem[off_idx]; \
+> +			err = 0; \
+> +			break; \
+> +		} \
+> +	}
+> +
+> +/**
+> + * etm4_cfg_map_reg_offset - validate and map the register offset into a
+> + *			     location in the driver config struct.
+> + *
+> + * Limits the number of registers that can be accessed and programmed in
+> + * features, to those which are used to control the trace capture parameters.
+> + *
+> + * Omits or limits access to those which the driver must use exclusively.
+> + *
+> + * Invalid offsets will result in fail code return and feature load failure.
+> + *
+> + * @drvdata:	driver data to map into.
+> + * @reg:	register to map.
+> + * @offset:	device offset for the register
+> + */
+> +static int etm4_cfg_map_reg_offset(struct etmv4_drvdata *drvdata,
+> +				   struct cscfg_regval_csdev *reg_csdev, u32 offset)
+> +{
+> +	int err = -EINVAL, idx;
+> +	struct etmv4_config *drvcfg = &drvdata->config;
+> +	u32 off_mask;
+> +
+> +	if (((offset >= TRCEVENTCTL0R) && (offset <= TRCVIPCSSCTLR)) ||
+> +	    ((offset >= TRCSEQRSTEVR) && (offset <= TRCEXTINSELR)) ||
+> +	    ((offset >= TRCCIDCCTLR0) && (offset <= TRCVMIDCCTLR1))) {
+> +		do {
+> +			CHECKREG(TRCEVENTCTL0R, eventctrl0);
+> +			CHECKREG(TRCEVENTCTL1R, eventctrl1);
+> +			CHECKREG(TRCSTALLCTLR, stall_ctrl);
+> +			CHECKREG(TRCTSCTLR, ts_ctrl);
+> +			CHECKREG(TRCSYNCPR, syncfreq);
+> +			CHECKREG(TRCCCCTLR, ccctlr);
+> +			CHECKREG(TRCBBCTLR, bb_ctrl);
+> +			CHECKREG(TRCVICTLR, vinst_ctrl);
+> +			CHECKREG(TRCVIIECTLR, viiectlr);
+> +			CHECKREG(TRCVISSCTLR, vissctlr);
+> +			CHECKREG(TRCVIPCSSCTLR, vipcssctlr);
+> +			CHECKREG(TRCSEQRSTEVR, seq_rst);
+> +			CHECKREG(TRCSEQSTR, seq_state);
+> +			CHECKREG(TRCEXTINSELR, ext_inp);
+> +			CHECKREG(TRCCIDCCTLR0, ctxid_mask0);
+> +			CHECKREG(TRCCIDCCTLR1, ctxid_mask1);
+> +			CHECKREG(TRCVMIDCCTLR0, vmid_mask0);
+> +			CHECKREG(TRCVMIDCCTLR1, vmid_mask1);
+> +		} while (0);
+> +	} else if ((offset & GENMASK(11, 4)) == TRCSEQEVRn(0)) {
+> +		/* sequencer state control registers */
+> +		idx = (offset & GENMASK(3, 0)) / 4;
+> +		if (idx < ETM_MAX_SEQ_STATES) {
+> +			reg_csdev->driver_regval = &drvcfg->seq_ctrl[idx];
+> +			err = 0;
+> +		}
+> +	} else if ((offset >= TRCSSCCRn(0)) && (offset <= TRCSSPCICRn(7))) {
+> +		/* 32 bit, 8 off indexed register sets */
+> +		idx = (offset & GENMASK(4, 0)) / 4;
+> +		off_mask =  (offset & GENMASK(11, 5));
+> +		do {
+> +			CHECKREGIDX(TRCSSCCRn(0), ss_ctrl, idx, off_mask);
+> +			CHECKREGIDX(TRCSSCSRn(0), ss_status, idx, off_mask);
+> +			CHECKREGIDX(TRCSSPCICRn(0), ss_pe_cmp, idx, off_mask);
+> +		} while (0);
+> +	} else if ((offset >= TRCCIDCVRn(0)) && (offset <= TRCVMIDCVRn(7))) {
+> +		/* 64 bit, 8 off indexed register sets */
+> +		idx = (offset & GENMASK(5, 0)) / 8;
+> +		off_mask = (offset & GENMASK(11, 6));
+> +		do {
+> +			CHECKREGIDX(TRCCIDCVRn(0), ctxid_pid, idx, off_mask);
+> +			CHECKREGIDX(TRCVMIDCVRn(0), vmid_val, idx, off_mask);
+> +		} while (0);
+> +	} else if ((offset >= TRCRSCTLRn(2)) &&
+> +		   (offset <= TRCRSCTLRn((ETM_MAX_RES_SEL - 1)))) {
+> +		/* 32 bit resource selection regs, 32 off, skip fixed 0,1 */
+> +		idx = (offset & GENMASK(6, 0)) / 4;
+> +		if (idx < ETM_MAX_RES_SEL) {
+> +			reg_csdev->driver_regval = &drvcfg->res_ctrl[idx];
+> +			err = 0;
+> +		}
+> +	} else if ((offset >= TRCACVRn(0)) &&
+> +		   (offset <= TRCACATRn((ETM_MAX_SINGLE_ADDR_CMP - 1)))) {
+> +		/* 64 bit addr cmp regs, 16 off */
+> +		idx = (offset & GENMASK(6, 0)) / 8;
+> +		off_mask = offset & GENMASK(11, 7);
+> +		do {
+> +			CHECKREGIDX(TRCACVRn(0), addr_val, idx, off_mask);
+> +			CHECKREGIDX(TRCACATRn(0), addr_acc, idx, off_mask);
+> +		} while (0);
+> +	} else if ((offset >= TRCCNTRLDVRn(0)) &&
+> +		   (offset <= TRCCNTVRn((ETMv4_MAX_CNTR - 1)))) {
+> +		/* 32 bit counter regs, 4 off (ETMv4_MAX_CNTR - 1) */
+> +		idx = (offset &  GENMASK(3, 0)) / 4;
+> +		off_mask = offset &  GENMASK(11, 4);
+> +		do {
+> +			CHECKREGIDX(TRCCNTRLDVRn(0), cntrldvr, idx, off_mask);
+> +			CHECKREGIDX(TRCCNTCTLRn(0), cntr_ctrl, idx, off_mask);
+> +			CHECKREGIDX(TRCCNTVRn(0), cntr_val, idx, off_mask);
+> +		} while (0);
+> +	}
+> +	return err;
+> +}
+> +
+> +/**
+> + * etm4_cfg_load_feature - load a feature into a device instance.
+> + *
+> + * @csdev:	An ETMv4 CoreSight device.
+> + * @feat:	The feature to be loaded.
+> + *
+> + * The function will load a feature instance into the device, checking that
+> + * the register definitions are valid for the device.
+> + *
+> + * Parameter and register definitions will be converted into internal
+> + * structures that are used to set the values in the driver when the
+> + * feature is enabled for the device.
+> + *
+> + * The feature spinlock pointer is initialised to the same spinlock
+> + * that the driver uses to protect the internal register values.
+> + */
+> +static int etm4_cfg_load_feature(struct coresight_device *csdev,
+> +				 struct cscfg_feature_csdev *feat_csdev)
+> +{
+> +	struct device *dev = csdev->dev.parent;
+> +	struct etmv4_drvdata *drvdata = dev_get_drvdata(dev);
+> +	const struct cscfg_feature_desc *feat_desc = feat_csdev->feat_desc;
+> +	u32 offset;
+> +	int i = 0, err = 0;
+> +
+> +	/*
+> +	 * essential we set the device spinlock - this is used in the generic
+> +	 * programming routines when copying values into the drvdata structures
+> +	 * via the pointers setup in etm4_cfg_map_reg_offset().
+> +	 */
+> +	feat_csdev->drv_spinlock = &drvdata->spinlock;
+> +
+> +	/* process the register descriptions */
+> +	for (i = 0; i < feat_csdev->nr_regs && !err; i++) {
+> +		offset = feat_desc->regs_desc[i].offset;
+> +		err = etm4_cfg_map_reg_offset(drvdata, &feat_csdev->regs_csdev[i], offset);
+> +	}
+> +	return err;
+> +}
+> +
+> +/* match information when loading configurations */
+> +#define CS_CFG_ETM4_MATCH_FLAGS	(CS_CFG_MATCH_CLASS_SRC_ALL | \
+> +				 CS_CFG_MATCH_CLASS_SRC_ETM4)
+> +
+> +int etm4_cscfg_register(struct coresight_device *csdev, const char *dev_name)
+> +{
+> +	struct cscfg_csdev_feat_ops ops;
+> +
+> +	ops.load_feat = &etm4_cfg_load_feature;
+> +
+> +	return cscfg_register_csdev(csdev, CS_CFG_ETM4_MATCH_FLAGS, &ops);
+> +}
+> diff --git a/drivers/hwtracing/coresight/coresight-etm4x-cfg.h b/drivers/hwtracing/coresight/coresight-etm4x-cfg.h
+> new file mode 100644
+> index 000000000000..7ec65771ee58
+> --- /dev/null
+> +++ b/drivers/hwtracing/coresight/coresight-etm4x-cfg.h
+> @@ -0,0 +1,15 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +/*
+> + * Copyright (c) 2014-2020, The Linux Foundation. All rights reserved.
+> + */
+> +
+> +#ifndef _CORESIGHT_ETM4X_CFG_H
+> +#define _CORESIGHT_ETM4X_CFG_H
+> +
+> +#include "coresight-config.h"
+> +#include "coresight-etm4x.h"
+> +
+> +/* ETMv4 specific config functions */
+> +int etm4_cscfg_register(struct coresight_device *csdev, const char *dev_name);
+> +
+> +#endif /* CORESIGHT_ETM4X_CFG_H */
+> diff --git a/drivers/hwtracing/coresight/coresight-etm4x-core.c b/drivers/hwtracing/coresight/coresight-etm4x-core.c
+> index 15016f757828..fb82a33f2606 100644
+> --- a/drivers/hwtracing/coresight/coresight-etm4x-core.c
+> +++ b/drivers/hwtracing/coresight/coresight-etm4x-core.c
+> @@ -38,6 +38,8 @@
+>  
+>  #include "coresight-etm4x.h"
+>  #include "coresight-etm-perf.h"
+> +#include "coresight-etm4x-cfg.h"
+> +#include "coresight-syscfg.h"
+>  
+>  static int boot_enable;
+>  module_param(boot_enable, int, 0444);
+> @@ -492,12 +494,15 @@ static int etm4_config_timestamp_event(struct etmv4_drvdata *drvdata)
+>  	return ret;
+>  }
+>  
+> -static int etm4_parse_event_config(struct etmv4_drvdata *drvdata,
+> +static int etm4_parse_event_config(struct coresight_device *csdev,
+>  				   struct perf_event *event)
+>  {
+>  	int ret = 0;
+> +	struct etmv4_drvdata *drvdata = dev_get_drvdata(csdev->dev.parent);
+>  	struct etmv4_config *config = &drvdata->config;
+>  	struct perf_event_attr *attr = &event->attr;
+> +	unsigned long cfg_hash;
+> +	int preset;
+>  
+>  	if (!attr) {
+>  		ret = -EINVAL;
+> @@ -568,6 +573,20 @@ static int etm4_parse_event_config(struct etmv4_drvdata *drvdata,
+>  		/* bit[12], Return stack enable bit */
+>  		config->cfg |= BIT(12);
+>  
+> +	/*
+> +	 * Set any selected configuration and preset.
+> +	 *
+> +	 * This extracts the values of PMU_FORMAT_ATTR(configid) and PMU_FORMAT_ATTR(preset)
+> +	 * in the perf attributes defined in coresight-etm-perf.c.
+> +	 * configid uses bits 63:32 of attr->config2, preset uses bits 3:0 of attr->config.
+> +	 * A zero configid means no configuration active, preset = 0 means no preset selected.
+> +	 */
+> +	if (attr->config2 & GENMASK_ULL(63, 32)) {
+> +		cfg_hash = (u32)(attr->config2 >> 32);
+> +		preset = attr->config & 0xF;
+> +		ret = cscfg_csdev_enable_active_config(csdev, cfg_hash, preset);
+> +	}
+> +
+>  out:
+>  	return ret;
+>  }
+> @@ -584,7 +603,7 @@ static int etm4_enable_perf(struct coresight_device *csdev,
+>  	}
+>  
+>  	/* Configure the tracer based on the session's specifics */
+> -	ret = etm4_parse_event_config(drvdata, event);
+> +	ret = etm4_parse_event_config(csdev, event);
+>  	if (ret)
+>  		goto out;
+>  	/* And enable it */
+> @@ -715,11 +734,18 @@ static int etm4_disable_perf(struct coresight_device *csdev,
+>  	u32 control;
+>  	struct etm_filters *filters = event->hw.addr_filters;
+>  	struct etmv4_drvdata *drvdata = dev_get_drvdata(csdev->dev.parent);
+> +	struct perf_event_attr *attr = &event->attr;
+>  
+>  	if (WARN_ON_ONCE(drvdata->cpu != smp_processor_id()))
+>  		return -EINVAL;
+>  
+>  	etm4_disable_hw(drvdata);
+> +	/*
+> +	 * The config_id occupies bits 63:32 of the config2 perf event attr
+> +	 * field. If this is non-zero then we will have enabled a config.
+> +	 */
+> +	if (attr->config2 & GENMASK_ULL(63, 32))
+> +		cscfg_csdev_disable_active_config(csdev);
+>  
+>  	/*
+>  	 * Check if the start/stop logic was active when the unit was stopped.
+> @@ -1831,6 +1857,13 @@ static int etm4_probe(struct device *dev, void __iomem *base, u32 etm_pid)
+>  		return ret;
+>  	}
+>  
+> +	/* register with config infrastructure & load any current features */
+> +	ret = etm4_cscfg_register(drvdata->csdev, dev_name(dev));
+> +	if (ret) {
+> +		coresight_unregister(drvdata->csdev);
+> +		return ret;
+> +	}
+> +
+>  	etmdrvdata[drvdata->cpu] = drvdata;
+>  
+>  	dev_info(&drvdata->csdev->dev, "CPU%d: ETM v%d.%d initialized\n",
+> @@ -1918,6 +1951,7 @@ static int __exit etm4_remove_dev(struct etmv4_drvdata *drvdata)
+>  
+>  	cpus_read_unlock();
+>  
+> +	cscfg_unregister_csdev(drvdata->csdev);
+>  	coresight_unregister(drvdata->csdev);
+>  
+>  	return 0;
+> diff --git a/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c b/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
+> index 0995a10790f4..71593b605bd5 100644
+> --- a/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
+> +++ b/drivers/hwtracing/coresight/coresight-etm4x-sysfs.c
+> @@ -9,6 +9,7 @@
+>  #include <linux/sysfs.h>
+>  #include "coresight-etm4x.h"
+>  #include "coresight-priv.h"
+> +#include "coresight-syscfg.h"
+>  
+>  static int etm4_set_mode_exclude(struct etmv4_drvdata *drvdata, bool exclude)
+>  {
+> @@ -269,6 +270,8 @@ static ssize_t reset_store(struct device *dev,
+>  
+>  	spin_unlock(&drvdata->spinlock);
+>  
+> +	cscfg_csdev_reset_feats(to_coresight_device(dev));
+> +
+>  	return size;
+>  }
+>  static DEVICE_ATTR_WO(reset);
+> -- 
+> 2.17.1
+> 
