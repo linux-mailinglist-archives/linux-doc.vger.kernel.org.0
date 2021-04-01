@@ -2,136 +2,308 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7F8013518C3
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 19:49:28 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7431E35180F
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 19:48:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236842AbhDARre (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 13:47:34 -0400
-Received: from mail.kernel.org ([198.145.29.99]:42944 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S235596AbhDARnA (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 1 Apr 2021 13:43:00 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 0398561285;
-        Thu,  1 Apr 2021 14:07:31 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1617286054;
-        bh=V9bgGYiXE/LDBTtHWvl7WWQChZzjc4Q9/uN+D4DIQy0=;
-        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
-        b=EOF9Y/ffwJdLpVX103cX18Q3xPEvwbjUOBxWoJakgB0+ZUiWZBijfZ+bnYgMESBUk
-         0k/HgFAi3Wwk/R1XtRMpAhFU2su5ZHMBU+xO2Ph2VFV5FKZW0fpFuFgb5x3bg/gId9
-         nWg83yDf4xdEnfZcPgMxtrSWXkjeW3kZjGkCAN9L87o3hNjU5pMIJA/CAxDpnb/jsC
-         Rs195DiAnGhJ9UsWS26pcpcYv6koBJTVFQiSpW9DdOByGyKBiqfJulxtBLDkkupDYq
-         6tVeoKcLiVUkJRYA0ReZCa5kn+rpxZhLU4ce88Pr+jR5x7MO2h4GncVNEl+IDkhd6J
-         p9DZgt1NYdCOg==
-Date:   Thu, 1 Apr 2021 16:07:29 +0200
-From:   Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-To:     Andrew Lunn <andrew@lunn.ch>
-Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        "David S. Miller" <davem@davemloft.net>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Benedikt Spranger <b.spranger@linutronix.de>,
-        Florian Fainelli <f.fainelli@gmail.com>,
-        Hyunchul Lee <hyc.lee@gmail.com>,
-        Namjae Jeon <namjae.jeon@samsung.com>,
-        Ronnie Sahlberg <lsahlber@redhat.com>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Steve French <stfrench@microsoft.com>,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 30/32] Documentation: net: dsa: update configuration.rst
- reference
-Message-ID: <20210401160729.6ee45872@coco.lan>
-In-Reply-To: <YGW/a8FuCO+Q6hEg@lunn.ch>
-References: <cover.1617279355.git.mchehab+huawei@kernel.org>
-        <a3d52c1380624f34b4a04e9698f67e1e6d8d23f8.1617279356.git.mchehab+huawei@kernel.org>
-        <YGW/a8FuCO+Q6hEg@lunn.ch>
-X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-redhat-linux-gnu)
+        id S234414AbhDARnf (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 13:43:35 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57260 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234418AbhDARhR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 13:37:17 -0400
+Received: from mail-pj1-x1033.google.com (mail-pj1-x1033.google.com [IPv6:2607:f8b0:4864:20::1033])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB155C031145
+        for <linux-doc@vger.kernel.org>; Thu,  1 Apr 2021 09:43:16 -0700 (PDT)
+Received: by mail-pj1-x1033.google.com with SMTP id lr1-20020a17090b4b81b02900ea0a3f38c1so4985451pjb.0
+        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 09:43:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=9kXrOvZONIFORzF1gr1KYSrBPGnVSir3zJQM6INvU0c=;
+        b=UYTI2Z+XERu2McjjUV04jXIH/tJEVfD74dnF479gOXCxIwNj89UzCQfJANLtUcSMCo
+         ZfVtPNhQGVPNLtH1nHjnkfyVjL3Vr6yUtivC7fqVxbmgas5Xqr5uZyUX1SR099gSnUBL
+         186fg3T8c1jJwHEcwtzwkFjYTZRfcu4WZ+fg+yZqTqxMTX+Zp9KFJ5yWxeA2JB3Xa/8s
+         Z+Bj3/sfrmlT7mKQN7b0qD7Ec+hBdi0GuKr5+z4IiqQLk9J+V6tKeEHxzElp0hjBBg/i
+         4WjOOi+LW9oLjIt7Ck5/pEcg0Mg9/nLjULJUrvqWwN/Lu8lZVFJ34pDJefqfiRj0Plr/
+         f9DA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=9kXrOvZONIFORzF1gr1KYSrBPGnVSir3zJQM6INvU0c=;
+        b=PHcMCPARk7PK5CO7GfejVbw5yuenCKwonXR+oggc/v9ky4CyiTMWKhwPPuRLyaUK65
+         +1M4CkTmRJXqgNIpVOS3rvmlO6dVjz1CWPfOHW0oyuUtWTXbFk/AnYCNFGiJwdaJBSV0
+         aT70Kq4ovAqdmo4x9yKMWqOMPNnVuh9c5PDe7XLNQhb3nRX5D6NVOgERd2V7xisCT+r5
+         XTCFSzbbtG6lUh4uCSz8FGKG853LZ788gShbwYEgV3p53JTBhHraF0RXcS5zymbN89x6
+         5FXACRfQFcaKOAiyaydr9/Xnq4ngLEGXpcOJG2Cuw0YaqqCxpPBXmGqfyq6eGzzSG++5
+         fNdQ==
+X-Gm-Message-State: AOAM533kc3QJoFZalrRfyU1TvPsGju4kgszgY5FUJQ0MdDLAQOUEhQwE
+        nF2QwqseYXj105NTEEPnSGeBXg==
+X-Google-Smtp-Source: ABdhPJzlWF9LMWoYEoTpbDoszDeb2D+rJZVO0dKqePivBWRYnod6rpVFi8kvTiB4De7ZF6XMuAsrEw==
+X-Received: by 2002:a17:90a:f403:: with SMTP id ch3mr9741454pjb.126.1617295396385;
+        Thu, 01 Apr 2021 09:43:16 -0700 (PDT)
+Received: from xps15 (S0106889e681aac74.cg.shawcable.net. [68.147.0.187])
+        by smtp.gmail.com with ESMTPSA id 205sm6204905pfc.201.2021.04.01.09.43.14
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 01 Apr 2021 09:43:15 -0700 (PDT)
+Date:   Thu, 1 Apr 2021 10:43:13 -0600
+From:   Mathieu Poirier <mathieu.poirier@linaro.org>
+To:     Mike Leach <mike.leach@linaro.org>
+Cc:     linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org,
+        linux-doc@vger.kernel.org, suzuki.poulose@arm.com,
+        yabinc@google.com, corbet@lwn.net, leo.yan@linaro.org,
+        alexander.shishkin@linux.intel.com, tingwei@codeaurora.org,
+        gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v5 05/10] coresight: syscfg: Add API to activate and
+ enable configurations
+Message-ID: <20210401164313.GA145043@xps15>
+References: <20210316180400.7184-1-mike.leach@linaro.org>
+ <20210316180400.7184-6-mike.leach@linaro.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20210316180400.7184-6-mike.leach@linaro.org>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Em Thu, 1 Apr 2021 14:41:15 +0200
-Andrew Lunn <andrew@lunn.ch> escreveu:
-
-> On Thu, Apr 01, 2021 at 02:17:50PM +0200, Mauro Carvalho Chehab wrote:
-> > The file name: Documentation/configuration.txt
-> > should be, instead: Documentation/networking/dsa/configuration.rst.
-> > 
-> > Update its cross-reference accordingly.
-> > 
-> > Fixes: 75b8988dfe83 ("cifsd: add server handler for central processing and tranport layers")
-> > Fixes: 58dd7a8d9d02 ("Documentation: net: dsa: Describe DSA switch configuration")
-> > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> > ---
-> >  Documentation/filesystems/cifs/cifsd.rst | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > 
-> > diff --git a/Documentation/filesystems/cifs/cifsd.rst b/Documentation/filesystems/cifs/cifsd.rst
-> > index 48ae58f2a53c..082a839535e7 100644
-> > --- a/Documentation/filesystems/cifs/cifsd.rst
-> > +++ b/Documentation/filesystems/cifs/cifsd.rst
-> > @@ -114,7 +114,7 @@ How to run
-> >  	# ksmbd.adduser -a <Enter USERNAME for SMB share access>
-> >  
-> >  3. Create /etc/ksmbd/smb.conf file, add SMB share in smb.conf file
-> > -	- Refer smb.conf.example and Documentation/configuration.txt
-> > +	- Refer smb.conf.example and Documentation/networking/dsa/configuration.rst
-> >  	  in ksmbd-tools  
+On Tue, Mar 16, 2021 at 06:03:55PM +0000, Mike Leach wrote:
+> Configurations are first activated, then when any coresight device is
+> enabled, the active configurations are checked and any matching
+> one is enabled.
 > 
-> Hi Mauro
+> This patch provides the activation / enable API.
 > 
-> This looks wrong. There is no relationship between SMB and DSA. I
-> suspect you are looking for some other configuration.txt
+> Signed-off-by: Mike Leach <mike.leach@linaro.org>
+> ---
+>  .../hwtracing/coresight/coresight-config.h    |   2 +
+>  .../hwtracing/coresight/coresight-syscfg.c    | 122 ++++++++++++++++++
+>  .../hwtracing/coresight/coresight-syscfg.h    |   8 ++
+>  include/linux/coresight.h                     |   2 +
+>  4 files changed, 134 insertions(+)
+>
 
-Thanks for reviewing it.
-
-I'll drop the patch from my series.
-
-After re-reading cifsd.rst, I suspect that it is actually trying to
-refer to:
-
-	https://github.com/cifsd-team/ksmbd-tools/blob/master/Documentation/configuration.txt
-
-and not to a local file.
-
-So, IMO, the right thing to do is to apply the enclosed patch instead.
-	
-
-Thanks,
-Mauro
-
-[PATCH] docs: cifsd: change the reference to configuration.txt
-
-Changeset 75b8988dfe83 ("cifsd: add server handler for central processing and tranport layers")
-added documentation for cifsd. There, it points to a file
-named:
-	Documentation/configuration.txt
-
-This confuses Kernel scripts, as they think that this is a
-document within the Kernel tree, instead of a file from
-some other place.
-
-Replace it by an hyperlink to the ksmbd-tools tree, in order
-to avoid false-positives.
-
-Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-
-diff --git a/Documentation/filesystems/cifs/cifsd.rst b/Documentation/filesystems/cifs/cifsd.rst
-index 48ae58f2a53c..a6ab85e68252 100644
---- a/Documentation/filesystems/cifs/cifsd.rst
-+++ b/Documentation/filesystems/cifs/cifsd.rst
-@@ -114,8 +114,8 @@ How to run
- 	# ksmbd.adduser -a <Enter USERNAME for SMB share access>
+Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
  
- 3. Create /etc/ksmbd/smb.conf file, add SMB share in smb.conf file
--	- Refer smb.conf.example and Documentation/configuration.txt
--	  in ksmbd-tools
-+	- Refer smb.conf.example and
-+	  https://github.com/cifsd-team/ksmbd-tools/blob/master/Documentation/configuration.txt
- 
- 4. Insert ksmbd.ko module
- 
-
-
+> diff --git a/drivers/hwtracing/coresight/coresight-config.h b/drivers/hwtracing/coresight/coresight-config.h
+> index 38fd1c71eb05..f1a5957a25c9 100644
+> --- a/drivers/hwtracing/coresight/coresight-config.h
+> +++ b/drivers/hwtracing/coresight/coresight-config.h
+> @@ -127,6 +127,7 @@ struct cscfg_feature_desc {
+>   * @nr_total_params:	Sum of all parameters declared by used features
+>   * @presets:		Array of preset values.
+>   * @event_ea:		Extended attribute for perf event value
+> + * @active_cnt:		ref count for activate on this configuration.
+>   *
+>   */
+>  struct cscfg_config_desc {
+> @@ -139,6 +140,7 @@ struct cscfg_config_desc {
+>  	int nr_total_params;
+>  	const u64 *presets; /* nr_presets * nr_total_params */
+>  	struct dev_ext_attribute *event_ea;
+> +	atomic_t active_cnt;
+>  };
+>  
+>  /**
+> diff --git a/drivers/hwtracing/coresight/coresight-syscfg.c b/drivers/hwtracing/coresight/coresight-syscfg.c
+> index 03014a2142c1..c44746d6cd6d 100644
+> --- a/drivers/hwtracing/coresight/coresight-syscfg.c
+> +++ b/drivers/hwtracing/coresight/coresight-syscfg.c
+> @@ -284,6 +284,7 @@ static int cscfg_load_config(struct cscfg_config_desc *config_desc)
+>  		return err;
+>  
+>  	list_add(&config_desc->item, &cscfg_mgr->config_desc_list);
+> +	atomic_set(&config_desc->active_cnt, 0);
+>  	return 0;
+>  }
+>  
+> @@ -451,6 +452,126 @@ void cscfg_unregister_csdev(struct coresight_device *csdev)
+>  }
+>  EXPORT_SYMBOL_GPL(cscfg_unregister_csdev);
+>  
+> +void cscfg_csdev_reset_feats(struct coresight_device *csdev)
+> +{
+> +	struct cscfg_feature_csdev *feat_csdev;
+> +
+> +	mutex_lock(&cscfg_csdev_mutex);
+> +	if (list_empty(&csdev->feature_csdev_list))
+> +		goto unlock_exit;
+> +
+> +	list_for_each_entry(feat_csdev, &csdev->feature_csdev_list, node)
+> +		cscfg_reset_feat(feat_csdev);
+> +
+> +unlock_exit:
+> +	mutex_unlock(&cscfg_csdev_mutex);
+> +}
+> +EXPORT_SYMBOL_GPL(cscfg_csdev_reset_feats);
+> +
+> +/**
+> + * Mark a config descriptor as active.
+> + * This will be seen when csdev devices are activated in the system.
+> + *
+> + * Selection by hash value - generated from the configuration name when it
+> + * was loaded and added to the cs_etm/configurations file system for selection
+> + * by perf.
+> + *
+> + * @cfg_hash: Hash value of the selected configuration name.
+> + */
+> +int cscfg_activate_config(unsigned long cfg_hash)
+> +{
+> +	struct cscfg_config_desc *config_desc;
+> +	int err = -EINVAL;
+> +
+> +	mutex_lock(&cscfg_mutex);
+> +
+> +	list_for_each_entry(config_desc, &cscfg_mgr->config_desc_list, item) {
+> +		if ((unsigned long)config_desc->event_ea->var == cfg_hash) {
+> +			/*
+> +			 * increment the global active count - control changes to
+> +			 * active configurations
+> +			 */
+> +			atomic_inc(&cscfg_mgr->sys_active_cnt);
+> +
+> +			/*
+> +			 * mark the descriptor as active so enable config on a
+> +			 * device instance will use it
+> +			 */
+> +			atomic_inc(&config_desc->active_cnt);
+> +
+> +			err = 0;
+> +			dev_dbg(cscfg_device(), "Activate config %s.\n", config_desc->name);
+> +			break;
+> +		}
+> +	}
+> +	mutex_unlock(&cscfg_mutex);
+> +
+> +	return err;
+> +}
+> +EXPORT_SYMBOL_GPL(cscfg_activate_config);
+> +
+> +void cscfg_deactivate_config(unsigned long cfg_hash)
+> +{
+> +	struct cscfg_config_desc *config_desc;
+> +
+> +	mutex_lock(&cscfg_mutex);
+> +
+> +	list_for_each_entry(config_desc, &cscfg_mgr->config_desc_list, item) {
+> +		if ((unsigned long)config_desc->event_ea->var == cfg_hash) {
+> +			atomic_dec(&config_desc->active_cnt);
+> +			atomic_dec(&cscfg_mgr->sys_active_cnt);
+> +			dev_dbg(cscfg_device(), "Deactivate config %s.\n", config_desc->name);
+> +			break;
+> +		}
+> +	}
+> +	mutex_unlock(&cscfg_mutex);
+> +}
+> +EXPORT_SYMBOL_GPL(cscfg_deactivate_config);
+> +
+> +/* Find and program any active config for the supplied device.*/
+> +int cscfg_csdev_enable_active_config(struct coresight_device *csdev,
+> +				     unsigned long cfg_hash, int preset)
+> +{
+> +	struct cscfg_config_csdev *config_csdev_active = NULL, *config_csdev_item;
+> +	const struct cscfg_config_desc *config_desc;
+> +	int err = 0;
+> +
+> +	/* quickly check global count */
+> +	if (!atomic_read(&cscfg_mgr->sys_active_cnt))
+> +		return 0;
+> +
+> +	mutex_lock(&cscfg_csdev_mutex);
+> +	list_for_each_entry(config_csdev_item, &csdev->config_csdev_list, node) {
+> +		config_desc = config_csdev_item->config_desc;
+> +		if ((atomic_read(&config_desc->active_cnt)) &&
+> +		    ((unsigned long)config_desc->event_ea->var == cfg_hash)) {
+> +			config_csdev_active = config_csdev_item;
+> +			break;
+> +		}
+> +	}
+> +	if (config_csdev_active) {
+> +		err = cscfg_csdev_enable_config(config_csdev_active, preset);
+> +		if (!err)
+> +			csdev->active_cscfg_ctxt = (void *)config_csdev_active;
+> +	}
+> +	mutex_unlock(&cscfg_csdev_mutex);
+> +	return err;
+> +}
+> +EXPORT_SYMBOL_GPL(cscfg_csdev_enable_active_config);
+> +
+> +/* save and disable the active config for the device */
+> +void cscfg_csdev_disable_active_config(struct coresight_device *csdev)
+> +{
+> +	struct cscfg_config_csdev *config_csdev;
+> +
+> +	mutex_lock(&cscfg_csdev_mutex);
+> +	config_csdev = (struct cscfg_config_csdev *)csdev->active_cscfg_ctxt;
+> +	if (config_csdev)
+> +		cscfg_csdev_disable_config(config_csdev);
+> +	mutex_unlock(&cscfg_csdev_mutex);
+> +}
+> +EXPORT_SYMBOL_GPL(cscfg_csdev_disable_active_config);
+> +
+>  /* Initialise system configuration management device. */
+>  
+>  struct device *cscfg_device(void)
+> @@ -519,6 +640,7 @@ int __init cscfg_init(void)
+>  	INIT_LIST_HEAD(&cscfg_mgr->csdev_desc_list);
+>  	INIT_LIST_HEAD(&cscfg_mgr->feat_desc_list);
+>  	INIT_LIST_HEAD(&cscfg_mgr->config_desc_list);
+> +	atomic_set(&cscfg_mgr->sys_active_cnt, 0);
+>  
+>  	dev_info(cscfg_device(), "CoreSight Configuration manager initialised");
+>  	return 0;
+> diff --git a/drivers/hwtracing/coresight/coresight-syscfg.h b/drivers/hwtracing/coresight/coresight-syscfg.h
+> index 5bcae3b374c6..a52775890670 100644
+> --- a/drivers/hwtracing/coresight/coresight-syscfg.h
+> +++ b/drivers/hwtracing/coresight/coresight-syscfg.h
+> @@ -24,12 +24,14 @@
+>   * @csdev_desc_list:	List of coresight devices registered with the configuration manager.
+>   * @feat_desc_list:	List of feature descriptors to load into registered devices.
+>   * @config_desc_list:	List of system configuration descriptors to load into registered devices.
+> + * @sys_active_cnt:	Total number of active config descriptor references.
+>   */
+>  struct cscfg_manager {
+>  	struct device dev;
+>  	struct list_head csdev_desc_list;
+>  	struct list_head feat_desc_list;
+>  	struct list_head config_desc_list;
+> +	atomic_t sys_active_cnt;
+>  };
+>  
+>  /* get reference to dev in cscfg_manager */
+> @@ -61,5 +63,11 @@ int cscfg_load_config_sets(struct cscfg_config_desc **cfg_descs,
+>  int cscfg_register_csdev(struct coresight_device *csdev, u32 match_flags,
+>  			 struct cscfg_csdev_feat_ops *ops);
+>  void cscfg_unregister_csdev(struct coresight_device *csdev);
+> +int cscfg_activate_config(unsigned long cfg_hash);
+> +void cscfg_deactivate_config(unsigned long cfg_hash);
+> +void cscfg_csdev_reset_feats(struct coresight_device *csdev);
+> +int cscfg_csdev_enable_active_config(struct coresight_device *csdev,
+> +				     unsigned long cfg_hash, int preset);
+> +void cscfg_csdev_disable_active_config(struct coresight_device *csdev);
+>  
+>  #endif /* CORESIGHT_SYSCFG_H */
+> diff --git a/include/linux/coresight.h b/include/linux/coresight.h
+> index d0126ed326a6..a3b39ce2d6ef 100644
+> --- a/include/linux/coresight.h
+> +++ b/include/linux/coresight.h
+> @@ -221,6 +221,7 @@ struct coresight_sysfs_link {
+>   * @has_conns_grp: Have added a "connections" group for sysfs links.
+>   * @feature_csdev_list: List of complex feature programming added to the device.
+>   * @config_csdev_list:  List of system configurations added to the device.
+> + * @active_cscfg_ctxt:  Context information for current active system configuration.
+>   */
+>  struct coresight_device {
+>  	struct coresight_platform_data *pdata;
+> @@ -245,6 +246,7 @@ struct coresight_device {
+>  	/* system configuration and feature lists */
+>  	struct list_head feature_csdev_list;
+>  	struct list_head config_csdev_list;
+> +	void *active_cscfg_ctxt;
+>  };
+>  
+>  /*
+> -- 
+> 2.17.1
+> 
