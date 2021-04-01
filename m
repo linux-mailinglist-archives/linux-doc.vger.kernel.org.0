@@ -2,106 +2,87 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 52F31350ED0
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 08:04:23 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id D16B3350FC5
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 09:06:43 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233050AbhDAGDu (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 02:03:50 -0400
-Received: from mail.kernel.org ([198.145.29.99]:45352 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233219AbhDAGDk (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 1 Apr 2021 02:03:40 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id 5C04461055;
-        Thu,  1 Apr 2021 06:03:39 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1617257019;
-        bh=xt6GQYsb58xuQ6PPnQZNlaKyr1g0GjRYBFrfAuKY2t8=;
-        h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-        b=p1Qt48hXISX/0tFEftpS56HuuzWK2yhF8NA6tlN9DbOlNoRic99mX4UqP85MlVPC+
-         /wD/PmfERDh5wOjvraogBFYLnf0LRsOE9QKfOrcgjXqMwX1xwuJo62xwTYse0Zw8dB
-         GzWE0pO3I/UDUaiA5JGffU2/M9qXqmYaIDyuTUdYdeEPq827TGHwLjvgcIrtZDzJb0
-         oEiC+HE6KHGa1SdyGn8z+FD7mDFUgVNkSJCTwb+XcS3KzibyfWK1f8vsapZcAgH9e1
-         zpLPnXmR3P5w6xLmYqO2YXih4YGc2w6F/KSBotAWogQaiG2lhnEbcYGD2P0Bmubnoq
-         vTlmBPA7bbDwQ==
-Date:   Wed, 31 Mar 2021 23:03:37 -0700
-From:   Eric Biggers <ebiggers@kernel.org>
-To:     Jarkko Sakkinen <jarkko@kernel.org>
-Cc:     Herbert Xu <herbert@gondor.apana.org.au>,
-        David Gstir <david@sigma-star.at>,
-        Sumit Garg <sumit.garg@linaro.org>,
-        Ahmad Fatoum <a.fatoum@pengutronix.de>,
-        Mimi Zohar <zohar@linux.ibm.com>,
-        Horia =?utf-8?Q?Geant=C4=83?= <horia.geanta@nxp.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        David Howells <dhowells@redhat.com>,
-        James Bottomley <jejb@linux.ibm.com>,
-        "kernel@pengutronix.de" <kernel@pengutronix.de>,
-        James Morris <jmorris@namei.org>,
-        "Serge E. Hallyn" <serge@hallyn.com>,
-        Aymen Sghaier <aymen.sghaier@nxp.com>,
-        "David S. Miller" <davem@davemloft.net>,
-        Udit Agarwal <udit.agarwal@nxp.com>,
-        Jan Luebbe <j.luebbe@pengutronix.de>,
-        Franck Lenormand <franck.lenormand@nxp.com>,
-        "keyrings@vger.kernel.org" <keyrings@vger.kernel.org>,
-        "linux-crypto@vger.kernel.org" <linux-crypto@vger.kernel.org>,
-        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
-        "linux-integrity@vger.kernel.org" <linux-integrity@vger.kernel.org>,
-        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>,
-        "linux-security-module@vger.kernel.org" 
-        <linux-security-module@vger.kernel.org>
-Subject: Re: [PATCH v1 3/3] KEYS: trusted: Introduce support for NXP
- CAAM-based trusted keys
-Message-ID: <YGViOc3DG+Pjuur6@sol.localdomain>
-References: <CAFA6WYOw_mQwOUN=onhzb7zCTyYDBrcx0E7C3LRk6nPLAVCWEQ@mail.gmail.com>
- <557b92d2-f3b8-d136-7431-419429f0e059@pengutronix.de>
- <CAFA6WYNE44=Y7Erfc-xNtOrf7TkJjh+odmYH5vzhEHR6KqBfeQ@mail.gmail.com>
- <6F812C20-7585-4718-997E-0306C4118468@sigma-star.at>
- <YGDpA4yPWmTWEyx+@kernel.org>
- <YGOcZtkw3ZM5kvl6@gmail.com>
- <YGUGYi4Q3Uxyol6r@kernel.org>
- <YGUHBelwhvJDhKoo@gmail.com>
- <20210401011132.GB4349@gondor.apana.org.au>
- <YGVfDUHunGC44iuH@kernel.org>
+        id S233371AbhDAHGL (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 03:06:11 -0400
+Received: from [43.250.32.171] ([43.250.32.171]:61882 "EHLO email.cn"
+        rhost-flags-FAIL-FAIL-OK-FAIL) by vger.kernel.org with ESMTP
+        id S229539AbhDAHFo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Apr 2021 03:05:44 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
+        s=dkim; h=Date:From:To; bh=0QB4h50hZuLr3iOwOaq9YirqUfeGldMZUeHOZ
+        5T6QQQ=; b=lGIPIG2Oy8Svvvbx8cICMNUH0wdia0y9FU8YThwS4m1THj6ZEXE9J
+        +QoOpCs96Em651oOCwZZ6qikCQcnmkGbADVuNddqm8VFOgxURZzrmwhijKHjAIwG
+        0jzBrb62NilPzJAQ2O64WQr8qX5qmO9P1tz3RA+7Gr9ipwib3udwUY=
+Received: from mipc (unknown [120.238.248.129])
+        by v_coremail2-frontend-1 (Coremail) with SMTP id LCKnCgB36c+7cGVgxqBFAA--.24088S2;
+        Thu, 01 Apr 2021 15:05:33 +0800 (CST)
+Date:   Thu, 1 Apr 2021 15:05:31 +0800
+From:   Wu XiangCheng <bobwxc@email.cn>
+To:     Alex Shi <alexs@kernel.org>
+Cc:     Alex Shi <seakeel@gmail.com>,
+        Alex Shi <alex.shi@linux.alibaba.com>,
+        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
+Subject: [PATCH 0/5] docs/zh_CN: Add translations in zh_CN/doc-guide/
+Message-ID: <cover.1617260163.git.bobwxc@email.cn>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <YGVfDUHunGC44iuH@kernel.org>
+X-today: happy
+User-Agent: Mutt/1.10.1 (2018-07-13)
+X-CM-TRANSID: LCKnCgB36c+7cGVgxqBFAA--.24088S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7WFWrKFyDtw15Cr4fCw1DAwb_yoW8Jw1rpF
+        45KryfG3Wqyr13Kw1fWFWUCF1rCa1xuws5K34Iqw1Fqr95Kr4vqrWDKry2gFZxJr10vFn8
+        ZF4Fkr4Uu34UAFJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUgab7Iv0xC_Cr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
+        cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
+        v20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j6r4UM28EF7xvwVC2
+        z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j6F4UJwAS0I0E0x
+        vYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VCjz48v1sIEY20_
+        Cr1UJr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAKI48JMxkIecxEwVAFwVW8CwCF04
+        k20xvY0x0EwIxGrwCF04k20xvE74AGY7Cv6cx26F4UJr1UMxC20s026xCaFVCjc4AY6r1j
+        6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17CEb7
+        AF67AKxVWUAVWUtwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF0xvE
+        2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcV
+        C2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73
+        UjIFyTuYvjxUUJ5rDUUUU
+X-Originating-IP: [120.238.248.129]
+X-CM-SenderInfo: pere453f6hztlloou0/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu, Apr 01, 2021 at 08:50:05AM +0300, Jarkko Sakkinen wrote:
-> On Thu, Apr 01, 2021 at 12:11:32PM +1100, Herbert Xu wrote:
-> > On Wed, Mar 31, 2021 at 04:34:29PM -0700, Eric Biggers wrote:
-> > > On Thu, Apr 01, 2021 at 02:31:46AM +0300, Jarkko Sakkinen wrote:
-> > > > 
-> > > > It's a bummer but uapi is the god in the end. Since TPM does not do it
-> > > > today, that behaviour must be supported forever. That's why a boot option
-> > > > AND a warning would be the best compromise.
-> > > 
-> > > It's not UAPI if there is no way for userspace to tell if it changed.
-> > 
-> > Exactly.  UAPI is only an issue if something *breaks*.
-> 
-> If there's even one user that comes shouting that he has a user space
-> configuration, where e.g. rng entropy is consumed constantly and the
-> code assumes that trusted keys does not add to that, then something
-> would break.
-> 
-> It would be a crap user space yes, but I don't want to go on reverting
-> because of that. I think there is small but still existing chance that
-> something could break.
+Hi all,
 
-random.c no longer provides any interfaces that subtract entropy credits, as
-that was never something that made sense.  So "consuming" all the entropy from
-random.c isn't a thing anymore.
+This set of patches add some translations in zh_CN/doc-guide/
 
-> 
-> Why not just add a boot parameter instead of making brutal enforcing
-> changes, indirectly visible to the user space?
+Thanks!
 
-Why not just fix this bug instead of providing an option to fix it that everyone
-will need to remember to provide?
+base: next tree
+  commit 3501c960dfda ("docs/zh_CN: Add translations in zh_CN/kernel-hacking/")
 
-- Eric
+Wu XiangCheng (5):
+  docs/zh_CN: Add translation zh_CN/doc-guide/index.rst
+  docs/zh_CN: Link zh_CN/doc-guide to zh_CN/index.rst
+  docs/zh_CN: Add translation zh_CN/doc-guide/sphinx.rst
+  docs/zh_CN: Add two image example files
+  docs/zh_CN: Add translation zh_CN/doc-guide/kernel-doc.rst
+
+ .../translations/zh_CN/doc-guide/hello.dot    |   3 +
+ .../translations/zh_CN/doc-guide/index.rst    |  30 ++
+ .../zh_CN/doc-guide/kernel-doc.rst            | 497 ++++++++++++++++++
+ .../translations/zh_CN/doc-guide/sphinx.rst   | 415 +++++++++++++++
+ .../zh_CN/doc-guide/svg_image.svg             |  10 +
+ Documentation/translations/zh_CN/index.rst    |   1 +
+ 6 files changed, 956 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/doc-guide/hello.dot
+ create mode 100644 Documentation/translations/zh_CN/doc-guide/index.rst
+ create mode 100644 Documentation/translations/zh_CN/doc-guide/kernel-doc.rst
+ create mode 100644 Documentation/translations/zh_CN/doc-guide/sphinx.rst
+ create mode 100644 Documentation/translations/zh_CN/doc-guide/svg_image.svg
+
+-- 
+2.20.1
+
