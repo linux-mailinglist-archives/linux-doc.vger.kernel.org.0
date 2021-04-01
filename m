@@ -2,144 +2,164 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 1802535181C
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 19:48:15 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 7EFB3351825
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 19:48:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234442AbhDARoC (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 13:44:02 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:57208 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234670AbhDARjG (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 13:39:06 -0400
-Received: from mail-pj1-x1035.google.com (mail-pj1-x1035.google.com [IPv6:2607:f8b0:4864:20::1035])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 90FABC031169
-        for <linux-doc@vger.kernel.org>; Thu,  1 Apr 2021 09:53:56 -0700 (PDT)
-Received: by mail-pj1-x1035.google.com with SMTP id lr1-20020a17090b4b81b02900ea0a3f38c1so4998894pjb.0
-        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 09:53:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=opZpqvsKBsI6VYq138fXrWfaN6YGeUQyxcS+8w6v06c=;
-        b=zyQRNsvsA9LyQidoA1ch2aMxTysyo4s72aUu6/nXPD6YOT0doXN4COWofYcRSdBXLK
-         fxF7ePO8YBbA1bIPzpxIL0mmgajnn9eT1XlKIN97lsNhc3y0oYb2Lc7icx3Pf1aDnzr/
-         +sx6AW/ZGNo25YgzOQIuE2/r1Xa7zEAVi42VDyPxtHWv/I6nbOnZkFcsjCerQny1sT2m
-         0mqdRRXI9xNjCtMgAyv3B0b9OjMphUbiH66QnOihnMF49qQi7b+6pOyrz3GpriebnP6o
-         BxZ22EI/QELKYnvdueqv8l3eg41xRX6W6NRgn3R7SNZLJEFcJ1sg2FO9uaocJwzuouqG
-         n02Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=opZpqvsKBsI6VYq138fXrWfaN6YGeUQyxcS+8w6v06c=;
-        b=MM/DIV4TmKuwz26rvZAVi7+txYZtxF5fF705MdA/Jtb9hOELbWpjDEvpACXrk7VNML
-         xelV9RjEElSOLgbLnncXyUtVFRdwBbOtP8uaGM/1YUSrNf/WC+9WR86mlxv0bz9JSQ/i
-         5jXYUHTxTY3kOMDhi/dxRX7UlLIgs3gxvYMg+NcB/kkw3Bj+YoaNdz11E1td5O3IJzU1
-         K/LbguPyQg6/jWjeksccPyr4r1Mjo1AUFYuTMaRmzVm4P4ZfylfZVOQMYUB4w5FASnB9
-         6IeSCF5JChG7m0+ek61zZlYtvsDksnTRCapLxiyVF4iha6ltWx1ZS7ikWdCE6MljO6UN
-         Inwg==
-X-Gm-Message-State: AOAM530kv7VqeUXbQS82W6PemnCb+FrwRV9CN1hL0tVCGlwaR21QtR9g
-        BUremGQ8VF/ccNXBDqzG8if9Lg==
-X-Google-Smtp-Source: ABdhPJzebmFG08KQlbsAdWpiNfw7N9cydtdTFMIvPyPRVFw/mXPRQEzgELZQ7HN3vPDPmXw8q9kobQ==
-X-Received: by 2002:a17:902:7d95:b029:e7:3780:3c5f with SMTP id a21-20020a1709027d95b02900e737803c5fmr8793961plm.59.1617296036123;
-        Thu, 01 Apr 2021 09:53:56 -0700 (PDT)
-Received: from xps15 (S0106889e681aac74.cg.shawcable.net. [68.147.0.187])
-        by smtp.gmail.com with ESMTPSA id j10sm5817403pjs.11.2021.04.01.09.53.54
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Thu, 01 Apr 2021 09:53:55 -0700 (PDT)
-Date:   Thu, 1 Apr 2021 10:53:53 -0600
-From:   Mathieu Poirier <mathieu.poirier@linaro.org>
-To:     Mike Leach <mike.leach@linaro.org>
-Cc:     linux-arm-kernel@lists.infradead.org, coresight@lists.linaro.org,
-        linux-doc@vger.kernel.org, suzuki.poulose@arm.com,
-        yabinc@google.com, corbet@lwn.net, leo.yan@linaro.org,
-        alexander.shishkin@linux.intel.com, tingwei@codeaurora.org,
-        gregkh@linuxfoundation.org, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH v5 06/10] coresight: etm-perf: Update to activate
- selected configuration
-Message-ID: <20210401165353.GB145043@xps15>
-References: <20210316180400.7184-1-mike.leach@linaro.org>
- <20210316180400.7184-7-mike.leach@linaro.org>
+        id S235029AbhDARoI (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 13:44:08 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:51996 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S234875AbhDARlA (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 13:41:00 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1617298859;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=/DmKnXvfMsDsqJmp2i9gQ0b8U5NbC/IHrSRuv8yD1DA=;
+        b=EDCvX8Tqy5VbjSFVP0JOe4Fl2p7SJNVsUjni3YJaUkQMGYci99DoL56iXwcyCS7yByS90P
+        zIHrnUlW3St0/4rqRR2otEOrd9iIGpUEEk00SxQp96jy9mDuyNldF+nyFm6/2rptioh7yJ
+        rcS169/Didxe7pMBxkJX0nJE1M4TUuo=
+Received: from mimecast-mx01.redhat.com (mimecast-mx01.redhat.com
+ [209.132.183.4]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-534-O5uQh4liNO-3fml1QQs6rQ-1; Thu, 01 Apr 2021 13:10:31 -0400
+X-MC-Unique: O5uQh4liNO-3fml1QQs6rQ-1
+Received: from smtp.corp.redhat.com (int-mx01.intmail.prod.int.phx2.redhat.com [10.5.11.11])
+        (using TLSv1.2 with cipher AECDH-AES256-SHA (256/256 bits))
+        (No client certificate requested)
+        by mimecast-mx01.redhat.com (Postfix) with ESMTPS id E1DF7817469;
+        Thu,  1 Apr 2021 17:10:29 +0000 (UTC)
+Received: from starship (unknown [10.35.206.58])
+        by smtp.corp.redhat.com (Postfix) with ESMTP id 2172C59469;
+        Thu,  1 Apr 2021 17:10:25 +0000 (UTC)
+Message-ID: <0b3a93e3d1ba6a89da327b93be2ecf47f22010d4.camel@redhat.com>
+Subject: Re: [PATCH 4/6] KVM: x86: Introduce KVM_GET_SREGS2 / KVM_SET_SREGS2
+From:   Maxim Levitsky <mlevitsk@redhat.com>
+To:     Paolo Bonzini <pbonzini@redhat.com>, kvm@vger.kernel.org
+Cc:     "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        Jim Mattson <jmattson@google.com>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Sean Christopherson <seanjc@google.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        "open list:X86 ARCHITECTURE (32-BIT AND 64-BIT)" 
+        <linux-kernel@vger.kernel.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Borislav Petkov <bp@alien8.de>, Ingo Molnar <mingo@redhat.com>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
+Date:   Thu, 01 Apr 2021 20:10:24 +0300
+In-Reply-To: <b1a36c94-6dd5-88ef-a503-f6d91eb2d267@redhat.com>
+References: <20210401141814.1029036-1-mlevitsk@redhat.com>
+         <20210401141814.1029036-5-mlevitsk@redhat.com>
+         <b1a36c94-6dd5-88ef-a503-f6d91eb2d267@redhat.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.36.5 (3.36.5-2.fc32) 
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210316180400.7184-7-mike.leach@linaro.org>
+Content-Transfer-Encoding: 7bit
+X-Scanned-By: MIMEDefang 2.79 on 10.5.11.11
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Mar 16, 2021 at 06:03:56PM +0000, Mike Leach wrote:
-> Add calls to activate the selected configuration as perf starts
-> and stops the tracing session.
+On Thu, 2021-04-01 at 16:44 +0200, Paolo Bonzini wrote:
+> Just a quick review on the API:
 > 
-> Signed-off-by: Mike Leach <mike.leach@linaro.org>
-> Reviewed-by: Suzuki K Poulose <suzuki.poulose@arm.com>
+> On 01/04/21 16:18, Maxim Levitsky wrote:
+> > +struct kvm_sregs2 {
+> > +	/* out (KVM_GET_SREGS2) / in (KVM_SET_SREGS2) */
+> > +	struct kvm_segment cs, ds, es, fs, gs, ss;
+> > +	struct kvm_segment tr, ldt;
+> > +	struct kvm_dtable gdt, idt;
+> > +	__u64 cr0, cr2, cr3, cr4, cr8;
+> > +	__u64 efer;
+> > +	__u64 apic_base;
+> > +	__u64 flags; /* must be zero*/
+> 
+> I think it would make sense to define a flag bit for the PDPTRs, so that 
+> userspace can use KVM_SET_SREGS2 unconditionally (e.g. even when 
+> migrating from a source that uses KVM_GET_SREGS and therefore doesn't 
+> provide the PDPTRs).
+Yes, I didn't think about this case! I'll add this to the next version.
+Thanks!
 
-Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
+> 
+> > +	__u64 pdptrs[4];
+> > +	__u64 padding;
+> 
+> No need to add padding; if we add more fields in the future we can use 
+> the flags to determine the length of the userspace data, similar to 
+> KVM_GET/SET_NESTED_STATE.
+Got it, will fix. I added it just in case.
 
-> ---
->  drivers/hwtracing/coresight/coresight-etm-perf.c | 14 +++++++++++++-
->  drivers/hwtracing/coresight/coresight-etm-perf.h |  2 ++
->  2 files changed, 15 insertions(+), 1 deletion(-)
 > 
-> diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.c b/drivers/hwtracing/coresight/coresight-etm-perf.c
-> index 66bda452a2f4..9128f59864a8 100644
-> --- a/drivers/hwtracing/coresight/coresight-etm-perf.c
-> +++ b/drivers/hwtracing/coresight/coresight-etm-perf.c
-> @@ -196,6 +196,10 @@ static void free_event_data(struct work_struct *work)
->  	/* Free the sink buffers, if there are any */
->  	free_sink_buffer(event_data);
->  
-> +	/* clear any configuration we were using */
-> +	if (event_data->cfg_hash)
-> +		cscfg_deactivate_config(event_data->cfg_hash);
-> +
->  	for_each_cpu(cpu, mask) {
->  		struct list_head **ppath;
->  
-> @@ -254,7 +258,7 @@ static void etm_free_aux(void *data)
->  static void *etm_setup_aux(struct perf_event *event, void **pages,
->  			   int nr_pages, bool overwrite)
->  {
-> -	u32 id;
-> +	u32 id, cfg_hash;
->  	int cpu = event->cpu;
->  	cpumask_t *mask;
->  	struct coresight_device *sink = NULL;
-> @@ -271,6 +275,14 @@ static void *etm_setup_aux(struct perf_event *event, void **pages,
->  		sink = coresight_get_sink_by_id(id);
->  	}
->  
-> +	/* check if user wants a coresight configuration selected */
-> +	cfg_hash = (u32)((event->attr.config2 & GENMASK_ULL(63, 32)) >> 32);
-> +	if (cfg_hash) {
-> +		if (cscfg_activate_config(cfg_hash))
-> +			goto err;
-> +		event_data->cfg_hash = cfg_hash;
-> +	}
-> +
->  	mask = &event_data->mask;
->  
->  	/*
-> diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.h b/drivers/hwtracing/coresight/coresight-etm-perf.h
-> index ba617fe2217e..468f7799ab4f 100644
-> --- a/drivers/hwtracing/coresight/coresight-etm-perf.h
-> +++ b/drivers/hwtracing/coresight/coresight-etm-perf.h
-> @@ -49,12 +49,14 @@ struct etm_filters {
->   * @work:		Handle to free allocated memory outside IRQ context.
->   * @mask:		Hold the CPU(s) this event was set for.
->   * @snk_config:		The sink configuration.
-> + * @cfg_hash:		The hash id of any coresight config selected.
->   * @path:		An array of path, each slot for one CPU.
->   */
->  struct etm_event_data {
->  	struct work_struct work;
->  	cpumask_t mask;
->  	void *snk_config;
-> +	u32 cfg_hash;
->  	struct list_head * __percpu *path;
->  };
->  
-> -- 
-> 2.17.1
 > 
+> > +	idx = srcu_read_lock(&vcpu->kvm->srcu);
+> > +	if (is_pae_paging(vcpu)) {
+> > +		for (i = 0 ; i < 4 ; i++)
+> > +			kvm_pdptr_write(vcpu, i, sregs2->pdptrs[i]);
+> > +		kvm_register_mark_dirty(vcpu, VCPU_EXREG_PDPTR);
+> > +		mmu_reset_needed = 1;
+> > +	}
+> > +	srcu_read_unlock(&vcpu->kvm->srcu, idx);
+> > +
+> 
+> SRCU should not be needed here?
+
+I haven't yet studied in depth the locking that is used in the kvm,
+so I put this to be on the safe side.
+
+I looked at it a bit and it looks like the pdptr reading code takes
+this lock because it accesses the memslots, which is not done here,
+and therefore the lock is indeed not needed here.
+
+I need to study in depth how locking is done in kvm to be 100% sure
+about this.
+
+
+> 
+> > +	case KVM_GET_SREGS2: {
+> > +		u.sregs2 = kzalloc(sizeof(struct kvm_sregs2), GFP_KERNEL_ACCOUNT);
+> > +		r = -ENOMEM;
+> > +		if (!u.sregs2)
+> > +			goto out;
+> 
+> No need to account, I think it's a little slower and this allocation is 
+> very short lived.
+Right, I will fix this in the next version.
+
+> 
+> >  #define KVM_CAP_PPC_DAWR1 194
+> > +#define KVM_CAP_SREGS2 196
+> 
+> 195, not 196.
+
+I am also planning to add KVM_CAP_SET_GUEST_DEBUG2 for which I
+used 195.
+Prior to sending I rebased all of my patch series on top of kvm/queue,
+but I kept the numbers just in case.
+
+> 
+> >  #define KVM_XEN_VCPU_GET_ATTR	_IOWR(KVMIO, 0xca, struct kvm_xen_vcpu_attr)
+> >  #define KVM_XEN_VCPU_SET_ATTR	_IOW(KVMIO,  0xcb, struct kvm_xen_vcpu_attr)
+> > +
+> > +#define KVM_GET_SREGS2             _IOR(KVMIO,  0xca, struct kvm_sregs2)
+> > +#define KVM_SET_SREGS2             _IOW(KVMIO,  0xcb, struct kvm_sregs2)
+> > +
+> 
+> It's not exactly overlapping, but please bump the ioctls to 0xcc/0xcd.
+Will do.
+
+
+Thanks a lot for the review!
+
+Best regards,
+	Maxim Levitsky
+
+> 
+> Paolo
+> 
+
+
