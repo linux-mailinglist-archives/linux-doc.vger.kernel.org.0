@@ -2,53 +2,53 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5EFE5350E3E
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 06:51:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 21E11350E40
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 06:53:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229459AbhDAEvD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 00:51:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34126 "EHLO
+        id S229539AbhDAEwk (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 00:52:40 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34426 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229473AbhDAEu6 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 00:50:58 -0400
-Received: from mail-pl1-x62d.google.com (mail-pl1-x62d.google.com [IPv6:2607:f8b0:4864:20::62d])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A61D5C0613E6
-        for <linux-doc@vger.kernel.org>; Wed, 31 Mar 2021 21:50:58 -0700 (PDT)
-Received: by mail-pl1-x62d.google.com with SMTP id v23so384520ple.9
-        for <linux-doc@vger.kernel.org>; Wed, 31 Mar 2021 21:50:58 -0700 (PDT)
+        with ESMTP id S230073AbhDAEwi (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 00:52:38 -0400
+Received: from mail-pg1-x533.google.com (mail-pg1-x533.google.com [IPv6:2607:f8b0:4864:20::533])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id CCCC6C0613E6
+        for <linux-doc@vger.kernel.org>; Wed, 31 Mar 2021 21:52:16 -0700 (PDT)
+Received: by mail-pg1-x533.google.com with SMTP id f3so829440pgv.0
+        for <linux-doc@vger.kernel.org>; Wed, 31 Mar 2021 21:52:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=gmail.com; s=20161025;
         h=subject:to:cc:references:from:message-id:date:user-agent
          :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=BNhnx+YHhs8tH/pj9QD72Lhn3WrXUvAiea+xkauqTAA=;
-        b=VfaTyiE2ptpxaH472ReSuJSZKhdj6m3BZrPUHuR9uXBjOgW1mZYiBMchb4J9MhTqb4
-         w6pNQJGLKYmpmeOrYATb37koibVrSepKoFNHH8eweVSVx2VnRuKSCPqVtDkkBv7pZfUT
-         6euiFcfA4vBnfqfgq/cuACHKKAL4uXuk0mUD5yX9988oY8ZYJGByginDqWOfiU4hha+X
-         FzdrUrQnIETF7rBd4tgvDX75kc8TuoGdBHc58k10VGL56X7msULyVa66Q+v9ix5Fz9/5
-         J0IaTXspX2PL6ZD3K6p46CYNRw+Ll3Uhjbs+nY2UqvlJ2AMt49Jf+6eBFedCedaRG0Xj
-         S/oQ==
+        bh=UhwdD2gO8nOO5tCisCra55ciclH3EOXOGC4jrUducKI=;
+        b=hdfHC7QTmuGTQw16+4IoCNmVizFFqyOy9/DiE411SYTWdUz3zvNnNR5mA1zg+BMrGG
+         7cr+NZUlaxnRwgisBTGpMKb76RQnqnfaNSA978opBv1FFKUifkWnmQsNzWya3ojBym8A
+         mqjYq1PMFW3rd8swwa7PjdQJGiWKvh+M+l1sEu2g1zM4Y13h3asbh0IAv5laKPCY7snu
+         pRk7zpTSralFtxUFl4GrZ///bQPir/u7lOyFoVyi4dAYbKQHyWEkWGhv18plEvxBqXsX
+         wfSi1S8hsUPJMMIFN4rh15vH7ow0sXSXKa/+JOT7/oYcrzROpdE4/IA2HyaWEgj8rRKw
+         z0Zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
         h=x-gm-message-state:subject:to:cc:references:from:message-id:date
          :user-agent:mime-version:in-reply-to:content-language
          :content-transfer-encoding;
-        bh=BNhnx+YHhs8tH/pj9QD72Lhn3WrXUvAiea+xkauqTAA=;
-        b=V5hHlkMAKxEK3hg40uF9PsSXzgxzHgHixWho2/ajkopPIJGaBjzK0bUBjt0VZTETQ/
-         c9hkmjtcqnyLCFxe3N6aiJPfKeVoQBDEMNuvCqmGYu5w/6ndi0SEix2eG/1lK7gvAkcZ
-         6k1FgiAkOAPCULmOfP2KKuTQ1tYxBNz4rHFZXKxoiculztCicPXvqFjOZOdf5Zc/Psx/
-         Aej0l04lMNhyMJIROid1auRcjc/Gbgfy0zxeo+XIG/Doy6nF++FUzdh6E+ATyTxSf28j
-         7I/m0gBX3XImhqQfqx2huyyJgZZb/1D7bOJR/u69L523y0Q0ycQO5w3rxJTmE2KToOPO
-         Euyg==
-X-Gm-Message-State: AOAM531ziIDp4Ib2MQejoaf9UFy8oAZU/pIfBViWouqRfscXwcHXPf7F
-        wBe/6EFD3pCRuzTgIMWVxvc=
-X-Google-Smtp-Source: ABdhPJx4JTZdjulJ3lLu/V/CJM7yT5CbSBFJXXRMuYYn4z5DpHzUJ97n3Mg51VlIZQ6LSkmnUsLTxg==
-X-Received: by 2002:a17:90a:f005:: with SMTP id bt5mr7169031pjb.127.1617252658296;
-        Wed, 31 Mar 2021 21:50:58 -0700 (PDT)
+        bh=UhwdD2gO8nOO5tCisCra55ciclH3EOXOGC4jrUducKI=;
+        b=WvCGkkJOg4shlsM9AjP0tIxc5tHH3hyxVwXj2Of9JcqOmSaLZiG0mznI/smiUGUNm5
+         vS89iWtXX9kXGmZ1ZxXCwkwSWwk6qCX/3jVVjLc3DbcFSMY6dQ6oJz71kb7d4px9QYNN
+         XwxjcooXmkCVKeLmWKw3NcbgL3gR8yxcA8YAKISOVL5myYV3Mxh8i+eYufnymdyRel/O
+         C0M7KajDIDl2PZ10KpgfkQWj08TpEJhN4RZLyDjjafZRy0yUwzRurHOtDitH4g7Wvdet
+         V+lT98MPG4KSClK+Nu5vWcECIQVMtzJLTV6fNEIMAaptF5mEGgWHpzVbH+rTO1ujDsfF
+         VNVg==
+X-Gm-Message-State: AOAM530eibyxynxOQxbG10pM+zUztaRMsT3aqOZWnBYrGyS9Vvfonvh3
+        tx2ZNU6PLG/BZtZt44L1IO4=
+X-Google-Smtp-Source: ABdhPJzK9d3cQgEbTrM2PkMgUVbNCHbqdL3x0Vge0sXvx0ovAbUUB3XuX27QvLbCgRIhNwkNWehazA==
+X-Received: by 2002:a63:41c6:: with SMTP id o189mr6050655pga.118.1617252736439;
+        Wed, 31 Mar 2021 21:52:16 -0700 (PDT)
 Received: from [192.168.2.225] (93.179.119.173.16clouds.com. [93.179.119.173])
-        by smtp.gmail.com with ESMTPSA id o134sm3828697pfd.113.2021.03.31.21.50.54
+        by smtp.gmail.com with ESMTPSA id 138sm3800672pfv.192.2021.03.31.21.52.12
         (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Wed, 31 Mar 2021 21:50:58 -0700 (PDT)
-Subject: Re: [PATCH v3 6/8] docs/zh_CN: add mips to zh_CN index
+        Wed, 31 Mar 2021 21:52:16 -0700 (PDT)
+Subject: Re: [PATCH v3 7/8] docs/zh_CN: add iio to zh_CN index
 To:     Yanteng Si <siyanteng@loongson.cn>,
         Jonathan Corbet <corbet@lwn.net>
 Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <alex.shi@linux.alibaba.com>,
@@ -57,14 +57,14 @@ Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <alex.shi@linux.alibaba.com>,
         Harry Wei <harryxiyou@gmail.com>, linux-doc@vger.kernel.org,
         realpuyuwang@gmail.com, siyanteng01@gmail.com
 References: <20210330114728.2680-1-siyanteng@loongson.cn>
- <20210330114728.2680-7-siyanteng@loongson.cn>
+ <20210330114728.2680-8-siyanteng@loongson.cn>
 From:   Alex Shi <seakeel@gmail.com>
-Message-ID: <e55cc1a7-ea1d-6ce6-01f7-ede978982c5f@gmail.com>
-Date:   Thu, 1 Apr 2021 12:50:52 +0800
+Message-ID: <e2f17519-acce-1587-4893-4f4b8be2a0be@gmail.com>
+Date:   Thu, 1 Apr 2021 12:52:10 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
  Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210330114728.2680-7-siyanteng@loongson.cn>
+In-Reply-To: <20210330114728.2680-8-siyanteng@loongson.cn>
 Content-Type: text/plain; charset=utf-8
 Content-Language: en-US
 Content-Transfer-Encoding: 8bit
@@ -75,7 +75,7 @@ X-Mailing-List: linux-doc@vger.kernel.org
 Reviewed-by: Alex Shi <alexs@kernel.org>
 
 On 2021/3/30 下午7:47, Yanteng Si wrote:
-> All the files in the mips directory have been translated into
+> All the files in the iio directory have been translated into
 > Chinese and it is time to add them to the zh_CN index.
 > 
 > Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
@@ -84,14 +84,14 @@ On 2021/3/30 下午7:47, Yanteng Si wrote:
 >  1 file changed, 1 insertion(+)
 > 
 > diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
-> index cd55c1aea604..16641203dc88 100644
+> index 16641203dc88..51c50f319487 100644
 > --- a/Documentation/translations/zh_CN/index.rst
 > +++ b/Documentation/translations/zh_CN/index.rst
-> @@ -22,6 +22,7 @@
->     arm64/index
+> @@ -23,6 +23,7 @@
 >     sound/index
 >     cpu-freq/index
-> +   mips/index
+>     mips/index
+> +   iio/index
 >  
 >  目录和表格
 >  ----------
