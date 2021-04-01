@@ -2,147 +2,88 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id D1528351962
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:02:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 8A640351B28
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:08:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235449AbhDARxG (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 13:53:06 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([216.205.24.124]:45728 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S236498AbhDARpR (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 13:45:17 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1617299116;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=5cXKDMg3hKjPJQxwPGQ5ktY0E9OHOmBfWVuhkV+IFpg=;
-        b=H7g0bcsE7OmJVh8n14J+ms3Zdmj2YSUOYKffGCc00W01mGQ5tGBxIu1lRrxMnFZxD2qTK5
-        qvrtNKddmsY09u3BU/R5OebARg0m0LilhKILEQWRPDUPN1hCcNVN7Ig7z7koyiRywBBaQg
-        FCtqEl/AxbDzlrW2kT9NWGXWx/1o5nc=
-Received: from mail-ej1-f70.google.com (mail-ej1-f70.google.com
- [209.85.218.70]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-451-0UV8chBxNRCK6aEJQepffA-1; Thu, 01 Apr 2021 10:44:17 -0400
-X-MC-Unique: 0UV8chBxNRCK6aEJQepffA-1
-Received: by mail-ej1-f70.google.com with SMTP id h14so2322101ejg.7
-        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 07:44:17 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:to:cc:references:from:subject:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=5cXKDMg3hKjPJQxwPGQ5ktY0E9OHOmBfWVuhkV+IFpg=;
-        b=oIzsXhzlvPUcDgnPZdCmgQ8UcylaXWGeUJwZdrHTcCPGd7DxmK/TA4rEKNC8sOrrQM
-         RknwNqbB8z1XZNMUF1J0zgKOTVd5lsVGjGHda2cbFSlgCLwIW44jc9nJpSLDWcYwQYZF
-         XZTTJXOTw+3GbRyNMvNez7UmbJd10gRhzfKefpm2MnO9gIp76/VFV6osj5k9bRYGKrDs
-         plHxGhr+nNX9NxPJiV8QXPD5ASzM0iqCGG5cn2pwIfYENTQobgZ06mUW/z8xCvxnAKQ1
-         XYYuehKrNCY7ESSIuan+6EnaHZtrBmcYKeRDRKqvOKZsS2v11NO6hsJ5wgKd+Z+7Xbp9
-         t8hg==
-X-Gm-Message-State: AOAM530QNpL2YEXevNbXVTD65ZQC+DjWh81KYU6SYJYEPX3mfEnAhmtD
-        IIREpQ0JdCCiT4jproWgrk6zZvdJY4pdj0Gc4oTh9rJ6f4ylyzgE2pUK8opHQkIHYqPqpzAuD6c
-        3qLS7+KzIIfgyDtdSS+wdQVGzf1aT7JNq3EuhAhAVW5odx/yTye86aCzLGn9GueduNOaUG2lk
-X-Received: by 2002:a17:906:7cc:: with SMTP id m12mr9198958ejc.171.1617288255583;
-        Thu, 01 Apr 2021 07:44:15 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJxBvqVmNf7jxxrmZVvbLGCfGGoUZuyyx3hDl4qqpBdw1aJqT1wubt4ceARSA8kiv/b6Aoi4tw==
-X-Received: by 2002:a17:906:7cc:: with SMTP id m12mr9198931ejc.171.1617288255332;
-        Thu, 01 Apr 2021 07:44:15 -0700 (PDT)
-Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a? ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
-        by smtp.gmail.com with ESMTPSA id si3sm2877618ejb.90.2021.04.01.07.44.14
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 01 Apr 2021 07:44:14 -0700 (PDT)
-To:     Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org
-Cc:     "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
-        Jim Mattson <jmattson@google.com>,
-        Vitaly Kuznetsov <vkuznets@redhat.com>,
-        Wanpeng Li <wanpengli@tencent.com>,
-        Sean Christopherson <seanjc@google.com>,
-        Joerg Roedel <joro@8bytes.org>,
-        "H. Peter Anvin" <hpa@zytor.com>,
-        "open list:X86 ARCHITECTURE (32-BIT AND 64-BIT)" 
-        <linux-kernel@vger.kernel.org>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Borislav Petkov <bp@alien8.de>, Ingo Molnar <mingo@redhat.com>,
-        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>
-References: <20210401141814.1029036-1-mlevitsk@redhat.com>
- <20210401141814.1029036-5-mlevitsk@redhat.com>
-From:   Paolo Bonzini <pbonzini@redhat.com>
-Subject: Re: [PATCH 4/6] KVM: x86: Introduce KVM_GET_SREGS2 / KVM_SET_SREGS2
-Message-ID: <b1a36c94-6dd5-88ef-a503-f6d91eb2d267@redhat.com>
-Date:   Thu, 1 Apr 2021 16:44:13 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+        id S234558AbhDASGg (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 14:06:36 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34008 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S235093AbhDASBg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 14:01:36 -0400
+Received: from perceval.ideasonboard.com (perceval.ideasonboard.com [IPv6:2001:4b98:dc2:55:216:3eff:fef7:d647])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 7C9AAC02FE95;
+        Thu,  1 Apr 2021 09:01:45 -0700 (PDT)
+Received: from [192.168.0.20] (cpc89244-aztw30-2-0-cust3082.18-1.cable.virginm.net [86.31.172.11])
+        by perceval.ideasonboard.com (Postfix) with ESMTPSA id D94A589B;
+        Thu,  1 Apr 2021 18:01:40 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ideasonboard.com;
+        s=mail; t=1617292901;
+        bh=9PpGK5DYSDHyjsBaiZozxLkq3MRlWpOKUyVcUk0phsM=;
+        h=Reply-To:Subject:To:Cc:References:From:Date:In-Reply-To:From;
+        b=Uiw4WeVEXPnxxHr7LLQidTggt4sWeyauxEFAhUcE0FUK7yFqCD2KdFq8rV2lw76U+
+         gkiQAf9iyDxgO+JlkvUSWu9vQgIxmbPZXOwy0enYuP9Xrh4qz4q8Vgxrc2Yoag0hry
+         2siBoSR0PL/6S54FPzmolSfRMU2WcluNHE9owqUg=
+Reply-To: kieran.bingham+renesas@ideasonboard.com
+Subject: Re: [PATCH 24/32] MAINTAINERS: update imi,rdacm2x-gmsl.yaml reference
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Jacopo Mondi <jacopo+renesas@jmondi.org>,
+        Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>,
+        Rob Herring <robh@kernel.org>,
+        Sakari Ailus <sakari.ailus@linux.intel.com>,
+        linux-kernel@vger.kernel.org
+References: <cover.1617279355.git.mchehab+huawei@kernel.org>
+ <b03a41b5051b6cb115b2aa9c3d610e75d84dcfea.1617279356.git.mchehab+huawei@kernel.org>
+From:   Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
+Organization: Ideas on Board
+Message-ID: <aee4c49c-04f8-c553-63ce-868c46ade0e8@ideasonboard.com>
+Date:   Thu, 1 Apr 2021 17:01:38 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
-In-Reply-To: <20210401141814.1029036-5-mlevitsk@redhat.com>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
+In-Reply-To: <b03a41b5051b6cb115b2aa9c3d610e75d84dcfea.1617279356.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Just a quick review on the API:
+Hi Mauro,
 
-On 01/04/21 16:18, Maxim Levitsky wrote:
-> +struct kvm_sregs2 {
-> +	/* out (KVM_GET_SREGS2) / in (KVM_SET_SREGS2) */
-> +	struct kvm_segment cs, ds, es, fs, gs, ss;
-> +	struct kvm_segment tr, ldt;
-> +	struct kvm_dtable gdt, idt;
-> +	__u64 cr0, cr2, cr3, cr4, cr8;
-> +	__u64 efer;
-> +	__u64 apic_base;
-> +	__u64 flags; /* must be zero*/
-
-I think it would make sense to define a flag bit for the PDPTRs, so that 
-userspace can use KVM_SET_SREGS2 unconditionally (e.g. even when 
-migrating from a source that uses KVM_GET_SREGS and therefore doesn't 
-provide the PDPTRs).
-
-> +	__u64 pdptrs[4];
-> +	__u64 padding;
-
-No need to add padding; if we add more fields in the future we can use 
-the flags to determine the length of the userspace data, similar to 
-KVM_GET/SET_NESTED_STATE.
-
-
+On 01/04/2021 13:17, Mauro Carvalho Chehab wrote:
+> The file name: Documentation/devicetree/bindings/media/i2c/rdacm2x-gmsl.yaml
+> should be, instead: Documentation/devicetree/bindings/media/i2c/imi,rdacm2x-gmsl.yaml.
 > 
-> +	idx = srcu_read_lock(&vcpu->kvm->srcu);
-> +	if (is_pae_paging(vcpu)) {
-> +		for (i = 0 ; i < 4 ; i++)
-> +			kvm_pdptr_write(vcpu, i, sregs2->pdptrs[i]);
-> +		kvm_register_mark_dirty(vcpu, VCPU_EXREG_PDPTR);
-> +		mmu_reset_needed = 1;
-> +	}
-> +	srcu_read_unlock(&vcpu->kvm->srcu, idx);
-> +
+> Update its cross-reference accordingly.
+> 
+> Fixes: 34009bffc1c6 ("media: i2c: Add RDACM20 driver")
+> Fixes: e9f817689789 ("media: dt-bindings: media: i2c: Add bindings for IMI RDACM2x")
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 
-SRCU should not be needed here?
+Indeed, confirmed,
 
-> +	case KVM_GET_SREGS2: {
-> +		u.sregs2 = kzalloc(sizeof(struct kvm_sregs2), GFP_KERNEL_ACCOUNT);
-> +		r = -ENOMEM;
-> +		if (!u.sregs2)
-> +			goto out;
+Reviewed-by: Kieran Bingham <kieran.bingham+renesas@ideasonboard.com>
 
-No need to account, I think it's a little slower and this allocation is 
-very short lived.
 
->  #define KVM_CAP_PPC_DAWR1 194
-> +#define KVM_CAP_SREGS2 196
-
-195, not 196.
-
->  #define KVM_XEN_VCPU_GET_ATTR	_IOWR(KVMIO, 0xca, struct kvm_xen_vcpu_attr)
->  #define KVM_XEN_VCPU_SET_ATTR	_IOW(KVMIO,  0xcb, struct kvm_xen_vcpu_attr)
-> +
-> +#define KVM_GET_SREGS2             _IOR(KVMIO,  0xca, struct kvm_sregs2)
-> +#define KVM_SET_SREGS2             _IOW(KVMIO,  0xcb, struct kvm_sregs2)
-> +
-
-It's not exactly overlapping, but please bump the ioctls to 0xcc/0xcd.
-
-Paolo
+> ---
+>  MAINTAINERS | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 1644b6e9697c..b405ee71f730 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -15258,7 +15258,7 @@ M:	Laurent Pinchart <laurent.pinchart+renesas@ideasonboard.com>
+>  M:	Niklas Söderlund <niklas.soderlund+renesas@ragnatech.se>
+>  L:	linux-media@vger.kernel.org
+>  S:	Maintained
+> -F:	Documentation/devicetree/bindings/media/i2c/rdacm2x-gmsl.yaml
+> +F:	Documentation/devicetree/bindings/media/i2c/imi,rdacm2x-gmsl.yaml
+>  F:	drivers/media/i2c/max9271.c
+>  F:	drivers/media/i2c/max9271.h
+>  F:	drivers/media/i2c/rdacm21.c
+> 
 
