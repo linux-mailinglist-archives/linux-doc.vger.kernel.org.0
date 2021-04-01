@@ -2,156 +2,142 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 730D2351F7B
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 21:19:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 270FF351FD2
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 21:29:26 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S234726AbhDATTr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 15:19:47 -0400
-Received: from us-smtp-delivery-124.mimecast.com ([63.128.21.124]:39162 "EHLO
-        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S234256AbhDATT0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 15:19:26 -0400
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-        s=mimecast20190719; t=1617304766;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:content-transfer-encoding:
-         in-reply-to:in-reply-to:references:references;
-        bh=pLIGaRQ2nVUk6jR5DNrqt8tHu2ni4xLrfo2kj5QLFek=;
-        b=WNon9R8z9KW5c0b1rrhLXmV0ilK7mogven7OboMbVAyjKrjIRHWZyufzLIfGDUL0W8dZws
-        OVRjLX36t2qoqsy8XLMfJChpPAW52C11SFQS63iBHzSIPfx6aqbB05GglUa4v6DiLaHK0r
-        dafvIfF74oqETb5Wb9YISGMEvfV6cJc=
-Received: from mail-ed1-f72.google.com (mail-ed1-f72.google.com
- [209.85.208.72]) (Using TLS) by relay.mimecast.com with ESMTP id
- us-mta-544-MpHV2Z7WM3udTFA-deo8NA-1; Thu, 01 Apr 2021 15:18:49 -0400
-X-MC-Unique: MpHV2Z7WM3udTFA-deo8NA-1
-Received: by mail-ed1-f72.google.com with SMTP id i6so3331027edq.12
-        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 12:18:48 -0700 (PDT)
+        id S235189AbhDAT3X (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 15:29:23 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:53338 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S235433AbhDAT3M (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 15:29:12 -0400
+Received: from mail-io1-xd34.google.com (mail-io1-xd34.google.com [IPv6:2607:f8b0:4864:20::d34])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id E2332C0613E6
+        for <linux-doc@vger.kernel.org>; Thu,  1 Apr 2021 12:21:13 -0700 (PDT)
+Received: by mail-io1-xd34.google.com with SMTP id n198so1059904iod.0
+        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 12:21:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=google.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=898Op6M40JinO4D3cznUkQtr1L0luSLau7chpWc5uKg=;
+        b=ZHtLYWtQ+FqDVYKZTHwxwCgUSMGSoQwWB3jcqgznkK+uvYCZl71pVwy5ATKWFW+awD
+         RSsxcenvm4NI2KyYWaJUIG6gvaMfET9w4iUr92BU7UnnqyKaC+Ju011n6FIZIKYDawUS
+         RfPx0iEgWjQkSsfvtpGU74dXu9GoGZoyW0RremDQPcGSRotsSgTYpyhipkTT3zuFwni9
+         sjiPRhgr49+7DQJBGGd7WW1reLrFWvr/qNBKcAA2mu09pJ2RM+Gdf2ROLzB5obPcnu9S
+         RvCPLxzmOd4AN2AX3Z8HVq/gV/3V7zY244fX74qyZGgWcN/dIAA+Fg3WJlQfpEJEuMwR
+         wlBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=pLIGaRQ2nVUk6jR5DNrqt8tHu2ni4xLrfo2kj5QLFek=;
-        b=TaO7/IQXEmTBlpSqOlgO12O8qTQAGYNRGOCIgCdavm0o1lD9b5JZT8f2+492eyF1EP
-         YjcoxQxTWz1y8U2WhAsBhNVL+Efbr+AKd72v18sCwMsJ3IHGFEHodje1+i3wiopif4Ob
-         Gis2rdEYdLS/JRZjUag1aWOu4f4ELY/jT9rW+OsPciI9jjYL+uYWGiP0STRpVt3OWNIz
-         NUtzIO+QbktYEuo16ZFYIHfXweanvZotqqTui6InmD1RB02Cji6XG4rcdIYtRsVyep5M
-         Ee6q4ttrurkj1NhiFDXL4e9jyYm5bozGvmMwZTkbiS286clODNuF8jLbrsDZZgQ2re6D
-         vFSQ==
-X-Gm-Message-State: AOAM530Z5fxJp9NW2LFTnazY2id6HHKeiI6KXE1kNa3+8Qw/Cpn5uTRO
-        esWoc9xlUFDLzjJeC1YIZZq4fxmfKsQiGz/jr1CEc74UeZlqHK+sdBuCQwXEifyz0bP2BiRCqjL
-        Rbot5MQK3hrqjdgO0rqs/
-X-Received: by 2002:a17:906:4a50:: with SMTP id a16mr10869291ejv.256.1617304728082;
-        Thu, 01 Apr 2021 12:18:48 -0700 (PDT)
-X-Google-Smtp-Source: ABdhPJx6IIXbzUPIUIJYm5LC4yCnOpYD68MmwjpFGpCXNtZ+B5abq6NsxEaZfvoRD8IrV01ORVxgcw==
-X-Received: by 2002:a17:906:4a50:: with SMTP id a16mr10869277ejv.256.1617304727941;
-        Thu, 01 Apr 2021 12:18:47 -0700 (PDT)
-Received: from x1.localdomain (2001-1c00-0c1e-bf00-1054-9d19-e0f0-8214.cable.dynamic.v6.ziggo.nl. [2001:1c00:c1e:bf00:1054:9d19:e0f0:8214])
-        by smtp.gmail.com with ESMTPSA id g22sm3212923ejm.69.2021.04.01.12.18.47
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Thu, 01 Apr 2021 12:18:47 -0700 (PDT)
-Subject: Re: [External] Re: [PATCH 31/32] Documentation: update
- sysfs-platform_profile.rst reference
-To:     Mark Pearson <markpearson@lenovo.com>,
-        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>,
-        "Rafael J. Wysocki" <rafael.j.wysocki@intel.com>,
-        linux-kernel@vger.kernel.org
-References: <cover.1617279355.git.mchehab+huawei@kernel.org>
- <828434d891e40234255e3f06c13827b7996b1ad1.1617279356.git.mchehab+huawei@kernel.org>
- <e042f8f8-0ba1-098d-2503-8c319c3c2bf9@redhat.com>
- <79ad4a98-a70c-2f7d-3ce6-8202fcc83857@lenovo.com>
-From:   Hans de Goede <hdegoede@redhat.com>
-Message-ID: <b7b95382-de15-7a55-6931-b4f6f786cfcf@redhat.com>
-Date:   Thu, 1 Apr 2021 21:18:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.0
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=898Op6M40JinO4D3cznUkQtr1L0luSLau7chpWc5uKg=;
+        b=DwIiqx5MV1BS/+D5JHjQ9CAV85D1gdtpzu8bdzQVmqYKdsEkxBJdvvoqICl64d/WNJ
+         dTp2WcL7bFhfDLDt3ZIAaKOHvluSWKqU4iOvikcRr0XaXEne7LWftdbtw+fz1RtDv6Nl
+         3FnRuFc2pNrDLxxIMs6ik5ztx+piEotYkkAF/fCW/40fe0vL6GeT5r3DLvsnTfIqefm9
+         YWvnwhrF1CDrDMGzX0NDSlAhBjESts4IOrJ2fnJu4C2chDPuXowag+syIaYx9iL5K9CP
+         71OZALf9JD6L0kz8CwdeZQE1XW8Rl5ML/e5Fb+FXmg9AbkrUbkwVPg9eWg2JtXxS5qbV
+         /0VA==
+X-Gm-Message-State: AOAM532szAeH7lcH11NqIaConzKynhiiicLWb351+MsVAaFataj31wzr
+        op8qykUwQjgtLgZjD7VHdml7+VJ5Puw802Wfm7E/hw==
+X-Google-Smtp-Source: ABdhPJxEg/kpAy++MLYpSkRG9zcOD0RT02x3wwPiTJxd0kzs4URGTpC5xS4fYjGbFYzdClWgvc/xicYjAnIIn52b/Ng=
+X-Received: by 2002:a05:6638:388e:: with SMTP id b14mr9630881jav.62.1617304872817;
+ Thu, 01 Apr 2021 12:21:12 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <79ad4a98-a70c-2f7d-3ce6-8202fcc83857@lenovo.com>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+References: <20210326000805.2518-1-apopple@nvidia.com> <23784464.epyy5R1Yul@nvdebian>
+ <20210331115746.GA1463678@nvidia.com> <2557539.O4bb4zRkYN@nvdebian>
+In-Reply-To: <2557539.O4bb4zRkYN@nvdebian>
+From:   Shakeel Butt <shakeelb@google.com>
+Date:   Thu, 1 Apr 2021 12:21:01 -0700
+Message-ID: <CALvZod5a39kNUW3uj4z0+eYi_yfWLPEZ1BKdzbA42=E5TeEgHQ@mail.gmail.com>
+Subject: Re: [PATCH v7 3/8] mm/rmap: Split try_to_munlock from try_to_unmap
+To:     Alistair Popple <apopple@nvidia.com>,
+        Hugh Dickins <hughd@google.com>
+Cc:     Jason Gunthorpe <jgg@nvidia.com>,
+        John Hubbard <jhubbard@nvidia.com>,
+        Linux MM <linux-mm@kvack.org>, nouveau@lists.freedesktop.org,
+        bskeggs@redhat.com, Andrew Morton <akpm@linux-foundation.org>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        kvm-ppc@vger.kernel.org, dri-devel@lists.freedesktop.org,
+        rcampbell@nvidia.com,
+        =?UTF-8?B?SsOpcsO0bWUgR2xpc3Nl?= <jglisse@redhat.com>,
+        Christoph Hellwig <hch@infradead.org>, daniel@ffwll.ch,
+        Matthew Wilcox <willy@infradead.org>,
+        Christoph Hellwig <hch@lst.de>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+CC: Hugh Dickins
 
-On 4/1/21 5:07 PM, Mark Pearson wrote:
-> 
-> 
-> On 01/04/2021 09:49, Hans de Goede wrote:
->> Hi,
->>
->> On 4/1/21 2:17 PM, Mauro Carvalho Chehab wrote:
->>> The file name: Documentation/ABI/testing/sysfs-platform_profile.rst
->>> should be, instead: Documentation/userspace-api/sysfs-platform_profile.rst.
->>>
->>> Update its cross-reference accordingly.
->>>
->>> Fixes: a2ff95e018f1 ("ACPI: platform: Add platform profile support")
->>> Fixes: 8e0cbf356377 ("Documentation: Add documentation for new platform_profile sysfs attribute")
->>> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
->>
->> Thanks, patch looks good to me:
->>
->> Reviewed-by: Hans de Goede <hdegoede@redhat.com>
->>
->> Rafael, I assume you will merge this through your tree?
->>
->> Regards,
->>
->> Hans
->>
-> Looks good to me too - though I'd missed the fact the file had moved
-> somehow :)
-> 
-> Not sure if my reviewed tag has any value but if it's useful:
-> Reviewed-by: Mark Pearson <markpearson@lenovo.com>
-> 
-> Just for my education - how do things get moved from testing to
-> somewhere else, is there a decision process etc?
+On Wed, Mar 31, 2021 at 9:37 PM Alistair Popple <apopple@nvidia.com> wrote:
+>
+> On Wednesday, 31 March 2021 10:57:46 PM AEDT Jason Gunthorpe wrote:
+> > On Wed, Mar 31, 2021 at 03:15:47PM +1100, Alistair Popple wrote:
+> > > On Wednesday, 31 March 2021 2:56:38 PM AEDT John Hubbard wrote:
+> > > > On 3/30/21 3:56 PM, Alistair Popple wrote:
+> > > > ...
+> > > > >> +1 for renaming "munlock*" items to "mlock*", where applicable. good
+> > > grief.
+> > > > >
+> > > > > At least the situation was weird enough to prompt further
+> investigation :)
+> > > > >
+> > > > > Renaming to mlock* doesn't feel like the right solution to me either
+> > > though. I
+> > > > > am not sure if you saw me responding to myself earlier but I am
+> thinking
+> > > > > renaming try_to_munlock() -> page_mlocked() and try_to_munlock_one() -
+> >
+> > > > > page_mlock_one() might be better. Thoughts?
+> > > > >
+> > > >
+> > > > Quite confused by this naming idea. Because: try_to_munlock() returns
+> > > > void, so a boolean-style name such as "page_mlocked()" is already not a
+> > > > good fit.
+> > > >
+> > > > Even more important, though, is that try_to_munlock() is mlock-ing the
+> > > > page, right? Is there some subtle point I'm missing? It really is doing
+> > > > an mlock to the best of my knowledge here. Although the kerneldoc
+> > > > comment for try_to_munlock() seems questionable too:
+> > >
+> > > It's mlocking the page if it turns out it still needs to be locked after
+> > > unlocking it. But I don't think you're missing anything.
+> >
+> > It is really searching all VMA's to see if the VMA flag is set and if
+> > any are found then it mlocks the page.
+> >
+> > But presenting this rountine in its simplified form raises lots of
+> > questions:
+> >
+> >  - What locking is being used to read the VMA flag?
+> >  - Why do we need to manipulate global struct page flags under the
+> >    page table locks of a single VMA?
+>
+> I was wondering that and questioned it in an earlier version of this series. I
+> have done some digging and the commit log for b87537d9e2fe ("mm: rmap use pte
+> lock not mmap_sem to set PageMlocked") provides the original justification.
+>
+> It's fairly long so I won't quote it here but the summary seems to be that
+> among other things the combination of page lock and ptl makes this safe. I
+> have yet to verify if everything there still holds and is sensible, but the
+> last paragraph certainly is :-)
+>
+> "Stopped short of separating try_to_munlock_one() from try_to_munmap_one()
+> on this occasion, but that's probably the sensible next step - with a
+> rename, given that try_to_munlock()'s business is to try to set Mlocked."
+>
+> >  - Why do we need to check for huge pages inside the VMA loop, not
+> >    before going to the rmap? PageTransCompoundHead() is not sensitive to
+> >    the PTEs. (and what happens if the huge page breaks up concurrently?)
+> >  - Why do we clear the mlock bit then run around to try and set it?
+>
+> I don't have an answer for that as I'm not (yet) across all the mlock code
+> paths, but I'm hoping this patch at least won't change anything.
+>
 
-I'm not sure how things work with the new Documentation/userspace-api/
-dir, but with the old Documentation/ABI/testing dir things used to go
-like this (AFAICT):
+It would be good to ask the person who has the most answers?
 
-1) A new sysfs API bindings starts in Documentation/ABI/testing
-2) This sysfs API bindings then stays in Documentation/ABI/testing forever
-
-And if the bindings were actually in use by userspace then they were being
-treated as immutable / unbreakable API anyways so the testing prefix
-had very little meaning really.
-
-Which I guess may well be the reason why new the new place no
-longer has a testing prefix.
-
-Regards,
-
-Hans
-
-
-
->>> ---
->>>  include/linux/platform_profile.h | 2 +-
->>>  1 file changed, 1 insertion(+), 1 deletion(-)
->>>
->>> diff --git a/include/linux/platform_profile.h b/include/linux/platform_profile.h
->>> index a6329003aee7..e5cbb6841f3a 100644
->>> --- a/include/linux/platform_profile.h
->>> +++ b/include/linux/platform_profile.h
->>> @@ -2,7 +2,7 @@
->>>  /*
->>>   * Platform profile sysfs interface
->>>   *
->>> - * See Documentation/ABI/testing/sysfs-platform_profile.rst for more
->>> + * See Documentation/userspace-api/sysfs-platform_profile.rst for more
->>>   * information.
->>>   */
->>>  
->>>
->>
-> 
-
+Hugh, the thread started at
+https://lore.kernel.org/dri-devel/20210326000805.2518-4-apopple@nvidia.com/
