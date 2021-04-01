@@ -2,331 +2,473 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7B9023519CB
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:03:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 85047351B00
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:08:11 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235498AbhDAR43 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 13:56:29 -0400
-Received: from m34-101.88.com ([104.250.34.101]:33974 "EHLO 88.com"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S237277AbhDARvP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 1 Apr 2021 13:51:15 -0400
-X-Greylist: delayed 358 seconds by postgrey-1.27 at vger.kernel.org; Thu, 01 Apr 2021 13:51:14 EDT
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=Date:From:To; bh=ASbMt47A/MRnnixjOGpwSexCafpygq/mpK+s+
-        hHb9OA=; b=WZjjy43wATaZb7E72/AQ27h+R9Il7mePUfvid3zQkUypmMjxDxHGj
-        5dZDOLEi2KHwNUnYmsexpRvMXVNAQh13EWV6CANXkaO67oMdKwk/hZDlR4UGS9dM
-        MlYJLpQsedT6q7QtUkLFxGYqpeyWxD+w9EvqURuATMAM8P1hfWvIao=
-Received: from mipc (unknown [120.238.248.129])
-        by v_coremail2-frontend-1 (Coremail) with SMTP id LCKnCgDHOdAXzmVgkydGAA--.26878S2;
-        Thu, 01 Apr 2021 21:43:52 +0800 (CST)
-Date:   Thu, 1 Apr 2021 21:43:51 +0800
-From:   "Wu X.C." <bobwxc@email.cn>
-To:     teng sterling <sterlingteng@gmail.com>
-Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <seakeel@gmail.com>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: Re: [PATCH 3/5] docs/zh_CN: Add translation
- zh_CN/doc-guide/sphinx.rst
-Message-ID: <20210401134350.GA27759@mipc>
-References: <cover.1617260163.git.bobwxc@email.cn>
- <8e7152f494d93b9eac04ff5fce8b46f1236f1542.1617260163.git.bobwxc@email.cn>
- <CAMU9jJodfzup_-rxc7Y6Fn89MkGnsoAoY+YwCcHpzV99itB6_Q@mail.gmail.com>
+        id S237693AbhDASEK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 14:04:10 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34208 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S237557AbhDASAg (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 14:00:36 -0400
+Received: from mail-wm1-x32b.google.com (mail-wm1-x32b.google.com [IPv6:2a00:1450:4864:20::32b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 799DDC08EC67
+        for <linux-doc@vger.kernel.org>; Thu,  1 Apr 2021 06:46:11 -0700 (PDT)
+Received: by mail-wm1-x32b.google.com with SMTP id d191so1087745wmd.2
+        for <linux-doc@vger.kernel.org>; Thu, 01 Apr 2021 06:46:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=t2C9ZBZpxFUdpoBYge46oy4VcBaZCLp0NntE0LDe6hI=;
+        b=M0Aom6XfZr/NmgFX/0O6hWdAMCW+M1dqFKwiooa1d26MrQvoC6JBCz0J/If8RhgBKC
+         2jxNjYGqYuoJ+khnqb6KwB7Hrav5Cj3F8eYzDupR8CE6GU722CPYSr9qsK9DqGcg7LGl
+         XiF4R8hLFk6Vq25LfhvO630elyTEIo2umzVNtKfjIXnNYn6ZHfzw9bM7MOXpkjk1Cccc
+         jWJBGUbTjEAbqexTVMOmach7WutZv5h+ef2FGQ5G+yK5oZrV8xy4V/CveOR/gGJi/ibQ
+         yP/4QRrq4wrJdwMc8Q3FSa6U7g9OGvQTFm4Gch1b53NpY7k3QhfXWaSTOEU9ytnNn3qR
+         j4jQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=t2C9ZBZpxFUdpoBYge46oy4VcBaZCLp0NntE0LDe6hI=;
+        b=N04GxWuOcqqAsY8X94LMCA37Jzh8y6bEq04NodkPt/mpwV3jAh9jSfwVvhqCb2CjfR
+         VByuyUwRc4gzggjr/+YZO/Ml9yN1Jsx0fpSCSVYXnpBfD4iGh5Z4/zoDAFG0q91Hdbej
+         jn3i4060UXeAQ4g6SH0GjFqs+KiwMPUp4qvnSV9s03Ba9WwpOnyzdLObuKi92hoVYuPQ
+         IEKWOkgti1iFd1JzdPCVJJASn02nXxFRq8m2legUo0rrD6qutyeraAzUFhnRSnnvwffa
+         OUHcLwR28hdBZTfow6DETEWSPRPVTsPS+6IVBuHWoPhcMRoyN5B06fP1lkHMeMDciUdi
+         KiPw==
+X-Gm-Message-State: AOAM533qrxsE1OxT1gAjuUEe8goUpEoHnIkIoVrjpkqYr4JiRAjaLDuj
+        dsbQ7xP1+qwtO0LiFlsnbz0W65kW0EHcibTs26AWFQ==
+X-Google-Smtp-Source: ABdhPJyQSpNJtmTx7RTbj+kkBxtoY0CXJ7wmb8eu5YbpjkQwuR1fKep/NoHu/KAvjcZRNw2LeNGLE9kCElxG6KgxcXU=
+X-Received: by 2002:a05:600c:259:: with SMTP id 25mr8424291wmj.5.1617284770113;
+ Thu, 01 Apr 2021 06:46:10 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CAMU9jJodfzup_-rxc7Y6Fn89MkGnsoAoY+YwCcHpzV99itB6_Q@mail.gmail.com>
-User-Agent: Mutt/1.10.1 (2018-07-13)
-X-CM-TRANSID: LCKnCgDHOdAXzmVgkydGAA--.26878S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3XFWxuFy3Gw15ArWDKFWUtwb_yoWftw1DpF
-        sIg397KF4kJry8JrWxKrsrZw1akrW8AF12qF18tFyIyrnayFyDtrWjvr1rWFWxWFy8AFyj
-        vF17WrW7Cry8C3DanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-        9KBjDU0xBIdaVrnRJUUUyjb7Iv0xC_tr1lb4IE77IF4wAFc2x0x2IEx4CE42xK8VAvwI8I
-        cIk0rVWrJVCq3wA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84ACjcxK6xIIjx
-        v20xvE14v26r1j6r1xM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26r1j6r4UM28EF7xvwVC2
-        z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcx
-        kEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x8ErcxFaVAv8VWx
-        Jr1UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc2xSY4AK67AK6ry8MxAIw2
-        8IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_Cr1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_
-        Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
-        CE14v26r126r1DMIIYY7kG6xAYrwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j
-        6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWUJVW8JwCI42IY6xAIw20EY4v20xvaj40_Jr
-        0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUv
-        cSsGvfC2KfnxnUUI43ZEXa7IU5rgA7UUUUU==
-X-Originating-IP: [120.238.248.129]
-X-CM-SenderInfo: pere453f6hztlloou0/
+References: <20210316180400.7184-1-mike.leach@linaro.org> <20210316180400.7184-5-mike.leach@linaro.org>
+ <20210331204859.GA51243@xps15>
+In-Reply-To: <20210331204859.GA51243@xps15>
+From:   Mike Leach <mike.leach@linaro.org>
+Date:   Thu, 1 Apr 2021 14:45:59 +0100
+Message-ID: <CAJ9a7Vg+ua_ZBmn1Dk2U8-mkDpgEyrASgTqZ5jPXUumQMvqzAA@mail.gmail.com>
+Subject: Re: [PATCH v5 04/10] coresight: etm-perf: update to handle
+ configuration selection
+To:     Mathieu Poirier <mathieu.poirier@linaro.org>
+Cc:     linux-arm-kernel <linux-arm-kernel@lists.infradead.org>,
+        Coresight ML <coresight@lists.linaro.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        "Suzuki K. Poulose" <suzuki.poulose@arm.com>,
+        Yabin Cui <yabinc@google.com>,
+        Jonathan Corbet <corbet@lwn.net>, Leo Yan <leo.yan@linaro.org>,
+        Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+        Tingwei Zhang <tingwei@codeaurora.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hi,
+Hi Mathieu,
 
-On Thu, Apr 01, 2021 at 08:44:07PM +0800, teng sterling wrote:
-> Hi~
-> Xiang cheng
-> 
-> Wu XiangCheng <bobwxc@email.cn> 于2021年4月1日周四 下午3:08写道：
+On Wed, 31 Mar 2021 at 21:49, Mathieu Poirier
+<mathieu.poirier@linaro.org> wrote:
+>
+> On Tue, Mar 16, 2021 at 06:03:54PM +0000, Mike Leach wrote:
+> > Loaded coresight configurations are registered in the cs_etm\cs_config sub
+>
+> This changelog is obsolete - cs_config is no longer under cs_etm.
+>
+Agreed.
+
+> > directory. This extends the etm-perf code to handle these registrations,
+> > and the cs_syscfg driver to perform the registration on load.
 > >
-> > Add new translation
-> >   Documentation/translations/zh_CN/doc-guide/sphinx.rst
-> >
-> > Signed-off-by: Wu XiangCheng <bobwxc@email.cn>
+> > Signed-off-by: Mike Leach <mike.leach@linaro.org>
 > > ---
-> >  .../translations/zh_CN/doc-guide/sphinx.rst   | 415 ++++++++++++++++++
-> >  1 file changed, 415 insertions(+)
-> >  create mode 100644 Documentation/translations/zh_CN/doc-guide/sphinx.rst
+> >  .../hwtracing/coresight/coresight-config.h    |   2 +
+> >  .../hwtracing/coresight/coresight-etm-perf.c  | 139 ++++++++++++++----
+> >  .../hwtracing/coresight/coresight-etm-perf.h  |   8 +
+> >  .../hwtracing/coresight/coresight-syscfg.c    |  12 ++
+> >  4 files changed, 130 insertions(+), 31 deletions(-)
 > >
-> > diff --git a/Documentation/translations/zh_CN/doc-guide/sphinx.rst b/Documentation/translations/zh_CN/doc-guide/sphinx.rst
-> > new file mode 100644
-> > index 000000000000..6c2555c98dd3
-> > --- /dev/null
-> > +++ b/Documentation/translations/zh_CN/doc-guide/sphinx.rst
-[...]
+> > diff --git a/drivers/hwtracing/coresight/coresight-config.h b/drivers/hwtracing/coresight/coresight-config.h
+> > index f70561c1504b..38fd1c71eb05 100644
+> > --- a/drivers/hwtracing/coresight/coresight-config.h
+> > +++ b/drivers/hwtracing/coresight/coresight-config.h
+> > @@ -126,6 +126,7 @@ struct cscfg_feature_desc {
+> >   * @nr_presets:              Number of sets of presets supplied by this configuration.
+> >   * @nr_total_params: Sum of all parameters declared by used features
+> >   * @presets:         Array of preset values.
+> > + * @event_ea:                Extended attribute for perf event value
+> >   *
+> >   */
+> >  struct cscfg_config_desc {
+> > @@ -137,6 +138,7 @@ struct cscfg_config_desc {
+> >       int nr_presets;
+> >       int nr_total_params;
+> >       const u64 *presets; /* nr_presets * nr_total_params */
+> > +     struct dev_ext_attribute *event_ea;
+> >  };
+> >
+> >  /**
+> > diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.c b/drivers/hwtracing/coresight/coresight-etm-perf.c
+> > index 0e392513b2d6..66bda452a2f4 100644
+> > --- a/drivers/hwtracing/coresight/coresight-etm-perf.c
+> > +++ b/drivers/hwtracing/coresight/coresight-etm-perf.c
+> > @@ -18,8 +18,10 @@
+> >  #include <linux/types.h>
+> >  #include <linux/workqueue.h>
+> >
+> > +#include "coresight-config.h"
+> >  #include "coresight-etm-perf.h"
+> >  #include "coresight-priv.h"
+> > +#include "coresight-syscfg.h"
+> >
+> >  static struct pmu etm_pmu;
+> >  static bool etm_perf_up;
+> > @@ -38,8 +40,13 @@ PMU_FORMAT_ATTR(contextid1,        "config:" __stringify(ETM_OPT_CTXTID));
+> >  PMU_FORMAT_ATTR(contextid2,  "config:" __stringify(ETM_OPT_CTXTID2));
+> >  PMU_FORMAT_ATTR(timestamp,   "config:" __stringify(ETM_OPT_TS));
+> >  PMU_FORMAT_ATTR(retstack,    "config:" __stringify(ETM_OPT_RETSTK));
+> > +/* preset - if sink ID is used as a configuration selector */
+> > +PMU_FORMAT_ATTR(preset,              "config:0-3");
+> >  /* Sink ID - same for all ETMs */
+> >  PMU_FORMAT_ATTR(sinkid,              "config2:0-31");
+> > +/* config ID - set if a system configuration is selected */
+> > +PMU_FORMAT_ATTR(configid,    "config2:32-63");
 > > +
-> > +检查Sphinx依赖项
-> > +--------------------------------
+> >
+> >  /*
+> >   * contextid always traces the "PID".  The PID is in CONTEXTIDR_EL1
+> > @@ -69,6 +76,8 @@ static struct attribute *etm_config_formats_attr[] = {
+> >       &format_attr_timestamp.attr,
+> >       &format_attr_retstack.attr,
+> >       &format_attr_sinkid.attr,
+> > +     &format_attr_preset.attr,
+> > +     &format_attr_configid.attr,
+> >       NULL,
+> >  };
+> >
+> > @@ -86,9 +95,19 @@ static const struct attribute_group etm_pmu_sinks_group = {
+> >       .attrs  = etm_config_sinks_attr,
+> >  };
+> >
+> > +static struct attribute *etm_config_events_attr[] = {
+> > +     NULL,
+> > +};
 > > +
-> > +这有一个脚本可以自动检查Sphinx依赖项。如果它认得您的发行版，还会提示您所用发行
-> > +版的安装命令::
+> > +static const struct attribute_group etm_pmu_events_group = {
+> > +     .name   = "events",
+> > +     .attrs  = etm_config_events_attr,
+> > +};
 > > +
-> > +       $ ./scripts/sphinx-pre-install
-> > +       Checking if the needed tools for Fedora release 26 (Twenty Six) are available
-> > +       Warning: better to also install "texlive-luatex85".
-> > +       You should run:
-> translate？:)
-> > +
-> > +               sudo dnf install -y texlive-luatex85
-> > +               /usr/bin/virtualenv sphinx_1.7.9
-> > +               . sphinx_1.7.9/bin/activate
-> > +               pip install -r Documentation/sphinx/requirements.txt
-> > +
-> > +       Can't build as 1 mandatory dependency is missing at ./scripts/sphinx-pre-install line 468.
-> translate？:)
-
-These two are actually the *output* of the script
-	`./scripts/sphinx-pre-install`
-They are rendered as a code block. I think no need for translating.
-
-> > +
-> > +默认情况下，它会检查html和PDF的所有依赖项，包括图像、数学表达式和LaTeX构建的
-> > +需求，并假设将使用虚拟Python环境。html构建所需的部分被认为是必需的，其他部分
-> 部分 -> 依赖项？
-
-OK.
-
-> > +则是可选的。
-> > +
-> > +它支持两个可选参数：
-> > +
-> > +``--no-pdf``
-> > +
-> > +       禁用PDF检查；
-> > +
-> > +``--no-virtualenv``
-> > +
-> > +       使用Sphinx的系统打包，而不是Python虚拟环境。
-> Maybe the translation is wrong？:)
-
-This means to use the Sphinx package provied by os package manager such
-as apt/yum, instead of using `python -m venv` then `pip install ...`.
-
-> > +
-> > +Sphinx构建
-> > +============
-> > +
-> > +生成文档的常用方法是运行 ``make htmldocs`` 或 ``make pdfdocs`` 。还有其他可用
-> 其他 -> 其它
-
-OK.
-
-> > +的格式：请参阅 ``make help`` 的文档部分。生成的文档放在 ``Documentation/output``
-> > +下各个格式的子目录中。
-> Any better translation？
-
-相应格式的子目录
-
-> > +
-> > +要生成文档，显然必须安装Sphinx（ ``sphinx-build`` ）。要让HTML输出更漂亮，可以
-> > +使用Read the Docs Sphinx主题（ ``sphinx_rtd_theme`` ）。对于PDF输出，您还需要
-> > +``XeLaTeX`` 和来自ImageMagick（https://www.imagemagick.org）的 ``convert(1)`` 。
-> > +所有这些在一般发行版中都有可用打包。
-> 所有这些软件包都是广泛存在的，并且被打包进发行版。？
-
-All of these are widely available and packaged in distributions.
-use this 所有这些软件在大多发行版中都可用或已打包。
-
-> > +
-> > +要传递额外的选项给Sphinx，可以使用 ``SPHINXOPTS`` make变量。例如，使用
-> 可以使用make变量 ``SPHINXOPTS``。？
-
-OK.
-
-> > +``make SPHINXOPTS=-v htmldocs`` 获得更详细的输出。
-> > +
-> > +
-> > +要删除生成的文档，请运行 ``make cleandocs`` 。
-> > +
-> > +编写文档
-> > +=====================
-> > +
-> > +添加新文档很容易，只需：
-> > +
-> > +1. 在 ``Documentation`` 下某处添加一个新的 ``.rst`` 文件。
-> > +2. 从 ``Documentation/index.rst`` 中的Sphinx `主目录树`_ 链接到它。
-> > +
-> > +.. _主目录树: http://www.sphinx-doc.org/en/stable/markup/toctree.html
-> > +
-> > +对于简单的文档（比如您现在正在阅读的文档），这通常已经足够好了，但是对于较大
-> > +的文档，最好创建一个子目录（或者使用现有的子目录）。例如，图形子系统文档位于
-> > +``Documentation/gpu`` 下，拆分为多个 ``.rst`` 文件，并具有从主目录链接来的单
-> > +独索引 ``index.rst`` （有自己的目录树 ``toctree`` ）。
-> > +
-> > +请参阅 `Sphinx <http://www.sphinx-doc.org/>`_ 和 `reStructuredText
-> > +<http://docutils.sourceforge.net/rst.html>`_ 的文档，以了解如何使用它们。
-> > +特别是Sphinx `reStructuredText 基础`_ 这是开始学习使用reStructuredText的
-> > +好地方。还有一些 `Sphinx 特殊标记结构`_ 。
-> > +
-> > +.. _reStructuredText 基础: http://www.sphinx-doc.org/en/stable/rest.html
-> > +.. _Sphinx 特殊标记结构: http://www.sphinx-doc.org/en/stable/markup/index.html
-> > +
-> > +内核文档的具体指南
-> > +------------------------------------------------
-> > +
-> > +这是一些内核文档的具体指南：
-> > +
-> > +* 请不要过于痴迷转换格式到reStructuredText。保持简单。在大多数情况下，文档
-> > +  应该是纯文本，格式应足够一致，以便可以转换为其他格式。
-> > +
-> > +* 将现有文档转换为reStructuredText时，请尽量减少格式更改。P
-> what is P？
-
-Will delete it.
-'P' is paste in vim :P
-
-> > +
-> > +* 在转换文档时，还要更新内容，而不仅仅是格式。
-> > +
-> > +* 请遵循标题修饰符的顺序：
-> > +
-> > +  1. ``=`` 文档标题，要有上线::
-> > +
-> > +       ==============
-> > +       文档标题
-> > +       ==============
-> > +
-> > +  2. ``=`` 章::
-> > +
-> > +       章标题
-> > +       ========
-> > +
-> > +  3. ``-`` 节::
-> > +
-> > +       节标题
-> > +       -------
-> > +
-> > +  4. ``~`` 小节::
-> > +
-> > +       小节标题
-> > +       ~~~~~~~~~~
-> > +
-> > +  尽管RST没有规定具体的顺序（“没有强加一个固定数量和顺序的节标题装饰风格，最终
-> > +  按照的顺序将是实际遇到的顺序。”），但是拥有一个通用级别的文档更容易遵循。
-> > +
-> > +* 对于插入固定宽度的文本块（用于代码样例、用例等）： ``::`` 用于语法高亮意义不
-> > +  大的内容，尤其是短代码段； ``.. code-block:: <language>`` 用于需要语法高亮的
-> > +  较长代码块。对于嵌入到文本中的简短代码片段，请使用 \`\` 。
-> > +
-> > +
-> > +C域
-> > +------------
-> > +
-> > +**Sphinx C域（Domain）** （name c）适用于C API文档。例如，功能原型：
-> 函数原型？
-
-OK!
-
-[...]
-> > +交叉引用
-> > +-----------------
-> > +
-> > +从一页文档到另一页文档的交叉引用可以通过简单地写出文件路径来完成，无特殊格式
-> > +要求。路径可以是绝对路径或相对路径。绝对路径从“Documentation/”开始。例如，要
-> > +交叉引用此页，以下写法皆可，取决于具体的文档目录（注意 ``.rst`` 扩展名是可选
-> > +的）::
-> > +
-> > +    See Documentation/doc-guide/sphinx.rst. This always works.
-> > +    Take a look at sphinx.rst, which is at this same directory.
-> > +    Read ../sphinx.rst, which is one directory above.
-> translate？
-
+> >  static const struct attribute_group *etm_pmu_attr_groups[] = {
+> >       &etm_pmu_format_group,
+> >       &etm_pmu_sinks_group,
+> > +     &etm_pmu_events_group,
+> >       NULL,
+> >  };
+> >
+> > @@ -247,7 +266,7 @@ static void *etm_setup_aux(struct perf_event *event, void **pages,
+> >       INIT_WORK(&event_data->work, free_event_data);
+> >
+> >       /* First get the selected sink from user space. */
+> > -     if (event->attr.config2) {
+> > +     if (event->attr.config2 & GENMASK_ULL(31, 0)) {
+> >               id = (u32)event->attr.config2;
+> >               sink = coresight_get_sink_by_id(id);
+> >       }
+> > @@ -555,9 +574,9 @@ int etm_perf_symlink(struct coresight_device *csdev, bool link)
+> >  }
+> >  EXPORT_SYMBOL_GPL(etm_perf_symlink);
+> >
+> > -static ssize_t etm_perf_sink_name_show(struct device *dev,
+> > -                                    struct device_attribute *dattr,
+> > -                                    char *buf)
+>
+> Because we now have etm_perf_cscfg_event_show(), this could have remained
+> unchanged.
+>
+> > +static ssize_t etm_perf_name_show(struct device *dev,
+> > +                               struct device_attribute *dattr,
+> > +                               char *buf)
+> >  {
+> >       struct dev_ext_attribute *ea;
+> >
+> > @@ -565,68 +584,126 @@ static ssize_t etm_perf_sink_name_show(struct device *dev,
+> >       return scnprintf(buf, PAGE_SIZE, "0x%lx\n", (unsigned long)(ea->var));
+> >  }
+> >
+> > -int etm_perf_add_symlink_sink(struct coresight_device *csdev)
+> > +static struct dev_ext_attribute *
+> > +etm_perf_add_symlink_group(struct device *dev, const char *name, const char *group_name)
+> >  {
+> > -     int ret;
+> > +     struct dev_ext_attribute *ea;
+> >       unsigned long hash;
+> > -     const char *name;
+> > +     int ret;
+> >       struct device *pmu_dev = etm_pmu.dev;
+> > -     struct device *dev = &csdev->dev;
+> > -     struct dev_ext_attribute *ea;
+> > -
+> > -     if (csdev->type != CORESIGHT_DEV_TYPE_SINK &&
+> > -         csdev->type != CORESIGHT_DEV_TYPE_LINKSINK)
+> > -             return -EINVAL;
+> > -
+> > -     if (csdev->ea != NULL)
+> > -             return -EINVAL;
+> >
+> >       if (!etm_perf_up)
+> > -             return -EPROBE_DEFER;
+> > +             return ERR_PTR(-EPROBE_DEFER);
+> >
+> >       ea = devm_kzalloc(dev, sizeof(*ea), GFP_KERNEL);
+> >       if (!ea)
+> > -             return -ENOMEM;
+> > +             return ERR_PTR(-ENOMEM);
+> >
+> > -     name = dev_name(dev);
+> > -     /* See function coresight_get_sink_by_id() to know where this is used */
+> > +     /*
+> > +      * If this function is called adding a sink then the hash is used for
+> > +      * sink selection - see function coresight_get_sink_by_id().
+> > +      * If adding a configuration then the hash is used for selection in
+> > +      * cscfg_activate_config()
+> > +      */
+> >       hash = hashlen_hash(hashlen_string(NULL, name));
+> >
+> >       sysfs_attr_init(&ea->attr.attr);
+> >       ea->attr.attr.name = devm_kstrdup(dev, name, GFP_KERNEL);
+> >       if (!ea->attr.attr.name)
+> > -             return -ENOMEM;
+> > +             return ERR_PTR(-ENOMEM);
+> >
+> >       ea->attr.attr.mode = 0444;
+> > -     ea->attr.show = etm_perf_sink_name_show;
+> > +     ea->attr.show = etm_perf_name_show;
+>
+> I would have removed the assignment entirely from this function and moved it to
+> etm_perf_add_symlink_cscfg() (like you already did) and
+> etm_perf_add_symlink_link().
+>
 OK
 
+> >       ea->var = (unsigned long *)hash;
+> >
+> >       ret = sysfs_add_file_to_group(&pmu_dev->kobj,
+> > -                                   &ea->attr.attr, "sinks");
+> > +                                   &ea->attr.attr, group_name);
+> >
+> > -     if (!ret)
+> > -             csdev->ea = ea;
+> > +     return ret ? ERR_PTR(ret) : ea;
+> > +}
+> >
+> > -     return ret;
+> > +int etm_perf_add_symlink_sink(struct coresight_device *csdev)
+> > +{
+> > +     const char *name;
+> > +     struct device *dev = &csdev->dev;
+> > +     int err = 0;
 > > +
-> > +如果要使用相对路径，则需要使用Sphinx的 ``doc`` 修饰。例如，从同一目录引用此页
-> > +的操作如下::
+> > +     if (csdev->type != CORESIGHT_DEV_TYPE_SINK &&
+> > +         csdev->type != CORESIGHT_DEV_TYPE_LINKSINK)
+> > +             return -EINVAL;
 > > +
-> > +    See :doc:`my custom link text for document sphinx <sphinx>`.
-> translate？
+> > +     if (csdev->ea != NULL)
+> > +             return -EINVAL;
+> > +
+> > +     name = dev_name(dev);
+> > +     csdev->ea = etm_perf_add_symlink_group(dev, name, "sinks");
+> > +     if (IS_ERR(csdev->ea)) {
+> > +             err = PTR_ERR(csdev->ea);
+> > +             csdev->ea = NULL;
+> > +     }
+> > +     return err;
+> >  }
+> >
+> > -void etm_perf_del_symlink_sink(struct coresight_device *csdev)
+> > +void etm_perf_del_symlink_group(struct dev_ext_attribute *ea, const char *group_name)
+> >  {
+> >       struct device *pmu_dev = etm_pmu.dev;
+> > -     struct dev_ext_attribute *ea = csdev->ea;
+> >
+> > +     sysfs_remove_file_from_group(&pmu_dev->kobj,
+> > +                                  &ea->attr.attr, group_name);
+> > +}
+> > +
+> > +void etm_perf_del_symlink_sink(struct coresight_device *csdev)
+> > +{
+> >       if (csdev->type != CORESIGHT_DEV_TYPE_SINK &&
+> >           csdev->type != CORESIGHT_DEV_TYPE_LINKSINK)
+> >               return;
+> >
+> > -     if (!ea)
+> > +     if (!csdev->ea)
+> >               return;
+> >
+> > -     sysfs_remove_file_from_group(&pmu_dev->kobj,
+> > -                                  &ea->attr.attr, "sinks");
+> > +     etm_perf_del_symlink_group(csdev->ea, "sinks");
+> >       csdev->ea = NULL;
+> >  }
+> >
+> > +static ssize_t etm_perf_cscfg_event_show(struct device *dev,
+> > +                                      struct device_attribute *dattr,
+> > +                                      char *buf)
+> > +{
+> > +     struct dev_ext_attribute *ea;
+> > +
+> > +     ea = container_of(dattr, struct dev_ext_attribute, attr);
+> > +     return scnprintf(buf, PAGE_SIZE, "configid=0x%lx\n", (unsigned long)(ea->var));
+> > +}
+> > +
+> > +int etm_perf_add_symlink_cscfg(struct device *dev, struct cscfg_config_desc *config_desc)
+> > +{
+> > +     int err = 0;
+> > +
+> > +     if (config_desc->event_ea != NULL)
+> > +             return 0;
+> > +
+> > +     config_desc->event_ea = etm_perf_add_symlink_group(dev, config_desc->name, "events");
+> > +
+> > +     /* override the show function to the custom cscfg event */
+> > +     if (!IS_ERR(config_desc->event_ea))
+> > +             config_desc->event_ea->attr.show = etm_perf_cscfg_event_show;
+> > +     else {
+> > +             err = PTR_ERR(config_desc->event_ea);
+> > +             config_desc->event_ea = NULL;
+> > +     }
+> > +
+> > +     return err;
+> > +}
+> > +
+> > +void etm_perf_del_symlink_cscfg(struct cscfg_config_desc *config_desc)
+> > +{
+> > +     if (!config_desc->event_ea)
+> > +             return;
+> > +
+> > +     etm_perf_del_symlink_group(config_desc->event_ea, "events");
+> > +     config_desc->event_ea = NULL;
+> > +}
+> > +
+> >  int __init etm_perf_init(void)
+> >  {
+> >       int ret;
+> > diff --git a/drivers/hwtracing/coresight/coresight-etm-perf.h b/drivers/hwtracing/coresight/coresight-etm-perf.h
+> > index 29d90dfeba31..ba617fe2217e 100644
+> > --- a/drivers/hwtracing/coresight/coresight-etm-perf.h
+> > +++ b/drivers/hwtracing/coresight/coresight-etm-perf.h
+> > @@ -11,6 +11,7 @@
+> >  #include "coresight-priv.h"
+> >
+> >  struct coresight_device;
+> > +struct cscfg_config_desc;
+> >
+> >  /*
+> >   * In both ETMv3 and v4 the maximum number of address comparator implentable
+> > @@ -69,6 +70,9 @@ static inline void *etm_perf_sink_config(struct perf_output_handle *handle)
+> >               return data->snk_config;
+> >       return NULL;
+> >  }
+> > +int etm_perf_add_symlink_cscfg(struct device *dev,
+> > +                            struct cscfg_config_desc *config_desc);
+> > +void etm_perf_del_symlink_cscfg(struct cscfg_config_desc *config_desc);
+> >  #else
+> >  static inline int etm_perf_symlink(struct coresight_device *csdev, bool link)
+> >  { return -EINVAL; }
+> > @@ -79,6 +83,10 @@ static inline void *etm_perf_sink_config(struct perf_output_handle *handle)
+> >  {
+> >       return NULL;
+> >  }
+> > +int etm_perf_add_symlink_cscfg(struct device *dev,
+> > +                            struct cscfg_config_desc *config_desc)
+> > +{ return -EINVAL; }
+> > +void etm_perf_del_symlink_cscfg(struct cscfg_config_desc *config_desc) {}
+> >
+> >  #endif /* CONFIG_CORESIGHT */
+> >
+> > diff --git a/drivers/hwtracing/coresight/coresight-syscfg.c b/drivers/hwtracing/coresight/coresight-syscfg.c
+> > index 11d1422f0ed3..03014a2142c1 100644
+> > --- a/drivers/hwtracing/coresight/coresight-syscfg.c
+> > +++ b/drivers/hwtracing/coresight/coresight-syscfg.c
+> > @@ -7,6 +7,7 @@
+> >  #include <linux/platform_device.h>
+> >
+> >  #include "coresight-config.h"
+> > +#include "coresight-etm-perf.h"
+> >  #include "coresight-syscfg.h"
+> >
+> >  /*
+> > @@ -86,6 +87,7 @@ static int cscfg_add_csdev_cfg(struct coresight_device *csdev,
+> >                       config_csdev->feats_csdev[config_csdev->nr_feat++] = feat_csdev;
+> >               }
+> >       }
+> > +
+>
+> Spurious newline.
+>
+> If you end up respinning:
+>
+> Reviewed-by: Mathieu Poirier <mathieu.poirier@linaro.org>
+>
+> Otherwise I have fixed it on my side.
+>
+> Thanks,
+> Mathieu
+>
 
-OK
+I have a v6 underway that picks up the kernel robot issues and a
+couple of minor fixes I spotted in patches 5 (missing NULL assignment
+for the enabled config on disable)  and 8 (unused #define) while
+re-basing the follow-up dynamic config load / unload set. Only one in
+patch 5 has potential to actually cause incorrect behaviour - then
+only when configs have been unloaded - but it is part of the baseline
+code so must be fixed there.
 
-> > +
-> > +对于大多数用例，前者是首选，因为它更干净，更适合阅读源文件的人。如果您遇到一
-> > +个没有任何特殊作用的 ``:doc:`` 用法，请将其转换为文档路径。
-> > +
-> > +有关交叉引用kernel-doc函数或类型的信息，请参阅
-> > +Documentation/doc-guide/kernel-doc.rst 。
-> > +
-> > +.. _sphinx_kfigure_zh:
-> > +
-> > +图形图片
-> > +================
-> > +
-> > +如果要添加图片，应该使用 ``kernel-figure`` 和 ``kernel-image`` 指令。例如，
-> > +要插入具有可缩放图像格式的图形，请使用SVG（:ref:`svg_image_example_zh` ）::
-> > +
-> > +    .. kernel-figure::  svg_image.svg
-> > +       :alt:    简易 SVG 图片
-> > +
-> > +       SVG 图片示例
-> > +
-> > +.. _svg_image_example_zh:
-> > +
-> > +.. kernel-figure::  svg_image.svg
-> > +   :alt:    简易 SVG 图片
-> > +
-> > +   SVG 图片示例
-> > +
-> > +内核figure（和image）指令支持 DOT 格式文件，请参阅
-> > +
-> > +* DOT：http://graphviz.org/pdf/dotguide.pdf
-> > +* Graphviz：http://www.graphviz.org/content/dot-language
-> > +
-> > +一个简单的例子（:ref:`hello_dot_file_zh` ）::
-> > +
-> > +  .. kernel-figure::  hello.dot
-> > +     :alt:    你好，世界
-> > +
-> > +     DOT 示例
-> > +
-> > +.. _hello_dot_file_zh:
-> > +
-> > +.. kernel-figure::  hello.dot
-> > +   :alt:    你好，世界
-> > +
-> > +   DOT 示例
-> any better translation？
+Assuming no major issues from your reviews of the rest of this set, v6
+should be available quickly.
 
-Nope. It will act as the title of this figure.
-Keep simple.
+Thanks
 
-[...]
+Mike
+
+> >       /* if matched features, add config to device.*/
+> >       if (config_csdev) {
+> >               mutex_lock(&cscfg_csdev_mutex);
+> > @@ -276,6 +278,11 @@ static int cscfg_load_config(struct cscfg_config_desc *config_desc)
+> >       if (err)
+> >               return err;
+> >
+> > +     /* add config to perf fs to allow selection */
+> > +     err = etm_perf_add_symlink_cscfg(cscfg_device(), config_desc);
+> > +     if (err)
+> > +             return err;
+> > +
+> >       list_add(&config_desc->item, &cscfg_mgr->config_desc_list);
+> >       return 0;
+> >  }
+> > @@ -490,7 +497,12 @@ int cscfg_create_device(void)
+> >
+> >  void cscfg_clear_device(void)
+> >  {
+> > +     struct cscfg_config_desc *cfg_desc;
+> > +
+> >       mutex_lock(&cscfg_mutex);
+> > +     list_for_each_entry(cfg_desc, &cscfg_mgr->config_desc_list, item) {
+> > +             etm_perf_del_symlink_cscfg(cfg_desc);
+> > +     }
+> >       device_unregister(cscfg_device());
+> >       mutex_unlock(&cscfg_mutex);
+> >  }
 > > --
-> > 2.20.1
+> > 2.17.1
 > >
-> 
-> Thanks！
-> 
-> Yanteng
 
+
+
+-- 
+Mike Leach
+Principal Engineer, ARM Ltd.
+Manchester Design Centre. UK
