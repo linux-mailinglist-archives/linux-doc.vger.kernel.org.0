@@ -2,15 +2,15 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3E95B3519D1
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:03:52 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 686CA351BDA
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 20:12:07 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231550AbhDAR4c (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 13:56:32 -0400
-Received: from m34-101.88.com ([104.250.34.101]:46853 "EHLO 88.com"
+        id S236729AbhDASLa (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 14:11:30 -0400
+Received: from m34-101.88.com ([104.250.34.101]:13857 "EHLO 88.com"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S234860AbhDARxo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 1 Apr 2021 13:53:44 -0400
+        id S237885AbhDASEv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Apr 2021 14:04:51 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
         s=dkim; h=Date:From:To; bh=ASbMt47A/MRnnixjOGpwSexCafpygq/mpK+s+
         hHb9OA=; b=WZjjy43wATaZb7E72/AQ27h+R9Il7mePUfvid3zQkUypmMjxDxHGj
