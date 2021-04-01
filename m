@@ -2,105 +2,76 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 14D62350FC8
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 09:06:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4E52A350FC6
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 09:06:44 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229539AbhDAHGM (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 03:06:12 -0400
-Received: from m32-153.88.com ([43.250.32.153]:29378 "EHLO email.cn"
+        id S232951AbhDAHGN (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 03:06:13 -0400
+Received: from m32-153.88.com ([43.250.32.153]:29404 "EHLO email.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S233050AbhDAHFt (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 1 Apr 2021 03:05:49 -0400
+        id S233179AbhDAHGC (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Apr 2021 03:06:02 -0400
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=email.cn;
-        s=dkim; h=Date:From:To; bh=aon9spnwMH7lma0qTufIT8fGdBbTbuKj79HBi
-        Bx8VNM=; b=hHxHfJQdO49DS6cpJiHUr/+lvXnbrkG9q4Ea/G/aBvd8myKK56LAl
-        sGnt3NN15rOSpDRgTCY7kSp/MnU0cNKImFPaZO9GgUKpLvbtfL6x2a0SC68qr7/L
-        CcAC+uKCXUtq273c3dbycl9B0SimvxPEGTlH69zzF0naRLsNpk2nAg=
+        s=dkim; h=Date:From:To; bh=fZT26DkncR+INA8TQ+SCHB6+hFnqH7TsCzfcK
+        Z2Ngxo=; b=cIfCZAd+TdPkRtPVYRUrJikDDAjKyI3Ry6FOiQQtfNQB6OaanxPJt
+        iDMatoV9SZ+fYhx2ic9c/++wcOGQQywNVBRpgkNidSjj0KknVZKFAIIKGUjqEiZt
+        0rIVF84VismHdUVsJEecUvnSm2VR6r8KHNcu3l7gxbB5livsp2dt2Y=
 Received: from mipc (unknown [120.238.248.129])
-        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgBn8iLIcGVgC7lUAA--.1170S2;
-        Thu, 01 Apr 2021 15:05:45 +0800 (CST)
-Date:   Thu, 1 Apr 2021 15:05:44 +0800
+        by v_coremail2-frontend-2 (Coremail) with SMTP id GiKnCgBX4iLUcGVgFrlUAA--.1530S2;
+        Thu, 01 Apr 2021 15:05:57 +0800 (CST)
+Date:   Thu, 1 Apr 2021 15:05:55 +0800
 From:   Wu XiangCheng <bobwxc@email.cn>
 To:     Alex Shi <alexs@kernel.org>
 Cc:     Alex Shi <seakeel@gmail.com>,
         Alex Shi <alex.shi@linux.alibaba.com>,
         Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Subject: [PATCH 1/5] docs/zh_CN: Add translation zh_CN/doc-guide/index.rst
-Message-ID: <066b972c0ef496004dcd9a2c6adff4a53504b600.1617260163.git.bobwxc@email.cn>
+Subject: [PATCH 2/5] docs/zh_CN: Link zh_CN/doc-guide to zh_CN/index.rst
+Message-ID: <fdc591a9f5449aa59269f6d9667c8c5d28b77567.1617260163.git.bobwxc@email.cn>
 References: <cover.1617260163.git.bobwxc@email.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 In-Reply-To: <cover.1617260163.git.bobwxc@email.cn>
 User-Agent: Mutt/1.10.1 (2018-07-13)
-X-CM-TRANSID: GiKnCgBn8iLIcGVgC7lUAA--.1170S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrtrWDCr18ArWrKr13AFWxCrg_yoWkJFc_Aw
-        n7XFWvyay5XF97XFW8Zr18AryIkF4fCF4qkFs8t398Z3yUJ398GF1vqF95Za18Wr4a9ry5
-        CryDWr1fXr13KjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-        9fnUUIcSsGvfJTRUUUbYkYjsxI4VWxJwAYFVCjjxCrM7CY07I20VC2zVCF04k26cxKx2IY
-        s7xG6rWj6s0DM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI
-        8IcVAFwI0_Jr0_JF4l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E
-        87Iv67AKxVW8Jr0_Cr1UM28EF7xvwVC2z280aVCY1x0267AKxVW8Jr0_Cr1UM2AIxVAIcx
-        kEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6x8ErcxFaVAv8VWx
-        Jr1UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lc2xSY4AK67AK6r4xMxAIw2
-        8IcxkI7VAKI48JMxAIw28IcVCjz48v1sIEY20_Cr1UJr1l4I8I3I0E4IkC6x0Yz7v_Jr0_
-        Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17
-        CE14v26r126r1DMIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0
-        I7IYx2IY6xkF7I0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I
-        8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r1j6r4UYxBIdaVFxhVjvjDU
-        0xZFpf9x07U1UDXUUUUU=
+X-CM-TRANSID: GiKnCgBX4iLUcGVgFrlUAA--.1530S2
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUU5B7k0a2IF6F4UM7kC6x804xWl1xkIjI8I
+        6I8E6xAIw20EY4v20xvaj40_Wr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2
+        x7M28EF7xvwVC0I7IYx2IY67AKxVWUJVWUCwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8
+        JVWxJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
+        4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
+        Yx0E74AGY7Cv6cx26F4UJr1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCY02
+        Avz4vE14v_GF4l42xK82IYc2Ij64vIr41l42xK82IY6x8ErcxFaVAv8VWxJr1UJwCFx2Iq
+        xVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r
+        106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AK
+        xVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Gr0_Cr1lIxAIcVCF04k26cxKx2IYs7
+        xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_
+        Gr1UYxBIdaVFxhVjvjDU0xZFpf9x07U1UDXUUUUU=
 X-Originating-IP: [120.238.248.129]
 X-CM-SenderInfo: pere453f6hztlloou0/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Add new translation
-  Documentation/translations/zh_CN/doc-guide/index.rst
+Add zh_CN/doc-guide entry in zh_CN/index.rst
 
 Signed-off-by: Wu XiangCheng <bobwxc@email.cn>
 ---
- .../translations/zh_CN/doc-guide/index.rst    | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/doc-guide/index.rst
+ Documentation/translations/zh_CN/index.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/Documentation/translations/zh_CN/doc-guide/index.rst b/Documentation/translations/zh_CN/doc-guide/index.rst
-new file mode 100644
-index 000000000000..b835c8d95f0e
---- /dev/null
-+++ b/Documentation/translations/zh_CN/doc-guide/index.rst
-@@ -0,0 +1,30 @@
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: Documentation/doc-guide/index.rst
-+
-+:译者: 吴想成 Wu XiangCheng <bobwxc@email.cn>
-+
-+.. _doc_guide_zh:
-+
-+==================
-+如何编写内核文档
-+==================
-+
-+.. toctree::
-+   :maxdepth: 1
-+
-+   sphinx
-+   kernel-doc
-+
-+TodoList:
-+
-+* parse-headers
-+* contributing
-+* maintainer-profile
-+
-+.. only::  子项目与HTML
-+
-+   目录
-+   =======
-+
-+   * :ref:`genindex`
+diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
+index 4fdd57417ffb..4258006f4763 100644
+--- a/Documentation/translations/zh_CN/index.rst
++++ b/Documentation/translations/zh_CN/index.rst
+@@ -18,6 +18,7 @@
+ 
+    admin-guide/index
+    process/index
++   doc-guide/index
+    kernel-hacking/index
+    filesystems/index
+    arm64/index
 -- 
 2.20.1
 
