@@ -2,610 +2,148 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 57600352108
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 22:52:20 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 650C13521EB
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 23:57:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235207AbhDAUwA (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 16:52:00 -0400
-Received: from smtp-42ac.mail.infomaniak.ch ([84.16.66.172]:40869 "EHLO
-        smtp-42ac.mail.infomaniak.ch" rhost-flags-OK-OK-OK-OK)
-        by vger.kernel.org with ESMTP id S234275AbhDAUv0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 16:51:26 -0400
-Received: from smtp-3-0000.mail.infomaniak.ch (unknown [10.4.36.107])
-        by smtp-3-3000.mail.infomaniak.ch (Postfix) with ESMTPS id 4FBFhk16CVzMprhV;
-        Thu,  1 Apr 2021 22:51:18 +0200 (CEST)
-Received: from localhost (unknown [23.97.221.149])
-        by smtp-3-0000.mail.infomaniak.ch (Postfix) with ESMTPA id 4FBFhj569Hzlh8T4;
-        Thu,  1 Apr 2021 22:51:17 +0200 (CEST)
-From:   =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>
-To:     James Morris <jmorris@namei.org>, Jann Horn <jannh@google.com>,
-        "Serge E . Hallyn" <serge@hallyn.com>
-Cc:     =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@digikod.net>,
-        Al Viro <viro@zeniv.linux.org.uk>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        Andy Lutomirski <luto@amacapital.net>,
-        Anton Ivanov <anton.ivanov@cambridgegreys.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Casey Schaufler <casey@schaufler-ca.com>,
-        David Howells <dhowells@redhat.com>,
-        Jeff Dike <jdike@addtoit.com>,
+        id S234047AbhDAV5V (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 17:57:21 -0400
+Received: from mail-bn8nam12on2080.outbound.protection.outlook.com ([40.107.237.80]:54144
+        "EHLO NAM12-BN8-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S233974AbhDAV5V (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 1 Apr 2021 17:57:21 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=Jp0jZ2pLJwqRDagQm61EFVTNwuiwmEt+iIz8WbHnjGf5UdbAezXVV/hRmdN7vd+lTNDfovJbHnvG+oTjnUJZfO1nBCIEp0V1Iw6Ttjc0csk4if/g9IAshilLfAchFv/6OQwe778OPN8DoJelA6Gjkmkxe2aYN3cpp7soSalyzAWglEKuHAVA86dMH5eYRl3t51GdNtTM5NQ1O2xkI4NA63zpuWAxIafgXLOL2VZCcjpJBrN2Jt4JmBhw5g6tNOVD5N4s8wpbIf1xfPPRF7dlHOHt4wh4CvS1gvPVMVJwOCNTZCglrN28tiL/zvZUpCh5cbEpa/mzMo+Clpma2vLHDw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kiF+Ekaciqls+yFBaM3+dQvUKpVWCYwn5J82sDaQ6XI=;
+ b=DQA+Cr0fLUAM0byNVFdArSyJL9hObF0iCCYtEB8PhuqXTmHE6GYvbZaJE25WtjvgqshGWjUcJ0qKgfnnnBQyhYj9fV1AHVa5INnHgaJkIZH6M8YvDDf8Ht0/Tbx0AKo3c+Qs3MsgL7gH4HsyfPB7/yJpATNRWQZVikV8sNPuK+MEDQtcBN3OWXKL8dlp6aVnX1rgEkJQjpu/BT9TPRsMzEAL6Pau12HNn/ruHuGvA3kTeSiWtJOO4POmxJIq/WgHbMrGry0d/04Wez/lZOk7s/mx6fivTl4ez6DBDaeZ3zVmgUzeRO6enGu25CDsuohdpePbHwsmrjXVpCfKaKEbTg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=lwn.net smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=kiF+Ekaciqls+yFBaM3+dQvUKpVWCYwn5J82sDaQ6XI=;
+ b=h4JL8USQqOv21wyJSTmDsUY3NVN5uSYmbgBVCNxNm+jQTpf0S1nV7xEP/IWojPVCyRXKOMV5DzKDfD6EOyFtubxq9KH26pAjSmixl9UI3rI+3aaDj6/6P/8SReBUXIxn6l1lIp1uv5L8dJn0z7xQGOgdU4GjSmn7ZYd2Zox9Kk9eStRRRLbWrO4DmYFxJzAck3KTWQqv9OwQQX0Bxwq/FtqLKQ4zv8TVPZAuQoV04JnhUKf4uIxke9pPQpqYTJoEe1ViSYyfWNVfHquIvm4QdGDOQmWgk2z6bnlEHjy6SdlrLLykqwQeEWGjnAeZX407lXcmguLutW+fYiUIjWnw1A==
+Received: from MWHPR04CA0039.namprd04.prod.outlook.com (2603:10b6:300:ee::25)
+ by DM6PR12MB3435.namprd12.prod.outlook.com (2603:10b6:5:39::26) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3977.25; Thu, 1 Apr
+ 2021 21:56:06 +0000
+Received: from CO1NAM11FT068.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:300:ee:cafe::b2) by MWHPR04CA0039.outlook.office365.com
+ (2603:10b6:300:ee::25) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.26 via Frontend
+ Transport; Thu, 1 Apr 2021 21:56:06 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; lwn.net; dkim=none (message not signed)
+ header.d=none;lwn.net; dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ CO1NAM11FT068.mail.protection.outlook.com (10.13.175.142) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.3999.28 via Frontend Transport; Thu, 1 Apr 2021 21:56:06 +0000
+Received: from [10.2.63.109] (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Thu, 1 Apr
+ 2021 21:56:06 +0000
+Subject: Re: [PATCH v2 7/7] ABI: sysfs-kernel-mm-cma: fix two cross-references
+To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Michael Kerrisk <mtk.manpages@gmail.com>,
-        Richard Weinberger <richard@nod.at>,
-        Shuah Khan <shuah@kernel.org>,
-        Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>,
-        kernel-hardening@lists.openwall.com, linux-api@vger.kernel.org,
-        linux-arch@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-fsdevel@vger.kernel.org, linux-kernel@vger.kernel.org,
-        linux-kselftest@vger.kernel.org,
-        linux-security-module@vger.kernel.org, x86@kernel.org,
-        =?UTF-8?q?Micka=C3=ABl=20Sala=C3=BCn?= <mic@linux.microsoft.com>
-Subject: [PATCH v32 12/12] landlock: Add user and kernel documentation
-Date:   Thu,  1 Apr 2021 22:52:08 +0200
-Message-Id: <20210401205208.2756565-13-mic@digikod.net>
-X-Mailer: git-send-email 2.30.2
-In-Reply-To: <20210401205208.2756565-1-mic@digikod.net>
-References: <20210401205208.2756565-1-mic@digikod.net>
+        Andrew Morton <akpm@linux-foundation.org>
+CC:     Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Minchan Kim <minchan@kernel.org>,
+        Stephen Rothwell <sfr@canb.auug.org.au>,
+        <linux-kernel@vger.kernel.org>
+References: <cover.1616668017.git.mchehab+huawei@kernel.org>
+ <87907316390311c6b42e86c3ba9fb2f2903d9499.1616668017.git.mchehab+huawei@kernel.org>
+From:   John Hubbard <jhubbard@nvidia.com>
+Message-ID: <07220859-0a4e-34fb-9349-b3c7d011a108@nvidia.com>
+Date:   Thu, 1 Apr 2021 14:56:05 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.9.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+In-Reply-To: <87907316390311c6b42e86c3ba9fb2f2903d9499.1616668017.git.mchehab+huawei@kernel.org>
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: e16a42ed-78b3-4827-e090-08d8f558f376
+X-MS-TrafficTypeDiagnostic: DM6PR12MB3435:
+X-Microsoft-Antispam-PRVS: <DM6PR12MB3435977505BB1A1CD31BE0F8A87B9@DM6PR12MB3435.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:3631;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: lJtMtndmQc4ORwkz1oCa/HeiEMOg7oQQ9A6VW8Z8EO0GdNCFy5Iekp/zVlskUdhN7sOASDIVU3QwLqZnPPTyYQfXEaTZ0pdFVhAWZez6uRD9yoU15PlfZb/399b2YjfIhF74oUjexxkaUy9R+NmpAbYpy6pRJxbQmL7jQSDJ8W/hR0rysmffYbfp1qQadgYLmkNUDtRkSFLtXfYOiG2IKM2pu/28/Jbgvu0NlK6zitwkkMOK0ljk2R8L1hs9HoEnOAIhsb+aJ1bK5V3BExrMlzYsh9kdvFIejnd9LANEX3tRt1LvS2wGqiEXnN89T4RuQnistBG8gVTNiLwAYNrH49yyltpVAFUQAF5oPmNwXKrs9rbAaLl4Y4wYcjJwlcgo0dAK0kKJuDRPc+Y0JPwnpFnb44UH+XQ0njdl1Y9XanaEwiMb1uQTss00wASshiZ4FvMdui2vqXI2byy9lx8KogVZtSls54iP+ffYvpL2YotobkSOhaLpouoentFNUZoIwKMIXQSMoe1ROxADVLMTa5tJJN6Ek8JGI+GDG/+3vd9xtTZ5Fw3kwkvNw2zasL8RqUhQtSMmDZscPzwAQWb3BvJ4ecTrln1PVrpOc928bZZ8s0EOJC8eI0/2rUkjW5jLGJZBs8RfJi31EoHA464yoAxIIUdKZnZE5Qaqki+vF61tkvAH/d1aMTZePYegb7tJ
+X-Forefront-Antispam-Report: CIP:216.228.112.34;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:schybrid03.nvidia.com;CAT:NONE;SFS:(4636009)(39860400002)(376002)(346002)(396003)(136003)(36840700001)(46966006)(16526019)(31686004)(356005)(86362001)(82310400003)(316002)(336012)(70206006)(82740400003)(47076005)(26005)(8936002)(70586007)(4326008)(54906003)(36756003)(36906005)(16576012)(110136005)(83380400001)(7636003)(2906002)(186003)(31696002)(53546011)(5660300002)(426003)(2616005)(8676002)(478600001)(36860700001)(43740500002);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Apr 2021 21:56:06.2457
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: e16a42ed-78b3-4827-e090-08d8f558f376
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.112.34];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: CO1NAM11FT068.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB3435
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-From: Mickaël Salaün <mic@linux.microsoft.com>
+On 3/25/21 3:38 AM, Mauro Carvalho Chehab wrote:
+> Change the text in order to generate cross-references for
+> alloc_pages_success and alloc_pages_fail symbols.
+> 
+> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> ---
+>   Documentation/ABI/testing/sysfs-kernel-mm-cma | 8 +++-----
+>   1 file changed, 3 insertions(+), 5 deletions(-)
+> 
+> diff --git a/Documentation/ABI/testing/sysfs-kernel-mm-cma b/Documentation/ABI/testing/sysfs-kernel-mm-cma
+> index 02b2bb60c296..86e261185561 100644
+> --- a/Documentation/ABI/testing/sysfs-kernel-mm-cma
+> +++ b/Documentation/ABI/testing/sysfs-kernel-mm-cma
+> @@ -5,12 +5,10 @@ Description:
+>   		/sys/kernel/mm/cma/ contains a subdirectory for each CMA
+>   		heap name (also sometimes called CMA areas).
+>   
+> -		Each CMA heap subdirectory (that is, each
+> -		/sys/kernel/mm/cma/<cma-heap-name> directory) contains the
+> -		following items:
+> +		Each CMA heap subdirectory contains the following items:
+>   
+> -			alloc_pages_success
+> -			alloc_pages_fail
+> +			- /sys/kernel/mm/cma/<cma-heap-name>/alloc_pages_success
+> +			- /sys/kernel/mm/cma/<cma-heap-name>/alloc_pages_fail
+>   
 
-Add a first document describing userspace API: how to define and enforce
-a Landlock security policy.  This is explained with a simple example.
-The Landlock system calls are described with their expected behavior and
-current limitations.
+I agree that this is clearer and easier on the reader, who can now see
+directly what the full path to each item is.
 
-Another document is dedicated to kernel developers, describing guiding
-principles and some important kernel structures.
+As for calling it a "fix", that seems a bit much. It's an upgrade.
+I'm not sure how many people realize that this sort of change causes
+cross refs to magically start working. I certainly didn't until now.
 
-This documentation can be built with the Sphinx framework.
+But either way, this improvement is nice to have, so:
 
-Cc: James Morris <jmorris@namei.org>
-Cc: Jann Horn <jannh@google.com>
-Cc: Serge E. Hallyn <serge@hallyn.com>
-Signed-off-by: Mickaël Salaün <mic@linux.microsoft.com>
-Reviewed-by: Vincent Dagonneau <vincent.dagonneau@ssi.gouv.fr>
-Reviewed-by: Kees Cook <keescook@chromium.org>
-Link: https://lore.kernel.org/r/20210401205208.2756565-13-mic@digikod.net
----
+Reviewed-by: John Hubbard <jhubbard@nvidia.com>
 
-Changes since v31:
-* Use "filesystem topology".
-* Add Reviewed-by Kees Cook.
-
-Changes since v30:
-* Fix typo (spotted by Kees Cook).
-* Extend commit description (suggested by Kees Cook).
-* Add note about what a Landlock user should do about OverlayFS
-  (requested by Kees Cook).
-* Include inode and superblock documentation.
-* Improve explanations about special filesystem limitations, and
-  highlight automatic /proc restrictions.
-* Bump the last modification date.
-
-Changes since v28:
-* Reorder subsections by importance in the "Current limitations"
-  section.
-
-Changes since v27:
-* Update landlock_restrict_self(2).
-* Update date and copyright.
-
-Changes since v25:
-* Explain the behavior of layered access rights.
-* Explain how bind mounts and overayfs mounts are handled by Landlock:
-  merged overlayfs mount points have their own inodes, which makes these
-  hierarchies independent from its upper and lower layers, unlike bind
-  mounts which share the same inodes between the source hierarchy and
-  the mount point hierarchy.
-  New overlayfs mount and bind mount tests check these behaviors.
-* Synchronize with the new syscalls.c file and update syscall names.
-* Fix spelling.
-* Remove Reviewed-by Jann Horn because of the above changes.
-
-Changes since v24:
-* Add Reviewed-by Jann Horn.
-* Add a paragraph to explain how the ruleset layers work.
-* Bump date.
-
-Changes since v23:
-* Explain limitations for the maximum number of stacked ruleset, and the
-  memory usage restrictions.
-
-Changes since v22:
-* Fix spelling and remove obsolete sentence (spotted by Jann Horn).
-* Bump date.
-
-Changes since v21:
-* Move the user space documentation to userspace-api/landlock.rst and
-  the kernel documentation to security/landlock.rst .
-* Add license headers.
-* Add last update dates.
-* Update MAINTAINERS file.
-* Add (back) links to git.kernel.org .
-* Fix spelling.
-
-Changes since v20:
-* Update examples and documentation with the new syscalls.
-
-Changes since v19:
-* Update examples and documentation with the new syscalls.
-
-Changes since v15:
-* Add current limitations.
-
-Changes since v14:
-* Fix spelling (contributed by Randy Dunlap).
-* Extend documentation about inheritance and explain layer levels.
-* Remove the use of now-removed access rights.
-* Use GitHub links.
-* Improve kernel documentation.
-* Add section for tests.
-* Update example.
-
-Changes since v13:
-* Rewrote the documentation according to the major revamp.
-
-Previous changes:
-https://lore.kernel.org/lkml/20191104172146.30797-8-mic@digikod.net/
----
- Documentation/security/index.rst         |   1 +
- Documentation/security/landlock.rst      |  85 +++++++
- Documentation/userspace-api/index.rst    |   1 +
- Documentation/userspace-api/landlock.rst | 311 +++++++++++++++++++++++
- MAINTAINERS                              |   2 +
- 5 files changed, 400 insertions(+)
- create mode 100644 Documentation/security/landlock.rst
- create mode 100644 Documentation/userspace-api/landlock.rst
-
-diff --git a/Documentation/security/index.rst b/Documentation/security/index.rst
-index 8129405eb2cc..16335de04e8c 100644
---- a/Documentation/security/index.rst
-+++ b/Documentation/security/index.rst
-@@ -16,3 +16,4 @@ Security Documentation
-    siphash
-    tpm/index
-    digsig
-+   landlock
-diff --git a/Documentation/security/landlock.rst b/Documentation/security/landlock.rst
-new file mode 100644
-index 000000000000..2e84925ae971
---- /dev/null
-+++ b/Documentation/security/landlock.rst
-@@ -0,0 +1,85 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. Copyright © 2017-2020 Mickaël Salaün <mic@digikod.net>
-+.. Copyright © 2019-2020 ANSSI
-+
-+==================================
-+Landlock LSM: kernel documentation
-+==================================
-+
-+:Author: Mickaël Salaün
-+:Date: March 2021
-+
-+Landlock's goal is to create scoped access-control (i.e. sandboxing).  To
-+harden a whole system, this feature should be available to any process,
-+including unprivileged ones.  Because such process may be compromised or
-+backdoored (i.e. untrusted), Landlock's features must be safe to use from the
-+kernel and other processes point of view.  Landlock's interface must therefore
-+expose a minimal attack surface.
-+
-+Landlock is designed to be usable by unprivileged processes while following the
-+system security policy enforced by other access control mechanisms (e.g. DAC,
-+LSM).  Indeed, a Landlock rule shall not interfere with other access-controls
-+enforced on the system, only add more restrictions.
-+
-+Any user can enforce Landlock rulesets on their processes.  They are merged and
-+evaluated according to the inherited ones in a way that ensures that only more
-+constraints can be added.
-+
-+User space documentation can be found here: :doc:`/userspace-api/landlock`.
-+
-+Guiding principles for safe access controls
-+===========================================
-+
-+* A Landlock rule shall be focused on access control on kernel objects instead
-+  of syscall filtering (i.e. syscall arguments), which is the purpose of
-+  seccomp-bpf.
-+* To avoid multiple kinds of side-channel attacks (e.g. leak of security
-+  policies, CPU-based attacks), Landlock rules shall not be able to
-+  programmatically communicate with user space.
-+* Kernel access check shall not slow down access request from unsandboxed
-+  processes.
-+* Computation related to Landlock operations (e.g. enforcing a ruleset) shall
-+  only impact the processes requesting them.
-+
-+Tests
-+=====
-+
-+Userspace tests for backward compatibility, ptrace restrictions and filesystem
-+support can be found here: `tools/testing/selftests/landlock/`_.
-+
-+Kernel structures
-+=================
-+
-+Object
-+------
-+
-+.. kernel-doc:: security/landlock/object.h
-+    :identifiers:
-+
-+Filesystem
-+----------
-+
-+.. kernel-doc:: security/landlock/fs.h
-+    :identifiers:
-+
-+Ruleset and domain
-+------------------
-+
-+A domain is a read-only ruleset tied to a set of subjects (i.e. tasks'
-+credentials).  Each time a ruleset is enforced on a task, the current domain is
-+duplicated and the ruleset is imported as a new layer of rules in the new
-+domain.  Indeed, once in a domain, each rule is tied to a layer level.  To
-+grant access to an object, at least one rule of each layer must allow the
-+requested action on the object.  A task can then only transit to a new domain
-+that is the intersection of the constraints from the current domain and those
-+of a ruleset provided by the task.
-+
-+The definition of a subject is implicit for a task sandboxing itself, which
-+makes the reasoning much easier and helps avoid pitfalls.
-+
-+.. kernel-doc:: security/landlock/ruleset.h
-+    :identifiers:
-+
-+.. Links
-+.. _tools/testing/selftests/landlock/:
-+   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/tools/testing/selftests/landlock/
-diff --git a/Documentation/userspace-api/index.rst b/Documentation/userspace-api/index.rst
-index d29b020e5622..744c6491610c 100644
---- a/Documentation/userspace-api/index.rst
-+++ b/Documentation/userspace-api/index.rst
-@@ -18,6 +18,7 @@ place where this information is gathered.
- 
-    no_new_privs
-    seccomp_filter
-+   landlock
-    unshare
-    spec_ctrl
-    accelerators/ocxl
-diff --git a/Documentation/userspace-api/landlock.rst b/Documentation/userspace-api/landlock.rst
-new file mode 100644
-index 000000000000..62c9361a3c7f
---- /dev/null
-+++ b/Documentation/userspace-api/landlock.rst
-@@ -0,0 +1,311 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+.. Copyright © 2017-2020 Mickaël Salaün <mic@digikod.net>
-+.. Copyright © 2019-2020 ANSSI
-+.. Copyright © 2021 Microsoft Corporation
-+
-+=====================================
-+Landlock: unprivileged access control
-+=====================================
-+
-+:Author: Mickaël Salaün
-+:Date: March 2021
-+
-+The goal of Landlock is to enable to restrict ambient rights (e.g. global
-+filesystem access) for a set of processes.  Because Landlock is a stackable
-+LSM, it makes possible to create safe security sandboxes as new security layers
-+in addition to the existing system-wide access-controls. This kind of sandbox
-+is expected to help mitigate the security impact of bugs or
-+unexpected/malicious behaviors in user space applications.  Landlock empowers
-+any process, including unprivileged ones, to securely restrict themselves.
-+
-+Landlock rules
-+==============
-+
-+A Landlock rule describes an action on an object.  An object is currently a
-+file hierarchy, and the related filesystem actions are defined with `access
-+rights`_.  A set of rules is aggregated in a ruleset, which can then restrict
-+the thread enforcing it, and its future children.
-+
-+Defining and enforcing a security policy
-+----------------------------------------
-+
-+We first need to create the ruleset that will contain our rules.  For this
-+example, the ruleset will contain rules that only allow read actions, but write
-+actions will be denied.  The ruleset then needs to handle both of these kind of
-+actions.
-+
-+.. code-block:: c
-+
-+    int ruleset_fd;
-+    struct landlock_ruleset_attr ruleset_attr = {
-+        .handled_access_fs =
-+            LANDLOCK_ACCESS_FS_EXECUTE |
-+            LANDLOCK_ACCESS_FS_WRITE_FILE |
-+            LANDLOCK_ACCESS_FS_READ_FILE |
-+            LANDLOCK_ACCESS_FS_READ_DIR |
-+            LANDLOCK_ACCESS_FS_REMOVE_DIR |
-+            LANDLOCK_ACCESS_FS_REMOVE_FILE |
-+            LANDLOCK_ACCESS_FS_MAKE_CHAR |
-+            LANDLOCK_ACCESS_FS_MAKE_DIR |
-+            LANDLOCK_ACCESS_FS_MAKE_REG |
-+            LANDLOCK_ACCESS_FS_MAKE_SOCK |
-+            LANDLOCK_ACCESS_FS_MAKE_FIFO |
-+            LANDLOCK_ACCESS_FS_MAKE_BLOCK |
-+            LANDLOCK_ACCESS_FS_MAKE_SYM,
-+    };
-+
-+    ruleset_fd = landlock_create_ruleset(&ruleset_attr, sizeof(ruleset_attr), 0);
-+    if (ruleset_fd < 0) {
-+        perror("Failed to create a ruleset");
-+        return 1;
-+    }
-+
-+We can now add a new rule to this ruleset thanks to the returned file
-+descriptor referring to this ruleset.  The rule will only allow reading the
-+file hierarchy ``/usr``.  Without another rule, write actions would then be
-+denied by the ruleset.  To add ``/usr`` to the ruleset, we open it with the
-+``O_PATH`` flag and fill the &struct landlock_path_beneath_attr with this file
-+descriptor.
-+
-+.. code-block:: c
-+
-+    int err;
-+    struct landlock_path_beneath_attr path_beneath = {
-+        .allowed_access =
-+            LANDLOCK_ACCESS_FS_EXECUTE |
-+            LANDLOCK_ACCESS_FS_READ_FILE |
-+            LANDLOCK_ACCESS_FS_READ_DIR,
-+    };
-+
-+    path_beneath.parent_fd = open("/usr", O_PATH | O_CLOEXEC);
-+    if (path_beneath.parent_fd < 0) {
-+        perror("Failed to open file");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+    err = landlock_add_rule(ruleset_fd, LANDLOCK_RULE_PATH_BENEATH,
-+                            &path_beneath, 0);
-+    close(path_beneath.parent_fd);
-+    if (err) {
-+        perror("Failed to update ruleset");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+
-+We now have a ruleset with one rule allowing read access to ``/usr`` while
-+denying all other handled accesses for the filesystem.  The next step is to
-+restrict the current thread from gaining more privileges (e.g. thanks to a SUID
-+binary).
-+
-+.. code-block:: c
-+
-+    if (prctl(PR_SET_NO_NEW_PRIVS, 1, 0, 0, 0)) {
-+        perror("Failed to restrict privileges");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+
-+The current thread is now ready to sandbox itself with the ruleset.
-+
-+.. code-block:: c
-+
-+    if (landlock_restrict_self(ruleset_fd, 0)) {
-+        perror("Failed to enforce ruleset");
-+        close(ruleset_fd);
-+        return 1;
-+    }
-+    close(ruleset_fd);
-+
-+If the `landlock_restrict_self` system call succeeds, the current thread is now
-+restricted and this policy will be enforced on all its subsequently created
-+children as well.  Once a thread is landlocked, there is no way to remove its
-+security policy; only adding more restrictions is allowed.  These threads are
-+now in a new Landlock domain, merge of their parent one (if any) with the new
-+ruleset.
-+
-+Full working code can be found in `samples/landlock/sandboxer.c`_.
-+
-+Layers of file path access rights
-+---------------------------------
-+
-+Each time a thread enforces a ruleset on itself, it updates its Landlock domain
-+with a new layer of policy.  Indeed, this complementary policy is stacked with
-+the potentially other rulesets already restricting this thread.  A sandboxed
-+thread can then safely add more constraints to itself with a new enforced
-+ruleset.
-+
-+One policy layer grants access to a file path if at least one of its rules
-+encountered on the path grants the access.  A sandboxed thread can only access
-+a file path if all its enforced policy layers grant the access as well as all
-+the other system access controls (e.g. filesystem DAC, other LSM policies,
-+etc.).
-+
-+Bind mounts and OverlayFS
-+-------------------------
-+
-+Landlock enables to restrict access to file hierarchies, which means that these
-+access rights can be propagated with bind mounts (cf.
-+:doc:`/filesystems/sharedsubtree`) but not with :doc:`/filesystems/overlayfs`.
-+
-+A bind mount mirrors a source file hierarchy to a destination.  The destination
-+hierarchy is then composed of the exact same files, on which Landlock rules can
-+be tied, either via the source or the destination path.  These rules restrict
-+access when they are encountered on a path, which means that they can restrict
-+access to multiple file hierarchies at the same time, whether these hierarchies
-+are the result of bind mounts or not.
-+
-+An OverlayFS mount point consists of upper and lower layers.  These layers are
-+combined in a merge directory, result of the mount point.  This merge hierarchy
-+may include files from the upper and lower layers, but modifications performed
-+on the merge hierarchy only reflects on the upper layer.  From a Landlock
-+policy point of view, each OverlayFS layers and merge hierarchies are
-+standalone and contains their own set of files and directories, which is
-+different from bind mounts.  A policy restricting an OverlayFS layer will not
-+restrict the resulted merged hierarchy, and vice versa.  Landlock users should
-+then only think about file hierarchies they want to allow access to, regardless
-+of the underlying filesystem.
-+
-+Inheritance
-+-----------
-+
-+Every new thread resulting from a :manpage:`clone(2)` inherits Landlock domain
-+restrictions from its parent.  This is similar to the seccomp inheritance (cf.
-+:doc:`/userspace-api/seccomp_filter`) or any other LSM dealing with task's
-+:manpage:`credentials(7)`.  For instance, one process's thread may apply
-+Landlock rules to itself, but they will not be automatically applied to other
-+sibling threads (unlike POSIX thread credential changes, cf.
-+:manpage:`nptl(7)`).
-+
-+When a thread sandboxes itself, we have the guarantee that the related security
-+policy will stay enforced on all this thread's descendants.  This allows
-+creating standalone and modular security policies per application, which will
-+automatically be composed between themselves according to their runtime parent
-+policies.
-+
-+Ptrace restrictions
-+-------------------
-+
-+A sandboxed process has less privileges than a non-sandboxed process and must
-+then be subject to additional restrictions when manipulating another process.
-+To be allowed to use :manpage:`ptrace(2)` and related syscalls on a target
-+process, a sandboxed process should have a subset of the target process rules,
-+which means the tracee must be in a sub-domain of the tracer.
-+
-+Kernel interface
-+================
-+
-+Access rights
-+-------------
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: fs_access
-+
-+Creating a new ruleset
-+----------------------
-+
-+.. kernel-doc:: security/landlock/syscalls.c
-+    :identifiers: sys_landlock_create_ruleset
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: landlock_ruleset_attr
-+
-+Extending a ruleset
-+-------------------
-+
-+.. kernel-doc:: security/landlock/syscalls.c
-+    :identifiers: sys_landlock_add_rule
-+
-+.. kernel-doc:: include/uapi/linux/landlock.h
-+    :identifiers: landlock_rule_type landlock_path_beneath_attr
-+
-+Enforcing a ruleset
-+-------------------
-+
-+.. kernel-doc:: security/landlock/syscalls.c
-+    :identifiers: sys_landlock_restrict_self
-+
-+Current limitations
-+===================
-+
-+File renaming and linking
-+-------------------------
-+
-+Because Landlock targets unprivileged access controls, it is needed to properly
-+handle composition of rules.  Such property also implies rules nesting.
-+Properly handling multiple layers of ruleset, each one of them able to restrict
-+access to files, also implies to inherit the ruleset restrictions from a parent
-+to its hierarchy.  Because files are identified and restricted by their
-+hierarchy, moving or linking a file from one directory to another implies to
-+propagate the hierarchy constraints.  To protect against privilege escalations
-+through renaming or linking, and for the sake of simplicity, Landlock currently
-+limits linking and renaming to the same directory.  Future Landlock evolutions
-+will enable more flexibility for renaming and linking, with dedicated ruleset
-+flags.
-+
-+Filesystem topology modification
-+--------------------------------
-+
-+As for file renaming and linking, a sandboxed thread cannot modify its
-+filesystem topology, whether via :manpage:`mount(2)` or
-+:manpage:`pivot_root(2)`.  However, :manpage:`chroot(2)` calls are not denied.
-+
-+Special filesystems
-+-------------------
-+
-+Access to regular files and directories can be restricted by Landlock,
-+according to the handled accesses of a ruleset.  However, files that do not
-+come from a user-visible filesystem (e.g. pipe, socket), but can still be
-+accessed through ``/proc/<pid>/fd/*``, cannot currently be explicitly
-+restricted.  Likewise, some special kernel filesystems such as nsfs, which can
-+be accessed through ``/proc/<pid>/ns/*``, cannot currently be explicitly
-+restricted.  However, thanks to the `ptrace restrictions`_, access to such
-+sensitive ``/proc`` files are automatically restricted according to domain
-+hierarchies.  Future Landlock evolutions could still enable to explicitly
-+restrict such paths with dedicated ruleset flags.
-+
-+Ruleset layers
-+--------------
-+
-+There is a limit of 64 layers of stacked rulesets.  This can be an issue for a
-+task willing to enforce a new ruleset in complement to its 64 inherited
-+rulesets.  Once this limit is reached, sys_landlock_restrict_self() returns
-+E2BIG.  It is then strongly suggested to carefully build rulesets once in the
-+life of a thread, especially for applications able to launch other applications
-+that may also want to sandbox themselves (e.g. shells, container managers,
-+etc.).
-+
-+Memory usage
-+------------
-+
-+Kernel memory allocated to create rulesets is accounted and can be restricted
-+by the :doc:`/admin-guide/cgroup-v1/memory`.
-+
-+Questions and answers
-+=====================
-+
-+What about user space sandbox managers?
-+---------------------------------------
-+
-+Using user space process to enforce restrictions on kernel resources can lead
-+to race conditions or inconsistent evaluations (i.e. `Incorrect mirroring of
-+the OS code and state
-+<https://www.ndss-symposium.org/ndss2003/traps-and-pitfalls-practical-problems-system-call-interposition-based-security-tools/>`_).
-+
-+What about namespaces and containers?
-+-------------------------------------
-+
-+Namespaces can help create sandboxes but they are not designed for
-+access-control and then miss useful features for such use case (e.g. no
-+fine-grained restrictions).  Moreover, their complexity can lead to security
-+issues, especially when untrusted processes can manipulate them (cf.
-+`Controlling access to user namespaces <https://lwn.net/Articles/673597/>`_).
-+
-+Additional documentation
-+========================
-+
-+* :doc:`/security/landlock`
-+* https://landlock.io
-+
-+.. Links
-+.. _samples/landlock/sandboxer.c:
-+   https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git/tree/samples/landlock/sandboxer.c
-diff --git a/MAINTAINERS b/MAINTAINERS
-index 88175ed1f315..7b0c6de5946a 100644
---- a/MAINTAINERS
-+++ b/MAINTAINERS
-@@ -10003,6 +10003,8 @@ L:	linux-security-module@vger.kernel.org
- S:	Supported
- W:	https://landlock.io
- T:	git https://github.com/landlock-lsm/linux.git
-+F:	Documentation/security/landlock.rst
-+F:	Documentation/userspace-api/landlock.rst
- F:	include/uapi/linux/landlock.h
- F:	samples/landlock/
- F:	security/landlock/
+thanks,
 -- 
-2.30.2
+John Hubbard
+NVIDIA
+
+>   What:		/sys/kernel/mm/cma/<cma-heap-name>/alloc_pages_success
+>   Date:		Feb 2021
+> 
 
