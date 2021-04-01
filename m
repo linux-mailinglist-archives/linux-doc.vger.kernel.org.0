@@ -2,75 +2,78 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id CC1DB351F49
-	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 21:07:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5B1C3351F84
+	for <lists+linux-doc@lfdr.de>; Thu,  1 Apr 2021 21:21:17 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235132AbhDATE7 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 1 Apr 2021 15:04:59 -0400
-Received: from vern.gendns.com ([98.142.107.122]:49660 "EHLO vern.gendns.com"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S235887AbhDAS7B (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 1 Apr 2021 14:59:01 -0400
-X-Greylist: delayed 4503 seconds by postgrey-1.27 at vger.kernel.org; Thu, 01 Apr 2021 14:59:01 EDT
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=lechnology.com; s=default; h=Content-Transfer-Encoding:Content-Type:
-        In-Reply-To:MIME-Version:Date:Message-ID:From:References:Cc:To:Subject:Sender
-        :Reply-To:Content-ID:Content-Description:Resent-Date:Resent-From:
-        Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:List-Id:List-Help:
-        List-Unsubscribe:List-Subscribe:List-Post:List-Owner:List-Archive;
-        bh=RNTCZdBbhMjO2dSPgQllX07OBfeYeDmdhR8sOt+nJoE=; b=vwbwnsmAtNcVyjR8tkrz0eRMBh
-        CnyXQ6lqeYRkpUIOZKS0A7ZbmOuy6x9rnrLNOKkC7c+umNbC8CisM4UIkzjWlauPZwcnxin/7/jS2
-        tS1zslG3PeZcBvsUUsmEYGF5xgP53MAFQpT4Z2dFSuPX2xGQi7E8JNwFta/Fu/aP5PuTL4NuNW/uS
-        NmQAyubwdxboI/QLNyTqOOyXCY+D/34jZK7/4CJHbrySh6hqYWzMrSFxDfDnLB3hmozeuJo2ARCyl
-        Z+vmkTCFFkF5IdCLrHJRKH4SOu6gQf6FPz6uo0j9utqvAJv98WW+I6DU18pRbz5Y3bU6oHPfJzShw
-        K53VXlsw==;
-Received: from 108-198-5-147.lightspeed.okcbok.sbcglobal.net ([108.198.5.147]:43322 helo=[192.168.0.134])
-        by vern.gendns.com with esmtpsa  (TLS1.2) tls TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
-        (Exim 4.94)
-        (envelope-from <david@lechnology.com>)
-        id 1lRzQv-00056q-AA; Thu, 01 Apr 2021 11:40:33 -0400
-Subject: Re: [PATCH 12/32] MAINTAINERS: update lego,ev3-battery.yaml reference
-To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-        Linux Doc Mailing List <linux-doc@vger.kernel.org>
-Cc:     Jonathan Corbet <corbet@lwn.net>, Rob Herring <robh@kernel.org>,
-        Sebastian Reichel <sebastian.reichel@collabora.com>,
-        linux-kernel@vger.kernel.org
-References: <cover.1617279355.git.mchehab+huawei@kernel.org>
- <be4e2f1c7f6b2cfbda4fc98ca2177b048a3ed575.1617279355.git.mchehab+huawei@kernel.org>
-From:   David Lechner <david@lechnology.com>
-Message-ID: <a727e107-a322-7720-3438-a165b3297a32@lechnology.com>
-Date:   Thu, 1 Apr 2021 10:40:32 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.7.1
+        id S234481AbhDATVO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 1 Apr 2021 15:21:14 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:51388 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S234569AbhDATVE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 1 Apr 2021 15:21:04 -0400
+Received: from mail-pl1-x62b.google.com (mail-pl1-x62b.google.com [IPv6:2607:f8b0:4864:20::62b])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 48E39C06178A;
+        Thu,  1 Apr 2021 11:15:15 -0700 (PDT)
+Received: by mail-pl1-x62b.google.com with SMTP id f17so1445033plr.0;
+        Thu, 01 Apr 2021 11:15:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=fCN7HFcnvMpvphnepoCBtJplYkwECQXR2iZTdliGiTg=;
+        b=dchZIDlXtJvfkwTLzGyyTve5opr2+bltojKqDNPOcF3IJah1ARE+lv/AfJNEYHb/TV
+         X8l/y3PNjPzZn1ybq4INWmCQ5Jsi0zNqPyXruuFXDm9l3XVQ6HJx2rKc3r8kmX/Lshk4
+         WYHPFuWfsI60CZQ1749BHQdDkUz8EWZMs+7J/IViwV3xaOa1gtOtMOCffQf8vSYN9qBc
+         2LIrHnWB6srdpRIbHBuVCFEsqFW6O/cl6vdrRdSYhZbKHzsnWf0QimI0vTvty7gSty+C
+         ofIXArAXVbH6xCJofuvId4hFanWuN4A+0qZW/8hZ4Q5TARRI3A1rCsCM5o9xGYspGPPf
+         3dUw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=fCN7HFcnvMpvphnepoCBtJplYkwECQXR2iZTdliGiTg=;
+        b=P1yiZDJrDoUDkfevG4K7qLLmec6vZMoRUp+lRS16dBHSf2XioS63Cge8SzTKpeOb2J
+         RxDoAOJZKGKgQn8S1ocvTEYgDO1a8XIDZX69UjH6D5O39BSOa/MrFE+K/zPcs0f+OFN6
+         A/HL2qmoxd3qKcU10Kv2pCQ3e2SSjAtz+ODIeTepzGbsZd+4d2cGBUI+F0uTTY8Ci+wJ
+         hBm7ZYtTaT1pnca+Fr3BL5e4LIVtgK9exI4Fi9/VlkDaDCsFyrB7kda0XFcUYucBpJbr
+         ywrsX6Rs5J+TLt+n1ZGu6Jk7d1QSgBAgsMRU/c+uuFJJIjO0ezp7eB2b1b7T8q4yqQDd
+         XPGg==
+X-Gm-Message-State: AOAM533XsKwEX2IdejhYi1LapdPApZXvkO1UhZyFm67J8BibWKj8zeN3
+        pUNziG+YSIo4yYeue4wPJq1NX/LgJkvBEty6x08NtwF1
+X-Google-Smtp-Source: ABdhPJwBYzTyRNc5CtDOYzz/PZZSIIocniBSGHjSb4F+WJEtDwFrRCi+7tXiHbjIobJvsh8lGp1yHXUy8nGzsKNPlxg=
+X-Received: by 2002:a17:902:8f8d:b029:e7:4a2f:1950 with SMTP id
+ z13-20020a1709028f8db02900e74a2f1950mr8884582plo.77.1617300914858; Thu, 01
+ Apr 2021 11:15:14 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <be4e2f1c7f6b2cfbda4fc98ca2177b048a3ed575.1617279355.git.mchehab+huawei@kernel.org>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
-X-AntiAbuse: This header was added to track abuse, please include it with any abuse report
-X-AntiAbuse: Primary Hostname - vern.gendns.com
-X-AntiAbuse: Original Domain - vger.kernel.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - lechnology.com
-X-Get-Message-Sender-Via: vern.gendns.com: authenticated_id: davidmain+lechnology.com/only user confirmed/virtual account not confirmed
-X-Authenticated-Sender: vern.gendns.com: davidmain@lechnology.com
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
+References: <20210328221205.726511-1-xie.he.0141@gmail.com>
+ <CAJht_EMVAV1eyredF+VEF=hxTTMVRMx+89XdpVAWpD5Lq1Y9Tw@mail.gmail.com> <21ec9eafa230f2e20dd88d31fd95faa0@dev.tdt.de>
+In-Reply-To: <21ec9eafa230f2e20dd88d31fd95faa0@dev.tdt.de>
+From:   Xie He <xie.he.0141@gmail.com>
+Date:   Thu, 1 Apr 2021 11:15:04 -0700
+Message-ID: <CAJht_EMpRd8KhLQLZeDOVrhi2KHi5aLUkDknv=Ujw6MniesRHg@mail.gmail.com>
+Subject: Re: [PATCH net-next v4] net: x25: Queue received packets in the
+ drivers instead of per-CPU queues
+To:     Martin Schiller <ms@dev.tdt.de>
+Cc:     "David S. Miller" <davem@davemloft.net>,
+        Jakub Kicinski <kuba@kernel.org>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Krzysztof Halasa <khc@pm.waw.pl>,
+        Linux X25 <linux-x25@vger.kernel.org>,
+        Linux Kernel Network Developers <netdev@vger.kernel.org>,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 4/1/21 7:17 AM, Mauro Carvalho Chehab wrote:
-> Changeset 3004e581d92a ("dt-bindings: power: supply: lego-ev3-battery: Convert to DT schema format")
-> renamed: Documentation/devicetree/bindings/power/supply/lego_ev3_battery.txt
-> to: Documentation/devicetree/bindings/power/supply/lego,ev3-battery.yaml.
-> 
-> Update its cross-reference accordingly.
-> 
-> Fixes: 3004e581d92a ("dt-bindings: power: supply: lego-ev3-battery: Convert to DT schema format")
-> Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-> ---
+On Thu, Apr 1, 2021 at 3:06 AM Martin Schiller <ms@dev.tdt.de> wrote:
+>
+> Hi!
+>
+> Sorry for my late answer.
+> Can you please also fix this line length warning?
+> https://patchwork.hopto.org/static/nipa/442445/12117801/checkpatch/stdout
 
-Reviewed-by: David Lechner <david@lechnology.com>
+OK! Sure! I'll fix the line length warning and resubmit.
 
+Thanks!
