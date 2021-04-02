@@ -2,32 +2,32 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BE2ED352805
-	for <lists+linux-doc@lfdr.de>; Fri,  2 Apr 2021 11:07:48 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 5C6AC35282F
+	for <lists+linux-doc@lfdr.de>; Fri,  2 Apr 2021 11:10:36 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233894AbhDBJHX (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 2 Apr 2021 05:07:23 -0400
-Received: from mail.kernel.org ([198.145.29.99]:51542 "EHLO mail.kernel.org"
+        id S234536AbhDBJIj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 2 Apr 2021 05:08:39 -0400
+Received: from mail.kernel.org ([198.145.29.99]:52592 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S234854AbhDBJHS (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 2 Apr 2021 05:07:18 -0400
+        id S235161AbhDBJIc (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 2 Apr 2021 05:08:32 -0400
 Received: from jic23-huawei (cpc108967-cmbg20-2-0-cust86.5-4.cable.virginm.net [81.101.6.87])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by mail.kernel.org (Postfix) with ESMTPSA id C641B60724;
-        Fri,  2 Apr 2021 09:07:14 +0000 (UTC)
-Date:   Fri, 2 Apr 2021 10:07:26 +0100
+        by mail.kernel.org (Postfix) with ESMTPSA id A34D360FF3;
+        Fri,  2 Apr 2021 09:08:29 +0000 (UTC)
+Date:   Fri, 2 Apr 2021 10:08:40 +0100
 From:   Jonathan Cameron <jic23@kernel.org>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
         "Jonathan Corbet" <corbet@lwn.net>,
         Jonathan Cameron <Jonathan.Cameron@huawei.com>,
         Rob Herring <robh@kernel.org>, linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 05/32] MAINTAINERS: update st,hts221.yaml reference
-Message-ID: <20210402100602.1673bc1e@jic23-huawei>
-In-Reply-To: <a83cf29bbd27b26eb22e0046c41efebf488e7e4d.1617279355.git.mchehab+huawei@kernel.org>
+Subject: Re: [PATCH 06/32] MAINTAINERS: update dpot-dac.yaml reference
+Message-ID: <20210402100840.21be3bdd@jic23-huawei>
+In-Reply-To: <efda999adce3332dc1b5c20a998f3824c1cc1b0f.1617279355.git.mchehab+huawei@kernel.org>
 References: <cover.1617279355.git.mchehab+huawei@kernel.org>
-        <a83cf29bbd27b26eb22e0046c41efebf488e7e4d.1617279355.git.mchehab+huawei@kernel.org>
+        <efda999adce3332dc1b5c20a998f3824c1cc1b0f.1617279355.git.mchehab+huawei@kernel.org>
 X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
 Content-Type: text/plain; charset=US-ASCII
@@ -36,33 +36,35 @@ Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Thu,  1 Apr 2021 14:17:25 +0200
+On Thu,  1 Apr 2021 14:17:26 +0200
 Mauro Carvalho Chehab <mchehab+huawei@kernel.org> wrote:
 
-> Changeset 9a6ac3138258 ("dt-bindings:iio:humidity:st,hts221 yaml conversion.")
-> renamed: Documentation/devicetree/bindings/iio/humidity/hts221.txt
-> to: Documentation/devicetree/bindings/iio/humidity/st,hts221.yaml.
+> Changeset 06d2ff6fe11e ("dt-bindings:iio:dac:dpot-dac: yaml conversion.")
+> renamed: Documentation/devicetree/bindings/iio/dac/dpot-dac.txt
+> to: Documentation/devicetree/bindings/iio/dac/dpot-dac.yaml.
 > 
 > Update its cross-reference accordingly.
 > 
-> Fixes: 9a6ac3138258 ("dt-bindings:iio:humidity:st,hts221 yaml conversion.")
+> Fixes: 06d2ff6fe11e ("dt-bindings:iio:dac:dpot-dac: yaml conversion.")
 > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
-Applied
+
+Applied.
+
 > ---
 >  MAINTAINERS | 2 +-
 >  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
 > diff --git a/MAINTAINERS b/MAINTAINERS
-> index de9637196526..1985d75d59c7 100644
+> index 1985d75d59c7..52ce258fab37 100644
 > --- a/MAINTAINERS
 > +++ b/MAINTAINERS
-> @@ -8287,7 +8287,7 @@ M:	Lorenzo Bianconi <lorenzo.bianconi83@gmail.com>
+> @@ -8753,7 +8753,7 @@ M:	Peter Rosin <peda@axentia.se>
 >  L:	linux-iio@vger.kernel.org
 >  S:	Maintained
->  W:	http://www.st.com/
-> -F:	Documentation/devicetree/bindings/iio/humidity/hts221.txt
-> +F:	Documentation/devicetree/bindings/iio/humidity/st,hts221.yaml
->  F:	drivers/iio/humidity/hts221*
+>  F:	Documentation/ABI/testing/sysfs-bus-iio-dac-dpot-dac
+> -F:	Documentation/devicetree/bindings/iio/dac/dpot-dac.txt
+> +F:	Documentation/devicetree/bindings/iio/dac/dpot-dac.yaml
+>  F:	drivers/iio/dac/dpot-dac.c
 >  
->  HUAWEI ETHERNET DRIVER
+>  IIO ENVELOPE DETECTOR
 
