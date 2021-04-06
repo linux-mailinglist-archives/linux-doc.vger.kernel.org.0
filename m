@@ -2,101 +2,68 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E19623553EB
-	for <lists+linux-doc@lfdr.de>; Tue,  6 Apr 2021 14:32:07 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 624F7355433
+	for <lists+linux-doc@lfdr.de>; Tue,  6 Apr 2021 14:48:49 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1344012AbhDFMcO (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 6 Apr 2021 08:32:14 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:45720 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S243177AbhDFMcN (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Apr 2021 08:32:13 -0400
-Received: from mail-oi1-x22b.google.com (mail-oi1-x22b.google.com [IPv6:2607:f8b0:4864:20::22b])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4CB05C06174A
-        for <linux-doc@vger.kernel.org>; Tue,  6 Apr 2021 05:32:06 -0700 (PDT)
-Received: by mail-oi1-x22b.google.com with SMTP id a8so14872423oic.11
-        for <linux-doc@vger.kernel.org>; Tue, 06 Apr 2021 05:32:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:from:date:message-id:subject:to:cc;
-        bh=mOGYTloogX7Yy/qlD5Wx++js30ffTWh/96k1TeD3NDI=;
-        b=U8QdFcZYCVqvdu3cWbGjh+mmGTTK3ZgoixxAlHl589sSrlTYc2auaiPUffXsfOW35c
-         LN6PyTSTORbwTxGFi4T9/jlDeIsKKx0Bm+xuv2Hv/JOXNDhbdipCmfLOXJNnk6WLrzJw
-         x1vTnVWekUHZHszzrlZxRtjD+sAr8Md3ieY/o8C5LzoPRqV4uPme+hAZFFAvR8CgI2FD
-         wYQ9cYG7HgxTHJaPKbC82fvylB7++2puvpsMtRgsrCemtLqTJHYIKg0q0z0YLXUhrXCO
-         TlzZGr2v4pm8fn/6WVHe5wthzU9b9USN6M8xpdX+Hd38FQQ9DsQdyLlbZry56w2m7HJe
-         EiQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
-        bh=mOGYTloogX7Yy/qlD5Wx++js30ffTWh/96k1TeD3NDI=;
-        b=oV6SqJNWJTxt9Qq5FeSy8R9nTFXhL6yrbsoDj7BAhcHRJkl3CRRAczkpz9YpiBkUSK
-         aMqWnKEhc3ClbSH4qMEZDIxlWKS0ZrriNwMTAnK8n07h9OUKxojFgjtUekt+89BGY5qi
-         NjPGg/9FrPxGao8jQopQ+4lrOfCRcR7cNLrHHCxQufs05RgffCZqDnJcsKNwI1rYorpR
-         5G7k/vEHt27y555dv2YyfX4CrYXW2NcX0pvC4tnJNDI23knD6452qciGRHYzTWNzlxNZ
-         zwlkChPguum0oJMUV8NA2vrZsFDiE4QsC9G3neNt4L6EZgZ7PG5ZmwlRh9Eujz6Ug/Pn
-         WBAA==
-X-Gm-Message-State: AOAM533/cGdGw/UJFDcaJiWQC0WAcoFFquP4/MXFTc+gI3Nw+fuJ1oxr
-        icHzvPTG9S3gG4sw+yoyJBr5+fgCMbUJuyocBa+GO3KXEfI=
-X-Google-Smtp-Source: ABdhPJz6mT2L7jR6KUrOaYxO7Qkl+E8gQg+Qb5li+w9c6yMJSGfBW0A5pljJHr6E8MhYZqH9r6tbg89VYzWDhhMEkzA=
-X-Received: by 2002:a54:4507:: with SMTP id l7mr3018654oil.165.1617712325776;
- Tue, 06 Apr 2021 05:32:05 -0700 (PDT)
+        id S1344205AbhDFMsr (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 6 Apr 2021 08:48:47 -0400
+Received: from szxga06-in.huawei.com ([45.249.212.32]:15920 "EHLO
+        szxga06-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S243230AbhDFMsr (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 6 Apr 2021 08:48:47 -0400
+Received: from DGGEMS413-HUB.china.huawei.com (unknown [172.30.72.58])
+        by szxga06-in.huawei.com (SkyGuard) with ESMTP id 4FF6jP0wzCzkhqX;
+        Tue,  6 Apr 2021 20:46:49 +0800 (CST)
+Received: from localhost.localdomain (10.67.165.24) by
+ DGGEMS413-HUB.china.huawei.com (10.3.19.213) with Microsoft SMTP Server id
+ 14.3.498.0; Tue, 6 Apr 2021 20:48:27 +0800
+From:   Yicong Yang <yangyicong@hisilicon.com>
+To:     <alexander.shishkin@linux.intel.com>, <helgaas@kernel.org>,
+        <linux-kernel@vger.kernel.org>, <linux-pci@vger.kernel.org>
+CC:     <lorenzo.pieralisi@arm.com>, <gregkh@linuxfoundation.org>,
+        <jonathan.cameron@huawei.com>, <song.bao.hua@hisilicon.com>,
+        <prime.zeng@huawei.com>, <yangyicong@hisilicon.com>,
+        <linux-doc@vger.kernel.org>, <linuxarm@huawei.com>
+Subject: [PATCH 0/4] Add support for HiSilicon PCIe Tune and Trace device
+Date:   Tue, 6 Apr 2021 20:45:50 +0800
+Message-ID: <1617713154-35533-1-git-send-email-yangyicong@hisilicon.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-From:   =?UTF-8?Q?St=C3=A9phane_Blondon?= <stephane.blondon@gmail.com>
-Date:   Tue, 6 Apr 2021 14:31:50 +0200
-Message-ID: <CAOy+up7EdTf4ouh5onVy_ZzXFWGBEP+P6CPqY-=E+1UFwCeq8w@mail.gmail.com>
-Subject: Minor spellcheck in spi documentation
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     linux-doc@vger.kernel.org
-Content-Type: multipart/mixed; boundary="00000000000087217705bf4d0092"
+Content-Type: text/plain
+X-Originating-IP: [10.67.165.24]
+X-CFilter-Loop: Reflected
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
---00000000000087217705bf4d0092
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+HiSilicon PCIe tune and trace device(PTT) is a PCIe Root Complex
+integrated Endpoint(RCiEP) device, providing the capability
+to dynamically monitor and tune the PCIe traffic(tune),
+and trace the TLP headers(trace). The driver exposes the user
+interface through debugfs, so no need for extra user space tools.
+The usage is described in the document.
 
-Hello,
+Yicong Yang (4):
+  hwtracing: Add trace function support for HiSilicon PCIe Tune and
+    Trace device
+  hwtracing: Add tune function support for HiSilicon PCIe Tune and Trace
+    device
+  docs: Add documentation for HiSilicon PTT device driver
+  MAINTAINERS: Add maintainer for HiSilicon PTT driver
 
-I attached a patch fixing the wrong spelling ('ciruit' to 'circuit').
+ Documentation/trace/hisi-ptt.rst       |  316 ++++++
+ MAINTAINERS                            |    7 +
+ drivers/Makefile                       |    1 +
+ drivers/hwtracing/Kconfig              |    2 +
+ drivers/hwtracing/hisilicon/Kconfig    |    8 +
+ drivers/hwtracing/hisilicon/Makefile   |    2 +
+ drivers/hwtracing/hisilicon/hisi_ptt.c | 1636 ++++++++++++++++++++++++++++++++
+ 7 files changed, 1972 insertions(+)
+ create mode 100644 Documentation/trace/hisi-ptt.rst
+ create mode 100644 drivers/hwtracing/hisilicon/Kconfig
+ create mode 100644 drivers/hwtracing/hisilicon/Makefile
+ create mode 100644 drivers/hwtracing/hisilicon/hisi_ptt.c
 
-I temporarily subscribed to the linux-doc mailing list if replies are neede=
-d.
+-- 
+2.8.1
 
-Regards,
---=20
-St=C3=A9phane
-
---00000000000087217705bf4d0092
-Content-Type: text/x-diff; charset="UTF-8"; name="spellcheck_spi_documentation.patch"
-Content-Disposition: attachment; 
-	filename="spellcheck_spi_documentation.patch"
-Content-Transfer-Encoding: base64
-Content-ID: <f_kn601wuj0>
-X-Attachment-Id: f_kn601wuj0
-
-RnJvbSAyMzNlMDBjMzQ3OTcwOWNjNTI0NDhiNTQxZDA3M2E1ZTRjODU2OGFlIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiA9P1VURi04P3E/U3Q9QzM9QTlwaGFuZT0yMEJsb25kb24/PSA8
-c3RlcGhhbmUuYmxvbmRvbkBnbWFpbC5jb20+CkRhdGU6IFR1ZSwgNiBBcHIgMjAyMSAxNDoxMjoy
-MiArMDIwMApTdWJqZWN0OiBbUEFUQ0hdIEZpeDogc3BlbGxjaGVjayAnY2lydWl0JyB0byAnY2ly
-Y3VpdCcKTUlNRS1WZXJzaW9uOiAxLjAKQ29udGVudC1UeXBlOiB0ZXh0L3BsYWluOyBjaGFyc2V0
-PVVURi04CkNvbnRlbnQtVHJhbnNmZXItRW5jb2Rpbmc6IDhiaXQKClNpZ25lZC1vZmYtYnk6IFN0
-w6lwaGFuZSBCbG9uZG9uIDxzdGVwaGFuZS5ibG9uZG9uQGdtYWlsLmNvbT4KLS0tCiBEb2N1bWVu
-dGF0aW9uL3NwaS9idXR0ZXJmbHkucnN0IHwgMiArLQogMSBmaWxlIGNoYW5nZWQsIDEgaW5zZXJ0
-aW9uKCspLCAxIGRlbGV0aW9uKC0pCgpkaWZmIC0tZ2l0IGEvRG9jdW1lbnRhdGlvbi9zcGkvYnV0
-dGVyZmx5LnJzdCBiL0RvY3VtZW50YXRpb24vc3BpL2J1dHRlcmZseS5yc3QKaW5kZXggZTYxNGE1
-ODk1NDdjLi41NjA4OGZiMDkwYzcgMTAwNjQ0Ci0tLSBhL0RvY3VtZW50YXRpb24vc3BpL2J1dHRl
-cmZseS5yc3QKKysrIGIvRG9jdW1lbnRhdGlvbi9zcGkvYnV0dGVyZmx5LnJzdApAQCAtMTEsNyAr
-MTEsNyBAQCBkZXZlbG9wIGZpcm13YXJlIGZvciB0aGlzLCBhbmQgZmxhc2ggaXQgdXNpbmcgdGhp
-cyBhZGFwdGVyIGNhYmxlLgogCiBZb3UgY2FuIG1ha2UgdGhpcyBhZGFwdGVyIGZyb20gYW4gb2xk
-IHByaW50ZXIgY2FibGUgYW5kIHNvbGRlciB0aGluZ3MKIGRpcmVjdGx5IHRvIHRoZSBCdXR0ZXJm
-bHkuICBPciAoaWYgeW91IGhhdmUgdGhlIHBhcnRzIGFuZCBza2lsbHMpIHlvdQotY2FuIGNvbWUg
-dXAgd2l0aCBzb21ldGhpbmcgZmFuY2llciwgcHJvdmlkaW5nIGNpcnVpdCBwcm90ZWN0aW9uIHRv
-IHRoZQorY2FuIGNvbWUgdXAgd2l0aCBzb21ldGhpbmcgZmFuY2llciwgcHJvdmlkaW5nIGNpcmN1
-aXQgcHJvdGVjdGlvbiB0byB0aGUKIEJ1dHRlcmZseSBhbmQgdGhlIHByaW50ZXIgcG9ydCwgb3Ig
-d2l0aCBhIGJldHRlciBwb3dlciBzdXBwbHkgdGhhbiB0d28KIHNpZ25hbCBwaW5zIGZyb20gdGhl
-IHByaW50ZXIgcG9ydC4gIE9yIGZvciB0aGF0IG1hdHRlciwgeW91IGNhbiB1c2UKIHNpbWlsYXIg
-Y2FibGVzIHRvIHRhbGsgdG8gbWFueSBBVlIgYm9hcmRzLCBldmVuIGEgYnJlYWRib2FyZC4KLS0g
-CjIuMjAuMQoK
---00000000000087217705bf4d0092--
