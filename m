@@ -2,113 +2,178 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 34A873566CF
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Apr 2021 10:28:45 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C03EB356776
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Apr 2021 11:00:27 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237713AbhDGI2w (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 7 Apr 2021 04:28:52 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:52816 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S234447AbhDGI2w (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Apr 2021 04:28:52 -0400
-Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 08E6FC06174A
-        for <linux-doc@vger.kernel.org>; Wed,  7 Apr 2021 01:28:37 -0700 (PDT)
-Received: by mail-pj1-x102a.google.com with SMTP id ep1-20020a17090ae641b029014d48811e37so898100pjb.4
-        for <linux-doc@vger.kernel.org>; Wed, 07 Apr 2021 01:28:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-         :cc:content-transfer-encoding;
-        bh=SKVhXXdVelUke93XrkiteYMFIGUwijvgTjfClqhiyN4=;
-        b=U07amTl36WDftCG25Y7ZRiWvJT6GBW07IMxsSfV1mhFZ/0325SzTlibGApv7df/NoG
-         FnV+b6pLb6/6TTDU8hXKOCPe+VNTik+vU7k7aj4Lsc9mlxRum0vB8TWCchbvLtJ8KTYz
-         lVVk2QlmLAxoIeH7/mVjGUdPF90esWTmyoM3lCixFI/flwJGsHI5Oqv1MWtHTE3GW4ue
-         gFphLkPuP9Z7DJNDH0VpnnU+bJFGt+JnlY8Abwd8+YU3D1LP4a2VlOapy5I3wEn377rN
-         zQoroYTrAJKvzJoM1wrygri9Jd0ZyiTb/sf0jvyHEoEoNBEjEjl3D5dZJV+5jSZoonS0
-         HBFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-         :message-id:subject:to:cc:content-transfer-encoding;
-        bh=SKVhXXdVelUke93XrkiteYMFIGUwijvgTjfClqhiyN4=;
-        b=djwwp4VenoJQOUXNgNZ6wnBhKL85YW5p1Apqb1GHOAcEu1BzPJRmTERNl0VorirqPs
-         KW+3DPmEN07Kr9woQXGcEa+2DC1364gnn+JRDkEEiu+barYX6Jphd//AFzUy3ZrbFXM1
-         EOm4auJ1eWtEOcpaVxix57T+5PTv/En6BSYqJi23hne1/ZXWn7SpeZHDigseboL3Kbxj
-         B3oHoxMb1eSGCwpU6ICHXvLvDOkAQhXqDjlraFWtU3joMmi5gpchwxfePb+Z796iREIW
-         4VtOBubrpEuL/onK9Z3wR17sjdSXHv1J8Z3KLA0rey6UXSxS99lH0hVS0D15PFeqjHCh
-         cJAQ==
-X-Gm-Message-State: AOAM5308MQInzdlAzXW5OF65FTsYAfXiJtKcdwHdz+2u5TUcVOjkYxEY
-        qOBQIXartOBwob5cwb170ApSgl15hhR3Y7iipPY=
-X-Google-Smtp-Source: ABdhPJxjGz3UTXc474GX9hkV1HGMBhUyTQr71AEuXBI0JdP6vhBg483+wHQl8YsnQmGwIaM1SVcZaBycj38v6HIe5Vw=
-X-Received: by 2002:a17:903:2490:b029:e6:faf5:86df with SMTP id
- p16-20020a1709032490b02900e6faf586dfmr1901487plw.69.1617784116553; Wed, 07
- Apr 2021 01:28:36 -0700 (PDT)
+        id S1349811AbhDGJA3 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Apr 2021 05:00:29 -0400
+Received: from mail-bn7nam10on2046.outbound.protection.outlook.com ([40.107.92.46]:13063
+        "EHLO NAM10-BN7-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S231784AbhDGJA2 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 7 Apr 2021 05:00:28 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=J5zYDpJD/MybtUsNLiNYNLSIZDBQRE6hgY9K0VjKPlmvIvGXnmTPHQ2XgrSnVrd5+gt2igdMI1/VZ9sKBAWCasNukEGxtpcdzuS6NQwMqYR1YzKgITfzPBPbhSyoIUUPebf20cS5je2LC/hgc8bSgi5kIG2neeEdw0B/D0Fzb1tfruiTrj+tyMVJV20OSD4XqYhFyuyCGedAIexE/L8ePkPSgoNW6j+TzVDyaC9pirs+R0lPE+zeh+61+GW0+4lILuAsxV6PL6tvGKuDiA8nwCYSx+rgUxbBacfQI7hL+2OW76uKmVIQ8J1OyZ/TApnjOB9p/5oIuRBe7/01a6CLlw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8atsAucQ0pf6s4/I6SzoG1tIrheC/G0Dy6H8UzwNmm0=;
+ b=DEdOZlVQt64EnXve4NnDQkOLjV3ODCCqAU8Ar55DKilZEPneknucZgcufpVc8OuatJUO5zeH0weH4f3HQ32eM1HMY61NCZWc894dpmyReWYxViXx+NqUbKuy45NDLX92irTUkX847SpgR+QVUWLlIUy1sFhelpnu4Fnfc7+r6QSwkLdHiZiWxzWrvEoxAhLrlrbtRrg8lAm9m8TToygEkQMaHi4PS7zApzI8KSZ1n5POlYuYR1daDAOT91wNWNe+ynRR14vfFoheikcZDDAOMebBtuDgvkrVJXEF64eNIlW/v7H/X+wrr1vIbky/7grzWZHGNAIjo6FGyenclj+3aA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 216.228.112.34) smtp.rcpttodomain=infradead.org smtp.mailfrom=nvidia.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=nvidia.com;
+ dkim=none (message not signed); arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=8atsAucQ0pf6s4/I6SzoG1tIrheC/G0Dy6H8UzwNmm0=;
+ b=npwX4mkxoM5h7nHmbEBpSDT5nXCsxVRM6M/XD4yqy898e472oRW/t7WEiICRgaol5upfLECCssZpb0Cu4VkJG4bnRboRwjeZB9vJtGtUS1yHZ0yKIPmHJGCKig1rG4UbEw15Kw84HIGNGIxAsjuvQGC2gvFMrYTTiktG5swMhIe1WaSw0W3pQXtsZbl4deaU5Gmyxio9yv6O3HagCnXMEK9ZTOS7hrw8YD2S7/d05QUzkjhWnXnwi842IO3ZuC4wL+Gp8yaCN0Yi4/rzX0gnvXXbPSb2WkoHzAIzF7Ddvr5HjSl2hCZ890c1hELnOYolCkFGZXlfbGZayRsdFh7Q4Q==
+Received: from BN9PR03CA0451.namprd03.prod.outlook.com (2603:10b6:408:139::6)
+ by SN6PR12MB2685.namprd12.prod.outlook.com (2603:10b6:805:67::33) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.32; Wed, 7 Apr
+ 2021 08:42:57 +0000
+Received: from BN8NAM11FT008.eop-nam11.prod.protection.outlook.com
+ (2603:10b6:408:139:cafe::2f) by BN9PR03CA0451.outlook.office365.com
+ (2603:10b6:408:139::6) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.3999.28 via Frontend
+ Transport; Wed, 7 Apr 2021 08:42:56 +0000
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 216.228.112.34)
+ smtp.mailfrom=nvidia.com; infradead.org; dkim=none (message not signed)
+ header.d=none;infradead.org; dmarc=pass action=none header.from=nvidia.com;
+Received-SPF: Pass (protection.outlook.com: domain of nvidia.com designates
+ 216.228.112.34 as permitted sender) receiver=protection.outlook.com;
+ client-ip=216.228.112.34; helo=mail.nvidia.com;
+Received: from mail.nvidia.com (216.228.112.34) by
+ BN8NAM11FT008.mail.protection.outlook.com (10.13.177.95) with Microsoft SMTP
+ Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id
+ 15.20.3999.28 via Frontend Transport; Wed, 7 Apr 2021 08:42:56 +0000
+Received: from localhost (172.20.145.6) by HQMAIL107.nvidia.com
+ (172.20.187.13) with Microsoft SMTP Server (TLS) id 15.0.1497.2; Wed, 7 Apr
+ 2021 08:42:55 +0000
+From:   Alistair Popple <apopple@nvidia.com>
+To:     <linux-mm@kvack.org>, <nouveau@lists.freedesktop.org>,
+        <bskeggs@redhat.com>, <akpm@linux-foundation.org>
+CC:     Alistair Popple <apopple@nvidia.com>, <linux-doc@vger.kernel.org>,
+        <linux-kernel@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+        <jhubbard@nvidia.com>, <rcampbell@nvidia.com>,
+        <jglisse@redhat.com>, <jgg@nvidia.com>, <hch@infradead.org>,
+        <daniel@ffwll.ch>, <willy@infradead.org>, <bsingharora@gmail.com>
+Subject: [PATCH v8 0/8] Add support for SVM atomics in Nouveau
+Date:   Wed, 7 Apr 2021 18:42:30 +1000
+Message-ID: <20210407084238.20443-1-apopple@nvidia.com>
+X-Mailer: git-send-email 2.20.1
 MIME-Version: 1.0
-References: <cover.1617699755.git.bobwxc@email.cn> <c2c2d12ac6b85a357ef76889bcb3797efbad1fd4.1617699755.git.bobwxc@email.cn>
-In-Reply-To: <c2c2d12ac6b85a357ef76889bcb3797efbad1fd4.1617699755.git.bobwxc@email.cn>
-From:   teng sterling <sterlingteng@gmail.com>
-Date:   Wed, 7 Apr 2021 16:28:25 +0800
-Message-ID: <CAMU9jJrhExJZyGKZFtSCdfTcT_E4LMznn5NMdSNHYe+na5e=Lg@mail.gmail.com>
-Subject: Re: [PATCH v3 6/8] docs/zh_CN: Add translation zh_CN/doc-guide/maintainer-profile.rst
-To:     Wu XiangCheng <bobwxc@email.cn>
-Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <seakeel@gmail.com>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Jonathan Corbet <corbet@lwn.net>, linux-doc@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [172.20.145.6]
+X-ClientProxiedBy: HQMAIL107.nvidia.com (172.20.187.13) To
+ HQMAIL107.nvidia.com (172.20.187.13)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-Office365-Filtering-Correlation-Id: 9956c420-90f4-48b0-4ffc-08d8f9a12463
+X-MS-TrafficTypeDiagnostic: SN6PR12MB2685:
+X-Microsoft-Antispam-PRVS: <SN6PR12MB26854AE7B874CC2D32AFEF80DF759@SN6PR12MB2685.namprd12.prod.outlook.com>
+X-MS-Oob-TLC-OOBClassifiers: OLM:10000;
+X-MS-Exchange-SenderADCheck: 1
+X-Microsoft-Antispam: BCL:0;
+X-Microsoft-Antispam-Message-Info: WI5/BxbTvGeIKaA8XpijPEomx00Vnt6PnzGcRN2DVYFxiy4e5bWiupikUzXLsLc1Ci9gjxQclyq3+7t0TtDsARXf78pk3T4Nv6NWm3hPY5OUZJv+ZVVs7D/ZDMGzwvuQDqd4xyV1/xkexVbBZpLeWIao9kauKKfZ+dvo55l1u1ru8U+uVRfWd2mNKgeXefKY0pcRPTqRr4FG77l7UorBNpAChvtrNcN+RCeuoxgzMEL/E6MuPZKct6yLBpyVZeDhOtcn4Z99ohqBcVT6+vjkMPVluvn0mvm8o3QjdCL2Kw9jHgvdmpN/z5YjzufriCrGktqMI5xqD5dqwUrrrTfjyTg2gBpZJ+t0R4D/Sc2F9MEtHLvWKdxMxpN/OA9regYIZbtcIXfbUPu92pleuYEdywYUD4e5OH0AuyRe0DMragD6nQ4TrmY6fcYbSvp+vr2/rGZC5N5lsRYilKxlOedzo26oE5sfIxcHGMpWa1J2eOWnONRWF4HV+UCYEecGznVLBf0zpJt8g+r2oDCmQZsJdF17+UI/GGV9z5SgOuXksfGr6mbgooYmdExKplBbz58cJIM6O055w7fPIlW45pL9n9WSLL2hYIR89ANkuUtma/Rb48h4scgzHhqyQjtUeRgziupoSfr9MUHXLkaXHqTLkjFJ6HPg/Crm1UX8wXTU320=
+X-Forefront-Antispam-Report: CIP:216.228.112.34;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mail.nvidia.com;PTR:schybrid03.nvidia.com;CAT:NONE;SFS:(4636009)(396003)(39860400002)(376002)(136003)(346002)(46966006)(36840700001)(1076003)(356005)(4326008)(36756003)(7636003)(7416002)(6666004)(5660300002)(426003)(186003)(70206006)(16526019)(82310400003)(47076005)(86362001)(36860700001)(54906003)(316002)(82740400003)(70586007)(83380400001)(478600001)(8936002)(2616005)(26005)(8676002)(336012)(2906002)(110136005)(36906005);DIR:OUT;SFP:1101;
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Apr 2021 08:42:56.6785
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9956c420-90f4-48b0-4ffc-08d8f9a12463
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=43083d15-7273-40c1-b7db-39efd9ccc17a;Ip=[216.228.112.34];Helo=[mail.nvidia.com]
+X-MS-Exchange-CrossTenant-AuthSource: BN8NAM11FT008.eop-nam11.prod.protection.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN6PR12MB2685
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-V3UgWGlhbmdDaGVuZyA8Ym9id3hjQGVtYWlsLmNuPiDkuo4yMDIx5bm0NOaciDfml6XlkajkuIkg
-5LiL5Y2IMzo1MeWGmemBk++8mg0KPg0KPiBBZGQgbmV3IHRyYW5zbGF0aW9uDQo+ICAgRG9jdW1l
-bnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vZG9jLWd1aWRlL21haW50YWluZXItcHJvZmlsZS5y
-c3QNCj4NCj4gU2lnbmVkLW9mZi1ieTogV3UgWGlhbmdDaGVuZyA8Ym9id3hjQGVtYWlsLmNuPg0K
-PiAtLS0NCj4gIC4uLi96aF9DTi9kb2MtZ3VpZGUvbWFpbnRhaW5lci1wcm9maWxlLnJzdCAgICB8
-IDQzICsrKysrKysrKysrKysrKysrKysNCj4gIDEgZmlsZSBjaGFuZ2VkLCA0MyBpbnNlcnRpb25z
-KCspDQo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhf
-Q04vZG9jLWd1aWRlL21haW50YWluZXItcHJvZmlsZS5yc3QNCj4NCj4gZGlmZiAtLWdpdCBhL0Rv
-Y3VtZW50YXRpb24vdHJhbnNsYXRpb25zL3poX0NOL2RvYy1ndWlkZS9tYWludGFpbmVyLXByb2Zp
-bGUucnN0IGIvRG9jdW1lbnRhdGlvbi90cmFuc2xhdGlvbnMvemhfQ04vZG9jLWd1aWRlL21haW50
-YWluZXItcHJvZmlsZS5yc3QNCj4gbmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gaW5kZXggMDAwMDAw
-MDAwMDAwLi5lM2UxMDI4N2FlZjANCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9Eb2N1bWVudGF0
-aW9uL3RyYW5zbGF0aW9ucy96aF9DTi9kb2MtZ3VpZGUvbWFpbnRhaW5lci1wcm9maWxlLnJzdA0K
-PiBAQCAtMCwwICsxLDQzIEBADQo+ICsuLiBTUERYLUxpY2Vuc2UtSWRlbnRpZmllcjogR1BMLTIu
-MA0KPiArDQo+ICsuLiBpbmNsdWRlOjogLi4vZGlzY2xhaW1lci16aF9DTi5yc3QNCj4gKw0KPiAr
-Ok9yaWdpbmFsOiBEb2N1bWVudGF0aW9uL2RvYy1ndWlkZS9tYWludGFpbmVyLXByb2ZpbGUucnN0
-DQo+ICsNCj4gKzror5HogIU6IOWQtOaDs+aIkCBXdSBYaWFuZ0NoZW5nIDxib2J3eGNAZW1haWwu
-Y24+DQo+ICsNCj4gK+aWh+aho+WtkOezu+e7n+e7tOaKpOS6uuWRmOadoeebruamgui/sA0KPiAr
-PT09PT09PT09PT09PT09PT09PT09PT09PT09DQo+ICsNCj4gK+aWh+aho+KAnOWtkOezu+e7n+KA
-neaYr+WGheaguOaWh+aho+WSjOebuOWFs+WfuuehgOiuvuaWveeahOS4reW/g+WNj+iwg+eCueOA
-guWug+a2teebluS6hiBEb2N1bWVudGF0aW9uLyDkuIsNCj4gK+eahOaWh+S7tuWxgue6p++8iERv
-Y3VtZW50YXRpb24vZGV2aWNldHJlZSDpmaTlpJbvvInjgIFzY3JpcHRzLyDkuIvnmoTlkITnp43l
-rp7nlKjnqIvluo/vvIzlubbkuJQNCj4gK+WcqOafkOS6m+aDheWGteS4i+eahOS5n+WMheaLrCBM
-SUNFTlNFUy8g44CCDQo+ICsNCj4gK+S4jei/h+WAvOW+l+azqOaEj+eahOaYr++8jOi/meS4quWt
-kOezu+e7n+eahOi+ueeVjOavlOmAmuW4uOabtOWKoOaooeeziuOAguiuuOWkmuWFtuS7luWtkOez
-u+e7n+e7tOaKpOS6uuWRmOmcgOimgQ0KPiAr5L+d5oyB5a+5IERvY3VtZW50YXRpb24vIOafkOS6
-m+mDqOWIhueahOaOp+WItu+8jOS7peS+v+S6juWPr+S7peabtOiHqueUseWcsOWBmuabtOaUueOA
-gumZpOatpOS5i+Wklu+8jA0KPiAr6K645aSa5YaF5qC45paH5qGj6YO95Lula2VybmVsLWRvY+az
-qOmHiueahOW9ouW8j+WHuueOsOWcqOa6kOS7o+eggeS4re+8m+i/meS6m+azqOmHiumAmuW4uO+8
-iOS9huS4jeaAu+aYr++8iQ0KPiAr55Sx55u45YWz55qE5a2Q57O757uf57u05oqk5Lq65ZGY57u0
-5oqk44CCDQo+ICsNCj4gK+aWh+aho+WtkOezu+e7n+eahOmCruS7tuWIl+ihqOaYrzxsaW51eC1k
-b2NAdmdlci5rZXJuZWwub3JnPuOAgg0KPiAr6KGl5LiB5bqU5bC96YeP6ZKI5a+5ZG9jcy1uZXh0
-5qCR44CCDQo+ICsNCj4gK+aPkOS6pOajgOafpeWNleihpemBlw0KPiArLS0tLS0tLS0tLS0tLS0t
-DQo+ICsNCj4gK+WcqOi/m+ihjOaWh+aho+abtOaUueaXtu+8jOaCqOW6lOW9k+aehOW7uuaWh+ah
-o+S7pea1i+ivle+8jOW5tuehruS/neayoeacieW8leWFpeaWsOeahOmUmeivr+aIluitpuWRiuOA
-gueUn+aIkA0KPiArSFRNTOaWh+aho+W5tuafpeeci+e7k+aenOWwhuacieWKqeS6jumBv+WFjeWv
-ueaWh+aho+a4suafk+e7k+aenOeahOS4jeW/heimgeS6ieaJp+OAgg0KPiArDQo+ICvlvIDlj5Hl
-kajmnJ/nmoTlhbPplK7oioLngrkNCj4gKy0tLS0tLS0tLS0tLS0tLS0tLS0NCj4gKw0KPiAr6KGl
-5LiB5Y+v5Lul6ZqP5pe25Y+R6YCB77yM5L2G5Zyo5ZCI5bm256qX5Y+j5pyf6Ze077yM5ZON5bqU
-5bCG5q+U6YCa5bi45oWi44CC5paH5qGj5qCR5b6A5b6A5Zyo5ZCI5bm256qX5Y+j5omT5byADQo+
-ICvkuYvliY3lhbPpl63lvpfmr5TovoPmmZrvvIzlm6DkuLrmlofmoaPooaXkuIHlr7zoh7Tlm57l
-vZLnmoTpo47pmanlvojlsI/jgIINCuWbnuW9kiAtPiDlm57mu5ogb3Ig5Zue6YCA5oyH6ZKI77yf
-DQo+ICsNCj4gK+WuoemYheiKguWljw0KPiArLS0tLS0tLS0tDQo+ICsNCj4gK+aIke+8iOivkeaz
-qO+8muaMh0pvbmF0aGFuIENvcmJldCA8Y29yYmV0QGx3bi5uZXQ+77yJ5piv5paH5qGj5a2Q57O7
-57uf55qE5ZSv5LiA57u05oqk6ICF77yM5oiR5ZyoDQo+ICvoh6rlt7HnmoTml7bpl7Tph4zlrozm
-iJDov5npobnlt6XkvZzvvIzmiYDku6Xlr7nooaXkuIHnmoTlk43lupTmnInml7bkvJrlvojmhaLj
-gILlvZPooaXkuIHooqvlkIjlubbml7bvvIjmiJblvZPmiJENCj4gK+WGs+WumuaLkue7neWQiOW5
-tuihpeS4geaXtu+8ie+8jOaIkemDveS8muWPkemAgemAmuefpeOAguWmguaenOaCqOWcqOWPkemA
-geihpeS4geWQjuS4gOWRqOWGheayoeacieaUtuWIsOWbnuWkje+8jA0KPiAr6K+35LiN6KaB54q5
-6LGr77yM5Y+R6YCB5o+Q6YaS5bCx5aW944CCDQo+ICsNCj4gLS0NCj4gMi4yMC4xDQo+DQoNClRo
-YW5rcw0KDQpZYW50ZW5nDQo=
+This is the eighth version of a series to add support to Nouveau for atomic
+memory operations on OpenCL shared virtual memory (SVM) regions.
+
+The main change for this version is a simplification of device exclusive
+entry handling. Instead of copying entries for copy-on-write mappings
+during fork they are removed instead. This is safer because there could be
+unique corner cases when copying, particularly for pinned pages which
+should follow the same logic as copy_present_page(). Removing entries
+avoids this possiblity by treating them as normal ptes.
+
+Exclusive device access is implemented by adding a new swap entry type
+(SWAP_DEVICE_EXCLUSIVE) which is similar to a migration entry. The main
+difference is that on fault the original entry is immediately restored by
+the fault handler instead of waiting.
+
+Restoring the entry triggers calls to MMU notifers which allows a device
+driver to revoke the atomic access permission from the GPU prior to the CPU
+finalising the entry.
+
+Patches 1 & 2 refactor existing migration and device private entry
+functions.
+
+Patches 3 & 4 rework try_to_unmap_one() by splitting out unrelated
+functionality into separate functions - try_to_migrate_one() and
+try_to_munlock_one(). These should not change any functionality, but any
+help testing would be much appreciated as I have not been able to test
+every usage of try_to_unmap_one().
+
+Patch 5 contains the bulk of the implementation for device exclusive
+memory.
+
+Patch 6 contains some additions to the HMM selftests to ensure everything
+works as expected.
+
+Patch 7 is a cleanup for the Nouveau SVM implementation.
+
+Patch 8 contains the implementation of atomic access for the Nouveau
+driver.
+
+This has been tested using the latest upstream Mesa userspace with a simple
+OpenCL test program which checks the results of atomic GPU operations on a
+SVM buffer whilst also writing to the same buffer from the CPU.
+
+Alistair Popple (8):
+  mm: Remove special swap entry functions
+  mm/swapops: Rework swap entry manipulation code
+  mm/rmap: Split try_to_munlock from try_to_unmap
+  mm/rmap: Split migration into its own function
+  mm: Device exclusive memory access
+  mm: Selftests for exclusive device memory
+  nouveau/svm: Refactor nouveau_range_fault
+  nouveau/svm: Implement atomic SVM access
+
+ Documentation/vm/hmm.rst                      |  19 +-
+ Documentation/vm/unevictable-lru.rst          |  33 +-
+ arch/s390/mm/pgtable.c                        |   2 +-
+ drivers/gpu/drm/nouveau/include/nvif/if000c.h |   1 +
+ drivers/gpu/drm/nouveau/nouveau_svm.c         | 156 ++++-
+ drivers/gpu/drm/nouveau/nvkm/subdev/mmu/vmm.h |   1 +
+ .../drm/nouveau/nvkm/subdev/mmu/vmmgp100.c    |   6 +
+ fs/proc/task_mmu.c                            |  23 +-
+ include/linux/mmu_notifier.h                  |  26 +-
+ include/linux/rmap.h                          |  11 +-
+ include/linux/swap.h                          |   8 +-
+ include/linux/swapops.h                       | 123 ++--
+ lib/test_hmm.c                                | 126 +++-
+ lib/test_hmm_uapi.h                           |   2 +
+ mm/debug_vm_pgtable.c                         |  12 +-
+ mm/hmm.c                                      |  12 +-
+ mm/huge_memory.c                              |  45 +-
+ mm/hugetlb.c                                  |  10 +-
+ mm/memcontrol.c                               |   2 +-
+ mm/memory.c                                   | 196 +++++-
+ mm/migrate.c                                  |  51 +-
+ mm/mlock.c                                    |  10 +-
+ mm/mprotect.c                                 |  18 +-
+ mm/page_vma_mapped.c                          |  15 +-
+ mm/rmap.c                                     | 612 +++++++++++++++---
+ tools/testing/selftests/vm/hmm-tests.c        | 158 +++++
+ 26 files changed, 1366 insertions(+), 312 deletions(-)
+
+-- 
+2.20.1
+
