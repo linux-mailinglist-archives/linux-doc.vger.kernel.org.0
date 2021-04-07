@@ -2,119 +2,96 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 01482356B4A
-	for <lists+linux-doc@lfdr.de>; Wed,  7 Apr 2021 13:34:35 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1764E356BCB
+	for <lists+linux-doc@lfdr.de>; Wed,  7 Apr 2021 14:09:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S1343817AbhDGLej (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 7 Apr 2021 07:34:39 -0400
-Received: from relay7-d.mail.gandi.net ([217.70.183.200]:37397 "EHLO
-        relay7-d.mail.gandi.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S1343726AbhDGLec (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 7 Apr 2021 07:34:32 -0400
-X-Originating-IP: 90.65.108.55
-Received: from localhost (lfbn-lyo-1-1676-55.w90-65.abo.wanadoo.fr [90.65.108.55])
-        (Authenticated sender: alexandre.belloni@bootlin.com)
-        by relay7-d.mail.gandi.net (Postfix) with ESMTPSA id F204D2000A;
-        Wed,  7 Apr 2021 11:34:20 +0000 (UTC)
-Date:   Wed, 7 Apr 2021 13:34:20 +0200
-From:   Alexandre Belloni <alexandre.belloni@bootlin.com>
+        id S235571AbhDGMJx (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 7 Apr 2021 08:09:53 -0400
+Received: from mx.kolabnow.com ([95.128.36.40]:44668 "EHLO mx.kolabnow.com"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S235309AbhDGMJt (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Wed, 7 Apr 2021 08:09:49 -0400
+Received: from localhost (unknown [127.0.0.1])
+        by ext-mx-out003.mykolab.com (Postfix) with ESMTP id A163840B61;
+        Wed,  7 Apr 2021 14:00:42 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kolabnow.com; h=
+        message-id:references:in-reply-to:subject:subject:from:from:date
+        :date:content-transfer-encoding:content-type:content-type
+        :mime-version:received:received:received; s=dkim20160331; t=
+        1617796842; x=1619611243; bh=f2K5S/OWJqXSu8xFMGUz5ameMNWBDVZMZnD
+        l08rBIE0=; b=DkFQMDs1HfEQA24jolEzn6jKLZMt1hZcD+exM3cEzwOn12PWTOe
+        6GmIJTydgywI80+SVOS1hs4tIMtz7FbsMakdZ9WfvJfttwJtTnRe7Zz/rMM2j7bl
+        NSHvhOYv42qUA3K8mpLME3RbaBZx8AHgPEaYI8sI2mdywFqH0KXiZLmFpxRJq6NI
+        szQhHC/f9THGWhrnfvePO0/JIvXwIYjqh2S80Qcluw6iiBu3smEn7if4sPBPS5Ip
+        SxV6p/onH5ZEFA+r1zEMaeWwc6w93/eZgqgS8/EGGVkJxa5hHhdWdr9rt+HZICXP
+        oacpLVKQVAfy+u7KwKpQhVzrTy71qqjdPi6r73ryDnXhgE/VBkfbEajN/8SR4Kan
+        xdgGCd5tvY4veLDtx6dHsx3WSGk/G9SdfrmI9+QYUVfa6i28lNFo46kJAlHEszVV
+        LcEJdbTc0ckyTYQBdOHW4SnonOPcATbLzMcIDqOnpHxjzl+9iySaaznXv4S+CV31
+        vygz9kcDsujSwL6/1YdydrTiYHJ93R5e+tqbvWVCQ91qVYT6me+/lUvrshlfHmC9
+        U9tLrE6GdVRWBfynWD+0wLKj4RG+L+ZEZIhAAe0paR/gCpr/Zq01NPZX6apD69oS
+        Y61vbHpLZ2T5Vbjid/rpDIWreecvl/VmUJ0xiVY5HA97B4pUNvFgx3zk=
+X-Virus-Scanned: amavisd-new at mykolab.com
+X-Spam-Flag: NO
+X-Spam-Score: -1.899
+X-Spam-Level: 
+X-Spam-Status: No, score=-1.899 tagged_above=-10 required=5
+        tests=[BAYES_00=-1.9, URIBL_BLOCKED=0.001]
+        autolearn=ham autolearn_force=no
+Received: from mx.kolabnow.com ([127.0.0.1])
+        by localhost (ext-mx-out003.mykolab.com [127.0.0.1]) (amavisd-new, port 10024)
+        with ESMTP id ybUBiOnSaMlu; Wed,  7 Apr 2021 14:00:42 +0200 (CEST)
+Received: from int-mx003.mykolab.com (unknown [10.9.13.3])
+        by ext-mx-out003.mykolab.com (Postfix) with ESMTPS id E2D1A40194;
+        Wed,  7 Apr 2021 14:00:41 +0200 (CEST)
+Received: from int-subm002.mykolab.com (unknown [10.9.37.2])
+        by int-mx003.mykolab.com (Postfix) with ESMTPS id 0FC3A3234;
+        Wed,  7 Apr 2021 14:00:37 +0200 (CEST)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+Date:   Wed, 07 Apr 2021 14:00:36 +0200
+From:   Federico Vaga <federico.vaga@vaga.pv.it>
 To:     Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 Cc:     Linux Doc Mailing List <linux-doc@vger.kernel.org>,
-        Jonathan Corbet <corbet@lwn.net>,
-        =?utf-8?Q?Przemys=C5=82aw?= Gaj <pgaj@cadence.com>,
-        Miquel Raynal <miquel.raynal@bootlin.com>,
-        Rob Herring <robh+dt@kernel.org>,
-        Vitor Soares <vitor.soares@synopsys.com>,
-        devicetree@vger.kernel.org, linux-i3c@lists.infradead.org,
-        linux-kernel@vger.kernel.org, Rob Herring <robh@kernel.org>
-Subject: Re: [PATCH v2 09/19] dt-bindings: i3c: update i3c.yaml references
-Message-ID: <YG2YvD2WABchrVAA@piout.net>
+        "Alexander A. Klimov" <grandmaster@al2klimov.de>,
+        Jonathan Corbet <corbet@lwn.net>, Alex Shi <alexs@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        Harry Wei <harryxiyou@gmail.com>,
+        Thorsten Leemhuis <linux@leemhuis.info>,
+        Wu XiangCheng <bobwxc@email.cn>, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v2 17/19] docs: replace transation references for
+ reporting-bugs.rst
+In-Reply-To: <65d1983fb625b5dd38d05f5c75a592e61992a4e0.1617783062.git.mchehab+huawei@kernel.org>
 References: <cover.1617783062.git.mchehab+huawei@kernel.org>
- <8bb8923b4d98b4e8a6336a4c0b548c714e01aef5.1617783062.git.mchehab+huawei@kernel.org>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <8bb8923b4d98b4e8a6336a4c0b548c714e01aef5.1617783062.git.mchehab+huawei@kernel.org>
+ <65d1983fb625b5dd38d05f5c75a592e61992a4e0.1617783062.git.mchehab+huawei@kernel.org>
+Message-ID: <91fdf345c72062fed4306fee8f0b7efe@vaga.pv.it>
+X-Sender: federico.vaga@vaga.pv.it
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 07/04/2021 10:20:48+0200, Mauro Carvalho Chehab wrote:
-> Changeset 5e4cdca887fd ("dt-bindings: i3c: Convert the bus description to yaml")
-> renamed: Documentation/devicetree/bindings/i3c/i3c.txt
-> to: Documentation/devicetree/bindings/i3c/i3c.yaml.
+On 2021-04-07 10:20, Mauro Carvalho Chehab wrote:
+> Changeset d2ce285378b0 ("docs: make reporting-issues.rst official and
+> delete reporting-bugs.rst")
+> dropped reporting-bugs.rst, in favor of reporting-issues.rst, but
+> translations still need to be updated, in order to point to the
+> new file.
 > 
-> Update the cross-references accordingly.
-> 
-> Fixes: 5e4cdca887fd ("dt-bindings: i3c: Convert the bus description to yaml")
-> Acked-by: Rob Herring <robh@kernel.org>
-Acked-by: Alexandre Belloni <alexandre.belloni@bootlin.com>
-
+> Fixes: d2ce285378b0 ("docs: make reporting-issues.rst official and
+> delete reporting-bugs.rst")
 > Signed-off-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
 > ---
->  Documentation/devicetree/bindings/i3c/cdns,i3c-master.txt   | 6 +++---
->  .../devicetree/bindings/i3c/snps,dw-i3c-master.txt          | 6 +++---
->  2 files changed, 6 insertions(+), 6 deletions(-)
-> 
-> diff --git a/Documentation/devicetree/bindings/i3c/cdns,i3c-master.txt b/Documentation/devicetree/bindings/i3c/cdns,i3c-master.txt
-> index 1cf6182f888c..3716589d6999 100644
-> --- a/Documentation/devicetree/bindings/i3c/cdns,i3c-master.txt
-> +++ b/Documentation/devicetree/bindings/i3c/cdns,i3c-master.txt
-> @@ -10,19 +10,19 @@ Required properties:
->  - reg: I3C master registers
->  
->  Mandatory properties defined by the generic binding (see
-> -Documentation/devicetree/bindings/i3c/i3c.txt for more details):
-> +Documentation/devicetree/bindings/i3c/i3c.yaml for more details):
->  
->  - #address-cells: shall be set to 1
->  - #size-cells: shall be set to 0
->  
->  Optional properties defined by the generic binding (see
-> -Documentation/devicetree/bindings/i3c/i3c.txt for more details):
-> +Documentation/devicetree/bindings/i3c/i3c.yaml for more details):
->  
->  - i2c-scl-hz
->  - i3c-scl-hz
->  
->  I3C device connected on the bus follow the generic description (see
-> -Documentation/devicetree/bindings/i3c/i3c.txt for more details).
-> +Documentation/devicetree/bindings/i3c/i3c.yaml for more details).
->  
->  Example:
->  
-> diff --git a/Documentation/devicetree/bindings/i3c/snps,dw-i3c-master.txt b/Documentation/devicetree/bindings/i3c/snps,dw-i3c-master.txt
-> index 5020eb71eb8d..07f35f36085d 100644
-> --- a/Documentation/devicetree/bindings/i3c/snps,dw-i3c-master.txt
-> +++ b/Documentation/devicetree/bindings/i3c/snps,dw-i3c-master.txt
-> @@ -9,19 +9,19 @@ Required properties:
->  - reg: Offset and length of I3C master registers
->  
->  Mandatory properties defined by the generic binding (see
-> -Documentation/devicetree/bindings/i3c/i3c.txt for more details):
-> +Documentation/devicetree/bindings/i3c/i3c.yaml for more details):
->  
->  - #address-cells: shall be set to 3
->  - #size-cells: shall be set to 0
->  
->  Optional properties defined by the generic binding (see
-> -Documentation/devicetree/bindings/i3c/i3c.txt for more details):
-> +Documentation/devicetree/bindings/i3c/i3c.yaml for more details):
->  
->  - i2c-scl-hz
->  - i3c-scl-hz
->  
->  I3C device connected on the bus follow the generic description (see
-> -Documentation/devicetree/bindings/i3c/i3c.txt for more details).
-> +Documentation/devicetree/bindings/i3c/i3c.yaml for more details).
->  
->  Example:
->  
-> -- 
-> 2.30.2
-> 
+>  Documentation/translations/it_IT/process/howto.rst            | 2 +-
+
+Acked-by: Federico Vaga <federico.vaga@vaga.pv.it>
+
+>  Documentation/translations/ja_JP/howto.rst                    | 2 +-
+>  Documentation/translations/zh_CN/SecurityBugs                 | 2 +-
+>  .../translations/zh_CN/admin-guide/reporting-issues.rst       | 4 ++--
+>  Documentation/translations/zh_CN/process/howto.rst            | 2 +-
+>  5 files changed, 6 insertions(+), 6 deletions(-)
 
 -- 
-Alexandre Belloni, co-owner and COO, Bootlin
-Embedded Linux and Kernel engineering
-https://bootlin.com
+Federico Vaga
+http://www.federicovaga.it/
