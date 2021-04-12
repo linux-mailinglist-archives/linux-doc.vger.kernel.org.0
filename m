@@ -2,174 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 319ED35BF25
-	for <lists+linux-doc@lfdr.de>; Mon, 12 Apr 2021 11:03:37 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4C2B235C281
+	for <lists+linux-doc@lfdr.de>; Mon, 12 Apr 2021 12:03:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239322AbhDLJDE (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 12 Apr 2021 05:03:04 -0400
-Received: from mx2.suse.de ([195.135.220.15]:39726 "EHLO mx2.suse.de"
+        id S237532AbhDLJpV (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 12 Apr 2021 05:45:21 -0400
+Received: from mga18.intel.com ([134.134.136.126]:19008 "EHLO mga18.intel.com"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S239563AbhDLJAo (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 12 Apr 2021 05:00:44 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id D2EB6AFE1;
-        Mon, 12 Apr 2021 09:00:25 +0000 (UTC)
-From:   Thomas Zimmermann <tzimmermann@suse.de>
-To:     airlied@linux.ie, daniel@ffwll.ch,
-        maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-        corbet@lwn.net
-Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
+        id S241188AbhDLJhP (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 12 Apr 2021 05:37:15 -0400
+IronPort-SDR: B1ftWdqansXOm5tSRSMvKo9Dj41eQVyvaLCrycbBs7pZ3dVFjTKztDinXnDa235kJ8RudSOuC2
+ AoZCVyhhbHxQ==
+X-IronPort-AV: E=McAfee;i="6000,8403,9951"; a="181670669"
+X-IronPort-AV: E=Sophos;i="5.82,216,1613462400"; 
+   d="scan'208";a="181670669"
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+  by orsmga106.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Apr 2021 02:36:51 -0700
+IronPort-SDR: BBCOyapemeK9QZkDPBZxXvoR2i98nYdREezj2tp28wTBkgLtXJB+Xt78hIAApuRKeB+lVe58sq
+ BSfQQBkcXE7g==
+X-IronPort-AV: E=Sophos;i="5.82,216,1613462400"; 
+   d="scan'208";a="417310215"
+Received: from cyeni-mobl.ger.corp.intel.com (HELO localhost) ([10.252.62.41])
+  by fmsmga008-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 12 Apr 2021 02:36:47 -0700
+From:   Jani Nikula <jani.nikula@linux.intel.com>
+To:     Thomas Zimmermann <tzimmermann@suse.de>, airlied@linux.ie,
+        daniel@ffwll.ch, maarten.lankhorst@linux.intel.com,
+        mripard@kernel.org, corbet@lwn.net
+Cc:     Daniel Vetter <daniel.vetter@ffwll.ch>,
         Thomas Zimmermann <tzimmermann@suse.de>,
-        Daniel Vetter <daniel.vetter@ffwll.ch>
-Subject: [PATCH 3/3] drm/aperture: Inline fbdev conflict helpers into aperture helpers
-Date:   Mon, 12 Apr 2021 11:00:21 +0200
-Message-Id: <20210412090021.23054-4-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210412090021.23054-1-tzimmermann@suse.de>
-References: <20210412090021.23054-1-tzimmermann@suse.de>
+        dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org
+Subject: Re: [PATCH 1/3] drm/aperture: Add infrastructure for aperture ownership
+In-Reply-To: <20210412090021.23054-2-tzimmermann@suse.de>
+Organization: Intel Finland Oy - BIC 0357606-4 - Westendinkatu 7, 02160 Espoo
+References: <20210412090021.23054-1-tzimmermann@suse.de> <20210412090021.23054-2-tzimmermann@suse.de>
+Date:   Mon, 12 Apr 2021 12:36:44 +0300
+Message-ID: <87mtu3kfo3.fsf@intel.com>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Fbdev's helpers for handling conflicting framebuffer drivers are
-related to framebuffer apertures, not console emulation. Therefore
-remove them from drm_fb_helper.h and inline them into the aperture
-helpers. No functional changes.
+On Mon, 12 Apr 2021, Thomas Zimmermann <tzimmermann@suse.de> wrote:
+> + * DRM drivers should call drm_aperture_remove_conflicting_framebuffers()
+> + * at the top of their probe function. The function removes any generic
+> + * driver that is currently associated with the given framebuffer memory.
+> + * If the framebuffer is located at PCI BAR 0, the rsp code looks as in the
+> + * example given below.
+> + *
+> + * .. code-block:: c
+> + *
+> + *	static int remove_conflicting_framebuffers(struct pci_dev *pdev)
+> + *	{
+> + *		bool primary = false;
+> + *		resource_size_t base, size;
+> + *		int ret;
+> + *
+> + *		base = pci_resource_start(pdev, 0);
+> + *		size = pci_resource_len(pdev, 0);
+> + *	#ifdef CONFIG_X86
+> + *		primary = pdev->resource[PCI_ROM_RESOURCE].flags & IORESOURCE_ROM_SHADOW;
+> + *	#endif
+> + *
+> + *		return drm_aperture_remove_conflicting_framebuffers(base, size, primary,
+> + *		                                                    "example driver");
+> + *	}
+> + *
+> + *	static int probe(struct pci_dev *pdev)
+> + *	{
+> + *		int ret;
+> + *
+> + *		// Remove any generic drivers...
+> + *		ret = remove_conflicting_framebuffers(pdev);
+> + *		if (ret)
+> + *			return ret;
+> + *
+> + *		// ... and initialize the hardware.
+> + *		...
+> + *
+> + *		drm_dev_register();
+> + *
+> + *		return 0;
+> + *	}
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Acked-by: Daniel Vetter <daniel.vetter@ffwll.ch>
----
- drivers/gpu/drm/drm_aperture.c | 23 +++++++++++++--
- include/drm/drm_fb_helper.h    | 51 ----------------------------------
- 2 files changed, 20 insertions(+), 54 deletions(-)
+I'm guessing you can't use tabs for the first indentation level
+here. IIRC kernel-doc removes the leading comment marker and one
+whitespace whether it's space or tab, resulting in rst where the
+code-block contents are only partially indented.
 
-diff --git a/drivers/gpu/drm/drm_aperture.c b/drivers/gpu/drm/drm_aperture.c
-index 929dcbc0758a..e034dd7f9b09 100644
---- a/drivers/gpu/drm/drm_aperture.c
-+++ b/drivers/gpu/drm/drm_aperture.c
-@@ -1,7 +1,9 @@
- // SPDX-License-Identifier: MIT
- 
-+#include <linux/fb.h>
-+#include <linux/vgaarb.h>
-+
- #include <drm/drm_aperture.h>
--#include <drm/drm_fb_helper.h>
- 
- /**
-  * DOC: overview
-@@ -78,6 +80,7 @@
- int drm_aperture_remove_conflicting_framebuffers(resource_size_t base, resource_size_t size,
- 						 bool primary, const char *name)
- {
-+#if IS_REACHABLE(CONFIG_FB)
- 	struct apertures_struct *a;
- 	int ret;
- 
-@@ -88,10 +91,13 @@ int drm_aperture_remove_conflicting_framebuffers(resource_size_t base, resource_
- 	a->ranges[0].base = base;
- 	a->ranges[0].size = size;
- 
--	ret = drm_fb_helper_remove_conflicting_framebuffers(a, name, primary);
-+	ret = remove_conflicting_framebuffers(a, name, primary);
- 	kfree(a);
- 
- 	return ret;
-+#else
-+	return 0;
-+#endif
- }
- EXPORT_SYMBOL(drm_aperture_remove_conflicting_framebuffers);
- 
-@@ -109,6 +115,17 @@ EXPORT_SYMBOL(drm_aperture_remove_conflicting_framebuffers);
-  */
- int drm_aperture_remove_conflicting_pci_framebuffers(struct pci_dev *pdev, const char *name)
- {
--	return drm_fb_helper_remove_conflicting_pci_framebuffers(pdev, name);
-+	int ret = 0;
-+
-+	/*
-+	 * WARNING: Apparently we must kick fbdev drivers before vgacon,
-+	 * otherwise the vga fbdev driver falls over.
-+	 */
-+#if IS_REACHABLE(CONFIG_FB)
-+	ret = remove_conflicting_pci_framebuffers(pdev, name);
-+#endif
-+	if (ret == 0)
-+		ret = vga_remove_vgacon(pdev);
-+	return ret;
- }
- EXPORT_SYMBOL(drm_aperture_remove_conflicting_pci_framebuffers);
-diff --git a/include/drm/drm_fb_helper.h b/include/drm/drm_fb_helper.h
-index 3b273f9ca39a..3af4624368d8 100644
---- a/include/drm/drm_fb_helper.h
-+++ b/include/drm/drm_fb_helper.h
-@@ -36,7 +36,6 @@ struct drm_fb_helper;
- #include <drm/drm_crtc.h>
- #include <drm/drm_device.h>
- #include <linux/kgdb.h>
--#include <linux/vgaarb.h>
- 
- enum mode_set_atomic {
- 	LEAVE_ATOMIC_MODE_SET,
-@@ -451,54 +450,4 @@ drm_fbdev_generic_setup(struct drm_device *dev, unsigned int preferred_bpp)
- 
- #endif
- 
--/**
-- * drm_fb_helper_remove_conflicting_framebuffers - remove firmware-configured framebuffers
-- * @a: memory range, users of which are to be removed
-- * @name: requesting driver name
-- * @primary: also kick vga16fb if present
-- *
-- * This function removes framebuffer devices (initialized by firmware/bootloader)
-- * which use memory range described by @a. If @a is NULL all such devices are
-- * removed.
-- */
--static inline int
--drm_fb_helper_remove_conflicting_framebuffers(struct apertures_struct *a,
--					      const char *name, bool primary)
--{
--#if IS_REACHABLE(CONFIG_FB)
--	return remove_conflicting_framebuffers(a, name, primary);
--#else
--	return 0;
--#endif
--}
--
--/**
-- * drm_fb_helper_remove_conflicting_pci_framebuffers - remove firmware-configured framebuffers for PCI devices
-- * @pdev: PCI device
-- * @name: requesting driver name
-- *
-- * This function removes framebuffer devices (eg. initialized by firmware)
-- * using memory range configured for any of @pdev's memory bars.
-- *
-- * The function assumes that PCI device with shadowed ROM drives a primary
-- * display and so kicks out vga16fb.
-- */
--static inline int
--drm_fb_helper_remove_conflicting_pci_framebuffers(struct pci_dev *pdev,
--						  const char *name)
--{
--	int ret = 0;
--
--	/*
--	 * WARNING: Apparently we must kick fbdev drivers before vgacon,
--	 * otherwise the vga fbdev driver falls over.
--	 */
--#if IS_REACHABLE(CONFIG_FB)
--	ret = remove_conflicting_pci_framebuffers(pdev, name);
--#endif
--	if (ret == 0)
--		ret = vga_remove_vgacon(pdev);
--	return ret;
--}
--
- #endif
+Please test the documentation build before applying.
+
+Otherwise, the series seems like a nice cleanup.
+
+Acked-by: Jani Nikula <jani.nikula@intel.com>
+
+
+
 -- 
-2.31.1
-
+Jani Nikula, Intel Open Source Graphics Center
