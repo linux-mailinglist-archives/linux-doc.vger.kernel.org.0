@@ -2,127 +2,84 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 050A1361549
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Apr 2021 00:20:55 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 691D2361587
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Apr 2021 00:33:24 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236155AbhDOWUS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 15 Apr 2021 18:20:18 -0400
-Received: from mga07.intel.com ([134.134.136.100]:58096 "EHLO mga07.intel.com"
+        id S234829AbhDOWdq (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 15 Apr 2021 18:33:46 -0400
+Received: from mail.kernel.org ([198.145.29.99]:34150 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S236392AbhDOWTv (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 15 Apr 2021 18:19:51 -0400
-IronPort-SDR: k6X13shbDMdkvI+jiXCVxWyodLNbakAePmiosbcjMixuHUA7StIMsUYTyjJfpvPsfRYBKsi50c
- p6IT+LcS/LAQ==
-X-IronPort-AV: E=McAfee;i="6200,9189,9955"; a="258913094"
-X-IronPort-AV: E=Sophos;i="5.82,225,1613462400"; 
-   d="scan'208";a="258913094"
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-  by orsmga105.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Apr 2021 15:17:51 -0700
-IronPort-SDR: EQVQ5kPaaVeZ7DjDWDpRzsN60DqLLwCOmdhG3JJF5NHyjo0n0wSxgkL7e6XCj9X+49VRU/t7zF
- hGIcKa6Pk+GA==
-X-IronPort-AV: E=Sophos;i="5.82,225,1613462400"; 
-   d="scan'208";a="399720994"
-Received: from yyu32-desk.sc.intel.com ([143.183.136.146])
-  by orsmga002-auth.jf.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 15 Apr 2021 15:17:50 -0700
-From:   Yu-cheng Yu <yu-cheng.yu@intel.com>
-To:     x86@kernel.org, "H. Peter Anvin" <hpa@zytor.com>,
-        Thomas Gleixner <tglx@linutronix.de>,
-        Ingo Molnar <mingo@redhat.com>, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, linux-mm@kvack.org,
-        linux-arch@vger.kernel.org, linux-api@vger.kernel.org,
-        Arnd Bergmann <arnd@arndb.de>,
-        Andy Lutomirski <luto@kernel.org>,
-        Balbir Singh <bsingharora@gmail.com>,
-        Borislav Petkov <bp@alien8.de>,
-        Cyrill Gorcunov <gorcunov@gmail.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>,
-        Eugene Syromiatnikov <esyr@redhat.com>,
-        Florian Weimer <fweimer@redhat.com>,
-        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Kees Cook <keescook@chromium.org>,
-        Mike Kravetz <mike.kravetz@oracle.com>,
-        Nadav Amit <nadav.amit@gmail.com>,
-        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
-        Peter Zijlstra <peterz@infradead.org>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
-        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
-        Dave Martin <Dave.Martin@arm.com>,
-        Weijiang Yang <weijiang.yang@intel.com>,
-        Pengfei Xu <pengfei.xu@intel.com>,
-        Haitao Huang <haitao.huang@intel.com>
-Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>,
-        Jarkko Sakkinen <jarkko@kernel.org>
-Subject: [PATCH v25 9/9] x86/vdso: Add ENDBR to __vdso_sgx_enter_enclave
-Date:   Thu, 15 Apr 2021 15:17:34 -0700
-Message-Id: <20210415221734.32628-10-yu-cheng.yu@intel.com>
-X-Mailer: git-send-email 2.21.0
-In-Reply-To: <20210415221734.32628-1-yu-cheng.yu@intel.com>
-References: <20210415221734.32628-1-yu-cheng.yu@intel.com>
+        id S234764AbhDOWdq (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 15 Apr 2021 18:33:46 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id 1F3A7610FB;
+        Thu, 15 Apr 2021 22:33:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1618526002;
+        bh=/gOqZg+Pg164K/IJSTPjixvLEaBlytjs/HR6s1fHt/o=;
+        h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
+        b=cY+KIXFb3pQGfPiWc8RJ/iL+gVCdRdQ6WgsByRIy8C3p+IM2dxdoCn9cMEGTKeOyN
+         ep+Qp3xPkIbmqf3t24rTlhidZYai+2eJ3Xtk+DQNN6VZHkFEwf3oMrvHQZMuW9j7x+
+         oDd/sNENqzbeVQ5LmnYvowjoU2+Rf/H3tNE/LW1H8Caf+u4PiqDYUGqrvFMJKZwwSz
+         yuDOsoT7ki/r5FFsdJqs+n5OEAYy1kZ12QDibcQkjNOxTp/H80Qez2ZeJUK8eJTvKK
+         kce8CCFijDREtqy8IZzmEULEx9aAbFEf7wE75zUYa5Ya1rwSbsMM9NcyhZm281OY8D
+         dkW1r/sPGPUlA==
+Message-ID: <1652e284aea7ff3240d28a22d0dd09c50aed405a.camel@kernel.org>
+Subject: Re: [PATCH net-next 3/6] ethtool: add FEC statistics
+From:   Saeed Mahameed <saeed@kernel.org>
+To:     Jakub Kicinski <kuba@kernel.org>
+Cc:     davem@davemloft.net, netdev@vger.kernel.org,
+        michael.chan@broadcom.com, leon@kernel.org, ecree.xilinx@gmail.com,
+        habetsm.xilinx@gmail.com, f.fainelli@gmail.com, andrew@lunn.ch,
+        mkubecek@suse.cz, ariela@nvidia.com, corbet@lwn.net,
+        linux-doc@vger.kernel.org
+Date:   Thu, 15 Apr 2021 15:33:21 -0700
+In-Reply-To: <20210415082144.260cf3ce@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+References: <20210414034454.1970967-1-kuba@kernel.org>
+         <20210414034454.1970967-4-kuba@kernel.org>
+         <723b2858c61898df02e57bb2aaa4c4b4b3c30c50.camel@kernel.org>
+         <20210415082144.260cf3ce@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+Content-Type: text/plain; charset="UTF-8"
+User-Agent: Evolution 3.38.4 (3.38.4-1.fc33) 
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-ENDBR is a special new instruction for the Indirect Branch Tracking (IBT)
-component of CET.  IBT prevents attacks by ensuring that (most) indirect
-branches and function calls may only land at ENDBR instructions.  Branches
-that don't follow the rules will result in control flow (#CF) exceptions.
+On Thu, 2021-04-15 at 08:21 -0700, Jakub Kicinski wrote:
+> On Wed, 14 Apr 2021 23:25:43 -0700 Saeed Mahameed wrote:
+> > On Tue, 2021-04-13 at 20:44 -0700, Jakub Kicinski wrote:
+> > > ethtool_link_ksettings *);
+> > > +       void    (*get_fec_stats)(struct net_device *dev,
+> > > +                                struct ethtool_fec_stats
+> > > *fec_stats);  
+> > 
+> > why void ? some drivers need to access the FW and it could be an
+> > old
+> > FW/device where the fec stats are not supported.
+> 
+> When stats are not supported just returning is fine. Stats are
+> initialized to -1, core will not dump them into the netlink message 
+> if driver didn't assign anything.
+> 
+> > and sometimes e.g. in mlx5 case FW can fail for FW related
+> > businesses
+> > :)..
+> 
+> Can do. I was wondering if the entity reading the stats (from user
+> space) can do anything useful with the error, and didn't really come 
+> up with anything other than printing an error. Which the kernel can 
+> do as well. OTOH if there are multiple stats to read and one of them
+> fails its probably better to return partial results than fail 
+> the entire op. Therefore I went for no error - if something fails - 
+> the stats will be missing.
+> 
+> Does that make any sense? Or do you think errors are rare enough that
+> it's okay if they are fatal? (with the caveat that -EOPNOTSUPP should
+> be ignored).
 
-ENDBR is a noop when IBT is unsupported or disabled.  Most ENDBR
-instructions are inserted automatically by the compiler, but branch
-targets written in assembly must have ENDBR added manually.
-
-Add ENDBR to __vdso_sgx_enter_enclave() branch targets.
-
-Signed-off-by: Yu-cheng Yu <yu-cheng.yu@intel.com>
-Cc: Andy Lutomirski <luto@kernel.org>
-Cc: Borislav Petkov <bp@alien8.de>
-Cc: Dave Hansen <dave.hansen@linux.intel.com>
-Cc: Jarkko Sakkinen <jarkko@kernel.org>
-Cc: Peter Zijlstra <peterz@infradead.org>
----
- arch/x86/entry/vdso/vsgx.S | 4 ++++
- 1 file changed, 4 insertions(+)
-
-diff --git a/arch/x86/entry/vdso/vsgx.S b/arch/x86/entry/vdso/vsgx.S
-index 86a0e94f68df..f3ebd38d1898 100644
---- a/arch/x86/entry/vdso/vsgx.S
-+++ b/arch/x86/entry/vdso/vsgx.S
-@@ -4,6 +4,7 @@
- #include <asm/export.h>
- #include <asm/errno.h>
- #include <asm/enclu.h>
-+#include <asm/vdso.h>
- 
- #include "extable.h"
- 
-@@ -27,6 +28,7 @@
- SYM_FUNC_START(__vdso_sgx_enter_enclave)
- 	/* Prolog */
- 	.cfi_startproc
-+	ENDBR64
- 	push	%rbp
- 	.cfi_adjust_cfa_offset	8
- 	.cfi_rel_offset		%rbp, 0
-@@ -62,6 +64,7 @@ SYM_FUNC_START(__vdso_sgx_enter_enclave)
- .Lasync_exit_pointer:
- .Lenclu_eenter_eresume:
- 	enclu
-+	ENDBR64
- 
- 	/* EEXIT jumps here unless the enclave is doing something fancy. */
- 	mov	SGX_ENCLAVE_OFFSET_OF_RUN(%rbp), %rbx
-@@ -91,6 +94,7 @@ SYM_FUNC_START(__vdso_sgx_enter_enclave)
- 	jmp	.Lout
- 
- .Lhandle_exception:
-+	ENDBR64
- 	mov	SGX_ENCLAVE_OFFSET_OF_RUN(%rbp), %rbx
- 
- 	/* Set the exception info. */
--- 
-2.21.0
+Agreed, Thanks for the explanation
+but you still need to handle the error internally in the driver,
+otherwise the command returns garbage or 0 if you didn't check return
+status. 
 
