@@ -2,104 +2,107 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 8B7C735FF99
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Apr 2021 03:31:26 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6EF6C35FFAF
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Apr 2021 03:40:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229612AbhDOBbS (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 14 Apr 2021 21:31:18 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:53426 "EHLO loongson.cn"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S229523AbhDOBbR (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Wed, 14 Apr 2021 21:31:17 -0400
-Received: from localhost.localdomain (unknown [223.106.57.161])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9DxX8s6l3dgXR0IAA--.15458S12;
-        Thu, 15 Apr 2021 09:30:50 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Alex Shi <alexs@kernel.org>, Alex Shi <alex.shi@linux.alibaba.com>,
-        Huacai Chen <chenhuacai@kernel.org>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        Harry Wei <harryxiyou@gmail.com>, linux-doc@vger.kernel.org,
-        realpuyuwang@gmail.com, siyanteng01@gmail.com,
-        Wu XiangCheng <bobwxc@email.cn>,
-        Yanteng Si <siyanteng@loongson.cn>
-Subject: [PATCH v4 10/11] docs/zh_CN: add openrisc index.rst translation
-Date:   Thu, 15 Apr 2021 09:31:23 +0800
-Message-Id: <20210415013124.2256416-11-siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <20210415013124.2256416-1-siyanteng@loongson.cn>
-References: <20210415013124.2256416-1-siyanteng@loongson.cn>
+        id S229705AbhDOBjW (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 14 Apr 2021 21:39:22 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39110 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229641AbhDOBjV (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 14 Apr 2021 21:39:21 -0400
+Received: from mail-pl1-x634.google.com (mail-pl1-x634.google.com [IPv6:2607:f8b0:4864:20::634])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 4929EC061760
+        for <linux-doc@vger.kernel.org>; Wed, 14 Apr 2021 18:38:59 -0700 (PDT)
+Received: by mail-pl1-x634.google.com with SMTP id t22so10834280ply.1
+        for <linux-doc@vger.kernel.org>; Wed, 14 Apr 2021 18:38:59 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=chromium.org; s=google;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to;
+        bh=bX6POsGmP4rs/rcLgPiRiQi4oaHEHZ6HqQN4nR2RIow=;
+        b=QsNXz83U6yLc/9B6Ylh4qLBbM+mPoSDKwIE36jf24RToMnYA6W/NTMnk4CSkDaUDu1
+         fchQlGZSES0NTLp9wu5LBdzEchrvbRvU9yKyeV2C6p6gEALe0GLxpC0aSOGEOyTJgPOr
+         +t6OqHmIWMjLTfFGARripHpVxPqOF70SbTut4=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to;
+        bh=bX6POsGmP4rs/rcLgPiRiQi4oaHEHZ6HqQN4nR2RIow=;
+        b=pf1wAhDESvU4tInHfuZa/mHi5OkNVtwkV6f/5vLt5bWeior67U4y1QYAE2V71XqU5E
+         IsMNIZv5Y09q9eeZKrmzq2/9AZ9HSTk/E9DtqF4DdnALwmNfNrgi5n2F1YcRy6WlELk7
+         il8d/4Q2hlZxFq/Gda/CLmkhG8TtluIcW3CAZ/qQc3GPk0gdji+zSQ8gb0wrs/TuDJgI
+         YbuA25JfUkeOYuGrbFEWFOH0fDmqIyBwJoEVe4xA8ICbgxkCwfasNcgvh10NpuNE0ryk
+         pkrui11I6oV7VUvKO2wCzGWFl9ZoHzZ+lIb7mCLXR/PE1yzfBaARn1b03Bw81ELIjX4n
+         Wxwg==
+X-Gm-Message-State: AOAM531kH6ZInWkOTkeurgle7erutys9CqTYJSTEIySFcZvWSnuOcuZF
+        RblFFO8CnBWYiakcfzyw3r6cBg==
+X-Google-Smtp-Source: ABdhPJwd5bR54OWgpgBTnm6xH0X8VpmlK7vpSuR0Oz+hSNYVch3S//NX4ZCB3JzVG85QOgXpbg0aOw==
+X-Received: by 2002:a17:902:e851:b029:eb:1fd0:fa8e with SMTP id t17-20020a170902e851b02900eb1fd0fa8emr1262234plg.38.1618450738773;
+        Wed, 14 Apr 2021 18:38:58 -0700 (PDT)
+Received: from www.outflux.net (smtp.outflux.net. [198.145.64.163])
+        by smtp.gmail.com with ESMTPSA id o9sm516255pfh.217.2021.04.14.18.38.57
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Wed, 14 Apr 2021 18:38:58 -0700 (PDT)
+Date:   Wed, 14 Apr 2021 18:38:56 -0700
+From:   Kees Cook <keescook@chromium.org>
+To:     Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
+Cc:     Linus Torvalds <torvalds@linux-foundation.org>,
+        Miguel Ojeda <ojeda@kernel.org>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        rust-for-linux@vger.kernel.org,
+        Linux Kbuild mailing list <linux-kbuild@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux Kernel Mailing List <linux-kernel@vger.kernel.org>
+Subject: Re: [PATCH 00/13] [RFC] Rust support
+Message-ID: <202104141820.7DDE15A30@keescook>
+References: <20210414184604.23473-1-ojeda@kernel.org>
+ <CAHk-=wh_sNLoz84AUUzuqXEsYH35u=8HV3vK-jbRbJ_B-JjGrg@mail.gmail.com>
+ <CANiq72mSMtfdRFPGJKuoqCBFdsa_xHvx9ATjcB7QSunQdDHBuw@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9DxX8s6l3dgXR0IAA--.15458S12
-X-Coremail-Antispam: 1UD129KBjvdXoWrKF4kGw1xJF13Aw1UWw4kWFg_yoWkWrb_Zw
-        nYqFW0kr4jq3Z7tFWkAFykJr10kF4qkF129a15t398Jw1Dtr98JFyqqwn3XF18W39Ivrya
-        kan7urykXrn7KjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-        9fnUUIcSsGvfJTRUUUbgxFF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
-        IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
-        F7xvwVC0I7IYx2IY67AKxVW7JVWDJwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
-        1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr1j
-        6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7V
-        C0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j
-        6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x0262
-        8vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02
-        F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GF
-        ylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVW8JVW5JwCI42IY6xIIjxv20xvEc7Cj
-        xVAFwI0_Gr1j6F4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI
-        0_Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x
-        0JUQSdkUUUUU=
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CANiq72mSMtfdRFPGJKuoqCBFdsa_xHvx9ATjcB7QSunQdDHBuw@mail.gmail.com>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch translates Documentation/openrisc/index.rst into Chinese.
+Before anything else: yay! I'm really glad to see this RFC officially
+hit LKML. :)
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
----
- .../translations/zh_CN/openrisc/index.rst     | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/openrisc/index.rst
+On Wed, Apr 14, 2021 at 10:20:51PM +0200, Miguel Ojeda wrote:
+>   - On floating-point, 128-bit, etc.: the main issue is that the
+> `core` library is a single big blob at the moment. I have already
+> mentioned this to some Rust team folks. We will need a way to "cut"
+> some things out, for instance with the "feature flags" they already
+> have for other crates (or they can split `core` in to several, like
+> `alloc` is for similar reasons). Or we could do it on our side
+> somehow, but I prefer to avoid that (we cannot easily customize `core`
+> like we can with `alloc`, because it is tied to the compiler too
+> tightly).
 
-diff --git a/Documentation/translations/zh_CN/openrisc/index.rst b/Documentation/translations/zh_CN/openrisc/index.rst
-new file mode 100644
-index 000000000000..89432b9cf8e1
---- /dev/null
-+++ b/Documentation/translations/zh_CN/openrisc/index.rst
-@@ -0,0 +1,30 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: :doc:`../../../openrisc/index`
-+:Translator: Yanteng Si <siyanteng@loongson.cn>
-+
-+.. _cn_openrisc_index:
-+
-+
-+=================
-+OpenRISC 体系架构
-+=================
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   openrisc_port
-+   todo
-+
-+Todolist:
-+    features
-+
-+
-+.. only::  subproject and html
-+
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
+Besides just FP, 128-bit, etc, I remain concerned about just basic
+math operations. C has no way to describe the intent of integer
+overflow, so the kernel was left with the only "predictable" result:
+wrap around. Unfortunately, this is wrong in most cases, and we're left
+with entire classes of vulnerability related to such overflows.
+
+When originally learning Rust I was disappointed to see that (by default)
+Rust similarly ignores the overflow problem, but I'm glad to see the
+very intentional choices in the Rust-in-Linux design to deal with it
+directly. I think the default behavior should be saturate-with-WARN
+(this will match the ultimate goals of the UBSAN overflow support[1][2]
+in the C portions of the kernel). Rust code wanting wrapping/checking
+can expressly use those. The list of exploitable overflows is loooong,
+and this will remain a weakness in Rust unless we get it right from
+the start. What's not clear to me is if it's better to say "math with
+undeclared overflow expectation" will saturate" or to say "all math must
+declare its overflow expectation".
+
+-Kees
+
+[1] https://github.com/KSPP/linux/issues/26
+[2] https://github.com/KSPP/linux/issues/27
+
 -- 
-2.27.0
-
+Kees Cook
