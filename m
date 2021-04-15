@@ -2,55 +2,48 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5A88E360251
-	for <lists+linux-doc@lfdr.de>; Thu, 15 Apr 2021 08:25:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 65DBC3602BA
+	for <lists+linux-doc@lfdr.de>; Thu, 15 Apr 2021 08:51:46 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230170AbhDOG0H (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 15 Apr 2021 02:26:07 -0400
-Received: from mail.kernel.org ([198.145.29.99]:60842 "EHLO mail.kernel.org"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229731AbhDOG0H (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Thu, 15 Apr 2021 02:26:07 -0400
-Received: by mail.kernel.org (Postfix) with ESMTPSA id C312C60231;
-        Thu, 15 Apr 2021 06:25:43 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
-        s=k20201202; t=1618467944;
-        bh=u6Zbi9B9esvESnvVaCVhd8dbXhNBWXXPVerlvWC5DkM=;
-        h=Subject:From:To:Cc:Date:In-Reply-To:References:From;
-        b=QZ1A/yEGGX2P2VrhXdEp5ToU/KBUIvJ/ERRoD282g3Bw+RaKxPQk+WoWtR285oxsA
-         +arohWu9RUkY9VwFORFeiwieESuW+8DwEdIWY/a7BHRUfi+IU9JYghOi0fOTJ+X2Fe
-         hCpufg6UyUF5YXpJo/j4psx9roec1Yd9a6AP6IX7ejWwhslLvmklylzZOHl8dFED//
-         nCrj6XNpje5eczPAawNJgzxBh+Gff2HoS/2kQi8xQC6EMcTEKQgpmoKX3kCJ/emSZm
-         1KWjAjkOIbs11uzTr+JclFbnnkG5K8drAWj2ZgQRsRoLtI1qb/SYhn+sBzIrUfjPxI
-         iAuHsU3o3yl7w==
-Message-ID: <723b2858c61898df02e57bb2aaa4c4b4b3c30c50.camel@kernel.org>
-Subject: Re: [PATCH net-next 3/6] ethtool: add FEC statistics
-From:   Saeed Mahameed <saeed@kernel.org>
-To:     Jakub Kicinski <kuba@kernel.org>, davem@davemloft.net
-Cc:     netdev@vger.kernel.org, michael.chan@broadcom.com, leon@kernel.org,
-        ecree.xilinx@gmail.com, habetsm.xilinx@gmail.com,
-        f.fainelli@gmail.com, andrew@lunn.ch, mkubecek@suse.cz,
-        ariela@nvidia.com, corbet@lwn.net, linux-doc@vger.kernel.org
-Date:   Wed, 14 Apr 2021 23:25:43 -0700
-In-Reply-To: <20210414034454.1970967-4-kuba@kernel.org>
-References: <20210414034454.1970967-1-kuba@kernel.org>
-         <20210414034454.1970967-4-kuba@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-User-Agent: Evolution 3.38.4 (3.38.4-1.fc33) 
-MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+        id S230372AbhDOGwD convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Thu, 15 Apr 2021 02:52:03 -0400
+Received: from vsrv57620.customer.xenway.de ([95.129.54.190]:46286 "EHLO
+        vsrv57620.customer.xenway.de" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S230090AbhDOGwD (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 15 Apr 2021 02:52:03 -0400
+X-Greylist: delayed 1236 seconds by postgrey-1.27 at vger.kernel.org; Thu, 15 Apr 2021 02:51:58 EDT
+Received: from [193.56.28.106] (unknown [193.56.28.106])
+        by vsrv57620.customer.xenway.de (Postfix) with ESMTPA id 613C83097B5;
+        Thu, 15 Apr 2021 08:23:44 +0200 (CEST)
+Date:   Wed, 14 Apr 2021 23:24:19 -0700
+Mime-version: 1.0
+Subject: Compliments
+From:   Christopher Quinlan QC <cqukesq@gmail.com>
+To:     Undisclosed-Recipients:;
+Message-Id: <20210414232419.UVUVQACXIIXYKI@gmail.com>
+Reply-To: cqukesq@gmail.com
+Content-type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-transfer-encoding: 8BIT
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, 2021-04-13 at 20:44 -0700, Jakub Kicinski wrote:
-> ethtool_link_ksettings *);
-> +       void    (*get_fec_stats)(struct net_device *dev,
-> +                                struct ethtool_fec_stats
-> *fec_stats);
+My name is Christopher Quinlan QC I am a solicitor at law / investment adviser to your late relative. Your late relative left behind Cash deposit in capital and investment security account along with properties, I will like to discuss with you regarding making this claim since he is related to you going by the lineage, surname and country of origin.
 
-why void ? some drivers need to access the FW and it could be an old
-FW/device where the fec stats are not supported.
-and sometimes e.g. in mlx5 case FW can fail for FW related businesses
-:)..
+Please get back to me on my private email cqukesq6@gmail.com for further details.
+
+To facilitate the process of this transaction, urgently forward to me
+Your full names,
+Telephone and fax numbers,
+Address,
+Age,
+Marital status,
+Occupation
+
+I will be expecting to hear from you.
+
+Regards
+
+Christopher Quinlan QC
+Private email cqukesq6@gmail.com
 
