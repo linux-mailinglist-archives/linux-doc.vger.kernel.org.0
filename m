@@ -2,75 +2,54 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 7197E36283F
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Apr 2021 21:06:39 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id BA5633628C0
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Apr 2021 21:40:41 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S236021AbhDPTHD (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 16 Apr 2021 15:07:03 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49330 "EHLO
+        id S243910AbhDPTlF convert rfc822-to-8bit (ORCPT
+        <rfc822;lists+linux-doc@lfdr.de>); Fri, 16 Apr 2021 15:41:05 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56782 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S235877AbhDPTHD (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Apr 2021 15:07:03 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1EFEAC061574
-        for <linux-doc@vger.kernel.org>; Fri, 16 Apr 2021 12:06:38 -0700 (PDT)
-Received: from localhost (unknown [IPv6:2601:281:8300:104d::5f6])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id BAC3C6D9;
-        Fri, 16 Apr 2021 19:06:37 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net BAC3C6D9
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1618599997; bh=PNhWhHDX4QjHizURCIPzXL0D81/fOu6dufo/G5GhPM4=;
-        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=HWgnu3bQbnTlGqGvleg80EwZnLJKcbQ4VN82vCpV5UXdPG3zq1A+PzxGC01R2+tba
-         ftbyLNmsSBKf3Mvb0sREJCNdV6gv8/GtfP/esQJuzkPPl2GvoD4BbVTs4tn4mgoMCc
-         aV8gkMRTUjSLlhNSMpSob42+b2YmDaVatYJXOKH/FythXV0PFPOAiFn+z8puh3jW2P
-         OfSzepd9LX7B/GU6NXWoC48MCMvbRl/aSzE1MmY1OUOlAm4r/fLjsAjoFPArJYcWou
-         KzGW5RhCfFWdLUgADocVgtuCpMh8Kt3i1RKfPwJG75EHHfURicY8n/5ThBn23OIP3H
-         oNLr+mU5eaZjQ==
-From:   Jonathan Corbet <corbet@lwn.net>
-To:     yanteng si <siyanteng01@gmail.com>
-Cc:     Yanteng Si <siyanteng@loongson.cn>, Alex Shi <alexs@kernel.org>,
-        Alex Shi <alex.shi@linux.alibaba.com>,
-        Huacai Chen <chenhuacai@kernel.org>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        Harry Wei <harryxiyou@gmail.com>, linux-doc@vger.kernel.org,
-        Puyu Wang <realpuyuwang@gmail.com>,
-        Wu XiangCheng <bobwxc@email.cn>
-Subject: Re: [PATCH v5 0/4] docs/zh_CN: add core api and openrisc translation
-In-Reply-To: <CAEensMyd=yeLaYwoLr6P3qnenj+DbcAqsmTamhAT=uy8nKHtOQ@mail.gmail.com>
-References: <20210415063838.2341827-1-siyanteng@loongson.cn>
- <87y2dj4lvw.fsf@meer.lwn.net>
- <CAEensMyd=yeLaYwoLr6P3qnenj+DbcAqsmTamhAT=uy8nKHtOQ@mail.gmail.com>
-Date:   Fri, 16 Apr 2021 13:06:37 -0600
-Message-ID: <87v98mf3r6.fsf@meer.lwn.net>
-MIME-Version: 1.0
-Content-Type: text/plain
+        with ESMTP id S236021AbhDPTlE (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Apr 2021 15:41:04 -0400
+X-Greylist: delayed 10585 seconds by postgrey-1.37 at lindbergh.monkeyblade.net; Fri, 16 Apr 2021 12:40:38 PDT
+Received: from server.anaxus.com.au (unknown [IPv6:2a01:4f8:10b:4585::2])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id D017DC061756;
+        Fri, 16 Apr 2021 12:40:38 -0700 (PDT)
+Received: from [193.56.28.106] (unknown [193.56.28.106])
+        by server.anaxus.com.au (Postfix) with ESMTPA id 8C9BC6EA668E;
+        Sat, 17 Apr 2021 01:46:30 +1000 (AEST)
+Authentication-Results: server.anaxus.com.au;
+        spf=pass (sender IP is 193.56.28.106) smtp.mailfrom=cqukesq6@gmail.com smtp.helo=[193.56.28.106]
+Received-SPF: pass (server.anaxus.com.au: connection is authenticated)
+Date:   Fri, 16 Apr 2021 08:46:59 -0700
+Mime-version: 1.0
+Subject: Compliments
+From:   Christopher Quinlan QC <cqukesq6@gmail.com>
+To:     Undisclosed-Recipients:;
+Message-Id: <20210416084659.LDAOMSGFVRINMN@gmail.com>
+Reply-To: cqukesq6@gmail.com
+Content-type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-transfer-encoding: 8BIT
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-yanteng si <siyanteng01@gmail.com> writes:
+My name is Christopher Quinlan QC I am a solicitor at law / investment adviser to your late relative. Your late relative left behind Cash deposit in capital and investment security account along with properties, I will like to discuss with you regarding making this claim since he is related to you going by the lineage, surname and country of origin.
 
->> So I am now totally confused.  I have two "v5" series with the same
->> subject; they are evidently different but there's no explanation of why
->> or which order I should put them in.
->>
->> Please, why have you done this, and what do you expect me to do now?
->>
-> I'm sorry.
->
-> I'm making things worse and worse. I just want to split into two
-> separate series,
-> the first series is 7 patches for core-api and the second series is 4
-> patches for
-> openrisc. However, I didn't change the subject of the cover letter,
-> I'm really stupid.
+Please get back to me on my private email cqukesq6@gmail.com for further details.
 
-No, you're not; no need to talk that way.  There's a lot to learn when
-it comes submitting patches without making maintainers grumpy (or at
-least any more grumpy than they already are :).  You're doing fine,
-don't worry about it, thanks for working to improve the documentation.
+To facilitate the process of this transaction, urgently forward to me
+Your full names,
+Telephone and fax numbers,
+Address,
+Age,
+Marital status,
+Occupation
 
-jon
+I will be expecting to hear from you.
+
+Regards
+
+Christopher Quinlan QC
+Private email cqukesq6@gmail.com
+
