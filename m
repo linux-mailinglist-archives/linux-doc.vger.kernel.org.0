@@ -2,100 +2,73 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2F5F7361DF9
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Apr 2021 12:32:09 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 395A1361DFB
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Apr 2021 12:32:10 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239109AbhDPKc0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 16 Apr 2021 06:32:26 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:40376 "EHLO loongson.cn"
+        id S238743AbhDPKc2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 16 Apr 2021 06:32:28 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:40388 "EHLO loongson.cn"
         rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S238766AbhDPKc0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 16 Apr 2021 06:32:26 -0400
+        id S239117AbhDPKc1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 16 Apr 2021 06:32:27 -0400
 Received: from localhost.localdomain (unknown [223.106.57.161])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9CxucmRZ3lgFq8IAA--.15956S12;
-        Fri, 16 Apr 2021 18:31:57 +0800 (CST)
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9CxucmRZ3lgFq8IAA--.15956S13;
+        Fri, 16 Apr 2021 18:31:58 +0800 (CST)
 From:   Yanteng Si <siyanteng@loongson.cn>
 To:     corbet@lwn.net
 Cc:     Yanteng Si <siyanteng@loongson.cn>, alexs@kernel.org,
         chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
         linux-doc@vger.kernel.org, realpuyuwang@gmail.com, bobwxc@email.cn,
         siyanteng01@gmail.com
-Subject: [PATCH v7 10/11] docs/zh_CN: add openrisc index.rst translation
-Date:   Fri, 16 Apr 2021 18:32:33 +0800
-Message-Id: <f3878525e0d5f94a9c541f5ec8fd31b44a6dc5cd.1618568135.git.siyanteng@loongson.cn>
+Subject: [PATCH v7 11/11] docs/zh_CN: add openrisc translation to zh_CN index
+Date:   Fri, 16 Apr 2021 18:32:34 +0800
+Message-Id: <162fb50638028c9b0a92a0ce5c53e691be0cfec2.1618568135.git.siyanteng@loongson.cn>
 X-Mailer: git-send-email 2.27.0
 In-Reply-To: <cover.1618568135.git.siyanteng@loongson.cn>
 References: <cover.1618568135.git.siyanteng@loongson.cn>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9CxucmRZ3lgFq8IAA--.15956S12
-X-Coremail-Antispam: 1UD129KBjvdXoWrKF4kGw1xJF13Aw1UWw4kWFg_yoWkWrb_Zw
-        nYqFW0kr4jq3Z7tFWkAFykXr1IkF4vkr129a15t398J34DtrZ8JFyqqwn3XF18W39Ivrya
-        kan7urykXrn7KjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-        9fnUUIcSsGvfJTRUUUbf8FF20E14v26rWj6s0DM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28IrcIa0xkI8VA2jI8067AKxVWUAVCq3wA2048vs2
-        IY020Ec7CjxVAFwI0_Xr0E3s1l8cAvFVAK0II2c7xJM28CjxkF64kEwVA0rcxSw2x7M28E
-        F7xvwVC0I7IYx2IY67AKxVW5JVW7JwA2z4x0Y4vE2Ix0cI8IcVCY1x0267AKxVW8Jr0_Cr
-        1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I8E87Iv6xkF7I0E14v26rxl6s0D
-        M2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI64kE6c02F40Ex7xfMcIj6xIIjx
-        v20xvE14v26r1j6r18McIj6I8E87Iv67AKxVW8JVWxJwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
-        F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7MxAIw28IcxkI7VAKI48JMx
-        C20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAF
-        wI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20x
-        vE14v26r4j6ryUMIIF0xvE2Ix0cI8IcVCY1x0267AKxVWxJVW8Jr1lIxAIcVCF04k26cxK
-        x2IYs7xG6r1j6r1xMIIF0xvEx4A2jsIE14v26F4j6r4UJwCI42IY6I8E87Iv6xkF7I0E14
-        v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUj_HUJUUUUU==
+X-CM-TRANSID: AQAAf9CxucmRZ3lgFq8IAA--.15956S13
+X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
+        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUOY7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E
+        6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14
+        v26r126s0DM28IrcIa0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CE
+        w4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6x
+        kF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
+        c7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
+        8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCF
+        s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42
+        xK82IYc2Ij64vIr41l4c8EcI0Ec7CjxVAaw2AFwI0_JF0_Jw1l4I8I3I0E4IkC6x0Yz7v_
+        Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1V
+        AY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAI
+        cVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMI
+        IF0xvEx4A2jsIE14v26F4j6r4UJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsG
+        vfC2KfnxnUUI43ZEXa7VUj_HUJUUUUU==
 X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch translates Documentation/openrisc/index.rst into Chinese.
+This patch add zh_CN/openrisc to zh_CN/index.
 
 Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
-Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
 ---
- .../translations/zh_CN/openrisc/index.rst     | 30 +++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 Documentation/translations/zh_CN/openrisc/index.rst
+ Documentation/translations/zh_CN/index.rst | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/Documentation/translations/zh_CN/openrisc/index.rst b/Documentation/translations/zh_CN/openrisc/index.rst
-new file mode 100644
-index 000000000000..d722642796c8
---- /dev/null
-+++ b/Documentation/translations/zh_CN/openrisc/index.rst
-@@ -0,0 +1,30 @@
-+.. SPDX-License-Identifier: GPL-2.0
-+
-+.. include:: ../disclaimer-zh_CN.rst
-+
-+:Original: :doc:`../../../openrisc/index`
-+:Translator: Yanteng Si <siyanteng@loongson.cn>
-+
-+.. _cn_openrisc_index:
-+
-+
-+=================
-+OpenRISC 体系架构
-+=================
-+
-+.. toctree::
-+   :maxdepth: 2
-+
-+   openrisc_port
-+   todo
-+
-+Todolist:
-+    features
-+
-+
-+.. only::  subproject and html
-+
-+   Indices
-+   =======
-+
-+   * :ref:`genindex`
+diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
+index 8bb15ee2cf6d..f86fd7d31035 100644
+--- a/Documentation/translations/zh_CN/index.rst
++++ b/Documentation/translations/zh_CN/index.rst
+@@ -28,6 +28,7 @@
+    iio/index
+    riscv/index
+    core-api/index
++   openrisc/index
+ 
+ 目录和表格
+ ----------
 -- 
 2.27.0
 
