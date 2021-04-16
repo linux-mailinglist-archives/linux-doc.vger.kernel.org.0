@@ -2,73 +2,116 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 395A1361DFB
-	for <lists+linux-doc@lfdr.de>; Fri, 16 Apr 2021 12:32:10 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9488A361E26
+	for <lists+linux-doc@lfdr.de>; Fri, 16 Apr 2021 12:42:23 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238743AbhDPKc2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 16 Apr 2021 06:32:28 -0400
-Received: from mail.loongson.cn ([114.242.206.163]:40388 "EHLO loongson.cn"
-        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
-        id S239117AbhDPKc1 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 16 Apr 2021 06:32:27 -0400
-Received: from localhost.localdomain (unknown [223.106.57.161])
-        by mail.loongson.cn (Coremail) with SMTP id AQAAf9CxucmRZ3lgFq8IAA--.15956S13;
-        Fri, 16 Apr 2021 18:31:58 +0800 (CST)
-From:   Yanteng Si <siyanteng@loongson.cn>
-To:     corbet@lwn.net
-Cc:     Yanteng Si <siyanteng@loongson.cn>, alexs@kernel.org,
-        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
-        linux-doc@vger.kernel.org, realpuyuwang@gmail.com, bobwxc@email.cn,
-        siyanteng01@gmail.com
-Subject: [PATCH v7 11/11] docs/zh_CN: add openrisc translation to zh_CN index
-Date:   Fri, 16 Apr 2021 18:32:34 +0800
-Message-Id: <162fb50638028c9b0a92a0ce5c53e691be0cfec2.1618568135.git.siyanteng@loongson.cn>
-X-Mailer: git-send-email 2.27.0
-In-Reply-To: <cover.1618568135.git.siyanteng@loongson.cn>
-References: <cover.1618568135.git.siyanteng@loongson.cn>
+        id S241765AbhDPKm2 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 16 Apr 2021 06:42:28 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:49062 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S241747AbhDPKm1 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 16 Apr 2021 06:42:27 -0400
+Received: from mail-wm1-x329.google.com (mail-wm1-x329.google.com [IPv6:2a00:1450:4864:20::329])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 1153EC061756
+        for <linux-doc@vger.kernel.org>; Fri, 16 Apr 2021 03:42:03 -0700 (PDT)
+Received: by mail-wm1-x329.google.com with SMTP id i21-20020a05600c3555b029012eae2af5d4so4303053wmq.4
+        for <linux-doc@vger.kernel.org>; Fri, 16 Apr 2021 03:42:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=brainfault-org.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc;
+        bh=zex7i7Gm7ilDvh/qRtb14tTVDUsTiPnIyJ8lJBlTVDY=;
+        b=o+NE8pGADgY4FrSGIXWUfJDlnJ1juLdQCdEiocUx/f4kBswMU6EacEfCbch4zfDr8H
+         +8aCGjJXpl6SK20MOt1VpdXaX4BbkHmki5A2hh1gmZ20w2EMJP1VjnEsC8VADb9byTqY
+         lE+sl5rG/g22g2pLcBDdBqPUtuuihLLbi7A6mVCOjdUC+LZqLYwD2VrW6Q33ZmABcitG
+         osCWWS16aeTjD/SapJryOxU2/k5hi64Zs2KKTkPikhugxITJ9wbjvvaZwkFN1zhfoIGY
+         lMbuOFwM6i8S1cr0T1JDeA7IJyAS5SdymT8sxxaVslfrawq50NfS7neQz6FJIXPKg4kh
+         wuBw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc;
+        bh=zex7i7Gm7ilDvh/qRtb14tTVDUsTiPnIyJ8lJBlTVDY=;
+        b=FS9FWDH4fXjFG/edlYIb76/Rz5yUSkbq6irB2D6VnasDCZ5iwXUmwWv9F5Yl8MwFZx
+         NC2j6SUivqhueAxRi23HI6wAneDi6doOX6FDCAoi4mi00Mq4/ZzdKUs2rwkw2F7MYiCl
+         LO+rnFncCLyhIZIY5Jzsh1MQckCkJDSmKQI0pRrKQra3ROa1srQzbjqA6/gOXsAZJFJo
+         /VjovvTHtF1Ia7RL1DSMws2poEPxRVxeqQ6ZGLJBCFsnya5J3Y9hzLPAIyobnKQfC3iI
+         LAfJ2SQ3EVAnU4nJaQVPZo7AIeHlkDlqd8Qf6svV+iYN9N30pOE8kW+Pjk6x/IR2lSB9
+         8q1w==
+X-Gm-Message-State: AOAM533fNtljidQgMzZZfRVZDDHkl7wLYAWEvcLd67SmhHKGsuseesCU
+        WKlyZ6353+OfTRp3gexAXOvykmRIGxeNRAeUg0pbzA==
+X-Google-Smtp-Source: ABdhPJzSZVwXQXIP/gEzyKiBpeLInXpc+75cZ3dvpf3JNqEHMcXwCYZIJpV2ZQZVzZT+LiXa+F2urN3JdQz1K4fuTB0=
+X-Received: by 2002:a7b:c348:: with SMTP id l8mr7746989wmj.152.1618569721686;
+ Fri, 16 Apr 2021 03:42:01 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID: AQAAf9CxucmRZ3lgFq8IAA--.15956S13
-X-Coremail-Antispam: 1UD129KBjDUn29KB7ZKAUJUUUUU529EdanIXcx71UUUUU7v73
-        VFW2AGmfu7bjvjm3AaLaJ3UjIYCTnIWjp_UUUOY7AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E
-        6xAIw20EY4v20xvaj40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14
-        v26r126s0DM28IrcIa0xkI8VCY1x0267AKxVW5JVCq3wA2ocxC64kIII0Yj41l84x0c7CE
-        w4AK67xGY2AK021l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6x
-        kF7I0E14v26r4UJVWxJr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4A2jsIE
-        c7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I
-        8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCF
-        s4IE7xkEbVWUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1l42
-        xK82IYc2Ij64vIr41l4c8EcI0Ec7CjxVAaw2AFwI0_JF0_Jw1l4I8I3I0E4IkC6x0Yz7v_
-        Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1V
-        AY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Gr0_Xr1lIxAI
-        cVC0I7IYx2IY6xkF7I0E14v26r4UJVWxJr1lIxAIcVCF04k26cxKx2IYs7xG6r1j6r1xMI
-        IF0xvEx4A2jsIE14v26F4j6r4UJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsG
-        vfC2KfnxnUUI43ZEXa7VUj_HUJUUUUU==
-X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
+References: <20210415110426.2238-1-alex@ghiti.fr>
+In-Reply-To: <20210415110426.2238-1-alex@ghiti.fr>
+From:   Anup Patel <anup@brainfault.org>
+Date:   Fri, 16 Apr 2021 16:11:50 +0530
+Message-ID: <CAAhSdy2pD2q99-g3QSSHbpqw1ZD402fStFmbKNFzht2m=MS8mQ@mail.gmail.com>
+Subject: Re: [PATCH] riscv: Protect kernel linear mapping only if
+ CONFIG_STRICT_KERNEL_RWX is set
+To:     Alexandre Ghiti <alex@ghiti.fr>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Paul Walmsley <paul.walmsley@sifive.com>,
+        Palmer Dabbelt <palmer@dabbelt.com>,
+        Albert Ou <aou@eecs.berkeley.edu>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Andrey Ryabinin <aryabinin@virtuozzo.com>,
+        Alexander Potapenko <glider@google.com>,
+        Dmitry Vyukov <dvyukov@google.com>, linux-doc@vger.kernel.org,
+        linux-riscv <linux-riscv@lists.infradead.org>,
+        "linux-kernel@vger.kernel.org List" <linux-kernel@vger.kernel.org>,
+        kasan-dev@googlegroups.com,
+        linux-arch <linux-arch@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>
+Content-Type: text/plain; charset="UTF-8"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-This patch add zh_CN/openrisc to zh_CN/index.
+On Thu, Apr 15, 2021 at 4:34 PM Alexandre Ghiti <alex@ghiti.fr> wrote:
+>
+> If CONFIG_STRICT_KERNEL_RWX is not set, we cannot set different permissions
+> to the kernel data and text sections, so make sure it is defined before
+> trying to protect the kernel linear mapping.
+>
+> Signed-off-by: Alexandre Ghiti <alex@ghiti.fr>
 
-Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
----
- Documentation/translations/zh_CN/index.rst | 1 +
- 1 file changed, 1 insertion(+)
+Maybe you should add "Fixes:" tag in commit tag ?
 
-diff --git a/Documentation/translations/zh_CN/index.rst b/Documentation/translations/zh_CN/index.rst
-index 8bb15ee2cf6d..f86fd7d31035 100644
---- a/Documentation/translations/zh_CN/index.rst
-+++ b/Documentation/translations/zh_CN/index.rst
-@@ -28,6 +28,7 @@
-    iio/index
-    riscv/index
-    core-api/index
-+   openrisc/index
- 
- 目录和表格
- ----------
--- 
-2.27.0
+Otherwise it looks good.
 
+Reviewed-by: Anup Patel <anup@brainfault.org>
+
+Regards,
+Anup
+
+> ---
+>  arch/riscv/kernel/setup.c | 8 ++++----
+>  1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/arch/riscv/kernel/setup.c b/arch/riscv/kernel/setup.c
+> index 626003bb5fca..ab394d173cd4 100644
+> --- a/arch/riscv/kernel/setup.c
+> +++ b/arch/riscv/kernel/setup.c
+> @@ -264,12 +264,12 @@ void __init setup_arch(char **cmdline_p)
+>
+>         sbi_init();
+>
+> -       if (IS_ENABLED(CONFIG_STRICT_KERNEL_RWX))
+> +       if (IS_ENABLED(CONFIG_STRICT_KERNEL_RWX)) {
+>                 protect_kernel_text_data();
+> -
+> -#if defined(CONFIG_64BIT) && defined(CONFIG_MMU)
+> -       protect_kernel_linear_mapping_text_rodata();
+> +#ifdef CONFIG_64BIT
+> +               protect_kernel_linear_mapping_text_rodata();
+>  #endif
+> +       }
+>
+>  #ifdef CONFIG_SWIOTLB
+>         swiotlb_init(1);
+> --
+> 2.20.1
+>
