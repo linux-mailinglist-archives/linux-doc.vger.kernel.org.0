@@ -2,88 +2,79 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BA28C3636E5
-	for <lists+linux-doc@lfdr.de>; Sun, 18 Apr 2021 18:59:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9B9033637DF
+	for <lists+linux-doc@lfdr.de>; Sun, 18 Apr 2021 23:31:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230038AbhDRRA1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 18 Apr 2021 13:00:27 -0400
-Received: from mail.skyhub.de ([5.9.137.197]:53672 "EHLO mail.skyhub.de"
+        id S231942AbhDRVbt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 18 Apr 2021 17:31:49 -0400
+Received: from mbox.abcom.al ([217.73.143.249]:37716 "EHLO mbox.abcom.al"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S229446AbhDRRA0 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 18 Apr 2021 13:00:26 -0400
-Received: from zn.tnic (p200300ec2f25f6004f6759a73f3b605d.dip0.t-ipconnect.de [IPv6:2003:ec:2f25:f600:4f67:59a7:3f3b:605d])
-        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-        (No client certificate requested)
-        by mail.skyhub.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 937281EC026D;
-        Sun, 18 Apr 2021 18:59:56 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=dkim;
-        t=1618765196;
-        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-         content-transfer-encoding:in-reply-to:in-reply-to:  references:references;
-        bh=NpQYZXvjLRkeD9aRobuDgVQB/agTppYn2tW+8c/M7ms=;
-        b=eAsOKh/blZgL0HJry/c7mcPJMKz/mDezp2WY0nH+xDbI3DefrxzIOMF/c0NBNGV0Q1DEBo
-        Ho3j/LVvi50M8g1qcVyzGjpi1zO3COMvgDj2JwoL3J0FVqAHjCnePhJ5/QEzURdVK2oxDD
-        nxPBSREfGszsa//6L5TY0egUAq9G+QA=
-Date:   Sun, 18 Apr 2021 18:59:53 +0200
-From:   Borislav Petkov <bp@alien8.de>
-To:     Liang Zhou <lullaby2005@gmail.com>
-Cc:     tglx@linutronix.de, mingo@redhat.com, x86@kernel.org,
-        hpa@zytor.com, corbet@lwn.net, linux-kernel@vger.kernel.org,
-        linux-doc@vger.kernel.org, zhoul110@chinatelecom.cn
-Subject: Re: [PATCH] docs: fix the invalid vt-d spec location
-Message-ID: <20210418165953.GA1206@zn.tnic>
-References: <1618763386-29562-1-git-send-email-zhoul110@chinatelecom.cn>
+        id S231218AbhDRVbs (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 18 Apr 2021 17:31:48 -0400
+X-Greylist: delayed 47990 seconds by postgrey-1.27 at vger.kernel.org; Sun, 18 Apr 2021 17:31:48 EDT
+Received: from localhost (localhost [127.0.0.1])
+        by mbox.abcom.al (Postfix) with ESMTP id C80A611CA5BCE;
+        Sun, 18 Apr 2021 23:17:12 +0200 (CEST)
+Received: from mbox.abcom.al ([127.0.0.1])
+        by localhost (mbox.abcom.al [127.0.0.1]) (amavisd-new, port 10032)
+        with ESMTP id L3adZvfr-em9; Sun, 18 Apr 2021 23:17:12 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+        by mbox.abcom.al (Postfix) with ESMTP id 59F1E11C93597;
+        Sun, 18 Apr 2021 23:17:12 +0200 (CEST)
+DKIM-Filter: OpenDKIM Filter v2.10.3 mbox.abcom.al 59F1E11C93597
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=abcom.al;
+        s=0F3BA0EE-D5D4-11E8-9596-F9115129F2F4; t=1618780632;
+        bh=p2Sn/5BeV1TeOpE0g2OnXyVNOPHFXRN2kak+hb1GY3o=;
+        h=MIME-Version:To:From:Date:Message-Id;
+        b=PG2Z3z812vO901r0veeFOcW7ngDKizgkHHIUpcWwqo8mSGj5KGyC1TlKqjF4UAPQ+
+         +NY46D2IxTHx7PocTJ3fQ1PrrBbTtgiMssV4omcWCWWSx2jyOYi5SacA5JUk11dX2n
+         g4ImfzrMAPV/W9lssaaIbTq6EJIBmQk1z20zW+41q6uEeu2djBjIR04ykOpCvps1sT
+         vFZBBjYXjhHJ4C7VvBFzrbdQfDAvJcG6Df5mtySnZDbDHP/v4ffE9UYoYEWcyMuNzj
+         lm19QjlL5kjpmFLFcU3ctXaYZpc9WZLXamtODaCG3e6lEhwSHlvguFru+I3oQ2+qav
+         hNWvRchflGWog==
+X-Virus-Scanned: amavisd-new at mbox.abcom.al
+Received: from mbox.abcom.al ([127.0.0.1])
+        by localhost (mbox.abcom.al [127.0.0.1]) (amavisd-new, port 10026)
+        with ESMTP id GX4jshHRiPpN; Sun, 18 Apr 2021 23:17:12 +0200 (CEST)
+Received: from [192.168.43.60] (unknown [105.0.5.99])
+        by mbox.abcom.al (Postfix) with ESMTPSA id BD94C11F5590E;
+        Sun, 18 Apr 2021 23:17:05 +0200 (CEST)
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <1618763386-29562-1-git-send-email-zhoul110@chinatelecom.cn>
+Content-Transfer-Encoding: quoted-printable
+Content-Description: Mail message body
+Subject: =?utf-8?q?Hallo=2C_Sie_haben_eine_Spende_von_=E2=82=AC_2=2E000=2E000=2C00?=
+To:     Recipients <abashi@abcom.al>
+From:   <abashi@abcom.al>
+Date:   Sun, 18 Apr 2021 23:16:28 +0200
+Reply-To: billlawrencedonationorg@yahoo.com
+Message-Id: <20210418211705.BD94C11F5590E@mbox.abcom.al>
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Sun, Apr 18, 2021 at 09:29:46AM -0700, Liang Zhou wrote:
-> This patch fixes the invalid vt-d spec location.
+Sehr geehrter Herr / Frau
+Ich gr=C3=BC=C3=9Fe Sie im Namen des Herrn. Diese Nachricht wird Ihnen als =
+Benachrichtigung gesendet, dass Sie ausgew=C3=A4hlt wurden, um von meinem W=
+ohlt=C3=A4tigkeitsprojekt zu profitieren, das darauf abzielt, Leben zu ber=
+=C3=BChren und denen zu helfen, die ich auf der ganzen Welt kann, wie Gott =
+mich gesegnet hat.
+Ich habe die Powerball-Lotterie in H=C3=B6he von 150 Millionen USD am 16. D=
+ezember 2019 gewonnen und ich habe mich freiwillig entschlossen, Ihnen eine=
+n Betrag von (2.000.000,00 =E2=82=AC) als Wohlt=C3=A4tigkeitsorganisation z=
+u spenden. Ich versuche, zuf=C3=A4llige Menschen aus verschiedenen Quellen =
+und Moden zu erreichen, um das Leben aus verschiedenen Quellen zu ber=C3=BC=
+hren Winkel. Deshalb erhalten Sie hier die Nachricht.
+Sie wurden als einer der gl=C3=BCcklichen Empf=C3=A4nger registriert, die 2=
+ Millionen Euro erhalten haben. Diese Spende wird Ihnen gegeben, damit Sie =
+Ihre pers=C3=B6nlichen Probleme versch=C3=A4rfen und uns zum gro=C3=9Fen Te=
+il gro=C3=9Fz=C3=BCgig dabei helfen k=C3=B6nnen, die weniger gl=C3=BCcklich=
+en Waisen und gemeinn=C3=BCtzigen Organisationen in Ihrem Land zu unterst=
+=C3=BCtzen Nachbarschaftslokalit=C3=A4t
+Zur =C3=9Cberpr=C3=BCfung: //www.powerball.com/winner-story/150-million-pow=
+erball-ticket-claimed
 
-Avoid having "This patch" or "This commit" in the commit message. It is
-tautologically useless.
+Kontaktieren Sie mich erneut, um Spenden zu erhalten. E-Mail: billlawrenced=
+onationorg@yahoo.com
 
-Also, do
-
-$ git grep 'This patch' Documentation/process
-
-for more details.
-
-> Signed-off-by: Liang Zhou <zhoul110@chinatelecom.cn>
-> ---
->  Documentation/x86/intel-iommu.rst | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
-> 
-> diff --git a/Documentation/x86/intel-iommu.rst b/Documentation/x86/intel-iommu.rst
-> index 099f13d..e95ee34 100644
-> --- a/Documentation/x86/intel-iommu.rst
-> +++ b/Documentation/x86/intel-iommu.rst
-> @@ -4,7 +4,7 @@ Linux IOMMU Support
->  
->  The architecture spec can be obtained from the below location.
->  
-> -http://www.intel.com/content/dam/www/public/us/en/documents/product-specifications/vt-directed-io-spec.pdf
-> +https://software.intel.com/content/dam/develop/external/us/en/documents-tps/vt-directed-io-spec.pdf
-
-Those links are never stable.
-
-Please open a bugzilla at bugzilla.kernel.org, upload that document
-there, like this, for example:
-
-https://bugzilla.kernel.org/show_bug.cgi?id=206537
-
-and then add the *bugzilla* link to intel-iommu.rst so that it doesn't
-get invalid again.
-
-Thx.
-
--- 
-Regards/Gruss,
-    Boris.
-
-https://people.kernel.org/tglx/notes-about-netiquette
+Vielen Dank, Bill Lawrence
