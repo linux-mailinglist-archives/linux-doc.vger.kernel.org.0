@@ -2,56 +2,54 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id DC65E364D45
-	for <lists+linux-doc@lfdr.de>; Mon, 19 Apr 2021 23:45:29 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 0C88E364D4F
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Apr 2021 23:50:56 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S232685AbhDSVp5 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 19 Apr 2021 17:45:57 -0400
-Received: from vps0.lunn.ch ([185.16.172.187]:59086 "EHLO vps0.lunn.ch"
+        id S232114AbhDSVvZ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 19 Apr 2021 17:51:25 -0400
+Received: from mail.kernel.org ([198.145.29.99]:44116 "EHLO mail.kernel.org"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S232382AbhDSVp4 (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Mon, 19 Apr 2021 17:45:56 -0400
-Received: from andrew by vps0.lunn.ch with local (Exim 4.94)
-        (envelope-from <andrew@lunn.ch>)
-        id 1lYbhl-00Hajm-FH; Mon, 19 Apr 2021 23:45:17 +0200
-Date:   Mon, 19 Apr 2021 23:45:17 +0200
-From:   Andrew Lunn <andrew@lunn.ch>
-To:     Jakub Kicinski <kuba@kernel.org>
+        id S231145AbhDSVvW (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 19 Apr 2021 17:51:22 -0400
+Received: by mail.kernel.org (Postfix) with ESMTPSA id B1E2A613B4;
+        Mon, 19 Apr 2021 21:50:50 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=kernel.org;
+        s=k20201202; t=1618869051;
+        bh=evaMLtccrnqOIDDF5gtHGiH65wCJKjRnN2VAF2VCRik=;
+        h=Date:From:To:Cc:Subject:In-Reply-To:References:From;
+        b=X+mA2dlzCAEmf5P32v43pTgdG5htsXhru5NbBzvpRTtv20GBWEg1SZYKVGvAiv3BL
+         /uywKf1Pze5xZTfMDMP4wBGv4YlQVT7uJcwJ915vcLRoDH05rO6I/Muyg9jo15HaXK
+         3UAyasKHp7rwv0sMAJNYB0PvMQZX9u02RVLz9umOLcbEx6KkWhCHJLs9P4Gii1CSXl
+         vLXEUcDMGZq5HqyRIgNIx3DDECzi6M2T/owN+Ko2OG1lwxnYnFxMjZe0DaAoPoMn7J
+         RhmPxe632BkZdGxPMkaN8FWU73LCIrRv0J4zHvzpovT/J1b9goGPpSKPB35CBxI1uY
+         5/fu/87Q3thvw==
+Date:   Mon, 19 Apr 2021 14:50:49 -0700
+From:   Jakub Kicinski <kuba@kernel.org>
+To:     Andrew Lunn <andrew@lunn.ch>
 Cc:     davem@davemloft.net, netdev@vger.kernel.org, mkubecek@suse.cz,
         corbet@lwn.net, vladyslavt@nvidia.com, linux-doc@vger.kernel.org
-Subject: Re: [PATCH net-next] ethtool: add missing EEPROM to list of messages
-Message-ID: <YH357QLGqz6igLtc@lunn.ch>
+Subject: Re: [PATCH net-next] ethtool: add missing EEPROM to list of
+ messages
+Message-ID: <20210419145049.2ab6edd7@kicinski-fedora-pc1c0hjn.dhcp.thefacebook.com>
+In-Reply-To: <YH357QLGqz6igLtc@lunn.ch>
 References: <20210419212622.2993451-1-kuba@kernel.org>
+        <YH357QLGqz6igLtc@lunn.ch>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20210419212622.2993451-1-kuba@kernel.org>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Mon, Apr 19, 2021 at 02:26:22PM -0700, Jakub Kicinski wrote:
-> ETHTOOL_MSG_MODULE_EEPROM_GET is missing from the list of messages.
-> ETHTOOL_MSG_MODULE_EEPROM_GET_REPLY is sadly a rather long name
-> so we need to adjust column length.
+On Mon, 19 Apr 2021 23:45:17 +0200 Andrew Lunn wrote:
+> > @@ -210,45 +210,47 @@ All constants identifying message types use ``ETHTOOL_CMD_`` prefix and suffix
+> >    ``ETHTOOL_MSG_TUNNEL_INFO_GET``       get tunnel offload info
+> >    ``ETHTOOL_MSG_FEC_GET``               get FEC settings
+> >    ``ETHTOOL_MSG_FEC_SET``               set FEC settings
+> > +  ``ETHTOOL_MSG_MODULE_EEPROM_GET``	read SFP module EEPROM  
 > 
-> Fixes: c781ff12a2f3 ("ethtool: Allow network drivers to dump arbitrary EEPROM data")
-> Signed-off-by: Jakub Kicinski <kuba@kernel.org>
-> ---
->  Documentation/networking/ethtool-netlink.rst | 70 ++++++++++----------
->  1 file changed, 36 insertions(+), 34 deletions(-)
-> 
-> diff --git a/Documentation/networking/ethtool-netlink.rst b/Documentation/networking/ethtool-netlink.rst
-> index 48cad2fce147..c8814d787072 100644
-> --- a/Documentation/networking/ethtool-netlink.rst
-> +++ b/Documentation/networking/ethtool-netlink.rst
-> @@ -210,45 +210,47 @@ All constants identifying message types use ``ETHTOOL_CMD_`` prefix and suffix
->    ``ETHTOOL_MSG_TUNNEL_INFO_GET``       get tunnel offload info
->    ``ETHTOOL_MSG_FEC_GET``               get FEC settings
->    ``ETHTOOL_MSG_FEC_SET``               set FEC settings
-> +  ``ETHTOOL_MSG_MODULE_EEPROM_GET``	read SFP module EEPROM
+> It looks like you used a tab, where as the rest of the table is
+> spaces?
 
-It looks like you used a tab, where as the rest of the table is
-spaces?
-
-	Andrew
+Ah.. after carefully adjusting _REPLY to use spaces.. :)
+Sorry, v2 coming.
