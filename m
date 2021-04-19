@@ -2,79 +2,118 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9B9033637DF
-	for <lists+linux-doc@lfdr.de>; Sun, 18 Apr 2021 23:31:21 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 100193638E2
+	for <lists+linux-doc@lfdr.de>; Mon, 19 Apr 2021 02:52:12 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231942AbhDRVbt (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sun, 18 Apr 2021 17:31:49 -0400
-Received: from mbox.abcom.al ([217.73.143.249]:37716 "EHLO mbox.abcom.al"
+        id S235636AbhDSAwj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sun, 18 Apr 2021 20:52:39 -0400
+Received: from mx2.suse.de ([195.135.220.15]:45192 "EHLO mx2.suse.de"
         rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S231218AbhDRVbs (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Sun, 18 Apr 2021 17:31:48 -0400
-X-Greylist: delayed 47990 seconds by postgrey-1.27 at vger.kernel.org; Sun, 18 Apr 2021 17:31:48 EDT
-Received: from localhost (localhost [127.0.0.1])
-        by mbox.abcom.al (Postfix) with ESMTP id C80A611CA5BCE;
-        Sun, 18 Apr 2021 23:17:12 +0200 (CEST)
-Received: from mbox.abcom.al ([127.0.0.1])
-        by localhost (mbox.abcom.al [127.0.0.1]) (amavisd-new, port 10032)
-        with ESMTP id L3adZvfr-em9; Sun, 18 Apr 2021 23:17:12 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-        by mbox.abcom.al (Postfix) with ESMTP id 59F1E11C93597;
-        Sun, 18 Apr 2021 23:17:12 +0200 (CEST)
-DKIM-Filter: OpenDKIM Filter v2.10.3 mbox.abcom.al 59F1E11C93597
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=abcom.al;
-        s=0F3BA0EE-D5D4-11E8-9596-F9115129F2F4; t=1618780632;
-        bh=p2Sn/5BeV1TeOpE0g2OnXyVNOPHFXRN2kak+hb1GY3o=;
-        h=MIME-Version:To:From:Date:Message-Id;
-        b=PG2Z3z812vO901r0veeFOcW7ngDKizgkHHIUpcWwqo8mSGj5KGyC1TlKqjF4UAPQ+
-         +NY46D2IxTHx7PocTJ3fQ1PrrBbTtgiMssV4omcWCWWSx2jyOYi5SacA5JUk11dX2n
-         g4ImfzrMAPV/W9lssaaIbTq6EJIBmQk1z20zW+41q6uEeu2djBjIR04ykOpCvps1sT
-         vFZBBjYXjhHJ4C7VvBFzrbdQfDAvJcG6Df5mtySnZDbDHP/v4ffE9UYoYEWcyMuNzj
-         lm19QjlL5kjpmFLFcU3ctXaYZpc9WZLXamtODaCG3e6lEhwSHlvguFru+I3oQ2+qav
-         hNWvRchflGWog==
-X-Virus-Scanned: amavisd-new at mbox.abcom.al
-Received: from mbox.abcom.al ([127.0.0.1])
-        by localhost (mbox.abcom.al [127.0.0.1]) (amavisd-new, port 10026)
-        with ESMTP id GX4jshHRiPpN; Sun, 18 Apr 2021 23:17:12 +0200 (CEST)
-Received: from [192.168.43.60] (unknown [105.0.5.99])
-        by mbox.abcom.al (Postfix) with ESMTPSA id BD94C11F5590E;
-        Sun, 18 Apr 2021 23:17:05 +0200 (CEST)
-Content-Type: text/plain; charset="utf-8"
+        id S233117AbhDSAwj (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Sun, 18 Apr 2021 20:52:39 -0400
+X-Virus-Scanned: by amavisd-new at test-mx.suse.de
+Received: from relay2.suse.de (unknown [195.135.221.27])
+        by mx2.suse.de (Postfix) with ESMTP id 3B572B1AE;
+        Mon, 19 Apr 2021 00:52:09 +0000 (UTC)
+From:   NeilBrown <neilb@suse.de>
+To:     Fox Chen <foxhlchen@gmail.com>
+Date:   Mon, 19 Apr 2021 10:52:01 +1000
+Cc:     Fox Chen <foxhlchen@gmail.com>, corbet@lwn.net,
+        vegard.nossum@oracle.com, viro@zeniv.linux.org.uk,
+        rdunlap@infradead.org, grandmaster@al2klimov.de,
+        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
+        gregkh@linuxfoundation.org
+Subject: Re: [PATCH v2 01/12] docs: path-lookup: update follow_managed() part
+In-Reply-To: <20210316054727.25655-2-foxhlchen@gmail.com>
+References: <20210316054727.25655-1-foxhlchen@gmail.com>
+ <20210316054727.25655-2-foxhlchen@gmail.com>
+Message-ID: <87k0oz2j0u.fsf@notabene.neil.brown.name>
 MIME-Version: 1.0
-Content-Transfer-Encoding: quoted-printable
-Content-Description: Mail message body
-Subject: =?utf-8?q?Hallo=2C_Sie_haben_eine_Spende_von_=E2=82=AC_2=2E000=2E000=2C00?=
-To:     Recipients <abashi@abcom.al>
-From:   <abashi@abcom.al>
-Date:   Sun, 18 Apr 2021 23:16:28 +0200
-Reply-To: billlawrencedonationorg@yahoo.com
-Message-Id: <20210418211705.BD94C11F5590E@mbox.abcom.al>
+Content-Type: multipart/signed; boundary="=-=-=";
+        micalg=pgp-sha256; protocol="application/pgp-signature"
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Sehr geehrter Herr / Frau
-Ich gr=C3=BC=C3=9Fe Sie im Namen des Herrn. Diese Nachricht wird Ihnen als =
-Benachrichtigung gesendet, dass Sie ausgew=C3=A4hlt wurden, um von meinem W=
-ohlt=C3=A4tigkeitsprojekt zu profitieren, das darauf abzielt, Leben zu ber=
-=C3=BChren und denen zu helfen, die ich auf der ganzen Welt kann, wie Gott =
-mich gesegnet hat.
-Ich habe die Powerball-Lotterie in H=C3=B6he von 150 Millionen USD am 16. D=
-ezember 2019 gewonnen und ich habe mich freiwillig entschlossen, Ihnen eine=
-n Betrag von (2.000.000,00 =E2=82=AC) als Wohlt=C3=A4tigkeitsorganisation z=
-u spenden. Ich versuche, zuf=C3=A4llige Menschen aus verschiedenen Quellen =
-und Moden zu erreichen, um das Leben aus verschiedenen Quellen zu ber=C3=BC=
-hren Winkel. Deshalb erhalten Sie hier die Nachricht.
-Sie wurden als einer der gl=C3=BCcklichen Empf=C3=A4nger registriert, die 2=
- Millionen Euro erhalten haben. Diese Spende wird Ihnen gegeben, damit Sie =
-Ihre pers=C3=B6nlichen Probleme versch=C3=A4rfen und uns zum gro=C3=9Fen Te=
-il gro=C3=9Fz=C3=BCgig dabei helfen k=C3=B6nnen, die weniger gl=C3=BCcklich=
-en Waisen und gemeinn=C3=BCtzigen Organisationen in Ihrem Land zu unterst=
-=C3=BCtzen Nachbarschaftslokalit=C3=A4t
-Zur =C3=9Cberpr=C3=BCfung: //www.powerball.com/winner-story/150-million-pow=
-erball-ticket-claimed
+--=-=-=
+Content-Type: text/plain
+Content-Transfer-Encoding: quoted-printable
 
-Kontaktieren Sie mich erneut, um Spenden zu erhalten. E-Mail: billlawrenced=
-onationorg@yahoo.com
+On Tue, Mar 16 2021, Fox Chen wrote:
 
-Vielen Dank, Bill Lawrence
+> No follow_managed() anymore, handle_mounts(),
+> traverse_mounts(), will do the job.
+> see commit 9deed3ebca24 ("new helper: traverse_mounts()")
+>
+> Signed-off-by: Fox Chen <foxhlchen@gmail.com>
+> ---
+>  Documentation/filesystems/path-lookup.rst | 10 +++++-----
+>  1 file changed, 5 insertions(+), 5 deletions(-)
+>
+> diff --git a/Documentation/filesystems/path-lookup.rst b/Documentation/fi=
+lesystems/path-lookup.rst
+> index c482e1619e77..d07766375e13 100644
+> --- a/Documentation/filesystems/path-lookup.rst
+> +++ b/Documentation/filesystems/path-lookup.rst
+> @@ -448,10 +448,11 @@ described.  If it finds a ``LAST_NORM`` component i=
+t first calls
+>  filesystem to revalidate the result if it is that sort of filesystem.
+>  If that doesn't get a good result, it calls "``lookup_slow()``" which
+>  takes ``i_rwsem``, rechecks the cache, and then asks the filesystem
+> -to find a definitive answer.  Each of these will call
+> -``follow_managed()`` (as described below) to handle any mount points.
+> +to find a definitive answer.
+>=20=20
+> -In the absence of symbolic links, ``walk_component()`` creates a new
+> +As the last step of ``walk_component()``, ``step_into()`` will be called=
+ either
+> +directly from walk_component() or from handle_dots().  It calls
+> +``handle_mount()``, to check and handle mount points, in which a new
+
+Typo - it is "handle_mounts", not "handle_mount"
+
+With that fixed:
+  Reviewed-by: NeilBrown <neilb@suse.de>
+
+Thanks,
+NeilBrown
+
+
+>  ``struct path`` containing a counted reference to the new dentry and a
+>  reference to the new ``vfsmount`` which is only counted if it is
+>  different from the previous ``vfsmount``.  It then calls
+> @@ -535,8 +536,7 @@ covered in greater detail in autofs.txt in the Linux =
+documentation
+>  tree, but a few notes specifically related to path lookup are in order
+>  here.
+>=20=20
+> -The Linux VFS has a concept of "managed" dentries which is reflected
+> -in function names such as "``follow_managed()``".  There are three
+> +The Linux VFS has a concept of "managed" dentries.  There are three
+>  potentially interesting things about these dentries corresponding
+>  to three different flags that might be set in ``dentry->d_flags``:
+>=20=20
+> --=20
+> 2.30.2
+
+--=-=-=
+Content-Type: application/pgp-signature; name="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+iQJCBAEBCAAsFiEEG8Yp69OQ2HB7X0l6Oeye3VZigbkFAmB81DIOHG5laWxiQHN1
+c2UuZGUACgkQOeye3VZigbnF1hAAlBHIQl8+cJrqICzkhK5VOsom1BWwH2DvJE/i
+tlqn76S2rCYAQgqzE3T7bPfCFrDPlEM0ztcx5XMYHdguU5e+pemWxJRhWfz+aJE6
+kvxJcJjE/uGW+FlHY3hjVEahjrGFhhGiKQy/3NroSyedaa9LzAN8svJu45YxznxS
+WABNCvYMKx/CPrnTrMcxTTT4bZeYYHYV/wksyib4YTYziNs65LARBvstRREKtDAU
+58S1RA4AZbX1TwdxOILZZf/LoppMZ4ce3lb46dm/KWgtLLT3T6cr+vbeTDJy7e5T
+ErthbtnJiR5//OCKOwYE67EDu/8t28e4z8gcuO6+NsqT/VY1ylXUxf0M4maUwfG0
+RLZ0hgLOWXiwUPLs8icSL+MNYKHFQXlyBbPoGhzJSlQRcPABtrfrStbk2wPVHHFT
+wfrcQmNLwWpnfftM94ZFmjmmh5DkleCvOljCsjTcDJNp49axas677lsmcRc8uF0N
+j/vXYUvvS4zouRjRpr8Wzd3deH0sGi/r4ADtP50LxogTtYnvtiet/wMYCHhooFNi
+DlYatkDmKu21rucTWa2iigKGcdgPUE6B1qT4YAGsS+wtP9dhZPAO+9cup3u7L7fP
+osd7ohkVHAa6hNksD4ptc2xQPVqHmAWbiStBUCWkIg74XFVQK40YgqYlt4Dy8uHc
+VHMOCww=
+=btDA
+-----END PGP SIGNATURE-----
+--=-=-=--
