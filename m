@@ -2,148 +2,128 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 3835F36B366
-	for <lists+linux-doc@lfdr.de>; Mon, 26 Apr 2021 14:46:46 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 60B8B36B397
+	for <lists+linux-doc@lfdr.de>; Mon, 26 Apr 2021 14:55:33 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S233448AbhDZMrY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 26 Apr 2021 08:47:24 -0400
-Received: from office2.cesnet.cz ([195.113.144.244]:46088 "EHLO
-        office2.cesnet.cz" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231862AbhDZMrY (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Apr 2021 08:47:24 -0400
-Received: from mail-pj1-f45.google.com (mail-pj1-f45.google.com [209.85.216.45])
-        (using TLSv1.3 with cipher TLS_AES_128_GCM_SHA256 (128/128 bits)
-         key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
-        (No client certificate requested)
-        by office2.cesnet.cz (Postfix) with ESMTPSA id 422A6400052;
-        Mon, 26 Apr 2021 14:46:41 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=cesnet.cz;
-        s=office2-2020; t=1619441201;
-        bh=vAAsbBiBH7LAbBh1t9loyx/hGv7nApOFY9XOY22lVNg=;
-        h=References:In-Reply-To:From:Date:Subject:To:Cc;
-        b=aKdaeQQmkMCROGpYjyLcjsOEBCprIG7wrCPrVQ5HqomHNBDoHwBPWJZCn6ZQXtabE
-         pHsrmmkEicC00vRdQ2n3ELyIGG9hj3XNmHsb7seMPBpbRMk4Q/NN8hgtatP+uzMtfK
-         jKMjKJ919ECBYJPOiu48KDaZ4LCsMsjXQiu+x94SSnZ1PVS+ar2BPU15ptVfEmUBDC
-         q2DcT+/k3M0EI/fafovQ6F/XzFtvszfYxR+2EPp2j4Iw5QRegzB54985sppPZPT2IE
-         FyuAXeCp25b03P1aV5z1IA+qSVfbEtfTAD+m4HcUohDQuNUMi554u1DRSJRJ2rKU0J
-         d0IHLxGEQaWcg==
-Received: by mail-pj1-f45.google.com with SMTP id md17so1524734pjb.0;
-        Mon, 26 Apr 2021 05:46:41 -0700 (PDT)
-X-Gm-Message-State: AOAM531het5S/UIIBVooOVqB7eNTSrGHke5axXrG277hgfLVdqCbv7TP
-        WyJQLDVPDN97oJRw87FOZITEh30kCHgwcLCxngQ=
-X-Google-Smtp-Source: ABdhPJw45wCj7QeQGS20UcVMLO74ChUMRhb/yYlOPI3Wl6DXngaPVEiVwR8/pT7CtHuZCHWgY8+dy+ZmltO0gzr0AcY=
-X-Received: by 2002:a17:902:b408:b029:ec:e879:bbd8 with SMTP id
- x8-20020a170902b408b02900ece879bbd8mr12993884plr.65.1619441199370; Mon, 26
- Apr 2021 05:46:39 -0700 (PDT)
+        id S233376AbhDZM4O (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 26 Apr 2021 08:56:14 -0400
+Received: from us-smtp-delivery-124.mimecast.com ([170.10.133.124]:47244 "EHLO
+        us-smtp-delivery-124.mimecast.com" rhost-flags-OK-OK-OK-OK)
+        by vger.kernel.org with ESMTP id S231876AbhDZM4N (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Apr 2021 08:56:13 -0400
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+        s=mimecast20190719; t=1619441731;
+        h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+         to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+         content-transfer-encoding:content-transfer-encoding:
+         in-reply-to:in-reply-to:references:references;
+        bh=E96iHRi0pDB8Gx/hvOHUwMH9SmXwt6oYBpOC2eqrBwY=;
+        b=MlqRtiHxJCh4bXCHTNm1SqzhCkHCgtFGQYeqrzSeXq3Oz6sIZVEp3EhFK5MNwCSojJIJre
+        DHc7F8M3Usj/ZPyClDhzM5BS0RigtnQeHgM8hnrM1ppJtQoY5wavJ0FeaSZq5QHs3HqkLv
+        oUKKKTEqrYyw5wbwUgzEWKD3hT9Ury4=
+Received: from mail-ed1-f71.google.com (mail-ed1-f71.google.com
+ [209.85.208.71]) (Using TLS) by relay.mimecast.com with ESMTP id
+ us-mta-132-oSe3m2uSPqqtpgM3WKi7bg-1; Mon, 26 Apr 2021 08:55:30 -0400
+X-MC-Unique: oSe3m2uSPqqtpgM3WKi7bg-1
+Received: by mail-ed1-f71.google.com with SMTP id u30-20020a50a41e0000b0290385504d6e4eso1127738edb.7
+        for <linux-doc@vger.kernel.org>; Mon, 26 Apr 2021 05:55:29 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=E96iHRi0pDB8Gx/hvOHUwMH9SmXwt6oYBpOC2eqrBwY=;
+        b=CYEIIB32ybrMiMD+GXnQKo3tlfzADhbvHDiz7wK9sSZgxEuej7LnnHGMBWsfqHf0rc
+         u+G392/jk0Hx/p4Ey7zigZK+u+XBgNxJs16npRWTBXyQP9BpB2uZRF+aeGwBhcAC9IZ3
+         MP39+2gYLAf/bm+tb7vPMyiMmCohY23f1Zfvv9gX4KfPAZohmIQuesd2l2lcpYHE2SC/
+         JNsoWwmv30OVvyDLoftwEuLSmePNnoEJl7ZyP5d1Py4TR4s27YcIAJj5Ug0eIuJPiJeX
+         uTUI1lZi4j2bRNazX/EZhKFl8ctIykzsG5m3D+k7Puo7M25c7QuAKw0MXr49tfBoIdRs
+         K7QA==
+X-Gm-Message-State: AOAM533JiWkaHQi1km6crqqYKDuhC/qJCT8ht9QiKRkxoRV9K2H0iLxT
+        0SExa52dnvPtoFib8Bx/NwX9gjY9qTYGypExhGfwCH3NAKm/ahI3TL2Q/1yMFxScWqkAYNSAwvF
+        uX0RKriDzOLoYIT81d94V
+X-Received: by 2002:a17:906:64f:: with SMTP id t15mr18008551ejb.411.1619441728514;
+        Mon, 26 Apr 2021 05:55:28 -0700 (PDT)
+X-Google-Smtp-Source: ABdhPJyTtmFyrhUELiEp1Slv3Dv1f/poXDpkq6nkg7FLSZqKNS3iFCBG4GlPkVuX75QtDDae6M/k8A==
+X-Received: by 2002:a17:906:64f:: with SMTP id t15mr18008528ejb.411.1619441728303;
+        Mon, 26 Apr 2021 05:55:28 -0700 (PDT)
+Received: from ?IPv6:2001:b07:6468:f312:c8dd:75d4:99ab:290a? ([2001:b07:6468:f312:c8dd:75d4:99ab:290a])
+        by smtp.gmail.com with ESMTPSA id la24sm12007107ejb.71.2021.04.26.05.55.26
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 26 Apr 2021 05:55:27 -0700 (PDT)
+Subject: Re: [PATCH v2 0/9] KVM: my debug patch queue
+To:     Maxim Levitsky <mlevitsk@redhat.com>, kvm@vger.kernel.org
+Cc:     "maintainer:X86 ARCHITECTURE (32-BIT AND 64-BIT)" <x86@kernel.org>,
+        Ingo Molnar <mingo@redhat.com>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Sean Christopherson <seanjc@google.com>,
+        Marc Zyngier <maz@kernel.org>,
+        Catalin Marinas <catalin.marinas@arm.com>,
+        open list <linux-kernel@vger.kernel.org>,
+        Julien Thierry <julien.thierry.kdev@gmail.com>,
+        Stefano Garzarella <sgarzare@redhat.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Suzuki K Poulose <suzuki.poulose@arm.com>,
+        Jonathan Corbet <corbet@lwn.net>, Jessica Yu <jeyu@kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Jan Kiszka <jan.kiszka@siemens.com>,
+        Will Deacon <will@kernel.org>,
+        "open list:KERNEL VIRTUAL MACHINE FOR ARM64 (KVM/arm64)" 
+        <kvmarm@lists.cs.columbia.edu>,
+        Vitaly Kuznetsov <vkuznets@redhat.com>,
+        Vasily Gorbik <gor@linux.ibm.com>,
+        Joerg Roedel <joro@8bytes.org>,
+        Claudio Imbrenda <imbrenda@linux.ibm.com>,
+        Jim Mattson <jmattson@google.com>,
+        Cornelia Huck <cohuck@redhat.com>,
+        David Hildenbrand <david@redhat.com>,
+        Wanpeng Li <wanpengli@tencent.com>,
+        Janosch Frank <frankja@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@de.ibm.com>,
+        "open list:S390" <linux-s390@vger.kernel.org>,
+        Heiko Carstens <hca@linux.ibm.com>,
+        Kieran Bingham <kbingham@kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        "moderated list:KERNEL VIRTUAL MACHINE FOR ARM64 (KVM/arm64)" 
+        <linux-arm-kernel@lists.infradead.org>,
+        James Morse <james.morse@arm.com>
+References: <20210401135451.1004564-1-mlevitsk@redhat.com>
+ <cb7f918c-932f-d558-76ec-801ed8ed1f62@redhat.com>
+ <6d7146021f3435330b42f2e1b917d4b5dea00edc.camel@redhat.com>
+From:   Paolo Bonzini <pbonzini@redhat.com>
+Message-ID: <afba4cd8-72d3-ae18-df22-92be3b8eb321@redhat.com>
+Date:   Mon, 26 Apr 2021 14:55:25 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
+ Thunderbird/78.7.0
 MIME-Version: 1.0
-References: <20210413025948.901867-1-kubernat@cesnet.cz> <250c1c16-541a-984f-c720-1a8b6176e97e@roeck-us.net>
-In-Reply-To: <250c1c16-541a-984f-c720-1a8b6176e97e@roeck-us.net>
-From:   =?UTF-8?B?VsOhY2xhdiBLdWJlcm7DoXQ=?= <kubernat@cesnet.cz>
-Date:   Mon, 26 Apr 2021 14:46:27 +0200
-X-Gmail-Original-Message-ID: <CABKa3npjrpq5Aw_Xqy3mFZtUHZcfB0YENxEDgo_MCwPUKqA4ww@mail.gmail.com>
-Message-ID: <CABKa3npjrpq5Aw_Xqy3mFZtUHZcfB0YENxEDgo_MCwPUKqA4ww@mail.gmail.com>
-Subject: Re: [PATCH v2 1/5] hwmon: (max31790) Rework to use regmap
-To:     Guenter Roeck <linux@roeck-us.net>
-Cc:     Jean Delvare <jdelvare@suse.com>, Jonathan Corbet <corbet@lwn.net>,
-        linux-hwmon@vger.kernel.org, linux-doc@vger.kernel.org,
-        linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+In-Reply-To: <6d7146021f3435330b42f2e1b917d4b5dea00edc.camel@redhat.com>
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Hello.
+On 26/04/21 14:43, Maxim Levitsky wrote:
+> On Fri, 2021-04-02 at 10:38 -0700, Paolo Bonzini wrote:
+>> On 01/04/21 15:54, Maxim Levitsky wrote:
+>>> Hi!
+>>>
+>>> I would like to publish two debug features which were needed for other stuff
+>>> I work on.
+>>>
+>>> One is the reworked lx-symbols script which now actually works on at least
+>>> gdb 9.1 (gdb 9.2 was reported to fail to load the debug symbols from the kernel
+>>> for some reason, not related to this patch) and upstream qemu.
+>>
+>> Queued patches 2-5 for now.  6 is okay but it needs a selftest. (e.g.
+>> using KVM_VCPU_SET_EVENTS) and the correct name for the constant.
+> Do you mean to add a kvm-unit-test or to add a test to kernel's kvm unit tests
+> for this?
 
-I'm sending a new version of my patch on max31790. This new version
-fixes the cache issue and actually makes it work by setting
-.cache_type. You were right about the "yes/no" ranges, so I flipped
-those.
+selftests is used for those in the kernel.  "Unit test" can mean both, 
+but usually it means kvm-unit-tests because they're easier to write.
 
-By the way, it seems that the reason your reply got lost is because of
-weird addresses in the "Cc:" email field, they end with "cesnet.cz",
-so it could be that I'm sending email incorrectly. Let me know if I'm
-doing something wrong.
+Paolo
 
-Thanks,
-V=C3=A1clav
-
-=C4=8Dt 22. 4. 2021 v 3:31 odes=C3=ADlatel Guenter Roeck <linux@roeck-us.ne=
-t> napsal:
->
-> On 4/12/21 7:59 PM, V=C3=A1clav Kubern=C3=A1t wrote:
-> > Converting the driver to use regmap makes it more generic. It also make=
-s
-> > it a lot easier to debug through debugfs.
-> >
-> > Signed-off-by: V=C3=A1clav Kubern=C3=A1t <kubernat@cesnet.cz>
-> > ---
-> >  drivers/hwmon/Kconfig    |   1 +
-> >  drivers/hwmon/max31790.c | 254 ++++++++++++++++++++-------------------
-> >  2 files changed, 133 insertions(+), 122 deletions(-)
-> >
-> > diff --git a/drivers/hwmon/Kconfig b/drivers/hwmon/Kconfig
-> > index 1ecf697d8d99..9f11d036c316 100644
-> > --- a/drivers/hwmon/Kconfig
-> > +++ b/drivers/hwmon/Kconfig
-> > @@ -1095,6 +1095,7 @@ config SENSORS_MAX6697
-> >  config SENSORS_MAX31790
-> >       tristate "Maxim MAX31790 sensor chip"
-> >       depends on I2C
-> > +     select REGMAP_I2C
-> >       help
-> >         If you say yes here you get support for 6-Channel PWM-Output
-> >         Fan RPM Controller.
-> > diff --git a/drivers/hwmon/max31790.c b/drivers/hwmon/max31790.c
-> > index 2c6b333a28e9..e3765ce4444a 100644
-> > --- a/drivers/hwmon/max31790.c
-> > +++ b/drivers/hwmon/max31790.c
-> > @@ -12,6 +12,7 @@
-> >  #include <linux/init.h>
-> >  #include <linux/jiffies.h>
-> >  #include <linux/module.h>
-> > +#include <linux/regmap.h>
-> >  #include <linux/slab.h>
-> >
-> >  /* MAX31790 registers */
-> > @@ -46,92 +47,53 @@
-> >
-> >  #define NR_CHANNEL                   6
-> >
-> > +#define MAX31790_REG_USER_BYTE_67    0x67
-> > +
-> > +#define BULK_TO_U16(msb, lsb)                (((msb) << 8) + (lsb))
-> > +#define U16_MSB(num)                 (((num) & 0xFF00) >> 8)
-> > +#define U16_LSB(num)                 ((num) & 0x00FF)
-> > +
-> > +static const struct regmap_range max31790_ro_range =3D {
-> > +     .range_min =3D MAX31790_REG_TACH_COUNT(0),
-> > +     .range_max =3D MAX31790_REG_PWMOUT(0) - 1,
-> > +};
-> > +
-> > +static const struct regmap_access_table max31790_wr_table =3D {
-> > +     .no_ranges =3D &max31790_ro_range,
-> > +     .n_no_ranges =3D 1,
-> > +};
-> > +
-> > +static const struct regmap_range max31790_volatile_ranges[] =3D {
-> > +     regmap_reg_range(MAX31790_REG_TACH_COUNT(0), MAX31790_REG_TACH_CO=
-UNT(12)),
-> > +     regmap_reg_range(MAX31790_REG_FAN_FAULT_STATUS2, MAX31790_REG_FAN=
-_FAULT_STATUS1),
-> > +};
-> > +
-> > +static const struct regmap_access_table max31790_volatile_table =3D {
-> > +     .no_ranges =3D max31790_volatile_ranges,
-> > +     .n_no_ranges =3D 2,
-> > +     .n_yes_ranges =3D 0
-> > +};
->
-> Looks like my reply to this got lost. Other regmap code suggests that
-> volatile register ranges are identified with yes_ranges, not with no_rang=
-es.
-> "no" seems to mean "not volatile". Please verify and confirm if the
-> above code does what you want it to do.
->
-> Thanks,
-> Guenter
