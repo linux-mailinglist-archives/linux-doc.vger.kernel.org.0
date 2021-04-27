@@ -2,162 +2,198 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id E0F6E36BDB1
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Apr 2021 05:22:00 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id AE61D36BE39
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Apr 2021 06:13:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231666AbhD0DWm (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 26 Apr 2021 23:22:42 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48458 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231363AbhD0DWm (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Apr 2021 23:22:42 -0400
-Received: from mail-ot1-x32f.google.com (mail-ot1-x32f.google.com [IPv6:2607:f8b0:4864:20::32f])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 5D4E1C061574;
-        Mon, 26 Apr 2021 20:21:58 -0700 (PDT)
-Received: by mail-ot1-x32f.google.com with SMTP id f75-20020a9d03d10000b0290280def9ab76so49015151otf.12;
-        Mon, 26 Apr 2021 20:21:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=2y1skpQm5O9nY3/sAmsR/w1AbZytq1gVeLlk4C9o/lk=;
-        b=sBFtoSAUpLDJmX0PMdbcueyJLnj7Yd0LccPDGWnmTmDDIgiI4UGvR7xD+dgaoz+4a2
-         VbarueU/Mx26TxFOi29+mkj9r4yDziOxr/Srf7g5w4rztQVjBzDCds50y3Iak2EcUJhu
-         YcL+uS62BXr2Q8aUNAQIiYXYxeDAlXwZWmvZYBrVIfI0vj+JZ0vmzPRZMHz/HFVY1bGC
-         pcwrQz/UdLLoS61hdA64/pGcGNs15FTeqQjqk+QCZWvEtJk4vmkeQ+WasQ/+WTZsvV5I
-         a/KcNj+XZ/nw+BavnoBNvOQyXx5EYRvMhMFcuQSz3yKwu9p4vgheMljfe4+xcOB0yBij
-         ZGkg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=2y1skpQm5O9nY3/sAmsR/w1AbZytq1gVeLlk4C9o/lk=;
-        b=H4MHcXMklok5rBbjEGLjqYFtCy7HRV1lTIeRd4U+hypXaAdkkDxSniPOaBJnyOcq5T
-         rz/5vK86EmfQ65HPs2ELQ0js91EmZ15T+32vdcvjgvJOvfjsNzx25WnqJBnzWfqrJXfz
-         swKgFr8FUXRPmYDkQ1NOFrDN3modsoK86CycxeadJ99ObZsmVBq8dUhUaTeuxsSuDDa5
-         +xCqPIfIdPKgiggr1SqV7MKvVIDvJu+EmWYKLQA/irLdck4nzV8CmQAFSm3Re+Ov+Cf0
-         PyKdyihMUsNegR2ZjQWklrXj9NeJanOVfnQmXkm2fN3ONaqID80jYQqEzRORy6Hq/M03
-         T1jg==
-X-Gm-Message-State: AOAM532pBdELgw0oXK14sIXvEVVWoKzXIlzKg77NQG7IkOQFzX295tHj
-        IOhuG4l44SsRSeiNsqQYT2lMnGEo2Vo=
-X-Google-Smtp-Source: ABdhPJz7lv4mElFZRkcyXxzJygI9MnlneCXXDmSUqufdUZy4R+6DR2GDIqlPOM9PKHJKVsvf32sAog==
-X-Received: by 2002:a9d:6e8f:: with SMTP id a15mr11153409otr.169.1619493717525;
-        Mon, 26 Apr 2021 20:21:57 -0700 (PDT)
-Received: from Davids-MacBook-Pro.local ([8.48.134.33])
-        by smtp.googlemail.com with ESMTPSA id 3sm427755ood.46.2021.04.26.20.21.55
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Mon, 26 Apr 2021 20:21:56 -0700 (PDT)
-Subject: Re: [PATCH v4 net-next] net: multipath routing: configurable seed
-To:     Balaev Pavel <balaevpa@infotecs.ru>, netdev@vger.kernel.org
-Cc:     "David S. Miller" <davem@davemloft.net>,
+        id S229550AbhD0EOU (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Apr 2021 00:14:20 -0400
+Received: from mail-db8eur05on2047.outbound.protection.outlook.com ([40.107.20.47]:22753
+        "EHLO EUR05-DB8-obe.outbound.protection.outlook.com"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S229526AbhD0EOU (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Tue, 27 Apr 2021 00:14:20 -0400
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector9901; d=microsoft.com; cv=none;
+ b=erLlCDmbEObEBX5L08U8gtYTonzIfOBisGYfDtgpZYQGuPNApWzRqZ6htSGRhHnHqSVUOdGaKoYj0Zacb0OA47dOG9dKJeV2KvMBf7Jl9Lw5uL2Boyjmh8/Jj9UTwumL6PbyDRkGFP1egQe+K3qetyXl9Zvrl/4HxCSJtr3BxaFflqZRxXEoAJ6Y0X0RzSb/4uWLRk3Us9LNN+RTnbaJpcl6Wamh8GzOUlDMwZy6tqHUgKq67K1q7U8yDGU8YAW9YBBsN0tTw2pHtda6DbFqVTqfoZ5OXFD7d9250/NKmF3+TaSku9TfVAZxqUWJFnDD47j5Z0AweoGBpu3Jc+Theg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector9901;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=isfOKK35SWabvE7FzXNZnSala3Mk2ZDnIJAu949g898=;
+ b=j1PRdxorLKCUseXTIyK0mshMOFA7OUoGqfDBLxMqdIVLU/4R5UkU/elIGwC410ltTrW3Xblw5LhMfCK8OV/DwIdQ9FMY5GWIKL2RuRIzU61y1vmrPX34SHFjqKgoL8u8BqCPHK3446mOpBjQg1c5H6TwmtsYN9JR/i2n39JoTdBrR7CqOq9Q4z8MOy+iOd3EyX1Cx9JHupvRFtv0V3x5Pq7e4d0KoWzVSYRjEs1D4JP6M+C74xomyasF1CKeL1VbF34TgX8K1PZz2eeiNtV0cUiIgyQMDxMdQp7wu4cGOeg2Lnf8vNRBdMGeBiMhEAlG7HThBYnKkxMezUoLDUu+qw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nxp.com; dmarc=pass action=none header.from=nxp.com; dkim=pass
+ header.d=nxp.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nxp.com; s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=isfOKK35SWabvE7FzXNZnSala3Mk2ZDnIJAu949g898=;
+ b=FtUWwTENm24eXOSs/phde+W4u4CmZjt0aYrH5Z5/BHON66marxDxCpEaq0ovD0S/GvJG1K2DJgpvZz/XmyddDsNV8HcgGMTrhoh1KwIvLcxJJwnaWqGAyuNN3xSsp3ta2n0PSgPmARGik99wFN3op6lNJZJDJcXTLbd5pln2yEQ=
+Received: from AM7PR04MB6885.eurprd04.prod.outlook.com (2603:10a6:20b:10d::24)
+ by AM6PR04MB5191.eurprd04.prod.outlook.com (2603:10a6:20b:1::28) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.4065.20; Tue, 27 Apr
+ 2021 04:13:36 +0000
+Received: from AM7PR04MB6885.eurprd04.prod.outlook.com
+ ([fe80::358e:fb22:2f7c:2777]) by AM7PR04MB6885.eurprd04.prod.outlook.com
+ ([fe80::358e:fb22:2f7c:2777%3]) with mapi id 15.20.4065.027; Tue, 27 Apr 2021
+ 04:13:36 +0000
+From:   "Y.b. Lu" <yangbo.lu@nxp.com>
+To:     Vladimir Oltean <olteanv@gmail.com>,
+        Florian Fainelli <f.fainelli@gmail.com>
+CC:     "netdev@vger.kernel.org" <netdev@vger.kernel.org>,
+        Richard Cochran <richardcochran@gmail.com>,
+        Vladimir Oltean <vladimir.oltean@nxp.com>,
+        "David S . Miller" <davem@davemloft.net>,
         Jakub Kicinski <kuba@kernel.org>,
         Jonathan Corbet <corbet@lwn.net>,
-        Hideaki YOSHIFUJI <yoshfuji@linux-ipv6.org>,
-        David Ahern <dsahern@kernel.org>,
-        Shuah Khan <shuah@kernel.org>,
-        Christophe JAILLET <christophe.jaillet@wanadoo.fr>,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org,
-        Ido Schimmel <idosch@nvidia.com>
-References: <YILPPCyMjlnhPmEN@rnd>
-From:   David Ahern <dsahern@gmail.com>
-Message-ID: <93ca6644-fc5a-0977-db7d-16779ebd320c@gmail.com>
-Date:   Mon, 26 Apr 2021 21:21:53 -0600
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:78.0)
- Gecko/20100101 Thunderbird/78.10.0
-MIME-Version: 1.0
-In-Reply-To: <YILPPCyMjlnhPmEN@rnd>
-Content-Type: text/plain; charset=utf-8
+        Kurt Kanzenbach <kurt@linutronix.de>,
+        Andrew Lunn <andrew@lunn.ch>,
+        Vivien Didelot <vivien.didelot@gmail.com>,
+        Claudiu Manoil <claudiu.manoil@nxp.com>,
+        Alexandre Belloni <alexandre.belloni@bootlin.com>,
+        "UNGLinuxDriver@microchip.com" <UNGLinuxDriver@microchip.com>,
+        "linux-doc@vger.kernel.org" <linux-doc@vger.kernel.org>,
+        "linux-kernel@vger.kernel.org" <linux-kernel@vger.kernel.org>
+Subject: RE: [net-next, v2, 3/7] net: dsa: free skb->cb usage in core driver
+Thread-Topic: [net-next, v2, 3/7] net: dsa: free skb->cb usage in core driver
+Thread-Index: AQHXOn8Jr4d6SG7MRkyMg7TxAYZcc6rHG5mAgACmd8A=
+Date:   Tue, 27 Apr 2021 04:13:36 +0000
+Message-ID: <AM7PR04MB6885CBAB63363CA93E50A207F8419@AM7PR04MB6885.eurprd04.prod.outlook.com>
+References: <20210426093802.38652-1-yangbo.lu@nxp.com>
+ <20210426093802.38652-4-yangbo.lu@nxp.com>
+ <20210426181637.2rneohfxkrvwctf2@skbuf>
+In-Reply-To: <20210426181637.2rneohfxkrvwctf2@skbuf>
+Accept-Language: en-US
 Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: gmail.com; dkim=none (message not signed)
+ header.d=none;gmail.com; dmarc=none action=none header.from=nxp.com;
+x-originating-ip: [119.31.174.73]
+x-ms-publictraffictype: Email
+x-ms-office365-filtering-correlation-id: b594d9bb-baa4-41ac-d766-08d90932d431
+x-ms-traffictypediagnostic: AM6PR04MB5191:
+x-ms-exchange-transport-forked: True
+x-microsoft-antispam-prvs: <AM6PR04MB5191D97CBC4F516BB2C8ED76F8419@AM6PR04MB5191.eurprd04.prod.outlook.com>
+x-ms-oob-tlc-oobclassifiers: OLM:8882;
+x-ms-exchange-senderadcheck: 1
+x-microsoft-antispam: BCL:0;
+x-microsoft-antispam-message-info: b6/V2WeMMjff78djcD+/LhTkE/7JHTQBe82D60MxNrMh5PdzJ0c6RIEibwzUx7JHlOQBtQZOrnO0R0v7bsKy4S7V3fB8ZQr38zVQRw79O5PTlrItzpvqYkf0rCRwbvkvw5SkvsdbMwqHWW782XVYkeSk92GO/ylesG+rtZjXTTjI5fvDHBpFGN9ubzYAewarXbwe8atnvxPV3kK3IvBSZIujYHhYRH7Ypi2JnEztazcxoAXusCesPfJLXe/g4+LwCxfwg4t8GHaqIYaiVdykjqSOwjsi4SFgffpX0bPN0EgwXRSzETa9KTQY/q07xEJc2OxhARF9+FwbXqv7neq2yTUxHQ0S8MU6BwlyOs804OAhMhraLXWolPdYSJ8nd5aSyqYw4Rm367YgM/NuxgdTr+SS0l4GAFHYPVQBJmKbkfL9JVaAumc0lb+/5DCqsW/aevKFhgL9gThU5AW6kcwWn3IWUQYlgPiuQQ7t6ow7xHBJq3bRzxzyM9dqaewdE3ScCnWnzsU4YvoTmSHh0YODLVL2i1BUDqdEpNx/zj4Mo7WPIUSACzsU1UeuxPSYgCWw6TQF3n2g7dxhzu5rHMBKUiVrzqhqRwW20IqzYYeV3Hs=
+x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM7PR04MB6885.eurprd04.prod.outlook.com;PTR:;CAT:NONE;SFS:(4636009)(366004)(66446008)(66476007)(64756008)(66556008)(83380400001)(26005)(66946007)(76116006)(33656002)(54906003)(4326008)(86362001)(110136005)(122000001)(38100700002)(8936002)(55016002)(2906002)(186003)(5660300002)(8676002)(7416002)(52536014)(6506007)(498600001)(71200400001)(7696005)(53546011)(9686003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata: =?utf-8?B?U1NReFY1UGpCVER6WFNaMEt1dkMrdHViT3JqYm1EbHdQc254TVhudUhwKytq?=
+ =?utf-8?B?MFI2UTRtY2JPTnlrb1Nnc0lnb0FOMDNKd1l0MExwZGVEcUpLWStRSEdQbFZO?=
+ =?utf-8?B?ZThDbWk1cjI3aDFDUHZlZVdBcnp0ekZPNVdibWpnRVlWNmFrMXE2dlkrTG4v?=
+ =?utf-8?B?S0JBVm5yQ3duUTM2Z3g1bnF1U1pwMHZwNHNqVi8xQ2tMeEgvN0ltQ1MvRW4y?=
+ =?utf-8?B?Y2hkbndOVVc5MURWM0JIeGZ0MzFxMk5vTGxLZW8wYjc3STdSeEhWMGdNL283?=
+ =?utf-8?B?Q0hkeHowdnBhL3pGLzU3L3N2dzJaNU5rZ0tsSzJ6MkNSaTZreHpKajFtSEk0?=
+ =?utf-8?B?Y3dzNFU1THkvRmpTb0VJakI0dk5tTElpcXd3Ykh1ajJvN3RQZGhPUm15dnhq?=
+ =?utf-8?B?Z014RE50V2FMdFBVeTJsZGhUUHpvRlc3TmNTOVZnLzhiS3hNblZJV1hKK1hN?=
+ =?utf-8?B?NER5SnNrcDZKUWZUaENrSVNWK2RrUnl1VGtFTWZBMWh3akx0VFBveWx3YVRG?=
+ =?utf-8?B?L2Rid29yTG5JY3o3cW5Gc1JkSG1ndVRvTVF1OE9jamRLbG9FbTFVTUxrVEJ5?=
+ =?utf-8?B?a05Cb2pzMHNZVEhUOUJjNlYrT3ZHVS94SEwveVdtc0JPV09KS3g5MWNRbDVY?=
+ =?utf-8?B?aHlidzlBNmVMeTZld2FvanlDcDdmUDNDMmk5emtRN1Rxc01TWXlDVDNlZng4?=
+ =?utf-8?B?aXJVTlo4OWZINXo1MGh1Z2RwY2w0Y1QrazNEMnJKVEJ4cUk3c3NDMkc4MmNq?=
+ =?utf-8?B?QlZiWC9yVFFmSmlxMVdaTGRxNGZTWkpDQnhNUUVOWU9Kb3psWmQ3K3BFcHA0?=
+ =?utf-8?B?dEV4SUxKS3ZBQzJRQlFBbkdCNDhEZjhkcUNQazdNVTdDQytDTUFYN3hmdnRk?=
+ =?utf-8?B?S1NpODFDTTBDbEVHRlUvcGlFdzMxMkNkRGVVaEE2WmZyR050YUE2L0ZiVkZp?=
+ =?utf-8?B?WjgxSEp6cEcwRHlqczE2VGRZVU03TmhxaFFjS0ptNGh5bEVQVXBNR1RHSllV?=
+ =?utf-8?B?alpyWFpoWnd4eEVWd2dWanVJZjcxa2hZTG4xNUlPcFVVeE43ME1XVGxTUUh6?=
+ =?utf-8?B?WXloc1Y4QnpXZUo4ZGN3NXEwMHlLVXFtVWUzb25SaGhpTUFOZHovb2M5dTRi?=
+ =?utf-8?B?d25ncTdpTTVNRy95V2FvM0pIOUdoYU1iYnc3ZUc2bkNuZmpzOG9LY3hZaFQ5?=
+ =?utf-8?B?a0l5QWFtRFc1R21IdTRjdHpTZ09mamhtRFhhNGdhMi9nMTNHUTVWNDhmd1Zz?=
+ =?utf-8?B?dDU1bjJxWFIvK2xYdmZrT3h3UUVEdGlsOHNMck5raHhBOGYyTWpBamptUXdT?=
+ =?utf-8?B?Z3l2azN0YkJnVUxWMC9wd2kzbDhIcXlBUnhkQmR1bVFhdklJVWlUdWxRdGIr?=
+ =?utf-8?B?dXZMY3Q4YkJhTXdZUU9YRVVVVUI0YW4wVkEyMm5PemVJRjFpZlpkYlV0WSsw?=
+ =?utf-8?B?eEFVd3Znc25UejJoVlFWL1RtdmdFeG42MnhNSitoNTlhMUc2S002dzhCdGNF?=
+ =?utf-8?B?MHhuTFpqeFBpU2s1MmptVFFQRDBtQktwL3NPTktXUHRRdTZsUDNBU0lQc0Zk?=
+ =?utf-8?B?dldmcGk0OUZncm1oNjhPdTZOSnliczJjQW52UEpmOG8rc3FPSU9sSWpIZlhW?=
+ =?utf-8?B?aVhUR3hwV24xMHVVaUg2ZFFlZCtJOXhYcU4wZnU4dWNFSzB3Snc5VVZOSFgx?=
+ =?utf-8?B?UlV5bm93WWxVc3F5c3J2OW1nSFc3RTU2VndMeGlPRFh3eGYzL1p0L3VId2FF?=
+ =?utf-8?Q?Tp2O/AwId55F/43jouuef0YIcSBF1AaStqLHKaV?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
+MIME-Version: 1.0
+X-OriginatorOrg: nxp.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM7PR04MB6885.eurprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b594d9bb-baa4-41ac-d766-08d90932d431
+X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Apr 2021 04:13:36.2109
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 686ea1d3-bc2b-4c6f-a92c-d99c5c301635
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: ndYHGsVNL2piyLZY4apNu/7PYAVIQPom71dUTovwSLYgNL+cTtmoU8ClbLWwMNE/4yevPi7ylpUSOfv0azLD/A==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM6PR04MB5191
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 4/23/21 6:44 AM, Balaev Pavel wrote:
-> Ability for a user to assign seed value to multipath route hashes.
-> Now kernel uses random seed value to prevent hash-flooding DoS attacks;
-> however, it disables some use cases, f.e:
-> 
-> +-------+        +------+        +--------+
-> |       |-eth0---| FW0  |---eth0-|        |
-> |       |        +------+        |        |
-> |  GW0  |ECMP                ECMP|  GW1   |
-> |       |        +------+        |        |
-> |       |-eth1---| FW1  |---eth1-|        |
-> +-------+        +------+        +--------+
-> 
-> In this use case, two ECMP routers balance traffic between two firewalls.
-> If some flow transmits a response over a different channel than request,
-> such flow will be dropped, because keep-state rules are created on
-> the other firewall.
-> 
-> This patch adds sysctl variable: net.ipv4|ipv6.fib_multipath_hash_seed.
-> User can set the same seed value on GW0 and GW1 for traffic to be
-> mirror-balanced. By default, random value is used.
-> 
-> Signed-off-by: Balaev Pavel <balaevpa@infotecs.ru>
-> ---
->  Documentation/networking/ip-sysctl.rst        |  14 +
->  include/net/flow_dissector.h                  |   4 +
->  include/net/netns/ipv4.h                      |   2 +
->  include/net/netns/ipv6.h                      |   3 +
->  net/core/flow_dissector.c                     |   9 +
->  net/ipv4/route.c                              |  10 +-
->  net/ipv4/sysctl_net_ipv4.c                    |  97 +++++
->  net/ipv6/route.c                              |  10 +-
->  net/ipv6/sysctl_net_ipv6.c                    |  96 +++++
->  .../testing/selftests/net/forwarding/Makefile |   1 +
->  tools/testing/selftests/net/forwarding/lib.sh |  41 +++
->  .../net/forwarding/router_mpath_seed.sh       | 347 ++++++++++++++++++
->  12 files changed, 632 insertions(+), 2 deletions(-)
->  create mode 100755 tools/testing/selftests/net/forwarding/router_mpath_seed.sh
-
-this really needs to be multiple patches. At a minimum 1 for ipv4, 1 for
-ipv6 and 1 for the test script (thank you for adding that).
-
-[ cc'ed Ido since most of the tests under
-tools/testing/selftests/net/forwarding come from him and team ]
-
-> 
-> diff --git a/Documentation/networking/ip-sysctl.rst b/Documentation/networking/ip-sysctl.rst
-> index 9701906f6..d1a67e6fe 100644
-> --- a/Documentation/networking/ip-sysctl.rst
-> +++ b/Documentation/networking/ip-sysctl.rst
-> @@ -100,6 +100,20 @@ fib_multipath_hash_policy - INTEGER
->  	- 1 - Layer 4
->  	- 2 - Layer 3 or inner Layer 3 if present
->  
-> +fib_multipath_hash_seed - STRING
-> +	Controls seed value for multipath route hashes. By default
-> +	random value is used. Only valid for kernels built with
-> +	CONFIG_IP_ROUTE_MULTIPATH enabled.
-> +
-> +	Valid format: two hex values set off with comma or "random"
-> +	keyword.
-> +
-> +	Example to generate the seed value::
-> +
-> +		RAND=$(openssl rand -hex 16) && echo "${RAND:0:16},${RAND:16:16}"
-> +
-> +	Default: "random"
-> +
->  fib_sync_mem - UNSIGNED INTEGER
->  	Amount of dirty memory from fib entries that can be backlogged before
->  	synchronize_rcu is forced.
-> diff --git a/include/net/flow_dissector.h b/include/net/flow_dissector.h
-> index ffd386ea0..2bd4e28de 100644
-> --- a/include/net/flow_dissector.h
-> +++ b/include/net/flow_dissector.h
-> @@ -348,6 +348,10 @@ static inline bool flow_keys_have_l4(const struct flow_keys *keys)
->  }
->  
->  u32 flow_hash_from_keys(struct flow_keys *keys);
-> +#ifdef CONFIG_IP_ROUTE_MULTIPATH
-> +u32 flow_multipath_hash_from_keys(struct flow_keys *keys,
-> +			   const siphash_key_t *seed);
-
-column alignment looks off here ^^^^ and a few other places; please
-correct in the next version.
-
-
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogVmxhZGltaXIgT2x0ZWFu
+IDxvbHRlYW52QGdtYWlsLmNvbT4NCj4gU2VudDogMjAyMeW5tDTmnIgyN+aXpSAyOjE3DQo+IFRv
+OiBZLmIuIEx1IDx5YW5nYm8ubHVAbnhwLmNvbT4NCj4gQ2M6IG5ldGRldkB2Z2VyLmtlcm5lbC5v
+cmc7IFJpY2hhcmQgQ29jaHJhbiA8cmljaGFyZGNvY2hyYW5AZ21haWwuY29tPjsNCj4gVmxhZGlt
+aXIgT2x0ZWFuIDx2bGFkaW1pci5vbHRlYW5AbnhwLmNvbT47IERhdmlkIFMgLiBNaWxsZXINCj4g
+PGRhdmVtQGRhdmVtbG9mdC5uZXQ+OyBKYWt1YiBLaWNpbnNraSA8a3ViYUBrZXJuZWwub3JnPjsg
+Sm9uYXRoYW4gQ29yYmV0DQo+IDxjb3JiZXRAbHduLm5ldD47IEt1cnQgS2FuemVuYmFjaCA8a3Vy
+dEBsaW51dHJvbml4LmRlPjsgQW5kcmV3IEx1bm4NCj4gPGFuZHJld0BsdW5uLmNoPjsgVml2aWVu
+IERpZGVsb3QgPHZpdmllbi5kaWRlbG90QGdtYWlsLmNvbT47IEZsb3JpYW4NCj4gRmFpbmVsbGkg
+PGYuZmFpbmVsbGlAZ21haWwuY29tPjsgQ2xhdWRpdSBNYW5vaWwgPGNsYXVkaXUubWFub2lsQG54
+cC5jb20+Ow0KPiBBbGV4YW5kcmUgQmVsbG9uaSA8YWxleGFuZHJlLmJlbGxvbmlAYm9vdGxpbi5j
+b20+Ow0KPiBVTkdMaW51eERyaXZlckBtaWNyb2NoaXAuY29tOyBsaW51eC1kb2NAdmdlci5rZXJu
+ZWwub3JnOw0KPiBsaW51eC1rZXJuZWxAdmdlci5rZXJuZWwub3JnDQo+IFN1YmplY3Q6IFJlOiBb
+bmV0LW5leHQsIHYyLCAzLzddIG5ldDogZHNhOiBmcmVlIHNrYi0+Y2IgdXNhZ2UgaW4gY29yZSBk
+cml2ZXINCj4gDQo+IE9uIE1vbiwgQXByIDI2LCAyMDIxIGF0IDA1OjM3OjU4UE0gKzA4MDAsIFlh
+bmdibyBMdSB3cm90ZToNCj4gPiBGcmVlIHNrYi0+Y2IgdXNhZ2UgaW4gY29yZSBkcml2ZXIgYW5k
+IGxldCBkZXZpY2UgZHJpdmVycyBkZWNpZGUgdG8gdXNlDQo+ID4gb3Igbm90LiBUaGUgcmVhc29u
+IGhhdmluZyBhIERTQV9TS0JfQ0Ioc2tiKS0+Y2xvbmUgd2FzIGJlY2F1c2UNCj4gPiBkc2Ffc2ti
+X3R4X3RpbWVzdGFtcCgpIHdoaWNoIG1heSBzZXQgdGhlIGNsb25lIHBvaW50ZXIgd2FzIGNhbGxl
+ZA0KPiA+IGJlZm9yZSBwLT54bWl0KCkgd2hpY2ggd291bGQgdXNlIHRoZSBjbG9uZSBpZiBhbnks
+IGFuZCB0aGUgZGV2aWNlDQo+ID4gZHJpdmVyIGhhcyBubyB3YXkgdG8gaW5pdGlhbGl6ZSB0aGUg
+Y2xvbmUgcG9pbnRlci4NCj4gPg0KPiA+IEFsdGhvdWdoIGZvciBub3cgcHV0dGluZyBtZW1zZXQo
+c2tiLT5jYiwgMCwgNDgpIGF0IGJlZ2lubmluZyBvZg0KPiA+IGRzYV9zbGF2ZV94bWl0KCkgYnkg
+dGhpcyBwYXRjaCBpcyBub3QgdmVyeSBnb29kLCB0aGVyZSBpcyBzdGlsbCB3YXkgdG8NCj4gPiBp
+bXByb3ZlIHRoaXMuIE90aGVyd2lzZSwgc29tZSBvdGhlciBuZXcgZmVhdHVyZXMsIGxpa2Ugb25l
+LXN0ZXANCj4gPiB0aW1lc3RhbXAgd2hpY2ggbmVlZHMgYSBmbGFnIG9mIHNrYiBtYXJrZWQgaW4g
+ZHNhX3NrYl90eF90aW1lc3RhbXAoKSwNCj4gPiBhbmQgaGFuZGxlcyBhcyBvbmUtc3RlcCB0aW1l
+c3RhbXAgaW4gcC0+eG1pdCgpIHdpbGwgZmFjZSBzYW1lDQo+ID4gc2l0dWF0aW9uLg0KPiA+DQo+
+ID4gU2lnbmVkLW9mZi1ieTogWWFuZ2JvIEx1IDx5YW5nYm8ubHVAbnhwLmNvbT4NCj4gPiAtLS0N
+Cj4gPiBDaGFuZ2VzIGZvciB2MjoNCj4gPiAJLSBBZGRlZCB0aGlzIHBhdGNoLg0KPiA+IC0tLQ0K
+PiA+ICBkcml2ZXJzL25ldC9kc2Evb2NlbG90L2ZlbGl4LmMgICAgICAgICB8ICAxICsNCj4gPiAg
+ZHJpdmVycy9uZXQvZHNhL3NqYTExMDUvc2phMTEwNV9tYWluLmMgfCAgMiArLQ0KPiA+IGRyaXZl
+cnMvbmV0L2RzYS9zamExMTA1L3NqYTExMDVfcHRwLmMgIHwgIDQgKysrLQ0KPiA+ICBkcml2ZXJz
+L25ldC9ldGhlcm5ldC9tc2NjL29jZWxvdC5jICAgICB8ICA2ICsrKy0tLQ0KPiA+ICBkcml2ZXJz
+L25ldC9ldGhlcm5ldC9tc2NjL29jZWxvdF9uZXQuYyB8ICAyICstDQo+ID4gIGluY2x1ZGUvbGlu
+dXgvZHNhL3NqYTExMDUuaCAgICAgICAgICAgIHwgIDMgKystDQo+ID4gIGluY2x1ZGUvbmV0L2Rz
+YS5oICAgICAgICAgICAgICAgICAgICAgIHwgMTQgLS0tLS0tLS0tLS0tLS0NCj4gPiAgaW5jbHVk
+ZS9zb2MvbXNjYy9vY2Vsb3QuaCAgICAgICAgICAgICAgfCAgOCArKysrKysrKw0KPiA+ICBuZXQv
+ZHNhL3NsYXZlLmMgICAgICAgICAgICAgICAgICAgICAgICB8ICAzICstLQ0KPiA+ICBuZXQvZHNh
+L3RhZ19vY2Vsb3QuYyAgICAgICAgICAgICAgICAgICB8ICA4ICsrKystLS0tDQo+ID4gIG5ldC9k
+c2EvdGFnX29jZWxvdF84MDIxcS5jICAgICAgICAgICAgIHwgIDggKysrKy0tLS0NCj4gPiAgMTEg
+ZmlsZXMgY2hhbmdlZCwgMjggaW5zZXJ0aW9ucygrKSwgMzEgZGVsZXRpb25zKC0pDQo+ID4NCj4g
+PiBkaWZmIC0tZ2l0IGEvZHJpdmVycy9uZXQvZHNhL29jZWxvdC9mZWxpeC5jDQo+ID4gYi9kcml2
+ZXJzL25ldC9kc2Evb2NlbG90L2ZlbGl4LmMgaW5kZXggZDY3OWYwMjNkYzAwLi44OTgwZDU2ZWU3
+OTMNCj4gPiAxMDA2NDQNCj4gPiAtLS0gYS9kcml2ZXJzL25ldC9kc2Evb2NlbG90L2ZlbGl4LmMN
+Cj4gPiArKysgYi9kcml2ZXJzL25ldC9kc2Evb2NlbG90L2ZlbGl4LmMNCj4gPiBAQCAtMTQwMyw2
+ICsxNDAzLDcgQEAgc3RhdGljIGJvb2wgZmVsaXhfdHh0c3RhbXAoc3RydWN0IGRzYV9zd2l0Y2gN
+Cj4gPiAqZHMsIGludCBwb3J0LA0KPiA+DQo+ID4gIAlpZiAob2NlbG90LT5wdHAgJiYgb2NlbG90
+X3BvcnQtPnB0cF9jbWQgPT0NCj4gSUZIX1JFV19PUF9UV09fU1RFUF9QVFApIHsNCj4gPiAgCQlv
+Y2Vsb3RfcG9ydF9hZGRfdHh0c3RhbXBfc2tiKG9jZWxvdCwgcG9ydCwgY2xvbmUpOw0KPiA+ICsJ
+CU9DRUxPVF9TS0JfQ0Ioc2tiKS0+Y2xvbmUgPSBjbG9uZTsNCj4gPiAgCQlyZXR1cm4gdHJ1ZTsN
+Cj4gPiAgCX0NCj4gPg0KPiANCj4gVWgtb2gsIHRoaXMgcGF0Y2ggZmFpbHMgdG8gYnVpbGQ6DQo+
+IA0KPiBJbiBmaWxlIGluY2x1ZGVkIGZyb20gLi9pbmNsdWRlL3NvYy9tc2NjL29jZWxvdF92Y2Fw
+Lmg6OTowLA0KPiAgICAgICAgICAgICAgICAgIGZyb20gZHJpdmVycy9uZXQvZHNhL29jZWxvdC9m
+ZWxpeC5jOjk6DQo+IGRyaXZlcnMvbmV0L2RzYS9vY2Vsb3QvZmVsaXguYzogSW4gZnVuY3Rpb24g
+4oCYZmVsaXhfdHh0c3RhbXDigJk6DQo+IGRyaXZlcnMvbmV0L2RzYS9vY2Vsb3QvZmVsaXguYzox
+NDA2OjE3OiBlcnJvcjog4oCYc2ti4oCZIHVuZGVjbGFyZWQgKGZpcnN0IHVzZSBpbg0KPiB0aGlz
+IGZ1bmN0aW9uKQ0KPiAgICBPQ0VMT1RfU0tCX0NCKHNrYiktPmNsb25lID0gY2xvbmU7DQo+ICAg
+ICAgICAgICAgICAgICAgXg0KPiAuL2luY2x1ZGUvc29jL21zY2Mvb2NlbG90Lmg6Njk4OjI5OiBu
+b3RlOiBpbiBkZWZpbml0aW9uIG9mIG1hY3JvDQo+IOKAmE9DRUxPVF9TS0JfQ0LigJkNCj4gICAo
+KHN0cnVjdCBvY2Vsb3Rfc2tiX2NiICopKChza2IpLT5jYikpDQo+ICAgICAgICAgICAgICAgICAg
+ICAgICAgICAgICAgXn5+DQo+IGRyaXZlcnMvbmV0L2RzYS9vY2Vsb3QvZmVsaXguYzoxNDA2OjE3
+OiBub3RlOiBlYWNoIHVuZGVjbGFyZWQgaWRlbnRpZmllciBpcw0KPiByZXBvcnRlZCBvbmx5IG9u
+Y2UgZm9yIGVhY2ggZnVuY3Rpb24gaXQgYXBwZWFycyBpbg0KPiAgICBPQ0VMT1RfU0tCX0NCKHNr
+YiktPmNsb25lID0gY2xvbmU7DQo+ICAgICAgICAgICAgICAgICAgXg0KPiAuL2luY2x1ZGUvc29j
+L21zY2Mvb2NlbG90Lmg6Njk4OjI5OiBub3RlOiBpbiBkZWZpbml0aW9uIG9mIG1hY3JvDQo+IOKA
+mE9DRUxPVF9TS0JfQ0LigJkNCj4gICAoKHN0cnVjdCBvY2Vsb3Rfc2tiX2NiICopKChza2IpLT5j
+YikpDQo+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXn5+DQo+IA0KPiBJdCBkZXBlbmRz
+IG9uIGNoYW5nZXMgbWFkZSBpbiBwYXRjaCAzLg0KDQpPaC4uIFRoYXQncyBhIHNlcXVlbmNlIHBy
+b2JsZW0uDQpJIHN3aXRjaGVkIHBhdGNoICMzIGFuZCBwYXRjaCAjNCB3aXRoIHJlYmFzaW5nIHRv
+IGZpeCB1cCBpbiB2MyB2ZXJzaW9uLg0KVGhhbmtzLg0K
