@@ -2,126 +2,101 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 9086436BC45
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Apr 2021 01:45:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 1A17236BD20
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Apr 2021 04:06:34 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235224AbhDZXnK (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 26 Apr 2021 19:43:10 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56660 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237778AbhDZXnF (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 26 Apr 2021 19:43:05 -0400
-Received: from mail-ot1-x334.google.com (mail-ot1-x334.google.com [IPv6:2607:f8b0:4864:20::334])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 2A519C061756
-        for <linux-doc@vger.kernel.org>; Mon, 26 Apr 2021 16:42:17 -0700 (PDT)
-Received: by mail-ot1-x334.google.com with SMTP id g4-20020a9d6b040000b029029debbbb3ecso20798987otp.7
-        for <linux-doc@vger.kernel.org>; Mon, 26 Apr 2021 16:42:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=chromium.org; s=google;
-        h=mime-version:in-reply-to:references:from:user-agent:date:message-id
-         :subject:to:cc;
-        bh=rABt3tcBwh2XInWLEly6iJ6gJ5SfldgUQGQTM9kHuxw=;
-        b=C38KK+gKaqQ1I0W4asX+n3E9S4FujSL6FsuyShgIa96VKgIKlRYu9WJncqyF0rT08Y
-         EfTCOpK0WvdocQ2bHXQE2ZcoYNjJ0HSt4/sLmn4+T9HOKxYii3zgYwQgay+MtvCtmr09
-         r3E78n8WHv9RTqvDW4JLY5RcsmG0mdZqg1GFE=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:mime-version:in-reply-to:references:from
-         :user-agent:date:message-id:subject:to:cc;
-        bh=rABt3tcBwh2XInWLEly6iJ6gJ5SfldgUQGQTM9kHuxw=;
-        b=rVvWxA2b4cdH2mVAVc3WHPOwxAs2WJN1Q0D0WKHYKGzOrItsxqhxb4gGdvkjK+0kCm
-         A3d8CtPapffaQJrYPYJqheY5zD+UxZaDfEsp1GuFqrAh5rnlSydp50eGKxcVROQddOsJ
-         ZAsOeSsV46dk9OMp4s2GUHYM+0QT6eap4dBqBDCWkY5SelwDo2RcisSxEvtKaMIAkF5Y
-         Cz3qYbj+1v90ZCvmoxEvtuTueWceIsR/oEid+ZJjc/cIPFaKj8ChzX1gXpSGnNuw+PS3
-         caGmEUwVjteeQxRs0Au8KOESx7hUqbMTG3Q1AYKDkcX0YKHwif5O5M4jwOagSDmEUrAI
-         4sHg==
-X-Gm-Message-State: AOAM530lN/4zOeyQ6UQKur1HWB+Crw0rcO7A8BLp+HvubsTXJm02Jw+T
-        hTLe0mhFkMYVH98O+PHS10hxeNHajPfDIoXhJRg8fQ==
-X-Google-Smtp-Source: ABdhPJzhbVQr/cxzBwUXNgmJFIHkEi3C1tG3WUuIq0sbL8zZj9hc2x+BfnXKSs+VbtNBw+U4iJ0p4zCaMTppjLXeYRE=
-X-Received: by 2002:a9d:222a:: with SMTP id o39mr13079949ota.246.1619480536586;
- Mon, 26 Apr 2021 16:42:16 -0700 (PDT)
-Received: from 753933720722 named unknown by gmailapi.google.com with
- HTTPREST; Mon, 26 Apr 2021 16:42:16 -0700
+        id S234074AbhD0CHP (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 26 Apr 2021 22:07:15 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:36986 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S234072AbhD0CHO (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 26 Apr 2021 22:07:14 -0400
+Received: from localhost.localdomain (unknown [112.3.197.94])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dx7++YcYdgP0kOAA--.8941S2;
+        Tue, 27 Apr 2021 10:06:18 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net
+Cc:     Yanteng Si <siyanteng@loongson.cn>, alexs@kernel.org,
+        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
+        linux-doc@vger.kernel.org, realpuyuwang@gmail.com, bobwxc@email.cn,
+        siyanteng01@gmail.com, huangjianghui@uniontech.com
+Subject: [PATCH v3 0/3] docs/zh_CN add three core api docs
+Date:   Tue, 27 Apr 2021 10:06:59 +0800
+Message-Id: <cover.1619488828.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-In-Reply-To: <YILKpQ2KsBXCoHlG@smile.fi.intel.com>
-References: <20210420215003.3510247-1-swboyd@chromium.org> <20210420215003.3510247-6-swboyd@chromium.org>
- <YIARTVqnN8t/FA/P@smile.fi.intel.com> <161913520061.46595.8469966711677906076@swboyd.mtv.corp.google.com>
- <YILKpQ2KsBXCoHlG@smile.fi.intel.com>
-From:   Stephen Boyd <swboyd@chromium.org>
-User-Agent: alot/0.9.1
-Date:   Mon, 26 Apr 2021 16:42:16 -0700
-Message-ID: <CAE-0n52Aq+hOXCJkDXBgNjVG=kP3yVMsc5czyi3R8SU=X362ug@mail.gmail.com>
-Subject: Re: [PATCH v5 05/13] module: Add printk formats to add module build
- ID to stacktraces
-To:     Andy Shevchenko <andriy.shevchenko@linux.intel.com>
-Cc:     Andrew Morton <akpm@linux-foundation.org>,
-        linux-kernel@vger.kernel.org, Jiri Olsa <jolsa@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Jessica Yu <jeyu@kernel.org>,
-        Evan Green <evgreen@chromium.org>,
-        Hsin-Yi Wang <hsinyi@chromium.org>,
-        Petr Mladek <pmladek@suse.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Sergey Senozhatsky <sergey.senozhatsky@gmail.com>,
-        Rasmus Villemoes <linux@rasmusvillemoes.dk>,
-        linux-doc@vger.kernel.org, Matthew Wilcox <willy@infradead.org>
-Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9Dx7++YcYdgP0kOAA--.8941S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxAFyUtry8GFWDuF15CFW7Jwb_yoW5XrW3pF
+        y7KrWft3ZxGF1Uuwn7W3ykZr1UWa4xuws8Kay7Xwn5tanxKrW0yw4jgF9Iqasaqr1vqF1F
+        vF43KFyq93yjyrJanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUvF14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+        6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26F
+        4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+        7VC0I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r
+        1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02
+        628vn2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c
+        02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_
+        GFylIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7
+        CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAF
+        wI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvj
+        fUoOJ5UUUUU
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Quoting Andy Shevchenko (2021-04-23 06:24:53)
-> On Thu, Apr 22, 2021 at 04:46:40PM -0700, Stephen Boyd wrote:
-> > Quoting Andy Shevchenko (2021-04-21 04:49:33)
-> > > On Tue, Apr 20, 2021 at 02:49:55PM -0700, Stephen Boyd wrote:
->
-> ...
->
-> > > > Example:
-> > >
-> > > Please, shrink the example to leave only meaningful lines.
-> > >
-> > > Why, e.g., do we need to see register dump, is it somehow different?
-> >
-> > Can you format it how you would like to see it? Should it be a unified
-> > diff? I agree it would help to see "what changed" but also don't know
-> > what you want so opted to provide more information, not less. I was
-> > worried about the questions like "do you change other parts of a splat?"
-> > so I just put the whole thing there.
->
->
-> Before:
->  ...line X...
->  ...
->  ...line Y...
->
-> After:
->  ...line X'...
->  ...
->  ...line Y'...
->
-> Three lines of example per each paragraph, in each of them the middle one is
-> simply [...].
+v1 -> v2:
 
-Ok got it. Thanks for clarifying.
+* Some bad translations have been modified as suggested by Xiangcheng.Thank you for your review
 
->
-> ...
->
-> > > > +#ifdef CONFIG_STACKTRACE_BUILD_ID
-> > > > +     /* Module build ID */
-> > > > +     unsigned char build_id[BUILD_ID_SIZE_MAX];
-> > >
-> > > Is it really string of characters? Perhaps u8 will be more explicit.
-> >
-> > I'm just matching the build ID API that uses unsigned char. If you want
-> > u8 then we should update more places. I could do that in a followup
-> > patch, but this one is already sorta big.
->
-> Unsigned char here is confusing. I would prefer a prerequisite patch to fix
-> other places first.
->
+  https://lore.kernel.org/linux-doc/cover.1618836460.git.siyanteng@loongson.cn/T/#t
 
-Does anyone else want this to happen first? Andrew? I'm inclined to fix
-this in a followup. As I said before, this would make this an even
-bigger patch series which I'd like to avoid.
+* As Matthew and Xiangcheng suggested:
+
+  call kernel-doc to generate related docs (0001 and 0002).Thanks!
+
+  I tested it on other computers (at least three) with no problem,
+  But on my computers it prints 1000+ warnings, I tried to find the
+  cause in the past few days but no clue.
+  So, the two patches may print as follows:(maybe your computer won't print anything)
+
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: struct list_head *prev'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: struct list_head *next'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:235: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:235.
+  Declaration is '.. c:None:: void (*sync)(void)'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:283: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:283.
+  Declaration is '.. c:function:: void list_splice_init_rcu(struct list_head *list, struct list_head *head, void (*sync)(void))'.
+  linux-next/Documentation/translations/zh_CN/core-api/kernel-api.rst:283: WARNING: Duplicate C declaration, also defined at core-api/kernel-api:283.
+  Declaration is '.. c:None:: struct list_head *list'.
+  ...
+
+  I'm a little skeptical now that something's wrong with my computer.
+
+v2 -> v3:
+
+* Pick Xiangcheng Wu's review-by tag for [patch 1-3/3]
+
+* fix two original links. [1/3 and 3/3]
+
+Yanteng Si (3):
+  docs/zh_CN: add core-api kernel-api.rst translation
+  docs/zh_CN: add core-api printk-basics.rst translation
+  docs/zh_CN: add core-api printk-formats.rst translation
+
+ .../translations/zh_CN/core-api/index.rst     |   7 +-
+ .../zh_CN/core-api/kernel-api.rst             | 385 ++++++++++++
+ .../zh_CN/core-api/printk-basics.rst          | 111 ++++
+ .../zh_CN/core-api/printk-formats.rst         | 580 ++++++++++++++++++
+ 4 files changed, 1081 insertions(+), 2 deletions(-)
+ create mode 100644 Documentation/translations/zh_CN/core-api/kernel-api.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/printk-basics.rst
+ create mode 100644 Documentation/translations/zh_CN/core-api/printk-formats.rst
+
+-- 
+2.27.0
+
