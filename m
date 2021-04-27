@@ -2,85 +2,149 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 836FF36C9D6
-	for <lists+linux-doc@lfdr.de>; Tue, 27 Apr 2021 18:57:08 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id CFD5C36CA65
+	for <lists+linux-doc@lfdr.de>; Tue, 27 Apr 2021 19:34:35 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S237720AbhD0Q5s (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Tue, 27 Apr 2021 12:57:48 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:59548 "EHLO
+        id S235593AbhD0RfR (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Tue, 27 Apr 2021 13:35:17 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:39776 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237946AbhD0Q5p (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Apr 2021 12:57:45 -0400
-Received: from casper.infradead.org (casper.infradead.org [IPv6:2001:8b0:10b:1236::1])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 6A00EC06175F;
-        Tue, 27 Apr 2021 09:57:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-        d=infradead.org; s=casper.20170209; h=In-Reply-To:Content-Type:MIME-Version:
-        References:Message-ID:Subject:Cc:To:From:Date:Sender:Reply-To:
-        Content-Transfer-Encoding:Content-ID:Content-Description;
-        bh=XVHaeqgZB+erEa9UOd2e5xkHagKcSoWRwUEctU/iNSY=; b=Fyy4Y8nUeQf9/Up8osMcyno9T0
-        gy+JjV3A3VgWENh1hriXrkZMyJImCsYjwgFpvz27dbnY5Wq3OfKCVKW20dpxpbOmuhHPFHdm8Ud8R
-        lDdoC48qQDaH11BU5OFZpoL5c+fq24n8DAPQeAhMktAgQJCU2mGuiHNq2EkiotGRCqM7dmlDNa1oM
-        FLCDxwEqgoR8sWkiNNwzE1w+VhIN9YkJR8NsZmJLK7AYX+nNCAYPG8zX/kHhKbjCj/f0iOt761QMc
-        B7kGsCJxObMQv978OeWW3iGpwbd7r48iWF5arC//g6e5ugk9Q7/WCHS3RhyJ7n+paLn3LqzOwiyjQ
-        D5XDygTQ==;
-Received: from willy by casper.infradead.org with local (Exim 4.94 #2 (Red Hat Linux))
-        id 1lbR0j-007ALN-Hd; Tue, 27 Apr 2021 16:56:40 +0000
-Date:   Tue, 27 Apr 2021 17:56:33 +0100
-From:   Matthew Wilcox <willy@infradead.org>
-To:     Jonathan Corbet <corbet@lwn.net>
-Cc:     Aditya Srivastava <yashsri421@gmail.com>, lukas.bulwahn@gmail.com,
-        linux-kernel-mentees@lists.linuxfoundation.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: Re: [RFC v2] scripts: kernel-doc: reduce repeated regex expressions
- into variables
-Message-ID: <20210427165633.GA235567@casper.infradead.org>
-References: <6f76ddcb-7076-4c91-9c4c-995002c4cb91@gmail.com>
- <20210424124731.29905-1-yashsri421@gmail.com>
- <87wnsnd8nc.fsf@meer.lwn.net>
+        with ESMTP id S230219AbhD0RfR (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Tue, 27 Apr 2021 13:35:17 -0400
+Received: from haggis.mythic-beasts.com (haggis.mythic-beasts.com [IPv6:2a00:1098:0:86:1000:0:2:1])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id A46A8C061574
+        for <linux-doc@vger.kernel.org>; Tue, 27 Apr 2021 10:34:33 -0700 (PDT)
+Received: from [81.101.6.87] (port=33690 helo=jic23-huawei)
+        by haggis.mythic-beasts.com with esmtpsa (TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256)
+        (Exim 4.92.3)
+        (envelope-from <jic23@jic23.retrosnub.co.uk>)
+        id 1lbRWk-0008NX-Sk; Tue, 27 Apr 2021 18:29:39 +0100
+Date:   Tue, 27 Apr 2021 18:30:20 +0100
+From:   Jonathan Cameron <jic23@jic23.retrosnub.co.uk>
+To:     linux-iio@vger.kernel.org, linux-doc@vger.kernel.org,
+        Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+        Lukas Bulwahn <lukas.bulwahn@gmail.com>
+Cc:     Jonathan Cameron <Jonathan.Cameron@huawei.com>,
+        Jean-Baptiste Maneyrol <jmaneyrol@invensense.com>
+Subject: Re: [RFC PATCH 1/7] iio:ABI docs: Fix up duplicate *_calibbias_*
+ documentation for icm42600
+Message-ID: <20210427183004.14fede9c@jic23-huawei>
+In-Reply-To: <20210221160529.0012c931@archlinux>
+References: <20210117153816.696693-1-jic23@kernel.org>
+        <20210117153816.696693-2-jic23@kernel.org>
+        <20210221160529.0012c931@archlinux>
+X-Mailer: Claws Mail 3.17.8 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <87wnsnd8nc.fsf@meer.lwn.net>
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-BlackCat-Spam-Score: 19
+X-Spam-Status: No, score=1.9
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Tue, Apr 27, 2021 at 09:55:35AM -0600, Jonathan Corbet wrote:
-> The use of the variables here doesn't really make those expressions more
-> readable.  
+On Sun, 21 Feb 2021 16:05:29 +0000
+Jonathan Cameron <jic23@kernel.org> wrote:
+
+> On Sun, 17 Jan 2021 15:38:10 +0000
+> Jonathan Cameron <jic23@kernel.org> wrote:
 > 
-> >  	$members =~ s/\s*CRYPTO_MINALIGN_ATTR/ /gos;
-> > -	$members =~ s/\s*____cacheline_aligned_in_smp/ /gos;
-> > -	$members =~ s/\s*____cacheline_aligned/ /gos;
-> > +	$members =~ s/\s*$cacheline_aligned_in_smp/ /gos;
-> > +	$members =~ s/\s*$cacheline_aligned/ /gos;
+> > From: Jonathan Cameron <Jonathan.Cameron@huawei.com>  
+> @Jean-Baptiste.
+> 
+> Whilst this is 'fairly obviously' fine, could you take a quick glance at it.
+> I'm never keen to take my own patches without someone having agreed
+> I haven't done anything particularly silly ;)
+
+As these are still frustrating Mauro's attempt to get the docs to build
+cleanly and it should be safe enough.
+
+Applied to the togreg branch of iio.git and pushed out as testing for
+the autobuilders to poke at it.
+
+Jonathan
+
+> 
+> Jonathan
+> 
+> > 
+> > This device has the unusual characteristic that the calibbias values
+> > have well defined units (more commonly they are tweaks to a DAC)
+> > Unfortunately the previous approach of having more specific documentation
+> > in sysfs-bus-iio-icm42600 results in warnings during the documentation
+> > build and random ordering in the resulting documentation.
+> > 
+> > To avoid this, add a note to the main documentation on this special
+> > characteristic for the icm42600.   The _available for calibbias was
+> > missing from the main sysfs-bus-iio docs so also add that, allowing
+> > us to drop the icm42600 specific file.
+> > 
+> > Fixes
+> > $ scripts/get_abi.pl validate warning:
+> > Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_x_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:0  ./Documentation/ABI/testing/sysfs-bus-iio:394
+> > Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_y_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:1  ./Documentation/ABI/testing/sysfs-bus-iio:395
+> > Warning: /sys/bus/iio/devices/iio:deviceX/in_accel_z_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:2  ./Documentation/ABI/testing/sysfs-bus-iio:396
+> > Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_x_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:3  ./Documentation/ABI/testing/sysfs-bus-iio:397
+> > Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_y_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:4  ./Documentation/ABI/testing/sysfs-bus-iio:398
+> > Warning: /sys/bus/iio/devices/iio:deviceX/in_anglvel_z_calibbias is defined 2 times:  ./Documentation/ABI/testing/sysfs-bus-iio-icm42600:5  ./Documentation/ABI/testing/sysfs-bus-iio:399
+> > 
+> > Cc: Jean-Baptiste Maneyrol <jmaneyrol@invensense.com>
+> > Reported-by: Mauro Carvalho Chehab <mchehab+huawei@kernel.org>
+> > Signed-off-by: Jonathan Cameron <Jonathan.Cameron@huawei.com>
+> > ---
+> >  Documentation/ABI/testing/sysfs-bus-iio       | 13 ++++++++++++
+> >  .../ABI/testing/sysfs-bus-iio-icm42600        | 20 -------------------
+> >  2 files changed, 13 insertions(+), 20 deletions(-)
+> > 
+> > diff --git a/Documentation/ABI/testing/sysfs-bus-iio b/Documentation/ABI/testing/sysfs-bus-iio
+> > index d957f5da5c04..d2dd9cc280f9 100644
+> > --- a/Documentation/ABI/testing/sysfs-bus-iio
+> > +++ b/Documentation/ABI/testing/sysfs-bus-iio
+> > @@ -408,6 +408,19 @@ Contact:	linux-iio@vger.kernel.org
+> >  Description:
+> >  		Hardware applied calibration offset (assumed to fix production
+> >  		inaccuracies).
+> > +		icm42600: For this device values are real physical offsets
+> > +		expressed in SI units (m/s^2 for accelerometers and rad/s
+> > +		for gyroscope)/
+> > +
+> > +What:		/sys/bus/iio/devices/iio:deviceX/in_accel_calibbias_available
+> > +What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_calibbias_available
+> > +KernelVersion:  5.8
+> > +Contact:        linux-iio@vger.kernel.org
+> > +Description:
+> > +		Available values of calibbias. Maybe expressed as either of:
+> > +
+> > +		- a small discrete set of values like "0 2 4 6 8"
+> > +		- a range specified as "[min step max]"
 > >  
-> > +	my $args = qr{([^,)]+)};
-> >  	# replace DECLARE_BITMAP
-> >  	$members =~ s/__ETHTOOL_DECLARE_LINK_MODE_MASK\s*\(([^\)]+)\)/DECLARE_BITMAP($1, __ETHTOOL_LINK_MODE_MASK_NBITS)/gos;
-> > -	$members =~ s/DECLARE_BITMAP\s*\(([^,)]+),\s*([^,)]+)\)/unsigned long $1\[BITS_TO_LONGS($2)\]/gos;
-> > +	$members =~ s/DECLARE_BITMAP\s*\($args,\s*$args\)/unsigned long $1\[BITS_TO_LONGS($2)\]/gos;
+> >  What:		/sys/bus/iio/devices/iio:deviceX/in_voltageY_calibscale
+> >  What:		/sys/bus/iio/devices/iio:deviceX/in_voltageY_supply_calibscale
+> > diff --git a/Documentation/ABI/testing/sysfs-bus-iio-icm42600 b/Documentation/ABI/testing/sysfs-bus-iio-icm42600
+> > deleted file mode 100644
+> > index 0bf1fd4f5bf1..000000000000
+> > --- a/Documentation/ABI/testing/sysfs-bus-iio-icm42600
+> > +++ /dev/null
+> > @@ -1,20 +0,0 @@
+> > -What:		/sys/bus/iio/devices/iio:deviceX/in_accel_x_calibbias
+> > -What:		/sys/bus/iio/devices/iio:deviceX/in_accel_y_calibbias
+> > -What:		/sys/bus/iio/devices/iio:deviceX/in_accel_z_calibbias
+> > -What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_x_calibbias
+> > -What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_y_calibbias
+> > -What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_z_calibbias
+> > -KernelVersion:  5.8
+> > -Contact:        linux-iio@vger.kernel.org
+> > -Description:
+> > -		Hardware applied calibration offset (assumed to fix production
+> > -		inaccuracies). Values represent a real physical offset expressed
+> > -		in SI units (m/s^2 for accelerometer and rad/s for gyroscope).
+> > -
+> > -What:		/sys/bus/iio/devices/iio:deviceX/in_accel_calibbias_available
+> > -What:		/sys/bus/iio/devices/iio:deviceX/in_anglvel_calibbias_available
+> > -KernelVersion:  5.8
+> > -Contact:        linux-iio@vger.kernel.org
+> > -Description:
+> > -		Range of available values for hardware offset. Values in SI
+> > -		units (m/s^2 for accelerometer and rad/s for gyroscope).  
 > 
-> Here too ... this is the kind of stuff that makes me glad that Colorado
-> is a legal-weed state, and the new version, while better, doesn't change
-> that basic fact.
 
-I'm going to have to disagree with you on this one (I agree with you on all
-the others).  I find this much easier to read ...
-
-"DECLARE_BITMAP followed by any amount of whitespace, literal open bracket,
-an argument, literal comma, whitespace, another argument, literal close bracket"
-
-Before, I get to "DECLARE_BITMAP followed by any amount of whitespace,
-then some line noise".
-
-Obviously I'm less experienced at reading regexes than you are, but this
-simplification really does help me.
-
-> I think I'll stop here; hopefully I've gotten my point across.  I really
-> like where this work is heading; focusing just a bit more on pulling the
-> regexes together and making the whole thing more readable would be
-> wonderful.
-
-Amen.
