@@ -2,163 +2,229 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5A1B036D5F3
-	for <lists+linux-doc@lfdr.de>; Wed, 28 Apr 2021 12:50:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 6F49C36D742
+	for <lists+linux-doc@lfdr.de>; Wed, 28 Apr 2021 14:27:21 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S238640AbhD1Kve (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Wed, 28 Apr 2021 06:51:34 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41540 "EHLO
+        id S235924AbhD1M1o (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Wed, 28 Apr 2021 08:27:44 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:34610 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229811AbhD1Kvd (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Apr 2021 06:51:33 -0400
-Received: from mail-wr1-x435.google.com (mail-wr1-x435.google.com [IPv6:2a00:1450:4864:20::435])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB5C7C061574
-        for <linux-doc@vger.kernel.org>; Wed, 28 Apr 2021 03:50:48 -0700 (PDT)
-Received: by mail-wr1-x435.google.com with SMTP id m9so49779126wrx.3
-        for <linux-doc@vger.kernel.org>; Wed, 28 Apr 2021 03:50:48 -0700 (PDT)
+        with ESMTP id S234298AbhD1M1o (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Wed, 28 Apr 2021 08:27:44 -0400
+Received: from mail-pf1-x432.google.com (mail-pf1-x432.google.com [IPv6:2607:f8b0:4864:20::432])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id EB4BFC06138B
+        for <linux-doc@vger.kernel.org>; Wed, 28 Apr 2021 05:26:58 -0700 (PDT)
+Received: by mail-pf1-x432.google.com with SMTP id m11so448606pfc.11
+        for <linux-doc@vger.kernel.org>; Wed, 28 Apr 2021 05:26:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20161025;
-        h=date:from:to:cc:subject:message-id:references:mime-version
-         :content-disposition:in-reply-to;
-        bh=dFlrZNwewzJjjzd4Q3foni0JHdVNBMcKnh6aPt1+A68=;
-        b=Vx0zC10HAWNZtl1sFotO4aplomYeqGuymbDIKRjYBfg9PaUs2BBSUa6WzHKwzrxnX9
-         8LqMHPlczsofq9PvMtndv5XuBEvhWC8XST+srJ/3wLLnX1G9mh2aMj6nKUCoaKcORXTi
-         kJXAi2O75XvmAK1KlVI17Ii2/Z4CqjFlMXeaJ/STl5S7hIIUIgJKzCf9J8rSBBk8GGSv
-         1M98f/XCXHNY1Byyy53S4mXXaqGMya0Xi/VSNvsSqYAUZfBDtlYQ8p8pAtoHSM90avxF
-         Cemg5m64+46kBAwBu82Ao/Mdj4NrlxDFgu3z9U0ipyj/VGuThoNDnceCa66A6jw3eKwa
-         TZuA==
+        d=bytedance-com.20150623.gappssmtp.com; s=20150623;
+        h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+         :cc:content-transfer-encoding;
+        bh=+P2aXNH0eb9nbOwC+3ZSOJGpMrFmuqGvb3tBbYkL2iQ=;
+        b=FRQdO2BRAjmVaxozzsFaMH5w5WmPmW++6UYQNvgpLchYx5YlmtVqSpkOZ0slWc1kZe
+         BUbA3xGOtAbwHzcGVfh4UrBd79skqZNFT7PqLQ+MdhbSv/mWKJiQmVx1KgE9Pj4WK5vF
+         Knxq+XSQ1HXR8xXI5SHvu3VXfVxP8PseOkZctqlDQ9aGbogxDI/r/PrKQleP9iBM649m
+         TjoEr/h5jAC5SGOEOvgTaFj1cY2co6xa9dd80lf6pm8nEG8rKmehNUCqLlId/dY2vHSW
+         Q02H5uyaOsUZUFLqxyYmppPLzmsshujUFl76Th6/sULiTV5KeS8MKwj741ZT7FzldbYE
+         6fbQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
         d=1e100.net; s=20161025;
-        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-         :mime-version:content-disposition:in-reply-to;
-        bh=dFlrZNwewzJjjzd4Q3foni0JHdVNBMcKnh6aPt1+A68=;
-        b=UW4HUz24/74KHcj+rU3SEaGIca1sEsc0g7tz/iegXLPeShALc0cd272hLd2sFAgPHJ
-         eR9MvTx0f8dDPNco3srOue7mSMVJpiEzSYaYFAatbhvBfGujwVRSjSmhhozKzLaiLs9I
-         KECcd7D1qnVy2y/NtKBymWldX9Os4zDF/zkLa0GM4i05Jg3QaIMnX3qZqcCstE57lmrx
-         WZql+RMN41PO7bHu9F25LKSO4/hHTAoynpqEznY6Nzuu6Fmmf/idK8fMaEksFwBxmaOR
-         oUgEUIC7PcAth480+vp4kvS1a88AfpVSzQdSJTmTXaw0Tdq7MMyR+SOrn0lREiOBjKBf
-         UglQ==
-X-Gm-Message-State: AOAM533mtLiC6pkycvBssyRFgX1znTGb330uSQZWWXDhzKshd214agqw
-        GAl3coAILSDayTCErS9ma5ejAy54Vl7mFg==
-X-Google-Smtp-Source: ABdhPJzQeRE82S377/tNYKWOwvtZORQAU8YHKTWHgdf0we8Asm93G7iMvssrWLEENNxUzsXTnDkERA==
-X-Received: by 2002:a5d:4fc9:: with SMTP id h9mr34773624wrw.172.1619607047463;
-        Wed, 28 Apr 2021 03:50:47 -0700 (PDT)
-Received: from google.com ([2a00:79e0:d:210:2487:1bd4:1f2b:61f5])
-        by smtp.gmail.com with ESMTPSA id a15sm7448349wrr.53.2021.04.28.03.50.46
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Apr 2021 03:50:46 -0700 (PDT)
-Date:   Wed, 28 Apr 2021 11:50:46 +0100
-From:   Matthias Maennich <maennich@google.com>
-To:     Yanteng Si <siyanteng@loongson.cn>
-Cc:     corbet@lwn.net, linux-doc@vger.kernel.org, bobwxc@email.cn,
-        chenhuacai@kernel.org, siyanteng01@gmail.com
-Subject: Re: [PATCH] docs/core-api: Consistent code style
-Message-ID: <YIk+Bp4M4zVAXjpo@google.com>
-References: <20210428100720.1076276-1-siyanteng@loongson.cn>
+        h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+         :message-id:subject:to:cc:content-transfer-encoding;
+        bh=+P2aXNH0eb9nbOwC+3ZSOJGpMrFmuqGvb3tBbYkL2iQ=;
+        b=nG7HBIIY0BDWXpBzE1mmk9IyjX8pqbLQ600a8Z1r18O7GSR/mnsBEltxmCdj69Q4mx
+         tMU7JeaNxuIZJGvukvPp0WByPSRnRhvxuwysnmZAn+sDMnhA7MMgPI7gfBQ14m7qa380
+         wteKkSckEhukSEtEY34e8o/y+WYxdLg91ypJNMG4TVVwJT4NihqfnwK8BIIqQj//UsIt
+         gIKz5Usk+NVuz+XeqcmtQvXLUVsTSVZmSRbIkFgs+EduDeLLE8erQdZ484h5H9dDxxhM
+         YFF5AaUpSzMTshVW5yVDWqJ2b+NF0UCk7QJUnwym3iRksXYJsvvT+cRFY0K/06IUPAK+
+         NgNQ==
+X-Gm-Message-State: AOAM533p8B3LlJUcMNkj74gGCL00kYmQ2ozul1sEcy04W76Zg4fZ6mF3
+        uTqAdl+OCxK+n2/IYThoHNbP+64Nof/FHUQhCJ4bZw==
+X-Google-Smtp-Source: ABdhPJwhscR8kLfuTEGvTn/4O/MIAvSqb0LqqMK+CTgRMvudUl9u7J3Z3wLQdtDH766kaIw7iNgL+A97OnQLvYmBbBo=
+X-Received: by 2002:aa7:9af7:0:b029:264:b19e:ac9c with SMTP id
+ y23-20020aa79af70000b0290264b19eac9cmr27715798pfp.59.1619612818360; Wed, 28
+ Apr 2021 05:26:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Disposition: inline
-In-Reply-To: <20210428100720.1076276-1-siyanteng@loongson.cn>
+References: <20210425070752.17783-1-songmuchun@bytedance.com> <ee3903ae-7033-7608-c7ed-1f16f0359663@oracle.com>
+In-Reply-To: <ee3903ae-7033-7608-c7ed-1f16f0359663@oracle.com>
+From:   Muchun Song <songmuchun@bytedance.com>
+Date:   Wed, 28 Apr 2021 20:26:21 +0800
+Message-ID: <CAMZfGtVbB6YwUMg2ECpdmniQ_vt_3AwdVAuu0GdUJfzWZgQpyg@mail.gmail.com>
+Subject: Re: [External] Re: [PATCH v21 0/9] Free some vmemmap pages of HugeTLB page
+To:     Mike Kravetz <mike.kravetz@oracle.com>
+Cc:     Jonathan Corbet <corbet@lwn.net>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>, bp@alien8.de,
+        X86 ML <x86@kernel.org>, hpa@zytor.com,
+        dave.hansen@linux.intel.com, luto@kernel.org,
+        Peter Zijlstra <peterz@infradead.org>,
+        Alexander Viro <viro@zeniv.linux.org.uk>,
+        Andrew Morton <akpm@linux-foundation.org>, paulmck@kernel.org,
+        pawan.kumar.gupta@linux.intel.com,
+        Randy Dunlap <rdunlap@infradead.org>, oneukum@suse.com,
+        anshuman.khandual@arm.com, jroedel@suse.de,
+        Mina Almasry <almasrymina@google.com>,
+        David Rientjes <rientjes@google.com>,
+        Matthew Wilcox <willy@infradead.org>,
+        Oscar Salvador <osalvador@suse.de>,
+        Michal Hocko <mhocko@suse.com>,
+        "Song Bao Hua (Barry Song)" <song.bao.hua@hisilicon.com>,
+        David Hildenbrand <david@redhat.com>,
+        =?UTF-8?B?SE9SSUdVQ0hJIE5BT1lBKOWggOWPoyDnm7TkuZ8p?= 
+        <naoya.horiguchi@nec.com>,
+        Joao Martins <joao.m.martins@oracle.com>,
+        Xiongchun duan <duanxiongchun@bytedance.com>,
+        fam.zheng@bytedance.com, zhengqi.arch@bytedance.com,
+        linux-doc@vger.kernel.org, LKML <linux-kernel@vger.kernel.org>,
+        Linux Memory Management List <linux-mm@kvack.org>,
+        linux-fsdevel <linux-fsdevel@vger.kernel.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On Wed, Apr 28, 2021 at 06:07:20PM +0800, Yanteng Si wrote:
->all `example` in this file should be replaced with ``example``.
+On Wed, Apr 28, 2021 at 7:47 AM Mike Kravetz <mike.kravetz@oracle.com> wrot=
+e:
 >
->Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
->---
-> Documentation/core-api/symbol-namespaces.rst | 26 ++++++++++----------
-> 1 file changed, 13 insertions(+), 13 deletions(-)
+> Thanks!  I will take a look at the modifications soon.
 >
->diff --git a/Documentation/core-api/symbol-namespaces.rst b/Documentation/core-api/symbol-namespaces.rst
->index 9b76337f6756..5ad9e0abe42c 100644
->--- a/Documentation/core-api/symbol-namespaces.rst
->+++ b/Documentation/core-api/symbol-namespaces.rst
->@@ -43,14 +43,14 @@ exporting of kernel symbols to the kernel symbol table, variants of these are
-> available to export symbols into a certain namespace: EXPORT_SYMBOL_NS() and
-> EXPORT_SYMBOL_NS_GPL(). They take one additional argument: the namespace.
-> Please note that due to macro expansion that argument needs to be a
->-preprocessor symbol. E.g. to export the symbol `usb_stor_suspend` into the
->-namespace `USB_STORAGE`, use::
->+preprocessor symbol. E.g. to export the symbol ``usb_stor_suspend`` into the
->+namespace ``USB_STORAGE``, use::
->
-> 	EXPORT_SYMBOL_NS(usb_stor_suspend, USB_STORAGE);
->
->-The corresponding ksymtab entry struct `kernel_symbol` will have the member
->-`namespace` set accordingly. A symbol that is exported without a namespace will
->-refer to `NULL`. There is no default namespace if none is defined. `modpost`
->+The corresponding ksymtab entry struct ``kernel_symbol`` will have the member
->+``namespace`` set accordingly. A symbol that is exported without a namespace will
->+refer to ``NULL``. There is no default namespace if none is defined. ``modpost``
-> and kernel/module.c make use the namespace at build time or module load time,
-> respectively.
->
->@@ -64,7 +64,7 @@ and EXPORT_SYMBOL_GPL() macro expansions that do not specify a namespace.
->
-> There are multiple ways of specifying this define and it depends on the
-> subsystem and the maintainer's preference, which one to use. The first option
->-is to define the default namespace in the `Makefile` of the subsystem. E.g. to
->+is to define the default namespace in the ``Makefile`` of the subsystem. E.g. to
-> export all symbols defined in usb-common into the namespace USB_COMMON, add a
-> line like this to drivers/usb/common/Makefile::
->
->@@ -96,7 +96,7 @@ using a statement like::
->
-> 	MODULE_IMPORT_NS(USB_STORAGE);
->
->-This will create a `modinfo` tag in the module for each imported namespace.
->+This will create a ``modinfo`` tag in the module for each imported namespace.
-> This has the side effect, that the imported namespaces of a module can be
-> inspected with modinfo::
->
->@@ -113,7 +113,7 @@ metadata definitions like MODULE_AUTHOR() or MODULE_LICENSE(). Refer to section
-> 4. Loading Modules that use namespaced Symbols
-> ==============================================
->
->-At module loading time (e.g. `insmod`), the kernel will check each symbol
->+At module loading time (e.g. ``insmod``), the kernel will check each symbol
-> referenced from the module for its availability and whether the namespace it
-> might be exported to has been imported by the module. The default behaviour of
-> the kernel is to reject loading modules that don't specify sufficient imports.
->@@ -138,19 +138,19 @@ missing imports. Fixing missing imports can be done with::
-> A typical scenario for module authors would be::
->
-> 	- write code that depends on a symbol from a not imported namespace
->-	- `make`
->+	- ``make``
-> 	- notice the warning of modpost telling about a missing import
->-	- run `make nsdeps` to add the import to the correct code location
->+	- run ``make nsdeps`` to add the import to the correct code location
->
-> For subsystem maintainers introducing a namespace, the steps are very similar.
->-Again, `make nsdeps` will eventually add the missing namespace imports for
->+Again, ``make nsdeps`` will eventually add the missing namespace imports for
-> in-tree modules::
->
-> 	- move or add symbols to a namespace (e.g. with EXPORT_SYMBOL_NS())
+> I applied the patches to Andrew's mmotm-2021-04-21-23-03, ran some tests =
+and
+> got the following warning.  We may need to special case that call to
+> __prep_new_huge_page/free_huge_page_vmemmap from alloc_and_dissolve_huge_=
+page
+> as it is holding hugetlb lock with IRQs disabled.
 
-Actually, that could also be made ``EXPORT_SYMBOL_NS()``. Similarly,
-MODULE_IMPORT_NS, DEFAULT_SYMBOL_NAMESPACE and other occurrences or
-EXPORT_SYMBOL* variants could be adjusted as well.
+Good catch. Thanks Mike. I will fix it in the next version. How about this:
 
-Nevertheless, thanks for the change!
+@@ -1618,7 +1617,8 @@ static void __prep_new_huge_page(struct hstate
+*h, struct page *page)
 
-Acked-by: Matthias Maennich <maennich@google.com>
+ static void prep_new_huge_page(struct hstate *h, struct page *page, int ni=
+d)
+ {
++       free_huge_page_vmemmap(h, page);
+        __prep_new_huge_page(page);
+        spin_lock_irq(&hugetlb_lock);
+        __prep_account_new_huge_page(h, nid);
+        spin_unlock_irq(&hugetlb_lock);
+@@ -2429,6 +2429,7 @@ static int alloc_and_dissolve_huge_page(struct
+hstate *h, struct page *old_page,
+        if (!new_page)
+                return -ENOMEM;
 
-Cheers,
-Matthias
++       free_huge_page_vmemmap(h, new_page);
+ retry:
+        spin_lock_irq(&hugetlb_lock);
+        if (!PageHuge(old_page)) {
+@@ -2489,7 +2490,7 @@ static int alloc_and_dissolve_huge_page(struct
+hstate *h, struct page *old_page,
 
->-	- `make` (preferably with an allmodconfig to cover all in-kernel
->+	- ``make`` (preferably with an allmodconfig to cover all in-kernel
-> 	  modules)
-> 	- notice the warning of modpost telling about a missing import
->-	- run `make nsdeps` to add the import to the correct code location
->+	- run ``make nsdeps`` to add the import to the correct code location
+ free_new:
+        spin_unlock_irq(&hugetlb_lock);
+-       __free_pages(new_page, huge_page_order(h));
++       update_and_free_page(h, new_page, false);
+
+        return ret;
+ }
+
+
 >
-> You can also run nsdeps for external module builds. A typical usage is::
+> Sorry I missed that previously.
+> --
+> Mike Kravetz
 >
->-- 
->2.27.0
->
+> [ 1521.579890] ------------[ cut here ]------------
+> [ 1521.581309] WARNING: CPU: 1 PID: 1046 at kernel/smp.c:884 smp_call_fun=
+ction_many_cond+0x1bb/0x390
+> [ 1521.583895] Modules linked in: ip6t_rpfilter ip6t_REJECT nf_reject_ipv=
+6 xt_conntrack ebtable_nat ip6table_nat ip6table_mangle ip6table_raw ip6tab=
+le_security iptable_nat nf_nat iptable_mangle iptable_raw iptable_security =
+nf_conntrack nf_defrag_ipv6 nf_defrag_ipv4 rfkill ebtable_filter ebtables 9=
+p ip6table_filter ip6_tables sunrpc snd_hda_codec_generic snd_hda_intel snd=
+_intel_dspcfg snd_hda_codec snd_hwdep snd_hda_core snd_seq joydev crct10dif=
+_pclmul snd_seq_device crc32_pclmul snd_pcm ghash_clmulni_intel snd_timer 9=
+pnet_virtio snd 9pnet virtio_balloon soundcore i2c_piix4 virtio_net virtio_=
+console net_failover virtio_blk failover 8139too qxl drm_ttm_helper ttm drm=
+_kms_helper drm crc32c_intel serio_raw virtio_pci virtio_pci_modern_dev 813=
+9cp virtio_ring mii ata_generic virtio pata_acpi
+> [ 1521.598644] CPU: 1 PID: 1046 Comm: bash Not tainted 5.12.0-rc8-mm1+ #2
+> [ 1521.599787] Hardware name: QEMU Standard PC (i440FX + PIIX, 1996), BIO=
+S 1.14.0-1.fc33 04/01/2014
+> [ 1521.601259] RIP: 0010:smp_call_function_many_cond+0x1bb/0x390
+> [ 1521.602232] Code: 87 75 71 01 85 d2 0f 84 c8 fe ff ff 65 8b 05 94 3d e=
+9 7e 85 c0 0f 85 b9 fe ff ff 65 8b 05 f9 3a e8 7e 85 c0 0f 85 aa fe ff ff <=
+0f> 0b e9 a3 fe ff ff 65 8b 05 47 33 e8 7e a9 ff ff ff 7f 0f 85 75
+> [ 1521.605167] RSP: 0018:ffffc90001fcb928 EFLAGS: 00010046
+> [ 1521.606049] RAX: 0000000000000000 RBX: ffffffff828a85d0 RCX: 000000000=
+0000001
+> [ 1521.607103] RDX: 0000000000000001 RSI: 0000000000000000 RDI: 000000000=
+0000001
+> [ 1521.608127] RBP: 0000000000000000 R08: 0000000000000000 R09: ffffea000=
+8fa6f88
+> [ 1521.609144] R10: 0000000000000001 R11: 0000000000000001 R12: ffff88823=
+7d3bfc0
+> [ 1521.610112] R13: dead000000000122 R14: dead000000000100 R15: ffffea000=
+7bb8000
+> [ 1521.611106] FS:  00007f8a11223740(0000) GS:ffff888237d00000(0000) knlG=
+S:0000000000000000
+> [ 1521.612231] CS:  0010 DS: 0000 ES: 0000 CR0: 0000000080050033
+> [ 1521.612952] CR2: 0000555e1d00a430 CR3: 000000019ef5a005 CR4: 000000000=
+0370ee0
+> [ 1521.614295] DR0: 0000000000000000 DR1: 0000000000000000 DR2: 000000000=
+0000000
+> [ 1521.615539] DR3: 0000000000000000 DR6: 00000000fffe0ff0 DR7: 000000000=
+0000400
+> [ 1521.616814] Call Trace:
+> [ 1521.617241]  ? flush_tlb_one_kernel+0x20/0x20
+> [ 1521.618041]  on_each_cpu_cond_mask+0x25/0x30
+> [ 1521.618797]  flush_tlb_kernel_range+0xa5/0xc0
+> [ 1521.619577]  vmemmap_remap_free+0x7d/0x150
+> [ 1521.620319]  ? sparse_remove_section+0x80/0x80
+> [ 1521.621120]  free_huge_page_vmemmap+0x2f/0x40
+> [ 1521.621898]  __prep_new_huge_page+0xe/0xd0
+> [ 1521.622633]  isolate_or_dissolve_huge_page+0x300/0x360
+> [ 1521.623559]  isolate_migratepages_block+0x4c4/0xe20
+> [ 1521.624430]  ? verify_cpu+0x100/0x100
+> [ 1521.625096]  isolate_migratepages_range+0x6b/0xc0
+> [ 1521.625936]  alloc_contig_range+0x220/0x3d0
+> [ 1521.626729]  cma_alloc+0x1ae/0x5f0
+> [ 1521.627333]  alloc_fresh_huge_page+0x67/0x190
+> [ 1521.628054]  alloc_pool_huge_page+0x72/0xf0
+> [ 1521.628769]  set_max_huge_pages+0x128/0x2c0
+> [ 1521.629540]  __nr_hugepages_store_common+0x3d/0xb0
+> [ 1521.630457]  ? _kstrtoull+0x35/0xd0
+> [ 1521.631182]  nr_hugepages_store+0x73/0x80
+> [ 1521.631903]  kernfs_fop_write_iter+0x127/0x1c0
+> [ 1521.632698]  new_sync_write+0x11f/0x1b0
+> [ 1521.633408]  vfs_write+0x26f/0x380
+> [ 1521.633946]  ksys_write+0x68/0xe0
+> [ 1521.634444]  do_syscall_64+0x40/0x80
+> [ 1521.634914]  entry_SYSCALL_64_after_hwframe+0x44/0xae
+> [ 1521.635669] RIP: 0033:0x7f8a11313ff8
+> [ 1521.636251] Code: 89 02 48 c7 c0 ff ff ff ff eb b3 0f 1f 80 00 00 00 0=
+0 f3 0f 1e fa 48 8d 05 25 77 0d 00 8b 00 85 c0 75 17 b8 01 00 00 00 0f 05 <=
+48> 3d 00 f0 ff ff 77 58 c3 0f 1f 80 00 00 00 00 41 54 49 89 d4 55
+> [ 1521.639758] RSP: 002b:00007ffd26f79b18 EFLAGS: 00000246 ORIG_RAX: 0000=
+000000000001
+> [ 1521.641118] RAX: ffffffffffffffda RBX: 0000000000000002 RCX: 00007f8a1=
+1313ff8
+> [ 1521.642425] RDX: 0000000000000002 RSI: 0000555e1cf94960 RDI: 000000000=
+0000001
+> [ 1521.643644] RBP: 0000555e1cf94960 R08: 000000000000000a R09: 00007f8a1=
+13a5e80
+> [ 1521.644904] R10: 000000000000000a R11: 0000000000000246 R12: 00007f8a1=
+13e7780
+> [ 1521.646177] R13: 0000000000000002 R14: 00007f8a113e2740 R15: 000000000=
+0000002
+> [ 1521.647450] irq event stamp: 10006640
+> [ 1521.648103] hardirqs last  enabled at (10006639): [<ffffffff812ad02b>]=
+ bad_range+0x15b/0x180
+> [ 1521.649577] hardirqs last disabled at (10006640): [<ffffffff81abcea1>]=
+ _raw_spin_lock_irq+0x51/0x60
+> [ 1521.651194] softirqs last  enabled at (10006630): [<ffffffff810da5e2>]=
+ __irq_exit_rcu+0xd2/0x100
+> [ 1521.652763] softirqs last disabled at (10006625): [<ffffffff810da5e2>]=
+ __irq_exit_rcu+0xd2/0x100
+> [ 1521.654251] ---[ end trace 561fa19f90280f2f ]---
