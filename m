@@ -2,314 +2,135 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id BB05A36E57E
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Apr 2021 09:03:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 4C9EE36E5EB
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Apr 2021 09:28:18 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S239672AbhD2HE0 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 29 Apr 2021 03:04:26 -0400
-Received: from szxga04-in.huawei.com ([45.249.212.190]:16167 "EHLO
-        szxga04-in.huawei.com" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S237274AbhD2HEZ (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Apr 2021 03:04:25 -0400
-Received: from DGGEMS411-HUB.china.huawei.com (unknown [172.30.72.59])
-        by szxga04-in.huawei.com (SkyGuard) with ESMTP id 4FW5x86dzWzpcPn;
-        Thu, 29 Apr 2021 15:00:28 +0800 (CST)
-Received: from localhost.localdomain (10.69.192.56) by
- DGGEMS411-HUB.china.huawei.com (10.3.19.211) with Microsoft SMTP Server id
- 14.3.498.0; Thu, 29 Apr 2021 15:03:28 +0800
-From:   Tian Tao <tiantao6@hisilicon.com>
-To:     <corbet@lwn.net>, <gregkh@linuxfoundation.org>,
-        <song.bao.hua@hisilicon.com>
-CC:     <linux-doc@vger.kernel.org>, <linux-kernel@vger.kernel.org>,
-        Tian Tao <tiantao6@hisilicon.com>
-Subject: [PATCH 2/2] Documentation/ABI: Move the topology-related sysfs interface to the right place
-Date:   Thu, 29 Apr 2021 15:03:39 +0800
-Message-ID: <1619679819-45256-3-git-send-email-tiantao6@hisilicon.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1619679819-45256-1-git-send-email-tiantao6@hisilicon.com>
-References: <1619679819-45256-1-git-send-email-tiantao6@hisilicon.com>
+        id S239509AbhD2H3C (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 29 Apr 2021 03:29:02 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:60038 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S239542AbhD2H25 (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Apr 2021 03:28:57 -0400
+Received: from mail-lf1-x134.google.com (mail-lf1-x134.google.com [IPv6:2a00:1450:4864:20::134])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 08E48C06138F;
+        Thu, 29 Apr 2021 00:28:11 -0700 (PDT)
+Received: by mail-lf1-x134.google.com with SMTP id h36so49163112lfv.7;
+        Thu, 29 Apr 2021 00:28:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=date:from:to:cc:subject:message-id:references:mime-version
+         :content-disposition:in-reply-to:user-agent;
+        bh=jdGoIRWBioljnz1nn4BBzNDaqsoqN9PPsguAeYrjWLg=;
+        b=HJX7+45yNzfNOqoK21ORJnfSS4SqA73WGkbuaPh5kcOvNYBW3pgUgci+P8nrnGhQNi
+         QZWfIOMDuLxP7E+IQpYLX9lQKKuah9ZA8zd1fRzmg+us00a0DmfVFSJnoglvDlrR5JPu
+         wZT0M0/aUfULpMBV9n6oztU1UyISEfYE99jx+Q8TP6g+4uRAG8uA8+yTJauJnN5AbBUY
+         qNoqboxDl+xzzGI7bhFrM+aicJFNWgbT7KP6ymuX4ynpdc3n//T15fOaV6b78MEdGhpM
+         FgBTL7grc3s+XEViMjWFpN6JTZThcff9VQa1IWXouixVnItPd6v/EBVeRr1oW/H3lGiu
+         /UIA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+         :mime-version:content-disposition:in-reply-to:user-agent;
+        bh=jdGoIRWBioljnz1nn4BBzNDaqsoqN9PPsguAeYrjWLg=;
+        b=F7+IaO8wzRH5HaDZ7T77Gov35YfycrgsjdDmc/5Uz+pJbUnQSZzrU5lrgE64EQhJSP
+         32Lk8yfAiYARvKp8shBrftuGmLcoo0qws35hlHZkKmaMgohLu7GvpPRhbBsZ32ZOSgWi
+         oMOroKpoqpAKsqedrDZsnY9U12THMT0UMEIFYriBshw4xmcaFWca8fXO4ITnqb9iX6RR
+         osr1sxE1LfcqW6m17zK5polb/jxBA9GGCTBP2iXmptwNrb8WAfllNfT1ntJVIz1VIq40
+         Oa5gI4UTsU6qavlS3g4NLC5zoJ4RO2GeoNH7aZjxwb7W3mPYw1VDTMLzT7qJ1JoL1Jt+
+         jb9A==
+X-Gm-Message-State: AOAM531FUzHww6X9No679KWry/KHEaRq6pENdedH23LqD53HVRitJCdj
+        H0n7s7Bmx7zpKM0RozizhrY=
+X-Google-Smtp-Source: ABdhPJwuzpu7JK/CSqJabsNtmy0swVR3AkMVRzJ7rqYa3XCC6KgbaqN5bCkxJUe0VVIgGQcVOJHNpg==
+X-Received: by 2002:a05:6512:12d2:: with SMTP id p18mr4572032lfg.239.1619681289241;
+        Thu, 29 Apr 2021 00:28:09 -0700 (PDT)
+Received: from grain.localdomain ([5.18.199.94])
+        by smtp.gmail.com with ESMTPSA id f17sm260073lfu.215.2021.04.29.00.28.07
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Thu, 29 Apr 2021 00:28:08 -0700 (PDT)
+Received: by grain.localdomain (Postfix, from userid 1000)
+        id 72CF5560116; Thu, 29 Apr 2021 10:28:07 +0300 (MSK)
+Date:   Thu, 29 Apr 2021 10:28:07 +0300
+From:   Cyrill Gorcunov <gorcunov@gmail.com>
+To:     Andy Lutomirski <luto@kernel.org>
+Cc:     Yu-cheng Yu <yu-cheng.yu@intel.com>,
+        linux-arch <linux-arch@vger.kernel.org>, X86 ML <x86@kernel.org>,
+        "H. Peter Anvin" <hpa@zytor.com>,
+        Thomas Gleixner <tglx@linutronix.de>,
+        Ingo Molnar <mingo@redhat.com>,
+        LKML <linux-kernel@vger.kernel.org>,
+        "open list:DOCUMENTATION" <linux-doc@vger.kernel.org>,
+        Linux-MM <linux-mm@kvack.org>,
+        Linux API <linux-api@vger.kernel.org>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Balbir Singh <bsingharora@gmail.com>,
+        Borislav Petkov <bp@alien8.de>,
+        Dave Hansen <dave.hansen@linux.intel.com>,
+        Eugene Syromiatnikov <esyr@redhat.com>,
+        Florian Weimer <fweimer@redhat.com>,
+        "H.J. Lu" <hjl.tools@gmail.com>, Jann Horn <jannh@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Kees Cook <keescook@chromium.org>,
+        Mike Kravetz <mike.kravetz@oracle.com>,
+        Nadav Amit <nadav.amit@gmail.com>,
+        Oleg Nesterov <oleg@redhat.com>, Pavel Machek <pavel@ucw.cz>,
+        Peter Zijlstra <peterz@infradead.org>,
+        Randy Dunlap <rdunlap@infradead.org>,
+        "Ravi V. Shankar" <ravi.v.shankar@intel.com>,
+        Vedvyas Shanbhogue <vedvyas.shanbhogue@intel.com>,
+        Dave Martin <Dave.Martin@arm.com>,
+        Weijiang Yang <weijiang.yang@intel.com>,
+        Pengfei Xu <pengfei.xu@intel.com>,
+        Haitao Huang <haitao.huang@intel.com>
+Subject: Re: extending ucontext (Re: [PATCH v26 25/30] x86/cet/shstk: Handle
+ signals for shadow stack)
+Message-ID: <YIpgB5HbnNPWX4FP@grain>
+References: <20210427204315.24153-1-yu-cheng.yu@intel.com>
+ <20210427204315.24153-26-yu-cheng.yu@intel.com>
+ <CALCETrVTeYfzO-XWh+VwTuKCyPyp-oOMGH=QR_msG9tPQ4xPmA@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain
-X-Originating-IP: [10.69.192.56]
-X-CFilter-Loop: Reflected
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <CALCETrVTeYfzO-XWh+VwTuKCyPyp-oOMGH=QR_msG9tPQ4xPmA@mail.gmail.com>
+User-Agent: Mutt/2.0.5 (2021-01-21)
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Move the interface that exists under
-/sys/devices/system/cpu/cpuX/topology/ to the more logical
-Documentation/ABI/ file that can be properly parsed and
-displayed to the user space
+On Wed, Apr 28, 2021 at 04:03:55PM -0700, Andy Lutomirski wrote:
+> On Tue, Apr 27, 2021 at 1:44 PM Yu-cheng Yu <yu-cheng.yu@intel.com> wrote:
+> >
+> > When shadow stack is enabled, a task's shadow stack states must be saved
+> > along with the signal context and later restored in sigreturn.  However,
+> > currently there is no systematic facility for extending a signal context.
+> > There is some space left in the ucontext, but changing ucontext is likely
+> > to create compatibility issues and there is not enough space for further
+> > extensions.
+> >
+> > Introduce a signal context extension struct 'sc_ext', which is used to save
+> > shadow stack restore token address.  The extension is located above the fpu
+> > states, plus alignment.  The struct can be extended (such as the ibt's
+> > wait_endbr status to be introduced later), and sc_ext.total_size field
+> > keeps track of total size.
+> 
+> I still don't like this.
+> 
+> Here's how the signal layout works, for better or for worse:
+> 
+> The kernel has:
+> 
+> struct rt_sigframe {
+>     char __user *pretcode;
+>     struct ucontext uc;
+>     struct siginfo info;
+>     /* fp state follows here */
+> };
+> 
+> This is roughly the actual signal frame.  But userspace does not have
+> this struct declared, and user code does not know the sizes of the
+> fields.  So it's accessed in a nonsensical way.  The signal handler
 
-Signed-off-by: Tian Tao <tiantao6@hisilicon.com>
----
- Documentation/ABI/stable/sysfs-devices-system-cpu | 142 ++++++++++++++++++++++
- Documentation/admin-guide/cputopology.rst         |  98 +--------------
- 2 files changed, 144 insertions(+), 96 deletions(-)
-
-diff --git a/Documentation/ABI/stable/sysfs-devices-system-cpu b/Documentation/ABI/stable/sysfs-devices-system-cpu
-index 33c133e..f63a72d 100644
---- a/Documentation/ABI/stable/sysfs-devices-system-cpu
-+++ b/Documentation/ABI/stable/sysfs-devices-system-cpu
-@@ -1,3 +1,7 @@
-+Export CPU topology info via sysfs. Items (attributes) are similar
-+to /proc/cpuinfo output of some architectures. They reside in
-+/sys/devices/system/cpu/cpuX/topology/:
-+
- What: 		/sys/devices/system/cpu/dscr_default
- Date:		13-May-2014
- KernelVersion:	v3.15.0
-@@ -23,3 +27,141 @@ Description:	Default value for the Data Stream Control Register (DSCR) on
- 		here).
- 		If set by a process it will be inherited by child processes.
- Values:		64 bit unsigned integer (bit field)
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/physical_package_id
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    physical package id of cpuX. Typically corresponds to a physical
-+                socket number, but the actual value is architecture and platform
-+                dependent.
-+Values:         64 bit unsigned integer (bit field)
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/die_id
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    the CPU die ID of cpuX. Typically it is the hardware platform's
-+                identifier (rather than the kernel's). The actual value is
-+                architecture and platform dependent.
-+Values:         64 bit unsigned integer (bit field)
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/core_id
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    the CPU core ID of cpuX. Typically it is the hardware platform's
-+                identifier (rather than the kernel's). The actual value is
-+                architecture and platform dependent.
-+Values:         64 bit unsigned integer (bit field)
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/book_id
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    the book ID of cpuX. Typically it is the hardware platform's
-+                identifier (rather than the kernel's). The actual value is
-+                architecture and platform dependent. it's only used on s390.
-+Values:         64 bit unsigned integer (bit field)
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/drawer_id
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    the drawer ID of cpuX. Typically it is the hardware platform's
-+                identifier (rather than the kernel's). The actual value is
-+                architecture and platform dependent. it's only used on s390.
-+Values:         64 bit unsigned integer (bit field)
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/core_cpus
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    internal kernel map of CPUs within the same core.
-+                (deprecated name: "thread_siblings")
-+Values:         hexadecimal bitmask.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/core_cpus_list
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    human-readable list of CPUs within the same core.
-+                The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
-+	        so the tail of the string will be trimmed while its size is larger
-+                than PAGE_SIZE.
-+                (deprecated name: "thread_siblings_list").
-+Values:         decimal list.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/package_cpus
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    internal kernel map of the CPUs sharing the same physical_package_id.
-+                (deprecated name: "core_siblings").
-+Values:         hexadecimal bitmask.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/package_cpus_list
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    human-readable list of CPUs sharing the same physical_package_id.
-+                The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
-+                so the tail of the string will be trimmed while its size is larger
-+                than PAGE_SIZE.
-+                (deprecated name: "core_siblings_list")
-+Values:         decimal list.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/die_cpus
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    internal kernel map of CPUs within the same die.
-+Values:         hexadecimal bitmask.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/die_cpus_list
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    human-readable list of CPUs within the same die.
-+                The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
-+                so the tail of the string will be trimmed while its size is larger
-+                than PAGE_SIZE.
-+Values:         decimal list.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/book_siblings
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    internal kernel map of cpuX's hardware threads within the same
-+                book_id. it's only used on s390.
-+Values:         hexadecimal bitmask.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/book_siblings_list
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    human-readable list of cpuX's hardware threads within the same
-+                book_id. it's only used on s390.
-+                The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
-+                so the tail of the string will be trimmed while its size is larger
-+                than PAGE_SIZE.
-+Values:         decimal list.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/drawer_siblings
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    internal kernel map of cpuX's hardware threads within the same
-+                drawer_id. it's only used on s390.
-+Values:         hexadecimal bitmask.
-+
-+What:           /sys/devices/system/cpu/cpuX/topology/drawer_siblings_list
-+Date:           19-Mar-2021
-+KernelVersion:  v5.12
-+Contact:
-+Description:    human-readable list of cpuX's hardware threads within the same
-+                drawer_id.
-+                The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
-+                so the tail of the string will be trimmed while its size is larger
-+                than PAGE_SIZE. it's only used on s390.
-+Values:         decimal list.
-diff --git a/Documentation/admin-guide/cputopology.rst b/Documentation/admin-guide/cputopology.rst
-index 4538d78..de1995c 100644
---- a/Documentation/admin-guide/cputopology.rst
-+++ b/Documentation/admin-guide/cputopology.rst
-@@ -2,102 +2,8 @@
- How CPU topology info is exported via sysfs
- ===========================================
- 
--Export CPU topology info via sysfs. Items (attributes) are similar
--to /proc/cpuinfo output of some architectures.  They reside in
--/sys/devices/system/cpu/cpuX/topology/:
--
--physical_package_id:
--
--	physical package id of cpuX. Typically corresponds to a physical
--	socket number, but the actual value is architecture and platform
--	dependent.
--
--die_id:
--
--	the CPU die ID of cpuX. Typically it is the hardware platform's
--	identifier (rather than the kernel's).  The actual value is
--	architecture and platform dependent.
--
--core_id:
--
--	the CPU core ID of cpuX. Typically it is the hardware platform's
--	identifier (rather than the kernel's).  The actual value is
--	architecture and platform dependent.
--
--book_id:
--
--	the book ID of cpuX. Typically it is the hardware platform's
--	identifier (rather than the kernel's).	The actual value is
--	architecture and platform dependent.
--
--drawer_id:
--
--	the drawer ID of cpuX. Typically it is the hardware platform's
--	identifier (rather than the kernel's).	The actual value is
--	architecture and platform dependent.
--
--core_cpus:
--
--	internal kernel map of CPUs within the same core.
--	(deprecated name: "thread_siblings")
--
--core_cpus_list:
--
--	human-readable list of CPUs within the same core.
--	The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
--	so the tail of the string will be trimmed while its size is larger
--	than PAGE_SIZE.
--	(deprecated name: "thread_siblings_list");
--
--package_cpus:
--
--	internal kernel map of the CPUs sharing the same physical_package_id.
--	(deprecated name: "core_siblings")
--
--package_cpus_list:
--
--	human-readable list of CPUs sharing the same physical_package_id.
--	The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
--	so the tail of the string will be trimmed while its size is larger
--	than PAGE_SIZE.
--	(deprecated name: "core_siblings_list")
--
--die_cpus:
--
--	internal kernel map of CPUs within the same die.
--
--die_cpus_list:
--
--	human-readable list of CPUs within the same die.
--	The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
--	so the tail of the string will be trimmed while its size is larger
--	than PAGE_SIZE.
--
--book_siblings:
--
--	internal kernel map of cpuX's hardware threads within the same
--	book_id.
--
--book_siblings_list:
--
--	human-readable list of cpuX's hardware threads within the same
--	book_id.
--	The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
--	so the tail of the string will be trimmed while its size is larger
--	than PAGE_SIZE.
--
--drawer_siblings:
--
--	internal kernel map of cpuX's hardware threads within the same
--	drawer_id.
--
--drawer_siblings_list:
--
--	human-readable list of cpuX's hardware threads within the same
--	drawer_id.
--	The format is like 0-3, 8-11, 14,17. The maximum size is PAGE_SIZE,
--	so the tail of the string will be trimmed while its size is larger
--	than PAGE_SIZE.
-+Export CPU topology info via sysfs. Please refer to the ABI file:
-+Documentation/ABI/stable/sysfs-devices-system-cpu.
- 
- Architecture-neutral, drivers/base/topology.c, exports these attributes.
- However, the book and drawer related sysfs files will only be created if
--- 
-2.7.4
-
+Well, not really. While indeed this is not declared as a part of API
+the structure is widely used for rt_sigreturn syscall (and we're using
+it inside criu thus any change here will simply break the restore
+procedure). Sorry out of time right now, I'll read your mail more
+carefully once time permit.
