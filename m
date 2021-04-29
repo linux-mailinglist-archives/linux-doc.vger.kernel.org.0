@@ -2,266 +2,234 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5412036E4EE
-	for <lists+linux-doc@lfdr.de>; Thu, 29 Apr 2021 08:37:42 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 180F436E515
+	for <lists+linux-doc@lfdr.de>; Thu, 29 Apr 2021 08:50:01 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229904AbhD2Gi1 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Thu, 29 Apr 2021 02:38:27 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:48488 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S230148AbhD2Gi0 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Thu, 29 Apr 2021 02:38:26 -0400
-Received: from mail-pj1-x1030.google.com (mail-pj1-x1030.google.com [IPv6:2607:f8b0:4864:20::1030])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 18AA9C06138B;
-        Wed, 28 Apr 2021 23:37:40 -0700 (PDT)
-Received: by mail-pj1-x1030.google.com with SMTP id lr7so15947424pjb.2;
-        Wed, 28 Apr 2021 23:37:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=from:to:cc:subject:date:message-id:in-reply-to:references;
-        bh=DWvEqPxo5quJ67cNZw5T846UEoXgYHse2SDYouWmS8g=;
-        b=LWdylvemY/bsXptkS0JHBD0BVlJFgNs0PPHw4P/qWND/kR6wPAUbdV18IXjW5XhKsp
-         hOzHjR84p80bl5mEw/zPm/Qn9fxD/rgykA4IPtEPlF44lY9piNtXpeOBpjkCmSAc+0Wr
-         ZtHghNfZAFYJaAQckyhGbzbhU8VAwUPGdmAaIUWkZVIV7j7PZWzMu71UgF8D3CCUtYp1
-         3wr4771nTPMMmxXcFYt35KOkamgnPXvxEhDJf6MrH7mW1rSQLryHY4wKa3XK7+8exbLR
-         Ivo5zpji6TWEgDj8a2c824S8q4+nCYTPbLx/7ctxIMFt3WvdUk/j/AeEFflvPF+U2IUf
-         0lFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-         :references;
-        bh=DWvEqPxo5quJ67cNZw5T846UEoXgYHse2SDYouWmS8g=;
-        b=gl++Bhw8se2b6YbC+qslaZQt4gTHKwXi1ehXeJP4QHQeF+v6D+Vdnc+6TEC7vJKlWl
-         J8k3IZS3XabT3suqL/4cAjeKpEMOMgqAdSIAf/eGF5+s4qBRyni1DOrp0urX1e0I1uys
-         q3CmDFsXgmtmF6FeQYmiAha665CvqrN3L6/35SD5ZuFJZjdLKAAaXkHnWMeKgUM/xzqw
-         kRMdEuGKhoc/UDO4vAUDXF7Wbhk1GlvXvB+khRgtiyFxjTht9lUDGKSAOzOE8fkWrsiQ
-         7XXO/4auPD9/OKIJnbP4gWd/Ix0TzpW4fd4eekxbgZKweY+CKPZM2+nkdGkOiRxW8Wwm
-         Ukfw==
-X-Gm-Message-State: AOAM531Xn064/hhE7y4v5GS4t+lp0swdLmv7dp45mANSqJ7GWrkHNF5k
-        a0Rkjbgaky7dTlJv+e0X4fbJ9R7/WC8xeQ==
-X-Google-Smtp-Source: ABdhPJymbtsAxpkU843VHh5l1oAGwRNO6wiPW751bAvcs1M+W79Lh8KKrxAVE67pHGkWA1bS9yu/Wg==
-X-Received: by 2002:a17:90b:3b43:: with SMTP id ot3mr36306030pjb.100.1619678259362;
-        Wed, 28 Apr 2021 23:37:39 -0700 (PDT)
-Received: from localhost.localdomain ([2405:201:600d:a089:292c:376:689b:476d])
-        by smtp.googlemail.com with ESMTPSA id o9sm1573331pfh.217.2021.04.28.23.37.34
-        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
-        Wed, 28 Apr 2021 23:37:38 -0700 (PDT)
-From:   Aditya Srivastava <yashsri421@gmail.com>
+        id S238748AbhD2Guj (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Thu, 29 Apr 2021 02:50:39 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:32926 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S229814AbhD2Guj (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Thu, 29 Apr 2021 02:50:39 -0400
+Received: from localhost.localdomain (unknown [112.3.197.94])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Axncj_VopghnMPAA--.20275S2;
+        Thu, 29 Apr 2021 14:49:37 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
 To:     corbet@lwn.net
-Cc:     yashsri421@gmail.com, lukas.bulwahn@gmail.com, willy@infradead.org,
-        linux-kernel-mentees@lists.linuxfoundation.org,
-        linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
-Subject: [RFC v3] scripts: kernel-doc: reduce repeated regex expressions into variables
-Date:   Thu, 29 Apr 2021 12:07:29 +0530
-Message-Id: <20210429063729.8144-1-yashsri421@gmail.com>
-X-Mailer: git-send-email 2.17.1
-In-Reply-To: <20210427165633.GA235567@casper.infradead.org>
-References: <20210427165633.GA235567@casper.infradead.org>
+Cc:     alexs@kernel.org, chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
+        linux-doc@vger.kernel.org, realpuyuwang@gmail.com, bobwxc@email.cn,
+        siyanteng01@gmail.com, huangjianghui@uniontech.com,
+        Yanteng Si <siyanteng@loongson.cn>
+Subject: [PATCH v2] docs/zh_CN: add core-api symbol-namespaces.rst translation
+Date:   Thu, 29 Apr 2021 14:50:19 +0800
+Message-Id: <20210429065019.1513454-1-siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9Axncj_VopghnMPAA--.20275S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3ArW7Jw1kZr4kuF1rGFWDXFb_yoWfZFyfpF
+        yqyr97KF1UJry7Zw1xGrW8tr17Ca97WF43Gwn7J343Jw1DtFZ8Cw47tryjkFyxKr4vkFWk
+        Ar4qyFW7AryjgFDanT9S1TB71UUUUUUqnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+        9KBjDU0xBIdaVrnRJUUUvY14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+        rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+        1l84ACjcxK6xIIjxv20xvE14v26ryj6F1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+        6r4UJwA2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gc
+        CE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E
+        2Ix0cI8IcVAFwI0_Jr0_Jr4lYx0Ex4A2jsIE14v26r1j6r4UMcvjeVCFs4IE7xkEbVWUJV
+        W8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2
+        Y2ka0xkIwI1l42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
+        xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43
+        MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I
+        0E14v26r1j6r4UMIIF0xvE42xK8VAvwI8IcIk0rVWrZr1j6s0DMIIF0xvEx4A2jsIE14v2
+        6r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Gr0_Gr1UYxBIdaVFxhVjvjDU0xZFpf9x0J
+        UdHUDUUUUU=
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-There are some regex expressions in the kernel-doc script, which are used
-repeatedly in the script.
+This patch translates Documentation/core-api/symbol-namespaces.rst into Chinese.
 
-Reduce such expressions into variables, which can be used everywhere.
+v1 -> v2:
 
-A quick manual check found that no errors and warnings were added/removed
-in this process.
+* Some bad translations have been modified as suggested by Xiangcheng.Thank you for your review.
+https://lore.kernel.org/linux-doc/20210429052252.GA9451@bobwxc.top/T/#t
 
-Suggested-by: Jonathan Corbet <corbet@lwn.net>
-Signed-off-by: Aditya Srivastava <yashsri421@gmail.com>
+* Pick Xiangcheng Wu's review-by tag.
+
+Signed-off-by: Yanteng Si <siyanteng@loongson.cn>
+Reviewed-by: Wu XiangCheng <bobwxc@email.cn>
 ---
-Changes in v3:
-- Remove variables for separate qualifiers in "sub dump_struct"
-- Make a common variable for all the qualifiers
-- Make $attribute global variable to use it at "sub check_sections" as well
+ .../translations/zh_CN/core-api/index.rst     |   5 +
+ .../zh_CN/core-api/symbol-namespaces.rst      | 142 ++++++++++++++++++
+ 2 files changed, 147 insertions(+)
+ create mode 100644 Documentation/translations/zh_CN/core-api/symbol-namespaces.rst
 
-Changes in v2:
-- Rename $pointer_function to $function_pointer
-- Combine elsif-block expressions at "sub dump_function" into lesser regex expressions
-- Combine $prototype_end1,$prototype_end2 expressions into a common $prototype_end
-
- scripts/kernel-doc | 71 ++++++++++++++++++++++------------------------
- 1 file changed, 34 insertions(+), 37 deletions(-)
-
-diff --git a/scripts/kernel-doc b/scripts/kernel-doc
-index 2a85d34fdcd0..721005a02e64 100755
---- a/scripts/kernel-doc
-+++ b/scripts/kernel-doc
-@@ -406,6 +406,8 @@ my $doc_inline_sect = '\s*\*\s*(@\s*[\w][\w\.]*\s*):(.*)';
- my $doc_inline_end = '^\s*\*/\s*$';
- my $doc_inline_oneline = '^\s*/\*\*\s*(@[\w\s]+):\s*(.*)\s*\*/\s*$';
- my $export_symbol = '^\s*EXPORT_SYMBOL(_GPL)?\s*\(\s*(\w+)\s*\)\s*;';
-+my $function_pointer = qr{([^\(]*\(\*)\s*\)\s*\(([^\)]*)\)};
-+my $attribute = qr{__attribute__\s*\(\([a-z0-9,_\*\s\(\)]*\)\)}i;
+diff --git a/Documentation/translations/zh_CN/core-api/index.rst b/Documentation/translations/zh_CN/core-api/index.rst
+index f1fa71e45c77..1af5a62fcc03 100644
+--- a/Documentation/translations/zh_CN/core-api/index.rst
++++ b/Documentation/translations/zh_CN/core-api/index.rst
+@@ -19,6 +19,11 @@
+ 来的大量 kerneldoc 信息；有朝一日，若有人有动力的话，应当把它们拆分
+ 出来。
  
- my %parameterdescs;
- my %parameterdesc_start_lines;
-@@ -694,7 +696,7 @@ sub output_function_man(%) {
- 	    $post = ");";
- 	}
- 	$type = $args{'parametertypes'}{$parameter};
--	if ($type =~ m/([^\(]*\(\*)\s*\)\s*\(([^\)]*)\)/) {
-+	if ($type =~ m/$function_pointer/) {
- 	    # pointer-to-function
- 	    print ".BI \"" . $parenth . $1 . "\" " . " \") (" . $2 . ")" . $post . "\"\n";
- 	} else {
-@@ -974,7 +976,7 @@ sub output_function_rst(%) {
- 	$count++;
- 	$type = $args{'parametertypes'}{$parameter};
- 
--	if ($type =~ m/([^\(]*\(\*)\s*\)\s*\(([^\)]*)\)/) {
-+	if ($type =~ m/$function_pointer/) {
- 	    # pointer-to-function
- 	    print $1 . $parameter . ") (" . $2 . ")";
- 	} else {
-@@ -1211,7 +1213,9 @@ sub dump_struct($$) {
-     my $members;
-     my $type = qr{struct|union};
-     # For capturing struct/union definition body, i.e. "{members*}qualifiers*"
--    my $definition_body = qr{\{(.*)\}(?:\s*(?:__packed|__aligned|____cacheline_aligned_in_smp|____cacheline_aligned|__attribute__\s*\(\([a-z0-9,_\s\(\)]*\)\)))*};
-+    my $qualifiers = qr{$attribute|__packed|__aligned|____cacheline_aligned_in_smp|____cacheline_aligned};
-+    my $definition_body = qr{\{(.*)\}\s*$qualifiers*};
-+    my $struct_members = qr{($type)([^\{\};]+)\{([^\{\}]*)\}([^\{\}\;]*)\;};
- 
-     if ($x =~ /($type)\s+(\w+)\s*$definition_body/) {
- 	$decl_type = $1;
-@@ -1235,27 +1239,27 @@ sub dump_struct($$) {
- 	# strip comments:
- 	$members =~ s/\/\*.*?\*\///gos;
- 	# strip attributes
--	$members =~ s/\s*__attribute__\s*\(\([a-z0-9,_\*\s\(\)]*\)\)/ /gi;
-+	$members =~ s/\s*$attribute/ /gi;
- 	$members =~ s/\s*__aligned\s*\([^;]*\)/ /gos;
- 	$members =~ s/\s*__packed\s*/ /gos;
- 	$members =~ s/\s*CRYPTO_MINALIGN_ATTR/ /gos;
- 	$members =~ s/\s*____cacheline_aligned_in_smp/ /gos;
- 	$members =~ s/\s*____cacheline_aligned/ /gos;
- 
-+	my $args = qr{([^,)]+)};
- 	# replace DECLARE_BITMAP
- 	$members =~ s/__ETHTOOL_DECLARE_LINK_MODE_MASK\s*\(([^\)]+)\)/DECLARE_BITMAP($1, __ETHTOOL_LINK_MODE_MASK_NBITS)/gos;
--	$members =~ s/DECLARE_BITMAP\s*\(([^,)]+),\s*([^,)]+)\)/unsigned long $1\[BITS_TO_LONGS($2)\]/gos;
-+	$members =~ s/DECLARE_BITMAP\s*\($args,\s*$args\)/unsigned long $1\[BITS_TO_LONGS($2)\]/gos;
- 	# replace DECLARE_HASHTABLE
--	$members =~ s/DECLARE_HASHTABLE\s*\(([^,)]+),\s*([^,)]+)\)/unsigned long $1\[1 << (($2) - 1)\]/gos;
-+	$members =~ s/DECLARE_HASHTABLE\s*\($args,\s*$args\)/unsigned long $1\[1 << (($2) - 1)\]/gos;
- 	# replace DECLARE_KFIFO
--	$members =~ s/DECLARE_KFIFO\s*\(([^,)]+),\s*([^,)]+),\s*([^,)]+)\)/$2 \*$1/gos;
-+	$members =~ s/DECLARE_KFIFO\s*\($args,\s*$args,\s*$args\)/$2 \*$1/gos;
- 	# replace DECLARE_KFIFO_PTR
--	$members =~ s/DECLARE_KFIFO_PTR\s*\(([^,)]+),\s*([^,)]+)\)/$2 \*$1/gos;
--
-+	$members =~ s/DECLARE_KFIFO_PTR\s*\($args,\s*$args\)/$2 \*$1/gos;
- 	my $declaration = $members;
- 
- 	# Split nested struct/union elements as newer ones
--	while ($members =~ m/(struct|union)([^\{\};]+)\{([^\{\}]*)\}([^\{\}\;]*)\;/) {
-+	while ($members =~ m/$struct_members/) {
- 		my $newmember;
- 		my $maintype = $1;
- 		my $ids = $4;
-@@ -1315,7 +1319,7 @@ sub dump_struct($$) {
- 				}
- 			}
- 		}
--		$members =~ s/(struct|union)([^\{\};]+)\{([^\{\}]*)\}([^\{\}\;]*)\;/$newmember/;
-+		$members =~ s/$struct_members/$newmember/;
- 	}
- 
- 	# Ignore other nested elements, like enums
-@@ -1555,8 +1559,9 @@ sub create_parameterlist($$$$) {
-     my $param;
- 
-     # temporarily replace commas inside function pointer definition
--    while ($args =~ /(\([^\),]+),/) {
--	$args =~ s/(\([^\),]+),/$1#/g;
-+    my $arg_expr = qr{\([^\),]+};
-+    while ($args =~ /$arg_expr,/) {
-+	$args =~ s/($arg_expr),/$1#/g;
-     }
- 
-     foreach my $arg (split($splitter, $args)) {
-@@ -1707,7 +1712,7 @@ sub check_sections($$$$$) {
- 		foreach $px (0 .. $#prms) {
- 			$prm_clean = $prms[$px];
- 			$prm_clean =~ s/\[.*\]//;
--			$prm_clean =~ s/__attribute__\s*\(\([a-z,_\*\s\(\)]*\)\)//i;
-+			$prm_clean =~ s/$attribute//i;
- 			# ignore array size in a parameter string;
- 			# however, the original param string may contain
- 			# spaces, e.g.:  addr[6 + 2]
-@@ -1808,8 +1813,14 @@ sub dump_function($$) {
-     # - parport_register_device (function pointer parameters)
-     # - atomic_set (macro)
-     # - pci_match_device, __copy_to_user (long return type)
--
--    if ($define && $prototype =~ m/^()([a-zA-Z0-9_~:]+)\s+/) {
-+    my $name = qr{[a-zA-Z0-9_~:]+};
-+    my $prototype_end1 = qr{[^\(]*};
-+    my $prototype_end2 = qr{[^\{]*};
-+    my $prototype_end = qr{\(($prototype_end1|$prototype_end2)\)};
-+    my $type1 = qr{[\w\s]+};
-+    my $type2 = qr{$type1\*+};
++.. toctree::
++   :maxdepth: 1
 +
-+    if ($define && $prototype =~ m/^()($name)\s+/) {
-         # This is an object-like macro, it has no return type and no parameter
-         # list.
-         # Function-like macros are not allowed to have spaces between
-@@ -1817,23 +1828,9 @@ sub dump_function($$) {
-         $return_type = $1;
-         $declaration_name = $2;
-         $noret = 1;
--    } elsif ($prototype =~ m/^()([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)/ ||
--	$prototype =~ m/^(\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)/ ||
--	$prototype =~ m/^(\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\(]*)\)/ ||
--	$prototype =~ m/^()([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s+\w+\s+\w+)\s+([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s+\w+\s+\w+\s*\*+)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/ ||
--	$prototype =~ m/^(\w+\s+\w+\s*\*+\s*\w+\s*\*+\s*)\s*([a-zA-Z0-9_~:]+)\s*\(([^\{]*)\)/)  {
-+    } elsif ($prototype =~ m/^()($name)\s*$prototype_end/ ||
-+	$prototype =~ m/^($type1)\s+($name)\s*$prototype_end/ ||
-+	$prototype =~ m/^($type2)+\s*($name)\s*$prototype_end/)  {
- 	$return_type = $1;
- 	$declaration_name = $2;
- 	my $args = $3;
-@@ -2110,12 +2107,12 @@ sub process_name($$) {
-     } elsif (/$doc_decl/o) {
- 	$identifier = $1;
- 	my $is_kernel_comment = 0;
--	my $decl_start = qr{\s*\*};
-+	my $decl_start = qr{$doc_com};
- 	# test for pointer declaration type, foo * bar() - desc
- 	my $fn_type = qr{\w+\s*\*\s*}; 
- 	my $parenthesis = qr{\(\w*\)};
- 	my $decl_end = qr{[-:].*};
--	if (/^$decl_start\s*([\w\s]+?)$parenthesis?\s*$decl_end?$/) {
-+	if (/^$decl_start([\w\s]+?)$parenthesis?\s*$decl_end?$/) {
- 	    $identifier = $1;
- 	}
- 	if ($identifier =~ m/^(struct|union|enum|typedef)\b\s*(\S*)/) {
-@@ -2125,8 +2122,8 @@ sub process_name($$) {
- 	}
- 	# Look for foo() or static void foo() - description; or misspelt
- 	# identifier
--	elsif (/^$decl_start\s*$fn_type?(\w+)\s*$parenthesis?\s*$decl_end?$/ ||
--	    /^$decl_start\s*$fn_type?(\w+.*)$parenthesis?\s*$decl_end$/) {
-+	elsif (/^$decl_start$fn_type?(\w+)\s*$parenthesis?\s*$decl_end?$/ ||
-+	    /^$decl_start$fn_type?(\w+.*)$parenthesis?\s*$decl_end$/) {
- 	    $identifier = $1;
- 	    $decl_type = 'function';
- 	    $identifier =~ s/^define\s+//;
++   symbol-namespaces
++
+ Todolist:
+ 
+    kernel-api
+diff --git a/Documentation/translations/zh_CN/core-api/symbol-namespaces.rst b/Documentation/translations/zh_CN/core-api/symbol-namespaces.rst
+new file mode 100644
+index 000000000000..3dc23ef1d254
+--- /dev/null
++++ b/Documentation/translations/zh_CN/core-api/symbol-namespaces.rst
+@@ -0,0 +1,142 @@
++.. include:: ../disclaimer-zh_CN.rst
++
++:Original: Documentation/core-api/symbol-namespaces.rst
++:Translator: Yanteng Si <siyanteng@loongson.cn>
++
++.. _cn_symbol-namespaces.rst:
++
++
++=================================
++符号命名空间（Symbol Namespaces）
++=================================
++
++本文档描述了如何使用符号命名空间来构造通过EXPORT_SYMBOL()系列宏导出的内核内符号的导出面。
++
++.. 目录
++
++	=== 1 简介
++	=== 2 如何定义符号命名空间
++	   --- 2.1 使用EXPORT_SYMBOL宏
++	   --- 2.2 使用DEFAULT_SYMBOL_NAMESPACE定义
++	=== 3 如何使用命名空间中导出的符号
++	=== 4 加载使用命名空间符号的模块
++	=== 5 自动创建MODULE_IMPORT_NS声明
++
++1. 简介
++=======
++
++符号命名空间已经被引入，作为构造内核内API的导出面的一种手段。它允许子系统维护者将
++他们导出的符号划分进独立的命名空间。这对于文档的编写非常有用（想想SUBSYSTEM_DEBUG
++命名空间），也可以限制一组符号在内核其他部分的使用。今后，使用导出到命名空间的符号
++的模块必须导入命名空间。否则，内核将根据其配置，拒绝加载该模块或警告说缺少
++导入。
++
++2. 如何定义符号命名空间
++=======================
++
++符号可以用不同的方法导出到命名空间。所有这些都在改变 EXPORT_SYMBOL 和与之类似的那些宏
++被检测到的方式，以创建 ksymtab 条目。
++
++2.1 使用EXPORT_SYMBOL宏
++=======================
++
++除了允许将内核符号导出到内核符号表的宏EXPORT_SYMBOL()和EXPORT_SYMBOL_GPL()之外，
++这些宏的变体还可以将符号导出到某个命名空间：EXPORT_SYMBOL_NS() 和 EXPORT_SYMBOL_NS_GPL()。
++它们需要一个额外的参数：命名空间（the namespace）。请注意，由于宏扩展，该参数需
++要是一个预处理器符号。例如，要把符号 ``usb_stor_suspend`` 导出到命名空间 ``USB_STORAGE``，
++请使用::
++
++	EXPORT_SYMBOL_NS(usb_stor_suspend, USB_STORAGE);
++
++相应的 ksymtab 条目结构体 ``kernel_symbol`` 将有相应的成员 ``命名空间`` 集。
++导出时未指明命名空间的符号将指向 ``NULL`` 。如果没有定义命名空间，则默认没有。
++``modpost`` 和kernel/module.c分别在构建时或模块加载时使用名称空间。
++
++2.2 使用DEFAULT_SYMBOL_NAMESPACE定义
++====================================
++
++为一个子系统的所有符号定义命名空间可能会非常冗长，并可能变得难以维护。因此，我
++们提供了一个默认定义（DEFAULT_SYMBOL_NAMESPACE），如果设置了这个定义， 它将成
++为所有没有指定命名空间的 EXPORT_SYMBOL() 和 EXPORT_SYMBOL_GPL() 宏扩展的默认
++定义。
++
++有多种方法来指定这个定义，使用哪种方法取决于子系统和维护者的喜好。第一种方法是在
++子系统的 ``Makefile`` 中定义默认命名空间。例如，如果要将usb-common中定义的所有符号导
++出到USB_COMMON命名空间，可以在drivers/usb/common/Makefile中添加这样一行::
++
++	ccflags-y += -DDEFAULT_SYMBOL_NAMESPACE=USB_COMMON
++
++这将影响所有 EXPORT_SYMBOL() 和 EXPORT_SYMBOL_GPL() 语句。当这个定义存在时，
++用EXPORT_SYMBOL_NS()导出的符号仍然会被导出到作为命名空间参数传递的命名空间中，
++因为这个参数优先于默认的符号命名空间。
++
++定义默认命名空间的第二个选项是直接在编译单元中作为预处理声明。上面的例子就会变
++成::
++
++	#undef  DEFAULT_SYMBOL_NAMESPACE
++	#define DEFAULT_SYMBOL_NAMESPACE USB_COMMON
++
++应置于相关编译单元中任何 EXPORT_SYMBOL 宏之前
++
++3. 如何使用命名空间中导出的符号
++===============================
++
++为了使用被导出到命名空间的符号，内核模块需要明确地导入这些命名空间。
++否则内核可能会拒绝加载该模块。模块代码需要使用宏MODULE_IMPORT_NS来
++表示它所使用的命名空间的符号。例如，一个使用usb_stor_suspend符号的
++模块，需要使用如下语句导入命名空间USB_STORAGE::
++
++	MODULE_IMPORT_NS(USB_STORAGE);
++
++这将在模块中为每个导入的命名空间创建一个 ``modinfo`` 标签。这也顺带
++使得可以用modinfo检查模块已导入的命名空间::
++
++	$ modinfo drivers/usb/storage/ums-karma.ko
++	[...]
++	import_ns:      USB_STORAGE
++	[...]
++
++
++建议将 MODULE_IMPORT_NS() 语句添加到靠近其他模块元数据定义的地方，
++如 MODULE_AUTHOR() 或 MODULE_LICENSE() 。关于自动创建缺失的导入
++语句的方法，请参考第5节。
++
++4. 加载使用命名空间符号的模块
++=============================
++
++在模块加载时（比如 ``insmod`` ），内核将检查每个从模块中引用的符号是否可
++用，以及它可能被导出到的名字空间是否被模块导入。内核的默认行为是拒绝
++加载那些没有指明足以导入的模块。此错误会被记录下来，并且加载将以
++EINVAL方式失败。要允许加载不满足这个前提条件的模块，可以使用此配置选项：
++设置 MODULE_ALLOW_MISSING_NAMESPACE_IMPORTS=y 将使加载不受影响，但会
++发出警告。
++
++5. 自动创建MODULE_IMPORT_NS声明
++===============================
++
++缺少命名空间的导入可以在构建时很容易被检测到。事实上，如果一个模块
++使用了一个命名空间的符号而没有导入它，modpost会发出警告。
++MODULE_IMPORT_NS()语句通常会被添加到一个明确的位置（和其他模块元
++数据一起）。为了使模块作者（和子系统维护者）的生活更加轻松，我们提
++供了一个脚本和make目标来修复丢失的导入。修复丢失的导入可以用::
++
++	$ make nsdeps
++
++对模块作者来说，以下情况可能很典型::
++
++	- 编写依赖未导入命名空间的符号的代码
++	- ``make``
++	- 注意 ``modpost`` 的警告，提醒你有一个丢失的导入。
++	- 运行 ``make nsdeps``将导入添加到正确的代码位置。
++
++对于引入命名空间的子系统维护者来说，其步骤非常相似。同样，make nsdeps最终将
++为树内模块添加缺失的命名空间导入::
++
++	- 向命名空间转移或添加符号（例如，使用EXPORT_SYMBOL_NS()）。
++	- `make e`（最好是用allmodconfig来覆盖所有的内核模块）。
++	- 注意 ``modpost`` 的警告，提醒你有一个丢失的导入。
++	- 运行 ``maknsdeps``将导入添加到正确的代码位置。
++
++你也可以为外部模块的构建运行nsdeps。典型的用法是::
++
++	$ make -C <path_to_kernel_src> M=$PWD nsdeps
 -- 
-2.17.1
+2.27.0
 
