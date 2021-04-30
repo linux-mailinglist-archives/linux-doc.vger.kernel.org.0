@@ -2,156 +2,113 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 2A91E36F8D3
-	for <lists+linux-doc@lfdr.de>; Fri, 30 Apr 2021 12:58:59 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9F96036F8EB
+	for <lists+linux-doc@lfdr.de>; Fri, 30 Apr 2021 13:06:20 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S230030AbhD3K7h (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 30 Apr 2021 06:59:37 -0400
-Received: from mx2.suse.de ([195.135.220.15]:52162 "EHLO mx2.suse.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S230394AbhD3K7h (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 30 Apr 2021 06:59:37 -0400
-X-Virus-Scanned: by amavisd-new at test-mx.suse.de
-Received: from relay2.suse.de (unknown [195.135.221.27])
-        by mx2.suse.de (Postfix) with ESMTP id 2C25DB246;
-        Fri, 30 Apr 2021 10:58:48 +0000 (UTC)
-From:   Thomas Zimmermann <tzimmermann@suse.de>
-To:     daniel@ffwll.ch, airlied@linux.ie,
-        maarten.lankhorst@linux.intel.com, mripard@kernel.org,
-        kraxel@redhat.com, corbet@lwn.net, lgirdwood@gmail.com,
-        broonie@kernel.org, sam@ravnborg.org, robh@kernel.org,
-        emil.l.velikov@gmail.com, geert+renesas@glider.be,
-        hdegoede@redhat.com, bluescreen_avenger@verizon.net,
-        gregkh@linuxfoundation.org
-Cc:     dri-devel@lists.freedesktop.org, linux-doc@vger.kernel.org,
-        virtualization@lists.linux-foundation.org,
-        Thomas Zimmermann <tzimmermann@suse.de>,
-        Maxime Ripard <maxime@cerno.tech>
-Subject: [PATCH v5 9/9] drm/simpledrm: Acquire memory aperture for framebuffer
-Date:   Fri, 30 Apr 2021 12:58:40 +0200
-Message-Id: <20210430105840.30515-10-tzimmermann@suse.de>
-X-Mailer: git-send-email 2.31.1
-In-Reply-To: <20210430105840.30515-1-tzimmermann@suse.de>
-References: <20210430105840.30515-1-tzimmermann@suse.de>
+        id S229598AbhD3LHH (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 30 Apr 2021 07:07:07 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:58056 "EHLO
+        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
+        with ESMTP id S229543AbhD3LHG (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Fri, 30 Apr 2021 07:07:06 -0400
+Received: from mail-pj1-x102a.google.com (mail-pj1-x102a.google.com [IPv6:2607:f8b0:4864:20::102a])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id F2FF8C06174A
+        for <linux-doc@vger.kernel.org>; Fri, 30 Apr 2021 04:06:18 -0700 (PDT)
+Received: by mail-pj1-x102a.google.com with SMTP id p17so8357372pjz.3
+        for <linux-doc@vger.kernel.org>; Fri, 30 Apr 2021 04:06:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20161025;
+        h=subject:to:cc:references:from:message-id:date:user-agent
+         :mime-version:in-reply-to:content-language:content-transfer-encoding;
+        bh=2MEFbp6KPTYqgIUMgYJXiZoUbzUO0jUr7RYqY21a9nI=;
+        b=iPEWEfmJylg/WXG3j9lVU8KT3ITMcD1Js2Zv/3x2ebNPZO2umwN+Vde+aY7417NnOp
+         QBEg8b9OOiUiVeeplo6w+K4EL33g3CyhQYcNRoffuPeM43e+G93vvSfir5AAYBUcn75w
+         OVxIogqEGAcpIqZ1OF43GWUtFmJWI/G747SGObEbXphSMfRL2CzyYcN/4NQn+PmDPEzS
+         0Zm81a+CrYT45FOiqGKXpDN24Ve01CLxPS9JHRIg4yCYjb2bMjK8prOU57JR+ru/m92c
+         zVmXlUD3n9p2xGIC7EHcJW9mci7e6mZHrcWa7NVcLvYsZ6XvEeTEM7gxUnc+NB4LY6u6
+         r03A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+         :user-agent:mime-version:in-reply-to:content-language
+         :content-transfer-encoding;
+        bh=2MEFbp6KPTYqgIUMgYJXiZoUbzUO0jUr7RYqY21a9nI=;
+        b=mKD6Hb9lwKpUlExal9r+1f8rBLuxqlPd55SO/X9/WTMWHh+dw6KH0wHUcp5CiNBhXq
+         f+dA4Pk8VcSKroXwPaLkMEJkUfPprpHNhdMh83SdXFSmQphKlz6RvKlgIkQQ1r8C1L6n
+         iarPxbmuTPsIR2maGGF79J03+iCitU9gVdO1rfbmJV1IBtK9h0hagpz7poZEmH8wlB3y
+         5TPECx5RmHFPb0ok/reCCI8dfy/xEN+fTvBark+V78kGCf6PC61dpDGj595ZJ/VPspaF
+         egY0RTdNd2w38iQK734XjpW53oG2gARA1U/OmjDb8MCYt5eC018YIyW4ytZIVmhR8qVn
+         5nCg==
+X-Gm-Message-State: AOAM5330cGy91h902EoE++8ho//p/813Wq2kIXalBKeczCeWcRV35XAW
+        f5c2CpNecGFcUGYVjKzw1c4=
+X-Google-Smtp-Source: ABdhPJxf1g7mJXRPaiF8j102JlTf6gH2AwsaGU9dXZsjXmpYGX0UZGgB/MIdakziW9LIdhJ7p0uA0w==
+X-Received: by 2002:a17:90a:1284:: with SMTP id g4mr4921229pja.66.1619780778420;
+        Fri, 30 Apr 2021 04:06:18 -0700 (PDT)
+Received: from [127.0.0.1] (93.179.119.173.16clouds.com. [93.179.119.173])
+        by smtp.gmail.com with ESMTPSA id e10sm1820644pfc.40.2021.04.30.04.06.13
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Fri, 30 Apr 2021 04:06:17 -0700 (PDT)
+Subject: Re: [PATCH 1/3] docs/zh_CN: add core-api kernel-api.rst translation
+To:     Matthew Wilcox <willy@infradead.org>,
+        Yanteng Si <siyanteng@loongson.cn>
+Cc:     corbet@lwn.net, alexs@kernel.org, chenhuacai@kernel.org,
+        jiaxun.yang@flygoat.com, linux-doc@vger.kernel.org,
+        realpuyuwang@gmail.com, bobwxc@email.cn, siyanteng01@gmail.com
+References: <cover.1618836460.git.siyanteng@loongson.cn>
+ <301caca03324dd367830a50ff84e250882b91957.1618836460.git.siyanteng@loongson.cn>
+ <20210419133526.GB2531743@casper.infradead.org>
+From:   Alex Shi <seakeel@gmail.com>
+Message-ID: <77f0e536-9458-5ef2-6cd8-6d47f0452e14@gmail.com>
+Date:   Fri, 30 Apr 2021 19:06:08 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
+ Thunderbird/68.10.0
 MIME-Version: 1.0
+In-Reply-To: <20210419133526.GB2531743@casper.infradead.org>
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-We register the simplekms device with the DRM platform helpers. A
-native driver for the graphics hardware will kick-out the simpledrm
-driver before taking over the device.
 
-The original generic platform device from the simple-framebuffer boot
-code will be unregistered. The native driver will use whatever native
-hardware device it received.
 
-v4:
-	* convert to drm_aperture_acquire_from_firmware()
-v3:
-	* use platform_device_unregister() and handle detachment
-	  like hot-unplug event (Daniel)
-v2:
-	* adapt to aperture changes
-	* use drm_dev_unplug() and drm_dev_enter/exit()
-	* don't split error string
+On 2021/4/19 下午9:35, Matthew Wilcox wrote:
+> On Mon, Apr 19, 2021 at 09:10:55PM +0800, Yanteng Si wrote:
+>> This patch translates Documentation/core-api/kernel-api.rst into Chinese.
+> 
+> I don't speak one word of Chinese, but this can't be right?
+> 
+>> +列表管理函数
+>> +============
+>> +
+>> +Todolist:
+>> +
+>> +   :internal:
+> 
+> The corresponding section in English is:
+> 
+> List Management Functions
+> =========================
+> 
+> .. kernel-doc:: include/linux/list.h
+>    :internal:
+> 
+> and surely you need a '.. kernel-doc' to have the ':internal:' make sense?
+> 
+> Then, I wonder how useful it is to bring kernel-doc written in English
+> into a Chinese document?  Wouldn't we be better off admitting that we
+> don't provide Chinese documentation for kernel APIs and referring to
+> the English documents?
+> 
+> (I would love nothing more than to provide Chinese documentation for
+> kernel APIs, but we don't have any kind of system for providing that
+> today)
+> 
 
-Signed-off-by: Thomas Zimmermann <tzimmermann@suse.de>
-Acked-by: Maxime Ripard <maxime@cerno.tech>
-Tested-by: nerdopolis <bluescreen_avenger@verizon.net>
----
- drivers/gpu/drm/tiny/simpledrm.c | 25 ++++++++++++++++++++++++-
- 1 file changed, 24 insertions(+), 1 deletion(-)
+I wouldn't reject the Chinese version of kernel-api, but a bit concern
+of the subtle of the doc could be kept in translation. It would be a
+big challenge. :)
 
-diff --git a/drivers/gpu/drm/tiny/simpledrm.c b/drivers/gpu/drm/tiny/simpledrm.c
-index 9d522473cd7c..2bdb477d9326 100644
---- a/drivers/gpu/drm/tiny/simpledrm.c
-+++ b/drivers/gpu/drm/tiny/simpledrm.c
-@@ -6,6 +6,7 @@
- #include <linux/platform_device.h>
- #include <linux/regulator/consumer.h>
- 
-+#include <drm/drm_aperture.h>
- #include <drm/drm_atomic_state_helper.h>
- #include <drm/drm_connector.h>
- #include <drm/drm_damage_helper.h>
-@@ -517,14 +518,23 @@ static int simpledrm_device_init_fb(struct simpledrm_device *sdev)
- 
- static int simpledrm_device_init_mm(struct simpledrm_device *sdev)
- {
-+	struct drm_device *dev = &sdev->dev;
- 	struct platform_device *pdev = sdev->pdev;
- 	struct resource *mem;
- 	void __iomem *screen_base;
-+	int ret;
- 
- 	mem = platform_get_resource(pdev, IORESOURCE_MEM, 0);
- 	if (!mem)
- 		return -EINVAL;
- 
-+	ret = devm_aperture_acquire_from_firmware(dev, mem->start, resource_size(mem));
-+	if (ret) {
-+		drm_err(dev, "could not acquire memory range [0x%llx:0x%llx]: error %d\n",
-+			mem->start, mem->end, ret);
-+		return ret;
-+	}
-+
- 	screen_base = devm_ioremap_wc(&pdev->dev, mem->start,
- 				      resource_size(mem));
- 	if (!screen_base)
-@@ -625,12 +635,18 @@ simpledrm_simple_display_pipe_enable(struct drm_simple_display_pipe *pipe,
- 	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
- 	struct drm_framebuffer *fb = plane_state->fb;
- 	void *vmap = shadow_plane_state->map[0].vaddr; /* TODO: Use mapping abstraction properly */
-+	struct drm_device *dev = &sdev->dev;
-+	int idx;
- 
- 	if (!fb)
- 		return;
- 
-+	if (!drm_dev_enter(dev, &idx))
-+		return;
-+
- 	drm_fb_blit_dstclip(sdev->screen_base, sdev->pitch,
- 			    sdev->format->format, vmap, fb);
-+	drm_dev_exit(idx);
- }
- 
- static void
-@@ -658,7 +674,9 @@ simpledrm_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
- 	void *vmap = shadow_plane_state->map[0].vaddr; /* TODO: Use mapping abstraction properly */
- 	struct drm_framebuffer *fb = plane_state->fb;
-+	struct drm_device *dev = &sdev->dev;
- 	struct drm_rect clip;
-+	int idx;
- 
- 	if (!fb)
- 		return;
-@@ -666,8 +684,13 @@ simpledrm_simple_display_pipe_update(struct drm_simple_display_pipe *pipe,
- 	if (!drm_atomic_helper_damage_merged(old_plane_state, plane_state, &clip))
- 		return;
- 
-+	if (!drm_dev_enter(dev, &idx))
-+		return;
-+
- 	drm_fb_blit_rect_dstclip(sdev->screen_base, sdev->pitch,
- 				 sdev->format->format, vmap, fb, &clip);
-+
-+	drm_dev_exit(idx);
- }
- 
- static const struct drm_simple_display_pipe_funcs
-@@ -847,7 +870,7 @@ static int simpledrm_remove(struct platform_device *pdev)
- 	struct simpledrm_device *sdev = platform_get_drvdata(pdev);
- 	struct drm_device *dev = &sdev->dev;
- 
--	drm_dev_unregister(dev);
-+	drm_dev_unplug(dev);
- 
- 	return 0;
- }
--- 
-2.31.1
-
+Thanks
+Alex
