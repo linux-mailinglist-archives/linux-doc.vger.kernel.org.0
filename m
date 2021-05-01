@@ -2,116 +2,100 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 5FFC037069B
-	for <lists+linux-doc@lfdr.de>; Sat,  1 May 2021 11:30:36 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 98AD137079D
+	for <lists+linux-doc@lfdr.de>; Sat,  1 May 2021 17:03:28 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S231853AbhEAJbY (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Sat, 1 May 2021 05:31:24 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:41262 "EHLO
+        id S231488AbhEAPEQ (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Sat, 1 May 2021 11:04:16 -0400
+Received: from lindbergh.monkeyblade.net ([23.128.96.19]:56240 "EHLO
         lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S231713AbhEAJbX (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Sat, 1 May 2021 05:31:23 -0400
-Received: from mail-pj1-x1034.google.com (mail-pj1-x1034.google.com [IPv6:2607:f8b0:4864:20::1034])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 26A4AC06138B;
-        Sat,  1 May 2021 02:30:31 -0700 (PDT)
-Received: by mail-pj1-x1034.google.com with SMTP id l10-20020a17090a850ab0290155b06f6267so2992125pjn.5;
-        Sat, 01 May 2021 02:30:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20161025;
-        h=subject:to:cc:references:from:message-id:date:user-agent
-         :mime-version:in-reply-to:content-language:content-transfer-encoding;
-        bh=ozGWR7HUiB8PmJLBAJ188PKLUOh7dBweE/9zGbN2Zp0=;
-        b=D/0vPlgJu5jfqBOMQb50lihexlAJcQUP3pR3XMPv4HFKDZYb0SJapZVJ/gkmpAY8TG
-         PyqPT9PUsuY5+PRiuEIMkfFVa21wyRDP2Pzb+NcG0GI7fQ7JOom2ex00qPbddZLHsoXL
-         ckoFnKo9WAj563lpWcxYGf3SXQcLZUuOvRHmH8t5DnnODQ6ZIdpQ+2qJcm2KPuEjPR0n
-         AI2ghO+t6CLTwfnhl7EDL5y5FyzjED2pRzPgEgSjBxJ8wgk2QpG07MnVQ6KI20afJ4VK
-         o5Iq7bSCzkKekZFiGm8fYsq8aro5AtmnUKVvR2SDcx1kIOc6eqkw4CvoEyy3jBP9d/Sv
-         vRqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20161025;
-        h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-         :user-agent:mime-version:in-reply-to:content-language
-         :content-transfer-encoding;
-        bh=ozGWR7HUiB8PmJLBAJ188PKLUOh7dBweE/9zGbN2Zp0=;
-        b=hGe1Pmz2mtoimFv446qByRriQt+joJEbiCE4Xy3DVsDLyZxuw3vJNBG/i9cFcN80Bs
-         6zkpNVNsQtOeQ8akWT54lztxlt7SZgtJ4poUjFLMWINCzpl/m3MV1sDeK2cEYW2cTrXd
-         jKJTmtkLTk0KHWiBdHi/Ddq+MYtvHWBL3WTlXEmtjHXyKisTeazsECxslKHo9/RXIL2/
-         EYlYgFP2weAFbncR0UVQAhfJgEV8UywVsD2fAE0jBQzr7SHwn3q7UTLoJen651Oly2R8
-         S5x5arRg38JWQKFsZsB9b/s62zXrBYgGGydcb89VglTzA8o8QFrvD10HUdmr8a7887lG
-         rnZA==
-X-Gm-Message-State: AOAM5330PHiBTdUv0b78WVTj9Covx52RmBuus3Onnq9UvCet9mI4TsdN
-        xYGuGogbvRPZc7MDXSWKelgkJtip54qsBQ==
-X-Google-Smtp-Source: ABdhPJwpm/0pMCfrGPM5UL4PfA3nBMBiph5MjUiyi4zHNxdxrqGxDn+fiDlj+fil1VWEFSLBopugoA==
-X-Received: by 2002:a17:90a:b292:: with SMTP id c18mr20434639pjr.179.1619861430361;
-        Sat, 01 May 2021 02:30:30 -0700 (PDT)
-Received: from ?IPv6:2405:201:600d:a089:4bc:4b06:bb39:6fa2? ([2405:201:600d:a089:4bc:4b06:bb39:6fa2])
-        by smtp.gmail.com with ESMTPSA id ms2sm453915pjb.8.2021.05.01.02.30.27
-        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
-        Sat, 01 May 2021 02:30:30 -0700 (PDT)
-Subject: Re: [RFC v3] scripts: kernel-doc: reduce repeated regex expressions
- into variables
-To:     Jonathan Corbet <corbet@lwn.net>
+        with ESMTP id S230522AbhEAPEQ (ORCPT
+        <rfc822;linux-doc@vger.kernel.org>); Sat, 1 May 2021 11:04:16 -0400
+Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
+        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 36020C06138B;
+        Sat,  1 May 2021 08:03:26 -0700 (PDT)
+Received: from localhost (unknown [IPv6:2601:281:8300:104d:444a:d152:279d:1dbb])
+        (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+        (No client certificate requested)
+        by ms.lwn.net (Postfix) with ESMTPSA id 6D2142DD;
+        Sat,  1 May 2021 15:03:25 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net 6D2142DD
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
+        t=1619881405; bh=xiUPjVQBLypVmmHFGUuNCDr9cDHqM/YBFlPvHnb84os=;
+        h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
+        b=jN8i5S4IfYqrKNIICU2CvnzCY5G5LyjU0vt55s+ZZ5mSUzYdfMoHfHbMpXgJUP/RU
+         rM2KAJr0tewI8typMBOclpKHDZHlbSrCg8doaIv7NcRUFQ9igy7hlUAufeMClhrH0y
+         Vik6XynVb/wNTKJ/875tPSTqWLeg7LVCxkYOww5eA0Q1r6LzVyWvnlOPACjM9uQboR
+         YYTL5Js/aF3rgFJHD6YNVHkbvjLMeTgAWuLAZM18EkGXy3Wkm7gaBLPqepRMc2JaN1
+         QbumUeC1fE0+e3FKmmQL6K9N69jk/LX031jh3MfCoAq8XmGpdFcgo3W5UcT6edO6jx
+         SWdTq8NSWh8CQ==
+From:   Jonathan Corbet <corbet@lwn.net>
+To:     Aditya Srivastava <yashsri421@gmail.com>
 Cc:     lukas.bulwahn@gmail.com, willy@infradead.org,
         linux-kernel-mentees@lists.linuxfoundation.org,
         linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [RFC v3] scripts: kernel-doc: reduce repeated regex expressions
+ into variables
+In-Reply-To: <99186604-8ed6-ff72-0308-9ca788db3a51@gmail.com>
 References: <20210427165633.GA235567@casper.infradead.org>
  <20210429063729.8144-1-yashsri421@gmail.com> <8735v8d5ja.fsf@meer.lwn.net>
-From:   Aditya Srivastava <yashsri421@gmail.com>
-Message-ID: <99186604-8ed6-ff72-0308-9ca788db3a51@gmail.com>
-Date:   Sat, 1 May 2021 15:00:24 +0530
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101
- Thunderbird/68.10.0
+ <99186604-8ed6-ff72-0308-9ca788db3a51@gmail.com>
+Date:   Sat, 01 May 2021 09:03:24 -0600
+Message-ID: <87bl9ujy2r.fsf@meer.lwn.net>
 MIME-Version: 1.0
-In-Reply-To: <8735v8d5ja.fsf@meer.lwn.net>
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-On 30/4/21 5:09 am, Jonathan Corbet wrote:
-> Aditya Srivastava <yashsri421@gmail.com> writes:
-> 
->> There are some regex expressions in the kernel-doc script, which are used
->> repeatedly in the script.
+Aditya Srivastava <yashsri421@gmail.com> writes:
+
+> On 30/4/21 5:09 am, Jonathan Corbet wrote:
+>> Aditya Srivastava <yashsri421@gmail.com> writes:
+>> 
+>>> There are some regex expressions in the kernel-doc script, which are used
+>>> repeatedly in the script.
+>>>
+>>> Reduce such expressions into variables, which can be used everywhere.
+>>>
+>>> A quick manual check found that no errors and warnings were added/removed
+>>> in this process.
+>>>
+>>> Suggested-by: Jonathan Corbet <corbet@lwn.net>
+>>> Signed-off-by: Aditya Srivastava <yashsri421@gmail.com>
+>>> ---
+>>> Changes in v3:
+>>> - Remove variables for separate qualifiers in "sub dump_struct"
+>>> - Make a common variable for all the qualifiers
+>>> - Make $attribute global variable to use it at "sub check_sections" as well
+>>>
+>>> Changes in v2:
+>>> - Rename $pointer_function to $function_pointer
+>>> - Combine elsif-block expressions at "sub dump_function" into lesser regex expressions
+>>> - Combine $prototype_end1,$prototype_end2 expressions into a common $prototype_end
+>>>
+>>>  scripts/kernel-doc | 71 ++++++++++++++++++++++------------------------
+>>>  1 file changed, 34 insertions(+), 37 deletions(-)
+>> 
+>> So this looks good but ... it adds a warning to the build:
+>> 
+>> /stuff/k/git/kernel/Documentation/driver-api/media/v4l2-controls:823: ./include/media/v4l2-ctrls.h:964: WARNING: Invalid C declaration: Expected identifier in nested name. [error at 6]
+>>   const * v4l2_ctrl_get_menu (u32 id)
+>>   ------^
+>> 
+>> So it looks like something isn't being parsed quite identically?
 >>
->> Reduce such expressions into variables, which can be used everywhere.
->>
->> A quick manual check found that no errors and warnings were added/removed
->> in this process.
->>
->> Suggested-by: Jonathan Corbet <corbet@lwn.net>
->> Signed-off-by: Aditya Srivastava <yashsri421@gmail.com>
->> ---
->> Changes in v3:
->> - Remove variables for separate qualifiers in "sub dump_struct"
->> - Make a common variable for all the qualifiers
->> - Make $attribute global variable to use it at "sub check_sections" as well
->>
->> Changes in v2:
->> - Rename $pointer_function to $function_pointer
->> - Combine elsif-block expressions at "sub dump_function" into lesser regex expressions
->> - Combine $prototype_end1,$prototype_end2 expressions into a common $prototype_end
->>
->>  scripts/kernel-doc | 71 ++++++++++++++++++++++------------------------
->>  1 file changed, 34 insertions(+), 37 deletions(-)
-> 
-> So this looks good but ... it adds a warning to the build:
-> 
-> /stuff/k/git/kernel/Documentation/driver-api/media/v4l2-controls:823: ./include/media/v4l2-ctrls.h:964: WARNING: Invalid C declaration: Expected identifier in nested name. [error at 6]
->   const * v4l2_ctrl_get_menu (u32 id)
->   ------^
-> 
-> So it looks like something isn't being parsed quite identically?
 >
+> Hi Jonathan!
+> I could not reproduce this error..
+> Can you suggest me how can I reproduce this error?
+> I ran kernel-doc -none {$file} over the tree.
+>
+> Probably, this is not a kernel-doc error
 
-Hi Jonathan!
-I could not reproduce this error..
-Can you suggest me how can I reproduce this error?
-I ran kernel-doc -none {$file} over the tree.
+It's a Sphinx error; run "make htmldocs" to see it.  That said, the
+error itself should be enough to point at where the problem is.
 
-Probably, this is not a kernel-doc error
+Thanks,
 
-Thanks
-Aditya
+jon
