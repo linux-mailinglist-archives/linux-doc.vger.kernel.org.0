@@ -2,70 +2,55 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 53AE737234D
-	for <lists+linux-doc@lfdr.de>; Tue,  4 May 2021 00:57:05 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id C2745372353
+	for <lists+linux-doc@lfdr.de>; Tue,  4 May 2021 00:58:25 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S229594AbhECW55 (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Mon, 3 May 2021 18:57:57 -0400
-Received: from lindbergh.monkeyblade.net ([23.128.96.19]:50616 "EHLO
-        lindbergh.monkeyblade.net" rhost-flags-OK-OK-OK-OK) by vger.kernel.org
-        with ESMTP id S229497AbhECW55 (ORCPT
-        <rfc822;linux-doc@vger.kernel.org>); Mon, 3 May 2021 18:57:57 -0400
-Received: from ms.lwn.net (ms.lwn.net [IPv6:2600:3c01:e000:3a1::42])
-        by lindbergh.monkeyblade.net (Postfix) with ESMTPS id 10785C061574;
-        Mon,  3 May 2021 15:57:04 -0700 (PDT)
+        id S229499AbhECW7Q (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Mon, 3 May 2021 18:59:16 -0400
+Received: from ms.lwn.net ([45.79.88.28]:43168 "EHLO ms.lwn.net"
+        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
+        id S229680AbhECW7P (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Mon, 3 May 2021 18:59:15 -0400
 Received: from localhost (unknown [IPv6:2601:281:8300:104d:444a:d152:279d:1dbb])
         (using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
         (No client certificate requested)
-        by ms.lwn.net (Postfix) with ESMTPSA id BB5B68B2;
-        Mon,  3 May 2021 22:57:03 +0000 (UTC)
-DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net BB5B68B2
+        by ms.lwn.net (Postfix) with ESMTPSA id BE1A72ED;
+        Mon,  3 May 2021 22:58:21 +0000 (UTC)
+DKIM-Filter: OpenDKIM Filter v2.11.0 ms.lwn.net BE1A72ED
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=lwn.net; s=20201203;
-        t=1620082623; bh=z941Lu+/CtawpFMt/mj1RUwC1eDTMB9N3idI2b0h/ZM=;
+        t=1620082701; bh=/wxRzKKm9ILisw0zqzRx2o+KzRBSeU3HsFY9OdFVbZQ=;
         h=From:To:Cc:Subject:In-Reply-To:References:Date:From;
-        b=ITwzPHCQdv/nKgjoRbfUERj0a5rzB4MEnHbVuj3bHNwKn35gg3uTeTUa31TsDqW6U
-         sm+9GmGgSZmU2LqjGjWmBm+exk+J8bK1i24te2b0LK1vWsSS29Du2KLovDjQqqJJco
-         E1Fhs5fr4BQCr026+9OWeL8EfXWFVRxGKSMcxpb6XkdXkD4yIXzWvy0tduorOIi2z9
-         XkmaqpU1DWK29K3ohT8s5EjUro7RzsA7O9jNwukz8WQpbuJK0l0OJNUmTLQQ0ds/MN
-         J2iOb0XsNH59nLVfTPrzBWCHJqBH3QW3kKiDlvk8NEe9FhJaZK2Jagv9Aa3DpUETYi
-         s/WWXAvMCICPQ==
+        b=AXgzGPJu34DrVSXQIh5XWU8SX2PKRRewKVqhrJNZ5Xy+Baywga9wFddCUIjJYPuu7
+         znW0wa3fhMnXlb5/pFbvtxogR8lC95NPErcPEln3Yuo6HwDlso+6o6jrEF5MymPbpA
+         ALVGfefnhZIhb4fmA8LBWrAaU6uZqeneOzgjVQlMZDHyXD5ZhO3t0W8JpcYcXeTy2H
+         eLibrB1dhSwYpcmqsWXfp/eOLCRP9anBpaz1QxzmWqeDp11Z4LcZLZ697OdTQh0Y7f
+         TTvdhddQz3FkqTN2gkWQ9xnqgGQZQKShSjTet75MQKM6Nw3dk5sYoPqYan3q4s7/MO
+         U+89504DVS/hQ==
 From:   Jonathan Corbet <corbet@lwn.net>
-To:     Anatoly Pugachev <matorola@gmail.com>, linux-doc@vger.kernel.org
-Cc:     Linux Kernel list <linux-kernel@vger.kernel.org>
-Subject: Re: [PATCH] docs: correct URL to bios and kernel developer's guide
-In-Reply-To: <20210428104851.GA10572@u164.east.ru>
-References: <20210428104851.GA10572@u164.east.ru>
-Date:   Mon, 03 May 2021 16:57:03 -0600
-Message-ID: <87a6pbh1ds.fsf@meer.lwn.net>
+To:     Thorsten Leemhuis <linux@leemhuis.info>
+Cc:     linux-doc@vger.kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH v1] docs: reporting-issues.rst: CC subsystem and
+ maintainers on regressions
+In-Reply-To: <e1d2e16a-60b8-0a55-20d4-53db11e6821c@leemhuis.info>
+References: <dd13f10c30e79e550215e53a8103406daec4e593.1618482489.git.linux@leemhuis.info>
+ <e1d2e16a-60b8-0a55-20d4-53db11e6821c@leemhuis.info>
+Date:   Mon, 03 May 2021 16:58:21 -0600
+Message-ID: <875yzzh1bm.fsf@meer.lwn.net>
 MIME-Version: 1.0
 Content-Type: text/plain
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Anatoly Pugachev <matorola@gmail.com> writes:
+Thorsten Leemhuis <linux@leemhuis.info> writes:
 
-> correct URL to bios and kernel developer's guide on amd.com site
->
-> Signed-off-by: Anatoly Pugachev <matorola@gmail.com>
-> ---
->  Documentation/ABI/testing/sysfs-devices-system-cpu | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/Documentation/ABI/testing/sysfs-devices-system-cpu b/Documentation/ABI/testing/sysfs-devices-system-cpu
-> index 0eee30b27ab6..f2fff6020439 100644
-> --- a/Documentation/ABI/testing/sysfs-devices-system-cpu
-> +++ b/Documentation/ABI/testing/sysfs-devices-system-cpu
-> @@ -285,7 +285,7 @@ Description:        Disable L3 cache indices
->
->                 All AMD processors with L3 caches provide this functionality.
->                 For details, see BKDGs at
-> -               http://developer.amd.com/documentation/guides/Pages/default.aspx
-> +               https://www.amd.com/en/support/tech-docs?keyword=bios+kernel
->
+> Hi Jonathan. Wondering if this slipped through the cracks, as I haven't
+> heart anything (or did I miss it?). Would IMHO have been nice to have in
+> 5.13 as well, but it's not crucial.
 
-Well, that will work until they change it again...
+Hmm...I was sure I'd applied this one, guess not.  Sorry.  Applied now,
+I'll push it Linusward shortly.
 
-Applied, thanks.
+Thanks,
 
 jon
