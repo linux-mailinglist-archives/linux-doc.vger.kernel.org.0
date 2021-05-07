@@ -2,123 +2,80 @@ Return-Path: <linux-doc-owner@vger.kernel.org>
 X-Original-To: lists+linux-doc@lfdr.de
 Delivered-To: lists+linux-doc@lfdr.de
 Received: from vger.kernel.org (vger.kernel.org [23.128.96.18])
-	by mail.lfdr.de (Postfix) with ESMTP id 35626376320
-	for <lists+linux-doc@lfdr.de>; Fri,  7 May 2021 11:51:50 +0200 (CEST)
+	by mail.lfdr.de (Postfix) with ESMTP id 9504037634B
+	for <lists+linux-doc@lfdr.de>; Fri,  7 May 2021 12:06:40 +0200 (CEST)
 Received: (majordomo@vger.kernel.org) by vger.kernel.org via listexpand
-        id S235666AbhEGJws (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
-        Fri, 7 May 2021 05:52:48 -0400
-Received: from smtp3.goneo.de ([85.220.129.37]:40856 "EHLO smtp3.goneo.de"
-        rhost-flags-OK-OK-OK-OK) by vger.kernel.org with ESMTP
-        id S233300AbhEGJws (ORCPT <rfc822;linux-doc@vger.kernel.org>);
-        Fri, 7 May 2021 05:52:48 -0400
-Received: from [192.168.1.127] (dyndsl-091-096-161-150.ewe-ip-backbone.de [91.96.161.150])
-        by smtp3.goneo.de (Postfix) with ESMTPSA id 4ABF3203F75C;
-        Fri,  7 May 2021 11:51:47 +0200 (CEST)
-Subject: Re: Sphinx parallel build error: UnicodeEncodeError: 'latin-1' codec
- can't encode characters in position 18-20: ordinal not in range(256)
-To:     Mauro Carvalho Chehab <mchehab@kernel.org>
-Cc:     =?UTF-8?Q?Michal_Such=c3=a1nek?= <msuchanek@suse.de>,
-        Randy Dunlap <rdunlap@infradead.org>,
-        Matthew Wilcox <willy@infradead.org>,
-        linux-doc@vger.kernel.org, Jonathan Corbet <corbet@lwn.net>
-References: <20210506103913.GE6564@kitsune.suse.cz>
- <30f2117f-aa38-6d60-f020-ff5cf8f004b5@darmarit.de>
- <20210506184641.6348a621@coco.lan>
- <0fd5bb54-a8fc-84b2-2bd6-31ab12f12303@darmarit.de>
- <20210506192756.2a2cc273@coco.lan>
- <cecb28f8-dfaa-3584-c9f5-fe15145ef3cf@infradead.org>
- <20210506180842.GD388843@casper.infradead.org>
- <be21de46-6655-152e-e431-144c2be6137c@infradead.org>
- <20210507083924.7b8ec1fe@coco.lan> <20210507100435.3095f924@coco.lan>
- <20210507083527.GL6564@kitsune.suse.cz>
- <85bebda3-df0b-8554-5f90-45aa097ce405@darmarit.de>
- <20210507111451.36f063bb@coco.lan>
-From:   Markus Heiser <markus.heiser@darmarit.de>
-Message-ID: <43583d9c-bfc4-e3c2-96d9-7cffec9e2909@darmarit.de>
-Date:   Fri, 7 May 2021 11:51:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:78.0) Gecko/20100101
- Thunderbird/78.8.1
+        id S235091AbhEGKHi (ORCPT <rfc822;lists+linux-doc@lfdr.de>);
+        Fri, 7 May 2021 06:07:38 -0400
+Received: from mail.loongson.cn ([114.242.206.163]:41554 "EHLO loongson.cn"
+        rhost-flags-OK-OK-OK-FAIL) by vger.kernel.org with ESMTP
+        id S235363AbhEGKHg (ORCPT <rfc822;linux-doc@vger.kernel.org>);
+        Fri, 7 May 2021 06:07:36 -0400
+Received: from localhost.localdomain (unknown [112.3.197.94])
+        by mail.loongson.cn (Coremail) with SMTP id AQAAf9Dxr+4cEZVgvScTAA--.12861S2;
+        Fri, 07 May 2021 18:06:21 +0800 (CST)
+From:   Yanteng Si <siyanteng@loongson.cn>
+To:     corbet@lwn.net
+Cc:     Yanteng Si <siyanteng@loongson.cn>, alexs@kernel.org,
+        chenhuacai@kernel.org, jiaxun.yang@flygoat.com,
+        linux-doc@vger.kernel.org, realpuyuwang@gmail.com, bobwxc@email.cn,
+        siyanteng01@gmail.com, huangjianghui@uniontech.com
+Subject: [PATCH v2 0/3] docs/zh_CN: add parisc Chinese documents
+Date:   Fri,  7 May 2021 18:07:02 +0800
+Message-Id: <cover.1620284974.git.siyanteng@loongson.cn>
+X-Mailer: git-send-email 2.27.0
 MIME-Version: 1.0
-In-Reply-To: <20210507111451.36f063bb@coco.lan>
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
 Content-Transfer-Encoding: 8bit
+X-CM-TRANSID: AQAAf9Dxr+4cEZVgvScTAA--.12861S2
+X-Coremail-Antispam: 1UD129KBjvdXoW7Jr15WrWDKr1fXF4fXw1fZwb_yoWkArbE9a
+        1kXrW0yr47ZF97KFW8GF15ZF409FW0gry8ZFn8ta98W3ykurWDXr1vqasYvay5XF43Ar15
+        GFykXr1SgrnrWjkaLaAFLSUrUUUUUb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+        9fnUUIcSsGvfJTRUUUbxxFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+        6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+        A2z4x0Y4vE2Ix0cI8IcVAFwI0_Ar0_tr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Gr1j
+        6F4UJwA2z4x0Y4vEx4A2jsIE14v26rxl6s0DM28EF7xvwVC2z280aVCY1x0267AKxVW0oV
+        Cq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0
+        I7IYx2IY67AKxVWUJVWUGwAv7VC2z280aVAFwI0_Jr0_Gr1lOx8S6xCaFVCjc4AY6r1j6r
+        4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwACI402YVCY1x02628v
+        n2kIc2xKxwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
+        0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
+        IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxV
+        AFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7xG6rW3Jr0E3s1lIxAIcVC2z280aVAFwI0_
+        Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVWUJVW8JbIYCTnIWIevJa73UjIFyTuYvjfUoO
+        J5UUUUU
+X-CM-SenderInfo: pvl1t0pwhqwqxorr0wxvrqhubq/
 Precedence: bulk
 List-ID: <linux-doc.vger.kernel.org>
 X-Mailing-List: linux-doc@vger.kernel.org
 
-Am 07.05.21 um 11:14 schrieb Mauro Carvalho Chehab:
-> Em Fri, 7 May 2021 10:56:39 +0200
-> Markus Heiser <markus.heiser@darmarit.de> escreveu:
-> 
->> Am 07.05.21 um 10:35 schrieb Michal Suchánek:
->>> So the bottom line is that UTF-8 in the files will stay, and Sphinx
->>> cannot handle UTF-8 when the locale is not UTF-8.
->>>
->>> In the long run it might be nice to fix Sphinx to properly set the
->>> encoding of the files it reads and writes. Or maybe there is some
->>> parameter that specifies it?
->>
->> Let's not mix things up. The Unicode-Error is not related or limited
->> to log nor to sphinx, it is related to the fact that we (you) try to
->> run a utf-8 application in an environment which is not full utf-8
->> functional.
-> 
-> No. The application itself is not UTF-8. The application input files are.
+v1 -> v2:
 
-May be we have a different view on this, for me an application which
-reads UTF-8 in and spids out UTF-8 is an UTF-8 application.
+* Some bad translations have been modified as suggested by Xiangcheng.Thank you for your review.
+https://lore.kernel.org/linux-doc/cover.1619665430.git.siyanteng@loongson.cn/T/#t
 
-hint: HTML is just one Sphinx writer, there exist also other writers
-e.g. LaTeX.
+* Update [PATCH 1/3].
+Because zh_CN/inxdex.rst has been refactored by Xiangcheng Wu.
 
-> The big issue with the way python works with charsets is due to that:
-> it does a very poor job with regards to that.
+* Pick Xiangcheng Wu's review-by tag for [patch 1/3]
 
-This is your POV, the python developers have a different view on
-handling strings.  There are epic discussions around about.
+v1:
 
-But all this discussions won't help, since we can't change the
-principles of python.
+This set translates Documentation/parisc/* into Chinese.
 
-Personally I think I can't ignore the principles of a language
-and I'm feeling well with setting up an UTF-8 environment.
+Yanteng Si (3):
+  docs/zh_CN: add parisc index translation
+  docs/zh_CN: add parisc debugging.rst translation
+  docs/zh_CN: add parisc registers.rst translation
 
-> I remember that in the past I had to use this quite often
-> (before UTF-8 being default on the distros I was using on that time):
-> 
-> 	LANG=C <some_python_script>
-> 
-> Just to avoid them to crash.
-> 
-> If I'm not mistaken, older Fedora/Mandrake distros had some bugs with
-> python-written scripts that, if the machine's language were not
-> English, such scripts crash, as the i18n translated messages were
-> on a different charset than what the python script would be expecting.
+ Documentation/translations/zh_CN/index.rst    |   2 +-
+ .../translations/zh_CN/parisc/debugging.rst   |  42 +++++
+ .../translations/zh_CN/parisc/index.rst       |  28 ++++
+ .../translations/zh_CN/parisc/registers.rst   | 153 ++++++++++++++++++
+ 4 files changed, 224 insertions(+), 1 deletion(-)
+ create mode 100644 Documentation/translations/zh_CN/parisc/debugging.rst
+ create mode 100644 Documentation/translations/zh_CN/parisc/index.rst
+ create mode 100644 Documentation/translations/zh_CN/parisc/registers.rst
 
-For me "i18n translated message" is a good example that I'm not
-wrong with my opinions.  This is not true for all devices but
-on those device you won't run an applications like Sphinx.
+-- 
+2.27.0
 
->>> For the short term I think it is reasonable to run a python test script
->>> that prints fancy unicode characters before running Sphinx and bail if
->>> the test script fails.
->>
->> To be assure, I recommend to set UTF-8 locale environment in the
->> Makefile.
->>
->> My experience shows that this is the default with almost all
->> containers (images), there are only a few where this is not the
->> case (may be suse?).
-> 
-> That may not be true on certain parts of the globe.
-
-Sorry, I have spoken about common LXC images.
-
-> I've no idea what charsets the most-used distributions in Asian
-> Countries use use ;-)
-
-I guess these days most often they will use UTF-8 since ASCII
-haven't helped in the past 80s ;-)
-
-   -- Markus --
